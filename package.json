@@ -1,0 +1,21 @@
+{
+  "name": "charts",
+  "version": "0.0.1",
+  "description": "WCE charts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.ibm.com:peretz-next/charts.git"
+  },
+  "keywords": [
+    "charts"
+  ],
+  "author": "IBM",
+  "license": "SEE LICENSE IN LICENSE",
+  "dependencies": {
+    "d3": "^4.10.0"
+  }
+}
