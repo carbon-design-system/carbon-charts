@@ -4,6 +4,10 @@
   "description": "WCE charts",
   "main": "index.js",
   "scripts": {
+    "demo:server": "echo \"run server here\"",
+    "demo:build": "echo \"generate static files\"",
+    "build":"echo \"generate compiled js\"",
+    "deploy":"echo \"something for deploy here\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
