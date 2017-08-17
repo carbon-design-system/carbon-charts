@@ -52,7 +52,6 @@ export namespace Lines {
 			keys = options.yDomain;
 		}
 		const color = d3.scaleOrdinal().range(options.colors).domain(keys);
-		console.log(options.colors)
 		keys = activeSeries ? activeSeries : keys;
 		const line = d3.line<any>()
 			.x(d => xScale(d.key) + options.chartSize.width / dataList.length / 2)
