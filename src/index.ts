@@ -1,5 +1,9 @@
 import * as d3 from 'd3'
 import {ibmD3} from './ibmD3/main.ts'
+import {renderCombo} from './ibmD3/types/combo.ts'
+import {Bars} from './ibmD3/parts/bars.ts'
+import {Lines} from './ibmD3/parts/lines.ts'
+import {StackedBars} from './ibmD3/parts/stackedBars.ts'
 let container = d3.select('.chart-holder')
 const chartTypes = [
 	{
@@ -25,33 +29,9 @@ const chartTypes = [
 	{
 		id: 'combo',
 		name: 'Combo',
-		avail: false
+		avail: true
 	}
 ];
-
-let typeSelections = d3.select('body').append('ul').classed('chart-type-selection', true);
-chartTypes.forEach(type => {
-	d3.select('.chart-type-selection').append('li').attr('id', type.id).text(type.name)
-
-	d3.select("#" + type.id)
-		.classed("disabled", !type.avail)
-		.on('click', () => {
-			let btn = d3.select("#" + type.id)
-			if (!btn.classed("disabled")) {
-				d3.selectAll(".chart-type-selection li")
-				  .classed("active", false);
-				btn.classed("active", !btn.classed("active"));
-			}
-			if (btn.classed('active')) {
-				ibmD3.removeChart(container)
-				options.type = d3.select(".chart-type-selection .active").attr("id");
-				ibmD3.renderChart(data, container, options)
-			}
-		})
-})
-
-d3.select(".chart-type-selection #bar").classed("active", true)
-
 let options = {
 	type: 'bar',
 	width: 600,
@@ -115,8 +95,51 @@ const data = [
 	}
 ];
 
+let typeSelections = d3.select('body').insert('ul', 'div').classed('chart-type-selection', true);
+chartTypes.forEach(type => {
+	d3.select('.chart-type-selection').append('li').attr('id', type.id).text(type.name)
 
+	d3.select("#" + type.id)
+		.classed("disabled", !type.avail)
+		.on('click', () => {
+			let btn = d3.select("#" + type.id)
+			if (!btn.classed("disabled")) {
+				d3.selectAll(".chart-type-selection li")
+				  .classed("active", false);
+				btn.classed("active", !btn.classed("active"));
+			}
+			if (btn.classed('active')) {
+				ibmD3.removeChart(container)
+				options.type = d3.select(".chart-type-selection .active").attr("id");
+				// ibmD3.renderChart(data, container, options)
+				switch (type.id) {
+					case "bar":
+						Bars.drawChart(data, container, options);
+						break;
+					case "stackedBar":
+						// ibmD3.setTooltip(resetBarOpacity(svg, 1));
+						StackedBars.drawChart(data, container, options);
+						break;
+					case "line":
+						// ibmD3.setTooltip(resetLineOpacity(svg, 1));
+						Lines.drawChart(data, container, options);
+						break;
+					case "combo":
+						// ibmD3.setTooltip(resetLineOpacity(svg, 1));
+						renderCombo(data, container, options);
+						break;
+					default:
+						Bars.drawChart(data, container, options);
+						break;
+				}
+			}
+		})
+})
 
-ibmD3.renderChart(data, container, options)
+d3.select(".chart-type-selection #line").classed("active", true)
+// renderCombo(data, container, options);
+Lines.drawChart(data, container, options)
+// renderCombo(data, container, options)
+// ibmD3.renderChart(data, container, options)
 
 
