@@ -1,0 +1,22 @@
+.chart-type-selection {
+	display: inline;
+}
+.chart-type-selection li {
+	color: white;
+	cursor: pointer;
+	background-color: #009BEF;
+	display: inline;
+	padding: 5px 10px;
+	margin: 5px;
+	width: fit-content;
+}
+
+.chart-type-selection li.active {
+	background-color: #FFB000;
+}
+
+.chart-type-selection li.disabled {
+	background-color: #959595;
+	cursor: not-allowed;
+}
+
