@@ -1,8 +1,43 @@
 import * as d3 from 'd3'
+import {Axis} from './axis.ts'
+import {Grid} from './grid.ts'
+import {Legend} from './legend.ts'
 import {Tooltip} from './tooltip.ts'
+import '../style.scss'
+import {ibmD3} from '../main.ts'
+
+let localData = <any>{};
+let localOptions = <any>{};
 
 export namespace Lines {
+	export function drawChart(data, container, options) {
+		localData = data;
+		container.classed("ibmD3-chart-wrapper", true);
+		container.append("div").attr("class", "legend");
+		const chartSize = {
+			height: options.height - ibmD3.margin.top - ibmD3.margin.bottom,
+			width: options.width - ibmD3.margin.left - ibmD3.margin.right
+		}
+		options.chartSize = chartSize;
+		localOptions = options;
+		let svg = ibmD3.setSVG(container, options);
+		ibmD3.setTooltip(resetLineOpacity);
+		let xScale = ibmD3.setXScale(data, options);
+		let yScale = ibmD3.setYScale(data, options, ibmD3.getActiveDataSeries(container));
+
+		Axis.drawXAxis(svg, xScale, options, data);
+		Axis.drawYAxis(svg, yScale, options, data);
+		Grid.drawXGrid(svg, xScale, options, data);
+		Grid.drawYGrid(svg, yScale, options, data);
+		Legend.addLegend(container, data, options);
+		if (options.legendClickable) {
+			ibmD3.setClickableLegend(data, container, options)
+		}
+
+		draw(svg, xScale, yScale, options, data, ibmD3.getActiveDataSeries(container));
+	}
 	export function draw(svg, xScale, yScale, options, data, activeSeries) {
+		ibmD3.setTooltip(resetLineOpacity);
 		let keys: any;
 		let dataList = data;
 		if (options.dimension) {
@@ -17,6 +52,7 @@ export namespace Lines {
 			keys = options.yDomain;
 		}
 		const color = d3.scaleOrdinal().range(options.colors).domain(keys);
+		console.log(options.colors)
 		keys = activeSeries ? activeSeries : keys;
 		const line = d3.line<any>()
 			.x(d => xScale(d.key) + options.chartSize.width / dataList.length / 2)
@@ -68,14 +104,17 @@ export namespace Lines {
 
 }
 
-function reduceOpacity(svg, exceptionPath) {
-	console.log(exceptionPath, svg.selectAll("path"))
+function reduceOpacity(svg, exceptionCircle) {
 	svg.selectAll("path").attr("stroke-opacity", 0.25)
 	svg.selectAll("circle").attr("stroke-opacity", 0.25)
+	d3.select(exceptionCircle.parentNode).select("path").attr("stroke-opacity", 1)
+	d3.select(exceptionCircle.parentNode).selectAll("circle").attr("stroke-opacity", 1)
+	d3.select(exceptionCircle).attr("stroke-opacity", 1)
+	d3.select(exceptionCircle).attr("fill", d3.select(exceptionCircle).attr("stroke"))
+}
 
-	// d3.select(exceptionPath).attr("stroke-opacity", 1)
-	d3.select(exceptionPath.parentNode).select("path").attr("stroke-opacity", 1)
-	d3.select(exceptionPath).attr("stroke-opacity", 1)
-	console.log(d3.select(exceptionPath).attr("fill"))
-	d3.select(exceptionPath).attr("fill", d3.select(exceptionPath).attr("stroke"))
+function resetLineOpacity() {
+	d3.select("svg").selectAll("path").attr("stroke-opacity", 1)
+	d3.select("svg").selectAll("circle").attr("stroke-opacity", 1)
+		.attr("fill", "white")
 }
