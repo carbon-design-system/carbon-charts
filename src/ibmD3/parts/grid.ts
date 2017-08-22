@@ -15,10 +15,11 @@ export namespace Grid {
 	}
 
   export function drawYGrid(svg, yScale, options, data) {
+  	const tickNum = options.y2Ticks ? d3.max([options.yTicks, options.y2Ticks]) : options.yTicks;
 		let yGrid = d3.axisLeft(yScale)
 			.tickSizeInner(-(options.chartSize.width))
 			.tickSizeOuter(0)
-			.ticks(options.yTicks);
+			.ticks(tickNum);
 		let g = svg.select(".y.grid")
 			.attr("transform", `translate(0, 0)`)
 			.call(yGrid);
