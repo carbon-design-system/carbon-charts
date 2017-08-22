@@ -5,6 +5,8 @@ import {Grid} from './parts/grid.ts'
 import {Bars} from './parts/bars.ts'
 import {StackedBars} from './parts/stackedBars.ts'
 import {Lines} from './parts/lines.ts'
+import {renderCombo} from './types/combo.ts'
+import {renderDoubleAxis} from './types/doubleAxis.ts'
 import {Legend} from './parts/legend.ts'
 import {Tooltip} from './parts/tooltip.ts'
 import './style.scss'
@@ -52,8 +54,8 @@ export namespace ibmD3 {
 		if (options.legendClickable) {
 			setClickableLegend(data, container, options)
 		}
-
-		putDataIn(svg, xScale, yScale, options, data, getActiveDataSeries(container));
+		drawChart(data, container, options);
+		// drawChart(svg, xScale, yScale, options, data, getActiveDataSeries(container));
 	}
 	export function getData() {
 		return
@@ -85,19 +87,25 @@ export namespace ibmD3 {
 		return svg;
 	}
 
-	export function putDataIn(svg, xScale, yScale, options, data, activeSeries) {
+	export function drawChart(data, container, options) {
 		switch (options.type) {
 			case "bar":
-				Bars.draw(svg, xScale, yScale, options, data, activeSeries);
+				Bars.drawChart(data, container, options);
 				break;
 			case "stackedBar":
-				StackedBars.draw(svg, xScale, yScale, options, data, activeSeries);
+				StackedBars.drawChart(data, container, options);
 				break;
 			case "line":
-				Lines.draw(svg, xScale, yScale, options, data, activeSeries);
+				Lines.drawChart(data, container, options);
+				break;
+			case "doubleAxis":
+				Lines.drawChart(data, container, options);
+				break;
+			case "combo":
+				renderCombo(data, container, options);
 				break;
 			default:
-				Bars.draw(svg, xScale, yScale, options, data, activeSeries);
+				Bars.drawChart(data, container, options);
 				break;
 		}
 	}
@@ -166,20 +174,7 @@ export namespace ibmD3 {
 
 	export function updateChart(data, container, options) {
 		container.select("svg").remove();
-		let svg = setSVG(container, options)
-		let xScale = setXScale(data, options);
-		let yScale = setYScale(data, options, getActiveDataSeries(container));
-
-		Axis.drawXAxis(svg, xScale, options, data);
-		Axis.drawYAxis(svg, yScale, options, data);
-		Grid.drawXGrid(svg, xScale, options, data);
-		Grid.drawYGrid(svg, yScale, options, data);
-		// container.selectAll(".legend").remove();
-		Legend.addLegend(container, data, options);
-		if (options.legendClickable) {
-			setClickableLegend(data, container, options)
-		}
-		putDataIn(svg, xScale, yScale, options, data, getActiveDataSeries(container));
+		drawChart(data, container, options);
 	}
 
 	export function getActiveDataSeries(container) {
