@@ -14,6 +14,8 @@ export namespace Legend {
 				}
 			});
 			legendItems = newKeys;
+		} else if (options.y2Domain) {
+			legendItems = options.yDomain.concat(options.y2Domain);
 		} else {
 			legendItems = options.yDomain;
 		}
