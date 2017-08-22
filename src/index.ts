@@ -1,6 +1,7 @@
 import * as d3 from 'd3'
 import {ibmD3} from './ibmD3/main.ts'
 import {renderCombo} from './ibmD3/types/combo.ts'
+import {renderDoubleAxis} from './ibmD3/types/doubleAxis.ts'
 import {Bars} from './ibmD3/parts/bars.ts'
 import {Lines} from './ibmD3/parts/lines.ts'
 import {StackedBars} from './ibmD3/parts/stackedBars.ts'
@@ -24,7 +25,7 @@ const chartTypes = [
 	{
 		id: 'doubleAxis',
 		name: 'Double Axis',
-		avail: false
+		avail: true
 	},
 	{
 		id: 'combo',
@@ -32,15 +33,8 @@ const chartTypes = [
 		avail: true
 	}
 ];
-let options = {
-	type: 'bar',
-	width: 600,
-	height: 400,
-	xDomain: "Part Number",
-	yDomain: ["Sold", "More", "Qty"],
-	yTicks: 5,
-	legendClickable: true,
-	colors: [
+
+let colors = [
 		"#009BEF",
 		"#95D13C",
 		"#785EF0",
@@ -54,6 +48,27 @@ let options = {
 		"#40D5BB",
 		"#FF509E"
 	]
+let options = {
+	type: 'bar',
+	width: 600,
+	height: 400,
+	xDomain: "Part Number",
+	yDomain: ["Sold", "More", "Qty"],
+	yTicks: 5,
+	legendClickable: true,
+	colors
+}
+
+let doubleYAxisOptions = {
+	width: 600,
+	height: 400,
+	xDomain: "Part Number",
+	yDomain: ["Qty"],
+	y2Domain: ["Sold", "More"],
+	yTicks: 5,
+	y2Ticks: 10,
+	legendClickable: true,
+	colors
 }
 
 const data = [
@@ -117,16 +132,16 @@ chartTypes.forEach(type => {
 						Bars.drawChart(data, container, options);
 						break;
 					case "stackedBar":
-						// ibmD3.setTooltip(resetBarOpacity(svg, 1));
 						StackedBars.drawChart(data, container, options);
 						break;
 					case "line":
-						// ibmD3.setTooltip(resetLineOpacity(svg, 1));
 						Lines.drawChart(data, container, options);
 						break;
+					case "doubleAxis":
+						renderDoubleAxis(data, container, doubleYAxisOptions, "line");
+						break;
 					case "combo":
-						// ibmD3.setTooltip(resetLineOpacity(svg, 1));
-						renderCombo(data, container, options);
+						renderCombo(data, container, doubleYAxisOptions);
 						break;
 					default:
 						Bars.drawChart(data, container, options);
@@ -136,9 +151,12 @@ chartTypes.forEach(type => {
 		})
 })
 
-d3.select(".chart-type-selection #line").classed("active", true)
-// renderCombo(data, container, options);
-Lines.drawChart(data, container, options)
+d3.select(".chart-type-selection #bar").classed("active", true)
+Bars.drawChart(data, container, options);
+// renderCombo(data, container, doubleYAxisOptions);
+// const doubleAxisOpt = Object.assign({}, options, {yDomain: [options.yDomain[0]], y2Domain: [options.yDomain[1]]});
+// renderDoubleAxis(data, container, doubleYAxisOptions, "line")
+// Lines.drawChart(data, container, options)
 // renderCombo(data, container, options)
 // ibmD3.renderChart(data, container, options)
 
