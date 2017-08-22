@@ -23,7 +23,6 @@ export namespace Axis {
 	}
 
   export function drawY2Axis(svg, yScale, options, data) {
-  	console.log(" - - - -- -", svg, yScale, options, data)
   	svg.append("g")
   		.attr("class", "y2 axis")
 		let maxWidth = 0;
@@ -44,7 +43,6 @@ export namespace Axis {
 		  .attr("text-anchor", "middle")
 		  .attr("class", "y2 axis-label")
 		  .text(options.y2Domain.join(", "));
-		  console.log(g)
 		}
 
   export function drawXAxis(svg, xScale, options, data) {
