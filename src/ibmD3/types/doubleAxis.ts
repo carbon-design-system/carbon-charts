@@ -15,7 +15,7 @@ let localOptions = <any>{};
 
 export function renderDoubleAxis(data, container, options, type) {
 	Lines.drawChart(data, container, options)
-	console.log(options)
+	options.type = "doubleAxis"
 	const svg = container.select('svg')
 	let yScale = ibmD3.setYScale(data, options, options.y2Domain);
 	svg.select(".inner-wrap").append("g")
