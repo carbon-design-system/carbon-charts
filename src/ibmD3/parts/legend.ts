@@ -2,9 +2,6 @@ import * as d3 from 'd3'
 
 export namespace Legend {
 	export function addLegend(container, data, options) {
-		// if (container.select(".legend").nodes().length > 0) {
-		// 	container.selectAll(".legend").remove();
-		// }
 		let legendItems = [];
 		if (options.dimension) {
 			let newKeys = <any>[];
