@@ -13,7 +13,9 @@ export namespace Lines {
 	export function drawChart(data, container, options) {
 		localData = data;
 		container.classed("ibmD3-chart-wrapper", true);
-		container.append("div").attr("class", "legend");
+		if (container.select(".legend").nodes().length === 0) {
+			container.append("div").attr("class", "legend");
+		}
 		const chartSize = {
 			height: options.height - ibmD3.margin.top - ibmD3.margin.bottom,
 			width: options.width - ibmD3.margin.left - ibmD3.margin.right
@@ -49,6 +51,8 @@ export namespace Lines {
 				}
 			});
 			keys = newKeys;
+		} else if (options.y2Domain) {
+			keys = options.yDomain.concat(options.y2Domain);
 		} else {
 			keys = options.yDomain;
 		}
