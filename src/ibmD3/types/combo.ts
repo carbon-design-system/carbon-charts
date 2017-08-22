@@ -14,9 +14,12 @@ let localData = <any>{};
 let localOptions = <any>{};
 
 export function renderCombo(data, container, options) {
+	options.type = 'combo';
 	localData = data;
 	container.classed("ibmD3-chart-wrapper", true);
-	container.append("div").attr("class", "legend");
+	if (container.select(".legend").nodes().length === 0) {
+		container.append("div").attr("class", "legend");
+	}
 	const chartSize = {
 		height: options.height - ibmD3.margin.top - ibmD3.margin.bottom,
 		width: options.width - ibmD3.margin.left - ibmD3.margin.right
@@ -27,6 +30,9 @@ export function renderCombo(data, container, options) {
 	}
 	options.chartSize = chartSize;
 	localOptions = options;
+	const activeSeries = <any>ibmD3.getActiveDataSeries(container);
+	const activeBar =  activeSeries.includes(options.yDomain[0]);
+	const activeLineSeries = activeBar ? activeSeries.slice(1, activeSeries.length) : activeSeries;
 
 	const barData = [];
 	const lineData = [];
@@ -47,9 +53,9 @@ export function renderCombo(data, container, options) {
 	let xScaleBar = ibmD3.setXScale(barData, options);
 	let xScaleLine = ibmD3.setXScale(lineData, options);
 	let yScale = ibmD3.setYScale(barData, options, options.yDomain);
-	let y2Scale = ibmD3.setYScale(lineData, options, options.y2Domain);
+	let y2Scale = ibmD3.setYScale(lineData, options, activeLineSeries);
 	let yScaleBar = ibmD3.setYScale(barData, options, options.yDomain);
-	let yScaleLine = ibmD3.setYScale(lineData, options, options.y2Domain);
+	let yScaleLine = ibmD3.setYScale(lineData, options, activeLineSeries);
 
 	Axis.drawXAxis(svg, xScaleBar, options, data);
 	Axis.drawYAxis(svg, yScale, options, barData);
@@ -57,8 +63,10 @@ export function renderCombo(data, container, options) {
 	Grid.drawXGrid(svg, xScaleBar, options, data);
 	Grid.drawYGrid(svg, yScale, options, data);
 
-	Bars.draw(svg, xScaleBar, yScale, options, data, options.yDomain);
-	Lines.draw(svg, xScaleLine, yScaleLine, options, data, options.y2Domain);
+	if (activeBar) {
+		Bars.draw(svg, xScaleBar, yScale, options, data, options.yDomain);
+	}
+	Lines.draw(svg, xScaleLine, yScaleLine, options, data, activeLineSeries);
 
 	ibmD3.setTooltip();
 	ibmD3.addTooltipEventListener(svg, d3.selectAll("rect"), reduceOpacity);
