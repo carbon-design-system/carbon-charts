@@ -102,7 +102,7 @@ export namespace ibmD3 {
 		}
 	}
 
-	export function setTooltip(opacityFunc) {
+	export function setTooltip() {
 		const tooltip = d3.selectAll(".chart-tooltip");
 		if (tooltip.nodes().length < 1) {
 			let tooltip = d3.select("body").append("div")
@@ -114,10 +114,20 @@ export namespace ibmD3 {
 				.attr("class", "close-btn")
 				.text("x")
 		}
-		tooltip.on("click", () => {
+	}
+
+	export function setTooltipCloseEventListener(opacityFunc) {
+		d3.select(".close-btn").on("click", () => {
 			Tooltip.hide()
 			opacityFunc();
 		});
+	}
+
+	export function addTooltipEventListener(svg, elements, reduceOpacity) {
+		elements.on("click", function(d) {
+			Tooltip.showTooltip(d)
+			reduceOpacity(svg, this)
+		})
 	}
 
 	export function setResizable(container) {
@@ -133,13 +143,13 @@ export namespace ibmD3 {
 
 	export function setYScale(data, options, activeSeries) {
 		let yScale = d3.scaleLinear().range([options.height - margin.top - margin.bottom, 0]);
-		const keys = activeSeries ? activeSeries : options.yDomain;
+		const keys = activeSeries.length > 0 ? activeSeries : options.yDomain;
 		if (options.type === 'stackedBar') {
 			const yMax = d3.max(data, d => keys.map(val => d[val]).reduce((acc, cur) => acc + cur, 0));
 			yScale.domain([0, yMax])
 		} else {
 			yScale.domain([0, d3.max(data, d =>
-					d3.max(options.yDomain.map(domain => d[domain])))
+					d3.max(keys.map(domain => d[domain])))
 				]);
 		}
 		return yScale
