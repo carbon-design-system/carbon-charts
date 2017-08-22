@@ -28,36 +28,65 @@ export function renderCombo(data, container, options) {
 	options.chartSize = chartSize;
 	localOptions = options;
 
-	const barOption = Object.assign({}, options, {yDomain: [options.yDomain[0]]});
-	const lineOption = Object.assign({}, options, {colors: options.colors.slice(1), yDomain: options.yDomain.slice(1)});
 	const barData = [];
 	const lineData = [];
 	data.forEach((d) => {
 		let barDataObj = {};
 		let lineDataObj = {};
-		barDataObj[barOption.xDomain] = d[barOption.xDomain];
-		lineDataObj[lineOption.xDomain] = d[lineOption.xDomain];
-		barDataObj[barOption.yDomain[0]] = d[barOption.yDomain[0]];
+		barDataObj[options.xDomain] = d[options.xDomain];
+		lineDataObj[options.xDomain] = d[options.xDomain];
+		barDataObj[options.yDomain] = d[options.yDomain];
 		barData.push(barDataObj);
-		for (let i = 0; i < lineOption.yDomain.length; i++) {
-			lineDataObj[lineOption.yDomain[i]] = d[lineOption.yDomain[i]];
+		for (let i = 0; i < options.y2Domain.length; i++) {
+			lineDataObj[options.y2Domain[i]] = d[options.y2Domain[i]];
 		}
 		lineData.push(lineDataObj);
 	})
-	d3.max(data, d => d3.max(options.yDomain.map(domain => d[domain])))
 
 	let svg = ibmD3.setSVG(container, options);
-	let xScaleBar = ibmD3.setXScale(barData, barOption);
-	let xScaleLine = ibmD3.setXScale(lineData, lineOption);
-	let yScale = ibmD3.setYScale(data, options, options.yDomain);
-	let yScaleBar = ibmD3.setYScale(barData, barOption, barOption.yDomain);
-	let yScaleLine = ibmD3.setYScale(lineData, lineOption, lineOption.yDomain);
+	let xScaleBar = ibmD3.setXScale(barData, options);
+	let xScaleLine = ibmD3.setXScale(lineData, options);
+	let yScale = ibmD3.setYScale(barData, options, options.yDomain);
+	let y2Scale = ibmD3.setYScale(lineData, options, options.y2Domain);
+	let yScaleBar = ibmD3.setYScale(barData, options, options.yDomain);
+	let yScaleLine = ibmD3.setYScale(lineData, options, options.y2Domain);
 
-	Axis.drawXAxis(svg, xScaleBar, barOption, data);
-	Axis.drawYAxis(svg, yScale, options, data);
-	Grid.drawXGrid(svg, xScaleBar, barOption, data);
+	Axis.drawXAxis(svg, xScaleBar, options, data);
+	Axis.drawYAxis(svg, yScale, options, barData);
+	Axis.drawY2Axis(svg, y2Scale, options, lineData);
+	Grid.drawXGrid(svg, xScaleBar, options, data);
 	Grid.drawYGrid(svg, yScale, options, data);
 
-	Bars.draw(svg, xScaleBar, yScale, barOption, barData, barOption.yDomain);
-	Lines.draw(svg, xScaleLine, yScaleLine, lineOption, lineData, lineOption.yDomain);
+	Bars.draw(svg, xScaleBar, yScale, options, data, options.yDomain);
+	Lines.draw(svg, xScaleLine, yScaleLine, options, data, options.y2Domain);
+
+	ibmD3.setTooltip();
+	ibmD3.addTooltipEventListener(svg, d3.selectAll("rect"), reduceOpacity);
+	ibmD3.addTooltipEventListener(svg, d3.selectAll("circle"), reduceOpacity);
+	ibmD3.setTooltipCloseEventListener(resetLineBarOpacity);
+}
+
+function reduceOpacity(svg, exception) {
+	if (exception.tagName === "rect") {
+		svg.selectAll("rect").attr("fill-opacity", 0.25)
+		d3.select(exception).attr("fill-opacity", false)
+		svg.selectAll("path").attr("stroke-opacity", 0.25)
+		svg.selectAll("circle").attr("stroke-opacity", 0.25)
+	} else if (exception.tagName === "circle") {
+		svg.selectAll("rect").attr("fill-opacity", 0.25)
+		svg.selectAll("path").attr("stroke-opacity", 0.25)
+		svg.selectAll("circle").attr("stroke-opacity", 0.25)
+		d3.select(exception.parentNode).select("path").attr("stroke-opacity", 1)
+		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", 1)
+		d3.select(exception).attr("stroke-opacity", 1)
+		d3.select(exception).attr("fill", d3.select(exception).attr("stroke"))
+	}
+}
+
+function resetLineBarOpacity() {
+	const svg = d3.select("svg");
+	svg.selectAll("path").attr("stroke-opacity", 1)
+	svg.selectAll("circle").attr("stroke-opacity", 1)
+		.attr("fill", "white")
+	svg.selectAll("rect").attr("fill-opacity", 1)
 }
