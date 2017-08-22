@@ -10,7 +10,6 @@ let localOptions = <any>{};
 
 export namespace StackedBars {
 	export function drawChart(data, container, options) {
-		ibmD3.setTooltip(resetBarOpacity);
 		localData = data;
 		container.classed("ibmD3-chart-wrapper", true);
 		container.append("div").attr("class", "legend");
@@ -35,10 +34,12 @@ export namespace StackedBars {
 		}
 
 		draw(svg, xScale, yScale, options, data, ibmD3.getActiveDataSeries(container));
+		ibmD3.setTooltip();
+		ibmD3.setTooltipCloseEventListener(resetBarOpacity);
+		ibmD3.addTooltipEventListener(svg, d3.selectAll("rect"), reduceOpacity);
 	}
 
 	export function draw(svg, xScale, yScale, options, data, activeSeries) {
-		ibmD3.setTooltip(resetBarOpacity);
 		const keys = activeSeries ? activeSeries : options.yDomain;
 		const x1 = d3.scaleBand();
 		xScale.paddingInner(0.2);
@@ -66,10 +67,6 @@ export namespace StackedBars {
 			.attr("y", d => yScale(d.y1))
 			.attr("height", d => yScale(d.y0) - yScale(d.y1))
 			.style("fill", d => color(d.series))
-			.on("click", function(d) {
-				Tooltip.showTooltip(d)
-				reduceOpacity(svg, this)
-			})
 			// .on("mouseover", d => this.tooltipService.updateTooltip(d))
 			// .on("mouseout", () => this.tooltipService.hideTooltip());
 	}

@@ -21,7 +21,6 @@ export namespace Bars {
 		localOptions = options;
 
 		let svg = ibmD3.setSVG(container, options);
-		ibmD3.setTooltip(resetBarOpacity);
 		let xScale = ibmD3.setXScale(data, options);
 		let yScale = ibmD3.setYScale(data, options, ibmD3.getActiveDataSeries(container));
 
@@ -35,10 +34,12 @@ export namespace Bars {
 		}
 
 		draw(svg, xScale, yScale, options, data, ibmD3.getActiveDataSeries(container));
+		ibmD3.setTooltip();
+		ibmD3.setTooltipCloseEventListener(resetBarOpacity);
+		ibmD3.addTooltipEventListener(svg, d3.selectAll("rect"), reduceOpacity);
 	}
 
 	export function draw(svg, xScale, yScale, options, data, activeSeries) {
-		ibmD3.setTooltip(resetBarOpacity);
 		xScale.padding(0.1)
 		const keys = activeSeries ? activeSeries : options.yDomain;
 		const x1 = d3.scaleBand();
@@ -53,10 +54,6 @@ export namespace Bars {
 			.selectAll("rect")
 			.data(d => keys.map(key => ({xAxis: options.xDomain, series: key, key: d[options.xDomain], value: d[key]})))
 			.enter().append("rect")
-				.on("click", function(d) {
-					Tooltip.showTooltip(d)
-					reduceOpacity(svg, this)
-				})
 				.attr("x", d => x1(d.series))
 				.attr("y", d => yScale(d.value))
 				.attr("width", x1.bandwidth())

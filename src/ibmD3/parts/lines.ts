@@ -21,7 +21,6 @@ export namespace Lines {
 		options.chartSize = chartSize;
 		localOptions = options;
 		let svg = ibmD3.setSVG(container, options);
-		ibmD3.setTooltip(resetLineOpacity);
 		let xScale = ibmD3.setXScale(data, options);
 		let yScale = ibmD3.setYScale(data, options, ibmD3.getActiveDataSeries(container));
 
@@ -35,9 +34,11 @@ export namespace Lines {
 		}
 
 		draw(svg, xScale, yScale, options, data, ibmD3.getActiveDataSeries(container));
+		ibmD3.setTooltip();
+		ibmD3.setTooltipCloseEventListener(resetLineOpacity);
+		ibmD3.addTooltipEventListener(svg, d3.selectAll("circle"), reduceOpacity);
 	}
 	export function draw(svg, xScale, yScale, options, data, activeSeries) {
-		ibmD3.setTooltip(resetLineOpacity);
 		let keys: any;
 		let dataList = data;
 		if (options.dimension) {
@@ -90,14 +91,6 @@ export namespace Lines {
 				.attr("stroke-widget", "10%")
 				.attr("cx", d => xScale(d.key) + options.chartSize.width / dataList.length / 2)
 				.attr("cy", d => yScale(d.value))
-				// .on("mouseover", d => {
-				// 	this.
-				// })
-				.on("click", function(d) {
-					Tooltip.showTooltip(d)
-					reduceOpacity(svg, this)
-				})
-				// .on("mouseout", () => Tooltip.hideTooltip());
 		});
 	}
 
