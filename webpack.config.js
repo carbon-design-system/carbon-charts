@@ -4,7 +4,9 @@ module.exports = {
 	entry: "./src/index.ts",
 	output: {
 		path: __dirname + '/dist',
-		filename: "bundle.js"
+		filename: "bundle.js",
+		libraryTarget: "var",
+    library: "ibmD3"
 	},
 	resolve: {
 		// Add '.ts' and '.tsx' as a resolvable extension.

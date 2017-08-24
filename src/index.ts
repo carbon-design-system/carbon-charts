@@ -1,38 +1,10 @@
 import * as d3 from 'd3'
 import {ibmD3} from './ibmD3/main.ts'
-import {renderCombo} from './ibmD3/types/combo.ts'
-import {renderDoubleAxis} from './ibmD3/types/doubleAxis.ts'
+import {Combo} from './ibmD3/types/combo.ts'
+import {DoubleAxis} from './ibmD3/types/doubleAxis.ts'
 import {Bars} from './ibmD3/parts/bars.ts'
 import {Lines} from './ibmD3/parts/lines.ts'
 import {StackedBars} from './ibmD3/parts/stackedBars.ts'
-let container = d3.select('.chart-holder')
-const chartTypes = [
-	{
-		id: 'bar',
-		name: 'Bar',
-		avail: true
-	},
-	{
-		id: 'line',
-		name: 'Line',
-		avail: true
-	},
-	{
-		id: 'stackedBar',
-		name: 'Stacked Bar',
-		avail: true
-	},
-	{
-		id: 'doubleAxis',
-		name: 'Double Axis',
-		avail: true
-	},
-	{
-		id: 'combo',
-		name: 'Combo',
-		avail: true
-	}
-];
 
 let colors = [
 		"#009BEF",
@@ -49,7 +21,6 @@ let colors = [
 		"#FF509E"
 	]
 let options = {
-	type: 'bar',
 	width: 600,
 	height: 400,
 	xDomain: "Part Number",
@@ -110,54 +81,108 @@ const data = [
 	}
 ];
 
-let typeSelections = d3.select('body').insert('ul', 'div').classed('chart-type-selection', true);
+
+const chartTypes = [
+	{
+		id: 'bar',
+		name: 'Bar',
+		avail: true,
+		options,
+		data
+	},
+	{
+		id: 'line',
+		name: 'Line',
+		avail: true,
+		options,
+		data
+	},
+	{
+		id: 'stackedBar',
+		name: 'Stacked Bar',
+		avail: true,
+		options,
+		data
+	},
+	{
+		id: 'doubleAxis',
+		name: 'Double Axis',
+		avail: true,
+		options: doubleYAxisOptions,
+		data
+	},
+	{
+		id: 'combo',
+		name: 'Combo',
+		avail: true,
+		options: doubleYAxisOptions,
+		data
+	}
+];
+
+// let typeSelections = d3.select('body').insert('ul', 'div').classed('chart-type-selection', true);
+// chartTypes.forEach(type => {
+// 	d3.select('.chart-type-selection').append('li').attr('id', type.id).text(type.name)
+
+// 	d3.select("#" + type.id)
+// 		.classed("disabled", !type.avail)
+// 		.on('click', () => {
+// 			let btn = d3.select("#" + type.id)
+// 			if (!btn.classed("disabled")) {
+// 				d3.selectAll(".chart-type-selection li")
+// 				  .classed("active", false);
+// 				btn.classed("active", !btn.classed("active"));
+// 			}
+// 			if (btn.classed('active')) {
+// 				ibmD3.removeChart(container)
+// 				options.type = d3.select(".chart-type-selection .active").attr("id");
+// 				// ibmD3.renderChart(data, container, options)
+// 				switch (type.id) {
+// 					case "bar":
+// 						Bars.drawChart(data, container, options);
+// 						break;
+// 					case "stackedBar":
+// 						StackedBars.drawChart(data, container, options);
+// 						break;
+// 					case "line":
+// 						Lines.drawChart(data, container, options);
+// 						break;
+// 					case "doubleAxis":
+// 						renderDoubleAxis(data, container, doubleYAxisOptions, "line");
+// 						break;
+// 					case "combo":
+// 						renderCombo(data, container, doubleYAxisOptions);
+// 						break;
+// 					default:
+// 						Bars.drawChart(data, container, options);
+// 						break;
+// 				}
+// 			}
+// 		})
+// })Object.assign({}, options, {yDomain: [options.yDomain[0]]});
+
 chartTypes.forEach(type => {
-	d3.select('.chart-type-selection').append('li').attr('id', type.id).text(type.name)
+	let container = d3.select('#' + type.id + '-chart-holder');
+	container.append('h3').text(type.name)
 
-	d3.select("#" + type.id)
-		.classed("disabled", !type.avail)
-		.on('click', () => {
-			let btn = d3.select("#" + type.id)
-			if (!btn.classed("disabled")) {
-				d3.selectAll(".chart-type-selection li")
-				  .classed("active", false);
-				btn.classed("active", !btn.classed("active"));
-			}
-			if (btn.classed('active')) {
-				ibmD3.removeChart(container)
-				options.type = d3.select(".chart-type-selection .active").attr("id");
-				// ibmD3.renderChart(data, container, options)
-				switch (type.id) {
-					case "bar":
-						Bars.drawChart(data, container, options);
-						break;
-					case "stackedBar":
-						StackedBars.drawChart(data, container, options);
-						break;
-					case "line":
-						Lines.drawChart(data, container, options);
-						break;
-					case "doubleAxis":
-						renderDoubleAxis(data, container, doubleYAxisOptions, "line");
-						break;
-					case "combo":
-						renderCombo(data, container, doubleYAxisOptions);
-						break;
-					default:
-						Bars.drawChart(data, container, options);
-						break;
-				}
-			}
-		})
+	switch (type.id) {
+		case "bar":
+			Bars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
+			break;
+		case "stackedBar":
+			StackedBars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
+			break;
+		case "line":
+			Lines.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
+			break;
+		case "doubleAxis":
+			DoubleAxis.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
+			break;
+		case "combo":
+			Combo.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
+			break;
+		default:
+			Bars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
+			break;
+	}
 })
-
-d3.select(".chart-type-selection #bar").classed("active", true)
-Bars.drawChart(data, container, options);
-// renderCombo(data, container, doubleYAxisOptions);
-// const doubleAxisOpt = Object.assign({}, options, {yDomain: [options.yDomain[0]], y2Domain: [options.yDomain[1]]});
-// renderDoubleAxis(data, container, doubleYAxisOptions, "line")
-// Lines.drawChart(data, container, options)
-// renderCombo(data, container, options)
-// ibmD3.renderChart(data, container, options)
-
-

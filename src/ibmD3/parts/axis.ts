@@ -66,7 +66,7 @@ export namespace Axis {
 		  .attr("class", "x axis-label")
 		  .attr("text-anchor", "middle")
 		  .attr("fill", "#586464")
-		  .attr("transform", "translate("+ (options.width/2 - 70) +","+ 80 +")")
+		  .attr("transform", "translate("+ (options.chartSize.width/2 - 70) +","+ 80 +")")
 		  .text(options.xDomain);
 	}
 }

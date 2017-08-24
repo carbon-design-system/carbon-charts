@@ -5,23 +5,12 @@ import {Legend} from './legend.ts'
 import {Tooltip} from './tooltip.ts'
 import '../style.scss'
 import {ibmD3} from '../main.ts'
-let localData = <any>{};
-let localOptions = <any>{};
 
 export namespace Bars {
-	export function drawChart(data, container, options) {
-		localData = data;
-		container.classed("ibmD3-chart-wrapper", true);
-		if (container.select(".legend").nodes().length === 0) {
-			container.append("div").attr("class", "legend");
-		}
-		const chartSize = {
-			height: options.height - ibmD3.margin.top - ibmD3.margin.bottom,
-			width: options.width - ibmD3.margin.left - ibmD3.margin.right
-		}
-		options.chartSize = chartSize;
-		localOptions = options;
-
+	export function drawChart(data, parent, options) {
+		let {chartID, container} = ibmD3.setChartIDContainer(parent)
+		ibmD3.setResizable();
+		options.chartSize = ibmD3.getActualChartSize(container, options);
 		let svg = ibmD3.setSVG(container, options);
 		let xScale = ibmD3.setXScale(data, options);
 		let yScale = ibmD3.setYScale(data, options, ibmD3.getActiveDataSeries(container));
@@ -32,13 +21,21 @@ export namespace Bars {
 		Grid.drawYGrid(svg, yScale, options, data);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			ibmD3.setClickableLegend(data, container, options)
+			ibmD3.setClickableLegend(data, parent, options)
+		}
+		ibmD3.redrawFunctions[chartID] = {
+			self: this,
+			data, parent, options
 		}
 
 		draw(svg, xScale, yScale, options, data, ibmD3.getActiveDataSeries(container));
-		ibmD3.setTooltip();
-		ibmD3.setTooltipCloseEventListener(resetBarOpacity);
-		ibmD3.addTooltipEventListener(svg, d3.selectAll("rect"), reduceOpacity);
+		setTooltip(chartID, svg)
+	}
+
+	export function setTooltip(chartID, svg) {
+		ibmD3.setTooltip(chartID);
+		ibmD3.setTooltipCloseEventListener(chartID, resetBarOpacity);
+		ibmD3.addTooltipEventListener(chartID, svg, svg.selectAll("rect"), reduceOpacity);
 	}
 
 	export function draw(svg, xScale, yScale, options, data, activeSeries) {
@@ -70,8 +67,7 @@ function reduceOpacity(svg, exceptionRect) {
 	d3.select(exceptionRect).attr("fill-opacity", false)
 }
 
-
 function resetBarOpacity() {
-	d3.select("svg").selectAll("rect").attr("fill-opacity", 1)
+	d3.selectAll("svg").selectAll("rect").attr("fill-opacity", 1)
 }
 

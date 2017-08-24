@@ -22,3 +22,9 @@
 	cursor: not-allowed;
 }
 
+.resizable {
+    overflow: scroll;
+    resize: both;
+    max-width: 300px;
+    max-height: 460px;
+}

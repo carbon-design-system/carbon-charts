@@ -1,8 +1,9 @@
 import * as d3 from 'd3'
 
 export namespace Tooltip {
-  export function showTooltip(d) {
-		const div = d3.select(".chart-tooltip")
+  export function showTooltip(chartID, d) {
+  	console.log(d3.select("#tooltip-" + chartID))
+		const div = d3.select("#tooltip-" + chartID)
 			.style("display", "block")
 			.style("left", (d3.event.pageX) + "px")
 			.style("top", (d3.event.pageY) + "px");
@@ -16,6 +17,6 @@ export namespace Tooltip {
 	}
 
 	export function hide() {
-		d3.select(".chart-tooltip").style("display", "none");
+		d3.selectAll(".chart-tooltip").style("display", "none");
 	}
 }

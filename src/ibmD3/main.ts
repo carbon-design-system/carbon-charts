@@ -5,8 +5,8 @@ import {Grid} from './parts/grid.ts'
 import {Bars} from './parts/bars.ts'
 import {StackedBars} from './parts/stackedBars.ts'
 import {Lines} from './parts/lines.ts'
-import {renderCombo} from './types/combo.ts'
-import {renderDoubleAxis} from './types/doubleAxis.ts'
+import {Combo} from './types/combo.ts'
+import {DoubleAxis} from './types/doubleAxis.ts'
 import {Legend} from './parts/legend.ts'
 import {Tooltip} from './parts/tooltip.ts'
 import './style.scss'
@@ -22,10 +22,10 @@ export namespace ibmD3 {
 		left: 70,
 		right: 20
 	};
-	export function getActualChartSize(options) {
+	export function getActualChartSize(container, options) {
 		return {
 			height: options.height - margin.top - margin.bottom,
-			width: options.width - margin.left - margin.right
+			width: container.node().clientWidth - margin.left - margin.right
 		}
 	}
 	export function updateData(data) {
@@ -38,10 +38,10 @@ export namespace ibmD3 {
 		localData = data;
 		container.classed("ibmD3-chart-wrapper", true);
 		container.append("div").attr("class", "legend");
-		options.chartSize = getActualChartSize(options);;
+		options.chartSize = getActualChartSize(container, options);;
 		localOptions = options;
 
-		setResizable(container);
+		// setResizable(data, container, options);
 		let svg = setSVG(container, options);
 		let xScale = setXScale(data, options);
 		let yScale = setYScale(data, options, getActiveDataSeries(container));
@@ -57,12 +57,12 @@ export namespace ibmD3 {
 		drawChart(data, container, options);
 		// drawChart(svg, xScale, yScale, options, data, getActiveDataSeries(container));
 	}
-	export function getData() {
-		return
+	export function setUniqueID() {
+		return Math.floor(Math.random()*90000) + 10000;
 	}
 
 	export function setSVG(container, options) {
-		const chartSize = getActualChartSize(options);
+		const chartSize = getActualChartSize(container, options);
 		let svg = container.append("svg")
 			.attr("width", options.width)
 			.attr("height", options.height)
@@ -99,10 +99,10 @@ export namespace ibmD3 {
 				Lines.drawChart(data, container, options);
 				break;
 			case "doubleAxis":
-				Lines.drawChart(data, container, options);
+				DoubleAxis.drawChart(data, container, options);
 				break;
 			case "combo":
-				renderCombo(data, container, options);
+				Combo.drawChart(data, container, options);
 				break;
 			default:
 				Bars.drawChart(data, container, options);
@@ -110,11 +110,12 @@ export namespace ibmD3 {
 		}
 	}
 
-	export function setTooltip() {
-		const tooltip = d3.selectAll(".chart-tooltip");
+	export function setTooltip(chartID) {
+		const tooltip = d3.select("#tooltip-" + chartID);
 		if (tooltip.nodes().length < 1) {
 			let tooltip = d3.select("body").append("div")
 				.attr("class", "tooltip chart-tooltip")
+				.attr("id", "tooltip-" + chartID)
 				.style("display", "none");
 			tooltip.append("span")
 				.attr("class", "text-box")
@@ -124,28 +125,37 @@ export namespace ibmD3 {
 		}
 	}
 
-	export function setTooltipCloseEventListener(opacityFunc) {
-		d3.select(".close-btn").on("click", () => {
+	export function setTooltipCloseEventListener(chartID, opacityFunc) {
+		d3.select("#tooltip-" + chartID).select(".close-btn").on("click", () => {
 			Tooltip.hide()
 			opacityFunc();
 		});
 	}
 
-	export function addTooltipEventListener(svg, elements, reduceOpacity) {
+	export function addTooltipEventListener(chartID, svg, elements, reduceOpacity) {
 		elements.on("click", function(d) {
-			Tooltip.showTooltip(d)
+			Tooltip.showTooltip(chartID, d)
 			reduceOpacity(svg, this)
+			console.log(this, reduceOpacity)
 		})
 	}
 
-	export function setResizable(container) {
-		// d3.select(window).on("resize", (event) => {
-		// 	localOptions.chartSize.width =
-		// 	updateChart(data, container, options		// });
+	export function setResizable() {
+		d3.select(window).on("resize", function() {
+			redrawAll();
+		});
+	}
+
+	export let redrawFunctions = {};
+
+	function redrawAll() {
+		Object.keys(redrawFunctions).forEach((chart) => {
+			redrawFunctions[chart].self.drawChart(redrawFunctions[chart].data, redrawFunctions[chart].parent, redrawFunctions[chart].options)
+		})
 	}
 
 	export function setXScale(data, options) {
-		return d3.scaleBand().range([0, options.width - margin.left - margin.right])
+		return d3.scaleBand().range([0, options.chartSize.width])
 			.domain(data.map(d => d[options.xDomain]));
 	}
 
@@ -163,17 +173,17 @@ export namespace ibmD3 {
 		return yScale
 	}
 
-	export function setClickableLegend(data, container, options) {
-		container.selectAll(".legendBtn").each(function(d, i) {
+	export function setClickableLegend(data, parent, options) {
+		parent.selectAll(".legendBtn").each(function(d, i) {
 			d3.select(this).on("click", function(d) {
 				Legend.updateLegend(this);
-				updateChart(data, container, options)
+				drawChart(data, parent, options);
 			});
 		})
 	}
 
 	export function updateChart(data, container, options) {
-		container.select("svg").remove();
+		// container.select("svg").remove();
 		drawChart(data, container, options);
 	}
 
@@ -185,5 +195,24 @@ export namespace ibmD3 {
 		return activeSeries;
 	}
 
+	export function setChartIDContainer(parent) {
+		let chartID, container;
+		if (parent.select(".ibmD3-chart-wrapper").nodes().length > 0) {
+			container = parent.select(".ibmD3-chart-wrapper")
+			chartID = container.attr("ibmD3-id");
+			container.selectAll('svg').remove();
+		} else {
+			chartID = ibmD3.setUniqueID();
+			container = parent.append('div')
+			container.attr("ibmD3-id", chartID)
+				.classed("ibmD3-chart-wrapper", true);
+			if (container.select(".legend").nodes().length === 0) {
+				container.append("div").attr("class", "legend");
+			}
+		}
+		return {chartID, container}
+	}
+
 }
+
 

@@ -6,22 +6,11 @@ import {Tooltip} from './tooltip.ts'
 import '../style.scss'
 import {ibmD3} from '../main.ts'
 
-let localData = <any>{};
-let localOptions = <any>{};
-
 export namespace Lines {
-	export function drawChart(data, container, options) {
-		localData = data;
-		container.classed("ibmD3-chart-wrapper", true);
-		if (container.select(".legend").nodes().length === 0) {
-			container.append("div").attr("class", "legend");
-		}
-		const chartSize = {
-			height: options.height - ibmD3.margin.top - ibmD3.margin.bottom,
-			width: options.width - ibmD3.margin.left - ibmD3.margin.right
-		}
-		options.chartSize = chartSize;
-		localOptions = options;
+	export function drawChart(data, parent, options) {
+		let {chartID, container} = ibmD3.setChartIDContainer(parent)
+		ibmD3.setResizable();
+		options.chartSize = ibmD3.getActualChartSize(container, options);
 		let svg = ibmD3.setSVG(container, options);
 		let xScale = ibmD3.setXScale(data, options);
 		let yScale = ibmD3.setYScale(data, options, ibmD3.getActiveDataSeries(container));
@@ -32,14 +21,24 @@ export namespace Lines {
 		Grid.drawYGrid(svg, yScale, options, data);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			ibmD3.setClickableLegend(data, container, options)
+			ibmD3.setClickableLegend(data, parent, options)
+		}
+		ibmD3.redrawFunctions[chartID] = {
+			self: this,
+			data, parent, options
 		}
 
 		draw(svg, xScale, yScale, options, data, ibmD3.getActiveDataSeries(container));
-		ibmD3.setTooltip();
-		ibmD3.setTooltipCloseEventListener(resetLineOpacity);
-		ibmD3.addTooltipEventListener(svg, d3.selectAll("circle"), reduceOpacity);
+		setTooltip(chartID, svg);
 	}
+
+	export function setTooltip(chartID, svg) {
+		ibmD3.setTooltip(chartID);
+		ibmD3.setTooltipCloseEventListener(chartID, resetLineOpacity);
+		ibmD3.addTooltipEventListener(chartID, svg, svg.selectAll("circle"), reduceOpacity);
+	}
+
+
 	export function draw(svg, xScale, yScale, options, data, activeSeries) {
 		let keys: any;
 		let dataList = data;
@@ -98,19 +97,19 @@ export namespace Lines {
 		});
 	}
 
+	export function reduceOpacity(svg, exceptionCircle) {
+		svg.selectAll("path").attr("stroke-opacity", 0.25)
+		svg.selectAll("circle").attr("stroke-opacity", 0.25)
+		d3.select(exceptionCircle.parentNode).select("path").attr("stroke-opacity", 1)
+		d3.select(exceptionCircle.parentNode).selectAll("circle").attr("stroke-opacity", 1)
+		d3.select(exceptionCircle).attr("stroke-opacity", 1)
+		d3.select(exceptionCircle).attr("fill", d3.select(exceptionCircle).attr("stroke"))
+	}
+
+	export function resetLineOpacity() {
+		d3.selectAll("svg").selectAll("path").attr("stroke-opacity", 1)
+		d3.selectAll("svg").selectAll("circle").attr("stroke-opacity", 1)
+			.attr("fill", "white")
+	}
 }
 
-function reduceOpacity(svg, exceptionCircle) {
-	svg.selectAll("path").attr("stroke-opacity", 0.25)
-	svg.selectAll("circle").attr("stroke-opacity", 0.25)
-	d3.select(exceptionCircle.parentNode).select("path").attr("stroke-opacity", 1)
-	d3.select(exceptionCircle.parentNode).selectAll("circle").attr("stroke-opacity", 1)
-	d3.select(exceptionCircle).attr("stroke-opacity", 1)
-	d3.select(exceptionCircle).attr("fill", d3.select(exceptionCircle).attr("stroke"))
-}
-
-function resetLineOpacity() {
-	d3.select("svg").selectAll("path").attr("stroke-opacity", 1)
-	d3.select("svg").selectAll("circle").attr("stroke-opacity", 1)
-		.attr("fill", "white")
-}
