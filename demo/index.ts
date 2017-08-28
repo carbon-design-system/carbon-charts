@@ -1,10 +1,10 @@
 import * as d3 from 'd3'
-import {ibmD3} from './ibmD3/main.ts'
-import {Combo} from './ibmD3/types/combo.ts'
-import {DoubleAxis} from './ibmD3/types/doubleAxis.ts'
-import {Bars} from './ibmD3/parts/bars.ts'
-import {Lines} from './ibmD3/parts/lines.ts'
-import {StackedBars} from './ibmD3/parts/stackedBars.ts'
+import {Charts} from '../src/charts/index.ts'
+import {Combo} from '../src/charts/types/combo.ts'
+import {DoubleAxis} from '../src/charts/types/doubleAxis.ts'
+import {Bars} from '../src/charts/parts/bars.ts'
+import {Lines} from '../src/charts/parts/lines.ts'
+import {StackedBars} from '../src/charts/parts/stackedBars.ts'
 
 let colors = [
 		"#009BEF",
@@ -134,9 +134,9 @@ const chartTypes = [
 // 				btn.classed("active", !btn.classed("active"));
 // 			}
 // 			if (btn.classed('active')) {
-// 				ibmD3.removeChart(container)
+// 				Charts.removeChart(container)
 // 				options.type = d3.select(".chart-type-selection .active").attr("id");
-// 				// ibmD3.renderChart(data, container, options)
+// 				// Charts.renderChart(data, container, options)
 // 				switch (type.id) {
 // 					case "bar":
 // 						Bars.drawChart(data, container, options);

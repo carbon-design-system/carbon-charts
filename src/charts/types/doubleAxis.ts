@@ -8,21 +8,21 @@ import {Lines} from '../parts/lines.ts'
 import {Legend} from '../parts/legend.ts'
 import {Tooltip} from '../parts/tooltip.ts'
 import '../style.scss'
-import {ibmD3} from '../main.ts'
+import {Charts} from '../index.ts'
 
 let localData = <any>{};
 let localOptions = <any>{};
 export namespace DoubleAxis {
 	export function drawChart(data, parent, options) {
 		parent.style('padding-right', '80px')
-		let {chartID, container} = ibmD3.setChartIDContainer(parent)
-		ibmD3.setResizable()
-		options.chartSize = ibmD3.getActualChartSize(container, options);
+		let {chartID, container} = Charts.setChartIDContainer(parent)
+		Charts.setResizable()
+		options.chartSize = Charts.getActualChartSize(container, options);
 		localOptions = options;
-		let svg = ibmD3.setSVG(container, options);
-		let xScale = ibmD3.setXScale(data, options);
-		let yScale = ibmD3.setYScale(data, options, ibmD3.getActiveDataSeries(container));
-		let y2Scale = ibmD3.setYScale(data, options, options.y2Domain);
+		let svg = Charts.setSVG(container, options);
+		let xScale = Charts.setXScale(data, options);
+		let yScale = Charts.setYScale(data, options, Charts.getActiveDataSeries(container));
+		let y2Scale = Charts.setYScale(data, options, options.y2Domain);
 
 		Axis.drawXAxis(svg, xScale, options, data);
 		Axis.drawYAxis(svg, yScale, options, data);
@@ -33,14 +33,14 @@ export namespace DoubleAxis {
 		Axis.drawY2Axis(svg, y2Scale, options, data);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			ibmD3.setClickableLegend(data, parent, options)
+			Charts.setClickableLegend(data, parent, options)
 		}
-		ibmD3.redrawFunctions[chartID] = {
+		Charts.redrawFunctions[chartID] = {
 			self: this,
 			data, parent, options
 		}
 
-		Lines.draw(svg, xScale, yScale, options, data, ibmD3.getActiveDataSeries(container));
+		Lines.draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
 		Lines.setTooltip(chartID, svg);
 	}
 }

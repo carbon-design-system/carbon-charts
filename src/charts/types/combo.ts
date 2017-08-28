@@ -8,20 +8,20 @@ import {Lines} from '../parts/lines.ts'
 import {Legend} from '../parts/legend.ts'
 import {Tooltip} from '../parts/tooltip.ts'
 import '../style.scss'
-import {ibmD3} from '../main.ts'
+import {Charts} from '../index.ts'
 
 export namespace Combo {
 	export function drawChart(data, parent, options) {
 		parent.style('padding-right', '80px')
-		let {chartID, container} = ibmD3.setChartIDContainer(parent)
-		ibmD3.setResizable();
+		let {chartID, container} = Charts.setChartIDContainer(parent)
+		Charts.setResizable();
 
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			ibmD3.setClickableLegend(data, parent, options)
+			Charts.setClickableLegend(data, parent, options)
 		}
-		options.chartSize = ibmD3.getActualChartSize(container, options);
-		const activeSeries = <any>ibmD3.getActiveDataSeries(container);
+		options.chartSize = Charts.getActualChartSize(container, options);
+		const activeSeries = <any>Charts.getActiveDataSeries(container);
 		const activeBar =  activeSeries.includes(options.yDomain[0]);
 		const activeLineSeries = activeBar ? activeSeries.slice(1, activeSeries.length) : activeSeries;
 
@@ -39,18 +39,18 @@ export namespace Combo {
 			}
 			lineData.push(lineDataObj);
 		})
-		ibmD3.redrawFunctions[chartID] = {
+		Charts.redrawFunctions[chartID] = {
 			self: this,
 			data, parent, options
 		}
 
-		let svg = ibmD3.setSVG(container, options);
-		let xScaleBar = ibmD3.setXScale(barData, options);
-		let xScaleLine = ibmD3.setXScale(lineData, options);
-		let yScale = ibmD3.setYScale(barData, options, options.yDomain);
-		let y2Scale = ibmD3.setYScale(lineData, options, activeLineSeries);
-		let yScaleBar = ibmD3.setYScale(barData, options, options.yDomain);
-		let yScaleLine = ibmD3.setYScale(lineData, options, activeLineSeries);
+		let svg = Charts.setSVG(container, options);
+		let xScaleBar = Charts.setXScale(barData, options);
+		let xScaleLine = Charts.setXScale(lineData, options);
+		let yScale = Charts.setYScale(barData, options, options.yDomain);
+		let y2Scale = Charts.setYScale(lineData, options, activeLineSeries);
+		let yScaleBar = Charts.setYScale(barData, options, options.yDomain);
+		let yScaleLine = Charts.setYScale(lineData, options, activeLineSeries);
 
 		Axis.drawXAxis(svg, xScaleBar, options, data);
 		Axis.drawYAxis(svg, yScale, options, barData);
@@ -67,10 +67,10 @@ export namespace Combo {
 }
 
 export function setTooltip(chartID, svg) {
-	ibmD3.setTooltip(chartID);
-	ibmD3.addTooltipEventListener(chartID, svg, svg.selectAll("rect"), reduceOpacity);
-	ibmD3.addTooltipEventListener(chartID, svg, svg.selectAll("circle"), reduceOpacity);
-	ibmD3.setTooltipCloseEventListener(chartID, resetLineBarOpacity);
+	Charts.setTooltip(chartID);
+	Charts.addTooltipEventListener(chartID, svg, svg.selectAll("rect"), reduceOpacity);
+	Charts.addTooltipEventListener(chartID, svg, svg.selectAll("circle"), reduceOpacity);
+	Charts.setTooltipCloseEventListener(chartID, resetLineBarOpacity);
 }
 
 

@@ -1,4 +1,3 @@
-// export {HelloWorld} from './hello-world'
 import * as d3 from 'd3'
 import {Axis} from './parts/axis.ts'
 import {Grid} from './parts/grid.ts'
@@ -11,11 +10,10 @@ import {Legend} from './parts/legend.ts'
 import {Tooltip} from './parts/tooltip.ts'
 import './style.scss'
 
-
 let localData = <any>{};
 let localOptions = <any>{};
 
-export namespace ibmD3 {
+export namespace Charts {
 	export const margin = {
 		top: 20,
 		bottom: 50,
@@ -36,12 +34,11 @@ export namespace ibmD3 {
 	}
 	export function renderChart(data, container, options) {
 		localData = data;
-		container.classed("ibmD3-chart-wrapper", true);
+		container.classed("Charts-chart-wrapper", true);
 		container.append("div").attr("class", "legend");
 		options.chartSize = getActualChartSize(container, options);;
 		localOptions = options;
 
-		// setResizable(data, container, options);
 		let svg = setSVG(container, options);
 		let xScale = setXScale(data, options);
 		let yScale = setYScale(data, options, getActiveDataSeries(container));
@@ -55,7 +52,6 @@ export namespace ibmD3 {
 			setClickableLegend(data, container, options)
 		}
 		drawChart(data, container, options);
-		// drawChart(svg, xScale, yScale, options, data, getActiveDataSeries(container));
 	}
 	export function setUniqueID() {
 		return Math.floor(Math.random()*90000) + 10000;
@@ -64,7 +60,7 @@ export namespace ibmD3 {
 	export function setSVG(container, options) {
 		const chartSize = getActualChartSize(container, options);
 		let svg = container.append("svg")
-			.attr("width", options.width)
+			.attr("width", container.node().clientWidth)
 			.attr("height", options.height)
 			.append("g")
 			.attr("class", "inner-wrap")
@@ -136,7 +132,6 @@ export namespace ibmD3 {
 		elements.on("click", function(d) {
 			Tooltip.showTooltip(chartID, d)
 			reduceOpacity(svg, this)
-			console.log(this, reduceOpacity)
 		})
 	}
 
@@ -183,7 +178,6 @@ export namespace ibmD3 {
 	}
 
 	export function updateChart(data, container, options) {
-		// container.select("svg").remove();
 		drawChart(data, container, options);
 	}
 
@@ -197,15 +191,15 @@ export namespace ibmD3 {
 
 	export function setChartIDContainer(parent) {
 		let chartID, container;
-		if (parent.select(".ibmD3-chart-wrapper").nodes().length > 0) {
-			container = parent.select(".ibmD3-chart-wrapper")
-			chartID = container.attr("ibmD3-id");
+		if (parent.select(".Charts-chart-wrapper").nodes().length > 0) {
+			container = parent.select(".Charts-chart-wrapper")
+			chartID = container.attr("Charts-id");
 			container.selectAll('svg').remove();
 		} else {
-			chartID = ibmD3.setUniqueID();
+			chartID = Charts.setUniqueID();
 			container = parent.append('div')
-			container.attr("ibmD3-id", chartID)
-				.classed("ibmD3-chart-wrapper", true);
+			container.attr("Charts-id", chartID)
+				.classed("Charts-chart-wrapper", true);
 			if (container.select(".legend").nodes().length === 0) {
 				container.append("div").attr("class", "legend");
 			}
@@ -214,5 +208,3 @@ export namespace ibmD3 {
 	}
 
 }
-
-
