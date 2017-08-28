@@ -2,7 +2,7 @@
   "name": "charts",
   "version": "0.0.1",
   "description": "WCE charts",
-  "main": "index.js",
+  "main": "demo.js",
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
     "demo:build": "webpack --config webpack.config.js",
@@ -20,8 +20,7 @@
   "author": "IBM",
   "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
-    "d3": "^4.10.0",
-    "webpack-dev-server": "2.7.1"
+    "d3": "^4.10.0"
   },
   "devDependencies": {
     "css-loader": "0.28.4",
@@ -33,6 +32,7 @@
     "style-loader": "0.18.2",
     "ts-loader": "2.3.2",
     "typescript": "2.4.2",
-    "webpack": "3.5.4"
+    "webpack": "3.5.4",
+    "webpack-dev-server": "2.7.1"
   }
 }
