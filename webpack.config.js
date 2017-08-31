@@ -6,7 +6,7 @@ module.exports = {
 		path: __dirname + '/dist',
 		filename: "bundle.js",
 		libraryTarget: "var",
-    library: "ibmD3"
+    library: "Charts"
 	},
 	resolve: {
 		// Add '.ts' and '.tsx' as a resolvable extension.
