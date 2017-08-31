@@ -3,7 +3,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
 	entry: "./demo/index.ts",
 	output: {
-		path: __dirname + '/dist',
+		path: __dirname + '/demo/bundle',
 		filename: "bundle.js",
 		libraryTarget: "var",
     library: "Charts"
@@ -32,5 +32,12 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './demo/index.html'
 		})
-	]
+	],
+	devServer: {
+		contentBase: "./demo",
+		host: "0.0.0.0",
+		port: 9001,
+		historyApiFallback: true,
+		disableHostCheck: true
+	}
 }
