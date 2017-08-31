@@ -2,12 +2,12 @@
   "name": "charts",
   "version": "0.0.1",
   "description": "WCE charts",
-  "main": "index.js",
+  "main": "demo.js",
   "scripts": {
-    "demo:server": "echo \"run server here\"",
-    "demo:build": "echo \"generate static files\"",
-    "build":"echo \"generate compiled js\"",
-    "deploy":"echo \"something for deploy here\"",
+    "demo:server": "webpack-dev-server --config webpack.config.js --watch",
+    "demo:build": "webpack --config webpack.config.js",
+    "build": "echo \"generate compiled js\"",
+    "deploy": "echo \"something for deploy here\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,5 +21,18 @@
   "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
     "d3": "^4.10.0"
+  },
+  "devDependencies": {
+    "css-loader": "0.28.4",
+    "html-loader": "0.5.1",
+    "html-webpack-plugin": "2.30.1",
+    "node-sass": "4.5.3",
+    "postcss-loader": "2.0.6",
+    "sass-loader": "6.0.6",
+    "style-loader": "0.18.2",
+    "ts-loader": "2.3.2",
+    "typescript": "2.4.2",
+    "webpack": "3.5.4",
+    "webpack-dev-server": "2.7.1"
   }
 }
