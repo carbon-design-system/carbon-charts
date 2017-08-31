@@ -34,7 +34,7 @@ export namespace Charts {
 	}
 	export function renderChart(data, container, options) {
 		localData = data;
-		container.classed("Charts-chart-wrapper", true);
+		container.classed("chart-wrapper", true);
 		container.append("div").attr("class", "legend");
 		options.chartSize = getActualChartSize(container, options);;
 		localOptions = options;
@@ -191,15 +191,15 @@ export namespace Charts {
 
 	export function setChartIDContainer(parent) {
 		let chartID, container;
-		if (parent.select(".Charts-chart-wrapper").nodes().length > 0) {
-			container = parent.select(".Charts-chart-wrapper")
-			chartID = container.attr("Charts-id");
+		if (parent.select(".chart-wrapper").nodes().length > 0) {
+			container = parent.select(".chart-wrapper")
+			chartID = container.attr("chart-id");
 			container.selectAll('svg').remove();
 		} else {
 			chartID = Charts.setUniqueID();
 			container = parent.append('div')
-			container.attr("Charts-id", chartID)
-				.classed("Charts-chart-wrapper", true);
+			container.attr("chart-id", chartID)
+				.classed("chart-wrapper", true);
 			if (container.select(".legend").nodes().length === 0) {
 				container.append("div").attr("class", "legend");
 			}
