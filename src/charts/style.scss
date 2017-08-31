@@ -6,35 +6,36 @@
 	padding: 20px 30px 100px;
 	height: 400px;
 	width: 50%;
+
+	h3 {
+		border-bottom: 1px solid lightgray;
+		margin: 0;
+	}
+
+	svg {
+		overflow: initial;
+		.inner-wrap {
+			width: 100%;
+		}
+		circle:hover {
+			filter: drop-shadow( -5px -5px 5px #000 );
+		}
+	}
 }
 
-.chart-holder h3 {
-	border-bottom: 1px solid lightgray;
-	margin: 0;
-}
-
-.ibmD3-chart-wrapper {
+.chart-wrapper {
 	width: 100%;
 	height: 100%;
+
+	svg {
+		overflow: visible;
+	}
 }
-g.inner-wrap {
-	width: 100%;
-}
+
 .chart-title {
-    display: block;
-    font-size: 16px;
-    font-weight: bold;
-}
-.ibmD3-chart-wrapper svg {
-	overflow: visible;
-}
-
-.chart-holder svg {
-	overflow: initial;
-}
-
-svg circle:hover {
-	filter: drop-shadow( -5px -5px 5px #000 );
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .legend {
@@ -46,10 +47,10 @@ svg circle:hover {
 	display: inline-block;
 	line-height: 10px;
 	font-size: 12px;
-}
 
-.legendBtn span {
-	display: inline;
+	span {
+		display: inline;
+	}
 }
 
 .legend-circle {
@@ -72,13 +73,13 @@ svg circle:hover {
 	position: absolute;
 	padding: 10px 20px 10px 10px;
 	border-top: 2px solid #4178BE;
-}
 
-.chart-tooltip .close-btn {
-	color: #586464;
-	font-size: 12px;
-	position: absolute;
-	top: 0;
-	right: 0;
-	padding: 5px;
+	.close-btn {
+		color: #586464;
+		font-size: 12px;
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: 5px;
+	}
 }
