@@ -21,15 +21,17 @@ export namespace Charts {
 		right: 20
 	};
 	export function getActualChartSize(data, container, options) {
-		let ratio;
+		let ratio, marginForLegendTop;
 		if (container.node().clientWidth > 600 &&
 			Legend.getLegendItems(data, options).length > 4) {
-			ratio = 0.6
+			ratio = 0.6;
+			marginForLegendTop = 50;
 		} else {
+			marginForLegendTop = 100;
 			ratio = 1
 		}
 		return {
-			height: options.height - margin.top - margin.bottom,
+			height: container.node().clientHeight - margin.top - margin.bottom - marginForLegendTop,
 			width: (container.node().clientWidth - margin.left - margin.right) * ratio
 		}
 	}
@@ -65,17 +67,19 @@ export namespace Charts {
 	}
 
 	export function setSVG(data, container, options) {
-		let svgWidth;
+		let svgWidth, svgHeight;
 		if (container.node().clientWidth > 600 &&
 			Legend.getLegendItems(data, options).length > 4) {
 			svgWidth = container.node().clientWidth * 0.6
+			svgHeight = container.node().clientHeight;
 		} else {
 			svgWidth = container.node().clientWidth
+			svgHeight = container.node().clientHeight - 100;
 		}
 		const chartSize = getActualChartSize(data, container, options);
 		let svg = container.append("svg")
 			.attr("width", svgWidth)
-			.attr("height", options.height)
+			.attr("height", svgHeight)
 			.append("g")
 			.attr("class", "inner-wrap")
 			.attr("transform", `translate(${margin.left},${margin.top})`);
@@ -184,7 +188,7 @@ export namespace Charts {
 	}
 
 	export function setYScale(data, options, activeSeries) {
-		let yScale = d3.scaleLinear().range([options.height - margin.top - margin.bottom, 0]);
+		let yScale = d3.scaleLinear().range([options.chartSize.height, 0]);
 		const keys = activeSeries.length > 0 ? activeSeries : options.yDomain;
 		if (options.type === 'stackedBar') {
 			const yMax = d3.max(data, d => keys.map(val => d[val]).reduce((acc, cur) => acc + cur, 0));
