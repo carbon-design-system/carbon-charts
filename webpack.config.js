@@ -18,14 +18,18 @@ module.exports = {
 			{ test: /\.tsx?$/, loader: "ts-loader" },
 			{ test: /\.html?$/, loader: "html-loader" },
 			{
-				test: /\.scss$/,
+				test: /\.s?css$/,
 				loaders: [
 					"style-loader",
           "css-loader",
           "postcss-loader",
           "sass-loader"
          ]
-			}
+			},
+			{
+	      test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
+	      loader: 'url-loader'
+	    }
 		]
 	},
 	plugins: [
