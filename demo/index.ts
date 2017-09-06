@@ -1,3 +1,4 @@
+import '@peretz/matter/matter.css'
 import * as d3 from 'd3'
 import {Charts} from '../src/charts/index.ts'
 import {Combo} from '../src/charts/types/combo.ts'
