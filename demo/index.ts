@@ -30,6 +30,16 @@ let options = {
 	colors
 }
 
+let longDataOptions = {
+	width: 600,
+	height: 400,
+	xDomain: "Part Number",
+	yDomain: ["Total Quantity", "Returned", "Defects", "This is extra long legend", "Number of Sold products"],
+	yTicks: 5,
+	legendClickable: true,
+	colors
+}
+
 let doubleYAxisOptions = {
 	width: 600,
 	height: 400,
@@ -82,13 +92,65 @@ const data = [
 ];
 
 
+const longData = [
+	{
+		"Part Number": "2V2N-9KYPM",
+		"Total Quantity": 100000,
+		"Returned": 60000,
+		"Defects": 9230,
+		"This is extra long legend": 12345,
+		"Number of Sold products": 90000
+	},
+	{
+		"Part Number": "L22I-P66EP",
+		"Total Quantity": 200000,
+		"Returned": 50000,
+		"Defects": 9230,
+		"This is extra long legend": 12345,
+		"Number of Sold products": 70000
+	},
+	{
+		"Part Number": "JQAI-2M4L1",
+		"Total Quantity": 100000,
+		"Returned": 9000,
+		"Defects": 2980,
+		"This is extra long legend": 12345,
+		"Number of Sold products": 6000
+	},
+	{
+		"Part Number": "J9DZ-F37AP",
+		"Total Quantity": 150000,
+		"Returned": 8000,
+		"Defects": 12230,
+		"This is extra long legend": 12345,
+		"Number of Sold products": 11000
+	},
+	{
+		"Part Number": "Q6XK-YEL48",
+		"Total Quantity": 230000,
+		"Returned": 4000,
+		"Defects": 8230,
+		"This is extra long legend": 12345,
+		"Number of Sold products": 300000
+	},
+	{
+		"Part Number": "773C-XKB5L",
+		"Total Quantity": 390000,
+		"Returned": 35000,
+		"Defects": 5230,
+		"This is extra long legend": 12345,
+		"Number of Sold products": 190000
+	}
+];
+
+
 const chartTypes = [
 	{
 		id: 'bar',
 		name: 'Bar',
 		avail: true,
-		options,
-		data
+		options: longDataOptions,
+		data: longData
 	},
 	{
 		id: 'line',
