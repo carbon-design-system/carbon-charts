@@ -10,9 +10,9 @@ export namespace StackedBars {
 	export function drawChart(data, parent, options) {
 		let {chartID, container} = Charts.setChartIDContainer(parent)
 		Charts.setResizable();
-		options.chartSize = Charts.getActualChartSize(container, options);
+		options.chartSize = Charts.getActualChartSize(data, container, options);
 
-		let svg = Charts.setSVG(container, options);
+		let svg = Charts.setSVG(data, container, options);
 		let xScale = Charts.setXScale(data, options);
 		let yScale = Charts.setYScale(data, options, Charts.getActiveDataSeries(container));
 
@@ -64,9 +64,14 @@ export namespace StackedBars {
 			.data(d => d.series)
 			.enter().append("rect")
 			.attr("width", xScale.bandwidth())
+			.style("fill", d => color(d.series))
+			.attr("y", options.chartSize.height)
+			.attr("height", 0)
+			.transition()
+			.delay((d, i) => i * 30)
+			.ease(d3.easeLinear)
 			.attr("y", d => yScale(d.y1))
 			.attr("height", d => yScale(d.y0) - yScale(d.y1))
-			.style("fill", d => color(d.series));
 	}
 }
 

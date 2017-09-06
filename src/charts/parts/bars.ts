@@ -10,9 +10,10 @@ export namespace Bars {
 	export function drawChart(data, parent, options) {
 		let {chartID, container} = Charts.setChartIDContainer(parent)
 		Charts.setResizable();
-		options.chartSize = Charts.getActualChartSize(container, options);
-		let svg = Charts.setSVG(container, options);
+		options.chartSize = Charts.getActualChartSize(data, container, options);
+		let svg = Charts.setSVG(data, container, options);
 		let xScale = Charts.setXScale(data, options);
+		const activeDataSeries = Charts.getActiveDataSeries(container)
 		let yScale = Charts.setYScale(data, options, Charts.getActiveDataSeries(container));
 
 		Axis.drawXAxis(svg, xScale, options, data);
@@ -54,10 +55,15 @@ export namespace Bars {
 			.data(d => keys.map(key => ({xAxis: options.xDomain, series: key, key: d[options.xDomain], value: d[key]})))
 			.enter().append("rect")
 				.attr("x", d => x1(d.series))
-				.attr("y", d => yScale(d.value))
+				.attr("y", d => options.chartSize.height)
 				.attr("width", x1.bandwidth())
+				.attr("height", 0)
+				.attr("fill", d => color(d.series))
+				.transition()
+				.duration(500)
+				.ease(d3.easeExp)
+				.attr("y", d => yScale(d.value))
 				.attr("height", d => options.chartSize.height - yScale(d.value))
-				.attr("fill", d => color(d.series));
 	}
 
 }

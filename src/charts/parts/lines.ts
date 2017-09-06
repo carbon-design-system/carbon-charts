@@ -10,9 +10,9 @@ export namespace Lines {
 	export function drawChart(data, parent, options) {
 		let {chartID, container} = Charts.setChartIDContainer(parent)
 		Charts.setResizable();
-		options.chartSize = Charts.getActualChartSize(container, options);
+		options.chartSize = Charts.getActualChartSize(data, container, options);
 
-		let svg = Charts.setSVG(container, options);
+		let svg = Charts.setSVG(data, container, options);
 		let xScale = Charts.setXScale(data, options);
 		let yScale = Charts.setYScale(data, options, Charts.getActiveDataSeries(container));
 
@@ -84,7 +84,11 @@ export namespace Lines {
 				.attr("stroke-linecap", "round")
 				.attr("stroke-width", 1.5)
 				.attr("d", line)
-				.style("stroke", color(colorKey));
+				.style("stroke", color(colorKey))
+				.style("opacity", 0)
+				.transition()
+				.duration(700)
+				.style("opacity", 1);
 
 			series.selectAll("dot")
 				.data(valueData)
@@ -95,6 +99,10 @@ export namespace Lines {
 				.attr("stroke-widget", "10%")
 				.attr("cx", d => xScale(d.key) + options.chartSize.width / dataList.length / 2)
 				.attr("cy", d => yScale(d.value))
+				.style("opacity", 0)
+				.transition()
+				.duration(500)
+				.style("opacity", 1)
 		});
 	}
 
