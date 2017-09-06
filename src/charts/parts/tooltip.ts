@@ -14,6 +14,6 @@ export namespace Tooltip {
 	}
 
 	export function hide() {
-		d3.selectAll(".chart-tooltip").style("display", "none");
+		d3.selectAll(".tooltip").style("display", "none");
 	}
 }
