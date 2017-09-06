@@ -90,10 +90,13 @@ export namespace Legend {
 
 	function openLegendTooltip(target, container, legendItems, options, data) {
 		d3.selectAll(".legend-tooltip").remove();
+		const mouseXPoint = d3.mouse(container.node())[0];
+		const windowXPoint = d3.event.x;
+		let leftPos = window.innerWidth - (windowXPoint + 200) < 0 ? mouseXPoint - 200 : mouseXPoint;
 		let tooltip = container.append("div")
 			.attr("class", "tooltip legend-tooltip")
 			.style("display", "block")
-			.style("left", (d3.mouse(container.node())[0]) + "px")
+			.style("left", leftPos + "px")
 			.style("top", (d3.mouse(container.node())[1]) + "px");
 		tooltip.append("h2").text("Legend")
 		tooltip.append('div')
