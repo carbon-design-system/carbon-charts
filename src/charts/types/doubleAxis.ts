@@ -17,9 +17,9 @@ export namespace DoubleAxis {
 		parent.style('padding-right', '80px')
 		let {chartID, container} = Charts.setChartIDContainer(parent)
 		Charts.setResizable()
-		options.chartSize = Charts.getActualChartSize(container, options);
+		options.chartSize = Charts.getActualChartSize(data, container, options);
 		localOptions = options;
-		let svg = Charts.setSVG(container, options);
+		let svg = Charts.setSVG(data, container, options);
 		let xScale = Charts.setXScale(data, options);
 		let yScale = Charts.setYScale(data, options, Charts.getActiveDataSeries(container));
 		let y2Scale = Charts.setYScale(data, options, options.y2Domain);

@@ -20,7 +20,7 @@ export namespace Combo {
 		if (options.legendClickable) {
 			Charts.setClickableLegend(data, parent, options)
 		}
-		options.chartSize = Charts.getActualChartSize(container, options);
+		options.chartSize = Charts.getActualChartSize(data, container, options);
 		const activeSeries = <any>Charts.getActiveDataSeries(container);
 		const activeBar =  activeSeries.includes(options.yDomain[0]);
 		const activeLineSeries = activeBar ? activeSeries.slice(1, activeSeries.length) : activeSeries;
@@ -44,7 +44,7 @@ export namespace Combo {
 			data, parent, options
 		}
 
-		let svg = Charts.setSVG(container, options);
+		let svg = Charts.setSVG(data, container, options);
 		let xScaleBar = Charts.setXScale(barData, options);
 		let xScaleLine = Charts.setXScale(lineData, options);
 		let yScale = Charts.setYScale(barData, options, options.yDomain);
