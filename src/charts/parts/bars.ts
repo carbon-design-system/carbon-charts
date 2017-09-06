@@ -60,8 +60,8 @@ export namespace Bars {
 				.attr("height", 0)
 				.attr("fill", d => color(d.series))
 				.transition()
-				.duration(500)
-				.ease(d3.easeExp)
+				.duration(1000)
+				.ease(d3.easePolyOut, 0.5)
 				.attr("y", d => yScale(d.value))
 				.attr("height", d => options.chartSize.height - yScale(d.value))
 	}

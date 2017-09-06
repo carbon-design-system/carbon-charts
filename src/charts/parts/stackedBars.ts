@@ -69,7 +69,7 @@ export namespace StackedBars {
 			.attr("height", 0)
 			.transition()
 			.delay((d, i) => i * 30)
-			.ease(d3.easeLinear)
+			.ease(d3.easePolyOut, 0.5)
 			.attr("y", d => yScale(d.y1))
 			.attr("height", d => yScale(d.y0) - yScale(d.y1))
 	}
