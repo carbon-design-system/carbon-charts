@@ -79,7 +79,7 @@
 	width: 10px;
 	-moz-border-radius: 50%;
 	border-radius: 50%;
-	margin: 0 5px 0 15px;
+	margin: 0 5px 5px 15px;
 	box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -118,7 +118,7 @@
 		width: 100%;
 	}
 	text {
-		max-width: none;
+		max-width: 160px;
 	}
 	.close-btn {
 		color: white;
@@ -150,6 +150,6 @@
 		text-indent: -.7em;
 	}
 	.legend-circle {
-		margin: 0 5px 0 15px;
+		margin: 0 15px;
 	}
 }
