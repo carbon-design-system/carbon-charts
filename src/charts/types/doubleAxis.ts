@@ -19,10 +19,17 @@ export namespace DoubleAxis {
 		Charts.setResizable()
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 		localOptions = options;
+		Legend.addLegend(container, data, options);
+		if (options.legendClickable) {
+			Charts.setClickableLegend(data, parent, options)
+		}
+		const activeSeries = <any>Charts.getActiveDataSeries(container);
+		const y1ActiveSeries = options.yDomain.filter(val => activeSeries.includes(val))
+		const y2ActiveSeries = options.y2Domain.filter(val => activeSeries.includes(val))
 		let svg = Charts.setSVG(data, container, options);
 		let xScale = Charts.setXScale(data, options);
-		let yScale = Charts.setYScale(data, options, Charts.getActiveDataSeries(container));
-		let y2Scale = Charts.setYScale(data, options, options.y2Domain);
+		let yScale = Charts.setYScale(data, options, y1ActiveSeries);
+		let y2Scale = Charts.setYScale(data, options, y2ActiveSeries);
 
 		Axis.drawXAxis(svg, xScale, options, data);
 		Axis.drawYAxis(svg, yScale, options, data);
@@ -31,16 +38,12 @@ export namespace DoubleAxis {
 		svg.select(".inner-wrap").append("g")
 			.attr("class", "y2 axis")
 		Axis.drawY2Axis(svg, y2Scale, options, data);
-		Legend.addLegend(container, data, options);
-		if (options.legendClickable) {
-			Charts.setClickableLegend(data, parent, options)
-		}
 		Charts.redrawFunctions[chartID] = {
 			self: this,
 			data, parent, options
 		}
-
-		Lines.draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
+		Lines.draw(svg, xScale, yScale, options, data, y1ActiveSeries);
+		Lines.draw(svg, xScale, y2Scale, options, data, y2ActiveSeries);
 		Lines.setTooltip(chartID, svg);
 	}
 }
