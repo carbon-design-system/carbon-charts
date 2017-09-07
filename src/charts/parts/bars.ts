@@ -52,7 +52,13 @@ export namespace Bars {
 			.enter().append("g")
 				.attr("transform", d => "translate(" + xScale(d[options.xDomain]) + ",0)")
 			.selectAll("rect")
-			.data(d => keys.map(key => ({xAxis: options.xDomain, series: key, key: d[options.xDomain], value: d[key]})))
+			.data(d => keys.map(key => ({
+				xAxis: options.xDomain,
+				series: key,
+				key: d[options.xDomain],
+				value: d[key],
+				formatter: options.yFormatter
+			})))
 			.enter().append("rect")
 				.attr("x", d => x1(d.series))
 				.attr("y", d => options.chartSize.height)

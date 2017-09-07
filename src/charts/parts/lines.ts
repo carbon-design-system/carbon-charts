@@ -73,7 +73,8 @@ export namespace Lines {
 				series: value,
 				value: d[value],
 				dimension: options.dimension,
-				dimVal: d[options.dimension]
+				dimVal: d[options.dimension],
+				formatter: options.yFormatter
 			}));
 			const series = svg.append("g");
 			series.append("path")

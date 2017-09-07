@@ -50,7 +50,16 @@ export namespace StackedBars {
 			let key = d[options.xDomain];
 			const xAxis = options.xDomain;
 			d.series = keys.map(function(seriesVal) {
-				return {xAxis, series: seriesVal, key, y0: y0, y1: y0 += +d[seriesVal], value: d[seriesVal]}; });
+				return {
+					xAxis,
+					series: seriesVal,
+					key,
+					y0: y0,
+					y1: y0 += +d[seriesVal],
+					value: d[seriesVal],
+					formatter: options.yFormatter
+				};
+			});
 			d.total = options.yDomain.map(val => d[val]).reduce((acc, cur) => acc + cur, 0);
 		});
 
