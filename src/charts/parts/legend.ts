@@ -48,7 +48,7 @@ export namespace Legend {
 			container.select(".legend").classed("right-legend", false)
 			let numberOfLegendAvail = Math.floor((container.node().clientWidth) / 130)
 			let btns = container.selectAll(".legend-btn").nodes();
-			for (let i = numberOfLegendAvail + 1; i < legendItems.length; i++) {
+			for (let i = numberOfLegendAvail; i < legendItems.length; i++) {
 				d3.select(btns[i]).style("display", "none")
 			}
 			if (container.select(".expand-btn").nodes().length === 0) {
@@ -99,7 +99,7 @@ export namespace Legend {
 			.style("left", leftPos + "px")
 			.style("top", (d3.mouse(container.node())[1]) + "px");
 		tooltip.append("h2").text("Legend")
-		tooltip.append('div')
+		tooltip.append('ul')
 			.attr("class", "legend-tooltip-content")
 			.attr("font-size", 10)
 		tooltip.append("span")
@@ -113,7 +113,7 @@ export namespace Legend {
 			.attr("font-size", 10)
 		.selectAll("div")
 		.data(legendItems)
-		.enter().append("div")
+		.enter().append("li")
 			.attr("class", "legend-btn active")
 
 		legendContent.append("div")
