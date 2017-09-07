@@ -42,7 +42,7 @@ export namespace Legend {
 					.style("background-color", (d, i) => options.colors[i])
 
 				legend.append("text")
-					.text(function(d) { return d; });
+					.text(d => d);
 		container.selectAll(".legend-btn").style("display", "inline-block")
 		if (hasLegendExpandBtn(container, legendItems)) {
 			container.select(".legend").classed("right-legend", false)
@@ -121,7 +121,7 @@ export namespace Legend {
 			.style("background-color", (d, i) => options.colors[i])
 
 		legendContent.append("text")
-			.text(function(d) { return d; });
+			.text(d => d);
 
 		Charts.setClickableLegendInTooltip(data, container, options)
 	}

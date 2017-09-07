@@ -49,7 +49,7 @@ export namespace StackedBars {
 			let y0 = 0;
 			let key = d[options.xDomain];
 			const xAxis = options.xDomain;
-			d.series = keys.map(function(seriesVal) {
+			d.series = keys.map(seriesVal => {
 				return {
 					xAxis,
 					series: seriesVal,
