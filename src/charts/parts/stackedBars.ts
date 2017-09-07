@@ -10,9 +10,9 @@ export namespace StackedBars {
 	export function drawChart(data, parent, options) {
 		let {chartID, container} = Charts.setChartIDContainer(parent)
 		Charts.setResizable();
-		options.chartSize = Charts.getActualChartSize(container, options);
+		options.chartSize = Charts.getActualChartSize(data, container, options);
 
-		let svg = Charts.setSVG(container, options);
+		let svg = Charts.setSVG(data, container, options);
 		let xScale = Charts.setXScale(data, options);
 		let yScale = Charts.setYScale(data, options, Charts.getActiveDataSeries(container));
 
@@ -49,8 +49,17 @@ export namespace StackedBars {
 			let y0 = 0;
 			let key = d[options.xDomain];
 			const xAxis = options.xDomain;
-			d.series = keys.map(function(seriesVal) {
-				return {xAxis, series: seriesVal, key, y0: y0, y1: y0 += +d[seriesVal], value: d[seriesVal]}; });
+			d.series = keys.map(seriesVal => {
+				return {
+					xAxis,
+					series: seriesVal,
+					key,
+					y0: y0,
+					y1: y0 += +d[seriesVal],
+					value: d[seriesVal],
+					formatter: options.yFormatter
+				};
+			});
 			d.total = options.yDomain.map(val => d[val]).reduce((acc, cur) => acc + cur, 0);
 		});
 
@@ -64,9 +73,14 @@ export namespace StackedBars {
 			.data(d => d.series)
 			.enter().append("rect")
 			.attr("width", xScale.bandwidth())
+			.style("fill", d => color(d.series))
+			.attr("y", options.chartSize.height)
+			.attr("height", 0)
+			.transition()
+			.delay((d, i) => i * 30)
+			.ease(d3.easePolyOut, 0.5)
 			.attr("y", d => yScale(d.y1))
 			.attr("height", d => yScale(d.y0) - yScale(d.y1))
-			.style("fill", d => color(d.series));
 	}
 }
 

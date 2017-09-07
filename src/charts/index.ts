@@ -20,10 +20,19 @@ export namespace Charts {
 		left: 70,
 		right: 20
 	};
-	export function getActualChartSize(container, options) {
+	export function getActualChartSize(data, container, options) {
+		let ratio, marginForLegendTop;
+		if (container.node().clientWidth > 600 &&
+			Legend.getLegendItems(data, options).length > 4) {
+			ratio = 0.6;
+			marginForLegendTop = 50;
+		} else {
+			marginForLegendTop = 100;
+			ratio = 1
+		}
 		return {
-			height: options.height - margin.top - margin.bottom,
-			width: container.node().clientWidth - margin.left - margin.right
+			height: container.node().clientHeight - margin.top - margin.bottom - marginForLegendTop,
+			width: (container.node().clientWidth - margin.left - margin.right) * ratio
 		}
 	}
 	export function updateData(data) {
@@ -36,10 +45,10 @@ export namespace Charts {
 		localData = data;
 		container.classed("chart-wrapper", true);
 		container.append("div").attr("class", "legend");
-		options.chartSize = getActualChartSize(container, options);;
+		options.chartSize = getActualChartSize(data, container, options);;
 		localOptions = options;
 
-		let svg = setSVG(container, options);
+		let svg = setSVG(data, container, options);
 		let xScale = setXScale(data, options);
 		let yScale = setYScale(data, options, getActiveDataSeries(container));
 
@@ -57,11 +66,20 @@ export namespace Charts {
 		return Math.floor(Math.random()*90000) + 10000;
 	}
 
-	export function setSVG(container, options) {
-		const chartSize = getActualChartSize(container, options);
+	export function setSVG(data, container, options) {
+		let svgWidth, svgHeight;
+		if (container.node().clientWidth > 600 &&
+			Legend.getLegendItems(data, options).length > 4) {
+			svgWidth = container.node().clientWidth * 0.6
+			svgHeight = container.node().clientHeight;
+		} else {
+			svgWidth = container.node().clientWidth
+			svgHeight = container.node().clientHeight - 100;
+		}
+		const chartSize = getActualChartSize(data, container, options);
 		let svg = container.append("svg")
-			.attr("width", container.node().clientWidth)
-			.attr("height", options.height)
+			.attr("width", svgWidth)
+			.attr("height", svgHeight)
 			.append("g")
 			.attr("class", "inner-wrap")
 			.attr("transform", `translate(${margin.left},${margin.top})`);
@@ -136,10 +154,29 @@ export namespace Charts {
 	}
 
 	export function setResizable() {
-		d3.select(window).on("resize", function() {
+		d3.select(window).on("resize", debounce(function() {
 			redrawAll();
-		});
+		}, 250));
 	}
+
+	function debounce(func, wait, immediate?) {
+		let timeout;
+		return function() {
+			let context = this, args = arguments;
+			let later = function() {
+				timeout = null;
+				if (!immediate) {
+					func.apply(context, args)
+				};
+			};
+			let callNow = immediate && !timeout;
+			clearTimeout(timeout);
+			timeout = setTimeout(later, wait);
+			if (callNow) {
+				func.apply(context, args)
+			};
+		};
+	};
 
 	export let redrawFunctions = {};
 
@@ -155,7 +192,7 @@ export namespace Charts {
 	}
 
 	export function setYScale(data, options, activeSeries) {
-		let yScale = d3.scaleLinear().range([options.height - margin.top - margin.bottom, 0]);
+		let yScale = d3.scaleLinear().range([options.chartSize.height, 0]);
 		const keys = activeSeries.length > 0 ? activeSeries : options.yDomain;
 		if (options.type === 'stackedBar') {
 			const yMax = d3.max(data, d => keys.map(val => d[val]).reduce((acc, cur) => acc + cur, 0));
@@ -169,10 +206,20 @@ export namespace Charts {
 	}
 
 	export function setClickableLegend(data, parent, options) {
-		parent.selectAll(".legendBtn").each(function(d, i) {
+		parent.selectAll(".legend-btn").each(function(d, i) {
 			d3.select(this).on("click", function(d) {
 				Legend.updateLegend(this);
 				drawChart(data, parent, options);
+			});
+		})
+	}
+
+	export function setClickableLegendInTooltip(data, parent, options) {
+		const tooltip = parent.select(".legend-tooltip-content")
+		tooltip.selectAll(".legend-btn").each(function(d, i) {
+			d3.select(this).on("click", function(d) {
+				Legend.updateLegend(this);
+				drawChart(data, d3.select(parent.node().parentNode), options);
 			});
 		})
 	}
@@ -183,7 +230,10 @@ export namespace Charts {
 
 	export function getActiveDataSeries(container) {
 		const activeSeries = [];
-		container.selectAll(".legendBtn").filter(".active").each(function(b) {
+		if (container.selectAll(".legend-tooltip").nodes().length > 0) {
+			container = container.select(".legend-tooltip");
+		}
+		container.selectAll(".legend-btn").filter(".active").each(function(b) {
 			activeSeries.push(d3.select(this).select("text").text())
 		})
 		return activeSeries;
@@ -201,7 +251,7 @@ export namespace Charts {
 			container.attr("chart-id", chartID)
 				.classed("chart-wrapper", true);
 			if (container.select(".legend").nodes().length === 0) {
-				container.append("div").attr("class", "legend");
+				container.append("ul").attr("class", "legend");
 			}
 		}
 		return {chartID, container}

@@ -15,7 +15,7 @@ export namespace Axis {
 
 		g.append("text")
 		  .attr("fill", "#586464")
-		  .attr("transform", "translate(-80,"+(options.height/2 - 40)+")rotate(-90)")
+		  .attr("transform", "translate(-80,"+(options.chartSize.height/2)+")rotate(-90)")
 		  .attr("dy", "0.71em")
 		  .attr("text-anchor", "middle")
 		  .attr("class", "y axis-label")
@@ -66,7 +66,7 @@ export namespace Axis {
 		  .attr("class", "x axis-label")
 		  .attr("text-anchor", "middle")
 		  .attr("fill", "#586464")
-		  .attr("transform", "translate("+ (options.chartSize.width/2 - 70) +","+ 80 +")")
+		  .attr("transform", "translate("+ (options.chartSize.width/2) +","+ 80 +")")
 		  .text(options.xDomain);
 	}
 }
