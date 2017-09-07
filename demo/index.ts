@@ -1,4 +1,5 @@
 import '@peretz/matter/matter.css'
+import './index.scss'
 import * as d3 from 'd3'
 import {Charts} from '../src/charts/index.ts'
 import {Combo} from '../src/charts/types/combo.ts'
@@ -8,32 +9,22 @@ import {Lines} from '../src/charts/parts/lines.ts'
 import {StackedBars} from '../src/charts/parts/stackedBars.ts'
 
 let colors = [
-		"#009BEF",
-		"#95D13C",
-		"#785EF0",
-		"#F87EAC",
-		"#FFB000",
-		"#00B6CB",
-		"#FF5C49",
-		"#047CC0",
-		"#FE8500",
-		"#5A3EC8",
-		"#40D5BB",
-		"#FF509E"
-	]
-let options = {
-	width: 600,
-	height: 400,
-	xDomain: "Part Number",
-	yDomain: ["Sold", "More", "Qty"],
-	yTicks: 5,
-	legendClickable: true,
-	colors
-}
+	"#009BEF",
+	"#95D13C",
+	"#785EF0",
+	"#F87EAC",
+	"#FFB000",
+	"#00B6CB",
+	"#FF5C49",
+	"#047CC0",
+	"#FE8500",
+	"#5A3EC8",
+	"#40D5BB",
+	"#FF509E"
+]
+
 
 let longDataOptions = {
-	width: 600,
-	height: 400,
 	xDomain: "Part Number",
 	yDomain: ["Total Quantity", "Returned", "Defects", "This is extra long legend", "Number of Sold products"],
 	yTicks: 5,
@@ -42,13 +33,33 @@ let longDataOptions = {
 }
 
 let doubleYAxisOptions = {
-	width: 600,
-	height: 400,
 	xDomain: "Part Number",
 	yDomain: ["Qty"],
 	y2Domain: ["Sold", "More"],
 	yTicks: 5,
 	y2Ticks: 10,
+	legendClickable: true,
+	colors
+}
+
+let options = {
+	xDomain: "Part Number",
+	yDomain: ["Sold", "More", "Qty"],
+	yTicks: 5,
+	legendClickable: true,
+	colors
+}
+
+let optionsWithFormatter = {
+	xDomain: "Day",
+	yDomain: ["Clicks"],
+	y2Domain: ["Click rate"],
+	yFormatter: {
+		"Click rate"(value) {
+			return value + "%"
+		}
+	},
+	yTicks: 5,
 	legendClickable: true,
 	colors
 }
@@ -90,6 +101,44 @@ const data = [
 		"More": 35000,
 		"Sold": 390000
 	}
+];
+
+const doubleAxisData = [
+	{
+		"Day": "Monday",
+		"Clicks": 60000,
+		"Click rate": 9
+	},
+	{
+		"Day": "Tuesday",
+		"Clicks": 50000,
+		"Click rate": 76
+	},
+	{
+		"Day": "Wednesday",
+		"Clicks": 9000,
+		"Click rate": 80
+	},
+	{
+		"Day": "Thursday",
+		"Clicks": 8000,
+		"Click rate": 1
+	},
+	{
+		"Day": "Friday",
+		"Clicks": 4000,
+		"Click rate": 30
+	},
+	{
+		"Day": "Saturday",
+		"Clicks": 35000,
+		"Click rate": 59
+	},
+		{
+			"Day": "Sunday",
+			"Clicks": 35000,
+			"Click rate": 38
+		}
 ];
 
 
@@ -171,8 +220,8 @@ const chartTypes = [
 		id: 'doubleAxis',
 		name: 'Double Axis',
 		avail: true,
-		options: doubleYAxisOptions,
-		data
+		options: optionsWithFormatter,
+		data: doubleAxisData
 	},
 	{
 		id: 'combo',
