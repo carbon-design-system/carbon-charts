@@ -35,7 +35,7 @@ export namespace Legend {
 				.selectAll("div")
 				.data(legendItems)
 				.enter().append("li")
-					.attr("class", "legendBtn active")
+					.attr("class", "legend-btn active")
 
 				legend.append("div")
 					.attr("class", "legend-circle")
@@ -43,11 +43,11 @@ export namespace Legend {
 
 				legend.append("text")
 					.text(function(d) { return d; });
-		container.selectAll(".legendBtn").style("display", "inline-block")
+		container.selectAll(".legend-btn").style("display", "inline-block")
 		if (hasLegendExpandBtn(container, legendItems)) {
 			container.select(".legend").classed("right-legend", false)
 			let numberOfLegendAvail = Math.floor((container.node().clientWidth) / 130)
-			let btns = container.selectAll(".legendBtn").nodes();
+			let btns = container.selectAll(".legend-btn").nodes();
 			for (let i = numberOfLegendAvail + 1; i < legendItems.length; i++) {
 				d3.select(btns[i]).style("display", "none")
 			}
@@ -114,7 +114,7 @@ export namespace Legend {
 		.selectAll("div")
 		.data(legendItems)
 		.enter().append("div")
-			.attr("class", "legendBtn active")
+			.attr("class", "legend-btn active")
 
 		legendContent.append("div")
 			.attr("class", "legend-circle")

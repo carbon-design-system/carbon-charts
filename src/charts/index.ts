@@ -165,12 +165,16 @@ export namespace Charts {
 			let context = this, args = arguments;
 			let later = function() {
 				timeout = null;
-				if (!immediate) func.apply(context, args);
+				if (!immediate) {
+					func.apply(context, args)
+				};
 			};
 			let callNow = immediate && !timeout;
 			clearTimeout(timeout);
 			timeout = setTimeout(later, wait);
-			if (callNow) func.apply(context, args);
+			if (callNow) {
+				func.apply(context, args)
+			};
 		};
 	};
 
@@ -202,7 +206,7 @@ export namespace Charts {
 	}
 
 	export function setClickableLegend(data, parent, options) {
-		parent.selectAll(".legendBtn").each(function(d, i) {
+		parent.selectAll(".legend-btn").each(function(d, i) {
 			d3.select(this).on("click", function(d) {
 				Legend.updateLegend(this);
 				drawChart(data, parent, options);
@@ -212,7 +216,7 @@ export namespace Charts {
 
 	export function setClickableLegendInTooltip(data, parent, options) {
 		const tooltip = parent.select(".legend-tooltip-content")
-		tooltip.selectAll(".legendBtn").each(function(d, i) {
+		tooltip.selectAll(".legend-btn").each(function(d, i) {
 			d3.select(this).on("click", function(d) {
 				Legend.updateLegend(this);
 				drawChart(data, d3.select(parent.node().parentNode), options);
@@ -229,7 +233,7 @@ export namespace Charts {
 		if (container.selectAll(".legend-tooltip").nodes().length > 0) {
 			container = container.select(".legend-tooltip");
 		}
-		container.selectAll(".legendBtn").filter(".active").each(function(b) {
+		container.selectAll(".legend-btn").filter(".active").each(function(b) {
 			activeSeries.push(d3.select(this).select("text").text())
 		})
 		return activeSeries;
