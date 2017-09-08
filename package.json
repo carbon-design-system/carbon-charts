@@ -1,5 +1,5 @@
 {
-  "name": "charts",
+  "name": "@peretz/charts",
   "version": "0.0.1",
   "description": "WCE charts",
   "main": "demo.js",
@@ -14,6 +14,9 @@
   "repository": {
     "type": "git",
     "url": "git@github.ibm.com:peretz-next/charts.git"
+  },
+  "publishConfig": {
+    "registry": "npm-registry.whitewater.ibm.com"
   },
   "keywords": [
     "charts"
