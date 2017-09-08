@@ -48,7 +48,7 @@ export namespace Legend {
 			container.select(".legend").classed("right-legend", false)
 			let numberOfLegendAvail = Math.floor((container.node().clientWidth) / 130)
 			let btns = container.selectAll(".legend-btn").nodes();
-			for (let i = numberOfLegendAvail; i < legendItems.length; i++) {
+			for (let i = numberOfLegendAvail + 1; i < legendItems.length; i++) {
 				d3.select(btns[i]).style("display", "none")
 			}
 			if (container.select(".expand-btn").nodes().length === 0) {
