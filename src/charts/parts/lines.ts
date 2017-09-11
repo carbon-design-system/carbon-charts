@@ -39,7 +39,6 @@ export namespace Lines {
 		Charts.addTooltipEventListener(chartID, svg, svg.selectAll("circle"), reduceOpacity);
 	}
 
-
 	export function draw(svg, xScale, yScale, options, data, activeSeries) {
 		let keys: any;
 		let dataList = data;
@@ -104,7 +103,23 @@ export namespace Lines {
 				.transition()
 				.duration(500)
 				.style("opacity", 1)
+
+			series.selectAll("circle")
+				.on('mouseover', function (d) {
+					const glow = series.append("circle").attr("class", "hover-glow")
+	        	.attr("r", 5.5)
+	        	.attr("fill", "none")
+	        	.attr("stroke-width", 2)
+	        	.attr("stroke", color(colorKey))
+	        	.attr("stroke-opacity", 0.5)
+	        	.attr("cx", this.cx.baseVal.value)
+	        	.attr("cy", this.cy.baseVal.value)
+	      })
+	      .on('mouseout', function (d) {
+	      	svg.selectAll(".hover-glow").remove();
+	      })
 		});
+
 	}
 
 	export function reduceOpacity(svg, exceptionCircle) {
