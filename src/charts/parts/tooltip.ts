@@ -1,6 +1,16 @@
 import * as d3 from 'd3'
 
 export namespace Tooltip {
+  export function showLabelTooltip(container, d) {
+  	const mouseXPoint = d3.mouse(container)[0];
+  	const windowXPoint = d3.event.x;
+  	let tooltip = d3.select(container).append("div")
+  		.attr("class", "tooltip label-tooltip")
+  		.style("left", mouseXPoint + "px")
+  		.style("top", (d3.mouse(container)[1]) + "px")
+  	tooltip.append('p').text(d)
+  		.on('click', function() {d3.selectAll(".tooltip").remove()} )
+	}
   export function showTooltip(chartID, d) {
 		const div = d3.select("#tooltip-" + chartID)
 			.style("display", "block")

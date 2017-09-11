@@ -1,4 +1,5 @@
 import * as d3 from 'd3'
+import {Tooltip} from './tooltip.ts'
 
 export namespace Axis {
   export function drawYAxis(svg, yScale, options, data) {
@@ -60,6 +61,9 @@ export namespace Axis {
 			.attr("transform", "rotate(-45)")
 			.style("text-anchor", "end")
 			.call(wrapTick)
+			.on('click', d => {
+				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, d)
+			})
 		g.select(".domain")
 			.attr("stroke", "#959595")
 			.attr("fill", "#959595")
