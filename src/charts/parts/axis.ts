@@ -16,11 +16,11 @@ export namespace Axis {
 
 		let label = options.yDomain.map(val => val.length > 15 ? val.substring(0, 15) + '...' : val).join(", ")
 		console.log(label.length)
-		if (label.length > 70) {
+		if (label.length > 64) {
 			label
 		}
 		g.append("text")
-		  .attr("transform", "translate(-80,"+(options.chartSize.height/2)+")rotate(-90)")
+		  .attr("transform", "translate(-60,"+(options.chartSize.height/2)+")rotate(-90)")
 		  .attr("dy", "0.71em")
 		  .attr("text-anchor", "middle")
 		  .attr("class", "y axis-label")
@@ -42,7 +42,7 @@ export namespace Axis {
 		g.select(".domain").remove();
 
 		g.append("text")
-		  .attr("transform", "translate(80,"+(options.chartSize.height/2)+")rotate(90)")
+		  .attr("transform", "translate(60,"+(options.chartSize.height/2)+")rotate(-90)")
 		  .attr("dy", "0.71em")
 		  .attr("text-anchor", "middle")
 		  .attr("class", "y2 axis-label")
