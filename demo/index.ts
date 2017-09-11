@@ -25,15 +25,15 @@ let colors = [
 
 
 let longDataOptions = {
-	xDomain: "Part Number",
-	yDomain: ["Total Quantity", "Returned", "Defects", "This is extra long legend", "Number of Sold products"],
+	xDomain: "Part number",
+	yDomain: ["Total quantity", "Returned", "Defects", "This is an extra long long long legend", "Number of sold products"],
 	yTicks: 5,
 	legendClickable: true,
 	colors
 }
 
 let doubleYAxisOptions = {
-	xDomain: "Part Number",
+	xDomain: "Part number",
 	yDomain: ["Qty"],
 	y2Domain: ["Sold", "More"],
 	yTicks: 5,
@@ -43,7 +43,7 @@ let doubleYAxisOptions = {
 }
 
 let options = {
-	xDomain: "Part Number",
+	xDomain: "Part number",
 	yDomain: ["Sold", "More", "Qty"],
 	yTicks: 5,
 	legendClickable: true,
@@ -66,37 +66,37 @@ let optionsWithFormatter = {
 
 const data = [
 	{
-		"Part Number": "2V2N-9KYPM",
+		"Part number": "2V2N-9KYPM version 1",
 		"Qty": 100000,
 		"More": 60000,
 		"Sold": 90000
 	},
 	{
-		"Part Number": "L22I-P66EP",
+		"Part number": "L22I-P66EP-L22I-P66EP-L22I-P66EP",
 		"Qty": 200000,
 		"More": 50000,
 		"Sold": 70000
 	},
 	{
-		"Part Number": "JQAI-2M4L1",
+		"Part number": "JQAI-2M4L1",
 		"Qty": 600000,
 		"More": 9000,
 		"Sold": 6000
 	},
 	{
-		"Part Number": "J9DZ-F37AP",
+		"Part number": "J9DZ-F37AP",
 		"Qty": 100000,
 		"More": 8000,
 		"Sold": 11000
 	},
 	{
-		"Part Number": "Q6XK-YEL48",
+		"Part number": "Q6XK-YEL48",
 		"Qty": 400000,
 		"More": 4000,
 		"Sold": 300000
 	},
 	{
-		"Part Number": "773C-XKB5L",
+		"Part number": "773C-XKB5L",
 		"Qty": 800000,
 		"More": 35000,
 		"Sold": 390000
@@ -144,52 +144,52 @@ const doubleAxisData = [
 
 const longData = [
 	{
-		"Part Number": "2V2N-9KYPM",
-		"Total Quantity": 100000,
+		"Part number": "2V2N-9KYPM",
+		"Total quantity": 100000,
 		"Returned": 60000,
 		"Defects": 9230,
-		"This is extra long legend": 12345,
-		"Number of Sold products": 90000
+		"This is an extra long long long legend": 12345,
+		"Number of sold products": 90000
 	},
 	{
-		"Part Number": "L22I-P66EP",
-		"Total Quantity": 200000,
+		"Part number": "L22I-P66EP",
+		"Total quantity": 200000,
 		"Returned": 50000,
 		"Defects": 9230,
-		"This is extra long legend": 12345,
-		"Number of Sold products": 70000
+		"This is an extra long long long legend": 12345,
+		"Number of sold products": 70000
 	},
 	{
-		"Part Number": "JQAI-2M4L1",
-		"Total Quantity": 100000,
+		"Part number": "JQAI-2M4L1",
+		"Total quantity": 100000,
 		"Returned": 9000,
 		"Defects": 2980,
-		"This is extra long legend": 12345,
-		"Number of Sold products": 6000
+		"This is an extra long long long legend": 12345,
+		"Number of sold products": 6000
 	},
 	{
-		"Part Number": "J9DZ-F37AP",
-		"Total Quantity": 150000,
+		"Part number": "J9DZ-F37AP",
+		"Total quantity": 150000,
 		"Returned": 8000,
 		"Defects": 12230,
-		"This is extra long legend": 12345,
-		"Number of Sold products": 11000
+		"This is an extra long long long legend": 12345,
+		"Number of sold products": 11000
 	},
 	{
-		"Part Number": "Q6XK-YEL48",
-		"Total Quantity": 230000,
+		"Part number": "Q6XK-YEL48",
+		"Total quantity": 230000,
 		"Returned": 4000,
 		"Defects": 8230,
-		"This is extra long legend": 12345,
-		"Number of Sold products": 300000
+		"This is an extra long long long legend": 12345,
+		"Number of sold products": 300000
 	},
 	{
-		"Part Number": "773C-XKB5L",
-		"Total Quantity": 390000,
+		"Part number": "773C-XKB5L",
+		"Total quantity": 390000,
 		"Returned": 35000,
 		"Defects": 5230,
-		"This is extra long legend": 12345,
-		"Number of Sold products": 190000
+		"This is an extra long long long legend": 12345,
+		"Number of sold products": 190000
 	}
 ];
 
