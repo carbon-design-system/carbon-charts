@@ -44,6 +44,7 @@
 	margin: 10px 20px;
 	color: #586464;
 	overflow: hidden;
+	padding-left: 0;
 	white-space: nowrap;
 	.expand-btn {
 		background-color: rgb(65, 120, 190);
@@ -60,7 +61,7 @@
 	display: inline-block;
 	line-height: 20px;
 	font-size: 12px;
-
+	margin-bottom: 0;
 	span {
 		display: inline;
 	}
@@ -83,9 +84,12 @@
 	box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  /*&:hover {
+	  box-shadow: 0 0 0 15px hsl(0, 0%, 90%);
+	}*/
 }
 
-.legend-tooltip, .chart-tooltip {
+.tooltip {
 	background-color: #FFFFFF;
 	box-shadow: 0 0 10px 0 rgba(0,0,0,0.16);
 	display: block;
@@ -93,7 +97,6 @@
 	position: absolute;
 	padding: 10px 20px 10px 10px;
 	border-top: 2px solid #4178BE;
-
 	.close-btn {
 		color: #586464;
 		font-size: 12px;
@@ -107,9 +110,11 @@
 .legend-tooltip {
 	padding: 0;
 	width: 200px;
-	h2 {
+	.legend-tooltip-header {
 		background: #4178BE;
 		color: white;
+		font-size: 15px;
+		font-weight: 700;
 		padding: 10px;
 		margin: 0;
 	}
@@ -151,5 +156,11 @@
 	}
 	.legend-circle {
 		margin: 0 15px;
+	}
+}
+
+.axis {
+	text {
+		fill: #586464;
 	}
 }
