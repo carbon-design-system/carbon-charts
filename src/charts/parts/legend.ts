@@ -98,7 +98,8 @@ export namespace Legend {
 			.style("display", "block")
 			.style("left", leftPos + "px")
 			.style("top", (d3.mouse(container.node())[1]) + "px");
-		tooltip.append("h2").text("Legend")
+		tooltip.append("p").text("Legend")
+			.attr("class", "legend-tooltip-header")
 		tooltip.append('ul')
 			.attr("class", "legend-tooltip-content")
 			.attr("font-size", 10)
