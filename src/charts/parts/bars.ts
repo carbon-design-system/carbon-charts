@@ -70,7 +70,21 @@ export namespace Bars {
 				.ease(d3.easePolyOut, 0.5)
 				.attr("y", d => yScale(d.value))
 				.attr("height", d => options.chartSize.height - yScale(d.value))
+		svg.selectAll("rect")
+			.on('mouseover', function (d) {
+				d3.select(this)
+	      	.attr("stroke-width", 4)
+	      	.attr("stroke", color(d.series))
+	      	.attr("stroke-opacity", 0.5)
+	    })
+	    .on('mouseout', function (d) {
+	    	d3.select(this)
+	      	.attr("stroke-width", 0)
+	      	.attr("stroke", "none")
+	      	.attr("stroke-opacity", 1)
+	    })
 	}
+
 
 }
 
