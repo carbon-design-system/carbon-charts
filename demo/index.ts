@@ -26,7 +26,7 @@ let colors = [
 
 let longDataOptions = {
 	xDomain: "Part number",
-	yDomain: ["Total quantity", "Returned", "Defects", "This is an extra long long long legend", "Number of sold products"],
+	yDomain: ["Total", "Returned", "Defects", "This is an extra long long long legend", "Number of sold products"],
 	yTicks: 5,
 	legendClickable: true,
 	colors
@@ -145,7 +145,7 @@ const doubleAxisData = [
 const longData = [
 	{
 		"Part number": "2V2N-9KYPM",
-		"Total quantity": 100000,
+		"Total": 100000,
 		"Returned": 60000,
 		"Defects": 9230,
 		"This is an extra long long long legend": 12345,
@@ -153,7 +153,7 @@ const longData = [
 	},
 	{
 		"Part number": "L22I-P66EP",
-		"Total quantity": 200000,
+		"Total": 200000,
 		"Returned": 50000,
 		"Defects": 9230,
 		"This is an extra long long long legend": 12345,
@@ -161,7 +161,7 @@ const longData = [
 	},
 	{
 		"Part number": "JQAI-2M4L1",
-		"Total quantity": 100000,
+		"Total": 100000,
 		"Returned": 9000,
 		"Defects": 2980,
 		"This is an extra long long long legend": 12345,
@@ -169,7 +169,7 @@ const longData = [
 	},
 	{
 		"Part number": "J9DZ-F37AP",
-		"Total quantity": 150000,
+		"Total": 150000,
 		"Returned": 8000,
 		"Defects": 12230,
 		"This is an extra long long long legend": 12345,
@@ -177,7 +177,7 @@ const longData = [
 	},
 	{
 		"Part number": "Q6XK-YEL48",
-		"Total quantity": 230000,
+		"Total": 230000,
 		"Returned": 4000,
 		"Defects": 8230,
 		"This is an extra long long long legend": 12345,
@@ -185,7 +185,7 @@ const longData = [
 	},
 	{
 		"Part number": "773C-XKB5L",
-		"Total quantity": 390000,
+		"Total": 390000,
 		"Returned": 35000,
 		"Defects": 5230,
 		"This is an extra long long long legend": 12345,
