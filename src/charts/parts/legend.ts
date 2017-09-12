@@ -104,9 +104,8 @@ export namespace Legend {
 		tooltip.append('ul')
 			.attr("class", "legend-tooltip-content")
 			.attr("font-size", 10)
-		tooltip.append("span")
-		  .attr("class", "close-btn")
-		  .text("x")
+
+		Charts.addCloseBtn(tooltip, 'md')
 		  .on("click", () => {
   			d3.selectAll(".legend-tooltip").remove();
   		});
