@@ -105,7 +105,7 @@ export namespace Legend {
 			.attr("class", "legend-tooltip-content")
 			.attr("font-size", 10)
 
-		Charts.addCloseBtn(tooltip, 'md')
+		Charts.addCloseBtn(tooltip, 'md', 'white')
 		  .on("click", () => {
   			d3.selectAll(".legend-tooltip").remove();
   		});

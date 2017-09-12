@@ -142,9 +142,11 @@ export namespace Charts {
 		}
 	}
 
-	export function addCloseBtn(tooltip, size) {
+	export function addCloseBtn(tooltip, size, color?) {
 		const closeBtn = tooltip.append('button')
-		closeBtn.attr('class', 'close--' + size)
+		let classNames = 'close--' + size;
+		classNames = color ? ' close--' + color : classNames;
+		closeBtn.attr('class', classNames)
 			.attr('type', 'button')
 			.attr('aria-label', 'Close')
 			.append('svg').attr('class', 'close_icon')
