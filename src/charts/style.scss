@@ -97,6 +97,7 @@
 	position: absolute;
 	padding: 10px 20px 10px 10px;
 	border-top: 2px solid #4178BE;
+	max-width: 200px;
 	.close-btn {
 		color: #586464;
 		font-size: 12px;
@@ -105,6 +106,15 @@
 		right: 0;
 		padding: 5px;
 	}
+	.close--xs {
+		position: absolute;
+		right: 5px;
+		top: 5px;
+	}
+}
+
+.chart-tooltip {
+	width: 200px;
 }
 
 .legend-tooltip {
@@ -125,12 +135,10 @@
 	text {
 		max-width: 160px;
 	}
-	.close-btn {
-		color: white;
-		font-size: 25px;
+	button {
 		position: absolute;
-		right: 5px;
-		top: 5px;
+		top: 7px;
+		right: 10px;
 	}
 	.legend-tooltip-content {
 		padding-left: 0;
@@ -163,4 +171,45 @@
 	text {
 		fill: #586464;
 	}
+}
+
+.arrow {
+	position: absolute;
+}
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+
+  border-bottom: 11px solid black;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+
+  border-top: 11px solid #f00;
+}
+
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+
+  border-left: 11px solid green;
+}
+
+.arrow-left {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+
+  border-right: 10px solid white;
+	left: -10px;
 }
