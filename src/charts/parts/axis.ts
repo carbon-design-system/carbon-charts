@@ -13,6 +13,9 @@ export namespace Axis {
 			.attr("transform", `translate(0, 0)`)
 			.call(yAxis);
 		g.select(".domain").remove();
+		if (options.yFormatter && options.yFormatter[options.yDomain[0]]) {
+			addUnits(g.selectAll('text'), options.yFormatter[options.yDomain[0]]);
+		}
 
 		const label = options.yDomain.join(", ");
 		const textBox = g.append("text")
@@ -38,10 +41,14 @@ export namespace Axis {
 			.tickSizeOuter(0)
 			.tickPadding(10)
 			.ticks(options.y2Ticks);
+
 		let g = svg.select(".y2.axis")
 			.attr("transform", "translate("+ options.chartSize.width + ", 0)")
 			.call(yAxis);
 		g.select(".domain").remove();
+		if (options.yFormatter && options.yFormatter[options.y2Domain[0]]) {
+			addUnits(g.selectAll('text'), options.yFormatter[options.y2Domain[0]]);
+		}
 
 		const textBox = g.append("text")
 		  .attr("transform", "translate(60,"+(options.chartSize.height/2)+")rotate(-90)")
@@ -117,6 +124,12 @@ export namespace Axis {
 					tspan2.text(d.substring(14, 25) + '...')
 				}
 			}
+		})
+	}
+
+	function addUnits(ticks, formatters) {
+		ticks.nodes().forEach(t => {
+			t.textContent = formatters(t.textContent);
 		})
 	}
 }
