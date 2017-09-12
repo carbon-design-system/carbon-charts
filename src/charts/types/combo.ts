@@ -67,10 +67,9 @@ export namespace Combo {
 }
 
 export function setTooltip(chartID, svg) {
-	Charts.setTooltip(chartID);
+	Charts.setTooltip(chartID, resetLineBarOpacity);
 	Charts.addTooltipEventListener(chartID, svg, svg.selectAll("rect"), reduceOpacity);
 	Charts.addTooltipEventListener(chartID, svg, svg.selectAll("circle"), reduceOpacity);
-	Charts.setTooltipCloseEventListener(chartID, resetLineBarOpacity);
 }
 
 
