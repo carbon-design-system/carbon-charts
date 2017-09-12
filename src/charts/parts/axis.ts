@@ -14,17 +14,19 @@ export namespace Axis {
 			.call(yAxis);
 		g.select(".domain").remove();
 
-		let label = options.yDomain.map(val => val.length > 15 ? val.substring(0, 15) + '...' : val).join(", ")
-		console.log(label.length)
-		if (label.length > 64) {
-			label
-		}
-		g.append("text")
+		const label = options.yDomain.join(", ");
+		const textBox = g.append("text")
 		  .attr("transform", "translate(-60,"+(options.chartSize.height/2)+")rotate(-90)")
 		  .attr("dy", "0.71em")
 		  .attr("text-anchor", "middle")
 		  .attr("class", "y axis-label")
 		  .text(label);
+		if (textBox.node().getBBox().width > 175) {
+			const wrappedLabel = wrapLabel(textBox);
+			wrappedLabel.on('click', d => {
+				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, label)
+			})
+		}
 	}
 
   export function drawY2Axis(svg, yScale, options, data) {
@@ -41,13 +43,16 @@ export namespace Axis {
 			.call(yAxis);
 		g.select(".domain").remove();
 
-		g.append("text")
+		const textBox = g.append("text")
 		  .attr("transform", "translate(60,"+(options.chartSize.height/2)+")rotate(-90)")
 		  .attr("dy", "0.71em")
 		  .attr("text-anchor", "middle")
 		  .attr("class", "y2 axis-label")
-		  .text(options.y2Domain.join(", "));
-		}
+		  .text(options.y2Domain.join(", "))
+	  if (textBox.node().getBBox().width > 175) {
+	  	textBox.call(wrapLabel);
+	  }
+	}
 
   export function drawXAxis(svg, xScale, options, data) {
 		let xAxis = d3.axisBottom(xScale)
@@ -74,6 +79,24 @@ export namespace Axis {
 		  .attr("text-anchor", "middle")
 		  .attr("transform", "translate("+ (options.chartSize.width/2) +","+ 80 +")")
 		  .text(options.xDomain);
+	}
+
+	function wrapLabel(label) {
+		const text = label.text();
+		const y = label.attr("y");
+		label.text('');
+		const tspan1 = label.append('tspan')
+			.attr('x', 0).attr('y', y).attr('dx', '-1em').attr('dy', '-1em');
+		const tspan2 = label.append('tspan')
+			.attr('x', 0).attr('y', y).attr('dx', '-1em').attr('dy', '1em');
+		if (text.length < 60) {
+			tspan1.text(text.substring(0, text.length/2))
+			tspan2.text(text.substring(text.length/2 + 1, text.length))
+		} else {
+			tspan1.text(text.substring(0, 32))
+			tspan2.text(text.substring(32, 60) + '...')
+		}
+		return label;
 	}
 
 	function wrapTick(t) {
