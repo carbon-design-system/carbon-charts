@@ -124,7 +124,7 @@ export namespace Charts {
 		}
 	}
 
-	export function setTooltip(chartID) {
+	export function setTooltip(chartID, resetOpacity) {
 		const tooltip = d3.select("#tooltip-" + chartID);
 		if (tooltip.nodes().length < 1) {
 			let tooltip = d3.select("body").append("div")
@@ -133,17 +133,23 @@ export namespace Charts {
 				.style("display", "none");
 			tooltip.append("span")
 				.attr("class", "text-box")
-			tooltip.append("span")
-				.attr("class", "close-btn")
-				.text("x")
+
+			addCloseBtn(tooltip, 'xs')
+				.on('click', () => {
+					Tooltip.hide()
+					resetOpacity();
+				})
 		}
 	}
 
-	export function setTooltipCloseEventListener(chartID, opacityFunc) {
-		d3.select("#tooltip-" + chartID).select(".close-btn").on("click", () => {
-			Tooltip.hide()
-			opacityFunc();
-		});
+	export function addCloseBtn(tooltip, size) {
+		const closeBtn = tooltip.append('button')
+		closeBtn.attr('class', 'close--' + size)
+			.attr('type', 'button')
+			.attr('aria-label', 'Close')
+			.append('svg').attr('class', 'close_icon')
+			.append('use').attr('href', 'https://peretz-icons.mybluemix.net/core_set.svg#x_12')
+		return closeBtn;
 	}
 
 	export function addTooltipEventListener(chartID, svg, elements, reduceOpacity) {
