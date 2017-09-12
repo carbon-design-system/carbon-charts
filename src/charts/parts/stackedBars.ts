@@ -34,8 +34,7 @@ export namespace StackedBars {
 	}
 
 	export function setTooltip(chartID, svg) {
-		Charts.setTooltip(chartID);
-		Charts.setTooltipCloseEventListener(chartID, resetBarOpacity);
+		Charts.setTooltip(chartID, resetBarOpacity);
 		Charts.addTooltipEventListener(chartID, svg, svg.selectAll("rect"), reduceOpacity);
 	}
 

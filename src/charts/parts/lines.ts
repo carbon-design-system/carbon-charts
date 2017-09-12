@@ -34,8 +34,7 @@ export namespace Lines {
 	}
 
 	export function setTooltip(chartID, svg) {
-		Charts.setTooltip(chartID);
-		Charts.setTooltipCloseEventListener(chartID, resetLineOpacity);
+		Charts.setTooltip(chartID, resetLineOpacity);
 		Charts.addTooltipEventListener(chartID, svg, svg.selectAll("circle"), reduceOpacity);
 	}
 

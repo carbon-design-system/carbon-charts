@@ -7,7 +7,8 @@ export namespace Tooltip {
   	let tooltip = d3.select(container).append("div")
   		.attr("class", "tooltip label-tooltip")
   		.style("left", mouseXPoint + "px")
-  		.style("top", (d3.mouse(container)[1]) + "px")
+  		.style("top", (d3.mouse(container)[1]) + "px");
+  	tooltip.append('div').attr('class', 'arrow arrow-left')
   	tooltip.append('p').text(d)
   		.on('click', function() {d3.selectAll(".tooltip").remove()} )
 	}
