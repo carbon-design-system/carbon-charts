@@ -16,10 +16,10 @@ export namespace Axis {
 		if (options.yFormatter && options.yFormatter[options.yDomain[0]]) {
 			addUnits(g.selectAll('text'), options.yFormatter[options.yDomain[0]]);
 		}
-
+		const tickWidth = getLargestTickWidth(g.selectAll('.tick')) + 17;
 		const label = options.yDomain.join(", ");
 		const textBox = g.append("text")
-		  .attr("transform", "translate(-60,"+(options.chartSize.height/2)+")rotate(-90)")
+		  .attr("transform", "translate(-" + tickWidth + "," +(options.chartSize.height/2)+")rotate(-90)")
 		  .attr("dy", "0.71em")
 		  .attr("text-anchor", "middle")
 		  .attr("class", "y axis-label")
@@ -50,9 +50,10 @@ export namespace Axis {
 			addUnits(g.selectAll('text'), options.yFormatter[options.y2Domain[0]]);
 		}
 
+		const tickWidth = getLargestTickWidth(g.selectAll('.tick')) + 12;
 		const label = options.y2Domain.join(", ");
 		const textBox = g.append("text")
-		  .attr("transform", "translate(60,"+(options.chartSize.height/2)+")rotate(-90)")
+		  .attr("transform", "translate(" + tickWidth + ","+(options.chartSize.height/2)+")rotate(-90)")
 		  .attr("dy", "0.71em")
 		  .attr("text-anchor", "middle")
 		  .attr("class", "y2 axis-label")
@@ -136,6 +137,17 @@ export namespace Axis {
 		ticks.nodes().forEach(t => {
 			t.textContent = formatters(t.textContent);
 		})
+	}
+
+	function getLargestTickWidth(ticks) {
+		let largestWidth = 0;
+		ticks.each(function(t) {
+			const tickLength = this.getBBox().width;
+			if (tickLength > largestWidth) {
+				largestWidth = tickLength;
+			}
+		})
+		return largestWidth;
 	}
 }
 
