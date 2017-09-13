@@ -2,6 +2,11 @@ import * as d3 from 'd3'
 import {Tooltip} from './tooltip.ts'
 
 export namespace Axis {
+	const axisConstants = {
+		maxWidthOfAxisLabel: 175,
+		maxNumOfAxisLabelLetters: 60,
+		maxTickLetNum: 28
+	}
 
   export function drawYAxis(svg, yScale, options, data) {
 		let maxWidth = 0;
@@ -47,7 +52,7 @@ export namespace Axis {
 		  .attr("class", labelNum + " axis-label")
 		  .attr("text-anchor", "middle")
 		  .text(label)
-	  if (axisLabel.node().getBBox().width > 175) {
+	  if (axisLabel.node().getBBox().width > axisConstants.maxWidthOfAxisLabel) {
 			const wrappedLabel = wrapLabel(axisLabel);
 			wrappedLabel.on('click', d => {
 				const leftAxis = labelNum === "y"
@@ -84,6 +89,7 @@ export namespace Axis {
 	}
 
 	function wrapLabel(label) {
+		const letNum = axisConstants.maxNumOfAxisLabelLetters;
 		const text = label.text();
 		const y = label.attr("y");
 		label.text('');
@@ -91,19 +97,20 @@ export namespace Axis {
 			.attr('x', 0).attr('y', y).attr('dx', '-1em').attr('dy', '-1em');
 		const tspan2 = label.append('tspan')
 			.attr('x', 0).attr('y', y).attr('dx', '-1em').attr('dy', '1em');
-		if (text.length < 60) {
+		if (text.length < axisConstants.maxNumOfAxisLabelLetters) {
 			tspan1.text(text.substring(0, text.length/2))
 			tspan2.text(text.substring(text.length/2 + 1, text.length))
 		} else {
-			tspan1.text(text.substring(0, 32))
-			tspan2.text(text.substring(32, 60) + '...')
+			tspan1.text(text.substring(0, letNum/2))
+			tspan2.text(text.substring(letNum/2, letNum) + '...')
 		}
 		return label;
 	}
 
 	function wrapTick(t, svg) {
+		const letNum = axisConstants.maxTickLetNum;
 		t.each(function(d) {
-			if (d.length > 14) {
+			if (d.length > letNum/2) {
 				let tick = d3.select(this);
 				const y = tick.attr("y");
 				tick.text('');
@@ -111,12 +118,12 @@ export namespace Axis {
 					.attr('x', 0).attr('y', y).attr('dx', '-1em').attr('dy', '-0.5em');
 				const tspan2 = tick.append('tspan')
 					.attr('x', 0).attr('y', y).attr('dx', '-1em').attr('dy', '0.5em');
-				if (d.length < 25) {
+				if (d.length < letNum - 3) {
 					tspan1.text(d.substring(0, d.length/2))
 					tspan2.text(d.substring(d.length/2 + 1, d.length))
 				} else {
-					tspan1.text(d.substring(0, 14))
-					tspan2.text(d.substring(14, 25) + '...')
+					tspan1.text(d.substring(0, letNum/2))
+					tspan2.text(d.substring(letNum/2, letNum - 3) + '...')
 					tick.on('click', d => {
 						Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, d, true)
 					})
