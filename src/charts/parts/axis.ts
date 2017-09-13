@@ -84,10 +84,11 @@ export namespace Axis {
 			.attr("fill", "#959595")
 			.attr("stroke-width", 2);
 
+		const tickHeight = getLargestTickHeight(g.selectAll('.tick')) + 12;
 		g.append("text")
 		  .attr("class", "x axis-label")
 		  .attr("text-anchor", "middle")
-		  .attr("transform", "translate("+ (options.chartSize.width/2) +","+ 80 +")")
+		  .attr("transform", "translate("+ (options.chartSize.width/2) +","+ tickHeight +")")
 		  .text(options.xDomain);
 	}
 
@@ -137,6 +138,17 @@ export namespace Axis {
 		ticks.nodes().forEach(t => {
 			t.textContent = formatters(t.textContent);
 		})
+	}
+
+	function getLargestTickHeight(ticks) {
+		let largestHeight = 0;
+		ticks.each(function(t) {
+			const tickLength = this.getBBox().width;
+			if (tickLength > largestHeight) {
+				largestHeight = tickLength;
+			}
+		})
+		return largestHeight;
 	}
 
 	function getLargestTickWidth(ticks) {
