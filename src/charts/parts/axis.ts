@@ -2,13 +2,11 @@ import * as d3 from 'd3'
 import {Tooltip} from './tooltip.ts'
 
 export namespace Axis {
+
   export function drawYAxis(svg, yScale, options, data) {
 		let maxWidth = 0;
 		const yAxis = d3.axisLeft(yScale)
-			.tickSizeInner(0)
-			.tickSizeOuter(0)
-			.tickPadding(10)
-			.ticks(options.yTicks);
+		setTickStyle(yAxis, options.yTicks)
 		let g = svg.select(".y.axis")
 			.attr("transform", `translate(0, 0)`)
 			.call(yAxis);
@@ -18,18 +16,9 @@ export namespace Axis {
 		}
 		const tickWidth = getLargestTickWidth(g.selectAll('.tick')) + 17;
 		const label = options.yDomain.join(", ");
-		const textBox = g.append("text")
-		  .attr("transform", "translate(-" + tickWidth + "," +(options.chartSize.height/2)+")rotate(-90)")
-		  .attr("dy", "0.71em")
-		  .attr("text-anchor", "middle")
+
+		let axisLabel = appendYAxisLabel(g, svg, -tickWidth, label, options, "y")
 		  .attr("class", "y axis-label")
-		  .text(label);
-		if (textBox.node().getBBox().width > 175) {
-			const wrappedLabel = wrapLabel(textBox);
-			wrappedLabel.on('click', d => {
-				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, label, true)
-			})
-		}
 	}
 
   export function drawY2Axis(svg, yScale, options, data) {
@@ -37,10 +26,7 @@ export namespace Axis {
   		.attr("class", "y2 axis")
 		let maxWidth = 0;
 		const yAxis = d3.axisRight(yScale)
-			.tickSizeInner(0)
-			.tickSizeOuter(0)
-			.tickPadding(10)
-			.ticks(options.y2Ticks);
+		setTickStyle(yAxis, options.y2Ticks)
 
 		let g = svg.select(".y2.axis")
 			.attr("transform", "translate("+ options.chartSize.width + ", 0)")
@@ -49,21 +35,26 @@ export namespace Axis {
 		if (options.yFormatter && options.yFormatter[options.y2Domain[0]]) {
 			addUnits(g.selectAll('text'), options.yFormatter[options.y2Domain[0]]);
 		}
-
 		const tickWidth = getLargestTickWidth(g.selectAll('.tick')) + 12;
 		const label = options.y2Domain.join(", ");
-		const textBox = g.append("text")
+		let axisLabel = appendYAxisLabel(g, svg, tickWidth, label, options, "y2")
+	}
+
+	function appendYAxisLabel(g, svg, tickWidth, label, options, labelNum) {
+		const axisLabel = g.append("text")
 		  .attr("transform", "translate(" + tickWidth + ","+(options.chartSize.height/2)+")rotate(-90)")
 		  .attr("dy", "0.71em")
+		  .attr("class", labelNum + " axis-label")
 		  .attr("text-anchor", "middle")
-		  .attr("class", "y2 axis-label")
 		  .text(label)
-	  if (textBox.node().getBBox().width > 175) {
-			const wrappedLabel = wrapLabel(textBox);
+	  if (axisLabel.node().getBBox().width > 175) {
+			const wrappedLabel = wrapLabel(axisLabel);
 			wrappedLabel.on('click', d => {
-				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, label, false)
+				const leftAxis = labelNum === "y"
+				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, label, leftAxis)
 			})
 		}
+		return axisLabel;
 	}
 
   export function drawXAxis(svg, xScale, options, data) {
@@ -160,6 +151,13 @@ export namespace Axis {
 			}
 		})
 		return largestWidth;
+	}
+
+	function setTickStyle(axis, tickNum) {
+		axis.tickSizeInner(0)
+			.tickSizeOuter(0)
+			.tickPadding(10)
+			.ticks(tickNum);
 	}
 }
 
