@@ -201,7 +201,9 @@
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
 
-  border-left: 11px solid green;
+  border-left: 11px solid white;
+  right: -10px;
+  top: 10px;
 }
 
 .arrow-left {
@@ -211,5 +213,6 @@
   border-bottom: 10px solid transparent;
 
   border-right: 10px solid white;
-	left: -10px;
+	left: -9px;
+	top: 9px;
 }
