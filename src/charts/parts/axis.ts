@@ -76,10 +76,8 @@ export namespace Axis {
 			.attr("dy", ".35em")
 			.attr("transform", "rotate(-45)")
 			.style("text-anchor", "end")
-			.call(wrapTick)
-			.on('click', d => {
-				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, d, true)
-			})
+			.call(t => wrapTick(t, svg))
+
 		g.select(".domain")
 			.attr("stroke", "#959595")
 			.attr("fill", "#959595")
@@ -110,7 +108,7 @@ export namespace Axis {
 		return label;
 	}
 
-	function wrapTick(t) {
+	function wrapTick(t, svg) {
 		t.each(function(d) {
 			if (d.length > 14) {
 				let tick = d3.select(this);
@@ -126,6 +124,9 @@ export namespace Axis {
 				} else {
 					tspan1.text(d.substring(0, 14))
 					tspan2.text(d.substring(14, 25) + '...')
+					tick.on('click', d => {
+						Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, d, true)
+					})
 				}
 			}
 		})
