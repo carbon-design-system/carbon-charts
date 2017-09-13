@@ -27,7 +27,7 @@ export namespace Axis {
 		if (textBox.node().getBBox().width > 175) {
 			const wrappedLabel = wrapLabel(textBox);
 			wrappedLabel.on('click', d => {
-				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, label)
+				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, label, true)
 			})
 		}
 	}
@@ -50,15 +50,19 @@ export namespace Axis {
 			addUnits(g.selectAll('text'), options.yFormatter[options.y2Domain[0]]);
 		}
 
+		const label = options.y2Domain.join(", ");
 		const textBox = g.append("text")
 		  .attr("transform", "translate(60,"+(options.chartSize.height/2)+")rotate(-90)")
 		  .attr("dy", "0.71em")
 		  .attr("text-anchor", "middle")
 		  .attr("class", "y2 axis-label")
-		  .text(options.y2Domain.join(", "))
+		  .text(label)
 	  if (textBox.node().getBBox().width > 175) {
-	  	textBox.call(wrapLabel);
-	  }
+			const wrappedLabel = wrapLabel(textBox);
+			wrappedLabel.on('click', d => {
+				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, label, false)
+			})
+		}
 	}
 
   export function drawXAxis(svg, xScale, options, data) {
@@ -74,7 +78,7 @@ export namespace Axis {
 			.style("text-anchor", "end")
 			.call(wrapTick)
 			.on('click', d => {
-				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, d)
+				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, d, true)
 			})
 		g.select(".domain")
 			.attr("stroke", "#959595")
