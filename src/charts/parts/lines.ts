@@ -101,11 +101,11 @@ export namespace Lines {
 				.style("opacity", 0)
 				.transition()
 				.duration(500)
-				.style("opacity", 1)
+				.style("opacity", 1);
 
 			series.selectAll("circle")
 				.on('mouseover', function (d) {
-					const glow = series.append("circle").attr("class", "hover-glow")
+					series.append("circle").attr("class", "hover-glow")
 	        	.attr("r", 5.5)
 	        	.attr("fill", "none")
 	        	.attr("stroke-width", 2)
@@ -116,24 +116,24 @@ export namespace Lines {
 	      })
 	      .on('mouseout', function (d) {
 	      	svg.selectAll(".hover-glow").remove();
-	      })
+	      });
 		});
 
 	}
 
 	export function reduceOpacity(svg, exceptionCircle) {
-		svg.selectAll("path").attr("stroke-opacity", 0.25)
-		svg.selectAll("circle").attr("stroke-opacity", 0.25)
-		d3.select(exceptionCircle.parentNode).select("path").attr("stroke-opacity", 1)
-		d3.select(exceptionCircle.parentNode).selectAll("circle").attr("stroke-opacity", 1)
-		d3.select(exceptionCircle).attr("stroke-opacity", 1)
-		d3.select(exceptionCircle).attr("fill", d3.select(exceptionCircle).attr("stroke"))
+		svg.selectAll("path").attr("stroke-opacity", 0.25);
+		svg.selectAll("circle").attr("stroke-opacity", 0.25);
+		d3.select(exceptionCircle.parentNode).select("path").attr("stroke-opacity", 1);
+		d3.select(exceptionCircle.parentNode).selectAll("circle").attr("stroke-opacity", 1);
+		d3.select(exceptionCircle).attr("stroke-opacity", 1);
+		d3.select(exceptionCircle).attr("fill", d3.select(exceptionCircle).attr("stroke"));
 	}
 
 	export function resetLineOpacity() {
-		d3.selectAll("svg").selectAll("path").attr("stroke-opacity", 1)
+		d3.selectAll("svg").selectAll("path").attr("stroke-opacity", 1);
 		d3.selectAll("svg").selectAll("circle").attr("stroke-opacity", 1)
-			.attr("fill", "white")
+			.attr("fill", "white");
 	}
 }
 
