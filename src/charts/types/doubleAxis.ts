@@ -16,7 +16,7 @@ export namespace DoubleAxis {
 	export function drawChart(data, parent, options) {
 		parent.style('padding-right', '80px')
 		let {chartID, container} = Charts.setChartIDContainer(parent)
-		Charts.setResizable()
+		Charts.setResizableWindow()
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 		localOptions = options;
 		Legend.addLegend(container, data, options);
@@ -45,5 +45,6 @@ export namespace DoubleAxis {
 		Lines.draw(svg, xScale, yScale, options, data, y1ActiveSeries);
 		Lines.draw(svg, xScale, y2Scale, options, data, y2ActiveSeries);
 		Lines.setTooltip(chartID, svg);
+		Charts.setResizeWhenContainerChange(data, parent, options);
 	}
 }

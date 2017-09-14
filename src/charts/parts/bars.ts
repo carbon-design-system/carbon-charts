@@ -9,7 +9,7 @@ import {Charts} from '../index.ts'
 export namespace Bars {
 	export function drawChart(data, parent, options) {
 		let {chartID, container} = Charts.setChartIDContainer(parent)
-		Charts.setResizable();
+		Charts.setResizableWindow();
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 		let svg = Charts.setSVG(data, container, options);
 		let xScale = Charts.setXScale(data, options);
@@ -31,6 +31,7 @@ export namespace Bars {
 
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
 		setTooltip(chartID, svg)
+		Charts.setResizeWhenContainerChange(data, parent, options);
 	}
 
 	export function setTooltip(chartID, svg) {
@@ -84,6 +85,9 @@ export namespace Bars {
 	    })
 	}
 
+	export function resetBarOpacity() {
+		d3.selectAll("svg").selectAll("rect").attr("fill-opacity", 1)
+	}
 
 }
 
@@ -92,7 +96,4 @@ function reduceOpacity(svg, exceptionRect) {
 	d3.select(exceptionRect).attr("fill-opacity", false)
 }
 
-function resetBarOpacity() {
-	d3.selectAll("svg").selectAll("rect").attr("fill-opacity", 1)
-}
 

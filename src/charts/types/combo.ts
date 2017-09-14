@@ -14,7 +14,7 @@ export namespace Combo {
 	export function drawChart(data, parent, options) {
 		parent.style('padding-right', '80px')
 		let {chartID, container} = Charts.setChartIDContainer(parent)
-		Charts.setResizable();
+		Charts.setResizableWindow();
 
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
@@ -63,6 +63,7 @@ export namespace Combo {
 		}
 		Lines.draw(svg, xScaleLine, yScaleLine, options, data, activeLineSeries);
 		setTooltip(chartID, svg);
+		Charts.setResizeWhenContainerChange(data, parent, options);
 	}
 }
 

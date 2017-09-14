@@ -9,7 +9,7 @@ import {Charts} from '../index.ts'
 export namespace Lines {
 	export function drawChart(data, parent, options) {
 		let {chartID, container} = Charts.setChartIDContainer(parent)
-		Charts.setResizable();
+		Charts.setResizableWindow();
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 
 		let svg = Charts.setSVG(data, container, options);
@@ -31,6 +31,7 @@ export namespace Lines {
 
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
 		setTooltip(chartID, svg);
+		Charts.setResizeWhenContainerChange(data, parent, options);
 	}
 
 	export function setTooltip(chartID, svg) {
