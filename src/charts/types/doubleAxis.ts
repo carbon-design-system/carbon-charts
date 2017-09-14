@@ -45,6 +45,8 @@ export namespace DoubleAxis {
 		Lines.draw(svg, xScale, yScale, options, data, y1ActiveSeries);
 		Lines.draw(svg, xScale, y2Scale, options, data, y2ActiveSeries);
 		Lines.setTooltip(chartID, svg);
-		Charts.setResizeWhenContainerChange(data, parent, options);
+		if (options.containerResizable) {
+			Charts.setResizeWhenContainerChange(data, parent, options);
+		}
 	}
 }

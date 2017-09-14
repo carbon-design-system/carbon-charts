@@ -31,7 +31,9 @@ export namespace Lines {
 
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
 		setTooltip(chartID, svg);
-		Charts.setResizeWhenContainerChange(data, parent, options);
+		if (options.containerResizable) {
+			Charts.setResizeWhenContainerChange(data, parent, options);
+		}
 	}
 
 	export function setTooltip(chartID, svg) {

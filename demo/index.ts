@@ -29,6 +29,7 @@ let longDataOptions = {
 	yDomain: ["Total", "Returned", "Defects", "This is an extra long long long legend", "Number of sold products"],
 	yTicks: 5,
 	legendClickable: true,
+	containerResizable: true,
 	colors
 }
 
@@ -39,6 +40,7 @@ let doubleYAxisOptions = {
 	yTicks: 5,
 	y2Ticks: 10,
 	legendClickable: true,
+	containerResizable: true,
 	colors
 }
 
@@ -47,6 +49,7 @@ let options = {
 	yDomain: ["Sold", "More", "Qty"],
 	yTicks: 5,
 	legendClickable: true,
+	containerResizable: true,
 	colors
 }
 
@@ -61,6 +64,7 @@ let optionsWithFormatter = {
 	},
 	yTicks: 5,
 	legendClickable: true,
+	containerResizable: true,
 	colors
 }
 

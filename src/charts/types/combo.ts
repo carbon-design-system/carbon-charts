@@ -63,7 +63,9 @@ export namespace Combo {
 		}
 		Lines.draw(svg, xScaleLine, yScaleLine, options, data, activeLineSeries);
 		setTooltip(chartID, svg);
-		Charts.setResizeWhenContainerChange(data, parent, options);
+		if (options.containerResizable) {
+			Charts.setResizeWhenContainerChange(data, parent, options);
+		}
 	}
 }
 
