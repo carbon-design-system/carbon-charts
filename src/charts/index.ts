@@ -161,10 +161,35 @@ export namespace Charts {
 		})
 	}
 
-	export function setResizable() {
-		d3.select(window).on("resize", debounce(function() {
+	export function setResizableWindow() {
+		d3.select(window).on("resize", debounce(() => {
+			resizeTimers.forEach(id => {
+				window.clearTimeout(id);
+				resizeTimers = [];
+			})
 			redrawAll();
 		}, 250));
+	}
+
+	export let resizeTimers = [];
+
+	export function setResizeWhenContainerChange(data, container, options) {
+		let containerWidth = container.node().clientWidth;
+		let containerHeight = container.node().clientHeight;
+		let intervalId = setInterval(resizeTimer, 800);
+		resizeTimers.push(intervalId);
+		function resizeTimer() {
+			if (Math.abs(containerWidth - container.node().clientWidth) > 20
+				|| Math.abs(containerHeight - container.node().clientHeight) > 20) {
+		  	containerWidth = container.node().clientWidth;
+		  	containerHeight = container.node().clientHeight;
+		  	debounce(() => {
+  				window.clearTimeout(intervalId);
+  				drawChart(data, container, options);
+  			}, 500)();
+			}
+		}
+		return intervalId;
 	}
 
 	function debounce(func, wait, immediate?) {
@@ -264,5 +289,4 @@ export namespace Charts {
 		}
 		return {chartID, container}
 	}
-
 }
