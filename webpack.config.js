@@ -5,7 +5,7 @@ module.exports = {
 	output: {
 		path: __dirname + '/demo/bundle',
 		filename: "bundle.js",
-		libraryTarget: "var",
+		libraryTarget: "umd",
     library: "Charts"
 	},
 	resolve: {
