@@ -3,13 +3,14 @@ import {Axis} from './axis.ts'
 import {Grid} from './grid.ts'
 import {Legend} from './legend.ts'
 import {Tooltip} from './tooltip.ts'
+import {Bars} from './bars.ts'
 import '../style.scss'
 import {Charts} from '../index.ts'
 
 export namespace StackedBars {
 	export function drawChart(data, parent, options) {
 		let {chartID, container} = Charts.setChartIDContainer(parent)
-		Charts.setResizable();
+		Charts.setResizableWindow();
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 
 		let svg = Charts.setSVG(data, container, options);
@@ -31,11 +32,13 @@ export namespace StackedBars {
 
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
 		setTooltip(chartID, svg);
+		if (options.containerResizable) {
+			Charts.setResizeWhenContainerChange(data, parent, options);
+		}
 	}
 
 	export function setTooltip(chartID, svg) {
-		Charts.setTooltip(chartID);
-		Charts.setTooltipCloseEventListener(chartID, resetBarOpacity);
+		Charts.setTooltip(chartID, Bars.resetBarOpacity);
 		Charts.addTooltipEventListener(chartID, svg, svg.selectAll("rect"), reduceOpacity);
 	}
 
@@ -87,9 +90,5 @@ export namespace StackedBars {
 function reduceOpacity(svg, exceptionRect) {
 	svg.selectAll("rect").attr("fill-opacity", 0.25)
 	d3.select(exceptionRect).attr("fill-opacity", false)
-}
-
-function resetBarOpacity() {
-	d3.selectAll("svg").selectAll("rect").attr("fill-opacity", 1)
 }
 

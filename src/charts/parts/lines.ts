@@ -9,7 +9,7 @@ import {Charts} from '../index.ts'
 export namespace Lines {
 	export function drawChart(data, parent, options) {
 		let {chartID, container} = Charts.setChartIDContainer(parent)
-		Charts.setResizable();
+		Charts.setResizableWindow();
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 
 		let svg = Charts.setSVG(data, container, options);
@@ -31,14 +31,15 @@ export namespace Lines {
 
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
 		setTooltip(chartID, svg);
+		if (options.containerResizable) {
+			Charts.setResizeWhenContainerChange(data, parent, options);
+		}
 	}
 
 	export function setTooltip(chartID, svg) {
-		Charts.setTooltip(chartID);
-		Charts.setTooltipCloseEventListener(chartID, resetLineOpacity);
+		Charts.setTooltip(chartID, resetLineOpacity);
 		Charts.addTooltipEventListener(chartID, svg, svg.selectAll("circle"), reduceOpacity);
 	}
-
 
 	export function draw(svg, xScale, yScale, options, data, activeSeries) {
 		let keys: any;
@@ -83,7 +84,7 @@ export namespace Lines {
 				.attr("stroke", "steelblue")
 				.attr("stroke-linejoin", "round")
 				.attr("stroke-linecap", "round")
-				.attr("stroke-width", 1.5)
+				.attr("stroke-width", 2)
 				.attr("d", line)
 				.style("stroke", color(colorKey))
 				.style("opacity", 0)
@@ -97,29 +98,45 @@ export namespace Lines {
 				.attr("r", 3.5)
 				.attr("fill", "white")
 				.attr("stroke", color(colorKey))
-				.attr("stroke-widget", "10%")
+				.attr("stroke-width", 2)
 				.attr("cx", d => xScale(d.key) + options.chartSize.width / dataList.length / 2)
 				.attr("cy", d => yScale(d.value))
 				.style("opacity", 0)
 				.transition()
 				.duration(500)
-				.style("opacity", 1)
+				.style("opacity", 1);
+
+			series.selectAll("circle")
+				.on('mouseover', function (d) {
+					series.append("circle").attr("class", "hover-glow")
+	        	.attr("r", 5.5)
+	        	.attr("fill", "none")
+	        	.attr("stroke-width", 2)
+	        	.attr("stroke", color(colorKey))
+	        	.attr("stroke-opacity", 0.5)
+	        	.attr("cx", this.cx.baseVal.value)
+	        	.attr("cy", this.cy.baseVal.value)
+	      })
+	      .on('mouseout', function (d) {
+	      	svg.selectAll(".hover-glow").remove();
+	      });
 		});
+
 	}
 
 	export function reduceOpacity(svg, exceptionCircle) {
-		svg.selectAll("path").attr("stroke-opacity", 0.25)
-		svg.selectAll("circle").attr("stroke-opacity", 0.25)
-		d3.select(exceptionCircle.parentNode).select("path").attr("stroke-opacity", 1)
-		d3.select(exceptionCircle.parentNode).selectAll("circle").attr("stroke-opacity", 1)
-		d3.select(exceptionCircle).attr("stroke-opacity", 1)
-		d3.select(exceptionCircle).attr("fill", d3.select(exceptionCircle).attr("stroke"))
+		svg.selectAll("path").attr("stroke-opacity", 0.25);
+		svg.selectAll("circle").attr("stroke-opacity", 0.25);
+		d3.select(exceptionCircle.parentNode).select("path").attr("stroke-opacity", 1);
+		d3.select(exceptionCircle.parentNode).selectAll("circle").attr("stroke-opacity", 1);
+		d3.select(exceptionCircle).attr("stroke-opacity", 1);
+		d3.select(exceptionCircle).attr("fill", d3.select(exceptionCircle).attr("stroke"));
 	}
 
 	export function resetLineOpacity() {
-		d3.selectAll("svg").selectAll("path").attr("stroke-opacity", 1)
+		d3.selectAll("svg").selectAll("path").attr("stroke-opacity", 1);
 		d3.selectAll("svg").selectAll("circle").attr("stroke-opacity", 1)
-			.attr("fill", "white")
+			.attr("fill", "white");
 	}
 }
 

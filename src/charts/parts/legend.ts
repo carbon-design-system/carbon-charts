@@ -40,6 +40,7 @@ export namespace Legend {
 				legend.append("div")
 					.attr("class", "legend-circle")
 					.style("background-color", (d, i) => options.colors[i])
+				addCircleHoverEffect()
 
 				legend.append("text")
 					.text(d => d);
@@ -48,7 +49,7 @@ export namespace Legend {
 			container.select(".legend").classed("right-legend", false)
 			let numberOfLegendAvail = Math.floor((container.node().clientWidth) / 130)
 			let btns = container.selectAll(".legend-btn").nodes();
-			for (let i = numberOfLegendAvail; i < legendItems.length; i++) {
+			for (let i = numberOfLegendAvail + 1; i < legendItems.length; i++) {
 				d3.select(btns[i]).style("display", "none")
 			}
 			if (container.select(".expand-btn").nodes().length === 0) {
@@ -98,13 +99,13 @@ export namespace Legend {
 			.style("display", "block")
 			.style("left", leftPos + "px")
 			.style("top", (d3.mouse(container.node())[1]) + "px");
-		tooltip.append("h2").text("Legend")
+		tooltip.append("p").text("Legend")
+			.attr("class", "legend-tooltip-header")
 		tooltip.append('ul')
 			.attr("class", "legend-tooltip-content")
 			.attr("font-size", 10)
-		tooltip.append("span")
-		  .attr("class", "close-btn")
-		  .text("x")
+
+		Charts.addCloseBtn(tooltip, 'md', 'white')
 		  .on("click", () => {
   			d3.selectAll(".legend-tooltip").remove();
   		});
@@ -119,10 +120,22 @@ export namespace Legend {
 		legendContent.append("div")
 			.attr("class", "legend-circle")
 			.style("background-color", (d, i) => options.colors[i])
+			addCircleHoverEffect()
 
 		legendContent.append("text")
 			.text(d => d);
 
 		Charts.setClickableLegendInTooltip(data, container, options)
+	}
+
+	export function addCircleHoverEffect() {
+		d3.selectAll('.legend-circle')
+			.on('mouseover', function(d, i) {
+				const color = this.style.backgroundColor.substring(4, this.style.backgroundColor.length - 1)
+				d3.select(this).style('box-shadow', "0 0 0 3px rgba(" + color + ", 0.2)")
+			})
+			.on('mouseout', function(d, i) {
+				d3.select(this).style('box-shadow', "none")
+			})
 	}
 }

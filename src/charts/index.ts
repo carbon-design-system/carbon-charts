@@ -124,7 +124,7 @@ export namespace Charts {
 		}
 	}
 
-	export function setTooltip(chartID) {
+	export function setTooltip(chartID, resetOpacity) {
 		const tooltip = d3.select("#tooltip-" + chartID);
 		if (tooltip.nodes().length < 1) {
 			let tooltip = d3.select("body").append("div")
@@ -133,17 +133,25 @@ export namespace Charts {
 				.style("display", "none");
 			tooltip.append("span")
 				.attr("class", "text-box")
-			tooltip.append("span")
-				.attr("class", "close-btn")
-				.text("x")
+
+			addCloseBtn(tooltip, 'xs')
+				.on('click', () => {
+					Tooltip.hide()
+					resetOpacity();
+				})
 		}
 	}
 
-	export function setTooltipCloseEventListener(chartID, opacityFunc) {
-		d3.select("#tooltip-" + chartID).select(".close-btn").on("click", () => {
-			Tooltip.hide()
-			opacityFunc();
-		});
+	export function addCloseBtn(tooltip, size, color?) {
+		const closeBtn = tooltip.append('button')
+		let classNames = 'close--' + size;
+		classNames = color ? ' close--' + color : classNames;
+		closeBtn.attr('class', classNames)
+			.attr('type', 'button')
+			.attr('aria-label', 'Close')
+			.append('svg').attr('class', 'close_icon')
+			.append('use').attr('href', 'https://peretz-icons.mybluemix.net/core_set.svg#x_12')
+		return closeBtn;
 	}
 
 	export function addTooltipEventListener(chartID, svg, elements, reduceOpacity) {
@@ -153,10 +161,35 @@ export namespace Charts {
 		})
 	}
 
-	export function setResizable() {
-		d3.select(window).on("resize", debounce(function() {
+	export function setResizableWindow() {
+		d3.select(window).on("resize", debounce(() => {
+			resizeTimers.forEach(id => {
+				window.clearTimeout(id);
+				resizeTimers = [];
+			})
 			redrawAll();
 		}, 250));
+	}
+
+	export let resizeTimers = [];
+
+	export function setResizeWhenContainerChange(data, container, options) {
+		let containerWidth = container.node().clientWidth;
+		let containerHeight = container.node().clientHeight;
+		let intervalId = setInterval(resizeTimer, 800);
+		resizeTimers.push(intervalId);
+		function resizeTimer() {
+			if (Math.abs(containerWidth - container.node().clientWidth) > 20
+				|| Math.abs(containerHeight - container.node().clientHeight) > 20) {
+		  	containerWidth = container.node().clientWidth;
+		  	containerHeight = container.node().clientHeight;
+		  	debounce(() => {
+  				window.clearTimeout(intervalId);
+  				drawChart(data, container, options);
+  			}, 500)();
+			}
+		}
+		return intervalId;
 	}
 
 	function debounce(func, wait, immediate?) {
@@ -256,5 +289,4 @@ export namespace Charts {
 		}
 		return {chartID, container}
 	}
-
 }

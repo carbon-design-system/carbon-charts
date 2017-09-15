@@ -9,7 +9,7 @@ import {Charts} from '../index.ts'
 export namespace Bars {
 	export function drawChart(data, parent, options) {
 		let {chartID, container} = Charts.setChartIDContainer(parent)
-		Charts.setResizable();
+		Charts.setResizableWindow();
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 		let svg = Charts.setSVG(data, container, options);
 		let xScale = Charts.setXScale(data, options);
@@ -31,11 +31,13 @@ export namespace Bars {
 
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
 		setTooltip(chartID, svg)
+		if (options.containerResizable) {
+			Charts.setResizeWhenContainerChange(data, parent, options);
+		}
 	}
 
 	export function setTooltip(chartID, svg) {
-		Charts.setTooltip(chartID);
-		Charts.setTooltipCloseEventListener(chartID, resetBarOpacity);
+		Charts.setTooltip(chartID, resetBarOpacity);
 		Charts.addTooltipEventListener(chartID, svg, svg.selectAll("rect"), reduceOpacity);
 	}
 
@@ -70,6 +72,23 @@ export namespace Bars {
 				.ease(d3.easePolyOut, 0.5)
 				.attr("y", d => yScale(d.value))
 				.attr("height", d => options.chartSize.height - yScale(d.value))
+		svg.selectAll("rect")
+			.on('mouseover', function (d) {
+				d3.select(this)
+	      	.attr("stroke-width", 4)
+	      	.attr("stroke", color(d.series))
+	      	.attr("stroke-opacity", 0.5)
+	    })
+	    .on('mouseout', function (d) {
+	    	d3.select(this)
+	      	.attr("stroke-width", 0)
+	      	.attr("stroke", "none")
+	      	.attr("stroke-opacity", 1)
+	    })
+	}
+
+	export function resetBarOpacity() {
+		d3.selectAll("svg").selectAll("rect").attr("fill-opacity", 1)
 	}
 
 }
@@ -79,7 +98,4 @@ function reduceOpacity(svg, exceptionRect) {
 	d3.select(exceptionRect).attr("fill-opacity", false)
 }
 
-function resetBarOpacity() {
-	d3.selectAll("svg").selectAll("rect").attr("fill-opacity", 1)
-}
 
