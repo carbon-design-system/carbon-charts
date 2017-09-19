@@ -25,7 +25,7 @@ export namespace DoubleAxis {
 		localOptions = options;
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			Charts.setClickableLegend(data, parent, options)
+			Charts.setClickableLegend(data, parentSelection, options)
 		}
 		const activeSeries = <any>Charts.getActiveDataSeries(container);
 		const y1ActiveSeries = options.yDomain.filter(val => activeSeries.includes(val))
@@ -44,7 +44,7 @@ export namespace DoubleAxis {
 		Axis.drawY2Axis(svg, y2Scale, options, data);
 		Charts.redrawFunctions[chartID] = {
 			self: this,
-			data, parent, options
+			data, parentSelection, options
 		}
 		Lines.draw(svg, xScale, yScale, options, data, y1ActiveSeries);
 		Lines.draw(svg, xScale, y2Scale, options, data, y2ActiveSeries);

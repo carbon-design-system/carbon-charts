@@ -23,7 +23,7 @@ export namespace Bars {
 		Grid.drawYGrid(svg, yScale, options, data);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			Charts.setClickableLegend(data, parent, options)
+			Charts.setClickableLegend(data, parentSelection, options)
 		}
 		if (!Charts.redrawFunctions[chartID]) {
 			Charts.redrawFunctions[chartID] = {

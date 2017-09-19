@@ -27,11 +27,11 @@ export namespace StackedBars {
 		Grid.drawYGrid(svg, yScale, options, data);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			Charts.setClickableLegend(data, parent, options)
+			Charts.setClickableLegend(data, parentSelection, options)
 		}
 		Charts.redrawFunctions[chartID] = {
 			self: this,
-			data, parent, options
+			data, parentSelection, options
 		}
 
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));

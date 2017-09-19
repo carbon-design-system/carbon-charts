@@ -22,7 +22,7 @@ export namespace Combo {
 
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			Charts.setClickableLegend(data, parent, options)
+			Charts.setClickableLegend(data, parentSelection, options)
 		}
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 		const activeSeries = <any>Charts.getActiveDataSeries(container);
@@ -45,7 +45,7 @@ export namespace Combo {
 		})
 		Charts.redrawFunctions[chartID] = {
 			self: this,
-			data, parent, options
+			data, parentSelection, options
 		}
 
 		let svg = Charts.setSVG(data, container, options);
