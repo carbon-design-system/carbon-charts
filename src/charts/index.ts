@@ -9,11 +9,17 @@ import {DoubleAxis} from './types/doubleAxis.ts'
 import {Legend} from './parts/legend.ts'
 import {Tooltip} from './parts/tooltip.ts'
 import './style.scss'
+import '@peretz/matter/matter.css'
 
 let localData = <any>{};
 let localOptions = <any>{};
 
 export namespace Charts {
+	export const bars = Bars;
+	export const lines = Lines;
+	export const combo = Combo;
+	export const stackedBars = StackedBars;
+	export const doubleAxis = DoubleAxis;
 	export const margin = {
 		top: 20,
 		bottom: 50,
@@ -136,7 +142,7 @@ export namespace Charts {
 
 			addCloseBtn(tooltip, 'xs')
 				.on('click', () => {
-					Tooltip.hide()
+					d3.selectAll(".tooltip").remove();
 					resetOpacity();
 				})
 		}
@@ -150,13 +156,13 @@ export namespace Charts {
 			.attr('type', 'button')
 			.attr('aria-label', 'Close')
 			.append('svg').attr('class', 'close_icon')
-			.append('use').attr('href', 'https://peretz-icons.mybluemix.net/core_set.svg#x_12')
+			.append('use').attr('href', '#x_12')
 		return closeBtn;
 	}
 
-	export function addTooltipEventListener(chartID, svg, elements, reduceOpacity) {
+	export function addTooltipEventListener(parent, svg, elements, reduceOpacity, resetBarOpacity) {
 		elements.on("click", function(d) {
-			Tooltip.showTooltip(chartID, d)
+			Tooltip.showTooltip(parent, d, resetBarOpacity)
 			reduceOpacity(svg, this)
 		})
 	}
@@ -174,15 +180,15 @@ export namespace Charts {
 	export let resizeTimers = [];
 
 	export function setResizeWhenContainerChange(data, container, options) {
-		let containerWidth = container.node().clientWidth;
-		let containerHeight = container.node().clientHeight;
+		let containerWidth = container.clientWidth;
+		let containerHeight = container.clientHeight;
 		let intervalId = setInterval(resizeTimer, 800);
 		resizeTimers.push(intervalId);
 		function resizeTimer() {
-			if (Math.abs(containerWidth - container.node().clientWidth) > 20
-				|| Math.abs(containerHeight - container.node().clientHeight) > 20) {
-		  	containerWidth = container.node().clientWidth;
-		  	containerHeight = container.node().clientHeight;
+			if (Math.abs(containerWidth - container.clientWidth) > 20
+				|| Math.abs(containerHeight - container.clientHeight) > 20) {
+		  	containerWidth = container.clientWidth;
+		  	containerHeight = container.clientHeight;
 		  	debounce(() => {
   				window.clearTimeout(intervalId);
   				drawChart(data, container, options);
@@ -215,7 +221,7 @@ export namespace Charts {
 
 	function redrawAll() {
 		Object.keys(redrawFunctions).forEach((chart) => {
-			redrawFunctions[chart].self.drawChart(redrawFunctions[chart].data, redrawFunctions[chart].parent, redrawFunctions[chart].options)
+			redrawFunctions[chart].self.drawChart(redrawFunctions[chart].data, redrawFunctions[chart].parentSelection.node(), redrawFunctions[chart].options)
 		})
 	}
 
@@ -242,7 +248,7 @@ export namespace Charts {
 		parent.selectAll(".legend-btn").each(function(d, i) {
 			d3.select(this).on("click", function(d) {
 				Legend.updateLegend(this);
-				drawChart(data, parent, options);
+				drawChart(data, parent.node(), options);
 			});
 		})
 	}
@@ -252,7 +258,7 @@ export namespace Charts {
 		tooltip.selectAll(".legend-btn").each(function(d, i) {
 			d3.select(this).on("click", function(d) {
 				Legend.updateLegend(this);
-				drawChart(data, d3.select(parent.node().parentNode), options);
+				drawChart(data, parent.node().parentNode, options);
 			});
 		})
 	}

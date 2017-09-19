@@ -14,9 +14,13 @@ let localData = <any>{};
 let localOptions = <any>{};
 export namespace DoubleAxis {
 	export function drawChart(data, parent, options) {
-		parent.style('padding-right', '80px')
-		let {chartID, container} = Charts.setChartIDContainer(parent)
-		Charts.setResizableWindow()
+		options.type = 'doubleAxis';
+		let parentSelection = d3.select(parent);
+		parentSelection.style('padding-right', '80px');
+		let {chartID, container} = Charts.setChartIDContainer(parentSelection)
+		if (options.windowResizable) {
+			Charts.setResizableWindow();
+		}
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 		localOptions = options;
 		Legend.addLegend(container, data, options);
@@ -44,7 +48,7 @@ export namespace DoubleAxis {
 		}
 		Lines.draw(svg, xScale, yScale, options, data, y1ActiveSeries);
 		Lines.draw(svg, xScale, y2Scale, options, data, y2ActiveSeries);
-		Lines.setTooltip(chartID, svg);
+		Charts.addTooltipEventListener(parent, svg, svg.selectAll("circle"), Lines.reduceOpacity, Lines.resetLineOpacity);
 		if (options.containerResizable) {
 			Charts.setResizeWhenContainerChange(data, parent, options);
 		}

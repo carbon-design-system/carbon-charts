@@ -8,8 +8,9 @@ import {Charts} from '../index.ts'
 
 export namespace Bars {
 	export function drawChart(data, parent, options) {
-		let {chartID, container} = Charts.setChartIDContainer(parent)
-		Charts.setResizableWindow();
+		options.type = 'bar';
+		let parentSelection = d3.select(parent);
+		let {chartID, container} = Charts.setChartIDContainer(parentSelection);
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 		let svg = Charts.setSVG(data, container, options);
 		let xScale = Charts.setXScale(data, options);
@@ -24,21 +25,21 @@ export namespace Bars {
 		if (options.legendClickable) {
 			Charts.setClickableLegend(data, parent, options)
 		}
-		Charts.redrawFunctions[chartID] = {
-			self: this,
-			data, parent, options
+		if (!Charts.redrawFunctions[chartID]) {
+			Charts.redrawFunctions[chartID] = {
+				self: this,
+				data, parentSelection, options
+			}
 		}
 
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
-		setTooltip(chartID, svg)
+		Charts.addTooltipEventListener(parent, svg, svg.selectAll("rect"), reduceOpacity, resetBarOpacity);
 		if (options.containerResizable) {
 			Charts.setResizeWhenContainerChange(data, parent, options);
 		}
-	}
-
-	export function setTooltip(chartID, svg) {
-		Charts.setTooltip(chartID, resetBarOpacity);
-		Charts.addTooltipEventListener(chartID, svg, svg.selectAll("rect"), reduceOpacity);
+		if (options.windowResizable) {
+			Charts.setResizableWindow();
+		}
 	}
 
 	export function draw(svg, xScale, yScale, options, data, activeSeries) {
@@ -90,7 +91,6 @@ export namespace Bars {
 	export function resetBarOpacity() {
 		d3.selectAll("svg").selectAll("rect").attr("fill-opacity", 1)
 	}
-
 }
 
 function reduceOpacity(svg, exceptionRect) {

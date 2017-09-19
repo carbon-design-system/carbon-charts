@@ -1,4 +1,4 @@
-import '@peretz/matter/matter.css'
+
 import './index.scss'
 import * as d3 from 'd3'
 import {Charts} from '../src/charts/index.ts'
@@ -30,6 +30,7 @@ let longDataOptions = {
 	yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
+	// windowResizable: true,
 	colors
 }
 
@@ -41,6 +42,7 @@ let doubleYAxisOptions = {
 	y2Ticks: 10,
 	legendClickable: true,
 	containerResizable: true,
+	// windowResizable: true,
 	colors
 }
 
@@ -50,6 +52,7 @@ let options = {
 	yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
+	// windowResizable: true,
 	colors
 }
 
@@ -65,6 +68,7 @@ let optionsWithFormatter = {
 	yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
+	// windowResizable: true,
 	colors
 }
 
