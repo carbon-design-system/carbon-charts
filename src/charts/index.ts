@@ -22,8 +22,8 @@ export namespace Charts {
 	export const doubleAxis = DoubleAxis;
 	export const margin = {
 		top: 20,
-		bottom: 50,
-		left: 70,
+		bottom: 60,
+		left: 90,
 		right: 20
 	};
 	export function getActualChartSize(data, container, options) {
