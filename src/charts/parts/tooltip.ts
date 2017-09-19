@@ -43,7 +43,7 @@ export namespace Tooltip {
 		if (d.dimension) {
 			tooltipHTML += "<br/><b>" + d.dimension + ": </b>" + d.dimVal;
 		}
-		tooltip.append('div').attr('class', ".text-box").html(tooltipHTML);
+		tooltip.append('div').attr('class', "text-box").html(tooltipHTML);
 		Charts.addCloseBtn(tooltip, 'xs')
 			.on('click', () => {
 				resetOpacityFunctions.forEach(f => f());
