@@ -282,9 +282,7 @@ const chartTypes = [
 // })Object.assign({}, options, {yDomain: [options.yDomain[0]]});
 
 chartTypes.forEach(type => {
-	let container = d3.select('#' + type.id + '-chart-holder');
-	container.append('h3').text(type.name)
-
+	let container = document.getElementById(type.id + '-chart-holder')
 	switch (type.id) {
 		case "bar":
 			Bars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
