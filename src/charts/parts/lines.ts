@@ -8,17 +8,12 @@ import {Charts} from '../index.ts'
 
 export namespace Lines {
 	export function drawChart(data, parent, options) {
-<<<<<<< Updated upstream
-		let {chartID, container} = Charts.setChartIDContainer(parent)
-		Charts.setResizableWindow();
-=======
 		options.type = 'line';
 		let parentSelection = d3.select(parent);
 		let {chartID, container} = Charts.setChartIDContainer(parentSelection)
 		if (options.windowResizable) {
 			Charts.setResizableWindow();
 		}
->>>>>>> Stashed changes
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 
 		let svg = Charts.setSVG(data, container, options);
