@@ -32,6 +32,7 @@ export namespace Legend {
 		let legendItems = getLegendItems(data, options)
 		let legend = container.select(".legend")
 					.attr("font-size", 10)
+					.style("max-width", container.select('svg').node().clientWidth)
 				.selectAll("div")
 				.data(legendItems)
 				.enter().append("li")

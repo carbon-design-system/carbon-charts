@@ -23,6 +23,7 @@ export namespace DoubleAxis {
 		}
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 		localOptions = options;
+		let svg = Charts.setSVG(data, container, options);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
 			Charts.setClickableLegend(data, parentSelection, options)
@@ -30,7 +31,6 @@ export namespace DoubleAxis {
 		const activeSeries = <any>Charts.getActiveDataSeries(container);
 		const y1ActiveSeries = options.yDomain.filter(val => activeSeries.includes(val))
 		const y2ActiveSeries = options.y2Domain.filter(val => activeSeries.includes(val))
-		let svg = Charts.setSVG(data, container, options);
 		let xScale = Charts.setXScale(data, options);
 		let yScale = Charts.setYScale(data, options, y1ActiveSeries);
 		let y2Scale = Charts.setYScale(data, options, y2ActiveSeries);
