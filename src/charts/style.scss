@@ -56,6 +56,10 @@
 		}*/
 	}
 
+	.label-tooltip {
+		word-wrap: break-word;
+	}
+
 	.legend-tooltip {
 		padding: 0;
 		width: 200px;
@@ -84,7 +88,6 @@
 			margin-top: 1rem;
 		}
 	}
-
 
 	.right-legend {
 		position: absolute;
@@ -153,7 +156,6 @@
 		top: 9px;
 	}
 }
-
 
 .tooltip {
 	background-color: #FFFFFF;
