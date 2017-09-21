@@ -7,7 +7,6 @@ export namespace Tooltip {
 	export function showLabelTooltip(container, d, leftSide) {
 		d3.selectAll(".label-tooltip").remove();
 		const mouseXPoint = d3.mouse(container)[0] + 10;
-		const windowXPoint = d3.mouse(container)[0];
 		let tooltip = d3.select(container).append("div")
 			.attr("class", "tooltip label-tooltip")
 			.style("top", d3.mouse(container)[1] - 19 + "px")
