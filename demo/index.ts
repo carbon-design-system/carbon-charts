@@ -1,3 +1,4 @@
+import '@peretz/matter/matter.css'
 
 import './index.scss'
 import {Charts} from '../src/charts/index.ts'
