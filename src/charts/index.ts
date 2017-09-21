@@ -154,13 +154,9 @@ export namespace Charts {
 		closeBtn.attr('class', classNames)
 			.attr('type', 'button')
 			.attr('aria-label', 'Close')
-		let svg = closeBtn.append('svg').attr('class', 'close_icon')
-		if (d3.select('#x_12').node() === null) {
-			svg.append('use').attr('href', 'https://peretz-icons.mybluemix.net/core_set.svg#x_12')
-		} else {
-			svg.append('use').attr('href', '#x_12')
-		}
-		return svg;
+			.append('svg').attr('class', 'close_icon')
+			.append('use').attr('href', '#x_12')
+		return closeBtn;
 	}
 
 	export function addTooltipEventListener(parent, svg, elements, reduceOpacity, resetBarOpacity) {
