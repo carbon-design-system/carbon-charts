@@ -80,7 +80,7 @@ export namespace Axis {
 			.attr("fill", "#959595")
 			.attr("stroke-width", 2);
 
-		const tickHeight = getLargestTickHeight(g.selectAll('.tick')) + 12;
+		const tickHeight = getLargestTickHeight(g.selectAll('.tick')) + 16;
 		g.append("text")
 		  .attr("class", "x axis-label")
 		  .attr("text-anchor", "middle")
