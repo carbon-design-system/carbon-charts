@@ -9,7 +9,6 @@ import {DoubleAxis} from './types/doubleAxis.ts'
 import {Legend} from './parts/legend.ts'
 import {Tooltip} from './parts/tooltip.ts'
 import './style.scss'
-import '@peretz/matter/matter.css'
 
 let localData = <any>{};
 let localOptions = <any>{};
@@ -49,8 +48,8 @@ export namespace Charts {
 	}
 	export function renderChart(data, container, options) {
 		localData = data;
-		container.classed("chart-wrapper", true);
-		container.append("div").attr("class", "legend");
+		container.classed('chart-wrapper', true);
+		container.append('div').attr('class', 'legend');
 		options.chartSize = getActualChartSize(data, container, options);;
 		localOptions = options;
 
@@ -83,45 +82,45 @@ export namespace Charts {
 			svgHeight = container.node().clientHeight - 100;
 		}
 		const chartSize = getActualChartSize(data, container, options);
-		let svg = container.append("svg")
-			.attr("width", svgWidth)
-			.attr("height", svgHeight)
-			.append("g")
-			.attr("class", "inner-wrap")
-			.attr("transform", `translate(${margin.left},${margin.top})`);
-		svg.append("g")
-			.attr("class", "y axis")
-			.attr("transform", `translate(0, 0)`);
-		svg.append("g")
-			.attr("class", "x axis")
-			.attr("transform", `translate(0, ${chartSize.height})`);
-		let grid = svg.append("g")
-			.attr("class", "grid")
-			.attr("clip-path", `url(${window.location.origin}${window.location.pathname}#clip)`);
-		grid.append("g")
-			.attr("class", "x grid")
-			.attr("transform", `translate(0, ${chartSize.width})`);
-		grid.append("g")
-			.attr("class", "y grid")
-			.attr("transform", `translate(0, 0)`);
+		let svg = container.append('svg')
+			.attr('width', svgWidth)
+			.attr('height', svgHeight)
+			.append('g')
+			.attr('class', 'inner-wrap')
+			.attr('transform', `translate(${margin.left},${margin.top})`);
+		svg.append('g')
+			.attr('class', 'y axis')
+			.attr('transform', `translate(0, 0)`);
+		svg.append('g')
+			.attr('class', 'x axis')
+			.attr('transform', `translate(0, ${chartSize.height})`);
+		let grid = svg.append('g')
+			.attr('class', 'grid')
+			.attr('clip-path', `url(${window.location.origin}${window.location.pathname}#clip)`);
+		grid.append('g')
+			.attr('class', 'x grid')
+			.attr('transform', `translate(0, ${chartSize.width})`);
+		grid.append('g')
+			.attr('class', 'y grid')
+			.attr('transform', `translate(0, 0)`);
 		return svg;
 	}
 
 	export function drawChart(data, container, options) {
 		switch (options.type) {
-			case "bar":
+			case 'bar':
 				Bars.drawChart(data, container, options);
 				break;
-			case "stackedBar":
+			case 'stackedBar':
 				StackedBars.drawChart(data, container, options);
 				break;
-			case "line":
+			case 'line':
 				Lines.drawChart(data, container, options);
 				break;
-			case "doubleAxis":
+			case 'doubleAxis':
 				DoubleAxis.drawChart(data, container, options);
 				break;
-			case "combo":
+			case 'combo':
 				Combo.drawChart(data, container, options);
 				break;
 			default:
@@ -131,18 +130,18 @@ export namespace Charts {
 	}
 
 	export function setTooltip(chartID, resetOpacity) {
-		const tooltip = d3.select("#tooltip-" + chartID);
+		const tooltip = d3.select('#tooltip-' + chartID);
 		if (tooltip.nodes().length < 1) {
-			let tooltip = d3.select("body").append("div")
-				.attr("class", "tooltip chart-tooltip")
-				.attr("id", "tooltip-" + chartID)
-				.style("display", "none");
-			tooltip.append("span")
-				.attr("class", "text-box")
+			let tooltip = d3.select('body').append('div')
+				.attr('class', 'tooltip chart-tooltip')
+				.attr('id', 'tooltip-' + chartID)
+				.style('display', 'none');
+			tooltip.append('span')
+				.attr('class', 'text-box')
 
 			addCloseBtn(tooltip, 'xs')
 				.on('click', () => {
-					d3.selectAll(".tooltip").remove();
+					d3.selectAll('.tooltip').remove();
 					resetOpacity();
 				})
 		}
@@ -155,20 +154,24 @@ export namespace Charts {
 		closeBtn.attr('class', classNames)
 			.attr('type', 'button')
 			.attr('aria-label', 'Close')
-			.append('svg').attr('class', 'close_icon')
-			.append('use').attr('href', '#x_12')
-		return closeBtn;
+		let svg = closeBtn.append('svg').attr('class', 'close_icon')
+		if (d3.select('#x_12').node() === null) {
+			svg.append('use').attr('href', 'https://peretz-icons.mybluemix.net/core_set.svg#x_12')
+		} else {
+			svg.append('use').attr('href', '#x_12')
+		}
+		return svg;
 	}
 
 	export function addTooltipEventListener(parent, svg, elements, reduceOpacity, resetBarOpacity) {
-		elements.on("click", function(d) {
+		elements.on('click', function(d) {
 			Tooltip.showTooltip(parent, d, resetBarOpacity)
 			reduceOpacity(svg, this)
 		})
 	}
 
 	export function setResizableWindow() {
-		d3.select(window).on("resize", debounce(() => {
+		d3.select(window).on('resize', debounce(() => {
 			resizeTimers.forEach(id => {
 				window.clearTimeout(id);
 				resizeTimers = [];
@@ -245,8 +248,8 @@ export namespace Charts {
 	}
 
 	export function setClickableLegend(data, parent, options) {
-		parent.selectAll(".legend-btn").each(function(d, i) {
-			d3.select(this).on("click", function(d) {
+		parent.selectAll('.legend-btn').each(function(d, i) {
+			d3.select(this).on('click', function(d) {
 				Legend.updateLegend(this);
 				drawChart(data, parent.node(), options);
 			});
@@ -254,9 +257,9 @@ export namespace Charts {
 	}
 
 	export function setClickableLegendInTooltip(data, parent, options) {
-		const tooltip = parent.select(".legend-tooltip-content")
-		tooltip.selectAll(".legend-btn").each(function(d, i) {
-			d3.select(this).on("click", function(d) {
+		const tooltip = parent.select('.legend-tooltip-content')
+		tooltip.selectAll('.legend-btn').each(function(d, i) {
+			d3.select(this).on('click', function(d) {
 				Legend.updateLegend(this);
 				drawChart(data, parent.node().parentNode, options);
 			});
@@ -269,28 +272,28 @@ export namespace Charts {
 
 	export function getActiveDataSeries(container) {
 		const activeSeries = [];
-		if (container.selectAll(".legend-tooltip").nodes().length > 0) {
-			container = container.select(".legend-tooltip");
+		if (container.selectAll('.legend-tooltip').nodes().length > 0) {
+			container = container.select('.legend-tooltip');
 		}
-		container.selectAll(".legend-btn").filter(".active").each(function(b) {
-			activeSeries.push(d3.select(this).select("text").text())
+		container.selectAll('.legend-btn').filter('.active').each(function(b) {
+			activeSeries.push(d3.select(this).select('text').text())
 		})
 		return activeSeries;
 	}
 
 	export function setChartIDContainer(parent) {
 		let chartID, container;
-		if (parent.select(".chart-wrapper").nodes().length > 0) {
-			container = parent.select(".chart-wrapper")
-			chartID = container.attr("chart-id");
+		if (parent.select('.chart-wrapper').nodes().length > 0) {
+			container = parent.select('.chart-wrapper')
+			chartID = container.attr('chart-id');
 			container.selectAll('svg').remove();
 		} else {
 			chartID = Charts.setUniqueID();
 			container = parent.append('div')
-			container.attr("chart-id", chartID)
-				.classed("chart-wrapper", true);
-			if (container.select(".legend").nodes().length === 0) {
-				container.append("ul").attr("class", "legend");
+			container.attr('chart-id', chartID)
+				.classed('chart-wrapper', true);
+			if (container.select('.legend').nodes().length === 0) {
+				container.append('ul').attr('class', 'legend');
 			}
 		}
 		return {chartID, container}
