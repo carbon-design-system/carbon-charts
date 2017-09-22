@@ -9,8 +9,12 @@ import {Charts} from '../index.ts'
 
 export namespace StackedBars {
 	export function drawChart(data, parent, options) {
-		let {chartID, container} = Charts.setChartIDContainer(parent)
-		Charts.setResizableWindow();
+		options.type = 'stackedBar';
+		let parentSelection = d3.select(parent);
+		let {chartID, container} = Charts.setChartIDContainer(parentSelection)
+		if (options.windowResizable) {
+			Charts.setResizableWindow();
+		}
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 
 		let svg = Charts.setSVG(data, container, options);
@@ -23,23 +27,18 @@ export namespace StackedBars {
 		Grid.drawYGrid(svg, yScale, options, data);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			Charts.setClickableLegend(data, parent, options)
+			Charts.setClickableLegend(data, parentSelection, options)
 		}
 		Charts.redrawFunctions[chartID] = {
 			self: this,
-			data, parent, options
+			data, parentSelection, options
 		}
 
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
-		setTooltip(chartID, svg);
+		Charts.addTooltipEventListener(parent, svg, svg.selectAll("rect"), reduceOpacity, Bars.resetBarOpacity);
 		if (options.containerResizable) {
 			Charts.setResizeWhenContainerChange(data, parent, options);
 		}
-	}
-
-	export function setTooltip(chartID, svg) {
-		Charts.setTooltip(chartID, Bars.resetBarOpacity);
-		Charts.addTooltipEventListener(chartID, svg, svg.selectAll("rect"), reduceOpacity);
 	}
 
 	export function draw(svg, xScale, yScale, options, data, activeSeries) {

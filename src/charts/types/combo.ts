@@ -12,15 +12,20 @@ import {Charts} from '../index.ts'
 
 export namespace Combo {
 	export function drawChart(data, parent, options) {
-		parent.style('padding-right', '80px')
-		let {chartID, container} = Charts.setChartIDContainer(parent)
-		Charts.setResizableWindow();
+		options.type = 'combo';
+		let parentSelection = d3.select(parent);
+		parentSelection.style('padding-right', '80px');
+		let {chartID, container} = Charts.setChartIDContainer(parentSelection)
+		if (options.windowResizable) {
+			Charts.setResizableWindow();
+		}
 
+		options.chartSize = Charts.getActualChartSize(data, container, options);
+		let svg = Charts.setSVG(data, container, options);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			Charts.setClickableLegend(data, parent, options)
+			Charts.setClickableLegend(data, parentSelection, options)
 		}
-		options.chartSize = Charts.getActualChartSize(data, container, options);
 		const activeSeries = <any>Charts.getActiveDataSeries(container);
 		const activeBar =  activeSeries.includes(options.yDomain[0]);
 		const activeLineSeries = activeBar ? activeSeries.slice(1, activeSeries.length) : activeSeries;
@@ -41,10 +46,9 @@ export namespace Combo {
 		})
 		Charts.redrawFunctions[chartID] = {
 			self: this,
-			data, parent, options
+			data, parentSelection, options
 		}
 
-		let svg = Charts.setSVG(data, container, options);
 		let xScaleBar = Charts.setXScale(barData, options);
 		let xScaleLine = Charts.setXScale(lineData, options);
 		let yScale = Charts.setYScale(barData, options, options.yDomain);
@@ -62,19 +66,13 @@ export namespace Combo {
 			Bars.draw(svg, xScaleBar, yScale, options, data, options.yDomain);
 		}
 		Lines.draw(svg, xScaleLine, yScaleLine, options, data, activeLineSeries);
-		setTooltip(chartID, svg);
+		Charts.addTooltipEventListener(parent, svg, svg.selectAll("rect"), reduceOpacity, resetLineBarOpacity);
+		Charts.addTooltipEventListener(parent, svg, svg.selectAll("circle"), reduceOpacity, resetLineBarOpacity);
 		if (options.containerResizable) {
 			Charts.setResizeWhenContainerChange(data, parent, options);
 		}
 	}
 }
-
-export function setTooltip(chartID, svg) {
-	Charts.setTooltip(chartID, resetLineBarOpacity);
-	Charts.addTooltipEventListener(chartID, svg, svg.selectAll("rect"), reduceOpacity);
-	Charts.addTooltipEventListener(chartID, svg, svg.selectAll("circle"), reduceOpacity);
-}
-
 
 function reduceOpacity(svg, exception) {
 	if (exception.tagName === "rect") {

@@ -14,10 +14,15 @@ let localData = <any>{};
 let localOptions = <any>{};
 
 export namespace Charts {
+	export const bars = Bars;
+	export const lines = Lines;
+	export const combo = Combo;
+	export const stackedBars = StackedBars;
+	export const doubleAxis = DoubleAxis;
 	export const margin = {
 		top: 20,
-		bottom: 50,
-		left: 70,
+		bottom: 60,
+		left: 90,
 		right: 20
 	};
 	export function getActualChartSize(data, container, options) {
@@ -43,8 +48,8 @@ export namespace Charts {
 	}
 	export function renderChart(data, container, options) {
 		localData = data;
-		container.classed("chart-wrapper", true);
-		container.append("div").attr("class", "legend");
+		container.classed('chart-wrapper', true);
+		container.append('div').attr('class', 'legend');
 		options.chartSize = getActualChartSize(data, container, options);;
 		localOptions = options;
 
@@ -77,45 +82,45 @@ export namespace Charts {
 			svgHeight = container.node().clientHeight - 100;
 		}
 		const chartSize = getActualChartSize(data, container, options);
-		let svg = container.append("svg")
-			.attr("width", svgWidth)
-			.attr("height", svgHeight)
-			.append("g")
-			.attr("class", "inner-wrap")
-			.attr("transform", `translate(${margin.left},${margin.top})`);
-		svg.append("g")
-			.attr("class", "y axis")
-			.attr("transform", `translate(0, 0)`);
-		svg.append("g")
-			.attr("class", "x axis")
-			.attr("transform", `translate(0, ${chartSize.height})`);
-		let grid = svg.append("g")
-			.attr("class", "grid")
-			.attr("clip-path", `url(${window.location.origin}${window.location.pathname}#clip)`);
-		grid.append("g")
-			.attr("class", "x grid")
-			.attr("transform", `translate(0, ${chartSize.width})`);
-		grid.append("g")
-			.attr("class", "y grid")
-			.attr("transform", `translate(0, 0)`);
+		let svg = container.append('svg')
+			.attr('width', svgWidth)
+			.attr('height', svgHeight)
+			.append('g')
+			.attr('class', 'inner-wrap')
+			.attr('transform', `translate(${margin.left},${margin.top})`);
+		svg.append('g')
+			.attr('class', 'y axis')
+			.attr('transform', `translate(0, 0)`);
+		svg.append('g')
+			.attr('class', 'x axis')
+			.attr('transform', `translate(0, ${chartSize.height})`);
+		let grid = svg.append('g')
+			.attr('class', 'grid')
+			.attr('clip-path', `url(${window.location.origin}${window.location.pathname}#clip)`);
+		grid.append('g')
+			.attr('class', 'x grid')
+			.attr('transform', `translate(0, ${chartSize.width})`);
+		grid.append('g')
+			.attr('class', 'y grid')
+			.attr('transform', `translate(0, 0)`);
 		return svg;
 	}
 
 	export function drawChart(data, container, options) {
 		switch (options.type) {
-			case "bar":
+			case 'bar':
 				Bars.drawChart(data, container, options);
 				break;
-			case "stackedBar":
+			case 'stackedBar':
 				StackedBars.drawChart(data, container, options);
 				break;
-			case "line":
+			case 'line':
 				Lines.drawChart(data, container, options);
 				break;
-			case "doubleAxis":
+			case 'doubleAxis':
 				DoubleAxis.drawChart(data, container, options);
 				break;
-			case "combo":
+			case 'combo':
 				Combo.drawChart(data, container, options);
 				break;
 			default:
@@ -125,18 +130,18 @@ export namespace Charts {
 	}
 
 	export function setTooltip(chartID, resetOpacity) {
-		const tooltip = d3.select("#tooltip-" + chartID);
+		const tooltip = d3.select('#tooltip-' + chartID);
 		if (tooltip.nodes().length < 1) {
-			let tooltip = d3.select("body").append("div")
-				.attr("class", "tooltip chart-tooltip")
-				.attr("id", "tooltip-" + chartID)
-				.style("display", "none");
-			tooltip.append("span")
-				.attr("class", "text-box")
+			let tooltip = d3.select('body').append('div')
+				.attr('class', 'tooltip chart-tooltip')
+				.attr('id', 'tooltip-' + chartID)
+				.style('display', 'none');
+			tooltip.append('span')
+				.attr('class', 'text-box')
 
 			addCloseBtn(tooltip, 'xs')
 				.on('click', () => {
-					Tooltip.hide()
+					d3.selectAll('.tooltip').remove();
 					resetOpacity();
 				})
 		}
@@ -150,19 +155,19 @@ export namespace Charts {
 			.attr('type', 'button')
 			.attr('aria-label', 'Close')
 			.append('svg').attr('class', 'close_icon')
-			.append('use').attr('href', 'https://peretz-icons.mybluemix.net/core_set.svg#x_12')
+			.append('use').attr('href', '#x_12')
 		return closeBtn;
 	}
 
-	export function addTooltipEventListener(chartID, svg, elements, reduceOpacity) {
-		elements.on("click", function(d) {
-			Tooltip.showTooltip(chartID, d)
+	export function addTooltipEventListener(parent, svg, elements, reduceOpacity, resetBarOpacity) {
+		elements.on('click', function(d) {
+			Tooltip.showTooltip(parent, d, resetBarOpacity)
 			reduceOpacity(svg, this)
 		})
 	}
 
 	export function setResizableWindow() {
-		d3.select(window).on("resize", debounce(() => {
+		d3.select(window).on('resize', debounce(() => {
 			resizeTimers.forEach(id => {
 				window.clearTimeout(id);
 				resizeTimers = [];
@@ -174,15 +179,15 @@ export namespace Charts {
 	export let resizeTimers = [];
 
 	export function setResizeWhenContainerChange(data, container, options) {
-		let containerWidth = container.node().clientWidth;
-		let containerHeight = container.node().clientHeight;
+		let containerWidth = container.clientWidth;
+		let containerHeight = container.clientHeight;
 		let intervalId = setInterval(resizeTimer, 800);
 		resizeTimers.push(intervalId);
 		function resizeTimer() {
-			if (Math.abs(containerWidth - container.node().clientWidth) > 20
-				|| Math.abs(containerHeight - container.node().clientHeight) > 20) {
-		  	containerWidth = container.node().clientWidth;
-		  	containerHeight = container.node().clientHeight;
+			if (Math.abs(containerWidth - container.clientWidth) > 20
+				|| Math.abs(containerHeight - container.clientHeight) > 20) {
+		  	containerWidth = container.clientWidth;
+		  	containerHeight = container.clientHeight;
 		  	debounce(() => {
   				window.clearTimeout(intervalId);
   				drawChart(data, container, options);
@@ -215,7 +220,7 @@ export namespace Charts {
 
 	function redrawAll() {
 		Object.keys(redrawFunctions).forEach((chart) => {
-			redrawFunctions[chart].self.drawChart(redrawFunctions[chart].data, redrawFunctions[chart].parent, redrawFunctions[chart].options)
+			redrawFunctions[chart].self.drawChart(redrawFunctions[chart].data, redrawFunctions[chart].parentSelection.node(), redrawFunctions[chart].options)
 		})
 	}
 
@@ -239,20 +244,20 @@ export namespace Charts {
 	}
 
 	export function setClickableLegend(data, parent, options) {
-		parent.selectAll(".legend-btn").each(function(d, i) {
-			d3.select(this).on("click", function(d) {
+		parent.selectAll('.legend-btn').each(function(d, i) {
+			d3.select(this).on('click', function(d) {
 				Legend.updateLegend(this);
-				drawChart(data, parent, options);
+				drawChart(data, parent.node(), options);
 			});
 		})
 	}
 
 	export function setClickableLegendInTooltip(data, parent, options) {
-		const tooltip = parent.select(".legend-tooltip-content")
-		tooltip.selectAll(".legend-btn").each(function(d, i) {
-			d3.select(this).on("click", function(d) {
+		const tooltip = parent.select('.legend-tooltip-content')
+		tooltip.selectAll('.legend-btn').each(function(d, i) {
+			d3.select(this).on('click', function(d) {
 				Legend.updateLegend(this);
-				drawChart(data, d3.select(parent.node().parentNode), options);
+				drawChart(data, parent.node().parentNode, options);
 			});
 		})
 	}
@@ -263,28 +268,28 @@ export namespace Charts {
 
 	export function getActiveDataSeries(container) {
 		const activeSeries = [];
-		if (container.selectAll(".legend-tooltip").nodes().length > 0) {
-			container = container.select(".legend-tooltip");
+		if (container.selectAll('.legend-tooltip').nodes().length > 0) {
+			container = container.select('.legend-tooltip');
 		}
-		container.selectAll(".legend-btn").filter(".active").each(function(b) {
-			activeSeries.push(d3.select(this).select("text").text())
+		container.selectAll('.legend-btn').filter('.active').each(function(b) {
+			activeSeries.push(d3.select(this).select('text').text())
 		})
 		return activeSeries;
 	}
 
 	export function setChartIDContainer(parent) {
 		let chartID, container;
-		if (parent.select(".chart-wrapper").nodes().length > 0) {
-			container = parent.select(".chart-wrapper")
-			chartID = container.attr("chart-id");
+		if (parent.select('.chart-wrapper').nodes().length > 0) {
+			container = parent.select('.chart-wrapper')
+			chartID = container.attr('chart-id');
 			container.selectAll('svg').remove();
 		} else {
 			chartID = Charts.setUniqueID();
 			container = parent.append('div')
-			container.attr("chart-id", chartID)
-				.classed("chart-wrapper", true);
-			if (container.select(".legend").nodes().length === 0) {
-				container.append("ul").attr("class", "legend");
+			container.attr('chart-id', chartID)
+				.classed('chart-wrapper', true);
+			if (container.select('.legend').nodes().length === 0) {
+				container.append('ul').attr('class', 'legend');
 			}
 		}
 		return {chartID, container}

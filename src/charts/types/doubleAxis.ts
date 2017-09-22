@@ -14,19 +14,23 @@ let localData = <any>{};
 let localOptions = <any>{};
 export namespace DoubleAxis {
 	export function drawChart(data, parent, options) {
-		parent.style('padding-right', '80px')
-		let {chartID, container} = Charts.setChartIDContainer(parent)
-		Charts.setResizableWindow()
+		options.type = 'doubleAxis';
+		let parentSelection = d3.select(parent);
+		parentSelection.style('padding-right', '80px');
+		let {chartID, container} = Charts.setChartIDContainer(parentSelection)
+		if (options.windowResizable) {
+			Charts.setResizableWindow();
+		}
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 		localOptions = options;
+		let svg = Charts.setSVG(data, container, options);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			Charts.setClickableLegend(data, parent, options)
+			Charts.setClickableLegend(data, parentSelection, options)
 		}
 		const activeSeries = <any>Charts.getActiveDataSeries(container);
 		const y1ActiveSeries = options.yDomain.filter(val => activeSeries.includes(val))
 		const y2ActiveSeries = options.y2Domain.filter(val => activeSeries.includes(val))
-		let svg = Charts.setSVG(data, container, options);
 		let xScale = Charts.setXScale(data, options);
 		let yScale = Charts.setYScale(data, options, y1ActiveSeries);
 		let y2Scale = Charts.setYScale(data, options, y2ActiveSeries);
@@ -40,11 +44,11 @@ export namespace DoubleAxis {
 		Axis.drawY2Axis(svg, y2Scale, options, data);
 		Charts.redrawFunctions[chartID] = {
 			self: this,
-			data, parent, options
+			data, parentSelection, options
 		}
 		Lines.draw(svg, xScale, yScale, options, data, y1ActiveSeries);
 		Lines.draw(svg, xScale, y2Scale, options, data, y2ActiveSeries);
-		Lines.setTooltip(chartID, svg);
+		Charts.addTooltipEventListener(parent, svg, svg.selectAll("circle"), Lines.reduceOpacity, Lines.resetLineOpacity);
 		if (options.containerResizable) {
 			Charts.setResizeWhenContainerChange(data, parent, options);
 		}
