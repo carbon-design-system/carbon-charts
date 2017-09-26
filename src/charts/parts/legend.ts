@@ -31,8 +31,7 @@ export namespace Legend {
 	export function addLegend(container, data, options) {
 		let legendItems = getLegendItems(data, options)
 		let legend = container.select(".legend")
-					.attr("font-size", 10)
-					.style("max-width", container.select('svg').node().clientWidth)
+					.attr("font-size", 12)
 				.selectAll("div")
 				.data(legendItems)
 				.enter().append("li")
@@ -83,7 +82,7 @@ export namespace Legend {
 
 	function addTooltipOpenBtn(container, legendItems, options, data) {
 		const thisLegend = container.select(".legend");
-		thisLegend.append("span").text('+')
+		thisLegend.append("div")
 			.attr("class", "expand-btn")
 			.on("click", function() {
 				openLegendTooltip(this, container, legendItems, options, data)
@@ -104,7 +103,7 @@ export namespace Legend {
 			.attr("class", "legend-tooltip-header")
 		tooltip.append('ul')
 			.attr("class", "legend-tooltip-content")
-			.attr("font-size", 10)
+			.attr("font-size", 12)
 
 		Charts.addCloseBtn(tooltip, 'md', 'white')
 		  .on("click", () => {
@@ -112,7 +111,7 @@ export namespace Legend {
   		});
 
 		const legendContent = d3.select(".legend-tooltip-content")
-			.attr("font-size", 10)
+			.attr("font-size", 12)
 		.selectAll("div")
 		.data(legendItems)
 		.enter().append("li")

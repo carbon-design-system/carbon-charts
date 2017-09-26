@@ -26,18 +26,22 @@ export namespace Charts {
 		right: 20
 	};
 	export function getActualChartSize(data, container, options) {
-		let ratio, marginForLegendTop;
+		let ratio, marginForLegendTop
+		let moreForY2Axis = 0;
 		if (container.node().clientWidth > 600 &&
 			Legend.getLegendItems(data, options).length > 4) {
-			ratio = 0.6;
+			ratio = 0.7;
 			marginForLegendTop = 50;
 		} else {
 			marginForLegendTop = 100;
 			ratio = 1
 		}
+		if (options.type === "doubleAxis" || options.type === "combo") {
+			moreForY2Axis = 70;
+		}
 		return {
 			height: container.node().clientHeight - margin.top - margin.bottom - marginForLegendTop,
-			width: (container.node().clientWidth - margin.left - margin.right) * ratio
+			width: (container.node().clientWidth - margin.left - margin.right - moreForY2Axis) * ratio
 		}
 	}
 	export function updateData(data) {
@@ -75,7 +79,7 @@ export namespace Charts {
 		let svgWidth, svgHeight;
 		if (container.node().clientWidth > 600 &&
 			Legend.getLegendItems(data, options).length > 4) {
-			svgWidth = container.node().clientWidth * 0.6
+			svgWidth = container.node().clientWidth * 0.7
 			svgHeight = container.node().clientHeight;
 		} else {
 			svgWidth = container.node().clientWidth
@@ -87,7 +91,7 @@ export namespace Charts {
 			.attr('height', svgHeight)
 			.append('g')
 			.attr('class', 'inner-wrap')
-			.attr('transform', `translate(${margin.left},${margin.top})`);
+			.attr('transform', `translate(${margin.left},0)`);
 		svg.append('g')
 			.attr('class', 'y axis')
 			.attr('transform', `translate(0, 0)`);

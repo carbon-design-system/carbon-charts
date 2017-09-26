@@ -27,6 +27,7 @@ export namespace Grid {
 			.attr("stroke", "#ECEEEF");
 		g.selectAll("text").remove();
 		g.select(".domain").remove();
+		g.select(".tick").remove();
 	}
 }
 
