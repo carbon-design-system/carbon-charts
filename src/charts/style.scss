@@ -64,13 +64,14 @@
 
 	.legend-tooltip {
 		padding: 0;
+		border: none;
 		width: 200px;
 		.legend-tooltip-header {
-			background: #4178BE;
+			background: #2D74DA;
 			color: white;
 			font-size: 15px;
 			font-weight: 700;
-			padding: 10px;
+			padding: 13px 20px;
 			margin: 0;
 		}
 		.legend-btn {
@@ -78,7 +79,7 @@
 			width: 100%;
 		}
 		text {
-			max-width: 160px;
+			max-width: 145px;
 		}
 		button {
 			position: absolute;
@@ -87,7 +88,13 @@
 		}
 		.legend-tooltip-content {
 			padding-left: 0;
-			margin-top: 1rem;
+			margin: 20px 5px 20px;
+		}
+		.arrow-right {
+		  border-left: 11px solid #2D74DA;
+		}
+		.arrow-left {
+		  border-right: 10px solid #2D74DA;
 		}
 	}
 
@@ -100,15 +107,17 @@
 		padding-left: 25px;
 		white-space: inherit;
 		text {
-			text-overflow: initial;
-			overflow: inherit;
+			padding-left: 15px;
 		}
 		.legend-btn {
 			width: 100%;
 			text-indent: -.7em;
+			text {
+				max-width: 90%;
+			}
 		}
 		.legend-circle {
-			margin: 0 15px;
+			margin: 5px;
 		}
 	}
 
@@ -117,6 +126,9 @@
 			fill: #959595;
 			stroke: #959595;
 			stroke-width: .3;
+		}
+		tspan {
+			cursor: pointer;
 		}
 	}
 }
@@ -128,7 +140,7 @@
 	font-size: 12px;
 	position: absolute;
 	padding: 10px 20px 10px 10px;
-	border-top: 4px solid #4178BE;
+	border-top: 4px solid #2D74DA;
 	max-width: 200px;
 	word-wrap: break-word;
 	z-index: 1059;
