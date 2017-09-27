@@ -16,7 +16,6 @@ export namespace DoubleAxis {
 	export function drawChart(data, parent, options) {
 		options.type = 'doubleAxis';
 		let parentSelection = d3.select(parent);
-		parentSelection.style('padding-right', '80px');
 		let {chartID, container} = Charts.setChartIDContainer(parentSelection)
 		if (options.windowResizable) {
 			Charts.setResizableWindow();

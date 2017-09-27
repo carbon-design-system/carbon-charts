@@ -60,7 +60,8 @@ export namespace Bars {
 				series: key,
 				key: d[options.xDomain],
 				value: d[key],
-				formatter: options.yFormatter
+				formatter: options.yFormatter,
+				color: color(key)
 			})))
 			.enter().append("rect")
 				.attr("x", d => x1(d.series))
@@ -76,7 +77,7 @@ export namespace Bars {
 		svg.selectAll("rect")
 			.on('mouseover', function (d) {
 				d3.select(this)
-	      	.attr("stroke-width", 4)
+	      	.attr("stroke-width", 6)
 	      	.attr("stroke", color(d.series))
 	      	.attr("stroke-opacity", 0.5)
 	    })

@@ -29,10 +29,10 @@ export namespace Legend {
 	}
 
 	export function addLegend(container, data, options) {
+		const svgWidth = container.select('svg').node().clientWidth;
 		let legendItems = getLegendItems(data, options)
 		let legend = container.select(".legend")
-					.attr("font-size", 10)
-					.style("max-width", container.select('svg').node().clientWidth)
+					.attr("font-size", 12)
 				.selectAll("div")
 				.data(legendItems)
 				.enter().append("li")
@@ -48,11 +48,15 @@ export namespace Legend {
 		container.selectAll(".legend-btn").style("display", "inline-block")
 		if (hasLegendExpandBtn(container, legendItems)) {
 			container.select(".legend").classed("right-legend", false)
-			let numberOfLegendAvail = Math.floor((container.node().clientWidth) / 130)
 			let btns = container.selectAll(".legend-btn").nodes();
-			for (let i = numberOfLegendAvail + 1; i < legendItems.length; i++) {
-				d3.select(btns[i]).style("display", "none")
-			}
+			let btnsWidth = 0;
+			btns.forEach(btn => {
+				if ((btnsWidth + btn.clientWidth + 15) > svgWidth) {
+					d3.select(btn).style("display", "none")
+				} else {
+					btnsWidth += btn.clientWidth;
+				}
+			})
 			if (container.select(".expand-btn").nodes().length === 0) {
 				addTooltipOpenBtn(container, legendItems, options, data)
 			}
@@ -83,7 +87,7 @@ export namespace Legend {
 
 	function addTooltipOpenBtn(container, legendItems, options, data) {
 		const thisLegend = container.select(".legend");
-		thisLegend.append("span").text('+')
+		thisLegend.append("div")
 			.attr("class", "expand-btn")
 			.on("click", function() {
 				openLegendTooltip(this, container, legendItems, options, data)
@@ -104,7 +108,7 @@ export namespace Legend {
 			.attr("class", "legend-tooltip-header")
 		tooltip.append('ul')
 			.attr("class", "legend-tooltip-content")
-			.attr("font-size", 10)
+			.attr("font-size", 12)
 
 		Charts.addCloseBtn(tooltip, 'md', 'white')
 		  .on("click", () => {
@@ -112,7 +116,7 @@ export namespace Legend {
   		});
 
 		const legendContent = d3.select(".legend-tooltip-content")
-			.attr("font-size", 10)
+			.attr("font-size", 12)
 		.selectAll("div")
 		.data(legendItems)
 		.enter().append("li")

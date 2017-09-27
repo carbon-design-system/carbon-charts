@@ -21,7 +21,6 @@
 }
 
 .resizable {
-  overflow: scroll;
   resize: both;
 }
 .demo-title {
@@ -39,15 +38,6 @@
 	h3 {
 		border-bottom: 1px solid lightgray;
 		margin: 0;
-	}
-
-	svg {
-		.inner-wrap {
-			width: 100%;
-		}
-		circle:hover {
-			filter: drop-shadow( -5px -5px 5px #000 );
-		}
 	}
 }
 

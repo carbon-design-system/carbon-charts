@@ -74,7 +74,8 @@ export namespace Lines {
 				value: d[value],
 				dimension: options.dimension,
 				dimVal: d[options.dimension],
-				formatter: options.yFormatter
+				formatter: options.yFormatter,
+				color: color(colorKey)
 			}));
 			const series = svg.append("g");
 			series.append("path")
@@ -110,7 +111,7 @@ export namespace Lines {
 					series.append("circle").attr("class", "hover-glow")
 	        	.attr("r", 5.5)
 	        	.attr("fill", "none")
-	        	.attr("stroke-width", 2)
+	        	.attr("stroke-width", 4)
 	        	.attr("stroke", color(colorKey))
 	        	.attr("stroke-opacity", 0.5)
 	        	.attr("cx", this.cx.baseVal.value)

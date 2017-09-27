@@ -35,7 +35,14 @@ export namespace Tooltip {
 		d3.selectAll(".tooltip").remove();
 		let tooltip = d3.select(container).append("div")
 			.attr("class", "tooltip chart-tooltip")
-			.style("top", d3.mouse(container)[1] + "px")
+			.style("top", d3.mouse(container)[1] - 22 + "px")
+			.style("border-color", d.color)
+		Charts.addCloseBtn(tooltip, 'xs')
+			.on('click', () => {
+				resetOpacityFunctions.forEach(f => f());
+				resetOpacityFunctions = [];
+				d3.selectAll(".tooltip").remove();
+			})
 		const dVal = d.formatter && d.formatter[d.series] ? d.formatter[d.series](d.value.toLocaleString()) : d.value.toLocaleString();
 		let tooltipHTML = "<b>" + d.xAxis + ": </b>" + d.key + "<br/><b>" + d.series + ": </b>" + dVal;
 		if (d.dimension) {
@@ -43,15 +50,11 @@ export namespace Tooltip {
 		}
 		tooltip.append('div').attr('class', "text-box").html(tooltipHTML);
 		if (d3.mouse(container)[0] + tooltip.node().clientWidth > container.clientWidth) {
-			tooltip.style("left", d3.mouse(container)[0] - tooltip.node().clientWidth + "px");
+			tooltip.style("left", d3.mouse(container)[0] - tooltip.node().clientWidth - 12 + "px");
+			tooltip.append('div').attr('class', 'arrow arrow-right')
 		} else {
-			tooltip.style("left", d3.mouse(container)[0] + "px");
+			tooltip.style("left", d3.mouse(container)[0] + 11 + "px");
+			tooltip.append('div').attr('class', 'arrow arrow-left')
 		}
-		Charts.addCloseBtn(tooltip, 'xs')
-			.on('click', () => {
-				resetOpacityFunctions.forEach(f => f());
-				resetOpacityFunctions = [];
-				d3.selectAll(".tooltip").remove();
-			})
 	}
 }

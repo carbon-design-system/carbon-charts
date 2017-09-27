@@ -59,7 +59,8 @@ export namespace StackedBars {
 					y0: y0,
 					y1: y0 += +d[seriesVal],
 					value: d[seriesVal],
-					formatter: options.yFormatter
+					formatter: options.yFormatter,
+					color: color(seriesVal)
 				};
 			});
 			d.total = options.yDomain.map(val => d[val]).reduce((acc, cur) => acc + cur, 0);
@@ -83,6 +84,22 @@ export namespace StackedBars {
 			.ease(d3.easePolyOut, 0.5)
 			.attr("y", d => yScale(d.y1))
 			.attr("height", d => yScale(d.y0) - yScale(d.y1))
+
+		svg.selectAll("rect")
+			.on('mouseover', function (d) {
+				d3.select(this)
+					.attr("stroke-width", 6)
+					.attr("stroke", color(d.series))
+					.attr("stroke-opacity", 0.5)
+					.attr("z-index", 1)
+			})
+			.on('mouseout', function (d) {
+				d3.select(this)
+					.attr("stroke-width", 0)
+					.attr("stroke", "none")
+					.attr("stroke-opacity", 1)
+					.attr("z-index", 0)
+			})
 	}
 }
 
