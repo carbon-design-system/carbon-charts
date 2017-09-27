@@ -29,7 +29,10 @@ export namespace Legend {
 	}
 
 	export function addLegend(container, data, options) {
-		const svgWidth = container.select('svg').node().clientWidth;
+		if (container.select('.legend-tooltip').nodes().length > 0) {
+			return
+		}
+		const svgWidth = container.select('svg').node().width.baseVal.value;
 		let legendItems = getLegendItems(data, options)
 		let legend = container.select(".legend")
 					.attr("font-size", 12)
@@ -98,17 +101,23 @@ export namespace Legend {
 		d3.selectAll(".legend-tooltip").remove();
 		const mouseXPoint = d3.mouse(container.node())[0];
 		const windowXPoint = d3.event.x;
-		let leftPos = window.innerWidth - (windowXPoint + 200) < 0 ? mouseXPoint - 200 : mouseXPoint;
 		let tooltip = container.append("div")
 			.attr("class", "tooltip legend-tooltip")
 			.style("display", "block")
-			.style("left", leftPos + "px")
-			.style("top", (d3.mouse(container.node())[1]) + "px");
+			.style("top", (d3.mouse(container.node())[1] - 19) + "px");
 		tooltip.append("p").text("Legend")
 			.attr("class", "legend-tooltip-header")
 		tooltip.append('ul')
 			.attr("class", "legend-tooltip-content")
 			.attr("font-size", 12)
+
+		if (window.innerWidth - (windowXPoint + 200) < 0) {
+			tooltip.append('div').attr('class', 'arrow arrow-right')
+			tooltip.style("left", mouseXPoint - 210 + "px")
+		} else {
+			tooltip.append('div').attr('class', 'arrow arrow-left')
+			tooltip.style("left", mouseXPoint + 10 + "px")
+		}
 
 		Charts.addCloseBtn(tooltip, 'md', 'white')
 		  .on("click", () => {
