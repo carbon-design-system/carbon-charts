@@ -40,24 +40,27 @@ export namespace Axis {
 		if (options.yFormatter && options.yFormatter[options.y2Domain[0]]) {
 			addUnits(g.selectAll('text'), options.yFormatter[options.y2Domain[0]]);
 		}
-		const tickWidth = getLargestTickWidth(g.selectAll('.tick')) + 12;
+		const tickWidth = getLargestTickWidth(g.selectAll('.tick')) + 15;
 		const label = options.y2Domain.join(", ");
 		let axisLabel = appendYAxisLabel(g, svg, tickWidth, label, options, "y2")
 	}
 
 	function appendYAxisLabel(g, svg, tickWidth, label, options, labelNum) {
 		const axisLabel = g.append("text")
-		  .attr("transform", "translate(" + tickWidth + ","+(options.chartSize.height/2)+")rotate(-90)")
 		  .attr("dy", "0.71em")
 		  .attr("class", labelNum + " axis-label")
 		  .attr("text-anchor", "middle")
 		  .text(label)
 	  if (axisLabel.node().getBBox().width > axisConstants.maxWidthOfAxisLabel) {
+	  	const marginToTicks = labelNum === "y" ? -10 : 7;
+		  axisLabel.attr("transform", "translate(" + (tickWidth + axisLabel.node().getBBox().height + marginToTicks) + ","+(options.chartSize.height/2)+")rotate(-90)")
 			const wrappedLabel = wrapLabel(axisLabel);
 			wrappedLabel.on('click', d => {
 				const leftAxis = labelNum === "y"
 				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, label, leftAxis)
 			})
+		} else {
+		  axisLabel.attr("transform", "translate(" + tickWidth + ","+(options.chartSize.height/2)+")rotate(-90)")
 		}
 		return axisLabel;
 	}
