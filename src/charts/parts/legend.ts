@@ -86,8 +86,8 @@ export namespace Legend {
 
 	export function updateLegend(legend) {
 		const thisLegend = d3.select(legend);
-	 	const circle = d3.select(legend).select(".legend-circle");
-	 	const text = d3.select(legend).select("text");
+		const circle = d3.select(legend).select(".legend-circle");
+		const text = d3.select(legend).select("text");
 		thisLegend.classed("active", !thisLegend.classed("active"));
 		if (thisLegend.classed("active")) {
 			circle.style("background-color", circle.style("border-color"))
@@ -134,9 +134,9 @@ export namespace Legend {
 		}
 
 		Charts.addCloseBtn(tooltip, 'md', 'white')
-		  .on("click", () => {
-  			d3.selectAll(".legend-tooltip").remove();
-  		});
+			.on("click", () => {
+				d3.selectAll(".legend-tooltip").remove();
+			});
 
 		const legendContent = d3.select(".legend-tooltip-content")
 			.attr("font-size", 12)

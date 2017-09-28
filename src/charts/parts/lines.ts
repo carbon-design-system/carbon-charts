@@ -33,6 +33,9 @@ export namespace Lines {
 			data, parentSelection, options
 		}
 
+
+		svg.attr("width", container.select('.inner-wrap').node().getBBox().width)
+		svg.attr("height", container.select('.inner-wrap').node().getBBox().height)
 		Legend.positionLegend(container, data, options);
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
 		Charts.addTooltipEventListener(parent, svg, svg.selectAll("circle"), reduceOpacity, resetLineOpacity);
@@ -110,17 +113,17 @@ export namespace Lines {
 			series.selectAll("circle")
 				.on('mouseover', function (d) {
 					series.append("circle").attr("class", "hover-glow")
-	        	.attr("r", 5.5)
-	        	.attr("fill", "none")
-	        	.attr("stroke-width", 4)
-	        	.attr("stroke", color(colorKey))
-	        	.attr("stroke-opacity", 0.5)
-	        	.attr("cx", this.cx.baseVal.value)
-	        	.attr("cy", this.cy.baseVal.value)
-	      })
-	      .on('mouseout', function (d) {
-	      	svg.selectAll(".hover-glow").remove();
-	      });
+						.attr("r", 5.5)
+						.attr("fill", "none")
+						.attr("stroke-width", 4)
+						.attr("stroke", color(colorKey))
+						.attr("stroke-opacity", 0.5)
+						.attr("cx", this.cx.baseVal.value)
+						.attr("cy", this.cy.baseVal.value)
+				})
+				.on('mouseout', function (d) {
+					svg.selectAll(".hover-glow").remove();
+				});
 		});
 
 	}

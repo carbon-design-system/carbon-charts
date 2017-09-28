@@ -8,7 +8,7 @@ export namespace Axis {
 		maxTickLetNum: 28
 	}
 
-  export function drawYAxis(svg, yScale, options, data) {
+	export function drawYAxis(svg, yScale, options, data) {
 		let maxWidth = 0;
 		const yAxis = d3.axisLeft(yScale)
 		setTickStyle(yAxis, options.yTicks)
@@ -23,12 +23,12 @@ export namespace Axis {
 		const label = options.yDomain.join(", ");
 
 		let axisLabel = appendYAxisLabel(g, svg, -tickWidth, label, options, "y")
-		  .attr("class", "y axis-label")
+			.attr("class", "y axis-label")
 	}
 
-  export function drawY2Axis(svg, yScale, options, data) {
-  	svg.append("g")
-  		.attr("class", "y2 axis")
+	export function drawY2Axis(svg, yScale, options, data) {
+		svg.append("g")
+			.attr("class", "y2 axis")
 		let maxWidth = 0;
 		const yAxis = d3.axisRight(yScale)
 		setTickStyle(yAxis, options.y2Ticks)
@@ -47,25 +47,25 @@ export namespace Axis {
 
 	function appendYAxisLabel(g, svg, tickWidth, label, options, labelNum) {
 		const axisLabel = g.append("text")
-		  .attr("dy", "0.71em")
-		  .attr("class", labelNum + " axis-label")
-		  .attr("text-anchor", "middle")
-		  .text(label)
-	  if (axisLabel.node().getBBox().width > axisConstants.maxWidthOfAxisLabel) {
-	  	const marginToTicks = labelNum === "y" ? -10 : 7;
-		  axisLabel.attr("transform", "translate(" + (tickWidth + axisLabel.node().getBBox().height + marginToTicks) + ","+(options.chartSize.height/2)+")rotate(-90)")
+			.attr("dy", "0.71em")
+			.attr("class", labelNum + " axis-label")
+			.attr("text-anchor", "middle")
+			.text(label)
+		if (axisLabel.node().getBBox().width > axisConstants.maxWidthOfAxisLabel) {
+			const marginToTicks = labelNum === "y" ? -10 : 7;
+			axisLabel.attr("transform", "translate(" + (tickWidth + axisLabel.node().getBBox().height + marginToTicks) + ","+(options.chartSize.height/2)+")rotate(-90)")
 			const wrappedLabel = wrapLabel(axisLabel);
 			wrappedLabel.on('click', d => {
 				const leftAxis = labelNum === "y"
 				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, label, leftAxis)
 			})
 		} else {
-		  axisLabel.attr("transform", "translate(" + tickWidth + ","+(options.chartSize.height/2)+")rotate(-90)")
+			axisLabel.attr("transform", "translate(" + tickWidth + ","+(options.chartSize.height/2)+")rotate(-90)")
 		}
 		return axisLabel;
 	}
 
-  export function drawXAxis(svg, xScale, options, data) {
+	export function drawXAxis(svg, xScale, options, data) {
 		let xAxis = d3.axisBottom(xScale)
 			.tickSizeInner(0)
 			.tickSizeOuter(0);
@@ -85,10 +85,10 @@ export namespace Axis {
 
 		const tickHeight = getLargestTickHeight(g.selectAll('.tick')) + 16;
 		g.append("text")
-		  .attr("class", "x axis-label")
-		  .attr("text-anchor", "middle")
-		  .attr("transform", "translate("+ (options.chartSize.width/2) +","+ tickHeight +")")
-		  .text(options.xDomain);
+			.attr("class", "x axis-label")
+			.attr("text-anchor", "middle")
+			.attr("transform", "translate("+ (options.chartSize.width/2) +","+ tickHeight +")")
+			.text(options.xDomain);
 	}
 
 	function wrapLabel(label) {
@@ -170,5 +170,3 @@ export namespace Axis {
 			.ticks(tickNum);
 	}
 }
-
-
