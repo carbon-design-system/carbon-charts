@@ -36,8 +36,8 @@ let longDataOptions = {
 
 let doubleYAxisOptions = {
 	xDomain: "Part number",
-	yDomain: ["Qty"],
-	y2Domain: ["Sold", "More"],
+	yDomain: ["Total"],
+	y2Domain: ["Returned", "Defects", "This is an extra long long long legend", "Number of sold products"],
 	yTicks: 5,
 	y2Ticks: 10,
 	legendClickable: true,
@@ -104,7 +104,7 @@ const data = [
 		"Sold": 300000
 	},
 	{
-		"Part number": "773C-XKB5L",
+		"Part number": "773C-XKB5-L6EP-L22I-P66EP-L22I",
 		"Qty": 800000,
 		"More": 35000,
 		"Sold": 390000
@@ -236,7 +236,7 @@ const chartTypes = [
 		name: 'Combo',
 		avail: true,
 		options: doubleYAxisOptions,
-		data
+		data: longData
 	}
 ];
 
