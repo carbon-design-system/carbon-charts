@@ -32,7 +32,6 @@ export namespace Legend {
 		if (container.select('.legend-tooltip').nodes().length > 0) {
 			return
 		}
-		const svgWidth = container.select('svg').node().width.baseVal.value;
 		let legendItems = getLegendItems(data, options)
 		let legend = container.select(".legend")
 					.attr("font-size", 12)
@@ -48,9 +47,28 @@ export namespace Legend {
 
 				legend.append("text")
 					.text(d => d);
+	}
+
+	export function positionLegend(container, data, options) {
+		if (container.select('.legend-tooltip').nodes().length > 0) {
+			return
+		}
 		container.selectAll(".legend-btn").style("display", "inline-block")
-		if (hasLegendExpandBtn(container, legendItems)) {
+		const svgWidth = container.select('.inner-wrap').node().getBBox().width;
+		if (isLegendOnRight(container, getLegendItems(data, options))) {
+			container.selectAll(".expand-btn").remove();
+			container.select(".legend-wrapper").style("height", 0);
+			const containerWidth = container.node().clientWidth;
+			const legendWidth = containerWidth - svgWidth;
+			container.select(".legend").classed("right-legend", true)
+				.style("width", legendWidth - 10)
+		} else {
+			container.select(".legend-wrapper").style("height", 40);
+		}
+
+		if (hasLegendExpandBtn(container, getLegendItems(data, options))) {
 			container.select(".legend").classed("right-legend", false)
+				.style("width", null)
 			let btns = container.selectAll(".legend-btn").nodes();
 			let btnsWidth = 0;
 			btns.forEach(btn => {
@@ -61,12 +79,8 @@ export namespace Legend {
 				}
 			})
 			if (container.select(".expand-btn").nodes().length === 0) {
-				addTooltipOpenBtn(container, legendItems, options, data)
+				addTooltipOpenBtn(container, getLegendItems(data, options), options, data)
 			}
-		} else if (isLegendOnRight(container, legendItems)) {
-			container.selectAll(".expand-btn").remove();
-			container.select(".legend").classed("right-legend", true)
-				.style("width", container.node().clientWidth * 0.3)
 		}
 	}
 
