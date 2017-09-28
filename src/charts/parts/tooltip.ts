@@ -9,7 +9,7 @@ export namespace Tooltip {
 		const mouseXPoint = d3.mouse(container)[0] + 10;
 		let tooltip = d3.select(container).append("div")
 			.attr("class", "tooltip label-tooltip")
-			.style("top", d3.mouse(container)[1] - 19 + "px")
+			.style("top", d3.mouse(container)[1] - 21 + "px")
 		Charts.addCloseBtn(tooltip, 'xs')
 			.on('click', () => {
 				resetOpacityFunctions.forEach(f => f());
@@ -22,7 +22,7 @@ export namespace Tooltip {
 			tooltip.style("left", mouseXPoint + "px");
 			tooltip.append('div').attr('class', 'arrow arrow-left')
 		} else {
-			const xPoint = mouseXPoint - tooltip.node().clientWidth;
+			const xPoint = mouseXPoint - tooltip.node().clientWidth - 20;
 			tooltip.style("left", xPoint + "px");
 			tooltip.append('div').attr('class', 'arrow arrow-right')
 		}
