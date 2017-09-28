@@ -33,7 +33,7 @@ export namespace StackedBars {
 			self: this,
 			data, parentSelection, options
 		}
-
+		Legend.positionLegend(container, data, options);
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
 		Charts.addTooltipEventListener(parent, svg, svg.selectAll("rect"), reduceOpacity, Bars.resetBarOpacity);
 		if (options.containerResizable) {

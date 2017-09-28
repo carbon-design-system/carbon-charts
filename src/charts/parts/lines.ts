@@ -33,6 +33,7 @@ export namespace Lines {
 			data, parentSelection, options
 		}
 
+		Legend.positionLegend(container, data, options);
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
 		Charts.addTooltipEventListener(parent, svg, svg.selectAll("circle"), reduceOpacity, resetLineOpacity);
 		if (options.containerResizable) {

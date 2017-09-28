@@ -26,8 +26,6 @@ export namespace Combo {
 			Charts.setClickableLegend(data, parentSelection, options)
 		}
 		const activeSeries = <any>Charts.getActiveDataSeries(container);
-		const activeBar =  activeSeries.includes(options.yDomain[0]);
-		const activeLineSeries = activeBar ? activeSeries.slice(1, activeSeries.length) : activeSeries;
 
 		const barData = [];
 		const lineData = [];
@@ -47,7 +45,8 @@ export namespace Combo {
 			self: this,
 			data, parentSelection, options
 		}
-
+		const activeBar =  activeSeries.includes(options.yDomain[0]);
+		const activeLineSeries = activeBar ? activeSeries.slice(1, activeSeries.length) : activeSeries;
 		let xScaleBar = Charts.setXScale(barData, options);
 		let xScaleLine = Charts.setXScale(lineData, options);
 		let yScale = Charts.setYScale(barData, options, options.yDomain);
@@ -60,7 +59,7 @@ export namespace Combo {
 		Axis.drawY2Axis(svg, y2Scale, options, lineData);
 		Grid.drawXGrid(svg, xScaleBar, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
-
+		Legend.positionLegend(container, data, options);
 		if (activeBar) {
 			Bars.draw(svg, xScaleBar, yScale, options, data, options.yDomain);
 		}
