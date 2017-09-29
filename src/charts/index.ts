@@ -81,7 +81,6 @@ export namespace Charts {
 			.attr('class', 'chart-svg')
 			.append('g')
 			.attr('class', 'inner-wrap')
-			.attr('transform', `translate(${margin.left},0)`);
 		svg.append('g')
 			.attr('class', 'y axis')
 			.attr('transform', `translate(0, 0)`);
@@ -98,6 +97,12 @@ export namespace Charts {
 			.attr('class', 'y grid')
 			.attr('transform', `translate(0, 0)`);
 		return svg;
+	}
+
+	export function repositionSVG(svg) {
+		const xAxisHeight = svg.select(".x.axis").node().getBBox().height;
+		const yAxisWidth = svg.select(".y.axis").node().getBBox().width;
+		svg.attr('transform', `translate(${yAxisWidth}, ${0})`);
 	}
 
 	export function drawChart(data, container, options) {
