@@ -61,7 +61,7 @@ export namespace Legend {
 			const containerWidth = container.node().clientWidth;
 			const legendWidth = containerWidth - svgWidth;
 			container.select(".legend").classed("right-legend", true)
-				.style("width", (legendWidth - 10) + 'px')
+				.style("width", legendWidth + 'px')
 		} else {
 			container.select(".legend-wrapper").style("height", 40);
 		}
