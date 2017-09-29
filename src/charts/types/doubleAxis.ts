@@ -30,23 +30,23 @@ export namespace DoubleAxis {
 		const activeSeries = <any>Charts.getActiveDataSeries(container);
 		const y1ActiveSeries = options.yDomain.filter(val => activeSeries.includes(val))
 		const y2ActiveSeries = options.y2Domain.filter(val => activeSeries.includes(val))
-		let xScale = Charts.setXScale(data, options);
-		let yScale = Charts.setYScale(data, options, y1ActiveSeries);
-		let y2Scale = Charts.setYScale(data, options, y2ActiveSeries);
 
+		let xScale = Charts.setXScale(data, options);
 		Axis.drawXAxis(svg, xScale, options, data);
+		let yScale = Charts.setYScale(svg, data, options, y1ActiveSeries);
+		let y2Scale = Charts.setYScale(svg, data, options, y2ActiveSeries);
 		Axis.drawYAxis(svg, yScale, options, data);
-		Charts.repositionSVG(svg);
-		Grid.drawXGrid(svg, xScale, options, data);
-		Grid.drawYGrid(svg, yScale, options, data);
 		svg.select(".inner-wrap").append("g")
 			.attr("class", "y2 axis")
 		Axis.drawY2Axis(svg, y2Scale, options, data);
+		Grid.drawXGrid(svg, xScale, options, data);
+		Grid.drawYGrid(svg, yScale, options, data);
 		Charts.redrawFunctions[chartID] = {
 			self: this,
 			data, parentSelection, options
 		}
 		Legend.positionLegend(container, data, options);
+		Charts.repositionSVG(container);
 		Lines.draw(svg, xScale, yScale, options, data, y1ActiveSeries);
 		Lines.draw(svg, xScale, y2Scale, options, data, y2ActiveSeries);
 		Charts.addTooltipEventListener(parent, svg, svg.selectAll("circle"), Lines.reduceOpacity, Lines.resetLineOpacity);
