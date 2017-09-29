@@ -242,10 +242,10 @@ const chartTypes = [
 
 chartTypes.forEach(type => {
 	let container = document.getElementById(type.id + '-chart-holder')
-	const header = document.createElement("h2");
-	header.className = "chart-title";
-	header.appendChild(document.createTextNode(type.name));
-	container.appendChild(header);
+	// const header = document.createElement("h2");
+	// header.className = "chart-title";
+	// header.appendChild(document.createTextNode(type.name));
+	// container.appendChild(header);
 	switch (type.id) {
 		case "bar":
 			Bars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
