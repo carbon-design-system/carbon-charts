@@ -6,14 +6,18 @@
 	svg {
 		overflow: visible !important;
 		rect, circle {
-		  &:hover {
-			  cursor: pointer;
+			&:hover {
+				cursor: pointer;
 			}
 		}
 	}
+	.legend-wrapper {
+		height: 40px;
+		width: 100%;
+	}
 	.legend {
 		float: right;
-		margin: 0 20px 15px;
+		margin-right: 20px;
 		color: #586464;
 		overflow: hidden;
 		padding-left: 0;
@@ -55,10 +59,10 @@
 		border-radius: 50%;
 		margin: 0 5px 5px 15px;
 		box-sizing: border-box;
-	  -moz-box-sizing: border-box;
-	  -webkit-box-sizing: border-box;
-	  &:hover {
-		  cursor: pointer;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		&:hover {
+			cursor: pointer;
 		}
 	}
 
@@ -91,10 +95,10 @@
 			margin: 20px 5px 20px;
 		}
 		.arrow-right {
-		  border-left: 11px solid #2D74DA;
+			border-left: 11px solid #2D74DA;
 		}
 		.arrow-left {
-		  border-right: 10px solid #2D74DA;
+			border-right: 10px solid #2D74DA;
 		}
 	}
 
@@ -102,7 +106,7 @@
 		position: absolute;
 		right: 0;
 		overflow: auto;
-		margin: 30px 0;
+		margin: 0;
 		max-width: 30%;
 		padding-left: 25px;
 		white-space: inherit;
@@ -123,6 +127,7 @@
 
 	.axis {
 		text {
+			font-size: 12px;
 			fill: #959595;
 			stroke: #959595;
 			stroke-width: .3;
@@ -162,37 +167,37 @@
 	}
 
 	.arrow-up {
-	  width: 0;
-	  height: 0;
-	  border-left: 10px solid transparent;
-	  border-right: 10px solid transparent;
-	  border-bottom: 11px solid black;
+		width: 0;
+		height: 0;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-bottom: 11px solid black;
 	}
 
 	.arrow-down {
-	  width: 0;
-	  height: 0;
-	  border-left: 10px solid transparent;
-	  border-right: 10px solid transparent;
-	  border-top: 11px solid #f00;
+		width: 0;
+		height: 0;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-top: 11px solid #f00;
 	}
 
 	.arrow-right {
-	  width: 0;
-	  height: 0;
-	  border-top: 10px solid transparent;
-	  border-bottom: 10px solid transparent;
-	  border-left: 11px solid white;
-	  right: -10px;
-	  top: 10px;
+		width: 0;
+		height: 0;
+		border-top: 10px solid transparent;
+		border-bottom: 10px solid transparent;
+		border-left: 11px solid white;
+		right: -10px;
+		top: 10px;
 	}
 
 	.arrow-left {
-	  width: 0;
-	  height: 0;
-	  border-top: 10px solid transparent;
-	  border-bottom: 10px solid transparent;
-	  border-right: 10px solid white;
+		width: 0;
+		height: 0;
+		border-top: 10px solid transparent;
+		border-bottom: 10px solid transparent;
+		border-right: 10px solid white;
 		left: -9px;
 		top: 9px;
 	}

@@ -45,6 +45,7 @@ export namespace DoubleAxis {
 			self: this,
 			data, parentSelection, options
 		}
+		Legend.positionLegend(container, data, options);
 		Lines.draw(svg, xScale, yScale, options, data, y1ActiveSeries);
 		Lines.draw(svg, xScale, y2Scale, options, data, y2ActiveSeries);
 		Charts.addTooltipEventListener(parent, svg, svg.selectAll("circle"), Lines.reduceOpacity, Lines.resetLineOpacity);

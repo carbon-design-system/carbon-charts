@@ -76,19 +76,9 @@ export namespace Charts {
 	}
 
 	export function setSVG(data, container, options) {
-		let svgWidth, svgHeight;
-		if (container.node().clientWidth > 600 &&
-			Legend.getLegendItems(data, options).length > 4) {
-			svgWidth = container.node().clientWidth * 0.7
-			svgHeight = container.node().clientHeight;
-		} else {
-			svgWidth = container.node().clientWidth
-			svgHeight = container.node().clientHeight - 100;
-		}
 		const chartSize = getActualChartSize(data, container, options);
 		let svg = container.append('svg')
-			.attr('width', svgWidth)
-			.attr('height', svgHeight)
+			.attr('class', 'chart-svg')
 			.append('g')
 			.attr('class', 'inner-wrap')
 			.attr('transform', `translate(${margin.left},0)`);
@@ -286,14 +276,15 @@ export namespace Charts {
 		if (parent.select('.chart-wrapper').nodes().length > 0) {
 			container = parent.select('.chart-wrapper')
 			chartID = container.attr('chart-id');
-			container.selectAll('svg').remove();
+			container.selectAll('.chart-svg').remove();
 		} else {
 			chartID = Charts.setUniqueID();
 			container = parent.append('div')
 			container.attr('chart-id', chartID)
 				.classed('chart-wrapper', true);
-			if (container.select('.legend').nodes().length === 0) {
-				container.append('ul').attr('class', 'legend');
+			if (container.select('.legend-wrapper').nodes().length === 0) {
+				const legendWrapper = container.append('div').attr('class', 'legend-wrapper');
+				legendWrapper.append('ul').attr('class', 'legend');
 			}
 		}
 		return {chartID, container}

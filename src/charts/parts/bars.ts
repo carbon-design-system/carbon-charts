@@ -31,7 +31,7 @@ export namespace Bars {
 				data, parentSelection, options
 			}
 		}
-
+		Legend.positionLegend(container, data, options);
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
 		Charts.addTooltipEventListener(parent, svg, svg.selectAll("rect"), reduceOpacity, resetBarOpacity);
 		if (options.containerResizable) {
@@ -77,16 +77,16 @@ export namespace Bars {
 		svg.selectAll("rect")
 			.on('mouseover', function (d) {
 				d3.select(this)
-	      	.attr("stroke-width", 6)
-	      	.attr("stroke", color(d.series))
-	      	.attr("stroke-opacity", 0.5)
-	    })
-	    .on('mouseout', function (d) {
-	    	d3.select(this)
-	      	.attr("stroke-width", 0)
-	      	.attr("stroke", "none")
-	      	.attr("stroke-opacity", 1)
-	    })
+					.attr("stroke-width", 6)
+					.attr("stroke", color(d.series))
+					.attr("stroke-opacity", 0.5)
+			})
+			.on('mouseout', function (d) {
+				d3.select(this)
+					.attr("stroke-width", 0)
+					.attr("stroke", "none")
+					.attr("stroke-opacity", 1)
+			})
 	}
 
 	export function resetBarOpacity() {
@@ -98,5 +98,3 @@ function reduceOpacity(svg, exceptionRect) {
 	svg.selectAll("rect").attr("fill-opacity", 0.25)
 	d3.select(exceptionRect).attr("fill-opacity", false)
 }
-
-
