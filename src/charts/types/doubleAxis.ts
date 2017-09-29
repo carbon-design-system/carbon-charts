@@ -36,6 +36,7 @@ export namespace DoubleAxis {
 
 		Axis.drawXAxis(svg, xScale, options, data);
 		Axis.drawYAxis(svg, yScale, options, data);
+		Charts.repositionSVG(svg);
 		Grid.drawXGrid(svg, xScale, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
 		svg.select(".inner-wrap").append("g")

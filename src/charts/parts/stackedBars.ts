@@ -23,6 +23,7 @@ export namespace StackedBars {
 
 		Axis.drawXAxis(svg, xScale, options, data);
 		Axis.drawYAxis(svg, yScale, options, data);
+		Charts.repositionSVG(svg);
 		Grid.drawXGrid(svg, xScale, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
 		Legend.addLegend(container, data, options);

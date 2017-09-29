@@ -56,6 +56,7 @@ export namespace Combo {
 
 		Axis.drawXAxis(svg, xScaleBar, options, data);
 		Axis.drawYAxis(svg, yScale, options, barData);
+		Charts.repositionSVG(svg);
 		Axis.drawY2Axis(svg, y2Scale, options, lineData);
 		Grid.drawXGrid(svg, xScaleBar, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
