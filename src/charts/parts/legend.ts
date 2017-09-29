@@ -63,7 +63,7 @@ export namespace Legend {
 			container.select(".legend").classed("right-legend", true)
 				.style("width", legendWidth + 'px')
 		} else {
-			container.select(".legend-wrapper").style("height", 40);
+			container.select(".legend-wrapper").style("height", "40px");
 		}
 
 		if (hasLegendExpandBtn(container, getLegendItems(data, options))) {
@@ -98,7 +98,7 @@ export namespace Legend {
 			circle.style("border-color", circle.style("background-color"))
 				.style("background-color", "white")
 				.style("border-style", "solid")
-				.style("border-width", "2");
+				.style("border-width", "2px");
 		}
 	}
 
