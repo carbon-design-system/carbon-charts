@@ -19,7 +19,7 @@ export namespace Axis {
 		if (options.yFormatter && options.yFormatter[options.yDomain[0]]) {
 			addUnits(g.selectAll('text'), options.yFormatter[options.yDomain[0]]);
 		}
-		const tickWidth = getLargestTickWidth(g.selectAll('.tick')) + 17;
+		const tickWidth = getLargestTickWidth(g.selectAll('.tick')) + 25;
 		const label = options.yDomain.join(", ");
 
 		let axisLabel = appendYAxisLabel(g, svg, -tickWidth, label, options, "y")
