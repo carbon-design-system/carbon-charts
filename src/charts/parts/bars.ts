@@ -13,11 +13,11 @@ export namespace Bars {
 		let {chartID, container} = Charts.setChartIDContainer(parentSelection);
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 		let svg = Charts.setSVG(data, container, options);
-		let xScale = Charts.setXScale(data, options);
 		const activeDataSeries = Charts.getActiveDataSeries(container)
-		let yScale = Charts.setYScale(data, options, Charts.getActiveDataSeries(container));
 
+		let xScale = Charts.setXScale(data, options);
 		Axis.drawXAxis(svg, xScale, options, data);
+		let yScale = Charts.setYScale(svg, data, options, Charts.getActiveDataSeries(container));
 		Axis.drawYAxis(svg, yScale, options, data);
 		Grid.drawXGrid(svg, xScale, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
@@ -33,6 +33,7 @@ export namespace Bars {
 		}
 		Legend.positionLegend(container, data, options);
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
+		Charts.repositionSVG(container);
 		Charts.addTooltipEventListener(parent, svg, svg.selectAll("rect"), reduceOpacity, resetBarOpacity);
 		if (options.containerResizable) {
 			Charts.setResizeWhenContainerChange(data, parent, options);
@@ -44,6 +45,7 @@ export namespace Bars {
 
 	export function draw(svg, xScale, yScale, options, data, activeSeries) {
 		xScale.padding(0.1)
+		const yHeight = options.chartSize.height - svg.select(".x.axis").node().getBBox().height;
 		const keys = activeSeries ? activeSeries : options.yDomain;
 		const x1 = d3.scaleBand();
 		x1.domain(keys).rangeRound([0, xScale.bandwidth()]);
@@ -65,7 +67,7 @@ export namespace Bars {
 			})))
 			.enter().append("rect")
 				.attr("x", d => x1(d.series))
-				.attr("y", d => options.chartSize.height)
+				.attr("y", d => yHeight)
 				.attr("width", x1.bandwidth())
 				.attr("height", 0)
 				.attr("fill", d => color(d.series))
@@ -73,7 +75,7 @@ export namespace Bars {
 				.duration(1000)
 				.ease(d3.easePolyOut, 0.5)
 				.attr("y", d => yScale(d.value))
-				.attr("height", d => options.chartSize.height - yScale(d.value))
+				.attr("height", d => yHeight - yScale(d.value))
 		svg.selectAll("rect")
 			.on('mouseover', function (d) {
 				d3.select(this)

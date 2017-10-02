@@ -47,19 +47,20 @@ export namespace Combo {
 		}
 		const activeBar =  activeSeries.includes(options.yDomain[0]);
 		const activeLineSeries = activeBar ? activeSeries.slice(1, activeSeries.length) : activeSeries;
+
 		let xScaleBar = Charts.setXScale(barData, options);
 		let xScaleLine = Charts.setXScale(lineData, options);
-		let yScale = Charts.setYScale(barData, options, options.yDomain);
-		let y2Scale = Charts.setYScale(lineData, options, activeLineSeries);
-		let yScaleBar = Charts.setYScale(barData, options, options.yDomain);
-		let yScaleLine = Charts.setYScale(lineData, options, activeLineSeries);
-
 		Axis.drawXAxis(svg, xScaleBar, options, data);
+		let yScale = Charts.setYScale(svg, barData, options, options.yDomain);
+		let y2Scale = Charts.setYScale(svg, lineData, options, activeLineSeries);
+		let yScaleBar = Charts.setYScale(svg, barData, options, options.yDomain);
+		let yScaleLine = Charts.setYScale(svg, lineData, options, activeLineSeries);
 		Axis.drawYAxis(svg, yScale, options, barData);
 		Axis.drawY2Axis(svg, y2Scale, options, lineData);
 		Grid.drawXGrid(svg, xScaleBar, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
 		Legend.positionLegend(container, data, options);
+		Charts.repositionSVG(container);
 		if (activeBar) {
 			Bars.draw(svg, xScaleBar, yScale, options, data, options.yDomain);
 		}

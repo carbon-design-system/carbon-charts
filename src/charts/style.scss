@@ -17,6 +17,7 @@
 	}
 	.legend {
 		float: right;
+		margin-top: 0;
 		margin-right: 20px;
 		color: #586464;
 		overflow: hidden;
@@ -108,7 +109,7 @@
 		overflow: auto;
 		margin: 0;
 		max-width: 30%;
-		padding-left: 25px;
+		padding-left: 20px;
 		white-space: inherit;
 		text {
 			padding-left: 15px;

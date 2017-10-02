@@ -17,10 +17,10 @@ export namespace Lines {
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 
 		let svg = Charts.setSVG(data, container, options);
-		let xScale = Charts.setXScale(data, options);
-		let yScale = Charts.setYScale(data, options, Charts.getActiveDataSeries(container));
 
+		let xScale = Charts.setXScale(data, options);
 		Axis.drawXAxis(svg, xScale, options, data);
+		let yScale = Charts.setYScale(svg, data, options, Charts.getActiveDataSeries(container));
 		Axis.drawYAxis(svg, yScale, options, data);
 		Grid.drawXGrid(svg, xScale, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
@@ -33,10 +33,8 @@ export namespace Lines {
 			data, parentSelection, options
 		}
 
-
-		svg.attr("width", container.select('.inner-wrap').node().getBBox().width)
-		svg.attr("height", container.select('.inner-wrap').node().getBBox().height)
 		Legend.positionLegend(container, data, options);
+		Charts.repositionSVG(container);
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
 		Charts.addTooltipEventListener(parent, svg, svg.selectAll("circle"), reduceOpacity, resetLineOpacity);
 		if (options.containerResizable) {

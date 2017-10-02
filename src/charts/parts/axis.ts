@@ -19,7 +19,7 @@ export namespace Axis {
 		if (options.yFormatter && options.yFormatter[options.yDomain[0]]) {
 			addUnits(g.selectAll('text'), options.yFormatter[options.yDomain[0]]);
 		}
-		const tickWidth = getLargestTickWidth(g.selectAll('.tick')) + 17;
+		const tickWidth = getLargestTickWidth(g.selectAll('.tick')) + 25;
 		const label = options.yDomain.join(", ");
 
 		let axisLabel = appendYAxisLabel(g, svg, -tickWidth, label, options, "y")
@@ -46,6 +46,7 @@ export namespace Axis {
 	}
 
 	function appendYAxisLabel(g, svg, tickWidth, label, options, labelNum) {
+		const yHeight = options.chartSize.height - svg.select(".x.axis").node().getBBox().height;
 		const axisLabel = g.append("text")
 			.attr("dy", "0.71em")
 			.attr("class", labelNum + " axis-label")
@@ -53,14 +54,14 @@ export namespace Axis {
 			.text(label)
 		if (axisLabel.node().getBBox().width > axisConstants.maxWidthOfAxisLabel) {
 			const marginToTicks = labelNum === "y" ? -10 : 7;
-			axisLabel.attr("transform", "translate(" + (tickWidth + axisLabel.node().getBBox().height + marginToTicks) + ","+(options.chartSize.height/2)+")rotate(-90)")
+			axisLabel.attr("transform", "translate(" + (tickWidth + axisLabel.node().getBBox().height + marginToTicks) + ","+(yHeight/2)+")rotate(-90)")
 			const wrappedLabel = wrapLabel(axisLabel);
 			wrappedLabel.on('click', d => {
 				const leftAxis = labelNum === "y"
 				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, label, leftAxis)
 			})
 		} else {
-			axisLabel.attr("transform", "translate(" + tickWidth + ","+(options.chartSize.height/2)+")rotate(-90)")
+			axisLabel.attr("transform", "translate(" + tickWidth + ","+(yHeight/2)+")rotate(-90)")
 		}
 		return axisLabel;
 	}
@@ -87,8 +88,10 @@ export namespace Axis {
 		g.append("text")
 			.attr("class", "x axis-label")
 			.attr("text-anchor", "middle")
-			.attr("transform", "translate("+ (options.chartSize.width/2) +","+ tickHeight +")")
+			.attr("transform", "translate("+ (g.node().getBBox().width/2) +","+ tickHeight +")")
 			.text(options.xDomain);
+		const yHeight = options.chartSize.height - svg.select(".x.axis").node().getBBox().height;
+		g.attr('transform', `translate(0, ${yHeight})`);
 	}
 
 	function wrapLabel(label) {

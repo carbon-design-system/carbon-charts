@@ -31,16 +31,16 @@ export namespace Charts {
 		if (container.node().clientWidth > 600 &&
 			Legend.getLegendItems(data, options).length > 4) {
 			ratio = 0.7;
-			marginForLegendTop = 50;
+			marginForLegendTop = 0;
 		} else {
-			marginForLegendTop = 100;
+			marginForLegendTop = 40;
 			ratio = 1
 		}
 		if (options.type === "doubleAxis" || options.type === "combo") {
 			moreForY2Axis = 70;
 		}
 		return {
-			height: container.node().clientHeight - margin.top - margin.bottom - marginForLegendTop,
+			height: container.node().clientHeight - marginForLegendTop,
 			width: (container.node().clientWidth - margin.left - margin.right - moreForY2Axis) * ratio
 		}
 	}
@@ -59,7 +59,7 @@ export namespace Charts {
 
 		let svg = setSVG(data, container, options);
 		let xScale = setXScale(data, options);
-		let yScale = setYScale(data, options, getActiveDataSeries(container));
+		let yScale = setYScale(svg, data, options, getActiveDataSeries(container));
 
 		Axis.drawXAxis(svg, xScale, options, data);
 		Axis.drawYAxis(svg, yScale, options, data);
@@ -81,13 +81,11 @@ export namespace Charts {
 			.attr('class', 'chart-svg')
 			.append('g')
 			.attr('class', 'inner-wrap')
-			.attr('transform', `translate(${margin.left},0)`);
 		svg.append('g')
 			.attr('class', 'y axis')
 			.attr('transform', `translate(0, 0)`);
 		svg.append('g')
 			.attr('class', 'x axis')
-			.attr('transform', `translate(0, ${chartSize.height})`);
 		let grid = svg.append('g')
 			.attr('class', 'grid')
 			.attr('clip-path', `url(${window.location.origin}${window.location.pathname}#clip)`);
@@ -98,6 +96,15 @@ export namespace Charts {
 			.attr('class', 'y grid')
 			.attr('transform', `translate(0, 0)`);
 		return svg;
+	}
+
+	export function repositionSVG(container) {
+		const svg = container.select(".inner-wrap")
+		const xAxisHeight = container.select(".x.axis").node().getBBox().height;
+		const yAxisWidth = container.select(".y.axis").node().getBBox().width;
+		const leftWidth = container.node().clientWidth - svg.node().getBBox().width;
+		const yTranslateVal = container.select('.right-legend').node() ? yAxisWidth : yAxisWidth + leftWidth/2;
+		svg.attr('transform', `translate(${yTranslateVal}, ${0})`);
 	}
 
 	export function drawChart(data, container, options) {
@@ -223,8 +230,9 @@ export namespace Charts {
 			.domain(data.map(d => d[options.xDomain]));
 	}
 
-	export function setYScale(data, options, activeSeries) {
-		let yScale = d3.scaleLinear().range([options.chartSize.height, 0]);
+	export function setYScale(svg, data, options, activeSeries) {
+		const yHeight = options.chartSize.height - svg.select(".x.axis").node().getBBox().height;
+		let yScale = d3.scaleLinear().range([yHeight, 0]);
 		const keys = activeSeries.length > 0 ? activeSeries : options.yDomain;
 		if (options.type === 'stackedBar') {
 			const yMax = d3.max(data, d => keys.map(val => d[val]).reduce((acc, cur) => acc + cur, 0));
