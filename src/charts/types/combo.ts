@@ -1,4 +1,3 @@
-// export {HelloWorld} from './hello-world'
 import * as d3 from 'd3'
 import {Axis} from '../parts/axis.ts'
 import {Grid} from '../parts/grid.ts'
@@ -65,12 +64,49 @@ export namespace Combo {
 			Bars.draw(svg, xScaleBar, yScale, options, data, options.yDomain);
 		}
 		Lines.draw(svg, xScaleLine, yScaleLine, options, data, activeLineSeries);
-		Charts.addTooltipEventListener(parent, svg, svg.selectAll("rect"), reduceOpacity, resetLineBarOpacity);
-		Charts.addTooltipEventListener(parent, svg, svg.selectAll("circle"), reduceOpacity, resetLineBarOpacity);
+		addDataPointEventListener(parent, svg);
 		if (options.containerResizable) {
 			Charts.setResizeWhenContainerChange(data, parent, options);
 		}
 	}
+}
+
+function addDataPointEventListener(parent, svg) {
+	svg.selectAll("rect")
+		.on('mouseover', function (d) {
+			d3.select(this)
+				.attr("stroke-width", 6)
+				.attr("stroke", d.color)
+				.attr("stroke-opacity", 0.5)
+		})
+		.on('mouseout', function (d) {
+			d3.select(this)
+				.attr("stroke-width", 0)
+				.attr("stroke", "none")
+				.attr("stroke-opacity", 1)
+		})
+		.on('click', function(d) {
+			Tooltip.showTooltip(parent, d, resetLineBarOpacity)
+			reduceOpacity(svg, this)
+		});
+	svg.selectAll("circle")
+		.on('click', function(d) {
+			Tooltip.showTooltip(parent, d, resetLineBarOpacity)
+			reduceOpacity(svg, this)
+		})
+		.on('mouseover', function (d) {
+			svg.append("circle").attr("class", "hover-glow")
+				.attr("r", 5.5)
+				.attr("fill", "none")
+				.attr("stroke-width", 4)
+				.attr("stroke", d.color)
+				.attr("stroke-opacity", 0.5)
+				.attr("cx", this.cx.baseVal.value)
+				.attr("cy", this.cy.baseVal.value)
+		})
+		.on('mouseout', function (d) {
+			svg.selectAll(".hover-glow").remove();
+		});
 }
 
 function reduceOpacity(svg, exception) {

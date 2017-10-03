@@ -18,7 +18,6 @@ export namespace StackedBars {
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 
 		let svg = Charts.setSVG(data, container, options);
-
 		let xScale = Charts.setXScale(data, options);
 		Axis.drawXAxis(svg, xScale, options, data);
 		let yScale = Charts.setYScale(svg, data, options, Charts.getActiveDataSeries(container));
@@ -36,7 +35,7 @@ export namespace StackedBars {
 		Legend.positionLegend(container, data, options);
 		Charts.repositionSVG(container);
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
-		Charts.addTooltipEventListener(parent, svg, svg.selectAll("rect"), reduceOpacity, Bars.resetBarOpacity);
+		Bars.addDataPointEventListener(parent, svg);
 		if (options.containerResizable) {
 			Charts.setResizeWhenContainerChange(data, parent, options);
 		}
@@ -85,27 +84,5 @@ export namespace StackedBars {
 			.ease(d3.easePolyOut, 0.5)
 			.attr("y", d => yScale(d.y1))
 			.attr("height", d => yScale(d.y0) - yScale(d.y1))
-
-		svg.selectAll("rect")
-			.on('mouseover', function (d) {
-				d3.select(this)
-					.attr("stroke-width", 6)
-					.attr("stroke", color(d.series))
-					.attr("stroke-opacity", 0.5)
-					.attr("z-index", 1)
-			})
-			.on('mouseout', function (d) {
-				d3.select(this)
-					.attr("stroke-width", 0)
-					.attr("stroke", "none")
-					.attr("stroke-opacity", 1)
-					.attr("z-index", 0)
-			})
 	}
 }
-
-function reduceOpacity(svg, exceptionRect) {
-	svg.selectAll("rect").attr("fill-opacity", 0.25)
-	d3.select(exceptionRect).attr("fill-opacity", false)
-}
-

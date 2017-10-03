@@ -36,7 +36,7 @@ export namespace Lines {
 		Legend.positionLegend(container, data, options);
 		Charts.repositionSVG(container);
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
-		Charts.addTooltipEventListener(parent, svg, svg.selectAll("circle"), reduceOpacity, resetLineOpacity);
+		addDataPointEventListener(parent, svg);
 		if (options.containerResizable) {
 			Charts.setResizeWhenContainerChange(data, parent, options);
 		}
@@ -108,22 +108,28 @@ export namespace Lines {
 				.duration(500)
 				.style("opacity", 1);
 
-			series.selectAll("circle")
-				.on('mouseover', function (d) {
-					series.append("circle").attr("class", "hover-glow")
-						.attr("r", 5.5)
-						.attr("fill", "none")
-						.attr("stroke-width", 4)
-						.attr("stroke", color(colorKey))
-						.attr("stroke-opacity", 0.5)
-						.attr("cx", this.cx.baseVal.value)
-						.attr("cy", this.cy.baseVal.value)
-				})
-				.on('mouseout', function (d) {
-					svg.selectAll(".hover-glow").remove();
-				});
 		});
+	}
 
+	export function addDataPointEventListener(parent, svg) {
+		svg.selectAll("circle")
+			.on('click', function(d) {
+				Tooltip.showTooltip(parent, d, resetLineOpacity)
+				reduceOpacity(svg, this)
+			})
+			.on('mouseover', function (d) {
+				svg.append("circle").attr("class", "hover-glow")
+					.attr("r", 5.5)
+					.attr("fill", "none")
+					.attr("stroke-width", 4)
+					.attr("stroke", d.color)
+					.attr("stroke-opacity", 0.5)
+					.attr("cx", this.cx.baseVal.value)
+					.attr("cy", this.cy.baseVal.value)
+			})
+			.on('mouseout', function (d) {
+				svg.selectAll(".hover-glow").remove();
+			});
 	}
 
 	export function reduceOpacity(svg, exceptionCircle) {

@@ -13,28 +13,28 @@ export namespace Bars {
 		let {chartID, container} = Charts.setChartIDContainer(parentSelection);
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 		let svg = Charts.setSVG(data, container, options);
-		const activeDataSeries = Charts.getActiveDataSeries(container)
-
-		let xScale = Charts.setXScale(data, options);
-		Axis.drawXAxis(svg, xScale, options, data);
-		let yScale = Charts.setYScale(svg, data, options, Charts.getActiveDataSeries(container));
-		Axis.drawYAxis(svg, yScale, options, data);
-		Grid.drawXGrid(svg, xScale, options, data);
-		Grid.drawYGrid(svg, yScale, options, data);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
 			Charts.setClickableLegend(data, parentSelection, options)
 		}
+		const activeDataSeries = Charts.getActiveDataSeries(container)
+
+		let xScale = Charts.setXScale(data, options);
+		Axis.drawXAxis(svg, xScale, options, data);
+		let yScale = Charts.setYScale(svg, data, options, activeDataSeries);
+		Axis.drawYAxis(svg, yScale, options, data);
+		Grid.drawXGrid(svg, xScale, options, data);
+		Grid.drawYGrid(svg, yScale, options, data);
+		draw(svg, xScale, yScale, options, data, activeDataSeries);
+		Charts.repositionSVG(container);
+		addDataPointEventListener(parent, svg)
+		Legend.positionLegend(container, data, options);
 		if (!Charts.redrawFunctions[chartID]) {
 			Charts.redrawFunctions[chartID] = {
 				self: this,
 				data, parentSelection, options
 			}
 		}
-		Legend.positionLegend(container, data, options);
-		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
-		Charts.repositionSVG(container);
-		Charts.addTooltipEventListener(parent, svg, svg.selectAll("rect"), reduceOpacity, resetBarOpacity);
 		if (options.containerResizable) {
 			Charts.setResizeWhenContainerChange(data, parent, options);
 		}
@@ -76,11 +76,18 @@ export namespace Bars {
 				.ease(d3.easePolyOut, 0.5)
 				.attr("y", d => yScale(d.value))
 				.attr("height", d => yHeight - yScale(d.value))
+	}
+
+	export function resetBarOpacity() {
+		d3.selectAll("svg").selectAll("rect").attr("fill-opacity", 1)
+	}
+
+	export function addDataPointEventListener(parent, svg) {
 		svg.selectAll("rect")
 			.on('mouseover', function (d) {
 				d3.select(this)
 					.attr("stroke-width", 6)
-					.attr("stroke", color(d.series))
+					.attr("stroke", d.color)
 					.attr("stroke-opacity", 0.5)
 			})
 			.on('mouseout', function (d) {
@@ -89,10 +96,10 @@ export namespace Bars {
 					.attr("stroke", "none")
 					.attr("stroke-opacity", 1)
 			})
-	}
-
-	export function resetBarOpacity() {
-		d3.selectAll("svg").selectAll("rect").attr("fill-opacity", 1)
+			.on('click', function(d) {
+				Tooltip.showTooltip(parent, d, resetBarOpacity)
+				reduceOpacity(svg, this)
+			})
 	}
 }
 

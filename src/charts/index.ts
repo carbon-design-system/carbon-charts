@@ -109,7 +109,8 @@ export namespace Charts {
 	}
 
 	export function drawChart(data, container, options) {
-		d3.select(container).selectAll(".tooltip").remove();
+		d3.select(container).selectAll(".chart-tooltip").remove();
+		d3.select(container).selectAll(".label-tooltip").remove();
 		switch (options.type) {
 			case 'bar':
 				Bars.drawChart(data, container, options);
