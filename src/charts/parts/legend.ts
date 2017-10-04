@@ -112,7 +112,10 @@ export namespace Legend {
 	}
 
 	function openLegendTooltip(target, container, legendItems, options, data) {
-		d3.selectAll(".legend-tooltip").remove();
+		if (container.select('.legend-tooltip').nodes().length > 0) {
+			d3.selectAll(".legend-tooltip").style("display", "block");
+			return;
+		}
 		const mouseXPoint = d3.mouse(container.node())[0];
 		const windowXPoint = d3.event.x;
 		let tooltip = container.append("div")
@@ -135,7 +138,7 @@ export namespace Legend {
 
 		Charts.addCloseBtn(tooltip, 'md', 'white')
 			.on("click", () => {
-				d3.selectAll(".legend-tooltip").remove();
+				d3.selectAll(".legend-tooltip").style("display", "none");
 			});
 
 		const legendContent = d3.select(".legend-tooltip-content")

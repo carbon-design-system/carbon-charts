@@ -86,6 +86,7 @@ export namespace Charts {
 			.attr('transform', `translate(0, 0)`);
 		svg.append('g')
 			.attr('class', 'x axis')
+			.attr('transform', `translate(0, ${chartSize.height})`);
 		let grid = svg.append('g')
 			.attr('class', 'grid')
 			.attr('clip-path', `url(${window.location.origin}${window.location.pathname}#clip)`);
@@ -104,10 +105,12 @@ export namespace Charts {
 		const yAxisWidth = container.select(".y.axis").node().getBBox().width;
 		const leftWidth = container.node().clientWidth - svg.node().getBBox().width;
 		const yTranslateVal = container.select('.right-legend').node() ? yAxisWidth : yAxisWidth + leftWidth/2;
-		svg.attr('transform', `translate(${yTranslateVal}, ${0})`);
+		container.style("padding-left", yAxisWidth);
 	}
 
 	export function drawChart(data, container, options) {
+		d3.select(container).selectAll(".chart-tooltip").remove();
+		d3.select(container).selectAll(".label-tooltip").remove();
 		switch (options.type) {
 			case 'bar':
 				Bars.drawChart(data, container, options);
@@ -160,15 +163,10 @@ export namespace Charts {
 		return closeBtn;
 	}
 
-	export function addTooltipEventListener(parent, svg, elements, reduceOpacity, resetBarOpacity) {
-		elements.on('click', function(d) {
-			Tooltip.showTooltip(parent, d, resetBarOpacity)
-			reduceOpacity(svg, this)
-		})
-	}
-
 	export function setResizableWindow() {
 		d3.select(window).on('resize', debounce(() => {
+			d3.selectAll(".chart-tooltip").remove();
+			d3.selectAll(".label-tooltip").remove();
 			resizeTimers.forEach(id => {
 				window.clearTimeout(id);
 				resizeTimers = [];
@@ -248,6 +246,8 @@ export namespace Charts {
 	export function setClickableLegend(data, parent, options) {
 		parent.selectAll('.legend-btn').each(function(d, i) {
 			d3.select(this).on('click', function(d) {
+				parent.selectAll(".chart-tooltip").remove();
+				parent.selectAll(".label-tooltip").remove();
 				Legend.updateLegend(this);
 				drawChart(data, parent.node(), options);
 			});

@@ -49,7 +49,7 @@ export namespace DoubleAxis {
 		Charts.repositionSVG(container);
 		Lines.draw(svg, xScale, yScale, options, data, y1ActiveSeries);
 		Lines.draw(svg, xScale, y2Scale, options, data, y2ActiveSeries);
-		Charts.addTooltipEventListener(parent, svg, svg.selectAll("circle"), Lines.reduceOpacity, Lines.resetLineOpacity);
+		Lines.addDataPointEventListener(parent, svg);
 		if (options.containerResizable) {
 			Charts.setResizeWhenContainerChange(data, parent, options);
 		}
