@@ -105,7 +105,7 @@ export namespace Charts {
 		const yAxisWidth = container.select(".y.axis").node().getBBox().width;
 		const leftWidth = container.node().clientWidth - svg.node().getBBox().width;
 		const yTranslateVal = container.select('.right-legend').node() ? yAxisWidth : yAxisWidth + leftWidth/2;
-		container.style("padding-left", yAxisWidth);
+		container.style("padding-left", yAxisWidth + "px");
 	}
 
 	export function drawChart(data, container, options) {
