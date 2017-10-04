@@ -50,7 +50,8 @@ export namespace Legend {
 	}
 
 	export function positionLegend(container, data, options) {
-		if (container.select('.legend-tooltip').nodes().length > 0) {
+		if (container.select('.legend-tooltip').nodes().length > 0
+			&& container.select('.legend-tooltip').node().style.display === 'block') {
 			return
 		}
 		container.selectAll(".legend-btn").style("display", "inline-block")
@@ -112,21 +113,44 @@ export namespace Legend {
 	}
 
 	function openLegendTooltip(target, container, legendItems, options, data) {
-		if (container.select('.legend-tooltip').nodes().length > 0) {
-			d3.selectAll(".legend-tooltip").style("display", "block");
-			return;
-		}
 		const mouseXPoint = d3.mouse(container.node())[0];
 		const windowXPoint = d3.event.x;
-		let tooltip = container.append("div")
-			.attr("class", "tooltip legend-tooltip")
-			.style("display", "block")
-			.style("top", (d3.mouse(container.node())[1] - 19) + "px");
-		tooltip.append("p").text("Legend")
-			.attr("class", "legend-tooltip-header")
-		tooltip.append('ul')
-			.attr("class", "legend-tooltip-content")
-			.attr("font-size", 12)
+		let tooltip;
+		if (container.select('.legend-tooltip').nodes().length > 0) {
+			tooltip = d3.selectAll(".legend-tooltip").style("display", "block");
+			tooltip.select('arrow').remove();
+		} else {
+			tooltip = container.append("div")
+				.attr("class", "tooltip legend-tooltip")
+				.style("display", "block")
+				.style("top", (d3.mouse(container.node())[1] - 19) + "px");
+			tooltip.append("p").text("Legend")
+				.attr("class", "legend-tooltip-header")
+			tooltip.append('ul')
+				.attr("class", "legend-tooltip-content")
+				.attr("font-size", 12)
+			Charts.addCloseBtn(tooltip, 'md', 'white')
+				.on("click", () => {
+					d3.selectAll(".legend-tooltip").style("display", "none");
+				});
+
+			const legendContent = d3.select(".legend-tooltip-content")
+				.attr("font-size", 12)
+			.selectAll("div")
+			.data(legendItems)
+			.enter().append("li")
+				.attr("class", "legend-btn active")
+
+			legendContent.append("div")
+				.attr("class", "legend-circle")
+				.style("background-color", (d, i) => options.colors[i])
+				addCircleHoverEffect()
+
+			legendContent.append("text")
+				.text(d => d);
+
+			Charts.setClickableLegendInTooltip(data, container, options)
+		}
 
 		if (window.innerWidth - (windowXPoint + 200) < 0) {
 			tooltip.append('div').attr('class', 'arrow arrow-right')
@@ -135,28 +159,6 @@ export namespace Legend {
 			tooltip.append('div').attr('class', 'arrow arrow-left')
 			tooltip.style("left", mouseXPoint + 10 + "px")
 		}
-
-		Charts.addCloseBtn(tooltip, 'md', 'white')
-			.on("click", () => {
-				d3.selectAll(".legend-tooltip").style("display", "none");
-			});
-
-		const legendContent = d3.select(".legend-tooltip-content")
-			.attr("font-size", 12)
-		.selectAll("div")
-		.data(legendItems)
-		.enter().append("li")
-			.attr("class", "legend-btn active")
-
-		legendContent.append("div")
-			.attr("class", "legend-circle")
-			.style("background-color", (d, i) => options.colors[i])
-			addCircleHoverEffect()
-
-		legendContent.append("text")
-			.text(d => d);
-
-		Charts.setClickableLegendInTooltip(data, container, options)
 	}
 
 	export function addCircleHoverEffect() {
