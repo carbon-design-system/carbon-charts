@@ -42,6 +42,7 @@ export namespace StackedBars {
 	}
 
 	export function draw(svg, xScale, yScale, options, data, activeSeries) {
+		const yHeight = options.chartSize.height - svg.select(".x.axis").node().getBBox().height;
 		const keys = activeSeries ? activeSeries : options.yDomain;
 		const x1 = d3.scaleBand();
 		xScale.paddingInner(0.2);
@@ -76,8 +77,8 @@ export namespace StackedBars {
 			.data(d => d.series)
 			.enter().append("rect")
 			.attr("width", xScale.bandwidth())
-			.style("fill", d => color(d.series))
-			.attr("y", options.chartSize.height)
+			.style("fill", d => d.color)
+			.attr("y", yHeight)
 			.attr("height", 0)
 			.transition()
 			.delay((d, i) => i * 30)

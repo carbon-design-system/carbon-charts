@@ -70,7 +70,7 @@ export namespace Bars {
 				.attr("y", d => yHeight)
 				.attr("width", x1.bandwidth())
 				.attr("height", 0)
-				.attr("fill", d => color(d.series))
+				.attr("fill", d => d.color)
 				.transition()
 				.duration(1000)
 				.ease(d3.easePolyOut, 0.5)
