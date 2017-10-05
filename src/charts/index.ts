@@ -111,7 +111,6 @@ export namespace Charts {
 	export function drawChart(data, container, options) {
 		d3.select(container).selectAll(".chart-tooltip").remove();
 		d3.select(container).selectAll(".label-tooltip").remove();
-		d3.selectAll(".legend-tooltip").style("display", "none");
 		switch (options.type) {
 			case 'bar':
 				Bars.drawChart(data, container, options);
@@ -190,6 +189,7 @@ export namespace Charts {
 		  	containerHeight = container.clientHeight;
 		  	debounce(() => {
   				window.clearTimeout(intervalId);
+  				d3.selectAll(".legend-tooltip").style("display", "none");
   				drawChart(data, container, options);
   			}, 500)();
 			}
