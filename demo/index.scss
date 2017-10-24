@@ -21,11 +21,28 @@
 }
 
 .resizable {
-    overflow: scroll;
-    resize: both;
-    max-width: 300px;
-    max-height: 460px;
+	resize: both;
 }
 .demo-title {
 	margin-top: 20px;
+}
+.chart-holder {
+	border: 1px solid #ECEEEF;
+	box-shadow: 1px 1px 2px grey;
+	margin: 30px auto;
+	display: block;
+	padding: 20px 30px;
+	height: 500px;
+	width: 50%;
+	position: relative;
+	h3 {
+		border-bottom: 1px solid lightgray;
+		margin: 0;
+	}
+}
+
+.chart-title {
+	display: block;
+	font-size: 16px;
+	font-weight: bold;
 }

@@ -21,9 +21,10 @@ module.exports = [{
 		charts: "./src/charts/index.ts",
 	},
 	output: {
-		path: __dirname + "/dist/bundle",
+		path: __dirname + '/dist/bundle',
 		filename: "bundle.js",
-		libraryTarget: "var",
+		libraryTarget: "umd",
+    library: "Charts"
 	},
 	module: {
 		loaders: [

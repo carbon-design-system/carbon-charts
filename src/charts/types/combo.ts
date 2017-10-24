@@ -1,4 +1,3 @@
-// export {HelloWorld} from './hello-world'
 import * as d3 from 'd3'
 import {Axis} from '../parts/axis.ts'
 import {Grid} from '../parts/grid.ts'
@@ -12,18 +11,20 @@ import {Charts} from '../index.ts'
 
 export namespace Combo {
 	export function drawChart(data, parent, options) {
-		parent.style('padding-right', '80px')
-		let {chartID, container} = Charts.setChartIDContainer(parent)
-		Charts.setResizable();
+		options.type = 'combo';
+		let parentSelection = d3.select(parent);
+		let {chartID, container} = Charts.setChartIDContainer(parentSelection)
+		if (options.windowResizable) {
+			Charts.setResizableWindow();
+		}
 
+		options.chartSize = Charts.getActualChartSize(data, container, options);
+		let svg = Charts.setSVG(data, container, options);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			Charts.setClickableLegend(data, parent, options)
+			Charts.setClickableLegend(data, parentSelection, options)
 		}
-		options.chartSize = Charts.getActualChartSize(data, container, options);
 		const activeSeries = <any>Charts.getActiveDataSeries(container);
-		const activeBar =  activeSeries.includes(options.yDomain[0]);
-		const activeLineSeries = activeBar ? activeSeries.slice(1, activeSeries.length) : activeSeries;
 
 		const barData = [];
 		const lineData = [];
@@ -41,38 +42,72 @@ export namespace Combo {
 		})
 		Charts.redrawFunctions[chartID] = {
 			self: this,
-			data, parent, options
+			data, parentSelection, options
 		}
+		const activeBar =  activeSeries.includes(options.yDomain[0]);
+		const activeLineSeries = activeBar ? activeSeries.slice(1, activeSeries.length) : activeSeries;
 
-		let svg = Charts.setSVG(data, container, options);
 		let xScaleBar = Charts.setXScale(barData, options);
 		let xScaleLine = Charts.setXScale(lineData, options);
-		let yScale = Charts.setYScale(barData, options, options.yDomain);
-		let y2Scale = Charts.setYScale(lineData, options, activeLineSeries);
-		let yScaleBar = Charts.setYScale(barData, options, options.yDomain);
-		let yScaleLine = Charts.setYScale(lineData, options, activeLineSeries);
-
 		Axis.drawXAxis(svg, xScaleBar, options, data);
+		let yScale = Charts.setYScale(svg, barData, options, options.yDomain);
+		let y2Scale = Charts.setYScale(svg, lineData, options, activeLineSeries);
+		let yScaleBar = Charts.setYScale(svg, barData, options, options.yDomain);
+		let yScaleLine = Charts.setYScale(svg, lineData, options, activeLineSeries);
 		Axis.drawYAxis(svg, yScale, options, barData);
 		Axis.drawY2Axis(svg, y2Scale, options, lineData);
 		Grid.drawXGrid(svg, xScaleBar, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
-
+		Legend.positionLegend(container, data, options);
+		Charts.repositionSVG(container);
 		if (activeBar) {
 			Bars.draw(svg, xScaleBar, yScale, options, data, options.yDomain);
 		}
 		Lines.draw(svg, xScaleLine, yScaleLine, options, data, activeLineSeries);
-		setTooltip(chartID, svg);
+		addDataPointEventListener(parent, svg);
+		if (options.containerResizable) {
+			Charts.setResizeWhenContainerChange(data, parent, options);
+		}
 	}
 }
 
-export function setTooltip(chartID, svg) {
-	Charts.setTooltip(chartID);
-	Charts.addTooltipEventListener(chartID, svg, svg.selectAll("rect"), reduceOpacity);
-	Charts.addTooltipEventListener(chartID, svg, svg.selectAll("circle"), reduceOpacity);
-	Charts.setTooltipCloseEventListener(chartID, resetLineBarOpacity);
+function addDataPointEventListener(parent, svg) {
+	svg.selectAll("rect")
+		.on('mouseover', function (d) {
+			d3.select(this)
+				.attr("stroke-width", 6)
+				.attr("stroke", d.color)
+				.attr("stroke-opacity", 0.5)
+		})
+		.on('mouseout', function (d) {
+			d3.select(this)
+				.attr("stroke-width", 0)
+				.attr("stroke", "none")
+				.attr("stroke-opacity", 1)
+		})
+		.on('click', function(d) {
+			Tooltip.showTooltip(parent, d, resetLineBarOpacity)
+			reduceOpacity(svg, this)
+		});
+	svg.selectAll("circle")
+		.on('click', function(d) {
+			Tooltip.showTooltip(parent, d, resetLineBarOpacity)
+			reduceOpacity(svg, this)
+		})
+		.on('mouseover', function (d) {
+			svg.append("circle").attr("class", "hover-glow")
+				.attr("r", 5.5)
+				.attr("fill", "none")
+				.attr("stroke-width", 4)
+				.attr("stroke", d.color)
+				.attr("stroke-opacity", 0.5)
+				.attr("cx", this.cx.baseVal.value)
+				.attr("cy", this.cy.baseVal.value)
+		})
+		.on('mouseout', function (d) {
+			svg.selectAll(".hover-glow").remove();
+		});
 }
-
 
 function reduceOpacity(svg, exception) {
 	if (exception.tagName === "rect") {

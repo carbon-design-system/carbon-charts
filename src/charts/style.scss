@@ -1,99 +1,155 @@
-.chart-holder {
-	border: 1px solid #ECEEEF;
-	box-shadow: 1px 1px 2px grey;
-	margin: 30px auto;
-	display: block;
-	padding: 20px 30px;
-	height: 500px;
-	width: 50%;
-
-	h3 {
-		border-bottom: 1px solid lightgray;
-		margin: 0;
-	}
-
-	svg {
-		overflow: initial;
-		.inner-wrap {
-			width: 100%;
-		}
-		circle:hover {
-			filter: drop-shadow( -5px -5px 5px #000 );
-		}
-	}
-}
-
 .chart-wrapper {
 	width: 100%;
 	height: 100%;
 	position: relative;
 
 	svg {
-		overflow: visible;
+		overflow: visible !important;
+		rect, circle {
+			&:hover {
+				cursor: pointer;
+			}
+		}
 	}
-}
+	.legend-wrapper {
+		height: 40px;
+		width: 100%;
+	}
+	.legend {
+		float: right;
+		margin-top: 0;
+		margin-right: 20px;
+		color: #586464;
+		overflow: hidden;
+		padding-left: 0;
+		white-space: nowrap;
+		.expand-btn {
+			background-repeat: no-repeat;
+			background-image: url("data:image/svg+xml;utf8,<svg width='13px' height='13px' viewBox='0 0 13 13' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch --><title>icoPlus</title><desc>Created with Sketch.</desc><defs></defs><g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='Artboard' transform='translate(-496.000000, -162.000000)'><g id='icoPlus' transform='translate(496.000000, 162.000000)'><g id='open-modal-' fill='#4178BE'><rect id='Rectangle' x='0' y='0' width='13' height='13'></rect><g id='Expand-20px' fill-rule='nonzero'><path d='M12.1875,12.1875 L0.8125,12.1875 L0.8125,0.8125 L12.1875,0.8125 L12.1875,12.1875 Z M13,0 L0,0 L0,13 L13,13 L13,0 Z' id='Shape'></path></g></g><g id='Add,-Plus-16px' transform='translate(2.000000, 2.000000)' fill-rule='nonzero' fill='#FFFFFF'><polygon id='Shape' points='9 3.85714286 5.14285714 3.85714286 5.14285714 0 3.85714286 0 3.85714286 3.85714286 0 3.85714286 0 5.14285714 3.85714286 5.14285714 3.85714286 9 5.14285714 9 5.14285714 5.14285714 9 5.14285714'></polygon></g></g></g></g></svg>");
+			position: absolute;
+			right: 0;
+			top: 2px;
+			height: 16px;
+			width: 16px;
+		}
+	}
 
-.chart-title {
-  display: block;
-  font-size: 16px;
-  font-weight: bold;
-}
+	.legend-btn {
+		display: inline-block;
+		line-height: 20px;
+		font-size: 12px;
+		margin-bottom: 0;
+		span {
+			display: inline;
+		}
+		text {
+			font-size: 12px;
+			max-width: 100px;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			display: inherit;
+		}
+	}
 
-.legend {
-	float: right;
-	margin: 10px 20px;
-	color: #586464;
-	overflow: hidden;
-	white-space: nowrap;
-	.expand-btn {
-		background-color: rgb(65, 120, 190);
-		color: white;
-		margin-left: 10px;
-		padding: 0 4px;
+	.legend-circle {
+		display: inherit;
+		height: 10px;
+		width: 10px;
+		-moz-border-radius: 50%;
+		border-radius: 50%;
+		margin: 0 5px 5px 15px;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	.legend-tooltip {
+		padding: 0;
+		border: none;
+		width: 200px;
+		.legend-tooltip-header {
+			background: #2D74DA;
+			color: white;
+			font-size: 15px;
+			font-weight: 700;
+			padding: 13px 20px;
+			margin: 0;
+		}
+		.legend-btn {
+			display: inline-block;
+			width: 100%;
+		}
+		text {
+			max-width: 145px;
+		}
+		button {
+			position: absolute;
+			top: 7px;
+			right: 10px;
+		}
+		.legend-tooltip-content {
+			padding-left: 0;
+			margin: 20px 5px 20px;
+		}
+		.arrow-right {
+			border-left: 11px solid #2D74DA;
+		}
+		.arrow-left {
+			border-right: 10px solid #2D74DA;
+		}
+	}
+
+	.right-legend {
 		position: absolute;
 		right: 0;
-		top: 10px;
+		overflow: auto;
+		margin: 0;
+		max-width: 30%;
+		padding-left: 20px;
+		white-space: inherit;
+		text {
+			padding-left: 15px;
+		}
+		.legend-btn {
+			width: 100%;
+			text-indent: -.7em;
+			text {
+				max-width: 90%;
+			}
+		}
+		.legend-circle {
+			margin: 5px;
+		}
+	}
+
+	.axis {
+		text {
+			font-size: 12px;
+			fill: #959595;
+			stroke: #959595;
+			stroke-width: .3;
+		}
+		tspan {
+			cursor: pointer;
+		}
 	}
 }
 
-.legend-btn {
-	display: inline-block;
-	line-height: 20px;
-	font-size: 12px;
-
-	span {
-		display: inline;
-	}
-	text {
-		max-width: 100px;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		overflow: hidden;
-		display: inherit;
-	}
-}
-
-.legend-circle {
-	display: inherit;
-	height: 10px;
-	width: 10px;
-	-moz-border-radius: 50%;
-	border-radius: 50%;
-	margin: 0 5px 5px 15px;
-	box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
-
-.legend-tooltip, .chart-tooltip {
+.tooltip {
 	background-color: #FFFFFF;
 	box-shadow: 0 0 10px 0 rgba(0,0,0,0.16);
 	display: block;
 	font-size: 12px;
 	position: absolute;
 	padding: 10px 20px 10px 10px;
-	border-top: 2px solid #4178BE;
-
+	border-top: 4px solid #2D74DA;
+	max-width: 200px;
+	word-wrap: break-word;
+	z-index: 1059;
 	.close-btn {
 		color: #586464;
 		font-size: 12px;
@@ -102,54 +158,52 @@
 		right: 0;
 		padding: 5px;
 	}
-}
-
-.legend-tooltip {
-	padding: 0;
-	width: 200px;
-	h2 {
-		background: #4178BE;
-		color: white;
-		padding: 10px;
-		margin: 0;
-	}
-	.legend-btn {
-		display: inline-block;
-		width: 100%;
-	}
-	text {
-		max-width: 160px;
-	}
-	.close-btn {
-		color: white;
-		font-size: 25px;
+	.close--xs {
 		position: absolute;
-		right: 5px;
+		right: 10px;
 		top: 5px;
 	}
-	.legend-tooltip-content {
-		padding-left: 0;
-		margin-top: 1rem;
+	.arrow {
+		position: absolute;
+	}
+
+	.arrow-up {
+		width: 0;
+		height: 0;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-bottom: 11px solid black;
+	}
+
+	.arrow-down {
+		width: 0;
+		height: 0;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-top: 11px solid #f00;
+	}
+
+	.arrow-right {
+		width: 0;
+		height: 0;
+		border-top: 10px solid transparent;
+		border-bottom: 10px solid transparent;
+		border-left: 11px solid white;
+		right: -10px;
+		top: 10px;
+	}
+
+	.arrow-left {
+		width: 0;
+		height: 0;
+		border-top: 10px solid transparent;
+		border-bottom: 10px solid transparent;
+		border-right: 10px solid white;
+		left: -9px;
+		top: 9px;
 	}
 }
 
-
-.right-legend {
-	position: absolute;
-	right: 0;
-	overflow: auto;
-	margin: 30px 0;
-	padding-left: 0;
-	white-space: inherit;
-	text {
-		text-overflow: initial;
-		overflow: inherit;
-	}
-	.legend-btn {
-		width: 100%;
-		text-indent: -.7em;
-	}
-	.legend-circle {
-		margin: 0 15px;
-	}
+.chart-tooltip {
+	width: 200px;
 }

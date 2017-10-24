@@ -14,25 +14,34 @@ let localData = <any>{};
 let localOptions = <any>{};
 
 export namespace Charts {
+	export const bars = Bars;
+	export const lines = Lines;
+	export const combo = Combo;
+	export const stackedBars = StackedBars;
+	export const doubleAxis = DoubleAxis;
 	export const margin = {
 		top: 20,
-		bottom: 50,
-		left: 70,
+		bottom: 60,
+		left: 90,
 		right: 20
 	};
 	export function getActualChartSize(data, container, options) {
-		let ratio, marginForLegendTop;
+		let ratio, marginForLegendTop
+		let moreForY2Axis = 0;
 		if (container.node().clientWidth > 600 &&
 			Legend.getLegendItems(data, options).length > 4) {
-			ratio = 0.6;
-			marginForLegendTop = 50;
+			ratio = 0.7;
+			marginForLegendTop = 0;
 		} else {
-			marginForLegendTop = 100;
+			marginForLegendTop = 40;
 			ratio = 1
 		}
+		if (options.type === "doubleAxis" || options.type === "combo") {
+			moreForY2Axis = 70;
+		}
 		return {
-			height: container.node().clientHeight - margin.top - margin.bottom - marginForLegendTop,
-			width: (container.node().clientWidth - margin.left - margin.right) * ratio
+			height: container.node().clientHeight - marginForLegendTop,
+			width: (container.node().clientWidth - margin.left - margin.right - moreForY2Axis) * ratio
 		}
 	}
 	export function updateData(data) {
@@ -43,14 +52,14 @@ export namespace Charts {
 	}
 	export function renderChart(data, container, options) {
 		localData = data;
-		container.classed("chart-wrapper", true);
-		container.append("div").attr("class", "legend");
+		container.classed('chart-wrapper', true);
+		container.append('div').attr('class', 'legend');
 		options.chartSize = getActualChartSize(data, container, options);;
 		localOptions = options;
 
 		let svg = setSVG(data, container, options);
 		let xScale = setXScale(data, options);
-		let yScale = setYScale(data, options, getActiveDataSeries(container));
+		let yScale = setYScale(svg, data, options, getActiveDataSeries(container));
 
 		Axis.drawXAxis(svg, xScale, options, data);
 		Axis.drawYAxis(svg, yScale, options, data);
@@ -67,55 +76,55 @@ export namespace Charts {
 	}
 
 	export function setSVG(data, container, options) {
-		let svgWidth, svgHeight;
-		if (container.node().clientWidth > 600 &&
-			Legend.getLegendItems(data, options).length > 4) {
-			svgWidth = container.node().clientWidth * 0.6
-			svgHeight = container.node().clientHeight;
-		} else {
-			svgWidth = container.node().clientWidth
-			svgHeight = container.node().clientHeight - 100;
-		}
 		const chartSize = getActualChartSize(data, container, options);
-		let svg = container.append("svg")
-			.attr("width", svgWidth)
-			.attr("height", svgHeight)
-			.append("g")
-			.attr("class", "inner-wrap")
-			.attr("transform", `translate(${margin.left},${margin.top})`);
-		svg.append("g")
-			.attr("class", "y axis")
-			.attr("transform", `translate(0, 0)`);
-		svg.append("g")
-			.attr("class", "x axis")
-			.attr("transform", `translate(0, ${chartSize.height})`);
-		let grid = svg.append("g")
-			.attr("class", "grid")
-			.attr("clip-path", `url(${window.location.origin}${window.location.pathname}#clip)`);
-		grid.append("g")
-			.attr("class", "x grid")
-			.attr("transform", `translate(0, ${chartSize.width})`);
-		grid.append("g")
-			.attr("class", "y grid")
-			.attr("transform", `translate(0, 0)`);
+		let svg = container.append('svg')
+			.attr('class', 'chart-svg')
+			.append('g')
+			.attr('class', 'inner-wrap')
+		svg.append('g')
+			.attr('class', 'y axis')
+			.attr('transform', `translate(0, 0)`);
+		svg.append('g')
+			.attr('class', 'x axis')
+			.attr('transform', `translate(0, ${chartSize.height})`);
+		let grid = svg.append('g')
+			.attr('class', 'grid')
+			.attr('clip-path', `url(${window.location.origin}${window.location.pathname}#clip)`);
+		grid.append('g')
+			.attr('class', 'x grid')
+			.attr('transform', `translate(0, ${chartSize.width})`);
+		grid.append('g')
+			.attr('class', 'y grid')
+			.attr('transform', `translate(0, 0)`);
 		return svg;
 	}
 
+	export function repositionSVG(container) {
+		const svg = container.select(".inner-wrap")
+		const xAxisHeight = container.select(".x.axis").node().getBBox().height;
+		const yAxisWidth = container.select(".y.axis").node().getBBox().width;
+		const leftWidth = container.node().clientWidth - svg.node().getBBox().width;
+		const yTranslateVal = container.select('.right-legend').node() ? yAxisWidth : yAxisWidth + leftWidth/2;
+		container.style("padding-left", yAxisWidth + "px");
+	}
+
 	export function drawChart(data, container, options) {
+		d3.select(container).selectAll(".chart-tooltip").remove();
+		d3.select(container).selectAll(".label-tooltip").remove();
 		switch (options.type) {
-			case "bar":
+			case 'bar':
 				Bars.drawChart(data, container, options);
 				break;
-			case "stackedBar":
+			case 'stackedBar':
 				StackedBars.drawChart(data, container, options);
 				break;
-			case "line":
+			case 'line':
 				Lines.drawChart(data, container, options);
 				break;
-			case "doubleAxis":
+			case 'doubleAxis':
 				DoubleAxis.drawChart(data, container, options);
 				break;
-			case "combo":
+			case 'combo':
 				Combo.drawChart(data, container, options);
 				break;
 			default:
@@ -124,39 +133,68 @@ export namespace Charts {
 		}
 	}
 
-	export function setTooltip(chartID) {
-		const tooltip = d3.select("#tooltip-" + chartID);
+	export function setTooltip(chartID, resetOpacity) {
+		const tooltip = d3.select('#tooltip-' + chartID);
 		if (tooltip.nodes().length < 1) {
-			let tooltip = d3.select("body").append("div")
-				.attr("class", "tooltip chart-tooltip")
-				.attr("id", "tooltip-" + chartID)
-				.style("display", "none");
-			tooltip.append("span")
-				.attr("class", "text-box")
-			tooltip.append("span")
-				.attr("class", "close-btn")
-				.text("x")
+			let tooltip = d3.select('body').append('div')
+				.attr('class', 'tooltip chart-tooltip')
+				.attr('id', 'tooltip-' + chartID)
+				.style('display', 'none');
+			tooltip.append('span')
+				.attr('class', 'text-box')
+
+			addCloseBtn(tooltip, 'xs')
+				.on('click', () => {
+					d3.selectAll('.tooltip').remove();
+					resetOpacity();
+				})
 		}
 	}
 
-	export function setTooltipCloseEventListener(chartID, opacityFunc) {
-		d3.select("#tooltip-" + chartID).select(".close-btn").on("click", () => {
-			Tooltip.hide()
-			opacityFunc();
-		});
+	export function addCloseBtn(tooltip, size, color?) {
+		const closeBtn = tooltip.append('button')
+		let classNames = 'close--' + size;
+		classNames = color ? ' close--' + color : classNames;
+		closeBtn.attr('class', classNames)
+			.attr('type', 'button')
+			.attr('aria-label', 'Close')
+			.append('svg').attr('class', 'close_icon')
+			.append('use').attr('href', '#x_12')
+		return closeBtn;
 	}
 
-	export function addTooltipEventListener(chartID, svg, elements, reduceOpacity) {
-		elements.on("click", function(d) {
-			Tooltip.showTooltip(chartID, d)
-			reduceOpacity(svg, this)
-		})
-	}
-
-	export function setResizable() {
-		d3.select(window).on("resize", debounce(function() {
+	export function setResizableWindow() {
+		d3.select(window).on('resize', debounce(() => {
+			d3.selectAll(".chart-tooltip").remove();
+			d3.selectAll(".label-tooltip").remove();
+			resizeTimers.forEach(id => {
+				window.clearTimeout(id);
+				resizeTimers = [];
+			})
 			redrawAll();
 		}, 250));
+	}
+
+	export let resizeTimers = [];
+
+	export function setResizeWhenContainerChange(data, container, options) {
+		let containerWidth = container.clientWidth;
+		let containerHeight = container.clientHeight;
+		let intervalId = setInterval(resizeTimer, 800);
+		resizeTimers.push(intervalId);
+		function resizeTimer() {
+			if (Math.abs(containerWidth - container.clientWidth) > 20
+				|| Math.abs(containerHeight - container.clientHeight) > 20) {
+		  	containerWidth = container.clientWidth;
+		  	containerHeight = container.clientHeight;
+		  	debounce(() => {
+  				window.clearTimeout(intervalId);
+  				d3.selectAll(".legend-tooltip").style("display", "none");
+  				drawChart(data, container, options);
+  			}, 500)();
+			}
+		}
+		return intervalId;
 	}
 
 	function debounce(func, wait, immediate?) {
@@ -182,7 +220,7 @@ export namespace Charts {
 
 	function redrawAll() {
 		Object.keys(redrawFunctions).forEach((chart) => {
-			redrawFunctions[chart].self.drawChart(redrawFunctions[chart].data, redrawFunctions[chart].parent, redrawFunctions[chart].options)
+			redrawFunctions[chart].self.drawChart(redrawFunctions[chart].data, redrawFunctions[chart].parentSelection.node(), redrawFunctions[chart].options)
 		})
 	}
 
@@ -191,8 +229,9 @@ export namespace Charts {
 			.domain(data.map(d => d[options.xDomain]));
 	}
 
-	export function setYScale(data, options, activeSeries) {
-		let yScale = d3.scaleLinear().range([options.chartSize.height, 0]);
+	export function setYScale(svg, data, options, activeSeries) {
+		const yHeight = options.chartSize.height - svg.select(".x.axis").node().getBBox().height;
+		let yScale = d3.scaleLinear().range([yHeight, 0]);
 		const keys = activeSeries.length > 0 ? activeSeries : options.yDomain;
 		if (options.type === 'stackedBar') {
 			const yMax = d3.max(data, d => keys.map(val => d[val]).reduce((acc, cur) => acc + cur, 0));
@@ -206,20 +245,22 @@ export namespace Charts {
 	}
 
 	export function setClickableLegend(data, parent, options) {
-		parent.selectAll(".legend-btn").each(function(d, i) {
-			d3.select(this).on("click", function(d) {
+		parent.selectAll('.legend-btn').each(function(d, i) {
+			d3.select(this).on('click', function(d) {
+				parent.selectAll(".chart-tooltip").remove();
+				parent.selectAll(".label-tooltip").remove();
 				Legend.updateLegend(this);
-				drawChart(data, parent, options);
+				drawChart(data, parent.node(), options);
 			});
 		})
 	}
 
 	export function setClickableLegendInTooltip(data, parent, options) {
-		const tooltip = parent.select(".legend-tooltip-content")
-		tooltip.selectAll(".legend-btn").each(function(d, i) {
-			d3.select(this).on("click", function(d) {
+		const tooltip = parent.select('.legend-tooltip-content')
+		tooltip.selectAll('.legend-btn').each(function(d, i) {
+			d3.select(this).on('click', function(d) {
 				Legend.updateLegend(this);
-				drawChart(data, d3.select(parent.node().parentNode), options);
+				drawChart(data, parent.node().parentNode, options);
 			});
 		})
 	}
@@ -230,31 +271,31 @@ export namespace Charts {
 
 	export function getActiveDataSeries(container) {
 		const activeSeries = [];
-		if (container.selectAll(".legend-tooltip").nodes().length > 0) {
-			container = container.select(".legend-tooltip");
+		if (container.selectAll('.legend-tooltip').nodes().length > 0) {
+			container = container.select('.legend-tooltip');
 		}
-		container.selectAll(".legend-btn").filter(".active").each(function(b) {
-			activeSeries.push(d3.select(this).select("text").text())
+		container.selectAll('.legend-btn').filter('.active').each(function(b) {
+			activeSeries.push(d3.select(this).select('text').text())
 		})
 		return activeSeries;
 	}
 
 	export function setChartIDContainer(parent) {
 		let chartID, container;
-		if (parent.select(".chart-wrapper").nodes().length > 0) {
-			container = parent.select(".chart-wrapper")
-			chartID = container.attr("chart-id");
-			container.selectAll('svg').remove();
+		if (parent.select('.chart-wrapper').nodes().length > 0) {
+			container = parent.select('.chart-wrapper')
+			chartID = container.attr('chart-id');
+			container.selectAll('.chart-svg').remove();
 		} else {
 			chartID = Charts.setUniqueID();
 			container = parent.append('div')
-			container.attr("chart-id", chartID)
-				.classed("chart-wrapper", true);
-			if (container.select(".legend").nodes().length === 0) {
-				container.append("ul").attr("class", "legend");
+			container.attr('chart-id', chartID)
+				.classed('chart-wrapper', true);
+			if (container.select('.legend-wrapper').nodes().length === 0) {
+				const legendWrapper = container.append('div').attr('class', 'legend-wrapper');
+				legendWrapper.append('ul').attr('class', 'legend');
 			}
 		}
 		return {chartID, container}
 	}
-
 }
