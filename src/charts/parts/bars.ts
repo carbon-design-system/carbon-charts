@@ -36,7 +36,7 @@ export namespace Bars {
 			}
 		}
 		if (options.containerResizable) {
-			Charts.setResizeWhenContainerChange(data, parent, options);
+			Charts.setResizeWhenContainerChange(chartID, data, parent, options);
 		}
 		if (options.windowResizable) {
 			Charts.setResizableWindow();

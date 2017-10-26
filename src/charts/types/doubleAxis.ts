@@ -51,7 +51,7 @@ export namespace DoubleAxis {
 		Lines.draw(svg, xScale, y2Scale, options, data, y2ActiveSeries);
 		Lines.addDataPointEventListener(parent, svg);
 		if (options.containerResizable) {
-			Charts.setResizeWhenContainerChange(data, parent, options);
+			Charts.setResizeWhenContainerChange(chartID, data, parent, options);
 		}
 	}
 }

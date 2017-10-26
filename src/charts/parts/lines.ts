@@ -38,7 +38,7 @@ export namespace Lines {
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
 		addDataPointEventListener(parent, svg);
 		if (options.containerResizable) {
-			Charts.setResizeWhenContainerChange(data, parent, options);
+			Charts.setResizeWhenContainerChange(chartID, data, parent, options);
 		}
 	}
 

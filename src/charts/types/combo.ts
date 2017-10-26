@@ -66,7 +66,7 @@ export namespace Combo {
 		Lines.draw(svg, xScaleLine, yScaleLine, options, data, activeLineSeries);
 		addDataPointEventListener(parent, svg);
 		if (options.containerResizable) {
-			Charts.setResizeWhenContainerChange(data, parent, options);
+			Charts.setResizeWhenContainerChange(chartID, data, parent, options);
 		}
 	}
 }

@@ -37,7 +37,7 @@ export namespace StackedBars {
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
 		Bars.addDataPointEventListener(parent, svg);
 		if (options.containerResizable) {
-			Charts.setResizeWhenContainerChange(data, parent, options);
+			Charts.setResizeWhenContainerChange(chartID, data, parent, options);
 		}
 	}
 
