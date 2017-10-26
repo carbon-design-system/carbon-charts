@@ -167,30 +167,32 @@ export namespace Charts {
 		d3.select(window).on('resize', debounce(() => {
 			d3.selectAll(".chart-tooltip").remove();
 			d3.selectAll(".label-tooltip").remove();
-			resizeTimers.forEach(id => {
-				window.clearTimeout(id);
-				resizeTimers = [];
+			Object.keys(resizeTimers).forEach(chartID => {
+				window.clearTimeout(resizeTimers[chartID]);
 			})
+			resizeTimers = {};
 			redrawAll();
 		}, 250));
 	}
 
-	export let resizeTimers = [];
+	export let resizeTimers = {};
 
-	export function setResizeWhenContainerChange(data, container, options) {
+	export function setResizeWhenContainerChange(chartID, data, container, options) {
 		let containerWidth = container.clientWidth;
 		let containerHeight = container.clientHeight;
 		let intervalId = setInterval(resizeTimer, 800);
-		resizeTimers.push(intervalId);
+		resizeTimers[chartID] = intervalId;
 		function resizeTimer() {
-			if (Math.abs(containerWidth - container.clientWidth) > 20
-				|| Math.abs(containerHeight - container.clientHeight) > 20) {
+			if ((container.clientWidth > 0 || container.clientHeight > 0) && (Math.abs(containerWidth - container.clientWidth) > 20
+							|| Math.abs(containerHeight - container.clientHeight) > 20)) {
 		  	containerWidth = container.clientWidth;
 		  	containerHeight = container.clientHeight;
 		  	debounce(() => {
   				window.clearTimeout(intervalId);
   				d3.selectAll(".legend-tooltip").style("display", "none");
-  				drawChart(data, container, options);
+  				if (resizeTimers[chartID]) {
+  					drawChart(data, container, options);
+  				}
   			}, 500)();
 			}
 		}
