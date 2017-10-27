@@ -1,37 +1,37 @@
-import * as d3 from 'd3'
-import {Axis} from './axis.ts'
-import {Grid} from './grid.ts'
-import {Legend} from './legend.ts'
-import {Tooltip} from './tooltip.ts'
-import '../style.scss'
-import {Charts} from '../index.ts'
+import * as d3 from "d3";
+import { Axis } from "./axis";
+import { Grid } from "./grid";
+import { Legend } from "./legend";
+import { Tooltip } from "./tooltip";
+import "../style.scss";
+import { Charts } from "../index";
 
 export namespace Lines {
 	export function drawChart(data, parent, options) {
-		options.type = 'line';
-		let parentSelection = d3.select(parent);
-		let {chartID, container} = Charts.setChartIDContainer(parentSelection)
+		options.type = "line";
+		const parentSelection = d3.select(parent);
+		const {chartID, container} = Charts.setChartIDContainer(parentSelection);
 		if (options.windowResizable) {
 			Charts.setResizableWindow();
 		}
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 
-		let svg = Charts.setSVG(data, container, options);
+		const svg = Charts.setSVG(data, container, options);
 
-		let xScale = Charts.setXScale(data, options);
+		const xScale = Charts.setXScale(data, options);
 		Axis.drawXAxis(svg, xScale, options, data);
-		let yScale = Charts.setYScale(svg, data, options, Charts.getActiveDataSeries(container));
+		const yScale = Charts.setYScale(svg, data, options, Charts.getActiveDataSeries(container));
 		Axis.drawYAxis(svg, yScale, options, data);
 		Grid.drawXGrid(svg, xScale, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			Charts.setClickableLegend(data, parentSelection, options)
+			Charts.setClickableLegend(data, parentSelection, options);
 		}
 		Charts.redrawFunctions[chartID] = {
 			self: this,
 			data, parentSelection, options
-		}
+		};
 
 		Legend.positionLegend(container, data, options);
 		Charts.repositionSVG(container);
@@ -46,7 +46,7 @@ export namespace Lines {
 		let keys: any;
 		let dataList = data;
 		if (options.dimension) {
-			let newKeys = <any>[];
+			const newKeys = <any>[];
 			dataList.forEach(d => {
 				if (!newKeys.includes(d[options.dimension])) {
 					newKeys.push(d[options.dimension]);
@@ -113,11 +113,11 @@ export namespace Lines {
 
 	export function addDataPointEventListener(parent, svg) {
 		svg.selectAll("circle")
-			.on('click', function(d) {
-				Tooltip.showTooltip(parent, d, resetLineOpacity)
-				reduceOpacity(svg, this)
+			.on("click", function(d) {
+				Tooltip.showTooltip(parent, d, resetLineOpacity);
+				reduceOpacity(svg, this);
 			})
-			.on('mouseover', function (d) {
+			.on("mouseover", function (d) {
 				svg.append("circle").attr("class", "hover-glow")
 					.attr("r", 5.5)
 					.attr("fill", "none")
@@ -125,9 +125,9 @@ export namespace Lines {
 					.attr("stroke", d.color)
 					.attr("stroke-opacity", 0.5)
 					.attr("cx", this.cx.baseVal.value)
-					.attr("cy", this.cy.baseVal.value)
+					.attr("cy", this.cy.baseVal.value);
 			})
-			.on('mouseout', function (d) {
+			.on("mouseout", function (d) {
 				svg.selectAll(".hover-glow").remove();
 			});
 	}
