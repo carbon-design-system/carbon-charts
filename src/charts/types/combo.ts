@@ -1,36 +1,36 @@
-import * as d3 from 'd3'
-import {Axis} from '../parts/axis.ts'
-import {Grid} from '../parts/grid.ts'
-import {Bars} from '../parts/bars.ts'
-import {StackedBars} from '../parts/stackedBars.ts'
-import {Lines} from '../parts/lines.ts'
-import {Legend} from '../parts/legend.ts'
-import {Tooltip} from '../parts/tooltip.ts'
-import '../style.scss'
-import {Charts} from '../index.ts'
+import * as d3 from "d3";
+import { Axis } from "../parts/axis";
+import { Grid } from "../parts/grid";
+import { Bars } from "../parts/bars";
+import { StackedBars } from "../parts/stackedBars";
+import { Lines } from "../parts/lines";
+import { Legend } from "../parts/legend";
+import { Tooltip } from "../parts/tooltip";
+import "../style.scss";
+import { Charts } from "../index";
 
 export namespace Combo {
 	export function drawChart(data, parent, options) {
-		options.type = 'combo';
-		let parentSelection = d3.select(parent);
-		let {chartID, container} = Charts.setChartIDContainer(parentSelection)
+		options.type = "combo";
+		const parentSelection = d3.select(parent);
+		const {chartID, container} = Charts.setChartIDContainer(parentSelection);
 		if (options.windowResizable) {
 			Charts.setResizableWindow();
 		}
 
 		options.chartSize = Charts.getActualChartSize(data, container, options);
-		let svg = Charts.setSVG(data, container, options);
+		const svg = Charts.setSVG(data, container, options);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			Charts.setClickableLegend(data, parentSelection, options)
+			Charts.setClickableLegend(data, parentSelection, options);
 		}
 		const activeSeries = <any>Charts.getActiveDataSeries(container);
 
 		const barData = [];
 		const lineData = [];
 		data.forEach((d) => {
-			let barDataObj = {};
-			let lineDataObj = {};
+			const barDataObj = {};
+			const lineDataObj = {};
 			barDataObj[options.xDomain] = d[options.xDomain];
 			lineDataObj[options.xDomain] = d[options.xDomain];
 			barDataObj[options.yDomain] = d[options.yDomain];
@@ -39,21 +39,21 @@ export namespace Combo {
 				lineDataObj[options.y2Domain[i]] = d[options.y2Domain[i]];
 			}
 			lineData.push(lineDataObj);
-		})
+		});
 		Charts.redrawFunctions[chartID] = {
 			self: this,
 			data, parentSelection, options
-		}
+		};
 		const activeBar =  activeSeries.includes(options.yDomain[0]);
 		const activeLineSeries = activeBar ? activeSeries.slice(1, activeSeries.length) : activeSeries;
 
-		let xScaleBar = Charts.setXScale(barData, options);
-		let xScaleLine = Charts.setXScale(lineData, options);
+		const xScaleBar = Charts.setXScale(barData, options);
+		const xScaleLine = Charts.setXScale(lineData, options);
 		Axis.drawXAxis(svg, xScaleBar, options, data);
-		let yScale = Charts.setYScale(svg, barData, options, options.yDomain);
-		let y2Scale = Charts.setYScale(svg, lineData, options, activeLineSeries);
-		let yScaleBar = Charts.setYScale(svg, barData, options, options.yDomain);
-		let yScaleLine = Charts.setYScale(svg, lineData, options, activeLineSeries);
+		const yScale = Charts.setYScale(svg, barData, options, options.yDomain);
+		const y2Scale = Charts.setYScale(svg, lineData, options, activeLineSeries);
+		const yScaleBar = Charts.setYScale(svg, barData, options, options.yDomain);
+		const yScaleLine = Charts.setYScale(svg, lineData, options, activeLineSeries);
 		Axis.drawYAxis(svg, yScale, options, barData);
 		Axis.drawY2Axis(svg, y2Scale, options, lineData);
 		Grid.drawXGrid(svg, xScaleBar, options, data);
@@ -73,28 +73,28 @@ export namespace Combo {
 
 function addDataPointEventListener(parent, svg) {
 	svg.selectAll("rect")
-		.on('mouseover', function (d) {
+		.on("mouseover", function (d) {
 			d3.select(this)
 				.attr("stroke-width", 6)
 				.attr("stroke", d.color)
-				.attr("stroke-opacity", 0.5)
+				.attr("stroke-opacity", 0.5);
 		})
-		.on('mouseout', function (d) {
+		.on("mouseout", function (d) {
 			d3.select(this)
 				.attr("stroke-width", 0)
 				.attr("stroke", "none")
-				.attr("stroke-opacity", 1)
+				.attr("stroke-opacity", 1);
 		})
-		.on('click', function(d) {
-			Tooltip.showTooltip(parent, d, resetLineBarOpacity)
-			reduceOpacity(svg, this)
+		.on("click", function(d) {
+			Tooltip.showTooltip(parent, d, resetLineBarOpacity);
+			reduceOpacity(svg, this);
 		});
 	svg.selectAll("circle")
-		.on('click', function(d) {
-			Tooltip.showTooltip(parent, d, resetLineBarOpacity)
-			reduceOpacity(svg, this)
+		.on("click", function(d) {
+			Tooltip.showTooltip(parent, d, resetLineBarOpacity);
+			reduceOpacity(svg, this);
 		})
-		.on('mouseover', function (d) {
+		.on("mouseover", function (d) {
 			svg.append("circle").attr("class", "hover-glow")
 				.attr("r", 5.5)
 				.attr("fill", "none")
@@ -102,34 +102,34 @@ function addDataPointEventListener(parent, svg) {
 				.attr("stroke", d.color)
 				.attr("stroke-opacity", 0.5)
 				.attr("cx", this.cx.baseVal.value)
-				.attr("cy", this.cy.baseVal.value)
+				.attr("cy", this.cy.baseVal.value);
 		})
-		.on('mouseout', function (d) {
+		.on("mouseout", function (d) {
 			svg.selectAll(".hover-glow").remove();
 		});
 }
 
 function reduceOpacity(svg, exception) {
 	if (exception.tagName === "rect") {
-		svg.selectAll("rect").attr("fill-opacity", 0.25)
-		d3.select(exception).attr("fill-opacity", false)
-		svg.selectAll("path").attr("stroke-opacity", 0.25)
-		svg.selectAll("circle").attr("stroke-opacity", 0.25)
+		svg.selectAll("rect").attr("fill-opacity", 0.25);
+		d3.select(exception).attr("fill-opacity", false);
+		svg.selectAll("path").attr("stroke-opacity", 0.25);
+		svg.selectAll("circle").attr("stroke-opacity", 0.25);
 	} else if (exception.tagName === "circle") {
-		svg.selectAll("rect").attr("fill-opacity", 0.25)
-		svg.selectAll("path").attr("stroke-opacity", 0.25)
-		svg.selectAll("circle").attr("stroke-opacity", 0.25)
-		d3.select(exception.parentNode).select("path").attr("stroke-opacity", 1)
-		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", 1)
-		d3.select(exception).attr("stroke-opacity", 1)
-		d3.select(exception).attr("fill", d3.select(exception).attr("stroke"))
+		svg.selectAll("rect").attr("fill-opacity", 0.25);
+		svg.selectAll("path").attr("stroke-opacity", 0.25);
+		svg.selectAll("circle").attr("stroke-opacity", 0.25);
+		d3.select(exception.parentNode).select("path").attr("stroke-opacity", 1);
+		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", 1);
+		d3.select(exception).attr("stroke-opacity", 1);
+		d3.select(exception).attr("fill", d3.select(exception).attr("stroke"));
 	}
 }
 
 function resetLineBarOpacity() {
 	const svg = d3.selectAll("svg");
-	svg.selectAll("path").attr("stroke-opacity", 1)
+	svg.selectAll("path").attr("stroke-opacity", 1);
 	svg.selectAll("circle").attr("stroke-opacity", 1)
-		.attr("fill", "white")
-	svg.selectAll("rect").attr("fill-opacity", 1)
+		.attr("fill", "white");
+	svg.selectAll("rect").attr("fill-opacity", 1);
 }

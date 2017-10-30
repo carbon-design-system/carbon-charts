@@ -1,12 +1,12 @@
-import * as d3 from 'd3'
+import * as d3 from "d3";
 
 export namespace Grid {
-  export function drawXGrid(svg, xScale, options, data) {
-  	const yHeight = options.chartSize.height - svg.select(".x.axis").node().getBBox().height;
+	export function drawXGrid(svg, xScale, options, data) {
+	const yHeight = options.chartSize.height - svg.select(".x.axis").node().getBBox().height;
 		const xGrid = d3.axisBottom(xScale)
 			.tickSizeInner(-yHeight)
 			.tickSizeOuter(0);
-		let g = svg.select(".x.grid")
+		const g = svg.select(".x.grid")
 			.attr("transform", `translate(0, ${yHeight})`)
 			.call(xGrid);
 		g.selectAll("line")
@@ -15,14 +15,14 @@ export namespace Grid {
 		g.select(".domain").remove();
 	}
 
-  export function drawYGrid(svg, yScale, options, data) {
-  	const tickNum = options.y2Ticks ? d3.max([options.yTicks, options.y2Ticks]) : options.yTicks;
-  	const yHeight = options.chartSize.height - svg.select(".x.axis").node().getBBox().height;
-		let yGrid = d3.axisLeft(yScale)
+	export function drawYGrid(svg, yScale, options, data) {
+		const tickNum = options.y2Ticks ? d3.max([options.yTicks, options.y2Ticks]) : options.yTicks;
+		const yHeight = options.chartSize.height - svg.select(".x.axis").node().getBBox().height;
+		const yGrid = d3.axisLeft(yScale)
 			.tickSizeInner(-options.chartSize.width)
 			.tickSizeOuter(0)
 			.ticks(tickNum);
-		let g = svg.select(".y.grid")
+		const g = svg.select(".y.grid")
 			.attr("transform", `translate(0, 0)`)
 			.call(yGrid);
 		g.selectAll("line")

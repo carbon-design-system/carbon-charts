@@ -1,50 +1,49 @@
-// export {HelloWorld} from './hello-world'
-import * as d3 from 'd3'
-import {Axis} from '../parts/axis.ts'
-import {Grid} from '../parts/grid.ts'
-import {Bars} from '../parts/bars.ts'
-import {StackedBars} from '../parts/stackedBars.ts'
-import {Lines} from '../parts/lines.ts'
-import {Legend} from '../parts/legend.ts'
-import {Tooltip} from '../parts/tooltip.ts'
-import '../style.scss'
-import {Charts} from '../index.ts'
+import * as d3 from "d3";
+import { Axis } from "../parts/axis";
+import { Grid } from "../parts/grid";
+import { Bars } from "../parts/bars";
+import { StackedBars } from "../parts/stackedBars";
+import { Lines } from "../parts/lines";
+import { Legend } from "../parts/legend";
+import { Tooltip } from "../parts/tooltip";
+import "../style.scss";
+import { Charts } from "../index";
 
-let localData = <any>{};
+const localData = <any>{};
 let localOptions = <any>{};
 export namespace DoubleAxis {
 	export function drawChart(data, parent, options) {
-		options.type = 'doubleAxis';
-		let parentSelection = d3.select(parent);
-		let {chartID, container} = Charts.setChartIDContainer(parentSelection)
+		options.type = "doubleAxis";
+		const parentSelection = d3.select(parent);
+		const {chartID, container} = Charts.setChartIDContainer(parentSelection);
 		if (options.windowResizable) {
 			Charts.setResizableWindow();
 		}
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 		localOptions = options;
-		let svg = Charts.setSVG(data, container, options);
+		const svg = Charts.setSVG(data, container, options);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
-			Charts.setClickableLegend(data, parentSelection, options)
+			Charts.setClickableLegend(data, parentSelection, options);
 		}
 		const activeSeries = <any>Charts.getActiveDataSeries(container);
-		const y1ActiveSeries = options.yDomain.filter(val => activeSeries.includes(val))
-		const y2ActiveSeries = options.y2Domain.filter(val => activeSeries.includes(val))
+		const y1ActiveSeries = options.yDomain.filter(val => activeSeries.includes(val));
+		const y2ActiveSeries = options.y2Domain.filter(val => activeSeries.includes(val));
 
-		let xScale = Charts.setXScale(data, options);
+		const xScale = Charts.setXScale(data, options);
 		Axis.drawXAxis(svg, xScale, options, data);
-		let yScale = Charts.setYScale(svg, data, options, y1ActiveSeries);
-		let y2Scale = Charts.setYScale(svg, data, options, y2ActiveSeries);
+		const yScale = Charts.setYScale(svg, data, options, y1ActiveSeries);
+		const y2Scale = Charts.setYScale(svg, data, options, y2ActiveSeries);
 		Axis.drawYAxis(svg, yScale, options, data);
 		svg.select(".inner-wrap").append("g")
-			.attr("class", "y2 axis")
+			.attr("class", "y2 axis");
 		Axis.drawY2Axis(svg, y2Scale, options, data);
 		Grid.drawXGrid(svg, xScale, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
 		Charts.redrawFunctions[chartID] = {
 			self: this,
 			data, parentSelection, options
-		}
+		};
 		Legend.positionLegend(container, data, options);
 		Charts.repositionSVG(container);
 		Lines.draw(svg, xScale, yScale, options, data, y1ActiveSeries);
