@@ -61,8 +61,8 @@ export namespace Charts {
 		const xScale = setXScale(data, options);
 		const yScale = setYScale(svg, data, options, getActiveDataSeries(container));
 
-		Axis.drawXAxis(svg, xScale, options, data);
-		Axis.drawYAxis(svg, yScale, options, data);
+		Axis.drawXAxis(svg, xScale, options);
+		Axis.drawYAxis(svg, yScale, options);
 		Grid.drawXGrid(svg, xScale, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
 		Legend.addLegend(container, data, options);

@@ -49,13 +49,13 @@ export namespace Combo {
 
 		const xScaleBar = Charts.setXScale(barData, options);
 		const xScaleLine = Charts.setXScale(lineData, options);
-		Axis.drawXAxis(svg, xScaleBar, options, data);
+		Axis.drawXAxis(svg, xScaleBar, options);
 		const yScale = Charts.setYScale(svg, barData, options, options.yDomain);
 		const y2Scale = Charts.setYScale(svg, lineData, options, activeLineSeries);
 		const yScaleBar = Charts.setYScale(svg, barData, options, options.yDomain);
 		const yScaleLine = Charts.setYScale(svg, lineData, options, activeLineSeries);
-		Axis.drawYAxis(svg, yScale, options, barData);
-		Axis.drawY2Axis(svg, y2Scale, options, lineData);
+		Axis.drawYAxis(svg, yScale, options);
+		Axis.drawY2Axis(svg, y2Scale, options);
 		Grid.drawXGrid(svg, xScaleBar, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
 		Legend.positionLegend(container, data, options);

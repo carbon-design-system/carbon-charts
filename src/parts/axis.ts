@@ -8,7 +8,7 @@ export namespace Axis {
 		maxTickLetNum: 28
 	};
 
-	export function drawYAxis(svg, yScale, options, data) {
+	export function drawYAxis(svg, yScale, options) {
 		const maxWidth = 0;
 		const yAxis = d3.axisLeft(yScale);
 		setTickStyle(yAxis, options.yTicks);
@@ -26,7 +26,7 @@ export namespace Axis {
 			.attr("class", "y axis-label");
 	}
 
-	export function drawY2Axis(svg, yScale, options, data) {
+	export function drawY2Axis(svg, yScale, options) {
 		svg.append("g")
 			.attr("class", "y2 axis");
 		const maxWidth = 0;
@@ -69,7 +69,7 @@ export namespace Axis {
 		return axisLabel;
 	}
 
-	export function drawXAxis(svg, xScale, options, data) {
+	export function drawXAxis(svg, xScale, options) {
 		const xAxis = d3.axisBottom(xScale)
 			.tickSizeInner(0)
 			.tickSizeOuter(0);

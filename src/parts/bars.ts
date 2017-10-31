@@ -20,9 +20,9 @@ export namespace Bars {
 		const activeDataSeries = Charts.getActiveDataSeries(container);
 
 		const xScale = Charts.setXScale(data, options);
-		Axis.drawXAxis(svg, xScale, options, data);
+		Axis.drawXAxis(svg, xScale, options);
 		const yScale = Charts.setYScale(svg, data, options, activeDataSeries);
-		Axis.drawYAxis(svg, yScale, options, data);
+		Axis.drawYAxis(svg, yScale, options);
 		Grid.drawXGrid(svg, xScale, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
 		draw(svg, xScale, yScale, options, data, activeDataSeries);

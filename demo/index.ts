@@ -1,12 +1,12 @@
 import "@peretz/matter/matter.css";
 
 import "./index.scss";
-import { Charts } from "../src/charts/index";
-import { Combo } from "../src/charts/types/combo";
-import { DoubleAxis } from "../src/charts/types/doubleAxis";
-import { Bars } from "../src/charts/parts/bars";
-import { Lines } from "../src/charts/parts/lines";
-import { StackedBars } from "../src/charts/parts/stackedBars";
+import { Charts } from "../src/index";
+import { Combo } from "../src/types/combo";
+import { DoubleAxis } from "../src/types/doubleAxis";
+import { Bars } from "../src/parts/bars";
+import { Lines } from "../src/parts/lines";
+import { StackedBars } from "../src/parts/stackedBars";
 
 const colors = [
 	"#009BEF",

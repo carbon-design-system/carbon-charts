@@ -19,9 +19,9 @@ export namespace Lines {
 		const svg = Charts.setSVG(data, container, options);
 
 		const xScale = Charts.setXScale(data, options);
-		Axis.drawXAxis(svg, xScale, options, data);
+		Axis.drawXAxis(svg, xScale, options);
 		const yScale = Charts.setYScale(svg, data, options, Charts.getActiveDataSeries(container));
-		Axis.drawYAxis(svg, yScale, options, data);
+		Axis.drawYAxis(svg, yScale, options);
 		Grid.drawXGrid(svg, xScale, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
 		Legend.addLegend(container, data, options);

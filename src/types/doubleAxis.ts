@@ -31,13 +31,13 @@ export namespace DoubleAxis {
 		const y2ActiveSeries = options.y2Domain.filter(val => activeSeries.includes(val));
 
 		const xScale = Charts.setXScale(data, options);
-		Axis.drawXAxis(svg, xScale, options, data);
+		Axis.drawXAxis(svg, xScale, options);
 		const yScale = Charts.setYScale(svg, data, options, y1ActiveSeries);
 		const y2Scale = Charts.setYScale(svg, data, options, y2ActiveSeries);
-		Axis.drawYAxis(svg, yScale, options, data);
+		Axis.drawYAxis(svg, yScale, options);
 		svg.select(".inner-wrap").append("g")
 			.attr("class", "y2 axis");
-		Axis.drawY2Axis(svg, y2Scale, options, data);
+		Axis.drawY2Axis(svg, y2Scale, options);
 		Grid.drawXGrid(svg, xScale, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
 		Charts.redrawFunctions[chartID] = {
