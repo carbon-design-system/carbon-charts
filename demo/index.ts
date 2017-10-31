@@ -1,14 +1,14 @@
-import '@peretz/matter/matter.css'
+import "@peretz/matter/matter.css";
 
-import './index.scss'
-import {Charts} from '../src/charts/index.ts'
-import {Combo} from '../src/charts/types/combo.ts'
-import {DoubleAxis} from '../src/charts/types/doubleAxis.ts'
-import {Bars} from '../src/charts/parts/bars.ts'
-import {Lines} from '../src/charts/parts/lines.ts'
-import {StackedBars} from '../src/charts/parts/stackedBars.ts'
+import "./index.scss";
+import { Charts } from "../src/charts/index";
+import { Combo } from "../src/charts/types/combo";
+import { DoubleAxis } from "../src/charts/types/doubleAxis";
+import { Bars } from "../src/charts/parts/bars";
+import { Lines } from "../src/charts/parts/lines";
+import { StackedBars } from "../src/charts/parts/stackedBars";
 
-let colors = [
+const colors = [
 	"#009BEF",
 	"#95D13C",
 	"#785EF0",
@@ -21,10 +21,10 @@ let colors = [
 	"#5A3EC8",
 	"#40D5BB",
 	"#FF509E"
-]
+];
 
 
-let longDataOptions = {
+const longDataOptions = {
 	xDomain: "Part number",
 	yDomain: ["Total", "Returned", "Defects", "This is an extra long long long legend", "Number of sold products"],
 	yTicks: 5,
@@ -32,9 +32,9 @@ let longDataOptions = {
 	containerResizable: true,
 	// windowResizable: true,
 	colors
-}
+};
 
-let doubleYAxisOptions = {
+const doubleYAxisOptions = {
 	xDomain: "Part number",
 	yDomain: ["Total"],
 	y2Domain: ["Returned", "Defects", "This is an extra long long long legend", "Number of sold products"],
@@ -44,9 +44,9 @@ let doubleYAxisOptions = {
 	containerResizable: true,
 	// windowResizable: true,
 	colors
-}
+};
 
-let options = {
+const options = {
 	xDomain: "Part number",
 	yDomain: ["Sold", "More", "Qty"],
 	yTicks: 5,
@@ -54,15 +54,15 @@ let options = {
 	containerResizable: true,
 	// windowResizable: true,
 	colors
-}
+};
 
-let optionsWithFormatter = {
+const optionsWithFormatter = {
 	xDomain: "Day",
 	yDomain: ["Clicks"],
 	y2Domain: ["Click rate"],
 	yFormatter: {
 		"Click rate"(value) {
-			return value + "%"
+			return value + "%";
 		}
 	},
 	yTicks: 5,
@@ -70,7 +70,7 @@ let optionsWithFormatter = {
 	containerResizable: true,
 	// windowResizable: true,
 	colors
-}
+};
 
 const data = [
 	{
@@ -204,36 +204,36 @@ const longData = [
 
 const chartTypes = [
 	{
-		id: 'bar',
-		name: 'Bar',
+		id: "bar",
+		name: "Bar",
 		avail: true,
 		options: longDataOptions,
 		data: longData
 	},
 	{
-		id: 'line',
-		name: 'Line',
+		id: "line",
+		name: "Line",
 		avail: true,
 		options,
 		data
 	},
 	{
-		id: 'stackedBar',
-		name: 'Stacked Bar',
+		id: "stackedBar",
+		name: "Stacked Bar",
 		avail: true,
 		options,
 		data
 	},
 	{
-		id: 'doubleAxis',
-		name: 'Double Axis',
+		id: "doubleAxis",
+		name: "Double Axis",
 		avail: true,
 		options: optionsWithFormatter,
 		data: doubleAxisData
 	},
 	{
-		id: 'combo',
-		name: 'Combo',
+		id: "combo",
+		name: "Combo",
 		avail: true,
 		options: doubleYAxisOptions,
 		data: longData
@@ -241,7 +241,7 @@ const chartTypes = [
 ];
 
 chartTypes.forEach(type => {
-	let container = document.getElementById(type.id + '-chart-holder')
+	const container = document.getElementById(type.id + "-chart-holder");
 	// const header = document.createElement("h2");
 	// header.className = "chart-title";
 	// header.appendChild(document.createTextNode(type.name));
@@ -266,4 +266,4 @@ chartTypes.forEach(type => {
 			Bars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
 			break;
 	}
-})
+});
