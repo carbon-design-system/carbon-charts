@@ -171,7 +171,7 @@ export namespace Charts {
 			d3.selectAll(".label-tooltip").remove();
 			Object.keys(resizeTimers).forEach(chartID => {
 				window.clearTimeout(resizeTimers[chartID]);
-			})
+			});
 			resizeTimers = {};
 			redrawAll();
 		}, 250));
@@ -180,20 +180,20 @@ export namespace Charts {
 	export function setResizeWhenContainerChange(chartID, data, container, options) {
 		let containerWidth = container.clientWidth;
 		let containerHeight = container.clientHeight;
-		let intervalId = setInterval(resizeTimer, 800);
+		const intervalId = setInterval(resizeTimer, 800);
 		resizeTimers[chartID] = intervalId;
 		function resizeTimer() {
 			if ((container.clientWidth > 0 || container.clientHeight > 0) && (Math.abs(containerWidth - container.clientWidth) > 20
 							|| Math.abs(containerHeight - container.clientHeight) > 20)) {
-		  	containerWidth = container.clientWidth;
-		  	containerHeight = container.clientHeight;
-		  	debounce(() => {
-  				window.clearTimeout(intervalId);
-  				d3.selectAll(".legend-tooltip").style("display", "none");
-  				if (resizeTimers[chartID]) {
-  					drawChart(data, container, options);
-  				}
-  			}, 500)();
+				containerWidth = container.clientWidth;
+				containerHeight = container.clientHeight;
+				debounce(() => {
+					window.clearTimeout(intervalId);
+					d3.selectAll(".legend-tooltip").style("display", "none");
+					if (resizeTimers[chartID]) {
+						drawChart(data, container, options);
+					}
+				}, 500)();
 			}
 		}
 		return intervalId;
