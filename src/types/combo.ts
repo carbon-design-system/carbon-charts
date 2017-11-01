@@ -85,13 +85,13 @@ function addDataPointEventListener(parent, svg) {
 				.attr("stroke-opacity", 1);
 		})
 		.on("click", function(d) {
-			Tooltip.showTooltip(parent, d, resetLineBarOpacity);
-			reduceOpacity(svg, this);
+			Tooltip.showTooltip(parent, d);
+			Charts.reduceOpacity(svg, this);
 		});
 	svg.selectAll("circle")
 		.on("click", function(d) {
-			Tooltip.showTooltip(parent, d, resetLineBarOpacity);
-			reduceOpacity(svg, this);
+			Tooltip.showTooltip(parent, d);
+			Charts.reduceOpacity(svg, this);
 		})
 		.on("mouseover", function (d) {
 			svg.append("circle").attr("class", "hover-glow")
@@ -106,29 +106,4 @@ function addDataPointEventListener(parent, svg) {
 		.on("mouseout", function (d) {
 			svg.selectAll(".hover-glow").remove();
 		});
-}
-
-function reduceOpacity(svg, exception) {
-	if (exception.tagName === "rect") {
-		svg.selectAll("rect").attr("fill-opacity", 0.25);
-		d3.select(exception).attr("fill-opacity", false);
-		svg.selectAll("path").attr("stroke-opacity", 0.25);
-		svg.selectAll("circle").attr("stroke-opacity", 0.25);
-	} else if (exception.tagName === "circle") {
-		svg.selectAll("rect").attr("fill-opacity", 0.25);
-		svg.selectAll("path").attr("stroke-opacity", 0.25);
-		svg.selectAll("circle").attr("stroke-opacity", 0.25);
-		d3.select(exception.parentNode).select("path").attr("stroke-opacity", 1);
-		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", 1);
-		d3.select(exception).attr("stroke-opacity", 1);
-		d3.select(exception).attr("fill", d3.select(exception).attr("stroke"));
-	}
-}
-
-function resetLineBarOpacity() {
-	const svg = d3.selectAll("svg");
-	svg.selectAll("path").attr("stroke-opacity", 1);
-	svg.selectAll("circle").attr("stroke-opacity", 1)
-		.attr("fill", "white");
-	svg.selectAll("rect").attr("fill-opacity", 1);
 }

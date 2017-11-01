@@ -121,7 +121,7 @@ export namespace Charts {
 		}
 	}
 
-	export function setTooltip(chartID, resetOpacity) {
+	export function setTooltip(chartID) {
 		let tooltip = d3.select("#tooltip-" + chartID);
 		if (tooltip.nodes().length <= 0) {
 			tooltip = d3.select("body").append("div")
@@ -285,5 +285,24 @@ export namespace Charts {
 			}
 		}
 		return {chartID, container};
+	}
+
+	export function resetOpacity() {
+		const svg = d3.selectAll("svg");
+		svg.selectAll("path").attr("stroke-opacity", 1);
+		svg.selectAll("circle").attr("stroke-opacity", 1)
+			.attr("fill", "white");
+		svg.selectAll("rect").attr("fill-opacity", 1);
+	}
+
+	export function reduceOpacity(svg, exception) {
+		svg.selectAll("rect").attr("fill-opacity", 0.25);
+		d3.select(exception).attr("fill-opacity", false);
+		svg.selectAll("path").attr("stroke-opacity", 0.25);
+		svg.selectAll("circle").attr("stroke-opacity", 0.25);
+		d3.select(exception.parentNode).select("path").attr("stroke-opacity", 1);
+		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", 1);
+		d3.select(exception).attr("stroke-opacity", 1);
+		d3.select(exception).attr("fill", d3.select(exception).attr("stroke"));
 	}
 }

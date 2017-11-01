@@ -78,10 +78,6 @@ export namespace Bars {
 				.attr("height", d => yHeight - yScale(d.value));
 	}
 
-	export function resetBarOpacity() {
-		d3.selectAll("svg").selectAll("rect").attr("fill-opacity", 1);
-	}
-
 	export function addDataPointEventListener(parent, svg) {
 		svg.selectAll("rect")
 			.on("mouseover", function (d) {
@@ -97,13 +93,8 @@ export namespace Bars {
 					.attr("stroke-opacity", 1);
 			})
 			.on("click", function(d) {
-				Tooltip.showTooltip(parent, d, resetBarOpacity);
-				reduceOpacity(svg, this);
+				Tooltip.showTooltip(parent, d);
+				Charts.reduceOpacity(svg, this);
 			});
 	}
-}
-
-function reduceOpacity(svg, exceptionRect) {
-	svg.selectAll("rect").attr("fill-opacity", 0.25);
-	d3.select(exceptionRect).attr("fill-opacity", false);
 }

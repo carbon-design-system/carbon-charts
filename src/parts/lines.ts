@@ -114,8 +114,8 @@ export namespace Lines {
 	export function addDataPointEventListener(parent, svg) {
 		svg.selectAll("circle")
 			.on("click", function(d) {
-				Tooltip.showTooltip(parent, d, resetLineOpacity);
-				reduceOpacity(svg, this);
+				Tooltip.showTooltip(parent, d);
+				Charts.reduceOpacity(svg, this);
 			})
 			.on("mouseover", function (d) {
 				svg.append("circle").attr("class", "hover-glow")
@@ -130,21 +130,6 @@ export namespace Lines {
 			.on("mouseout", function (d) {
 				svg.selectAll(".hover-glow").remove();
 			});
-	}
-
-	export function reduceOpacity(svg, exceptionCircle) {
-		svg.selectAll("path").attr("stroke-opacity", 0.25);
-		svg.selectAll("circle").attr("stroke-opacity", 0.25);
-		d3.select(exceptionCircle.parentNode).select("path").attr("stroke-opacity", 1);
-		d3.select(exceptionCircle.parentNode).selectAll("circle").attr("stroke-opacity", 1);
-		d3.select(exceptionCircle).attr("stroke-opacity", 1);
-		d3.select(exceptionCircle).attr("fill", d3.select(exceptionCircle).attr("stroke"));
-	}
-
-	export function resetLineOpacity() {
-		d3.selectAll("svg").selectAll("path").attr("stroke-opacity", 1);
-		d3.selectAll("svg").selectAll("circle").attr("stroke-opacity", 1)
-			.attr("fill", "white");
 	}
 }
 

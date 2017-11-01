@@ -2,7 +2,6 @@ import * as d3 from "d3";
 import { Charts } from "../index";
 
 export namespace Tooltip {
-	let resetOpacityFunctions = [];
 	export function showLabelTooltip(container, d, leftSide) {
 		d3.selectAll(".label-tooltip").remove();
 		const mouseXPoint = d3.mouse(container)[0] + 10;
@@ -11,8 +10,7 @@ export namespace Tooltip {
 			.style("top", d3.mouse(container)[1] - 21 + "px");
 		Charts.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
-				resetOpacityFunctions.forEach(f => f());
-				resetOpacityFunctions = [];
+				Charts.resetOpacity();
 				d3.selectAll(".tooltip").remove();
 			});
 		tooltip.append("p").text(d);
@@ -27,10 +25,9 @@ export namespace Tooltip {
 		}
 	}
 
-	export function showTooltip(container, d, resetOpacity) {
-		resetOpacityFunctions.forEach(f => f());
-		resetOpacityFunctions = [];
-		resetOpacityFunctions.push(resetOpacity);
+	export function showTooltip(container, d) {
+		Charts.resetOpacity();
+
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(container).append("div")
 			.attr("class", "tooltip chart-tooltip")
@@ -38,8 +35,7 @@ export namespace Tooltip {
 			.style("border-color", d.color);
 		Charts.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
-				resetOpacityFunctions.forEach(f => f());
-				resetOpacityFunctions = [];
+				Charts.resetOpacity();
 				d3.selectAll(".tooltip").remove();
 			});
 		const dVal = d.formatter && d.formatter[d.series] ? d.formatter[d.series](d.value.toLocaleString()) : d.value.toLocaleString();
