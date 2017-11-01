@@ -237,8 +237,8 @@ export namespace Charts {
 	}
 
 	export function setClickableLegend(data, parent, options) {
-		parent.selectAll(".legend-btn").each(function(d, i) {
-			d3.select(this).on("click", function(ev) {
+		parent.selectAll(".legend-btn").each(function() {
+			d3.select(this).on("click", function() {
 				parent.selectAll(".chart-tooltip").remove();
 				parent.selectAll(".label-tooltip").remove();
 				Legend.updateLegend(this);
@@ -249,8 +249,8 @@ export namespace Charts {
 
 	export function setClickableLegendInTooltip(data, parent, options) {
 		const tooltip = parent.select(".legend-tooltip-content");
-		tooltip.selectAll(".legend-btn").each(function(d, i) {
-			d3.select(this).on("click", function(ev) {
+		tooltip.selectAll(".legend-btn").each(function() {
+			d3.select(this).on("click", function() {
 				Legend.updateLegend(this);
 				drawChart(data, parent.node().parentNode, options);
 			});
@@ -262,7 +262,7 @@ export namespace Charts {
 		if (container.selectAll(".legend-tooltip").nodes().length > 0) {
 			container = container.select(".legend-tooltip");
 		}
-		container.selectAll(".legend-btn").filter(".active").each(function(b) {
+		container.selectAll(".legend-btn").filter(".active").each(function() {
 			activeSeries.push(d3.select(this).select("text").text());
 		});
 		return activeSeries;

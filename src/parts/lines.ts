@@ -117,7 +117,7 @@ export namespace Lines {
 				Tooltip.showTooltip(parent, d);
 				Charts.reduceOpacity(svg, this);
 			})
-			.on("mouseover", function (d) {
+			.on("mouseover", function(d) {
 				svg.append("circle").attr("class", "hover-glow")
 					.attr("r", 5.5)
 					.attr("fill", "none")
@@ -127,7 +127,7 @@ export namespace Lines {
 					.attr("cx", this.cx.baseVal.value)
 					.attr("cy", this.cy.baseVal.value);
 			})
-			.on("mouseout", function (d) {
+			.on("mouseout", function() {
 				svg.selectAll(".hover-glow").remove();
 			});
 	}

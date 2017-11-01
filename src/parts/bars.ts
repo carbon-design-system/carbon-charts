@@ -80,13 +80,13 @@ export namespace Bars {
 
 	export function addDataPointEventListener(parent, svg) {
 		svg.selectAll("rect")
-			.on("mouseover", function (d) {
+			.on("mouseover", function(d) {
 				d3.select(this)
 					.attr("stroke-width", 6)
 					.attr("stroke", d.color)
 					.attr("stroke-opacity", 0.5);
 			})
-			.on("mouseout", function (d) {
+			.on("mouseout", function() {
 				d3.select(this)
 					.attr("stroke-width", 0)
 					.attr("stroke", "none")

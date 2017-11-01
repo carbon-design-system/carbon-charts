@@ -1,4 +1,4 @@
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
     plugins: ['karma-webpack', 'karma-jasmine', 'karma-phantomjs-launcher'],
     autoWatch: false,

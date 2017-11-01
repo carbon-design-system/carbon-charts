@@ -72,13 +72,13 @@ export namespace Combo {
 
 function addDataPointEventListener(parent, svg) {
 	svg.selectAll("rect")
-		.on("mouseover", function (d) {
+		.on("mouseover", function(d) {
 			d3.select(this)
 				.attr("stroke-width", 6)
 				.attr("stroke", d.color)
 				.attr("stroke-opacity", 0.5);
 		})
-		.on("mouseout", function (d) {
+		.on("mouseout", function() {
 			d3.select(this)
 				.attr("stroke-width", 0)
 				.attr("stroke", "none")
@@ -93,7 +93,7 @@ function addDataPointEventListener(parent, svg) {
 			Tooltip.showTooltip(parent, d);
 			Charts.reduceOpacity(svg, this);
 		})
-		.on("mouseover", function (d) {
+		.on("mouseover", function(d) {
 			svg.append("circle").attr("class", "hover-glow")
 				.attr("r", 5.5)
 				.attr("fill", "none")
@@ -103,7 +103,7 @@ function addDataPointEventListener(parent, svg) {
 				.attr("cx", this.cx.baseVal.value)
 				.attr("cy", this.cy.baseVal.value);
 		})
-		.on("mouseout", function (d) {
+		.on("mouseout", function() {
 			svg.selectAll(".hover-glow").remove();
 		});
 }

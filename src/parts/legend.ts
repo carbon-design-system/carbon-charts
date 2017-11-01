@@ -162,11 +162,11 @@ export namespace Legend {
 
 	export function addCircleHoverEffect() {
 		d3.selectAll(".legend-circle")
-			.on("mouseover", function(d, i) {
+			.on("mouseover", function() {
 				const color = this.style.backgroundColor.substring(4, this.style.backgroundColor.length - 1);
 				d3.select(this).style("box-shadow", "0 0 0 3px rgba(" + color + ", 0.2)");
 			})
-			.on("mouseout", function(d, i) {
+			.on("mouseout", function() {
 				d3.select(this).style("box-shadow", "none");
 			});
 	}

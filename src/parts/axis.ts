@@ -78,7 +78,7 @@ export namespace Axis {
 			.attr("dy", ".35em")
 			.attr("transform", "rotate(-45)")
 			.style("text-anchor", "end")
-			.call(t => wrapTick(t, svg));
+			.call(text => wrapTick(text, svg));
 
 		g.select(".domain")
 			.attr("stroke", "#959595")
@@ -114,10 +114,10 @@ export namespace Axis {
 		return label;
 	}
 
-	function wrapTick(t, svg) {
+	function wrapTick(ticks, svg) {
 		const letNum = axisConstants.maxTickLetNum;
-		t.each(function(d) {
-			if (d.length > letNum / 2) {
+		ticks.each(function(t) {
+			if (t.length > letNum / 2) {
 				const tick = d3.select(this);
 				const y = tick.attr("y");
 				tick.text("");
@@ -125,12 +125,12 @@ export namespace Axis {
 					.attr("x", 0).attr("y", y).attr("dx", "-1em").attr("dy", "-0.5em");
 				const tspan2 = tick.append("tspan")
 					.attr("x", 0).attr("y", y).attr("dx", "-1em").attr("dy", "0.5em");
-				if (d.length < letNum - 3) {
-					tspan1.text(d.substring(0, d.length / 2));
-					tspan2.text(d.substring(d.length / 2 + 1, d.length));
+				if (t.length < letNum - 3) {
+					tspan1.text(t.substring(0, t.length / 2));
+					tspan2.text(t.substring(t.length / 2 + 1, t.length));
 				} else {
-					tspan1.text(d.substring(0, letNum / 2));
-					tspan2.text(d.substring(letNum / 2, letNum - 3) + "...");
+					tspan1.text(t.substring(0, letNum / 2));
+					tspan2.text(t.substring(letNum / 2, letNum - 3) + "...");
 					tick.on("click", dd => {
 						Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, dd, true);
 					});
@@ -147,8 +147,8 @@ export namespace Axis {
 
 	function getLargestTickHeight(ticks) {
 		let largestHeight = 0;
-		ticks.each(function(t) {
-			const tickLength = this.getBBox().width;
+		ticks.each(function() {
+			const tickLength = this.getBBox().height;
 			if (tickLength > largestHeight) {
 				largestHeight = tickLength;
 			}
@@ -158,7 +158,7 @@ export namespace Axis {
 
 	function getLargestTickWidth(ticks) {
 		let largestWidth = 0;
-		ticks.each(function(t) {
+		ticks.each(function() {
 			const tickLength = this.getBBox().width;
 			if (tickLength > largestWidth) {
 				largestWidth = tickLength;
