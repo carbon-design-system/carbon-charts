@@ -7,11 +7,8 @@ import { Lines } from "./parts/lines";
 import { Combo } from "./types/combo";
 import { DoubleAxis } from "./types/doubleAxis";
 import { Legend } from "./parts/legend";
-import { Tooltip } from "./parts/tooltip";
 import "./style.scss";
 
-let localData = <any>{};
-let localOptions = <any>{};
 
 export namespace Charts {
 	export const bars = Bars;
@@ -44,18 +41,13 @@ export namespace Charts {
 			width: (container.node().clientWidth - margin.left - margin.right - moreForY2Axis) * ratio
 		};
 	}
-	export function updateData(data) {
-		localData = data;
-	}
 	export function removeChart(container) {
 		container.select("svg").remove();
 	}
 	export function renderChart(data, container, options) {
-		localData = data;
 		container.classed("chart-wrapper", true);
 		container.append("div").attr("class", "legend");
 		options.chartSize = getActualChartSize(data, container, options);
-		localOptions = options;
 
 		const svg = setSVG(data, container, options);
 		const xScale = setXScale(data, options);
@@ -100,11 +92,7 @@ export namespace Charts {
 	}
 
 	export function repositionSVG(container) {
-		const svg = container.select(".inner-wrap");
-		const xAxisHeight = container.select(".x.axis").node().getBBox().height;
 		const yAxisWidth = container.select(".y.axis").node().getBBox().width;
-		const leftWidth = container.node().clientWidth - svg.node().getBBox().width;
-		const yTranslateVal = container.select(".right-legend").node() ? yAxisWidth : yAxisWidth + leftWidth / 2;
 		container.style("padding-left", yAxisWidth + "px");
 	}
 
@@ -267,10 +255,6 @@ export namespace Charts {
 				drawChart(data, parent.node().parentNode, options);
 			});
 		});
-	}
-
-	export function updateChart(data, container, options) {
-		drawChart(data, container, options);
 	}
 
 	export function getActiveDataSeries(container) {

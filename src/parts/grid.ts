@@ -17,7 +17,6 @@ export namespace Grid {
 
 	export function drawYGrid(svg, yScale, options, data) {
 		const tickNum = options.y2Ticks ? d3.max([options.yTicks, options.y2Ticks]) : options.yTicks;
-		const yHeight = options.chartSize.height - svg.select(".x.axis").node().getBBox().height;
 		const yGrid = d3.axisLeft(yScale)
 			.tickSizeInner(-options.chartSize.width)
 			.tickSizeOuter(0)

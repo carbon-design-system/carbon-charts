@@ -88,7 +88,6 @@ export namespace Legend {
 	export function updateLegend(legend) {
 		const thisLegend = d3.select(legend);
 		const circle = d3.select(legend).select(".legend-circle");
-		const text = d3.select(legend).select("text");
 		thisLegend.classed("active", !thisLegend.classed("active"));
 		if (thisLegend.classed("active")) {
 			circle.style("background-color", circle.style("border-color"))

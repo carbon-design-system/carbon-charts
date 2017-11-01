@@ -1,5 +1,4 @@
 import * as d3 from "d3";
-import { event } from "d3-selection";
 import { Charts } from "../index";
 
 export namespace Tooltip {

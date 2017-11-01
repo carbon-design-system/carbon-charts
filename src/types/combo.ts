@@ -2,7 +2,6 @@ import * as d3 from "d3";
 import { Axis } from "../parts/axis";
 import { Grid } from "../parts/grid";
 import { Bars } from "../parts/bars";
-import { StackedBars } from "../parts/stackedBars";
 import { Lines } from "../parts/lines";
 import { Legend } from "../parts/legend";
 import { Tooltip } from "../parts/tooltip";
@@ -52,7 +51,7 @@ export namespace Combo {
 		Axis.drawXAxis(svg, xScaleBar, options);
 		const yScale = Charts.setYScale(svg, barData, options, options.yDomain);
 		const y2Scale = Charts.setYScale(svg, lineData, options, activeLineSeries);
-		const yScaleBar = Charts.setYScale(svg, barData, options, options.yDomain);
+		Charts.setYScale(svg, barData, options, options.yDomain);
 		const yScaleLine = Charts.setYScale(svg, lineData, options, activeLineSeries);
 		Axis.drawYAxis(svg, yScale, options);
 		Axis.drawY2Axis(svg, y2Scale, options);

@@ -9,7 +9,6 @@ export namespace Axis {
 	};
 
 	export function drawYAxis(svg, yScale, options) {
-		const maxWidth = 0;
 		const yAxis = d3.axisLeft(yScale);
 		setTickStyle(yAxis, options.yTicks);
 		const g = svg.select(".y.axis")
@@ -22,14 +21,13 @@ export namespace Axis {
 		const tickWidth = getLargestTickWidth(g.selectAll(".tick")) + 25;
 		const label = options.yDomain.join(", ");
 
-		const axisLabel = appendYAxisLabel(g, svg, -tickWidth, label, options, "y")
+		appendYAxisLabel(g, svg, -tickWidth, label, options, "y")
 			.attr("class", "y axis-label");
 	}
 
 	export function drawY2Axis(svg, yScale, options) {
 		svg.append("g")
 			.attr("class", "y2 axis");
-		const maxWidth = 0;
 		const yAxis = d3.axisRight(yScale);
 		setTickStyle(yAxis, options.y2Ticks);
 
@@ -42,7 +40,7 @@ export namespace Axis {
 		}
 		const tickWidth = getLargestTickWidth(g.selectAll(".tick")) + 15;
 		const label = options.y2Domain.join(", ");
-		const axisLabel = appendYAxisLabel(g, svg, tickWidth, label, options, "y2");
+		appendYAxisLabel(g, svg, tickWidth, label, options, "y2");
 	}
 
 	function appendYAxisLabel(g, svg, tickWidth, label, options, labelNum) {

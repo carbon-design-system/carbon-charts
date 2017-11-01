@@ -1,7 +1,6 @@
 import "@peretz/matter/matter.css";
 
 import "./index.scss";
-import { Charts } from "../src/index";
 import { Combo } from "../src/types/combo";
 import { DoubleAxis } from "../src/types/doubleAxis";
 import { Bars } from "../src/parts/bars";

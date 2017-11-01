@@ -2,7 +2,6 @@ import * as d3 from "d3";
 import { Axis } from "./axis";
 import { Grid } from "./grid";
 import { Legend } from "./legend";
-import { Tooltip } from "./tooltip";
 import { Bars } from "./bars";
 import "../style.scss";
 import { Charts } from "../index";

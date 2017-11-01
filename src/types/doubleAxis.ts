@@ -1,16 +1,11 @@
 import * as d3 from "d3";
 import { Axis } from "../parts/axis";
 import { Grid } from "../parts/grid";
-import { Bars } from "../parts/bars";
-import { StackedBars } from "../parts/stackedBars";
 import { Lines } from "../parts/lines";
 import { Legend } from "../parts/legend";
-import { Tooltip } from "../parts/tooltip";
 import "../style.scss";
 import { Charts } from "../index";
 
-const localData = <any>{};
-let localOptions = <any>{};
 export namespace DoubleAxis {
 	export function drawChart(data, parent, options) {
 		options.type = "doubleAxis";
@@ -20,7 +15,6 @@ export namespace DoubleAxis {
 			Charts.setResizableWindow();
 		}
 		options.chartSize = Charts.getActualChartSize(data, container, options);
-		localOptions = options;
 		const svg = Charts.setSVG(data, container, options);
 		Legend.addLegend(container, data, options);
 		if (options.legendClickable) {
