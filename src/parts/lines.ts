@@ -5,15 +5,13 @@ import { Legend } from "./legend";
 import { Tooltip } from "./tooltip";
 import "../style.scss";
 import { Charts } from "../index";
+import { Configuration } from "../configuration";
 
 export namespace Lines {
 	export function drawChart(data, parent, options) {
 		options.type = "line";
 		const parentSelection = d3.select(parent);
 		const {chartID, container} = Charts.setChartIDContainer(parentSelection);
-		if (options.windowResizable) {
-			Charts.setResizableWindow();
-		}
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 
 		const svg = Charts.setSVG(data, container, options);
@@ -28,10 +26,6 @@ export namespace Lines {
 		if (options.legendClickable) {
 			Charts.setClickableLegend(data, parentSelection, options);
 		}
-		Charts.redrawFunctions[chartID] = {
-			self: this,
-			data, parentSelection, options
-		};
 
 		Legend.positionLegend(container, data, options);
 		Charts.repositionSVG(container);
@@ -82,30 +76,30 @@ export namespace Lines {
 			const series = svg.append("g");
 			series.append("path")
 				.data([valueData])
-				.attr("fill", "none")
-				.attr("stroke", "steelblue")
-				.attr("stroke-linejoin", "round")
-				.attr("stroke-linecap", "round")
-				.attr("stroke-width", 2)
+				.attr("fill", Configuration.lines.path.fill)
+				.attr("stroke", Configuration.lines.path.stroke)
+				.attr("stroke-linejoin", Configuration.lines.path.strokeLinejoin)
+				.attr("stroke-linecap", Configuration.lines.path.strokeLinecap)
+				.attr("stroke-width", Configuration.lines.path.strokeWidth)
 				.attr("d", line)
 				.style("stroke", color(colorKey))
 				.style("opacity", 0)
 				.transition()
-				.duration(700)
+				.duration(Configuration.lines.path.duration)
 				.style("opacity", 1);
 
 			series.selectAll("dot")
 				.data(valueData)
 				.enter().append("circle")
-				.attr("r", 3.5)
-				.attr("fill", "white")
+				.attr("r", Configuration.lines.dot.r)
+				.attr("fill", Configuration.lines.dot.fill)
 				.attr("stroke", color(colorKey))
-				.attr("stroke-width", 2)
+				.attr("stroke-width", Configuration.lines.dot.strokeWidth)
 				.attr("cx", d => xScale(d.key) + options.chartSize.width / dataList.length / 2)
 				.attr("cy", d => yScale(d.value))
 				.style("opacity", 0)
 				.transition()
-				.duration(500)
+				.duration(Configuration.lines.dot.duration)
 				.style("opacity", 1);
 
 		});
@@ -118,17 +112,17 @@ export namespace Lines {
 				Charts.reduceOpacity(svg, this);
 			})
 			.on("mouseover", function(d) {
-				svg.append("circle").attr("class", "hover-glow")
-					.attr("r", 5.5)
-					.attr("fill", "none")
-					.attr("stroke-width", 4)
+				svg.append("circle").attr("class", Configuration.lines.mouseover.class)
+					.attr("r", Configuration.lines.mouseover.r)
+					.attr("fill", Configuration.lines.mouseover.fill)
+					.attr("stroke-width", Configuration.lines.mouseover.strokeWidth)
 					.attr("stroke", d.color)
-					.attr("stroke-opacity", 0.5)
+					.attr("stroke-opacity", Configuration.lines.mouseover.strokeOpacity)
 					.attr("cx", this.cx.baseVal.value)
 					.attr("cy", this.cy.baseVal.value);
 			})
 			.on("mouseout", function() {
-				svg.selectAll(".hover-glow").remove();
+				svg.selectAll(`.${Configuration.lines.mouseover.class}`).remove();
 			});
 	}
 }

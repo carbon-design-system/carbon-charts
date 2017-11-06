@@ -7,15 +7,13 @@ import { Legend } from "../parts/legend";
 import { Tooltip } from "../parts/tooltip";
 import "../style.scss";
 import { Charts } from "../index";
+import { Configuration } from "../configuration";
 
 export namespace Combo {
 	export function drawChart(data, parent, options) {
 		options.type = "combo";
 		const parentSelection = d3.select(parent);
 		const {chartID, container} = Charts.setChartIDContainer(parentSelection);
-		if (options.windowResizable) {
-			Charts.setResizableWindow();
-		}
 
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 		const svg = Charts.setSVG(data, container, options);
@@ -39,10 +37,6 @@ export namespace Combo {
 			}
 			lineData.push(lineDataObj);
 		});
-		Charts.redrawFunctions[chartID] = {
-			self: this,
-			data, parentSelection, options
-		};
 		const activeBar =  activeSeries.includes(options.yDomain[0]);
 		const activeLineSeries = activeBar ? activeSeries.slice(1, activeSeries.length) : activeSeries;
 
@@ -74,15 +68,15 @@ function addDataPointEventListener(parent, svg) {
 	svg.selectAll("rect")
 		.on("mouseover", function(d) {
 			d3.select(this)
-				.attr("stroke-width", 6)
+				.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
 				.attr("stroke", d.color)
-				.attr("stroke-opacity", 0.5);
+				.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
 		})
 		.on("mouseout", function() {
 			d3.select(this)
-				.attr("stroke-width", 0)
+				.attr("stroke-width", Configuration.bars.mouseout.strokeWidth)
 				.attr("stroke", "none")
-				.attr("stroke-opacity", 1);
+				.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
 		})
 		.on("click", function(d) {
 			Tooltip.showTooltip(parent, d);
@@ -94,16 +88,16 @@ function addDataPointEventListener(parent, svg) {
 			Charts.reduceOpacity(svg, this);
 		})
 		.on("mouseover", function(d) {
-			svg.append("circle").attr("class", "hover-glow")
-				.attr("r", 5.5)
-				.attr("fill", "none")
-				.attr("stroke-width", 4)
+			svg.append("circle").attr("class", Configuration.lines.mouseover.class)
+				.attr("r", Configuration.lines.mouseover.r)
+				.attr("fill", Configuration.lines.mouseover.fill)
+				.attr("stroke-width", Configuration.lines.mouseover.strokeWidth)
 				.attr("stroke", d.color)
-				.attr("stroke-opacity", 0.5)
+				.attr("stroke-opacity", Configuration.lines.mouseover.strokeOpacity)
 				.attr("cx", this.cx.baseVal.value)
 				.attr("cy", this.cy.baseVal.value);
 		})
 		.on("mouseout", function() {
-			svg.selectAll(".hover-glow").remove();
+			svg.selectAll(`.${Configuration.lines.mouseover.class}`).remove();
 		});
 }

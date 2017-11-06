@@ -29,7 +29,6 @@ const longDataOptions = {
 	yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
-	// windowResizable: true,
 	colors
 };
 
@@ -41,7 +40,6 @@ const doubleYAxisOptions = {
 	y2Ticks: 10,
 	legendClickable: true,
 	containerResizable: true,
-	// windowResizable: true,
 	colors
 };
 
@@ -51,7 +49,6 @@ const options = {
 	yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
-	// windowResizable: true,
 	colors
 };
 
@@ -67,7 +64,6 @@ const optionsWithFormatter = {
 	yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
-	// windowResizable: true,
 	colors
 };
 
@@ -241,10 +237,6 @@ const chartTypes = [
 
 chartTypes.forEach(type => {
 	const container = document.getElementById(type.id + "-chart-holder");
-	// const header = document.createElement("h2");
-	// header.className = "chart-title";
-	// header.appendChild(document.createTextNode(type.name));
-	// container.appendChild(header);
 	switch (type.id) {
 		case "bar":
 			Bars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));

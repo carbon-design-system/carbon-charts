@@ -11,9 +11,6 @@ export namespace DoubleAxis {
 		options.type = "doubleAxis";
 		const parentSelection = d3.select(parent);
 		const {chartID, container} = Charts.setChartIDContainer(parentSelection);
-		if (options.windowResizable) {
-			Charts.setResizableWindow();
-		}
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 		const svg = Charts.setSVG(data, container, options);
 		Legend.addLegend(container, data, options);
@@ -34,10 +31,6 @@ export namespace DoubleAxis {
 		Axis.drawY2Axis(svg, y2Scale, options);
 		Grid.drawXGrid(svg, xScale, options, data);
 		Grid.drawYGrid(svg, yScale, options, data);
-		Charts.redrawFunctions[chartID] = {
-			self: this,
-			data, parentSelection, options
-		};
 		Legend.positionLegend(container, data, options);
 		Charts.repositionSVG(container);
 		Lines.draw(svg, xScale, yScale, options, data, y1ActiveSeries);

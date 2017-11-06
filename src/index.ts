@@ -7,38 +7,36 @@ import { Lines } from "./parts/lines";
 import { Combo } from "./types/combo";
 import { DoubleAxis } from "./types/doubleAxis";
 import { Legend } from "./parts/legend";
+import { Configuration } from "./configuration";
 import "./style.scss";
 
 
 export namespace Charts {
+	export let chartCount = 1;
+
 	export const bars = Bars;
 	export const lines = Lines;
 	export const combo = Combo;
 	export const stackedBars = StackedBars;
 	export const doubleAxis = DoubleAxis;
-	export const margin = {
-		top: 20,
-		bottom: 60,
-		left: 90,
-		right: 20
-	};
+
 	export function getActualChartSize(data, container, options) {
 		let ratio, marginForLegendTop;
 		let moreForY2Axis = 0;
-		if (container.node().clientWidth > 600 &&
-			Legend.getLegendItems(data, options).length > 4) {
-			ratio = 0.7;
+		if (container.node().clientWidth > Configuration.charts.widthBreak &&
+			Legend.getLegendItems(data, options).length > Configuration.legend.countBreak) {
+			ratio = Configuration.charts.magicRatio;
 			marginForLegendTop = 0;
 		} else {
-			marginForLegendTop = 40;
+			marginForLegendTop = Configuration.charts.marginForLegendTop;
 			ratio = 1;
 		}
 		if (options.type === "doubleAxis" || options.type === "combo") {
-			moreForY2Axis = 70;
+			moreForY2Axis = Configuration.charts.magicMoreForY2Axis;
 		}
 		return {
 			height: container.node().clientHeight - marginForLegendTop,
-			width: (container.node().clientWidth - margin.left - margin.right - moreForY2Axis) * ratio
+			width: (container.node().clientWidth - Configuration.charts.margin.left - Configuration.charts.margin.right - moreForY2Axis) * ratio
 		};
 	}
 	export function removeChart(container) {
@@ -63,8 +61,9 @@ export namespace Charts {
 		}
 		drawChart(data, container, options);
 	}
-	export function setUniqueID() {
-		return Math.floor(Math.random() * 90000) + 10000;
+
+	function nextId() {
+		return `chart-${chartCount++}`;
 	}
 
 	export function setSVG(data, container, options) {
@@ -93,7 +92,7 @@ export namespace Charts {
 
 	export function repositionSVG(container) {
 		const yAxisWidth = container.select(".y.axis").node().getBBox().width;
-		container.style("padding-left", yAxisWidth + "px");
+		container.style("padding-left", `${yAxisWidth}px`);
 	}
 
 	export function drawChart(data, container, options) {
@@ -122,11 +121,11 @@ export namespace Charts {
 	}
 
 	export function setTooltip(chartID) {
-		let tooltip = d3.select("#tooltip-" + chartID);
+		let tooltip = d3.select(`#tooltip-${chartID}`);
 		if (tooltip.nodes().length <= 0) {
 			tooltip = d3.select("body").append("div")
 				.attr("class", "tooltip chart-tooltip")
-				.attr("id", "tooltip-" + chartID)
+				.attr("id", `tooltip-${chartID}`)
 				.style("display", "none");
 			tooltip.append("span")
 				.attr("class", "text-box");
@@ -141,7 +140,7 @@ export namespace Charts {
 
 	export function addCloseBtn(tooltip, size, color?) {
 		const closeBtn = tooltip.append("button");
-		let classNames = "close--" + size;
+		let classNames = `close--${size}`;
 		classNames = color ? " close--" + color : classNames;
 		closeBtn.attr("class", classNames)
 			.attr("type", "button")
@@ -152,18 +151,6 @@ export namespace Charts {
 	}
 
 	export let resizeTimers = [];
-
-	export function setResizableWindow() {
-		d3.select(window).on("resize", debounce(() => {
-			d3.selectAll(".chart-tooltip").remove();
-			d3.selectAll(".label-tooltip").remove();
-			resizeTimers.forEach(id => {
-				window.clearTimeout(id);
-				resizeTimers = [];
-			});
-			redrawAll();
-		}, 250));
-	}
 
 	export function setResizeWhenContainerChange(data, container, options) {
 		let containerWidth = container.clientWidth;
@@ -202,18 +189,6 @@ export namespace Charts {
 				func.apply(context, args);
 			}
 		};
-	}
-
-	export let redrawFunctions = {};
-
-	function redrawAll() {
-		Object.keys(redrawFunctions).forEach((chart) => {
-			redrawFunctions[chart].self.drawChart(
-				redrawFunctions[chart].data,
-				redrawFunctions[chart].parentSelection.node(),
-				redrawFunctions[chart].options
-			);
-		});
 	}
 
 	export function setXScale(data, options) {
@@ -275,7 +250,7 @@ export namespace Charts {
 			chartID = container.attr("chart-id");
 			container.selectAll(".chart-svg").remove();
 		} else {
-			chartID = Charts.setUniqueID();
+			chartID = nextId();
 			container = parent.append("div");
 			container.attr("chart-id", chartID)
 				.classed("chart-wrapper", true);
@@ -289,20 +264,20 @@ export namespace Charts {
 
 	export function resetOpacity() {
 		const svg = d3.selectAll("svg");
-		svg.selectAll("path").attr("stroke-opacity", 1);
-		svg.selectAll("circle").attr("stroke-opacity", 1)
-			.attr("fill", "white");
-		svg.selectAll("rect").attr("fill-opacity", 1);
+		svg.selectAll("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
+			.attr("fill", Configuration.charts.resetOpacity.circle.fill);
+		svg.selectAll("rect").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
 	}
 
 	export function reduceOpacity(svg, exception) {
-		svg.selectAll("rect").attr("fill-opacity", 0.25);
+		svg.selectAll("rect").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
 		d3.select(exception).attr("fill-opacity", false);
-		svg.selectAll("path").attr("stroke-opacity", 0.25);
-		svg.selectAll("circle").attr("stroke-opacity", 0.25);
-		d3.select(exception.parentNode).select("path").attr("stroke-opacity", 1);
-		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", 1);
-		d3.select(exception).attr("stroke-opacity", 1);
+		svg.selectAll("path").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+		svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+		d3.select(exception.parentNode).select("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		d3.select(exception).attr("fill", d3.select(exception).attr("stroke"));
 	}
 }

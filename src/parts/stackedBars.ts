@@ -11,9 +11,6 @@ export namespace StackedBars {
 		options.type = "stackedBar";
 		const parentSelection = d3.select(parent);
 		const {chartID, container} = Charts.setChartIDContainer(parentSelection);
-		if (options.windowResizable) {
-			Charts.setResizableWindow();
-		}
 		options.chartSize = Charts.getActualChartSize(data, container, options);
 
 		const svg = Charts.setSVG(data, container, options);
@@ -27,10 +24,6 @@ export namespace StackedBars {
 		if (options.legendClickable) {
 			Charts.setClickableLegend(data, parentSelection, options);
 		}
-		Charts.redrawFunctions[chartID] = {
-			self: this,
-			data, parentSelection, options
-		};
 		Legend.positionLegend(container, data, options);
 		Charts.repositionSVG(container);
 		draw(svg, xScale, yScale, options, data, Charts.getActiveDataSeries(container));
@@ -70,7 +63,7 @@ export namespace StackedBars {
 				.data(data)
 			.enter().append("g")
 			.attr("class", "g")
-			.attr("transform", d => "translate(" + (xScale(d[options.xDomain])) + ",0)");
+			.attr("transform", d => `translate(${xScale(d[options.xDomain])},0)`);
 
 		series.selectAll("rect")
 			.data(d => d.series)

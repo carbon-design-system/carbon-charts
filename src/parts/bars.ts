@@ -3,8 +3,10 @@ import { Axis } from "./axis";
 import { Grid } from "./grid";
 import { Legend } from "./legend";
 import { Tooltip } from "./tooltip";
-import "../style.scss";
+import { Configuration } from "../configuration";
 import { Charts } from "../index";
+
+import "../style.scss";
 
 export namespace Bars {
 	export function drawChart(data, parent, options) {
@@ -29,17 +31,8 @@ export namespace Bars {
 		Charts.repositionSVG(container);
 		addDataPointEventListener(parent, svg);
 		Legend.positionLegend(container, data, options);
-		if (!Charts.redrawFunctions[chartID]) {
-			Charts.redrawFunctions[chartID] = {
-				self: this,
-				data, parentSelection, options
-			};
-		}
 		if (options.containerResizable) {
 			Charts.setResizeWhenContainerChange(data, parent, options);
-		}
-		if (options.windowResizable) {
-			Charts.setResizableWindow();
 		}
 	}
 
@@ -55,7 +48,7 @@ export namespace Bars {
 			.selectAll("g")
 			.data(data)
 			.enter().append("g")
-				.attr("transform", d => "translate(" + xScale(d[options.xDomain]) + ",0)")
+				.attr("transform", d => `translate(${xScale(d[options.xDomain])},0)`)
 			.selectAll("rect")
 			.data(d => keys.map(key => ({
 				xAxis: options.xDomain,
@@ -82,15 +75,15 @@ export namespace Bars {
 		svg.selectAll("rect")
 			.on("mouseover", function(d) {
 				d3.select(this)
-					.attr("stroke-width", 6)
+					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
 					.attr("stroke", d.color)
-					.attr("stroke-opacity", 0.5);
+					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
 			})
 			.on("mouseout", function() {
 				d3.select(this)
-					.attr("stroke-width", 0)
+					.attr("stroke-width", Configuration.bars.mouseout.strokeWidth)
 					.attr("stroke", "none")
-					.attr("stroke-opacity", 1);
+					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
 			})
 			.on("click", function(d) {
 				Tooltip.showTooltip(parent, d);

@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import { Configuration } from "../configuration";
 
 export namespace Grid {
 	export function drawXGrid(svg, xScale, options, data) {
@@ -10,7 +11,7 @@ export namespace Grid {
 			.attr("transform", `translate(0, ${yHeight})`)
 			.call(xGrid);
 		g.selectAll("line")
-			.attr("stroke", "#ECEEEF");
+			.attr("stroke", Configuration.grid.strokeColor);
 		g.selectAll("text").remove();
 		g.select(".domain").remove();
 	}
@@ -25,7 +26,7 @@ export namespace Grid {
 			.attr("transform", `translate(0, 0)`)
 			.call(yGrid);
 		g.selectAll("line")
-			.attr("stroke", "#ECEEEF");
+			.attr("stroke", Configuration.grid.strokeColor);
 		g.selectAll("text").remove();
 		g.select(".domain").remove();
 		g.select(".tick").remove();

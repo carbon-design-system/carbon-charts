@@ -1,13 +1,14 @@
 import * as d3 from "d3";
 import { Charts } from "../index";
+import { Configuration } from "../configuration";
 
 export namespace Tooltip {
 	export function showLabelTooltip(container, d, leftSide) {
 		d3.selectAll(".label-tooltip").remove();
-		const mouseXPoint = d3.mouse(container)[0] + 10;
+		const mouseXPoint = d3.mouse(container)[0] + Configuration.tooltip.magicXPoint1;
 		const tooltip = d3.select(container).append("div")
 			.attr("class", "tooltip label-tooltip")
-			.style("top", d3.mouse(container)[1] - 21 + "px");
+			.style("top", d3.mouse(container)[1] - Configuration.tooltip.magicTop1 + "px");
 		Charts.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				Charts.resetOpacity();
@@ -19,7 +20,7 @@ export namespace Tooltip {
 			tooltip.style("left", mouseXPoint + "px");
 			tooltip.append("div").attr("class", "arrow arrow-left");
 		} else {
-			const xPoint = mouseXPoint - tooltip.node().clientWidth - 20;
+			const xPoint = mouseXPoint - tooltip.node().clientWidth - Configuration.tooltip.magicXPoint2;
 			tooltip.style("left", xPoint + "px");
 			tooltip.append("div").attr("class", "arrow arrow-right");
 		}
@@ -31,7 +32,7 @@ export namespace Tooltip {
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(container).append("div")
 			.attr("class", "tooltip chart-tooltip")
-			.style("top", d3.mouse(container)[1] - 22 + "px")
+			.style("top", d3.mouse(container)[1] - Configuration.tooltip.magicTop2 + "px")
 			.style("border-color", d.color);
 		Charts.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
@@ -45,10 +46,10 @@ export namespace Tooltip {
 		}
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (d3.mouse(container)[0] + tooltip.node().clientWidth > container.clientWidth) {
-			tooltip.style("left", d3.mouse(container)[0] - tooltip.node().clientWidth - 12 + "px");
+			tooltip.style("left", d3.mouse(container)[0] - tooltip.node().clientWidth - Configuration.tooltip.magicLeft1 + "px");
 			tooltip.append("div").attr("class", "arrow arrow-right");
 		} else {
-			tooltip.style("left", d3.mouse(container)[0] + 11 + "px");
+			tooltip.style("left", d3.mouse(container)[0] + Configuration.tooltip.magicLeft2 + "px");
 			tooltip.append("div").attr("class", "arrow arrow-left");
 		}
 	}

@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { Charts } from "../index";
+import { Configuration } from "../configuration";
 
 export namespace Legend {
 	export function getLegendItems(data, options) {
@@ -21,11 +22,11 @@ export namespace Legend {
 	}
 
 	export function hasLegendExpandBtn(container, legendItems) {
-		return container.node().clientWidth < 600 && legendItems.length > 4;
+		return container.node().clientWidth < Configuration.charts.widthBreak && legendItems.length > Configuration.legend.countBreak;
 	}
 
 	export function isLegendOnRight(container, legendItems) {
-		return container.node().clientWidth > 600 && legendItems.length > 4;
+		return container.node().clientWidth > Configuration.charts.widthBreak && legendItems.length > Configuration.legend.countBreak;
 	}
 
 	export function addLegend(container, data, options) {
@@ -34,7 +35,7 @@ export namespace Legend {
 		}
 		const legendItems = getLegendItems(data, options);
 		const legend = container.select(".legend")
-					.attr("font-size", 12)
+					.attr("font-size", Configuration.legend.fontSize)
 				.selectAll("div")
 				.data(legendItems)
 				.enter().append("li")
@@ -64,7 +65,7 @@ export namespace Legend {
 			container.select(".legend").classed("right-legend", true)
 				.style("width", legendWidth + "px");
 		} else {
-			container.select(".legend-wrapper").style("height", "40px");
+			container.select(".legend-wrapper").style("height", Configuration.legend.wrapperHeight);
 		}
 
 		if (hasLegendExpandBtn(container, getLegendItems(data, options))) {
@@ -73,7 +74,7 @@ export namespace Legend {
 			const btns = container.selectAll(".legend-btn").nodes();
 			let btnsWidth = 0;
 			btns.forEach(btn => {
-				if ((btnsWidth + btn.clientWidth + 15) > svgWidth) {
+				if ((btnsWidth + btn.clientWidth + Configuration.legend.widthTolerance) > svgWidth) {
 					d3.select(btn).style("display", "none");
 				} else {
 					btnsWidth += btn.clientWidth;
@@ -91,14 +92,14 @@ export namespace Legend {
 		thisLegend.classed("active", !thisLegend.classed("active"));
 		if (thisLegend.classed("active")) {
 			circle.style("background-color", circle.style("border-color"))
-				.style("border-color", false)
-				.style("border-style", false)
-				.style("border-width", false);
+				.style("border-color", Configuration.legend.active.borderColor)
+				.style("border-style", Configuration.legend.active.borderStyle)
+				.style("border-width", Configuration.legend.active.borderWidth);
 		} else {
 			circle.style("border-color", circle.style("background-color"))
-				.style("background-color", "white")
-				.style("border-style", "solid")
-				.style("border-width", "2px");
+			.style("background-color", Configuration.legend.inactive.backgroundColor)
+			.style("border-style", Configuration.legend.inactive.borderStyle)
+			.style("border-width", Configuration.legend.inactive.borderWidth);
 		}
 	}
 
@@ -122,28 +123,28 @@ export namespace Legend {
 			tooltip = container.append("div")
 				.attr("class", "tooltip legend-tooltip")
 				.style("display", "block")
-				.style("top", (d3.mouse(container.node())[1] - 19) + "px");
+				.style("top", (d3.mouse(container.node())[1] - Configuration.legend.margin.top) + "px");
 			tooltip.append("p").text("Legend")
 				.attr("class", "legend-tooltip-header");
 			tooltip.append("ul")
 				.attr("class", "legend-tooltip-content")
-				.attr("font-size", 12);
+				.attr("font-size", Configuration.legend.fontSize);
 			Charts.addCloseBtn(tooltip, "md", "white")
 				.on("click", () => {
 					d3.selectAll(".legend-tooltip").style("display", "none");
 				});
 
 			const legendContent = d3.select(".legend-tooltip-content")
-				.attr("font-size", 12)
-			.selectAll("div")
-			.data(legendItems)
-			.enter().append("li")
+				.attr("font-size", Configuration.legend.fontSize)
+				.selectAll("div")
+				.data(legendItems)
+				.enter().append("li")
 				.attr("class", "legend-btn active");
 
 			legendContent.append("div")
 				.attr("class", "legend-circle")
 				.style("background-color", (d, i) => options.colors[i]);
-				addCircleHoverEffect();
+			addCircleHoverEffect();
 
 			legendContent.append("text")
 				.text(d => d);
@@ -151,12 +152,12 @@ export namespace Legend {
 			Charts.setClickableLegendInTooltip(data, container, options);
 		}
 
-		if (window.innerWidth - (windowXPoint + 200) < 0) {
+		if (window.innerWidth - (windowXPoint + Configuration.tooltip.width) < 0) {
 			tooltip.append("div").attr("class", "arrow arrow-right");
-			tooltip.style("left", mouseXPoint - 210 + "px");
+			tooltip.style("left", `${mouseXPoint - Configuration.tooltip.width - Configuration.tooltip.arrowWidth}px`);
 		} else {
 			tooltip.append("div").attr("class", "arrow arrow-left");
-			tooltip.style("left", mouseXPoint + 10 + "px");
+			tooltip.style("left", `${mouseXPoint + Configuration.tooltip.arrowWidth}px`);
 		}
 	}
 
@@ -164,7 +165,10 @@ export namespace Legend {
 		d3.selectAll(".legend-circle")
 			.on("mouseover", function() {
 				const color = this.style.backgroundColor.substring(4, this.style.backgroundColor.length - 1);
-				d3.select(this).style("box-shadow", "0 0 0 3px rgba(" + color + ", 0.2)");
+				d3.select(this).style(
+					"box-shadow",
+					`0 0 0 ${Configuration.legend.hoverShadowSize} rgba(${color}, ${Configuration.legend.hoverShadowTransparency})`
+				);
 			})
 			.on("mouseout", function() {
 				d3.select(this).style("box-shadow", "none");

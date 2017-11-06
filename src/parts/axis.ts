@@ -1,13 +1,8 @@
 import * as d3 from "d3";
 import { Tooltip } from "./tooltip";
+import { Configuration } from "../configuration";
 
 export namespace Axis {
-	const axisConstants = {
-		maxWidthOfAxisLabel: 175,
-		maxNumOfAxisLabelLetters: 60,
-		maxTickLetNum: 28
-	};
-
 	export function drawYAxis(svg, yScale, options) {
 		const yAxis = d3.axisLeft(yScale);
 		setTickStyle(yAxis, options.yTicks);
@@ -18,7 +13,7 @@ export namespace Axis {
 		if (options.yFormatter && options.yFormatter[options.yDomain[0]]) {
 			addUnits(g.selectAll("text"), options.yFormatter[options.yDomain[0]]);
 		}
-		const tickWidth = getLargestTickWidth(g.selectAll(".tick")) + 25;
+		const tickWidth = getLargestTickWidth(g.selectAll(".tick")) + Configuration.axis.tick.widthAdditionY;
 		const label = options.yDomain.join(", ");
 
 		appendYAxisLabel(g, svg, -tickWidth, label, options, "y")
@@ -32,13 +27,13 @@ export namespace Axis {
 		setTickStyle(yAxis, options.y2Ticks);
 
 		const g = svg.select(".y2.axis")
-			.attr("transform", "translate(" + options.chartSize.width + ", 0)")
+			.attr("transform", `translate(${options.chartSize.width}, 0)`)
 			.call(yAxis);
 		g.select(".domain").remove();
 		if (options.yFormatter && options.yFormatter[options.y2Domain[0]]) {
 			addUnits(g.selectAll("text"), options.yFormatter[options.y2Domain[0]]);
 		}
-		const tickWidth = getLargestTickWidth(g.selectAll(".tick")) + 15;
+		const tickWidth = getLargestTickWidth(g.selectAll(".tick")) + Configuration.axis.tick.widthAdditionY2;
 		const label = options.y2Domain.join(", ");
 		appendYAxisLabel(g, svg, tickWidth, label, options, "y2");
 	}
@@ -46,15 +41,15 @@ export namespace Axis {
 	function appendYAxisLabel(g, svg, tickWidth, label, options, labelNum) {
 		const yHeight = options.chartSize.height - svg.select(".x.axis").node().getBBox().height;
 		const axisLabel = g.append("text")
-			.attr("dy", "0.71em")
-			.attr("class", labelNum + " axis-label")
+			.attr("dy", Configuration.axis.magicDy1)
+			.attr("class", `${labelNum} axis-label`)
 			.attr("text-anchor", "middle")
 			.text(label);
-		if (axisLabel.node().getBBox().width > axisConstants.maxWidthOfAxisLabel) {
+		if (axisLabel.node().getBBox().width > Configuration.axis.maxWidthOfAxisLabel) {
 			const marginToTicks = labelNum === "y" ? -10 : 7;
 			axisLabel.attr(
 				"transform",
-				"translate(" + (tickWidth + axisLabel.node().getBBox().height + marginToTicks) + "," + (yHeight / 2) + ")rotate(-90)"
+				`translate(${tickWidth + axisLabel.node().getBBox().height + marginToTicks}, ${yHeight / 2})rotate(${Configuration.axis.yAxisAngle})`
 			);
 			const wrappedLabel = wrapLabel(axisLabel);
 			wrappedLabel.on("click", d => {
@@ -62,7 +57,7 @@ export namespace Axis {
 				Tooltip.showLabelTooltip(svg.node().parentNode.parentNode, label, leftAxis);
 			});
 		} else {
-			axisLabel.attr("transform", "translate(" + tickWidth + "," + (yHeight / 2) + ")rotate(-90)");
+			axisLabel.attr("transform", `translate(${tickWidth}, ${yHeight / 2})rotate(${Configuration.axis.yAxisAngle})`);
 		}
 		return axisLabel;
 	}
@@ -73,19 +68,19 @@ export namespace Axis {
 			.tickSizeOuter(0);
 		const g = svg.select(".x.axis").call(xAxis);
 		g.selectAll("text")
-			.attr("y", 9)
-			.attr("x", -4)
+			.attr("y", Configuration.axis.magicY1)
+			.attr("x", Configuration.axis.magicX1)
 			.attr("dy", ".35em")
-			.attr("transform", "rotate(-45)")
+			.attr("transform", `rotate(${Configuration.axis.xAxisAngle})`)
 			.style("text-anchor", "end")
 			.call(text => wrapTick(text, svg));
 
 		g.select(".domain")
-			.attr("stroke", "#959595")
-			.attr("fill", "#959595")
-			.attr("stroke-width", 2);
+			.attr("stroke", Configuration.axis.domain.color)
+			.attr("fill", Configuration.axis.domain.color)
+			.attr("stroke-width", Configuration.axis.domain.strokeWidth);
 
-		const tickHeight = getLargestTickHeight(g.selectAll(".tick")) + 16;
+		const tickHeight = getLargestTickHeight(g.selectAll(".tick")) + Configuration.axis.tick.heightAddition;
 		g.append("text")
 			.attr("class", "x axis-label")
 			.attr("text-anchor", "middle")
@@ -96,15 +91,15 @@ export namespace Axis {
 	}
 
 	function wrapLabel(label) {
-		const letNum = axisConstants.maxNumOfAxisLabelLetters;
+		const letNum = Configuration.axis.maxNumOfAxisLabelLetters;
 		const text = label.text();
 		const y = label.attr("y");
 		label.text("");
 		const tspan1 = label.append("tspan")
-			.attr("x", 0).attr("y", y).attr("dx", "-1em").attr("dy", "-1em");
+			.attr("x", 0).attr("y", y).attr("dx", Configuration.axis.dx).attr("dy", `-${Configuration.axis.label.dy}`);
 		const tspan2 = label.append("tspan")
-			.attr("x", 0).attr("y", y).attr("dx", "-1em").attr("dy", "1em");
-		if (text.length < axisConstants.maxNumOfAxisLabelLetters) {
+			.attr("x", 0).attr("y", y).attr("dx", Configuration.axis.dx).attr("dy", Configuration.axis.label.dy);
+		if (text.length < Configuration.axis.maxNumOfAxisLabelLetters) {
 			tspan1.text(text.substring(0, text.length / 2));
 			tspan2.text(text.substring(text.length / 2 + 1, text.length));
 		} else {
@@ -115,16 +110,16 @@ export namespace Axis {
 	}
 
 	function wrapTick(ticks, svg) {
-		const letNum = axisConstants.maxTickLetNum;
+		const letNum = Configuration.axis.tick.maxLetNum;
 		ticks.each(function(t) {
 			if (t.length > letNum / 2) {
 				const tick = d3.select(this);
 				const y = tick.attr("y");
 				tick.text("");
 				const tspan1 = tick.append("tspan")
-					.attr("x", 0).attr("y", y).attr("dx", "-1em").attr("dy", "-0.5em");
+					.attr("x", 0).attr("y", y).attr("dx", Configuration.axis.dx).attr("dy", `-${Configuration.axis.tick.dy}`);
 				const tspan2 = tick.append("tspan")
-					.attr("x", 0).attr("y", y).attr("dx", "-1em").attr("dy", "0.5em");
+					.attr("x", 0).attr("y", y).attr("dx", Configuration.axis.dx).attr("dy", Configuration.axis.tick.dy);
 				if (t.length < letNum - 3) {
 					tspan1.text(t.substring(0, t.length / 2));
 					tspan2.text(t.substring(t.length / 2 + 1, t.length));
