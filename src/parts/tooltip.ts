@@ -5,7 +5,7 @@ import { Configuration } from "../configuration";
 export namespace Tooltip {
 	export function showLabelTooltip(container, d, leftSide) {
 		d3.selectAll(".label-tooltip").remove();
-		const mouseXPoint = d3.mouse(container)[0] + Configuration.tooltip.magicXPoint1;
+		const mouseXPoint = d3.mouse(container)[0] + Configuration.tooltip.arrowWidth;
 		const tooltip = d3.select(container).append("div")
 			.attr("class", "tooltip label-tooltip")
 			.style("top", d3.mouse(container)[1] - Configuration.tooltip.magicTop1 + "px");

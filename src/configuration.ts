@@ -110,7 +110,6 @@ export namespace Configuration {
 	export const tooltip = {
 		width: 200,
 		arrowWidth: 10,
-		magicXPoint1: 10,
 		magicXPoint2: 20,
 		magicTop1: 21,
 		magicTop2: 22,
