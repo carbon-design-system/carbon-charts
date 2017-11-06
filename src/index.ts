@@ -8,6 +8,7 @@ import { Combo } from "./types/combo";
 import { DoubleAxis } from "./types/doubleAxis";
 import { Legend } from "./parts/legend";
 import { Configuration } from "./configuration";
+import { Tools } from "./tools";
 import "./style.scss";
 
 
@@ -162,7 +163,7 @@ export namespace Charts {
 			|| Math.abs(containerHeight - container.clientHeight) > 20) {
 				containerWidth = container.clientWidth;
 				containerHeight = container.clientHeight;
-				debounce(() => {
+				Tools.debounce(() => {
 					window.clearTimeout(intervalId);
 					d3.selectAll(".legend-tooltip").style("display", "none");
 					drawChart(data, container, options);
@@ -170,25 +171,6 @@ export namespace Charts {
 			}
 		}
 		return intervalId;
-	}
-
-	function debounce(func, wait, immediate?) {
-		let timeout;
-		return function() {
-			const context = this, args = arguments;
-			const later = function() {
-				timeout = null;
-				if (!immediate) {
-					func.apply(context, args);
-				}
-			};
-			const callNow = immediate && !timeout;
-			clearTimeout(timeout);
-			timeout = setTimeout(later, wait);
-			if (callNow) {
-				func.apply(context, args);
-			}
-		};
 	}
 
 	export function setXScale(data, options) {
