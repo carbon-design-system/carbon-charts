@@ -173,20 +173,20 @@ export namespace Charts {
 		return intervalId;
 	}
 
-	export function setXScale(data, options) {
+	export function setXScale(data, options): d3.ScaleBand<string> {
 		return d3.scaleBand().range([0, options.chartSize.width])
 			.domain(data.map(d => d[options.xDomain]));
 	}
 
-	export function setYScale(svg, data, options, activeSeries) {
+	export function setYScale(svg, data, options, activeSeries): d3.ScaleLinear<number, number> {
 		const yHeight = options.chartSize.height - svg.select(".x.axis").node().getBBox().height;
 		const yScale = d3.scaleLinear().range([yHeight, 0]);
 		const keys = activeSeries.length > 0 ? activeSeries : options.yDomain;
 		if (options.type === "stackedBar") {
 			const yMax = d3.max(data, d => keys.map(val => d[val]).reduce((acc, cur) => acc + cur, 0));
-			yScale.domain([0, yMax]);
+			yScale.domain([0, +yMax]);
 		} else {
-			yScale.domain([0, d3.max(data, d =>
+			yScale.domain([0, +d3.max(data, d =>
 					d3.max(keys.map(domain => d[domain])))
 				]);
 		}

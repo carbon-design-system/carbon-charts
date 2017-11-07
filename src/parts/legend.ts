@@ -147,7 +147,7 @@ export namespace Legend {
 			addCircleHoverEffect();
 
 			legendContent.append("text")
-				.text(d => d);
+				.text(d => "" + d);
 
 			Charts.setClickableLegendInTooltip(data, container, options);
 		}
@@ -164,7 +164,7 @@ export namespace Legend {
 	export function addCircleHoverEffect() {
 		d3.selectAll(".legend-circle")
 			.on("mouseover", function() {
-				const color = this.style.backgroundColor.substring(4, this.style.backgroundColor.length - 1);
+				const color = (this as HTMLElement).style.backgroundColor.substring(4, (this as HTMLElement).style.backgroundColor.length - 1);
 				d3.select(this).style(
 					"box-shadow",
 					`0 0 0 ${Configuration.legend.hoverShadowSize} rgba(${color}, ${Configuration.legend.hoverShadowTransparency})`

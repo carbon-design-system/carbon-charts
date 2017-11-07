@@ -20,7 +20,7 @@ export namespace Tooltip {
 			tooltip.style("left", mouseXPoint + "px");
 			tooltip.append("div").attr("class", "arrow arrow-left");
 		} else {
-			const xPoint = mouseXPoint - tooltip.node().clientWidth - Configuration.tooltip.magicXPoint2;
+			const xPoint = mouseXPoint - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicXPoint2;
 			tooltip.style("left", xPoint + "px");
 			tooltip.append("div").attr("class", "arrow arrow-right");
 		}
@@ -45,8 +45,8 @@ export namespace Tooltip {
 			tooltipHTML += "<br/><b>" + d.dimension + ": </b>" + d.dimVal;
 		}
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
-		if (d3.mouse(container)[0] + tooltip.node().clientWidth > container.clientWidth) {
-			tooltip.style("left", d3.mouse(container)[0] - tooltip.node().clientWidth - Configuration.tooltip.magicLeft1 + "px");
+		if (d3.mouse(container)[0] + (tooltip.node() as Element).clientWidth > container.clientWidth) {
+			tooltip.style("left", d3.mouse(container)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px");
 			tooltip.append("div").attr("class", "arrow arrow-right");
 		} else {
 			tooltip.style("left", d3.mouse(container)[0] + Configuration.tooltip.magicLeft2 + "px");
