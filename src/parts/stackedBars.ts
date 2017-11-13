@@ -8,7 +8,7 @@ import { Charts } from "../index";
 
 export namespace StackedBars {
 	export function drawChart(data, parent, options) {
-		options.type = "stackedBar";
+		options.type = "stacked-bar";
 		const parentSelection = d3.select(parent);
 		const {chartID, container} = Charts.setChartIDContainer(parentSelection);
 		options.chartSize = Charts.getActualChartSize(data, container, options);

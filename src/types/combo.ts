@@ -45,8 +45,6 @@ export namespace Combo {
 		Axis.drawXAxis(svg, xScaleBar, options);
 		const yScale = Charts.setYScale(svg, barData, options, options.yDomain);
 		const y2Scale = Charts.setYScale(svg, lineData, options, activeLineSeries);
-		Charts.setYScale(svg, barData, options, options.yDomain);
-		const yScaleLine = Charts.setYScale(svg, lineData, options, activeLineSeries);
 		Axis.drawYAxis(svg, yScale, options);
 		Axis.drawY2Axis(svg, y2Scale, options);
 		Grid.drawXGrid(svg, xScaleBar, options, data);
@@ -56,7 +54,7 @@ export namespace Combo {
 		if (activeBar) {
 			Bars.draw(svg, xScaleBar, yScale, options, data, options.yDomain);
 		}
-		Lines.draw(svg, xScaleLine, yScaleLine, options, data, activeLineSeries);
+		Lines.draw(svg, xScaleLine, y2Scale, options, data, activeLineSeries);
 		addDataPointEventListener(parent, svg);
 		if (options.containerResizable) {
 			Charts.setResizeWhenContainerChange(data, parent, options);

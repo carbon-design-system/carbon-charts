@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import { Charts } from "../index";
 import { Configuration } from "../configuration";
+import { Tools } from "../tools";
 
 export namespace Tooltip {
 	export function showLabelTooltip(container, d, leftSide) {
@@ -9,7 +10,7 @@ export namespace Tooltip {
 		const tooltip = d3.select(container).append("div")
 			.attr("class", "tooltip label-tooltip")
 			.style("top", d3.mouse(container)[1] - Configuration.tooltip.magicTop1 + "px");
-		Charts.addCloseBtn(tooltip, "xs")
+		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				Charts.resetOpacity();
 				d3.selectAll(".tooltip").remove();
@@ -34,7 +35,7 @@ export namespace Tooltip {
 			.attr("class", "tooltip chart-tooltip")
 			.style("top", d3.mouse(container)[1] - Configuration.tooltip.magicTop2 + "px")
 			.style("border-color", d.color);
-		Charts.addCloseBtn(tooltip, "xs")
+		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				Charts.resetOpacity();
 				d3.selectAll(".tooltip").remove();

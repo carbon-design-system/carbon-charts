@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import { Charts } from "../index";
 import { Configuration } from "../configuration";
+import { Tools } from "../tools";
 
 export namespace Legend {
 	export function getLegendItems(data, options) {
@@ -35,19 +36,19 @@ export namespace Legend {
 		}
 		const legendItems = getLegendItems(data, options);
 		const legend = container.select(".legend")
-					.attr("font-size", Configuration.legend.fontSize)
-				.selectAll("div")
-				.data(legendItems)
-				.enter().append("li")
-					.attr("class", "legend-btn active");
+			.attr("font-size", Configuration.legend.fontSize)
+			.selectAll("div")
+			.data(legendItems)
+			.enter().append("li")
+				.attr("class", "legend-btn active");
 
-				legend.append("div")
-					.attr("class", "legend-circle")
-					.style("background-color", (d, i) => options.colors[i]);
-				addCircleHoverEffect();
+		legend.append("div")
+			.attr("class", "legend-circle")
+			.style("background-color", (d, i) => options.colors[i]);
+		addCircleHoverEffect();
 
-				legend.append("text")
-					.text(d => d);
+		legend.append("text")
+			.text(d => d);
 	}
 
 	export function positionLegend(container, data, options) {
@@ -129,7 +130,7 @@ export namespace Legend {
 			tooltip.append("ul")
 				.attr("class", "legend-tooltip-content")
 				.attr("font-size", Configuration.legend.fontSize);
-			Charts.addCloseBtn(tooltip, "md", "white")
+			Tools.addCloseBtn(tooltip, "md", "white")
 				.on("click", () => {
 					d3.selectAll(".legend-tooltip").style("display", "none");
 				});

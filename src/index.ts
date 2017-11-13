@@ -32,7 +32,7 @@ export namespace Charts {
 			marginForLegendTop = Configuration.charts.marginForLegendTop;
 			ratio = 1;
 		}
-		if (options.type === "doubleAxis" || options.type === "combo") {
+		if (options.type === "double-axis-line" || options.type === "combo") {
 			moreForY2Axis = Configuration.charts.magicMoreForY2Axis;
 		}
 		return {
@@ -42,25 +42,6 @@ export namespace Charts {
 	}
 	export function removeChart(container) {
 		container.select("svg").remove();
-	}
-	export function renderChart(data, container, options) {
-		container.classed("chart-wrapper", true);
-		container.append("div").attr("class", "legend");
-		options.chartSize = getActualChartSize(data, container, options);
-
-		const svg = setSVG(data, container, options);
-		const xScale = setXScale(data, options);
-		const yScale = setYScale(svg, data, options, getActiveDataSeries(container));
-
-		Axis.drawXAxis(svg, xScale, options);
-		Axis.drawYAxis(svg, yScale, options);
-		Grid.drawXGrid(svg, xScale, options, data);
-		Grid.drawYGrid(svg, yScale, options, data);
-		Legend.addLegend(container, data, options);
-		if (options.legendClickable) {
-			setClickableLegend(data, container, options);
-		}
-		drawChart(data, container, options);
 	}
 
 	function nextId() {
@@ -103,13 +84,13 @@ export namespace Charts {
 			case "bar":
 				Bars.drawChart(data, container, options);
 				break;
-			case "stackedBar":
+			case "stacked-bar":
 				StackedBars.drawChart(data, container, options);
 				break;
 			case "line":
 				Lines.drawChart(data, container, options);
 				break;
-			case "doubleAxis":
+			case "double-axis-line":
 				DoubleAxis.drawChart(data, container, options);
 				break;
 			case "combo":
@@ -119,36 +100,6 @@ export namespace Charts {
 				Bars.drawChart(data, container, options);
 				break;
 		}
-	}
-
-	export function setTooltip(chartID) {
-		let tooltip = d3.select(`#tooltip-${chartID}`);
-		if (tooltip.nodes().length <= 0) {
-			tooltip = d3.select("body").append("div")
-				.attr("class", "tooltip chart-tooltip")
-				.attr("id", `tooltip-${chartID}`)
-				.style("display", "none");
-			tooltip.append("span")
-				.attr("class", "text-box");
-
-			addCloseBtn(tooltip, "xs")
-				.on("click", () => {
-					d3.selectAll(".tooltip").remove();
-					resetOpacity();
-				});
-		}
-	}
-
-	export function addCloseBtn(tooltip, size, color?) {
-		const closeBtn = tooltip.append("button");
-		let classNames = `close--${size}`;
-		classNames = color ? " close--" + color : classNames;
-		closeBtn.attr("class", classNames)
-			.attr("type", "button")
-			.attr("aria-label", "Close")
-			.append("svg").attr("class", "close_icon")
-			.append("use").attr("href", "#x_12");
-		return closeBtn;
 	}
 
 	export let resizeTimers = [];
@@ -182,7 +133,7 @@ export namespace Charts {
 		const yHeight = options.chartSize.height - svg.select(".x.axis").node().getBBox().height;
 		const yScale = d3.scaleLinear().range([yHeight, 0]);
 		const keys = activeSeries.length > 0 ? activeSeries : options.yDomain;
-		if (options.type === "stackedBar") {
+		if (options.type === "stacked-bar") {
 			const yMax = d3.max(data, d => keys.map(val => d[val]).reduce((acc, cur) => acc + cur, 0));
 			yScale.domain([0, +yMax]);
 		} else {

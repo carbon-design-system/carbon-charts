@@ -19,4 +19,16 @@ export namespace Tools {
 			}
 		};
 	}
+
+	export function addCloseBtn(tooltip, size, color?) {
+		const closeBtn = tooltip.append("button");
+		let classNames = `close--${size}`;
+		classNames = color ? " close--" + color : classNames;
+		closeBtn.attr("class", classNames)
+			.attr("type", "button")
+			.attr("aria-label", "Close")
+			.append("svg").attr("class", "close_icon")
+			.append("use").attr("href", "#x_12");
+		return closeBtn;
+	}
 }

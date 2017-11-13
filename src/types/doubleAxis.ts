@@ -8,7 +8,7 @@ import { Charts } from "../index";
 
 export namespace DoubleAxis {
 	export function drawChart(data, parent, options) {
-		options.type = "doubleAxis";
+		options.type = "double-axis-line";
 		const parentSelection = d3.select(parent);
 		const {chartID, container} = Charts.setChartIDContainer(parentSelection);
 		options.chartSize = Charts.getActualChartSize(data, container, options);

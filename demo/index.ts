@@ -1,3 +1,8 @@
+import { BarChart } from "./../src/bar-chart";
+import { LineChart } from "./../src/line-chart";
+import { DoubleAxisLineChart } from "./../src/double-axis-line-chart";
+import { StackedBarChart } from "./../src/stacked-bar-chart";
+import { ComboChart } from "./../src/combo-chart";
 import "@peretz/matter/matter.css";
 
 import "./index.scss";
@@ -213,14 +218,14 @@ const chartTypes = [
 		data
 	},
 	{
-		id: "stackedBar",
+		id: "stacked-bar",
 		name: "Stacked Bar",
 		avail: true,
 		options,
 		data
 	},
 	{
-		id: "doubleAxis",
+		id: "double-axis-line",
 		name: "Double Axis",
 		avail: true,
 		options: optionsWithFormatter,
@@ -236,25 +241,59 @@ const chartTypes = [
 ];
 
 chartTypes.forEach(type => {
-	const container = document.getElementById(type.id + "-chart-holder");
+	const container = document.getElementById(`${type.id}-chart-holder`);
+	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
 	switch (type.id) {
+		default:
 		case "bar":
+			const classyBarChart = new BarChart(
+				classyContainer,
+				Object.assign({}, type.options, {type: type.id}),
+				type.data
+			);
+			classyBarChart.drawChart();
+
 			Bars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
 			break;
-		case "stackedBar":
-			StackedBars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
-			break;
 		case "line":
+			const classyLineChart = new LineChart(
+				classyContainer,
+				Object.assign({}, type.options, {type: type.id}),
+				type.data
+			);
+			classyLineChart.drawChart();
+
 			Lines.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
 			break;
-		case "doubleAxis":
+		case "stacked-bar":
+			const classyStackedBarChart = new StackedBarChart(
+				classyContainer,
+				Object.assign({}, type.options, {type: type.id}),
+				type.data
+			);
+			classyStackedBarChart.drawChart();
+
+			StackedBars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
+			break;
+		case "double-axis-line":
+			const classyDoubleAxisChart = new DoubleAxisLineChart(
+				classyContainer,
+				Object.assign({}, type.options, {type: type.id}),
+				type.data
+			);
+			classyDoubleAxisChart.drawChart();
+
 			DoubleAxis.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
 			break;
 		case "combo":
+			const classyComboChart = new ComboChart(
+				classyContainer,
+				Object.assign({}, type.options, {type: type.id}),
+				type.data
+			);
+			classyComboChart.drawChart();
+
 			Combo.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
-			break;
-		default:
-			Bars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
 			break;
 	}
 });
