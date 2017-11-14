@@ -1,12 +1,14 @@
+import {
+	BarChart,
+	LineChart,
+	DoubleAxisLineChart,
+	StackedBarChart,
+	ComboChart
+} from "./../src/index";
+
 import "@peretz/matter/matter.css";
 
 import "./index.scss";
-import { Charts } from "../src/charts/index";
-import { Combo } from "../src/charts/types/combo";
-import { DoubleAxis } from "../src/charts/types/doubleAxis";
-import { Bars } from "../src/charts/parts/bars";
-import { Lines } from "../src/charts/parts/lines";
-import { StackedBars } from "../src/charts/parts/stackedBars";
 
 const colors = [
 	"#009BEF",
@@ -30,7 +32,6 @@ const longDataOptions = {
 	yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
-	// windowResizable: true,
 	colors
 };
 
@@ -42,7 +43,6 @@ const doubleYAxisOptions = {
 	y2Ticks: 10,
 	legendClickable: true,
 	containerResizable: true,
-	// windowResizable: true,
 	colors
 };
 
@@ -52,7 +52,6 @@ const options = {
 	yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
-	// windowResizable: true,
 	colors
 };
 
@@ -68,7 +67,6 @@ const optionsWithFormatter = {
 	yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
-	// windowResizable: true,
 	colors
 };
 
@@ -218,14 +216,14 @@ const chartTypes = [
 		data
 	},
 	{
-		id: "stackedBar",
+		id: "stacked-bar",
 		name: "Stacked Bar",
 		avail: true,
 		options,
 		data
 	},
 	{
-		id: "doubleAxis",
+		id: "double-axis-line",
 		name: "Double Axis",
 		avail: true,
 		options: optionsWithFormatter,
@@ -241,29 +239,49 @@ const chartTypes = [
 ];
 
 chartTypes.forEach(type => {
-	const container = document.getElementById(type.id + "-chart-holder");
-	// const header = document.createElement("h2");
-	// header.className = "chart-title";
-	// header.appendChild(document.createTextNode(type.name));
-	// container.appendChild(header);
+	const container = document.getElementById(`${type.id}-chart-holder`);
+	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
 	switch (type.id) {
+		default:
 		case "bar":
-			Bars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
-			break;
-		case "stackedBar":
-			StackedBars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
+			const classyBarChart = new BarChart(
+				classyContainer,
+				Object.assign({}, type.options, {type: type.id}),
+				type.data
+			);
+			classyBarChart.drawChart();
 			break;
 		case "line":
-			Lines.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
+			const classyLineChart = new LineChart(
+				classyContainer,
+				Object.assign({}, type.options, {type: type.id}),
+				type.data
+			);
+			classyLineChart.drawChart();
 			break;
-		case "doubleAxis":
-			DoubleAxis.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
+		case "stacked-bar":
+			const classyStackedBarChart = new StackedBarChart(
+				classyContainer,
+				Object.assign({}, type.options, {type: type.id}),
+				type.data
+			);
+			classyStackedBarChart.drawChart();
+			break;
+		case "double-axis-line":
+			const classyDoubleAxisChart = new DoubleAxisLineChart(
+				classyContainer,
+				Object.assign({}, type.options, {type: type.id}),
+				type.data
+			);
+			classyDoubleAxisChart.drawChart();
 			break;
 		case "combo":
-			Combo.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
-			break;
-		default:
-			Bars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
+			const classyComboChart = new ComboChart(
+				classyContainer,
+				Object.assign({}, type.options, {type: type.id}),
+				type.data
+			);
+			classyComboChart.drawChart();
 			break;
 	}
 });
