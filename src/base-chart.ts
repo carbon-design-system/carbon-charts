@@ -178,15 +178,15 @@ export class BaseChart {
 	}
 
 	setChartIDContainer() {
-		const c = d3.select(this.holder);
+		const parent = d3.select(this.holder);
 		let chartId, container;
-		if (c.select(".chart-wrapper").nodes().length > 0) {
-			container = c.select(".chart-wrapper");
+		if (parent.select(".chart-wrapper").nodes().length > 0) {
+			container = parent.select(".chart-wrapper");
 			chartId = container.attr("chart-id");
 			container.selectAll(".chart-svg").remove();
 		} else {
 			chartId = this.id;
-			container = c.append("div");
+			container = parent.append("div");
 			container.attr("chart-id", chartId)
 				.classed("chart-wrapper", true);
 			if (container.select(".legend-wrapper").nodes().length === 0) {

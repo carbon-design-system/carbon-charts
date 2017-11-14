@@ -1,7 +1,5 @@
 import * as d3 from "d3";
 import { BaseChart } from "./base-chart";
-import { Axis } from "./parts/axis";
-import { Grid } from "./parts/grid";
 import { Configuration } from "./configuration";
 
 export class BaseAxisChart extends BaseChart {

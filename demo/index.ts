@@ -1,16 +1,14 @@
-import { BarChart } from "./../src/bar-chart";
-import { LineChart } from "./../src/line-chart";
-import { DoubleAxisLineChart } from "./../src/double-axis-line-chart";
-import { StackedBarChart } from "./../src/stacked-bar-chart";
-import { ComboChart } from "./../src/combo-chart";
+import {
+	BarChart,
+	LineChart,
+	DoubleAxisLineChart,
+	StackedBarChart,
+	ComboChart
+} from "./../src/index";
+
 import "@peretz/matter/matter.css";
 
 import "./index.scss";
-import { Combo } from "../src/types/combo";
-import { DoubleAxis } from "../src/types/doubleAxis";
-import { Bars } from "../src/parts/bars";
-import { Lines } from "../src/parts/lines";
-import { StackedBars } from "../src/parts/stackedBars";
 
 const colors = [
 	"#009BEF",
@@ -252,8 +250,6 @@ chartTypes.forEach(type => {
 				type.data
 			);
 			classyBarChart.drawChart();
-
-			Bars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
 			break;
 		case "line":
 			const classyLineChart = new LineChart(
@@ -262,8 +258,6 @@ chartTypes.forEach(type => {
 				type.data
 			);
 			classyLineChart.drawChart();
-
-			Lines.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
 			break;
 		case "stacked-bar":
 			const classyStackedBarChart = new StackedBarChart(
@@ -272,8 +266,6 @@ chartTypes.forEach(type => {
 				type.data
 			);
 			classyStackedBarChart.drawChart();
-
-			StackedBars.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
 			break;
 		case "double-axis-line":
 			const classyDoubleAxisChart = new DoubleAxisLineChart(
@@ -282,8 +274,6 @@ chartTypes.forEach(type => {
 				type.data
 			);
 			classyDoubleAxisChart.drawChart();
-
-			DoubleAxis.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
 			break;
 		case "combo":
 			const classyComboChart = new ComboChart(
@@ -292,8 +282,6 @@ chartTypes.forEach(type => {
 				type.data
 			);
 			classyComboChart.drawChart();
-
-			Combo.drawChart(type.data, container, Object.assign({}, type.options, {type: type.id}));
 			break;
 	}
 });
