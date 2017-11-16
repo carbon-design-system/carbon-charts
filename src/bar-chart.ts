@@ -7,6 +7,10 @@ export class BarChart extends BaseAxisChart {
 		super(holder, options, data);
 
 		this.options.type = "bar";
+		if (this.options.containerResizable) {
+			// this.setResizeWhenContainerChange();
+			this.resizeWhenContainerChange();
+		}
 	}
 
 	drawChart(data?: any) {
@@ -32,9 +36,48 @@ export class BarChart extends BaseAxisChart {
 		this.repositionSVG();
 		this.addDataPointEventListener();
 		this.positionLegend();
-		if (this.options.containerResizable) {
-			this.setResizeWhenContainerChange();
+		// if (this.options.containerResizable) {
+		// 	// this.setResizeWhenContainerChange();
+		// 	this.resizeWhenContainerChange();
+		// }
+	}
+
+	updateChart() {
+		if (this.svg) {
+			// update the root svg
+			this.updateSVG();
+			// these don't explicitly add elements, so they're "safe" to call
+			this.setXScale();
+			this.updateXAxis();
+			this.setYScale();
+			this.updateYAxis();
+			this.drawXGrid();
+			this.drawYGrid();
+			// update the actual chart
+			this.update();
+
+			this.repositionSVG();
+			this.positionLegend();
 		}
+	}
+
+	update() {
+		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		const activeSeries = this.getActiveDataSeries();
+		const keys = activeSeries ? activeSeries : this.options.yDomain;
+		const x1 = d3.scaleBand();
+		x1.domain(keys).rangeRound([0, this.xScale.bandwidth()]);
+		const color = d3.scaleOrdinal().range(this.options.colors).domain(this.options.yDomain);
+		const bars = this.svg.select(".bars");
+		bars.selectAll("g")
+			.attr("transform", d => `translate(${this.xScale(d[this.options.xDomain])},0)`);
+		bars.selectAll("g")
+			.selectAll("rect")
+			.attr("x", d => x1(d.series))
+			.attr("y", d => this.yScale(d.value))
+			.attr("height", d => yHeight - this.yScale(d.value))
+			.attr("width", x1.bandwidth())
+			.style("display", d => keys.includes(d.series) ? "initial" : "none");
 	}
 
 	draw() {

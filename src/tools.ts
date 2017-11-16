@@ -1,5 +1,3 @@
-
-
 export namespace Tools {
 	export function debounce(func, wait, immediate?) {
 		let timeout;

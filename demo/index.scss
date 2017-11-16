@@ -34,6 +34,10 @@
 	height: 500px;
 	width: 50%;
 	position: relative;
+	// tmp
+	overflow: hidden;
+	resize: both;
+	//
 	h3 {
 		border-bottom: 1px solid lightgray;
 		margin: 0;
@@ -44,4 +48,9 @@
 	display: block;
 	font-size: 16px;
 	font-weight: bold;
+}
+
+#classy-bar-chart-holder {
+	overflow: hidden;
+	resize: both;
 }

@@ -5,8 +5,10 @@ import { Configuration } from "./configuration";
 export class LineChart extends BaseAxisChart {
 	constructor(holder: Element, options?: any, data?: any) {
 		super(holder, options, data);
-
 		this.options.type = "line";
+		if (this.options.containerResizable) {
+			this.resizeWhenContainerChange();
+		}
 	}
 
 	drawChart(data?: any) {
@@ -31,9 +33,47 @@ export class LineChart extends BaseAxisChart {
 		this.repositionSVG();
 		this.draw();
 		this.addDataPointEventListener();
-		if (this.options.containerResizable) {
-			this.setResizeWhenContainerChange();
+	}
+
+	updateChart() {
+		if (this.svg) {
+			// update the root svg
+			this.updateSVG();
+			// these don't explicitly add elements, so they're "safe" to call
+			this.setXScale();
+			this.updateXAxis();
+			this.setYScale();
+			this.updateYAxis();
+			this.drawXGrid();
+			this.drawYGrid();
+			// update the actual chart
+			this.update();
+
+			this.repositionSVG();
+			this.positionLegend();
 		}
+	}
+
+	update(yScale: d3.ScaleLinear<number, number> = this.yScale, activeSeries = this.getActiveDataSeries()) {
+		const dataList = this.data;
+		const lines = this.svg.selectAll(".lines");
+		const line = d3.line<any>()
+			.x(d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
+			.y(d => yScale(d.value));
+		const keys = activeSeries ? activeSeries : this.options.yDomain;
+		const allActiveSeries: any = this.getActiveDataSeries();
+		lines.selectAll(".line")
+			.select("path")
+			// filter to include just the relevant series (mostly useful for 2 axis charts)
+			.filter(d => keys.includes(d[0].series))
+			.attr("d", line);
+		// hide hidden series, and prevent them from being clicked
+		lines.selectAll("path").style("display", d => allActiveSeries.includes(d[0].series) ? "initial" : "none");
+		lines.selectAll("circle")
+			.filter(d => keys.includes(d.series))
+			.attr("cx", d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
+			.attr("cy", d => yScale(d.value));
+		lines.selectAll("circle").style("display", d => allActiveSeries.includes(d.series) ? "initial" : "none");
 	}
 
 	draw(yScale: d3.ScaleLinear<number, number> = this.yScale, activeSeries = this.getActiveDataSeries()) {
@@ -57,7 +97,9 @@ export class LineChart extends BaseAxisChart {
 		const line = d3.line<any>()
 			.x(d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
 			.y(d => yScale(d.value));
-		keys.forEach((value, idx) => {
+		const lines = this.svg.append("g");
+		lines.attr("class", "lines");
+		keys.forEach(value => {
 			const colorKey = value;
 			if (this.options.dimension) {
 				dataList = this.data.filter(d => d[this.options.dimension] === value);
@@ -73,7 +115,8 @@ export class LineChart extends BaseAxisChart {
 				formatter: this.options.yFormatter,
 				color: color(colorKey)
 			}));
-			const series = this.svg.append("g");
+			const series = lines.append("g");
+			series.attr("class", "line");
 			series.append("path")
 				.data([valueData])
 				.attr("fill", Configuration.lines.path.fill)
