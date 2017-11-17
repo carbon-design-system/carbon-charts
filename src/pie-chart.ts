@@ -4,16 +4,18 @@ import { Configuration } from "./configuration";
 import { Tools } from "./tools";
 
 export class PieChart extends BaseChart {
+	color: any;
+
 	constructor(holder: Element, options?: any, data?: any) {
 		super(holder, options, data);
 
 		this.options.type = "pie";
 		let keys: any = [];
-		this.data.map((entry) => {
-			console.log(entry.label);
-			keys.push(entry.label);
-		});
+		this.data.map((entry) => keys.push(entry.label));
 		this.options.yDomain = keys;
+
+		this.color = d3.scaleOrdinal()
+			.range(this.options.colors);
 	}
 
 	drawChart(data?: any) {
@@ -49,8 +51,6 @@ export class PieChart extends BaseChart {
 
 		const actualChartSize: any = this.getActualChartSize(this.container);
 		const radius: number = Math.min(actualChartSize.width, actualChartSize.height) / 2;
-		const color = d3.scaleOrdinal()
-			.range(this.options.colors);
 
 		d3.select(this.holder).select("svg")
 			.attr("width", actualChartSize.width)
@@ -73,21 +73,35 @@ export class PieChart extends BaseChart {
 			.append("path")
 			.attr("d", arc)
 			.attr("fill", function(d, i) {
-				return color(d.data.label);
-			})
+				return this.color(d.data.label);
+			}.bind(this))
 			.attr("stroke", function(d, i) {
-				return d3.select(this).attr("fill");
-			});
+				return this.color(d.data.label);
+			}.bind(this));
+			// .datum(function (d, i) { return Object.assign(d, {color: color(d.data.label)}); });
+	}
+
+	reduceOpacity(exception) {
+		this.svg.selectAll("rect").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
+		this.svg.selectAll("path").attr("stroke-opacity", this.options.type !== "pie" ? Configuration.charts.reduceOpacity.opacity : 0);
+		this.svg.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
+		this.svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+		d3.select(exception).attr("fill-opacity", false);
+		if (this.options.type !== "pie") {
+			d3.select(exception.parentNode).select("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		}
+		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		d3.select(exception).attr("fill", d3.select(exception).attr("stroke"));
 	}
 
 	showTooltip(d) {
 		this.resetOpacity();
-
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
 			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px")
-			.style("border-color", d.color);
+			.style("border-color", this.color(d.data.label));
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				this.resetOpacity();
@@ -122,9 +136,9 @@ export class PieChart extends BaseChart {
 				.attr("fill", Configuration.lines.mouseover.fill)
 				.attr("stroke-width", Configuration.lines.mouseover.strokeWidth)
 				.attr("stroke", d.color)
-				.attr("stroke-opacity", Configuration.lines.mouseover.strokeOpacity)
-				.attr("cx", this.cx.baseVal.value)
-				.attr("cy", this.cy.baseVal.value);
+				.attr("stroke-opacity", Configuration.lines.mouseover.strokeOpacity);
+				// .attr("cx", this.cx.baseVal.value)
+				// .attr("cy", this.cy.baseVal.value);
 		})
 		.on("mouseout", function() {
 			self.svg.selectAll(`.${Configuration.lines.mouseover.class}`).remove();
