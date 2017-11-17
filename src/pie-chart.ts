@@ -42,59 +42,31 @@ export class PieChart extends BaseChart {
 		const actualChartSize: any = this.getActualChartSize(this.container);
 		const radius: number = Math.min(actualChartSize.width, actualChartSize.height) / 2;
 		const color = d3.scaleOrdinal()
-		.range(this.options.colors);
+			.range(this.options.colors);
 
-		// const color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
-		// keys = activeSeries ? activeSeries : keys;
-		// const line = d3.line<any>()
-		// 	.x(d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
-		// 	.y(d => yScale(d.value));
-		// keys.forEach((value, idx) => {
-		// 	const colorKey = value;
-		// 	if (this.options.dimension) {
-		// 		dataList = this.data.filter(d => d[this.options.dimension] === value);
-		// 		value = this.options.yDomain[0];
-		// 	}
-		// 	const valueData = dataList.map(d => (<any>{
-		// 		xAxis: this.options.xDomain,
-		// 		key: d[this.options.xDomain],
-		// 		series: value,
-		// 		value: d[value],
-		// 		dimension: this.options.dimension,
-		// 		dimVal: d[this.options.dimension],
-		// 		formatter: this.options.yFormatter,
-		// 		color: color(colorKey)
-		// 	}));
-		// 	const series = this.svg.append("g");
-		// 	series.append("path")
-		// 		.data([valueData])
-		// 		.attr("fill", Configuration.lines.path.fill)
-		// 		.attr("stroke", Configuration.lines.path.stroke)
-		// 		.attr("stroke-linejoin", Configuration.lines.path.strokeLinejoin)
-		// 		.attr("stroke-linecap", Configuration.lines.path.strokeLinecap)
-		// 		.attr("stroke-width", Configuration.lines.path.strokeWidth)
-		// 		.attr("d", line)
-		// 		.style("stroke", color(colorKey))
-		// 		.style("opacity", 0)
-		// 		.transition()
-		// 		.duration(Configuration.lines.path.duration)
-		// 		.style("opacity", 1);
+		d3.select(this.holder).select("svg")
+			.attr("width", actualChartSize.width)
+			.attr("height", actualChartSize.height);
 
-		// 	series.selectAll("dot")
-		// 		.data(valueData)
-		// 		.enter().append("circle")
-		// 		.attr("r", Configuration.lines.dot.r)
-		// 		.attr("fill", Configuration.lines.dot.fill)
-		// 		.attr("stroke", color(colorKey))
-		// 		.attr("stroke-width", Configuration.lines.dot.strokeWidth)
-		// 		.attr("cx", d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
-		// 		.attr("cy", d => yScale(d.value))
-		// 		.style("opacity", 0)
-		// 		.transition()
-		// 		.duration(Configuration.lines.dot.duration)
-		// 		.style("opacity", 1);
+		this.svg
+			.attr("transform", "translate(" + (actualChartSize.width / 2) +  "," + (actualChartSize.height / 2) + ")");
 
-		// });
+		const arc = d3.arc()
+			.innerRadius(0)
+			.outerRadius(radius);
+
+		const pie = d3.pie()
+			.value(function(d: any) { return d.value; })
+			.sort(null);
+
+		const path = this.svg.selectAll("path")
+			.data(pie(dataList))
+			.enter()
+			.append("path")
+			.attr("d", arc)
+			.attr("fill", function(d, i) {
+				return color(d.data.label);
+			});
 	}
 
 	addDataPointEventListener() {

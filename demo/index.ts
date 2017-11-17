@@ -201,30 +201,10 @@ const longData = [
 ];
 
 const pieData = [
-	{
-		label: "2V2N-9KYPM version 1",
-		value: 100000
-	},
-	{
-		label: "L22I-P66EP-L22I-P66EP-L22I-P66EP",
-		value: 200000
-	},
-	{
-		label: "JQAI-2M4L1",
-		value: 600000
-	},
-	{
-		label: "J9DZ-F37AP",
-		value: 100000
-	},
-	{
-		label: "Q6XK-YEL48",
-		value: 400000
-	},
-	{
-		label: "773C-XKB5-L6EP-L22I-P66EP-L22I",
-		value: 800000
-	}
+	{ label: "Abulia", value: 10 },
+	{ label: "Betelgeuse", value: 20 },
+	{ label: "Cantaloupe", value: 30 },
+	{ label: "Dijkstra", value: 40 }
 ];
 
 
@@ -269,7 +249,7 @@ const chartTypes = [
 		name: "pie",
 		avail: true,
 		options: doubleYAxisOptions,
-		data: longData
+		data: pieData
 	}
 ];
 
