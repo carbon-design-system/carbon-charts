@@ -3,7 +3,8 @@ import {
 	LineChart,
 	DoubleAxisLineChart,
 	StackedBarChart,
-	ComboChart
+	ComboChart,
+	PieChart
 } from "./../src/index";
 
 import "@peretz/matter/matter.css";
@@ -235,6 +236,13 @@ const chartTypes = [
 		avail: true,
 		options: doubleYAxisOptions,
 		data: longData
+	},
+	{
+		id: "pie",
+		name: "pie",
+		avail: true,
+		options: doubleYAxisOptions,
+		data: longData
 	}
 ];
 
@@ -282,6 +290,14 @@ chartTypes.forEach(type => {
 				type.data
 			);
 			classyComboChart.drawChart();
+			break;
+		case "pie":
+			const classyPieChart = new PieChart(
+				classyContainer,
+				Object.assign({}, type.options, {type: type.id}),
+				type.data
+			);
+			classyPieChart.drawChart();
 			break;
 	}
 });
