@@ -200,6 +200,7 @@ export class BaseChart {
 	resetOpacity() {
 		const svg = d3.selectAll("svg");
 		svg.selectAll("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		svg.selectAll("path").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
 		svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
 			.attr("fill", Configuration.charts.resetOpacity.circle.fill);
 		svg.selectAll("rect").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
@@ -207,10 +208,13 @@ export class BaseChart {
 
 	reduceOpacity(exception) {
 		this.svg.selectAll("rect").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
-		d3.select(exception).attr("fill-opacity", false);
-		this.svg.selectAll("path").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+		this.svg.selectAll("path").attr("stroke-opacity", this.options.type !== "pie" ? Configuration.charts.reduceOpacity.opacity : 0);
+		this.svg.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
 		this.svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
-		d3.select(exception.parentNode).select("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		d3.select(exception).attr("fill-opacity", false);
+		if (this.options.type !== "pie") {
+			d3.select(exception.parentNode).select("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		}
 		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		d3.select(exception).attr("fill", d3.select(exception).attr("stroke"));

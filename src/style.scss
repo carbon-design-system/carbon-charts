@@ -202,6 +202,15 @@
 		left: -9px;
 		top: 9px;
 	}
+
+	p {
+		margin-bottom: 5px;
+
+		&.bignum {
+			margin-top: 15px;
+			font-size: 27px;
+		}
+	}
 }
 
 .chart-tooltip {
