@@ -41,13 +41,15 @@ export class PieChart extends BaseChart {
 
 	draw(activeSeries = this.getActiveDataSeries()) {
 		let keys: any = [];
-		let dataList = this.data;
-		dataList.map((entry) => {
-			console.log(entry.label);
-			keys.push(entry.label);
-		});
+		const dataList = this.data;
+		if (activeSeries) {
+			keys = activeSeries;
+		} else {
+			dataList.map((entry) => {
+				keys.push(entry.label);
+			});
+		}
 		this.options.yDomain = keys;
-		console.log(this.options);
 
 		const actualChartSize: any = this.getActualChartSize(this.container);
 		const radius: number = Math.min(actualChartSize.width, actualChartSize.height) / 2;
@@ -57,6 +59,7 @@ export class PieChart extends BaseChart {
 			.attr("height", actualChartSize.height);
 
 		this.svg
+			.attr("class", "pie-chart")
 			.attr("transform", "translate(" + (actualChartSize.width / 2) +  "," + (actualChartSize.height / 2) + ")");
 
 		const arc = d3.arc()
@@ -126,22 +129,22 @@ export class PieChart extends BaseChart {
 	addDataPointEventListener() {
 		const self = this;
 		this.svg.selectAll("path")
-		.on("click", function(d) {
-			self.showTooltip(d);
-			self.reduceOpacity(this);
-		})
-		.on("mouseover", function(d) {
-			self.svg.append("circle").attr("class", Configuration.lines.mouseover.class)
-				.attr("r", Configuration.lines.mouseover.r)
-				.attr("fill", Configuration.lines.mouseover.fill)
-				.attr("stroke-width", Configuration.lines.mouseover.strokeWidth)
-				.attr("stroke", d.color)
-				.attr("stroke-opacity", Configuration.lines.mouseover.strokeOpacity);
-				// .attr("cx", this.cx.baseVal.value)
-				// .attr("cy", this.cy.baseVal.value);
-		})
-		.on("mouseout", function() {
-			self.svg.selectAll(`.${Configuration.lines.mouseover.class}`).remove();
-		});
+			.on("click", function(d) {
+				self.showTooltip(d);
+				self.reduceOpacity(this);
+			})
+			.on("mouseover", function(d) {
+				console.log(d);
+				console.log(this);
+
+				d3.select(this)
+					.attr("stroke-width", Configuration.pie.mouseover.strokeWidth)
+					.attr("stroke-opacity", Configuration.pie.mouseover.strokeOpacity)
+					.attr("stroke", self.color(d.data.label));
+			})
+			.on("mouseout", function(d) {
+				d3.select(this)
+					.attr("stroke", "");
+			});
 	}
 }

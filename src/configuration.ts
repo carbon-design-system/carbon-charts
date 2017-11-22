@@ -85,6 +85,14 @@ export namespace Configuration {
 		}
 	};
 
+	export const pie = {
+		mouseover: {
+			strokeWidth: 8,
+			strokeOpacity: 0.5
+		}
+	};
+
+
 	export const legend = {
 		countBreak: 4,
 		fontSize: 12,

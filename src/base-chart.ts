@@ -422,8 +422,6 @@ export class BaseChart {
 	showTooltip(d) {
 		this.resetOpacity();
 
-		console.log(d3.select(d).attr("fill"));
-
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
