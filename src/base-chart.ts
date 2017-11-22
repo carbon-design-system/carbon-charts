@@ -449,4 +449,19 @@ export class BaseChart {
 			tooltip.append("div").attr("class", "arrow arrow-left");
 		}
 	}
+
+	// https://github.com/wbkd/d3-extended
+	moveToBack(element) {
+		return element.each(function() {
+			const firstChild = this.parentNode.firstChild;
+			if (firstChild) {
+				this.parentNode.insertBefore(this, firstChild);
+			}
+		});
+	}
+	moveToFront(element) {
+		return element.each(function() {
+			this.parentNode.appendChild(this);
+		});
+	}
 }

@@ -10,7 +10,7 @@ export class PieChart extends BaseChart {
 		super(holder, options, data);
 
 		this.options.type = "pie";
-		let keys: any = [];
+		const keys: any = [];
 		this.data.map((entry) => keys.push(entry.label));
 		this.options.yDomain = keys;
 
@@ -82,7 +82,7 @@ export class PieChart extends BaseChart {
 				return this.color(d.data.label);
 			}.bind(this))
 			.style("opacity", 0)
-			.style("transform", "scale(0.5)")
+			.style("transform", "scale(0.75)")
 			.transition()
 			.duration(Configuration.lines.path.duration)
 			.style("opacity", 1)
@@ -139,10 +139,10 @@ export class PieChart extends BaseChart {
 				self.reduceOpacity(this);
 			})
 			.on("mouseover", function(d) {
-				console.log(d);
-				console.log(this);
+				const sel = d3.select(this);
+				self.moveToFront(sel);
 
-				d3.select(this)
+				sel
 					.attr("stroke-width", Configuration.pie.mouseover.strokeWidth)
 					.attr("stroke-opacity", Configuration.pie.mouseover.strokeOpacity)
 					.attr("stroke", self.color(d.data.label));
