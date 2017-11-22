@@ -41,7 +41,7 @@ export class PieChart extends BaseChart {
 
 	draw(activeSeries = this.getActiveDataSeries()) {
 		let keys: any = [];
-		const dataList = this.data;
+		let dataList = this.data;
 		if (activeSeries) {
 			keys = activeSeries;
 		} else {
@@ -49,6 +49,16 @@ export class PieChart extends BaseChart {
 				keys.push(entry.label);
 			});
 		}
+
+		keys.forEach((value, idx) => {
+			const colorKey = value;
+			if (this.options.dimension) {
+				console.log("Dimension is there");
+				dataList = this.data.filter(d => d[this.options.dimension] === value);
+				value = this.options.yDomain[0];
+			}
+		});
+
 		this.options.yDomain = keys;
 
 		const actualChartSize: any = this.getActualChartSize(this.container);
@@ -117,7 +127,7 @@ export class PieChart extends BaseChart {
 			});
 
 		const dVal = d.value.toLocaleString();
-		let tooltipHTML = "<p class='bignum'>" + dVal + "</p><p>" + d.data.label + "</p>";
+		const tooltipHTML = "<p class='bignum'>" + dVal + "</p><p>" + d.data.label + "</p>";
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
 			tooltip.style(

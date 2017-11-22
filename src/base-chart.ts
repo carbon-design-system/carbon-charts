@@ -339,11 +339,12 @@ export class BaseChart {
 	}
 
 	addTooltipOpenButtonToLegend() {
+		const self = this;
 		const thisLegend = this.container.select(".legend");
 		thisLegend.append("div")
 			.attr("class", "expand-btn")
 			.on("click", function() {
-				this.openLegendTooltip(this);
+				self.openLegendTooltip(this);
 			});
 	}
 
