@@ -80,8 +80,13 @@ export class PieChart extends BaseChart {
 			}.bind(this))
 			.attr("stroke", function(d, i) {
 				return this.color(d.data.label);
-			}.bind(this));
-			// .datum(function (d, i) { return Object.assign(d, {color: color(d.data.label)}); });
+			}.bind(this))
+			.style("opacity", 0)
+			.style("transform", "scale(0.5)")
+			.transition()
+			.duration(Configuration.lines.path.duration)
+			.style("opacity", 1)
+			.style("transform", "scale(1)");
 	}
 
 	reduceOpacity(exception) {
