@@ -5,8 +5,10 @@ import { Configuration } from "./configuration";
 export class StackedBarChart extends BarChart {
 	constructor(holder: Element, options?: any, data?: any) {
 		super(holder, options, data);
-
 		this.options.type = "stacked-bar";
+		if (this.options.containerResizable) {
+			this.resizeWhenContainerChange();
+		}
 	}
 
 	drawChart(data?: any) {
@@ -31,18 +33,62 @@ export class StackedBarChart extends BarChart {
 		this.repositionSVG();
 		this.draw();
 		this.addDataPointEventListener();
-		if (this.options.containerResizable) {
-			this.setResizeWhenContainerChange();
-		}
+	}
+
+	update() {
+		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		const activeSeries = this.getActiveDataSeries();
+		const keys = activeSeries ? activeSeries : this.options.yDomain;
+		const color = d3.scaleOrdinal().range(this.options.colors).domain(this.options.yDomain);
+		const bars = this.svg.select(".stacked-bars");
+		this.xScale.paddingInner(0.2);
+
+		// TODO: only do this data update if the number of selected keys has changed
+		this.data.forEach(d => {
+			let y0 = 0;
+			const key = d[this.options.xDomain];
+			const xAxis = this.options.xDomain;
+			d.series = keys.map(seriesVal => {
+				return {
+					xAxis,
+					series: seriesVal,
+					key,
+					y0: y0,
+					y1: y0 += +d[seriesVal],
+					value: d[seriesVal],
+					formatter: this.options.yFormatter,
+					color: color(seriesVal)
+				};
+			});
+			d.total = this.options.yDomain.map(val => d[val]).reduce((acc, cur) => acc + cur, 0);
+		});
+
+		bars.selectAll(".series")
+			.data(this.data)
+			.attr("transform", d => `translate(${this.xScale(d[this.options.xDomain])},0)`);
+
+		const s = bars.selectAll(".series")
+			.selectAll("rect")
+			.data(d => d.series);
+		s.attr("y", d => this.yScale(d.y1))
+			.style("fill", d => d.color)
+			.attr("height", d => this.yScale(d.y0) - this.yScale(d.y1))
+			.attr("width", this.xScale.bandwidth());
+		s.enter()
+			.append("rect")
+			.attr("width", this.xScale.bandwidth())
+			.style("fill", d => d.color)
+			.attr("y", d => this.yScale(d.y1))
+			.attr("height", d => this.yScale(d.y0) - this.yScale(d.y1));
+		s.exit()
+			.remove();
 	}
 
 	draw() {
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		const activeSeries = this.getActiveDataSeries();
 		const keys = activeSeries ? activeSeries : this.options.yDomain;
-		const x1 = d3.scaleBand();
 		this.xScale.paddingInner(0.2);
-		x1.domain(keys).rangeRound([0, this.xScale.bandwidth()]);
 		const color = d3.scaleOrdinal().range(this.options.colors).domain(this.options.yDomain);
 		this.data.forEach(d => {
 			let y0 = 0;
@@ -63,15 +109,19 @@ export class StackedBarChart extends BarChart {
 			d.total = this.options.yDomain.map(val => d[val]).reduce((acc, cur) => acc + cur, 0);
 		});
 
-		const series = this.svg.selectAll(".series")
+		const bars = this.svg.append("g").attr("class", "stacked-bars");
+
+		const series = bars.selectAll(".series")
 			.data(this.data)
-			.enter().append("g")
-			.attr("class", "g")
+			.enter()
+			.append("g")
+			.attr("class", "series")
 			.attr("transform", d => `translate(${this.xScale(d[this.options.xDomain])},0)`);
 
 		series.selectAll("rect")
 			.data(d => d.series)
-			.enter().append("rect")
+			.enter()
+			.append("rect")
 			.attr("width", this.xScale.bandwidth())
 			.style("fill", d => d.color)
 			.attr("y", yHeight)

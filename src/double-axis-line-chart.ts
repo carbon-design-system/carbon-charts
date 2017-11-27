@@ -7,6 +7,35 @@ export class DoubleAxisLineChart extends LineChart {
 		super(holder, options, data);
 
 		this.options.type = "double-axis-line";
+		if (this.options.containerResizable) {
+			this.resizeWhenContainerChange();
+		}
+	}
+
+	updateChart() {
+		if (this.svg) {
+			const activeSeries = <any>this.getActiveDataSeries();
+			const y1ActiveSeries = this.options.yDomain.filter(val => activeSeries.includes(val));
+			const y2ActiveSeries = this.options.y2Domain.filter(val => activeSeries.includes(val));
+
+			// update the root svg
+			this.updateSVG();
+			// these don't explicitly add elements, so they're "safe" to call
+			this.setXScale();
+			this.updateXAxis();
+			const yScale = this.setYScale(this.data, y1ActiveSeries);
+			const y2Scale = this.setYScale(this.data, y2ActiveSeries);
+			this.updateYAxis(yScale);
+			this.updateY2Axis(y2Scale);
+			this.drawXGrid();
+			this.drawYGrid(yScale);
+			// update the actual chart
+			this.update(yScale, y1ActiveSeries);
+			this.update(y2Scale, y2ActiveSeries);
+
+			this.repositionSVG();
+			this.positionLegend();
+		}
 	}
 
 	drawChart(data?: any) {
@@ -44,9 +73,6 @@ export class DoubleAxisLineChart extends LineChart {
 		this.repositionSVG();
 
 		this.addDataPointEventListener();
-		if (this.options.containerResizable) {
-			this.setResizeWhenContainerChange();
-		}
 	}
 
 

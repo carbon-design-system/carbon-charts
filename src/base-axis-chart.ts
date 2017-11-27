@@ -39,8 +39,8 @@ export class BaseAxisChart extends BaseChart {
 				yScale.domain([0, +yMax]);
 			} else {
 				yScale.domain([0, +d3.max(data, d =>
-						d3.max(keys.map(domain => d[domain])))
-					]);
+					d3.max(keys.map(domain => d[domain])))
+				]);
 			}
 			return yScale;
 		}
@@ -54,8 +54,8 @@ export class BaseAxisChart extends BaseChart {
 			this.yScale.domain([0, +yMax]);
 		} else {
 			this.yScale.domain([0, +d3.max(this.data, d =>
-					d3.max(keys.map(domain => d[domain])))
-				]);
+				d3.max(keys.map(domain => d[domain])))
+			]);
 		}
 		return this.yScale;
 	}
@@ -72,19 +72,42 @@ export class BaseAxisChart extends BaseChart {
 			.attr("transform", `rotate(${Configuration.axis.xAxisAngle})`)
 			.style("text-anchor", "end")
 			.call(text => this.wrapTick(text));
-
+		// get the tickHeight after the ticks have been wrapped
+		const tickHeight = this.getLargestTickHeight(g.selectAll(".tick")) + Configuration.axis.tick.heightAddition;
 		g.select(".domain")
 			.attr("stroke", Configuration.axis.domain.color)
 			.attr("fill", Configuration.axis.domain.color)
 			.attr("stroke-width", Configuration.axis.domain.strokeWidth);
 
-		const tickHeight = this.getLargestTickHeight(g.selectAll(".tick")) + Configuration.axis.tick.heightAddition;
 		g.append("text")
 			.attr("class", "x axis-label")
 			.attr("text-anchor", "middle")
 			.attr("transform", "translate(" + (g.node().getBBox().width / 2) + "," + tickHeight + ")")
 			.text(this.options.xDomain);
+		// get the yHeight after the height of the axis has settled
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		g.attr("transform", `translate(0, ${yHeight})`);
+	}
+
+	updateXAxis(xScale: d3.ScaleBand<string> = this.xScale) {
+		// configure the axis with no visible ticks
+		const xAxis = d3.axisBottom(xScale)
+			.tickSizeInner(0)
+			.tickSizeOuter(0);
+
+		// update the axis
+		const g = this.svg.select(".x.axis").call(xAxis);
+
+		g.selectAll(".tick")
+			.select("text")
+			.call(text => this.wrapTick(text));
+		// get the yHeight and tickHeight after the ticks have been wrapped
+		const tickHeight = this.getLargestTickHeight(g.selectAll(".tick")) + Configuration.axis.tick.heightAddition;
+		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		// center the label
+		g.select(".x.axis-label")
+			.attr("transform", "translate(" + (g.node().getBBox().width / 2) + "," + tickHeight + ")");
+		// set the axis to sit at the bottom of the chart correctly
 		g.attr("transform", `translate(0, ${yHeight})`);
 	}
 
@@ -98,11 +121,22 @@ export class BaseAxisChart extends BaseChart {
 		if (this.options.yFormatter && this.options.yFormatter[this.options.yDomain[0]]) {
 			this.addUnits(g.selectAll("text"), this.options.yFormatter[this.options.yDomain[0]]);
 		}
-		const tickWidth = this.getLargestTickWidth(g.selectAll(".tick")) + Configuration.axis.tick.widthAdditionY;
 		const label = this.options.yDomain.join(", ");
 
 		this.appendYAxisLabel(g, label, "y")
 			.attr("class", "y axis-label");
+	}
+
+	updateYAxis(yScale: d3.ScaleLinear<number, number> = this.yScale) {
+		const yAxis = d3.axisLeft(yScale);
+		this.setTickStyle(yAxis, this.options.yTicks);
+		const g = this.svg.select(".y.axis")
+			.attr("transform", `translate(0, 0)`)
+			.call(yAxis);
+		g.select(".domain").remove();
+		if (this.options.yFormatter && this.options.yFormatter[this.options.yDomain[0]]) {
+			this.addUnits(g.selectAll("text"), this.options.yFormatter[this.options.yDomain[0]]);
+		}
 	}
 
 	drawY2Axis(yScale: d3.ScaleLinear<number, number> = this.yScale) {
@@ -118,9 +152,20 @@ export class BaseAxisChart extends BaseChart {
 		if (this.options.yFormatter && this.options.yFormatter[this.options.y2Domain[0]]) {
 			this.addUnits(g.selectAll("text"), this.options.yFormatter[this.options.y2Domain[0]]);
 		}
-		const tickWidth = this.getLargestTickWidth(g.selectAll(".tick")) + Configuration.axis.tick.widthAdditionY2;
 		const label = this.options.y2Domain.join(", ");
 		this.appendYAxisLabel(g, label, "y2");
+	}
+
+	updateY2Axis(yScale: d3.ScaleLinear<number, number> = this.yScale) {
+		const yAxis = d3.axisRight(yScale);
+		this.setTickStyle(yAxis, this.options.y2Ticks);
+		const g = this.svg.select(".y2.axis")
+			.attr("transform", `translate(${this.getActualChartSize().width}, 0)`)
+			.call(yAxis);
+		g.select(".domain").remove();
+		if (this.options.yFormatter && this.options.yFormatter[this.options.yDomain[0]]) {
+			this.addUnits(g.selectAll("text"), this.options.yFormatter[this.options.yDomain[0]]);
+		}
 	}
 
 	appendYAxisLabel(g, label, labelNum) {

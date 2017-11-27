@@ -4,6 +4,8 @@ import { Tools } from "./tools";
 
 export class BaseChart {
 	static chartCount = 1;
+
+	//#region
 	id = "";
 	container: any;
 	holder: Element;
@@ -34,7 +36,6 @@ export class BaseChart {
 		]
 	};
 	data: any;
-
 	constructor(holder: Element, options?: any, data?: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
 
@@ -73,15 +74,25 @@ export class BaseChart {
 		};
 	}
 
+	/*
+	 * removes the chart and any tooltips
+	 */
 	removeChart() {
 		this.container.select("svg").remove();
 		this.container.selectAll(".chart-tooltip").remove();
 		this.container.selectAll(".label-tooltip").remove();
 	}
 
+	/*
+	 * either creates or updates the chart
+	 */
 	redrawChart(data?: any) {
-		this.removeChart();
-		this.drawChart(data);
+		if (!data) {
+			this.updateChart();
+		} else {
+			this.removeChart();
+			this.drawChart(data);
+		}
 	}
 
 	setSVG(): any {
@@ -108,19 +119,43 @@ export class BaseChart {
 		return this.svg;
 	}
 
+	updateSVG() {
+		const chartSize = this.getActualChartSize();
+		this.svg.select(".x.axis")
+			.attr("transform", `translate(0, ${chartSize.height})`);
+		const grid = this.svg.select(".grid")
+			.attr("clip-path", `url(${window.location.origin}${window.location.pathname}#clip)`);
+		grid.select(".x.grid")
+			.attr("transform", `translate(0, ${chartSize.width})`);
+		grid.select(".y.grid")
+			.attr("transform", `translate(0, 0)`);
+	}
+
 	repositionSVG() {
 		const yAxisWidth = (this.container.select(".y.axis").node() as SVGGElement).getBBox().width;
 		this.container.style("padding-left", `${yAxisWidth}px`);
 	}
 
+	/*
+	 * creates the chart from scratch
+	 * should only be called once (or removeChart should be called before)
+	 */
 	drawChart(data?: any) {
 		if (data) {
 			this.data = data;
 		}
 
-		console.log("You should implement your own `drawChart()` function.");
+		console.warn("You should implement your own `drawChart()` function.");
 	}
 
+	/*
+	 * called when the chart needs to be updated visually
+	 * similar to drawChart but it should work from the existing chart
+	 */
+	updateChart() {
+		console.warn("You should implement your own `updateChart() function.");
+	}
+	//#endregion
 	setResizeWhenContainerChange() {
 		let containerWidth = this.holder.clientWidth;
 		let containerHeight = this.holder.clientHeight;
@@ -138,6 +173,22 @@ export class BaseChart {
 		}, 800);
 		this.resizeTimers.push(intervalId);
 		return intervalId;
+	}
+
+	resizeWhenContainerChange() {
+		let containerWidth = this.holder.clientWidth;
+		let containerHeight = this.holder.clientHeight;
+		const frame = () => {
+			if (Math.abs(containerWidth - this.holder.clientWidth) > 1
+				|| Math.abs(containerHeight - this.holder.clientHeight) > 1) {
+				containerWidth = this.holder.clientWidth;
+				containerHeight = this.holder.clientHeight;
+				d3.selectAll(".legend-tooltip").style("display", "none");
+				this.updateChart();
+			}
+			requestAnimationFrame(frame);
+		};
+		requestAnimationFrame(frame);
 	}
 
 	setClickableLegend() {
@@ -339,10 +390,12 @@ export class BaseChart {
 
 	addTooltipOpenButtonToLegend() {
 		const thisLegend = this.container.select(".legend");
+		const self = this;
 		thisLegend.append("div")
 			.attr("class", "expand-btn")
+			.style("cursor", "pointer")
 			.on("click", function() {
-				this.openLegendTooltip(this);
+				self.openLegendTooltip(this);
 			});
 	}
 
@@ -373,7 +426,11 @@ export class BaseChart {
 				.selectAll("div")
 				.data(this.getLegendItems())
 				.enter().append("li")
-				.attr("class", "legend-btn active");
+				.attr("class", "legend-btn active")
+				.on("click", () => {
+					this.updateLegend(".legend-tooltip-content");
+					this.redrawChart();
+				});
 
 			legendContent.append("div")
 				.attr("class", "legend-circle")
@@ -382,8 +439,6 @@ export class BaseChart {
 
 			legendContent.append("text")
 				.text(d => "" + d);
-
-			this.setClickableLegendInTooltip();
 		}
 
 		if (window.innerWidth - (windowXPoint + Configuration.tooltip.width) < 0) {

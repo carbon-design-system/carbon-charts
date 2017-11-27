@@ -239,7 +239,6 @@ const chartTypes = [
 ];
 
 chartTypes.forEach(type => {
-	const container = document.getElementById(`${type.id}-chart-holder`);
 	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
 	switch (type.id) {
 		default:
