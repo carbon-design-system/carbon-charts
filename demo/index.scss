@@ -1,3 +1,7 @@
+body {
+	margin: 20px;
+}
+
 .chart-type-selection {
 	display: inline;
 	line-height: 50px;
@@ -32,7 +36,8 @@
 	display: block;
 	padding: 20px 30px;
 	height: 500px;
-	width: 50%;
+	min-width: 300px;
+	max-width: 800px;
 	position: relative;
 	// tmp
 	overflow: hidden;
