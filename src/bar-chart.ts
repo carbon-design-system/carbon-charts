@@ -8,7 +8,6 @@ export class BarChart extends BaseAxisChart {
 
 		this.options.type = "bar";
 		if (this.options.containerResizable) {
-			// this.setResizeWhenContainerChange();
 			this.resizeWhenContainerChange();
 		}
 	}

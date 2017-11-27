@@ -145,7 +145,7 @@ export class BaseChart {
 			this.data = data;
 		}
 
-		console.log("You should implement your own `drawChart()` function.");
+		console.warn("You should implement your own `drawChart()` function.");
 	}
 
 	/*
@@ -153,7 +153,7 @@ export class BaseChart {
 	 * similar to drawChart but it should work from the existing chart
 	 */
 	updateChart() {
-		console.log("");
+		console.warn("You should implement your own `updateChart() function.");
 	}
 	//#endregion
 	setResizeWhenContainerChange() {
@@ -207,11 +207,8 @@ export class BaseChart {
 	setClickableLegendInTooltip() {
 		const self = this;
 		const c = d3.select(this.container);
-		console.log(c);
 		const tooltip = c.select(".legend-tooltip-content");
-		console.log(tooltip);
 		tooltip.selectAll(".legend-btn").each(function() {
-			console.log(this);
 			d3.select(this).on("click", function() {
 				self.updateLegend(this);
 				self.redrawChart();
@@ -396,7 +393,7 @@ export class BaseChart {
 		const self = this;
 		thisLegend.append("div")
 			.attr("class", "expand-btn")
-			// .style("cursor", "pointer")
+			.style("cursor", "pointer")
 			.on("click", function() {
 				self.openLegendTooltip(this);
 			});
@@ -442,8 +439,6 @@ export class BaseChart {
 
 			legendContent.append("text")
 				.text(d => "" + d);
-
-			// this.setClickableLegendInTooltip();
 		}
 
 		if (window.innerWidth - (windowXPoint + Configuration.tooltip.width) < 0) {
