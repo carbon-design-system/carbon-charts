@@ -36,16 +36,16 @@ export class BarChart extends BaseAxisChart {
 		this.repositionSVG();
 		this.addDataPointEventListener();
 		this.positionLegend();
-		// if (this.options.containerResizable) {
-		// 	// this.setResizeWhenContainerChange();
-		// 	this.resizeWhenContainerChange();
-		// }
 	}
 
 	updateChart() {
 		if (this.svg) {
 			// update the root svg
 			this.updateSVG();
+			this.addLegend();
+			if (this.options.legendClickable) {
+				this.setClickableLegend();
+			}
 			// these don't explicitly add elements, so they're "safe" to call
 			this.setXScale();
 			this.updateXAxis();

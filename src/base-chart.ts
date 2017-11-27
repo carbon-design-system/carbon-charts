@@ -178,17 +178,6 @@ export class BaseChart {
 	resizeWhenContainerChange() {
 		let containerWidth = this.holder.clientWidth;
 		let containerHeight = this.holder.clientHeight;
-		// BaseChart.globalInterval.throttle(0).subscribe(() => {
-			// Tools.debounce(() => {
-				// if (Math.abs(containerWidth - this.holder.clientWidth) > 20
-				// 	|| Math.abs(containerHeight - this.holder.clientHeight) > 20) {
-				// 	containerWidth = this.holder.clientWidth;
-				// 	containerHeight = this.holder.clientHeight;
-				// 	d3.selectAll(".legend-tooltip").style("display", "none");
-				// 	this.redrawChart();
-				// }
-			// }, 500)();
-		// });
 		const frame = () => {
 			if (Math.abs(containerWidth - this.holder.clientWidth) > 1
 				|| Math.abs(containerHeight - this.holder.clientHeight) > 1) {
@@ -218,8 +207,11 @@ export class BaseChart {
 	setClickableLegendInTooltip() {
 		const self = this;
 		const c = d3.select(this.container);
+		console.log(c);
 		const tooltip = c.select(".legend-tooltip-content");
+		console.log(tooltip);
 		tooltip.selectAll(".legend-btn").each(function() {
+			console.log(this);
 			d3.select(this).on("click", function() {
 				self.updateLegend(this);
 				self.redrawChart();
@@ -401,10 +393,12 @@ export class BaseChart {
 
 	addTooltipOpenButtonToLegend() {
 		const thisLegend = this.container.select(".legend");
+		const self = this;
 		thisLegend.append("div")
 			.attr("class", "expand-btn")
+			// .style("cursor", "pointer")
 			.on("click", function() {
-				this.openLegendTooltip(this);
+				self.openLegendTooltip(this);
 			});
 	}
 
@@ -435,7 +429,11 @@ export class BaseChart {
 				.selectAll("div")
 				.data(this.getLegendItems())
 				.enter().append("li")
-				.attr("class", "legend-btn active");
+				.attr("class", "legend-btn active")
+				.on("click", () => {
+					this.updateLegend(".legend-tooltip-content");
+					this.redrawChart();
+				});
 
 			legendContent.append("div")
 				.attr("class", "legend-circle")
@@ -445,7 +443,7 @@ export class BaseChart {
 			legendContent.append("text")
 				.text(d => "" + d);
 
-			this.setClickableLegendInTooltip();
+			// this.setClickableLegendInTooltip();
 		}
 
 		if (window.innerWidth - (windowXPoint + Configuration.tooltip.width) < 0) {
