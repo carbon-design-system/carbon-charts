@@ -58,11 +58,10 @@ export class BarChart extends BaseAxisChart {
 	update(yScale: d3.ScaleLinear<number, number> = this.yScale, activeSeries = this.getActiveDataSeries()) {
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		let keys: any;
-		let dataList = this.data;
+		const dataList = this.data;
 		if (this.options.y2Domain) {
 			keys = this.options.yDomain.concat(this.options.y2Domain);
-		}
-		else {
+		} else {
 			keys = this.options.yDomain;
 		}
 		keys = activeSeries ? activeSeries : keys;
@@ -94,11 +93,9 @@ export class BarChart extends BaseAxisChart {
 				}
 			});
 			keys = newKeys;
-		}
-		else if (this.options.y2Domain) {
+		} else if (this.options.y2Domain) {
 			keys = this.options.yDomain.concat(this.options.y2Domain);
-		}
-		else {
+		} else {
 			keys = this.options.yDomain;
 		}
 		keys = activeSeries ? activeSeries : keys;

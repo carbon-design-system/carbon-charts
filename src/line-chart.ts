@@ -101,13 +101,12 @@ export class LineChart extends BaseAxisChart {
 		lines.attr("class", "lines");
 		keys.forEach(value => {
 			const colorKey = value;
-			let series = value;
+			const series = value;
 			if (this.options.dimension) {
 				dataList = this.data.filter(d => d[this.options.dimension] === value);
 				value = this.options.yDomain[0];
 			}
 			const valueData = dataList.map(d => {
-				this.options.dimension ?  this.options.dimension : series;
 				return <any>{
 					xAxis: this.options.xDomain,
 					key: d[this.options.xDomain],
@@ -117,7 +116,7 @@ export class LineChart extends BaseAxisChart {
 					dimVal: d[this.options.dimension],
 					formatter: this.options.yFormatter,
 					color: color(colorKey)
-				}
+				};
 			});
 			const lineGroup = lines.append("g");
 			lineGroup.attr("class", "line");
