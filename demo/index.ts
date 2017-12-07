@@ -35,7 +35,7 @@ const dimensionOption = {
 	xDomain: "Mailing name",
 	type: "bars",
 	yFormatter: {
-		"Click rate"(value) {
+		"Open rate (unique)"(value) {
 			return value + "%";
 		}
 	},
