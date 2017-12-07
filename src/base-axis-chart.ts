@@ -129,7 +129,10 @@ export class BaseAxisChart extends BaseChart {
 		if (this.options.yFormatter && this.options.yFormatter[this.options.yDomain[0]]) {
 			this.addUnits(g.selectAll("text"), this.options.yFormatter[this.options.yDomain[0]]);
 		}
-		const label = this.options.yDomain.join(", ");
+		let label: string;
+		if (this.options.yFormatter) {
+			label = this.options.yDomain.map(yDom => this.options.yFormatter[yDom] ? this.options.yFormatter[yDom](yDom) : yDom).join(", ");
+		}
 
 		this.appendYAxisLabel(g, label, "y")
 			.attr("class", "y axis-label");
@@ -142,9 +145,6 @@ export class BaseAxisChart extends BaseChart {
 			.attr("transform", `translate(0, 0)`)
 			.call(yAxis);
 		g.select(".domain").remove();
-		if (this.options.yFormatter && this.options.yFormatter[this.options.yDomain[0]]) {
-			this.addUnits(g.selectAll("text"), this.options.yFormatter[this.options.yDomain[0]]);
-		}
 	}
 
 	drawY2Axis(yScale: d3.ScaleLinear<number, number> = this.yScale) {
