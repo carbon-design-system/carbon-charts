@@ -452,10 +452,10 @@ export class BaseChart {
 
 	showLabelTooltip(d, leftSide) {
 		d3.selectAll(".label-tooltip").remove();
-		const mouseXPoint = d3.mouse(this.container)[0] + Configuration.tooltip.arrowWidth;
-		const tooltip = d3.select(this.container).append("div")
+		const mouseXPoint = d3.mouse(d3.event.currentTarget)[0] + Configuration.tooltip.arrowWidth;
+		const tooltip = this.container.append("div")
 			.attr("class", "tooltip label-tooltip")
-			.style("top", d3.mouse(this.container)[1] - Configuration.tooltip.magicTop1 + "px");
+			.style("top", d3.mouse(d3.event.currentTarget)[1] - Configuration.tooltip.magicTop1 + "px");
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				this.resetOpacity();

@@ -18,10 +18,6 @@ export class BarChart extends BaseAxisChart {
 		}
 
 		this.setSVG();
-		this.addLegend();
-		if (this.options.legendClickable) {
-			this.setClickableLegend();
-		}
 
 		this.setXScale();
 		this.drawXAxis();
@@ -29,22 +25,21 @@ export class BarChart extends BaseAxisChart {
 		this.drawYAxis();
 		this.drawXGrid();
 		this.drawYGrid();
+		this.addLegend();
+		if (this.options.legendClickable) {
+			this.setClickableLegend();
+		}
 
-		this.draw();
-
-		this.repositionSVG();
-		this.addDataPointEventListener();
 		this.positionLegend();
+		this.repositionSVG();
+		this.draw();
+		this.addDataPointEventListener();
 	}
 
 	updateChart() {
 		if (this.svg) {
 			// update the root svg
 			this.updateSVG();
-			this.addLegend();
-			if (this.options.legendClickable) {
-				this.setClickableLegend();
-			}
 			// these don't explicitly add elements, so they're "safe" to call
 			this.setXScale();
 			this.updateXAxis();
@@ -62,11 +57,17 @@ export class BarChart extends BaseAxisChart {
 
 	update() {
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		let keys: any;
+		if (this.options.y2Domain) {
+			keys = this.options.yDomain.concat(this.options.y2Domain);
+		} else {
+			keys = this.options.yDomain;
+		}
 		const activeSeries = this.getActiveDataSeries();
-		const keys = activeSeries ? activeSeries : this.options.yDomain;
+		keys = activeSeries.length > 0 ? activeSeries : keys;
 		const x1 = d3.scaleBand();
 		x1.domain(keys).rangeRound([0, this.xScale.bandwidth()]);
-		const color = d3.scaleOrdinal().range(this.options.colors).domain(this.options.yDomain);
+		const color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
 		const bars = this.svg.select(".bars");
 		bars.selectAll("g")
 			.attr("transform", d => `translate(${this.xScale(d[this.options.xDomain])},0)`);
@@ -82,37 +83,61 @@ export class BarChart extends BaseAxisChart {
 	draw() {
 		this.xScale.padding(0.1);
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		let keys: any;
+		if (this.options.dimension) {
+			let newKeys = <any>[];
+			newKeys = this.data.map(d => {
+				if (!newKeys.includes(d[this.options.dimension])) {
+					return d[this.options.dimension];
+				}
+			});
+			keys = newKeys;
+		} else if (this.options.y2Domain) {
+			keys = this.options.yDomain.concat(this.options.y2Domain);
+		} else {
+			keys = this.options.yDomain;
+		}
 		const activeSeries = this.getActiveDataSeries();
-		const keys = activeSeries ? activeSeries : this.options.yDomain;
+		keys = activeSeries.length > 0 ? activeSeries : keys;
 		const x1 = d3.scaleBand();
 		x1.domain(keys).rangeRound([0, this.xScale.bandwidth()]);
-		const color = d3.scaleOrdinal().range(this.options.colors).domain(this.options.yDomain);
-		this.svg.append("g")
+		const color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
+		const barGroup = this.svg.append("g");
+		barGroup.append("g")
 			.attr("class", "bars")
 			.selectAll("g")
 			.data(this.data)
 			.enter().append("g")
-				.attr("transform", d => `translate(${this.xScale(d[this.options.xDomain])},0)`)
+			.attr("transform", d => `translate(${this.xScale(d[this.options.xDomain])},0)`)
 			.selectAll("rect")
-			.data(d => keys.map(key => ({
-				xAxis: this.options.xDomain,
-				series: key,
-				key: d[this.options.xDomain],
-				value: d[key],
-				formatter: this.options.yFormatter,
-				color: color(key)
-			})))
+			.data(d => keys.map((value, idx) => {
+				let series = value;
+				if (this.options.dimension) {
+					value = this.options.yDomain[0];
+					series = d[this.options.dimension];
+				}
+				return {
+					xAxis: this.options.xDomain,
+					key: d[this.options.xDomain],
+					value: d[value],
+					formatter: this.options.yFormatter,
+					dimension: this.options.dimension,
+					dimVal: d[this.options.dimension],
+					series,
+					color: color(series)
+				};
+			}))
 			.enter().append("rect")
-				.attr("x", d => x1(d.series))
-				.attr("y", d => yHeight)
-				.attr("width", x1.bandwidth())
-				.attr("height", 0)
-				.attr("fill", d => d.color)
-				.transition()
-				.duration(1000)
-				.ease(d3.easePolyOut, 0.5)
-				.attr("y", d => this.yScale(d.value))
-				.attr("height", d => yHeight - this.yScale(d.value));
+			.attr("x", d => x1(d.series))
+			.attr("y", d => yHeight)
+			.attr("width", x1.bandwidth())
+			.attr("height", 0)
+			.attr("fill", d => d.color)
+			.transition()
+			.duration(1000)
+			.ease(d3.easePolyOut, 0.5)
+			.attr("y", d => this.yScale(d.value))
+			.attr("height", d => yHeight - this.yScale(d.value));
 	}
 
 	addDataPointEventListener() {

@@ -25,6 +25,202 @@ const colors = [
 	"#FF509E"
 ];
 
+const dimensionOption = {
+	"yFormatter": {},
+	"dimension": "Audience name",
+	"yDomain": [
+		"Open rate (unique)"
+	],
+	"yTicks": 5,
+	"legendClickable": true,
+	"containerResizable": true,
+	colors,
+	"xDomain": "Mailing name",
+	"type": "bars"
+};
+
+const dimensionData = [
+	{
+		"Mailing name": "Birthday Discount",
+		"Audience name": "Total unique contacts",
+		"Open rate (unique)": 32.15
+	},
+	{
+		"Mailing name": "Birthday Discount",
+		"Audience name": "AudienceB_WithMediumSizeName",
+		"Open rate (unique)": 48.89
+	},
+	{
+		"Mailing name": "Birthday Discount",
+		"Audience name": "Couch Potatoes",
+		"Open rate (unique)": 41.16
+	},
+	{
+		"Mailing name": "Birthday Discount",
+		"Audience name": "Cyclists",
+		"Open rate (unique)": 418.42
+	},
+	{
+		"Mailing name": "Birthday Discount",
+		"Audience name": "Fit Fanatic Card Member",
+		"Open rate (unique)": 32.14
+	},
+	{
+		"Mailing name": "Birthday Discount",
+		"Audience name": "Mountain Climbers",
+		"Open rate (unique)": 136.94
+	},
+	{
+		"Mailing name": "Birthday Discount",
+		"Audience name": "No audience",
+		"Open rate (unique)": 99.02
+	},
+	{
+		"Mailing name": "Birthday Discount",
+		"Audience name": "Swimmers",
+		"Open rate (unique)": 231.87
+	},
+	{
+		"Mailing name": "Birthday Discount",
+		"Audience name": "party",
+		"Open rate (unique)": 70.64
+	},
+	{
+		"Mailing name": "First Purchase",
+		"Audience name": "Total unique contacts",
+		"Open rate (unique)": 83.41
+	},
+	{
+		"Mailing name": "First Purchase",
+		"Audience name": "AudienceB_WithMediumSizeName",
+		"Open rate (unique)": 140
+	},
+	{
+		"Mailing name": "First Purchase",
+		"Audience name": "Couch Potatoes",
+		"Open rate (unique)": 133.33
+	},
+	{
+		"Mailing name": "First Purchase",
+		"Audience name": "Cyclists",
+		"Open rate (unique)": 1233.33
+	},
+	{
+		"Mailing name": "First Purchase",
+		"Audience name": "Fit Fanatic Card Member",
+		"Open rate (unique)": 83.33
+	},
+	{
+		"Mailing name": "First Purchase",
+		"Audience name": "Mountain Climbers",
+		"Open rate (unique)": 383.33
+	},
+	{
+		"Mailing name": "First Purchase",
+		"Audience name": "No audience",
+		"Open rate (unique)": 260
+	},
+	{
+		"Mailing name": "First Purchase",
+		"Audience name": "Swimmers",
+		"Open rate (unique)": 581.82
+	},
+	{
+		"Mailing name": "First Purchase",
+		"Audience name": "party",
+		"Open rate (unique)": 216.67
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Invite",
+		"Audience name": "Total unique contacts",
+		"Open rate (unique)": 83.41
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Invite",
+		"Audience name": "AudienceB_WithMediumSizeName",
+		"Open rate (unique)": 140
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Invite",
+		"Audience name": "Couch Potatoes",
+		"Open rate (unique)": 133.33
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Invite",
+		"Audience name": "Cyclists",
+		"Open rate (unique)": 1233.33
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Invite",
+		"Audience name": "Fit Fanatic Card Member",
+		"Open rate (unique)": 83.33
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Invite",
+		"Audience name": "Mountain Climbers",
+		"Open rate (unique)": 383.33
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Invite",
+		"Audience name": "No audience",
+		"Open rate (unique)": 260
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Invite",
+		"Audience name": "Swimmers",
+		"Open rate (unique)": 581.82
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Invite",
+		"Audience name": "party",
+		"Open rate (unique)": 216.67
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Reminder",
+		"Audience name": "Total unique contacts",
+		"Open rate (unique)": 83.85
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Reminder",
+		"Audience name": "AudienceB_WithMediumSizeName",
+		"Open rate (unique)": 133.33
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Reminder",
+		"Audience name": "Couch Potatoes",
+		"Open rate (unique)": 66.67
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Reminder",
+		"Audience name": "Cyclists",
+		"Open rate (unique)": 1150
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Reminder",
+		"Audience name": "Fit Fanatic Card Member",
+		"Open rate (unique)": 82.28
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Reminder",
+		"Audience name": "Mountain Climbers",
+		"Open rate (unique)": 311.11
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Reminder",
+		"Audience name": "No audience",
+		"Open rate (unique)": 266.67
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Reminder",
+		"Audience name": "Swimmers",
+		"Open rate (unique)": 557.14
+	},
+	{
+		"Mailing name": "First Purchase - Fit Fanatic Card Reminder",
+		"Audience name": "party",
+		"Open rate (unique)": 200
+	}
+];
 
 const longDataOptions = {
 	xDomain: "Part number",
@@ -202,11 +398,18 @@ const longData = [
 
 const chartTypes = [
 	{
+		id: "multi-bar",
+		name: "Bar",
+		avail: true,
+		data: dimensionData,
+		options: dimensionOption
+	},
+	{
 		id: "bar",
 		name: "Bar",
 		avail: true,
-		options: longDataOptions,
-		data: longData
+		options,
+		data
 	},
 	{
 		id: "line",

@@ -48,10 +48,18 @@ export class BaseAxisChart extends BaseChart {
 		yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		this.yScale = d3.scaleLinear().range([yHeight, 0]);
 		activeSeries = activeSeries ? activeSeries : this.getActiveDataSeries();
-		keys = activeSeries.length > 0 ? activeSeries : this.options.yDomain;
+		if (this.options.y2Domain) {
+			keys = this.options.yDomain.concat(this.options.y2Domain);
+		} else {
+			keys = activeSeries.length > 0 ? activeSeries : this.options.yDomain;
+		}
 		if (this.options.type === "stacked-bar") {
 			const yMax = d3.max(this.data, d => keys.map(val => d[val]).reduce((acc, cur) => acc + cur, 0));
 			this.yScale.domain([0, +yMax]);
+		} else if (this.options.dimension) {
+			this.yScale.domain([0, +d3.max(this.data, d =>
+				d3.max(keys.map(domain => d[domain])))
+			]);
 		} else {
 			this.yScale.domain([0, +d3.max(this.data, d =>
 				d3.max(keys.map(domain => d[domain])))
