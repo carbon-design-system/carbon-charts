@@ -26,17 +26,19 @@ const colors = [
 ];
 
 const dimensionOption = {
-	"yFormatter": {},
-	"dimension": "Audience name",
-	"yDomain": [
-		"Open rate (unique)"
-	],
-	"yTicks": 5,
-	"legendClickable": true,
-	"containerResizable": true,
+	dimension: "Audience name",
+	yDomain: ["Open rate (unique)"],
+	yTicks: 5,
+	legendClickable: true,
+	containerResizable: true,
 	colors,
-	"xDomain": "Mailing name",
-	"type": "bars"
+	xDomain: "Mailing name",
+	type: "bars",
+	yFormatter: {
+		"Click rate"(value) {
+			return value + "%";
+		}
+	},
 };
 
 const dimensionData = [

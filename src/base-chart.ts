@@ -427,8 +427,8 @@ export class BaseChart {
 				.data(this.getLegendItems())
 				.enter().append("li")
 				.attr("class", "legend-btn active")
-				.on("click", () => {
-					this.updateLegend(".legend-tooltip-content");
+				.on("click", (clickedItem) => {
+					this.updateLegend(d3.event.currentTarget);
 					this.redrawChart();
 				});
 
@@ -452,10 +452,10 @@ export class BaseChart {
 
 	showLabelTooltip(d, leftSide) {
 		d3.selectAll(".label-tooltip").remove();
-		const mouseXPoint = d3.mouse(d3.event.currentTarget)[0] + Configuration.tooltip.arrowWidth;
+		const mouseXPoint = d3.mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.arrowWidth;
 		const tooltip = this.container.append("div")
 			.attr("class", "tooltip label-tooltip")
-			.style("top", d3.mouse(d3.event.currentTarget)[1] - Configuration.tooltip.magicTop1 + "px");
+			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop1 + "px");
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				this.resetOpacity();
@@ -475,7 +475,6 @@ export class BaseChart {
 
 	showTooltip(d) {
 		this.resetOpacity();
-
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
