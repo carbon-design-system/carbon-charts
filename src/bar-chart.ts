@@ -55,16 +55,16 @@ export class BarChart extends BaseAxisChart {
 		}
 	}
 
-	update(yScale: d3.ScaleLinear<number, number> = this.yScale, activeSeries = this.getActiveDataSeries()) {
+	update() {
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		let keys: any;
-		const dataList = this.data;
 		if (this.options.y2Domain) {
 			keys = this.options.yDomain.concat(this.options.y2Domain);
 		} else {
 			keys = this.options.yDomain;
 		}
-		keys = activeSeries ? activeSeries : keys;
+		const activeSeries = this.getActiveDataSeries();
+		keys = activeSeries.length > 0 ? activeSeries : keys;
 		const x1 = d3.scaleBand();
 		x1.domain(keys).rangeRound([0, this.xScale.bandwidth()]);
 		const color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
@@ -74,22 +74,21 @@ export class BarChart extends BaseAxisChart {
 		bars.selectAll("g")
 			.selectAll("rect")
 			.attr("x", d => x1(d.series))
-			.attr("y", d => yScale(d.value))
-			.attr("height", d => yHeight - yScale(d.value))
+			.attr("y", d => this.yScale(d.value))
+			.attr("height", d => yHeight - this.yScale(d.value))
 			.attr("width", x1.bandwidth())
 			.style("display", d => keys.includes(d.series) ? "initial" : "none");
 	}
 
-	draw(yScale: d3.ScaleLinear<number, number> = this.yScale, activeSeries = this.getActiveDataSeries()) {
+	draw() {
 		this.xScale.padding(0.1);
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		let keys: any;
-		let dataList = this.data;
 		if (this.options.dimension) {
-			const newKeys = <any>[];
-			dataList.forEach(d => {
+			let newKeys = <any>[];
+			newKeys = this.data.map(d => {
 				if (!newKeys.includes(d[this.options.dimension])) {
-					newKeys.push(d[this.options.dimension]);
+					return d[this.options.dimension];
 				}
 			});
 			keys = newKeys;
@@ -98,7 +97,8 @@ export class BarChart extends BaseAxisChart {
 		} else {
 			keys = this.options.yDomain;
 		}
-		keys = activeSeries ? activeSeries : keys;
+		const activeSeries = this.getActiveDataSeries();
+		keys = activeSeries.length > 0 ? activeSeries : keys;
 		const x1 = d3.scaleBand();
 		x1.domain(keys).rangeRound([0, this.xScale.bandwidth()]);
 		const color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
@@ -111,12 +111,9 @@ export class BarChart extends BaseAxisChart {
 			.attr("transform", d => `translate(${this.xScale(d[this.options.xDomain])},0)`)
 			.selectAll("rect")
 			.data(d => keys.map((value, idx) => {
-				let colorKey = value;
 				let series = value;
 				if (this.options.dimension) {
-					dataList = this.data.filter(d => d[this.options.dimension] === value);
 					value = this.options.yDomain[0];
-					colorKey = d[this.options.dimension];
 					series = d[this.options.dimension];
 				}
 				return {
@@ -127,7 +124,7 @@ export class BarChart extends BaseAxisChart {
 					dimension: this.options.dimension,
 					dimVal: d[this.options.dimension],
 					series,
-					color: color(colorKey)
+					color: color(series)
 				};
 			}))
 			.enter().append("rect")
@@ -139,8 +136,8 @@ export class BarChart extends BaseAxisChart {
 			.transition()
 			.duration(1000)
 			.ease(d3.easePolyOut, 0.5)
-			.attr("y", d => yScale(d.value))
-			.attr("height", d => yHeight - yScale(d.value));
+			.attr("y", d => this.yScale(d.value))
+			.attr("height", d => yHeight - this.yScale(d.value));
 	}
 
 	addDataPointEventListener() {

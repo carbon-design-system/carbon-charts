@@ -100,24 +100,21 @@ export class LineChart extends BaseAxisChart {
 		const lines = this.svg.append("g");
 		lines.attr("class", "lines");
 		keys.forEach(value => {
-			const colorKey = value;
 			const series = value;
 			if (this.options.dimension) {
 				dataList = this.data.filter(d => d[this.options.dimension] === value);
 				value = this.options.yDomain[0];
 			}
-			const valueData = dataList.map(d => {
-				return <any>{
-					xAxis: this.options.xDomain,
-					key: d[this.options.xDomain],
-					series,
-					value: d[value],
-					dimension: this.options.dimension,
-					dimVal: d[this.options.dimension],
-					formatter: this.options.yFormatter,
-					color: color(colorKey)
-				};
-			});
+			const valueData = dataList.map(d => (<any>{
+				xAxis: this.options.xDomain,
+				key: d[this.options.xDomain],
+				series,
+				value: d[value],
+				dimension: this.options.dimension,
+				dimVal: d[this.options.dimension],
+				formatter: this.options.yFormatter,
+				color: color(series)
+			}));
 			const lineGroup = lines.append("g");
 			lineGroup.attr("class", "line");
 			lineGroup.append("path")
@@ -128,7 +125,7 @@ export class LineChart extends BaseAxisChart {
 				.attr("stroke-linecap", Configuration.lines.path.strokeLinecap)
 				.attr("stroke-width", Configuration.lines.path.strokeWidth)
 				.attr("d", line)
-				.style("stroke", color(colorKey))
+				.style("stroke", color(series))
 				.style("opacity", 0)
 				.transition()
 				.duration(Configuration.lines.path.duration)
@@ -139,7 +136,7 @@ export class LineChart extends BaseAxisChart {
 				.enter().append("circle")
 				.attr("r", Configuration.lines.dot.r)
 				.attr("fill", Configuration.lines.dot.fill)
-				.attr("stroke", color(colorKey))
+				.attr("stroke", color(series))
 				.attr("stroke-width", Configuration.lines.dot.strokeWidth)
 				.attr("cx", d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
 				.attr("cy", d => yScale(d.value))
