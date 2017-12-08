@@ -400,6 +400,7 @@ export class BaseChart {
 	}
 
 	openLegendTooltip(target) {
+		d3.selectAll(".legend-tooltip").remove();
 		const mouseXPoint = d3.mouse(this.container.node())[0];
 		const windowXPoint = d3.event.x;
 		let tooltip;
