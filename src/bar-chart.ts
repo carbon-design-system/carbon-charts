@@ -117,9 +117,9 @@ export class BarChart extends BaseAxisChart {
 			.enter().append("g")
 			.attr("transform", d => {
 				if (this.options.xDomain) {
-					return `translate(${this.xScale(d[this.options.xDomain])},0)`
+					return `translate(${this.xScale(d[this.options.xDomain])},0)`;
 				} else {
-					return `translate(0,0)`
+					return `translate(0,0)`;
 				}
 			})
 			.selectAll("rect")

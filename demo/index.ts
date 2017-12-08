@@ -268,6 +268,23 @@ const optionsWithFormatter = {
 	colors
 };
 
+const optionsNoXAxis = {
+	xDomain: undefined,
+	yDomain: ["Sold", "More", "Qty"],
+	yTicks: 5,
+	legendClickable: true,
+	containerResizable: true,
+	colors
+};
+
+const dataNoXAxis= [
+	{
+		"Qty": 100000,
+		"More": 50000,
+		"Sold": 6000
+	}
+];
+
 const data = [
 	{
 		"Part number": "2V2N-9KYPM version 1",
@@ -399,48 +416,48 @@ const longData = [
 
 
 const chartTypes = [
-	{
-		id: "multi-bar",
-		name: "Bar",
-		avail: true,
-		data: dimensionData,
-		options: dimensionOption
-	},
+	// {
+	// 	id: "multi-bar",
+	// 	name: "Bar",
+	// 	avail: true,
+	// 	data: dimensionData,
+	// 	options: dimensionOption
+	// },
 	{
 		id: "bar",
 		name: "Bar",
 		avail: true,
-		options,
-		data
+		options: optionsNoXAxis,
+		data: dataNoXAxis
 	},
-	{
-		id: "line",
-		name: "Line",
-		avail: true,
-		options,
-		data
-	},
-	{
-		id: "stacked-bar",
-		name: "Stacked Bar",
-		avail: true,
-		options,
-		data
-	},
-	{
-		id: "double-axis-line",
-		name: "Double Axis",
-		avail: true,
-		options: optionsWithFormatter,
-		data: doubleAxisData
-	},
-	{
-		id: "combo",
-		name: "Combo",
-		avail: true,
-		options: doubleYAxisOptions,
-		data: longData
-	}
+	// {
+	// 	id: "line",
+	// 	name: "Line",
+	// 	avail: true,
+	// 	options,
+	// 	data
+	// },
+	// {
+	// 	id: "stacked-bar",
+	// 	name: "Stacked Bar",
+	// 	avail: true,
+	// 	options,
+	// 	data
+	// },
+	// {
+	// 	id: "double-axis-line",
+	// 	name: "Double Axis",
+	// 	avail: true,
+	// 	options: optionsWithFormatter,
+	// 	data: doubleAxisData
+	// },
+	// {
+	// 	id: "combo",
+	// 	name: "Combo",
+	// 	avail: true,
+	// 	options: doubleYAxisOptions,
+	// 	data: longData
+	// }
 ];
 
 chartTypes.forEach(type => {
