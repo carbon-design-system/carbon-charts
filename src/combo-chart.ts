@@ -18,9 +18,11 @@ export class ComboChart extends BaseAxisChart {
 		}
 
 		this.setSVG();
-		this.addLegend();
-		if (this.options.legendClickable) {
-			this.setClickableLegend();
+		if (this.options.xDomain) {
+			this.addLegend();
+			if (this.options.legendClickable) {
+				this.setClickableLegend();
+			}
 		}
 
 		const activeSeries = <any>this.getActiveDataSeries();

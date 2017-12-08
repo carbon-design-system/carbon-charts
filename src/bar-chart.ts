@@ -25,9 +25,11 @@ export class BarChart extends BaseAxisChart {
 		this.drawYAxis();
 		this.drawXGrid();
 		this.drawYGrid();
-		this.addLegend();
-		if (this.options.legendClickable) {
-			this.setClickableLegend();
+		if (this.options.xDomain) {
+			this.addLegend();
+			if (this.options.legendClickable) {
+				this.setClickableLegend();
+			}
 		}
 
 		this.positionLegend();
@@ -81,6 +83,7 @@ export class BarChart extends BaseAxisChart {
 	}
 
 	draw() {
+		let x1;
 		this.xScale.padding(0.1);
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		let keys: any;
@@ -99,8 +102,12 @@ export class BarChart extends BaseAxisChart {
 		}
 		const activeSeries = this.getActiveDataSeries();
 		keys = activeSeries.length > 0 ? activeSeries : keys;
-		const x1 = d3.scaleBand();
-		x1.domain(keys).rangeRound([0, this.xScale.bandwidth()]);
+		if (this.options.xDomain) {
+			x1 = d3.scaleBand();
+			x1.domain(keys).rangeRound([0, this.xScale.bandwidth()]);
+		} else {
+			x1 = this.xScale;
+		}
 		const color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
 		const barGroup = this.svg.append("g");
 		barGroup.append("g")
@@ -108,17 +115,28 @@ export class BarChart extends BaseAxisChart {
 			.selectAll("g")
 			.data(this.data)
 			.enter().append("g")
-			.attr("transform", d => `translate(${this.xScale(d[this.options.xDomain])},0)`)
+			.attr("transform", d => {
+				if (this.options.xDomain) {
+					return `translate(${this.xScale(d[this.options.xDomain])},0)`
+				} else {
+					return `translate(0,0)`
+				}
+			})
 			.selectAll("rect")
 			.data(d => keys.map((value, idx) => {
 				let series = value;
+				let xAxis = this.options.xDomain;
 				if (this.options.dimension) {
 					value = this.options.yDomain[0];
 					series = d[this.options.dimension];
 				}
+				if (!this.options.xDomain) {
+					xAxis = value;
+					series = value;
+				}
 				return {
-					xAxis: this.options.xDomain,
-					key: d[this.options.xDomain],
+					xAxis,
+					key: d[xAxis],
 					value: d[value],
 					formatter: this.options.yFormatter,
 					dimension: this.options.dimension,
