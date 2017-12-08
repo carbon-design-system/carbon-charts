@@ -130,10 +130,6 @@ export class BarChart extends BaseAxisChart {
 					value = this.options.yDomain[0];
 					series = d[this.options.dimension];
 				}
-				if (!this.options.xDomain) {
-					xAxis = value;
-					series = value;
-				}
 				return {
 					xAxis,
 					key: d[xAxis],
@@ -142,6 +138,7 @@ export class BarChart extends BaseAxisChart {
 					dimension: this.options.dimension,
 					dimVal: d[this.options.dimension],
 					series,
+					valueName: value,
 					color: color(series)
 				};
 			}))

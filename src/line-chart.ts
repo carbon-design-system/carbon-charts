@@ -112,6 +112,7 @@ export class LineChart extends BaseAxisChart {
 				key: d[this.options.xDomain],
 				series,
 				value: d[value],
+				valueName: value,
 				dimension: this.options.dimension,
 				dimVal: d[this.options.dimension],
 				formatter: this.options.yFormatter,

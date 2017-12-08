@@ -14,13 +14,13 @@ export class BaseAxisChart extends BaseChart {
 
 	setXScale(data?): d3.ScaleBand<string> {
 		if (data) {
-			const xAxisValues = this.options.xDomain ? this.data.map(d => d[this.options.xDomain]) : this.options.yDomain;
+			const xAxisValues = this.options.xDomain ? data.map(d => d[this.options.xDomain]) : this.options.yDomain;
 			// setting scale for arbitrary data if provided (used for things like combo chart)
 			const xScale = d3.scaleBand().range([0, this.getActualChartSize().width])
 			.domain(xAxisValues);
 			return xScale;
 		} else {
-			const xAxisValues = this.options.xDomain ? data.map(d => d[this.options.xDomain]) : this.options.yDomain;
+			const xAxisValues = this.options.xDomain ? this.data.map(d => d[this.options.xDomain]) : this.options.yDomain;
 			this.xScale = d3.scaleBand().range([0, this.getActualChartSize().width])
 				.domain(xAxisValues);
 			return this.xScale;

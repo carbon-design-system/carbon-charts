@@ -475,6 +475,7 @@ export class BaseChart {
 	}
 
 	showTooltip(d) {
+		let tooltipHTML: string = "";
 		this.resetOpacity();
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(this.holder).append("div")
@@ -487,9 +488,14 @@ export class BaseChart {
 				d3.selectAll(".tooltip").remove();
 			});
 		const dVal = d.formatter && d.formatter[d.series] ? d.formatter[d.series](d.value.toLocaleString()) : d.value.toLocaleString();
-		let tooltipHTML = "<b>" + d.xAxis + ": </b>" + d.key + "<br/><b>" + d.series + ": </b>" + dVal;
+		if (d.xAxis) {
+			tooltipHTML += "<b>" + d.xAxis + ": </b>" + d.key + "<br/>";
+		}
+		if (d.series && !d.dimension) {
+			tooltipHTML += "<b>" + d.series + ": </b>" + dVal + "<br/>";
+		}
 		if (d.dimension) {
-			tooltipHTML += "<br/><b>" + d.dimension + ": </b>" + d.dimVal;
+			tooltipHTML += "<b>" + d.dimension + ": </b>" + d.dimVal + "<br/><b>" + d.valueName + ": </b>" + d.value;
 		}
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
