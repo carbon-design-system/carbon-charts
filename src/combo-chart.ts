@@ -273,5 +273,23 @@ export class ComboChart extends BaseAxisChart {
 				self.showTooltip(d);
 				self.reduceOpacity(this);
 			});
+		this.svg.selectAll("circle")
+			.on("click", function(d) {
+				self.showTooltip(d);
+				self.reduceOpacity(this);
+			})
+			.on("mouseover", function(d) {
+				self.svg.append("circle").attr("class", Configuration.lines.mouseover.class)
+					.attr("r", Configuration.lines.mouseover.r)
+					.attr("fill", Configuration.lines.mouseover.fill)
+					.attr("stroke-width", Configuration.lines.mouseover.strokeWidth)
+					.attr("stroke", d.color)
+					.attr("stroke-opacity", Configuration.lines.mouseover.strokeOpacity)
+					.attr("cx", this.cx.baseVal.value)
+					.attr("cy", this.cy.baseVal.value);
+			})
+			.on("mouseout", function() {
+				self.svg.selectAll(`.${Configuration.lines.mouseover.class}`).remove();
+			});
 	}
 }
