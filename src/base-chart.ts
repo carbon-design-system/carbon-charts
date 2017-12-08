@@ -475,7 +475,7 @@ export class BaseChart {
 	}
 
 	showTooltip(d) {
-		let tooltipHTML: string = "";
+		let tooltipHTML = "";
 		this.resetOpacity();
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(this.holder).append("div")

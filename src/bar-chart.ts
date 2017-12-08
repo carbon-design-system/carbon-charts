@@ -125,14 +125,13 @@ export class BarChart extends BaseAxisChart {
 			.selectAll("rect")
 			.data(d => keys.map((value, idx) => {
 				let series = value;
-				let xAxis = this.options.xDomain;
 				if (this.options.dimension) {
 					value = this.options.yDomain[0];
 					series = d[this.options.dimension];
 				}
 				return {
-					xAxis,
-					key: d[xAxis],
+					xAxis: this.options.xDomain,
+					key: d[this.options.xDomain],
 					value: d[value],
 					formatter: this.options.yFormatter,
 					dimension: this.options.dimension,
