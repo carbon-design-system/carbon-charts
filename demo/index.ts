@@ -269,7 +269,6 @@ const optionsWithFormatter = {
 };
 
 const optionsNoXAxis = {
-	xDomain: undefined,
 	yDomain: ["Sold", "More", "Qty"],
 	yTicks: 5,
 	legendClickable: true,

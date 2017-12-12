@@ -12,17 +12,31 @@ export class BaseAxisChart extends BaseChart {
 		this.options.type = "basic-axis";
 	}
 
+	getXDomain(keys, xScale): d3.ScaleBand<string> {
+		return d3.scaleBand().domain(keys).rangeRound([0, xScale.bandwidth()]);
+	}
+
+	transformXDomain(xDomain, xValue) {
+		if (xDomain.length > 0) {
+			return `translate(${xValue},0)`;
+		} else {
+			return `translate(0,0)`;
+		}
+	}
+
 	setXScale(data?): d3.ScaleBand<string> {
 		if (data) {
-			const xAxisValues = this.options.xDomain ? data.map(d => d[this.options.xDomain]) : this.options.yDomain;
+			const xAxisValues = this.options.xDomain.length > 0 ? data.map(d => d[this.options.xDomain]) : this.options.yDomain;
 			// setting scale for arbitrary data if provided (used for things like combo chart)
 			const xScale = d3.scaleBand().range([0, this.getActualChartSize().width])
-			.domain(xAxisValues);
+			.domain(xAxisValues)
+			.padding(0.1);
 			return xScale;
 		} else {
-			const xAxisValues = this.options.xDomain ? this.data.map(d => d[this.options.xDomain]) : this.options.yDomain;
+			const xAxisValues = this.options.xDomain.length > 0 ? this.data.map(d => d[this.options.xDomain]) : this.options.yDomain;
 			this.xScale = d3.scaleBand().range([0, this.getActualChartSize().width])
-				.domain(xAxisValues);
+				.domain(xAxisValues)
+				.padding(0.1);
 			return this.xScale;
 		}
 
@@ -52,16 +66,14 @@ export class BaseAxisChart extends BaseChart {
 		activeSeries = activeSeries ? activeSeries : this.getActiveDataSeries();
 		if (this.options.y2Domain.length > 0) {
 			keys = this.options.yDomain.concat(this.options.y2Domain);
+		} else if (this.options.dimension) {
+			keys = this.options.yDomain;
 		} else {
 			keys = activeSeries.length > 0 ? activeSeries : this.options.yDomain;
 		}
 		if (this.options.type === "stacked-bar") {
 			const yMax = d3.max(this.data, d => keys.map(val => d[val]).reduce((acc, cur) => acc + cur, 0));
 			this.yScale.domain([0, +yMax]);
-		} else if (this.options.dimension) {
-			this.yScale.domain([0, +d3.max(this.data, d =>
-				d3.max(keys.map(domain => d[domain])))
-			]);
 		} else {
 			this.yScale.domain([0, +d3.max(this.data, d =>
 				d3.max(keys.map(domain => d[domain])))
@@ -147,6 +159,9 @@ export class BaseAxisChart extends BaseChart {
 			.attr("transform", `translate(0, 0)`)
 			.call(yAxis);
 		g.select(".domain").remove();
+		if (this.options.yFormatter && this.options.yFormatter[this.options.yDomain[0]]) {
+			this.addUnits(g.selectAll(".tick text"), this.options.yFormatter[this.options.yDomain[0]]);
+		}
 	}
 
 	drawY2Axis(yScale: d3.ScaleLinear<number, number> = this.yScale) {
