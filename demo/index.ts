@@ -268,6 +268,22 @@ const optionsWithFormatter = {
 	colors
 };
 
+const optionsNoXAxis = {
+	yDomain: ["Sold", "More", "Qty"],
+	yTicks: 5,
+	legendClickable: true,
+	containerResizable: true,
+	colors
+};
+
+const dataNoXAxis = [
+	{
+		"Qty": 100000,
+		"More": 50000,
+		"Sold": 6000
+	}
+];
+
 const data = [
 	{
 		"Part number": "2V2N-9KYPM version 1",
@@ -412,6 +428,13 @@ const chartTypes = [
 		avail: true,
 		options,
 		data
+	},
+	{
+		id: "simplest-bar",
+		name: "Bar",
+		avail: true,
+		options: optionsNoXAxis,
+		data: dataNoXAxis
 	},
 	{
 		id: "line",

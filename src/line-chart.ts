@@ -24,9 +24,11 @@ export class LineChart extends BaseAxisChart {
 		this.drawYAxis();
 		this.drawXGrid();
 		this.drawYGrid();
-		this.addLegend();
-		if (this.options.legendClickable) {
-			this.setClickableLegend();
+		if (this.options.xDomain) {
+			this.addLegend();
+			if (this.options.legendClickable) {
+				this.setClickableLegend();
+			}
 		}
 
 		this.positionLegend();
@@ -110,6 +112,7 @@ export class LineChart extends BaseAxisChart {
 				key: d[this.options.xDomain],
 				series,
 				value: d[value],
+				valueName: value,
 				dimension: this.options.dimension,
 				dimVal: d[this.options.dimension],
 				formatter: this.options.yFormatter,

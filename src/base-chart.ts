@@ -35,6 +35,7 @@ export class BaseChart {
 			"#FF509E"
 		]
 	};
+
 	data: any;
 	constructor(holder: Element, options?: any, data?: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
@@ -72,6 +73,28 @@ export class BaseChart {
 			height: container.node().clientHeight - marginForLegendTop,
 			width: (container.node().clientWidth - Configuration.charts.margin.left - Configuration.charts.margin.right - moreForY2Axis) * ratio
 		};
+	}
+
+	getXKeys() {
+		let keys: any;
+
+		const activeSeries = this.getActiveDataSeries();
+		if (this.options.dimension) {
+			const newKeys = <any>[];
+			this.data.forEach(d => {
+				if (!newKeys.includes(d[this.options.dimension])) {
+					newKeys.push(d[this.options.dimension]);
+				}
+			});
+			keys = newKeys;
+		} else if (this.options.y2Domain) {
+			keys = this.options.yDomain.concat(this.options.y2Domain);
+			keys = activeSeries.length > 0 ? activeSeries : keys;
+		} else {
+			keys = this.options.yDomain;
+			keys = activeSeries.length > 0 ? activeSeries : keys;
+		}
+		return keys;
 	}
 
 	/*
@@ -400,6 +423,7 @@ export class BaseChart {
 	}
 
 	openLegendTooltip(target) {
+		d3.selectAll(".legend-tooltip").remove();
 		const mouseXPoint = d3.mouse(this.container.node())[0];
 		const windowXPoint = d3.event.x;
 		let tooltip;
@@ -474,6 +498,7 @@ export class BaseChart {
 	}
 
 	showTooltip(d) {
+		let tooltipHTML = "";
 		this.resetOpacity();
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(this.holder).append("div")
@@ -486,9 +511,14 @@ export class BaseChart {
 				d3.selectAll(".tooltip").remove();
 			});
 		const dVal = d.formatter && d.formatter[d.series] ? d.formatter[d.series](d.value.toLocaleString()) : d.value.toLocaleString();
-		let tooltipHTML = "<b>" + d.xAxis + ": </b>" + d.key + "<br/><b>" + d.series + ": </b>" + dVal;
+		if (d.xAxis && d.xAxis.length > 0) {
+			tooltipHTML += "<b>" + d.xAxis + ": </b>" + d.key + "<br/>";
+		}
+		if (d.series && !d.dimension) {
+			tooltipHTML += "<b>" + d.series + ": </b>" + dVal + "<br/>";
+		}
 		if (d.dimension) {
-			tooltipHTML += "<br/><b>" + d.dimension + ": </b>" + d.dimVal;
+			tooltipHTML += "<b>" + d.dimension + ": </b>" + d.dimVal + "<br/><b>" + d.valueName + ": </b>" + d.value;
 		}
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
