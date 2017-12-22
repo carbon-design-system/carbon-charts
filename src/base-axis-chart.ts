@@ -12,17 +12,34 @@ export class BaseAxisChart extends BaseChart {
 		this.options.type = "basic-axis";
 	}
 
+	getXDomain(keys, xScale): d3.ScaleBand<string> {
+		return d3.scaleBand().domain(keys).rangeRound([0, xScale.bandwidth()]);
+	}
+
+	transformXDomain(xDomain, xValue) {
+		if (xDomain.length > 0) {
+			return `translate(${xValue},0)`;
+		} else {
+			return `translate(0,0)`;
+		}
+	}
+
 	setXScale(data?): d3.ScaleBand<string> {
 		if (data) {
+			const xAxisValues = this.options.xDomain.length > 0 ? data.map(d => d[this.options.xDomain]) : this.options.yDomain;
 			// setting scale for arbitrary data if provided (used for things like combo chart)
 			const xScale = d3.scaleBand().range([0, this.getActualChartSize().width])
-			.domain(data.map(d => d[this.options.xDomain]));
+			.domain(xAxisValues)
+			.padding(0.1);
 			return xScale;
+		} else {
+			const xAxisValues = this.options.xDomain.length > 0 ? this.data.map(d => d[this.options.xDomain]) : this.options.yDomain;
+			this.xScale = d3.scaleBand().range([0, this.getActualChartSize().width])
+				.domain(xAxisValues)
+				.padding(0.1);
+			return this.xScale;
 		}
 
-		this.xScale = d3.scaleBand().range([0, this.getActualChartSize().width])
-			.domain(this.data.map(d => d[this.options.xDomain]));
-		return this.xScale;
 	}
 
 	setYScale(data?, activeSeries?): d3.ScaleLinear<number, number> {
@@ -44,11 +61,16 @@ export class BaseAxisChart extends BaseChart {
 			}
 			return yScale;
 		}
-
 		yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		this.yScale = d3.scaleLinear().range([yHeight, 0]);
 		activeSeries = activeSeries ? activeSeries : this.getActiveDataSeries();
-		keys = activeSeries.length > 0 ? activeSeries : this.options.yDomain;
+		if (this.options.y2Domain.length > 0) {
+			keys = this.options.yDomain.concat(this.options.y2Domain);
+		} else if (this.options.dimension) {
+			keys = this.options.yDomain;
+		} else {
+			keys = activeSeries.length > 0 ? activeSeries : this.options.yDomain;
+		}
 		if (this.options.type === "stacked-bar") {
 			const yMax = d3.max(this.data, d => keys.map(val => d[val]).reduce((acc, cur) => acc + cur, 0));
 			this.yScale.domain([0, +yMax]);
@@ -121,7 +143,10 @@ export class BaseAxisChart extends BaseChart {
 		if (this.options.yFormatter && this.options.yFormatter[this.options.yDomain[0]]) {
 			this.addUnits(g.selectAll("text"), this.options.yFormatter[this.options.yDomain[0]]);
 		}
-		const label = this.options.yDomain.join(", ");
+		let label: string;
+		if (this.options.yFormatter) {
+			label = this.options.yDomain.map(yDom => this.options.yFormatter[yDom] ? this.options.yFormatter[yDom](yDom) : yDom).join(", ");
+		}
 
 		this.appendYAxisLabel(g, label, "y")
 			.attr("class", "y axis-label");
@@ -135,7 +160,7 @@ export class BaseAxisChart extends BaseChart {
 			.call(yAxis);
 		g.select(".domain").remove();
 		if (this.options.yFormatter && this.options.yFormatter[this.options.yDomain[0]]) {
-			this.addUnits(g.selectAll("text"), this.options.yFormatter[this.options.yDomain[0]]);
+			this.addUnits(g.selectAll(".tick text"), this.options.yFormatter[this.options.yDomain[0]]);
 		}
 	}
 

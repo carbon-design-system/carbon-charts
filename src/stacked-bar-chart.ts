@@ -17,9 +17,11 @@ export class StackedBarChart extends BarChart {
 		}
 
 		this.setSVG();
-		this.addLegend();
-		if (this.options.legendClickable) {
-			this.setClickableLegend();
+		if (this.options.xDomain) {
+			this.addLegend();
+			if (this.options.legendClickable) {
+				this.setClickableLegend();
+			}
 		}
 
 		this.setXScale();

@@ -45,9 +45,11 @@ export class DoubleAxisLineChart extends LineChart {
 
 		this.setSVG();
 
-		this.addLegend();
-		if (this.options.legendClickable) {
-			this.setClickableLegend();
+		if (this.options.xDomain) {
+			this.addLegend();
+			if (this.options.legendClickable) {
+				this.setClickableLegend();
+			}
 		}
 
 		const activeSeries = <any>this.getActiveDataSeries();

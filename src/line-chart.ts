@@ -24,9 +24,11 @@ export class LineChart extends BaseAxisChart {
 		this.drawYAxis();
 		this.drawXGrid();
 		this.drawYGrid();
-		this.addLegend();
-		if (this.options.legendClickable) {
-			this.setClickableLegend();
+		if (this.options.xDomain) {
+			this.addLegend();
+			if (this.options.legendClickable) {
+				this.setClickableLegend();
+			}
 		}
 
 		this.positionLegend();
@@ -100,7 +102,7 @@ export class LineChart extends BaseAxisChart {
 		const lines = this.svg.append("g");
 		lines.attr("class", "lines");
 		keys.forEach(value => {
-			const colorKey = value;
+			const series = value;
 			if (this.options.dimension) {
 				dataList = this.data.filter(d => d[this.options.dimension] === value);
 				value = this.options.yDomain[0];
@@ -108,16 +110,17 @@ export class LineChart extends BaseAxisChart {
 			const valueData = dataList.map(d => (<any>{
 				xAxis: this.options.xDomain,
 				key: d[this.options.xDomain],
-				series: value,
+				series,
 				value: d[value],
+				valueName: value,
 				dimension: this.options.dimension,
 				dimVal: d[this.options.dimension],
 				formatter: this.options.yFormatter,
-				color: color(colorKey)
+				color: color(series)
 			}));
-			const series = lines.append("g");
-			series.attr("class", "line");
-			series.append("path")
+			const lineGroup = lines.append("g");
+			lineGroup.attr("class", "line");
+			lineGroup.append("path")
 				.data([valueData])
 				.attr("fill", Configuration.lines.path.fill)
 				.attr("stroke", Configuration.lines.path.stroke)
@@ -125,18 +128,18 @@ export class LineChart extends BaseAxisChart {
 				.attr("stroke-linecap", Configuration.lines.path.strokeLinecap)
 				.attr("stroke-width", Configuration.lines.path.strokeWidth)
 				.attr("d", line)
-				.style("stroke", color(colorKey))
+				.style("stroke", color(series))
 				.style("opacity", 0)
 				.transition()
 				.duration(Configuration.lines.path.duration)
 				.style("opacity", 1);
 
-			series.selectAll("dot")
+			lineGroup.selectAll("dot")
 				.data(valueData)
 				.enter().append("circle")
 				.attr("r", Configuration.lines.dot.r)
 				.attr("fill", Configuration.lines.dot.fill)
-				.attr("stroke", color(colorKey))
+				.attr("stroke", color(series))
 				.attr("stroke-width", Configuration.lines.dot.strokeWidth)
 				.attr("cx", d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
 				.attr("cy", d => yScale(d.value))
@@ -144,7 +147,6 @@ export class LineChart extends BaseAxisChart {
 				.transition()
 				.duration(Configuration.lines.dot.duration)
 				.style("opacity", 1);
-
 		});
 	}
 
