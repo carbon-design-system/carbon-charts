@@ -109,64 +109,66 @@ export class ComboChart extends BaseAxisChart {
 		xScale.padding(0.1);
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		if (yHeight > 0) {
-			const keys = this.options.yDomain;
-			const x1 = d3.scaleBand();
-			x1.domain(keys).rangeRound([0, xScale.bandwidth()]);
-			const color = d3.scaleOrdinal().range(this.options.colors).domain(this.options.yDomain);
-			this.svg.append("g")
-				.attr("class", "bars")
-				.selectAll("g")
-				.data(this.data)
-				.enter().append("g")
-					.attr("transform", d => `translate(${xScale(d[this.options.xDomain])},0)`)
-				.selectAll("rect")
-				.data(d => keys.map(key => ({
-					xAxis: this.options.xDomain,
-					series: key,
-					key: d[this.options.xDomain],
-					value: d[key],
-					formatter: this.options.yFormatter,
-					color: color(key)
-				})))
-				.enter().append("rect")
-					.attr("x", d => x1(d.series))
-					.attr("y", d => yHeight)
-					.attr("width", x1.bandwidth())
-					.attr("height", 0)
-					.attr("fill", d => d.color)
-					.transition()
-					.duration(1000)
-					.ease(d3.easePolyOut, 0.5)
-					.attr("y", d => yScale(d.value))
-					.attr("height", d => yHeight - yScale(d.value));
+			return;
 		}
+		const keys = this.options.yDomain;
+		const x1 = d3.scaleBand();
+		x1.domain(keys).rangeRound([0, xScale.bandwidth()]);
+		const color = d3.scaleOrdinal().range(this.options.colors).domain(this.options.yDomain);
+		this.svg.append("g")
+			.attr("class", "bars")
+			.selectAll("g")
+			.data(this.data)
+			.enter().append("g")
+				.attr("transform", d => `translate(${xScale(d[this.options.xDomain])},0)`)
+			.selectAll("rect")
+			.data(d => keys.map(key => ({
+				xAxis: this.options.xDomain,
+				series: key,
+				key: d[this.options.xDomain],
+				value: d[key],
+				formatter: this.options.yFormatter,
+				color: color(key)
+			})))
+			.enter().append("rect")
+				.attr("x", d => x1(d.series))
+				.attr("y", d => yHeight)
+				.attr("width", x1.bandwidth())
+				.attr("height", 0)
+				.attr("fill", d => d.color)
+				.transition()
+				.duration(1000)
+				.ease(d3.easePolyOut, 0.5)
+				.attr("y", d => yScale(d.value))
+				.attr("height", d => yHeight - yScale(d.value));
 	}
 
 	updateBars(xScale, yScale, active: boolean) {
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		if (yHeight > 0) {
-			const bars = this.svg.select(".bars");
-			if (!active) {
-				bars.style("display", "none");
-				return;
-			} else {
-				bars.style("display", "initial");
-			}
-			xScale.padding(0.1);
-			const keys = this.options.yDomain;
-			const x1 = d3.scaleBand();
-			x1.domain(keys).rangeRound([0, xScale.bandwidth()]);
-			const color = d3.scaleOrdinal().range(this.options.colors).domain(this.options.yDomain);
-			bars.selectAll("g")
-				.attr("transform", d => `translate(${xScale(d[this.options.xDomain])},0)`);
-			bars.selectAll("g")
-				.selectAll("rect")
-				.attr("x", d => x1(d.series))
-				.attr("y", d => yScale(d.value))
-				.attr("height", d => yHeight - yScale(d.value))
-				.attr("width", x1.bandwidth())
-				.style("display", d => keys.includes(d.series) ? "initial" : "none");
+			return;
 		}
+		const bars = this.svg.select(".bars");
+		if (!active) {
+			bars.style("display", "none");
+			return;
+		} else {
+			bars.style("display", "initial");
+		}
+		xScale.padding(0.1);
+		const keys = this.options.yDomain;
+		const x1 = d3.scaleBand();
+		x1.domain(keys).rangeRound([0, xScale.bandwidth()]);
+		const color = d3.scaleOrdinal().range(this.options.colors).domain(this.options.yDomain);
+		bars.selectAll("g")
+			.attr("transform", d => `translate(${xScale(d[this.options.xDomain])},0)`);
+		bars.selectAll("g")
+			.selectAll("rect")
+			.attr("x", d => x1(d.series))
+			.attr("y", d => yScale(d.value))
+			.attr("height", d => yHeight - yScale(d.value))
+			.attr("width", x1.bandwidth())
+			.style("display", d => keys.includes(d.series) ? "initial" : "none");
 	}
 
 	drawLines(xScale, yScale, activeSeries) {
