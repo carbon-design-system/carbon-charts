@@ -59,6 +59,9 @@ export class BarChart extends BaseAxisChart {
 
 	update() {
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		if (yHeight > 0) {
+			return;
+		}
 		let keys = this.getXKeys();
 		const activeSeries = this.getActiveDataSeries();
 		keys = activeSeries.length > 0 ? activeSeries : keys;
@@ -78,6 +81,9 @@ export class BarChart extends BaseAxisChart {
 
 	draw() {
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		if (yHeight > 0) {
+			return;
+		}
 		let keys = this.getXKeys();
 		const activeSeries = this.getActiveDataSeries();
 		keys = activeSeries.length > 0 ? activeSeries : keys;
