@@ -108,7 +108,7 @@ export class ComboChart extends BaseAxisChart {
 	drawBars(xScale, yScale) {
 		xScale.padding(0.1);
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
-		if (yHeight > 0) {
+		if (yHeight <= 0) {
 			return;
 		}
 		const keys = this.options.yDomain;
@@ -145,7 +145,7 @@ export class ComboChart extends BaseAxisChart {
 
 	updateBars(xScale, yScale, active: boolean) {
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
-		if (yHeight > 0) {
+		if (yHeight <= 0) {
 			return;
 		}
 		const bars = this.svg.select(".bars");

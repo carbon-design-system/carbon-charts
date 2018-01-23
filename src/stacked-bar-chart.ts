@@ -39,7 +39,7 @@ export class StackedBarChart extends BarChart {
 
 	update() {
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
-		if (yHeight > 0) {
+		if (yHeight <= 0) {
 			return;
 		}
 		const activeSeries = this.getActiveDataSeries();
@@ -91,7 +91,7 @@ export class StackedBarChart extends BarChart {
 
 	draw() {
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
-		if (yHeight > 0) {
+		if (yHeight <= 0) {
 			return;
 		}
 		const activeSeries = this.getActiveDataSeries();
