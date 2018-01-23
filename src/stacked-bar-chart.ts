@@ -39,6 +39,9 @@ export class StackedBarChart extends BarChart {
 
 	update() {
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		if (yHeight > 0) {
+			return;
+		}
 		const activeSeries = this.getActiveDataSeries();
 		const keys = activeSeries ? activeSeries : this.options.yDomain;
 		const color = d3.scaleOrdinal().range(this.options.colors).domain(this.options.yDomain);
@@ -88,6 +91,9 @@ export class StackedBarChart extends BarChart {
 
 	draw() {
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		if (yHeight > 0) {
+			return;
+		}
 		const activeSeries = this.getActiveDataSeries();
 		const keys = activeSeries ? activeSeries : this.options.yDomain;
 		this.xScale.paddingInner(0.2);
