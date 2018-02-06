@@ -284,44 +284,15 @@ const dataNoXAxis = [
 	}
 ];
 
-const data = [
-	{
-		"Part number": "2V2N-9KYPM version 1",
-		"Qty": 100000,
-		"More": 60000,
-		"Sold": 90000
-	},
-	{
-		"Part number": "L22I-P66EP-L22I-P66EP-L22I-P66EP",
-		"Qty": 200000,
-		"More": 50000,
-		"Sold": 70000
-	},
-	{
-		"Part number": "JQAI-2M4L1",
-		"Qty": 600000,
-		"More": 9000,
-		"Sold": 6000
-	},
-	{
-		"Part number": "J9DZ-F37AP",
-		"Qty": 100000,
-		"More": 8000,
-		"Sold": 11000
-	},
-	{
-		"Part number": "Q6XK-YEL48",
-		"Qty": 400000,
-		"More": 4000,
-		"Sold": 300000
-	},
-	{
-		"Part number": "773C-XKB5-L6EP-L22I-P66EP-L22I",
-		"Qty": 800000,
-		"More": 35000,
-		"Sold": 390000
-	}
-];
+const data = [];
+for (var i = 0; i < 2; i++) {
+    data.push({
+		"Part number": `773C-${i*2}-L6EP-L22I-${i*8}-L22I`,
+		"Qty": i*10,
+		"More": i*20,
+		"Sold": i*0
+	})
+}
 
 const doubleAxisData = [
 	{
@@ -468,47 +439,50 @@ const chartTypes = [
 
 chartTypes.forEach(type => {
 	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
-	switch (type.id) {
-		default:
-		case "bar":
-			const classyBarChart = new BarChart(
-				classyContainer,
-				Object.assign({}, type.options, {type: type.id}),
-				type.data
-			);
-			classyBarChart.drawChart();
-			break;
-		case "line":
-			const classyLineChart = new LineChart(
-				classyContainer,
-				Object.assign({}, type.options, {type: type.id}),
-				type.data
-			);
-			classyLineChart.drawChart();
-			break;
-		case "stacked-bar":
-			const classyStackedBarChart = new StackedBarChart(
-				classyContainer,
-				Object.assign({}, type.options, {type: type.id}),
-				type.data
-			);
-			classyStackedBarChart.drawChart();
-			break;
-		case "double-axis-line":
-			const classyDoubleAxisChart = new DoubleAxisLineChart(
-				classyContainer,
-				Object.assign({}, type.options, {type: type.id}),
-				type.data
-			);
-			classyDoubleAxisChart.drawChart();
-			break;
-		case "combo":
-			const classyComboChart = new ComboChart(
-				classyContainer,
-				Object.assign({}, type.options, {type: type.id}),
-				type.data
-			);
-			classyComboChart.drawChart();
-			break;
+	if(classyContainer) {
+		switch (type.id) {
+			default:
+			case "bar":
+				const classyBarChart = new BarChart(
+					classyContainer,
+					Object.assign({}, type.options, {type: type.id}),
+					type.data
+				);
+
+				classyBarChart.drawChart();
+				break;
+			case "line":
+				const classyLineChart = new LineChart(
+					classyContainer,
+					Object.assign({}, type.options, {type: type.id}),
+					type.data
+				);
+				classyLineChart.drawChart();
+				break;
+			case "stacked-bar":
+				const classyStackedBarChart = new StackedBarChart(
+					classyContainer,
+					Object.assign({}, type.options, {type: type.id}),
+					type.data
+				);
+				classyStackedBarChart.drawChart();
+				break;
+			case "double-axis-line":
+				const classyDoubleAxisChart = new DoubleAxisLineChart(
+					classyContainer,
+					Object.assign({}, type.options, {type: type.id}),
+					type.data
+				);
+				classyDoubleAxisChart.drawChart();
+				break;
+			case "combo":
+				const classyComboChart = new ComboChart(
+					classyContainer,
+					Object.assign({}, type.options, {type: type.id}),
+					type.data
+				);
+				classyComboChart.drawChart();
+				break;
+		}
 	}
 });

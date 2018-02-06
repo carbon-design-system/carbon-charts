@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import { Configuration } from "./configuration";
 import { Tools } from "./tools";
+import { local } from "d3";
 
 export class BaseChart {
 	static chartCount = 1;
