@@ -280,12 +280,12 @@ const dataNoXAxis = [
 	{
 		"Qty": 100000,
 		"More": 50000,
-		"Sold": 6000
+		"Sold": 0
 	}
 ];
 
 const data = [];
-for (var i = 0; i < 2; i++) {
+for (var i = 0; i < 10; i++) {
     data.push({
 		"Part number": `773C-${i*2}-L6EP-L22I-${i*8}-L22I`,
 		"Qty": i*10,
