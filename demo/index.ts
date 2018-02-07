@@ -285,13 +285,13 @@ const dataNoXAxis = [
 ];
 
 const data = [];
-for (var i = 0; i < 10; i++) {
-    data.push({
-		"Part number": `773C-${i*2}-L6EP-L22I-${i*8}-L22I`,
-		"Qty": i*10,
-		"More": i*20,
-		"Sold": i*0
-	})
+for (let i = 0; i < 10; i++) {
+	data.push({
+	"Part number": `773C-${ i * 2 }-L6EP-L22I-${ i * 8 }-L22I`,
+	"Qty": i * 10,
+	"More": i * 20,
+	"Sold": i * 0
+	});
 }
 
 const doubleAxisData = [
@@ -439,7 +439,7 @@ const chartTypes = [
 
 chartTypes.forEach(type => {
 	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
-	if(classyContainer) {
+	if (classyContainer) {
 		switch (type.id) {
 			default:
 			case "bar":

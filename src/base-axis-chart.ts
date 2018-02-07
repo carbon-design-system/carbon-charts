@@ -75,8 +75,8 @@ export class BaseAxisChart extends BaseChart {
 			const yMax = d3.max(this.data, d => keys.map(val => d[val]).reduce((acc, cur) => acc + cur, 0));
 			this.yScale.domain([0, +yMax]);
 		} else {
-			let forcedHeight = +d3.max(this.data, d => d3.max(keys.map(domain => d[domain])))
-			if (forcedHeight === 0) {forcedHeight = 1;}
+			let forcedHeight = +d3.max(this.data, d => d3.max(keys.map(domain => d[domain])));
+			if (forcedHeight === 0) { forcedHeight = 1; }
 			this.yScale.domain([0, forcedHeight]);
 		}
 		return this.yScale;
