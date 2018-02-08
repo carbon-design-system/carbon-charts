@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import { BaseChart } from "./base-chart";
 import { Configuration } from "./configuration";
+import { local } from "d3";
 
 export class BaseAxisChart extends BaseChart {
 	xScale: d3.ScaleBand<string>;
@@ -45,7 +46,6 @@ export class BaseAxisChart extends BaseChart {
 	setYScale(data?, activeSeries?): d3.ScaleLinear<number, number> {
 		let yHeight = undefined;
 		let keys = undefined;
-
 		if (data) {
 			yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 			const yScale = d3.scaleLinear().range([yHeight, 0]);
@@ -75,9 +75,9 @@ export class BaseAxisChart extends BaseChart {
 			const yMax = d3.max(this.data, d => keys.map(val => d[val]).reduce((acc, cur) => acc + cur, 0));
 			this.yScale.domain([0, +yMax]);
 		} else {
-			this.yScale.domain([0, +d3.max(this.data, d =>
-				d3.max(keys.map(domain => d[domain])))
-			]);
+			let forcedHeight = +d3.max(this.data, d => d3.max(keys.map(domain => d[domain])));
+			if (forcedHeight === 0) { forcedHeight = 1; }
+			this.yScale.domain([0, forcedHeight]);
 		}
 		return this.yScale;
 	}
@@ -147,7 +147,6 @@ export class BaseAxisChart extends BaseChart {
 		if (this.options.yFormatter) {
 			label = this.options.yDomain.map(yDom => this.options.yFormatter[yDom] ? this.options.yFormatter[yDom](yDom) : yDom).join(", ");
 		}
-
 		this.appendYAxisLabel(g, label, "y")
 			.attr("class", "y axis-label");
 	}
@@ -274,6 +273,7 @@ export class BaseAxisChart extends BaseChart {
 			if (tickLength > largestHeight) {
 				largestHeight = tickLength;
 			}
+
 		});
 		return largestHeight;
 	}
@@ -331,4 +331,5 @@ export class BaseAxisChart extends BaseChart {
 		g.select(".domain").remove();
 		g.select(".tick").remove();
 	}
+
 }
