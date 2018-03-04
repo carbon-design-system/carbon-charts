@@ -269,7 +269,12 @@ export class BaseAxisChart extends BaseChart {
 	getLargestTickHeight(ticks) {
 		let largestHeight = 0;
 		ticks.each(function() {
-			const tickLength = this.getBBox().height;
+			let tickLength = { x: 0, y: 0, height: 0, width: 0 }
+			try {
+				tickLength = this.getBBox().height;
+			} catch (e) {
+				console.log(e);
+			}
 			if (tickLength > largestHeight) {
 				largestHeight = tickLength;
 			}
