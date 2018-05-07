@@ -179,25 +179,27 @@ export class BaseChart {
 	updateChart() {
 		console.warn("You should implement your own `updateChart() function.");
 	}
+
+	// TODO - Remove, doesn't seem like it's being used
 	//#endregion
-	setResizeWhenContainerChange() {
-		let containerWidth = this.holder.clientWidth;
-		let containerHeight = this.holder.clientHeight;
-		const intervalId = setInterval(() => {
-			if (Math.abs(containerWidth - this.holder.clientWidth) > 20
-			|| Math.abs(containerHeight - this.holder.clientHeight) > 20) {
-				containerWidth = this.holder.clientWidth;
-				containerHeight = this.holder.clientHeight;
-				Tools.debounce(() => {
-					window.clearTimeout(intervalId);
-					d3.selectAll(".legend-tooltip").style("display", "none");
-					this.redrawChart();
-				}, 500)();
-			}
-		}, 800);
-		this.resizeTimers.push(intervalId);
-		return intervalId;
-	}
+	// setResizeWhenContainerChange() {
+	// 	let containerWidth = this.holder.clientWidth;
+	// 	let containerHeight = this.holder.clientHeight;
+	// 	const intervalId = setInterval(() => {
+	// 		if (Math.abs(containerWidth - this.holder.clientWidth) > 20
+	// 		|| Math.abs(containerHeight - this.holder.clientHeight) > 20) {
+	// 			containerWidth = this.holder.clientWidth;
+	// 			containerHeight = this.holder.clientHeight;
+	// 			Tools.debounce(() => {
+	// 				window.clearTimeout(intervalId);
+	// 				d3.selectAll(".legend-tooltip").style("display", "none");
+	// 				this.redrawChart();
+	// 			}, 500)();
+	// 		}
+	// 	}, 800);
+	// 	this.resizeTimers.push(intervalId);
+	// 	return intervalId;
+	// }
 
 	resizeWhenContainerChange() {
 		let containerWidth = this.holder.clientWidth;
@@ -352,6 +354,7 @@ export class BaseChart {
 	positionLegend() {
 		if (this.container.select(".legend-tooltip").nodes().length > 0
 			&& this.container.select(".legend-tooltip").node().style.display === "block") {
+				console.log("RETURN")
 			return;
 		}
 		this.container.selectAll(".legend-btn").style("display", "inline-block");
