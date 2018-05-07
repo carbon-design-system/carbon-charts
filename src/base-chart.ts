@@ -416,7 +416,6 @@ export class BaseChart {
 	addTooltipOpenButtonToLegend() {
 		const self = this;
 		const thisLegend = this.container.select(".legend");
-		const self = this;
 		thisLegend.append("div")
 			.attr("class", "expand-btn")
 			.style("cursor", "pointer")
