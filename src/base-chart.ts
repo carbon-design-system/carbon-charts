@@ -1,9 +1,12 @@
 import * as d3 from "d3";
 import { Configuration } from "./configuration";
 import { Tools } from "./tools";
+import { local } from "d3";
 
 export class BaseChart {
 	static chartCount = 1;
+
+	//#region
 	id = "";
 	container: any;
 	holder: Element;
@@ -33,8 +36,8 @@ export class BaseChart {
 			"#FF509E"
 		]
 	};
-	data: any;
 
+	data: any;
 	constructor(holder: Element, options?: any, data?: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
 
@@ -73,15 +76,47 @@ export class BaseChart {
 		};
 	}
 
+	getXKeys() {
+		let keys: any;
+
+		const activeSeries = this.getActiveDataSeries();
+		if (this.options.dimension) {
+			const newKeys = <any>[];
+			this.data.forEach(d => {
+				if (!newKeys.includes(d[this.options.dimension])) {
+					newKeys.push(d[this.options.dimension]);
+				}
+			});
+			keys = newKeys;
+		} else if (this.options.y2Domain) {
+			keys = this.options.yDomain.concat(this.options.y2Domain);
+			keys = activeSeries.length > 0 ? activeSeries : keys;
+		} else {
+			keys = this.options.yDomain;
+			keys = activeSeries.length > 0 ? activeSeries : keys;
+		}
+		return keys;
+	}
+
+	/*
+	 * removes the chart and any tooltips
+	 */
 	removeChart() {
 		this.container.select("svg").remove();
 		this.container.selectAll(".chart-tooltip").remove();
 		this.container.selectAll(".label-tooltip").remove();
 	}
 
+	/*
+	 * either creates or updates the chart
+	 */
 	redrawChart(data?: any) {
-		this.removeChart();
-		this.drawChart(data);
+		if (!data) {
+			this.updateChart();
+		} else {
+			this.removeChart();
+			this.drawChart(data);
+		}
 	}
 
 	setSVG(): any {
@@ -108,19 +143,43 @@ export class BaseChart {
 		return this.svg;
 	}
 
+	updateSVG() {
+		const chartSize = this.getActualChartSize();
+		this.svg.select(".x.axis")
+			.attr("transform", `translate(0, ${chartSize.height})`);
+		const grid = this.svg.select(".grid")
+			.attr("clip-path", `url(${window.location.origin}${window.location.pathname}#clip)`);
+		grid.select(".x.grid")
+			.attr("transform", `translate(0, ${chartSize.width})`);
+		grid.select(".y.grid")
+			.attr("transform", `translate(0, 0)`);
+	}
+
 	repositionSVG() {
 		const yAxisWidth = (this.container.select(".y.axis").node() as SVGGElement).getBBox().width;
 		this.container.style("padding-left", `${yAxisWidth}px`);
 	}
 
+	/*
+	 * creates the chart from scratch
+	 * should only be called once (or removeChart should be called before)
+	 */
 	drawChart(data?: any) {
 		if (data) {
 			this.data = data;
 		}
 
-		console.log("You should implement your own `drawChart()` function.");
+		console.warn("You should implement your own `drawChart()` function.");
 	}
 
+	/*
+	 * called when the chart needs to be updated visually
+	 * similar to drawChart but it should work from the existing chart
+	 */
+	updateChart() {
+		console.warn("You should implement your own `updateChart() function.");
+	}
+	//#endregion
 	setResizeWhenContainerChange() {
 		let containerWidth = this.holder.clientWidth;
 		let containerHeight = this.holder.clientHeight;
@@ -138,6 +197,22 @@ export class BaseChart {
 		}, 800);
 		this.resizeTimers.push(intervalId);
 		return intervalId;
+	}
+
+	resizeWhenContainerChange() {
+		let containerWidth = this.holder.clientWidth;
+		let containerHeight = this.holder.clientHeight;
+		const frame = () => {
+			if (Math.abs(containerWidth - this.holder.clientWidth) > 1
+				|| Math.abs(containerHeight - this.holder.clientHeight) > 1) {
+				containerWidth = this.holder.clientWidth;
+				containerHeight = this.holder.clientHeight;
+				d3.selectAll(".legend-tooltip").style("display", "none");
+				this.updateChart();
+			}
+			requestAnimationFrame(frame);
+		};
+		requestAnimationFrame(frame);
 	}
 
 	setClickableLegend() {
@@ -341,14 +416,17 @@ export class BaseChart {
 	addTooltipOpenButtonToLegend() {
 		const self = this;
 		const thisLegend = this.container.select(".legend");
+		const self = this;
 		thisLegend.append("div")
 			.attr("class", "expand-btn")
+			.style("cursor", "pointer")
 			.on("click", function() {
 				self.openLegendTooltip(this);
 			});
 	}
 
 	openLegendTooltip(target) {
+		d3.selectAll(".legend-tooltip").remove();
 		const mouseXPoint = d3.mouse(this.container.node())[0];
 		const windowXPoint = d3.event.x;
 		let tooltip;
@@ -375,7 +453,11 @@ export class BaseChart {
 				.selectAll("div")
 				.data(this.getLegendItems())
 				.enter().append("li")
-				.attr("class", "legend-btn active");
+				.attr("class", "legend-btn active")
+				.on("click", (clickedItem) => {
+					this.updateLegend(d3.event.currentTarget);
+					this.redrawChart();
+				});
 
 			legendContent.append("div")
 				.attr("class", "legend-circle")
@@ -384,8 +466,6 @@ export class BaseChart {
 
 			legendContent.append("text")
 				.text(d => "" + d);
-
-			this.setClickableLegendInTooltip();
 		}
 
 		if (window.innerWidth - (windowXPoint + Configuration.tooltip.width) < 0) {
@@ -399,10 +479,10 @@ export class BaseChart {
 
 	showLabelTooltip(d, leftSide) {
 		d3.selectAll(".label-tooltip").remove();
-		const mouseXPoint = d3.mouse(this.container)[0] + Configuration.tooltip.arrowWidth;
-		const tooltip = d3.select(this.container).append("div")
+		const mouseXPoint = d3.mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.arrowWidth;
+		const tooltip = this.container.append("div")
 			.attr("class", "tooltip label-tooltip")
-			.style("top", d3.mouse(this.container)[1] - Configuration.tooltip.magicTop1 + "px");
+			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop1 + "px");
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				this.resetOpacity();
@@ -421,8 +501,8 @@ export class BaseChart {
 	}
 
 	showTooltip(d) {
+		let tooltipHTML = "";
 		this.resetOpacity();
-
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
@@ -434,9 +514,14 @@ export class BaseChart {
 				d3.selectAll(".tooltip").remove();
 			});
 		const dVal = d.formatter && d.formatter[d.series] ? d.formatter[d.series](d.value.toLocaleString()) : d.value.toLocaleString();
-		let tooltipHTML = "<b>" + d.xAxis + ": </b>" + d.key + "<br/><b>" + d.series + ": </b>" + dVal;
+		if (d.xAxis && d.xAxis.length > 0) {
+			tooltipHTML += "<b>" + d.xAxis + ": </b>" + d.key + "<br/>";
+		}
+		if (d.series && !d.dimension) {
+			tooltipHTML += "<b>" + d.series + ": </b>" + dVal + "<br/>";
+		}
 		if (d.dimension) {
-			tooltipHTML += "<br/><b>" + d.dimension + ": </b>" + d.dimVal;
+			tooltipHTML += "<b>" + d.dimension + ": </b>" + d.dimVal + "<br/><b>" + d.valueName + ": </b>" + d.value;
 		}
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {

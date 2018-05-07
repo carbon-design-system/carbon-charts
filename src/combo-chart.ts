@@ -7,6 +7,9 @@ export class ComboChart extends BaseAxisChart {
 		super(holder, options, data);
 
 		this.options.type = "combo";
+		if (this.options.containerResizable) {
+			this.resizeWhenContainerChange();
+		}
 	}
 
 	drawChart(data?: any) {
@@ -15,9 +18,11 @@ export class ComboChart extends BaseAxisChart {
 		}
 
 		this.setSVG();
-		this.addLegend();
-		if (this.options.legendClickable) {
-			this.setClickableLegend();
+		if (this.options.xDomain) {
+			this.addLegend();
+			if (this.options.legendClickable) {
+				this.setClickableLegend();
+			}
 		}
 
 		const activeSeries = <any>this.getActiveDataSeries();
@@ -55,14 +60,57 @@ export class ComboChart extends BaseAxisChart {
 		}
 		this.drawLines(xScaleLine, y2Scale, activeLineSeries);
 		this.addDataPointEventListener();
-		if (this.options.containerResizable) {
-			this.setResizeWhenContainerChange();
+	}
+
+	updateChart() {
+		if (this.svg) {
+			const activeSeries = <any>this.getActiveDataSeries();
+			// pull out the bar/line data
+			// this would probably be done better in a setdata method and stored as props
+			const barData = [];
+			const lineData = [];
+			this.data.forEach((d) => {
+				const barDataObj = {};
+				const lineDataObj = {};
+				barDataObj[this.options.xDomain] = d[this.options.xDomain];
+				lineDataObj[this.options.xDomain] = d[this.options.xDomain];
+				barDataObj[this.options.yDomain] = d[this.options.yDomain];
+				barData.push(barDataObj);
+				for (let i = 0; i < this.options.y2Domain.length; i++) {
+					lineDataObj[this.options.y2Domain[i]] = d[this.options.y2Domain[i]];
+				}
+				lineData.push(lineDataObj);
+			});
+			const activeBar = activeSeries.includes(this.options.yDomain[0]);
+			const activeLineSeries = activeBar ? activeSeries.slice(1, activeSeries.length) : activeSeries;
+
+			// update the root svg
+			this.updateSVG();
+			// these don't explicitly add elements, so they're "safe" to call
+			const xScaleBar = this.setXScale(barData);
+			const xScaleLine = this.setXScale(lineData);
+			this.updateXAxis(xScaleBar);
+			const yScale = this.setYScale(barData);
+			const y2Scale = this.setYScale(lineData);
+			this.updateYAxis(yScale);
+			this.updateY2Axis(y2Scale);
+			this.drawXGrid(xScaleBar);
+			this.drawYGrid(yScale);
+			// update the actual chart
+			this.updateBars(xScaleBar, yScale, activeBar);
+			this.updateLines(xScaleLine, y2Scale, activeLineSeries);
+
+			this.repositionSVG();
+			this.positionLegend();
 		}
 	}
 
 	drawBars(xScale, yScale) {
 		xScale.padding(0.1);
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		if (yHeight <= 0) {
+			return;
+		}
 		const keys = this.options.yDomain;
 		const x1 = d3.scaleBand();
 		x1.domain(keys).rangeRound([0, xScale.bandwidth()]);
@@ -95,6 +143,34 @@ export class ComboChart extends BaseAxisChart {
 				.attr("height", d => yHeight - yScale(d.value));
 	}
 
+	updateBars(xScale, yScale, active: boolean) {
+		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		if (yHeight <= 0) {
+			return;
+		}
+		const bars = this.svg.select(".bars");
+		if (!active) {
+			bars.style("display", "none");
+			return;
+		} else {
+			bars.style("display", "initial");
+		}
+		xScale.padding(0.1);
+		const keys = this.options.yDomain;
+		const x1 = d3.scaleBand();
+		x1.domain(keys).rangeRound([0, xScale.bandwidth()]);
+		const color = d3.scaleOrdinal().range(this.options.colors).domain(this.options.yDomain);
+		bars.selectAll("g")
+			.attr("transform", d => `translate(${xScale(d[this.options.xDomain])},0)`);
+		bars.selectAll("g")
+			.selectAll("rect")
+			.attr("x", d => x1(d.series))
+			.attr("y", d => yScale(d.value))
+			.attr("height", d => yHeight - yScale(d.value))
+			.attr("width", x1.bandwidth())
+			.style("display", d => keys.includes(d.series) ? "initial" : "none");
+	}
+
 	drawLines(xScale, yScale, activeSeries) {
 		let keys: any;
 		let dataList = this.data;
@@ -116,6 +192,8 @@ export class ComboChart extends BaseAxisChart {
 		const line = d3.line<any>()
 			.x(d => xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
 			.y(d => yScale(d.value));
+		const lines = this.svg.append("g");
+		lines.attr("class", "lines");
 		keys.forEach((value, idx) => {
 			const colorKey = value;
 			if (this.options.dimension) {
@@ -132,7 +210,8 @@ export class ComboChart extends BaseAxisChart {
 				formatter: this.options.yFormatter,
 				color: color(colorKey)
 			}));
-			const series = this.svg.append("g");
+			const series = lines.append("g");
+			series.attr("class", "line");
 			series.append("path")
 				.data([valueData])
 				.attr("fill", Configuration.lines.path.fill)
@@ -164,6 +243,25 @@ export class ComboChart extends BaseAxisChart {
 		});
 	}
 
+	updateLines(xScale, yScale, activeSeries) {
+		const dataList = this.data;
+		const lines = this.svg.selectAll(".lines");
+		const line = d3.line<any>()
+			.x(d => xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
+			.y(d => yScale(d.value));
+		const keys = activeSeries;
+		const allActiveSeries: any = this.getActiveDataSeries();
+		lines.selectAll("path")
+			.attr("d", line);
+		// hide hidden series, and prevent them from being clicked
+		lines.selectAll("path").style("display", d => allActiveSeries.includes(d[0].series) ? "initial" : "none");
+		lines.selectAll("circle")
+			.filter(d => keys.includes(d.series))
+			.attr("cx", d => xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
+			.attr("cy", d => yScale(d.value));
+		lines.selectAll("circle").style("display", d => allActiveSeries.includes(d.series) ? "initial" : "none");
+	}
+
 	addDataPointEventListener() {
 		const self = this;
 		this.svg.selectAll("rect")
@@ -182,6 +280,24 @@ export class ComboChart extends BaseAxisChart {
 			.on("click", function(d) {
 				self.showTooltip(d);
 				self.reduceOpacity(this);
+			});
+		this.svg.selectAll("circle")
+			.on("click", function(d) {
+				self.showTooltip(d);
+				self.reduceOpacity(this);
+			})
+			.on("mouseover", function(d) {
+				self.svg.append("circle").attr("class", Configuration.lines.mouseover.class)
+					.attr("r", Configuration.lines.mouseover.r)
+					.attr("fill", Configuration.lines.mouseover.fill)
+					.attr("stroke-width", Configuration.lines.mouseover.strokeWidth)
+					.attr("stroke", d.color)
+					.attr("stroke-opacity", Configuration.lines.mouseover.strokeOpacity)
+					.attr("cx", this.cx.baseVal.value)
+					.attr("cy", this.cy.baseVal.value);
+			})
+			.on("mouseout", function() {
+				self.svg.selectAll(`.${Configuration.lines.mouseover.class}`).remove();
 			});
 	}
 }
