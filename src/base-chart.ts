@@ -353,10 +353,8 @@ export class BaseChart {
 
 	positionLegend() {
 		if (this.container.select(".legend-tooltip").nodes().length > 0
-			&& this.container.select(".legend-tooltip").node().style.display === "block") {
-				console.log("RETURN")
-			return;
-		}
+			&& this.container.select(".legend-tooltip").node().style.display === "block") return;
+
 		this.container.selectAll(".legend-btn").style("display", "inline-block");
 		const svgWidth = this.container.select(".inner-wrap").node().getBBox().width;
 		if (this.isLegendOnRight()) {
