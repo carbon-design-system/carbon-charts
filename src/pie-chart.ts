@@ -12,7 +12,11 @@ export class PieChart extends BaseChart {
 
 		this.options.type = "pie";
 		const keys: any = [];
+		
+		// Sort data by value (descending)
+		this.data = this.data.sort((a, b) => b.value - a.value)
 		this.data.map((entry) => keys.push(entry.label));
+
 		this.options.yDomain = keys;
 
 		this.color = d3.scaleOrdinal()
