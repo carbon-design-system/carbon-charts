@@ -3,7 +3,7 @@ export namespace Configuration {
 		margin: {
 			top: 20,
 			bottom: 60,
-			left: 90,
+			left: 60,
 			right: 20
 		},
 		resetOpacity: {
