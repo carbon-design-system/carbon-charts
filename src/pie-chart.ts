@@ -4,7 +4,6 @@ import { Configuration } from "./configuration";
 import { Tools } from "./tools";
 
 export class PieChart extends BaseChart {
-	color: any;
 	arc: any;
 
 	constructor(holder: Element, options?: any, data?: any) {
@@ -12,15 +11,14 @@ export class PieChart extends BaseChart {
 
 		this.options.type = "pie";
 		const keys: any = [];
-		
+
 		// Sort data by value (descending)
 		this.sortAndRepartitionData();
-		this.data.map((entry) => keys.push(entry.label));
+		this.data.map((entry) => {
+			keys.push(entry.label)
+		});
 
 		this.options.yDomain = keys;
-
-		this.color = d3.scaleOrdinal()
-			.range(this.options.colors);
 
 		if (this.options.containerResizable) {
 			this.resizeWhenContainerChange();
@@ -34,10 +32,12 @@ export class PieChart extends BaseChart {
 			, rest = sortedData.slice(6)
 			, restAccumulatedValue = rest.reduce((accum, item) => accum + item.value, 0)
 		
-		this.data = sortedData.slice(0, 6).concat([{
-			label: "Other",
-			value: restAccumulatedValue
-		}]);
+		this.data = sortedData.slice(0, 6)
+			.concat([{
+				label: "Other",
+				value: restAccumulatedValue
+			}])
+			.map((item, i) => Object.assign(item, { index: i }));
 	}
 
 	drawChart(data?: any) {
@@ -100,10 +100,10 @@ export class PieChart extends BaseChart {
 			.append("path")
 			.attr("d", arc)
 			.attr("fill", function(d, i) {
-				return this.color(d.data.label);
+				return this.options.colors[d.data.index];
 			}.bind(this))
 			.attr("stroke", function(d, i) {
-				return this.color(d.data.label);
+				return this.options.colors[d.data.index];
 			}.bind(this));
 	}
 
@@ -119,12 +119,13 @@ export class PieChart extends BaseChart {
 	}
 
 	showTooltip(d) {
+		console.log(d)
 		this.resetOpacity();
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
 			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px")
-			.style("border-color", this.color(d.data.label));
+			.style("border-color", this.options.colors[d.data.index]);
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				this.resetOpacity();
@@ -160,7 +161,7 @@ export class PieChart extends BaseChart {
 				sel
 					.attr("stroke-width", Configuration.pie.mouseover.strokeWidth)
 					.attr("stroke-opacity", Configuration.pie.mouseover.strokeOpacity)
-					.attr("stroke", self.color(d.data.label));
+					.attr("stroke", self.options.colors[d.index]);
 			})
 			.on("mouseout", function(d) {
 				d3.select(this)

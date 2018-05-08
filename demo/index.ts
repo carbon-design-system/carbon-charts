@@ -403,7 +403,7 @@ const pieData = [
 		value: 100000
 	},
 	{
-		label: "Q6XK-YEL48",
+		label: "YEL48-Q6XK-YEL48",
 		value: 400000
 	},
 	{
