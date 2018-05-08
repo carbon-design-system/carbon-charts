@@ -407,8 +407,24 @@ const pieData = [
 		value: 400000
 	},
 	{
-		label: "773C-XKB5-L6EP-L22I-P66EP-L22I",
-		value: 800000
+		label: "L22I-P66EP-L22I",
+		value: 450000
+	},
+	{
+		label: "Q6XK-YEL48",
+		value: 300000
+	},
+	{
+		label: "XKB5-L6EP",
+		value: 70000
+	},
+	{
+		label: "YEL48-Q6XK",
+		value: 20000
+	},
+	{
+		label: "L22I-P66EP-L22I",
+		value: 120000
 	}
 ];
 
