@@ -5,6 +5,7 @@ import { Tools } from "./tools";
 
 export class PieChart extends BaseChart {
 	color: any;
+	arc: any;
 
 	constructor(holder: Element, options?: any, data?: any) {
 		super(holder, options, data);
@@ -66,7 +67,6 @@ export class PieChart extends BaseChart {
 			.attr("class", "inner-wrap")
 			.attr("transform", "translate(" + (actualChartSize.width / 2) +  "," + (actualChartSize.height / 2) + ")");
 
-		console.log("Actual chart size", actualChartSize)
 		const arc = d3.arc()
 			.innerRadius(0)
 			.outerRadius(radius);
