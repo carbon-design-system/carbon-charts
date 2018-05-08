@@ -125,7 +125,6 @@ export class PieChart extends BaseChart {
 	}
 
 	showTooltip(d) {
-		console.log(d)
 		this.resetOpacity();
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(this.holder).append("div")
@@ -191,7 +190,6 @@ export class PieChart extends BaseChart {
 	}
 
 	updateChart() {
-		console.log("Update Chart - PIE");
 		if (this.svg) {
 			// update the root svg
 			this.updateSVG();

@@ -78,9 +78,6 @@ export class BaseChart {
 			width: (container.node().clientWidth - marginsToExclude - moreForY2Axis) * ratio
 		}
 
-		// console.log("computedActualSize", computedActualSize)
-		// console.log("Configuration.charts.margin.right", Configuration.charts.margin.right, "Configuration.charts.margin.left", Configuration.charts.margin.left)
-
 		// If chart is of type pie or donut, width and height should equal to the min of the width and height computed
 		if (this.options.type === 'pie') {
 			const maxSizePossible = Math.min(computedActualSize.height, computedActualSize.width)
@@ -302,12 +299,6 @@ export class BaseChart {
 
 	// Legend
 	getLegendItems() {
-		if (this.options.type === 'pie') {
-			console.log("GET LEGEND ITEMS")
-			console.log("this.options.dimension", this.options.dimension)
-			console.log("this.options.y2Domain", this.options.y2Domain)
-			console.log("this.options.yDomain", this.options.y2Domain)
-		}
 		let legendItems = [];
 		if (this.options.dimension) {
 			const newKeys = <any>[];
