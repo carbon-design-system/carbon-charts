@@ -52,7 +52,7 @@ export class PieChart extends BaseChart {
 				keys.push(entry.label);
 			});
 		}
-
+		
 		this.options.yDomain = keys;
 
 		const actualChartSize: any = this.getActualChartSize(this.container);
@@ -66,9 +66,12 @@ export class PieChart extends BaseChart {
 			.attr("class", "inner-wrap")
 			.attr("transform", "translate(" + (actualChartSize.width / 2) +  "," + (actualChartSize.height / 2) + ")");
 
+		console.log("Actual chart size", actualChartSize)
 		const arc = d3.arc()
 			.innerRadius(0)
 			.outerRadius(radius);
+
+		this.arc = arc;
 
 		const pie = d3.pie()
 			.value(function(d: any) { return d.value; })
@@ -84,13 +87,7 @@ export class PieChart extends BaseChart {
 			}.bind(this))
 			.attr("stroke", function(d, i) {
 				return this.color(d.data.label);
-			}.bind(this))
-			.style("opacity", 0)
-			.style("transform", "scale(0.75)")
-			.transition()
-			.duration(Configuration.lines.path.duration)
-			.style("opacity", 1)
-			.style("transform", "scale(1)");
+			}.bind(this));
 	}
 
 	reduceOpacity(exception) {
@@ -155,6 +152,10 @@ export class PieChart extends BaseChart {
 				d3.select(this)
 					.attr("stroke", "");
 			});
+	}
+
+	scaleToFit() {
+		// TODO
 	}
 
 	setSVG() {
