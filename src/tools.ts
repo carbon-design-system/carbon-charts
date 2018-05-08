@@ -50,4 +50,8 @@ export namespace Tools {
 			height: parseFloat(el.style.height.replace('px', '') || el.offsetHeight)
 		}
 	}
+
+	export function capitalizeFirstLetter(string) {
+		return string[0].toUpperCase() + string.slice(1);
+	}
 }

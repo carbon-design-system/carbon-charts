@@ -4,21 +4,19 @@ import { Configuration } from "./configuration";
 import { Tools } from "./tools";
 
 export class PieChart extends BaseChart {
-	arc: any;
-
-	constructor(holder: Element, options?: any, data?: any) {
+	constructor(holder: Element, options?: any, data?: any, type: string = "pie") {
 		super(holder, options, data);
 
-		this.options.type = "pie";
+		this.options.type = type;
 		const keys: any = [];
 
 		// Check for duplicate keys
 		const duplicates = Tools.duplicateKeysInData(this.data);
 		if (duplicates.length > 0) {
-			console.error("You have duplicate keys", duplicates);
+			console.error(`${Tools.capitalizeFirstLetter(this.options.type)} Chart - You have duplicate keys`, duplicates);
 		}
 		
-		// Sort data by value (descending)
+		// Process data, and generate keys for legend
 		this.sortAndRepartitionData();
 		this.data.map((entry) => {
 			keys.push(entry.label)
@@ -64,9 +62,11 @@ export class PieChart extends BaseChart {
 		this.addDataPointEventListener();
 	}
 
-	draw(activeSeries = this.getActiveDataSeries()) {
-		let keys: any = [];
-		let dataList = this.data;
+	draw(innerRadius = 0) {
+		const activeSeries = this.getActiveDataSeries()
+		let keys: any = []
+		  , dataList = this.data;
+		
 		if (activeSeries) {
 			keys = activeSeries;
 
@@ -91,10 +91,8 @@ export class PieChart extends BaseChart {
 			.attr("transform", "translate(" + (actualChartSize.width / 2) +  "," + (actualChartSize.height / 2) + ")");
 
 		const arc = d3.arc()
-			.innerRadius(0)
+			.innerRadius(innerRadius * (innerRadius / 200))
 			.outerRadius(radius);
-
-		this.arc = arc;
 
 		const pie = d3.pie()
 			.value(function(d: any) { return d.value; })
