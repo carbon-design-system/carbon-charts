@@ -86,9 +86,14 @@ export namespace Configuration {
 	};
 
 	export const pie = {
+		maxWidth: 516.6,
 		mouseover: {
 			strokeWidth: 8,
 			strokeOpacity: 0.5
+		},
+		label: {
+			dy: ".32em",
+			margin: 15
 		}
 	};
 

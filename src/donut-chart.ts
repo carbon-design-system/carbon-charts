@@ -14,9 +14,12 @@ export class DonutChart extends PieChart {
 			
 			const actualChartSize: any = this.getActualChartSize(this.container)
 				, radius: number = Math.min(actualChartSize.width, actualChartSize.height) / 2
+			
+			const { pie: pieConfigs } = Configuration
+				, marginedRadius = radius - (pieConfigs.label.margin * (actualChartSize.width / pieConfigs.maxWidth))
 				, arc = d3.arc()
-							.innerRadius(radius * (2/3))
-							.outerRadius(radius);
+							.innerRadius(marginedRadius * (2/3))
+							.outerRadius(marginedRadius);
 			
 			this.svg.selectAll("path")
 				.attr("d", arc);
