@@ -217,6 +217,10 @@ export class BaseChart {
 				containerWidth = this.holder.clientWidth;
 				containerHeight = this.holder.clientHeight;
 				d3.selectAll(".legend-tooltip").style("display", "none");
+				
+				// Hide tooltips
+				this.hideTooltip();
+				
 				this.updateChart();
 			}
 			requestAnimationFrame(frame);
@@ -513,6 +517,12 @@ export class BaseChart {
 		}
 	}
 
+	hideTooltip() {
+		this.resetOpacity();
+
+		d3.selectAll(".tooltip").remove();
+	}
+
 	showTooltip(d) {
 		let tooltipHTML = "";
 		this.resetOpacity();
@@ -523,8 +533,7 @@ export class BaseChart {
 			.style("border-color", d.color);
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
-				this.resetOpacity();
-				d3.selectAll(".tooltip").remove();
+				this.hideTooltip();
 			});
 		const dVal = d.formatter && d.formatter[d.series] ? d.formatter[d.series](d.value.toLocaleString()) : d.value.toLocaleString();
 		if (d.xAxis && d.xAxis.length > 0) {
