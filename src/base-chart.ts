@@ -472,10 +472,12 @@ export class BaseChart {
 		}
 
 		if (window.innerWidth - (windowXPoint + Configuration.tooltip.width) < 0) {
-			tooltip.append("div").attr("class", "arrow arrow-right");
+			tooltip.classed("arrow-right", true);
+			tooltip.append("div").attr("class", "arrow");
 			tooltip.style("left", `${mouseXPoint - Configuration.tooltip.width - Configuration.tooltip.arrowWidth}px`);
 		} else {
-			tooltip.append("div").attr("class", "arrow arrow-left");
+			tooltip.classed("arrow-left", true);
+			tooltip.append("div").attr("class", "arrow");
 			tooltip.style("left", `${mouseXPoint + Configuration.tooltip.arrowWidth}px`);
 		}
 	}
@@ -494,12 +496,16 @@ export class BaseChart {
 		tooltip.append("p").text(d);
 
 		if (leftSide) {
+			tooltip.classed("arrow-left", true);
+
 			tooltip.style("left", mouseXPoint + "px");
-			tooltip.append("div").attr("class", "arrow arrow-left");
+			tooltip.append("div").attr("class", "arrow");
 		} else {
+			tooltip.classed("arrow-right", true);
+
 			const xPoint = mouseXPoint - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicXPoint2;
 			tooltip.style("left", xPoint + "px");
-			tooltip.append("div").attr("class", "arrow arrow-right");
+			tooltip.append("div").attr("class", "arrow");
 		}
 	}
 
@@ -528,14 +534,16 @@ export class BaseChart {
 		}
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
+			tooltip.classed("arrow-right", true);
 			tooltip.style(
 				"left",
 				d3.mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
 			);
-			tooltip.append("div").attr("class", "arrow arrow-right");
+			tooltip.append("div").attr("class", "arrow");
 		} else {
+			tooltip.classed("arrow-left", true);
 			tooltip.style("left", d3.mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
-			tooltip.append("div").attr("class", "arrow arrow-left");
+			tooltip.append("div").attr("class", "arrow");
 		}
 	}
 

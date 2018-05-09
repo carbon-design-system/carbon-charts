@@ -100,10 +100,12 @@ $default_transition: all .1s ease-out;
 			padding-left: 0;
 			margin: 20px 5px 20px;
 		}
-		.arrow-right {
+
+		&.arrow-right .arrow {
 			border-left: 11px solid #2D74DA;
 		}
-		.arrow-left {
+
+		&.arrow-left .arrow {
 			border-right: 10px solid #2D74DA;
 		}
 	}
@@ -150,7 +152,6 @@ $default_transition: all .1s ease-out;
 	font-size: 12px;
 	position: absolute;
 	padding: 10px 20px 10px 10px;
-	border-right: 4px solid #2D74DA;
 	max-width: 200px;
 	word-wrap: break-word;
 	z-index: 1059;
@@ -167,44 +168,47 @@ $default_transition: all .1s ease-out;
 		right: 10px;
 		top: 5px;
 	}
+	
 	.arrow {
 		position: absolute;
-	}
-
-	.arrow-up {
 		width: 0;
 		height: 0;
+	}
+
+	&.arrow-up .arrow {
 		border-left: 10px solid transparent;
 		border-right: 10px solid transparent;
 		border-bottom: 11px solid black;
 	}
 
-	.arrow-down {
-		width: 0;
-		height: 0;
+	&.arrow-down .arrow {
 		border-left: 10px solid transparent;
 		border-right: 10px solid transparent;
 		border-top: 11px solid #f00;
 	}
 
-	.arrow-right {
-		width: 0;
-		height: 0;
-		border-top: 10px solid transparent;
-		border-bottom: 10px solid transparent;
-		border-left: 11px solid white;
-		right: -10px;
-		top: 10px;
+	&.arrow-right {
+		border-left: 4px solid #2D74DA;
+		
+		.arrow {
+			border-top: 10px solid transparent;
+			border-bottom: 10px solid transparent;
+			border-left: 11px solid white;
+			right: -10px;
+			top: 10px;
+		}
 	}
 
-	.arrow-left {
-		width: 0;
-		height: 0;
-		border-top: 10px solid transparent;
-		border-bottom: 10px solid transparent;
-		border-right: 10px solid white;
-		left: -9px;
-		top: 9px;
+	&.arrow-left {
+		border-right: 4px solid #2D74DA;
+
+		.arrow {
+			border-top: 10px solid transparent;
+			border-bottom: 10px solid transparent;
+			border-right: 10px solid white;
+			left: -9px;
+			top: 9px;
+		}
 	}
 
 	p {
