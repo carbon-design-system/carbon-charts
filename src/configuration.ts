@@ -93,7 +93,8 @@ export namespace Configuration {
 		},
 		label: {
 			dy: ".32em",
-			margin: 15
+			margin: 15,
+			other: "Other"
 		}
 	};
 
