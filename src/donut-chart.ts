@@ -4,8 +4,37 @@ import { Configuration } from "./configuration";
 import { Tools } from "./tools";
 
 export class DonutChart extends PieChart {
+	figure: number;
+	title: string;
+
 	constructor(holder: Element, options?: any, data?: any) {
 		super(holder, options, data, "donut");
+
+		// Check if figure & title have been provided
+		if (options.figure && options.title) {
+			this.figure = options.figure;
+			this.title = options.title;
+		}
+	}
+
+	draw() {
+		super.draw();
+
+		// Add the center text (figure & title)
+		if (this.figure && this.title) {
+			this.svg
+				.append("text")
+				.attr("class", "donut-figure")
+				.attr("text-anchor", "middle")
+				.text(this.figure.toLocaleString());
+
+			this.svg
+				.append("text")
+				.attr("class", "donut-title")
+				.attr("text-anchor", "middle")
+				.attr('y', Configuration.donut.centerText.title.y)
+				.text(this.title);
+		}
 	}
 
 	updateChart() {
@@ -13,10 +42,12 @@ export class DonutChart extends PieChart {
 			super.updateChart();
 			
 			const actualChartSize: any = this.getActualChartSize(this.container)
-				, radius: number = Math.min(actualChartSize.width, actualChartSize.height) / 2
+				, dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height)
+				, radius: number = dimensionToUseForScale / 2
 			
 			const { pie: pieConfigs } = Configuration
-				, marginedRadius = radius - (pieConfigs.label.margin * (actualChartSize.width / pieConfigs.maxWidth))
+				, scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth
+				, marginedRadius = radius - (pieConfigs.label.margin * scaleRatio)
 				, arc = d3.arc()
 							.innerRadius(marginedRadius * (2/3))
 							.outerRadius(marginedRadius);

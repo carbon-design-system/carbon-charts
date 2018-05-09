@@ -97,6 +97,13 @@ export namespace Configuration {
 		}
 	};
 
+	export const donut = {
+		centerText: {
+			title: {
+				y: 22
+			}
+		}
+	};
 
 	export const legend = {
 		countBreak: 4,

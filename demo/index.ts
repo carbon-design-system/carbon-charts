@@ -8,9 +8,9 @@ import {
 	DonutChart
 } from "./../src/index";
 
-import "@peretz/matter/matter.css";
-
 import "./index.scss";
+
+import "@peretz/matter/matter.css";
 
 const colors = [
 	"#009BEF",
@@ -296,7 +296,8 @@ const donutOptions = {
 	legendClickable: true,
 	containerResizable: true,
 	colors,
-	innerRadius: 170
+	figure: 15250,
+	title: "Browsers"
 };
 
 const data = [];
