@@ -45,19 +45,13 @@ export class PieChart extends BaseChart {
 		let dataList = this.data;
 		if (activeSeries) {
 			keys = activeSeries;
+
+			dataList = dataList.filter(item => keys.indexOf(item.label) > -1)
 		} else {
-			dataList.map((entry) => {
+			dataList = dataList.map((entry) => {
 				keys.push(entry.label);
 			});
 		}
-
-		keys.forEach((value, idx) => {
-			const colorKey = value;
-			if (this.options.dimension) {
-				dataList = this.data.filter(d => d[this.options.dimension] === value);
-				value = this.options.yDomain[0];
-			}
-		});
 
 		this.options.yDomain = keys;
 
@@ -163,23 +157,30 @@ export class PieChart extends BaseChart {
 			});
 	}
 
+	setSVG() {
+		const currentSVG = d3.select(this.holder).select('svg.chart-svg')
+		if (currentSVG) {
+			currentSVG.remove();
+		}
+
+		super.setSVG();
+	}
+
+	update(data?: any) {
+		this.setSVG();
+		this.draw();
+		this.addDataPointEventListener();
+	}
+
 	updateChart() {
 		console.log("Update Chart - PIE");
 		if (this.svg) {
 			// update the root svg
 			this.updateSVG();
-			// these don't explicitly add elements, so they're "safe" to call
-			// this.setXScale();
-			// this.updateXAxis();
-			// this.setYScale();
-			// this.updateYAxis();
-			// this.drawXGrid();
-			// this.drawYGrid();
-			// // update the actual chart
-			// this.update();
-
+			this.update();
 			this.repositionSVG();
 			this.positionLegend();
+			this.scaleToFit();
 		}
 	}
 }

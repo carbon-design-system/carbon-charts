@@ -29,4 +29,11 @@ export namespace Tools {
 			.append("use").attr("href", "#x_12");
 		return closeBtn;
 	}
+
+	export function getDimensions(el) {
+		return {
+			width: parseFloat(el.style.width.replace('px', '') || el.offsetWidth),
+			height: parseFloat(el.style.height.replace('px', '') || el.offsetHeight)
+		}
+	}
 }
