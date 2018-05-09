@@ -54,4 +54,8 @@ export namespace Tools {
 	export function capitalizeFirstLetter(string) {
 		return string[0].toUpperCase() + string.slice(1);
 	}
+
+	export function convertValueToPercentage(item, fullData) {
+		return Math.floor(item / (fullData.reduce((accum, val) => accum + val.value, 0)) * 100) + "%";
+	}
 }

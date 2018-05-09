@@ -91,9 +91,11 @@ export class PieChart extends BaseChart {
 			.attr("transform", "translate(" + (actualChartSize.width / 2) +  "," + (actualChartSize.height / 2) + ")")
 			.attr("preserveAspectRatio", "xMidYMid meet");
 
-		const arc = d3.arc()
-			.innerRadius(this.options.type === 'donut' ? (radius * (2/3)) : 0)
-			.outerRadius(radius);
+		const { pie: pieConfigs } = Configuration
+			, marginedRadius = radius - (pieConfigs.label.margin * (actualChartSize.width / pieConfigs.maxWidth))
+			, arc = d3.arc()
+				.innerRadius(this.options.type === 'donut' ? (marginedRadius * (2/3)) : 0)
+				.outerRadius(marginedRadius);
 
 		const pie = d3.pie()
 			.value(function(d: any) { return d.value; })
@@ -110,6 +112,35 @@ export class PieChart extends BaseChart {
 			.attr("stroke", function(d, i) {
 				return this.options.colors[d.data.index];
 			}.bind(this));
+
+		this.svg
+			.selectAll('g.inner-wrap')
+			.data(pie(dataList))
+			.enter()
+			.append("text")
+			.attr("transform", function(d) {
+				const theta = d.endAngle - d.startAngle
+
+				return "translate(" + (radius * Math.sin((theta / 2) + d.startAngle )) + "," + (-1 * radius * Math.cos((theta / 2) + d.startAngle )) + ")"; })
+			.attr("dy", Configuration.pie.label.dy)
+			.style("text-anchor", function(d) {
+				const QUADRANT = Math.PI / 4
+					, rads = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+				
+				if (rads >= QUADRANT && rads <= 3 * QUADRANT) {
+					return "start";
+				} else if ((rads > 7 * QUADRANT && rads < QUADRANT) || (rads > 3 * QUADRANT && rads < 5 * QUADRANT)) {
+					return "middle";
+				} else if (rads >= 5 * QUADRANT && rads <= 7 * QUADRANT) {
+					return "end";
+				} else {
+					return "middle";
+				}
+			})
+			.text(function(d) { 
+				return Tools.convertValueToPercentage(d.data.value, dataList);
+			});
+  
 	}
 
 	reduceOpacity(exception) {
@@ -125,7 +156,7 @@ export class PieChart extends BaseChart {
 
 	showTooltip(d) {
 		this.resetOpacity();
-		
+
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")

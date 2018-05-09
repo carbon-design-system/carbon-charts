@@ -131,16 +131,15 @@ $default_transition: all .1s ease-out;
 		}
 	}
 
-	.axis {
-		text {
-			font-size: 12px;
-			fill: #959595;
-			stroke: #959595;
-			stroke-width: .3;
-		}
-		tspan {
-			cursor: pointer;
-		}
+	text {
+		font-size: 12px;
+		fill: #959595;
+		stroke: #959595;
+		stroke-width: .3;
+	}
+	
+	tspan {
+		cursor: pointer;
 	}
 }
 
@@ -151,7 +150,7 @@ $default_transition: all .1s ease-out;
 	font-size: 12px;
 	position: absolute;
 	padding: 10px 20px 10px 10px;
-	border-top: 4px solid #2D74DA;
+	border-right: 4px solid #2D74DA;
 	max-width: 200px;
 	word-wrap: break-word;
 	z-index: 1059;
