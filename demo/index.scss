@@ -49,7 +49,8 @@ header.m-demo-header {
 	margin-top: 20px;
 }
 .chart-holder {
-	box-shadow: 0 8px 34px -11px rgba(22, 56, 107, 0.15);
+	border: 1px solid rgba(24, 62, 117, 0.2);
+	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
 	margin: 0 auto 60px auto;
 	display: block;
 	padding: 30px;
@@ -69,7 +70,7 @@ header.m-demo-header {
 	}
 
 	&:hover {
-		box-shadow: 0 8px 34px -11px rgba(22, 56, 107, 0.25);
+		box-shadow: 0 15px 45px -11px rgba(22, 56, 107, 0.15);
 		transition: box-shadow .1s ease-out;
 	}
 }
