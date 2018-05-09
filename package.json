@@ -21,7 +21,8 @@
   "author": "IBM",
   "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
-    "d3": "^4.11.0"
+    "d3": "^4.11.0",
+    "prismjs": "^1.14.0"
   },
   "devDependencies": {
     "@peretz/matter": "^1.1.0",

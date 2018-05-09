@@ -243,6 +243,33 @@ export class PieChart extends BaseChart {
 			this.update();
 			this.repositionSVG();
 			this.positionLegend();
+
+			// const actualChartSize: any = this.getActualChartSize(this.container)
+			// 	, dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height)
+			// 	, radius: number = dimensionToUseForScale / 2
+			
+			// const { pie: pieConfigs } = Configuration
+			// 	, scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth
+
+			// this.svg
+			// .selectAll('text')
+			// .attr("dy", function(d) {
+			// 	if (d) {
+			// 		const QUADRANT = Math.PI / 4
+			// 			, rads = ((d.endAngle - d.startAngle) / 2) + d.startAngle
+			// 			, theta = rads * 180 / Math.PI
+			// 		if (d.data.label === '2V2N-9KYPM version 1') {
+			// 			console.log(theta / QUADRANT)
+			// 		}
+			// 		if (rads === 1) {
+			// 			return 0.1 + "em"
+			// 		} else {
+			// 			return 0.9 + "em"
+			// 		}
+			// 	} else {
+			// 		return null
+			// 	}
+			// });
 		}
 	}
 }

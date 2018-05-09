@@ -8,9 +8,14 @@ import {
 	DonutChart
 } from "./../src/index";
 
+// Styles
 import "./index.scss";
-
 import "@peretz/matter/matter.css";
+
+import Prism from 'prismjs';
+import loadLanguages from 'prismjs/components/index.js';
+import { html } from "d3";
+loadLanguages(['haml', 'javascript']);
 
 const colors = [
 	"#009BEF",
@@ -575,3 +580,77 @@ chartTypes.forEach(type => {
 		}
 	}
 });
+
+
+/*
+///
+///	Sample code for demos, as well as syntax highlighting
+///
+*/
+window["switchTabs"] = (e, chartType, tabID) => {
+	e.preventDefault();
+
+	const disable = tabID === 'html' ? 'js' : 'html'
+	const tab = document.getElementById(`code-${chartType}`);
+
+	tab.querySelector(`a.tabs-anchor.${disable}`).setAttribute('aria-selected', "false");
+	tab.querySelector(`a.tabs-anchor.${tabID}`).setAttribute('aria-selected', "true");
+
+	tab.querySelector(`div.tabs-panel.${disable}`).setAttribute('hidden', "true");
+	tab.querySelector(`div.tabs-panel.${tabID}`).removeAttribute('hidden');
+};
+
+chartTypes.forEach(type => {
+	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
+	if (classyContainer) {
+		const htmlCode = `<div id="${classyContainer.id}"></div>`
+			, htmlHighlightedCode = Prism.highlight(htmlCode, Prism.languages.haml, 'haml');
+
+		const jsCode = `
+const data = ${JSON.stringify(type.data)};
+const options = ${JSON.stringify(type.options)};
+const classyContainer = document.getElementById('classy-${type.id}-chart-holder');
+
+const classyBarChart = new BarChart(
+	classyContainer,
+	Object.assign({}, options, {type: '${type.id}'}),
+	data
+);
+
+classyBarChart.drawChart();`
+			, jsHighlightedCode = Prism.highlight(jsCode, Prism.languages.javascript, 'javascript');
+
+		const el = document.createElement("div");
+		el.classList.add('code');
+		el.innerHTML = `
+<div id="code-${type.id}">
+	<div class="tabs">
+		<div>
+			<ul role="tablist" aria-label="Demo Code">
+				<li>
+					<a class="tabs-anchor js" href="#" onclick="switchTabs(event, '${type.id}', 'js');" role="tab" aria-selected="true" aria-controls="js-tab-a">JS</a>
+				</li>
+
+				<li>
+					<a class="tabs-anchor html" href="#" onclick="switchTabs(event, '${type.id}', 'html');" role="tab" aria-selected="false" aria-controls="html-tab-a">HTML</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="tabs-panel js" role="tabpanel" aria-labelledby="js-a">
+		<pre class="demo-code">
+			${jsHighlightedCode}
+		</pre>
+	</div>
+
+	<div class="tabs-panel html" role="tabpanel" aria-labelledby="html-a" hidden="">
+		<pre class="demo-code">
+			${htmlHighlightedCode}
+		</pre>
+	</div>
+</div>
+		`;
+		classyContainer.parentNode.insertBefore(el, classyContainer.nextSibling);
+	}
+})

@@ -1,5 +1,7 @@
 $default_transition: all .1s ease-out;
 
+@import "../node_modules/prismjs/themes/prism.css";
+
 html, body { margin: 0; }
 
 header.m-demo-header {
@@ -48,7 +50,7 @@ header.m-demo-header {
 .chart-holder {
 	border: 1px solid rgba(24, 62, 117, 0.2);
 	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
-	margin: 0 auto 60px auto;
+	margin: 0 auto;
 	display: block;
 	padding: 30px;
 	height: 500px;
@@ -81,4 +83,22 @@ header.m-demo-header {
 #classy-bar-chart-holder {
 	overflow: hidden;
 	resize: both;
+}
+
+div.code {
+	display: block;
+	min-width: 300px;
+	max-width: 800px;
+	margin: auto;
+	margin-bottom: 60px;
+
+	ul[role="tablist"] li:first-child {
+		margin-left: 0;
+	}
+
+	div.tabs-panel {		
+		pre.demo-code {
+			overflow: scroll;
+		}
+	}
 }
