@@ -7,7 +7,6 @@ export class BaseChart {
 	static chartCount = 1;
 
 	//#region
-	arc: any;
 	id = "";
 	container: any;
 	holder: Element;
@@ -58,20 +57,20 @@ export class BaseChart {
 	}
 
 	getActualChartSize(container = this.container) {
-		console.log(container.node().clientWidth)
 		let ratio, marginForLegendTop;
 		let moreForY2Axis = 0;
-		if (container.node().clientWidth > Configuration.charts.widthBreak &&
-			this.getLegendItems().length > Configuration.legend.countBreak) {
+		if (container.node().clientWidth > Configuration.charts.widthBreak) {
 			ratio = Configuration.charts.magicRatio;
 			marginForLegendTop = 0;
 		} else {
 			marginForLegendTop = Configuration.charts.marginForLegendTop;
 			ratio = 1;
 		}
+
 		if (this.options.type === "double-axis-line" || this.options.type === "combo") {
 			moreForY2Axis = Configuration.charts.magicMoreForY2Axis;
 		}
+
 		return {
 			height: container.node().clientHeight - marginForLegendTop,
 			width: (container.node().clientWidth - Configuration.charts.margin.left - Configuration.charts.margin.right - moreForY2Axis) * ratio
@@ -404,15 +403,15 @@ export class BaseChart {
 
 	hasLegendExpandBtn() {
 		return (
-			this.container.node().clientWidth < Configuration.charts.widthBreak &&
-			this.getLegendItems().length > Configuration.legend.countBreak
+			this.container.node().clientWidth < Configuration.charts.widthBreak
+			// && this.getLegendItems().length > Configuration.legend.countBreak
 		);
 	}
 
 	isLegendOnRight() {
 		return (
-			this.container.node().clientWidth > Configuration.charts.widthBreak &&
-			this.getLegendItems().length > Configuration.legend.countBreak
+			this.container.node().clientWidth > Configuration.charts.widthBreak
+			// && this.getLegendItems().length > Configuration.legend.countBreak
 		);
 	}
 
