@@ -12,6 +12,12 @@ export class PieChart extends BaseChart {
 		this.options.type = "pie";
 		const keys: any = [];
 
+		// Check for duplicate keys
+		const duplicates = Tools.duplicateKeysInData(this.data);
+		if (duplicates.length > 0) {
+			console.error("You have duplicate keys", duplicates);
+		}
+		
 		// Sort data by value (descending)
 		this.sortAndRepartitionData();
 		this.data.map((entry) => {

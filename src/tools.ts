@@ -18,6 +18,20 @@ export namespace Tools {
 		};
 	}
 
+	export function duplicateKeysInData(data: any) {
+		const keys = []
+			, duplicateKeys = [];
+		
+		data.map(item => {
+			const key = item.label;
+			if (keys.indexOf(key) > -1 && duplicateKeys.indexOf(key) === -1) duplicateKeys.push(key);
+
+			keys.push(key);
+		});
+
+		return duplicateKeys;
+	}
+
 	export function addCloseBtn(tooltip, size, color?) {
 		const closeBtn = tooltip.append("button");
 		let classNames = `close--${size}`;
