@@ -91,6 +91,7 @@ export namespace Configuration {
 			strokeWidth: 8,
 			strokeOpacity: 0.5
 		},
+		sliceLimit: 6,
 		label: {
 			dy: ".32em",
 			margin: 15,

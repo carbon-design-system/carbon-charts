@@ -33,10 +33,11 @@ export class PieChart extends BaseChart {
 	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
 	sortAndRepartitionData() {
 		const sortedData = this.data.sort((a, b) => b.value - a.value)
-			, rest = sortedData.slice(7)
+			, stopAt = Configuration.pie.sliceLimit
+			, rest = sortedData.slice(stopAt)
 			, restAccumulatedValue = rest.reduce((accum, item) => accum + item.value, 0)
 		
-		this.data = sortedData.slice(0, 7)
+		this.data = sortedData.slice(0, stopAt)
 			.concat([{
 				label: Configuration.pie.label.other,
 				value: restAccumulatedValue,
