@@ -302,6 +302,12 @@ export class BaseChart {
 
 	// Legend
 	getLegendItems() {
+		if (this.options.type === 'pie') {
+			console.log("GET LEGEND ITEMS")
+			console.log("this.options.dimension", this.options.dimension)
+			console.log("this.options.y2Domain", this.options.y2Domain)
+			console.log("this.options.yDomain", this.options.y2Domain)
+		}
 		let legendItems = [];
 		if (this.options.dimension) {
 			const newKeys = <any>[];
