@@ -54,6 +54,15 @@ export class DonutChart extends PieChart {
 			
 			this.svg.selectAll("path")
 				.attr("d", arc);
+
+			if (dimensionToUseForScale < 175) {
+				this.svg.select("text.donut-figure")
+					.style("font-size", 24 * scaleRatio * 2.5 + "px");
+
+				this.svg.select("text.donut-title")
+					.style("font-size", 15 * scaleRatio * 2.5 + "px")
+					.attr('y', Configuration.donut.centerText.title.y * scaleRatio * 2.5);
+			}
 		}
 	}
 }
