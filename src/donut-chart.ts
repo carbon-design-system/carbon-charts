@@ -8,9 +8,9 @@ export class DonutChart extends PieChart {
 	constructor(holder: Element, options?: any, data?: any) {
 		super(holder, options, data, "donut");
 
+		// Check if innerRadius has been provided
 		if (options.innerRadius) this.innerRadius = options.innerRadius;
 		else console.warn(`Donut Chart - Missing innerRadius, ${this.innerRadius} will be used`);
-		
 	}
 
 	draw() {
