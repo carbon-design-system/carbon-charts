@@ -151,10 +151,6 @@ export class PieChart extends BaseChart {
 			});
 	}
 
-	scaleToFit() {
-		// TODO
-	}
-
 	setSVG() {
 		const currentSVG = d3.select(this.holder).select('svg.chart-svg')
 		if (currentSVG) {
@@ -178,7 +174,6 @@ export class PieChart extends BaseChart {
 			this.update();
 			this.repositionSVG();
 			this.positionLegend();
-			this.scaleToFit();
 		}
 	}
 }

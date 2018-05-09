@@ -70,11 +70,27 @@ export class BaseChart {
 		if (this.options.type === "double-axis-line" || this.options.type === "combo") {
 			moreForY2Axis = Configuration.charts.magicMoreForY2Axis;
 		}
-
-		return {
+		
+		// Store computed actual size, to be considered for change if chart does not support axis
+		const marginsToExclude = (this.options.type === 'pie') ? 0 : (Configuration.charts.margin.left + Configuration.charts.margin.right)
+		const computedActualSize = {
 			height: container.node().clientHeight - marginForLegendTop,
-			width: (container.node().clientWidth - Configuration.charts.margin.left - Configuration.charts.margin.right - moreForY2Axis) * ratio
-		};
+			width: (container.node().clientWidth - marginsToExclude - moreForY2Axis) * ratio
+		}
+
+		// console.log("computedActualSize", computedActualSize)
+		// console.log("Configuration.charts.margin.right", Configuration.charts.margin.right, "Configuration.charts.margin.left", Configuration.charts.margin.left)
+
+		// If chart is of type pie or donut, width and height should equal to the min of the width and height computed
+		if (this.options.type === 'pie') {
+			const maxSizePossible = Math.min(computedActualSize.height, computedActualSize.width)
+			return {
+				height: maxSizePossible,
+				width: maxSizePossible
+			}
+		}
+		
+		return computedActualSize
 	}
 
 	getXKeys() {
