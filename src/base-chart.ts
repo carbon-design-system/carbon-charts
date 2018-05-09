@@ -57,6 +57,8 @@ export class BaseChart {
 	}
 
 	getActualChartSize(container = this.container) {
+		const noAxis = this.options.type === 'pie' || this.options.type === 'donut';
+
 		let ratio, marginForLegendTop;
 		let moreForY2Axis = 0;
 		if (container.node().clientWidth > Configuration.charts.widthBreak) {
@@ -72,15 +74,17 @@ export class BaseChart {
 		}
 		
 		// Store computed actual size, to be considered for change if chart does not support axis
-		const marginsToExclude = (this.options.type === 'pie') ? 0 : (Configuration.charts.margin.left + Configuration.charts.margin.right)
+		const marginsToExclude = (noAxis) ? 0 : (Configuration.charts.margin.left + Configuration.charts.margin.right)
 		const computedActualSize = {
 			height: container.node().clientHeight - marginForLegendTop,
 			width: (container.node().clientWidth - marginsToExclude - moreForY2Axis) * ratio
 		}
 
 		// If chart is of type pie or donut, width and height should equal to the min of the width and height computed
-		if (this.options.type === 'pie') {
-			const maxSizePossible = Math.min(computedActualSize.height, computedActualSize.width)
+		if (noAxis) {
+			let maxSizePossible = Math.min(computedActualSize.height, computedActualSize.width)
+			maxSizePossible = Math.max(maxSizePossible, 100);
+
 			return {
 				height: maxSizePossible,
 				width: maxSizePossible
