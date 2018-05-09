@@ -88,7 +88,8 @@ export class PieChart extends BaseChart {
 
 		this.svg
 			.attr("class", "inner-wrap")
-			.attr("transform", "translate(" + (actualChartSize.width / 2) +  "," + (actualChartSize.height / 2) + ")");
+			.attr("transform", "translate(" + (actualChartSize.width / 2) +  "," + (actualChartSize.height / 2) + ")")
+			.attr("preserveAspectRatio", "xMidYMid meet");
 
 		const arc = d3.arc()
 			.innerRadius(innerRadius * (innerRadius / 200))
@@ -123,6 +124,7 @@ export class PieChart extends BaseChart {
 	}
 
 	showTooltip(d) {
+		console.log(d)
 		this.resetOpacity();
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(this.holder).append("div")
@@ -164,7 +166,7 @@ export class PieChart extends BaseChart {
 				sel
 					.attr("stroke-width", Configuration.pie.mouseover.strokeWidth)
 					.attr("stroke-opacity", Configuration.pie.mouseover.strokeOpacity)
-					.attr("stroke", self.options.colors[d.index]);
+					.attr("stroke", self.options.colors[d.data.index]);
 			})
 			.on("mouseout", function(d) {
 				d3.select(this)
