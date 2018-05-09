@@ -16,6 +16,10 @@ export class PieChart extends BaseChart {
 
 		this.color = d3.scaleOrdinal()
 			.range(this.options.colors);
+
+		if (this.options.containerResizable) {
+			this.resizeWhenContainerChange();
+		}
 	}
 
 	drawChart(data?: any) {
@@ -34,9 +38,6 @@ export class PieChart extends BaseChart {
 		this.repositionSVG();
 		this.draw();
 		this.addDataPointEventListener();
-		if (this.options.containerResizable) {
-			this.setResizeWhenContainerChange();
-		}
 	}
 
 	draw(activeSeries = this.getActiveDataSeries()) {
@@ -53,7 +54,6 @@ export class PieChart extends BaseChart {
 		keys.forEach((value, idx) => {
 			const colorKey = value;
 			if (this.options.dimension) {
-				console.log("Dimension is there");
 				dataList = this.data.filter(d => d[this.options.dimension] === value);
 				value = this.options.yDomain[0];
 			}
@@ -161,5 +161,9 @@ export class PieChart extends BaseChart {
 				d3.select(this)
 					.attr("stroke", "");
 			});
+	}
+
+	updateChart() {
+		console.log("Update Chart - PIE");
 	}
 }
