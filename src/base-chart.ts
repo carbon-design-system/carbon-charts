@@ -220,7 +220,7 @@ export class BaseChart {
 				
 				// Hide tooltips
 				this.hideTooltip();
-				
+
 				this.updateChart();
 			}
 			requestAnimationFrame(frame);
@@ -413,14 +413,14 @@ export class BaseChart {
 
 	hasLegendExpandBtn() {
 		return (
-			this.container.node().clientWidth < Configuration.charts.widthBreak
+			this.container.node().clientWidth < Configuration.charts.widthBreak || this.container.node().clientHeight < this.container.select("ul.legend").node().clientHeight
 			// && this.getLegendItems().length > Configuration.legend.countBreak
 		);
 	}
 
 	isLegendOnRight() {
 		return (
-			this.container.node().clientWidth > Configuration.charts.widthBreak
+			this.container.node().clientWidth > Configuration.charts.widthBreak && this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight
 			// && this.getLegendItems().length > Configuration.legend.countBreak
 		);
 	}
