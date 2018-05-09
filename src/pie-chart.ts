@@ -69,7 +69,7 @@ export class PieChart extends BaseChart {
 			.attr("height", actualChartSize.height);
 
 		this.svg
-			.attr("class", "pie-chart")
+			.attr("class", "inner-wrap")
 			.attr("transform", "translate(" + (actualChartSize.width / 2) +  "," + (actualChartSize.height / 2) + ")");
 
 		const arc = d3.arc()
@@ -165,5 +165,21 @@ export class PieChart extends BaseChart {
 
 	updateChart() {
 		console.log("Update Chart - PIE");
+		if (this.svg) {
+			// update the root svg
+			this.updateSVG();
+			// these don't explicitly add elements, so they're "safe" to call
+			// this.setXScale();
+			// this.updateXAxis();
+			// this.setYScale();
+			// this.updateYAxis();
+			// this.drawXGrid();
+			// this.drawYGrid();
+			// // update the actual chart
+			// this.update();
+
+			this.repositionSVG();
+			this.positionLegend();
+		}
 	}
 }
