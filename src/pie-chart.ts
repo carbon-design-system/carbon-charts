@@ -96,9 +96,6 @@ export class PieChart extends BaseChart {
 		this.svg.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
 		this.svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
 		d3.select(exception).attr("fill-opacity", false);
-		if (this.options.type !== "pie") {
-			d3.select(exception.parentNode).select("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
-		}
 		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		d3.select(exception).attr("fill", d3.select(exception).attr("stroke"));
