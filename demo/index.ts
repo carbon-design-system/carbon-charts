@@ -4,7 +4,8 @@ import {
 	DoubleAxisLineChart,
 	StackedBarChart,
 	ComboChart,
-	PieChart
+	PieChart,
+	DonutChart
 } from "./../src/index";
 
 import "@peretz/matter/matter.css";
@@ -285,6 +286,19 @@ const dataNoXAxis = [
 	}
 ];
 
+const pieOptions = {
+	legendClickable: true,
+	containerResizable: true,
+	colors
+};
+
+const donutOptions = {
+	legendClickable: true,
+	containerResizable: true,
+	colors,
+	innerRadius: 170
+};
+
 const data = [];
 for (let i = 0; i < 10; i++) {
 	data.push({
@@ -407,7 +421,7 @@ const pieData = [
 		value: 400000
 	},
 	{
-		label: "L22I-P66EP-L22I",
+		label: "P66EP-L22I-L22I",
 		value: 450000
 	},
 	{
@@ -483,7 +497,14 @@ const chartTypes = [
 		id: "pie",
 		name: "pie",
 		avail: true,
-		options,
+		options: pieOptions,
+		data: pieData
+	},
+	{
+		id: "donut",
+		name: "donut",
+		avail: true,
+		options: donutOptions,
 		data: pieData
 	}
 ];
@@ -541,6 +562,14 @@ chartTypes.forEach(type => {
 					type.data
 				);
 				classyPieChart.drawChart();
+				break;
+			case "donut":
+				const classyDonutChart = new DonutChart(
+					classyContainer,
+					Object.assign({}, type.options, {type: type.id}),
+					type.data
+				);
+				classyDonutChart.drawChart();
 				break;
 		}
 	}
