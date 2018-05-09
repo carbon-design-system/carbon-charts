@@ -1,3 +1,4 @@
+@import "~@peretz/matter/scss/_tools.scss";
 $default_transition: all .1s ease-out;
 
 .chart-wrapper {
@@ -13,10 +14,34 @@ $default_transition: all .1s ease-out;
 			}
 		}
 	}
+	text {
+		font-size: 12px;
+		fill: #959595;
+		stroke: #959595;
+		stroke-width: .3;
+
+		&.donut {
+			&-figure {
+				font-size: 24px;
+				fill: m_color("gray", 60);
+			}
+
+			&-title {
+				font-size: 15px;
+				fill: m_color("gray", 60);
+			}
+		}
+	}
+	
+	tspan {
+		cursor: pointer;
+	}
+
 	.legend-wrapper {
 		height: 40px;
 		width: 100%;
 	}
+
 	.legend {
 		float: right;
 		margin-top: 0;
@@ -131,17 +156,6 @@ $default_transition: all .1s ease-out;
 		.legend-circle {
 			margin: 5px;
 		}
-	}
-
-	text {
-		font-size: 12px;
-		fill: #959595;
-		stroke: #959595;
-		stroke-width: .3;
-	}
-	
-	tspan {
-		cursor: pointer;
 	}
 }
 

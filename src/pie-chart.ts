@@ -140,7 +140,6 @@ export class PieChart extends BaseChart {
 			.text(function(d) { 
 				return Tools.convertValueToPercentage(d.data.value, dataList);
 			});
-  
 	}
 
 	reduceOpacity(exception) {
