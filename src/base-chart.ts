@@ -7,6 +7,7 @@ export class BaseChart {
 	static chartCount = 1;
 
 	//#region
+	arc: any;
 	id = "";
 	container: any;
 	holder: Element;
@@ -57,6 +58,7 @@ export class BaseChart {
 	}
 
 	getActualChartSize(container = this.container) {
+		console.log(container.node().clientWidth)
 		let ratio, marginForLegendTop;
 		let moreForY2Axis = 0;
 		if (container.node().clientWidth > Configuration.charts.widthBreak &&
