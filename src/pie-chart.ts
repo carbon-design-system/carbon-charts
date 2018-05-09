@@ -172,14 +172,16 @@ export class PieChart extends BaseChart {
 		const tooltipHTML = "<p class='bignum'>" + dVal + "</p><p>" + d.data.label + "</p>";
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
+			tooltip.classed("arrow-right", true);
 			tooltip.style(
 				"left",
 				d3.mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
 			);
-			tooltip.append("div").attr("class", "arrow arrow-right");
+			tooltip.append("div").attr("class", "arrow");
 		} else {
+			tooltip.classed("arrow-left", true);
 			tooltip.style("left", d3.mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
-			tooltip.append("div").attr("class", "arrow arrow-left");
+			tooltip.append("div").attr("class", "arrow");
 		}
 	}
 
