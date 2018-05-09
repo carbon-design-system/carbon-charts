@@ -24,7 +24,7 @@
     "d3": "^4.11.0"
   },
   "devDependencies": {
-    "@peretz/matter": "1.1.0",
+    "@peretz/matter": "^1.1.0",
     "@types/d3": "^4.11.0",
     "css-loader": "0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",

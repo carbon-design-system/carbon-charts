@@ -27,7 +27,6 @@ export class DonutChart extends PieChart {
 							.innerRadius(this.innerRadius * (actualChartSize.width / 516.6))
 							.outerRadius(radius);
 			
-							console.log(actualChartSize.width / 516.6)
 			this.svg.selectAll("path")
 				.attr("d", arc);
 		}

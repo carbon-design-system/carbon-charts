@@ -1,5 +1,24 @@
-body {
-	margin: 20px;
+$font-path: "../node_modules/@peretz/matter/fonts/";
+@import "../node_modules/@peretz/matter/scss/matter";
+
+$default_transition: all .1s ease-out;
+
+html, body { margin: 0; }
+
+header.m-demo-header {
+	margin-bottom: 20px;
+	padding: 50px 0;
+	text-align: left;
+
+	div {
+		width: 80%;
+		max-width: 800px;
+		margin: auto;
+
+		h1 {
+			margin-bottom: 10px;
+		}
+	}
 }
 
 .chart-type-selection {
@@ -30,22 +49,28 @@ body {
 	margin-top: 20px;
 }
 .chart-holder {
-	border: 1px solid #ECEEEF;
-	box-shadow: 1px 1px 2px grey;
-	margin: 30px auto;
+	box-shadow: 0 8px 34px -11px rgba(22, 56, 107, 0.15);
+	margin: 0 auto 60px auto;
 	display: block;
-	padding: 20px 30px;
+	padding: 30px;
 	height: 500px;
 	min-width: 300px;
 	max-width: 800px;
 	position: relative;
+	transition: box-shadow .1s ease-out;
 	// tmp
 	overflow: hidden;
 	resize: both;
 	//
+
 	h3 {
 		border-bottom: 1px solid lightgray;
 		margin: 0;
+	}
+
+	&:hover {
+		box-shadow: 0 8px 34px -11px rgba(22, 56, 107, 0.25);
+		transition: box-shadow .1s ease-out;
 	}
 }
 
