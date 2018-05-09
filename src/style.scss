@@ -14,10 +14,11 @@ $default_transition: all .1s ease-out;
 			}
 		}
 	}
+
 	text {
 		font-size: 12px;
-		fill: #959595;
-		stroke: #959595;
+		fill: m_color("gray", 60);
+		stroke: m_color("gray", 60);
 		stroke-width: .3;
 
 		&.donut {
@@ -165,7 +166,7 @@ $default_transition: all .1s ease-out;
 	display: block;
 	font-size: 12px;
 	position: absolute;
-	padding: 10px 20px 10px 10px;
+	padding: 10px;
 	max-width: 200px;
 	word-wrap: break-word;
 	z-index: 1059;
