@@ -38,8 +38,9 @@ export class PieChart extends BaseChart {
 		
 		this.data = sortedData.slice(0, 7)
 			.concat([{
-				label: "Other",
-				value: restAccumulatedValue
+				label: Configuration.pie.label.other,
+				value: restAccumulatedValue,
+				items: rest
 			}])
 			.map((item, i) => Object.assign(item, { index: i }));
 	}
@@ -168,7 +169,21 @@ export class PieChart extends BaseChart {
 			});
 
 		const dVal = d.value.toLocaleString();
-		const tooltipHTML = "<p class='bignum'>" + dVal + "</p><p>" + d.data.label + "</p>";
+		let tooltipHTML = `
+			<p class='bignum'>${dVal}</p>
+			<p>${d.data.label}</p>
+		`;
+
+		if (d.data.label === Configuration.pie.label.other) {
+			const { items } = d.data;
+
+			items.map(item => {
+				tooltipHTML += `
+					<p>${item.label}: ${item.value.toLocaleString()}</p>
+				`;
+			})
+		}
+
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
 			tooltip.classed("arrow-right", true);
