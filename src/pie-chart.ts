@@ -62,7 +62,7 @@ export class PieChart extends BaseChart {
 		this.addDataPointEventListener();
 	}
 
-	draw(innerRadius = 0) {
+	draw() {
 		const activeSeries = this.getActiveDataSeries()
 		let keys: any = []
 		  , dataList = this.data;
@@ -92,7 +92,7 @@ export class PieChart extends BaseChart {
 			.attr("preserveAspectRatio", "xMidYMid meet");
 
 		const arc = d3.arc()
-			.innerRadius(innerRadius * (innerRadius / 200))
+			.innerRadius(this.options.type === 'donut' ? (radius * (2/3)) : 0)
 			.outerRadius(radius);
 
 		const pie = d3.pie()
@@ -124,8 +124,8 @@ export class PieChart extends BaseChart {
 	}
 
 	showTooltip(d) {
-		console.log(d)
 		this.resetOpacity();
+		
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
