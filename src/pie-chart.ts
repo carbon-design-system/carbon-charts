@@ -15,11 +15,11 @@ export class PieChart extends BaseChart {
 		if (duplicates.length > 0) {
 			console.error(`${Tools.capitalizeFirstLetter(this.options.type)} Chart - You have duplicate keys`, duplicates);
 		}
-		
+
 		// Process data, and generate keys for legend
 		this.sortAndRepartitionData();
 		this.data.map((entry) => {
-			keys.push(entry.label)
+			keys.push(entry.label);
 		});
 
 		this.options.yDomain = keys;
@@ -35,8 +35,8 @@ export class PieChart extends BaseChart {
 		const sortedData = this.data.sort((a, b) => b.value - a.value)
 			, stopAt = Configuration.pie.sliceLimit
 			, rest = sortedData.slice(stopAt)
-			, restAccumulatedValue = rest.reduce((accum, item) => accum + item.value, 0)
-		
+			, restAccumulatedValue = rest.reduce((accum, item) => accum + item.value, 0);
+
 		this.data = sortedData.slice(0, stopAt)
 			.concat([{
 				label: Configuration.pie.label.other,
@@ -65,20 +65,20 @@ export class PieChart extends BaseChart {
 	}
 
 	draw() {
-		const activeSeries = this.getActiveDataSeries()
+		const activeSeries = this.getActiveDataSeries();
 		let keys: any = []
-		  , dataList = this.data;
-		
+			, dataList = this.data;
+
 		if (activeSeries) {
 			keys = activeSeries;
 
-			dataList = dataList.filter(item => keys.indexOf(item.label) > -1)
+			dataList = dataList.filter(item => keys.indexOf(item.label) > -1);
 		} else {
 			dataList = dataList.map((entry) => {
 				keys.push(entry.label);
 			});
 		}
-		
+
 		this.options.yDomain = keys;
 
 		const actualChartSize: any = this.getActualChartSize(this.container);
@@ -96,7 +96,7 @@ export class PieChart extends BaseChart {
 		const { pie: pieConfigs } = Configuration
 			, marginedRadius = radius - (pieConfigs.label.margin * (actualChartSize.width / pieConfigs.maxWidth))
 			, arc = d3.arc()
-				.innerRadius(this.options.type === 'donut' ? (marginedRadius * (2/3)) : 0)
+				.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
 				.outerRadius(marginedRadius);
 
 		const pie = d3.pie()
@@ -116,19 +116,23 @@ export class PieChart extends BaseChart {
 			}.bind(this));
 
 		this.svg
-			.selectAll('g.inner-wrap')
+			.selectAll("g.inner-wrap")
 			.data(pie(dataList))
 			.enter()
 			.append("text")
 			.attr("transform", function(d) {
-				const theta = d.endAngle - d.startAngle
+				const theta = d.endAngle - d.startAngle;
 
-				return "translate(" + (radius * Math.sin((theta / 2) + d.startAngle )) + "," + (-1 * radius * Math.cos((theta / 2) + d.startAngle )) + ")"; })
+				return "translate(" +
+						(radius * Math.sin((theta / 2) + d.startAngle )) +
+						"," +
+						(-1 * radius * Math.cos((theta / 2) + d.startAngle )) + ")";
+			})
 			.attr("dy", Configuration.pie.label.dy)
 			.style("text-anchor", function(d) {
 				const QUADRANT = Math.PI / 4
 					, rads = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
-				
+
 				if (rads >= QUADRANT && rads <= 3 * QUADRANT) {
 					return "start";
 				} else if ((rads > 7 * QUADRANT && rads < QUADRANT) || (rads > 3 * QUADRANT && rads < 5 * QUADRANT)) {
@@ -139,7 +143,7 @@ export class PieChart extends BaseChart {
 					return "middle";
 				}
 			})
-			.text(function(d) { 
+			.text(function(d) {
 				return Tools.convertValueToPercentage(d.data.value, dataList);
 			});
 	}
@@ -182,7 +186,7 @@ export class PieChart extends BaseChart {
 				tooltipHTML += `
 					<p>${item.label}: ${item.value.toLocaleString()}</p>
 				`;
-			})
+			});
 		}
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
@@ -223,7 +227,7 @@ export class PieChart extends BaseChart {
 	}
 
 	setSVG() {
-		const currentSVG = d3.select(this.holder).select('svg.chart-svg')
+		const currentSVG = d3.select(this.holder).select("svg.chart-svg");
 		if (currentSVG) {
 			currentSVG.remove();
 		}
@@ -248,7 +252,7 @@ export class PieChart extends BaseChart {
 			// const actualChartSize: any = this.getActualChartSize(this.container)
 			// 	, dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height)
 			// 	, radius: number = dimensionToUseForScale / 2
-			
+
 			// const { pie: pieConfigs } = Configuration
 			// 	, scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth
 

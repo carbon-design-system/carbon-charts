@@ -32,7 +32,7 @@ export class DonutChart extends PieChart {
 				.append("text")
 				.attr("class", "donut-title")
 				.attr("text-anchor", "middle")
-				.attr('y', Configuration.donut.centerText.title.y)
+				.attr("y", Configuration.donut.centerText.title.y)
 				.text(this.title);
 		}
 	}
@@ -40,18 +40,18 @@ export class DonutChart extends PieChart {
 	updateChart() {
 		if (this.svg) {
 			super.updateChart();
-			
+
 			const actualChartSize: any = this.getActualChartSize(this.container)
 				, dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height)
-				, radius: number = dimensionToUseForScale / 2
-			
+				, radius: number = dimensionToUseForScale / 2;
+
 			const { pie: pieConfigs } = Configuration
 				, scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth
 				, marginedRadius = radius - (pieConfigs.label.margin * scaleRatio)
 				, arc = d3.arc()
-							.innerRadius(marginedRadius * (2/3))
+							.innerRadius(marginedRadius * (2 / 3))
 							.outerRadius(marginedRadius);
-			
+
 			this.svg.selectAll("path")
 				.attr("d", arc);
 
@@ -61,7 +61,7 @@ export class DonutChart extends PieChart {
 
 				this.svg.select("text.donut-title")
 					.style("font-size", 15 * scaleRatio * 2.5 + "px")
-					.attr('y', Configuration.donut.centerText.title.y * scaleRatio * 2.5);
+					.attr("y", Configuration.donut.centerText.title.y * scaleRatio * 2.5);
 			}
 		}
 	}

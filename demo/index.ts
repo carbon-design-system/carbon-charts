@@ -12,10 +12,10 @@ import {
 import "./index.scss";
 import "@peretz/matter/matter.css";
 
-import Prism from 'prismjs';
-import loadLanguages from 'prismjs/components/index.js';
+import Prism from "prismjs";
+import loadLanguages from "prismjs/components/index.js";
 import { html } from "d3";
-loadLanguages(['haml', 'javascript']);
+loadLanguages(["haml", "javascript"]);
 
 const colors = [
 	"#009BEF",
@@ -590,18 +590,18 @@ chartTypes.forEach(type => {
 window["switchTabs"] = (e, chartType, tabID) => {
 	e.preventDefault();
 
-	const disable = tabID === 'html' ? 'js' : 'html'
+	const disable = tabID === "html" ? "js" : "html";
 	const tab = document.getElementById(`code-${chartType}`);
 
-	tab.querySelector(`a.tabs-anchor.${disable}`).setAttribute('aria-selected', "false");
-	tab.querySelector(`a.tabs-anchor.${tabID}`).setAttribute('aria-selected', "true");
+	tab.querySelector(`a.tabs-anchor.${disable}`).setAttribute("aria-selected", "false");
+	tab.querySelector(`a.tabs-anchor.${tabID}`).setAttribute("aria-selected", "true");
 
-	tab.querySelector(`div.tabs-panel.${disable}`).setAttribute('hidden', "true");
-	tab.querySelector(`div.tabs-panel.${tabID}`).removeAttribute('hidden');
+	tab.querySelector(`div.tabs-panel.${disable}`).setAttribute("hidden", "true");
+	tab.querySelector(`div.tabs-panel.${tabID}`).removeAttribute("hidden");
 };
 
 const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
-const formatChartName = (name) => name.split(' ').map(item => capitalizeFirstLetter(item)).join('') + 'Chart'
+const formatChartName = (name) => name.split(" ").map(item => capitalizeFirstLetter(item)).join("") + "Chart";
 
 chartTypes.forEach(type => {
 	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
@@ -609,7 +609,7 @@ chartTypes.forEach(type => {
 		const formattedChartName = formatChartName(type.name);
 
 		const htmlCode = `<div id="${classyContainer.id}"></div>`
-			, htmlHighlightedCode = Prism.highlight(htmlCode, Prism.languages.haml, 'haml');
+			, htmlHighlightedCode = Prism.highlight(htmlCode, Prism.languages.haml, "haml");
 
 		const jsCode = `
 const data = ${JSON.stringify(type.data)};
@@ -623,26 +623,32 @@ const classy${formattedChartName} = new ${formattedChartName}(
 );
 
 classy${formattedChartName}.drawChart();`
-			, jsHighlightedCode = Prism.highlight(jsCode, Prism.languages.javascript, 'javascript');
+			, jsHighlightedCode = Prism.highlight(jsCode, Prism.languages.javascript, "javascript");
 
 		const el = document.createElement("div");
-		el.classList.add('code');
+		el.classList.add("code");
 		el.innerHTML = `
 <div id="code-${type.id}">
 	<div class="tabs">
 		<div>
 			<ul role="tablist" aria-label="Demo Code">
 				<li>
-					<a class="tabs-anchor js" href="#" onclick="switchTabs(event, '${type.id}', 'js');" role="tab" aria-selected="true" aria-controls="js-tab-a">JS</a>
+					<a class="tabs-anchor js" href="#" onclick="switchTabs(event, '${type.id}', 'js');" role="tab"
+					   aria-selected="true" aria-controls="js-tab-a">
+					   JS
+					</a>
 				</li>
 
 				<li>
-					<a class="tabs-anchor html" href="#" onclick="switchTabs(event, '${type.id}', 'html');" role="tab" aria-selected="false" aria-controls="html-tab-a">HTML</a>
+					<a class="tabs-anchor html" href="#" onclick="switchTabs(event, '${type.id}', 'html');" role="tab"
+					   aria-selected="false" aria-controls="html-tab-a">
+						HTML
+					</a>
 				</li>
 			</ul>
 		</div>
 	</div>
-	
+
 	<div class="tabs-panel js" role="tabpanel" aria-labelledby="js-a">
 		<pre class="demo-code">
 			${jsHighlightedCode}
@@ -658,4 +664,4 @@ classy${formattedChartName}.drawChart();`
 		`;
 		classyContainer.parentNode.insertBefore(el, classyContainer.nextSibling);
 	}
-})
+});

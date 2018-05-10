@@ -41,7 +41,7 @@ export class BaseAxisChart extends BaseChart {
 		grid.append("g")
 			.attr("class", "y grid")
 			.attr("transform", `translate(0, 0)`);
-		
+
 		return this.svg;
 	}
 

@@ -21,10 +21,10 @@ export namespace Tools {
 	export function duplicateKeysInData(data: any) {
 		const keys = []
 			, duplicateKeys = [];
-		
+
 		data.map(item => {
 			const key = item.label;
-			if (keys.indexOf(key) > -1 && duplicateKeys.indexOf(key) === -1) duplicateKeys.push(key);
+			if (keys.indexOf(key) > -1 && duplicateKeys.indexOf(key) === -1) { duplicateKeys.push(key); }
 
 			keys.push(key);
 		});
@@ -46,9 +46,9 @@ export namespace Tools {
 
 	export function getDimensions(el) {
 		return {
-			width: parseFloat(el.style.width.replace('px', '') || el.offsetWidth),
-			height: parseFloat(el.style.height.replace('px', '') || el.offsetHeight)
-		}
+			width: parseFloat(el.style.width.replace("px", "") || el.offsetWidth),
+			height: parseFloat(el.style.height.replace("px", "") || el.offsetHeight)
+		};
 	}
 
 	export function capitalizeFirstLetter(string) {

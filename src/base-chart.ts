@@ -57,7 +57,7 @@ export class BaseChart {
 	}
 
 	getActualChartSize(container = this.container) {
-		const noAxis = this.options.type === 'pie' || this.options.type === 'donut';
+		const noAxis = this.options.type === "pie" || this.options.type === "donut";
 
 		let ratio, marginForLegendTop;
 		let moreForY2Axis = 0;
@@ -72,26 +72,26 @@ export class BaseChart {
 		if (this.options.type === "double-axis-line" || this.options.type === "combo") {
 			moreForY2Axis = Configuration.charts.magicMoreForY2Axis;
 		}
-		
+
 		// Store computed actual size, to be considered for change if chart does not support axis
-		const marginsToExclude = (noAxis) ? 0 : (Configuration.charts.margin.left + Configuration.charts.margin.right)
+		const marginsToExclude = (noAxis) ? 0 : (Configuration.charts.margin.left + Configuration.charts.margin.right);
 		const computedActualSize = {
 			height: container.node().clientHeight - marginForLegendTop,
 			width: (container.node().clientWidth - marginsToExclude - moreForY2Axis) * ratio
-		}
+		};
 
 		// If chart is of type pie or donut, width and height should equal to the min of the width and height computed
 		if (noAxis) {
-			let maxSizePossible = Math.min(computedActualSize.height, computedActualSize.width)
+			let maxSizePossible = Math.min(computedActualSize.height, computedActualSize.width);
 			maxSizePossible = Math.max(maxSizePossible, 100);
 
 			return {
 				height: maxSizePossible,
 				width: maxSizePossible
-			}
+			};
 		}
-		
-		return computedActualSize
+
+		return computedActualSize;
 	}
 
 	getXKeys() {
@@ -146,7 +146,7 @@ export class BaseChart {
 		this.svg.append("g")
 			.attr("class", "y axis")
 			.attr("transform", `translate(0, 0)`);
-			
+
 		return this.svg;
 	}
 
@@ -217,7 +217,7 @@ export class BaseChart {
 				containerWidth = this.holder.clientWidth;
 				containerHeight = this.holder.clientHeight;
 				d3.selectAll(".legend-tooltip").style("display", "none");
-				
+
 				// Hide tooltips
 				this.hideTooltip();
 
@@ -364,7 +364,7 @@ export class BaseChart {
 
 	positionLegend() {
 		if (this.container.select(".legend-tooltip").nodes().length > 0
-			&& this.container.select(".legend-tooltip").node().style.display === "block") return;
+			&& this.container.select(".legend-tooltip").node().style.display === "block") { return; }
 
 		this.container.selectAll(".legend-btn").style("display", "inline-block");
 		const svgWidth = this.container.select(".inner-wrap").node().getBBox().width;
@@ -413,14 +413,18 @@ export class BaseChart {
 
 	hasLegendExpandBtn() {
 		return (
-			this.container.node().clientWidth < Configuration.charts.widthBreak || this.container.node().clientHeight < this.container.select("ul.legend").node().clientHeight
+			this.container.node().clientWidth < Configuration.charts.widthBreak ||
+				this.container.node().clientHeight < this.container.select("ul.legend").node().clientHeight
+
 			// && this.getLegendItems().length > Configuration.legend.countBreak
 		);
 	}
 
 	isLegendOnRight() {
 		return (
-			this.container.node().clientWidth > Configuration.charts.widthBreak && this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight
+			this.container.node().clientWidth > Configuration.charts.widthBreak &&
+				this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight
+
 			// && this.getLegendItems().length > Configuration.legend.countBreak
 		);
 	}
