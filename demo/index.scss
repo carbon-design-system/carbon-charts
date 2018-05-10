@@ -50,7 +50,7 @@ header.m-demo-header {
 .chart-holder {
 	border: 1px solid rgba(24, 62, 117, 0.2);
 	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
-	margin: 0 auto;
+	margin: 0 auto 60px auto;
 	display: block;
 	padding: 30px;
 	height: 500px;
@@ -71,6 +71,10 @@ header.m-demo-header {
 	&:hover {
 		box-shadow: 0 15px 45px -11px rgba(22, 56, 107, 0.15);
 		transition: box-shadow .1s ease-out;
+	}
+
+	&:last-child {
+		margin-bottom: 30px;
 	}
 }
 

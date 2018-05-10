@@ -4,36 +4,23 @@ import { Configuration } from "./configuration";
 import { Tools } from "./tools";
 
 export class DonutChart extends PieChart {
-	figure: number;
-	title: string;
+	donutCenter: DonutCenter;
 
 	constructor(holder: Element, options?: any, data?: any) {
 		super(holder, options, data, "donut");
 
-		// Check if figure & title have been provided
-		if (options.figure && options.title) {
-			this.figure = options.figure;
-			this.title = options.title;
+		// Check if the DonutCenter object is provided
+		if (options.center) {
+			this.donutCenter = options.center;
 		}
 	}
 
 	draw() {
 		super.draw();
 
-		// Add the center text (figure & title)
-		if (this.figure && this.title) {
-			this.svg
-				.append("text")
-				.attr("class", "donut-figure")
-				.attr("text-anchor", "middle")
-				.text(this.figure.toLocaleString());
-
-			this.svg
-				.append("text")
-				.attr("class", "donut-title")
-				.attr("text-anchor", "middle")
-				.attr("y", Configuration.donut.centerText.title.y)
-				.text(this.title);
+		// Draw the center text
+		if (this.donutCenter && this.donutCenter.configs) {
+			this.donutCenter.draw(this.svg);
 		}
 	}
 
@@ -66,5 +53,31 @@ export class DonutChart extends PieChart {
 					.attr("y", Configuration.donut.centerText.title.y * scaleRatio * Configuration.donut.centerText.magicScaleRatio);
 			}
 		}
+	}
+}
+
+export class DonutCenter {
+	configs: any;
+	constructor(configs: any) {
+		if (configs) {
+			this.configs = configs;
+		} else {
+			console.error("Configuration object is missing for DonutCenter");
+		}
+	}
+
+	draw (svg: any) {
+		// Add the number shown in the center of the donut
+		svg.append("text")
+			.attr("class", "donut-figure")
+			.attr("text-anchor", "middle")
+			.text(this.configs.number.toLocaleString());
+
+		// Add the label below the number in the center of the donut
+		svg.append("text")
+			.attr("class", "donut-title")
+			.attr("text-anchor", "middle")
+			.attr("y", Configuration.donut.centerText.title.y)
+			.text(this.configs.label);
 	}
 }

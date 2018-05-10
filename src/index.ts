@@ -8,7 +8,7 @@ import { DoubleAxisLineChart } from "./double-axis-line-chart";
 import { LineChart } from "./line-chart";
 import { StackedBarChart } from "./stacked-bar-chart";
 import { PieChart } from "./pie-chart";
-import { DonutChart } from "./donut-chart";
+import { DonutChart, DonutCenter } from "./donut-chart";
 import { Tools } from "./tools";
 
 import "./style.scss";
@@ -22,5 +22,6 @@ export {
 	StackedBarChart,
 	ComboChart,
 	PieChart,
-	DonutChart
+	DonutChart,
+	DonutCenter
 };
