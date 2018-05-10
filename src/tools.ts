@@ -19,8 +19,8 @@ export namespace Tools {
 	}
 
 	export function duplicateKeysInData(data: any) {
-		const keys = []
-			, duplicateKeys = [];
+		const keys = [];
+		const duplicateKeys = [];
 
 		data.map(item => {
 			const key = item.label;
