@@ -651,13 +651,13 @@ classy${formattedChartName}.drawChart();`
 
 	<div class="tabs-panel js" role="tabpanel" aria-labelledby="js-a">
 		<pre class="demo-code">
-			${jsHighlightedCode}
+${jsHighlightedCode}
 		</pre>
 	</div>
 
 	<div class="tabs-panel html" role="tabpanel" aria-labelledby="html-a" hidden="">
 		<pre class="demo-code">
-			${htmlHighlightedCode}
+${htmlHighlightedCode}
 		</pre>
 	</div>
 </div>
