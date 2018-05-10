@@ -55,13 +55,15 @@ export class DonutChart extends PieChart {
 			this.svg.selectAll("path")
 				.attr("d", arc);
 
-			if (dimensionToUseForScale < 175) {
+			// If the dimensions of the chart are smaller than a certain number (e.g. 175x175)
+			// Resize the center text sizes
+			if (dimensionToUseForScale < Configuration.donut.centerText.breakpoint) {
 				this.svg.select("text.donut-figure")
-					.style("font-size", 24 * scaleRatio * 2.5 + "px");
+					.style("font-size", 24 * scaleRatio * Configuration.donut.centerText.magicScaleRatio + "px");
 
 				this.svg.select("text.donut-title")
-					.style("font-size", 15 * scaleRatio * 2.5 + "px")
-					.attr("y", Configuration.donut.centerText.title.y * scaleRatio * 2.5);
+					.style("font-size", 15 * scaleRatio * Configuration.donut.centerText.magicScaleRatio + "px")
+					.attr("y", Configuration.donut.centerText.title.y * scaleRatio * Configuration.donut.centerText.magicScaleRatio);
 			}
 		}
 	}

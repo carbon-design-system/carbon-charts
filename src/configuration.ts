@@ -103,7 +103,9 @@ export namespace Configuration {
 		centerText: {
 			title: {
 				y: 22
-			}
+			},
+			breakpoint: 175,
+			magicScaleRatio: 2.5
 		}
 	};
 

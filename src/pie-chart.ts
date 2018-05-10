@@ -32,10 +32,10 @@ export class PieChart extends BaseChart {
 	// Sort data by value (descending)
 	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
 	sortAndRepartitionData() {
-		const sortedData = this.data.sort((a, b) => b.value - a.value)
-			, stopAt = Configuration.pie.sliceLimit
-			, rest = sortedData.slice(stopAt)
-			, restAccumulatedValue = rest.reduce((accum, item) => accum + item.value, 0);
+		const sortedData = this.data.sort((a, b) => b.value - a.value);
+		const stopAt = Configuration.pie.sliceLimit;
+		const rest = sortedData.slice(stopAt);
+		const restAccumulatedValue = rest.reduce((accum, item) => accum + item.value, 0);
 
 		this.data = sortedData.slice(0, stopAt)
 			.concat([{
@@ -66,8 +66,8 @@ export class PieChart extends BaseChart {
 
 	draw() {
 		const activeSeries = this.getActiveDataSeries();
-		let keys: any = []
-			, dataList = this.data;
+		let keys: any = [];
+		let dataList = this.data;
 
 		if (activeSeries) {
 			keys = activeSeries;
@@ -249,6 +249,7 @@ export class PieChart extends BaseChart {
 			this.repositionSVG();
 			this.positionLegend();
 
+			// TODO - Finish this for optimized text resizing logic
 			// const actualChartSize: any = this.getActualChartSize(this.container)
 			// 	, dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height)
 			// 	, radius: number = dimensionToUseForScale / 2
