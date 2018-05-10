@@ -600,9 +600,14 @@ window["switchTabs"] = (e, chartType, tabID) => {
 	tab.querySelector(`div.tabs-panel.${tabID}`).removeAttribute('hidden');
 };
 
+const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+const formatChartName = (name) => name.split(' ').map(item => capitalizeFirstLetter(item)).join('') + 'Chart'
+
 chartTypes.forEach(type => {
 	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
 	if (classyContainer) {
+		const formattedChartName = formatChartName(type.name);
+
 		const htmlCode = `<div id="${classyContainer.id}"></div>`
 			, htmlHighlightedCode = Prism.highlight(htmlCode, Prism.languages.haml, 'haml');
 
@@ -611,13 +616,13 @@ const data = ${JSON.stringify(type.data)};
 const options = ${JSON.stringify(type.options)};
 const classyContainer = document.getElementById('classy-${type.id}-chart-holder');
 
-const classyBarChart = new BarChart(
+const classy${formattedChartName} = new ${formattedChartName}(
 	classyContainer,
 	Object.assign({}, options, {type: '${type.id}'}),
 	data
 );
 
-classyBarChart.drawChart();`
+classy${formattedChartName}.drawChart();`
 			, jsHighlightedCode = Prism.highlight(jsCode, Prism.languages.javascript, 'javascript');
 
 		const el = document.createElement("div");
