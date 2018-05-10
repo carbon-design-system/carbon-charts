@@ -28,14 +28,14 @@ export class DonutChart extends PieChart {
 		if (this.svg) {
 			super.updateChart();
 
-			const actualChartSize: any = this.getActualChartSize(this.container)
-				, dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height)
-				, radius: number = dimensionToUseForScale / 2;
+			const actualChartSize: any = this.getActualChartSize(this.container);
+			const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
+			const radius: number = dimensionToUseForScale / 2;
 
-			const { pie: pieConfigs } = Configuration
-				, scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth
-				, marginedRadius = radius - (pieConfigs.label.margin * scaleRatio)
-				, arc = d3.arc()
+			const { pie: pieConfigs } = Configuration;
+			const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
+			const marginedRadius = radius - (pieConfigs.label.margin * scaleRatio);
+			const arc = d3.arc()
 							.innerRadius(marginedRadius * (2 / 3))
 							.outerRadius(marginedRadius);
 
