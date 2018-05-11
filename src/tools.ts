@@ -58,6 +58,6 @@ export namespace Tools {
 	}
 
 	export function convertValueToPercentage(item, fullData) {
-		return Math.floor(item / (fullData.reduce((accum, val) => accum + val.value, 0)) * 100) + "%";
+		return Math.floor(item / fullData.reduce((accum, val) => accum + val.value, 0) * 100) + "%";
 	}
 }

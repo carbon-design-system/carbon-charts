@@ -18,7 +18,7 @@ export class PieChart extends BaseChart {
 
 		// Process data, and generate keys for legend
 		this.sortAndRepartitionData();
-		this.data.map((entry) => {
+		this.data.map(entry => {
 			keys.push(entry.label);
 		});
 
@@ -70,7 +70,7 @@ export class PieChart extends BaseChart {
 
 			dataList = dataList.filter(item => keys.indexOf(item.label) > -1);
 		} else {
-			dataList = dataList.map((entry) => {
+			dataList = dataList.map(entry => {
 				keys.push(entry.label);
 			});
 		}

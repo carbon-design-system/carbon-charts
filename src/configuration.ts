@@ -105,7 +105,9 @@ export namespace Configuration {
 				y: 22
 			},
 			breakpoint: 175,
-			magicScaleRatio: 2.5
+			magicScaleRatio: 2.5,
+			numberFontSize: 24,
+			titleFontSize: 15
 		}
 	};
 

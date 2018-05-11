@@ -36,8 +36,8 @@ export class DonutChart extends PieChart {
 			const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
 			const marginedRadius = radius - (pieConfigs.label.margin * scaleRatio);
 			const arc = d3.arc()
-							.innerRadius(marginedRadius * (2 / 3))
-							.outerRadius(marginedRadius);
+				.innerRadius(marginedRadius * (2 / 3))
+				.outerRadius(marginedRadius);
 
 			this.svg.selectAll("path")
 				.attr("d", arc);
@@ -46,10 +46,12 @@ export class DonutChart extends PieChart {
 			// Resize the center text sizes
 			if (dimensionToUseForScale < Configuration.donut.centerText.breakpoint) {
 				this.svg.select("text.donut-figure")
-					.style("font-size", 24 * scaleRatio * Configuration.donut.centerText.magicScaleRatio + "px");
+					.style("font-size",
+						Configuration.donut.centerText.numberFontSize * scaleRatio * Configuration.donut.centerText.magicScaleRatio + "px"
+					);
 
 				this.svg.select("text.donut-title")
-					.style("font-size", 15 * scaleRatio * Configuration.donut.centerText.magicScaleRatio + "px")
+					.style("font-size", Configuration.donut.centerText.titleFontSize * scaleRatio * Configuration.donut.centerText.magicScaleRatio + "px")
 					.attr("y", Configuration.donut.centerText.title.y * scaleRatio * Configuration.donut.centerText.magicScaleRatio);
 			}
 		}
@@ -58,6 +60,7 @@ export class DonutChart extends PieChart {
 
 export class DonutCenter {
 	configs: any;
+
 	constructor(configs: any) {
 		if (configs) {
 			this.configs = configs;

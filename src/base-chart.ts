@@ -74,7 +74,7 @@ export class BaseChart {
 		}
 
 		// Store computed actual size, to be considered for change if chart does not support axis
-		const marginsToExclude = (noAxis) ? 0 : (Configuration.charts.margin.left + Configuration.charts.margin.right);
+		const marginsToExclude = noAxis ? 0 : (Configuration.charts.margin.left + Configuration.charts.margin.right);
 		const computedActualSize = {
 			height: container.node().clientHeight - marginForLegendTop,
 			width: (container.node().clientWidth - marginsToExclude - moreForY2Axis) * ratio
@@ -508,16 +508,15 @@ export class BaseChart {
 		tooltip.append("p").text(d);
 
 		if (leftSide) {
-			tooltip.classed("arrow-left", true);
-
-			tooltip.style("left", mouseXPoint + "px");
-			tooltip.append("div").attr("class", "arrow");
+			tooltip.classed("arrow-left", true)
+					.style("left", mouseXPoint + "px")
+					.append("div").attr("class", "arrow");
 		} else {
 			tooltip.classed("arrow-right", true);
 
 			const xPoint = mouseXPoint - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicXPoint2;
-			tooltip.style("left", xPoint + "px");
-			tooltip.append("div").attr("class", "arrow");
+			tooltip.style("left", xPoint + "px")
+					.append("div").attr("class", "arrow");
 		}
 	}
 
