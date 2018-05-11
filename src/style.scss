@@ -1,3 +1,6 @@
+@import "~@peretz/matter/scss/_tools.scss";
+$default_transition: all .1s ease-out;
+
 .chart-wrapper {
 	width: 100%;
 	height: 100%;
@@ -11,10 +14,35 @@
 			}
 		}
 	}
+
+	text {
+		font-size: 12px;
+		fill: m_color("gray", 60);
+		stroke: m_color("gray", 60);
+		stroke-width: .3;
+
+		&.donut {
+			&-figure {
+				font-size: 24px;
+				fill: m_color("gray", 60);
+			}
+
+			&-title {
+				font-size: 15px;
+				fill: m_color("gray", 60);
+			}
+		}
+	}
+	
+	tspan {
+		cursor: pointer;
+	}
+
 	.legend-wrapper {
 		height: 40px;
 		width: 100%;
 	}
+
 	.legend {
 		float: right;
 		margin-top: 0;
@@ -98,10 +126,12 @@
 			padding-left: 0;
 			margin: 20px 5px 20px;
 		}
-		.arrow-right {
+
+		&.arrow-right .arrow {
 			border-left: 11px solid #2D74DA;
 		}
-		.arrow-left {
+
+		&.arrow-left .arrow {
 			border-right: 10px solid #2D74DA;
 		}
 	}
@@ -128,18 +158,6 @@
 			margin: 5px;
 		}
 	}
-
-	.axis {
-		text {
-			font-size: 12px;
-			fill: #959595;
-			stroke: #959595;
-			stroke-width: .3;
-		}
-		tspan {
-			cursor: pointer;
-		}
-	}
 }
 
 .tooltip {
@@ -148,8 +166,7 @@
 	display: block;
 	font-size: 12px;
 	position: absolute;
-	padding: 10px 20px 10px 10px;
-	border-top: 4px solid #2D74DA;
+	padding: 10px;
 	max-width: 200px;
 	word-wrap: break-word;
 	z-index: 1059;
@@ -166,47 +183,68 @@
 		right: 10px;
 		top: 5px;
 	}
+	
 	.arrow {
 		position: absolute;
-	}
-
-	.arrow-up {
 		width: 0;
 		height: 0;
+	}
+
+	&.arrow-up .arrow {
 		border-left: 10px solid transparent;
 		border-right: 10px solid transparent;
 		border-bottom: 11px solid black;
 	}
 
-	.arrow-down {
-		width: 0;
-		height: 0;
+	&.arrow-down .arrow {
 		border-left: 10px solid transparent;
 		border-right: 10px solid transparent;
 		border-top: 11px solid #f00;
 	}
 
-	.arrow-right {
-		width: 0;
-		height: 0;
-		border-top: 10px solid transparent;
-		border-bottom: 10px solid transparent;
-		border-left: 11px solid white;
-		right: -10px;
-		top: 10px;
+	&.arrow-right {
+		border-left: 4px solid #2D74DA;
+		
+		.arrow {
+			border-top: 10px solid transparent;
+			border-bottom: 10px solid transparent;
+			border-left: 11px solid white;
+			right: -10px;
+			top: 10px;
+		}
 	}
 
-	.arrow-left {
-		width: 0;
-		height: 0;
-		border-top: 10px solid transparent;
-		border-bottom: 10px solid transparent;
-		border-right: 10px solid white;
-		left: -9px;
-		top: 9px;
+	&.arrow-left {
+		border-right: 4px solid #2D74DA;
+
+		.arrow {
+			border-top: 10px solid transparent;
+			border-bottom: 10px solid transparent;
+			border-right: 10px solid white;
+			left: -9px;
+			top: 9px;
+		}
+	}
+
+	p {
+		margin-bottom: 5px;
+
+		&.bignum {
+			margin-top: 15px;
+			font-size: 27px;
+		}
 	}
 }
 
 .chart-tooltip {
 	width: 200px;
+}
+
+.pie-chart {
+	path {
+		transition: $default_transition;
+		&:hover {
+			cursor: pointer;
+		}
+	}
 }

@@ -1,5 +1,23 @@
-body {
-	margin: 20px;
+$default_transition: all .1s ease-out;
+
+@import "../node_modules/prismjs/themes/prism.css";
+
+html, body { margin: 0; }
+
+header.m-demo-header {
+	margin-bottom: 20px;
+	padding: 50px 0;
+	text-align: left;
+
+	div {
+		width: 80%;
+		max-width: 800px;
+		margin: auto;
+
+		h1 {
+			margin-bottom: 5px;
+		}
+	}
 }
 
 .chart-type-selection {
@@ -30,22 +48,33 @@ body {
 	margin-top: 20px;
 }
 .chart-holder {
-	border: 1px solid #ECEEEF;
-	box-shadow: 1px 1px 2px grey;
-	margin: 30px auto;
+	border: 1px solid rgba(24, 62, 117, 0.2);
+	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
+	margin: 0 auto 60px auto;
 	display: block;
-	padding: 20px 30px;
+	padding: 30px;
 	height: 500px;
 	min-width: 300px;
 	max-width: 800px;
 	position: relative;
+	transition: box-shadow .1s ease-out;
 	// tmp
 	overflow: hidden;
 	resize: both;
 	//
+
 	h3 {
 		border-bottom: 1px solid lightgray;
 		margin: 0;
+	}
+
+	&:hover {
+		box-shadow: 0 15px 45px -11px rgba(22, 56, 107, 0.15);
+		transition: box-shadow .1s ease-out;
+	}
+
+	&:last-child {
+		margin-bottom: 30px;
 	}
 }
 
@@ -58,4 +87,22 @@ body {
 #classy-bar-chart-holder {
 	overflow: hidden;
 	resize: both;
+}
+
+div.code {
+	display: block;
+	min-width: 300px;
+	max-width: 800px;
+	margin: auto;
+	margin-bottom: 60px;
+
+	ul[role="tablist"] li:first-child {
+		margin-left: 0;
+	}
+
+	div.tabs-panel {
+		pre.demo-code {
+			overflow: scroll;
+		}
+	}
 }

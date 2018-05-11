@@ -57,23 +57,41 @@ export class BaseChart {
 	}
 
 	getActualChartSize(container = this.container) {
+		const noAxis = this.options.type === "pie" || this.options.type === "donut";
+
 		let ratio, marginForLegendTop;
 		let moreForY2Axis = 0;
-		if (container.node().clientWidth > Configuration.charts.widthBreak &&
-			this.getLegendItems().length > Configuration.legend.countBreak) {
+		if (container.node().clientWidth > Configuration.charts.widthBreak) {
 			ratio = Configuration.charts.magicRatio;
 			marginForLegendTop = 0;
 		} else {
 			marginForLegendTop = Configuration.charts.marginForLegendTop;
 			ratio = 1;
 		}
+
 		if (this.options.type === "double-axis-line" || this.options.type === "combo") {
 			moreForY2Axis = Configuration.charts.magicMoreForY2Axis;
 		}
-		return {
+
+		// Store computed actual size, to be considered for change if chart does not support axis
+		const marginsToExclude = noAxis ? 0 : (Configuration.charts.margin.left + Configuration.charts.margin.right);
+		const computedActualSize = {
 			height: container.node().clientHeight - marginForLegendTop,
-			width: (container.node().clientWidth - Configuration.charts.margin.left - Configuration.charts.margin.right - moreForY2Axis) * ratio
+			width: (container.node().clientWidth - marginsToExclude - moreForY2Axis) * ratio
 		};
+
+		// If chart is of type pie or donut, width and height should equal to the min of the width and height computed
+		if (noAxis) {
+			let maxSizePossible = Math.min(computedActualSize.height, computedActualSize.width);
+			maxSizePossible = Math.max(maxSizePossible, 100);
+
+			return {
+				height: maxSizePossible,
+				width: maxSizePossible
+			};
+		}
+
+		return computedActualSize;
 	}
 
 	getXKeys() {
@@ -128,18 +146,7 @@ export class BaseChart {
 		this.svg.append("g")
 			.attr("class", "y axis")
 			.attr("transform", `translate(0, 0)`);
-		this.svg.append("g")
-			.attr("class", "x axis")
-			.attr("transform", `translate(0, ${chartSize.height})`);
-		const grid = this.svg.append("g")
-			.attr("class", "grid")
-			.attr("clip-path", `url(${window.location.origin}${window.location.pathname}#clip)`);
-		grid.append("g")
-			.attr("class", "x grid")
-			.attr("transform", `translate(0, ${chartSize.width})`);
-		grid.append("g")
-			.attr("class", "y grid")
-			.attr("transform", `translate(0, 0)`);
+
 		return this.svg;
 	}
 
@@ -179,25 +186,27 @@ export class BaseChart {
 	updateChart() {
 		console.warn("You should implement your own `updateChart() function.");
 	}
+
+	// TODO - Remove, doesn't seem like it's being used
 	//#endregion
-	setResizeWhenContainerChange() {
-		let containerWidth = this.holder.clientWidth;
-		let containerHeight = this.holder.clientHeight;
-		const intervalId = setInterval(() => {
-			if (Math.abs(containerWidth - this.holder.clientWidth) > 20
-			|| Math.abs(containerHeight - this.holder.clientHeight) > 20) {
-				containerWidth = this.holder.clientWidth;
-				containerHeight = this.holder.clientHeight;
-				Tools.debounce(() => {
-					window.clearTimeout(intervalId);
-					d3.selectAll(".legend-tooltip").style("display", "none");
-					this.redrawChart();
-				}, 500)();
-			}
-		}, 800);
-		this.resizeTimers.push(intervalId);
-		return intervalId;
-	}
+	// setResizeWhenContainerChange() {
+	// 	let containerWidth = this.holder.clientWidth;
+	// 	let containerHeight = this.holder.clientHeight;
+	// 	const intervalId = setInterval(() => {
+	// 		if (Math.abs(containerWidth - this.holder.clientWidth) > 20
+	// 		|| Math.abs(containerHeight - this.holder.clientHeight) > 20) {
+	// 			containerWidth = this.holder.clientWidth;
+	// 			containerHeight = this.holder.clientHeight;
+	// 			Tools.debounce(() => {
+	// 				window.clearTimeout(intervalId);
+	// 				d3.selectAll(".legend-tooltip").style("display", "none");
+	// 				this.redrawChart();
+	// 			}, 500)();
+	// 		}
+	// 	}, 800);
+	// 	this.resizeTimers.push(intervalId);
+	// 	return intervalId;
+	// }
 
 	resizeWhenContainerChange() {
 		let containerWidth = this.holder.clientWidth;
@@ -208,6 +217,10 @@ export class BaseChart {
 				containerWidth = this.holder.clientWidth;
 				containerHeight = this.holder.clientHeight;
 				d3.selectAll(".legend-tooltip").style("display", "none");
+
+				// Hide tooltips
+				this.hideTooltip();
+
 				this.updateChart();
 			}
 			requestAnimationFrame(frame);
@@ -275,6 +288,7 @@ export class BaseChart {
 	resetOpacity() {
 		const svg = d3.selectAll("svg");
 		svg.selectAll("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		svg.selectAll("path").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
 		svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
 			.attr("fill", Configuration.charts.resetOpacity.circle.fill);
 		svg.selectAll("rect").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
@@ -282,10 +296,10 @@ export class BaseChart {
 
 	reduceOpacity(exception) {
 		this.svg.selectAll("rect").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
-		d3.select(exception).attr("fill-opacity", false);
 		this.svg.selectAll("path").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+		this.svg.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
 		this.svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
-		d3.select(exception.parentNode).select("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		d3.select(exception).attr("fill-opacity", false);
 		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		d3.select(exception).attr("fill", d3.select(exception).attr("stroke"));
@@ -350,9 +364,8 @@ export class BaseChart {
 
 	positionLegend() {
 		if (this.container.select(".legend-tooltip").nodes().length > 0
-			&& this.container.select(".legend-tooltip").node().style.display === "block") {
-			return;
-		}
+			&& this.container.select(".legend-tooltip").node().style.display === "block") { return; }
+
 		this.container.selectAll(".legend-btn").style("display", "inline-block");
 		const svgWidth = this.container.select(".inner-wrap").node().getBBox().width;
 		if (this.isLegendOnRight()) {
@@ -400,21 +413,25 @@ export class BaseChart {
 
 	hasLegendExpandBtn() {
 		return (
-			this.container.node().clientWidth < Configuration.charts.widthBreak &&
-			this.getLegendItems().length > Configuration.legend.countBreak
+			this.container.node().clientWidth < Configuration.charts.widthBreak ||
+				this.container.node().clientHeight < this.container.select("ul.legend").node().clientHeight
+
+			// && this.getLegendItems().length > Configuration.legend.countBreak
 		);
 	}
 
 	isLegendOnRight() {
 		return (
 			this.container.node().clientWidth > Configuration.charts.widthBreak &&
-			this.getLegendItems().length > Configuration.legend.countBreak
+				this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight
+
+			// && this.getLegendItems().length > Configuration.legend.countBreak
 		);
 	}
 
 	addTooltipOpenButtonToLegend() {
-		const thisLegend = this.container.select(".legend");
 		const self = this;
+		const thisLegend = this.container.select(".legend");
 		thisLegend.append("div")
 			.attr("class", "expand-btn")
 			.style("cursor", "pointer")
@@ -467,10 +484,12 @@ export class BaseChart {
 		}
 
 		if (window.innerWidth - (windowXPoint + Configuration.tooltip.width) < 0) {
-			tooltip.append("div").attr("class", "arrow arrow-right");
+			tooltip.classed("arrow-right", true);
+			tooltip.append("div").attr("class", "arrow");
 			tooltip.style("left", `${mouseXPoint - Configuration.tooltip.width - Configuration.tooltip.arrowWidth}px`);
 		} else {
-			tooltip.append("div").attr("class", "arrow arrow-left");
+			tooltip.classed("arrow-left", true);
+			tooltip.append("div").attr("class", "arrow");
 			tooltip.style("left", `${mouseXPoint + Configuration.tooltip.arrowWidth}px`);
 		}
 	}
@@ -489,13 +508,22 @@ export class BaseChart {
 		tooltip.append("p").text(d);
 
 		if (leftSide) {
-			tooltip.style("left", mouseXPoint + "px");
-			tooltip.append("div").attr("class", "arrow arrow-left");
+			tooltip.classed("arrow-left", true)
+					.style("left", mouseXPoint + "px")
+					.append("div").attr("class", "arrow");
 		} else {
+			tooltip.classed("arrow-right", true);
+
 			const xPoint = mouseXPoint - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicXPoint2;
-			tooltip.style("left", xPoint + "px");
-			tooltip.append("div").attr("class", "arrow arrow-right");
+			tooltip.style("left", xPoint + "px")
+					.append("div").attr("class", "arrow");
 		}
+	}
+
+	hideTooltip() {
+		this.resetOpacity();
+
+		d3.selectAll(".tooltip").remove();
 	}
 
 	showTooltip(d) {
@@ -508,8 +536,7 @@ export class BaseChart {
 			.style("border-color", d.color);
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
-				this.resetOpacity();
-				d3.selectAll(".tooltip").remove();
+				this.hideTooltip();
 			});
 		const dVal = d.formatter && d.formatter[d.series] ? d.formatter[d.series](d.value.toLocaleString()) : d.value.toLocaleString();
 		if (d.xAxis && d.xAxis.length > 0) {
@@ -523,14 +550,31 @@ export class BaseChart {
 		}
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
+			tooltip.classed("arrow-right", true);
 			tooltip.style(
 				"left",
 				d3.mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
 			);
-			tooltip.append("div").attr("class", "arrow arrow-right");
+			tooltip.append("div").attr("class", "arrow");
 		} else {
+			tooltip.classed("arrow-left", true);
 			tooltip.style("left", d3.mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
-			tooltip.append("div").attr("class", "arrow arrow-left");
+			tooltip.append("div").attr("class", "arrow");
 		}
+	}
+
+	// https://github.com/wbkd/d3-extended
+	moveToBack(element) {
+		return element.each(function() {
+			const firstChild = this.parentNode.firstChild;
+			if (firstChild) {
+				this.parentNode.insertBefore(this, firstChild);
+			}
+		});
+	}
+	moveToFront(element) {
+		return element.each(function() {
+			this.parentNode.appendChild(this);
+		});
 	}
 }

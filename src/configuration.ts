@@ -3,7 +3,7 @@ export namespace Configuration {
 		margin: {
 			top: 20,
 			bottom: 60,
-			left: 90,
+			left: 60,
 			right: 20
 		},
 		resetOpacity: {
@@ -82,6 +82,32 @@ export namespace Configuration {
 			fill: "white",
 			strokeWidth: 2,
 			duration: 500
+		}
+	};
+
+	export const pie = {
+		maxWidth: 516.6,
+		mouseover: {
+			strokeWidth: 8,
+			strokeOpacity: 0.5
+		},
+		sliceLimit: 6,
+		label: {
+			dy: ".32em",
+			margin: 15,
+			other: "Other"
+		}
+	};
+
+	export const donut = {
+		centerText: {
+			title: {
+				y: 22
+			},
+			breakpoint: 175,
+			magicScaleRatio: 2.5,
+			numberFontSize: 24,
+			titleFontSize: 15
 		}
 	};
 

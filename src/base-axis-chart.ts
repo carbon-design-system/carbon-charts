@@ -25,6 +25,26 @@ export class BaseAxisChart extends BaseChart {
 		}
 	}
 
+	setSVG(): any {
+		super.setSVG();
+
+		const chartSize = this.getActualChartSize();
+		this.svg.append("g")
+			.attr("class", "x axis")
+			.attr("transform", `translate(0, ${chartSize.height})`);
+		const grid = this.svg.append("g")
+			.attr("class", "grid")
+			.attr("clip-path", `url(${window.location.origin}${window.location.pathname}#clip)`);
+		grid.append("g")
+			.attr("class", "x grid")
+			.attr("transform", `translate(0, ${chartSize.width})`);
+		grid.append("g")
+			.attr("class", "y grid")
+			.attr("transform", `translate(0, 0)`);
+
+		return this.svg;
+	}
+
 	setXScale(data?): d3.ScaleBand<string> {
 		if (data) {
 			const xAxisValues = this.options.xDomain.length > 0 ? data.map(d => d[this.options.xDomain]) : this.options.yDomain;
