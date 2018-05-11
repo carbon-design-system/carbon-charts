@@ -24,7 +24,9 @@ export namespace Tools {
 
 		data.map(item => {
 			const key = item.label;
-			if (keys.indexOf(key) > -1 && duplicateKeys.indexOf(key) === -1) { duplicateKeys.push(key); }
+			if (keys.indexOf(key) > -1 && duplicateKeys.indexOf(key) === -1) {
+				duplicateKeys.push(key);
+			}
 
 			keys.push(key);
 		});

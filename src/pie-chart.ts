@@ -46,11 +46,7 @@ export class PieChart extends BaseChart {
 			.map((item, i) => Object.assign(item, { index: i }));
 	}
 
-	drawChart(data?: any) {
-		if (data) {
-			this.data = data;
-		}
-
+	drawChart() {
 		this.setSVG();
 
 		this.addLegend();
@@ -93,9 +89,10 @@ export class PieChart extends BaseChart {
 			.attr("transform", "translate(" + (actualChartSize.width / 2) +  "," + (actualChartSize.height / 2) + ")")
 			.attr("preserveAspectRatio", "xMidYMid meet");
 
-		const { pie: pieConfigs } = Configuration
-			, marginedRadius = radius - (pieConfigs.label.margin * (actualChartSize.width / pieConfigs.maxWidth))
-			, arc = d3.arc()
+		// Compute the correct inner & outer radius
+		const { pie: pieConfigs } = Configuration;
+		const marginedRadius = radius - (pieConfigs.label.margin * (actualChartSize.width / pieConfigs.maxWidth));
+		const arc = d3.arc()
 				.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
 				.outerRadius(marginedRadius);
 
@@ -103,6 +100,7 @@ export class PieChart extends BaseChart {
 			.value(function(d: any) { return d.value; })
 			.sort(null);
 
+		// Draw the slices
 		const path = this.svg.selectAll("path")
 			.data(pie(dataList))
 			.enter()
@@ -115,6 +113,7 @@ export class PieChart extends BaseChart {
 				return this.options.colors[d.data.index];
 			}.bind(this));
 
+		// Slices labels
 		this.svg
 			.selectAll("g.inner-wrap")
 			.data(pie(dataList))
@@ -130,8 +129,8 @@ export class PieChart extends BaseChart {
 			})
 			.attr("dy", Configuration.pie.label.dy)
 			.style("text-anchor", function(d) {
-				const QUADRANT = Math.PI / 4
-					, rads = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+				const QUADRANT = Math.PI / 4;
+				const rads = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
 
 				if (rads >= QUADRANT && rads <= 3 * QUADRANT) {
 					return "start";
@@ -221,8 +220,7 @@ export class PieChart extends BaseChart {
 					.attr("stroke", self.options.colors[d.data.index]);
 			})
 			.on("mouseout", function(d) {
-				d3.select(this)
-					.attr("stroke", "");
+				d3.select(this).attr("stroke", "");
 			});
 	}
 
