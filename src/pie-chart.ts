@@ -233,7 +233,7 @@ export class PieChart extends BaseChart {
 		super.setSVG();
 	}
 
-	update(data?: any) {
+	update() {
 		this.setSVG();
 		this.draw();
 		this.addDataPointEventListener();
