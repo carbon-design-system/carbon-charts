@@ -1,14 +1,14 @@
-import { PieChart } from "./index";
+import { DonutChart, DonutCenter } from "./index";
 import { createClassyContainer, grabClassyContainer, mainSVGSelector, colors } from "./test-tools";
 
-const chartType = "pie";
-describe("Pie Chart", () => {
+const chartType = "donut";
+describe("Donut Chart", () => {
 	beforeEach(() => {
 		// Append the chart container to DOM
 		const classyContainer = createClassyContainer(chartType);
 		document.body.appendChild(classyContainer);
 
-		const pieData = [
+		const donutData = [
 			{ label: "2V2N-9KYPM version 1", value: 100000 },
 			{ label: "L22I-P66EP-L22I-P66EP-L22I-P66EP", value: 200000 },
 			{ label: "JQAI-2M4L1", value: 600000 },
@@ -21,19 +21,23 @@ describe("Pie Chart", () => {
 			{ label: "L22I-P66EP-L22I", value: 120000 }
 		];
 
-		const pieOptions = {
+		const donutOptions = {
 			legendClickable: true,
 			containerResizable: true,
-			colors
+			colors,
+			center: new DonutCenter({
+				number: 25423,
+				label: "Browsers"
+			})
 		};
 
 		// Instantiate chart object & draw on DOM
-		const classyPieChart = new PieChart(
+		const classyDonutChart = new DonutChart(
 			classyContainer,
-			Object.assign({}, pieOptions, {type: chartType}),
-			pieData
+			Object.assign({}, donutOptions, {type: chartType}),
+			donutData
 		);
-		classyPieChart.drawChart();
+		classyDonutChart.drawChart();
 	});
 
 	it("Should work", () => {
