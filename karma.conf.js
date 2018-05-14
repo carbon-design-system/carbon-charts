@@ -3,7 +3,10 @@ module.exports = function (config) {
 		plugins: ['karma-webpack', 'karma-jasmine', 'karma-chrome-launcher'],
 		browsers: ['ChromeHeadless'],
 		frameworks: ['jasmine'],
-		files: ['**/*.spec.ts'],
+		files: [{
+			pattern: '**/*.spec.ts',
+			watched: false
+		}],
 		preprocessors: {
 			'**/*.spec.ts': ['webpack']
 		},
