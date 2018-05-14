@@ -8,7 +8,7 @@ describe("Donut Chart", () => {
 		const classyContainer = createClassyContainer(chartType);
 		document.body.appendChild(classyContainer);
 
-		const donutData = [
+		const data = [
 			{ label: "2V2N-9KYPM version 1", value: 100000 },
 			{ label: "L22I-P66EP-L22I-P66EP-L22I-P66EP", value: 200000 },
 			{ label: "JQAI-2M4L1", value: 600000 },
@@ -21,7 +21,7 @@ describe("Donut Chart", () => {
 			{ label: "L22I-P66EP-L22I", value: 120000 }
 		];
 
-		const donutOptions = {
+		const options = {
 			legendClickable: true,
 			containerResizable: true,
 			colors,
@@ -34,8 +34,8 @@ describe("Donut Chart", () => {
 		// Instantiate chart object & draw on DOM
 		const classyDonutChart = new DonutChart(
 			classyContainer,
-			Object.assign({}, donutOptions, {type: chartType}),
-			donutData
+			Object.assign({}, options, {type: chartType}),
+			data
 		);
 		classyDonutChart.drawChart();
 	});
