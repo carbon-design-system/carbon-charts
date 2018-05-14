@@ -168,8 +168,7 @@ export class PieChart extends BaseChart {
 			.style("border-color", this.options.colors[d.data.index]);
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
-				this.resetOpacity();
-				d3.selectAll(".tooltip").remove();
+				this.hideTooltip();
 			});
 
 		const dVal = d.value.toLocaleString();
@@ -201,6 +200,12 @@ export class PieChart extends BaseChart {
 			tooltip.style("left", d3.mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
 			tooltip.append("div").attr("class", "arrow");
 		}
+
+		window.onkeydown = (evt: KeyboardEvent) => {
+			if ("key" in evt && evt.key === "Escape" || evt.key === "Esc") {
+				this.hideTooltip();
+			}
+		};
 	}
 
 	addDataPointEventListener() {

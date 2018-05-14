@@ -522,8 +522,9 @@ export class BaseChart {
 
 	hideTooltip() {
 		this.resetOpacity();
-
 		d3.selectAll(".tooltip").remove();
+
+		window.onkeydown = null;
 	}
 
 	showTooltip(d) {
@@ -561,6 +562,12 @@ export class BaseChart {
 			tooltip.style("left", d3.mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
 			tooltip.append("div").attr("class", "arrow");
 		}
+
+		window.onkeydown = (evt: KeyboardEvent) => {
+			if ("key" in evt && evt.key === "Escape" || evt.key === "Esc") {
+				this.hideTooltip();
+			}
+		};
 	}
 
 	// https://github.com/wbkd/d3-extended
