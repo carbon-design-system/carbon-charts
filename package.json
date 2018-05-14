@@ -9,7 +9,8 @@
     "build": "bash scripts/build.sh",
     "deploy": "bash scripts/deploy.sh",
     "lint": "tslint -p tsconfig.json -c tslint.json",
-    "test": "karma start"
+	"test": "karma start --single-run",
+	"test:watch": "karma start --no-single-run"
   },
   "repository": {
     "type": "git",
@@ -49,6 +50,7 @@
     "karma-webpack": "^2.0.5",
     "node-sass": "4.6.0",
     "postcss-loader": "2.0.8",
+    "raw-loader": "^0.5.1",
     "sass-loader": "6.0.6",
     "style-loader": "0.19.0",
     "ts-loader": "3.1.1",
