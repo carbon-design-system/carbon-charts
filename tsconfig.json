@@ -13,8 +13,11 @@
 		"rootDirs": ["./src", "./demo"],
 		"target": "es5",
 		"inlineSources": true,
+		"types": [
+			"node", "jasmine"
+		],
 		"typeRoots": [
-			"../node_modules/@types"
+			"./node_modules/@types"
 		]
 	},
 	"files": [

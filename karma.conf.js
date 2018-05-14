@@ -1,38 +1,31 @@
-module.exports = function(config) {
-  config.set({
-    plugins: ['karma-webpack', 'karma-jasmine', 'karma-phantomjs-launcher'],
-    autoWatch: false,
-    browsers: ['PhantomJS'],
-    files: [{
-      pattern: './karma-test-shim.js',
-      watched: false
-    }],
-    frameworks: ['jasmine'],
-    phantomJsLauncher: {
-      exitOnResourceError: true
-    },
-    preprocessors: {
-      './karma-test-shim.js': ['webpack']
-    },
-		browserConsoleLogOptions: {
-				terminal: true,
-				level: ""
+module.exports = function (config) {
+	config.set({
+		plugins: ['karma-webpack', 'karma-jasmine', 'karma-chrome-launcher'],
+		autoWatch: false,
+		browsers: ['ChromeHeadless'],
+		frameworks: ['jasmine'],
+		files: ['**/*.spec.ts'],
+		preprocessors: {
+			'**/*.spec.ts': ['webpack']
 		},
 		browserConsoleLogOptions: {
-				terminal: true,
-				level: ""
+			terminal: true,
+			level: "debug"
 		},
-    reporters: ['dots'],
-    port: 9876,
-    logLevel: config.LOG_INFO,
-    colors: true,
-    singleRun: true,
-    webpack: require('./webpack.test'),
-    webpackMiddleware: {
-      stats: 'errors-only'
-    },
-    webpackServer: {
-      noInfo: true
-    }
-  });
+		reporters: ['dots'],
+		port: 9876,
+		logLevel: config.LOG_INFO,
+		colors: true,
+		singleRun: true,
+		mime: {
+			'text/x-typescript': ['ts']
+		},
+		webpack: require('./webpack.test'),
+		webpackMiddleware: {
+			stats: 'errors-only'
+		},
+		webpackServer: {
+			noInfo: true
+		}
+	});
 };
