@@ -9,8 +9,8 @@
     "build": "bash scripts/build.sh",
     "deploy": "bash scripts/deploy.sh",
     "lint": "tslint -p tsconfig.json -c tslint.json",
-	"test": "karma start --single-run",
-	"test:watch": "karma start --no-single-run"
+    "test": "karma start --single-run",
+    "test:watch": "karma start --no-single-run"
   },
   "repository": {
     "type": "git",
@@ -45,7 +45,6 @@
     "karma": "^1.7.1",
     "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^1.1.0",
-    "karma-phantomjs-launcher": "^1.0.4",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.5",
     "node-sass": "4.6.0",
