@@ -11,6 +11,9 @@ import {
 // Variables
 const chartType = "pie";
 
+// Functions
+const getNumberOfSlices = (classyContainer) => classyContainer.querySelectorAll(`${selectors.INNERWRAP} path`).length;
+
 describe("Pie Chart", () => {
 	let classyPieChart;
 	beforeAll(() => {
@@ -63,5 +66,16 @@ describe("Pie Chart", () => {
 
 		// Make sure the tooltip container exists now
 		expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();
+	});
+
+	it("Should filter results", () => {
+		// Grab chart container in DOM & # of current slices
+		const classyContainer = grabClassyContainer(chartType);
+		const numberOfSlices = getNumberOfSlices(classyContainer);
+
+		// Click on the first legend item
+		d3.select(classyContainer).select(selectors.LEGEND_BTN).dispatch("click");
+
+		expect(getNumberOfSlices(classyContainer)).toBe(numberOfSlices - 1);
 	});
 });
