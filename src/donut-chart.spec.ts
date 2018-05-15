@@ -3,7 +3,12 @@ import * as d3 from "d3";
 import { DonutChart, DonutCenter } from "./index";
 import { createClassyContainer, grabClassyContainer, selectors, colors } from "./test-tools";
 
+// Variables
 const chartType = "donut";
+
+// Functions
+const getNumberOfSlices = (classyContainer) => classyContainer.querySelectorAll(`${selectors.INNERWRAP} path`).length;
+
 describe("Donut Chart", () => {
 	beforeEach(() => {
 		// Append the chart container to DOM
@@ -59,5 +64,16 @@ describe("Donut Chart", () => {
 
 		// Make sure the tooltip container exists now
 		expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();
+	});
+
+	it("Should filter results", () => {
+		// Grab chart container in DOM & # of current slices
+		const classyContainer = grabClassyContainer(chartType);
+		const numberOfSlices = getNumberOfSlices(classyContainer);
+
+		// Click on the first legend item
+		d3.select(classyContainer).select(selectors.LEGEND_BTN).dispatch("click");
+
+		expect(getNumberOfSlices(classyContainer)).toBe(numberOfSlices - 1);
 	});
 });
