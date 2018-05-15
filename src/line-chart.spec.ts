@@ -1,3 +1,5 @@
+import * as d3 from "d3";
+
 import { LineChart } from "./index";
 import { createClassyContainer, grabClassyContainer, selectors, colors } from "./test-tools";
 
@@ -42,5 +44,16 @@ describe("Line Chart", () => {
 
 		// Expect chart container to contain the main chart SVG element
 		expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
+	});
+
+	it ("Should show tooltips", () => {
+		// Grab chart container in DOM
+		const classyContainer = grabClassyContainer(chartType);
+
+		// Trigger click on a slice
+		d3.select(classyContainer).select(`${selectors.INNERWRAP} circle`).dispatch("click");
+
+		// Make sure the tooltip container exists now
+		expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();
 	});
 });

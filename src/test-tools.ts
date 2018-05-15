@@ -15,7 +15,8 @@ export const grabClassyContainer = (chartType) => {
 export const selectors = {
 	OUTERSVG: "svg.chart-svg",
 	INNERWRAP: "g.inner-wrap",
-	TOOLTIP: "div.chart-tooltip"
+	TOOLTIP: "div.chart-tooltip",
+	LEGEND_BTN: "li.legend-btn"
 };
 export const colors = [
 	"#009BEF",

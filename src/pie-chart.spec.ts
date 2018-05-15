@@ -8,7 +8,9 @@ import {
 	colors
 } from "./test-tools";
 
+// Variables
 const chartType = "pie";
+
 describe("Pie Chart", () => {
 	let classyPieChart;
 	beforeAll(() => {
