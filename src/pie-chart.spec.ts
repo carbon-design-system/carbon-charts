@@ -1,9 +1,17 @@
+import * as d3 from "d3";
+
 import { PieChart } from "./index";
-import { createClassyContainer, grabClassyContainer, mainSVGSelector, colors } from "./test-tools";
+import {
+	createClassyContainer,
+	grabClassyContainer,
+	selectors,
+	colors
+} from "./test-tools";
 
 const chartType = "pie";
 describe("Pie Chart", () => {
-	beforeEach(() => {
+	let classyPieChart;
+	beforeAll(() => {
 		// Append the chart container to DOM
 		const classyContainer = createClassyContainer(chartType);
 		document.body.appendChild(classyContainer);
@@ -28,7 +36,7 @@ describe("Pie Chart", () => {
 		};
 
 		// Instantiate chart object & draw on DOM
-		const classyPieChart = new PieChart(
+		classyPieChart = new PieChart(
 			classyContainer,
 			Object.assign({}, options, {type: chartType}),
 			data
@@ -41,6 +49,17 @@ describe("Pie Chart", () => {
 		const classyContainer = grabClassyContainer(chartType);
 
 		// Expect chart container to contain the main chart SVG element
-		expect(classyContainer.querySelector(mainSVGSelector)).toBeTruthy();
+		expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
+	});
+
+	it ("Should show tooltips", () => {
+		// Grab chart container in DOM
+		const classyContainer = grabClassyContainer(chartType);
+
+		// Trigger click on a slice
+		d3.select(classyContainer).select(`${selectors.INNERWRAP} path`).dispatch("click");
+
+		// Make sure the tooltip container exists now
+		expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();
 	});
 });

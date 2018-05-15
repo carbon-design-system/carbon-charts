@@ -12,7 +12,11 @@ export const grabClassyContainer = (chartType) => {
 };
 
 // Objects/data
-export const mainSVGSelector = "svg.chart-svg";
+export const selectors = {
+	OUTERSVG: "svg.chart-svg",
+	INNERWRAP: "g.inner-wrap",
+	TOOLTIP: "div.chart-tooltip"
+};
 export const colors = [
 	"#009BEF",
 	"#95D13C",

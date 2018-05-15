@@ -1,5 +1,5 @@
 import { StackedBarChart } from "./index";
-import { createClassyContainer, grabClassyContainer, mainSVGSelector, colors } from "./test-tools";
+import { createClassyContainer, grabClassyContainer, selectors, colors } from "./test-tools";
 
 const chartType = "stacked-bar";
 describe("Stacked Bar Chart", () => {
@@ -41,6 +41,6 @@ describe("Stacked Bar Chart", () => {
 		const classyContainer = grabClassyContainer(chartType);
 
 		// Expect chart container to contain the main chart SVG element
-		expect(classyContainer.querySelector(mainSVGSelector)).toBeTruthy();
+		expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
 	});
 });
