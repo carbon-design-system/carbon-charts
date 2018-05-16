@@ -16,7 +16,10 @@ export const selectors = {
 	OUTERSVG: "svg.chart-svg",
 	INNERWRAP: "g.inner-wrap",
 	TOOLTIP: "div.chart-tooltip",
-	LEGEND_BTN: "li.legend-btn"
+	LEGEND_BTN: "li.legend-btn",
+	pie: {
+		SLICE: "path"
+	}
 };
 export const colors = [
 	"#009BEF",

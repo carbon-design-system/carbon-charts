@@ -3,6 +3,9 @@ import * as d3 from "d3";
 import { DonutChart, DonutCenter } from "./index";
 import { createClassyContainer, grabClassyContainer, selectors, colors } from "./test-tools";
 
+// Global chart configs
+import { Configuration } from "./configuration";
+
 // Variables
 const chartType = "donut";
 
@@ -11,6 +14,12 @@ const getNumberOfSlices = (classyContainer) => classyContainer.querySelectorAll(
 
 describe("Donut Chart", () => {
 	beforeEach(() => {
+		// Remove the chart from the previous test case
+		const oldClassyContainer = grabClassyContainer(chartType);
+		if (oldClassyContainer) {
+			oldClassyContainer.parentNode.removeChild(oldClassyContainer);
+		}
+
 		// Append the chart container to DOM
 		const classyContainer = createClassyContainer(chartType);
 		document.body.appendChild(classyContainer);
@@ -75,5 +84,13 @@ describe("Donut Chart", () => {
 		d3.select(classyContainer).select(selectors.LEGEND_BTN).dispatch("click");
 
 		expect(getNumberOfSlices(classyContainer)).toBe(numberOfSlices - 1);
+	});
+
+	it(`Should show a maximum of ${(Configuration.pie.sliceLimit + 1)} slices`, () => {
+		// Grab chart container in DOM & # of current slices
+		const classyContainer = grabClassyContainer(chartType);
+
+		// (Configuration.pie.sliceLimit + 1) because of the auto-generated "Other" slice when (# of slices > Configuration.pie.sliceLimit)
+		expect(classyContainer.querySelectorAll(selectors.pie.SLICE).length).toBeLessThanOrEqual(Configuration.pie.sliceLimit + 1);
 	});
 });
