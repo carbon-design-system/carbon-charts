@@ -11,6 +11,21 @@ export const grabClassyContainer = (chartType) => {
 	return document.getElementById(`classy-${chartType}-chart-holder`);
 };
 
+export const arraysHaveSameValues = (arr1, arr2) => {
+	if (arr1.length !== arr2.length) {
+		return false;
+	}
+
+	let result = true;
+	arr1.map(item => {
+		if (arr2.indexOf(item) === -1) {
+			result = false;
+		}
+	});
+
+	return result;
+};
+
 // Objects/data
 export const selectors = {
 	OUTERSVG: "svg.chart-svg",

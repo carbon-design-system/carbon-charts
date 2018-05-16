@@ -4,6 +4,7 @@ import { PieChart } from "./index";
 import {
 	createClassyContainer,
 	grabClassyContainer,
+	arraysHaveSameValues,
 	selectors,
 	colors
 } from "./test-tools";
@@ -19,6 +20,7 @@ const getNumberOfSlices = (classyContainer) => classyContainer.querySelectorAll(
 
 describe("Pie Chart", () => {
 	let classyPieChart;
+	let data;
 	beforeEach(() => {
 		// Remove the chart from the previous test case
 		const oldClassyContainer = grabClassyContainer(chartType);
@@ -30,7 +32,7 @@ describe("Pie Chart", () => {
 		const classyContainer = createClassyContainer(chartType);
 		document.body.appendChild(classyContainer);
 
-		const data = [
+		data = [
 			{ label: "2V2N-9KYPM version 1", value: 100000 },
 			{ label: "L22I-P66EP-L22I-P66EP-L22I-P66EP", value: 200000 },
 			{ label: "JQAI-2M4L1", value: 600000 },
@@ -66,7 +68,73 @@ describe("Pie Chart", () => {
 		expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
 	});
 
-	it ("Should show tooltips", () => {
+	/*
+	 * Events
+	 * Testing (data comes in correctly, goes out correctly)
+	 */
+	it(`Should show a maximum of ${(Configuration.pie.sliceLimit + 1)} slices`, () => {
+		// Grab chart container in DOM & # of current slices
+		const classyContainer = grabClassyContainer(chartType);
+
+		// (Configuration.pie.sliceLimit + 1) because of the auto-generated "Other" slice when (# of slices > Configuration.pie.sliceLimit)
+		expect(classyContainer.querySelectorAll(selectors.pie.SLICE).length).toBeLessThanOrEqual(Configuration.pie.sliceLimit + 1);
+	});
+
+	it("Should not be missing any of the labels in the processed data", () => {
+		const { data: processedData } = classyPieChart;
+
+		// Input data labels
+		const dataLabels = data.reduce((result, dataPoint) => {
+			result.push(dataPoint.label);
+			return result;
+		}, []);
+
+		// Charts processed data labels
+		const processedLabels = processedData.reduce((result, dataPoint) => {
+			if (dataPoint.items) {
+				// this is the "Other" label
+				dataPoint.items.map(item => result.push(item.label));
+
+				return result;
+			}
+
+			result.push(dataPoint.label);
+			return result;
+		}, []);
+
+		expect(arraysHaveSameValues(dataLabels, processedLabels)).toBe(true);
+	});
+
+	it("Should not be missing any of the values in the processed data", () => {
+		const { data: processedData } = classyPieChart;
+
+		// Input data labels
+		const dataValues = data.reduce((result, dataPoint) => {
+			result.push(dataPoint.value);
+			return result;
+		}, []);
+
+		// Charts processed data labels
+		const processedValues = processedData.reduce((result, dataPoint) => {
+			if (dataPoint.items) {
+				// this is the "Other" label
+				dataPoint.items.map(item => result.push(item.value));
+
+				return result;
+			}
+
+			result.push(dataPoint.value);
+			return result;
+		}, []);
+
+		expect(arraysHaveSameValues(dataValues, processedValues)).toBe(true);
+	});
+
+	/*
+	 * Functionality
+	 * Testing
+	 */
+	it("Should show tooltips", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
 
@@ -86,13 +154,5 @@ describe("Pie Chart", () => {
 		d3.select(classyContainer).select(selectors.LEGEND_BTN).dispatch("click");
 
 		expect(getNumberOfSlices(classyContainer)).toBe(numberOfSlices - 1);
-	});
-
-	it(`Should show a maximum of ${(Configuration.pie.sliceLimit + 1)} slices`, () => {
-		// Grab chart container in DOM & # of current slices
-		const classyContainer = grabClassyContainer(chartType);
-
-		// (Configuration.pie.sliceLimit + 1) because of the auto-generated "Other" slice when (# of slices > Configuration.pie.sliceLimit)
-		expect(classyContainer.querySelectorAll(selectors.pie.SLICE).length).toBeLessThanOrEqual(Configuration.pie.sliceLimit + 1);
 	});
 });
