@@ -11,6 +11,34 @@ export const grabClassyContainer = (chartType) => {
 	return document.getElementById(`classy-${chartType}-chart-holder`);
 };
 
+export const grabInputAndProcessedData = (chartObj, inputData, key) => {
+	const { data: processedData } = chartObj;
+
+	// Input data labels
+	const inputValues = inputData.reduce((result, dataPoint) => {
+		result.push(dataPoint[key]);
+		return result;
+	}, []);
+
+	// Charts processed data labels
+	const processedValues = processedData.reduce((result, dataPoint) => {
+		if (dataPoint.items) {
+			// this is the "Other" label
+			dataPoint.items.map(item => result.push(item[key]));
+
+			return result;
+		}
+
+		result.push(dataPoint[key]);
+		return result;
+	}, []);
+
+	return {
+		input: inputValues,
+		processed: processedValues
+	};
+};
+
 export const arraysHaveSameValues = (arr1, arr2) => {
 	if (arr1.length !== arr2.length) {
 		return false;

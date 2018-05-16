@@ -4,6 +4,7 @@ import { DonutChart, DonutCenter } from "./index";
 import {
 	createClassyContainer,
 	grabClassyContainer,
+	grabInputAndProcessedData,
 	arraysHaveSameValues,
 	selectors,
 	colors
@@ -85,53 +86,15 @@ describe("Donut Chart", () => {
 	});
 
 	it("Should not be missing any of the labels in the processed data", () => {
-		const { data: processedData } = classyDonutChart;
+		const { input: inputLabels, processed: processedLabels } = grabInputAndProcessedData(classyDonutChart, data, "label");
 
-		// Input data labels
-		const dataLabels = data.reduce((result, dataPoint) => {
-			result.push(dataPoint.label);
-			return result;
-		}, []);
-
-		// Charts processed data labels
-		const processedLabels = processedData.reduce((result, dataPoint) => {
-			if (dataPoint.items) {
-				// this is the "Other" label
-				dataPoint.items.map(item => result.push(item.label));
-
-				return result;
-			}
-
-			result.push(dataPoint.label);
-			return result;
-		}, []);
-
-		expect(arraysHaveSameValues(dataLabels, processedLabels)).toBe(true);
+		expect(arraysHaveSameValues(inputLabels, processedLabels)).toBe(true);
 	});
 
 	it("Should not be missing any of the values in the processed data", () => {
-		const { data: processedData } = classyDonutChart;
+		const { input: inputValues, processed: processedValues } = grabInputAndProcessedData(classyDonutChart, data, "value");
 
-		// Input data labels
-		const dataValues = data.reduce((result, dataPoint) => {
-			result.push(dataPoint.value);
-			return result;
-		}, []);
-
-		// Charts processed data labels
-		const processedValues = processedData.reduce((result, dataPoint) => {
-			if (dataPoint.items) {
-				// this is the "Other" label
-				dataPoint.items.map(item => result.push(item.value));
-
-				return result;
-			}
-
-			result.push(dataPoint.value);
-			return result;
-		}, []);
-
-		expect(arraysHaveSameValues(dataValues, processedValues)).toBe(true);
+		expect(arraysHaveSameValues(inputValues, processedValues)).toBe(true);
 	});
 
 	/*
