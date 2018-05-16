@@ -1,7 +1,13 @@
 import * as d3 from "d3";
 
 import { StackedBarChart } from "./index";
-import { createClassyContainer, grabClassyContainer, selectors, colors } from "./test-tools";
+import {
+	createClassyContainer,
+	grabClassyContainer,
+	removeChart,
+	selectors,
+	colors
+} from "./test-tools";
 
 const chartType = "stacked-bar";
 describe("Stacked Bar Chart", () => {
@@ -36,6 +42,11 @@ describe("Stacked Bar Chart", () => {
 			data
 		);
 		classyStackedBarChart.drawChart();
+	});
+
+	afterEach(() => {
+		// Remove the chart resulted from this test case
+		removeChart(chartType);
 	});
 
 	it("Should work", () => {

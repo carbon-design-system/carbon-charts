@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import { BaseChart } from "./base-chart";
 import { PieChart } from "./pie-chart";
 import { Configuration } from "./configuration";
 import { Tools } from "./tools";

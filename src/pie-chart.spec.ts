@@ -4,8 +4,8 @@ import { PieChart } from "./index";
 import {
 	createClassyContainer,
 	grabClassyContainer,
-	grabInputAndProcessedData,
-	arraysHaveSameValues,
+	removeChart,
+	inputAndProcessedDataMatch,
 	selectors,
 	colors
 } from "./test-tools";
@@ -61,6 +61,11 @@ describe("Pie Chart", () => {
 		classyPieChart.drawChart();
 	});
 
+	afterEach(() => {
+		// Remove the chart resulted from this test case
+		removeChart(chartType);
+	});
+
 	it("Should work", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
@@ -81,16 +86,8 @@ describe("Pie Chart", () => {
 		expect(classyContainer.querySelectorAll(selectors.pie.SLICE).length).toBeLessThanOrEqual(Configuration.pie.sliceLimit + 1);
 	});
 
-	it("Should not be missing any of the labels in the processed data", () => {
-		const { input: inputLabels, processed: processedLabels } = grabInputAndProcessedData(classyPieChart, data, "label");
-
-		expect(arraysHaveSameValues(inputLabels, processedLabels)).toBe(true);
-	});
-
-	it("Should not be missing any of the values in the processed data", () => {
-		const { input: inputValues, processed: processedValues } = grabInputAndProcessedData(classyPieChart, data, "value");
-
-		expect(arraysHaveSameValues(inputValues, processedValues)).toBe(true);
+	it("Should not be missing any of the labels or values in the processed data", () => {
+		expect(inputAndProcessedDataMatch(classyPieChart, data)).toBe(true);
 	});
 
 	/*
@@ -102,7 +99,7 @@ describe("Pie Chart", () => {
 		const classyContainer = grabClassyContainer(chartType);
 
 		// Trigger click on a slice
-		d3.select(classyContainer).select(`${selectors.INNERWRAP} path`).dispatch("click");
+		d3.select(classyContainer).select(`${selectors.INNERWRAP} ${selectors.pie.SLICE}`).dispatch("click");
 
 		// Make sure the tooltip container exists now
 		expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();

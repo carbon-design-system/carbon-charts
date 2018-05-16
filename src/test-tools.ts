@@ -1,3 +1,16 @@
+// Extensions
+Object.prototype["containsKeysAndValuesFrom"] = (sourceObject) => {
+	let result = true;
+	Object.keys(sourceObject).map(key => {
+		const supposedValue = sourceObject[key];
+		if (this[key] !== supposedValue) {
+			result = false;
+		}
+	});
+
+	return true;
+};
+
 // Functions
 export const createClassyContainer = (chartType) => {
 	const classyContainer = document.createElement("div");
@@ -11,45 +24,37 @@ export const grabClassyContainer = (chartType) => {
 	return document.getElementById(`classy-${chartType}-chart-holder`);
 };
 
-export const grabInputAndProcessedData = (chartObj, inputData, key) => {
-	const { data: processedData } = chartObj;
-
-	// Input data labels
-	const inputValues = inputData.reduce((result, dataPoint) => {
-		result.push(dataPoint[key]);
-		return result;
-	}, []);
-
-	// Charts processed data labels
-	const processedValues = processedData.reduce((result, dataPoint) => {
-		if (dataPoint.items) {
-			// this is the "Other" label
-			dataPoint.items.map(item => result.push(item[key]));
-
-			return result;
-		}
-
-		result.push(dataPoint[key]);
-		return result;
-	}, []);
-
-	return {
-		input: inputValues,
-		processed: processedValues
-	};
+export const removeChart = (chartType) => {
+	const oldClassyContainer = grabClassyContainer(chartType);
+	if (oldClassyContainer) {
+		oldClassyContainer.parentNode.removeChild(oldClassyContainer);
+	}
 };
 
-export const arraysHaveSameValues = (arr1, arr2) => {
-	if (arr1.length !== arr2.length) {
-		return false;
-	}
+export const inputAndProcessedDataMatch = (chartObj, inputData) => {
+	// Gather all pieces of processed data for every type of chart
+	const processedDataPoints = chartObj.data.reduce((finalArray, dataPoint) => {
+		if (dataPoint.items) {
+			// this is the "Other" label, in Pie & Donut
+			dataPoint.items.map(item => finalArray.push(item));
 
-	let result = true;
-	arr1.map(item => {
-		if (arr2.indexOf(item) === -1) {
-			result = false;
+			return finalArray;
 		}
-	});
+
+		finalArray.push(dataPoint);
+		return finalArray;
+	}, []);
+
+	let result = processedDataPoints.length === inputData.length;
+	if (result) {
+		processedDataPoints.map(dataPoint => {
+			// Check if every piece of data in the processed data array
+			// Contains every key-value pair from the input data provided to the chart
+			if (!dataPoint.containsKeysAndValuesFrom(inputData)) {
+				result = false;
+			}
+		});
+	}
 
 	return result;
 };

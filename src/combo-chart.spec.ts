@@ -1,7 +1,13 @@
 import * as d3 from "d3";
 
 import { ComboChart } from "./index";
-import { createClassyContainer, grabClassyContainer, selectors, colors } from "./test-tools";
+import {
+	createClassyContainer,
+	grabClassyContainer,
+	removeChart,
+	selectors,
+	colors
+} from "./test-tools";
 
 const chartType = "combo";
 describe("Combo Chart", () => {
@@ -79,6 +85,11 @@ describe("Combo Chart", () => {
 			data
 		);
 		classyComboChart.drawChart();
+	});
+
+	afterEach(() => {
+		// Remove the chart resulted from this test case
+		removeChart(chartType);
 	});
 
 	it("Should work", () => {

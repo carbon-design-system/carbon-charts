@@ -4,8 +4,8 @@ import { DonutChart, DonutCenter } from "./index";
 import {
 	createClassyContainer,
 	grabClassyContainer,
-	grabInputAndProcessedData,
-	arraysHaveSameValues,
+	removeChart,
+	inputAndProcessedDataMatch,
 	selectors,
 	colors
 } from "./test-tools";
@@ -17,18 +17,14 @@ import { Configuration } from "./configuration";
 const chartType = "donut";
 
 // Functions
-const getNumberOfSlices = (classyContainer) => classyContainer.querySelectorAll(`${selectors.INNERWRAP} path`).length;
+const getNumberOfSlices = (classyContainer) => {
+	return classyContainer.querySelectorAll(`${selectors.INNERWRAP} ${selectors.pie.SLICE}`).length;
+};
 
 describe("Donut Chart", () => {
 	let classyDonutChart;
 	let data;
 	beforeEach(() => {
-		// Remove the chart from the previous test case
-		const oldClassyContainer = grabClassyContainer(chartType);
-		if (oldClassyContainer) {
-			oldClassyContainer.parentNode.removeChild(oldClassyContainer);
-		}
-
 		// Append the chart container to DOM
 		const classyContainer = createClassyContainer(chartType);
 		document.body.appendChild(classyContainer);
@@ -65,6 +61,11 @@ describe("Donut Chart", () => {
 		classyDonutChart.drawChart();
 	});
 
+	afterEach(() => {
+		// Remove the chart resulted from this test case
+		removeChart(chartType);
+	});
+
 	it("Should work", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
@@ -85,16 +86,8 @@ describe("Donut Chart", () => {
 		expect(classyContainer.querySelectorAll(selectors.pie.SLICE).length).toBeLessThanOrEqual(Configuration.pie.sliceLimit + 1);
 	});
 
-	it("Should not be missing any of the labels in the processed data", () => {
-		const { input: inputLabels, processed: processedLabels } = grabInputAndProcessedData(classyDonutChart, data, "label");
-
-		expect(arraysHaveSameValues(inputLabels, processedLabels)).toBe(true);
-	});
-
-	it("Should not be missing any of the values in the processed data", () => {
-		const { input: inputValues, processed: processedValues } = grabInputAndProcessedData(classyDonutChart, data, "value");
-
-		expect(arraysHaveSameValues(inputValues, processedValues)).toBe(true);
+	it("Should not be missing any of the labels or values in the processed data", () => {
+		expect(inputAndProcessedDataMatch(classyDonutChart, data)).toBe(true);
 	});
 
 	/*
@@ -102,14 +95,16 @@ describe("Donut Chart", () => {
 	 * Testing
 	 */
 	it ("Should show tooltips", () => {
-		// Grab chart container in DOM
-		const classyContainer = grabClassyContainer(chartType);
+		setTimeout(() => {
+			// Grab chart container in DOM
+			const classyContainer = grabClassyContainer(chartType);
 
-		// Trigger click on a slice
-		d3.select(classyContainer).select(`${selectors.INNERWRAP} path`).dispatch("click");
+			// Trigger click on a slice
+			d3.select(classyContainer).select(`${selectors.INNERWRAP} path`).dispatch("click");
 
-		// Make sure the tooltip container exists now
-		expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();
+			// Make sure the tooltip container exists now
+			expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();
+		}, 5000);
 	});
 
 	it("Should filter results", () => {

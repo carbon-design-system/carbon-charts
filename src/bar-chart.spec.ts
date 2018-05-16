@@ -1,16 +1,26 @@
 import * as d3 from "d3";
 
 import { BarChart } from "./index";
-import { createClassyContainer, grabClassyContainer, selectors, colors } from "./test-tools";
+import {
+	createClassyContainer,
+	grabClassyContainer,
+	removeChart,
+	inputAndProcessedDataMatch,
+	selectors,
+	colors
+} from "./test-tools";
 
 const chartType = "bar";
 describe("Bar Chart", () => {
+	let classyBarChart;
+	let data;
+
 	beforeEach(() => {
 		// Append the chart container to DOM
 		const classyContainer = createClassyContainer(chartType);
 		document.body.appendChild(classyContainer);
 
-		const data = [];
+		data = [];
 		for (let i = 0; i < 10; i++) {
 			data.push({
 				"Part number": `773C-${ i * 2 }-L6EP-L22I-${ i * 8 }-L22I`,
@@ -30,12 +40,16 @@ describe("Bar Chart", () => {
 		};
 
 		// Instantiate chart object & draw on DOM
-		const classyBarChart = new BarChart(
+		classyBarChart = new BarChart(
 			classyContainer,
 			Object.assign({}, options, {type: chartType}),
 			data
 		);
 		classyBarChart.drawChart();
+	});
+
+	afterEach(() => {
+		removeChart(chartType);
 	});
 
 	it("Should work", () => {
@@ -46,6 +60,18 @@ describe("Bar Chart", () => {
 		expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
 	});
 
+	/*
+	 * Events
+	 * Testing (data comes in correctly, goes out correctly)
+	 */
+	it("Should not be missing any of the labels or values in the processed data", () => {
+		expect(inputAndProcessedDataMatch(classyBarChart, data)).toBe(true);
+	});
+
+	/*
+	 * Functionality
+	 * Testing
+	 */
 	it ("Should show tooltips", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
