@@ -5,18 +5,22 @@ import {
 	createClassyContainer,
 	grabClassyContainer,
 	removeChart,
+	inputAndProcessedDataMatch,
 	selectors,
 	colors
 } from "./test-tools";
 
 const chartType = "stacked-bar";
 describe("Stacked Bar Chart", () => {
+	let classyStackedBarChart;
+	let data;
+
 	beforeEach(() => {
 		// Append the chart container to DOM
 		const classyContainer = createClassyContainer(chartType);
 		document.body.appendChild(classyContainer);
 
-		const data = [];
+		data = [];
 		for (let i = 0; i < 10; i++) {
 			data.push({
 			"Part number": `773C-${ i * 2 }-L6EP-L22I-${ i * 8 }-L22I`,
@@ -36,7 +40,7 @@ describe("Stacked Bar Chart", () => {
 		};
 
 		// Instantiate chart object & draw on DOM
-		const classyStackedBarChart = new StackedBarChart(
+		classyStackedBarChart = new StackedBarChart(
 			classyContainer,
 			Object.assign({}, options, {type: chartType}),
 			data
@@ -55,6 +59,14 @@ describe("Stacked Bar Chart", () => {
 
 		// Expect chart container to contain the main chart SVG element
 		expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
+	});
+
+	/*
+	 * Events
+	 * Testing (data comes in correctly, goes out correctly)
+	 */
+	it("Should not be missing any of the labels or values in the processed data", () => {
+		expect(inputAndProcessedDataMatch(classyStackedBarChart, data)).toBe(true);
 	});
 
 	it ("Should show tooltips", () => {

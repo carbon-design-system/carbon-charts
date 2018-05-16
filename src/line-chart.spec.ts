@@ -5,17 +5,22 @@ import {
 	createClassyContainer,
 	grabClassyContainer,
 	removeChart,
+	inputAndProcessedDataMatch,
 	selectors,
-	colors } from "./test-tools";
+	colors
+} from "./test-tools";
 
 const chartType = "line";
 describe("Line Chart", () => {
+	let classyLineChart;
+	let data;
+
 	beforeEach(() => {
 		// Append the chart container to DOM
 		const classyContainer = createClassyContainer(chartType);
 		document.body.appendChild(classyContainer);
 
-		const data = [];
+		data = [];
 		for (let i = 0; i < 10; i++) {
 			data.push({
 			"Part number": `773C-${ i * 2 }-L6EP-L22I-${ i * 8 }-L22I`,
@@ -35,7 +40,7 @@ describe("Line Chart", () => {
 		};
 
 		// Instantiate chart object & draw on DOM
-		const classyLineChart = new LineChart(
+		classyLineChart = new LineChart(
 			classyContainer,
 			Object.assign({}, options, {type: chartType}),
 			data
@@ -54,6 +59,14 @@ describe("Line Chart", () => {
 
 		// Expect chart container to contain the main chart SVG element
 		expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
+	});
+
+	/*
+	 * Events
+	 * Testing (data comes in correctly, goes out correctly)
+	 */
+	it("Should not be missing any of the labels or values in the processed data", () => {
+		expect(inputAndProcessedDataMatch(classyLineChart, data)).toBe(true);
 	});
 
 	it ("Should show tooltips", () => {

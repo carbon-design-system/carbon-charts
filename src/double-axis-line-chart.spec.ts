@@ -4,6 +4,7 @@ import { DoubleAxisLineChart } from "./index";
 import {
 	createClassyContainer,
 	grabClassyContainer,
+	inputAndProcessedDataMatch,
 	removeChart,
 	selectors,
 	colors
@@ -11,12 +12,15 @@ import {
 
 const chartType = "double-axis-line";
 describe("Double Axis Line Chart", () => {
+	let classyDoubleAxisChart;
+	let data;
+
 	beforeEach(() => {
 		// Append the chart container to DOM
 		const classyContainer = createClassyContainer(chartType);
 		document.body.appendChild(classyContainer);
 
-		const data = [
+		data = [
 			{
 				"Day": "Monday",
 				"Clicks": 60000,
@@ -70,7 +74,7 @@ describe("Double Axis Line Chart", () => {
 		};
 
 		// Instantiate chart object & draw on DOM
-		const classyDoubleAxisChart = new DoubleAxisLineChart(
+		classyDoubleAxisChart = new DoubleAxisLineChart(
 			classyContainer,
 			Object.assign({}, options, {type: chartType}),
 			data
@@ -89,6 +93,14 @@ describe("Double Axis Line Chart", () => {
 
 		// Expect chart container to contain the main chart SVG element
 		expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
+	});
+
+	/*
+	 * Events
+	 * Testing (data comes in correctly, goes out correctly)
+	 */
+	it("Should not be missing any of the labels or values in the processed data", () => {
+		expect(inputAndProcessedDataMatch(classyDoubleAxisChart, data)).toBe(true);
 	});
 
 	it ("Should show tooltips", () => {

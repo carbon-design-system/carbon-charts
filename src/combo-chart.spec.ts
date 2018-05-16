@@ -5,18 +5,22 @@ import {
 	createClassyContainer,
 	grabClassyContainer,
 	removeChart,
+	inputAndProcessedDataMatch,
 	selectors,
 	colors
 } from "./test-tools";
 
 const chartType = "combo";
 describe("Combo Chart", () => {
+	let classyComboChart;
+	let data;
+
 	beforeEach(() => {
 		// Append the chart container to DOM
 		const classyContainer = createClassyContainer(chartType);
 		document.body.appendChild(classyContainer);
 
-		const data = [
+		data = [
 			{
 				"Part number": "2V2N-9KYPM",
 				"Total": 100000,
@@ -79,7 +83,7 @@ describe("Combo Chart", () => {
 		};
 
 		// Instantiate chart object & draw on DOM
-		const classyComboChart = new ComboChart(
+		classyComboChart = new ComboChart(
 			classyContainer,
 			Object.assign({}, options, {type: chartType}),
 			data
@@ -98,6 +102,14 @@ describe("Combo Chart", () => {
 
 		// Expect chart container to contain the main chart SVG element
 		expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
+	});
+
+	/*
+	 * Events
+	 * Testing (data comes in correctly, goes out correctly)
+	 */
+	it("Should not be missing any of the labels or values in the processed data", () => {
+		expect(inputAndProcessedDataMatch(classyComboChart, data)).toBe(true);
 	});
 
 	it ("Should show tooltips", () => {
