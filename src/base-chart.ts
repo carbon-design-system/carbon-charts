@@ -524,7 +524,42 @@ export class BaseChart {
 		this.resetOpacity();
 		d3.selectAll(".tooltip").remove();
 
+		this.removeTooltipEventListeners();
+	}
+
+	addTooltipEventListeners(tooltip: any) {
+		// Apply the event listeners to close the tooltip
+		// setTimeout is there to avoid catching the click event that opened the tooltip
+		setTimeout(() => {
+			// When ESC is pressed
+			window.onkeydown = (evt: KeyboardEvent) => {
+				if ("key" in evt && evt.key === "Escape" || evt.key === "Esc") {
+					this.hideTooltip();
+				}
+			};
+
+			// If clicked outside
+			window.onclick = (evt: MouseEvent) => {
+				const targetTagName = evt.target["tagName"];
+				const targetsToBeSkipped = ["rect", "circle", "path"];
+
+				if (targetsToBeSkipped.indexOf(targetTagName) === -1) {
+					this.hideTooltip();
+				}
+			};
+
+			// Stop clicking inside tooltip from bubbling up to window
+			tooltip.on("click", () => {
+				d3.event.stopPropagation();
+			});
+		}, 0);
+	}
+
+	removeTooltipEventListeners() {
+		// Remove eventlistener to close tooltip when ESC is pressed
 		window.onkeydown = null;
+		// Remove eventlistener to close tooltip when clicked outside
+		window.onclick = null;
 	}
 
 	showTooltip(d) {
@@ -563,11 +598,7 @@ export class BaseChart {
 			tooltip.append("div").attr("class", "arrow");
 		}
 
-		window.onkeydown = (evt: KeyboardEvent) => {
-			if ("key" in evt && evt.key === "Escape" || evt.key === "Esc") {
-				this.hideTooltip();
-			}
-		};
+		this.addTooltipEventListeners(tooltip);
 	}
 
 	// https://github.com/wbkd/d3-extended

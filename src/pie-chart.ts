@@ -201,11 +201,7 @@ export class PieChart extends BaseChart {
 			tooltip.append("div").attr("class", "arrow");
 		}
 
-		window.onkeydown = (evt: KeyboardEvent) => {
-			if ("key" in evt && evt.key === "Escape" || evt.key === "Esc") {
-				this.hideTooltip();
-			}
-		};
+		this.addTooltipEventListeners(tooltip);
 	}
 
 	addDataPointEventListener() {
