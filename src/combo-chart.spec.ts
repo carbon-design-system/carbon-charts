@@ -11,7 +11,7 @@ import {
 } from "./test-tools";
 
 const chartType = "combo";
-describe("Combo Chart", () => {
+describe("combo Chart", () => {
 	let classyComboChart;
 	let data;
 
@@ -96,7 +96,7 @@ describe("Combo Chart", () => {
 		removeChart(chartType);
 	});
 
-	it("Should work", () => {
+	it("should work", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
 
@@ -108,11 +108,11 @@ describe("Combo Chart", () => {
 	 * Events
 	 * Testing (data comes in correctly, goes out correctly)
 	 */
-	it("Should not be missing any of the labels or values in the processed data", () => {
+	it("should not be missing any of the labels or values in the processed data", () => {
 		expect(inputAndProcessedDataMatch(classyComboChart, data)).toBe(true);
 	});
 
-	it ("Should show tooltips", () => {
+	it ("should show tooltips", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
 

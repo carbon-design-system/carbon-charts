@@ -1,5 +1,5 @@
 // Extensions
-Object.prototype["containsKeysAndValuesFrom"] = (sourceObject) => {
+Object.prototype["containsKeysAndValuesFrom"] = sourceObject => {
 	let result = true;
 	Object.keys(sourceObject).map(key => {
 		const supposedValue = sourceObject[key];
@@ -12,7 +12,7 @@ Object.prototype["containsKeysAndValuesFrom"] = (sourceObject) => {
 };
 
 // Functions
-export const createClassyContainer = (chartType) => {
+export const createClassyContainer = chartType => {
 	const classyContainer = document.createElement("div");
 	classyContainer.id = `classy-${chartType}-chart-holder`;
 	classyContainer.classList.add("chart-holder");
@@ -20,11 +20,11 @@ export const createClassyContainer = (chartType) => {
 	return classyContainer;
 };
 
-export const grabClassyContainer = (chartType) => {
+export const grabClassyContainer = chartType => {
 	return document.getElementById(`classy-${chartType}-chart-holder`);
 };
 
-export const removeChart = (chartType) => {
+export const removeChart = chartType => {
 	const oldClassyContainer = grabClassyContainer(chartType);
 	if (oldClassyContainer) {
 		oldClassyContainer.parentNode.removeChild(oldClassyContainer);

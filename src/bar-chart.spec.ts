@@ -11,7 +11,7 @@ import {
 } from "./test-tools";
 
 const chartType = "bar";
-describe("Bar Chart", () => {
+describe("bar Chart", () => {
 	let classyBarChart;
 	let data;
 
@@ -52,7 +52,7 @@ describe("Bar Chart", () => {
 		removeChart(chartType);
 	});
 
-	it("Should work", () => {
+	it("should work", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
 
@@ -64,7 +64,7 @@ describe("Bar Chart", () => {
 	 * Events
 	 * Testing (data comes in correctly, goes out correctly)
 	 */
-	it("Should not be missing any of the labels or values in the processed data", () => {
+	it("should not be missing any of the labels or values in the processed data", () => {
 		expect(inputAndProcessedDataMatch(classyBarChart, data)).toBe(true);
 	});
 
@@ -72,7 +72,7 @@ describe("Bar Chart", () => {
 	 * Functionality
 	 * Testing
 	 */
-	it ("Should show tooltips", () => {
+	it ("should show tooltips", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
 

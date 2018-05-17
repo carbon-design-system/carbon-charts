@@ -11,7 +11,7 @@ import {
 } from "./test-tools";
 
 const chartType = "double-axis-line";
-describe("Double Axis Line Chart", () => {
+describe("double axis line chart", () => {
 	let classyDoubleAxisChart;
 	let data;
 
@@ -87,7 +87,7 @@ describe("Double Axis Line Chart", () => {
 		removeChart(chartType);
 	});
 
-	it("Should work", () => {
+	it("should work", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
 
@@ -99,11 +99,11 @@ describe("Double Axis Line Chart", () => {
 	 * Events
 	 * Testing (data comes in correctly, goes out correctly)
 	 */
-	it("Should not be missing any of the labels or values in the processed data", () => {
+	it("should not be missing any of the labels or values in the processed data", () => {
 		expect(inputAndProcessedDataMatch(classyDoubleAxisChart, data)).toBe(true);
 	});
 
-	it ("Should show tooltips", () => {
+	it ("should show tooltips", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
 

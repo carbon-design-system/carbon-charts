@@ -11,7 +11,7 @@ import {
 } from "./test-tools";
 
 const chartType = "stacked-bar";
-describe("Stacked Bar Chart", () => {
+describe("stacked bar chart", () => {
 	let classyStackedBarChart;
 	let data;
 
@@ -53,7 +53,7 @@ describe("Stacked Bar Chart", () => {
 		removeChart(chartType);
 	});
 
-	it("Should work", () => {
+	it("should work", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
 
@@ -65,11 +65,11 @@ describe("Stacked Bar Chart", () => {
 	 * Events
 	 * Testing (data comes in correctly, goes out correctly)
 	 */
-	it("Should not be missing any of the labels or values in the processed data", () => {
+	it("should not be missing any of the labels or values in the processed data", () => {
 		expect(inputAndProcessedDataMatch(classyStackedBarChart, data)).toBe(true);
 	});
 
-	it ("Should show tooltips", () => {
+	it ("should show tooltips", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
 

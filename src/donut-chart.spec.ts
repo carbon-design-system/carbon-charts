@@ -17,11 +17,9 @@ import { Configuration } from "./configuration";
 const chartType = "donut";
 
 // Functions
-const getNumberOfSlices = (classyContainer) => {
-	return classyContainer.querySelectorAll(`${selectors.INNERWRAP} ${selectors.pie.SLICE}`).length;
-};
+const getNumberOfSlices = classyContainer => classyContainer.querySelectorAll(`${selectors.INNERWRAP} ${selectors.pie.SLICE}`).length;
 
-describe("Donut Chart", () => {
+describe("donut Chart", () => {
 	let classyDonutChart;
 	let data;
 	beforeEach(() => {
@@ -66,7 +64,7 @@ describe("Donut Chart", () => {
 		removeChart(chartType);
 	});
 
-	it("Should work", () => {
+	it("should work", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
 
@@ -78,15 +76,15 @@ describe("Donut Chart", () => {
 	 * Events
 	 * Testing (data comes in correctly, goes out correctly)
 	 */
-	it(`Should show a maximum of ${(Configuration.pie.sliceLimit + 1)} slices`, () => {
+	it(`should show a maximum of ${(Configuration.pie.sliceLimit + 1)} slices`, () => {
 		// Grab chart container in DOM & # of current slices
 		const classyContainer = grabClassyContainer(chartType);
 
 		// (Configuration.pie.sliceLimit + 1) because of the auto-generated "Other" slice when (# of slices > Configuration.pie.sliceLimit)
-		expect(classyContainer.querySelectorAll(selectors.pie.SLICE).length).toBeLessThanOrEqual(Configuration.pie.sliceLimit + 1);
+		expect(getNumberOfSlices(classyContainer)).toBeLessThanOrEqual(Configuration.pie.sliceLimit + 1);
 	});
 
-	it("Should not be missing any of the labels or values in the processed data", () => {
+	it("should not be missing any of the labels or values in the processed data", () => {
 		expect(inputAndProcessedDataMatch(classyDonutChart, data)).toBe(true);
 	});
 
@@ -94,7 +92,7 @@ describe("Donut Chart", () => {
 	 * Functionality
 	 * Testing
 	 */
-	it ("Should show tooltips", () => {
+	it ("should show tooltips", () => {
 		setTimeout(() => {
 			// Grab chart container in DOM
 			const classyContainer = grabClassyContainer(chartType);
@@ -107,7 +105,7 @@ describe("Donut Chart", () => {
 		}, 5000);
 	});
 
-	it("Should filter results", () => {
+	it("should filter results", () => {
 		// Grab chart container in DOM & # of current slices
 		const classyContainer = grabClassyContainer(chartType);
 		const numberOfSlices = getNumberOfSlices(classyContainer);
