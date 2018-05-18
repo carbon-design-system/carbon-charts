@@ -1,14 +1,26 @@
+import * as d3 from "d3";
+
 import { ComboChart } from "./index";
-import { createClassyContainer, grabClassyContainer, mainSVGSelector, colors } from "./test-tools";
+import {
+	createClassyContainer,
+	grabClassyContainer,
+	removeChart,
+	inputAndProcessedDataMatch,
+	selectors,
+	colors
+} from "./test-tools";
 
 const chartType = "combo";
-describe("Combo Chart", () => {
+describe("combo Chart", () => {
+	let classyComboChart;
+	let data;
+
 	beforeEach(() => {
 		// Append the chart container to DOM
 		const classyContainer = createClassyContainer(chartType);
 		document.body.appendChild(classyContainer);
 
-		const data = [
+		data = [
 			{
 				"Part number": "2V2N-9KYPM",
 				"Total": 100000,
@@ -71,7 +83,7 @@ describe("Combo Chart", () => {
 		};
 
 		// Instantiate chart object & draw on DOM
-		const classyComboChart = new ComboChart(
+		classyComboChart = new ComboChart(
 			classyContainer,
 			Object.assign({}, options, {type: chartType}),
 			data
@@ -79,11 +91,35 @@ describe("Combo Chart", () => {
 		classyComboChart.drawChart();
 	});
 
-	it("Should work", () => {
+	afterEach(() => {
+		// Remove the chart resulted from this test case
+		removeChart(chartType);
+	});
+
+	it("should work", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
 
 		// Expect chart container to contain the main chart SVG element
-		expect(classyContainer.querySelector(mainSVGSelector)).toBeTruthy();
+		expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
+	});
+
+	/*
+	 * Events
+	 * Testing (data comes in correctly, goes out correctly)
+	 */
+	it("should not be missing any of the labels or values in the processed data", () => {
+		expect(inputAndProcessedDataMatch(classyComboChart, data)).toBe(true);
+	});
+
+	it ("should show tooltips", () => {
+		// Grab chart container in DOM
+		const classyContainer = grabClassyContainer(chartType);
+
+		// Trigger click on a slice
+		d3.select(classyContainer).select(`${selectors.INNERWRAP} rect`).dispatch("click");
+
+		// Make sure the tooltip container exists now
+		expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();
 	});
 });

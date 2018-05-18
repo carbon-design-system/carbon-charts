@@ -1,14 +1,26 @@
+import * as d3 from "d3";
+
 import { DoubleAxisLineChart } from "./index";
-import { createClassyContainer, grabClassyContainer, mainSVGSelector, colors } from "./test-tools";
+import {
+	createClassyContainer,
+	grabClassyContainer,
+	inputAndProcessedDataMatch,
+	removeChart,
+	selectors,
+	colors
+} from "./test-tools";
 
 const chartType = "double-axis-line";
-describe("Double Axis Line Chart", () => {
+describe("double axis line chart", () => {
+	let classyDoubleAxisChart;
+	let data;
+
 	beforeEach(() => {
 		// Append the chart container to DOM
 		const classyContainer = createClassyContainer(chartType);
 		document.body.appendChild(classyContainer);
 
-		const data = [
+		data = [
 			{
 				"Day": "Monday",
 				"Clicks": 60000,
@@ -62,7 +74,7 @@ describe("Double Axis Line Chart", () => {
 		};
 
 		// Instantiate chart object & draw on DOM
-		const classyDoubleAxisChart = new DoubleAxisLineChart(
+		classyDoubleAxisChart = new DoubleAxisLineChart(
 			classyContainer,
 			Object.assign({}, options, {type: chartType}),
 			data
@@ -70,11 +82,35 @@ describe("Double Axis Line Chart", () => {
 		classyDoubleAxisChart.drawChart();
 	});
 
-	it("Should work", () => {
+	afterEach(() => {
+		// Remove the chart resulted from this test case
+		removeChart(chartType);
+	});
+
+	it("should work", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
 
 		// Expect chart container to contain the main chart SVG element
-		expect(classyContainer.querySelector(mainSVGSelector)).toBeTruthy();
+		expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
+	});
+
+	/*
+	 * Events
+	 * Testing (data comes in correctly, goes out correctly)
+	 */
+	it("should not be missing any of the labels or values in the processed data", () => {
+		expect(inputAndProcessedDataMatch(classyDoubleAxisChart, data)).toBe(true);
+	});
+
+	it ("should show tooltips", () => {
+		// Grab chart container in DOM
+		const classyContainer = grabClassyContainer(chartType);
+
+		// Trigger click on a slice
+		d3.select(classyContainer).select(`${selectors.INNERWRAP} circle`).dispatch("click");
+
+		// Make sure the tooltip container exists now
+		expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();
 	});
 });
