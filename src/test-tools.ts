@@ -47,7 +47,7 @@ export const inputAndProcessedDataMatch = (chartObj, inputData) => {
 
 	let result = processedDataPoints.length === inputData.length;
 	if (result) {
-		processedDataPoints.map(dataPoint => {
+		processedDataPoints.forEach(dataPoint => {
 			// Check if every piece of data in the processed data array
 			// Contains every key-value pair from the input data provided to the chart
 			if (!dataPoint.containsKeysAndValuesFrom(inputData)) {
