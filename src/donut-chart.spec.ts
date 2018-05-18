@@ -93,16 +93,14 @@ describe("donut Chart", () => {
 	 * Testing
 	 */
 	it ("should show tooltips", () => {
-		setTimeout(() => {
-			// Grab chart container in DOM
-			const classyContainer = grabClassyContainer(chartType);
+		// Grab chart container in DOM
+		const classyContainer = grabClassyContainer(chartType);
 
-			// Trigger click on a slice
-			d3.select(classyContainer).select(`${selectors.INNERWRAP} path`).dispatch("click");
+		// Trigger click on a slice
+		d3.select(classyContainer).select(`${selectors.INNERWRAP} path`).dispatch("click");
 
-			// Make sure the tooltip container exists now
-			expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();
-		}, 5000);
+		// Make sure the tooltip container exists now
+		expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();
 	});
 
 	it("should filter results", () => {
