@@ -82,7 +82,7 @@ describe("pie chart", () => {
 		// Grab chart container in DOM & # of current slices
 		const classyContainer = grabClassyContainer(chartType);
 
-		// (Configuration.pie.sliceLimit + 1) because of the auto-generated "Other" slice when (# of slices > Configuration.pie.sliceLimit)
+		// (Configuration.pie.sliceLimit + 1) because of the auto-generated "Other" slice when (# of datapoints > Configuration.pie.sliceLimit)
 		expect(getNumberOfSlices(classyContainer)).toBeLessThanOrEqual(Configuration.pie.sliceLimit + 1);
 	});
 
