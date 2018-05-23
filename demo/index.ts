@@ -513,6 +513,13 @@ const chartTypes = [
 	}
 ];
 
+const changeData = (dataToChange: any) => {
+	return dataToChange.map(dataPoint => {
+		const newValue = Math.max(0.2 * dataPoint.value, Math.floor(dataPoint.value * Math.random() * (Math.random() * 5)));
+		return Object.assign({}, dataPoint, {value: newValue});
+	});
+};
+
 chartTypes.forEach(type => {
 	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
 	if (classyContainer) {
@@ -563,15 +570,17 @@ chartTypes.forEach(type => {
 				const classyPieChart = new PieChart(
 					classyContainer,
 					Object.assign({}, type.options, {type: type.id}),
-					type.data
-				);
-				classyPieChart.setData(
 					new Promise((resolve, reject) => {
 						setTimeout(() => {
 							resolve(type.data);
-						}, 2000);
+						}, 0);
 					})
 				);
+
+				setInterval(() => {
+					classyPieChart.setData(changeData(type.data));
+				}, 3000);
+
 				break;
 			case "donut":
 				const classyDonutChart = new DonutChart(
@@ -579,7 +588,10 @@ chartTypes.forEach(type => {
 					Object.assign({}, type.options, {type: type.id}),
 					type.data
 				);
-				classyDonutChart.drawChart();
+
+				setInterval(() => {
+					classyDonutChart.setData(changeData(type.data));
+				}, 3000);
 				break;
 		}
 	}

@@ -4,6 +4,10 @@ import { Configuration } from "./configuration";
 import { Tools } from "./tools";
 
 export class PieChart extends BaseChart {
+	pie: any;
+	arc: any;
+	path: any;
+
 	constructor(holder: Element, options?: any, data?: any, type: string = "pie") {
 		super(holder, options, data);
 
@@ -11,6 +15,10 @@ export class PieChart extends BaseChart {
 
 		if (this.options.containerResizable) {
 			this.resizeWhenContainerChange();
+		}
+
+		if (data) {
+			this.setData(data);
 		}
 	}
 
@@ -44,14 +52,16 @@ export class PieChart extends BaseChart {
 
 			// Perform the draw or update chart
 			if (initialDraw) {
+				console.log("initialDraw()");
+
 				this.initialDraw();
 
 				const overlayEl = <HTMLElement>this.holder.querySelector("div.chart-overlay");
 				overlayEl.style.display = "none";
 			} else {
-				console.log("updateChart");
+				console.log("updateChart()");
 
-				// this.interpolateValues(value);
+				this.interpolateValues(value);
 			}
 		});
 	}
@@ -87,27 +97,130 @@ export class PieChart extends BaseChart {
 		this.addDataPointEventListener();
 	}
 
-	// interpolateValues(newData: any) {
-	// 	const oldData = this.data;
+	interpolateValues(newData: any) {
+		// console.log("NEW DATA", newData);
 
-	// 	const pie = d3.pie()
-	// 		.value(function(d: any) { return d.value; })
-	// 		.sort(null);
+		const oldData = this.data;
+		const processedNewData = this.sortAndRepartitionData(newData);
+		// console.log("PROCESSED NEW DATA", processedNewData);
+		const activeSeries = this.getActiveDataSeries();
+		let keys: any = [];
+		let dataList = processedNewData;
 
-	// 	const path = this.svg.datum(newData).selectAll("path")
-	// 		.data(pie)
-	// 		.enter().append("path")
-	// 			.attr("d", arc)
-	// 			.attr("fill", function(d, i) {
-	// 				return this.options.colors[d.data.index];
-	// 			}.bind(this))
-	// 			.attr("stroke", function(d, i) {
-	// 				return this.options.colors[d.data.index];
-	// 			}.bind(this));
-	// 			.each(function(d) { this._current = d; });
+		if (activeSeries) {
+			keys = dataList.map(item => item.label);
+			// keys = activeSeries;
+			// console.log("activeSeries", keys, dataList.map(item => item.label));
 
-	// 	this.data = this.sortAndRepartitionData(value);
-	// }
+			dataList = dataList.filter(item => keys.indexOf(item.label) > -1);
+		} else {
+			// console.log("no activeSeries");
+			dataList = dataList.map(entry => {
+				keys.push(entry.label);
+			});
+		}
+
+		this.options.yDomain = keys;
+
+		// console.log("CHANGED DATA", dataList);
+
+		this.pie.value(function(d: any) { return d.value; }); // change the value function
+		this.path = this.path.data(this.pie(dataList)); // compute the new angles
+		this.path.transition().duration(750).attrTween("d", arcTween); // redraw the arcs
+
+		const arc = this.arc;
+		function arcTween(a) {
+			const i = d3.interpolate(this._lastValue, a);
+			this._lastValue = i(0);
+
+			return function(t) {
+				return arc(i(t));
+			};
+		}
+
+		const actualChartSize: any = this.getActualChartSize(this.container);
+		const radius: number = Math.min(actualChartSize.width, actualChartSize.height) / 2;
+		// const midAngle = d => d.startAngle + (d.endAngle - d.startAngle) / 2;
+		this.svg.selectAll("text.chart-label")
+			.transition().duration(375).style("opacity", 0).on("end", function(d) {
+				d3.select(this).transition().duration(375).style("opacity", 1);
+			});
+
+		setTimeout(() => {
+			this.svg.selectAll("text.chart-label")
+				.data(this.pie(dataList))
+				.attr("transform", function(d) {
+					const theta = d.endAngle - d.startAngle;
+
+					const transformString = "translate(" +
+					(radius * Math.sin((theta / 2) + d.startAngle )) +
+					"," +
+					(-1 * radius * Math.cos((theta / 2) + d.startAngle )) + ")";
+
+					this._latestTransform = transformString;
+
+					return transformString;
+				})
+				.attr("dy", Configuration.pie.label.dy)
+				.style("text-anchor", function(d) {
+					const QUADRANT = Math.PI / 4;
+					const rads = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+
+					if (rads >= QUADRANT && rads <= 3 * QUADRANT) {
+						return "start";
+					} else if ((rads > 7 * QUADRANT && rads < QUADRANT) || (rads > 3 * QUADRANT && rads < 5 * QUADRANT)) {
+						return "middle";
+					} else if (rads >= 5 * QUADRANT && rads <= 7 * QUADRANT) {
+						return "end";
+					} else {
+						return "middle";
+					}
+				})
+				.text(function(d) {
+					return Tools.convertValueToPercentage(d.data.value, dataList);
+				});
+		}, 375);
+		// .transition().duration(1000)
+		// .attrTween("transform", function(d) {
+		// 	this._current = this._current || d;
+
+		// 	const interpolate = d3.interpolate(this._current, d);
+		// 	this._current = interpolate(0);
+		// 	return function(t) {
+		// 		const d2 = interpolate(t);
+		// 		const pos = arc.centroid(d2);
+		// 		pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+		// 		return "translate(" + pos + ")";
+		// 	};
+		// });
+
+		// function interpolateTransform(t) {
+		// 	const theta = d.endAngle - d.startAngle;
+
+		// 	const transformString = "translate(" +
+		// 	(radius * Math.sin((theta / 2) + d.startAngle )) +
+		// 	"," +
+		// 	(-1 * radius * Math.cos((theta / 2) + d.startAngle )) + ")";
+
+		// 	this._latestTransform = transformString;
+
+		// 	return transformString;
+		// }
+
+		function textTween(a) {
+			const i = d3.interpolate(this._latestTransform, a);
+			this._latestTransform = i(0);
+
+			return function(t) {
+				console.log(t);
+				return i(t);
+			};
+		}
+
+		this.data = processedNewData;
+		// this.path = this.path
+		// 		.each(function(d) { this._lastValue = d; });
+	}
 
 	draw() {
 		const activeSeries = this.getActiveDataSeries();
@@ -123,6 +236,8 @@ export class PieChart extends BaseChart {
 				keys.push(entry.label);
 			});
 		}
+
+		// console.log("INITIAL DATA", dataList);
 
 		this.options.yDomain = keys;
 
@@ -141,40 +256,46 @@ export class PieChart extends BaseChart {
 		// Compute the correct inner & outer radius
 		const { pie: pieConfigs } = Configuration;
 		const marginedRadius = radius - (pieConfigs.label.margin * (actualChartSize.width / pieConfigs.maxWidth));
-		const arc = d3.arc()
+		this.arc = d3.arc()
 				.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
 				.outerRadius(marginedRadius);
 
-		const pie = d3.pie()
+		this.pie = d3.pie()
 			.value(function(d: any) { return d.value; })
 			.sort(null);
 
 		// Draw the slices
-		const path = this.svg.selectAll("path")
-			.data(pie(dataList))
+		this.path = this.svg.selectAll("path")
+			.data(this.pie(dataList))
 			.enter()
 			.append("path")
-			.attr("d", arc)
+			.attr("d", this.arc)
 			.attr("fill", function(d, i) {
 				return this.options.colors[d.data.index];
 			}.bind(this))
 			.attr("stroke", function(d, i) {
 				return this.options.colors[d.data.index];
-			}.bind(this));
+			}.bind(this))
+			.each(function(d) { this._lastValue = d; });
 
 		// Slices labels
 		this.svg
 			.selectAll("g.inner-wrap")
-			.data(pie(dataList))
+			.data(this.pie(dataList))
 			.enter()
 			.append("text")
+			.classed("chart-label", true)
 			.attr("transform", function(d) {
 				const theta = d.endAngle - d.startAngle;
 
-				return "translate(" +
-						(radius * Math.sin((theta / 2) + d.startAngle )) +
-						"," +
-						(-1 * radius * Math.cos((theta / 2) + d.startAngle )) + ")";
+				const transformString = "translate(" +
+				(radius * Math.sin((theta / 2) + d.startAngle )) +
+				"," +
+				(-1 * radius * Math.cos((theta / 2) + d.startAngle )) + ")";
+
+				this._latestTransform = transformString;
+
+				return transformString;
 			})
 			.attr("dy", Configuration.pie.label.dy)
 			.style("text-anchor", function(d) {
