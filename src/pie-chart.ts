@@ -180,32 +180,6 @@ export class PieChart extends BaseChart {
 					return Tools.convertValueToPercentage(d.data.value, dataList);
 				});
 		}, 375);
-		// .transition().duration(1000)
-		// .attrTween("transform", function(d) {
-		// 	this._current = this._current || d;
-
-		// 	const interpolate = d3.interpolate(this._current, d);
-		// 	this._current = interpolate(0);
-		// 	return function(t) {
-		// 		const d2 = interpolate(t);
-		// 		const pos = arc.centroid(d2);
-		// 		pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
-		// 		return "translate(" + pos + ")";
-		// 	};
-		// });
-
-		// function interpolateTransform(t) {
-		// 	const theta = d.endAngle - d.startAngle;
-
-		// 	const transformString = "translate(" +
-		// 	(radius * Math.sin((theta / 2) + d.startAngle )) +
-		// 	"," +
-		// 	(-1 * radius * Math.cos((theta / 2) + d.startAngle )) + ")";
-
-		// 	this._latestTransform = transformString;
-
-		// 	return transformString;
-		// }
 
 		function textTween(a) {
 			const i = d3.interpolate(this._latestTransform, a);
@@ -318,10 +292,8 @@ export class PieChart extends BaseChart {
 	}
 
 	reduceOpacity(exception) {
-		this.svg.selectAll("rect").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
 		this.svg.selectAll("path").attr("stroke-opacity", this.options.type !== "pie" ? Configuration.charts.reduceOpacity.opacity : 0);
 		this.svg.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
-		this.svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
 		d3.select(exception).attr("fill-opacity", false);
 		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
