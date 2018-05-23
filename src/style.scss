@@ -6,6 +6,22 @@ $default_transition: all .1s ease-out;
 	height: 100%;
 	position: relative;
 
+	div.chart-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(256, 256, 256, 0.75);
+
+		span {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
 	svg {
 		overflow: visible !important;
 		rect, circle {

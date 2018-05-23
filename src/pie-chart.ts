@@ -8,36 +8,63 @@ export class PieChart extends BaseChart {
 		super(holder, options, data);
 
 		this.options.type = type;
-		const keys: any = [];
-
-		// Check for duplicate keys
-		const duplicates = Tools.duplicateKeysInData(this.data);
-		if (duplicates.length > 0) {
-			console.error(`${Tools.capitalizeFirstLetter(this.options.type)} Chart - You have duplicate keys`, duplicates);
-		}
-
-		// Process data, and generate keys for legend
-		this.sortAndRepartitionData();
-		this.data.map(entry => {
-			keys.push(entry.label);
-		});
-
-		this.options.yDomain = keys;
 
 		if (this.options.containerResizable) {
 			this.resizeWhenContainerChange();
 		}
 	}
 
+	setData(data: any) {
+		const { selectors } = Configuration;
+		const innerWrapElement = this.holder.querySelector(selectors.INNERWRAP);
+		const initialDraw = innerWrapElement === null;
+
+		if (initialDraw) {
+			const loadingOverlay = document.createElement("div");
+			loadingOverlay.classList.add("chart-overlay");
+			loadingOverlay.innerHTML = "<span>loading...</span>";
+			this.holder.querySelector(selectors.CHARTWRAPPER).appendChild(loadingOverlay);
+		}
+
+		Promise.resolve(data).then(value => {
+			// Check for duplicate keys in the data
+			const duplicates = Tools.duplicateKeysInData(value);
+			if (duplicates.length > 0) {
+				console.error(`${Tools.capitalizeFirstLetter(this.options.type)} Chart - You have duplicate keys`, duplicates);
+			}
+
+			// Process data
+			const keys: any = [];
+			this.data = this.sortAndRepartitionData(value);
+			this.data.map(entry => {
+				keys.push(entry.label);
+			});
+
+			this.options.yDomain = keys;
+
+			// Perform the draw or update chart
+			if (initialDraw) {
+				this.initialDraw();
+
+				const overlayEl = <HTMLElement>this.holder.querySelector("div.chart-overlay");
+				overlayEl.style.display = "none";
+			} else {
+				console.log("updateChart");
+
+				// this.interpolateValues(value);
+			}
+		});
+	}
+
 	// Sort data by value (descending)
 	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
-	sortAndRepartitionData() {
-		const sortedData = this.data.sort((a, b) => b.value - a.value);
+	sortAndRepartitionData(data: any) {
+		const sortedData = data.sort((a, b) => b.value - a.value);
 		const stopAt = Configuration.pie.sliceLimit;
 		const rest = sortedData.slice(stopAt);
 		const restAccumulatedValue = rest.reduce((accum, item) => accum + item.value, 0);
 
-		this.data = sortedData.slice(0, stopAt)
+		return sortedData.slice(0, stopAt)
 			.concat([{
 				label: Configuration.pie.label.other,
 				value: restAccumulatedValue,
@@ -46,7 +73,7 @@ export class PieChart extends BaseChart {
 			.map((item, i) => Object.assign(item, { index: i }));
 	}
 
-	drawChart() {
+	initialDraw() {
 		this.setSVG();
 
 		this.addLegend();
@@ -59,6 +86,28 @@ export class PieChart extends BaseChart {
 		this.draw();
 		this.addDataPointEventListener();
 	}
+
+	// interpolateValues(newData: any) {
+	// 	const oldData = this.data;
+
+	// 	const pie = d3.pie()
+	// 		.value(function(d: any) { return d.value; })
+	// 		.sort(null);
+
+	// 	const path = this.svg.datum(newData).selectAll("path")
+	// 		.data(pie)
+	// 		.enter().append("path")
+	// 			.attr("d", arc)
+	// 			.attr("fill", function(d, i) {
+	// 				return this.options.colors[d.data.index];
+	// 			}.bind(this))
+	// 			.attr("stroke", function(d, i) {
+	// 				return this.options.colors[d.data.index];
+	// 			}.bind(this));
+	// 			.each(function(d) { this._current = d; });
+
+	// 	this.data = this.sortAndRepartitionData(value);
+	// }
 
 	draw() {
 		const activeSeries = this.getActiveDataSeries();

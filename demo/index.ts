@@ -565,7 +565,13 @@ chartTypes.forEach(type => {
 					Object.assign({}, type.options, {type: type.id}),
 					type.data
 				);
-				classyPieChart.drawChart();
+				classyPieChart.setData(
+					new Promise((resolve, reject) => {
+						setTimeout(() => {
+							resolve(type.data);
+						}, 2000);
+					})
+				);
 				break;
 			case "donut":
 				const classyDonutChart = new DonutChart(

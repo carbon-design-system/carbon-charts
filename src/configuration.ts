@@ -142,4 +142,15 @@ export namespace Configuration {
 		magicLeft1: 11,
 		magicLeft2: 12
 	};
+
+	export const selectors = {
+		OUTERSVG: "svg.chart-svg",
+		INNERWRAP: "g.inner-wrap",
+		CHARTWRAPPER: "div.chart-wrapper",
+		TOOLTIP: "div.chart-tooltip",
+		LEGEND_BTN: "li.legend-btn",
+		pie: {
+			SLICE: "path"
+		}
+	};
 }

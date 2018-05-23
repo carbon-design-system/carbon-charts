@@ -1,3 +1,5 @@
+import { Configuration } from "./configuration";
+
 // Extensions
 Object.prototype["containsKeysAndValuesFrom"] = sourceObject => {
 	let result = true;
@@ -60,15 +62,7 @@ export const inputAndProcessedDataMatch = (chartObj, inputData) => {
 };
 
 // Objects/data
-export const selectors = {
-	OUTERSVG: "svg.chart-svg",
-	INNERWRAP: "g.inner-wrap",
-	TOOLTIP: "div.chart-tooltip",
-	LEGEND_BTN: "li.legend-btn",
-	pie: {
-		SLICE: "path"
-	}
-};
+export const selectors = Configuration.selectors;
 export const colors = [
 	"#009BEF",
 	"#95D13C",
