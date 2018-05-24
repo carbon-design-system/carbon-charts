@@ -149,32 +149,10 @@ export class PieChart extends BaseChart {
 		setTimeout(() => {
 			this.svg.selectAll("text.chart-label")
 				.data(this.pie(dataList))
-				.attr("transform", function(d) {
-					const theta = d.endAngle - d.startAngle;
-
-					const transformString = "translate(" +
-					(radius * Math.sin((theta / 2) + d.startAngle )) +
-					"," +
-					(-1 * radius * Math.cos((theta / 2) + d.startAngle )) + ")";
-
-					this._latestTransform = transformString;
-
-					return transformString;
-				})
 				.attr("dy", Configuration.pie.label.dy)
-				.style("text-anchor", function(d) {
-					const QUADRANT = Math.PI / 4;
-					const rads = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
-
-					if (rads >= QUADRANT && rads <= 3 * QUADRANT) {
-						return "start";
-					} else if ((rads > 7 * QUADRANT && rads < QUADRANT) || (rads > 3 * QUADRANT && rads < 5 * QUADRANT)) {
-						return "middle";
-					} else if (rads >= 5 * QUADRANT && rads <= 7 * QUADRANT) {
-						return "end";
-					} else {
-						return "middle";
-					}
+				.style("text-anchor", this._deriveTextAnchor)
+				.attr("transform", (d) => {
+					return this._deriveTransformString(d, radius);
 				})
 				.text(function(d) {
 					return Tools.convertValueToPercentage(d.data.value, dataList);
@@ -183,7 +161,6 @@ export class PieChart extends BaseChart {
 
 		function textTween(a) {
 			const i = d3.interpolate(this._latestTransform, a);
-			this._latestTransform = i(0);
 
 			return function(t) {
 				console.log(t);
@@ -259,32 +236,10 @@ export class PieChart extends BaseChart {
 			.enter()
 			.append("text")
 			.classed("chart-label", true)
-			.attr("transform", function(d) {
-				const theta = d.endAngle - d.startAngle;
-
-				const transformString = "translate(" +
-				(radius * Math.sin((theta / 2) + d.startAngle )) +
-				"," +
-				(-1 * radius * Math.cos((theta / 2) + d.startAngle )) + ")";
-
-				this._latestTransform = transformString;
-
-				return transformString;
-			})
 			.attr("dy", Configuration.pie.label.dy)
-			.style("text-anchor", function(d) {
-				const QUADRANT = Math.PI / 4;
-				const rads = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
-
-				if (rads >= QUADRANT && rads <= 3 * QUADRANT) {
-					return "start";
-				} else if ((rads > 7 * QUADRANT && rads < QUADRANT) || (rads > 3 * QUADRANT && rads < 5 * QUADRANT)) {
-					return "middle";
-				} else if (rads >= 5 * QUADRANT && rads <= 7 * QUADRANT) {
-					return "end";
-				} else {
-					return "middle";
-				}
+			.style("text-anchor", this._deriveTextAnchor)
+			.attr("transform", (d) => {
+				return this._deriveTransformString(d, radius);
 			})
 			.text(function(d) {
 				return Tools.convertValueToPercentage(d.data.value, dataList);
@@ -292,8 +247,10 @@ export class PieChart extends BaseChart {
 	}
 
 	reduceOpacity(exception) {
-		this.svg.selectAll("path").attr("stroke-opacity", this.options.type !== "pie" ? Configuration.charts.reduceOpacity.opacity : 0);
+		this.svg.selectAll("path").attr("stroke-opacity", 0);
 		this.svg.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
+
+		// Fade out everything except for this element
 		d3.select(exception).attr("fill-opacity", false);
 		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
@@ -389,34 +346,33 @@ export class PieChart extends BaseChart {
 			this.update();
 			this.repositionSVG();
 			this.positionLegend();
+		}
+	}
 
-			// TODO - Finish this for optimized text resizing logic
-			// const actualChartSize: any = this.getActualChartSize(this.container)
-			// 	, dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height)
-			// 	, radius: number = dimensionToUseForScale / 2
+	// Helper functions
+	private _deriveTransformString(d, radius) {
+		const theta = d.endAngle - d.startAngle;
 
-			// const { pie: pieConfigs } = Configuration
-			// 	, scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth
+		const transformString = "translate(" +
+		(radius * Math.sin((theta / 2) + d.startAngle )) +
+		"," +
+		(-1 * radius * Math.cos((theta / 2) + d.startAngle )) + ")";
 
-			// this.svg
-			// .selectAll('text')
-			// .attr("dy", function(d) {
-			// 	if (d) {
-			// 		const QUADRANT = Math.PI / 4
-			// 			, rads = ((d.endAngle - d.startAngle) / 2) + d.startAngle
-			// 			, theta = rads * 180 / Math.PI
-			// 		if (d.data.label === '2V2N-9KYPM version 1') {
-			// 			console.log(theta / QUADRANT)
-			// 		}
-			// 		if (rads === 1) {
-			// 			return 0.1 + "em"
-			// 		} else {
-			// 			return 0.9 + "em"
-			// 		}
-			// 	} else {
-			// 		return null
-			// 	}
-			// });
+		return transformString;
+	}
+
+	private _deriveTextAnchor(d) {
+		const QUADRANT = Math.PI / 4;
+		const rads = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+
+		if (rads >= QUADRANT && rads <= 3 * QUADRANT) {
+			return "start";
+		} else if ((rads > 7 * QUADRANT && rads < QUADRANT) || (rads > 3 * QUADRANT && rads < 5 * QUADRANT)) {
+			return "middle";
+		} else if (rads >= 5 * QUADRANT && rads <= 7 * QUADRANT) {
+			return "end";
+		} else {
+			return "middle";
 		}
 	}
 }
