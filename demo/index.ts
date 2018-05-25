@@ -520,6 +520,7 @@ const changeData = (dataToChange: any) => {
 	});
 };
 
+let accum = 0;
 chartTypes.forEach(type => {
 	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
 	if (classyContainer) {
@@ -577,9 +578,11 @@ chartTypes.forEach(type => {
 					})
 				);
 
-				setInterval(() => {
-					classyPieChart.setData(changeData(type.data));
-				}, 3000);
+				// setInterval(() => {
+				// 	if (accum++ < 20) {
+				// 		classyPieChart.setData(changeData(type.data));
+				// 	}
+				// }, 3000);
 
 				break;
 			case "donut":
@@ -589,9 +592,15 @@ chartTypes.forEach(type => {
 					type.data
 				);
 
-				setInterval(() => {
-					classyDonutChart.setData(changeData(type.data));
-				}, 3000);
+				// classyDonutChart.donutCenter.getConfigs.number = 10000;
+				// classyDonutChart.donutCenter.update();
+
+				window.onkeydown = (e) => {
+					if (e.keyCode === 13) {
+						classyDonutChart.setData(changeData(type.data));
+					}
+				};
+
 				break;
 		}
 	}

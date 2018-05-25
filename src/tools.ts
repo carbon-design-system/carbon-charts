@@ -1,3 +1,4 @@
+// Functions
 export namespace Tools {
 	export function debounce(func, wait, immediate?) {
 		let timeout;
@@ -59,5 +60,26 @@ export namespace Tools {
 
 	export function convertValueToPercentage(item, fullData) {
 		return Math.floor(item / fullData.reduce((accum, val) => accum + val.value, 0) * 100) + "%";
+	}
+
+	export function arrayDifferences(oldArray: any[], newArray: any[]) {
+		const difference = {
+			missing: [],
+			added: []
+		};
+
+		oldArray.forEach(element => {
+			if (newArray.indexOf(element) === -1) {
+				difference.missing.push(element);
+			}
+		});
+
+		newArray.forEach(element => {
+			if (oldArray.indexOf(element) === -1) {
+				difference.added.push(element);
+			}
+		});
+
+		return difference;
 	}
 }

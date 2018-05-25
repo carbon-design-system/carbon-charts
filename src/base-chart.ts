@@ -262,6 +262,7 @@ export class BaseChart {
 		c.selectAll(".legend-btn").filter(".active").each(function() {
 			activeSeries.push(d3.select(this).select("text").text());
 		});
+
 		return activeSeries;
 	}
 

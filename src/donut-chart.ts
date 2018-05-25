@@ -84,4 +84,8 @@ export class DonutCenter {
 			.attr("y", Configuration.donut.centerText.title.y)
 			.text(this.configs.label);
 	}
+
+	update() {
+
+	}
 }
