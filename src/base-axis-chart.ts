@@ -22,7 +22,6 @@ export class BaseAxisChart extends BaseChart {
 	getLegendItems() {
 		let legendItems = [];
 		if (this.options.dimension) {
-			console.log("DIMENSION", this.options.dimension);
 			const newKeys = <any>[];
 			this.data.forEach(d => {
 				if (!newKeys.includes(d[this.options.dimension])) {

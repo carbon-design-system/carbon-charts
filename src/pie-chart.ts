@@ -48,7 +48,7 @@ export class PieChart extends BaseChart {
 				keys.push(entry.label);
 			});
 
-			this.options.yDomain = keys;
+			this.options.keys = keys;
 
 			// Perform the draw or update chart
 			if (initialDraw) {
@@ -164,7 +164,7 @@ export class PieChart extends BaseChart {
 
 		// console.log("INITIAL DATA", dataList);
 
-		this.options.yDomain = keys;
+		this.options.keys = keys;
 
 		const actualChartSize: any = this.getActualChartSize(this.container);
 		const radius: number = Math.min(actualChartSize.width, actualChartSize.height) / 2;

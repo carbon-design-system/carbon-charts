@@ -265,6 +265,11 @@ export class BaseChart {
 	// Legend
 	getLegendItems() {
 		let legendItems = [];
+
+		if (this.options.keys) {
+			legendItems = this.options.keys;
+		}
+
 		return legendItems;
 	}
 
