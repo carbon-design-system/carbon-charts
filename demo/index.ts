@@ -598,6 +598,12 @@ chartTypes.forEach(type => {
 				window.onkeydown = (e) => {
 					if (e.keyCode === 13) {
 						classyDonutChart.setData(changeData(type.data));
+
+						const { number: centerNumber } = classyDonutChart.center.configs;
+						const newCenterNumber = Math.floor(Math.max(0.2 * centerNumber, centerNumber * Math.random() * (Math.random() * 5)));
+						classyDonutChart.center.configs.number = newCenterNumber;
+
+						classyDonutChart.center.update();
 					}
 				};
 

@@ -40,10 +40,15 @@ export class DonutChart extends PieChart {
 
 export class DonutCenter {
 	configs: any;
+	oldConfigs: any;
+	donutSVG: any;
 
 	constructor(configs: any) {
 		if (configs) {
 			this.configs = configs;
+
+			// Keep track of changes to the configs above
+			this.oldConfigs = Object.assign({}, configs);
 		} else {
 			console.error("Configuration object is missing for DonutCenter");
 		}
@@ -62,18 +67,47 @@ export class DonutCenter {
 			.attr("text-anchor", "middle")
 			.attr("y", Configuration.donut.centerText.title.y)
 			.text(this.configs.label);
+
+		this.donutSVG = svg;
 	}
 
 	update() {
+		const possiblyNewConfigs = this.configs;
+		// If the configs are different from the previous update() call
+		if (this.oldConfigs !== possiblyNewConfigs) {
+			const newNumber = this.configs.number;
+			// Update center number
+			this.donutSVG.select("text.donut-figure")
+				.transition()
+				.duration(700)
+				.tween("text", function() {
+					const d3Ref = d3.select(this);
+					// Remove commas from the current value string, and convert to an int
+					const currentValue = parseInt(d3Ref.text().replace(/[, ]+/g, ""), 10);
+					const i = d3.interpolateNumber(currentValue, newNumber);
 
+					const formatInterpolatedValue = number => Math.floor(number).toLocaleString();
+					return function(t) {
+						d3Ref.text(formatInterpolatedValue(i(t)));
+					};
+				});
+
+			// Update center label
+			this.donutSVG.select("text.donut-title")
+				.text(this.configs.label);
+
+			// Set the latest configs in record to keep track of future config updates
+			this.oldConfigs = Object.assign({}, this.configs);
+		}
 	}
 
 	resize(svgElement: any, actualChartSize: any) {
-		// If the dimensions of the chart are smaller than a certain number (e.g. 175x175)
-		// Resize the center text sizes
 		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
 		const { pie: pieConfigs } = Configuration;
 		const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
+
+		// If the dimensions of the chart are smaller than a certain number (e.g. 175x175)
+		// Resize the center text sizes
 		if (dimensionToUseForScale < Configuration.donut.centerText.breakpoint) {
 			svgElement.select("text.donut-figure")
 				.style("font-size",
