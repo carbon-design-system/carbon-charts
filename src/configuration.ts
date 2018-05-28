@@ -1,4 +1,37 @@
+const baseOptions: any = {
+	legendClickable: true,
+	containerResizable: true,
+	type: "basic",
+	colors: [
+		"#009BEF",
+		"#95D13C",
+		"#785EF0",
+		"#F87EAC",
+		"#FFB000",
+		"#00B6CB",
+		"#FF5C49",
+		"#047CC0",
+		"#FE8500",
+		"#5A3EC8",
+		"#40D5BB",
+		"#FF509E"
+	]
+};
+
+const axisOptions: any = Object.assign({}, baseOptions, {
+	xDomain: [],
+	yDomain: [],
+	y2Domain: [],
+	yTicks: 5,
+	y2Ticks: 10
+});
+
 export namespace Configuration {
+	export const options = {
+		BASE: baseOptions,
+		AXIS: axisOptions
+	};
+
 	export const charts = {
 		margin: {
 			top: 20,

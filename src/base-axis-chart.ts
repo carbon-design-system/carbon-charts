@@ -4,13 +4,61 @@ import { Configuration } from "./configuration";
 import { local } from "d3";
 
 export class BaseAxisChart extends BaseChart {
+	options: any = Object.assign({}, Configuration.options.AXIS);
+
 	xScale: d3.ScaleBand<string>;
 	yScale: d3.ScaleLinear<number, number>;
 
 	constructor(holder: Element, options?: any, data?: any) {
 		super(holder, options, data);
 
+		if (options) {
+			this.options = Object.assign(this.options, options);
+		}
 		this.options.type = "basic-axis";
+	}
+
+	// Legend & keys
+	getLegendItems() {
+		let legendItems = [];
+		if (this.options.dimension) {
+			console.log("DIMENSION", this.options.dimension);
+			const newKeys = <any>[];
+			this.data.forEach(d => {
+				if (!newKeys.includes(d[this.options.dimension])) {
+					newKeys.push(d[this.options.dimension]);
+				}
+			});
+			legendItems = newKeys;
+		} else if (this.options.y2Domain) {
+			legendItems = this.options.yDomain.concat(this.options.y2Domain);
+		} else {
+			legendItems = this.options.yDomain;
+		}
+
+		return legendItems;
+	}
+
+	getXKeys() {
+		let keys: any;
+
+		const activeSeries = this.getActiveDataSeries();
+		if (this.options.dimension) {
+			const newKeys = <any>[];
+			this.data.forEach(d => {
+				if (!newKeys.includes(d[this.options.dimension])) {
+					newKeys.push(d[this.options.dimension]);
+				}
+			});
+			keys = newKeys;
+		} else if (this.options.y2Domain) {
+			keys = this.options.yDomain.concat(this.options.y2Domain);
+			keys = activeSeries.length > 0 ? activeSeries : keys;
+		} else {
+			keys = this.options.yDomain;
+			keys = activeSeries.length > 0 ? activeSeries : keys;
+		}
+		return keys;
 	}
 
 	getXDomain(keys, xScale): d3.ScaleBand<string> {

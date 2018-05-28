@@ -12,32 +12,9 @@ export class BaseChart {
 	holder: Element;
 	svg: any;
 	resizeTimers = [];
-	options: any = {
-		xDomain: [],
-		yDomain: [],
-		y2Domain: [],
-		yTicks: 5,
-		y2Ticks: 10,
-		legendClickable: true,
-		containerResizable: true,
-		type: "basic",
-		colors: [
-			"#009BEF",
-			"#95D13C",
-			"#785EF0",
-			"#F87EAC",
-			"#FFB000",
-			"#00B6CB",
-			"#FF5C49",
-			"#047CC0",
-			"#FE8500",
-			"#5A3EC8",
-			"#40D5BB",
-			"#FF509E"
-		]
-	};
-
+	options: any = Object.assign({}, Configuration.options.BASE);
 	data: any;
+
 	constructor(holder: Element, options?: any, data?: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
 
@@ -94,27 +71,6 @@ export class BaseChart {
 		return computedActualSize;
 	}
 
-	getXKeys() {
-		let keys: any;
-
-		const activeSeries = this.getActiveDataSeries();
-		if (this.options.dimension) {
-			const newKeys = <any>[];
-			this.data.forEach(d => {
-				if (!newKeys.includes(d[this.options.dimension])) {
-					newKeys.push(d[this.options.dimension]);
-				}
-			});
-			keys = newKeys;
-		} else if (this.options.y2Domain) {
-			keys = this.options.yDomain.concat(this.options.y2Domain);
-			keys = activeSeries.length > 0 ? activeSeries : keys;
-		} else {
-			keys = this.options.yDomain;
-			keys = activeSeries.length > 0 ? activeSeries : keys;
-		}
-		return keys;
-	}
 
 	/*
 	 * removes the chart and any tooltips
@@ -309,19 +265,6 @@ export class BaseChart {
 	// Legend
 	getLegendItems() {
 		let legendItems = [];
-		if (this.options.dimension) {
-			const newKeys = <any>[];
-			this.data.forEach(d => {
-				if (!newKeys.includes(d[this.options.dimension])) {
-					newKeys.push(d[this.options.dimension]);
-				}
-			});
-			legendItems = newKeys;
-		} else if (this.options.y2Domain) {
-			legendItems = this.options.yDomain.concat(this.options.y2Domain);
-		} else {
-			legendItems = this.options.yDomain;
-		}
 		return legendItems;
 	}
 
@@ -611,6 +554,7 @@ export class BaseChart {
 			}
 		});
 	}
+
 	moveToFront(element) {
 		return element.each(function() {
 			this.parentNode.appendChild(this);
