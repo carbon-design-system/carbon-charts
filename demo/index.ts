@@ -600,7 +600,11 @@ chartTypes.forEach(type => {
 						classyDonutChart.setData(changeData(type.data));
 
 						const { number: centerNumber } = classyDonutChart.center.configs;
-						const newCenterNumber = Math.floor(Math.max(0.2 * centerNumber, centerNumber * Math.random() * (Math.random() * 5)));
+						let newCenterNumber = Math.floor(Math.max(0.2 * centerNumber, centerNumber * Math.random() * (Math.random() * 5)));
+						if (newCenterNumber <= 10) {
+							newCenterNumber = 10000;
+						}
+
 						classyDonutChart.center.configs.number = newCenterNumber;
 
 						classyDonutChart.center.update();
