@@ -5,14 +5,14 @@ import { Configuration } from "./configuration";
 import { Tools } from "./tools";
 
 export class DonutChart extends PieChart {
-	donutCenter: DonutCenter;
+	center: DonutCenter;
 
 	constructor(holder: Element, options?: any, data?: any) {
 		super(holder, options, data, "donut");
 
 		// Check if the DonutCenter object is provided
 		if (options.center) {
-			this.donutCenter = options.center;
+			this.center = options.center;
 		}
 	}
 
@@ -20,43 +20,19 @@ export class DonutChart extends PieChart {
 		super.draw();
 
 		// Draw the center text
-		if (this.donutCenter && this.donutCenter.configs) {
-			this.donutCenter.draw(this.svg);
+		if (this.center && this.center.configs) {
+			this.center.draw(this.svg);
 		}
 	}
 
 	resizeChart() {
 		if (this.svg) {
+			// Inherit resizing logic from PieChart
 			super.resizeChart();
 
-			const actualChartSize: any = this.getActualChartSize(this.container);
-			const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
-			const radius: number = dimensionToUseForScale / 2;
-
-			const { pie: pieConfigs } = Configuration;
-			const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
-			const marginedRadius = radius - (pieConfigs.label.margin * scaleRatio);
-
-			console.log("MARGINED RADIUS", marginedRadius);
-
-			const arc = d3.arc()
-				.innerRadius(marginedRadius * (2 / 3))
-				.outerRadius(marginedRadius);
-
-			this.svg.selectAll("path")
-				.attr("d", arc);
-
-			// If the dimensions of the chart are smaller than a certain number (e.g. 175x175)
-			// Resize the center text sizes
-			if (dimensionToUseForScale < Configuration.donut.centerText.breakpoint) {
-				this.svg.select("text.donut-figure")
-					.style("font-size",
-						Configuration.donut.centerText.numberFontSize * scaleRatio * Configuration.donut.centerText.magicScaleRatio + "px"
-					);
-
-				this.svg.select("text.donut-title")
-					.style("font-size", Configuration.donut.centerText.titleFontSize * scaleRatio * Configuration.donut.centerText.magicScaleRatio + "px")
-					.attr("y", Configuration.donut.centerText.title.y * scaleRatio * Configuration.donut.centerText.magicScaleRatio);
+			if (this.center) {
+				// Trigger resize on DonutCenter as well
+				this.center.resize(this.svg, this.getActualChartSize(this.container));
 			}
 		}
 	}
@@ -90,5 +66,23 @@ export class DonutCenter {
 
 	update() {
 
+	}
+
+	resize(svgElement: any, actualChartSize: any) {
+		// If the dimensions of the chart are smaller than a certain number (e.g. 175x175)
+		// Resize the center text sizes
+		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
+		const { pie: pieConfigs } = Configuration;
+		const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
+		if (dimensionToUseForScale < Configuration.donut.centerText.breakpoint) {
+			svgElement.select("text.donut-figure")
+				.style("font-size",
+					Configuration.donut.centerText.numberFontSize * scaleRatio * Configuration.donut.centerText.magicScaleRatio + "px"
+				);
+
+			svgElement.select("text.donut-title")
+				.style("font-size", Configuration.donut.centerText.titleFontSize * scaleRatio * Configuration.donut.centerText.magicScaleRatio + "px")
+				.attr("y", Configuration.donut.centerText.title.y * scaleRatio * Configuration.donut.centerText.magicScaleRatio);
+		}
 	}
 }

@@ -74,7 +74,7 @@ describe("combo Chart", () => {
 		const options = {
 			xDomain: "Part number",
 			yDomain: ["Total"],
-			y2Domain: ["Returned", "Defects", "This is an extra long long long legend", "Number of sold products"],
+			secondaryYDomain: ["Returned", "Defects", "This is an extra long long long legend", "Number of sold products"],
 			yTicks: 5,
 			y2Ticks: 10,
 			legendClickable: true,

@@ -36,8 +36,8 @@ export class ComboChart extends BaseAxisChart {
 			lineDataObj[this.options.xDomain] = d[this.options.xDomain];
 			barDataObj[this.options.yDomain] = d[this.options.yDomain];
 			barData.push(barDataObj);
-			for (let i = 0; i < this.options.y2Domain.length; i++) {
-				lineDataObj[this.options.y2Domain[i]] = d[this.options.y2Domain[i]];
+			for (let i = 0; i < this.options.secondaryYDomain.length; i++) {
+				lineDataObj[this.options.secondaryYDomain[i]] = d[this.options.secondaryYDomain[i]];
 			}
 			lineData.push(lineDataObj);
 		});
@@ -76,8 +76,8 @@ export class ComboChart extends BaseAxisChart {
 				lineDataObj[this.options.xDomain] = d[this.options.xDomain];
 				barDataObj[this.options.yDomain] = d[this.options.yDomain];
 				barData.push(barDataObj);
-				for (let i = 0; i < this.options.y2Domain.length; i++) {
-					lineDataObj[this.options.y2Domain[i]] = d[this.options.y2Domain[i]];
+				for (let i = 0; i < this.options.secondaryYDomain.length; i++) {
+					lineDataObj[this.options.secondaryYDomain[i]] = d[this.options.secondaryYDomain[i]];
 				}
 				lineData.push(lineDataObj);
 			});
@@ -182,8 +182,8 @@ export class ComboChart extends BaseAxisChart {
 				}
 			});
 			keys = newKeys;
-		} else if (this.options.y2Domain) {
-			keys = this.options.yDomain.concat(this.options.y2Domain);
+		} else if (this.options.secondaryYDomain) {
+			keys = this.options.yDomain.concat(this.options.secondaryYDomain);
 		} else {
 			keys = this.options.yDomain;
 		}

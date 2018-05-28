@@ -349,13 +349,6 @@ export class PieChart extends BaseChart {
 				d3.select(buttonElement).select("text").text(keys[i]);
 			}
 		});
-		// if (this.svg) {
-		// 	// update the root svg
-		// 	this.updateSVG();
-		// 	this.update();
-		// 	this.repositionSVG();
-		// 	this.positionLegend();
-		// }
 	}
 
 	resizeChart() {

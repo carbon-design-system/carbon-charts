@@ -29,8 +29,8 @@ export class BaseAxisChart extends BaseChart {
 				}
 			});
 			legendItems = newKeys;
-		} else if (this.options.y2Domain) {
-			legendItems = this.options.yDomain.concat(this.options.y2Domain);
+		} else if (this.options.secondaryYDomain) {
+			legendItems = this.options.yDomain.concat(this.options.secondaryYDomain);
 		} else {
 			legendItems = this.options.yDomain;
 		}
@@ -50,8 +50,8 @@ export class BaseAxisChart extends BaseChart {
 				}
 			});
 			keys = newKeys;
-		} else if (this.options.y2Domain) {
-			keys = this.options.yDomain.concat(this.options.y2Domain);
+		} else if (this.options.secondaryYDomain) {
+			keys = this.options.yDomain.concat(this.options.secondaryYDomain);
 			keys = activeSeries.length > 0 ? activeSeries : keys;
 		} else {
 			keys = this.options.yDomain;
@@ -131,8 +131,8 @@ export class BaseAxisChart extends BaseChart {
 		yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		this.yScale = d3.scaleLinear().range([yHeight, 0]);
 		activeSeries = activeSeries ? activeSeries : this.getActiveDataSeries();
-		if (this.options.y2Domain.length > 0) {
-			keys = this.options.yDomain.concat(this.options.y2Domain);
+		if (this.options.secondaryYDomain.length > 0) {
+			keys = this.options.yDomain.concat(this.options.secondaryYDomain);
 		} else if (this.options.dimension) {
 			keys = this.options.yDomain;
 		} else {
@@ -240,10 +240,10 @@ export class BaseAxisChart extends BaseChart {
 			.attr("transform", `translate(${this.getActualChartSize().width}, 0)`)
 			.call(yAxis);
 		g.select(".domain").remove();
-		if (this.options.yFormatter && this.options.yFormatter[this.options.y2Domain[0]]) {
-			this.addUnits(g.selectAll("text"), this.options.yFormatter[this.options.y2Domain[0]]);
+		if (this.options.yFormatter && this.options.yFormatter[this.options.secondaryYDomain[0]]) {
+			this.addUnits(g.selectAll("text"), this.options.yFormatter[this.options.secondaryYDomain[0]]);
 		}
-		const label = this.options.y2Domain.join(", ");
+		const label = this.options.secondaryYDomain.join(", ");
 		this.appendYAxisLabel(g, label, "y2");
 	}
 

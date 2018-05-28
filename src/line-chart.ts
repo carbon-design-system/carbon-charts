@@ -89,8 +89,8 @@ export class LineChart extends BaseAxisChart {
 				}
 			});
 			keys = newKeys;
-		} else if (this.options.y2Domain) {
-			keys = this.options.yDomain.concat(this.options.y2Domain);
+		} else if (this.options.secondaryYDomain) {
+			keys = this.options.yDomain.concat(this.options.secondaryYDomain);
 		} else {
 			keys = this.options.yDomain;
 		}

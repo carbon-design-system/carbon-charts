@@ -21,7 +21,7 @@ const baseOptions: any = {
 const axisOptions: any = Object.assign({}, baseOptions, {
 	xDomain: [],
 	yDomain: [],
-	y2Domain: [],
+	secondaryYDomain: [],
 	yTicks: 5,
 	y2Ticks: 10
 });

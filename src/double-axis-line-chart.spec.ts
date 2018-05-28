@@ -61,7 +61,7 @@ describe("double axis line chart", () => {
 		const options = {
 			xDomain: "Day",
 			yDomain: ["Clicks"],
-			y2Domain: ["Click rate"],
+			secondaryYDomain: ["Click rate"],
 			yFormatter: {
 				"Click rate"(value) {
 					return value + "%";

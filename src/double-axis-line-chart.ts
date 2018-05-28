@@ -16,7 +16,7 @@ export class DoubleAxisLineChart extends LineChart {
 		if (this.svg) {
 			const activeSeries = <any>this.getActiveDataSeries();
 			const y1ActiveSeries = this.options.yDomain.filter(val => activeSeries.includes(val));
-			const y2ActiveSeries = this.options.y2Domain.filter(val => activeSeries.includes(val));
+			const y2ActiveSeries = this.options.secondaryYDomain.filter(val => activeSeries.includes(val));
 
 			// update the root svg
 			this.updateSVG();
@@ -54,7 +54,7 @@ export class DoubleAxisLineChart extends LineChart {
 
 		const activeSeries = <any>this.getActiveDataSeries();
 		const y1ActiveSeries = this.options.yDomain.filter(val => activeSeries.includes(val));
-		const y2ActiveSeries = this.options.y2Domain.filter(val => activeSeries.includes(val));
+		const y2ActiveSeries = this.options.secondaryYDomain.filter(val => activeSeries.includes(val));
 
 		this.setXScale();
 		this.drawXAxis();
