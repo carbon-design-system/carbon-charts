@@ -143,6 +143,10 @@ export class BaseChart {
 		console.warn("You should implement your own `updateChart() function.");
 	}
 
+	resizeChart() {
+		console.warn("You should implement your own `resizeChart() function.");
+	}
+
 	// TODO - Remove, doesn't seem like it's being used
 	//#endregion
 	// setResizeWhenContainerChange() {
@@ -177,7 +181,9 @@ export class BaseChart {
 				// Hide tooltips
 				this.hideTooltip();
 
+				// TODO - Remove updateChart
 				this.updateChart();
+				this.resizeChart();
 			}
 			requestAnimationFrame(frame);
 		};

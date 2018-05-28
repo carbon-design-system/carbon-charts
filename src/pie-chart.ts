@@ -59,7 +59,7 @@ export class PieChart extends BaseChart {
 				const overlayEl = <HTMLElement>this.holder.querySelector("div.chart-overlay");
 				overlayEl.style.display = "none";
 			} else {
-				console.log("updateChart()");
+				console.log("update()");
 				this.update(value);
 			}
 		});
@@ -109,7 +109,6 @@ export class PieChart extends BaseChart {
 		}
 
 		this.positionLegend();
-		this.repositionSVG();
 		this.draw();
 		this.addDataPointEventListener();
 	}
@@ -167,16 +166,19 @@ export class PieChart extends BaseChart {
 		this.options.keys = keys;
 
 		const actualChartSize: any = this.getActualChartSize(this.container);
-		const radius: number = Math.min(actualChartSize.width, actualChartSize.height) / 2;
+		const diameter = Math.min(actualChartSize.width, actualChartSize.height);
+		const radius: number = diameter / 2;
 
 		d3.select(this.holder).select("svg")
-			.attr("width", actualChartSize.width)
-			.attr("height", actualChartSize.height);
+			.attr("width", `${diameter}px`)
+			.attr("height", `${diameter}px`);
 
 		this.svg
 			.attr("class", "inner-wrap")
-			.attr("transform", "translate(" + (actualChartSize.width / 2) +  "," + (actualChartSize.height / 2) + ")")
-			.attr("preserveAspectRatio", "xMidYMid meet");
+			.style("transform", `translate(${radius}px,${radius}px)`)
+			.attr("width", `${diameter}px`)
+			.attr("height", `${diameter}px`)
+			.attr("preserveAspectRatio", "xMinYMin");
 
 		// Compute the correct inner & outer radius
 		const { pie: pieConfigs } = Configuration;
@@ -356,6 +358,40 @@ export class PieChart extends BaseChart {
 		// }
 	}
 
+	resizeChart() {
+		const { pie: pieConfigs } = Configuration;
+
+		const actualChartSize: any = this.getActualChartSize(this.container);
+		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
+		const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
+		const radius: number = dimensionToUseForScale / 2;
+
+		// Resize the SVG
+		d3.select(this.holder).select("svg")
+				.attr("width", `${dimensionToUseForScale}px`)
+				.attr("height", `${dimensionToUseForScale}px`);
+		this.svg
+			.style("transform", `translate(${radius}px,${radius}px)`);
+
+		// Resize the arc
+		const marginedRadius = radius - (pieConfigs.label.margin * scaleRatio);
+		const arc = d3.arc()
+			.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
+			.outerRadius(marginedRadius);
+
+		this.svg.selectAll("path")
+			.attr("d", arc);
+
+		this.svg
+			.selectAll("text.chart-label")
+			.attr("transform", (d) => {
+				return this.deriveTransformString(d, radius);
+			});
+
+		// Reposition the legend
+		this.positionLegend();
+	}
+
 	// Helper functions
 	private computeRadius() {
 		const actualChartSize: any = this.getActualChartSize(this.container);
@@ -375,13 +411,10 @@ export class PieChart extends BaseChart {
 	 */
 	private deriveTransformString(d, radius) {
 		const theta = d.endAngle - d.startAngle;
+		const xPosition = radius * Math.sin((theta / 2) + d.startAngle);
+		const yPosition = (-1 * radius * Math.cos((theta / 2) + d.startAngle ));
 
-		const transformString = "translate(" +
-		(radius * Math.sin((theta / 2) + d.startAngle )) +
-		"," +
-		(-1 * radius * Math.cos((theta / 2) + d.startAngle )) + ")";
-
-		return transformString;
+		return `translate(${xPosition},${yPosition})`;
 	}
 
 	/**

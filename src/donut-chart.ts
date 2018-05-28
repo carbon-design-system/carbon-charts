@@ -25,9 +25,9 @@ export class DonutChart extends PieChart {
 		}
 	}
 
-	updateChart() {
+	resizeChart() {
 		if (this.svg) {
-			super.updateChart();
+			super.resizeChart();
 
 			const actualChartSize: any = this.getActualChartSize(this.container);
 			const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
@@ -36,6 +36,9 @@ export class DonutChart extends PieChart {
 			const { pie: pieConfigs } = Configuration;
 			const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
 			const marginedRadius = radius - (pieConfigs.label.margin * scaleRatio);
+
+			console.log("MARGINED RADIUS", marginedRadius);
+
 			const arc = d3.arc()
 				.innerRadius(marginedRadius * (2 / 3))
 				.outerRadius(marginedRadius);
