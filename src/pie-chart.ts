@@ -7,11 +7,14 @@ export class PieChart extends BaseChart {
 	pie: any;
 	arc: any;
 	path: any;
+	color: any;
 
 	constructor(holder: Element, options?: any, data?: any, type: string = "pie") {
 		super(holder, options, data);
 
 		this.options.type = type;
+
+		this.color = d3.scaleOrdinal(this.options.colors);
 
 		if (this.options.containerResizable) {
 			this.resizeWhenContainerChange();
@@ -42,12 +45,13 @@ export class PieChart extends BaseChart {
 			}
 
 			// Process data
-			const keys: any = [];
+			const keys: any = {};
 			this.data = this.sortAndRepartitionData(value);
-			this.data.map(entry => {
-				keys.push(entry.label);
-			});
 
+			// Build out the keys array of objects to represent the legend items
+			this.data.forEach(entry => {
+				keys[entry.label] = Configuration.legend.items.status.ACTIVE;
+			});
 			this.options.keys = keys;
 
 			// Perform the draw or update chart
@@ -60,44 +64,34 @@ export class PieChart extends BaseChart {
 				overlayEl.style.display = "none";
 			} else {
 				console.log("update()");
-				this.update(value);
+				this.update();
 			}
 		});
-	}
-
-	updateLegend(legend) {
-		console.log("UPDATE LEG");
-		const thisLegend = d3.select(legend);
-		const circle = d3.select(legend).select(".legend-circle");
-		thisLegend.classed("active", !thisLegend.classed("active"));
-		if (thisLegend.classed("active")) {
-			circle.style("background-color", circle.style("border-color"))
-				.style("border-color", Configuration.legend.active.borderColor)
-				.style("border-style", Configuration.legend.active.borderStyle)
-				.style("border-width", Configuration.legend.active.borderWidth);
-		} else {
-			circle.style("border-color", circle.style("background-color"))
-			.style("background-color", Configuration.legend.inactive.backgroundColor)
-			.style("border-style", Configuration.legend.inactive.borderStyle)
-			.style("border-width", Configuration.legend.inactive.borderWidth);
-		}
 	}
 
 	// Sort data by value (descending)
 	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
 	sortAndRepartitionData(data: any) {
-		const sortedData = data.sort((a, b) => b.value - a.value);
+		let sortedData = data.sort((a, b) => b.value - a.value);
 		const stopAt = Configuration.pie.sliceLimit;
 		const rest = sortedData.slice(stopAt);
 		const restAccumulatedValue = rest.reduce((accum, item) => accum + item.value, 0);
 
-		return sortedData.slice(0, stopAt)
-			.concat([{
-				label: Configuration.pie.label.other,
-				value: restAccumulatedValue,
-				items: rest
-			}])
-			.map((item, i) => Object.assign(item, { index: i }));
+		const otherLabelIndex = sortedData.findIndex(dataPoint => dataPoint.label === "Other");
+		if (otherLabelIndex > -1) {
+			sortedData.push(sortedData.splice(otherLabelIndex, 1)[0]);
+		} else {
+			if (rest.length > 0) {
+			sortedData = sortedData.slice(0, stopAt)
+				.concat([{
+					label: Configuration.pie.label.other,
+					value: restAccumulatedValue,
+					items: rest
+				}]);
+			}
+		}
+
+		return sortedData.map((item, i) => Object.assign(item, { index: i }));
 	}
 
 	initialDraw() {
@@ -113,13 +107,33 @@ export class PieChart extends BaseChart {
 		this.addDataPointEventListener();
 	}
 
-	interpolateValues(newData: any, dataList: any) {
+	interpolateValues(newData: any) {
+		console.log("INT VAL NEW DATA", newData);
 		// Apply the new data to the slices, and interpolate them
 		const arc = this.arc;
-		this.path = this.path.data(this.pie(dataList));
+		this.path = this.path.data(this.pie(newData));
 		this.path.transition().duration(750).attrTween("d", function (a) {
 			return arcTween.bind(this)(a, arc);
 		});
+
+		this.path
+			.enter()
+			.insert("path")
+			// .attr("d", this.arc)
+			.attr("fill", function(d, i) {
+				return this.options.colors[d.data.index];
+			}.bind(this))
+			.attr("stroke", function(d, i) {
+				return this.options.colors[d.data.index];
+			}.bind(this))
+			.each(function(d) { this._current = d; });
+
+		this.path
+			.exit()
+			.transition()
+			.duration(750)
+			.style("opacity", 0)
+			.remove();
 
 		// Fade out all text labels
 		this.svg.selectAll("text.chart-label")
@@ -130,40 +144,29 @@ export class PieChart extends BaseChart {
 		// Move text labels to their new location, and fade them in again
 		const radius = this.computeRadius();
 		setTimeout(() => {
-			this.svg.selectAll("text.chart-label")
-				.data(this.pie(dataList))
+			const { ACTIVE } = Configuration.legend.items.status;
+			const text = this.svg.selectAll("text.chart-label").data(this.pie(newData, function(d) { return d; }));
+			text
+				.exit()
+				.remove();
+
+			text
 				.attr("dy", Configuration.pie.label.dy)
 				.style("text-anchor", this.deriveTextAnchor)
 				.attr("transform", (d) => {
 					return this.deriveTransformString(d, radius);
 				})
 				.text(function(d) {
-					return Tools.convertValueToPercentage(d.data.value, dataList);
+					return Tools.convertValueToPercentage(d.data.value, newData);
 				});
 		}, 375);
 
-		// Set the new data through the chart component
-		this.data = this.sortAndRepartitionData(newData);
+		// // Set the new data through the chart component
+		// this.data = newData;
 	}
 
 	draw() {
-		const activeSeries = this.getActiveDataSeries();
-		let keys: any = [];
-		let dataList = this.data;
-
-		if (activeSeries) {
-			keys = activeSeries;
-
-			dataList = dataList.filter(item => keys.indexOf(item.label) > -1);
-		} else {
-			dataList = dataList.map(entry => {
-				keys.push(entry.label);
-			});
-		}
-
-		// console.log("INITIAL DATA", dataList);
-
-		this.options.keys = keys;
+		const dataList = this.data;
 
 		const actualChartSize: any = this.getActualChartSize(this.container);
 		const diameter = Math.min(actualChartSize.width, actualChartSize.height);
@@ -220,6 +223,10 @@ export class PieChart extends BaseChart {
 			.text(function(d) {
 				return Tools.convertValueToPercentage(d.data.value, dataList);
 			});
+
+		this.svg
+			.selectAll("text.chart-label")
+			.enter();
 	}
 
 	reduceOpacity(exception) {
@@ -300,6 +307,7 @@ export class PieChart extends BaseChart {
 			});
 	}
 
+	// TODO - Remove
 	setSVG() {
 		const currentSVG = d3.select(this.holder).select("svg.chart-svg");
 		if (currentSVG) {
@@ -315,40 +323,82 @@ export class PieChart extends BaseChart {
 	// 	this.addDataPointEventListener();
 	// }
 
-	update(value: any) {
+	update(newData?: any) {
+		console.log(newData);
 		const oldData = this.data;
-		const processedNewData = this.sortAndRepartitionData(value);
-		// console.log("PROCESSED NEW DATA", processedNewData);
-		const activeSeries = this.getActiveDataSeries();
-		let keys: any = [];
-		let dataList = processedNewData;
+		const activeSeries = this.getActiveLegendItems();
+		if (!newData) {
+			// Get new data by filtering the data based off of the legend
+			newData = oldData.filter(dataPoint => {
+				// If this datapoint is active on the legend
+				const activeSeriesItemIndex = activeSeries.indexOf(dataPoint.label);
 
-		if (activeSeries) {
-			keys = dataList.map(item => item.label);
-			// keys = activeSeries;
-			// console.log("activeSeries", keys, dataList.map(item => item.label));
-
-			dataList = dataList.filter(item => keys.indexOf(item.label) > -1);
-		} else {
-			// console.log("no activeSeries");
-			dataList = dataList.map(entry => {
-				keys.push(entry.label);
+				return activeSeriesItemIndex > -1;
 			});
 		}
+		const processedNewData = this.sortAndRepartitionData(newData);
 
-		this.options.yDomain = keys;
 
-		this.interpolateValues(value, dataList);
+		console.log("processedNewData", activeSeries, newData, processedNewData);
 
-		const oldLegendItems = this.getActiveDataSeries();
-		const { missing: removedItems, added: newItems } = Tools.arrayDifferences(oldLegendItems, keys);
-		const currentLegendButtons = Array.prototype.slice.call(this.holder.querySelectorAll(".legend-btn"));
-		currentLegendButtons.forEach((buttonElement, i) => {
-			const buttonShouldUpdate = d3.select(buttonElement).select("text").text() !== keys[i];
-			if (buttonShouldUpdate) {
-				d3.select(buttonElement).select("text").text(keys[i]);
-			}
-		});
+		// console.log("FILTERED DATA", filteredData);
+
+		this.interpolateValues(processedNewData);
+
+		// const oldLegendItems = this.getActiveDataSeries();
+		// const { missing: removedItems, added: newItems } = Tools.arrayDifferences(oldLegendItems, keys);
+		// console.log(oldLegendItems, keys);
+		// console.log("NEW KEYS OR NOT", removedItems, newItems);
+		// const currentLegendButtons = Array.prototype.slice.call(this.holder.querySelectorAll(".legend-btn"));
+		// currentLegendButtons.forEach((buttonElement, i) => {
+		// 	const buttonShouldUpdate = d3.select(buttonElement).select("text").text() !== keys[i];
+		// 	if (buttonShouldUpdate) {
+		// 		d3.select(buttonElement).select("text").text(keys[i]);
+		// 	}
+		// });
+	}
+
+	getActiveLegendItems() {
+		const legendItems = this.getLegendItems();
+
+		return Object.keys(legendItems)
+			.filter(legendItemLabel => legendItems[legendItemLabel] === Configuration.legend.items.status.ACTIVE);
+	}
+
+	getDisabledLegendItems() {
+		const legendItems = this.getLegendItems();
+
+		return Object.keys(legendItems)
+			.filter(legendItemLabel => legendItems[legendItemLabel] === Configuration.legend.items.status.DISABLED);
+	}
+
+	addLegend() {
+		if (this.container.select(".legend-tooltip").nodes().length > 0) {
+			return;
+		}
+
+		const legend = this.container.select(".legend")
+			.attr("font-size", Configuration.legend.fontSize)
+			.selectAll("div")
+			.data(this.getLegendItemsArray())
+			.enter().append("li")
+				.attr("class", "legend-btn active");
+
+		legend.append("div")
+			.attr("class", "legend-circle")
+			.style("background-color", (d, i) => this.options.colors[i]);
+		this.addLegendCircleHoverEffect();
+
+		legend.append("text")
+			.text(d => d);
+	}
+
+	applyLegendFilter(changedLabel: string) {
+		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
+		const oldStatus = this.options.keys[changedLabel];
+		this.options.keys[changedLabel] = oldStatus === ACTIVE ? DISABLED : ACTIVE;
+
+		this.update();
 	}
 
 	resizeChart() {
@@ -437,9 +487,11 @@ export class PieChart extends BaseChart {
 // d3 Tween functions
 function arcTween(a, arc) {
 	const i = d3.interpolate(this._current, a);
-	this._current = i(0);
+	const self = this;
 
 	return function(t) {
-		return arc(i(t));
+		self._current = i(t);
+
+		return arc(self._current);
 	};
 }

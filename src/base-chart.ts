@@ -85,7 +85,6 @@ export class BaseChart {
 	 * either creates or updates the chart
 	 */
 	redrawChart(data?: any) {
-		console.log("REDRAW CHART");
 		if (!data) {
 			this.updateChart();
 		} else {
@@ -198,8 +197,9 @@ export class BaseChart {
 			d3.select(this).on("click", function() {
 				c.selectAll(".chart-tooltip").remove();
 				c.selectAll(".label-tooltip").remove();
+
 				self.updateLegend(this);
-				self.redrawChart();
+				self.applyLegendFilter(d3.select(this).select("text").text());
 			});
 		});
 	}
@@ -216,7 +216,7 @@ export class BaseChart {
 		});
 	}
 
-	getActiveDataSeries() {
+	getActiveLegendItems() {
 		const activeSeries = [];
 		let c = this.container;
 		if (c.selectAll(".legend-tooltip").nodes().length > 0) {
@@ -271,13 +271,19 @@ export class BaseChart {
 
 	// Legend
 	getLegendItems() {
-		let legendItems = [];
+		let legendItems = {};
 
 		if (this.options.keys) {
 			legendItems = this.options.keys;
 		}
 
 		return legendItems;
+	}
+
+	getLegendItemsArray() {
+		const legendItems = this.getLegendItems();
+
+		return Object.keys(legendItems);
 	}
 
 	updateLegend(legend) {
@@ -422,7 +428,7 @@ export class BaseChart {
 			const legendContent = d3.select(".legend-tooltip-content")
 				.attr("font-size", Configuration.legend.fontSize)
 				.selectAll("div")
-				.data(this.getLegendItems())
+				.data(this.getLegendItemsArray())
 				.enter().append("li")
 				.attr("class", "legend-btn active")
 				.on("click", (clickedItem) => {

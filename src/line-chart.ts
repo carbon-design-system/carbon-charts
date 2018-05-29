@@ -56,14 +56,14 @@ export class LineChart extends BaseAxisChart {
 		}
 	}
 
-	update(yScale: d3.ScaleLinear<number, number> = this.yScale, activeSeries = this.getActiveDataSeries()) {
+	update(yScale: d3.ScaleLinear<number, number> = this.yScale, activeSeries = this.getActiveLegendItems()) {
 		const dataList = this.data;
 		const lines = this.svg.selectAll(".lines");
 		const line = d3.line<any>()
 			.x(d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
 			.y(d => yScale(d.value));
 		const keys = activeSeries ? activeSeries : this.options.yDomain;
-		const allActiveSeries: any = this.getActiveDataSeries();
+		const allActiveSeries: any = this.getActiveLegendItems();
 		lines.selectAll(".line")
 			.select("path")
 			// filter to include just the relevant series (mostly useful for 2 axis charts)
@@ -78,7 +78,7 @@ export class LineChart extends BaseAxisChart {
 		lines.selectAll("circle").style("display", d => allActiveSeries.includes(d.series) ? "initial" : "none");
 	}
 
-	draw(yScale: d3.ScaleLinear<number, number> = this.yScale, activeSeries = this.getActiveDataSeries()) {
+	draw(yScale: d3.ScaleLinear<number, number> = this.yScale, activeSeries = this.getActiveLegendItems()) {
 		let keys: any;
 		let dataList = this.data;
 		if (this.options.dimension) {

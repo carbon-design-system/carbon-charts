@@ -42,7 +42,7 @@ export class StackedBarChart extends BarChart {
 		if (yHeight <= 0) {
 			return;
 		}
-		const activeSeries = this.getActiveDataSeries();
+		const activeSeries = this.getActiveLegendItems();
 		const keys = activeSeries ? activeSeries : this.options.yDomain;
 		const color = d3.scaleOrdinal().range(this.options.colors).domain(this.options.yDomain);
 		const bars = this.svg.select(".stacked-bars");
@@ -94,7 +94,7 @@ export class StackedBarChart extends BarChart {
 		if (yHeight <= 0) {
 			return;
 		}
-		const activeSeries = this.getActiveDataSeries();
+		const activeSeries = this.getActiveLegendItems();
 		const keys = activeSeries ? activeSeries : this.options.yDomain;
 		this.xScale.paddingInner(0.2);
 		const color = d3.scaleOrdinal().range(this.options.colors).domain(this.options.yDomain);

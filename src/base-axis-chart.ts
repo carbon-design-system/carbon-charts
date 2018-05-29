@@ -41,7 +41,7 @@ export class BaseAxisChart extends BaseChart {
 	getXKeys() {
 		let keys: any;
 
-		const activeSeries = this.getActiveDataSeries();
+		const activeSeries = this.getActiveLegendItems();
 		if (this.options.dimension) {
 			const newKeys = <any>[];
 			this.data.forEach(d => {
@@ -116,7 +116,7 @@ export class BaseAxisChart extends BaseChart {
 		if (data) {
 			yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 			const yScale = d3.scaleLinear().range([yHeight, 0]);
-			activeSeries = activeSeries ? activeSeries : this.getActiveDataSeries();
+			activeSeries = activeSeries ? activeSeries : this.getActiveLegendItems();
 			keys = activeSeries.length > 0 ? activeSeries : this.options.yDomain;
 			if (this.options.type === "stacked-bar") {
 				const yMax = d3.max(data, d => keys.map(val => d[val]).reduce((acc, cur) => acc + cur, 0));
@@ -130,7 +130,7 @@ export class BaseAxisChart extends BaseChart {
 		}
 		yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		this.yScale = d3.scaleLinear().range([yHeight, 0]);
-		activeSeries = activeSeries ? activeSeries : this.getActiveDataSeries();
+		activeSeries = activeSeries ? activeSeries : this.getActiveLegendItems();
 		if (this.options.secondaryYDomain.length > 0) {
 			keys = this.options.yDomain.concat(this.options.secondaryYDomain);
 		} else if (this.options.dimension) {

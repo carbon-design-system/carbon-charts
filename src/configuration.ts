@@ -163,6 +163,12 @@ export namespace Configuration {
 			backgroundColor: "white",
 			borderStyle: "solid",
 			borderWidth: "2px"
+		},
+		items: {
+			status: {
+				ACTIVE: 1,
+				DISABLED: 0
+			},
 		}
 	};
 

@@ -24,7 +24,7 @@ $default_transition: all .1s ease-out;
 
 	svg {
 		overflow: visible !important;
-		rect, circle {
+		rect, circle, path {
 			&:hover {
 				cursor: pointer;
 			}
@@ -84,9 +84,15 @@ $default_transition: all .1s ease-out;
 		line-height: 20px;
 		font-size: 12px;
 		margin-bottom: 0;
+
+		&:hover {
+			cursor: pointer;
+		}
+
 		span {
 			display: inline;
 		}
+
 		text {
 			font-size: 12px;
 			max-width: 100px;

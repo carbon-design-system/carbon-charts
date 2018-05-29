@@ -25,7 +25,7 @@ export class ComboChart extends BaseAxisChart {
 			}
 		}
 
-		const activeSeries = <any>this.getActiveDataSeries();
+		const activeSeries = <any>this.getActiveLegendItems();
 
 		const barData = [];
 		const lineData = [];
@@ -64,7 +64,7 @@ export class ComboChart extends BaseAxisChart {
 
 	updateChart() {
 		if (this.svg) {
-			const activeSeries = <any>this.getActiveDataSeries();
+			const activeSeries = <any>this.getActiveLegendItems();
 			// pull out the bar/line data
 			// this would probably be done better in a setdata method and stored as props
 			const barData = [];
@@ -250,7 +250,7 @@ export class ComboChart extends BaseAxisChart {
 			.x(d => xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
 			.y(d => yScale(d.value));
 		const keys = activeSeries;
-		const allActiveSeries: any = this.getActiveDataSeries();
+		const allActiveSeries: any = this.getActiveLegendItems();
 		lines.selectAll("path")
 			.attr("d", line);
 		// hide hidden series, and prevent them from being clicked

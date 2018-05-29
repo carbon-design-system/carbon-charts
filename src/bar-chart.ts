@@ -63,7 +63,7 @@ export class BarChart extends BaseAxisChart {
 			return;
 		}
 		let keys = this.getXKeys();
-		const activeSeries = this.getActiveDataSeries();
+		const activeSeries = this.getActiveLegendItems();
 		keys = activeSeries.length > 0 ? activeSeries : keys;
 		const x1 = this.options.xDomain.length > 0 ? this.getXDomain(keys, this.xScale) : this.xScale;
 		const color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
@@ -85,7 +85,7 @@ export class BarChart extends BaseAxisChart {
 			return;
 		}
 		let keys = this.getXKeys();
-		const activeSeries = this.getActiveDataSeries();
+		const activeSeries = this.getActiveLegendItems();
 		keys = activeSeries.length > 0 ? activeSeries : keys;
 		const x1 = this.options.xDomain.length > 0 ? this.getXDomain(keys, this.xScale) : this.xScale;
 		const color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
