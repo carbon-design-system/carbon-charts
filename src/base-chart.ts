@@ -85,6 +85,7 @@ export class BaseChart {
 	 * either creates or updates the chart
 	 */
 	redrawChart(data?: any) {
+		console.log("REDRAW CHART");
 		if (!data) {
 			this.updateChart();
 		} else {
@@ -182,7 +183,7 @@ export class BaseChart {
 				this.hideTooltip();
 
 				// TODO - Remove updateChart
-				this.updateChart();
+				// this.updateChart();
 				this.resizeChart();
 			}
 			requestAnimationFrame(frame);

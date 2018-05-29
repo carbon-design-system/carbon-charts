@@ -513,14 +513,28 @@ const chartTypes = [
 	}
 ];
 
-const changeData = (dataToChange: any) => {
-	return dataToChange.map(dataPoint => {
-		const newValue = Math.max(0.2 * dataPoint.value, Math.floor(dataPoint.value * Math.random() * (Math.random() * 5)));
-		return Object.assign({}, dataPoint, {value: newValue});
-	});
+const setDemoActionsEventListener = (chartType: any, oldData: any) => {
+	const changeDataButton = document.getElementById(`change-data-${chartType}`);
+	changeDataButton.onclick = e => {
+		e.preventDefault();
+
+		changeDemoData(chartType, oldData);
+	};
+
+	// switch (chartType) {
+	// 	case "donut":
+	// 		window.onkeydown = (e) => {
+	// 			if (e.keyCode === 13) {
+	// 				changeDemoData(chartType, oldData);
+	// 			}
+	// 		};
+
+	// 		break;
+	// }
 };
 
-let accum = 0;
+let classyDonutChart;
+let classyPieChart;
 chartTypes.forEach(type => {
 	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
 	if (classyContainer) {
@@ -568,7 +582,7 @@ chartTypes.forEach(type => {
 				classyComboChart.drawChart();
 				break;
 			case "pie":
-				const classyPieChart = new PieChart(
+				classyPieChart = new PieChart(
 					classyContainer,
 					Object.assign({}, type.options, {type: type.id}),
 					new Promise((resolve, reject) => {
@@ -578,40 +592,48 @@ chartTypes.forEach(type => {
 					})
 				);
 
-				// setInterval(() => {
-				// 	if (accum++ < 20) {
-				// 		classyPieChart.setData(changeData(type.data));
-				// 	}
-				// }, 3000);
+				setDemoActionsEventListener(type.id, type.data);
 
 				break;
 			case "donut":
-				const classyDonutChart = new DonutChart(
+				classyDonutChart = new DonutChart(
 					classyContainer,
 					Object.assign({}, type.options, {type: type.id}),
 					type.data
 				);
 
-				// classyDonutChart.donutCenter.getConfigs.number = 10000;
-				// classyDonutChart.donutCenter.update();
-
-				window.onkeydown = (e) => {
-					if (e.keyCode === 13) {
-						classyDonutChart.setData(changeData(type.data));
-
-						const { number: centerNumber } = classyDonutChart.center.configs;
-						let newCenterNumber = Math.floor(Math.max(0.2 * centerNumber, centerNumber * Math.random() * (Math.random() * 5)));
-						if (newCenterNumber <= 10) {
-							newCenterNumber = 10000;
-						}
-
-						classyDonutChart.center.configs.number = newCenterNumber;
-
-						classyDonutChart.center.update();
-					}
-				};
+				setDemoActionsEventListener(type.id, type.data);
 
 				break;
 		}
 	}
 });
+
+const changeDemoData = (chartType: any, oldData: any) => {
+	switch (chartType) {
+		case "donut":
+		case "pie":
+			const classyChartObject = chartType === "donut" ? classyDonutChart : classyPieChart;
+
+			// Randomize old data values
+			const newData = oldData.map(dataPoint => {
+				const newValue = Math.max(0.2 * dataPoint.value, Math.floor(dataPoint.value * Math.random() * (Math.random() * 5)));
+				return Object.assign({}, dataPoint, {value: newValue});
+			});
+			classyChartObject.setData(newData);
+
+			if (chartType === "donut") {
+				// Update DonutCenter values
+				const { number: centerNumber } = classyChartObject.center.configs;
+				let newCenterNumber = Math.floor(Math.max(0.2 * centerNumber, centerNumber * Math.random() * (Math.random() * 5)));
+				if (newCenterNumber <= 10) {
+					newCenterNumber = 10000;
+				}
+
+				classyChartObject.center.configs.number = newCenterNumber;
+				classyChartObject.center.update();
+			}
+
+			break;
+	}
+};

@@ -76,6 +76,19 @@ header.m-demo-header {
 	&:last-child {
 		margin-bottom: 30px;
 	}
+
+	&.has-actions {
+		margin: auto;
+	}
+}
+
+.chart-demo-actions {
+	min-width: 300px;
+    max-width: 800px;
+    margin: auto;
+    background: #eff3f9;
+    margin-bottom: 30px;
+    padding: 30px;
 }
 
 .chart-title {
