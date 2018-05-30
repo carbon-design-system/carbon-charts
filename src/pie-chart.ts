@@ -111,29 +111,48 @@ export class PieChart extends BaseChart {
 		console.log("INT VAL NEW DATA", newData);
 		// Apply the new data to the slices, and interpolate them
 		const arc = this.arc;
-		this.path = this.path.data(this.pie(newData));
-		this.path.transition().duration(750).attrTween("d", function (a) {
-			return arcTween.bind(this)(a, arc);
-		});
+		const path = this.svg.selectAll("path").data(this.pie(newData));
 
-		this.path
-			.enter()
-			.insert("path")
-			// .attr("d", this.arc)
-			.attr("fill", function(d, i) {
-				return this.options.colors[d.data.index];
-			}.bind(this))
-			.attr("stroke", function(d, i) {
-				return this.options.colors[d.data.index];
-			}.bind(this))
-			.each(function(d) { this._current = d; });
+		path.enter()
+			.append("path")
+			.attr("d", arc)
+			.attr("fill", (d, i) => this.options.colors[d.data.index])
+			.attr("stroke", (d, i) => this.options.colors[d.data.index])
+			.transition()
+			.duration(0)
+			.style("opacity", 0)
+			.transition()
+			.duration(750)
+			.style("opacity", 1);
 
-		this.path
+		path
 			.exit()
+			.attr("d", arc)
 			.transition()
 			.duration(750)
 			.style("opacity", 0)
 			.remove();
+
+		path.transition().duration(750).attrTween("d", function (a) {
+			return arcTween.bind(this)(a, arc);
+		});
+
+		// this.path
+		// 	.enter()
+		// 	.append("path")
+		// 	.attr("d", arc)
+		// 	.attr("fill", function(d, i) {
+		// 		return this.options.colors[d.data.index];
+		// 	}.bind(this))
+		// 	.attr("stroke", function(d, i) {
+		// 		return this.options.colors[d.data.index];
+		// 	}.bind(this))
+		// 	.transition()
+		// 	.duration(750)
+		// 	.attrTween("d", function (a) {
+		// 		return arcTween.bind(this)(a, arc);
+		// 	})
+		// 	.each(function(d) { this._current = d; });
 
 		// Fade out all text labels
 		this.svg.selectAll("text.chart-label")
@@ -146,6 +165,19 @@ export class PieChart extends BaseChart {
 		setTimeout(() => {
 			const { ACTIVE } = Configuration.legend.items.status;
 			const text = this.svg.selectAll("text.chart-label").data(this.pie(newData, function(d) { return d; }));
+
+			text
+				.enter()
+				.append("text")
+				.attr("dy", Configuration.pie.label.dy)
+				.style("text-anchor", this.deriveTextAnchor)
+				.attr("transform", (d) => {
+					return this.deriveTransformString(d, radius);
+				})
+				.text(function(d) {
+					return Tools.convertValueToPercentage(d.data.value, newData);
+				});
+
 			text
 				.exit()
 				.remove();
@@ -161,6 +193,7 @@ export class PieChart extends BaseChart {
 				});
 		}, 375);
 
+		this.addDataPointEventListener();
 		// // Set the new data through the chart component
 		// this.data = newData;
 	}
