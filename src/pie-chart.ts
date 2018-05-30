@@ -153,10 +153,11 @@ export class PieChart extends BaseChart {
 		// Move text labels to their new location, and fade them in again
 		const radius = this.computeRadius();
 		setTimeout(() => {
-			const text = this.svg.selectAll("text.chart-label").data(this.pie(newData));
-
+			const text = this.svg.selectAll("text.chart-label").data(this.pie(newData), function(d) { return d.data.label; });
+			// console.log("NEW D", newData);
 			text
 				.exit()
+				// .each(function(d) { console.log(d); })
 				.remove();
 
 			text
@@ -182,10 +183,9 @@ export class PieChart extends BaseChart {
 				});
 		}, 375);
 
+		// Add slice hover actions, and clear any slice borders present
 		this.addDataPointEventListener();
 		this.reduceOpacity();
-		// // Set the new data through the chart component
-		// this.data = newData;
 	}
 
 	draw() {
