@@ -7,6 +7,8 @@ export class PieChart extends BaseChart {
 	pie: any;
 	arc: any;
 	path: any;
+
+	// Used to assign colors to each slice by their label
 	color: any;
 
 	constructor(holder: Element, options?: any, data?: any, type: string = "pie") {
@@ -14,6 +16,7 @@ export class PieChart extends BaseChart {
 
 		this.options.type = type;
 
+		// Assign colors to each slice using their label
 		this.color = d3.scaleOrdinal(this.options.colors);
 
 		if (this.options.containerResizable) {
@@ -109,17 +112,25 @@ export class PieChart extends BaseChart {
 
 	interpolateValues(newData: any) {
 		console.log("INT VAL NEW DATA", newData);
+
 		// Apply the new data to the slices, and interpolate them
 		const arc = this.arc;
 		const path = this.svg.selectAll("path").data(this.pie(newData));
 
+		path
+			.transition()
+			.duration(750)
+			.attr("fill", (d, i) => this.color(d.data.label))
+			.attr("stroke", (d, i) => this.color(d.data.label))
+			.attrTween("d", function (a) {
+				return arcTween.bind(this)(a, arc);
+			});
+
 		path.enter()
 			.append("path")
 			.attr("d", arc)
-			.attr("fill", (d, i) => this.options.colors[d.data.index])
-			.attr("stroke", (d, i) => this.options.colors[d.data.index])
-			.transition()
-			.duration(0)
+			.attr("fill", (d, i) => this.color(d.data.label))
+			.attr("stroke", (d, i) => this.color(d.data.label))
 			.style("opacity", 0)
 			.transition()
 			.duration(750)
@@ -133,27 +144,6 @@ export class PieChart extends BaseChart {
 			.style("opacity", 0)
 			.remove();
 
-		path.transition().duration(750).attrTween("d", function (a) {
-			return arcTween.bind(this)(a, arc);
-		});
-
-		// this.path
-		// 	.enter()
-		// 	.append("path")
-		// 	.attr("d", arc)
-		// 	.attr("fill", function(d, i) {
-		// 		return this.options.colors[d.data.index];
-		// 	}.bind(this))
-		// 	.attr("stroke", function(d, i) {
-		// 		return this.options.colors[d.data.index];
-		// 	}.bind(this))
-		// 	.transition()
-		// 	.duration(750)
-		// 	.attrTween("d", function (a) {
-		// 		return arcTween.bind(this)(a, arc);
-		// 	})
-		// 	.each(function(d) { this._current = d; });
-
 		// Fade out all text labels
 		this.svg.selectAll("text.chart-label")
 			.transition().duration(375).style("opacity", 0).on("end", function(d) {
@@ -163,8 +153,11 @@ export class PieChart extends BaseChart {
 		// Move text labels to their new location, and fade them in again
 		const radius = this.computeRadius();
 		setTimeout(() => {
-			const { ACTIVE } = Configuration.legend.items.status;
-			const text = this.svg.selectAll("text.chart-label").data(this.pie(newData, function(d) { return d; }));
+			const text = this.svg.selectAll("text.chart-label").data(this.pie(newData));
+
+			text
+				.exit()
+				.remove();
 
 			text
 				.enter()
@@ -179,10 +172,6 @@ export class PieChart extends BaseChart {
 				});
 
 			text
-				.exit()
-				.remove();
-
-			text
 				.attr("dy", Configuration.pie.label.dy)
 				.style("text-anchor", this.deriveTextAnchor)
 				.attr("transform", (d) => {
@@ -194,6 +183,7 @@ export class PieChart extends BaseChart {
 		}, 375);
 
 		this.addDataPointEventListener();
+		this.reduceOpacity();
 		// // Set the new data through the chart component
 		// this.data = newData;
 	}
@@ -204,6 +194,10 @@ export class PieChart extends BaseChart {
 		const actualChartSize: any = this.getActualChartSize(this.container);
 		const diameter = Math.min(actualChartSize.width, actualChartSize.height);
 		const radius: number = diameter / 2;
+
+		// Assign a color to each of the slice/legend labels
+		const legendItems = this.getLegendItems();
+		this.color.domain(Object.keys(legendItems));
 
 		d3.select(this.holder).select("svg")
 			.attr("width", `${diameter}px`)
@@ -234,10 +228,10 @@ export class PieChart extends BaseChart {
 			.append("path")
 			.attr("d", this.arc)
 			.attr("fill", function(d, i) {
-				return this.options.colors[d.data.index];
+				return this.color(d.data.label);
 			}.bind(this))
 			.attr("stroke", function(d, i) {
-				return this.options.colors[d.data.index];
+				return this.color(d.data.label);
 			}.bind(this))
 			.each(function(d) { this._current = d; });
 
@@ -262,15 +256,18 @@ export class PieChart extends BaseChart {
 			.enter();
 	}
 
-	reduceOpacity(exception) {
+	reduceOpacity(exception?: any) {
 		this.svg.selectAll("path").attr("stroke-opacity", 0);
-		this.svg.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
 
-		// Fade out everything except for this element
-		d3.select(exception).attr("fill-opacity", false);
-		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
-		d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
-		d3.select(exception).attr("fill", d3.select(exception).attr("stroke"));
+		if (exception) {
+			this.svg.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
+
+			// Fade everything out except for this element
+			d3.select(exception).attr("fill-opacity", false);
+			d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+			d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+			d3.select(exception).attr("fill", d3.select(exception).attr("stroke"));
+		}
 	}
 
 	showTooltip(d) {
@@ -280,7 +277,7 @@ export class PieChart extends BaseChart {
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
 			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px")
-			.style("border-color", this.options.colors[d.data.index]);
+			.style("border-color", this.color(d.data.label));
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				this.hideTooltip();
@@ -333,7 +330,7 @@ export class PieChart extends BaseChart {
 				sel
 					.attr("stroke-width", Configuration.pie.mouseover.strokeWidth)
 					.attr("stroke-opacity", Configuration.pie.mouseover.strokeOpacity)
-					.attr("stroke", self.options.colors[d.data.index]);
+					.attr("stroke", self.color(d.data.label));
 			})
 			.on("mouseout", function(d) {
 				d3.select(this).attr("stroke", "");
@@ -349,12 +346,6 @@ export class PieChart extends BaseChart {
 
 		super.setSVG();
 	}
-
-	// update() {
-	// 	this.setSVG();
-	// 	this.draw();
-	// 	this.addDataPointEventListener();
-	// }
 
 	update(newData?: any) {
 		console.log(newData);
@@ -419,7 +410,7 @@ export class PieChart extends BaseChart {
 
 		legend.append("div")
 			.attr("class", "legend-circle")
-			.style("background-color", (d, i) => this.options.colors[i]);
+			.style("background-color", (d, i) => this.color(d));
 		this.addLegendCircleHoverEffect();
 
 		legend.append("text")
