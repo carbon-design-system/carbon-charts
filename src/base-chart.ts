@@ -201,9 +201,20 @@ export class BaseChart {
 				// Only apply legend filters if there are more than 1 active legend items
 				const activeLegendItems = self.getActiveLegendItems();
 				const legendButton = d3.select(this);
-				if (activeLegendItems.length > 1 || !legendButton.classed("active")) {
+				const enabling = !legendButton.classed("active");
+
+				// If there are more than 1 active legend items & one is getting toggled on
+				if (activeLegendItems.length > 1 || enabling) {
 					self.updateLegend(this);
 					self.applyLegendFilter(legendButton.select("text").text());
+				}
+				// If there are 2 active legend items & one is getting toggled off
+				if (activeLegendItems.length === 2 && !enabling) {
+					c.selectAll(".legend-btn.active").classed("not-allowed", true);
+				}
+
+				if (activeLegendItems.length === 1 && enabling) {
+					c.selectAll(".legend-btn.not-allowed").classed("not-allowed", false);
 				}
 			});
 		});

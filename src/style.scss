@@ -107,20 +107,30 @@ $default_transition: all .1s ease-out;
 			overflow: hidden;
 			display: inherit;
 		}
-	}
 
-	.legend-circle {
-		display: inherit;
-		height: 10px;
-		width: 10px;
-		-moz-border-radius: 50%;
-		border-radius: 50%;
-		margin: 0 5px 5px 15px;
-		box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		&:hover {
-			cursor: pointer;
+		.legend-circle {
+			display: inherit;
+			height: 10px;
+			width: 10px;
+			-moz-border-radius: 50%;
+			border-radius: 50%;
+			margin: 0 5px 5px 15px;
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+
+		&.not-allowed {
+			cursor: default;
+
+			.legend-circle:hover {
+				cursor: default;
+				box-shadow: none !important;
+			}
 		}
 	}
 

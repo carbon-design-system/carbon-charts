@@ -111,7 +111,7 @@ export class PieChart extends BaseChart {
 	}
 
 	interpolateValues(newData: any) {
-		console.log("INT VAL NEW DATA", newData);
+		// console.log("INT VAL NEW DATA", newData);
 
 		// Apply the new data to the slices, and interpolate them
 		const arc = this.arc;
@@ -153,6 +153,7 @@ export class PieChart extends BaseChart {
 		// Move text labels to their new location, and fade them in again
 		const radius = this.computeRadius();
 		// setTimeout(() => {
+			console.log("NEW DATA FOR TEXTS", newData);
 			const text = this.svg.selectAll("text.chart-label").data(this.pie(newData), function(d) { return d.data.label; });
 			console.log("DELETE OLD TEXTS***");
 
@@ -443,12 +444,12 @@ export class PieChart extends BaseChart {
 
 		// Resize the arc
 		const marginedRadius = radius - (pieConfigs.label.margin * scaleRatio);
-		const arc = d3.arc()
+		this.arc = d3.arc()
 			.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
 			.outerRadius(marginedRadius);
 
 		this.svg.selectAll("path")
-			.attr("d", arc);
+			.attr("d", this.arc);
 
 		this.svg
 			.selectAll("text.chart-label")
