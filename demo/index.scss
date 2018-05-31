@@ -2,7 +2,9 @@ $default_transition: all .1s ease-out;
 
 @import "../node_modules/prismjs/themes/prism.css";
 
-html, body { margin: 0; }
+html, body {
+	margin: 0;
+}
 
 header.m-demo-header {
 	margin-bottom: 20px;
@@ -62,6 +64,7 @@ header.m-demo-header {
 	overflow: hidden;
 	resize: both;
 	//
+	font-weight: 400;
 
 	h3 {
 		border-bottom: 1px solid lightgray;

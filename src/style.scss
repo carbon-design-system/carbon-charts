@@ -46,6 +46,7 @@ $default_transition: all .1s ease-out;
 		&.donut {
 			&-figure {
 				font-size: 24px;
+				font-weight: normal;
 				fill: m_color("gray", 60);
 			}
 
