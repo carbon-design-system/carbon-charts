@@ -152,13 +152,9 @@ export class PieChart extends BaseChart {
 
 		// Move text labels to their new location, and fade them in again
 		const radius = this.computeRadius();
-		setTimeout(() => {
+		// setTimeout(() => {
 			const text = this.svg.selectAll("text.chart-label").data(this.pie(newData), function(d) { return d.data.label; });
-			// console.log("NEW D", newData);
-			text
-				.exit()
-				// .each(function(d) { console.log(d); })
-				.remove();
+			console.log("DELETE OLD TEXTS***");
 
 			text
 				.enter()
@@ -170,7 +166,8 @@ export class PieChart extends BaseChart {
 				})
 				.text(function(d) {
 					return Tools.convertValueToPercentage(d.data.value, newData);
-				});
+				})
+				.each(d => console.log("NEW ENTER***", d));
 
 			text
 				.attr("dy", Configuration.pie.label.dy)
@@ -181,7 +178,13 @@ export class PieChart extends BaseChart {
 				.text(function(d) {
 					return Tools.convertValueToPercentage(d.data.value, newData);
 				});
-		}, 375);
+
+
+			text
+				.exit()
+				.each(function(d) { console.log("NEW EXIT***", d); })
+				.remove();
+		// }, 375);
 
 		// Add slice hover actions, and clear any slice borders present
 		this.addDataPointEventListener();
@@ -189,6 +192,7 @@ export class PieChart extends BaseChart {
 	}
 
 	draw() {
+		console.log("draw()");
 		const dataList = this.data;
 
 		const actualChartSize: any = this.getActualChartSize(this.container);
@@ -237,9 +241,10 @@ export class PieChart extends BaseChart {
 
 		// Render the slice labels
 		this.svg
-			.selectAll("g.inner-wrap")
-			.data(this.pie(dataList))
+			.selectAll("text.chart-label")
+			.data(this.pie(dataList), function(d) { return d.data.label; })
 			.enter()
+			.each((d) => console.log("ENTER FROM DRAW***"))
 			.append("text")
 			.classed("chart-label", true)
 			.attr("dy", Configuration.pie.label.dy)
@@ -250,10 +255,6 @@ export class PieChart extends BaseChart {
 			.text(function(d) {
 				return Tools.convertValueToPercentage(d.data.value, dataList);
 			});
-
-		this.svg
-			.selectAll("text.chart-label")
-			.enter();
 	}
 
 	reduceOpacity(exception?: any) {

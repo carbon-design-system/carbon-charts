@@ -198,10 +198,19 @@ export class BaseChart {
 				c.selectAll(".chart-tooltip").remove();
 				c.selectAll(".label-tooltip").remove();
 
-				self.updateLegend(this);
-				self.applyLegendFilter(d3.select(this).select("text").text());
+				// Only apply legend filters if there are more than 1 active legend items
+				const activeLegendItems = self.getActiveLegendItems();
+				const legendButton = d3.select(this);
+				if (activeLegendItems.length > 1 || !legendButton.classed("active")) {
+					self.updateLegend(this);
+					self.applyLegendFilter(legendButton.select("text").text());
+				}
 			});
 		});
+	}
+
+	applyLegendFilter(changedLabel: string) {
+		console.warn("You should implement your own `applyLegendFilter() function.");
 	}
 
 	setClickableLegendInTooltip() {
@@ -520,6 +529,7 @@ export class BaseChart {
 	removeTooltipEventListeners() {
 		// Remove eventlistener to close tooltip when ESC is pressed
 		window.onkeydown = null;
+
 		// Remove eventlistener to close tooltip when clicked outside
 		window.onclick = null;
 	}
