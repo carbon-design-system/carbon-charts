@@ -138,7 +138,6 @@ $default_transition: all .1s ease-out;
 	.legend-tooltip {
 		padding: 0;
 		border: none;
-		width: 200px;
 		.legend-tooltip-header {
 			background: #2D74DA;
 			color: white;
@@ -205,6 +204,7 @@ $default_transition: all .1s ease-out;
 	font-size: 12px;
 	position: absolute;
 	padding: 10px;
+	padding-right: 28px;
 	max-width: 200px;
 	word-wrap: break-word;
 	z-index: 1059;
@@ -272,10 +272,6 @@ $default_transition: all .1s ease-out;
 			font-size: 27px;
 		}
 	}
-}
-
-.chart-tooltip {
-	width: 200px;
 }
 
 .pie-chart {
