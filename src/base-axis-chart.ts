@@ -75,6 +75,10 @@ export class BaseAxisChart extends BaseChart {
 	setSVG(): any {
 		super.setSVG();
 
+		this.svg.append("g")
+			.attr("class", "y axis")
+			.attr("transform", `translate(0, 0)`);
+
 		const chartSize = this.getActualChartSize();
 		this.svg.append("g")
 			.attr("class", "x axis")

@@ -96,12 +96,9 @@ export class BaseChart {
 	setSVG(): any {
 		const chartSize = this.getActualChartSize();
 		this.svg = this.container.append("svg")
-			.attr("class", "chart-svg")
+			.classed("chart-svg", true)
 			.append("g")
-			.attr("class", "inner-wrap");
-		this.svg.append("g")
-			.attr("class", "y axis")
-			.attr("transform", `translate(0, 0)`);
+			.classed("inner-wrap", true);
 
 		return this.svg;
 	}
@@ -146,27 +143,6 @@ export class BaseChart {
 	resizeChart() {
 		console.warn("You should implement your own `resizeChart() function.");
 	}
-
-	// TODO - Remove, doesn't seem like it's being used
-	//#endregion
-	// setResizeWhenContainerChange() {
-	// 	let containerWidth = this.holder.clientWidth;
-	// 	let containerHeight = this.holder.clientHeight;
-	// 	const intervalId = setInterval(() => {
-	// 		if (Math.abs(containerWidth - this.holder.clientWidth) > 20
-	// 		|| Math.abs(containerHeight - this.holder.clientHeight) > 20) {
-	// 			containerWidth = this.holder.clientWidth;
-	// 			containerHeight = this.holder.clientHeight;
-	// 			Tools.debounce(() => {
-	// 				window.clearTimeout(intervalId);
-	// 				d3.selectAll(".legend-tooltip").style("display", "none");
-	// 				this.redrawChart();
-	// 			}, 500)();
-	// 		}
-	// 	}, 800);
-	// 	this.resizeTimers.push(intervalId);
-	// 	return intervalId;
-	// }
 
 	resizeWhenContainerChange() {
 		let containerWidth = this.holder.clientWidth;
@@ -283,6 +259,7 @@ export class BaseChart {
 		this.svg.selectAll("path").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
 		this.svg.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
 		this.svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+
 		d3.select(exception).attr("fill-opacity", false);
 		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
@@ -309,6 +286,7 @@ export class BaseChart {
 	updateLegend(legend) {
 		const thisLegend = d3.select(legend);
 		const circle = d3.select(legend).select(".legend-circle");
+
 		thisLegend.classed("active", !thisLegend.classed("active"));
 		if (thisLegend.classed("active")) {
 			circle.style("background-color", circle.style("border-color"))
@@ -317,9 +295,9 @@ export class BaseChart {
 				.style("border-width", Configuration.legend.active.borderWidth);
 		} else {
 			circle.style("border-color", circle.style("background-color"))
-			.style("background-color", Configuration.legend.inactive.backgroundColor)
-			.style("border-style", Configuration.legend.inactive.borderStyle)
-			.style("border-width", Configuration.legend.inactive.borderWidth);
+				.style("background-color", Configuration.legend.inactive.backgroundColor)
+				.style("border-style", Configuration.legend.inactive.borderStyle)
+				.style("border-width", Configuration.legend.inactive.borderWidth);
 		}
 	}
 
@@ -327,6 +305,7 @@ export class BaseChart {
 		if (this.container.select(".legend-tooltip").nodes().length > 0) {
 			return;
 		}
+
 		const legendItems = this.getLegendItems();
 		const legend = this.container.select(".legend")
 			.attr("font-size", Configuration.legend.fontSize)
@@ -338,10 +317,11 @@ export class BaseChart {
 		legend.append("div")
 			.attr("class", "legend-circle")
 			.style("background-color", (d, i) => this.options.colors[i]);
-		this.addLegendCircleHoverEffect();
 
 		legend.append("text")
 			.text(d => d);
+
+		this.addLegendCircleHoverEffect();
 	}
 
 	positionLegend() {
@@ -349,7 +329,7 @@ export class BaseChart {
 			&& this.container.select(".legend-tooltip").node().style.display === "block") { return; }
 
 		this.container.selectAll(".legend-btn").style("display", "inline-block");
-		const svgWidth = this.container.select(".inner-wrap").node().getBBox().width;
+		const svgWidth = this.container.select("g.inner-wrap").node().getBBox().width;
 		if (this.isLegendOnRight()) {
 			this.container.selectAll(".expand-btn").remove();
 			this.container.select(".legend-wrapper").style("height", 0);
@@ -377,6 +357,15 @@ export class BaseChart {
 				this.addTooltipOpenButtonToLegend();
 			}
 		}
+	}
+
+	addOrUpdateLegend() {
+		this.addLegend();
+		if (this.options.legendClickable) {
+			this.setClickableLegend();
+		}
+
+		this.positionLegend();
 	}
 
 	addLegendCircleHoverEffect() {

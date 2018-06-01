@@ -55,19 +55,33 @@ export class PieChart extends BaseChart {
 			this.data.forEach(entry => {
 				keys[entry.label] = Configuration.legend.items.status.ACTIVE;
 			});
+
+			// Grab the old legend items, the keys from the current data
+			// Compare the two, if there are any differences (additions/removals)
+			// Completely remove the legend and render again
+			const oldLegendItems = this.getActiveLegendItems();
+			const keysArray = Object.keys(keys);
+			const { missing: removedItems, added: newItems } = Tools.arrayDifferences(oldLegendItems, keysArray);
+
+			// Update keys for legend use the latest data keys
 			this.options.keys = keys;
 
 			// Perform the draw or update chart
 			if (initialDraw) {
-				console.log("initialDraw()");
+				// console.log("initialDraw()");
 
 				this.initialDraw();
 
+				// Hide the overlay
 				const overlayEl = <HTMLElement>this.holder.querySelector("div.chart-overlay");
 				overlayEl.style.display = "none";
 			} else {
+				if (removedItems.length > 0 || newItems.length > 0) {
+					this.addOrUpdateLegend();
+				}
+
 				console.log("update()");
-				this.update();
+				this.update(value);
 			}
 		});
 	}
@@ -94,25 +108,24 @@ export class PieChart extends BaseChart {
 			}
 		}
 
-		return sortedData.map((item, i) => Object.assign(item, { index: i }));
+		return sortedData;
 	}
 
 	initialDraw() {
+
 		this.setSVG();
 
-		this.addLegend();
-		if (this.options.legendClickable) {
-			this.setClickableLegend();
-		}
+		// Add legend
+		this.addOrUpdateLegend();
 
-		this.positionLegend();
+		// Draw slices & labels
 		this.draw();
+
+		// Add event listeners to slices
 		this.addDataPointEventListener();
 	}
 
 	interpolateValues(newData: any) {
-		// console.log("INT VAL NEW DATA", newData);
-
 		// Apply the new data to the slices, and interpolate them
 		const arc = this.arc;
 		const path = this.svg.selectAll("path").data(this.pie(newData));
@@ -153,10 +166,7 @@ export class PieChart extends BaseChart {
 		// Move text labels to their new location, and fade them in again
 		const radius = this.computeRadius();
 		setTimeout(() => {
-			console.log("NEW DATA FOR TEXTS", newData);
 			const text = this.svg.selectAll("text.chart-label").data(this.pie(newData), function(d) { return d.data.label; });
-			console.log("DELETE OLD TEXTS***");
-
 			text
 				.enter()
 				.append("text")
@@ -168,8 +178,7 @@ export class PieChart extends BaseChart {
 				})
 				.text(function(d) {
 					return Tools.convertValueToPercentage(d.data.value, newData);
-				})
-				.each(d => console.log("NEW ENTER***", d));
+				});
 
 			text
 				.attr("dy", Configuration.pie.label.dy)
@@ -184,7 +193,6 @@ export class PieChart extends BaseChart {
 
 			text
 				.exit()
-				.each(function(d) { console.log("NEW EXIT***", d); })
 				.remove();
 		}, 375);
 
@@ -339,18 +347,8 @@ export class PieChart extends BaseChart {
 			});
 	}
 
-	// TODO - Remove
-	setSVG() {
-		const currentSVG = d3.select(this.holder).select("svg.chart-svg");
-		if (currentSVG) {
-			currentSVG.remove();
-		}
-
-		super.setSVG();
-	}
-
 	update(newData?: any) {
-		console.log(newData);
+		console.log("newData", newData);
 		const oldData = this.data;
 		const activeSeries = this.getActiveLegendItems();
 		if (!newData) {
@@ -365,16 +363,11 @@ export class PieChart extends BaseChart {
 		const processedNewData = this.sortAndRepartitionData(newData);
 
 
-		console.log("processedNewData", activeSeries, newData, processedNewData);
+		// console.log("processedNewData", activeSeries, newData, processedNewData);
 
 		// console.log("FILTERED DATA", filteredData);
 
 		this.interpolateValues(processedNewData);
-
-		// const oldLegendItems = this.getActiveDataSeries();
-		// const { missing: removedItems, added: newItems } = Tools.arrayDifferences(oldLegendItems, keys);
-		// console.log(oldLegendItems, keys);
-		// console.log("NEW KEYS OR NOT", removedItems, newItems);
 		// const currentLegendButtons = Array.prototype.slice.call(this.holder.querySelectorAll(".legend-btn"));
 		// currentLegendButtons.forEach((buttonElement, i) => {
 		// 	const buttonShouldUpdate = d3.select(buttonElement).select("text").text() !== keys[i];
@@ -403,6 +396,9 @@ export class PieChart extends BaseChart {
 			return;
 		}
 
+		this.container.select(".legend")
+			.selectAll("*").remove();
+
 		const legend = this.container.select(".legend")
 			.attr("font-size", Configuration.legend.fontSize)
 			.selectAll("div")
@@ -413,10 +409,11 @@ export class PieChart extends BaseChart {
 		legend.append("div")
 			.attr("class", "legend-circle")
 			.style("background-color", (d, i) => this.color(d));
-		this.addLegendCircleHoverEffect();
 
 		legend.append("text")
 			.text(d => d);
+
+		this.addLegendCircleHoverEffect();
 	}
 
 	applyLegendFilter(changedLabel: string) {
