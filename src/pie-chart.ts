@@ -362,19 +362,7 @@ export class PieChart extends BaseChart {
 		}
 		const processedNewData = this.sortAndRepartitionData(newData);
 
-
-		// console.log("processedNewData", activeSeries, newData, processedNewData);
-
-		// console.log("FILTERED DATA", filteredData);
-
 		this.interpolateValues(processedNewData);
-		// const currentLegendButtons = Array.prototype.slice.call(this.holder.querySelectorAll(".legend-btn"));
-		// currentLegendButtons.forEach((buttonElement, i) => {
-		// 	const buttonShouldUpdate = d3.select(buttonElement).select("text").text() !== keys[i];
-		// 	if (buttonShouldUpdate) {
-		// 		d3.select(buttonElement).select("text").text(keys[i]);
-		// 	}
-		// });
 	}
 
 	getActiveLegendItems() {
