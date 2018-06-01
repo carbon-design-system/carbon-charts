@@ -523,6 +523,18 @@ const setDemoActionsEventListener = (chartType: any, oldData: any) => {
 		changeDemoData(chartType, oldData);
 	};
 
+	const actionsElement = document.getElementById(`actions-${chartType}`);
+	const changeDataPromiseButtons = Array.prototype.slice.call(document.querySelectorAll(".change-data-promise"));
+	changeDataPromiseButtons.forEach(element => {
+		element = <HTMLElement>element;
+		element.onclick = e => {
+			console.log("CLICKED");
+			e.preventDefault();
+
+			changeDemoData(chartType, oldData, parseInt(element.getAttribute("data-promise-delay"), 10));
+		};
+	});
+
 	// switch (chartType) {
 	// 	case "donut":
 	// 		window.onkeydown = (e) => {
@@ -611,7 +623,7 @@ chartTypes.forEach(type => {
 	}
 });
 
-const changeDemoData = (chartType: any, oldData: any) => {
+const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 	switch (chartType) {
 		case "donut":
 		case "pie":
@@ -622,18 +634,32 @@ const changeDemoData = (chartType: any, oldData: any) => {
 				const newValue = Math.max(0.2 * dataPoint.value, Math.floor(dataPoint.value * Math.random() * (Math.random() * 5)));
 				return Object.assign({}, dataPoint, {value: newValue});
 			});
-			classyChartObject.setData(newData);
+
+			if (delay) {
+				const dataPromise = new Promise((resolve, reject) => {
+					setTimeout(() => {
+						resolve(newData);
+					}, delay || 0);
+				});
+
+				classyChartObject.setData(dataPromise);
+			} else {
+				classyChartObject.setData(newData);
+			}
+
 
 			if (chartType === "donut") {
-				// Update DonutCenter values
-				const { number: centerNumber } = classyChartObject.center.configs;
-				let newCenterNumber = Math.floor(Math.max(0.2 * centerNumber, centerNumber * Math.random() * (Math.random() * 5)));
-				if (newCenterNumber <= 10) {
-					newCenterNumber = 10000;
-				}
+				setTimeout(() => {
+					// Update DonutCenter values
+					const { number: centerNumber } = classyChartObject.center.configs;
+					let newCenterNumber = Math.floor(Math.max(0.2 * centerNumber, centerNumber * Math.random() * (Math.random() * 5)));
+					if (newCenterNumber <= 10) {
+						newCenterNumber = 10000;
+					}
 
-				classyChartObject.center.configs.number = newCenterNumber;
-				classyChartObject.center.update();
+					classyChartObject.center.configs.number = newCenterNumber;
+					classyChartObject.center.update();
+				}, delay || 0);
 			}
 
 			break;

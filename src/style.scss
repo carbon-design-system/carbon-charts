@@ -8,7 +8,6 @@ $default_transition: all .1s ease-out;
 .chart-wrapper {
 	width: 100%;
 	height: 100%;
-	position: relative;
 	@include fonts();
 
 	div.chart-overlay {

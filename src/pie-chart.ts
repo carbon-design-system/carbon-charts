@@ -32,12 +32,10 @@ export class PieChart extends BaseChart {
 		const { selectors } = Configuration;
 		const innerWrapElement = this.holder.querySelector(selectors.INNERWRAP);
 		const initialDraw = innerWrapElement === null;
+		const newDataIsAPromise = Promise.resolve(data) === data;
 
-		if (initialDraw) {
-			const loadingOverlay = document.createElement("div");
-			loadingOverlay.classList.add("chart-overlay");
-			loadingOverlay.innerHTML = "<span>loading...</span>";
-			this.holder.querySelector(selectors.CHARTWRAPPER).appendChild(loadingOverlay);
+		if (initialDraw || newDataIsAPromise) {
+			this.updateOverlay().show();
 		}
 
 		Promise.resolve(data).then(value => {
@@ -71,10 +69,6 @@ export class PieChart extends BaseChart {
 				// console.log("initialDraw()");
 
 				this.initialDraw();
-
-				// Hide the overlay
-				const overlayEl = <HTMLElement>this.holder.querySelector("div.chart-overlay");
-				overlayEl.style.display = "none";
 			} else {
 				if (removedItems.length > 0 || newItems.length > 0) {
 					this.addOrUpdateLegend();
@@ -112,7 +106,6 @@ export class PieChart extends BaseChart {
 	}
 
 	initialDraw() {
-
 		this.setSVG();
 
 		// Add legend
@@ -190,7 +183,6 @@ export class PieChart extends BaseChart {
 					return Tools.convertValueToPercentage(d.data.value, newData);
 				});
 
-
 			text
 				.exit()
 				.remove();
@@ -199,6 +191,33 @@ export class PieChart extends BaseChart {
 		// Add slice hover actions, and clear any slice borders present
 		this.addDataPointEventListener();
 		this.reduceOpacity();
+
+		// Hide the overlay
+		this.updateOverlay().hide();
+	}
+
+	updateOverlay() {
+		const overlayElement = <HTMLElement>this.holder.querySelector("div.chart-overlay");
+
+		return {
+			show: () => {
+				// If overlay element has already been added to the chart container
+				// Just show it
+				if (overlayElement) {
+					overlayElement.style.display = "block";
+				} else {
+					const loadingOverlay = document.createElement("div");
+
+					loadingOverlay.classList.add("chart-overlay");
+					loadingOverlay.innerHTML = "<span>loading...</span>";
+
+					this.holder.querySelector(Configuration.selectors.CHARTWRAPPER).appendChild(loadingOverlay);
+				}
+			},
+			hide: () => {
+				overlayElement.style.display = "none";
+			}
+		};
 	}
 
 	draw() {
@@ -264,6 +283,9 @@ export class PieChart extends BaseChart {
 			.text(function(d) {
 				return Tools.convertValueToPercentage(d.data.value, dataList);
 			});
+
+		// Hide overlay
+		this.updateOverlay().hide();
 	}
 
 	reduceOpacity(exception?: any) {

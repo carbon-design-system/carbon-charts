@@ -13,14 +13,14 @@ buttonAddonElements.forEach(buttonElement => {
 		toggleChevronSVG(svgElement);
 
 
-		// If menu items are clicked, close menu
-		const menuItemElements = Array.prototype.slice.call(dropdownElement.querySelectorAll("li"));
-		menuItemElements.forEach(menuItemElement => {
-			menuItemElement.onclick = () => {
-				toggleClass(dropdownElement, "visible");
-				toggleChevronSVG(svgElement);
-			};
-		});
+		// // If menu items are clicked, close menu
+		// const menuItemElements = Array.prototype.slice.call(dropdownElement.querySelectorAll("li"));
+		// menuItemElements.forEach(menuItemElement => {
+		// 	menuItemElement.onclick = () => {
+		// 		toggleClass(dropdownElement, "visible");
+		// 		toggleChevronSVG(svgElement);
+		// 	};
+		// });
 	};
 });
 
