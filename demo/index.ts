@@ -10,8 +10,10 @@ import {
 } from "./../src/index";
 
 // Styles
-import "./index.scss";
 import "@peretz/matter/matter.css";
+import "./index.scss";
+
+import "./demo-matter";
 
 const colors = [
 	"#009BEF",

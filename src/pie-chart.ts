@@ -152,7 +152,7 @@ export class PieChart extends BaseChart {
 
 		// Move text labels to their new location, and fade them in again
 		const radius = this.computeRadius();
-		// setTimeout(() => {
+		setTimeout(() => {
 			console.log("NEW DATA FOR TEXTS", newData);
 			const text = this.svg.selectAll("text.chart-label").data(this.pie(newData), function(d) { return d.data.label; });
 			console.log("DELETE OLD TEXTS***");
@@ -160,6 +160,7 @@ export class PieChart extends BaseChart {
 			text
 				.enter()
 				.append("text")
+				.classed("chart-label", true)
 				.attr("dy", Configuration.pie.label.dy)
 				.style("text-anchor", this.deriveTextAnchor)
 				.attr("transform", (d) => {
@@ -185,7 +186,7 @@ export class PieChart extends BaseChart {
 				.exit()
 				.each(function(d) { console.log("NEW EXIT***", d); })
 				.remove();
-		// }, 375);
+		}, 375);
 
 		// Add slice hover actions, and clear any slice borders present
 		this.addDataPointEventListener();
@@ -245,7 +246,6 @@ export class PieChart extends BaseChart {
 			.selectAll("text.chart-label")
 			.data(this.pie(dataList), function(d) { return d.data.label; })
 			.enter()
-			.each((d) => console.log("ENTER FROM DRAW***"))
 			.append("text")
 			.classed("chart-label", true)
 			.attr("dy", Configuration.pie.label.dy)

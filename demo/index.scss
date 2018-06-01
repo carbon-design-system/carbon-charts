@@ -122,3 +122,12 @@ div.code {
 		}
 	}
 }
+
+// Matter styles
+ul.btn_menu {
+	display: none !important;
+
+	&.visible {
+		display: block !important;
+	}
+}
