@@ -58,7 +58,6 @@ describe("pie chart", () => {
 			Object.assign({}, options, {type: chartType}),
 			data
 		);
-		classyPieChart.drawChart();
 	});
 
 	afterEach(() => {
@@ -67,11 +66,13 @@ describe("pie chart", () => {
 	});
 
 	it("should work", () => {
-		// Grab chart container in DOM
-		const classyContainer = grabClassyContainer(chartType);
+		setTimeout(() => {
+			// Grab chart container in DOM
+			const classyContainer = grabClassyContainer(chartType);
 
-		// Expect chart container to contain the main chart SVG element
-		expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
+			// Expect chart container to contain the main chart SVG element
+			expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
+		}, 0);
 	});
 
 	/*
@@ -95,24 +96,28 @@ describe("pie chart", () => {
 	 * Testing
 	 */
 	it("should show tooltips", () => {
-		// Grab chart container in DOM
-		const classyContainer = grabClassyContainer(chartType);
+		setTimeout(() => {
+			// Grab chart container in DOM
+			const classyContainer = grabClassyContainer(chartType);
 
-		// Trigger click on a slice
-		d3.select(classyContainer).select(`${selectors.INNERWRAP} ${selectors.pie.SLICE}`).dispatch("click");
+			// Trigger click on a slice
+			d3.select(classyContainer).select(`${selectors.INNERWRAP} ${selectors.pie.SLICE}`).dispatch("click");
 
-		// Make sure the tooltip container exists now
-		expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();
+			// Make sure the tooltip container exists now
+			expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();
+		}, 500);
 	});
 
 	it("should filter results", () => {
-		// Grab chart container in DOM & # of current slices
-		const classyContainer = grabClassyContainer(chartType);
-		const numberOfSlices = getNumberOfSlices(classyContainer);
+		setTimeout(() => {
+			// Grab chart container in DOM & # of current slices
+			const classyContainer = grabClassyContainer(chartType);
+			const numberOfSlices = getNumberOfSlices(classyContainer);
 
-		// Click on the first legend item
-		d3.select(classyContainer).select(selectors.LEGEND_BTN).dispatch("click");
+			// Click on the first legend item
+			d3.select(classyContainer).select(selectors.LEGEND_BTN).dispatch("click");
 
-		expect(getNumberOfSlices(classyContainer)).toBe(numberOfSlices - 1);
+			expect(getNumberOfSlices(classyContainer)).toBe(numberOfSlices - 1);
+		}, 500);
 	});
 });

@@ -84,7 +84,7 @@ export class PieChart extends BaseChart {
 	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
 	sortAndRepartitionData(data: any) {
 		let sortedData = data.sort((a, b) => b.value - a.value);
-		const stopAt = Configuration.pie.sliceLimit;
+		const { sliceLimit: stopAt } = Configuration.pie;
 		const rest = sortedData.slice(stopAt);
 		const restAccumulatedValue = rest.reduce((accum, item) => accum + item.value, 0);
 
@@ -105,6 +105,8 @@ export class PieChart extends BaseChart {
 		return sortedData;
 	}
 
+	// If there isn't a chart already drawn in the container
+	// This function is called and will do that
 	initialDraw() {
 		this.setSVG();
 
@@ -118,11 +120,13 @@ export class PieChart extends BaseChart {
 		this.addDataPointEventListener();
 	}
 
+	// Interpolated transitions for older data points to reflect the new data changes
 	interpolateValues(newData: any) {
 		// Apply the new data to the slices, and interpolate them
 		const arc = this.arc;
 		const path = this.svg.selectAll("path").data(this.pie(newData));
 
+		// Update slices
 		path
 			.transition()
 			.duration(750)
@@ -268,7 +272,7 @@ export class PieChart extends BaseChart {
 			}.bind(this))
 			.each(function(d) { this._current = d; });
 
-		// Render the slice labels
+		// Draw the slice labels
 		this.svg
 			.selectAll("text.chart-label")
 			.data(this.pie(dataList), function(d) { return d.data.label; })
@@ -370,7 +374,6 @@ export class PieChart extends BaseChart {
 	}
 
 	update(newData?: any) {
-		console.log("newData", newData);
 		const oldData = this.data;
 		const activeSeries = this.getActiveLegendItems();
 		if (!newData) {
@@ -426,6 +429,12 @@ export class PieChart extends BaseChart {
 		this.addLegendCircleHoverEffect();
 	}
 
+	/**
+	 *
+	 * When a legend item is clicked, apply/remove the appropriate filter
+	 * @param {string} changedLabel The label of the legend element the user clicked on
+	 * @memberof PieChart
+	 */
 	applyLegendFilter(changedLabel: string) {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 		const oldStatus = this.options.keys[changedLabel];

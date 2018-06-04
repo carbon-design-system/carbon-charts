@@ -19,6 +19,7 @@ const chartType = "donut";
 // Functions
 const getNumberOfSlices = classyContainer => classyContainer.querySelectorAll(`${selectors.INNERWRAP} ${selectors.pie.SLICE}`).length;
 
+// TODO Update all setTimeouts to use chart.onLoad instead
 describe("donut Chart", () => {
 	let classyDonutChart;
 	let data;
@@ -56,7 +57,6 @@ describe("donut Chart", () => {
 			Object.assign({}, options, {type: chartType}),
 			data
 		);
-		classyDonutChart.drawChart();
 	});
 
 	afterEach(() => {
@@ -67,9 +67,10 @@ describe("donut Chart", () => {
 	it("should work", () => {
 		// Grab chart container in DOM
 		const classyContainer = grabClassyContainer(chartType);
-
-		// Expect chart container to contain the main chart SVG element
-		expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
+		setTimeout(() => {
+			// Expect chart container to contain the main chart SVG element
+			expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
+		}, 0);
 	});
 
 	/*
@@ -93,24 +94,28 @@ describe("donut Chart", () => {
 	 * Testing
 	 */
 	it ("should show tooltips", () => {
-		// Grab chart container in DOM
-		const classyContainer = grabClassyContainer(chartType);
+		setTimeout(() => {
+			// Grab chart container in DOM
+			const classyContainer = grabClassyContainer(chartType);
 
-		// Trigger click on a slice
-		d3.select(classyContainer).select(`${selectors.INNERWRAP} path`).dispatch("click");
+			// Trigger click on a slice
+			d3.select(classyContainer).select(`${selectors.INNERWRAP} path`).dispatch("click");
 
-		// Make sure the tooltip container exists now
-		expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();
+			// Make sure the tooltip container exists now
+			expect(document.querySelector(selectors.TOOLTIP)).toBeTruthy();
+		}, 500);
 	});
 
 	it("should filter results", () => {
-		// Grab chart container in DOM & # of current slices
-		const classyContainer = grabClassyContainer(chartType);
-		const numberOfSlices = getNumberOfSlices(classyContainer);
+		setTimeout(() => {
+			// Grab chart container in DOM & # of current slices
+			const classyContainer = grabClassyContainer(chartType);
+			const numberOfSlices = getNumberOfSlices(classyContainer);
 
-		// Click on the first legend item
-		d3.select(classyContainer).select(selectors.LEGEND_BTN).dispatch("click");
+			// Click on the first legend item
+			d3.select(classyContainer).select(selectors.LEGEND_BTN).dispatch("click");
 
-		expect(getNumberOfSlices(classyContainer)).toBe(numberOfSlices - 1);
+			expect(getNumberOfSlices(classyContainer)).toBe(numberOfSlices - 1);
+		}, 500);
 	});
 });

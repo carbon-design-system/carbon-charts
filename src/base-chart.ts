@@ -161,6 +161,7 @@ export class BaseChart {
 				// this.updateChart();
 				this.resizeChart();
 			}
+
 			requestAnimationFrame(frame);
 		};
 		requestAnimationFrame(frame);
