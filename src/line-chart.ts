@@ -32,7 +32,7 @@ export class LineChart extends BaseAxisChart {
 		}
 
 		this.positionLegend();
-		this.repositionSVG();
+		this.repositionBasedOnYAxis();
 		this.draw();
 		this.addDataPointEventListener();
 	}
@@ -51,7 +51,7 @@ export class LineChart extends BaseAxisChart {
 			// update the actual chart
 			this.update();
 
-			this.repositionSVG();
+			this.repositionBasedOnYAxis();
 			this.positionLegend();
 		}
 	}

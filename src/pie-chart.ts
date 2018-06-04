@@ -200,30 +200,6 @@ export class PieChart extends BaseChart {
 		this.updateOverlay().hide();
 	}
 
-	updateOverlay() {
-		const overlayElement = <HTMLElement>this.holder.querySelector("div.chart-overlay");
-
-		return {
-			show: () => {
-				// If overlay element has already been added to the chart container
-				// Just show it
-				if (overlayElement) {
-					overlayElement.style.display = "block";
-				} else {
-					const loadingOverlay = document.createElement("div");
-
-					loadingOverlay.classList.add("chart-overlay");
-					loadingOverlay.innerHTML = "<span>loading...</span>";
-
-					this.holder.querySelector(Configuration.selectors.CHARTWRAPPER).appendChild(loadingOverlay);
-				}
-			},
-			hide: () => {
-				overlayElement.style.display = "none";
-			}
-		};
-	}
-
 	draw() {
 		console.log("draw()");
 		const dataList = this.data;

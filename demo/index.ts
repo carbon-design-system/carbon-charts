@@ -517,23 +517,25 @@ const chartTypes = [
 
 const setDemoActionsEventListener = (chartType: any, oldData: any) => {
 	const changeDataButton = document.getElementById(`change-data-${chartType}`);
-	changeDataButton.onclick = e => {
-		e.preventDefault();
-
-		changeDemoData(chartType, oldData);
-	};
-
-	const actionsElement = document.getElementById(`actions-${chartType}`);
-	const changeDataPromiseButtons = Array.prototype.slice.call(document.querySelectorAll(".change-data-promise"));
-	changeDataPromiseButtons.forEach(element => {
-		element = <HTMLElement>element;
-		element.onclick = e => {
-			console.log("CLICKED");
+	if (changeDataButton) {
+		changeDataButton.onclick = e => {
 			e.preventDefault();
 
-			changeDemoData(chartType, oldData, parseInt(element.getAttribute("data-promise-delay"), 10));
+			changeDemoData(chartType, oldData);
 		};
-	});
+
+		const actionsElement = document.getElementById(`actions-${chartType}`);
+		const changeDataPromiseButtons = Array.prototype.slice.call(document.querySelectorAll(".change-data-promise"));
+		changeDataPromiseButtons.forEach(element => {
+			element = <HTMLElement>element;
+			element.onclick = e => {
+				console.log("CLICKED");
+				e.preventDefault();
+
+				changeDemoData(chartType, oldData, parseInt(element.getAttribute("data-promise-delay"), 10));
+			};
+		});
+	}
 
 	// switch (chartType) {
 	// 	case "donut":
@@ -547,6 +549,7 @@ const setDemoActionsEventListener = (chartType: any, oldData: any) => {
 	// }
 };
 
+let classyBarChart;
 let classyDonutChart;
 let classyPieChart;
 chartTypes.forEach(type => {
@@ -555,13 +558,16 @@ chartTypes.forEach(type => {
 		switch (type.id) {
 			default:
 			case "bar":
-				const classyBarChart = new BarChart(
+				classyBarChart = new BarChart(
 					classyContainer,
 					Object.assign({}, type.options, {type: type.id}),
 					type.data
 				);
 
-				classyBarChart.drawChart();
+				classyBarChart.setData(type.data);
+
+				setDemoActionsEventListener(type.id, type.data);
+
 				break;
 			case "line":
 				const classyLineChart = new LineChart(
@@ -663,5 +669,8 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 			}
 
 			break;
+
+		case "bar":
+			classyBarChart.setData([]);
 	}
 };

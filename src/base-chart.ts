@@ -115,11 +115,6 @@ export class BaseChart {
 			.attr("transform", `translate(0, 0)`);
 	}
 
-	repositionSVG() {
-		const yAxisWidth = (this.container.select(".y.axis").node() as SVGGElement).getBBox().width;
-		this.container.style("padding-left", `${yAxisWidth}px`);
-	}
-
 	/*
 	 * creates the chart from scratch
 	 * should only be called once (or removeChart should be called before)
@@ -572,6 +567,30 @@ export class BaseChart {
 		}
 
 		this.addTooltipEventListeners(tooltip);
+	}
+
+	updateOverlay() {
+		const overlayElement = <HTMLElement>this.holder.querySelector("div.chart-overlay");
+
+		return {
+			show: () => {
+				// If overlay element has already been added to the chart container
+				// Just show it
+				if (overlayElement) {
+					overlayElement.style.display = "block";
+				} else {
+					const loadingOverlay = document.createElement("div");
+
+					loadingOverlay.classList.add("chart-overlay");
+					loadingOverlay.innerHTML = "<span>loading...</span>";
+
+					this.holder.querySelector(Configuration.selectors.CHARTWRAPPER).appendChild(loadingOverlay);
+				}
+			},
+			hide: () => {
+				overlayElement.style.display = "none";
+			}
+		};
 	}
 
 	// https://github.com/wbkd/d3-extended

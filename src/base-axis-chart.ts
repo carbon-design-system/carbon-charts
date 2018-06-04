@@ -408,4 +408,8 @@ export class BaseAxisChart extends BaseChart {
 		g.select(".tick").remove();
 	}
 
+	repositionBasedOnYAxis() {
+		const yAxisWidth = (this.container.select(".y.axis").node() as SVGGElement).getBBox().width;
+		this.container.style("padding-left", `${yAxisWidth}px`);
+	}
 }

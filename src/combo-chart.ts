@@ -54,7 +54,7 @@ export class ComboChart extends BaseAxisChart {
 		this.drawXGrid(xScaleBar);
 		this.drawYGrid(yScale);
 		this.positionLegend();
-		this.repositionSVG();
+		this.repositionBasedOnYAxis();
 		if (activeBar) {
 			this.drawBars(xScaleBar, yScale);
 		}
@@ -100,7 +100,7 @@ export class ComboChart extends BaseAxisChart {
 			this.updateBars(xScaleBar, yScale, activeBar);
 			this.updateLines(xScaleLine, y2Scale, activeLineSeries);
 
-			this.repositionSVG();
+			this.repositionBasedOnYAxis();
 			this.positionLegend();
 		}
 	}

@@ -32,7 +32,7 @@ export class StackedBarChart extends BarChart {
 		this.drawYGrid();
 
 		this.positionLegend();
-		this.repositionSVG();
+		this.repositionBasedOnYAxis();
 		this.draw();
 		this.addDataPointEventListener();
 	}

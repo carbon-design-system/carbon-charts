@@ -33,7 +33,7 @@ export class DoubleAxisLineChart extends LineChart {
 			this.update(yScale, y1ActiveSeries);
 			this.update(y2Scale, y2ActiveSeries);
 
-			this.repositionSVG();
+			this.repositionBasedOnYAxis();
 			this.positionLegend();
 		}
 	}
@@ -67,12 +67,12 @@ export class DoubleAxisLineChart extends LineChart {
 		this.drawXGrid();
 		this.drawYGrid(yScale);
 		this.positionLegend();
-		this.repositionSVG();
+		this.repositionBasedOnYAxis();
 		this.draw(yScale, y1ActiveSeries);
 		this.draw(y2Scale, y2ActiveSeries);
 
 		this.positionLegend();
-		this.repositionSVG();
+		this.repositionBasedOnYAxis();
 
 		this.addDataPointEventListener();
 	}
