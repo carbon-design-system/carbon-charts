@@ -248,7 +248,7 @@ export class BaseChart {
 
 	resetOpacity() {
 		const svg = d3.selectAll("svg");
-		svg.selectAll("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		svg.selectAll("path").attr("stroke-opacity", 0);
 		svg.selectAll("path").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
 		svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
 			.attr("fill", Configuration.charts.resetOpacity.circle.fill);
