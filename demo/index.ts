@@ -15,6 +15,11 @@ import "./index.scss";
 
 import "./demo-matter";
 
+import {
+	barOptions,
+	barData
+} from "./demo-data/index";
+
 const colors = [
 	"#009BEF",
 	"#95D13C",
@@ -305,16 +310,6 @@ const donutOptions = {
 	})
 };
 
-const data = [];
-for (let i = 0; i < 10; i++) {
-	data.push({
-	"Part number": `773C-${ i * 2 }-L6EP-L22I-${ i * 8 }-L22I`,
-	"Qty": i * 10,
-	"More": i * 20,
-	"Sold": i * 0
-	});
-}
-
 const doubleAxisData = [
 	{
 		"Day": "Monday",
@@ -448,68 +443,58 @@ const pieData = [
 	}
 ];
 
-
 const chartTypes = [
 	{
 		id: "multi-bar",
 		name: "Bar",
-		avail: true,
 		data: dimensionData,
 		options: dimensionOption
 	},
 	{
 		id: "bar",
 		name: "Bar",
-		avail: true,
-		options,
-		data
+		options: barOptions,
+		data: barData
 	},
 	{
 		id: "simplest-bar",
 		name: "Bar",
-		avail: true,
 		options: optionsNoXAxis,
 		data: dataNoXAxis
 	},
 	{
 		id: "line",
 		name: "Line",
-		avail: true,
-		options,
-		data
+		options: barOptions,
+		data: barData
 	},
 	{
 		id: "stacked-bar",
 		name: "Stacked Bar",
-		avail: true,
-		options,
-		data
+		options: barOptions,
+		data: barData
 	},
 	{
 		id: "double-axis-line",
 		name: "Double Axis",
-		avail: true,
 		options: optionsWithFormatter,
 		data: doubleAxisData
 	},
 	{
 		id: "combo",
 		name: "Combo",
-		avail: true,
 		options: doubleYAxisOptions,
 		data: longData
 	},
 	{
 		id: "pie",
 		name: "pie",
-		avail: true,
 		options: pieOptions,
 		data: pieData
 	},
 	{
 		id: "donut",
 		name: "donut",
-		avail: true,
 		options: donutOptions,
 		data: pieData
 	}
@@ -630,15 +615,18 @@ chartTypes.forEach(type => {
 });
 
 const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
+	let newData;
+	// Function to be used to randomize a value
+	const randomizeValue = currentVal => Math.max(0.2 * currentVal, Math.floor(currentVal * Math.random() * (Math.random() * 5)));
+
 	switch (chartType) {
 		case "donut":
 		case "pie":
 			const classyChartObject = chartType === "donut" ? classyDonutChart : classyPieChart;
 
 			// Randomize old data values
-			const newData = oldData.map(dataPoint => {
-				const newValue = Math.max(0.2 * dataPoint.value, Math.floor(dataPoint.value * Math.random() * (Math.random() * 5)));
-				return Object.assign({}, dataPoint, {value: newValue});
+			newData = oldData.map(dataPoint => {
+				return Object.assign({}, dataPoint, {value: randomizeValue(dataPoint.value)});
 			});
 
 			if (delay) {
@@ -671,6 +659,15 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 			break;
 
 		case "bar":
-			classyBarChart.setData([]);
+			// Randomize old data values
+			newData = oldData.map(dataPoint => {
+				return Object.assign({}, dataPoint, {
+					Qty: randomizeValue(dataPoint.Qty),
+					More: randomizeValue(dataPoint.More),
+					Sold: randomizeValue(dataPoint.Sold)
+				});
+			});
+
+			classyBarChart.setData(newData);
 	}
 };

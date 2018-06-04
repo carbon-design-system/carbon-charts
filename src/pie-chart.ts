@@ -351,12 +351,12 @@ export class PieChart extends BaseChart {
 
 	update(newData?: any) {
 		const oldData = this.data;
-		const activeSeries = this.getActiveLegendItems();
+		const activeLegendItems = this.getActiveLegendItems();
 		if (!newData) {
 			// Get new data by filtering the data based off of the legend
 			newData = oldData.filter(dataPoint => {
 				// If this datapoint is active on the legend
-				const activeSeriesItemIndex = activeSeries.indexOf(dataPoint.label);
+				const activeSeriesItemIndex = activeLegendItems.indexOf(dataPoint.label);
 
 				return activeSeriesItemIndex > -1;
 			});
