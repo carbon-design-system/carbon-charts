@@ -12,7 +12,7 @@ export class BarChart extends BaseAxisChart {
 	constructor(holder: Element, options?: any, data?: any) {
 		super(holder, options, data);
 
-		this.options.type = "bar-new";
+		this.options.type = "bar";
 	}
 
 	initialDraw(data?: any) {
@@ -79,7 +79,7 @@ export class BarChart extends BaseAxisChart {
 			.attr("fill", (d: any) => this.color(d.label).toString());
 
 		const yAxis = d3.axisLeft(this.y).ticks(5).tickSize(0);
-		const svg = d3.select("div#classy-bar-new-chart-holder svg");
+		const svg = d3.select("div#classy-bar-chart-holder svg");
 
 		const xAxisRef = svg.select("g.x.axis")
 			.transition()
