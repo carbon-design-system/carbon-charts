@@ -310,14 +310,14 @@ export class BaseAxisChart extends BaseChart {
 	getLargestTickHeight(ticks) {
 		let largestHeight = 0;
 		ticks.each(function() {
-			let tickLength = 0;
-			try {
-				tickLength = this.getBBox().height;
-			} catch (e) {
-				console.log(e);
-			}
-			if (tickLength > largestHeight) {
-				largestHeight = tickLength;
+			const deg = -45;
+			const width = this.getBBox().width;
+			const height = this.getBBox().height;
+			// const rotatedWidth = width * Math.abs(Math.cos(deg)) + height * Math.abs(Math.sin(deg));
+			const rotatedHeight = height * Math.abs(Math.cos(deg)) + width * Math.abs(Math.sin(deg));
+
+			if (rotatedHeight > largestHeight) {
+				largestHeight = rotatedHeight;
 			}
 
 		});

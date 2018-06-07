@@ -31,7 +31,7 @@ export class BaseAxisNewChart extends BaseAxisChart {
 
 	drawYGrid() {
 		const yGrid = d3.axisLeft(this.y)
-			.tickSizeInner(-this.getActualChartSize().width)
+			.tickSizeInner(-(this.getActualChartSize().width))
 			.tickSizeOuter(0)
 			.ticks(10);
 		const g = this.svg.select(".y.grid")
@@ -58,7 +58,7 @@ export class BaseAxisNewChart extends BaseAxisChart {
 
 		// Update Y Grid
 		const yGrid = d3.axisLeft(this.y)
-			.tickSizeInner(-this.getActualChartSize().width)
+			.tickSizeInner(-(this.getActualChartSize().width))
 			.tickSizeOuter(0)
 			.tickFormat("" as any)
 			.ticks(10);

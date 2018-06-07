@@ -19,22 +19,6 @@ export namespace Tools {
 		};
 	}
 
-	export function duplicateKeysInData(data: any) {
-		const keys = [];
-		const duplicateKeys = [];
-
-		data.map(item => {
-			const key = item.label;
-			if (keys.indexOf(key) > -1 && duplicateKeys.indexOf(key) === -1) {
-				duplicateKeys.push(key);
-			}
-
-			keys.push(key);
-		});
-
-		return duplicateKeys;
-	}
-
 	export function addCloseBtn(tooltip, size, color?) {
 		const closeBtn = tooltip.append("button");
 		let classNames = `close--${size}`;
@@ -54,6 +38,7 @@ export namespace Tools {
 		};
 	}
 
+	// Formatting & calculations
 	export function capitalizeFirstLetter(string) {
 		return string[0].toUpperCase() + string.slice(1);
 	}
@@ -62,6 +47,7 @@ export namespace Tools {
 		return Math.floor(item / fullData.reduce((accum, val) => accum + val.value, 0) * 100) + "%";
 	}
 
+	// Objects
 	export function arrayDifferences(oldArray: any[], newArray: any[]) {
 		const difference = {
 			missing: [],
@@ -81,5 +67,28 @@ export namespace Tools {
 		});
 
 		return difference;
+	}
+
+	export function duplicateKeysInData(data: any) {
+		const keys = [];
+		const duplicateKeys = [];
+
+		data.map(item => {
+			const key = item.label;
+			if (keys.indexOf(key) > -1 && duplicateKeys.indexOf(key) === -1) {
+				duplicateKeys.push(key);
+			}
+
+			keys.push(key);
+		});
+
+		return duplicateKeys;
+	}
+
+	// Style helpers
+	export function getXTransformsValue(element: HTMLElement) {
+		const transformMatrixArray = window.getComputedStyle(element).getPropertyValue("transform").split(",");
+
+		return transformMatrixArray[4];
 	}
 }

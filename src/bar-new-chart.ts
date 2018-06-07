@@ -106,7 +106,7 @@ export class BarNewChart extends BaseAxisNewChart {
 	}
 
 	interpolateValues(newData: any) {
-		const margin = {top: 0, right: 20, bottom: 50, left: 40};
+		const margin = {top: 0, right: -40, bottom: 50, left: 40};
 		const chartSize = this.getActualChartSize();
 		const width = chartSize.width - margin.left - margin.right;
 		const height = chartSize.height - margin.top - margin.bottom;
@@ -133,14 +133,20 @@ export class BarNewChart extends BaseAxisNewChart {
 		const yAxis = d3.axisLeft(this.y).ticks(5).tickSize(0);
 		const svg = d3.select("div#classy-bar-new-chart-holder svg");
 
-		svg.select("g.x.axis")
+		const xAxisRef = svg.select("g.x.axis")
 			.transition()
 			.duration(750)
 			.attr("transform", "translate(0," + height + ")")
 			// Being cast to any because d3 does not offer appropriate typings for the .call() function
-			.call(d3.axisBottom(this.x).tickSize(0) as any)
-			.selectAll("text")
-			.attr("transform", "rotate(-45)");
+			.call(d3.axisBottom(this.x).tickSize(0) as any);
+
+		xAxisRef.attr("transform", "translate(0," + height + ")");
+		xAxisRef.selectAll("text")
+			.attr("y", Configuration.axis.magicY1)
+			.attr("x", Configuration.axis.magicX1)
+			.attr("dy", ".35em")
+			.attr("transform", `rotate(${Configuration.axis.xAxisAngle})`)
+			.style("text-anchor", "end");
 
 		svg.select("g.y.axis")
 			.transition()
@@ -184,10 +190,12 @@ export class BarNewChart extends BaseAxisNewChart {
 		svg.style("width", "100%")
 			.style("height", "100%");
 
-		const margin = {top: 0, right: 0, bottom: 50, left: 40};
+		const margin = {top: 0, right: -40, bottom: 50, left: 40};
 		const chartSize = this.getActualChartSize();
 		const width = chartSize.width - margin.left - margin.right;
 		const height = chartSize.height - margin.top - margin.bottom;
+
+		console.log(width);
 
 		const keys = data.map(dataPoint => dataPoint.label);
 
@@ -203,13 +211,17 @@ export class BarNewChart extends BaseAxisNewChart {
 		this.y.domain([0, yEnd]);
 
 		const xAxis = d3.axisBottom(this.x).tickSize(0);
-		g.append("g")
+		const xAxisRef = g.append("g")
 			.attr("class", "x axis")
-			.attr("transform", "translate(0," + height + ")")
-			.attr("height", "100%")
-			.call(xAxis)
-			.selectAll("text")
-			.attr("transform", "rotate(-45)");
+			.call(xAxis);
+
+		xAxisRef.attr("transform", "translate(0," + height + ")");
+		xAxisRef.selectAll("text")
+			.attr("y", Configuration.axis.magicY1)
+			.attr("x", Configuration.axis.magicX1)
+			.attr("dy", ".35em")
+			.attr("transform", `rotate(${Configuration.axis.xAxisAngle})`)
+			.style("text-anchor", "end");
 
 		const yAxis = d3.axisLeft(this.y).ticks(5).tickSize(0);
 		g.append("g")
