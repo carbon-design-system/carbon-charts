@@ -271,8 +271,48 @@ export class BarNewChart extends BaseAxisNewChart {
 			});
 	}
 
+	// resizeChart() {
+	// 	// Trigger then resize event
+	// 	this.events.dispatchEvent(new Event("resize"));
+
+	// 	this.interpolateValues(this.data);
+	// }
+
 	resizeChart() {
-		// Trigger then resize event
-		this.events.dispatchEvent(new Event("resize"));
+		console.log("RESIZEchart");
+
+		const { pie: pieConfigs } = Configuration;
+
+		const actualChartSize: any = this.getActualChartSize(this.container);
+		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
+		const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
+		const radius: number = dimensionToUseForScale / 2;
+
+		// Resize the SVG
+		d3.select(this.holder).select("svg")
+				.attr("width", `${dimensionToUseForScale}px`)
+				.attr("height", `${dimensionToUseForScale}px`);
+
+		this.updateXandYGrid(true);
+		// this.svg
+		// 	.style("transform", `translate(${radius}px,${radius}px)`);
+
+		// // Resize the arc
+		// const marginedRadius = radius - (pieConfigs.label.margin * scaleRatio);
+		// this.arc = d3.arc()
+		// 	.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
+		// 	.outerRadius(marginedRadius);
+
+		// this.svg.selectAll("path")
+		// 	.attr("d", this.arc);
+
+		// this.svg
+		// 	.selectAll("text.chart-label")
+		// 	.attr("transform", (d) => {
+		// 		return this.deriveTransformString(d, radius);
+		// 	});
+
+		// Reposition the legend
+		this.positionLegend();
 	}
 }

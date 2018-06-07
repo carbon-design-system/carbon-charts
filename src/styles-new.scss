@@ -12,5 +12,11 @@ div.chart-bar-new {
 				stroke-width: 2;
 			}
 		}
+
+		g.x.grid, g.y.grid {
+			g.tick line {
+				stroke: rgb(236, 238, 239);
+			}
+		}
 	}
 }

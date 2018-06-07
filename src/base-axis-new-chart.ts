@@ -41,32 +41,38 @@ export class BaseAxisNewChart extends BaseAxisChart {
 		cleanGrid(g);
 	}
 
-	updateXandYGrid() {
-		const t = d3.transition().duration(750);
+	updateXandYGrid(instant?: boolean) {
+		// setTimeout is needed here, to take into account the new position of bars
+		// Right after transitions are initiated for the
+		setTimeout(() => {
+			const t = d3.transition().duration(instant ? 0 : 750);
 
-		// Update X Grid
-		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
-		const xGrid = d3.axisBottom(this.x)
-			.tickSizeInner(-yHeight)
-			.tickSizeOuter(0);
+			// Update X Grid
+			const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+			const xGrid = d3.axisBottom(this.x)
+				.tickSizeInner(-yHeight)
+				.tickSizeOuter(0);
 
-		const g_xGrid = this.svg.select(".x.grid")
-			.transition(t)
-			.call(xGrid);
+			const g_xGrid = this.svg.select(".x.grid")
+				.transition(t)
+				.attr("transform", `translate(0, ${yHeight})`)
+				.call(xGrid);
 
-		cleanGrid(g_xGrid);
+			cleanGrid(g_xGrid);
 
-		// Update Y Grid
-		const yGrid = d3.axisLeft(this.y)
-			.tickSizeInner(-(this.getActualChartSize().width))
-			.tickSizeOuter(0)
-			.tickFormat("" as any)
-			.ticks(10);
-		const g_yGrid = this.svg.select(".y.grid")
-			.transition(t)
-			.call(yGrid);
+			// Update Y Grid
+			const yGrid = d3.axisLeft(this.y)
+				.tickSizeInner(-(this.getActualChartSize().width))
+				.tickSizeOuter(0)
+				.tickFormat("" as any)
+				.ticks(10);
+			const g_yGrid = this.svg.select(".y.grid")
+				.transition(t)
+				.attr("transform", `translate(0, 0)`)
+				.call(yGrid);
 
-		cleanGrid(g_yGrid);
+			cleanGrid(g_yGrid);
+		}, 0);
 	}
 }
 
