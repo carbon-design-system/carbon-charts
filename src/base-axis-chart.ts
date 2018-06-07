@@ -18,26 +18,6 @@ export class BaseAxisChart extends BaseChart {
 		this.options.type = "basic-axis";
 	}
 
-	// Legend & keys
-	getLegendItems() {
-		let legendItems = [];
-		if (this.options.dimension) {
-			const newKeys = <any>[];
-			this.data.forEach(d => {
-				if (!newKeys.includes(d[this.options.dimension])) {
-					newKeys.push(d[this.options.dimension]);
-				}
-			});
-			legendItems = newKeys;
-		} else if (this.options.secondaryYDomain) {
-			legendItems = this.options.yDomain.concat(this.options.secondaryYDomain);
-		} else {
-			legendItems = this.options.yDomain;
-		}
-
-		return legendItems;
-	}
-
 	getXKeys() {
 		let keys: any;
 
@@ -75,23 +55,13 @@ export class BaseAxisChart extends BaseChart {
 	setSVG(): any {
 		super.setSVG();
 
-		this.svg.append("g")
-			.attr("class", "y axis")
-			.attr("transform", `translate(0, 0)`);
-
 		const chartSize = this.getActualChartSize();
+
+		this.container.classed(`chart-${this.options.type}`, true);
 		this.svg.append("g")
-			.attr("class", "x axis")
-			.attr("transform", `translate(0, ${chartSize.height})`);
-		const grid = this.svg.append("g")
-			.attr("class", "grid")
-			.attr("clip-path", `url(${window.location.origin}${window.location.pathname}#clip)`);
-		grid.append("g")
-			.attr("class", "x grid")
-			.attr("transform", `translate(0, ${chartSize.width})`);
-		grid.append("g")
-			.attr("class", "y grid")
-			.attr("transform", `translate(0, 0)`);
+			.attr("class", "x grid");
+		this.svg.append("g")
+			.attr("class", "y grid");
 
 		return this.svg;
 	}
@@ -411,5 +381,11 @@ export class BaseAxisChart extends BaseChart {
 	repositionBasedOnYAxis() {
 		const yAxisWidth = (this.container.select(".y.axis").node() as SVGGElement).getBBox().width;
 		this.container.style("padding-left", `${yAxisWidth}px`);
+	}
+
+	resetOpacity() {
+		this.svg.selectAll("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+
+		super.resetOpacity();
 	}
 }

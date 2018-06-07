@@ -1,0 +1,16 @@
+div.chart-bar-new {
+	svg.chart-svg {
+		g.y.axis {
+			path.domain {
+				stroke: none;
+			}
+		}
+
+		g.x.axis {
+			path.domain {
+				stroke: #959595;
+				stroke-width: 2;
+			}
+		}
+	}
+}

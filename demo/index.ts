@@ -1,4 +1,5 @@
 import {
+	BarNewChart,
 	BarChart,
 	LineChart,
 	DoubleAxisLineChart,
@@ -288,9 +289,24 @@ const optionsNoXAxis = {
 
 const dataNoXAxis = [
 	{
-		"Qty": 100000,
-		"More": 50000,
-		"Sold": 0
+		label: "Qty",
+		value: 65000
+	},
+	{
+		label: "More",
+		value: 29123,
+	},
+	{
+		label: "Sold",
+		value: 35213
+	},
+	{
+		label: "Restocking",
+		value: 51213
+	},
+	{
+		label: "Misc",
+		value: 16932
 	}
 ];
 
@@ -456,9 +472,15 @@ const chartTypes = [
 		options: barOptions,
 		data: barData
 	},
+	// {
+	// 	id: "simplest-bar",
+	// 	name: "Bar",
+	// 	options: optionsNoXAxis,
+	// 	data: dataNoXAxis
+	// },
 	{
-		id: "simplest-bar",
-		name: "Bar",
+		id: "bar-new",
+		name: "Bar New",
 		options: optionsNoXAxis,
 		data: dataNoXAxis
 	},
@@ -535,6 +557,7 @@ const setDemoActionsEventListener = (chartType: any, oldData: any) => {
 };
 
 let classyBarChart;
+let classyBarNewChart;
 let classyDonutChart;
 let classyPieChart;
 chartTypes.forEach(type => {
@@ -550,6 +573,38 @@ chartTypes.forEach(type => {
 				);
 
 				classyBarChart.setData(type.data);
+
+				setDemoActionsEventListener(type.id, type.data);
+
+				break;
+			case "bar-new":
+				classyBarNewChart = new BarNewChart(
+					classyContainer,
+					Object.assign({}, type.options, {type: type.id}),
+					type.data
+				);
+
+				// classyBarNewChart.events.addEventListener("load", e => {
+				// 	console.log("Bar Chart - LOADED");
+				// }, false);
+
+				// classyBarNewChart.events.addEventListener("update", e => {
+				// 	console.log("Bar Chart - UPDATED");
+				// }, false);
+
+				// classyBarNewChart.events.addEventListener("data-change", e => {
+				// 	console.log("Bar Chart - DATACHANGE");
+				// }, false);
+
+				// classyBarNewChart.events.addEventListener("data-load", e => {
+				// 	console.log("Bar Chart - DATALOAD");
+				// }, false);
+
+				// classyBarNewChart.events.addEventListener("resize", e => {
+				// 	console.log("Bar Chart - RESIZE");
+				// }, false);
+
+				classyBarNewChart.setData(type.data);
 
 				setDemoActionsEventListener(type.id, type.data);
 
@@ -669,5 +724,21 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 			});
 
 			classyBarChart.setData(newData);
+
+			break;
+		case "bar-new":
+			const keys = ["Qty", "More", "Sold", "Restocking", "Misc"];
+			const removeAKey = Math.random() > 0.5;
+
+			newData = oldData.map(dataPoint => Object.assign({}, dataPoint, { value: randomizeValue(dataPoint.value)}));
+
+			if (removeAKey) {
+				const randomIndex = Math.random() * (newData.length - 1);
+				newData.splice(randomIndex, randomIndex);
+			}
+
+			classyBarNewChart.setData(newData);
+
+			break;
 	}
 };

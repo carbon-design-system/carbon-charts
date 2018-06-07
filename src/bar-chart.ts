@@ -53,7 +53,7 @@ export class BarChart extends BaseAxisChart {
 				// }
 
 				console.log("update()", value);
-				// this.update(value);
+				this.update(value);
 			}
 		});
 	}
@@ -79,45 +79,129 @@ export class BarChart extends BaseAxisChart {
 		this.addDataPointEventListener();
 	}
 
-	updateChart() {
-		if (this.svg) {
-			// update the root svg
-			this.updateSVG();
-			// these don't explicitly add elements, so they're "safe" to call
-			this.setXScale();
-			this.updateXAxis();
-			this.setYScale();
-			this.updateYAxis();
-			this.drawXGrid();
-			this.drawYGrid();
-			// update the actual chart
-			this.update();
+	// updateChart() {
+	// 	if (this.svg) {
+	// 		// update the root svg
+	// 		this.updateSVG();
+	// 		// these don't explicitly add elements, so they're "safe" to call
+	// 		this.setXScale();
+	// 		this.updateXAxis();
+	// 		this.setYScale();
+	// 		this.updateYAxis();
+	// 		this.drawXGrid();
+	// 		this.drawYGrid();
+	// 		// update the actual chart
+	// 		this.update();
 
-			this.repositionBasedOnYAxis();
-			this.positionLegend();
+	// 		this.repositionBasedOnYAxis();
+	// 		this.positionLegend();
+	// 	}
+	// }
+
+	update(newData?: any) {
+		const oldData = this.data;
+		const activeLegendItems = this.getActiveLegendItems();
+		if (!newData) {
+			// Get new data by filtering the data based off of the legend
+			newData = oldData.filter(dataPoint => {
+				// If this datapoint is active on the legend
+				const activeSeriesItemIndex = activeLegendItems.indexOf(dataPoint.label);
+
+				return activeSeriesItemIndex > -1;
+			});
 		}
+
+		this.interpolateValues(newData);
 	}
 
-	update() {
+	// update() {
+	// 	const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+	// 	if (yHeight <= 0) {
+	// 		return;
+	// 	}
+	// 	let keys = this.getXKeys();
+	// 	const activeSeries = this.getActiveLegendItems();
+	// 	keys = activeSeries.length > 0 ? activeSeries : keys;
+	// 	const x1 = this.options.xDomain.length > 0 ? this.getXDomain(keys, this.xScale) : this.xScale;
+	// 	const color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
+	// 	const bars = this.svg.select(".bars");
+	// 	bars.selectAll("g")
+	// 		.attr("transform", d => this.transformXDomain(this.options.xDomain, this.xScale(d[this.options.xDomain])));
+	// 	bars.selectAll("g")
+	// 		.selectAll("rect")
+	// 		.attr("x", d => x1(d.series))
+	// 		.attr("y", d => this.yScale(d.value))
+	// 		.attr("height", d => yHeight - this.yScale(d.value))
+	// 		.attr("width", x1.bandwidth())
+	// 		.style("display", d => keys.includes(d.series) ? "initial" : "none");
+
+	// 	this.interpolateValues();
+	// }
+
+	interpolateValues(newData: any) {
+		console.log("INTERPOLATE", newData);
+
 		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
-		if (yHeight <= 0) {
-			return;
-		}
 		let keys = this.getXKeys();
 		const activeSeries = this.getActiveLegendItems();
 		keys = activeSeries.length > 0 ? activeSeries : keys;
 		const x1 = this.options.xDomain.length > 0 ? this.getXDomain(keys, this.xScale) : this.xScale;
 		const color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
-		const bars = this.svg.select(".bars");
-		bars.selectAll("g")
-			.attr("transform", d => this.transformXDomain(this.options.xDomain, this.xScale(d[this.options.xDomain])));
-		bars.selectAll("g")
+		const rect = this.svg
+			.selectAll("g.bars g")
+			.data(newData)
 			.selectAll("rect")
-			.attr("x", d => x1(d.series))
-			.attr("y", d => this.yScale(d.value))
-			.attr("height", d => yHeight - this.yScale(d.value))
+			.data(d => keys.map((value, idx) => {
+				console.log("LOOP D", d);
+				let series = value;
+				if (this.options.dimension) {
+					value = this.options.yDomain[0];
+					series = d[this.options.dimension];
+				}
+				return {
+					xAxis: this.options.xDomain,
+					key: d[this.options.xDomain],
+					value: d[value],
+					formatter: this.options.yFormatter,
+					dimension: this.options.dimension,
+					dimVal: d[this.options.dimension],
+					series,
+					valueName: value,
+					color: color(series)
+				};
+			}));
+
+		rect
+			.transition()
+			.duration(750)
+			.attr("x", (d: any) => x1(d.series))
+			.attr("y", (d: any) => this.yScale(d.value))
 			.attr("width", x1.bandwidth())
-			.style("display", d => keys.includes(d.series) ? "initial" : "none");
+			.attr("height", (d: any) => {
+				console.log(yHeight, this.yScale(d.value));
+				return yHeight - this.yScale(d.value);
+			})
+			.attr("fill", (d: any) => d.color)
+			.each(d => console.log("Update D", d));
+
+
+		rect.enter()
+			.append("rect")
+			.style("opacity", 0)
+			.transition()
+			.duration(750)
+			.style("opacity", 1)
+			.each(d => console.log("NEW ENTER", d));
+
+		rect.exit()
+			.transition()
+			.duration(750)
+			.style("opacity", 0)
+			.each(d => console.log("NEW EXIT", d))
+			.remove();
+			// .attrTween("d", function (a) {
+			// 	return arcTween.bind(this)(a, arc);
+			// });
 	}
 
 	draw() {
@@ -156,7 +240,8 @@ export class BarChart extends BaseAxisChart {
 					color: color(series)
 				};
 			}))
-			.enter().append("rect")
+			.enter()
+			.append("rect")
 			.attr("x", d => x1(d.series))
 			.attr("y", d => yHeight)
 			.attr("width", x1.bandwidth())

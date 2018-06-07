@@ -1,6 +1,8 @@
 @import "~@peretz/matter/scss/_tools.scss";
 $default_transition: all .1s ease-out;
 
+@import "./styles-new";
+
 @mixin fonts() {
 	font-family: "IBM Plex Sans", "Helvetica Neue for IBM", "Helvetica Neue", Arial, sans-serif;
 }

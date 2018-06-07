@@ -66,15 +66,12 @@ export class PieChart extends BaseChart {
 
 			// Perform the draw or update chart
 			if (initialDraw) {
-				// console.log("initialDraw()");
-
 				this.initialDraw();
 			} else {
 				if (removedItems.length > 0 || newItems.length > 0) {
 					this.addOrUpdateLegend();
 				}
 
-				console.log("update()");
 				this.update(value);
 			}
 		});
@@ -201,7 +198,6 @@ export class PieChart extends BaseChart {
 	}
 
 	draw() {
-		console.log("draw()");
 		const dataList = this.data;
 
 		const actualChartSize: any = this.getActualChartSize(this.container);
@@ -266,6 +262,13 @@ export class PieChart extends BaseChart {
 
 		// Hide overlay
 		this.updateOverlay().hide();
+	}
+
+
+	resetOpacity() {
+		this.svg.selectAll("path").attr("stroke-opacity", 0);
+
+		super.resetOpacity();
 	}
 
 	reduceOpacity(exception?: any) {
@@ -391,7 +394,7 @@ export class PieChart extends BaseChart {
 		const legend = this.container.select(".legend")
 			.attr("font-size", Configuration.legend.fontSize)
 			.selectAll("div")
-			.data(this.getLegendItemsArray())
+			.data(this.getLegendItemKeys())
 			.enter().append("li")
 				.attr("class", "legend-btn active");
 
@@ -403,20 +406,6 @@ export class PieChart extends BaseChart {
 			.text(d => d);
 
 		this.addLegendCircleHoverEffect();
-	}
-
-	/**
-	 *
-	 * When a legend item is clicked, apply/remove the appropriate filter
-	 * @param {string} changedLabel The label of the legend element the user clicked on
-	 * @memberof PieChart
-	 */
-	applyLegendFilter(changedLabel: string) {
-		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
-		const oldStatus = this.options.keys[changedLabel];
-		this.options.keys[changedLabel] = oldStatus === ACTIVE ? DISABLED : ACTIVE;
-
-		this.update();
 	}
 
 	resizeChart() {

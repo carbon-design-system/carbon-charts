@@ -14,6 +14,8 @@ export class BaseChart {
 	resizeTimers = [];
 	options: any = Object.assign({}, Configuration.options.BASE);
 	data: any;
+	color: any;
+	events: any;
 
 	constructor(holder: Element, options?: any, data?: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
@@ -139,6 +141,10 @@ export class BaseChart {
 		console.warn("You should implement your own `resizeChart() function.");
 	}
 
+	update() {
+		console.warn("You should implement your own `update()` function.");
+	}
+
 	resizeWhenContainerChange() {
 		let containerWidth = this.holder.clientWidth;
 		let containerHeight = this.holder.clientHeight;
@@ -192,8 +198,18 @@ export class BaseChart {
 		});
 	}
 
+	/**
+	 *
+	 * When a legend item is clicked, apply/remove the appropriate filter
+	 * @param {string} changedLabel The label of the legend element the user clicked on
+	 * @memberof PieChart
+	 */
 	applyLegendFilter(changedLabel: string) {
-		console.warn("You should implement your own `applyLegendFilter() function.");
+		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
+		const oldStatus = this.options.keys[changedLabel];
+		this.options.keys[changedLabel] = oldStatus === ACTIVE ? DISABLED : ACTIVE;
+
+		this.update();
 	}
 
 	setClickableLegendInTooltip() {
@@ -208,25 +224,13 @@ export class BaseChart {
 		});
 	}
 
-	getActiveLegendItems() {
-		const activeSeries = [];
-		let c = this.container;
-		if (c.selectAll(".legend-tooltip").nodes().length > 0) {
-			c = c.select(".legend-tooltip");
-		}
-		c.selectAll(".legend-btn").filter(".active").each(function() {
-			activeSeries.push(d3.select(this).select("text").text());
-		});
-
-		return activeSeries;
-	}
-
 	setChartIDContainer() {
 		const parent = d3.select(this.holder);
 		let chartId, container;
 		if (parent.select(".chart-wrapper").nodes().length > 0) {
 			container = parent.select(".chart-wrapper");
 			chartId = container.attr("chart-id");
+
 			container.selectAll(".chart-svg").remove();
 		} else {
 			chartId = this.id;
@@ -242,8 +246,7 @@ export class BaseChart {
 	}
 
 	resetOpacity() {
-		const svg = d3.selectAll("svg");
-		svg.selectAll("path").attr("stroke-opacity", 0);
+		const svg = d3.selectAll("svg.chart-svg");
 		svg.selectAll("path").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
 		svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
 			.attr("fill", Configuration.charts.resetOpacity.circle.fill);
@@ -265,7 +268,6 @@ export class BaseChart {
 	// Legend
 	getLegendItems() {
 		let legendItems = {};
-
 		if (this.options.keys) {
 			legendItems = this.options.keys;
 		}
@@ -273,10 +275,31 @@ export class BaseChart {
 		return legendItems;
 	}
 
-	getLegendItemsArray() {
+	getLegendItemArray() {
+		const legendItems = this.getLegendItems();
+		const legendItemKeys = Object.keys(legendItems);
+
+		return legendItemKeys.map(key => {
+			return {
+				key,
+				value: legendItems[key]
+			};
+		});
+	}
+
+	getLegendItemKeys() {
 		const legendItems = this.getLegendItems();
 
 		return Object.keys(legendItems);
+	}
+
+	getActiveLegendItems() {
+		const legendItems = this.getLegendItems();
+		const legendItemKeys = Object.keys(legendItems);
+
+		return legendItemKeys.filter(itemKey => {
+			return legendItems[itemKey] === Configuration.legend.items.status.ACTIVE;
+		});
 	}
 
 	updateLegend(legend) {
@@ -302,21 +325,44 @@ export class BaseChart {
 			return;
 		}
 
-		const legendItems = this.getLegendItems();
-		const legend = this.container.select(".legend")
+		const legendItemsArray = this.getLegendItemArray();
+		const legendItems = this.container.select(".legend")
 			.attr("font-size", Configuration.legend.fontSize)
-			.selectAll("div")
-			.data(legendItems)
-			.enter().append("li")
-				.attr("class", "legend-btn active");
+			.selectAll("li.legend-btn")
+			.data(legendItemsArray, d => d.key);
 
-		legend.append("div")
-			.attr("class", "legend-circle")
-			.style("background-color", (d, i) => this.options.colors[i]);
+		console.log("legendItemsArray", legendItemsArray);
+		legendItems.exit()
+			.each(d => console.log("LEAVING", d))
+			.remove();
 
-		legend.append("text")
-			.text(d => d);
+		const legendEnter = legendItems.enter()
+			.append("li")
+			.attr("class", "legend-btn active");
 
+		legendEnter.append("div")
+			.attr("class", "legend-circle");
+
+		legendEnter.append("text");
+
+		legendEnter.selectAll("text")
+			.merge(legendItems.selectAll("text"))
+			.text(d => d.key);
+
+		legendEnter.select("div")
+			.merge(legendItems.selectAll("div"))
+			.style("background-color", (d, i) => {
+				console.log(d);
+				return d.value === Configuration.legend.items.status.ACTIVE ? this.color(d.key) : "white";
+			});
+
+		// // Update previous legend items
+		// legend.selectAll("div.legend-circle")
+		// 	.style("background-color", (d, i) => {
+		// 		return d.value === Configuration.legend.items.status.ACTIVE ? this.color(d.key) : "white";
+		// 	});
+
+		// Add hover effect for legend item circles
 		this.addLegendCircleHoverEffect();
 	}
 
@@ -433,7 +479,7 @@ export class BaseChart {
 			const legendContent = d3.select(".legend-tooltip-content")
 				.attr("font-size", Configuration.legend.fontSize)
 				.selectAll("div")
-				.data(this.getLegendItemsArray())
+				.data(this.getLegendItemKeys())
 				.enter().append("li")
 				.attr("class", "legend-btn active")
 				.on("click", (clickedItem) => {
@@ -537,7 +583,7 @@ export class BaseChart {
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
 			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px")
-			.style("border-color", d.color);
+			.style("border-color", this.color(d.label));
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				this.hideTooltip();
@@ -551,6 +597,9 @@ export class BaseChart {
 		}
 		if (d.dimension) {
 			tooltipHTML += "<b>" + d.dimension + ": </b>" + d.dimVal + "<br/><b>" + d.valueName + ": </b>" + d.value;
+		}
+		if (d.label) {
+			tooltipHTML += "<b>" + d.label + ": </b>" + d.value + "<br/>";
 		}
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {

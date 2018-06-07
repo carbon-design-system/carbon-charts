@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { BarChart } from "./bar-chart";
+import { BarNewChart } from "./bar-new-chart";
 import { BaseAxisChart } from "./base-axis-chart";
 import { BaseChart } from "./base-chart";
 import { ComboChart } from "./combo-chart";
@@ -17,6 +18,7 @@ export {
 	BaseChart,
 	BaseAxisChart,
 	BarChart,
+	BarNewChart,
 	LineChart,
 	DoubleAxisLineChart,
 	StackedBarChart,
