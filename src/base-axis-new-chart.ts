@@ -1,8 +1,10 @@
 import { BaseAxisChart } from "./base-axis-chart";
 import * as d3 from "d3";
 import { Configuration } from "./configuration";
+import { Tools } from "./tools";
+import { BaseChart } from "./base-chart";
 
-export class BaseAxisNewChart extends BaseAxisChart {
+export class BaseAxisNewChart extends BaseChart {
 	x: any;
 	y: any;
 
@@ -10,19 +12,53 @@ export class BaseAxisNewChart extends BaseAxisChart {
 		super(holder, options, data);
 
 		this.options.type = "bar";
-		if (this.options.containerResizable) {
-			this.resizeWhenContainerChange();
+	}
+
+	setSVG(): any {
+		super.setSVG();
+
+		const chartSize = this.getChartSize();
+
+		this.container.classed(`chart-${this.options.type}`, true);
+		this.innerWrap.append("g")
+			.attr("class", "x grid");
+		this.innerWrap.append("g")
+			.attr("class", "y grid");
+
+		return this.svg;
+	}
+
+	getChartSize(container = this.container) {
+		let ratio, marginForLegendTop;
+		let moreForY2Axis = 0;
+		if (container.node().clientWidth > Configuration.charts.widthBreak) {
+			ratio = Configuration.charts.magicRatio;
+			marginForLegendTop = 0;
+		} else {
+			marginForLegendTop = Configuration.charts.marginForLegendTop;
+			ratio = 1;
 		}
 
-		this.events = new EventTarget();
+		if (this.options.type === "double-axis-line" || this.options.type === "combo") {
+			moreForY2Axis = Configuration.charts.magicMoreForY2Axis;
+		}
+
+		// Store computed actual size, to be considered for change if chart does not support axis
+		const marginsToExclude = Configuration.charts.margin.left + Configuration.charts.margin.right;
+		const computedChartSize = {
+			height: container.node().clientHeight - marginForLegendTop,
+			width: (container.node().clientWidth - marginsToExclude - moreForY2Axis) * ratio
+		};
+
+		return computedChartSize;
 	}
 
 	drawXGrid() {
-		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		const yHeight = this.getChartSize().height - this.innerWrap.select(".x.axis").node().getBBox().height;
 		const xGrid = d3.axisBottom(this.x)
 			.tickSizeInner(-yHeight)
 			.tickSizeOuter(0);
-		const g = this.svg.select(".x.grid")
+		const g = this.innerWrap.select(".x.grid")
 			.attr("transform", `translate(0, ${yHeight})`)
 			.call(xGrid);
 
@@ -31,10 +67,10 @@ export class BaseAxisNewChart extends BaseAxisChart {
 
 	drawYGrid() {
 		const yGrid = d3.axisLeft(this.y)
-			.tickSizeInner(-(this.getActualChartSize().width))
+			.tickSizeInner(-(this.getChartSize().width))
 			.tickSizeOuter(0)
 			.ticks(10);
-		const g = this.svg.select(".y.grid")
+		const g = this.innerWrap.select(".y.grid")
 			.attr("transform", `translate(0, 0)`)
 			.call(yGrid);
 
@@ -48,12 +84,13 @@ export class BaseAxisNewChart extends BaseAxisChart {
 			const t = d3.transition().duration(instant ? 0 : 750);
 
 			// Update X Grid
-			const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+			const chartSize = this.getChartSize();
+			const yHeight = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
 			const xGrid = d3.axisBottom(this.x)
 				.tickSizeInner(-yHeight)
 				.tickSizeOuter(0);
 
-			const g_xGrid = this.svg.select(".x.grid")
+			const g_xGrid = this.innerWrap.select(".x.grid")
 				.transition(t)
 				.attr("transform", `translate(0, ${yHeight})`)
 				.call(xGrid);
@@ -62,16 +99,27 @@ export class BaseAxisNewChart extends BaseAxisChart {
 
 			// Update Y Grid
 			const yGrid = d3.axisLeft(this.y)
-				.tickSizeInner(-(this.getActualChartSize().width))
+				.tickSizeInner(-(chartSize.width))
 				.tickSizeOuter(0)
 				.tickFormat("" as any)
 				.ticks(10);
-			const g_yGrid = this.svg.select(".y.grid")
+			const g_yGrid = this.innerWrap.select(".y.grid")
 				.transition(t)
 				.attr("transform", `translate(0, 0)`)
 				.call(yGrid);
 
 			cleanGrid(g_yGrid);
+
+			// this.x = d3.scaleBand().rangeRound([0, chartSize.width]).padding(0.1);
+			// this.y = d3.scaleLinear().rangeRound([chartSize.height, 0]);
+			// this.x.domain(this.data.map(d => d.label));
+			// this.y.domain([0, yHeight]);
+
+			// const xAxis = d3.axisBottom(this.x).tickSize(0);
+			// this.svg.select(".x.axis").call(xAxis);
+
+			// const yAxis = d3.axisLeft(this.y).ticks(5).tickSize(0);
+			// this.svg.select(".y.axis").call(yAxis);
 		}, 0);
 	}
 }

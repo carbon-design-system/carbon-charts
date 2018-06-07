@@ -60,7 +60,7 @@ export class LineChart extends BaseAxisChart {
 		const dataList = this.data;
 		const lines = this.svg.selectAll(".lines");
 		const line = d3.line<any>()
-			.x(d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
+			.x(d => this.xScale(d.key) + this.getChartSize().width / dataList.length / 2)
 			.y(d => yScale(d.value));
 		const keys = activeSeries ? activeSeries : this.options.yDomain;
 		const allActiveSeries: any = this.getActiveLegendItems();
@@ -73,7 +73,7 @@ export class LineChart extends BaseAxisChart {
 		lines.selectAll("path").style("display", d => allActiveSeries.includes(d[0].series) ? "initial" : "none");
 		lines.selectAll("circle")
 			.filter(d => keys.includes(d.series))
-			.attr("cx", d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
+			.attr("cx", d => this.xScale(d.key) + this.getChartSize().width / dataList.length / 2)
 			.attr("cy", d => yScale(d.value));
 		lines.selectAll("circle").style("display", d => allActiveSeries.includes(d.series) ? "initial" : "none");
 	}
@@ -97,7 +97,7 @@ export class LineChart extends BaseAxisChart {
 		const color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
 		keys = activeSeries ? activeSeries : keys;
 		const line = d3.line<any>()
-			.x(d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
+			.x(d => this.xScale(d.key) + this.getChartSize().width / dataList.length / 2)
 			.y(d => yScale(d.value));
 		const lines = this.svg.append("g");
 		lines.attr("class", "lines");
@@ -141,7 +141,7 @@ export class LineChart extends BaseAxisChart {
 				.attr("fill", Configuration.lines.dot.fill)
 				.attr("stroke", color(series))
 				.attr("stroke-width", Configuration.lines.dot.strokeWidth)
-				.attr("cx", d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
+				.attr("cx", d => this.xScale(d.key) + this.getChartSize().width / dataList.length / 2)
 				.attr("cy", d => yScale(d.value))
 				.style("opacity", 0)
 				.transition()

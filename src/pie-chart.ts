@@ -18,68 +18,17 @@ export class PieChart extends BaseChart {
 
 		// Assign colors to each slice using their label
 		this.color = d3.scaleOrdinal(this.options.colors);
-
-		if (this.options.containerResizable) {
-			this.resizeWhenContainerChange();
-		}
-
-		if (data) {
-			this.setData(data);
-		}
-	}
-
-	setData(data: any) {
-		const { selectors } = Configuration;
-		const innerWrapElement = this.holder.querySelector(selectors.INNERWRAP);
-		const initialDraw = innerWrapElement === null;
-		const newDataIsAPromise = Promise.resolve(data) === data;
-
-		if (initialDraw || newDataIsAPromise) {
-			this.updateOverlay().show();
-		}
-
-		Promise.resolve(data).then(value => {
-			// Check for duplicate keys in the data
-			const duplicates = Tools.duplicateKeysInData(value);
-			if (duplicates.length > 0) {
-				console.error(`${Tools.capitalizeFirstLetter(this.options.type)} Chart - You have duplicate keys`, duplicates);
-			}
-
-			// Process data
-			const keys: any = {};
-			this.data = this.sortAndRepartitionData(value);
-
-			// Build out the keys array of objects to represent the legend items
-			this.data.forEach(entry => {
-				keys[entry.label] = Configuration.legend.items.status.ACTIVE;
-			});
-
-			// Grab the old legend items, the keys from the current data
-			// Compare the two, if there are any differences (additions/removals)
-			// Completely remove the legend and render again
-			const oldLegendItems = this.getActiveLegendItems();
-			const keysArray = Object.keys(keys);
-			const { missing: removedItems, added: newItems } = Tools.arrayDifferences(oldLegendItems, keysArray);
-
-			// Update keys for legend use the latest data keys
-			this.options.keys = keys;
-
-			// Perform the draw or update chart
-			if (initialDraw) {
-				this.initialDraw();
-			} else {
-				if (removedItems.length > 0 || newItems.length > 0) {
-					this.addOrUpdateLegend();
-				}
-
-				this.update(value);
-			}
-		});
 	}
 
 	// Sort data by value (descending)
 	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
-	sortAndRepartitionData(data: any) {
+	dataProcesser(data: any) {
+		// Check for duplicate keys in the data
+		const duplicates = Tools.duplicateKeysInData(data);
+		if (duplicates.length > 0) {
+			console.error(`${Tools.capitalizeFirstLetter(this.options.type)} Chart - You have duplicate keys`, duplicates);
+		}
+
 		let sortedData = data.sort((a, b) => b.value - a.value);
 		const { sliceLimit: stopAt } = Configuration.pie;
 		const rest = sortedData.slice(stopAt);
@@ -121,7 +70,7 @@ export class PieChart extends BaseChart {
 	interpolateValues(newData: any) {
 		// Apply the new data to the slices, and interpolate them
 		const arc = this.arc;
-		const path = this.svg.selectAll("path").data(this.pie(newData));
+		const path = this.innerWrap.selectAll("path").data(this.pie(newData));
 
 		// Update slices
 		path
@@ -152,7 +101,7 @@ export class PieChart extends BaseChart {
 			.remove();
 
 		// Fade out all text labels
-		this.svg.selectAll("text.chart-label")
+		this.innerWrap.selectAll("text.chart-label")
 			.transition().duration(375).style("opacity", 0).on("end", function(d) {
 				d3.select(this).transition().duration(375).style("opacity", 1);
 			});
@@ -160,7 +109,7 @@ export class PieChart extends BaseChart {
 		// Move text labels to their new location, and fade them in again
 		const radius = this.computeRadius();
 		setTimeout(() => {
-			const text = this.svg.selectAll("text.chart-label").data(this.pie(newData), function(d) { return d.data.label; });
+			const text = this.innerWrap.selectAll("text.chart-label").data(this.pie(newData), function(d) { return d.data.label; });
 			text
 				.enter()
 				.append("text")
@@ -200,7 +149,7 @@ export class PieChart extends BaseChart {
 	draw() {
 		const dataList = this.data;
 
-		const actualChartSize: any = this.getActualChartSize(this.container);
+		const actualChartSize: any = this.getChartSize(this.container);
 		const diameter = Math.min(actualChartSize.width, actualChartSize.height);
 		const radius: number = diameter / 2;
 
@@ -212,8 +161,7 @@ export class PieChart extends BaseChart {
 			.attr("width", `${diameter}px`)
 			.attr("height", `${diameter}px`);
 
-		this.svg
-			.attr("class", "inner-wrap")
+		this.innerWrap
 			.style("transform", `translate(${radius}px,${radius}px)`)
 			.attr("width", `${diameter}px`)
 			.attr("height", `${diameter}px`)
@@ -231,7 +179,7 @@ export class PieChart extends BaseChart {
 			.sort(null);
 
 		// Draw the slices
-		this.path = this.svg.selectAll("path")
+		this.path = this.innerWrap.selectAll("path")
 			.data(this.pie(dataList))
 			.enter()
 			.append("path")
@@ -245,7 +193,7 @@ export class PieChart extends BaseChart {
 			.each(function(d) { this._current = d; });
 
 		// Draw the slice labels
-		this.svg
+		this.innerWrap
 			.selectAll("text.chart-label")
 			.data(this.pie(dataList), function(d) { return d.data.label; })
 			.enter()
@@ -266,16 +214,16 @@ export class PieChart extends BaseChart {
 
 
 	resetOpacity() {
-		this.svg.selectAll("path").attr("stroke-opacity", 0);
+		this.innerWrap.selectAll("path").attr("stroke-opacity", 0);
 
 		super.resetOpacity();
 	}
 
 	reduceOpacity(exception?: any) {
-		this.svg.selectAll("path").attr("stroke-opacity", 0);
+		this.innerWrap.selectAll("path").attr("stroke-opacity", 0);
 
 		if (exception) {
-			this.svg.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
+			this.innerWrap.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
 
 			// Fade everything out except for this element
 			d3.select(exception).attr("fill-opacity", false);
@@ -333,16 +281,16 @@ export class PieChart extends BaseChart {
 
 	addDataPointEventListener() {
 		const self = this;
-		this.svg.selectAll("path")
+		this.innerWrap.selectAll("path")
 			.on("click", function(d) {
 				self.showTooltip(d);
 				self.reduceOpacity(this);
 			})
 			.on("mouseover", function(d) {
-				const sel = d3.select(this);
-				self.moveToFront(sel);
+				const sliceElement = d3.select(this);
+				Tools.moveToFront(sliceElement);
 
-				sel
+				sliceElement
 					.attr("stroke-width", Configuration.pie.mouseover.strokeWidth)
 					.attr("stroke-opacity", Configuration.pie.mouseover.strokeOpacity)
 					.attr("stroke", self.color(d.data.label));
@@ -364,7 +312,7 @@ export class PieChart extends BaseChart {
 				return activeSeriesItemIndex > -1;
 			});
 		}
-		const processedNewData = this.sortAndRepartitionData(newData);
+		const processedNewData = this.dataProcesser(newData);
 
 		this.interpolateValues(processedNewData);
 	}
@@ -411,7 +359,7 @@ export class PieChart extends BaseChart {
 	resizeChart() {
 		const { pie: pieConfigs } = Configuration;
 
-		const actualChartSize: any = this.getActualChartSize(this.container);
+		const actualChartSize: any = this.getChartSize(this.container);
 		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
 		const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
 		const radius: number = dimensionToUseForScale / 2;
@@ -420,7 +368,7 @@ export class PieChart extends BaseChart {
 		d3.select(this.holder).select("svg")
 				.attr("width", `${dimensionToUseForScale}px`)
 				.attr("height", `${dimensionToUseForScale}px`);
-		this.svg
+		this.innerWrap
 			.style("transform", `translate(${radius}px,${radius}px)`);
 
 		// Resize the arc
@@ -429,10 +377,10 @@ export class PieChart extends BaseChart {
 			.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
 			.outerRadius(marginedRadius);
 
-		this.svg.selectAll("path")
+		this.innerWrap.selectAll("path")
 			.attr("d", this.arc);
 
-		this.svg
+		this.innerWrap
 			.selectAll("text.chart-label")
 			.attr("transform", (d) => {
 				return this.deriveTransformString(d, radius);
@@ -444,7 +392,7 @@ export class PieChart extends BaseChart {
 
 	// Helper functions
 	private computeRadius() {
-		const actualChartSize: any = this.getActualChartSize(this.container);
+		const actualChartSize: any = this.getChartSize(this.container);
 		const radius: number = Math.min(actualChartSize.width, actualChartSize.height) / 2;
 
 		return radius;

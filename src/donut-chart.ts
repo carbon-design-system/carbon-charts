@@ -21,18 +21,18 @@ export class DonutChart extends PieChart {
 
 		// Draw the center text
 		if (this.center && this.center.configs) {
-			this.center.draw(this.svg);
+			this.center.draw(this.innerWrap);
 		}
 	}
 
 	resizeChart() {
-		if (this.svg) {
+		if (this.innerWrap) {
 			// Inherit resizing logic from PieChart
 			super.resizeChart();
 
 			if (this.center) {
 				// Trigger resize on DonutCenter as well
-				this.center.resize(this.svg, this.getActualChartSize(this.container));
+				this.center.resize(this.innerWrap, this.getChartSize(this.container));
 			}
 		}
 	}
@@ -54,21 +54,21 @@ export class DonutCenter {
 		}
 	}
 
-	draw (svg: any) {
+	draw (innerWrap: any) {
 		// Add the number shown in the center of the donut
-		svg.append("text")
+		innerWrap.append("text")
 			.attr("class", "donut-figure")
 			.attr("text-anchor", "middle")
 			.text(this.configs.number.toLocaleString());
 
 		// Add the label below the number in the center of the donut
-		svg.append("text")
+		innerWrap.append("text")
 			.attr("class", "donut-title")
 			.attr("text-anchor", "middle")
 			.attr("y", Configuration.donut.centerText.title.y)
 			.text(this.configs.label);
 
-		this.donutSVG = svg;
+		this.donutSVG = innerWrap;
 	}
 
 	update() {

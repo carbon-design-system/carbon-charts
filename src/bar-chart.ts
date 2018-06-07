@@ -141,7 +141,7 @@ export class BarChart extends BaseAxisChart {
 	interpolateValues(newData: any) {
 		console.log("INTERPOLATE", newData);
 
-		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		const yHeight = this.getChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		let keys = this.getXKeys();
 		const activeSeries = this.getActiveLegendItems();
 		keys = activeSeries.length > 0 ? activeSeries : keys;
@@ -205,7 +205,7 @@ export class BarChart extends BaseAxisChart {
 	}
 
 	draw() {
-		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		const yHeight = this.getChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		if (yHeight <= 0) {
 			return;
 		}

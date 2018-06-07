@@ -13,58 +13,6 @@ export class BarNewChart extends BaseAxisNewChart {
 		super(holder, options, data);
 
 		this.options.type = "bar-new";
-		if (this.options.containerResizable) {
-			this.resizeWhenContainerChange();
-		}
-	}
-
-	setData(data: any) {
-		const { selectors } = Configuration;
-		const innerWrapElement = this.holder.querySelector(selectors.INNERWRAP);
-		const initialDraw = innerWrapElement === null;
-		const newDataIsAPromise = Promise.resolve(data) === data;
-
-		// Dispatch the update event
-		this.events.dispatchEvent(new Event("data-change"));
-
-		if (initialDraw || newDataIsAPromise) {
-			this.updateOverlay().show();
-		}
-
-		Promise.resolve(data).then(value => {
-			// Dispatch the update event
-			this.events.dispatchEvent(new Event("data-load"));
-
-			// Process data
-			const keys: any = {};
-			this.data = value;
-
-			// Build out the keys array of objects to represent the legend items
-			this.data.forEach(entry => {
-				keys[entry.label] = Configuration.legend.items.status.ACTIVE;
-			});
-
-			// Grab the old legend items, the keys from the current data
-			// Compare the two, if there are any differences (additions/removals)
-			// Completely remove the legend and render again
-			const oldLegendItems = this.getActiveLegendItems();
-			const keysArray = Object.keys(keys);
-			const { missing: removedItems, added: newItems } = Tools.arrayDifferences(oldLegendItems, keysArray);
-
-			// Update keys for legend use the latest data keys
-			this.options.keys = keys;
-
-			// Perform the draw or update chart
-			if (initialDraw) {
-				this.initialDraw();
-			} else {
-				if (removedItems.length > 0 || newItems.length > 0) {
-					this.addOrUpdateLegend();
-				}
-
-				this.update(value);
-			}
-		});
 	}
 
 	initialDraw(data?: any) {
@@ -107,11 +55,11 @@ export class BarNewChart extends BaseAxisNewChart {
 
 	interpolateValues(newData: any) {
 		const margin = {top: 0, right: -40, bottom: 50, left: 40};
-		const chartSize = this.getActualChartSize();
+		const chartSize = this.getChartSize();
 		const width = chartSize.width - margin.left - margin.right;
 		const height = chartSize.height - margin.top - margin.bottom;
 
-		const rect = this.svg
+		const rect = this.innerWrap
 			.selectAll("rect.bar")
 			.data(newData);
 
@@ -186,23 +134,20 @@ export class BarNewChart extends BaseAxisNewChart {
 	draw() {
 		const { data } = this;
 
-		const svg = d3.select("div#classy-bar-new-chart-holder svg");
-		svg.style("width", "100%")
+		this.innerWrap.style("width", "100%")
 			.style("height", "100%");
 
 		const margin = {top: 0, right: -40, bottom: 50, left: 40};
-		const chartSize = this.getActualChartSize();
+		const chartSize = this.getChartSize();
 		const width = chartSize.width - margin.left - margin.right;
 		const height = chartSize.height - margin.top - margin.bottom;
-
-		console.log(width);
 
 		const keys = data.map(dataPoint => dataPoint.label);
 
 		this.x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
 		this.y = d3.scaleLinear().rangeRound([height, 0]);
 
-		const g = svg.select("g.inner-wrap")
+		const g = this.innerWrap
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 		const yEnd = parseFloat(d3.max(data, (d: any) => d.value));
@@ -283,7 +228,7 @@ export class BarNewChart extends BaseAxisNewChart {
 
 		const { pie: pieConfigs } = Configuration;
 
-		const actualChartSize: any = this.getActualChartSize(this.container);
+		const actualChartSize: any = this.getChartSize(this.container);
 		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
 		const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
 		const radius: number = dimensionToUseForScale / 2;

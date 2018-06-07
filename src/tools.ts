@@ -1,24 +1,5 @@
 // Functions
 export namespace Tools {
-	export function debounce(func, wait, immediate?) {
-		let timeout;
-		return function() {
-			const context = this, args = arguments;
-			const later = function() {
-				timeout = null;
-				if (!immediate) {
-					func.apply(context, args);
-				}
-			};
-			const callNow = immediate && !timeout;
-			clearTimeout(timeout);
-			timeout = setTimeout(later, wait);
-			if (callNow) {
-				func.apply(context, args);
-			}
-		};
-	}
-
 	export function addCloseBtn(tooltip, size, color?) {
 		const closeBtn = tooltip.append("button");
 		let classNames = `close--${size}`;
@@ -31,6 +12,17 @@ export namespace Tools {
 		return closeBtn;
 	}
 
+	/**************************************
+	 *  DOM-related operations            *
+	 *************************************/
+
+	/**
+	 * Get width & height of an element
+	 *
+	 * @export
+	 * @param {any} el element to get dimensions from
+	 * @returns an object containing the width and height of el
+	 */
 	export function getDimensions(el) {
 		return {
 			width: parseFloat(el.style.width.replace("px", "") || el.offsetWidth),
@@ -38,16 +30,43 @@ export namespace Tools {
 		};
 	}
 
-	// Formatting & calculations
+	/**************************************
+	 *  Formatting & calculations         *
+	 *************************************/
+
+	/**
+	 * Capitalizes first letter of a string
+	 *
+	 * @export
+	 * @param {any} string the string whose first letter you'd like to capitalize
+	 * @returns The input string with its first letter capitalized
+	 */
 	export function capitalizeFirstLetter(string) {
 		return string[0].toUpperCase() + string.slice(1);
 	}
 
+	/**
+	 * Get the percentage of a datapoint compared to the entire data-set
+	 *
+	 * @export
+	 * @param {any} item
+	 * @param {any} fullData
+	 * @returns The percentage in the form of a string "87%"
+	 */
 	export function convertValueToPercentage(item, fullData) {
 		return Math.floor(item / fullData.reduce((accum, val) => accum + val.value, 0) * 100) + "%";
 	}
 
-	// Objects
+	// ================================================================================
+	// Object/array related checks
+	/**
+	 * Get the difference between two arrays' items
+	 *
+	 * @export
+	 * @param {any[]} oldArray
+	 * @param {any[]} newArray
+	 * @returns The items missing in newArray from oldArray, and items added to newArray compared to oldArray
+	 */
 	export function arrayDifferences(oldArray: any[], newArray: any[]) {
 		const difference = {
 			missing: [],
@@ -69,6 +88,13 @@ export namespace Tools {
 		return difference;
 	}
 
+	/**
+	 * Lists out the duplicated keys in an array of data
+	 *
+	 * @export
+	 * @param {*} data - array of data
+	 * @returns A list of the duplicated keys in data
+	 */
 	export function duplicateKeysInData(data: any) {
 		const keys = [];
 		const duplicateKeys = [];
@@ -85,7 +111,31 @@ export namespace Tools {
 		return duplicateKeys;
 	}
 
-	// Style helpers
+	// ================================================================================
+	// D3 Extensions
+	// ================================================================================
+	/**
+	 * In D3, moves an element to the front of the canvas
+	 *
+	 * @export
+	 * @param {any} element
+	 * @returns The function to be used by D3 to push element to the top of the canvas
+	 */
+	export function moveToFront(element) {
+		return element.each(function() {
+			this.parentNode.appendChild(this);
+		});
+	}
+
+	// ================================================================================
+	// Style Helpers
+	/**
+	 * Retrieves the element transform matrix string, and returns the translateX string
+	 *
+	 * @export
+	 * @param {HTMLElement} element
+	 * @returns The translateX value for element
+	 */
 	export function getXTransformsValue(element: HTMLElement) {
 		const transformMatrixArray = window.getComputedStyle(element).getPropertyValue("transform").split(",");
 

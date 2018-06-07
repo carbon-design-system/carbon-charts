@@ -55,12 +55,12 @@ export class BaseAxisChart extends BaseChart {
 	setSVG(): any {
 		super.setSVG();
 
-		const chartSize = this.getActualChartSize();
+		const chartSize = this.getChartSize();
 
 		this.container.classed(`chart-${this.options.type}`, true);
-		this.svg.append("g")
+		this.innerWrap.append("g")
 			.attr("class", "x grid");
-		this.svg.append("g")
+		this.innerWrap.append("g")
 			.attr("class", "y grid");
 
 		return this.svg;
@@ -70,13 +70,13 @@ export class BaseAxisChart extends BaseChart {
 		if (data) {
 			const xAxisValues = this.options.xDomain.length > 0 ? data.map(d => d[this.options.xDomain]) : this.options.yDomain;
 			// setting scale for arbitrary data if provided (used for things like combo chart)
-			const xScale = d3.scaleBand().range([0, this.getActualChartSize().width])
+			const xScale = d3.scaleBand().range([0, this.getChartSize().width])
 			.domain(xAxisValues)
 			.padding(0.1);
 			return xScale;
 		} else {
 			const xAxisValues = this.options.xDomain.length > 0 ? this.data.map(d => d[this.options.xDomain]) : this.options.yDomain;
-			this.xScale = d3.scaleBand().range([0, this.getActualChartSize().width])
+			this.xScale = d3.scaleBand().range([0, this.getChartSize().width])
 				.domain(xAxisValues)
 				.padding(0.1);
 			return this.xScale;
@@ -88,7 +88,7 @@ export class BaseAxisChart extends BaseChart {
 		let yHeight = undefined;
 		let keys = undefined;
 		if (data) {
-			yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+			yHeight = this.getChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 			const yScale = d3.scaleLinear().range([yHeight, 0]);
 			activeSeries = activeSeries ? activeSeries : this.getActiveLegendItems();
 			keys = activeSeries.length > 0 ? activeSeries : this.options.yDomain;
@@ -102,7 +102,7 @@ export class BaseAxisChart extends BaseChart {
 			}
 			return yScale;
 		}
-		yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		yHeight = this.getChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		this.yScale = d3.scaleLinear().range([yHeight, 0]);
 		activeSeries = activeSeries ? activeSeries : this.getActiveLegendItems();
 		if (this.options.secondaryYDomain.length > 0) {
@@ -148,7 +148,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("transform", "translate(" + (g.node().getBBox().width / 2) + "," + tickHeight + ")")
 			.text(this.options.xDomain);
 		// get the yHeight after the height of the axis has settled
-		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		const yHeight = this.getChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		g.attr("transform", `translate(0, ${yHeight})`);
 	}
 
@@ -166,7 +166,7 @@ export class BaseAxisChart extends BaseChart {
 			.call(text => this.wrapTick(text));
 		// get the yHeight and tickHeight after the ticks have been wrapped
 		const tickHeight = this.getLargestTickHeight(g.selectAll(".tick")) + Configuration.axis.tick.heightAddition;
-		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		const yHeight = this.getChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		// center the label
 		g.select(".x.axis-label")
 			.attr("transform", "translate(" + (g.node().getBBox().width / 2) + "," + tickHeight + ")");
@@ -211,7 +211,7 @@ export class BaseAxisChart extends BaseChart {
 		this.setTickStyle(yAxis, this.options.y2Ticks);
 
 		const g = this.svg.select(".y2.axis")
-			.attr("transform", `translate(${this.getActualChartSize().width}, 0)`)
+			.attr("transform", `translate(${this.getChartSize().width}, 0)`)
 			.call(yAxis);
 		g.select(".domain").remove();
 		if (this.options.yFormatter && this.options.yFormatter[this.options.secondaryYDomain[0]]) {
@@ -225,7 +225,7 @@ export class BaseAxisChart extends BaseChart {
 		const yAxis = d3.axisRight(yScale);
 		this.setTickStyle(yAxis, this.options.y2Ticks);
 		const g = this.svg.select(".y2.axis")
-			.attr("transform", `translate(${this.getActualChartSize().width}, 0)`)
+			.attr("transform", `translate(${this.getChartSize().width}, 0)`)
 			.call(yAxis);
 		g.select(".domain").remove();
 		if (this.options.yFormatter && this.options.yFormatter[this.options.yDomain[0]]) {
@@ -239,7 +239,7 @@ export class BaseAxisChart extends BaseChart {
 		if (labelNum === "y2") {
 			tickWidth = this.getLargestTickWidth(g.selectAll(".tick")) + Configuration.axis.tick.widthAdditionY2;
 		}
-		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		const yHeight = this.getChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		const axisLabel = g.append("text")
 			.attr("dy", Configuration.axis.magicDy1)
 			.attr("class", `${labelNum} axis-label`)
@@ -349,7 +349,7 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	drawXGrid(xScale: d3.ScaleBand<string> = this.xScale) {
-		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		const yHeight = this.getChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		const xGrid = d3.axisBottom(xScale)
 			.tickSizeInner(-yHeight)
 			.tickSizeOuter(0);
@@ -365,7 +365,7 @@ export class BaseAxisChart extends BaseChart {
 	drawYGrid(yScale: d3.ScaleLinear<number, number> = this.yScale) {
 		const tickNum = this.options.y2Ticks ? d3.max([this.options.yTicks, this.options.y2Ticks]) : this.options.yTicks;
 		const yGrid = d3.axisLeft(yScale)
-			.tickSizeInner(-this.getActualChartSize().width)
+			.tickSizeInner(-this.getChartSize().width)
 			.tickSizeOuter(0)
 			.ticks(tickNum);
 		const g = this.svg.select(".y.grid")

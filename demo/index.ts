@@ -604,7 +604,7 @@ chartTypes.forEach(type => {
 				// 	console.log("Bar Chart - RESIZE");
 				// }, false);
 
-				classyBarNewChart.setData(type.data);
+				// classyBarNewChart.setData(type.data);
 
 				setDemoActionsEventListener(type.id, type.data);
 

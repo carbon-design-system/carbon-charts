@@ -11,6 +11,7 @@ export class BaseChart {
 	container: any;
 	holder: Element;
 	svg: any;
+	innerWrap: any;
 	resizeTimers = [];
 	options: any = Object.assign({}, Configuration.options.BASE);
 	data: any;
@@ -28,14 +29,70 @@ export class BaseChart {
 
 		if (options) {
 			this.options = Object.assign(this.options, options);
+
+			if (this.options.containerResizable) {
+				this.resizeWhenContainerChange();
+			}
 		}
 
+		this.events = new EventTarget();
+
 		if (data) {
-			this.data = data;
+			this.setData(data);
 		}
 	}
 
-	getActualChartSize(container = this.container) {
+
+	setData(data: any) {
+		const { selectors } = Configuration;
+		const innerWrapElement = this.holder.querySelector(selectors.INNERWRAP);
+		const initialDraw = innerWrapElement === null;
+		const newDataIsAPromise = Promise.resolve(data) === data;
+
+		// Dispatch the update event
+		this.events.dispatchEvent(new Event("data-change"));
+
+		if (initialDraw || newDataIsAPromise) {
+			this.updateOverlay().show();
+		}
+
+		Promise.resolve(data).then(value => {
+			// Dispatch the update event
+			this.events.dispatchEvent(new Event("data-load"));
+
+			// Process data
+			const keys: any = {};
+			this.data = this.dataProcesser(value);
+
+			// Build out the keys array of objects to represent the legend items
+			this.data.forEach(entry => {
+				keys[entry.label] = Configuration.legend.items.status.ACTIVE;
+			});
+
+			// Grab the old legend items, the keys from the current data
+			// Compare the two, if there are any differences (additions/removals)
+			// Completely remove the legend and render again
+			const oldLegendItems = this.getActiveLegendItems();
+			const keysArray = Object.keys(keys);
+			const { missing: removedItems, added: newItems } = Tools.arrayDifferences(oldLegendItems, keysArray);
+
+			// Update keys for legend use the latest data keys
+			this.options.keys = keys;
+
+			// Perform the draw or update chart
+			if (initialDraw) {
+				this.initialDraw();
+			} else {
+				if (removedItems.length > 0 || newItems.length > 0) {
+					this.addOrUpdateLegend();
+				}
+
+				this.update(value);
+			}
+		});
+	}
+
+	getChartSize(container = this.container) {
 		const noAxis = this.options.type === "pie" || this.options.type === "donut";
 
 		let ratio, marginForLegendTop;
@@ -54,14 +111,14 @@ export class BaseChart {
 
 		// Store computed actual size, to be considered for change if chart does not support axis
 		const marginsToExclude = noAxis ? 0 : (Configuration.charts.margin.left + Configuration.charts.margin.right);
-		const computedActualSize = {
+		const computedChartSize = {
 			height: container.node().clientHeight - marginForLegendTop,
 			width: (container.node().clientWidth - marginsToExclude - moreForY2Axis) * ratio
 		};
 
 		// If chart is of type pie or donut, width and height should equal to the min of the width and height computed
 		if (noAxis) {
-			let maxSizePossible = Math.min(computedActualSize.height, computedActualSize.width);
+			let maxSizePossible = Math.min(computedChartSize.height, computedChartSize.width);
 			maxSizePossible = Math.max(maxSizePossible, 100);
 
 			return {
@@ -70,9 +127,8 @@ export class BaseChart {
 			};
 		}
 
-		return computedActualSize;
+		return computedChartSize;
 	}
-
 
 	/*
 	 * removes the chart and any tooltips
@@ -83,30 +139,19 @@ export class BaseChart {
 		this.container.selectAll(".label-tooltip").remove();
 	}
 
-	/*
-	 * either creates or updates the chart
-	 */
-	redrawChart(data?: any) {
-		if (!data) {
-			this.updateChart();
-		} else {
-			this.removeChart();
-			this.drawChart(data);
-		}
-	}
-
 	setSVG(): any {
-		const chartSize = this.getActualChartSize();
+		const chartSize = this.getChartSize();
 		this.svg = this.container.append("svg")
-			.classed("chart-svg", true)
-			.append("g")
+			.classed("chart-svg", true);
+
+		this.innerWrap = this.svg.append("g")
 			.classed("inner-wrap", true);
 
 		return this.svg;
 	}
 
 	updateSVG() {
-		const chartSize = this.getActualChartSize();
+		const chartSize = this.getChartSize();
 		this.svg.select(".x.axis")
 			.attr("transform", `translate(0, ${chartSize.height})`);
 		const grid = this.svg.select(".grid")
@@ -129,10 +174,19 @@ export class BaseChart {
 		console.warn("You should implement your own `drawChart()` function.");
 	}
 
+	// Default fallback when no data processing is needed
+	dataProcesser(data: any) {
+		return data;
+	}
+
 	/*
 	 * called when the chart needs to be updated visually
 	 * similar to drawChart but it should work from the existing chart
 	 */
+	initialDraw() {
+		console.warn("You should implement your own `initialDraw() function.");
+	}
+
 	updateChart() {
 		console.warn("You should implement your own `updateChart() function.");
 	}
@@ -141,7 +195,7 @@ export class BaseChart {
 		console.warn("You should implement your own `resizeChart() function.");
 	}
 
-	update() {
+	update(value?: any) {
 		console.warn("You should implement your own `update()` function.");
 	}
 
@@ -198,32 +252,6 @@ export class BaseChart {
 		});
 	}
 
-	/**
-	 *
-	 * When a legend item is clicked, apply/remove the appropriate filter
-	 * @param {string} changedLabel The label of the legend element the user clicked on
-	 * @memberof PieChart
-	 */
-	applyLegendFilter(changedLabel: string) {
-		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
-		const oldStatus = this.options.keys[changedLabel];
-		this.options.keys[changedLabel] = oldStatus === ACTIVE ? DISABLED : ACTIVE;
-
-		this.update();
-	}
-
-	setClickableLegendInTooltip() {
-		const self = this;
-		const c = d3.select(this.container);
-		const tooltip = c.select(".legend-tooltip-content");
-		tooltip.selectAll(".legend-btn").each(function() {
-			d3.select(this).on("click", function() {
-				self.updateLegend(this);
-				self.redrawChart();
-			});
-		});
-	}
-
 	setChartIDContainer() {
 		const parent = d3.select(this.holder);
 		let chartId, container;
@@ -248,7 +276,8 @@ export class BaseChart {
 	resetOpacity() {
 		const svg = d3.selectAll("svg.chart-svg");
 		svg.selectAll("path").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
-		svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
+		svg.selectAll("circle")
+			.attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
 			.attr("fill", Configuration.charts.resetOpacity.circle.fill);
 		svg.selectAll("rect").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
 	}
@@ -265,7 +294,9 @@ export class BaseChart {
 		d3.select(exception).attr("fill", d3.select(exception).attr("stroke"));
 	}
 
+	// ================================================================================
 	// Legend
+	// ================================================================================
 	getLegendItems() {
 		let legendItems = {};
 		if (this.options.keys) {
@@ -331,7 +362,6 @@ export class BaseChart {
 			.selectAll("li.legend-btn")
 			.data(legendItemsArray, d => d.key);
 
-		console.log("legendItemsArray", legendItemsArray);
 		legendItems.exit()
 			.each(d => console.log("LEAVING", d))
 			.remove();
@@ -352,15 +382,8 @@ export class BaseChart {
 		legendEnter.select("div")
 			.merge(legendItems.selectAll("div"))
 			.style("background-color", (d, i) => {
-				console.log(d);
 				return d.value === Configuration.legend.items.status.ACTIVE ? this.color(d.key) : "white";
 			});
-
-		// // Update previous legend items
-		// legend.selectAll("div.legend-circle")
-		// 	.style("background-color", (d, i) => {
-		// 		return d.value === Configuration.legend.items.status.ACTIVE ? this.color(d.key) : "white";
-		// 	});
 
 		// Add hover effect for legend item circles
 		this.addLegendCircleHoverEffect();
@@ -442,6 +465,37 @@ export class BaseChart {
 		);
 	}
 
+	/**
+	 *
+	 * When a legend item is clicked, apply/remove the appropriate filter
+	 * @param {string} changedLabel The label of the legend element the user clicked on
+	 * @memberof PieChart
+	 */
+	applyLegendFilter(changedLabel: string) {
+		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
+		const oldStatus = this.options.keys[changedLabel];
+		this.options.keys[changedLabel] = oldStatus === ACTIVE ? DISABLED : ACTIVE;
+
+		this.update();
+	}
+
+	setClickableLegendInTooltip() {
+		const self = this;
+		const c = d3.select(this.container);
+		const tooltip = c.select(".legend-tooltip-content");
+		tooltip.selectAll(".legend-btn").each(function() {
+			d3.select(this).on("click", function() {
+				self.updateLegend(this);
+
+				console.log("TODO - setClickableLegendInTooltip()");
+				// self.redrawChart();
+			});
+		});
+	}
+
+	// ================================================================================
+	// Tooltips
+	// ================================================================================
 	addTooltipOpenButtonToLegend() {
 		const self = this;
 		const thisLegend = this.container.select(".legend");
@@ -484,7 +538,9 @@ export class BaseChart {
 				.attr("class", "legend-btn active")
 				.on("click", (clickedItem) => {
 					this.updateLegend(d3.event.currentTarget);
-					this.redrawChart();
+					// this.redrawChart();
+
+					console.log("TODO - openLegendTooltip()");
 				});
 
 			legendContent.append("div")
@@ -618,6 +674,9 @@ export class BaseChart {
 		this.addTooltipEventListeners(tooltip);
 	}
 
+	// ================================================================================
+	// Loading overlay
+	// ================================================================================
 	updateOverlay() {
 		const overlayElement = <HTMLElement>this.holder.querySelector("div.chart-overlay");
 
@@ -640,21 +699,5 @@ export class BaseChart {
 				overlayElement.style.display = "none";
 			}
 		};
-	}
-
-	// https://github.com/wbkd/d3-extended
-	moveToBack(element) {
-		return element.each(function() {
-			const firstChild = this.parentNode.firstChild;
-			if (firstChild) {
-				this.parentNode.insertBefore(this, firstChild);
-			}
-		});
-	}
-
-	moveToFront(element) {
-		return element.each(function() {
-			this.parentNode.appendChild(this);
-		});
 	}
 }
