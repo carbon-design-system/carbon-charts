@@ -1,10 +1,10 @@
 import {
-	BarNewChart,
+	// BarNewChart,
 	BarChart,
-	LineChart,
-	DoubleAxisLineChart,
-	StackedBarChart,
-	ComboChart,
+	// LineChart,
+	// DoubleAxisLineChart,
+	// StackedBarChart,
+	// ComboChart,
 	PieChart,
 	DonutChart,
 	DonutCenter
@@ -460,18 +460,18 @@ const pieData = [
 ];
 
 const chartTypes = [
-	{
-		id: "multi-bar",
-		name: "Bar",
-		data: dimensionData,
-		options: dimensionOption
-	},
-	{
-		id: "bar",
-		name: "Bar",
-		options: barOptions,
-		data: barData
-	},
+	// {
+	// 	id: "multi-bar",
+	// 	name: "Bar",
+	// 	data: dimensionData,
+	// 	options: dimensionOption
+	// },
+	// {
+	// 	id: "bar",
+	// 	name: "Bar",
+	// 	options: barOptions,
+	// 	data: barData
+	// },
 	// {
 	// 	id: "simplest-bar",
 	// 	name: "Bar",
@@ -479,35 +479,35 @@ const chartTypes = [
 	// 	data: dataNoXAxis
 	// },
 	{
-		id: "bar-new",
+		id: "bar",
 		name: "Bar New",
 		options: optionsNoXAxis,
 		data: dataNoXAxis
 	},
-	{
-		id: "line",
-		name: "Line",
-		options: barOptions,
-		data: barData
-	},
-	{
-		id: "stacked-bar",
-		name: "Stacked Bar",
-		options: barOptions,
-		data: barData
-	},
-	{
-		id: "double-axis-line",
-		name: "Double Axis",
-		options: optionsWithFormatter,
-		data: doubleAxisData
-	},
-	{
-		id: "combo",
-		name: "Combo",
-		options: doubleYAxisOptions,
-		data: longData
-	},
+	// {
+	// 	id: "line",
+	// 	name: "Line",
+	// 	options: barOptions,
+	// 	data: barData
+	// },
+	// {
+	// 	id: "stacked-bar",
+	// 	name: "Stacked Bar",
+	// 	options: barOptions,
+	// 	data: barData
+	// },
+	// {
+	// 	id: "double-axis-line",
+	// 	name: "Double Axis",
+	// 	options: optionsWithFormatter,
+	// 	data: doubleAxisData
+	// },
+	// {
+	// 	id: "combo",
+	// 	name: "Combo",
+	// 	options: doubleYAxisOptions,
+	// 	data: longData
+	// },
 	{
 		id: "pie",
 		name: "pie",
@@ -557,7 +557,6 @@ const setDemoActionsEventListener = (chartType: any, oldData: any) => {
 };
 
 let classyBarChart;
-let classyBarNewChart;
 let classyDonutChart;
 let classyPieChart;
 chartTypes.forEach(type => {
@@ -567,18 +566,6 @@ chartTypes.forEach(type => {
 			default:
 			case "bar":
 				classyBarChart = new BarChart(
-					classyContainer,
-					Object.assign({}, type.options, {type: type.id}),
-					type.data
-				);
-
-				classyBarChart.setData(type.data);
-
-				setDemoActionsEventListener(type.id, type.data);
-
-				break;
-			case "bar-new":
-				classyBarNewChart = new BarNewChart(
 					classyContainer,
 					Object.assign({}, type.options, {type: type.id}),
 					type.data
@@ -609,38 +596,38 @@ chartTypes.forEach(type => {
 				setDemoActionsEventListener(type.id, type.data);
 
 				break;
-			case "line":
-				const classyLineChart = new LineChart(
-					classyContainer,
-					Object.assign({}, type.options, {type: type.id}),
-					type.data
-				);
-				classyLineChart.drawChart();
-				break;
-			case "stacked-bar":
-				const classyStackedBarChart = new StackedBarChart(
-					classyContainer,
-					Object.assign({}, type.options, {type: type.id}),
-					type.data
-				);
-				classyStackedBarChart.drawChart();
-				break;
-			case "double-axis-line":
-				const classyDoubleAxisChart = new DoubleAxisLineChart(
-					classyContainer,
-					Object.assign({}, type.options, {type: type.id}),
-					type.data
-				);
-				classyDoubleAxisChart.drawChart();
-				break;
-			case "combo":
-				const classyComboChart = new ComboChart(
-					classyContainer,
-					Object.assign({}, type.options, {type: type.id}),
-					type.data
-				);
-				classyComboChart.drawChart();
-				break;
+			// case "line":
+			// 	const classyLineChart = new LineChart(
+			// 		classyContainer,
+			// 		Object.assign({}, type.options, {type: type.id}),
+			// 		type.data
+			// 	);
+			// 	classyLineChart.drawChart();
+			// 	break;
+			// case "stacked-bar":
+			// 	const classyStackedBarChart = new StackedBarChart(
+			// 		classyContainer,
+			// 		Object.assign({}, type.options, {type: type.id}),
+			// 		type.data
+			// 	);
+			// 	classyStackedBarChart.drawChart();
+			// 	break;
+			// case "double-axis-line":
+			// 	const classyDoubleAxisChart = new DoubleAxisLineChart(
+			// 		classyContainer,
+			// 		Object.assign({}, type.options, {type: type.id}),
+			// 		type.data
+			// 	);
+			// 	classyDoubleAxisChart.drawChart();
+			// 	break;
+			// case "combo":
+			// 	const classyComboChart = new ComboChart(
+			// 		classyContainer,
+			// 		Object.assign({}, type.options, {type: type.id}),
+			// 		type.data
+			// 	);
+			// 	classyComboChart.drawChart();
+			// 	break;
 			case "pie":
 				classyPieChart = new PieChart(
 					classyContainer,
@@ -713,20 +700,20 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 
 			break;
 
+		// case "bar":
+		// 	// Randomize old data values
+		// 	newData = oldData.map(dataPoint => {
+		// 		return Object.assign({}, dataPoint, {
+		// 			Qty: randomizeValue(dataPoint.Qty),
+		// 			More: randomizeValue(dataPoint.More),
+		// 			Sold: randomizeValue(dataPoint.Sold)
+		// 		});
+		// 	});
+
+		// 	classyBarChart.setData(newData);
+
+		// 	break;
 		case "bar":
-			// Randomize old data values
-			newData = oldData.map(dataPoint => {
-				return Object.assign({}, dataPoint, {
-					Qty: randomizeValue(dataPoint.Qty),
-					More: randomizeValue(dataPoint.More),
-					Sold: randomizeValue(dataPoint.Sold)
-				});
-			});
-
-			classyBarChart.setData(newData);
-
-			break;
-		case "bar-new":
 			const keys = ["Qty", "More", "Sold", "Restocking", "Misc"];
 			const removeAKey = Math.random() > 0.5;
 
@@ -737,7 +724,7 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 				newData.splice(randomIndex, randomIndex);
 			}
 
-			classyBarNewChart.setData(newData);
+			classyBarChart.setData(newData);
 
 			break;
 	}
