@@ -59,13 +59,13 @@ export class BarChart extends BaseAxisChart {
 		const width = chartSize.width - margin.left - margin.right;
 		const height = chartSize.height - margin.top - margin.bottom;
 
+		this.setXAxis();
 		const rect = this.innerWrap
 			.selectAll("rect.bar")
 			.data(newData);
 
 		const yEnd = d3.max(newData, (d: any) => d.value);
 
-		this.x.domain(newData.map(d => d.label));
 		this.y.domain([0, yEnd]);
 
 		rect
@@ -79,23 +79,8 @@ export class BarChart extends BaseAxisChart {
 			.attr("fill", (d: any) => this.color(d.label).toString());
 
 		const yAxis = d3.axisLeft(this.y).ticks(5).tickSize(0);
+
 		const svg = d3.select("div#classy-bar-chart-holder svg");
-
-		const xAxisRef = svg.select("g.x.axis")
-			.transition()
-			.duration(750)
-			.attr("transform", "translate(0," + height + ")")
-			// Being cast to any because d3 does not offer appropriate typings for the .call() function
-			.call(d3.axisBottom(this.x).tickSize(0) as any);
-
-		xAxisRef.attr("transform", "translate(0," + height + ")");
-		xAxisRef.selectAll("text")
-			.attr("y", Configuration.axis.magicY1)
-			.attr("x", Configuration.axis.magicX1)
-			.attr("dy", ".35em")
-			.attr("transform", `rotate(${Configuration.axis.xAxisAngle})`)
-			.style("text-anchor", "end");
-
 		svg.select("g.y.axis")
 			.transition()
 			.duration(750)
@@ -152,21 +137,10 @@ export class BarChart extends BaseAxisChart {
 
 		const yEnd = parseFloat(d3.max(data, (d: any) => d.value));
 
-		this.x.domain(data.map(d => d.label));
+		// this.x.domain(data.map(d => d.label));
 		this.y.domain([0, yEnd]);
 
-		const xAxis = d3.axisBottom(this.x).tickSize(0);
-		const xAxisRef = g.append("g")
-			.attr("class", "x axis")
-			.call(xAxis);
-
-		xAxisRef.attr("transform", "translate(0," + height + ")");
-		xAxisRef.selectAll("text")
-			.attr("y", Configuration.axis.magicY1)
-			.attr("x", Configuration.axis.magicX1)
-			.attr("dy", ".35em")
-			.attr("transform", `rotate(${Configuration.axis.xAxisAngle})`)
-			.style("text-anchor", "end");
+		this.setXAxis();
 
 		const yAxis = d3.axisLeft(this.y).ticks(5).tickSize(0);
 		g.append("g")
