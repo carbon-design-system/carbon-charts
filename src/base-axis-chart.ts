@@ -71,12 +71,22 @@ export class BaseAxisChart extends BaseChart {
 			});
 		}
 
+		this.data = newData;
+
 		this.updateXandYGrid();
 		this.setXScale();
 		this.setXAxis();
 		this.setYScale();
 		this.setYAxis();
 		this.interpolateValues(newData);
+	}
+
+	draw() {
+		console.warn("You should implement your own `draw() function.");
+	}
+
+	interpolateValues(newData: any) {
+		console.warn("You should implement your own `interpolateValues() function.");
 	}
 
 	/**************************************
@@ -108,11 +118,15 @@ export class BaseAxisChart extends BaseChart {
 		return computedChartSize;
 	}
 
+	setColorScale(keys: any) {
+		this.color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
+	}
+
 	/**************************************
 	 *  Axis & Grids                      *
 	 *************************************/
 
-	setXScale() {
+	setXScale(noAnimation?: boolean) {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
@@ -121,10 +135,11 @@ export class BaseAxisChart extends BaseChart {
 		this.x.domain(this.data.map(d => d.label));
 	}
 
-	setXAxis() {
+	setXAxis(noAnimation?: boolean) {
 		const margin = {top: 0, right: -40, bottom: 50, left: 40};
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - margin.top - margin.bottom;
+		const t = d3.transition().duration(noAnimation ? 0 : 750);
 
 		const xAxis = d3.axisBottom(this.x).tickSize(0);
 		let xAxisRef = this.svg.select("g.x.axis");
@@ -132,8 +147,7 @@ export class BaseAxisChart extends BaseChart {
 		// If the <g class="x axis"> exists in the chart SVG, just update it
 		if (xAxisRef.nodes().length > 0) {
 			xAxisRef = this.svg.select("g.x.axis")
-				.transition()
-				.duration(750)
+				.transition(t)
 				.attr("transform", "translate(0," + height + ")")
 				// Being cast to any because d3 does not offer appropriate typings for the .call() function
 				.call(d3.axisBottom(this.x).tickSize(0) as any);
@@ -163,14 +177,14 @@ export class BaseAxisChart extends BaseChart {
 		this.y.domain([0, yEnd]);
 	}
 
-	setYAxis() {
-		const yAxis = d3.axisLeft(this.y).ticks(5).tickSize(0);
+	setYAxis(noAnimation?: boolean) {
+		const t = d3.transition().duration(noAnimation ? 0 : 750);
 
+		const yAxis = d3.axisLeft(this.y).ticks(5).tickSize(0);
 		const yAxisRef = this.svg.select("g.y.axis");
 		// If the <g class="y axis"> exists in the chart SVG, just update it
 		if (yAxisRef.nodes().length > 0) {
-			yAxisRef.transition()
-				.duration(750)
+			yAxisRef.transition(t)
 				// Being cast to any because d3 does not offer appropriate typings for the .call() function
 				.call(yAxis as any);
 		} else {
@@ -178,10 +192,6 @@ export class BaseAxisChart extends BaseChart {
 				.attr("class", "y axis")
 				.call(yAxis);
 		}
-	}
-
-	setColorScale(keys: any) {
-		this.color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
 	}
 
 	drawXGrid() {
@@ -208,11 +218,11 @@ export class BaseAxisChart extends BaseChart {
 		cleanGrid(g);
 	}
 
-	updateXandYGrid(instant?: boolean) {
+	updateXandYGrid(noAnimation?: boolean) {
 		// setTimeout is needed here, to take into account the new position of bars
 		// Right after transitions are initiated for the
 		setTimeout(() => {
-			const t = d3.transition().duration(instant ? 0 : 750);
+			const t = d3.transition().duration(noAnimation ? 0 : 750);
 
 			// Update X Grid
 			const chartSize = this.getChartSize();

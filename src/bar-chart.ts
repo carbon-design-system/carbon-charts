@@ -15,6 +15,24 @@ export class BarChart extends BaseAxisChart {
 		this.options.type = "bar";
 	}
 
+	updateElements(rect: any, noAnimation?: boolean) {
+		const { bar: margins } = Configuration.charts.margin;
+		const chartSize = this.getChartSize();
+		const height = chartSize.height - margins.top - margins.bottom;
+
+		const t = d3.transition().duration(noAnimation ? 0 : 750);
+
+		// Update existing bars
+		rect
+			.transition(t)
+			.attr("class", "bar")
+			.attr("x", (d: any) => this.x(d.label))
+			.attr("y", (d: any, i) => this.y(d.value))
+			.attr("width", this.x.bandwidth())
+			.attr("height", (d: any) => height - this.y(d.value))
+			.attr("fill", (d: any) => this.color(d.label).toString());
+	}
+
 	interpolateValues(newData: any) {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
@@ -25,16 +43,7 @@ export class BarChart extends BaseAxisChart {
 			.selectAll("rect.bar")
 			.data(newData);
 
-		// Update existing bars
-		rect
-			.transition()
-			.duration(750)
-			.attr("class", "bar")
-			.attr("x", (d: any) => this.x(d.label))
-			.attr("y", (d: any, i) => this.y(d.value))
-			.attr("width", this.x.bandwidth())
-			.attr("height", (d: any) => height - this.y(d.value))
-			.attr("fill", (d: any) => this.color(d.label).toString());
+		this.updateElements(rect, false);
 
 		// Add bars that need to be added now
 		rect.enter()
@@ -115,6 +124,18 @@ export class BarChart extends BaseAxisChart {
 				.attr("height", `${dimensionToUseForScale}px`);
 
 		this.updateXandYGrid(true);
+		// Scale out the domains
+		this.setXScale(true);
+		this.setYScale();
+
+		// Set the x & y axis as well as their labels
+		this.setXAxis(true);
+		this.setYAxis(true);
+
+		// Apply new data to the bars
+		const rect = this.innerWrap.selectAll("rect.bar");
+		this.updateElements(rect, true);
+
 		// this.svg
 		// 	.style("transform", `translate(${radius}px,${radius}px)`);
 
