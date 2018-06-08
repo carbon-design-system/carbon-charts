@@ -57,8 +57,9 @@ export namespace Tools {
 		return Math.floor(item / fullData.reduce((accum, val) => accum + val.value, 0) * 100) + "%";
 	}
 
-	// ================================================================================
-	// Object/array related checks
+	/**************************************
+	 *  Object/array related checks       *
+	 *************************************/
 	/**
 	 * Get the difference between two arrays' items
 	 *

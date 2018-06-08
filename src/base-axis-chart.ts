@@ -29,6 +29,60 @@ export class BaseAxisChart extends BaseChart {
 		return this.svg;
 	}
 
+	initialDraw(data?: any) {
+		if (data) {
+			this.data = data;
+		}
+
+		this.setSVG();
+
+		// Set the color scale based on the keys present in the data
+		const keys = this.data.map(dataPoint => dataPoint.label);
+		this.setColorScale(keys);
+
+		// Scale out the domains
+		this.setXScale();
+		this.setYScale();
+
+		// Set the x & y axis as well as their labels
+		this.setXAxis();
+		this.setYAxis();
+
+		// Draw the x & y grid
+		this.drawXGrid();
+		this.drawYGrid();
+
+		this.draw();
+
+		this.addOrUpdateLegend();
+		this.addDataPointEventListener();
+	}
+
+	update(newData?: any) {
+		const oldData = this.data;
+		const activeLegendItems = this.getActiveLegendItems();
+		if (newData === undefined) {
+			// Get new data by filtering the data based off of the legend
+			newData = oldData.filter(dataPoint => {
+				// If this datapoint is active on the legend
+				const activeSeriesItemIndex = activeLegendItems.indexOf(dataPoint.label);
+
+				return activeSeriesItemIndex > -1;
+			});
+		}
+
+		this.updateXandYGrid();
+		this.setXScale();
+		this.setXAxis();
+		this.setYScale();
+		this.setYAxis();
+		this.interpolateValues(newData);
+	}
+
+	/**************************************
+	 *  Computations/Calculations         *
+	 *************************************/
+
 	getChartSize(container = this.container) {
 		let ratio, marginForLegendTop;
 		let moreForY2Axis = 0;
@@ -54,16 +108,28 @@ export class BaseAxisChart extends BaseChart {
 		return computedChartSize;
 	}
 
+	/**************************************
+	 *  Axis & Grids                      *
+	 *************************************/
+
+	setXScale() {
+		const { bar: margins } = Configuration.charts.margin;
+		const chartSize = this.getChartSize();
+		const width = chartSize.width - margins.left - margins.right;
+
+		this.x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
+		this.x.domain(this.data.map(d => d.label));
+	}
+
 	setXAxis() {
 		const margin = {top: 0, right: -40, bottom: 50, left: 40};
 		const chartSize = this.getChartSize();
-		const width = chartSize.width - margin.left - margin.right;
 		const height = chartSize.height - margin.top - margin.bottom;
-
-		this.x.domain(this.data.map(d => d.label));
 
 		const xAxis = d3.axisBottom(this.x).tickSize(0);
 		let xAxisRef = this.svg.select("g.x.axis");
+
+		// If the <g class="x axis"> exists in the chart SVG, just update it
 		if (xAxisRef.nodes().length > 0) {
 			xAxisRef = this.svg.select("g.x.axis")
 				.transition()
@@ -77,6 +143,7 @@ export class BaseAxisChart extends BaseChart {
 				.call(xAxis);
 		}
 
+		// Update the position of the x-axis and all the pieces of text inside it
 		xAxisRef.attr("transform", "translate(0," + height + ")");
 		xAxisRef.selectAll("text")
 			.attr("y", Configuration.axis.magicY1)
@@ -84,6 +151,37 @@ export class BaseAxisChart extends BaseChart {
 			.attr("dy", ".35em")
 			.attr("transform", `rotate(${Configuration.axis.xAxisAngle})`)
 			.style("text-anchor", "end");
+	}
+
+	setYScale() {
+		const { bar: margins } = Configuration.charts.margin;
+		const chartSize = this.getChartSize();
+		const height = chartSize.height - margins.top - margins.bottom;
+		const yEnd = d3.max(this.data, (d: any) => d.value);
+
+		this.y = d3.scaleLinear().rangeRound([height, 0]);
+		this.y.domain([0, yEnd]);
+	}
+
+	setYAxis() {
+		const yAxis = d3.axisLeft(this.y).ticks(5).tickSize(0);
+
+		const yAxisRef = this.svg.select("g.y.axis");
+		// If the <g class="y axis"> exists in the chart SVG, just update it
+		if (yAxisRef.nodes().length > 0) {
+			yAxisRef.transition()
+				.duration(750)
+				// Being cast to any because d3 does not offer appropriate typings for the .call() function
+				.call(yAxis as any);
+		} else {
+			this.innerWrap.append("g")
+				.attr("class", "y axis")
+				.call(yAxis);
+		}
+	}
+
+	setColorScale(keys: any) {
+		this.color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
 	}
 
 	drawXGrid() {
@@ -142,18 +240,32 @@ export class BaseAxisChart extends BaseChart {
 				.call(yGrid);
 
 			cleanGrid(g_yGrid);
-
-			// this.x = d3.scaleBand().rangeRound([0, chartSize.width]).padding(0.1);
-			// this.y = d3.scaleLinear().rangeRound([chartSize.height, 0]);
-			// this.x.domain(this.data.map(d => d.label));
-			// this.y.domain([0, yHeight]);
-
-			// const xAxis = d3.axisBottom(this.x).tickSize(0);
-			// this.svg.select(".x.axis").call(xAxis);
-
-			// const yAxis = d3.axisLeft(this.y).ticks(5).tickSize(0);
-			// this.svg.select(".y.axis").call(yAxis);
 		}, 0);
+	}
+
+	/**************************************
+	 *  Events & User interactions        *
+	 *************************************/
+
+	addDataPointEventListener() {
+		const self = this;
+		this.svg.selectAll("rect")
+			.on("mouseover", function(d) {
+				d3.select(this)
+					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
+					.attr("stroke", self.color(d.label))
+					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
+			})
+			.on("mouseout", function() {
+				d3.select(this)
+					.attr("stroke-width", Configuration.bars.mouseout.strokeWidth)
+					.attr("stroke", "none")
+					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
+			})
+			.on("click", function(d) {
+				self.showTooltip(d);
+				self.reduceOpacity(this);
+			});
 	}
 }
 

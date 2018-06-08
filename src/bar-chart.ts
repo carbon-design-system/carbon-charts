@@ -15,59 +15,17 @@ export class BarChart extends BaseAxisChart {
 		this.options.type = "bar";
 	}
 
-	initialDraw(data?: any) {
-		if (data) {
-			this.data = data;
-		}
-
-		this.setSVG();
-
-		this.draw();
-
-		// this.setXScale();
-		// this.drawXAxis();
-		// this.setYScale();
-		// this.drawYAxis();
-
-		// this.draw();
-		// this.repositionBasedOnYAxis();
-
-		this.addOrUpdateLegend();
-		this.addDataPointEventListener();
-	}
-
-	update(newData?: any) {
-		const oldData = this.data;
-		const activeLegendItems = this.getActiveLegendItems();
-		if (newData === undefined) {
-			// Get new data by filtering the data based off of the legend
-			newData = oldData.filter(dataPoint => {
-				// If this datapoint is active on the legend
-				const activeSeriesItemIndex = activeLegendItems.indexOf(dataPoint.label);
-
-				return activeSeriesItemIndex > -1;
-			});
-		}
-
-		this.updateXandYGrid();
-		this.interpolateValues(newData);
-	}
-
 	interpolateValues(newData: any) {
-		const margin = {top: 0, right: -40, bottom: 50, left: 40};
+		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
-		const width = chartSize.width - margin.left - margin.right;
-		const height = chartSize.height - margin.top - margin.bottom;
+		const height = chartSize.height - margins.top - margins.bottom;
 
-		this.setXAxis();
+		// Apply new data to the bars
 		const rect = this.innerWrap
 			.selectAll("rect.bar")
 			.data(newData);
 
-		const yEnd = d3.max(newData, (d: any) => d.value);
-
-		this.y.domain([0, yEnd]);
-
+		// Update existing bars
 		rect
 			.transition()
 			.duration(750)
@@ -78,15 +36,7 @@ export class BarChart extends BaseAxisChart {
 			.attr("height", (d: any) => height - this.y(d.value))
 			.attr("fill", (d: any) => this.color(d.label).toString());
 
-		const yAxis = d3.axisLeft(this.y).ticks(5).tickSize(0);
-
-		const svg = d3.select("div#classy-bar-chart-holder svg");
-		svg.select("g.y.axis")
-			.transition()
-			.duration(750)
-			// Being cast to any because d3 does not offer appropriate typings for the .call() function
-			.call(yAxis as any);
-
+		// Add bars that need to be added now
 		rect.enter()
 			.append("rect")
 			.attr("class", "bar")
@@ -100,6 +50,7 @@ export class BarChart extends BaseAxisChart {
 			.attr("opacity", 1)
 			.attr("fill", (d: any) => this.color(d.label).toString());
 
+		// Remove bars that are no longer needed
 		rect.exit()
 			.transition()
 			.duration(750)
@@ -127,27 +78,9 @@ export class BarChart extends BaseAxisChart {
 		const width = chartSize.width - margin.left - margin.right;
 		const height = chartSize.height - margin.top - margin.bottom;
 
-		const keys = data.map(dataPoint => dataPoint.label);
-
-		this.x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
-		this.y = d3.scaleLinear().rangeRound([height, 0]);
-
 		const g = this.innerWrap
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-		const yEnd = parseFloat(d3.max(data, (d: any) => d.value));
-
-		// this.x.domain(data.map(d => d.label));
-		this.y.domain([0, yEnd]);
-
-		this.setXAxis();
-
-		const yAxis = d3.axisLeft(this.y).ticks(5).tickSize(0);
-		g.append("g")
-			.attr("class", "y axis")
-			.call(yAxis);
-
-		this.color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
 		g.selectAll(".bar")
 			.data(data)
 			.enter()
@@ -159,43 +92,12 @@ export class BarChart extends BaseAxisChart {
 			.attr("height", (d: any) => height - this.y(d.value))
 			.attr("fill", (d: any) => this.color(d.label).toString());
 
-		this.drawXGrid();
-		this.drawYGrid();
-
 		// Hide the overlay
 		this.updateOverlay().hide();
 
 		// Dispatch the load event
 		this.events.dispatchEvent(new Event("load"));
 	}
-
-	addDataPointEventListener() {
-		const self = this;
-		this.svg.selectAll("rect")
-			.on("mouseover", function(d) {
-				d3.select(this)
-					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
-					.attr("stroke", self.color(d.label))
-					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
-			})
-			.on("mouseout", function() {
-				d3.select(this)
-					.attr("stroke-width", Configuration.bars.mouseout.strokeWidth)
-					.attr("stroke", "none")
-					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
-			})
-			.on("click", function(d) {
-				self.showTooltip(d);
-				self.reduceOpacity(this);
-			});
-	}
-
-	// resizeChart() {
-	// 	// Trigger then resize event
-	// 	this.events.dispatchEvent(new Event("resize"));
-
-	// 	this.interpolateValues(this.data);
-	// }
 
 	resizeChart() {
 		console.log("RESIZEchart");

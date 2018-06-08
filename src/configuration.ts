@@ -37,7 +37,13 @@ export namespace Configuration {
 			top: 20,
 			bottom: 60,
 			left: 60,
-			right: 20
+			right: 20,
+			bar: {
+				top: 0,
+				right: -40,
+				bottom: 50,
+				left: 40
+			}
 		},
 		resetOpacity: {
 			opacity: 1,
