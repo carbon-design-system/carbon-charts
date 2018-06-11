@@ -1,9 +1,10 @@
 import * as d3 from "d3";
 
-import { BaseAxisChart } from "./base-axis-chart";
+import { BarChart } from "./bar-chart";
 import { Configuration } from "./configuration";
+import { Tools } from "./tools";
 
-export class BarChart extends BaseAxisChart {
+export class GroupedBarChart extends BarChart {
 	x: any;
 	y: any;
 	color: any;
@@ -11,7 +12,7 @@ export class BarChart extends BaseAxisChart {
 	constructor(holder: Element, options?: any, data?: any) {
 		super(holder, options, data);
 
-		this.options.type = "bar";
+		this.options.type = "grouped-bar";
 	}
 
 	updateElements(rect: any, noAnimation?: boolean) {
@@ -133,9 +134,25 @@ export class BarChart extends BaseAxisChart {
 		const rect = this.innerWrap.selectAll("rect.bar");
 		this.updateElements(rect, true);
 
+		// this.svg
+		// 	.style("transform", `translate(${radius}px,${radius}px)`);
+
+		// // Resize the arc
+		// const marginedRadius = radius - (pieConfigs.label.margin * scaleRatio);
+		// this.arc = d3.arc()
+		// 	.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
+		// 	.outerRadius(marginedRadius);
+
+		// this.svg.selectAll("path")
+		// 	.attr("d", this.arc);
+
+		// this.svg
+		// 	.selectAll("text.chart-label")
+		// 	.attr("transform", (d) => {
+		// 		return this.deriveTransformString(d, radius);
+		// 	});
+
 		// Reposition the legend
 		this.positionLegend();
-
-		this.events.dispatchEvent(new Event("resize"));
 	}
 }

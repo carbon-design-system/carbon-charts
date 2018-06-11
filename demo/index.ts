@@ -1,6 +1,7 @@
 import {
 	// BarNewChart,
 	BarChart,
+	GroupedBarChart,
 	// LineChart,
 	// DoubleAxisLineChart,
 	// StackedBarChart,
@@ -257,7 +258,7 @@ const doubleYAxisOptions = {
 
 const options = {
 	xDomain: "Part number",
-	yDomain: ["Sold", "More", "Qty"],
+	yDomain: ["Sofr3frld", "More", "Qty"],
 	yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
@@ -279,15 +280,7 @@ const optionsWithFormatter = {
 	colors
 };
 
-const optionsNoXAxis = {
-	yDomain: ["Sold", "More", "Qty"],
-	yTicks: 5,
-	legendClickable: true,
-	containerResizable: true,
-	colors
-};
-
-const dataNoXAxis = [
+const simpleBarData = [
 	{
 		label: "Qty",
 		value: 65000
@@ -309,6 +302,15 @@ const dataNoXAxis = [
 		value: 16932
 	}
 ];
+
+const simpleBarOptions = {
+	xDomain: "label",
+	yDomain: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	yTicks: 5,
+	legendClickable: true,
+	containerResizable: true,
+	colors
+};
 
 const pieOptions = {
 	legendClickable: true,
@@ -466,12 +468,12 @@ const chartTypes = [
 	// 	data: dimensionData,
 	// 	options: dimensionOption
 	// },
-	// {
-	// 	id: "bar",
-	// 	name: "Bar",
-	// 	options: barOptions,
-	// 	data: barData
-	// },
+	{
+		id: "grouped-bar",
+		name: "Bar",
+		options: barOptions,
+		data: barData
+	},
 	// {
 	// 	id: "simplest-bar",
 	// 	name: "Bar",
@@ -479,10 +481,10 @@ const chartTypes = [
 	// 	data: dataNoXAxis
 	// },
 	{
-		id: "bar",
+		id: "simple-bar",
 		name: "Bar New",
-		options: optionsNoXAxis,
-		data: dataNoXAxis
+		options: simpleBarOptions,
+		data: simpleBarData
 	},
 	// {
 	// 	id: "line",
@@ -557,37 +559,44 @@ const setDemoActionsEventListener = (chartType: any, oldData: any) => {
 };
 
 let classyBarChart;
+let classyGroupedBarChart;
 let classyDonutChart;
 let classyPieChart;
 chartTypes.forEach(type => {
 	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
 	if (classyContainer) {
 		switch (type.id) {
-			default:
-			case "bar":
+			case "grouped-bar":
+				classyGroupedBarChart = new GroupedBarChart(
+					classyContainer,
+					Object.assign({}, type.options, {type: type.id}),
+					type.data
+				);
+				break;
+			case "simple-bar":
 				classyBarChart = new BarChart(
 					classyContainer,
 					Object.assign({}, type.options, {type: type.id}),
 					type.data
 				);
 
-				// classyBarNewChart.events.addEventListener("load", e => {
+				// classyBarChart.events.addEventListener("load", e => {
 				// 	console.log("Bar Chart - LOADED");
 				// }, false);
 
-				// classyBarNewChart.events.addEventListener("update", e => {
+				// classyBarChart.events.addEventListener("update", e => {
 				// 	console.log("Bar Chart - UPDATED");
 				// }, false);
 
-				// classyBarNewChart.events.addEventListener("data-change", e => {
+				// classyBarChart.events.addEventListener("data-change", e => {
 				// 	console.log("Bar Chart - DATACHANGE");
 				// }, false);
 
-				// classyBarNewChart.events.addEventListener("data-load", e => {
+				// classyBarChart.events.addEventListener("data-load", e => {
 				// 	console.log("Bar Chart - DATALOAD");
 				// }, false);
 
-				// classyBarNewChart.events.addEventListener("resize", e => {
+				// classyBarChart.events.addEventListener("resize", e => {
 				// 	console.log("Bar Chart - RESIZE");
 				// }, false);
 
@@ -652,6 +661,8 @@ chartTypes.forEach(type => {
 				setDemoActionsEventListener(type.id, type.data);
 
 				break;
+			default:
+				// console.log("DEFAULT", type);
 		}
 	}
 });

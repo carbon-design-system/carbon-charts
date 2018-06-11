@@ -6,7 +6,7 @@ import { BaseAxisChart } from "./base-axis-chart";
 import { PieChart } from "./pie-chart";
 import { DonutChart, DonutCenter } from "./donut-chart";
 import { BarChart } from "./bar-chart";
-// import { BarNewChart } from "./bar-new-chart";
+import { GroupedBarChart } from "./grouped-bar-chart";
 // import { ComboChart } from "./combo-chart";
 // import { Configuration } from "./configuration";
 // import { DoubleAxisLineChart } from "./double-axis-line-chart";
@@ -22,6 +22,7 @@ export {
 	DonutChart,
 	DonutCenter,
 	BarChart,
+	GroupedBarChart,
 	// BarNewChart,
 	// LineChart,
 	// DoubleAxisLineChart,
