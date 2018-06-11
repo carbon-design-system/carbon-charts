@@ -1,6 +1,6 @@
 import { colors } from "./colors";
 
-const generateRandomRatio = (num) => Math.max(0.2 * num, Math.random() * num);
+const generateRandomRatio = (num) => Math.max(0.2 * num, Math.floor(Math.random() * num));
 
 export const barOptions = {
 	xDomain: "Part number",

@@ -149,14 +149,14 @@ export class GroupedBarChart extends BarChart {
 			.enter().append("g")
 				.attr("transform", d => "translate(" + this.x(d[xDomain]) + ",0)")
 				.selectAll("rect")
-				.data(d => this.getLegendItemKeys().map(function(key) { return {key: key, value: d[key]}; }))
+				.data(d => this.getLegendItemKeys().map(function(key) { return {label: key, value: d[key]}; }))
 				.enter().append("rect")
 					.classed("bar", true)
-					.attr("x", d => this.x1(d.key))
+					.attr("x", d => this.x1(d.label))
 					.attr("y", d => this.y(d.value))
 					.attr("width", this.x1.bandwidth())
 					.attr("height", d => height - this.y(d.value))
-					.attr("fill", d => this.color(d.key));
+					.attr("fill", d => this.color(d.label));
 
 		// Hide the overlay
 		this.updateOverlay().hide();
