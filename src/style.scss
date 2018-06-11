@@ -1,8 +1,6 @@
 @import "~@peretz/matter/scss/_tools.scss";
 $default_transition: all .1s ease-out;
 
-@import "./styles-new";
-
 @mixin fonts() {
 	font-family: "IBM Plex Sans", "Helvetica Neue for IBM", "Helvetica Neue", Arial, sans-serif;
 }
@@ -281,6 +279,29 @@ $default_transition: all .1s ease-out;
 		transition: $default_transition;
 		&:hover {
 			cursor: pointer;
+		}
+	}
+}
+
+div.chart-axis {
+	svg.chart-svg {
+		g.y.axis {
+			path.domain {
+				stroke: none;
+			}
+		}
+
+		g.x.axis {
+			path.domain {
+				stroke: #959595;
+				stroke-width: 2;
+			}
+		}
+
+		g.x.grid, g.y.grid {
+			g.tick line {
+				stroke: rgb(236, 238, 239);
+			}
 		}
 	}
 }

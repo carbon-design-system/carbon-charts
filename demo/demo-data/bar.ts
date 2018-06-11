@@ -10,11 +10,11 @@ export const barOptions = {
 };
 
 export const barData = [];
-for (let i = 0; i < 10; i++) {
+for (let i = 1; i < 7; i++) {
 	barData.push({
 		"Part number": `773C-${ i * 2 }-L6EP-L22I-${ i * 8 }-L22I`,
-		"Qty": i * 10,
-		"More": i * 20,
-		"Sold": i * 0
+		"Qty": i * (Math.random() * 10),
+		"More": i * (Math.random() * 20),
+		"Sold": i * (Math.random() * 5)
 	});
 }

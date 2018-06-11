@@ -724,7 +724,7 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		// 	classyBarChart.setData(newData);
 
 		// 	break;
-		case "bar":
+		case "simple-bar":
 			const keys = ["Qty", "More", "Sold", "Restocking", "Misc"];
 			const removeAKey = Math.random() > 0.5;
 

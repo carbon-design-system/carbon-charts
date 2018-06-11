@@ -131,6 +131,18 @@ export namespace Tools {
 		return duplicateKeys;
 	}
 
+	export function removeArrayDuplicates(arr: any) {
+		const result = [];
+
+		arr.forEach(element => {
+			if (result.indexOf(element) === -1) {
+				result.push(element);
+			}
+		});
+
+		return result;
+	}
+
 	// ================================================================================
 	// D3 Extensions
 	// ================================================================================

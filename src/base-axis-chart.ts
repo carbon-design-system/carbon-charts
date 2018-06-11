@@ -17,7 +17,7 @@ export class BaseAxisChart extends BaseChart {
 		super.setSVG();
 
 		const chartSize = this.getChartSize();
-		this.container.classed(`chart-${this.options.type}`, true);
+		this.container.classed("chart-axis", true);
 		this.innerWrap.append("g")
 			.attr("class", "x grid");
 		this.innerWrap.append("g")
@@ -26,61 +26,22 @@ export class BaseAxisChart extends BaseChart {
 		return this.svg;
 	}
 
-	setData(data: any) {
-		const { selectors } = Configuration;
-		const innerWrapElement = this.holder.querySelector(selectors.INNERWRAP);
-		const initialDraw = innerWrapElement === null;
-		const newDataIsAPromise = Promise.resolve(data) === data;
-
-		// Dispatch the update event
-		this.events.dispatchEvent(new Event("data-change"));
-
-		if (initialDraw || newDataIsAPromise) {
-			this.updateOverlay().show();
+	getKeysFromData() {
+		const keys: any = {};
+		// Build out the keys array of objects to represent the legend items
+		// If yDomain does not exist & xDomain does
+		if (!this.options.yDomain && this.options.xDomain) {
+			this.data.forEach(entry => {
+				const entryLabel = entry[this.options.xDomain];
+				keys[entryLabel] = Configuration.legend.items.status.ACTIVE;
+			});
+		} else {
+			this.options.yDomain.forEach(item => {
+				keys[item] = Configuration.legend.items.status.ACTIVE;
+			});
 		}
 
-		Promise.resolve(data).then(value => {
-			// Dispatch the update event
-			this.events.dispatchEvent(new Event("data-load"));
-
-			// Process data
-			const keys: any = {};
-			this.data = this.dataProcesser(value);
-
-			// Build out the keys array of objects to represent the legend items
-			// If yDomain does not exist & xDomain does
-			if (!this.options.yDomain && this.options.xDomain) {
-				this.data.forEach(entry => {
-					const entryLabel = entry[this.options.xDomain];
-					keys[entryLabel] = Configuration.legend.items.status.ACTIVE;
-				});
-			} else {
-				this.options.yDomain.forEach(item => {
-					keys[item] = Configuration.legend.items.status.ACTIVE;
-				});
-			}
-
-			// Grab the old legend items, the keys from the current data
-			// Compare the two, if there are any differences (additions/removals)
-			// Completely remove the legend and render again
-			const oldLegendItems = this.getActiveLegendItems();
-			const keysArray = Object.keys(keys);
-			const { missing: removedItems, added: newItems } = Tools.arrayDifferences(oldLegendItems, keysArray);
-
-			// Update keys for legend use the latest data keys
-			this.options.keys = keys;
-
-			// Perform the draw or update chart
-			if (initialDraw) {
-				this.initialDraw();
-			} else {
-				if (removedItems.length > 0 || newItems.length > 0) {
-					this.addOrUpdateLegend();
-				}
-
-				this.update(value);
-			}
-		});
+		return keys;
 	}
 
 	initialDraw(data?: any) {
@@ -91,8 +52,7 @@ export class BaseAxisChart extends BaseChart {
 		this.setSVG();
 
 		// Set the color scale based on the keys present in the data
-		const keys = this.data.map(dataPoint => dataPoint.label);
-		this.setColorScale(keys);
+		this.setColorScale();
 
 		// Scale out the domains
 		this.setXScale();
@@ -172,8 +132,8 @@ export class BaseAxisChart extends BaseChart {
 		return computedChartSize;
 	}
 
-	setColorScale(keys: any) {
-		this.color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
+	setColorScale() {
+		this.color = d3.scaleOrdinal().range(this.options.colors).domain(this.getLegendItemKeys());
 	}
 
 	/**************************************

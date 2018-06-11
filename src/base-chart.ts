@@ -61,13 +61,10 @@ export class BaseChart {
 			this.events.dispatchEvent(new Event("data-load"));
 
 			// Process data
-			const keys: any = {};
 			this.data = this.dataProcesser(value);
+			const keys = this.getKeysFromData();
 
-			// Build out the keys array of objects to represent the legend items
-			this.data.forEach(entry => {
-				keys[entry.label] = Configuration.legend.items.status.ACTIVE;
-			});
+			console.log("KEYOOZ", keys, this.options.type);
 
 			// Grab the old legend items, the keys from the current data
 			// Compare the two, if there are any differences (additions/removals)
@@ -90,6 +87,17 @@ export class BaseChart {
 				this.update(value);
 			}
 		});
+	}
+
+	getKeysFromData() {
+		const keys = {};
+
+		// Build out the keys array of objects to represent the legend items
+		this.data.forEach(entry => {
+			keys[entry.label] = Configuration.legend.items.status.ACTIVE;
+		});
+
+		return keys;
 	}
 
 	getChartSize(container = this.container) {
