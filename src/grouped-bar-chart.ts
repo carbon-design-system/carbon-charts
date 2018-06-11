@@ -97,8 +97,8 @@ export class GroupedBarChart extends BarChart {
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
 
-		this.x = d3.scaleBand().rangeRound([0, width]).padding(0.05);
-		this.x1 = d3.scaleBand().padding(0.1);
+		this.x = d3.scaleBand().rangeRound([0, width]).padding(0.25);
+		this.x1 = d3.scaleBand().padding(0.2);
 
 		this.x.domain(this.groups);
 		this.x1.domain(this.options.yDomain).rangeRound([0, this.x.bandwidth()]);

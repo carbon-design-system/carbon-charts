@@ -184,12 +184,8 @@ export class PieChart extends BaseChart {
 			.enter()
 			.append("path")
 			.attr("d", this.arc)
-			.attr("fill", function(d, i) {
-				return this.color(d.data.label);
-			}.bind(this))
-			.attr("stroke", function(d, i) {
-				return this.color(d.data.label);
-			}.bind(this))
+			.attr("fill", d => this.color(d.data.label))
+			.attr("stroke", d => this.color(d.data.label))
 			.each(function(d) { this._current = d; });
 
 		// Draw the slice labels
