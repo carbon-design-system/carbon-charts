@@ -31,7 +31,7 @@ export class BaseAxisChart extends BaseChart {
 		// Build out the keys array of objects to represent the legend items
 		// If yDomain does not exist & xDomain does
 		if (!this.options.yDomain && this.options.xDomain) {
-			this.data.forEach(entry => {
+			this.displayData.forEach(entry => {
 				const entryLabel = entry[this.options.xDomain];
 				keys[entryLabel] = Configuration.legend.items.status.ACTIVE;
 			});
@@ -46,7 +46,7 @@ export class BaseAxisChart extends BaseChart {
 
 	initialDraw(data?: any) {
 		if (data) {
-			this.data = data;
+			this.displayData = data;
 		}
 
 		this.setSVG();
@@ -72,27 +72,31 @@ export class BaseAxisChart extends BaseChart {
 		this.addDataPointEventListener();
 	}
 
-	update(newData?: any) {
-		const oldData = this.data;
-		const activeLegendItems = this.getActiveLegendItems();
-		if (newData === undefined) {
-			// Get new data by filtering the data based off of the legend
-			newData = oldData.filter(dataPoint => {
-				// If this datapoint is active on the legend
-				const activeSeriesItemIndex = activeLegendItems.indexOf(dataPoint.label);
-
-				return activeSeriesItemIndex > -1;
-			});
-		}
-
-		this.data = newData;
+	update() {
+		const newDisplayData = this.updateData();
+		this.displayData = newDisplayData;
 
 		this.updateXandYGrid();
 		this.setXScale();
 		this.setXAxis();
 		this.setYScale();
 		this.setYAxis();
-		this.interpolateValues(newData);
+		this.interpolateValues(newDisplayData);
+	}
+
+	updateData() {
+		const oldData = this.data;
+		const activeLegendItems = this.getActiveLegendItems();
+
+		// Get new data by filtering the data based off of the legend
+		const newDisplayData = oldData.filter(dataPoint => {
+			// If this datapoint is active on the legend
+			const activeSeriesItemIndex = activeLegendItems.indexOf(dataPoint.label);
+
+			return activeSeriesItemIndex > -1;
+		});
+
+		return newDisplayData;
 	}
 
 	draw() {
@@ -146,7 +150,7 @@ export class BaseAxisChart extends BaseChart {
 		const width = chartSize.width - margins.left - margins.right;
 
 		this.x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
-		this.x.domain(this.data.map(d => d.label));
+		this.x.domain(this.displayData.map(d => d.label));
 	}
 
 	setXAxis(noAnimation?: boolean) {
@@ -185,7 +189,7 @@ export class BaseAxisChart extends BaseChart {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - margins.top - margins.bottom;
-		const yEnd = d3.max(this.data, (d: any) => d.value);
+		const yEnd = d3.max(this.displayData, (d: any) => d.value);
 
 		this.y = d3.scaleLinear().rangeRound([height, 0]);
 		this.y.domain([0, yEnd]);

@@ -6,15 +6,18 @@ import { local } from "d3";
 export class BaseChart {
 	static chartCount = 1;
 
-	//#region
 	id = "";
+
 	container: any;
 	holder: Element;
 	svg: any;
 	innerWrap: any;
-	resizeTimers = [];
+
 	options: any = Object.assign({}, Configuration.options.BASE);
+
 	data: any;
+	displayData: any;
+
 	color: any;
 	events: any;
 
@@ -62,9 +65,9 @@ export class BaseChart {
 
 			// Process data
 			this.data = this.dataProcesser(value);
-			const keys = this.getKeysFromData();
+			this.displayData = this.dataProcesser(value);
 
-			console.log("KEYOOZ", keys, this.options.type);
+			const keys = this.getKeysFromData();
 
 			// Grab the old legend items, the keys from the current data
 			// Compare the two, if there are any differences (additions/removals)
@@ -84,7 +87,7 @@ export class BaseChart {
 					this.addOrUpdateLegend();
 				}
 
-				this.update(value);
+				this.update();
 			}
 		});
 	}
@@ -330,6 +333,15 @@ export class BaseChart {
 		const legendItems = this.getLegendItems();
 
 		return Object.keys(legendItems);
+	}
+
+	getDisabledLegendItems() {
+		const legendItems = this.getLegendItems();
+		const legendItemKeys = Object.keys(legendItems);
+
+		return legendItemKeys.filter(itemKey => {
+			return legendItems[itemKey] === Configuration.legend.items.status.DISABLED;
+		});
 	}
 
 	getActiveLegendItems() {
