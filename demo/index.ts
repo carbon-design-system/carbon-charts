@@ -572,6 +572,9 @@ chartTypes.forEach(type => {
 					Object.assign({}, type.options, {type: type.id}),
 					type.data
 				);
+
+				setDemoActionsEventListener(type.id, type.data);
+
 				break;
 			case "simple-bar":
 				classyBarChart = new BarChart(
@@ -669,6 +672,9 @@ chartTypes.forEach(type => {
 
 const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 	let newData;
+
+	const removeAKey = Math.random() > 0.5;
+
 	// Function to be used to randomize a value
 	const randomizeValue = currentVal => Math.max(0.2 * currentVal, Math.floor(currentVal * Math.random() * (Math.random() * 5)));
 
@@ -724,9 +730,29 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		// 	classyBarChart.setData(newData);
 
 		// 	break;
+		case "grouped-bar":
+			newData = oldData.map(dataPoint => {
+				return Object.assign(
+					{},
+					dataPoint,
+					{
+						"Qty": randomizeValue(dataPoint.Qty),
+						"More": randomizeValue(dataPoint.More),
+						"Sold": randomizeValue(dataPoint.Sold)
+					}
+				);
+			});
+
+			if (removeAKey) {
+				const randomIndex = Math.random() * (newData.length - 1);
+				newData.splice(randomIndex, randomIndex);
+			}
+
+			classyGroupedBarChart.setData(newData);
+
+			break;
 		case "simple-bar":
 			const keys = ["Qty", "More", "Sold", "Restocking", "Misc"];
-			const removeAKey = Math.random() > 0.5;
 
 			newData = oldData.map(dataPoint => Object.assign({}, dataPoint, { value: randomizeValue(dataPoint.value)}));
 

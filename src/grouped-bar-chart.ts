@@ -27,52 +27,78 @@ export class GroupedBarChart extends BarChart {
 		this.groups = Tools.removeArrayDuplicates(groups);
 	}
 
-	updateElements(rect: any, noAnimation?: boolean) {
+	updateElements(g: any, rect: any, noAnimation?: boolean) {
+		const { xDomain } = this.options;
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - margins.top - margins.bottom;
 
 		const t = d3.transition().duration(noAnimation ? 0 : 750);
 
+		// Update existing groups
+		g.transition()
+			.duration(750)
+			.attr("transform", d => "translate(" + this.x(d[xDomain]) + ",0)");
+
 		// Update existing bars
 		rect
 			.transition(t)
-			.attr("class", "bar")
-			.attr("x", (d: any) => this.x(d.label))
-			.attr("y", (d: any, i) => this.y(d.value))
-			.attr("width", this.x.bandwidth())
-			.attr("height", (d: any) => height - this.y(d.value))
-			.attr("fill", (d: any) => this.color(d.label).toString());
+			.attr("x", d => this.x1(d.label))
+			.attr("y", d => this.y(d.value))
+			.attr("width", this.x1.bandwidth())
+			.attr("height", d => height - this.y(d.value))
+			.attr("fill", d => this.color(d.label));
 	}
 
 	interpolateValues(newData: any) {
+		const { xDomain } = this.options;
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - margins.top - margins.bottom;
 
 		// Apply new data to the bars
-		const rect = this.innerWrap
-			.selectAll("rect.bar")
+		const g = this.innerWrap
+			.select("g.bars")
+			.selectAll("g")
 			.data(newData);
 
-		this.updateElements(rect, false);
+		const rect = g.selectAll("rect.bar")
+			.data(d => this.getLegendItemKeys().map(function(key) { return {label: key, value: d[key]}; }));
+
+		this.updateElements(g, rect, false);
+
+		console.log("NUYU DATA", newData);
+
+		// Add groups that need to be added now
+		const groupsAdded: any = [];
+		g.enter().append("g")
+				.style("opacity", 0)
+				.transition()
+				.duration(750)
+				.style("opacity", 1)
+				.attr("transform", d => "translate(" + this.x(d[xDomain]) + ",0)")
+				.each(function(d) { groupsAdded.push(this); });
 
 		// Add bars that need to be added now
-		rect.enter()
-			.append("rect")
-			.attr("class", "bar")
-			.attr("x", (d: any) => this.x(d.label))
-			.attr("y", (d: any, i) => this.y(d.value))
-			.attr("width", this.x.bandwidth())
-			.attr("height", (d: any) => height - this.y(d.value))
-			.attr("opacity", 0)
-			.transition()
-			.duration(750)
-			.attr("opacity", 1)
-			.attr("fill", (d: any) => this.color(d.label).toString());
+		groupsAdded.forEach(groupAdded => {
+			d3.select(groupAdded)
+				.selectAll("rect.bar")
+				.data(d => this.getLegendItemKeys().map(function(key) { return {label: key, value: d[key]}; }))
+				.enter().append("rect")
+					.each(function(d) { console.log("ENTERED"); })
+					.classed("bar", true)
+					.attr("x", d => this.x1(d.label))
+					.attr("y", d => this.y(d.value))
+					.attr("height", d => height - this.y(d.value))
+					.transition()
+					.duration(750)
+					.attr("width", this.x1.bandwidth())
+					.attr("fill", d => this.color(d.label));
+		});
 
-		// Remove bars that are no longer needed
-		rect.exit()
+		// Remove groups that are no longer needed
+		g.exit()
+			.each(function(d) { console.log("EXITOONG"); })
 			.transition()
 			.duration(750)
 			.style("opacity", 0)
@@ -102,8 +128,6 @@ export class GroupedBarChart extends BarChart {
 
 		this.x.domain(this.groups);
 		this.x1.domain(this.options.yDomain).rangeRound([0, this.x.bandwidth()]);
-
-		console.log(this.data);
 	}
 
 	setYScale() {
@@ -130,25 +154,14 @@ export class GroupedBarChart extends BarChart {
 
 		const g = this.innerWrap
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-		// g.selectAll(".bar")
-		// 	.data(data)
-		// 	.enter()
-		// 	.append("rect")
-		// 	.attr("class", "bar")
-		// 	.attr("x", (d: any) => this.x(d.label))
-		// 	.attr("y", (d: any, i) => this.y(d.value))
-		// 	.attr("width", this.x.bandwidth())
-		// 	.attr("height", (d: any) => height - this.y(d.value))
-		// 	.attr("fill", (d: any) => this.color(d.label).toString());
-
+		console.log("INITIAL DATA", data);
 		g.append("g")
 			.classed("bars", true)
 			.selectAll("g")
 			.data(data)
 			.enter().append("g")
 				.attr("transform", d => "translate(" + this.x(d[xDomain]) + ",0)")
-				.selectAll("rect")
+				.selectAll("rect.bar")
 				.data(d => this.getLegendItemKeys().map(function(key) { return {label: key, value: d[key]}; }))
 				.enter().append("rect")
 					.classed("bar", true)
