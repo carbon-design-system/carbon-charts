@@ -45,13 +45,20 @@ export class GroupedBarChart extends BarChart {
 		this.groups = Tools.removeArrayDuplicates(groups);
 	}
 
-	updateElements(g: any, rect: any, noAnimation?: boolean) {
+	updateElements(animate?: boolean, g?: any, rect?: any) {
 		const { xDomain } = this.options;
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - margins.top - margins.bottom;
 
-		const t = d3.transition().duration(noAnimation ? 0 : 750);
+		const t = d3.transition().duration(animate ? 750 : 0);
+
+		if (!g) {
+			g = this.innerWrap.selectAll("g.bars g");
+		}
+		if (!rect) {
+			rect = this.innerWrap.selectAll("rect.bar");
+		}
 
 		// Update existing groups
 		g.transition(t)
@@ -82,7 +89,7 @@ export class GroupedBarChart extends BarChart {
 		const rect = g.selectAll("rect.bar")
 			.data(d => this.getActiveLegendItems().map(function(key) { return {label: key, value: d[key]}; }));
 
-		this.updateElements(g, rect, false);
+		this.updateElements(true, g, rect);
 
 		rect.enter()
 				.append("rect")
@@ -217,55 +224,6 @@ export class GroupedBarChart extends BarChart {
 
 		// Dispatch the load event
 		this.events.dispatchEvent(new Event("load"));
-	}
-
-	resizeChart() {
-		const { pie: pieConfigs } = Configuration;
-
-		const actualChartSize: any = this.getChartSize(this.container);
-		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
-		const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
-		const radius: number = dimensionToUseForScale / 2;
-
-		// Resize the SVG
-		d3.select(this.holder).select("svg")
-				.attr("width", `${dimensionToUseForScale}px`)
-				.attr("height", `${dimensionToUseForScale}px`);
-
-		this.updateXandYGrid(true);
-		// Scale out the domains
-		this.setXScale(true);
-		this.setYScale();
-
-		// Set the x & y axis as well as their labels
-		this.setXAxis(true);
-		this.setYAxis(true);
-
-		// Apply new data to the bars
-		const g = this.innerWrap.selectAll("g.bars g");
-		const rect = this.innerWrap.selectAll("rect.bar");
-		this.updateElements(g, rect, true);
-
-		// this.svg
-		// 	.style("transform", `translate(${radius}px,${radius}px)`);
-
-		// // Resize the arc
-		// const marginedRadius = radius - (pieConfigs.label.margin * scaleRatio);
-		// this.arc = d3.arc()
-		// 	.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
-		// 	.outerRadius(marginedRadius);
-
-		// this.svg.selectAll("path")
-		// 	.attr("d", this.arc);
-
-		// this.svg
-		// 	.selectAll("text.chart-label")
-		// 	.attr("transform", (d) => {
-		// 		return this.deriveTransformString(d, radius);
-		// 	});
-
-		// Reposition the legend
-		this.positionLegend();
 	}
 }
 

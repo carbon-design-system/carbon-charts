@@ -14,13 +14,16 @@ export class BarChart extends BaseAxisChart {
 		this.options.type = "bar";
 	}
 
-	updateElements(rect: any, noAnimation?: boolean) {
+	updateElements(animate: boolean, rect?: any) {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - margins.top - margins.bottom;
 
-		const t = d3.transition().duration(noAnimation ? 0 : 750);
+		const t = d3.transition().duration(animate ? 750 : 0);
 
+		if (!rect) {
+			rect = this.innerWrap.selectAll("rect.bar");
+		}
 		// Update existing bars
 		rect
 			.transition(t)
@@ -42,7 +45,7 @@ export class BarChart extends BaseAxisChart {
 			.selectAll("rect.bar")
 			.data(newData);
 
-		this.updateElements(rect, false);
+		this.updateElements(true, rect);
 
 		// Add bars that need to be added now
 		rect.enter()
@@ -130,8 +133,7 @@ export class BarChart extends BaseAxisChart {
 		this.setYAxis(true);
 
 		// Apply new data to the bars
-		const rect = this.innerWrap.selectAll("rect.bar");
-		this.updateElements(rect, true);
+		this.updateElements(false);
 
 		// Reposition the legend
 		this.positionLegend();
