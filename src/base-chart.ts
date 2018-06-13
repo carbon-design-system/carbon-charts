@@ -720,4 +720,8 @@ export class BaseChart {
 			}
 		};
 	}
+
+	getBBox(selector: any) {
+		return this.innerWrap.select(selector).node().getBBox();
+	}
 }

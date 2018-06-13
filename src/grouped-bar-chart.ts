@@ -49,7 +49,7 @@ export class GroupedBarChart extends BarChart {
 		const { xDomain } = this.options;
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
-		const height = chartSize.height - margins.top - margins.bottom;
+		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		const t = d3.transition().duration(animate ? 750 : 0);
 
@@ -78,7 +78,7 @@ export class GroupedBarChart extends BarChart {
 		const { xDomain } = this.options;
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
-		const height = chartSize.height - margins.top - margins.bottom;
+		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		// Apply new data to the bars
 		const g = this.innerWrap
@@ -105,7 +105,6 @@ export class GroupedBarChart extends BarChart {
 				.attr("fill", d => this.color(d.label));
 
 		rect.exit()
-			.each(function(d) { console.log("EXITOONG"); })
 			.transition()
 			.duration(750)
 			.style("opacity", 0)
@@ -177,7 +176,7 @@ export class GroupedBarChart extends BarChart {
 	setYScale() {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
-		const height = chartSize.height - margins.top - margins.bottom;
+		const height = chartSize.height - this.getBBox(".x.axis").height;
 		const yEnd = d3.max(this.displayData, d => d3.max(this.getLegendItemKeys(), key => d[key]));
 
 		this.y = d3.scaleLinear().rangeRound([height, 0]);
@@ -193,7 +192,7 @@ export class GroupedBarChart extends BarChart {
 		const margin = {top: 0, right: -40, bottom: 50, left: 40};
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margin.left - margin.right;
-		const height = chartSize.height - margin.top - margin.bottom;
+		const height = chartSize.height - this.getBBox(".x.axis").height;
 		const { xDomain } = this.options;
 
 		const g = this.innerWrap
@@ -222,12 +221,3 @@ export class GroupedBarChart extends BarChart {
 		this.events.dispatchEvent(new Event("load"));
 	}
 }
-
-// Helper functions
-const cleanGrid = g => {
-	g.selectAll("line")
-		.attr("stroke", Configuration.grid.strokeColor);
-	g.selectAll("text").style("display", "none").remove();
-	g.select(".domain").style("stroke", "none");
-	g.select(".tick").remove();
-};

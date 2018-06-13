@@ -55,11 +55,10 @@ export class BaseAxisChart extends BaseChart {
 		this.setColorScale();
 
 		// Scale out the domains
-		this.setXScale();
-		this.setYScale();
-
 		// Set the x & y axis as well as their labels
+		this.setXScale();
 		this.setXAxis();
+		this.setYScale();
 		this.setYAxis();
 
 		// Draw the x & y grid
@@ -157,7 +156,7 @@ export class BaseAxisChart extends BaseChart {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - margins.top - margins.bottom;
-		const t = d3.transition().duration(noAnimation ? 0 : 0);
+		const t = d3.transition().duration(noAnimation ? 0 : 750);
 
 		const xAxis = d3.axisBottom(this.x).tickSize(0);
 		let xAxisRef = this.svg.select("g.x.axis");
@@ -175,22 +174,39 @@ export class BaseAxisChart extends BaseChart {
 				.call(xAxis);
 		}
 
-		// Update the position of the x-axis and all the pieces of text inside it
-		xAxisRef.attr("transform", "translate(0," + height + ")");
-		xAxisRef.selectAll("text")
-			// .each(function(d) { console.log("text", this); })
+		// Update the position of the pieces of text inside x-axis
+		xAxisRef.selectAll("g.tick text")
 			.attr("y", Configuration.axis.magicY1)
 			.attr("x", Configuration.axis.magicX1)
 			.attr("dy", ".35em")
 			.attr("transform", `rotate(${Configuration.axis.xAxisAngle})`)
 			.style("text-anchor", "end")
 			.call(text => this.wrapTick(text));
+
+		// get the tickHeight after the ticks have been wrapped
+		const tickHeight = this.getLargestTickHeight(xAxisRef.selectAll(".tick")) + Configuration.axis.tick.heightAddition;
+		xAxisRef.select(".domain")
+			.attr("stroke", Configuration.axis.domain.color)
+			.attr("fill", Configuration.axis.domain.color)
+			.attr("stroke-width", Configuration.axis.domain.strokeWidth);
+
+		if (this.innerWrap.select(".axis-label.x").nodes().length === 0) {
+			xAxisRef.append("text")
+			.attr("class", "x axis-label")
+			.attr("text-anchor", "middle")
+			.attr("transform", "translate(" + (xAxisRef.node().getBBox().width / 2) + "," + tickHeight + ")")
+			.text(this.options.xDomain);
+		}
+
+		// get the yHeight after the height of the axis has settled
+		const yHeight = this.getChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		xAxisRef.attr("transform", `translate(0, ${yHeight})`);
 	}
 
 	setYScale() {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
-		const height = chartSize.height - margins.top - margins.bottom;
+		const height = chartSize.height - margins.top - margins.bottom - this.innerWrap.select(".x.axis").node().getBBox().height;
 		const yEnd = d3.max(this.displayData, (d: any) => d.value);
 
 		this.y = d3.scaleLinear().rangeRound([height, 0]);
@@ -215,7 +231,7 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	drawXGrid() {
-		const yHeight = this.getChartSize().height - this.innerWrap.select(".x.axis").node().getBBox().height;
+		const yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
 		const xGrid = d3.axisBottom(this.x)
 			.tickSizeInner(-yHeight)
 			.tickSizeOuter(0);
@@ -224,10 +240,11 @@ export class BaseAxisChart extends BaseChart {
 			.attr("transform", `translate(0, ${yHeight})`)
 			.call(xGrid);
 
-		cleanGrid(g);
+		this.cleanGrid(g);
 	}
 
 	drawYGrid() {
+		const yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
 		const yGrid = d3.axisLeft(this.y)
 			.tickSizeInner(-(this.getChartSize().width))
 			.tickSizeOuter(0)
@@ -236,7 +253,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("transform", `translate(0, 0)`)
 			.call(yGrid);
 
-		cleanGrid(g);
+		this.cleanGrid(g);
 	}
 
 	updateXandYGrid(noAnimation?: boolean) {
@@ -247,7 +264,7 @@ export class BaseAxisChart extends BaseChart {
 
 			// Update X Grid
 			const chartSize = this.getChartSize();
-			const yHeight = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
+			const yHeight = chartSize.height - this.getBBox(".x.axis").height;
 			const xGrid = d3.axisBottom(this.x)
 				.tickSizeInner(-yHeight)
 				.tickSizeOuter(0);
@@ -257,7 +274,7 @@ export class BaseAxisChart extends BaseChart {
 				.attr("transform", `translate(0, ${yHeight})`)
 				.call(xGrid);
 
-			cleanGrid(g_xGrid);
+			this.cleanGrid(g_xGrid);
 
 			// Update Y Grid
 			const yGrid = d3.axisLeft(this.y)
@@ -270,8 +287,16 @@ export class BaseAxisChart extends BaseChart {
 				.attr("transform", `translate(0, 0)`)
 				.call(yGrid);
 
-			cleanGrid(g_yGrid);
+			this.cleanGrid(g_yGrid);
 		}, 0);
+	}
+
+	cleanGrid (g) {
+		g.selectAll("line")
+			.attr("stroke", Configuration.grid.strokeColor);
+		g.selectAll("text").style("display", "none").remove();
+		g.select(".domain").style("stroke", "none");
+		g.select(".tick").remove();
 	}
 
 	// TODO - Refactor
@@ -279,7 +304,7 @@ export class BaseAxisChart extends BaseChart {
 		const self = this;
 		const letNum = Configuration.axis.tick.maxLetNum;
 		ticks.each(function(t) {
-			if (t.length > letNum / 2) {
+			if (t && t.length > letNum / 2) {
 				const tick = d3.select(this);
 				const y = tick.attr("y");
 				tick.text("");
@@ -299,6 +324,24 @@ export class BaseAxisChart extends BaseChart {
 				}
 			}
 		});
+	}
+
+	// TODO - Refactor
+	getLargestTickHeight(ticks) {
+		let largestHeight = 0;
+		ticks.each(function() {
+			let tickLength = 0;
+			try {
+				tickLength = this.getBBox().height;
+			} catch (e) {
+				console.log(e);
+			}
+			if (tickLength > largestHeight) {
+				largestHeight = tickLength;
+			}
+
+		});
+		return largestHeight;
 	}
 
 	/**************************************
@@ -326,12 +369,3 @@ export class BaseAxisChart extends BaseChart {
 			});
 	}
 }
-
-// Helper functions
-const cleanGrid = g => {
-	g.selectAll("line")
-		.attr("stroke", Configuration.grid.strokeColor);
-	g.selectAll("text").style("display", "none").remove();
-	g.select(".domain").style("stroke", "none");
-	g.select(".tick").remove();
-};

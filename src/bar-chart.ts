@@ -17,7 +17,7 @@ export class BarChart extends BaseAxisChart {
 	updateElements(animate: boolean, rect?: any) {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
-		const height = chartSize.height - margins.top - margins.bottom;
+		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		const t = d3.transition().duration(animate ? 750 : 0);
 
@@ -38,7 +38,7 @@ export class BarChart extends BaseAxisChart {
 	interpolateValues(newData: any) {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
-		const height = chartSize.height - margins.top - margins.bottom;
+		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		// Apply new data to the bars
 		const rect = this.innerWrap
@@ -87,7 +87,7 @@ export class BarChart extends BaseAxisChart {
 		const margin = {top: 0, right: -40, bottom: 50, left: 40};
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margin.left - margin.right;
-		const height = chartSize.height - margin.top - margin.bottom;
+		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		const g = this.innerWrap
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
