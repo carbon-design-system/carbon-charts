@@ -3,15 +3,24 @@ import * as d3 from "d3";
 import { BaseAxisChart } from "./base-axis-chart";
 import { Configuration } from "./configuration";
 
+import PatternsService from "./services/patterns";
+
 export class BarChart extends BaseAxisChart {
 	x: any;
 	y: any;
-	color: any;
+	colorScale: any;
 
 	constructor(holder: Element, options?: any, data?: any) {
 		super(holder, options, data);
 
 		this.options.type = "bar";
+
+		this.patternsService = new PatternsService();
+		this.patternsService.addPatternSVGs();
+
+		this.patternScale = d3.scaleOrdinal()
+			.range(this.patternsService.getFillValues())
+			.domain(this.getLegendItemKeys());
 	}
 
 	updateElements(animate: boolean, rect?: any) {
@@ -32,7 +41,7 @@ export class BarChart extends BaseAxisChart {
 			.attr("y", (d: any, i) => this.y(d.value))
 			.attr("width", this.x.bandwidth())
 			.attr("height", (d: any) => height - this.y(d.value))
-			.attr("fill", (d: any) => this.color(d.label).toString());
+			.attr("fill", (d: any) => this.getFillScale()(d.label).toString());
 	}
 
 	interpolateValues(newData: any) {
@@ -59,7 +68,7 @@ export class BarChart extends BaseAxisChart {
 			.transition()
 			.duration(750)
 			.attr("opacity", 1)
-			.attr("fill", (d: any) => this.color(d.label).toString());
+			.attr("fill", (d: any) => this.getFillScale()(d.label).toString());
 
 		// Remove bars that are no longer needed
 		rect.exit()
@@ -86,13 +95,13 @@ export class BarChart extends BaseAxisChart {
 
 		const margin = {top: 0, right: -40, bottom: 50, left: 40};
 		const chartSize = this.getChartSize();
-		const width = chartSize.width - margin.left - margin.right;
 		const height = chartSize.height - this.getBBox(".x.axis").height;
+		const fillScale = this.getFillScale();
 
 		const g = this.innerWrap
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-		g.selectAll(".bar")
+		const addedBars = g.selectAll(".bar")
 			.data(data)
 			.enter()
 			.append("rect")
@@ -101,7 +110,12 @@ export class BarChart extends BaseAxisChart {
 			.attr("y", (d: any, i) => this.y(d.value))
 			.attr("width", this.x.bandwidth())
 			.attr("height", (d: any) => height - this.y(d.value))
-			.attr("fill", (d: any) => this.color(d.label).toString());
+			.attr("fill", (d: any) => fillScale(d.label).toString());
+
+		if (this.options.accessibility) {
+			addedBars.attr("stroke", "black")
+				.attr("stroke-width", 4);
+		}
 
 		// Hide the overlay
 		this.updateOverlay().hide();

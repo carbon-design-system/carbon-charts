@@ -71,7 +71,7 @@ export class GroupedBarChart extends BarChart {
 			.attr("y", d => this.y(d.value))
 			.attr("width", this.x1.bandwidth())
 			.attr("height", d => height - this.y(d.value))
-			.attr("fill", d => this.color(d.label));
+			.attr("fill", d => this.colorScale(d.label));
 	}
 
 	interpolateValues(newData: any) {
@@ -102,7 +102,7 @@ export class GroupedBarChart extends BarChart {
 				.style("opacity", 1)
 				.attr("x", d => this.x1(d.label))
 				.attr("width", this.x1.bandwidth())
-				.attr("fill", d => this.color(d.label));
+				.attr("fill", d => this.colorScale(d.label));
 
 		rect.exit()
 			.transition()
@@ -135,7 +135,7 @@ export class GroupedBarChart extends BarChart {
 				.transition()
 				.duration(750)
 				.attr("width", this.x1.bandwidth())
-				.attr("fill", d => this.color(d.label));
+				.attr("fill", d => this.colorScale(d.label));
 		});
 
 		// Remove groups that are no longer needed
@@ -212,7 +212,7 @@ export class GroupedBarChart extends BarChart {
 					.attr("y", d => this.y(d.value))
 					.attr("width", this.x1.bandwidth())
 					.attr("height", d => height - this.y(d.value))
-					.attr("fill", d => this.color(d.label));
+					.attr("fill", d => this.colorScale(d.label));
 
 		// Hide the overlay
 		this.updateOverlay().hide();

@@ -9,7 +9,7 @@ export class PieChart extends BaseChart {
 	path: any;
 
 	// Used to assign colors to each slice by their label
-	color: any;
+	colorScale: any;
 
 	constructor(holder: Element, options?: any, data?: any, type: string = "pie") {
 		super(holder, options, data);
@@ -17,7 +17,7 @@ export class PieChart extends BaseChart {
 		this.options.type = type;
 
 		// Assign colors to each slice using their label
-		this.color = d3.scaleOrdinal(this.options.colors);
+		this.colorScale = d3.scaleOrdinal(this.options.colors);
 	}
 
 	// Sort data by value (descending)
@@ -76,8 +76,8 @@ export class PieChart extends BaseChart {
 		path
 			.transition()
 			.duration(750)
-			.attr("fill", (d, i) => this.color(d.data.label))
-			.attr("stroke", (d, i) => this.color(d.data.label))
+			.attr("fill", (d, i) => this.colorScale(d.data.label))
+			.attr("stroke", (d, i) => this.colorScale(d.data.label))
 			.attrTween("d", function (a) {
 				return arcTween.bind(this)(a, arc);
 			});
@@ -85,8 +85,8 @@ export class PieChart extends BaseChart {
 		path.enter()
 			.append("path")
 			.attr("d", arc)
-			.attr("fill", (d, i) => this.color(d.data.label))
-			.attr("stroke", (d, i) => this.color(d.data.label))
+			.attr("fill", (d, i) => this.colorScale(d.data.label))
+			.attr("stroke", (d, i) => this.colorScale(d.data.label))
 			.style("opacity", 0)
 			.transition()
 			.duration(750)
@@ -155,7 +155,7 @@ export class PieChart extends BaseChart {
 
 		// Assign a color to each of the slice/legend labels
 		const legendItems = this.getLegendItems();
-		this.color.domain(Object.keys(legendItems));
+		this.colorScale.domain(Object.keys(legendItems));
 
 		d3.select(this.holder).select("svg")
 			.attr("width", `${diameter}px`)
@@ -184,8 +184,8 @@ export class PieChart extends BaseChart {
 			.enter()
 			.append("path")
 			.attr("d", this.arc)
-			.attr("fill", d => this.color(d.data.label))
-			.attr("stroke", d => this.color(d.data.label))
+			.attr("fill", d => this.colorScale(d.data.label))
+			.attr("stroke", d => this.colorScale(d.data.label))
 			.each(function(d) { this._current = d; });
 
 		// Draw the slice labels
@@ -236,7 +236,7 @@ export class PieChart extends BaseChart {
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
 			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px")
-			.style("border-color", this.color(d.data.label));
+			.style("border-color", this.colorScale(d.data.label));
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				this.hideTooltip();
@@ -289,7 +289,7 @@ export class PieChart extends BaseChart {
 				sliceElement
 					.attr("stroke-width", Configuration.pie.mouseover.strokeWidth)
 					.attr("stroke-opacity", Configuration.pie.mouseover.strokeOpacity)
-					.attr("stroke", self.color(d.data.label));
+					.attr("stroke", self.colorScale(d.data.label));
 			})
 			.on("mouseout", function(d) {
 				d3.select(this).attr("stroke", "");
@@ -344,7 +344,7 @@ export class PieChart extends BaseChart {
 
 		legend.append("div")
 			.attr("class", "legend-circle")
-			.style("background-color", (d, i) => this.color(d));
+			.style("background-color", (d, i) => this.colorScale(d));
 
 		legend.append("text")
 			.text(d => d);

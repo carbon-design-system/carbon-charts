@@ -300,10 +300,19 @@ const simpleBarData = [
 	{
 		label: "Misc",
 		value: 16932
+	},
+	{
+		label: "Qty322",
+		value: 65000
+	},
+	{
+		label: "Mor213e",
+		value: 29123,
 	}
 ];
 
 const simpleBarOptions = {
+	accessibility: true,
 	xDomain: "label",
 	yDomain: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	yTicks: 5,

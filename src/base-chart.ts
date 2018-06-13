@@ -8,6 +8,7 @@ export class BaseChart {
 
 	id = "";
 
+	// Chart element references
 	container: any;
 	holder: Element;
 	svg: any;
@@ -15,13 +16,17 @@ export class BaseChart {
 
 	options: any = Object.assign({}, Configuration.options.BASE);
 
+	// Data
 	data: any;
 	displayData: any;
 
-	color: any;
-	events: any;
-
+	// Fill scales & fill related objects
+	patternScale: any;
+	colorScale: any;
 	patternsService: PatternsService;
+
+	// Event target
+	events: any;
 
 	constructor(holder: Element, options?: any, data?: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
@@ -45,9 +50,6 @@ export class BaseChart {
 		if (data) {
 			this.setData(data);
 		}
-
-		this.patternsService = new PatternsService();
-		this.patternsService.addPatternSVGs();
 	}
 
 
@@ -407,7 +409,7 @@ export class BaseChart {
 		legendEnter.select("div")
 			.merge(legendItems.selectAll("div"))
 			.style("background-color", (d, i) => {
-				return d.value === Configuration.legend.items.status.ACTIVE ? this.color(d.key) : "white";
+				return d.value === Configuration.legend.items.status.ACTIVE ? this.colorScale(d.key) : "white";
 			});
 
 		// Add hover effect for legend item circles
@@ -664,7 +666,7 @@ export class BaseChart {
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
 			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px")
-			.style("border-color", this.color(d.label));
+			.style("border-color", this.colorScale(d.label));
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				this.hideTooltip();
@@ -697,6 +699,10 @@ export class BaseChart {
 		}
 
 		this.addTooltipEventListeners(tooltip);
+	}
+
+	getFillScale() {
+		return this.patternScale;
 	}
 
 	// ================================================================================

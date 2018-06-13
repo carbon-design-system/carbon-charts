@@ -136,7 +136,7 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	setColorScale() {
-		this.color = d3.scaleOrdinal().range(this.options.colors).domain(this.getLegendItemKeys());
+		this.colorScale = d3.scaleOrdinal().range(this.options.colors).domain(this.getLegendItemKeys());
 	}
 
 	/**************************************
@@ -354,7 +354,7 @@ export class BaseAxisChart extends BaseChart {
 			.on("mouseover", function(d) {
 				d3.select(this)
 					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
-					.attr("stroke", self.color(d.label))
+					.attr("stroke", self.colorScale(d.label))
 					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
 			})
 			.on("mouseout", function() {

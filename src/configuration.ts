@@ -49,10 +49,12 @@ export namespace Configuration {
 			opacity: 1,
 			circle: {
 				fill: "white"
-			}
+			},
+			outline: "grey"
 		},
 		reduceOpacity: {
-			opacity: 0.25
+			opacity: 0.25,
+			outline: "grey"
 		},
 		widthBreak: 600,
 		marginForLegendTop: 40,
@@ -91,7 +93,7 @@ export namespace Configuration {
 
 	export const bars = {
 		mouseover: {
-			strokeWidth: 6,
+			strokeWidth: 4,
 			strokeOpacity: 0.5
 		},
 		mouseout: {

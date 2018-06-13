@@ -11,31 +11,63 @@ export default class PatternsService {
 		this.setDiv();
 	}
 
+	/**
+	 * Sets the container div for pattern SVGs in DOM
+	 *
+	 * @memberof PatternsService
+	 */
 	setDiv() {
-		const divExists = document.getElementById(selectors.PATTERNS_CONTAINER);
-		if (!divExists) {
+		const containerDiv = document.getElementById(selectors.PATTERNS_CONTAINER);
+		if (!containerDiv) {
 			const div = document.createElement("div");
 			div.id = selectors.PATTERNS_CONTAINER;
 
-			document.body.appendChild(div);
-
-			this.container = div;
+			const mountedDiv = document.body.appendChild(div);
+			this.container = mountedDiv;
+		} else {
+			this.container = containerDiv;
 		}
 	}
 
+	/**
+	 * Adds all the pattern SVGs to the container div, applying a unique ID to each one
+	 *
+	 * @memberof PatternsService
+	 */
 	addPatternSVGs() {
 		PATTERN_SVGS.forEach((patternSVG, i) => {
+			const index = i + 1;
+
 			const svgContainer = document.createElement("div");
-			svgContainer.id = `peretz-charts-pattern-container-${i}`;
+			svgContainer.id = `peretz-charts-pattern-container-${index}`;
 			svgContainer.innerHTML = removeComments(patternSVG);
 
 			const mountedSVG = svgContainer.querySelector("svg");
-			mountedSVG.id = `peretz-charts-pattern-${i}-svg`;
+			mountedSVG.id = `peretz-charts-pattern-${index}-svg`;
 
-			mountedSVG.querySelector("pattern").id = `peretz-charts-pattern-${i}`;
+			const patternElement = mountedSVG.querySelector("pattern");
+			patternElement.id = `peretz-charts-pattern-${index}`;
+
+			// Update pattern widths & heights
+			patternElement.setAttribute("width", "20");
+			patternElement.setAttribute("height", "20");
+
+			if (index === 2 || index === 4) {
+				patternElement.setAttribute("width", "30");
+				patternElement.setAttribute("height", "30");
+			}
+
+			if (index === 5 || index === 1) {
+				patternElement.setAttribute("width", "40");
+				patternElement.setAttribute("height", "40");
+			}
 
 			this.container.appendChild(svgContainer);
 		});
+	}
+
+	getFillValues() {
+		return PATTERN_SVGS.map((patternSVG, i) => `url(#peretz-charts-pattern-${i + 1})`);
 	}
 }
 
