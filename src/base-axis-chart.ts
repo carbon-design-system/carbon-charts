@@ -154,10 +154,10 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	setXAxis(noAnimation?: boolean) {
-		const margin = {top: 0, right: -40, bottom: 50, left: 40};
+		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
-		const height = chartSize.height - margin.top - margin.bottom;
-		const t = d3.transition().duration(noAnimation ? 0 : 750);
+		const height = chartSize.height - margins.top - margins.bottom;
+		const t = d3.transition().duration(noAnimation ? 0 : 0);
 
 		const xAxis = d3.axisBottom(this.x).tickSize(0);
 		let xAxisRef = this.svg.select("g.x.axis");
@@ -165,7 +165,7 @@ export class BaseAxisChart extends BaseChart {
 		// If the <g class="x axis"> exists in the chart SVG, just update it
 		if (xAxisRef.nodes().length > 0) {
 			xAxisRef = this.svg.select("g.x.axis")
-				.transition(t)
+				// .transition(t)
 				.attr("transform", "translate(0," + height + ")")
 				// Being cast to any because d3 does not offer appropriate typings for the .call() function
 				.call(d3.axisBottom(this.x).tickSize(0) as any);
@@ -178,11 +178,13 @@ export class BaseAxisChart extends BaseChart {
 		// Update the position of the x-axis and all the pieces of text inside it
 		xAxisRef.attr("transform", "translate(0," + height + ")");
 		xAxisRef.selectAll("text")
+			// .each(function(d) { console.log("text", this); })
 			.attr("y", Configuration.axis.magicY1)
 			.attr("x", Configuration.axis.magicX1)
 			.attr("dy", ".35em")
 			.attr("transform", `rotate(${Configuration.axis.xAxisAngle})`)
-			.style("text-anchor", "end");
+			.style("text-anchor", "end")
+			.call(text => this.wrapTick(text));
 	}
 
 	setYScale() {
@@ -217,6 +219,7 @@ export class BaseAxisChart extends BaseChart {
 		const xGrid = d3.axisBottom(this.x)
 			.tickSizeInner(-yHeight)
 			.tickSizeOuter(0);
+
 		const g = this.innerWrap.select(".x.grid")
 			.attr("transform", `translate(0, ${yHeight})`)
 			.call(xGrid);
@@ -269,6 +272,33 @@ export class BaseAxisChart extends BaseChart {
 
 			cleanGrid(g_yGrid);
 		}, 0);
+	}
+
+	// TODO - Refactor
+	wrapTick(ticks) {
+		const self = this;
+		const letNum = Configuration.axis.tick.maxLetNum;
+		ticks.each(function(t) {
+			if (t.length > letNum / 2) {
+				const tick = d3.select(this);
+				const y = tick.attr("y");
+				tick.text("");
+				const tspan1 = tick.append("tspan")
+					.attr("x", 0).attr("y", y).attr("dx", Configuration.axis.dx).attr("dy", `-${Configuration.axis.tick.dy}`);
+				const tspan2 = tick.append("tspan")
+					.attr("x", 0).attr("y", y).attr("dx", Configuration.axis.dx).attr("dy", Configuration.axis.tick.dy);
+				if (t.length < letNum - 3) {
+					tspan1.text(t.substring(0, t.length / 2));
+					tspan2.text(t.substring(t.length / 2 + 1, t.length));
+				} else {
+					tspan1.text(t.substring(0, letNum / 2));
+					tspan2.text(t.substring(letNum / 2, letNum - 3) + "...");
+					tick.on("click", dd => {
+						self.showLabelTooltip(dd, true);
+					});
+				}
+			}
+		});
 	}
 
 	/**************************************

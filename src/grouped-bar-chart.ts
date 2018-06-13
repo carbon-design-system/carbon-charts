@@ -111,8 +111,6 @@ export class GroupedBarChart extends BarChart {
 			.style("opacity", 0)
 			.remove();
 
-		console.log("NUYU DATA", newData);
-
 		// Add groups that need to be added now
 		const groupsAdded: any = [];
 		g.enter().append("g")
@@ -127,11 +125,10 @@ export class GroupedBarChart extends BarChart {
 		groupsAdded.forEach(groupAdded => {
 			const groupRect = d3.select(groupAdded)
 				.selectAll("rect.bar")
-				.data(d => this.getActiveLegendItems().map(function(key) { console.log(key); return {label: key, value: d[key]}; }));
+				.data(d => this.getActiveLegendItems().map(function(key) { return {label: key, value: d[key]}; }));
 
 			groupRect.enter()
 				.append("rect")
-				.each(function(d) { console.log("ENTERED"); })
 				.classed("bar", true)
 				.attr("x", d => this.x1(d.label))
 				.attr("y", d => this.y(d.value))
@@ -144,7 +141,6 @@ export class GroupedBarChart extends BarChart {
 
 		// Remove groups that are no longer needed
 		g.exit()
-			.each(function(d) { console.log("EXITOONG"); })
 			.transition()
 			.duration(750)
 			.style("opacity", 0)
