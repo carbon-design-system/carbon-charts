@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import { Configuration } from "./configuration";
 import { Tools } from "./tools";
-import { local } from "d3";
+import PatternsService from "./services/patterns";
 
 export class BaseChart {
 	static chartCount = 1;
@@ -20,6 +20,8 @@ export class BaseChart {
 
 	color: any;
 	events: any;
+
+	patternsService: PatternsService;
 
 	constructor(holder: Element, options?: any, data?: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
@@ -43,6 +45,9 @@ export class BaseChart {
 		if (data) {
 			this.setData(data);
 		}
+
+		this.patternsService = new PatternsService();
+		this.patternsService.addPatternSVGs();
 	}
 
 

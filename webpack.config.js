@@ -22,15 +22,19 @@ module.exports = {
 				test: /\.s?css$/,
 				loaders: [
 					"style-loader",
-          "css-loader",
-          "postcss-loader",
-          "sass-loader"
-         ]
+					"css-loader",
+					"postcss-loader",
+					"sass-loader"
+				]
 			},
 			{
-	      test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
-	      loader: 'url-loader'
-	    }
+				test: /\.(jpg|png|gif|eot|ttf|woff|woff2)$/,
+				loader: 'url-loader'
+			},
+			{
+				test: /\.svg?$/,
+				loader: 'raw-loader'
+			}
 		]
 	},
 	plugins: [
