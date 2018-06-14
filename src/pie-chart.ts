@@ -85,12 +85,15 @@ export class PieChart extends BaseChart {
 		path.enter()
 			.append("path")
 			.attr("d", arc)
-			.attr("fill", (d, i) => this.colorScale(d.data.label))
-			.attr("stroke", (d, i) => this.colorScale(d.data.label))
 			.style("opacity", 0)
 			.transition()
 			.duration(750)
-			.style("opacity", 1);
+			.attr("fill", (d, i) => this.colorScale(d.data.label))
+			.attr("stroke", (d, i) => this.colorScale(d.data.label))
+			.style("opacity", 1)
+			.attrTween("d", function (a) {
+				return arcTween.bind(this)(a, arc);
+			});
 
 		path
 			.exit()
