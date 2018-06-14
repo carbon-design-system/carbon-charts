@@ -50,6 +50,15 @@ export class BaseChart {
 		if (data) {
 			this.setData(data);
 		}
+
+
+		// Accessibility & patterns
+		this.patternsService = new PatternsService();
+		this.patternsService.addPatternSVGs();
+
+		this.patternScale = d3.scaleOrdinal()
+			.range(this.patternsService.getFillValues())
+			.domain(this.getLegendItemKeys());
 	}
 
 
@@ -702,7 +711,7 @@ export class BaseChart {
 	}
 
 	getFillScale() {
-		return this.patternScale;
+		return this.options.accessibility ? this.patternScale : this.colorScale;
 	}
 
 	// ================================================================================

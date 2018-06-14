@@ -1,3 +1,5 @@
+import * as d3 from "d3";
+
 import PATTERN_SVGS from "../assets/patterns/index";
 
 const selectors = {
@@ -35,6 +37,10 @@ export default class PatternsService {
 	 * @memberof PatternsService
 	 */
 	addPatternSVGs() {
+		d3.select(this.container)
+			.style("display", "table")
+			.style("max-height", 0);
+
 		PATTERN_SVGS.forEach((patternSVG, i) => {
 			const index = i + 1;
 

@@ -184,7 +184,7 @@ export class PieChart extends BaseChart {
 			.enter()
 			.append("path")
 			.attr("d", this.arc)
-			.attr("fill", d => this.colorScale(d.data.label))
+			.attr("fill", d => this.getFillScale()(d.data.label))
 			.attr("stroke", d => this.colorScale(d.data.label))
 			.each(function(d) { this._current = d; });
 

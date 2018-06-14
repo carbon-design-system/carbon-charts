@@ -14,13 +14,6 @@ export class BarChart extends BaseAxisChart {
 		super(holder, options, data);
 
 		this.options.type = "bar";
-
-		this.patternsService = new PatternsService();
-		this.patternsService.addPatternSVGs();
-
-		this.patternScale = d3.scaleOrdinal()
-			.range(this.patternsService.getFillValues())
-			.domain(this.getLegendItemKeys());
 	}
 
 	updateElements(animate: boolean, rect?: any) {

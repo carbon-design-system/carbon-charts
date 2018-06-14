@@ -3,6 +3,7 @@ import { colors } from "./colors";
 const generateRandomRatio = (num) => Math.max(0.2 * num, Math.floor(Math.random() * num));
 
 export const barOptions = {
+	accessibility: false,
 	xDomain: "Part number",
 	yDomain: ["Sold", "More", "Qty"],
 	yTicks: 5,

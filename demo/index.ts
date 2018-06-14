@@ -312,7 +312,7 @@ const simpleBarData = [
 ];
 
 const simpleBarOptions = {
-	accessibility: true,
+	accessibility: false,
 	xDomain: "label",
 	yDomain: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	yTicks: 5,
@@ -322,12 +322,14 @@ const simpleBarOptions = {
 };
 
 const pieOptions = {
+	accessibility: false,
 	legendClickable: true,
 	containerResizable: true,
 	colors
 };
 
 const donutOptions = {
+	accessibility: true,
 	legendClickable: true,
 	containerResizable: true,
 	colors,
@@ -491,7 +493,13 @@ const chartTypes = [
 	// },
 	{
 		id: "simple-bar",
-		name: "Bar New",
+		name: "Bar",
+		options: simpleBarOptions,
+		data: simpleBarData
+	},
+	{
+		id: "simple-bar-accessible",
+		name: "Accessible Bar",
 		options: simpleBarOptions,
 		data: simpleBarData
 	},
