@@ -329,7 +329,7 @@ const pieOptions = {
 };
 
 const donutOptions = {
-	accessibility: true,
+	accessibility: false,
 	legendClickable: true,
 	containerResizable: true,
 	colors,
@@ -500,7 +500,7 @@ const chartTypes = [
 	{
 		id: "simple-bar-accessible",
 		name: "Accessible Bar",
-		options: simpleBarOptions,
+		options: Object.assign({}, simpleBarOptions, {accessibility: true}),
 		data: simpleBarData
 	},
 	// {
@@ -545,6 +545,7 @@ const setDemoActionsEventListener = (chartType: any, oldData: any) => {
 	const changeDataButton = document.getElementById(`change-data-${chartType}`);
 	if (changeDataButton) {
 		changeDataButton.onclick = e => {
+			console.log("CLICKED", e.target, chartType);
 			e.preventDefault();
 
 			changeDemoData(chartType, oldData);
@@ -575,16 +576,13 @@ const setDemoActionsEventListener = (chartType: any, oldData: any) => {
 	// }
 };
 
-let classyBarChart;
-let classyGroupedBarChart;
-let classyDonutChart;
-let classyPieChart;
+const classyCharts = {};
 chartTypes.forEach(type => {
 	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
 	if (classyContainer) {
 		switch (type.id) {
 			case "grouped-bar":
-				classyGroupedBarChart = new GroupedBarChart(
+				classyCharts[type.id] = new GroupedBarChart(
 					classyContainer,
 					Object.assign({}, type.options, {type: type.id}),
 					type.data
@@ -593,8 +591,9 @@ chartTypes.forEach(type => {
 				setDemoActionsEventListener(type.id, type.data);
 
 				break;
+			default:
 			case "simple-bar":
-				classyBarChart = new BarChart(
+				classyCharts[type.id] = new BarChart(
 					classyContainer,
 					Object.assign({}, type.options, {type: type.id}),
 					type.data
@@ -622,6 +621,8 @@ chartTypes.forEach(type => {
 
 				// classyBarNewChart.setData(type.data);
 
+
+				console.log(type.id);
 				setDemoActionsEventListener(type.id, type.data);
 
 				break;
@@ -658,7 +659,7 @@ chartTypes.forEach(type => {
 			// 	classyComboChart.drawChart();
 			// 	break;
 			case "pie":
-				classyPieChart = new PieChart(
+				classyCharts[type.id] = new PieChart(
 					classyContainer,
 					Object.assign({}, type.options, {type: type.id}),
 					new Promise((resolve, reject) => {
@@ -672,7 +673,7 @@ chartTypes.forEach(type => {
 
 				break;
 			case "donut":
-				classyDonutChart = new DonutChart(
+				classyCharts[type.id] = new DonutChart(
 					classyContainer,
 					Object.assign({}, type.options, {type: type.id}),
 					type.data
@@ -681,8 +682,6 @@ chartTypes.forEach(type => {
 				setDemoActionsEventListener(type.id, type.data);
 
 				break;
-			default:
-				// console.log("DEFAULT", type);
 		}
 	}
 });
@@ -695,11 +694,11 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 	// Function to be used to randomize a value
 	const randomizeValue = currentVal => Math.max(0.2 * currentVal, Math.floor(currentVal * Math.random() * (Math.random() * 5)));
 
+	const classyChartObject = classyCharts[chartType];
+
 	switch (chartType) {
 		case "donut":
 		case "pie":
-			const classyChartObject = chartType === "donut" ? classyDonutChart : classyPieChart;
-
 			// Randomize old data values
 			newData = oldData.map(dataPoint => {
 				return Object.assign({}, dataPoint, {value: randomizeValue(dataPoint.value)});
@@ -765,11 +764,12 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 				newData.splice(randomIndex, randomIndex);
 			}
 
-			classyGroupedBarChart.setData(newData);
+			classyChartObject.setData(newData);
 
 			break;
 		case "simple-bar":
-			const keys = ["Qty", "More", "Sold", "Restocking", "Misc"];
+		case "simple-bar-accessible":
+			// const keys = ["Qty", "More", "Sold", "Restocking", "Misc"];
 
 			newData = oldData.map(dataPoint => Object.assign({}, dataPoint, { value: randomizeValue(dataPoint.value)}));
 
@@ -778,7 +778,7 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 				newData.splice(randomIndex, randomIndex);
 			}
 
-			classyBarChart.setData(newData);
+			classyChartObject.setData(newData);
 
 			break;
 	}
