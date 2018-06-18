@@ -114,8 +114,8 @@ export class BarChart extends BaseAxisChart {
 			.attr("fill", (d: any) => fillScale(d.label).toString());
 
 		if (this.options.accessibility) {
-			addedBars.attr("stroke", "black")
-				.attr("stroke-width", 4);
+			addedBars.attr("stroke", (d: any) => this.colorScale(d.label))
+				.attr("stroke-width", 2);
 		}
 
 		// Hide the overlay

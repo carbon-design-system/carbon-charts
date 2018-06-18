@@ -350,6 +350,8 @@ export class BaseAxisChart extends BaseChart {
 
 	addDataPointEventListener() {
 		const self = this;
+		const { accessibility } = this.options;
+
 		this.svg.selectAll("rect")
 			.on("mouseover", function(d) {
 				d3.select(this)
@@ -357,10 +359,10 @@ export class BaseAxisChart extends BaseChart {
 					.attr("stroke", self.colorScale(d.label))
 					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
 			})
-			.on("mouseout", function() {
+			.on("mouseout", function(d) {
 				d3.select(this)
-					.attr("stroke-width", Configuration.bars.mouseout.strokeWidth)
-					.attr("stroke", "none")
+					.attr("stroke-width", accessibility ? 2 : Configuration.bars.mouseout.strokeWidth)
+					.attr("stroke", accessibility ? self.colorScale(d.label) : "none")
 					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
 			})
 			.on("click", function(d) {
