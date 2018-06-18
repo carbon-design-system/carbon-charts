@@ -54,11 +54,7 @@ export class BaseChart {
 
 		// Accessibility & patterns
 		this.patternsService = new PatternsService();
-		this.patternsService.addPatternSVGs();
-
-		this.patternScale = d3.scaleOrdinal()
-			.range(this.patternsService.getFillValues())
-			.domain(this.getLegendItemKeys());
+		// this.patternsService.addPatternSVGs();
 	}
 
 
@@ -712,6 +708,12 @@ export class BaseChart {
 
 	getFillScale() {
 		return this.options.accessibility ? this.patternScale : this.colorScale;
+	}
+
+	// Used to determine whether to use a transition for updating fill attributes in charting elements
+	// Will disable the transition if in accessibility mode
+	getFillTransition() {
+		return d3.transition().duration(this.options.accessibility ? 0 : 750);
 	}
 
 	// ================================================================================

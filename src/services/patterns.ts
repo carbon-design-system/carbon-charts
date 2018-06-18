@@ -8,6 +8,7 @@ const selectors = {
 
 export default class PatternsService {
 	container: any;
+	accum = 0;
 
 	constructor() {
 		this.setDiv();
@@ -36,33 +37,34 @@ export default class PatternsService {
 	 *
 	 * @memberof PatternsService
 	 */
-	addPatternSVGs() {
+	addPatternSVGs(data: any, colorScale: any) {
 		d3.select(this.container)
 			.style("display", "table")
 			.style("max-height", 0);
 
-		PATTERN_SVGS.forEach((patternSVG, i) => {
+		data.forEach((dataPoint, i) => {
 			const index = i + 1;
+			const id = ++this.accum;
 
 			// Create SVG container div
 			const svgContainer = document.createElement("div");
-			svgContainer.id = `peretz-charts-pattern-container-${index}`;
-			svgContainer.innerHTML = trimSVG(patternSVG);
+			svgContainer.id = `peretz-charts-pattern-container-${id}`;
+			svgContainer.innerHTML = trimSVG(PATTERN_SVGS[i]);
 
 			// Apply id to the svg element
 			const mountedSVG = svgContainer.querySelector("svg");
-			mountedSVG.id = `peretz-charts-pattern-${index}-svg`;
+			mountedSVG.id = `peretz-charts-pattern-${id}-svg`;
 
 			// Apply id to the pattern element
 			const patternElement = mountedSVG.querySelector("pattern");
-			patternElement.id = `peretz-charts-pattern-${index}`;
+			patternElement.id = `peretz-charts-pattern-${id}`;
 
 			// Apply fills to everything
 			const allElementsInsideSVG = Array.prototype.slice.call(mountedSVG.querySelectorAll("pattern g *"));
 			allElementsInsideSVG.forEach((element, elementIndex) => {
 				if (elementIndex > 0) {
-					element.style.fill = "red";
-					element.style.stroke = "red";
+					element.style.fill = colorScale(dataPoint.label);
+					element.style.stroke = colorScale(dataPoint.label);
 				} else {
 					element.style.fill = "transparent";
 				}

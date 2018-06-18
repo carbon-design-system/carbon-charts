@@ -21,20 +21,21 @@ export class BarChart extends BaseAxisChart {
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
-		const t = d3.transition().duration(animate ? 750 : 0);
-
 		if (!rect) {
 			rect = this.innerWrap.selectAll("rect.bar");
 		}
+
 		// Update existing bars
 		rect
-			.transition(t)
+			.transition(this.getFillTransition())
+			.attr("fill", (d: any) => this.getFillScale()(d.label).toString())
+			.transition()
+			.duration(animate ? 750 : 0)
 			.attr("class", "bar")
 			.attr("x", (d: any) => this.x(d.label))
 			.attr("y", (d: any, i) => this.y(d.value))
 			.attr("width", this.x.bandwidth())
-			.attr("height", (d: any) => height - this.y(d.value))
-			.attr("fill", (d: any) => this.getFillScale()(d.label).toString());
+			.attr("height", (d: any) => height - this.y(d.value));
 	}
 
 	interpolateValues(newData: any) {
@@ -58,10 +59,11 @@ export class BarChart extends BaseAxisChart {
 			.attr("width", this.x.bandwidth())
 			.attr("height", (d: any) => height - this.y(d.value))
 			.attr("opacity", 0)
+			.transition(this.getFillTransition())
+			.attr("fill", (d: any) => this.getFillScale()(d.label).toString())
 			.transition()
 			.duration(750)
-			.attr("opacity", 1)
-			.attr("fill", (d: any) => this.getFillScale()(d.label).toString());
+			.attr("opacity", 1);
 
 		// Remove bars that are no longer needed
 		rect.exit()
@@ -89,10 +91,16 @@ export class BarChart extends BaseAxisChart {
 		const margin = {top: 0, right: -40, bottom: 50, left: 40};
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.getBBox(".x.axis").height;
-		const fillScale = this.getFillScale();
 
 		const g = this.innerWrap
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		this.patternsService.addPatternSVGs(data, this.colorScale);
+		this.patternScale = d3.scaleOrdinal()
+			.range(this.patternsService.getFillValues())
+			.domain(this.getLegendItemKeys());
+
+		const fillScale = this.getFillScale();
 
 		const addedBars = g.selectAll(".bar")
 			.data(data)
