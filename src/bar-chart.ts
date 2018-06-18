@@ -27,15 +27,14 @@ export class BarChart extends BaseAxisChart {
 
 		// Update existing bars
 		rect
-			.transition(this.getFillTransition())
-			.attr("fill", (d: any) => this.getFillScale()(d.label).toString())
-			.transition()
-			.duration(animate ? 750 : 0)
+			.transition(animate ? this.getFillTransition() : 0)
 			.attr("class", "bar")
 			.attr("x", (d: any) => this.x(d.label))
 			.attr("y", (d: any, i) => this.y(d.value))
 			.attr("width", this.x.bandwidth())
-			.attr("height", (d: any) => height - this.y(d.value));
+			.attr("height", (d: any) => height - this.y(d.value))
+			.attr("stroke", (d: any) => this.colorScale(d.label))
+			.attr("fill", (d: any) => this.getFillScale()(d.label).toString());
 	}
 
 	interpolateValues(newData: any) {
@@ -61,9 +60,9 @@ export class BarChart extends BaseAxisChart {
 			.attr("opacity", 0)
 			.transition(this.getFillTransition())
 			.attr("fill", (d: any) => this.getFillScale()(d.label).toString())
-			.transition()
-			.duration(750)
-			.attr("opacity", 1);
+			.attr("opacity", 1)
+			.attr("stroke", (d: any) => this.colorScale(d.label))
+			.attr("stroke-width", this.options.accessibility ? 2 : 0);
 
 		// Remove bars that are no longer needed
 		rect.exit()
@@ -111,11 +110,11 @@ export class BarChart extends BaseAxisChart {
 			.attr("y", (d: any, i) => this.y(d.value))
 			.attr("width", this.x.bandwidth())
 			.attr("height", (d: any) => height - this.y(d.value))
-			.attr("fill", (d: any) => fillScale(d.label).toString());
+			.attr("fill", (d: any) => fillScale(d.label).toString())
+			.attr("stroke", (d: any) => this.colorScale(d.label));
 
 		if (this.options.accessibility) {
-			addedBars.attr("stroke", (d: any) => this.colorScale(d.label))
-				.attr("stroke-width", 2);
+			addedBars.attr("stroke-width", 2);
 		}
 
 		// Hide the overlay
