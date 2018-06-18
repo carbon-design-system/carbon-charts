@@ -13,13 +13,13 @@ import PATTERN_11 from "./pattern-11.svg";
 export default [
 	PATTERN_1,
 	PATTERN_2,
-	PATTERN_3,
+	// PATTERN_3,
 	PATTERN_4,
 	PATTERN_5,
-	PATTERN_6,
+	// PATTERN_6,
 	PATTERN_7,
 	PATTERN_8,
-	PATTERN_9,
+	// PATTERN_9,
 	PATTERN_10,
 	PATTERN_11
 ];
