@@ -44,15 +44,32 @@ export default class PatternsService {
 		PATTERN_SVGS.forEach((patternSVG, i) => {
 			const index = i + 1;
 
+			// Create SVG container div
 			const svgContainer = document.createElement("div");
 			svgContainer.id = `peretz-charts-pattern-container-${index}`;
-			svgContainer.innerHTML = removeComments(patternSVG);
+			svgContainer.innerHTML = trimSVG(patternSVG);
 
+			// Apply id to the svg element
 			const mountedSVG = svgContainer.querySelector("svg");
 			mountedSVG.id = `peretz-charts-pattern-${index}-svg`;
 
+			// Apply id to the pattern element
 			const patternElement = mountedSVG.querySelector("pattern");
 			patternElement.id = `peretz-charts-pattern-${index}`;
+
+			// Apply fills to everything
+			const allElementsInsideSVG = Array.prototype.slice.call(mountedSVG.querySelectorAll("pattern g *"));
+			allElementsInsideSVG.forEach((element, elementIndex) => {
+				if (elementIndex > 0) {
+					element.style.fill = "red";
+					element.style.stroke = "red";
+				} else {
+					element.style.fill = "transparent";
+				}
+
+				element.removeAttribute("id");
+				element.removeAttribute("class");
+			});
 
 			// Update pattern widths & heights
 			patternElement.setAttribute("width", "20");
@@ -77,4 +94,16 @@ export default class PatternsService {
 	}
 }
 
-const removeComments = htmlString => htmlString.replace(/<!--[\s\S]*?-->/g, "");
+// Helper functions
+const trimSVG = (htmlString: any) => {
+	// Remove the CSS style block
+	const htmlBeforeStyleBlock = htmlString.substring(0, htmlString.indexOf("<style type=\"text/css\">"));
+	const htmlAfterStyleBlock = htmlString.substring(htmlString.indexOf("</style>") + "</style>".length);
+
+	htmlString = htmlBeforeStyleBlock + htmlAfterStyleBlock;
+
+	// Remove Adobe comments
+	htmlString = htmlString.replace(/<!--[\s\S]*?-->/g, "");
+
+	return htmlString;
+};
