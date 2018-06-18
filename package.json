@@ -1,6 +1,6 @@
 {
   "name": "@peretz/charts",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "WCE charts",
   "main": "demo.js",
   "scripts": {
