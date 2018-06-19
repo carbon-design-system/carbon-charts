@@ -63,3 +63,41 @@ export const simpleBarOptions = {
 	containerResizable: true,
 	colors
 };
+
+// Stacked bar
+export const stackedBarData = [
+	{
+		label: "Q1",
+		Qty: 12313,
+		More: 34234,
+		Sold: 12312
+	},
+	{
+		label: "Q2",
+		Qty: 35213,
+		More: 10031,
+		Sold: 21321
+	},
+	{
+		label: "Q3",
+		Qty: 13212,
+		More: 23123,
+		Sold: 43222
+	},
+	{
+		label: "Q4",
+		Qty: 12312,
+		More: 34233,
+		Sold: 32111
+	},
+];
+
+export const stackedBarOptions = {
+	accessibility: false,
+	xDomain: "label",
+	yDomain: ["Qty", "More", "Sold"],
+	yTicks: 5,
+	legendClickable: true,
+	containerResizable: true,
+	colors
+};

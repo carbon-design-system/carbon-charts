@@ -22,7 +22,7 @@ export class PieChart extends BaseChart {
 
 	// Sort data by value (descending)
 	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
-	dataProcesser(data: any) {
+	dataProcessor(data: any) {
 		// Check for duplicate keys in the data
 		const duplicates = Tools.duplicateKeysInData(data);
 		if (duplicates.length > 0) {
@@ -311,7 +311,7 @@ export class PieChart extends BaseChart {
 				return activeSeriesItemIndex > -1;
 			});
 		}
-		const processedNewData = this.dataProcesser(newData);
+		const processedNewData = this.dataProcessor(newData);
 
 		this.interpolateValues(processedNewData);
 	}

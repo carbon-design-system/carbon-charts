@@ -4,7 +4,7 @@ import {
 	GroupedBarChart,
 	// LineChart,
 	// DoubleAxisLineChart,
-	// StackedBarChart,
+	StackedBarChart,
 	// ComboChart,
 	PieChart,
 	DonutChart,
@@ -22,6 +22,8 @@ import {
 	barData,
 	simpleBarOptions,
 	simpleBarData,
+	stackedBarData,
+	stackedBarOptions,
 	pieOptions,
 	pieData,
 	donutOptions
@@ -64,12 +66,12 @@ const chartTypes = [
 	// 	options: barOptions,
 	// 	data: barData
 	// },
-	// {
-	// 	id: "stacked-bar",
-	// 	name: "Stacked Bar",
-	// 	options: barOptions,
-	// 	data: barData
-	// },
+	{
+		id: "stacked-bar",
+		name: "Stacked Bar",
+		options: stackedBarOptions,
+		data: stackedBarData
+	},
 	// {
 	// 	id: "double-axis-line",
 	// 	name: "Double Axis",
@@ -163,8 +165,6 @@ chartTypes.forEach(type => {
 
 				// classyBarNewChart.setData(type.data);
 
-
-				console.log(type.id);
 				setDemoActionsEventListener(type.id, type.data);
 
 				break;
@@ -200,6 +200,16 @@ chartTypes.forEach(type => {
 			// 	);
 			// 	classyComboChart.drawChart();
 			// 	break;
+			case "stacked-bar":
+				classyCharts[type.id] = new StackedBarChart(
+					classyContainer,
+					Object.assign({}, type.options, {type: type.id}),
+					type.data
+				);
+
+				setDemoActionsEventListener(type.id, type.data);
+
+				break;
 			case "pie":
 				classyCharts[type.id] = new PieChart(
 					classyContainer,
@@ -310,6 +320,7 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 			break;
 		case "simple-bar":
 		case "simple-bar-accessible":
+		case "stacked-bar":
 			// const keys = ["Qty", "More", "Sold", "Restocking", "Misc"];
 
 			newData = oldData.map(dataPoint => Object.assign({}, dataPoint, { value: randomizeValue(dataPoint.value)}));

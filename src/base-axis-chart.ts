@@ -98,6 +98,36 @@ export class BaseAxisChart extends BaseChart {
 		return newDisplayData;
 	}
 
+	dataProcessor(data: any) {
+		if (this.options.yDomain) {
+			data.map(dataPoint => {
+				let total = this.options.yDomain.reduce((accum, yKey) => {
+					if (dataPoint[yKey]) {
+						return accum + dataPoint[yKey]
+					} else {
+						return accum;
+					}
+				}, 0);
+
+				if (dataPoint.value) {
+					total += dataPoint.value;
+				}
+
+				dataPoint.totalDatumValue = total;
+
+				return dataPoint;
+			});
+		} else {
+			data.map(dataPoint => {
+				dataPoint.totalDatumValue = dataPoint.value;
+
+				return dataPoint;
+			});
+		}
+
+		return data;
+	}
+
 	draw() {
 		console.warn("You should implement your own `draw() function.");
 	}
@@ -207,7 +237,7 @@ export class BaseAxisChart extends BaseChart {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - margins.top - margins.bottom - this.innerWrap.select(".x.axis").node().getBBox().height;
-		const yEnd = d3.max(this.displayData, (d: any) => d.value);
+		const yEnd = d3.max(this.displayData, (d: any) => d.totalDatumValue);
 
 		this.y = d3.scaleLinear().rangeRound([height, 0]);
 		this.y.domain([0, yEnd]);

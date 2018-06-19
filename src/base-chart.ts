@@ -76,8 +76,8 @@ export class BaseChart {
 			this.events.dispatchEvent(new Event("data-load"));
 
 			// Process data
-			this.data = this.dataProcesser(value);
-			this.displayData = this.dataProcesser(value);
+			this.data = this.dataProcessor(value);
+			this.displayData = this.dataProcessor(value);
 
 			const keys = this.getKeysFromData();
 
@@ -198,7 +198,7 @@ export class BaseChart {
 	}
 
 	// Default fallback when no data processing is needed
-	dataProcesser(data: any) {
+	dataProcessor(data: any) {
 		return data;
 	}
 
