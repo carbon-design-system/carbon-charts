@@ -718,7 +718,7 @@ export class BaseChart {
 	// Used to determine whether to use a transition for updating fill attributes in charting elements
 	// Will disable the transition if in accessibility mode
 	getFillTransition() {
-		return d3.transition().duration(this.options.accessibility ? 0 : 750);
+		return d3.transition().duration(750);
 	}
 
 	// ================================================================================
