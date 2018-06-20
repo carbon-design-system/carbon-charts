@@ -80,17 +80,6 @@ export class StackedBarChart extends BaseAxisChart {
 	}
 
 	draw() {
-		// this.data = d3.stack()(this.options.yDomain.map(key => {
-		// 	return this.data.map(d => {
-		// 		return {
-		// 			x: 10,
-		// 			y: +d[key]
-		// 		};
-		// 	});
-		// }));
-
-		console.log(this.data);
-
 		const { data } = this;
 
 		this.innerWrap.style("width", "100%")
@@ -110,31 +99,38 @@ export class StackedBarChart extends BaseAxisChart {
 
 		const fillScale = this.getFillScale();
 
-		const addedBars = g.selectAll(".bar")
-			.data(d3.stack().keys(this.options.yDomain)(data))
-			.enter()
-				.append("g")
-				.selectAll("rect")
-				.data(function(d) { return d; })
+		const stackData = d3.stack().keys(this.options.yDomain)(data);
+		const addedBars = g.append("g")
+			// TODO - Rename to bars
+			.classed("all-bars", true)
+			.selectAll(".bars")
+				.data(stackData)
 				.enter()
-					.append("rect")
-					.attr("class", "bar")
-					.attr("x", (d: any) => this.x(d.data[this.options.xDomain]))
-					.attr("y", (d: any, i) => this.y(d[1]))
-					.attr("width", this.x.bandwidth())
-					.attr("height", (d: any) => this.y(d[0]) - this.y(d[1]))
-					.attr("fill", (d: any) => {
-						const dValue = d[1] - d[0];
-						const dKey = Object.keys(d.data).find(key => d.data[key] === dValue);
+					.append("g")
+					// TODO - Rename to bars-${dKey}
+					.classed("bars", true)
+					.selectAll("rect")
+					.data(function(d) { return d; })
+					.enter()
+						.append("rect")
+						.attr("class", "bar")
+						.attr("x", (d: any) => this.x(d.data[this.options.xDomain]))
+						.attr("y", (d: any, i) => this.y(d[1]))
+						.attr("width", this.x.bandwidth())
+						.attr("height", (d: any) => this.y(d[0]) - this.y(d[1]))
+						// TODO - Find a way to access key here
+						.attr("fill", (d: any) => {
+							const dValue = d[1] - d[0];
+							const dKey = Object.keys(d.data).find(key => d.data[key] === dValue);
 
-						return this.getFillScale()(dKey);
-					})
-					.attr("stroke", (d: any) => {
-						const dValue = d[1] - d[0];
-						const dKey = Object.keys(d.data).find(key => d.data[key] === dValue);
+							return this.getFillScale()(dKey);
+						})
+						.attr("stroke", (d: any) => {
+							const dValue = d[1] - d[0];
+							const dKey = Object.keys(d.data).find(key => d.data[key] === dValue);
 
-						return this.getFillScale()(dKey);
-					});
+							return this.getFillScale()(dKey);
+						});
 
 		if (this.options.accessibility) {
 			addedBars.attr("stroke-width", 2);

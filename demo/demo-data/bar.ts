@@ -70,32 +70,40 @@ export const stackedBarData = [
 		label: "Q1",
 		Qty: 12313,
 		More: 34234,
-		Sold: 12312
+		Sold: 12312,
+		Restocking: 32523,
+		Misc: 21312
 	},
 	{
 		label: "Q2",
 		Qty: 35213,
 		More: 10031,
-		Sold: 21321
+		Sold: 21321,
+		Restocking: 12312,
+		Misc: 12311
 	},
 	{
 		label: "Q3",
 		Qty: 13212,
 		More: 23123,
-		Sold: 43222
+		Sold: 43222,
+		Restocking: 21412,
+		Misc: 5322
 	},
 	{
 		label: "Q4",
 		Qty: 12312,
 		More: 34233,
-		Sold: 32111
+		Sold: 32111,
+		Restocking: 21313,
+		Misc: 43223
 	},
 ];
 
 export const stackedBarOptions = {
 	accessibility: false,
 	xDomain: "label",
-	yDomain: ["Qty", "More", "Sold"],
+	yDomain: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,

@@ -236,7 +236,7 @@ export class BaseAxisChart extends BaseChart {
 	setYScale() {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
-		const height = chartSize.height - margins.top - margins.bottom - this.innerWrap.select(".x.axis").node().getBBox().height;
+		const height = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
 		const yEnd = d3.max(this.displayData, (d: any) => d.totalDatumValue);
 
 		this.y = d3.scaleLinear().rangeRound([height, 0]);
