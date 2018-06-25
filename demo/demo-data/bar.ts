@@ -10,7 +10,10 @@ export const barOptions = {
 			title: "2017 Sales per Model"
 		},
 		y: {
-			domain: ["Sold", "More", "Qty"]
+			domain: ["Sold", "More", "Qty"],
+			formatter: axisValue => {
+				return `${axisValue / 1000000}mil`;
+			}
 		}
 	},
 	// yTicks: 5,
@@ -23,9 +26,9 @@ export const barData = [];
 for (let i = 1; i < 7; i++) {
 	barData.push({
 		"Part number": `773C-${ i * 2 }-L6EP-L22I-${ i * 8 }-L22I`,
-		"Qty": i * generateRandomRatio(3000),
-		"More": i * generateRandomRatio(4000),
-		"Sold": i * generateRandomRatio(5000)
+		"Qty": i * generateRandomRatio(3000000),
+		"More": i * generateRandomRatio(4000000),
+		"Sold": i * generateRandomRatio(5000000)
 	});
 }
 
@@ -121,7 +124,10 @@ export const stackedBarOptions = {
 			title: "2017 Financials"
 		},
 		y: {
-			domain: ["Qty", "More", "Sold", "Restocking", "Misc"]
+			domain: ["Qty", "More", "Sold", "Restocking", "Misc"],
+			formatter: axisValue => {
+				return `${axisValue / 1000}k`;
+			}
 		}
 	},
 	// yTicks: 5,

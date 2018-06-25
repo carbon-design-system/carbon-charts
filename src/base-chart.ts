@@ -643,6 +643,7 @@ export class BaseChart {
 				}
 			};
 
+			// TODO - Don't bind on window
 			// If clicked outside
 			window.onclick = (evt: MouseEvent) => {
 				const targetTagName = evt.target["tagName"];
@@ -661,6 +662,7 @@ export class BaseChart {
 	}
 
 	removeTooltipEventListeners() {
+		// TODO - Don't bind on window
 		// Remove eventlistener to close tooltip when ESC is pressed
 		window.onkeydown = null;
 

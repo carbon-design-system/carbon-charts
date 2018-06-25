@@ -31,7 +31,6 @@ export class StackedBarChart extends BarChart {
 			.attr("width", this.x.bandwidth())
 			.attr("height", (d: any) => this.y(d[0]) - this.y(d[1]))
 			.transition(this.getFillTransition())
-			// TODO - Find a way to access key here
 			.attr("fill", d => this.getFillScale()(d[axis.x.domain]))
 			.attr("stroke", d => this.colorScale(d[axis.x.domain]))
 			.attr("stroke-width", this.options.accessibility ? 2 : 0);
@@ -75,7 +74,7 @@ export class StackedBarChart extends BarChart {
 		const stackData = d3.stack().keys(axis.y.domain)(newData);
 
 		// Apply new data to the bars
-		const g = this.innerWrap.selectAll("g.all-bars g.bars")
+		const g = this.innerWrap.selectAll("g.bars-wrapper g.bars")
 			.data(stackData);
 		const rect = g.selectAll("g rect")
 				// TODO - Rename to bars-${dKey}
@@ -93,7 +92,6 @@ export class StackedBarChart extends BarChart {
 			.attr("height", (d: any) => this.y(d[0]) - this.y(d[1]))
 			.attr("opacity", 0)
 			.transition(this.getFillTransition())
-			// TODO - Find a way to access key here
 			.attr("fill", d => this.getFillScale()(d[axis.x.domain]))
 			.attr("stroke", d => this.colorScale(d[axis.x.domain]))
 			.attr("opacity", 1)
@@ -141,13 +139,13 @@ export class StackedBarChart extends BarChart {
 		const stackData = d3.stack().keys(axis.y.domain)(data);
 		const addedBars = g.append("g")
 			// TODO - Rename to bars
-			.classed("all-bars", true)
+			.classed("bars-wrapper", true)
 			.selectAll(".bars")
 				.data(stackData)
 				.enter()
 					.append("g")
 					// TODO - Rename to bars-${dKey}
-					.classed("bars", true)
+					.attr("class", d => `bars ${d.key}`)
 					.selectAll("rect")
 					.data(d => this.addLabelsToDataPoints(d))
 					.enter()

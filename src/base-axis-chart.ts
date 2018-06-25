@@ -228,6 +228,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("fill", Configuration.axis.domain.color)
 			.attr("stroke-width", Configuration.axis.domain.strokeWidth);
 
+		// Add x-axis title
 		if (this.innerWrap.select(".axis-label.x").nodes().length === 0 && this.options.axis.x.title) {
 			xAxisRef.append("text")
 				.attr("class", "x axis-label")
@@ -253,7 +254,10 @@ export class BaseAxisChart extends BaseChart {
 
 	setYAxis(noAnimation?: boolean) {
 		const t = d3.transition().duration(noAnimation ? 0 : 750);
-		const yAxis = d3.axisLeft(this.y).ticks(5).tickSize(0);
+		const yAxis = d3.axisLeft(this.y)
+			.ticks(5)
+			.tickSize(0)
+			.tickFormat(this.options.axis.y.formatter);
 		const yAxisRef = this.svg.select("g.y.axis");
 		// If the <g class="y axis"> exists in the chart SVG, just update it
 		if (yAxisRef.nodes().length > 0) {
