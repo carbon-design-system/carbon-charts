@@ -1,9 +1,9 @@
 import * as d3 from "d3";
 
-import { BaseAxisChart } from "./base-axis-chart";
+import { BarChart } from "./bar-chart";
 import { Configuration } from "./configuration";
 
-export class StackedBarChart extends BaseAxisChart {
+export class StackedBarChart extends BarChart {
 	x: any;
 	y: any;
 	colorScale: any;
@@ -11,11 +11,13 @@ export class StackedBarChart extends BaseAxisChart {
 	constructor(holder: Element, options?: any, data?: any) {
 		super(holder, options, data);
 
-		this.options.type = "bar";
+		this.options.type = "stacked-bar";
 	}
 
 	updateElements(animate: boolean, rect?: any) {
 		const { bar: margins } = Configuration.charts.margin;
+		const { axis } = this.options;
+
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
@@ -27,23 +29,71 @@ export class StackedBarChart extends BaseAxisChart {
 		rect
 			.transition(animate ? this.getFillTransition() : 0)
 			.attr("class", "bar")
-			.attr("x", (d: any) => this.x(d.label))
-			.attr("y", (d: any, i) => this.y(d.value))
+			.attr("x", (d: any) => this.x(d.data[axis.x.domain]))
+			.attr("y", (d: any, i) => this.y(d[1]))
 			.attr("width", this.x.bandwidth())
-			.attr("height", (d: any) => height - this.y(d.value))
+			.attr("height", (d: any) => this.y(d[0]) - this.y(d[1]))
+			.transition(this.getFillTransition())
+			// TODO - Find a way to access key here
+			.attr("fill", (d: any) => {
+				const dValue = d[1] - d[0];
+				const dKey = Object.keys(d.data).find(key => d.data[key] === dValue);
+
+				return this.getFillScale()(dKey);
+			})
+			.attr("stroke", (d: any) => {
+				const dValue = d[1] - d[0];
+				const dKey = Object.keys(d.data).find(key => d.data[key] === dValue);
+
+				return this.getFillScale()(dKey);
+			})
 			.attr("stroke", (d: any) => this.colorScale(d.label))
-			.attr("fill", (d: any) => this.getFillScale()(d.label).toString());
+			.attr("stroke-width", this.options.accessibility ? 2 : 0);
+	}
+
+	updateDisplayData() {
+		const oldData = this.data;
+		const activeLegendItems = this.getActiveLegendItems();
+
+		const { axis } = this.options;
+
+		// Get new data by looping through the data and keeping only the active legend items
+		const newDisplayData = oldData.map(dataPoint => {
+			const updatedDataPoint = {};
+
+			activeLegendItems.forEach(activeLegendItem => {
+				updatedDataPoint[activeLegendItem] = dataPoint[activeLegendItem];
+			});
+
+			updatedDataPoint[axis.x.domain] = dataPoint[axis.x.domain];
+
+			return updatedDataPoint;
+		});
+
+		return this.dataProcessor(newDisplayData, true);
+	}
+
+	addLabelsToDataPoints(d: any) {
+		d.forEach(dataPoint => {
+			if (Array.isArray(dataPoint)) {
+				dataPoint[this.options.axis.x.domain] = d.key;
+			}
+		});
+
+		return d;
 	}
 
 	interpolateValues(newData: any) {
-		const { bar: margins } = Configuration.charts.margin;
-		const chartSize = this.getChartSize();
-		const height = chartSize.height - this.getBBox(".x.axis").height;
+		const { axis } = this.options;
+
+		const stackData = d3.stack().keys(axis.y.domain)(newData);
 
 		// Apply new data to the bars
-		const rect = this.innerWrap
-			.selectAll("rect.bar")
-			.data(newData);
+		const rect = this.innerWrap.selectAll("g.all-bars g.bars")
+			.data(stackData)
+				// TODO - Rename to bars-${dKey}
+				.selectAll("g rect")
+				.data(d => this.addLabelsToDataPoints(d));
 
 		this.updateElements(true, rect);
 
@@ -51,15 +101,16 @@ export class StackedBarChart extends BaseAxisChart {
 		rect.enter()
 			.append("rect")
 			.attr("class", "bar")
-			.attr("x", (d: any) => this.x(d.label))
-			.attr("y", (d: any, i) => this.y(d.value))
+			.attr("x", (d: any) => this.x(d.data[axis.x.domain]))
+			.attr("y", (d: any, i) => this.y(d[1]))
 			.attr("width", this.x.bandwidth())
-			.attr("height", (d: any) => height - this.y(d.value))
+			.attr("height", (d: any) => this.y(d[0]) - this.y(d[1]))
 			.attr("opacity", 0)
 			.transition(this.getFillTransition())
-			.attr("fill", (d: any) => this.getFillScale()(d.label).toString())
+			// TODO - Find a way to access key here
+			.attr("fill", d => this.getFillScale()(d[axis.x.domain]))
+			.attr("stroke", d => this.getFillScale()(d[axis.x.domain]))
 			.attr("opacity", 1)
-			.attr("stroke", (d: any) => this.colorScale(d.label))
 			.attr("stroke-width", this.options.accessibility ? 2 : 0);
 
 		// Remove bars that are no longer needed
@@ -81,6 +132,7 @@ export class StackedBarChart extends BaseAxisChart {
 
 	draw() {
 		const { data } = this;
+		const { axis } = this.options;
 
 		this.innerWrap.style("width", "100%")
 			.style("height", "100%");
@@ -99,7 +151,7 @@ export class StackedBarChart extends BaseAxisChart {
 
 		const fillScale = this.getFillScale();
 
-		const stackData = d3.stack().keys(this.options.yDomain)(data);
+		const stackData = d3.stack().keys(axis.y.domain)(data);
 		const addedBars = g.append("g")
 			// TODO - Rename to bars
 			.classed("all-bars", true)
@@ -110,27 +162,17 @@ export class StackedBarChart extends BaseAxisChart {
 					// TODO - Rename to bars-${dKey}
 					.classed("bars", true)
 					.selectAll("rect")
-					.data(function(d) { return d; })
+					.data(d => this.addLabelsToDataPoints(d))
 					.enter()
 						.append("rect")
 						.attr("class", "bar")
-						.attr("x", (d: any) => this.x(d.data[this.options.xDomain]))
+						.attr("x", (d: any) => this.x(d.data[axis.x.domain]))
 						.attr("y", (d: any, i) => this.y(d[1]))
 						.attr("width", this.x.bandwidth())
 						.attr("height", (d: any) => this.y(d[0]) - this.y(d[1]))
 						// TODO - Find a way to access key here
-						.attr("fill", (d: any) => {
-							const dValue = d[1] - d[0];
-							const dKey = Object.keys(d.data).find(key => d.data[key] === dValue);
-
-							return this.getFillScale()(dKey);
-						})
-						.attr("stroke", (d: any) => {
-							const dValue = d[1] - d[0];
-							const dKey = Object.keys(d.data).find(key => d.data[key] === dValue);
-
-							return this.getFillScale()(dKey);
-						});
+						.attr("fill", d => this.getFillScale()(d[axis.x.domain]))
+						.attr("stroke", d => this.getFillScale()(d[axis.x.domain]));
 
 		if (this.options.accessibility) {
 			addedBars.attr("stroke-width", 2);
@@ -141,36 +183,5 @@ export class StackedBarChart extends BaseAxisChart {
 
 		// Dispatch the load event
 		this.events.dispatchEvent(new Event("load"));
-	}
-
-	resizeChart() {
-		const { pie: pieConfigs } = Configuration;
-
-		const actualChartSize: any = this.getChartSize(this.container);
-		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
-		const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
-		const radius: number = dimensionToUseForScale / 2;
-
-		// Resize the SVG
-		d3.select(this.holder).select("svg")
-				.attr("width", `${dimensionToUseForScale}px`)
-				.attr("height", `${dimensionToUseForScale}px`);
-
-		this.updateXandYGrid(true);
-		// Scale out the domains
-		this.setXScale(true);
-		this.setYScale();
-
-		// Set the x & y axis as well as their labels
-		this.setXAxis(true);
-		this.setYAxis(true);
-
-		// Apply new data to the bars
-		this.updateElements(false);
-
-		// Reposition the legend
-		this.positionLegend();
-
-		this.events.dispatchEvent(new Event("resize"));
 	}
 }

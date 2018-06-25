@@ -39,14 +39,14 @@ export class GroupedBarChart extends BarChart {
 	}
 
 	setGroups() {
-		const { xDomain } = this.options;
-		const groups = this.displayData.map(item => item[xDomain]);
+		const { axis } = this.options;
+		const groups = this.displayData.map(item => item[axis.x.domain]);
 
 		this.groups = Tools.removeArrayDuplicates(groups);
 	}
 
 	updateElements(animate?: boolean, g?: any, rect?: any) {
-		const { xDomain } = this.options;
+		const { axis } = this.options;
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.getBBox(".x.axis").height;
@@ -62,7 +62,7 @@ export class GroupedBarChart extends BarChart {
 
 		// Update existing groups
 		g.transition(t)
-			.attr("transform", d => "translate(" + this.x(d[xDomain]) + ",0)");
+			.attr("transform", d => "translate(" + this.x(d[axis.x.domain]) + ",0)");
 
 		// Update existing bars
 		rect
@@ -75,7 +75,7 @@ export class GroupedBarChart extends BarChart {
 	}
 
 	interpolateValues(newData: any) {
-		const { xDomain } = this.options;
+		const { axis } = this.options;
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.getBBox(".x.axis").height;
@@ -117,7 +117,7 @@ export class GroupedBarChart extends BarChart {
 				.transition()
 				.duration(750)
 				.style("opacity", 1)
-				.attr("transform", d => "translate(" + this.x(d[xDomain]) + ",0)")
+				.attr("transform", d => "translate(" + this.x(d[axis.x.domain]) + ",0)")
 				.each(function(d) { groupsAdded.push(this); });
 
 		// Add bars that need to be added now
@@ -161,6 +161,8 @@ export class GroupedBarChart extends BarChart {
 
 	setXScale(noAnimation?: boolean) {
 		const { bar: margins } = Configuration.charts.margin;
+		const { axis } = this.options;
+
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
 
@@ -168,7 +170,7 @@ export class GroupedBarChart extends BarChart {
 		this.x1 = d3.scaleBand().padding(0.2);
 
 		const activeLegendItems = this.getActiveLegendItems();
-		const keysToShowOnAxis = this.options.yDomain.filter(item => activeLegendItems.indexOf(item) > -1);
+		const keysToShowOnAxis = axis.y.domain.filter(item => activeLegendItems.indexOf(item) > -1);
 		this.x.domain(this.groups);
 		this.x1.domain(keysToShowOnAxis).rangeRound([0, this.x.bandwidth()]);
 	}
@@ -189,21 +191,22 @@ export class GroupedBarChart extends BarChart {
 		this.innerWrap.style("width", "100%")
 			.style("height", "100%");
 
-		const margin = {top: 0, right: -40, bottom: 50, left: 40};
+		const { bar: margins } = Configuration.charts.margin;
+		const { axis } = this.options;
+
 		const chartSize = this.getChartSize();
-		const width = chartSize.width - margin.left - margin.right;
+		const width = chartSize.width - margins.left - margins.right;
 		const height = chartSize.height - this.getBBox(".x.axis").height;
-		const { xDomain } = this.options;
 
 		const g = this.innerWrap
-			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+			.attr("transform", "translate(" + margins.left + "," + margins.top + ")");
 
 		g.append("g")
 			.classed("bars", true)
 			.selectAll("g")
 			.data(data)
 			.enter().append("g")
-				.attr("transform", d => "translate(" + this.x(d[xDomain]) + ",0)")
+				.attr("transform", d => "translate(" + this.x(d[axis.x.domain]) + ",0)")
 				.selectAll("rect.bar")
 				.data(d => this.getLegendItemKeys().map(function(key) { return {label: key, value: d[key]}; }))
 				.enter().append("rect")

@@ -45,12 +45,11 @@ export class BaseChart {
 			}
 		}
 
-		this.events = new EventTarget();
+		this.events = document.createDocumentFragment();
 
 		if (data) {
 			this.setData(data);
 		}
-
 
 		// Accessibility & patterns
 		this.patternsService = new PatternsService();
@@ -76,8 +75,8 @@ export class BaseChart {
 			this.events.dispatchEvent(new Event("data-load"));
 
 			// Process data
-			this.data = this.dataProcessor(value);
-			this.displayData = this.dataProcessor(value);
+			this.data = this.dataProcessor(value, false);
+			this.displayData = this.dataProcessor(value, true);
 
 			const keys = this.getKeysFromData();
 
@@ -198,7 +197,7 @@ export class BaseChart {
 	}
 
 	// Default fallback when no data processing is needed
-	dataProcessor(data: any) {
+	dataProcessor(data: any, calculateTotalValue: boolean) {
 		return data;
 	}
 

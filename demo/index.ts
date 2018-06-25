@@ -244,7 +244,12 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 	const removeAKey = Math.random() > 0.5;
 
 	// Function to be used to randomize a value
-	const randomizeValue = currentVal => Math.max(0.2 * currentVal, Math.floor(currentVal * Math.random() * (Math.random() * 5)));
+	const randomizeValue = currentVal => {
+		const firstTry = Math.max(0.5 * currentVal, currentVal * Math.random() * (Math.random() * 5));
+		const result = Math.min(2 * currentVal, firstTry);
+
+		return Math.floor(result);
+	};
 
 	const classyChartObject = classyCharts[chartType];
 
@@ -283,20 +288,6 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 			}
 
 			break;
-
-		// case "bar":
-		// 	// Randomize old data values
-		// 	newData = oldData.map(dataPoint => {
-		// 		return Object.assign({}, dataPoint, {
-		// 			Qty: randomizeValue(dataPoint.Qty),
-		// 			More: randomizeValue(dataPoint.More),
-		// 			Sold: randomizeValue(dataPoint.Sold)
-		// 		});
-		// 	});
-
-		// 	classyBarChart.setData(newData);
-
-		// 	break;
 		case "grouped-bar":
 			newData = oldData.map(dataPoint => {
 				return Object.assign(
@@ -320,10 +311,28 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 			break;
 		case "simple-bar":
 		case "simple-bar-accessible":
-		case "stacked-bar":
-			// const keys = ["Qty", "More", "Sold", "Restocking", "Misc"];
-
 			newData = oldData.map(dataPoint => Object.assign({}, dataPoint, { value: randomizeValue(dataPoint.value)}));
+
+			if (removeAKey) {
+				const randomIndex = Math.random() * (newData.length - 1);
+				newData.splice(randomIndex, randomIndex);
+			}
+
+			classyChartObject.setData(newData);
+
+			break;
+		case "stacked-bar":
+			newData = oldData.map(dataPoint => {
+				Object.keys(dataPoint).forEach(key => {
+					if (key !== classyChartObject.options.axis.x.domain) {
+						dataPoint[key] = randomizeValue(dataPoint[key]);
+					}
+
+					delete dataPoint.totalDatumValue;
+				});
+
+				return dataPoint;
+			});
 
 			if (removeAKey) {
 				const randomIndex = Math.random() * (newData.length - 1);

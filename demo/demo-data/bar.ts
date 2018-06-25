@@ -4,9 +4,15 @@ const generateRandomRatio = (num) => Math.max(0.2 * num, Math.floor(Math.random(
 
 export const barOptions = {
 	accessibility: false,
-	xDomain: "Part number",
-	yDomain: ["Sold", "More", "Qty"],
-	yTicks: 5,
+	axis: {
+		x: {
+			domain: "Part number"
+		},
+		y: {
+			domain: ["Sold", "More", "Qty"]
+		}
+	},
+	// yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
 	colors
@@ -56,9 +62,15 @@ export const simpleBarData = [
 
 export const simpleBarOptions = {
 	accessibility: false,
-	xDomain: "label",
-	yDomain: ["Qty", "More", "Sold", "Restocking", "Misc"],
-	yTicks: 5,
+	axis: {
+		x: {
+			domain: "label"
+		},
+		y: {
+			domain: ["Qty", "More", "Sold", "Restocking", "Misc"]
+		}
+	},
+	// yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
 	colors
@@ -102,9 +114,15 @@ export const stackedBarData = [
 
 export const stackedBarOptions = {
 	accessibility: false,
-	xDomain: "label",
-	yDomain: ["Qty", "More", "Sold", "Restocking", "Misc"],
-	yTicks: 5,
+	axis: {
+		x: {
+			domain: "label"
+		},
+		y: {
+			domain: ["Qty", "More", "Sold", "Restocking", "Misc"]
+		}
+	},
+	// yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
 	colors

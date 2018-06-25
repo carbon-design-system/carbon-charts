@@ -4,6 +4,7 @@ import { BaseChart } from "./base-chart";
 
 import { Configuration } from "./configuration";
 import { Tools } from "./tools";
+import { axisBottom } from "d3";
 
 export class BaseAxisChart extends BaseChart {
 	x: any;
@@ -28,15 +29,17 @@ export class BaseAxisChart extends BaseChart {
 
 	getKeysFromData() {
 		const keys: any = {};
+		const { axis } = this.options;
+
 		// Build out the keys array of objects to represent the legend items
 		// If yDomain does not exist & xDomain does
-		if (!this.options.yDomain && this.options.xDomain) {
+		if (!axis.y.domain && axis.x.domain) {
 			this.displayData.forEach(entry => {
-				const entryLabel = entry[this.options.xDomain];
+				const entryLabel = entry[axis.x.domain];
 				keys[entryLabel] = Configuration.legend.items.status.ACTIVE;
 			});
 		} else {
-			this.options.yDomain.forEach(item => {
+			axis.y.domain.forEach(item => {
 				keys[item] = Configuration.legend.items.status.ACTIVE;
 			});
 		}
@@ -72,7 +75,7 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	update() {
-		const newDisplayData = this.updateData();
+		const newDisplayData = this.updateDisplayData();
 		this.displayData = newDisplayData;
 
 		this.updateXandYGrid();
@@ -83,7 +86,7 @@ export class BaseAxisChart extends BaseChart {
 		this.interpolateValues(newDisplayData);
 	}
 
-	updateData() {
+	updateDisplayData() {
 		const oldData = this.data;
 		const activeLegendItems = this.getActiveLegendItems();
 
@@ -98,31 +101,34 @@ export class BaseAxisChart extends BaseChart {
 		return newDisplayData;
 	}
 
-	dataProcessor(data: any) {
-		if (this.options.yDomain) {
-			data.map(dataPoint => {
-				let total = this.options.yDomain.reduce((accum, yKey) => {
-					if (dataPoint[yKey]) {
-						return accum + dataPoint[yKey]
-					} else {
-						return accum;
+	dataProcessor(data: any, calculateTotalValue: boolean) {
+		const { axis } = this.options;
+		if (calculateTotalValue) {
+			if (axis.y.domain) {
+				data.map(dataPoint => {
+					let total = axis.y.domain.reduce((accum, yKey) => {
+						if (dataPoint[yKey]) {
+							return accum + dataPoint[yKey];
+						} else {
+							return accum;
+						}
+					}, 0);
+
+					if (dataPoint.value) {
+						total += dataPoint.value;
 					}
-				}, 0);
 
-				if (dataPoint.value) {
-					total += dataPoint.value;
-				}
+					dataPoint.totalDatumValue = total;
 
-				dataPoint.totalDatumValue = total;
+					return dataPoint;
+				});
+			} else {
+				data.map(dataPoint => {
+					dataPoint.totalDatumValue = dataPoint.value;
 
-				return dataPoint;
-			});
-		} else {
-			data.map(dataPoint => {
-				dataPoint.totalDatumValue = dataPoint.value;
-
-				return dataPoint;
-			});
+					return dataPoint;
+				});
+			}
 		}
 
 		return data;
@@ -175,11 +181,13 @@ export class BaseAxisChart extends BaseChart {
 
 	setXScale(noAnimation?: boolean) {
 		const { bar: margins } = Configuration.charts.margin;
+		const { axis } = this.options;
+
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
 
 		this.x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
-		this.x.domain(this.displayData.map(d => d.label));
+		this.x.domain(this.displayData.map(d => d[axis.x.domain]));
 	}
 
 	setXAxis(noAnimation?: boolean) {
@@ -225,7 +233,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("class", "x axis-label")
 			.attr("text-anchor", "middle")
 			.attr("transform", "translate(" + (xAxisRef.node().getBBox().width / 2) + "," + tickHeight + ")")
-			.text(this.options.xDomain);
+			.text(this.options.axis.x.domain);
 		}
 
 		// get the yHeight after the height of the axis has settled
@@ -245,7 +253,6 @@ export class BaseAxisChart extends BaseChart {
 
 	setYAxis(noAnimation?: boolean) {
 		const t = d3.transition().duration(noAnimation ? 0 : 750);
-
 		const yAxis = d3.axisLeft(this.y).ticks(5).tickSize(0);
 		const yAxisRef = this.svg.select("g.y.axis");
 		// If the <g class="y axis"> exists in the chart SVG, just update it

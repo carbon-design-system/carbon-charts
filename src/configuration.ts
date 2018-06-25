@@ -19,11 +19,26 @@ const baseOptions: any = {
 };
 
 const axisOptions: any = Object.assign({}, baseOptions, {
-	xDomain: [],
-	yDomain: [],
-	secondaryYDomain: [],
-	yTicks: 5,
-	y2Ticks: 10
+	series: [],
+	axis: {
+		x: {
+			domain: null,
+			ticks: 5
+		},
+		y: {
+			domain: null,
+			ticks: 5
+		},
+		ySecondary: {
+			domain: null,
+			ticks: 10
+		}
+	},
+	// xDomain: [],
+	// yDomain: [],
+	// secondaryYDomain: [],
+	// yTicks: 5,
+	// y2Ticks: 10
 });
 
 export namespace Configuration {
