@@ -27,7 +27,7 @@ export class StackedBarChart extends BarChart {
 
 		// Update existing bars
 		rect
-			.transition(animate ? this.getFillTransition() : 0)
+			.transition(this.getFillTransition(animate))
 			.attr("class", "bar")
 			.attr("x", (d: any) => this.x(d.data[axis.x.domain]))
 			.attr("y", (d: any, i) => this.y(d[1]))

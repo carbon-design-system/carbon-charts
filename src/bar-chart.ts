@@ -17,7 +17,8 @@ export class BarChart extends BaseAxisChart {
 	}
 
 	updateElements(animate: boolean, rect?: any) {
-		const { bar: margins } = Configuration.charts.margin;
+		const { axis } = this.options;
+
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
@@ -29,11 +30,11 @@ export class BarChart extends BaseAxisChart {
 		rect
 			.transition(animate ? this.getFillTransition() : 0)
 			.attr("class", "bar")
-			.attr("x", (d: any) => this.x(d.label))
+			.attr("x", (d: any) => this.x(d[axis.x.domain]))
 			.attr("y", (d: any, i) => this.y(d.value))
 			.attr("width", this.x.bandwidth())
 			.attr("height", (d: any) => height - this.y(d.value))
-			.attr("stroke", (d: any) => this.colorScale(d.label))
+			.attr("stroke", (d: any) => this.colorScale(d[axis.x.domain]))
 			.attr("fill", (d: any) => this.getFillScale()(d.label).toString());
 	}
 
