@@ -125,6 +125,17 @@ export class BarChart extends BaseAxisChart {
 		this.events.dispatchEvent(new Event("load"));
 	}
 
+	repositionXAxisTitle() {
+		const xAxisRef = this.svg.select("g.x.axis");
+		const tickHeight = this.getLargestTickHeight(xAxisRef.selectAll(".tick")) + Configuration.axis.tick.heightAddition;
+
+		const xAxisTitleRef = this.svg.select("g.x.axis text.x.axis-label");
+		xAxisTitleRef.attr("class", "x axis-label")
+			.attr("text-anchor", "middle")
+			.attr("transform", "translate(" + (xAxisRef.node().getBBox().width / 2) + "," + tickHeight + ")")
+			.text(this.options.axis.x.title);
+	}
+
 	resizeChart() {
 		const { pie: pieConfigs } = Configuration;
 
@@ -152,6 +163,10 @@ export class BarChart extends BaseAxisChart {
 
 		// Reposition the legend
 		this.positionLegend();
+
+		if (this.innerWrap.select(".axis-label.x").nodes().length > 0 && this.options.axis.x.title) {
+			this.repositionXAxisTitle();
+		}
 
 		this.events.dispatchEvent(new Event("resize"));
 	}

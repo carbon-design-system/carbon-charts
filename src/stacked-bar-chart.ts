@@ -18,9 +18,6 @@ export class StackedBarChart extends BarChart {
 		const { bar: margins } = Configuration.charts.margin;
 		const { axis } = this.options;
 
-		const chartSize = this.getChartSize();
-		const height = chartSize.height - this.getBBox(".x.axis").height;
-
 		if (!rect) {
 			rect = this.innerWrap.selectAll("rect.bar");
 		}
@@ -35,19 +32,8 @@ export class StackedBarChart extends BarChart {
 			.attr("height", (d: any) => this.y(d[0]) - this.y(d[1]))
 			.transition(this.getFillTransition())
 			// TODO - Find a way to access key here
-			.attr("fill", (d: any) => {
-				const dValue = d[1] - d[0];
-				const dKey = Object.keys(d.data).find(key => d.data[key] === dValue);
-
-				return this.getFillScale()(dKey);
-			})
-			.attr("stroke", (d: any) => {
-				const dValue = d[1] - d[0];
-				const dKey = Object.keys(d.data).find(key => d.data[key] === dValue);
-
-				return this.getFillScale()(dKey);
-			})
-			.attr("stroke", (d: any) => this.colorScale(d.label))
+			.attr("fill", d => this.getFillScale()(d[axis.x.domain]))
+			.attr("stroke", d => this.colorScale(d[axis.x.domain]))
 			.attr("stroke-width", this.options.accessibility ? 2 : 0);
 	}
 
@@ -89,10 +75,10 @@ export class StackedBarChart extends BarChart {
 		const stackData = d3.stack().keys(axis.y.domain)(newData);
 
 		// Apply new data to the bars
-		const rect = this.innerWrap.selectAll("g.all-bars g.bars")
-			.data(stackData)
+		const g = this.innerWrap.selectAll("g.all-bars g.bars")
+			.data(stackData);
+		const rect = g.selectAll("g rect")
 				// TODO - Rename to bars-${dKey}
-				.selectAll("g rect")
 				.data(d => this.addLabelsToDataPoints(d));
 
 		this.updateElements(true, rect);
@@ -109,12 +95,13 @@ export class StackedBarChart extends BarChart {
 			.transition(this.getFillTransition())
 			// TODO - Find a way to access key here
 			.attr("fill", d => this.getFillScale()(d[axis.x.domain]))
-			.attr("stroke", d => this.getFillScale()(d[axis.x.domain]))
+			.attr("stroke", d => this.colorScale(d[axis.x.domain]))
 			.attr("opacity", 1)
 			.attr("stroke-width", this.options.accessibility ? 2 : 0);
 
 		// Remove bars that are no longer needed
 		rect.exit()
+			.each(d => console.log("g removing"))
 			.transition()
 			.duration(750)
 			.style("opacity", 0)

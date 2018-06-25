@@ -6,7 +6,8 @@ export const barOptions = {
 	accessibility: false,
 	axis: {
 		x: {
-			domain: "Part number"
+			domain: "Part number",
+			title: "2017 Sales per Model"
 		},
 		y: {
 			domain: ["Sold", "More", "Qty"]
@@ -116,7 +117,8 @@ export const stackedBarOptions = {
 	accessibility: false,
 	axis: {
 		x: {
-			domain: "label"
+			domain: "label",
+			title: "2017 Financials"
 		},
 		y: {
 			domain: ["Qty", "More", "Sold", "Restocking", "Misc"]

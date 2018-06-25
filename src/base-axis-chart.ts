@@ -228,12 +228,12 @@ export class BaseAxisChart extends BaseChart {
 			.attr("fill", Configuration.axis.domain.color)
 			.attr("stroke-width", Configuration.axis.domain.strokeWidth);
 
-		if (this.innerWrap.select(".axis-label.x").nodes().length === 0) {
+		if (this.innerWrap.select(".axis-label.x").nodes().length === 0 && this.options.axis.x.title) {
 			xAxisRef.append("text")
-			.attr("class", "x axis-label")
-			.attr("text-anchor", "middle")
-			.attr("transform", "translate(" + (xAxisRef.node().getBBox().width / 2) + "," + tickHeight + ")")
-			.text(this.options.axis.x.domain);
+				.attr("class", "x axis-label")
+				.attr("text-anchor", "middle")
+				.attr("transform", "translate(" + (xAxisRef.node().getBBox().width / 2) + "," + tickHeight + ")")
+				.text(this.options.axis.x.title);
 		}
 
 		// get the yHeight after the height of the axis has settled
