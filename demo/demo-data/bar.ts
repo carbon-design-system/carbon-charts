@@ -13,7 +13,8 @@ export const barOptions = {
 			domain: ["Sold", "More", "Qty"],
 			formatter: axisValue => {
 				return `${axisValue / 1000000}mil`;
-			}
+			},
+			numberOfTicks: 3
 		}
 	},
 	// yTicks: 5,
@@ -127,7 +128,8 @@ export const stackedBarOptions = {
 			domain: ["Qty", "More", "Sold", "Restocking", "Misc"],
 			formatter: axisValue => {
 				return `${axisValue / 1000}k`;
-			}
+			},
+			numberOfTicks: 10
 		}
 	},
 	// yTicks: 5,

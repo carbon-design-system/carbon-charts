@@ -76,8 +76,7 @@ export class StackedBarChart extends BarChart {
 		// Apply new data to the bars
 		const g = this.innerWrap.selectAll("g.bars-wrapper g.bars")
 			.data(stackData);
-		const rect = g.selectAll("g rect")
-				// TODO - Rename to bars-${dKey}
+		const rect = g.selectAll("rect")
 				.data(d => this.addLabelsToDataPoints(d));
 
 		this.updateElements(true, rect);
@@ -99,7 +98,7 @@ export class StackedBarChart extends BarChart {
 
 		// Remove bars that are no longer needed
 		rect.exit()
-			.each(d => console.log("g removing"))
+			.each(d => console.log("rect removing"))
 			.transition()
 			.duration(750)
 			.style("opacity", 0)
@@ -138,13 +137,11 @@ export class StackedBarChart extends BarChart {
 
 		const stackData = d3.stack().keys(axis.y.domain)(data);
 		const addedBars = g.append("g")
-			// TODO - Rename to bars
 			.classed("bars-wrapper", true)
-			.selectAll(".bars")
+			.selectAll("g.bars")
 				.data(stackData)
 				.enter()
 					.append("g")
-					// TODO - Rename to bars-${dKey}
 					.attr("class", d => `bars ${d.key}`)
 					.selectAll("rect")
 					.data(d => this.addLabelsToDataPoints(d))
@@ -155,7 +152,6 @@ export class StackedBarChart extends BarChart {
 						.attr("y", (d: any, i) => this.y(d[1]))
 						.attr("width", this.x.bandwidth())
 						.attr("height", (d: any) => this.y(d[0]) - this.y(d[1]))
-						// TODO - Find a way to access key here
 						.attr("fill", d => this.getFillScale()(d[axis.x.domain]))
 						.attr("stroke", d => this.getFillScale()(d[axis.x.domain]));
 

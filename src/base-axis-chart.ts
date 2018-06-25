@@ -253,11 +253,12 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	setYAxis(noAnimation?: boolean) {
+		const { y: yAxisOptions } = this.options.axis;
 		const t = d3.transition().duration(noAnimation ? 0 : 750);
 		const yAxis = d3.axisLeft(this.y)
-			.ticks(5)
+			.ticks(yAxisOptions.numberOfTicks || 5)
 			.tickSize(0)
-			.tickFormat(this.options.axis.y.formatter);
+			.tickFormat(yAxisOptions.formatter);
 		const yAxisRef = this.svg.select("g.y.axis");
 		// If the <g class="y axis"> exists in the chart SVG, just update it
 		if (yAxisRef.nodes().length > 0) {
