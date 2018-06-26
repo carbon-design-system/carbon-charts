@@ -7,12 +7,12 @@ import { Tools } from "./tools";
 export class DonutChart extends PieChart {
 	center: DonutCenter;
 
-	constructor(holder: Element, options?: any, data?: any) {
-		super(holder, options, data, "donut");
+	constructor(holder: Element, configs: any) {
+		super(holder, configs, "donut");
 
 		// Check if the DonutCenter object is provided
-		if (options.center) {
-			this.center = options.center;
+		if (configs.options.center) {
+			this.center = configs.options.center;
 		}
 	}
 

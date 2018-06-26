@@ -22,13 +22,13 @@ export class BaseChart {
 
 	// Fill scales & fill related objects
 	patternScale: any;
-	colorScale: any;
+	colorScale = {};
 	patternsService: PatternsService;
 
 	// Event target
 	events: any;
 
-	constructor(holder: Element, options?: any, data?: any) {
+	constructor(holder: Element, configs: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
 
 		this.holder = holder;
@@ -37,8 +37,8 @@ export class BaseChart {
 		this.container = container;
 
 
-		if (options) {
-			this.options = Object.assign(this.options, options);
+		if (configs.options) {
+			this.options = Object.assign(this.options, configs.options);
 
 			if (this.options.containerResizable) {
 				this.resizeWhenContainerChange();
@@ -47,8 +47,8 @@ export class BaseChart {
 
 		this.events = document.createDocumentFragment();
 
-		if (data) {
-			this.setData(data);
+		if (configs.data) {
+			this.setData(configs.data);
 		}
 
 		// Accessibility & patterns
@@ -90,6 +90,9 @@ export class BaseChart {
 			// Update keys for legend use the latest data keys
 			this.options.keys = keys;
 
+			// Set the color scale based on the keys present in the data
+			this.setColorScale();
+
 			// Perform the draw or update chart
 			if (initialDraw) {
 				this.initialDraw();
@@ -103,15 +106,34 @@ export class BaseChart {
 		});
 	}
 
+	// TODO - Delete
 	getKeysFromData() {
 		const keys = {};
 
 		// Build out the keys array of objects to represent the legend items
-		this.data.forEach(entry => {
-			keys[entry.label] = Configuration.legend.items.status.ACTIVE;
+		this.data.labels.forEach(label => {
+			keys[label] = Configuration.legend.items.status.ACTIVE;
 		});
 
 		return keys;
+	}
+
+	// Goes through all datasets, and returns the larger length of dataset["data"]
+	getMaxDatasetLength() {
+		let result = 0;
+		this.displayData.datasets.forEach(dataset => {
+			if (dataset.data && dataset.data.length > result) {
+				result = dataset.data.length;
+			}
+		});
+
+		return result;
+	}
+
+	setColorScale() {
+		this.displayData.datasets.forEach(dataset => {
+			this.colorScale[dataset.label] = d3.scaleOrdinal().range(dataset.backgroundColors).domain(this.displayData.labels);
+		});
 	}
 
 	getChartSize(container = this.container) {
@@ -418,7 +440,9 @@ export class BaseChart {
 		legendEnter.select("div")
 			.merge(legendItems.selectAll("div"))
 			.style("background-color", (d, i) => {
-				return d.value === Configuration.legend.items.status.ACTIVE ? this.colorScale(d.key) : "white";
+				return "violet";
+
+				// return d.value === Configuration.legend.items.status.ACTIVE ? this.colorScale[d.datasetLabel](d.key) : "white";
 			});
 
 		// Add hover effect for legend item circles
@@ -677,7 +701,7 @@ export class BaseChart {
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
 			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px")
-			.style("border-color", this.colorScale(d.label));
+			.style("border-color", this.colorScale[d.datasetLabel](d.label));
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				this.hideTooltip();

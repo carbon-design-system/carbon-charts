@@ -8,8 +8,8 @@ export class GroupedBarChart extends BarChart {
 	x1: any;
 	groups: any;
 
-	constructor(holder: Element, options?: any, data?: any) {
-		super(holder, options, data);
+	constructor(holder: Element, configs: any) {
+		super(holder, configs);
 
 		this.options.type = "grouped-bar";
 	}

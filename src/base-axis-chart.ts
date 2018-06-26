@@ -10,8 +10,8 @@ export class BaseAxisChart extends BaseChart {
 	x: any;
 	y: any;
 
-	constructor(holder: Element, options?: any, data?: any) {
-		super(holder, options, data);
+	constructor(holder: Element, configs: any) {
+		super(holder, configs);
 	}
 
 	setSVG(): any {
@@ -53,9 +53,6 @@ export class BaseAxisChart extends BaseChart {
 		}
 
 		this.setSVG();
-
-		// Set the color scale based on the keys present in the data
-		this.setColorScale();
 
 		// Scale out the domains
 		// Set the x & y axis as well as their labels
@@ -102,34 +99,34 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	dataProcessor(data: any, calculateTotalValue: boolean) {
-		const { axis } = this.options;
-		if (calculateTotalValue) {
-			if (axis.y.domain) {
-				data.map(dataPoint => {
-					let total = axis.y.domain.reduce((accum, yKey) => {
-						if (dataPoint[yKey]) {
-							return accum + dataPoint[yKey];
-						} else {
-							return accum;
-						}
-					}, 0);
+		// const { axis } = this.options;
+		// if (calculateTotalValue) {
+		// 	if (axis.y.domain) {
+		// 		data.map(dataPoint => {
+		// 			let total = axis.y.domain.reduce((accum, yKey) => {
+		// 				if (dataPoint[yKey]) {
+		// 					return accum + dataPoint[yKey];
+		// 				} else {
+		// 					return accum;
+		// 				}
+		// 			}, 0);
 
-					if (dataPoint.value) {
-						total += dataPoint.value;
-					}
+		// 			if (dataPoint.value) {
+		// 				total += dataPoint.value;
+		// 			}
 
-					dataPoint.totalDatumValue = total;
+		// 			dataPoint.totalDatumValue = total;
 
-					return dataPoint;
-				});
-			} else {
-				data.map(dataPoint => {
-					dataPoint.totalDatumValue = dataPoint.value;
+		// 			return dataPoint;
+		// 		});
+		// 	} else {
+		// 		data.map(dataPoint => {
+		// 			dataPoint.totalDatumValue = dataPoint.value;
 
-					return dataPoint;
-				});
-			}
-		}
+		// 			return dataPoint;
+		// 		});
+		// 	}
+		// }
 
 		return data;
 	}
@@ -171,10 +168,6 @@ export class BaseAxisChart extends BaseChart {
 		return computedChartSize;
 	}
 
-	setColorScale() {
-		this.colorScale = d3.scaleOrdinal().range(this.options.colors).domain(this.getLegendItemKeys());
-	}
-
 	/**************************************
 	 *  Axis & Grids                      *
 	 *************************************/
@@ -187,7 +180,7 @@ export class BaseAxisChart extends BaseChart {
 		const width = chartSize.width - margins.left - margins.right;
 
 		this.x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
-		this.x.domain(this.displayData.map(d => d[axis.x.domain]));
+		this.x.domain(this.displayData.labels);
 	}
 
 	setXAxis(noAnimation?: boolean) {
@@ -246,7 +239,15 @@ export class BaseAxisChart extends BaseChart {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
-		const yEnd = d3.max(this.displayData, (d: any) => d.totalDatumValue);
+
+		const { datasets } = this.displayData;
+		let yEnd;
+		// TODO
+		if (datasets.length === 1) {
+			yEnd = d3.max(datasets[0].data);
+		} else {
+			yEnd = d3.max(datasets, (d: any) => d3.max(d.data));
+		}
 
 		this.y = d3.scaleLinear().rangeRound([height, 0]);
 		this.y.domain([0, yEnd]);
@@ -398,13 +399,13 @@ export class BaseAxisChart extends BaseChart {
 			.on("mouseover", function(d) {
 				d3.select(this)
 					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
-					.attr("stroke", self.colorScale(d.label))
+					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
 					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
 			})
 			.on("mouseout", function(d) {
 				d3.select(this)
 					.attr("stroke-width", accessibility ? 2 : Configuration.bars.mouseout.strokeWidth)
-					.attr("stroke", accessibility ? self.colorScale(d.label) : "none")
+					.attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
 					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
 			})
 			.on("click", function(d) {

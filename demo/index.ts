@@ -36,12 +36,12 @@ const chartTypes = [
 	// 	data: dimensionData,
 	// 	options: dimensionOption
 	// },
-	{
-		id: "grouped-bar",
-		name: "Bar",
-		options: barOptions,
-		data: barData
-	},
+	// {
+	// 	id: "grouped-bar",
+	// 	name: "Bar",
+	// 	options: barOptions,
+	// 	data: barData
+	// },
 	// {
 	// 	id: "simplest-bar",
 	// 	name: "Bar",
@@ -54,24 +54,24 @@ const chartTypes = [
 		options: simpleBarOptions,
 		data: simpleBarData
 	},
-	{
-		id: "simple-bar-accessible",
-		name: "Accessible Bar",
-		options: Object.assign({}, simpleBarOptions, {accessibility: true}),
-		data: simpleBarData
-	},
+	// {
+	// 	id: "simple-bar-accessible",
+	// 	name: "Accessible Bar",
+	// 	options: Object.assign({}, simpleBarOptions, {accessibility: true}),
+	// 	data: simpleBarData
+	// },
 	// {
 	// 	id: "line",
 	// 	name: "Line",
 	// 	options: barOptions,
 	// 	data: barData
 	// },
-	{
-		id: "stacked-bar",
-		name: "Stacked Bar",
-		options: stackedBarOptions,
-		data: stackedBarData
-	},
+	// {
+	// 	id: "stacked-bar",
+	// 	name: "Stacked Bar",
+	// 	options: stackedBarOptions,
+	// 	data: stackedBarData
+	// },
 	// {
 	// 	id: "double-axis-line",
 	// 	name: "Double Axis",
@@ -84,18 +84,18 @@ const chartTypes = [
 	// 	options: doubleYAxisOptions,
 	// 	data: longData
 	// },
-	{
-		id: "pie",
-		name: "pie",
-		options: pieOptions,
-		data: pieData
-	},
-	{
-		id: "donut",
-		name: "donut",
-		options: donutOptions,
-		data: pieData
-	}
+	// {
+	// 	id: "pie",
+	// 	name: "pie",
+	// 	options: pieOptions,
+	// 	data: pieData
+	// },
+	// {
+	// 	id: "donut",
+	// 	name: "donut",
+	// 	options: donutOptions,
+	// 	data: pieData
+	// }
 ];
 
 const setDemoActionsEventListener = (chartType: any, oldData: any) => {
@@ -125,22 +125,24 @@ chartTypes.forEach(type => {
 	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
 	if (classyContainer) {
 		switch (type.id) {
-			case "grouped-bar":
-				classyCharts[type.id] = new GroupedBarChart(
-					classyContainer,
-					Object.assign({}, type.options, {type: type.id}),
-					type.data
-				);
+			// case "grouped-bar":
+			// 	classyCharts[type.id] = new GroupedBarChart(
+			// 		classyContainer,
+			// 		Object.assign({}, type.options, {type: type.id}),
+			// 		type.data
+			// 	);
 
-				setDemoActionsEventListener(type.id, type.data);
+			// 	setDemoActionsEventListener(type.id, type.data);
 
-				break;
+			// 	break;
 			default:
 			case "simple-bar":
 				classyCharts[type.id] = new BarChart(
 					classyContainer,
-					Object.assign({}, type.options, {type: type.id}),
-					type.data
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id}),
+					}
 				);
 
 				// classyBarChart.events.addEventListener("load", e => {
@@ -168,72 +170,40 @@ chartTypes.forEach(type => {
 				setDemoActionsEventListener(type.id, type.data);
 
 				break;
-			// case "line":
-			// 	const classyLineChart = new LineChart(
-			// 		classyContainer,
-			// 		Object.assign({}, type.options, {type: type.id}),
-			// 		type.data
-			// 	);
-			// 	classyLineChart.drawChart();
-			// 	break;
 			// case "stacked-bar":
-			// 	const classyStackedBarChart = new StackedBarChart(
+			// 	classyCharts[type.id] = new StackedBarChart(
 			// 		classyContainer,
 			// 		Object.assign({}, type.options, {type: type.id}),
 			// 		type.data
 			// 	);
-			// 	classyStackedBarChart.drawChart();
+
+			// 	setDemoActionsEventListener(type.id, type.data);
+
 			// 	break;
-			// case "double-axis-line":
-			// 	const classyDoubleAxisChart = new DoubleAxisLineChart(
+			// case "pie":
+			// 	classyCharts[type.id] = new PieChart(
+			// 		classyContainer,
+			// 		Object.assign({}, type.options, {type: type.id}),
+			// 		new Promise((resolve, reject) => {
+			// 			setTimeout(() => {
+			// 				resolve(type.data);
+			// 			}, 0);
+			// 		})
+			// 	);
+
+			// 	setDemoActionsEventListener(type.id, type.data);
+
+			// 	break;
+			// case "donut":
+			// 	classyCharts[type.id] = new DonutChart(
 			// 		classyContainer,
 			// 		Object.assign({}, type.options, {type: type.id}),
 			// 		type.data
 			// 	);
-			// 	classyDoubleAxisChart.drawChart();
+
+			// 	setDemoActionsEventListener(type.id, type.data);
+
 			// 	break;
-			// case "combo":
-			// 	const classyComboChart = new ComboChart(
-			// 		classyContainer,
-			// 		Object.assign({}, type.options, {type: type.id}),
-			// 		type.data
-			// 	);
-			// 	classyComboChart.drawChart();
-			// 	break;
-			case "stacked-bar":
-				classyCharts[type.id] = new StackedBarChart(
-					classyContainer,
-					Object.assign({}, type.options, {type: type.id}),
-					type.data
-				);
-
-				setDemoActionsEventListener(type.id, type.data);
-
-				break;
-			case "pie":
-				classyCharts[type.id] = new PieChart(
-					classyContainer,
-					Object.assign({}, type.options, {type: type.id}),
-					new Promise((resolve, reject) => {
-						setTimeout(() => {
-							resolve(type.data);
-						}, 0);
-					})
-				);
-
-				setDemoActionsEventListener(type.id, type.data);
-
-				break;
-			case "donut":
-				classyCharts[type.id] = new DonutChart(
-					classyContainer,
-					Object.assign({}, type.options, {type: type.id}),
-					type.data
-				);
-
-				setDemoActionsEventListener(type.id, type.data);
-
-				break;
 		}
 	}
 });
@@ -254,61 +224,61 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 	const classyChartObject = classyCharts[chartType];
 
 	switch (chartType) {
-		case "donut":
-		case "pie":
-			// Randomize old data values
-			newData = oldData.map(dataPoint => {
-				return Object.assign({}, dataPoint, {value: randomizeValue(dataPoint.value)});
-			});
+		// case "donut":
+		// case "pie":
+		// 	// Randomize old data values
+		// 	newData = oldData.map(dataPoint => {
+		// 		return Object.assign({}, dataPoint, {value: randomizeValue(dataPoint.value)});
+		// 	});
 
-			if (delay) {
-				const dataPromise = new Promise((resolve, reject) => {
-					setTimeout(() => {
-						resolve(newData);
-					}, delay || 0);
-				});
+		// 	if (delay) {
+		// 		const dataPromise = new Promise((resolve, reject) => {
+		// 			setTimeout(() => {
+		// 				resolve(newData);
+		// 			}, delay || 0);
+		// 		});
 
-				classyChartObject.setData(dataPromise);
-			} else {
-				classyChartObject.setData(newData);
-			}
+		// 		classyChartObject.setData(dataPromise);
+		// 	} else {
+		// 		classyChartObject.setData(newData);
+		// 	}
 
-			if (chartType === "donut") {
-				setTimeout(() => {
-					// Update DonutCenter values
-					const { number: centerNumber } = classyChartObject.center.configs;
-					let newCenterNumber = Math.floor(Math.max(0.2 * centerNumber, centerNumber * Math.random() * (Math.random() * 5)));
-					if (newCenterNumber <= 10) {
-						newCenterNumber = 10000;
-					}
+		// 	if (chartType === "donut") {
+		// 		setTimeout(() => {
+		// 			// Update DonutCenter values
+		// 			const { number: centerNumber } = classyChartObject.center.configs;
+		// 			let newCenterNumber = Math.floor(Math.max(0.2 * centerNumber, centerNumber * Math.random() * (Math.random() * 5)));
+		// 			if (newCenterNumber <= 10) {
+		// 				newCenterNumber = 10000;
+		// 			}
 
-					classyChartObject.center.configs.number = newCenterNumber;
-					classyChartObject.center.update();
-				}, delay || 0);
-			}
+		// 			classyChartObject.center.configs.number = newCenterNumber;
+		// 			classyChartObject.center.update();
+		// 		}, delay || 0);
+		// 	}
 
-			break;
-		case "grouped-bar":
-			newData = oldData.map(dataPoint => {
-				return Object.assign(
-					{},
-					dataPoint,
-					{
-						"Qty": randomizeValue(dataPoint.Qty),
-						"More": randomizeValue(dataPoint.More),
-						"Sold": randomizeValue(dataPoint.Sold)
-					}
-				);
-			});
+		// 	break;
+		// case "grouped-bar":
+		// 	newData = oldData.map(dataPoint => {
+		// 		return Object.assign(
+		// 			{},
+		// 			dataPoint,
+		// 			{
+		// 				"Qty": randomizeValue(dataPoint.Qty),
+		// 				"More": randomizeValue(dataPoint.More),
+		// 				"Sold": randomizeValue(dataPoint.Sold)
+		// 			}
+		// 		);
+		// 	});
 
-			if (removeAKey) {
-				const randomIndex = Math.random() * (newData.length - 1);
-				newData.splice(randomIndex, randomIndex);
-			}
+		// 	if (removeAKey) {
+		// 		const randomIndex = Math.random() * (newData.length - 1);
+		// 		newData.splice(randomIndex, randomIndex);
+		// 	}
 
-			classyChartObject.setData(newData);
+		// 	classyChartObject.setData(newData);
 
-			break;
+		// 	break;
 		case "simple-bar":
 		case "simple-bar-accessible":
 			newData = oldData.map(dataPoint => Object.assign({}, dataPoint, { value: randomizeValue(dataPoint.value)}));
@@ -321,26 +291,26 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 			classyChartObject.setData(newData);
 
 			break;
-		case "stacked-bar":
-			newData = oldData.map(dataPoint => {
-				Object.keys(dataPoint).forEach(key => {
-					if (key !== classyChartObject.options.axis.x.domain) {
-						dataPoint[key] = randomizeValue(dataPoint[key]);
-					}
+		// case "stacked-bar":
+		// 	newData = oldData.map(dataPoint => {
+		// 		Object.keys(dataPoint).forEach(key => {
+		// 			if (key !== classyChartObject.options.axis.x.domain) {
+		// 				dataPoint[key] = randomizeValue(dataPoint[key]);
+		// 			}
 
-					delete dataPoint.totalDatumValue;
-				});
+		// 			delete dataPoint.totalDatumValue;
+		// 		});
 
-				return dataPoint;
-			});
+		// 		return dataPoint;
+		// 	});
 
-			if (removeAKey) {
-				const randomIndex = Math.random() * (newData.length - 1);
-				newData.splice(randomIndex, randomIndex);
-			}
+		// 	if (removeAKey) {
+		// 		const randomIndex = Math.random() * (newData.length - 1);
+		// 		newData.splice(randomIndex, randomIndex);
+		// 	}
 
-			classyChartObject.setData(newData);
+		// 	classyChartObject.setData(newData);
 
-			break;
+		// 	break;
 	}
 };

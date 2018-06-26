@@ -11,8 +11,8 @@ export class PieChart extends BaseChart {
 	// Used to assign colors to each slice by their label
 	colorScale: any;
 
-	constructor(holder: Element, options?: any, data?: any, type: string = "pie") {
-		super(holder, options, data);
+	constructor(holder: Element, configs: any, type: string = "pie") {
+		super(holder, configs);
 
 		this.options.type = type;
 

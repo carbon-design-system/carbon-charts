@@ -8,8 +8,8 @@ export class StackedBarChart extends BarChart {
 	y: any;
 	colorScale: any;
 
-	constructor(holder: Element, options?: any, data?: any) {
-		super(holder, options, data);
+	constructor(holder: Element, configs: any) {
+		super(holder, configs);
 
 		this.options.type = "stacked-bar";
 	}

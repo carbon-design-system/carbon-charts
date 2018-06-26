@@ -7,11 +7,12 @@ import PatternsService from "./services/patterns";
 
 export class BarChart extends BaseAxisChart {
 	x: any;
+	x1: any;
 	y: any;
 	colorScale: any;
 
-	constructor(holder: Element, options?: any, data?: any) {
-		super(holder, options, data);
+	constructor(holder: Element, configs: any) {
+		super(holder, configs);
 
 		this.options.type = "bar";
 	}
@@ -36,6 +37,25 @@ export class BarChart extends BaseAxisChart {
 			.attr("height", (d: any) => height - this.y(d.value))
 			.attr("stroke", (d: any) => this.colorScale(d[axis.x.domain]))
 			.attr("fill", (d: any) => this.getFillScale()(d.label).toString());
+	}
+
+	setXScale(noAnimation?: boolean) {
+		const { bar: margins } = Configuration.charts.margin;
+		const { axis } = this.options;
+
+		const chartSize = this.getChartSize();
+		const width = chartSize.width - margins.left - margins.right;
+
+		this.x = d3.scaleBand().rangeRound([0, width]).padding(0.25);
+		this.x1 = d3.scaleBand().padding(0.2);
+
+		const activeLegendItems = this.getActiveLegendItems();
+		// Apply legened filters, OLD VERSION axis.y.domain.filter(item => activeLegendItems.indexOf(item) > -1)
+
+		this.x.domain(this.displayData.labels);
+		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
+
+		console.log("this.x.bandwidth()", this.x.bandwidth(), this.displayData.datasets.map(dataset => dataset.label));
 	}
 
 	interpolateValues(newData: any) {
@@ -88,35 +108,73 @@ export class BarChart extends BaseAxisChart {
 		this.innerWrap.style("width", "100%")
 			.style("height", "100%");
 
-		const margin = {top: 0, right: -40, bottom: 50, left: 40};
+		const { bar: margins } = Configuration.charts.margin;
+		const { axis } = this.options;
+
 		const chartSize = this.getChartSize();
+		const width = chartSize.width - margins.left - margins.right;
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
-		const g = this.innerWrap
-			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+		const gBars = this.innerWrap
+			.attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+			.append("g")
+			.classed("bars", true);
 
-		this.patternsService.addPatternSVGs(data, this.colorScale);
-		this.patternScale = d3.scaleOrdinal()
-			.range(this.patternsService.getFillValues())
-			.domain(this.getLegendItemKeys());
-
-		const fillScale = this.getFillScale();
-
-		const addedBars = g.selectAll(".bar")
-			.data(data)
+		const { datasets } = this.displayData;
+		gBars.selectAll("g")
+			.data(this.displayData.labels)
 			.enter()
-			.append("rect")
-			.attr("class", "bar")
-			.attr("x", (d: any) => this.x(d.label))
-			.attr("y", (d: any, i) => this.y(d.value))
-			.attr("width", this.x.bandwidth())
-			.attr("height", (d: any) => height - this.y(d.value))
-			.attr("fill", (d: any) => fillScale(d.label).toString())
-			.attr("stroke", (d: any) => this.colorScale(d.label));
+				.append("g")
+				.attr("transform", d => "translate(" + this.x(d) + ",0)")
+				.selectAll("rect.bar")
+				.data((d, index) => {
+					console.log(datasets.map(dataset => {
+						return {
+							label: d,
+							datasetLabel: dataset.label,
+							value: dataset.data[index]
+						};
+					}));
 
-		if (this.options.accessibility) {
-			addedBars.attr("stroke-width", 2);
-		}
+					return datasets.map(dataset => {
+						return {
+							label: d,
+							datasetLabel: dataset.label,
+							value: dataset.data[index]
+						};
+					});
+				})
+					.enter()
+						.each(d => console.log("d", d))
+						.append("rect")
+						.classed("bar", true)
+						.attr("x", d => this.x1(d.datasetLabel))
+						.attr("y", d => this.y(d.value)) // this.y(d.value)
+						.attr("width", this.x1.bandwidth())
+						.attr("height", d => height - this.y(d.value)) // this.y(d.value)
+						.attr("fill", d => this.colorScale[d.datasetLabel](d.label));
+
+		// 		.attr("x", d => this.x1(d.label))
+		// 		.attr("y", d => this.y(d.value))
+		// 		.attr("width", this.x1.bandwidth())
+		// 		.attr("height", d => height - this.y(d.value))
+		// 		.attr("fill", d => this.colorScale(d.label));
+
+		// g.append("g")
+		// .classed("bars", true)
+		// .selectAll("g")
+		// .data(data)
+		// .enter().append("g")
+		// 	.attr("transform", d => "translate(" + this.x(d[axis.x.domain]) + ",0)")
+		// 	.selectAll("rect.bar")
+		// 	.data(d => this.getLegendItemKeys().map(function(key) { return {label: key, value: d[key]}; }))
+		// 	.enter().append("rect")
+		// 		.classed("bar", true)
+		// 		.attr("x", d => this.x1(d.label))
+		// 		.attr("y", d => this.y(d.value))
+		// 		.attr("width", this.x1.bandwidth())
+		// 		.attr("height", d => height - this.y(d.value))
+		// 		.attr("fill", d => this.colorScale(d.label));
 
 		// Hide the overlay
 		this.updateOverlay().hide();
@@ -124,6 +182,52 @@ export class BarChart extends BaseAxisChart {
 		// Dispatch the load event
 		this.events.dispatchEvent(new Event("load"));
 	}
+
+	// draw() {
+	// 	const { data } = this;
+
+	// 	console.log("BAR DRAW");
+	// 	console.log("data", data);
+
+	// 	this.innerWrap.style("width", "100%")
+	// 		.style("height", "100%");
+
+	// 	const margin = {top: 0, right: -40, bottom: 50, left: 40};
+	// 	const chartSize = this.getChartSize();
+	// 	const height = chartSize.height - this.getBBox(".x.axis").height;
+
+	// 	const g = this.innerWrap
+	// 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	// 	this.patternsService.addPatternSVGs(data, this.colorScale);
+	// 	this.patternScale = d3.scaleOrdinal()
+	// 		.range(this.patternsService.getFillValues())
+	// 		.domain(this.getLegendItemKeys());
+
+	// 	const fillScale = this.getFillScale();
+
+	// 	const addedBars = g.selectAll(".bar")
+	// 		.data(data)
+	// 		.enter()
+	// 		.append("rect")
+	// 		.attr("class", "bar")
+	// 		.attr("x", (d: any) => this.x(d.label))
+	// 		.attr("y", (d: any, i) => this.y(d.value))
+	// 		.attr("width", this.x.bandwidth())
+	// 		.attr("height", (d: any) => height - this.y(d.value))
+	// 		.attr("fill", (d: any) => fillScale(d.label).toString())
+	// 		.attr("stroke", (d: any) => this.colorScale(d.label));
+
+	// 	if (this.options.accessibility) {
+	// 		addedBars.attr("stroke-width", 2);
+	// 	}
+
+	// 	// Hide the overlay
+	// 	this.updateOverlay().hide();
+
+	// 	// Dispatch the load event
+	// 	this.events.dispatchEvent(new Event("load"));
+	// }
 
 	repositionXAxisTitle() {
 		const xAxisRef = this.svg.select("g.x.axis");
