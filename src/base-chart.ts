@@ -108,12 +108,19 @@ export class BaseChart {
 
 	// TODO - Delete
 	getKeysFromData() {
+		const { datasets } = this.displayData;
 		const keys = {};
 
-		// Build out the keys array of objects to represent the legend items
-		this.data.labels.forEach(label => {
-			keys[label] = Configuration.legend.items.status.ACTIVE;
-		});
+		if (datasets.length === 1) {
+			// Build out the keys array of objects to represent the legend items
+			this.displayData.labels.forEach(label => {
+				keys[label] = Configuration.legend.items.status.ACTIVE;
+			});
+		} else {
+			this.displayData.datasets.forEach(dataset => {
+				keys[dataset.label] = Configuration.legend.items.status.ACTIVE;
+			});
+		}
 
 		return keys;
 	}

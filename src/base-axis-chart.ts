@@ -27,25 +27,25 @@ export class BaseAxisChart extends BaseChart {
 		return this.svg;
 	}
 
-	getKeysFromData() {
-		const keys: any = {};
-		const { axis } = this.options;
+	// getKeysFromData() {
+	// 	const keys: any = {};
+	// 	const { axis } = this.options;
 
-		// Build out the keys array of objects to represent the legend items
-		// If yDomain does not exist & xDomain does
-		if (!axis.y.domain && axis.x.domain) {
-			this.displayData.forEach(entry => {
-				const entryLabel = entry[axis.x.domain];
-				keys[entryLabel] = Configuration.legend.items.status.ACTIVE;
-			});
-		} else {
-			axis.y.domain.forEach(item => {
-				keys[item] = Configuration.legend.items.status.ACTIVE;
-			});
-		}
+	// 	// Build out the keys array of objects to represent the legend items
+	// 	// If yDomain does not exist & xDomain does
+	// 	if (!axis.y.domain && axis.x.domain) {
+	// 		this.displayData.forEach(entry => {
+	// 			const entryLabel = entry[axis.x.domain];
+	// 			keys[entryLabel] = Configuration.legend.items.status.ACTIVE;
+	// 		});
+	// 	} else {
+	// 		axis.y.domain.forEach(item => {
+	// 			keys[item] = Configuration.legend.items.status.ACTIVE;
+	// 		});
+	// 	}
 
-		return keys;
-	}
+	// 	return keys;
+	// }
 
 	initialDraw(data?: any) {
 		if (data) {
