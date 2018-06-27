@@ -91,7 +91,11 @@ export const simpleBarOptions = {
 			domain: "label"
 		},
 		y: {
-			domain: ["Qty", "More", "Sold", "Restocking", "Misc"]
+			domain: ["Qty", "More", "Sold", "Restocking", "Misc"],
+			formatter: axisValue => {
+				return `${axisValue / 1000}k`;
+			},
+			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 		}
 	},
 	// yTicks: 5,

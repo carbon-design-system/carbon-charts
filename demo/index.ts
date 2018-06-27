@@ -281,12 +281,21 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		// 	break;
 		case "simple-bar":
 		case "simple-bar-accessible":
-			newData = oldData.map(dataPoint => Object.assign({}, dataPoint, { value: randomizeValue(dataPoint.value)}));
+			newData = Object.assign({}, oldData);
+			newData.datasets = oldData.datasets.map(dataset => {
+				const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
 
-			if (removeAKey) {
-				const randomIndex = Math.random() * (newData.length - 1);
-				newData.splice(randomIndex, randomIndex);
-			}
+				const newDataset = Object.assign({}, dataset, { data: datasetNewData });
+
+				return newDataset;
+			});
+
+			// console.log("datasetNewData", newData);
+
+			// if (removeAKey) {
+			// 	const randomIndex = Math.random() * (newData.length - 1);
+			// 	newData.splice(randomIndex, randomIndex);
+			// }
 
 			classyChartObject.setData(newData);
 

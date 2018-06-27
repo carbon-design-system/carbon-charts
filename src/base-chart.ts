@@ -74,6 +74,8 @@ export class BaseChart {
 			// Dispatch the update event
 			this.events.dispatchEvent(new Event("data-load"));
 
+			console.log("Promise resolved", value);
+
 			// Process data
 			this.data = this.dataProcessor(value, false);
 			this.displayData = this.dataProcessor(value, true);
@@ -111,7 +113,7 @@ export class BaseChart {
 		const { datasets } = this.displayData;
 		const keys = {};
 
-		if (datasets.length === 1) {
+		if (datasets.length === 1 && datasets[0].backgroundColors.length > 1) {
 			// Build out the keys array of objects to represent the legend items
 			this.displayData.labels.forEach(label => {
 				keys[label] = Configuration.legend.items.status.ACTIVE;

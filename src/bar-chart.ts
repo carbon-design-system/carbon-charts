@@ -30,13 +30,12 @@ export class BarChart extends BaseAxisChart {
 		// Update existing bars
 		rect
 			.transition(animate ? this.getFillTransition() : 0)
-			.attr("class", "bar")
-			.attr("x", (d: any) => this.x(d[axis.x.domain]))
-			.attr("y", (d: any, i) => this.y(d.value))
-			.attr("width", this.x.bandwidth())
-			.attr("height", (d: any) => height - this.y(d.value))
-			.attr("stroke", (d: any) => this.colorScale(d[axis.x.domain]))
-			.attr("fill", (d: any) => this.getFillScale()(d.label).toString());
+			// .ease(d3.easeCircle)
+			.attr("x", d => this.x1(d.datasetLabel))
+			.attr("y", d => this.y(d.value))
+			.attr("width", this.x1.bandwidth())
+			.attr("height", d => height - this.y(d.value))
+			.attr("fill", d => this.colorScale[d.datasetLabel](d.label));
 	}
 
 	setXScale(noAnimation?: boolean) {
@@ -54,8 +53,6 @@ export class BarChart extends BaseAxisChart {
 
 		this.x.domain(this.displayData.labels);
 		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
-
-		console.log("this.x.bandwidth()", this.x.bandwidth(), this.displayData.datasets.map(dataset => dataset.label));
 	}
 
 	interpolateValues(newData: any) {
@@ -64,9 +61,20 @@ export class BarChart extends BaseAxisChart {
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		// Apply new data to the bars
-		const rect = this.innerWrap
-			.selectAll("rect.bar")
-			.data(newData);
+		const { datasets } = this.displayData;
+		const rect = this.innerWrap.selectAll("g.bars g")
+			.data(this.displayData.labels)
+				.attr("transform", d => "translate(" + this.x(d) + ",0)")
+				.selectAll("rect.bar")
+				.data((d, index) => {
+					return datasets.map(dataset => {
+						return {
+							label: d,
+							datasetLabel: dataset.label,
+							value: dataset.data[index]
+						};
+					});
+				});
 
 		this.updateElements(true, rect);
 
@@ -103,8 +111,6 @@ export class BarChart extends BaseAxisChart {
 	}
 
 	draw() {
-		const { data } = this;
-
 		this.innerWrap.style("width", "100%")
 			.style("height", "100%");
 
@@ -128,14 +134,6 @@ export class BarChart extends BaseAxisChart {
 				.attr("transform", d => "translate(" + this.x(d) + ",0)")
 				.selectAll("rect.bar")
 				.data((d, index) => {
-					console.log(datasets.map(dataset => {
-						return {
-							label: d,
-							datasetLabel: dataset.label,
-							value: dataset.data[index]
-						};
-					}));
-
 					return datasets.map(dataset => {
 						return {
 							label: d,
@@ -145,36 +143,13 @@ export class BarChart extends BaseAxisChart {
 					});
 				})
 					.enter()
-						.each(d => console.log("d", d))
 						.append("rect")
 						.classed("bar", true)
 						.attr("x", d => this.x1(d.datasetLabel))
-						.attr("y", d => this.y(d.value)) // this.y(d.value)
+						.attr("y", d => this.y(d.value))
 						.attr("width", this.x1.bandwidth())
-						.attr("height", d => height - this.y(d.value)) // this.y(d.value)
+						.attr("height", d => height - this.y(d.value))
 						.attr("fill", d => this.colorScale[d.datasetLabel](d.label));
-
-		// 		.attr("x", d => this.x1(d.label))
-		// 		.attr("y", d => this.y(d.value))
-		// 		.attr("width", this.x1.bandwidth())
-		// 		.attr("height", d => height - this.y(d.value))
-		// 		.attr("fill", d => this.colorScale(d.label));
-
-		// g.append("g")
-		// .classed("bars", true)
-		// .selectAll("g")
-		// .data(data)
-		// .enter().append("g")
-		// 	.attr("transform", d => "translate(" + this.x(d[axis.x.domain]) + ",0)")
-		// 	.selectAll("rect.bar")
-		// 	.data(d => this.getLegendItemKeys().map(function(key) { return {label: key, value: d[key]}; }))
-		// 	.enter().append("rect")
-		// 		.classed("bar", true)
-		// 		.attr("x", d => this.x1(d.label))
-		// 		.attr("y", d => this.y(d.value))
-		// 		.attr("width", this.x1.bandwidth())
-		// 		.attr("height", d => height - this.y(d.value))
-		// 		.attr("fill", d => this.colorScale(d.label));
 
 		// Hide the overlay
 		this.updateOverlay().hide();
@@ -182,52 +157,6 @@ export class BarChart extends BaseAxisChart {
 		// Dispatch the load event
 		this.events.dispatchEvent(new Event("load"));
 	}
-
-	// draw() {
-	// 	const { data } = this;
-
-	// 	console.log("BAR DRAW");
-	// 	console.log("data", data);
-
-	// 	this.innerWrap.style("width", "100%")
-	// 		.style("height", "100%");
-
-	// 	const margin = {top: 0, right: -40, bottom: 50, left: 40};
-	// 	const chartSize = this.getChartSize();
-	// 	const height = chartSize.height - this.getBBox(".x.axis").height;
-
-	// 	const g = this.innerWrap
-	// 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-	// 	this.patternsService.addPatternSVGs(data, this.colorScale);
-	// 	this.patternScale = d3.scaleOrdinal()
-	// 		.range(this.patternsService.getFillValues())
-	// 		.domain(this.getLegendItemKeys());
-
-	// 	const fillScale = this.getFillScale();
-
-	// 	const addedBars = g.selectAll(".bar")
-	// 		.data(data)
-	// 		.enter()
-	// 		.append("rect")
-	// 		.attr("class", "bar")
-	// 		.attr("x", (d: any) => this.x(d.label))
-	// 		.attr("y", (d: any, i) => this.y(d.value))
-	// 		.attr("width", this.x.bandwidth())
-	// 		.attr("height", (d: any) => height - this.y(d.value))
-	// 		.attr("fill", (d: any) => fillScale(d.label).toString())
-	// 		.attr("stroke", (d: any) => this.colorScale(d.label));
-
-	// 	if (this.options.accessibility) {
-	// 		addedBars.attr("stroke-width", 2);
-	// 	}
-
-	// 	// Hide the overlay
-	// 	this.updateOverlay().hide();
-
-	// 	// Dispatch the load event
-	// 	this.events.dispatchEvent(new Event("load"));
-	// }
 
 	repositionXAxisTitle() {
 		const xAxisRef = this.svg.select("g.x.axis");

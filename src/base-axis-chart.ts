@@ -88,12 +88,14 @@ export class BaseAxisChart extends BaseChart {
 		const activeLegendItems = this.getActiveLegendItems();
 
 		// Get new data by filtering the data based off of the legend
-		const newDisplayData = oldData.filter(dataPoint => {
-			// If this datapoint is active on the legend
-			const activeSeriesItemIndex = activeLegendItems.indexOf(dataPoint.label);
+		// const newDisplayData = oldData.filter(dataPoint => {
+		// 	// If this datapoint is active on the legend
+		// 	const activeSeriesItemIndex = activeLegendItems.indexOf(dataPoint.label);
 
-			return activeSeriesItemIndex > -1;
-		});
+		// 	return activeSeriesItemIndex > -1;
+		// });
+		// TODO
+		const newDisplayData = oldData;
 
 		return newDisplayData;
 	}
@@ -241,16 +243,21 @@ export class BaseAxisChart extends BaseChart {
 		const height = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
 
 		const { datasets } = this.displayData;
-		let yEnd;
+		const { axis } = this.options;
+		let yMax;
 		// TODO
 		if (datasets.length === 1) {
-			yEnd = d3.max(datasets[0].data);
+			yMax = d3.max(datasets[0].data);
 		} else {
-			yEnd = d3.max(datasets, (d: any) => d3.max(d.data));
+			yMax = d3.max(datasets, (d: any) => d3.max(d.data)) + 10000;
+		}
+
+		if (axis.y.yMaxAdjuster) {
+			yMax = axis.y.yMaxAdjuster(yMax);
 		}
 
 		this.y = d3.scaleLinear().rangeRound([height, 0]);
-		this.y.domain([0, yEnd]);
+		this.y.domain([0, yMax]);
 	}
 
 	setYAxis(noAnimation?: boolean) {
