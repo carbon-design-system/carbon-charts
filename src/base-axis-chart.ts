@@ -88,14 +88,16 @@ export class BaseAxisChart extends BaseChart {
 		const activeLegendItems = this.getActiveLegendItems();
 
 		// Get new data by filtering the data based off of the legend
-		// const newDisplayData = oldData.filter(dataPoint => {
-		// 	// If this datapoint is active on the legend
-		// 	const activeSeriesItemIndex = activeLegendItems.indexOf(dataPoint.label);
+		const newDisplayData = Object.assign({}, oldData);
+		newDisplayData.datasets = oldData.datasets.filter(dataset => {
+			// If this datapoint is active on the legend
+			const activeSeriesItemIndex = activeLegendItems.indexOf(dataset.label);
 
-		// 	return activeSeriesItemIndex > -1;
-		// });
+			return activeSeriesItemIndex > -1;
+		});
+
 		// TODO
-		const newDisplayData = oldData;
+		// Add logic for when the legend is based on labels
 
 		return newDisplayData;
 	}

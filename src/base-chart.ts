@@ -124,6 +124,15 @@ export class BaseChart {
 			});
 		}
 
+		// Apply disabled legend items from previous data
+		// That also are applicable to the new data
+		const disabledLegendItems = this.getDisabledLegendItems();
+		Object.keys(keys).forEach(key => {
+			if (disabledLegendItems.indexOf(key) > -1) {
+				keys[key] = Configuration.legend.items.status.DISABLED;
+			}
+		});
+
 		return keys;
 	}
 
@@ -546,6 +555,8 @@ export class BaseChart {
 		const oldStatus = this.options.keys[changedLabel];
 		this.options.keys[changedLabel] = oldStatus === ACTIVE ? DISABLED : ACTIVE;
 
+		console.log("applyLegendFilter", changedLabel, this.options.keys);
+
 		this.update();
 	}
 
@@ -748,6 +759,10 @@ export class BaseChart {
 
 	getFillScale() {
 		return this.options.accessibility ? this.patternScale : this.colorScale;
+	}
+
+	getDefaultTransition() {
+		return d3.transition().duration(750);
 	}
 
 	// Used to determine whether to use a transition for updating fill attributes in charting elements

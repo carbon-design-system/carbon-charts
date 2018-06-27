@@ -46,7 +46,7 @@ export class BarChart extends BaseAxisChart {
 		const width = chartSize.width - margins.left - margins.right;
 
 		this.x = d3.scaleBand().rangeRound([0, width]).padding(0.25);
-		this.x1 = d3.scaleBand().padding(0.2);
+		this.x1 = d3.scaleBand().rangeRound([0, width]).padding(0.2);
 
 		const activeLegendItems = this.getActiveLegendItems();
 		// Apply legened filters, OLD VERSION axis.y.domain.filter(item => activeLegendItems.indexOf(item) > -1)
@@ -95,8 +95,7 @@ export class BarChart extends BaseAxisChart {
 
 		// Remove bars that are no longer needed
 		rect.exit()
-			.transition()
-			.duration(750)
+			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
 

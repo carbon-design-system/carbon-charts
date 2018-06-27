@@ -88,7 +88,7 @@ export const simpleBarOptions = {
 	accessibility: false,
 	axis: {
 		x: {
-			domain: "label"
+			title: "2018 Annual Sales Figures",
 		},
 		y: {
 			domain: ["Qty", "More", "Sold", "Restocking", "Misc"],

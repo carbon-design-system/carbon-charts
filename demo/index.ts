@@ -292,10 +292,10 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 
 			// console.log("datasetNewData", newData);
 
-			if (removeADataset) {
-				const randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));
-				newData.datasets.splice(randomIndex, randomIndex);
-			}
+			// if (removeADataset) {
+			// 	const randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));
+			// 	newData.datasets.splice(randomIndex, randomIndex);
+			// }
 
 			classyChartObject.setData(newData);
 
