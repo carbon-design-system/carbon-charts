@@ -211,7 +211,7 @@ chartTypes.forEach(type => {
 const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 	let newData;
 
-	const removeAKey = Math.random() > 0.5;
+	const removeADataset = Math.random() > 0.5;
 
 	// Function to be used to randomize a value
 	const randomizeValue = currentVal => {
@@ -292,10 +292,10 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 
 			// console.log("datasetNewData", newData);
 
-			// if (removeAKey) {
-			// 	const randomIndex = Math.random() * (newData.length - 1);
-			// 	newData.splice(randomIndex, randomIndex);
-			// }
+			if (removeADataset) {
+				const randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));
+				newData.datasets.splice(randomIndex, randomIndex);
+			}
 
 			classyChartObject.setData(newData);
 

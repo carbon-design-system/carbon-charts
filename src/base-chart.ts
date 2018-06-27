@@ -449,9 +449,10 @@ export class BaseChart {
 		legendEnter.select("div")
 			.merge(legendItems.selectAll("div"))
 			.style("background-color", (d, i) => {
-				return "violet";
+				// TODO - REMOVE
+				// return "violet";
 
-				// return d.value === Configuration.legend.items.status.ACTIVE ? this.colorScale[d.datasetLabel](d.key) : "white";
+				return d.value === Configuration.legend.items.status.ACTIVE ? this.colorScale[d.key]() : "white";
 			});
 
 		// Add hover effect for legend item circles

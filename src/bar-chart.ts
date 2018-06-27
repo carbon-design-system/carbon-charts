@@ -35,7 +35,7 @@ export class BarChart extends BaseAxisChart {
 			.attr("y", d => this.y(d.value))
 			.attr("width", this.x1.bandwidth())
 			.attr("height", d => height - this.y(d.value))
-			.attr("fill", d => this.colorScale[d.datasetLabel](d.label));
+			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label));
 	}
 
 	setXScale(noAnimation?: boolean) {
@@ -82,15 +82,15 @@ export class BarChart extends BaseAxisChart {
 		rect.enter()
 			.append("rect")
 			.attr("class", "bar")
-			.attr("x", (d: any) => this.x(d.label))
-			.attr("y", (d: any, i) => this.y(d.value))
-			.attr("width", this.x.bandwidth())
-			.attr("height", (d: any) => height - this.y(d.value))
+			.attr("x", d => this.x1(d.datasetLabel))
+			.attr("y", d => this.y(d.value))
+			.attr("width", this.x1.bandwidth())
+			.attr("height", d => height - this.y(d.value))
 			.attr("opacity", 0)
 			.transition(this.getFillTransition())
-			.attr("fill", (d: any) => this.getFillScale()(d.label).toString())
+			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
 			.attr("opacity", 1)
-			.attr("stroke", (d: any) => this.colorScale(d.label))
+			.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
 			.attr("stroke-width", this.options.accessibility ? 2 : 0);
 
 		// Remove bars that are no longer needed
