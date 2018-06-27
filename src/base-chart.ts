@@ -358,7 +358,7 @@ export class BaseChart {
 		d3.select(exception).attr("fill-opacity", false);
 		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
-		d3.select(exception).attr("fill", this.getFillScale()(exceptedElementData.label));
+		d3.select(exception).attr("fill", (d: any) => this.getFillScale()[d.datasetLabel](exceptedElementData.label));
 	}
 
 	// ================================================================================
@@ -716,31 +716,40 @@ export class BaseChart {
 	}
 
 	showTooltip(d) {
-		let tooltipHTML = "";
+		// Rest opacity of all elements in the chart
 		this.resetOpacity();
+
+		// Remove existing tooltips on the page
+		// TODO - Update class to not conflict with other elements on page
 		d3.selectAll(".tooltip").remove();
+
+		// Draw tooltip
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
 			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px")
 			.style("border-color", this.colorScale[d.datasetLabel](d.label));
+
+		// Add close button to tooltip
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				this.hideTooltip();
 			});
-		const dVal = d.formatter && d.formatter[d.series] ? d.formatter[d.series](d.value.toLocaleString()) : d.value.toLocaleString();
-		if (d.xAxis && d.xAxis.length > 0) {
-			tooltipHTML += "<b>" + d.xAxis + ": </b>" + d.key + "<br/>";
+
+		let tooltipHTML = "";
+		if (d.datasetLabel) {
+			tooltipHTML += `
+				${d.label}<br/>
+				<b>${d.datasetLabel}:</b> ${d.value}<br/>
+			`;
+		} else {
+			tooltipHTML += `
+				<b>${d.label}:</b> ${d.value}<br/>
+			`;
 		}
-		if (d.series && !d.dimension) {
-			tooltipHTML += "<b>" + d.series + ": </b>" + dVal + "<br/>";
-		}
-		if (d.dimension) {
-			tooltipHTML += "<b>" + d.dimension + ": </b>" + d.dimVal + "<br/><b>" + d.valueName + ": </b>" + d.value;
-		}
-		if (d.label) {
-			tooltipHTML += "<b>" + d.label + ": </b>" + d.value + "<br/>";
-		}
+
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
+
+		// Draw tooltip arrow in the right direction
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
 			tooltip.classed("arrow-right", true);
 			tooltip.style(
@@ -754,6 +763,7 @@ export class BaseChart {
 			tooltip.append("div").attr("class", "arrow");
 		}
 
+		//
 		this.addTooltipEventListeners(tooltip);
 	}
 
@@ -763,6 +773,10 @@ export class BaseChart {
 
 	getDefaultTransition() {
 		return d3.transition().duration(750);
+	}
+
+	getInstantTransition() {
+		return d3.transition().duration(0);
 	}
 
 	// Used to determine whether to use a transition for updating fill attributes in charting elements

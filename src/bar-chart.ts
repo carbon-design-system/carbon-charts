@@ -17,27 +17,6 @@ export class BarChart extends BaseAxisChart {
 		this.options.type = "bar";
 	}
 
-	updateElements(animate: boolean, rect?: any) {
-		const { axis } = this.options;
-
-		const chartSize = this.getChartSize();
-		const height = chartSize.height - this.getBBox(".x.axis").height;
-
-		if (!rect) {
-			rect = this.innerWrap.selectAll("rect.bar");
-		}
-
-		// Update existing bars
-		rect
-			.transition(animate ? this.getFillTransition() : 0)
-			// .ease(d3.easeCircle)
-			.attr("x", d => this.x1(d.datasetLabel))
-			.attr("y", d => this.y(d.value))
-			.attr("width", this.x1.bandwidth())
-			.attr("height", d => height - this.y(d.value))
-			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label));
-	}
-
 	setXScale(noAnimation?: boolean) {
 		const { bar: margins } = Configuration.charts.margin;
 		const { axis } = this.options;
@@ -55,14 +34,66 @@ export class BarChart extends BaseAxisChart {
 		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
 	}
 
+	draw() {
+		this.innerWrap.style("width", "100%")
+			.style("height", "100%");
+
+		const { bar: margins } = Configuration.charts.margin;
+		const { axis } = this.options;
+
+		const chartSize = this.getChartSize();
+		const width = chartSize.width - margins.left - margins.right;
+		const height = chartSize.height - this.getBBox(".x.axis").height;
+
+		const gBars = this.innerWrap
+			.attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+			.append("g")
+			.classed("bars", true)
+			.attr("width", width);
+
+		const { datasets } = this.displayData;
+		gBars.selectAll("g")
+			.data(this.displayData.labels)
+			.enter()
+				.append("g")
+				.attr("transform", d => "translate(" + this.x(d) + ",0)")
+				.selectAll("rect.bar")
+				.data((d, index) => {
+					return datasets.map(dataset => {
+						return {
+							label: d,
+							datasetLabel: dataset.label,
+							value: dataset.data[index]
+						};
+					});
+				})
+					.enter()
+						.append("rect")
+						.classed("bar", true)
+						.attr("x", d => this.x1(d.datasetLabel))
+						.attr("y", d => this.y(d.value))
+						.attr("width", this.x1.bandwidth())
+						.attr("height", d => height - this.y(d.value))
+						.attr("fill", d => this.colorScale[d.datasetLabel](d.label));
+
+		// Hide the overlay
+		this.updateOverlay().hide();
+
+		// Dispatch the load event
+		this.events.dispatchEvent(new Event("load"));
+	}
+
 	interpolateValues(newData: any) {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
+		const width = chartSize.width - margins.left - margins.right;
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		// Apply new data to the bars
 		const { datasets } = this.displayData;
-		const rect = this.innerWrap.selectAll("g.bars g")
+		const rect = this.innerWrap.select("g.bars")
+			.attr("width", width)
+			.selectAll("g")
 			.data(this.displayData.labels)
 				.attr("transform", d => "translate(" + this.x(d) + ",0)")
 				.selectAll("rect.bar")
@@ -109,52 +140,29 @@ export class BarChart extends BaseAxisChart {
 		this.events.dispatchEvent(new Event("update"));
 	}
 
-	draw() {
-		this.innerWrap.style("width", "100%")
-			.style("height", "100%");
-
-		const { bar: margins } = Configuration.charts.margin;
+	updateElements(animate: boolean, rect?: any, g?: any) {
 		const { axis } = this.options;
 
 		const chartSize = this.getChartSize();
-		const width = chartSize.width - margins.left - margins.right;
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
-		const gBars = this.innerWrap
-			.attr("transform", "translate(" + margins.left + "," + margins.top + ")")
-			.append("g")
-			.classed("bars", true);
+		if (!rect) {
+			rect = this.innerWrap.selectAll("rect.bar");
+		}
 
-		const { datasets } = this.displayData;
-		gBars.selectAll("g")
-			.data(this.displayData.labels)
-			.enter()
-				.append("g")
-				.attr("transform", d => "translate(" + this.x(d) + ",0)")
-				.selectAll("rect.bar")
-				.data((d, index) => {
-					return datasets.map(dataset => {
-						return {
-							label: d,
-							datasetLabel: dataset.label,
-							value: dataset.data[index]
-						};
-					});
-				})
-					.enter()
-						.append("rect")
-						.classed("bar", true)
-						.attr("x", d => this.x1(d.datasetLabel))
-						.attr("y", d => this.y(d.value))
-						.attr("width", this.x1.bandwidth())
-						.attr("height", d => height - this.y(d.value))
-						.attr("fill", d => this.colorScale[d.datasetLabel](d.label));
+		if (g) {
+			g.attr("transform", d => "translate(" + this.x(d) + ",0)");
+		}
 
-		// Hide the overlay
-		this.updateOverlay().hide();
-
-		// Dispatch the load event
-		this.events.dispatchEvent(new Event("load"));
+		// Update existing bars
+		rect
+			.transition(animate ? this.getFillTransition() : this.getInstantTransition())
+			// .ease(d3.easeCircle)
+			.attr("x", d => this.x1(d.datasetLabel))
+			.attr("y", d => this.y(d.value))
+			.attr("width", this.x1.bandwidth())
+			.attr("height", d => height - this.y(d.value))
+			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label));
 	}
 
 	repositionXAxisTitle() {
@@ -191,7 +199,8 @@ export class BarChart extends BaseAxisChart {
 		this.setYAxis(true);
 
 		// Apply new data to the bars
-		this.updateElements(false);
+		const g = this.innerWrap.selectAll("g.bars g");
+		this.updateElements(false, null, g);
 
 		// Reposition the legend
 		this.positionLegend();
