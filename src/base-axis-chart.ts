@@ -102,37 +102,16 @@ export class BaseAxisChart extends BaseChart {
 		return newDisplayData;
 	}
 
-	dataProcessor(data: any, calculateTotalValue: boolean) {
-		// const { axis } = this.options;
-		// if (calculateTotalValue) {
-		// 	if (axis.y.domain) {
-		// 		data.map(dataPoint => {
-		// 			let total = axis.y.domain.reduce((accum, yKey) => {
-		// 				if (dataPoint[yKey]) {
-		// 					return accum + dataPoint[yKey];
-		// 				} else {
-		// 					return accum;
-		// 				}
-		// 			}, 0);
+	addLabelsToDataPoints(d, index) {
+		const { datasets } = this.displayData;
 
-		// 			if (dataPoint.value) {
-		// 				total += dataPoint.value;
-		// 			}
-
-		// 			dataPoint.totalDatumValue = total;
-
-		// 			return dataPoint;
-		// 		});
-		// 	} else {
-		// 		data.map(dataPoint => {
-		// 			dataPoint.totalDatumValue = dataPoint.value;
-
-		// 			return dataPoint;
-		// 		});
-		// 	}
-		// }
-
-		return data;
+		return datasets.map(dataset => {
+			return {
+				label: d,
+				datasetLabel: dataset.label,
+				value: dataset.data[index]
+			};
+		});
 	}
 
 	draw() {

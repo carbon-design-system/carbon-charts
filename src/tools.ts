@@ -31,6 +31,10 @@ export namespace Tools {
 		return closeBtn;
 	}
 
+	export function passObjectByValue(obj) {
+		return JSON.parse(JSON.stringify(obj));
+	}
+
 	/**************************************
 	 *  DOM-related operations            *
 	 *************************************/
@@ -115,20 +119,19 @@ export namespace Tools {
 	 * @param {*} data - array of data
 	 * @returns A list of the duplicated keys in data
 	 */
-	export function duplicateKeysInData(data: any) {
-		const keys = [];
-		const duplicateKeys = [];
+	export function getDuplicateValues(arr: any) {
+		const values = [];
+		const duplicateValues = [];
 
-		data.map(item => {
-			const key = item.label;
-			if (keys.indexOf(key) > -1 && duplicateKeys.indexOf(key) === -1) {
-				duplicateKeys.push(key);
+		arr.map(value => {
+			if (values.indexOf(value) > -1 && duplicateValues.indexOf(value) === -1) {
+				duplicateValues.push(value);
 			}
 
-			keys.push(key);
+			values.push(value);
 		});
 
-		return duplicateKeys;
+		return duplicateValues;
 	}
 
 	export function removeArrayDuplicates(arr: any) {

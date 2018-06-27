@@ -84,12 +84,12 @@ const chartTypes = [
 	// 	options: doubleYAxisOptions,
 	// 	data: longData
 	// },
-	// {
-	// 	id: "pie",
-	// 	name: "pie",
-	// 	options: pieOptions,
-	// 	data: pieData
-	// },
+	{
+		id: "pie",
+		name: "pie",
+		options: pieOptions,
+		data: pieData
+	},
 	// {
 	// 	id: "donut",
 	// 	name: "donut",
@@ -180,30 +180,34 @@ chartTypes.forEach(type => {
 			// 	setDemoActionsEventListener(type.id, type.data);
 
 			// 	break;
-			// case "pie":
-			// 	classyCharts[type.id] = new PieChart(
-			// 		classyContainer,
-			// 		Object.assign({}, type.options, {type: type.id}),
-			// 		new Promise((resolve, reject) => {
-			// 			setTimeout(() => {
-			// 				resolve(type.data);
-			// 			}, 0);
-			// 		})
-			// 	);
+			case "pie":
+				classyCharts[type.id] = new PieChart(
+					classyContainer,
+					{
+						data: new Promise((resolve, reject) => {
+							setTimeout(() => {
+								resolve(type.data);
+							}, 0);
+						}),
+						options: Object.assign({}, type.options, {type: type.id})
+					}
+				);
 
-			// 	setDemoActionsEventListener(type.id, type.data);
+				setDemoActionsEventListener(type.id, type.data);
 
-			// 	break;
-			// case "donut":
-			// 	classyCharts[type.id] = new DonutChart(
-			// 		classyContainer,
-			// 		Object.assign({}, type.options, {type: type.id}),
-			// 		type.data
-			// 	);
+				break;
+			case "donut":
+				classyCharts[type.id] = new DonutChart(
+					classyContainer,
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id})
+					}
+				);
 
-			// 	setDemoActionsEventListener(type.id, type.data);
+				setDemoActionsEventListener(type.id, type.data);
 
-			// 	break;
+				break;
 		}
 	}
 });
@@ -224,40 +228,45 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 	const classyChartObject = classyCharts[chartType];
 
 	switch (chartType) {
-		// case "donut":
-		// case "pie":
-		// 	// Randomize old data values
-		// 	newData = oldData.map(dataPoint => {
-		// 		return Object.assign({}, dataPoint, {value: randomizeValue(dataPoint.value)});
-		// 	});
+		case "donut":
+		case "pie":
+			// Randomize old data values
+			newData = Object.assign({}, oldData);
+			newData.datasets = oldData.datasets.map(dataset => {
+				const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
 
-		// 	if (delay) {
-		// 		const dataPromise = new Promise((resolve, reject) => {
-		// 			setTimeout(() => {
-		// 				resolve(newData);
-		// 			}, delay || 0);
-		// 		});
+				const newDataset = Object.assign({}, dataset, { data: datasetNewData });
 
-		// 		classyChartObject.setData(dataPromise);
-		// 	} else {
-		// 		classyChartObject.setData(newData);
-		// 	}
+				return newDataset;
+			});
 
-		// 	if (chartType === "donut") {
-		// 		setTimeout(() => {
-		// 			// Update DonutCenter values
-		// 			const { number: centerNumber } = classyChartObject.center.configs;
-		// 			let newCenterNumber = Math.floor(Math.max(0.2 * centerNumber, centerNumber * Math.random() * (Math.random() * 5)));
-		// 			if (newCenterNumber <= 10) {
-		// 				newCenterNumber = 10000;
-		// 			}
+			if (delay) {
+				const dataPromise = new Promise((resolve, reject) => {
+					setTimeout(() => {
+						resolve(newData);
+					}, delay || 0);
+				});
 
-		// 			classyChartObject.center.configs.number = newCenterNumber;
-		// 			classyChartObject.center.update();
-		// 		}, delay || 0);
-		// 	}
+				classyChartObject.setData(dataPromise);
+			} else {
+				classyChartObject.setData(newData);
+			}
 
-		// 	break;
+			if (chartType === "donut") {
+				setTimeout(() => {
+					// Update DonutCenter values
+					const { number: centerNumber } = classyChartObject.center.configs;
+					let newCenterNumber = Math.floor(Math.max(0.2 * centerNumber, centerNumber * Math.random() * (Math.random() * 5)));
+					if (newCenterNumber <= 10) {
+						newCenterNumber = 10000;
+					}
+
+					classyChartObject.center.configs.number = newCenterNumber;
+					classyChartObject.center.update();
+				}, delay || 0);
+			}
+
+			break;
 		// case "grouped-bar":
 		// 	newData = oldData.map(dataPoint => {
 		// 		return Object.assign(
@@ -289,8 +298,6 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 
 				return newDataset;
 			});
-
-			// console.log("datasetNewData", newData);
 
 			if (removeADataset) {
 				const randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));

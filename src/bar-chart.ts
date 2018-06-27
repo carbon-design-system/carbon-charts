@@ -51,22 +51,13 @@ export class BarChart extends BaseAxisChart {
 			.classed("bars", true)
 			.attr("width", width);
 
-		const { datasets } = this.displayData;
 		gBars.selectAll("g")
 			.data(this.displayData.labels)
 			.enter()
 				.append("g")
 				.attr("transform", d => "translate(" + this.x(d) + ",0)")
 				.selectAll("rect.bar")
-				.data((d, index) => {
-					return datasets.map(dataset => {
-						return {
-							label: d,
-							datasetLabel: dataset.label,
-							value: dataset.data[index]
-						};
-					});
-				})
+				.data((d, index) => this.addLabelsToDataPoints(d, index))
 					.enter()
 						.append("rect")
 						.classed("bar", true)
@@ -90,22 +81,13 @@ export class BarChart extends BaseAxisChart {
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		// Apply new data to the bars
-		const { datasets } = this.displayData;
 		const rect = this.innerWrap.select("g.bars")
 			.attr("width", width)
 			.selectAll("g")
 			.data(this.displayData.labels)
 				.attr("transform", d => "translate(" + this.x(d) + ",0)")
 				.selectAll("rect.bar")
-				.data((d, index) => {
-					return datasets.map(dataset => {
-						return {
-							label: d,
-							datasetLabel: dataset.label,
-							value: dataset.data[index]
-						};
-					});
-				});
+				.data((d, index) => this.addLabelsToDataPoints(d, index));
 
 		this.updateElements(true, rect);
 

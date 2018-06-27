@@ -55,7 +55,7 @@ export class StackedBarChart extends BarChart {
 			return updatedDataPoint;
 		});
 
-		return this.dataProcessor(newDisplayData, true);
+		return this.dataProcessor(newDisplayData);
 	}
 
 	addLabelsToDataPoints(d: any) {

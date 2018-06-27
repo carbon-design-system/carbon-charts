@@ -74,11 +74,9 @@ export class BaseChart {
 			// Dispatch the update event
 			this.events.dispatchEvent(new Event("data-load"));
 
-			console.log("Promise resolved", value);
-
 			// Process data
-			this.data = this.dataProcessor(value, false);
-			this.displayData = this.dataProcessor(value, true);
+			this.data = this.dataProcessor(Tools.passObjectByValue(value));
+			this.displayData = this.dataProcessor(Tools.passObjectByValue(value));
 
 			const keys = this.getKeysFromData();
 
@@ -237,7 +235,7 @@ export class BaseChart {
 	}
 
 	// Default fallback when no data processing is needed
-	dataProcessor(data: any, calculateTotalValue: boolean) {
+	dataProcessor(data: any) {
 		return data;
 	}
 

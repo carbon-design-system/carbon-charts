@@ -24,12 +24,22 @@ export class PieChart extends BaseChart {
 	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
 	dataProcessor(data: any) {
 		// Check for duplicate keys in the data
-		const duplicates = Tools.duplicateKeysInData(data);
+		const duplicates = Tools.getDuplicateValues(data.labels);
 		if (duplicates.length > 0) {
 			console.error(`${Tools.capitalizeFirstLetter(this.options.type)} Chart - You have duplicate keys`, duplicates);
 		}
 
-		let sortedData = data.sort((a, b) => b.value - a.value);
+		// TODO - Support more than 1 dataset & sort data
+		// let sortedData = data.datasets[0].data.sort((a, b) => b.value - a.value);
+		let sortedData = data.datasets[0].data;
+		sortedData = sortedData.map((datum, i) => {
+			return {
+				label: data.labels[i],
+				value: datum,
+				// datasetLabel: data.datasets[0].label
+			};
+		});
+
 		const { sliceLimit: stopAt } = Configuration.pie;
 		const rest = sortedData.slice(stopAt);
 		const restAccumulatedValue = rest.reduce((accum, item) => accum + item.value, 0);
@@ -48,7 +58,9 @@ export class PieChart extends BaseChart {
 			}
 		}
 
-		return sortedData;
+		data.datasets[0].data = sortedData;
+
+		return data;
 	}
 
 	// If there isn't a chart already drawn in the container
@@ -68,16 +80,18 @@ export class PieChart extends BaseChart {
 
 	// Interpolated transitions for older data points to reflect the new data changes
 	interpolateValues(newData: any) {
+		console.log("INTERPOOOALTE");
 		// Apply the new data to the slices, and interpolate them
 		const arc = this.arc;
 		const path = this.innerWrap.selectAll("path").data(this.pie(newData));
 
+		console.log("POOY", newData);
 		// Update slices
 		path
 			.transition()
 			.duration(750)
-			.attr("fill", (d, i) => this.colorScale(d.data.label))
-			.attr("stroke", (d, i) => this.colorScale(d.data.label))
+			// .attr("fill", (d, i) => this.colorScale(d.data.label))
+			// .attr("stroke", (d, i) => this.colorScale(d.data.label))
 			.attrTween("d", function (a) {
 				return arcTween.bind(this)(a, arc);
 			});
@@ -88,8 +102,8 @@ export class PieChart extends BaseChart {
 			.style("opacity", 0)
 			.transition()
 			.duration(750)
-			.attr("fill", (d, i) => this.colorScale(d.data.label))
-			.attr("stroke", (d, i) => this.colorScale(d.data.label))
+			// .attr("fill", (d, i) => this.colorScale(d.data.label))
+			// .attr("stroke", (d, i) => this.colorScale(d.data.label))
 			.style("opacity", 1)
 			.attrTween("d", function (a) {
 				return arcTween.bind(this)(a, arc);
@@ -112,7 +126,7 @@ export class PieChart extends BaseChart {
 		// Move text labels to their new location, and fade them in again
 		const radius = this.computeRadius();
 		setTimeout(() => {
-			const text = this.innerWrap.selectAll("text.chart-label").data(this.pie(newData), function(d) { return d.data.label; });
+			const text = this.innerWrap.selectAll("text.chart-label").data(this.pie(newData), function(d) { return d.label; });
 			text
 				.enter()
 				.append("text")
@@ -150,7 +164,7 @@ export class PieChart extends BaseChart {
 	}
 
 	draw() {
-		const dataList = this.data;
+		const dataList = this.displayData.datasets[0].data;
 
 		const actualChartSize: any = this.getChartSize(this.container);
 		const diameter = Math.min(actualChartSize.width, actualChartSize.height);
@@ -178,7 +192,7 @@ export class PieChart extends BaseChart {
 				.outerRadius(marginedRadius);
 
 		this.pie = d3.pie()
-			.value(function(d: any) { return d.value; })
+			.value((d: any) => d.value)
 			.sort(null);
 
 		// Draw the slices
@@ -194,7 +208,7 @@ export class PieChart extends BaseChart {
 		// Draw the slice labels
 		this.innerWrap
 			.selectAll("text.chart-label")
-			.data(this.pie(dataList), function(d) { return d.data.label; })
+			.data(this.pie(dataList), function(d) { console.log(d); return d.data.label; })
 			.enter()
 			.append("text")
 			.classed("chart-label", true)
@@ -302,18 +316,16 @@ export class PieChart extends BaseChart {
 	update(newData?: any) {
 		const oldData = this.data;
 		const activeLegendItems = this.getActiveLegendItems();
-		if (!newData) {
-			// Get new data by filtering the data based off of the legend
-			newData = oldData.filter(dataPoint => {
-				// If this datapoint is active on the legend
-				const activeSeriesItemIndex = activeLegendItems.indexOf(dataPoint.label);
 
-				return activeSeriesItemIndex > -1;
-			});
-		}
-		const processedNewData = this.dataProcessor(newData);
+		const newDisplayData = Object.assign({}, oldData);
+		newDisplayData.datasets = oldData.datasets.filter(dataset => {
+			// If this datapoint is active on the legend
+			const activeSeriesItemIndex = activeLegendItems.indexOf(dataset.label);
 
-		this.interpolateValues(processedNewData);
+			return activeSeriesItemIndex > -1;
+		});
+
+		this.interpolateValues(newDisplayData);
 	}
 
 	getActiveLegendItems() {
@@ -389,6 +401,26 @@ export class PieChart extends BaseChart {
 		this.positionLegend();
 	}
 
+	getLegendItems() {
+		const { sliceLimit } = Configuration.pie;
+
+		let legendItems = {};
+		if (this.options.keys) {
+			legendItems = this.options.keys;
+
+			if (Object.keys(legendItems).length > sliceLimit) {
+				Object.keys(legendItems).slice(sliceLimit)
+					.forEach(key => {
+						delete legendItems[key];
+					});
+
+				legendItems["Other"] = Configuration.legend.items.status.ACTIVE;
+			}
+		}
+
+		return legendItems;
+	}
+
 	// Helper functions
 	private computeRadius() {
 		const actualChartSize: any = this.getChartSize(this.container);
@@ -442,6 +474,8 @@ export class PieChart extends BaseChart {
 function arcTween(a, arc) {
 	const i = d3.interpolate(this._current, a);
 	const self = this;
+
+	console.log("tween", this._current, this);
 
 	return function(t) {
 		self._current = i(t);

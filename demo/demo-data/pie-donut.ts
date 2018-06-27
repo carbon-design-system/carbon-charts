@@ -20,45 +20,14 @@ export const donutOptions = {
 	})
 };
 
-export const pieData = [
-	{
-		label: "2V2N-9KYPM version 1",
-		value: 100000
-	},
-	{
-		label: "L22I-P66EP-L22I-P66EP-L22I-P66EP",
-		value: 200000
-	},
-	{
-		label: "JQAI-2M4L1",
-		value: 600000
-	},
-	{
-		label: "J9DZ-F37AP",
-		value: 100000
-	},
-	{
-		label: "YEL48-Q6XK-YEL48",
-		value: 400000
-	},
-	{
-		label: "P66EP-L22I-L22I",
-		value: 450000
-	},
-	{
-		label: "Q6XK-YEL48",
-		value: 300000
-	},
-	{
-		label: "XKB5-L6EP",
-		value: 70000
-	},
-	{
-		label: "YEL48-Q6XK",
-		value: 20000
-	},
-	{
-		label: "L22I-P66EP-L22I",
-		value: 120000
-	}
-];
+export const pieData = {
+	labels: ["2V2N-9KYPM version 1", "L22I-P66EP-L22I-P66EP-L22I-P66EP", "JQAI-2M4L1", "J9DZ-F37AP",
+		"YEL48-Q6XK-YEL48", "P66EP-L22I-L22I", "Q6XK-YEL48", "XKB5-L6EP", "YEL48-Q6XK", "L22I-P66EP-L22I"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			backgroundColors: colors,
+			data: [100000, 200000, 600000, 100000, 400000, 450000, 300000, 70000, 20000, 120000]
+		}
+	]
+};
