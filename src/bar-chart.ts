@@ -157,6 +157,7 @@ export class BarChart extends BaseAxisChart {
 		// Update existing bars
 		rect
 			.transition(animate ? this.getFillTransition() : this.getInstantTransition())
+			// TODO
 			// .ease(d3.easeCircle)
 			.attr("x", d => this.x1(d.datasetLabel))
 			.attr("y", d => this.y(d.value))
@@ -165,24 +166,9 @@ export class BarChart extends BaseAxisChart {
 			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label));
 	}
 
-	repositionXAxisTitle() {
-		const xAxisRef = this.svg.select("g.x.axis");
-		const tickHeight = this.getLargestTickHeight(xAxisRef.selectAll(".tick")) + Configuration.axis.tick.heightAddition;
-
-		const xAxisTitleRef = this.svg.select("g.x.axis text.x.axis-label");
-		xAxisTitleRef.attr("class", "x axis-label")
-			.attr("text-anchor", "middle")
-			.attr("transform", "translate(" + (xAxisRef.node().getBBox().width / 2) + "," + tickHeight + ")")
-			.text(this.options.axis.x.title);
-	}
-
 	resizeChart() {
-		const { pie: pieConfigs } = Configuration;
-
 		const actualChartSize: any = this.getChartSize(this.container);
 		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
-		const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
-		const radius: number = dimensionToUseForScale / 2;
 
 		// Resize the SVG
 		d3.select(this.holder).select("svg")
@@ -202,13 +188,6 @@ export class BarChart extends BaseAxisChart {
 		const g = this.innerWrap.selectAll("g.bars g");
 		this.updateElements(false, null, g);
 
-		// Reposition the legend
-		this.positionLegend();
-
-		if (this.innerWrap.select(".axis-label.x").nodes().length > 0 && this.options.axis.x.title) {
-			this.repositionXAxisTitle();
-		}
-
-		this.events.dispatchEvent(new Event("resize"));
+		super.resizeChart();
 	}
 }

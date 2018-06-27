@@ -172,6 +172,17 @@ export class BaseAxisChart extends BaseChart {
 		return computedChartSize;
 	}
 
+	resizeChart() {
+		// Reposition the legend
+		this.positionLegend();
+
+		if (this.innerWrap.select(".axis-label.x").nodes().length > 0 && this.options.axis.x.title) {
+			this.repositionXAxisTitle();
+		}
+
+		this.events.dispatchEvent(new Event("resize"));
+	}
+
 	/**************************************
 	 *  Axis & Grids                      *
 	 *************************************/
@@ -237,6 +248,17 @@ export class BaseAxisChart extends BaseChart {
 		// get the yHeight after the height of the axis has settled
 		const yHeight = this.getChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		xAxisRef.attr("transform", `translate(0, ${yHeight})`);
+	}
+
+	repositionXAxisTitle() {
+		const xAxisRef = this.svg.select("g.x.axis");
+		const tickHeight = this.getLargestTickHeight(xAxisRef.selectAll(".tick")) + Configuration.axis.tick.heightAddition;
+
+		const xAxisTitleRef = this.svg.select("g.x.axis text.x.axis-label");
+		xAxisTitleRef.attr("class", "x axis-label")
+			.attr("text-anchor", "middle")
+			.attr("transform", "translate(" + (xAxisRef.node().getBBox().width / 2) + "," + tickHeight + ")")
+			.text(this.options.axis.x.title);
 	}
 
 	setYScale() {
