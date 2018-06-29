@@ -22,25 +22,31 @@ export class PieChart extends BaseChart {
 
 	// Sort data by value (descending)
 	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
-	dataProcessor(data: any) {
+	dataProcessor(dataObject: any) {
 		// TODO - Support multiple datasets
 		// Check for duplicate keys in the data
-		const duplicates = Tools.getDuplicateValues(data.labels);
+		const duplicates = Tools.getDuplicateValues(dataObject.labels);
 		if (duplicates.length > 0) {
 			console.error(`${Tools.capitalizeFirstLetter(this.options.type)} Chart - You have duplicate keys`, duplicates);
 		}
 
-		// TODO - Support multiple datasets & sort data
-		// let sortedData = data.datasets[0].data.sort((a, b) => b.value - a.value);
-		let sortedData = data.datasets[0].data;
-		sortedData = sortedData.map((datum, i) => {
+		// TODO - Support multiple datasets
+		// let sortedData = data.datasets[0];
+		const dataList = dataObject.datasets[0].data.map((datum, i) => {
 			return {
-				label: data.labels[i],
+				label: dataObject.labels[i],
 				value: datum,
 				// datasetLabel: data.datasets[0].label
 			};
 		});
 
+		// Sort data by value
+		let sortedData = dataList.sort((a, b) => b.value - a.value);
+
+		// Sort labels based on the order made above
+		dataObject.labels = sortedData.map((datum, i) => datum.label);
+
+		// Keep a certain number of slices, and add an "Other" slice for the rest
 		const { sliceLimit: stopAt } = Configuration.pie;
 		const rest = sortedData.slice(stopAt);
 		const restAccumulatedValue = rest.reduce((accum, item) => accum + item.value, 0);
@@ -50,18 +56,18 @@ export class PieChart extends BaseChart {
 			sortedData.push(sortedData.splice(otherLabelIndex, 1)[0]);
 		} else {
 			if (rest.length > 0) {
-			sortedData = sortedData.slice(0, stopAt)
-				.concat([{
-					label: Configuration.pie.label.other,
-					value: restAccumulatedValue,
-					items: rest
-				}]);
+				sortedData = sortedData.slice(0, stopAt)
+					.concat([{
+						label: Configuration.pie.label.other,
+						value: restAccumulatedValue,
+						items: rest
+					}]);
 			}
 		}
 
-		data.datasets[0].data = sortedData;
+		dataObject.datasets[0].data = sortedData;
 
-		return data;
+		return dataObject;
 	}
 
 	// If there isn't a chart already drawn in the container
@@ -81,8 +87,6 @@ export class PieChart extends BaseChart {
 
 	draw() {
 		const dataList = this.displayData.datasets[0].data;
-
-		console.log("DRAW PIE", this.data);
 
 		const actualChartSize: any = this.getChartSize(this.container);
 		const diameter = Math.min(actualChartSize.width, actualChartSize.height);
@@ -122,7 +126,7 @@ export class PieChart extends BaseChart {
 		// Draw the slice labels
 		this.innerWrap
 			.selectAll("text.chart-label")
-			.data(this.pie(dataList), function(d) { console.log(d); return d.data.label; })
+			.data(this.pie(dataList), (d: any) => d.data.label)
 			.enter()
 			.append("text")
 			.classed("chart-label", true)
