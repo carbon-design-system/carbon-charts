@@ -75,7 +75,8 @@ export class BaseChart {
 			this.events.dispatchEvent(new Event("data-load"));
 
 			// Process data
-			this.data = this.dataProcessor(Tools.passObjectByValue(value));
+			// this.data = this.dataProcessor(Tools.passObjectByValue(value));
+			this.data = Tools.passObjectByValue(value);
 			this.displayData = this.dataProcessor(Tools.passObjectByValue(value));
 
 			const keys = this.getKeysFromData();
@@ -552,8 +553,6 @@ export class BaseChart {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 		const oldStatus = this.options.keys[changedLabel];
 		this.options.keys[changedLabel] = oldStatus === ACTIVE ? DISABLED : ACTIVE;
-
-		console.log("applyLegendFilter", changedLabel, this.options.keys);
 
 		this.update();
 	}

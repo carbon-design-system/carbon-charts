@@ -90,12 +90,12 @@ const chartTypes = [
 		options: pieOptions,
 		data: pieData
 	},
-	// {
-	// 	id: "donut",
-	// 	name: "donut",
-	// 	options: donutOptions,
-	// 	data: pieData
-	// }
+	{
+		id: "donut",
+		name: "donut",
+		options: donutOptions,
+		data: pieData
+	}
 ];
 
 const setDemoActionsEventListener = (chartType: any, oldData: any) => {

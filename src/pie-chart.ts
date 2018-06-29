@@ -23,13 +23,14 @@ export class PieChart extends BaseChart {
 	// Sort data by value (descending)
 	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
 	dataProcessor(data: any) {
+		// TODO - Support multiple datasets
 		// Check for duplicate keys in the data
 		const duplicates = Tools.getDuplicateValues(data.labels);
 		if (duplicates.length > 0) {
 			console.error(`${Tools.capitalizeFirstLetter(this.options.type)} Chart - You have duplicate keys`, duplicates);
 		}
 
-		// TODO - Support more than 1 dataset & sort data
+		// TODO - Support multiple datasets & sort data
 		// let sortedData = data.datasets[0].data.sort((a, b) => b.value - a.value);
 		let sortedData = data.datasets[0].data;
 		sortedData = sortedData.map((datum, i) => {
@@ -78,101 +79,14 @@ export class PieChart extends BaseChart {
 		this.addDataPointEventListener();
 	}
 
-	// Interpolated transitions for older data points to reflect the new data changes
-	interpolateValues(newData: any) {
-		console.log("INTERPOOOALTE");
-		// Apply the new data to the slices, and interpolate them
-		const arc = this.arc;
-		const path = this.innerWrap.selectAll("path").data(this.pie(newData));
-
-		console.log("POOY", newData);
-		// Update slices
-		path
-			.transition()
-			.duration(750)
-			// .attr("fill", (d, i) => this.colorScale(d.data.label))
-			// .attr("stroke", (d, i) => this.colorScale(d.data.label))
-			.attrTween("d", function (a) {
-				return arcTween.bind(this)(a, arc);
-			});
-
-		path.enter()
-			.append("path")
-			.attr("d", arc)
-			.style("opacity", 0)
-			.transition()
-			.duration(750)
-			// .attr("fill", (d, i) => this.colorScale(d.data.label))
-			// .attr("stroke", (d, i) => this.colorScale(d.data.label))
-			.style("opacity", 1)
-			.attrTween("d", function (a) {
-				return arcTween.bind(this)(a, arc);
-			});
-
-		path
-			.exit()
-			.attr("d", arc)
-			.transition()
-			.duration(750)
-			.style("opacity", 0)
-			.remove();
-
-		// Fade out all text labels
-		this.innerWrap.selectAll("text.chart-label")
-			.transition().duration(375).style("opacity", 0).on("end", function(d) {
-				d3.select(this).transition().duration(375).style("opacity", 1);
-			});
-
-		// Move text labels to their new location, and fade them in again
-		const radius = this.computeRadius();
-		setTimeout(() => {
-			const text = this.innerWrap.selectAll("text.chart-label").data(this.pie(newData), function(d) { return d.label; });
-			text
-				.enter()
-				.append("text")
-				.classed("chart-label", true)
-				.attr("dy", Configuration.pie.label.dy)
-				.style("text-anchor", this.deriveTextAnchor)
-				.attr("transform", (d) => {
-					return this.deriveTransformString(d, radius);
-				})
-				.text(function(d) {
-					return Tools.convertValueToPercentage(d.data.value, newData);
-				});
-
-			text
-				.attr("dy", Configuration.pie.label.dy)
-				.style("text-anchor", this.deriveTextAnchor)
-				.attr("transform", (d) => {
-					return this.deriveTransformString(d, radius);
-				})
-				.text(function(d) {
-					return Tools.convertValueToPercentage(d.data.value, newData);
-				});
-
-			text
-				.exit()
-				.remove();
-		}, 375);
-
-		// Add slice hover actions, and clear any slice borders present
-		this.addDataPointEventListener();
-		this.reduceOpacity();
-
-		// Hide the overlay
-		this.updateOverlay().hide();
-	}
-
 	draw() {
 		const dataList = this.displayData.datasets[0].data;
+
+		console.log("DRAW PIE", this.data);
 
 		const actualChartSize: any = this.getChartSize(this.container);
 		const diameter = Math.min(actualChartSize.width, actualChartSize.height);
 		const radius: number = diameter / 2;
-
-		// Assign a color to each of the slice/legend labels
-		const legendItems = this.getLegendItems();
-		this.colorScale.domain(Object.keys(legendItems));
 
 		d3.select(this.holder).select("svg")
 			.attr("width", `${diameter}px`)
@@ -222,6 +136,98 @@ export class PieChart extends BaseChart {
 			});
 
 		// Hide overlay
+		this.updateOverlay().hide();
+	}
+
+	// Interpolated transitions for older data points to reflect the new data changes
+	interpolateValues(newData: any) {
+		const dataList = newData.datasets[0].data;
+
+		// Apply the new data to the slices, and interpolate them
+		const arc = this.arc;
+		const path = this.innerWrap.selectAll("path").data(this.pie(dataList));
+
+		// Update slices
+		path
+			.transition()
+			.duration(750)
+			.attr("fill", (d, i) => this.colorScale(d.data.label))
+			.attr("stroke", (d, i) => this.colorScale(d.data.label))
+			.attrTween("d", function (a) {
+				return arcTween.bind(this)(a, arc);
+			});
+
+		path.enter()
+			.append("path")
+			.attr("d", arc)
+			.style("opacity", 0)
+			.transition()
+			.duration(750)
+			.attr("fill", (d, i) => this.colorScale(d.data.label))
+			.attr("stroke", (d, i) => this.colorScale(d.data.label))
+			.style("opacity", 1)
+			.attrTween("d", function (a) {
+				return arcTween.bind(this)(a, arc);
+			});
+
+		path
+			.exit()
+			.attr("d", arc)
+			.transition()
+			.duration(750)
+			.style("opacity", 0)
+			.remove();
+
+		// Fade out all text labels
+		this.innerWrap.selectAll("text.chart-label")
+			.transition().duration(375).style("opacity", 0).on("end", function(d) {
+				d3.select(this).transition().duration(375).style("opacity", 1);
+			});
+
+		// Move text labels to their new location, and fade them in again
+		const radius = this.computeRadius();
+		setTimeout(() => {
+			const text = this.innerWrap.selectAll("text.chart-label").data(this.pie(dataList), function(d) { return d.label; });
+			text
+				.enter()
+				.append("text")
+				.classed("chart-label", true)
+				.attr("dy", Configuration.pie.label.dy)
+				.style("text-anchor", this.deriveTextAnchor)
+				.attr("transform", (d) => {
+					return this.deriveTransformString(d, radius);
+				})
+				.text(function(d) {
+					return Tools.convertValueToPercentage(d.data.value, dataList);
+				})
+				.style("opacity", 0)
+				.transition()
+				.duration(375)
+				.style("opacity", 1);
+
+			text
+				.attr("dy", Configuration.pie.label.dy)
+				.style("text-anchor", this.deriveTextAnchor)
+				.attr("transform", (d) => {
+					return this.deriveTransformString(d, radius);
+				})
+				.text(function(d) {
+					return Tools.convertValueToPercentage(d.data.value, dataList);
+				})
+				.transition()
+				.duration(375)
+				.style("opacity", 1);
+
+			text
+				.exit()
+				.remove();
+		}, 375);
+
+		// Add slice hover actions, and clear any slice borders present
+		this.addDataPointEventListener();
+		this.reduceOpacity();
+
+		// Hide the overlay
 		this.updateOverlay().hide();
 	}
 
@@ -314,13 +320,14 @@ export class PieChart extends BaseChart {
 	}
 
 	update(newData?: any) {
-		const oldData = this.data;
+		const oldData = this.displayData;
 		const activeLegendItems = this.getActiveLegendItems();
 
 		const newDisplayData = Object.assign({}, oldData);
-		newDisplayData.datasets = oldData.datasets.filter(dataset => {
+		newDisplayData.datasets[0].data = oldData.datasets[0].data.filter(dataPoint => {
+
 			// If this datapoint is active on the legend
-			const activeSeriesItemIndex = activeLegendItems.indexOf(dataset.label);
+			const activeSeriesItemIndex = activeLegendItems.indexOf(dataPoint.label);
 
 			return activeSeriesItemIndex > -1;
 		});
@@ -474,8 +481,6 @@ export class PieChart extends BaseChart {
 function arcTween(a, arc) {
 	const i = d3.interpolate(this._current, a);
 	const self = this;
-
-	console.log("tween", this._current, this);
 
 	return function(t) {
 		self._current = i(t);
