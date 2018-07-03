@@ -235,13 +235,13 @@ export class PieChart extends BaseChart {
 		this.updateOverlay().hide();
 	}
 
-
 	resetOpacity() {
 		this.innerWrap.selectAll("path").attr("stroke-opacity", 0);
 
 		super.resetOpacity();
 	}
 
+	// TODO - Possible inherits from base-chart
 	reduceOpacity(exception?: any) {
 		this.innerWrap.selectAll("path").attr("stroke-opacity", 0);
 
@@ -256,6 +256,7 @@ export class PieChart extends BaseChart {
 		}
 	}
 
+	// TODO - Should inherit most logic from base-chart
 	showTooltip(d) {
 		this.resetOpacity();
 

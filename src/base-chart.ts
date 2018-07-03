@@ -112,7 +112,11 @@ export class BaseChart {
 		const { datasets } = this.displayData;
 		const keys = {};
 
-		if (datasets.length === 1 && datasets[0].backgroundColors.length > 1) {
+		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
+			if (this.options.type === "bar") {
+				console.log("YEAAAAH");
+			}
+
 			// Build out the keys array of objects to represent the legend items
 			this.displayData.labels.forEach(label => {
 				keys[label] = Configuration.legend.items.status.ACTIVE;
@@ -123,6 +127,10 @@ export class BaseChart {
 			});
 		}
 
+		if (this.options.type === "bar") {
+			console.log("before return", keys);
+		}
+
 		// Apply disabled legend items from previous data
 		// That also are applicable to the new data
 		const disabledLegendItems = this.getDisabledLegendItems();
@@ -131,6 +139,10 @@ export class BaseChart {
 				keys[key] = Configuration.legend.items.status.DISABLED;
 			}
 		});
+
+		if (this.options.type === "bar") {
+			console.log("getKeysFromData()", keys);
+		}
 
 		return keys;
 	}
@@ -147,10 +159,23 @@ export class BaseChart {
 		return result;
 	}
 
+	getLegendType() {
+		const { datasets } = this.displayData;
+
+		if (datasets.length === 1 && datasets[0].backgroundColors.length > 1) {
+			return Configuration.legend.basedOn.LABELS;
+		} else {
+			return Configuration.legend.basedOn.SERIES;
+		}
+	}
+
 	setColorScale() {
-		this.displayData.datasets.forEach(dataset => {
-			this.colorScale[dataset.label] = d3.scaleOrdinal().range(dataset.backgroundColors).domain(this.displayData.labels);
-		});
+		// if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
+		// } else {
+			this.displayData.datasets.forEach(dataset => {
+				this.colorScale[dataset.label] = d3.scaleOrdinal().range(dataset.backgroundColors).domain(this.displayData.labels);
+			});
+		// }
 	}
 
 	getChartSize(container = this.container) {
@@ -460,7 +485,19 @@ export class BaseChart {
 				// TODO - REMOVE
 				// return "violet";
 
-				return d.value === Configuration.legend.items.status.ACTIVE ? this.colorScale[d.key]() : "white";
+				if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
+					if (d.value === Configuration.legend.items.status.ACTIVE) {
+						return this.colorScale[this.displayData.datasets[0].label](d.key);
+					}
+
+					return "white";
+				} else {
+					if (d.value === Configuration.legend.items.status.ACTIVE) {
+						return this.colorScale[d.key]();
+					}
+
+					return "white";
+				}
 			});
 
 		// Add hover effect for legend item circles

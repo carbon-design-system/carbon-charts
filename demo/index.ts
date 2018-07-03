@@ -18,8 +18,8 @@ import "./index.scss";
 import "./demo-matter";
 
 import {
-	barOptions,
-	barData,
+	groupedBarOptions,
+	groupedBarData,
 	simpleBarOptions,
 	simpleBarData,
 	stackedBarData,
@@ -36,12 +36,12 @@ const chartTypes = [
 	// 	data: dimensionData,
 	// 	options: dimensionOption
 	// },
-	// {
-	// 	id: "grouped-bar",
-	// 	name: "Bar",
-	// 	options: barOptions,
-	// 	data: barData
-	// },
+	{
+		id: "grouped-bar",
+		name: "Grouped Bar",
+		options: groupedBarOptions,
+		data: groupedBarData
+	},
 	// {
 	// 	id: "simplest-bar",
 	// 	name: "Bar",
@@ -137,6 +137,7 @@ chartTypes.forEach(type => {
 			// 	break;
 			default:
 			case "simple-bar":
+			case "grouped-bar":
 				classyCharts[type.id] = new BarChart(
 					classyContainer,
 					{
@@ -288,6 +289,7 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		// 	classyChartObject.setData(newData);
 
 		// 	break;
+		case "grouped-bar":
 		case "simple-bar":
 		case "simple-bar-accessible":
 			newData = Object.assign({}, oldData);

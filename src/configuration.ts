@@ -192,6 +192,10 @@ export namespace Configuration {
 				ACTIVE: 1,
 				DISABLED: 0
 			},
+		},
+		basedOn: {
+			SERIES: "series",
+			LABELS: "labels"
 		}
 	};
 

@@ -2,39 +2,7 @@ import { colors } from "./colors";
 
 const generateRandomRatio = (num) => Math.max(0.2 * num, Math.floor(Math.random() * num));
 
-export const barOptions = {
-	accessibility: false,
-	axis: {
-		x: {
-			domain: "Part number",
-			title: "2017 Sales per Model"
-		},
-		y: {
-			domain: ["Sold", "More", "Qty"],
-			formatter: axisValue => {
-				return `${axisValue / 1000000}mil`;
-			},
-			numberOfTicks: 3
-		}
-	},
-	// yTicks: 5,
-	legendClickable: true,
-	containerResizable: true,
-	colors
-};
-
-export const barData = [];
-for (let i = 1; i < 7; i++) {
-	barData.push({
-		"Part number": `773C-${ i * 2 }-L6EP-L22I-${ i * 8 }-L22I`,
-		"Qty": i * generateRandomRatio(3000000),
-		"More": i * generateRandomRatio(4000000),
-		"Sold": i * generateRandomRatio(5000000)
-	});
-}
-
-// Simple bar
-export const simpleBarData = {
+export const groupedBarData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
 		{
@@ -84,6 +52,42 @@ export const simpleBarData = {
 	]
 };
 
+export const groupedBarOptions = {
+	accessibility: false,
+	axis: {
+		x: {
+			title: "2018 Annual Sales Figures",
+		},
+		y: {
+			domain: ["Qty", "More", "Sold", "Restocking", "Misc"],
+			formatter: axisValue => {
+				return `${axisValue / 1000}k`;
+			},
+			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
+		}
+	},
+	legendClickable: true,
+	containerResizable: true,
+};
+
+// Simple bar
+export const simpleBarData = {
+	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			backgroundColors: colors,
+			data: [
+				65000,
+				29123,
+				35213,
+				51213,
+				16932
+			]
+		}
+	]
+};
+
 export const simpleBarOptions = {
 	accessibility: false,
 	axis: {
@@ -98,10 +102,8 @@ export const simpleBarOptions = {
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 		}
 	},
-	// yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
-	colors
 };
 
 // Stacked bar
