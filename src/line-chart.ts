@@ -73,7 +73,7 @@ export class LineChart extends BaseAxisChart {
 			.attr("class", "dot")
 			.attr("cx", (d, i) => this.x(d.label) + margins.left)
 			.attr("cy", (d: any) => this.y(d.value))
-			.attr("r", 5)
+			.attr("r", 4)
 			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
 
 		// const gBars = this.innerWrap
