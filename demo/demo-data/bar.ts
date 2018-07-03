@@ -1,7 +1,5 @@
 import { colors } from "./colors";
 
-const generateRandomRatio = (num) => Math.max(0.2 * num, Math.floor(Math.random() * num));
-
 export const groupedBarData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
@@ -59,7 +57,6 @@ export const groupedBarOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
-			domain: ["Qty", "More", "Sold", "Restocking", "Misc"],
 			formatter: axisValue => {
 				return `${axisValue / 1000}k`;
 			},
@@ -95,7 +92,6 @@ export const simpleBarOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
-			domain: ["Qty", "More", "Sold", "Restocking", "Misc"],
 			formatter: axisValue => {
 				return `${axisValue / 1000}k`;
 			},
@@ -150,7 +146,6 @@ export const stackedBarOptions = {
 			title: "2017 Financials"
 		},
 		y: {
-			domain: ["Qty", "More", "Sold", "Restocking", "Misc"],
 			formatter: axisValue => {
 				return `${axisValue / 1000}k`;
 			},

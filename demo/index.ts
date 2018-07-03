@@ -1,8 +1,7 @@
 import {
 	// BarNewChart,
 	BarChart,
-	GroupedBarChart,
-	// LineChart,
+	LineChart,
 	// DoubleAxisLineChart,
 	StackedBarChart,
 	// ComboChart,
@@ -18,15 +17,20 @@ import "./index.scss";
 import "./demo-matter";
 
 import {
+	// Bar
 	groupedBarOptions,
 	groupedBarData,
 	simpleBarOptions,
 	simpleBarData,
 	stackedBarData,
 	stackedBarOptions,
+	// Pie & donut
 	pieOptions,
 	pieData,
-	donutOptions
+	donutOptions,
+	// Line
+	lineData,
+	lineOptions
 } from "./demo-data/index";
 
 const chartTypes = [
@@ -54,18 +58,24 @@ const chartTypes = [
 		options: simpleBarOptions,
 		data: simpleBarData
 	},
-	// {
-	// 	id: "simple-bar-accessible",
-	// 	name: "Accessible Bar",
-	// 	options: Object.assign({}, simpleBarOptions, {accessibility: true}),
-	// 	data: simpleBarData
-	// },
+	{
+		id: "simple-bar-accessible",
+		name: "Accessible Bar",
+		options: Object.assign({}, simpleBarOptions, {accessibility: true}),
+		data: simpleBarData
+	},
 	// {
 	// 	id: "line",
 	// 	name: "Line",
 	// 	options: barOptions,
 	// 	data: barData
 	// },
+	{
+		id: "line",
+		name: "Line",
+		options: lineOptions,
+		data: lineData
+	},
 	// {
 	// 	id: "stacked-bar",
 	// 	name: "Stacked Bar",
@@ -171,6 +181,18 @@ chartTypes.forEach(type => {
 				setDemoActionsEventListener(type.id, type.data);
 
 				break;
+			case "line":
+					classyCharts[type.id] = new LineChart(
+						classyContainer,
+						{
+							data: type.data,
+							options: Object.assign({}, type.options, {type: type.id}),
+						}
+					);
+
+					setDemoActionsEventListener(type.id, type.data);
+
+					break;
 			// case "stacked-bar":
 			// 	classyCharts[type.id] = new StackedBarChart(
 			// 		classyContainer,

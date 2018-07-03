@@ -5,6 +5,8 @@ $default_transition: all .1s ease-out;
 	font-family: "IBM Plex Sans", "Helvetica Neue for IBM", "Helvetica Neue", Arial, sans-serif;
 }
 
+// TODO - Nest all styles into the "chart-wrapper class
+
 .chart-wrapper {
 	width: 100%;
 	height: 100%;
@@ -32,6 +34,24 @@ $default_transition: all .1s ease-out;
 		rect, circle, path {
 			&:hover {
 				cursor: pointer;
+			}
+		}
+
+		path {
+			&.line {
+				fill: none;
+				stroke-width: 2;
+
+				&:hover {
+					cursor: default;
+				}
+			}
+		}
+
+		circle {
+			&.dot {
+				fill: #fff;
+				stroke-width: 2;
 			}
 		}
 	}
