@@ -1,6 +1,6 @@
 import { colors } from "./colors";
 
-export const lineData = {
+export const curvedLineData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
 		{
@@ -34,6 +34,63 @@ export const lineData = {
 				39232,
 				12312,
 				34234
+			]
+		}
+	]
+};
+
+export const curvedLineOptions = {
+	accessibility: false,
+	axis: {
+		x: {
+			title: "2018 Annual Sales Figures",
+		},
+		y: {
+			formatter: axisValue => {
+				return `${axisValue / 1000}k`;
+			},
+		}
+	},
+	curve: "curveNatural",
+	legendClickable: true,
+	containerResizable: true,
+};
+
+
+export const lineData = {
+	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			backgroundColors: [colors[0]],
+			data: [
+				0,
+				0,
+				0,
+				0,
+				0
+			]
+		},
+		{
+			label: "Dataset 2",
+			backgroundColors: [colors[1]],
+			data: [
+				0,
+				10000,
+				20000,
+				30000,
+				40000
+			]
+		},
+		{
+			label: "Dataset 3",
+			backgroundColors: [colors[2]],
+			data: [
+				0,
+				20000,
+				40000,
+				60000,
+				80000
 			]
 		}
 	]

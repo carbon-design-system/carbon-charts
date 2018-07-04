@@ -7,14 +7,23 @@ import PatternsService from "./services/patterns";
 
 export class LineChart extends BaseAxisChart {
 	x: any;
-	x1: any;
 	y: any;
+
 	colorScale: any;
+
+	lineGenerator: any;
 
 	constructor(holder: Element, configs: any) {
 		super(holder, configs);
 
 		this.options.type = "line";
+
+		const { line: margins } = Configuration.charts.margin;
+		// D3 line generator function
+		this.lineGenerator = d3.line()
+			.x((d, i) => this.x(this.displayData.labels[i]) + margins.left)
+			.y((d: any) => this.y(d))
+			.curve(d3[this.options.curve] || d3.curveLinear);
 	}
 
 	addLabelsToDataPoints(d, index) {
@@ -45,15 +54,8 @@ export class LineChart extends BaseAxisChart {
 
 		this.innerWrap.attr("transform", "translate(" + margins.left + "," + margins.top + ")");
 
-		// D3 line generator function
-		const line = d3.line()
-			.x((d, i) => this.x(this.displayData.labels[i]) + margins.left)
-			.y((d: any) => this.y(d))
-			.curve(d3.curveNatural);
-
-		const { datasets } = this.displayData;
 		const gLines = this.innerWrap.selectAll("g.lines")
-			.data(datasets)
+			.data(this.displayData.datasets)
 			.enter()
 			.append("g")
 			.classed("lines", true);
@@ -64,7 +66,7 @@ export class LineChart extends BaseAxisChart {
 			})
 			.datum(d => d.data)
 			.attr("class", "line")
-			.attr("d", line);
+			.attr("d", this.lineGenerator);
 
 		gLines.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i))
@@ -76,28 +78,6 @@ export class LineChart extends BaseAxisChart {
 			.attr("r", 4)
 			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
 
-		// const gBars = this.innerWrap
-		// 	.attr("transform", "translate(" + margins.left + "," + margins.top + ")")
-		// 	.append("g")
-		// 	.classed("bars", true)
-		// 	.attr("width", width);
-
-		// gBars.selectAll("g")
-		// 	.data(this.displayData.labels)
-		// 	.enter()
-		// 		.append("g")
-		// 		.attr("transform", d => "translate(" + this.x(d) + ",0)")
-		// 		.selectAll("rect.bar")
-		// 		.data((d, index) => this.addLabelsToDataPoints(d, index))
-		// 			.enter()
-		// 				.append("rect")
-		// 				.classed("bar", true)
-		// 				.attr("x", d => this.x1(d.datasetLabel))
-		// 				.attr("y", d => this.y(d.value))
-		// 				.attr("width", this.x1.bandwidth())
-		// 				.attr("height", d => height - this.y(d.value))
-		// 				.attr("fill", d => this.colorScale[d.datasetLabel](d.label));
-
 		// Hide the overlay
 		this.updateOverlay().hide();
 
@@ -106,39 +86,49 @@ export class LineChart extends BaseAxisChart {
 	}
 
 	interpolateValues(newData: any) {
-		const { bar: margins } = Configuration.charts.margin;
+		const { line: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
-		// Apply new data to the bars
-		const rect = this.innerWrap.select("g.bars")
-			.attr("width", width)
-			.selectAll("g")
-			.data(this.displayData.labels)
-				.attr("transform", d => "translate(" + this.x(d) + ",0)")
-				.selectAll("rect.bar")
-				.data((d, index) => this.addLabelsToDataPoints(d, index));
+		// Apply new data to the lines
+		const gLines = this.innerWrap.selectAll("g.lines")
+			.data(newData.datasets);
 
-		this.updateElements(true, rect);
+		this.updateElements(true, gLines);
 
-		// Add bars that need to be added now
-		rect.enter()
-			.append("rect")
-			.attr("class", "bar")
-			.attr("x", d => this.x1(d.datasetLabel))
-			.attr("y", d => this.y(d.value))
-			.attr("width", this.x1.bandwidth())
-			.attr("height", d => height - this.y(d.value))
-			.attr("opacity", 0)
-			.transition(this.getFillTransition())
-			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
-			.attr("opacity", 1)
-			.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
-			.attr("stroke-width", this.options.accessibility ? 2 : 0);
+		// Add lines that need to be added now
+		const addedLineGroups = gLines.enter()
+			.append("g")
+			.classed("lines", true);
 
-		// Remove bars that are no longer needed
-		rect.exit()
+		addedLineGroups.append("path")
+			.attr("stroke", d => {
+				return this.colorScale[d.label]();
+			})
+			.datum(d => d.data)
+			.style("opacity", 0)
+			.transition(this.getDefaultTransition())
+			.style("opacity", 1)
+			.attr("class", "line")
+			.attr("d", this.lineGenerator);
+
+		// Add line circles
+		addedLineGroups.selectAll("circle.dot")
+			.data((d, i) => this.addLabelsToDataPoints(d, i))
+			.enter()
+			.append("circle")
+			.attr("class", "dot")
+			.attr("cx", (d, i) => this.x(d.label) + margins.left)
+			.attr("cy", (d: any) => this.y(d.value))
+			.attr("r", 4)
+			.style("opacity", 0)
+			.transition(this.getDefaultTransition())
+			.style("opacity", 1)
+			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+
+		// Remove lines that are no longer needed
+		gLines.exit()
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
@@ -153,30 +143,45 @@ export class LineChart extends BaseAxisChart {
 		this.events.dispatchEvent(new Event("update"));
 	}
 
-	updateElements(animate: boolean, rect?: any, g?: any) {
+	updateElements(animate: boolean, gLines?: any) {
 		const { axis } = this.options;
 
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
-		if (!rect) {
-			rect = this.innerWrap.selectAll("rect.bar");
+		if (!gLines) {
+			gLines = this.innerWrap.selectAll("g.lines");
 		}
 
-		if (g) {
-			g.attr("transform", d => "translate(" + this.x(d) + ",0)");
-		}
+		const transitionToUse = animate ? this.getFillTransition() : this.getInstantTransition();
+		const self = this;
+		gLines.selectAll("path.line")
+			.datum(function(d) {
+				const parentDatum = d3.select(this.parentNode).datum() as any;
 
-		// Update existing bars
-		rect
-			.transition(animate ? this.getFillTransition() : this.getInstantTransition())
-			// TODO
-			// .ease(d3.easeCircle)
-			.attr("x", d => this.x1(d.datasetLabel))
-			.attr("y", d => this.y(d.value))
-			.attr("width", this.x1.bandwidth())
-			.attr("height", d => height - this.y(d.value))
-			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label));
+				return parentDatum.data;
+			})
+			.transition(transitionToUse)
+			.attr("stroke", function(d) {
+				const parentDatum = d3.select(this.parentNode).datum() as any;
+
+				return self.colorScale[parentDatum.label]();
+			})
+			.attr("class", "line")
+			.attr("d", this.lineGenerator);
+
+		const { line: margins } = Configuration.charts.margin;
+		gLines.selectAll("circle.dot")
+			.data(function(d, i) {
+				const parentDatum = d3.select(this).datum() as any;
+
+				return self.addLabelsToDataPoints(parentDatum, i);
+			})
+			.transition(transitionToUse)
+			.attr("cx", (d, i) => this.x(d.label) + margins.left)
+			.attr("cy", (d: any) => this.y(d.value))
+			.attr("r", 4)
+			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
 	}
 
 	resizeChart() {
@@ -197,9 +202,7 @@ export class LineChart extends BaseAxisChart {
 		this.setXAxis(true);
 		this.setYAxis(true);
 
-		// Apply new data to the bars
-		const g = this.innerWrap.selectAll("g.bars g");
-		this.updateElements(false, null, g);
+		this.updateElements(false, null);
 
 		super.resizeChart();
 	}

@@ -29,6 +29,8 @@ import {
 	pieData,
 	donutOptions,
 	// Line
+	curvedLineOptions,
+	curvedLineData,
 	lineData,
 	lineOptions
 } from "./demo-data/index";
@@ -64,12 +66,12 @@ const chartTypes = [
 		options: Object.assign({}, simpleBarOptions, {accessibility: true}),
 		data: simpleBarData
 	},
-	// {
-	// 	id: "line",
-	// 	name: "Line",
-	// 	options: barOptions,
-	// 	data: barData
-	// },
+	{
+		id: "curved-line",
+		name: "Curved Line",
+		options: curvedLineOptions,
+		data: curvedLineData
+	},
 	{
 		id: "line",
 		name: "Line",
@@ -181,6 +183,7 @@ chartTypes.forEach(type => {
 				setDemoActionsEventListener(type.id, type.data);
 
 				break;
+			case "curved-line":
 			case "line":
 					classyCharts[type.id] = new LineChart(
 						classyContainer,
@@ -311,6 +314,7 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		// 	classyChartObject.setData(newData);
 
 		// 	break;
+		default:
 		case "grouped-bar":
 		case "simple-bar":
 		case "simple-bar-accessible":
