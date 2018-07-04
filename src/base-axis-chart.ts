@@ -405,7 +405,7 @@ export class BaseAxisChart extends BaseChart {
 		const self = this;
 		const { accessibility } = this.options;
 
-		this.svg.selectAll("rect")
+		this.svg.selectAll("rect, circle.dot")
 			.on("mouseover", function(d) {
 				d3.select(this)
 					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
@@ -419,7 +419,7 @@ export class BaseAxisChart extends BaseChart {
 					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
 			})
 			.on("click", function(d) {
-				self.showTooltip(d);
+				self.showTooltip(d, this);
 				self.reduceOpacity(this);
 			});
 	}

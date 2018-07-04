@@ -3,6 +3,9 @@ import { Configuration } from "./configuration";
 import { Tools } from "./tools";
 import PatternsService from "./services/patterns";
 
+// Use submodule
+import { position } from "../node_modules/@peretz/neutrino/common/position.service";
+
 export class BaseChart {
 	static chartCount = 1;
 
@@ -113,10 +116,6 @@ export class BaseChart {
 		const keys = {};
 
 		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
-			if (this.options.type === "bar") {
-				console.log("YEAAAAH");
-			}
-
 			// Build out the keys array of objects to represent the legend items
 			this.displayData.labels.forEach(label => {
 				keys[label] = Configuration.legend.items.status.ACTIVE;
@@ -127,10 +126,6 @@ export class BaseChart {
 			});
 		}
 
-		if (this.options.type === "bar") {
-			console.log("before return", keys);
-		}
-
 		// Apply disabled legend items from previous data
 		// That also are applicable to the new data
 		const disabledLegendItems = this.getDisabledLegendItems();
@@ -139,10 +134,6 @@ export class BaseChart {
 				keys[key] = Configuration.legend.items.status.DISABLED;
 			}
 		});
-
-		if (this.options.type === "bar") {
-			console.log("getKeysFromData()", keys);
-		}
 
 		return keys;
 	}
@@ -362,6 +353,7 @@ export class BaseChart {
 	resetOpacity() {
 		const svg = d3.selectAll("svg.chart-svg");
 		svg.selectAll("path").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
+		svg.selectAll("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		svg.selectAll("circle")
 			.attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
 			.attr("fill", Configuration.charts.resetOpacity.circle.fill);
@@ -749,7 +741,7 @@ export class BaseChart {
 		window.onclick = null;
 	}
 
-	showTooltip(d) {
+	showTooltip(d, clickedElement) {
 		// Rest opacity of all elements in the chart
 		this.resetOpacity();
 
@@ -760,8 +752,8 @@ export class BaseChart {
 		// Draw tooltip
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
-			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px")
-			.style("border-color", this.colorScale[d.datasetLabel](d.label));
+			.style("border-color", this.colorScale[d.datasetLabel](d.label))
+			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
 		// Add close button to tooltip
 		Tools.addCloseBtn(tooltip, "xs")
@@ -783,6 +775,35 @@ export class BaseChart {
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 
+		// TODO - Tooltip auto-position using Neutrino utils
+		// const getOffset = element => {
+		// 	const boundingRect = element.getBoundingClientRect();
+		// 	const htmlElement = document.documentElement;
+
+		// 	return {
+		// 		top: boundingRect.top + window.pageYOffset - htmlElement.clientTop,
+		// 		left: boundingRect.left + window.pageXOffset - htmlElement.clientLeft
+		// 	};
+		// };
+
+		// const clickedElementDimensions = clickedElement.getBoundingClientRect();
+		// const clickedElementOffsets = getOffset(clickedElement);
+		// const triggerElement = d3.select(document.body)
+		// 	.append("div")
+		// 	.style("position", "absolute")
+		// 	.style("top", clickedElementOffsets.top + "px")
+		// 	.style("left", clickedElementOffsets.left + "px")
+		// 	.style("width", clickedElementDimensions.width + "px")
+		// 	.style("height", clickedElementDimensions.height + "px");
+
+		// const tooltipPosition = position.findAbsolute(triggerElement.node() as HTMLElement, tooltip.node() as HTMLElement, "right");
+		// console.log(tooltipPosition);
+
+		// tooltip.style("top", tooltipPosition.top + "px")
+		// 	.style("left", tooltipPosition.left + "px")
+		// 	// Programmatically set class for direction
+		// 	.classed("arrow-left", true);
+
 		// Draw tooltip arrow in the right direction
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
 			tooltip.classed("arrow-right", true);
@@ -797,7 +818,6 @@ export class BaseChart {
 			tooltip.append("div").attr("class", "arrow");
 		}
 
-		//
 		this.addTooltipEventListeners(tooltip);
 	}
 
