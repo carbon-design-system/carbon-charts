@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 
 import PATTERN_SVGS from "../assets/patterns/index";
+import { Configuration } from "../configuration";
 
 const selectors = {
 	PATTERNS_CONTAINER: "peretz-charts-patterns"
@@ -8,7 +9,11 @@ const selectors = {
 
 export default class PatternsService {
 	container: any;
-	accum = 0;
+
+	patternAccum = 0;
+	idAccum = 0;
+
+	patternURLs = {};
 
 	constructor() {
 		this.setDiv();
@@ -37,62 +42,68 @@ export default class PatternsService {
 	 *
 	 * @memberof PatternsService
 	 */
-	addPatternSVGs(data: any, colorScale: any) {
-		// d3.select(this.container)
-		// 	.style("display", "table")
-		// 	.style("max-height", 0);
+	addPatternSVGs(d: any, colorScale: any, chartContainerID: string, legendType: string) {
+		d3.select(this.container)
+			.style("display", "table")
+			.style("max-height", 0);
 
-		// data.forEach((dataPoint, i) => {
-		// 	const index = i + 1;
-		// 	const id = ++this.accum;
+		d.datasets.forEach(dataset => {
+			let datasetPattern: string;
 
-		// 	// Create SVG container div
-		// 	const svgContainer = document.createElement("div");
-		// 	svgContainer.id = `peretz-charts-pattern-container-${id}`;
-		// 	svgContainer.innerHTML = trimSVG(PATTERN_SVGS[i]);
+			dataset.data.forEach((dataPoint, i) => {
+				const index = i + 1;
+				const id = ++this.idAccum;
 
-		// 	// Apply id to the svg element
-		// 	const mountedSVG = svgContainer.querySelector("svg");
-		// 	mountedSVG.id = `peretz-charts-pattern-${id}-svg`;
+				if (!datasetPattern || legendType === Configuration.legend.basedOn.LABELS) {
+					datasetPattern = PATTERN_SVGS[this.patternAccum++];
+				}
 
-		// 	// Apply id to the pattern element
-		// 	const patternElement = mountedSVG.querySelector("pattern");
-		// 	patternElement.id = `peretz-charts-pattern-${id}`;
+				// Create SVG container div
+				const svgContainer = document.createElement("div");
+				svgContainer.id = `peretz-${chartContainerID}-pattern-container-${id}`;
+				svgContainer.innerHTML = trimSVG(datasetPattern);
 
-		// 	// Apply fills to everything
-		// 	const allElementsInsideSVG = Array.prototype.slice.call(mountedSVG.querySelectorAll("pattern g *"));
-		// 	allElementsInsideSVG.forEach((element, elementIndex) => {
-		// 		if (elementIndex > 0) {
-		// 			element.style.fill = colorScale(dataPoint.label);
-		// 			element.style.stroke = colorScale(dataPoint.label);
-		// 		} else {
-		// 			element.style.fill = "transparent";
-		// 		}
+				// Apply id to the svg element
+				const mountedSVG = svgContainer.querySelector("svg");
+				mountedSVG.id = `peretz-${chartContainerID}-pattern-${id}-svg`;
 
-		// 		element.removeAttribute("id");
-		// 		element.removeAttribute("class");
-		// 	});
+				// Apply id to the pattern element
+				const patternElement = mountedSVG.querySelector("pattern");
+				patternElement.id = `peretz-${chartContainerID}-pattern-${id}`;
 
-		// 	// Update pattern widths & heights
-		// 	patternElement.setAttribute("width", "20");
-		// 	patternElement.setAttribute("height", "20");
+				// Apply fills to everything
+				const allElementsInsideSVG = Array.prototype.slice.call(mountedSVG.querySelectorAll("pattern g *"));
+				allElementsInsideSVG.forEach((element, elementIndex) => {
+					if (elementIndex > 0) {
+						element.style.fill = colorScale[dataset.label](d.labels[i]);
+						element.style.stroke = colorScale[dataset.label](d.labels[i]);
+					} else {
+						element.style.fill = "transparent";
+					}
 
-		// 	if (index === 2 || index === 4) {
-		// 		patternElement.setAttribute("width", "30");
-		// 		patternElement.setAttribute("height", "30");
-		// 	}
+					element.removeAttribute("id");
+					element.removeAttribute("class");
+				});
 
-		// 	if (index === 5 || index === 1) {
-		// 		patternElement.setAttribute("width", "40");
-		// 		patternElement.setAttribute("height", "40");
-		// 	}
+				// Update pattern widths & heights
+				patternElement.setAttribute("width", "20");
+				patternElement.setAttribute("height", "20");
 
-		// 	this.container.appendChild(svgContainer);
-		// });
+				this.container.appendChild(svgContainer);
+
+				// Add pattern to the list of patterns
+				const patternURL = `url(#peretz-${chartContainerID}-pattern-${id})`;
+				if (this.patternURLs[dataset.label]) {
+					this.patternURLs[dataset.label].push(patternURL);
+				} else {
+					this.patternURLs[dataset.label] = [patternURL];
+				}
+			});
+		});
 	}
 
 	getFillValues() {
-		return PATTERN_SVGS.map((patternSVG, i) => `url(#peretz-charts-pattern-${i + 1})`);
+		return this.patternURLs;
 	}
 }
 

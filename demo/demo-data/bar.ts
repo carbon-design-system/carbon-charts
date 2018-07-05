@@ -51,7 +51,7 @@ export const groupedBarData = {
 };
 
 export const groupedBarOptions = {
-	accessibility: false,
+	accessibility: true,
 	scales: {
 		x: {
 			title: "2018 Annual Sales Figures",

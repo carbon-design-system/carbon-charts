@@ -10,6 +10,7 @@ export class BaseChart {
 	static chartCount = 1;
 
 	id = "";
+	chartContainerID = "";
 
 	// Chart element references
 	container: any;
@@ -24,7 +25,7 @@ export class BaseChart {
 	displayData: any;
 
 	// Fill scales & fill related objects
-	patternScale: any;
+	patternScale = {};
 	colorScale = {};
 	patternsService: PatternsService;
 
@@ -38,10 +39,10 @@ export class BaseChart {
 
 		const {chartId, container} = this.setChartIDContainer();
 		this.container = container;
-
+		this.chartContainerID = chartId;
 
 		if (configs.options) {
-			this.options = Object.assign(this.options, configs.options);
+			this.options = Object.assign({}, this.options, configs.options);
 
 			if (this.options.containerResizable) {
 				this.resizeWhenContainerChange();
@@ -53,10 +54,6 @@ export class BaseChart {
 		if (configs.data) {
 			this.setData(configs.data);
 		}
-
-		// Accessibility & patterns
-		this.patternsService = new PatternsService();
-		// this.patternsService.addPatternSVGs();
 	}
 
 
@@ -96,6 +93,11 @@ export class BaseChart {
 
 			// Set the color scale based on the keys present in the data
 			this.setColorScale();
+
+			// Add patterns to page, set pattern scales
+			if (this.options.accessibility) {
+				this.setPatterns();
+			}
 
 			// Perform the draw or update chart
 			if (initialDraw) {
@@ -158,6 +160,19 @@ export class BaseChart {
 		} else {
 			return Configuration.legend.basedOn.SERIES;
 		}
+	}
+
+	setPatterns() {
+		// Accessibility & patterns
+		this.patternsService = new PatternsService();
+		this.patternsService.addPatternSVGs(this.displayData, this.colorScale, this.chartContainerID, this.getLegendType());
+
+		const patternURLs = this.patternsService.getFillValues();
+		Object.keys(patternURLs).forEach(datasetLabel => {
+			this.patternScale[datasetLabel] = d3.scaleOrdinal()
+				.range(patternURLs[datasetLabel])
+				.domain(this.getLegendItemKeys());
+		});
 	}
 
 	setColorScale() {

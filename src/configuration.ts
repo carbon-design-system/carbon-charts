@@ -123,6 +123,9 @@ export namespace Configuration {
 		mouseout: {
 			strokeWidth: 0,
 			strokeOpacity: 1
+		},
+		default: {
+			strokeWidth: 2
 		}
 	};
 

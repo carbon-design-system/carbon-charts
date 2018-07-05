@@ -119,8 +119,8 @@ export class PieChart extends BaseChart {
 			.enter()
 			.append("path")
 			.attr("d", this.arc)
-			.attr("fill", d => this.getFillScale()(d.data.label))
-			.attr("stroke", d => this.colorScale(d.data.label))
+			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label)) // Support multiple datasets
+			.attr("stroke", d => this.colorScale[this.displayData.datasets[0].label](d.data.label))
 			.each(function(d) { this._current = d; });
 
 		// Draw the slice labels
