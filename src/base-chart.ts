@@ -378,16 +378,12 @@ export class BaseChart {
 	}
 
 	reduceOpacity(exception) {
-		this.svg.selectAll("rect").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
-		this.svg.selectAll("rect").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
-		this.svg.selectAll("path").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
-		this.svg.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
-		this.svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+		this.svg.selectAll("rect, path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
+		this.svg.selectAll("rect, path").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
 
 		const exceptedElement = d3.select(exception);
 		const exceptedElementData = exceptedElement.datum() as any;
 		d3.select(exception).attr("fill-opacity", false);
-		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		d3.select(exception).attr("fill", (d: any) => this.getFillScale()[d.datasetLabel](exceptedElementData.label));
 	}

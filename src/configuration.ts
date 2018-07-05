@@ -129,29 +129,32 @@ export namespace Configuration {
 		}
 	};
 
-	// export const lines = {
-	// 	mouseover: {
-	// 		class: "hover-glow",
-	// 		r: 5.5,
-	// 		fill: "none",
-	// 		strokeWidth: 4,
-	// 		strokeOpacity: 0.5
-	// 	},
-	// 	path: {
-	// 		fill: "none",
-	// 		stroke: "steelblue",
-	// 		strokeLinejoin: "round",
-	// 		strokeLinecap: "round",
-	// 		strokeWidth: 2,
-	// 		duration: 700
-	// 	},
-	// 	dot: {
-	// 		r: 3.5,
-	// 		fill: "white",
-	// 		strokeWidth: 2,
-	// 		duration: 500
-	// 	}
-	// };
+	export const lines = {
+		// mouseover: {
+		// 	class: "hover-glow",
+		// 	r: 5.5,
+		// 	fill: "none",
+		// 	strokeWidth: 4,
+		// 	strokeOpacity: 0.5
+		// },
+		// path: {
+		// 	fill: "none",
+		// 	stroke: "steelblue",
+		// 	strokeLinejoin: "round",
+		// 	strokeLinecap: "round",
+		// 	strokeWidth: 2,
+		// 	duration: 700
+		// },
+		points: {
+			strokeWidth: 4,
+			mouseover: {
+				strokeOpacity: 0.5
+			},
+			mouseout: {
+				strokeOpacity: 1
+			}
+		}
+	};
 
 	export const pie = {
 		maxWidth: 516.6,

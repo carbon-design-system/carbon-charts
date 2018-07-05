@@ -180,7 +180,7 @@ export class LineChart extends BaseAxisChart {
 			.transition(transitionToUse)
 			.attr("cx", (d, i) => this.x(d.label) + margins.left)
 			.attr("cy", (d: any) => this.y(d.value))
-			.attr("r", 4)
+			.attr("r", Configuration.lines.points.strokeWidth)
 			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
 	}
 
@@ -205,5 +205,12 @@ export class LineChart extends BaseAxisChart {
 		this.updateElements(false, null);
 
 		super.resizeChart();
+	}
+
+	reduceOpacity(exception) {
+		super.reduceOpacity(exception);
+
+		this.innerWrap.selectAll("circle.dot").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 	}
 }

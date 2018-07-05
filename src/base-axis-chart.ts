@@ -412,7 +412,7 @@ export class BaseAxisChart extends BaseChart {
 		const self = this;
 		const { accessibility } = this.options;
 
-		this.svg.selectAll("rect, circle.dot")
+		this.svg.selectAll("rect")
 			.on("mouseover", function(d) {
 				d3.select(this)
 					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
@@ -424,6 +424,22 @@ export class BaseAxisChart extends BaseChart {
 					.attr("stroke-width", accessibility ? 2 : Configuration.bars.mouseout.strokeWidth)
 					.attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
 					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
+			})
+			.on("click", function(d) {
+				self.showTooltip(d, this);
+				self.reduceOpacity(this);
+			});
+
+		this.svg.selectAll("circle.dot")
+			.on("mouseover", function(d) {
+				d3.select(this)
+					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
+					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
+			})
+			.on("mouseout", function(d) {
+				d3.select(this)
+					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
+					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
 			})
 			.on("click", function(d) {
 				self.showTooltip(d, this);
