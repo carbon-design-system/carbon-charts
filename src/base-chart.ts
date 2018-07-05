@@ -659,15 +659,10 @@ export class BaseChart {
 				.text(d => "" + d);
 		}
 
-		if (window.innerWidth - (windowXPoint + Configuration.tooltip.width) < 0) {
-			tooltip.classed("arrow-right", true);
-			tooltip.append("div").attr("class", "arrow");
-			tooltip.style("left", `${mouseXPoint - Configuration.tooltip.width - Configuration.tooltip.arrowWidth}px`);
-		} else {
-			tooltip.classed("arrow-left", true);
-			tooltip.append("div").attr("class", "arrow");
-			tooltip.style("left", `${mouseXPoint + Configuration.tooltip.arrowWidth}px`);
-		}
+		// Position the tooltip
+		tooltip.classed("arrow-right", true);
+		tooltip.append("div").attr("class", "arrow");
+		tooltip.style("left", `${mouseXPoint - Configuration.tooltip.width - Configuration.tooltip.arrowWidth}px`);
 	}
 
 	showLabelTooltip(d, leftSide) {
