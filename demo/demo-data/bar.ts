@@ -61,6 +61,12 @@ export const groupedBarOptions = {
 				return `${axisValue / 1000}k`;
 			},
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
+		},
+		y2: {
+			ticks: {
+				max: 1,
+				min: 0
+			}
 		}
 	},
 	legendClickable: true,

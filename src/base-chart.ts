@@ -757,14 +757,15 @@ export class BaseChart {
 			});
 
 		let tooltipHTML = "";
-		if (d.datasetLabel) {
+		const formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString('en');
+		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
 			tooltipHTML += `
-				${d.label}<br/>
-				<b>${d.datasetLabel}:</b> ${d.value}<br/>
+				<b>${d.label}:</b> ${formattedValue}<br/>
 			`;
 		} else {
 			tooltipHTML += `
-				<b>${d.label}:</b> ${d.value}<br/>
+				${d.label}<br/>
+				<b>${d.datasetLabel}:</b> ${formattedValue}<br/>
 			`;
 		}
 

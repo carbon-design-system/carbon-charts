@@ -15,7 +15,10 @@ const baseOptions: any = {
 		"#5A3EC8",
 		"#40D5BB",
 		"#FF509E"
-	]
+	],
+	tooltip: {
+		formatter: null
+	}
 };
 
 const axisOptions: any = Object.assign({}, baseOptions, {
@@ -33,7 +36,7 @@ const axisOptions: any = Object.assign({}, baseOptions, {
 			domain: null,
 			ticks: 10
 		}
-	},
+	}
 	// xDomain: [],
 	// yDomain: [],
 	// secondaryYDomain: [],
