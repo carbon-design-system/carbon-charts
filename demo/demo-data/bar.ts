@@ -52,7 +52,7 @@ export const groupedBarData = {
 
 export const groupedBarOptions = {
 	accessibility: false,
-	axis: {
+	scales: {
 		x: {
 			title: "2018 Annual Sales Figures",
 		},
@@ -87,7 +87,7 @@ export const simpleBarData = {
 
 export const simpleBarOptions = {
 	accessibility: false,
-	axis: {
+	scales: {
 		x: {
 			title: "2018 Annual Sales Figures",
 		},
@@ -140,7 +140,7 @@ export const stackedBarData = [
 
 export const stackedBarOptions = {
 	accessibility: false,
-	axis: {
+	scales: {
 		x: {
 			domain: "label",
 			title: "2017 Financials"
@@ -150,6 +150,9 @@ export const stackedBarOptions = {
 				return `${axisValue / 1000}k`;
 			},
 			numberOfTicks: 10
+		},
+		y2: {
+
 		}
 	},
 	// yTicks: 5,

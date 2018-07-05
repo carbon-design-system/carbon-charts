@@ -20,7 +20,7 @@ const baseOptions: any = {
 
 const axisOptions: any = Object.assign({}, baseOptions, {
 	series: [],
-	axis: {
+	scales: {
 		x: {
 			domain: null,
 			ticks: 5
@@ -83,7 +83,7 @@ export namespace Configuration {
 		magicMoreForY2Axis: 70
 	};
 
-	export const axis = {
+	export const scales = {
 		maxWidthOfAxisLabel: 175,
 		maxNumOfAxisLabelLetters: 60,
 		yAxisAngle: -90,

@@ -11,7 +11,7 @@ import { BarChart } from "./bar-chart";
 // import { Configuration } from "./configuration";
 // import { DoubleAxisLineChart } from "./double-axis-line-chart";
 import { LineChart } from "./line-chart";
-import { StackedBarChart } from "./stacked-bar-chart";
+// import { StackedBarChart } from "./stacked-bar-chart";
 
 import "./style.scss";
 
@@ -25,6 +25,6 @@ export {
 	// BarNewChart,
 	LineChart,
 	// DoubleAxisLineChart,
-	StackedBarChart,
+	// StackedBarChart,
 	// ComboChart,\
 };

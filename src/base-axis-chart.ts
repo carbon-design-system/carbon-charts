@@ -9,6 +9,7 @@ import { axisBottom } from "d3";
 export class BaseAxisChart extends BaseChart {
 	x: any;
 	y: any;
+	y2: any;
 
 	constructor(holder: Element, configs: any) {
 		super(holder, configs);
@@ -26,26 +27,6 @@ export class BaseAxisChart extends BaseChart {
 
 		return this.svg;
 	}
-
-	// getKeysFromData() {
-	// 	const keys: any = {};
-	// 	const { axis } = this.options;
-
-	// 	// Build out the keys array of objects to represent the legend items
-	// 	// If yDomain does not exist & xDomain does
-	// 	if (!axis.y.domain && axis.x.domain) {
-	// 		this.displayData.forEach(entry => {
-	// 			const entryLabel = entry[axis.x.domain];
-	// 			keys[entryLabel] = Configuration.legend.items.status.ACTIVE;
-	// 		});
-	// 	} else {
-	// 		axis.y.domain.forEach(item => {
-	// 			keys[item] = Configuration.legend.items.status.ACTIVE;
-	// 		});
-	// 	}
-
-	// 	return keys;
-	// }
 
 	initialDraw(data?: any) {
 		if (data) {
@@ -155,7 +136,7 @@ export class BaseAxisChart extends BaseChart {
 		// Reposition the legend
 		this.positionLegend();
 
-		if (this.innerWrap.select(".axis-label.x").nodes().length > 0 && this.options.axis.x.title) {
+		if (this.innerWrap.select(".axis-label.x").nodes().length > 0 && this.options.scales.x.title) {
 			this.repositionXAxisTitle();
 		}
 
@@ -168,7 +149,7 @@ export class BaseAxisChart extends BaseChart {
 
 	setXScale(noAnimation?: boolean) {
 		const { bar: margins } = Configuration.charts.margin;
-		const { axis } = this.options;
+		const { scales } = this.options;
 
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
@@ -201,27 +182,27 @@ export class BaseAxisChart extends BaseChart {
 
 		// Update the position of the pieces of text inside x-axis
 		xAxisRef.selectAll("g.tick text")
-			.attr("y", Configuration.axis.magicY1)
-			.attr("x", Configuration.axis.magicX1)
+			.attr("y", Configuration.scales.magicY1)
+			.attr("x", Configuration.scales.magicX1)
 			.attr("dy", ".35em")
-			.attr("transform", `rotate(${Configuration.axis.xAxisAngle})`)
+			.attr("transform", `rotate(${Configuration.scales.xAxisAngle})`)
 			.style("text-anchor", "end")
 			.call(text => this.wrapTick(text));
 
 		// get the tickHeight after the ticks have been wrapped
-		const tickHeight = this.getLargestTickHeight(xAxisRef.selectAll(".tick")) + Configuration.axis.tick.heightAddition;
+		const tickHeight = this.getLargestTickHeight(xAxisRef.selectAll(".tick")) + Configuration.scales.tick.heightAddition;
 		xAxisRef.select(".domain")
-			.attr("stroke", Configuration.axis.domain.color)
-			.attr("fill", Configuration.axis.domain.color)
-			.attr("stroke-width", Configuration.axis.domain.strokeWidth);
+			.attr("stroke", Configuration.scales.domain.color)
+			.attr("fill", Configuration.scales.domain.color)
+			.attr("stroke-width", Configuration.scales.domain.strokeWidth);
 
 		// Add x-axis title
-		if (this.innerWrap.select(".axis-label.x").nodes().length === 0 && this.options.axis.x.title) {
+		if (this.innerWrap.select(".axis-label.x").nodes().length === 0 && this.options.scales.x.title) {
 			xAxisRef.append("text")
 				.attr("class", "x axis-label")
 				.attr("text-anchor", "middle")
 				.attr("transform", "translate(" + (xAxisRef.node().getBBox().width / 2) + "," + tickHeight + ")")
-				.text(this.options.axis.x.title);
+				.text(this.options.scales.x.title);
 		}
 
 		// get the yHeight after the height of the axis has settled
@@ -231,13 +212,13 @@ export class BaseAxisChart extends BaseChart {
 
 	repositionXAxisTitle() {
 		const xAxisRef = this.svg.select("g.x.axis");
-		const tickHeight = this.getLargestTickHeight(xAxisRef.selectAll(".tick")) + Configuration.axis.tick.heightAddition;
+		const tickHeight = this.getLargestTickHeight(xAxisRef.selectAll(".tick")) + Configuration.scales.tick.heightAddition;
 
 		const xAxisTitleRef = this.svg.select("g.x.axis text.x.axis-label");
 		xAxisTitleRef.attr("class", "x axis-label")
 			.attr("text-anchor", "middle")
 			.attr("transform", "translate(" + (xAxisRef.node().getBBox().width / 2) + "," + tickHeight + ")")
-			.text(this.options.axis.x.title);
+			.text(this.options.scales.x.title);
 	}
 
 	setYScale() {
@@ -246,7 +227,7 @@ export class BaseAxisChart extends BaseChart {
 		const height = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
 
 		const { datasets } = this.displayData;
-		const { axis } = this.options;
+		const { scales } = this.options;
 		let yMax;
 		// TODO
 		if (datasets.length === 1) {
@@ -255,21 +236,26 @@ export class BaseAxisChart extends BaseChart {
 			yMax = d3.max(datasets, (d: any) => d3.max(d.data)) + 10000;
 		}
 
-		if (axis.y.yMaxAdjuster) {
-			yMax = axis.y.yMaxAdjuster(yMax);
+		if (scales.y.yMaxAdjuster) {
+			yMax = scales.y.yMaxAdjuster(yMax);
 		}
 
 		this.y = d3.scaleLinear().rangeRound([height, 0]);
 		this.y.domain([0, yMax]);
+
+		if (scales.y2 && scales.y2.ticks.max) {
+			this.y2 = d3.scaleLinear().rangeRound([height, 0]);
+			this.y2.domain([scales.y2.ticks.min, scales.y2.ticks.max]);
+		}
 	}
 
 	setYAxis(noAnimation?: boolean) {
-		const { y: yAxisOptions } = this.options.axis;
+		const { scales } = this.options;
 		const t = d3.transition().duration(noAnimation ? 0 : 750);
 		const yAxis = d3.axisLeft(this.y)
-			.ticks(yAxisOptions.numberOfTicks || 5)
+			.ticks(scales.y.numberOfTicks || 5)
 			.tickSize(0)
-			.tickFormat(yAxisOptions.formatter);
+			.tickFormat(scales.y.formatter);
 		const yAxisRef = this.svg.select("g.y.axis");
 		// If the <g class="y axis"> exists in the chart SVG, just update it
 		if (yAxisRef.nodes().length > 0) {
@@ -278,8 +264,29 @@ export class BaseAxisChart extends BaseChart {
 				.call(yAxis as any);
 		} else {
 			this.innerWrap.append("g")
-				.attr("class", "y axis")
+				.attr("class", "y axis yAxes")
 				.call(yAxis);
+		}
+
+		if (scales.y2 && scales.y2.ticks.max) {
+			const secondaryYAxis = d3.axisRight(this.y2)
+				.ticks(scales.y2.numberOfTicks || 5)
+				.tickSize(0)
+				.tickFormat(scales.y2.formatter);
+
+			const secondaryYAxisRef = this.svg.select("g.y2.axis");
+			// If the <g class="y axis"> exists in the chart SVG, just update it
+			if (secondaryYAxisRef.nodes().length > 0) {
+				secondaryYAxisRef.transition(t)
+					.attr("transform", "translate(" + this.getChartSize().width + " ,0)")
+					// Being cast to any because d3 does not offer appropriate typings for the .call() function
+					.call(secondaryYAxis as any);
+			} else {
+				this.innerWrap.append("g")
+					.attr("class", "y2 axis yAxes")
+					.attr("transform", "translate(" + this.getChartSize().width + " ,0)")
+					.call(secondaryYAxis);
+			}
 		}
 	}
 
@@ -355,16 +362,16 @@ export class BaseAxisChart extends BaseChart {
 	// TODO - Refactor
 	wrapTick(ticks) {
 		const self = this;
-		const letNum = Configuration.axis.tick.maxLetNum;
+		const letNum = Configuration.scales.tick.maxLetNum;
 		ticks.each(function(t) {
 			if (t && t.length > letNum / 2) {
 				const tick = d3.select(this);
 				const y = tick.attr("y");
 				tick.text("");
 				const tspan1 = tick.append("tspan")
-					.attr("x", 0).attr("y", y).attr("dx", Configuration.axis.dx).attr("dy", `-${Configuration.axis.tick.dy}`);
+					.attr("x", 0).attr("y", y).attr("dx", Configuration.scales.dx).attr("dy", `-${Configuration.scales.tick.dy}`);
 				const tspan2 = tick.append("tspan")
-					.attr("x", 0).attr("y", y).attr("dx", Configuration.axis.dx).attr("dy", Configuration.axis.tick.dy);
+					.attr("x", 0).attr("y", y).attr("dx", Configuration.scales.dx).attr("dy", Configuration.scales.tick.dy);
 				if (t.length < letNum - 3) {
 					tspan1.text(t.substring(0, t.length / 2));
 					tspan2.text(t.substring(t.length / 2 + 1, t.length));

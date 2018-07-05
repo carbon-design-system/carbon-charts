@@ -43,7 +43,7 @@ export class LineChart extends BaseAxisChart {
 			.style("height", "100%");
 
 		const { line: margins } = Configuration.charts.margin;
-		const { axis } = this.options;
+		const { scales } = this.options;
 
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
@@ -144,7 +144,7 @@ export class LineChart extends BaseAxisChart {
 	}
 
 	updateElements(animate: boolean, gLines?: any) {
-		const { axis } = this.options;
+		const { scales } = this.options;
 
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.getBBox(".x.axis").height;

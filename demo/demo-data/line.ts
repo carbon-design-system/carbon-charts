@@ -41,7 +41,7 @@ export const curvedLineData = {
 
 export const curvedLineOptions = {
 	accessibility: false,
-	axis: {
+	scales: {
 		x: {
 			title: "2018 Annual Sales Figures",
 		},
@@ -49,6 +49,12 @@ export const curvedLineOptions = {
 			formatter: axisValue => {
 				return `${axisValue / 1000}k`;
 			},
+		},
+		y2: {
+			ticks: {
+				max: 1,
+				min: 0
+			}
 		}
 	},
 	curve: "curveNatural",
@@ -98,7 +104,7 @@ export const lineData = {
 
 export const lineOptions = {
 	accessibility: false,
-	axis: {
+	scales: {
 		x: {
 			title: "2018 Annual Sales Figures",
 		},

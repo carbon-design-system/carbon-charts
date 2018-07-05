@@ -19,7 +19,7 @@ export class BarChart extends BaseAxisChart {
 
 	setXScale(noAnimation?: boolean) {
 		const { bar: margins } = Configuration.charts.margin;
-		const { axis } = this.options;
+		const { scales } = this.options;
 
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
@@ -39,7 +39,7 @@ export class BarChart extends BaseAxisChart {
 			.style("height", "100%");
 
 		const { bar: margins } = Configuration.charts.margin;
-		const { axis } = this.options;
+		const { scales } = this.options;
 
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
@@ -123,7 +123,7 @@ export class BarChart extends BaseAxisChart {
 	}
 
 	updateElements(animate: boolean, rect?: any, g?: any) {
-		const { axis } = this.options;
+		const { scales } = this.options;
 
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.getBBox(".x.axis").height;
