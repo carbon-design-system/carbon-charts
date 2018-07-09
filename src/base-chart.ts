@@ -154,10 +154,15 @@ export class BaseChart {
 	getLegendType() {
 		const { datasets } = this.displayData;
 
-		if (datasets.length === 1 && datasets[0].backgroundColors.length > 1) {
-			return Configuration.legend.basedOn.LABELS;
-		} else {
+		// TODO - Support the labels based legend for line chart
+		if (this.options.type === "line") {
 			return Configuration.legend.basedOn.SERIES;
+		} else {
+			if (datasets.length === 1 && datasets[0].backgroundColors.length > 1) {
+				return Configuration.legend.basedOn.LABELS;
+			} else {
+				return Configuration.legend.basedOn.SERIES;
+			}
 		}
 	}
 
