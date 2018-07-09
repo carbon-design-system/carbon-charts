@@ -275,15 +275,15 @@ export class BaseChart {
 	 * similar to drawChart but it should work from the existing chart
 	 */
 	initialDraw() {
-		console.warn("You should implement your own `initialDraw() function.");
+		console.warn("You should implement your own `initialDraw()` function.");
 	}
 
 	updateChart() {
-		console.warn("You should implement your own `updateChart() function.");
+		console.warn("You should implement your own `updateChart()` function.");
 	}
 
 	resizeChart() {
-		console.warn("You should implement your own `resizeChart() function.");
+		console.warn("You should implement your own `resizeChart()` function.");
 	}
 
 	update(value?: any) {
@@ -298,6 +298,7 @@ export class BaseChart {
 				|| Math.abs(containerHeight - this.holder.clientHeight) > 1) {
 				containerWidth = this.holder.clientWidth;
 				containerHeight = this.holder.clientHeight;
+
 				d3.selectAll(".legend-tooltip").style("display", "none");
 
 				this.hideTooltip();
@@ -584,7 +585,7 @@ export class BaseChart {
 	applyLegendFilter(changedLabel: string) {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 		const oldStatus = this.options.keys[changedLabel];
-		this.options.keys[changedLabel] = oldStatus === ACTIVE ? DISABLED : ACTIVE;
+		this.options.keys[changedLabel] = (oldStatus === ACTIVE ? DISABLED : ACTIVE);
 
 		this.update();
 	}

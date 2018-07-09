@@ -43,9 +43,6 @@ export class PieChart extends BaseChart {
 		// Sort data by value
 		let sortedData = dataList.sort((a, b) => b.value - a.value);
 
-		// Sort labels based on the order made above
-		dataObject.labels = sortedData.map((datum, i) => datum.label);
-
 		// Keep a certain number of slices, and add an "Other" slice for the rest
 		const { sliceLimit: stopAt } = Configuration.pie;
 		const rest = sortedData.slice(stopAt);
@@ -64,6 +61,9 @@ export class PieChart extends BaseChart {
 					}]);
 			}
 		}
+
+		// Sort labels based on the order made above
+		dataObject.labels = sortedData.map((datum, i) => datum.label);
 
 		dataObject.datasets[0].data = sortedData;
 
