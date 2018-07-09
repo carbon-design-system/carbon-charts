@@ -132,7 +132,7 @@ export class BaseAxisChart extends BaseChart {
 	/**************************************
 	 *  Computations/Calculations         *
 	 *************************************/
-
+	// TODO - Refactor
 	getChartSize(container = this.container) {
 		let ratio, marginForLegendTop;
 		let moreForY2Axis = 0;

@@ -341,20 +341,6 @@ export class PieChart extends BaseChart {
 		this.interpolateValues(newDisplayData);
 	}
 
-	getActiveLegendItems() {
-		const legendItems = this.getLegendItems();
-
-		return Object.keys(legendItems)
-			.filter(legendItemLabel => legendItems[legendItemLabel] === Configuration.legend.items.status.ACTIVE);
-	}
-
-	getDisabledLegendItems() {
-		const legendItems = this.getLegendItems();
-
-		return Object.keys(legendItems)
-			.filter(legendItemLabel => legendItems[legendItemLabel] === Configuration.legend.items.status.DISABLED);
-	}
-
 	addLegend() {
 		if (this.container.select(".legend-tooltip").nodes().length > 0) {
 			return;
@@ -412,26 +398,6 @@ export class PieChart extends BaseChart {
 
 		// Reposition the legend
 		this.positionLegend();
-	}
-
-	getLegendItems() {
-		const { sliceLimit } = Configuration.pie;
-
-		let legendItems = {};
-		if (this.options.keys) {
-			legendItems = this.options.keys;
-
-			if (Object.keys(legendItems).length > sliceLimit) {
-				Object.keys(legendItems).slice(sliceLimit)
-					.forEach(key => {
-						delete legendItems[key];
-					});
-
-				legendItems["Other"] = Configuration.legend.items.status.ACTIVE;
-			}
-		}
-
-		return legendItems;
 	}
 
 	// Helper functions

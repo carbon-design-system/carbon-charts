@@ -585,6 +585,7 @@ export class BaseChart {
 	applyLegendFilter(changedLabel: string) {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 		const oldStatus = this.options.keys[changedLabel];
+
 		this.options.keys[changedLabel] = (oldStatus === ACTIVE ? DISABLED : ACTIVE);
 
 		this.update();
