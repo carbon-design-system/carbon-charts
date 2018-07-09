@@ -85,7 +85,6 @@ Get updates on Charts' development and chat with the core team and community.
 - Bookmark the [WCE Showcase](http://peretz.stage1.mybluemix.net/) in your favorite browser.
 - Join our very own [Slack room](https://peretz.slack.com/).
 - Subscribe to our quarterly Community Calls by contacting [Nina Li](https://github.ibm.com/nina).
-- Sign up to be your team's representative at our biweekly UI Dev Group meetings by contacting [Eliad Moosavi](https://github.ibm.com/iliadm).
 
 ## Versioning
 
