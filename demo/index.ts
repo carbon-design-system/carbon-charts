@@ -63,6 +63,12 @@ const chartTypes = [
 		data: lineData
 	},
 	{
+		id: "line-step",
+		name: "Step",
+		options: Object.assign({}, lineOptions, {curve: "curveStepAfter"}),
+		data: lineData
+	},
+	{
 		id: "pie",
 		name: "pie",
 		options: pieOptions,
@@ -220,6 +226,7 @@ chartTypes.forEach(type => {
 				break;
 			case "curved-line":
 			case "line":
+			case "line-step":
 					classyCharts[type.id] = new LineChart(
 						classyContainer,
 						{
