@@ -10,7 +10,7 @@ export const pieOptions = {
 };
 
 export const donutOptions = {
-	accessibility: true,
+	accessibility: false,
 	legendClickable: true,
 	containerResizable: true,
 	colors,

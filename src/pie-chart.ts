@@ -156,9 +156,13 @@ export class PieChart extends BaseChart {
 		// Update slices
 		path
 			.transition()
+			.duration(0)
+			.attr("stroke", d => this.colorScale[this.displayData.datasets[0].label](d.data.label))
+			.attr("stroke-width", Configuration.pie.default.strokeWidth)
+			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
+			.transition()
 			.duration(750)
 			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
-			.attr("stroke", d => this.colorScale[this.displayData.datasets[0].label](d.data.label))
 			.attrTween("d", function (a) {
 				return arcTween.bind(this)(a, arc);
 			});
@@ -166,11 +170,15 @@ export class PieChart extends BaseChart {
 		path.enter()
 			.append("path")
 			.attr("d", arc)
+			.transition()
+			.duration(0)
 			.style("opacity", 0)
+			.attr("stroke", d => this.colorScale[this.displayData.datasets[0].label](d.data.label))
+			.attr("stroke-width", Configuration.pie.default.strokeWidth)
+			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.transition()
 			.duration(750)
 			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
-			.attr("stroke", d => this.colorScale[this.displayData.datasets[0].label](d.data.label))
 			.style("opacity", 1)
 			.attrTween("d", function (a) {
 				return arcTween.bind(this)(a, arc);
