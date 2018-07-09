@@ -70,12 +70,38 @@ export class BaseAxisChart extends BaseChart {
 
 		// Get new data by filtering the data based off of the legend
 		const newDisplayData = Object.assign({}, oldData);
-		newDisplayData.datasets = oldData.datasets.filter(dataset => {
-			// If this datapoint is active on the legend
-			const activeSeriesItemIndex = activeLegendItems.indexOf(dataset.label);
+		if (this.getLegendType() === Configuration.legend.basedOn.SERIES) {
+			newDisplayData.datasets = oldData.datasets.filter(dataset => {
+				// If this datapoint is active on the legend
+				const activeSeriesItemIndex = activeLegendItems.indexOf(dataset.label);
 
-			return activeSeriesItemIndex > -1;
-		});
+				return activeSeriesItemIndex > -1;
+			});
+		} else {
+			const dataIndeciesToRemove = [];
+			newDisplayData.labels = oldData.labels.filter((label, index) => {
+				// If this datapoint is active on the legend
+				const activeSeriesItemIndex = activeLegendItems.indexOf(label);
+
+				if (activeSeriesItemIndex === -1) {
+					dataIndeciesToRemove.push(index);
+				}
+
+				return activeSeriesItemIndex > -1;
+			});
+
+			if (dataIndeciesToRemove.length > 0) {
+				console.log("dataIndeciesToRemove", dataIndeciesToRemove, newDisplayData);
+
+				newDisplayData.datasets = oldData.datasets.map(dataset => {
+					dataset.data = dataset.data.filter((dataPoint, i) => {
+						return dataIndeciesToRemove.indexOf(i) === -1;
+					});
+
+					return dataset;
+				});
+			}
+		}
 
 		// TODO
 		// Add logic for when the legend is based on labels
@@ -229,11 +255,11 @@ export class BaseAxisChart extends BaseChart {
 		const { datasets } = this.displayData;
 		const { scales } = this.options;
 		let yMax;
-		// TODO
+
 		if (datasets.length === 1) {
 			yMax = d3.max(datasets[0].data);
 		} else {
-			yMax = d3.max(datasets, (d: any) => d3.max(d.data)) + 10000;
+			yMax = d3.max(datasets, (d: any) => d3.max(d.data));
 		}
 
 		if (scales.y.yMaxAdjuster) {

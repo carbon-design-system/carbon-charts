@@ -112,7 +112,6 @@ export class BaseChart {
 		});
 	}
 
-	// TODO - Delete
 	getKeysFromData() {
 		const { datasets } = this.displayData;
 		const keys = {};
@@ -301,11 +300,7 @@ export class BaseChart {
 				containerHeight = this.holder.clientHeight;
 				d3.selectAll(".legend-tooltip").style("display", "none");
 
-				// Hide tooltips
 				this.hideTooltip();
-
-				// TODO - Remove updateChart
-				// this.updateChart();
 				this.resizeChart();
 			}
 
@@ -485,9 +480,6 @@ export class BaseChart {
 		legendEnter.select("div")
 			.merge(legendItems.selectAll("div"))
 			.style("background-color", (d, i) => {
-				// TODO - REMOVE
-				// return "violet";
-
 				if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
 					if (d.value === Configuration.legend.items.status.ACTIVE) {
 						return this.colorScale[this.displayData.datasets[0].label](d.key);

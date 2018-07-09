@@ -30,6 +30,7 @@ export class BarChart extends BaseAxisChart {
 		const activeLegendItems = this.getActiveLegendItems();
 		// Apply legened filters, OLD VERSION axis.y.domain.filter(item => activeLegendItems.indexOf(item) > -1)
 
+		console.log("DATA", this.displayData);
 		this.x.domain(this.displayData.labels);
 		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
 	}
@@ -84,18 +85,26 @@ export class BarChart extends BaseAxisChart {
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		// Apply new data to the bars
-		const rect = this.innerWrap.select("g.bars")
+		const g = this.innerWrap.select("g.bars")
 			.attr("width", width)
 			.selectAll("g")
-			.data(this.displayData.labels)
-				.attr("transform", d => "translate(" + this.x(d) + ",0)")
-				.selectAll("rect.bar")
+			.data(this.displayData.labels);
+
+		const rect = g.selectAll("rect.bar")
 				.data((d, index) => this.addLabelsToDataPoints(d, index));
 
-		this.updateElements(true, rect);
+		this.updateElements(true, rect, g);
+
+		// Add bar groups that need to be added now
+		const addedBars = g.enter()
+			.append("g")
+			.classed("bars", true)
+			.attr("transform", d => "translate(" + this.x(d) + ",0)");
 
 		// Add bars that need to be added now
-		rect.enter()
+		g.selectAll("rect.bar")
+			.data((d, index) => this.addLabelsToDataPoints(d, index))
+			.enter()
 			.append("rect")
 			.attr("class", "bar")
 			.attr("x", d => this.x1(d.datasetLabel))
@@ -108,6 +117,28 @@ export class BarChart extends BaseAxisChart {
 			.attr("opacity", 1)
 			.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
 			.attr("stroke-width", this.options.accessibility ? 2 : 0);
+
+		addedBars.selectAll("rect.bar")
+			.data((d, index) => this.addLabelsToDataPoints(d, index))
+			.enter()
+			.append("rect")
+			.attr("class", "bar")
+			.attr("x", d => this.x1(d.datasetLabel))
+			.attr("y", d => this.y(d.value))
+			.attr("width", this.x1.bandwidth())
+			.attr("height", d => height - this.y(d.value))
+			.attr("opacity", 0)
+			.transition(this.getFillTransition())
+			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
+			.attr("opacity", 1)
+			.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
+			.attr("stroke-width", this.options.accessibility ? 2 : 0);
+
+		// Remove bar groups are no longer needed
+		g.exit()
+			.transition(this.getDefaultTransition())
+			.style("opacity", 0)
+			.remove();
 
 		// Remove bars that are no longer needed
 		rect.exit()
@@ -136,7 +167,8 @@ export class BarChart extends BaseAxisChart {
 		}
 
 		if (g) {
-			g.attr("transform", d => "translate(" + this.x(d) + ",0)");
+			g.transition(animate ? this.getDefaultTransition() : this.getInstantTransition())
+				.attr("transform", d => "translate(" + this.x(d) + ",0)");
 		}
 
 		// Update existing bars
