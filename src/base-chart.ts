@@ -767,7 +767,7 @@ export class BaseChart {
 			});
 
 		let tooltipHTML = "";
-		const formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString('en');
+		const formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString("en");
 		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
 			tooltipHTML += `
 				<b>${d.label}:</b> ${formattedValue}<br/>

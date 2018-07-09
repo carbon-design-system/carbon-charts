@@ -7,6 +7,20 @@ const selectors = {
 	PATTERNS_CONTAINER: "peretz-charts-patterns"
 };
 
+// Helper functions
+const trimSVG = (htmlString: any) => {
+	// Remove the CSS style block
+	const htmlBeforeStyleBlock = htmlString.substring(0, htmlString.indexOf("<style type=\"text/css\">"));
+	const htmlAfterStyleBlock = htmlString.substring(htmlString.indexOf("</style>") + "</style>".length);
+
+	htmlString = htmlBeforeStyleBlock + htmlAfterStyleBlock;
+
+	// Remove Adobe comments
+	htmlString = htmlString.replace(/<!--[\s\S]*?-->/g, "");
+
+	return htmlString;
+};
+
 export default class PatternsService {
 	container: any;
 
@@ -106,17 +120,3 @@ export default class PatternsService {
 		return this.patternURLs;
 	}
 }
-
-// Helper functions
-const trimSVG = (htmlString: any) => {
-	// Remove the CSS style block
-	const htmlBeforeStyleBlock = htmlString.substring(0, htmlString.indexOf("<style type=\"text/css\">"));
-	const htmlAfterStyleBlock = htmlString.substring(htmlString.indexOf("</style>") + "</style>".length);
-
-	htmlString = htmlBeforeStyleBlock + htmlAfterStyleBlock;
-
-	// Remove Adobe comments
-	htmlString = htmlString.replace(/<!--[\s\S]*?-->/g, "");
-
-	return htmlString;
-};

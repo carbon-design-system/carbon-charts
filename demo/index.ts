@@ -1,10 +1,6 @@
 import {
-	// BarNewChart,
 	BarChart,
 	LineChart,
-	// DoubleAxisLineChart,
-	// StackedBarChart,
-	// ComboChart,
 	PieChart,
 	DonutChart,
 	DonutCenter
@@ -36,24 +32,12 @@ import {
 } from "./demo-data/index";
 
 const chartTypes = [
-	// {
-	// 	id: "multi-bar",
-	// 	name: "Bar",
-	// 	data: dimensionData,
-	// 	options: dimensionOption
-	// },
 	{
 		id: "grouped-bar",
 		name: "Grouped Bar",
 		options: groupedBarOptions,
 		data: groupedBarData
 	},
-	// {
-	// 	id: "simplest-bar",
-	// 	name: "Bar",
-	// 	options: optionsNoXAxis,
-	// 	data: dataNoXAxis
-	// },
 	{
 		id: "simple-bar",
 		name: "Bar",
@@ -78,24 +62,6 @@ const chartTypes = [
 		options: lineOptions,
 		data: lineData
 	},
-	// {
-	// 	id: "stacked-bar",
-	// 	name: "Stacked Bar",
-	// 	options: stackedBarOptions,
-	// 	data: stackedBarData
-	// },
-	// {
-	// 	id: "double-axis-line",
-	// 	name: "Double Axis",
-	// 	options: optionsWithFormatter,
-	// 	data: doubleAxisData
-	// },
-	// {
-	// 	id: "combo",
-	// 	name: "Combo",
-	// 	options: doubleYAxisOptions,
-	// 	data: longData
-	// },
 	{
 		id: "pie",
 		name: "pie",
@@ -110,133 +76,7 @@ const chartTypes = [
 	}
 ];
 
-const setDemoActionsEventListener = (chartType: any, oldData: any) => {
-	const changeDataButton = document.getElementById(`change-data-${chartType}`);
-	if (changeDataButton) {
-		changeDataButton.onclick = e => {
-			e.preventDefault();
-
-			changeDemoData(chartType, oldData);
-		};
-
-		const actionsElement = document.getElementById(`actions-${chartType}`);
-		const changeDataPromiseButtons = Array.prototype.slice.call(document.querySelectorAll(".change-data-promise"));
-		changeDataPromiseButtons.forEach(element => {
-			element = <HTMLElement>element;
-			element.onclick = e => {
-				e.preventDefault();
-
-				changeDemoData(chartType, oldData, parseInt(element.getAttribute("data-promise-delay"), 10));
-			};
-		});
-	}
-};
-
 const classyCharts = {};
-chartTypes.forEach(type => {
-	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
-	if (classyContainer) {
-		switch (type.id) {
-			// case "grouped-bar":
-			// 	classyCharts[type.id] = new GroupedBarChart(
-			// 		classyContainer,
-			// 		Object.assign({}, type.options, {type: type.id}),
-			// 		type.data
-			// 	);
-
-			// 	setDemoActionsEventListener(type.id, type.data);
-
-			// 	break;
-			default:
-			case "simple-bar":
-			case "grouped-bar":
-				classyCharts[type.id] = new BarChart(
-					classyContainer,
-					{
-						data: type.data,
-						options: Object.assign({}, type.options, {type: type.id}),
-					}
-				);
-
-				// classyBarChart.events.addEventListener("load", e => {
-				// 	console.log("Bar Chart - LOADED");
-				// }, false);
-
-				// classyBarChart.events.addEventListener("update", e => {
-				// 	console.log("Bar Chart - UPDATED");
-				// }, false);
-
-				// classyBarChart.events.addEventListener("data-change", e => {
-				// 	console.log("Bar Chart - DATACHANGE");
-				// }, false);
-
-				// classyBarChart.events.addEventListener("data-load", e => {
-				// 	console.log("Bar Chart - DATALOAD");
-				// }, false);
-
-				// classyBarChart.events.addEventListener("resize", e => {
-				// 	console.log("Bar Chart - RESIZE");
-				// }, false);
-
-				// classyBarNewChart.setData(type.data);
-
-				setDemoActionsEventListener(type.id, type.data);
-
-				break;
-			case "curved-line":
-			case "line":
-					classyCharts[type.id] = new LineChart(
-						classyContainer,
-						{
-							data: type.data,
-							options: Object.assign({}, type.options, {type: type.id}),
-						}
-					);
-
-					setDemoActionsEventListener(type.id, type.data);
-
-					break;
-			// case "stacked-bar":
-			// 	classyCharts[type.id] = new StackedBarChart(
-			// 		classyContainer,
-			// 		Object.assign({}, type.options, {type: type.id}),
-			// 		type.data
-			// 	);
-
-			// 	setDemoActionsEventListener(type.id, type.data);
-
-			// 	break;
-			case "pie":
-				classyCharts[type.id] = new PieChart(
-					classyContainer,
-					{
-						data: new Promise((resolve, reject) => {
-							setTimeout(() => {
-								resolve(type.data);
-							}, 0);
-						}),
-						options: Object.assign({}, type.options, {type: type.id})
-					}
-				);
-
-				setDemoActionsEventListener(type.id, type.data);
-
-				break;
-			case "donut":
-				classyCharts[type.id] = new DonutChart(
-					classyContainer,
-					{
-						data: type.data,
-						options: Object.assign({}, type.options, {type: type.id})
-					}
-				);
-
-				setDemoActionsEventListener(type.id, type.data);
-
-				break;
-		}
-	}
-});
 
 const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 	let newData;
@@ -293,27 +133,6 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 			}
 
 			break;
-		// case "grouped-bar":
-		// 	newData = oldData.map(dataPoint => {
-		// 		return Object.assign(
-		// 			{},
-		// 			dataPoint,
-		// 			{
-		// 				"Qty": randomizeValue(dataPoint.Qty),
-		// 				"More": randomizeValue(dataPoint.More),
-		// 				"Sold": randomizeValue(dataPoint.Sold)
-		// 			}
-		// 		);
-		// 	});
-
-		// 	if (removeAKey) {
-		// 		const randomIndex = Math.random() * (newData.length - 1);
-		// 		newData.splice(randomIndex, randomIndex);
-		// 	}
-
-		// 	classyChartObject.setData(newData);
-
-		// 	break;
 		default:
 		case "grouped-bar":
 		case "simple-bar":
@@ -335,26 +154,111 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 			classyChartObject.setData(newData);
 
 			break;
-		// case "stacked-bar":
-		// 	newData = oldData.map(dataPoint => {
-		// 		Object.keys(dataPoint).forEach(key => {
-		// 			if (key !== classyChartObject.options.axis.x.domain) {
-		// 				dataPoint[key] = randomizeValue(dataPoint[key]);
-		// 			}
-
-		// 			delete dataPoint.totalDatumValue;
-		// 		});
-
-		// 		return dataPoint;
-		// 	});
-
-		// 	if (removeAKey) {
-		// 		const randomIndex = Math.random() * (newData.length - 1);
-		// 		newData.splice(randomIndex, randomIndex);
-		// 	}
-
-		// 	classyChartObject.setData(newData);
-
-		// 	break;
 	}
 };
+
+const setDemoActionsEventListener = (chartType: any, oldData: any) => {
+	const changeDataButton = document.getElementById(`change-data-${chartType}`);
+	if (changeDataButton) {
+		changeDataButton.onclick = e => {
+			e.preventDefault();
+
+			changeDemoData(chartType, oldData);
+		};
+
+		const actionsElement = document.getElementById(`actions-${chartType}`);
+		const changeDataPromiseButtons = Array.prototype.slice.call(document.querySelectorAll(".change-data-promise"));
+		changeDataPromiseButtons.forEach(element => {
+			element = <HTMLElement>element;
+			element.onclick = e => {
+				e.preventDefault();
+
+				changeDemoData(chartType, oldData, parseInt(element.getAttribute("data-promise-delay"), 10));
+			};
+		});
+	}
+};
+
+chartTypes.forEach(type => {
+	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
+	if (classyContainer) {
+		switch (type.id) {
+			default:
+			case "simple-bar":
+			case "grouped-bar":
+				classyCharts[type.id] = new BarChart(
+					classyContainer,
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id}),
+					}
+				);
+
+				const chartObject = classyCharts[type.id];
+				chartObject.events.addEventListener("load", e => {
+					console.log("Bar Chart - LOADED");
+				}, false);
+
+				chartObject.events.addEventListener("update", e => {
+					console.log("Bar Chart - UPDATED");
+				}, false);
+
+				chartObject.events.addEventListener("data-change", e => {
+					console.log("Bar Chart - DATACHANGE");
+				}, false);
+
+				chartObject.events.addEventListener("data-load", e => {
+					console.log("Bar Chart - DATALOAD");
+				}, false);
+
+				chartObject.events.addEventListener("resize", e => {
+					console.log("Bar Chart - RESIZE");
+				}, false);
+
+				setDemoActionsEventListener(type.id, type.data);
+
+				break;
+			case "curved-line":
+			case "line":
+					classyCharts[type.id] = new LineChart(
+						classyContainer,
+						{
+							data: type.data,
+							options: Object.assign({}, type.options, {type: type.id}),
+						}
+					);
+
+					setDemoActionsEventListener(type.id, type.data);
+
+					break;
+			case "pie":
+				classyCharts[type.id] = new PieChart(
+					classyContainer,
+					{
+						data: new Promise((resolve, reject) => {
+							setTimeout(() => {
+								resolve(type.data);
+							}, 0);
+						}),
+						options: Object.assign({}, type.options, {type: type.id})
+					}
+				);
+
+				setDemoActionsEventListener(type.id, type.data);
+
+				break;
+			case "donut":
+				classyCharts[type.id] = new DonutChart(
+					classyContainer,
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id})
+					}
+				);
+
+				setDemoActionsEventListener(type.id, type.data);
+
+				break;
+		}
+	}
+});

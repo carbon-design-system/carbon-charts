@@ -1,3 +1,20 @@
+// Functions
+const toggleClass = (element: HTMLElement, className: string) => {
+	if (element.classList.contains(className)) {
+		element.classList.remove(className);
+	} else {
+		element.classList.add(className);
+	}
+};
+
+const toggleChevronSVG = (svgElement) => {
+	const direction = svgElement.getAttribute("href").indexOf("down") > -1 ? "up" : "down";
+
+	svgElement.removeAttribute("href");
+	svgElement.setAttributeNS("http://www.w3.org/1999/xlink",
+		"href", `https://peretz-icons.mybluemix.net/arrows_chevrons.svg#chevron_${direction}_16`);
+};
+
 // Dropdown menu buttons
 const buttonAddonElements = Array.prototype.slice.call(document.querySelectorAll("button.btn--primary-addon"));
 buttonAddonElements.forEach(buttonElement => {
@@ -23,20 +40,3 @@ buttonAddonElements.forEach(buttonElement => {
 		// });
 	};
 });
-
-// Functions
-const toggleClass = (element: HTMLElement, className: string) => {
-	if (element.classList.contains(className)) {
-		element.classList.remove(className);
-	} else {
-		element.classList.add(className);
-	}
-};
-
-const toggleChevronSVG = (svgElement) => {
-	const direction = svgElement.getAttribute("href").indexOf("down") > -1 ? "up" : "down";
-
-	svgElement.removeAttribute("href");
-	svgElement.setAttributeNS("http://www.w3.org/1999/xlink",
-		"href", `https://peretz-icons.mybluemix.net/arrows_chevrons.svg#chevron_${direction}_16`);
-};
