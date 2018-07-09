@@ -325,17 +325,18 @@ export class PieChart extends BaseChart {
 	}
 
 	update(newData?: any) {
-		const oldData = this.displayData;
+		const oldData = Tools.passObjectByValue(this.displayData);
 		const activeLegendItems = this.getActiveLegendItems();
 
 		const newDisplayData = Object.assign({}, oldData);
 		newDisplayData.datasets[0].data = oldData.datasets[0].data.filter(dataPoint => {
-
 			// If this datapoint is active on the legend
 			const activeSeriesItemIndex = activeLegendItems.indexOf(dataPoint.label);
 
 			return activeSeriesItemIndex > -1;
 		});
+
+		newDisplayData.labels = newDisplayData.datasets[0].data.map(datum => datum.label);
 
 		this.interpolateValues(newDisplayData);
 	}
