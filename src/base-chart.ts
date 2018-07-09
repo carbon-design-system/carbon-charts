@@ -467,7 +467,6 @@ export class BaseChart {
 			.data(legendItemsArray, d => d.key);
 
 		legendItems.exit()
-			.each(d => console.log("LEAVING", d))
 			.remove();
 
 		const legendEnter = legendItems.enter()
@@ -604,8 +603,7 @@ export class BaseChart {
 			d3.select(this).on("click", function() {
 				self.updateLegend(this);
 
-				console.log("TODO - setClickableLegendInTooltip()");
-				// self.redrawChart();
+				// TODO - setClickableLegendInTooltip()
 			});
 		});
 	}
@@ -655,9 +653,8 @@ export class BaseChart {
 				.attr("class", "legend-btn active")
 				.on("click", (clickedItem) => {
 					this.updateLegend(d3.event.currentTarget);
-					// this.redrawChart();
 
-					console.log("TODO - openLegendTooltip()");
+					// TODO - openLegendTooltip()
 				});
 
 			legendContent.append("div")
