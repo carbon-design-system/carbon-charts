@@ -91,8 +91,6 @@ export class BaseAxisChart extends BaseChart {
 			});
 
 			if (dataIndeciesToRemove.length > 0) {
-				console.log("dataIndeciesToRemove", dataIndeciesToRemove, newDisplayData);
-
 				newDisplayData.datasets = oldData.datasets.map(dataset => {
 					dataset.data = dataset.data.filter((dataPoint, i) => {
 						return dataIndeciesToRemove.indexOf(i) === -1;

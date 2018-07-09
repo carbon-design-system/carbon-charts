@@ -28,7 +28,6 @@ export class BarChart extends BaseAxisChart {
 		const activeLegendItems = this.getActiveLegendItems();
 		// Apply legened filters, OLD VERSION axis.y.domain.filter(item => activeLegendItems.indexOf(item) > -1)
 
-		console.log("DATA", this.displayData);
 		this.x.domain(this.displayData.labels);
 		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
 	}
@@ -114,7 +113,7 @@ export class BarChart extends BaseAxisChart {
 			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
 			.attr("opacity", 1)
 			.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
-			.attr("stroke-width", this.options.accessibility ? 2 : 0);
+			.attr("stroke-width", Configuration.bars.default.strokeWidth);
 
 		addedBars.selectAll("rect.bar")
 			.data((d, index) => this.addLabelsToDataPoints(d, index))
@@ -130,7 +129,7 @@ export class BarChart extends BaseAxisChart {
 			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
 			.attr("opacity", 1)
 			.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
-			.attr("stroke-width", this.options.accessibility ? 2 : 0);
+			.attr("stroke-width", Configuration.bars.default.strokeWidth);
 
 		// Remove bar groups are no longer needed
 		g.exit()

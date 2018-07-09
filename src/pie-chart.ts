@@ -121,6 +121,8 @@ export class PieChart extends BaseChart {
 			.attr("d", this.arc)
 			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label)) // Support multiple datasets
 			.attr("stroke", d => this.colorScale[this.displayData.datasets[0].label](d.data.label))
+			.attr("stroke-width", Configuration.pie.default.strokeWidth)
+			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.each(function(d) { this._current = d; });
 
 		// Draw the slice labels
@@ -155,8 +157,8 @@ export class PieChart extends BaseChart {
 		path
 			.transition()
 			.duration(750)
-			.attr("fill", (d, i) => this.colorScale(d.data.label))
-			.attr("stroke", (d, i) => this.colorScale(d.data.label))
+			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
+			.attr("stroke", d => this.colorScale[this.displayData.datasets[0].label](d.data.label))
 			.attrTween("d", function (a) {
 				return arcTween.bind(this)(a, arc);
 			});
@@ -167,8 +169,8 @@ export class PieChart extends BaseChart {
 			.style("opacity", 0)
 			.transition()
 			.duration(750)
-			.attr("fill", (d, i) => this.colorScale(d.data.label))
-			.attr("stroke", (d, i) => this.colorScale(d.data.label))
+			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
+			.attr("stroke", d => this.colorScale[this.displayData.datasets[0].label](d.data.label))
 			.style("opacity", 1)
 			.attrTween("d", function (a) {
 				return arcTween.bind(this)(a, arc);
@@ -250,9 +252,8 @@ export class PieChart extends BaseChart {
 
 			// Fade everything out except for this element
 			d3.select(exception).attr("fill-opacity", false);
-			d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 			d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
-			d3.select(exception).attr("fill", d3.select(exception).attr("stroke"));
+			d3.select(exception).attr("fill", (d: any) => this.getFillScale()[this.displayData.datasets[0].label](d.data.label));
 		}
 	}
 
@@ -303,8 +304,11 @@ export class PieChart extends BaseChart {
 		this.addTooltipEventListeners(tooltip);
 	}
 
+	// TODO - Refactor
 	addDataPointEventListener() {
 		const self = this;
+		const { accessibility } = this.options;
+
 		this.innerWrap.selectAll("path")
 			.on("click", function(d) {
 				self.showTooltip(d);
@@ -317,10 +321,13 @@ export class PieChart extends BaseChart {
 				sliceElement
 					.attr("stroke-width", Configuration.pie.mouseover.strokeWidth)
 					.attr("stroke-opacity", Configuration.pie.mouseover.strokeOpacity)
-					.attr("stroke", self.colorScale(d.data.label));
+					.attr("stroke", self.colorScale[self.displayData.datasets[0].label](d.data.label));
 			})
 			.on("mouseout", function(d) {
-				d3.select(this).attr("stroke", "");
+				d3.select(this)
+					.attr("stroke-width", accessibility ? 2 : Configuration.pie.mouseout.strokeWidth)
+					.attr("stroke", accessibility ? self.colorScale[self.displayData.datasets[0].label](d.data.label) : "none")
+					.attr("stroke-opacity", Configuration.pie.mouseout.strokeOpacity);
 			});
 	}
 

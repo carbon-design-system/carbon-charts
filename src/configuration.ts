@@ -159,14 +159,21 @@ export namespace Configuration {
 	export const pie = {
 		maxWidth: 516.6,
 		mouseover: {
-			strokeWidth: 8,
+			strokeWidth: 6,
 			strokeOpacity: 0.5
+		},
+		mouseout: {
+			strokeWidth: 0,
+			strokeOpacity: 1
 		},
 		sliceLimit: 6,
 		label: {
 			dy: ".32em",
 			margin: 15,
 			other: "Other"
+		},
+		default: {
+			strokeWidth: 2
 		}
 	};
 
