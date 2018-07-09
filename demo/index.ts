@@ -84,6 +84,7 @@ const chartTypes = [
 
 const classyCharts = {};
 
+// TODO - removeADataset shouldn't be used if chart legend is label based
 const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 	let newData;
 
