@@ -161,7 +161,6 @@ export const stackedBarOptions = {
 
 		}
 	},
-	// yTicks: 5,
 	legendClickable: true,
 	containerResizable: true,
 	colors
