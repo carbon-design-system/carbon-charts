@@ -65,7 +65,7 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	updateDisplayData() {
-		const oldData = this.data;
+		const oldData = Tools.passObjectByValue(this.data);
 		const activeLegendItems = this.getActiveLegendItems();
 
 		// Get new data by filtering the data based off of the legend
@@ -100,9 +100,6 @@ export class BaseAxisChart extends BaseChart {
 				});
 			}
 		}
-
-		// TODO
-		// Add logic for when the legend is based on labels
 
 		return newDisplayData;
 	}
