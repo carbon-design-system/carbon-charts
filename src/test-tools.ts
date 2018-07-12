@@ -58,8 +58,6 @@ export const inputAndProcessedDataMatch = (chartObj, inputData) => {
 	// 	});
 	// }
 
-	console.log("wadup", chartObj.data);
-
 	// TODO - Implement Deeper check
 	return chartObj.displayData.datasets.length === inputData.datasets.length;
 };

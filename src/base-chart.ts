@@ -261,26 +261,13 @@ export class BaseChart {
 			.attr("transform", `translate(0, 0)`);
 	}
 
-	/*
-	 * creates the chart from scratch
-	 * should only be called once (or removeChart should be called before)
-	 */
-	drawChart(data?: any) {
-		if (data) {
-			this.data = data;
-		}
-
-		console.warn("You should implement your own `drawChart()` function.");
-	}
-
 	// Default fallback when no data processing is needed
 	dataProcessor(data: any) {
 		return data;
 	}
 
 	/*
-	 * called when the chart needs to be updated visually
-	 * similar to drawChart but it should work from the existing chart
+	 * called when the chart needs to be drawn initially
 	 */
 	initialDraw() {
 		console.warn("You should implement your own `initialDraw()` function.");

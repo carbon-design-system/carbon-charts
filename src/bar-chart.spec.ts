@@ -8,10 +8,8 @@ import {
 	selectors,
 } from "./test-tools";
 
-import {
-	groupedBarData,
-	groupedBarOptions
-} from "../demo/demo-data/bar";
+// Data & Options
+import { groupedBarData, groupedBarOptions } from "../demo/demo-data/bar";
 
 const chartType = "bar";
 // TODO - Include other types of bar chart as well
@@ -40,7 +38,7 @@ describe("bar Chart", () => {
 		setTimeout(() => {
 			// Expect chart container to contain the main chart SVG element
 			expect(classyContainer.querySelector(selectors.OUTERSVG)).toBeTruthy();
-		}, 0);
+		});
 	});
 
 	/*
@@ -50,7 +48,7 @@ describe("bar Chart", () => {
 	it("should not be missing any of the labels or values in the processed data", () => {
 		setTimeout(() => {
 			expect(inputAndProcessedDataMatch(classyBarChart, groupedBarData)).toBe(true);
-		}, 0);
+		});
 	});
 
 	/*
