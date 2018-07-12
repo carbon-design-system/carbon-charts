@@ -3,8 +3,6 @@ import * as d3 from "d3";
 import { BaseAxisChart } from "./base-axis-chart";
 import { Configuration } from "./configuration";
 
-import PatternsService from "./services/patterns";
-
 export class LineChart extends BaseAxisChart {
 	x: any;
 	y: any;

@@ -3,8 +3,8 @@ import { Configuration } from "./configuration";
 import { Tools } from "./tools";
 import PatternsService from "./services/patterns";
 
-// Use submodule
-import { position } from "../node_modules/@peretz/neutrino/common/position.service";
+// TODO - Use submodule
+// import { position } from "../node_modules/@peretz/neutrino/common/position.service";
 
 export class BaseChart {
 	static chartCount = 1;
@@ -31,6 +31,9 @@ export class BaseChart {
 
 	// Event target
 	events: any;
+	eventHandlers = {
+		tooltips: null
+	};
 
 	constructor(holder: Element, configs: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
@@ -706,26 +709,24 @@ export class BaseChart {
 	}
 
 	addTooltipEventListeners(tooltip: any) {
+		this.eventHandlers.tooltips = (evt: Event) => {
+			const targetTagName = evt.target["tagName"];
+			const targetsToBeSkipped = ["rect", "circle", "path"];
+
+			if (!evt.target || targetsToBeSkipped.indexOf(targetTagName) === -1) {
+				this.hideTooltip();
+			}
+		};
+
 		// Apply the event listeners to close the tooltip
 		// setTimeout is there to avoid catching the click event that opened the tooltip
 		setTimeout(() => {
 			// When ESC is pressed
-			window.onkeydown = (evt: KeyboardEvent) => {
-				if ("key" in evt && evt.key === "Escape" || evt.key === "Esc") {
-					this.hideTooltip();
-				}
-			};
+			window.addEventListener("keydown", this.eventHandlers.tooltips);
 
 			// TODO - Don't bind on window
 			// If clicked outside
-			window.onclick = (evt: MouseEvent) => {
-				const targetTagName = evt.target["tagName"];
-				const targetsToBeSkipped = ["rect", "circle", "path"];
-
-				if (targetsToBeSkipped.indexOf(targetTagName) === -1) {
-					this.hideTooltip();
-				}
-			};
+			this.holder.addEventListener("click", this.eventHandlers.tooltips);
 
 			// Stop clicking inside tooltip from bubbling up to window
 			tooltip.on("click", () => {
@@ -737,10 +738,10 @@ export class BaseChart {
 	removeTooltipEventListeners() {
 		// TODO - Don't bind on window
 		// Remove eventlistener to close tooltip when ESC is pressed
-		window.onkeydown = null;
+		window.removeEventListener("keydown", this.eventHandlers.tooltips);
 
 		// Remove eventlistener to close tooltip when clicked outside
-		window.onclick = null;
+		this.holder.removeEventListener("click", this.eventHandlers.tooltips);
 	}
 
 	showTooltip(d, clickedElement) {
