@@ -705,7 +705,13 @@ export class BaseChart {
 			const targetTagName = evt.target["tagName"];
 			const targetsToBeSkipped = ["rect", "circle", "path"];
 
-			if (!evt.target || targetsToBeSkipped.indexOf(targetTagName) === -1) {
+			// If keyboard event
+			if (evt["key"]) {
+				if (evt["key"] === "Escape" || evt["key"] === "Esc") {
+					this.hideTooltip();
+				}
+			} else if (targetsToBeSkipped.indexOf(targetTagName) === -1) {
+				// If mouse event
 				this.hideTooltip();
 			}
 		};
