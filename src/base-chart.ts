@@ -73,6 +73,11 @@ export class BaseChart {
 			this.updateOverlay().show();
 		}
 
+		// Hide current showing tooltip
+		if (!initialDraw) {
+			this.hideTooltip();
+		}
+
 		Promise.resolve(data).then(value => {
 			// Dispatch the update event
 			this.events.dispatchEvent(new Event("data-load"));
