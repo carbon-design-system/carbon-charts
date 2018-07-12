@@ -39,6 +39,10 @@ module.exports = [{
 					"postcss-loader",
 					"sass-loader"
 				]
+			},
+			{
+				test: /\.svg?$/,
+				loader: 'raw-loader'
 			}
 		]
 	},
