@@ -130,7 +130,6 @@ export class BaseAxisChart extends BaseChart {
 	// TODO - Refactor
 	getChartSize(container = this.container) {
 		let ratio, marginForLegendTop;
-		let moreForY2Axis = 0;
 		if (container.node().clientWidth > Configuration.charts.widthBreak) {
 			ratio = Configuration.charts.magicRatio;
 			marginForLegendTop = 0;
@@ -139,15 +138,11 @@ export class BaseAxisChart extends BaseChart {
 			ratio = 1;
 		}
 
-		if (this.options.type === "double-axis-line" || this.options.type === "combo") {
-			moreForY2Axis = Configuration.charts.magicMoreForY2Axis;
-		}
-
 		// Store computed actual size, to be considered for change if chart does not support axis
 		const marginsToExclude = Configuration.charts.margin.left + Configuration.charts.margin.right;
 		const computedChartSize = {
 			height: container.node().clientHeight - marginForLegendTop,
-			width: (container.node().clientWidth - marginsToExclude - moreForY2Axis) * ratio
+			width: (container.node().clientWidth - marginsToExclude) * ratio
 		};
 
 		return computedChartSize;
