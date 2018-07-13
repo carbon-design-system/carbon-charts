@@ -86,6 +86,7 @@ const classyCharts = {};
 
 // TODO - removeADataset shouldn't be used if chart legend is label based
 const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
+	const classyChartObject = classyCharts[chartType];
 	let newData;
 
 	const removeADataset = Math.random() > 0.5;
@@ -97,8 +98,6 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 
 		return Math.floor(result);
 	};
-
-	const classyChartObject = classyCharts[chartType];
 
 	switch (chartType) {
 		case "donut":
@@ -112,18 +111,6 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 
 				return newDataset;
 			});
-
-			if (delay) {
-				const dataPromise = new Promise((resolve, reject) => {
-					setTimeout(() => {
-						resolve(newData);
-					}, delay || 0);
-				});
-
-				classyChartObject.setData(dataPromise);
-			} else {
-				classyChartObject.setData(newData);
-			}
 
 			if (chartType === "donut") {
 				setTimeout(() => {
@@ -158,9 +145,20 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 				newData.datasets.splice(randomIndex, randomIndex);
 			}
 
-			classyChartObject.setData(newData);
-
 			break;
+	}
+
+	// Handle setting the new data
+	if (delay) {
+		const dataPromise = new Promise((resolve, reject) => {
+			setTimeout(() => {
+				resolve(newData);
+			}, delay || 0);
+		});
+
+		classyChartObject.setData(dataPromise);
+	} else {
+		classyChartObject.setData(newData);
 	}
 };
 
@@ -174,15 +172,19 @@ const setDemoActionsEventListener = (chartType: any, oldData: any) => {
 		};
 
 		const actionsElement = document.getElementById(`actions-${chartType}`);
-		const changeDataPromiseButtons = Array.prototype.slice.call(document.querySelectorAll(".change-data-promise"));
-		changeDataPromiseButtons.forEach(element => {
-			element = <HTMLElement>element;
-			element.onclick = e => {
-				e.preventDefault();
+		if (actionsElement) {
+			const changeDataPromiseButtons = Array.prototype.slice.call(actionsElement.querySelectorAll(".change-data-promise"));
+			changeDataPromiseButtons.forEach(element => {
+				element = <HTMLElement>element;
+				element.onclick = e => {
+					e.preventDefault();
 
-				changeDemoData(chartType, oldData, parseInt(element.getAttribute("data-promise-delay"), 10));
-			};
-		});
+					console.log("UPDATE WITH DELAY", parseInt(element.getAttribute("data-promise-delay"), 10));
+
+					changeDemoData(chartType, oldData, parseInt(element.getAttribute("data-promise-delay"), 10));
+				};
+			});
+		}
 	}
 };
 
