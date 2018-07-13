@@ -8,11 +8,9 @@ const toggleClass = (element: HTMLElement, className: string) => {
 };
 
 const toggleChevronSVG = (svgElement) => {
-	const direction = svgElement.getAttribute("href").indexOf("down") > -1 ? "up" : "down";
+	// const direction = svgElement.getAttribute("direction");
 
-	svgElement.removeAttribute("href");
-	svgElement.setAttributeNS("http://www.w3.org/1999/xlink",
-		"href", `https://peretz-icons.mybluemix.net/arrows_chevrons.svg#chevron_${direction}_16`);
+	svgElement.classList.toggle("flipped-y");
 };
 
 // Dropdown menu buttons
@@ -24,19 +22,18 @@ buttonAddonElements.forEach(buttonElement => {
 		const dropdownElement = <HTMLElement>parentElement.querySelector("ul.btn_menu");
 
 		// Make dropdown menu visible
-		toggleClass(dropdownElement, "visible");
+		dropdownElement.classList.toggle("visible");
 
-		const svgElement = parentElement.querySelector("svg use");
+		const svgElement = parentElement.querySelector("svg");
 		toggleChevronSVG(svgElement);
 
-
-		// // If menu items are clicked, close menu
-		// const menuItemElements = Array.prototype.slice.call(dropdownElement.querySelectorAll("li"));
-		// menuItemElements.forEach(menuItemElement => {
-		// 	menuItemElement.onclick = () => {
-		// 		toggleClass(dropdownElement, "visible");
-		// 		toggleChevronSVG(svgElement);
-		// 	};
-		// });
+		// If menu items are clicked, close menu
+		const menuItemElements = Array.prototype.slice.call(dropdownElement.querySelectorAll("li"));
+		menuItemElements.forEach(menuItemElement => {
+			menuItemElement.addEventListener("click", () => {
+				dropdownElement.classList.toggle("visible");
+				toggleChevronSVG(svgElement);
+			});
+		});
 	};
 });

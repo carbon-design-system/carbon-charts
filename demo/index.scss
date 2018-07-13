@@ -132,6 +132,12 @@ ul.btn_menu {
 	}
 }
 
-svg.icon--white-sm * {
-	fill: white;
+svg.icon--white-sm {
+	* {
+		fill: white;
+	}
+
+	&.flipped-y {
+		transform: rotate(180deg);
+	}
 }
