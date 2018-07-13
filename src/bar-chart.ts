@@ -17,15 +17,12 @@ export class BarChart extends BaseAxisChart {
 
 	setXScale(noAnimation?: boolean) {
 		const { bar: margins } = Configuration.charts.margin;
-		const { scales } = this.options;
 
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
 
 		this.x = d3.scaleBand().rangeRound([0, width]).padding(0.25);
 		this.x1 = d3.scaleBand().rangeRound([0, width]).padding(0.2);
-
-		const activeLegendItems = this.getActiveLegendItems();
 
 		this.x.domain(this.displayData.labels);
 		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
@@ -36,7 +33,6 @@ export class BarChart extends BaseAxisChart {
 			.style("height", "100%");
 
 		const { bar: margins } = Configuration.charts.margin;
-		const { scales } = this.options;
 
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;

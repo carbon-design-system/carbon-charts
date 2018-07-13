@@ -119,7 +119,6 @@ function donutCenterNumberTween(d3Ref, newNumber: number) {
 	const i = d3.interpolateNumber(currentValue, newNumber);
 
 	const formatInterpolatedValue = number => Math.floor(number).toLocaleString();
-	console.log(i(0.5));
 
 	return t => {
 		d3Ref.text(formatInterpolatedValue(i(t)));

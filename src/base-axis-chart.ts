@@ -176,12 +176,15 @@ export class BaseAxisChart extends BaseChart {
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - margins.top - margins.bottom;
 
+		const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
+
 		const xAxis = d3.axisBottom(this.x).tickSize(0);
 		let xAxisRef = this.svg.select("g.x.axis");
 
 		// If the <g class="x axis"> exists in the chart SVG, just update it
 		if (xAxisRef.nodes().length > 0) {
 			xAxisRef = this.svg.select("g.x.axis")
+				.transition(t)
 				.attr("transform", "translate(0," + height + ")")
 				// Casting to any because d3 does not offer appropriate typings for the .call() function
 				.call(d3.axisBottom(this.x).tickSize(0) as any);
@@ -233,7 +236,6 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	setYScale() {
-		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
 
