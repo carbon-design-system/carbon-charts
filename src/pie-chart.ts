@@ -88,8 +88,8 @@ export class PieChart extends BaseChart {
 	draw() {
 		const dataList = this.displayData.datasets[0].data;
 
-		const actualChartSize: any = this.getChartSize(this.container);
-		const diameter = Math.min(actualChartSize.width, actualChartSize.height);
+		const chartSize: any = this.getChartSize(this.container);
+		const diameter = Math.min(chartSize.width, chartSize.height);
 		const radius: number = diameter / 2;
 
 		d3.select(this.holder).select("svg")
@@ -104,7 +104,7 @@ export class PieChart extends BaseChart {
 
 		// Compute the correct inner & outer radius
 		const { pie: pieConfigs } = Configuration;
-		const marginedRadius = radius - (pieConfigs.label.margin * (actualChartSize.width / pieConfigs.maxWidth));
+		const marginedRadius = radius - (pieConfigs.label.margin * (chartSize.width / pieConfigs.maxWidth));
 		this.arc = d3.arc()
 				.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
 				.outerRadius(marginedRadius);
@@ -384,8 +384,8 @@ export class PieChart extends BaseChart {
 	resizeChart() {
 		const { pie: pieConfigs } = Configuration;
 
-		const actualChartSize: any = this.getChartSize(this.container);
-		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
+		const chartSize: any = this.getChartSize(this.container);
+		const dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
 		const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
 		const radius: number = dimensionToUseForScale / 2;
 
@@ -417,14 +417,14 @@ export class PieChart extends BaseChart {
 
 	// Helper functions
 	private computeRadius() {
-		const actualChartSize: any = this.getChartSize(this.container);
-		const radius: number = Math.min(actualChartSize.width, actualChartSize.height) / 2;
+		const chartSize: any = this.getChartSize(this.container);
+		const radius: number = Math.min(chartSize.width, chartSize.height) / 2;
 
 		return radius;
 	}
 
 	/**
-	 *
+	 * Return the css transform string to be used for the slice
 	 *
 	 * @private
 	 * @param {any} d - d3 data item for slice
@@ -437,11 +437,11 @@ export class PieChart extends BaseChart {
 		const xPosition = radius * Math.sin((theta / 2) + d.startAngle);
 		const yPosition = (-1 * radius * Math.cos((theta / 2) + d.startAngle ));
 
-		return `translate(${xPosition},${yPosition})`;
+		return `translate(${xPosition}, ${yPosition})`;
 	}
 
 	/**
-	 *
+	 * Decide what text-anchor value the slice label item would need based on the quadrant it's in
 	 *
 	 * @private
 	 * @param {any} d - d3 data item for slice

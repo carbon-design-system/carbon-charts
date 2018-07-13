@@ -79,17 +79,9 @@ export class DonutCenter {
 			// Update center number
 			this.donutSVG.select("text.donut-figure")
 				.transition()
-				.duration(700)
+				.duration(Configuration.transitions.default.duration)
 				.tween("text", function() {
-					const d3Ref = d3.select(this);
-					// Remove commas from the current value string, and convert to an int
-					const currentValue = parseInt(d3Ref.text().replace(/[, ]+/g, ""), 10);
-					const i = d3.interpolateNumber(currentValue, newNumber);
-
-					const formatInterpolatedValue = number => Math.floor(number).toLocaleString();
-					return function(t) {
-						d3Ref.text(formatInterpolatedValue(i(t)));
-					};
+					return donutCenterNumberTween(d3.select(this), newNumber);
 				});
 
 			// Update center label
@@ -119,4 +111,17 @@ export class DonutCenter {
 				.attr("y", Configuration.donut.centerText.title.y * scaleRatio * Configuration.donut.centerText.magicScaleRatio);
 		}
 	}
+}
+
+function donutCenterNumberTween(d3Ref, newNumber: number) {
+	// Remove commas from the current value string, and convert to an int
+	const currentValue = parseInt(d3Ref.text().replace(/[, ]+/g, ""), 10);
+	const i = d3.interpolateNumber(currentValue, newNumber);
+
+	const formatInterpolatedValue = number => Math.floor(number).toLocaleString();
+	console.log(i(0.5));
+
+	return t => {
+		d3Ref.text(formatInterpolatedValue(i(t)));
+	};
 }

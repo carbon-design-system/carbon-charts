@@ -124,7 +124,7 @@ export namespace Tools {
 		const duplicateValues = [];
 
 		arr.map(value => {
-			if (values.indexOf(value) > -1 && duplicateValues.indexOf(value) === -1) {
+			if (values.indexOf(value) !== -1 && duplicateValues.indexOf(value) === -1) {
 				duplicateValues.push(value);
 			}
 

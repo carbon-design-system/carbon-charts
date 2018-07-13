@@ -37,11 +37,6 @@ const axisOptions: any = Object.assign({}, baseOptions, {
 			ticks: 10
 		}
 	}
-	// xDomain: [],
-	// yDomain: [],
-	// secondaryYDomain: [],
-	// yTicks: 5,
-	// y2Ticks: 10
 });
 
 export namespace Configuration {
@@ -108,7 +103,16 @@ export namespace Configuration {
 		},
 		magicDy1: "0.71em",
 		magicY1: 9,
-		magicX1: -4
+		magicX1: -4,
+		y: {
+			numberOfTicks: 5
+		},
+		x: {
+			numberOfTicks: 5
+		},
+		y2: {
+			numberOfTicks: 5
+		}
 	};
 
 	export const grid = {
@@ -122,6 +126,7 @@ export namespace Configuration {
 		},
 		mouseout: {
 			strokeWidth: 0,
+			strokeWidthAccessible: 2,
 			strokeOpacity: 1
 		},
 		default: {
@@ -130,21 +135,6 @@ export namespace Configuration {
 	};
 
 	export const lines = {
-		// mouseover: {
-		// 	class: "hover-glow",
-		// 	r: 5.5,
-		// 	fill: "none",
-		// 	strokeWidth: 4,
-		// 	strokeOpacity: 0.5
-		// },
-		// path: {
-		// 	fill: "none",
-		// 	stroke: "steelblue",
-		// 	strokeLinejoin: "round",
-		// 	strokeLinecap: "round",
-		// 	strokeWidth: 2,
-		// 	duration: 700
-		// },
 		points: {
 			strokeWidth: 4,
 			mouseover: {
@@ -157,6 +147,7 @@ export namespace Configuration {
 	};
 
 	export const pie = {
+		minWidth: 100,
 		maxWidth: 516.6,
 		mouseover: {
 			strokeWidth: 6,
@@ -229,6 +220,12 @@ export namespace Configuration {
 		magicTop2: 22,
 		magicLeft1: 11,
 		magicLeft2: 12
+	};
+
+	export const transitions = {
+		default: {
+			duration: 750
+		}
 	};
 
 	export const selectors = {

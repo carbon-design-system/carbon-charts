@@ -40,14 +40,11 @@ export default class PatternsService {
 	 */
 	setDiv() {
 		const containerDiv = document.getElementById(selectors.PATTERNS_CONTAINER);
-		if (!containerDiv) {
+		if (!this.container) {
 			const div = document.createElement("div");
 			div.id = selectors.PATTERNS_CONTAINER;
 
-			const mountedDiv = document.body.appendChild(div);
-			this.container = mountedDiv;
-		} else {
-			this.container = containerDiv;
+			this.container = document.body.appendChild(div);
 		}
 	}
 

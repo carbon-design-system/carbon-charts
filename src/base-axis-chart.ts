@@ -244,7 +244,7 @@ export class BaseAxisChart extends BaseChart {
 		if (datasets.length === 1) {
 			yMax = d3.max(datasets[0].data);
 		} else {
-			yMax = d3.max(datasets, (d: any) => d3.max(d.data));
+			yMax = d3.max(datasets, (d: any) => (d3.max(d.data)));
 		}
 
 		if (scales.y.yMaxAdjuster) {
@@ -262,16 +262,17 @@ export class BaseAxisChart extends BaseChart {
 
 	setYAxis(noAnimation?: boolean) {
 		const { scales } = this.options;
-		const t = d3.transition().duration(noAnimation ? 0 : 750);
+		const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
+
 		const yAxis = d3.axisLeft(this.y)
-			.ticks(scales.y.numberOfTicks || 5)
+			.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks)
 			.tickSize(0)
 			.tickFormat(scales.y.formatter);
 		const yAxisRef = this.svg.select("g.y.axis");
 		// If the <g class="y axis"> exists in the chart SVG, just update it
 		if (yAxisRef.nodes().length > 0) {
 			yAxisRef.transition(t)
-				// Being cast to any because d3 does not offer appropriate typings for the .call() function
+				// Casting to any because d3 does not offer appropriate typings for the .call() function
 				.call(yAxis as any);
 		} else {
 			this.innerWrap.append("g")
@@ -281,7 +282,7 @@ export class BaseAxisChart extends BaseChart {
 
 		if (scales.y2 && scales.y2.ticks.max) {
 			const secondaryYAxis = d3.axisRight(this.y2)
-				.ticks(scales.y2.numberOfTicks || 5)
+				.ticks(scales.y2.numberOfTicks || Configuration.scales.y2.numberOfTicks)
 				.tickSize(0)
 				.tickFormat(scales.y2.formatter);
 
@@ -289,13 +290,13 @@ export class BaseAxisChart extends BaseChart {
 			// If the <g class="y axis"> exists in the chart SVG, just update it
 			if (secondaryYAxisRef.nodes().length > 0) {
 				secondaryYAxisRef.transition(t)
-					.attr("transform", "translate(" + this.getChartSize().width + " ,0)")
+					.attr("transform", `translate(${this.getChartSize().width} ,0)`)
 					// Being cast to any because d3 does not offer appropriate typings for the .call() function
 					.call(secondaryYAxis as any);
 			} else {
 				this.innerWrap.append("g")
 					.attr("class", "y2 axis yAxes")
-					.attr("transform", "translate(" + this.getChartSize().width + " ,0)")
+					.attr("transform", `translate(${this.getChartSize().width} ,0)`)
 					.call(secondaryYAxis);
 			}
 		}
@@ -317,11 +318,11 @@ export class BaseAxisChart extends BaseChart {
 	drawYGrid() {
 		const yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
 		const yGrid = d3.axisLeft(this.y)
-			.tickSizeInner(-(this.getChartSize().width))
+			.tickSizeInner(-this.getChartSize().width)
 			.tickSizeOuter(0)
 			.ticks(10);
 		const g = this.innerWrap.select(".y.grid")
-			.attr("transform", `translate(0, 0)`)
+			.attr("transform", "translate(0, 0)")
 			.call(yGrid);
 
 		this.cleanGrid(g);
@@ -349,7 +350,7 @@ export class BaseAxisChart extends BaseChart {
 
 			// Update Y Grid
 			const yGrid = d3.axisLeft(this.y)
-				.tickSizeInner(-(chartSize.width))
+				.tickSizeInner(-chartSize.width)
 				.tickSizeOuter(0)
 				.tickFormat("" as any)
 				.ticks(10);
@@ -431,8 +432,9 @@ export class BaseAxisChart extends BaseChart {
 					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
 			})
 			.on("mouseout", function(d) {
+				const { strokeWidth, strokeWidthAccessible } = Configuration.bars.mouseout;
 				d3.select(this)
-					.attr("stroke-width", accessibility ? 2 : Configuration.bars.mouseout.strokeWidth)
+					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
 					.attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
 					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
 			})

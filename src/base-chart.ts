@@ -139,24 +139,12 @@ export class BaseChart {
 		// That also are applicable to the new data
 		const disabledLegendItems = this.getDisabledLegendItems();
 		Object.keys(keys).forEach(key => {
-			if (disabledLegendItems.indexOf(key) > -1) {
+			if (disabledLegendItems.indexOf(key) !== -1) {
 				keys[key] = Configuration.legend.items.status.DISABLED;
 			}
 		});
 
 		return keys;
-	}
-
-	// Goes through all datasets, and returns the larger length of dataset["data"]
-	getMaxDatasetLength() {
-		let result = 0;
-		this.displayData.datasets.forEach(dataset => {
-			if (dataset.data && dataset.data.length > result) {
-				result = dataset.data.length;
-			}
-		});
-
-		return result;
 	}
 
 	getLegendType() {
@@ -165,12 +153,10 @@ export class BaseChart {
 		// TODO - Support the labels based legend for line chart
 		if (this.options.type === "line") {
 			return Configuration.legend.basedOn.SERIES;
+		} else if (datasets.length === 1 && datasets[0].backgroundColors.length > 1) {
+			return Configuration.legend.basedOn.LABELS;
 		} else {
-			if (datasets.length === 1 && datasets[0].backgroundColors.length > 1) {
-				return Configuration.legend.basedOn.LABELS;
-			} else {
-				return Configuration.legend.basedOn.SERIES;
-			}
+			return Configuration.legend.basedOn.SERIES;
 		}
 	}
 
@@ -188,14 +174,12 @@ export class BaseChart {
 	}
 
 	setColorScale() {
-		// if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
-		// } else {
-			this.displayData.datasets.forEach(dataset => {
-				this.colorScale[dataset.label] = d3.scaleOrdinal().range(dataset.backgroundColors).domain(this.displayData.labels);
-			});
-		// }
+		this.displayData.datasets.forEach(dataset => {
+			this.colorScale[dataset.label] = d3.scaleOrdinal().range(dataset.backgroundColors).domain(this.displayData.labels);
+		});
 	}
 
+	// TODO - Refactor
 	getChartSize(container = this.container) {
 		const noAxis = this.options.type === "pie" || this.options.type === "donut";
 
@@ -223,7 +207,7 @@ export class BaseChart {
 		// If chart is of type pie or donut, width and height should equal to the min of the width and height computed
 		if (noAxis) {
 			let maxSizePossible = Math.min(computedChartSize.height, computedChartSize.width);
-			maxSizePossible = Math.max(maxSizePossible, 100);
+			maxSizePossible = Math.max(maxSizePossible, Configuration.pie.minWidth);
 
 			return {
 				height: maxSizePossible,
@@ -400,36 +384,28 @@ export class BaseChart {
 		const legendItems = this.getLegendItems();
 		const legendItemKeys = Object.keys(legendItems);
 
-		return legendItemKeys.map(key => {
-			return {
-				key,
-				value: legendItems[key]
-			};
-		});
+		return legendItemKeys.map(key => ({
+			key,
+			value: legendItems[key]
+		}));
 	}
 
 	getLegendItemKeys() {
-		const legendItems = this.getLegendItems();
-
-		return Object.keys(legendItems);
+		return Object.keys(this.getLegendItems());
 	}
 
 	getDisabledLegendItems() {
 		const legendItems = this.getLegendItems();
 		const legendItemKeys = Object.keys(legendItems);
 
-		return legendItemKeys.filter(itemKey => {
-			return legendItems[itemKey] === Configuration.legend.items.status.DISABLED;
-		});
+		return legendItemKeys.filter(itemKey => legendItems[itemKey] === Configuration.legend.items.status.DISABLED);
 	}
 
 	getActiveLegendItems() {
 		const legendItems = this.getLegendItems();
 		const legendItemKeys = Object.keys(legendItems);
 
-		return legendItemKeys.filter(itemKey => {
-			return legendItems[itemKey] === Configuration.legend.items.status.ACTIVE;
-		});
+		return legendItemKeys.filter(itemKey => legendItems[itemKey] === Configuration.legend.items.status.ACTIVE);
 	}
 
 	updateLegend(legend) {
@@ -828,7 +804,7 @@ export class BaseChart {
 	}
 
 	getDefaultTransition() {
-		return d3.transition().duration(750);
+		return d3.transition().duration(Configuration.transitions.default.duration);
 	}
 
 	getInstantTransition() {
@@ -838,7 +814,7 @@ export class BaseChart {
 	// Used to determine whether to use a transition for updating fill attributes in charting elements
 	// Will disable the transition if in accessibility mode
 	getFillTransition(animate?: boolean) {
-		return d3.transition().duration(animate === false ? 0 : 750);
+		return d3.transition().duration(animate === false ? 0 : Configuration.transitions.default.duration);
 	}
 
 	// ================================================================================
