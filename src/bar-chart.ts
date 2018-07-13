@@ -26,7 +26,6 @@ export class BarChart extends BaseAxisChart {
 		this.x1 = d3.scaleBand().rangeRound([0, width]).padding(0.2);
 
 		const activeLegendItems = this.getActiveLegendItems();
-		// Apply legened filters, OLD VERSION axis.y.domain.filter(item => activeLegendItems.indexOf(item) > -1)
 
 		this.x.domain(this.displayData.labels);
 		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
@@ -88,7 +87,7 @@ export class BarChart extends BaseAxisChart {
 			.data(this.displayData.labels);
 
 		const rect = g.selectAll("rect.bar")
-				.data((d, index) => this.addLabelsToDataPoints(d, index));
+			.data((d, index) => this.addLabelsToDataPoints(d, index));
 
 		this.updateElements(true, rect, g);
 
@@ -187,8 +186,8 @@ export class BarChart extends BaseAxisChart {
 
 		// Resize the SVG
 		d3.select(this.holder).select("svg")
-				.attr("width", `${dimensionToUseForScale}px`)
-				.attr("height", `${dimensionToUseForScale}px`);
+			.attr("width", `${dimensionToUseForScale}px`)
+			.attr("height", `${dimensionToUseForScale}px`);
 
 		this.updateXandYGrid(true);
 		// Scale out the domains

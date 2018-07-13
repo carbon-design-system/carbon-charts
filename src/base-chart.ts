@@ -83,9 +83,9 @@ export class BaseChart {
 			this.events.dispatchEvent(new Event("data-load"));
 
 			// Process data
-			// this.data = this.dataProcessor(Tools.passObjectByValue(value));
-			this.data = Tools.passObjectByValue(value);
-			this.displayData = this.dataProcessor(Tools.passObjectByValue(value));
+			// this.data = this.dataProcessor(Tools.clone(value));
+			this.data = Tools.clone(value);
+			this.displayData = this.dataProcessor(Tools.clone(value));
 
 			const keys = this.getKeysFromData();
 

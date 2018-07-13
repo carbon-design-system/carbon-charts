@@ -53,19 +53,18 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	update() {
-		const newDisplayData = this.updateDisplayData();
-		this.displayData = newDisplayData;
+		this.displayData = this.updateDisplayData();
 
 		this.updateXandYGrid();
 		this.setXScale();
 		this.setXAxis();
 		this.setYScale();
 		this.setYAxis();
-		this.interpolateValues(newDisplayData);
+		this.interpolateValues(this.displayData);
 	}
 
 	updateDisplayData() {
-		const oldData = Tools.passObjectByValue(this.data);
+		const oldData = Tools.clone(this.data);
 		const activeLegendItems = this.getActiveLegendItems();
 
 		// Get new data by filtering the data based off of the legend
@@ -75,7 +74,7 @@ export class BaseAxisChart extends BaseChart {
 				// If this datapoint is active on the legend
 				const activeSeriesItemIndex = activeLegendItems.indexOf(dataset.label);
 
-				return activeSeriesItemIndex > -1;
+				return activeSeriesItemIndex !== -1;
 			});
 		} else {
 			const dataIndeciesToRemove = [];
@@ -87,7 +86,7 @@ export class BaseAxisChart extends BaseChart {
 					dataIndeciesToRemove.push(index);
 				}
 
-				return activeSeriesItemIndex > -1;
+				return activeSeriesItemIndex !== -1;
 			});
 
 			if (dataIndeciesToRemove.length > 0) {
@@ -107,13 +106,11 @@ export class BaseAxisChart extends BaseChart {
 	addLabelsToDataPoints(d, index) {
 		const { datasets } = this.displayData;
 
-		return datasets.map(dataset => {
-			return {
-				label: d,
-				datasetLabel: dataset.label,
-				value: dataset.data[index]
-			};
-		});
+		return datasets.map(dataset => ({
+			label: d,
+			datasetLabel: dataset.label,
+			value: dataset.data[index]
+		}));
 	}
 
 	draw() {
@@ -178,7 +175,6 @@ export class BaseAxisChart extends BaseChart {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - margins.top - margins.bottom;
-		const t = d3.transition().duration(noAnimation ? 0 : 750);
 
 		const xAxis = d3.axisBottom(this.x).tickSize(0);
 		let xAxisRef = this.svg.select("g.x.axis");
@@ -186,9 +182,8 @@ export class BaseAxisChart extends BaseChart {
 		// If the <g class="x axis"> exists in the chart SVG, just update it
 		if (xAxisRef.nodes().length > 0) {
 			xAxisRef = this.svg.select("g.x.axis")
-				// .transition(t)
 				.attr("transform", "translate(0," + height + ")")
-				// Being cast to any because d3 does not offer appropriate typings for the .call() function
+				// Casting to any because d3 does not offer appropriate typings for the .call() function
 				.call(d3.axisBottom(this.x).tickSize(0) as any);
 		} else {
 			xAxisRef = this.innerWrap.append("g")
@@ -217,7 +212,7 @@ export class BaseAxisChart extends BaseChart {
 			xAxisRef.append("text")
 				.attr("class", "x axis-label")
 				.attr("text-anchor", "middle")
-				.attr("transform", "translate(" + (xAxisRef.node().getBBox().width / 2) + "," + tickHeight + ")")
+				.attr("transform", `translate(${xAxisRef.node().getBBox().width / 2}, ${tickHeight})`)
 				.text(this.options.scales.x.title);
 		}
 
@@ -233,7 +228,7 @@ export class BaseAxisChart extends BaseChart {
 		const xAxisTitleRef = this.svg.select("g.x.axis text.x.axis-label");
 		xAxisTitleRef.attr("class", "x axis-label")
 			.attr("text-anchor", "middle")
-			.attr("transform", "translate(" + (xAxisRef.node().getBBox().width / 2) + "," + tickHeight + ")")
+			.attr("transform", `translate(${xAxisRef.node().getBBox().width / 2}, ${tickHeight})`)
 			.text(this.options.scales.x.title);
 	}
 

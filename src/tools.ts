@@ -31,7 +31,7 @@ export namespace Tools {
 		return closeBtn;
 	}
 
-	export function passObjectByValue(obj) {
+	export function clone(obj) {
 		return JSON.parse(JSON.stringify(obj));
 	}
 

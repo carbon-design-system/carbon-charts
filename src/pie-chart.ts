@@ -340,7 +340,7 @@ export class PieChart extends BaseChart {
 	}
 
 	update(newData?: any) {
-		const oldData = Tools.passObjectByValue(this.displayData);
+		const oldData = Tools.clone(this.displayData);
 		const activeLegendItems = this.getActiveLegendItems();
 
 		const newDisplayData = Object.assign({}, oldData);

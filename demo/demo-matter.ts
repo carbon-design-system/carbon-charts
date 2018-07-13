@@ -1,15 +1,5 @@
 // Functions
-const toggleClass = (element: HTMLElement, className: string) => {
-	if (element.classList.contains(className)) {
-		element.classList.remove(className);
-	} else {
-		element.classList.add(className);
-	}
-};
-
-const toggleChevronSVG = (svgElement) => {
-	// const direction = svgElement.getAttribute("direction");
-
+const toggleChevronSVG = (svgElement: SVGSVGElement) => {
 	svgElement.classList.toggle("flipped-y");
 };
 
@@ -30,8 +20,10 @@ buttonAddonElements.forEach(buttonElement => {
 		// If menu items are clicked, close menu
 		const menuItemElements = Array.prototype.slice.call(dropdownElement.querySelectorAll("li"));
 		menuItemElements.forEach(menuItemElement => {
+			// TODO - Only add these listeners when the menu opens, and destroy after
 			menuItemElement.addEventListener("click", () => {
 				dropdownElement.classList.toggle("visible");
+
 				toggleChevronSVG(svgElement);
 			});
 		});
