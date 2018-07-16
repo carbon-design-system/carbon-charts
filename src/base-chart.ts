@@ -827,7 +827,7 @@ export class BaseChart {
 					const loadingOverlay = document.createElement("div");
 
 					loadingOverlay.classList.add("chart-overlay");
-					loadingOverlay.innerHTML = "<span>loading...</span>";
+					loadingOverlay.innerHTML = this.options.loadingOverlay.innerHTML;
 
 					this.holder.querySelector(Configuration.selectors.CHARTWRAPPER).appendChild(loadingOverlay);
 				}
