@@ -32,13 +32,11 @@ export class PieChart extends BaseChart {
 
 		// TODO - Support multiple datasets
 		// let sortedData = data.datasets[0];
-		const dataList = dataObject.datasets[0].data.map((datum, i) => {
-			return {
-				label: dataObject.labels[i],
-				value: datum,
-				// datasetLabel: data.datasets[0].label
-			};
-		});
+		const dataList = dataObject.datasets[0].data.map((datum, i) => ({
+			label: dataObject.labels[i],
+			value: datum,
+			// datasetLabel: data.datasets[0].label
+		}));
 
 		// Sort data by value
 		let sortedData = dataList.sort((a, b) => b.value - a.value);
@@ -49,17 +47,15 @@ export class PieChart extends BaseChart {
 		const restAccumulatedValue = rest.reduce((accum, item) => accum + item.value, 0);
 
 		const otherLabelIndex = sortedData.findIndex(dataPoint => dataPoint.label === "Other");
-		if (otherLabelIndex > -1) {
+		if (otherLabelIndex !== -1) {
 			sortedData.push(sortedData.splice(otherLabelIndex, 1)[0]);
-		} else {
-			if (rest.length > 0) {
-				sortedData = sortedData.slice(0, stopAt)
-					.concat([{
-						label: Configuration.pie.label.other,
-						value: restAccumulatedValue,
-						items: rest
-					}]);
-			}
+		} else if (rest.length > 0) {
+			sortedData = sortedData.slice(0, stopAt)
+				.concat([{
+					label: Configuration.pie.label.other,
+					value: restAccumulatedValue,
+					items: rest
+				}]);
 		}
 
 		// Sort labels based on the order made above
@@ -134,12 +130,8 @@ export class PieChart extends BaseChart {
 			.classed("chart-label", true)
 			.attr("dy", Configuration.pie.label.dy)
 			.style("text-anchor", this.deriveTextAnchor)
-			.attr("transform", (d) => {
-				return this.deriveTransformString(d, radius);
-			})
-			.text(function(d) {
-				return Tools.convertValueToPercentage(d.data.value, dataList);
-			});
+			.attr("transform", d => this.deriveTransformString(d, radius))
+			.text(d => Tools.convertValueToPercentage(d.data.value, dataList));
 
 		// Hide overlay
 		this.updateOverlay().hide();
@@ -161,7 +153,7 @@ export class PieChart extends BaseChart {
 			.attr("stroke-width", Configuration.pie.default.strokeWidth)
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.transition()
-			.duration(750)
+			.duration(Configuration.transitions.default.duration)
 			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
 			.attrTween("d", function (a) {
 				return arcTween.bind(this)(a, arc);
@@ -177,7 +169,7 @@ export class PieChart extends BaseChart {
 			.attr("stroke-width", Configuration.pie.default.strokeWidth)
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.transition()
-			.duration(750)
+			.duration(Configuration.transitions.default.duration)
 			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
 			.style("opacity", 1)
 			.attrTween("d", function (a) {
@@ -188,14 +180,20 @@ export class PieChart extends BaseChart {
 			.exit()
 			.attr("d", arc)
 			.transition()
-			.duration(750)
+			.duration(Configuration.transitions.default.duration)
 			.style("opacity", 0)
 			.remove();
 
 		// Fade out all text labels
 		this.innerWrap.selectAll("text.chart-label")
-			.transition().duration(375).style("opacity", 0).on("end", function(d) {
-				d3.select(this).transition().duration(375).style("opacity", 1);
+			.transition()
+			.duration(Configuration.transitions.default.duration / 2)
+			.style("opacity", 0)
+			.on("end", function(d) {
+				d3.select(this)
+					.transition()
+					.duration(Configuration.transitions.default.duration / 2)
+					.style("opacity", 1);
 			});
 
 		// Move text labels to their new location, and fade them in again
@@ -208,34 +206,26 @@ export class PieChart extends BaseChart {
 				.classed("chart-label", true)
 				.attr("dy", Configuration.pie.label.dy)
 				.style("text-anchor", this.deriveTextAnchor)
-				.attr("transform", (d) => {
-					return this.deriveTransformString(d, radius);
-				})
-				.text(function(d) {
-					return Tools.convertValueToPercentage(d.data.value, dataList);
-				})
+				.attr("transform", d => this.deriveTransformString(d, radius))
+				.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
 				.style("opacity", 0)
 				.transition()
-				.duration(375)
+				.duration(Configuration.transitions.default.duration / 2)
 				.style("opacity", 1);
 
 			text
 				.attr("dy", Configuration.pie.label.dy)
 				.style("text-anchor", this.deriveTextAnchor)
-				.attr("transform", (d) => {
-					return this.deriveTransformString(d, radius);
-				})
-				.text(function(d) {
-					return Tools.convertValueToPercentage(d.data.value, dataList);
-				})
+				.attr("transform", d => this.deriveTransformString(d, radius))
+				.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
 				.transition()
-				.duration(375)
+				.duration(Configuration.transitions.default.duration / 2)
 				.style("opacity", 1);
 
 			text
 				.exit()
 				.remove();
-		}, 375);
+		}, Configuration.transitions.default.duration / 2);
 
 		// Add slice hover actions, and clear any slice borders present
 		this.addDataPointEventListener();
@@ -348,7 +338,7 @@ export class PieChart extends BaseChart {
 			// If this datapoint is active on the legend
 			const activeSeriesItemIndex = activeLegendItems.indexOf(dataPoint.label);
 
-			return activeSeriesItemIndex > -1;
+			return activeSeriesItemIndex !== -1;
 		});
 
 		newDisplayData.labels = newDisplayData.datasets[0].data.map(datum => datum.label);

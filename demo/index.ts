@@ -179,8 +179,6 @@ const setDemoActionsEventListener = (chartType: any, oldData: any) => {
 				element.onclick = e => {
 					e.preventDefault();
 
-					console.log("UPDATE WITH DELAY", parseInt(element.getAttribute("data-promise-delay"), 10));
-
 					changeDemoData(chartType, oldData, parseInt(element.getAttribute("data-promise-delay"), 10));
 				};
 			});

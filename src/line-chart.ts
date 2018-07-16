@@ -50,18 +50,16 @@ export class LineChart extends BaseAxisChart {
 		this.innerWrap.style("width", "100%")
 			.style("height", "100%");
 
-		this.innerWrap.attr("transform", "translate(" + margins.left + "," + margins.top + ")");
+		this.innerWrap.attr("transform", `translate(${margins.left}, ${margins.top})`);
 
 		const gLines = this.innerWrap.selectAll("g.lines")
 			.data(this.displayData.datasets)
 			.enter()
-			.append("g")
-			.classed("lines", true);
+				.append("g")
+				.classed("lines", true);
 
 		gLines.append("path")
-			.attr("stroke", d => {
-				return this.colorScale[d.label]();
-			})
+			.attr("stroke", d => this.colorScale[d.label]())
 			.datum(d => d.data)
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);
@@ -69,12 +67,12 @@ export class LineChart extends BaseAxisChart {
 		gLines.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i))
 			.enter()
-			.append("circle")
-			.attr("class", "dot")
-			.attr("cx", (d, i) => this.x(d.label) + margins.left)
-			.attr("cy", (d: any) => this.y(d.value))
-			.attr("r", 4)
-			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+				.append("circle")
+				.attr("class", "dot")
+				.attr("cx", d => this.x(d.label) + margins.left)
+				.attr("cy", d => this.y(d.value))
+				.attr("r", 4)
+				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
 
 		// Hide the overlay
 		this.updateOverlay().hide();
@@ -101,9 +99,7 @@ export class LineChart extends BaseAxisChart {
 			.classed("lines", true);
 
 		addedLineGroups.append("path")
-			.attr("stroke", d => {
-				return this.colorScale[d.label]();
-			})
+			.attr("stroke", d => this.colorScale[d.label]())
 			.datum(d => d.data)
 			.style("opacity", 0)
 			.transition(this.getDefaultTransition())
@@ -115,15 +111,15 @@ export class LineChart extends BaseAxisChart {
 		addedLineGroups.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i))
 			.enter()
-			.append("circle")
-			.attr("class", "dot")
-			.attr("cx", (d, i) => this.x(d.label) + margins.left)
-			.attr("cy", (d: any) => this.y(d.value))
-			.attr("r", 4)
-			.style("opacity", 0)
-			.transition(this.getDefaultTransition())
-			.style("opacity", 1)
-			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+				.append("circle")
+				.attr("class", "dot")
+				.attr("cx", (d, i) => this.x(d.label) + margins.left)
+				.attr("cy", (d: any) => this.y(d.value))
+				.attr("r", 4)
+				.style("opacity", 0)
+				.transition(this.getDefaultTransition())
+				.style("opacity", 1)
+				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
 
 		// Remove lines that are no longer needed
 		gLines.exit()
@@ -176,15 +172,15 @@ export class LineChart extends BaseAxisChart {
 				return self.addLabelsToDataPoints(parentDatum, i);
 			})
 			.transition(transitionToUse)
-			.attr("cx", (d, i) => this.x(d.label) + margins.left)
-			.attr("cy", (d: any) => this.y(d.value))
+			.attr("cx", d => this.x(d.label) + margins.left)
+			.attr("cy", d => this.y(d.value))
 			.attr("r", Configuration.lines.points.strokeWidth)
 			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
 	}
 
 	resizeChart() {
-		const actualChartSize: any = this.getChartSize(this.container);
-		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
+		const chartSize: any = this.getChartSize(this.container);
+		const dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
 
 		// Resize the SVG
 		d3.select(this.holder).select("svg")
