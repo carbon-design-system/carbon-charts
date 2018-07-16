@@ -456,19 +456,13 @@ export class BaseChart {
 		legendEnter.select("div")
 			.merge(legendItems.selectAll("div"))
 			.style("background-color", (d, i) => {
-				if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
-					if (d.value === Configuration.legend.items.status.ACTIVE) {
-						return this.colorScale[this.displayData.datasets[0].label](d.key);
-					}
-
-					return "white";
-				} else {
-					if (d.value === Configuration.legend.items.status.ACTIVE) {
+				if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
+					return this.colorScale[this.displayData.datasets[0].label](d.key);
+				} else if (d.value === Configuration.legend.items.status.ACTIVE) {
 						return this.colorScale[d.key]();
-					}
-
-					return "white";
 				}
+
+				return "white";
 			});
 
 		// Add hover effect for legend item circles

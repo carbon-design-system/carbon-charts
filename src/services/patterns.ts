@@ -8,7 +8,7 @@ const selectors = {
 };
 
 // Helper functions
-const trimSVG = (htmlString: any) => {
+const trimSVG = (htmlString: string) => {
 	// Remove the CSS style block
 	const htmlBeforeStyleBlock = htmlString.substring(0, htmlString.indexOf("<style type=\"text/css\">"));
 	const htmlAfterStyleBlock = htmlString.substring(htmlString.indexOf("</style>") + "</style>".length);
@@ -39,7 +39,7 @@ export default class PatternsService {
 	 * @memberof PatternsService
 	 */
 	setDiv() {
-		const containerDiv = document.getElementById(selectors.PATTERNS_CONTAINER);
+		this.container = document.getElementById(selectors.PATTERNS_CONTAINER);
 		if (!this.container) {
 			const div = document.createElement("div");
 			div.id = selectors.PATTERNS_CONTAINER;

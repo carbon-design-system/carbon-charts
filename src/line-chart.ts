@@ -27,13 +27,11 @@ export class LineChart extends BaseAxisChart {
 	addLabelsToDataPoints(d, index) {
 		const { labels } = this.displayData;
 
-		return d.data.map((datum, i) => {
-			return {
-				label: labels[i],
-				datasetLabel: d.label,
-				value: datum
-			};
-		});
+		return d.data.map((datum, i) => ({
+			label: labels[i],
+			datasetLabel: d.label,
+			value: datum
+		}));
 	}
 
 	draw() {

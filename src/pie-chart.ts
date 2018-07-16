@@ -199,7 +199,9 @@ export class PieChart extends BaseChart {
 		// Move text labels to their new location, and fade them in again
 		const radius = this.computeRadius();
 		setTimeout(() => {
-			const text = this.innerWrap.selectAll("text.chart-label").data(this.pie(dataList), function(d) { return d.label; });
+			const text = this.innerWrap.selectAll("text.chart-label")
+				.data(this.pie(dataList), d => d.label );
+
 			text
 				.enter()
 				.append("text")
@@ -323,7 +325,7 @@ export class PieChart extends BaseChart {
 			})
 			.on("mouseout", function(d) {
 				d3.select(this)
-					.attr("stroke-width", accessibility ? 2 : Configuration.pie.mouseout.strokeWidth)
+					.attr("stroke-width", accessibility ? Configuration.pie.default.strokeWidth : Configuration.pie.mouseout.strokeWidth)
 					.attr("stroke", accessibility ? self.colorScale[self.displayData.datasets[0].label](d.data.label) : "none")
 					.attr("stroke-opacity", Configuration.pie.mouseout.strokeOpacity);
 			});
@@ -397,9 +399,7 @@ export class PieChart extends BaseChart {
 
 		this.innerWrap
 			.selectAll("text.chart-label")
-			.attr("transform", (d) => {
-				return this.deriveTransformString(d, radius);
-			});
+			.attr("transform", d => this.deriveTransformString(d, radius));
 
 		// Reposition the legend
 		this.positionLegend();
