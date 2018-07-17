@@ -32,24 +32,24 @@ import {
 } from "./demo-data/index";
 
 const chartTypes = [
-	{
-		id: "grouped-bar",
-		name: "Grouped Bar",
-		options: groupedBarOptions,
-		data: groupedBarData
-	},
+	// {
+	// 	id: "grouped-bar",
+	// 	name: "Grouped Bar",
+	// 	options: groupedBarOptions,
+	// 	data: groupedBarData
+	// },
 	{
 		id: "simple-bar",
 		name: "Bar",
 		options: simpleBarOptions,
 		data: simpleBarData
 	},
-	{
-		id: "simple-bar-accessible",
-		name: "Accessible Bar",
-		options: Object.assign({}, simpleBarOptions, {accessibility: true}),
-		data: simpleBarData
-	},
+	// {
+	// 	id: "simple-bar-accessible",
+	// 	name: "Accessible Bar",
+	// 	options: Object.assign({}, simpleBarOptions, {accessibility: true}),
+	// 	data: simpleBarData
+	// },
 	{
 		id: "curved-line",
 		name: "Curved Line",

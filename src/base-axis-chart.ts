@@ -235,10 +235,7 @@ export class BaseAxisChart extends BaseChart {
 			.text(this.options.scales.x.title);
 	}
 
-	setYScale() {
-		const chartSize = this.getChartSize();
-		const height = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
-
+	getYMax() {
 		const { datasets } = this.displayData;
 		const { scales } = this.options;
 		let yMax;
@@ -252,6 +249,18 @@ export class BaseAxisChart extends BaseChart {
 		if (scales.y.yMaxAdjuster) {
 			yMax = scales.y.yMaxAdjuster(yMax);
 		}
+
+		return yMax;
+	}
+
+	setYScale() {
+		const chartSize = this.getChartSize();
+		const height = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
+
+		const { datasets } = this.displayData;
+		const { scales } = this.options;
+
+		const yMax = this.getYMax();
 
 		this.y = d3.scaleLinear().rangeRound([height, 0]);
 		this.y.domain([0, yMax]);

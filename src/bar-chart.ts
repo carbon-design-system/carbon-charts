@@ -1,15 +1,20 @@
 import * as d3 from "d3";
 
 import { BaseAxisChart } from "./base-axis-chart";
+import { StackedBarChart } from "./stacked-bar-chart";
 import { Configuration } from "./configuration";
 
 export class BarChart extends BaseAxisChart {
 	x: any;
-	x1: any;
+	x1?: any;
 	y: any;
 	colorScale: any;
 
 	constructor(holder: Element, configs: any) {
+		if (configs.options.scales.y.stacked) {
+			return new StackedBarChart(holder, configs);
+		}
+
 		super(holder, configs);
 
 		this.options.type = "bar";
