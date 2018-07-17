@@ -125,7 +125,7 @@ export const simpleBarData = {
 };
 
 export const simpleBarOptions = {
-	accessibility: true,
+	accessibility: false,
 	scales: {
 		x: {
 			title: "2018 Annual Sales Figures",
