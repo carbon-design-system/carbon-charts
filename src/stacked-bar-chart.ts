@@ -80,6 +80,8 @@ export class StackedBarChart extends BaseAxisChart {
 					Object.keys(d).map(key => {
 						if (typeof d[key] === "object") {
 							d[key]["datasetLabel"] = d.key;
+							d[key]["label"] = d[key].data["label"];
+							d[key]["value"] = d[key].data[d.key];
 						}
 					});
 
