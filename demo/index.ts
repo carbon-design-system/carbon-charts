@@ -18,7 +18,6 @@ import {
 	groupedBarData,
 	simpleBarOptions,
 	simpleBarData,
-	stackedBarData,
 	stackedBarOptions,
 	// Pie & donut
 	pieOptions,
@@ -45,10 +44,22 @@ const chartTypes = [
 		data: simpleBarData
 	},
 	{
+		id: "stacked-bar",
+		name: "Bar",
+		options: stackedBarOptions,
+		data: groupedBarData
+	},
+	{
 		id: "simple-bar-accessible",
 		name: "Accessible Bar",
 		options: Object.assign({}, simpleBarOptions, {accessibility: true}),
 		data: simpleBarData
+	},
+	{
+		id: "stacked-bar-accessible",
+		name: "Bar",
+		options: Object.assign({}, stackedBarOptions, {accessibility: true}),
+		data: groupedBarData
 	},
 	{
 		id: "curved-line",
@@ -131,6 +142,8 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		case "grouped-bar":
 		case "simple-bar":
 		case "simple-bar-accessible":
+		case "stacked-bar":
+		case "stacked-bar-accessible":
 			newData = Object.assign({}, oldData);
 			newData.datasets = oldData.datasets.map(dataset => {
 				const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
@@ -193,6 +206,8 @@ chartTypes.forEach(type => {
 			default:
 			case "simple-bar":
 			case "grouped-bar":
+			case "stacked-bar":
+			case "stacked-bar-accessible":
 				classyCharts[type.id] = new BarChart(
 					classyContainer,
 					{
