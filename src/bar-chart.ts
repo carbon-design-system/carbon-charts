@@ -11,6 +11,7 @@ export class BarChart extends BaseAxisChart {
 	colorScale: any;
 
 	constructor(holder: Element, configs: any) {
+		// If this is a stacked bar chart, change the object prototype
 		if (configs.options.scales.y.stacked) {
 			return new StackedBarChart(holder, configs);
 		}
