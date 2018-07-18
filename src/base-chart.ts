@@ -587,7 +587,10 @@ export class BaseChart {
 			});
 	}
 
+	// TODO - Refactor
 	openLegendTooltip(target) {
+		const self = this;
+
 		d3.selectAll(".legend-tooltip").remove();
 		const mouseXPoint = d3.mouse(this.container.node())[0];
 		const windowXPoint = d3.event.x;
@@ -613,22 +616,41 @@ export class BaseChart {
 			const legendContent = d3.select(".legend-tooltip-content")
 				.attr("font-size", Configuration.legend.fontSize)
 				.selectAll("div")
-				.data(this.getLegendItemKeys())
-				.enter().append("li")
-				.attr("class", "legend-btn active")
-				.on("click", (clickedItem) => {
-					this.updateLegend(d3.event.currentTarget);
+				.data(this.getLegendItemArray(), (d: any) => d.key)
+				.enter()
+					.append("li")
+					.classed("legend-btn", true)
+					.classed("active", d => d.value === Configuration.legend.items.status.ACTIVE)
+					.on("click", (clickedItem) => {
+						this.updateLegend(d3.event.currentTarget);
 
-					// TODO - openLegendTooltip()
-				});
+						this.applyLegendFilter(clickedItem.key);
+					});
 
 			legendContent.append("div")
 				.attr("class", "legend-circle")
-				.style("background-color", (d, i) => this.options.colors[i]);
+				.style("background-color", (d, i) => {
+					if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
+						return this.colorScale[this.displayData.datasets[0].label](d.key);
+					} else if (d.value === Configuration.legend.items.status.ACTIVE) {
+						return this.colorScale[d.key]();
+					}
+
+					return "white";
+				})
+				.style("border-color", function(d) {
+					if (self.getLegendType() === Configuration.legend.basedOn.LABELS) {
+						return self.colorScale[self.displayData.datasets[0].label](d.key);
+					} else {
+						return self.colorScale[d.key]();
+					}
+				})
+				.style("border-style", Configuration.legend.inactive.borderStyle)
+				.style("border-width", Configuration.legend.inactive.borderWidth);
 			this.addLegendCircleHoverEffect();
 
 			legendContent.append("text")
-				.text(d => "" + d);
+				.text(d => d.key);
 		}
 
 		// Position the tooltip

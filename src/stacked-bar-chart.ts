@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import { Configuration } from "./configuration";
 import { BaseAxisChart } from "./base-axis-chart";
 
+// TODO - Cleanup & add some comments
 export class StackedBarChart extends BaseAxisChart {
 	constructor(holder: Element, configs: any) {
 		super(holder, configs);
