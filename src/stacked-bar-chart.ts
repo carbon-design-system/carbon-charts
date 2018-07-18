@@ -3,6 +3,20 @@ import * as d3 from "d3";
 import { Configuration } from "./configuration";
 import { BaseAxisChart } from "./base-axis-chart";
 
+// Add datasetLabel to each piece of data
+// To be used to get the fill color
+const addLabelsAndValueToData = (d) => {
+	Object.keys(d).map(key => {
+		if (typeof d[key] === "object") {
+			d[key]["datasetLabel"] = d.key;
+			d[key]["label"] = d[key].data["label"];
+			d[key]["value"] = d[key].data[d.key];
+		}
+	});
+
+	return d;
+};
+
 // TODO - Cleanup & add some comments
 export class StackedBarChart extends BaseAxisChart {
 	constructor(holder: Element, configs: any) {
@@ -197,17 +211,3 @@ export class StackedBarChart extends BaseAxisChart {
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
 	}
 }
-
-const addLabelsAndValueToData = (d) => {
-	// Add datasetLabel to each piece of data
-	// To be used to get the fill color
-	Object.keys(d).map(key => {
-		if (typeof d[key] === "object") {
-			d[key]["datasetLabel"] = d.key;
-			d[key]["label"] = d[key].data["label"];
-			d[key]["value"] = d[key].data[d.key];
-		}
-	});
-
-	return d;
-};
