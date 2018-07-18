@@ -613,6 +613,7 @@ export class BaseChart {
 					d3.selectAll(".legend-tooltip").style("display", "none");
 				});
 
+			const activeLegendItems = this.getActiveLegendItems();
 			const legendContent = d3.select(".legend-tooltip-content")
 				.attr("font-size", Configuration.legend.fontSize)
 				.selectAll("div")
@@ -621,35 +622,48 @@ export class BaseChart {
 					.append("li")
 					.classed("legend-btn", true)
 					.classed("active", d => d.value === Configuration.legend.items.status.ACTIVE)
-					.on("click", (clickedItem) => {
-						this.updateLegend(d3.event.currentTarget);
+					.classed("not-allowed", d => activeLegendItems.length === 1 && d.value === Configuration.legend.items.status.ACTIVE)
+					.on("click", (clickedItem, e) => {
+						const legendButton = d3.select(d3.event.currentTarget);
+						const enabling = !legendButton.classed("active");
 
-						this.applyLegendFilter(clickedItem.key);
+						if (activeLegendItems.length > 1 || enabling) {
+							this.updateLegend(d3.event.currentTarget);
 
-						this.container.selectAll("ul.legend li.legend-btn")
-							.data(this.getLegendItemArray(), (d: any) => d.key)
-							.each(d => console.log("EACH", d))
-							.classed("active", d => d.value === Configuration.legend.items.status.ACTIVE)
-							.select("div.legend-circle")
-							.style("background-color", (d, i) => {
-								if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
-									return this.colorScale[this.displayData.datasets[0].label](d.key);
-								} else if (d.value === Configuration.legend.items.status.ACTIVE) {
-									return this.colorScale[d.key]();
-								}
+							this.applyLegendFilter(clickedItem.key);
 
-								return "white";
-							})
-							.style("border-color", function(d) {
-								if (self.getLegendType() === Configuration.legend.basedOn.LABELS) {
-									return self.colorScale[self.displayData.datasets[0].label](d.key);
-								} else {
-									return self.colorScale[d.key]();
-								}
-							})
-							.style("border-style", Configuration.legend.inactive.borderStyle)
-							.style("border-width", Configuration.legend.inactive.borderWidth);
+							this.container.selectAll("ul.legend li.legend-btn")
+								.data(this.getLegendItemArray(), (d: any) => d.key)
+								.classed("active", d => d.value === Configuration.legend.items.status.ACTIVE)
+								.select("div.legend-circle")
+								.style("background-color", (d, i) => {
+									if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
+										return this.colorScale[this.displayData.datasets[0].label](d.key);
+									} else if (d.value === Configuration.legend.items.status.ACTIVE) {
+										return this.colorScale[d.key]();
+									}
 
+									return "white";
+								})
+								.style("border-color", function(d) {
+									if (self.getLegendType() === Configuration.legend.basedOn.LABELS) {
+										return self.colorScale[self.displayData.datasets[0].label](d.key);
+									} else {
+										return self.colorScale[d.key]();
+									}
+								})
+								.style("border-style", Configuration.legend.inactive.borderStyle)
+								.style("border-width", Configuration.legend.inactive.borderWidth);
+						}
+
+						// If there are 2 active legend items & one is getting toggled off
+						if (activeLegendItems.length === 2 && !enabling) {
+							this.container.selectAll(".legend-btn.active").classed("not-allowed", true);
+						}
+
+						if (activeLegendItems.length === 1 && enabling) {
+							this.container.selectAll(".legend-btn.not-allowed").classed("not-allowed", false);
+						}
 					});
 
 			legendContent.append("div")
