@@ -625,6 +625,31 @@ export class BaseChart {
 						this.updateLegend(d3.event.currentTarget);
 
 						this.applyLegendFilter(clickedItem.key);
+
+						this.container.selectAll("ul.legend li.legend-btn")
+							.data(this.getLegendItemArray(), (d: any) => d.key)
+							.each(d => console.log("EACH", d))
+							.classed("active", d => d.value === Configuration.legend.items.status.ACTIVE)
+							.select("div.legend-circle")
+							.style("background-color", (d, i) => {
+								if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
+									return this.colorScale[this.displayData.datasets[0].label](d.key);
+								} else if (d.value === Configuration.legend.items.status.ACTIVE) {
+									return this.colorScale[d.key]();
+								}
+
+								return "white";
+							})
+							.style("border-color", function(d) {
+								if (self.getLegendType() === Configuration.legend.basedOn.LABELS) {
+									return self.colorScale[self.displayData.datasets[0].label](d.key);
+								} else {
+									return self.colorScale[d.key]();
+								}
+							})
+							.style("border-style", Configuration.legend.inactive.borderStyle)
+							.style("border-width", Configuration.legend.inactive.borderWidth);
+
 					});
 
 			legendContent.append("div")
