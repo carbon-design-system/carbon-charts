@@ -69,17 +69,7 @@ export class StackedBarChart extends BaseAxisChart {
 				.classed("bars", true)
 				.selectAll("rect")
 				.data(function(d) {
-					// Add datasetLabel to each piece of data
-					// To be used to get the fill color
-					Object.keys(d).map(key => {
-						if (typeof d[key] === "object") {
-							d[key]["datasetLabel"] = d.key;
-							d[key]["label"] = d[key].data["label"];
-							d[key]["value"] = d[key].data[d.key];
-						}
-					});
-
-					return d;
+					return addLabelsAndValueToData(d);
 				})
 				.enter()
 					.append("rect")
@@ -110,39 +100,13 @@ export class StackedBarChart extends BaseAxisChart {
 
 		const rect = g.selectAll("rect.bar")
 			.data(function(d) {
-				// Add datasetLabel to each piece of data
-				// To be used to get the fill color
-				Object.keys(d).map(key => {
-					if (typeof d[key] === "object") {
-						d[key]["datasetLabel"] = d.key;
-						d[key]["label"] = d[key].data["label"];
-						d[key]["value"] = d[key].data[d.key];
-					}
-				});
-
-				return d;
+				return addLabelsAndValueToData(d);
 			});
 
 		this.updateElements(true, g.selectAll("rect.bar"), g);
 
-		g.enter()
-			.append("g")
-			.classed("bars", true)
-			.selectAll("rect")
-			.data(function(d) {
-				// Add datasetLabel to each piece of data
-				// To be used to get the fill color
-				Object.keys(d).map(key => {
-					if (typeof d[key] === "object") {
-						d[key]["datasetLabel"] = d.key;
-						d[key]["label"] = d[key].data["label"];
-						d[key]["value"] = d[key].data[d.key];
-					}
-				});
-
-				return d;
-			})
-			.enter()
+		const addRect = (selection) => {
+			selection.enter()
 				.append("rect")
 				.classed("bar", true)
 				.attr("x", d => this.x(d.data.label))
@@ -156,8 +120,25 @@ export class StackedBarChart extends BaseAxisChart {
 				.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.data.label) : null)
 				.attr("stroke-width", Configuration.bars.default.strokeWidth)
 				.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
+		};
+
+		const rectsToAdd = g.enter()
+			.append("g")
+			.classed("bars", true)
+			.selectAll("rect")
+			.data(function(d) {
+				return addLabelsAndValueToData(d);
+			});
+
+		addRect(rectsToAdd);
+		addRect(rect);
 
 		g.exit()
+			.transition(this.getDefaultTransition())
+			.style("opacity", 0)
+			.remove();
+
+		rect.exit()
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
@@ -215,3 +196,17 @@ export class StackedBarChart extends BaseAxisChart {
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
 	}
 }
+
+const addLabelsAndValueToData = (d) => {
+	// Add datasetLabel to each piece of data
+	// To be used to get the fill color
+	Object.keys(d).map(key => {
+		if (typeof d[key] === "object") {
+			d[key]["datasetLabel"] = d.key;
+			d[key]["label"] = d[key].data["label"];
+			d[key]["value"] = d[key].data[d.key];
+		}
+	});
+
+	return d;
+};
