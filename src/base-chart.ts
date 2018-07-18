@@ -1,62 +1,186 @@
 import * as d3 from "d3";
 import { Configuration } from "./configuration";
 import { Tools } from "./tools";
-import { local } from "d3";
+import PatternsService from "./services/patterns";
+
+// TODO - Use submodule
+// import { position } from "../node_modules/@peretz/neutrino/common/position.service";
 
 export class BaseChart {
 	static chartCount = 1;
 
-	//#region
 	id = "";
+	chartContainerID = "";
+
+	// Chart element references
 	container: any;
 	holder: Element;
 	svg: any;
-	resizeTimers = [];
-	options: any = {
-		xDomain: [],
-		yDomain: [],
-		y2Domain: [],
-		yTicks: 5,
-		y2Ticks: 10,
-		legendClickable: true,
-		containerResizable: true,
-		type: "basic",
-		colors: [
-			"#009BEF",
-			"#95D13C",
-			"#785EF0",
-			"#F87EAC",
-			"#FFB000",
-			"#00B6CB",
-			"#FF5C49",
-			"#047CC0",
-			"#FE8500",
-			"#5A3EC8",
-			"#40D5BB",
-			"#FF509E"
-		]
+	innerWrap: any;
+
+	options: any = Object.assign({}, Configuration.options.BASE);
+
+	// Data
+	data: any;
+	displayData: any;
+
+	// Fill scales & fill related objects
+	patternScale = {};
+	colorScale = {};
+	patternsService: PatternsService;
+
+	// Event target
+	events: any;
+	eventHandlers = {
+		tooltips: null
 	};
 
-	data: any;
-	constructor(holder: Element, options?: any, data?: any) {
+	constructor(holder: Element, configs: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
 
 		this.holder = holder;
 
 		const {chartId, container} = this.setChartIDContainer();
 		this.container = container;
+		this.chartContainerID = chartId;
 
+		if (configs.options) {
+			this.options = Object.assign({}, this.options, configs.options);
 
-		if (options) {
-			this.options = Object.assign(this.options, options);
+			if (this.options.containerResizable) {
+				this.resizeWhenContainerChange();
+			}
 		}
 
-		if (data) {
-			this.data = data;
+		this.events = document.createDocumentFragment();
+
+		if (configs.data) {
+			this.setData(configs.data);
 		}
 	}
 
-	getActualChartSize(container = this.container) {
+
+	setData(data: any) {
+		const { selectors } = Configuration;
+		const innerWrapElement = this.holder.querySelector(selectors.INNERWRAP);
+		const initialDraw = innerWrapElement === null;
+		const newDataIsAPromise = Promise.resolve(data) === data;
+
+		// Dispatch the update event
+		this.events.dispatchEvent(new Event("data-change"));
+
+		if (initialDraw || newDataIsAPromise) {
+			this.updateOverlay().show();
+		}
+
+		// Hide current showing tooltip
+		if (!initialDraw) {
+			this.hideTooltip();
+		}
+
+		Promise.resolve(data).then(value => {
+			// Dispatch the update event
+			this.events.dispatchEvent(new Event("data-load"));
+
+			// Process data
+			// this.data = this.dataProcessor(Tools.clone(value));
+			this.data = Tools.clone(value);
+			this.displayData = this.dataProcessor(Tools.clone(value));
+
+			const keys = this.getKeysFromData();
+
+			// Grab the old legend items, the keys from the current data
+			// Compare the two, if there are any differences (additions/removals)
+			// Completely remove the legend and render again
+			const oldLegendItems = this.getActiveLegendItems();
+			const keysArray = Object.keys(keys);
+			const { missing: removedItems, added: newItems } = Tools.arrayDifferences(oldLegendItems, keysArray);
+
+			// Update keys for legend use the latest data keys
+			this.options.keys = keys;
+
+			// Set the color scale based on the keys present in the data
+			this.setColorScale();
+
+			// Add patterns to page, set pattern scales
+			if (this.options.accessibility) {
+				this.setPatterns();
+			}
+
+			// Perform the draw or update chart
+			if (initialDraw) {
+				this.initialDraw();
+			} else {
+				if (removedItems.length > 0 || newItems.length > 0) {
+					this.addOrUpdateLegend();
+				}
+
+				this.update();
+			}
+		});
+	}
+
+	getKeysFromData() {
+		const { datasets } = this.displayData;
+		const keys = {};
+
+		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
+			// Build out the keys array of objects to represent the legend items
+			this.displayData.labels.forEach(label => {
+				keys[label] = Configuration.legend.items.status.ACTIVE;
+			});
+		} else {
+			this.displayData.datasets.forEach(dataset => {
+				keys[dataset.label] = Configuration.legend.items.status.ACTIVE;
+			});
+		}
+
+		// Apply disabled legend items from previous data
+		// That also are applicable to the new data
+		const disabledLegendItems = this.getDisabledLegendItems();
+		Object.keys(keys).forEach(key => {
+			if (disabledLegendItems.indexOf(key) !== -1) {
+				keys[key] = Configuration.legend.items.status.DISABLED;
+			}
+		});
+
+		return keys;
+	}
+
+	getLegendType() {
+		const { datasets } = this.displayData;
+
+		// TODO - Support the labels based legend for line chart
+		if (this.options.type === "line") {
+			return Configuration.legend.basedOn.SERIES;
+		} else if (datasets.length === 1 && datasets[0].backgroundColors.length > 1) {
+			return Configuration.legend.basedOn.LABELS;
+		} else {
+			return Configuration.legend.basedOn.SERIES;
+		}
+	}
+
+	setPatterns() {
+		// Accessibility & patterns
+		this.patternsService = new PatternsService();
+		this.patternsService.addPatternSVGs(this.displayData, this.colorScale, this.chartContainerID, this.getLegendType());
+
+		const patternURLs = this.patternsService.getFillValues();
+		Object.keys(patternURLs).forEach(datasetLabel => {
+			this.patternScale[datasetLabel] = d3.scaleOrdinal()
+				.range(patternURLs[datasetLabel])
+				.domain(this.getLegendItemKeys());
+		});
+	}
+
+	setColorScale() {
+		this.displayData.datasets.forEach(dataset => {
+			this.colorScale[dataset.label] = d3.scaleOrdinal().range(dataset.backgroundColors).domain(this.displayData.labels);
+		});
+	}
+
+	// TODO - Refactor
+	getChartSize(container = this.container) {
 		const noAxis = this.options.type === "pie" || this.options.type === "donut";
 
 		let ratio, marginForLegendTop;
@@ -75,15 +199,15 @@ export class BaseChart {
 
 		// Store computed actual size, to be considered for change if chart does not support axis
 		const marginsToExclude = noAxis ? 0 : (Configuration.charts.margin.left + Configuration.charts.margin.right);
-		const computedActualSize = {
+		const computedChartSize = {
 			height: container.node().clientHeight - marginForLegendTop,
 			width: (container.node().clientWidth - marginsToExclude - moreForY2Axis) * ratio
 		};
 
 		// If chart is of type pie or donut, width and height should equal to the min of the width and height computed
 		if (noAxis) {
-			let maxSizePossible = Math.min(computedActualSize.height, computedActualSize.width);
-			maxSizePossible = Math.max(maxSizePossible, 100);
+			let maxSizePossible = Math.min(computedChartSize.height, computedChartSize.width);
+			maxSizePossible = Math.max(maxSizePossible, Configuration.pie.minWidth);
 
 			return {
 				height: maxSizePossible,
@@ -91,29 +215,7 @@ export class BaseChart {
 			};
 		}
 
-		return computedActualSize;
-	}
-
-	getXKeys() {
-		let keys: any;
-
-		const activeSeries = this.getActiveDataSeries();
-		if (this.options.dimension) {
-			const newKeys = <any>[];
-			this.data.forEach(d => {
-				if (!newKeys.includes(d[this.options.dimension])) {
-					newKeys.push(d[this.options.dimension]);
-				}
-			});
-			keys = newKeys;
-		} else if (this.options.y2Domain) {
-			keys = this.options.yDomain.concat(this.options.y2Domain);
-			keys = activeSeries.length > 0 ? activeSeries : keys;
-		} else {
-			keys = this.options.yDomain;
-			keys = activeSeries.length > 0 ? activeSeries : keys;
-		}
-		return keys;
+		return computedChartSize;
 	}
 
 	/*
@@ -125,33 +227,19 @@ export class BaseChart {
 		this.container.selectAll(".label-tooltip").remove();
 	}
 
-	/*
-	 * either creates or updates the chart
-	 */
-	redrawChart(data?: any) {
-		if (!data) {
-			this.updateChart();
-		} else {
-			this.removeChart();
-			this.drawChart(data);
-		}
-	}
-
 	setSVG(): any {
-		const chartSize = this.getActualChartSize();
+		const chartSize = this.getChartSize();
 		this.svg = this.container.append("svg")
-			.attr("class", "chart-svg")
-			.append("g")
-			.attr("class", "inner-wrap");
-		this.svg.append("g")
-			.attr("class", "y axis")
-			.attr("transform", `translate(0, 0)`);
+			.classed("chart-svg", true);
+
+		this.innerWrap = this.svg.append("g")
+			.classed("inner-wrap", true);
 
 		return this.svg;
 	}
 
 	updateSVG() {
-		const chartSize = this.getActualChartSize();
+		const chartSize = this.getChartSize();
 		this.svg.select(".x.axis")
 			.attr("transform", `translate(0, ${chartSize.height})`);
 		const grid = this.svg.select(".grid")
@@ -162,51 +250,29 @@ export class BaseChart {
 			.attr("transform", `translate(0, 0)`);
 	}
 
-	repositionSVG() {
-		const yAxisWidth = (this.container.select(".y.axis").node() as SVGGElement).getBBox().width;
-		this.container.style("padding-left", `${yAxisWidth}px`);
+	// Default fallback when no data processing is needed
+	dataProcessor(data: any) {
+		return data;
 	}
 
 	/*
-	 * creates the chart from scratch
-	 * should only be called once (or removeChart should be called before)
+	 * called when the chart needs to be drawn initially
 	 */
-	drawChart(data?: any) {
-		if (data) {
-			this.data = data;
-		}
-
-		console.warn("You should implement your own `drawChart()` function.");
+	initialDraw() {
+		console.warn("You should implement your own `initialDraw()` function.");
 	}
 
-	/*
-	 * called when the chart needs to be updated visually
-	 * similar to drawChart but it should work from the existing chart
-	 */
 	updateChart() {
-		console.warn("You should implement your own `updateChart() function.");
+		console.warn("You should implement your own `updateChart()` function.");
 	}
 
-	// TODO - Remove, doesn't seem like it's being used
-	//#endregion
-	// setResizeWhenContainerChange() {
-	// 	let containerWidth = this.holder.clientWidth;
-	// 	let containerHeight = this.holder.clientHeight;
-	// 	const intervalId = setInterval(() => {
-	// 		if (Math.abs(containerWidth - this.holder.clientWidth) > 20
-	// 		|| Math.abs(containerHeight - this.holder.clientHeight) > 20) {
-	// 			containerWidth = this.holder.clientWidth;
-	// 			containerHeight = this.holder.clientHeight;
-	// 			Tools.debounce(() => {
-	// 				window.clearTimeout(intervalId);
-	// 				d3.selectAll(".legend-tooltip").style("display", "none");
-	// 				this.redrawChart();
-	// 			}, 500)();
-	// 		}
-	// 	}, 800);
-	// 	this.resizeTimers.push(intervalId);
-	// 	return intervalId;
-	// }
+	resizeChart() {
+		console.warn("You should implement your own `resizeChart()` function.");
+	}
+
+	update(value?: any) {
+		console.warn("You should implement your own `update()` function.");
+	}
 
 	resizeWhenContainerChange() {
 		let containerWidth = this.holder.clientWidth;
@@ -216,13 +282,13 @@ export class BaseChart {
 				|| Math.abs(containerHeight - this.holder.clientHeight) > 1) {
 				containerWidth = this.holder.clientWidth;
 				containerHeight = this.holder.clientHeight;
+
 				d3.selectAll(".legend-tooltip").style("display", "none");
 
-				// Hide tooltips
 				this.hideTooltip();
-
-				this.updateChart();
+				this.resizeChart();
 			}
+
 			requestAnimationFrame(frame);
 		};
 		requestAnimationFrame(frame);
@@ -235,34 +301,27 @@ export class BaseChart {
 			d3.select(this).on("click", function() {
 				c.selectAll(".chart-tooltip").remove();
 				c.selectAll(".label-tooltip").remove();
-				self.updateLegend(this);
-				self.redrawChart();
+
+				// Only apply legend filters if there are more than 1 active legend items
+				const activeLegendItems = self.getActiveLegendItems();
+				const legendButton = d3.select(this);
+				const enabling = !legendButton.classed("active");
+
+				// If there are more than 1 active legend items & one is getting toggled on
+				if (activeLegendItems.length > 1 || enabling) {
+					self.updateLegend(this);
+					self.applyLegendFilter(legendButton.select("text").text());
+				}
+				// If there are 2 active legend items & one is getting toggled off
+				if (activeLegendItems.length === 2 && !enabling) {
+					c.selectAll(".legend-btn.active").classed("not-allowed", true);
+				}
+
+				if (activeLegendItems.length === 1 && enabling) {
+					c.selectAll(".legend-btn.not-allowed").classed("not-allowed", false);
+				}
 			});
 		});
-	}
-
-	setClickableLegendInTooltip() {
-		const self = this;
-		const c = d3.select(this.container);
-		const tooltip = c.select(".legend-tooltip-content");
-		tooltip.selectAll(".legend-btn").each(function() {
-			d3.select(this).on("click", function() {
-				self.updateLegend(this);
-				self.redrawChart();
-			});
-		});
-	}
-
-	getActiveDataSeries() {
-		const activeSeries = [];
-		let c = this.container;
-		if (c.selectAll(".legend-tooltip").nodes().length > 0) {
-			c = c.select(".legend-tooltip");
-		}
-		c.selectAll(".legend-btn").filter(".active").each(function() {
-			activeSeries.push(d3.select(this).select("text").text());
-		});
-		return activeSeries;
 	}
 
 	setChartIDContainer() {
@@ -271,6 +330,7 @@ export class BaseChart {
 		if (parent.select(".chart-wrapper").nodes().length > 0) {
 			container = parent.select(".chart-wrapper");
 			chartId = container.attr("chart-id");
+
 			container.selectAll(".chart-svg").remove();
 		} else {
 			chartId = this.id;
@@ -286,47 +346,72 @@ export class BaseChart {
 	}
 
 	resetOpacity() {
-		const svg = d3.selectAll("svg");
-		svg.selectAll("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		const svg = d3.selectAll("svg.chart-svg");
 		svg.selectAll("path").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
-		svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
+		svg.selectAll("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		svg.selectAll("circle")
+			.attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
 			.attr("fill", Configuration.charts.resetOpacity.circle.fill);
-		svg.selectAll("rect").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
+		svg.selectAll("rect")
+			.attr("fill-opacity", Configuration.charts.resetOpacity.opacity)
+			.attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 	}
 
 	reduceOpacity(exception) {
-		this.svg.selectAll("rect").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
-		this.svg.selectAll("path").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
-		this.svg.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
-		this.svg.selectAll("circle").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+		this.svg.selectAll("rect, path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
+		this.svg.selectAll("rect, path").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+
+		const exceptedElement = d3.select(exception);
+		const exceptedElementData = exceptedElement.datum() as any;
 		d3.select(exception).attr("fill-opacity", false);
-		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 		d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
-		d3.select(exception).attr("fill", d3.select(exception).attr("stroke"));
+		d3.select(exception).attr("fill", (d: any) => this.getFillScale()[d.datasetLabel](exceptedElementData.label));
 	}
 
+	// ================================================================================
 	// Legend
+	// ================================================================================
 	getLegendItems() {
-		let legendItems = [];
-		if (this.options.dimension) {
-			const newKeys = <any>[];
-			this.data.forEach(d => {
-				if (!newKeys.includes(d[this.options.dimension])) {
-					newKeys.push(d[this.options.dimension]);
-				}
-			});
-			legendItems = newKeys;
-		} else if (this.options.y2Domain) {
-			legendItems = this.options.yDomain.concat(this.options.y2Domain);
-		} else {
-			legendItems = this.options.yDomain;
+		let legendItems = {};
+		if (this.options.keys) {
+			legendItems = this.options.keys;
 		}
+
 		return legendItems;
+	}
+
+	getLegendItemArray() {
+		const legendItems = this.getLegendItems();
+		const legendItemKeys = Object.keys(legendItems);
+
+		return legendItemKeys.map(key => ({
+			key,
+			value: legendItems[key]
+		}));
+	}
+
+	getLegendItemKeys() {
+		return Object.keys(this.getLegendItems());
+	}
+
+	getDisabledLegendItems() {
+		const legendItems = this.getLegendItems();
+		const legendItemKeys = Object.keys(legendItems);
+
+		return legendItemKeys.filter(itemKey => legendItems[itemKey] === Configuration.legend.items.status.DISABLED);
+	}
+
+	getActiveLegendItems() {
+		const legendItems = this.getLegendItems();
+		const legendItemKeys = Object.keys(legendItems);
+
+		return legendItemKeys.filter(itemKey => legendItems[itemKey] === Configuration.legend.items.status.ACTIVE);
 	}
 
 	updateLegend(legend) {
 		const thisLegend = d3.select(legend);
 		const circle = d3.select(legend).select(".legend-circle");
+
 		thisLegend.classed("active", !thisLegend.classed("active"));
 		if (thisLegend.classed("active")) {
 			circle.style("background-color", circle.style("border-color"))
@@ -335,9 +420,9 @@ export class BaseChart {
 				.style("border-width", Configuration.legend.active.borderWidth);
 		} else {
 			circle.style("border-color", circle.style("background-color"))
-			.style("background-color", Configuration.legend.inactive.backgroundColor)
-			.style("border-style", Configuration.legend.inactive.borderStyle)
-			.style("border-width", Configuration.legend.inactive.borderWidth);
+				.style("background-color", Configuration.legend.inactive.backgroundColor)
+				.style("border-style", Configuration.legend.inactive.borderStyle)
+				.style("border-width", Configuration.legend.inactive.borderWidth);
 		}
 	}
 
@@ -345,21 +430,43 @@ export class BaseChart {
 		if (this.container.select(".legend-tooltip").nodes().length > 0) {
 			return;
 		}
-		const legendItems = this.getLegendItems();
-		const legend = this.container.select(".legend")
+
+		const legendItemsArray = this.getLegendItemArray();
+		const legendItems = this.container.select(".legend")
 			.attr("font-size", Configuration.legend.fontSize)
-			.selectAll("div")
-			.data(legendItems)
-			.enter().append("li")
-				.attr("class", "legend-btn active");
+			.selectAll("li.legend-btn")
+			.data(legendItemsArray, d => d.key);
 
-		legend.append("div")
-			.attr("class", "legend-circle")
-			.style("background-color", (d, i) => this.options.colors[i]);
+		legendItems.exit()
+			.remove();
+
+		const legendEnter = legendItems.enter()
+			.append("li")
+			.attr("class", "legend-btn active");
+
+		legendEnter.append("div")
+			.attr("class", "legend-circle");
+
+		legendEnter.append("text");
+
+		legendEnter.selectAll("text")
+			.merge(legendItems.selectAll("text"))
+			.text(d => d.key);
+
+		legendEnter.select("div")
+			.merge(legendItems.selectAll("div"))
+			.style("background-color", (d, i) => {
+				if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
+					return this.colorScale[this.displayData.datasets[0].label](d.key);
+				} else if (d.value === Configuration.legend.items.status.ACTIVE) {
+						return this.colorScale[d.key]();
+				}
+
+				return "white";
+			});
+
+		// Add hover effect for legend item circles
 		this.addLegendCircleHoverEffect();
-
-		legend.append("text")
-			.text(d => d);
 	}
 
 	positionLegend() {
@@ -367,7 +474,7 @@ export class BaseChart {
 			&& this.container.select(".legend-tooltip").node().style.display === "block") { return; }
 
 		this.container.selectAll(".legend-btn").style("display", "inline-block");
-		const svgWidth = this.container.select(".inner-wrap").node().getBBox().width;
+		const svgWidth = this.container.select("g.inner-wrap").node().getBBox().width;
 		if (this.isLegendOnRight()) {
 			this.container.selectAll(".expand-btn").remove();
 			this.container.select(".legend-wrapper").style("height", 0);
@@ -395,6 +502,15 @@ export class BaseChart {
 				this.addTooltipOpenButtonToLegend();
 			}
 		}
+	}
+
+	addOrUpdateLegend() {
+		this.addLegend();
+		if (this.options.legendClickable) {
+			this.setClickableLegend();
+		}
+
+		this.positionLegend();
 	}
 
 	addLegendCircleHoverEffect() {
@@ -429,6 +545,37 @@ export class BaseChart {
 		);
 	}
 
+	/**
+	 *
+	 * When a legend item is clicked, apply/remove the appropriate filter
+	 * @param {string} changedLabel The label of the legend element the user clicked on
+	 * @memberof PieChart
+	 */
+	applyLegendFilter(changedLabel: string) {
+		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
+		const oldStatus = this.options.keys[changedLabel];
+
+		this.options.keys[changedLabel] = (oldStatus === ACTIVE ? DISABLED : ACTIVE);
+
+		this.update();
+	}
+
+	setClickableLegendInTooltip() {
+		const self = this;
+		const c = d3.select(this.container);
+		const tooltip = c.select(".legend-tooltip-content");
+		tooltip.selectAll(".legend-btn").each(function() {
+			d3.select(this).on("click", function() {
+				self.updateLegend(this);
+
+				// TODO - setClickableLegendInTooltip()
+			});
+		});
+	}
+
+	// ================================================================================
+	// Tooltips
+	// ================================================================================
 	addTooltipOpenButtonToLegend() {
 		const self = this;
 		const thisLegend = this.container.select(".legend");
@@ -440,7 +587,10 @@ export class BaseChart {
 			});
 	}
 
+	// TODO - Refactor
 	openLegendTooltip(target) {
+		const self = this;
+
 		d3.selectAll(".legend-tooltip").remove();
 		const mouseXPoint = d3.mouse(this.container.node())[0];
 		const windowXPoint = d3.event.x;
@@ -463,35 +613,89 @@ export class BaseChart {
 					d3.selectAll(".legend-tooltip").style("display", "none");
 				});
 
+			const activeLegendItems = this.getActiveLegendItems();
 			const legendContent = d3.select(".legend-tooltip-content")
 				.attr("font-size", Configuration.legend.fontSize)
 				.selectAll("div")
-				.data(this.getLegendItems())
-				.enter().append("li")
-				.attr("class", "legend-btn active")
-				.on("click", (clickedItem) => {
-					this.updateLegend(d3.event.currentTarget);
-					this.redrawChart();
-				});
+				.data(this.getLegendItemArray(), (d: any) => d.key)
+				.enter()
+					.append("li")
+					.classed("legend-btn", true)
+					.classed("active", d => d.value === Configuration.legend.items.status.ACTIVE)
+					.classed("not-allowed", d => activeLegendItems.length === 1 && d.value === Configuration.legend.items.status.ACTIVE)
+					.on("click", (clickedItem, e) => {
+						const legendButton = d3.select(d3.event.currentTarget);
+						const enabling = !legendButton.classed("active");
+
+						if (activeLegendItems.length > 1 || enabling) {
+							this.updateLegend(d3.event.currentTarget);
+
+							this.applyLegendFilter(clickedItem.key);
+
+							this.container.selectAll("ul.legend li.legend-btn")
+								.data(this.getLegendItemArray(), (d: any) => d.key)
+								.classed("active", d => d.value === Configuration.legend.items.status.ACTIVE)
+								.select("div.legend-circle")
+								.style("background-color", (d, i) => {
+									if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
+										return this.colorScale[this.displayData.datasets[0].label](d.key);
+									} else if (d.value === Configuration.legend.items.status.ACTIVE) {
+										return this.colorScale[d.key]();
+									}
+
+									return "white";
+								})
+								.style("border-color", function(d) {
+									if (self.getLegendType() === Configuration.legend.basedOn.LABELS) {
+										return self.colorScale[self.displayData.datasets[0].label](d.key);
+									} else {
+										return self.colorScale[d.key]();
+									}
+								})
+								.style("border-style", Configuration.legend.inactive.borderStyle)
+								.style("border-width", Configuration.legend.inactive.borderWidth);
+						}
+
+						// If there are 2 active legend items & one is getting toggled off
+						if (activeLegendItems.length === 2 && !enabling) {
+							this.container.selectAll(".legend-btn.active").classed("not-allowed", true);
+						}
+
+						if (activeLegendItems.length === 1 && enabling) {
+							this.container.selectAll(".legend-btn.not-allowed").classed("not-allowed", false);
+						}
+					});
 
 			legendContent.append("div")
 				.attr("class", "legend-circle")
-				.style("background-color", (d, i) => this.options.colors[i]);
+				.style("background-color", (d, i) => {
+					if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
+						return this.colorScale[this.displayData.datasets[0].label](d.key);
+					} else if (d.value === Configuration.legend.items.status.ACTIVE) {
+						return this.colorScale[d.key]();
+					}
+
+					return "white";
+				})
+				.style("border-color", function(d) {
+					if (self.getLegendType() === Configuration.legend.basedOn.LABELS) {
+						return self.colorScale[self.displayData.datasets[0].label](d.key);
+					} else {
+						return self.colorScale[d.key]();
+					}
+				})
+				.style("border-style", Configuration.legend.inactive.borderStyle)
+				.style("border-width", Configuration.legend.inactive.borderWidth);
 			this.addLegendCircleHoverEffect();
 
 			legendContent.append("text")
-				.text(d => "" + d);
+				.text(d => d.key);
 		}
 
-		if (window.innerWidth - (windowXPoint + Configuration.tooltip.width) < 0) {
-			tooltip.classed("arrow-right", true);
-			tooltip.append("div").attr("class", "arrow");
-			tooltip.style("left", `${mouseXPoint - Configuration.tooltip.width - Configuration.tooltip.arrowWidth}px`);
-		} else {
-			tooltip.classed("arrow-left", true);
-			tooltip.append("div").attr("class", "arrow");
-			tooltip.style("left", `${mouseXPoint + Configuration.tooltip.arrowWidth}px`);
-		}
+		// Position the tooltip
+		tooltip.classed("arrow-right", true);
+		tooltip.append("div").attr("class", "arrow");
+		tooltip.style("left", `${mouseXPoint - Configuration.tooltip.width - Configuration.tooltip.arrowWidth}px`);
 	}
 
 	showLabelTooltip(d, leftSide) {
@@ -528,25 +732,30 @@ export class BaseChart {
 	}
 
 	addTooltipEventListeners(tooltip: any) {
+		this.eventHandlers.tooltips = (evt: Event) => {
+			const targetTagName = evt.target["tagName"];
+			const targetsToBeSkipped = ["rect", "circle", "path"];
+
+			// If keyboard event
+			if (evt["key"]) {
+				if (evt["key"] === "Escape" || evt["key"] === "Esc") {
+					this.hideTooltip();
+				}
+			} else if (targetsToBeSkipped.indexOf(targetTagName) === -1) {
+				// If mouse event
+				this.hideTooltip();
+			}
+		};
+
 		// Apply the event listeners to close the tooltip
 		// setTimeout is there to avoid catching the click event that opened the tooltip
 		setTimeout(() => {
 			// When ESC is pressed
-			window.onkeydown = (evt: KeyboardEvent) => {
-				if ("key" in evt && evt.key === "Escape" || evt.key === "Esc") {
-					this.hideTooltip();
-				}
-			};
+			window.addEventListener("keydown", this.eventHandlers.tooltips);
 
+			// TODO - Don't bind on window
 			// If clicked outside
-			window.onclick = (evt: MouseEvent) => {
-				const targetTagName = evt.target["tagName"];
-				const targetsToBeSkipped = ["rect", "circle", "path"];
-
-				if (targetsToBeSkipped.indexOf(targetTagName) === -1) {
-					this.hideTooltip();
-				}
-			};
+			this.holder.addEventListener("click", this.eventHandlers.tooltips);
 
 			// Stop clicking inside tooltip from bubbling up to window
 			tooltip.on("click", () => {
@@ -556,35 +765,79 @@ export class BaseChart {
 	}
 
 	removeTooltipEventListeners() {
+		// TODO - Don't bind on window
 		// Remove eventlistener to close tooltip when ESC is pressed
-		window.onkeydown = null;
+		window.removeEventListener("keydown", this.eventHandlers.tooltips);
+
 		// Remove eventlistener to close tooltip when clicked outside
-		window.onclick = null;
+		this.holder.removeEventListener("click", this.eventHandlers.tooltips);
 	}
 
-	showTooltip(d) {
-		let tooltipHTML = "";
+	showTooltip(d, clickedElement) {
+		// Rest opacity of all elements in the chart
 		this.resetOpacity();
+
+		// Remove existing tooltips on the page
+		// TODO - Update class to not conflict with other elements on page
 		d3.selectAll(".tooltip").remove();
+
+		// Draw tooltip
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
-			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px")
-			.style("border-color", d.color);
+			.style("border-color", this.colorScale[d.datasetLabel](d.label))
+			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
+
+		// Add close button to tooltip
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				this.hideTooltip();
 			});
-		const dVal = d.formatter && d.formatter[d.series] ? d.formatter[d.series](d.value.toLocaleString()) : d.value.toLocaleString();
-		if (d.xAxis && d.xAxis.length > 0) {
-			tooltipHTML += "<b>" + d.xAxis + ": </b>" + d.key + "<br/>";
+
+		let tooltipHTML = "";
+		const formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString("en");
+		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
+			tooltipHTML += `
+				<b>${d.label}:</b> ${formattedValue}<br/>
+			`;
+		} else {
+			tooltipHTML += `
+				${d.label}<br/>
+				<b>${d.datasetLabel}:</b> ${formattedValue}<br/>
+			`;
 		}
-		if (d.series && !d.dimension) {
-			tooltipHTML += "<b>" + d.series + ": </b>" + dVal + "<br/>";
-		}
-		if (d.dimension) {
-			tooltipHTML += "<b>" + d.dimension + ": </b>" + d.dimVal + "<br/><b>" + d.valueName + ": </b>" + d.value;
-		}
+
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
+
+		// TODO - Tooltip auto-position using Neutrino utils
+		// const getOffset = element => {
+		// 	const boundingRect = element.getBoundingClientRect();
+		// 	const htmlElement = document.documentElement;
+
+		// 	return {
+		// 		top: boundingRect.top + window.pageYOffset - htmlElement.clientTop,
+		// 		left: boundingRect.left + window.pageXOffset - htmlElement.clientLeft
+		// 	};
+		// };
+
+		// const clickedElementDimensions = clickedElement.getBoundingClientRect();
+		// const clickedElementOffsets = getOffset(clickedElement);
+		// const triggerElement = d3.select(document.body)
+		// 	.append("div")
+		// 	.style("position", "absolute")
+		// 	.style("top", clickedElementOffsets.top + "px")
+		// 	.style("left", clickedElementOffsets.left + "px")
+		// 	.style("width", clickedElementDimensions.width + "px")
+		// 	.style("height", clickedElementDimensions.height + "px");
+
+		// const tooltipPosition = position.findAbsolute(triggerElement.node() as HTMLElement, tooltip.node() as HTMLElement, "right");
+		// console.log(tooltipPosition);
+
+		// tooltip.style("top", tooltipPosition.top + "px")
+		// 	.style("left", tooltipPosition.left + "px")
+		// 	// Programmatically set class for direction
+		// 	.classed("arrow-left", true);
+
+		// Draw tooltip arrow in the right direction
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
 			tooltip.classed("arrow-right", true);
 			tooltip.style(
@@ -601,18 +854,52 @@ export class BaseChart {
 		this.addTooltipEventListeners(tooltip);
 	}
 
-	// https://github.com/wbkd/d3-extended
-	moveToBack(element) {
-		return element.each(function() {
-			const firstChild = this.parentNode.firstChild;
-			if (firstChild) {
-				this.parentNode.insertBefore(this, firstChild);
-			}
-		});
+	getFillScale() {
+		return this.options.accessibility ? this.patternScale : this.colorScale;
 	}
-	moveToFront(element) {
-		return element.each(function() {
-			this.parentNode.appendChild(this);
-		});
+
+	getDefaultTransition() {
+		return d3.transition().duration(Configuration.transitions.default.duration);
+	}
+
+	getInstantTransition() {
+		return d3.transition().duration(0);
+	}
+
+	// Used to determine whether to use a transition for updating fill attributes in charting elements
+	// Will disable the transition if in accessibility mode
+	getFillTransition(animate?: boolean) {
+		return d3.transition().duration(animate === false ? 0 : Configuration.transitions.default.duration);
+	}
+
+	// ================================================================================
+	// Loading overlay
+	// ================================================================================
+	updateOverlay() {
+		const overlayElement = <HTMLElement>this.holder.querySelector("div.chart-overlay");
+
+		return {
+			show: () => {
+				// If overlay element has already been added to the chart container
+				// Just show it
+				if (overlayElement) {
+					overlayElement.style.display = "block";
+				} else {
+					const loadingOverlay = document.createElement("div");
+
+					loadingOverlay.classList.add("chart-overlay");
+					loadingOverlay.innerHTML = this.options.loadingOverlay.innerHTML;
+
+					this.holder.querySelector(Configuration.selectors.CHARTWRAPPER).appendChild(loadingOverlay);
+				}
+			},
+			hide: () => {
+				overlayElement.style.display = "none";
+			}
+		};
+	}
+
+	getBBox(selector: any) {
+		return this.innerWrap.select(selector).node().getBBox();
 	}
 }

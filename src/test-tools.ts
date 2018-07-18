@@ -33,30 +33,33 @@ export const removeChart = chartType => {
 
 export const inputAndProcessedDataMatch = (chartObj, inputData) => {
 	// Gather all pieces of processed data for every type of chart
-	const processedDataPoints = chartObj.data.reduce((finalArray, dataPoint) => {
-		if (dataPoint.items) {
-			// this is the "Other" label, in Pie & Donut
-			dataPoint.items.map(item => finalArray.push(item));
+	// const processedDataPoints = chartObj.displayData.reduce((finalArray, dataPoint) => {
+	// 	if (dataPoint.items) {
+	// 		// this is the "Other" label, in Pie & Donut
+	// 		dataPoint.items.map(item => finalArray.push(item));
 
-			return finalArray;
-		}
+	// 		return finalArray;
+	// 	}
 
-		finalArray.push(dataPoint);
-		return finalArray;
-	}, []);
+	// 	finalArray.push(dataPoint);
+	// 	return finalArray;
+	// }, []);
 
-	let result = processedDataPoints.length === inputData.length;
-	if (result) {
-		processedDataPoints.forEach(dataPoint => {
-			// Check if every piece of data in the processed data array
-			// Contains every key-value pair from the input data provided to the chart
-			if (!dataPoint.containsKeysAndValuesFrom(inputData)) {
-				result = false;
-			}
-		});
-	}
+	// let result = processedDataPoints.length === inputData.length;
+	// if (result) {
+	// 	processedDataPoints.forEach(dataPoint => {
+	// 		console.log("datapoint", dataPoint);
 
-	return result;
+	// 		// Check if every piece of data in the processed data array
+	// 		// Contains every key-value pair from the input data provided to the chart
+	// 		if (!dataPoint.containsKeysAndValuesFrom(inputData)) {
+	// 			result = false;
+	// 		}
+	// 	});
+	// }
+
+	// TODO - Implement Deeper check
+	return chartObj.displayData.datasets.length === inputData.datasets.length;
 };
 
 // Objects/data

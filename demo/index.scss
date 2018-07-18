@@ -2,7 +2,10 @@ $default_transition: all .1s ease-out;
 
 @import "../node_modules/prismjs/themes/prism.css";
 
-html, body { margin: 0; }
+html,
+body {
+	margin: 0;
+}
 
 header.m-demo-header {
 	margin-bottom: 20px;
@@ -62,6 +65,7 @@ header.m-demo-header {
 	overflow: hidden;
 	resize: both;
 	//
+	font-weight: 400;
 
 	h3 {
 		border-bottom: 1px solid lightgray;
@@ -76,6 +80,19 @@ header.m-demo-header {
 	&:last-child {
 		margin-bottom: 30px;
 	}
+
+	&.has-actions {
+		margin: auto;
+	}
+}
+
+.chart-demo-actions {
+	min-width: 300px;
+	max-width: 800px;
+	margin: auto;
+	background: #eff3f9;
+	margin-bottom: 30px;
+	padding: 30px;
 }
 
 .chart-title {
@@ -104,5 +121,24 @@ div.code {
 		pre.demo-code {
 			overflow: scroll;
 		}
+	}
+}
+
+// Matter styles
+ul.btn_menu {
+	display: none !important;
+
+	&.visible {
+		display: block !important;
+	}
+}
+
+svg.icon--white-sm {
+	* {
+		fill: white;
+	}
+
+	&.flipped-y {
+		transform: rotate(180deg);
 	}
 }

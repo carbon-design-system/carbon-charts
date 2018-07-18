@@ -17,20 +17,24 @@ module.exports = {
 		loaders: [
 			// all files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
 			{ test: /\.tsx?$/, loader: "ts-loader" },
-			{ test: /\.html?$/, loader: "html-loader" },
+			{ test: /\.html?$/, loaders: ["html-loader", "@peretz/icon-loader"] },
 			{
 				test: /\.s?css$/,
 				loaders: [
 					"style-loader",
-          "css-loader",
-          "postcss-loader",
-          "sass-loader"
-         ]
+					"css-loader",
+					"postcss-loader",
+					"sass-loader"
+				]
 			},
 			{
-	      test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
-	      loader: 'url-loader'
-	    }
+				test: /\.(jpg|png|gif|eot|ttf|woff|woff2)$/,
+				loader: 'url-loader'
+			},
+			{
+				test: /\.svg?$/,
+				loader: 'raw-loader'
+			}
 		]
 	},
 	plugins: [

@@ -1,16 +1,81 @@
 @import "~@peretz/matter/scss/_tools.scss";
 $default_transition: all .1s ease-out;
 
+@mixin fonts() {
+	font-family: "IBM Plex Sans", "Helvetica Neue for IBM", "Helvetica Neue", Arial, sans-serif;
+}
+
+// TODO - Nest all styles into the "chart-wrapper class
+
 .chart-wrapper {
 	width: 100%;
 	height: 100%;
 	position: relative;
+	@include fonts();
 
-	svg {
+	div.chart-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(256, 256, 256, 0.75);
+
+		span {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	// Chart elements
+	svg.chart-svg {
 		overflow: visible !important;
-		rect, circle {
+
+		/*
+		Axes
+		*/
+		g.yAxes.axis {
+			path.domain {
+				stroke: none;
+			}
+		}
+
+		g.x.axis {
+			path.domain {
+				stroke: #959595;
+				stroke-width: 2;
+			}
+		}
+
+		g.x.grid, g.y.grid {
+			g.tick line {
+				stroke: rgb(236, 238, 239);
+			}
+		}
+
+		rect, circle, path {
 			&:hover {
 				cursor: pointer;
+			}
+		}
+
+		path {
+			&.line {
+				fill: none;
+				stroke-width: 2;
+
+				&:hover {
+					cursor: default;
+				}
+			}
+		}
+
+		circle {
+			&.dot {
+				fill: #fff;
+				stroke-width: 2;
 			}
 		}
 	}
@@ -20,10 +85,12 @@ $default_transition: all .1s ease-out;
 		fill: m_color("gray", 60);
 		stroke: m_color("gray", 60);
 		stroke-width: .3;
+		@include fonts();
 
 		&.donut {
 			&-figure {
 				font-size: 24px;
+				font-weight: normal;
 				fill: m_color("gray", 60);
 			}
 
@@ -68,9 +135,15 @@ $default_transition: all .1s ease-out;
 		line-height: 20px;
 		font-size: 12px;
 		margin-bottom: 0;
+
+		&:hover {
+			cursor: pointer;
+		}
+
 		span {
 			display: inline;
 		}
+
 		text {
 			font-size: 12px;
 			max-width: 100px;
@@ -79,27 +152,36 @@ $default_transition: all .1s ease-out;
 			overflow: hidden;
 			display: inherit;
 		}
-	}
 
-	.legend-circle {
-		display: inherit;
-		height: 10px;
-		width: 10px;
-		-moz-border-radius: 50%;
-		border-radius: 50%;
-		margin: 0 5px 5px 15px;
-		box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		&:hover {
-			cursor: pointer;
+		.legend-circle {
+			display: inherit;
+			height: 10px;
+			width: 10px;
+			-moz-border-radius: 50%;
+			border-radius: 50%;
+			margin: 0 5px 5px 15px;
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+
+		&.not-allowed {
+			cursor: default;
+
+			.legend-circle:hover {
+				cursor: default;
+				box-shadow: none !important;
+			}
 		}
 	}
 
 	.legend-tooltip {
 		padding: 0;
 		border: none;
-		width: 200px;
 		.legend-tooltip-header {
 			background: #2D74DA;
 			color: white;
@@ -140,7 +222,7 @@ $default_transition: all .1s ease-out;
 		overflow: auto;
 		margin: 0;
 		max-width: 30%;
-		padding-left: 20px;
+		padding-left: 30px;
 		white-space: inherit;
 		text {
 			padding-left: 15px;
@@ -156,15 +238,41 @@ $default_transition: all .1s ease-out;
 			margin: 5px;
 		}
 	}
+
+	// TODO - Remove once loading bee animations are refactored
+	div.loading-bee {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+		svg {
+			width: 50px;
+			height: 50px;
+
+			g {
+				&.loading-bee_wing-1,
+				&.loading-bee_wing-2 {
+					display: none;
+				}
+			}
+		}
+
+		p.loadingBeeMessage {
+			margin-top: 10px;
+		}
+	}
 }
 
 .tooltip {
 	background-color: #FFFFFF;
 	box-shadow: 0 0 10px 0 rgba(0,0,0,0.16);
 	display: block;
+	@include fonts();
 	font-size: 12px;
 	position: absolute;
 	padding: 10px;
+	padding-right: 28px;
 	max-width: 200px;
 	word-wrap: break-word;
 	z-index: 1059;
@@ -230,19 +338,6 @@ $default_transition: all .1s ease-out;
 		&.bignum {
 			margin-top: 15px;
 			font-size: 27px;
-		}
-	}
-}
-
-.chart-tooltip {
-	width: 200px;
-}
-
-.pie-chart {
-	path {
-		transition: $default_transition;
-		&:hover {
-			cursor: pointer;
 		}
 	}
 }

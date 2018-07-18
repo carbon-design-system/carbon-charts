@@ -1,174 +1,208 @@
 import * as d3 from "d3";
+
 import { BaseAxisChart } from "./base-axis-chart";
 import { Configuration } from "./configuration";
 
 export class LineChart extends BaseAxisChart {
-	constructor(holder: Element, options?: any, data?: any) {
-		super(holder, options, data);
+	x: any;
+	y: any;
+
+	colorScale: any;
+
+	lineGenerator: any;
+
+	constructor(holder: Element, configs: any) {
+		super(holder, configs);
+
 		this.options.type = "line";
-		if (this.options.containerResizable) {
-			this.resizeWhenContainerChange();
-		}
+
+		const { line: margins } = Configuration.charts.margin;
+		// D3 line generator function
+		this.lineGenerator = d3.line()
+			.x((d, i) => this.x(this.displayData.labels[i]) + margins.left)
+			.y((d: any) => this.y(d))
+			.curve(d3[this.options.curve] || d3.curveLinear);
 	}
 
-	drawChart(data?: any) {
-		if (data) {
-			this.data = data;
-		}
+	addLabelsToDataPoints(d, index) {
+		const { labels } = this.displayData;
 
-		this.setSVG();
+		return d.data.map((datum, i) => ({
+			label: labels[i],
+			datasetLabel: d.label,
+			value: datum
+		}));
+	}
 
-		this.setXScale();
-		this.drawXAxis();
-		this.setYScale();
-		this.drawYAxis();
-		this.drawXGrid();
-		this.drawYGrid();
-		if (this.options.xDomain) {
-			this.addLegend();
-			if (this.options.legendClickable) {
-				this.setClickableLegend();
-			}
-		}
+	draw() {
+		this.innerWrap.style("width", "100%")
+			.style("height", "100%");
 
-		this.positionLegend();
-		this.repositionSVG();
-		this.draw();
+		const { line: margins } = Configuration.charts.margin;
+		const { scales } = this.options;
+
+		const chartSize = this.getChartSize();
+		const width = chartSize.width - margins.left - margins.right;
+		const height = chartSize.height - this.getBBox(".x.axis").height;
+
+		this.innerWrap.style("width", "100%")
+			.style("height", "100%");
+
+		this.innerWrap.attr("transform", `translate(${margins.left}, ${margins.top})`);
+
+		const gLines = this.innerWrap.selectAll("g.lines")
+			.data(this.displayData.datasets)
+			.enter()
+				.append("g")
+				.classed("lines", true);
+
+		gLines.append("path")
+			.attr("stroke", d => this.colorScale[d.label]())
+			.datum(d => d.data)
+			.attr("class", "line")
+			.attr("d", this.lineGenerator);
+
+		gLines.selectAll("circle.dot")
+			.data((d, i) => this.addLabelsToDataPoints(d, i))
+			.enter()
+				.append("circle")
+				.attr("class", "dot")
+				.attr("cx", d => this.x(d.label) + margins.left)
+				.attr("cy", d => this.y(d.value))
+				.attr("r", 4)
+				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+
+		// Hide the overlay
+		this.updateOverlay().hide();
+
+		// Dispatch the load event
+		this.events.dispatchEvent(new Event("load"));
+	}
+
+	interpolateValues(newData: any) {
+		const { line: margins } = Configuration.charts.margin;
+		const chartSize = this.getChartSize();
+		const width = chartSize.width - margins.left - margins.right;
+		const height = chartSize.height - this.getBBox(".x.axis").height;
+
+		// Apply new data to the lines
+		const gLines = this.innerWrap.selectAll("g.lines")
+			.data(newData.datasets);
+
+		this.updateElements(true, gLines);
+
+		// Add lines that need to be added now
+		const addedLineGroups = gLines.enter()
+			.append("g")
+			.classed("lines", true);
+
+		addedLineGroups.append("path")
+			.attr("stroke", d => this.colorScale[d.label]())
+			.datum(d => d.data)
+			.style("opacity", 0)
+			.transition(this.getDefaultTransition())
+			.style("opacity", 1)
+			.attr("class", "line")
+			.attr("d", this.lineGenerator);
+
+		// Add line circles
+		addedLineGroups.selectAll("circle.dot")
+			.data((d, i) => this.addLabelsToDataPoints(d, i))
+			.enter()
+				.append("circle")
+				.attr("class", "dot")
+				.attr("cx", (d, i) => this.x(d.label) + margins.left)
+				.attr("cy", (d: any) => this.y(d.value))
+				.attr("r", 4)
+				.style("opacity", 0)
+				.transition(this.getDefaultTransition())
+				.style("opacity", 1)
+				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+
+		// Remove lines that are no longer needed
+		gLines.exit()
+			.transition(this.getDefaultTransition())
+			.style("opacity", 0)
+			.remove();
+
+		// Add slice hover actions, and clear any slice borders present
 		this.addDataPointEventListener();
+
+		// Hide the overlay
+		this.updateOverlay().hide();
+
+		// Dispatch the update event
+		this.events.dispatchEvent(new Event("update"));
 	}
 
-	updateChart() {
-		if (this.svg) {
-			// update the root svg
-			this.updateSVG();
-			// these don't explicitly add elements, so they're "safe" to call
-			this.setXScale();
-			this.updateXAxis();
-			this.setYScale();
-			this.updateYAxis();
-			this.drawXGrid();
-			this.drawYGrid();
-			// update the actual chart
-			this.update();
+	updateElements(animate: boolean, gLines?: any) {
+		const { scales } = this.options;
 
-			this.repositionSVG();
-			this.positionLegend();
+		const chartSize = this.getChartSize();
+		const height = chartSize.height - this.getBBox(".x.axis").height;
+
+		if (!gLines) {
+			gLines = this.innerWrap.selectAll("g.lines");
 		}
-	}
 
-	update(yScale: d3.ScaleLinear<number, number> = this.yScale, activeSeries = this.getActiveDataSeries()) {
-		const dataList = this.data;
-		const lines = this.svg.selectAll(".lines");
-		const line = d3.line<any>()
-			.x(d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
-			.y(d => yScale(d.value));
-		const keys = activeSeries ? activeSeries : this.options.yDomain;
-		const allActiveSeries: any = this.getActiveDataSeries();
-		lines.selectAll(".line")
-			.select("path")
-			// filter to include just the relevant series (mostly useful for 2 axis charts)
-			.filter(d => keys.includes(d[0].series))
-			.attr("d", line);
-		// hide hidden series, and prevent them from being clicked
-		lines.selectAll("path").style("display", d => allActiveSeries.includes(d[0].series) ? "initial" : "none");
-		lines.selectAll("circle")
-			.filter(d => keys.includes(d.series))
-			.attr("cx", d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
-			.attr("cy", d => yScale(d.value));
-		lines.selectAll("circle").style("display", d => allActiveSeries.includes(d.series) ? "initial" : "none");
-	}
-
-	draw(yScale: d3.ScaleLinear<number, number> = this.yScale, activeSeries = this.getActiveDataSeries()) {
-		let keys: any;
-		let dataList = this.data;
-		if (this.options.dimension) {
-			const newKeys = <any>[];
-			dataList.forEach(d => {
-				if (!newKeys.includes(d[this.options.dimension])) {
-					newKeys.push(d[this.options.dimension]);
-				}
-			});
-			keys = newKeys;
-		} else if (this.options.y2Domain) {
-			keys = this.options.yDomain.concat(this.options.y2Domain);
-		} else {
-			keys = this.options.yDomain;
-		}
-		const color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
-		keys = activeSeries ? activeSeries : keys;
-		const line = d3.line<any>()
-			.x(d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
-			.y(d => yScale(d.value));
-		const lines = this.svg.append("g");
-		lines.attr("class", "lines");
-		keys.forEach(value => {
-			const series = value;
-			if (this.options.dimension) {
-				dataList = this.data.filter(d => d[this.options.dimension] === value);
-				value = this.options.yDomain[0];
-			}
-			const valueData = dataList.map(d => (<any>{
-				xAxis: this.options.xDomain,
-				key: d[this.options.xDomain],
-				series,
-				value: d[value],
-				valueName: value,
-				dimension: this.options.dimension,
-				dimVal: d[this.options.dimension],
-				formatter: this.options.yFormatter,
-				color: color(series)
-			}));
-			const lineGroup = lines.append("g");
-			lineGroup.attr("class", "line");
-			lineGroup.append("path")
-				.data([valueData])
-				.attr("fill", Configuration.lines.path.fill)
-				.attr("stroke", Configuration.lines.path.stroke)
-				.attr("stroke-linejoin", Configuration.lines.path.strokeLinejoin)
-				.attr("stroke-linecap", Configuration.lines.path.strokeLinecap)
-				.attr("stroke-width", Configuration.lines.path.strokeWidth)
-				.attr("d", line)
-				.style("stroke", color(series))
-				.style("opacity", 0)
-				.transition()
-				.duration(Configuration.lines.path.duration)
-				.style("opacity", 1);
-
-			lineGroup.selectAll("dot")
-				.data(valueData)
-				.enter().append("circle")
-				.attr("r", Configuration.lines.dot.r)
-				.attr("fill", Configuration.lines.dot.fill)
-				.attr("stroke", color(series))
-				.attr("stroke-width", Configuration.lines.dot.strokeWidth)
-				.attr("cx", d => this.xScale(d.key) + this.getActualChartSize().width / dataList.length / 2)
-				.attr("cy", d => yScale(d.value))
-				.style("opacity", 0)
-				.transition()
-				.duration(Configuration.lines.dot.duration)
-				.style("opacity", 1);
-		});
-	}
-
-	addDataPointEventListener() {
+		const transitionToUse = animate ? this.getFillTransition() : this.getInstantTransition();
 		const self = this;
-		this.svg.selectAll("circle")
-		.on("click", function(d) {
-			self.showTooltip(d);
-			self.reduceOpacity(this);
-		})
-		.on("mouseover", function(d) {
-			self.svg.append("circle").attr("class", Configuration.lines.mouseover.class)
-				.attr("r", Configuration.lines.mouseover.r)
-				.attr("fill", Configuration.lines.mouseover.fill)
-				.attr("stroke-width", Configuration.lines.mouseover.strokeWidth)
-				.attr("stroke", d.color)
-				.attr("stroke-opacity", Configuration.lines.mouseover.strokeOpacity)
-				.attr("cx", this.cx.baseVal.value)
-				.attr("cy", this.cy.baseVal.value);
-		})
-		.on("mouseout", function() {
-			self.svg.selectAll(`.${Configuration.lines.mouseover.class}`).remove();
-		});
+		gLines.selectAll("path.line")
+			.datum(function(d) {
+				const parentDatum = d3.select(this.parentNode).datum() as any;
+
+				return parentDatum.data;
+			})
+			.transition(transitionToUse)
+			.attr("stroke", function(d) {
+				const parentDatum = d3.select(this.parentNode).datum() as any;
+
+				return self.colorScale[parentDatum.label]();
+			})
+			.attr("class", "line")
+			.attr("d", this.lineGenerator);
+
+		const { line: margins } = Configuration.charts.margin;
+		gLines.selectAll("circle.dot")
+			.data(function(d, i) {
+				const parentDatum = d3.select(this).datum() as any;
+
+				return self.addLabelsToDataPoints(parentDatum, i);
+			})
+			.transition(transitionToUse)
+			.attr("cx", d => this.x(d.label) + margins.left)
+			.attr("cy", d => this.y(d.value))
+			.attr("r", Configuration.lines.points.strokeWidth)
+			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+	}
+
+	resizeChart() {
+		const chartSize: any = this.getChartSize(this.container);
+		const dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
+
+		// Resize the SVG
+		d3.select(this.holder).select("svg")
+				.attr("width", `${dimensionToUseForScale}px`)
+				.attr("height", `${dimensionToUseForScale}px`);
+
+		this.updateXandYGrid(true);
+		// Scale out the domains
+		this.setXScale(true);
+		this.setYScale();
+
+		// Set the x & y axis as well as their labels
+		this.setXAxis(true);
+		this.setYAxis(true);
+
+		this.updateElements(false, null);
+
+		super.resizeChart();
+	}
+
+	reduceOpacity(exception) {
+		super.reduceOpacity(exception);
+
+		this.innerWrap.selectAll("circle.dot").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 	}
 }

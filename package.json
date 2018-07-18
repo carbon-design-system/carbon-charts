@@ -1,6 +1,6 @@
 {
   "name": "@peretz/charts",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "WCE charts",
   "main": "demo.js",
   "scripts": {
@@ -22,10 +22,12 @@
   "author": "IBM",
   "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
+    "@peretz/neutrino": "^1.1.0",
     "d3": "^4.11.0",
     "prismjs": "^1.14.0"
   },
   "devDependencies": {
+    "@peretz/icon-loader": "0.0.4",
     "@peretz/matter": "1.1.0",
     "@types/d3": "^4.11.0",
     "@types/jasmine": "^2.8.7",

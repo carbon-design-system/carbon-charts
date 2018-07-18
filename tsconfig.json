@@ -17,7 +17,8 @@
 			"node", "jasmine"
 		],
 		"typeRoots": [
-			"./node_modules/@types"
+			"./node_modules/@types",
+			"./custom.d.ts"
 		]
 	},
 	"files": [

@@ -1,151 +1,209 @@
 import * as d3 from "d3";
+
 import { BaseAxisChart } from "./base-axis-chart";
+import { StackedBarChart } from "./stacked-bar-chart";
 import { Configuration } from "./configuration";
 
 export class BarChart extends BaseAxisChart {
-	constructor(holder: Element, options?: any, data?: any) {
-		super(holder, options, data);
+	x: any;
+	x1?: any;
+	y: any;
+	colorScale: any;
+
+	constructor(holder: Element, configs: any) {
+		// If this is a stacked bar chart, change the object prototype
+		if (configs.options.scales.y.stacked) {
+			return new StackedBarChart(holder, configs);
+		}
+
+		super(holder, configs);
 
 		this.options.type = "bar";
-		if (this.options.containerResizable) {
-			this.resizeWhenContainerChange();
-		}
 	}
 
-	drawChart(data?: any) {
-		if (data) {
-			this.data = data;
-		}
+	setXScale(noAnimation?: boolean) {
+		const { bar: margins } = Configuration.charts.margin;
 
-		this.setSVG();
-		if (this.options.xDomain) {
-			this.addLegend();
-			if (this.options.legendClickable) {
-				this.setClickableLegend();
-			}
-		}
+		const chartSize = this.getChartSize();
+		const width = chartSize.width - margins.left - margins.right;
 
-		this.setXScale();
-		this.drawXAxis();
-		this.setYScale();
-		this.drawYAxis();
-		this.drawXGrid();
-		this.drawYGrid();
+		this.x = d3.scaleBand().rangeRound([0, width]).padding(0.25);
+		this.x1 = d3.scaleBand().rangeRound([0, width]).padding(0.2);
 
-		this.positionLegend();
-		this.repositionSVG();
-		this.draw();
-		this.addDataPointEventListener();
-	}
-
-	updateChart() {
-		if (this.svg) {
-			// update the root svg
-			this.updateSVG();
-			// these don't explicitly add elements, so they're "safe" to call
-			this.setXScale();
-			this.updateXAxis();
-			this.setYScale();
-			this.updateYAxis();
-			this.drawXGrid();
-			this.drawYGrid();
-			// update the actual chart
-			this.update();
-
-			this.repositionSVG();
-			this.positionLegend();
-		}
-	}
-
-	update() {
-		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
-		if (yHeight <= 0) {
-			return;
-		}
-		let keys = this.getXKeys();
-		const activeSeries = this.getActiveDataSeries();
-		keys = activeSeries.length > 0 ? activeSeries : keys;
-		const x1 = this.options.xDomain.length > 0 ? this.getXDomain(keys, this.xScale) : this.xScale;
-		const color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
-		const bars = this.svg.select(".bars");
-		bars.selectAll("g")
-			.attr("transform", d => this.transformXDomain(this.options.xDomain, this.xScale(d[this.options.xDomain])));
-		bars.selectAll("g")
-			.selectAll("rect")
-			.attr("x", d => x1(d.series))
-			.attr("y", d => this.yScale(d.value))
-			.attr("height", d => yHeight - this.yScale(d.value))
-			.attr("width", x1.bandwidth())
-			.style("display", d => keys.includes(d.series) ? "initial" : "none");
+		this.x.domain(this.displayData.labels);
+		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
 	}
 
 	draw() {
-		const yHeight = this.getActualChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
-		if (yHeight <= 0) {
-			return;
-		}
-		let keys = this.getXKeys();
-		const activeSeries = this.getActiveDataSeries();
-		keys = activeSeries.length > 0 ? activeSeries : keys;
-		const x1 = this.options.xDomain.length > 0 ? this.getXDomain(keys, this.xScale) : this.xScale;
-		const color = d3.scaleOrdinal().range(this.options.colors).domain(keys);
-		const barGroup = this.svg.append("g");
-		barGroup.append("g")
-			.attr("class", "bars")
-			.selectAll("g")
-			.data(this.data)
-			.enter().append("g")
-			.attr("transform", d => this.transformXDomain(this.options.xDomain, this.xScale(d[this.options.xDomain])))
-			.selectAll("rect")
-			.data(d => keys.map((value, idx) => {
-				let series = value;
-				if (this.options.dimension) {
-					value = this.options.yDomain[0];
-					series = d[this.options.dimension];
-				}
-				return {
-					xAxis: this.options.xDomain,
-					key: d[this.options.xDomain],
-					value: d[value],
-					formatter: this.options.yFormatter,
-					dimension: this.options.dimension,
-					dimVal: d[this.options.dimension],
-					series,
-					valueName: value,
-					color: color(series)
-				};
-			}))
-			.enter().append("rect")
-			.attr("x", d => x1(d.series))
-			.attr("y", d => yHeight)
-			.attr("width", x1.bandwidth())
-			.attr("height", 0)
-			.attr("fill", d => d.color)
-			.transition()
-			.duration(1000)
-			.ease(d3.easePolyOut, 0.5)
-			.attr("y", d => this.yScale(d.value))
-			.attr("height", d => yHeight - this.yScale(d.value));
+		this.innerWrap.style("width", "100%")
+			.style("height", "100%");
+
+		const { bar: margins } = Configuration.charts.margin;
+
+		const chartSize = this.getChartSize();
+		const width = chartSize.width - margins.left - margins.right;
+		const height = chartSize.height - this.getBBox(".x.axis").height;
+
+		const gBars = this.innerWrap
+			.attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+			.append("g")
+			.classed("bars", true)
+			.attr("width", width);
+
+		gBars.selectAll("g")
+			.data(this.displayData.labels)
+			.enter()
+				.append("g")
+				.attr("transform", d => "translate(" + this.x(d) + ",0)")
+				.selectAll("rect.bar")
+				.data((d, index) => this.addLabelsToDataPoints(d, index))
+					.enter()
+						.append("rect")
+						.classed("bar", true)
+						.attr("x", d => this.x1(d.datasetLabel))
+						.attr("y", d => this.y(d.value))
+						.attr("width", this.x1.bandwidth())
+						.attr("height", d => height - this.y(d.value))
+						.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
+						.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.label) : null)
+						.attr("stroke-width", Configuration.bars.default.strokeWidth)
+						.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
+
+		// Hide the overlay
+		this.updateOverlay().hide();
+
+		// Dispatch the load event
+		this.events.dispatchEvent(new Event("load"));
 	}
 
-	addDataPointEventListener() {
-		const self = this;
-		this.svg.selectAll("rect")
-			.on("mouseover", function(d) {
-				d3.select(this)
-					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
-					.attr("stroke", d.color)
-					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
-			})
-			.on("mouseout", function() {
-				d3.select(this)
-					.attr("stroke-width", Configuration.bars.mouseout.strokeWidth)
-					.attr("stroke", "none")
-					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
-			})
-			.on("click", function(d) {
-				self.showTooltip(d);
-				self.reduceOpacity(this);
-			});
+	interpolateValues(newData: any) {
+		const { bar: margins } = Configuration.charts.margin;
+		const chartSize = this.getChartSize();
+		const width = chartSize.width - margins.left - margins.right;
+		const height = chartSize.height - this.getBBox(".x.axis").height;
+
+		// Apply new data to the bars
+		const g = this.innerWrap.select("g.bars")
+			.attr("width", width)
+			.selectAll("g")
+			.data(this.displayData.labels);
+
+		const rect = g.selectAll("rect.bar")
+			.data((d, index) => this.addLabelsToDataPoints(d, index));
+
+		this.updateElements(true, rect, g);
+
+		// Add bar groups that need to be added now
+		const addedBars = g.enter()
+			.append("g")
+			.classed("bars", true)
+			.attr("transform", d => "translate(" + this.x(d) + ",0)");
+
+		// Add bars that need to be added now
+		g.selectAll("rect.bar")
+			.data((d, index) => this.addLabelsToDataPoints(d, index))
+			.enter()
+			.append("rect")
+			.attr("class", "bar")
+			.attr("x", d => this.x1(d.datasetLabel))
+			.attr("y", d => this.y(d.value))
+			.attr("width", this.x1.bandwidth())
+			.attr("height", d => height - this.y(d.value))
+			.attr("opacity", 0)
+			.transition(this.getFillTransition())
+			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
+			.attr("opacity", 1)
+			.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
+			.attr("stroke-width", Configuration.bars.default.strokeWidth);
+
+		addedBars.selectAll("rect.bar")
+			.data((d, index) => this.addLabelsToDataPoints(d, index))
+			.enter()
+			.append("rect")
+			.attr("class", "bar")
+			.attr("x", d => this.x1(d.datasetLabel))
+			.attr("y", d => this.y(d.value))
+			.attr("width", this.x1.bandwidth())
+			.attr("height", d => height - this.y(d.value))
+			.attr("opacity", 0)
+			.transition(this.getFillTransition())
+			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
+			.attr("opacity", 1)
+			.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
+			.attr("stroke-width", Configuration.bars.default.strokeWidth);
+
+		// Remove bar groups are no longer needed
+		g.exit()
+			.transition(this.getDefaultTransition())
+			.style("opacity", 0)
+			.remove();
+
+		// Remove bars that are no longer needed
+		rect.exit()
+			.transition(this.getDefaultTransition())
+			.style("opacity", 0)
+			.remove();
+
+		// Add slice hover actions, and clear any slice borders present
+		this.addDataPointEventListener();
+
+		// Hide the overlay
+		this.updateOverlay().hide();
+
+		// Dispatch the update event
+		this.events.dispatchEvent(new Event("update"));
+	}
+
+	updateElements(animate: boolean, rect?: any, g?: any) {
+		const { scales } = this.options;
+
+		const chartSize = this.getChartSize();
+		const height = chartSize.height - this.getBBox(".x.axis").height;
+
+		if (!rect) {
+			rect = this.innerWrap.selectAll("rect.bar");
+		}
+
+		if (g) {
+			g.transition(animate ? this.getDefaultTransition() : this.getInstantTransition())
+				.attr("transform", d => "translate(" + this.x(d) + ",0)");
+		}
+
+		// Update existing bars
+		rect
+			.transition(animate ? this.getFillTransition() : this.getInstantTransition())
+			// TODO
+			// .ease(d3.easeCircle)
+			.attr("x", d => this.x1(d.datasetLabel))
+			.attr("y", d => this.y(d.value))
+			.attr("width", this.x1.bandwidth())
+			.attr("height", d => height - this.y(d.value))
+			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
+			.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.label) : null);
+	}
+
+	resizeChart() {
+		const actualChartSize: any = this.getChartSize(this.container);
+		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
+
+		// Resize the SVG
+		d3.select(this.holder).select("svg")
+			.attr("width", `${dimensionToUseForScale}px`)
+			.attr("height", `${dimensionToUseForScale}px`);
+
+		this.updateXandYGrid(true);
+		// Scale out the domains
+		this.setXScale(true);
+		this.setYScale();
+
+		// Set the x & y axis as well as their labels
+		this.setXAxis(true);
+		this.setYAxis(true);
+
+		// Apply new data to the bars
+		const g = this.innerWrap.selectAll("g.bars g");
+		this.updateElements(false, null, g);
+
+		super.resizeChart();
 	}
 }
