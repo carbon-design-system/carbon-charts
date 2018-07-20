@@ -52,8 +52,6 @@ export class PieChartComponent extends BaseChart implements AfterViewInit {
 	 */
 	@ViewChild("nChart") chartRef;
 
-	chart: PieChart;
-
 	/**
 	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
 	 *

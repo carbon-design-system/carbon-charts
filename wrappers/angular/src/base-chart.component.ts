@@ -70,6 +70,16 @@ export class BaseChart implements AfterViewInit {
 		this.drawChart();
 	}
 
+
+	/**
+	 * Calls `setData()` from the chart library.
+	 *
+	 * @memberof BaseChart
+	 */
+	setData(data: any) {
+		this.chart.setData(data);
+	}
+
 	/**
 	 * Calls `getActualChartSize()` from the chart library.
 	 *
