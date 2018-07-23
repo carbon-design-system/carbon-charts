@@ -5,20 +5,20 @@ import {
 } from "@angular/core";
 
 import { BaseChart } from "./base-chart.component";
-import { BarChart } from "@peretz/charts/bundle/bundle.js";
+import { LineChart } from "@peretz/charts/bundle/bundle.js";
 
 /**
- * Wrapper around `BarChart` in peretz charts library
+ * Wrapper around `LineChart` in peretz charts library
  *
  * Most functions just call their equivalent from the chart library.
  *
  * @export
- * @class BarChart
+ * @class LineChart
  * @extends {BaseChart}
  * @implements {AfterViewInit}
  */
 @Component({
-	selector: "n-bar-chart",
+	selector: "n-line-chart",
 	template: `
 		<div #nChart
 			class='n-chart-container'>
@@ -27,14 +27,14 @@ import { BarChart } from "@peretz/charts/bundle/bundle.js";
 	styleUrls: ["./charts.scss"],
 	encapsulation: ViewEncapsulation.None
 })
-export class BarChartComponent extends BaseChart implements AfterViewInit {
+export class LineChartComponent extends BaseChart implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
 	 *
-	 * @memberof BarChart
+	 * @memberof LineChart
 	 */
 	ngAfterViewInit() {
-		this.chart = new BarChart(
+		this.chart = new LineChart(
 			this.chartRef.nativeElement,
 			{
 				data: this.data,
