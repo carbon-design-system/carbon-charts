@@ -65,8 +65,7 @@ export class BaseChart implements AfterViewInit {
 	 * @memberof BaseChart
 	 */
 	ngAfterViewInit() {
-		this.chart = new BC(this.chartRef.nativeElement, this.options, this.data);
-		Object.assign(this, this.chart);
+		console.log("You need to implement your own `ngAfterViewInit()` function");
 	}
 
 
