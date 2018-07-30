@@ -9,8 +9,9 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  /* height: 120px; */
   padding: 20px;
+  margin-bottom: 30px;
   color: white;
 }
 
@@ -22,7 +23,42 @@
   font-size: large;
 }
 
+.App-header ul.navigation {
+	display: table;
+	margin: 15px auto 0 auto;
+}
+
+.App-header ul.navigation li {
+	float: left;
+	list-style-type: none;
+    margin-right: 10px;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.container {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+	/* TODO - Remove & support natively in vanilla charts */
+	text-align: left;
+}
+@media (min-width: 768px) {
+	.container {
+		width: 750px;
+	}
+}
+@media (min-width: 992px) {
+	.container {
+		width: 970px;
+	}
+}
+@media (min-width: 1200px) {
+	.container {
+		width: 1170px;
+	}
 }
