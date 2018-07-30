@@ -1,14 +1,24 @@
 import React from 'react';
 
+import { PieChart as PC } from "@peretz/charts/bundle/bundle.js";
+
 export default class PieChart extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+	componentDidMount() {
+		this.chart = new PC(
+			this.chartRef,
+			{
+				data: this.props.data,
+				options: this.props.options
+			}
+		);
+	}
 
     render() {
       return (
-        <div>
-			PIE
+		<div
+			ref={chartRef => this.chartRef = chartRef}
+			style={{ height: 500 }}
+		>
 		</div>
       )
     }

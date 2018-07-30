@@ -1,0 +1,16 @@
+## How to get demo running
+1. In this directory, run:
+```sh
+npm i
+npm run build
+npm link
+npm start
+```
+
+2. Open a separate tab in Terminal, then run:
+```sh
+cd demo
+npm i
+npm link @peretz/charts-react
+npm start
+```
