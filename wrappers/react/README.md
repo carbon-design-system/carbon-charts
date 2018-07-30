@@ -1,4 +1,4 @@
-## How to get demo running
+## How to run the demo app:
 1. In this directory, run:
 ```sh
 npm i
