@@ -5,6 +5,8 @@ import "@peretz/matter/matter.css";
 
 // React router & route components
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import Bar from "./_pages/Bar";
+import LineAndStep from "./_pages/LineAndStep";
 import PieAndDonut from "./_pages/PieAndDonut";
 
 export default class App extends Component {
@@ -21,11 +23,11 @@ export default class App extends Component {
 						</li>
 
 						<li>
-							<Link to="/topics">Bar</Link>
+							<Link to="/bar">Bar</Link>
 						</li>
 
 						<li>
-							<Link to="/topics">Line & Step</Link>
+							<Link to="/line-step">Line & Step</Link>
 						</li>
 					</ul>
 				</header>
@@ -33,7 +35,8 @@ export default class App extends Component {
 				<div className="container">
 					<Route exact path="/" component={() => <Redirect to="/pie-donut" />} />
 					<Route path="/pie-donut" component={PieAndDonut} />
-					{/* <Route path="/topics" component={Topics} /> */}
+					<Route path="/bar" component={Bar} />
+					<Route path="/line-step" component={LineAndStep} />
 				</div>
 			</div>
 		</Router>
