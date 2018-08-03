@@ -830,7 +830,6 @@ export class BaseChart {
 		// 	.style("height", clickedElementDimensions.height + "px");
 
 		// const tooltipPosition = position.findAbsolute(triggerElement.node() as HTMLElement, tooltip.node() as HTMLElement, "right");
-		// console.log(tooltipPosition);
 
 		// tooltip.style("top", tooltipPosition.top + "px")
 		// 	.style("left", tooltipPosition.left + "px")
