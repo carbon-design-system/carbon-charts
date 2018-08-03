@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="https://pages.github.ibm.com/peretz/charts/">
-		<img src="src/assets/logo.png" alt="Peretz Charts" width=90 height=90 />
+		<img src="packages/core/src/assets/logo.png" alt="Peretz Charts" width=90 height=90 />
 	</a>
 	<h3 align="center">Peretz Charts</h3>
 	<p align="center">
@@ -59,7 +59,7 @@ Charts' demo and documentation can be viewed in [GitHub Pages](https://github.ib
 
 ### Code Sample
 <p align="center">
-	<img src="src/assets/demo-stacked-bar.jpg" alt="Stacked Bar Chart" width=600 />
+	<img src="packages/core/src/assets/demo-stacked-bar.jpg" alt="Stacked Bar Chart" width=600 />
 </p>
 
 HTML:
