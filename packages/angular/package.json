@@ -1,6 +1,6 @@
 {
 	"name": "@peretz/charts-angular",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "WCE charting components for Angular",
 	"main": "index.js",
 	"scripts": {
@@ -29,10 +29,10 @@
 		"@angular/platform-browser": "^5.1.1",
 		"@angular/platform-browser-dynamic": "^5.1.1",
 		"@ngx-translate/core": "^9.0.2",
+		"@peretz/matter": "^1.1.0",
 		"core-js": "^2.5.3",
 		"rxjs": "^5.5.5",
-		"zone.js": "^0.8.18",
-		"@peretz/matter": "^1.1.0"
+		"zone.js": "^0.8.18"
 	},
 	"devDependencies": {
 		"@angular/animations": "5.1.1",
@@ -71,13 +71,13 @@
 		"jasmine-core": "3.1.0",
 		"karma": "2.0.2",
 		"karma-chrome-launcher": "2.2.0",
-		"karma-jasmine": "1.1.2",
 		"karma-cli": "1.0.1",
 		"karma-firefox-launcher": "1.1.0",
 		"karma-html2js-preprocessor": "1.1.0",
-		"karma-spec-reporter": "0.0.32",
+		"karma-jasmine": "1.1.2",
 		"karma-notify-reporter": "1.0.1",
 		"karma-sourcemap-loader": "0.3.7",
+		"karma-spec-reporter": "0.0.32",
 		"karma-webpack": "3.0.0",
 		"marked": "0.3.7",
 		"node-sass": "4.9.0",
@@ -91,6 +91,7 @@
 		"stylelint-webpack-plugin": "0.10.4",
 		"svgxuse": "1.2.6",
 		"ts-helpers": "1.1.2",
+		"ts-loader": "4.3.0",
 		"tslint": "5.10.0",
 		"tslint-loader": "3.6.0",
 		"typescript": "2.5.1",
@@ -100,7 +101,6 @@
 		"webpack-dev-server": "3.1.4",
 		"webpack-node-externals": "1.6.0",
 		"whatwg-fetch": "2.0.3",
-		"zone.js": "0.8.21",
-		"ts-loader": "4.3.0"
+		"zone.js": "0.8.21"
 	}
 }
