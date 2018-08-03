@@ -1,0 +1,52 @@
+<ng-template #listTpl let-item="item">
+	<span *ngIf="item.icon"><n-icon icon="{{item.icon}}" size="md"></n-icon></span>
+	<span class="side-nav-item" [routerLink]="item.link">{{item.content}}</span>
+</ng-template>
+
+
+<n-top-nav [fixed]="true">
+  <n-hamburger (onClick)="onClick()" [selected]="sideNavOpen" hamburger></n-hamburger>
+  <div title>
+        <a class="top-nav_brand" routerLink="/">
+            <h1>
+                <strong>{{topNavBrand}}</strong> <span class="secondary">{{topNavTitle}}</span>
+            </h1>
+        </a>
+    </div>
+</n-top-nav>
+
+<n-side-nav [open]="sideNavOpen">
+	<n-side-nav-group routerLink="/pie" routerLinkActive="active" tabindex="-1">
+		<span class="accordion_title">Pie</span>
+	</n-side-nav-group>
+
+	<n-side-nav-group routerLink="/donut" routerLinkActive="active" tabindex="-1">
+		<span class="accordion_title">Donut</span>
+	</n-side-nav-group>
+
+	<n-side-nav-group routerLink="/bar" routerLinkActive="active" tabindex="-1">
+		<span class="accordion_title">Bar</span>
+	</n-side-nav-group>
+
+	<n-side-nav-group routerLink="/line" routerLinkActive="active" tabindex="-1">
+		<span class="accordion_title">Line & Step</span>
+	</n-side-nav-group>
+</n-side-nav>
+
+
+<main class="main"
+	[ngClass]="{'side-nav-open': sideNavOpen}">
+	<router-outlet></router-outlet>
+</main>
+
+<n-modal-placeholder></n-modal-placeholder>
+<n-sprite sprite="core_set"></n-sprite>
+<n-sprite sprite="alerts_status"></n-sprite>
+<n-sprite sprite="arrows_chevrons"></n-sprite>
+<n-sprite sprite="brands"></n-sprite>
+<n-sprite sprite="calculator"></n-sprite>
+<n-sprite sprite="emoticons"></n-sprite>
+<n-sprite sprite="formatting"></n-sprite>
+<n-sprite sprite="mobile_controls"></n-sprite>
+<n-sprite sprite="playback_controls"></n-sprite>
+<n-sprite sprite="window_controls"></n-sprite>

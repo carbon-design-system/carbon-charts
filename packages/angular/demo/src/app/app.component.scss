@@ -1,0 +1,18 @@
+@import "../assets/scss/scss-utils.scss";
+
+.main {
+	padding: 15px;
+	margin-top: $topnav-height;
+	position: absolute;
+	width: 100%;
+	transition: padding-left 0.35s ease-in-out;
+
+	&.side-nav-open {
+		padding-left: 280px;
+	}
+}
+
+.side-nav {
+	float: left;
+	margin-top: $topnav-height;
+}

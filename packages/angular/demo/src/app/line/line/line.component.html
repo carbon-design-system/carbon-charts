@@ -1,0 +1,28 @@
+<div style="margin: 30px;">
+	<h2>Curved Line</h2>
+	<n-line-chart
+		class="n-chart"
+		[data]="curvedLineData"
+		[options]="curvedLineOptions" #curvedLineChart>
+	</n-line-chart>
+
+	<button class="btn--primary" (click)="changeDemoData('curvedLineChart');">Change Data</button>
+
+	<h2 style="margin-top: 60px;">Simple Line</h2>
+	<n-line-chart
+		class="n-chart"
+		[data]="lineData"
+		[options]="lineOptions" #simpleLineChart>
+	</n-line-chart>
+
+	<button class="btn--primary" (click)="changeDemoData('simpleLineChart');">Change Data</button>
+
+	<h2 style="margin-top: 60px;">Step Line</h2>
+	<n-line-chart
+		class="n-chart"
+		[data]="lineData"
+		[options]="lineOptions" #stepLineChart>
+	</n-line-chart>
+
+	<button class="btn--primary" (click)="changeDemoData('stepLineChart');">Change Data</button>
+</div>
