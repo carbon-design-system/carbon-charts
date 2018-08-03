@@ -6,6 +6,9 @@
 	<p align="center">
 		A reusable framework-agnostic D3 charting library for Watson Customer Engagement.
 	</p>
+	<p align="center">
+		:bar_chart: :chart_with_upwards_trend: :rocket:
+	</p>
 </p>
 
 ## Table of contents
