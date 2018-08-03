@@ -57,8 +57,6 @@ export class BaseChart {
 		if (configs.data) {
 			this.setData(configs.data);
 		}
-
-		console.log("TEST 1.5");
 	}
 
 
