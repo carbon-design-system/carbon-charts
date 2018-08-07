@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { PieChart as PC } from "@peretz/charts/dist/bundle/bundle.js";
+import { LineChart as LC } from "@peretz/charts/dist/bundle/bundle.js";
 import BaseChart from "./base-chart";
 
-export default class PieChart extends BaseChart {
+export default class LineChart extends BaseChart {
 	componentDidMount() {
-		this.chart = new PC(
+		this.chart = new LC(
 			this.chartRef,
 			{
 				data: this.props.data,

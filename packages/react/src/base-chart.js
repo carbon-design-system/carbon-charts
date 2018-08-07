@@ -1,78 +1,23 @@
-import {
-	Component,
-	Input,
-	AfterViewInit,
-	ViewChild,
-	ViewEncapsulation
-} from "@angular/core";
+import React from 'react';
 
-/**
- * Wrapper around `BaseChart` in peretz charts library
- *
- * Most functions just call their equivalent from the chart library.
- *
- * @export
- * @class BaseChart
- * @implements {AfterViewInit}
- */
-@Component({
-	selector: "n-base-chart",
-	template: `
-		<div #nChart
-			class='n-chart-container'>
-		</div>
-	`,
-	styleUrls: ["./charts.scss"],
-	encapsulation: ViewEncapsulation.None
-})
-export class BaseChart implements AfterViewInit {
-	/**
-	 * Data passed to charts library for displaying
-	 *
-	 * @type {*}
-	 * @memberof BaseChart
-	 */
-	@Input() data: any;
-	/**
-	 * Options passed to charts library
-	 *
-	 * @type {*}
-	 * @memberof BaseChart
-	 */
-	@Input() options: any;
-	/**
-	 * Chart container element ref
-	 *
-	 * @memberof BaseChart
-	 */
-	@ViewChild("nChart") chartRef;
+export default class BaseChart extends React.Component {
+	constructor(props) {
+		super(props);
 
-	/**
-	 * Chart object instance
-	 *
-	 * You can use this to do whatever you would normally do with a chart if you used
-	 * charts library directly.
-	 *
-	 * @memberof BaseChart
-	 */
-	chart;
-
-	/**
-	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
-	 *
-	 * @memberof BaseChart
-	 */
-	ngAfterViewInit() {
-		console.log("You need to implement your own `ngAfterViewInit()` function");
+		this.data = props.data;
+		this.options = props.options;
 	}
 
+	componentWillUnmount() {
+		this.chart.removeChart();
+	}
 
 	/**
 	 * Calls `setData()` from the chart library.
 	 *
 	 * @memberof BaseChart
 	 */
-	setData(data: any) {
+	setData(data) {
 		this.chart.setData(data);
 	}
 
@@ -100,7 +45,7 @@ export class BaseChart implements AfterViewInit {
 	 * @param {*} [data]
 	 * @memberof BaseChart
 	 */
-	redrawChart(data?: any) {
+	redrawChart(data) {
 		this.chart.redrawChart(data);
 	}
 
@@ -137,7 +82,7 @@ export class BaseChart implements AfterViewInit {
 	 * @param {*} [data]
 	 * @memberof BaseChart
 	 */
-	drawChart(data?: any) {
+	drawChart(data) {
 		this.chart.draw(data);
 	}
 

@@ -223,9 +223,7 @@ export class BaseChart {
 	 * removes the chart and any tooltips
 	 */
 	removeChart() {
-		this.container.select("svg").remove();
-		this.container.selectAll(".chart-tooltip").remove();
-		this.container.selectAll(".label-tooltip").remove();
+		this.holder.remove();
 	}
 
 	setSVG(): any {

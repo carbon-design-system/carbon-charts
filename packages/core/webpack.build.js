@@ -30,7 +30,7 @@ module.exports = [{
 		loaders: [
 			// all files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
 			{ test: /\.tsx?$/, loader: "ts-loader" },
-			{ test: /\.html?$/, loader: "html-loader" },
+			{ test: /\.html?$/, loaders: ["html-loader", "@peretz/icon-loader"] },
 			{
 				test: /\.scss$/,
 				loaders: [

@@ -23,11 +23,15 @@ export namespace Tools {
 		const closeBtn = tooltip.append("button");
 		let classNames = `close--${size}`;
 		classNames = color ? " close--" + color : classNames;
+
+		const iconHolder = document.createElement("div");
+		iconHolder.innerHTML = `<peretz-icon set="arrows_chevrons" icon="chevron_up" size="sm" class="icon--white-sm"></peretz-icon>`;
 		closeBtn.attr("class", classNames)
 			.attr("type", "button")
-			.attr("aria-label", "Close")
-			.append("svg").attr("class", "close_icon")
-			.append("use").attr("href", "#x_12");
+			.attr("aria-label", "Close");
+
+			// TODO - Finish
+			// console.log(iconHolder);
 		return closeBtn;
 	}
 

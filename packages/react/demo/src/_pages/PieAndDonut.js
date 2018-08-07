@@ -2,20 +2,7 @@ import React from "react";
 
 import { PieChart } from "@peretz/charts-react";
 
-const colors = [
-	"#009BEF",
-	"#95D13C",
-	"#785EF0",
-	"#F87EAC",
-	"#FFB000",
-	"#00B6CB",
-	"#FF5C49",
-	"#047CC0",
-	"#FE8500",
-	"#5A3EC8",
-	"#40D5BB",
-	"#FF509E"
-];
+import { randomizeValue, colors } from "../utils";
 
 const pieOptions = {
 	accessibility: false,
@@ -37,6 +24,22 @@ const pieData = {
 };
 
 export default class PieAndDonut extends React.Component {
+	changeDemoData = () => {
+		const oldData = this.pieChart.data;
+
+		// Randomize old data values
+		const newData = Object.assign({}, oldData);
+		newData.datasets = oldData.datasets.map(dataset => {
+			const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
+
+			const newDataset = Object.assign({}, dataset, { data: datasetNewData });
+
+			return newDataset;
+		});
+
+		this.pieChart.setData(newData);
+	}
+
 	render() {
 		return (
 			<div>
@@ -45,7 +48,12 @@ export default class PieAndDonut extends React.Component {
 				<PieChart
 					data={pieData}
 					options={pieOptions}
+					ref={pieChart => this.pieChart = pieChart}
 				/>
+
+				<button className="btn--primary" onClick={this.changeDemoData}>
+					Change Data
+				</button>
 			</div>
 		)
 	}

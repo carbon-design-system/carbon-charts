@@ -5,3 +5,4 @@ node_modules
 .vscode/
 .idea/
 *.log
+packages/react/build
