@@ -38,6 +38,7 @@ export class BaseChart {
 	constructor(holder: Element, configs: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
 
+		(holder as HTMLElement).style.position = "relative";
 		this.holder = holder;
 
 		const {chartId, container} = this.setChartIDContainer();

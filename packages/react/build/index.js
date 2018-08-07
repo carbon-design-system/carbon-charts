@@ -4002,6 +4002,7 @@ var BaseChart = /** @class */ (function () {
             tooltips: null
         };
         this.id = "chart-" + BaseChart.chartCount++;
+        holder.style.position = "relative";
         this.holder = holder;
         var _a = this.setChartIDContainer(), chartId = _a.chartId, container = _a.container;
         this.container = container;
@@ -4685,7 +4686,6 @@ var BaseChart = /** @class */ (function () {
         // 	.style("width", clickedElementDimensions.width + "px")
         // 	.style("height", clickedElementDimensions.height + "px");
         // const tooltipPosition = position.findAbsolute(triggerElement.node() as HTMLElement, tooltip.node() as HTMLElement, "right");
-        // console.log(tooltipPosition);
         // tooltip.style("top", tooltipPosition.top + "px")
         // 	.style("left", tooltipPosition.left + "px")
         // 	// Programmatically set class for direction

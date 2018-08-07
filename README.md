@@ -169,7 +169,7 @@ Environment prereqs: [GHE](https://github.ibm.com/peretz), [NPM Enterprise](http
 
 2. Run `npm install` to install Node.js dependencies.
 3. Run `npm run demo:server` to serve up the demo locally.
-4. Finally, open <http://localhost:9090/> in your browser. SPOILER ALERT: There's no "Hello, World!"
+4. Finally, open <http://localhost:9001/> in your browser. SPOILER ALERT: There's no "Hello, World!"
 
 ## Bugs and feature requests
 

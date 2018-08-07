@@ -19,7 +19,7 @@
 	},
 	"homepage": "https://github.ibm.com/peretz/charts#readme",
 	"dependencies": {
-		"@peretz/charts": "1.1.0-alpha.40bc6",
+		"@peretz/charts": "^1.0.0",
 		"react": "^16.0.0",
 		"react-icons": "^2.2.7"
 	},
