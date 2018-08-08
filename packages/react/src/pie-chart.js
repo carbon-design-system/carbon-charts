@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PieChart as PC } from "@peretz/charts/dist/bundle/bundle.js";
+import { PieChart as PC } from "@peretz/charts";
 import BaseChart from "./base-chart";
 
 export default class PieChart extends BaseChart {

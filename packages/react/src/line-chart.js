@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LineChart as LC } from "@peretz/charts/dist/bundle/bundle.js";
+import { LineChart as LC } from "@peretz/charts";
 import BaseChart from "./base-chart";
 
 export default class LineChart extends BaseChart {
