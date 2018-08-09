@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 
-import { colors, randomizeValue } from "../../../helpers/commons";
+import { colors, randomizeValue } from "../helpers/commons";
 import { Input } from "@angular/core";
 
 @Component({
 	selector: "app-pie-donut",
 	templateUrl: "./pie.component.html"
 })
-export class PieComponent implements OnInit {
+export class PieComponent {
 	@ViewChild("pieChart") pieChart;
 
 	pieOptions = {
@@ -17,11 +17,7 @@ export class PieComponent implements OnInit {
 		colors
 	};
 
-  @Input() pieData = {};
-
-	constructor() { }
-
-	ngOnInit() { }
+	@Input() pieData = {};
 
 	changeDemoData() {
 		const oldData = this.pieChart.data;
