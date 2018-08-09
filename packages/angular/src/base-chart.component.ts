@@ -32,7 +32,22 @@ export class BaseChart implements AfterViewInit {
 	 * @type {*}
 	 * @memberof BaseChart
 	 */
-	@Input() data: any;
+	@Input() set data(newData) {
+		const dataExistsAlready = this.chartData !== null && this.chartData !== undefined;
+
+		this.chartData = newData;
+
+		if (dataExistsAlready) {
+			this.setData(newData);
+		}
+	}
+
+	get data() {
+		return this.chartData;
+	}
+
+	private chartData: any;
+
 	/**
 	 * Options passed to charts library
 	 *

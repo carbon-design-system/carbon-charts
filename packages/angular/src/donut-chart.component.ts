@@ -6,7 +6,7 @@ import {
 
 import { BaseChart } from "./base-chart.component";
 
-import { DonutChart } from "@peretz/charts/bundle/bundle.js";
+import { DonutChart } from "@peretz/charts";
 
 /**
  * Wrapper around `DonutChart` in peretz charts library

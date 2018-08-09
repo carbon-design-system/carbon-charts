@@ -1,52 +1,20 @@
-<ng-template #listTpl let-item="item">
-	<span *ngIf="item.icon"><n-icon icon="{{item.icon}}" size="md"></n-icon></span>
-	<span class="side-nav-item" [routerLink]="item.link">{{item.content}}</span>
-</ng-template>
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+</div>
+<h2>Here are some links to help you start: </h2>
+<ul>
+  <li>
+    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
+  </li>
+  <li>
+    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
+  </li>
+  <li>
+    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
+  </li>
+</ul>
 
-
-<n-top-nav [fixed]="true">
-  <n-hamburger (onClick)="onClick()" [selected]="sideNavOpen" hamburger></n-hamburger>
-  <div title>
-        <a class="top-nav_brand" routerLink="/">
-            <h1>
-                <strong>{{topNavBrand}}</strong> <span class="secondary">{{topNavTitle}}</span>
-            </h1>
-        </a>
-    </div>
-</n-top-nav>
-
-<n-side-nav [open]="sideNavOpen">
-	<n-side-nav-group routerLink="/pie" routerLinkActive="active" tabindex="-1">
-		<span class="accordion_title">Pie</span>
-	</n-side-nav-group>
-
-	<n-side-nav-group routerLink="/donut" routerLinkActive="active" tabindex="-1">
-		<span class="accordion_title">Donut</span>
-	</n-side-nav-group>
-
-	<n-side-nav-group routerLink="/bar" routerLinkActive="active" tabindex="-1">
-		<span class="accordion_title">Bar</span>
-	</n-side-nav-group>
-
-	<n-side-nav-group routerLink="/line" routerLinkActive="active" tabindex="-1">
-		<span class="accordion_title">Line & Step</span>
-	</n-side-nav-group>
-</n-side-nav>
-
-
-<main class="main"
-	[ngClass]="{'side-nav-open': sideNavOpen}">
-	<router-outlet></router-outlet>
-</main>
-
-<n-modal-placeholder></n-modal-placeholder>
-<n-sprite sprite="core_set"></n-sprite>
-<n-sprite sprite="alerts_status"></n-sprite>
-<n-sprite sprite="arrows_chevrons"></n-sprite>
-<n-sprite sprite="brands"></n-sprite>
-<n-sprite sprite="calculator"></n-sprite>
-<n-sprite sprite="emoticons"></n-sprite>
-<n-sprite sprite="formatting"></n-sprite>
-<n-sprite sprite="mobile_controls"></n-sprite>
-<n-sprite sprite="playback_controls"></n-sprite>
-<n-sprite sprite="window_controls"></n-sprite>

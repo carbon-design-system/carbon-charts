@@ -5,7 +5,7 @@ import {
 } from "@angular/core";
 
 import { BaseChart } from "./base-chart.component";
-import { LineChart } from "@peretz/charts/bundle/bundle.js";
+import { LineChart } from "@peretz/charts";
 
 /**
  * Wrapper around `LineChart` in peretz charts library

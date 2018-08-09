@@ -34,6 +34,9 @@
 		"rxjs": "^5.5.5",
 		"zone.js": "^0.8.18"
 	},
+	"dependencies": {
+		"@peretz/charts": "^1.0.0"
+	},
 	"devDependencies": {
 		"@angular/animations": "5.1.1",
 		"@angular/common": "5.1.1",
@@ -48,7 +51,6 @@
 		"@angular/router": "5.1.1",
 		"@compodoc/compodoc": "1.0.4",
 		"@ngx-translate/core": "9.0.2",
-		"@peretz/charts": "1.1.0-alpha.40bc6",
 		"@peretz/icon-loader": "0.0.5",
 		"@peretz/matter": "1.1.0-alpha.84e66",
 		"@types/d3": "4.12.0",

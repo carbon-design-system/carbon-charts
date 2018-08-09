@@ -2,7 +2,9 @@
 	<n-pie-chart
 		class="n-chart"
 		[data]="pieData"
-		[options]="pieOptions" #pieChart>
+    [options]="pieOptions"
+    style="height: 500px;"
+    #pieChart>
 	</n-pie-chart>
 
 	<button class="btn--primary" (click)="changeDemoData();">Change Data</button>

@@ -6,7 +6,7 @@ import {
 
 import { BaseChart } from "./base-chart.component";
 
-import { PieChart } from "@peretz/charts/bundle/bundle.js";
+import { PieChart } from "@peretz/charts";
 
 /**
  * Wrapper around `PieChart` in peretz charts library
