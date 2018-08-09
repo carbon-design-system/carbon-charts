@@ -10,13 +10,7 @@ import { Input } from "@angular/core";
 export class PieComponent {
 	@ViewChild("pieChart") pieChart;
 
-	pieOptions = {
-		accessibility: false,
-		legendClickable: true,
-		containerResizable: true,
-		colors
-	};
-
+	@Input() pieOptions = {};
 	@Input() pieData = {};
 
 	changeDemoData() {

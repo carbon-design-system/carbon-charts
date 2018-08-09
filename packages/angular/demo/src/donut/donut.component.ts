@@ -1,8 +1,7 @@
 import { Component, Input, ViewChild } from "@angular/core";
 
 // Chart imports
-import { DonutCenter } from "@peretz/charts";
-import { colors, randomizeValue } from "@peretz/charts-angular/demo/src/helpers/commons";
+import { randomizeValue } from "@peretz/charts-angular/demo/src/helpers/commons";
 
 @Component({
 	selector: "app-donut-donut",
@@ -11,17 +10,7 @@ import { colors, randomizeValue } from "@peretz/charts-angular/demo/src/helpers/
 export class DonutComponent {
 	@ViewChild("donutChart") donutChart;
 
-	donutOptions = {
-		accessibility: false,
-		legendClickable: true,
-		containerResizable: true,
-		colors,
-		center: new DonutCenter({
-			number: 25423,
-			label: "Browsers"
-		})
-	};
-
+	@Input() donutOptions = {};
 	@Input() donutData = {};
 
 	changeDemoData() {
