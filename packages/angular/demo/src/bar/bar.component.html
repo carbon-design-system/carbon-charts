@@ -1,28 +1,9 @@
 <div style="margin: 30px;">
-	<h2>Grouped</h2>
 	<n-bar-chart
 		class="n-chart"
-		[data]="groupedBarData"
-		[options]="groupedBarOptions" #groupedBarChart>
+		[data]="barData"
+		[options]="barOptions" #barChart>
 	</n-bar-chart>
 
-	<button class="btn--primary" (click)="changeDemoData('groupedBarChart');">Change Data</button>
-
-	<h2 style="margin-top: 60px;">Simple</h2>
-	<n-bar-chart
-		class="n-chart"
-		[data]="simpleBarData"
-		[options]="simpleBarOptions" #simpleBarChart>
-	</n-bar-chart>
-
-	<button class="btn--primary" (click)="changeDemoData('simpleBarChart');">Change Data</button>
-
-	<h2 style="margin-top: 60px;">Stacked</h2>
-	<n-bar-chart
-		class="n-chart"
-		[data]="groupedBarData"
-		[options]="stackedBarOptions" #stackedBarChart>
-	</n-bar-chart>
-
-	<button class="btn--primary" (click)="changeDemoData('stackedBarChart');">Change Data</button>
+	<button class="btn--primary" (click)="changeDemoData();">Change Data</button>
 </div>

@@ -4,7 +4,7 @@ import { colors, randomizeValue } from "../helpers/commons";
 import { Input } from "@angular/core";
 
 @Component({
-	selector: "app-pie-donut",
+	selector: "app-pie",
 	templateUrl: "./pie.component.html"
 })
 export class PieComponent {

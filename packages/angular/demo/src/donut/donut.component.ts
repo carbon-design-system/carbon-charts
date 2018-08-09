@@ -4,7 +4,7 @@ import { Component, Input, ViewChild } from "@angular/core";
 import { randomizeValue } from "@peretz/charts-angular/demo/src/helpers/commons";
 
 @Component({
-	selector: "app-donut-donut",
+	selector: "app-donut",
 	templateUrl: "./donut.component.html"
 })
 export class DonutComponent {
