@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { PieChart as PC } from "@peretz/charts";
+import { DonutChart as DC } from "@peretz/charts";
 import BaseChart from "./base-chart";
 
-export default class PieChart extends BaseChart {
+export default class DonutChart extends BaseChart {
 	componentDidMount() {
-		this.chart = new PC(
+		this.chart = new DC(
 			this.chartRef,
 			{
 				data: this.props.data,

@@ -6,7 +6,8 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "webpack -w",
-		"build": "webpack"
+		"build": "webpack",
+		"storybook": "start-storybook -p 9006 -c .storybook"
 	},
 	"repository": {
 		"type": "git",
@@ -20,10 +21,14 @@
 	"homepage": "https://github.ibm.com/peretz/charts#readme",
 	"dependencies": {
 		"@peretz/charts": "^1.0.0",
+		"@peretz/matter": "1.1.0",
 		"react": "^16.0.0",
+		"react-dom": "^16.4.2",
 		"react-icons": "^2.2.7"
 	},
 	"devDependencies": {
+		"@storybook/addon-options": "^3.4.10",
+		"@storybook/react": "^3.4.10",
 		"babel-cli": "^6.26.0",
 		"babel-core": "^6.26.0",
 		"babel-loader": "^7.1.2",
@@ -33,6 +38,8 @@
 		"base64-inline-loader": "^1.1.0",
 		"css-loader": "^0.28.7",
 		"img-loader": "^2.0.0",
+		"node-sass": "^4.9.3",
+		"sass-loader": "^7.1.0",
 		"style-loader": "^0.19.0",
 		"url-loader": "^0.6.2",
 		"webpack": "^3.12.0"

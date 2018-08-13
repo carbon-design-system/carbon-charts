@@ -18,7 +18,7 @@ export default class LineChart extends BaseChart {
       return (
 		<div
 			ref={chartRef => this.chartRef = chartRef}
-			style={{ height: 500 }}
+			className="chart-holder"
 		>
 		</div>
       )
