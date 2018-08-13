@@ -130,7 +130,7 @@ export namespace Tools {
 		const values = [];
 		const duplicateValues = [];
 
-		arr.map(value => {
+		arr.forEach(value => {
 			if (values.indexOf(value) !== -1 && duplicateValues.indexOf(value) === -1) {
 				duplicateValues.push(value);
 			}

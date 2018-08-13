@@ -176,6 +176,10 @@ export namespace Configuration {
 		},
 		default: {
 			strokeWidth: 2
+		},
+		spacing: {
+			bars: 0.2,
+			datasets: 0.25
 		}
 	};
 

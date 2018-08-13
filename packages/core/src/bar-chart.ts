@@ -27,8 +27,8 @@ export class BarChart extends BaseAxisChart {
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
 
-		this.x = d3.scaleBand().rangeRound([0, width]).padding(0.25);
-		this.x1 = d3.scaleBand().rangeRound([0, width]).padding(0.2);
+		this.x = d3.scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.datasets);
+		this.x1 = d3.scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
 
 		this.x.domain(this.displayData.labels);
 		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
@@ -45,7 +45,7 @@ export class BarChart extends BaseAxisChart {
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		const gBars = this.innerWrap
-			.attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+			.attr("transform", `translate(${margins.left}, ${margins.top})`)
 			.append("g")
 			.classed("bars", true)
 			.attr("width", width);
@@ -54,7 +54,7 @@ export class BarChart extends BaseAxisChart {
 			.data(this.displayData.labels)
 			.enter()
 				.append("g")
-				.attr("transform", d => "translate(" + this.x(d) + ",0)")
+				.attr("transform", d => `translate(${this.x(d)}, 0)`)
 				.selectAll("rect.bar")
 				.data((d, index) => this.addLabelsToDataPoints(d, index))
 					.enter()
@@ -97,7 +97,7 @@ export class BarChart extends BaseAxisChart {
 		const addedBars = g.enter()
 			.append("g")
 			.classed("bars", true)
-			.attr("transform", d => "translate(" + this.x(d) + ",0)");
+			.attr("transform", d => `translate(${this.x(d)}, 0)`);
 
 		// Add bars that need to be added now
 		g.selectAll("rect.bar")
@@ -166,7 +166,7 @@ export class BarChart extends BaseAxisChart {
 
 		if (g) {
 			g.transition(animate ? this.getDefaultTransition() : this.getInstantTransition())
-				.attr("transform", d => "translate(" + this.x(d) + ",0)");
+				.attr("transform", d => `translate(${this.x(d)}, 0)`);
 		}
 
 		// Update existing bars

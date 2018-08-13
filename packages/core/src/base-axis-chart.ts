@@ -114,11 +114,11 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	draw() {
-		console.warn("You should implement your own `draw() function.");
+		console.warn("You should implement your own `draw()` function.");
 	}
 
 	interpolateValues(newData: any) {
-		console.warn("You should implement your own `interpolateValues() function.");
+		console.warn("You should implement your own `interpolateValues()` function.");
 	}
 
 	/**************************************

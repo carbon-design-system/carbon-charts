@@ -83,9 +83,7 @@ export class StackedBarChart extends BaseAxisChart {
 				.append("g")
 				.classed("bars", true)
 				.selectAll("rect")
-				.data(function(d) {
-					return addLabelsAndValueToData(d);
-				})
+				.data(d => addLabelsAndValueToData(d))
 				.enter()
 					.append("rect")
 					.classed("bar", true)
@@ -114,13 +112,11 @@ export class StackedBarChart extends BaseAxisChart {
 			.data(d3.stack().keys(stackKeys)(stackDataArray));
 
 		const rect = g.selectAll("rect.bar")
-			.data(function(d) {
-				return addLabelsAndValueToData(d);
-			});
+			.data(d => addLabelsAndValueToData(d));
 
 		this.updateElements(true, g.selectAll("rect.bar"), g);
 
-		const addRect = (selection) => {
+		const addRect = selection => {
 			selection.enter()
 				.append("rect")
 				.classed("bar", true)
@@ -141,9 +137,7 @@ export class StackedBarChart extends BaseAxisChart {
 			.append("g")
 			.classed("bars", true)
 			.selectAll("rect")
-			.data(function(d) {
-				return addLabelsAndValueToData(d);
-			});
+			.data(d => addLabelsAndValueToData(d));
 
 		addRect(rectsToAdd);
 		addRect(rect);
