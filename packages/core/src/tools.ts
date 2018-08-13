@@ -24,11 +24,14 @@ export namespace Tools {
 		let classNames = `close--${size}`;
 		classNames = color ? " close--" + color : classNames;
 
-		const iconHolder = document.createElement("div");
-		iconHolder.innerHTML = `<peretz-icon set="arrows_chevrons" icon="chevron_up" size="sm" class="icon--white-sm"></peretz-icon>`;
+		const iconHolder = document.createElement("span");
+		iconHolder.innerHTML = `<peretz-icon set="core_set" icon="x" size="sm"></peretz-icon>`;
 		closeBtn.attr("class", classNames)
 			.attr("type", "button")
 			.attr("aria-label", "Close");
+
+		closeBtn.node()
+			.appendChild(iconHolder);
 
 			// TODO - Finish
 			// console.log(iconHolder);

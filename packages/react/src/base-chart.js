@@ -8,9 +8,10 @@ export default class BaseChart extends React.Component {
 		this.options = props.options;
 	}
 
-	componentWillUnmount() {
-		this.chart.removeChart();
-	}
+	// TODO
+	// componentWillUnmount() {
+	// 	this.chart.removeChart();
+	// }
 
 	/**
 	 * Calls `setData()` from the chart library.

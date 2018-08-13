@@ -1,6 +1,6 @@
 import { colors } from "../helpers/commons";
 
-export const groupedBarData = {
+export const curvedLineData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
 		{
@@ -8,8 +8,8 @@ export const groupedBarData = {
 			backgroundColors: [colors[0]],
 			data: [
 				65000,
-				29123,
-				35213,
+				79000,
+				49213,
 				51213,
 				16932
 			]
@@ -18,11 +18,11 @@ export const groupedBarData = {
 			label: "Dataset 2",
 			backgroundColors: [colors[1]],
 			data: [
-				32432,
+				80000,
 				21312,
 				56456,
 				21312,
-				34234
+				0
 			]
 		},
 		{
@@ -30,27 +30,17 @@ export const groupedBarData = {
 			backgroundColors: [colors[2]],
 			data: [
 				12312,
-				23232,
 				34232,
+				39232,
 				12312,
 				34234
-			]
-		},
-		{
-			label: "Dataset 4",
-			backgroundColors: [colors[3]],
-			data: [
-				32423,
-				21313,
-				64353,
-				24134,
-				32423
 			]
 		}
 	]
 };
 
-export const groupedBarOptions = {
+export const curvedLineOptions = {
+	accessibility: false,
 	scales: {
 		x: {
 			title: "2018 Annual Sales Figures",
@@ -59,7 +49,6 @@ export const groupedBarOptions = {
 			formatter: axisValue => {
 				return `${axisValue / 1000}k`;
 			},
-			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 		},
 		y2: {
 			ticks: {
@@ -68,29 +57,52 @@ export const groupedBarOptions = {
 			}
 		}
 	},
+	curve: "curveNatural",
 	legendClickable: true,
-	containerResizable: true
+	containerResizable: true,
 };
 
-// Simple bar
-export const simpleBarData = {
+
+export const lineData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
 		{
 			label: "Dataset 1",
-			backgroundColors: colors,
+			backgroundColors: [colors[0]],
 			data: [
-				65000,
-				29123,
-				35213,
-				51213,
-				16932
+				0,
+				0,
+				0,
+				0,
+				0
+			]
+		},
+		{
+			label: "Dataset 2",
+			backgroundColors: [colors[1]],
+			data: [
+				0,
+				10000,
+				20000,
+				30000,
+				40000
+			]
+		},
+		{
+			label: "Dataset 3",
+			backgroundColors: [colors[2]],
+			data: [
+				0,
+				20000,
+				40000,
+				60000,
+				80000
 			]
 		}
 	]
 };
 
-export const simpleBarOptions = {
+export const lineOptions = {
 	accessibility: false,
 	scales: {
 		x: {
@@ -100,27 +112,6 @@ export const simpleBarOptions = {
 			formatter: axisValue => {
 				return `${axisValue / 1000}k`;
 			},
-			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
-			stacked: false
-		}
-	},
-	legendClickable: true,
-	containerResizable: true,
-};
-
-// Stacked bar
-export const stackedBarOptions = {
-	accessibility: false,
-	scales: {
-		x: {
-			title: "2018 Annual Sales Figures",
-		},
-		y: {
-			formatter: axisValue => {
-				return `${axisValue / 1000}k`;
-			},
-			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
-			stacked: true
 		}
 	},
 	legendClickable: true,

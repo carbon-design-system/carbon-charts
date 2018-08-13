@@ -8,19 +8,19 @@ module.exports = [{
 		loaders: [
 			{
 				test: /\.ts$/,
-				loader: "ts-loader"
+				loader: ["ts-loader", "@peretz/icon-loader"]
 			},
 			{
 				test: /\.html$/,
-				loader: "html-loader"
+				loaders: ["html-loader", "@peretz/icon-loader"]
 			},
 			{
 				test: /\.css$/,
-				loader: "raw-loader"
+				loader: ["raw-loader", "@peretz/icon-loader"]
 			},
 			{
 				test: /\.scss$/,
-				loaders: ["raw-loader", "sass-loader"]
+				loaders: ["raw-loader", "sass-loader", "@peretz/icon-loader"]
 			},
 			{
 				test   : /\.(ttf|eot|woff(2)?)(\?[a-z0-9=&.]+)?$/,

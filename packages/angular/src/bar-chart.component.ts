@@ -5,7 +5,7 @@ import {
 } from "@angular/core";
 
 import { BaseChart } from "./base-chart.component";
-import { BarChart } from "../../core/src/bar-chart";
+import { BarChart } from "@peretz/charts";
 
 /**
  * Wrapper around `BarChart` in peretz charts library
