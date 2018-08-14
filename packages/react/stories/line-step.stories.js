@@ -65,17 +65,3 @@ stepStories.add("After (Regular)", () => (
 		options={Object.assign({}, lineOptions, {curve: "curveStepAfter"})}
 	/>
 ));
-// const donutStories = storiesOf("Donut", module);
-// donutStories.add("Basic", () => (
-// 	<DonutChart
-// 		data={demoPieData}
-// 		options={demoDonutOptions}
-// 	/>
-// ));
-
-// donutStories.add("Accessible", () => (
-// 	<DonutChart
-// 		data={demoPieData}
-// 		options={Object.assign({}, demoDonutOptions, {accessibility: true})}
-// 	/>
-// ));
