@@ -141,16 +141,13 @@ export namespace Tools {
 		return duplicateValues;
 	}
 
-	export function removeArrayDuplicates(arr: any) {
-		const result = [];
+	export function removeArrayDuplicates(arr): any[] {
+		// Casting to any because of the lack of typescript types
+		// Set removes duplicates automatically
+		const result = new Set(arr) as any;
 
-		arr.forEach(element => {
-			if (result.indexOf(element) === -1) {
-				result.push(element);
-			}
-		});
-
-		return result;
+		// Spread operator appends all elements from result into []
+		return [...result];
 	}
 
 	// ================================================================================
