@@ -167,7 +167,7 @@ export class BaseAxisChart extends BaseChart {
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
 
-		this.x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
+		this.x = d3.scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
 		this.x.domain(this.displayData.labels);
 	}
 
@@ -185,7 +185,7 @@ export class BaseAxisChart extends BaseChart {
 		if (xAxisRef.nodes().length > 0) {
 			xAxisRef = this.svg.select("g.x.axis")
 				.transition(t)
-				.attr("transform", "translate(0," + height + ")")
+				.attr("transform", `translate(0, ${height})`)
 				// Casting to any because d3 does not offer appropriate typings for the .call() function
 				.call(d3.axisBottom(this.x).tickSize(0) as any);
 		} else {
@@ -301,13 +301,13 @@ export class BaseAxisChart extends BaseChart {
 			// If the <g class="y axis"> exists in the chart SVG, just update it
 			if (secondaryYAxisRef.nodes().length > 0) {
 				secondaryYAxisRef.transition(t)
-					.attr("transform", `translate(${this.getChartSize().width} ,0)`)
+					.attr("transform", `translate(${this.getChartSize().width}, 0)`)
 					// Being cast to any because d3 does not offer appropriate typings for the .call() function
 					.call(secondaryYAxis as any);
 			} else {
 				this.innerWrap.append("g")
 					.attr("class", "y2 axis yAxes")
-					.attr("transform", `translate(${this.getChartSize().width} ,0)`)
+					.attr("transform", `translate(${this.getChartSize().width}, 0)`)
 					.call(secondaryYAxis);
 			}
 		}
@@ -327,11 +327,13 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	drawYGrid() {
+		const { scales } = this.options;
+
 		const yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
 		const yGrid = d3.axisLeft(this.y)
 			.tickSizeInner(-this.getChartSize().width)
 			.tickSizeOuter(0)
-			.ticks(10);
+			.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
 		const g = this.innerWrap.select(".y.grid")
 			.attr("transform", "translate(0, 0)")
 			.call(yGrid);

@@ -84,7 +84,7 @@ export class PieChart extends BaseChart {
 	draw() {
 		const dataList = this.displayData.datasets[0].data;
 
-		const chartSize: any = this.getChartSize(this.container);
+		const chartSize = this.getChartSize(this.container);
 		const diameter = Math.min(chartSize.width, chartSize.height);
 		const radius: number = diameter / 2;
 
@@ -420,7 +420,7 @@ export class PieChart extends BaseChart {
 	private deriveTransformString(d, radius) {
 		const theta = d.endAngle - d.startAngle;
 		const xPosition = radius * Math.sin((theta / 2) + d.startAngle);
-		const yPosition = (-1 * radius * Math.cos((theta / 2) + d.startAngle ));
+		const yPosition = -1 * radius * Math.cos((theta / 2) + d.startAngle );
 
 		return `translate(${xPosition}, ${yPosition})`;
 	}
@@ -435,7 +435,7 @@ export class PieChart extends BaseChart {
 	 */
 	private deriveTextAnchor(d) {
 		const QUADRANT = Math.PI / 4;
-		const rads = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+		const rads = (d.endAngle - d.startAngle) / 2 + d.startAngle;
 
 		if (rads >= QUADRANT && rads <= 3 * QUADRANT) {
 			return "start";
@@ -452,11 +452,10 @@ export class PieChart extends BaseChart {
 // d3 Tween functions
 function arcTween(a, arc) {
 	const i = d3.interpolate(this._current, a);
-	const self = this;
 
-	return function(t) {
-		self._current = i(t);
+	return t => {
+		this._current = i(t);
 
-		return arc(self._current);
+		return arc(this._current);
 	};
 }

@@ -152,9 +152,7 @@ export class BaseChart {
 		const { datasets } = this.displayData;
 
 		// TODO - Support the labels based legend for line chart
-		if (this.options.type === "line") {
-			return Configuration.legend.basedOn.SERIES;
-		} else if (datasets.length === 1 && datasets[0].backgroundColors.length > 1) {
+		if (datasets.length === 1 && datasets[0].backgroundColors.length > 1) {
 			return Configuration.legend.basedOn.LABELS;
 		} else {
 			return Configuration.legend.basedOn.SERIES;
@@ -185,7 +183,6 @@ export class BaseChart {
 		const noAxis = this.options.type === "pie" || this.options.type === "donut";
 
 		let ratio, marginForLegendTop;
-		let moreForY2Axis = 0;
 		if (container.node().clientWidth > Configuration.charts.widthBreak) {
 			ratio = Configuration.charts.magicRatio;
 			marginForLegendTop = 0;
@@ -194,15 +191,11 @@ export class BaseChart {
 			ratio = 1;
 		}
 
-		if (this.options.type === "double-axis-line" || this.options.type === "combo") {
-			moreForY2Axis = Configuration.charts.magicMoreForY2Axis;
-		}
-
 		// Store computed actual size, to be considered for change if chart does not support axis
 		const marginsToExclude = noAxis ? 0 : (Configuration.charts.margin.left + Configuration.charts.margin.right);
 		const computedChartSize = {
 			height: container.node().clientHeight - marginForLegendTop,
-			width: (container.node().clientWidth - marginsToExclude - moreForY2Axis) * ratio
+			width: (container.node().clientWidth - marginsToExclude) * ratio
 		};
 
 		// If chart is of type pie or donut, width and height should equal to the min of the width and height computed
@@ -296,6 +289,11 @@ export class BaseChart {
 	setClickableLegend() {
 		const self = this;
 		const c = d3.select(this.holder);
+
+		if (this.getActiveLegendItems().length === 1) {
+			c.selectAll(".legend-btn.active").classed("not-allowed", true);
+		}
+
 		c.selectAll(".legend-btn").each(function() {
 			d3.select(this).on("click", function() {
 				c.selectAll(".chart-tooltip").remove();
@@ -588,8 +586,6 @@ export class BaseChart {
 
 	// TODO - Refactor
 	openLegendTooltip(target) {
-		const self = this;
-
 		d3.selectAll(".legend-tooltip").remove();
 		const mouseXPoint = d3.mouse(this.container.node())[0];
 		const windowXPoint = d3.event.x;
@@ -644,11 +640,11 @@ export class BaseChart {
 
 									return "white";
 								})
-								.style("border-color", function(d) {
-									if (self.getLegendType() === Configuration.legend.basedOn.LABELS) {
-										return self.colorScale[self.displayData.datasets[0].label](d.key);
+								.style("border-color", d => {
+									if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
+										return this.colorScale[this.displayData.datasets[0].label](d.key);
 									} else {
-										return self.colorScale[d.key]();
+										return this.colorScale[d.key]();
 									}
 								})
 								.style("border-style", Configuration.legend.inactive.borderStyle)
@@ -676,11 +672,11 @@ export class BaseChart {
 
 					return "white";
 				})
-				.style("border-color", function(d) {
-					if (self.getLegendType() === Configuration.legend.basedOn.LABELS) {
-						return self.colorScale[self.displayData.datasets[0].label](d.key);
+				.style("border-color", d => {
+					if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
+						return this.colorScale[this.displayData.datasets[0].label](d.key);
 					} else {
-						return self.colorScale[d.key]();
+						return this.colorScale[d.key]();
 					}
 				})
 				.style("border-style", Configuration.legend.inactive.borderStyle)

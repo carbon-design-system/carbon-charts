@@ -70,11 +70,11 @@ export const lineData = {
 			label: "Dataset 1",
 			backgroundColors: [colors[0]],
 			data: [
-				0,
-				0,
-				0,
-				0,
-				0
+				2000,
+				4200,
+				7000,
+				4000,
+				19000
 			]
 		},
 		{

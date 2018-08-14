@@ -24,6 +24,10 @@ export class LineChart extends BaseAxisChart {
 			.curve(d3[this.options.curve] || d3.curveLinear);
 	}
 
+	getLegendType() {
+		return Configuration.legend.basedOn.SERIES;
+	}
+
 	addLabelsToDataPoints(d, index) {
 		const { labels } = this.displayData;
 
@@ -69,7 +73,7 @@ export class LineChart extends BaseAxisChart {
 				.attr("class", "dot")
 				.attr("cx", d => this.x(d.label) + margins.left)
 				.attr("cy", d => this.y(d.value))
-				.attr("r", 4)
+				.attr("r", Configuration.charts.pointCircles.radius)
 				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
 
 		// Hide the overlay

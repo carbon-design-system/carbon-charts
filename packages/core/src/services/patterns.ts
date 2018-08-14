@@ -97,8 +97,8 @@ export default class PatternsService {
 				});
 
 				// Update pattern widths & heights
-				patternElement.setAttribute("width", "20");
-				patternElement.setAttribute("height", "20");
+				patternElement.setAttribute("width", `${Configuration.charts.patternFills.width}`);
+				patternElement.setAttribute("height", `${Configuration.charts.patternFills.height}`);
 
 				this.container.appendChild(svgContainer);
 

@@ -120,6 +120,13 @@ export namespace Configuration {
 			opacity: 0.25,
 			outline: "grey"
 		},
+		pointCircles: {
+			radius: 4
+		},
+		patternFills: {
+			width: 20,
+			height: 20
+		},
 		widthBreak: 600,
 		marginForLegendTop: 40,
 		magicRatio: 0.7,
@@ -153,7 +160,8 @@ export namespace Configuration {
 			numberOfTicks: 5
 		},
 		x: {
-			numberOfTicks: 5
+			numberOfTicks: 5,
+			padding: 0.2
 		},
 		y2: {
 			numberOfTicks: 5
