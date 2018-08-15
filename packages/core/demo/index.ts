@@ -18,6 +18,7 @@ import {
 	groupedBarData,
 	simpleBarOptions,
 	simpleBarData,
+	stackedBarData,
 	stackedBarOptions,
 	// Pie & donut
 	pieOptions,
@@ -47,7 +48,7 @@ const chartTypes = [
 		id: "stacked-bar",
 		name: "Bar",
 		options: stackedBarOptions,
-		data: groupedBarData
+		data: stackedBarData
 	},
 	{
 		id: "simple-bar-accessible",
@@ -59,7 +60,7 @@ const chartTypes = [
 		id: "stacked-bar-accessible",
 		name: "Bar",
 		options: Object.assign({}, stackedBarOptions, {accessibility: true}),
-		data: groupedBarData
+		data: stackedBarData
 	},
 	{
 		id: "curved-line",

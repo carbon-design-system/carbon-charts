@@ -178,7 +178,7 @@ export class BaseAxisChart extends BaseChart {
 
 		const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
-		const xAxis = d3.axisBottom(this.x).tickSize(0);
+		const xAxis = d3.axisBottom(this.x).tickSize(0).tickSizeOuter(0);
 		let xAxisRef = this.svg.select("g.x.axis");
 
 		// If the <g class="x axis"> exists in the chart SVG, just update it
@@ -187,11 +187,12 @@ export class BaseAxisChart extends BaseChart {
 				.transition(t)
 				.attr("transform", `translate(0, ${height})`)
 				// Casting to any because d3 does not offer appropriate typings for the .call() function
-				.call(d3.axisBottom(this.x).tickSize(0) as any);
+				.call(xAxis);
 		} else {
 			xAxisRef = this.innerWrap.append("g")
-				.attr("class", "x axis")
-				.call(xAxis);
+				.attr("class", "x axis");
+
+			xAxisRef.call(xAxis);
 		}
 
 		// Update the position of the pieces of text inside x-axis
@@ -205,11 +206,6 @@ export class BaseAxisChart extends BaseChart {
 
 		// get the tickHeight after the ticks have been wrapped
 		const tickHeight = this.getLargestTickHeight(xAxisRef.selectAll(".tick")) + Configuration.scales.tick.heightAddition;
-		xAxisRef.select(".domain")
-			.attr("stroke", Configuration.scales.domain.color)
-			.attr("fill", Configuration.scales.domain.color)
-			.attr("stroke-width", Configuration.scales.domain.strokeWidth);
-
 		// Add x-axis title
 		if (this.innerWrap.select(".axis-label.x").nodes().length === 0 && this.options.scales.x.title) {
 			xAxisRef.append("text")
@@ -253,17 +249,35 @@ export class BaseAxisChart extends BaseChart {
 		return yMax;
 	}
 
+	getYMin() {
+		const { datasets } = this.displayData;
+		const { scales } = this.options;
+		let yMin;
+
+		if (datasets.length === 1) {
+			yMin = d3.min(datasets[0].data);
+		} else {
+			yMin = d3.min(datasets, (d: any) => (d3.min(d.data)));
+		}
+
+		if (scales.y.yMinAdjuster) {
+			yMin = scales.y.yMinAdjuster(yMin);
+		}
+
+		return yMin;
+	}
+
 	setYScale() {
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
 
-		const { datasets } = this.displayData;
 		const { scales } = this.options;
 
+		const yMin = this.getYMin();
 		const yMax = this.getYMax();
 
-		this.y = d3.scaleLinear().rangeRound([height, 0]);
-		this.y.domain([0, yMax]);
+		this.y = d3.scaleLinear().range([height, 0]);
+		this.y.domain([Math.min(yMin, 0), yMax]);
 
 		if (scales.y2 && scales.y2.ticks.max) {
 			this.y2 = d3.scaleLinear().rangeRound([height, 0]);
@@ -272,6 +286,8 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	setYAxis(noAnimation?: boolean) {
+		const chartSize = this.getChartSize();
+
 		const { scales } = this.options;
 		const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
@@ -279,17 +295,42 @@ export class BaseAxisChart extends BaseChart {
 			.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks)
 			.tickSize(0)
 			.tickFormat(scales.y.formatter);
-		const yAxisRef = this.svg.select("g.y.axis");
+
+		let yAxisRef = this.svg.select("g.y.axis");
+		const horizontalLine = this.svg.select("line.domain");
+
+		this.svg.select("g.x.axis path.domain")
+			.remove();
+
 		// If the <g class="y axis"> exists in the chart SVG, just update it
 		if (yAxisRef.nodes().length > 0) {
 			yAxisRef.transition(t)
 				// Casting to any because d3 does not offer appropriate typings for the .call() function
 				.call(yAxis as any);
+
+			horizontalLine.transition(t)
+				.attr("y1", this.y(0))
+				.attr("y2", this.y(0))
+				.attr("x1", 0)
+				.attr("x2", chartSize.width);
 		} else {
-			this.innerWrap.append("g")
-				.attr("class", "y axis yAxes")
-				.call(yAxis);
+			yAxisRef = this.innerWrap.append("g")
+				.attr("class", "y axis yAxes");
+
+			yAxisRef.call(yAxis);
+
+			yAxisRef.append("line")
+				.classed("domain", true)
+				.attr("y1", this.y(0))
+				.attr("y2", this.y(0))
+				.attr("x1", 0)
+				.attr("x2", chartSize.width)
+				.attr("stroke", Configuration.scales.domain.color)
+				.attr("fill", Configuration.scales.domain.color)
+				.attr("stroke-width", Configuration.scales.domain.strokeWidth);
 		}
+
+		Tools.moveToFront(horizontalLine);
 
 		if (scales.y2 && scales.y2.ticks.max) {
 			const secondaryYAxis = d3.axisRight(this.y2)

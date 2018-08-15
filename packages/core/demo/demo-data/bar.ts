@@ -8,8 +8,8 @@ export const groupedBarData = {
 			backgroundColors: [colors[0]],
 			data: [
 				65000,
-				29123,
-				35213,
+				-29123,
+				-35213,
 				51213,
 				16932
 			]
@@ -19,9 +19,9 @@ export const groupedBarData = {
 			backgroundColors: [colors[1]],
 			data: [
 				32432,
-				21312,
-				56456,
-				21312,
+				-21312,
+				-56456,
+				-21312,
 				34234
 			]
 		},
@@ -29,18 +29,18 @@ export const groupedBarData = {
 			label: "Dataset 3",
 			backgroundColors: [colors[2]],
 			data: [
-				12312,
+				-12312,
 				23232,
 				34232,
-				12312,
-				34234
+				-12312,
+				-34234
 			]
 		},
 		{
 			label: "Dataset 4",
 			backgroundColors: [colors[3]],
 			data: [
-				32423,
+				-32423,
 				21313,
 				64353,
 				24134,
@@ -51,7 +51,6 @@ export const groupedBarData = {
 };
 
 export const groupedBarOptions = {
-	accessibility: true,
 	scales: {
 		x: {
 			title: "2018 Annual Sales Figures",
@@ -64,8 +63,8 @@ export const groupedBarOptions = {
 		},
 		y2: {
 			ticks: {
-				max: 1,
-				min: 0
+				max: 70,
+				min: -60
 			}
 		}
 	},
@@ -107,6 +106,56 @@ export const simpleBarOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
+};
+
+export const stackedBarData = {
+	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			backgroundColors: [colors[0]],
+			data: [
+				65000,
+				29123,
+				35213,
+				51213,
+				16932
+			]
+		},
+		{
+			label: "Dataset 2",
+			backgroundColors: [colors[1]],
+			data: [
+				32432,
+				21312,
+				56456,
+				21312,
+				34234
+			]
+		},
+		{
+			label: "Dataset 3",
+			backgroundColors: [colors[2]],
+			data: [
+				12312,
+				23232,
+				34232,
+				12312,
+				34234
+			]
+		},
+		{
+			label: "Dataset 4",
+			backgroundColors: [colors[3]],
+			data: [
+				32423,
+				21313,
+				64353,
+				24134,
+				32423
+			]
+		}
+	]
 };
 
 // Stacked bar

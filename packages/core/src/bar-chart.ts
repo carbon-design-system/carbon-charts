@@ -4,6 +4,24 @@ import { BaseAxisChart } from "./base-axis-chart";
 import { StackedBarChart } from "./stacked-bar-chart";
 import { Configuration } from "./configuration";
 
+const getYMin = configs => {
+	const { datasets } = configs.data;
+	const { scales } = configs.options;
+	let yMin;
+
+	if (datasets.length === 1) {
+		yMin = d3.min(datasets[0].data);
+	} else {
+		yMin = d3.min(datasets, (d: any) => (d3.min(d.data)));
+	}
+
+	if (scales.y.yMinAdjuster) {
+		yMin = scales.y.yMinAdjuster(yMin);
+	}
+
+	return yMin;
+};
+
 export class BarChart extends BaseAxisChart {
 	x: any;
 	x1?: any;
@@ -12,7 +30,7 @@ export class BarChart extends BaseAxisChart {
 
 	constructor(holder: Element, configs: any) {
 		// If this is a stacked bar chart, change the object prototype
-		if (configs.options.scales.y.stacked) {
+		if (configs.options.scales.y.stacked && getYMin(configs) >= 0 ) {
 			return new StackedBarChart(holder, configs);
 		}
 
@@ -61,9 +79,9 @@ export class BarChart extends BaseAxisChart {
 						.append("rect")
 						.classed("bar", true)
 						.attr("x", d => this.x1(d.datasetLabel))
-						.attr("y", d => this.y(d.value))
+						.attr("y", d => this.y(Math.max(0, d.value)))
 						.attr("width", this.x1.bandwidth())
-						.attr("height", d => height - this.y(d.value))
+						.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
 						.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
 						.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.label) : null)
 						.attr("stroke-width", Configuration.bars.default.strokeWidth)
@@ -106,9 +124,9 @@ export class BarChart extends BaseAxisChart {
 			.append("rect")
 			.attr("class", "bar")
 			.attr("x", d => this.x1(d.datasetLabel))
-			.attr("y", d => this.y(d.value))
+			.attr("y", d => this.y(Math.max(0, d.value)))
 			.attr("width", this.x1.bandwidth())
-			.attr("height", d => height - this.y(d.value))
+			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
 			.attr("opacity", 0)
 			.transition(this.getFillTransition())
 			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
@@ -122,9 +140,9 @@ export class BarChart extends BaseAxisChart {
 			.append("rect")
 			.attr("class", "bar")
 			.attr("x", d => this.x1(d.datasetLabel))
-			.attr("y", d => this.y(d.value))
+			.attr("y", d => this.y(Math.max(0, d.value)))
 			.attr("width", this.x1.bandwidth())
-			.attr("height", d => height - this.y(d.value))
+			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
 			.attr("opacity", 0)
 			.transition(this.getFillTransition())
 			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
@@ -175,9 +193,9 @@ export class BarChart extends BaseAxisChart {
 			// TODO
 			// .ease(d3.easeCircle)
 			.attr("x", d => this.x1(d.datasetLabel))
-			.attr("y", d => this.y(d.value))
+			.attr("y", d => this.y(Math.max(0, d.value)))
 			.attr("width", this.x1.bandwidth())
-			.attr("height", d => height - this.y(d.value))
+			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
 			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
 			.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.label) : null);
 	}
