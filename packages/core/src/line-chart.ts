@@ -202,11 +202,4 @@ export class LineChart extends BaseAxisChart {
 
 		super.resizeChart();
 	}
-
-	reduceOpacity(exception) {
-		super.reduceOpacity(exception);
-
-		this.innerWrap.selectAll("circle.dot").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
-		d3.select(exception.parentNode).selectAll("circle").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
-	}
 }

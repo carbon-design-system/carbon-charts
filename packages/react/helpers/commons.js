@@ -7,16 +7,10 @@ export const randomizeValue = currentVal => {
 };
 
 export const colors = [
-	"#009BEF",
-	"#95D13C",
-	"#785EF0",
-	"#F87EAC",
-	"#FFB000",
-	"#00B6CB",
-	"#FF5C49",
-	"#047CC0",
-	"#FE8500",
-	"#5A3EC8",
-	"#40D5BB",
-	"#FF509E"
+	"#00a68f",
+	"#3b1a40",
+	"#473793",
+	"#3c6df0",
+	"#56D2BB"
+	// 12 items needed
 ];

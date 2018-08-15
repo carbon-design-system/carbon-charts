@@ -443,6 +443,17 @@ export class BaseAxisChart extends BaseChart {
 					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
 					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
+
+				self.showTooltip(d, this);
+				self.reduceOpacity(this);
+			})
+			.on("mousemove", function(d) {
+				// TODOCARBON - REFACTOR
+				const tooltipRef = d3.select(self.holder).select("div.chart-tooltip");
+
+				const relativeMousePosition = d3.mouse(self.holder as HTMLElement);
+				tooltipRef.style("left", relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px")
+					.style("top", relativeMousePosition[1] + "px");
 			})
 			.on("mouseout", function(d) {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.bars.mouseout;
@@ -450,10 +461,8 @@ export class BaseAxisChart extends BaseChart {
 					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
 					.attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
 					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
-			})
-			.on("click", function(d) {
-				self.showTooltip(d, this);
-				self.reduceOpacity(this);
+
+				self.hideTooltip();
 			});
 
 		this.svg.selectAll("circle.dot")
@@ -461,15 +470,16 @@ export class BaseAxisChart extends BaseChart {
 				d3.select(this)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
 					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
+
+				self.showTooltip(d, this);
+				self.reduceOpacity(this);
 			})
 			.on("mouseout", function(d) {
 				d3.select(this)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
 					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
-			})
-			.on("click", function(d) {
-				self.showTooltip(d, this);
-				self.reduceOpacity(this);
+
+				self.hideTooltip();
 			});
 	}
 }

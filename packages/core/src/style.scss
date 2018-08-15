@@ -59,11 +59,12 @@ $default_transition: all .1s ease-out;
 			}
 		}
 
-		rect, circle, path {
-			&:hover {
-				cursor: pointer;
-			}
-		}
+		// TODOCARBON
+		// rect, circle, path {
+		// 	&:hover {
+		// 		cursor: pointer;
+		// 	}
+		// }
 
 		path {
 			&.line {
@@ -159,14 +160,11 @@ $default_transition: all .1s ease-out;
 
 		.legend-circle {
 			display: inherit;
-			height: 10px;
-			width: 10px;
-			-moz-border-radius: 50%;
-			border-radius: 50%;
+			height: 12px;
+			width: 12px;
+			border-radius: 3px;
 			margin: 0 5px 5px 15px;
 			box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			-webkit-box-sizing: border-box;
 
 			&:hover {
 				cursor: pointer;
@@ -269,14 +267,15 @@ $default_transition: all .1s ease-out;
 }
 
 .tooltip {
-	background-color: #FFFFFF;
+	background-color: #484848;
+    color: #fff;
 	box-shadow: 0 0 10px 0 rgba(0,0,0,0.16);
 	display: block;
 	@include fonts();
 	font-size: 12px;
 	position: absolute;
 	padding: 10px;
-	padding-right: 28px;
+	border-radius: 3px;
 	max-width: 200px;
 	word-wrap: break-word;
 	z-index: 1059;

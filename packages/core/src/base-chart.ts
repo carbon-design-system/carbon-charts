@@ -342,10 +342,12 @@ export class BaseChart {
 		return {chartId, container};
 	}
 
+	// TODOCARBON - REFACTOR
 	resetOpacity() {
 		const svg = d3.selectAll("svg.chart-svg");
 		svg.selectAll("path").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
-		svg.selectAll("path").attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		// svg.selectAll("path").attr("stroke-opacity", this.options.accessibility ? 1 : 0);
+
 		svg.selectAll("circle")
 			.attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
 			.attr("fill", Configuration.charts.resetOpacity.circle.fill);
@@ -355,13 +357,13 @@ export class BaseChart {
 	}
 
 	reduceOpacity(exception) {
-		this.svg.selectAll("rect, path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
-		this.svg.selectAll("rect, path").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+		// this.svg.selectAll("rect, path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
+		// this.svg.selectAll("rect, path").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
 
 		const exceptedElement = d3.select(exception);
 		const exceptedElementData = exceptedElement.datum() as any;
 		d3.select(exception).attr("fill-opacity", false);
-		d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+		d3.select(exception).attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
 		d3.select(exception).attr("fill", (d: any) => this.getFillScale()[d.datasetLabel](exceptedElementData.label));
 	}
 
@@ -511,16 +513,19 @@ export class BaseChart {
 	}
 
 	addLegendCircleHoverEffect() {
-		d3.selectAll(".legend-circle")
+		d3.selectAll("li.legend-btn")
 			.on("mouseover", function() {
-				const color = (this as HTMLElement).style.backgroundColor.substring(4, (this as HTMLElement).style.backgroundColor.length - 1);
-				d3.select(this).style(
+				const circleRef = d3.select(this).select("div.legend-circle");
+				const color = (circleRef.node() as HTMLElement).style.backgroundColor.substring(4,
+					(circleRef.node() as HTMLElement).style.backgroundColor.length - 1);
+
+				circleRef.style(
 					"box-shadow",
 					`0 0 0 ${Configuration.legend.hoverShadowSize} rgba(${color}, ${Configuration.legend.hoverShadowTransparency})`
 				);
 			})
 			.on("mouseout", function() {
-				d3.select(this).style("box-shadow", "none");
+				d3.select(this).select("div.legend-circle").style("box-shadow", "none");
 			});
 	}
 
@@ -721,7 +726,13 @@ export class BaseChart {
 
 	hideTooltip() {
 		this.resetOpacity();
-		d3.selectAll(".tooltip").remove();
+
+		const tooltipRef = d3.select(this.holder).select("div.chart-tooltip");
+		tooltipRef.style("opacity", 1)
+			.transition()
+			.duration(Configuration.tooltip.fadeOut.duration)
+			.style("opacity", 0)
+			.remove();
 
 		this.removeTooltipEventListeners();
 	}
@@ -782,11 +793,12 @@ export class BaseChart {
 			.style("border-color", this.colorScale[d.datasetLabel](d.label))
 			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
+		// TODOCARBON - Remove
 		// Add close button to tooltip
-		Tools.addCloseBtn(tooltip, "xs")
-			.on("click", () => {
-				this.hideTooltip();
-			});
+		// Tools.addCloseBtn(tooltip, "xs")
+		// 	.on("click", () => {
+		// 		this.hideTooltip();
+		// 	});
 
 		let tooltipHTML = "";
 		const formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString("en");
@@ -833,17 +845,18 @@ export class BaseChart {
 
 		// Draw tooltip arrow in the right direction
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
-			tooltip.classed("arrow-right", true);
 			tooltip.style(
 				"left",
 				d3.mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
 			);
-			tooltip.append("div").attr("class", "arrow");
 		} else {
-			tooltip.classed("arrow-left", true);
 			tooltip.style("left", d3.mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
-			tooltip.append("div").attr("class", "arrow");
 		}
+
+		tooltip.style("opacity", 0)
+			.transition()
+			.duration(Configuration.tooltip.fadeIn.duration)
+			.style("opacity", 1);
 
 		this.addTooltipEventListeners(tooltip);
 	}

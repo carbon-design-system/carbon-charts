@@ -248,11 +248,11 @@ export class PieChart extends BaseChart {
 		this.innerWrap.selectAll("path").attr("stroke-opacity", 0);
 
 		if (exception) {
-			this.innerWrap.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
+			// this.innerWrap.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
 
 			// Fade everything out except for this element
 			d3.select(exception).attr("fill-opacity", false);
-			d3.select(exception).attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
+			d3.select(exception).attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
 			d3.select(exception).attr("fill", (d: any) => this.getFillScale()[this.displayData.datasets[0].label](d.data.label));
 		}
 	}
@@ -266,10 +266,12 @@ export class PieChart extends BaseChart {
 			.attr("class", "tooltip chart-tooltip")
 			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px")
 			.style("border-color", this.colorScale[this.displayData.datasets[0].label](d.data.label)); // TODO - Support multiple datasets
-		Tools.addCloseBtn(tooltip, "xs")
-			.on("click", () => {
-				this.hideTooltip();
-			});
+
+		// TODOCARBON - Remove
+		// Tools.addCloseBtn(tooltip, "xs")
+		// 	.on("click", () => {
+		// 		this.hideTooltip();
+		// 	});
 
 		const dVal = d.value.toLocaleString();
 		let tooltipHTML = `
@@ -289,17 +291,18 @@ export class PieChart extends BaseChart {
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
-			tooltip.classed("arrow-right", true);
 			tooltip.style(
 				"left",
 				d3.mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
 			);
-			tooltip.append("div").attr("class", "arrow");
 		} else {
-			tooltip.classed("arrow-left", true);
 			tooltip.style("left", d3.mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
-			tooltip.append("div").attr("class", "arrow");
 		}
+
+		tooltip.style("opacity", 0)
+			.transition()
+			.duration(Configuration.tooltip.fadeIn.duration)
+			.style("opacity", 1);
 
 		this.addTooltipEventListeners(tooltip);
 	}
@@ -310,10 +313,6 @@ export class PieChart extends BaseChart {
 		const { accessibility } = this.options;
 
 		this.innerWrap.selectAll("path")
-			.on("click", function(d) {
-				self.showTooltip(d);
-				self.reduceOpacity(this);
-			})
 			.on("mouseover", function(d) {
 				const sliceElement = d3.select(this);
 				Tools.moveToFront(sliceElement);
@@ -322,12 +321,25 @@ export class PieChart extends BaseChart {
 					.attr("stroke-width", Configuration.pie.mouseover.strokeWidth)
 					.attr("stroke-opacity", Configuration.pie.mouseover.strokeOpacity)
 					.attr("stroke", self.colorScale[self.displayData.datasets[0].label](d.data.label));
+
+				self.showTooltip(d);
+				self.reduceOpacity(this);
+			})
+			.on("mousemove", function(d) {
+				// TODOCARBON - REFACTOR
+				const tooltipRef = d3.select(self.holder).select("div.chart-tooltip");
+
+				const relativeMousePosition = d3.mouse(self.holder as HTMLElement);
+				tooltipRef.style("left", relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px")
+					.style("top", relativeMousePosition[1] + "px");
 			})
 			.on("mouseout", function(d) {
 				d3.select(this)
 					.attr("stroke-width", accessibility ? Configuration.pie.default.strokeWidth : Configuration.pie.mouseout.strokeWidth)
 					.attr("stroke", accessibility ? self.colorScale[self.displayData.datasets[0].label](d.data.label) : "none")
 					.attr("stroke-opacity", Configuration.pie.mouseout.strokeOpacity);
+
+				self.hideTooltip();
 			});
 	}
 
