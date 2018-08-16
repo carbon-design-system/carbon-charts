@@ -1,0 +1,19 @@
+dist: trusty
+language: node_js
+node_js:
+ - '8'
+addons:
+  chrome: stable
+before_install:
+- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+before_install: .travis/before_install.sh
+after_success: .travis/after_success.sh
+script: npm test && npm run lint && cd packages/core && npm run demo:build
+sudo: false
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: bash ./scripts/deploy.sh
+  on:
+    all_branches: true
+    repo: carbon/charts
