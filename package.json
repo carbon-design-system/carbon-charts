@@ -1,5 +1,5 @@
 {
-  "name": "@peretz-charts/monorepo",
+  "name": "@carbon/charts",
   "scripts": {
     "commit": "git-cz",
     "semantic-release": "lerna-semantic-release pre && lerna-semantic-release post && lerna-semantic-release perform",

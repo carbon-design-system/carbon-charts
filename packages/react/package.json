@@ -1,7 +1,7 @@
 {
-	"name": "@peretz/charts-react",
+	"name": "@carbon/charts-react",
 	"version": "1.0.0",
-	"description": "WCE charting components for React",
+	"description": "Carbon charting components for React",
 	"main": "build/index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
@@ -11,16 +11,16 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.ibm.com:peretz/charts.git"
+		"url": "git@github.com:IBM/carbon-charts.git"
 	},
-	"license": "SEE LICENSE IN LICENSE",
+	"license": "Apache-2",
 	"author": "IBM",
 	"bugs": {
-		"url": "https://github.ibm.com/peretz/charts/issues"
+		"url": "https://github.com/IBM/carbon-charts/issues"
 	},
-	"homepage": "https://github.ibm.com/peretz/charts#readme",
+	"homepage": "https://github.com/IBM/carbon-charts#readme",
 	"dependencies": {
-		"@peretz/charts": "^1.0.0",
+		"@carbon/charts": "^1.0.0",
 		"@peretz/matter": "1.1.0",
 		"react": "^16.0.0",
 		"react-dom": "^16.4.2",

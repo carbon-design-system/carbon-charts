@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/angular";
 
-import { DonutCenter } from "@peretz/charts";
-import { colors } from "@peretz/charts-angular/demo/src/helpers/commons";
+import { DonutCenter } from "@carbon/charts";
+import { colors } from "@carbon/charts-angular/demo/src/helpers/commons";
 
 import { ChartsModule } from "../../../src/charts.module";
 import { PieComponent } from "../pie/pie.component";

@@ -5,7 +5,7 @@ import PieChart from "../src/pie-chart";
 import DonutChart from "../src/donut-chart";
 
 import { colors } from "../helpers/commons";
-import { DonutCenter } from "@peretz/charts";
+import { DonutCenter } from "@carbon/charts";
 
 const demoPieOptions = {
 	accessibility: false,

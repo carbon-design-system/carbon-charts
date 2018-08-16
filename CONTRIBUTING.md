@@ -16,10 +16,10 @@ Please take a moment to review this document in order to make the contribution p
 
 ## Issue guidelines
 
-- **Before submitting**, confirm the issue doesn't already exist by browsing through [existing issues](https://github.ibm.com/peretz/charts/issues). _Duplicates are just a waste of space._
+- **Before submitting**, confirm the issue doesn't already exist by browsing through [existing issues](https://github.com/IBM/carbon-charts/issues). _Duplicates are just a waste of space._
 - Keep issues **specific to one topic**. _Do not open an issue that describes multiple defects._
 - Provide a **short descriptive title** that mentions the component being addressed.
-- Provide enough of the **relevant information** below to initiate a clear issue description. Most of this content comes out-of-the-box as a template when [creating a new issue](https://github.ibm.com/peretz/charts/issues/new).
+- Provide enough of the **relevant information** below to initiate a clear issue description. Most of this content comes out-of-the-box as a template when [creating a new issue](https://github.com/IBM/carbon-charts/issues/new).
   - Type of issue
   - Version of charts
   - Description of the issue
@@ -30,7 +30,7 @@ Please take a moment to review this document in order to make the contribution p
   - Code snippets
   - Links to your application source code or running demo
     - Include any connection/authentication information we may need to view the links
-- Add **relevant labels** (accessibility, bug, design, discussion, feature, etc.) to help organize and identify issues. For a complete list of our labels, see the [labels page](https://github.ibm.com/peretz/charts/labels).
+- Add **relevant labels** (accessibility, bug, design, discussion, feature, etc.) to help organize and identify issues. For a complete list of our labels, see the [labels page](https://github.com/IBM/carbon-charts/labels).
 - If you are interested in contributing, feel free to **assign the issue** to yourself, otherwise leave it unassigned.
 
 ## Pull request guidelines
@@ -48,7 +48,7 @@ Please take a moment to review this document in order to make the contribution p
     Demos all features | All interactions spec'd out in the Design Guide has visual support and a demo as proof.
     Documented/annotated | All rule blocks, placeholders, mixins, and functions has associated comment blocks that convey purpose and list inline notations referencing declarations that need further explanation.
     Matches UI/UX specs | All features are pixel perfect when compared to the Design Guide.
-    Meets the [code style guide](https://github.ibm.com/peretz/charts/wiki/Code-style-guide) | All code adheres to our custom style guide giving off the impression that it was written by one developer.
+    Meets the [code style guide](https://github.com/IBM/carbon-charts/wiki/Code-style-guide) | All code adheres to our custom style guide giving off the impression that it was written by one developer.
     Accessible | All code passes the [Dynamic Assessment Plugin (DAP)](https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W88ee03f8907c_412b_a3a8_988dabb72b35/page/Dynamic%20Assessment%20Plugin) scan in Chrome.
     Mobile first | All visual elements are elegantly responsive.
     RTL support | All visual elements reflect bidirectional text appropriately.
@@ -56,19 +56,19 @@ Please take a moment to review this document in order to make the contribution p
 
 - While creating the pull request:
   - Prepend "WIP: " to the title of your pull request if it is **not ready** to be merged.
-  - Provide enough of the **relevant information** below to initiate a clear contribution description. Most of this content comes out-of-the-box as a template when [creating a pull request](https://github.ibm.com/peretz/charts/compare).
+  - Provide enough of the **relevant information** below to initiate a clear contribution description. Most of this content comes out-of-the-box as a template when [creating a pull request](https://github.com/IBM/carbon-charts/compare).
     1. A list of updates with references to the related issue (see: [Closing issues using keywords](https://help.github.com/articles/closing-issues-using-keywords/))
     2. Screenshots or recording
     3. @mention any key stakeholders that need to be aware of the changes
-  - Add **relevant labels** (needs review, accessibility, bug, design, feature, etc.) to help organize and identify issues. For a complete list of our labels, see the [labels page](https://github.ibm.com/peretz/charts/labels)
+  - Add **relevant labels** (needs review, accessibility, bug, design, feature, etc.) to help organize and identify issues. For a complete list of our labels, see the [labels page](https://github.com/IBM/carbon-charts/labels)
 
 ### Contribution process
 
-1. [Run Charts locally](https://github.ibm.com/peretz/charts/blob/master/README.md#run-charts-locally), then **configure the remotes** from your `charts/` directory:
+1. [Run Charts locally](https://github.com/IBM/carbon-charts/blob/master/README.md#run-charts-locally), then **configure the remotes** from your `charts/` directory:
 
    ```bash
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream git@github.ibm.com:peretz/charts.git
+   git remote add upstream git@github.com:IBM/carbon-charts.git
    ```
 
 2. **Create a new topic branch** (off the original remote branch) to contain your code changes:
@@ -113,7 +113,7 @@ Please take a moment to review this document in order to make the contribution p
    git push origin <topic-branch-name>
    ```
 
-6. [Open a Pull Request](https://github.ibm.com/peretz/charts/compare) with a clear title and description from the template provided.
+6. [Open a Pull Request](https://github.com/IBM/carbon-charts/compare) with a clear title and description from the template provided.
 
     - See [Creating a pull request from a fork](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) for step-by-step instructions.
     - Ensure the base branch is assigned to `master`.
@@ -123,14 +123,14 @@ Please take a moment to review this document in order to make the contribution p
 We use specific NPM scripts to test, lint, and build our demo and distributed files. Here are the scripts to choose from:
 
 - `npm run demo:server` to run the demo server on port 9090 and watch for changes
-- `npm run demo:build` to build the demo directory in `charts/demo/`
-- `npm run build` to build the distributed directory in `charts/dist/`
+- `npm run demo:build` to build the demo directory in `carbon-charts/demo/`
+- `npm run build` to build the distributed directory in `carbon-charts/dist/`
 - `npm run lint` to run TS lint on the source files
 - `npm run test` to run unit tests on the source files
 
 ## Code guidelines
 
-Adhere to the code guide enforced with our _very specific_ TS rules defined in our very own [linter file](https://github.ibm.com/peretz/charts/blob/master/tslint.json).
+Adhere to the code guide enforced with our _very specific_ TS rules defined in our very own [linter file](https://github.com/IBM/carbon-charts/blob/master/tslint.json).
 
 Run `npm run lint` before committing to ensure your changes follow our coding standards.
 
@@ -138,9 +138,7 @@ Run `npm run lint` before committing to ensure your changes follow our coding st
 
 - [Dynamic Assessment Plugin (DAP)](https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W88ee03f8907c_412b_a3a8_988dabb72b35/page/Dynamic%20Assessment%20Plugin)
 - [IBM Accessibility Checklist](http://www-03.ibm.com/able/guidelines/ci162/accessibility_checklist.html)
-- [charts Wiki pages](https://github.ibm.com/peretz/charts/wiki)
-- [Peretz Showcase](http://peretz.stage1.mybluemix.net/)
-- [Peretz Slack room](https://peretz.slack.com/)
+- [Charts Wiki pages](https://github.com/IBM/carbon-charts/wiki)
 - [WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices-1.1/)
 
 ### Philosophy

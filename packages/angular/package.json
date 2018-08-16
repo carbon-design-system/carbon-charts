@@ -1,7 +1,7 @@
 {
-	"name": "@peretz/charts-angular",
+	"name": "@carbon/charts-angular",
 	"version": "1.1.0",
-	"description": "WCE charting components for Angular",
+	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"scripts": {
 		"build": "bash scripts/build.sh",
@@ -15,9 +15,9 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.ibm.com:peretz/charts.git"
+		"url": "git@github.com:IBM/carbon-charts.git"
 	},
-	"license": "SEE LICENSE IN LICENSE",
+	"license": "Apache-2",
 	"author": "IBM",
 	"peerDependencies": {
 		"@angular/animations": "^5.1.1",
@@ -35,7 +35,7 @@
 		"zone.js": "^0.8.18"
 	},
 	"dependencies": {
-		"@peretz/charts": "^1.0.0"
+		"@carbon/charts": "^1.0.0"
 	},
 	"devDependencies": {
 		"@angular/animations": "5.1.1",

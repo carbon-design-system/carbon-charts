@@ -1,8 +1,8 @@
 <p align="center">
-	<a href="https://pages.github.ibm.com/peretz/charts/">
-		<img src="packages/core/src/assets/logo.png" alt="Peretz Charts" width=90 height=90 />
+	<a href="https://pages.github.com/IBM/carbon-charts/">
+		<img src="packages/core/src/assets/logo.png" alt="Carbon Charts" width=90 height=90 />
 	</a>
-	<h3 align="center">Peretz Charts</h3>
+	<h3 align="center">Carbon Charts</h3>
 	<p align="center">
 		A reusable framework-agnostic D3 charting library for Watson Customer Engagement.
 	</p>
@@ -43,19 +43,14 @@
 
 ### Installation
 
-First, log in to the whitewater hosted NPM Enterprise by initiating authentication like this:
-
-  ```bash
-  $ npm login --registry=https://npm-registry.whitewater.ibm.com --scope=@peretz --auth-type=oauth
-  ```
-
-_Refer to [this guide](https://github.ibm.com/Whitewater/npm-enterprise) for further instructions._
-
-After authentication, run `npm install @peretz/charts` to download the latest Charts distribution package.
+Run:
+```bash
+npm install @carbon/charts --save
+```
 
 ## Demo and documentation
 
-Charts' demo and documentation can be viewed in [GitHub Pages](https://github.ibm.com/peretz/charts/tree/gh-pages) at <https://pages.github.ibm.com/peretz/charts/> and <https://pages.github.ibm.com/peretz/charts/documentation/> respectively.
+Charts' demo and documentation can be viewed in [GitHub Pages](https://pages.github.com/IBM/carbon-charts/) at <https://pages.github.com/IBM/carbon-charts/> and <https://pages.github.com/IBM/carbon-charts/documentation/> respectively.
 
 ### Code Sample
 <p align="center">
@@ -69,7 +64,7 @@ HTML:
 
 JS:
 ```js
-import { BarChart } from "@peretz/charts/bundle/bundle.js";
+import { BarChart } from "@carbon/charts";
 
 const colors = [
 	"#00a68f",
@@ -148,16 +143,13 @@ const barChart = new BarChart(
 ```
 
 ### Run Charts locally
-
-Environment prereqs: [GHE](https://github.ibm.com/peretz), [NPM Enterprise](https://github.ibm.com/Whitewater/npm-enterprise), [Git](https://git-scm.com/downloads), and [Node.js](https://nodejs.org/en/download/).
-
 1. Fork the project and clone your fork:
 
    ```bash
    # Clone your fork of the repo into the current directory
-   git clone git@github.ibm.com:<your-username>/charts.git
+   git clone git@github.com:<your-username>/carbon-charts.git
    # Navigate to the newly cloned directory
-   cd charts
+   cd carbon-charts
    ```
 
 2. Run `npm install` to install Node.js dependencies.
@@ -166,26 +158,18 @@ Environment prereqs: [GHE](https://github.ibm.com/peretz), [NPM Enterprise](http
 
 ## Bugs and feature requests
 
-Have a bug or a feature request? First read the [issue guidelines](https://github.ibm.com/peretz/charts/blob/master/CONTRIBUTING.md#issue-guidelines) and search for existing and closed issues. If your problem or idea is not addressed yet, [open a new issue](https://github.ibm.com/peretz/charts/issues/new).
+Have a bug or a feature request? First read the [issue guidelines](https://github.com/IBM/carbon-charts/blob/master/CONTRIBUTING.md#issue-guidelines) and search for existing and closed issues. If your problem or idea is not addressed yet, [open a new issue](https://github.com/IBM/carbon-charts/issues/new).
 
 ## Contributing
 
-See our [contributing guidelines](https://github.ibm.com/peretz/charts/blob/master/CONTRIBUTING.md). Included are instructions for opening issues, coding guidelines, and submitting pull requests.
+See our [contributing guidelines](https://github.com/IBM/carbon-charts/blob/master/CONTRIBUTING.md). Included are instructions for opening issues, coding guidelines, and submitting pull requests.
 
-## Community
+<!-- ## Community
 
-Get updates on Charts' development and chat with the core team and community.
-
-- Bookmark the [WCE Showcase](http://peretz.stage1.mybluemix.net/) in your favorite browser.
-- Join our very own [Slack room](https://peretz.slack.com/).
-- Subscribe to our quarterly Community Calls by contacting [Nina Li](https://github.ibm.com/nina).
+Get updates on Charts' development and chat with the core team and community. -->
 
 ## Versioning
 
-It is important to know we do our best to ensure Charts adheres to the [Semantic Versioning guidelines](http://semver.org/).
+We use the **semantic-release** library to automatically version our releases within the guidelines of Semantic Versioning [Semantic Versioning guidelines](http://semver.org/).
 
-See our [releases notes](https://github.ibm.com/peretz/charts/releases) for the changelog of each version of Charts. Releases are announced at our Community Calls and posted in [Charts' slack channel](https://peretz.slack.com/messages/peretz-charts/).
-
-## Copyright and license
-
-© Copyright IBM Corp. 2014, 2018
+See our [releases notes](https://github.com/IBM/carbon-charts/releases) for the changelog of each version of Charts.

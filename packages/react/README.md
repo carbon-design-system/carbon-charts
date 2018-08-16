@@ -11,6 +11,6 @@ npm start
 ```sh
 cd demo
 npm i
-npm link @peretz/charts-react
+npm link @carbon/charts-react
 npm start
 ```

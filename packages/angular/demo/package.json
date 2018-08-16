@@ -1,5 +1,5 @@
 {
-  "name": "@peretz/charts-angular-storybook",
+  "name": "@carbon/charts-angular-storybook",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -22,8 +22,8 @@
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
     "core-js": "^2.5.4",
-    "@peretz/charts": "^1.0.0",
-    "@peretz/charts-angular": "^1.1.0",
+    "@carbon/charts": "^1.0.0",
+    "@carbon/charts-angular": "^1.1.0",
     "@peretz/matter": "1.1.0",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
