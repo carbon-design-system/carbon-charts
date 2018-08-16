@@ -13,7 +13,7 @@
 	"scripts": {
 	  "commit": "git-cz",
 	  "semantic-release": "lerna-semantic-release pre && lerna-semantic-release post && lerna-semantic-release perform",
-	  "postinstall": "lerna bootstrap",
+	  "postinstall": "lerna bootstrap --hoist",
 	  "test": "lerna run test",
 	  "lint": "eslint packages"
 	},
