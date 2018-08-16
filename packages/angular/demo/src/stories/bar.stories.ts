@@ -8,6 +8,7 @@ import {
 	groupedBarOptions,
 	simpleBarData,
 	simpleBarOptions,
+	stackedBarData,
 	stackedBarOptions
 } from "./bar-demo-data";
 
@@ -62,7 +63,7 @@ barStories.add("Stacked", () => ({
 		imports: [ChartsModule]
 	},
 	props: {
-		barData: groupedBarData,
+		barData: stackedBarData,
 		barOptions: stackedBarOptions
 	},
 }));
@@ -73,7 +74,7 @@ barStories.add("Stacked (Accessible)", () => ({
 		imports: [ChartsModule]
 	},
 	props: {
-		barData: groupedBarData,
+		barData: stackedBarData,
 		barOptions: Object.assign({}, stackedBarOptions, {accessibility: true})
 	},
 }));

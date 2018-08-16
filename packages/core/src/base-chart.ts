@@ -866,7 +866,11 @@ export class BaseChart {
 	}
 
 	getDefaultTransition() {
-		return d3.transition().duration(Configuration.transitions.default.duration);
+		if (this.options.animations === false) {
+			return this.getInstantTransition();
+		} else {
+			return d3.transition().duration(Configuration.transitions.default.duration);
+		}
 	}
 
 	getInstantTransition() {
@@ -876,7 +880,11 @@ export class BaseChart {
 	// Used to determine whether to use a transition for updating fill attributes in charting elements
 	// Will disable the transition if in accessibility mode
 	getFillTransition(animate?: boolean) {
-		return d3.transition().duration(animate === false ? 0 : Configuration.transitions.default.duration);
+		if (this.options.animations === false) {
+			return this.getInstantTransition();
+		} else {
+			return d3.transition().duration(animate === false ? 0 : Configuration.transitions.default.duration);
+		}
 	}
 
 	// ================================================================================

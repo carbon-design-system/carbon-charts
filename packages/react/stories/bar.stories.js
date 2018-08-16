@@ -7,6 +7,7 @@ import {
 	groupedBarOptions,
 	simpleBarData,
 	simpleBarOptions,
+	stackedBarData,
 	stackedBarOptions
 } from "./bar-demo-data";
 
@@ -41,14 +42,14 @@ barStories.add("Grouped (Accessible)", () => (
 
 barStories.add("Stacked", () => (
 	<BarChart
-		data={groupedBarData}
+		data={stackedBarData}
 		options={stackedBarOptions}
 	/>
 ));
 
 barStories.add("Stacked (Accessible)", () => (
 	<BarChart
-		data={groupedBarData}
+		data={stackedBarData}
 		options={Object.assign({}, stackedBarOptions, {accessibility: true})}
 	/>
 ));

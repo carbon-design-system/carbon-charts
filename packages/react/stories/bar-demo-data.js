@@ -8,8 +8,8 @@ export const groupedBarData = {
 			backgroundColors: [colors[0]],
 			data: [
 				65000,
-				29123,
-				35213,
+				-29123,
+				-35213,
 				51213,
 				16932
 			]
@@ -19,9 +19,9 @@ export const groupedBarData = {
 			backgroundColors: [colors[1]],
 			data: [
 				32432,
-				21312,
-				56456,
-				21312,
+				-21312,
+				-56456,
+				-21312,
 				34234
 			]
 		},
@@ -29,18 +29,18 @@ export const groupedBarData = {
 			label: "Dataset 3",
 			backgroundColors: [colors[2]],
 			data: [
-				12312,
+				-12312,
 				23232,
 				34232,
-				12312,
-				34234
+				-12312,
+				-34234
 			]
 		},
 		{
 			label: "Dataset 4",
 			backgroundColors: [colors[3]],
 			data: [
-				32423,
+				-32423,
 				21313,
 				64353,
 				24134,
@@ -65,7 +65,10 @@ export const groupedBarOptions = {
 			ticks: {
 				max: 1,
 				min: 0
-			}
+			},
+			formatter: axisValue => {
+				return `${axisValue * 100}%`;
+			},
 		}
 	},
 	legendClickable: true,
@@ -109,6 +112,56 @@ export const simpleBarOptions = {
 };
 
 // Stacked bar
+export const stackedBarData = {
+	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			backgroundColors: [colors[0]],
+			data: [
+				65000,
+				29123,
+				35213,
+				51213,
+				16932
+			]
+		},
+		{
+			label: "Dataset 2",
+			backgroundColors: [colors[1]],
+			data: [
+				32432,
+				21312,
+				56456,
+				21312,
+				34234
+			]
+		},
+		{
+			label: "Dataset 3",
+			backgroundColors: [colors[2]],
+			data: [
+				12312,
+				23232,
+				34232,
+				12312,
+				34234
+			]
+		},
+		{
+			label: "Dataset 4",
+			backgroundColors: [colors[3]],
+			data: [
+				32423,
+				21313,
+				64353,
+				24134,
+				32423
+			]
+		}
+	]
+};
+
 export const stackedBarOptions = {
 	accessibility: false,
 	scales: {

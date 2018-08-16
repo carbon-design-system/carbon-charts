@@ -386,7 +386,7 @@ export class BaseAxisChart extends BaseChart {
 		// setTimeout is needed here, to take into account the new position of bars
 		// Right after transitions are initiated for the
 		setTimeout(() => {
-			const t = d3.transition().duration(noAnimation ? 0 : 750);
+			const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
 			// Update X Grid
 			const chartSize = this.getChartSize();

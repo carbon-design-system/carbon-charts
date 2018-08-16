@@ -106,7 +106,7 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 	// Function to be used to randomize a value
 	const randomizeValue = currentVal => {
 		const firstTry = Math.max(0.5 * currentVal, currentVal * Math.random() * (Math.random() * 5));
-		const result = Math.min(2 * currentVal, firstTry);
+		const result = currentVal > 0 ? Math.min(2 * currentVal, firstTry) : Math.max(2 * currentVal, firstTry);
 
 		return Math.floor(result);
 	};

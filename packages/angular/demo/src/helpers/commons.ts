@@ -1,22 +1,16 @@
 // Function to be used to randomize a value
 export const randomizeValue = currentVal => {
 	const firstTry = Math.max(0.5 * currentVal, currentVal * Math.random() * (Math.random() * 5));
-	const result = Math.min(2 * currentVal, firstTry);
+	const result = currentVal > 0 ? Math.min(2 * currentVal, firstTry) : Math.max(2 * currentVal, firstTry);
 
 	return Math.floor(result);
 };
 
 export const colors = [
-	"#009BEF",
-	"#95D13C",
-	"#785EF0",
-	"#F87EAC",
-	"#FFB000",
-	"#00B6CB",
-	"#FF5C49",
-	"#047CC0",
-	"#FE8500",
-	"#5A3EC8",
-	"#40D5BB",
-	"#FF509E"
+	"#00a68f",
+	"#3b1a40",
+	"#473793",
+	"#3c6df0",
+	"#56D2BB"
+	// 12 items needed
 ];

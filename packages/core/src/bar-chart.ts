@@ -30,8 +30,12 @@ export class BarChart extends BaseAxisChart {
 
 	constructor(holder: Element, configs: any) {
 		// If this is a stacked bar chart, change the object prototype
-		if (configs.options.scales.y.stacked && getYMin(configs) >= 0 ) {
-			return new StackedBarChart(holder, configs);
+		if (configs.options.scales.y.stacked) {
+			if (getYMin(configs) >= 0) {
+				return new StackedBarChart(holder, configs);
+			} else {
+				console.error("Negative values are not supported in StackedBarChart, using GroupedBarChart instead to render!");
+			}
 		}
 
 		super(holder, configs);

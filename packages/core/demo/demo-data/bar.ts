@@ -72,7 +72,8 @@ export const groupedBarOptions = {
 		}
 	},
 	legendClickable: true,
-	containerResizable: true
+	containerResizable: true,
+	animations: false
 };
 
 // Simple bar
@@ -111,6 +112,7 @@ export const simpleBarOptions = {
 	containerResizable: true,
 };
 
+// Stacked bar
 export const stackedBarData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
@@ -161,7 +163,6 @@ export const stackedBarData = {
 	]
 };
 
-// Stacked bar
 export const stackedBarOptions = {
 	accessibility: false,
 	scales: {
