@@ -63,9 +63,12 @@ export const groupedBarOptions = {
 		},
 		y2: {
 			ticks: {
-				max: 70,
-				min: -60
-			}
+				max: 1,
+				min: 0
+			},
+			formatter: axisValue => {
+				return `${axisValue * 100}%`;
+			},
 		}
 	},
 	legendClickable: true,
