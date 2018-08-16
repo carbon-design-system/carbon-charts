@@ -1,25 +1,35 @@
 {
-  "name": "@carbon/charts",
-  "scripts": {
-    "commit": "git-cz",
-    "semantic-release": "lerna-semantic-release pre && lerna-semantic-release post && lerna-semantic-release perform",
-    "postinstall": "lerna bootstrap",
-    "test": "lerna run test",
-    "lint": "eslint packages"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-lerna-changelog"
-    },
-    "validate-commit-msg": {
-      "helpMessage": "Commit message violates the rules defined for this project. Please, execute `npm run commit` to generate a correct commit message with `commitizen`"
-    }
-  },
-  "devDependencies": {
-    "commitizen": "^2.10.1",
-    "cz-lerna-changelog": "^1.2.1",
-    "husky": "^0.14.3",
-    "lerna": "^2.11.0",
-    "semantic-release": "^15.9.5"
+	"name": "@carbon/charts-monorepo",
+	"description": "Carbon charting components, lerna monorepo",
+	"repository": {
+	  "type": "git",
+	  "url": "git@github.com:IBM/carbon-charts.git"
+	},
+	"keywords": [
+	  "charts"
+	],
+	"author": "IBM",
+	"license": "Apache-2",
+	"scripts": {
+	  "commit": "git-cz",
+	  "semantic-release": "lerna-semantic-release pre && lerna-semantic-release post && lerna-semantic-release perform",
+	  "postinstall": "lerna bootstrap",
+	  "test": "lerna run test",
+	  "lint": "eslint packages"
+	},
+	"config": {
+	  "commitizen": {
+		"path": "./node_modules/cz-lerna-changelog"
+	  },
+	  "validate-commit-msg": {
+		"helpMessage": "Commit message violates the rules defined for this project. Please, execute `npm run commit` to generate a correct commit message with `commitizen`"
+	  }
+	},
+	"devDependencies": {
+	  "commitizen": "^2.10.1",
+	  "cz-lerna-changelog": "^1.2.1",
+	  "husky": "^0.14.3",
+	  "lerna": "^2.11.0",
+	  "semantic-release": "^15.9.5"
+	}
   }
-}
