@@ -9,7 +9,7 @@ import { BaseChart } from "./base-chart.component";
 import { PieChart } from "@carbon/charts";
 
 /**
- * Wrapper around `PieChart` in peretz charts library
+ * Wrapper around `PieChart` in carbon charts library
  *
  * Most functions just call their equivalent from the chart library.
  *

@@ -4,7 +4,7 @@ import PATTERN_SVGS from "../assets/patterns/index";
 import { Configuration } from "../configuration";
 
 const selectors = {
-	PATTERNS_CONTAINER: "peretz-charts-patterns"
+	PATTERNS_CONTAINER: "carbon-charts-patterns"
 };
 
 // Helper functions
@@ -71,16 +71,16 @@ export default class PatternsService {
 
 				// Create SVG container div
 				const svgContainer = document.createElement("div");
-				svgContainer.id = `peretz-${chartContainerID}-pattern-container-${id}`;
+				svgContainer.id = `carbon-${chartContainerID}-pattern-container-${id}`;
 				svgContainer.innerHTML = trimSVG(datasetPattern);
 
 				// Apply id to the svg element
 				const mountedSVG = svgContainer.querySelector("svg");
-				mountedSVG.id = `peretz-${chartContainerID}-pattern-${id}-svg`;
+				mountedSVG.id = `carbon-${chartContainerID}-pattern-${id}-svg`;
 
 				// Apply id to the pattern element
 				const patternElement = mountedSVG.querySelector("pattern");
-				patternElement.id = `peretz-${chartContainerID}-pattern-${id}`;
+				patternElement.id = `carbon-${chartContainerID}-pattern-${id}`;
 
 				// Apply fills to everything
 				const allElementsInsideSVG = Array.prototype.slice.call(mountedSVG.querySelectorAll("pattern g *"));
@@ -103,7 +103,7 @@ export default class PatternsService {
 				this.container.appendChild(svgContainer);
 
 				// Add pattern to the list of patterns
-				const patternURL = `url(#peretz-${chartContainerID}-pattern-${id})`;
+				const patternURL = `url(#carbon-${chartContainerID}-pattern-${id})`;
 				if (this.patternURLs[dataset.label]) {
 					this.patternURLs[dataset.label].push(patternURL);
 				} else {

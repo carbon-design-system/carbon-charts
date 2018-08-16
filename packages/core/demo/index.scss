@@ -187,22 +187,3 @@ div.code {
 		}
 	}
 }
-
-// Matter styles
-ul.btn_menu {
-	display: none !important;
-
-	&.visible {
-		display: block !important;
-	}
-}
-
-svg.icon--white-sm {
-	* {
-		fill: white;
-	}
-
-	&.flipped-y {
-		transform: rotate(180deg);
-	}
-}

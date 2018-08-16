@@ -25,7 +25,7 @@ export namespace Tools {
 		classNames = color ? " close--" + color : classNames;
 
 		const iconHolder = document.createElement("span");
-		iconHolder.innerHTML = `<peretz-icon set="core_set" icon="x" size="12"></peretz-icon>`;
+		iconHolder.innerHTML = `Close`;
 		closeBtn.attr("class", classNames)
 			.attr("type", "button")
 			.attr("aria-label", "Close");

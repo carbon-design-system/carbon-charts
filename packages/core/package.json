@@ -23,14 +23,11 @@
   "author": "IBM",
   "license": "Apache-2",
   "dependencies": {
-    "@peretz/neutrino": "^1.1.0",
     "carbon-components": "^9.8.0",
     "d3": "^4.11.0",
     "prismjs": "^1.14.0"
   },
   "devDependencies": {
-    "@peretz/icon-loader": "0.0.6",
-    "@peretz/matter": "1.1.0",
     "@types/d3": "^4.11.0",
     "@types/jasmine": "^2.8.7",
     "@types/node": "^10.0.8",

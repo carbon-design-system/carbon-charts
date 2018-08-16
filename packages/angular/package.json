@@ -29,7 +29,6 @@
 		"@angular/platform-browser": "^5.1.1",
 		"@angular/platform-browser-dynamic": "^5.1.1",
 		"@ngx-translate/core": "^9.0.2",
-		"@peretz/matter": "^1.1.0",
 		"core-js": "^2.5.3",
 		"rxjs": "^5.5.5",
 		"zone.js": "^0.8.18"
@@ -51,8 +50,6 @@
 		"@angular/router": "5.1.1",
 		"@compodoc/compodoc": "1.0.4",
 		"@ngx-translate/core": "9.0.2",
-		"@peretz/icon-loader": "0.0.5",
-		"@peretz/matter": "1.1.0-alpha.84e66",
 		"@types/d3": "4.12.0",
 		"@types/jasmine": "2.8.6",
 		"@types/node": "8.5.2",

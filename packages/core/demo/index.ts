@@ -9,8 +9,6 @@ import {
 // Styles
 import "./index.scss";
 
-import "./demo-matter";
-
 import {
 	// Bar
 	groupedBarOptions,

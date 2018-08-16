@@ -9,7 +9,7 @@ import { BaseChart } from "./base-chart.component";
 import { DonutChart } from "@carbon/charts";
 
 /**
- * Wrapper around `DonutChart` in peretz charts library
+ * Wrapper around `DonutChart` in carbon charts library
  *
  * Most functions just call their equivalent from the chart library.
  *

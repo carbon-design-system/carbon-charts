@@ -8,7 +8,7 @@ import { BaseChart } from "./base-chart.component";
 import { BarChart } from "@carbon/charts";
 
 /**
- * Wrapper around `BarChart` in peretz charts library
+ * Wrapper around `BarChart` in carbon charts library
  *
  * Most functions just call their equivalent from the chart library.
  *

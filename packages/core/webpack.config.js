@@ -16,16 +16,15 @@ module.exports = {
 	module: {
 		loaders: [
 			// all files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
-			{ test: /\.ts$/, loaders: ["ts-loader", "@peretz/icon-loader"] },
-			{ test: /\.html?$/, loaders: ["html-loader", "@peretz/icon-loader"] },
+			{ test: /\.ts$/, loaders: ["ts-loader"] },
+			{ test: /\.html?$/, loaders: ["html-loader"] },
 			{
 				test: /\.s?css$/,
 				loaders: [
 					"style-loader",
 					"css-loader",
 					"postcss-loader",
-					"sass-loader",
-					"@peretz/icon-loader"
+					"sass-loader"
 				]
 			},
 			{

@@ -21,7 +21,6 @@
 	"homepage": "https://github.com/IBM/carbon-charts#readme",
 	"dependencies": {
 		"@carbon/charts": "^1.0.0",
-		"@peretz/matter": "1.1.0",
 		"react": "^16.0.0",
 		"react-dom": "^16.4.2",
 		"react-icons": "^2.2.7"

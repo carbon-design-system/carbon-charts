@@ -3,9 +3,6 @@ import { Configuration } from "./configuration";
 import { Tools } from "./tools";
 import PatternsService from "./services/patterns";
 
-// TODO - Use submodule
-// import { position } from "../node_modules/@peretz/neutrino/common/position.service";
-
 export class BaseChart {
 	static chartCount = 1;
 
@@ -814,34 +811,6 @@ export class BaseChart {
 		}
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
-
-		// TODO - Tooltip auto-position using Neutrino utils
-		// const getOffset = element => {
-		// 	const boundingRect = element.getBoundingClientRect();
-		// 	const htmlElement = document.documentElement;
-
-		// 	return {
-		// 		top: boundingRect.top + window.pageYOffset - htmlElement.clientTop,
-		// 		left: boundingRect.left + window.pageXOffset - htmlElement.clientLeft
-		// 	};
-		// };
-
-		// const clickedElementDimensions = clickedElement.getBoundingClientRect();
-		// const clickedElementOffsets = getOffset(clickedElement);
-		// const triggerElement = d3.select(document.body)
-		// 	.append("div")
-		// 	.style("position", "absolute")
-		// 	.style("top", clickedElementOffsets.top + "px")
-		// 	.style("left", clickedElementOffsets.left + "px")
-		// 	.style("width", clickedElementDimensions.width + "px")
-		// 	.style("height", clickedElementDimensions.height + "px");
-
-		// const tooltipPosition = position.findAbsolute(triggerElement.node() as HTMLElement, tooltip.node() as HTMLElement, "right");
-
-		// tooltip.style("top", tooltipPosition.top + "px")
-		// 	.style("left", tooltipPosition.left + "px")
-		// 	// Programmatically set class for direction
-		// 	.classed("arrow-left", true);
 
 		// Draw tooltip arrow in the right direction
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
