@@ -7,7 +7,6 @@ import {
 } from "../src/index";
 
 // Styles
-import "@peretz/matter/matter.css";
 import "./index.scss";
 
 import "./demo-matter";

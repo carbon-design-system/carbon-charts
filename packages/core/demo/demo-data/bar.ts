@@ -72,8 +72,7 @@ export const groupedBarOptions = {
 		}
 	},
 	legendClickable: true,
-	containerResizable: true,
-	animations: false
+	containerResizable: true
 };
 
 // Simple bar

@@ -1,37 +1,21 @@
-@import "~@peretz/matter/scss/_tools.scss";
+$gray_60: #595859;
+
 $default_transition: all .1s ease-out;
 
 @mixin fonts() {
-	font-family: "IBM Plex Sans", "Helvetica Neue for IBM", "Helvetica Neue", Arial, sans-serif;
+	font-family: "IBM Plex Sans", Arial, sans-serif;
 }
-
-// TODO - Nest all styles into the "chart-wrapper class
 
 .chart-holder {
 	padding: 30px;
 }
 
+// TODO - Nest all styles into the "chart-wrapper class
 .chart-wrapper {
 	width: 100%;
 	height: 100%;
 	position: relative;
 	@include fonts();
-
-	div.chart-overlay {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: rgba(256, 256, 256, 0.75);
-
-		span {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-		}
-	}
 
 	// Chart elements
 	svg.chart-svg {
@@ -87,8 +71,8 @@ $default_transition: all .1s ease-out;
 
 	text {
 		font-size: 12px;
-		fill: m_color("gray", 60);
-		stroke: m_color("gray", 60);
+		fill: $gray_60;
+		stroke: $gray_60;
 		stroke-width: .3;
 		@include fonts();
 
@@ -96,12 +80,12 @@ $default_transition: all .1s ease-out;
 			&-figure {
 				font-size: 24px;
 				font-weight: normal;
-				fill: m_color("gray", 60);
+				fill: $gray_60;
 			}
 
 			&-title {
 				font-size: 15px;
-				fill: m_color("gray", 60);
+				fill: $gray_60;
 			}
 		}
 	}
@@ -123,6 +107,7 @@ $default_transition: all .1s ease-out;
 		overflow: hidden;
 		padding-left: 0;
 		white-space: nowrap;
+
 		.expand-btn {
 			background-repeat: no-repeat;
 			background-image: url("data:image/svg+xml;utf8,<svg width='13px' height='13px' viewBox='0 0 13 13' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch --><title>icoPlus</title><desc>Created with Sketch.</desc><defs></defs><g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='Artboard' transform='translate(-496.000000, -162.000000)'><g id='icoPlus' transform='translate(496.000000, 162.000000)'><g id='open-modal-' fill='%234178BE'><rect id='Rectangle' x='0' y='0' width='13' height='13'></rect><g id='Expand-20px' fill-rule='nonzero'><path d='M12.1875,12.1875 L0.8125,12.1875 L0.8125,0.8125 L12.1875,0.8125 L12.1875,12.1875 Z M13,0 L0,0 L0,13 L13,13 L13,0 Z' id='Shape'></path></g></g><g id='Add,-Plus-16px' transform='translate(2.000000, 2.000000)' fill-rule='nonzero' fill='%23FFFFFF'><polygon id='Shape' points='9 3.85714286 5.14285714 3.85714286 5.14285714 0 3.85714286 0 3.85714286 3.85714286 0 3.85714286 0 5.14285714 3.85714286 5.14285714 3.85714286 9 5.14285714 9 5.14285714 5.14285714 9 5.14285714'></polygon></g></g></g></g></svg>");
@@ -185,7 +170,6 @@ $default_transition: all .1s ease-out;
 		padding: 0;
 		border: none;
 		.legend-tooltip-header {
-			background: #2D74DA;
 			color: white;
 			font-size: 15px;
 			font-weight: 700;
@@ -205,16 +189,7 @@ $default_transition: all .1s ease-out;
 			right: 10px;
 		}
 		.legend-tooltip-content {
-			padding-left: 0;
-			margin: 20px 5px 20px;
-		}
-
-		&.arrow-right .arrow {
-			border-left: 11px solid #2D74DA;
-		}
-
-		&.arrow-left .arrow {
-			border-right: 10px solid #2D74DA;
+			padding: 0 7px 15px 7px;
 		}
 	}
 
@@ -239,6 +214,22 @@ $default_transition: all .1s ease-out;
 		.legend-circle {
 			margin: 5px;
 		}
+	}
+}
+
+div.chart-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(256, 256, 256, 0.75);
+
+	span {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 	}
 
 	// TODO - Remove once loading bee animations are refactored
@@ -279,61 +270,6 @@ $default_transition: all .1s ease-out;
 	max-width: 200px;
 	word-wrap: break-word;
 	z-index: 1059;
-	.close-btn {
-		color: #586464;
-		font-size: 12px;
-		position: absolute;
-		top: 0;
-		right: 0;
-		padding: 5px;
-	}
-	.close--xs {
-		position: absolute;
-		right: 10px;
-		top: 5px;
-	}
-
-	.arrow {
-		position: absolute;
-		width: 0;
-		height: 0;
-	}
-
-	&.arrow-up .arrow {
-		border-left: 10px solid transparent;
-		border-right: 10px solid transparent;
-		border-bottom: 11px solid black;
-	}
-
-	&.arrow-down .arrow {
-		border-left: 10px solid transparent;
-		border-right: 10px solid transparent;
-		border-top: 11px solid #f00;
-	}
-
-	&.arrow-right {
-		border-left: 4px solid #2D74DA;
-
-		.arrow {
-			border-top: 10px solid transparent;
-			border-bottom: 10px solid transparent;
-			border-left: 11px solid white;
-			right: -10px;
-			top: 10px;
-		}
-	}
-
-	&.arrow-left {
-		border-right: 4px solid #2D74DA;
-
-		.arrow {
-			border-top: 10px solid transparent;
-			border-bottom: 10px solid transparent;
-			border-right: 10px solid white;
-			left: -9px;
-			top: 9px;
-		}
-	}
 
 	p {
 		margin-bottom: 5px;

@@ -905,7 +905,7 @@ export class BaseChart {
 					loadingOverlay.classList.add("chart-overlay");
 					loadingOverlay.innerHTML = this.options.loadingOverlay.innerHTML;
 
-					this.holder.querySelector(Configuration.selectors.CHARTWRAPPER).appendChild(loadingOverlay);
+					this.holder.appendChild(loadingOverlay);
 				}
 			},
 			hide: () => {

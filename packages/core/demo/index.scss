@@ -1,21 +1,64 @@
 $default_transition: all .1s ease-out;
 
-@import "../node_modules/prismjs/themes/prism.css";
+* {
+	box-sizing: border-box;
+}
 
-// Matter overrides
+body {
+	font-family: "IBM Plex Sans", Arial, sans-serif;
+}
+
+h1 {
+	font-weight: 500;
+}
+
+h3 {
+	margin-bottom: 40px;
+}
+
+.button {
+	display: table;
+	padding: 12px 15px;
+    margin-bottom: 10px;
+	background: #0063ff;
+	color: #fff;
+	border: none;
+	font-size: 15px;
+    text-decoration: none;
+}
+
+// Carbon overrides
 $due_blue: #0063ff;
-.btn--icon-white {
+.bx--btn--primary {
 	background: $due_blue;
+	outline: none !important;
+    border: none !important;
+
+	&:hover {
+		background: #0059e4;
+	}
+
+	&:active {
+		background: #003992;
+	}
 }
 
-.btn-group--lg .btn--primary + .btn--primary-addon {
-    margin-left: 0;
+.bx--overflow-menu-options {
+	outline: none;
 }
 
-.btn--primary-addon, .btn--primary {
-	background: $due_blue;
-	border-color: $due_blue;
-}
+// .btn--icon-white {
+// 	background: $due_blue;
+// }
+
+// .btn-group--lg .btn--primary + .btn--primary-addon {
+//     margin-left: 0;
+// }
+
+// .btn--primary-addon, .btn--primary {
+// 	background: $due_blue;
+// 	border-color: $due_blue;
+// }
 
 html,
 body {
@@ -102,13 +145,18 @@ header.m-demo-header {
 }
 
 .chart-demo-actions {
+	display: table;
+	width: 100%;
 	min-width: 300px;
 	max-width: 800px;
 	margin: auto;
 	margin-top: -1px;
-	// background: #eff3f9;
-	// padding: 30px;
 	margin-bottom: 45px;
+	overflow: hidden;
+
+	button {
+		float: left;
+	}
 }
 
 .chart-title {

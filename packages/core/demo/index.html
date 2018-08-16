@@ -1,22 +1,27 @@
 <html>
 	<head>
-		<title>Charts</title>
+		<title>Carbon Charts</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
 		<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
 		<link rel="shortcut icon" href="favicon.ico" />
+
+		<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,700" rel="stylesheet">
+
+		<link href="https://unpkg.com/carbon-components/css/carbon-components.min.css" rel="stylesheet">
 	</head>
 	<body>
 		<header class="m-demo-header" id="header">
 			<div>
 				<h1>Carbon Charts</h1>
-				<h2>Basic chart types: Demo</h2>
+				<h3>Basic chart types: Demo</h3>
 
-				<a class="btn--icon-white" href="https://github.com/IBM/carbon-charts">
+				<a class="bx--btn bx--btn--primary" href="https://github.com/IBM/carbon-charts">
 					Project Repository
 				</a>
 
-				<a class="btn--icon-white" href="https://pages.github.com/IBM/carbon-charts/documentation/">
+				<a class="bx--btn bx--btn--primary" href="https://pages.github.com/IBM/carbon-charts/documentation/">
 					Documentation
 				</a>
 			</div>
@@ -25,177 +30,119 @@
 		<!-- Donut Chart -->
 		<div class="chart-holder has-actions" id="classy-donut-chart-holder"></div>
 		<div class="chart-demo-actions" id="actions-donut">
-			<div class="btn-group--lg" role="group" aria-label="Options for changing data">
-				<button id="change-data-donut" class="btn--primary" type="button">Change Data</button>
+			<button class="bx--btn bx--btn--primary" id="change-data-donut" type="button">
+				Update Data
+			</button>
 
-				<button class="btn--primary-addon" id="largeExpMenuBtn2" type="button" aria-controls="largeBtn2ExpMenu" aria-expanded="true" aria-haspopup="true">
-					<peretz-icon set="arrows_chevrons" icon="chevron_up" size="sm" class="icon--white-sm"></peretz-icon>
-				</button>
-
-				<ul class="btn_menu"  role="menu" aria-labelledby="donutActions">
-				  <li role="menuitem" tabindex="0" class="change-data-promise" data-promise-delay="2000">Using Promises (2s)</li>
-				  <li role="menuitem" tabindex="1" class="change-data-promise" data-promise-delay="5000">Using Promises (5s)</li>
-				  <li role="menuitem" tabindex="2" class="change-data-promise" data-promise-delay="10000">Using Promises (10s)</li>
-				</ul>
-			</div>
+			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+				Promise
+			</button>
 		</div>
 
 		<!-- Pie Chart -->
 		<div class="chart-holder has-actions" id="classy-pie-chart-holder"></div>
 		<div class="chart-demo-actions" id="actions-pie">
-			<div class="btn-group--lg" role="group" aria-label="Options for changing data">
-				<button id="change-data-pie" class="btn--primary" type="button">Change Data</button>
+			<button class="bx--btn bx--btn--primary" id="change-data-pie" type="button">
+				Update Data
+			</button>
 
-				<button class="btn--primary-addon" id="largeExpMenuBtn2" type="button" aria-controls="largeBtn2ExpMenu" aria-expanded="true" aria-haspopup="true">
-					<peretz-icon set="arrows_chevrons" icon="chevron_up" size="sm" class="icon--white-sm"></peretz-icon>
-				</button>
-
-				<ul class="btn_menu"  role="menu" aria-labelledby="pieActions">
-				  <li role="menuitem" tabindex="0" class="change-data-promise" data-promise-delay="2000">Using Promises (2s)</li>
-				  <li role="menuitem" tabindex="1" class="change-data-promise" data-promise-delay="5000">Using Promises (5s)</li>
-				  <li role="menuitem" tabindex="2" class="change-data-promise" data-promise-delay="10000">Using Promises (10s)</li>
-				</ul>
-			</div>
+			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+				Promise
+			</button>
 		</div>
 
 		<!-- Bar Chart -->
 		<div class="chart-holder has-actions" id="classy-grouped-bar-chart-holder"></div>
 		<div class="chart-demo-actions" id="actions-grouped-bar">
-			<div class="btn-group--lg" role="group" aria-label="Options for changing data">
-				<button id="change-data-grouped-bar" class="btn--primary" type="button">Change Data</button>
+			<button class="bx--btn bx--btn--primary" id="change-data-grouped-bar" type="button">
+				Update Data
+			</button>
 
-				<button class="btn--primary-addon" id="largeExpMenuBtn2" type="button" aria-controls="largeBtn2ExpMenu" aria-expanded="true" aria-haspopup="true">
-					<peretz-icon set="arrows_chevrons" icon="chevron_up" size="sm" class="icon--white-sm"></peretz-icon>
-				</button>
-
-				<ul class="btn_menu"  role="menu" aria-labelledby="groupedBarActions">
-				  <li role="menuitem" tabindex="0" class="change-data-promise" data-promise-delay="2000">Using Promises (2s)</li>
-				  <li role="menuitem" tabindex="1" class="change-data-promise" data-promise-delay="5000">Using Promises (5s)</li>
-				  <li role="menuitem" tabindex="2" class="change-data-promise" data-promise-delay="10000">Using Promises (10s)</li>
-				</ul>
-			</div>
+			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+				Promise
+			</button>
 		</div>
 
 		<div class="chart-holder has-actions" id="classy-simple-bar-accessible-chart-holder"></div>
 		<div class="chart-demo-actions" id="actions-simple-bar-accessible">
-			<div class="btn-group--lg" role="group" aria-label="Options for changing data">
-				<button id="change-data-simple-bar-accessible" class="btn--primary" type="button">Change Data</button>
+			<button class="bx--btn bx--btn--primary" id="change-data-simple-bar-accessible" type="button">
+				Update Data
+			</button>
 
-				<button class="btn--primary-addon" id="largeExpMenuBtn2" type="button" aria-controls="largeBtn2ExpMenu" aria-expanded="true" aria-haspopup="true">
-					<peretz-icon set="arrows_chevrons" icon="chevron_up" size="sm" class="icon--white-sm"></peretz-icon>
-				</button>
-
-				<ul class="btn_menu"  role="menu" aria-labelledby="simpleBarAccessibleActions">
-				  <li role="menuitem" tabindex="0" class="change-data-promise" data-promise-delay="2000">Using Promises (2s)</li>
-				  <li role="menuitem" tabindex="1" class="change-data-promise" data-promise-delay="5000">Using Promises (5s)</li>
-				  <li role="menuitem" tabindex="2" class="change-data-promise" data-promise-delay="10000">Using Promises (10s)</li>
-				</ul>
-			</div>
+			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+				Promise
+			</button>
 		</div>
 
 		<div class="chart-holder has-actions" id="classy-stacked-bar-chart-holder"></div>
 		<div class="chart-demo-actions" id="actions-stacked-bar">
-			<div class="btn-group--lg" role="group" aria-label="Options for changing data">
-				<button id="change-data-stacked-bar" class="btn--primary" type="button">Change Data</button>
+			<button class="bx--btn bx--btn--primary" id="change-data-stacked-bar" type="button">
+				Update Data
+			</button>
 
-				<button class="btn--primary-addon" id="largeExpMenuBtn2" type="button" aria-controls="largeBtn2ExpMenu" aria-expanded="true" aria-haspopup="true">
-					<peretz-icon set="arrows_chevrons" icon="chevron_up" size="sm" class="icon--white-sm"></peretz-icon>
-				</button>
-
-				<ul class="btn_menu"  role="menu" aria-labelledby="stackedBarActions">
-				  <li role="menuitem" tabindex="0" class="change-data-promise" data-promise-delay="2000">Using Promises (2s)</li>
-				  <li role="menuitem" tabindex="1" class="change-data-promise" data-promise-delay="5000">Using Promises (5s)</li>
-				  <li role="menuitem" tabindex="2" class="change-data-promise" data-promise-delay="10000">Using Promises (10s)</li>
-				</ul>
-			</div>
+			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+				Promise
+			</button>
 		</div>
 
 		<div class="chart-holder has-actions" id="classy-simple-bar-chart-holder"></div>
 		<div class="chart-demo-actions" id="actions-simple-bar">
-			<div class="btn-group--lg" role="group" aria-label="Options for changing data">
-				<button id="change-data-simple-bar" class="btn--primary" type="button">Change Data</button>
+			<button class="bx--btn bx--btn--primary" id="change-data-simple-bar" type="button">
+				Update Data
+			</button>
 
-				<button class="btn--primary-addon" id="largeExpMenuBtn2" type="button" aria-controls="largeBtn2ExpMenu" aria-expanded="true" aria-haspopup="true">
-					<peretz-icon set="arrows_chevrons" icon="chevron_up" size="sm" class="icon--white-sm"></peretz-icon>
-				</button>
-
-				<ul class="btn_menu"  role="menu" aria-labelledby="simpleBarActions">
-				  <li role="menuitem" tabindex="0" class="change-data-promise" data-promise-delay="2000">Using Promises (2s)</li>
-				  <li role="menuitem" tabindex="1" class="change-data-promise" data-promise-delay="5000">Using Promises (5s)</li>
-				  <li role="menuitem" tabindex="2" class="change-data-promise" data-promise-delay="10000">Using Promises (10s)</li>
-				</ul>
-			</div>
+			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+				Promise
+			</button>
 		</div>
 
 		<div class="chart-holder has-actions" id="classy-stacked-bar-accessible-chart-holder"></div>
 		<div class="chart-demo-actions" id="actions-stacked-bar-accessible">
-			<div class="btn-group--lg" role="group" aria-label="Options for changing data">
-				<button id="change-data-stacked-bar-accessible" class="btn--primary" type="button">Change Data</button>
+			<button class="bx--btn bx--btn--primary" id="change-data-stacked-bar-accessible" type="button">
+				Update Data
+			</button>
 
-				<button class="btn--primary-addon" id="largeExpMenuBtn2" type="button" aria-controls="largeBtn2ExpMenu" aria-expanded="true" aria-haspopup="true">
-					<peretz-icon set="arrows_chevrons" icon="chevron_up" size="sm" class="icon--white-sm"></peretz-icon>
-				</button>
-
-				<ul class="btn_menu"  role="menu" aria-labelledby="stackedBarAccessibleActions">
-				  <li role="menuitem" tabindex="0" class="change-data-promise" data-promise-delay="2000">Using Promises (2s)</li>
-				  <li role="menuitem" tabindex="1" class="change-data-promise" data-promise-delay="5000">Using Promises (5s)</li>
-				  <li role="menuitem" tabindex="2" class="change-data-promise" data-promise-delay="10000">Using Promises (10s)</li>
-				</ul>
-			</div>
+			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+				Promise
+			</button>
 		</div>
 
 		<!-- Line Chart -->
 		<div class="chart-holder has-actions" id="classy-curved-line-chart-holder"></div>
 		<div class="chart-demo-actions" id="actions-curved-line">
-			<div class="btn-group--lg" role="group" aria-label="Options for changing data">
-				<button id="change-data-curved-line" class="btn--primary" type="button">Change Data</button>
+			<button class="bx--btn bx--btn--primary" id="change-data-curved-line" type="button">
+				Update Data
+			</button>
 
-				<button class="btn--primary-addon" id="largeExpMenuBtn2" type="button" aria-controls="largeBtn2ExpMenu" aria-expanded="true" aria-haspopup="true">
-					<peretz-icon set="arrows_chevrons" icon="chevron_up" size="sm" class="icon--white-sm"></peretz-icon>
-				</button>
-
-				<ul class="btn_menu"  role="menu" aria-labelledby="curvedLineAccessibleActions">
-				  <li role="menuitem" tabindex="0" class="change-data-promise" data-promise-delay="2000">Using Promises (2s)</li>
-				  <li role="menuitem" tabindex="1" class="change-data-promise" data-promise-delay="5000">Using Promises (5s)</li>
-				  <li role="menuitem" tabindex="2" class="change-data-promise" data-promise-delay="10000">Using Promises (10s)</li>
-				</ul>
-			</div>
+			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+				Promise
+			</button>
 		</div>
 
 		<div class="chart-holder has-actions" id="classy-line-chart-holder"></div>
 		<div class="chart-demo-actions" id="actions-line">
-			<div class="btn-group--lg" role="group" aria-label="Options for changing data">
-				<button id="change-data-line" class="btn--primary" type="button">Change Data</button>
+			<button class="bx--btn bx--btn--primary" id="change-data-line" type="button">
+				Update Data
+			</button>
 
-				<button class="btn--primary-addon" id="largeExpMenuBtn2" type="button" aria-controls="largeBtn2ExpMenu" aria-expanded="true" aria-haspopup="true">
-					<peretz-icon set="arrows_chevrons" icon="chevron_up" size="sm" class="icon--white-sm"></peretz-icon>
-				</button>
-
-				<ul class="btn_menu"  role="menu" aria-labelledby="lineAccessibleActions">
-				  <li role="menuitem" tabindex="0" class="change-data-promise" data-promise-delay="2000">Using Promises (2s)</li>
-				  <li role="menuitem" tabindex="1" class="change-data-promise" data-promise-delay="5000">Using Promises (5s)</li>
-				  <li role="menuitem" tabindex="2" class="change-data-promise" data-promise-delay="10000">Using Promises (10s)</li>
-				</ul>
-			</div>
+			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+				Promise
+			</button>
 		</div>
 
 		<div class="chart-holder has-actions" id="classy-line-step-chart-holder"></div>
 		<div class="chart-demo-actions" id="actions-line-step">
-			<div class="btn-group--lg" role="group" aria-label="Options for changing data">
-				<button id="change-data-line-step" class="btn--primary" type="button">Change Data</button>
+			<button class="bx--btn bx--btn--primary" id="change-data-line-step" type="button">
+				Update Data
+			</button>
 
-				<button class="btn--primary-addon" id="largeExpMenuBtn2" type="button" aria-controls="largeBtn2ExpMenu" aria-expanded="true" aria-haspopup="true">
-					<peretz-icon set="arrows_chevrons" icon="chevron_up" size="sm" class="icon--white-sm"></peretz-icon>
-				</button>
-
-				<ul class="btn_menu"  role="menu" aria-labelledby="lineStepAccessibleActions">
-				  <li role="menuitem" tabindex="0" class="change-data-promise" data-promise-delay="2000">Using Promises (2s)</li>
-				  <li role="menuitem" tabindex="1" class="change-data-promise" data-promise-delay="5000">Using Promises (5s)</li>
-				  <li role="menuitem" tabindex="2" class="change-data-promise" data-promise-delay="10000">Using Promises (10s)</li>
-				</ul>
-			</div>
+			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+				Promise
+			</button>
 		</div>
 	</body>
+
+	<script src="https://unpkg.com/carbon-components@9.8.0/scripts/carbon-components.min.js" type="text/javascript"></script>
 
 	<svg xmlns="http://www.w3.org/2000/svg">
 		<symbol id="x_12" viewbox="0 0 12 12">
