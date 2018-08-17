@@ -13,7 +13,6 @@
 	"scripts": {
 		"commit": "git-cz",
 		"semantic-release": "lerna-semantic-release pre && lerna-semantic-release post && lerna-semantic-release perform",
-		"postinstall": "lerna bootstrap --hoist",
 		"test": "lerna run test",
 		"lint": "eslint packages"
 	},
@@ -30,6 +29,6 @@
 		"cz-lerna-changelog": "^1.2.1",
 		"husky": "^0.14.3",
 		"lerna": "^2.11.0",
-		"semantic-release": "^15.9.5"
+		"semantic-release": "^15.9.8"
 	}
 }
