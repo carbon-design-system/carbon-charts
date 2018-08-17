@@ -29,14 +29,14 @@
 
 | Component   | Vanilla            | Angular                  | React |
 |-------------|--------------------|--------------------------|-------|
-| Simple Bar  | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
-| Grouped Bar | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
-| Stacked Bar | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
-| Donut       | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
-| Line        | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
-| Curved Line | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
-| Pie         | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
-| Step        | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
+| Simple Bar  | :white_check_mark: | :hourglass_flowing_sand: | :hourglass_flowing_sand:  |
+| Grouped Bar | :white_check_mark: | :hourglass_flowing_sand: | :hourglass_flowing_sand:  |
+| Stacked Bar | :white_check_mark: | :hourglass_flowing_sand: | :hourglass_flowing_sand:  |
+| Donut       | :white_check_mark: | :hourglass_flowing_sand: | :hourglass_flowing_sand:  |
+| Line        | :white_check_mark: | :hourglass_flowing_sand: | :hourglass_flowing_sand:  |
+| Curved Line | :white_check_mark: | :hourglass_flowing_sand: | :hourglass_flowing_sand:  |
+| Pie         | :white_check_mark: | :hourglass_flowing_sand: | :hourglass_flowing_sand:  |
+| Step        | :white_check_mark: | :hourglass_flowing_sand: | :hourglass_flowing_sand:  |
 | Area        | Soon               | Soon                     | Soon  |
 
 ## Getting started
