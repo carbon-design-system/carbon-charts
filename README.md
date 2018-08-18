@@ -4,7 +4,7 @@
 	</a>
 	<h3 align="center">Carbon Charts</h3>
 	<p align="center">
-		A reusable framework-agnostic D3 charting library for Watson Customer Engagement.
+		A reusable framework-agnostic D3 charting library.
 	</p>
 	<p align="center">
 		:bar_chart: :chart_with_upwards_trend: :rocket:
