@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild } from "@angular/core";
 
 // Chart imports
-import { randomizeValue } from "@carbon/charts-angular/demo/src/helpers/commons";
+import { randomizeValue } from "../helpers/commons";
 
 @Component({
 	selector: "app-donut",
