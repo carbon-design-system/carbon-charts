@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="https://pages.github.com/IBM/carbon-charts/">
-		<img src="packages/core/src/assets/logo.png" alt="Carbon Charts" width=90 height=90 />
+		<img src="assets/logo.png" alt="Carbon Charts" width=90 height=90 />
 	</a>
 	<h3 align="center">Carbon Charts</h3>
 	<p align="center">
@@ -45,6 +45,8 @@
 
 Run:
 ```bash
+npm i -g @storybook/cli
+
 npm install @carbon/charts --save
 ```
 
@@ -54,7 +56,7 @@ Charts' demo and documentation can be viewed in [GitHub Pages](https://pages.git
 
 ### Code Sample
 <p align="center">
-	<img src="packages/core/src/assets/demo-stacked-bar.jpg" alt="Stacked Bar Chart" width=600 />
+	<img src="assets/demo-stacked-bar.png" alt="Stacked Bar Chart" width=600 />
 </p>
 
 HTML:
