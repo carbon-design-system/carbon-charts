@@ -5,4 +5,6 @@ node_modules
 .vscode/
 .idea/
 *.log
-packages/react/build
+packages/core/demo/bundle/
+packages/react/build/
+storybook-dist

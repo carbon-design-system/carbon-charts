@@ -787,7 +787,7 @@ export class BaseChart {
 		// Draw tooltip
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
-			.style("border-color", this.colorScale[d.datasetLabel](d.label))
+			// .style("border-color", this.colorScale[d.datasetLabel](d.label))
 			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
 		// TODOCARBON - Remove
@@ -805,7 +805,6 @@ export class BaseChart {
 			`;
 		} else {
 			tooltipHTML += `
-				${d.label}<br/>
 				<b>${d.datasetLabel}:</b> ${formattedValue}<br/>
 			`;
 		}

@@ -258,12 +258,14 @@ div.chart-overlay {
 }
 
 .tooltip {
-	background-color: #484848;
-    color: #fff;
-	box-shadow: 0 0 10px 0 rgba(0,0,0,0.16);
+	background-color: #fff;
+	border: 1px solid #DFE3E6;
+	padding: .25rem .5rem;
 	display: block;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .1);
 	@include fonts();
 	font-size: 12px;
+	font-weight: 300;
 	position: absolute;
 	padding: 10px;
 	border-radius: 3px;
@@ -272,12 +274,16 @@ div.chart-overlay {
 	z-index: 1059;
 
 	p {
-		margin-bottom: 5px;
+		font-size: 12px;
 
 		&.bignum {
-			margin-top: 15px;
-			font-size: 27px;
+			font-size: 19px;
+			font-weight: 600;
 		}
+	}
+
+	b {
+		font-weight: 600;
 	}
 }
 

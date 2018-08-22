@@ -105,7 +105,14 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		const firstTry = Math.max(0.5 * currentVal, currentVal * Math.random() * (Math.random() * 5));
 		const result = currentVal > 0 ? Math.min(2 * currentVal, firstTry) : Math.max(2 * currentVal, firstTry);
 
-		return Math.floor(result);
+		if (Math.random() > 0.5
+			|| chartType.indexOf("stacked") !== -1
+			|| chartType.indexOf("pie") !== -1
+			|| chartType.indexOf("donut") !== -1) {
+			return Math.floor(result);
+		} else {
+			return Math.floor(result) * -1;
+		}
 	};
 
 	switch (chartType) {

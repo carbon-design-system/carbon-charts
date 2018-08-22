@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "storybook": "start-storybook -p 9005 -c .storybook"
+    "storybook": "start-storybook -p 9005 -c .storybook -s ./assets"
   },
   "private": true,
   "dependencies": {

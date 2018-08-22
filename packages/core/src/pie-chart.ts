@@ -265,7 +265,7 @@ export class PieChart extends BaseChart {
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
 			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px")
-			.style("border-color", this.colorScale[this.displayData.datasets[0].label](d.data.label)); // TODO - Support multiple datasets
+			// .style("border-color", this.colorScale[this.displayData.datasets[0].label](d.data.label)); // TODO - Support multiple datasets
 
 		// TODOCARBON - Remove
 		// Tools.addCloseBtn(tooltip, "xs")
@@ -279,15 +279,16 @@ export class PieChart extends BaseChart {
 			<p>${d.data.label}</p>
 		`;
 
-		if (d.data.label === Configuration.pie.label.other) {
-			const { items } = d.data;
+		// TODOCARBON - Switch to popover onclick
+		// if (d.data.label === Configuration.pie.label.other) {
+		// 	const { items } = d.data;
 
-			items.map(item => {
-				tooltipHTML += `
-					<p>${item.label}: ${item.value.toLocaleString()}</p>
-				`;
-			});
-		}
+		// 	items.map(item => {
+		// 		tooltipHTML += `
+		// 			<b>${item.label}:</b> ${item.value.toLocaleString()}<br />
+		// 		`;
+		// 	});
+		// }
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {

@@ -7,7 +7,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "webpack -w",
 		"build": "webpack",
-		"storybook": "start-storybook -p 9006 -c .storybook"
+		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets"
 	},
 	"repository": {
 		"type": "git",
