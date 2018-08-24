@@ -8,4 +8,16 @@ fi
 
 if [[ $TRAVIS_BRANCH == 'master' ]]; then
   npm run semantic-release
+
+  mkdir pages
+  echo "charts.carbondesignsystem.com" > pages/CNAME
+
+  # bundle core demo
+  cd packages/core
+  npm run demo:build
+  cp -a demo/bundle/. ../../pages
+
+  cd ../angular/demo
+  npm run build-storybook
+  cp -a storybook-dist/. ../../../pages/angular
 fi

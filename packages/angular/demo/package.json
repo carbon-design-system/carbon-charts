@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "storybook": "start-storybook -p 9005 -c .storybook -s ./assets"
+    "storybook": "start-storybook -p 9005 -c .storybook -s ./assets",
+    "build-storybook": "build-storybook -o storybook-dist"
   },
   "private": true,
   "dependencies": {
@@ -44,6 +45,7 @@
     "@storybook/addon-storysource": "4.0.0-alpha.16",
     "@storybook/addons": "4.0.0-alpha.16",
     "@storybook/angular": "^4.0.0-alpha.16",
+    "@storybook/storybook-deployer": "^2.3.0",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",

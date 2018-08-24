@@ -2,12 +2,14 @@
 	"name": "@carbon/charts-react",
 	"version": "1.0.0",
 	"description": "Carbon charting components for React",
+	"private": true,
 	"main": "build/index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "webpack -w",
 		"build": "webpack",
-		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets"
+		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
+		"build-storybook": "build-storybook -o storybook-dist"
 	},
 	"repository": {
 		"type": "git",
@@ -28,6 +30,7 @@
 	"devDependencies": {
 		"@storybook/addon-options": "^3.4.10",
 		"@storybook/react": "^3.4.10",
+		"@storybook/storybook-deployer": "^2.3.0",
 		"babel-cli": "^6.26.0",
 		"babel-core": "^6.26.0",
 		"babel-loader": "^7.1.2",
@@ -42,5 +45,19 @@
 		"style-loader": "^0.19.0",
 		"url-loader": "^0.6.2",
 		"webpack": "^3.12.0"
-	}
+	},
+	"maintainers": [
+		{
+		  "name": "Eliad Moosavi",
+		  "email": "iliadm@ca.ibm.com",
+		  "url": "https://github.com/theiliad"
+		}
+	],
+	"contributors": [
+		{
+		  "name": "Eliad Moosavi",
+		  "email": "iliadm@ca.ibm.com",
+		  "url": "https://github.com/theiliad"
+		}
+	]
 }

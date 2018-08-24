@@ -101,5 +101,19 @@
 		"webpack-node-externals": "1.6.0",
 		"whatwg-fetch": "2.0.3",
 		"zone.js": "0.8.21"
-	}
+	},
+	"maintainers": [
+		{
+		  "name": "Eliad Moosavi",
+		  "email": "iliadm@ca.ibm.com",
+		  "url": "https://github.com/theiliad"
+		}
+	],
+	"contributors": [
+		{
+		  "name": "Eliad Moosavi",
+		  "email": "iliadm@ca.ibm.com",
+		  "url": "https://github.com/theiliad"
+		}
+	]
 }
