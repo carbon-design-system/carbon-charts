@@ -10,11 +10,13 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
   npm run semantic-release
 
   mkdir pages
+  touch pages/.nojekyll
   echo "charts.carbondesignsystem.com" > pages/CNAME
 
   # bundle core demo
   cd packages/core
   npm run demo:build
+  typedoc --out ./demo/bundle/documentation ./src/index.ts
   cp -a demo/bundle/. ../../pages
 
   cd ../angular/demo

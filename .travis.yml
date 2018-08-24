@@ -6,8 +6,12 @@ node_js:
 #   chrome: stable
 # before_install:
 # - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
-before_install: .travis/before_install.sh
-after_success: .travis/after_success.sh
+before_install:
+  - chmod +x .travis/before_install.sh
+  - .travis/before_install.sh
+after_success:
+  - chmod +x .travis/after_success.sh
+  - .travis/after_success.sh
 # script: npm test && npm run lint && cd packages/core && npm run demo:build
 sudo: false
 deploy:
