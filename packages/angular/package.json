@@ -3,16 +3,6 @@
 	"version": "1.1.0",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
-	"scripts": {
-		"build": "bash scripts/build.sh",
-		"demo:build": "gulp demo && webpack --config webpack.config.js",
-		"demo:server": "gulp demo && webpack-dev-server --config webpack.config.js --watch",
-		"demo:server:travis": "npm run demo:server &",
-		"docs:build": "compodoc src -p tsconfig.json",
-		"docs:server": "compodoc src -p tsconfig.json -s -w",
-		"lint": "tslint -e spec.ts src/**/*.ts && stylelint src/**/*.scss --config .stylelintrc.yml",
-		"test": "karma start"
-	},
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:IBM/carbon-charts.git"

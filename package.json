@@ -13,6 +13,7 @@
 	"scripts": {
 		"commit": "git-cz",
 		"semantic-release": "lerna-semantic-release pre && lerna-semantic-release post && lerna-semantic-release perform",
+		"postinstall": "lerna bootstrap",
 		"test": "lerna run test",
 		"lint": "eslint packages"
 	},
@@ -33,8 +34,8 @@
 	},
 	"maintainers": [
 		{
-		  "name": "Eliad Moosavi",
-		  "email": "iliadm@ca.ibm.com"
+			"name": "Eliad Moosavi",
+			"email": "iliadm@ca.ibm.com"
 		}
 	]
 }
