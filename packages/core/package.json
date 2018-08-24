@@ -63,5 +63,19 @@
     "webpack-command": "^0.4.1",
     "webpack-dev-server": "2.9.4",
     "webpack-node-externals": "1.6.0"
-  }
+  },
+	"maintainers": [
+		{
+		  "name": "Eliad Moosavi",
+		  "email": "iliadm@ca.ibm.com",
+		  "url": "https://github.com/theiliad"
+		}
+	],
+	"contributors": [
+		{
+		  "name": "Eliad Moosavi",
+		  "email": "iliadm@ca.ibm.com",
+		  "url": "https://github.com/theiliad"
+		}
+	]
 }
