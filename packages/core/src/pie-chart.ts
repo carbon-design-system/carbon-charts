@@ -264,7 +264,7 @@ export class PieChart extends BaseChart {
 		d3.selectAll(".tooltip").remove();
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
-			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px")
+			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 			// .style("border-color", this.colorScale[this.displayData.datasets[0].label](d.data.label)); // TODO - Support multiple datasets
 
 		// TODOCARBON - Remove
@@ -274,7 +274,7 @@ export class PieChart extends BaseChart {
 		// 	});
 
 		const dVal = d.value.toLocaleString();
-		let tooltipHTML = `
+		const tooltipHTML = `
 			<p class='bignum'>${dVal}</p>
 			<p>${d.data.label}</p>
 		`;

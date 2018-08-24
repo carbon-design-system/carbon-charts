@@ -12,7 +12,8 @@ before_install:
 after_success:
   - chmod +x .travis/after_success.sh
   - .travis/after_success.sh
-# script: npm test && npm run lint && cd packages/core && npm run demo:build
+# script: lerna run lint && lerna run test
+script: lerna run lint
 sudo: false
 deploy:
   -
