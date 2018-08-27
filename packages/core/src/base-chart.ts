@@ -828,7 +828,7 @@ export class BaseChart {
 		if (this.options.animations === false) {
 			return this.getInstantTransition();
 		}
-		
+
 		return d3.transition().duration(Configuration.transitions.default.duration);
 	}
 
@@ -842,7 +842,7 @@ export class BaseChart {
 		if (this.options.animations === false) {
 			return this.getInstantTransition();
 		}
-		
+
 		return d3.transition().duration(animate === false ? 0 : Configuration.transitions.default.duration);
 	}
 
