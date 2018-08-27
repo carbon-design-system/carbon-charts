@@ -339,11 +339,9 @@ export class BaseChart {
 		return {chartId, container};
 	}
 
-	// TODOCARBON - REFACTOR
 	resetOpacity() {
 		const svg = d3.selectAll("svg.chart-svg");
 		svg.selectAll("path").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
-		// svg.selectAll("path").attr("stroke-opacity", this.options.accessibility ? 1 : 0);
 
 		svg.selectAll("circle")
 			.attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
@@ -597,7 +595,7 @@ export class BaseChart {
 			tooltip.select("arrow").remove();
 		} else {
 			tooltip = this.container.append("div")
-				.attr("class", "tooltip legend-tooltip")
+				.attr("class", "tooltip chart-tooltip legend-tooltip")
 				.style("display", "block")
 				.style("top", (d3.mouse(this.container.node())[1] - Configuration.legend.margin.top) + "px");
 			tooltip.append("p").text("Legend")
@@ -782,20 +780,13 @@ export class BaseChart {
 
 		// Remove existing tooltips on the page
 		// TODO - Update class to not conflict with other elements on page
-		d3.selectAll(".tooltip").remove();
+		d3.selectAll(".chart-tooltip").remove();
 
 		// Draw tooltip
 		const tooltip = d3.select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
-			// .style("border-color", this.colorScale[d.datasetLabel](d.label))
 			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
-		// TODOCARBON - Remove
-		// Add close button to tooltip
-		// Tools.addCloseBtn(tooltip, "xs")
-		// 	.on("click", () => {
-		// 		this.hideTooltip();
-		// 	});
 
 		let tooltipHTML = "";
 		const formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString("en");
