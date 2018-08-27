@@ -19,7 +19,7 @@ lineStories.add("Basic", () => ({
 	props: {
 		lineData: lineData,
 		lineOptions: lineOptions
-	},
+	}
 }));
 
 lineStories.add("Natural Curve", () => ({
@@ -30,7 +30,7 @@ lineStories.add("Natural Curve", () => ({
 	props: {
 		lineData: curvedLineData,
 		lineOptions: curvedLineOptions
-	},
+	}
 }));
 
 lineStories.add("Bundle Curve", () => ({
@@ -41,7 +41,7 @@ lineStories.add("Bundle Curve", () => ({
 	props: {
 		lineData: curvedLineData,
 		lineOptions: Object.assign({}, curvedLineOptions, {curve: "curveBundle"})
-	},
+	}
 }));
 
 lineStories.add("Monotone Y Curve", () => ({
@@ -52,7 +52,7 @@ lineStories.add("Monotone Y Curve", () => ({
 	props: {
 		lineData: curvedLineData,
 		lineOptions: Object.assign({}, curvedLineOptions, {curve: "curveMonotoneY"})
-	},
+	}
 }));
 
 lineStories.add("Monotone X Curve", () => ({
@@ -63,7 +63,7 @@ lineStories.add("Monotone X Curve", () => ({
 	props: {
 		lineData: curvedLineData,
 		lineOptions: Object.assign({}, curvedLineOptions, {curve: "curveMonotoneX"})
-	},
+	}
 }));
 
 const stepStories = storiesOf("Step", module);
@@ -75,7 +75,7 @@ stepStories.add("Middle", () => ({
 	props: {
 		lineData: lineData,
 		lineOptions: Object.assign({}, lineOptions, {curve: "curveStep"})
-	},
+	}
 }));
 
 stepStories.add("Before", () => ({
@@ -86,7 +86,7 @@ stepStories.add("Before", () => ({
 	props: {
 		lineData: lineData,
 		lineOptions: Object.assign({}, lineOptions, {curve: "curveStepBefore"})
-	},
+	}
 }));
 
 stepStories.add("After", () => ({
@@ -97,5 +97,5 @@ stepStories.add("After", () => ({
 	props: {
 		lineData: lineData,
 		lineOptions: Object.assign({}, lineOptions, {curve: "curveStepAfter"})
-	},
+	}
 }));

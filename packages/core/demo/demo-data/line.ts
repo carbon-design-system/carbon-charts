@@ -46,9 +46,7 @@ export const curvedLineOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
-			formatter: axisValue => {
-				return `${axisValue / 1000}k`;
-			},
+			formatter: axisValue => `${axisValue / 1000}k`
 		},
 		y2: {
 			ticks: {
@@ -59,7 +57,7 @@ export const curvedLineOptions = {
 	},
 	curve: "curveNatural",
 	legendClickable: true,
-	containerResizable: true,
+	containerResizable: true
 };
 
 
@@ -109,11 +107,9 @@ export const lineOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
-			formatter: axisValue => {
-				return `${axisValue / 1000}k`;
-			},
+			formatter: axisValue => `${axisValue / 1000}k`
 		}
 	},
 	legendClickable: true,
-	containerResizable: true,
+	containerResizable: true
 };
