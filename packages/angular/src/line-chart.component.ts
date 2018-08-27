@@ -1,7 +1,6 @@
 import {
 	Component,
-	AfterViewInit,
-	ViewEncapsulation,
+	AfterViewInit
 } from "@angular/core";
 
 import { BaseChart } from "./base-chart.component";
@@ -20,12 +19,9 @@ import { LineChart } from "@carbon/charts";
 @Component({
 	selector: "n-line-chart",
 	template: `
-		<div #nChart
-			class='n-chart-container'>
+		<div #nChart class='n-chart-container'>
 		</div>
-	`,
-	styleUrls: ["./charts.scss"],
-	encapsulation: ViewEncapsulation.None
+	`
 })
 export class LineChartComponent extends BaseChart implements AfterViewInit {
 	/**

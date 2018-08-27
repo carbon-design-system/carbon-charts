@@ -827,9 +827,9 @@ export class BaseChart {
 	getDefaultTransition() {
 		if (this.options.animations === false) {
 			return this.getInstantTransition();
-		} else {
-			return d3.transition().duration(Configuration.transitions.default.duration);
 		}
+		
+		return d3.transition().duration(Configuration.transitions.default.duration);
 	}
 
 	getInstantTransition() {
@@ -841,9 +841,9 @@ export class BaseChart {
 	getFillTransition(animate?: boolean) {
 		if (this.options.animations === false) {
 			return this.getInstantTransition();
-		} else {
-			return d3.transition().duration(animate === false ? 0 : Configuration.transitions.default.duration);
 		}
+		
+		return d3.transition().duration(animate === false ? 0 : Configuration.transitions.default.duration);
 	}
 
 	// ================================================================================

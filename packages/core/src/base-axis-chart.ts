@@ -489,7 +489,6 @@ export class BaseAxisChart extends BaseChart {
 				self.reduceOpacity(this);
 			})
 			.on("mousemove", function(d) {
-				// TODOCARBON - REFACTOR
 				const tooltipRef = d3.select(self.holder).select("div.chart-tooltip");
 
 				const relativeMousePosition = d3.mouse(self.holder as HTMLElement);

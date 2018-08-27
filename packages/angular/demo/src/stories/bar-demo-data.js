@@ -56,9 +56,7 @@ export const groupedBarOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
-			formatter: axisValue => {
-				return `${axisValue / 1000}k`;
-			},
+			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 		},
 		y2: {
@@ -66,9 +64,7 @@ export const groupedBarOptions = {
 				max: 1,
 				min: 0
 			},
-			formatter: axisValue => {
-				return `${axisValue * 100}%`;
-			},
+			formatter: axisValue => `${axisValue * 100}%`
 		}
 	},
 	legendClickable: true,
@@ -100,15 +96,13 @@ export const simpleBarOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
-			formatter: axisValue => {
-				return `${axisValue / 1000}k`;
-			},
+			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 			stacked: false
 		}
 	},
 	legendClickable: true,
-	containerResizable: true,
+	containerResizable: true
 };
 
 // Stacked bar
@@ -169,13 +163,11 @@ export const stackedBarOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
-			formatter: axisValue => {
-				return `${axisValue / 1000}k`;
-			},
+			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 			stacked: true
 		}
 	},
 	legendClickable: true,
-	containerResizable: true,
+	containerResizable: true
 };

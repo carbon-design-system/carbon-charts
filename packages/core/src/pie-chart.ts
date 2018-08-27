@@ -237,16 +237,8 @@ export class PieChart extends BaseChart {
 		this.updateOverlay().hide();
 	}
 
-	resetOpacity() {
-		this.innerWrap.selectAll("path").attr("stroke-opacity", 0);
-
-		super.resetOpacity();
-	}
-
 	// TODO - Possible inherits from base-chart
 	reduceOpacity(exception?: any) {
-		this.innerWrap.selectAll("path").attr("stroke-opacity", 0);
-
 		if (exception) {
 			// this.innerWrap.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
 
@@ -321,7 +313,7 @@ export class PieChart extends BaseChart {
 					.attr("stroke", accessibility ? self.colorScale[self.displayData.datasets[0].label](d.data.label) : "none")
 					.attr("stroke-opacity", Configuration.pie.mouseout.strokeOpacity);
 
-				self.hideTooltip();
+				// self.hideTooltip();
 			});
 	}
 
