@@ -313,7 +313,7 @@ export class PieChart extends BaseChart {
 					.attr("stroke", accessibility ? self.colorScale[self.displayData.datasets[0].label](d.data.label) : "none")
 					.attr("stroke-opacity", Configuration.pie.mouseout.strokeOpacity);
 
-				// self.hideTooltip();
+				self.hideTooltip();
 			});
 	}
 
@@ -406,7 +406,7 @@ export class PieChart extends BaseChart {
 	private deriveTransformString(d, radius) {
 		const theta = d.endAngle - d.startAngle;
 		const xPosition = radius * Math.sin((theta / 2) + d.startAngle);
-		const yPosition = -1 * radius * Math.cos((theta / 2) + d.startAngle );
+		const yPosition = -1 * radius * Math.cos((theta / 2) + d.startAngle);
 
 		return `translate(${xPosition}, ${yPosition})`;
 	}

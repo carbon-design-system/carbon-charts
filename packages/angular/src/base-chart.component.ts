@@ -43,8 +43,6 @@ export class BaseChart implements AfterViewInit {
 		return this._data;
 	}
 
-	private _data: any;
-
 	/**
 	 * Options passed to charts library
 	 *
@@ -68,6 +66,8 @@ export class BaseChart implements AfterViewInit {
 	 * @memberof BaseChart
 	 */
 	chart;
+
+	private _data: any;
 
 	/**
 	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
