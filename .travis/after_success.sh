@@ -9,6 +9,8 @@ fi
 if [[ $TRAVIS_BRANCH == 'master' ]]; then
   export RELEASE_GH_TOKEN=$GH_TOKEN
 
+  git branch
+  
   npm run semantic-release
 
   mkdir pages

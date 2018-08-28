@@ -17,6 +17,9 @@
 		"test": "lerna run test",
 		"lint": "eslint packages"
 	},
+	"release": {
+	  "branch": "master"
+	},
 	"devDependencies": {
 		"commitizen": "2.10.1",
 		"cz-lerna-changelog": "1.2.1",
