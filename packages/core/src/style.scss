@@ -43,13 +43,6 @@ $default_transition: all .1s ease-out;
 			}
 		}
 
-		// TODOCARBON
-		// rect, circle, path {
-		// 	&:hover {
-		// 		cursor: pointer;
-		// 	}
-		// }
-
 		path {
 			&.line {
 				fill: none;
@@ -274,6 +267,7 @@ div.chart-overlay {
 	z-index: 1059;
 
 	p {
+		margin: 0;
 		font-size: 12px;
 
 		&.bignum {
