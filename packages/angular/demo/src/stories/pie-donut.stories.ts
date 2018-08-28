@@ -46,7 +46,7 @@ pieStories.add("Basic", () => ({
 	props: {
 		pieData: demoPieData,
 		pieOptions: demoPieOptions
-	},
+	}
 }));
 
 pieStories.add("Accessible", () => ({
@@ -57,7 +57,7 @@ pieStories.add("Accessible", () => ({
 	props: {
 		pieData: demoPieData,
 		pieOptions: Object.assign({}, demoPieOptions, {accessibility: true})
-	},
+	}
 }));
 
 const donutStories = storiesOf("Donut", module);
@@ -69,7 +69,7 @@ donutStories.add("Basic", () => ({
 	props: {
 		donutData: demoPieData,
 		donutOptions: demoDonutOptions
-	},
+	}
 }));
 
 donutStories.add("Accessible", () => ({
@@ -80,5 +80,5 @@ donutStories.add("Accessible", () => ({
 	props: {
 		donutData: demoPieData,
 		donutOptions: Object.assign({}, demoDonutOptions, {accessibility: true})
-	},
+	}
 }));

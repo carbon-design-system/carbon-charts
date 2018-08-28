@@ -18,8 +18,7 @@ export default class LineChart extends BaseChart {
       return (
 		<div
 			ref={chartRef => this.chartRef = chartRef}
-			className="chart-holder"
-		>
+			className="chart-holder">
 		</div>
       )
     }

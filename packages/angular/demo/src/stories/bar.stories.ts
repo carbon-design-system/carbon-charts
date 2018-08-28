@@ -21,7 +21,7 @@ barStories.add("Label-based legend", () => ({
 	props: {
 		barData: simpleBarData,
 		barOptions: simpleBarOptions
-	},
+	}
 }));
 
 barStories.add("Label-based legend (Accessible)", () => ({
@@ -32,7 +32,7 @@ barStories.add("Label-based legend (Accessible)", () => ({
 	props: {
 		barData: simpleBarData,
 		barOptions: Object.assign({}, simpleBarOptions, {accessibility: true})
-	},
+	}
 }));
 
 barStories.add("Grouped", () => ({
@@ -43,7 +43,7 @@ barStories.add("Grouped", () => ({
 	props: {
 		barData: groupedBarData,
 		barOptions: groupedBarOptions
-	},
+	}
 }));
 
 barStories.add("Grouped (Accessible)", () => ({
@@ -54,7 +54,7 @@ barStories.add("Grouped (Accessible)", () => ({
 	props: {
 		barData: groupedBarData,
 		barOptions: Object.assign({}, groupedBarOptions, {accessibility: true})
-	},
+	}
 }));
 
 barStories.add("Stacked", () => ({
@@ -65,7 +65,7 @@ barStories.add("Stacked", () => ({
 	props: {
 		barData: stackedBarData,
 		barOptions: stackedBarOptions
-	},
+	}
 }));
 
 barStories.add("Stacked (Accessible)", () => ({
@@ -76,5 +76,5 @@ barStories.add("Stacked (Accessible)", () => ({
 	props: {
 		barData: stackedBarData,
 		barOptions: Object.assign({}, stackedBarOptions, {accessibility: true})
-	},
+	}
 }));

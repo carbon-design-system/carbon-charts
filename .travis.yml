@@ -8,7 +8,8 @@ node_js:
 # - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 before_install: .travis/before_install.sh
 after_success: .travis/after_success.sh
-# script: npm test && npm run lint && cd packages/core && npm run demo:build
+# script: lerna run lint && lerna run test
+script: lerna run lint
 sudo: false
 deploy:
   -
