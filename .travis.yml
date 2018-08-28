@@ -13,12 +13,6 @@ script: lerna run lint
 sudo: false
 deploy:
   -
-    provider: script
-    script: "bash ./scripts/deploy.sh"
-    skip_cleanup: true
-    true:
-      branch: master
-  -
     allow-empty-commit: true
     email: carbon@us.ibm.com
     github-token: $GH_TOKEN
