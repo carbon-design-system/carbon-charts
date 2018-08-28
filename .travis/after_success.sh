@@ -7,6 +7,8 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
 fi
 
 if [[ $TRAVIS_BRANCH == 'master' ]]; then
+  export RELEASE_GH_TOKEN=$GH_TOKEN
+
   npm run semantic-release
 
   mkdir pages
