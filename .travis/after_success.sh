@@ -11,7 +11,7 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
 
   git branch
   git status
-  git log
+  git diff package.json
 
   npm run semantic-release
 
