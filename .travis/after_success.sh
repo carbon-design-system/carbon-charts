@@ -9,13 +9,7 @@ fi
 if [[ $TRAVIS_BRANCH == 'master' ]]; then
   export RELEASE_GH_TOKEN=$GH_TOKEN
 
-  # Need this in here currently because of
-  # https://github.com/atlassian/cz-lerna-changelog/issues/16
-  # Should remove as soon that issue is closed
-  git stash
-  git checkout master
-
-  npm run semantic-release
+  lerna publish --conventional-commits
 
   mkdir pages
   touch pages/.nojekyll
