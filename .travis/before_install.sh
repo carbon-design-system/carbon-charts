@@ -4,7 +4,7 @@ set -e
 
 # Note: do not do set -x or the passwords will leak!
 
-npm install -g lerna@2.11.0 @storybook/cli lerna-semantic-release
+npm install -g lerna@3.2.1 @storybook/cli
 
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo "We are in a pull request, not setting up release"
