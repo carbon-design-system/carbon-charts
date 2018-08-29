@@ -13,6 +13,7 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
   # https://github.com/atlassian/cz-lerna-changelog/issues/16
   # Should remove as soon that issue is closed
   git stash
+  git checkout master
 
   npm run semantic-release
 
