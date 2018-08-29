@@ -8,6 +8,10 @@ fi
 
 if [[ $TRAVIS_BRANCH == 'master' ]]; then
   export RELEASE_GH_TOKEN=$GH_TOKEN
+  
+  git status
+  git stash
+  git checkout master
 
   lerna publish --conventional-commits
 
