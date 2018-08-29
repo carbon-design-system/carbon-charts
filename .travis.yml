@@ -13,7 +13,7 @@ sudo: false
 deploy:
   -
     provider: script
-    script: "bash ./.travis/deploy.sh"
+    script: .travis/deploy.sh
     skip_cleanup: true
     github-token: $GH_TOKEN
   -
