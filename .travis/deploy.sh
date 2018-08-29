@@ -6,14 +6,15 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   exit 0
 fi
 
-if [[ $TRAVIS_BRANCH == 'master' ]]; then  
+if [[ $TRAVIS_BRANCH == 'master' ]]; then
   # Should remove once lerna stops mistakenly
   # adding package-lock.json to every package after npm install
   git status
   git stash
   git checkout master
 
-  git config credential.helper "store --file=.git/credentials"; echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
+  git config credential.helper "store --file=.git/credentials"
+  echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
 
   lerna publish --conventional-commits --yes
 
