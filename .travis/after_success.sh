@@ -13,7 +13,7 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
   git stash
   git checkout master
 
-  lerna publish --conventional-commits
+  lerna publish --conventional-commits --yes
 
   mkdir pages
   touch pages/.nojekyll
@@ -21,6 +21,7 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
 
   # bundle core demo
   cd packages/core
+  npm run build
   npm run demo:build
   typedoc --out ./demo/bundle/documentation ./src/index.ts
   cp -a demo/bundle/. ../../pages
