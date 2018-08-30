@@ -3,7 +3,6 @@ var ExtractText = require("extract-text-webpack-plugin");
 var nodeExternals = require('webpack-node-externals');
 var path = require('path');
 
-
 function rxjsExternal(context, request, cb) {
     if (/^rxjs\/add\/observable\//.test(request)) {
       return cb(null, {root: ['Rx', 'Observable'], commonjs: request, commonjs2: request, amd: request});
