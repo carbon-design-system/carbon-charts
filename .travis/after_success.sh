@@ -41,3 +41,7 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
   npm run build-storybook
   cp -a storybook-dist/. ../../../pages/angular
 fi
+
+if [[ echo $TRAVIS_BRANCH | grep "^v[0-9]\+\.[0-9]\+\.[0-9]\+\$" ]]; then
+  lerna publish from-git
+fi
