@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts-angular-storybook",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -22,9 +22,9 @@
     "@angular/platform-browser": "6.0.3",
     "@angular/platform-browser-dynamic": "6.0.3",
     "@angular/router": "6.0.3",
+    "@carbon/charts": "^0.1.0",
+    "@carbon/charts-angular": "^0.1.0",
     "core-js": "2.5.4",
-    "@carbon/charts": "0.0.0",
-    "@carbon/charts-angular": "0.0.0",
     "rxjs": "6.0.0",
     "zone.js": "0.8.26"
   },
