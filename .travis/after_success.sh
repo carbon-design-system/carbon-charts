@@ -7,6 +7,8 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
 fi
 
 if [[ $TRAVIS_BRANCH == 'master' ]]; then
+  npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
+
   # Should remove once lerna stops mistakenly
   # adding package-lock.json to every package after npm install
   git status
