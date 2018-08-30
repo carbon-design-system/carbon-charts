@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/IBM/carbon-charts/compare/v0.2.0...v0.3.0) (2018-08-30)
+
+
+### Features
+
+* **core angular:** trigger minor release on Travis ([1c476b2](https://github.com/IBM/carbon-charts/commit/1c476b2))
+
+
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/IBM/carbon-charts/compare/v0.1.0...v0.2.0) (2018-08-30)
 
