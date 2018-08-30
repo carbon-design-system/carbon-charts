@@ -82,6 +82,8 @@ export default class PatternsService {
 				const patternElement = mountedSVG.querySelector("pattern");
 				patternElement.id = `carbon-${chartContainerID}-pattern-${id}`;
 
+				mountedSVG.querySelector("g").removeAttribute("id");
+
 				// Apply fills to everything
 				const allElementsInsideSVG = Array.prototype.slice.call(mountedSVG.querySelectorAll("pattern g *"));
 				allElementsInsideSVG.forEach((element, elementIndex) => {
@@ -94,6 +96,11 @@ export default class PatternsService {
 
 					element.removeAttribute("id");
 					element.removeAttribute("class");
+				});
+
+				const allRectsInsideSVG = Array.prototype.slice.call(mountedSVG.querySelectorAll("rect"));
+				allRectsInsideSVG.forEach(rectElement => {
+					rectElement.removeAttribute("id");
 				});
 
 				// Update pattern widths & heights

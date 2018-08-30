@@ -7,7 +7,7 @@
 		"type": "git",
 		"url": "git@github.com:IBM/carbon-charts.git"
 	},
-	"license": "Apache-2",
+	"license": "Apache-2.0",
 	"author": "IBM",
 	"peerDependencies": {
 		"@angular/animations": "^6.0.0",
@@ -91,6 +91,9 @@
 		"webpack-node-externals": "1.6.0",
 		"whatwg-fetch": "2.0.3",
 		"zone.js": "0.8.21"
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"maintainers": [
 		{
