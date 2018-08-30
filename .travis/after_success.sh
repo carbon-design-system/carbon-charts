@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
+
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo "We are in a pull request, not releasing"
   exit 0
@@ -41,7 +43,5 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
 fi
 
 if [[ echo $TRAVIS_BRANCH | grep "^v[0-9]\+\.[0-9]\+\.[0-9]\+\$" ]]; then
-  npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
-
   lerna publish from-git
 fi
