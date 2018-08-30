@@ -15,17 +15,22 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
   git stash
   git checkout master
 
+  # Git user info configs
+  git config --global user.email "carbon@us.ibm.com"
+  git config --global user.name "carbon-bot"
+
+  # Add github token to git credentials
   git config credential.helper "store --file=.git/credentials"
   echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
-  cat .git/credentials
 
   lerna publish --conventional-commits --yes
 
+  # Generate all assets
+  # needed for push to gh-page
   mkdir pages
   touch pages/.nojekyll
   echo "charts.carbondesignsystem.com" > pages/CNAME
 
-  # bundle core demo
   cd packages/core
   npm run build
   npm run demo:build
