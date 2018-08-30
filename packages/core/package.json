@@ -57,6 +57,9 @@
     "webpack-dev-server": "2.9.4",
     "webpack-node-externals": "1.6.0"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "maintainers": [
     {
       "name": "Eliad Moosavi",

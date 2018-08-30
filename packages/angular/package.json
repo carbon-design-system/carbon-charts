@@ -92,6 +92,9 @@
 		"whatwg-fetch": "2.0.3",
 		"zone.js": "0.8.21"
 	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"maintainers": [
 		{
 			"name": "Eliad Moosavi",
