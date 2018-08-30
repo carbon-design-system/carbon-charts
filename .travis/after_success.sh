@@ -7,6 +7,8 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
 fi
 
 if [[ $TRAVIS_BRANCH == 'master' ]]; then
+  npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
+
   # Should remove once lerna stops mistakenly
   # adding package-lock.json to every package after npm install
   git status
@@ -15,6 +17,7 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
 
   git config credential.helper "store --file=.git/credentials"
   echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
+  cat .git/credentials
 
   lerna publish --conventional-commits --yes
 
