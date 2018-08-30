@@ -332,8 +332,13 @@ export class BaseChart {
 			container.attr("chart-id", chartId)
 				.classed("chart-wrapper", true);
 			if (container.select(".legend-wrapper").nodes().length === 0) {
-				const legendWrapper = container.append("div").attr("class", "legend-wrapper");
-				legendWrapper.append("ul").attr("class", "legend");
+				const legendWrapper = container.append("div")
+					.attr("class", "legend-wrapper")
+					.attr("role", "region")
+					.attr("aria-label", `Chart ${chartId} Legend`);
+
+				legendWrapper.append("ul")
+					.attr("class", "legend");
 			}
 		}
 		return {chartId, container};
