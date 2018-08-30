@@ -4067,8 +4067,12 @@ var BaseChart = /** @class */ (function () {
             container.attr("chart-id", chartId)
                 .classed("chart-wrapper", true);
             if (container.select(".legend-wrapper").nodes().length === 0) {
-                var legendWrapper = container.append("div").attr("class", "legend-wrapper");
-                legendWrapper.append("ul").attr("class", "legend");
+                var legendWrapper = container.append("div")
+                    .attr("class", "legend-wrapper")
+                    .attr("role", "region")
+                    .attr("aria-label", "Chart " + chartId + " Legend");
+                legendWrapper.append("ul")
+                    .attr("class", "legend");
             }
         }
         return { chartId: chartId, container: container };
@@ -25686,6 +25690,7 @@ var PatternsService = /** @class */ (function () {
                 // Apply id to the pattern element
                 var patternElement = mountedSVG.querySelector("pattern");
                 patternElement.id = "carbon-" + chartContainerID + "-pattern-" + id;
+                mountedSVG.querySelector("g").removeAttribute("id");
                 // Apply fills to everything
                 var allElementsInsideSVG = Array.prototype.slice.call(mountedSVG.querySelectorAll("pattern g *"));
                 allElementsInsideSVG.forEach(function (element, elementIndex) {
@@ -25698,6 +25703,10 @@ var PatternsService = /** @class */ (function () {
                     }
                     element.removeAttribute("id");
                     element.removeAttribute("class");
+                });
+                var allRectsInsideSVG = Array.prototype.slice.call(mountedSVG.querySelectorAll("rect"));
+                allRectsInsideSVG.forEach(function (rectElement) {
+                    rectElement.removeAttribute("id");
                 });
                 // Update pattern widths & heights
                 patternElement.setAttribute("width", "" + __WEBPACK_IMPORTED_MODULE_2__configuration__["a" /* Configuration */].charts.patternFills.width);
