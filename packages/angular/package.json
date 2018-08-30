@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-angular",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"repository": {
@@ -24,7 +24,7 @@
 		"zone.js": "0.8.18"
 	},
 	"dependencies": {
-		"@carbon/charts": "0.0.0"
+		"@carbon/charts": "^0.1.0"
 	},
 	"devDependencies": {
 		"@angular/animations": "6.0.0",
@@ -94,16 +94,16 @@
 	},
 	"maintainers": [
 		{
-		  "name": "Eliad Moosavi",
-		  "email": "iliadm@ca.ibm.com",
-		  "url": "https://github.com/theiliad"
+			"name": "Eliad Moosavi",
+			"email": "iliadm@ca.ibm.com",
+			"url": "https://github.com/theiliad"
 		}
 	],
 	"contributors": [
 		{
-		  "name": "Eliad Moosavi",
-		  "email": "iliadm@ca.ibm.com",
-		  "url": "https://github.com/theiliad"
+			"name": "Eliad Moosavi",
+			"email": "iliadm@ca.ibm.com",
+			"url": "https://github.com/theiliad"
 		}
 	]
 }
