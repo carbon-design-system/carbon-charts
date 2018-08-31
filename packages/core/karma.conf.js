@@ -19,7 +19,9 @@ module.exports = function (config) {
 		logLevel: config.LOG_INFO,
 		colors: true,
 		mime: {
-			'text/x-typescript': ['ts']
+			'text/x-typescript': [
+				'ts'
+			]
 		},
 		webpack: require('./webpack.test'),
 		webpackMiddleware: {
