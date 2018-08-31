@@ -13,7 +13,7 @@
 	"scripts": {
 		"commit": "git-cz",
 		"postinstall": "lerna bootstrap",
-		"prepush": "lerna run lint",
+		"pre-push": "lerna run lint",
 		"test": "lerna run test",
 		"lint": "eslint packages"
 	},
