@@ -56,7 +56,13 @@ export class BaseChart {
 			this.setData(configs.data);
 		}
 	}
+	
+	dispatchEvent(eventType: string) {
+		const event = document.createEvent("Event");
+		event.initEvent(eventType, false, true); 
 
+		this.events.dispatchEvent(event);
+	}
 
 	setData(data: any) {
 		const { selectors } = Configuration;
@@ -65,7 +71,7 @@ export class BaseChart {
 		const newDataIsAPromise = Promise.resolve(data) === data;
 
 		// Dispatch the update event
-		this.events.dispatchEvent(new Event("data-change"));
+		this.dispatchEvent("data-change");
 
 		if (initialDraw || newDataIsAPromise) {
 			this.updateOverlay().show();
@@ -78,7 +84,7 @@ export class BaseChart {
 
 		Promise.resolve(data).then(value => {
 			// Dispatch the update event
-			this.events.dispatchEvent(new Event("data-load"));
+			this.dispatchEvent("data-load");
 
 			// Process data
 			// this.data = this.dataProcessor(Tools.clone(value));

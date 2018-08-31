@@ -95,7 +95,7 @@ export class BarChart extends BaseAxisChart {
 		this.updateOverlay().hide();
 
 		// Dispatch the load event
-		this.events.dispatchEvent(new Event("load"));
+		this.dispatchEvent("load");
 	}
 
 	interpolateValues(newData: any) {
@@ -173,7 +173,7 @@ export class BarChart extends BaseAxisChart {
 		this.updateOverlay().hide();
 
 		// Dispatch the update event
-		this.events.dispatchEvent(new Event("update"));
+		this.dispatchEvent("update");
 	}
 
 	updateElements(animate: boolean, rect?: any, g?: any) {

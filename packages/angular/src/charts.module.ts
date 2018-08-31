@@ -7,7 +7,9 @@ import { BarChartComponent } from "./bar-chart.component";
 import { LineChartComponent } from "./line-chart.component";
 
 @NgModule({
-	imports: [CommonModule],
+	imports: [
+		CommonModule
+	],
 	declarations: [
 		DonutChartComponent,
 		PieChartComponent,
