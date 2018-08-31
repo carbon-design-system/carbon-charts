@@ -2,7 +2,10 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	devtool: "sourcemap",
-	entry: "./demo/index.ts",
+	entry: [
+		"babel-polyfill",
+		"./demo/index.ts"
+	],
 	output: {
 		path: __dirname + '/demo/bundle',
 		filename: "bundle.js",
