@@ -5,6 +5,14 @@
 	<h3 align="center">Carbon Charts</h3>
 	<p align="center">
 		A reusable framework-agnostic D3 charting library.
+		<br /><br />
+		<a href="https://travis-ci.org/IBM/carbon-charts/">
+			<img src="https://api.travis-ci.org/IBM/carbon-charts.svg?branch=master" />
+		</a>
+		<a href="https://www.npmjs.com/package/@carbon/charts">
+			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
+		</a>
+		<img src="https://img.shields.io/badge/comp-IE11%2B-blue.svg" />
 	</p>
 	<p align="center">
 		:bar_chart: :chart_with_upwards_trend: :rocket:
