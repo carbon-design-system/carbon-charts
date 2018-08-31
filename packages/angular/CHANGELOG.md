@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.1"></a>
+## [0.4.1](https://github.com/IBM/carbon-charts/compare/v0.4.0...v0.4.1) (2018-08-31)
+
+
+### Bug Fixes
+
+* **core angular:** Remove demo folders from published packages ([5e3c556](https://github.com/IBM/carbon-charts/commit/5e3c556))
+* **core angular:** Remove demos & add dist in packages ([94bb9f4](https://github.com/IBM/carbon-charts/commit/94bb9f4))
+
+
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/IBM/carbon-charts/compare/v0.3.0...v0.4.0) (2018-08-30)
 
