@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.2"></a>
+## [0.4.2](https://github.com/IBM/carbon-charts/compare/v0.4.1...v0.4.2) (2018-08-31)
+
+
+### Bug Fixes
+
+* **core angular:** IE11 Support ([b0dd2b5](https://github.com/IBM/carbon-charts/commit/b0dd2b5))
+
+
+
+
+
 <a name="0.4.1"></a>
 ## [0.4.1](https://github.com/IBM/carbon-charts/compare/v0.4.0...v0.4.1) (2018-08-31)
 
