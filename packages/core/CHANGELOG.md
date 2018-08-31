@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/IBM/carbon-charts/compare/v0.3.0...v0.4.0) (2018-08-30)
+
+
+### Features
+
+* **core angular react:** Resolve DAP violations ([86f6e05](https://github.com/IBM/carbon-charts/commit/86f6e05))
+
+
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/IBM/carbon-charts/compare/v0.2.0...v0.3.0) (2018-08-30)
 
