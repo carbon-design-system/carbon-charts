@@ -1,6 +1,6 @@
 # `@carbon/charts-angular`
 
-> Angular wrappers for the Carbon Charts components
+> Angular wrappers for the Carbon charting components
 
 ## Getting Started
 
