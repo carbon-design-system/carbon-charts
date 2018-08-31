@@ -37,14 +37,15 @@
 
 | Component   | Vanilla            | Angular                  | React |
 |-------------|--------------------|--------------------------|-------|
-| Simple Bar  | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
-| Grouped Bar | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
-| Stacked Bar | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
-| Donut       | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
-| Line        | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
-| Curved Line | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
-| Pie         | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
-| Step        | :white_check_mark: | :hourglass_flowing_sand: | Soon  |
+| Simple Bar  | :white_check_mark: | :white_check_mark:       | Soon  |
+| Grouped Bar | :white_check_mark: | :white_check_mark:       | Soon  |
+| Stacked Bar | :white_check_mark: | :white_check_mark:       | Soon  |
+| Donut       | :white_check_mark: | :white_check_mark:       | Soon  |
+| Line        | :white_check_mark: | :white_check_mark:       | Soon  |
+| Curved Line | :white_check_mark: | :white_check_mark:       | Soon  |
+| Pie         | :white_check_mark: | :white_check_mark:       | Soon  |
+| Step        | :white_check_mark: | :white_check_mark:       | Soon  |
+| Combo       | Soon               | Soon                     | Soon  |
 | Area        | Soon               | Soon                     | Soon  |
 
 ## Getting started
