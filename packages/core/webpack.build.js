@@ -17,7 +17,10 @@ function rxjsExternal(context, request, cb) {
 module.exports = [{
 	devtool: "source-map",
 	entry: {
-		charts: "./src/index.ts"
+		charts: [
+			"babel-polyfill",
+			"./src/index.ts"
+		]
 	},
 	output: {
 		path: __dirname + '/dist/bundle',

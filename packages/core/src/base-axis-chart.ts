@@ -153,7 +153,7 @@ export class BaseAxisChart extends BaseChart {
 			this.repositionXAxisTitle();
 		}
 
-		this.events.dispatchEvent(new Event("resize"));
+		this.dispatchEvent("resize");
 	}
 
 	/**************************************
