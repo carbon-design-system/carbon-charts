@@ -1,4 +1,5 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	devtool: "sourcemap",
@@ -43,7 +44,10 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: './demo/index.html'
-		})
+		}),
+		new CopyWebpackPlugin([
+            { from: 'demo/assets' }
+        ])
 	],
 	devServer: {
 		contentBase: "./demo",
