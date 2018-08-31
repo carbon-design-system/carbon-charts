@@ -44,6 +44,7 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
   cd ../..
 
   # Perform git & npm publish
+  git update-index --assume-unchanged `git diff --name-only`
   lerna publish --conventional-commits --yes
 fi
 
