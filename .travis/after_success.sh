@@ -23,8 +23,6 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
   git config credential.helper "store --file=.git/credentials"
   echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
 
-  lerna publish --conventional-commits --yes
-
   # Generate all assets
   # needed for push to gh-page
   mkdir pages
@@ -36,10 +34,17 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
   npm run demo:build
   typedoc --out ./demo/bundle/documentation ./src/index.ts
   cp -a demo/bundle/. ../../pages
+  rm -rf demo
 
   cd ../angular/demo
   npm run build-storybook
   cp -a storybook-dist/. ../../../pages/angular
+  cd ..
+  rm -rf demo
+  cd ../..
+
+  # Perform git & npm publish
+  lerna publish --conventional-commits --yes
 fi
 
 if [[ echo $TRAVIS_BRANCH | grep "^v[0-9]\+\.[0-9]\+\.[0-9]\+\$" ]]; then
