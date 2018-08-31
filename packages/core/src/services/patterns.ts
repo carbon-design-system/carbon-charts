@@ -82,6 +82,7 @@ export default class PatternsService {
 				const patternElement = mountedSVG.querySelector("pattern");
 				patternElement.id = `carbon-${chartContainerID}-pattern-${id}`;
 
+				// Remove all IDs to avoid duplicate IDs (accessibility violation)
 				mountedSVG.querySelector("g").removeAttribute("id");
 
 				// Apply fills to everything
@@ -94,12 +95,14 @@ export default class PatternsService {
 						element.style.fill = "transparent";
 					}
 
+					// Remove ID to avoid duplicate IDs (accessibility violation)
 					element.removeAttribute("id");
 					element.removeAttribute("class");
 				});
 
 				const allRectsInsideSVG = Array.prototype.slice.call(mountedSVG.querySelectorAll("rect"));
 				allRectsInsideSVG.forEach(rectElement => {
+					// Remove all IDs to avoid duplicate IDs (accessibility violation)
 					rectElement.removeAttribute("id");
 				});
 
