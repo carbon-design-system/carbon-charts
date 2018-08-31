@@ -25690,6 +25690,7 @@ var PatternsService = /** @class */ (function () {
                 // Apply id to the pattern element
                 var patternElement = mountedSVG.querySelector("pattern");
                 patternElement.id = "carbon-" + chartContainerID + "-pattern-" + id;
+                // Remove all IDs to avoid duplicate IDs (accessibility violation)
                 mountedSVG.querySelector("g").removeAttribute("id");
                 // Apply fills to everything
                 var allElementsInsideSVG = Array.prototype.slice.call(mountedSVG.querySelectorAll("pattern g *"));
@@ -25701,11 +25702,13 @@ var PatternsService = /** @class */ (function () {
                     else {
                         element.style.fill = "transparent";
                     }
+                    // Remove ID to avoid duplicate IDs (accessibility violation)
                     element.removeAttribute("id");
                     element.removeAttribute("class");
                 });
                 var allRectsInsideSVG = Array.prototype.slice.call(mountedSVG.querySelectorAll("rect"));
                 allRectsInsideSVG.forEach(function (rectElement) {
+                    // Remove all IDs to avoid duplicate IDs (accessibility violation)
                     rectElement.removeAttribute("id");
                 });
                 // Update pattern widths & heights
