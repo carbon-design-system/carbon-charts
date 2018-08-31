@@ -56,10 +56,10 @@ export class BaseChart {
 			this.setData(configs.data);
 		}
 	}
-	
+
 	dispatchEvent(eventType: string) {
 		const event = document.createEvent("Event");
-		event.initEvent(eventType, false, true); 
+		event.initEvent(eventType, false, true);
 
 		this.events.dispatchEvent(event);
 	}
