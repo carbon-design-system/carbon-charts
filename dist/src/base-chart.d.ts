@@ -19,6 +19,7 @@ export declare class BaseChart {
         tooltips: any;
     };
     constructor(holder: Element, configs: any);
+    dispatchEvent(eventType: string): void;
     setData(data: any): void;
     getKeysFromData(): {};
     getLegendType(): string;
