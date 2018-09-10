@@ -1,4 +1,7 @@
-import * as d3 from "d3";
+// D3 Imports
+import { select } from "d3-selection";
+import { stack } from "d3-shape";
+import { max } from "d3-array";
 
 import { Configuration } from "./configuration";
 import { BaseAxisChart } from "./base-axis-chart";
@@ -31,9 +34,9 @@ export class StackedBarChart extends BaseAxisChart {
 		let yMax;
 
 		if (datasets.length === 1) {
-			yMax = d3.max(datasets[0].data);
+			yMax = max(datasets[0].data);
 		} else {
-			yMax = d3.max(labels.map((label, i) => {
+			yMax = max(labels.map((label, i) => {
 				const correspondingValues = datasets.map(dataset => dataset.data[i]);
 				const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
 
@@ -78,7 +81,7 @@ export class StackedBarChart extends BaseAxisChart {
 		this.innerWrap.append("g")
 			.classed("bars-wrapper", true)
 			.selectAll("g")
-			.data(d3.stack().keys(stackKeys)(stackDataArray))
+			.data(stack().keys(stackKeys)(stackDataArray))
 			.enter()
 				.append("g")
 				.classed("bars", true)
@@ -109,7 +112,7 @@ export class StackedBarChart extends BaseAxisChart {
 
 		const g = this.innerWrap.selectAll("g.bars-wrapper")
 			.selectAll("g")
-			.data(d3.stack().keys(stackKeys)(stackDataArray));
+			.data(stack().keys(stackKeys)(stackDataArray));
 
 		const rect = g.selectAll("rect.bar")
 			.data(d => addLabelsAndValueToData(d));
@@ -167,7 +170,7 @@ export class StackedBarChart extends BaseAxisChart {
 		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
 
 		// Resize the SVG
-		d3.select(this.holder).select("svg")
+		select(this.holder).select("svg")
 			.attr("width", `${dimensionToUseForScale}px`)
 			.attr("height", `${dimensionToUseForScale}px`);
 

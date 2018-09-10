@@ -1,4 +1,13 @@
-import * as d3 from "d3";
+// D3 Imports
+import {
+	event,
+	mouse,
+	select,
+	selectAll
+} from "d3-selection";
+import { scaleOrdinal } from "d3-scale";
+import { transition, Transition } from "d3-transition";
+
 import { Configuration } from "./configuration";
 import { Tools } from "./tools";
 import PatternsService from "./services/patterns";
@@ -169,7 +178,7 @@ export class BaseChart {
 
 		const patternURLs = this.patternsService.getFillValues();
 		Object.keys(patternURLs).forEach(datasetLabel => {
-			this.patternScale[datasetLabel] = d3.scaleOrdinal()
+			this.patternScale[datasetLabel] = scaleOrdinal()
 				.range(patternURLs[datasetLabel])
 				.domain(this.getLegendItemKeys());
 		});
@@ -177,7 +186,7 @@ export class BaseChart {
 
 	setColorScale() {
 		this.displayData.datasets.forEach(dataset => {
-			this.colorScale[dataset.label] = d3.scaleOrdinal().range(dataset.backgroundColors).domain(this.displayData.labels);
+			this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.displayData.labels);
 		});
 	}
 
@@ -278,7 +287,7 @@ export class BaseChart {
 				containerWidth = this.holder.clientWidth;
 				containerHeight = this.holder.clientHeight;
 
-				d3.selectAll(".legend-tooltip").style("display", "none");
+				selectAll(".legend-tooltip").style("display", "none");
 
 				this.hideTooltip();
 				this.resizeChart();
@@ -291,20 +300,20 @@ export class BaseChart {
 
 	setClickableLegend() {
 		const self = this;
-		const c = d3.select(this.holder);
+		const c = select(this.holder);
 
 		if (this.getActiveLegendItems().length === 1) {
 			c.selectAll(".legend-btn.active").classed("not-allowed", true);
 		}
 
 		c.selectAll(".legend-btn").each(function() {
-			d3.select(this).on("click", function() {
+			select(this).on("click", function() {
 				c.selectAll(".chart-tooltip").remove();
 				c.selectAll(".label-tooltip").remove();
 
 				// Only apply legend filters if there are more than 1 active legend items
 				const activeLegendItems = self.getActiveLegendItems();
-				const legendButton = d3.select(this);
+				const legendButton = select(this);
 				const enabling = !legendButton.classed("active");
 
 				// If there are more than 1 active legend items & one is getting toggled on
@@ -325,7 +334,7 @@ export class BaseChart {
 	}
 
 	setChartIDContainer() {
-		const parent = d3.select(this.holder);
+		const parent = select(this.holder);
 		let chartId, container;
 		if (parent.select(".chart-wrapper").nodes().length > 0) {
 			container = parent.select(".chart-wrapper");
@@ -351,7 +360,7 @@ export class BaseChart {
 	}
 
 	resetOpacity() {
-		const svg = d3.selectAll("svg.chart-svg");
+		const svg = selectAll("svg.chart-svg");
 		svg.selectAll("path").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
 
 		svg.selectAll("circle")
@@ -366,11 +375,11 @@ export class BaseChart {
 		// this.svg.selectAll("rect, path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
 		// this.svg.selectAll("rect, path").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
 
-		const exceptedElement = d3.select(exception);
+		const exceptedElement = select(exception);
 		const exceptedElementData = exceptedElement.datum() as any;
-		d3.select(exception).attr("fill-opacity", false);
-		d3.select(exception).attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
-		d3.select(exception).attr("fill", (d: any) => this.getFillScale()[d.datasetLabel](exceptedElementData.label));
+		select(exception).attr("fill-opacity", false);
+		select(exception).attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+		select(exception).attr("fill", (d: any) => this.getFillScale()[d.datasetLabel](exceptedElementData.label));
 	}
 
 	// ================================================================================
@@ -414,8 +423,8 @@ export class BaseChart {
 	}
 
 	updateLegend(legend) {
-		const thisLegend = d3.select(legend);
-		const circle = d3.select(legend).select(".legend-circle");
+		const thisLegend = select(legend);
+		const circle = select(legend).select(".legend-circle");
 
 		thisLegend.classed("active", !thisLegend.classed("active"));
 		if (thisLegend.classed("active")) {
@@ -498,7 +507,7 @@ export class BaseChart {
 			let btnsWidth = 0;
 			btns.forEach(btn => {
 				if ((btnsWidth + btn.clientWidth + Configuration.legend.widthTolerance) > svgWidth) {
-					d3.select(btn).style("display", "none");
+					select(btn).style("display", "none");
 				} else {
 					btnsWidth += btn.clientWidth;
 				}
@@ -519,9 +528,9 @@ export class BaseChart {
 	}
 
 	addLegendCircleHoverEffect() {
-		d3.selectAll("li.legend-btn")
+		selectAll("li.legend-btn")
 			.on("mouseover", function() {
-				const circleRef = d3.select(this).select("div.legend-circle");
+				const circleRef = select(this).select("div.legend-circle");
 				const color = (circleRef.node() as HTMLElement).style.backgroundColor.substring(4,
 					(circleRef.node() as HTMLElement).style.backgroundColor.length - 1);
 
@@ -531,7 +540,7 @@ export class BaseChart {
 				);
 			})
 			.on("mouseout", function() {
-				d3.select(this).select("div.legend-circle").style("box-shadow", "none");
+				select(this).select("div.legend-circle").style("box-shadow", "none");
 			});
 	}
 
@@ -570,10 +579,10 @@ export class BaseChart {
 
 	setClickableLegendInTooltip() {
 		const self = this;
-		const c = d3.select(this.container);
+		const c = select(this.container);
 		const tooltip = c.select(".legend-tooltip-content");
 		tooltip.selectAll(".legend-btn").each(function() {
-			d3.select(this).on("click", function() {
+			select(this).on("click", function() {
 				self.updateLegend(this);
 
 				// TODO - setClickableLegendInTooltip()
@@ -597,18 +606,18 @@ export class BaseChart {
 
 	// TODO - Refactor
 	openLegendTooltip(target) {
-		d3.selectAll(".legend-tooltip").remove();
-		const mouseXPoint = d3.mouse(this.container.node())[0];
-		const windowXPoint = d3.event.x;
+		selectAll(".legend-tooltip").remove();
+		const mouseXPoint = mouse(this.container.node())[0];
+		const windowXPoint = event.x;
 		let tooltip;
 		if (this.container.select(".legend-tooltip").nodes().length > 0) {
-			tooltip = d3.selectAll(".legend-tooltip").style("display", "block");
+			tooltip = selectAll(".legend-tooltip").style("display", "block");
 			tooltip.select("arrow").remove();
 		} else {
 			tooltip = this.container.append("div")
 				.attr("class", "tooltip chart-tooltip legend-tooltip")
 				.style("display", "block")
-				.style("top", (d3.mouse(this.container.node())[1] - Configuration.legend.margin.top) + "px");
+				.style("top", (mouse(this.container.node())[1] - Configuration.legend.margin.top) + "px");
 			tooltip.append("p").text("Legend")
 				.attr("class", "legend-tooltip-header");
 			tooltip.append("ul")
@@ -616,11 +625,11 @@ export class BaseChart {
 				.attr("font-size", Configuration.legend.fontSize);
 			Tools.addCloseBtn(tooltip, "md", "white")
 				.on("click", () => {
-					d3.selectAll(".legend-tooltip").style("display", "none");
+					selectAll(".legend-tooltip").style("display", "none");
 				});
 
 			const activeLegendItems = this.getActiveLegendItems();
-			const legendContent = d3.select(".legend-tooltip-content")
+			const legendContent = select(".legend-tooltip-content")
 				.attr("font-size", Configuration.legend.fontSize)
 				.selectAll("div")
 				.data(this.getLegendItemArray(), (d: any) => d.key)
@@ -630,11 +639,11 @@ export class BaseChart {
 					.classed("active", d => d.value === Configuration.legend.items.status.ACTIVE)
 					.classed("not-allowed", d => activeLegendItems.length === 1 && d.value === Configuration.legend.items.status.ACTIVE)
 					.on("click", (clickedItem, e) => {
-						const legendButton = d3.select(d3.event.currentTarget);
+						const legendButton = select(event.currentTarget);
 						const enabling = !legendButton.classed("active");
 
 						if (activeLegendItems.length > 1 || enabling) {
-							this.updateLegend(d3.event.currentTarget);
+							this.updateLegend(event.currentTarget);
 
 							this.applyLegendFilter(clickedItem.key);
 
@@ -705,15 +714,15 @@ export class BaseChart {
 	}
 
 	showLabelTooltip(d, leftSide) {
-		d3.selectAll(".label-tooltip").remove();
-		const mouseXPoint = d3.mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.arrowWidth;
+		selectAll(".label-tooltip").remove();
+		const mouseXPoint = mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.arrowWidth;
 		const tooltip = this.container.append("div")
 			.attr("class", "tooltip label-tooltip")
-			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop1 + "px");
+			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop1 + "px");
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				this.resetOpacity();
-				d3.selectAll(".tooltip").remove();
+				selectAll(".tooltip").remove();
 			});
 		tooltip.append("p").text(d);
 
@@ -733,7 +742,7 @@ export class BaseChart {
 	hideTooltip() {
 		this.resetOpacity();
 
-		const tooltipRef = d3.select(this.holder).select("div.chart-tooltip");
+		const tooltipRef = select(this.holder).select("div.chart-tooltip");
 		tooltipRef.style("opacity", 1)
 			.transition()
 			.duration(Configuration.tooltip.fadeOut.duration)
@@ -771,7 +780,7 @@ export class BaseChart {
 
 			// Stop clicking inside tooltip from bubbling up to window
 			tooltip.on("click", () => {
-				d3.event.stopPropagation();
+				event.stopPropagation();
 			});
 		}, 0);
 	}
@@ -791,12 +800,12 @@ export class BaseChart {
 
 		// Remove existing tooltips on the page
 		// TODO - Update class to not conflict with other elements on page
-		d3.selectAll(".chart-tooltip").remove();
+		selectAll(".chart-tooltip").remove();
 
 		// Draw tooltip
-		const tooltip = d3.select(this.holder).append("div")
+		const tooltip = select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
-			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
+			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
 
 		let tooltipHTML = "";
@@ -814,13 +823,13 @@ export class BaseChart {
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 
 		// Draw tooltip arrow in the right direction
-		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
+		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
 			tooltip.style(
 				"left",
-				d3.mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
+				mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
 			);
 		} else {
-			tooltip.style("left", d3.mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
+			tooltip.style("left", mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
 		}
 
 		tooltip.style("opacity", 0)
@@ -835,26 +844,26 @@ export class BaseChart {
 		return this.options.accessibility ? this.patternScale : this.colorScale;
 	}
 
-	getDefaultTransition() {
+	getDefaultTransition(): Transition<any, any, any, any> {
 		if (this.options.animations === false) {
 			return this.getInstantTransition();
 		}
 
-		return d3.transition().duration(Configuration.transitions.default.duration);
+		return transition().duration(Configuration.transitions.default.duration);
 	}
 
-	getInstantTransition() {
-		return d3.transition().duration(0);
+	getInstantTransition(): Transition<any, any, any, any>  {
+		return transition().duration(0);
 	}
 
 	// Used to determine whether to use a transition for updating fill attributes in charting elements
 	// Will disable the transition if in accessibility mode
-	getFillTransition(animate?: boolean) {
+	getFillTransition(animate?: boolean): Transition<any, any, any, any>  {
 		if (this.options.animations === false) {
 			return this.getInstantTransition();
 		}
 
-		return d3.transition().duration(animate === false ? 0 : Configuration.transitions.default.duration);
+		return transition().duration(animate === false ? 0 : Configuration.transitions.default.duration);
 	}
 
 	// ================================================================================
