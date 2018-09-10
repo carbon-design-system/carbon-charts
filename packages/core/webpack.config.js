@@ -1,7 +1,8 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+	mode: "development",
 	devtool: "sourcemap",
 	entry: [
 		"babel-polyfill",
@@ -18,13 +19,13 @@ module.exports = {
 		extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
 	},
 	module: {
-		loaders: [
+		rules: [
 			// all files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
-			{ test: /\.ts$/, loaders: ["ts-loader"] },
-			{ test: /\.html?$/, loaders: ["html-loader"] },
+			{ test: /\.ts$/, loader: "ts-loader" },
+			{ test: /\.html?$/, loader: "html-loader" },
 			{
 				test: /\.s?css$/,
-				loaders: [
+				use: [
 					"style-loader",
 					"css-loader",
 					"postcss-loader",
@@ -47,7 +48,7 @@ module.exports = {
 		}),
 		new CopyWebpackPlugin([
             { from: 'demo/assets' }
-        ])
+    	])
 	],
 	devServer: {
 		contentBase: "./demo",

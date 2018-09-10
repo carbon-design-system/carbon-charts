@@ -1,20 +1,11 @@
-var webpack = require("webpack");
-var ExtractText = require("extract-text-webpack-plugin");
-var nodeExternals = require('webpack-node-externals');
-var path = require('path');
-
-function rxjsExternal(context, request, cb) {
-    if (/^rxjs\/add\/observable\//.test(request)) {
-      return cb(null, {root: ['Rx', 'Observable'], commonjs: request, commonjs2: request, amd: request});
-    } else if (/^rxjs\/add\/operator\//.test(request)) {
-      return cb(null, {root: ['Rx', 'Observable', 'prototype'], commonjs: request, commonjs2: request, amd: request});
-    } else if (/^rxjs\//.test(request)) {
-      return cb(null, {root: ['Rx'], commonjs: request, commonjs2: request, amd: request});
-    }
-    cb();
-}
+const webpack = require("webpack");
+const ExtractText = require("extract-text-webpack-plugin");
+const nodeExternals = require('webpack-node-externals');
+const path = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = [{
+	mode: "production",
 	devtool: "source-map",
 	entry: {
 		charts: [
@@ -23,19 +14,24 @@ module.exports = [{
 		]
 	},
 	output: {
-		path: __dirname + '/dist/bundle',
+		path: __dirname + '/dist',
 		filename: "bundle.js",
 		libraryTarget: "umd",
     library: "Charts"
 	},
+	// optimization: {
+	// 	splitChunks: {
+	// 		chunks: 'all'
+	// 	}
+	// },
 	module: {
-		loaders: [
+		rules: [
 			// all files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
-			{ test: /\.ts$/, loaders: ["ts-loader"] },
-			{ test: /\.html?$/, loaders: ["html-loader"] },
+			{ test: /\.ts$/, loader: "ts-loader" },
+			{ test: /\.html?$/, loader: "html-loader" },
 			{
 				test: /\.scss$/,
-				loaders: [
+				use: [
 					"style-loader",
 					"css-loader",
 					"postcss-loader",
@@ -44,12 +40,14 @@ module.exports = [{
 			},
 			{
 				test: /\.svg?$/,
-				loader: 'raw-loader'
+				loader: "raw-loader"
 			}
 		]
 	},
 	resolve: {
 		extensions: [".ts", ".js", ".json"]
 	},
-	plugins: [],
+	plugins: [
+		new BundleAnalyzerPlugin()
+	],
 }];

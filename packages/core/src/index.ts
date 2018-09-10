@@ -1,5 +1,3 @@
-import * as d3 from "d3";
-
 import { BaseChart } from "./base-chart";
 import { BaseAxisChart } from "./base-axis-chart";
 

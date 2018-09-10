@@ -1,7 +1,11 @@
-import * as d3 from "d3";
+// D3 Imports
+import { select } from "d3-selection";
+import { line } from "d3-shape";
 
 import { BaseAxisChart } from "./base-axis-chart";
 import { Configuration } from "./configuration";
+
+import { getD3Curve } from "./services/curves";
 
 export class LineChart extends BaseAxisChart {
 	x: any;
@@ -18,10 +22,10 @@ export class LineChart extends BaseAxisChart {
 
 		const { line: margins } = Configuration.charts.margin;
 		// D3 line generator function
-		this.lineGenerator = d3.line()
+		this.lineGenerator = line()
 			.x((d, i) => this.x(this.displayData.labels[i]) + margins.left)
 			.y((d: any) => this.y(d))
-			.curve(d3[this.options.curve] || d3.curveLinear);
+			.curve(getD3Curve(this.options.curve) || getD3Curve("curveLinear"));
 	}
 
 	getLegendType() {
@@ -153,13 +157,13 @@ export class LineChart extends BaseAxisChart {
 		const self = this;
 		gLines.selectAll("path.line")
 			.datum(function(d) {
-				const parentDatum = d3.select(this.parentNode).datum() as any;
+				const parentDatum = select(this.parentNode).datum() as any;
 
 				return parentDatum.data;
 			})
 			.transition(transitionToUse)
 			.attr("stroke", function(d) {
-				const parentDatum = d3.select(this.parentNode).datum() as any;
+				const parentDatum = select(this.parentNode).datum() as any;
 
 				return self.colorScale[parentDatum.label]();
 			})
@@ -169,7 +173,7 @@ export class LineChart extends BaseAxisChart {
 		const { line: margins } = Configuration.charts.margin;
 		gLines.selectAll("circle.dot")
 			.data(function(d, i) {
-				const parentDatum = d3.select(this).datum() as any;
+				const parentDatum = select(this).datum() as any;
 
 				return self.addLabelsToDataPoints(parentDatum, i);
 			})
@@ -185,7 +189,7 @@ export class LineChart extends BaseAxisChart {
 		const dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
 
 		// Resize the SVG
-		d3.select(this.holder).select("svg")
+		select(this.holder).select("svg")
 				.attr("width", `${dimensionToUseForScale}px`)
 				.attr("height", `${dimensionToUseForScale}px`);
 

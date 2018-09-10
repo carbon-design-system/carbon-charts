@@ -1,4 +1,5 @@
-import * as d3 from "d3";
+// D3 Imports
+import { select } from "d3-selection";
 
 import PATTERN_SVGS from "../assets/patterns/index";
 import { Configuration } from "../configuration";
@@ -54,7 +55,7 @@ export default class PatternsService {
 	 * @memberof PatternsService
 	 */
 	addPatternSVGs(d: any, colorScale: any, chartContainerID: string, legendType: string) {
-		d3.select(this.container)
+		select(this.container)
 			.style("display", "table")
 			.style("max-height", 0);
 
