@@ -6,7 +6,6 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
     "e2e": "ng e2e",
     "storybook": "start-storybook -p 9005 -c .storybook -s ./assets",
     "build-storybook": "build-storybook -o storybook-dist"
