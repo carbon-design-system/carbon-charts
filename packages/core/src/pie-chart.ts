@@ -147,7 +147,7 @@ export class PieChart extends BaseChart {
 		const dataList = newData.datasets[0].data;
 
 		// Apply the new data to the slices, and interpolate them
-		const arc = this.arc;
+		const self = this;
 		const path = this.innerWrap.selectAll("path").data(this.pie(dataList));
 
 		// Update slices
@@ -161,12 +161,12 @@ export class PieChart extends BaseChart {
 			.duration(Configuration.transitions.default.duration)
 			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
 			.attrTween("d", function (a) {
-				return arcTween.bind(this)(a, arc);
+				return arcTween.bind(this)(a, self.arc);
 			});
 
 		path.enter()
 			.append("path")
-			.attr("d", arc)
+			.attr("d", this.arc)
 			.transition()
 			.duration(0)
 			.style("opacity", 0)
@@ -178,12 +178,12 @@ export class PieChart extends BaseChart {
 			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
 			.style("opacity", 1)
 			.attrTween("d", function (a) {
-				return arcTween.bind(this)(a, arc);
+				return arcTween.bind(this)(a, self.arc);
 			});
 
 		path
 			.exit()
-			.attr("d", arc)
+			.attr("d", this.arc)
 			.transition()
 			.duration(Configuration.transitions.default.duration)
 			.style("opacity", 0)
@@ -441,12 +441,12 @@ export class PieChart extends BaseChart {
 }
 
 // d3 Tween functions
-function arcTween(a, arc) {
+function arcTween(a, arcFunc) {
 	const i = interpolate(this._current, a);
 
 	return t => {
 		this._current = i(t);
 
-		return arc(this._current);
+		return arcFunc(this._current);
 	};
 }

@@ -27,7 +27,7 @@ const curveTypes = {
 	"curveBasisOpen": curveBasisOpen,
 	"curveBundle": curveBundle,
 	"curveCardinal": curveCardinal,
-	"curveCardinalClosed":curveCardinalClosed,
+	"curveCardinalClosed": curveCardinalClosed,
 	"curveCardinalOpen": curveCardinalOpen,
 	"curveCatmullRom": curveCatmullRom,
 	"curveCatmullRomClosed": curveCatmullRomClosed,
