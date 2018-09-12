@@ -48,6 +48,6 @@ module.exports = env => {
 		resolve: {
 			extensions: [".ts", ".js", ".json"]
 		},
-		plugins,
+		plugins
 	};
 };
