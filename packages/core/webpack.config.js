@@ -9,10 +9,16 @@ module.exports = {
 		"./demo/index.ts"
 	],
 	output: {
-		path: __dirname + '/demo/bundle',
-		filename: "bundle.js",
+		path: __dirname + "/demo/bundle",
+		filename: "index.js",
+		chunkFilename: "[name].chunk.js",
 		libraryTarget: "umd",
-    library: "Charts"
+    	library: "Charts"
+	},
+	optimization: {
+		splitChunks: {
+			chunks: "all"
+		}
 	},
 	resolve: {
 		// Add '.ts' and '.tsx' as a resolvable extension.
@@ -57,4 +63,4 @@ module.exports = {
 		historyApiFallback: true,
 		disableHostCheck: true
 	}
-}
+};

@@ -8,9 +8,9 @@
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
     "demo:build": "webpack --config webpack.config.js",
-    "build": "webpack --config webpack.build.js",
-    "build:watch": "webpack -w --config webpack.build.js",
-    "deploy": "bash scripts/deploy.sh",
+    "build": "rm -rf dist && webpack --config webpack.build.js",
+    "build:watch": "rm -rf dist && webpack -w --config webpack.build.js",
+    "bundle:analyzer": "rm -rf dist && webpack --config webpack.build.js --env.bundleAnalyzer",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "karma start --single-run",
     "test:watch": "karma start --no-single-run"
@@ -24,16 +24,17 @@
   ],
   "author": "IBM",
   "license": "Apache-2.0",
-  "dependencies": {
-    "d3": "4.11.0"
+  "peerDependencies": {
+    "d3": "^4.11.0"
   },
   "devDependencies": {
     "@types/d3": "4.11.0",
     "@types/jasmine": "2.8.7",
     "@types/node": "10.0.8",
     "babel-polyfill": "6.26.0",
-    "copy-webpack-plugin": "^4.5.2",
+    "copy-webpack-plugin": "4.5.2",
     "css-loader": "0.28.7",
+    "d3": "4.11.0",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
     "html-loader": "0.5.1",
@@ -56,9 +57,9 @@
     "typedoc": "0.11.1",
     "typescript": "2.8.3",
     "url-loader": "0.6.2",
-    "webpack": "4.17.2",
-    "webpack-bundle-analyzer": "^2.13.1",
-    "webpack-cli": "^3.1.0",
+    "webpack": "4.18.0",
+    "webpack-bundle-analyzer": "2.13.1",
+    "webpack-cli": "3.1.0",
     "webpack-dev-server": "3.1.8",
     "webpack-node-externals": "1.6.0"
   },
