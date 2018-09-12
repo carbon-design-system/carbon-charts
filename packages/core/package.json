@@ -25,7 +25,7 @@
   "author": "IBM",
   "license": "Apache-2.0",
   "peerDependencies": {
-    "d3": "^4.11.0"
+    "d3": ">=4.11.0 <=5.7.0"
   },
   "devDependencies": {
     "@types/d3": "4.11.0",
