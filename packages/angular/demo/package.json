@@ -7,6 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "e2e": "ng e2e",
+    "lint": "ng lint",
     "storybook": "start-storybook -p 9005 -c .storybook -s ./assets",
     "build-storybook": "build-storybook -o storybook-dist"
   },
