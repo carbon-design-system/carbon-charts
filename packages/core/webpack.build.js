@@ -21,9 +21,7 @@ module.exports = env => {
 			library: "Charts"
 		},
 		optimization: {
-			splitChunks: {
-				chunks: "all"
-			}
+			minimize: true
 		},
 		module: {
 			rules: [
