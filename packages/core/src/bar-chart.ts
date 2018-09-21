@@ -1,4 +1,7 @@
-import * as d3 from "d3";
+// D3 Imports
+import { select } from "d3-selection";
+import { scaleBand } from "d3-scale";
+import { min } from "d3-array";
 
 import { BaseAxisChart } from "./base-axis-chart";
 import { StackedBarChart } from "./stacked-bar-chart";
@@ -10,9 +13,9 @@ const getYMin = configs => {
 	let yMin;
 
 	if (datasets.length === 1) {
-		yMin = d3.min(datasets[0].data);
+		yMin = min(datasets[0].data);
 	} else {
-		yMin = d3.min(datasets, (d: any) => (d3.min(d.data)));
+		yMin = min(datasets, (d: any) => (min(d.data)));
 	}
 
 	if (scales.y.yMinAdjuster) {
@@ -49,8 +52,8 @@ export class BarChart extends BaseAxisChart {
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
 
-		this.x = d3.scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.datasets);
-		this.x1 = d3.scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
+		this.x = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.datasets);
+		this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
 
 		this.x.domain(this.displayData.labels);
 		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
@@ -209,7 +212,7 @@ export class BarChart extends BaseAxisChart {
 		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
 
 		// Resize the SVG
-		d3.select(this.holder).select("svg")
+		select(this.holder).select("svg")
 			.attr("width", `${dimensionToUseForScale}px`)
 			.attr("height", `${dimensionToUseForScale}px`);
 

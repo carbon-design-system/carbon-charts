@@ -1,10 +1,16 @@
-import * as d3 from "d3";
+// D3 Imports
+import {
+	mouse,
+	select
+} from "d3-selection";
+import { scaleBand, scaleLinear } from "d3-scale";
+import { axisBottom, axisLeft, axisRight } from "d3-axis";
+import { min, max } from "d3-array";
 
 import { BaseChart } from "./base-chart";
 
 import { Configuration } from "./configuration";
 import { Tools } from "./tools";
-import { axisBottom } from "d3";
 
 export class BaseAxisChart extends BaseChart {
 	x: any;
@@ -167,7 +173,7 @@ export class BaseAxisChart extends BaseChart {
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
 
-		this.x = d3.scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
+		this.x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
 		this.x.domain(this.displayData.labels);
 	}
 
@@ -178,7 +184,7 @@ export class BaseAxisChart extends BaseChart {
 
 		const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
-		const xAxis = d3.axisBottom(this.x).tickSize(0).tickSizeOuter(0);
+		const xAxis = axisBottom(this.x).tickSize(0).tickSizeOuter(0);
 		let xAxisRef = this.svg.select("g.x.axis");
 
 		// If the <g class="x axis"> exists in the chart SVG, just update it
@@ -237,9 +243,9 @@ export class BaseAxisChart extends BaseChart {
 		let yMax;
 
 		if (datasets.length === 1) {
-			yMax = d3.max(datasets[0].data);
+			yMax = max(datasets[0].data);
 		} else {
-			yMax = d3.max(datasets, (d: any) => (d3.max(d.data)));
+			yMax = max(datasets, (d: any) => (max(d.data)));
 		}
 
 		if (scales.y.yMaxAdjuster) {
@@ -255,9 +261,9 @@ export class BaseAxisChart extends BaseChart {
 		let yMin;
 
 		if (datasets.length === 1) {
-			yMin = d3.min(datasets[0].data);
+			yMin = min(datasets[0].data);
 		} else {
-			yMin = d3.min(datasets, (d: any) => (d3.min(d.data)));
+			yMin = min(datasets, (d: any) => (min(d.data)));
 		}
 
 		if (scales.y.yMinAdjuster) {
@@ -276,11 +282,11 @@ export class BaseAxisChart extends BaseChart {
 		const yMin = this.getYMin();
 		const yMax = this.getYMax();
 
-		this.y = d3.scaleLinear().range([height, 0]);
+		this.y = scaleLinear().range([height, 0]);
 		this.y.domain([Math.min(yMin, 0), yMax]);
 
 		if (scales.y2 && scales.y2.ticks.max) {
-			this.y2 = d3.scaleLinear().rangeRound([height, 0]);
+			this.y2 = scaleLinear().rangeRound([height, 0]);
 			this.y2.domain([scales.y2.ticks.min, scales.y2.ticks.max]);
 		}
 	}
@@ -291,7 +297,7 @@ export class BaseAxisChart extends BaseChart {
 		const { scales } = this.options;
 		const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
-		const yAxis = d3.axisLeft(this.y)
+		const yAxis = axisLeft(this.y)
 			.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks)
 			.tickSize(0)
 			.tickFormat(scales.y.formatter);
@@ -333,7 +339,7 @@ export class BaseAxisChart extends BaseChart {
 		Tools.moveToFront(horizontalLine);
 
 		if (scales.y2 && scales.y2.ticks.max) {
-			const secondaryYAxis = d3.axisRight(this.y2)
+			const secondaryYAxis = axisRight(this.y2)
 				.ticks(scales.y2.numberOfTicks || Configuration.scales.y2.numberOfTicks)
 				.tickSize(0)
 				.tickFormat(scales.y2.formatter);
@@ -356,7 +362,7 @@ export class BaseAxisChart extends BaseChart {
 
 	drawXGrid() {
 		const yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
-		const xGrid = d3.axisBottom(this.x)
+		const xGrid = axisBottom(this.x)
 			.tickSizeInner(-yHeight)
 			.tickSizeOuter(0);
 
@@ -371,7 +377,7 @@ export class BaseAxisChart extends BaseChart {
 		const { scales } = this.options;
 
 		const yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
-		const yGrid = d3.axisLeft(this.y)
+		const yGrid = axisLeft(this.y)
 			.tickSizeInner(-this.getChartSize().width)
 			.tickSizeOuter(0)
 			.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
@@ -391,7 +397,7 @@ export class BaseAxisChart extends BaseChart {
 			// Update X Grid
 			const chartSize = this.getChartSize();
 			const yHeight = chartSize.height - this.getBBox(".x.axis").height;
-			const xGrid = d3.axisBottom(this.x)
+			const xGrid = axisBottom(this.x)
 				.tickSizeInner(-yHeight)
 				.tickSizeOuter(0);
 
@@ -403,7 +409,7 @@ export class BaseAxisChart extends BaseChart {
 			this.cleanGrid(g_xGrid);
 
 			// Update Y Grid
-			const yGrid = d3.axisLeft(this.y)
+			const yGrid = axisLeft(this.y)
 				.tickSizeInner(-chartSize.width)
 				.tickSizeOuter(0)
 				.tickFormat("" as any)
@@ -431,7 +437,7 @@ export class BaseAxisChart extends BaseChart {
 		const letNum = Configuration.scales.tick.maxLetNum;
 		ticks.each(function(t) {
 			if (t && t.length > letNum / 2) {
-				const tick = d3.select(this);
+				const tick = select(this);
 				const y = tick.attr("y");
 				tick.text("");
 				const tspan1 = tick.append("tspan")
@@ -480,7 +486,7 @@ export class BaseAxisChart extends BaseChart {
 
 		this.svg.selectAll("rect")
 			.on("mouseover", function(d) {
-				d3.select(this)
+				select(this)
 					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
 					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
@@ -489,15 +495,15 @@ export class BaseAxisChart extends BaseChart {
 				self.reduceOpacity(this);
 			})
 			.on("mousemove", function(d) {
-				const tooltipRef = d3.select(self.holder).select("div.chart-tooltip");
+				const tooltipRef = select(self.holder).select("div.chart-tooltip");
 
-				const relativeMousePosition = d3.mouse(self.holder as HTMLElement);
+				const relativeMousePosition = mouse(self.holder as HTMLElement);
 				tooltipRef.style("left", relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px")
 					.style("top", relativeMousePosition[1] + "px");
 			})
 			.on("mouseout", function(d) {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.bars.mouseout;
-				d3.select(this)
+				select(this)
 					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
 					.attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
 					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
@@ -507,7 +513,7 @@ export class BaseAxisChart extends BaseChart {
 
 		this.svg.selectAll("circle.dot")
 			.on("mouseover", function(d) {
-				d3.select(this)
+				select(this)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
 					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
 
@@ -515,7 +521,7 @@ export class BaseAxisChart extends BaseChart {
 				self.reduceOpacity(this);
 			})
 			.on("mouseout", function(d) {
-				d3.select(this)
+				select(this)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
 					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
 

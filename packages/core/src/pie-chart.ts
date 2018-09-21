@@ -1,4 +1,9 @@
-import * as d3 from "d3";
+// D3 Imports
+import { select, selectAll, mouse } from "d3-selection";
+import { scaleOrdinal } from "d3-scale";
+import { pie, arc } from "d3-shape";
+import { interpolate } from "d3-interpolate";
+
 import { BaseChart } from "./base-chart";
 import { Configuration } from "./configuration";
 import { Tools } from "./tools";
@@ -17,7 +22,7 @@ export class PieChart extends BaseChart {
 		this.options.type = type;
 
 		// Assign colors to each slice using their label
-		this.colorScale = d3.scaleOrdinal(this.options.colors);
+		this.colorScale = scaleOrdinal(this.options.colors);
 	}
 
 	// Sort data by value (descending)
@@ -88,7 +93,7 @@ export class PieChart extends BaseChart {
 		const diameter = Math.min(chartSize.width, chartSize.height);
 		const radius: number = diameter / 2;
 
-		d3.select(this.holder).select("svg")
+		select(this.holder).select("svg")
 			.attr("width", `${diameter}px`)
 			.attr("height", `${diameter}px`);
 
@@ -101,11 +106,11 @@ export class PieChart extends BaseChart {
 		// Compute the correct inner & outer radius
 		const { pie: pieConfigs } = Configuration;
 		const marginedRadius = radius - (pieConfigs.label.margin * (chartSize.width / pieConfigs.maxWidth));
-		this.arc = d3.arc()
+		this.arc = arc()
 				.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
 				.outerRadius(marginedRadius);
 
-		this.pie = d3.pie()
+		this.pie = pie()
 			.value((d: any) => d.value)
 			.sort(null);
 
@@ -142,7 +147,7 @@ export class PieChart extends BaseChart {
 		const dataList = newData.datasets[0].data;
 
 		// Apply the new data to the slices, and interpolate them
-		const arc = this.arc;
+		const self = this;
 		const path = this.innerWrap.selectAll("path").data(this.pie(dataList));
 
 		// Update slices
@@ -156,12 +161,12 @@ export class PieChart extends BaseChart {
 			.duration(Configuration.transitions.default.duration)
 			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
 			.attrTween("d", function (a) {
-				return arcTween.bind(this)(a, arc);
+				return arcTween.bind(this)(a, self.arc);
 			});
 
 		path.enter()
 			.append("path")
-			.attr("d", arc)
+			.attr("d", this.arc)
 			.transition()
 			.duration(0)
 			.style("opacity", 0)
@@ -173,12 +178,12 @@ export class PieChart extends BaseChart {
 			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
 			.style("opacity", 1)
 			.attrTween("d", function (a) {
-				return arcTween.bind(this)(a, arc);
+				return arcTween.bind(this)(a, self.arc);
 			});
 
 		path
 			.exit()
-			.attr("d", arc)
+			.attr("d", this.arc)
 			.transition()
 			.duration(Configuration.transitions.default.duration)
 			.style("opacity", 0)
@@ -190,7 +195,7 @@ export class PieChart extends BaseChart {
 			.duration(Configuration.transitions.default.duration / 2)
 			.style("opacity", 0)
 			.on("end", function(d) {
-				d3.select(this)
+				select(this)
 					.transition()
 					.duration(Configuration.transitions.default.duration / 2)
 					.style("opacity", 1);
@@ -243,9 +248,9 @@ export class PieChart extends BaseChart {
 			// this.innerWrap.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
 
 			// Fade everything out except for this element
-			d3.select(exception).attr("fill-opacity", false);
-			d3.select(exception).attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
-			d3.select(exception).attr("fill", (d: any) => this.getFillScale()[this.displayData.datasets[0].label](d.data.label));
+			select(exception).attr("fill-opacity", false);
+			select(exception).attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+			select(exception).attr("fill", (d: any) => this.getFillScale()[this.displayData.datasets[0].label](d.data.label));
 		}
 	}
 
@@ -253,10 +258,10 @@ export class PieChart extends BaseChart {
 	showTooltip(d) {
 		this.resetOpacity();
 
-		d3.selectAll(".tooltip").remove();
-		const tooltip = d3.select(this.holder).append("div")
+		selectAll(".tooltip").remove();
+		const tooltip = select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip")
-			.style("top", d3.mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
+			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
 		const dVal = d.value.toLocaleString();
 		const tooltipHTML = `
@@ -265,13 +270,13 @@ export class PieChart extends BaseChart {
 		`;
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
-		if (d3.mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
+		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
 			tooltip.style(
 				"left",
-				d3.mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
+				mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
 			);
 		} else {
-			tooltip.style("left", d3.mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
+			tooltip.style("left", mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
 		}
 
 		tooltip.style("opacity", 0)
@@ -289,7 +294,7 @@ export class PieChart extends BaseChart {
 
 		this.innerWrap.selectAll("path")
 			.on("mouseover", function(d) {
-				const sliceElement = d3.select(this);
+				const sliceElement = select(this);
 				Tools.moveToFront(sliceElement);
 
 				sliceElement
@@ -301,14 +306,14 @@ export class PieChart extends BaseChart {
 				self.reduceOpacity(this);
 			})
 			.on("mousemove", function(d) {
-				const tooltipRef = d3.select(self.holder).select("div.chart-tooltip");
+				const tooltipRef = select(self.holder).select("div.chart-tooltip");
 
-				const relativeMousePosition = d3.mouse(self.holder as HTMLElement);
+				const relativeMousePosition = mouse(self.holder as HTMLElement);
 				tooltipRef.style("left", relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px")
 					.style("top", relativeMousePosition[1] + "px");
 			})
 			.on("mouseout", function(d) {
-				d3.select(this)
+				select(this)
 					.attr("stroke-width", accessibility ? Configuration.pie.default.strokeWidth : Configuration.pie.mouseout.strokeWidth)
 					.attr("stroke", accessibility ? self.colorScale[self.displayData.datasets[0].label](d.data.label) : "none")
 					.attr("stroke-opacity", Configuration.pie.mouseout.strokeOpacity);
@@ -363,7 +368,7 @@ export class PieChart extends BaseChart {
 		const radius: number = dimensionToUseForScale / 2;
 
 		// Resize the SVG
-		d3.select(this.holder).select("svg")
+		select(this.holder).select("svg")
 				.attr("width", `${dimensionToUseForScale}px`)
 				.attr("height", `${dimensionToUseForScale}px`);
 		this.innerWrap
@@ -371,7 +376,7 @@ export class PieChart extends BaseChart {
 
 		// Resize the arc
 		const marginedRadius = radius - (pieConfigs.label.margin * scaleRatio);
-		this.arc = d3.arc()
+		this.arc = arc()
 			.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
 			.outerRadius(marginedRadius);
 
@@ -436,12 +441,12 @@ export class PieChart extends BaseChart {
 }
 
 // d3 Tween functions
-function arcTween(a, arc) {
-	const i = d3.interpolate(this._current, a);
+function arcTween(a, arcFunc) {
+	const i = interpolate(this._current, a);
 
 	return t => {
 		this._current = i(t);
 
-		return arc(this._current);
+		return arcFunc(this._current);
 	};
 }
