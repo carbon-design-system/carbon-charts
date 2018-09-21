@@ -1,1 +1,1 @@
-export * from "./dist/bundle/bundle";
+export * from "./dist/index";
