@@ -11,5 +11,5 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
 fi
 
 if [[ $TRAVIS_BRANCH == 'master' ]]; then
-  npm install -g lerna@3.2.1 @storybook/cli
+  npm install -g lerna@3.2.1 @storybook/cli @angular/cli
 fi
