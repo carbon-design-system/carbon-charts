@@ -1,8 +1,9 @@
-import * as d3 from "d3";
-import { BaseChart } from "./base-chart";
+// D3 Imports
+import { select } from "d3-selection";
+import { interpolateNumber } from "d3-interpolate";
+
 import { PieChart } from "./pie-chart";
 import { Configuration } from "./configuration";
-import { Tools } from "./tools";
 
 export class DonutChart extends PieChart {
 	center: DonutCenter;
@@ -81,7 +82,7 @@ export class DonutCenter {
 				.transition()
 				.duration(Configuration.transitions.default.duration)
 				.tween("text", function() {
-					return donutCenterNumberTween(d3.select(this), newNumber);
+					return donutCenterNumberTween(select(this), newNumber);
 				});
 
 			// Update center label
@@ -116,7 +117,7 @@ export class DonutCenter {
 function donutCenterNumberTween(d3Ref, newNumber: number) {
 	// Remove commas from the current value string, and convert to an int
 	const currentValue = parseInt(d3Ref.text().replace(/[, ]+/g, ""), 10);
-	const i = d3.interpolateNumber(currentValue, newNumber);
+	const i = interpolateNumber(currentValue, newNumber);
 
 	const formatInterpolatedValue = number => Math.floor(number).toLocaleString();
 

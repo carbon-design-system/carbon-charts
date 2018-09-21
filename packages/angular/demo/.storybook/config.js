@@ -3,11 +3,7 @@ import { setOptions } from '@storybook/addon-options';
 
 setOptions({
   name: 'Carbon Charts - Angular Wrappers',
-  showDownPanel: false
-  // goFullScreen: false,
-  // showLeftPanel: true,
-//   showSearchBox: false,
-  // downPanelInRight: true,
+  showAddonPanel: false
 });
 
 // load global styles

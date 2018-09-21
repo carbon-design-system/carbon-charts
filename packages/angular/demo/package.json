@@ -6,8 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
     "e2e": "ng e2e",
+    "lint": "ng lint",
     "storybook": "start-storybook -p 9005 -c .storybook -s ./assets",
     "build-storybook": "build-storybook -o storybook-dist"
   },
@@ -22,8 +22,8 @@
     "@angular/platform-browser": "6.0.3",
     "@angular/platform-browser-dynamic": "6.0.3",
     "@angular/router": "6.0.3",
-    "@carbon/charts": "^0.4.0",
-    "@carbon/charts-angular": "^0.4.0",
+    "@carbon/charts": "^0.4.3",
+    "@carbon/charts-angular": "^0.4.3",
     "core-js": "2.5.4",
     "rxjs": "6.0.0",
     "zone.js": "0.8.26"
