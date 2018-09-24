@@ -2,6 +2,7 @@
 set -e
 
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
+npm config set @carbon:registry https://registry.npmjs.org/
 
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo "We are in a pull request, not releasing"
@@ -43,6 +44,9 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
   rm -rf demo
   cd ../..
 
+  cat packages/core/package.json
+  cat packages/angular/package.json
+  
   # Perform git & npm publish
   git update-index --assume-unchanged `git diff --name-only`
   lerna publish --conventional-commits --yes
