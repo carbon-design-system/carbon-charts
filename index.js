@@ -164,6 +164,44 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
+/***/ "../../node_modules/css-loader/index.js!../../node_modules/postcss-loader/lib/index.js!./node_modules/sass-loader/lib/loader.js!./demo/index.scss":
+/*!****************************************************************************************************************************************************************************************************!*\
+  !*** /home/travis/build/IBM/carbon-charts/node_modules/css-loader!/home/travis/build/IBM/carbon-charts/node_modules/postcss-loader/lib!./node_modules/sass-loader/lib/loader.js!./demo/index.scss ***!
+  \****************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "../../node_modules/css-loader/lib/css-base.js")(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\nbody {\n  font-family: \"IBM Plex Sans\", Arial, sans-serif; }\n\nh1 {\n  font-weight: 500; }\n\nh3 {\n  margin-bottom: 40px; }\n\n.button {\n  display: table;\n  padding: 12px 15px;\n  margin-bottom: 10px;\n  background: #0063ff;\n  color: #fff;\n  border: none;\n  font-size: 15px;\n  text-decoration: none; }\n\n.bx--btn--primary {\n  background: #0063ff;\n  outline: none !important;\n  border: none !important; }\n  .bx--btn--primary:hover {\n    background: #0059e4; }\n  .bx--btn--primary:active {\n    background: #003992; }\n\n.bx--overflow-menu-options {\n  outline: none; }\n\nhtml,\nbody {\n  margin: 0;\n  background: #f4f7fa; }\n\nheader.m-demo-header {\n  margin-bottom: 20px;\n  padding: 50px 0;\n  text-align: left; }\n  header.m-demo-header div {\n    width: 80%;\n    max-width: 800px;\n    margin: auto; }\n    header.m-demo-header div h1 {\n      margin-bottom: 5px; }\n\n.chart-type-selection {\n  display: inline;\n  line-height: 50px; }\n  .chart-type-selection li {\n    color: white;\n    cursor: pointer;\n    background-color: #009BEF;\n    display: inline;\n    padding: 5px 10px;\n    margin: 5px;\n    min-width: 50px; }\n  .chart-type-selection .active {\n    background-color: #FFB000; }\n  .chart-type-selection .disabled {\n    background-color: #959595;\n    cursor: not-allowed; }\n\n.resizable {\n  resize: both; }\n\n.demo-title {\n  margin-top: 20px; }\n\n.chart-holder {\n  border: 1px solid rgba(24, 62, 117, 0.2);\n  box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);\n  margin: 0 auto 60px auto;\n  display: block;\n  height: 500px;\n  min-width: 300px;\n  max-width: 800px;\n  position: relative;\n  transition: box-shadow .1s ease-out;\n  overflow: hidden;\n  resize: both;\n  font-weight: 400; }\n  .chart-holder h3 {\n    border-bottom: 1px solid lightgray;\n    margin: 0; }\n  .chart-holder:hover {\n    box-shadow: 0 15px 45px -11px rgba(22, 56, 107, 0.15);\n    transition: box-shadow .1s ease-out; }\n  .chart-holder:last-child {\n    margin-bottom: 30px; }\n  .chart-holder.has-actions {\n    margin: auto; }\n\n.chart-demo-actions {\n  display: table;\n  width: 100%;\n  min-width: 300px;\n  max-width: 800px;\n  margin: auto;\n  margin-top: -1px;\n  margin-bottom: 45px;\n  overflow: hidden; }\n  .chart-demo-actions button {\n    float: left; }\n\n.chart-title {\n  display: block;\n  font-size: 16px;\n  font-weight: bold; }\n\n#classy-bar-chart-holder {\n  overflow: hidden;\n  resize: both; }\n\ndiv#carbon-charts-patterns svg {\n  height: 0; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "../../node_modules/css-loader/index.js!../../node_modules/postcss-loader/lib/index.js!./node_modules/sass-loader/lib/loader.js!./src/style.scss":
+/*!***************************************************************************************************************************************************************************************************!*\
+  !*** /home/travis/build/IBM/carbon-charts/node_modules/css-loader!/home/travis/build/IBM/carbon-charts/node_modules/postcss-loader/lib!./node_modules/sass-loader/lib/loader.js!./src/style.scss ***!
+  \***************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "../../node_modules/css-loader/lib/css-base.js")(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".chart-holder {\n  padding: 30px; }\n\n.chart-wrapper {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  font-family: \"IBM Plex Sans\", Arial, sans-serif; }\n  .chart-wrapper svg.chart-svg {\n    overflow: visible !important;\n    /*\n\t\tAxes\n\t\t*/ }\n    .chart-wrapper svg.chart-svg g.yAxes.axis path.domain {\n      stroke: none; }\n    .chart-wrapper svg.chart-svg g.x.axis path.domain {\n      stroke: #959595;\n      stroke-width: 2; }\n    .chart-wrapper svg.chart-svg g.x.grid g.tick line, .chart-wrapper svg.chart-svg g.y.grid g.tick line {\n      stroke: #eceeef; }\n    .chart-wrapper svg.chart-svg path.line {\n      fill: none;\n      stroke-width: 2; }\n      .chart-wrapper svg.chart-svg path.line:hover {\n        cursor: default; }\n    .chart-wrapper svg.chart-svg circle.dot {\n      fill: #fff;\n      stroke-width: 2; }\n  .chart-wrapper text {\n    font-size: 12px;\n    fill: #595859;\n    stroke: #595859;\n    stroke-width: .3;\n    font-family: \"IBM Plex Sans\", Arial, sans-serif; }\n    .chart-wrapper text.donut-figure {\n      font-size: 24px;\n      font-weight: normal;\n      fill: #595859; }\n    .chart-wrapper text.donut-title {\n      font-size: 15px;\n      fill: #595859; }\n  .chart-wrapper tspan {\n    cursor: pointer; }\n  .chart-wrapper .legend-wrapper {\n    height: 40px;\n    width: 100%; }\n  .chart-wrapper .legend {\n    float: right;\n    margin-top: 0;\n    margin-right: 20px;\n    color: #586464;\n    overflow: hidden;\n    padding-left: 0;\n    white-space: nowrap; }\n    .chart-wrapper .legend .expand-btn {\n      background-repeat: no-repeat;\n      background-image: url(\"data:image/svg+xml;utf8,<svg width='13px' height='13px' viewBox='0 0 13 13' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch --><title>icoPlus</title><desc>Created with Sketch.</desc><defs></defs><g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='Artboard' transform='translate(-496.000000, -162.000000)'><g id='icoPlus' transform='translate(496.000000, 162.000000)'><g id='open-modal-' fill='%234178BE'><rect id='Rectangle' x='0' y='0' width='13' height='13'></rect><g id='Expand-20px' fill-rule='nonzero'><path d='M12.1875,12.1875 L0.8125,12.1875 L0.8125,0.8125 L12.1875,0.8125 L12.1875,12.1875 Z M13,0 L0,0 L0,13 L13,13 L13,0 Z' id='Shape'></path></g></g><g id='Add,-Plus-16px' transform='translate(2.000000, 2.000000)' fill-rule='nonzero' fill='%23FFFFFF'><polygon id='Shape' points='9 3.85714286 5.14285714 3.85714286 5.14285714 0 3.85714286 0 3.85714286 3.85714286 0 3.85714286 0 5.14285714 3.85714286 5.14285714 3.85714286 9 5.14285714 9 5.14285714 5.14285714 9 5.14285714'></polygon></g></g></g></g></svg>\");\n      position: absolute;\n      right: 0;\n      top: 2px;\n      height: 16px;\n      width: 16px;\n      cursor: pointer; }\n  .chart-wrapper .legend-btn {\n    display: inline-block;\n    line-height: 20px;\n    font-size: 12px;\n    margin-bottom: 0; }\n    .chart-wrapper .legend-btn:hover {\n      cursor: pointer; }\n    .chart-wrapper .legend-btn span {\n      display: inline; }\n    .chart-wrapper .legend-btn text {\n      font-size: 12px;\n      max-width: 100px;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n      overflow: hidden;\n      display: inherit; }\n    .chart-wrapper .legend-btn .legend-circle {\n      display: inherit;\n      height: 12px;\n      width: 12px;\n      border-radius: 3px;\n      margin: 0 5px 5px 15px;\n      box-sizing: border-box; }\n      .chart-wrapper .legend-btn .legend-circle:hover {\n        cursor: pointer; }\n    .chart-wrapper .legend-btn.not-allowed {\n      cursor: default; }\n      .chart-wrapper .legend-btn.not-allowed .legend-circle:hover {\n        cursor: default;\n        box-shadow: none !important; }\n  .chart-wrapper .legend-tooltip {\n    padding: 0;\n    border: none; }\n    .chart-wrapper .legend-tooltip .legend-tooltip-header {\n      color: white;\n      font-size: 15px;\n      font-weight: 700;\n      padding: 13px 20px;\n      margin: 0; }\n    .chart-wrapper .legend-tooltip .legend-btn {\n      display: inline-block;\n      width: 100%; }\n    .chart-wrapper .legend-tooltip text {\n      max-width: 145px; }\n    .chart-wrapper .legend-tooltip button {\n      position: absolute;\n      top: 7px;\n      right: 10px; }\n    .chart-wrapper .legend-tooltip .legend-tooltip-content {\n      padding: 0 7px 15px 7px; }\n  .chart-wrapper .right-legend {\n    position: absolute;\n    right: 0;\n    overflow: auto;\n    margin: 0;\n    max-width: 30%;\n    padding-left: 30px;\n    white-space: inherit; }\n    .chart-wrapper .right-legend text {\n      padding-left: 15px; }\n    .chart-wrapper .right-legend .legend-btn {\n      width: 100%;\n      text-indent: -.7em; }\n      .chart-wrapper .right-legend .legend-btn text {\n        max-width: 90%; }\n    .chart-wrapper .right-legend .legend-circle {\n      margin: 5px; }\n\ndiv.chart-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(255, 255, 255, 0.75); }\n  div.chart-overlay span {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%); }\n  div.chart-overlay div.loading-bee {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%); }\n    div.chart-overlay div.loading-bee svg {\n      width: 50px;\n      height: 50px; }\n      div.chart-overlay div.loading-bee svg g.loading-bee_wing-1, div.chart-overlay div.loading-bee svg g.loading-bee_wing-2 {\n        display: none; }\n    div.chart-overlay div.loading-bee p.loadingBeeMessage {\n      margin-top: 10px; }\n\n.tooltip {\n  background-color: #fff;\n  border: 1px solid #DFE3E6;\n  padding: .25rem .5rem;\n  display: block;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  font-family: \"IBM Plex Sans\", Arial, sans-serif;\n  font-size: 12px;\n  font-weight: 300;\n  position: absolute;\n  padding: 10px;\n  border-radius: 3px;\n  max-width: 200px;\n  word-wrap: break-word;\n  z-index: 1059; }\n  .tooltip p {\n    margin: 0;\n    font-size: 12px; }\n    .tooltip p.bignum {\n      font-size: 19px;\n      font-weight: 600; }\n  .tooltip b {\n    font-weight: 600; }\n\n#carbon-charts-patterns svg {\n  height: 0; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./demo/demo-data/bar.ts":
 /*!*******************************!*\
   !*** ./demo/demo-data/bar.ts ***!
@@ -607,7 +645,7 @@ var pieData = {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(/*! !../node_modules/css-loader!../node_modules/postcss-loader/lib!../node_modules/sass-loader/lib/loader.js!./index.scss */ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/lib/index.js!./node_modules/sass-loader/lib/loader.js!./demo/index.scss");
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/postcss-loader/lib!../node_modules/sass-loader/lib/loader.js!./index.scss */ "../../node_modules/css-loader/index.js!../../node_modules/postcss-loader/lib/index.js!./node_modules/sass-loader/lib/loader.js!./demo/index.scss");
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -615,7 +653,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(/*! ../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "../../node_modules/style-loader/lib/addStyles.js")(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {}
@@ -860,44 +898,6 @@ chartTypes.forEach(function (type) {
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/lib/index.js!./node_modules/sass-loader/lib/loader.js!./demo/index.scss":
-/*!******************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/postcss-loader/lib!./node_modules/sass-loader/lib/loader.js!./demo/index.scss ***!
-  \******************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\nbody {\n  font-family: \"IBM Plex Sans\", Arial, sans-serif; }\n\nh1 {\n  font-weight: 500; }\n\nh3 {\n  margin-bottom: 40px; }\n\n.button {\n  display: table;\n  padding: 12px 15px;\n  margin-bottom: 10px;\n  background: #0063ff;\n  color: #fff;\n  border: none;\n  font-size: 15px;\n  text-decoration: none; }\n\n.bx--btn--primary {\n  background: #0063ff;\n  outline: none !important;\n  border: none !important; }\n  .bx--btn--primary:hover {\n    background: #0059e4; }\n  .bx--btn--primary:active {\n    background: #003992; }\n\n.bx--overflow-menu-options {\n  outline: none; }\n\nhtml,\nbody {\n  margin: 0;\n  background: #f4f7fa; }\n\nheader.m-demo-header {\n  margin-bottom: 20px;\n  padding: 50px 0;\n  text-align: left; }\n  header.m-demo-header div {\n    width: 80%;\n    max-width: 800px;\n    margin: auto; }\n    header.m-demo-header div h1 {\n      margin-bottom: 5px; }\n\n.chart-type-selection {\n  display: inline;\n  line-height: 50px; }\n  .chart-type-selection li {\n    color: white;\n    cursor: pointer;\n    background-color: #009BEF;\n    display: inline;\n    padding: 5px 10px;\n    margin: 5px;\n    min-width: 50px; }\n  .chart-type-selection .active {\n    background-color: #FFB000; }\n  .chart-type-selection .disabled {\n    background-color: #959595;\n    cursor: not-allowed; }\n\n.resizable {\n  resize: both; }\n\n.demo-title {\n  margin-top: 20px; }\n\n.chart-holder {\n  border: 1px solid rgba(24, 62, 117, 0.2);\n  box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);\n  margin: 0 auto 60px auto;\n  display: block;\n  height: 500px;\n  min-width: 300px;\n  max-width: 800px;\n  position: relative;\n  transition: box-shadow .1s ease-out;\n  overflow: hidden;\n  resize: both;\n  font-weight: 400; }\n  .chart-holder h3 {\n    border-bottom: 1px solid lightgray;\n    margin: 0; }\n  .chart-holder:hover {\n    box-shadow: 0 15px 45px -11px rgba(22, 56, 107, 0.15);\n    transition: box-shadow .1s ease-out; }\n  .chart-holder:last-child {\n    margin-bottom: 30px; }\n  .chart-holder.has-actions {\n    margin: auto; }\n\n.chart-demo-actions {\n  display: table;\n  width: 100%;\n  min-width: 300px;\n  max-width: 800px;\n  margin: auto;\n  margin-top: -1px;\n  margin-bottom: 45px;\n  overflow: hidden; }\n  .chart-demo-actions button {\n    float: left; }\n\n.chart-title {\n  display: block;\n  font-size: 16px;\n  font-weight: bold; }\n\n#classy-bar-chart-holder {\n  overflow: hidden;\n  resize: both; }\n\ndiv#carbon-charts-patterns svg {\n  height: 0; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/lib/index.js!./node_modules/sass-loader/lib/loader.js!./src/style.scss":
-/*!*****************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/postcss-loader/lib!./node_modules/sass-loader/lib/loader.js!./src/style.scss ***!
-  \*****************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(undefined);
-// imports
-
-
-// module
-exports.push([module.i, ".chart-holder {\n  padding: 30px; }\n\n.chart-wrapper {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  font-family: \"IBM Plex Sans\", Arial, sans-serif; }\n  .chart-wrapper svg.chart-svg {\n    overflow: visible !important;\n    /*\n\t\tAxes\n\t\t*/ }\n    .chart-wrapper svg.chart-svg g.yAxes.axis path.domain {\n      stroke: none; }\n    .chart-wrapper svg.chart-svg g.x.axis path.domain {\n      stroke: #959595;\n      stroke-width: 2; }\n    .chart-wrapper svg.chart-svg g.x.grid g.tick line, .chart-wrapper svg.chart-svg g.y.grid g.tick line {\n      stroke: #eceeef; }\n    .chart-wrapper svg.chart-svg path.line {\n      fill: none;\n      stroke-width: 2; }\n      .chart-wrapper svg.chart-svg path.line:hover {\n        cursor: default; }\n    .chart-wrapper svg.chart-svg circle.dot {\n      fill: #fff;\n      stroke-width: 2; }\n  .chart-wrapper text {\n    font-size: 12px;\n    fill: #595859;\n    stroke: #595859;\n    stroke-width: .3;\n    font-family: \"IBM Plex Sans\", Arial, sans-serif; }\n    .chart-wrapper text.donut-figure {\n      font-size: 24px;\n      font-weight: normal;\n      fill: #595859; }\n    .chart-wrapper text.donut-title {\n      font-size: 15px;\n      fill: #595859; }\n  .chart-wrapper tspan {\n    cursor: pointer; }\n  .chart-wrapper .legend-wrapper {\n    height: 40px;\n    width: 100%; }\n  .chart-wrapper .legend {\n    float: right;\n    margin-top: 0;\n    margin-right: 20px;\n    color: #586464;\n    overflow: hidden;\n    padding-left: 0;\n    white-space: nowrap; }\n    .chart-wrapper .legend .expand-btn {\n      background-repeat: no-repeat;\n      background-image: url(\"data:image/svg+xml;utf8,<svg width='13px' height='13px' viewBox='0 0 13 13' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch --><title>icoPlus</title><desc>Created with Sketch.</desc><defs></defs><g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='Artboard' transform='translate(-496.000000, -162.000000)'><g id='icoPlus' transform='translate(496.000000, 162.000000)'><g id='open-modal-' fill='%234178BE'><rect id='Rectangle' x='0' y='0' width='13' height='13'></rect><g id='Expand-20px' fill-rule='nonzero'><path d='M12.1875,12.1875 L0.8125,12.1875 L0.8125,0.8125 L12.1875,0.8125 L12.1875,12.1875 Z M13,0 L0,0 L0,13 L13,13 L13,0 Z' id='Shape'></path></g></g><g id='Add,-Plus-16px' transform='translate(2.000000, 2.000000)' fill-rule='nonzero' fill='%23FFFFFF'><polygon id='Shape' points='9 3.85714286 5.14285714 3.85714286 5.14285714 0 3.85714286 0 3.85714286 3.85714286 0 3.85714286 0 5.14285714 3.85714286 5.14285714 3.85714286 9 5.14285714 9 5.14285714 5.14285714 9 5.14285714'></polygon></g></g></g></g></svg>\");\n      position: absolute;\n      right: 0;\n      top: 2px;\n      height: 16px;\n      width: 16px;\n      cursor: pointer; }\n  .chart-wrapper .legend-btn {\n    display: inline-block;\n    line-height: 20px;\n    font-size: 12px;\n    margin-bottom: 0; }\n    .chart-wrapper .legend-btn:hover {\n      cursor: pointer; }\n    .chart-wrapper .legend-btn span {\n      display: inline; }\n    .chart-wrapper .legend-btn text {\n      font-size: 12px;\n      max-width: 100px;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n      overflow: hidden;\n      display: inherit; }\n    .chart-wrapper .legend-btn .legend-circle {\n      display: inherit;\n      height: 12px;\n      width: 12px;\n      border-radius: 3px;\n      margin: 0 5px 5px 15px;\n      box-sizing: border-box; }\n      .chart-wrapper .legend-btn .legend-circle:hover {\n        cursor: pointer; }\n    .chart-wrapper .legend-btn.not-allowed {\n      cursor: default; }\n      .chart-wrapper .legend-btn.not-allowed .legend-circle:hover {\n        cursor: default;\n        box-shadow: none !important; }\n  .chart-wrapper .legend-tooltip {\n    padding: 0;\n    border: none; }\n    .chart-wrapper .legend-tooltip .legend-tooltip-header {\n      color: white;\n      font-size: 15px;\n      font-weight: 700;\n      padding: 13px 20px;\n      margin: 0; }\n    .chart-wrapper .legend-tooltip .legend-btn {\n      display: inline-block;\n      width: 100%; }\n    .chart-wrapper .legend-tooltip text {\n      max-width: 145px; }\n    .chart-wrapper .legend-tooltip button {\n      position: absolute;\n      top: 7px;\n      right: 10px; }\n    .chart-wrapper .legend-tooltip .legend-tooltip-content {\n      padding: 0 7px 15px 7px; }\n  .chart-wrapper .right-legend {\n    position: absolute;\n    right: 0;\n    overflow: auto;\n    margin: 0;\n    max-width: 30%;\n    padding-left: 30px;\n    white-space: inherit; }\n    .chart-wrapper .right-legend text {\n      padding-left: 15px; }\n    .chart-wrapper .right-legend .legend-btn {\n      width: 100%;\n      text-indent: -.7em; }\n      .chart-wrapper .right-legend .legend-btn text {\n        max-width: 90%; }\n    .chart-wrapper .right-legend .legend-circle {\n      margin: 5px; }\n\ndiv.chart-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(255, 255, 255, 0.75); }\n  div.chart-overlay span {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%); }\n  div.chart-overlay div.loading-bee {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%); }\n    div.chart-overlay div.loading-bee svg {\n      width: 50px;\n      height: 50px; }\n      div.chart-overlay div.loading-bee svg g.loading-bee_wing-1, div.chart-overlay div.loading-bee svg g.loading-bee_wing-2 {\n        display: none; }\n    div.chart-overlay div.loading-bee p.loadingBeeMessage {\n      margin-top: 10px; }\n\n.tooltip {\n  background-color: #fff;\n  border: 1px solid #DFE3E6;\n  padding: .25rem .5rem;\n  display: block;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  font-family: \"IBM Plex Sans\", Arial, sans-serif;\n  font-size: 12px;\n  font-weight: 300;\n  position: absolute;\n  padding: 10px;\n  border-radius: 3px;\n  max-width: 200px;\n  word-wrap: break-word;\n  z-index: 1059; }\n  .tooltip p {\n    margin: 0;\n    font-size: 12px; }\n    .tooltip p.bignum {\n      font-size: 19px;\n      font-weight: 600; }\n  .tooltip b {\n    font-weight: 600; }\n\n#carbon-charts-patterns svg {\n  height: 0; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./src/assets/patterns/index.ts":
 /*!**************************************!*\
   !*** ./src/assets/patterns/index.ts ***!
@@ -1066,9 +1066,9 @@ module.exports = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!-- Generator: 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BarChart", function() { return BarChart; });
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "./node_modules/d3-selection/index.js");
-/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-scale */ "./node_modules/d3-scale/index.js");
-/* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-array */ "./node_modules/d3-array/index.js");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/index.js");
+/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/index.js");
+/* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-array */ "../../node_modules/d3-array/index.js");
 /* harmony import */ var _base_axis_chart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./base-axis-chart */ "./src/base-axis-chart.ts");
 /* harmony import */ var _stacked_bar_chart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./stacked-bar-chart */ "./src/stacked-bar-chart.ts");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
@@ -1248,8 +1248,6 @@ var BarChart = /** @class */ (function (_super) {
         // Update existing bars
         rect
             .transition(animate ? this.getFillTransition() : this.getInstantTransition())
-            // TODO
-            // .ease(d3.easeCircle)
             .attr("x", function (d) { return _this.x1(d.datasetLabel); })
             .attr("y", function (d) { return _this.y(Math.max(0, d.value)); })
             .attr("width", this.x1.bandwidth())
@@ -1293,10 +1291,10 @@ var BarChart = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseAxisChart", function() { return BaseAxisChart; });
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "./node_modules/d3-selection/index.js");
-/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-scale */ "./node_modules/d3-scale/index.js");
-/* harmony import */ var d3_axis__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-axis */ "./node_modules/d3-axis/index.js");
-/* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-array */ "./node_modules/d3-array/index.js");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/index.js");
+/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/index.js");
+/* harmony import */ var d3_axis__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-axis */ "../../node_modules/d3-axis/index.js");
+/* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-array */ "../../node_modules/d3-array/index.js");
 /* harmony import */ var _base_chart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./base-chart */ "./src/base-chart.ts");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
@@ -1462,7 +1460,6 @@ var BaseAxisChart = /** @class */ (function (_super) {
             xAxisRef = this.svg.select("g.x.axis")
                 .transition(t)
                 .attr("transform", "translate(0, " + height + ")")
-                // Casting to any because d3 does not offer appropriate typings for the .call() function
                 .call(xAxis);
         }
         else {
@@ -1559,7 +1556,6 @@ var BaseAxisChart = /** @class */ (function (_super) {
         // If the <g class="y axis"> exists in the chart SVG, just update it
         if (yAxisRef.nodes().length > 0) {
             yAxisRef.transition(t)
-                // Casting to any because d3 does not offer appropriate typings for the .call() function
                 .call(yAxis);
             horizontalLine.transition(t)
                 .attr("y1", this.y(0))
@@ -1592,7 +1588,6 @@ var BaseAxisChart = /** @class */ (function (_super) {
             if (secondaryYAxisRef.nodes().length > 0) {
                 secondaryYAxisRef.transition(t)
                     .attr("transform", "translate(" + this.getChartSize().width + ", 0)")
-                    // Being cast to any because d3 does not offer appropriate typings for the .call() function
                     .call(secondaryYAxis);
             }
             else {
@@ -1767,9 +1762,9 @@ var BaseAxisChart = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseChart", function() { return BaseChart; });
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "./node_modules/d3-selection/index.js");
-/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-scale */ "./node_modules/d3-scale/index.js");
-/* harmony import */ var d3_transition__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-transition */ "./node_modules/d3-transition/index.js");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/index.js");
+/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/index.js");
+/* harmony import */ var d3_transition__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-transition */ "../../node_modules/d3-transition/index.js");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
 /* harmony import */ var _services_patterns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/patterns */ "./src/services/patterns.ts");
@@ -2217,15 +2212,11 @@ var BaseChart = /** @class */ (function () {
     };
     BaseChart.prototype.hasLegendExpandBtn = function () {
         return (this.container.node().clientWidth < _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.widthBreak ||
-            this.container.node().clientHeight < this.container.select("ul.legend").node().clientHeight
-        // && this.getLegendItems().length > Configuration.legend.countBreak
-        );
+            this.container.node().clientHeight < this.container.select("ul.legend").node().clientHeight);
     };
     BaseChart.prototype.isLegendOnRight = function () {
         return (this.container.node().clientWidth > _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.widthBreak &&
-            this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight
-        // && this.getLegendItems().length > Configuration.legend.countBreak
-        );
+            this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight);
     };
     /**
      *
@@ -2801,8 +2792,8 @@ var Configuration;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DonutChart", function() { return DonutChart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DonutCenter", function() { return DonutCenter; });
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "./node_modules/d3-selection/index.js");
-/* harmony import */ var d3_interpolate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-interpolate */ "./node_modules/d3-interpolate/index.js");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/index.js");
+/* harmony import */ var d3_interpolate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-interpolate */ "../../node_modules/d3-interpolate/index.js");
 /* harmony import */ var _pie_chart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pie-chart */ "./src/pie-chart.ts");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
@@ -2977,8 +2968,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LineChart", function() { return LineChart; });
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "./node_modules/d3-selection/index.js");
-/* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-shape */ "./node_modules/d3-shape/index.js");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/index.js");
+/* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-shape */ "../../node_modules/d3-shape/index.js");
 /* harmony import */ var _base_axis_chart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base-axis-chart */ "./src/base-axis-chart.ts");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
 /* harmony import */ var _services_curves__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/curves */ "./src/services/curves.ts");
@@ -3173,10 +3164,10 @@ var LineChart = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PieChart", function() { return PieChart; });
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "./node_modules/d3-selection/index.js");
-/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-scale */ "./node_modules/d3-scale/index.js");
-/* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-shape */ "./node_modules/d3-shape/index.js");
-/* harmony import */ var d3_interpolate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-interpolate */ "./node_modules/d3-interpolate/index.js");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/index.js");
+/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/index.js");
+/* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-shape */ "../../node_modules/d3-shape/index.js");
+/* harmony import */ var d3_interpolate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-interpolate */ "../../node_modules/d3-interpolate/index.js");
 /* harmony import */ var _base_chart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./base-chart */ "./src/base-chart.ts");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
@@ -3581,7 +3572,7 @@ function arcTween(a, arcFunc) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getD3Curve", function() { return getD3Curve; });
-/* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-shape */ "./node_modules/d3-shape/index.js");
+/* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-shape */ "../../node_modules/d3-shape/index.js");
 
 var curveTypes = {
     "curveLinear": d3_shape__WEBPACK_IMPORTED_MODULE_0__["curveLinear"],
@@ -3622,7 +3613,7 @@ var getD3Curve = function (curveName) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "./node_modules/d3-selection/index.js");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/index.js");
 /* harmony import */ var _assets_patterns_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/patterns/index */ "./src/assets/patterns/index.ts");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../configuration */ "./src/configuration.ts");
 // D3 Imports
@@ -3746,9 +3737,9 @@ var PatternsService = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StackedBarChart", function() { return StackedBarChart; });
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "./node_modules/d3-selection/index.js");
-/* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-shape */ "./node_modules/d3-shape/index.js");
-/* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-array */ "./node_modules/d3-array/index.js");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/index.js");
+/* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-shape */ "../../node_modules/d3-shape/index.js");
+/* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-array */ "../../node_modules/d3-array/index.js");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
 /* harmony import */ var _base_axis_chart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./base-axis-chart */ "./src/base-axis-chart.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
@@ -3954,7 +3945,7 @@ var StackedBarChart = /** @class */ (function (_super) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(/*! !../node_modules/css-loader!../node_modules/postcss-loader/lib!../node_modules/sass-loader/lib/loader.js!./style.scss */ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/lib/index.js!./node_modules/sass-loader/lib/loader.js!./src/style.scss");
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/postcss-loader/lib!../node_modules/sass-loader/lib/loader.js!./style.scss */ "../../node_modules/css-loader/index.js!../../node_modules/postcss-loader/lib/index.js!./node_modules/sass-loader/lib/loader.js!./src/style.scss");
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -3962,7 +3953,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(/*! ../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "../../node_modules/style-loader/lib/addStyles.js")(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {}
@@ -4162,7 +4153,7 @@ var Tools;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! babel-polyfill */"./node_modules/babel-polyfill/lib/index.js");
+__webpack_require__(/*! babel-polyfill */"../../node_modules/babel-polyfill/lib/index.js");
 module.exports = __webpack_require__(/*! ./demo/index.ts */"./demo/index.ts");
 
 
