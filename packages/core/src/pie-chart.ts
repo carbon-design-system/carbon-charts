@@ -352,18 +352,18 @@ export class PieChart extends BaseChart {
 
 		legend.append("div")
 			.attr("class", "legend-circle")
-			.style("background-color", (d, i) => {				
+			.style("background-color", (d, i) => {
 				if (legendItems[d] === Configuration.legend.items.status.ACTIVE) {
 					return this.colorScale(d);
 				}
-				
+
 				return "white";
 			})
-			.style("border", (d, i) => {				
+			.style("border", (d, i) => {
 				if (legendItems[d] === Configuration.legend.items.status.ACTIVE) {
 					return "none";
 				}
-				
+
 				return `2px solid ${this.colorScale(d)}`;
 			});
 
