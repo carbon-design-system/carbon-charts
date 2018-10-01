@@ -176,7 +176,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\nbody {\n  font-family: \"IBM Plex Sans\", Arial, sans-serif; }\n\nh1 {\n  font-weight: 500; }\n\nh3 {\n  margin-bottom: 40px; }\n\n.button {\n  display: table;\n  padding: 12px 15px;\n  margin-bottom: 10px;\n  background: #0063ff;\n  color: #fff;\n  border: none;\n  font-size: 15px;\n  text-decoration: none; }\n\n.bx--btn--primary {\n  background: #0063ff;\n  outline: none !important;\n  border: none !important; }\n  .bx--btn--primary:hover {\n    background: #0059e4; }\n  .bx--btn--primary:active {\n    background: #003992; }\n\n.bx--overflow-menu-options {\n  outline: none; }\n\nhtml,\nbody {\n  margin: 0;\n  background: #f4f7fa; }\n\nheader.m-demo-header {\n  margin-bottom: 20px;\n  padding: 50px 0;\n  text-align: left; }\n  header.m-demo-header div {\n    width: 80%;\n    max-width: 800px;\n    margin: auto; }\n    header.m-demo-header div h1 {\n      margin-bottom: 5px; }\n\n.chart-type-selection {\n  display: inline;\n  line-height: 50px; }\n  .chart-type-selection li {\n    color: white;\n    cursor: pointer;\n    background-color: #009BEF;\n    display: inline;\n    padding: 5px 10px;\n    margin: 5px;\n    min-width: 50px; }\n  .chart-type-selection .active {\n    background-color: #FFB000; }\n  .chart-type-selection .disabled {\n    background-color: #959595;\n    cursor: not-allowed; }\n\n.resizable {\n  resize: both; }\n\n.demo-title {\n  margin-top: 20px; }\n\n.chart-holder {\n  border: 1px solid rgba(24, 62, 117, 0.2);\n  box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);\n  margin: 0 auto 60px auto;\n  display: block;\n  height: 500px;\n  min-width: 300px;\n  max-width: 800px;\n  position: relative;\n  transition: box-shadow .1s ease-out;\n  overflow: hidden;\n  resize: both;\n  font-weight: 400; }\n  .chart-holder h3 {\n    border-bottom: 1px solid lightgray;\n    margin: 0; }\n  .chart-holder:hover {\n    box-shadow: 0 15px 45px -11px rgba(22, 56, 107, 0.15);\n    transition: box-shadow .1s ease-out; }\n  .chart-holder:last-child {\n    margin-bottom: 30px; }\n  .chart-holder.has-actions {\n    margin: auto; }\n\n.chart-demo-actions {\n  display: table;\n  width: 100%;\n  min-width: 300px;\n  max-width: 800px;\n  margin: auto;\n  margin-top: -1px;\n  margin-bottom: 45px;\n  overflow: hidden; }\n  .chart-demo-actions button {\n    float: left; }\n\n.chart-title {\n  display: block;\n  font-size: 16px;\n  font-weight: bold; }\n\n#classy-bar-chart-holder {\n  overflow: hidden;\n  resize: both; }\n\ndiv#carbon-charts-patterns svg {\n  height: 0; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\nbody {\n  font-family: \"IBM Plex Sans\", Arial, sans-serif; }\n\nh1 {\n  font-weight: 500; }\n\nh3 {\n  margin-bottom: 40px; }\n\n.button {\n  display: table;\n  padding: 12px 15px;\n  margin-bottom: 10px;\n  background: #0063ff;\n  color: #fff;\n  border: none;\n  font-size: 15px;\n  text-decoration: none; }\n\n.bx--btn--primary {\n  background: #0063ff;\n  outline: none !important;\n  border: none !important; }\n  .bx--btn--primary:hover {\n    background: #0059e4; }\n  .bx--btn--primary:active {\n    background: #003992; }\n\n.bx--overflow-menu-options {\n  outline: none; }\n\nhtml,\nbody {\n  margin: 0;\n  background: #f4f7fa; }\n\nheader.m-demo-header {\n  margin-bottom: 20px;\n  padding: 50px 0;\n  text-align: center; }\n  header.m-demo-header div.logo {\n    border-radius: 20px;\n    border: 1px solid #cad3e0;\n    width: 100px;\n    height: 100px;\n    margin: auto;\n    margin-bottom: 15px; }\n    header.m-demo-header div.logo img {\n      width: 75px;\n      height: 75px;\n      margin-top: 12.5px; }\n  header.m-demo-header div.content {\n    width: 80%;\n    max-width: 800px;\n    margin: auto; }\n  header.m-demo-header div h1 {\n    margin-bottom: 5px; }\n\n.chart-type-selection {\n  display: inline;\n  line-height: 50px; }\n  .chart-type-selection li {\n    color: white;\n    cursor: pointer;\n    background-color: #009BEF;\n    display: inline;\n    padding: 5px 10px;\n    margin: 5px;\n    min-width: 50px; }\n  .chart-type-selection .active {\n    background-color: #FFB000; }\n  .chart-type-selection .disabled {\n    background-color: #959595;\n    cursor: not-allowed; }\n\n.resizable {\n  resize: both; }\n\n.demo-title {\n  margin-top: 20px; }\n\n.chart-holder {\n  border: 1px solid rgba(24, 62, 117, 0.2);\n  box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);\n  margin: 0 auto 60px auto;\n  display: block;\n  height: 500px;\n  min-width: 300px;\n  max-width: 800px;\n  position: relative;\n  transition: box-shadow .1s ease-out;\n  overflow: hidden;\n  resize: both;\n  font-weight: 400; }\n  .chart-holder h3 {\n    border-bottom: 1px solid lightgray;\n    margin: 0; }\n  .chart-holder:hover {\n    box-shadow: 0 15px 45px -11px rgba(22, 56, 107, 0.15);\n    transition: box-shadow .1s ease-out; }\n  .chart-holder:last-child {\n    margin-bottom: 30px; }\n  .chart-holder.has-actions {\n    margin: auto; }\n\n.chart-demo-actions {\n  display: table;\n  width: 100%;\n  min-width: 300px;\n  max-width: 800px;\n  margin: auto;\n  margin-top: -1px;\n  margin-bottom: 45px;\n  overflow: hidden; }\n  .chart-demo-actions button {\n    float: left; }\n\n.chart-title {\n  display: block;\n  font-size: 16px;\n  font-weight: bold; }\n\n#classy-bar-chart-holder {\n  overflow: hidden;\n  resize: both; }\n\ndiv#carbon-charts-patterns svg {\n  height: 0; }\n", ""]);
 
 // exports
 
@@ -195,7 +195,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".chart-holder {\n  padding: 30px; }\n\n.chart-wrapper {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  font-family: \"IBM Plex Sans\", Arial, sans-serif; }\n  .chart-wrapper svg.chart-svg {\n    overflow: visible !important;\n    /*\n\t\tAxes\n\t\t*/ }\n    .chart-wrapper svg.chart-svg g.yAxes.axis path.domain {\n      stroke: none; }\n    .chart-wrapper svg.chart-svg g.x.axis path.domain {\n      stroke: #959595;\n      stroke-width: 2; }\n    .chart-wrapper svg.chart-svg g.x.grid g.tick line, .chart-wrapper svg.chart-svg g.y.grid g.tick line {\n      stroke: #eceeef; }\n    .chart-wrapper svg.chart-svg path.line {\n      fill: none;\n      stroke-width: 2; }\n      .chart-wrapper svg.chart-svg path.line:hover {\n        cursor: default; }\n    .chart-wrapper svg.chart-svg circle.dot {\n      fill: #fff;\n      stroke-width: 2; }\n  .chart-wrapper text {\n    font-size: 12px;\n    fill: #595859;\n    stroke: #595859;\n    stroke-width: .3;\n    font-family: \"IBM Plex Sans\", Arial, sans-serif; }\n    .chart-wrapper text.donut-figure {\n      font-size: 24px;\n      font-weight: normal;\n      fill: #595859; }\n    .chart-wrapper text.donut-title {\n      font-size: 15px;\n      fill: #595859; }\n  .chart-wrapper tspan {\n    cursor: pointer; }\n  .chart-wrapper .legend-wrapper {\n    height: 40px;\n    width: 100%; }\n  .chart-wrapper .legend {\n    float: right;\n    margin-top: 0;\n    margin-right: 20px;\n    color: #586464;\n    overflow: hidden;\n    padding-left: 0;\n    white-space: nowrap; }\n    .chart-wrapper .legend .expand-btn {\n      background-repeat: no-repeat;\n      background-image: url(\"data:image/svg+xml;utf8,<svg width='13px' height='13px' viewBox='0 0 13 13' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch --><title>icoPlus</title><desc>Created with Sketch.</desc><defs></defs><g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='Artboard' transform='translate(-496.000000, -162.000000)'><g id='icoPlus' transform='translate(496.000000, 162.000000)'><g id='open-modal-' fill='%234178BE'><rect id='Rectangle' x='0' y='0' width='13' height='13'></rect><g id='Expand-20px' fill-rule='nonzero'><path d='M12.1875,12.1875 L0.8125,12.1875 L0.8125,0.8125 L12.1875,0.8125 L12.1875,12.1875 Z M13,0 L0,0 L0,13 L13,13 L13,0 Z' id='Shape'></path></g></g><g id='Add,-Plus-16px' transform='translate(2.000000, 2.000000)' fill-rule='nonzero' fill='%23FFFFFF'><polygon id='Shape' points='9 3.85714286 5.14285714 3.85714286 5.14285714 0 3.85714286 0 3.85714286 3.85714286 0 3.85714286 0 5.14285714 3.85714286 5.14285714 3.85714286 9 5.14285714 9 5.14285714 5.14285714 9 5.14285714'></polygon></g></g></g></g></svg>\");\n      position: absolute;\n      right: 0;\n      top: 2px;\n      height: 16px;\n      width: 16px;\n      cursor: pointer; }\n  .chart-wrapper .legend-btn {\n    display: inline-block;\n    line-height: 20px;\n    font-size: 12px;\n    margin-bottom: 0; }\n    .chart-wrapper .legend-btn:hover {\n      cursor: pointer; }\n    .chart-wrapper .legend-btn span {\n      display: inline; }\n    .chart-wrapper .legend-btn text {\n      font-size: 12px;\n      max-width: 100px;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n      overflow: hidden;\n      display: inherit; }\n    .chart-wrapper .legend-btn .legend-circle {\n      display: inherit;\n      height: 12px;\n      width: 12px;\n      border-radius: 3px;\n      margin: 0 5px 5px 15px;\n      box-sizing: border-box; }\n      .chart-wrapper .legend-btn .legend-circle:hover {\n        cursor: pointer; }\n    .chart-wrapper .legend-btn.not-allowed {\n      cursor: default; }\n      .chart-wrapper .legend-btn.not-allowed .legend-circle:hover {\n        cursor: default;\n        box-shadow: none !important; }\n  .chart-wrapper .legend-tooltip {\n    padding: 0;\n    border: none; }\n    .chart-wrapper .legend-tooltip .legend-tooltip-header {\n      color: white;\n      font-size: 15px;\n      font-weight: 700;\n      padding: 13px 20px;\n      margin: 0; }\n    .chart-wrapper .legend-tooltip .legend-btn {\n      display: inline-block;\n      width: 100%; }\n    .chart-wrapper .legend-tooltip text {\n      max-width: 145px; }\n    .chart-wrapper .legend-tooltip button {\n      position: absolute;\n      top: 7px;\n      right: 10px; }\n    .chart-wrapper .legend-tooltip .legend-tooltip-content {\n      padding: 0 7px 15px 7px; }\n  .chart-wrapper .right-legend {\n    position: absolute;\n    right: 0;\n    overflow: auto;\n    margin: 0;\n    max-width: 30%;\n    padding-left: 30px;\n    white-space: inherit; }\n    .chart-wrapper .right-legend text {\n      padding-left: 15px; }\n    .chart-wrapper .right-legend .legend-btn {\n      width: 100%;\n      text-indent: -.7em; }\n      .chart-wrapper .right-legend .legend-btn text {\n        max-width: 90%; }\n    .chart-wrapper .right-legend .legend-circle {\n      margin: 5px; }\n\ndiv.chart-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(255, 255, 255, 0.75); }\n  div.chart-overlay span {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%); }\n  div.chart-overlay div.loading-bee {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%); }\n    div.chart-overlay div.loading-bee svg {\n      width: 50px;\n      height: 50px; }\n      div.chart-overlay div.loading-bee svg g.loading-bee_wing-1, div.chart-overlay div.loading-bee svg g.loading-bee_wing-2 {\n        display: none; }\n    div.chart-overlay div.loading-bee p.loadingBeeMessage {\n      margin-top: 10px; }\n\n.tooltip {\n  background-color: #fff;\n  border: 1px solid #DFE3E6;\n  padding: .25rem .5rem;\n  display: block;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  font-family: \"IBM Plex Sans\", Arial, sans-serif;\n  font-size: 12px;\n  font-weight: 300;\n  position: absolute;\n  padding: 10px;\n  border-radius: 3px;\n  max-width: 200px;\n  word-wrap: break-word;\n  z-index: 1059; }\n  .tooltip p {\n    margin: 0;\n    font-size: 12px; }\n    .tooltip p.bignum {\n      font-size: 19px;\n      font-weight: 600; }\n  .tooltip b {\n    font-weight: 600; }\n\n#carbon-charts-patterns svg {\n  height: 0; }\n", ""]);
+exports.push([module.i, ".chart-holder {\n  padding: 30px; }\n\n.chart-wrapper {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  font-family: \"IBM Plex Sans\", Arial, sans-serif; }\n  .chart-wrapper svg.chart-svg {\n    overflow: visible !important;\n    /*\n\t\tAxes\n\t\t*/ }\n    .chart-wrapper svg.chart-svg g.yAxes.axis path.domain {\n      stroke: none; }\n    .chart-wrapper svg.chart-svg g.x.axis path.domain {\n      stroke: #959595;\n      stroke-width: 2; }\n    .chart-wrapper svg.chart-svg g.x.grid g.tick line, .chart-wrapper svg.chart-svg g.y.grid g.tick line {\n      stroke: #eceeef; }\n    .chart-wrapper svg.chart-svg path.line {\n      fill: none;\n      stroke-width: 2; }\n      .chart-wrapper svg.chart-svg path.line:hover {\n        cursor: default; }\n    .chart-wrapper svg.chart-svg circle.dot {\n      fill: #fff;\n      stroke-width: 2; }\n  .chart-wrapper text {\n    font-size: 12px;\n    fill: #595859;\n    stroke: #595859;\n    stroke-width: .3;\n    font-family: \"IBM Plex Sans\", Arial, sans-serif; }\n    .chart-wrapper text.donut-figure {\n      font-size: 24px;\n      font-weight: normal;\n      fill: #595859; }\n    .chart-wrapper text.donut-title {\n      font-size: 15px;\n      fill: #595859; }\n  .chart-wrapper tspan {\n    cursor: pointer; }\n  .chart-wrapper .legend-wrapper {\n    height: 40px;\n    width: 100%; }\n  .chart-wrapper .legend {\n    float: right;\n    margin-top: 0;\n    margin-right: 20px;\n    color: #586464;\n    overflow: hidden;\n    padding-left: 0;\n    white-space: nowrap; }\n    .chart-wrapper .legend .expand-btn {\n      background-repeat: no-repeat;\n      background-image: url(\"data:image/svg+xml;utf8,<svg width='13px' height='13px' viewBox='0 0 13 13' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch --><title>icoPlus</title><desc>Created with Sketch.</desc><defs></defs><g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='Artboard' transform='translate(-496.000000, -162.000000)'><g id='icoPlus' transform='translate(496.000000, 162.000000)'><g id='open-modal-' fill='%234178BE'><rect id='Rectangle' x='0' y='0' width='13' height='13'></rect><g id='Expand-20px' fill-rule='nonzero'><path d='M12.1875,12.1875 L0.8125,12.1875 L0.8125,0.8125 L12.1875,0.8125 L12.1875,12.1875 Z M13,0 L0,0 L0,13 L13,13 L13,0 Z' id='Shape'></path></g></g><g id='Add,-Plus-16px' transform='translate(2.000000, 2.000000)' fill-rule='nonzero' fill='%23FFFFFF'><polygon id='Shape' points='9 3.85714286 5.14285714 3.85714286 5.14285714 0 3.85714286 0 3.85714286 3.85714286 0 3.85714286 0 5.14285714 3.85714286 5.14285714 3.85714286 9 5.14285714 9 5.14285714 5.14285714 9 5.14285714'></polygon></g></g></g></g></svg>\");\n      position: absolute;\n      right: 0;\n      top: 2px;\n      height: 16px;\n      width: 16px;\n      cursor: pointer; }\n  .chart-wrapper .legend-btn {\n    display: inline-block;\n    line-height: 20px;\n    font-size: 12px;\n    margin-bottom: 0; }\n    .chart-wrapper .legend-btn:hover {\n      cursor: pointer; }\n    .chart-wrapper .legend-btn span {\n      display: inline; }\n    .chart-wrapper .legend-btn text {\n      font-size: 12px;\n      max-width: 100px;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n      overflow: hidden;\n      display: inherit; }\n    .chart-wrapper .legend-btn .legend-circle {\n      display: inherit;\n      height: 12px;\n      width: 12px;\n      border-radius: 3px;\n      margin: 0 5px 5px 15px;\n      box-sizing: border-box; }\n      .chart-wrapper .legend-btn .legend-circle:hover {\n        cursor: pointer; }\n    .chart-wrapper .legend-btn.not-allowed {\n      cursor: default; }\n      .chart-wrapper .legend-btn.not-allowed .legend-circle:hover {\n        cursor: default;\n        box-shadow: none !important; }\n  .chart-wrapper .legend-tooltip {\n    padding: 0;\n    border: none; }\n    .chart-wrapper .legend-tooltip .legend-tooltip-header {\n      color: white;\n      font-size: 15px;\n      font-weight: 700;\n      padding: 13px 20px;\n      margin: 0; }\n    .chart-wrapper .legend-tooltip .legend-btn {\n      display: inline-block;\n      width: 100%; }\n    .chart-wrapper .legend-tooltip text {\n      max-width: 145px; }\n    .chart-wrapper .legend-tooltip button {\n      position: absolute;\n      top: 7px;\n      right: 10px; }\n    .chart-wrapper .legend-tooltip .legend-tooltip-content {\n      padding: 0 7px 15px 7px; }\n  .chart-wrapper .right-legend {\n    position: absolute;\n    right: 0;\n    overflow: auto;\n    margin: 0;\n    max-width: 30%;\n    padding-left: 30px;\n    white-space: inherit; }\n    .chart-wrapper .right-legend text {\n      padding-left: 15px; }\n    .chart-wrapper .right-legend .legend-btn {\n      width: 100%;\n      text-indent: -.7em; }\n      .chart-wrapper .right-legend .legend-btn text {\n        max-width: 90%; }\n    .chart-wrapper .right-legend .legend-circle {\n      margin: 5px; }\n\ndiv.chart-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(255, 255, 255, 0.75); }\n  div.chart-overlay span {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%); }\n  div.chart-overlay div.loading-overlay-content {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%); }\n    div.chart-overlay div.loading-overlay-content div.bx--loading {\n      margin: auto; }\n\n.tooltip {\n  background-color: #fff;\n  border: 1px solid #DFE3E6;\n  padding: .25rem .5rem;\n  display: block;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);\n  font-family: \"IBM Plex Sans\", Arial, sans-serif;\n  font-size: 12px;\n  font-weight: 300;\n  position: absolute;\n  padding: 10px;\n  border-radius: 3px;\n  max-width: 200px;\n  word-wrap: break-word;\n  z-index: 1059; }\n  .tooltip p {\n    margin: 0;\n    font-size: 12px; }\n    .tooltip p.bignum {\n      font-size: 19px;\n      font-weight: 600; }\n  .tooltip b {\n    font-weight: 600; }\n\n#carbon-charts-patterns svg {\n  height: 0; }\n", ""]);
 
 // exports
 
@@ -411,11 +411,100 @@ var colors = [
 
 /***/ }),
 
+/***/ "./demo/demo-data/combo.ts":
+/*!*********************************!*\
+  !*** ./demo/demo-data/combo.ts ***!
+  \*********************************/
+/*! exports provided: comboData, comboOptions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "comboData", function() { return comboData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "comboOptions", function() { return comboOptions; });
+/* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./demo/demo-data/colors.ts");
+
+var comboData = {
+    labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+    datasets: [
+        {
+            label: "Dataset 1",
+            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
+            data: [
+                65000,
+                -29123,
+                -35213,
+                51213,
+                16932
+            ],
+            chartType: "BarChart"
+        },
+        {
+            label: "Dataset 2",
+            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
+            data: [
+                -12312,
+                23232,
+                34232,
+                -12312,
+                -34234
+            ],
+            chartType: "BarChart"
+        },
+        {
+            label: "Dataset 3",
+            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
+            data: [
+                -32423,
+                21313,
+                64353,
+                24134,
+                32423
+            ],
+            chartType: "BarChart"
+        },
+        {
+            label: "Dataset 4",
+            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
+            data: [
+                32432,
+                11312,
+                3234,
+                43534,
+                34234
+            ],
+            chartType: "LineChart"
+        }
+    ]
+};
+var comboOptions = {
+    scales: {
+        x: {
+            title: "2018 Annual Sales Figures",
+        },
+        y: {
+            formatter: function (axisValue) { return axisValue / 1000 + "k"; },
+            yMaxAdjuster: function (yMaxValue) { return yMaxValue * 1.1; },
+        },
+        y2: {
+            ticks: {
+                max: 70,
+                min: -60
+            }
+        }
+    },
+    legendClickable: true,
+    containerResizable: true
+};
+
+
+/***/ }),
+
 /***/ "./demo/demo-data/index.ts":
 /*!*********************************!*\
   !*** ./demo/demo-data/index.ts ***!
   \*********************************/
-/*! exports provided: colors, groupedBarData, groupedBarOptions, simpleBarData, simpleBarOptions, stackedBarData, stackedBarOptions, pieOptions, donutOptions, pieData, curvedLineData, curvedLineOptions, lineData, lineOptions */
+/*! exports provided: colors, groupedBarData, groupedBarOptions, simpleBarData, simpleBarOptions, stackedBarData, stackedBarOptions, pieOptions, donutOptions, pieData, curvedLineData, curvedLineOptions, lineData, lineOptions, comboData, comboOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -451,6 +540,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineData", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineData"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineOptions"]; });
+
+/* harmony import */ var _combo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./combo */ "./demo/demo-data/combo.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "comboData", function() { return _combo__WEBPACK_IMPORTED_MODULE_4__["comboData"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "comboOptions", function() { return _combo__WEBPACK_IMPORTED_MODULE_4__["comboOptions"]; });
+
 
 
 
@@ -691,6 +786,12 @@ var chartTypes = [
         data: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["simpleBarData"]
     },
     {
+        id: "combo",
+        name: "Combo",
+        options: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["comboOptions"],
+        data: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["comboData"]
+    },
+    {
         id: "stacked-bar",
         name: "Bar",
         options: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["stackedBarOptions"],
@@ -794,7 +895,7 @@ var changeDemoData = function (chartType, oldData, delay) {
                 var newDataset = Object.assign({}, dataset, { data: datasetNewData });
                 return newDataset;
             });
-            if (removeADataset) {
+            if (removeADataset && chartType !== "combo") {
                 var randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));
                 newData.datasets.splice(randomIndex, randomIndex);
             }
@@ -862,6 +963,13 @@ chartTypes.forEach(function (type) {
                 chartObject.events.addEventListener("resize", function (e) {
                     console.log("Bar Chart - RESIZE");
                 }, false);
+                setDemoActionsEventListener(type.id, type.data);
+                break;
+            case "combo":
+                classyCharts[type.id] = new _src_index__WEBPACK_IMPORTED_MODULE_0__["ComboChart"](classyContainer, {
+                    data: type.data,
+                    options: Object.assign({}, type.options, { type: type.id }),
+                });
                 setDemoActionsEventListener(type.id, type.data);
                 break;
             case "curved-line":
@@ -1118,16 +1226,30 @@ var BarChart = /** @class */ (function (_super) {
             }
         }
         _this = _super.call(this, holder, configs) || this;
+        // To be used for combo chart instances of a bar chart
+        var axis = configs.options.axis;
+        if (axis) {
+            var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.margin.bar;
+            var chartSize = _this.getChartSize();
+            var width = chartSize.width - margins.left - margins.right;
+            _this.x1 = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.spacing.bars);
+            _this.x1.domain(configs.data.datasets.map(function (dataset) { return dataset.label; })).rangeRound([0, _this.x.bandwidth()]);
+        }
         _this.options.type = "bar";
         return _this;
     }
-    BarChart.prototype.setXScale = function (noAnimation) {
+    BarChart.prototype.setXScale = function (xScale) {
         var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.margin.bar;
         var chartSize = this.getChartSize();
         var width = chartSize.width - margins.left - margins.right;
-        this.x = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.spacing.datasets);
+        if (xScale) {
+            this.x = xScale;
+        }
+        else {
+            this.x = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.spacing.datasets);
+            this.x.domain(this.displayData.labels);
+        }
         this.x1 = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.spacing.bars);
-        this.x.domain(this.displayData.labels);
         this.x1.domain(this.displayData.datasets.map(function (dataset) { return dataset.label; })).rangeRound([0, this.x.bandwidth()]);
     };
     BarChart.prototype.draw = function () {
@@ -1264,7 +1386,7 @@ var BarChart = /** @class */ (function (_super) {
             .attr("height", dimensionToUseForScale + "px");
         this.updateXandYGrid(true);
         // Scale out the domains
-        this.setXScale(true);
+        this.setXScale();
         this.setYScale();
         // Set the x & y axis as well as their labels
         this.setXAxis(true);
@@ -1319,11 +1441,17 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var BaseAxisChart = /** @class */ (function (_super) {
     __extends(BaseAxisChart, _super);
     function BaseAxisChart(holder, configs) {
-        return _super.call(this, holder, configs) || this;
+        var _this = _super.call(this, holder, configs) || this;
+        var axis = configs.options.axis;
+        if (axis) {
+            _this.x = axis.x;
+            _this.y = axis.y;
+            _this.y2 = axis.y2;
+        }
+        return _this;
     }
     BaseAxisChart.prototype.setSVG = function () {
         _super.prototype.setSVG.call(this);
-        var chartSize = this.getChartSize();
         this.container.classed("chart-axis", true);
         this.innerWrap.append("g")
             .attr("class", "x grid");
@@ -1335,18 +1463,27 @@ var BaseAxisChart = /** @class */ (function (_super) {
         if (data) {
             this.displayData = data;
         }
-        this.setSVG();
-        // Scale out the domains
-        // Set the x & y axis as well as their labels
-        this.setXScale();
-        this.setXAxis();
-        this.setYScale();
-        this.setYAxis();
-        // Draw the x & y grid
-        this.drawXGrid();
-        this.drawYGrid();
+        // If an axis exists
+        var xAxisRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.holder).select(".axis.x");
+        if (!xAxisRef.node()) {
+            this.setSVG();
+            // Scale out the domains
+            // Set the x & y axis as well as their labels
+            this.setXScale();
+            this.setXAxis();
+            this.setYScale();
+            this.setYAxis();
+            // Draw the x & y grid
+            this.drawXGrid();
+            this.drawYGrid();
+            this.addOrUpdateLegend();
+        }
+        else {
+            var holderRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.holder);
+            this.innerWrap = holderRef.select("g.inner-wrap");
+            this.svg = holderRef.select("svg.chart-svg");
+        }
         this.draw();
-        this.addOrUpdateLegend();
         this.addDataPointEventListener();
     };
     BaseAxisChart.prototype.update = function () {
@@ -1439,13 +1576,18 @@ var BaseAxisChart = /** @class */ (function (_super) {
     /**************************************
      *  Axis & Grids                      *
      *************************************/
-    BaseAxisChart.prototype.setXScale = function (noAnimation) {
-        var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.margin.bar;
-        var scales = this.options.scales;
-        var chartSize = this.getChartSize();
-        var width = chartSize.width - margins.left - margins.right;
-        this.x = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.x.padding);
-        this.x.domain(this.displayData.labels);
+    BaseAxisChart.prototype.setXScale = function (xScale) {
+        if (xScale) {
+            this.x = xScale;
+        }
+        else {
+            var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.margin.bar;
+            var scales = this.options.scales;
+            var chartSize = this.getChartSize();
+            var width = chartSize.width - margins.left - margins.right;
+            this.x = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.x.padding);
+            this.x.domain(this.displayData.labels);
+        }
     };
     BaseAxisChart.prototype.setXAxis = function (noAnimation) {
         var _this = this;
@@ -1453,7 +1595,9 @@ var BaseAxisChart = /** @class */ (function (_super) {
         var chartSize = this.getChartSize();
         var height = chartSize.height - margins.top - margins.bottom;
         var t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
-        var xAxis = Object(d3_axis__WEBPACK_IMPORTED_MODULE_2__["axisBottom"])(this.x).tickSize(0).tickSizeOuter(0);
+        var xAxis = Object(d3_axis__WEBPACK_IMPORTED_MODULE_2__["axisBottom"])(this.x)
+            .tickSize(0)
+            .tickSizeOuter(0);
         var xAxisRef = this.svg.select("g.x.axis");
         // If the <g class="x axis"> exists in the chart SVG, just update it
         if (xAxisRef.nodes().length > 0) {
@@ -1528,14 +1672,19 @@ var BaseAxisChart = /** @class */ (function (_super) {
         }
         return yMin;
     };
-    BaseAxisChart.prototype.setYScale = function () {
+    BaseAxisChart.prototype.setYScale = function (yScale) {
         var chartSize = this.getChartSize();
         var height = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
         var scales = this.options.scales;
         var yMin = this.getYMin();
         var yMax = this.getYMax();
-        this.y = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleLinear"])().range([height, 0]);
-        this.y.domain([Math.min(yMin, 0), yMax]);
+        if (yScale) {
+            this.y = yScale;
+        }
+        else {
+            this.y = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleLinear"])().range([height, 0]);
+            this.y.domain([Math.min(yMin, 0), yMax]);
+        }
         if (scales.y2 && scales.y2.ticks.max) {
             this.y2 = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleLinear"])().rangeRound([height, 0]);
             this.y2.domain([scales.y2.ticks.min, scales.y2.ticks.max]);
@@ -1810,9 +1959,7 @@ var BaseChart = /** @class */ (function () {
     };
     BaseChart.prototype.setData = function (data) {
         var _this = this;
-        var selectors = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].selectors;
-        var innerWrapElement = this.holder.querySelector(selectors.INNERWRAP);
-        var initialDraw = innerWrapElement === null;
+        var initialDraw = !this.innerWrap;
         var newDataIsAPromise = Promise.resolve(data) === data;
         // Dispatch the update event
         this.dispatchEvent("data-change");
@@ -1948,7 +2095,7 @@ var BaseChart = /** @class */ (function () {
     BaseChart.prototype.setSVG = function () {
         var chartSize = this.getChartSize();
         this.svg = this.container.append("svg")
-            .classed("chart-svg", true);
+            .classed("chart-svg " + this.options.type, true);
         this.innerWrap = this.svg.append("g")
             .classed("inner-wrap", true);
         return this.svg;
@@ -2517,6 +2664,129 @@ var BaseChart = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/combo-chart.ts":
+/*!****************************!*\
+  !*** ./src/combo-chart.ts ***!
+  \****************************/
+/*! exports provided: ComboChart */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComboChart", function() { return ComboChart; });
+/* harmony import */ var _base_axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base-axis-chart */ "./src/base-axis-chart.ts");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index */ "./src/index.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+// TODO - Support adding/removing charts when updating data
+var ComboChart = /** @class */ (function (_super) {
+    __extends(ComboChart, _super);
+    function ComboChart(holder, configs) {
+        var _this = _super.call(this, holder, configs) || this;
+        // Includes all the sub-charts
+        _this.charts = [];
+        _this.options.type = "combo";
+        return _this;
+    }
+    // Extract data related to the specific sub-chart
+    ComboChart.prototype.extractDataForChart = function (chartType) {
+        return Object.assign({}, this.displayData, {
+            datasets: this.displayData.datasets.filter(function (_dataset) { return _dataset.chartType === chartType; })
+        });
+    };
+    ComboChart.prototype.update = function () {
+        _super.prototype.update.call(this);
+        if (this.charts && this.charts.length > 0) {
+            this.updateChildrenScales();
+            this.setChildrenData();
+        }
+    };
+    // This only needs to be performed in the sub-chart instances
+    ComboChart.prototype.interpolateValues = function (newData) {
+        return;
+    };
+    // This only needs to be performed in the sub-chart instances
+    ComboChart.prototype.addDataPointEventListener = function () {
+        return;
+    };
+    ComboChart.prototype.draw = function () {
+        var _this = this;
+        // If charts have been initialized
+        if (this.charts.length) {
+            return;
+        }
+        this.displayData.datasets.forEach(function (dataset) {
+            // If the chart type is valid
+            if (_index__WEBPACK_IMPORTED_MODULE_1__[dataset.chartType]) {
+                // If the chart for this dataset has not already been created
+                if (_this.charts.findIndex(function (chart) { return chart.type === dataset.chartType; }) === -1) {
+                    if (_index__WEBPACK_IMPORTED_MODULE_1__[dataset.chartType].prototype instanceof _base_axis_chart__WEBPACK_IMPORTED_MODULE_0__["BaseAxisChart"]) {
+                        var chartConfigs = {
+                            data: _this.extractDataForChart(dataset.chartType),
+                            options: Object.assign({}, _this.options, {
+                                axis: {
+                                    x: _this.x,
+                                    y: _this.y,
+                                    y2: _this.y2
+                                }
+                            })
+                        };
+                        var chart = new _index__WEBPACK_IMPORTED_MODULE_1__[dataset.chartType](_this.holder, chartConfigs);
+                        // Override sub-chart update function
+                        chart.update = function () {
+                            this.displayData = this.updateDisplayData();
+                            this.interpolateValues(this.displayData);
+                        };
+                        // Add chart to the array of sub-charts
+                        _this.charts.push({
+                            type: dataset.chartType,
+                            instance: chart
+                        });
+                    }
+                    else {
+                        console.error("Chart type " + dataset.chartType + " not supported in Combo - your chart should extend BaseAxisChart");
+                    }
+                }
+            }
+            else {
+                console.error("Invalid chart type: \"" + dataset.chartType + "\"");
+            }
+        });
+    };
+    // Pass down the x & y scales to the sub-charts
+    ComboChart.prototype.updateChildrenScales = function () {
+        var _this = this;
+        this.charts.forEach(function (chart) {
+            chart.instance.setXScale(_this.x);
+            chart.instance.setYScale(_this.y);
+        });
+    };
+    // Extract data related to each sub-chart and set them
+    ComboChart.prototype.setChildrenData = function () {
+        var _this = this;
+        this.charts.forEach(function (chart) {
+            var chartData = _this.extractDataForChart(chart.type);
+            chart.instance.setData(chartData);
+            console.log("SET " + chart.type + " data to", chartData);
+        });
+    };
+    return ComboChart;
+}(_base_axis_chart__WEBPACK_IMPORTED_MODULE_0__["BaseAxisChart"]));
+
+
+
+/***/ }),
+
 /***/ "./src/configuration.ts":
 /*!******************************!*\
   !*** ./src/configuration.ts ***!
@@ -2532,24 +2802,17 @@ var baseOptions = {
     containerResizable: true,
     type: "basic",
     colors: [
-        "#009BEF",
-        "#95D13C",
-        "#785EF0",
-        "#F87EAC",
-        "#FFB000",
-        "#00B6CB",
-        "#FF5C49",
-        "#047CC0",
-        "#FE8500",
-        "#5A3EC8",
-        "#40D5BB",
-        "#FF509E"
+        "#00a68f",
+        "#3b1a40",
+        "#473793",
+        "#3c6df0",
+        "#56D2BB"
     ],
     tooltip: {
         formatter: null
     },
     loadingOverlay: {
-        innerHTML: "\n<div class=\"loading-bee\" role=\"status\" aria-describedby=\"loadingBeeMessage\" aria-live=\"assertive\">\n\t<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 30 30\">\n\t\t<g class=\"loading-bee_wing-1\">\n\t\t\t<path d=\"M16.2,5.7l-0.1-0.1c-1.4,0-5.1-0.2-6.7-0.2c-1.1,0-2.5,0.8-3.7,2c-1.8,1.8-2.5,\n\t\t\t\t\t4-1.6,4.9c0.2,0.2,1.2,1.2,3.4-0.3C8,11.6,15.7,6.1,16.2,5.7\"></path>\n\n\t\t\t<path d=\"M24.3,13.8c-0.4,0.5-5.9,8.2-6.3,8.7c-1.5,2.2-0.5,3.2-0.3,3.4c0.9,0.9,3.1,0.2,\n\t\t\t\t\t4.9-1.6c1.2-1.2,2-2.6,2-3.7c0-1.6-0.2-5.2-0.2-6.7L24.3,13.8\"></path>\n\t\t</g>\n\n\t\t<g class=\"loading-bee_wing-2\">\n\t\t\t<path d=\"M16.2,5.7L16,5.5c-1.8-0.4-6.5-1.6-8.5-2C6.2,3.3,4.6,3.9,3.4,5.1c-1.8,\n\t\t\t\t1.8-2.1,4.4-0.8,5.7c0.3,0.3,1.8,1.8,4.2,0.5C7.4,11,15.6,6.1,16.2,5.7\"></path>\n\n\t\t\t<path d=\"M24.3,13.8c-0.4,0.6-5.3,8.8-5.6,9.4c-1.3,2.4,0.2,3.9,0.5,4.2c1.4,1.4,3.9,\n\t\t\t\t1,5.7-0.8c1.2-1.2,1.8-2.8,1.6-4.1c-0.5-2-1.6-6.7-2-8.5L24.3,13.8\"></path>\n\t\t</g>\n\n\t\t<g class=\"loading-bee_wing-3\">\n\t\t\t<path d=\"M24.5,14c0.8,2.1,2.8,7.7,3.6,10.1c0.5,1.6,0.1,3.3-1.2,4.5c-1.8,1.8-4.7,\n\t\t\t\t1.8-6.5,0c-0.4-0.4-2.4-2.4-1.3-4.9c0.3-0.6,4.7-9.3,5-10L24.5,14z\"></path>\n\n\t\t\t<path d=\"M16,5.5C13.8,4.7,8.3,2.7,5.9,1.9C4.3,1.4,2.6,1.8,1.4,3c-1.8,1.8-1.8,4.7,0,\n\t\t\t\t6.5c0.4,0.4,2.4,2.4,4.9,1.3c0.6-0.3,9.3-4.7,10-5L16,5.5z\"></path>\n\t\t</g>\n\t\t<g>\n\t\t\t<g>\n\t\t\t\t<path d=\"M22.9,14.6c0.9-2,0.4-4.4-1.3-6.2c-1.8-1.8-4.1-2.3-6.2-1.3L22.9,14.6z\"></path>\n\t\t\t\t<g>\n\t\t\t\t<rect x=\"14.6\" y=\"8\" transform=\"matrix(0.7071 -0.7071 0.7071 0.7071 -4.8964 15.5454)\" width=\"3.4\" height=\"11.4\"></rect>\n\t\t\t\t<path d=\"M9.5,12.5l-2.3,2.3c0,0-0.1,0.1-0.1,0.2l8,8c0,0,0.1-0.1,0.2-0.1l2.3-2.3L9.5,12.5z\"></path>\n\t\t\t\t<path d=\"M5.8,16.9c-0.8,2-0.4,4.4,1.2,6.1c1.7,1.7,4,2,6.1,1.2L5.8,16.9z\"></path>\n\t\t\t\t</g>\n\t\t\t</g>\n\n\t\t\t<circle cx=\"21.5\" cy=\"2.8\" r=\"2.8\"></circle>\n\t\t\t<path d=\"M29.2,10.5c-1.1,1.1-2.9,1.1-4,0c-1.1-1.1-1.1-2.9,0-4s2.9-1.1,4,0C30.3,7.6,30.3,9.4,29.2,10.5z\"></path>\n\t\t</g>\n\t</svg>\n\t<p class=\"loadingBeeMessage\">Loading...</p>\n</div>\n\t\t"
+        innerHTML: "\n\t\t<div class=\"loading-overlay-content\">\n\t\t  <div data-loading class=\"bx--loading bx--loading--small\">\n\t\t\t<svg class=\"bx--loading__svg\" viewBox=\"-75 -75 150 150\">\n\t\t\t\t<title>Loading</title>\n\t\t\t\t<circle cx=\"0\" cy=\"0\" r=\"37.5\" />\n\t\t\t</svg>\n\t\t  </div>\n\n\t\t  <p>Loading</p>\n\t\t</div>\n\t\t"
     }
 };
 var axisOptions = Object.assign({}, baseOptions, {
@@ -2919,7 +3182,7 @@ function donutCenterNumberTween(d3Ref, newNumber) {
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/*! exports provided: BaseChart, BaseAxisChart, PieChart, DonutChart, DonutCenter, BarChart, LineChart */
+/*! exports provided: BaseChart, BaseAxisChart, PieChart, DonutChart, DonutCenter, BarChart, LineChart, ComboChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2944,8 +3207,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _line_chart__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./line-chart */ "./src/line-chart.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LineChart", function() { return _line_chart__WEBPACK_IMPORTED_MODULE_5__["LineChart"]; });
 
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _combo_chart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./combo-chart */ "./src/combo-chart.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ComboChart", function() { return _combo_chart__WEBPACK_IMPORTED_MODULE_6__["ComboChart"]; });
+
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_7__);
+
 
 
 
@@ -2994,12 +3261,6 @@ var LineChart = /** @class */ (function (_super) {
     function LineChart(holder, configs) {
         var _this = _super.call(this, holder, configs) || this;
         _this.options.type = "line";
-        var margins = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.margin.line;
-        // D3 line generator function
-        _this.lineGenerator = Object(d3_shape__WEBPACK_IMPORTED_MODULE_1__["line"])()
-            .x(function (d, i) { return _this.x(_this.displayData.labels[i]) + margins.left; })
-            .y(function (d) { return _this.y(d); })
-            .curve(Object(_services_curves__WEBPACK_IMPORTED_MODULE_4__["getD3Curve"])(_this.options.curve) || Object(_services_curves__WEBPACK_IMPORTED_MODULE_4__["getD3Curve"])("curveLinear"));
         return _this;
     }
     LineChart.prototype.getLegendType = function () {
@@ -3025,6 +3286,11 @@ var LineChart = /** @class */ (function (_super) {
         this.innerWrap.style("width", "100%")
             .style("height", "100%");
         this.innerWrap.attr("transform", "translate(" + margins.left + ", " + margins.top + ")");
+        // D3 line generator function
+        this.lineGenerator = Object(d3_shape__WEBPACK_IMPORTED_MODULE_1__["line"])()
+            .x(function (d, i) { return _this.x(_this.displayData.labels[i]) + margins.left; })
+            .y(function (d) { return _this.y(d); })
+            .curve(Object(_services_curves__WEBPACK_IMPORTED_MODULE_4__["getD3Curve"])(this.options.curve) || Object(_services_curves__WEBPACK_IMPORTED_MODULE_4__["getD3Curve"])("curveLinear"));
         var gLines = this.innerWrap.selectAll("g.lines")
             .data(this.displayData.datasets)
             .enter()
@@ -3139,13 +3405,31 @@ var LineChart = /** @class */ (function (_super) {
             .attr("height", dimensionToUseForScale + "px");
         this.updateXandYGrid(true);
         // Scale out the domains
-        this.setXScale(true);
+        this.setXScale();
         this.setYScale();
         // Set the x & y axis as well as their labels
         this.setXAxis(true);
         this.setYAxis(true);
         this.updateElements(false, null);
         _super.prototype.resizeChart.call(this);
+    };
+    LineChart.prototype.addDataPointEventListener = function () {
+        var self = this;
+        this.svg.selectAll("circle.dot")
+            .on("mouseover", function (d) {
+            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
+                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].lines.points.mouseover.strokeOpacity);
+        })
+            .on("mouseout", function (d) {
+            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
+                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].lines.points.mouseout.strokeOpacity);
+        })
+            .on("click", function (d) {
+            self.showTooltip(d, this);
+            self.reduceOpacity(this);
+        });
     };
     return LineChart;
 }(_base_axis_chart__WEBPACK_IMPORTED_MODULE_2__["BaseAxisChart"]));
@@ -3462,15 +3746,27 @@ var PieChart = /** @class */ (function (_super) {
         }
         this.container.select(".legend")
             .selectAll("*").remove();
+        var legendItems = this.getLegendItems();
         var legend = this.container.select(".legend")
             .attr("font-size", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].legend.fontSize)
             .selectAll("div")
-            .data(this.getLegendItemKeys())
+            .data(Object.keys(legendItems))
             .enter().append("li")
             .attr("class", "legend-btn active");
         legend.append("div")
             .attr("class", "legend-circle")
-            .style("background-color", function (d, i) { return _this.colorScale(d); });
+            .style("background-color", function (d, i) {
+            if (legendItems[d] === _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].legend.items.status.ACTIVE) {
+                return _this.colorScale(d);
+            }
+            return "white";
+        })
+            .style("border", function (d, i) {
+            if (legendItems[d] === _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].legend.items.status.ACTIVE) {
+                return "none";
+            }
+            return "2px solid " + _this.colorScale(d);
+        });
         legend.append("text")
             .text(function (d) { return d; });
         this.addLegendCircleHoverEffect();
@@ -3901,7 +4197,7 @@ var StackedBarChart = /** @class */ (function (_super) {
             .attr("height", dimensionToUseForScale + "px");
         this.updateXandYGrid(true);
         // Scale out the domains
-        this.setXScale(true);
+        this.setXScale();
         this.setYScale();
         // Set the x & y axis as well as their labels
         this.setXAxis(true);
@@ -3927,6 +4223,28 @@ var StackedBarChart = /** @class */ (function (_super) {
             .attr("stroke", function (d) { return _this.options.accessibility ? _this.colorScale[d.datasetLabel](d.data.label) : null; })
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].bars.default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; });
+    };
+    StackedBarChart.prototype.addDataPointEventListener = function () {
+        var self = this;
+        var accessibility = this.options.accessibility;
+        this.svg.selectAll("rect")
+            .on("mouseover", function (d) {
+            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
+                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].bars.mouseover.strokeWidth)
+                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].bars.mouseover.strokeOpacity);
+        })
+            .on("mouseout", function (d) {
+            var _a = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].bars.mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
+            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
+                .attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
+                .attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].bars.mouseout.strokeOpacity);
+        })
+            .on("click", function (d) {
+            self.showTooltip(d, this);
+            self.reduceOpacity(this);
+        });
     };
     return StackedBarChart;
 }(_base_axis_chart__WEBPACK_IMPORTED_MODULE_4__["BaseAxisChart"]));
