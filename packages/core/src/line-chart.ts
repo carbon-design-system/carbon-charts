@@ -19,13 +19,6 @@ export class LineChart extends BaseAxisChart {
 		super(holder, configs);
 
 		this.options.type = "line";
-
-		const { line: margins } = Configuration.charts.margin;
-		// D3 line generator function
-		this.lineGenerator = line()
-			.x((d, i) => this.x(this.displayData.labels[i]) + margins.left)
-			.y((d: any) => this.y(d))
-			.curve(getD3Curve(this.options.curve) || getD3Curve("curveLinear"));
 	}
 
 	getLegendType() {
@@ -57,6 +50,12 @@ export class LineChart extends BaseAxisChart {
 			.style("height", "100%");
 
 		this.innerWrap.attr("transform", `translate(${margins.left}, ${margins.top})`);
+
+		// D3 line generator function
+		this.lineGenerator = line()
+			.x((d, i) => this.x(this.displayData.labels[i]) + margins.left)
+			.y((d: any) => this.y(d))
+			.curve(getD3Curve(this.options.curve) || getD3Curve("curveLinear"));
 
 		const gLines = this.innerWrap.selectAll("g.lines")
 			.data(this.displayData.datasets)
@@ -195,7 +194,7 @@ export class LineChart extends BaseAxisChart {
 
 		this.updateXandYGrid(true);
 		// Scale out the domains
-		this.setXScale(true);
+		this.setXScale();
 		this.setYScale();
 
 		// Set the x & y axis as well as their labels
@@ -205,5 +204,25 @@ export class LineChart extends BaseAxisChart {
 		this.updateElements(false, null);
 
 		super.resizeChart();
+	}
+
+	addDataPointEventListener() {
+		const self = this;
+
+		this.svg.selectAll("circle.dot")
+			.on("mouseover", function(d) {
+				select(this)
+					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
+					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
+			})
+			.on("mouseout", function(d) {
+				select(this)
+					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
+					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
+			})
+			.on("click", function(d) {
+				self.showTooltip(d, this);
+				self.reduceOpacity(this);
+			});
 	}
 }

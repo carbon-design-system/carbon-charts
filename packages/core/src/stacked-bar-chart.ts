@@ -176,7 +176,7 @@ export class StackedBarChart extends BaseAxisChart {
 
 		this.updateXandYGrid(true);
 		// Scale out the domains
-		this.setXScale(true);
+		this.setXScale();
 		this.setYScale();
 
 		// Set the x & y axis as well as their labels
@@ -206,5 +206,29 @@ export class StackedBarChart extends BaseAxisChart {
 			.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.data.label) : null)
 			.attr("stroke-width", Configuration.bars.default.strokeWidth)
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
+	}
+
+	addDataPointEventListener() {
+		const self = this;
+		const { accessibility } = this.options;
+
+		this.svg.selectAll("rect")
+			.on("mouseover", function(d) {
+				select(this)
+					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
+					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
+					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
+			})
+			.on("mouseout", function(d) {
+				const { strokeWidth, strokeWidthAccessible } = Configuration.bars.mouseout;
+				select(this)
+					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
+					.attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
+					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
+			})
+			.on("click", function(d) {
+				self.showTooltip(d, this);
+				self.reduceOpacity(this);
+			});
 	}
 }

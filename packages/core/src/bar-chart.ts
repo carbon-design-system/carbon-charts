@@ -43,19 +43,33 @@ export class BarChart extends BaseAxisChart {
 
 		super(holder, configs);
 
+		// To be used for combo chart instances of a bar chart
+		const { axis } = configs.options;
+		if (axis) {
+			const { bar: margins } = Configuration.charts.margin;
+			const chartSize = this.getChartSize();
+			const width = chartSize.width - margins.left - margins.right;
+
+			this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
+			this.x1.domain(configs.data.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
+		}
+
 		this.options.type = "bar";
 	}
 
-	setXScale(noAnimation?: boolean) {
+	setXScale(xScale?: any) {
 		const { bar: margins } = Configuration.charts.margin;
-
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
 
-		this.x = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.datasets);
-		this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
+		if (xScale) {
+			this.x = xScale;
+		} else {
+			this.x = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.datasets);
+			this.x.domain(this.displayData.labels);
+		}
 
-		this.x.domain(this.displayData.labels);
+		this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
 		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
 	}
 
@@ -218,7 +232,7 @@ export class BarChart extends BaseAxisChart {
 
 		this.updateXandYGrid(true);
 		// Scale out the domains
-		this.setXScale(true);
+		this.setXScale();
 		this.setYScale();
 
 		// Set the x & y axis as well as their labels

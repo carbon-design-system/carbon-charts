@@ -225,27 +225,14 @@ div.chart-overlay {
 		transform: translate(-50%, -50%);
 	}
 
-	// TODO - Remove once loading bee animations are refactored
-	div.loading-bee {
+	div.loading-overlay-content {
 		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 
-		svg {
-			width: 50px;
-			height: 50px;
-
-			g {
-				&.loading-bee_wing-1,
-				&.loading-bee_wing-2 {
-					display: none;
-				}
-			}
-		}
-
-		p.loadingBeeMessage {
-			margin-top: 10px;
+		div.bx--loading {
+			margin: auto;
 		}
 	}
 }
