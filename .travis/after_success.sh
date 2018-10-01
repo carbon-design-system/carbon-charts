@@ -2,7 +2,6 @@
 set -e
 
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
-npm config set @carbon:registry https://registry.npmjs.org/
 
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo "We are in a pull request, not releasing"
