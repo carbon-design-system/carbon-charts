@@ -19,12 +19,18 @@ export class BaseAxisChart extends BaseChart {
 
 	constructor(holder: Element, configs: any) {
 		super(holder, configs);
+
+		const { axis } = configs.options;
+		if (axis) {
+			this.x = axis.x;
+			this.y = axis.y;
+			this.y2 = axis.y2;
+		}
 	}
 
 	setSVG(): any {
 		super.setSVG();
 
-		const chartSize = this.getChartSize();
 		this.container.classed("chart-axis", true);
 		this.innerWrap.append("g")
 			.attr("class", "x grid");
@@ -39,22 +45,32 @@ export class BaseAxisChart extends BaseChart {
 			this.displayData = data;
 		}
 
-		this.setSVG();
+		// If an axis exists
+		const xAxisRef = select(this.holder).select(".axis.x");
+		if (!xAxisRef.node()) {
+			this.setSVG();
 
-		// Scale out the domains
-		// Set the x & y axis as well as their labels
-		this.setXScale();
-		this.setXAxis();
-		this.setYScale();
-		this.setYAxis();
+			// Scale out the domains
+			// Set the x & y axis as well as their labels
+			this.setXScale();
+			this.setXAxis();
+			this.setYScale();
+			this.setYAxis();
 
-		// Draw the x & y grid
-		this.drawXGrid();
-		this.drawYGrid();
+			// Draw the x & y grid
+			this.drawXGrid();
+			this.drawYGrid();
+
+			this.addOrUpdateLegend();
+		} else {
+			const holderRef = select(this.holder);
+
+			this.innerWrap = holderRef.select("g.inner-wrap");
+			this.svg = holderRef.select("svg.chart-svg");
+		}
 
 		this.draw();
 
-		this.addOrUpdateLegend();
 		this.addDataPointEventListener();
 	}
 
@@ -166,15 +182,19 @@ export class BaseAxisChart extends BaseChart {
 	 *  Axis & Grids                      *
 	 *************************************/
 
-	setXScale(noAnimation?: boolean) {
-		const { bar: margins } = Configuration.charts.margin;
-		const { scales } = this.options;
+	setXScale(xScale?: any) {
+		if (xScale) {
+			this.x = xScale;
+		} else {
+			const { bar: margins } = Configuration.charts.margin;
+			const { scales } = this.options;
 
-		const chartSize = this.getChartSize();
-		const width = chartSize.width - margins.left - margins.right;
+			const chartSize = this.getChartSize();
+			const width = chartSize.width - margins.left - margins.right;
 
-		this.x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
-		this.x.domain(this.displayData.labels);
+			this.x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
+			this.x.domain(this.displayData.labels);
+		}
 	}
 
 	setXAxis(noAnimation?: boolean) {
@@ -184,7 +204,9 @@ export class BaseAxisChart extends BaseChart {
 
 		const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
-		const xAxis = axisBottom(this.x).tickSize(0).tickSizeOuter(0);
+		const xAxis = axisBottom(this.x)
+			.tickSize(0)
+			.tickSizeOuter(0);
 		let xAxisRef = this.svg.select("g.x.axis");
 
 		// If the <g class="x axis"> exists in the chart SVG, just update it
@@ -273,7 +295,7 @@ export class BaseAxisChart extends BaseChart {
 		return yMin;
 	}
 
-	setYScale() {
+	setYScale(yScale?: any) {
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
 
@@ -281,9 +303,12 @@ export class BaseAxisChart extends BaseChart {
 
 		const yMin = this.getYMin();
 		const yMax = this.getYMax();
-
-		this.y = scaleLinear().range([height, 0]);
-		this.y.domain([Math.min(yMin, 0), yMax]);
+		if (yScale) {
+			this.y = yScale;
+		} else {
+			this.y = scaleLinear().range([height, 0]);
+			this.y.domain([Math.min(yMin, 0), yMax]);
+		}
 
 		if (scales.y2 && scales.y2.ticks.max) {
 			this.y2 = scaleLinear().rangeRound([height, 0]);

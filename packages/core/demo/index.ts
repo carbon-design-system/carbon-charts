@@ -3,7 +3,7 @@ import {
 	LineChart,
 	PieChart,
 	DonutChart,
-	DonutCenter
+	ComboChart
 } from "../src/index";
 
 // Styles
@@ -25,7 +25,10 @@ import {
 	curvedLineOptions,
 	curvedLineData,
 	lineData,
-	lineOptions
+	lineOptions,
+	// Combo
+	comboData,
+	comboOptions
 } from "./demo-data/index";
 
 const chartTypes = [
@@ -40,6 +43,12 @@ const chartTypes = [
 		name: "Bar",
 		options: simpleBarOptions,
 		data: simpleBarData
+	},
+	{
+		id: "combo",
+		name: "Combo",
+		options: comboOptions,
+		data: comboData
 	},
 	{
 		id: "stacked-bar",
@@ -158,7 +167,7 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 				return newDataset;
 			});
 
-			if (removeADataset) {
+			if (removeADataset && chartType !== "combo") {
 				const randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));
 				newData.datasets.splice(randomIndex, randomIndex);
 			}
@@ -241,6 +250,18 @@ chartTypes.forEach(type => {
 				chartObject.events.addEventListener("resize", e => {
 					console.log("Bar Chart - RESIZE");
 				}, false);
+
+				setDemoActionsEventListener(type.id, type.data);
+
+				break;
+			case "combo":
+				classyCharts[type.id] = new ComboChart(
+					classyContainer,
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id}),
+					}
+				);
 
 				setDemoActionsEventListener(type.id, type.data);
 
