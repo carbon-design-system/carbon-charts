@@ -473,7 +473,7 @@ export class BaseChart {
 				if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
 					return this.colorScale[this.displayData.datasets[0].label](d.key);
 				} else if (d.value === Configuration.legend.items.status.ACTIVE) {
-						return this.colorScale[d.key]();
+					return this.colorScale[d.key]();
 				}
 
 				return "white";
@@ -520,6 +520,7 @@ export class BaseChart {
 
 	addOrUpdateLegend() {
 		this.addLegend();
+
 		if (this.options.legendClickable) {
 			this.setClickableLegend();
 		}
