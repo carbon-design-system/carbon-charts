@@ -56,12 +56,29 @@ body {
 header.m-demo-header {
 	margin-bottom: 20px;
 	padding: 50px 0;
-	text-align: left;
+	text-align: center;
 
 	div {
-		width: 80%;
-		max-width: 800px;
-		margin: auto;
+		&.logo {
+			border-radius: 20px;
+			border: 1px solid #cad3e0;
+			width: 100px;
+			height: 100px;
+			margin: auto;
+			margin-bottom: 15px;
+
+			img {
+				width: 75px;
+				height: 75px;
+				margin-top: 12.5px;
+			}
+		}
+
+		&.content {
+			width: 80%;
+			max-width: 800px;
+			margin: auto;
+		}
 
 		h1 {
 			margin-bottom: 5px;
