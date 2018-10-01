@@ -74,9 +74,7 @@ export class BaseChart {
 	}
 
 	setData(data: any) {
-		const { selectors } = Configuration;
-		const innerWrapElement = this.holder.querySelector(selectors.INNERWRAP);
-		const initialDraw = innerWrapElement === null;
+		const initialDraw = !this.innerWrap;
 		const newDataIsAPromise = Promise.resolve(data) === data;
 
 		// Dispatch the update event
@@ -234,7 +232,7 @@ export class BaseChart {
 	setSVG(): any {
 		const chartSize = this.getChartSize();
 		this.svg = this.container.append("svg")
-			.classed("chart-svg", true);
+			.classed("chart-svg " + this.options.type, true);
 
 		this.innerWrap = this.svg.append("g")
 			.classed("inner-wrap", true);
