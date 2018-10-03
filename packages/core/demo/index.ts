@@ -231,6 +231,11 @@ chartTypes.forEach(type => {
 				);
 
 				const chartObject = classyCharts[type.id];
+				chartObject.events.addEventListener("onClick", e=> {
+					console.log("Im clicked");
+					console.log(e.detail);
+				})
+
 				chartObject.events.addEventListener("load", e => {
 					console.log("Bar Chart - LOADED");
 				}, false);
@@ -292,6 +297,12 @@ chartTypes.forEach(type => {
 						options: Object.assign({}, type.options, {type: type.id})
 					}
 				);
+				const pieChartObject = classyCharts[type.id];
+				pieChartObject.events.addEventListener("onClick", e=> {
+					console.log("Im clicked");
+					console.log(e.detail);
+				})
+				
 
 				setDemoActionsEventListener(type.id, type.data);
 
