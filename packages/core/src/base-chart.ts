@@ -67,13 +67,12 @@ export class BaseChart {
 	}
 
 	dispatchEvent(eventType: string, eventDetail?: object) {
-		var newEvent;
-		if(eventDetail){
+		let newEvent;
+		if (eventDetail){
 			newEvent = new CustomEvent(eventType, {
 				detail: eventDetail
 			})
-		}
-		else{
+		} else {
 			newEvent = document.createEvent("Event");
 			newEvent.initEvent(eventType, false, true);
 		}
