@@ -231,9 +231,8 @@ chartTypes.forEach(type => {
 				);
 
 				const chartObject = classyCharts[type.id];
-				chartObject.events.addEventListener("onClick", e=> {
-					console.log("Im clicked");
-					console.log(e.detail);
+				chartObject.events.addEventListener("bar-onClick", e=> {
+					console.log("Bar chart clicked", e.detail);
 				})
 
 				chartObject.events.addEventListener("load", e => {
@@ -298,9 +297,8 @@ chartTypes.forEach(type => {
 					}
 				);
 				const pieChartObject = classyCharts[type.id];
-				pieChartObject.events.addEventListener("onClick", e=> {
-					console.log("Im clicked");
-					console.log(e.detail);
+				pieChartObject.events.addEventListener("pie-slice-onClick", e=> {
+					console.log("Pie chart clicked", e.detail);
 				})
 				
 
