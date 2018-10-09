@@ -3,24 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-<a name="0.5.0"></a>
-# [0.5.0](https://github.com/IBM/carbon-charts/compare/v0.4.3...v0.5.0) (2018-10-01)
-
-
-### Bug Fixes
-
-* **core:** legend updates in pie & donut should respect legend filters ([203c7e6](https://github.com/IBM/carbon-charts/commit/203c7e6))
-* **core:** use correct default colors, and replace loading bee with carbon loading spinner ([80ff9bd](https://github.com/IBM/carbon-charts/commit/80ff9bd))
-
-
-### Features
-
-* **core:** first attempt at combo-chart ([6613160](https://github.com/IBM/carbon-charts/commit/6613160))
-
-
-
-
-
 <a name="0.4.3"></a>
 ## [0.4.3](https://github.com/IBM/carbon-charts/compare/v0.4.2...v0.4.3) (2018-08-31)
 
