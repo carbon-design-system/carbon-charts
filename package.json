@@ -17,6 +17,9 @@
 		"test": "lerna run test",
 		"lint": "eslint packages"
 	},
+	"engines": {
+		"npm": "5.6.0"
+	},
 	"release": {
 		"branch": "master"
 	},
