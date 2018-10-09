@@ -68,7 +68,7 @@ export class BaseChart {
 
 	dispatchEvent(eventType: string, eventDetail?: object) {
 		let newEvent;
-		if (eventDetail){
+		if (eventDetail) {
 			newEvent = new CustomEvent(eventType, {
 				detail: eventDetail
 			})
