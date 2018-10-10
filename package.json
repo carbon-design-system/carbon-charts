@@ -12,7 +12,7 @@
 	"license": "Apache-2.0",
 	"scripts": {
 		"commit": "git-cz",
-		"postinstall": "lerna bootstrap --hoist `if [ $CI = true ] ; then echo \"--ci\" ; fi`",
+		"postinstall": "lerna bootstrap --hoist `if [ $CI ] ; then echo \"--ci\" ; fi`",
 		"pre-push": "lerna run lint",
 		"test": "lerna run test",
 		"lint": "eslint packages"
