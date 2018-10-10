@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
 	mode: "development",
@@ -32,7 +33,9 @@ module.exports = {
 			{
 				test: /\.s?css$/,
 				use: [
-					"style-loader",
+					{
+						loader: MiniCssExtractPlugin.loader
+					},
 					"css-loader",
 					"postcss-loader",
 					"sass-loader"
@@ -49,6 +52,9 @@ module.exports = {
 		]
 	},
 	plugins: [
+		new MiniCssExtractPlugin({
+			filename: "bundle.css"
+		}),
 		new HtmlWebpackPlugin({
 			template: './demo/index.html'
 		}),
