@@ -1,3 +1,5 @@
+require("./polyfills");
+
 import { BaseChart } from "./base-chart";
 import { BaseAxisChart } from "./base-axis-chart";
 

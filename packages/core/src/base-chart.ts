@@ -66,9 +66,16 @@ export class BaseChart {
 		}
 	}
 
-	dispatchEvent(eventType: string) {
-		const newEvent = document.createEvent("Event");
-		newEvent.initEvent(eventType, false, true);
+	dispatchEvent(eventType: string, eventDetail?: object) {
+		let newEvent;
+		if (eventDetail) {
+			newEvent = new CustomEvent(eventType, {
+				detail: eventDetail
+			});
+		} else {
+			newEvent = document.createEvent("Event");
+			newEvent.initEvent(eventType, false, true);
+		}
 
 		this.events.dispatchEvent(newEvent);
 	}
