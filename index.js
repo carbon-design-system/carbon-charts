@@ -948,6 +948,9 @@ chartTypes.forEach(function (type) {
                     options: Object.assign({}, type.options, { type: type.id }),
                 });
                 var chartObject = classyCharts[type.id];
+                chartObject.events.addEventListener("bar-onClick", function (e) {
+                    console.log("Bar chart - Bar clicked", e.detail);
+                });
                 chartObject.events.addEventListener("load", function (e) {
                     console.log("Bar Chart - LOADED");
                 }, false);
@@ -989,6 +992,10 @@ chartTypes.forEach(function (type) {
                         }, 0);
                     }),
                     options: Object.assign({}, type.options, { type: type.id })
+                });
+                var pieChartObject = classyCharts[type.id];
+                pieChartObject.events.addEventListener("pie-slice-onClick", function (e) {
+                    console.log("Pie chart - Slice clicked", e.detail);
                 });
                 setDemoActionsEventListener(type.id, type.data);
                 break;
@@ -1857,6 +1864,9 @@ var BaseAxisChart = /** @class */ (function (_super) {
         var self = this;
         var accessibility = this.options.accessibility;
         this.svg.selectAll("rect")
+            .on("click", function (d) {
+            self.dispatchEvent("bar-onClick", d);
+        })
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.mouseover.strokeWidth)
@@ -1952,9 +1962,17 @@ var BaseChart = /** @class */ (function () {
             this.setData(configs.data);
         }
     }
-    BaseChart.prototype.dispatchEvent = function (eventType) {
-        var newEvent = document.createEvent("Event");
-        newEvent.initEvent(eventType, false, true);
+    BaseChart.prototype.dispatchEvent = function (eventType, eventDetail) {
+        var newEvent;
+        if (eventDetail) {
+            newEvent = new CustomEvent(eventType, {
+                detail: eventDetail
+            });
+        }
+        else {
+            newEvent = document.createEvent("Event");
+            newEvent.initEvent(eventType, false, true);
+        }
         this.events.dispatchEvent(newEvent);
     };
     BaseChart.prototype.setData = function (data) {
@@ -3212,6 +3230,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_7__);
+__webpack_require__(/*! ./polyfills */ "./src/polyfills.ts");
 
 
 
@@ -3707,6 +3726,9 @@ var PieChart = /** @class */ (function (_super) {
         var self = this;
         var accessibility = this.options.accessibility;
         this.innerWrap.selectAll("path")
+            .on("click", function (d) {
+            self.dispatchEvent("pie-slice-onClick", d);
+        })
             .on("mouseover", function (d) {
             var sliceElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this);
             _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].moveToFront(sliceElement);
@@ -3854,6 +3876,30 @@ function arcTween(a, arcFunc) {
         return arcFunc(_this._current);
     };
 }
+
+
+/***/ }),
+
+/***/ "./src/polyfills.ts":
+/*!**************************!*\
+  !*** ./src/polyfills.ts ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function () {
+    if (typeof window["CustomEvent"] === "function")
+        return false;
+    function CustomEvent(event, params) {
+        params = params || { bubbles: false, cancelable: false, detail: undefined };
+        var evt = document.createEvent("CustomEvent");
+        evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+        return evt;
+    }
+    ;
+    CustomEvent.prototype = window["Event"].prototype;
+    window["CustomEvent"] = CustomEvent;
+})();
 
 
 /***/ }),
