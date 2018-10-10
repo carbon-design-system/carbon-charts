@@ -298,9 +298,8 @@ chartTypes.forEach(type => {
 				);
 				const pieChartObject = classyCharts[type.id];
 				pieChartObject.events.addEventListener("pie-slice-onClick", e => {
-					console.log("Pie chart clicked", e.detail);
-				})
-				
+					console.log("Pie chart - Slice clicked", e.detail);
+				});
 
 				setDemoActionsEventListener(type.id, type.data);
 
