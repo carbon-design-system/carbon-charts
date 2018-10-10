@@ -46,6 +46,7 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-webpack": "2.0.5",
     "lerna": "3.0.0-rc.0",
+    "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "4.9.3",
     "postcss-loader": "2.0.8",
     "raw-loader": "0.5.1",
