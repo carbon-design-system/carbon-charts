@@ -293,6 +293,9 @@ export class PieChart extends BaseChart {
 		const { accessibility } = this.options;
 
 		this.innerWrap.selectAll("path")
+			.on("click", function(d) {
+				self.dispatchEvent("pie-slice-onClick", d);
+			})
 			.on("mouseover", function(d) {
 				const sliceElement = select(this);
 				Tools.moveToFront(sliceElement);
