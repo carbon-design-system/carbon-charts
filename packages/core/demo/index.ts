@@ -231,9 +231,9 @@ chartTypes.forEach(type => {
 				);
 
 				const chartObject = classyCharts[type.id];
-				chartObject.events.addEventListener("bar-onClick", e=> {
-					console.log("Bar chart clicked", e.detail);
-				})
+				chartObject.events.addEventListener("bar-onClick", e => {
+					console.log("Bar chart - Bar clicked", e.detail);
+				});
 
 				chartObject.events.addEventListener("load", e => {
 					console.log("Bar Chart - LOADED");
