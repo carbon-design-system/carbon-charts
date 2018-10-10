@@ -71,7 +71,7 @@ export class BaseChart {
 		if (eventDetail) {
 			newEvent = new CustomEvent(eventType, {
 				detail: eventDetail
-			})
+			});
 		} else {
 			newEvent = document.createEvent("Event");
 			newEvent.initEvent(eventType, false, true);
