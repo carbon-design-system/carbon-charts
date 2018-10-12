@@ -111,5 +111,28 @@ export const lineOptions = {
 		}
 	},
 	legendClickable: true,
-	containerResizable: true
+	containerResizable: true,
+	// thresholds: [10000, 20000, 40000],
+	thresholds: [
+		{ 
+			value : 10000,
+			color: "red",
+			circleColor : "purple"
+		},
+		{
+			value : 25000,
+			color: "blue",
+			circleColor : "black"
+		}, 
+		{
+			value: 30000,
+			color: "purple",
+			circleColor : "red"
+		},
+		{
+			value: 50000,
+			color: "black",
+			circleColor : "yellow"
+		}
+	],
 };
