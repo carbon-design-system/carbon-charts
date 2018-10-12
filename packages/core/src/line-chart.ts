@@ -77,8 +77,41 @@ export class LineChart extends BaseAxisChart {
 				.attr("cx", d => this.x(d.label) + margins.left)
 				.attr("cy", d => this.y(d.value))
 				.attr("r", Configuration.charts.pointCircles.radius)
-				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));		
+		
+		let { thresholds } = this.options;
+		let thresholdRange = []
+		let prevBase = this.innerWrap.select(".y.axis line.domain").attr("y2");
+		let gGrid = this.innerWrap.select(".y.grid")
+			.selectAll(".tick")
+			.each(function(d,i){
+				let y = parseFloat(select(this).attr("transform")
+					.replace(")","")
+					.split(",")[1]
+				);
+				thresholdRange.push(
+					{ 
+						floor: prevBase,
+						ceiling: y
+					}
+				)
+				prevBase = y;
+			})
+		
+		gLines.selectAll("circle.dot")
+			.each(function(d,i){
+				let circleY = parseFloat(select(this).attr("cy"));
+				thresholdRange.forEach(function(e, i){
+					if (circleY >= e.ceiling && circleY <= e.floor){
+						console.log(circleY, thresholds[i].circleColor, d);
+						select(this).style("fill", thresholds[i].circleColor);
+						select(this).attr("fill", thresholds[i].circleColor);
+					} 
+				})
+				
+			})
 
+			
 		// Hide the overlay
 		this.updateOverlay().hide();
 
@@ -221,7 +254,19 @@ export class LineChart extends BaseAxisChart {
 					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
 			})
 			.on("click", function(d) {
+				console.log(d);
 				self.showTooltip(d, this);
+				self.reduceOpacity(this);
+			});
+
+		this.svg.selectAll(".y.grid line")
+			.on("mouseover", function(d) {
+				//kind of a hack to use the tooltip 
+				let data = {
+					value: d,
+					datasetLabel: "threshold"
+				}
+				self.showTooltip(data, this);
 				self.reduceOpacity(this);
 			});
 	}

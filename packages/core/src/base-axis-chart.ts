@@ -400,17 +400,58 @@ export class BaseAxisChart extends BaseChart {
 
 	drawYGrid() {
 		const { scales } = this.options;
-
+		const { thresholds } = this.options;
 		const yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
 		const yGrid = axisLeft(this.y)
 			.tickSizeInner(-this.getChartSize().width)
-			.tickSizeOuter(0)
-			.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
+			.tickSizeOuter(0);
+			
+		if (thresholds) {
+			const thresValues = (typeof thresholds[0] == "object") ? (function() {
+				const retarr =  [];
+				thresholds.forEach( e => {
+					retarr.push(e.value);
+				})
+				return retarr;
+			}()) : thresholds;
+			//for some reason tickValues ignore the first element of the array
+			//passed to it so this workaround
+			thresValues.unshift(0); 
+			yGrid.tickValues(thresValues);
+		}
+
+		yGrid.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
+		
 		const g = this.innerWrap.select(".y.grid")
-			.attr("transform", "translate(0, 0)")
+			.attr("transform", "translate(0, 0)") 
 			.call(yGrid);
 
 		this.cleanGrid(g);
+		this.fillTickThresholds(g);
+	}
+
+	fillTickThresholds(yGrid) { 
+		const { thresholds } = this.options;
+		const width = yGrid.node().getBBox().width;
+		let prevBase = this.innerWrap.select(".y.axis line.domain").attr("y2");
+	
+		yGrid.selectAll(".tick")
+			.each(function(d,i){
+				let y = parseFloat(select(this).attr("transform")
+					.replace(")","")
+					.split(",")[1]
+				);
+				let height = prevBase - y;
+				let color = thresholds[i].color
+				//draw rectangles
+				yGrid.append("rect")
+					.attr("height", height)
+					.attr("width", width)
+					.attr("y", prevBase - height)
+					.style("fill", color)
+					.style("opacity","0.5"); //could be specified in stylesheet?
+				prevBase = y;
+			})
 	}
 
 	updateXandYGrid(noAnimation?: boolean) {
