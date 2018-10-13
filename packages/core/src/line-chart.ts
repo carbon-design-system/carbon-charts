@@ -77,41 +77,41 @@ export class LineChart extends BaseAxisChart {
 				.attr("cx", d => this.x(d.label) + margins.left)
 				.attr("cy", d => this.y(d.value))
 				.attr("r", Configuration.charts.pointCircles.radius)
-				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));	
-	
-		
-		let { thresholds } = this.options;
-		let thresholdRange = []
+				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+
+
+		const { thresholds } = this.options;
+		const thresholdRange = [];
 		let prevBase = this.innerWrap.select(".y.axis line.domain").attr("y2");
-		let gGrid = this.innerWrap.select(".y.grid")
+		const gGrid = this.innerWrap.select(".y.grid")
 			.selectAll(".tick")
-			.each(function(d,i){
-				let y = parseFloat(select(this).attr("transform")
-					.replace(")","")
+			.each(function(d, i) {
+				const y = parseFloat(select(this).attr("transform")
+					.replace(")", "")
 					.split(",")[1]
 				);
 				thresholdRange.push(
-					{ 
+					{
 						floor: prevBase,
 						ceiling: y
 					}
-				)
+				);
 				prevBase = y;
-			})
-		
-		gLines.selectAll("circle.dot")
-			.each(function(d,i){
-				let c = select(this);
-				let circleY = parseFloat(c.attr("cy"));
-				thresholdRange.forEach(function(e, i){
-					if (circleY >= e.ceiling && circleY <= e.floor){
-						c.attr("stroke", thresholds[i].circleColor)
-					} 
-				})
-				
-			})
+			});
 
-			
+		gLines.selectAll("circle.dot")
+			.each(function(d) {
+				const c = select(this);
+				const circleY = parseFloat(c.attr("cy"));
+				thresholdRange.forEach(function(e, i) {
+					if (circleY >= e.ceiling && circleY <= e.floor) {
+						c.attr("stroke", thresholds[i].circleColor);
+					}
+				});
+
+			});
+
+
 		// Hide the overlay
 		this.updateOverlay().hide();
 
@@ -261,10 +261,10 @@ export class LineChart extends BaseAxisChart {
 
 		this.svg.selectAll(".y.grid line")
 			.on("mouseover", function(d) {
-				let data = {
+				const data = {
 					value: d,
 					datasetLabel: "threshold"
-				}
+				};
 				self.showTooltip(data, this);
 				self.reduceOpacity(this);
 			});
