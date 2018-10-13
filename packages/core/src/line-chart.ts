@@ -77,7 +77,8 @@ export class LineChart extends BaseAxisChart {
 				.attr("cx", d => this.x(d.label) + margins.left)
 				.attr("cy", d => this.y(d.value))
 				.attr("r", Configuration.charts.pointCircles.radius)
-				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));		
+				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));	
+	
 		
 		let { thresholds } = this.options;
 		let thresholdRange = []
@@ -100,12 +101,11 @@ export class LineChart extends BaseAxisChart {
 		
 		gLines.selectAll("circle.dot")
 			.each(function(d,i){
-				let circleY = parseFloat(select(this).attr("cy"));
+				let c = select(this);
+				let circleY = parseFloat(c.attr("cy"));
 				thresholdRange.forEach(function(e, i){
 					if (circleY >= e.ceiling && circleY <= e.floor){
-						console.log(circleY, thresholds[i].circleColor, d);
-						select(this).style("fill", thresholds[i].circleColor);
-						select(this).attr("fill", thresholds[i].circleColor);
+						c.attr("stroke", thresholds[i].circleColor)
 					} 
 				})
 				
@@ -261,7 +261,6 @@ export class LineChart extends BaseAxisChart {
 
 		this.svg.selectAll(".y.grid line")
 			.on("mouseover", function(d) {
-				//kind of a hack to use the tooltip 
 				let data = {
 					value: d,
 					datasetLabel: "threshold"

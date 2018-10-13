@@ -449,7 +449,7 @@ export class BaseAxisChart extends BaseChart {
 					.attr("width", width)
 					.attr("y", prevBase - height)
 					.style("fill", color)
-					.style("opacity","0.5"); //could be specified in stylesheet?
+					.style("opacity", "0.5"); //prolly shud be set in stylesheets
 				prevBase = y;
 			})
 	}
