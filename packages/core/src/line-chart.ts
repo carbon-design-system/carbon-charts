@@ -241,6 +241,7 @@ export class LineChart extends BaseAxisChart {
 
 	addDataPointEventListener() {
 		const self = this;
+		const { thresholds } = this.options;
 
 		this.svg.selectAll("circle.dot")
 			.on("mouseover", function(d) {
