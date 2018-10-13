@@ -117,12 +117,12 @@ export const lineOptions = {
 		{ 
 			value : 10000,
 			color: "red",
-			circleColor : "purple"
+			circleColor : "red"
 		},
 		{
 			value : 25000,
 			color: "blue",
-			circleColor : "black"
+			circleColor : "red"
 		}, 
 		{
 			value: 30000,
@@ -132,7 +132,7 @@ export const lineOptions = {
 		{
 			value: 50000,
 			color: "black",
-			circleColor : "yellow"
+			circleColor : "red"
 		}
 	],
 };
