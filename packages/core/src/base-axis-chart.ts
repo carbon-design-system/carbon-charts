@@ -402,6 +402,7 @@ export class BaseAxisChart extends BaseChart {
 		const { scales } = this.options;
 		const { thresholds } = this.options;
 		const yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
+
 		const yGrid = axisLeft(this.y)
 			.tickSizeInner(-this.getChartSize().width)
 			.tickSizeOuter(0);
@@ -421,17 +422,21 @@ export class BaseAxisChart extends BaseChart {
 		}
 
 		yGrid.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
-
+		
 		const g = this.innerWrap.select(".y.grid")
 			.attr("transform", "translate(0, 0)")
 			.call(yGrid);
-
+			
 		this.cleanGrid(g);
 		this.fillTickThresholds(g);
 	}
 
 	fillTickThresholds(yGrid) {
 		const { thresholds } = this.options;
+		if (typeof thresholds === "undefined") {
+			return;
+		}
+
 		const width = yGrid.node().getBBox().width;
 		let prevBase = this.innerWrap.select(".y.axis line.domain").attr("y2");
 

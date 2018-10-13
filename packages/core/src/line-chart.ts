@@ -79,39 +79,6 @@ export class LineChart extends BaseAxisChart {
 				.attr("r", Configuration.charts.pointCircles.radius)
 				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
 
-
-		const { thresholds } = this.options;
-		const thresholdRange = [];
-		let prevBase = this.innerWrap.select(".y.axis line.domain").attr("y2");
-		const gGrid = this.innerWrap.select(".y.grid")
-			.selectAll(".tick")
-			.each(function(d, i) {
-				const y = parseFloat(select(this).attr("transform")
-					.replace(")", "")
-					.split(",")[1]
-				);
-				thresholdRange.push(
-					{
-						floor: prevBase,
-						ceiling: y
-					}
-				);
-				prevBase = y;
-			});
-
-		gLines.selectAll("circle.dot")
-			.each(function(d) {
-				const c = select(this);
-				const circleY = parseFloat(c.attr("cy"));
-				thresholdRange.forEach(function(e, i) {
-					if (circleY >= e.ceiling && circleY <= e.floor) {
-						c.attr("stroke", thresholds[i].circleColor);
-					}
-				});
-
-			});
-
-
 		// Hide the overlay
 		this.updateOverlay().hide();
 
@@ -241,6 +208,7 @@ export class LineChart extends BaseAxisChart {
 
 	addDataPointEventListener() {
 		const self = this;
+		const { thresholds } = this.options;
 
 		this.svg.selectAll("circle.dot")
 			.on("mouseover", function(d) {
@@ -254,18 +222,7 @@ export class LineChart extends BaseAxisChart {
 					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
 			})
 			.on("click", function(d) {
-				console.log(d);
 				self.showTooltip(d, this);
-				self.reduceOpacity(this);
-			});
-
-		this.svg.selectAll(".y.grid line")
-			.on("mouseover", function(d) {
-				const data = {
-					value: d,
-					datasetLabel: "threshold"
-				};
-				self.showTooltip(data, this);
 				self.reduceOpacity(this);
 			});
 	}
