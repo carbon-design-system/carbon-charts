@@ -5,7 +5,7 @@ import { min } from "d3-array";
 
 import { BaseAxisChart } from "./base-axis-chart";
 import { StackedBarChart } from "./stacked-bar-chart";
-import { Configuration } from "./configuration";
+import * as Configuration from "./configuration";
 
 const getYMin = configs => {
 	const { datasets } = configs.data;

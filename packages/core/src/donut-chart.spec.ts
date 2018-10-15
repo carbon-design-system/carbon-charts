@@ -12,7 +12,7 @@ import {
 import { pieData, donutOptions } from "../demo/demo-data/pie-donut";
 
 // Global chart configs
-import { Configuration } from "./configuration";
+import * as Configuration from "./configuration";
 
 // Variables
 const chartType = "donut";
