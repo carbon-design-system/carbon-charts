@@ -3,7 +3,8 @@
   "version": "0.5.2",
   "description": "Carbon charting components",
   "files": [
-    "dist"
+    "dist",
+    "index.js"
   ],
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
