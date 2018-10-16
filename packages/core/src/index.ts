@@ -9,9 +9,13 @@ import { BarChart } from "./bar-chart";
 import { LineChart } from "./line-chart";
 import { ComboChart } from "./combo-chart";
 
+import * as Configuration from "./configuration";
+const defaultColors = Configuration.options.BASE.colors;
+
 import "./style.scss";
 
 export {
+	defaultColors,
 	BaseChart,
 	BaseAxisChart,
 	PieChart,

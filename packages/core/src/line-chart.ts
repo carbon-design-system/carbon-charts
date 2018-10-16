@@ -3,7 +3,7 @@ import { select } from "d3-selection";
 import { line } from "d3-shape";
 
 import { BaseAxisChart } from "./base-axis-chart";
-import { Configuration } from "./configuration";
+import * as Configuration from "./configuration";
 
 import { getD3Curve } from "./services/curves";
 
