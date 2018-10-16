@@ -415,7 +415,7 @@ export class BaseAxisChart extends BaseChart {
 				});
 				return retarr;
 			}()) : thresholds;
-			
+
 			// for some reason tickValues ignore the first element of the array
 			// passed to it so this workaround
 			thresValues.unshift(0);
@@ -423,11 +423,11 @@ export class BaseAxisChart extends BaseChart {
 		}
 
 		yGrid.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
-		
+
 		const g = this.innerWrap.select(".y.grid")
 			.attr("transform", "translate(0, 0)")
 			.call(yGrid);
-			
+
 		this.cleanGrid(g);
 
 		if (this.options.thresholds) {
@@ -454,7 +454,8 @@ export class BaseAxisChart extends BaseChart {
 					.attr("height", height)
 					.attr("width", width)
 					.attr("y", prevBase - height)
-					.style("fill", Configuration.scales.y.thresholds.colors[color])
+					.style("fill", Configuration.scales.y.thresholds.colors[color]);
+
 				prevBase = y;
 			});
 	}
