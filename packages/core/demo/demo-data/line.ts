@@ -112,24 +112,18 @@ export const lineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	// random colors scheme not yet supported
-	// thresholds: [10000, 20000, 40000],
 	thresholds: [
 		{
-			value : 10000,
-			color: "red"
+			value : 30000,
+			color: "success"
 		},
 		{
-			value : 25000,
-			color: "blue"
-		},
-		{
-			value: 30000,
-			color: "purple"
+			value : 40000,
+			color: "danger"
 		},
 		{
 			value: 50000,
-			color: "black"
+			color: "warning"
 		}
 	],
 };
