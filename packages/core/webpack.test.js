@@ -1,34 +1,24 @@
 var HtmlWebpackPlugin = require("html-webpack-plugin");
-var ExtractText = require("extract-text-webpack-plugin");
-var nodeExternals = require('webpack-node-externals');
-var path = require('path');
 
-module.exports = [{
+module.exports = {
+	mode: "development",
 	module: {
-		loaders: [
-			{
-				test: /\.ts$/,
-				loader: ["ts-loader"]
-			},
-			{
-				test: /\.html$/,
-				loaders: ["html-loader"]
-			},
-			{
-				test: /\.css$/,
-				loader: ["raw-loader"]
-			},
+		rules: [
+			// all files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
+			{ test: /\.ts$/, loader: "ts-loader" },
+			{ test: /\.html?$/, loader: "html-loader" },
 			{
 				test: /\.scss$/,
-				loaders: ["raw-loader", "sass-loader"]
-			},
-			{
-				test   : /\.(ttf|eot|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-				loader : 'file-loader'
+				use: [
+					"style-loader",
+					"css-loader",
+					"postcss-loader",
+					"sass-loader"
+				]
 			},
 			{
 				test: /\.svg?$/,
-				loader: 'raw-loader'
+				loader: "raw-loader"
 			}
 		]
 	},
@@ -40,4 +30,4 @@ module.exports = [{
 			template: './demo/index.html'
 		})
 	],
-}];
+};

@@ -12,22 +12,22 @@ Object.prototype["containsKeysAndValuesFrom"] = sourceObject => {
 };
 
 // Functions
-export const createClassyContainer = chartType => {
-	const classyContainer = document.createElement("div");
-	classyContainer.id = `classy-${chartType}-chart-holder`;
-	classyContainer.classList.add("chart-holder");
+export const createChartContainer = chartType => {
+	const chartContainer = document.createElement("div");
+	chartContainer.id = `${chartType}-chart-holder`;
+	chartContainer.classList.add("chart-holder");
 
-	return classyContainer;
+	return chartContainer;
 };
 
-export const grabClassyContainer = chartType => {
-	return document.getElementById(`classy-${chartType}-chart-holder`);
+export const grabChartContainer = chartType => {
+	return document.getElementById(`${chartType}-chart-holder`);
 };
 
 export const removeChart = chartType => {
-	const oldClassyContainer = grabClassyContainer(chartType);
-	if (oldClassyContainer) {
-		oldClassyContainer.parentNode.removeChild(oldClassyContainer);
+	const oldChartContainer = grabChartContainer(chartType);
+	if (oldChartContainer) {
+		oldChartContainer.parentNode.removeChild(oldChartContainer);
 	}
 };
 
@@ -59,6 +59,7 @@ export const inputAndProcessedDataMatch = (chartObj, inputData) => {
 	// }
 
 	// TODO - Implement Deeper check
+	console.log(chartObj.displayData.datasets.length, inputData.datasets.length, chartObj.displayData.datasets.length === inputData.datasets.length)
 	return chartObj.displayData.datasets.length === inputData.datasets.length;
 };
 
@@ -72,6 +73,7 @@ export const selectors = {
 		SLICE: "path"
 	}
 };
+
 export const colors = [
 	"#009BEF",
 	"#95D13C",
