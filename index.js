@@ -1184,34 +1184,34 @@ var BarChart = /** @class */ (function (_super) {
         // To be used for combo chart instances of a bar chart
         var axis = configs.options.axis;
         if (axis) {
-            var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.margin.bar;
+            var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].margin.bar;
             var chartSize = _this.getChartSize();
             var width = chartSize.width - margins.left - margins.right;
-            _this.x1 = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.spacing.bars);
+            _this.x1 = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].spacing.bars);
             _this.x1.domain(configs.data.datasets.map(function (dataset) { return dataset.label; })).rangeRound([0, _this.x.bandwidth()]);
         }
         _this.options.type = "bar";
         return _this;
     }
     BarChart.prototype.setXScale = function (xScale) {
-        var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.margin.bar;
+        var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].margin.bar;
         var chartSize = this.getChartSize();
         var width = chartSize.width - margins.left - margins.right;
         if (xScale) {
             this.x = xScale;
         }
         else {
-            this.x = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.spacing.datasets);
+            this.x = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].spacing.datasets);
             this.x.domain(this.displayData.labels);
         }
-        this.x1 = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.spacing.bars);
+        this.x1 = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].spacing.bars);
         this.x1.domain(this.displayData.datasets.map(function (dataset) { return dataset.label; })).rangeRound([0, this.x.bandwidth()]);
     };
     BarChart.prototype.draw = function () {
         var _this = this;
         this.innerWrap.style("width", "100%")
             .style("height", "100%");
-        var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.margin.bar;
+        var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].margin.bar;
         var chartSize = this.getChartSize();
         var width = chartSize.width - margins.left - margins.right;
         var height = chartSize.height - this.getBBox(".x.axis").height;
@@ -1236,7 +1236,7 @@ var BarChart = /** @class */ (function (_super) {
             .attr("height", function (d) { return Math.abs(_this.y(d.value) - _this.y(0)); })
             .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.label); })
             .attr("stroke", function (d) { return _this.options.accessibility ? _this.colorScale[d.datasetLabel](d.label) : null; })
-            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.default.strokeWidth)
+            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; });
         // Hide the overlay
         this.updateOverlay().hide();
@@ -1245,7 +1245,7 @@ var BarChart = /** @class */ (function (_super) {
     };
     BarChart.prototype.interpolateValues = function (newData) {
         var _this = this;
-        var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.margin.bar;
+        var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].margin.bar;
         var chartSize = this.getChartSize();
         var width = chartSize.width - margins.left - margins.right;
         var height = chartSize.height - this.getBBox(".x.axis").height;
@@ -1277,7 +1277,7 @@ var BarChart = /** @class */ (function (_super) {
             .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.label); })
             .attr("opacity", 1)
             .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); })
-            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.default.strokeWidth);
+            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].default.strokeWidth);
         addedBars.selectAll("rect.bar")
             .data(function (d, index) { return _this.addLabelsToDataPoints(d, index); })
             .enter()
@@ -1292,7 +1292,7 @@ var BarChart = /** @class */ (function (_super) {
             .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.label); })
             .attr("opacity", 1)
             .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); })
-            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.default.strokeWidth);
+            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].default.strokeWidth);
         // Remove bar groups are no longer needed
         g.exit()
             .transition(this.getDefaultTransition())
@@ -1455,7 +1455,7 @@ var BaseAxisChart = /** @class */ (function (_super) {
         var activeLegendItems = this.getActiveLegendItems();
         // Get new data by filtering the data based off of the legend
         var newDisplayData = Object.assign({}, oldData);
-        if (this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].legend.basedOn.SERIES) {
+        if (this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_5__["legend"].basedOn.SERIES) {
             newDisplayData.datasets = oldData.datasets.filter(function (dataset) {
                 // If this datapoint is active on the legend
                 var activeSeriesItemIndex = activeLegendItems.indexOf(dataset.label);
@@ -1504,16 +1504,16 @@ var BaseAxisChart = /** @class */ (function (_super) {
     BaseAxisChart.prototype.getChartSize = function (container) {
         if (container === void 0) { container = this.container; }
         var ratio, marginForLegendTop;
-        if (container.node().clientWidth > _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.widthBreak) {
-            ratio = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.magicRatio;
+        if (container.node().clientWidth > _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].widthBreak) {
+            ratio = _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].magicRatio;
             marginForLegendTop = 0;
         }
         else {
-            marginForLegendTop = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.marginForLegendTop;
+            marginForLegendTop = _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].marginForLegendTop;
             ratio = 1;
         }
         // Store computed actual size, to be considered for change if chart does not support axis
-        var marginsToExclude = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.margin.left + _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.margin.right;
+        var marginsToExclude = _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].margin.left + _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].margin.right;
         var computedChartSize = {
             height: container.node().clientHeight - marginForLegendTop,
             width: (container.node().clientWidth - marginsToExclude) * ratio
@@ -1536,17 +1536,17 @@ var BaseAxisChart = /** @class */ (function (_super) {
             this.x = xScale;
         }
         else {
-            var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.margin.bar;
+            var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].margin.bar;
             var scales = this.options.scales;
             var chartSize = this.getChartSize();
             var width = chartSize.width - margins.left - margins.right;
-            this.x = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.x.padding);
+            this.x = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].x.padding);
             this.x.domain(this.displayData.labels);
         }
     };
     BaseAxisChart.prototype.setXAxis = function (noAnimation) {
         var _this = this;
-        var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.margin.bar;
+        var margins = _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].margin.bar;
         var chartSize = this.getChartSize();
         var height = chartSize.height - margins.top - margins.bottom;
         var t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
@@ -1568,14 +1568,14 @@ var BaseAxisChart = /** @class */ (function (_super) {
         }
         // Update the position of the pieces of text inside x-axis
         xAxisRef.selectAll("g.tick text")
-            .attr("y", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.magicY1)
-            .attr("x", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.magicX1)
+            .attr("y", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].magicY1)
+            .attr("x", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].magicX1)
             .attr("dy", ".35em")
-            .attr("transform", "rotate(" + _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.xAxisAngle + ")")
+            .attr("transform", "rotate(" + _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].xAxisAngle + ")")
             .style("text-anchor", "end")
             .call(function (text) { return _this.wrapTick(text); });
         // get the tickHeight after the ticks have been wrapped
-        var tickHeight = this.getLargestTickHeight(xAxisRef.selectAll(".tick")) + _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.tick.heightAddition;
+        var tickHeight = this.getLargestTickHeight(xAxisRef.selectAll(".tick")) + _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].tick.heightAddition;
         // Add x-axis title
         if (this.innerWrap.select(".axis-label.x").nodes().length === 0 && this.options.scales.x.title) {
             xAxisRef.append("text")
@@ -1590,7 +1590,7 @@ var BaseAxisChart = /** @class */ (function (_super) {
     };
     BaseAxisChart.prototype.repositionXAxisTitle = function () {
         var xAxisRef = this.svg.select("g.x.axis");
-        var tickHeight = this.getLargestTickHeight(xAxisRef.selectAll(".tick")) + _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.tick.heightAddition;
+        var tickHeight = this.getLargestTickHeight(xAxisRef.selectAll(".tick")) + _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].tick.heightAddition;
         var xAxisTitleRef = this.svg.select("g.x.axis text.x.axis-label");
         xAxisTitleRef.attr("class", "x axis-label")
             .attr("text-anchor", "middle")
@@ -1650,7 +1650,7 @@ var BaseAxisChart = /** @class */ (function (_super) {
         var scales = this.options.scales;
         var t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
         var yAxis = Object(d3_axis__WEBPACK_IMPORTED_MODULE_2__["axisLeft"])(this.y)
-            .ticks(scales.y.numberOfTicks || _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.y.numberOfTicks)
+            .ticks(scales.y.numberOfTicks || _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].y.numberOfTicks)
             .tickSize(0)
             .tickFormat(scales.y.formatter);
         var yAxisRef = this.svg.select("g.y.axis");
@@ -1677,14 +1677,14 @@ var BaseAxisChart = /** @class */ (function (_super) {
                 .attr("y2", this.y(0))
                 .attr("x1", 0)
                 .attr("x2", chartSize.width)
-                .attr("stroke", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.domain.color)
-                .attr("fill", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.domain.color)
-                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.domain.strokeWidth);
+                .attr("stroke", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].domain.color)
+                .attr("fill", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].domain.color)
+                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].domain.strokeWidth);
         }
         _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].moveToFront(horizontalLine);
         if (scales.y2 && scales.y2.ticks.max) {
             var secondaryYAxis = Object(d3_axis__WEBPACK_IMPORTED_MODULE_2__["axisRight"])(this.y2)
-                .ticks(scales.y2.numberOfTicks || _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.y2.numberOfTicks)
+                .ticks(scales.y2.numberOfTicks || _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].y2.numberOfTicks)
                 .tickSize(0)
                 .tickFormat(scales.y2.formatter);
             var secondaryYAxisRef = this.svg.select("g.y2.axis");
@@ -1718,7 +1718,7 @@ var BaseAxisChart = /** @class */ (function (_super) {
         var yGrid = Object(d3_axis__WEBPACK_IMPORTED_MODULE_2__["axisLeft"])(this.y)
             .tickSizeInner(-this.getChartSize().width)
             .tickSizeOuter(0)
-            .ticks(scales.y.numberOfTicks || _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.y.numberOfTicks);
+            .ticks(scales.y.numberOfTicks || _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].y.numberOfTicks);
         var g = this.innerWrap.select(".y.grid")
             .attr("transform", "translate(0, 0)")
             .call(yGrid);
@@ -1756,7 +1756,7 @@ var BaseAxisChart = /** @class */ (function (_super) {
     };
     BaseAxisChart.prototype.cleanGrid = function (g) {
         g.selectAll("line")
-            .attr("stroke", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].grid.strokeColor);
+            .attr("stroke", _configuration__WEBPACK_IMPORTED_MODULE_5__["grid"].strokeColor);
         g.selectAll("text").style("display", "none").remove();
         g.select(".domain").style("stroke", "none");
         g.select(".tick").remove();
@@ -1764,16 +1764,16 @@ var BaseAxisChart = /** @class */ (function (_super) {
     // TODO - Refactor
     BaseAxisChart.prototype.wrapTick = function (ticks) {
         var self = this;
-        var letNum = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.tick.maxLetNum;
+        var letNum = _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].tick.maxLetNum;
         ticks.each(function (t) {
             if (t && t.length > letNum / 2) {
                 var tick = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this);
                 var y = tick.attr("y");
                 tick.text("");
                 var tspan1 = tick.append("tspan")
-                    .attr("x", 0).attr("y", y).attr("dx", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.dx).attr("dy", "-" + _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.tick.dy);
+                    .attr("x", 0).attr("y", y).attr("dx", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].dx).attr("dy", "-" + _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].tick.dy);
                 var tspan2 = tick.append("tspan")
-                    .attr("x", 0).attr("y", y).attr("dx", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.dx).attr("dy", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].scales.tick.dy);
+                    .attr("x", 0).attr("y", y).attr("dx", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].dx).attr("dy", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].tick.dy);
                 if (t.length < letNum - 3) {
                     tspan1.text(t.substring(0, t.length / 2));
                     tspan2.text(t.substring(t.length / 2 + 1, t.length));
@@ -1817,38 +1817,38 @@ var BaseAxisChart = /** @class */ (function (_super) {
         })
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
-                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.mouseover.strokeWidth)
+                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseover.strokeWidth)
                 .attr("stroke", self.colorScale[d.datasetLabel](d.label))
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.mouseover.strokeOpacity);
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseover.strokeOpacity);
             self.showTooltip(d, this);
             self.reduceOpacity(this);
         })
             .on("mousemove", function (d) {
             var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(self.holder).select("div.chart-tooltip");
             var relativeMousePosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(self.holder);
-            tooltipRef.style("left", relativeMousePosition[0] + _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].tooltip.magicLeft2 + "px")
+            tooltipRef.style("left", relativeMousePosition[0] + _configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].magicLeft2 + "px")
                 .style("top", relativeMousePosition[1] + "px");
         })
             .on("mouseout", function (d) {
-            var _a = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
+            var _a = _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
                 .attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].bars.mouseout.strokeOpacity);
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseout.strokeOpacity);
             self.hideTooltip();
         });
         this.svg.selectAll("circle.dot")
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke", self.colorScale[d.datasetLabel](d.label))
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].lines.points.mouseover.strokeOpacity);
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["lines"].points.mouseover.strokeOpacity);
             self.showTooltip(d, this);
             self.reduceOpacity(this);
         })
             .on("mouseout", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke", self.colorScale[d.datasetLabel](d.label))
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].lines.points.mouseout.strokeOpacity);
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["lines"].points.mouseout.strokeOpacity);
             self.hideTooltip();
         });
     };
@@ -1886,7 +1886,7 @@ var BaseChart = /** @class */ (function () {
     function BaseChart(holder, configs) {
         this.id = "";
         this.chartContainerID = "";
-        this.options = Object.assign({}, _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].options.BASE);
+        this.options = Object.assign({}, _configuration__WEBPACK_IMPORTED_MODULE_3__["options"].BASE);
         // Fill scales & fill related objects
         this.patternScale = {};
         this.colorScale = {};
@@ -1973,15 +1973,15 @@ var BaseChart = /** @class */ (function () {
     BaseChart.prototype.getKeysFromData = function () {
         var datasets = this.displayData.datasets;
         var keys = {};
-        if (this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.basedOn.LABELS) {
+        if (this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS) {
             // Build out the keys array of objects to represent the legend items
             this.displayData.labels.forEach(function (label) {
-                keys[label] = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status.ACTIVE;
+                keys[label] = _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE;
             });
         }
         else {
             this.displayData.datasets.forEach(function (dataset) {
-                keys[dataset.label] = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status.ACTIVE;
+                keys[dataset.label] = _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE;
             });
         }
         // Apply disabled legend items from previous data
@@ -1989,7 +1989,7 @@ var BaseChart = /** @class */ (function () {
         var disabledLegendItems = this.getDisabledLegendItems();
         Object.keys(keys).forEach(function (key) {
             if (disabledLegendItems.indexOf(key) !== -1) {
-                keys[key] = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status.DISABLED;
+                keys[key] = _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.DISABLED;
             }
         });
         return keys;
@@ -1998,10 +1998,10 @@ var BaseChart = /** @class */ (function () {
         var datasets = this.displayData.datasets;
         // TODO - Support the labels based legend for line chart
         if (datasets.length === 1 && datasets[0].backgroundColors.length > 1) {
-            return _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.basedOn.LABELS;
+            return _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS;
         }
         else {
-            return _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.basedOn.SERIES;
+            return _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.SERIES;
         }
     };
     BaseChart.prototype.setPatterns = function () {
@@ -2027,16 +2027,16 @@ var BaseChart = /** @class */ (function () {
         if (container === void 0) { container = this.container; }
         var noAxis = this.options.type === "pie" || this.options.type === "donut";
         var ratio, marginForLegendTop;
-        if (container.node().clientWidth > _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.widthBreak) {
-            ratio = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.magicRatio;
+        if (container.node().clientWidth > _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].widthBreak) {
+            ratio = _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].magicRatio;
             marginForLegendTop = 0;
         }
         else {
-            marginForLegendTop = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.marginForLegendTop;
+            marginForLegendTop = _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].marginForLegendTop;
             ratio = 1;
         }
         // Store computed actual size, to be considered for change if chart does not support axis
-        var marginsToExclude = noAxis ? 0 : (_configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.margin.left + _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.margin.right);
+        var marginsToExclude = noAxis ? 0 : (_configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].margin.left + _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].margin.right);
         var computedChartSize = {
             height: container.node().clientHeight - marginForLegendTop,
             width: (container.node().clientWidth - marginsToExclude) * ratio
@@ -2044,7 +2044,7 @@ var BaseChart = /** @class */ (function () {
         // If chart is of type pie or donut, width and height should equal to the min of the width and height computed
         if (noAxis) {
             var maxSizePossible = Math.min(computedChartSize.height, computedChartSize.width);
-            maxSizePossible = Math.max(maxSizePossible, _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].pie.minWidth);
+            maxSizePossible = Math.max(maxSizePossible, _configuration__WEBPACK_IMPORTED_MODULE_3__["pie"].minWidth);
             return {
                 height: maxSizePossible,
                 width: maxSizePossible
@@ -2168,13 +2168,13 @@ var BaseChart = /** @class */ (function () {
     };
     BaseChart.prototype.resetOpacity = function () {
         var svg = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["selectAll"])("svg.chart-svg");
-        svg.selectAll("path").attr("fill-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.resetOpacity.opacity);
+        svg.selectAll("path").attr("fill-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].resetOpacity.opacity);
         svg.selectAll("circle")
-            .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.resetOpacity.opacity)
-            .attr("fill", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.resetOpacity.circle.fill);
+            .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].resetOpacity.opacity)
+            .attr("fill", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].resetOpacity.circle.fill);
         svg.selectAll("rect")
-            .attr("fill-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.resetOpacity.opacity)
-            .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.resetOpacity.opacity);
+            .attr("fill-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].resetOpacity.opacity)
+            .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].resetOpacity.opacity);
     };
     BaseChart.prototype.reduceOpacity = function (exception) {
         // this.svg.selectAll("rect, path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
@@ -2183,7 +2183,7 @@ var BaseChart = /** @class */ (function () {
         var exceptedElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception);
         var exceptedElementData = exceptedElement.datum();
         Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill-opacity", false);
-        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.reduceOpacity.opacity);
+        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].reduceOpacity.opacity);
         Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](exceptedElementData.label); });
     };
     // ================================================================================
@@ -2210,12 +2210,12 @@ var BaseChart = /** @class */ (function () {
     BaseChart.prototype.getDisabledLegendItems = function () {
         var legendItems = this.getLegendItems();
         var legendItemKeys = Object.keys(legendItems);
-        return legendItemKeys.filter(function (itemKey) { return legendItems[itemKey] === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status.DISABLED; });
+        return legendItemKeys.filter(function (itemKey) { return legendItems[itemKey] === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.DISABLED; });
     };
     BaseChart.prototype.getActiveLegendItems = function () {
         var legendItems = this.getLegendItems();
         var legendItemKeys = Object.keys(legendItems);
-        return legendItemKeys.filter(function (itemKey) { return legendItems[itemKey] === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status.ACTIVE; });
+        return legendItemKeys.filter(function (itemKey) { return legendItems[itemKey] === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE; });
     };
     BaseChart.prototype.updateLegend = function (legend) {
         var thisLegend = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(legend);
@@ -2223,15 +2223,15 @@ var BaseChart = /** @class */ (function () {
         thisLegend.classed("active", !thisLegend.classed("active"));
         if (thisLegend.classed("active")) {
             circle.style("background-color", circle.style("border-color"))
-                .style("border-color", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.active.borderColor)
-                .style("border-style", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.active.borderStyle)
-                .style("border-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.active.borderWidth);
+                .style("border-color", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].active.borderColor)
+                .style("border-style", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].active.borderStyle)
+                .style("border-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].active.borderWidth);
         }
         else {
             circle.style("border-color", circle.style("background-color"))
-                .style("background-color", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.inactive.backgroundColor)
-                .style("border-style", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.inactive.borderStyle)
-                .style("border-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.inactive.borderWidth);
+                .style("background-color", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].inactive.backgroundColor)
+                .style("border-style", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].inactive.borderStyle)
+                .style("border-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].inactive.borderWidth);
         }
     };
     BaseChart.prototype.addLegend = function () {
@@ -2241,7 +2241,7 @@ var BaseChart = /** @class */ (function () {
         }
         var legendItemsArray = this.getLegendItemArray();
         var legendItems = this.container.select(".legend")
-            .attr("font-size", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.fontSize)
+            .attr("font-size", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].fontSize)
             .selectAll("li.legend-btn")
             .data(legendItemsArray, function (d) { return d.key; });
         legendItems.exit()
@@ -2258,10 +2258,10 @@ var BaseChart = /** @class */ (function () {
         legendEnter.select("div")
             .merge(legendItems.selectAll("div"))
             .style("background-color", function (d, i) {
-            if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.basedOn.LABELS && d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status.ACTIVE) {
+            if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS && d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE) {
                 return _this.colorScale[_this.displayData.datasets[0].label](d.key);
             }
-            else if (d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status.ACTIVE) {
+            else if (d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE) {
                 return _this.colorScale[d.key]();
             }
             return "white";
@@ -2285,7 +2285,7 @@ var BaseChart = /** @class */ (function () {
                 .style("width", legendWidth + "px");
         }
         else {
-            this.container.select(".legend-wrapper").style("height", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.wrapperHeight);
+            this.container.select(".legend-wrapper").style("height", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].wrapperHeight);
         }
         if (this.hasLegendExpandBtn()) {
             this.container.select(".legend").classed("right-legend", false)
@@ -2293,7 +2293,7 @@ var BaseChart = /** @class */ (function () {
             var btns = this.container.selectAll(".legend-btn").nodes();
             var btnsWidth_1 = 0;
             btns.forEach(function (btn) {
-                if ((btnsWidth_1 + btn.clientWidth + _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.widthTolerance) > svgWidth) {
+                if ((btnsWidth_1 + btn.clientWidth + _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].widthTolerance) > svgWidth) {
                     Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(btn).style("display", "none");
                 }
                 else {
@@ -2317,18 +2317,18 @@ var BaseChart = /** @class */ (function () {
             .on("mouseover", function () {
             var circleRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this).select("div.legend-circle");
             var color = circleRef.node().style.backgroundColor.substring(4, circleRef.node().style.backgroundColor.length - 1);
-            circleRef.style("box-shadow", "0 0 0 " + _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.hoverShadowSize + " rgba(" + color + ", " + _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.hoverShadowTransparency + ")");
+            circleRef.style("box-shadow", "0 0 0 " + _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].hoverShadowSize + " rgba(" + color + ", " + _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].hoverShadowTransparency + ")");
         })
             .on("mouseout", function () {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this).select("div.legend-circle").style("box-shadow", "none");
         });
     };
     BaseChart.prototype.hasLegendExpandBtn = function () {
-        return (this.container.node().clientWidth < _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.widthBreak ||
+        return (this.container.node().clientWidth < _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].widthBreak ||
             this.container.node().clientHeight < this.container.select("ul.legend").node().clientHeight);
     };
     BaseChart.prototype.isLegendOnRight = function () {
-        return (this.container.node().clientWidth > _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.widthBreak &&
+        return (this.container.node().clientWidth > _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].widthBreak &&
             this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight);
     };
     /**
@@ -2338,7 +2338,7 @@ var BaseChart = /** @class */ (function () {
      * @memberof PieChart
      */
     BaseChart.prototype.applyLegendFilter = function (changedLabel) {
-        var _a = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status, ACTIVE = _a.ACTIVE, DISABLED = _a.DISABLED;
+        var _a = _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status, ACTIVE = _a.ACTIVE, DISABLED = _a.DISABLED;
         var oldStatus = this.options.keys[changedLabel];
         this.options.keys[changedLabel] = (oldStatus === ACTIVE ? DISABLED : ACTIVE);
         this.update();
@@ -2382,26 +2382,26 @@ var BaseChart = /** @class */ (function () {
             tooltip = this.container.append("div")
                 .attr("class", "tooltip chart-tooltip legend-tooltip")
                 .style("display", "block")
-                .style("top", (Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.container.node())[1] - _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.margin.top) + "px");
+                .style("top", (Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.container.node())[1] - _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].margin.top) + "px");
             tooltip.append("p").text("Legend")
                 .attr("class", "legend-tooltip-header");
             tooltip.append("ul")
                 .attr("class", "legend-tooltip-content")
-                .attr("font-size", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.fontSize);
+                .attr("font-size", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].fontSize);
             _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].addCloseBtn(tooltip, "md", "white")
                 .on("click", function () {
                 Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["selectAll"])(".legend-tooltip").style("display", "none");
             });
             var activeLegendItems_1 = this.getActiveLegendItems();
             var legendContent = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(".legend-tooltip-content")
-                .attr("font-size", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.fontSize)
+                .attr("font-size", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].fontSize)
                 .selectAll("div")
                 .data(this.getLegendItemArray(), function (d) { return d.key; })
                 .enter()
                 .append("li")
                 .classed("legend-btn", true)
-                .classed("active", function (d) { return d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status.ACTIVE; })
-                .classed("not-allowed", function (d) { return activeLegendItems_1.length === 1 && d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status.ACTIVE; })
+                .classed("active", function (d) { return d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE; })
+                .classed("not-allowed", function (d) { return activeLegendItems_1.length === 1 && d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE; })
                 .on("click", function (clickedItem, e) {
                 var legendButton = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(d3_selection__WEBPACK_IMPORTED_MODULE_0__["event"].currentTarget);
                 var enabling = !legendButton.classed("active");
@@ -2410,27 +2410,27 @@ var BaseChart = /** @class */ (function () {
                     _this.applyLegendFilter(clickedItem.key);
                     _this.container.selectAll("ul.legend li.legend-btn")
                         .data(_this.getLegendItemArray(), function (d) { return d.key; })
-                        .classed("active", function (d) { return d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status.ACTIVE; })
+                        .classed("active", function (d) { return d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE; })
                         .select("div.legend-circle")
                         .style("background-color", function (d, i) {
-                        if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.basedOn.LABELS && d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status.ACTIVE) {
+                        if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS && d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE) {
                             return _this.colorScale[_this.displayData.datasets[0].label](d.key);
                         }
-                        else if (d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status.ACTIVE) {
+                        else if (d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE) {
                             return _this.colorScale[d.key]();
                         }
                         return "white";
                     })
                         .style("border-color", function (d) {
-                        if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.basedOn.LABELS) {
+                        if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS) {
                             return _this.colorScale[_this.displayData.datasets[0].label](d.key);
                         }
                         else {
                             return _this.colorScale[d.key]();
                         }
                     })
-                        .style("border-style", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.inactive.borderStyle)
-                        .style("border-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.inactive.borderWidth);
+                        .style("border-style", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].inactive.borderStyle)
+                        .style("border-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].inactive.borderWidth);
                 }
                 // If there are 2 active legend items & one is getting toggled off
                 if (activeLegendItems_1.length === 2 && !enabling) {
@@ -2443,24 +2443,24 @@ var BaseChart = /** @class */ (function () {
             legendContent.append("div")
                 .attr("class", "legend-circle")
                 .style("background-color", function (d, i) {
-                if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.basedOn.LABELS && d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status.ACTIVE) {
+                if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS && d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE) {
                     return _this.colorScale[_this.displayData.datasets[0].label](d.key);
                 }
-                else if (d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.items.status.ACTIVE) {
+                else if (d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE) {
                     return _this.colorScale[d.key]();
                 }
                 return "white";
             })
                 .style("border-color", function (d) {
-                if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.basedOn.LABELS) {
+                if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS) {
                     return _this.colorScale[_this.displayData.datasets[0].label](d.key);
                 }
                 else {
                     return _this.colorScale[d.key]();
                 }
             })
-                .style("border-style", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.inactive.borderStyle)
-                .style("border-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.inactive.borderWidth);
+                .style("border-style", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].inactive.borderStyle)
+                .style("border-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].inactive.borderWidth);
             this.addLegendCircleHoverEffect();
             legendContent.append("text")
                 .text(function (d) { return d.key; });
@@ -2468,15 +2468,15 @@ var BaseChart = /** @class */ (function () {
         // Position the tooltip
         tooltip.classed("arrow-right", true);
         tooltip.append("div").attr("class", "arrow");
-        tooltip.style("left", mouseXPoint - _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].tooltip.width - _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].tooltip.arrowWidth + "px");
+        tooltip.style("left", mouseXPoint - _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].width - _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].arrowWidth + "px");
     };
     BaseChart.prototype.showLabelTooltip = function (d, leftSide) {
         var _this = this;
         Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["selectAll"])(".label-tooltip").remove();
-        var mouseXPoint = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] + _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].tooltip.arrowWidth;
+        var mouseXPoint = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] + _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].arrowWidth;
         var tooltip = this.container.append("div")
             .attr("class", "tooltip label-tooltip")
-            .style("top", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[1] - _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].tooltip.magicTop1 + "px");
+            .style("top", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[1] - _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].magicTop1 + "px");
         _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].addCloseBtn(tooltip, "xs")
             .on("click", function () {
             _this.resetOpacity();
@@ -2490,7 +2490,7 @@ var BaseChart = /** @class */ (function () {
         }
         else {
             tooltip.classed("arrow-right", true);
-            var xPoint = mouseXPoint - tooltip.node().clientWidth - _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].tooltip.magicXPoint2;
+            var xPoint = mouseXPoint - tooltip.node().clientWidth - _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].magicXPoint2;
             tooltip.style("left", xPoint + "px")
                 .append("div").attr("class", "arrow");
         }
@@ -2500,7 +2500,7 @@ var BaseChart = /** @class */ (function () {
         var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.holder).select("div.chart-tooltip");
         tooltipRef.style("opacity", 1)
             .transition()
-            .duration(_configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].tooltip.fadeOut.duration)
+            .duration(_configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].fadeOut.duration)
             .style("opacity", 0)
             .remove();
         this.removeTooltipEventListeners();
@@ -2551,10 +2551,10 @@ var BaseChart = /** @class */ (function () {
         // Draw tooltip
         var tooltip = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.holder).append("div")
             .attr("class", "tooltip chart-tooltip")
-            .style("top", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[1] - _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].tooltip.magicTop2 + "px");
+            .style("top", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[1] - _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].magicTop2 + "px");
         var tooltipHTML = "";
         var formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString("en");
-        if (this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.basedOn.LABELS) {
+        if (this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS) {
             tooltipHTML += "\n\t\t\t\t<b>" + d.label + ":</b> " + formattedValue + "<br/>\n\t\t\t";
         }
         else {
@@ -2563,14 +2563,14 @@ var BaseChart = /** @class */ (function () {
         tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
         // Draw tooltip arrow in the right direction
         if (Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] + tooltip.node().clientWidth > this.holder.clientWidth) {
-            tooltip.style("left", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] - tooltip.node().clientWidth - _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].tooltip.magicLeft1 + "px");
+            tooltip.style("left", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] - tooltip.node().clientWidth - _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].magicLeft1 + "px");
         }
         else {
-            tooltip.style("left", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] + _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].tooltip.magicLeft2 + "px");
+            tooltip.style("left", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] + _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].magicLeft2 + "px");
         }
         tooltip.style("opacity", 0)
             .transition()
-            .duration(_configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].tooltip.fadeIn.duration)
+            .duration(_configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].fadeIn.duration)
             .style("opacity", 1);
         this.addTooltipEventListeners(tooltip);
     };
@@ -2581,7 +2581,7 @@ var BaseChart = /** @class */ (function () {
         if (this.options.animations === false) {
             return this.getInstantTransition();
         }
-        return Object(d3_transition__WEBPACK_IMPORTED_MODULE_2__["transition"])().duration(_configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].transitions.default.duration);
+        return Object(d3_transition__WEBPACK_IMPORTED_MODULE_2__["transition"])().duration(_configuration__WEBPACK_IMPORTED_MODULE_3__["transitions"].default.duration);
     };
     BaseChart.prototype.getInstantTransition = function () {
         return Object(d3_transition__WEBPACK_IMPORTED_MODULE_2__["transition"])().duration(0);
@@ -2592,7 +2592,7 @@ var BaseChart = /** @class */ (function () {
         if (this.options.animations === false) {
             return this.getInstantTransition();
         }
-        return Object(d3_transition__WEBPACK_IMPORTED_MODULE_2__["transition"])().duration(animate === false ? 0 : _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].transitions.default.duration);
+        return Object(d3_transition__WEBPACK_IMPORTED_MODULE_2__["transition"])().duration(animate === false ? 0 : _configuration__WEBPACK_IMPORTED_MODULE_3__["transitions"].default.duration);
     };
     // ================================================================================
     // Loading overlay
@@ -2757,12 +2757,23 @@ var ComboChart = /** @class */ (function (_super) {
 /*!******************************!*\
   !*** ./src/configuration.ts ***!
   \******************************/
-/*! exports provided: Configuration */
+/*! exports provided: options, charts, scales, grid, bars, lines, pie, donut, legend, tooltip, transitions, selectors */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Configuration", function() { return Configuration; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "options", function() { return options; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "charts", function() { return charts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scales", function() { return scales; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "grid", function() { return grid; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bars", function() { return bars; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lines", function() { return lines; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pie", function() { return pie; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "donut", function() { return donut; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "legend", function() { return legend; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tooltip", function() { return tooltip; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transitions", function() { return transitions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectors", function() { return selectors; });
 var baseOptions = {
     legendClickable: true,
     containerResizable: true,
@@ -2798,214 +2809,211 @@ var axisOptions = Object.assign({}, baseOptions, {
         }
     }
 });
-var Configuration;
-(function (Configuration) {
-    Configuration.options = {
-        BASE: baseOptions,
-        AXIS: axisOptions
-    };
-    Configuration.charts = {
-        margin: {
-            top: 20,
-            bottom: 60,
-            left: 60,
-            right: 20,
-            bar: {
-                top: 0,
-                right: -40,
-                bottom: 50,
-                left: 40
-            },
-            line: {
-                top: 0,
-                right: -40,
-                bottom: 50,
-                left: 40
-            }
+var options = {
+    BASE: baseOptions,
+    AXIS: axisOptions
+};
+var charts = {
+    margin: {
+        top: 20,
+        bottom: 60,
+        left: 60,
+        right: 20,
+        bar: {
+            top: 0,
+            right: -40,
+            bottom: 50,
+            left: 40
         },
-        resetOpacity: {
-            opacity: 1,
-            circle: {
-                fill: "white"
-            },
-            outline: "grey"
-        },
-        reduceOpacity: {
-            opacity: 0.25,
-            outline: "grey"
-        },
-        pointCircles: {
-            radius: 4
-        },
-        patternFills: {
-            width: 20,
-            height: 20
-        },
-        widthBreak: 600,
-        marginForLegendTop: 40,
-        magicRatio: 0.7,
-        magicMoreForY2Axis: 70
-    };
-    Configuration.scales = {
-        maxWidthOfAxisLabel: 175,
-        maxNumOfAxisLabelLetters: 60,
-        yAxisAngle: -90,
-        xAxisAngle: -45,
-        domain: {
-            color: "#959595",
-            strokeWidth: 2
-        },
-        dx: "-1em",
-        label: {
-            dy: "1em"
-        },
-        tick: {
-            dy: "0.5em",
-            widthAdditionY: 25,
-            widthAdditionY2: 15,
-            heightAddition: 16,
-            maxLetNum: 28
-        },
-        magicDy1: "0.71em",
-        magicY1: 9,
-        magicX1: -4,
-        y: {
-            numberOfTicks: 5
-        },
-        x: {
-            numberOfTicks: 5,
-            padding: 0.2
-        },
-        y2: {
-            numberOfTicks: 5
+        line: {
+            top: 0,
+            right: -40,
+            bottom: 50,
+            left: 40
         }
-    };
-    Configuration.grid = {
-        strokeColor: "#ECEEEF"
-    };
-    Configuration.bars = {
+    },
+    resetOpacity: {
+        opacity: 1,
+        circle: {
+            fill: "white"
+        },
+        outline: "grey"
+    },
+    reduceOpacity: {
+        opacity: 0.25,
+        outline: "grey"
+    },
+    pointCircles: {
+        radius: 4
+    },
+    patternFills: {
+        width: 20,
+        height: 20
+    },
+    widthBreak: 600,
+    marginForLegendTop: 40,
+    magicRatio: 0.7,
+    magicMoreForY2Axis: 70
+};
+var scales = {
+    maxWidthOfAxisLabel: 175,
+    maxNumOfAxisLabelLetters: 60,
+    yAxisAngle: -90,
+    xAxisAngle: -45,
+    domain: {
+        color: "#959595",
+        strokeWidth: 2
+    },
+    dx: "-1em",
+    label: {
+        dy: "1em"
+    },
+    tick: {
+        dy: "0.5em",
+        widthAdditionY: 25,
+        widthAdditionY2: 15,
+        heightAddition: 16,
+        maxLetNum: 28
+    },
+    magicDy1: "0.71em",
+    magicY1: 9,
+    magicX1: -4,
+    y: {
+        numberOfTicks: 5
+    },
+    x: {
+        numberOfTicks: 5,
+        padding: 0.2
+    },
+    y2: {
+        numberOfTicks: 5
+    }
+};
+var grid = {
+    strokeColor: "#ECEEEF"
+};
+var bars = {
+    mouseover: {
+        strokeWidth: 4,
+        strokeOpacity: 0.5
+    },
+    mouseout: {
+        strokeWidth: 0,
+        strokeWidthAccessible: 2,
+        strokeOpacity: 1
+    },
+    default: {
+        strokeWidth: 2
+    },
+    spacing: {
+        bars: 0.2,
+        datasets: 0.25
+    }
+};
+var lines = {
+    points: {
+        strokeWidth: 4,
         mouseover: {
-            strokeWidth: 4,
             strokeOpacity: 0.5
         },
         mouseout: {
-            strokeWidth: 0,
-            strokeWidthAccessible: 2,
             strokeOpacity: 1
-        },
-        default: {
-            strokeWidth: 2
-        },
-        spacing: {
-            bars: 0.2,
-            datasets: 0.25
         }
-    };
-    Configuration.lines = {
-        points: {
-            strokeWidth: 4,
-            mouseover: {
-                strokeOpacity: 0.5
-            },
-            mouseout: {
-                strokeOpacity: 1
-            }
-        }
-    };
-    Configuration.pie = {
-        minWidth: 100,
-        maxWidth: 516.6,
-        mouseover: {
-            strokeWidth: 6,
-            strokeOpacity: 0.5
+    }
+};
+var pie = {
+    minWidth: 100,
+    maxWidth: 516.6,
+    mouseover: {
+        strokeWidth: 6,
+        strokeOpacity: 0.5
+    },
+    mouseout: {
+        strokeWidth: 0,
+        strokeOpacity: 1
+    },
+    sliceLimit: 6,
+    label: {
+        dy: ".32em",
+        margin: 15,
+        other: "Other"
+    },
+    default: {
+        strokeWidth: 2
+    }
+};
+var donut = {
+    centerText: {
+        title: {
+            y: 22
         },
-        mouseout: {
-            strokeWidth: 0,
-            strokeOpacity: 1
+        breakpoint: 175,
+        magicScaleRatio: 2.5,
+        numberFontSize: 24,
+        titleFontSize: 15
+    }
+};
+var legend = {
+    countBreak: 4,
+    fontSize: 12,
+    wrapperHeight: "40px",
+    widthTolerance: 15,
+    hoverShadowSize: "3px",
+    hoverShadowTransparency: 0.2,
+    margin: {
+        top: 19
+    },
+    active: {
+        borderColor: false,
+        borderStyle: false,
+        borderWidth: false
+    },
+    inactive: {
+        backgroundColor: "white",
+        borderStyle: "solid",
+        borderWidth: "2px"
+    },
+    items: {
+        status: {
+            ACTIVE: 1,
+            DISABLED: 0
         },
-        sliceLimit: 6,
-        label: {
-            dy: ".32em",
-            margin: 15,
-            other: "Other"
-        },
-        default: {
-            strokeWidth: 2
-        }
-    };
-    Configuration.donut = {
-        centerText: {
-            title: {
-                y: 22
-            },
-            breakpoint: 175,
-            magicScaleRatio: 2.5,
-            numberFontSize: 24,
-            titleFontSize: 15
-        }
-    };
-    Configuration.legend = {
-        countBreak: 4,
-        fontSize: 12,
-        wrapperHeight: "40px",
-        widthTolerance: 15,
-        hoverShadowSize: "3px",
-        hoverShadowTransparency: 0.2,
-        margin: {
-            top: 19
-        },
-        active: {
-            borderColor: false,
-            borderStyle: false,
-            borderWidth: false
-        },
-        inactive: {
-            backgroundColor: "white",
-            borderStyle: "solid",
-            borderWidth: "2px"
-        },
-        items: {
-            status: {
-                ACTIVE: 1,
-                DISABLED: 0
-            },
-        },
-        basedOn: {
-            SERIES: "series",
-            LABELS: "labels"
-        }
-    };
-    Configuration.tooltip = {
-        width: 200,
-        arrowWidth: 10,
-        magicXPoint2: 20,
-        magicTop1: 21,
-        magicTop2: 22,
-        magicLeft1: 11,
-        magicLeft2: 12,
-        fadeIn: {
-            duration: 250
-        },
-        fadeOut: {
-            duration: 250
-        }
-    };
-    Configuration.transitions = {
-        default: {
-            duration: 750
-        }
-    };
-    Configuration.selectors = {
-        OUTERSVG: "svg.chart-svg",
-        INNERWRAP: "g.inner-wrap",
-        CHARTWRAPPER: "div.chart-wrapper",
-        TOOLTIP: "div.chart-tooltip",
-        LEGEND_BTN: "li.legend-btn",
-        pie: {
-            SLICE: "path"
-        }
-    };
-})(Configuration || (Configuration = {}));
+    },
+    basedOn: {
+        SERIES: "series",
+        LABELS: "labels"
+    }
+};
+var tooltip = {
+    width: 200,
+    arrowWidth: 10,
+    magicXPoint2: 20,
+    magicTop1: 21,
+    magicTop2: 22,
+    magicLeft1: 11,
+    magicLeft2: 12,
+    fadeIn: {
+        duration: 250
+    },
+    fadeOut: {
+        duration: 250
+    }
+};
+var transitions = {
+    default: {
+        duration: 750
+    }
+};
+var selectors = {
+    OUTERSVG: "svg.chart-svg",
+    INNERWRAP: "g.inner-wrap",
+    CHARTWRAPPER: "div.chart-wrapper",
+    TOOLTIP: "div.chart-tooltip",
+    LEGEND_BTN: "li.legend-btn",
+    pie: {
+        SLICE: "path"
+    }
+};
 
 
 /***/ }),
@@ -3091,7 +3099,7 @@ var DonutCenter = /** @class */ (function () {
         innerWrap.append("text")
             .attr("class", "donut-title")
             .attr("text-anchor", "middle")
-            .attr("y", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].donut.centerText.title.y)
+            .attr("y", _configuration__WEBPACK_IMPORTED_MODULE_3__["donut"].centerText.title.y)
             .text(this.configs.label);
         this.donutSVG = innerWrap;
     };
@@ -3103,7 +3111,7 @@ var DonutCenter = /** @class */ (function () {
             // Update center number
             this.donutSVG.select("text.donut-figure")
                 .transition()
-                .duration(_configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].transitions.default.duration)
+                .duration(_configuration__WEBPACK_IMPORTED_MODULE_3__["transitions"].default.duration)
                 .tween("text", function () {
                 return donutCenterNumberTween(Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this), newNumber_1);
             });
@@ -3116,16 +3124,16 @@ var DonutCenter = /** @class */ (function () {
     };
     DonutCenter.prototype.resize = function (svgElement, actualChartSize) {
         var dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
-        var pieConfigs = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].pie;
+        var pieConfigs = _configuration__WEBPACK_IMPORTED_MODULE_3__["pie"];
         var scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
         // If the dimensions of the chart are smaller than a certain number (e.g. 175x175)
         // Resize the center text sizes
-        if (dimensionToUseForScale < _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].donut.centerText.breakpoint) {
+        if (dimensionToUseForScale < _configuration__WEBPACK_IMPORTED_MODULE_3__["donut"].centerText.breakpoint) {
             svgElement.select("text.donut-figure")
-                .style("font-size", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].donut.centerText.numberFontSize * scaleRatio * _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].donut.centerText.magicScaleRatio + "px");
+                .style("font-size", _configuration__WEBPACK_IMPORTED_MODULE_3__["donut"].centerText.numberFontSize * scaleRatio * _configuration__WEBPACK_IMPORTED_MODULE_3__["donut"].centerText.magicScaleRatio + "px");
             svgElement.select("text.donut-title")
-                .style("font-size", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].donut.centerText.titleFontSize * scaleRatio * _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].donut.centerText.magicScaleRatio + "px")
-                .attr("y", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].donut.centerText.title.y * scaleRatio * _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].donut.centerText.magicScaleRatio);
+                .style("font-size", _configuration__WEBPACK_IMPORTED_MODULE_3__["donut"].centerText.titleFontSize * scaleRatio * _configuration__WEBPACK_IMPORTED_MODULE_3__["donut"].centerText.magicScaleRatio + "px")
+                .attr("y", _configuration__WEBPACK_IMPORTED_MODULE_3__["donut"].centerText.title.y * scaleRatio * _configuration__WEBPACK_IMPORTED_MODULE_3__["donut"].centerText.magicScaleRatio);
         }
     };
     return DonutCenter;
@@ -3148,11 +3156,12 @@ function donutCenterNumberTween(d3Ref, newNumber) {
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/*! exports provided: BaseChart, BaseAxisChart, PieChart, DonutChart, DonutCenter, BarChart, LineChart, ComboChart */
+/*! exports provided: defaultColors, BaseChart, BaseAxisChart, PieChart, DonutChart, DonutCenter, BarChart, LineChart, ComboChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultColors", function() { return defaultColors; });
 /* harmony import */ var _base_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base-chart */ "./src/base-chart.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BaseChart", function() { return _base_chart__WEBPACK_IMPORTED_MODULE_0__["BaseChart"]; });
 
@@ -3176,8 +3185,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _combo_chart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./combo-chart */ "./src/combo-chart.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ComboChart", function() { return _combo_chart__WEBPACK_IMPORTED_MODULE_6__["ComboChart"]; });
 
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_8__);
 __webpack_require__(/*! ./polyfills */ "./src/polyfills.ts");
 
 
@@ -3186,6 +3196,8 @@ __webpack_require__(/*! ./polyfills */ "./src/polyfills.ts");
 
 
 
+
+var defaultColors = _configuration__WEBPACK_IMPORTED_MODULE_7__["options"].BASE.colors;
 
 
 
@@ -3231,7 +3243,7 @@ var LineChart = /** @class */ (function (_super) {
         return _this;
     }
     LineChart.prototype.getLegendType = function () {
-        return _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].legend.basedOn.SERIES;
+        return _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.SERIES;
     };
     LineChart.prototype.addLabelsToDataPoints = function (d, index) {
         var labels = this.displayData.labels;
@@ -3245,7 +3257,7 @@ var LineChart = /** @class */ (function (_super) {
         var _this = this;
         this.innerWrap.style("width", "100%")
             .style("height", "100%");
-        var margins = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.margin.line;
+        var margins = _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].margin.line;
         var scales = this.options.scales;
         var chartSize = this.getChartSize();
         var width = chartSize.width - margins.left - margins.right;
@@ -3275,7 +3287,7 @@ var LineChart = /** @class */ (function (_super) {
             .attr("class", "dot")
             .attr("cx", function (d) { return _this.x(d.label) + margins.left; })
             .attr("cy", function (d) { return _this.y(d.value); })
-            .attr("r", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.pointCircles.radius)
+            .attr("r", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].pointCircles.radius)
             .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); });
         // Hide the overlay
         this.updateOverlay().hide();
@@ -3284,7 +3296,7 @@ var LineChart = /** @class */ (function (_super) {
     };
     LineChart.prototype.interpolateValues = function (newData) {
         var _this = this;
-        var margins = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.margin.line;
+        var margins = _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].margin.line;
         var chartSize = this.getChartSize();
         var width = chartSize.width - margins.left - margins.right;
         var height = chartSize.height - this.getBBox(".x.axis").height;
@@ -3351,7 +3363,7 @@ var LineChart = /** @class */ (function (_super) {
         })
             .attr("class", "line")
             .attr("d", this.lineGenerator);
-        var margins = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.margin.line;
+        var margins = _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].margin.line;
         gLines.selectAll("circle.dot")
             .data(function (d, i) {
             var parentDatum = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this).datum();
@@ -3360,7 +3372,7 @@ var LineChart = /** @class */ (function (_super) {
             .transition(transitionToUse)
             .attr("cx", function (d) { return _this.x(d.label) + margins.left; })
             .attr("cy", function (d) { return _this.y(d.value); })
-            .attr("r", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].lines.points.strokeWidth)
+            .attr("r", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.strokeWidth)
             .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); });
     };
     LineChart.prototype.resizeChart = function () {
@@ -3386,12 +3398,12 @@ var LineChart = /** @class */ (function (_super) {
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke", self.colorScale[d.datasetLabel](d.label))
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].lines.points.mouseover.strokeOpacity);
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseover.strokeOpacity);
         })
             .on("mouseout", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke", self.colorScale[d.datasetLabel](d.label))
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].lines.points.mouseout.strokeOpacity);
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseout.strokeOpacity);
         })
             .on("click", function (d) {
             self.showTooltip(d, this);
@@ -3468,7 +3480,7 @@ var PieChart = /** @class */ (function (_super) {
         // Sort data by value
         var sortedData = dataList.sort(function (a, b) { return b.value - a.value; });
         // Keep a certain number of slices, and add an "Other" slice for the rest
-        var stopAt = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie.sliceLimit;
+        var stopAt = _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].sliceLimit;
         var rest = sortedData.slice(stopAt);
         var restAccumulatedValue = rest.reduce(function (accum, item) { return accum + item.value; }, 0);
         var otherLabelIndex = sortedData.findIndex(function (dataPoint) { return dataPoint.label === "Other"; });
@@ -3478,7 +3490,7 @@ var PieChart = /** @class */ (function (_super) {
         else if (rest.length > 0) {
             sortedData = sortedData.slice(0, stopAt)
                 .concat([{
-                    label: _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie.label.other,
+                    label: _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.other,
                     value: restAccumulatedValue,
                     items: rest
                 }]);
@@ -3514,7 +3526,7 @@ var PieChart = /** @class */ (function (_super) {
             .attr("height", diameter + "px")
             .attr("preserveAspectRatio", "xMinYMin");
         // Compute the correct inner & outer radius
-        var pieConfigs = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie;
+        var pieConfigs = _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"];
         var marginedRadius = radius - (pieConfigs.label.margin * (chartSize.width / pieConfigs.maxWidth));
         this.arc = Object(d3_shape__WEBPACK_IMPORTED_MODULE_2__["arc"])()
             .innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
@@ -3530,7 +3542,7 @@ var PieChart = /** @class */ (function (_super) {
             .attr("d", this.arc)
             .attr("fill", function (d) { return _this.getFillScale()[_this.displayData.datasets[0].label](d.data.label); }) // Support multiple datasets
             .attr("stroke", function (d) { return _this.colorScale[_this.displayData.datasets[0].label](d.data.label); })
-            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie.default.strokeWidth)
+            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; })
             .each(function (d) { this._current = d; });
         // Draw the slice labels
@@ -3540,7 +3552,7 @@ var PieChart = /** @class */ (function (_super) {
             .enter()
             .append("text")
             .classed("chart-label", true)
-            .attr("dy", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie.label.dy)
+            .attr("dy", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.dy)
             .style("text-anchor", this.deriveTextAnchor)
             .attr("transform", function (d) { return _this.deriveTransformString(d, radius); })
             .text(function (d) { return _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].convertValueToPercentage(d.data.value, dataList); });
@@ -3559,10 +3571,10 @@ var PieChart = /** @class */ (function (_super) {
             .transition()
             .duration(0)
             .attr("stroke", function (d) { return _this.colorScale[_this.displayData.datasets[0].label](d.data.label); })
-            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie.default.strokeWidth)
+            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; })
             .transition()
-            .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].transitions.default.duration)
+            .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration)
             .attr("fill", function (d) { return _this.getFillScale()[_this.displayData.datasets[0].label](d.data.label); })
             .attrTween("d", function (a) {
             return arcTween.bind(this)(a, self.arc);
@@ -3574,10 +3586,10 @@ var PieChart = /** @class */ (function (_super) {
             .duration(0)
             .style("opacity", 0)
             .attr("stroke", function (d) { return _this.colorScale[_this.displayData.datasets[0].label](d.data.label); })
-            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie.default.strokeWidth)
+            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; })
             .transition()
-            .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].transitions.default.duration)
+            .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration)
             .attr("fill", function (d) { return _this.getFillScale()[_this.displayData.datasets[0].label](d.data.label); })
             .style("opacity", 1)
             .attrTween("d", function (a) {
@@ -3587,18 +3599,18 @@ var PieChart = /** @class */ (function (_super) {
             .exit()
             .attr("d", this.arc)
             .transition()
-            .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].transitions.default.duration)
+            .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration)
             .style("opacity", 0)
             .remove();
         // Fade out all text labels
         this.innerWrap.selectAll("text.chart-label")
             .transition()
-            .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].transitions.default.duration / 2)
+            .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration / 2)
             .style("opacity", 0)
             .on("end", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .transition()
-                .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].transitions.default.duration / 2)
+                .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration / 2)
                 .style("opacity", 1);
         });
         // Move text labels to their new location, and fade them in again
@@ -3610,26 +3622,26 @@ var PieChart = /** @class */ (function (_super) {
                 .enter()
                 .append("text")
                 .classed("chart-label", true)
-                .attr("dy", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie.label.dy)
+                .attr("dy", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.dy)
                 .style("text-anchor", _this.deriveTextAnchor)
                 .attr("transform", function (d) { return _this.deriveTransformString(d, radius); })
                 .text(function (d) { return _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].convertValueToPercentage(d.data.value, dataList); })
                 .style("opacity", 0)
                 .transition()
-                .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].transitions.default.duration / 2)
+                .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration / 2)
                 .style("opacity", 1);
             text
-                .attr("dy", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie.label.dy)
+                .attr("dy", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.dy)
                 .style("text-anchor", _this.deriveTextAnchor)
                 .attr("transform", function (d) { return _this.deriveTransformString(d, radius); })
                 .text(function (d) { return _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].convertValueToPercentage(d.data.value, dataList); })
                 .transition()
-                .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].transitions.default.duration / 2)
+                .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration / 2)
                 .style("opacity", 1);
             text
                 .exit()
                 .remove();
-        }, _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].transitions.default.duration / 2);
+        }, _configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration / 2);
         // Add slice hover actions, and clear any slice borders present
         this.addDataPointEventListener();
         this.reduceOpacity();
@@ -3643,7 +3655,7 @@ var PieChart = /** @class */ (function (_super) {
             // this.innerWrap.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
             // Fade everything out except for this element
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill-opacity", false);
-            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].charts.reduceOpacity.opacity);
+            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].reduceOpacity.opacity);
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill", function (d) { return _this.getFillScale()[_this.displayData.datasets[0].label](d.data.label); });
         }
     };
@@ -3653,19 +3665,19 @@ var PieChart = /** @class */ (function (_super) {
         Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["selectAll"])(".tooltip").remove();
         var tooltip = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.holder).append("div")
             .attr("class", "tooltip chart-tooltip")
-            .style("top", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[1] - _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].tooltip.magicTop2 + "px");
+            .style("top", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[1] - _configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].magicTop2 + "px");
         var dVal = d.value.toLocaleString();
         var tooltipHTML = "\n\t\t\t<p class='bignum'>" + dVal + "</p>\n\t\t\t<p>" + d.data.label + "</p>\n\t\t";
         tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
         if (Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] + tooltip.node().clientWidth > this.holder.clientWidth) {
-            tooltip.style("left", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] - tooltip.node().clientWidth - _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].tooltip.magicLeft1 + "px");
+            tooltip.style("left", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] - tooltip.node().clientWidth - _configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].magicLeft1 + "px");
         }
         else {
-            tooltip.style("left", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] + _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].tooltip.magicLeft2 + "px");
+            tooltip.style("left", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] + _configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].magicLeft2 + "px");
         }
         tooltip.style("opacity", 0)
             .transition()
-            .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].tooltip.fadeIn.duration)
+            .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].fadeIn.duration)
             .style("opacity", 1);
         this.addTooltipEventListeners(tooltip);
     };
@@ -3681,8 +3693,8 @@ var PieChart = /** @class */ (function (_super) {
             var sliceElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this);
             _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].moveToFront(sliceElement);
             sliceElement
-                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie.mouseover.strokeWidth)
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie.mouseover.strokeOpacity)
+                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseover.strokeWidth)
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseover.strokeOpacity)
                 .attr("stroke", self.colorScale[self.displayData.datasets[0].label](d.data.label));
             self.showTooltip(d);
             self.reduceOpacity(this);
@@ -3690,14 +3702,14 @@ var PieChart = /** @class */ (function (_super) {
             .on("mousemove", function (d) {
             var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(self.holder).select("div.chart-tooltip");
             var relativeMousePosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(self.holder);
-            tooltipRef.style("left", relativeMousePosition[0] + _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].tooltip.magicLeft2 + "px")
+            tooltipRef.style("left", relativeMousePosition[0] + _configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].magicLeft2 + "px")
                 .style("top", relativeMousePosition[1] + "px");
         })
             .on("mouseout", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
-                .attr("stroke-width", accessibility ? _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie.default.strokeWidth : _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie.mouseout.strokeWidth)
+                .attr("stroke-width", accessibility ? _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].default.strokeWidth : _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseout.strokeWidth)
                 .attr("stroke", accessibility ? self.colorScale[self.displayData.datasets[0].label](d.data.label) : "none")
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie.mouseout.strokeOpacity);
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseout.strokeOpacity);
             self.hideTooltip();
         });
     };
@@ -3718,7 +3730,7 @@ var PieChart = /** @class */ (function (_super) {
             .selectAll("*").remove();
         var legendItems = this.getLegendItems();
         var legend = this.container.select(".legend")
-            .attr("font-size", _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].legend.fontSize)
+            .attr("font-size", _configuration__WEBPACK_IMPORTED_MODULE_5__["legend"].fontSize)
             .selectAll("div")
             .data(Object.keys(legendItems))
             .enter().append("li")
@@ -3726,13 +3738,13 @@ var PieChart = /** @class */ (function (_super) {
         legend.append("div")
             .attr("class", "legend-circle")
             .style("background-color", function (d, i) {
-            if (legendItems[d] === _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].legend.items.status.ACTIVE) {
+            if (legendItems[d] === _configuration__WEBPACK_IMPORTED_MODULE_5__["legend"].items.status.ACTIVE) {
                 return _this.colorScale(d);
             }
             return "white";
         })
             .style("border", function (d, i) {
-            if (legendItems[d] === _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].legend.items.status.ACTIVE) {
+            if (legendItems[d] === _configuration__WEBPACK_IMPORTED_MODULE_5__["legend"].items.status.ACTIVE) {
                 return "none";
             }
             return "2px solid " + _this.colorScale(d);
@@ -3743,7 +3755,7 @@ var PieChart = /** @class */ (function (_super) {
     };
     PieChart.prototype.resizeChart = function () {
         var _this = this;
-        var pieConfigs = _configuration__WEBPACK_IMPORTED_MODULE_5__["Configuration"].pie;
+        var pieConfigs = _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"];
         var chartSize = this.getChartSize(this.container);
         var dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
         var scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
@@ -3958,7 +3970,7 @@ var PatternsService = /** @class */ (function () {
             dataset.data.forEach(function (dataPoint, i) {
                 var index = i + 1;
                 var id = ++_this.idAccum;
-                if (!datasetPattern || legendType === _configuration__WEBPACK_IMPORTED_MODULE_2__["Configuration"].legend.basedOn.LABELS) {
+                if (!datasetPattern || legendType === _configuration__WEBPACK_IMPORTED_MODULE_2__["legend"].basedOn.LABELS) {
                     datasetPattern = _assets_patterns_index__WEBPACK_IMPORTED_MODULE_1__["default"][_this.patternAccum++];
                 }
                 // Create SVG container div
@@ -3993,8 +4005,8 @@ var PatternsService = /** @class */ (function () {
                     rectElement.removeAttribute("id");
                 });
                 // Update pattern widths & heights
-                patternElement.setAttribute("width", "" + _configuration__WEBPACK_IMPORTED_MODULE_2__["Configuration"].charts.patternFills.width);
-                patternElement.setAttribute("height", "" + _configuration__WEBPACK_IMPORTED_MODULE_2__["Configuration"].charts.patternFills.height);
+                patternElement.setAttribute("width", "" + _configuration__WEBPACK_IMPORTED_MODULE_2__["charts"].patternFills.width);
+                patternElement.setAttribute("height", "" + _configuration__WEBPACK_IMPORTED_MODULE_2__["charts"].patternFills.height);
                 _this.container.appendChild(svgContainer);
                 // Add pattern to the list of patterns
                 var patternURL = "url(#carbon-" + chartContainerID + "-pattern-" + id + ")";
@@ -4104,7 +4116,7 @@ var StackedBarChart = /** @class */ (function (_super) {
         var _this = this;
         this.innerWrap.style("width", "100%")
             .style("height", "100%");
-        var margins = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].charts.margin.bar;
+        var margins = _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].margin.bar;
         this.innerWrap
             .attr("transform", "translate(" + margins.left + ", " + margins.top + ")");
         var stackDataArray = this.getStackData();
@@ -4127,7 +4139,7 @@ var StackedBarChart = /** @class */ (function (_super) {
             .attr("width", function (d) { return _this.x.bandwidth(); })
             .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.data.label); })
             .attr("stroke", function (d) { return _this.options.accessibility ? _this.colorScale[d.datasetLabel](d.data.label) : null; })
-            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].bars.default.strokeWidth)
+            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; });
         // Hide the overlay
         this.updateOverlay().hide();
@@ -4157,7 +4169,7 @@ var StackedBarChart = /** @class */ (function (_super) {
                 .transition(_this.getFillTransition())
                 .attr("opacity", 1)
                 .attr("stroke", function (d) { return _this.options.accessibility ? _this.colorScale[d.datasetLabel](d.data.label) : null; })
-                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].bars.default.strokeWidth)
+                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].default.strokeWidth)
                 .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; });
         };
         var rectsToAdd = g.enter()
@@ -4215,7 +4227,7 @@ var StackedBarChart = /** @class */ (function (_super) {
             .attr("width", function (d) { return _this.x.bandwidth(); })
             .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.data.label); })
             .attr("stroke", function (d) { return _this.options.accessibility ? _this.colorScale[d.datasetLabel](d.data.label) : null; })
-            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].bars.default.strokeWidth)
+            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; });
     };
     StackedBarChart.prototype.addDataPointEventListener = function () {
@@ -4224,16 +4236,16 @@ var StackedBarChart = /** @class */ (function (_super) {
         this.svg.selectAll("rect")
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
-                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].bars.mouseover.strokeWidth)
+                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].mouseover.strokeWidth)
                 .attr("stroke", self.colorScale[d.datasetLabel](d.label))
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].bars.mouseover.strokeOpacity);
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].mouseover.strokeOpacity);
         })
             .on("mouseout", function (d) {
-            var _a = _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].bars.mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
+            var _a = _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
                 .attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["Configuration"].bars.mouseout.strokeOpacity);
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].mouseout.strokeOpacity);
         })
             .on("click", function (d) {
             self.showTooltip(d, this);
