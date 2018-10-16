@@ -8,7 +8,7 @@ lerna run lint
 
 if [ $? -ne 0 ]
 then
-	echo "Error: There were lint errors in the code, please review above and fix"
+	echo "Error: There were lint errors in the code, please review above and fix."
 	exit 1
 fi
 
@@ -28,7 +28,7 @@ lerna bootstrap --hoist --ci
 
 if [ $? -ne 0 ]
 then
-	echo "There was an error running lerna bootstrap"
+	echo "There was an error running lerna bootstrap."
 	exit 1
 fi
 
