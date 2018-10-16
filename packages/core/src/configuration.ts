@@ -118,7 +118,15 @@ export const scales = {
 	magicY1: 9,
 	magicX1: -4,
 	y: {
-		numberOfTicks: 5
+		numberOfTicks: 5,
+		thresholds: {
+			colors: {
+				"danger": "#fdf4f4",
+				"success": "#f3f9f6",
+				"warning": "#fffbeb"
+
+			}
+		}
 	},
 	x: {
 		numberOfTicks: 5,
