@@ -8,7 +8,7 @@ import {
 import { scaleOrdinal } from "d3-scale";
 import { transition, Transition } from "d3-transition";
 
-import { Configuration } from "./configuration";
+import * as Configuration from "./configuration";
 import { Tools } from "./tools";
 import PatternsService from "./services/patterns";
 

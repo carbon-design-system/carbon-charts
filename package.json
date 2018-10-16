@@ -11,11 +11,15 @@
 	"author": "IBM",
 	"license": "Apache-2.0",
 	"scripts": {
-		"commit": "git-cz",
 		"postinstall": "lerna bootstrap --hoist `if [ $CI ] ; then echo \"--ci\" ; fi`",
-		"pre-push": "lerna run lint",
+		"commit": "git-cz",
 		"test": "lerna run test",
 		"lint": "eslint packages"
+	},
+	"husky": {
+		"hooks": {
+			"pre-push": "bash scripts/prepush.sh"
+		}
 	},
 	"engines": {
 		"npm": "5.6.0"
@@ -26,7 +30,7 @@
 	"devDependencies": {
 		"commitizen": "2.10.1",
 		"cz-conventional-changelog": "2.1.0",
-		"husky": "0.14.3",
+		"husky": "1.1.2",
 		"lerna": "3.2.1"
 	},
 	"config": {

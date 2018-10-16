@@ -3,7 +3,7 @@ import { select } from "d3-selection";
 import { interpolateNumber } from "d3-interpolate";
 
 import { PieChart } from "./pie-chart";
-import { Configuration } from "./configuration";
+import * as Configuration from "./configuration";
 
 export class DonutChart extends PieChart {
 	center: DonutCenter;

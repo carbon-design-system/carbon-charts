@@ -5,7 +5,7 @@ import { pie, arc } from "d3-shape";
 import { interpolate } from "d3-interpolate";
 
 import { BaseChart } from "./base-chart";
-import { Configuration } from "./configuration";
+import * as Configuration from "./configuration";
 import { Tools } from "./tools";
 
 export class PieChart extends BaseChart {

@@ -2,7 +2,7 @@
 import { select } from "d3-selection";
 
 import PATTERN_SVGS from "../assets/patterns/index";
-import { Configuration } from "../configuration";
+import * as Configuration from "../configuration";
 
 const selectors = {
 	PATTERNS_CONTAINER: "carbon-charts-patterns"

@@ -3,7 +3,7 @@ import { select } from "d3-selection";
 import { stack } from "d3-shape";
 import { max } from "d3-array";
 
-import { Configuration } from "./configuration";
+import * as Configuration from "./configuration";
 import { BaseAxisChart } from "./base-axis-chart";
 
 // Add datasetLabel to each piece of data

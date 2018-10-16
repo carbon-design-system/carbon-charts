@@ -9,7 +9,7 @@ import { min, max } from "d3-array";
 
 import { BaseChart } from "./base-chart";
 
-import { Configuration } from "./configuration";
+import * as Configuration from "./configuration";
 import { Tools } from "./tools";
 
 export class BaseAxisChart extends BaseChart {
