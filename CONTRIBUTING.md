@@ -1,18 +1,38 @@
 # Contributing to Charts
 
-Yippee! If you're here, you _must_ be interested in contributing something to Charts—and if that's the case, it's safe to say that one: we like you already 🤓 and two: we would like to personally thank you ahead of time ❤️
+Yippee! If you're here, you _must_ be interested in contributing something to Charts.
+
+If that's the case, we would like to personally thank you ahead of time 🤓❤️
 
 Please take a moment to review this document in order to make the contribution process easy and effective for everyone involved.
 
 ## Table of contents
 
+- **[Run Charts in Local Environment](#run-charts-in-local-environment)**
 - [Issue guidelines](#issue-guidelines)
 - [Pull request guidelines](#pull-request-guidelines)
   - [Contribution process](#contribution-process)
-  - [NPM commands](#npm-commands)
 - [Code guidelines](#code-guidelines)
-  - [Resources](#resources)
   - [Philosophy](#philosophy)
+
+
+## Run Charts in Local Environment
+We use Lerna to manage all packages in Charts.
+
+To get charts running locally on your machine:
+1. Fork this repo
+2. Clone your fork
+3. Run `npm install` (this would install all packages and get **lerna** setup)
+
+The **core** package (vanilla JS) demos can be launched using:
+```sh
+npm run demo:server
+```
+
+All wrapper package (currently **react** & **angular**) use Storybook for demos:
+```sh
+npm run storybook
+```
 
 ## Issue guidelines
 
@@ -39,7 +59,6 @@ Please take a moment to review this document in order to make the contribution p
   - Update the "[Unreleased]" section of `CHANGELOG.md`.
   - Update the demo _as needed_.
   - Update the documentation _as needed_.
-  - Make sure the **linter passes** by running `npm run lint`.
   - **Do not** change the version number.
   - Keep in mind there will be a **code review checklist** against the following requirements at time of review:
 
@@ -79,24 +98,9 @@ Please take a moment to review this document in order to make the contribution p
 
 3. **Commit your changes in small logical chunks.** Refer to these [git commit
    message guidelines](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
-   to maintain consistency. For funsies, prefix your commit with relevant emojis from the list below:
-
-    Emoji | Short code | Use case
-    ----- | ---------- | --------
-    🎨 | `:art:` | when improving the format/structure of the code
-    🐎 | `:racehorse:` | when improving performance
-    ♿️ | `:wheelchair:` | when improving accessibility
-    🌐 | `:globe_with_meridians:` | when improving bidirectional support
-    📝 | `:memo:` | when writing docs
-    🆕 | `:new:` | when adding new features or patterns
-    🐛 | `:bug:` | when fixing a bug
-    🔧 | `:wrench:` | when refactoring code
-    🔥 | `:fire:` | when removing code or files
-    💚 | `:green_heart:` | when fixing the build
-    ✅ | `:white_check_mark:` | when adding tests
-    ⬆️ | `:arrow_up:` | when upgrading dependencies
-    ⬇️ | `:arrow_down:` | when downgrading dependencies
-    👕 | `:shirt:` | when removing linter warnings
+   to maintain consistency.
+   
+	**To commit changes, please use `npm run commit` rather than `git commit`**
 
 4. If time passes between development, **locally merge (or rebase) the upstream master branch** into your topic branch to avoid conflicts in your pull request. We recommend using Git's [interactive rebase](https://help.github.com/articles/interactive-rebase) feature to tidy up a messy commit history.
 
@@ -118,29 +122,7 @@ Please take a moment to review this document in order to make the contribution p
     - See [Creating a pull request from a fork](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) for step-by-step instructions.
     - Ensure the base branch is assigned to `master`.
 
-### NPM commands
-
-We use specific NPM scripts to test, lint, and build our demo and distributed files. Here are the scripts to choose from:
-
-- `npm run demo:server` to run the demo server on port 9090 and watch for changes
-- `npm run demo:build` to build the demo directory in `carbon-charts/demo/`
-- `npm run build` to build the distributed directory in `carbon-charts/dist/`
-- `npm run lint` to run TS lint on the source files
-- `npm run test` to run unit tests on the source files
-
 ## Code guidelines
-
-Adhere to the code guide enforced with our _very specific_ TS rules defined in our very own [linter file](https://github.com/IBM/carbon-charts/blob/master/tslint.json).
-
-Run `npm run lint` before committing to ensure your changes follow our coding standards.
-
-### Resources
-
-- [Dynamic Assessment Plugin (DAP)](https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W88ee03f8907c_412b_a3a8_988dabb72b35/page/Dynamic%20Assessment%20Plugin)
-- [IBM Accessibility Checklist](http://www-03.ibm.com/able/guidelines/ci162/accessibility_checklist.html)
-- [Charts Wiki pages](https://github.com/IBM/carbon-charts/wiki)
-- [WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices-1.1/)
-
 ### Philosophy
 
 - Components should be fully equipped with _all_ features and interactions defined in the latest Design Guide and UX Specifications.
