@@ -400,26 +400,22 @@ export class BaseAxisChart extends BaseChart {
 
 	drawYGrid() {
 		const { scales } = this.options;
-		const { thresholds } = this.options;
+		const { thresholds } = this.options.scales.y;
 		const yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
 
 		const yGrid = axisLeft(this.y)
 			.tickSizeInner(-this.getChartSize().width)
 			.tickSizeOuter(0);
 
-		if (thresholds) {
-			const thresValues = (typeof thresholds[0] === "object") ? (function() {
-				const retarr =  [];
-				thresholds.forEach( e => {
-					retarr.push(e.value);
-				});
-				return retarr;
-			}()) : thresholds;
-
+		if (thresholds && thresholds.length > 0) {
+			const thresholdTickValues = thresholds.map(e => {
+				if (e.value) return e.value;
+				console.error("Missing threshold value: ", e); 
+			});
 			// for some reason tickValues ignore the first element of the array
 			// passed to it so this workaround
-			thresValues.unshift(0);
-			yGrid.tickValues(thresValues);
+			thresholdTickValues.unshift(0);
+			yGrid.tickValues(thresholdTickValues);
 		}
 
 		yGrid.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
@@ -430,13 +426,13 @@ export class BaseAxisChart extends BaseChart {
 
 		this.cleanGrid(g);
 
-		if (this.options.thresholds) {
+		if (thresholds && thresholds.length > 0) {
 			this.fillTickThresholds(g);
 		}
 	}
 
 	fillTickThresholds(yGrid) {
-		const { thresholds } = this.options;
+		const { thresholds } = this.options.scales.y;
 
 		const width = yGrid.node().getBBox().width;
 		let prevBase = this.innerWrap.select(".y.axis line.domain").attr("y2");
@@ -447,14 +443,15 @@ export class BaseAxisChart extends BaseChart {
 					.replace(")", "")
 					.split(",")[1]
 				);
+				// draw rectangle between previous tick and the current tick
 				const height = prevBase - y;
-				const color = thresholds[i].color;
+				const theme = thresholds[i].theme;
 				// draw rectangles
 				yGrid.append("rect")
 					.attr("height", height)
 					.attr("width", width)
 					.attr("y", prevBase - height)
-					.style("fill", Configuration.scales.y.thresholds.colors[color]);
+					.style("fill", Configuration.scales.y.thresholds.colors[theme]);
 
 				prevBase = y;
 			});
