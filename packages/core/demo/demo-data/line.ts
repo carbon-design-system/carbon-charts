@@ -107,23 +107,23 @@ export const lineOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
-			formatter: axisValue => `${axisValue / 1000}k`
+			formatter: axisValue => `${axisValue / 1000}k`,
+			thresholds: [
+				{
+					value : 10000,
+					theme: "success"
+				},
+				{
+					value : 40000,
+					theme: "danger"
+				},
+				{
+					value: 50000,
+					theme: "warning"
+				}
+			]
 		}
 	},
 	legendClickable: true,
-	containerResizable: true,
-	thresholds: [
-		{
-			value : 30000,
-			color: "success"
-		},
-		{
-			value : 40000,
-			color: "danger"
-		},
-		{
-			value: 50000,
-			color: "warning"
-		}
-	],
+	containerResizable: true
 };
