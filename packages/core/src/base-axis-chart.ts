@@ -409,8 +409,8 @@ export class BaseAxisChart extends BaseChart {
 
 		if (thresholds && thresholds.length > 0) {
 			const thresholdTickValues = thresholds.map(e => {
-				if (e.value) return e.value;
-				console.error("Missing threshold value: ", e); 
+				if (e.value) { return e.value; }
+				console.error("Missing threshold value: ", e);
 			});
 			// for some reason tickValues ignore the first element of the array
 			// passed to it so this workaround
