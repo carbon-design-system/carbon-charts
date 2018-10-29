@@ -55,7 +55,7 @@ export class LineChart extends BaseAxisChart {
 		this.lineGenerator = line()
 			.x((d, i) => this.x(this.displayData.labels[i]) + margins.left)
 			.y((d: any) => this.y(d))
-			.curve(getD3Curve(this.options.curve) || getD3Curve("curveLinear"));
+			.curve(getD3Curve(this.options.curve, this.options.curveOptions));
 
 		const gLines = this.innerWrap.selectAll("g.lines")
 			.data(this.displayData.datasets)

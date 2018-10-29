@@ -55,7 +55,8 @@ export const curvedLineOptions = {
 			}
 		}
 	},
-	curve: "curveNatural",
+	curve: "curveCardinal",
+	curveOptions: { tension: 0 },
 	legendClickable: true,
 	containerResizable: true
 };
