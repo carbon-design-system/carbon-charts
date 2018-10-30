@@ -16,6 +16,7 @@ export class BaseAxisChart extends BaseChart {
 	x: any;
 	y: any;
 	y2: any;
+	thresholdDimensions: any;
 
 	constructor(holder: Element, configs: any) {
 		super(holder, configs);
@@ -433,31 +434,86 @@ export class BaseAxisChart extends BaseChart {
 
 	fillTickThresholds(yGrid) {
 		const { thresholds } = this.options.scales.y;
+		const thresholdDimensions = [];
+		let gThresholdContainer;
+
+		let prevBase = this.y(0);
 
 		const width = yGrid.node().getBBox().width;
-		let prevBase = this.innerWrap.select(".y.axis line.domain").attr("y2");
-
+		console.log(thresholds);
 		yGrid.selectAll(".tick")
 			.each(function(d, i) {
 				const y = parseFloat(select(this).attr("transform")
 					.replace(")", "")
 					.split(",")[1]
 				);
+
 				// draw rectangle between previous tick and the current tick
-				const height = prevBase - y;
+				const height = Math.abs(prevBase - y);
 				const theme = thresholds[i].theme;
-				// draw rectangles
-				yGrid.append("rect")
-					.attr("height", height)
-					.attr("width", width)
-					.attr("y", prevBase - height)
-					.style("fill", Configuration.scales.y.thresholds.colors[theme]);
+
+				thresholdDimensions.push({
+					height: height,
+					width: width,
+					y: y,
+					theme: theme
+				});
 
 				prevBase = y;
 			});
+		console.log("thres dimensions: ", thresholdDimensions);
+
+		if (yGrid.select("g .threshold-container").nodes().length > 0) {
+			console.log("preeixiting");
+			gThresholdContainer = yGrid.select("g .threshold-container");
+			gThresholdContainer.selectAll("rect")
+				.data(thresholdDimensions)
+				.enter()
+				.append("rect")
+				.attr("opacity", 0)
+				.attr("height", d => d.height)
+				.attr("width", d => d.width)
+				.attr("y", d => d.y )
+				.style("fill", d => Configuration.scales.y.thresholds.colors[d.theme])
+				.transition()
+				.attr("opacity", 1)
+				.duration((d, index) => {
+					if (index === 0) {
+						return 1000;
+					} else if (index === 1) {
+						return 1500;
+					} else {
+						return 2000;
+					}
+				});
+
+			gThresholdContainer.selectAll("rect")
+				.exit()
+				.transition(this.getDefaultTransition())
+				.style("opacity", 0)
+				.duration(300)
+				.remove();
+
+		} else {
+			console.log("new");
+			gThresholdContainer = yGrid.append("g")
+				.attr("class", "threshold-container");
+
+			gThresholdContainer.selectAll("rect")
+				.data(thresholdDimensions)
+				.enter()
+				.append("rect")
+				.attr("height", d => d.height)
+				.attr("width", d => d.width)
+				.attr("y", d => d.y )
+				.style("fill", d => Configuration.scales.y.thresholds.colors[d.theme]);
+		}
 	}
 
+
 	updateXandYGrid(noAnimation?: boolean) {
+		const { thresholds } = this.options.scales.y;
+
 		// setTimeout is needed here, to take into account the new position of bars
 		// Right after transitions are initiated for the
 		setTimeout(() => {
@@ -481,14 +537,31 @@ export class BaseAxisChart extends BaseChart {
 			const yGrid = axisLeft(this.y)
 				.tickSizeInner(-chartSize.width)
 				.tickSizeOuter(0)
-				.tickFormat("" as any)
-				.ticks(10);
+				.tickFormat("" as any);
+
+			if (thresholds && thresholds.length > 0) {
+				const thresholdTickValues = thresholds.map(e => {
+					if (e.value) { return e.value; }
+					console.error("Missing threshold value: ", e);
+				});
+				// for some reason tickValues ignore the first element of the array
+				// passed to it so this workaround
+				thresholdTickValues.unshift(0);
+				yGrid.tickValues(thresholdTickValues);
+			}
+				// .ticks(10);
 			const g_yGrid = this.innerWrap.select(".y.grid")
-				.transition(t)
 				.attr("transform", `translate(0, 0)`)
 				.call(yGrid);
 
+			g_yGrid.transition(t);
+
 			this.cleanGrid(g_yGrid);
+
+			if (thresholds && thresholds.length > 0) {
+				this.fillTickThresholds(g_yGrid);
+			}
+
 		}, 0);
 	}
 
@@ -498,6 +571,7 @@ export class BaseAxisChart extends BaseChart {
 		g.selectAll("text").style("display", "none").remove();
 		g.select(".domain").style("stroke", "none");
 		g.select(".tick").remove();
+		g.selectAll("rect").remove();
 	}
 
 	// TODO - Refactor
