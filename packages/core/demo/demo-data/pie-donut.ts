@@ -21,12 +21,12 @@ export const donutOptions = {
 };
 
 export const pieData = {
-	labels: ["JOHN", "myy", "illiad", "nezar"],
+	labels: ["john", "illiad", "nezar", "my"],
 	datasets: [
 		{
 			label: "Dataset 1",
 			backgroundColors: colors,
-			data: [100000, 200000, 600000, 70000]
+			data: [100000, 200000, 600000, 100000]
 		}
 	]
 };

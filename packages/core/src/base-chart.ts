@@ -41,6 +41,9 @@ export class BaseChart {
 		tooltips: null
 	};
 
+	//fix for random pie chart colours
+	fixedDataLabels;
+
 	constructor(holder: Element, configs: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
 
@@ -103,6 +106,10 @@ export class BaseChart {
 			// Process data
 			// this.data = this.dataProcessor(Tools.clone(value));
 			this.data = Tools.clone(value);
+
+			//PIEFIX COMMENTS
+			//dataProcessor changes the order of the labels based on newly updated values
+			//this messes up scaleOrdinal
 			this.displayData = this.dataProcessor(Tools.clone(value));
 
 			const keys = this.getKeysFromData();
@@ -161,6 +168,11 @@ export class BaseChart {
 				keys[key] = Configuration.legend.items.status.DISABLED;
 			}
 		});
+		
+		if(!this.fixedDataLabels){
+			console.log("im called");
+			this.fixedDataLabels = this.displayData.labels;
+		} 
 
 		return keys;
 	}
@@ -190,8 +202,17 @@ export class BaseChart {
 	}
 
 	setColorScale() {
+		//PIE-FIX COMMENTS
+		//this is the main source of the error
+		//this.displayData.labels would get its order changed everytime setData is called,
+		//but dataset.Backgroundcolor has the same order each time, so mapping of colours=>labels would change
+		//everytime 
+		//Solution: use a static array of labels (this.fixedDataLabels) that remains static everytime setData is called
+
 		this.displayData.datasets.forEach(dataset => {
-			this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.displayData.labels);
+			console.log("range: ", dataset.backgroundColors);
+			console.log("domain: ", this.fixedDataLabels);
+			this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.fixedDataLabels);
 		});
 	}
 
