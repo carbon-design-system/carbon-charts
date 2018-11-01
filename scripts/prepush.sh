@@ -22,10 +22,6 @@ then
 	exit 1
 fi
 
-
-# generate changelog
-lerna bootstrap --hoist --ci
-
 if [ $? -ne 0 ]
 then
 	echo "There was an error running lerna bootstrap."
