@@ -6,7 +6,9 @@
 	],
 	"command": {
 		"bootstrap": {
-			"npmClientArgs": ["--no-package-lock"]
+			"npmClientArgs": [
+				"--no-package-lock"
+			]
 		},
 		"publish": {
 			"ignoreChanges": [
@@ -14,5 +16,5 @@
 			]
 		}
 	},
-	"version": "0.5.4"
+	"version": "0.6.0"
 }
