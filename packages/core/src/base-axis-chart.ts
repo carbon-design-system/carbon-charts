@@ -413,8 +413,9 @@ export class BaseAxisChart extends BaseChart {
 				if (e.value) { return e.value; }
 				console.error("Missing threshold value: ", e);
 			});
-			// for some reason tickValues ignore the first element of the array
-			// passed to it so this workaround
+
+			// TickValues seem to ignore the first element of the array
+			// This workaround is a temporary solution
 			thresholdTickValues.unshift(0);
 			yGrid.tickValues(thresholdTickValues);
 		}
@@ -428,14 +429,14 @@ export class BaseAxisChart extends BaseChart {
 		this.cleanGrid(g);
 
 		if (thresholds && thresholds.length > 0) {
-			this.fillTickThresholds(g);
+			this.addOrUpdateThresholds(g);
 		}
 	}
 
-	fillTickThresholds(yGrid) {
+	addOrUpdateThresholds(yGrid, animate?) {
 		const { thresholds } = this.options.scales.y;
 		const thresholdDimensions = [];
-		const width = yGrid.node().getBBox().width;
+		const width = this.getChartSize().width;
 
 		let prevBase = this.y(0);
 		let gThresholdContainer = (yGrid.select("g.threshold-container").nodes().length > 0)
@@ -468,8 +469,7 @@ export class BaseAxisChart extends BaseChart {
 
 		// update
 		gThresholdContainer
-			.transition()
-			.duration(500)
+			.transition(animate === false ? this.getInstantTransition() : this.getDefaultTransition())
 			.attr("height", d => d.height)
 			.attr("width", d => d.width)
 			.attr("y", d => d.y )
@@ -478,21 +478,18 @@ export class BaseAxisChart extends BaseChart {
 		// enter
 		gThresholdContainer
 			.enter()
-			.append("rect")
-			.attr("height", d => d.height)
-			.attr("width", d => d.width)
-			.attr("y", d => d.y )
-			.style("fill", d => Configuration.scales.y.thresholds.colors[d.theme])
-			.transition()
-			.duration(3000);
+				.append("rect")
+				.attr("height", d => d.height)
+				.attr("width", d => d.width)
+				.attr("y", d => d.y )
+				.style("fill", d => Configuration.scales.y.thresholds.colors[d.theme]);
 
 		// exit
 		gThresholdContainer
 			.exit()
-			.transition(this.getDefaultTransition())
-			.style("opacity", 0)
-			.duration(300)
-			.remove();
+				.transition(this.getDefaultTransition())
+				.style("opacity", 0)
+				.remove();
 	}
 
 	updateXandYGrid(noAnimation?: boolean) {
@@ -543,13 +540,12 @@ export class BaseAxisChart extends BaseChart {
 			this.cleanGrid(g_yGrid);
 
 			if (thresholds && thresholds.length > 0) {
-				this.fillTickThresholds(g_yGrid);
+				this.addOrUpdateThresholds(g_yGrid, !noAnimation);
 			}
-
 		}, 0);
 	}
 
-	cleanGrid (g) {
+	cleanGrid(g) {
 		g.selectAll("line")
 			.attr("stroke", Configuration.grid.strokeColor);
 		g.selectAll("text").style("display", "none").remove();
