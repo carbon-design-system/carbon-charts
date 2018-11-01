@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/IBM/carbon-charts/compare/v0.5.4...v0.6.0) (2018-11-01)
+
+
+### Features
+
+* **core:** changed threshold config format, refactored code ([8271615](https://github.com/IBM/carbon-charts/commit/8271615))
+
+
+
+
+
 <a name="0.5.4"></a>
 ## [0.5.4](https://github.com/IBM/carbon-charts/compare/v0.5.3...v0.5.4) (2018-10-16)
 
