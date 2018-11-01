@@ -11,7 +11,7 @@
 	"author": "IBM",
 	"license": "Apache-2.0",
 	"scripts": {
-		"postinstall": "lerna bootstrap --hoist `if [ $CI ] ; then echo \"--ci\" ; fi`",
+		"postinstall": "lerna bootstrap --hoist",
 		"commit": "git-cz",
 		"test": "lerna run test",
 		"lint": "eslint packages"
