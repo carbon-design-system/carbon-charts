@@ -65,6 +65,24 @@ export namespace Tools {
 	 *************************************/
 
 	/**
+	 * Gets x and y coordinates from a HTML transform attribute
+	 *
+	 * @export
+	 * @param {any} string the transform attribute string ie. transform(x,y)
+	 * @returns Returns an object with x and y offsets of the transform
+	 */
+	export function getTranformOffsets(string) {
+		const regExp = /\(([^)]+)\)/;
+		const match = regExp.exec(string)[1];
+		const xyString = match.split(",");
+
+		return {
+			x: parseFloat(xyString[0]),
+			y: parseFloat(xyString[1])
+		};
+	}
+
+	/**
 	 * Capitalizes first letter of a string
 	 *
 	 * @export

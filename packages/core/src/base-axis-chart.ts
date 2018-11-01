@@ -435,19 +435,17 @@ export class BaseAxisChart extends BaseChart {
 	fillTickThresholds(yGrid) {
 		const { thresholds } = this.options.scales.y;
 		const thresholdDimensions = [];
-		let gThresholdContainer;
+		const width = yGrid.node().getBBox().width;
 
 		let prevBase = this.y(0);
+		let gThresholdContainer = (yGrid.select("g.threshold-container").nodes().length > 0)
+			? yGrid.select("g.threshold-container")
+			: yGrid.append("g").attr("class", "threshold-container");
 
-		const width = yGrid.node().getBBox().width;
-		console.log(thresholds);
+		// iterate ticks to find y offset, and height
 		yGrid.selectAll(".tick")
 			.each(function(d, i) {
-				const y = parseFloat(select(this).attr("transform")
-					.replace(")", "")
-					.split(",")[1]
-				);
-
+				const y = Tools.getTranformOffsets(select(this).attr("transform")).y;
 				// draw rectangle between previous tick and the current tick
 				const height = Math.abs(prevBase - y);
 				const theme = thresholds[i].theme;
@@ -458,58 +456,44 @@ export class BaseAxisChart extends BaseChart {
 					y: y,
 					theme: theme
 				});
-
+				// rectangles are drawn stacked ontop of each other, so y of the current rect
+				// is used as the base of the next one
 				prevBase = y;
 			});
-		console.log("thres dimensions: ", thresholdDimensions);
 
-		if (yGrid.select("g .threshold-container").nodes().length > 0) {
-			console.log("preeixiting");
-			gThresholdContainer = yGrid.select("g .threshold-container");
-			gThresholdContainer.selectAll("rect")
-				.data(thresholdDimensions)
-				.enter()
-				.append("rect")
-				.attr("opacity", 0)
-				.attr("height", d => d.height)
-				.attr("width", d => d.width)
-				.attr("y", d => d.y )
-				.style("fill", d => Configuration.scales.y.thresholds.colors[d.theme])
-				.transition()
-				.attr("opacity", 1)
-				.duration((d, index) => {
-					if (index === 0) {
-						return 1000;
-					} else if (index === 1) {
-						return 1500;
-					} else {
-						return 2000;
-					}
-				});
+		// bind rect to rectangle dimensions
+		gThresholdContainer = gThresholdContainer
+			.selectAll("rect")
+			.data(thresholdDimensions);
 
-			gThresholdContainer.selectAll("rect")
-				.exit()
-				.transition(this.getDefaultTransition())
-				.style("opacity", 0)
-				.duration(300)
-				.remove();
+		// update
+		gThresholdContainer
+			.transition()
+			.duration(500)
+			.attr("height", d => d.height)
+			.attr("width", d => d.width)
+			.attr("y", d => d.y )
+			.style("fill", d => Configuration.scales.y.thresholds.colors[d.theme]);
 
-		} else {
-			console.log("new");
-			gThresholdContainer = yGrid.append("g")
-				.attr("class", "threshold-container");
+		// enter
+		gThresholdContainer
+			.enter()
+			.append("rect")
+			.attr("height", d => d.height)
+			.attr("width", d => d.width)
+			.attr("y", d => d.y )
+			.style("fill", d => Configuration.scales.y.thresholds.colors[d.theme])
+			.transition()
+			.duration(3000);
 
-			gThresholdContainer.selectAll("rect")
-				.data(thresholdDimensions)
-				.enter()
-				.append("rect")
-				.attr("height", d => d.height)
-				.attr("width", d => d.width)
-				.attr("y", d => d.y )
-				.style("fill", d => Configuration.scales.y.thresholds.colors[d.theme]);
-		}
+		// exit
+		gThresholdContainer
+			.exit()
+			.transition(this.getDefaultTransition())
+			.style("opacity", 0)
+			.duration(300)
+			.remove();
 	}
-
 
 	updateXandYGrid(noAnimation?: boolean) {
 		const { thresholds } = this.options.scales.y;
@@ -571,7 +555,6 @@ export class BaseAxisChart extends BaseChart {
 		g.selectAll("text").style("display", "none").remove();
 		g.select(".domain").style("stroke", "none");
 		g.select(".tick").remove();
-		g.selectAll("rect").remove();
 	}
 
 	// TODO - Refactor
