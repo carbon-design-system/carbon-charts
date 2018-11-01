@@ -635,7 +635,21 @@ var lineOptions = {
             title: "2018 Annual Sales Figures",
         },
         y: {
-            formatter: function (axisValue) { return axisValue / 1000 + "k"; }
+            formatter: function (axisValue) { return axisValue / 1000 + "k"; },
+            thresholds: [
+                {
+                    value: 10000,
+                    theme: "success"
+                },
+                {
+                    value: 40000,
+                    theme: "danger"
+                },
+                {
+                    value: 50000,
+                    theme: "warning"
+                }
+            ]
         }
     },
     legendClickable: true,
@@ -1714,18 +1728,86 @@ var BaseAxisChart = /** @class */ (function (_super) {
     };
     BaseAxisChart.prototype.drawYGrid = function () {
         var scales = this.options.scales;
+        var thresholds = this.options.scales.y.thresholds;
         var yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
         var yGrid = Object(d3_axis__WEBPACK_IMPORTED_MODULE_2__["axisLeft"])(this.y)
             .tickSizeInner(-this.getChartSize().width)
-            .tickSizeOuter(0)
-            .ticks(scales.y.numberOfTicks || _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].y.numberOfTicks);
+            .tickSizeOuter(0);
+        if (thresholds && thresholds.length > 0) {
+            var thresholdTickValues = thresholds.map(function (e) {
+                if (e.value) {
+                    return e.value;
+                }
+                console.error("Missing threshold value: ", e);
+            });
+            // TickValues seem to ignore the first element of the array
+            // This workaround is a temporary solution
+            thresholdTickValues.unshift(0);
+            yGrid.tickValues(thresholdTickValues);
+        }
+        yGrid.ticks(scales.y.numberOfTicks || _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].y.numberOfTicks);
         var g = this.innerWrap.select(".y.grid")
             .attr("transform", "translate(0, 0)")
             .call(yGrid);
         this.cleanGrid(g);
+        if (thresholds && thresholds.length > 0) {
+            this.addOrUpdateThresholds(g);
+        }
+    };
+    BaseAxisChart.prototype.addOrUpdateThresholds = function (yGrid, animate) {
+        var thresholds = this.options.scales.y.thresholds;
+        var thresholdDimensions = [];
+        var width = this.getChartSize().width;
+        var prevBase = this.y(0);
+        var gThresholdContainer = (yGrid.select("g.threshold-container").nodes().length > 0)
+            ? yGrid.select("g.threshold-container")
+            : yGrid.append("g").attr("class", "threshold-container");
+        // iterate ticks to find y offset, and height
+        yGrid.selectAll(".tick")
+            .each(function (d, i) {
+            var y = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getTranformOffsets(Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this).attr("transform")).y;
+            // draw rectangle between previous tick and the current tick
+            var height = Math.abs(prevBase - y);
+            var theme = thresholds[i].theme;
+            thresholdDimensions.push({
+                height: height,
+                width: width,
+                y: y,
+                theme: theme
+            });
+            // rectangles are drawn stacked ontop of each other, so y of the current rect
+            // is used as the base of the next one
+            prevBase = y;
+        });
+        // bind rect to rectangle dimensions
+        gThresholdContainer = gThresholdContainer
+            .selectAll("rect")
+            .data(thresholdDimensions);
+        // update
+        gThresholdContainer
+            .transition(animate === false ? this.getInstantTransition() : this.getDefaultTransition())
+            .attr("height", function (d) { return d.height; })
+            .attr("width", function (d) { return d.width; })
+            .attr("y", function (d) { return d.y; })
+            .style("fill", function (d) { return _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].y.thresholds.colors[d.theme]; });
+        // enter
+        gThresholdContainer
+            .enter()
+            .append("rect")
+            .attr("height", function (d) { return d.height; })
+            .attr("width", function (d) { return d.width; })
+            .attr("y", function (d) { return d.y; })
+            .style("fill", function (d) { return _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].y.thresholds.colors[d.theme]; });
+        // exit
+        gThresholdContainer
+            .exit()
+            .transition(this.getDefaultTransition())
+            .style("opacity", 0)
+            .remove();
     };
     BaseAxisChart.prototype.updateXandYGrid = function (noAnimation) {
         var _this = this;
+        var thresholds = this.options.scales.y.thresholds;
         // setTimeout is needed here, to take into account the new position of bars
         // Right after transitions are initiated for the
         setTimeout(function () {
@@ -1745,13 +1827,28 @@ var BaseAxisChart = /** @class */ (function (_super) {
             var yGrid = Object(d3_axis__WEBPACK_IMPORTED_MODULE_2__["axisLeft"])(_this.y)
                 .tickSizeInner(-chartSize.width)
                 .tickSizeOuter(0)
-                .tickFormat("")
-                .ticks(10);
+                .tickFormat("");
+            if (thresholds && thresholds.length > 0) {
+                var thresholdTickValues = thresholds.map(function (e) {
+                    if (e.value) {
+                        return e.value;
+                    }
+                    console.error("Missing threshold value: ", e);
+                });
+                // for some reason tickValues ignore the first element of the array
+                // passed to it so this workaround
+                thresholdTickValues.unshift(0);
+                yGrid.tickValues(thresholdTickValues);
+            }
+            // .ticks(10);
             var g_yGrid = _this.innerWrap.select(".y.grid")
-                .transition(t)
                 .attr("transform", "translate(0, 0)")
                 .call(yGrid);
+            g_yGrid.transition(t);
             _this.cleanGrid(g_yGrid);
+            if (thresholds && thresholds.length > 0) {
+                _this.addOrUpdateThresholds(g_yGrid, !noAnimation);
+            }
         }, 0);
     };
     BaseAxisChart.prototype.cleanGrid = function (g) {
@@ -2879,7 +2976,14 @@ var scales = {
     magicY1: 9,
     magicX1: -4,
     y: {
-        numberOfTicks: 5
+        numberOfTicks: 5,
+        thresholds: {
+            colors: {
+                "danger": "rgba(230, 35, 37, 0.15)",
+                "success": "rgba(254, 213, 0, 0.15)",
+                "warning": "rgba(0, 136, 75, 0.15)"
+            }
+        }
     },
     x: {
         numberOfTicks: 5,
@@ -3394,6 +3498,7 @@ var LineChart = /** @class */ (function (_super) {
     };
     LineChart.prototype.addDataPointEventListener = function () {
         var self = this;
+        var thresholds = this.options.thresholds;
         this.svg.selectAll("circle.dot")
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
@@ -4342,6 +4447,23 @@ var Tools;
     /**************************************
      *  Formatting & calculations         *
      *************************************/
+    /**
+     * Gets x and y coordinates from a HTML transform attribute
+     *
+     * @export
+     * @param {any} string the transform attribute string ie. transform(x,y)
+     * @returns Returns an object with x and y offsets of the transform
+     */
+    function getTranformOffsets(string) {
+        var regExp = /\(([^)]+)\)/;
+        var match = regExp.exec(string)[1];
+        var xyString = match.split(",");
+        return {
+            x: parseFloat(xyString[0]),
+            y: parseFloat(xyString[1])
+        };
+    }
+    Tools.getTranformOffsets = getTranformOffsets;
     /**
      * Capitalizes first letter of a string
      *
