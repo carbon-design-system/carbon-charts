@@ -26,22 +26,6 @@
 - [Contributing](#contributing)
 - [Bugs and feature requests](#bugs-and-feature-requests)
 
-## Component status
-:white_check_mark: Stable :hourglass_flowing_sand: In progress
-
-| Component   | Vanilla            | Angular                  | React |
-|-------------|--------------------|--------------------------|-------|
-| Simple Bar  | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Grouped Bar | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Stacked Bar | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Donut       | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Line        | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Curved Line | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Pie         | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Step        | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Combo       | :hourglass_flowing_sand:               | :hourglass_flowing_sand:                     | :hourglass_flowing_sand:  |
-| Area        | Soon               | Soon                     | :hourglass_flowing_sand:  |
-
 ## Getting started
 
 ### Installation
@@ -80,6 +64,22 @@ npm install @carbon/charts --save
 2. Run `npm install` to install Node.js dependencies.
 3. Run `npm run demo:server` to serve up the demo locally.
 4. Finally, open <http://localhost:9001/> in your browser. SPOILER ALERT: There's no "Hello, World!"
+
+## Component status
+:white_check_mark: Stable :hourglass_flowing_sand: In progress
+
+| Component   | Vanilla            | Angular                  | React |
+|-------------|--------------------|--------------------------|-------|
+| Simple Bar  | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
+| Grouped Bar | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
+| Stacked Bar | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
+| Donut       | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
+| Line        | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
+| Curved Line | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
+| Pie         | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
+| Step        | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
+| Combo       | :hourglass_flowing_sand:               | :hourglass_flowing_sand:                     | :hourglass_flowing_sand:  |
+| Area        | Soon               | Soon                     | :hourglass_flowing_sand:  |
 
 ## Bugs and feature requests
 
