@@ -19,12 +19,12 @@
 
 ## Table of contents
 
-- [Component status](#component-status)
 - [Installation](#installation)
 - [Demo & Docs](#demo-and-documentation)
 - [Run Charts locally](#run-charts-locally)
-- [Contributing](#contributing)
+- [Component status](#component-status)
 - [Bugs and feature requests](#bugs-and-feature-requests)
+- [Contributing](#contributing)
 
 ## Getting started
 
