@@ -34,7 +34,7 @@ The **core** package (vanilla JS) demos can be launched using:
 npm run demo:server
 ```
 
-All wrapper package (currently **react** & **angular**) use Storybook for demos:
+All wrapper packages (currently **react** & **angular**) use Storybook for demos:
 
 ```sh
 npm run storybook
@@ -73,8 +73,8 @@ npm run storybook
     Demos all features | All interactions spec'd out in the Design Guide has visual support and a demo as proof.
     Documented/annotated | All rule blocks, placeholders, mixins, and functions has associated comment blocks that convey purpose and list inline notations referencing declarations that need further explanation.
     Matches UI/UX specs | All features are pixel perfect when compared to the Design Guide.
-    Meets the [code style guide](https://github.com/IBM/carbon-charts/wiki/Code-style-guide) | All code adheres to our custom style guide giving off the impression that it was written by one developer.
-    Accessible | All code passes the [Dynamic Assessment Plugin (DAP)](https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W88ee03f8907c_412b_a3a8_988dabb72b35/page/Dynamic%20Assessment%20Plugin) scan in Chrome.
+    All new code follows similar structure and style to the existing codebase giving off the impression that it was written by one developer.
+    Accessible | All code passes the [Dynamic Assessment Plugin (DAP)](https://www.ibm.com/able/dynamic-assessment-plug-in.html) scan in Chrome.
     Mobile first | All visual elements are elegantly responsive.
     RTL support | All visual elements reflect bidirectional text appropriately.
     Performant | All Sass code is strategically written in a way to limit bloat in the compiled CSS.
