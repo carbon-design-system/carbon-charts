@@ -21,14 +21,10 @@
 
 - [Component status](#component-status)
 - [Installation](#installation)
-- [Demo and documentation](#demo-and-documentation)
-- [Code Sample](#code-sample)
+- [Demo & Docs](#demo-and-documentation)
 - [Run Charts locally](#run-charts-locally)
-- [Bugs and feature requests](#bugs-and-feature-requests)
 - [Contributing](#contributing)
-- [Community](#community)
-- [Versioning](#versioning)
-- [Copyright and license](#copyright-and-license)
+- [Bugs and feature requests](#bugs-and-feature-requests)
 
 ## Component status
 :white_check_mark: Stable :hourglass_flowing_sand: In progress
@@ -58,98 +54,18 @@ npm install @carbon/charts --save
 ```
 
 ## Demo and documentation
+**Charts demos:**
+- [Vanilla JS](https://charts.carbondesignsystem.com/)
+- [Angular](https://charts.carbondesignsystem.com/angular)
 
-Charts' demo and documentation can be viewed in [GitHub Pages](https://pages.github.com/IBM/carbon-charts/) at <https://pages.github.com/IBM/carbon-charts/> and <https://pages.github.com/IBM/carbon-charts/documentation/> respectively.
+**Docs:** <https://charts.carbondesignsystem.com/documentation/>
 
 ### Code Sample
 <p align="center">
 	<img src="assets/demo-stacked-bar.png" alt="Stacked Bar Chart" width=600 />
 </p>
 
-HTML:
-```html
-<div id="stacked-bar-chart-holder"></div>
-```
-
-JS:
-```js
-import { BarChart } from "@carbon/charts";
-
-const colors = [
-	"#00a68f",
-	"#3b1a40",
-	"#473793",
-	"#3c6df0",
-	"#56D2BB"
-];
-
-const stackedBarData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
-	datasets: [
-		{
-			label: "Dataset 1",
-			backgroundColors: [colors[0]],
-			data: [
-				65000,
-				29123,
-				35213,
-				51213,
-				16932
-			]
-		},
-		{
-			label: "Dataset 2",
-			backgroundColors: [colors[1]],
-			data: [
-				32432,
-				21312,
-				56456,
-				21312,
-				34234
-			]
-		},
-		{
-			label: "Dataset 3",
-			backgroundColors: [colors[2]],
-			data: [
-				12312,
-				23232,
-				34232,
-				12312,
-				34234
-			]
-		}
-	]
-};
-
-const stackedBarOptions = {
-	accessibility: false,
-	scales: {
-		x: {
-			title: "2018 Annual Sales Figures",
-		},
-		y: {
-			formatter: axisValue => {
-				return `${axisValue / 1000}k`;
-			},
-			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
-			stacked: true
-		}
-	},
-	legendClickable: true,
-	containerResizable: true,
-};
-
-// Grab chart holder HTML element and initialize the chart
-const chartHolder = document.getElementById("stacked-bar-chart-holder");
-const barChart = new BarChart(
-	chartHolder,
-	{
-		data: stackedBarData,
-		options: stackedBarOptions,
-	}
-);
-```
+[![Edit Carbon Charts - Vanilla](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/2plrn2jp7r)
 
 ### Run Charts locally
 1. Fork the project and clone your fork:
