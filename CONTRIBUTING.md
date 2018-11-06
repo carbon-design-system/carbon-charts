@@ -29,6 +29,7 @@ To get charts running locally on your machine:
 3. Run `npm install` (this would install all packages and get **lerna** setup)
 
 The **core** package (vanilla JS) demos can be launched using:
+
 ```sh
 npm run demo:server
 ```
