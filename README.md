@@ -13,9 +13,7 @@
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
 		</a>
 		<img src="https://img.shields.io/badge/comp-IE11%2B-blue.svg" />
-	</p>
-	<p align="center">
-		:bar_chart: :chart_with_upwards_trend: :rocket:
+		<img alt="semantic-versioning" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versioning-e10079.svg">
 	</p>
 </p>
 
