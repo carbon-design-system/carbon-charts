@@ -11,3 +11,14 @@
 	CustomEvent.prototype = window["Event"].prototype;
 	window["CustomEvent"] = CustomEvent;
 })();
+
+// Avoid multiple instances of babel-polyfill
+function idempotentBabelPolyfill() {
+	if (!global["_babelPolyfill"] && (typeof window === "undefined" || !window["_babelPolyfill"])) {
+		return require("babel-polyfill");
+	}
+
+	return null;
+};
+
+idempotentBabelPolyfill();
