@@ -119,8 +119,25 @@ $default_transition: all .1s ease-out;
 		font-size: 12px;
 		margin-bottom: 0;
 
-		&:hover {
-			cursor: pointer;
+		&.clickable {
+			&:hover {
+				cursor: pointer;
+			}
+
+			.legend-circle {
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+
+		.legend-circle {
+			display: inherit;
+			height: 12px;
+			width: 12px;
+			border-radius: 3px;
+			margin: 0 5px 5px 15px;
+			box-sizing: border-box;
 		}
 
 		span {
@@ -134,19 +151,6 @@ $default_transition: all .1s ease-out;
 			white-space: nowrap;
 			overflow: hidden;
 			display: inherit;
-		}
-
-		.legend-circle {
-			display: inherit;
-			height: 12px;
-			width: 12px;
-			border-radius: 3px;
-			margin: 0 5px 5px 15px;
-			box-sizing: border-box;
-
-			&:hover {
-				cursor: pointer;
-			}
 		}
 
 		&.not-allowed {
