@@ -311,7 +311,12 @@ export class BaseChart {
 			c.selectAll(".legend-btn.active").classed("not-allowed", true);
 		}
 
+		// Add hover effect for legend item circles
+		self.addLegendCircleHoverEffect();
+
 		c.selectAll(".legend-btn").each(function() {
+			select(this).classed('clickable', true);
+
 			select(this).on("click", function() {
 				c.selectAll(".chart-tooltip").remove();
 				c.selectAll(".label-tooltip").remove();
@@ -483,9 +488,6 @@ export class BaseChart {
 
 				return "white";
 			});
-
-		// Add hover effect for legend item circles
-		this.addLegendCircleHoverEffect();
 	}
 
 	positionLegend() {
@@ -534,7 +536,7 @@ export class BaseChart {
 	}
 
 	addLegendCircleHoverEffect() {
-		selectAll("li.legend-btn")
+		this.container.selectAll("li.legend-btn")
 			.on("mouseover", function() {
 				const circleRef = select(this).select("div.legend-circle");
 				const color = (circleRef.node() as HTMLElement).style.backgroundColor.substring(4,
@@ -707,7 +709,6 @@ export class BaseChart {
 				})
 				.style("border-style", Configuration.legend.inactive.borderStyle)
 				.style("border-width", Configuration.legend.inactive.borderWidth);
-			this.addLegendCircleHoverEffect();
 
 			legendContent.append("text")
 				.text(d => d.key);
