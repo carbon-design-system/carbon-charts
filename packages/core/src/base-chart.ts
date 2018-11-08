@@ -315,7 +315,7 @@ export class BaseChart {
 		self.addLegendCircleHoverEffect();
 
 		c.selectAll(".legend-btn").each(function() {
-			select(this).classed('clickable', true);
+			select(this).classed("clickable", true);
 
 			select(this).on("click", function() {
 				c.selectAll(".chart-tooltip").remove();
