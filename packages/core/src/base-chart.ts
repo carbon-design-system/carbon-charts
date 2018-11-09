@@ -163,15 +163,15 @@ export class BaseChart {
 				keys[key] = Configuration.legend.items.status.DISABLED;
 			}
 		});
-		
-		if(typeof this.fixedDataLabels === "undefined"){
+
+		if (typeof this.fixedDataLabels === "undefined") {
 			this.fixedDataLabels = this.displayData.labels;
 		} else {
 			this.displayData.labels.forEach(element => {
 				if (this.fixedDataLabels.indexOf(element) === -1) {
 					this.fixedDataLabels.push(element);
 				}
-			})
+			});
 		}
 
 		return keys;
