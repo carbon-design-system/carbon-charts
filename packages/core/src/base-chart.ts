@@ -41,6 +41,8 @@ export class BaseChart {
 		tooltips: null
 	};
 
+	fixedDataLabels;
+
 	constructor(holder: Element, configs: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
 
@@ -161,6 +163,16 @@ export class BaseChart {
 				keys[key] = Configuration.legend.items.status.DISABLED;
 			}
 		});
+		
+		if(typeof this.fixedDataLabels === "undefined"){
+			this.fixedDataLabels = this.displayData.labels;
+		} else {
+			this.displayData.labels.forEach(element => {
+				if (this.fixedDataLabels.indexOf(element) === -1) {
+					this.fixedDataLabels.push(element);
+				}
+			})
+		}
 
 		return keys;
 	}
@@ -191,7 +203,7 @@ export class BaseChart {
 
 	setColorScale() {
 		this.displayData.datasets.forEach(dataset => {
-			this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.displayData.labels);
+			this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.fixedDataLabels);
 		});
 	}
 
