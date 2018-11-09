@@ -157,7 +157,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([0,"vendors~main"]);
+/******/ 	deferredModules.push(["./demo/index.ts","vendors~main"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -3950,9 +3950,9 @@ function arcTween(a, arcFunc) {
   !*** ./src/polyfills.ts ***!
   \**************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-(function () {
+/* WEBPACK VAR INJECTION */(function(global) {(function () {
     if (typeof window["CustomEvent"] === "function")
         return false;
     function CustomEvent(event, params) {
@@ -3965,7 +3965,17 @@ function arcTween(a, arcFunc) {
     CustomEvent.prototype = window["Event"].prototype;
     window["CustomEvent"] = CustomEvent;
 })();
+// Avoid multiple instances of babel-polyfill
+function idempotentBabelPolyfill() {
+    if (!global["_babelPolyfill"] && (typeof window === "undefined" || !window["_babelPolyfill"])) {
+        return __webpack_require__(/*! babel-polyfill */ "../../node_modules/babel-polyfill/lib/index.js");
+    }
+    return null;
+}
+;
+idempotentBabelPolyfill();
 
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/global.js */ "../../node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -4574,19 +4584,6 @@ var Tools;
     }
     Tools.getXTransformsValue = getXTransformsValue;
 })(Tools || (Tools = {}));
-
-
-/***/ }),
-
-/***/ 0:
-/*!********************************************!*\
-  !*** multi babel-polyfill ./demo/index.ts ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(/*! babel-polyfill */"../../node_modules/babel-polyfill/lib/index.js");
-module.exports = __webpack_require__(/*! ./demo/index.ts */"./demo/index.ts");
 
 
 /***/ })
