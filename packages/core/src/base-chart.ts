@@ -644,9 +644,12 @@ export class BaseChart {
 				.enter()
 					.append("li")
 					.classed("legend-btn", true)
+					.classed("clickable", this.options.legendClickable)
 					.classed("active", d => d.value === Configuration.legend.items.status.ACTIVE)
 					.classed("not-allowed", d => activeLegendItems.length === 1 && d.value === Configuration.legend.items.status.ACTIVE)
 					.on("click", (clickedItem, e) => {
+						if (!this.options.legendClickable) return
+
 						const legendButton = select(event.currentTarget);
 						const enabling = !legendButton.classed("active");
 
@@ -718,6 +721,8 @@ export class BaseChart {
 		tooltip.classed("arrow-right", true);
 		tooltip.append("div").attr("class", "arrow");
 		tooltip.style("left", `${mouseXPoint - Configuration.tooltip.width - Configuration.tooltip.arrowWidth}px`);
+	
+		if (this.options.legendClickable) this.addLegendCircleHoverEffect();
 	}
 
 	showLabelTooltip(d, leftSide) {

@@ -92,6 +92,20 @@ $default_transition: all .1s ease-out;
 		width: 100%;
 	}
 
+	.legend-btn {
+		&.clickable {
+			&:hover {
+				cursor: pointer;
+			}
+
+			.legend-circle {
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+	}
+
 	.legend {
 		float: right;
 		margin-top: 0;
@@ -118,18 +132,6 @@ $default_transition: all .1s ease-out;
 		line-height: 20px;
 		font-size: 12px;
 		margin-bottom: 0;
-
-		&.clickable {
-			&:hover {
-				cursor: pointer;
-			}
-
-			.legend-circle {
-				&:hover {
-					cursor: pointer;
-				}
-			}
-		}
 
 		.legend-circle {
 			display: inherit;
