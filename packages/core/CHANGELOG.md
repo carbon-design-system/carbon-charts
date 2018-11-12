@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/IBM/carbon-charts/compare/v0.7.0...v0.7.1) (2018-11-12)
+
+
+### Bug Fixes
+
+* **core:** Refactor thresholds to support a range of values, closes [#85](https://github.com/IBM/carbon-charts/issues/85) ([50b44c0](https://github.com/IBM/carbon-charts/commit/50b44c0))
+
+
+
+
+
 # [0.7.0](https://github.com/IBM/carbon-charts/compare/v0.6.2...v0.7.0) (2018-11-12)
 
 
