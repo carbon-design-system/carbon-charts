@@ -434,7 +434,7 @@ export class BaseAxisChart extends BaseChart {
 			: this.innerWrap.append("g").classed("thresholds", true).selectAll("rect").data(thresholds);
 
 		const calculateYPosition = d => {
-			return Math.max(0, this.y(d.range[1]))
+			return Math.max(0, this.y(d.range[1]));
 		};
 
 		const calculateHeight = d => {
