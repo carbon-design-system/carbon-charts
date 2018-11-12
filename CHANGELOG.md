@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/IBM/carbon-charts/compare/v0.6.2...v0.7.0) (2018-11-12)
+
+
+### Features
+
+* **core:** Automatic calculation of DonutCenter value, closes [#83](https://github.com/IBM/carbon-charts/issues/83) ([d20e883](https://github.com/IBM/carbon-charts/commit/d20e883))
+
+
+
+
+
 ## [0.6.2](https://github.com/IBM/carbon-charts/compare/v0.6.1...v0.6.2) (2018-11-12)
 
 

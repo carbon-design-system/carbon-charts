@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-angular",
-	"version": "0.6.2",
+	"version": "0.7.0",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"repository": {
@@ -24,7 +24,7 @@
 		"zone.js": "0.8.18"
 	},
 	"dependencies": {
-		"@carbon/charts": "^0.6.2"
+		"@carbon/charts": "^0.7.0"
 	},
 	"devDependencies": {
 		"@angular/animations": "6.0.0",
