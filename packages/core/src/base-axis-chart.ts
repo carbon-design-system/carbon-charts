@@ -408,18 +408,6 @@ export class BaseAxisChart extends BaseChart {
 			.tickSizeInner(-this.getChartSize().width)
 			.tickSizeOuter(0);
 
-		if (thresholds && thresholds.length > 0) {
-			const thresholdTickValues = thresholds.map(e => {
-				if (e.value) { return e.value; }
-				console.error("Missing threshold value: ", e);
-			});
-
-			// TickValues seem to ignore the first element of the array
-			// This workaround is a temporary solution
-			thresholdTickValues.unshift(0);
-			yGrid.tickValues(thresholdTickValues);
-		}
-
 		yGrid.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
 
 		const g = this.innerWrap.select(".y.grid")
@@ -429,67 +417,74 @@ export class BaseAxisChart extends BaseChart {
 		this.cleanGrid(g);
 
 		if (thresholds && thresholds.length > 0) {
-			this.addOrUpdateThresholds(g);
+			this.addOrUpdateThresholds(g, false);
 		}
 	}
 
 	addOrUpdateThresholds(yGrid, animate?) {
-		const { thresholds } = this.options.scales.y;
-		const thresholdDimensions = [];
+		const t = animate === false ? this.getInstantTransition() : this.getDefaultTransition();
+
 		const width = this.getChartSize().width;
+		const { thresholds } = this.options.scales.y;
 
-		let prevBase = this.y(0);
-		let gThresholdContainer = (yGrid.select("g.threshold-container").nodes().length > 0)
-			? yGrid.select("g.threshold-container")
-			: yGrid.append("g").attr("class", "threshold-container");
+		// Check if the thresholds container <g> exists
+		const thresholdContainerExists = this.innerWrap.select("g.thresholds").nodes().length > 0;
+		const thresholdRects = thresholdContainerExists
+			? this.innerWrap.selectAll("g.thresholds rect")
+			: this.innerWrap.append("g").classed("thresholds", true).selectAll("rect").data(thresholds);
 
-		// iterate ticks to find y offset, and height
-		yGrid.selectAll(".tick")
-			.each(function(d, i) {
-				const y = Tools.getTranformOffsets(select(this).attr("transform")).y;
-				// draw rectangle between previous tick and the current tick
-				const height = Math.abs(prevBase - y);
-				const theme = thresholds[i].theme;
+		const calculateHeight = d => {
+			const height = Math.abs(this.y(d.range[1]) - this.y(d.range[0]));
+				
+			// If the threshold is getting cropped because it is extending beyond
+			// the top of the chart, update its height to reflect the crop
+			if (this.y(d.range[1]) < 0) {
+				return Math.max(0, height + this.y(d.range[1]));
+			}
 
-				thresholdDimensions.push({
-					height: height,
-					width: width,
-					y: y,
-					theme: theme
-				});
-				// rectangles are drawn stacked ontop of each other, so y of the current rect
-				// is used as the base of the next one
-				prevBase = y;
-			});
+			return Math.max(0, height);
+		};
 
-		// bind rect to rectangle dimensions
-		gThresholdContainer = gThresholdContainer
-			.selectAll("rect")
-			.data(thresholdDimensions);
+		const calculateOpacity = d => {
+			const height = Math.abs(this.y(d.range[1]) - this.y(d.range[0]));
 
-		// update
-		gThresholdContainer
-			.transition(animate === false ? this.getInstantTransition() : this.getDefaultTransition())
-			.attr("height", d => d.height)
-			.attr("width", d => d.width)
-			.attr("y", d => d.y )
-			.style("fill", d => Configuration.scales.y.thresholds.colors[d.theme]);
+			// If the threshold is to be shown anywhere outside of the top edge of the chart
+			// Hide it
+			if (this.y(d.range[1]) + height <= 0) {
+				return 0;
+			}
 
-		// enter
-		gThresholdContainer
-			.enter()
-				.append("rect")
-				.attr("height", d => d.height)
-				.attr("width", d => d.width)
-				.attr("y", d => d.y )
-				.style("fill", d => Configuration.scales.y.thresholds.colors[d.theme]);
+			return 1;
+		};
 
-		// exit
-		gThresholdContainer
-			.exit()
-				.transition(this.getDefaultTransition())
-				.style("opacity", 0)
-				.remove();
+		// Applies to thresholds being added
+		thresholdRects.enter()
+			.append("rect")
+			.classed("bar", true)
+			.attr("x", 0)
+			.attr("y", d => Math.max(0, this.y(d.range[1])))
+			.attr("width", width)
+			.attr("height", d => calculateHeight(d))
+			.attr("fill", d => Configuration.scales.y.thresholds.colors[d.theme])
+			.attr("opacity", 0)
+			.transition(t)
+			.attr("opacity", d => calculateOpacity(d));
+
+		// Update thresholds
+		thresholdRects
+			.transition(t)
+			.attr("x", 0)
+			.attr("y", d => Math.max(0, this.y(d.range[1])))
+			.attr("width", width)
+			.attr("height", d => calculateHeight(d))
+			.attr("opacity", d => calculateOpacity(d))
+			.attr("fill", d => Configuration.scales.y.thresholds.colors[d.theme]);
+
+		// Applies to thresholds getting removed
+		thresholdRects.exit()
+			.transition(t)
+			.style("opacity", 0)
+			.remove();
 	}
 
 	updateXandYGrid(noAnimation?: boolean) {
@@ -520,18 +515,8 @@ export class BaseAxisChart extends BaseChart {
 				.tickSizeOuter(0)
 				.tickFormat("" as any);
 
-			if (thresholds && thresholds.length > 0) {
-				const thresholdTickValues = thresholds.map(e => {
-					if (e.value) { return e.value; }
-					console.error("Missing threshold value: ", e);
-				});
-				// for some reason tickValues ignore the first element of the array
-				// passed to it so this workaround
-				thresholdTickValues.unshift(0);
-				yGrid.tickValues(thresholdTickValues);
-			}
-				// .ticks(10);
 			const g_yGrid = this.innerWrap.select(".y.grid")
+				.transition(t)
 				.attr("transform", `translate(0, 0)`)
 				.call(yGrid);
 
@@ -550,7 +535,6 @@ export class BaseAxisChart extends BaseChart {
 			.attr("stroke", Configuration.grid.strokeColor);
 		g.selectAll("text").style("display", "none").remove();
 		g.select(".domain").style("stroke", "none");
-		g.select(".tick").remove();
 	}
 
 	// TODO - Refactor
