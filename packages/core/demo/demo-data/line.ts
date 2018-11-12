@@ -114,7 +114,7 @@ export const lineOptions = {
 			formatter: axisValue => `${axisValue / 1000}k`,
 			thresholds: [
 				{
-					range: [0, 30000],
+					range: [-20000, 30000],
 					theme: "success"
 				},
 				{
