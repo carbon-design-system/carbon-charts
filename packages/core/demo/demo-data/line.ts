@@ -46,6 +46,8 @@ export const curvedLineOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
+			yMaxAdjuster: yMax => yMax * 1.2,
+			yMinAdjuster: yMin => yMin * 1.2,
 			formatter: axisValue => `${axisValue / 1000}k`
 		},
 		y2: {
@@ -107,18 +109,20 @@ export const lineOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
+			yMaxAdjuster: yMax => yMax * 1.2,
+			yMinAdjuster: yMin => yMin * 1.2,
 			formatter: axisValue => `${axisValue / 1000}k`,
 			thresholds: [
 				{
-					value : 10000,
+					range: [0, 30000],
 					theme: "success"
 				},
 				{
-					value : 40000,
+					range: [30000, 40000],
 					theme: "danger"
 				},
 				{
-					value: 50000,
+					range: [40000, 70000],
 					theme: "warning"
 				}
 			]
