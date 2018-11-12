@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.2](https://github.com/IBM/carbon-charts/compare/v0.6.1...v0.6.2) (2018-11-12)
+
+
+### Bug Fixes
+
+* **$core:** Remove hover effect and pointer on non-clickable legends ([dc9a2f2](https://github.com/IBM/carbon-charts/commit/dc9a2f2)), closes [#71](https://github.com/IBM/carbon-charts/issues/71)
+
+
+
+
+
 ## [0.6.1](https://github.com/IBM/carbon-charts/compare/v0.6.0...v0.6.1) (2018-11-09)
 
 
