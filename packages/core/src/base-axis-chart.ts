@@ -433,13 +433,22 @@ export class BaseAxisChart extends BaseChart {
 			? this.innerWrap.selectAll("g.thresholds rect")
 			: this.innerWrap.append("g").classed("thresholds", true).selectAll("rect").data(thresholds);
 
+		const calculateYPosition = d => {
+			return Math.max(0, this.y(d.range[1]))
+		};
+
 		const calculateHeight = d => {
 			const height = Math.abs(this.y(d.range[1]) - this.y(d.range[0]));
+			const yMax = this.y(this.y.domain()[0]);
 
 			// If the threshold is getting cropped because it is extending beyond
 			// the top of the chart, update its height to reflect the crop
 			if (this.y(d.range[1]) < 0) {
 				return Math.max(0, height + this.y(d.range[1]));
+			} else if (this.y(d.range[1]) + height > yMax) {
+				// If the threshold is getting cropped because it is extending beyond
+				// the bottom of the chart, update its height to reflect the crop
+				return Math.max(0, yMax - calculateYPosition(d));
 			}
 
 			return Math.max(0, height);
@@ -448,8 +457,8 @@ export class BaseAxisChart extends BaseChart {
 		const calculateOpacity = d => {
 			const height = Math.abs(this.y(d.range[1]) - this.y(d.range[0]));
 
-			// If the threshold is to be shown anywhere outside of the top edge of the chart
-			// Hide it
+			// If the threshold is to be shown anywhere
+			// outside of the top edge of the chart, hide it
 			if (this.y(d.range[1]) + height <= 0) {
 				return 0;
 			}
@@ -462,7 +471,7 @@ export class BaseAxisChart extends BaseChart {
 			.append("rect")
 			.classed("bar", true)
 			.attr("x", 0)
-			.attr("y", d => Math.max(0, this.y(d.range[1])))
+			.attr("y", d => calculateYPosition(d))
 			.attr("width", width)
 			.attr("height", d => calculateHeight(d))
 			.attr("fill", d => Configuration.scales.y.thresholds.colors[d.theme])
@@ -474,7 +483,7 @@ export class BaseAxisChart extends BaseChart {
 		thresholdRects
 			.transition(t)
 			.attr("x", 0)
-			.attr("y", d => Math.max(0, this.y(d.range[1])))
+			.attr("y", d => calculateYPosition(d))
 			.attr("width", width)
 			.attr("height", d => calculateHeight(d))
 			.attr("opacity", d => calculateOpacity(d))
