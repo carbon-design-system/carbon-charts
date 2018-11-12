@@ -12,8 +12,10 @@ export class DonutChart extends PieChart {
 		super(holder, configs, "donut");
 
 		// Check if the DonutCenter object is provided
-		if (configs.options.center) {
-			this.center = configs.options.center;
+		if (configs.options.centerLabel) {
+			this.center = new DonutCenter({
+				label: configs.options.centerLabel
+			});
 		}
 	}
 
@@ -22,6 +24,9 @@ export class DonutChart extends PieChart {
 
 		// Draw the center text
 		if (this.center && this.center.configs) {
+			const sumOfDatapoints = this.displayData.datasets[0].data.reduce((accum, currVal) => accum + currVal.value, 0);
+			this.center.configs.number = sumOfDatapoints;
+
 			this.center.draw(this.innerWrap);
 		}
 	}
@@ -35,6 +40,17 @@ export class DonutChart extends PieChart {
 				// Trigger resize on DonutCenter as well
 				this.center.resize(this.innerWrap, this.getChartSize(this.container));
 			}
+		}
+	}
+
+	update() {
+		super.update();
+
+		if (this.center) {
+			const sumOfDatapoints = this.displayData.datasets[0].data.reduce((accum, currVal) => accum + currVal.value, 0);
+
+			this.center.configs.number = sumOfDatapoints;
+			this.center.update();
 		}
 	}
 }
