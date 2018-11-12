@@ -164,7 +164,7 @@ export class BaseChart {
 			}
 		});
 
-		if (typeof this.fixedDataLabels === "undefined") {
+		if (!this.fixedDataLabels) {
 			this.fixedDataLabels = this.displayData.labels;
 		} else {
 			this.displayData.labels.forEach(element => {
