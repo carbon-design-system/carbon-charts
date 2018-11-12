@@ -24,8 +24,7 @@
 	"dependencies": {
 		"@carbon/charts": "^0.7.1",
 		"react": "16.0.0",
-		"react-dom": "16.4.2",
-		"react-icons": "2.2.7"
+		"react-dom": "16.4.2"
 	},
 	"devDependencies": {
 		"@storybook/addon-options": "3.4.10",
