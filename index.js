@@ -2216,7 +2216,10 @@ var BaseChart = /** @class */ (function () {
         if (this.getActiveLegendItems().length === 1) {
             c.selectAll(".legend-btn.active").classed("not-allowed", true);
         }
+        // Add hover effect for legend item circles
+        self.addLegendCircleHoverEffect();
         c.selectAll(".legend-btn").each(function () {
+            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this).classed("clickable", true);
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this).on("click", function () {
                 c.selectAll(".chart-tooltip").remove();
                 c.selectAll(".label-tooltip").remove();
@@ -2363,8 +2366,6 @@ var BaseChart = /** @class */ (function () {
             }
             return "white";
         });
-        // Add hover effect for legend item circles
-        this.addLegendCircleHoverEffect();
     };
     BaseChart.prototype.positionLegend = function () {
         if (this.container.select(".legend-tooltip").nodes().length > 0
@@ -2410,7 +2411,7 @@ var BaseChart = /** @class */ (function () {
         this.positionLegend();
     };
     BaseChart.prototype.addLegendCircleHoverEffect = function () {
-        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["selectAll"])("li.legend-btn")
+        this.container.selectAll("li.legend-btn")
             .on("mouseover", function () {
             var circleRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this).select("div.legend-circle");
             var color = circleRef.node().style.backgroundColor.substring(4, circleRef.node().style.backgroundColor.length - 1);
@@ -2497,9 +2498,13 @@ var BaseChart = /** @class */ (function () {
                 .enter()
                 .append("li")
                 .classed("legend-btn", true)
+                .classed("clickable", this.options.legendClickable)
                 .classed("active", function (d) { return d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE; })
                 .classed("not-allowed", function (d) { return activeLegendItems_1.length === 1 && d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE; })
                 .on("click", function (clickedItem, e) {
+                if (!_this.options.legendClickable) {
+                    return;
+                }
                 var legendButton = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(d3_selection__WEBPACK_IMPORTED_MODULE_0__["event"].currentTarget);
                 var enabling = !legendButton.classed("active");
                 if (activeLegendItems_1.length > 1 || enabling) {
@@ -2558,7 +2563,6 @@ var BaseChart = /** @class */ (function () {
             })
                 .style("border-style", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].inactive.borderStyle)
                 .style("border-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].inactive.borderWidth);
-            this.addLegendCircleHoverEffect();
             legendContent.append("text")
                 .text(function (d) { return d.key; });
         }
@@ -2566,6 +2570,9 @@ var BaseChart = /** @class */ (function () {
         tooltip.classed("arrow-right", true);
         tooltip.append("div").attr("class", "arrow");
         tooltip.style("left", mouseXPoint - _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].width - _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].arrowWidth + "px");
+        if (this.options.legendClickable) {
+            this.addLegendCircleHoverEffect();
+        }
     };
     BaseChart.prototype.showLabelTooltip = function (d, leftSide) {
         var _this = this;
@@ -3856,7 +3863,6 @@ var PieChart = /** @class */ (function (_super) {
         });
         legend.append("text")
             .text(function (d) { return d; });
-        this.addLegendCircleHoverEffect();
     };
     PieChart.prototype.resizeChart = function () {
         var _this = this;

@@ -44,6 +44,10 @@
   .chart-wrapper .legend-wrapper {
     height: 40px;
     width: 100%; }
+  .chart-wrapper .legend-btn.clickable:hover {
+    cursor: pointer; }
+  .chart-wrapper .legend-btn.clickable .legend-circle:hover {
+    cursor: pointer; }
   .chart-wrapper .legend {
     float: right;
     margin-top: 0;
@@ -66,8 +70,13 @@
     line-height: 20px;
     font-size: 12px;
     margin-bottom: 0; }
-    .chart-wrapper .legend-btn:hover {
-      cursor: pointer; }
+    .chart-wrapper .legend-btn .legend-circle {
+      display: inherit;
+      height: 12px;
+      width: 12px;
+      border-radius: 3px;
+      margin: 0 5px 5px 15px;
+      box-sizing: border-box; }
     .chart-wrapper .legend-btn span {
       display: inline; }
     .chart-wrapper .legend-btn text {
@@ -77,15 +86,6 @@
       white-space: nowrap;
       overflow: hidden;
       display: inherit; }
-    .chart-wrapper .legend-btn .legend-circle {
-      display: inherit;
-      height: 12px;
-      width: 12px;
-      border-radius: 3px;
-      margin: 0 5px 5px 15px;
-      box-sizing: border-box; }
-      .chart-wrapper .legend-btn .legend-circle:hover {
-        cursor: pointer; }
     .chart-wrapper .legend-btn.not-allowed {
       cursor: default; }
       .chart-wrapper .legend-btn.not-allowed .legend-circle:hover {
