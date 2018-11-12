@@ -577,6 +577,8 @@ var curvedLineOptions = {
             title: "2018 Annual Sales Figures",
         },
         y: {
+            yMaxAdjuster: function (yMax) { return yMax * 1.2; },
+            yMinAdjuster: function (yMin) { return yMin * 1.2; },
             formatter: function (axisValue) { return axisValue / 1000 + "k"; }
         },
         y2: {
@@ -635,18 +637,20 @@ var lineOptions = {
             title: "2018 Annual Sales Figures",
         },
         y: {
+            yMaxAdjuster: function (yMax) { return yMax * 1.2; },
+            yMinAdjuster: function (yMin) { return yMin * 1.2; },
             formatter: function (axisValue) { return axisValue / 1000 + "k"; },
             thresholds: [
                 {
-                    value: 10000,
+                    range: [-20000, 30000],
                     theme: "success"
                 },
                 {
-                    value: 40000,
+                    range: [30000, 40000],
                     theme: "danger"
                 },
                 {
-                    value: 50000,
+                    range: [40000, 70000],
                     theme: "warning"
                 }
             ]
@@ -1716,75 +1720,76 @@ var BaseAxisChart = /** @class */ (function (_super) {
         var yGrid = Object(d3_axis__WEBPACK_IMPORTED_MODULE_2__["axisLeft"])(this.y)
             .tickSizeInner(-this.getChartSize().width)
             .tickSizeOuter(0);
-        if (thresholds && thresholds.length > 0) {
-            var thresholdTickValues = thresholds.map(function (e) {
-                if (e.value) {
-                    return e.value;
-                }
-                console.error("Missing threshold value: ", e);
-            });
-            // TickValues seem to ignore the first element of the array
-            // This workaround is a temporary solution
-            thresholdTickValues.unshift(0);
-            yGrid.tickValues(thresholdTickValues);
-        }
         yGrid.ticks(scales.y.numberOfTicks || _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].y.numberOfTicks);
         var g = this.innerWrap.select(".y.grid")
             .attr("transform", "translate(0, 0)")
             .call(yGrid);
         this.cleanGrid(g);
         if (thresholds && thresholds.length > 0) {
-            this.addOrUpdateThresholds(g);
+            this.addOrUpdateThresholds(g, false);
         }
     };
     BaseAxisChart.prototype.addOrUpdateThresholds = function (yGrid, animate) {
-        var thresholds = this.options.scales.y.thresholds;
-        var thresholdDimensions = [];
+        var _this = this;
+        var t = animate === false ? this.getInstantTransition() : this.getDefaultTransition();
         var width = this.getChartSize().width;
-        var prevBase = this.y(0);
-        var gThresholdContainer = (yGrid.select("g.threshold-container").nodes().length > 0)
-            ? yGrid.select("g.threshold-container")
-            : yGrid.append("g").attr("class", "threshold-container");
-        // iterate ticks to find y offset, and height
-        yGrid.selectAll(".tick")
-            .each(function (d, i) {
-            var y = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getTranformOffsets(Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this).attr("transform")).y;
-            // draw rectangle between previous tick and the current tick
-            var height = Math.abs(prevBase - y);
-            var theme = thresholds[i].theme;
-            thresholdDimensions.push({
-                height: height,
-                width: width,
-                y: y,
-                theme: theme
-            });
-            // rectangles are drawn stacked ontop of each other, so y of the current rect
-            // is used as the base of the next one
-            prevBase = y;
-        });
-        // bind rect to rectangle dimensions
-        gThresholdContainer = gThresholdContainer
-            .selectAll("rect")
-            .data(thresholdDimensions);
-        // update
-        gThresholdContainer
-            .transition(animate === false ? this.getInstantTransition() : this.getDefaultTransition())
-            .attr("height", function (d) { return d.height; })
-            .attr("width", function (d) { return d.width; })
-            .attr("y", function (d) { return d.y; })
-            .style("fill", function (d) { return _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].y.thresholds.colors[d.theme]; });
-        // enter
-        gThresholdContainer
-            .enter()
+        var thresholds = this.options.scales.y.thresholds;
+        // Check if the thresholds container <g> exists
+        var thresholdContainerExists = this.innerWrap.select("g.thresholds").nodes().length > 0;
+        var thresholdRects = thresholdContainerExists
+            ? this.innerWrap.selectAll("g.thresholds rect")
+            : this.innerWrap.append("g").classed("thresholds", true).selectAll("rect").data(thresholds);
+        var calculateYPosition = function (d) {
+            return Math.max(0, _this.y(d.range[1]));
+        };
+        var calculateHeight = function (d) {
+            var height = Math.abs(_this.y(d.range[1]) - _this.y(d.range[0]));
+            var yMax = _this.y(_this.y.domain()[0]);
+            // If the threshold is getting cropped because it is extending beyond
+            // the top of the chart, update its height to reflect the crop
+            if (_this.y(d.range[1]) < 0) {
+                return Math.max(0, height + _this.y(d.range[1]));
+            }
+            else if (_this.y(d.range[1]) + height > yMax) {
+                // If the threshold is getting cropped because it is extending beyond
+                // the bottom of the chart, update its height to reflect the crop
+                return Math.max(0, yMax - calculateYPosition(d));
+            }
+            return Math.max(0, height);
+        };
+        var calculateOpacity = function (d) {
+            var height = Math.abs(_this.y(d.range[1]) - _this.y(d.range[0]));
+            // If the threshold is to be shown anywhere
+            // outside of the top edge of the chart, hide it
+            if (_this.y(d.range[1]) + height <= 0) {
+                return 0;
+            }
+            return 1;
+        };
+        // Applies to thresholds being added
+        thresholdRects.enter()
             .append("rect")
-            .attr("height", function (d) { return d.height; })
-            .attr("width", function (d) { return d.width; })
-            .attr("y", function (d) { return d.y; })
-            .style("fill", function (d) { return _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].y.thresholds.colors[d.theme]; });
-        // exit
-        gThresholdContainer
-            .exit()
-            .transition(this.getDefaultTransition())
+            .classed("bar", true)
+            .attr("x", 0)
+            .attr("y", function (d) { return calculateYPosition(d); })
+            .attr("width", width)
+            .attr("height", function (d) { return calculateHeight(d); })
+            .attr("fill", function (d) { return _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].y.thresholds.colors[d.theme]; })
+            .attr("opacity", 0)
+            .transition(t)
+            .attr("opacity", function (d) { return calculateOpacity(d); });
+        // Update thresholds
+        thresholdRects
+            .transition(t)
+            .attr("x", 0)
+            .attr("y", function (d) { return calculateYPosition(d); })
+            .attr("width", width)
+            .attr("height", function (d) { return calculateHeight(d); })
+            .attr("opacity", function (d) { return calculateOpacity(d); })
+            .attr("fill", function (d) { return _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].y.thresholds.colors[d.theme]; });
+        // Applies to thresholds getting removed
+        thresholdRects.exit()
+            .transition(t)
             .style("opacity", 0)
             .remove();
     };
@@ -1811,20 +1816,8 @@ var BaseAxisChart = /** @class */ (function (_super) {
                 .tickSizeInner(-chartSize.width)
                 .tickSizeOuter(0)
                 .tickFormat("");
-            if (thresholds && thresholds.length > 0) {
-                var thresholdTickValues = thresholds.map(function (e) {
-                    if (e.value) {
-                        return e.value;
-                    }
-                    console.error("Missing threshold value: ", e);
-                });
-                // for some reason tickValues ignore the first element of the array
-                // passed to it so this workaround
-                thresholdTickValues.unshift(0);
-                yGrid.tickValues(thresholdTickValues);
-            }
-            // .ticks(10);
             var g_yGrid = _this.innerWrap.select(".y.grid")
+                .transition(t)
                 .attr("transform", "translate(0, 0)")
                 .call(yGrid);
             g_yGrid.transition(t);
@@ -1839,7 +1832,6 @@ var BaseAxisChart = /** @class */ (function (_super) {
             .attr("stroke", _configuration__WEBPACK_IMPORTED_MODULE_5__["grid"].strokeColor);
         g.selectAll("text").style("display", "none").remove();
         g.select(".domain").style("stroke", "none");
-        g.select(".tick").remove();
     };
     // TODO - Refactor
     BaseAxisChart.prototype.wrapTick = function (ticks) {
