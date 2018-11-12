@@ -435,7 +435,7 @@ export class BaseAxisChart extends BaseChart {
 
 		const calculateHeight = d => {
 			const height = Math.abs(this.y(d.range[1]) - this.y(d.range[0]));
-				
+
 			// If the threshold is getting cropped because it is extending beyond
 			// the top of the chart, update its height to reflect the crop
 			if (this.y(d.range[1]) < 0) {
