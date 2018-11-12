@@ -137,20 +137,6 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 				return newDataset;
 			});
 
-			if (chartType === "donut") {
-				setTimeout(() => {
-					// Update DonutCenter values
-					const { number: centerNumber } = classyChartObject.center.configs;
-					let newCenterNumber = Math.floor(Math.max(0.2 * centerNumber, centerNumber * Math.random() * (Math.random() * 5)));
-					if (newCenterNumber <= 10) {
-						newCenterNumber = 10000;
-					}
-
-					classyChartObject.center.configs.number = newCenterNumber;
-					classyChartObject.center.update();
-				}, delay || 0);
-			}
-
 			break;
 		default:
 		case "grouped-bar":
