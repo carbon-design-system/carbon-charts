@@ -9,10 +9,7 @@ module.exports = env => {
 	return {
 		mode: "production",
 		devtool: "source-map",
-		entry: [
-			"babel-polyfill",
-			"./src/index.ts"
-		],
+		entry: "./src/index.ts",
 		output: {
 			path: __dirname + "/dist",
 			filename: "index.js",
