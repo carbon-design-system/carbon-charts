@@ -672,8 +672,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "donutOptions", function() { return donutOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pieData", function() { return pieData; });
 /* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./demo/demo-data/colors.ts");
-/* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../src/index */ "./src/index.ts");
-
 
 var pieOptions = {
     accessibility: false,
@@ -686,10 +684,7 @@ var donutOptions = {
     legendClickable: true,
     containerResizable: true,
     colors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
-    center: new _src_index__WEBPACK_IMPORTED_MODULE_1__["DonutCenter"]({
-        number: 25423,
-        label: "Browsers"
-    })
+    centerLabel: "Products"
 };
 var pieData = {
     labels: ["2V2N-9KYPM version 1", "L22I-P66EP-L22I-P66EP-L22I-P66EP", "JQAI-2M4L1", "J9DZ-F37AP",
@@ -698,7 +693,7 @@ var pieData = {
         {
             label: "Dataset 1",
             backgroundColors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
-            data: [100000, 200000, 600000, 100000, 400000, 450000, 300000, 70000, 20000, 120000]
+            data: [70000, 40000, 90000, 50000, 60000, 45000, 90000, 70000, 80000, 120000]
         }
     ]
 };
@@ -832,18 +827,6 @@ var changeDemoData = function (chartType, oldData, delay) {
                 var newDataset = Object.assign({}, dataset, { data: datasetNewData });
                 return newDataset;
             });
-            if (chartType === "donut") {
-                setTimeout(function () {
-                    // Update DonutCenter values
-                    var centerNumber = classyChartObject.center.configs.number;
-                    var newCenterNumber = Math.floor(Math.max(0.2 * centerNumber, centerNumber * Math.random() * (Math.random() * 5)));
-                    if (newCenterNumber <= 10) {
-                        newCenterNumber = 10000;
-                    }
-                    classyChartObject.center.configs.number = newCenterNumber;
-                    classyChartObject.center.update();
-                }, delay || 0);
-            }
             break;
         default:
         case "grouped-bar":
@@ -3133,13 +3116,13 @@ var selectors = {
 /*!****************************!*\
   !*** ./src/donut-chart.ts ***!
   \****************************/
-/*! exports provided: DonutChart, DonutCenter */
+/*! exports provided: DonutCenter, DonutChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DonutChart", function() { return DonutChart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DonutCenter", function() { return DonutCenter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DonutChart", function() { return DonutChart; });
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/index.js");
 /* harmony import */ var d3_interpolate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-interpolate */ "../../node_modules/d3-interpolate/index.js");
 /* harmony import */ var _pie_chart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pie-chart */ "./src/pie-chart.ts");
@@ -3158,36 +3141,6 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
-
-var DonutChart = /** @class */ (function (_super) {
-    __extends(DonutChart, _super);
-    function DonutChart(holder, configs) {
-        var _this = _super.call(this, holder, configs, "donut") || this;
-        // Check if the DonutCenter object is provided
-        if (configs.options.center) {
-            _this.center = configs.options.center;
-        }
-        return _this;
-    }
-    DonutChart.prototype.draw = function () {
-        _super.prototype.draw.call(this);
-        // Draw the center text
-        if (this.center && this.center.configs) {
-            this.center.draw(this.innerWrap);
-        }
-    };
-    DonutChart.prototype.resizeChart = function () {
-        if (this.innerWrap) {
-            // Inherit resizing logic from PieChart
-            _super.prototype.resizeChart.call(this);
-            if (this.center) {
-                // Trigger resize on DonutCenter as well
-                this.center.resize(this.innerWrap, this.getChartSize(this.container));
-            }
-        }
-    };
-    return DonutChart;
-}(_pie_chart__WEBPACK_IMPORTED_MODULE_2__["PieChart"]));
 
 var DonutCenter = /** @class */ (function () {
     function DonutCenter(configs) {
@@ -3249,6 +3202,48 @@ var DonutCenter = /** @class */ (function () {
     };
     return DonutCenter;
 }());
+
+var DonutChart = /** @class */ (function (_super) {
+    __extends(DonutChart, _super);
+    function DonutChart(holder, configs) {
+        var _this = _super.call(this, holder, configs, "donut") || this;
+        // Check if the DonutCenter object is provided
+        if (configs.options.centerLabel) {
+            _this.center = new DonutCenter({
+                label: configs.options.centerLabel
+            });
+        }
+        return _this;
+    }
+    DonutChart.prototype.draw = function () {
+        _super.prototype.draw.call(this);
+        // Draw the center text
+        if (this.center && this.center.configs) {
+            var sumOfDatapoints = this.displayData.datasets[0].data.reduce(function (accum, currVal) { return accum + currVal.value; }, 0);
+            this.center.configs.number = sumOfDatapoints;
+            this.center.draw(this.innerWrap);
+        }
+    };
+    DonutChart.prototype.resizeChart = function () {
+        if (this.innerWrap) {
+            // Inherit resizing logic from PieChart
+            _super.prototype.resizeChart.call(this);
+            if (this.center) {
+                // Trigger resize on DonutCenter as well
+                this.center.resize(this.innerWrap, this.getChartSize(this.container));
+            }
+        }
+    };
+    DonutChart.prototype.update = function () {
+        _super.prototype.update.call(this);
+        if (this.center) {
+            var sumOfDatapoints = this.displayData.datasets[0].data.reduce(function (accum, currVal) { return accum + currVal.value; }, 0);
+            this.center.configs.number = sumOfDatapoints;
+            this.center.update();
+        }
+    };
+    return DonutChart;
+}(_pie_chart__WEBPACK_IMPORTED_MODULE_2__["PieChart"]));
 
 function donutCenterNumberTween(d3Ref, newNumber) {
     // Remove commas from the current value string, and convert to an int
