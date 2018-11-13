@@ -29,7 +29,7 @@ export class BaseChart {
 	// Data
 	data: any;
 	displayData: any;
-	fixedDataLabels = [];
+	fixedDataLabels;
 
 	// Fill scales & fill related objects
 	patternScale = {};
