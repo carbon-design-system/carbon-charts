@@ -29,6 +29,7 @@ export class BaseChart {
 	// Data
 	data: any;
 	displayData: any;
+	fixedDataLabels = [];
 
 	// Fill scales & fill related objects
 	patternScale = {};
@@ -41,7 +42,7 @@ export class BaseChart {
 		tooltips: null
 	};
 
-	fixedDataLabels;
+
 
 	constructor(holder: Element, configs: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
