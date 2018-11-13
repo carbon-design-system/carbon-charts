@@ -2043,6 +2043,7 @@ var BaseChart = /** @class */ (function () {
         });
     };
     BaseChart.prototype.getKeysFromData = function () {
+        var _this = this;
         var datasets = this.displayData.datasets;
         var keys = {};
         if (this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS) {
@@ -2064,6 +2065,16 @@ var BaseChart = /** @class */ (function () {
                 keys[key] = _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.DISABLED;
             }
         });
+        if (!this.fixedDataLabels) {
+            this.fixedDataLabels = this.displayData.labels;
+        }
+        else {
+            this.displayData.labels.forEach(function (element) {
+                if (_this.fixedDataLabels.indexOf(element) === -1) {
+                    _this.fixedDataLabels.push(element);
+                }
+            });
+        }
         return keys;
     };
     BaseChart.prototype.getLegendType = function () {
@@ -2091,7 +2102,7 @@ var BaseChart = /** @class */ (function () {
     BaseChart.prototype.setColorScale = function () {
         var _this = this;
         this.displayData.datasets.forEach(function (dataset) {
-            _this.colorScale[dataset.label] = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleOrdinal"])().range(dataset.backgroundColors).domain(_this.displayData.labels);
+            _this.colorScale[dataset.label] = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleOrdinal"])().range(dataset.backgroundColors).domain(_this.fixedDataLabels);
         });
     };
     // TODO - Refactor
