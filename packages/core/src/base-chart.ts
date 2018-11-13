@@ -29,6 +29,7 @@ export class BaseChart {
 	// Data
 	data: any;
 	displayData: any;
+	fixedDataLabels;
 
 	// Fill scales & fill related objects
 	patternScale = {};
@@ -40,6 +41,8 @@ export class BaseChart {
 	eventHandlers = {
 		tooltips: null
 	};
+
+
 
 	constructor(holder: Element, configs: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
@@ -162,6 +165,16 @@ export class BaseChart {
 			}
 		});
 
+		if (!this.fixedDataLabels) {
+			this.fixedDataLabels = this.displayData.labels;
+		} else {
+			this.displayData.labels.forEach(element => {
+				if (this.fixedDataLabels.indexOf(element) === -1) {
+					this.fixedDataLabels.push(element);
+				}
+			});
+		}
+
 		return keys;
 	}
 
@@ -191,7 +204,7 @@ export class BaseChart {
 
 	setColorScale() {
 		this.displayData.datasets.forEach(dataset => {
-			this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.displayData.labels);
+			this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.fixedDataLabels);
 		});
 	}
 
