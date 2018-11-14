@@ -9,6 +9,7 @@
   "imageSize": 100,
   "commit": false,
   "badgeTemplate": "",
+  "contributorsPerLine": 5,
   "contributors": [
     {
       "login": "theiliad",
