@@ -5,40 +5,6 @@ import { interpolateNumber } from "d3-interpolate";
 import { PieChart } from "./pie-chart";
 import * as Configuration from "./configuration";
 
-export class DonutChart extends PieChart {
-	center: DonutCenter;
-
-	constructor(holder: Element, configs: any) {
-		super(holder, configs, "donut");
-
-		// Check if the DonutCenter object is provided
-		if (configs.options.center) {
-			this.center = configs.options.center;
-		}
-	}
-
-	draw() {
-		super.draw();
-
-		// Draw the center text
-		if (this.center && this.center.configs) {
-			this.center.draw(this.innerWrap);
-		}
-	}
-
-	resizeChart() {
-		if (this.innerWrap) {
-			// Inherit resizing logic from PieChart
-			super.resizeChart();
-
-			if (this.center) {
-				// Trigger resize on DonutCenter as well
-				this.center.resize(this.innerWrap, this.getChartSize(this.container));
-			}
-		}
-	}
-}
-
 export class DonutCenter {
 	configs: any;
 	oldConfigs: any;
@@ -110,6 +76,56 @@ export class DonutCenter {
 			svgElement.select("text.donut-title")
 				.style("font-size", Configuration.donut.centerText.titleFontSize * scaleRatio * Configuration.donut.centerText.magicScaleRatio + "px")
 				.attr("y", Configuration.donut.centerText.title.y * scaleRatio * Configuration.donut.centerText.magicScaleRatio);
+		}
+	}
+}
+
+export class DonutChart extends PieChart {
+	center: DonutCenter;
+
+	constructor(holder: Element, configs: any) {
+		super(holder, configs, "donut");
+
+		// Check if the DonutCenter object is provided
+		if (configs.options.centerLabel) {
+			this.center = new DonutCenter({
+				label: configs.options.centerLabel
+			});
+		}
+	}
+
+	draw() {
+		super.draw();
+
+		// Draw the center text
+		if (this.center && this.center.configs) {
+			const sumOfDatapoints = this.displayData.datasets[0].data.reduce((accum, currVal) => accum + currVal.value, 0);
+			this.center.configs.number = sumOfDatapoints;
+
+			this.center.draw(this.innerWrap);
+		}
+	}
+
+	resizeChart() {
+		if (this.innerWrap) {
+			// Inherit resizing logic from PieChart
+			super.resizeChart();
+
+			if (this.center) {
+				// Trigger resize on DonutCenter as well
+				this.center.resize(this.innerWrap, this.getChartSize(this.container));
+			}
+		}
+	}
+
+	update() {
+		super.update();
+
+		if (this.center) {
+			const sumOfDatapoints = this.displayData.datasets[0].data.reduce((accum, currVal) => accum + currVal.value, 0);
+
+			this.center.configs.number = sumOfDatapoints;
+			this.center.update();
 		}
 	}
 }

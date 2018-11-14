@@ -121,9 +121,9 @@ export const scales = {
 		numberOfTicks: 5,
 		thresholds: {
 			colors: {
-				"danger": "rgba(230, 35, 37, 0.15)",
-				"success": "rgba(254, 213, 0, 0.15)",
-				"warning": "rgba(0, 136, 75, 0.15)"
+				"danger": "rgba(255, 39, 41, 0.1)",
+				"success": "rgba(0, 212, 117, 0.1)",
+				"warning": "rgba(255, 214, 0, 0.1)"
 
 			}
 		}
