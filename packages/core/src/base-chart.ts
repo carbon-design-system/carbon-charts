@@ -53,7 +53,6 @@ export class BaseChart {
 		const {chartId, container} = this.setChartIDContainer();
 		this.container = container;
 		this.chartContainerID = chartId;
-
 		if (configs.options) {
 			this.options = Object.assign({}, this.options, configs.options);
 
@@ -362,8 +361,6 @@ export class BaseChart {
 		if (parent.select(".chart-wrapper").nodes().length > 0) {
 			container = parent.select(".chart-wrapper");
 			chartId = container.attr("chart-id");
-
-			container.selectAll(".chart-svg").remove();
 		} else {
 			chartId = this.id;
 			container = parent.append("div");

@@ -13,6 +13,7 @@
     "build:watch": "rm -rf dist && webpack -w --config webpack.build.js",
     "bundle:analyzer": "rm -rf dist && webpack --config webpack.build.js --env.bundleAnalyzer",
     "lint": "tslint -p tsconfig.json -c tslint.json",
+	"fix": "tslint --fix -p tsconfig.json -c tslint.json",
     "test": "karma start --single-run",
     "test:watch": "karma start --no-single-run"
   },

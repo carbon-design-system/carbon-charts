@@ -93,7 +93,9 @@ export class ComboChart extends BaseAxisChart {
 	updateChildrenScales() {
 		this.charts.forEach(chart => {
 			chart.instance.setXScale(this.x);
+			chart.instance.setXAxis();
 			chart.instance.setYScale(this.y);
+			chart.instance.setYAxis();
 		});
 	}
 
