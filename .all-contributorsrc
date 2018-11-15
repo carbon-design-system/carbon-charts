@@ -1,0 +1,117 @@
+{
+  "projectName": "carbon-charts",
+  "projectOwner": "theiliad",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "badgeTemplate": "",
+  "contributorsPerLine": 5,
+  "contributors": [
+    {
+      "login": "theiliad",
+      "name": "Eliad Moosavi",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/14989804?v=4",
+      "profile": "http://eMoosavi.com",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "infra"
+      ]
+    },
+    {
+      "login": "zvonimirfras",
+      "name": "Zvonimir Fras",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/9692126?v=4",
+      "profile": "http://www.zvonimirfras.com",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "cal-smith",
+      "name": "Callum Smith",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1744185?v=4",
+      "profile": "http://reallyawesomedomain.com",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "michc",
+      "name": "MichC",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1393278?v=4",
+      "profile": "https://github.com/michc",
+      "contributions": [
+        "design",
+        "doc"
+      ]
+    },
+    {
+      "login": "nicoleroppel",
+      "name": "nicoleroppel",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/43546639?v=4",
+      "profile": "https://github.com/nicoleroppel",
+      "contributions": [
+        "design",
+        "doc"
+      ]
+    },
+    {
+      "login": "dianatran18",
+      "name": "Diana Tran",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/43549567?v=4",
+      "profile": "https://github.com/dianatran18",
+      "contributions": [
+        "design",
+        "doc"
+      ]
+    },
+    {
+      "login": "JaimeMae",
+      "name": "Jaime Stockton",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/43579539?v=4",
+      "profile": "https://github.com/JaimeMae",
+      "contributions": [
+        "design",
+        "doc"
+      ]
+    },
+    {
+      "login": "PLopezD",
+      "name": "Pablo Lopez Domowicz",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/5810053?v=4",
+      "profile": "https://github.com/PLopezD",
+      "contributions": [
+        "design",
+        "doc"
+      ]
+    },
+    {
+      "login": "JohnPeng47",
+      "name": "John Peng",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/9957837?v=4",
+      "profile": "http://www.johnpeng47.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "t-mullen",
+      "name": "Thomas Mullen",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/14932492?v=4",
+      "profile": "https://github.com/t-mullen",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
+}
