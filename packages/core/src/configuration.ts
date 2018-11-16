@@ -171,7 +171,7 @@ export const lines = {
 			strokeWidth: 0,
 			strokeWidthAccessible: 2,
 			strokeOpacity: 1
-		},
+		}
 	}
 };
 
