@@ -1,5 +1,5 @@
 // D3 Imports
-import { select } from "d3-selection";
+import { select, selectAll, mouse } from "d3-selection";
 import { line } from "d3-shape";
 
 import { BaseAxisChart } from "./base-axis-chart";
