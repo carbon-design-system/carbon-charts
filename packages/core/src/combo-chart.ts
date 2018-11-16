@@ -2,6 +2,8 @@ import { BaseAxisChart } from "./base-axis-chart";
 
 import * as ChartTypes from "./index";
 
+import { select } from "d3-selection";
+
 // TODO - Support adding/removing charts when updating data
 export class ComboChart extends BaseAxisChart {
 	// Includes all the sub-charts
@@ -39,6 +41,41 @@ export class ComboChart extends BaseAxisChart {
 		return;
 	}
 
+	resizeChart(){
+		const chartSize: any = this.getChartSize(this.container);
+		const dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
+
+		// Resize the SVG
+		select(this.holder).select("svg")
+			.attr("width", `${dimensionToUseForScale}px`)
+			.attr("height", `${dimensionToUseForScale}px`);
+
+		this.updateXandYGrid(true);
+		// Scale out the domains
+		this.setXScale();
+		this.setYScale();
+	
+		// Set the x & y axis as well as their labels
+		this.setXAxis(true);
+		this.setYAxis(true);
+
+		super.resizeChart();
+
+		this.charts.forEach(chart => {
+			chart.instance.setXScale(this.x);
+			chart.instance.setYScale(this.y);
+
+			const chartType = chart.instance.options.type;
+			if (chartType == "line") {
+				chart.instance.updateElements(false, null);
+			} 
+			else if (chartType == "bar") {
+				const g = this.innerWrap.selectAll("g.bars g");
+				chart.instance.updateElements(false, null, g);
+			}
+		});
+	}
+
 	draw() {
 		// If charts have been initialized
 		if (this.charts.length) {
@@ -73,6 +110,8 @@ export class ComboChart extends BaseAxisChart {
 
 							this.interpolateValues(this.displayData);
 						};
+
+						chart.resizeChart = null;
 
 						// Add chart to the array of sub-charts
 						this.charts.push({
