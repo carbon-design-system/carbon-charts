@@ -202,7 +202,7 @@ export class BarChart extends BaseAxisChart {
 		if (!rect) {
 			rect = this.innerWrap.selectAll("rect.bar");
 		}
-		
+
 		const g = this.innerWrap.selectAll("g.bars g");
 		if (g.nodes().length > 0) {
 			g.transition(animate ? this.getDefaultTransition() : this.getInstantTransition())
