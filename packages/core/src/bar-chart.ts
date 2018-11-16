@@ -130,7 +130,7 @@ export class BarChart extends BaseAxisChart {
 		const rect = g.selectAll("rect.bar")
 			.data((d, index) => this.addLabelsToDataPoints(d, index));
 
-		this.updateElements(true, rect, g);
+		this.updateElements(true, rect);
 
 		// Add bar groups that need to be added now
 		const addedBars = g.enter()
@@ -193,7 +193,7 @@ export class BarChart extends BaseAxisChart {
 		this.dispatchEvent("update");
 	}
 
-	updateElements(animate: boolean, rect?: any, g?: any) {
+	updateElements(animate: boolean, rect?: any) {
 		const { scales } = this.options;
 
 		const chartSize = this.getChartSize();
@@ -202,8 +202,9 @@ export class BarChart extends BaseAxisChart {
 		if (!rect) {
 			rect = this.innerWrap.selectAll("rect.bar");
 		}
-
-		if (g) {
+		
+		const g = this.innerWrap.selectAll("g.bars g");
+		if (g.nodes().length > 0) {
 			g.transition(animate ? this.getDefaultTransition() : this.getInstantTransition())
 				.attr("transform", d => `translate(${this.x(d)}, 0)`);
 		}
@@ -241,7 +242,7 @@ export class BarChart extends BaseAxisChart {
 
 		// Apply new data to the bars
 		const g = this.innerWrap.selectAll("g.bars g");
-		this.updateElements(false, null, g);
+		this.updateElements(false, null);
 
 		super.resizeChart();
 	}

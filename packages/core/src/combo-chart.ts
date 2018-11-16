@@ -41,7 +41,7 @@ export class ComboChart extends BaseAxisChart {
 		return;
 	}
 
-	resizeChart(){
+	resizeChart() {
 		const chartSize: any = this.getChartSize(this.container);
 		const dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
 
@@ -54,7 +54,7 @@ export class ComboChart extends BaseAxisChart {
 		// Scale out the domains
 		this.setXScale();
 		this.setYScale();
-	
+
 		// Set the x & y axis as well as their labels
 		this.setXAxis(true);
 		this.setYAxis(true);
@@ -64,15 +64,7 @@ export class ComboChart extends BaseAxisChart {
 		this.charts.forEach(chart => {
 			chart.instance.setXScale(this.x);
 			chart.instance.setYScale(this.y);
-
-			const chartType = chart.instance.options.type;
-			if (chartType == "line") {
-				chart.instance.updateElements(false, null);
-			} 
-			else if (chartType == "bar") {
-				const g = this.innerWrap.selectAll("g.bars g");
-				chart.instance.updateElements(false, null, g);
-			}
+			chart.instance.updateElements(false, null);
 		});
 	}
 
