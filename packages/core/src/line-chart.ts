@@ -206,24 +206,56 @@ export class LineChart extends BaseAxisChart {
 		super.resizeChart();
 	}
 
+
 	addDataPointEventListener() {
 		const self = this;
-		const { thresholds } = this.options;
+		const { accessibility } = this.options;
+
+		this.svg.selectAll("gLines")
+			.on("click", function(d) {
+				self.dispatchEvent("line-onClick", d);
+			})
+			.on("mouseover", function(d) {
+				select(this)
+					.attr("stroke-width", Configuration.lines.points.mouseover.strokeWidth)
+					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
+					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
+
+				self.showTooltip(d, this);
+				self.reduceOpacity(this);
+			})
+			.on("mousemove", function(d) {
+				const tooltipRef = select(self.holder).select("div.chart-tooltip");
+
+				const relativeMousePosition = mouse(self.holder as HTMLElement);
+				tooltipRef.style("left", relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px")
+					.style("top", relativeMousePosition[1] + "px");
+			})
+			.on("mouseout", function(d) {
+				const { strokeWidth, strokeWidthAccessible } = Configuration.lines.points.mouseout;
+				select(this)
+					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
+					.attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
+					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
+
+				self.hideTooltip();
+			});
 
 		this.svg.selectAll("circle.dot")
 			.on("mouseover", function(d) {
 				select(this)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
 					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
+
+				self.showTooltip(d, this);
+				self.reduceOpacity(this);
 			})
 			.on("mouseout", function(d) {
 				select(this)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
 					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
-			})
-			.on("click", function(d) {
-				self.showTooltip(d, this);
-				self.reduceOpacity(this);
+
+				self.hideTooltip();
 			});
 	}
 }
