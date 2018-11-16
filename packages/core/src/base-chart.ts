@@ -57,7 +57,7 @@ export class BaseChart {
 		const {chartId, container} = this.setChartIDContainer();
 		this.container = container;
 		this.chartContainerID = chartId;
-		
+
 		if (configs.options) {
 			this.options = Object.assign({}, this.options, configs.options);
 
