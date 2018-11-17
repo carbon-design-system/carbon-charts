@@ -3011,9 +3011,12 @@ var lines = {
     points: {
         strokeWidth: 4,
         mouseover: {
+            strokeWidth: 4,
             strokeOpacity: 0.5
         },
         mouseout: {
+            strokeWidth: 0,
+            strokeWidthAccessible: 2,
             strokeOpacity: 1
         }
     }
@@ -3503,21 +3506,32 @@ var LineChart = /** @class */ (function (_super) {
     };
     LineChart.prototype.addDataPointEventListener = function () {
         var self = this;
-        var thresholds = this.options.thresholds;
+        var accessibility = this.options.accessibility;
         this.svg.selectAll("circle.dot")
+            .on("click", function (d) {
+            self.dispatchEvent("line-onClick", d);
+        })
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
+                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseover.strokeWidth)
                 .attr("stroke", self.colorScale[d.datasetLabel](d.label))
                 .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseover.strokeOpacity);
-        })
-            .on("mouseout", function (d) {
-            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
-                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseout.strokeOpacity);
-        })
-            .on("click", function (d) {
             self.showTooltip(d, this);
             self.reduceOpacity(this);
+        })
+            .on("mousemove", function (d) {
+            var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(self.holder).select("div.chart-tooltip");
+            var relativeMousePosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(self.holder);
+            tooltipRef.style("left", relativeMousePosition[0] + _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].magicLeft2 + "px")
+                .style("top", relativeMousePosition[1] + "px");
+        })
+            .on("mouseout", function (d) {
+            var _a = _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
+            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
+                .attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
+                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseout.strokeOpacity);
+            self.hideTooltip();
         });
     };
     return LineChart;
@@ -4353,11 +4367,22 @@ var StackedBarChart = /** @class */ (function (_super) {
         var self = this;
         var accessibility = this.options.accessibility;
         this.svg.selectAll("rect")
+            .on("click", function (d) {
+            self.dispatchEvent("bar-onClick", d);
+        })
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].mouseover.strokeWidth)
                 .attr("stroke", self.colorScale[d.datasetLabel](d.label))
                 .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].mouseover.strokeOpacity);
+            self.showTooltip(d, this);
+            self.reduceOpacity(this);
+        })
+            .on("mousemove", function (d) {
+            var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(self.holder).select("div.chart-tooltip");
+            var relativeMousePosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(self.holder);
+            tooltipRef.style("left", relativeMousePosition[0] + _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].magicLeft2 + "px")
+                .style("top", relativeMousePosition[1] + "px");
         })
             .on("mouseout", function (d) {
             var _a = _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
@@ -4365,10 +4390,7 @@ var StackedBarChart = /** @class */ (function (_super) {
                 .attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
                 .attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
                 .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].mouseout.strokeOpacity);
-        })
-            .on("click", function (d) {
-            self.showTooltip(d, this);
-            self.reduceOpacity(this);
+            self.hideTooltip();
         });
     };
     return StackedBarChart;
