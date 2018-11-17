@@ -1,5 +1,5 @@
 // D3 Imports
-import { select, selectAll, mouse } from "d3-selection";
+import { select, mouse } from "d3-selection";
 import { stack } from "d3-shape";
 import { max } from "d3-array";
 
@@ -241,6 +241,5 @@ export class StackedBarChart extends BaseAxisChart {
 
 				self.hideTooltip();
 			});
-
 	}
 }
