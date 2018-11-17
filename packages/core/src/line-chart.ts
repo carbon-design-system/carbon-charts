@@ -1,5 +1,5 @@
 // D3 Imports
-import { select, selectAll, mouse } from "d3-selection";
+import { select, mouse } from "d3-selection";
 import { line } from "d3-shape";
 
 import { BaseAxisChart } from "./base-axis-chart";
@@ -206,12 +206,11 @@ export class LineChart extends BaseAxisChart {
 		super.resizeChart();
 	}
 
-
 	addDataPointEventListener() {
 		const self = this;
 		const { accessibility } = this.options;
 
-		this.svg.selectAll("gLines")
+		this.svg.selectAll("circle.dot")
 			.on("click", function(d) {
 				self.dispatchEvent("line-onClick", d);
 			})
@@ -235,23 +234,6 @@ export class LineChart extends BaseAxisChart {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.lines.points.mouseout;
 				select(this)
 					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
-					.attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
-					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
-
-				self.hideTooltip();
-			});
-
-		this.svg.selectAll("circle.dot")
-			.on("mouseover", function(d) {
-				select(this)
-					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
-					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
-
-				self.showTooltip(d, this);
-				self.reduceOpacity(this);
-			})
-			.on("mouseout", function(d) {
-				select(this)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
 					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
 
