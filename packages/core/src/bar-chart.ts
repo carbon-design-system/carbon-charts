@@ -242,7 +242,7 @@ export class BarChart extends BaseAxisChart {
 
 		// Apply new data to the bars
 		const g = this.innerWrap.selectAll("g.bars g");
-		this.updateElements(false, null);
+		this.updateElements(false);
 
 		super.resizeChart();
 	}

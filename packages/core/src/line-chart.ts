@@ -201,7 +201,7 @@ export class LineChart extends BaseAxisChart {
 		this.setXAxis(true);
 		this.setYAxis(true);
 
-		this.updateElements(false, null);
+		this.updateElements(false);
 
 		super.resizeChart();
 	}
