@@ -372,8 +372,6 @@ export class PieChart extends BaseChart {
 
 		legend.append("text")
 			.text(d => d);
-
-		this.addLegendCircleHoverEffect();
 	}
 
 	resizeChart() {

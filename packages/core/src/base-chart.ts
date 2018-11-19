@@ -29,6 +29,7 @@ export class BaseChart {
 	// Data
 	data: any;
 	displayData: any;
+	fixedDataLabels;
 
 	// Fill scales & fill related objects
 	patternScale = {};
@@ -40,6 +41,8 @@ export class BaseChart {
 	eventHandlers = {
 		tooltips: null
 	};
+
+
 
 	constructor(holder: Element, configs: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
@@ -162,6 +165,16 @@ export class BaseChart {
 			}
 		});
 
+		if (!this.fixedDataLabels) {
+			this.fixedDataLabels = this.displayData.labels;
+		} else {
+			this.displayData.labels.forEach(element => {
+				if (this.fixedDataLabels.indexOf(element) === -1) {
+					this.fixedDataLabels.push(element);
+				}
+			});
+		}
+
 		return keys;
 	}
 
@@ -191,7 +204,7 @@ export class BaseChart {
 
 	setColorScale() {
 		this.displayData.datasets.forEach(dataset => {
-			this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.displayData.labels);
+			this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.fixedDataLabels);
 		});
 	}
 
@@ -311,7 +324,12 @@ export class BaseChart {
 			c.selectAll(".legend-btn.active").classed("not-allowed", true);
 		}
 
+		// Add hover effect for legend item circles
+		self.addLegendCircleHoverEffect();
+
 		c.selectAll(".legend-btn").each(function() {
+			select(this).classed("clickable", true);
+
 			select(this).on("click", function() {
 				c.selectAll(".chart-tooltip").remove();
 				c.selectAll(".label-tooltip").remove();
@@ -483,9 +501,6 @@ export class BaseChart {
 
 				return "white";
 			});
-
-		// Add hover effect for legend item circles
-		this.addLegendCircleHoverEffect();
 	}
 
 	positionLegend() {
@@ -534,7 +549,7 @@ export class BaseChart {
 	}
 
 	addLegendCircleHoverEffect() {
-		selectAll("li.legend-btn")
+		this.container.selectAll("li.legend-btn")
 			.on("mouseover", function() {
 				const circleRef = select(this).select("div.legend-circle");
 				const color = (circleRef.node() as HTMLElement).style.backgroundColor.substring(4,
@@ -642,9 +657,14 @@ export class BaseChart {
 				.enter()
 					.append("li")
 					.classed("legend-btn", true)
+					.classed("clickable", this.options.legendClickable)
 					.classed("active", d => d.value === Configuration.legend.items.status.ACTIVE)
 					.classed("not-allowed", d => activeLegendItems.length === 1 && d.value === Configuration.legend.items.status.ACTIVE)
 					.on("click", (clickedItem, e) => {
+						if (!this.options.legendClickable) {
+							return;
+						}
+
 						const legendButton = select(event.currentTarget);
 						const enabling = !legendButton.classed("active");
 
@@ -707,7 +727,6 @@ export class BaseChart {
 				})
 				.style("border-style", Configuration.legend.inactive.borderStyle)
 				.style("border-width", Configuration.legend.inactive.borderWidth);
-			this.addLegendCircleHoverEffect();
 
 			legendContent.append("text")
 				.text(d => d.key);
@@ -717,6 +736,10 @@ export class BaseChart {
 		tooltip.classed("arrow-right", true);
 		tooltip.append("div").attr("class", "arrow");
 		tooltip.style("left", `${mouseXPoint - Configuration.tooltip.width - Configuration.tooltip.arrowWidth}px`);
+
+		if (this.options.legendClickable) {
+			this.addLegendCircleHoverEffect();
+		}
 	}
 
 	showLabelTooltip(d, leftSide) {

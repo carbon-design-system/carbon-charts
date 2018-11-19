@@ -3,6 +3,80 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.4](https://github.com/IBM/carbon-charts/compare/v0.7.3...v0.7.4) (2018-11-17)
+
+
+### Bug Fixes
+
+* **packages/core/src/line-chart.ts:** Fix tooltips bug [#89](https://github.com/IBM/carbon-charts/issues/89): Fix imports and addDataPointEventListene ([5a63f94](https://github.com/IBM/carbon-charts/commit/5a63f94))
+
+
+
+
+
+## [0.7.3](https://github.com/IBM/carbon-charts/compare/v0.7.2...v0.7.3) (2018-11-13)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.7.2](https://github.com/IBM/carbon-charts/compare/v0.7.1...v0.7.2) (2018-11-13)
+
+
+### Bug Fixes
+
+* **core:** Fixed label colours on donut charts ([5e40ef6](https://github.com/IBM/carbon-charts/commit/5e40ef6))
+
+
+
+
+
+## [0.7.1](https://github.com/IBM/carbon-charts/compare/v0.7.0...v0.7.1) (2018-11-12)
+
+
+### Bug Fixes
+
+* **core:** Refactor thresholds to support a range of values, closes [#85](https://github.com/IBM/carbon-charts/issues/85) ([50b44c0](https://github.com/IBM/carbon-charts/commit/50b44c0))
+
+
+
+
+
+# [0.7.0](https://github.com/IBM/carbon-charts/compare/v0.6.2...v0.7.0) (2018-11-12)
+
+
+### Features
+
+* **core:** Automatic calculation of DonutCenter value, closes [#83](https://github.com/IBM/carbon-charts/issues/83) ([d20e883](https://github.com/IBM/carbon-charts/commit/d20e883))
+
+
+
+
+
+## [0.6.2](https://github.com/IBM/carbon-charts/compare/v0.6.1...v0.6.2) (2018-11-12)
+
+
+### Bug Fixes
+
+* **$core:** Remove hover effect and pointer on non-clickable legends ([dc9a2f2](https://github.com/IBM/carbon-charts/commit/dc9a2f2)), closes [#71](https://github.com/IBM/carbon-charts/issues/71)
+
+
+
+
+
+## [0.6.1](https://github.com/IBM/carbon-charts/compare/v0.6.0...v0.6.1) (2018-11-09)
+
+
+### Bug Fixes
+
+* **angular:** Fix babel-polyfill multiple instances issue ([4a2f165](https://github.com/IBM/carbon-charts/commit/4a2f165))
+
+
+
+
+
 # [0.6.0](https://github.com/IBM/carbon-charts/compare/v0.5.4...v0.6.0) (2018-11-01)
 
 
