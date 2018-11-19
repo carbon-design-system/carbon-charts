@@ -1,7 +1,5 @@
 import { colors } from "./colors";
 
-import { DonutCenter } from "../../src/index";
-
 export const pieOptions = {
 	accessibility: false,
 	legendClickable: true,
@@ -14,10 +12,7 @@ export const donutOptions = {
 	legendClickable: true,
 	containerResizable: true,
 	colors,
-	center: new DonutCenter({
-		number: 25423,
-		label: "Browsers"
-	})
+	centerLabel: "Products"
 };
 
 export const pieData = {
@@ -27,7 +22,7 @@ export const pieData = {
 		{
 			label: "Dataset 1",
 			backgroundColors: colors,
-			data: [100000, 200000, 600000, 100000, 400000, 450000, 300000, 70000, 20000, 120000]
+			data: [70000, 40000, 90000, 50000, 60000, 45000, 90000, 70000, 80000, 120000]
 		}
 	]
 };

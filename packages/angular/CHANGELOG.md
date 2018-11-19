@@ -3,6 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.4](https://github.com/IBM/carbon-charts/compare/v0.7.3...v0.7.4) (2018-11-17)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
+## [0.7.3](https://github.com/IBM/carbon-charts/compare/v0.7.2...v0.7.3) (2018-11-13)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
+## [0.7.2](https://github.com/IBM/carbon-charts/compare/v0.7.1...v0.7.2) (2018-11-13)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
+## [0.7.1](https://github.com/IBM/carbon-charts/compare/v0.7.0...v0.7.1) (2018-11-12)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
+# [0.7.0](https://github.com/IBM/carbon-charts/compare/v0.6.2...v0.7.0) (2018-11-12)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
+## [0.6.2](https://github.com/IBM/carbon-charts/compare/v0.6.1...v0.6.2) (2018-11-12)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
+## [0.6.1](https://github.com/IBM/carbon-charts/compare/v0.6.0...v0.6.1) (2018-11-09)
+
+
+### Bug Fixes
+
+* **angular:** Fix babel-polyfill multiple instances issue ([4a2f165](https://github.com/IBM/carbon-charts/commit/4a2f165))
+
+
+
+
+
 # [0.6.0](https://github.com/IBM/carbon-charts/compare/v0.5.4...v0.6.0) (2018-11-01)
 
 

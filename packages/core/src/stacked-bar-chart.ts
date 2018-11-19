@@ -1,5 +1,5 @@
 // D3 Imports
-import { select } from "d3-selection";
+import { select, mouse } from "d3-selection";
 import { stack } from "d3-shape";
 import { max } from "d3-array";
 
@@ -213,11 +213,24 @@ export class StackedBarChart extends BaseAxisChart {
 		const { accessibility } = this.options;
 
 		this.svg.selectAll("rect")
+			.on("click", function(d) {
+				self.dispatchEvent("bar-onClick", d);
+			})
 			.on("mouseover", function(d) {
 				select(this)
 					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
 					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
+
+				self.showTooltip(d, this);
+				self.reduceOpacity(this);
+			})
+			.on("mousemove", function(d) {
+				const tooltipRef = select(self.holder).select("div.chart-tooltip");
+
+				const relativeMousePosition = mouse(self.holder as HTMLElement);
+				tooltipRef.style("left", relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px")
+					.style("top", relativeMousePosition[1] + "px");
 			})
 			.on("mouseout", function(d) {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.bars.mouseout;
@@ -225,10 +238,8 @@ export class StackedBarChart extends BaseAxisChart {
 					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
 					.attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
 					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
-			})
-			.on("click", function(d) {
-				self.showTooltip(d, this);
-				self.reduceOpacity(this);
+
+				self.hideTooltip();
 			});
 	}
 }
