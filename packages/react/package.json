@@ -3,6 +3,12 @@
 	"version": "0.7.4",
 	"description": "Carbon charting components for React",
 	"main": "index.js",
+	"files": [
+		"src",
+		"index.js",
+		"CHANGELOG.md",
+		"README.md"
+	],
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "webpack -w",
