@@ -9,9 +9,4 @@ export default class BaseChart extends React.Component {
 
 		Object.assign(this, this.chart);
 	}
-
-	// TODO
-	// componentWillUnmount() {
-	// 	this.chart.removeChart();
-	// }
 }
