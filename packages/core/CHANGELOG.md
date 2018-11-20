@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.4](https://github.com/IBM/carbon-charts/compare/v0.7.3...v0.7.4) (2018-11-17)
+
+
+### Bug Fixes
+
+* **packages/core/src/line-chart.ts:** Fix tooltips bug [#89](https://github.com/IBM/carbon-charts/issues/89): Fix imports and addDataPointEventListene ([5a63f94](https://github.com/IBM/carbon-charts/commit/5a63f94))
+
+
+
+
+
 ## [0.7.3](https://github.com/IBM/carbon-charts/compare/v0.7.2...v0.7.3) (2018-11-13)
 
 **Note:** Version bump only for package @carbon/charts
