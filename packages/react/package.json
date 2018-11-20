@@ -2,7 +2,7 @@
 	"name": "@carbon/charts-react",
 	"version": "0.7.4",
 	"description": "Carbon charting components for React",
-	"main": "build/index.js",
+	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "webpack -w",
@@ -42,6 +42,9 @@
 		"sass-loader": "7.1.0",
 		"style-loader": "0.19.0",
 		"url-loader": "0.6.2"
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"maintainers": [
 		{
