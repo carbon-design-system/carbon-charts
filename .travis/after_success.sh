@@ -23,34 +23,13 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
   git config credential.helper "store --file=.git/credentials"
   echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
 
-  # Generate all assets
-  # needed for push to gh-page
-  mkdir pages
-  touch pages/.nojekyll
-  echo "charts.carbondesignsystem.com" > pages/CNAME
-
-  cd packages/core
-  npm run build
-  npm run demo:build
-  typedoc --out ./demo/bundle/documentation ./src/index.ts
-  cp -a demo/bundle/. ../../pages
-  rm -rf demo
-
-  cd ../angular/demo
-  npm run build-storybook
-  cp -a storybook-dist/. ../../../pages/angular
-  cd ..
-  rm -rf demo
-  cd ../..
-
-  cat packages/core/package.json
-  cat packages/angular/package.json
+  # This script builds all package bundles (for NPM) & demos (for gh-pages)
+  ../scripts/build-packages-and-demos.sh
   
   # Perform git & npm publish
   git update-index --assume-unchanged `git diff --name-only`
 
   npm whoami
-  cat ~/.npmrc
   lerna publish --conventional-commits --yes
 fi
 
