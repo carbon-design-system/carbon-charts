@@ -4,7 +4,9 @@
   "description": "Carbon charting components",
   "files": [
     "dist",
-    "index.js"
+    "index.js",
+    "CHANGELOG.md",
+    "README.md"
   ],
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
