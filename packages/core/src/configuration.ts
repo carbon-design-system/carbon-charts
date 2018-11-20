@@ -164,9 +164,12 @@ export const lines = {
 	points: {
 		strokeWidth: 4,
 		mouseover: {
+			strokeWidth: 4,
 			strokeOpacity: 0.5
 		},
 		mouseout: {
+			strokeWidth: 0,
+			strokeWidthAccessible: 2,
 			strokeOpacity: 1
 		}
 	}
