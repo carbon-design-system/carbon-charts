@@ -592,6 +592,6 @@ export class BaseAxisChart extends BaseChart {
 	 *  Events & User interactions        *
 	 *************************************/
 	addDataPointEventListener() {
-		return;
+		console.warn("You should implement your own `addDataPointEventListener()` function.");
 	}
 }
