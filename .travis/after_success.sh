@@ -24,12 +24,11 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
   echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
 
   # This script builds all package bundles (for NPM) & demos (for gh-pages)
-  ../scripts/build-packages-and-demos.sh
+  ./scripts/build-packages-and-demos.sh
   
   # Perform git & npm publish
   git update-index --assume-unchanged `git diff --name-only`
 
-  npm whoami
   lerna publish --conventional-commits --yes
 fi
 
