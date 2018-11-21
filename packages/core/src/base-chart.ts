@@ -312,7 +312,7 @@ export class BaseChart {
 				}
 			}
 		});
-		 
+
 		resizeObserver.observe(this.holder);
 	}
 
