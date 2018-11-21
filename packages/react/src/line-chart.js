@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import { LineChart as LC } from "@carbon/charts";
 import BaseChart from "./base-chart";
