@@ -88,10 +88,15 @@ export const charts = {
 		width: 20,
 		height: 20
 	},
+	minWidth: 150,
 	widthBreak: 600,
 	marginForLegendTop: 40,
 	magicRatio: 0.7,
-	magicMoreForY2Axis: 70
+	magicMoreForY2Axis: 70,
+	axisCharts: {
+		minWidth: 100,
+		minHeight: 200
+	}
 };
 
 export const scales = {
@@ -176,7 +181,6 @@ export const lines = {
 };
 
 export const pie = {
-	minWidth: 100,
 	maxWidth: 516.6,
 	mouseover: {
 		strokeWidth: 6,
