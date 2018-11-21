@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default class BaseChart extends React.Component {
 	constructor(props) {
