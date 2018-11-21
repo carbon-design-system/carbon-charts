@@ -8,9 +8,13 @@ import {
 import { scaleOrdinal } from "d3-scale";
 import { transition, Transition } from "d3-transition";
 
+// Internal Imports
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
 import PatternsService from "./services/patterns";
+
+// Misc
+import ResizeObserver from "resize-observer-polyfill";
 
 export class BaseChart {
 	static chartCount = 1;
@@ -210,8 +214,6 @@ export class BaseChart {
 
 	// TODO - Refactor
 	getChartSize(container = this.container) {
-		const noAxis = this.options.type === "pie" || this.options.type === "donut";
-
 		let ratio, marginForLegendTop;
 		if (container.node().clientWidth > Configuration.charts.widthBreak) {
 			ratio = Configuration.charts.magicRatio;
@@ -222,24 +224,20 @@ export class BaseChart {
 		}
 
 		// Store computed actual size, to be considered for change if chart does not support axis
-		const marginsToExclude = noAxis ? 0 : (Configuration.charts.margin.left + Configuration.charts.margin.right);
+		const marginsToExclude = 0;
 		const computedChartSize = {
 			height: container.node().clientHeight - marginForLegendTop,
 			width: (container.node().clientWidth - marginsToExclude) * ratio
 		};
 
 		// If chart is of type pie or donut, width and height should equal to the min of the width and height computed
-		if (noAxis) {
-			let maxSizePossible = Math.min(computedChartSize.height, computedChartSize.width);
-			maxSizePossible = Math.max(maxSizePossible, Configuration.pie.minWidth);
+		let maxSizePossible = Math.min(computedChartSize.height, computedChartSize.width);
+		maxSizePossible = Math.max(maxSizePossible, Configuration.charts.minWidth);
 
-			return {
-				height: maxSizePossible,
-				width: maxSizePossible
-			};
-		}
-
-		return computedChartSize;
+		return {
+			height: maxSizePossible,
+			width: maxSizePossible
+		};
 	}
 
 	/*
@@ -299,21 +297,23 @@ export class BaseChart {
 	resizeWhenContainerChange() {
 		let containerWidth = this.holder.clientWidth;
 		let containerHeight = this.holder.clientHeight;
-		const frame = () => {
-			if (Math.abs(containerWidth - this.holder.clientWidth) > 1
-				|| Math.abs(containerHeight - this.holder.clientHeight) > 1) {
-				containerWidth = this.holder.clientWidth;
-				containerHeight = this.holder.clientHeight;
 
-				selectAll(".legend-tooltip").style("display", "none");
+		const resizeObserver = new ResizeObserver((entries, observer) => {
+			for (const entry of entries) {
+				if (Math.abs(containerWidth - this.holder.clientWidth) > 1
+					|| Math.abs(containerHeight - this.holder.clientHeight) > 1) {
+					containerWidth = this.holder.clientWidth;
+					containerHeight = this.holder.clientHeight;
 
-				this.hideTooltip();
-				this.resizeChart();
+					selectAll(".legend-tooltip").style("display", "none");
+
+					this.hideTooltip();
+					this.resizeChart();
+				}
 			}
-
-			requestAnimationFrame(frame);
-		};
-		requestAnimationFrame(frame);
+		});
+		 
+		resizeObserver.observe(this.holder);
 	}
 
 	setClickableLegend() {
