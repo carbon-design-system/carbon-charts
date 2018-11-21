@@ -20,6 +20,7 @@ rm -rf demo
 
 # Build React demos
 cd ../react
+npm run build
 npm run build-storybook
 cp -a storybook-dist/. ../../pages/react
 
