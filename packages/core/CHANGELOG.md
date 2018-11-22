@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.9](https://github.com/IBM/carbon-charts/compare/v0.7.8...v0.7.9) (2018-11-22)
+
+
+### Bug Fixes
+
+* **core:** Use a minimum size for all charts, and use resizeObserver rather than requestAnimationFra ([462c2d6](https://github.com/IBM/carbon-charts/commit/462c2d6))
+
+
+
+
+
 ## [0.7.8](https://github.com/IBM/carbon-charts/compare/v0.7.7...v0.7.8) (2018-11-22)
 
 
