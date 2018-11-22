@@ -162,7 +162,10 @@ export class BaseAxisChart extends BaseChart {
 			width: (container.node().clientWidth - marginsToExclude) * ratio
 		};
 
-		return computedChartSize;
+		return {
+			height: Math.max(computedChartSize.height, Configuration.charts.axisCharts.minHeight),
+			width: Math.max(computedChartSize.width, Configuration.charts.axisCharts.minWidth)
+		};
 	}
 
 	resizeChart() {
