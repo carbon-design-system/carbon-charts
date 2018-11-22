@@ -1,6 +1,5 @@
 // export all modules from an entrypoint
 // To be used with ts-loader & angular loaders in projects
-
 export * from "./src/charts.module.ts";
 
 export { DonutChartComponent } from "./src/donut-chart.component";

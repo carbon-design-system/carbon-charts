@@ -12,5 +12,4 @@ export const colors = [
 	"#473793",
 	"#3c6df0",
 	"#56D2BB"
-	// 12 items needed
 ];
