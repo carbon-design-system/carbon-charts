@@ -1352,6 +1352,36 @@ var BarChart = /** @class */ (function (_super) {
         this.updateElements(false, null, g);
         _super.prototype.resizeChart.call(this);
     };
+    BarChart.prototype.addDataPointEventListener = function () {
+        var self = this;
+        var accessibility = this.options.accessibility;
+        this.svg.selectAll("rect")
+            .on("click", function (d) {
+            self.dispatchEvent("bar-onClick", d);
+        })
+            .on("mouseover", function (d) {
+            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
+                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseover.strokeWidth)
+                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseover.strokeOpacity);
+            self.showTooltip(d, this);
+            self.reduceOpacity(this);
+        })
+            .on("mousemove", function (d) {
+            var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(self.holder).select("div.chart-tooltip");
+            var relativeMousePosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(self.holder);
+            tooltipRef.style("left", relativeMousePosition[0] + _configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].magicLeft2 + "px")
+                .style("top", relativeMousePosition[1] + "px");
+        })
+            .on("mouseout", function (d) {
+            var _a = _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
+            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
+                .attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
+                .attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseout.strokeOpacity);
+            self.hideTooltip();
+        });
+    };
     return BarChart;
 }(_base_axis_chart__WEBPACK_IMPORTED_MODULE_3__["BaseAxisChart"]));
 
@@ -1881,48 +1911,7 @@ var BaseAxisChart = /** @class */ (function (_super) {
      *  Events & User interactions        *
      *************************************/
     BaseAxisChart.prototype.addDataPointEventListener = function () {
-        var self = this;
-        var accessibility = this.options.accessibility;
-        this.svg.selectAll("rect")
-            .on("click", function (d) {
-            self.dispatchEvent("bar-onClick", d);
-        })
-            .on("mouseover", function (d) {
-            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
-                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseover.strokeWidth)
-                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseover.strokeOpacity);
-            self.showTooltip(d, this);
-            self.reduceOpacity(this);
-        })
-            .on("mousemove", function (d) {
-            var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(self.holder).select("div.chart-tooltip");
-            var relativeMousePosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(self.holder);
-            tooltipRef.style("left", relativeMousePosition[0] + _configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].magicLeft2 + "px")
-                .style("top", relativeMousePosition[1] + "px");
-        })
-            .on("mouseout", function (d) {
-            var _a = _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
-            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
-                .attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
-                .attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseout.strokeOpacity);
-            self.hideTooltip();
-        });
-        this.svg.selectAll("circle.dot")
-            .on("mouseover", function (d) {
-            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
-                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["lines"].points.mouseover.strokeOpacity);
-            self.showTooltip(d, this);
-            self.reduceOpacity(this);
-        })
-            .on("mouseout", function (d) {
-            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
-                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["lines"].points.mouseout.strokeOpacity);
-            self.hideTooltip();
-        });
+        console.warn("You should implement your own `addDataPointEventListener()` function.");
     };
     return BaseAxisChart;
 }(_base_chart__WEBPACK_IMPORTED_MODULE_4__["BaseChart"]));
