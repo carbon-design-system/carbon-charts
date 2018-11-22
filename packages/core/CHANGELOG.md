@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.8](https://github.com/IBM/carbon-charts/compare/v0.7.7...v0.7.8) (2018-11-22)
+
+
+### Bug Fixes
+
+* **core:** Remove and update addDataPointEventListener ([f40f775](https://github.com/IBM/carbon-charts/commit/f40f775)), closes [#97](https://github.com/IBM/carbon-charts/issues/97)
+
+
+
+
+
 ## [0.7.5](https://github.com/IBM/carbon-charts/compare/v0.7.4...v0.7.5) (2018-11-20)
 
 **Note:** Version bump only for package @carbon/charts
