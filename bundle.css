@@ -187,7 +187,7 @@ body {
   font-family: "IBM Plex Sans", Arial, sans-serif; }
 
 h1 {
-  font-weight: 500; }
+  font-weight: 600; }
 
 h3 {
   margin-bottom: 40px; }
@@ -233,6 +233,23 @@ header.m-demo-header {
     width: 80%;
     max-width: 800px;
     margin: auto; }
+    header.m-demo-header div.content div.links {
+      display: table;
+      margin: auto; }
+      header.m-demo-header div.content div.links .bx--btn {
+        float: left;
+        margin-right: 5px; }
+        header.m-demo-header div.content div.links .bx--btn.last {
+          margin-right: 0; }
+        header.m-demo-header div.content div.links .bx--btn svg {
+          margin-right: 5px; }
+          header.m-demo-header div.content div.links .bx--btn svg.angular {
+            width: 22px;
+            height: 22px; }
+          header.m-demo-header div.content div.links .bx--btn svg.react {
+            width: 25px;
+            height: 25px;
+            margin-left: -5px; }
   header.m-demo-header div h1 {
     margin-bottom: 5px; }
 

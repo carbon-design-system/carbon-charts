@@ -1549,7 +1549,10 @@ var BaseAxisChart = /** @class */ (function (_super) {
             height: container.node().clientHeight - marginForLegendTop,
             width: (container.node().clientWidth - marginsToExclude) * ratio
         };
-        return computedChartSize;
+        return {
+            height: Math.max(computedChartSize.height, _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].axisCharts.minHeight),
+            width: Math.max(computedChartSize.width, _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].axisCharts.minWidth)
+        };
     };
     BaseAxisChart.prototype.resizeChart = function () {
         // Reposition the legend
@@ -1936,12 +1939,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
 /* harmony import */ var _services_patterns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/patterns */ "./src/services/patterns.ts");
+/* harmony import */ var resize_observer_polyfill__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! resize-observer-polyfill */ "../../node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js");
 // D3 Imports
 
 
 
+// Internal Imports
 
 
+
+// Misc
 
 var BaseChart = /** @class */ (function () {
     function BaseChart(holder, configs) {
@@ -2097,7 +2104,6 @@ var BaseChart = /** @class */ (function () {
     // TODO - Refactor
     BaseChart.prototype.getChartSize = function (container) {
         if (container === void 0) { container = this.container; }
-        var noAxis = this.options.type === "pie" || this.options.type === "donut";
         var ratio, marginForLegendTop;
         if (container.node().clientWidth > _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].widthBreak) {
             ratio = _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].magicRatio;
@@ -2108,21 +2114,18 @@ var BaseChart = /** @class */ (function () {
             ratio = 1;
         }
         // Store computed actual size, to be considered for change if chart does not support axis
-        var marginsToExclude = noAxis ? 0 : (_configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].margin.left + _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].margin.right);
+        var marginsToExclude = 0;
         var computedChartSize = {
             height: container.node().clientHeight - marginForLegendTop,
             width: (container.node().clientWidth - marginsToExclude) * ratio
         };
         // If chart is of type pie or donut, width and height should equal to the min of the width and height computed
-        if (noAxis) {
-            var maxSizePossible = Math.min(computedChartSize.height, computedChartSize.width);
-            maxSizePossible = Math.max(maxSizePossible, _configuration__WEBPACK_IMPORTED_MODULE_3__["pie"].minWidth);
-            return {
-                height: maxSizePossible,
-                width: maxSizePossible
-            };
-        }
-        return computedChartSize;
+        var maxSizePossible = Math.min(computedChartSize.height, computedChartSize.width);
+        maxSizePossible = Math.max(maxSizePossible, _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].minWidth);
+        return {
+            height: maxSizePossible,
+            width: maxSizePossible
+        };
     };
     /*
      * removes the chart and any tooltips
@@ -2172,18 +2175,20 @@ var BaseChart = /** @class */ (function () {
         var _this = this;
         var containerWidth = this.holder.clientWidth;
         var containerHeight = this.holder.clientHeight;
-        var frame = function () {
-            if (Math.abs(containerWidth - _this.holder.clientWidth) > 1
-                || Math.abs(containerHeight - _this.holder.clientHeight) > 1) {
-                containerWidth = _this.holder.clientWidth;
-                containerHeight = _this.holder.clientHeight;
-                Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["selectAll"])(".legend-tooltip").style("display", "none");
-                _this.hideTooltip();
-                _this.resizeChart();
+        var resizeObserver = new resize_observer_polyfill__WEBPACK_IMPORTED_MODULE_6__["default"](function (entries, observer) {
+            for (var _i = 0, entries_1 = entries; _i < entries_1.length; _i++) {
+                var entry = entries_1[_i];
+                if (Math.abs(containerWidth - _this.holder.clientWidth) > 1
+                    || Math.abs(containerHeight - _this.holder.clientHeight) > 1) {
+                    containerWidth = _this.holder.clientWidth;
+                    containerHeight = _this.holder.clientHeight;
+                    Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["selectAll"])(".legend-tooltip").style("display", "none");
+                    _this.hideTooltip();
+                    _this.resizeChart();
+                }
             }
-            requestAnimationFrame(frame);
-        };
-        requestAnimationFrame(frame);
+        });
+        resizeObserver.observe(this.holder);
     };
     BaseChart.prototype.setClickableLegend = function () {
         var self = this;
@@ -2929,10 +2934,15 @@ var charts = {
         width: 20,
         height: 20
     },
+    minWidth: 150,
     widthBreak: 600,
     marginForLegendTop: 40,
     magicRatio: 0.7,
-    magicMoreForY2Axis: 70
+    magicMoreForY2Axis: 70,
+    axisCharts: {
+        minWidth: 100,
+        minHeight: 200
+    }
 };
 var scales = {
     maxWidthOfAxisLabel: 175,
@@ -3011,7 +3021,6 @@ var lines = {
     }
 };
 var pie = {
-    minWidth: 100,
     maxWidth: 516.6,
     mouseover: {
         strokeWidth: 6,
