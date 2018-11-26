@@ -87,7 +87,7 @@ export namespace Tools {
 		if (numberRegex.test(value.toString())) {
 			return true;
 		}
-		
+
 		console.error(`Value provided "${value}" is not formatted correctly`);
 
 		return false;
