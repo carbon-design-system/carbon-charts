@@ -51,25 +51,53 @@ export class BaseChart {
 	constructor(holder: Element, configs: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
 
-		(holder as HTMLElement).style.position = "relative";
+		if (configs.options) {
+			this.options = Object.assign({}, this.options, configs.options);
+		}
+
+		// Save holder element reference, and initialize it by applying appropriate styling
 		this.holder = holder;
+		this.styleHolderElement();
 
 		const {chartId, container} = this.setChartIDContainer();
 		this.container = container;
 		this.chartContainerID = chartId;
 
-		if (configs.options) {
-			this.options = Object.assign({}, this.options, configs.options);
-
-			if (this.options.containerResizable) {
-				this.resizeWhenContainerChange();
-			}
+		if (this.options && this.options.containerResizable) {
+			this.resizeWhenContainerChange();
 		}
 
 		this.events = document.createDocumentFragment();
 
 		if (configs.data) {
 			this.setData(configs.data);
+		}
+	}
+
+	styleHolderElement() {
+		const holderElement = this.holder as HTMLElement;
+		const { width, height } = this.options;
+
+		// If width exists in options
+		if (width) {
+			// Validate it's value
+			if (Tools.validateWidthHeightValues(width)) {
+				// Apply formatted width attribute to chart
+				holderElement.style.width = Tools.formatWidthHeightValues(width);
+			} else {
+				console.error("`width` is badly formatted");
+			}
+		}
+
+		// If height exists in options
+		if (height) {
+			// Validate it's value
+			if (Tools.validateWidthHeightValues(height)) {
+				// Apply formatted height attribute to chart
+				holderElement.style.height = Tools.formatWidthHeightValues(height);
+			} else {
+				console.error("`height` is badly formatted");
+			}
 		}
 	}
 
@@ -308,6 +336,7 @@ export class BaseChart {
 					selectAll(".legend-tooltip").style("display", "none");
 
 					this.hideTooltip();
+
 					this.resizeChart();
 				}
 			}

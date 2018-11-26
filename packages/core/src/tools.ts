@@ -82,6 +82,26 @@ export namespace Tools {
 		};
 	}
 
+	export function validateWidthHeightValues(value) {
+		const numberRegex = new RegExp(/[0-9]+(\.[0-9]+)?/);
+		if (numberRegex.test(value.toString())) {
+			return true;
+		}
+		
+		console.error(`Value provided "${value}" is not formatted correctly`);
+
+		return false;
+	}
+
+	export function formatWidthHeightValues(value) {
+		const stringValue = value.toString();
+		if (stringValue.indexOf("%") || stringValue.indexOf("px")) {
+			return stringValue;
+		}
+
+		return stringValue + "px";
+	}
+
 	/**
 	 * Capitalizes first letter of a string
 	 *
