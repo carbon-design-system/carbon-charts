@@ -80,24 +80,14 @@ export class BaseChart {
 
 		// If width exists in options
 		if (width) {
-			// Validate its value
-			if (Tools.validateWidthHeightValues(width)) {
-				// Apply formatted width attribute to chart
-				holderElement.style.width = Tools.formatWidthHeightValues(width);
-			} else {
-				console.error("`width` is badly formatted");
-			}
+			// Apply formatted width attribute to chart
+			holderElement.style.width = Tools.formatWidthHeightValues(width);
 		}
 
 		// If height exists in options
 		if (height) {
-			// Validate its value
-			if (Tools.validateWidthHeightValues(height)) {
-				// Apply formatted height attribute to chart
-				holderElement.style.height = Tools.formatWidthHeightValues(height);
-			} else {
-				console.error("`height` is badly formatted");
-			}
+			// Apply formatted height attribute to chart
+			holderElement.style.height = Tools.formatWidthHeightValues(height);
 		}
 	}
 
