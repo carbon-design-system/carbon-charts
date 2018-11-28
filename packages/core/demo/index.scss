@@ -141,19 +141,17 @@ header.m-demo-header {
 }
 .chart-holder {
 	background-color: #fff;
-	// border: 1px solid rgba(24, 62, 117, 0.2);
 	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
 	margin: 0 auto 60px auto;
 	display: block;
 	height: 500px;
 	min-width: 300px;
 	max-width: 800px;
+	padding: 30px;
 	position: relative;
 	transition: box-shadow .1s ease-out;
-	// tmp
 	overflow: hidden;
 	resize: both;
-	//
 	font-weight: 400;
 
 	h3 {
