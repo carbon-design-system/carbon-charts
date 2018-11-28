@@ -82,19 +82,6 @@ export namespace Tools {
 		};
 	}
 
-	export function validateWidthHeightValues(value) {
-		const numberRegex = new RegExp(/[0-9]+(\.[0-9]+)?/);
-
-		// If value provided contains numbers
-		if (numberRegex.test(value.toString())) {
-			return true;
-		}
-
-		console.error(`Value provided "${value}" does not include a number. Please provide a valid CSS value using "px", "%" or similar units`);
-
-		return false;
-	}
-
 	export function formatWidthHeightValues(value) {
 		const stringValue = value.toString();
 
