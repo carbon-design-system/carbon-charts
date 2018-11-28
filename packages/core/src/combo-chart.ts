@@ -78,6 +78,7 @@ export class ComboChart extends BaseAxisChart {
 			.attr("height", `${dimensionToUseForScale}px`);
 
 		this.updateXandYGrid(true);
+
 		// Calculate scale in combo using the superset of the subcharts datasets
 		this.setXScale();
 		this.setYScale();
