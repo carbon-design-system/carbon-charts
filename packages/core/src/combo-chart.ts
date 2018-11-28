@@ -4,6 +4,8 @@ import * as ChartTypes from "./index";
 
 import { select } from "d3-selection";
 
+import * as Configuration from "./configuration";
+
 // TODO - Support adding/removing charts when updating data
 export class ComboChart extends BaseAxisChart {
 	// Includes all the sub-charts
@@ -31,6 +33,31 @@ export class ComboChart extends BaseAxisChart {
 		}
 	}
 
+	applyLegendFilter(changedLabel: string) {
+		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
+		const oldStatus = this.options.keys[changedLabel];
+
+		this.options.keys[changedLabel] = (oldStatus === ACTIVE ? DISABLED : ACTIVE);
+
+		this.charts.forEach(chart => {
+			const comboKeys = this.options.keys;
+			const subChartKeys = chart.instance.options.keys;
+			let key;
+			// Updsate options.keys values for subcharts only if the dataset is associated
+			// with the particular subset already
+			for (key in comboKeys) {
+				if (subChartKeys[key] !== undefined) {
+					subChartKeys[key] = comboKeys[key];
+				}
+			}
+
+			chart.instance.displayData = chart.instance.updateDisplayData();
+			chart.instance.setXScale(this.x);
+			chart.instance.setYScale(this.y);
+			chart.instance.interpolateValues(chart.instance.displayData);
+		});
+	}
+
 	// This only needs to be performed in the sub-chart instances
 	interpolateValues(newData: any) {
 		return;
@@ -51,20 +78,21 @@ export class ComboChart extends BaseAxisChart {
 			.attr("height", `${dimensionToUseForScale}px`);
 
 		this.updateXandYGrid(true);
-		// Scale out the domains
+		// Calculate scale in combo using the superset of the subcharts datasets
 		this.setXScale();
 		this.setYScale();
 
-		// Set the x & y axis as well as their labels
+		// Set axis
 		this.setXAxis(true);
 		this.setYAxis(true);
 
 		super.resizeChart();
 
 		this.charts.forEach(chart => {
+			// Scales for each subchart is set to the same one calculated above for combo
 			chart.instance.setXScale(this.x);
 			chart.instance.setYScale(this.y);
-			chart.instance.updateElements(false, null);
+			chart.instance.updateElements(false);
 		});
 	}
 
