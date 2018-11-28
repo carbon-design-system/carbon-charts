@@ -84,6 +84,8 @@ export namespace Tools {
 
 	export function validateWidthHeightValues(value) {
 		const numberRegex = new RegExp(/[0-9]+(\.[0-9]+)?/);
+
+		// If value provided contains numbers
 		if (numberRegex.test(value.toString())) {
 			return true;
 		}
@@ -95,7 +97,10 @@ export namespace Tools {
 
 	export function formatWidthHeightValues(value) {
 		const stringValue = value.toString();
-		if (stringValue.indexOf("%") || stringValue.indexOf("px")) {
+
+		// If the value provided contains any letters
+		// Return it the same way
+		if (stringValue.match(/[a-z]/i)) {
 			return stringValue;
 		}
 
