@@ -1,6 +1,3 @@
-.chart-holder {
-  padding: 30px; }
-
 .chart-wrapper {
   width: 100%;
   height: 100%;
@@ -284,6 +281,7 @@ header.m-demo-header {
   height: 500px;
   min-width: 300px;
   max-width: 800px;
+  padding: 30px;
   position: relative;
   transition: box-shadow .1s ease-out;
   overflow: hidden;

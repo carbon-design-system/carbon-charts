@@ -1962,22 +1962,37 @@ var BaseChart = /** @class */ (function () {
             tooltips: null
         };
         this.id = "chart-" + BaseChart.chartCount++;
-        holder.style.position = "relative";
+        if (configs.options) {
+            this.options = Object.assign({}, this.options, configs.options);
+        }
+        // Save holder element reference, and initialize it by applying appropriate styling
         this.holder = holder;
+        this.styleHolderElement();
         var _a = this.setChartIDContainer(), chartId = _a.chartId, container = _a.container;
         this.container = container;
         this.chartContainerID = chartId;
-        if (configs.options) {
-            this.options = Object.assign({}, this.options, configs.options);
-            if (this.options.containerResizable) {
-                this.resizeWhenContainerChange();
-            }
+        if (this.options.containerResizable) {
+            this.resizeWhenContainerChange();
         }
         this.events = document.createDocumentFragment();
         if (configs.data) {
             this.setData(configs.data);
         }
     }
+    BaseChart.prototype.styleHolderElement = function () {
+        var holderElement = this.holder;
+        var _a = this.options, width = _a.width, height = _a.height;
+        // If width exists in options
+        if (width) {
+            // Apply formatted width attribute to chart
+            holderElement.style.width = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].formatWidthHeightValues(width);
+        }
+        // If height exists in options
+        if (height) {
+            // Apply formatted height attribute to chart
+            holderElement.style.height = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].formatWidthHeightValues(height);
+        }
+    };
     BaseChart.prototype.dispatchEvent = function (eventType, eventDetail) {
         var newEvent;
         if (eventDetail) {
@@ -4498,6 +4513,16 @@ var Tools;
         };
     }
     Tools.getTranformOffsets = getTranformOffsets;
+    function formatWidthHeightValues(value) {
+        var stringValue = value.toString();
+        // If the value provided contains any letters
+        // Return it the same way
+        if (stringValue.match(/[a-z]/i)) {
+            return stringValue;
+        }
+        return stringValue + "px";
+    }
+    Tools.formatWidthHeightValues = formatWidthHeightValues;
     /**
      * Capitalizes first letter of a string
      *
