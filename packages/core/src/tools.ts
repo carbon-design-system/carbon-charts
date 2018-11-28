@@ -90,7 +90,7 @@ export namespace Tools {
 			return true;
 		}
 
-		console.error(`Value provided "${value}" is not formatted correctly`);
+		console.error(`Value provided "${value}" does not include a number. Please provide a valid CSS value using "px", "%" or similar units`);
 
 		return false;
 	}
