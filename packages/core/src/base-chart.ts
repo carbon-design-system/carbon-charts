@@ -63,7 +63,7 @@ export class BaseChart {
 		this.container = container;
 		this.chartContainerID = chartId;
 
-		if (this.options && this.options.containerResizable) {
+		if (this.options.containerResizable) {
 			this.resizeWhenContainerChange();
 		}
 
@@ -80,7 +80,7 @@ export class BaseChart {
 
 		// If width exists in options
 		if (width) {
-			// Validate it's value
+			// Validate its value
 			if (Tools.validateWidthHeightValues(width)) {
 				// Apply formatted width attribute to chart
 				holderElement.style.width = Tools.formatWidthHeightValues(width);
@@ -91,7 +91,7 @@ export class BaseChart {
 
 		// If height exists in options
 		if (height) {
-			// Validate it's value
+			// Validate its value
 			if (Tools.validateWidthHeightValues(height)) {
 				// Apply formatted height attribute to chart
 				holderElement.style.height = Tools.formatWidthHeightValues(height);
