@@ -117,7 +117,7 @@ export class StackedBarChart extends BaseAxisChart {
 		const rect = g.selectAll("rect.bar")
 			.data(d => addLabelsAndValueToData(d));
 
-		this.updateElements(true, g.selectAll("rect.bar"), g);
+		this.updateElements(true, g.selectAll("rect.bar"));
 
 		const addRect = selection => {
 			selection.enter()
@@ -185,12 +185,12 @@ export class StackedBarChart extends BaseAxisChart {
 
 		// Apply new data to the bars
 		const g = this.innerWrap.selectAll("g.bars g");
-		this.updateElements(false, null, g);
+		this.updateElements(false);
 
 		super.resizeChart();
 	}
 
-	updateElements(animate: boolean, rect?: any, g?: any) {
+	updateElements(animate: boolean, rect?: any) {
 		if (!rect) {
 			rect = this.innerWrap.selectAll("rect.bar");
 		}
