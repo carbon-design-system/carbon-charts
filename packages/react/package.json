@@ -1,13 +1,18 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "0.7.3",
+	"version": "0.7.10",
 	"description": "Carbon charting components for React",
-	"private": true,
-	"main": "build/index.js",
+	"main": "index.js",
+	"files": [
+		"dist",
+		"index.js",
+		"CHANGELOG.md",
+		"README.md"
+	],
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "webpack -w",
-		"build": "webpack",
+		"start": "npm run storybook",
+		"build": "rollup -c",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
 		"build-storybook": "build-storybook -o storybook-dist"
 	},
@@ -22,27 +27,35 @@
 	},
 	"homepage": "https://github.com/IBM/carbon-charts#readme",
 	"dependencies": {
-		"@carbon/charts": "^0.7.3",
-		"react": "16.0.0",
-		"react-dom": "16.4.2"
+		"@carbon/charts": "^0.7.10",
+		"react": "16.6.3",
+		"react-dom": "16.6.3"
 	},
 	"devDependencies": {
-		"@storybook/addon-options": "3.4.10",
-		"@storybook/react": "3.4.10",
+		"@storybook/addon-options": "4.0.7",
+		"@storybook/react": "4.0.7",
 		"@storybook/storybook-deployer": "2.3.0",
 		"babel-cli": "6.26.0",
 		"babel-core": "6.26.0",
 		"babel-loader": "7.1.2",
+		"babel-plugin-external-helpers": "6.22.0",
 		"babel-plugin-transform-object-rest-spread": "6.26.0",
 		"babel-plugin-transform-react-jsx": "6.24.1",
 		"babel-preset-env": "1.6.1",
+		"babel-preset-react": "6.24.1",
 		"base64-inline-loader": "1.1.0",
 		"css-loader": "0.28.7",
 		"img-loader": "2.0.0",
 		"node-sass": "4.10.0",
+		"rollup": "0.67.3",
+		"rollup-plugin-babel": "3.0.4",
+		"rollup-plugin-commonjs": "9.2.0",
 		"sass-loader": "7.1.0",
 		"style-loader": "0.19.0",
 		"url-loader": "0.6.2"
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"maintainers": [
 		{

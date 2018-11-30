@@ -41,6 +41,7 @@ npm install @carbon/charts --save
 **Charts demos:**
 - [Vanilla JS](https://charts.carbondesignsystem.com/)
 - [Angular](https://charts.carbondesignsystem.com/angular)
+- [React](https://charts.carbondesignsystem.com/react)
 
 **Docs:** <https://charts.carbondesignsystem.com/documentation/>
 
@@ -70,14 +71,14 @@ npm install @carbon/charts --save
 
 | Component   | Vanilla            | Angular                  | React |
 |-------------|--------------------|--------------------------|-------|
-| Simple Bar  | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Grouped Bar | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Stacked Bar | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Donut       | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Line        | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Curved Line | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Pie         | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Step        | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
+| Simple Bar  | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
+| Grouped Bar | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
+| Stacked Bar | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
+| Donut       | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
+| Line        | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
+| Curved Line | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
+| Pie         | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
+| Step        | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
 | Combo       | :hourglass_flowing_sand:               | :hourglass_flowing_sand:                     | :hourglass_flowing_sand:  |
 | Area        | Soon               | Soon                     | :hourglass_flowing_sand:  |
 
@@ -98,3 +99,11 @@ Get updates on Charts' development and chat with the core team and community. --
 We use the **semantic-release** library to automatically version our releases within the guidelines of Semantic Versioning [Semantic Versioning guidelines](http://semver.org/).
 
 See our [releases notes](https://github.com/IBM/carbon-charts/releases) for the changelog of each version of Charts.
+
+## Contributors
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+| [<img src="https://avatars3.githubusercontent.com/u/14989804?v=4" width="100px;"/><br /><sub><b>Eliad Moosavi</b></sub>](http://eMoosavi.com)<br />[💻](https://github.com/theiliad/carbon-charts/commits?author=theiliad "Code") [📖](https://github.com/theiliad/carbon-charts/commits?author=theiliad "Documentation") [💡](#example-theiliad "Examples") [🚇](#infra-theiliad "Infrastructure (Hosting, Build-Tools, etc)") | [<img src="https://avatars0.githubusercontent.com/u/9692126?v=4" width="100px;"/><br /><sub><b>Zvonimir Fras</b></sub>](http://www.zvonimirfras.com)<br />[💻](https://github.com/theiliad/carbon-charts/commits?author=zvonimirfras "Code") [📖](https://github.com/theiliad/carbon-charts/commits?author=zvonimirfras "Documentation") [👀](#review-zvonimirfras "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/1744185?v=4" width="100px;"/><br /><sub><b>Callum Smith</b></sub>](http://reallyawesomedomain.com)<br />[💻](https://github.com/theiliad/carbon-charts/commits?author=cal-smith "Code") [📖](https://github.com/theiliad/carbon-charts/commits?author=cal-smith "Documentation") [👀](#review-cal-smith "Reviewed Pull Requests") | [<img src="https://avatars0.githubusercontent.com/u/43546639?v=4" width="100px;"/><br /><sub><b>nicoleroppel</b></sub>](https://github.com/nicoleroppel)<br />[🎨](#design-nicoleroppel "Design") | [<img src="https://avatars3.githubusercontent.com/u/43549567?v=4" width="100px;"/><br /><sub><b>Diana Tran</b></sub>](https://github.com/dianatran18)<br />[🎨](#design-dianatran18 "Design") |
+| :---: | :---: | :---: | :---: | :---: |
+| [<img src="https://avatars1.githubusercontent.com/u/6198288?v=4" width="100px;"/><br /><sub><b>Michelle Carlough </b></sub>](http://michellecarlough.com/)<br />[🎨](#design-MichelleCarlough "Design") [📖](https://github.com/theiliad/carbon-charts/commits?author=MichelleCarlough "Documentation") | [<img src="https://avatars0.githubusercontent.com/u/43579539?v=4" width="100px;"/><br /><sub><b>Jaime Stockton</b></sub>](https://github.com/JaimeMae)<br />[🎨](#design-JaimeMae "Design") | [<img src="https://avatars1.githubusercontent.com/u/5810053?v=4" width="100px;"/><br /><sub><b>Pablo Lopez Domowicz</b></sub>](https://github.com/PLopezD)<br />[🎨](#design-PLopezD "Design") | [<img src="https://avatars3.githubusercontent.com/u/9957837?v=4" width="100px;"/><br /><sub><b>John Peng</b></sub>](http://www.johnpeng47.com)<br />[💻](https://github.com/theiliad/carbon-charts/commits?author=JohnPeng47 "Code") | [<img src="https://avatars0.githubusercontent.com/u/14932492?v=4" width="100px;"/><br /><sub><b>Thomas Mullen</b></sub>](https://github.com/t-mullen)<br />[💻](https://github.com/theiliad/carbon-charts/commits?author=t-mullen "Code") |
+<!-- ALL-CONTRIBUTORS-LIST:END -->

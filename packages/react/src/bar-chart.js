@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import { BarChart as BC } from "@carbon/charts";
 import BaseChart from "./base-chart";
