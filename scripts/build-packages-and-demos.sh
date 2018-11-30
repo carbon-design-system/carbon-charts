@@ -18,10 +18,10 @@ npm run build-storybook
 cp -a storybook-dist/* ../../pages/angular
 # Build angular bundle for release
 npm run build
-cp index.js dist/index.js
 mv dist ../charts-angular-dist
-rm -rf * # We are in the `angular` directory
-cp -a ../charts-angular-dist/* .
+cd ..
+rm -rf angular
+mv charts-angular-dist angular
 
 # Build React demos
 cd ../react
