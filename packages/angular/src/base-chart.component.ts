@@ -72,14 +72,14 @@ export class BaseChart implements AfterViewInit, OnInit {
 		if (this.width) {
 			this.options.width = this.width;
 		} else if (!this.options.width) {
-			console.error("Missing `width` prop!");
+			console.error("Missing `width` Input!");
 		}
 
 		// Height prop is mandatory for the wrappers
 		if (this.height) {
 			this.options.height = this.height;
 		} else if (!this.options.height) {
-			console.error("Missing `height` prop!");
+			console.error("Missing `height` Input!");
 		}
 	}
 
