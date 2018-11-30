@@ -1,11 +1,11 @@
 import { storiesOf } from "@storybook/angular";
 
 import { DonutCenter } from "@carbon/charts";
-import { colors } from "../helpers/commons";
+import { colors } from "./helpers/commons";
 
-import { ChartsModule } from "../../../src/charts.module";
-import { PieComponent } from "../pie/pie.component";
-import { DonutComponent } from "../donut/donut.component";
+import { ChartsModule } from "../src/charts.module";
+import { PieComponent } from "./pie/pie.component";
+import { DonutComponent } from "./donut/donut.component";
 
 const demoPieOptions = {
 	accessibility: false,

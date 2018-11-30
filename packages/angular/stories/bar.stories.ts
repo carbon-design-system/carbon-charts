@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/angular";
 
-import { ChartsModule } from "../../../src/charts.module";
-import { BarComponent } from "../bar/bar.component";
+import { ChartsModule } from "../src/charts.module";
+import { BarComponent } from "./bar/bar.component";
 
 import {
 	groupedBarData,
