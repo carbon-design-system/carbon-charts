@@ -22,9 +22,7 @@ export class BarChartComponent extends BaseChart implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
 	 */
-	ngAfterViewInit() {
-		console.log(this.options);
-		
+	ngAfterViewInit() {		
 		this.chart = new BarChart(
 			this.chartRef.nativeElement,
 			{
