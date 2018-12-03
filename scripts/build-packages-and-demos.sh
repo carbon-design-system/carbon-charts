@@ -24,7 +24,7 @@ rm -rf angular
 mv charts-angular-dist angular
 
 # Build React demos
-cd ../react
+cd react
 npm run build
 npm run build-storybook
 cp -a storybook-dist/. ../../pages/react
