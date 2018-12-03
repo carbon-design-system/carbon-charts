@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.11](https://github.com/IBM/carbon-charts/compare/v0.7.10...v0.7.11) (2018-12-03)
+
+
+### Bug Fixes
+
+* **angular:** Bundle angular wrapper components using angular package format ([352166a](https://github.com/IBM/carbon-charts/commit/352166a))
+
+
+
+
+
 ## [0.7.10](https://github.com/IBM/carbon-charts/compare/v0.7.9...v0.7.10) (2018-11-28)
 
 
