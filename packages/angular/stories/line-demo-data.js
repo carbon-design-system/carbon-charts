@@ -1,4 +1,4 @@
-import { colors } from "../helpers/commons";
+import { colors } from "./helpers/commons";
 
 export const curvedLineData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],

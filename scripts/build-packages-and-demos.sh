@@ -9,14 +9,19 @@ cd packages/core
 npm run build
 npm run demo:build
 typedoc --out ./demo/bundle/documentation ./src/index.ts
-cp -a demo/bundle/. ../../pages
+cp -a demo/bundle/* ../../pages
 
 # Build Angular demos and copy to `pages` directory
-cd ../angular/demo
+cd ../angular
+# Build angular demos
 npm run build-storybook
-cp -a storybook-dist/. ../../../pages/angular
+cp -a storybook-dist/* ../../pages/angular
+# Build angular bundle for release
+npm run build
+mv dist ../charts-angular-dist
 cd ..
-rm -rf demo
+rm -rf angular
+mv charts-angular-dist angular
 
 # Build React demos
 cd ../react
