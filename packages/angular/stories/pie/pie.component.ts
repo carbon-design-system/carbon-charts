@@ -19,7 +19,7 @@ export class PieComponent {
 		// Randomize old data values
 		const newData = Object.assign({}, oldData);
 		newData.datasets = oldData.datasets.map(dataset => {
-			const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
+			const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint, false));
 
 			const newDataset = Object.assign({}, dataset, { data: datasetNewData });
 
