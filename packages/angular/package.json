@@ -22,7 +22,10 @@
 		"@carbon/charts": "^0.7.9"
 	},
 	"devDependencies": {
-		"ng-packagr": "4.4.0",
+		"@angular/common": "6.0.0",
+		"@angular/compiler": "6.0.0",
+		"@angular/compiler-cli": "6.0.0",
+		"@angular/core": "7.1.1",
 		"@storybook/addon-actions": "4.0.0-alpha.16",
 		"@storybook/addon-backgrounds": "4.0.0-alpha.16",
 		"@storybook/addon-centered": "4.0.0-alpha.16",
@@ -36,6 +39,7 @@
 		"@storybook/addons": "4.0.0-alpha.16",
 		"@storybook/angular": "4.0.0-alpha.16",
 		"@storybook/storybook-deployer": "2.3.0",
+		"ng-packagr": "4.4.0",
 		"typescript": "2.7.2"
 	},
 	"ngPackage": {
