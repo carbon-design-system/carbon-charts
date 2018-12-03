@@ -4,6 +4,7 @@ import {
 } from "@angular/core";
 
 import { BaseChart } from "./base-chart.component";
+
 import { BarChart } from "@carbon/charts";
 
 /**
