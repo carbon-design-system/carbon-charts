@@ -39,11 +39,11 @@ npm install @carbon/charts --save
 
 ## Demo and documentation
 **Charts demos:**
-- [Vanilla JS](https://charts.carbondesignsystem.com/)
-- [Angular](https://charts.carbondesignsystem.com/angular)
-- [React](https://charts.carbondesignsystem.com/react)
+- [Vanilla JS](https://carbon-design-system.github.io/carbon-charts/)
+- [Angular](https://carbon-design-system.github.io/carbon-charts/angular)
+- [React](https://carbon-design-system.github.io/carbon-charts/react)
 
-**Docs:** <https://charts.carbondesignsystem.com/documentation/>
+**Docs:** <https://carbon-design-system.github.io/carbon-charts/documentation/>
 
 ### Code Sample
 <p align="center">
