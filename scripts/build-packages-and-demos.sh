@@ -2,7 +2,7 @@
 # needed for push to gh-page
 mkdir pages
 touch pages/.nojekyll
-echo "charts.carbondesignsystem.com" > pages/CNAME
+# echo "charts.carbondesignsystem.com" > pages/CNAME
 
 # Build Core demos and copy to `pages` directory
 cd packages/core
