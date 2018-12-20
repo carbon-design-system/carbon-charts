@@ -1,9 +1,9 @@
 (window["webpackJsonpCharts"] = window["webpackJsonpCharts"] || []).push([["vendors~main"],{
 
 /***/ "../../node_modules/babel-polyfill/lib/index.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/babel-polyfill/lib/index.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/babel-polyfill/lib/index.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41,9 +41,9 @@ define(String.prototype, "padRight", "".padEnd);
 /***/ }),
 
 /***/ "../../node_modules/babel-polyfill/node_modules/regenerator-runtime/runtime.js":
-/*!********************************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/babel-polyfill/node_modules/regenerator-runtime/runtime.js ***!
-  \********************************************************************************************************************/
+/*!*************************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/babel-polyfill/node_modules/regenerator-runtime/runtime.js ***!
+  \*************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -789,9 +789,9 @@ define(String.prototype, "padRight", "".padEnd);
 /***/ }),
 
 /***/ "../../node_modules/core-js/fn/regexp/escape.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/fn/regexp/escape.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/fn/regexp/escape.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -802,9 +802,9 @@ module.exports = __webpack_require__(/*! ../../modules/_core */ "../../node_modu
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_a-function.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_a-function.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_a-function.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -817,9 +817,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_a-number-value.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_a-number-value.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_a-number-value.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -833,9 +833,9 @@ module.exports = function (it, msg) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_add-to-unscopables.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_add-to-unscopables.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_add-to-unscopables.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -850,10 +850,30 @@ module.exports = function (key) {
 
 /***/ }),
 
+/***/ "../../node_modules/core-js/modules/_advance-string-index.js":
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_advance-string-index.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var at = __webpack_require__(/*! ./_string-at */ "../../node_modules/core-js/modules/_string-at.js")(true);
+
+ // `AdvanceStringIndex` abstract operation
+// https://tc39.github.io/ecma262/#sec-advancestringindex
+module.exports = function (S, index, unicode) {
+  return index + (unicode ? at(S, index).length : 1);
+};
+
+
+/***/ }),
+
 /***/ "../../node_modules/core-js/modules/_an-instance.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_an-instance.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_an-instance.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -867,9 +887,9 @@ module.exports = function (it, Constructor, name, forbiddenField) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_an-object.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_an-object.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_an-object.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -883,9 +903,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_array-copy-within.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_array-copy-within.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_array-copy-within.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -921,9 +941,9 @@ module.exports = [].copyWithin || function copyWithin(target /* = 0 */, start /*
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_array-fill.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_array-fill.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_array-fill.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -948,9 +968,9 @@ module.exports = function fill(value /* , start = 0, end = @length */) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_array-from-iterable.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_array-from-iterable.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_array-from-iterable.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -966,9 +986,9 @@ module.exports = function (iter, ITERATOR) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_array-includes.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_array-includes.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_array-includes.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1000,9 +1020,9 @@ module.exports = function (IS_INCLUDES) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_array-methods.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_array-methods.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_array-methods.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1055,9 +1075,9 @@ module.exports = function (TYPE, $create) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_array-reduce.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_array-reduce.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_array-reduce.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1094,9 +1114,9 @@ module.exports = function (that, callbackfn, aLen, memo, isRight) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_array-species-constructor.js":
-/*!*******************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_array-species-constructor.js ***!
-  \*******************************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_array-species-constructor.js ***!
+  \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1121,9 +1141,9 @@ module.exports = function (original) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_array-species-create.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_array-species-create.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_array-species-create.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1138,9 +1158,9 @@ module.exports = function (original, length) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_bind.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_bind.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_bind.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1175,9 +1195,9 @@ module.exports = Function.bind || function bind(that /* , ...args */) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_classof.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_classof.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_classof.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1209,9 +1229,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_cof.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_cof.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_cof.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1225,9 +1245,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_collection-strong.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_collection-strong.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_collection-strong.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1381,9 +1401,9 @@ module.exports = {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_collection-to-json.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_collection-to-json.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_collection-to-json.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1401,9 +1421,9 @@ module.exports = function (NAME) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_collection-weak.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_collection-weak.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_collection-weak.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1498,9 +1518,9 @@ module.exports = {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_collection.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_collection.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_collection.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1595,22 +1615,22 @@ module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_core.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_core.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_core.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.5.7' };
+var core = module.exports = { version: '2.6.1' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_create-property.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_create-property.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_create-property.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1628,9 +1648,9 @@ module.exports = function (object, index, value) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_ctx.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_ctx.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_ctx.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1659,9 +1679,9 @@ module.exports = function (fn, that, length) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_date-to-iso-string.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_date-to-iso-string.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_date-to-iso-string.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1697,9 +1717,9 @@ module.exports = (fails(function () {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_date-to-primitive.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_date-to-primitive.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_date-to-primitive.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1718,9 +1738,9 @@ module.exports = function (hint) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_defined.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_defined.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_defined.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1734,9 +1754,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_descriptors.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_descriptors.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_descriptors.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1749,9 +1769,9 @@ module.exports = !__webpack_require__(/*! ./_fails */ "../../node_modules/core-j
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_dom-create.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_dom-create.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_dom-create.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1767,9 +1787,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_enum-bug-keys.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_enum-bug-keys.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_enum-bug-keys.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1782,9 +1802,9 @@ module.exports = (
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_enum-keys.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_enum-keys.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_enum-keys.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1808,9 +1828,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_export.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_export.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_export.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1862,9 +1882,9 @@ module.exports = $export;
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_fails-is-regexp.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_fails-is-regexp.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_fails-is-regexp.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1885,9 +1905,9 @@ module.exports = function (KEY) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_fails.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_fails.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_fails.js ***!
+  \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1903,30 +1923,98 @@ module.exports = function (exec) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_fix-re-wks.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_fix-re-wks.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_fix-re-wks.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var hide = __webpack_require__(/*! ./_hide */ "../../node_modules/core-js/modules/_hide.js");
+__webpack_require__(/*! ./es6.regexp.exec */ "../../node_modules/core-js/modules/es6.regexp.exec.js");
 var redefine = __webpack_require__(/*! ./_redefine */ "../../node_modules/core-js/modules/_redefine.js");
+var hide = __webpack_require__(/*! ./_hide */ "../../node_modules/core-js/modules/_hide.js");
 var fails = __webpack_require__(/*! ./_fails */ "../../node_modules/core-js/modules/_fails.js");
 var defined = __webpack_require__(/*! ./_defined */ "../../node_modules/core-js/modules/_defined.js");
 var wks = __webpack_require__(/*! ./_wks */ "../../node_modules/core-js/modules/_wks.js");
+var regexpExec = __webpack_require__(/*! ./_regexp-exec */ "../../node_modules/core-js/modules/_regexp-exec.js");
+
+var SPECIES = wks('species');
+
+var REPLACE_SUPPORTS_NAMED_GROUPS = !fails(function () {
+  // #replace needs built-in support for named groups.
+  // #match works fine because it just return the exec results, even if it has
+  // a "grops" property.
+  var re = /./;
+  re.exec = function () {
+    var result = [];
+    result.groups = { a: '7' };
+    return result;
+  };
+  return ''.replace(re, '$<a>') !== '7';
+});
+
+var SPLIT_WORKS_WITH_OVERWRITTEN_EXEC = (function () {
+  // Chrome 51 has a buggy "split" implementation when RegExp#exec !== nativeExec
+  var re = /(?:)/;
+  var originalExec = re.exec;
+  re.exec = function () { return originalExec.apply(this, arguments); };
+  var result = 'ab'.split(re);
+  return result.length === 2 && result[0] === 'a' && result[1] === 'b';
+})();
 
 module.exports = function (KEY, length, exec) {
   var SYMBOL = wks(KEY);
-  var fns = exec(defined, SYMBOL, ''[KEY]);
-  var strfn = fns[0];
-  var rxfn = fns[1];
-  if (fails(function () {
+
+  var DELEGATES_TO_SYMBOL = !fails(function () {
+    // String methods call symbol-named RegEp methods
     var O = {};
     O[SYMBOL] = function () { return 7; };
     return ''[KEY](O) != 7;
-  })) {
+  });
+
+  var DELEGATES_TO_EXEC = DELEGATES_TO_SYMBOL ? !fails(function () {
+    // Symbol-named RegExp methods call .exec
+    var execCalled = false;
+    var re = /a/;
+    re.exec = function () { execCalled = true; return null; };
+    if (KEY === 'split') {
+      // RegExp[@@split] doesn't call the regex's exec method, but first creates
+      // a new one. We need to return the patched regex when creating the new one.
+      re.constructor = {};
+      re.constructor[SPECIES] = function () { return re; };
+    }
+    re[SYMBOL]('');
+    return !execCalled;
+  }) : undefined;
+
+  if (
+    !DELEGATES_TO_SYMBOL ||
+    !DELEGATES_TO_EXEC ||
+    (KEY === 'replace' && !REPLACE_SUPPORTS_NAMED_GROUPS) ||
+    (KEY === 'split' && !SPLIT_WORKS_WITH_OVERWRITTEN_EXEC)
+  ) {
+    var nativeRegExpMethod = /./[SYMBOL];
+    var fns = exec(
+      defined,
+      SYMBOL,
+      ''[KEY],
+      function maybeCallNative(nativeMethod, regexp, str, arg2, forceStringMethod) {
+        if (regexp.exec === regexpExec) {
+          if (DELEGATES_TO_SYMBOL && !forceStringMethod) {
+            // The native String method already delegates to @@method (this
+            // polyfilled function), leasing to infinite recursion.
+            // We avoid it by directly calling the native @@method method.
+            return { done: true, value: nativeRegExpMethod.call(regexp, str, arg2) };
+          }
+          return { done: true, value: nativeMethod.call(str, regexp, arg2) };
+        }
+        return { done: false };
+      }
+    );
+    var strfn = fns[0];
+    var rxfn = fns[1];
+
     redefine(String.prototype, KEY, strfn);
     hide(RegExp.prototype, SYMBOL, length == 2
       // 21.2.5.8 RegExp.prototype[@@replace](string, replaceValue)
@@ -1943,9 +2031,9 @@ module.exports = function (KEY, length, exec) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_flags.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_flags.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_flags.js ***!
+  \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1968,9 +2056,9 @@ module.exports = function () {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_flatten-into-array.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_flatten-into-array.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_flatten-into-array.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2019,9 +2107,9 @@ module.exports = flattenIntoArray;
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_for-of.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_for-of.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_for-of.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2055,9 +2143,9 @@ exports.RETURN = RETURN;
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_global.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_global.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_global.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2072,9 +2160,9 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_has.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_has.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_has.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2087,9 +2175,9 @@ module.exports = function (it, key) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_hide.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_hide.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_hide.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2106,9 +2194,9 @@ module.exports = __webpack_require__(/*! ./_descriptors */ "../../node_modules/c
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_html.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_html.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_html.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2119,9 +2207,9 @@ module.exports = document && document.documentElement;
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_ie8-dom-define.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_ie8-dom-define.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_ie8-dom-define.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2133,9 +2221,9 @@ module.exports = !__webpack_require__(/*! ./_descriptors */ "../../node_modules/
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_inherit-if-required.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_inherit-if-required.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_inherit-if-required.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2153,9 +2241,9 @@ module.exports = function (that, target, C) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_invoke.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_invoke.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_invoke.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2180,9 +2268,9 @@ module.exports = function (fn, args, that) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_iobject.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_iobject.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_iobject.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2197,9 +2285,9 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_is-array-iter.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_is-array-iter.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_is-array-iter.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2216,9 +2304,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_is-array.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_is-array.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_is-array.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2232,9 +2320,9 @@ module.exports = Array.isArray || function isArray(arg) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_is-integer.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_is-integer.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_is-integer.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2249,9 +2337,9 @@ module.exports = function isInteger(it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_is-object.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_is-object.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_is-object.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2263,9 +2351,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_is-regexp.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_is-regexp.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_is-regexp.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2282,9 +2370,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_iter-call.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_iter-call.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_iter-call.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2305,9 +2393,9 @@ module.exports = function (iterator, fn, value, entries) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_iter-create.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_iter-create.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_iter-create.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2330,9 +2418,9 @@ module.exports = function (Constructor, NAME, next) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_iter-define.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_iter-define.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_iter-define.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2411,9 +2499,9 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_iter-detect.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_iter-detect.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_iter-detect.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2444,9 +2532,9 @@ module.exports = function (exec, skipClosing) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_iter-step.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_iter-step.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_iter-step.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2458,9 +2546,9 @@ module.exports = function (done, value) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_iterators.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_iterators.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_iterators.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2470,9 +2558,9 @@ module.exports = {};
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_library.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_library.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_library.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2482,9 +2570,9 @@ module.exports = false;
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_math-expm1.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_math-expm1.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_math-expm1.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2503,9 +2591,9 @@ module.exports = (!$expm1
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_math-fround.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_math-fround.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_math-fround.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2537,9 +2625,9 @@ module.exports = Math.fround || function fround(x) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_math-log1p.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_math-log1p.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_math-log1p.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2552,9 +2640,9 @@ module.exports = Math.log1p || function log1p(x) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_math-scale.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_math-scale.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_math-scale.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2581,9 +2669,9 @@ module.exports = Math.scale || function scale(x, inLow, inHigh, outLow, outHigh)
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_math-sign.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_math-sign.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_math-sign.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2597,9 +2685,9 @@ module.exports = Math.sign || function sign(x) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_meta.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_meta.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_meta.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2661,9 +2749,9 @@ var meta = module.exports = {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_metadata.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_metadata.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_metadata.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2723,9 +2811,9 @@ module.exports = {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_microtask.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_microtask.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_microtask.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2803,9 +2891,9 @@ module.exports = function () {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_new-promise-capability.js":
-/*!****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_new-promise-capability.js ***!
-  \****************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_new-promise-capability.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2833,9 +2921,9 @@ module.exports.f = function (C) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-assign.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-assign.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-assign.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2879,9 +2967,9 @@ module.exports = !$assign || __webpack_require__(/*! ./_fails */ "../../node_mod
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-create.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-create.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-create.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2931,9 +3019,9 @@ module.exports = Object.create || function create(O, Properties) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-dp.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-dp.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-dp.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2958,9 +3046,9 @@ exports.f = __webpack_require__(/*! ./_descriptors */ "../../node_modules/core-j
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-dps.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-dps.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-dps.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2982,9 +3070,9 @@ module.exports = __webpack_require__(/*! ./_descriptors */ "../../node_modules/c
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-forced-pam.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-forced-pam.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-forced-pam.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3003,9 +3091,9 @@ module.exports = __webpack_require__(/*! ./_library */ "../../node_modules/core-
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-gopd.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-gopd.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-gopd.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3030,9 +3118,9 @@ exports.f = __webpack_require__(/*! ./_descriptors */ "../../node_modules/core-j
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-gopn-ext.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-gopn-ext.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-gopn-ext.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3060,9 +3148,9 @@ module.exports.f = function getOwnPropertyNames(it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-gopn.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-gopn.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-gopn.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3078,9 +3166,9 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-gops.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-gops.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-gops.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -3090,9 +3178,9 @@ exports.f = Object.getOwnPropertySymbols;
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-gpo.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-gpo.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-gpo.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3114,9 +3202,9 @@ module.exports = Object.getPrototypeOf || function (O) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-keys-internal.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-keys-internal.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-keys-internal.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3142,9 +3230,9 @@ module.exports = function (object, names) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-keys.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-keys.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-keys.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3160,9 +3248,9 @@ module.exports = Object.keys || function keys(O) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-pie.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-pie.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-pie.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -3172,9 +3260,9 @@ exports.f = {}.propertyIsEnumerable;
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-sap.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-sap.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-sap.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3193,9 +3281,9 @@ module.exports = function (KEY, exec) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_object-to-array.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_object-to-array.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_object-to-array.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3220,9 +3308,9 @@ module.exports = function (isEntries) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_own-keys.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_own-keys.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_own-keys.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3241,9 +3329,9 @@ module.exports = Reflect && Reflect.ownKeys || function ownKeys(it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_parse-float.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_parse-float.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_parse-float.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3260,9 +3348,9 @@ module.exports = 1 / $parseFloat(__webpack_require__(/*! ./_string-ws */ "../../
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_parse-int.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_parse-int.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_parse-int.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3280,9 +3368,9 @@ module.exports = $parseInt(ws + '08') !== 8 || $parseInt(ws + '0x16') !== 22 ? f
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_perform.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_perform.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_perform.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -3298,9 +3386,9 @@ module.exports = function (exec) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_promise-resolve.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_promise-resolve.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_promise-resolve.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3321,9 +3409,9 @@ module.exports = function (C, x) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_property-desc.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_property-desc.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_property-desc.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -3340,9 +3428,9 @@ module.exports = function (bitmap, value) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_redefine-all.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_redefine-all.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_redefine-all.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3356,9 +3444,9 @@ module.exports = function (target, src, safe) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_redefine.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_redefine.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_redefine.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3397,10 +3485,113 @@ __webpack_require__(/*! ./_core */ "../../node_modules/core-js/modules/_core.js"
 
 /***/ }),
 
+/***/ "../../node_modules/core-js/modules/_regexp-exec-abstract.js":
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_regexp-exec-abstract.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var classof = __webpack_require__(/*! ./_classof */ "../../node_modules/core-js/modules/_classof.js");
+var builtinExec = RegExp.prototype.exec;
+
+ // `RegExpExec` abstract operation
+// https://tc39.github.io/ecma262/#sec-regexpexec
+module.exports = function (R, S) {
+  var exec = R.exec;
+  if (typeof exec === 'function') {
+    var result = exec.call(R, S);
+    if (typeof result !== 'object') {
+      throw new TypeError('RegExp exec method returned something other than an Object or null');
+    }
+    return result;
+  }
+  if (classof(R) !== 'RegExp') {
+    throw new TypeError('RegExp#exec called on incompatible receiver');
+  }
+  return builtinExec.call(R, S);
+};
+
+
+/***/ }),
+
+/***/ "../../node_modules/core-js/modules/_regexp-exec.js":
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_regexp-exec.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var regexpFlags = __webpack_require__(/*! ./_flags */ "../../node_modules/core-js/modules/_flags.js");
+
+var nativeExec = RegExp.prototype.exec;
+// This always refers to the native implementation, because the
+// String#replace polyfill uses ./fix-regexp-well-known-symbol-logic.js,
+// which loads this file before patching the method.
+var nativeReplace = String.prototype.replace;
+
+var patchedExec = nativeExec;
+
+var LAST_INDEX = 'lastIndex';
+
+var UPDATES_LAST_INDEX_WRONG = (function () {
+  var re1 = /a/,
+      re2 = /b*/g;
+  nativeExec.call(re1, 'a');
+  nativeExec.call(re2, 'a');
+  return re1[LAST_INDEX] !== 0 || re2[LAST_INDEX] !== 0;
+})();
+
+// nonparticipating capturing group, copied from es5-shim's String#split patch.
+var NPCG_INCLUDED = /()??/.exec('')[1] !== undefined;
+
+var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED;
+
+if (PATCH) {
+  patchedExec = function exec(str) {
+    var re = this;
+    var lastIndex, reCopy, match, i;
+
+    if (NPCG_INCLUDED) {
+      reCopy = new RegExp('^' + re.source + '$(?!\\s)', regexpFlags.call(re));
+    }
+    if (UPDATES_LAST_INDEX_WRONG) lastIndex = re[LAST_INDEX];
+
+    match = nativeExec.call(re, str);
+
+    if (UPDATES_LAST_INDEX_WRONG && match) {
+      re[LAST_INDEX] = re.global ? match.index + match[0].length : lastIndex;
+    }
+    if (NPCG_INCLUDED && match && match.length > 1) {
+      // Fix browsers whose `exec` methods don't consistently return `undefined`
+      // for NPCG, like IE8. NOTE: This doesn' work for /(.?)?/
+      // eslint-disable-next-line no-loop-func
+      nativeReplace.call(match[0], reCopy, function () {
+        for (i = 1; i < arguments.length - 2; i++) {
+          if (arguments[i] === undefined) match[i] = undefined;
+        }
+      });
+    }
+
+    return match;
+  };
+}
+
+module.exports = patchedExec;
+
+
+/***/ }),
+
 /***/ "../../node_modules/core-js/modules/_replacer.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_replacer.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_replacer.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -3417,9 +3608,9 @@ module.exports = function (regExp, replace) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_same-value.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_same-value.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_same-value.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -3433,9 +3624,9 @@ module.exports = Object.is || function is(x, y) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_set-collection-from.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_set-collection-from.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_set-collection-from.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3473,9 +3664,9 @@ module.exports = function (COLLECTION) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_set-collection-of.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_set-collection-of.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_set-collection-of.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3497,9 +3688,9 @@ module.exports = function (COLLECTION) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_set-proto.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_set-proto.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_set-proto.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3533,9 +3724,9 @@ module.exports = {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_set-species.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_set-species.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_set-species.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3558,9 +3749,9 @@ module.exports = function (KEY) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_set-to-string-tag.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_set-to-string-tag.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_set-to-string-tag.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3576,9 +3767,9 @@ module.exports = function (it, tag, stat) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_shared-key.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_shared-key.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_shared-key.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3592,9 +3783,9 @@ module.exports = function (key) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_shared.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_shared.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_shared.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3615,9 +3806,9 @@ var store = global[SHARED] || (global[SHARED] = {});
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_species-constructor.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_species-constructor.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_species-constructor.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3635,9 +3826,9 @@ module.exports = function (O, D) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_strict-method.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_strict-method.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_strict-method.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3656,9 +3847,9 @@ module.exports = function (method, arg) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_string-at.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_string-at.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_string-at.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3684,9 +3875,9 @@ module.exports = function (TO_STRING) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_string-context.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_string-context.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_string-context.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3703,9 +3894,9 @@ module.exports = function (that, searchString, NAME) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_string-html.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_string-html.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_string-html.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3733,9 +3924,9 @@ module.exports = function (NAME, exec) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_string-pad.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_string-pad.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_string-pad.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3760,9 +3951,9 @@ module.exports = function (that, maxLength, fillString, left) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_string-repeat.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_string-repeat.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_string-repeat.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3784,9 +3975,9 @@ module.exports = function repeat(count) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_string-trim.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_string-trim.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_string-trim.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3825,9 +4016,9 @@ module.exports = exporter;
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_string-ws.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_string-ws.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_string-ws.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -3838,9 +4029,9 @@ module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u20
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_task.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_task.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_task.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3933,9 +4124,9 @@ module.exports = {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_to-absolute-index.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_to-absolute-index.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_to-absolute-index.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3951,9 +4142,9 @@ module.exports = function (index, length) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_to-index.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_to-index.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_to-index.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3972,9 +4163,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_to-integer.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_to-integer.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_to-integer.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -3989,9 +4180,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_to-iobject.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_to-iobject.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_to-iobject.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4006,9 +4197,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_to-length.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_to-length.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_to-length.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4023,9 +4214,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_to-object.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_to-object.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_to-object.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4039,9 +4230,9 @@ module.exports = function (it) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_to-primitive.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_to-primitive.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_to-primitive.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4062,9 +4253,9 @@ module.exports = function (it, S) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_typed-array.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_typed-array.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_typed-array.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4554,9 +4745,9 @@ if (__webpack_require__(/*! ./_descriptors */ "../../node_modules/core-js/module
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_typed-buffer.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_typed-buffer.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_typed-buffer.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4842,9 +5033,9 @@ exports[DATA_VIEW] = $DataView;
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_typed.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_typed.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_typed.js ***!
+  \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4881,9 +5072,9 @@ module.exports = {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_uid.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_uid.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_uid.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -4897,9 +5088,9 @@ module.exports = function (key) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_user-agent.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_user-agent.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_user-agent.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4912,9 +5103,9 @@ module.exports = navigator && navigator.userAgent || '';
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_validate-collection.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_validate-collection.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_validate-collection.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4928,9 +5119,9 @@ module.exports = function (it, TYPE) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_wks-define.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_wks-define.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_wks-define.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4948,9 +5139,9 @@ module.exports = function (name) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_wks-ext.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_wks-ext.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_wks-ext.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4960,9 +5151,9 @@ exports.f = __webpack_require__(/*! ./_wks */ "../../node_modules/core-js/module
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/_wks.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/_wks.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/_wks.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4982,9 +5173,9 @@ $exports.store = store;
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/core.get-iterator-method.js":
-/*!*****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/core.get-iterator-method.js ***!
-  \*****************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/core.get-iterator-method.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5001,9 +5192,9 @@ module.exports = __webpack_require__(/*! ./_core */ "../../node_modules/core-js/
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/core.regexp.escape.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/core.regexp.escape.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/core.regexp.escape.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5017,9 +5208,9 @@ $export($export.S, 'RegExp', { escape: function escape(it) { return $re(it); } }
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.copy-within.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.copy-within.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.copy-within.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5034,9 +5225,9 @@ __webpack_require__(/*! ./_add-to-unscopables */ "../../node_modules/core-js/mod
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.every.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.every.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.every.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5056,9 +5247,9 @@ $export($export.P + $export.F * !__webpack_require__(/*! ./_strict-method */ "..
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.fill.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.fill.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.fill.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5073,9 +5264,9 @@ __webpack_require__(/*! ./_add-to-unscopables */ "../../node_modules/core-js/mod
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.filter.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.filter.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.filter.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5095,9 +5286,9 @@ $export($export.P + $export.F * !__webpack_require__(/*! ./_strict-method */ "..
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.find-index.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.find-index.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.find-index.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5121,9 +5312,9 @@ __webpack_require__(/*! ./_add-to-unscopables */ "../../node_modules/core-js/mod
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.find.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.find.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.find.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5147,9 +5338,9 @@ __webpack_require__(/*! ./_add-to-unscopables */ "../../node_modules/core-js/mod
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.for-each.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.for-each.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.for-each.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5170,9 +5361,9 @@ $export($export.P + $export.F * !STRICT, 'Array', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.from.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.from.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.from.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5219,9 +5410,9 @@ $export($export.S + $export.F * !__webpack_require__(/*! ./_iter-detect */ "../.
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.index-of.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.index-of.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.index-of.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5246,9 +5437,9 @@ $export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(/*! ./_st
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.is-array.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.is-array.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.is-array.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5261,9 +5452,9 @@ $export($export.S, 'Array', { isArray: __webpack_require__(/*! ./_is-array */ ".
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.iterator.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.iterator.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.iterator.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5307,9 +5498,9 @@ addToUnscopables('entries');
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.join.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.join.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.join.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5331,9 +5522,9 @@ $export($export.P + $export.F * (__webpack_require__(/*! ./_iobject */ "../../no
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.last-index-of.js":
-/*!****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.last-index-of.js ***!
-  \****************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.last-index-of.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5365,9 +5556,9 @@ $export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(/*! ./_st
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.map.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.map.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.map.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5387,9 +5578,9 @@ $export($export.P + $export.F * !__webpack_require__(/*! ./_strict-method */ "..
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.of.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.of.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.of.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5418,9 +5609,9 @@ $export($export.S + $export.F * __webpack_require__(/*! ./_fails */ "../../node_
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.reduce-right.js":
-/*!***************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.reduce-right.js ***!
-  \***************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.reduce-right.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5440,9 +5631,9 @@ $export($export.P + $export.F * !__webpack_require__(/*! ./_strict-method */ "..
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.reduce.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.reduce.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.reduce.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5462,9 +5653,9 @@ $export($export.P + $export.F * !__webpack_require__(/*! ./_strict-method */ "..
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.slice.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.slice.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.slice.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5502,9 +5693,9 @@ $export($export.P + $export.F * __webpack_require__(/*! ./_fails */ "../../node_
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.some.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.some.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.some.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5524,9 +5715,9 @@ $export($export.P + $export.F * !__webpack_require__(/*! ./_strict-method */ "..
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.sort.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.sort.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.sort.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5559,9 +5750,9 @@ $export($export.P + $export.F * (fails(function () {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.array.species.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.array.species.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.array.species.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5571,9 +5762,9 @@ __webpack_require__(/*! ./_set-species */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.date.now.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.date.now.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.date.now.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5586,9 +5777,9 @@ $export($export.S, 'Date', { now: function () { return new Date().getTime(); } }
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.date.to-iso-string.js":
-/*!***************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.date.to-iso-string.js ***!
-  \***************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.date.to-iso-string.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5605,9 +5796,9 @@ $export($export.P + $export.F * (Date.prototype.toISOString !== toISOString), 'D
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.date.to-json.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.date.to-json.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.date.to-json.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5633,9 +5824,9 @@ $export($export.P + $export.F * __webpack_require__(/*! ./_fails */ "../../node_
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.date.to-primitive.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.date.to-primitive.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.date.to-primitive.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5648,9 +5839,9 @@ if (!(TO_PRIMITIVE in proto)) __webpack_require__(/*! ./_hide */ "../../node_mod
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.date.to-string.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.date.to-string.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.date.to-string.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5671,9 +5862,9 @@ if (new Date(NaN) + '' != INVALID_DATE) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.function.bind.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.function.bind.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.function.bind.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5686,9 +5877,9 @@ $export($export.P, 'Function', { bind: __webpack_require__(/*! ./_bind */ "../..
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.function.has-instance.js":
-/*!******************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.function.has-instance.js ***!
-  \******************************************************************************************************/
+/*!***********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.function.has-instance.js ***!
+  \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5711,9 +5902,9 @@ if (!(HAS_INSTANCE in FunctionProto)) __webpack_require__(/*! ./_object-dp */ ".
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.function.name.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.function.name.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.function.name.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5738,9 +5929,9 @@ NAME in FProto || __webpack_require__(/*! ./_descriptors */ "../../node_modules/
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.map.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.map.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.map.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5769,9 +5960,9 @@ module.exports = __webpack_require__(/*! ./_collection */ "../../node_modules/co
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.acosh.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.acosh.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.acosh.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5798,9 +5989,9 @@ $export($export.S + $export.F * !($acosh
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.asinh.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.asinh.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.asinh.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5819,9 +6010,9 @@ $export($export.S + $export.F * !($asinh && 1 / $asinh(0) > 0), 'Math', { asinh:
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.atanh.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.atanh.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.atanh.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5840,9 +6031,9 @@ $export($export.S + $export.F * !($atanh && 1 / $atanh(-0) < 0), 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.cbrt.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.cbrt.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.cbrt.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5860,9 +6051,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.clz32.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.clz32.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.clz32.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5879,9 +6070,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.cosh.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.cosh.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.cosh.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5899,9 +6090,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.expm1.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.expm1.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.expm1.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5915,9 +6106,9 @@ $export($export.S + $export.F * ($expm1 != Math.expm1), 'Math', { expm1: $expm1 
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.fround.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.fround.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.fround.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5930,9 +6121,9 @@ $export($export.S, 'Math', { fround: __webpack_require__(/*! ./_math-fround */ "
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.hypot.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.hypot.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.hypot.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5966,9 +6157,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.imul.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.imul.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.imul.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5994,9 +6185,9 @@ $export($export.S + $export.F * __webpack_require__(/*! ./_fails */ "../../node_
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.log10.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.log10.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.log10.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6013,9 +6204,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.log1p.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.log1p.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.log1p.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6028,9 +6219,9 @@ $export($export.S, 'Math', { log1p: __webpack_require__(/*! ./_math-log1p */ "..
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.log2.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.log2.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.log2.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6047,9 +6238,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.sign.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.sign.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.sign.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6062,9 +6253,9 @@ $export($export.S, 'Math', { sign: __webpack_require__(/*! ./_math-sign */ "../.
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.sinh.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.sinh.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.sinh.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6088,9 +6279,9 @@ $export($export.S + $export.F * __webpack_require__(/*! ./_fails */ "../../node_
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.tanh.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.tanh.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.tanh.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6111,9 +6302,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.math.trunc.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.math.trunc.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.math.trunc.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6130,9 +6321,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.number.constructor.js":
-/*!***************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.number.constructor.js ***!
-  \***************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.number.constructor.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6211,9 +6402,9 @@ if (!$Number(' 0o1') || !$Number('0b1') || $Number('+0x1')) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.number.epsilon.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.number.epsilon.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.number.epsilon.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6226,9 +6417,9 @@ $export($export.S, 'Number', { EPSILON: Math.pow(2, -52) });
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.number.is-finite.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.number.is-finite.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.number.is-finite.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6246,9 +6437,9 @@ $export($export.S, 'Number', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.number.is-integer.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.number.is-integer.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.number.is-integer.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6261,9 +6452,9 @@ $export($export.S, 'Number', { isInteger: __webpack_require__(/*! ./_is-integer 
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.number.is-nan.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.number.is-nan.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.number.is-nan.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6281,9 +6472,9 @@ $export($export.S, 'Number', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.number.is-safe-integer.js":
-/*!*******************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.number.is-safe-integer.js ***!
-  \*******************************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.number.is-safe-integer.js ***!
+  \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6302,9 +6493,9 @@ $export($export.S, 'Number', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.number.max-safe-integer.js":
-/*!********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.number.max-safe-integer.js ***!
-  \********************************************************************************************************/
+/*!*************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.number.max-safe-integer.js ***!
+  \*************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6317,9 +6508,9 @@ $export($export.S, 'Number', { MAX_SAFE_INTEGER: 0x1fffffffffffff });
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.number.min-safe-integer.js":
-/*!********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.number.min-safe-integer.js ***!
-  \********************************************************************************************************/
+/*!*************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.number.min-safe-integer.js ***!
+  \*************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6332,9 +6523,9 @@ $export($export.S, 'Number', { MIN_SAFE_INTEGER: -0x1fffffffffffff });
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.number.parse-float.js":
-/*!***************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.number.parse-float.js ***!
-  \***************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.number.parse-float.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6347,9 +6538,9 @@ $export($export.S + $export.F * (Number.parseFloat != $parseFloat), 'Number', { 
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.number.parse-int.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.number.parse-int.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.number.parse-int.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6362,9 +6553,9 @@ $export($export.S + $export.F * (Number.parseInt != $parseInt), 'Number', { pars
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.number.to-fixed.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.number.to-fixed.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.number.to-fixed.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6488,9 +6679,9 @@ $export($export.P + $export.F * (!!$toFixed && (
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.number.to-precision.js":
-/*!****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.number.to-precision.js ***!
-  \****************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.number.to-precision.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6518,9 +6709,9 @@ $export($export.P + $export.F * ($fails(function () {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.assign.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.assign.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.assign.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6533,9 +6724,9 @@ $export($export.S + $export.F, 'Object', { assign: __webpack_require__(/*! ./_ob
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.create.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.create.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.create.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6547,9 +6738,9 @@ $export($export.S, 'Object', { create: __webpack_require__(/*! ./_object-create 
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.define-properties.js":
-/*!*********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.define-properties.js ***!
-  \*********************************************************************************************************/
+/*!**************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.define-properties.js ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6561,9 +6752,9 @@ $export($export.S + $export.F * !__webpack_require__(/*! ./_descriptors */ "../.
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.define-property.js":
-/*!*******************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.define-property.js ***!
-  \*******************************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.define-property.js ***!
+  \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6575,9 +6766,9 @@ $export($export.S + $export.F * !__webpack_require__(/*! ./_descriptors */ "../.
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.freeze.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.freeze.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.freeze.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6595,9 +6786,9 @@ __webpack_require__(/*! ./_object-sap */ "../../node_modules/core-js/modules/_ob
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.get-own-property-descriptor.js":
-/*!*******************************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.get-own-property-descriptor.js ***!
-  \*******************************************************************************************************************/
+/*!************************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.get-own-property-descriptor.js ***!
+  \************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6615,9 +6806,9 @@ __webpack_require__(/*! ./_object-sap */ "../../node_modules/core-js/modules/_ob
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.get-own-property-names.js":
-/*!**************************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.get-own-property-names.js ***!
-  \**************************************************************************************************************/
+/*!*******************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.get-own-property-names.js ***!
+  \*******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6630,9 +6821,9 @@ __webpack_require__(/*! ./_object-sap */ "../../node_modules/core-js/modules/_ob
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.get-prototype-of.js":
-/*!********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.get-prototype-of.js ***!
-  \********************************************************************************************************/
+/*!*************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.get-prototype-of.js ***!
+  \*************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6650,9 +6841,9 @@ __webpack_require__(/*! ./_object-sap */ "../../node_modules/core-js/modules/_ob
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.is-extensible.js":
-/*!*****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.is-extensible.js ***!
-  \*****************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.is-extensible.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6669,9 +6860,9 @@ __webpack_require__(/*! ./_object-sap */ "../../node_modules/core-js/modules/_ob
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.is-frozen.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.is-frozen.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.is-frozen.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6688,9 +6879,9 @@ __webpack_require__(/*! ./_object-sap */ "../../node_modules/core-js/modules/_ob
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.is-sealed.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.is-sealed.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.is-sealed.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6707,9 +6898,9 @@ __webpack_require__(/*! ./_object-sap */ "../../node_modules/core-js/modules/_ob
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.is.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.is.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.is.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6721,9 +6912,9 @@ $export($export.S, 'Object', { is: __webpack_require__(/*! ./_same-value */ "../
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.keys.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.keys.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.keys.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6741,9 +6932,9 @@ __webpack_require__(/*! ./_object-sap */ "../../node_modules/core-js/modules/_ob
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.prevent-extensions.js":
-/*!**********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.prevent-extensions.js ***!
-  \**********************************************************************************************************/
+/*!***************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.prevent-extensions.js ***!
+  \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6761,9 +6952,9 @@ __webpack_require__(/*! ./_object-sap */ "../../node_modules/core-js/modules/_ob
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.seal.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.seal.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.seal.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6781,9 +6972,9 @@ __webpack_require__(/*! ./_object-sap */ "../../node_modules/core-js/modules/_ob
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.set-prototype-of.js":
-/*!********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.set-prototype-of.js ***!
-  \********************************************************************************************************/
+/*!*************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.set-prototype-of.js ***!
+  \*************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6795,9 +6986,9 @@ $export($export.S, 'Object', { setPrototypeOf: __webpack_require__(/*! ./_set-pr
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.object.to-string.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.object.to-string.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.object.to-string.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6817,9 +7008,9 @@ if (test + '' != '[object z]') {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.parse-float.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.parse-float.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.parse-float.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6832,9 +7023,9 @@ $export($export.G + $export.F * (parseFloat != $parseFloat), { parseFloat: $pars
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.parse-int.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.parse-int.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.parse-int.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6847,9 +7038,9 @@ $export($export.G + $export.F * (parseInt != $parseInt), { parseInt: $parseInt }
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.promise.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.promise.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.promise.js ***!
+  \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7145,9 +7336,9 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(/*! ./_iter-
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.reflect.apply.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.reflect.apply.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.reflect.apply.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7172,9 +7363,9 @@ $export($export.S + $export.F * !__webpack_require__(/*! ./_fails */ "../../node
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.reflect.construct.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.reflect.construct.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.reflect.construct.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7230,9 +7421,9 @@ $export($export.S + $export.F * (NEW_TARGET_BUG || ARGS_BUG), 'Reflect', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.reflect.define-property.js":
-/*!********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.reflect.define-property.js ***!
-  \********************************************************************************************************/
+/*!*************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.reflect.define-property.js ***!
+  \*************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7264,9 +7455,9 @@ $export($export.S + $export.F * __webpack_require__(/*! ./_fails */ "../../node_
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.reflect.delete-property.js":
-/*!********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.reflect.delete-property.js ***!
-  \********************************************************************************************************/
+/*!*************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.reflect.delete-property.js ***!
+  \*************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7286,9 +7477,9 @@ $export($export.S, 'Reflect', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.reflect.enumerate.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.reflect.enumerate.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.reflect.enumerate.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7324,9 +7515,9 @@ $export($export.S, 'Reflect', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js":
-/*!********************************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js ***!
-  \********************************************************************************************************************/
+/*!*************************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js ***!
+  \*************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7345,9 +7536,9 @@ $export($export.S, 'Reflect', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.reflect.get-prototype-of.js":
-/*!*********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.reflect.get-prototype-of.js ***!
-  \*********************************************************************************************************/
+/*!**************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.reflect.get-prototype-of.js ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7366,9 +7557,9 @@ $export($export.S, 'Reflect', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.reflect.get.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.reflect.get.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.reflect.get.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7398,9 +7589,9 @@ $export($export.S, 'Reflect', { get: get });
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.reflect.has.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.reflect.has.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.reflect.has.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7417,9 +7608,9 @@ $export($export.S, 'Reflect', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.reflect.is-extensible.js":
-/*!******************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.reflect.is-extensible.js ***!
-  \******************************************************************************************************/
+/*!***********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.reflect.is-extensible.js ***!
+  \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7439,9 +7630,9 @@ $export($export.S, 'Reflect', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.reflect.own-keys.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.reflect.own-keys.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.reflect.own-keys.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7454,9 +7645,9 @@ $export($export.S, 'Reflect', { ownKeys: __webpack_require__(/*! ./_own-keys */ 
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.reflect.prevent-extensions.js":
-/*!***********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.reflect.prevent-extensions.js ***!
-  \***********************************************************************************************************/
+/*!****************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.reflect.prevent-extensions.js ***!
+  \****************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7481,9 +7672,9 @@ $export($export.S, 'Reflect', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.reflect.set-prototype-of.js":
-/*!*********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.reflect.set-prototype-of.js ***!
-  \*********************************************************************************************************/
+/*!**************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.reflect.set-prototype-of.js ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7507,9 +7698,9 @@ if (setProto) $export($export.S, 'Reflect', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.reflect.set.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.reflect.set.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.reflect.set.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7551,9 +7742,9 @@ $export($export.S, 'Reflect', { set: set });
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.regexp.constructor.js":
-/*!***************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.regexp.constructor.js ***!
-  \***************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.regexp.constructor.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7604,10 +7795,31 @@ __webpack_require__(/*! ./_set-species */ "../../node_modules/core-js/modules/_s
 
 /***/ }),
 
+/***/ "../../node_modules/core-js/modules/es6.regexp.exec.js":
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.regexp.exec.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var regexpExec = __webpack_require__(/*! ./_regexp-exec */ "../../node_modules/core-js/modules/_regexp-exec.js");
+__webpack_require__(/*! ./_export */ "../../node_modules/core-js/modules/_export.js")({
+  target: 'RegExp',
+  proto: true,
+  forced: regexpExec !== /./.exec
+}, {
+  exec: regexpExec
+});
+
+
+/***/ }),
+
 /***/ "../../node_modules/core-js/modules/es6.regexp.flags.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.regexp.flags.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.regexp.flags.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7621,86 +7833,259 @@ if (__webpack_require__(/*! ./_descriptors */ "../../node_modules/core-js/module
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.regexp.match.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.regexp.match.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.regexp.match.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+var anObject = __webpack_require__(/*! ./_an-object */ "../../node_modules/core-js/modules/_an-object.js");
+var toLength = __webpack_require__(/*! ./_to-length */ "../../node_modules/core-js/modules/_to-length.js");
+var advanceStringIndex = __webpack_require__(/*! ./_advance-string-index */ "../../node_modules/core-js/modules/_advance-string-index.js");
+var regExpExec = __webpack_require__(/*! ./_regexp-exec-abstract */ "../../node_modules/core-js/modules/_regexp-exec-abstract.js");
+
 // @@match logic
-__webpack_require__(/*! ./_fix-re-wks */ "../../node_modules/core-js/modules/_fix-re-wks.js")('match', 1, function (defined, MATCH, $match) {
-  // 21.1.3.11 String.prototype.match(regexp)
-  return [function match(regexp) {
-    'use strict';
-    var O = defined(this);
-    var fn = regexp == undefined ? undefined : regexp[MATCH];
-    return fn !== undefined ? fn.call(regexp, O) : new RegExp(regexp)[MATCH](String(O));
-  }, $match];
+__webpack_require__(/*! ./_fix-re-wks */ "../../node_modules/core-js/modules/_fix-re-wks.js")('match', 1, function (defined, MATCH, $match, maybeCallNative) {
+  return [
+    // `String.prototype.match` method
+    // https://tc39.github.io/ecma262/#sec-string.prototype.match
+    function match(regexp) {
+      var O = defined(this);
+      var fn = regexp == undefined ? undefined : regexp[MATCH];
+      return fn !== undefined ? fn.call(regexp, O) : new RegExp(regexp)[MATCH](String(O));
+    },
+    // `RegExp.prototype[@@match]` method
+    // https://tc39.github.io/ecma262/#sec-regexp.prototype-@@match
+    function (regexp) {
+      var res = maybeCallNative($match, regexp, this);
+      if (res.done) return res.value;
+      var rx = anObject(regexp);
+      var S = String(this);
+      if (!rx.global) return regExpExec(rx, S);
+      var fullUnicode = rx.unicode;
+      rx.lastIndex = 0;
+      var A = [];
+      var n = 0;
+      var result;
+      while ((result = regExpExec(rx, S)) !== null) {
+        var matchStr = String(result[0]);
+        A[n] = matchStr;
+        if (matchStr === '') rx.lastIndex = advanceStringIndex(S, toLength(rx.lastIndex), fullUnicode);
+        n++;
+      }
+      return n === 0 ? null : A;
+    }
+  ];
 });
 
 
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.regexp.replace.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.regexp.replace.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.regexp.replace.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+var anObject = __webpack_require__(/*! ./_an-object */ "../../node_modules/core-js/modules/_an-object.js");
+var toObject = __webpack_require__(/*! ./_to-object */ "../../node_modules/core-js/modules/_to-object.js");
+var toLength = __webpack_require__(/*! ./_to-length */ "../../node_modules/core-js/modules/_to-length.js");
+var toInteger = __webpack_require__(/*! ./_to-integer */ "../../node_modules/core-js/modules/_to-integer.js");
+var advanceStringIndex = __webpack_require__(/*! ./_advance-string-index */ "../../node_modules/core-js/modules/_advance-string-index.js");
+var regExpExec = __webpack_require__(/*! ./_regexp-exec-abstract */ "../../node_modules/core-js/modules/_regexp-exec-abstract.js");
+var max = Math.max;
+var min = Math.min;
+var floor = Math.floor;
+var SUBSTITUTION_SYMBOLS = /\$([$&`']|\d\d?|<[^>]*>)/g;
+var SUBSTITUTION_SYMBOLS_NO_NAMED = /\$([$&`']|\d\d?)/g;
+
+var maybeToString = function (it) {
+  return it === undefined ? it : String(it);
+};
+
 // @@replace logic
-__webpack_require__(/*! ./_fix-re-wks */ "../../node_modules/core-js/modules/_fix-re-wks.js")('replace', 2, function (defined, REPLACE, $replace) {
-  // 21.1.3.14 String.prototype.replace(searchValue, replaceValue)
-  return [function replace(searchValue, replaceValue) {
-    'use strict';
-    var O = defined(this);
-    var fn = searchValue == undefined ? undefined : searchValue[REPLACE];
-    return fn !== undefined
-      ? fn.call(searchValue, O, replaceValue)
-      : $replace.call(String(O), searchValue, replaceValue);
-  }, $replace];
+__webpack_require__(/*! ./_fix-re-wks */ "../../node_modules/core-js/modules/_fix-re-wks.js")('replace', 2, function (defined, REPLACE, $replace, maybeCallNative) {
+  return [
+    // `String.prototype.replace` method
+    // https://tc39.github.io/ecma262/#sec-string.prototype.replace
+    function replace(searchValue, replaceValue) {
+      var O = defined(this);
+      var fn = searchValue == undefined ? undefined : searchValue[REPLACE];
+      return fn !== undefined
+        ? fn.call(searchValue, O, replaceValue)
+        : $replace.call(String(O), searchValue, replaceValue);
+    },
+    // `RegExp.prototype[@@replace]` method
+    // https://tc39.github.io/ecma262/#sec-regexp.prototype-@@replace
+    function (regexp, replaceValue) {
+      var res = maybeCallNative($replace, regexp, this, replaceValue);
+      if (res.done) return res.value;
+
+      var rx = anObject(regexp);
+      var S = String(this);
+      var functionalReplace = typeof replaceValue === 'function';
+      if (!functionalReplace) replaceValue = String(replaceValue);
+      var global = rx.global;
+      if (global) {
+        var fullUnicode = rx.unicode;
+        rx.lastIndex = 0;
+      }
+      var results = [];
+      while (true) {
+        var result = regExpExec(rx, S);
+        if (result === null) break;
+        results.push(result);
+        if (!global) break;
+        var matchStr = String(result[0]);
+        if (matchStr === '') rx.lastIndex = advanceStringIndex(S, toLength(rx.lastIndex), fullUnicode);
+      }
+      var accumulatedResult = '';
+      var nextSourcePosition = 0;
+      for (var i = 0; i < results.length; i++) {
+        result = results[i];
+        var matched = String(result[0]);
+        var position = max(min(toInteger(result.index), S.length), 0);
+        var captures = [];
+        // NOTE: This is equivalent to
+        //   captures = result.slice(1).map(maybeToString)
+        // but for some reason `nativeSlice.call(result, 1, result.length)` (called in
+        // the slice polyfill when slicing native arrays) "doesn't work" in safari 9 and
+        // causes a crash (https://pastebin.com/N21QzeQA) when trying to debug it.
+        for (var j = 1; j < result.length; j++) captures.push(maybeToString(result[j]));
+        var namedCaptures = result.groups;
+        if (functionalReplace) {
+          var replacerArgs = [matched].concat(captures, position, S);
+          if (namedCaptures !== undefined) replacerArgs.push(namedCaptures);
+          var replacement = String(replaceValue.apply(undefined, replacerArgs));
+        } else {
+          replacement = getSubstitution(matched, S, position, captures, namedCaptures, replaceValue);
+        }
+        if (position >= nextSourcePosition) {
+          accumulatedResult += S.slice(nextSourcePosition, position) + replacement;
+          nextSourcePosition = position + matched.length;
+        }
+      }
+      return accumulatedResult + S.slice(nextSourcePosition);
+    }
+  ];
+
+    // https://tc39.github.io/ecma262/#sec-getsubstitution
+  function getSubstitution(matched, str, position, captures, namedCaptures, replacement) {
+    var tailPos = position + matched.length;
+    var m = captures.length;
+    var symbols = SUBSTITUTION_SYMBOLS_NO_NAMED;
+    if (namedCaptures !== undefined) {
+      namedCaptures = toObject(namedCaptures);
+      symbols = SUBSTITUTION_SYMBOLS;
+    }
+    return $replace.call(replacement, symbols, function (match, ch) {
+      var capture;
+      switch (ch.charAt(0)) {
+        case '$': return '$';
+        case '&': return matched;
+        case '`': return str.slice(0, position);
+        case "'": return str.slice(tailPos);
+        case '<':
+          capture = namedCaptures[ch.slice(1, -1)];
+          break;
+        default: // \d\d?
+          var n = +ch;
+          if (n === 0) return ch;
+          if (n > m) {
+            var f = floor(n / 10);
+            if (f === 0) return ch;
+            if (f <= m) return captures[f - 1] === undefined ? ch.charAt(1) : captures[f - 1] + ch.charAt(1);
+            return ch;
+          }
+          capture = captures[n - 1];
+      }
+      return capture === undefined ? '' : capture;
+    });
+  }
 });
 
 
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.regexp.search.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.regexp.search.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.regexp.search.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+var anObject = __webpack_require__(/*! ./_an-object */ "../../node_modules/core-js/modules/_an-object.js");
+var sameValue = __webpack_require__(/*! ./_same-value */ "../../node_modules/core-js/modules/_same-value.js");
+var regExpExec = __webpack_require__(/*! ./_regexp-exec-abstract */ "../../node_modules/core-js/modules/_regexp-exec-abstract.js");
+
 // @@search logic
-__webpack_require__(/*! ./_fix-re-wks */ "../../node_modules/core-js/modules/_fix-re-wks.js")('search', 1, function (defined, SEARCH, $search) {
-  // 21.1.3.15 String.prototype.search(regexp)
-  return [function search(regexp) {
-    'use strict';
-    var O = defined(this);
-    var fn = regexp == undefined ? undefined : regexp[SEARCH];
-    return fn !== undefined ? fn.call(regexp, O) : new RegExp(regexp)[SEARCH](String(O));
-  }, $search];
+__webpack_require__(/*! ./_fix-re-wks */ "../../node_modules/core-js/modules/_fix-re-wks.js")('search', 1, function (defined, SEARCH, $search, maybeCallNative) {
+  return [
+    // `String.prototype.search` method
+    // https://tc39.github.io/ecma262/#sec-string.prototype.search
+    function search(regexp) {
+      var O = defined(this);
+      var fn = regexp == undefined ? undefined : regexp[SEARCH];
+      return fn !== undefined ? fn.call(regexp, O) : new RegExp(regexp)[SEARCH](String(O));
+    },
+    // `RegExp.prototype[@@search]` method
+    // https://tc39.github.io/ecma262/#sec-regexp.prototype-@@search
+    function (regexp) {
+      var res = maybeCallNative($search, regexp, this);
+      if (res.done) return res.value;
+      var rx = anObject(regexp);
+      var S = String(this);
+      var previousLastIndex = rx.lastIndex;
+      if (!sameValue(previousLastIndex, 0)) rx.lastIndex = 0;
+      var result = regExpExec(rx, S);
+      if (!sameValue(rx.lastIndex, previousLastIndex)) rx.lastIndex = previousLastIndex;
+      return result === null ? -1 : result.index;
+    }
+  ];
 });
 
 
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.regexp.split.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.regexp.split.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.regexp.split.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+var isRegExp = __webpack_require__(/*! ./_is-regexp */ "../../node_modules/core-js/modules/_is-regexp.js");
+var anObject = __webpack_require__(/*! ./_an-object */ "../../node_modules/core-js/modules/_an-object.js");
+var speciesConstructor = __webpack_require__(/*! ./_species-constructor */ "../../node_modules/core-js/modules/_species-constructor.js");
+var advanceStringIndex = __webpack_require__(/*! ./_advance-string-index */ "../../node_modules/core-js/modules/_advance-string-index.js");
+var toLength = __webpack_require__(/*! ./_to-length */ "../../node_modules/core-js/modules/_to-length.js");
+var callRegExpExec = __webpack_require__(/*! ./_regexp-exec-abstract */ "../../node_modules/core-js/modules/_regexp-exec-abstract.js");
+var regexpExec = __webpack_require__(/*! ./_regexp-exec */ "../../node_modules/core-js/modules/_regexp-exec.js");
+var $min = Math.min;
+var $push = [].push;
+var $SPLIT = 'split';
+var LENGTH = 'length';
+var LAST_INDEX = 'lastIndex';
+
+// eslint-disable-next-line no-empty
+var SUPPORTS_Y = !!(function () { try { return new RegExp('x', 'y'); } catch (e) {} })();
+
 // @@split logic
-__webpack_require__(/*! ./_fix-re-wks */ "../../node_modules/core-js/modules/_fix-re-wks.js")('split', 2, function (defined, SPLIT, $split) {
-  'use strict';
-  var isRegExp = __webpack_require__(/*! ./_is-regexp */ "../../node_modules/core-js/modules/_is-regexp.js");
-  var _split = $split;
-  var $push = [].push;
-  var $SPLIT = 'split';
-  var LENGTH = 'length';
-  var LAST_INDEX = 'lastIndex';
+__webpack_require__(/*! ./_fix-re-wks */ "../../node_modules/core-js/modules/_fix-re-wks.js")('split', 2, function (defined, SPLIT, $split, maybeCallNative) {
+  var internalSplit;
   if (
     'abbc'[$SPLIT](/(b)*/)[1] == 'c' ||
     'test'[$SPLIT](/(?:)/, -1)[LENGTH] != 4 ||
@@ -7709,13 +8094,12 @@ __webpack_require__(/*! ./_fix-re-wks */ "../../node_modules/core-js/modules/_fi
     '.'[$SPLIT](/()()/)[LENGTH] > 1 ||
     ''[$SPLIT](/.?/)[LENGTH]
   ) {
-    var NPCG = /()??/.exec('')[1] === undefined; // nonparticipating capturing group
     // based on es5-shim implementation, need to rework it
-    $split = function (separator, limit) {
+    internalSplit = function (separator, limit) {
       var string = String(this);
       if (separator === undefined && limit === 0) return [];
       // If `separator` is not a regex, use native split
-      if (!isRegExp(separator)) return _split.call(string, separator, limit);
+      if (!isRegExp(separator)) return $split.call(string, separator, limit);
       var output = [];
       var flags = (separator.ignoreCase ? 'i' : '') +
                   (separator.multiline ? 'm' : '') +
@@ -7725,19 +8109,11 @@ __webpack_require__(/*! ./_fix-re-wks */ "../../node_modules/core-js/modules/_fi
       var splitLimit = limit === undefined ? 4294967295 : limit >>> 0;
       // Make `global` and avoid `lastIndex` issues by working with a copy
       var separatorCopy = new RegExp(separator.source, flags + 'g');
-      var separator2, match, lastIndex, lastLength, i;
-      // Doesn't need flags gy, but they don't hurt
-      if (!NPCG) separator2 = new RegExp('^' + separatorCopy.source + '$(?!\\s)', flags);
-      while (match = separatorCopy.exec(string)) {
-        // `separatorCopy.lastIndex` is not reliable cross-browser
-        lastIndex = match.index + match[0][LENGTH];
+      var match, lastIndex, lastLength;
+      while (match = regexpExec.call(separatorCopy, string)) {
+        lastIndex = separatorCopy[LAST_INDEX];
         if (lastIndex > lastLastIndex) {
           output.push(string.slice(lastLastIndex, match.index));
-          // Fix browsers whose `exec` methods don't consistently return `undefined` for NPCG
-          // eslint-disable-next-line no-loop-func
-          if (!NPCG && match[LENGTH] > 1) match[0].replace(separator2, function () {
-            for (i = 1; i < arguments[LENGTH] - 2; i++) if (arguments[i] === undefined) match[i] = undefined;
-          });
           if (match[LENGTH] > 1 && match.index < string[LENGTH]) $push.apply(output, match.slice(1));
           lastLength = match[0][LENGTH];
           lastLastIndex = lastIndex;
@@ -7752,25 +8128,83 @@ __webpack_require__(/*! ./_fix-re-wks */ "../../node_modules/core-js/modules/_fi
     };
   // Chakra, V8
   } else if ('0'[$SPLIT](undefined, 0)[LENGTH]) {
-    $split = function (separator, limit) {
-      return separator === undefined && limit === 0 ? [] : _split.call(this, separator, limit);
+    internalSplit = function (separator, limit) {
+      return separator === undefined && limit === 0 ? [] : $split.call(this, separator, limit);
     };
+  } else {
+    internalSplit = $split;
   }
-  // 21.1.3.17 String.prototype.split(separator, limit)
-  return [function split(separator, limit) {
-    var O = defined(this);
-    var fn = separator == undefined ? undefined : separator[SPLIT];
-    return fn !== undefined ? fn.call(separator, O, limit) : $split.call(String(O), separator, limit);
-  }, $split];
+
+  return [
+    // `String.prototype.split` method
+    // https://tc39.github.io/ecma262/#sec-string.prototype.split
+    function split(separator, limit) {
+      var O = defined(this);
+      var splitter = separator == undefined ? undefined : separator[SPLIT];
+      return splitter !== undefined
+        ? splitter.call(separator, O, limit)
+        : internalSplit.call(String(O), separator, limit);
+    },
+    // `RegExp.prototype[@@split]` method
+    // https://tc39.github.io/ecma262/#sec-regexp.prototype-@@split
+    //
+    // NOTE: This cannot be properly polyfilled in engines that don't support
+    // the 'y' flag.
+    function (regexp, limit) {
+      var res = maybeCallNative(internalSplit, regexp, this, limit, internalSplit !== $split);
+      if (res.done) return res.value;
+
+      var rx = anObject(regexp);
+      var S = String(this);
+      var C = speciesConstructor(rx, RegExp);
+
+      var unicodeMatching = rx.unicode;
+      var flags = (rx.ignoreCase ? 'i' : '') +
+                    (rx.multiline ? 'm' : '') +
+                    (rx.unicode ? 'u' : '') +
+                    (SUPPORTS_Y ? 'y' : 'g');
+
+      // ^(? + rx + ) is needed, in combination with some S slicing, to
+      // simulate the 'y' flag.
+      var splitter = new C(SUPPORTS_Y ? rx : '^(?:' + rx.source + ')', flags);
+      var lim = limit === undefined ? 0xffffffff : limit >>> 0;
+      if (lim === 0) return [];
+      if (S.length === 0) return callRegExpExec(splitter, S) === null ? [S] : [];
+      var p = 0;
+      var q = 0;
+      var A = [];
+      while (q < S.length) {
+        splitter.lastIndex = SUPPORTS_Y ? q : 0;
+        var z = callRegExpExec(splitter, SUPPORTS_Y ? S : S.slice(q));
+        var e;
+        if (
+          z === null ||
+          (e = $min(toLength(splitter.lastIndex + (SUPPORTS_Y ? 0 : q)), S.length)) === p
+        ) {
+          q = advanceStringIndex(S, q, unicodeMatching);
+        } else {
+          A.push(S.slice(p, q));
+          if (A.length === lim) return A;
+          for (var i = 1; i <= z.length - 1; i++) {
+            A.push(z[i]);
+            if (A.length === lim) return A;
+          }
+          q = p = e;
+        }
+      }
+      A.push(S.slice(p));
+      return A;
+    }
+  ];
 });
 
 
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.regexp.to-string.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.regexp.to-string.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.regexp.to-string.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7805,9 +8239,9 @@ if (__webpack_require__(/*! ./_fails */ "../../node_modules/core-js/modules/_fai
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.set.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.set.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.set.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7831,9 +8265,9 @@ module.exports = __webpack_require__(/*! ./_collection */ "../../node_modules/co
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.anchor.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.anchor.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.anchor.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7850,9 +8284,9 @@ __webpack_require__(/*! ./_string-html */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.big.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.big.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.big.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7869,9 +8303,9 @@ __webpack_require__(/*! ./_string-html */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.blink.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.blink.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.blink.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7888,9 +8322,9 @@ __webpack_require__(/*! ./_string-html */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.bold.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.bold.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.bold.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7907,9 +8341,9 @@ __webpack_require__(/*! ./_string-html */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.code-point-at.js":
-/*!*****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.code-point-at.js ***!
-  \*****************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.code-point-at.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7928,9 +8362,9 @@ $export($export.P, 'String', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.ends-with.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.ends-with.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.ends-with.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7960,9 +8394,9 @@ $export($export.P + $export.F * __webpack_require__(/*! ./_fails-is-regexp */ ".
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.fixed.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.fixed.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.fixed.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7979,9 +8413,9 @@ __webpack_require__(/*! ./_string-html */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.fontcolor.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.fontcolor.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.fontcolor.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7998,9 +8432,9 @@ __webpack_require__(/*! ./_string-html */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.fontsize.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.fontsize.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.fontsize.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8017,9 +8451,9 @@ __webpack_require__(/*! ./_string-html */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.from-code-point.js":
-/*!*******************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.from-code-point.js ***!
-  \*******************************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.from-code-point.js ***!
+  \************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8051,9 +8485,9 @@ $export($export.S + $export.F * (!!$fromCodePoint && $fromCodePoint.length != 1)
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.includes.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.includes.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.includes.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8075,9 +8509,9 @@ $export($export.P + $export.F * __webpack_require__(/*! ./_fails-is-regexp */ ".
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.italics.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.italics.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.italics.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8094,9 +8528,9 @@ __webpack_require__(/*! ./_string-html */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.iterator.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.iterator.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.iterator.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8123,9 +8557,9 @@ __webpack_require__(/*! ./_iter-define */ "../../node_modules/core-js/modules/_i
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.link.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.link.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.link.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8142,9 +8576,9 @@ __webpack_require__(/*! ./_string-html */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.raw.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.raw.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.raw.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8171,9 +8605,9 @@ $export($export.S, 'String', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.repeat.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.repeat.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.repeat.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8188,9 +8622,9 @@ $export($export.P, 'String', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.small.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.small.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.small.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8207,9 +8641,9 @@ __webpack_require__(/*! ./_string-html */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.starts-with.js":
-/*!***************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.starts-with.js ***!
-  \***************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.starts-with.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8237,9 +8671,9 @@ $export($export.P + $export.F * __webpack_require__(/*! ./_fails-is-regexp */ ".
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.strike.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.strike.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.strike.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8256,9 +8690,9 @@ __webpack_require__(/*! ./_string-html */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.sub.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.sub.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.sub.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8275,9 +8709,9 @@ __webpack_require__(/*! ./_string-html */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.sup.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.sup.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.sup.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8294,9 +8728,9 @@ __webpack_require__(/*! ./_string-html */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.string.trim.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.string.trim.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.string.trim.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8313,9 +8747,9 @@ __webpack_require__(/*! ./_string-trim */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.symbol.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.symbol.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.symbol.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8559,9 +8993,9 @@ setToStringTag(global.JSON, 'JSON', true);
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.typed.array-buffer.js":
-/*!***************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.typed.array-buffer.js ***!
-  \***************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.typed.array-buffer.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8617,9 +9051,9 @@ __webpack_require__(/*! ./_set-species */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.typed.data-view.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.typed.data-view.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.typed.data-view.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8632,9 +9066,9 @@ $export($export.G + $export.W + $export.F * !__webpack_require__(/*! ./_typed */
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.typed.float32-array.js":
-/*!****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.typed.float32-array.js ***!
-  \****************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.typed.float32-array.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8648,9 +9082,9 @@ __webpack_require__(/*! ./_typed-array */ "../../node_modules/core-js/modules/_t
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.typed.float64-array.js":
-/*!****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.typed.float64-array.js ***!
-  \****************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.typed.float64-array.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8664,9 +9098,9 @@ __webpack_require__(/*! ./_typed-array */ "../../node_modules/core-js/modules/_t
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.typed.int16-array.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.typed.int16-array.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.typed.int16-array.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8680,9 +9114,9 @@ __webpack_require__(/*! ./_typed-array */ "../../node_modules/core-js/modules/_t
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.typed.int32-array.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.typed.int32-array.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.typed.int32-array.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8696,9 +9130,9 @@ __webpack_require__(/*! ./_typed-array */ "../../node_modules/core-js/modules/_t
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.typed.int8-array.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.typed.int8-array.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.typed.int8-array.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8712,9 +9146,9 @@ __webpack_require__(/*! ./_typed-array */ "../../node_modules/core-js/modules/_t
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.typed.uint16-array.js":
-/*!***************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.typed.uint16-array.js ***!
-  \***************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.typed.uint16-array.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8728,9 +9162,9 @@ __webpack_require__(/*! ./_typed-array */ "../../node_modules/core-js/modules/_t
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.typed.uint32-array.js":
-/*!***************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.typed.uint32-array.js ***!
-  \***************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.typed.uint32-array.js ***!
+  \********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8744,9 +9178,9 @@ __webpack_require__(/*! ./_typed-array */ "../../node_modules/core-js/modules/_t
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.typed.uint8-array.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.typed.uint8-array.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.typed.uint8-array.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8760,9 +9194,9 @@ __webpack_require__(/*! ./_typed-array */ "../../node_modules/core-js/modules/_t
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.typed.uint8-clamped-array.js":
-/*!**********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.typed.uint8-clamped-array.js ***!
-  \**********************************************************************************************************/
+/*!***************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.typed.uint8-clamped-array.js ***!
+  \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8776,9 +9210,9 @@ __webpack_require__(/*! ./_typed-array */ "../../node_modules/core-js/modules/_t
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.weak-map.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.weak-map.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.weak-map.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8847,9 +9281,9 @@ if (fails(function () { return new $WeakMap().set((Object.freeze || Object)(tmp)
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es6.weak-set.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es6.weak-set.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es6.weak-set.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8873,9 +9307,9 @@ __webpack_require__(/*! ./_collection */ "../../node_modules/core-js/modules/_co
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.array.flat-map.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.array.flat-map.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.array.flat-map.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8907,9 +9341,9 @@ __webpack_require__(/*! ./_add-to-unscopables */ "../../node_modules/core-js/mod
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.array.flatten.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.array.flatten.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.array.flatten.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8940,9 +9374,9 @@ __webpack_require__(/*! ./_add-to-unscopables */ "../../node_modules/core-js/mod
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.array.includes.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.array.includes.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.array.includes.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8964,9 +9398,9 @@ __webpack_require__(/*! ./_add-to-unscopables */ "../../node_modules/core-js/mod
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.asap.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.asap.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.asap.js ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8987,9 +9421,9 @@ $export($export.G, {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.error.is-error.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.error.is-error.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.error.is-error.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9007,9 +9441,9 @@ $export($export.S, 'Error', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.global.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.global.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.global.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9022,9 +9456,9 @@ $export($export.G, { global: __webpack_require__(/*! ./_global */ "../../node_mo
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.map.from.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.map.from.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.map.from.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9035,9 +9469,9 @@ __webpack_require__(/*! ./_set-collection-from */ "../../node_modules/core-js/mo
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.map.of.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.map.of.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.map.of.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9048,9 +9482,9 @@ __webpack_require__(/*! ./_set-collection-of */ "../../node_modules/core-js/modu
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.map.to-json.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.map.to-json.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.map.to-json.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9063,9 +9497,9 @@ $export($export.P + $export.R, 'Map', { toJSON: __webpack_require__(/*! ./_colle
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.math.clamp.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.math.clamp.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.math.clamp.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9082,9 +9516,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.math.deg-per-rad.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.math.deg-per-rad.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.math.deg-per-rad.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9097,9 +9531,9 @@ $export($export.S, 'Math', { DEG_PER_RAD: Math.PI / 180 });
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.math.degrees.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.math.degrees.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.math.degrees.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9117,9 +9551,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.math.fscale.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.math.fscale.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.math.fscale.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9138,9 +9572,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.math.iaddh.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.math.iaddh.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.math.iaddh.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9160,9 +9594,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.math.imulh.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.math.imulh.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.math.imulh.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9187,9 +9621,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.math.isubh.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.math.isubh.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.math.isubh.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9209,9 +9643,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.math.rad-per-deg.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.math.rad-per-deg.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.math.rad-per-deg.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9224,9 +9658,9 @@ $export($export.S, 'Math', { RAD_PER_DEG: 180 / Math.PI });
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.math.radians.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.math.radians.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.math.radians.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9244,9 +9678,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.math.scale.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.math.scale.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.math.scale.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9259,9 +9693,9 @@ $export($export.S, 'Math', { scale: __webpack_require__(/*! ./_math-scale */ "..
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.math.signbit.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.math.signbit.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.math.signbit.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9277,9 +9711,9 @@ $export($export.S, 'Math', { signbit: function signbit(x) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.math.umulh.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.math.umulh.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.math.umulh.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9304,9 +9738,9 @@ $export($export.S, 'Math', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.object.define-getter.js":
-/*!*****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.object.define-getter.js ***!
-  \*****************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.object.define-getter.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9328,9 +9762,9 @@ __webpack_require__(/*! ./_descriptors */ "../../node_modules/core-js/modules/_d
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.object.define-setter.js":
-/*!*****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.object.define-setter.js ***!
-  \*****************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.object.define-setter.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9352,9 +9786,9 @@ __webpack_require__(/*! ./_descriptors */ "../../node_modules/core-js/modules/_d
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.object.entries.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.object.entries.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.object.entries.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9372,9 +9806,9 @@ $export($export.S, 'Object', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.object.get-own-property-descriptors.js":
-/*!********************************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.object.get-own-property-descriptors.js ***!
-  \********************************************************************************************************************/
+/*!*************************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.object.get-own-property-descriptors.js ***!
+  \*************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9405,9 +9839,9 @@ $export($export.S, 'Object', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.object.lookup-getter.js":
-/*!*****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.object.lookup-getter.js ***!
-  \*****************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.object.lookup-getter.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9435,9 +9869,9 @@ __webpack_require__(/*! ./_descriptors */ "../../node_modules/core-js/modules/_d
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.object.lookup-setter.js":
-/*!*****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.object.lookup-setter.js ***!
-  \*****************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.object.lookup-setter.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9465,9 +9899,9 @@ __webpack_require__(/*! ./_descriptors */ "../../node_modules/core-js/modules/_d
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.object.values.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.object.values.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.object.values.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9485,9 +9919,9 @@ $export($export.S, 'Object', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.observable.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.observable.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.observable.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9696,9 +10130,9 @@ __webpack_require__(/*! ./_set-species */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.promise.finally.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.promise.finally.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.promise.finally.js ***!
+  \*****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9728,9 +10162,9 @@ $export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.promise.try.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.promise.try.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.promise.try.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9752,9 +10186,9 @@ $export($export.S, 'Promise', { 'try': function (callbackfn) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.reflect.define-metadata.js":
-/*!********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.reflect.define-metadata.js ***!
-  \********************************************************************************************************/
+/*!*************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.reflect.define-metadata.js ***!
+  \*************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9771,9 +10205,9 @@ metadata.exp({ defineMetadata: function defineMetadata(metadataKey, metadataValu
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.reflect.delete-metadata.js":
-/*!********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.reflect.delete-metadata.js ***!
-  \********************************************************************************************************/
+/*!*************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.reflect.delete-metadata.js ***!
+  \*************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9797,9 +10231,9 @@ metadata.exp({ deleteMetadata: function deleteMetadata(metadataKey, target /* , 
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.reflect.get-metadata-keys.js":
-/*!**********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.reflect.get-metadata-keys.js ***!
-  \**********************************************************************************************************/
+/*!***************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.reflect.get-metadata-keys.js ***!
+  \***************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9827,9 +10261,9 @@ metadata.exp({ getMetadataKeys: function getMetadataKeys(target /* , targetKey *
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.reflect.get-metadata.js":
-/*!*****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.reflect.get-metadata.js ***!
-  \*****************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.reflect.get-metadata.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9855,9 +10289,9 @@ metadata.exp({ getMetadata: function getMetadata(metadataKey, target /* , target
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.reflect.get-own-metadata-keys.js":
-/*!**************************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.reflect.get-own-metadata-keys.js ***!
-  \**************************************************************************************************************/
+/*!*******************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.reflect.get-own-metadata-keys.js ***!
+  \*******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9874,9 +10308,9 @@ metadata.exp({ getOwnMetadataKeys: function getOwnMetadataKeys(target /* , targe
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.reflect.get-own-metadata.js":
-/*!*********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.reflect.get-own-metadata.js ***!
-  \*********************************************************************************************************/
+/*!**************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.reflect.get-own-metadata.js ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9894,9 +10328,9 @@ metadata.exp({ getOwnMetadata: function getOwnMetadata(metadataKey, target /* , 
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.reflect.has-metadata.js":
-/*!*****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.reflect.has-metadata.js ***!
-  \*****************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.reflect.has-metadata.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9921,9 +10355,9 @@ metadata.exp({ hasMetadata: function hasMetadata(metadataKey, target /* , target
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.reflect.has-own-metadata.js":
-/*!*********************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.reflect.has-own-metadata.js ***!
-  \*********************************************************************************************************/
+/*!**************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.reflect.has-own-metadata.js ***!
+  \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9941,9 +10375,9 @@ metadata.exp({ hasOwnMetadata: function hasOwnMetadata(metadataKey, target /* , 
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.reflect.metadata.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.reflect.metadata.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.reflect.metadata.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9967,9 +10401,9 @@ $metadata.exp({ metadata: function metadata(metadataKey, metadataValue) {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.set.from.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.set.from.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.set.from.js ***!
+  \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9980,9 +10414,9 @@ __webpack_require__(/*! ./_set-collection-from */ "../../node_modules/core-js/mo
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.set.of.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.set.of.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.set.of.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9993,9 +10427,9 @@ __webpack_require__(/*! ./_set-collection-of */ "../../node_modules/core-js/modu
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.set.to-json.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.set.to-json.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.set.to-json.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10008,9 +10442,9 @@ $export($export.P + $export.R, 'Set', { toJSON: __webpack_require__(/*! ./_colle
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.string.at.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.string.at.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.string.at.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10030,9 +10464,9 @@ $export($export.P, 'String', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.string.match-all.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.string.match-all.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.string.match-all.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10072,9 +10506,9 @@ $export($export.P, 'String', {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.string.pad-end.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.string.pad-end.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.string.pad-end.js ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10096,9 +10530,9 @@ $export($export.P + $export.F * /Version\/10\.\d+(\.\d+)? Safari\//.test(userAge
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.string.pad-start.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.string.pad-start.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.string.pad-start.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10120,9 +10554,9 @@ $export($export.P + $export.F * /Version\/10\.\d+(\.\d+)? Safari\//.test(userAge
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.string.trim-left.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.string.trim-left.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.string.trim-left.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10139,9 +10573,9 @@ __webpack_require__(/*! ./_string-trim */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.string.trim-right.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.string.trim-right.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.string.trim-right.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10158,9 +10592,9 @@ __webpack_require__(/*! ./_string-trim */ "../../node_modules/core-js/modules/_s
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.symbol.async-iterator.js":
-/*!******************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.symbol.async-iterator.js ***!
-  \******************************************************************************************************/
+/*!***********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.symbol.async-iterator.js ***!
+  \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10170,9 +10604,9 @@ __webpack_require__(/*! ./_wks-define */ "../../node_modules/core-js/modules/_wk
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.symbol.observable.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.symbol.observable.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.symbol.observable.js ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10182,9 +10616,9 @@ __webpack_require__(/*! ./_wks-define */ "../../node_modules/core-js/modules/_wk
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.system.global.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.system.global.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.system.global.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10197,9 +10631,9 @@ $export($export.S, 'System', { global: __webpack_require__(/*! ./_global */ "../
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.weak-map.from.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.weak-map.from.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.weak-map.from.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10210,9 +10644,9 @@ __webpack_require__(/*! ./_set-collection-from */ "../../node_modules/core-js/mo
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.weak-map.of.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.weak-map.of.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.weak-map.of.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10223,9 +10657,9 @@ __webpack_require__(/*! ./_set-collection-of */ "../../node_modules/core-js/modu
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.weak-set.from.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.weak-set.from.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.weak-set.from.js ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10236,9 +10670,9 @@ __webpack_require__(/*! ./_set-collection-from */ "../../node_modules/core-js/mo
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/es7.weak-set.of.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/es7.weak-set.of.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/es7.weak-set.of.js ***!
+  \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10249,9 +10683,9 @@ __webpack_require__(/*! ./_set-collection-of */ "../../node_modules/core-js/modu
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/web.dom.iterable.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/web.dom.iterable.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/web.dom.iterable.js ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10318,9 +10752,9 @@ for (var collections = getKeys(DOMIterables), i = 0; i < collections.length; i++
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/web.immediate.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/web.immediate.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/web.immediate.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10335,9 +10769,9 @@ $export($export.G + $export.B, {
 /***/ }),
 
 /***/ "../../node_modules/core-js/modules/web.timers.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/modules/web.timers.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/modules/web.timers.js ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10366,9 +10800,9 @@ $export($export.G + $export.B + $export.F * MSIE, {
 /***/ }),
 
 /***/ "../../node_modules/core-js/shim.js":
-/*!*************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/core-js/shim.js ***!
-  \*************************************************************************/
+/*!******************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/core-js/shim.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10473,6 +10907,7 @@ __webpack_require__(/*! ./modules/es6.array.find-index */ "../../node_modules/co
 __webpack_require__(/*! ./modules/es6.array.species */ "../../node_modules/core-js/modules/es6.array.species.js");
 __webpack_require__(/*! ./modules/es6.array.iterator */ "../../node_modules/core-js/modules/es6.array.iterator.js");
 __webpack_require__(/*! ./modules/es6.regexp.constructor */ "../../node_modules/core-js/modules/es6.regexp.constructor.js");
+__webpack_require__(/*! ./modules/es6.regexp.exec */ "../../node_modules/core-js/modules/es6.regexp.exec.js");
 __webpack_require__(/*! ./modules/es6.regexp.to-string */ "../../node_modules/core-js/modules/es6.regexp.to-string.js");
 __webpack_require__(/*! ./modules/es6.regexp.flags */ "../../node_modules/core-js/modules/es6.regexp.flags.js");
 __webpack_require__(/*! ./modules/es6.regexp.match */ "../../node_modules/core-js/modules/es6.regexp.match.js");
@@ -10574,9 +11009,9 @@ module.exports = __webpack_require__(/*! ./modules/_core */ "../../node_modules/
 /***/ }),
 
 /***/ "../../node_modules/d3-array/index.js":
-/*!***************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/index.js ***!
-  \***************************************************************************/
+/*!********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/index.js ***!
+  \********************************************************************************************/
 /*! exports provided: bisect, bisectRight, bisectLeft, ascending, bisector, cross, descending, deviation, extent, histogram, thresholdFreedmanDiaconis, thresholdScott, thresholdSturges, max, mean, median, merge, min, pairs, permute, quantile, range, scan, shuffle, sum, ticks, tickIncrement, tickStep, transpose, variance, zip */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10703,9 +11138,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/array.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/array.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/array.js ***!
+  \************************************************************************************************/
 /*! exports provided: slice, map */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10722,9 +11157,9 @@ var map = array.map;
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/ascending.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/ascending.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/ascending.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10738,9 +11173,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/bisect.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/bisect.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/bisect.js ***!
+  \*************************************************************************************************/
 /*! exports provided: bisectRight, bisectLeft, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10762,9 +11197,9 @@ var bisectLeft = ascendingBisect.left;
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/bisector.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/bisector.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/bisector.js ***!
+  \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10809,9 +11244,9 @@ function ascendingComparator(f) {
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/constant.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/constant.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/constant.js ***!
+  \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10827,9 +11262,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/cross.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/cross.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/cross.js ***!
+  \************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10862,9 +11297,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/descending.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/descending.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/descending.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10878,9 +11313,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/deviation.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/deviation.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/deviation.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10898,9 +11333,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/extent.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/extent.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/extent.js ***!
+  \*************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10948,9 +11383,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/histogram.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/histogram.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/histogram.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11044,9 +11479,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/identity.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/identity.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/identity.js ***!
+  \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11060,9 +11495,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/max.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/max.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/max.js ***!
+  \**********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11107,9 +11542,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/mean.js":
-/*!******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/mean.js ***!
-  \******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/mean.js ***!
+  \***********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11146,9 +11581,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/median.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/median.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/median.js ***!
+  \*************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11190,9 +11625,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/merge.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/merge.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/merge.js ***!
+  \************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11224,9 +11659,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/min.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/min.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/min.js ***!
+  \**********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11271,9 +11706,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/number.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/number.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/number.js ***!
+  \*************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11287,9 +11722,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/pairs.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/pairs.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/pairs.js ***!
+  \************************************************************************************************/
 /*! exports provided: default, pair */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11311,9 +11746,9 @@ function pair(a, b) {
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/permute.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/permute.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/permute.js ***!
+  \**************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11329,9 +11764,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/quantile.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/quantile.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/quantile.js ***!
+  \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11357,9 +11792,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/range.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/range.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/range.js ***!
+  \************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11383,9 +11818,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/scan.js":
-/*!******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/scan.js ***!
-  \******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/scan.js ***!
+  \***********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11417,9 +11852,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/shuffle.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/shuffle.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/shuffle.js ***!
+  \**************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11444,9 +11879,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/sum.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/sum.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/sum.js ***!
+  \**********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11477,9 +11912,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/threshold/freedmanDiaconis.js":
-/*!****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/threshold/freedmanDiaconis.js ***!
-  \****************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/threshold/freedmanDiaconis.js ***!
+  \*********************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11503,9 +11938,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/threshold/scott.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/threshold/scott.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/threshold/scott.js ***!
+  \**********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11522,9 +11957,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/threshold/sturges.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/threshold/sturges.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/threshold/sturges.js ***!
+  \************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11538,9 +11973,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/ticks.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/ticks.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/ticks.js ***!
+  \************************************************************************************************/
 /*! exports provided: default, tickIncrement, tickStep */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11604,9 +12039,9 @@ function tickStep(start, stop, count) {
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/transpose.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/transpose.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/transpose.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11633,9 +12068,9 @@ function length(d) {
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/variance.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/variance.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/variance.js ***!
+  \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11680,9 +12115,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-array/src/zip.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-array/src/zip.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-array/src/zip.js ***!
+  \**********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11699,9 +12134,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-axis/index.js":
-/*!**************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-axis/index.js ***!
-  \**************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-axis/index.js ***!
+  \*******************************************************************************************/
 /*! exports provided: axisTop, axisRight, axisBottom, axisLeft */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11722,9 +12157,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-axis/src/array.js":
-/*!******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-axis/src/array.js ***!
-  \******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-axis/src/array.js ***!
+  \***********************************************************************************************/
 /*! exports provided: slice */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11737,9 +12172,9 @@ var slice = Array.prototype.slice;
 /***/ }),
 
 /***/ "../../node_modules/d3-axis/src/axis.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-axis/src/axis.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-axis/src/axis.js ***!
+  \**********************************************************************************************/
 /*! exports provided: axisTop, axisRight, axisBottom, axisLeft */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11930,9 +12365,9 @@ function axisLeft(scale) {
 /***/ }),
 
 /***/ "../../node_modules/d3-axis/src/identity.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-axis/src/identity.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-axis/src/identity.js ***!
+  \**************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11946,9 +12381,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-collection/index.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-collection/index.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-collection/index.js ***!
+  \*************************************************************************************************/
 /*! exports provided: nest, set, map, keys, values, entries */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11983,9 +12418,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-collection/src/entries.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-collection/src/entries.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-collection/src/entries.js ***!
+  \*******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12001,9 +12436,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-collection/src/keys.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-collection/src/keys.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-collection/src/keys.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12019,9 +12454,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-collection/src/map.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-collection/src/map.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-collection/src/map.js ***!
+  \***************************************************************************************************/
 /*! exports provided: prefix, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12108,9 +12543,9 @@ function map(object, f) {
 /***/ }),
 
 /***/ "../../node_modules/d3-collection/src/nest.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-collection/src/nest.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-collection/src/nest.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12195,9 +12630,9 @@ function setMap(map, key, value) {
 /***/ }),
 
 /***/ "../../node_modules/d3-collection/src/set.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-collection/src/set.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-collection/src/set.js ***!
+  \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12248,9 +12683,9 @@ function set(object, f) {
 /***/ }),
 
 /***/ "../../node_modules/d3-collection/src/values.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-collection/src/values.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-collection/src/values.js ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12266,9 +12701,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-color/index.js":
-/*!***************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-color/index.js ***!
-  \***************************************************************************/
+/*!********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-color/index.js ***!
+  \********************************************************************************************/
 /*! exports provided: color, rgb, hsl, lab, hcl, cubehelix */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12297,9 +12732,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-color/src/color.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-color/src/color.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-color/src/color.js ***!
+  \************************************************************************************************/
 /*! exports provided: Color, darker, brighter, default, rgbConvert, rgb, Rgb, hslConvert, hsl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12650,9 +13085,9 @@ function hsl2rgb(h, m1, m2) {
 /***/ }),
 
 /***/ "../../node_modules/d3-color/src/cubehelix.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-color/src/cubehelix.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-color/src/cubehelix.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default, Cubehelix */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12729,9 +13164,9 @@ Object(_define__WEBPACK_IMPORTED_MODULE_0__["default"])(Cubehelix, cubehelix, Ob
 /***/ }),
 
 /***/ "../../node_modules/d3-color/src/define.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-color/src/define.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-color/src/define.js ***!
+  \*************************************************************************************************/
 /*! exports provided: default, extend */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12753,9 +13188,9 @@ function extend(parent, definition) {
 /***/ }),
 
 /***/ "../../node_modules/d3-color/src/lab.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-color/src/lab.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-color/src/lab.js ***!
+  \**********************************************************************************************/
 /*! exports provided: default, Lab, hcl, Hcl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12881,9 +13316,9 @@ Object(_define__WEBPACK_IMPORTED_MODULE_0__["default"])(Hcl, hcl, Object(_define
 /***/ }),
 
 /***/ "../../node_modules/d3-color/src/math.js":
-/*!******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-color/src/math.js ***!
-  \******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-color/src/math.js ***!
+  \***********************************************************************************************/
 /*! exports provided: deg2rad, rad2deg */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12898,9 +13333,9 @@ var rad2deg = 180 / Math.PI;
 /***/ }),
 
 /***/ "../../node_modules/d3-dispatch/index.js":
-/*!******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-dispatch/index.js ***!
-  \******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-dispatch/index.js ***!
+  \***********************************************************************************************/
 /*! exports provided: dispatch */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12915,9 +13350,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-dispatch/src/dispatch.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-dispatch/src/dispatch.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-dispatch/src/dispatch.js ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13012,9 +13447,9 @@ function set(type, name, callback) {
 /***/ }),
 
 /***/ "../../node_modules/d3-ease/index.js":
-/*!**************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-ease/index.js ***!
-  \**************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-ease/index.js ***!
+  \*******************************************************************************************/
 /*! exports provided: easeLinear, easeQuad, easeQuadIn, easeQuadOut, easeQuadInOut, easeCubic, easeCubicIn, easeCubicOut, easeCubicInOut, easePoly, easePolyIn, easePolyOut, easePolyInOut, easeSin, easeSinIn, easeSinOut, easeSinInOut, easeExp, easeExpIn, easeExpOut, easeExpInOut, easeCircle, easeCircleIn, easeCircleOut, easeCircleInOut, easeBounce, easeBounceIn, easeBounceOut, easeBounceInOut, easeBack, easeBackIn, easeBackOut, easeBackInOut, easeElastic, easeElasticIn, easeElasticOut, easeElasticInOut */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13128,9 +13563,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-ease/src/back.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-ease/src/back.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-ease/src/back.js ***!
+  \**********************************************************************************************/
 /*! exports provided: backIn, backOut, backInOut */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13181,9 +13616,9 @@ var backInOut = (function custom(s) {
 /***/ }),
 
 /***/ "../../node_modules/d3-ease/src/bounce.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-ease/src/bounce.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-ease/src/bounce.js ***!
+  \************************************************************************************************/
 /*! exports provided: bounceIn, bounceOut, bounceInOut */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13219,9 +13654,9 @@ function bounceInOut(t) {
 /***/ }),
 
 /***/ "../../node_modules/d3-ease/src/circle.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-ease/src/circle.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-ease/src/circle.js ***!
+  \************************************************************************************************/
 /*! exports provided: circleIn, circleOut, circleInOut */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13246,9 +13681,9 @@ function circleInOut(t) {
 /***/ }),
 
 /***/ "../../node_modules/d3-ease/src/cubic.js":
-/*!******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-ease/src/cubic.js ***!
-  \******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-ease/src/cubic.js ***!
+  \***********************************************************************************************/
 /*! exports provided: cubicIn, cubicOut, cubicInOut */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13273,9 +13708,9 @@ function cubicInOut(t) {
 /***/ }),
 
 /***/ "../../node_modules/d3-ease/src/elastic.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-ease/src/elastic.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-ease/src/elastic.js ***!
+  \*************************************************************************************************/
 /*! exports provided: elasticIn, elasticOut, elasticInOut */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13333,9 +13768,9 @@ var elasticInOut = (function custom(a, p) {
 /***/ }),
 
 /***/ "../../node_modules/d3-ease/src/exp.js":
-/*!****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-ease/src/exp.js ***!
-  \****************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-ease/src/exp.js ***!
+  \*********************************************************************************************/
 /*! exports provided: expIn, expOut, expInOut */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13360,9 +13795,9 @@ function expInOut(t) {
 /***/ }),
 
 /***/ "../../node_modules/d3-ease/src/linear.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-ease/src/linear.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-ease/src/linear.js ***!
+  \************************************************************************************************/
 /*! exports provided: linear */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13377,9 +13812,9 @@ function linear(t) {
 /***/ }),
 
 /***/ "../../node_modules/d3-ease/src/poly.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-ease/src/poly.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-ease/src/poly.js ***!
+  \**********************************************************************************************/
 /*! exports provided: polyIn, polyOut, polyInOut */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13430,9 +13865,9 @@ var polyInOut = (function custom(e) {
 /***/ }),
 
 /***/ "../../node_modules/d3-ease/src/quad.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-ease/src/quad.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-ease/src/quad.js ***!
+  \**********************************************************************************************/
 /*! exports provided: quadIn, quadOut, quadInOut */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13457,9 +13892,9 @@ function quadInOut(t) {
 /***/ }),
 
 /***/ "../../node_modules/d3-ease/src/sin.js":
-/*!****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-ease/src/sin.js ***!
-  \****************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-ease/src/sin.js ***!
+  \*********************************************************************************************/
 /*! exports provided: sinIn, sinOut, sinInOut */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13487,9 +13922,9 @@ function sinInOut(t) {
 /***/ }),
 
 /***/ "../../node_modules/d3-format/index.js":
-/*!****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/index.js ***!
-  \****************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/index.js ***!
+  \*********************************************************************************************/
 /*! exports provided: formatDefaultLocale, format, formatPrefix, formatLocale, formatSpecifier, precisionFixed, precisionPrefix, precisionRound */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13528,9 +13963,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/defaultLocale.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/defaultLocale.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/defaultLocale.js ***!
+  \*********************************************************************************************************/
 /*! exports provided: format, formatPrefix, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13564,9 +13999,9 @@ function defaultLocale(definition) {
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/exponent.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/exponent.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/exponent.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13583,9 +14018,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/formatDecimal.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/formatDecimal.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/formatDecimal.js ***!
+  \*********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13610,9 +14045,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/formatDefault.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/formatDefault.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/formatDefault.js ***!
+  \*********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13637,9 +14072,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/formatGroup.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/formatGroup.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/formatGroup.js ***!
+  \*******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13668,9 +14103,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/formatNumerals.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/formatNumerals.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/formatNumerals.js ***!
+  \**********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13688,9 +14123,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/formatPrefixAuto.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/formatPrefixAuto.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/formatPrefixAuto.js ***!
+  \************************************************************************************************************/
 /*! exports provided: prefixExponent, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13719,9 +14154,9 @@ var prefixExponent;
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/formatRounded.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/formatRounded.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/formatRounded.js ***!
+  \*********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13744,9 +14179,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/formatSpecifier.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/formatSpecifier.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/formatSpecifier.js ***!
+  \***********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13815,9 +14250,9 @@ FormatSpecifier.prototype.toString = function() {
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/formatTypes.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/formatTypes.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/formatTypes.js ***!
+  \*******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13851,9 +14286,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/identity.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/identity.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/identity.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13867,9 +14302,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/locale.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/locale.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/locale.js ***!
+  \**************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14015,9 +14450,9 @@ var prefixes = ["y","z","a","f","p","n","µ","m","","k","M","G","T","P","E","Z",
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/precisionFixed.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/precisionFixed.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/precisionFixed.js ***!
+  \**********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14034,9 +14469,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/precisionPrefix.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/precisionPrefix.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/precisionPrefix.js ***!
+  \***********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14053,9 +14488,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-format/src/precisionRound.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-format/src/precisionRound.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-format/src/precisionRound.js ***!
+  \**********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14073,9 +14508,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/index.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/index.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/index.js ***!
+  \**************************************************************************************************/
 /*! exports provided: interpolate, interpolateArray, interpolateBasis, interpolateBasisClosed, interpolateDate, interpolateNumber, interpolateObject, interpolateRound, interpolateString, interpolateTransformCss, interpolateTransformSvg, interpolateZoom, interpolateRgb, interpolateRgbBasis, interpolateRgbBasisClosed, interpolateHsl, interpolateHslLong, interpolateLab, interpolateHcl, interpolateHclLong, interpolateCubehelix, interpolateCubehelixLong, quantize */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14166,9 +14601,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/array.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/array.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/array.js ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14197,9 +14632,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/basis.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/basis.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/basis.js ***!
+  \******************************************************************************************************/
 /*! exports provided: basis, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14230,9 +14665,9 @@ function basis(t1, v0, v1, v2, v3) {
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/basisClosed.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/basisClosed.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/basisClosed.js ***!
+  \************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14257,9 +14692,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/color.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/color.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/color.js ***!
+  \******************************************************************************************************/
 /*! exports provided: hue, gamma, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14303,9 +14738,9 @@ function nogamma(a, b) {
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/constant.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/constant.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/constant.js ***!
+  \*********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14321,9 +14756,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/cubehelix.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/cubehelix.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/cubehelix.js ***!
+  \**********************************************************************************************************/
 /*! exports provided: default, cubehelixLong */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14366,9 +14801,9 @@ var cubehelixLong = cubehelix(_color__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/date.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/date.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/date.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14385,9 +14820,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/hcl.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/hcl.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/hcl.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default, hclLong */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14422,9 +14857,9 @@ var hclLong = hcl(_color__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/hsl.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/hsl.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/hsl.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default, hslLong */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14459,9 +14894,9 @@ var hslLong = hsl(_color__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/lab.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/lab.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/lab.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14491,9 +14926,9 @@ function lab(start, end) {
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/number.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/number.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/number.js ***!
+  \*******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14509,9 +14944,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/object.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/object.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/object.js ***!
+  \*******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14546,9 +14981,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/quantize.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/quantize.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/quantize.js ***!
+  \*********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14564,9 +14999,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/rgb.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/rgb.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/rgb.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default, rgbBasis, rgbBasisClosed */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14638,9 +15073,9 @@ var rgbBasisClosed = rgbSpline(_basisClosed__WEBPACK_IMPORTED_MODULE_2__["defaul
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/round.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/round.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/round.js ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14656,9 +15091,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/string.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/string.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/string.js ***!
+  \*******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14734,9 +15169,9 @@ function one(b) {
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/transform/decompose.js":
-/*!***************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/transform/decompose.js ***!
-  \***************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/transform/decompose.js ***!
+  \********************************************************************************************************************/
 /*! exports provided: identity, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14774,9 +15209,9 @@ var identity = {
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/transform/index.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/transform/index.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/transform/index.js ***!
+  \****************************************************************************************************************/
 /*! exports provided: interpolateTransformCss, interpolateTransformSvg */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14854,9 +15289,9 @@ var interpolateTransformSvg = interpolateTransform(_parse__WEBPACK_IMPORTED_MODU
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/transform/parse.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/transform/parse.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/transform/parse.js ***!
+  \****************************************************************************************************************/
 /*! exports provided: parseCss, parseSvg */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14895,9 +15330,9 @@ function parseSvg(value) {
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/value.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/value.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/value.js ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14936,9 +15371,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-interpolate/src/zoom.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-interpolate/src/zoom.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-interpolate/src/zoom.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15013,9 +15448,9 @@ function tanh(x) {
 /***/ }),
 
 /***/ "../../node_modules/d3-path/index.js":
-/*!**************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-path/index.js ***!
-  \**************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-path/index.js ***!
+  \*******************************************************************************************/
 /*! exports provided: path */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15030,9 +15465,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-path/src/path.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-path/src/path.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-path/src/path.js ***!
+  \**********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15173,9 +15608,9 @@ Path.prototype = path.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/index.js":
-/*!***************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/index.js ***!
-  \***************************************************************************/
+/*!********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/index.js ***!
+  \********************************************************************************************/
 /*! exports provided: scaleBand, scalePoint, scaleIdentity, scaleLinear, scaleLog, scaleOrdinal, scaleImplicit, scalePow, scaleSqrt, scaleQuantile, scaleQuantize, scaleThreshold, scaleTime, scaleUtc, schemeCategory10, schemeCategory20b, schemeCategory20c, schemeCategory20, interpolateCubehelixDefault, interpolateRainbow, interpolateWarm, interpolateCool, interpolateViridis, interpolateMagma, interpolateInferno, interpolatePlasma, scaleSequential */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15296,9 +15731,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/array.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/array.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/array.js ***!
+  \************************************************************************************************/
 /*! exports provided: map, slice */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15315,9 +15750,9 @@ var slice = array.slice;
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/band.js":
-/*!******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/band.js ***!
-  \******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/band.js ***!
+  \***********************************************************************************************/
 /*! exports provided: default, point */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15433,9 +15868,9 @@ function point() {
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/category10.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/category10.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/category10.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15450,9 +15885,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/category20.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/category20.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/category20.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15467,9 +15902,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/category20b.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/category20b.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/category20b.js ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15484,9 +15919,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/category20c.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/category20c.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/category20c.js ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15501,9 +15936,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/colors.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/colors.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/colors.js ***!
+  \*************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15519,9 +15954,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/constant.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/constant.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/constant.js ***!
+  \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15537,9 +15972,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/continuous.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/continuous.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/continuous.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: deinterpolateLinear, copy, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15671,9 +16106,9 @@ function continuous(deinterpolate, reinterpolate) {
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/cubehelix.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/cubehelix.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/cubehelix.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15690,9 +16125,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/identity.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/identity.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/identity.js ***!
+  \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15730,9 +16165,9 @@ function identity() {
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/linear.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/linear.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/linear.js ***!
+  \*************************************************************************************************/
 /*! exports provided: linearish, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15818,9 +16253,9 @@ function linear() {
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/log.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/log.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/log.js ***!
+  \**********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15965,9 +16400,9 @@ function log() {
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/nice.js":
-/*!******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/nice.js ***!
-  \******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/nice.js ***!
+  \***********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15996,9 +16431,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/number.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/number.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/number.js ***!
+  \*************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16012,9 +16447,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/ordinal.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/ordinal.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/ordinal.js ***!
+  \**************************************************************************************************/
 /*! exports provided: implicit, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16075,9 +16510,9 @@ function ordinal(range) {
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/pow.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/pow.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/pow.js ***!
+  \**********************************************************************************************/
 /*! exports provided: default, sqrt */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16131,9 +16566,9 @@ function sqrt() {
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/quantile.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/quantile.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/quantile.js ***!
+  \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16198,9 +16633,9 @@ function quantile() {
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/quantize.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/quantize.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/quantize.js ***!
+  \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16261,9 +16696,9 @@ function quantize() {
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/rainbow.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/rainbow.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/rainbow.js ***!
+  \**************************************************************************************************/
 /*! exports provided: warm, cool, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16295,9 +16730,9 @@ var rainbow = Object(d3_color__WEBPACK_IMPORTED_MODULE_0__["cubehelix"])();
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/sequential.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/sequential.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/sequential.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16340,9 +16775,9 @@ function sequential(interpolator) {
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/threshold.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/threshold.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/threshold.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16389,9 +16824,9 @@ function threshold() {
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/tickFormat.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/tickFormat.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/tickFormat.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16435,9 +16870,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/time.js":
-/*!******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/time.js ***!
-  \******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/time.js ***!
+  \***********************************************************************************************/
 /*! exports provided: calendar, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16591,9 +17026,9 @@ function calendar(year, month, week, day, hour, minute, second, millisecond, for
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/utcTime.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/utcTime.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/utcTime.js ***!
+  \**************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16614,9 +17049,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-scale/src/viridis.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-scale/src/viridis.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-scale/src/viridis.js ***!
+  \**************************************************************************************************/
 /*! exports provided: default, magma, inferno, plasma */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16647,9 +17082,9 @@ var plasma = ramp(Object(_colors__WEBPACK_IMPORTED_MODULE_0__["default"])("0d088
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/index.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/index.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/index.js ***!
+  \************************************************************************************************/
 /*! exports provided: creator, local, matcher, mouse, namespace, namespaces, select, selectAll, selection, selector, selectorAll, style, touch, touches, window, event, customEvent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16726,9 +17161,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/constant.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/constant.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/constant.js ***!
+  \*******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16744,9 +17179,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/creator.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/creator.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/creator.js ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16784,9 +17219,9 @@ function creatorFixed(fullname) {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/local.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/local.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/local.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16825,9 +17260,9 @@ Local.prototype = local.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/matcher.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/matcher.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/matcher.js ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16860,9 +17295,9 @@ if (typeof document !== "undefined") {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/mouse.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/mouse.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/mouse.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16883,9 +17318,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/namespace.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/namespace.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/namespace.js ***!
+  \********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16904,9 +17339,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/namespaces.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/namespaces.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/namespaces.js ***!
+  \*********************************************************************************************************/
 /*! exports provided: xhtml, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16927,9 +17362,9 @@ var xhtml = "http://www.w3.org/1999/xhtml";
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/point.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/point.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/point.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16953,9 +17388,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/select.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/select.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/select.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16974,9 +17409,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selectAll.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selectAll.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selectAll.js ***!
+  \********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -16995,9 +17430,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/append.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/append.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/append.js ***!
+  \***************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17017,9 +17452,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/attr.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/attr.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/attr.js ***!
+  \*************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17088,9 +17523,9 @@ function attrFunctionNS(fullname, value) {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/call.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/call.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/call.js ***!
+  \*************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17107,9 +17542,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/classed.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/classed.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/classed.js ***!
+  \****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17195,9 +17630,9 @@ function classedFunction(names, value) {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/data.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/data.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/data.js ***!
+  \*************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17329,9 +17764,9 @@ function bindKey(parent, group, enter, update, exit, data, key) {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/datum.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/datum.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/datum.js ***!
+  \**************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17347,9 +17782,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/dispatch.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/dispatch.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/dispatch.js ***!
+  \*****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17395,9 +17830,9 @@ function dispatchFunction(type, params) {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/each.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/each.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/each.js ***!
+  \*************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17418,9 +17853,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/empty.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/empty.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/empty.js ***!
+  \**************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17434,9 +17869,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/enter.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/enter.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/enter.js ***!
+  \**************************************************************************************************************/
 /*! exports provided: default, EnterNode */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17472,9 +17907,9 @@ EnterNode.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/exit.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/exit.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/exit.js ***!
+  \*************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17493,9 +17928,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/filter.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/filter.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/filter.js ***!
+  \***************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17524,9 +17959,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/html.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/html.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/html.js ***!
+  \*************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17562,9 +17997,9 @@ function htmlFunction(value) {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/index.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/index.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/index.js ***!
+  \**************************************************************************************************************/
 /*! exports provided: root, Selection, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17681,9 +18116,9 @@ Selection.prototype = selection.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/insert.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/insert.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/insert.js ***!
+  \***************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17710,9 +18145,9 @@ function constantNull() {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/lower.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/lower.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/lower.js ***!
+  \**************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17730,9 +18165,9 @@ function lower() {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/merge.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/merge.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/merge.js ***!
+  \**************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17762,9 +18197,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/node.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/node.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/node.js ***!
+  \*************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17786,9 +18221,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/nodes.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/nodes.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/nodes.js ***!
+  \**************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17804,9 +18239,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/on.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/on.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/on.js ***!
+  \***********************************************************************************************************/
 /*! exports provided: event, default, customEvent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17926,9 +18361,9 @@ function customEvent(event1, listener, that, args) {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/order.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/order.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/order.js ***!
+  \**************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17952,9 +18387,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/property.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/property.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/property.js ***!
+  \*****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17993,9 +18428,9 @@ function propertyFunction(name, value) {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/raise.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/raise.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/raise.js ***!
+  \**************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18013,9 +18448,9 @@ function raise() {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/remove.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/remove.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/remove.js ***!
+  \***************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18034,9 +18469,9 @@ function remove() {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/select.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/select.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/select.js ***!
+  \***************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18066,9 +18501,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/selectAll.js":
-/*!*************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/selectAll.js ***!
-  \*************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/selectAll.js ***!
+  \******************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18098,9 +18533,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/size.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/size.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/size.js ***!
+  \*************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18116,9 +18551,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/sort.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/sort.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/sort.js ***!
+  \*************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18154,9 +18589,9 @@ function ascending(a, b) {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/sparse.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/sparse.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/sparse.js ***!
+  \***************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18170,9 +18605,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/style.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/style.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/style.js ***!
+  \**************************************************************************************************************/
 /*! exports provided: default, styleValue */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18220,9 +18655,9 @@ function styleValue(node, name) {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selection/text.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selection/text.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selection/text.js ***!
+  \*************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18258,9 +18693,9 @@ function textFunction(value) {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selector.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selector.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selector.js ***!
+  \*******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18278,9 +18713,9 @@ function none() {}
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/selectorAll.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/selectorAll.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/selectorAll.js ***!
+  \**********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18300,9 +18735,9 @@ function empty() {
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/sourceEvent.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/sourceEvent.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/sourceEvent.js ***!
+  \**********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18321,9 +18756,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/touch.js":
-/*!***********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/touch.js ***!
-  \***********************************************************************************/
+/*!****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/touch.js ***!
+  \****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18350,9 +18785,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/touches.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/touches.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/touches.js ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18377,9 +18812,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-selection/src/window.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-selection/src/window.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-selection/src/window.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18395,9 +18830,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/index.js":
-/*!***************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/index.js ***!
-  \***************************************************************************/
+/*!********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/index.js ***!
+  \********************************************************************************************/
 /*! exports provided: arc, area, line, pie, areaRadial, radialArea, lineRadial, radialLine, pointRadial, linkHorizontal, linkVertical, linkRadial, symbol, symbols, symbolCircle, symbolCross, symbolDiamond, symbolSquare, symbolStar, symbolTriangle, symbolWye, curveBasisClosed, curveBasisOpen, curveBasis, curveBundle, curveCardinalClosed, curveCardinalOpen, curveCardinal, curveCatmullRomClosed, curveCatmullRomOpen, curveCatmullRom, curveLinearClosed, curveLinear, curveMonotoneX, curveMonotoneY, curveNatural, curveStep, curveStepAfter, curveStepBefore, stack, stackOffsetExpand, stackOffsetDiverging, stackOffsetNone, stackOffsetSilhouette, stackOffsetWiggle, stackOrderAscending, stackOrderDescending, stackOrderInsideOut, stackOrderNone, stackOrderReverse */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18595,9 +19030,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/arc.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/arc.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/arc.js ***!
+  \**********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18870,9 +19305,9 @@ function cornerTangents(x0, y0, x1, y1, r1, rc, cw) {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/area.js":
-/*!******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/area.js ***!
-  \******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/area.js ***!
+  \***********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18997,9 +19432,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/areaRadial.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/areaRadial.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/areaRadial.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19042,9 +19477,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/array.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/array.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/array.js ***!
+  \************************************************************************************************/
 /*! exports provided: slice */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19057,9 +19492,9 @@ var slice = Array.prototype.slice;
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/constant.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/constant.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/constant.js ***!
+  \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19075,9 +19510,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/basis.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/basis.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/basis.js ***!
+  \******************************************************************************************************/
 /*! exports provided: point, Basis, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19141,9 +19576,9 @@ Basis.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/basisClosed.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/basisClosed.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/basisClosed.js ***!
+  \************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19208,9 +19643,9 @@ BasisClosed.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/basisOpen.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/basisOpen.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/basisOpen.js ***!
+  \**********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19261,9 +19696,9 @@ BasisOpen.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/bundle.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/bundle.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/bundle.js ***!
+  \*******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19331,9 +19766,9 @@ Bundle.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/cardinal.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/cardinal.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/cardinal.js ***!
+  \*********************************************************************************************************/
 /*! exports provided: point, Cardinal, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19407,9 +19842,9 @@ Cardinal.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/cardinalClosed.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/cardinalClosed.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/cardinalClosed.js ***!
+  \***************************************************************************************************************/
 /*! exports provided: CardinalClosed, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19484,9 +19919,9 @@ CardinalClosed.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/cardinalOpen.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/cardinalOpen.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/cardinalOpen.js ***!
+  \*************************************************************************************************************/
 /*! exports provided: CardinalOpen, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19548,9 +19983,9 @@ CardinalOpen.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/catmullRom.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/catmullRom.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/catmullRom.js ***!
+  \***********************************************************************************************************/
 /*! exports provided: point, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19652,9 +20087,9 @@ CatmullRom.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/catmullRomClosed.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/catmullRomClosed.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/catmullRomClosed.js ***!
+  \*****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19742,9 +20177,9 @@ CatmullRomClosed.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/catmullRomOpen.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/catmullRomOpen.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/catmullRomOpen.js ***!
+  \***************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19819,9 +20254,9 @@ CatmullRomOpen.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/linear.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/linear.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/linear.js ***!
+  \*******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19863,9 +20298,9 @@ Linear.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/linearClosed.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/linearClosed.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/linearClosed.js ***!
+  \*************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -19902,9 +20337,9 @@ LinearClosed.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/monotone.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/monotone.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/monotone.js ***!
+  \*********************************************************************************************************/
 /*! exports provided: monotoneX, monotoneY */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20021,9 +20456,9 @@ function monotoneY(context) {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/natural.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/natural.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/natural.js ***!
+  \********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20099,9 +20534,9 @@ function controlPoints(x) {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/radial.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/radial.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/radial.js ***!
+  \*******************************************************************************************************/
 /*! exports provided: curveRadialLinear, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20151,9 +20586,9 @@ function curveRadial(curve) {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/curve/step.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/curve/step.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/curve/step.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default, stepBefore, stepAfter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20219,9 +20654,9 @@ function stepAfter(context) {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/descending.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/descending.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/descending.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20235,9 +20670,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/identity.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/identity.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/identity.js ***!
+  \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20251,9 +20686,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/line.js":
-/*!******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/line.js ***!
-  \******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/line.js ***!
+  \***********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20323,9 +20758,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/lineRadial.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/lineRadial.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/lineRadial.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: lineRadial, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20358,9 +20793,9 @@ function lineRadial(l) {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/link/index.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/link/index.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/link/index.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: linkHorizontal, linkVertical, linkRadial */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20463,9 +20898,9 @@ function linkRadial() {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/math.js":
-/*!******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/math.js ***!
-  \******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/math.js ***!
+  \***********************************************************************************************/
 /*! exports provided: abs, atan2, cos, max, min, sin, sqrt, epsilon, pi, halfPi, tau, acos, asin */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20509,9 +20944,9 @@ function asin(x) {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/noop.js":
-/*!******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/noop.js ***!
-  \******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/noop.js ***!
+  \***********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20523,9 +20958,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/offset/diverging.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/offset/diverging.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/offset/diverging.js ***!
+  \***********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20550,9 +20985,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/offset/expand.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/offset/expand.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/offset/expand.js ***!
+  \********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20574,9 +21009,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/offset/none.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/offset/none.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/offset/none.js ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20596,9 +21031,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/offset/silhouette.js":
-/*!*******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/offset/silhouette.js ***!
-  \*******************************************************************************************/
+/*!************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/offset/silhouette.js ***!
+  \************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20620,9 +21055,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/offset/wiggle.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/offset/wiggle.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/offset/wiggle.js ***!
+  \********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20658,9 +21093,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/order/ascending.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/order/ascending.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/order/ascending.js ***!
+  \**********************************************************************************************************/
 /*! exports provided: default, sum */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20685,9 +21120,9 @@ function sum(series) {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/order/descending.js":
-/*!******************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/order/descending.js ***!
-  \******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/order/descending.js ***!
+  \***********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20704,9 +21139,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/order/insideOut.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/order/insideOut.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/order/insideOut.js ***!
+  \**********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20746,9 +21181,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/order/none.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/order/none.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/order/none.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20764,9 +21199,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/order/reverse.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/order/reverse.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/order/reverse.js ***!
+  \********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20783,9 +21218,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/pie.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/pie.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/pie.js ***!
+  \**********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20879,9 +21314,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/point.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/point.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/point.js ***!
+  \************************************************************************************************/
 /*! exports provided: x, y */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20901,9 +21336,9 @@ function y(p) {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/pointRadial.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/pointRadial.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/pointRadial.js ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20917,9 +21352,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/stack.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/stack.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/stack.js ***!
+  \************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20991,9 +21426,9 @@ function stackValue(d, key) {
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/symbol.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/symbol.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/symbol.js ***!
+  \*************************************************************************************************/
 /*! exports provided: symbols, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21060,9 +21495,9 @@ var symbols = [
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/symbol/circle.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/symbol/circle.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/symbol/circle.js ***!
+  \********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21083,9 +21518,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/symbol/cross.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/symbol/cross.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/symbol/cross.js ***!
+  \*******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21114,9 +21549,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/symbol/diamond.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/symbol/diamond.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/symbol/diamond.js ***!
+  \*********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21141,9 +21576,9 @@ var tan30 = Math.sqrt(1 / 3),
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/symbol/square.js":
-/*!***************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/symbol/square.js ***!
-  \***************************************************************************************/
+/*!********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/symbol/square.js ***!
+  \********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21161,9 +21596,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/symbol/star.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/symbol/star.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/symbol/star.js ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21199,9 +21634,9 @@ var ka = 0.89081309152928522810,
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/symbol/triangle.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/symbol/triangle.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/symbol/triangle.js ***!
+  \**********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21223,9 +21658,9 @@ var sqrt3 = Math.sqrt(3);
 /***/ }),
 
 /***/ "../../node_modules/d3-shape/src/symbol/wye.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-shape/src/symbol/wye.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-shape/src/symbol/wye.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21262,9 +21697,9 @@ var c = -0.5,
 /***/ }),
 
 /***/ "../../node_modules/d3-time-format/index.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time-format/index.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time-format/index.js ***!
+  \**************************************************************************************************/
 /*! exports provided: timeFormatDefaultLocale, timeFormat, timeParse, utcFormat, utcParse, timeFormatLocale, isoFormat, isoParse */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21299,9 +21734,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-time-format/src/defaultLocale.js":
-/*!*********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time-format/src/defaultLocale.js ***!
-  \*********************************************************************************************/
+/*!**************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time-format/src/defaultLocale.js ***!
+  \**************************************************************************************************************/
 /*! exports provided: timeFormat, timeParse, utcFormat, utcParse, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21345,9 +21780,9 @@ function defaultLocale(definition) {
 /***/ }),
 
 /***/ "../../node_modules/d3-time-format/src/isoFormat.js":
-/*!*****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time-format/src/isoFormat.js ***!
-  \*****************************************************************************************/
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time-format/src/isoFormat.js ***!
+  \**********************************************************************************************************/
 /*! exports provided: isoSpecifier, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21373,9 +21808,9 @@ var formatIso = Date.prototype.toISOString
 /***/ }),
 
 /***/ "../../node_modules/d3-time-format/src/isoParse.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time-format/src/isoParse.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time-format/src/isoParse.js ***!
+  \*********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21401,9 +21836,9 @@ var parseIso = +new Date("2000-01-01T00:00:00.000Z")
 /***/ }),
 
 /***/ "../../node_modules/d3-time-format/src/locale.js":
-/*!**************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time-format/src/locale.js ***!
-  \**************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time-format/src/locale.js ***!
+  \*******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21945,9 +22380,9 @@ function formatLiteralPercent() {
 /***/ }),
 
 /***/ "../../node_modules/d3-time/index.js":
-/*!**************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/index.js ***!
-  \**************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/index.js ***!
+  \*******************************************************************************************/
 /*! exports provided: timeInterval, timeMillisecond, timeMilliseconds, utcMillisecond, utcMilliseconds, timeSecond, timeSeconds, utcSecond, utcSeconds, timeMinute, timeMinutes, timeHour, timeHours, timeDay, timeDays, timeWeek, timeWeeks, timeSunday, timeSundays, timeMonday, timeMondays, timeTuesday, timeTuesdays, timeWednesday, timeWednesdays, timeThursday, timeThursdays, timeFriday, timeFridays, timeSaturday, timeSaturdays, timeMonth, timeMonths, timeYear, timeYears, utcMinute, utcMinutes, utcHour, utcHours, utcDay, utcDays, utcWeek, utcWeeks, utcSunday, utcSundays, utcMonday, utcMondays, utcTuesday, utcTuesdays, utcWednesday, utcWednesdays, utcThursday, utcThursdays, utcFriday, utcFridays, utcSaturday, utcSaturdays, utcMonth, utcMonths, utcYear, utcYears */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22124,9 +22559,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/day.js":
-/*!****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/day.js ***!
-  \****************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/day.js ***!
+  \*********************************************************************************************/
 /*! exports provided: default, days */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22155,9 +22590,9 @@ var days = day.range;
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/duration.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/duration.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/duration.js ***!
+  \**************************************************************************************************/
 /*! exports provided: durationSecond, durationMinute, durationHour, durationDay, durationWeek */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22178,9 +22613,9 @@ var durationWeek = 6048e5;
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/hour.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/hour.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/hour.js ***!
+  \**********************************************************************************************/
 /*! exports provided: default, hours */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22211,9 +22646,9 @@ var hours = hour.range;
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/interval.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/interval.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/interval.js ***!
+  \**************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22292,9 +22727,9 @@ function newInterval(floori, offseti, count, field) {
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/millisecond.js":
-/*!************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/millisecond.js ***!
-  \************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/millisecond.js ***!
+  \*****************************************************************************************************/
 /*! exports provided: default, milliseconds */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22333,9 +22768,9 @@ var milliseconds = millisecond.range;
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/minute.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/minute.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/minute.js ***!
+  \************************************************************************************************/
 /*! exports provided: default, minutes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22364,9 +22799,9 @@ var minutes = minute.range;
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/month.js":
-/*!******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/month.js ***!
-  \******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/month.js ***!
+  \***********************************************************************************************/
 /*! exports provided: default, months */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22394,9 +22829,9 @@ var months = month.range;
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/second.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/second.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/second.js ***!
+  \************************************************************************************************/
 /*! exports provided: default, seconds */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22425,9 +22860,9 @@ var seconds = second.range;
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/utcDay.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/utcDay.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/utcDay.js ***!
+  \************************************************************************************************/
 /*! exports provided: default, utcDays */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22456,9 +22891,9 @@ var utcDays = utcDay.range;
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/utcHour.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/utcHour.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/utcHour.js ***!
+  \*************************************************************************************************/
 /*! exports provided: default, utcHours */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22487,9 +22922,9 @@ var utcHours = utcHour.range;
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/utcMinute.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/utcMinute.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/utcMinute.js ***!
+  \***************************************************************************************************/
 /*! exports provided: default, utcMinutes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22518,9 +22953,9 @@ var utcMinutes = utcMinute.range;
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/utcMonth.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/utcMonth.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/utcMonth.js ***!
+  \**************************************************************************************************/
 /*! exports provided: default, utcMonths */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22548,9 +22983,9 @@ var utcMonths = utcMonth.range;
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/utcWeek.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/utcWeek.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/utcWeek.js ***!
+  \*************************************************************************************************/
 /*! exports provided: utcSunday, utcMonday, utcTuesday, utcWednesday, utcThursday, utcFriday, utcSaturday, utcSundays, utcMondays, utcTuesdays, utcWednesdays, utcThursdays, utcFridays, utcSaturdays */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22606,9 +23041,9 @@ var utcSaturdays = utcSaturday.range;
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/utcYear.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/utcYear.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/utcYear.js ***!
+  \*************************************************************************************************/
 /*! exports provided: default, utcYears */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22647,9 +23082,9 @@ var utcYears = utcYear.range;
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/week.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/week.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/week.js ***!
+  \**********************************************************************************************/
 /*! exports provided: sunday, monday, tuesday, wednesday, thursday, friday, saturday, sundays, mondays, tuesdays, wednesdays, thursdays, fridays, saturdays */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22705,9 +23140,9 @@ var saturdays = saturday.range;
 /***/ }),
 
 /***/ "../../node_modules/d3-time/src/year.js":
-/*!*****************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-time/src/year.js ***!
-  \*****************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time/src/year.js ***!
+  \**********************************************************************************************/
 /*! exports provided: default, years */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22746,9 +23181,9 @@ var years = year.range;
 /***/ }),
 
 /***/ "../../node_modules/d3-timer/index.js":
-/*!***************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-timer/index.js ***!
-  \***************************************************************************/
+/*!********************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-timer/index.js ***!
+  \********************************************************************************************/
 /*! exports provided: now, timer, timerFlush, timeout, interval */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22777,9 +23212,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-timer/src/interval.js":
-/*!**********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-timer/src/interval.js ***!
-  \**********************************************************************************/
+/*!***************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-timer/src/interval.js ***!
+  \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22804,9 +23239,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-timer/src/timeout.js":
-/*!*********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-timer/src/timeout.js ***!
-  \*********************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-timer/src/timeout.js ***!
+  \**************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22829,9 +23264,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-timer/src/timer.js":
-/*!*******************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-timer/src/timer.js ***!
-  \*******************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-timer/src/timer.js ***!
+  \************************************************************************************************/
 /*! exports provided: now, Timer, timer, timerFlush */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22956,9 +23391,9 @@ function sleep(time) {
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/index.js":
-/*!********************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/index.js ***!
-  \********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/index.js ***!
+  \*************************************************************************************************/
 /*! exports provided: transition, active, interrupt */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22983,9 +23418,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/active.js":
-/*!*************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/active.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/active.js ***!
+  \******************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23019,9 +23454,9 @@ var root = [null];
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/interrupt.js":
-/*!****************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/interrupt.js ***!
-  \****************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/interrupt.js ***!
+  \*********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23057,9 +23492,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/selection/index.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/selection/index.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/selection/index.js ***!
+  \***************************************************************************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23079,9 +23514,9 @@ d3_selection__WEBPACK_IMPORTED_MODULE_0__["selection"].prototype.transition = _t
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/selection/interrupt.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/selection/interrupt.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/selection/interrupt.js ***!
+  \*******************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23100,9 +23535,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/selection/transition.js":
-/*!***************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/selection/transition.js ***!
-  \***************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/selection/transition.js ***!
+  \********************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23159,9 +23594,9 @@ function inherit(node, id) {
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/attr.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/attr.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/attr.js ***!
+  \***************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23250,9 +23685,9 @@ function attrFunctionNS(fullname, interpolate, value) {
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/attrTween.js":
-/*!***************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/attrTween.js ***!
-  \***************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/attrTween.js ***!
+  \********************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23296,9 +23731,9 @@ function attrTween(name, value) {
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/delay.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/delay.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/delay.js ***!
+  \****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23333,9 +23768,9 @@ function delayConstant(id, value) {
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/duration.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/duration.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/duration.js ***!
+  \*******************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23370,9 +23805,9 @@ function durationConstant(id, value) {
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/ease.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/ease.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/ease.js ***!
+  \***************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23400,9 +23835,9 @@ function easeConstant(id, value) {
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/filter.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/filter.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/filter.js ***!
+  \*****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23431,9 +23866,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/index.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/index.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/index.js ***!
+  \****************************************************************************************************************/
 /*! exports provided: Transition, default, newId */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23529,9 +23964,9 @@ Transition.prototype = transition.prototype = {
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/interpolate.js":
-/*!*****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/interpolate.js ***!
-  \*****************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/interpolate.js ***!
+  \**********************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23554,9 +23989,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/merge.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/merge.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/merge.js ***!
+  \****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23587,9 +24022,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/on.js":
-/*!********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/on.js ***!
-  \********************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/on.js ***!
+  \*************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23633,9 +24068,9 @@ function onFunction(id, name, listener) {
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/remove.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/remove.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/remove.js ***!
+  \*****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23657,9 +24092,9 @@ function removeFunction(id) {
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/schedule.js":
-/*!**************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/schedule.js ***!
-  \**************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/schedule.js ***!
+  \*******************************************************************************************************************/
 /*! exports provided: CREATED, SCHEDULED, STARTING, STARTED, RUNNING, ENDING, ENDED, default, init, set, get */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23837,9 +24272,9 @@ function create(node, id, self) {
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/select.js":
-/*!************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/select.js ***!
-  \************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/select.js ***!
+  \*****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23875,9 +24310,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/selectAll.js":
-/*!***************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/selectAll.js ***!
-  \***************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/selectAll.js ***!
+  \********************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23917,9 +24352,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/selection.js":
-/*!***************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/selection.js ***!
-  \***************************************************************************************************/
+/*!********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/selection.js ***!
+  \********************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23938,9 +24373,9 @@ var Selection = d3_selection__WEBPACK_IMPORTED_MODULE_0__["selection"].prototype
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/style.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/style.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/style.js ***!
+  \****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -24013,9 +24448,9 @@ function styleFunction(name, interpolate, value) {
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/styleTween.js":
-/*!****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/styleTween.js ***!
-  \****************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/styleTween.js ***!
+  \*********************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -24044,9 +24479,9 @@ function styleTween(name, value, priority) {
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/text.js":
-/*!**********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/text.js ***!
-  \**********************************************************************************************/
+/*!***************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/text.js ***!
+  \***************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -24078,9 +24513,9 @@ function textFunction(value) {
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/transition.js":
-/*!****************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/transition.js ***!
-  \****************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/transition.js ***!
+  \*********************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -24117,9 +24552,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "../../node_modules/d3-transition/src/transition/tween.js":
-/*!***********************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/d3-transition/src/transition/tween.js ***!
-  \***********************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-transition/src/transition/tween.js ***!
+  \****************************************************************************************************************/
 /*! exports provided: default, tweenValue */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -24213,9 +24648,9 @@ function tweenValue(transition, name, value) {
 /***/ }),
 
 /***/ "../../node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js":
-/*!************************************************************************************************************!*\
-  !*** /home/travis/build/IBM/carbon-charts/node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js ***!
-  \************************************************************************************************************/
+/*!*****************************************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js ***!
+  \*****************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
