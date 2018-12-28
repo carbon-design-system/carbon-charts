@@ -51,11 +51,23 @@ export class LineChart extends BaseAxisChart {
 
 		this.innerWrap.attr("transform", `translate(${margins.left}, ${margins.top})`);
 
+		let curveName;
+		let curveOptions;
+		this.options.curve = this.options.curve || "curveLinear";
+		if (typeof this.options.curve === "string") { // curve: 'string'
+			curveName = this.options.curve;
+			curveOptions = {};
+		} else { // curve: { name: 'string' }
+			curveName = this.options.curve.name || "curveLinear";
+			curveOptions = this.options.curve;
+			delete curveOptions["name"];
+		}
+
 		// D3 line generator function
 		this.lineGenerator = line()
 			.x((d, i) => this.x(this.displayData.labels[i]) + margins.left)
 			.y((d: any) => this.y(d))
-			.curve(getD3Curve(this.options.curve, this.options.curveOptions));
+			.curve(getD3Curve(curveName, curveOptions));
 
 		const gLines = this.innerWrap.selectAll("g.lines")
 			.data(this.displayData.datasets)

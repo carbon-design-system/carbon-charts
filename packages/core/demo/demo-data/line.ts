@@ -55,7 +55,9 @@ export const curvedLineOptions = {
 			}
 		}
 	},
-	curve: "curveNatural",
+	curve: {
+		name: "curveNatural"
+	},
 	legendClickable: true,
 	containerResizable: true
 };
