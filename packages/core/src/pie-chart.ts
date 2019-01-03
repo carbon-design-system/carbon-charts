@@ -337,43 +337,6 @@ export class PieChart extends BaseChart {
 		this.interpolateValues(newDisplayData);
 	}
 
-	addLegend() {
-		if (this.container.select(".legend-tooltip").nodes().length > 0) {
-			return;
-		}
-
-		this.container.select(".legend")
-			.selectAll("*").remove();
-
-		const legendItems = this.getLegendItems();
-		const legend = this.container.select(".legend")
-			.attr("font-size", Configuration.legend.fontSize)
-			.selectAll("div")
-			.data(Object.keys(legendItems))
-			.enter().append("li")
-				.attr("class", "legend-btn active");
-
-		legend.append("div")
-			.attr("class", "legend-circle")
-			.style("background-color", (d, i) => {
-				if (legendItems[d] === Configuration.legend.items.status.ACTIVE) {
-					return this.colorScale(d);
-				}
-
-				return "white";
-			})
-			.style("border", (d, i) => {
-				if (legendItems[d] === Configuration.legend.items.status.ACTIVE) {
-					return "none";
-				}
-
-				return `2px solid ${this.colorScale(d)}`;
-			});
-
-		legend.append("text")
-			.text(d => d);
-	}
-
 	resizeChart() {
 		const { pie: pieConfigs } = Configuration;
 
