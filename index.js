@@ -588,7 +588,9 @@ var curvedLineOptions = {
             }
         }
     },
-    curve: "curveNatural",
+    curve: {
+        name: "curveNatural"
+    },
     legendClickable: true,
     containerResizable: true
 };
@@ -3390,11 +3392,23 @@ var LineChart = /** @class */ (function (_super) {
         this.innerWrap.style("width", "100%")
             .style("height", "100%");
         this.innerWrap.attr("transform", "translate(" + margins.left + ", " + margins.top + ")");
+        var curveName;
+        var curveOptions;
+        this.options.curve = this.options.curve || "curveLinear";
+        if (typeof this.options.curve === "string") {
+            curveName = this.options.curve;
+            curveOptions = {};
+        }
+        else {
+            curveName = this.options.curve.name || "curveLinear";
+            curveOptions = this.options.curve;
+            delete curveOptions["name"];
+        }
         // D3 line generator function
         this.lineGenerator = Object(d3_shape__WEBPACK_IMPORTED_MODULE_1__["line"])()
             .x(function (d, i) { return _this.x(_this.displayData.labels[i]) + margins.left; })
             .y(function (d) { return _this.y(d); })
-            .curve(Object(_services_curves__WEBPACK_IMPORTED_MODULE_4__["getD3Curve"])(this.options.curve) || Object(_services_curves__WEBPACK_IMPORTED_MODULE_4__["getD3Curve"])("curveLinear"));
+            .curve(Object(_services_curves__WEBPACK_IMPORTED_MODULE_4__["getD3Curve"])(curveName, curveOptions));
         var gLines = this.innerWrap.selectAll("g.lines")
             .data(this.displayData.datasets)
             .enter()
@@ -4011,9 +4025,17 @@ var curveTypes = {
     "curveStepAfter": d3_shape__WEBPACK_IMPORTED_MODULE_0__["curveStepAfter"],
     "curveStepBefore": d3_shape__WEBPACK_IMPORTED_MODULE_0__["curveStepBefore"]
 };
-var getD3Curve = function (curveName) {
+var getD3Curve = function (curveName, curveOptions) {
+    if (curveName === void 0) { curveName = "curveLinear"; }
+    if (curveOptions === void 0) { curveOptions = {}; }
     if (curveTypes[curveName]) {
-        return curveTypes[curveName];
+        var curve_1 = curveTypes[curveName];
+        Object.keys(curveOptions).forEach(function (optionName) {
+            if (curve_1[optionName]) {
+                curve_1 = curve_1[optionName](curveOptions[optionName]);
+            }
+        });
+        return curve_1;
     }
     return null;
 };
