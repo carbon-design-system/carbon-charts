@@ -11,11 +11,6 @@ import { DonutChart } from "@carbon/charts";
  * Wrapper around `DonutChart` in carbon charts library
  *
  * Most functions just call their equivalent from the chart library.
- *
- * @export
- * @class DonutChart
- * @extends {BaseChart}
- * @implements {AfterViewInit}
  */
 @Component({
 	selector: "n-donut-chart",
@@ -27,8 +22,6 @@ import { DonutChart } from "@carbon/charts";
 export class DonutChartComponent extends BaseChart implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
-	 *
-	 * @memberof DonutChart
 	 */
 	ngAfterViewInit() {
 		this.chart = new DonutChart(

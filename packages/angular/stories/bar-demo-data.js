@@ -1,4 +1,4 @@
-import { colors, randomizeValue } from "../helpers/commons";
+import { colors, randomizeValue } from "./helpers/commons";
 
 export const groupedBarData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],

@@ -9,7 +9,10 @@
     "curly": true,
     "eofline": true,
     "forin": true,
-    "import-blacklist": [true, "rxjs"],
+    "import-blacklist": [
+      true,
+      "rxjs"
+    ],
     "import-spacing": true,
     "indent": [
       true,
@@ -23,27 +26,27 @@
     ],
     "member-access": false,
     "member-ordering": [
-		true,
-		{
-		"order": [
-			"public-static-field",
-			"protected-static-field",
-			"private-static-field",
-			"public-static-method",
-			"protected-static-method",
-			"private-static-method",
-			"public-instance-field",
-			"protected-instance-field",
-			"private-instance-field",
-			"public-constructor",
-			"protected-constructor",
-			"private-constructor",
-			"public-instance-method",
-			"protected-instance-method",
-			"private-instance-method"
-			]
-		}
-	],
+      true,
+      {
+        "order": [
+          "public-static-field",
+          "protected-static-field",
+          "private-static-field",
+          "public-static-method",
+          "protected-static-method",
+          "private-static-method",
+          "public-instance-field",
+          "protected-instance-field",
+          "private-instance-field",
+          "public-constructor",
+          "protected-constructor",
+          "private-constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ]
+      }
+    ],
     "no-arg": true,
     "no-bitwise": true,
     "no-console": [
@@ -60,7 +63,10 @@
     "no-empty": false,
     "no-empty-interface": true,
     "no-eval": true,
-    "no-inferrable-types": [true, "ignore-params"],
+    "no-inferrable-types": [
+      true,
+      "ignore-params"
+    ],
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,
@@ -71,7 +77,7 @@
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "one-line": [
-	  true,
+      true,
       "check-open-brace",
       "check-catch",
       "check-else",
@@ -84,9 +90,9 @@
     ],
     "radix": true,
     "semicolon": [
-		true,
-		"always"
-	],
+      true,
+      "always"
+    ],
     "triple-equals": [
       true,
       "allow-null-check"
@@ -110,7 +116,7 @@
       "check-decl",
       "check-operator",
       "check-separator",
-	  "check-module",
+      "check-module",
       "check-type"
     ]
   }
