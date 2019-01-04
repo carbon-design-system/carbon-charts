@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/IBM/carbon-charts/compare/v0.7.16...v0.8.0) (2019-01-04)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
 ## [0.7.16](https://github.com/IBM/carbon-charts/compare/v0.7.15...v0.7.16) (2019-01-03)
 
 **Note:** Version bump only for package @carbon/charts-react
