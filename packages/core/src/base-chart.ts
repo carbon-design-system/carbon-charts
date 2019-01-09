@@ -204,7 +204,7 @@ export class BaseChart {
 		const { datasets } = this.displayData;
 
 		// TODO - Support the labels based legend for line chart
-		if (datasets.length === 1 && datasets[0].backgroundColors.length > 1) {
+		if (datasets.length === 1 && datasets[0].backgroundColors && datasets[0].backgroundColors.length > 1) {
 			return Configuration.legend.basedOn.LABELS;
 		} else {
 			return Configuration.legend.basedOn.SERIES;
@@ -225,9 +225,16 @@ export class BaseChart {
 	}
 
 	setColorScale() {
-		this.displayData.datasets.forEach(dataset => {
-			this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.fixedDataLabels);
-		});
+		if (this.displayData.datasets[0].backgroundColors) {
+			this.displayData.datasets.forEach(dataset => {
+				this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.fixedDataLabels);
+			});
+		} else {
+			const colors = Configuration.options.BASE.colors;
+			this.displayData.datasets.forEach((dataset, i) => {
+				this.colorScale[dataset.label] = scaleOrdinal().range([colors[i]]).domain(this.fixedDataLabels);
+			});
+		}
 	}
 
 	// TODO - Refactor
