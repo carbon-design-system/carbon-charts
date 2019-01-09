@@ -361,14 +361,23 @@ var stackedBarOptions = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colors", function() { return colors; });
-var colors = [
-    "#00a68f",
-    "#3b1a40",
-    "#473793",
-    "#3c6df0",
-    "#56D2BB"
-    // 12 items needed
-];
+var colors = window["isExperimental"] ?
+    [
+        "#418cff",
+        "#3dbb61",
+        "#ee538b",
+        "#0058a1",
+        "#fb4b53",
+        "#8a3ffc",
+        "#00bab6" // Teal 40
+    ] :
+    [
+        "#00a68f",
+        "#3b1a40",
+        "#473793",
+        "#3c6df0",
+        "#56D2BB"
+    ];
 
 
 /***/ }),
@@ -730,77 +739,112 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/index */ "./src/index.ts");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.scss */ "./demo/index.scss");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _demo_data_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./demo-data/index */ "./demo/demo-data/index.ts");
 
 // Styles
 
-
+//
+// Experimental Switch Toggle
+//
+var experimentalSwitchWrapper = document.querySelector("fieldset.experimental-switch");
+var experimentalCheckbox = experimentalSwitchWrapper.querySelector("input#toggleInput");
+var location = window.location;
+if (location) {
+    window["isExperimental"] = location.search.replace("?experimental=", "") === "true";
+    experimentalCheckbox.checked = window["isExperimental"];
+    experimentalSwitchWrapper.querySelector("label.bx--toggle__label").addEventListener("click", function () {
+        // Need the setTimeout
+        // Here since carbon toggle
+        // Does not provide a callback
+        // Therefore we wait until the change in toggle
+        // Status takes effect
+        setTimeout(function () {
+            var experimentalMode = experimentalCheckbox.checked;
+            // It's not necessary to process the location pathname
+            // Since we're using the location origin
+            // And since we don't use any other query params
+            location.href = location.origin + "?experimental=" + experimentalMode;
+        });
+    });
+}
+else {
+    // Hide experimental switch altogether
+    experimentalSwitchWrapper.parentNode.removeChild(experimentalSwitchWrapper);
+}
+var _a = __webpack_require__(/*! ./demo-data/index */ "./demo/demo-data/index.ts"), 
+// Bar
+groupedBarOptions = _a.groupedBarOptions, groupedBarData = _a.groupedBarData, simpleBarOptions = _a.simpleBarOptions, simpleBarData = _a.simpleBarData, stackedBarData = _a.stackedBarData, stackedBarOptions = _a.stackedBarOptions, 
+// Pie & donut
+pieOptions = _a.pieOptions, pieData = _a.pieData, donutOptions = _a.donutOptions, 
+// Line
+curvedLineOptions = _a.curvedLineOptions, curvedLineData = _a.curvedLineData, lineData = _a.lineData, lineOptions = _a.lineOptions, 
+// Combo
+comboData = _a.comboData, comboOptions = _a.comboOptions;
 var chartTypes = [
     {
         id: "grouped-bar",
         name: "Grouped Bar",
-        options: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["groupedBarOptions"],
-        data: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["groupedBarData"]
+        options: groupedBarOptions,
+        data: groupedBarData
     },
     {
         id: "simple-bar",
         name: "Bar",
-        options: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["simpleBarOptions"],
-        data: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["simpleBarData"]
+        options: simpleBarOptions,
+        data: simpleBarData
     },
     {
         id: "combo",
         name: "Combo",
-        options: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["comboOptions"],
-        data: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["comboData"]
+        options: comboOptions,
+        data: comboData
     },
     {
         id: "stacked-bar",
         name: "Bar",
-        options: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["stackedBarOptions"],
-        data: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["stackedBarData"]
+        options: stackedBarOptions,
+        data: stackedBarData
     },
     {
         id: "simple-bar-accessible",
         name: "Accessible Bar",
-        options: Object.assign({}, _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["simpleBarOptions"], { accessibility: true }),
-        data: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["simpleBarData"]
+        options: Object.assign({}, simpleBarOptions, { accessibility: true }),
+        data: simpleBarData
     },
     {
         id: "stacked-bar-accessible",
         name: "Bar",
-        options: Object.assign({}, _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["stackedBarOptions"], { accessibility: true }),
-        data: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["stackedBarData"]
+        options: Object.assign({}, stackedBarOptions, { accessibility: true }),
+        data: stackedBarData
     },
     {
         id: "curved-line",
         name: "Curved Line",
-        options: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["curvedLineOptions"],
-        data: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["curvedLineData"]
+        options: curvedLineOptions,
+        data: curvedLineData
     },
     {
         id: "line",
         name: "Line",
-        options: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["lineOptions"],
-        data: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["lineData"]
+        options: lineOptions,
+        data: lineData
     },
     {
         id: "line-step",
         name: "Step",
-        options: Object.assign({}, _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["lineOptions"], { curve: "curveStepAfter" }),
-        data: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["lineData"]
+        options: Object.assign({}, lineOptions, { curve: "curveStepAfter" }),
+        data: lineData
     },
     {
         id: "pie",
         name: "pie",
-        options: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["pieOptions"],
-        data: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["pieData"]
+        options: pieOptions,
+        data: pieData
     },
     {
         id: "donut",
         name: "donut",
-        options: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["donutOptions"],
-        data: _demo_data_index__WEBPACK_IMPORTED_MODULE_2__["pieData"]
+        options: donutOptions,
+        data: pieData
     }
 ];
 var classyCharts = {};
@@ -2093,7 +2137,7 @@ var BaseChart = /** @class */ (function () {
     BaseChart.prototype.getLegendType = function () {
         var datasets = this.displayData.datasets;
         // TODO - Support the labels based legend for line chart
-        if (datasets.length === 1 && datasets[0].backgroundColors.length > 1) {
+        if (datasets.length === 1 && datasets[0].backgroundColors && datasets[0].backgroundColors.length > 1) {
             return _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS;
         }
         else {
@@ -2114,9 +2158,17 @@ var BaseChart = /** @class */ (function () {
     };
     BaseChart.prototype.setColorScale = function () {
         var _this = this;
-        this.displayData.datasets.forEach(function (dataset) {
-            _this.colorScale[dataset.label] = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleOrdinal"])().range(dataset.backgroundColors).domain(_this.fixedDataLabels);
-        });
+        if (this.displayData.datasets[0].backgroundColors) {
+            this.displayData.datasets.forEach(function (dataset) {
+                _this.colorScale[dataset.label] = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleOrdinal"])().range(dataset.backgroundColors).domain(_this.fixedDataLabels);
+            });
+        }
+        else {
+            var colors_1 = _configuration__WEBPACK_IMPORTED_MODULE_3__["options"].BASE.colors;
+            this.displayData.datasets.forEach(function (dataset, i) {
+                _this.colorScale[dataset.label] = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleOrdinal"])().range([colors_1[i]]).domain(_this.fixedDataLabels);
+            });
+        }
     };
     // TODO - Refactor
     BaseChart.prototype.getChartSize = function (container) {
