@@ -18,7 +18,11 @@ import * as Configuration from "./configuration";
 const chartType = "donut";
 
 // Functions
-const getNumberOfSlices = classyContainer => select(classyContainer).selectAll(`${selectors.INNERWRAP} ${selectors.pie.SLICE}`).nodes().length;
+const getNumberOfSlices = classyContainer => {
+	return select(classyContainer)
+		.selectAll(`${selectors.INNERWRAP} ${selectors.pie.SLICE}`)
+		.nodes().length;
+};
 
 describe("donut Chart", () => {
 	let classyDonutChart;
@@ -33,7 +37,7 @@ describe("donut Chart", () => {
 			classyContainer,
 			{
 				data: pieData,
-				options: Object.assign({}, donutOptions, {type: chartType})
+				options: Object.assign({}, donutOptions, { type: chartType })
 			}
 		);
 	});
@@ -89,7 +93,7 @@ describe("donut Chart", () => {
 	it("should filter results", () => {
 		// Grab chart container in DOM & # of current slices
 		const classyContainer = grabClassyContainer(chartType);
-        const numberOfSlices = getNumberOfSlices(classyContainer);
+		const numberOfSlices = getNumberOfSlices(classyContainer);
 
 		classyDonutChart.events.addEventListener("load", e => {
 			// Click on the first legend item
