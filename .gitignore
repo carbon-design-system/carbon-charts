@@ -10,3 +10,4 @@ packages/react/build/
 storybook-dist
 package-lock.json
 .cache/
+coverage

@@ -1,34 +1,22 @@
-module.exports = function (config) {
-	config.set({
-		plugins: ['karma-webpack', 'karma-jasmine', 'karma-chrome-launcher'],
-		browsers: ['ChromeHeadless'],
-		frameworks: ['jasmine'],
-		files: [{
-			pattern: '**/*.spec.ts',
-			watched: false
-		}],
-		preprocessors: {
-			'**/*.spec.ts': ['webpack']
-		},
-		browserConsoleLogOptions: {
-			terminal: true,
-			level: "debug"
-		},
-		reporters: ['dots'],
-		port: 9876,
-		logLevel: config.LOG_INFO,
-		colors: true,
-		mime: {
-			'text/x-typescript': [
-				'ts'
-			]
-		},
-		webpack: require('./webpack.test'),
-		webpackMiddleware: {
-			stats: 'errors-only'
-		},
-		webpackServer: {
-			noInfo: true
-		}
-	});
+module.exports = function(config) {
+    config.set({
+        baseUrl: ".",
+        frameworks: ["jasmine", "karma-typescript"],
+        files: [
+            { pattern: "src/**/*.ts" },
+            { pattern: "demo/**/*.ts" }
+        ],
+        preprocessors: {
+            "**/*.ts": ["webpack", "karma-typescript"]
+        },
+        webpack: require("./webpack.test"),
+        reporters: ["dots", "karma-typescript"],
+        browsers: ["ChromeHeadless"],
+        karmaTypescriptConfig: {
+            tsconfig: "./tsconfig.json",
+            coverageOptions: {
+                exclude: [/\.(d|test)\.ts$/i, /.*node_modules.*/, /demo/]
+            },
+        }
+    });
 };

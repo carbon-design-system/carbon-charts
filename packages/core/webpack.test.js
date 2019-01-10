@@ -1,11 +1,7 @@
-var HtmlWebpackPlugin = require("html-webpack-plugin");
-var ExtractText = require("extract-text-webpack-plugin");
-var nodeExternals = require('webpack-node-externals');
-var path = require('path');
-
-module.exports = [{
+module.exports = {
+	mode: "development",
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.ts$/,
 				loader: ["ts-loader"]
@@ -34,10 +30,5 @@ module.exports = [{
 	},
 	resolve: {
 		extensions: [".ts", ".js", ".json"]
-	},
-	plugins: [
-		new HtmlWebpackPlugin({
-			template: './demo/index.html'
-		})
-	],
-}];
+	}
+};
