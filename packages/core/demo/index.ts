@@ -9,7 +9,39 @@ import {
 // Styles
 import "./index.scss";
 
-import {
+//
+// Experimental Switch Toggle
+//
+const experimentalSwitchWrapper = document.querySelector("fieldset.experimental-switch");
+const experimentalCheckbox = (experimentalSwitchWrapper.querySelector("input#toggleInput") as HTMLInputElement);
+const { location } = window;
+
+if (location) {
+	window["isExperimental"] = location.search.replace("?experimental=", "") === "true";
+	experimentalCheckbox.checked = window["isExperimental"];
+
+	experimentalSwitchWrapper.querySelector("label.bx--toggle__label").addEventListener("click", () => {
+		// Need the setTimeout
+		// Here since carbon toggle
+		// Does not provide a callback
+		// Therefore we wait until the change in toggle
+		// Status takes effect
+		setTimeout(() => {
+			const experimentalMode = experimentalCheckbox.checked;
+
+			// It's not necessary to process the location pathname
+			// Since we're using the location origin
+			// And since we don't use any other query params
+			location.href = `${location.origin}?experimental=${experimentalMode}`;
+		});
+	});
+} else {
+	// Hide experimental switch altogether
+	experimentalSwitchWrapper.parentNode.removeChild(experimentalSwitchWrapper);
+}
+
+
+const {
 	// Bar
 	groupedBarOptions,
 	groupedBarData,
@@ -29,7 +61,7 @@ import {
 	// Combo
 	comboData,
 	comboOptions
-} from "./demo-data/index";
+} = require("./demo-data/index");
 
 const chartTypes = [
 	{
