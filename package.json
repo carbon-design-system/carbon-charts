@@ -14,7 +14,7 @@
 		"postinstall": "lerna bootstrap --hoist --no-ci",
 		"commit": "git-cz",
 		"test": "lerna run test",
-		"lint": "eslint packages",
+		"lint": "lerna run lint",
 		"contributors:add": "all-contributors add",
 		"contributors:generate": "all-contributors generate"
 	},
