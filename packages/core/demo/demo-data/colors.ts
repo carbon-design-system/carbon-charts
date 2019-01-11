@@ -7,7 +7,7 @@ export const colors = window["isExperimental"] ?
 		"#fb4b53", // Red 50
 		"#8a3ffc", // Purple 60
 		"#00bab6" // Teal 40
-	]:
+	] :
 	[
 		"#00a68f",
 		"#3b1a40",
