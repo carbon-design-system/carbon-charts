@@ -4,7 +4,13 @@ set -e
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
-  echo "We are in a pull request, not releasing"
+  echo "We are in a pull request, not releasing. Run unit tests:"
+
+  # Run tests
+  cd packages/core
+  npm run test
+  cd ../..
+
   exit 0
 fi
 
