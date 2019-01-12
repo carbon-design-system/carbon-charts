@@ -107,7 +107,8 @@ export class BarChart extends BaseAxisChart {
 						.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.label) : null)
 						.attr("stroke-width", Configuration.bars.default.strokeWidth)
 						.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
-						.attr("tabindex", 0);
+						.attr("aria-label", d => this.x1(d.datasetLabel))		
+						.call(this.makeAccessible);
 
 		// Hide the overlay
 		this.updateOverlay().hide();

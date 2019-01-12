@@ -124,8 +124,8 @@ export class PieChart extends BaseChart {
 			.attr("stroke", d => this.colorScale[this.displayData.datasets[0].label](d.data.label))
 			.attr("stroke-width", Configuration.pie.default.strokeWidth)
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
-			.attr("tabindex", 0)
-			.each(function(d) { this._current = d; });
+			.each(function(d) { this._current = d; })
+			.call(this.makeAccessible);;
 
 		// Draw the slice labels
 		this.innerWrap

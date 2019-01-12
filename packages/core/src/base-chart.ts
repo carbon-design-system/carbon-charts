@@ -951,4 +951,13 @@ export class BaseChart {
 	getBBox(selector: any) {
 		return this.innerWrap.select(selector).node().getBBox();
 	}
+
+	// ================================================================================
+	// Makes chart data components more screen reader friendly
+	// ================================================================================
+	makeAccessible (innerWrap: any) {
+		
+		//Make chart data components tabbable
+		innerWrap.attr("tabindex", 0);
+	}
 }
