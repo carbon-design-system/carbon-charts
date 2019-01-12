@@ -955,8 +955,10 @@ export class BaseChart {
 	// ================================================================================
 	// Makes chart data components more screen reader friendly
 	// ================================================================================
-	makeAccessible (innerWrap: any) {
+	makeAccessible (innerWrap: any, label?: any) {
 		// Make chart data components tabbable
-		innerWrap.attr("tabindex", 0);
+		innerWrap.attr("tabindex", 0)
+		// Aria label contains the x value, y value, and dataset for the data element
+		.attr("aria-label", label);
 	}
 }
