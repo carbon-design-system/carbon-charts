@@ -106,7 +106,7 @@ export class BarChart extends BaseAxisChart {
 						.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
 						.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.label) : null)
 						.attr("stroke-width", Configuration.bars.default.strokeWidth)
-						.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)						
+						.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 						.attr("tabindex", 0);
 
 		// Hide the overlay
