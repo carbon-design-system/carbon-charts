@@ -90,7 +90,7 @@ export class LineChart extends BaseAxisChart {
 				.attr("cy", d => this.y(d.value))
 				.attr("r", Configuration.charts.pointCircles.radius)
 				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label))
-				.call(this.makeAccessible);;
+				.call(this.makeAccessible);
 
 		// Hide the overlay
 		this.updateOverlay().hide();

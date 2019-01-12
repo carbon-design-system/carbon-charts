@@ -956,8 +956,7 @@ export class BaseChart {
 	// Makes chart data components more screen reader friendly
 	// ================================================================================
 	makeAccessible (innerWrap: any) {
-		
-		//Make chart data components tabbable
+		// Make chart data components tabbable
 		innerWrap.attr("tabindex", 0);
 	}
 }
