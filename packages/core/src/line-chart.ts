@@ -89,7 +89,8 @@ export class LineChart extends BaseAxisChart {
 				.attr("cx", d => this.x(d.label) + margins.left)
 				.attr("cy", d => this.y(d.value))
 				.attr("r", Configuration.charts.pointCircles.radius)
-				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label))
+				.attr("tabindex", 0);
 
 		// Hide the overlay
 		this.updateOverlay().hide();
