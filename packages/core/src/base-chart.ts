@@ -394,6 +394,8 @@ export class BaseChart {
 			chartId = this.id;
 			container = parent.append("div");
 			container.attr("chart-id", chartId)
+				// Alert user when the contents of the chart container changes
+				.attr("role", "alert")
 				.classed("chart-wrapper", true);
 			if (container.select(".legend-wrapper").nodes().length === 0) {
 				const legendWrapper = container.append("div")
