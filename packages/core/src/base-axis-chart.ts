@@ -1,5 +1,9 @@
 // D3 Imports
-import { select } from "d3-selection";
+import {
+	mouse,
+	select,
+	event
+} from "d3-selection";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { axisBottom, axisLeft, axisRight } from "d3-axis";
 import { min, max } from "d3-array";
@@ -8,12 +12,18 @@ import { BaseChart } from "./base-chart";
 
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
+import { drag } from "d3-drag";
 
 export class BaseAxisChart extends BaseChart {
 	x: any;
 	y: any;
 	y2: any;
 	thresholdDimensions: any;
+
+	// Represents the rescale value obtained from sliders
+	lowerScaleY = 1;
+	upperScaleY = 1;
+	scaleX = 1;
 
 	constructor(holder: Element, configs: any) {
 		super(holder, configs);
@@ -58,6 +68,9 @@ export class BaseAxisChart extends BaseChart {
 			// Draw the x & y grid
 			this.drawXGrid();
 			this.drawYGrid();
+
+			this.createXSlider();
+			this.createYSlider();
 
 			this.addOrUpdateLegend();
 		} else {
@@ -131,6 +144,212 @@ export class BaseAxisChart extends BaseChart {
 			datasetLabel: dataset.label,
 			value: dataset.data[index]
 		}));
+	}
+
+	createXSlider() {
+		const width = 960;
+		const height = 500;
+		const radius = 20;
+		const margin = 100;
+
+		const x1 = margin + 125;
+		const x2 = width - margin;
+		const y = height / 2;
+
+		let circle: any;
+
+		const dragged = (d) => {
+
+			// Get the cursor's x location.
+			let x = event.x;
+
+			// x must be between the two ends of the line.
+			x = x < x1 ? x1 : x > x2 ? x2 : x;
+
+			// This assignment is necessary for multiple drag gestures.
+			// It makes the drag.origin function yield the correct value.
+			d.x = x;
+
+			// Update the circle location on the slider
+			circle.attr("cx", x);
+
+			console.log(x);
+
+			// 480 is the default slider value. Update the y scale depending on if the slider is to the left or right of the origin
+			if ( x > 480 ) {
+				this.scaleX = 1 / ( Math.abs( x - 480 ) / 10);
+			} else {
+				this.scaleX = Math.abs( x - 480 ) / 10;
+			}
+
+			this.update();
+		};
+
+		// Insert the slider element into the action bar. A slider consists of a line and a circle
+		const svg = this.innerWrap.append("svg")
+			.attr("width", width)
+			.attr("height", height)
+			.datum({
+				x: (width / 2) - 200,
+				y: (height / 2) + 200
+			}).call(drag()
+			.on("drag", dragged));
+
+		const line = svg.append("line")
+			.attr("id", "slider-line")
+			.attr("x1", x1 - 200)
+			.attr("x2", x2 - 200)
+			.attr("y1", y + 200)
+			.attr("y2", y + 200)
+			.style("stroke", "black")
+			.style("stroke-linecap", "round")
+			.style("stroke-width", 5);
+
+		// Make circle draggable
+		circle = svg.append("circle")
+			.attr("id", "slider-circle")
+			.attr("r", radius)
+			.attr("cy", function(d) { return d.y; })
+			.attr("cx", function(d) { return d.x; })
+			.style("stroke", "black")
+			.style("cursor", "ew-resize")
+			.call(drag);
+	}
+
+	createYSlider() {
+		const width = 500;
+		const height = 960;
+		const radius = 20;
+		const margin = 100;
+
+		const y1 = margin - 75;
+		const y2 = (height - margin) / 2;
+		const x = width / 2;
+
+		let lowerCircle: any;
+		let upperCircle: any;
+
+		const upperDragged = (d) => {
+
+			// console.log(select(this.id).attr("id"));
+			console.log(select(this.id));
+
+			// Get the cursor's y location.
+			let y = event.y;
+
+			// y must be between the two ends of the line.
+			y = y < y1 ? y1 : y > y2 ? y2 : y;
+
+			// This assignment is necessary for multiple drag gestures.
+			// It makes the drag.origin function yield the correct value.
+			d.y = y;
+
+			// Update the circle location on the slider
+			upperCircle.attr("cy", y);
+
+			console.log(y + " upper ");
+
+			/* 202.5 is the default slider value (max value is 430, min value is 25).
+			Update the y scale depending on if the slider is above or below the origin*/
+			if ( y < 202.5 ) {
+				this.upperScaleY = 1 / ( Math.abs( y - 202.5 ) / 20);
+				// this.scaleY = this.scaleY;
+			} else if ( y < 202.5 ) {
+				this.upperScaleY = Math.abs( y - 202.5 ) / 20;
+			} // else if ( y < 202.5 ){
+				// this.scaleY = 1;
+	// }
+
+			this.update();
+		};
+
+		const lowerDragged = (d) => {
+
+			// console.log(select(this.id).attr("id"));
+			console.log(select(this.id));
+
+			// Get the cursor's y location.
+			let y = event.y;
+
+			// y must be between the two ends of the line.
+			y = y < y1 ? y1 : y > y2 ? y2 : y;
+
+			// This assignment is necessary for multiple drag gestures.
+			// It makes the drag.origin function yield the correct value.
+			d.y = y;
+
+			// Update the circle location on the slider
+			lowerCircle.attr("cy", y);
+
+			console.log(y + " lower");
+
+			/* 202.5 is the default slider value (max value is 430, min value is 25).
+			Update the y scale depending on if the slider is above or below the origin*/
+			if ( y > 202.5 ) {
+				this.lowerScaleY = 1 / ( Math.abs( y - 202.5 ) / 20);
+				// this.scaleY = this.scaleY;
+			} else if ( y < 202.5 ) {
+				this.lowerScaleY = Math.abs( y - 202.5 ) / 20;
+			} // else if ( y < 202.5 ){
+				// this.scaleY = 1;
+	// }
+
+			this.update();
+		};
+
+		// Insert the slider element into the action bar. A slider consists of a line and a circle
+		const svg1 = this.innerWrap.append("svg")
+			.attr("width", width)
+			.attr("height", height)
+			.datum({
+				x: (width / 2) - 240,
+				y: (height / 4) + 40
+			}).call(drag()
+			.on("drag", lowerDragged));
+
+		const svg2 = this.innerWrap.append("svg")
+			.attr("width", width)
+			.attr("height", height)
+			.datum({
+				x: (width / 2) - 240,
+				y: (height / 4) - 40
+			}).call(drag()
+			.on("drag", upperDragged));
+
+		const line = svg1.append("line")
+			.attr("id", "slider-line")
+			.attr("x1", x - 240)
+			.attr("x2", x - 240)
+			.attr("y1", y1)
+			.attr("y2", y2)
+			.style("stroke", "black")
+			.style("stroke-linecap", "round")
+			.style("stroke-width", 5);
+
+		// Make circle draggable
+		lowerCircle = svg1.append("circle")
+			.attr("id", "slider-circle-top")
+			.attr("r", radius)
+			.attr("cy", function(d) { return d.y; })
+			.attr("cx", function(d) { return d.x; })
+			.style("stroke", "black")
+			.style("cursor", "ew-resize")
+			.call(drag);
+
+		upperCircle = svg2.append("circle")
+			.attr("id", "slider-circle-bottom")
+			.attr("r", radius)
+			.attr("cy", function(d) { return d.y; })
+			.attr("cx", function(d) { return d.x; })
+			.style("stroke", "red")
+			.style("cursor", "ew-resize")
+			.call(drag);
+
+		const svg = this.innerWrap.append("clipPath")
+			.attr("id", "clip")
+			.append("rect")
+			.attr("width", 450)
+			.attr("height", 365.3402557373047);
 	}
 
 	draw() {
@@ -275,7 +494,7 @@ export class BaseAxisChart extends BaseChart {
 			yMax = scales.y.yMaxAdjuster(yMax);
 		}
 
-		return yMax;
+		return yMax * this.upperScaleY;
 	}
 
 	getYMin() {
@@ -293,7 +512,7 @@ export class BaseAxisChart extends BaseChart {
 			yMin = scales.y.yMinAdjuster(yMin);
 		}
 
-		return yMin;
+		return yMin * this.lowerScaleY;
 	}
 
 	setYScale(yScale?: any) {
