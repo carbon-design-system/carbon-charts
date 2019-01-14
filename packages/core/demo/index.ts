@@ -32,7 +32,7 @@ if (location) {
 			// It's not necessary to process the location pathname
 			// Since we're using the location origin
 			// And since we don't use any other query params
-			location.href = `${location.origin}?experimental=${experimentalMode}`;
+			location.href = `${location.origin}${location.pathname}?experimental=${experimentalMode}`;
 		});
 	});
 } else {
