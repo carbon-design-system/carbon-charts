@@ -52,10 +52,14 @@ export const groupedBarData = {
 
 export const groupedBarOptions = {
 	scales: {
+		headers:{
+			title:  "2018 Annual Sales Figures"
+		},
 		x: {
-			title: "2018 Annual Sales Figures",
+			title: "Asset Category",
 		},
 		y: {
+			title: "Dollars (CAD)",
 			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 		},
@@ -92,10 +96,14 @@ export const simpleBarData = {
 export const simpleBarOptions = {
 	accessibility: false,
 	scales: {
+		headers:{
+			title:  "2018 Annual Sales Figures"
+		},
 		x: {
-			title: "2018 Annual Sales Figures",
+			title: "Asset Category",
 		},
 		y: {
+			title: "Dollars (CAD)",
 			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 			stacked: false
@@ -159,10 +167,14 @@ export const stackedBarData = {
 export const stackedBarOptions = {
 	accessibility: false,
 	scales: {
+		headers:{
+			title:  "2018 Annual Sales Figures"
+		},
 		x: {
-			title: "2018 Annual Sales Figures",
+			title: "Asset Category",
 		},
 		y: {
+			title: "Dollars (CAD)",
 			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 			stacked: true

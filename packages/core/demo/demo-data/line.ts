@@ -42,10 +42,14 @@ export const curvedLineData = {
 export const curvedLineOptions = {
 	accessibility: false,
 	scales: {
+		headers:{
+			title:  "2018 Annual Sales Figures"
+		},
 		x: {
-			title: "2018 Annual Sales Figures",
+			title: "Asset Category",
 		},
 		y: {
+			title: "Dollars (CAD)",
 			yMaxAdjuster: yMax => yMax * 1.2,
 			yMinAdjuster: yMin => yMin * 1.2,
 			formatter: axisValue => `${axisValue / 1000}k`
@@ -107,10 +111,14 @@ export const lineData = {
 export const lineOptions = {
 	accessibility: false,
 	scales: {
+		headers:{
+			title:  "2018 Annual Sales Figures"
+		},
 		x: {
-			title: "2018 Annual Sales Figures",
+			title: "Asset Category",
 		},
 		y: {
+			title: "Dollars (CAD)",
 			yMaxAdjuster: yMax => yMax * 1.2,
 			yMinAdjuster: yMin => yMin * 1.2,
 			formatter: axisValue => `${axisValue / 1000}k`,
