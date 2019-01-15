@@ -244,6 +244,15 @@ export class BaseAxisChart extends BaseChart {
 				.text(this.options.scales.x.title);
 		}
 
+		// Add chart title
+		if (this.options.scales.headers.title) {
+			this.innerWrap.append("text")
+				.attr("class", "x axis-label")
+				.attr("text-anchor", "middle")
+				.attr("transform", `translate(${xAxisRef.node().getBBox().width / 2}, -10)`)
+				.text(this.options.scales.headers.title);
+		}
+
 		// get the yHeight after the height of the axis has settled
 		const yHeight = this.getChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		xAxisRef.attr("transform", `translate(0, ${yHeight})`);
