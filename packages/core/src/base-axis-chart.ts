@@ -147,7 +147,7 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	createXSlider() {
-		const width = 960;
+		const width = 750;
 		const height = 500;
 		const radius = 20;
 		const margin = 100;
