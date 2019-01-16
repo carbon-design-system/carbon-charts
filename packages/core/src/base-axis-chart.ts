@@ -20,6 +20,13 @@ export class BaseAxisChart extends BaseChart {
 	y2: any;
 	thresholdDimensions: any;
 
+	sliderAttributes = {
+		topHandle: 0,
+		bottomHandle: 0,
+		rightHandle: 0,
+		leftHandle: 0
+	};
+
 	// Represents the rescale value obtained from sliders
 	lowerScaleY = 1;
 	upperScaleY = 1;
@@ -238,7 +245,9 @@ export class BaseAxisChart extends BaseChart {
 			let y = event.y;
 
 			// y must be between the two ends of the line.
-			y = y < y1 ? y1 : y > y2 ? y2 : y;
+			//y = y < y1 ? y1 : y > y2 ? y2 : y;
+
+			y = y < y1 ? y1 : y > this.sliderAttributes.bottomHandle ? this.sliderAttributes.bottomHandle : y;
 
 			// This assignment is necessary for multiple drag gestures.
 			// It makes the drag.origin function yield the correct value.
@@ -246,6 +255,8 @@ export class BaseAxisChart extends BaseChart {
 
 			// Update the circle location on the slider
 			upperCircle.attr("cy", y);
+
+			this.sliderAttributes.topHandle = y;
 
 			console.log(y + " upper ");
 
@@ -272,7 +283,8 @@ export class BaseAxisChart extends BaseChart {
 			let y = event.y;
 
 			// y must be between the two ends of the line.
-			y = y < y1 ? y1 : y > y2 ? y2 : y;
+			//y = y < y1 ? y1 : y > y2 ? y2 : y;
+			y = y < this.sliderAttributes.topHandle ? this.sliderAttributes.topHandle : y > y2 ? y2 : y;
 
 			// This assignment is necessary for multiple drag gestures.
 			// It makes the drag.origin function yield the correct value.
@@ -280,6 +292,8 @@ export class BaseAxisChart extends BaseChart {
 
 			// Update the circle location on the slider
 			lowerCircle.attr("cy", y);
+
+			this.sliderAttributes.bottomHandle = y;
 
 			console.log(y + " lower");
 
