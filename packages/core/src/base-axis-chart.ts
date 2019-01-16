@@ -245,7 +245,7 @@ export class BaseAxisChart extends BaseChart {
 			let y = event.y;
 
 			// y must be between the two ends of the line.
-			//y = y < y1 ? y1 : y > y2 ? y2 : y;
+			// y = y < y1 ? y1 : y > y2 ? y2 : y;
 
 			y = y < y1 ? y1 : y > this.sliderAttributes.bottomHandle ? this.sliderAttributes.bottomHandle : y;
 
@@ -283,7 +283,7 @@ export class BaseAxisChart extends BaseChart {
 			let y = event.y;
 
 			// y must be between the two ends of the line.
-			//y = y < y1 ? y1 : y > y2 ? y2 : y;
+			// y = y < y1 ? y1 : y > y2 ? y2 : y;
 			y = y < this.sliderAttributes.topHandle ? this.sliderAttributes.topHandle : y > y2 ? y2 : y;
 
 			// This assignment is necessary for multiple drag gestures.
