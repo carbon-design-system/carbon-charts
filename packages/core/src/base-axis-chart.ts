@@ -469,7 +469,7 @@ export class BaseAxisChart extends BaseChart {
 		// Applies to thresholds being added
 		thresholdRects.enter()
 			.append("rect")
-			.classed("bar", true)
+			.classed("threshold-bar", true)
 			.attr("x", 0)
 			.attr("y", d => calculateYPosition(d))
 			.attr("width", width)
