@@ -2028,6 +2028,8 @@ var BaseChart = /** @class */ (function () {
     BaseChart.prototype.styleHolderElement = function () {
         var holderElement = this.holder;
         var _a = this.options, width = _a.width, height = _a.height;
+        // Add class to chart holder
+        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.holder).classed("chart-holder", true);
         // If width exists in options
         if (width) {
             // Apply formatted width attribute to chart

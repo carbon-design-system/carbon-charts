@@ -1,3 +1,6 @@
+div.chart-holder {
+  position: relative; }
+
 .chart-wrapper {
   width: 100%;
   height: 100%;
@@ -267,13 +270,7 @@ header.m-demo-header {
     background-color: #959595;
     cursor: not-allowed; }
 
-.resizable {
-  resize: both; }
-
-.demo-title {
-  margin-top: 20px; }
-
-.chart-holder {
+.demo-chart-holder {
   background-color: #fff;
   box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
   margin: 0 auto 60px auto;
@@ -282,20 +279,19 @@ header.m-demo-header {
   min-width: 300px;
   max-width: 800px;
   padding: 30px;
-  position: relative;
   transition: box-shadow .1s ease-out;
   overflow: hidden;
   resize: both;
   font-weight: 400; }
-  .chart-holder h3 {
+  .demo-chart-holder h3 {
     border-bottom: 1px solid lightgray;
     margin: 0; }
-  .chart-holder:hover {
+  .demo-chart-holder:hover {
     box-shadow: 0 15px 45px -11px rgba(22, 56, 107, 0.15);
     transition: box-shadow .1s ease-out; }
-  .chart-holder:last-child {
+  .demo-chart-holder:last-child {
     margin-bottom: 30px; }
-  .chart-holder.has-actions {
+  .demo-chart-holder.has-actions {
     margin: auto; }
 
 .chart-demo-actions {
@@ -309,18 +305,6 @@ header.m-demo-header {
   overflow: hidden; }
   .chart-demo-actions button {
     float: left; }
-
-.chart-title {
-  display: block;
-  font-size: 16px;
-  font-weight: bold; }
-
-#classy-bar-chart-holder {
-  overflow: hidden;
-  resize: both; }
-
-div#carbon-charts-patterns svg {
-  height: 0; }
 
 div.experimental-switch {
   display: table;
