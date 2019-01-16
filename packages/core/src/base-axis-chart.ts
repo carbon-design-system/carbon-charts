@@ -69,7 +69,7 @@ export class BaseAxisChart extends BaseChart {
 			this.drawXGrid();
 			this.drawYGrid();
 
-			this.createXSlider();
+			// this.createXSlider();
 			this.createYSlider();
 
 			this.addOrUpdateLegend();
