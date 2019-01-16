@@ -64,6 +64,15 @@ $default_transition: all .1s ease-out;
 		stroke: $gray_60;
 		stroke-width: .3;
 		@include fonts();
+		
+		&.y {
+			transform: rotate(-90deg) translate(-50%, -30%);
+		}
+
+		&.title{
+			font-size: 18px;
+			font-weight: bold;
+		}
 
 		&.donut {
 			&-figure {

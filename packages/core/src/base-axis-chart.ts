@@ -45,6 +45,7 @@ export class BaseAxisChart extends BaseChart {
 
 		// If an axis exists
 		const xAxisRef = select(this.holder).select(".axis.x");
+		const yAxisRef = select(this.holder).select(".axis.y");
 		if (!xAxisRef.node()) {
 			this.setSVG();
 
@@ -247,9 +248,9 @@ export class BaseAxisChart extends BaseChart {
 		// Add chart title
 		if (this.options.scales.headers.title) {
 			this.innerWrap.append("text")
-				.attr("class", "x axis-label")
+				.attr("class", "title")
 				.attr("text-anchor", "middle")
-				.attr("transform", `translate(${xAxisRef.node().getBBox().width / 2}, -10)`)
+				.attr("transform", `translate(${xAxisRef.node().getBBox().width / 2}, 0)`)
 				.text(this.options.scales.headers.title);
 		}
 
@@ -369,6 +370,13 @@ export class BaseAxisChart extends BaseChart {
 				.attr("stroke", Configuration.scales.domain.color)
 				.attr("fill", Configuration.scales.domain.color)
 				.attr("stroke-width", Configuration.scales.domain.strokeWidth);
+		}
+
+		// Add y-axis title
+		if (this.innerWrap.select(".axis-label.y").nodes().length === 0 && this.options.scales.y.title) {
+			yAxisRef.append("text")
+				.attr("class", "y axis-label")
+				.text(this.options.scales.y.title);
 		}
 
 		Tools.moveToFront(horizontalLine);
