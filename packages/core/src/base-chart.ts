@@ -78,6 +78,9 @@ export class BaseChart {
 		const holderElement = this.holder as HTMLElement;
 		const { width, height } = this.options;
 
+		// Add class to chart holder
+		select(this.holder).classed("chart-holder", true);
+
 		// If width exists in options
 		if (width) {
 			// Apply formatted width attribute to chart
