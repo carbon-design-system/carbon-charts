@@ -8,9 +8,13 @@ import {
 import { scaleOrdinal } from "d3-scale";
 import { transition, Transition } from "d3-transition";
 
+// Internal Imports
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
 import PatternsService from "./services/patterns";
+
+// Misc
+import ResizeObserver from "resize-observer-polyfill";
 
 export class BaseChart {
 	static chartCount = 1;
@@ -47,25 +51,46 @@ export class BaseChart {
 	constructor(holder: Element, configs: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
 
-		(holder as HTMLElement).style.position = "relative";
+		if (configs.options) {
+			this.options = Object.assign({}, this.options, configs.options);
+		}
+
+		// Save holder element reference, and initialize it by applying appropriate styling
 		this.holder = holder;
+		this.styleHolderElement();
 
 		const {chartId, container} = this.setChartIDContainer();
 		this.container = container;
 		this.chartContainerID = chartId;
 
-		if (configs.options) {
-			this.options = Object.assign({}, this.options, configs.options);
-
-			if (this.options.containerResizable) {
-				this.resizeWhenContainerChange();
-			}
+		if (this.options.containerResizable) {
+			this.resizeWhenContainerChange();
 		}
 
 		this.events = document.createDocumentFragment();
 
 		if (configs.data) {
 			this.setData(configs.data);
+		}
+	}
+
+	styleHolderElement() {
+		const holderElement = this.holder as HTMLElement;
+		const { width, height } = this.options;
+
+		// Add class to chart holder
+		select(this.holder).classed("chart-holder", true);
+
+		// If width exists in options
+		if (width) {
+			// Apply formatted width attribute to chart
+			holderElement.style.width = Tools.formatWidthHeightValues(width);
+		}
+
+		// If height exists in options
+		if (height) {
+			// Apply formatted height attribute to chart
+			holderElement.style.height = Tools.formatWidthHeightValues(height);
 		}
 	}
 
@@ -182,7 +207,7 @@ export class BaseChart {
 		const { datasets } = this.displayData;
 
 		// TODO - Support the labels based legend for line chart
-		if (datasets.length === 1 && datasets[0].backgroundColors.length > 1) {
+		if (datasets.length === 1 && datasets[0].backgroundColors && datasets[0].backgroundColors.length > 1) {
 			return Configuration.legend.basedOn.LABELS;
 		} else {
 			return Configuration.legend.basedOn.SERIES;
@@ -203,15 +228,20 @@ export class BaseChart {
 	}
 
 	setColorScale() {
-		this.displayData.datasets.forEach(dataset => {
-			this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.fixedDataLabels);
-		});
+		if (this.displayData.datasets[0].backgroundColors) {
+			this.displayData.datasets.forEach(dataset => {
+				this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.fixedDataLabels);
+			});
+		} else {
+			const colors = Configuration.options.BASE.colors;
+			this.displayData.datasets.forEach((dataset, i) => {
+				this.colorScale[dataset.label] = scaleOrdinal().range([colors[i]]).domain(this.fixedDataLabels);
+			});
+		}
 	}
 
 	// TODO - Refactor
 	getChartSize(container = this.container) {
-		const noAxis = this.options.type === "pie" || this.options.type === "donut";
-
 		let ratio, marginForLegendTop;
 		if (container.node().clientWidth > Configuration.charts.widthBreak) {
 			ratio = Configuration.charts.magicRatio;
@@ -222,24 +252,20 @@ export class BaseChart {
 		}
 
 		// Store computed actual size, to be considered for change if chart does not support axis
-		const marginsToExclude = noAxis ? 0 : (Configuration.charts.margin.left + Configuration.charts.margin.right);
+		const marginsToExclude = 0;
 		const computedChartSize = {
 			height: container.node().clientHeight - marginForLegendTop,
 			width: (container.node().clientWidth - marginsToExclude) * ratio
 		};
 
 		// If chart is of type pie or donut, width and height should equal to the min of the width and height computed
-		if (noAxis) {
-			let maxSizePossible = Math.min(computedChartSize.height, computedChartSize.width);
-			maxSizePossible = Math.max(maxSizePossible, Configuration.pie.minWidth);
+		let maxSizePossible = Math.min(computedChartSize.height, computedChartSize.width);
+		maxSizePossible = Math.max(maxSizePossible, Configuration.charts.minWidth);
 
-			return {
-				height: maxSizePossible,
-				width: maxSizePossible
-			};
-		}
-
-		return computedChartSize;
+		return {
+			height: maxSizePossible,
+			width: maxSizePossible
+		};
 	}
 
 	/*
@@ -299,21 +325,24 @@ export class BaseChart {
 	resizeWhenContainerChange() {
 		let containerWidth = this.holder.clientWidth;
 		let containerHeight = this.holder.clientHeight;
-		const frame = () => {
-			if (Math.abs(containerWidth - this.holder.clientWidth) > 1
-				|| Math.abs(containerHeight - this.holder.clientHeight) > 1) {
-				containerWidth = this.holder.clientWidth;
-				containerHeight = this.holder.clientHeight;
 
-				selectAll(".legend-tooltip").style("display", "none");
+		const resizeObserver = new ResizeObserver((entries, observer) => {
+			for (const entry of entries) {
+				if (Math.abs(containerWidth - this.holder.clientWidth) > 1
+					|| Math.abs(containerHeight - this.holder.clientHeight) > 1) {
+					containerWidth = this.holder.clientWidth;
+					containerHeight = this.holder.clientHeight;
 
-				this.hideTooltip();
-				this.resizeChart();
+					selectAll(".legend-tooltip").style("display", "none");
+
+					this.hideTooltip();
+
+					this.resizeChart();
+				}
 			}
+		});
 
-			requestAnimationFrame(frame);
-		};
-		requestAnimationFrame(frame);
+		resizeObserver.observe(this.holder);
 	}
 
 	setClickableLegend() {

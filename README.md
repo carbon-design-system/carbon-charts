@@ -1,13 +1,13 @@
 <p align="center">
-	<a href="https://pages.github.com/IBM/carbon-charts/">
+	<a href="https://carbon-design-system.github.io/carbon-charts/">
 		<img src="assets/logo.png" alt="Carbon Charts" width=150 height=150 />
 	</a>
 	<h3 align="center">Carbon Charts</h3>
 	<p align="center">
 		A reusable framework-agnostic D3 charting library.
 		<br /><br />
-		<a href="https://travis-ci.org/IBM/carbon-charts/">
-			<img src="https://api.travis-ci.org/IBM/carbon-charts.svg?branch=master" />
+		<a href="https://travis-ci.org/carbon-design-system/carbon-charts">
+			<img src="https://api.travis-ci.org/carbon-design-system/carbon-charts.svg?branch=master" />
 		</a>
 		<a href="https://www.npmjs.com/package/@carbon/charts">
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
@@ -39,10 +39,11 @@ npm install @carbon/charts --save
 
 ## Demo and documentation
 **Charts demos:**
-- [Vanilla JS](https://charts.carbondesignsystem.com/)
-- [Angular](https://charts.carbondesignsystem.com/angular)
+- [Vanilla JS](https://carbon-design-system.github.io/carbon-charts/)
+- [Angular](https://carbon-design-system.github.io/carbon-charts/angular)
+- [React](https://carbon-design-system.github.io/carbon-charts/react)
 
-**Docs:** <https://charts.carbondesignsystem.com/documentation/>
+**Docs:** <https://carbon-design-system.github.io/carbon-charts/documentation/>
 
 ### Code Sample
 <p align="center">
@@ -70,24 +71,24 @@ npm install @carbon/charts --save
 
 | Component   | Vanilla            | Angular                  | React |
 |-------------|--------------------|--------------------------|-------|
-| Simple Bar  | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Grouped Bar | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Stacked Bar | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Donut       | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Line        | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Curved Line | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Pie         | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
-| Step        | :white_check_mark: | :white_check_mark:       | :hourglass_flowing_sand:  |
+| Simple Bar  | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
+| Grouped Bar | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
+| Stacked Bar | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
+| Donut       | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
+| Line        | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
+| Curved Line | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
+| Pie         | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
+| Step        | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
 | Combo       | :hourglass_flowing_sand:               | :hourglass_flowing_sand:                     | :hourglass_flowing_sand:  |
 | Area        | Soon               | Soon                     | :hourglass_flowing_sand:  |
 
 ## Bugs and feature requests
 
-Have a bug or a feature request? First read the [issue guidelines](https://github.com/IBM/carbon-charts/blob/master/CONTRIBUTING.md#issue-guidelines) and search for existing and closed issues. If your problem or idea is not addressed yet, [open a new issue](https://github.com/IBM/carbon-charts/issues/new).
+Have a bug or a feature request? First read the [issue guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/CONTRIBUTING.md#issue-guidelines) and search for existing and closed issues. If your problem or idea is not addressed yet, [open a new issue](https://github.com/carbon-design-system/carbon-charts/issues/new).
 
 ## Contributing
 
-See our [contributing guidelines](https://github.com/IBM/carbon-charts/blob/master/CONTRIBUTING.md). Included are instructions for opening issues, coding guidelines, and submitting pull requests.
+See our [contributing guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/CONTRIBUTING.md). Included are instructions for opening issues, coding guidelines, and submitting pull requests.
 
 <!-- ## Community
 
@@ -97,7 +98,7 @@ Get updates on Charts' development and chat with the core team and community. --
 
 We use the **semantic-release** library to automatically version our releases within the guidelines of Semantic Versioning [Semantic Versioning guidelines](http://semver.org/).
 
-See our [releases notes](https://github.com/IBM/carbon-charts/releases) for the changelog of each version of Charts.
+See our [releases notes](https://github.com/carbon-design-system/carbon-charts/releases) for the changelog of each version of Charts.
 
 ## Contributors
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->

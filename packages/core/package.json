@@ -1,10 +1,12 @@
 {
   "name": "@carbon/charts",
-  "version": "0.7.4",
+  "version": "0.8.4",
   "description": "Carbon charting components",
   "files": [
     "dist",
-    "index.js"
+    "index.js",
+    "CHANGELOG.md",
+    "README.md"
   ],
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
@@ -25,6 +27,9 @@
   ],
   "author": "IBM",
   "license": "Apache-2.0",
+  "dependencies": {
+    "resize-observer-polyfill": "1.5.0"
+  },
   "peerDependencies": {
     "d3": ">=4.11.0 <=5.7.0"
   },
@@ -57,7 +62,7 @@
     "tslint": "5.8.0",
     "tslint-loader": "3.5.3",
     "typedoc": "0.11.1",
-    "typescript": "2.8.3",
+    "typescript": "2.7.2",
     "url-loader": "0.6.2",
     "webpack": "4.18.0",
     "webpack-bundle-analyzer": "2.13.1",

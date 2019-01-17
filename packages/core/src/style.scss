@@ -6,8 +6,8 @@ $default_transition: all .1s ease-out;
 	font-family: "IBM Plex Sans", Arial, sans-serif;
 }
 
-.chart-holder {
-	padding: 30px;
+div.chart-holder {
+	position: relative;
 }
 
 // TODO - Nest all styles into the "chart-wrapper class
@@ -277,3 +277,5 @@ div.chart-overlay {
 #carbon-charts-patterns svg {
     height: 0;
 }
+
+

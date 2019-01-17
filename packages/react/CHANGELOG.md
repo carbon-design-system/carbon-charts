@@ -3,6 +3,132 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.4](https://github.com/IBM/carbon-charts/compare/v0.8.3...v0.8.4) (2019-01-17)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
+## [0.8.3](https://github.com/IBM/carbon-charts/compare/v0.8.2...v0.8.3) (2019-01-16)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
+## [0.8.2](https://github.com/IBM/carbon-charts/compare/v0.8.1...v0.8.2) (2019-01-14)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
+## [0.8.1](https://github.com/IBM/carbon-charts/compare/v0.8.0...v0.8.1) (2019-01-09)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
+# [0.8.0](https://github.com/IBM/carbon-charts/compare/v0.7.16...v0.8.0) (2019-01-04)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
+## [0.7.16](https://github.com/IBM/carbon-charts/compare/v0.7.15...v0.7.16) (2019-01-03)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
+## [0.7.15](https://github.com/IBM/carbon-charts/compare/v0.7.14...v0.7.15) (2019-01-03)
+
+
+### Bug Fixes
+
+* **react:** Export DonutChart in React package ([f164072](https://github.com/IBM/carbon-charts/commit/f164072))
+
+
+
+
+
+## [0.7.14](https://github.com/IBM/carbon-charts/compare/v0.7.13...v0.7.14) (2019-01-03)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
+## [0.7.11](https://github.com/IBM/carbon-charts/compare/v0.7.10...v0.7.11) (2018-12-03)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
+## [0.7.10](https://github.com/IBM/carbon-charts/compare/v0.7.9...v0.7.10) (2018-11-28)
+
+
+### Bug Fixes
+
+* **react:** Fix react wrappers resizing with animation ([4219f33](https://github.com/IBM/carbon-charts/commit/4219f33))
+
+
+
+
+
+## [0.7.9](https://github.com/IBM/carbon-charts/compare/v0.7.8...v0.7.9) (2018-11-22)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
+## [0.7.8](https://github.com/IBM/carbon-charts/compare/v0.7.7...v0.7.8) (2018-11-22)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
+## [0.7.7](https://github.com/IBM/carbon-charts/compare/v0.7.6...v0.7.7) (2018-11-21)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
+## [0.7.6](https://github.com/IBM/carbon-charts/compare/v0.7.5...v0.7.6) (2018-11-20)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
+## [0.7.5](https://github.com/IBM/carbon-charts/compare/v0.7.4...v0.7.5) (2018-11-20)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+
+
+
+
 ## [0.7.4](https://github.com/IBM/carbon-charts/compare/v0.7.3...v0.7.4) (2018-11-17)
 
 **Note:** Version bump only for package @carbon/charts-react

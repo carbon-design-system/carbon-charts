@@ -4,17 +4,13 @@ import {
 } from "@angular/core";
 
 import { BaseChart } from "./base-chart.component";
+
 import { LineChart } from "@carbon/charts";
 
 /**
  * Wrapper around `LineChart` in carbon charts library
  *
  * Most functions just call their equivalent from the chart library.
- *
- * @export
- * @class LineChart
- * @extends {BaseChart}
- * @implements {AfterViewInit}
  */
 @Component({
 	selector: "n-line-chart",
@@ -26,8 +22,6 @@ import { LineChart } from "@carbon/charts";
 export class LineChartComponent extends BaseChart implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
-	 *
-	 * @memberof LineChart
 	 */
 	ngAfterViewInit() {
 		this.chart = new LineChart(

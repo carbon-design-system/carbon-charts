@@ -11,7 +11,7 @@ body {
 }
 
 h1 {
-	font-weight: 500;
+	font-weight: 600;
 }
 
 h3 {
@@ -31,6 +31,7 @@ h3 {
 
 // Carbon overrides
 $due_blue: #0063ff;
+
 .bx--btn--primary {
 	background: $due_blue;
 	outline: none !important;
@@ -74,6 +75,35 @@ header.m-demo-header {
 			width: 80%;
 			max-width: 800px;
 			margin: auto;
+
+			div.links {
+				display: table;
+				margin: auto;
+				
+				.bx--btn {
+					float: left;
+					margin-right: 5px;
+
+					&.last {
+						margin-right: 0;
+					}
+					
+					svg {
+						margin-right: 5px;
+
+						&.angular {
+							width: 22px;
+							height: 22px;
+						}
+
+						&.react {
+							width: 25px;
+							height: 25px;
+							margin-left: -5px;
+						}
+					}
+				}
+			}
 		}
 
 		h1 {
@@ -103,27 +133,18 @@ header.m-demo-header {
 	}
 }
 
-.resizable {
-	resize: both;
-}
-.demo-title {
-	margin-top: 20px;
-}
-.chart-holder {
+.demo-chart-holder {
 	background-color: #fff;
-	// border: 1px solid rgba(24, 62, 117, 0.2);
 	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
 	margin: 0 auto 60px auto;
 	display: block;
 	height: 500px;
 	min-width: 300px;
 	max-width: 800px;
-	position: relative;
+	padding: 30px;
 	transition: box-shadow .1s ease-out;
-	// tmp
 	overflow: hidden;
 	resize: both;
-	//
 	font-weight: 400;
 
 	h3 {
@@ -160,17 +181,14 @@ header.m-demo-header {
 	}
 }
 
-.chart-title {
-	display: block;
-	font-size: 16px;
-	font-weight: bold;
-}
-
-#classy-bar-chart-holder {
-	overflow: hidden;
-	resize: both;
-}
-
-div#carbon-charts-patterns svg {
-	height: 0;
+div.experimental-switch {
+	display: table;
+    width: 100%;
+	max-width: 800px;
+	margin: auto;
+	margin-bottom: 30px;
+	padding: 30px;
+	padding-bottom: 0;
+	background-color: #fff;
+    box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
 }
