@@ -220,7 +220,8 @@ export class LineChart extends BaseAxisChart {
 
 	setXScale () {
 		super.setXScale();
-		this.x.padding(0);
+
+		this.x.padding(0); // override BaseAxisChart padding so points aren't misaligned by a few pixels
 	}
 
 	addDataPointEventListener() {
