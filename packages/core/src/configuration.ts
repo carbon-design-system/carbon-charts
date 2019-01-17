@@ -194,7 +194,7 @@ export const pie = {
 	label: {
 		dy: ".32em",
 		margin: 8,
-		other: "Other",
+		other: "Other"
 	},
 	default: {
 		strokeWidth: 2
