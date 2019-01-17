@@ -3460,7 +3460,7 @@ var LineChart = /** @class */ (function (_super) {
         }
         // D3 line generator function
         this.lineGenerator = Object(d3_shape__WEBPACK_IMPORTED_MODULE_1__["line"])()
-            .x(function (d, i) { return _this.x(_this.displayData.labels[i]) + margins.left; })
+            .x(function (d, i) { return _this.x(_this.displayData.labels[i]) + _this.x.step() / 2; })
             .y(function (d) { return _this.y(d); })
             .curve(Object(_services_curves__WEBPACK_IMPORTED_MODULE_4__["getD3Curve"])(curveName, curveOptions));
         var gLines = this.innerWrap.selectAll("g.lines")
@@ -3478,7 +3478,7 @@ var LineChart = /** @class */ (function (_super) {
             .enter()
             .append("circle")
             .attr("class", "dot")
-            .attr("cx", function (d) { return _this.x(d.label) + margins.left; })
+            .attr("cx", function (d) { return _this.x(d.label) + _this.x.step() / 2; })
             .attr("cy", function (d) { return _this.y(d.value); })
             .attr("r", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].pointCircles.radius)
             .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); });
@@ -3515,7 +3515,7 @@ var LineChart = /** @class */ (function (_super) {
             .enter()
             .append("circle")
             .attr("class", "dot")
-            .attr("cx", function (d, i) { return _this.x(d.label) + margins.left; })
+            .attr("cx", function (d, i) { return _this.x(d.label) + _this.x.step() / 2; })
             .attr("cy", function (d) { return _this.y(d.value); })
             .attr("r", 4)
             .style("opacity", 0)
@@ -3563,7 +3563,7 @@ var LineChart = /** @class */ (function (_super) {
             return self.addLabelsToDataPoints(parentDatum, i);
         })
             .transition(transitionToUse)
-            .attr("cx", function (d) { return _this.x(d.label) + margins.left; })
+            .attr("cx", function (d) { return _this.x(d.label) + _this.x.step() / 2; })
             .attr("cy", function (d) { return _this.y(d.value); })
             .attr("r", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.strokeWidth)
             .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); });
@@ -3584,6 +3584,10 @@ var LineChart = /** @class */ (function (_super) {
         this.setYAxis(true);
         this.updateElements(false, null);
         _super.prototype.resizeChart.call(this);
+    };
+    LineChart.prototype.setXScale = function () {
+        _super.prototype.setXScale.call(this);
+        this.x.padding(0); // override BaseAxisChart padding so points aren't misaligned by a few pixels
     };
     LineChart.prototype.addDataPointEventListener = function () {
         var self = this;
