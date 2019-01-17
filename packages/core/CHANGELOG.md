@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.4](https://github.com/IBM/carbon-charts/compare/v0.8.3...v0.8.4) (2019-01-17)
+
+
+### Bug Fixes
+
+* **core:** Fix interference of thresholds and bar chart elements ([67ff065](https://github.com/IBM/carbon-charts/commit/67ff065))
+
+
+
+
+
 ## [0.8.3](https://github.com/IBM/carbon-charts/compare/v0.8.2...v0.8.3) (2019-01-16)
 
 
