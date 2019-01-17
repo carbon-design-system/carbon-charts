@@ -3104,7 +3104,7 @@ var pie = {
     sliceLimit: 6,
     label: {
         dy: ".32em",
-        margin: 15,
+        margin: 8,
         other: "Other"
     },
     default: {
@@ -3732,7 +3732,7 @@ var PieChart = /** @class */ (function (_super) {
             .attr("preserveAspectRatio", "xMinYMin");
         // Compute the correct inner & outer radius
         var pieConfigs = _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"];
-        var marginedRadius = radius - (pieConfigs.label.margin * (chartSize.width / pieConfigs.maxWidth));
+        var marginedRadius = this.computeRadius();
         this.arc = Object(d3_shape__WEBPACK_IMPORTED_MODULE_2__["arc"])()
             .innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
             .outerRadius(marginedRadius);
@@ -3751,6 +3751,7 @@ var PieChart = /** @class */ (function (_super) {
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; })
             .each(function (d) { this._current = d; });
         // Draw the slice labels
+        var self = this;
         this.innerWrap
             .selectAll("text.chart-label")
             .data(this.pie(dataList), function (d) { return d.data.label; })
@@ -3758,9 +3759,9 @@ var PieChart = /** @class */ (function (_super) {
             .append("text")
             .classed("chart-label", true)
             .attr("dy", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.dy)
-            .style("text-anchor", this.deriveTextAnchor)
-            .attr("transform", function (d) { return _this.deriveTransformString(d, radius); })
-            .text(function (d) { return _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].convertValueToPercentage(d.data.value, dataList); });
+            .style("text-anchor", "middle")
+            .text(function (d) { return _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].convertValueToPercentage(d.data.value, dataList); })
+            .attr("transform", function (d) { return self.deriveTransformString(this, d, radius); });
         // Hide overlay
         this.updateOverlay().hide();
     };
@@ -3828,18 +3829,17 @@ var PieChart = /** @class */ (function (_super) {
                 .append("text")
                 .classed("chart-label", true)
                 .attr("dy", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.dy)
-                .style("text-anchor", _this.deriveTextAnchor)
-                .attr("transform", function (d) { return _this.deriveTransformString(d, radius); })
+                .style("text-anchor", "middle")
                 .text(function (d) { return _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].convertValueToPercentage(d.data.value, dataList); })
+                .attr("transform", function (d) { return self.deriveTransformString(this, d, radius); })
                 .style("opacity", 0)
                 .transition()
                 .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration / 2)
                 .style("opacity", 1);
             text
-                .attr("dy", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.dy)
-                .style("text-anchor", _this.deriveTextAnchor)
-                .attr("transform", function (d) { return _this.deriveTransformString(d, radius); })
+                .style("text-anchor", "middle")
                 .text(function (d) { return _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].convertValueToPercentage(d.data.value, dataList); })
+                .attr("transform", function (d) { return self.deriveTransformString(this, d, radius); })
                 .transition()
                 .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration / 2)
                 .style("opacity", 1);
@@ -3927,12 +3927,10 @@ var PieChart = /** @class */ (function (_super) {
         this.interpolateValues(newDisplayData);
     };
     PieChart.prototype.resizeChart = function () {
-        var _this = this;
         var pieConfigs = _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"];
         var chartSize = this.getChartSize(this.container);
         var dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
-        var scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
-        var radius = dimensionToUseForScale / 2;
+        var radius = this.computeRadius();
         // Resize the SVG
         Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.holder).select("svg")
             .attr("width", dimensionToUseForScale + "px")
@@ -3940,15 +3938,15 @@ var PieChart = /** @class */ (function (_super) {
         this.innerWrap
             .style("transform", "translate(" + radius + "px," + radius + "px)");
         // Resize the arc
-        var marginedRadius = radius - (pieConfigs.label.margin * scaleRatio);
         this.arc = Object(d3_shape__WEBPACK_IMPORTED_MODULE_2__["arc"])()
-            .innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
-            .outerRadius(marginedRadius);
+            .innerRadius(this.options.type === "donut" ? (radius * (2 / 3)) : 0)
+            .outerRadius(radius);
         this.innerWrap.selectAll("path")
             .attr("d", this.arc);
+        var self = this;
         this.innerWrap
             .selectAll("text.chart-label")
-            .attr("transform", function (d) { return _this.deriveTransformString(d, radius); });
+            .attr("transform", function (d) { return self.deriveTransformString(this, d, radius); });
         // Reposition the legend
         this.positionLegend();
     };
@@ -3967,35 +3965,15 @@ var PieChart = /** @class */ (function (_super) {
      * @returns final transform string to be applied to the <text> element
      * @memberof PieChart
      */
-    PieChart.prototype.deriveTransformString = function (d, radius) {
-        var theta = d.endAngle - d.startAngle;
-        var xPosition = radius * Math.sin((theta / 2) + d.startAngle);
-        var yPosition = -1 * radius * Math.cos((theta / 2) + d.startAngle);
+    PieChart.prototype.deriveTransformString = function (element, d, radius) {
+        var textLength = element.getComputedTextLength();
+        var textOffsetX = textLength / 2;
+        var textOffsetY = parseFloat(getComputedStyle(element).fontSize) / 2;
+        var marginedRadius = radius + _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.margin;
+        var theta = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+        var xPosition = (textOffsetX + marginedRadius) * Math.sin(theta);
+        var yPosition = (textOffsetY + marginedRadius) * -Math.cos(theta);
         return "translate(" + xPosition + ", " + yPosition + ")";
-    };
-    /**
-     * Decide what text-anchor value the slice label item would need based on the quadrant it's in
-     *
-     * @private
-     * @param {any} d - d3 data item for slice
-     * @returns computed decision on what the text-anchor string should be
-     * @memberof PieChart
-     */
-    PieChart.prototype.deriveTextAnchor = function (d) {
-        var QUADRANT = Math.PI / 4;
-        var rads = (d.endAngle - d.startAngle) / 2 + d.startAngle;
-        if (rads >= QUADRANT && rads <= 3 * QUADRANT) {
-            return "start";
-        }
-        else if ((rads > 7 * QUADRANT && rads < QUADRANT) || (rads > 3 * QUADRANT && rads < 5 * QUADRANT)) {
-            return "middle";
-        }
-        else if (rads >= 5 * QUADRANT && rads <= 7 * QUADRANT) {
-            return "end";
-        }
-        else {
-            return "middle";
-        }
     };
     return PieChart;
 }(_base_chart__WEBPACK_IMPORTED_MODULE_4__["BaseChart"]));
