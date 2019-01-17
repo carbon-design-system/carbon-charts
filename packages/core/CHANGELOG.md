@@ -3,6 +3,126 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.4](https://github.com/IBM/carbon-charts/compare/v0.8.3...v0.8.4) (2019-01-17)
+
+
+### Bug Fixes
+
+* **core:** Fix interference of thresholds and bar chart elements ([67ff065](https://github.com/IBM/carbon-charts/commit/67ff065))
+
+
+
+
+
+## [0.8.3](https://github.com/IBM/carbon-charts/compare/v0.8.2...v0.8.3) (2019-01-16)
+
+
+### Bug Fixes
+
+* **core:** Fix tooltip positioning and clean up styling ([6de0665](https://github.com/IBM/carbon-charts/commit/6de0665))
+
+
+
+
+
+## [0.8.2](https://github.com/IBM/carbon-charts/compare/v0.8.1...v0.8.2) (2019-01-14)
+
+
+### Bug Fixes
+
+* **core demo:** Fix experimental link issue ([d9d660a](https://github.com/IBM/carbon-charts/commit/d9d660a))
+
+
+
+
+
+## [0.8.1](https://github.com/IBM/carbon-charts/compare/v0.8.0...v0.8.1) (2019-01-09)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+# [0.8.0](https://github.com/IBM/carbon-charts/compare/v0.7.16...v0.8.0) (2019-01-04)
+
+
+### Features
+
+* **$core:** adds support for tension, beta, alpha in curves ([09437dc](https://github.com/IBM/carbon-charts/commit/09437dc)), closes [#39](https://github.com/IBM/carbon-charts/issues/39)
+
+
+
+
+
+## [0.7.16](https://github.com/IBM/carbon-charts/compare/v0.7.15...v0.7.16) (2019-01-03)
+
+
+### Bug Fixes
+
+* **core:** Remove extension of addLegend in PieChart ([c66b633](https://github.com/IBM/carbon-charts/commit/c66b633))
+
+
+
+
+
+## [0.7.14](https://github.com/IBM/carbon-charts/compare/v0.7.13...v0.7.14) (2019-01-03)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.7.11](https://github.com/IBM/carbon-charts/compare/v0.7.10...v0.7.11) (2018-12-03)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.7.10](https://github.com/IBM/carbon-charts/compare/v0.7.9...v0.7.10) (2018-11-28)
+
+
+### Bug Fixes
+
+* **react:** Fix react wrappers resizing with animation ([4219f33](https://github.com/IBM/carbon-charts/commit/4219f33))
+
+
+
+
+
+## [0.7.9](https://github.com/IBM/carbon-charts/compare/v0.7.8...v0.7.9) (2018-11-22)
+
+
+### Bug Fixes
+
+* **core:** Use a minimum size for all charts, and use resizeObserver rather than requestAnimationFra ([462c2d6](https://github.com/IBM/carbon-charts/commit/462c2d6))
+
+
+
+
+
+## [0.7.8](https://github.com/IBM/carbon-charts/compare/v0.7.7...v0.7.8) (2018-11-22)
+
+
+### Bug Fixes
+
+* **core:** Remove and update addDataPointEventListener ([f40f775](https://github.com/IBM/carbon-charts/commit/f40f775)), closes [#97](https://github.com/IBM/carbon-charts/issues/97)
+
+
+
+
+
+## [0.7.5](https://github.com/IBM/carbon-charts/compare/v0.7.4...v0.7.5) (2018-11-20)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
 ## [0.7.4](https://github.com/IBM/carbon-charts/compare/v0.7.3...v0.7.4) (2018-11-17)
 
 

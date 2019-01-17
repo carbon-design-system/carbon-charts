@@ -11,11 +11,6 @@ import { PieChart } from "@carbon/charts";
  * Wrapper around `PieChart` in carbon charts library
  *
  * Most functions just call their equivalent from the chart library.
- *
- * @export
- * @class PieChart
- * @extends {BaseChart}
- * @implements {AfterViewInit}
  */
 @Component({
 	selector: "n-pie-chart",
@@ -27,8 +22,6 @@ import { PieChart } from "@carbon/charts";
 export class PieChartComponent extends BaseChart implements AfterViewInit {
 	/**
 	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
-	 *
-	 * @memberof PieChart
 	 */
 	ngAfterViewInit() {
 		this.chart = new PieChart(

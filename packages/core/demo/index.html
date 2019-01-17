@@ -1,52 +1,93 @@
 <html lang="en">
-	<head>
-		<title>Carbon Charts</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<meta property="og:title" content="Carbon Charts">
-		<meta property="og:description" content="Reusable charts implemented using D3 & typescript">
-		<meta property="og:image" content="thumbnail.jpg">
-		<meta property="og:url" content="https://charts.carbondesignsystem.com">
+<head>
+	<title>Carbon Charts</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<meta name="twitter:title" content="Carbon Charts">
-		<meta name="twitter:description" content="Reusable charts implemented using D3 & typescript">
-		<meta name="twitter:image" content="thumbnail.jpg">
-		<meta name="twitter:card" content="summary_large_image">
+	<meta property="og:title" content="Carbon Charts">
+	<meta property="og:description" content="Reusable charts implemented using D3 & typescript">
+	<meta property="og:image" content="https://carbon-design-system.github.io/carbon-charts/thumbnail.jpg">
+	<meta property="og:url" content="https://carbon-design-system.github.io/carbon-charts/">
 
-		<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
-		<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
-		<link rel="shortcut icon" href="favicon.ico" />
+	<meta name="twitter:title" content="Carbon Charts">
+	<meta name="twitter:description" content="Reusable charts implemented using D3 & typescript">
+	<meta name="twitter:image" content="https://carbon-design-system.github.io/carbon-charts/thumbnail.jpg">
+	<meta name="twitter:card" content="summary_large_image">
 
-		<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600,700" rel="stylesheet">
+	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+	<link rel="shortcut icon" href="favicon.ico" />
 
-		<link href="https://unpkg.com/carbon-components/css/carbon-components.min.css" rel="stylesheet">
-	</head>
-	<body>
-		<header class="m-demo-header" id="header">
-			<div class="logo">
-				<img src="./assets/logo.png" alt="Carbon Charts" />
-			</div>
+	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600,700" rel="stylesheet">
 
-			<div class="content">
-				<h1>Carbon Charts</h1>
-				<h3>A reusable framework-agnostic D3 charting library.</h3>
+	<link href="https://unpkg.com/carbon-components@9.61.1/css/carbon-components.css" rel="stylesheet">
+</head>
 
-				<a class="bx--btn bx--btn--primary" href="https://github.com/IBM/carbon-charts" target="_blank">
+<body>
+	<header class="m-demo-header" id="header">
+		<div class="logo">
+			<img src="./assets/logo.png" alt="Carbon Charts" />
+		</div>
+
+		<div class="content">
+			<h1>Carbon Charts</h1>
+			<h3>A reusable framework-agnostic D3 charting library.</h3>
+
+			<div class="links">
+				<a class="bx--btn bx--btn--primary" href="https://github.com/carbon-design-system/carbon-charts" target="_blank">
 					Repository
 				</a>
 
-				<a class="bx--btn bx--btn--primary" href="https://charts.carbondesignsystem.com/documentation/" target="_blank">
+				<a class="bx--btn bx--btn--primary" href="https://carbon-design-system.github.io/carbon-charts/documentation/" target="_blank">
 					Docs
 				</a>
 
-				<a class="bx--btn bx--btn--primary" href="https://charts.carbondesignsystem.com/angular" target="_blank">
-					Angular Wrappers
+				<a class="bx--btn bx--btn--primary" href="https://carbon-design-system.github.io/carbon-charts/angular" target="_blank">
+					<svg class="angular" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+						viewBox="0 0 250 250" style="enable-background:new 0 0 250 250; fill: #fff;" xml:space="preserve">
+						<g>
+							<polygon points="108,135.4 125,135.4 125,135.4 125,135.4 142,135.4 125,94.5 	"/>
+							<path d="M125,30L125,30L125,30L31.9,63.2l14.2,123.1L125,230l0,0l0,0l78.9-43.7l14.2-123.1L125,30z M183.1,182.6h-21.7h0
+								l-11.7-29.2H125h0h0h-24.7l-11.7,29.2h0H66.9h0L125,52.1l0,0l0,0l0,0l0,0L183.1,182.6L183.1,182.6z"/>
+						</g>
+					</svg>
+
+					Angular
+				</a>
+
+				<a class="bx--btn bx--btn--primary last" href="https://carbon-design-system.github.io/carbon-charts/react" target="_blank">
+					<svg class="react" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700.9 595.3" style="fill: #fff;">
+						<g>
+							<path d="M666.3 296.5c0-32.5-40.7-63.3-103.1-82.4 14.4-63.6 8-114.2-20.2-130.4-6.5-3.8-14.1-5.6-22.4-5.6v22.3c4.6 0 8.3.9 11.4 2.6 13.6 7.8 19.5 37.5 14.9 75.7-1.1 9.4-2.9 19.3-5.1 29.4-19.6-4.8-41-8.5-63.5-10.9-13.5-18.5-27.5-35.3-41.6-50 32.6-30.3 63.2-46.9 84-46.9V78c-27.5 0-63.5 19.6-99.9 53.6-36.4-33.8-72.4-53.2-99.9-53.2v22.3c20.7 0 51.4 16.5 84 46.6-14 14.7-28 31.4-41.3 49.9-22.6 2.4-44 6.1-63.6 11-2.3-10-4-19.7-5.2-29-4.7-38.2 1.1-67.9 14.6-75.8 3-1.8 6.9-2.6 11.5-2.6V78.5c-8.4 0-16 1.8-22.6 5.6-28.1 16.2-34.4 66.7-19.9 130.1-62.2 19.2-102.7 49.9-102.7 82.3 0 32.5 40.7 63.3 103.1 82.4-14.4 63.6-8 114.2 20.2 130.4 6.5 3.8 14.1 5.6 22.5 5.6 27.5 0 63.5-19.6 99.9-53.6 36.4 33.8 72.4 53.2 99.9 53.2 8.4 0 16-1.8 22.6-5.6 28.1-16.2 34.4-66.7 19.9-130.1 62-19.1 102.5-49.9 102.5-82.3zm-130.2-66.7c-3.7 12.9-8.3 26.2-13.5 39.5-4.1-8-8.4-16-13.1-24-4.6-8-9.5-15.8-14.4-23.4 14.2 2.1 27.9 4.7 41 7.9zm-45.8 106.5c-7.8 13.5-15.8 26.3-24.1 38.2-14.9 1.3-30 2-45.2 2-15.1 0-30.2-.7-45-1.9-8.3-11.9-16.4-24.6-24.2-38-7.6-13.1-14.5-26.4-20.8-39.8 6.2-13.4 13.2-26.8 20.7-39.9 7.8-13.5 15.8-26.3 24.1-38.2 14.9-1.3 30-2 45.2-2 15.1 0 30.2.7 45 1.9 8.3 11.9 16.4 24.6 24.2 38 7.6 13.1 14.5 26.4 20.8 39.8-6.3 13.4-13.2 26.8-20.7 39.9zm32.3-13c5.4 13.4 10 26.8 13.8 39.8-13.1 3.2-26.9 5.9-41.2 8 4.9-7.7 9.8-15.6 14.4-23.7 4.6-8 8.9-16.1 13-24.1zM421.2 430c-9.3-9.6-18.6-20.3-27.8-32 9 .4 18.2.7 27.5.7 9.4 0 18.7-.2 27.8-.7-9 11.7-18.3 22.4-27.5 32zm-74.4-58.9c-14.2-2.1-27.9-4.7-41-7.9 3.7-12.9 8.3-26.2 13.5-39.5 4.1 8 8.4 16 13.1 24 4.7 8 9.5 15.8 14.4 23.4zM420.7 163c9.3 9.6 18.6 20.3 27.8 32-9-.4-18.2-.7-27.5-.7-9.4 0-18.7.2-27.8.7 9-11.7 18.3-22.4 27.5-32zm-74 58.9c-4.9 7.7-9.8 15.6-14.4 23.7-4.6 8-8.9 16-13 24-5.4-13.4-10-26.8-13.8-39.8 13.1-3.1 26.9-5.8 41.2-7.9zm-90.5 125.2c-35.4-15.1-58.3-34.9-58.3-50.6 0-15.7 22.9-35.6 58.3-50.6 8.6-3.7 18-7 27.7-10.1 5.7 19.6 13.2 40 22.5 60.9-9.2 20.8-16.6 41.1-22.2 60.6-9.9-3.1-19.3-6.5-28-10.2zM310 490c-13.6-7.8-19.5-37.5-14.9-75.7 1.1-9.4 2.9-19.3 5.1-29.4 19.6 4.8 41 8.5 63.5 10.9 13.5 18.5 27.5 35.3 41.6 50-32.6 30.3-63.2 46.9-84 46.9-4.5-.1-8.3-1-11.3-2.7zm237.2-76.2c4.7 38.2-1.1 67.9-14.6 75.8-3 1.8-6.9 2.6-11.5 2.6-20.7 0-51.4-16.5-84-46.6 14-14.7 28-31.4 41.3-49.9 22.6-2.4 44-6.1 63.6-11 2.3 10.1 4.1 19.8 5.2 29.1zm38.5-66.7c-8.6 3.7-18 7-27.7 10.1-5.7-19.6-13.2-40-22.5-60.9 9.2-20.8 16.6-41.1 22.2-60.6 9.9 3.1 19.3 6.5 28.1 10.2 35.4 15.1 58.3 34.9 58.3 50.6-.1 15.7-23 35.6-58.4 50.6zM320.8 78.4z" />
+							<circle cx="420.9" cy="296.5" r="45.7" />
+						</g>
+					</svg>
+
+					React
 				</a>
 			</div>
-		</header>
+		</div>
+	</header>
 
-		<!-- Combo Chart -->
-		<!-- <div class="chart-holder has-actions" id="classy-combo-chart-holder"></div>
+	<div class="experimental-switch">
+		<fieldset class="bx--fieldset experimental-switch">
+			<legend class="bx--label">
+				Experimental Mode
+			</legend>
+
+			<div class="bx--form-item">
+				<input class="bx--toggle" id="toggleInput" type="checkbox">
+				<label class="bx--toggle__label" for="toggleInput">
+					<span class="bx--toggle__text--left">Off</span>
+					<span class="bx--toggle__appearance"></span>
+					<span class="bx--toggle__text--right">On</span>
+				</label>
+			</div>
+		</fieldset>
+	</div>
+
+	<!-- Combo Chart -->
+	<!-- <div class="demo-chart-holder has-actions" id="classy-combo-chart-holder"></div>
 		<div class="chart-demo-actions" id="actions-combo">
 			<div class="btn-group--lg" role="group" aria-label="Options for changing data">
 				<button id="change-data-combo" class="btn--primary" type="button">Change Data</button>
@@ -63,120 +104,121 @@
 			</div>
 		</div> -->
 
-		<!-- Donut Chart -->
-		<div class="chart-holder has-actions" id="classy-donut-chart-holder"></div>
-		<div class="chart-demo-actions" id="actions-donut" role="region" aria-label="Donut chart actions">
-			<button class="bx--btn bx--btn--primary" id="change-data-donut" type="button">
-				Update Data
-			</button>
+	<!-- Donut Chart -->
+	<div class="demo-chart-holder has-actions" id="classy-donut-chart-holder"></div>
+	<div class="chart-demo-actions" id="actions-donut" role="region" aria-label="Donut chart actions">
+		<button class="bx--btn bx--btn--primary" id="change-data-donut" type="button">
+			Update Data
+		</button>
 
-			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
-				Promise
-			</button>
-		</div>
+		<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+			Promise
+		</button>
+	</div>
 
-		<!-- Bar Chart -->
-		<div class="chart-holder has-actions" id="classy-grouped-bar-chart-holder"></div>
-		<div class="chart-demo-actions" id="actions-grouped-bar" role="region" aria-label="Grouped bar chart actions">
-			<button class="bx--btn bx--btn--primary" id="change-data-grouped-bar" type="button">
-				Update Data
-			</button>
+	<!-- Bar Chart -->
+	<div class="demo-chart-holder has-actions" id="classy-grouped-bar-chart-holder"></div>
+	<div class="chart-demo-actions" id="actions-grouped-bar" role="region" aria-label="Grouped bar chart actions">
+		<button class="bx--btn bx--btn--primary" id="change-data-grouped-bar" type="button">
+			Update Data
+		</button>
 
-			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
-				Promise
-			</button>
-		</div>
+		<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+			Promise
+		</button>
+	</div>
 
-		<!-- Pie Chart -->
-		<div class="chart-holder has-actions" id="classy-pie-chart-holder"></div>
-		<div class="chart-demo-actions" id="actions-pie" role="region" aria-label="Pie chart actions">
-			<button class="bx--btn bx--btn--primary" id="change-data-pie" type="button">
-				Update Data
-			</button>
+	<!-- Pie Chart -->
+	<div class="demo-chart-holder has-actions" id="classy-pie-chart-holder"></div>
+	<div class="chart-demo-actions" id="actions-pie" role="region" aria-label="Pie chart actions">
+		<button class="bx--btn bx--btn--primary" id="change-data-pie" type="button">
+			Update Data
+		</button>
 
-			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
-				Promise
-			</button>
-		</div>
+		<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+			Promise
+		</button>
+	</div>
 
-		<div class="chart-holder has-actions" id="classy-simple-bar-accessible-chart-holder"></div>
-		<div class="chart-demo-actions" id="actions-simple-bar-accessible" role="region" aria-label="Simple accessible bar chart actions">
-			<button class="bx--btn bx--btn--primary" id="change-data-simple-bar-accessible" type="button">
-				Update Data
-			</button>
+	<div class="demo-chart-holder has-actions" id="classy-simple-bar-accessible-chart-holder"></div>
+	<div class="chart-demo-actions" id="actions-simple-bar-accessible" role="region" aria-label="Simple accessible bar chart actions">
+		<button class="bx--btn bx--btn--primary" id="change-data-simple-bar-accessible" type="button">
+			Update Data
+		</button>
 
-			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
-				Promise
-			</button>
-		</div>
+		<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+			Promise
+		</button>
+	</div>
 
-		<div class="chart-holder has-actions" id="classy-stacked-bar-chart-holder"></div>
-		<div class="chart-demo-actions" id="actions-stacked-bar" role="region" aria-label="Stacked bar chart actions">
-			<button class="bx--btn bx--btn--primary" id="change-data-stacked-bar" type="button">
-				Update Data
-			</button>
+	<div class="demo-chart-holder has-actions" id="classy-stacked-bar-chart-holder"></div>
+	<div class="chart-demo-actions" id="actions-stacked-bar" role="region" aria-label="Stacked bar chart actions">
+		<button class="bx--btn bx--btn--primary" id="change-data-stacked-bar" type="button">
+			Update Data
+		</button>
 
-			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
-				Promise
-			</button>
-		</div>
+		<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+			Promise
+		</button>
+	</div>
 
-		<div class="chart-holder has-actions" id="classy-simple-bar-chart-holder"></div>
-		<div class="chart-demo-actions" id="actions-simple-bar" role="region" aria-label="Simple bar chart actions">
-			<button class="bx--btn bx--btn--primary" id="change-data-simple-bar" type="button">
-				Update Data
-			</button>
+	<div class="demo-chart-holder has-actions" id="classy-simple-bar-chart-holder"></div>
+	<div class="chart-demo-actions" id="actions-simple-bar" role="region" aria-label="Simple bar chart actions">
+		<button class="bx--btn bx--btn--primary" id="change-data-simple-bar" type="button">
+			Update Data
+		</button>
 
-			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
-				Promise
-			</button>
-		</div>
+		<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+			Promise
+		</button>
+	</div>
 
-		<div class="chart-holder has-actions" id="classy-stacked-bar-accessible-chart-holder"></div>
-		<div class="chart-demo-actions" id="actions-stacked-bar-accessible" role="region" aria-label="Stacked accessible bar chart actions">
-			<button class="bx--btn bx--btn--primary" id="change-data-stacked-bar-accessible" type="button">
-				Update Data
-			</button>
+	<div class="demo-chart-holder has-actions" id="classy-stacked-bar-accessible-chart-holder"></div>
+	<div class="chart-demo-actions" id="actions-stacked-bar-accessible" role="region" aria-label="Stacked accessible bar chart actions">
+		<button class="bx--btn bx--btn--primary" id="change-data-stacked-bar-accessible" type="button">
+			Update Data
+		</button>
 
-			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
-				Promise
-			</button>
-		</div>
+		<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+			Promise
+		</button>
+	</div>
 
-		<!-- Line Chart -->
-		<div class="chart-holder has-actions" id="classy-curved-line-chart-holder"></div>
-		<div class="chart-demo-actions" id="actions-curved-line" role="region" aria-label="Curved line chart actions">
-			<button class="bx--btn bx--btn--primary" id="change-data-curved-line" type="button">
-				Update Data
-			</button>
+	<!-- Line Chart -->
+	<div class="demo-chart-holder has-actions" id="classy-curved-line-chart-holder"></div>
+	<div class="chart-demo-actions" id="actions-curved-line" role="region" aria-label="Curved line chart actions">
+		<button class="bx--btn bx--btn--primary" id="change-data-curved-line" type="button">
+			Update Data
+		</button>
 
-			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
-				Promise
-			</button>
-		</div>
+		<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+			Promise
+		</button>
+	</div>
 
-		<div class="chart-holder has-actions" id="classy-line-chart-holder"></div>
-		<div class="chart-demo-actions" id="actions-line" role="region" aria-label="Line chart actions">
-			<button class="bx--btn bx--btn--primary" id="change-data-line" type="button">
-				Update Data
-			</button>
+	<div class="demo-chart-holder has-actions" id="classy-line-chart-holder"></div>
+	<div class="chart-demo-actions" id="actions-line" role="region" aria-label="Line chart actions">
+		<button class="bx--btn bx--btn--primary" id="change-data-line" type="button">
+			Update Data
+		</button>
 
-			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
-				Promise
-			</button>
-		</div>
+		<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+			Promise
+		</button>
+	</div>
 
-		<div class="chart-holder has-actions" id="classy-line-step-chart-holder"></div>
-		<div class="chart-demo-actions" id="actions-line-step" role="region" aria-label="Step chart actions">
-			<button class="bx--btn bx--btn--primary" id="change-data-line-step" type="button">
-				Update Data
-			</button>
+	<div class="demo-chart-holder has-actions" id="classy-line-step-chart-holder"></div>
+	<div class="chart-demo-actions" id="actions-line-step" role="region" aria-label="Step chart actions">
+		<button class="bx--btn bx--btn--primary" id="change-data-line-step" type="button">
+			Update Data
+		</button>
 
-			<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
-				Promise
-			</button>
-		</div>
-	</body>
+		<button class="bx--btn bx--btn--primary change-data-promise" type="button" data-promise-delay="2000">
+			Promise
+		</button>
+	</div>
+</body>
 
-	<script src="https://unpkg.com/carbon-components@9.8.0/scripts/carbon-components.min.js" type="text/javascript"></script>
+<script src="https://unpkg.com/carbon-components@9.8.0/scripts/carbon-components.min.js" type="text/javascript"></script>
+
 </html>

@@ -1,4 +1,4 @@
-import { colors } from "./colors";
+import { colors } from "./helpers/commons";
 
 export const curvedLineData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -46,8 +46,6 @@ export const curvedLineOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
-			yMaxAdjuster: yMax => yMax * 1.2,
-			yMinAdjuster: yMin => yMin * 1.2,
 			formatter: axisValue => `${axisValue / 1000}k`
 		},
 		y2: {
@@ -57,9 +55,7 @@ export const curvedLineOptions = {
 			}
 		}
 	},
-	curve: {
-		name: "curveNatural"
-	},
+	curve: "curveNatural",
 	legendClickable: true,
 	containerResizable: true
 };
@@ -72,11 +68,11 @@ export const lineData = {
 			label: "Dataset 1",
 			backgroundColors: [colors[0]],
 			data: [
-				2000,
-				4200,
-				7000,
-				4000,
-				19000
+				0,
+				0,
+				0,
+				0,
+				0
 			]
 		},
 		{
@@ -111,23 +107,7 @@ export const lineOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
-			yMaxAdjuster: yMax => yMax * 1.2,
-			yMinAdjuster: yMin => yMin * 1.2,
-			formatter: axisValue => `${axisValue / 1000}k`,
-			thresholds: [
-				{
-					range: [-20000, 30000],
-					theme: "success"
-				},
-				{
-					range: [30000, 40000],
-					theme: "danger"
-				},
-				{
-					range: [40000, 70000],
-					theme: "warning"
-				}
-			]
+			formatter: axisValue => `${axisValue / 1000}k`
 		}
 	},
 	legendClickable: true,

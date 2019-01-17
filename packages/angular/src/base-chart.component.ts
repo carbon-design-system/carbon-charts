@@ -1,18 +1,15 @@
 import {
 	Component,
 	Input,
-	AfterViewInit,
-	ViewChild
+	ViewChild,
+	OnInit,
+	AfterViewInit
 } from "@angular/core";
 
 /**
  * Wrapper around `BaseChart` in carbon charts library
  *
  * Most functions just call their equivalent from the chart library.
- *
- * @export
- * @class BaseChart
- * @implements {AfterViewInit}
  */
 @Component({
 	selector: "n-base-chart",
@@ -21,12 +18,9 @@ import {
 		</div>
 	`
 })
-export class BaseChart implements AfterViewInit {
+export class BaseChart implements AfterViewInit, OnInit {
 	/**
 	 * Data passed to charts library for displaying
-	 *
-	 * @type {*}
-	 * @memberof BaseChart
 	 */
 	@Input() set data(newData) {
 		// If data already exists, that means the chart has been initialized
@@ -45,15 +39,21 @@ export class BaseChart implements AfterViewInit {
 
 	/**
 	 * Options passed to charts library
-	 *
-	 * @type {*}
-	 * @memberof BaseChart
 	 */
 	@Input() options: any;
+
+	/**
+	 * Chart width
+	 */
+	@Input() width: any;
+	
+	/**
+	 * Chart height
+	 */
+	@Input() height: any;
+	
 	/**
 	 * Chart container element ref
-	 *
-	 * @memberof BaseChart
 	 */
 	@ViewChild("nChart") chartRef;
 
@@ -62,17 +62,29 @@ export class BaseChart implements AfterViewInit {
 	 *
 	 * You can use this to do whatever you would normally do with a chart if you used
 	 * charts library directly.
-	 *
-	 * @memberof BaseChart
 	 */
 	chart;
 
 	private _data: any;
 
+	ngOnInit() {
+		// Width prop is mandatory for the wrappers
+		if (this.width) {
+			this.options.width = this.width;
+		} else if (!this.options.width) {
+			console.error("Missing `width` Input!");
+		}
+
+		// Height prop is mandatory for the wrappers
+		if (this.height) {
+			this.options.height = this.height;
+		} else if (!this.options.height) {
+			console.error("Missing `height` Input!");
+		}
+	}
+
 	/**
 	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
-	 *
-	 * @memberof BaseChart
 	 */
 	ngAfterViewInit() {
 		console.log("You need to implement your own `ngAfterViewInit()` function");

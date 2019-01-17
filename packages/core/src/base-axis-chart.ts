@@ -1,8 +1,5 @@
 // D3 Imports
-import {
-	mouse,
-	select
-} from "d3-selection";
+import { select } from "d3-selection";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { axisBottom, axisLeft, axisRight } from "d3-axis";
 import { min, max } from "d3-array";
@@ -165,7 +162,10 @@ export class BaseAxisChart extends BaseChart {
 			width: (container.node().clientWidth - marginsToExclude) * ratio
 		};
 
-		return computedChartSize;
+		return {
+			height: Math.max(computedChartSize.height, Configuration.charts.axisCharts.minHeight),
+			width: Math.max(computedChartSize.width, Configuration.charts.axisCharts.minWidth)
+		};
 	}
 
 	resizeChart() {
@@ -469,7 +469,7 @@ export class BaseAxisChart extends BaseChart {
 		// Applies to thresholds being added
 		thresholdRects.enter()
 			.append("rect")
-			.classed("bar", true)
+			.classed("threshold-bar", true)
 			.attr("x", 0)
 			.attr("y", d => calculateYPosition(d))
 			.attr("width", width)
@@ -594,56 +594,7 @@ export class BaseAxisChart extends BaseChart {
 	/**************************************
 	 *  Events & User interactions        *
 	 *************************************/
-
 	addDataPointEventListener() {
-		const self = this;
-		const { accessibility } = this.options;
-
-		this.svg.selectAll("rect")
-			.on("click", function(d) {
-				self.dispatchEvent("bar-onClick", d);
-			})
-			.on("mouseover", function(d) {
-				select(this)
-					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
-					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
-					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
-
-				self.showTooltip(d, this);
-				self.reduceOpacity(this);
-			})
-			.on("mousemove", function(d) {
-				const tooltipRef = select(self.holder).select("div.chart-tooltip");
-
-				const relativeMousePosition = mouse(self.holder as HTMLElement);
-				tooltipRef.style("left", relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px")
-					.style("top", relativeMousePosition[1] + "px");
-			})
-			.on("mouseout", function(d) {
-				const { strokeWidth, strokeWidthAccessible } = Configuration.bars.mouseout;
-				select(this)
-					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
-					.attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
-					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
-
-				self.hideTooltip();
-			});
-
-		this.svg.selectAll("circle.dot")
-			.on("mouseover", function(d) {
-				select(this)
-					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
-					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
-
-				self.showTooltip(d, this);
-				self.reduceOpacity(this);
-			})
-			.on("mouseout", function(d) {
-				select(this)
-					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
-					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
-
-				self.hideTooltip();
-			});
+		console.warn("You should implement your own `addDataPointEventListener()` function.");
 	}
 }
