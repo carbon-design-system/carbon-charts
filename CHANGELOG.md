@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/IBM/carbon-charts/compare/v0.8.5...v1.0.0) (2019-01-17)
+
+
+### Bug Fixes
+
+* **$browser:** Use dynamic step value for margin instead of fixed value. ([b9910f0](https://github.com/IBM/carbon-charts/commit/b9910f0))
+
+
+### BREAKING CHANGES
+
+* **$browser:** None.
+
+
+
+
+
 ## [0.8.5](https://github.com/IBM/carbon-charts/compare/v0.8.4...v0.8.5) (2019-01-17)
 
 
