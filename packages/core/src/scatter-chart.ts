@@ -52,7 +52,7 @@ export class ScatterChart extends BaseAxisChart {
 				.append("g")
 				.classed("dots", true);
 
-    gDots.selectAll("circle.dot")
+		gDots.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i))
 			.enter()
 				.append("circle")
