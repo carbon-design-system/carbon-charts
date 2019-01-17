@@ -193,8 +193,8 @@ export const pie = {
 	sliceLimit: 6,
 	label: {
 		dy: ".32em",
-		margin: 15,
-		other: "Other"
+		margin: 8,
+		other: "Other",
 	},
 	default: {
 		strokeWidth: 2
