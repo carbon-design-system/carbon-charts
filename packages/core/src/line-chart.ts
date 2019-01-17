@@ -218,6 +218,11 @@ export class LineChart extends BaseAxisChart {
 		super.resizeChart();
 	}
 
+	setXScale () {
+		super.setXScale();
+		this.x.padding(0);
+	}
+
 	addDataPointEventListener() {
 		const self = this;
 		const { accessibility } = this.options;
