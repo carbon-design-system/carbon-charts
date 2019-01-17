@@ -1401,7 +1401,7 @@ var BarChart = /** @class */ (function (_super) {
     BarChart.prototype.addDataPointEventListener = function () {
         var self = this;
         var accessibility = this.options.accessibility;
-        this.svg.selectAll("rect")
+        this.svg.selectAll("rect.bar")
             .on("click", function (d) {
             self.dispatchEvent("bar-onClick", d);
         })
@@ -1848,7 +1848,7 @@ var BaseAxisChart = /** @class */ (function (_super) {
         // Applies to thresholds being added
         thresholdRects.enter()
             .append("rect")
-            .classed("bar", true)
+            .classed("threshold-bar", true)
             .attr("x", 0)
             .attr("y", function (d) { return calculateYPosition(d); })
             .attr("width", width)
