@@ -3,7 +3,8 @@ import {
 	LineChart,
 	PieChart,
 	DonutChart,
-	ComboChart
+	ComboChart,
+	ScatterChart
 } from "../src/index";
 
 // Styles
@@ -129,6 +130,12 @@ const chartTypes = [
 		name: "donut",
 		options: donutOptions,
 		data: pieData
+	},
+	{
+		id: "scatter",
+		name: "scatter",
+		options: lineOptions,
+		data: lineData
 	}
 ];
 
@@ -278,6 +285,18 @@ chartTypes.forEach(type => {
 				break;
 			case "combo":
 				classyCharts[type.id] = new ComboChart(
+					classyContainer,
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id}),
+					}
+				);
+
+				setDemoActionsEventListener(type.id, type.data);
+
+				break;
+			case "scatter":
+				classyCharts[type.id] = new ScatterChart(
 					classyContainer,
 					{
 						data: type.data,

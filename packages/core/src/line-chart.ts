@@ -6,33 +6,15 @@ import { BaseAxisChart } from "./base-axis-chart";
 import * as Configuration from "./configuration";
 
 import { getD3Curve } from "./services/curves";
+import { ScatterChart } from "./scatter-chart";
 
-export class LineChart extends BaseAxisChart {
-	x: any;
-	y: any;
-
-	colorScale: any;
-
+export class LineChart extends ScatterChart {
 	lineGenerator: any;
 
 	constructor(holder: Element, configs: any) {
 		super(holder, configs);
 
 		this.options.type = "line";
-	}
-
-	getLegendType() {
-		return Configuration.legend.basedOn.SERIES;
-	}
-
-	addLabelsToDataPoints(d, index) {
-		const { labels } = this.displayData;
-
-		return d.data.map((datum, i) => ({
-			label: labels[i],
-			datasetLabel: d.label,
-			value: datum
-		}));
 	}
 
 	draw() {
@@ -81,21 +63,7 @@ export class LineChart extends BaseAxisChart {
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);
 
-		gLines.selectAll("circle.dot")
-			.data((d, i) => this.addLabelsToDataPoints(d, i))
-			.enter()
-				.append("circle")
-				.attr("class", "dot")
-				.attr("cx", d => this.x(d.label) + margins.left)
-				.attr("cy", d => this.y(d.value))
-				.attr("r", Configuration.charts.pointCircles.radius)
-				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
-
-		// Hide the overlay
-		this.updateOverlay().hide();
-
-		// Dispatch the load event
-		this.dispatchEvent("load");
+		super.draw();
 	}
 
 	interpolateValues(newData: any) {
@@ -124,34 +92,13 @@ export class LineChart extends BaseAxisChart {
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);
 
-		// Add line circles
-		addedLineGroups.selectAll("circle.dot")
-			.data((d, i) => this.addLabelsToDataPoints(d, i))
-			.enter()
-				.append("circle")
-				.attr("class", "dot")
-				.attr("cx", (d, i) => this.x(d.label) + margins.left)
-				.attr("cy", (d: any) => this.y(d.value))
-				.attr("r", 4)
-				.style("opacity", 0)
-				.transition(this.getDefaultTransition())
-				.style("opacity", 1)
-				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
-
 		// Remove lines that are no longer needed
 		gLines.exit()
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
 
-		// Add slice hover actions, and clear any slice borders present
-		this.addDataPointEventListener();
-
-		// Hide the overlay
-		this.updateOverlay().hide();
-
-		// Dispatch the update event
-		this.dispatchEvent("update");
+		super.interpolateValues(newData);
 	}
 
 	updateElements(animate: boolean, gLines?: any) {
@@ -181,75 +128,10 @@ export class LineChart extends BaseAxisChart {
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);
 
-		const { line: margins } = Configuration.charts.margin;
-		gLines.selectAll("circle.dot")
-			.data(function(d, i) {
-				const parentDatum = select(this).datum() as any;
-
-				return self.addLabelsToDataPoints(parentDatum, i);
-			})
-			.transition(transitionToUse)
-			.attr("cx", d => this.x(d.label) + margins.left)
-			.attr("cy", d => this.y(d.value))
-			.attr("r", Configuration.lines.points.strokeWidth)
-			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+		super.updateElements(animate, null);
 	}
 
 	resizeChart() {
-		const chartSize: any = this.getChartSize(this.container);
-		const dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
-
-		// Resize the SVG
-		select(this.holder).select("svg")
-				.attr("width", `${dimensionToUseForScale}px`)
-				.attr("height", `${dimensionToUseForScale}px`);
-
-		this.updateXandYGrid(true);
-		// Scale out the domains
-		this.setXScale();
-		this.setYScale();
-
-		// Set the x & y axis as well as their labels
-		this.setXAxis(true);
-		this.setYAxis(true);
-
-		this.updateElements(false, null);
-
 		super.resizeChart();
-	}
-
-	addDataPointEventListener() {
-		const self = this;
-		const { accessibility } = this.options;
-
-		this.svg.selectAll("circle.dot")
-			.on("click", function(d) {
-				self.dispatchEvent("line-onClick", d);
-			})
-			.on("mouseover", function(d) {
-				select(this)
-					.attr("stroke-width", Configuration.lines.points.mouseover.strokeWidth)
-					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
-					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
-
-				self.showTooltip(d, this);
-				self.reduceOpacity(this);
-			})
-			.on("mousemove", function(d) {
-				const tooltipRef = select(self.holder).select("div.chart-tooltip");
-
-				const relativeMousePosition = mouse(self.holder as HTMLElement);
-				tooltipRef.style("left", relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px")
-					.style("top", relativeMousePosition[1] + "px");
-			})
-			.on("mouseout", function(d) {
-				const { strokeWidth, strokeWidthAccessible } = Configuration.lines.points.mouseout;
-				select(this)
-					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
-					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
-					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
-
-				self.hideTooltip();
-			});
 	}
 }
