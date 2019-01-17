@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.5](https://github.com/IBM/carbon-charts/compare/v0.8.4...v0.8.5) (2019-01-17)
+
+
+### Bug Fixes
+
+* **$browser:** Fixes the issue with pie labels not lining up on smaller sizes. ([54e2227](https://github.com/IBM/carbon-charts/commit/54e2227)), closes [#151](https://github.com/IBM/carbon-charts/issues/151)
+
+
+
+
+
 ## [0.8.4](https://github.com/IBM/carbon-charts/compare/v0.8.3...v0.8.4) (2019-01-17)
 
 
