@@ -27,7 +27,11 @@
 	},
 	"homepage": "https://github.com/IBM/carbon-charts#readme",
 	"dependencies": {
+<<<<<<< HEAD
 		"@carbon/charts": "^0.8.5",
+=======
+		"@carbon/charts": "^2.0.0",
+>>>>>>> a4b679432f4579925f3c9a063c639dfff4532b77
 		"react": "16.6.3",
 		"react-dom": "16.6.3"
 	},
