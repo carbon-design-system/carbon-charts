@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.6](https://github.com/IBM/carbon-charts/compare/v0.8.5...v0.8.6) (2019-01-18)
+
+
+### Bug Fixes
+
+* **$browser:** Fixes the issue with pie labels not lining up on smaller sizes. ([154467f](https://github.com/IBM/carbon-charts/commit/154467f)), closes [#151](https://github.com/IBM/carbon-charts/issues/151)
+* **$browser:** Use dynamic step value for margin instead of fixed value. ([1c96d7a](https://github.com/IBM/carbon-charts/commit/1c96d7a))
+* **core:** Fix interference of thresholds and bar chart elements ([a69dc15](https://github.com/IBM/carbon-charts/commit/a69dc15))
+
+
+
+
+
 ## [0.8.5](https://github.com/IBM/carbon-charts/compare/v0.8.4...v0.8.5) (2019-01-17)
 
 
