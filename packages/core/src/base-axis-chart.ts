@@ -256,7 +256,7 @@ export class BaseAxisChart extends BaseChart {
 			d.y1 = y;
 			d.y2 = y;
 
-			if (y + ((sliderTop - sliderBottom) / 2) + 8 > 25 && y - ((sliderTop - sliderBottom) / 2) + 8 < 430){
+			if (y + ((sliderTop - sliderBottom) / 2) + 8 > 25 && y - ((sliderTop - sliderBottom) / 2) + 8 < 430) {
 				line.attr("y1", y + ((sliderTop - sliderBottom) / 2) + 8);
 				upperCircle.attr("cy", y + ((sliderTop - sliderBottom) / 2));
 
