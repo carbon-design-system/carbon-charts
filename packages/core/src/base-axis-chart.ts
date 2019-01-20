@@ -256,10 +256,10 @@ export class BaseAxisChart extends BaseChart {
 			d.y1 = y;
 			d.y2 = y;
 
-			line.attr("y1", y + ((sliderTop - sliderBottom) / 2));
+			line.attr("y1", y + ((sliderTop - sliderBottom) / 2) + 8);
 			upperCircle.attr("cy", y + ((sliderTop - sliderBottom) / 2));
 
-			line.attr("y2", y - ((sliderTop - sliderBottom) / 2));
+			line.attr("y2", y - ((sliderTop - sliderBottom) / 2) - 8);
 			lowerCircle.attr("cy", y - ((sliderTop - sliderBottom) / 2));
 
 			this.update();
@@ -289,7 +289,7 @@ export class BaseAxisChart extends BaseChart {
 
 			this.upperScaleY = 1 - ((y - 25) / 405);
 			sliderTop = y;
-			line.attr("y1", sliderTop);
+			line.attr("y1", sliderTop + 8);
 
 			this.update();
 		};
@@ -319,7 +319,7 @@ export class BaseAxisChart extends BaseChart {
 			this.lowerScaleY = (y - 25) / 405;
 
 			sliderBottom = y;
-			line.attr("y2", sliderBottom);
+			line.attr("y2", sliderBottom - 8);
 
 			this.update();
 		};
@@ -345,14 +345,17 @@ export class BaseAxisChart extends BaseChart {
 			}).call(drag()
 			.on("drag", upperDragged));
 
-		line = svg1.append("line")
+		line = this.innerWrap.append("line")
 			.attr("id", "slider-line")
 			.attr("x1", x - 240)
 			.attr("x2", x - 240)
+			.attr("y1", sliderTop + 8)
+			.attr("y2", sliderBottom - 8)
 			.style("stroke", "red")
 			.style("opacity", 0.5)
 			.style("stroke-linecap", "round")
 			.style("stroke-width", 7)
+			.style("cursor", "grab")
 			.datum({
 				y1: sliderTop,
 				y2: sliderBottom
@@ -366,7 +369,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("cy", function(d) { return d.y; })
 			.attr("cx", function(d) { return d.x; })
 			.style("fill", "red")
-			.style("cursor", "ew-resize")
+			.style("cursor", "ns-resize")
 			.call(drag);
 
 		upperCircle = svg2.append("circle")
@@ -375,7 +378,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("cy", function(d) { return d.y; })
 			.attr("cx", function(d) { return d.x; })
 			.style("fill", "red")
-			.style("cursor", "ew-resize")
+			.style("cursor", "ns-resize")
 			.call(drag);
 
 		const svg = this.innerWrap.append("clipPath")
