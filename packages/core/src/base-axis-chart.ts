@@ -287,12 +287,7 @@ export class BaseAxisChart extends BaseChart {
 
 			console.log(y + " upper ");
 
-			if (y < sliderTop) {
-
-				this.upperScaleY = this.upperScaleY + (this.upperScaleY / 100);
-			} else if (y > sliderTop) {
-				this.upperScaleY = this.upperScaleY - (this.upperScaleY / 100);
-			}
+			this.upperScaleY = 1 - ((y - 25) / 405);
 			sliderTop = y;
 			line.attr("y1", sliderTop);
 
@@ -321,11 +316,7 @@ export class BaseAxisChart extends BaseChart {
 
 			console.log(y + " lower");
 
-			if (y < sliderBottom) {
-				this.lowerScaleY = this.lowerScaleY - (this.lowerScaleY / 100);
-			} else if (y > sliderBottom) {
-				this.lowerScaleY = this.lowerScaleY + (this.lowerScaleY / 100);
-			}
+			this.lowerScaleY = (y - 25) / 405;
 
 			sliderBottom = y;
 			line.attr("y2", sliderBottom);
