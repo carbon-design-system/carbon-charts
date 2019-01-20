@@ -239,6 +239,47 @@ export class BaseAxisChart extends BaseChart {
 		let lowerCircle: any;
 		let upperCircle: any;
 
+		const dragSlider = (d) => {
+			console.log("drag")
+			// Get the cursor's y location.
+			let y = event.y;
+			console.log(y)
+			// y must be between the two ends of the line.
+			 y = y < y1 ? y1 : y > y2 ? y2 : y;
+
+			//y = y < y1 ? y1 : y > this.sliderAttributes.bottomHandle ? this.sliderAttributes.bottomHandle : y;
+
+			// This assignment is necessary for multiple drag gestures.
+			// It makes the drag.origin function yield the correct value.
+			d.y1 = y;
+			d.y2 = y;
+			
+			line.attr("y1", y + ((sliderTop - sliderBottom) / 2));
+			upperCircle.attr("cy", y + ((sliderTop - sliderBottom) / 2));
+
+			if ( (y + ((sliderTop - sliderBottom)) / 2) < 202.5 ) {
+				this.upperScaleY = 1 / ( Math.abs( y - 202.5 ) / 20);
+				// this.scaleY = this.scaleY;
+			} else if ( (y + ((sliderTop - sliderBottom)) / 2) < 202.5 ) {
+				this.upperScaleY = Math.abs( y - 202.5 ) / 20;
+			}
+
+			line.attr("y2", y - ((sliderTop - sliderBottom) / 2));
+			lowerCircle.attr("cy", y - ((sliderTop - sliderBottom) / 2));
+
+			if ( (y - (sliderTop - sliderBottom)) > 202.5 ) {
+				this.lowerScaleY = 1 / ( Math.abs( y - 202.5 ) / 20);
+				// this.scaleY = this.scaleY;
+			} else if ( (y - (sliderTop - sliderBottom)) < 202.5 ) {
+				this.lowerScaleY = Math.abs( y - 202.5 ) / 20;
+			}
+
+			
+			
+
+			this.update();
+		}
+
 		const upperDragged = (d) => {
 
 			// console.log(select(this.id).attr("id"));
@@ -347,11 +388,16 @@ export class BaseAxisChart extends BaseChart {
 			.attr("id", "slider-line")
 			.attr("x1", x - 240)
 			.attr("x2", x - 240)
-			.attr("y1", sliderTop)
-			.attr("y2", sliderBottom)
+			//.attr("y1", sliderTop)
+			//.attr("y2", sliderBottom)
 			.style("stroke", "black")
 			.style("stroke-linecap", "round")
-			.style("stroke-width", 5);
+			.style("stroke-width", 5)
+			.datum({
+				y1: sliderTop,
+				y2: sliderBottom
+			}).call(drag()
+			.on("drag", dragSlider));
 
 		// Make circle draggable
 		lowerCircle = svg1.append("circle")
