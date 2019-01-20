@@ -233,6 +233,9 @@ export class BaseAxisChart extends BaseChart {
 		const y2 = (height - margin) / 2;
 		const x = width / 2;
 
+		let sliderTop = (height / 4) - 40;
+		let sliderBottom = (height / 4) + 40;
+
 		let lowerCircle: any;
 		let upperCircle: any;
 
@@ -245,13 +248,18 @@ export class BaseAxisChart extends BaseChart {
 			let y = event.y;
 
 			// y must be between the two ends of the line.
-			// y = y < y1 ? y1 : y > y2 ? y2 : y;
+			 y = y < y1 ? y1 : y > y2 ? y2 : y;
 
-			y = y < y1 ? y1 : y > this.sliderAttributes.bottomHandle ? this.sliderAttributes.bottomHandle : y;
+			//y = y < y1 ? y1 : y > this.sliderAttributes.bottomHandle ? this.sliderAttributes.bottomHandle : y;
 
 			// This assignment is necessary for multiple drag gestures.
 			// It makes the drag.origin function yield the correct value.
 			d.y = y;
+
+			//y1 = y;
+
+			sliderTop = y;
+			line.attr("y1", sliderTop);
 
 			// Update the circle location on the slider
 			upperCircle.attr("cy", y);
@@ -283,12 +291,15 @@ export class BaseAxisChart extends BaseChart {
 			let y = event.y;
 
 			// y must be between the two ends of the line.
-			// y = y < y1 ? y1 : y > y2 ? y2 : y;
-			y = y < this.sliderAttributes.topHandle ? this.sliderAttributes.topHandle : y > y2 ? y2 : y;
+			 y = y < y1 ? y1 : y > y2 ? y2 : y;
+			//y = y < this.sliderAttributes.topHandle ? this.sliderAttributes.topHandle : y > y2 ? y2 : y;
 
 			// This assignment is necessary for multiple drag gestures.
 			// It makes the drag.origin function yield the correct value.
 			d.y = y;
+
+			sliderBottom = y;
+			line.attr("y2", sliderBottom);
 
 			// Update the circle location on the slider
 			lowerCircle.attr("cy", y);
@@ -312,30 +323,32 @@ export class BaseAxisChart extends BaseChart {
 		};
 
 		// Insert the slider element into the action bar. A slider consists of a line and a circle
+		// Bottom handle
 		const svg1 = this.innerWrap.append("svg")
 			.attr("width", width)
 			.attr("height", height)
 			.datum({
 				x: (width / 2) - 240,
-				y: (height / 4) + 40
+				y: sliderBottom
 			}).call(drag()
 			.on("drag", lowerDragged));
 
+		// Top handle
 		const svg2 = this.innerWrap.append("svg")
 			.attr("width", width)
 			.attr("height", height)
 			.datum({
 				x: (width / 2) - 240,
-				y: (height / 4) - 40
+				y: sliderTop
 			}).call(drag()
 			.on("drag", upperDragged));
 
-		const line = svg1.append("line")
+		let line = svg1.append("line")
 			.attr("id", "slider-line")
 			.attr("x1", x - 240)
 			.attr("x2", x - 240)
-			.attr("y1", y1)
-			.attr("y2", y2)
+			.attr("y1", sliderTop)
+			.attr("y2", sliderBottom)
 			.style("stroke", "black")
 			.style("stroke-linecap", "round")
 			.style("stroke-width", 5);
