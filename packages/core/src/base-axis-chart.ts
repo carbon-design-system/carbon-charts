@@ -257,20 +257,20 @@ export class BaseAxisChart extends BaseChart {
 			line.attr("y1", y + ((sliderTop - sliderBottom) / 2));
 			upperCircle.attr("cy", y + ((sliderTop - sliderBottom) / 2));
 
-			if ( (y + ((sliderTop - sliderBottom)) / 2) < 202.5 ) {
+			if ( sliderTop < 202.5 ) {
 				this.upperScaleY = 1 / ( Math.abs( y - 202.5 ) / 20);
 				// this.scaleY = this.scaleY;
-			} else if ( (y + ((sliderTop - sliderBottom)) / 2) < 202.5 ) {
+			} else if ( sliderTop < 202.5 ) {
 				this.upperScaleY = Math.abs( y - 202.5 ) / 20;
 			}
 
 			line.attr("y2", y - ((sliderTop - sliderBottom) / 2));
 			lowerCircle.attr("cy", y - ((sliderTop - sliderBottom) / 2));
 
-			if ( (y - (sliderTop - sliderBottom)) > 202.5 ) {
+			if ( sliderBottom > 202.5 ) {
 				this.lowerScaleY = 1 / ( Math.abs( y - 202.5 ) / 20);
 				// this.scaleY = this.scaleY;
-			} else if ( (y - (sliderTop - sliderBottom)) < 202.5 ) {
+			} else if ( sliderBottom < 202.5 ) {
 				this.lowerScaleY = Math.abs( y - 202.5 ) / 20;
 			}
 
