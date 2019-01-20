@@ -233,52 +233,37 @@ export class BaseAxisChart extends BaseChart {
 		const y2 = (height - margin) / 2;
 		const x = width / 2;
 
-		let sliderTop = (height / 4) - 40;
-		let sliderBottom = (height / 4) + 40;
+		let sliderTop = y1;
+		let sliderBottom = y2;
 
 		let lowerCircle: any;
 		let upperCircle: any;
+		let line: any;
 
 		const dragSlider = (d) => {
-			console.log("drag")
+			console.log("drag");
 			// Get the cursor's y location.
 			let y = event.y;
-			console.log(y)
+			console.log(y);
 			// y must be between the two ends of the line.
-			 y = y < y1 ? y1 : y > y2 ? y2 : y;
+			y = y < y1 ? y1 : y > y2 ? y2 : y;
 
-			//y = y < y1 ? y1 : y > this.sliderAttributes.bottomHandle ? this.sliderAttributes.bottomHandle : y;
+			this.upperScaleY = 1 - ((y - 25) / 405);
+			this.lowerScaleY = (y - 25) / 405;
 
 			// This assignment is necessary for multiple drag gestures.
 			// It makes the drag.origin function yield the correct value.
 			d.y1 = y;
 			d.y2 = y;
-			
+
 			line.attr("y1", y + ((sliderTop - sliderBottom) / 2));
 			upperCircle.attr("cy", y + ((sliderTop - sliderBottom) / 2));
-
-			if ( sliderTop < 202.5 ) {
-				this.upperScaleY = 1 / ( Math.abs( y - 202.5 ) / 20);
-				// this.scaleY = this.scaleY;
-			} else if ( sliderTop < 202.5 ) {
-				this.upperScaleY = Math.abs( y - 202.5 ) / 20;
-			}
 
 			line.attr("y2", y - ((sliderTop - sliderBottom) / 2));
 			lowerCircle.attr("cy", y - ((sliderTop - sliderBottom) / 2));
 
-			if ( sliderBottom > 202.5 ) {
-				this.lowerScaleY = 1 / ( Math.abs( y - 202.5 ) / 20);
-				// this.scaleY = this.scaleY;
-			} else if ( sliderBottom < 202.5 ) {
-				this.lowerScaleY = Math.abs( y - 202.5 ) / 20;
-			}
-
-			
-			
-
 			this.update();
-		}
+		};
 
 		const upperDragged = (d) => {
 
@@ -289,18 +274,11 @@ export class BaseAxisChart extends BaseChart {
 			let y = event.y;
 
 			// y must be between the two ends of the line.
-			 y = y < y1 ? y1 : y > y2 ? y2 : y;
-
-			//y = y < y1 ? y1 : y > this.sliderAttributes.bottomHandle ? this.sliderAttributes.bottomHandle : y;
+			y = y < y1 ? y1 : y > y2 ? y2 : y;
 
 			// This assignment is necessary for multiple drag gestures.
 			// It makes the drag.origin function yield the correct value.
 			d.y = y;
-
-			//y1 = y;
-
-			sliderTop = y;
-			line.attr("y1", sliderTop);
 
 			// Update the circle location on the slider
 			upperCircle.attr("cy", y);
@@ -309,16 +287,14 @@ export class BaseAxisChart extends BaseChart {
 
 			console.log(y + " upper ");
 
-			/* 202.5 is the default slider value (max value is 430, min value is 25).
-			Update the y scale depending on if the slider is above or below the origin*/
-			if ( y < 202.5 ) {
-				this.upperScaleY = 1 / ( Math.abs( y - 202.5 ) / 20);
-				// this.scaleY = this.scaleY;
-			} else if ( y < 202.5 ) {
-				this.upperScaleY = Math.abs( y - 202.5 ) / 20;
-			} // else if ( y < 202.5 ){
-				// this.scaleY = 1;
-	// }
+			if (y < sliderTop) {
+
+				this.upperScaleY = this.upperScaleY + (this.upperScaleY / 100);
+			} else if (y > sliderTop) {
+				this.upperScaleY = this.upperScaleY - (this.upperScaleY / 100);
+			}
+			sliderTop = y;
+			line.attr("y1", sliderTop);
 
 			this.update();
 		};
@@ -332,15 +308,11 @@ export class BaseAxisChart extends BaseChart {
 			let y = event.y;
 
 			// y must be between the two ends of the line.
-			 y = y < y1 ? y1 : y > y2 ? y2 : y;
-			//y = y < this.sliderAttributes.topHandle ? this.sliderAttributes.topHandle : y > y2 ? y2 : y;
+			y = y < y1 ? y1 : y > y2 ? y2 : y;
 
 			// This assignment is necessary for multiple drag gestures.
 			// It makes the drag.origin function yield the correct value.
 			d.y = y;
-
-			sliderBottom = y;
-			line.attr("y2", sliderBottom);
 
 			// Update the circle location on the slider
 			lowerCircle.attr("cy", y);
@@ -349,16 +321,14 @@ export class BaseAxisChart extends BaseChart {
 
 			console.log(y + " lower");
 
-			/* 202.5 is the default slider value (max value is 430, min value is 25).
-			Update the y scale depending on if the slider is above or below the origin*/
-			if ( y > 202.5 ) {
-				this.lowerScaleY = 1 / ( Math.abs( y - 202.5 ) / 20);
-				// this.scaleY = this.scaleY;
-			} else if ( y < 202.5 ) {
-				this.lowerScaleY = Math.abs( y - 202.5 ) / 20;
-			} // else if ( y < 202.5 ){
-				// this.scaleY = 1;
-	// }
+			if (y < sliderBottom) {
+				this.lowerScaleY = this.lowerScaleY - (this.lowerScaleY / 100);
+			} else if (y > sliderBottom) {
+				this.lowerScaleY = this.lowerScaleY + (this.lowerScaleY / 100);
+			}
+
+			sliderBottom = y;
+			line.attr("y2", sliderBottom);
 
 			this.update();
 		};
@@ -384,12 +354,10 @@ export class BaseAxisChart extends BaseChart {
 			}).call(drag()
 			.on("drag", upperDragged));
 
-		let line = svg1.append("line")
+		line = svg1.append("line")
 			.attr("id", "slider-line")
 			.attr("x1", x - 240)
 			.attr("x2", x - 240)
-			//.attr("y1", sliderTop)
-			//.attr("y2", sliderBottom)
 			.style("stroke", "black")
 			.style("stroke-linecap", "round")
 			.style("stroke-width", 5)
