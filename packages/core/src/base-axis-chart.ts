@@ -156,7 +156,7 @@ export class BaseAxisChart extends BaseChart {
 	createXSlider() {
 		const width = 750;
 		const height = 500;
-		const radius = 20;
+		const radius = 7;
 		const margin = 100;
 
 		const x1 = margin + 125;
@@ -226,7 +226,7 @@ export class BaseAxisChart extends BaseChart {
 	createYSlider() {
 		const width = 500;
 		const height = 960;
-		const radius = 20;
+		const radius = 7;
 		const margin = 100;
 
 		const y1 = margin - 75;
@@ -349,9 +349,10 @@ export class BaseAxisChart extends BaseChart {
 			.attr("id", "slider-line")
 			.attr("x1", x - 240)
 			.attr("x2", x - 240)
-			.style("stroke", "black")
+			.style("stroke", "red")
+			.style("opacity", 0.5)
 			.style("stroke-linecap", "round")
-			.style("stroke-width", 5)
+			.style("stroke-width", 7)
 			.datum({
 				y1: sliderTop,
 				y2: sliderBottom
@@ -364,7 +365,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("r", radius)
 			.attr("cy", function(d) { return d.y; })
 			.attr("cx", function(d) { return d.x; })
-			.style("stroke", "black")
+			.style("fill", "red")
 			.style("cursor", "ew-resize")
 			.call(drag);
 
@@ -373,7 +374,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("r", radius)
 			.attr("cy", function(d) { return d.y; })
 			.attr("cx", function(d) { return d.x; })
-			.style("stroke", "red")
+			.style("fill", "red")
 			.style("cursor", "ew-resize")
 			.call(drag);
 
