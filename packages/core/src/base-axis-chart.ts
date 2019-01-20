@@ -256,11 +256,13 @@ export class BaseAxisChart extends BaseChart {
 			d.y1 = y;
 			d.y2 = y;
 
-			line.attr("y1", y + ((sliderTop - sliderBottom) / 2) + 8);
-			upperCircle.attr("cy", y + ((sliderTop - sliderBottom) / 2));
+			if (y + ((sliderTop - sliderBottom) / 2) + 8 > 25 && y - ((sliderTop - sliderBottom) / 2) + 8 < 430){
+				line.attr("y1", y + ((sliderTop - sliderBottom) / 2) + 8);
+				upperCircle.attr("cy", y + ((sliderTop - sliderBottom) / 2));
 
-			line.attr("y2", y - ((sliderTop - sliderBottom) / 2) - 8);
-			lowerCircle.attr("cy", y - ((sliderTop - sliderBottom) / 2));
+				line.attr("y2", y - ((sliderTop - sliderBottom) / 2) - 8);
+				lowerCircle.attr("cy", y - ((sliderTop - sliderBottom) / 2));
+			}
 
 			this.update();
 		};
