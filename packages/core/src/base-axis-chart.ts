@@ -55,6 +55,7 @@ export class BaseAxisChart extends BaseChart {
 			this.setXAxis();
 			this.setYScale();
 			this.setYAxis();
+			this.setTitle();
 
 			// Draw the x & y grid
 			this.drawXGrid();
@@ -199,6 +200,16 @@ export class BaseAxisChart extends BaseChart {
 		}
 	}
 
+	setTitle() {
+		// Add chart title
+		if (this.options.title) {
+			this.innerWrap.append("text")
+				.attr("class", "title")
+				.attr("text-anchor", "left")
+				.text(this.options.title);
+		}
+	}
+
 	setXAxis(noAnimation?: boolean) {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
@@ -243,15 +254,6 @@ export class BaseAxisChart extends BaseChart {
 				.attr("text-anchor", "middle")
 				.attr("transform", `translate(${xAxisRef.node().getBBox().width / 2}, ${tickHeight})`)
 				.text(this.options.scales.x.title);
-		}
-
-		// Add chart title
-		if (this.options.scales.headers.title) {
-			this.innerWrap.append("text")
-				.attr("class", "title")
-				.attr("text-anchor", "middle")
-				.attr("transform", `translate(${xAxisRef.node().getBBox().width / 2}, 0)`)
-				.text(this.options.scales.headers.title);
 		}
 
 		// get the yHeight after the height of the axis has settled
