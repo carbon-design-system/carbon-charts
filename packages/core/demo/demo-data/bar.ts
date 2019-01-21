@@ -51,10 +51,8 @@ export const groupedBarData = {
 };
 
 export const groupedBarOptions = {
+	title:  "2018 Annual Sales Figures",
 	scales: {
-		headers:{
-			title:  "2018 Annual Sales Figures"
-		},
 		x: {
 			title: "Asset Category",
 		},
@@ -95,10 +93,8 @@ export const simpleBarData = {
 
 export const simpleBarOptions = {
 	accessibility: false,
+	title:  "2018 Annual Sales Figures",
 	scales: {
-		headers:{
-			title:  "2018 Annual Sales Figures"
-		},
 		x: {
 			title: "Asset Category",
 		},
@@ -166,10 +162,8 @@ export const stackedBarData = {
 
 export const stackedBarOptions = {
 	accessibility: false,
+	title:  "2018 Annual Sales Figures",
 	scales: {
-		headers:{
-			title:  "2018 Annual Sales Figures"
-		},
 		x: {
 			title: "Asset Category",
 		},

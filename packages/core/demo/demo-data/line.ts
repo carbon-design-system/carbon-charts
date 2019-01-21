@@ -41,10 +41,8 @@ export const curvedLineData = {
 
 export const curvedLineOptions = {
 	accessibility: false,
+	title:  "2018 Annual Sales Figures",
 	scales: {
-		headers:{
-			title:  "2018 Annual Sales Figures"
-		},
 		x: {
 			title: "Asset Category",
 		},
@@ -111,9 +109,7 @@ export const lineData = {
 export const lineOptions = {
 	accessibility: false,
 	scales: {
-		headers:{
-			title:  "2018 Annual Sales Figures"
-		},
+		title:  "2018 Annual Sales Figures",
 		x: {
 			title: "Asset Category",
 		},
