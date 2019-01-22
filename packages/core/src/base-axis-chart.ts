@@ -250,18 +250,19 @@ export class BaseAxisChart extends BaseChart {
 			// y must be between the two ends of the line.
 			y = y < y1 ? y1 : y > y2 ? y2 : y;
 
-			// Scale the min and max axis values
-			this.upperScaleY = 1 - ((y - 25) / 405);
-			this.lowerScaleY = (y - 25) / 405;
-
-			// This assignment is necessary for multiple drag gestures.
-			// It makes the drag.origin function yield the correct value.
-			// Set slider top/bottom attributes
-			d.y1 = y;
-			d.y2 = y;
-
 			// Move the slider
 			if (y + ((sliderTop - sliderBottom) / 2) + 8 > 25 && y - ((sliderTop - sliderBottom) / 2) + 8 < 430) {
+
+				// Scale the min and max axis values
+				this.upperScaleY = 1 - ((y - 25) / 405);
+				this.lowerScaleY = (y - 25) / 405;
+
+				// This assignment is necessary for multiple drag gestures.
+				// It makes the drag.origin function yield the correct value.
+				// Set slider top/bottom attributes
+				d.y1 = y;
+				d.y2 = y;
+
 				line.attr("y1", y + ((sliderTop - sliderBottom) / 2) + 8);
 				upperCircle.attr("cy", y + ((sliderTop - sliderBottom) / 2));
 
