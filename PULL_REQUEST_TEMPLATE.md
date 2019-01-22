@@ -1,5 +1,4 @@
 ### Updates
-
 - list
 - out
 - updates
@@ -8,7 +7,6 @@
 ### Demo screenshot or recording
 
 ### Review checklist (for reviewers only)
-
 - [ ] Demos all features
 - [ ] Documented/annotated
 - [ ] Matches UI/UX specs
