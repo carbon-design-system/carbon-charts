@@ -233,29 +233,34 @@ export class BaseAxisChart extends BaseChart {
 		const y2 = (height - margin) / 2;
 		const x = width / 2;
 
+		// Slider is intially fit to the top and bottom of the axis
 		let sliderTop = y1;
 		let sliderBottom = y2;
 
+		// Slider components
 		let lowerCircle: any;
 		let upperCircle: any;
 		let line: any;
 
 		const dragSlider = (d) => {
-			console.log("drag");
+
 			// Get the cursor's y location.
 			let y = event.y;
-			console.log(y);
+
 			// y must be between the two ends of the line.
 			y = y < y1 ? y1 : y > y2 ? y2 : y;
 
+			// Scale the min and max axis values
 			this.upperScaleY = 1 - ((y - 25) / 405);
 			this.lowerScaleY = (y - 25) / 405;
 
 			// This assignment is necessary for multiple drag gestures.
 			// It makes the drag.origin function yield the correct value.
+			// Set slider top/bottom attributes
 			d.y1 = y;
 			d.y2 = y;
 
+			// Move the slider
 			if (y + ((sliderTop - sliderBottom) / 2) + 8 > 25 && y - ((sliderTop - sliderBottom) / 2) + 8 < 430) {
 				line.attr("y1", y + ((sliderTop - sliderBottom) / 2) + 8);
 				upperCircle.attr("cy", y + ((sliderTop - sliderBottom) / 2));
@@ -269,9 +274,6 @@ export class BaseAxisChart extends BaseChart {
 
 		const upperDragged = (d) => {
 
-			// console.log(select(this.id).attr("id"));
-			console.log(select(this.id));
-
 			// Get the cursor's y location.
 			let y = event.y;
 
@@ -280,15 +282,15 @@ export class BaseAxisChart extends BaseChart {
 
 			// This assignment is necessary for multiple drag gestures.
 			// It makes the drag.origin function yield the correct value.
+			// Set upper handle position
 			d.y = y;
 
-			// Update the circle location on the slider
+			// Update the handle location on the slider
 			upperCircle.attr("cy", y);
 
 			this.sliderAttributes.topHandle = y;
 
-			console.log(y + " upper ");
-
+			// Update axis range
 			this.upperScaleY = 1 - ((y - 25) / 405);
 			sliderTop = y;
 			line.attr("y1", sliderTop + 8);
@@ -298,9 +300,6 @@ export class BaseAxisChart extends BaseChart {
 
 		const lowerDragged = (d) => {
 
-			// console.log(select(this.id).attr("id"));
-			console.log(select(this.id));
-
 			// Get the cursor's y location.
 			let y = event.y;
 
@@ -309,6 +308,7 @@ export class BaseAxisChart extends BaseChart {
 
 			// This assignment is necessary for multiple drag gestures.
 			// It makes the drag.origin function yield the correct value.
+			// Set lower handle position
 			d.y = y;
 
 			// Update the circle location on the slider
@@ -316,8 +316,7 @@ export class BaseAxisChart extends BaseChart {
 
 			this.sliderAttributes.bottomHandle = y;
 
-			console.log(y + " lower");
-
+			// Update axis range
 			this.lowerScaleY = (y - 25) / 405;
 
 			sliderBottom = y;
@@ -364,7 +363,7 @@ export class BaseAxisChart extends BaseChart {
 			}).call(drag()
 			.on("drag", dragSlider));
 
-		// Make circle draggable
+		// Make handles draggable
 		lowerCircle = svg1.append("circle")
 			.attr("id", "slider-circle-top")
 			.attr("r", radius)
@@ -383,6 +382,7 @@ export class BaseAxisChart extends BaseChart {
 			.style("cursor", "ns-resize")
 			.call(drag);
 
+		// Keep chart data elements within the boundaires of the chart
 		const svg = this.innerWrap.append("clipPath")
 			.attr("id", "clip")
 			.append("rect")
