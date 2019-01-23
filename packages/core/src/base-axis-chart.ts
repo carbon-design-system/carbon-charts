@@ -20,13 +20,6 @@ export class BaseAxisChart extends BaseChart {
 	y2: any;
 	thresholdDimensions: any;
 
-	sliderAttributes = {
-		topHandle: 0,
-		bottomHandle: 0,
-		rightHandle: 0,
-		leftHandle: 0
-	};
-
 	// Represents the rescale value obtained from sliders
 	lowerScaleY = 1;
 	upperScaleY = 1;
@@ -289,8 +282,6 @@ export class BaseAxisChart extends BaseChart {
 			// Update the handle location on the slider
 			upperCircle.attr("cy", y);
 
-			this.sliderAttributes.topHandle = y;
-
 			// Update axis range
 			this.upperScaleY = 1 - ((y - 25) / 405);
 			sliderTop = y;
@@ -314,8 +305,6 @@ export class BaseAxisChart extends BaseChart {
 
 			// Update the circle location on the slider
 			lowerCircle.attr("cy", y);
-
-			this.sliderAttributes.bottomHandle = y;
 
 			// Update axis range
 			this.lowerScaleY = (y - 25) / 405;
