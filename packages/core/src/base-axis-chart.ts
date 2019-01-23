@@ -254,8 +254,8 @@ export class BaseAxisChart extends BaseChart {
 			if (y + ((sliderTop - sliderBottom) / 2) + 8 > 25 && y - ((sliderTop - sliderBottom) / 2) + 8 < 430) {
 
 				// Scale the min and max axis values
-				this.upperScaleY = 1 - ((y - 25) / 405);
-				this.lowerScaleY = (y - 25) / 405;
+				this.upperScaleY = 1 - ((y + ((sliderTop - sliderBottom) / 2) - 25) / 405);
+				this.lowerScaleY = (y - ((sliderTop - sliderBottom) / 2) - 25) / 405;
 
 				// This assignment is necessary for multiple drag gestures.
 				// It makes the drag.origin function yield the correct value.
