@@ -136,11 +136,6 @@ const classyCharts = {};
 
 // TODO - removeADataset shouldn't be used if chart legend is label based
 const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
-	const classyChartObject = classyCharts[chartType];
-	let newData;
-
-	const removeADataset = Math.random() > 0.5;
-
 	// Function to be used to randomize a value
 	const randomizeValue = currentVal => {
 		const firstTry = Math.max(0.5 * currentVal, currentVal * Math.random() * (Math.random() * 5));
@@ -157,18 +152,23 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 	};
 
 	// Function to be used to randomize all datapoints
-	const updateChartData = oldData => {
-		const newData = Object.assign({}, oldData);
-		newData.datasets = oldData.datasets.map(dataset => {
+	const updateChartData = currentData => {
+		const result = Object.assign({}, currentData);
+		result.datasets = currentData.datasets.map(dataset => {
 			const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
-	
+
 			const newDataset = Object.assign({}, dataset, { data: datasetNewData });
-	
+
 			return newDataset;
 		});
 
-		return newData;
+		return result;
 	};
+
+	const classyChartObject = classyCharts[chartType];
+	let newData;
+
+	const removeADataset = Math.random() > 0.5;
 
 	switch (chartType) {
 		case "donut":
