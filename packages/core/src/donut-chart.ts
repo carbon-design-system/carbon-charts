@@ -87,10 +87,13 @@ export class DonutChart extends PieChart {
 		super(holder, configs, "donut");
 
 		// Check if the DonutCenter object is provided
-		if (configs.options.centerLabel) {
-			this.center = new DonutCenter({
-				label: configs.options.centerLabel
-			});
+		// in the chart configurations
+		const { center } = configs.options;
+		if (center) {
+			// Set donut center configs
+			// And instantiate the DonutCenter object
+			const donutCenterConfigs = this.getSuppliedCenterConfigs();
+			this.center = new DonutCenter(donutCenterConfigs);
 		}
 	}
 
@@ -98,9 +101,9 @@ export class DonutChart extends PieChart {
 		super.draw();
 
 		// Draw the center text
-		if (this.center && this.center.configs) {
-			const sumOfDatapoints = this.displayData.datasets[0].data.reduce((accum, currVal) => accum + currVal.value, 0);
-			this.center.configs.number = sumOfDatapoints;
+		if (this.center) {
+			// Set donut center configs
+			this.setCenterConfigs();
 
 			this.center.draw(this.innerWrap);
 		}
@@ -120,13 +123,37 @@ export class DonutChart extends PieChart {
 
 	update() {
 		super.update();
-
+		
 		if (this.center) {
-			const sumOfDatapoints = this.displayData.datasets[0].data.reduce((accum, currVal) => accum + currVal.value, 0);
+			// Set donut center configs
+			this.setCenterConfigs();
 
-			this.center.configs.number = sumOfDatapoints;
+			// Update donut center
 			this.center.update();
 		}
+	}
+
+	getSuppliedCenterConfigs() {
+		let number;
+		const { center } = this.options;
+
+		// If a number for donut center has been provided
+		// Use it
+		if (center.number) {
+			number = center.number;
+		} else if (this.displayData) { // If not, use the sum of datapoints
+			const sumOfDatapoints = this.displayData.datasets[0].data.reduce((accum, currVal) => accum + currVal.value, 0);
+			number = sumOfDatapoints;
+		}
+
+		return {
+			label: center.label,
+			number
+		};
+	}
+
+	setCenterConfigs() {
+		this.center.configs = this.getSuppliedCenterConfigs();
 	}
 }
 
