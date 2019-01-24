@@ -123,7 +123,7 @@ export class DonutChart extends PieChart {
 
 	update() {
 		super.update();
-		
+
 		if (this.center) {
 			// Set donut center configs
 			this.setCenterConfigs();
