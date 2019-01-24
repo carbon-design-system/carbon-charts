@@ -156,18 +156,35 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		}
 	};
 
+	// Function to be used to randomize all datapoints
+	const updateChartData = oldData => {
+		const newData = Object.assign({}, oldData);
+		newData.datasets = oldData.datasets.map(dataset => {
+			const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
+	
+			const newDataset = Object.assign({}, dataset, { data: datasetNewData });
+	
+			return newDataset;
+		});
+
+		return newData;
+	};
+
 	switch (chartType) {
 		case "donut":
+			// Randomize old data values
+			newData = updateChartData(oldData);
+
+			// Update donut center configurations
+			classyChartObject.options.center = {
+				label: "New Title",
+				number: randomizeValue(classyChartObject.center.configs.number)
+			};
+
+			break;
 		case "pie":
 			// Randomize old data values
-			newData = Object.assign({}, oldData);
-			newData.datasets = oldData.datasets.map(dataset => {
-				const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
-
-				const newDataset = Object.assign({}, dataset, { data: datasetNewData });
-
-				return newDataset;
-			});
+			newData = updateChartData(oldData);
 
 			break;
 		default:
@@ -176,14 +193,7 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		case "simple-bar-accessible":
 		case "stacked-bar":
 		case "stacked-bar-accessible":
-			newData = Object.assign({}, oldData);
-			newData.datasets = oldData.datasets.map(dataset => {
-				const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
-
-				const newDataset = Object.assign({}, dataset, { data: datasetNewData });
-
-				return newDataset;
-			});
+			newData = updateChartData(oldData);
 
 			if (removeADataset && chartType !== "combo") {
 				const randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));
