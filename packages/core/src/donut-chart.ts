@@ -88,8 +88,10 @@ export class DonutChart extends PieChart {
 
 		// Check if the DonutCenter object is provided
 		// in the chart configurations
-		const { center } = configs.options;
-		if (center) {
+		const { center, centerLabel, centerNumber } = configs.options;
+
+		// TODO 1.0 - Remove deprecated API
+		if (center || centerLabel || centerNumber) {
 			// Set donut center configs
 			// And instantiate the DonutCenter object
 			const donutCenterConfigs = this.getSuppliedCenterConfigs();
@@ -134,20 +136,34 @@ export class DonutChart extends PieChart {
 	}
 
 	getSuppliedCenterConfigs() {
-		let number;
-		const { center } = this.options;
+		// TODO 1.0 - Remove deprecated API
+		const { center, centerLabel, centerNumber } = this.options;
+		const label = center ? center.label : centerLabel;
+		let number = center ? center.number : centerNumber;
 
-		// If a number for donut center has been provided
-		// Use it
-		if (center.number) {
-			number = center.number;
-		} else if (this.displayData) { // If not, use the sum of datapoints
+		// TODO 1.0 - Remove deprecated API
+		// Warn developer about deprecation
+		if (centerLabel || centerNumber) {
+			console.warn(
+				"`centerLabel` & `centerNumber` are deprecated and will be removed in v1.0, you should switch to",
+				{
+					center: {
+						label: "test",
+						number: 10
+					}
+				}
+			);
+		}
+
+		// If a number for donut center has not been provided
+		// Use the sum of datapoints
+		if (!number && this.displayData) {
 			const sumOfDatapoints = this.displayData.datasets[0].data.reduce((accum, currVal) => accum + currVal.value, 0);
 			number = sumOfDatapoints;
 		}
 
 		return {
-			label: center.label,
+			label,
 			number
 		};
 	}
