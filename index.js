@@ -699,7 +699,10 @@ var donutOptions = {
     legendClickable: true,
     containerResizable: true,
     colors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
-    centerLabel: "Products"
+    center: {
+        label: "Products",
+        number: 300000
+    }
 };
 var pieData = {
     labels: ["2V2N-9KYPM version 1", "L22I-P66EP-L22I-P66EP-L22I-P66EP", "JQAI-2M4L1", "J9DZ-F37AP",
@@ -850,9 +853,6 @@ var chartTypes = [
 var classyCharts = {};
 // TODO - removeADataset shouldn't be used if chart legend is label based
 var changeDemoData = function (chartType, oldData, delay) {
-    var classyChartObject = classyCharts[chartType];
-    var newData;
-    var removeADataset = Math.random() > 0.5;
     // Function to be used to randomize a value
     var randomizeValue = function (currentVal) {
         var firstTry = Math.max(0.5 * currentVal, currentVal * Math.random() * (Math.random() * 5));
@@ -867,16 +867,32 @@ var changeDemoData = function (chartType, oldData, delay) {
             return Math.floor(result) * -1;
         }
     };
+    // Function to be used to randomize all datapoints
+    var updateChartData = function (currentData) {
+        var result = Object.assign({}, currentData);
+        result.datasets = currentData.datasets.map(function (dataset) {
+            var datasetNewData = dataset.data.map(function (dataPoint) { return randomizeValue(dataPoint); });
+            var newDataset = Object.assign({}, dataset, { data: datasetNewData });
+            return newDataset;
+        });
+        return result;
+    };
+    var classyChartObject = classyCharts[chartType];
+    var newData;
+    var removeADataset = Math.random() > 0.5;
     switch (chartType) {
         case "donut":
+            // Randomize old data values
+            newData = updateChartData(oldData);
+            // Update donut center configurations
+            classyChartObject.options.center = {
+                label: "New Title",
+                number: randomizeValue(classyChartObject.center.configs.number)
+            };
+            break;
         case "pie":
             // Randomize old data values
-            newData = Object.assign({}, oldData);
-            newData.datasets = oldData.datasets.map(function (dataset) {
-                var datasetNewData = dataset.data.map(function (dataPoint) { return randomizeValue(dataPoint); });
-                var newDataset = Object.assign({}, dataset, { data: datasetNewData });
-                return newDataset;
-            });
+            newData = updateChartData(oldData);
             break;
         default:
         case "grouped-bar":
@@ -884,12 +900,7 @@ var changeDemoData = function (chartType, oldData, delay) {
         case "simple-bar-accessible":
         case "stacked-bar":
         case "stacked-bar-accessible":
-            newData = Object.assign({}, oldData);
-            newData.datasets = oldData.datasets.map(function (dataset) {
-                var datasetNewData = dataset.data.map(function (dataPoint) { return randomizeValue(dataPoint); });
-                var newDataset = Object.assign({}, dataset, { data: datasetNewData });
-                return newDataset;
-            });
+            newData = updateChartData(oldData);
             if (removeADataset && chartType !== "combo") {
                 var randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));
                 newData.datasets.splice(randomIndex, randomIndex);
@@ -3283,19 +3294,23 @@ var DonutChart = /** @class */ (function (_super) {
     function DonutChart(holder, configs) {
         var _this = _super.call(this, holder, configs, "donut") || this;
         // Check if the DonutCenter object is provided
-        if (configs.options.centerLabel) {
-            _this.center = new DonutCenter({
-                label: configs.options.centerLabel
-            });
+        // in the chart configurations
+        var _a = configs.options, center = _a.center, centerLabel = _a.centerLabel, centerNumber = _a.centerNumber;
+        // TODO 1.0 - Remove deprecated API
+        if (center || centerLabel || centerNumber) {
+            // Set donut center configs
+            // And instantiate the DonutCenter object
+            var donutCenterConfigs = _this.getSuppliedCenterConfigs();
+            _this.center = new DonutCenter(donutCenterConfigs);
         }
         return _this;
     }
     DonutChart.prototype.draw = function () {
         _super.prototype.draw.call(this);
         // Draw the center text
-        if (this.center && this.center.configs) {
-            var sumOfDatapoints = this.displayData.datasets[0].data.reduce(function (accum, currVal) { return accum + currVal.value; }, 0);
-            this.center.configs.number = sumOfDatapoints;
+        if (this.center) {
+            // Set donut center configs
+            this.setCenterConfigs();
             this.center.draw(this.innerWrap);
         }
     };
@@ -3312,10 +3327,40 @@ var DonutChart = /** @class */ (function (_super) {
     DonutChart.prototype.update = function () {
         _super.prototype.update.call(this);
         if (this.center) {
-            var sumOfDatapoints = this.displayData.datasets[0].data.reduce(function (accum, currVal) { return accum + currVal.value; }, 0);
-            this.center.configs.number = sumOfDatapoints;
+            // Set donut center configs
+            this.setCenterConfigs();
+            // Update donut center
             this.center.update();
         }
+    };
+    DonutChart.prototype.getSuppliedCenterConfigs = function () {
+        // TODO 1.0 - Remove deprecated API
+        var _a = this.options, center = _a.center, centerLabel = _a.centerLabel, centerNumber = _a.centerNumber;
+        var label = center ? center.label : centerLabel;
+        var number = center ? center.number : centerNumber;
+        // TODO 1.0 - Remove deprecated API
+        // Warn developer about deprecation
+        if (centerLabel || centerNumber) {
+            console.warn("`centerLabel` & `centerNumber` are deprecated and will be removed in v1.0, you should switch to", {
+                center: {
+                    label: "test",
+                    number: 10
+                }
+            });
+        }
+        // If a number for donut center has not been provided
+        // Use the sum of datapoints
+        if (!number && this.displayData) {
+            var sumOfDatapoints = this.displayData.datasets[0].data.reduce(function (accum, currVal) { return accum + currVal.value; }, 0);
+            number = sumOfDatapoints;
+        }
+        return {
+            label: label,
+            number: number
+        };
+    };
+    DonutChart.prototype.setCenterConfigs = function () {
+        this.center.configs = this.getSuppliedCenterConfigs();
     };
     return DonutChart;
 }(_pie_chart__WEBPACK_IMPORTED_MODULE_2__["PieChart"]));
