@@ -7,12 +7,12 @@ import {
 import { scaleBand, scaleLinear } from "d3-scale";
 import { axisBottom, axisLeft, axisRight } from "d3-axis";
 import { min, max } from "d3-array";
+import { drag } from "d3-drag";
 
 import { BaseChart } from "./base-chart";
 
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
-import { drag } from "d3-drag";
 
 export class BaseAxisChart extends BaseChart {
 	x: any;
@@ -217,18 +217,26 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	createYSlider() {
-		const width = 500;
-		const height = 960;
-		const radius = 7;
-		const margin = 100;
+		const margins = Configuration.charts.margin;
+		const width = this.getChartSize().width + margins.left;
+		const height = this.y(0)*2;
+		const radius = Configuration.sliders.handles.radius;
+		const diameter = 2*radius;
 
-		const y1 = margin - 75;
-		const y2 = (height - margin) / 2;
-		const x = width / 2;
+		//The max height of the upper handle
+		const maxHeight = margins.top;
+
+		//The minimum height of the lower handle
+		const minHeight = height - margins.bottom;
+
+		const dragAreaLength = minHeight - maxHeight;
+		
+		const clipboxWidth = this.getChartSize().width;
+		const clipBoxHeight = this.getChartSize().height - margins.top - margins.bottom;
 
 		// Slider is intially fit to the top and bottom of the axis
-		let sliderTop = y1;
-		let sliderBottom = y2;
+		let sliderTop = maxHeight;
+		let sliderBottom = minHeight;
 
 		// Slider components
 		let lowerCircle: any;
@@ -241,14 +249,23 @@ export class BaseAxisChart extends BaseChart {
 			let y = event.y;
 
 			// y must be between the two ends of the line.
-			y = y < y1 ? y1 : y > y2 ? y2 : y;
+			if (y < maxHeight){
+				y = maxHeight
+			} else {
+				if (y > minHeight){
+					y = minHeight
+				}
+			}
+
+			const newTopHandleLocation = y + ((sliderTop - sliderBottom) / 2);
+			const newBottomHandleLocation = y - ((sliderTop - sliderBottom) / 2);
 
 			// Move the slider
-			if (y + ((sliderTop - sliderBottom) / 2) + 8 > 25 && y - ((sliderTop - sliderBottom) / 2) + 8 < 430) {
+			if (newTopHandleLocation + radius > maxHeight && newBottomHandleLocation + radius < minHeight) {
 
 				// Scale the min and max axis values
-				this.upperScaleY = 1 - ((y + ((sliderTop - sliderBottom) / 2) - 25) / 405);
-				this.lowerScaleY = (y - ((sliderTop - sliderBottom) / 2) - 25) / 405;
+				this.upperScaleY = 1 - (newTopHandleLocation - maxHeight) / dragAreaLength;
+				this.lowerScaleY = (newBottomHandleLocation - maxHeight) / dragAreaLength;
 
 				// This assignment is necessary for multiple drag gestures.
 				// It makes the drag.origin function yield the correct value.
@@ -256,10 +273,10 @@ export class BaseAxisChart extends BaseChart {
 				d.y1 = y;
 				d.y2 = y;
 
-				line.attr("y1", y + ((sliderTop - sliderBottom) / 2) + 8);
+				line.attr("y1", y + ((sliderTop - sliderBottom) / 2) + radius);
 				upperCircle.attr("cy", y + ((sliderTop - sliderBottom) / 2));
 
-				line.attr("y2", y - ((sliderTop - sliderBottom) / 2) - 8);
+				line.attr("y2", y - ((sliderTop - sliderBottom) / 2) - radius);
 				lowerCircle.attr("cy", y - ((sliderTop - sliderBottom) / 2));
 			}
 
@@ -272,7 +289,13 @@ export class BaseAxisChart extends BaseChart {
 			let y = event.y;
 
 			// y must be between the two ends of the line.
-			y = y < y1 ? y1 : y > (sliderBottom - 15) ? (sliderBottom - 15) : y;
+			if (y < maxHeight) {
+				y = maxHeight;
+			} else {
+				if (y > sliderBottom - diameter){
+					y = sliderBottom - diameter;
+				}
+			}
 
 			// This assignment is necessary for multiple drag gestures.
 			// It makes the drag.origin function yield the correct value.
@@ -283,9 +306,9 @@ export class BaseAxisChart extends BaseChart {
 			upperCircle.attr("cy", y);
 
 			// Update axis range
-			this.upperScaleY = 1 - ((y - 25) / 405);
+			this.upperScaleY = 1 - ((y - margins.top) / dragAreaLength);
 			sliderTop = y;
-			line.attr("y1", sliderTop + 8);
+			line.attr("y1", sliderTop + radius);
 
 			this.update();
 		};
@@ -296,7 +319,13 @@ export class BaseAxisChart extends BaseChart {
 			let y = event.y;
 
 			// y must be between the two ends of the line.
-			y = y < (sliderTop + 15) ? (sliderTop + 15) : y > y2 ? y2 : y;
+			if (y < (sliderTop + diameter)) {
+				y = (sliderTop + diameter);
+			} else {
+				if (y > minHeight){
+					y = minHeight;
+				}
+			}
 
 			// This assignment is necessary for multiple drag gestures.
 			// It makes the drag.origin function yield the correct value.
@@ -307,10 +336,10 @@ export class BaseAxisChart extends BaseChart {
 			lowerCircle.attr("cy", y);
 
 			// Update axis range
-			this.lowerScaleY = (y - 25) / 405;
+			this.lowerScaleY = (y - margins.bottom) / dragAreaLength;
 
 			sliderBottom = y;
-			line.attr("y2", sliderBottom - 8);
+			line.attr("y2", sliderBottom - radius);
 
 			this.update();
 		};
@@ -321,7 +350,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("width", width)
 			.attr("height", height)
 			.datum({
-				x: (width / 2) - 240,
+				x: Configuration.sliders.margin.left,
 				y: sliderBottom
 			}).call(drag()
 			.on("drag", lowerDragged));
@@ -331,21 +360,21 @@ export class BaseAxisChart extends BaseChart {
 			.attr("width", width)
 			.attr("height", height)
 			.datum({
-				x: (width / 2) - 240,
+				x: Configuration.sliders.margin.left,
 				y: sliderTop
 			}).call(drag()
 			.on("drag", upperDragged));
 
 		line = this.innerWrap.append("line")
 			.attr("id", "slider-line")
-			.attr("x1", x - 240)
-			.attr("x2", x - 240)
-			.attr("y1", sliderTop + 8)
-			.attr("y2", sliderBottom - 8)
+			.attr("x1", Configuration.sliders.margin.left)
+			.attr("x2", Configuration.sliders.margin.left)
+			.attr("y1", sliderTop + radius)
+			.attr("y2", sliderBottom - radius)
 			.style("stroke", "red")
-			.style("opacity", 0.5)
+			.style("opacity", Configuration.sliders.line.opacity)
 			.style("stroke-linecap", "round")
-			.style("stroke-width", 7)
+			.style("stroke-width", radius)
 			.style("cursor", "grab")
 			.datum({
 				y1: sliderTop,
@@ -376,8 +405,8 @@ export class BaseAxisChart extends BaseChart {
 		const svg = this.innerWrap.append("clipPath")
 			.attr("id", "clip")
 			.append("rect")
-			.attr("width", 450)
-			.attr("height", 365.3402557373047);
+			.attr("width", clipboxWidth)
+			.attr("height", clipBoxHeight);
 	}
 
 	draw() {

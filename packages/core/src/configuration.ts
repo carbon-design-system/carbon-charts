@@ -51,6 +51,18 @@ export const options = {
 	AXIS: axisOptions
 };
 
+export const sliders = {
+	margin: {
+		left: 15
+	},
+	handles: {
+		radius: 7
+	},
+	line: {
+		opacity: 0.5
+	}
+}
+
 export const charts = {
 	margin: {
 		top: 20,
