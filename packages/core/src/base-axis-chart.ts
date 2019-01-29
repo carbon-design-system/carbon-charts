@@ -69,7 +69,7 @@ export class BaseAxisChart extends BaseChart {
 			this.drawXGrid();
 			this.drawYGrid();
 
-			// this.createYSlider();
+			// Create y axis slider
 			this.createYSlider();
 
 			this.addOrUpdateLegend();
@@ -243,7 +243,7 @@ export class BaseAxisChart extends BaseChart {
 		let upperCircle: any;
 		let line: any;
 
-		const dragSlider = (d) => {
+		const dragSlider = d => {
 
 			// Get the cursor's y location.
 			let y = event.y;
@@ -283,7 +283,7 @@ export class BaseAxisChart extends BaseChart {
 			this.update();
 		};
 
-		const upperDragged = (d) => {
+		const upperDragged = d => {
 
 			// Get the cursor's y location.
 			let y = event.y;
@@ -306,14 +306,14 @@ export class BaseAxisChart extends BaseChart {
 			upperCircle.attr("cy", y);
 
 			// Update axis range
-			this.upperScaleY = 1 - ((y - margins.top) / dragAreaLength);
+			this.upperScaleY = 1 - ((y - maxHeight) / dragAreaLength);
 			sliderTop = y;
 			line.attr("y1", sliderTop + radius);
 
 			this.update();
 		};
 
-		const lowerDragged = (d) => {
+		const lowerDragged = d => {
 
 			// Get the cursor's y location.
 			let y = event.y;
@@ -336,7 +336,7 @@ export class BaseAxisChart extends BaseChart {
 			lowerCircle.attr("cy", y);
 
 			// Update axis range
-			this.lowerScaleY = (y - margins.bottom) / dragAreaLength;
+			this.lowerScaleY = (y - maxHeight) / dragAreaLength;
 
 			sliderBottom = y;
 			line.attr("y2", sliderBottom - radius);
@@ -344,27 +344,7 @@ export class BaseAxisChart extends BaseChart {
 			this.update();
 		};
 
-		// Insert the slider element into the action bar. A slider consists of a line and a circle
-		// Bottom handle
-		const svg1 = this.innerWrap.append("svg")
-			.attr("width", width)
-			.attr("height", height)
-			.datum({
-				x: Configuration.sliders.margin.left,
-				y: sliderBottom
-			}).call(drag()
-			.on("drag", lowerDragged));
-
-		// Top handle
-		const svg2 = this.innerWrap.append("svg")
-			.attr("width", width)
-			.attr("height", height)
-			.datum({
-				x: Configuration.sliders.margin.left,
-				y: sliderTop
-			}).call(drag()
-			.on("drag", upperDragged));
-
+		// Insert the slider element into the action bar. A slider consists of a line and a two circles
 		line = this.innerWrap.append("line")
 			.attr("id", "slider-line")
 			.attr("x1", Configuration.sliders.margin.left)
@@ -383,23 +363,35 @@ export class BaseAxisChart extends BaseChart {
 			.on("drag", dragSlider));
 
 		// Make handles draggable
-		lowerCircle = svg1.append("circle")
+		lowerCircle = this.innerWrap.append("circle")
+			.attr("width", width)
+			.attr("height", height)
+			.datum({
+				x: Configuration.sliders.margin.left,
+				y: sliderBottom
+			}).call(drag()
+			.on("drag", lowerDragged))
 			.attr("id", "slider-circle-top")
 			.attr("r", radius)
 			.attr("cy", function(d) { return d.y; })
 			.attr("cx", function(d) { return d.x; })
 			.style("fill", "red")
-			.style("cursor", "ns-resize")
-			.call(drag);
+			.style("cursor", "ns-resize");
 
-		upperCircle = svg2.append("circle")
+		upperCircle = this.innerWrap.append("circle")
+			.attr("width", width)
+			.attr("height", height)
+			.datum({
+				x: Configuration.sliders.margin.left,
+				y: sliderTop
+			}).call(drag()
+			.on("drag", upperDragged))
 			.attr("id", "slider-circle-bottom")
 			.attr("r", radius)
 			.attr("cy", function(d) { return d.y; })
 			.attr("cx", function(d) { return d.x; })
 			.style("fill", "red")
-			.style("cursor", "ns-resize")
-			.call(drag);
+			.style("cursor", "ns-resize");
 
 		// Keep chart data elements within the boundaires of the chart
 		const svg = this.innerWrap.append("clipPath")
