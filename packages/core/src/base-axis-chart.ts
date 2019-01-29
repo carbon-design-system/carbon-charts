@@ -69,7 +69,7 @@ export class BaseAxisChart extends BaseChart {
 			this.drawXGrid();
 			this.drawYGrid();
 
-			// this.createXSlider();
+			// this.createYSlider();
 			this.createYSlider();
 
 			this.addOrUpdateLegend();
@@ -146,7 +146,7 @@ export class BaseAxisChart extends BaseChart {
 		}));
 	}
 
-	createXSlider() {
+/*	createXSlider() {
 		const width = 750;
 		const height = 500;
 		const radius = 7;
@@ -214,7 +214,7 @@ export class BaseAxisChart extends BaseChart {
 			.style("stroke", "black")
 			.style("cursor", "ew-resize")
 			.call(drag);
-	}
+	}*/
 
 	createYSlider() {
 		const margins = Configuration.charts.margin;
