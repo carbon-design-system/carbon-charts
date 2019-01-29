@@ -346,12 +346,12 @@ export class BaseAxisChart extends BaseChart {
 
 		// Insert the slider element into the action bar. A slider consists of a line and a two circles
 		line = this.innerWrap.append("line")
-			.attr("id", "slider-line")
+			.attr("id", `${this.chartContainerID}-slider-line`)
 			.attr("x1", Configuration.sliders.margin.left)
 			.attr("x2", Configuration.sliders.margin.left)
 			.attr("y1", sliderTop + radius)
 			.attr("y2", sliderBottom - radius)
-			.style("stroke", "red")
+			.style("stroke", Configuration.sliders.colour)
 			.style("opacity", Configuration.sliders.line.opacity)
 			.style("stroke-linecap", "round")
 			.style("stroke-width", radius)
@@ -371,11 +371,11 @@ export class BaseAxisChart extends BaseChart {
 				y: sliderBottom
 			}).call(drag()
 			.on("drag", lowerDragged))
-			.attr("id", "slider-circle-top")
+			.attr("id", `${this.chartContainerID}-slider-circle-top`)
 			.attr("r", radius)
-			.attr("cy", function(d) { return d.y; })
-			.attr("cx", function(d) { return d.x; })
-			.style("fill", "red")
+			.attr("cy", d => d.y)
+			.attr("cx", d => d.x)
+			.style("fill", Configuration.sliders.colour)
 			.style("cursor", "ns-resize");
 
 		upperCircle = this.innerWrap.append("circle")
@@ -386,11 +386,11 @@ export class BaseAxisChart extends BaseChart {
 				y: sliderTop
 			}).call(drag()
 			.on("drag", upperDragged))
-			.attr("id", "slider-circle-bottom")
+			.attr("id", `${this.chartContainerID}-slider-circle-bottom`)
 			.attr("r", radius)
-			.attr("cy", function(d) { return d.y; })
-			.attr("cx", function(d) { return d.x; })
-			.style("fill", "red")
+			.attr("cy", d => d.y)
+			.attr("cx", d => d.x)
+			.style("fill", Configuration.sliders.colour)
 			.style("cursor", "ns-resize");
 
 		// Keep chart data elements within the boundaires of the chart
