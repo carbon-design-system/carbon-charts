@@ -219,18 +219,18 @@ export class BaseAxisChart extends BaseChart {
 	createYSlider() {
 		const margins = Configuration.charts.margin;
 		const width = this.getChartSize().width + margins.left;
-		const height = this.y(0)*2;
+		const height = this.y(0) * 2;
 		const radius = Configuration.sliders.handles.radius;
-		const diameter = 2*radius;
+		const diameter = 2 * radius;
 
-		//The max height of the upper handle
+		// The max height of the upper handle
 		const maxHeight = margins.top;
 
-		//The minimum height of the lower handle
+		// The minimum height of the lower handle
 		const minHeight = height - margins.bottom;
 
 		const dragAreaLength = minHeight - maxHeight;
-		
+
 		const clipboxWidth = this.getChartSize().width;
 		const clipBoxHeight = this.getChartSize().height - margins.top - margins.bottom;
 
@@ -249,11 +249,11 @@ export class BaseAxisChart extends BaseChart {
 			let y = event.y;
 
 			// y must be between the two ends of the line.
-			if (y < maxHeight){
-				y = maxHeight
+			if (y < maxHeight) {
+				y = maxHeight;
 			} else {
-				if (y > minHeight){
-					y = minHeight
+				if (y > minHeight) {
+					y = minHeight;
 				}
 			}
 
@@ -292,7 +292,7 @@ export class BaseAxisChart extends BaseChart {
 			if (y < maxHeight) {
 				y = maxHeight;
 			} else {
-				if (y > sliderBottom - diameter){
+				if (y > sliderBottom - diameter) {
 					y = sliderBottom - diameter;
 				}
 			}
@@ -322,7 +322,7 @@ export class BaseAxisChart extends BaseChart {
 			if (y < (sliderTop + diameter)) {
 				y = (sliderTop + diameter);
 			} else {
-				if (y > minHeight){
+				if (y > minHeight) {
 					y = minHeight;
 				}
 			}

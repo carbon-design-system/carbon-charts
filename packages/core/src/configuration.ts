@@ -52,6 +52,7 @@ export const options = {
 };
 
 export const sliders = {
+	colour: "red",
 	margin: {
 		left: 15
 	},
@@ -61,7 +62,7 @@ export const sliders = {
 	line: {
 		opacity: 0.5
 	}
-}
+};
 
 export const charts = {
 	margin: {
