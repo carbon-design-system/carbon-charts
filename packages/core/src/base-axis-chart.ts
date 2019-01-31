@@ -492,7 +492,7 @@ export class BaseAxisChart extends BaseChart {
 		// Applies to thresholds getting removed
 		thresholdRects.exit()
 			.transition(t)
-			.style("opacity", 0)
+			.attr("opacity", 0)
 			.remove();
 	}
 

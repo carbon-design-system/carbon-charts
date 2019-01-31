@@ -174,13 +174,13 @@ export class BarChart extends BaseAxisChart {
 		// Remove bar groups are no longer needed
 		g.exit()
 			.transition(this.getDefaultTransition())
-			.style("opacity", 0)
+			.attr("opacity", 0)
 			.remove();
 
 		// Remove bars that are no longer needed
 		rect.exit()
 			.transition(this.getDefaultTransition())
-			.style("opacity", 0)
+			.attr("opacity", 0)
 			.remove();
 
 		// Add slice hover actions, and clear any slice borders present
@@ -213,6 +213,7 @@ export class BarChart extends BaseAxisChart {
 			.transition(animate ? this.getFillTransition() : this.getInstantTransition())
 			// TODO
 			// .ease(d3.easeCircle)
+			.attr("opacity", 1)
 			.attr("x", d => this.x1(d.datasetLabel))
 			.attr("y", d => this.y(Math.max(0, d.value)))
 			.attr("width", this.x1.bandwidth())

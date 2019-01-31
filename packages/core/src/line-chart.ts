@@ -118,9 +118,9 @@ export class LineChart extends BaseAxisChart {
 		addedLineGroups.append("path")
 			.attr("stroke", d => this.colorScale[d.label]())
 			.datum(d => d.data)
-			.style("opacity", 0)
+			.attr("opacity", 0)
 			.transition(this.getDefaultTransition())
-			.style("opacity", 1)
+			.attr("opacity", 1)
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);
 
@@ -133,15 +133,15 @@ export class LineChart extends BaseAxisChart {
 				.attr("cx", (d, i) => this.x(d.label) + this.x.step() / 2)
 				.attr("cy", (d: any) => this.y(d.value))
 				.attr("r", 4)
-				.style("opacity", 0)
+				.attr("opacity", 0)
 				.transition(this.getDefaultTransition())
-				.style("opacity", 1)
+				.attr("opacity", 1)
 				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
 
 		// Remove lines that are no longer needed
 		gLines.exit()
 			.transition(this.getDefaultTransition())
-			.style("opacity", 0)
+			.attr("opacity", 0)
 			.remove();
 
 		// Add slice hover actions, and clear any slice borders present
@@ -173,6 +173,7 @@ export class LineChart extends BaseAxisChart {
 				return parentDatum.data;
 			})
 			.transition(transitionToUse)
+			.attr("opacity", 1)
 			.attr("stroke", function(d) {
 				const parentDatum = select(this.parentNode).datum() as any;
 

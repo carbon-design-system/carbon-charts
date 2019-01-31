@@ -170,14 +170,14 @@ export class PieChart extends BaseChart {
 			.attr("d", this.arc)
 			.transition()
 			.duration(0)
-			.style("opacity", 0)
+			.attr("opacity", 0)
 			.attr("stroke", d => this.colorScale[this.displayData.datasets[0].label](d.data.label))
 			.attr("stroke-width", Configuration.pie.default.strokeWidth)
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.transition()
 			.duration(Configuration.transitions.default.duration)
 			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
-			.style("opacity", 1)
+			.attr("opacity", 1)
 			.attrTween("d", function (a) {
 				return arcTween.bind(this)(a, self.arc);
 			});
@@ -187,19 +187,19 @@ export class PieChart extends BaseChart {
 			.attr("d", this.arc)
 			.transition()
 			.duration(Configuration.transitions.default.duration)
-			.style("opacity", 0)
+			.attr("opacity", 0)
 			.remove();
 
 		// Fade out all text labels
 		this.innerWrap.selectAll("text.chart-label")
 			.transition()
 			.duration(Configuration.transitions.default.duration / 2)
-			.style("opacity", 0)
+			.attr("opacity", 0)
 			.on("end", function(d) {
 				select(this)
 					.transition()
 					.duration(Configuration.transitions.default.duration / 2)
-					.style("opacity", 1);
+					.attr("opacity", 1);
 			});
 
 		// Move text labels to their new location, and fade them in again
@@ -216,10 +216,10 @@ export class PieChart extends BaseChart {
 				.style("text-anchor", "middle")
 				.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
 				.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); })
-				.style("opacity", 0)
+				.attr("opacity", 0)
 				.transition()
 				.duration(Configuration.transitions.default.duration / 2)
-				.style("opacity", 1);
+				.attr("opacity", 1);
 
 			text
 				.style("text-anchor", "middle")
@@ -227,7 +227,7 @@ export class PieChart extends BaseChart {
 				.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); })
 				.transition()
 				.duration(Configuration.transitions.default.duration / 2)
-				.style("opacity", 1);
+				.attr("opacity", 1);
 
 			text
 				.exit()
@@ -279,10 +279,10 @@ export class PieChart extends BaseChart {
 			tooltip.style("left", mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
 		}
 
-		tooltip.style("opacity", 0)
+		tooltip.attr("opacity", 0)
 			.transition()
 			.duration(Configuration.tooltip.fadeIn.duration)
-			.style("opacity", 1);
+			.attr("opacity", 1);
 
 		this.addTooltipEventListeners(tooltip);
 	}
