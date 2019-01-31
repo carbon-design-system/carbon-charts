@@ -128,9 +128,9 @@ export class StackedBarChart extends BaseAxisChart {
 				.attr("height", d => this.y(d[0]) - this.y(d[1]))
 				.attr("width", d => this.x.bandwidth())
 				.attr("fill", d => this.getFillScale()[d.datasetLabel](d.data.label))
-				.attr("opacity", 0)
+				.style("opacity", 0)
 				.transition(this.getFillTransition())
-				.attr("opacity", 1)
+				.style("opacity", 1)
 				.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.data.label) : null)
 				.attr("stroke-width", Configuration.bars.default.strokeWidth)
 				.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
@@ -147,12 +147,12 @@ export class StackedBarChart extends BaseAxisChart {
 
 		g.exit()
 			.transition(this.getDefaultTransition())
-			.attr("opacity", 0)
+			.style("opacity", 0)
 			.remove();
 
 		rect.exit()
 			.transition(this.getDefaultTransition())
-			.attr("opacity", 0)
+			.style("opacity", 0)
 			.remove();
 
 		// Add slice hover actions, and clear any slice borders present
@@ -198,7 +198,7 @@ export class StackedBarChart extends BaseAxisChart {
 		// Update existing bars
 		rect
 			.transition(animate ? this.getFillTransition() : this.getInstantTransition())
-			.attr("opacity", 1)
+			.style("opacity", 1)
 			.attr("x", d => this.x(d.data.label))
 			.attr("y", d => this.y(d[1]))
 			.attr("height", d => this.y(d[0]) - this.y(d[1]))

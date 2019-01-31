@@ -801,10 +801,10 @@ export class BaseChart {
 		this.resetOpacity();
 
 		const tooltipRef = select(this.holder).select("div.chart-tooltip");
-		tooltipRef.attr("opacity", 1)
+		tooltipRef.style("opacity", 1)
 			.transition()
 			.duration(Configuration.tooltip.fadeOut.duration)
-			.attr("opacity", 0)
+			.style("opacity", 0)
 			.remove();
 
 		this.removeTooltipEventListeners();
@@ -890,10 +890,10 @@ export class BaseChart {
 			tooltip.style("left", mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
 		}
 
-		tooltip.attr("opacity", 0)
+		tooltip.style("opacity", 0)
 			.transition()
 			.duration(Configuration.tooltip.fadeIn.duration)
-			.attr("opacity", 1);
+			.style("opacity", 1);
 
 		this.addTooltipEventListeners(tooltip);
 	}

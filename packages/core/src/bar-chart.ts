@@ -148,10 +148,10 @@ export class BarChart extends BaseAxisChart {
 			.attr("y", d => this.y(Math.max(0, d.value)))
 			.attr("width", this.x1.bandwidth())
 			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
-			.attr("opacity", 0)
+			.style("opacity", 0)
 			.transition(this.getFillTransition())
 			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
-			.attr("opacity", 1)
+			.style("opacity", 1)
 			.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
 			.attr("stroke-width", Configuration.bars.default.strokeWidth);
 
@@ -164,23 +164,23 @@ export class BarChart extends BaseAxisChart {
 			.attr("y", d => this.y(Math.max(0, d.value)))
 			.attr("width", this.x1.bandwidth())
 			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
-			.attr("opacity", 0)
+			.style("opacity", 0)
 			.transition(this.getFillTransition())
 			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
-			.attr("opacity", 1)
+			.style("opacity", 1)
 			.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
 			.attr("stroke-width", Configuration.bars.default.strokeWidth);
 
 		// Remove bar groups are no longer needed
 		g.exit()
 			.transition(this.getDefaultTransition())
-			.attr("opacity", 0)
+			.style("opacity", 0)
 			.remove();
 
 		// Remove bars that are no longer needed
 		rect.exit()
 			.transition(this.getDefaultTransition())
-			.attr("opacity", 0)
+			.style("opacity", 0)
 			.remove();
 
 		// Add slice hover actions, and clear any slice borders present
@@ -213,7 +213,7 @@ export class BarChart extends BaseAxisChart {
 			.transition(animate ? this.getFillTransition() : this.getInstantTransition())
 			// TODO
 			// .ease(d3.easeCircle)
-			.attr("opacity", 1)
+			.style("opacity", 1)
 			.attr("x", d => this.x1(d.datasetLabel))
 			.attr("y", d => this.y(Math.max(0, d.value)))
 			.attr("width", this.x1.bandwidth())
