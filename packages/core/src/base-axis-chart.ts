@@ -245,9 +245,6 @@ export class BaseAxisChart extends BaseChart {
 
 		const dragSlider = d => {
 
-			//let newTopHandleLocation: any;
-			//let newBottomHandleLocation: any;
-
 			// Get the cursor's y location.
 			let y = event.y;
 
@@ -260,13 +257,6 @@ export class BaseAxisChart extends BaseChart {
 				}
 			}
 
-			/*if (y > ((sliderTop - sliderBottom) / 2)){
-				newTopHandleLocation++;
-				newTopHandleLocation++;
-			} else if (y > ((sliderTop - sliderBottom) / 2)){
-				newTopHandleLocation--;
-				newBottomHandleLocation--;
-			}*/
 			const newTopHandleLocation = y + ((sliderTop - sliderBottom) / 2);
 			const newBottomHandleLocation = y - ((sliderTop - sliderBottom) / 2);
 
@@ -347,7 +337,7 @@ export class BaseAxisChart extends BaseChart {
 			// It makes the drag.origin function yield the correct value.
 			// Set lower handle position
 			d.y = y;
-			
+
 			// Update axis range
 			this.lowerScaleY = (y - maxHeight) / dragAreaLength;
 
