@@ -510,7 +510,8 @@ export class BaseChart {
 			.attr("class", "legend-btn active");
 
 		legendEnter.append("div")
-			.attr("class", "legend-circle");
+			.attr("class", "legend-circle")
+			.call(this.makeAccessible, "legend-item");
 
 		legendEnter.append("text");
 
@@ -543,7 +544,8 @@ export class BaseChart {
 			const containerWidth = this.container.node().clientWidth;
 			const legendWidth = containerWidth - svgWidth;
 			this.container.select(".legend").classed("right-legend", true)
-				.style("width", legendWidth + "px");
+				.style("width", legendWidth + "px")
+				.call(this.makeAccessible, "legend-container");
 		} else {
 			this.container.select(".legend-wrapper").style("height", Configuration.legend.wrapperHeight);
 		}
@@ -957,10 +959,22 @@ export class BaseChart {
 	// ================================================================================
 	// Makes chart data components more screen reader friendly
 	// ================================================================================
-	makeAccessible (element?: any, label?: any) {
+	makeAccessible (element?: any, type?: any, dataList?: any) {
+		//console.log(this.svg.select("id"))
 		// Make chart data components tabbable
 		element.attr("tabindex", 0)
 		// Aria label contains the x value, y value, and dataset for the data element
-		.attr("aria-label", (d) => `Label: ${d.label}, Value: ${d.value}, belongs to ${d.datasetLabel}`);
+
+		if (type == "axis"){
+			element.attr("aria-label", (d) => `Label: ${d.label}, Value: ${d.value}, belongs to ${d.datasetLabel}`)
+		} else if (type == "slice"){
+			element.attr("aria-label", (d) => `Label: ${d.data.label}, Value: ${d.value}, percentage is ${Tools.convertValueToPercentage(d.data.value, dataList)} percent`)
+		} else if (type == "legend-item") {
+			element.attr("aria-label", (d) => `Legend Item: ${d.key}, Status: ${d.value}`);
+		} else if (type == "chart-container") {
+			//TODO aria-labelledby title
+		} else if (type == "legend-container") {
+			element.attr("Chart legend - click items to add or remove them from the chart");
+		}
 	}
 }
