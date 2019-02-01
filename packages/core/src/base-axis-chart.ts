@@ -243,6 +243,17 @@ export class BaseAxisChart extends BaseChart {
 		let upperCircle: any;
 		let line: any;
 
+		let cursorLocationOnSlider: any;
+
+		const setCursorLocation = d => {
+			console.log("event: " + event.y + " top: " + sliderTop + " bottom: " + sliderBottom + "  " + cursorLocationOnSlider)
+			let cursor = (Math.abs(event.y - 359) / Math.abs(359 - 672))
+			let sliderLocationOnAxis = 20 + Math.abs(maxHeight - minHeight)*cursor
+			console.log(cursor)
+			console.log(sliderLocationOnAxis + "  top handle: " + sliderTop + " " + Math.abs(sliderTop - sliderLocationOnAxis)/Math.abs(sliderTop-sliderBottom))
+			cursorLocationOnSlider = Math.abs(sliderTop - sliderLocationOnAxis)/Math.abs(sliderTop-sliderBottom);
+		}
+
 		const dragSlider = d => {
 
 			// Get the cursor's y location.
@@ -257,8 +268,14 @@ export class BaseAxisChart extends BaseChart {
 				}
 			}
 
-			const newTopHandleLocation = y + ((sliderTop - sliderBottom) / 2);
-			const newBottomHandleLocation = y - ((sliderTop - sliderBottom) / 2);
+			
+
+			//const cursorLocationOnSlider = Math.abs(y - sliderTop) / Math.abs(sliderTop - sliderBottom);
+
+			//console.log(cursorLocationOnSlider)
+
+			const newTopHandleLocation = y + ((sliderTop - sliderBottom) * cursorLocationOnSlider);
+			const newBottomHandleLocation = y - ((sliderTop - sliderBottom) * (1 - cursorLocationOnSlider));
 
 			// Move the slider
 			if (newTopHandleLocation + radius > maxHeight && newBottomHandleLocation + radius < minHeight) {
@@ -363,6 +380,7 @@ export class BaseAxisChart extends BaseChart {
 			.style("stroke-linecap", "round")
 			.style("stroke-width", radius)
 			.style("cursor", "grab")
+			.on("mousedown", setCursorLocation)
 			.datum({
 				y1: sliderTop,
 				y2: sliderBottom
