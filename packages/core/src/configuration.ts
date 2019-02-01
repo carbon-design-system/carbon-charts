@@ -113,6 +113,8 @@ export const charts = {
 };
 
 export const scales = {
+	maxYAxisClickEventValue: 672,
+	minYAxisClickEventValue: 359,
 	maxWidthOfAxisLabel: 175,
 	maxNumOfAxisLabelLetters: 60,
 	yAxisAngle: -90,
