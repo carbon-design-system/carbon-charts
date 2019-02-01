@@ -960,20 +960,19 @@ export class BaseChart {
 	// Makes chart data components more screen reader friendly
 	// ================================================================================
 	makeAccessible (element?: any, type?: any, dataList?: any) {
-		//console.log(this.svg.select("id"))
 		// Make chart data components tabbable
-		element.attr("tabindex", 0)
+		element.attr("tabindex", 0);
 		// Aria label contains the x value, y value, and dataset for the data element
-
-		if (type == "axis"){
-			element.attr("aria-label", (d) => `Label: ${d.label}, Value: ${d.value}, belongs to ${d.datasetLabel}`)
-		} else if (type == "slice"){
-			element.attr("aria-label", (d) => `Label: ${d.data.label}, Value: ${d.value}, percentage is ${Tools.convertValueToPercentage(d.data.value, dataList)} percent`)
-		} else if (type == "legend-item") {
-			element.attr("aria-label", (d) => `Legend Item: ${d.key}, Status: ${d.value}`);
-		} else if (type == "chart-container") {
-			//TODO aria-labelledby title
-		} else if (type == "legend-container") {
+		if (type === "axis") {
+			element.attr("aria-label", (d) => `Label: ${d.label}, Value: ${d.value}, belongs to ${d.datasetLabel}`);
+		} else if (type === "slice") {
+			element.attr("aria-label", (d) => `Label: ${d.data.label}, Value: ${d.value},
+			percentage is ${Tools.convertValueToPercentage(d.data.value, dataList)} percent`);
+		} else if (type === "legend-item") {
+			element.attr("aria-label", (d) => `Legend Item: ${d.key}, Status: ${d.value ? "enabled" : "disabled"}`);
+		} else if (type === "chart-container") {
+		// TODO aria-labelledby title
+		} else if (type === "legend-container") {
 			element.attr("Chart legend - click items to add or remove them from the chart");
 		}
 	}
