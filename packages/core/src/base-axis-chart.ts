@@ -245,6 +245,9 @@ export class BaseAxisChart extends BaseChart {
 
 		const dragSlider = d => {
 
+			//let newTopHandleLocation: any;
+			//let newBottomHandleLocation: any;
+
 			// Get the cursor's y location.
 			let y = event.y;
 
@@ -257,6 +260,13 @@ export class BaseAxisChart extends BaseChart {
 				}
 			}
 
+			/*if (y > ((sliderTop - sliderBottom) / 2)){
+				newTopHandleLocation++;
+				newTopHandleLocation++;
+			} else if (y > ((sliderTop - sliderBottom) / 2)){
+				newTopHandleLocation--;
+				newBottomHandleLocation--;
+			}*/
 			const newTopHandleLocation = y + ((sliderTop - sliderBottom) / 2);
 			const newBottomHandleLocation = y - ((sliderTop - sliderBottom) / 2);
 
@@ -267,17 +277,22 @@ export class BaseAxisChart extends BaseChart {
 				this.upperScaleY = 1 - (newTopHandleLocation - maxHeight) / dragAreaLength;
 				this.lowerScaleY = (newBottomHandleLocation - maxHeight) / dragAreaLength;
 
+				sliderTop = newTopHandleLocation;
+				sliderBottom = newBottomHandleLocation;
+
 				// This assignment is necessary for multiple drag gestures.
 				// It makes the drag.origin function yield the correct value.
 				// Set slider top/bottom attributes
-				d.y1 = y;
-				d.y2 = y;
+				d.y1 = sliderTop;
+				d.y2 = sliderBottom;
 
-				line.attr("y1", y + ((sliderTop - sliderBottom) / 2) + radius);
-				upperCircle.attr("cy", y + ((sliderTop - sliderBottom) / 2));
+				line.attr("y1", sliderTop + radius);
+				upperCircle.attr("cy", sliderTop);
+				upperCircle.datum({"y": sliderTop});
 
-				line.attr("y2", y - ((sliderTop - sliderBottom) / 2) - radius);
-				lowerCircle.attr("cy", y - ((sliderTop - sliderBottom) / 2));
+				line.attr("y2", sliderBottom - radius);
+				lowerCircle.attr("cy", sliderBottom);
+				lowerCircle.datum({"y": sliderBottom});
 			}
 
 			this.update();
@@ -302,13 +317,14 @@ export class BaseAxisChart extends BaseChart {
 			// Set upper handle position
 			d.y = y;
 
-			// Update the handle location on the slider
-			upperCircle.attr("cy", y);
-
 			// Update axis range
 			this.upperScaleY = 1 - ((y - maxHeight) / dragAreaLength);
 			sliderTop = y;
+
+			// Update the handle location on the slider
+			upperCircle.attr("cy", sliderTop);
 			line.attr("y1", sliderTop + radius);
+			line.datum({"y1": sliderTop + radius});
 
 			this.update();
 		};
@@ -331,15 +347,16 @@ export class BaseAxisChart extends BaseChart {
 			// It makes the drag.origin function yield the correct value.
 			// Set lower handle position
 			d.y = y;
-
-			// Update the circle location on the slider
-			lowerCircle.attr("cy", y);
-
+			
 			// Update axis range
 			this.lowerScaleY = (y - maxHeight) / dragAreaLength;
 
 			sliderBottom = y;
+
+			// Update the circle location on the slider
+			lowerCircle.attr("cy", sliderBottom);
 			line.attr("y2", sliderBottom - radius);
+			line.datum({"y2": sliderBottom - radius});
 
 			this.update();
 		};
