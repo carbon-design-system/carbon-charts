@@ -205,7 +205,8 @@ export class BarChart extends BaseAxisChart {
 
 		if (g) {
 			g.transition(animate ? this.getDefaultTransition() : this.getInstantTransition())
-				.attr("transform", d => `translate(${this.x(d)}, 0)`);
+				.attr("transform", d => `translate(${this.x(d)}, 0)`)
+				.style("opacity", 1);
 		}
 
 		// Update existing bars

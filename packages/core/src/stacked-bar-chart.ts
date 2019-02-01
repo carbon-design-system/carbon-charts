@@ -110,6 +110,9 @@ export class StackedBarChart extends BaseAxisChart {
 		const stackDataArray = this.getStackData();
 		const stackKeys = this.displayData.datasets.map(dataset => dataset.label);
 
+		this.innerWrap.selectAll(".removed")
+			.remove();
+
 		const g = this.innerWrap.selectAll("g.bars-wrapper")
 			.selectAll("g")
 			.data(stack().keys(stackKeys)(stackDataArray));
@@ -146,11 +149,13 @@ export class StackedBarChart extends BaseAxisChart {
 		addRect(rect);
 
 		g.exit()
+			.classed("removed", true)
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
 
 		rect.exit()
+			.classed("removed", true)
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();

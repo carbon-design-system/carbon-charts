@@ -159,6 +159,7 @@ export class PieChart extends BaseChart {
 			.attr("stroke-width", Configuration.pie.default.strokeWidth)
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.transition()
+			.style("opacity", 1)
 			.duration(Configuration.transitions.default.duration)
 			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
 			.attrTween("d", function (a) {

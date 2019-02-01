@@ -104,6 +104,9 @@ export class LineChart extends BaseAxisChart {
 		const width = chartSize.width - margins.left - margins.right;
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
+		this.innerWrap.selectAll(".removed")
+			.remove();
+
 		// Apply new data to the lines
 		const gLines = this.innerWrap.selectAll("g.lines")
 			.data(newData.datasets);
@@ -140,6 +143,7 @@ export class LineChart extends BaseAxisChart {
 
 		// Remove lines that are no longer needed
 		gLines.exit()
+			.classed("removed", true)
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
