@@ -243,16 +243,18 @@ export class BaseAxisChart extends BaseChart {
 		let upperCircle: any;
 		let line: any;
 
+		// Represents the grab point location on the slider
 		let cursorLocationOnSlider: any;
 
-		const setCursorLocation = d => {
-			console.log("event: " + event.y + " top: " + sliderTop + " bottom: " + sliderBottom + "  " + cursorLocationOnSlider)
-			let cursor = (Math.abs(event.y - 359) / Math.abs(359 - 672))
-			let sliderLocationOnAxis = 20 + Math.abs(maxHeight - minHeight)*cursor
-			console.log(cursor)
-			console.log(sliderLocationOnAxis + "  top handle: " + sliderTop + " " + Math.abs(sliderTop - sliderLocationOnAxis)/Math.abs(sliderTop-sliderBottom))
-			cursorLocationOnSlider = Math.abs(sliderTop - sliderLocationOnAxis)/Math.abs(sliderTop-sliderBottom);
-		}
+		// When a mousedown action is detected on the slider, calculate the cursor's relative position on the slider
+		// to be used as a grab point for dragging
+		const setGrabPoint = d => {
+			const maxClickRange = Math.abs(Configuration.scales.maxYAxisClickEventValue - Configuration.scales.minYAxisClickEventValue);
+			const cursorRelativePosition = (Math.abs(event.y - Configuration.scales.minYAxisClickEventValue) / maxClickRange);
+			const sliderRelativePosition = maxHeight + Math.abs(maxHeight - minHeight) * cursorRelativePosition;
+			const sliderLength = Math.abs(sliderTop - sliderBottom);
+			cursorLocationOnSlider = Math.abs(sliderTop - sliderRelativePosition) / sliderLength;
+		};
 
 		const dragSlider = d => {
 
@@ -267,12 +269,6 @@ export class BaseAxisChart extends BaseChart {
 					y = minHeight;
 				}
 			}
-
-			
-
-			//const cursorLocationOnSlider = Math.abs(y - sliderTop) / Math.abs(sliderTop - sliderBottom);
-
-			//console.log(cursorLocationOnSlider)
 
 			const newTopHandleLocation = y + ((sliderTop - sliderBottom) * cursorLocationOnSlider);
 			const newBottomHandleLocation = y - ((sliderTop - sliderBottom) * (1 - cursorLocationOnSlider));
@@ -380,7 +376,7 @@ export class BaseAxisChart extends BaseChart {
 			.style("stroke-linecap", "round")
 			.style("stroke-width", radius)
 			.style("cursor", "grab")
-			.on("mousedown", setCursorLocation)
+			.on("mousedown", setGrabPoint)
 			.datum({
 				y1: sliderTop,
 				y2: sliderBottom
