@@ -395,13 +395,11 @@ export class BaseChart {
 			container = parent.append("div");
 			container.attr("chart-id", chartId)
 				// Alert user when the contents of the chart container changes
-				.attr("role", "alert")
-				.classed("chart-wrapper", true);
+				.classed("chart-wrapper", true)
+				.call(this.makeAccessible, "chart-container");
 			if (container.select(".legend-wrapper").nodes().length === 0) {
 				const legendWrapper = container.append("div")
-					.attr("class", "legend-wrapper")
-					.attr("role", "region")
-					.attr("aria-label", `Chart ${chartId} Legend`);
+					.attr("class", "legend-wrapper");
 
 				legendWrapper.append("ul")
 					.attr("class", "legend");
@@ -544,7 +542,8 @@ export class BaseChart {
 			const containerWidth = this.container.node().clientWidth;
 			const legendWidth = containerWidth - svgWidth;
 			this.container.select(".legend").classed("right-legend", true)
-				.style("width", legendWidth + "px")
+				.style("width", legendWidth + "px");
+			this.container.select(".right-legend")
 				.call(this.makeAccessible, "legend-container");
 		} else {
 			this.container.select(".legend-wrapper").style("height", Configuration.legend.wrapperHeight);
@@ -969,11 +968,14 @@ export class BaseChart {
 			element.attr("aria-label", (d) => `Label: ${d.data.label}, Value: ${d.value},
 			percentage is ${Tools.convertValueToPercentage(d.data.value, dataList)} percent`);
 		} else if (type === "legend-item") {
-			element.attr("aria-label", (d) => `Legend Item: ${d.key}, Status: ${d.value ? "enabled" : "disabled"}`);
+			element.attr("aria-label", (d) => `Legend Item: ${d.key}, Status: ${d.value ? "enabled" : "disabled"},
+			Click to ${d.value ? "disable" : "enable"}`);
 		} else if (type === "chart-container") {
-		// TODO aria-labelledby title
+			// TODO aria-labelledby title
+			element.attr("aria-label", "New chart")
+			.attr("role", "alert");
 		} else if (type === "legend-container") {
-			element.attr("Chart legend - click items to add or remove them from the chart");
+			element.attr("aria-label", "Chart legend - click items to add or remove them from the chart");
 		}
 	}
 }
