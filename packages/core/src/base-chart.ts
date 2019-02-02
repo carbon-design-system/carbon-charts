@@ -498,7 +498,9 @@ export class BaseChart {
 		}
 
 		const legendItemsArray = this.getLegendItemArray();
+		// const legendItems = Configuration.charts.rtlSupport ? this.container.select(".legend-rtl") : this.container.select(".legend") ;
 		const legendItems = this.container.select(".legend")
+			.attr("font-size", Configuration.legend.fontSize)
 			.attr("font-size", Configuration.legend.fontSize)
 			.selectAll("li.legend-btn")
 			.data(legendItemsArray, d => d.key);
@@ -545,13 +547,25 @@ export class BaseChart {
 			const legendWidth = containerWidth - svgWidth;
 			this.container.select(".legend").classed("right-legend", true)
 				.style("width", legendWidth + "px");
+		} else if (Configuration.charts.rtlSupport) {
+			this.container.selectAll(".expand-btn").remove();
+			this.container.select(".legend-wrapper").style("height", 0);
+			const containerWidth = this.container.node().clientWidth;
+			const legendWidth = containerWidth - svgWidth;
+			this.container.select(".legend").classed("left-legend", true)
+				.style("width", legendWidth + "px");
 		} else {
 			this.container.select(".legend-wrapper").style("height", Configuration.legend.wrapperHeight);
 		}
 
 		if (this.hasLegendExpandBtn()) {
-			this.container.select(".legend").classed("right-legend", false)
-				.style("width", null);
+			if (Configuration.charts.rtlSupport) {
+				this.container.select(".legend").classed("left-legend", false);
+			}
+			else {
+				this.container.select(".legend").classed("right-legend", false);
+			}
+			this.container.style("width", null);
 			const btns = this.container.selectAll(".legend-btn").nodes();
 			let btnsWidth = 0;
 			btns.forEach(btn => {
@@ -605,10 +619,20 @@ export class BaseChart {
 
 	isLegendOnRight() {
 		return (
-			this.container.node().clientWidth > Configuration.charts.widthBreak &&
-				this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight
+			!Configuration.charts.rtlSupport &&
+				this.container.node().clientWidth > Configuration.charts.widthBreak &&
+					this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight
 
 			// && this.getLegendItems().length > Configuration.legend.countBreak
+		);
+	}
+
+	isLegendOnLeft(){
+		return (
+			Configuration.charts.rtlSupport &&
+				this.container.node().clientWidth > Configuration.charts.widthBreak &&
+					this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight	
+
 		);
 	}
 

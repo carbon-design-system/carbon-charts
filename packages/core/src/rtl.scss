@@ -1,0 +1,138 @@
+$gray_60: #595859;
+
+$default_transition: all .1s ease-out;
+
+@mixin fonts() {
+	font-family: "IBM Plex Sans", Arial, sans-serif;
+}
+
+div.chart-holder {
+	position: relative;
+}
+
+.chart-wrapper {
+	
+	.legend-wrapper {
+		height: 40px;
+		width: 100%;
+	}
+
+	.legend-btn {
+		&.clickable {
+			&:hover {
+				cursor: pointer;
+			}
+
+			.legend-circle {
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+	}
+
+	.legend-rtl {
+		float:left;
+		margin-top: 0;
+		margin-right: 20px;
+		color: #586464;
+		overflow: hidden;
+		padding-left: 0;
+		white-space: nowrap;
+
+
+	}
+
+	.legend-btn-rtl {
+		display: inline-block;
+		line-height: 20px;
+		font-size: 12px;
+		margin-bottom: 0;
+
+		.legend-circle {
+			display: inherit;
+			height: 12px;
+			width: 12px;
+			border-radius: 3px;
+			margin: 0 5px 5px 15px;
+			box-sizing: border-box;
+		}
+
+		span {
+			display: inline;
+		}
+
+		text {
+			font-size: 12px;
+			max-width: 100px;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			display: inherit;
+		}
+
+		&.not-allowed {
+			cursor: default;
+
+			.legend-circle:hover {
+				cursor: default;
+				box-shadow: none !important;
+			}
+		}
+	}
+
+	.legend-tooltip {
+		padding: 0;
+		border: none;
+		.legend-tooltip-header {
+			color: white;
+			font-size: 15px;
+			font-weight: 700;
+			padding: 13px 20px;
+			margin: 0;
+		}
+		.legend-btn {
+			display: inline-block;
+			width: 100%;
+		}
+		text {
+			max-width: 145px;
+		}
+		button {
+			position: absolute;
+			top: 7px;
+			right: 10px;
+		}
+		.legend-tooltip-content {
+			padding: 0 7px 15px 7px;
+		}
+	}
+
+	.left-legend {
+		position: relative;
+		float:left;
+		overflow: auto;
+		margin: 0;
+		max-width: 30%;
+		padding-left: 30px;
+		white-space: inherit;
+		text {
+			padding-left: 15px;
+		}
+		.legend-btn {
+			width: 100%;
+			text-indent: -.7em;
+			text {
+				max-width: 90%;
+			}
+		}
+		.legend-circle {
+			margin: 5px;
+		}
+	}
+
+	
+}
+
+
+
