@@ -342,8 +342,8 @@ export class BaseAxisChart extends BaseChart {
 				.attr("transform", function () {
 					if (Configuration.charts.rtlSupport) {
 						return `translate(${chartSize.width}, 0)`;
-					} else { return `translate(0, 0)`;}
-				}) 
+					} else { return `translate(0, 0)`; }
+				})
 				// Being cast to any because d3 does not offer appropriate typings for the .call() function
 				.call(yAxis as any);
 
@@ -358,7 +358,7 @@ export class BaseAxisChart extends BaseChart {
 				.attr("transform", function () {
 					if (Configuration.charts.rtlSupport) {
 						return `translate(${chartSize.width}, 0)`;
-					} else { return `translate(0, 0)`;}
+					} else { return `translate(0, 0)`; }
 				});
 
 			yAxisRef.call(yAxis);
@@ -390,7 +390,7 @@ export class BaseAxisChart extends BaseChart {
 					.attr("transform", function () {
 						if (Configuration.charts.rtlSupport) {
 							return `translate(0, 0)`;
-						} else { return `translate(${chartSize.width}, 0)`;}
+						} else { return `translate(${chartSize.width}, 0)`; }
 					})
 
 					// Being cast to any because d3 does not offer appropriate typings for the .call() function
@@ -398,10 +398,12 @@ export class BaseAxisChart extends BaseChart {
 			} else {
 				this.innerWrap.append("g")
 					.attr("class", "y2 axis yAxes")
-					.attr("transform", function() {
-						if (Configuration.charts.rtlSupport){
-							return 	`translate(0, 0)`;
-						} else { return `translate(${chartSize.width}, 0)`;}
+					.attr("transform", function () {
+						if (Configuration.charts.rtlSupport) {
+							return `translate(0, 0)`;
+						} else {
+							return `translate(${chartSize.width}, 0)`;
+						}
 					})
 					.call(secondaryYAxis);
 			}
