@@ -193,7 +193,8 @@ export class BaseAxisChart extends BaseChart {
 			const chartSize = this.getChartSize();
 			const width = chartSize.width - margins.left - margins.right;
 
-			this.x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
+			this.x = Configuration.charts.rtlSupport ?  scaleBand().rangeRound([width, 0]) : scaleBand().rangeRound([0, width]);
+			this.x.padding(Configuration.scales.x.padding);
 			this.x.domain(this.displayData.labels);
 		}
 	}
@@ -317,18 +318,19 @@ export class BaseAxisChart extends BaseChart {
 		}
 	}
 
+
 	setYAxis(noAnimation?: boolean) {
 		const chartSize = this.getChartSize();
 
 		const { scales } = this.options;
 		const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
-		const yAxis = axisLeft(this.y)
-			.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks)
+		const yAxis = Configuration.charts.rtlSupport ? axisRight(this.y) : axisLeft(this.y);
+		yAxis.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks)
 			.tickSize(0)
 			.tickFormat(scales.y.formatter);
 
-		let yAxisRef = this.svg.select("g.y.axis");
+		let yAxisRef  = this.svg.select("g.y.axis");
 		const horizontalLine = this.svg.select("line.domain");
 
 		this.svg.select("g.x.axis path.domain")
@@ -337,17 +339,27 @@ export class BaseAxisChart extends BaseChart {
 		// If the <g class="y axis"> exists in the chart SVG, just update it
 		if (yAxisRef.nodes().length > 0) {
 			yAxisRef.transition(t)
-				// Casting to any because d3 does not offer appropriate typings for the .call() function
+				.attr("transform", function () {
+					if (Configuration.charts.rtlSupport) {
+						return `translate(${chartSize.width}, 0)`;
+					} else { return `translate(0, 0)`;}
+				}) 
+				// Being cast to any because d3 does not offer appropriate typings for the .call() function
 				.call(yAxis as any);
 
 			horizontalLine.transition(t)
 				.attr("y1", this.y(0))
 				.attr("y2", this.y(0))
 				.attr("x1", 0)
-				.attr("x2", chartSize.width);
+				.attr("x2", Configuration.charts.rtlSupport ? -chartSize.width : chartSize.width);
 		} else {
 			yAxisRef = this.innerWrap.append("g")
-				.attr("class", "y axis yAxes");
+				.attr("class", "y axis yAxes")
+				.attr("transform", function () {
+					if (Configuration.charts.rtlSupport) {
+						return `translate(${chartSize.width}, 0)`;
+					} else { return `translate(0, 0)`;}
+				});
 
 			yAxisRef.call(yAxis);
 
@@ -356,7 +368,7 @@ export class BaseAxisChart extends BaseChart {
 				.attr("y1", this.y(0))
 				.attr("y2", this.y(0))
 				.attr("x1", 0)
-				.attr("x2", chartSize.width)
+				.attr("x2", Configuration.charts.rtlSupport ? -chartSize.width : chartSize.width)
 				.attr("stroke", Configuration.scales.domain.color)
 				.attr("fill", Configuration.scales.domain.color)
 				.attr("stroke-width", Configuration.scales.domain.strokeWidth);
@@ -365,8 +377,9 @@ export class BaseAxisChart extends BaseChart {
 		Tools.moveToFront(horizontalLine);
 
 		if (scales.y2 && scales.y2.ticks.max) {
-			const secondaryYAxis = axisRight(this.y2)
-				.ticks(scales.y2.numberOfTicks || Configuration.scales.y2.numberOfTicks)
+			const secondaryYAxis = Configuration.charts.rtlSupport ? axisLeft(this.y2) : axisRight(this.y2);
+
+			secondaryYAxis.ticks(scales.y2.numberOfTicks || Configuration.scales.y2.numberOfTicks)
 				.tickSize(0)
 				.tickFormat(scales.y2.formatter);
 
@@ -374,13 +387,22 @@ export class BaseAxisChart extends BaseChart {
 			// If the <g class="y axis"> exists in the chart SVG, just update it
 			if (secondaryYAxisRef.nodes().length > 0) {
 				secondaryYAxisRef.transition(t)
-					.attr("transform", `translate(${this.getChartSize().width}, 0)`)
+					.attr("transform", function () {
+						if (Configuration.charts.rtlSupport) {
+							return `translate(0, 0)`;
+						} else { return `translate(${chartSize.width}, 0)`;}
+					})
+
 					// Being cast to any because d3 does not offer appropriate typings for the .call() function
 					.call(secondaryYAxis as any);
 			} else {
 				this.innerWrap.append("g")
 					.attr("class", "y2 axis yAxes")
-					.attr("transform", `translate(${this.getChartSize().width}, 0)`)
+					.attr("transform", function() {
+						if (Configuration.charts.rtlSupport){
+							return 	`translate(0, 0)`;
+						} else { return `translate(${chartSize.width}, 0)`;}
+					})
 					.call(secondaryYAxis);
 			}
 		}

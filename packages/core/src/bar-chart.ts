@@ -50,7 +50,8 @@ export class BarChart extends BaseAxisChart {
 			const chartSize = this.getChartSize();
 			const width = chartSize.width - margins.left - margins.right;
 
-			this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
+			this.x1 = Configuration.charts.rtlSupport ?  scaleBand().rangeRound([width, 0]) : scaleBand().rangeRound([0, width]);
+			this.x1.padding(Configuration.bars.spacing.bars);
 			this.x1.domain(configs.data.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
 		}
 
@@ -65,11 +66,13 @@ export class BarChart extends BaseAxisChart {
 		if (xScale) {
 			this.x = xScale;
 		} else {
-			this.x = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.datasets);
+			this.x = Configuration.charts.rtlSupport ?  scaleBand().rangeRound([width, 0]) : scaleBand().rangeRound([0, width]);
+			this.x.padding(Configuration.bars.spacing.datasets);
 			this.x.domain(this.displayData.labels);
 		}
 
-		this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
+		this.x1 = Configuration.charts.rtlSupport ?  scaleBand().rangeRound([width, 0]) : scaleBand().rangeRound([0, width]);
+		this.x1.padding(Configuration.bars.spacing.bars);
 		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
 	}
 

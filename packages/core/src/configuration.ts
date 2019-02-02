@@ -96,7 +96,8 @@ export const charts = {
 	axisCharts: {
 		minWidth: 100,
 		minHeight: 200
-	}
+	},
+	rtlSupport: true
 };
 
 export const scales = {
