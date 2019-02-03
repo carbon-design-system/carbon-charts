@@ -561,8 +561,7 @@ export class BaseChart {
 		if (this.hasLegendExpandBtn()) {
 			if (Configuration.charts.rtlSupport) {
 				this.container.select(".legend").classed("left-legend", false);
-			}
-			else {
+			} else {
 				this.container.select(".legend").classed("right-legend", false);
 			}
 			this.container.style("width", null);
@@ -627,12 +626,11 @@ export class BaseChart {
 		);
 	}
 
-	isLegendOnLeft(){
+	isLegendOnLeft() {
 		return (
 			Configuration.charts.rtlSupport &&
 				this.container.node().clientWidth > Configuration.charts.widthBreak &&
-					this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight	
-
+					this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight
 		);
 	}
 
