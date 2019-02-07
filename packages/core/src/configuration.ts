@@ -258,6 +258,9 @@ export const tooltip = {
 	},
 	fadeOut: {
 		duration: 250
+	},
+	size: {
+		COMPACT: "compact"
 	}
 };
 
