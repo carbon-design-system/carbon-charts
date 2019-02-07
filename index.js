@@ -247,6 +247,9 @@ var groupedBarOptions = {
             formatter: function (axisValue) { return axisValue * 100 + "%"; }
         }
     },
+    tooltip: {
+        size: "compact"
+    },
     legendClickable: true,
     containerResizable: true
 };
@@ -343,6 +346,9 @@ var stackedBarOptions = {
             yMaxAdjuster: function (yMaxValue) { return yMaxValue * 1.1; },
             stacked: true
         }
+    },
+    tooltip: {
+        size: "compact"
     },
     legendClickable: true,
     containerResizable: true
@@ -2708,6 +2714,14 @@ var BaseChart = /** @class */ (function () {
         // Remove eventlistener to close tooltip when clicked outside
         this.holder.removeEventListener("click", this.eventHandlers.tooltips);
     };
+    BaseChart.prototype.generateTooltipHTML = function (label, value) {
+        if (this.options.tooltip.size === _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].size.COMPACT) {
+            return "<b>" + label + ":</b> " + value + "<br/>";
+        }
+        else {
+            return "\n\t\t\t\t<p class='bignum'>" + label + "</p>\n\t\t\t\t<p>" + value + "</p>\n\t\t\t";
+        }
+    };
     BaseChart.prototype.showTooltip = function (d, clickedElement) {
         // Rest opacity of all elements in the chart
         this.resetOpacity();
@@ -2721,10 +2735,10 @@ var BaseChart = /** @class */ (function () {
         var tooltipHTML = "";
         var formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString("en");
         if (this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS) {
-            tooltipHTML += "\n\t\t\t\t<b>" + d.label + ":</b> " + formattedValue + "<br/>\n\t\t\t";
+            tooltipHTML += this.generateTooltipHTML(d.label, formattedValue);
         }
         else {
-            tooltipHTML += "\n\t\t\t\t<b>" + d.datasetLabel + ":</b> " + formattedValue + "<br/>\n\t\t\t";
+            tooltipHTML += this.generateTooltipHTML(d.datasetLabel, formattedValue);
         }
         tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
         // Draw tooltip arrow in the right direction
@@ -3177,6 +3191,9 @@ var tooltip = {
     },
     fadeOut: {
         duration: 250
+    },
+    size: {
+        COMPACT: "compact"
     }
 };
 var transitions = {
@@ -3921,7 +3938,7 @@ var PieChart = /** @class */ (function (_super) {
             .attr("class", "tooltip chart-tooltip")
             .style("top", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[1] - _configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].magicTop2 + "px");
         var dVal = d.value.toLocaleString();
-        var tooltipHTML = "\n\t\t\t<p class='bignum'>" + dVal + "</p>\n\t\t\t<p>" + d.data.label + "</p>\n\t\t";
+        var tooltipHTML = this.generateTooltipHTML(d.data.label, dVal);
         tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
         if (Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] + tooltip.node().clientWidth > this.holder.clientWidth) {
             tooltip.style("left", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] - tooltip.node().clientWidth - _configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].magicLeft1 + "px");
