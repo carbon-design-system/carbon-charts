@@ -1,7 +1,7 @@
 // D3 Imports
 import { select, mouse } from "d3-selection";
 import { scaleBand } from "d3-scale";
-import { min } from "d3-array";
+import { min, range } from "d3-array";
 
 import { BaseAxisChart } from "./base-axis-chart";
 import { StackedBarChart } from "./stacked-bar-chart";
@@ -66,7 +66,7 @@ export class BarChart extends BaseAxisChart {
 			this.x = xScale;
 		} else {
 			this.x = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.datasets);
-			this.x.domain(this.displayData.labels);
+			this.x.domain(range(this.displayData.labels.length));
 		}
 
 		this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
@@ -90,7 +90,7 @@ export class BarChart extends BaseAxisChart {
 			.attr("width", width);
 
 		gBars.selectAll("g")
-			.data(this.displayData.labels)
+			.data(range(this.displayData.labels.length))
 			.enter()
 				.append("g")
 				.attr("transform", d => `translate(${this.x(d)}, 0)`)
@@ -125,7 +125,7 @@ export class BarChart extends BaseAxisChart {
 		const g = this.innerWrap.select("g.bars")
 			.attr("width", width)
 			.selectAll("g")
-			.data(this.displayData.labels);
+			.data(range(this.displayData.labels.length));
 
 		const rect = g.selectAll("rect.bar")
 			.data((d, index) => this.addLabelsToDataPoints(d, index));

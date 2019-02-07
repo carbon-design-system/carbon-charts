@@ -2,7 +2,7 @@
 import { select } from "d3-selection";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { axisBottom, axisLeft, axisRight } from "d3-axis";
-import { min, max } from "d3-array";
+import { min, max, range } from "d3-array";
 
 import { BaseChart } from "./base-chart";
 
@@ -194,7 +194,7 @@ export class BaseAxisChart extends BaseChart {
 			const width = chartSize.width - margins.left - margins.right;
 
 			this.x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
-			this.x.domain(this.displayData.labels);
+			this.x.domain(range(this.displayData.labels.length));
 		}
 	}
 
@@ -207,7 +207,8 @@ export class BaseAxisChart extends BaseChart {
 
 		const xAxis = axisBottom(this.x)
 			.tickSize(0)
-			.tickSizeOuter(0);
+			.tickSizeOuter(0)
+			.tickFormat((index: any) => this.displayData.labels[index]);
 		let xAxisRef = this.svg.select("g.x.axis");
 
 		// If the <g class="x axis"> exists in the chart SVG, just update it

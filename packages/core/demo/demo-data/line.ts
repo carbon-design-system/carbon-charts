@@ -66,7 +66,7 @@ export const curvedLineOptions = {
 
 
 export const lineData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	labels: ['12 AM', '6 AM', '12 PM', '6 PM', '12 AM', '6 AM', '12 PM', '6 PM', '12 AM'],
 	datasets: [
 		{
 			label: "Dataset 1",
@@ -76,7 +76,11 @@ export const lineData = {
 				4200,
 				7000,
 				4000,
-				19000
+				19000,
+				32432,
+				12313,
+				46364,
+				34243
 			]
 		},
 		{
@@ -87,7 +91,11 @@ export const lineData = {
 				10000,
 				20000,
 				30000,
-				40000
+				40000,
+				32432,
+				12313,
+				46364,
+				34243
 			]
 		},
 		{
@@ -98,7 +106,11 @@ export const lineData = {
 				20000,
 				40000,
 				60000,
-				80000
+				80000,
+				32432,
+				12313,
+				46364,
+				34243
 			]
 		}
 	]
@@ -108,7 +120,7 @@ export const lineOptions = {
 	accessibility: false,
 	scales: {
 		x: {
-			title: "2018 Annual Sales Figures",
+			title: "User Traction Today",
 		},
 		y: {
 			yMaxAdjuster: yMax => yMax * 1.2,
@@ -117,15 +129,15 @@ export const lineOptions = {
 			thresholds: [
 				{
 					range: [-20000, 30000],
-					theme: "success"
-				},
-				{
-					range: [30000, 40000],
 					theme: "danger"
 				},
 				{
-					range: [40000, 70000],
+					range: [30000, 40000],
 					theme: "warning"
+				},
+				{
+					range: [40000, 70000],
+					theme: "success"
 				}
 			]
 		}

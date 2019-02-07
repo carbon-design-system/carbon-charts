@@ -65,7 +65,7 @@ export class LineChart extends BaseAxisChart {
 
 		// D3 line generator function
 		this.lineGenerator = line()
-			.x((d, i) => this.x(this.displayData.labels[i]) + this.x.step() / 2)
+			.x((d, i) => this.x(i) + this.x.step() / 2)
 			.y((d: any) => this.y(d))
 			.curve(getD3Curve(curveName, curveOptions));
 
@@ -86,7 +86,7 @@ export class LineChart extends BaseAxisChart {
 			.enter()
 				.append("circle")
 				.attr("class", "dot")
-				.attr("cx", d => this.x(d.label) + this.x.step() / 2)
+				.attr("cx", (d, i) => this.x(i) + this.x.step() / 2)
 				.attr("cy", d => this.y(d.value))
 				.attr("r", Configuration.charts.pointCircles.radius)
 				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
@@ -130,7 +130,7 @@ export class LineChart extends BaseAxisChart {
 			.enter()
 				.append("circle")
 				.attr("class", "dot")
-				.attr("cx", (d, i) => this.x(d.label) + this.x.step() / 2)
+				.attr("cx", (d, i) => this.x(i) + this.x.step() / 2)
 				.attr("cy", (d: any) => this.y(d.value))
 				.attr("r", 4)
 				.style("opacity", 0)
@@ -189,7 +189,7 @@ export class LineChart extends BaseAxisChart {
 				return self.addLabelsToDataPoints(parentDatum, i);
 			})
 			.transition(transitionToUse)
-			.attr("cx", d => this.x(d.label) + this.x.step() / 2)
+			.attr("cx", (d, i) => this.x(i) + this.x.step() / 2)
 			.attr("cy", d => this.y(d.value))
 			.attr("r", Configuration.lines.points.strokeWidth)
 			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));

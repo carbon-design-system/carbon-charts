@@ -90,7 +90,7 @@ export class StackedBarChart extends BaseAxisChart {
 				.enter()
 					.append("rect")
 					.classed("bar", true)
-					.attr("x", d => this.x(d.data.label))
+					.attr("x", (d, i) => this.x(i))
 					.attr("y", d => this.y(d[1]))
 					.attr("height", d => this.y(d[0]) - this.y(d[1]))
 					.attr("width", d => this.x.bandwidth())
@@ -123,7 +123,7 @@ export class StackedBarChart extends BaseAxisChart {
 			selection.enter()
 				.append("rect")
 				.classed("bar", true)
-				.attr("x", d => this.x(d.data.label))
+				.attr("x", (d, i) => this.x(i))
 				.attr("y", d => this.y(d[1]))
 				.attr("height", d => this.y(d[0]) - this.y(d[1]))
 				.attr("width", d => this.x.bandwidth())
@@ -198,7 +198,7 @@ export class StackedBarChart extends BaseAxisChart {
 		// Update existing bars
 		rect
 			.transition(animate ? this.getFillTransition() : this.getInstantTransition())
-			.attr("x", d => this.x(d.data.label))
+			.attr("x", (d, i) => this.x(i))
 			.attr("y", d => this.y(d[1]))
 			.attr("height", d => this.y(d[0]) - this.y(d[1]))
 			.attr("width", d => this.x.bandwidth())

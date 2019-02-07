@@ -1,7 +1,7 @@
 import { colors } from "./colors";
 
 export const groupedBarData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	labels: ["Qty", "More", "Sold", "Restocking", "More"],
 	datasets: [
 		{
 			label: "Dataset 1",
@@ -73,7 +73,7 @@ export const groupedBarOptions = {
 
 // Simple bar
 export const simpleBarData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	labels: ["Qty", "More", "Sold", "More", "Misc"],
 	datasets: [
 		{
 			label: "Dataset 1",
@@ -107,7 +107,7 @@ export const simpleBarOptions = {
 
 // Stacked bar
 export const stackedBarData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	labels: ["Qty", "More", "Sold", "More", "Misc"],
 	datasets: [
 		{
 			label: "Dataset 1",
