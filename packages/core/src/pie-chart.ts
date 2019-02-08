@@ -107,8 +107,8 @@ export class PieChart extends BaseChart {
 		const { pie: pieConfigs } = Configuration;
 		const marginedRadius = this.computeRadius();
 		this.arc = arc()
-				.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
-				.outerRadius(marginedRadius);
+			.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
+			.outerRadius(marginedRadius);
 
 		this.pie = pie()
 			.value((d: any) => d.value)
@@ -119,12 +119,24 @@ export class PieChart extends BaseChart {
 			.data(this.pie(dataList))
 			.enter()
 			.append("path")
-			.attr("d", this.arc)
-			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label)) // Support multiple datasets
+			.each(function (d) { this._current = d; })
+			.transition()
+			.duration(0)
+			.style("opacity", 0)
 			.attr("stroke", d => this.colorScale[this.displayData.datasets[0].label](d.data.label))
 			.attr("stroke-width", Configuration.pie.default.strokeWidth)
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
-			.each(function(d) { this._current = d; });
+			.transition()
+			.duration(Configuration.transitions.default.duration)
+			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
+			.style("opacity", 1)
+			.attrTween('d', d => {
+				const i = interpolate(d.startAngle, d.endAngle);
+				return t => {
+					d.endAngle = i(t);
+					return this.arc(d);
+				}
+			});
 
 		// Draw the slice labels
 		const self = this;
@@ -195,7 +207,7 @@ export class PieChart extends BaseChart {
 			.transition()
 			.duration(Configuration.transitions.default.duration / 2)
 			.style("opacity", 0)
-			.on("end", function(d) {
+			.on("end", function (d) {
 				select(this)
 					.transition()
 					.duration(Configuration.transitions.default.duration / 2)
@@ -206,7 +218,7 @@ export class PieChart extends BaseChart {
 		const radius = this.computeRadius();
 		setTimeout(() => {
 			const text = this.innerWrap.selectAll("text.chart-label")
-				.data(this.pie(dataList), d => d.label );
+				.data(this.pie(dataList), d => d.label);
 
 			text
 				.enter()
@@ -293,10 +305,10 @@ export class PieChart extends BaseChart {
 		const { accessibility } = this.options;
 
 		this.innerWrap.selectAll("path")
-			.on("click", function(d) {
+			.on("click", function (d) {
 				self.dispatchEvent("pie-slice-onClick", d);
 			})
-			.on("mouseover", function(d) {
+			.on("mouseover", function (d) {
 				const sliceElement = select(this);
 				Tools.moveToFront(sliceElement);
 
@@ -308,14 +320,14 @@ export class PieChart extends BaseChart {
 				self.showTooltip(d);
 				self.reduceOpacity(this);
 			})
-			.on("mousemove", function(d) {
+			.on("mousemove", function (d) {
 				const tooltipRef = select(self.holder).select("div.chart-tooltip");
 
 				const relativeMousePosition = mouse(self.holder as HTMLElement);
 				tooltipRef.style("left", relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px")
 					.style("top", relativeMousePosition[1] + "px");
 			})
-			.on("mouseout", function(d) {
+			.on("mouseout", function (d) {
 				select(this)
 					.attr("stroke-width", accessibility ? Configuration.pie.default.strokeWidth : Configuration.pie.mouseout.strokeWidth)
 					.attr("stroke", accessibility ? self.colorScale[self.displayData.datasets[0].label](d.data.label) : "none")
@@ -346,8 +358,8 @@ export class PieChart extends BaseChart {
 
 		// Resize the SVG
 		select(this.holder).select("svg")
-				.attr("width", `${dimensionToUseForScale}px`)
-				.attr("height", `${dimensionToUseForScale}px`);
+			.attr("width", `${dimensionToUseForScale}px`)
+			.attr("height", `${dimensionToUseForScale}px`);
 		this.innerWrap
 			.style("transform", `translate(${radius}px,${radius}px)`);
 
