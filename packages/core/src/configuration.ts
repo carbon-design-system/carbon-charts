@@ -12,6 +12,10 @@ const baseOptions: any = {
 	tooltip: {
 		formatter: null
 	},
+	// Only used for line chart
+	points: {
+		radius: null
+	},
 	loadingOverlay: {
 		innerHTML: `
 		<div class="loading-overlay-content">
@@ -168,6 +172,7 @@ export const bars = {
 export const lines = {
 	points: {
 		strokeWidth: 4,
+		minNonFilledRadius: 4,
 		mouseover: {
 			strokeWidth: 4,
 			strokeOpacity: 0.5

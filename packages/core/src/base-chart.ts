@@ -413,20 +413,12 @@ export class BaseChart {
 
 	resetOpacity() {
 		const svg = selectAll("svg.chart-svg");
-		svg.selectAll("path").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
-
-		svg.selectAll("circle")
-			.attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
-			.attr("fill", Configuration.charts.resetOpacity.circle.fill);
 		svg.selectAll("rect")
 			.attr("fill-opacity", Configuration.charts.resetOpacity.opacity)
 			.attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 	}
 
 	reduceOpacity(exception) {
-		// this.svg.selectAll("rect, path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
-		// this.svg.selectAll("rect, path").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
-
 		const exceptedElement = select(exception);
 		const exceptedElementData = exceptedElement.datum() as any;
 		select(exception).attr("fill-opacity", false);
