@@ -844,6 +844,17 @@ export class BaseChart {
 		this.holder.removeEventListener("click", this.eventHandlers.tooltips);
 	}
 
+	generateTooltipHTML(label, value) {
+		if (this.options.tooltip.size === Configuration.tooltip.size.COMPACT) {
+			return `<b>${label}:</b> ${value}<br/>`;
+		} else {
+			return `
+				<p class='bignum'>${label}</p>
+				<p>${value}</p>
+			`;
+		}
+	}
+
 	showTooltip(d, clickedElement) {
 		// Rest opacity of all elements in the chart
 		this.resetOpacity();
@@ -861,13 +872,9 @@ export class BaseChart {
 		let tooltipHTML = "";
 		const formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString("en");
 		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
-			tooltipHTML += `
-				<b>${d.label}:</b> ${formattedValue}<br/>
-			`;
+			tooltipHTML += this.generateTooltipHTML(d.label, formattedValue);
 		} else {
-			tooltipHTML += `
-				<b>${d.datasetLabel}:</b> ${formattedValue}<br/>
-			`;
+			tooltipHTML += this.generateTooltipHTML(d.datasetLabel, formattedValue);
 		}
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);

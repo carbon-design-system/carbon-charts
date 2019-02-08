@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.1](https://github.com/IBM/carbon-charts/compare/v0.9.0...v0.9.1) (2019-02-07)
+
+
+### Bug Fixes
+
+* **core:** Allow the usage of different size variants of tooltip ([4f6aa1d](https://github.com/IBM/carbon-charts/commit/4f6aa1d))
+
+
+
+
+
+# [0.9.0](https://github.com/IBM/carbon-charts/compare/v0.8.6...v0.9.0) (2019-01-28)
+
+
+### Features
+
+* **CORE:** ability to customize donut label & number ([07014cf](https://github.com/IBM/carbon-charts/commit/07014cf))
+
+
+
+
+
 ## [0.8.6](https://github.com/IBM/carbon-charts/compare/v0.8.5...v0.8.6) (2019-01-18)
 
 
