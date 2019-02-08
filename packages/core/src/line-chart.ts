@@ -38,7 +38,7 @@ export class LineChart extends BaseAxisChart {
 	getCircleRadius() {
 		return this.options.points.radius || Configuration.charts.pointCircles.radius;
 	}
-	
+
 	getCircleFill(radius, d) {
 		const circleShouldBeFilled = radius < Configuration.lines.points.minNonFilledRadius;
 		return circleShouldBeFilled ? this.colorScale[d.datasetLabel](d.label) : "white";
