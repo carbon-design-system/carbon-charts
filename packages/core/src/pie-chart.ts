@@ -130,12 +130,12 @@ export class PieChart extends BaseChart {
 			.duration(Configuration.transitions.default.duration)
 			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
 			.style("opacity", 1)
-			.attrTween('d', d => {
+			.attrTween("d", d => {
 				const i = interpolate(d.startAngle, d.endAngle);
 				return t => {
 					d.endAngle = i(t);
 					return this.arc(d);
-				}
+				};
 			});
 
 		// Draw the slice labels
