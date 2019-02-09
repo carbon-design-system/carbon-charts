@@ -11,7 +11,6 @@ import { getD3Curve } from "./services/curves";
 
 export class AreaChart extends BaseAxisChart {
 	x: any;
-	x1?:any;
 	y: any;
 
 	colorScale: any;
@@ -37,7 +36,6 @@ export class AreaChart extends BaseAxisChart {
 		}));
 	}
 
-	
 
 	setXScale(xScale?: any) {
 		const { line: margins } = Configuration.charts.margin;
@@ -57,11 +55,10 @@ export class AreaChart extends BaseAxisChart {
 			this.x.range([0, width]);
 
 			// console.log(this.x.ticks());
-			
 		}
 	}
 
-	
+
 	setXAxis(noAnimation?: boolean) {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
@@ -70,7 +67,6 @@ export class AreaChart extends BaseAxisChart {
 		const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 		const formatTime = timeParse("%Y/%m/%d");
 
-		let xScale = this.x;
 		const xAxis = axisBottom(this.x)
 			.tickSize(0)
 			.tickSizeOuter(0)
@@ -133,9 +129,6 @@ export class AreaChart extends BaseAxisChart {
 		this.innerWrap.attr("transform", `translate(${margins.left}, ${margins.top})`);
 
 		// D3 area generator function
-		const parseTime = timeParse('%Y/%m/%d');
-		const formatTime = timeFormat('%Y/%m/%d');
-
 		this.areaGenerator = area()
 			.x((d,i)=>this.x(new Date(this.displayData.labels[i])))
 			.y1((d) => this.y(d))
@@ -312,7 +305,7 @@ export class AreaChart extends BaseAxisChart {
 				select(this)
 					.attr("stroke-width", Configuration.lines.points.mouseover.strokeWidth)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
-					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity)
+					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
 
 				self.showTooltip(d, this);
 				self.reduceOpacity(this);
