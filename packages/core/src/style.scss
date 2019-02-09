@@ -53,6 +53,15 @@ div.chart-holder {
 				}
 			}
 		}
+		path {
+			&.area{
+				stroke-width: 2;
+
+				&:hover{
+					cursor: default;
+				}
+			}
+		}
 
 		circle {
 			&.dot {

@@ -1,6 +1,7 @@
 import {
 	BarChart,
 	LineChart,
+	AreaChart,
 	PieChart,
 	DonutChart,
 	ComboChart
@@ -58,6 +59,9 @@ const {
 	curvedLineData,
 	lineData,
 	lineOptions,
+	// Area
+	areaOptions,
+	areaData,
 	// Combo
 	comboData,
 	comboOptions
@@ -117,6 +121,12 @@ const chartTypes = [
 		name: "Step",
 		options: Object.assign({}, lineOptions, {curve: "curveStepAfter"}),
 		data: lineData
+	},
+	{
+		id: "area",
+		name: "Area",
+		options: areaOptions,
+		data: areaData
 	},
 	{
 		id: "pie",
@@ -312,6 +322,18 @@ chartTypes.forEach(type => {
 					setDemoActionsEventListener(type.id, type.data);
 
 					break;
+			case "area":
+					classyCharts[type.id] = new AreaChart(
+						classyContainer,
+						{
+							data: type.data,
+							options: Object.assign({}, type.options, {type: type.id}),
+						}
+					);
+
+					setDemoActionsEventListener(type.id, type.data);
+
+					break;			
 			case "pie":
 				classyCharts[type.id] = new PieChart(
 					classyContainer,
