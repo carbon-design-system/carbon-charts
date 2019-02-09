@@ -12,10 +12,6 @@ const baseOptions: any = {
 	tooltip: {
 		formatter: null
 	},
-	// Only used for line chart
-	points: {
-		radius: null
-	},
 	loadingOverlay: {
 		innerHTML: `
 		<div class="loading-overlay-content">
@@ -47,6 +43,10 @@ const axisOptions: any = Object.assign({}, baseOptions, {
 			domain: null,
 			ticks: 10
 		}
+	},
+	// Only used for line chart
+	points: {
+		radius: null
 	}
 });
 
@@ -85,7 +85,7 @@ export const charts = {
 		opacity: 0.25,
 		outline: "grey"
 	},
-	pointCircles: {
+	points: {
 		radius: 4
 	},
 	patternFills: {

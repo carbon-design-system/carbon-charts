@@ -36,7 +36,7 @@ export class LineChart extends BaseAxisChart {
 	}
 
 	getCircleRadius() {
-		return this.options.points.radius || Configuration.charts.pointCircles.radius;
+		return this.options.points.radius || Configuration.charts.points.radius;
 	}
 
 	getCircleFill(radius, d) {
