@@ -330,10 +330,10 @@ chartTypes.forEach(type => {
 							options: Object.assign({}, type.options, {type: type.id}),
 						}
 					);
-					
+
 					setDemoActionsEventListener(type.id, type.data);
-					
-					break;			
+
+					break;
 				case "pie":
 				classyCharts[type.id] = new PieChart(
 					classyContainer,

@@ -130,7 +130,7 @@ export class AreaChart extends BaseAxisChart {
 
 		// D3 area generator function
 		this.areaGenerator = area()
-			.x((d,i)=>this.x(new Date(this.displayData.labels[i])))
+			.x((d,i) => this.x(new Date(this.displayData.labels[i])))
 			.y1((d) => this.y(d))
 			.y0(d => this.y(0))
 			.curve(getD3Curve("curveLinear"));
