@@ -46,8 +46,6 @@ export class BaseChart {
 		tooltips: null
 	};
 
-
-
 	constructor(holder: Element, configs: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
 
