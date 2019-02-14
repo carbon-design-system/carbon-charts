@@ -55,7 +55,7 @@ export class BaseAxisChart extends BaseChart {
 			this.setXAxis();
 			this.setYScale();
 			this.setYAxis();
-			//this.setTitle();
+			// this.setTitle();
 
 			// Draw the x & y grid
 			this.drawXGrid();
@@ -211,8 +211,6 @@ export class BaseAxisChart extends BaseChart {
 				.attr("class", "title")
 				.attr("text-anchor", "left")
 				.text(this.options.title);
-
-				
 		}
 	}*/
 
@@ -285,8 +283,8 @@ export class BaseAxisChart extends BaseChart {
 		const yAxisTitleRef = this.svg.select("g.y.axis text.y.axis-label");
 		yAxisTitleRef.attr("class", "y axis-label")
 		.attr("text-align", "center")
-			.attr("transform", `rotate(-90) translate(${ - (yAxisRef.node().getBBox().height / 2)}, ${ - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5})`)
-			//transform: rotate(-90deg) translate(-50%, -30%);
+			.attr("transform", `rotate(-90) translate(${ - (yAxisRef.node().getBBox().height / 2)},
+			${ - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5})`)
 			.text(this.options.scales.y.title);
 	}
 
@@ -397,10 +395,10 @@ export class BaseAxisChart extends BaseChart {
 		if (this.innerWrap.select(".axis-label.y").nodes().length === 0 && this.options.scales.y.title) {
 			yAxisRef.append("text")
 				.attr("class", "y axis-label")
-				.attr("transform", `rotate(-90) translate(${ - (yAxisRef.node().getBBox().height / 2)},${ - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5})`)
+				.attr("transform", `rotate(-90) translate(${ - (yAxisRef.node().getBBox().height / 2)},
+				${ - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5})`)
 				.attr("text-align", "center")
 				.text(this.options.scales.y.title);
-
 			this.svg.attr("transform", `translate(${this.innerWrap.select(".axis-label.y").node().getBBox().height}, 0)`);
 		}
 
