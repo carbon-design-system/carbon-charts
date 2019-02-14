@@ -55,7 +55,7 @@ export class BaseAxisChart extends BaseChart {
 			this.setXAxis();
 			this.setYScale();
 			this.setYAxis();
-			this.setTitle();
+			//this.setTitle();
 
 			// Draw the x & y grid
 			this.drawXGrid();
@@ -178,6 +178,10 @@ export class BaseAxisChart extends BaseChart {
 			this.repositionXAxisTitle();
 		}
 
+		if (this.innerWrap.select(".axis-label.y").nodes().length > 0 && this.options.scales.y.title) {
+			this.repositionYAxisTitle();
+		}
+
 		this.dispatchEvent("resize");
 	}
 
@@ -200,15 +204,17 @@ export class BaseAxisChart extends BaseChart {
 		}
 	}
 
-	setTitle() {
+	/*setTitle() {
 		// Add chart title
 		if (this.options.title) {
 			this.innerWrap.append("text")
 				.attr("class", "title")
 				.attr("text-anchor", "left")
 				.text(this.options.title);
+
+				
 		}
-	}
+	}*/
 
 	setXAxis(noAnimation?: boolean) {
 		const { bar: margins } = Configuration.charts.margin;
@@ -270,6 +276,18 @@ export class BaseAxisChart extends BaseChart {
 			.attr("text-anchor", "middle")
 			.attr("transform", `translate(${xAxisRef.node().getBBox().width / 2}, ${tickHeight})`)
 			.text(this.options.scales.x.title);
+	}
+
+	repositionYAxisTitle() {
+		const yAxisRef = this.svg.select("g.y.axis");
+		const tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
+
+		const yAxisTitleRef = this.svg.select("g.y.axis text.y.axis-label");
+		yAxisTitleRef.attr("class", "y axis-label")
+		.attr("text-align", "center")
+			.attr("transform", `rotate(-90) translate(${ - (yAxisRef.node().getBBox().height / 2)}, ${ - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5})`)
+			//transform: rotate(-90deg) translate(-50%, -30%);
+			.text(this.options.scales.y.title);
 	}
 
 	getYMax() {
@@ -374,11 +392,16 @@ export class BaseAxisChart extends BaseChart {
 				.attr("stroke-width", Configuration.scales.domain.strokeWidth);
 		}
 
+		const tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
 		// Add y-axis title
 		if (this.innerWrap.select(".axis-label.y").nodes().length === 0 && this.options.scales.y.title) {
 			yAxisRef.append("text")
 				.attr("class", "y axis-label")
+				.attr("transform", `rotate(-90) translate(${ - (yAxisRef.node().getBBox().height / 2)},${ - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5})`)
+				.attr("text-align", "center")
 				.text(this.options.scales.y.title);
+
+			this.svg.attr("transform", `translate(${this.innerWrap.select(".axis-label.y").node().getBBox().height}, 0)`);
 		}
 
 		Tools.moveToFront(horizontalLine);
