@@ -45,7 +45,6 @@ export class BaseAxisChart extends BaseChart {
 
 		// If an axis exists
 		const xAxisRef = select(this.holder).select(".axis.x");
-		const yAxisRef = select(this.holder).select(".axis.y");
 		if (!xAxisRef.node()) {
 			this.setSVG();
 
