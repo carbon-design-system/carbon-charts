@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.3](https://github.com/IBM/carbon-charts/compare/v0.9.2...v0.9.3) (2019-02-15)
+
+
+### Bug Fixes
+
+* **core:** Fix NPM vulnerabilities ([73ef611](https://github.com/IBM/carbon-charts/commit/73ef611))
+
+
+
+
+
 ## [0.9.2](https://github.com/IBM/carbon-charts/compare/v0.9.1...v0.9.2) (2019-02-15)
 
 
