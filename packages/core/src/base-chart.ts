@@ -46,8 +46,6 @@ export class BaseChart {
 		tooltips: null
 	};
 
-
-
 	constructor(holder: Element, configs: any) {
 		this.id = `chart-${BaseChart.chartCount++}`;
 
@@ -413,20 +411,12 @@ export class BaseChart {
 
 	resetOpacity() {
 		const svg = selectAll("svg.chart-svg");
-		svg.selectAll("path").attr("fill-opacity", Configuration.charts.resetOpacity.opacity);
-
-		svg.selectAll("circle")
-			.attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
-			.attr("fill", Configuration.charts.resetOpacity.circle.fill);
 		svg.selectAll("rect")
 			.attr("fill-opacity", Configuration.charts.resetOpacity.opacity)
 			.attr("stroke-opacity", Configuration.charts.resetOpacity.opacity);
 	}
 
 	reduceOpacity(exception) {
-		// this.svg.selectAll("rect, path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
-		// this.svg.selectAll("rect, path").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
-
 		const exceptedElement = select(exception);
 		const exceptedElementData = exceptedElement.datum() as any;
 		select(exception).attr("fill-opacity", false);
@@ -852,6 +842,17 @@ export class BaseChart {
 		this.holder.removeEventListener("click", this.eventHandlers.tooltips);
 	}
 
+	generateTooltipHTML(label, value) {
+		if (this.options.tooltip.size === Configuration.tooltip.size.COMPACT) {
+			return `<b>${label}:</b> ${value}<br/>`;
+		} else {
+			return `
+				<p class='bignum'>${label}</p>
+				<p>${value}</p>
+			`;
+		}
+	}
+
 	showTooltip(d, clickedElement) {
 		// Rest opacity of all elements in the chart
 		this.resetOpacity();
@@ -869,13 +870,9 @@ export class BaseChart {
 		let tooltipHTML = "";
 		const formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString("en");
 		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
-			tooltipHTML += `
-				<b>${d.label}:</b> ${formattedValue}<br/>
-			`;
+			tooltipHTML += this.generateTooltipHTML(d.label, formattedValue);
 		} else {
-			tooltipHTML += `
-				<b>${d.datasetLabel}:</b> ${formattedValue}<br/>
-			`;
+			tooltipHTML += this.generateTooltipHTML(d.datasetLabel, formattedValue);
 		}
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
