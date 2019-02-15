@@ -2,8 +2,8 @@
 export namespace Tools {
 	export function getUUID() {
 		// https://stackoverflow.com/a/2117523
-		return 'xxxxxxxx-xxxx-xxxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-			const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+		return "xxxxxxxx-xxxx-xxxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+			const r = Math.random() * 16 | 0, v = c === "x" ? r : (r & 0x3 | 0x8);
 
 			return v.toString(16);
 		});
