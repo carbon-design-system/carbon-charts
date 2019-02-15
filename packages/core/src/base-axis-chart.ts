@@ -381,7 +381,6 @@ export class BaseAxisChart extends BaseChart {
 
 		const tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
 		const yAxisTitleXPosition = - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5;
-		const yAxisLabelRef = this.innerWrap.select(".axis-label.y");
 
 		// Add y-axis title
 		if (this.innerWrap.select(".axis-label.y").nodes().length === 0 && this.options.scales.y.title) {
@@ -391,7 +390,7 @@ export class BaseAxisChart extends BaseChart {
 				${ yAxisTitleXPosition})`)
 				.attr("text-align", "center")
 				.text(this.options.scales.y.title);
-			this.svg.attr("transform", `translate(${yAxisLabelRef.node().getBBox().height}, 0)`);
+			this.svg.attr("transform", `translate(${this.innerWrap.select(".axis-label.y").node().getBBox().height}, 0)`);
 		}
 
 		Tools.moveToFront(horizontalLine);
