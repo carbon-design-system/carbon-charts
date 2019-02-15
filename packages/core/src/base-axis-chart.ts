@@ -391,7 +391,7 @@ export class BaseAxisChart extends BaseChart {
 		};
 
 		// Add y-axis title
-		if (this.innerWrap.select(".axis-label.y").nodes().length === 0 && this.options.scales.y.title) {
+		if (this.innerWrap.select(".axis-label.y").nodes().length === 0 || this.options.scales.y.title) {
 			yAxisRef.append("text")
 				.attr("class", "y axis-label")
 				.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`)
