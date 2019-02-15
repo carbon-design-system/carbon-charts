@@ -131,7 +131,7 @@ export const lineOptions = {
 		}
 	},
 	points: {
-		radius: 3
+		radius: 4
 	},
 	legendClickable: true,
 	containerResizable: true
