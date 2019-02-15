@@ -673,6 +673,9 @@ var lineOptions = {
             ]
         }
     },
+    points: {
+        radius: 4
+    },
     legendClickable: true,
     containerResizable: true
 };
@@ -1491,11 +1494,15 @@ var BaseAxisChart = /** @class */ (function (_super) {
     __extends(BaseAxisChart, _super);
     function BaseAxisChart(holder, configs) {
         var _this = _super.call(this, holder, configs) || this;
-        var axis = configs.options.axis;
-        if (axis) {
-            _this.x = axis.x;
-            _this.y = axis.y;
-            _this.y2 = axis.y2;
+        _this.options = Object.assign({}, _configuration__WEBPACK_IMPORTED_MODULE_5__["options"].AXIS);
+        if (configs.options) {
+            _this.options = Object.assign({}, _this.options, configs.options);
+            var axis = configs.options.axis;
+            if (axis) {
+                _this.x = axis.x;
+                _this.y = axis.y;
+                _this.y2 = axis.y2;
+            }
         }
         return _this;
     }
@@ -2336,17 +2343,11 @@ var BaseChart = /** @class */ (function () {
     };
     BaseChart.prototype.resetOpacity = function () {
         var svg = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["selectAll"])("svg.chart-svg");
-        svg.selectAll("path").attr("fill-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].resetOpacity.opacity);
-        svg.selectAll("circle")
-            .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].resetOpacity.opacity)
-            .attr("fill", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].resetOpacity.circle.fill);
         svg.selectAll("rect")
             .attr("fill-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].resetOpacity.opacity)
             .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].resetOpacity.opacity);
     };
     BaseChart.prototype.reduceOpacity = function (exception) {
-        // this.svg.selectAll("rect, path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
-        // this.svg.selectAll("rect, path").attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
         var _this = this;
         var exceptedElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception);
         var exceptedElementData = exceptedElement.datum();
@@ -2987,6 +2988,10 @@ var axisOptions = Object.assign({}, baseOptions, {
             domain: null,
             ticks: 10
         }
+    },
+    // Only used for line chart
+    points: {
+        radius: null
     }
 });
 var options = {
@@ -3023,7 +3028,7 @@ var charts = {
         opacity: 0.25,
         outline: "grey"
     },
-    pointCircles: {
+    points: {
         radius: 4
     },
     patternFills: {
@@ -3105,6 +3110,7 @@ var bars = {
 var lines = {
     points: {
         strokeWidth: 4,
+        minNonFilledRadius: 4,
         mouseover: {
             strokeWidth: 4,
             strokeOpacity: 0.5
@@ -3496,6 +3502,13 @@ var LineChart = /** @class */ (function (_super) {
             value: datum
         }); });
     };
+    LineChart.prototype.getCircleRadius = function () {
+        return this.options.points.radius || _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].points.radius;
+    };
+    LineChart.prototype.getCircleFill = function (radius, d) {
+        var circleShouldBeFilled = radius < _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.minNonFilledRadius;
+        return circleShouldBeFilled ? this.colorScale[d.datasetLabel](d.label) : "white";
+    };
     LineChart.prototype.draw = function () {
         var _this = this;
         this.innerWrap.style("width", "100%")
@@ -3535,6 +3548,7 @@ var LineChart = /** @class */ (function (_super) {
             .datum(function (d) { return d.data; })
             .attr("class", "line")
             .attr("d", this.lineGenerator);
+        var circleRadius = this.getCircleRadius();
         gLines.selectAll("circle.dot")
             .data(function (d, i) { return _this.addLabelsToDataPoints(d, i); })
             .enter()
@@ -3542,7 +3556,8 @@ var LineChart = /** @class */ (function (_super) {
             .attr("class", "dot")
             .attr("cx", function (d) { return _this.x(d.label) + _this.x.step() / 2; })
             .attr("cy", function (d) { return _this.y(d.value); })
-            .attr("r", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].pointCircles.radius)
+            .attr("r", circleRadius)
+            .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
             .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); });
         // Hide the overlay
         this.updateOverlay().hide();
@@ -3572,6 +3587,7 @@ var LineChart = /** @class */ (function (_super) {
             .attr("class", "line")
             .attr("d", this.lineGenerator);
         // Add line circles
+        var circleRadius = this.getCircleRadius();
         addedLineGroups.selectAll("circle.dot")
             .data(function (d, i) { return _this.addLabelsToDataPoints(d, i); })
             .enter()
@@ -3579,10 +3595,11 @@ var LineChart = /** @class */ (function (_super) {
             .attr("class", "dot")
             .attr("cx", function (d, i) { return _this.x(d.label) + _this.x.step() / 2; })
             .attr("cy", function (d) { return _this.y(d.value); })
-            .attr("r", 4)
+            .attr("r", circleRadius)
             .style("opacity", 0)
             .transition(this.getDefaultTransition())
             .style("opacity", 1)
+            .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
             .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); });
         // Remove lines that are no longer needed
         gLines.exit()
@@ -3619,6 +3636,7 @@ var LineChart = /** @class */ (function (_super) {
             .attr("class", "line")
             .attr("d", this.lineGenerator);
         var margins = _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].margin.line;
+        var circleRadius = this.getCircleRadius();
         gLines.selectAll("circle.dot")
             .data(function (d, i) {
             var parentDatum = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this).datum();
@@ -3627,7 +3645,8 @@ var LineChart = /** @class */ (function (_super) {
             .transition(transitionToUse)
             .attr("cx", function (d) { return _this.x(d.label) + _this.x.step() / 2; })
             .attr("cy", function (d) { return _this.y(d.value); })
-            .attr("r", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.strokeWidth)
+            .attr("r", circleRadius)
+            .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
             .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); });
     };
     LineChart.prototype.resizeChart = function () {
@@ -3650,6 +3669,20 @@ var LineChart = /** @class */ (function (_super) {
     LineChart.prototype.setXScale = function () {
         _super.prototype.setXScale.call(this);
         this.x.padding(0); // override BaseAxisChart padding so points aren't misaligned by a few pixels
+    };
+    LineChart.prototype.resetOpacity = function () {
+        var _this = this;
+        var circleRadius = this.getCircleRadius();
+        this.innerWrap.selectAll("circle")
+            .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].resetOpacity.opacity)
+            .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); });
+    };
+    LineChart.prototype.reduceOpacity = function (exception) {
+        var _this = this;
+        var circleRadius = this.getCircleRadius();
+        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill-opacity", false);
+        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].reduceOpacity.opacity);
+        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); });
     };
     LineChart.prototype.addDataPointEventListener = function () {
         var self = this;

@@ -24,7 +24,6 @@ div.chart-holder {
       .chart-wrapper svg.chart-svg path.line:hover {
         cursor: default; }
     .chart-wrapper svg.chart-svg circle.dot {
-      fill: #fff;
       stroke-width: 2; }
   .chart-wrapper text {
     font-size: 12px;
