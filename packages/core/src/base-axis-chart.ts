@@ -269,10 +269,13 @@ export class BaseAxisChart extends BaseChart {
 		const tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
 
 		const yAxisTitleRef = this.svg.select("g.y.axis text.y.axis-label");
+		const yAxisTitleRelativePositionY = - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5;
+		const yAxisRefRelativePositionX = - (yAxisRef.node().getBBox().height / 2);
+
 		yAxisTitleRef.attr("class", "y axis-label")
 		.attr("text-align", "center")
-		.attr("transform", `rotate(-90) translate(${ - (yAxisRef.node().getBBox().height / 2)},
-		${ - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5})`)
+		.attr("transform", `rotate(-90) translate(${yAxisRefRelativePositionX},
+		${yAxisTitleRelativePositionY})`)
 		.text(this.options.scales.y.title);
 	}
 
