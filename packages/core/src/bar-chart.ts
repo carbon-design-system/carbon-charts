@@ -81,7 +81,6 @@ export class BarChart extends BaseAxisChart {
 
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
-		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		const gBars = this.innerWrap
 			.attr("transform", `translate(${margins.left}, ${margins.top})`)
@@ -89,7 +88,7 @@ export class BarChart extends BaseAxisChart {
 			.classed("bars", true)
 			.attr("width", width);
 
-		gBars.selectAll("g")
+		const addedRects = gBars.selectAll("g")
 			.data(this.displayData.labels)
 			.enter()
 				.append("g")
@@ -97,16 +96,10 @@ export class BarChart extends BaseAxisChart {
 				.selectAll("rect.bar")
 				.data((d, index) => this.addLabelsToDataPoints(d, index))
 					.enter()
-						.append("rect")
-						.classed("bar", true)
-						.attr("x", d => this.x1(d.datasetLabel))
-						.attr("y", d => this.y(Math.max(0, d.value)))
-						.attr("width", this.x1.bandwidth())
-						.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
-						.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
-						.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.label) : null)
-						.attr("stroke-width", Configuration.bars.default.strokeWidth)
-						.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
+					.append("rect")
+					.classed("bar", true);
+
+		addedRects.call(selection => this.applyRenderLogic(selection));
 
 		// Hide the overlay
 		this.updateOverlay().hide();
@@ -115,11 +108,35 @@ export class BarChart extends BaseAxisChart {
 		this.dispatchEvent("load");
 	}
 
+	applyRenderLogic(selection, options?) {
+		if (options && options.transition === true) {
+			selection = selection.transition(this.getFillTransition());
+		}
+
+		const elements = selection
+			.attr("x", d => this.x1(d.datasetLabel))
+			.attr("y", d => this.y(Math.max(0, d.value)))
+			.attr("width", this.x1.bandwidth())
+			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
+			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
+			.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.label) : null)
+			.attr("stroke-width", Configuration.bars.default.strokeWidth)
+			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
+
+		if (options && options.animate === true) {
+			elements.attr("opacity", 0)
+				.transition(this.getFillTransition())
+				.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
+				.attr("opacity", 1)
+				.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
+				.attr("stroke-width", Configuration.bars.default.strokeWidth);
+		}
+	}
+
 	interpolateValues(newData: any) {
 		const { bar: margins } = Configuration.charts.margin;
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
-		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		// Apply new data to the bars
 		const g = this.innerWrap.select("g.bars")
@@ -130,46 +147,20 @@ export class BarChart extends BaseAxisChart {
 		const rect = g.selectAll("rect.bar")
 			.data((d, index) => this.addLabelsToDataPoints(d, index));
 
-		this.updateElements(true, rect, g);
+		this.updateExistingElements(true, rect, g);
 
 		// Add bar groups that need to be added now
-		const addedBars = g.enter()
+		const addedBarGroups = g.enter()
 			.append("g")
 			.classed("bars", true)
 			.attr("transform", d => `translate(${this.x(d)}, 0)`);
 
-		// Add bars that need to be added now
-		g.selectAll("rect.bar")
+		addedBarGroups.selectAll("rect.bar")
 			.data((d, index) => this.addLabelsToDataPoints(d, index))
 			.enter()
 			.append("rect")
-			.attr("class", "bar")
-			.attr("x", d => this.x1(d.datasetLabel))
-			.attr("y", d => this.y(Math.max(0, d.value)))
-			.attr("width", this.x1.bandwidth())
-			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
-			.attr("opacity", 0)
-			.transition(this.getFillTransition())
-			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
-			.attr("opacity", 1)
-			.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
-			.attr("stroke-width", Configuration.bars.default.strokeWidth);
-
-		addedBars.selectAll("rect.bar")
-			.data((d, index) => this.addLabelsToDataPoints(d, index))
-			.enter()
-			.append("rect")
-			.attr("class", "bar")
-			.attr("x", d => this.x1(d.datasetLabel))
-			.attr("y", d => this.y(Math.max(0, d.value)))
-			.attr("width", this.x1.bandwidth())
-			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
-			.attr("opacity", 0)
-			.transition(this.getFillTransition())
-			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
-			.attr("opacity", 1)
-			.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
-			.attr("stroke-width", Configuration.bars.default.strokeWidth);
+			.classed("bar", true)
+			.call(selection => this.applyRenderLogic(selection, { animate: true }));
 
 		// Remove bar groups are no longer needed
 		g.exit()
@@ -193,12 +184,7 @@ export class BarChart extends BaseAxisChart {
 		this.dispatchEvent("update");
 	}
 
-	updateElements(animate: boolean, rect?: any, g?: any) {
-		const { scales } = this.options;
-
-		const chartSize = this.getChartSize();
-		const height = chartSize.height - this.getBBox(".x.axis").height;
-
+	updateExistingElements(animate: boolean, rect?: any, g?: any) {
 		if (!rect) {
 			rect = this.innerWrap.selectAll("rect.bar");
 		}
@@ -209,16 +195,7 @@ export class BarChart extends BaseAxisChart {
 		}
 
 		// Update existing bars
-		rect
-			.transition(animate ? this.getFillTransition() : this.getInstantTransition())
-			// TODO
-			// .ease(d3.easeCircle)
-			.attr("x", d => this.x1(d.datasetLabel))
-			.attr("y", d => this.y(Math.max(0, d.value)))
-			.attr("width", this.x1.bandwidth())
-			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
-			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
-			.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.label) : null);
+		rect.call(selection => this.applyRenderLogic(selection, { transition: true }));
 	}
 
 	resizeChart() {
@@ -241,7 +218,7 @@ export class BarChart extends BaseAxisChart {
 
 		// Apply new data to the bars
 		const g = this.innerWrap.selectAll("g.bars g");
-		this.updateElements(false, null, g);
+		this.updateExistingElements(false, null, g);
 
 		super.resizeChart();
 	}
