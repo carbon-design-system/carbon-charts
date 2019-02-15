@@ -167,17 +167,22 @@ export class BaseChart {
 	}
 
 	getKeysFromData() {
-		const { datasets } = this.displayData;
 		const keys = {};
 
 		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
 			// Build out the keys array of objects to represent the legend items
 			this.displayData.labels.forEach(label => {
-				keys[label] = Configuration.legend.items.status.ACTIVE;
+				keys[Tools.getUUID()] = {
+					label,
+					status: Configuration.legend.items.status.ACTIVE
+				};
 			});
 		} else {
 			this.displayData.datasets.forEach(dataset => {
-				keys[dataset.label] = Configuration.legend.items.status.ACTIVE;
+				keys[Tools.getUUID()] = {
+					label: dataset.label,
+					status: Configuration.legend.items.status.ACTIVE
+				};
 			});
 		}
 
@@ -371,7 +376,7 @@ export class BaseChart {
 				// If there are more than 1 active legend items & one is getting toggled on
 				if (activeLegendItems.length > 1 || enabling) {
 					self.updateLegend(this);
-					self.applyLegendFilter(legendButton.select("text").text());
+					self.applyLegendFilter(legendButton.datum());
 				}
 				// If there are 2 active legend items & one is getting toggled off
 				if (activeLegendItems.length === 2 && !enabling) {
@@ -464,14 +469,14 @@ export class BaseChart {
 		const legendItems = this.getLegendItems();
 		const legendItemKeys = Object.keys(legendItems);
 
-		return legendItemKeys.filter(itemKey => legendItems[itemKey] === Configuration.legend.items.status.DISABLED);
+		return legendItemKeys.filter(itemKey => legendItems[itemKey].status === Configuration.legend.items.status.DISABLED);
 	}
 
 	getActiveLegendItems() {
 		const legendItems = this.getLegendItems();
 		const legendItemKeys = Object.keys(legendItems);
 
-		return legendItemKeys.filter(itemKey => legendItems[itemKey] === Configuration.legend.items.status.ACTIVE);
+		return legendItemKeys.filter(itemKey => legendItems[itemKey].status === Configuration.legend.items.status.ACTIVE);
 	}
 
 	updateLegend(legend) {
@@ -517,15 +522,15 @@ export class BaseChart {
 
 		legendEnter.selectAll("text")
 			.merge(legendItems.selectAll("text"))
-			.text(d => d.key);
+			.text(d => d.value.label);
 
 		legendEnter.select("div")
 			.merge(legendItems.selectAll("div"))
 			.style("background-color", (d, i) => {
-				if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
-					return this.colorScale[this.displayData.datasets[0].label](d.key);
-				} else if (d.value === Configuration.legend.items.status.ACTIVE) {
-					return this.colorScale[d.key]();
+				if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value.status === Configuration.legend.items.status.ACTIVE) {
+					return this.colorScale[this.displayData.datasets[0].label](d.value.label);
+				} else if (d.value.status === Configuration.legend.items.status.ACTIVE) {
+					return this.colorScale[d.value.label]();
 				}
 
 				return "white";
@@ -615,14 +620,14 @@ export class BaseChart {
 	/**
 	 *
 	 * When a legend item is clicked, apply/remove the appropriate filter
-	 * @param {string} changedLabel The label of the legend element the user clicked on
+	 * @param {string} changedItemDatum The data bound to the element the user clicked on
 	 * @memberof PieChart
 	 */
-	applyLegendFilter(changedLabel: string) {
+	applyLegendFilter(changedItemDatum) {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
-		const oldStatus = this.options.keys[changedLabel];
+		const oldStatus = this.options.keys[changedItemDatum.key].status;
 
-		this.options.keys[changedLabel] = (oldStatus === ACTIVE ? DISABLED : ACTIVE);
+		this.options.keys[changedItemDatum.key].status = (oldStatus === ACTIVE ? DISABLED : ACTIVE);
 
 		this.update();
 	}

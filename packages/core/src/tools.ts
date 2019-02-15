@@ -1,22 +1,12 @@
 // Functions
 export namespace Tools {
-	export function debounce(func, wait, immediate) {
-		let timeout;
-		return function() {
-			const context = this, args = arguments;
-			const later = function() {
-				timeout = null;
-				if (!immediate) {
-					func.apply(context, args);
-				}
-			};
-			const callNow = immediate && !timeout;
-			clearTimeout(timeout);
-			timeout = setTimeout(later, wait);
-			if (callNow) {
-				func.apply(context, args);
-			}
-		};
+	export function getUUID() {
+		// https://stackoverflow.com/a/2117523
+		return 'xxxxxxxx-xxxx-xxxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+
+			return v.toString(16);
+		});
 	}
 
 	export function addCloseBtn(tooltip, size, color?) {
