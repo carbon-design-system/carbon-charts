@@ -149,13 +149,13 @@ export class StackedBarChart extends BaseAxisChart {
 		addRect(rect);
 
 		g.exit()
-			.classed("removed", true)
+			.classed("removed", true) // mark this element with "removed" class so it isn't resued
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
 
 		rect.exit()
-			.classed("removed", true)
+			.classed("removed", true) // mark this element with "removed" class so it isn't resued
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();

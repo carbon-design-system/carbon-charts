@@ -156,7 +156,7 @@ export class LineChart extends BaseAxisChart {
 
 		// Remove lines that are no longer needed
 		gLines.exit()
-			.classed("removed", true)
+			.classed("removed", true) // mark this element with "removed" class so it isn't resued
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
