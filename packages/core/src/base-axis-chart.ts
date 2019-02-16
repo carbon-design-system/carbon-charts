@@ -402,8 +402,6 @@ export class BaseAxisChart extends BaseChart {
 				.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`)
 				.attr("text-align", "center")
 				.text(this.options.scales.y.title);
-
-			this.svg.attr("transform", `translate(${this.innerWrap.select(".axis-label.y").node().getBBox().height}, 0)`);
 		}
 
 		Tools.moveToFront(horizontalLine);
