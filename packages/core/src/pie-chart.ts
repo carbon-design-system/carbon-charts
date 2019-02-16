@@ -105,7 +105,7 @@ export class PieChart extends BaseChart {
 
 		// Compute the correct inner & outer radius
 		const { pie: pieConfigs } = Configuration;
-		const marginedRadius = radius - (pieConfigs.label.margin * (chartSize.width / pieConfigs.maxWidth));
+		const marginedRadius = this.computeRadius();
 		this.arc = arc()
 				.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
 				.outerRadius(marginedRadius);
@@ -127,6 +127,7 @@ export class PieChart extends BaseChart {
 			.each(function(d) { this._current = d; });
 
 		// Draw the slice labels
+		const self = this;
 		this.innerWrap
 			.selectAll("text.chart-label")
 			.data(this.pie(dataList), (d: any) => d.data.label)
@@ -134,9 +135,9 @@ export class PieChart extends BaseChart {
 			.append("text")
 			.classed("chart-label", true)
 			.attr("dy", Configuration.pie.label.dy)
-			.style("text-anchor", this.deriveTextAnchor)
-			.attr("transform", d => this.deriveTransformString(d, radius))
-			.text(d => Tools.convertValueToPercentage(d.data.value, dataList));
+			.style("text-anchor", "middle")
+			.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
+			.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); });
 
 		// Hide overlay
 		this.updateOverlay().hide();
@@ -212,19 +213,18 @@ export class PieChart extends BaseChart {
 				.append("text")
 				.classed("chart-label", true)
 				.attr("dy", Configuration.pie.label.dy)
-				.style("text-anchor", this.deriveTextAnchor)
-				.attr("transform", d => this.deriveTransformString(d, radius))
+				.style("text-anchor", "middle")
 				.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
+				.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); })
 				.style("opacity", 0)
 				.transition()
 				.duration(Configuration.transitions.default.duration / 2)
 				.style("opacity", 1);
 
 			text
-				.attr("dy", Configuration.pie.label.dy)
-				.style("text-anchor", this.deriveTextAnchor)
-				.attr("transform", d => this.deriveTransformString(d, radius))
+				.style("text-anchor", "middle")
 				.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
+				.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); })
 				.transition()
 				.duration(Configuration.transitions.default.duration / 2)
 				.style("opacity", 1);
@@ -264,10 +264,7 @@ export class PieChart extends BaseChart {
 			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
 		const dVal = d.value.toLocaleString();
-		const tooltipHTML = `
-			<p class='bignum'>${dVal}</p>
-			<p>${d.data.label}</p>
-		`;
+		const tooltipHTML = this.generateTooltipHTML(d.data.label, dVal);
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
@@ -342,8 +339,7 @@ export class PieChart extends BaseChart {
 
 		const chartSize: any = this.getChartSize(this.container);
 		const dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
-		const scaleRatio = dimensionToUseForScale / pieConfigs.maxWidth;
-		const radius: number = dimensionToUseForScale / 2;
+		const radius: number = this.computeRadius();
 
 		// Resize the SVG
 		select(this.holder).select("svg")
@@ -353,17 +349,17 @@ export class PieChart extends BaseChart {
 			.style("transform", `translate(${radius}px,${radius}px)`);
 
 		// Resize the arc
-		const marginedRadius = radius - (pieConfigs.label.margin * scaleRatio);
 		this.arc = arc()
-			.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
-			.outerRadius(marginedRadius);
+			.innerRadius(this.options.type === "donut" ? (radius * (2 / 3)) : 0)
+			.outerRadius(radius);
 
 		this.innerWrap.selectAll("path")
 			.attr("d", this.arc);
 
+		const self = this;
 		this.innerWrap
 			.selectAll("text.chart-label")
-			.attr("transform", d => this.deriveTransformString(d, radius));
+			.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); });
 
 		// Reposition the legend
 		this.positionLegend();
@@ -386,35 +382,18 @@ export class PieChart extends BaseChart {
 	 * @returns final transform string to be applied to the <text> element
 	 * @memberof PieChart
 	 */
-	private deriveTransformString(d, radius) {
-		const theta = d.endAngle - d.startAngle;
-		const xPosition = radius * Math.sin((theta / 2) + d.startAngle);
-		const yPosition = -1 * radius * Math.cos((theta / 2) + d.startAngle);
+	private deriveTransformString(element, d, radius) {
+		const textLength = element.getComputedTextLength();
+		const textOffsetX = textLength / 2;
+		const textOffsetY = parseFloat(getComputedStyle(element).fontSize) / 2;
+
+		const marginedRadius = radius + Configuration.pie.label.margin;
+
+		const theta = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+		const xPosition = (textOffsetX + marginedRadius) * Math.sin(theta);
+		const yPosition = (textOffsetY + marginedRadius) * -Math.cos(theta);
 
 		return `translate(${xPosition}, ${yPosition})`;
-	}
-
-	/**
-	 * Decide what text-anchor value the slice label item would need based on the quadrant it's in
-	 *
-	 * @private
-	 * @param {any} d - d3 data item for slice
-	 * @returns computed decision on what the text-anchor string should be
-	 * @memberof PieChart
-	 */
-	private deriveTextAnchor(d) {
-		const QUADRANT = Math.PI / 4;
-		const rads = (d.endAngle - d.startAngle) / 2 + d.startAngle;
-
-		if (rads >= QUADRANT && rads <= 3 * QUADRANT) {
-			return "start";
-		} else if ((rads > 7 * QUADRANT && rads < QUADRANT) || (rads > 3 * QUADRANT && rads < 5 * QUADRANT)) {
-			return "middle";
-		} else if (rads >= 5 * QUADRANT && rads <= 7 * QUADRANT) {
-			return "end";
-		} else {
-			return "middle";
-		}
 	}
 }
 
