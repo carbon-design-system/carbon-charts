@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.4](https://github.com/IBM/carbon-charts/compare/v0.9.3...v0.9.4) (2019-02-16)
+
+
+### Bug Fixes
+
+* **$browser:** Fix duplication of titles during title resize ([4698efd](https://github.com/IBM/carbon-charts/commit/4698efd))
+
+
+### Features
+
+* **$browser:** Add y axis ([8e2a86b](https://github.com/IBM/carbon-charts/commit/8e2a86b))
+* **$browser:** Y axis titles ([7e03ff7](https://github.com/IBM/carbon-charts/commit/7e03ff7))
+
+
+
+
+
 ## [0.9.3](https://github.com/IBM/carbon-charts/compare/v0.9.2...v0.9.3) (2019-02-15)
 
 
