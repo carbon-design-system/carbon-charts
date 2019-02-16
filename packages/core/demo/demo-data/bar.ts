@@ -56,6 +56,7 @@ export const groupedBarOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
+			title: "Dollars (CAD)",
 			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 		},
@@ -99,6 +100,7 @@ export const simpleBarOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
+			title: "Dollars (CAD)",
 			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 			stacked: false
@@ -166,6 +168,7 @@ export const stackedBarOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
+			title: "Dollars (CAD)",
 			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 			stacked: true

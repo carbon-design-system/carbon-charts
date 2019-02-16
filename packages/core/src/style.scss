@@ -68,6 +68,11 @@ div.chart-holder {
 		stroke-width: .3;
 		@include fonts();
 
+		&.title{
+			font-size: 18px;
+			font-weight: bold;
+		}
+
 		&.donut {
 			&-figure {
 				font-size: 24px;
