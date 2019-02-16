@@ -9,6 +9,9 @@
 		<a href="https://travis-ci.org/carbon-design-system/carbon-charts">
 			<img src="https://api.travis-ci.org/carbon-design-system/carbon-charts.svg?branch=master" />
 		</a>
+		<a href="https://app.netlify.com/sites/carbon-charts/deploys">
+			<img src="https://api.netlify.com/api/v1/badges/8dd7641f-6f80-498d-aa95-4716a0fa44e3/deploy-status" />
+		</a>
 		<a href="https://www.npmjs.com/package/@carbon/charts">
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
 		</a>

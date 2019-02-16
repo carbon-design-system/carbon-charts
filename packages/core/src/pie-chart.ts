@@ -265,10 +265,7 @@ export class PieChart extends BaseChart {
 			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
 		const dVal = d.value.toLocaleString();
-		const tooltipHTML = `
-			<p class='bignum'>${dVal}</p>
-			<p>${d.data.label}</p>
-		`;
+		const tooltipHTML = this.generateTooltipHTML(d.data.label, dVal);
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
