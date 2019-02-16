@@ -12,7 +12,10 @@ export const donutOptions = {
 	legendClickable: true,
 	containerResizable: true,
 	colors,
-	centerLabel: "Products"
+	center: {
+		label: "Products",
+		number: 300000
+	}
 };
 
 export const pieData = {
