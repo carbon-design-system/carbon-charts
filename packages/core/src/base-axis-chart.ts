@@ -15,14 +15,19 @@ export class BaseAxisChart extends BaseChart {
 	y2: any;
 	thresholdDimensions: any;
 
+	options: any = Object.assign({}, Configuration.options.AXIS);
+
 	constructor(holder: Element, configs: any) {
 		super(holder, configs);
 
-		const { axis } = configs.options;
-		if (axis) {
-			this.x = axis.x;
-			this.y = axis.y;
-			this.y2 = axis.y2;
+		if (configs.options) {
+			this.options = Object.assign({}, this.options, configs.options);
+			const { axis } = configs.options;
+			if (axis) {
+				this.x = axis.x;
+				this.y = axis.y;
+				this.y2 = axis.y2;
+			}
 		}
 	}
 
@@ -507,7 +512,7 @@ export class BaseAxisChart extends BaseChart {
 		// Applies to thresholds being added
 		thresholdRects.enter()
 			.append("rect")
-			.classed("bar", true)
+			.classed("threshold-bar", true)
 			.attr("x", 0)
 			.attr("y", d => calculateYPosition(d))
 			.attr("width", width)

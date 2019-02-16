@@ -132,6 +132,9 @@ export const lineOptions = {
 			]
 		}
 	},
+	points: {
+		radius: 4
+	},
 	legendClickable: true,
 	containerResizable: true
 };

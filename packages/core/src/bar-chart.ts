@@ -250,7 +250,7 @@ export class BarChart extends BaseAxisChart {
 		const self = this;
 		const { accessibility } = this.options;
 
-		this.svg.selectAll("rect")
+		this.svg.selectAll("rect.bar")
 			.on("click", function(d) {
 				self.dispatchEvent("bar-onClick", d);
 			})
