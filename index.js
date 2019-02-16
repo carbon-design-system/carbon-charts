@@ -236,6 +236,7 @@ var groupedBarOptions = {
             title: "2018 Annual Sales Figures",
         },
         y: {
+            title: "Dollars (CAD)",
             formatter: function (axisValue) { return axisValue / 1000 + "k"; },
             yMaxAdjuster: function (yMaxValue) { return yMaxValue * 1.1; },
         },
@@ -277,6 +278,7 @@ var simpleBarOptions = {
             title: "2018 Annual Sales Figures",
         },
         y: {
+            title: "Dollars (CAD)",
             formatter: function (axisValue) { return axisValue / 1000 + "k"; },
             yMaxAdjuster: function (yMaxValue) { return yMaxValue * 1.1; },
             stacked: false
@@ -342,6 +344,7 @@ var stackedBarOptions = {
             title: "2018 Annual Sales Figures",
         },
         y: {
+            title: "Dollars (CAD)",
             formatter: function (axisValue) { return axisValue / 1000 + "k"; },
             yMaxAdjuster: function (yMaxValue) { return yMaxValue * 1.1; },
             stacked: true
@@ -592,6 +595,7 @@ var curvedLineOptions = {
             title: "2018 Annual Sales Figures",
         },
         y: {
+            title: "Dollars (CAD)",
             yMaxAdjuster: function (yMax) { return yMax * 1.2; },
             yMinAdjuster: function (yMin) { return yMin * 1.2; },
             formatter: function (axisValue) { return axisValue / 1000 + "k"; }
@@ -654,6 +658,7 @@ var lineOptions = {
             title: "2018 Annual Sales Figures",
         },
         y: {
+            title: "Dollars (CAD)",
             yMaxAdjuster: function (yMax) { return yMax * 1.2; },
             yMinAdjuster: function (yMin) { return yMin * 1.2; },
             formatter: function (axisValue) { return axisValue / 1000 + "k"; },
@@ -1627,8 +1632,11 @@ var BaseAxisChart = /** @class */ (function (_super) {
     BaseAxisChart.prototype.resizeChart = function () {
         // Reposition the legend
         this.positionLegend();
-        if (this.innerWrap.select(".axis-label.x").nodes().length > 0 && this.options.scales.x.title) {
+        if (this.innerWrap.select(".axis-label.x").nodes().length > 0 || this.options.scales.x.title) {
             this.repositionXAxisTitle();
+        }
+        if (this.innerWrap.select(".axis-label.y").nodes().length > 0 || this.options.scales.y.title) {
+            this.repositionYAxisTitle();
         }
         this.dispatchEvent("resize");
     };
@@ -1700,6 +1708,19 @@ var BaseAxisChart = /** @class */ (function (_super) {
             .attr("text-anchor", "middle")
             .attr("transform", "translate(" + xAxisRef.node().getBBox().width / 2 + ", " + tickHeight + ")")
             .text(this.options.scales.x.title);
+    };
+    BaseAxisChart.prototype.repositionYAxisTitle = function () {
+        var yAxisRef = this.svg.select("g.y.axis");
+        var tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
+        var yAxisTitleRef = this.svg.select("g.y.axis text.y.axis-label");
+        var yAxisTitleTranslate = {
+            x: -(yAxisRef.node().getBBox().height / 2),
+            y: -(tickHeight + _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].tick.heightAddition) * 1.5
+        };
+        yAxisTitleRef.attr("class", "y axis-label")
+            .attr("text-align", "center")
+            .attr("transform", "rotate(-90) translate(" + yAxisTitleTranslate.x + ", " + yAxisTitleTranslate.y + ")")
+            .text(this.options.scales.y.title);
     };
     BaseAxisChart.prototype.getYMax = function () {
         var datasets = this.displayData.datasets;
@@ -1784,6 +1805,20 @@ var BaseAxisChart = /** @class */ (function (_super) {
                 .attr("stroke", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].domain.color)
                 .attr("fill", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].domain.color)
                 .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].domain.strokeWidth);
+        }
+        var tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
+        var yAxisTitleTranslate = {
+            x: -(yAxisRef.node().getBBox().height / 2),
+            y: -(tickHeight + _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].tick.heightAddition) * 1.5
+        };
+        // Add y-axis title
+        if (this.innerWrap.select(".axis-label.y").nodes().length === 0 && this.options.scales.y.title) {
+            yAxisRef.append("text")
+                .attr("class", "y axis-label")
+                .attr("transform", "rotate(-90) translate(" + yAxisTitleTranslate.x + ", " + yAxisTitleTranslate.y + ")")
+                .attr("text-align", "center")
+                .text(this.options.scales.y.title);
+            this.svg.attr("transform", "translate(" + this.innerWrap.select(".axis-label.y").node().getBBox().height + ", 0)");
         }
         _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].moveToFront(horizontalLine);
         if (scales.y2 && scales.y2.ticks.max) {
