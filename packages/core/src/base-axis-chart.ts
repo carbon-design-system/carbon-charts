@@ -279,7 +279,7 @@ export class BaseAxisChart extends BaseChart {
 		const yAxisLabelWidth = this.innerWrap.select(".axis-label.y").node().getBBox().width;
 
 		const yAxisTitleTranslate = {
-			x: - yAxisCenter + yAxisLabelWidth/2,
+			x: - yAxisCenter + yAxisLabelWidth / 2,
 			y: - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5
 		};
 
@@ -405,7 +405,7 @@ export class BaseAxisChart extends BaseChart {
 		const yAxisLabelWidth = this.innerWrap.select(".axis-label.y").node().getBBox().width;
 
 		const yAxisTitleTranslate = {
-			x: - yAxisCenter + yAxisLabelWidth/2,
+			x: - yAxisCenter + yAxisLabelWidth / 2,
 			y: - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5
 		};
 
