@@ -1344,10 +1344,10 @@ var BarChart = /** @class */ (function (_super) {
             .attr("y", function (d) { return _this.y(Math.max(0, d.value)); })
             .attr("width", this.x1.bandwidth())
             .attr("height", function (d) { return Math.abs(_this.y(d.value) - _this.y(0)); })
-            .attr("opacity", 0)
+            .style("opacity", 0)
             .transition(this.getFillTransition())
             .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.label); })
-            .attr("opacity", 1)
+            .style("opacity", 1)
             .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); })
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].default.strokeWidth);
         addedBars.selectAll("rect.bar")
@@ -1359,10 +1359,10 @@ var BarChart = /** @class */ (function (_super) {
             .attr("y", function (d) { return _this.y(Math.max(0, d.value)); })
             .attr("width", this.x1.bandwidth())
             .attr("height", function (d) { return Math.abs(_this.y(d.value) - _this.y(0)); })
-            .attr("opacity", 0)
+            .style("opacity", 0)
             .transition(this.getFillTransition())
             .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.label); })
-            .attr("opacity", 1)
+            .style("opacity", 1)
             .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); })
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].default.strokeWidth);
         // Remove bar groups are no longer needed
@@ -1392,11 +1392,13 @@ var BarChart = /** @class */ (function (_super) {
         }
         if (g) {
             g.transition(animate ? this.getDefaultTransition() : this.getInstantTransition())
-                .attr("transform", function (d) { return "translate(" + _this.x(d) + ", 0)"; });
+                .attr("transform", function (d) { return "translate(" + _this.x(d) + ", 0)"; })
+                .style("opacity", 1);
         }
         // Update existing bars
         rect
             .transition(animate ? this.getFillTransition() : this.getInstantTransition())
+            .style("opacity", 1)
             .attr("x", function (d) { return _this.x1(d.datasetLabel); })
             .attr("y", function (d) { return _this.y(Math.max(0, d.value)); })
             .attr("width", this.x1.bandwidth())
@@ -1913,9 +1915,9 @@ var BaseAxisChart = /** @class */ (function (_super) {
             .attr("width", width)
             .attr("height", function (d) { return calculateHeight(d); })
             .attr("fill", function (d) { return _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].y.thresholds.colors[d.theme]; })
-            .attr("opacity", 0)
+            .style("opacity", 0)
             .transition(t)
-            .attr("opacity", function (d) { return calculateOpacity(d); });
+            .style("opacity", function (d) { return calculateOpacity(d); });
         // Update thresholds
         thresholdRects
             .transition(t)
@@ -1923,7 +1925,7 @@ var BaseAxisChart = /** @class */ (function (_super) {
             .attr("y", function (d) { return calculateYPosition(d); })
             .attr("width", width)
             .attr("height", function (d) { return calculateHeight(d); })
-            .attr("opacity", function (d) { return calculateOpacity(d); })
+            .style("opacity", function (d) { return calculateOpacity(d); })
             .attr("fill", function (d) { return _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].y.thresholds.colors[d.theme]; });
         // Applies to thresholds getting removed
         thresholdRects.exit()
@@ -3605,6 +3607,8 @@ var LineChart = /** @class */ (function (_super) {
         var chartSize = this.getChartSize();
         var width = chartSize.width - margins.left - margins.right;
         var height = chartSize.height - this.getBBox(".x.axis").height;
+        this.innerWrap.selectAll(".removed")
+            .remove();
         // Apply new data to the lines
         var gLines = this.innerWrap.selectAll("g.lines")
             .data(newData.datasets);
@@ -3638,6 +3642,7 @@ var LineChart = /** @class */ (function (_super) {
             .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); });
         // Remove lines that are no longer needed
         gLines.exit()
+            .classed("removed", true) // mark this element with "removed" class so it isn't reused
             .transition(this.getDefaultTransition())
             .style("opacity", 0)
             .remove();
@@ -3664,6 +3669,7 @@ var LineChart = /** @class */ (function (_super) {
             return parentDatum.data;
         })
             .transition(transitionToUse)
+            .style("opacity", 1)
             .attr("stroke", function (d) {
             var parentDatum = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.parentNode).datum();
             return self.colorScale[parentDatum.label]();
@@ -3914,6 +3920,7 @@ var PieChart = /** @class */ (function (_super) {
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; })
             .transition()
+            .style("opacity", 1)
             .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration)
             .attr("fill", function (d) { return _this.getFillScale()[_this.displayData.datasets[0].label](d.data.label); })
             .attrTween("d", function (a) {
@@ -4453,6 +4460,8 @@ var StackedBarChart = /** @class */ (function (_super) {
         var _this = this;
         var stackDataArray = this.getStackData();
         var stackKeys = this.displayData.datasets.map(function (dataset) { return dataset.label; });
+        this.innerWrap.selectAll(".removed")
+            .remove();
         var g = this.innerWrap.selectAll("g.bars-wrapper")
             .selectAll("g")
             .data(Object(d3_shape__WEBPACK_IMPORTED_MODULE_1__["stack"])().keys(stackKeys)(stackDataArray));
@@ -4468,9 +4477,9 @@ var StackedBarChart = /** @class */ (function (_super) {
                 .attr("height", function (d) { return _this.y(d[0]) - _this.y(d[1]); })
                 .attr("width", function (d) { return _this.x.bandwidth(); })
                 .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.data.label); })
-                .attr("opacity", 0)
+                .style("opacity", 0)
                 .transition(_this.getFillTransition())
-                .attr("opacity", 1)
+                .style("opacity", 1)
                 .attr("stroke", function (d) { return _this.options.accessibility ? _this.colorScale[d.datasetLabel](d.data.label) : null; })
                 .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].default.strokeWidth)
                 .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; });
@@ -4483,10 +4492,12 @@ var StackedBarChart = /** @class */ (function (_super) {
         addRect(rectsToAdd);
         addRect(rect);
         g.exit()
+            .classed("removed", true) // mark this element with "removed" class so it isn't reused
             .transition(this.getDefaultTransition())
             .style("opacity", 0)
             .remove();
         rect.exit()
+            .classed("removed", true) // mark this element with "removed" class so it isn't reused
             .transition(this.getDefaultTransition())
             .style("opacity", 0)
             .remove();
@@ -4524,6 +4535,7 @@ var StackedBarChart = /** @class */ (function (_super) {
         // Update existing bars
         rect
             .transition(animate ? this.getFillTransition() : this.getInstantTransition())
+            .style("opacity", 1)
             .attr("x", function (d) { return _this.x(d.data.label); })
             .attr("y", function (d) { return _this.y(d[1]); })
             .attr("height", function (d) { return _this.y(d[0]) - _this.y(d[1]); })
