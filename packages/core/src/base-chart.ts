@@ -954,7 +954,6 @@ export class BaseChart {
 	getBBox(selector: any) {
 		return this.innerWrap.select(selector).node().getBBox();
 	}
-
 	// ================================================================================
 	// Makes chart data components more screen reader friendly
 	// ================================================================================
