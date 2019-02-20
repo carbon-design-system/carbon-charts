@@ -1,5 +1,5 @@
 // D3 Imports
-import { select, mouse } from "d3-selection";
+import { select, selectAll, mouse } from "d3-selection";
 import { line } from "d3-shape";
 
 import { BaseAxisChart } from "./base-axis-chart";
@@ -35,6 +35,15 @@ export class LineChart extends BaseAxisChart {
 		}));
 	}
 
+	getCircleRadius() {
+		return this.options.points.radius || Configuration.charts.points.radius;
+	}
+
+	getCircleFill(radius, d) {
+		const circleShouldBeFilled = radius < Configuration.lines.points.minNonFilledRadius;
+		return circleShouldBeFilled ? this.colorScale[d.datasetLabel](d.label) : "white";
+	}
+
 	draw() {
 		this.innerWrap.style("width", "100%")
 			.style("height", "100%");
@@ -65,7 +74,7 @@ export class LineChart extends BaseAxisChart {
 
 		// D3 line generator function
 		this.lineGenerator = line()
-			.x((d, i) => this.x(this.displayData.labels[i]) + margins.left)
+			.x((d, i) => this.x(this.displayData.labels[i]) + this.x.step() / 2)
 			.y((d: any) => this.y(d))
 			.curve(getD3Curve(curveName, curveOptions));
 
@@ -81,16 +90,23 @@ export class LineChart extends BaseAxisChart {
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);
 
+		const circleRadius = this.getCircleRadius();
 		gLines.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i))
 			.enter()
 				.append("circle")
 				.attr("class", "dot")
-				.attr("cx", d => this.x(d.label) + margins.left)
+				.attr("cx", d => this.x(d.label) + this.x.step() / 2)
 				.attr("cy", d => this.y(d.value))
+<<<<<<< HEAD
 				.attr("r", Configuration.charts.pointCircles.radius)
 				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label))
 				.call(this.makeAccessible, "axis");
+=======
+				.attr("r", circleRadius)
+				.attr("fill", d => this.getCircleFill(circleRadius, d))
+				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+>>>>>>> 42aabaeb1220799c9e56e36a58157031645b533b
 
 		// Hide the overlay
 		this.updateOverlay().hide();
@@ -104,6 +120,9 @@ export class LineChart extends BaseAxisChart {
 		const chartSize = this.getChartSize();
 		const width = chartSize.width - margins.left - margins.right;
 		const height = chartSize.height - this.getBBox(".x.axis").height;
+
+		this.innerWrap.selectAll(".removed")
+			.remove();
 
 		// Apply new data to the lines
 		const gLines = this.innerWrap.selectAll("g.lines")
@@ -126,21 +145,24 @@ export class LineChart extends BaseAxisChart {
 			.attr("d", this.lineGenerator);
 
 		// Add line circles
+		const circleRadius = this.getCircleRadius();
 		addedLineGroups.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i))
 			.enter()
 				.append("circle")
 				.attr("class", "dot")
-				.attr("cx", (d, i) => this.x(d.label) + margins.left)
+				.attr("cx", (d, i) => this.x(d.label) + this.x.step() / 2)
 				.attr("cy", (d: any) => this.y(d.value))
-				.attr("r", 4)
+				.attr("r", circleRadius)
 				.style("opacity", 0)
 				.transition(this.getDefaultTransition())
 				.style("opacity", 1)
+				.attr("fill", d => this.getCircleFill(circleRadius, d))
 				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
 
 		// Remove lines that are no longer needed
 		gLines.exit()
+			.classed("removed", true) // mark this element with "removed" class so it isn't reused
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
@@ -174,6 +196,7 @@ export class LineChart extends BaseAxisChart {
 				return parentDatum.data;
 			})
 			.transition(transitionToUse)
+			.style("opacity", 1)
 			.attr("stroke", function(d) {
 				const parentDatum = select(this.parentNode).datum() as any;
 
@@ -183,6 +206,7 @@ export class LineChart extends BaseAxisChart {
 			.attr("d", this.lineGenerator);
 
 		const { line: margins } = Configuration.charts.margin;
+		const circleRadius = this.getCircleRadius();
 		gLines.selectAll("circle.dot")
 			.data(function(d, i) {
 				const parentDatum = select(this).datum() as any;
@@ -190,9 +214,10 @@ export class LineChart extends BaseAxisChart {
 				return self.addLabelsToDataPoints(parentDatum, i);
 			})
 			.transition(transitionToUse)
-			.attr("cx", d => this.x(d.label) + margins.left)
+			.attr("cx", d => this.x(d.label) + this.x.step() / 2)
 			.attr("cy", d => this.y(d.value))
-			.attr("r", Configuration.lines.points.strokeWidth)
+			.attr("r", circleRadius)
+			.attr("fill", d => this.getCircleFill(circleRadius, d))
 			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
 	}
 
@@ -217,6 +242,26 @@ export class LineChart extends BaseAxisChart {
 		this.updateElements(false, null);
 
 		super.resizeChart();
+	}
+
+	setXScale () {
+		super.setXScale();
+
+		this.x.padding(0); // override BaseAxisChart padding so points aren't misaligned by a few pixels
+	}
+
+	resetOpacity() {
+		const circleRadius = this.getCircleRadius();
+		this.innerWrap.selectAll("circle")
+			.attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
+			.attr("fill", d => this.getCircleFill(circleRadius, d));
+	}
+
+	reduceOpacity(exception) {
+		const circleRadius = this.getCircleRadius();
+		select(exception).attr("fill-opacity", false);
+		select(exception).attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+		select(exception).attr("fill", (d: any) => this.getCircleFill(circleRadius, d));
 	}
 
 	addDataPointEventListener() {

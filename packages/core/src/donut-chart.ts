@@ -87,10 +87,15 @@ export class DonutChart extends PieChart {
 		super(holder, configs, "donut");
 
 		// Check if the DonutCenter object is provided
-		if (configs.options.centerLabel) {
-			this.center = new DonutCenter({
-				label: configs.options.centerLabel
-			});
+		// in the chart configurations
+		const { center, centerLabel, centerNumber } = configs.options;
+
+		// TODO 1.0 - Remove deprecated API
+		if (center || centerLabel || centerNumber) {
+			// Set donut center configs
+			// And instantiate the DonutCenter object
+			const donutCenterConfigs = this.getSuppliedCenterConfigs();
+			this.center = new DonutCenter(donutCenterConfigs);
 		}
 	}
 
@@ -98,9 +103,9 @@ export class DonutChart extends PieChart {
 		super.draw();
 
 		// Draw the center text
-		if (this.center && this.center.configs) {
-			const sumOfDatapoints = this.displayData.datasets[0].data.reduce((accum, currVal) => accum + currVal.value, 0);
-			this.center.configs.number = sumOfDatapoints;
+		if (this.center) {
+			// Set donut center configs
+			this.setCenterConfigs();
 
 			this.center.draw(this.innerWrap);
 		}
@@ -122,11 +127,49 @@ export class DonutChart extends PieChart {
 		super.update();
 
 		if (this.center) {
-			const sumOfDatapoints = this.displayData.datasets[0].data.reduce((accum, currVal) => accum + currVal.value, 0);
+			// Set donut center configs
+			this.setCenterConfigs();
 
-			this.center.configs.number = sumOfDatapoints;
+			// Update donut center
 			this.center.update();
 		}
+	}
+
+	getSuppliedCenterConfigs() {
+		// TODO 1.0 - Remove deprecated API
+		const { center, centerLabel, centerNumber } = this.options;
+		const label = center ? center.label : centerLabel;
+		let number = center ? center.number : centerNumber;
+
+		// TODO 1.0 - Remove deprecated API
+		// Warn developer about deprecation
+		if (centerLabel || centerNumber) {
+			console.warn(
+				"`centerLabel` & `centerNumber` are deprecated and will be removed in v1.0, you should switch to",
+				{
+					center: {
+						label: "test",
+						number: 10
+					}
+				}
+			);
+		}
+
+		// If a number for donut center has not been provided
+		// Use the sum of datapoints
+		if (!number && this.displayData) {
+			const sumOfDatapoints = this.displayData.datasets[0].data.reduce((accum, currVal) => accum + currVal.value, 0);
+			number = sumOfDatapoints;
+		}
+
+		return {
+			label,
+			number
+		};
+	}
+
+	setCenterConfigs() {
+		this.center.configs = this.getSuppliedCenterConfigs();
 	}
 }
 

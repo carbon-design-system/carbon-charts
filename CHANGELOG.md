@@ -3,6 +3,143 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.5](https://github.com/IBM/carbon-charts/compare/v0.9.4...v0.9.5) (2019-02-20)
+
+
+### Bug Fixes
+
+* **$core:** Fixes opacity transitions not completing when data is updated. Ensures use SVG vs CSS op ([f6b245e](https://github.com/IBM/carbon-charts/commit/f6b245e))
+
+
+
+
+
+## [0.9.4](https://github.com/IBM/carbon-charts/compare/v0.9.3...v0.9.4) (2019-02-16)
+
+
+### Bug Fixes
+
+* **$browser:** Fix duplication of titles during title resize ([4698efd](https://github.com/IBM/carbon-charts/commit/4698efd))
+
+
+### Features
+
+* **$browser:** Add y axis ([8e2a86b](https://github.com/IBM/carbon-charts/commit/8e2a86b))
+* **$browser:** Y axis titles ([7e03ff7](https://github.com/IBM/carbon-charts/commit/7e03ff7))
+
+
+
+
+
+## [0.9.3](https://github.com/IBM/carbon-charts/compare/v0.9.2...v0.9.3) (2019-02-15)
+
+
+### Bug Fixes
+
+* **core:** Fix NPM vulnerabilities ([73ef611](https://github.com/IBM/carbon-charts/commit/73ef611))
+
+
+
+
+
+## [0.9.2](https://github.com/IBM/carbon-charts/compare/v0.9.1...v0.9.2) (2019-02-15)
+
+
+### Bug Fixes
+
+* **core:** Allow custom circle size for line chart ([5fb93bd](https://github.com/IBM/carbon-charts/commit/5fb93bd))
+
+
+
+
+
+## [0.9.1](https://github.com/IBM/carbon-charts/compare/v0.9.0...v0.9.1) (2019-02-07)
+
+
+### Bug Fixes
+
+* **core:** Allow the usage of different size variants of tooltip ([4f6aa1d](https://github.com/IBM/carbon-charts/commit/4f6aa1d))
+
+
+
+
+
+# [0.9.0](https://github.com/IBM/carbon-charts/compare/v0.8.6...v0.9.0) (2019-01-28)
+
+
+### Features
+
+* **CORE:** ability to customize donut label & number ([07014cf](https://github.com/IBM/carbon-charts/commit/07014cf))
+
+
+
+
+
+## [0.8.6](https://github.com/IBM/carbon-charts/compare/v0.8.5...v0.8.6) (2019-01-18)
+
+
+### Bug Fixes
+
+* **$browser:** Fixes the issue with pie labels not lining up on smaller sizes. ([154467f](https://github.com/IBM/carbon-charts/commit/154467f)), closes [#151](https://github.com/IBM/carbon-charts/issues/151)
+* **$browser:** Use dynamic step value for margin instead of fixed value. ([1c96d7a](https://github.com/IBM/carbon-charts/commit/1c96d7a))
+* **$browser:** Use dynamic step value for margin instead of fixed value. ([b9910f0](https://github.com/IBM/carbon-charts/commit/b9910f0))
+* **core:** Fix axis alignment for LineChart ([c9f5124](https://github.com/IBM/carbon-charts/commit/c9f5124))
+* **core:** Fix axis alignment in LineChart ([18b44a6](https://github.com/IBM/carbon-charts/commit/18b44a6))
+* **core:** Fix interference of thresholds and bar chart elements ([a69dc15](https://github.com/IBM/carbon-charts/commit/a69dc15))
+
+
+### BREAKING CHANGES
+
+* **$browser:** None.
+
+
+
+
+
+## [0.8.5](https://github.com/IBM/carbon-charts/compare/v0.8.4...v0.8.5) (2019-01-17)
+
+
+### Bug Fixes
+
+* **$browser:** Fixes the issue with pie labels not lining up on smaller sizes. ([54e2227](https://github.com/IBM/carbon-charts/commit/54e2227)), closes [#151](https://github.com/IBM/carbon-charts/issues/151)
+
+
+
+
+
+## [0.8.4](https://github.com/IBM/carbon-charts/compare/v0.8.3...v0.8.4) (2019-01-17)
+
+
+### Bug Fixes
+
+* **core:** Fix interference of thresholds and bar chart elements ([67ff065](https://github.com/IBM/carbon-charts/commit/67ff065))
+
+
+
+
+
+## [0.8.3](https://github.com/IBM/carbon-charts/compare/v0.8.2...v0.8.3) (2019-01-16)
+
+
+### Bug Fixes
+
+* **core:** Fix tooltip positioning and clean up styling ([6de0665](https://github.com/IBM/carbon-charts/commit/6de0665))
+
+
+
+
+
+## [0.8.2](https://github.com/IBM/carbon-charts/compare/v0.8.1...v0.8.2) (2019-01-14)
+
+
+### Bug Fixes
+
+* **core demo:** Fix experimental link issue ([d9d660a](https://github.com/IBM/carbon-charts/commit/d9d660a))
+
+
+
+
+
 ## [0.8.1](https://github.com/IBM/carbon-charts/compare/v0.8.0...v0.8.1) (2019-01-09)
 
 **Note:** Version bump only for package @carbon/charts-monorepo

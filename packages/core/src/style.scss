@@ -6,6 +6,10 @@ $default_transition: all .1s ease-out;
 	font-family: "IBM Plex Sans", Arial, sans-serif;
 }
 
+div.chart-holder {
+	position: relative;
+}
+
 // TODO - Nest all styles into the "chart-wrapper class
 .chart-wrapper {
 	width: 100%;
@@ -52,7 +56,6 @@ $default_transition: all .1s ease-out;
 
 		circle {
 			&.dot {
-				fill: #fff;
 				stroke-width: 2;
 			}
 		}
@@ -64,6 +67,11 @@ $default_transition: all .1s ease-out;
 		stroke: $gray_60;
 		stroke-width: .3;
 		@include fonts();
+
+		&.title{
+			font-size: 18px;
+			font-weight: bold;
+		}
 
 		&.donut {
 			&-figure {
@@ -273,3 +281,5 @@ div.chart-overlay {
 #carbon-charts-patterns svg {
     height: 0;
 }
+
+

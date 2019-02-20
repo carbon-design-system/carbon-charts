@@ -15,14 +15,19 @@ export class BaseAxisChart extends BaseChart {
 	y2: any;
 	thresholdDimensions: any;
 
+	options: any = Object.assign({}, Configuration.options.AXIS);
+
 	constructor(holder: Element, configs: any) {
 		super(holder, configs);
 
-		const { axis } = configs.options;
-		if (axis) {
-			this.x = axis.x;
-			this.y = axis.y;
-			this.y2 = axis.y2;
+		if (configs.options) {
+			this.options = Object.assign({}, this.options, configs.options);
+			const { axis } = configs.options;
+			if (axis) {
+				this.x = axis.x;
+				this.y = axis.y;
+				this.y2 = axis.y2;
+			}
 		}
 	}
 
@@ -172,8 +177,12 @@ export class BaseAxisChart extends BaseChart {
 		// Reposition the legend
 		this.positionLegend();
 
-		if (this.innerWrap.select(".axis-label.x").nodes().length > 0 && this.options.scales.x.title) {
+		if (this.innerWrap.select(".axis-label.x").nodes().length > 0 || this.options.scales.x.title) {
 			this.repositionXAxisTitle();
+		}
+
+		if (this.innerWrap.select(".axis-label.y").nodes().length > 0 || this.options.scales.y.title) {
+			this.repositionYAxisTitle();
 		}
 
 		this.dispatchEvent("resize");
@@ -258,6 +267,23 @@ export class BaseAxisChart extends BaseChart {
 			.attr("text-anchor", "middle")
 			.attr("transform", `translate(${xAxisRef.node().getBBox().width / 2}, ${tickHeight})`)
 			.text(this.options.scales.x.title);
+	}
+
+	repositionYAxisTitle() {
+		const yAxisRef = this.svg.select("g.y.axis");
+		const tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
+
+		const yAxisTitleRef = this.svg.select("g.y.axis text.y.axis-label");
+
+		const yAxisTitleTranslate = {
+			x: - (yAxisRef.node().getBBox().height / 2),
+			y: - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5
+		};
+
+		yAxisTitleRef.attr("class", "y axis-label")
+		.attr("text-align", "center")
+		.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`)
+		.text(this.options.scales.y.title);
 	}
 
 	getYMax() {
@@ -360,6 +386,24 @@ export class BaseAxisChart extends BaseChart {
 				.attr("stroke", Configuration.scales.domain.color)
 				.attr("fill", Configuration.scales.domain.color)
 				.attr("stroke-width", Configuration.scales.domain.strokeWidth);
+		}
+
+		const tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
+
+		const yAxisTitleTranslate = {
+			x: - (yAxisRef.node().getBBox().height / 2),
+			y: - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5
+		};
+
+		// Add y-axis title
+		if (this.innerWrap.select(".axis-label.y").nodes().length === 0 && this.options.scales.y.title) {
+			yAxisRef.append("text")
+				.attr("class", "y axis-label")
+				.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`)
+				.attr("text-align", "center")
+				.text(this.options.scales.y.title);
+
+			this.svg.attr("transform", `translate(${this.innerWrap.select(".axis-label.y").node().getBBox().height}, 0)`);
 		}
 
 		Tools.moveToFront(horizontalLine);
@@ -469,15 +513,15 @@ export class BaseAxisChart extends BaseChart {
 		// Applies to thresholds being added
 		thresholdRects.enter()
 			.append("rect")
-			.classed("bar", true)
+			.classed("threshold-bar", true)
 			.attr("x", 0)
 			.attr("y", d => calculateYPosition(d))
 			.attr("width", width)
 			.attr("height", d => calculateHeight(d))
 			.attr("fill", d => Configuration.scales.y.thresholds.colors[d.theme])
-			.attr("opacity", 0)
+			.style("opacity", 0)
 			.transition(t)
-			.attr("opacity", d => calculateOpacity(d));
+			.style("opacity", d => calculateOpacity(d));
 
 		// Update thresholds
 		thresholdRects
@@ -486,7 +530,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("y", d => calculateYPosition(d))
 			.attr("width", width)
 			.attr("height", d => calculateHeight(d))
-			.attr("opacity", d => calculateOpacity(d))
+			.style("opacity", d => calculateOpacity(d))
 			.attr("fill", d => Configuration.scales.y.thresholds.colors[d.theme]);
 
 		// Applies to thresholds getting removed
