@@ -110,6 +110,9 @@ export class StackedBarChart extends BaseAxisChart {
 		const stackDataArray = this.getStackData();
 		const stackKeys = this.displayData.datasets.map(dataset => dataset.label);
 
+		this.innerWrap.selectAll(".removed")
+			.remove();
+
 		const g = this.innerWrap.selectAll("g.bars-wrapper")
 			.selectAll("g")
 			.data(stack().keys(stackKeys)(stackDataArray));
@@ -128,9 +131,9 @@ export class StackedBarChart extends BaseAxisChart {
 				.attr("height", d => this.y(d[0]) - this.y(d[1]))
 				.attr("width", d => this.x.bandwidth())
 				.attr("fill", d => this.getFillScale()[d.datasetLabel](d.data.label))
-				.attr("opacity", 0)
+				.style("opacity", 0)
 				.transition(this.getFillTransition())
-				.attr("opacity", 1)
+				.style("opacity", 1)
 				.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.data.label) : null)
 				.attr("stroke-width", Configuration.bars.default.strokeWidth)
 				.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
@@ -146,11 +149,13 @@ export class StackedBarChart extends BaseAxisChart {
 		addRect(rect);
 
 		g.exit()
+			.classed("removed", true) // mark this element with "removed" class so it isn't reused
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
 
 		rect.exit()
+			.classed("removed", true) // mark this element with "removed" class so it isn't reused
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
@@ -198,6 +203,7 @@ export class StackedBarChart extends BaseAxisChart {
 		// Update existing bars
 		rect
 			.transition(animate ? this.getFillTransition() : this.getInstantTransition())
+			.style("opacity", 1)
 			.attr("x", d => this.x(d.data.label))
 			.attr("y", d => this.y(d[1]))
 			.attr("height", d => this.y(d[0]) - this.y(d[1]))

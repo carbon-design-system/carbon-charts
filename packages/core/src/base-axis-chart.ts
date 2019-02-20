@@ -525,9 +525,9 @@ export class BaseAxisChart extends BaseChart {
 			.attr("width", width)
 			.attr("height", d => calculateHeight(d))
 			.attr("fill", d => Configuration.scales.y.thresholds.colors[d.theme])
-			.attr("opacity", 0)
+			.style("opacity", 0)
 			.transition(t)
-			.attr("opacity", d => calculateOpacity(d));
+			.style("opacity", d => calculateOpacity(d));
 
 		// Update thresholds
 		thresholdRects
@@ -536,7 +536,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("y", d => calculateYPosition(d))
 			.attr("width", width)
 			.attr("height", d => calculateHeight(d))
-			.attr("opacity", d => calculateOpacity(d))
+			.style("opacity", d => calculateOpacity(d))
 			.attr("fill", d => Configuration.scales.y.thresholds.colors[d.theme]);
 
 		// Applies to thresholds getting removed
