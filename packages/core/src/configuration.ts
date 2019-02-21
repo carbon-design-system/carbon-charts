@@ -166,6 +166,9 @@ export const bars = {
 	spacing: {
 		bars: 0.2,
 		datasets: 0.25
+	},
+	bars: {
+		maxWidth: null
 	}
 };
 
