@@ -166,7 +166,8 @@ export const bars = {
 	spacing: {
 		bars: 0.2,
 		datasets: 0.25
-	}
+	},
+	maxWidth: -1
 };
 
 export const lines = {

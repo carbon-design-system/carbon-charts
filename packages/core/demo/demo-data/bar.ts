@@ -107,7 +107,8 @@ export const simpleBarOptions = {
 		}
 	},
 	legendClickable: true,
-	containerResizable: true
+	containerResizable: true,
+	maxWidth: 50
 };
 
 // Stacked bar

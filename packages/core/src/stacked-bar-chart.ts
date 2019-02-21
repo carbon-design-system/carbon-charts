@@ -68,6 +68,9 @@ export class StackedBarChart extends BaseAxisChart {
 		return stackDataArray;
 	}
 
+	// currently unused, but required to match the BarChart class
+	getBarX(d) {}
+
 	draw() {
 		this.innerWrap.style("width", "100%")
 			.style("height", "100%");

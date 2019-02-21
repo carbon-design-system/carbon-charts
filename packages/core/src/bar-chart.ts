@@ -25,6 +25,31 @@ const getYMin = configs => {
 	return yMin;
 };
 
+// returns the configured max width or the calculated bandwidth
+// whichever is lower
+// defaults to the calculated bandwidth if no maxWidth is defined
+const getMaxBarWidth = (maxWidth, currentBandWidth) => {
+	if (!maxWidth) {
+		return currentBandWidth;
+	}
+	if (currentBandWidth <= maxWidth) {
+		return currentBandWidth;
+	}
+	return maxWidth;
+};
+
+// returns true if the calculated bandwidth is greater than the maxWidth (if deinfed)
+// i.e. if we should be constraining ourselves to a specific bar width
+const isWidthConstrained = (maxWidth, currentBandWidth) => {
+	if (!maxWidth) {
+		return false;
+	}
+	if (currentBandWidth <= maxWidth) {
+		return false;
+	}
+	return true;
+};
+
 export class BarChart extends BaseAxisChart {
 	x: any;
 	x1?: any;
@@ -51,7 +76,8 @@ export class BarChart extends BaseAxisChart {
 			const width = chartSize.width - margins.left - margins.right;
 
 			this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
-			this.x1.domain(configs.data.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
+			this.x1.domain(configs.data.datasets.map(dataset => dataset.label))
+				.rangeRound([0, getMaxBarWidth(this.options.maxWidth, this.x.bandwidth())]);
 		}
 
 		this.options.type = "bar";
@@ -69,8 +95,21 @@ export class BarChart extends BaseAxisChart {
 			this.x.domain(this.displayData.labels);
 		}
 
-		this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
-		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label)).rangeRound([0, this.x.bandwidth()]);
+		if (!isWidthConstrained(this.options.maxWidth, this.x.bandwidth())) {
+			this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
+		} else {
+			this.x1 = scaleBand().rangeRound([0, width]);
+		}
+		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label))
+			.rangeRound([0, getMaxBarWidth(this.options.maxWidth, this.x.bandwidth())]);
+	}
+
+	getBarX(d) {
+		if (!isWidthConstrained(this.options.maxWidth, this.x.bandwidth())) {
+			return this.x1(d.datasetLabel);
+		}
+
+		return (this.x.bandwidth() / 2) - (this.options.maxWidth / 2);
 	}
 
 	draw() {
@@ -99,7 +138,7 @@ export class BarChart extends BaseAxisChart {
 					.enter()
 						.append("rect")
 						.classed("bar", true)
-						.attr("x", d => this.x1(d.datasetLabel))
+						.attr("x", this.getBarX.bind(this))
 						.attr("y", d => this.y(Math.max(0, d.value)))
 						.attr("width", this.x1.bandwidth())
 						.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
@@ -144,7 +183,7 @@ export class BarChart extends BaseAxisChart {
 			.enter()
 			.append("rect")
 			.attr("class", "bar")
-			.attr("x", d => this.x1(d.datasetLabel))
+			.attr("x", this.getBarX.bind(this))
 			.attr("y", d => this.y(Math.max(0, d.value)))
 			.attr("width", this.x1.bandwidth())
 			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
@@ -160,7 +199,7 @@ export class BarChart extends BaseAxisChart {
 			.enter()
 			.append("rect")
 			.attr("class", "bar")
-			.attr("x", d => this.x1(d.datasetLabel))
+			.attr("x", this.getBarX.bind(this))
 			.attr("y", d => this.y(Math.max(0, d.value)))
 			.attr("width", this.x1.bandwidth())
 			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
@@ -215,7 +254,7 @@ export class BarChart extends BaseAxisChart {
 			// TODO
 			// .ease(d3.easeCircle)
 			.style("opacity", 1)
-			.attr("x", d => this.x1(d.datasetLabel))
+			.attr("x", this.getBarX.bind(this))
 			.attr("y", d => this.y(Math.max(0, d.value)))
 			.attr("width", this.x1.bandwidth())
 			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
