@@ -95,11 +95,13 @@ export class BarChart extends BaseAxisChart {
 			this.x.domain(this.displayData.labels);
 		}
 
-		if (!isWidthConstrained(this.options.maxWidth, this.x.bandwidth())) {
+		// if it's a grouped bar, use additoinal padding so the bars don't group up
+		if (this.displayData.datasets.length > 1) {
 			this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
 		} else {
 			this.x1 = scaleBand().rangeRound([0, width]);
 		}
+
 		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label))
 			.rangeRound([0, getMaxBarWidth(this.options.maxWidth, this.x.bandwidth())]);
 	}
