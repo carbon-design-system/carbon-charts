@@ -167,7 +167,9 @@ export const bars = {
 		bars: 0.2,
 		datasets: 0.25
 	},
-	maxWidth: -1
+	bars: {
+		maxWidth: null
+	}
 };
 
 export const lines = {

@@ -7,6 +7,8 @@ import { BaseAxisChart } from "./base-axis-chart";
 import { StackedBarChart } from "./stacked-bar-chart";
 import * as Configuration from "./configuration";
 
+import { Tools } from "./tools";
+
 const getYMin = configs => {
 	const { datasets } = configs.data;
 	const { scales } = configs.options;
@@ -77,7 +79,7 @@ export class BarChart extends BaseAxisChart {
 
 			this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
 			this.x1.domain(configs.data.datasets.map(dataset => dataset.label))
-				.rangeRound([0, getMaxBarWidth(this.options.maxWidth, this.x.bandwidth())]);
+				.rangeRound([0, getMaxBarWidth(Tools.getProperty(this.options, "bars", "maxWidth"), this.x.bandwidth())]);
 		}
 
 		this.options.type = "bar";
@@ -103,15 +105,15 @@ export class BarChart extends BaseAxisChart {
 		}
 
 		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label))
-			.rangeRound([0, getMaxBarWidth(this.options.maxWidth, this.x.bandwidth())]);
+			.rangeRound([0, getMaxBarWidth(Tools.getProperty(this.options, "bars", "maxWidth"), this.x.bandwidth())]);
 	}
 
 	getBarX(d) {
-		if (!isWidthConstrained(this.options.maxWidth, this.x.bandwidth())) {
+		if (!isWidthConstrained(Tools.getProperty(this.options, "bars", "maxWidth"), this.x.bandwidth())) {
 			return this.x1(d.datasetLabel);
 		}
 
-		return (this.x.bandwidth() / 2) - (this.options.maxWidth / 2);
+		return (this.x.bandwidth() / 2) - (Tools.getProperty(this.options, "bars", "maxWidth") / 2);
 	}
 
 	draw() {
