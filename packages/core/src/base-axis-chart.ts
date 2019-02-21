@@ -408,7 +408,8 @@ export class BaseAxisChart extends BaseChart {
 			};
 
 			// Align y axis title on the y axis
-			this.innerWrap.select(".axis-label.y").attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
+			this.innerWrap.select(".axis-label.y")
+				.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
 		}
 
 		Tools.moveToFront(horizontalLine);
