@@ -285,7 +285,10 @@ var simpleBarOptions = {
         }
     },
     legendClickable: true,
-    containerResizable: true
+    containerResizable: true,
+    bars: {
+        maxWidth: 50
+    }
 };
 // Stacked bar
 var stackedBarData = {
@@ -1207,6 +1210,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base_axis_chart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./base-axis-chart */ "./src/base-axis-chart.ts");
 /* harmony import */ var _stacked_bar_chart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./stacked-bar-chart */ "./src/stacked-bar-chart.ts");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -1218,6 +1222,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
     };
 })();
 // D3 Imports
+
 
 
 
@@ -1238,6 +1243,29 @@ var getYMin = function (configs) {
         yMin = scales.y.yMinAdjuster(yMin);
     }
     return yMin;
+};
+// returns the configured max width or the calculated bandwidth
+// whichever is lower
+// defaults to the calculated bandwidth if no maxWidth is defined
+var getMaxBarWidth = function (maxWidth, currentBandWidth) {
+    if (!maxWidth) {
+        return currentBandWidth;
+    }
+    if (currentBandWidth <= maxWidth) {
+        return currentBandWidth;
+    }
+    return maxWidth;
+};
+// returns true if the calculated bandwidth is greater than the maxWidth (if deinfed)
+// i.e. if we should be constraining ourselves to a specific bar width
+var isWidthConstrained = function (maxWidth, currentBandWidth) {
+    if (!maxWidth) {
+        return false;
+    }
+    if (currentBandWidth <= maxWidth) {
+        return false;
+    }
+    return true;
 };
 var BarChart = /** @class */ (function (_super) {
     __extends(BarChart, _super);
@@ -1260,7 +1288,8 @@ var BarChart = /** @class */ (function (_super) {
             var chartSize = _this.getChartSize();
             var width = chartSize.width - margins.left - margins.right;
             _this.x1 = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].spacing.bars);
-            _this.x1.domain(configs.data.datasets.map(function (dataset) { return dataset.label; })).rangeRound([0, _this.x.bandwidth()]);
+            _this.x1.domain(configs.data.datasets.map(function (dataset) { return dataset.label; }))
+                .rangeRound([0, getMaxBarWidth(_tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getProperty(_this.options, "bars", "maxWidth"), _this.x.bandwidth())]);
         }
         _this.options.type = "bar";
         return _this;
@@ -1276,8 +1305,21 @@ var BarChart = /** @class */ (function (_super) {
             this.x = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].spacing.datasets);
             this.x.domain(this.displayData.labels);
         }
-        this.x1 = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].spacing.bars);
-        this.x1.domain(this.displayData.datasets.map(function (dataset) { return dataset.label; })).rangeRound([0, this.x.bandwidth()]);
+        // if it's a grouped bar, use additoinal padding so the bars don't group up
+        if (this.displayData.datasets.length > 1) {
+            this.x1 = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].spacing.bars);
+        }
+        else {
+            this.x1 = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]);
+        }
+        this.x1.domain(this.displayData.datasets.map(function (dataset) { return dataset.label; }))
+            .rangeRound([0, getMaxBarWidth(_tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getProperty(this.options, "bars", "maxWidth"), this.x.bandwidth())]);
+    };
+    BarChart.prototype.getBarX = function (d) {
+        if (!isWidthConstrained(_tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getProperty(this.options, "bars", "maxWidth"), this.x.bandwidth())) {
+            return this.x1(d.datasetLabel);
+        }
+        return (this.x.bandwidth() / 2) - (_tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getProperty(this.options, "bars", "maxWidth") / 2);
     };
     BarChart.prototype.draw = function () {
         var _this = this;
@@ -1302,7 +1344,7 @@ var BarChart = /** @class */ (function (_super) {
             .enter()
             .append("rect")
             .classed("bar", true)
-            .attr("x", function (d) { return _this.x1(d.datasetLabel); })
+            .attr("x", this.getBarX.bind(this))
             .attr("y", function (d) { return _this.y(Math.max(0, d.value)); })
             .attr("width", this.x1.bandwidth())
             .attr("height", function (d) { return Math.abs(_this.y(d.value) - _this.y(0)); })
@@ -1340,7 +1382,7 @@ var BarChart = /** @class */ (function (_super) {
             .enter()
             .append("rect")
             .attr("class", "bar")
-            .attr("x", function (d) { return _this.x1(d.datasetLabel); })
+            .attr("x", this.getBarX.bind(this))
             .attr("y", function (d) { return _this.y(Math.max(0, d.value)); })
             .attr("width", this.x1.bandwidth())
             .attr("height", function (d) { return Math.abs(_this.y(d.value) - _this.y(0)); })
@@ -1355,7 +1397,7 @@ var BarChart = /** @class */ (function (_super) {
             .enter()
             .append("rect")
             .attr("class", "bar")
-            .attr("x", function (d) { return _this.x1(d.datasetLabel); })
+            .attr("x", this.getBarX.bind(this))
             .attr("y", function (d) { return _this.y(Math.max(0, d.value)); })
             .attr("width", this.x1.bandwidth())
             .attr("height", function (d) { return Math.abs(_this.y(d.value) - _this.y(0)); })
@@ -1399,7 +1441,7 @@ var BarChart = /** @class */ (function (_super) {
         rect
             .transition(animate ? this.getFillTransition() : this.getInstantTransition())
             .style("opacity", 1)
-            .attr("x", function (d) { return _this.x1(d.datasetLabel); })
+            .attr("x", this.getBarX.bind(this))
             .attr("y", function (d) { return _this.y(Math.max(0, d.value)); })
             .attr("width", this.x1.bandwidth())
             .attr("height", function (d) { return Math.abs(_this.y(d.value) - _this.y(0)); })
@@ -3142,6 +3184,9 @@ var bars = {
     spacing: {
         bars: 0.2,
         datasets: 0.25
+    },
+    bars: {
+        maxWidth: null
     }
 };
 var lines = {
@@ -4422,6 +4467,8 @@ var StackedBarChart = /** @class */ (function (_super) {
         });
         return stackDataArray;
     };
+    // currently unused, but required to match the BarChart class
+    StackedBarChart.prototype.getBarX = function (d) { };
     StackedBarChart.prototype.draw = function () {
         var _this = this;
         this.innerWrap.style("width", "100%")
@@ -4801,6 +4848,23 @@ var Tools;
         return transformMatrixArray[4];
     }
     Tools.getXTransformsValue = getXTransformsValue;
+    Tools.getProperty = function (object) {
+        var propPath = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            propPath[_i - 1] = arguments[_i];
+        }
+        var position = object;
+        for (var _a = 0, propPath_1 = propPath; _a < propPath_1.length; _a++) {
+            var prop = propPath_1[_a];
+            if (position[prop]) {
+                position = position[prop];
+            }
+            else {
+                return null;
+            }
+        }
+        return position;
+    };
 })(Tools || (Tools = {}));
 
 
