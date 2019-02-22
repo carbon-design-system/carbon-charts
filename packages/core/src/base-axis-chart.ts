@@ -280,7 +280,7 @@ export class BaseAxisChart extends BaseChart {
 
 		const yAxisTitleTranslate = {
 			x: - yAxisCenter + yAxisLabelWidth / 2,
-			y: - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5
+			y: - (tickHeight + Configuration.scales.tick.heightAddition)
 		};
 
 		// Align y axis title with y axis
@@ -405,7 +405,7 @@ export class BaseAxisChart extends BaseChart {
 
 			const yAxisTitleTranslate = {
 				x: - yAxisCenter + yAxisLabelWidth / 2,
-				y: - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5
+				y: - (tickHeight + Configuration.scales.tick.heightAddition)
 			};
 
 			// Align y axis title on the y axis
