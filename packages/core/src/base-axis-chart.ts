@@ -283,6 +283,7 @@ export class BaseAxisChart extends BaseChart {
 			y: - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5
 		};
 
+		// Align y axis title with y axis
 		yAxisTitleRef.attr("class", "y axis-label")
 		.attr("text-align", "center")
 		.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`)
