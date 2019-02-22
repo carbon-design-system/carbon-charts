@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<<<<<<< HEAD
+=======
+## [0.9.6](https://github.com/IBM/carbon-charts/compare/v0.9.4...v0.9.6) (2019-02-21)
+
+
+### Bug Fixes
+
+* **bar:** add maxWidth and other bar fixes ([3866d86](https://github.com/IBM/carbon-charts/commit/3866d86))
+
+
+
+
+
+>>>>>>> fc21a9b2774645e4163c51c9e204f256ce6aeefc
 ## [0.9.5](https://github.com/IBM/carbon-charts/compare/v0.9.4...v0.9.5) (2019-02-20)
 
 
