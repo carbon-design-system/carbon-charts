@@ -46,6 +46,7 @@ export const curvedLineOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
+			title: "Dollars (CAD)",
 			yMaxAdjuster: yMax => yMax * 1.2,
 			yMinAdjuster: yMin => yMin * 1.2,
 			formatter: axisValue => `${axisValue / 1000}k`
@@ -111,6 +112,7 @@ export const lineOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
+			title: "Dollars (CAD)",
 			yMaxAdjuster: yMax => yMax * 1.2,
 			yMinAdjuster: yMin => yMin * 1.2,
 			formatter: axisValue => `${axisValue / 1000}k`,
@@ -129,6 +131,9 @@ export const lineOptions = {
 				}
 			]
 		}
+	},
+	points: {
+		radius: 4
 	},
 	legendClickable: true,
 	containerResizable: true
