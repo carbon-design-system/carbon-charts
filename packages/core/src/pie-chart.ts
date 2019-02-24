@@ -159,6 +159,7 @@ export class PieChart extends BaseChart {
 			.attr("stroke-width", Configuration.pie.default.strokeWidth)
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.transition()
+			.style("opacity", 1)
 			.duration(Configuration.transitions.default.duration)
 			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
 			.attrTween("d", function (a) {
@@ -264,10 +265,7 @@ export class PieChart extends BaseChart {
 			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
 		const dVal = d.value.toLocaleString();
-		const tooltipHTML = `
-			<p class='bignum'>${dVal}</p>
-			<p>${d.data.label}</p>
-		`;
+		const tooltipHTML = this.generateTooltipHTML(d.data.label, dVal);
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
