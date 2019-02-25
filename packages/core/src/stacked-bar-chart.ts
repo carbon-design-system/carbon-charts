@@ -81,7 +81,7 @@ export class StackedBarChart extends BaseAxisChart {
 
 		const stackDataArray = this.getStackData();
 		const stackKeys = this.displayData.datasets.map(dataset => dataset.label);
-		this.innerWrap.append("g")
+		this.viewport.append("g")
 			.classed("bars-wrapper", true)
 			.selectAll("g")
 			.data(stack().keys(stackKeys)(stackDataArray))
@@ -113,10 +113,10 @@ export class StackedBarChart extends BaseAxisChart {
 		const stackDataArray = this.getStackData();
 		const stackKeys = this.displayData.datasets.map(dataset => dataset.label);
 
-		this.innerWrap.selectAll(".removed")
+		this.viewport.selectAll(".removed")
 			.remove();
 
-		const g = this.innerWrap.selectAll("g.bars-wrapper")
+		const g = this.viewport.selectAll("g.bars-wrapper")
 			.selectAll("g")
 			.data(stack().keys(stackKeys)(stackDataArray));
 
@@ -192,15 +192,20 @@ export class StackedBarChart extends BaseAxisChart {
 		this.setYAxis(true);
 
 		// Apply new data to the bars
-		const g = this.innerWrap.selectAll("g.bars g");
+		const g = this.viewport.selectAll("g.bars g");
 		this.updateElements(false, null, g);
 
 		super.resizeChart();
 	}
 
+	onZoom () {
+		super.onZoom();
+		this.updateElements(false);
+	}
+
 	updateElements(animate: boolean, rect?: any, g?: any) {
 		if (!rect) {
-			rect = this.innerWrap.selectAll("rect.bar");
+			rect = this.viewport.selectAll("rect.bar");
 		}
 
 		// Update existing bars

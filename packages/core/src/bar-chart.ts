@@ -126,7 +126,7 @@ export class BarChart extends BaseAxisChart {
 		const width = chartSize.width - margins.left - margins.right;
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
-		const gBars = this.innerWrap
+		const gBars = this.viewport
 			.attr("transform", `translate(${margins.left}, ${margins.top})`)
 			.append("g")
 			.classed("bars", true)
@@ -165,7 +165,7 @@ export class BarChart extends BaseAxisChart {
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		// Apply new data to the bars
-		const g = this.innerWrap.select("g.bars")
+		const g = this.viewport.select("g.bars")
 			.attr("width", width)
 			.selectAll("g")
 			.data(this.displayData.labels);
@@ -236,6 +236,11 @@ export class BarChart extends BaseAxisChart {
 		this.dispatchEvent("update");
 	}
 
+	onZoom () {
+		super.onZoom();
+		this.updateElements(false);
+	}
+
 	updateElements(animate: boolean, rect?: any, g?: any) {
 		const { scales } = this.options;
 
@@ -243,7 +248,7 @@ export class BarChart extends BaseAxisChart {
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		if (!rect) {
-			rect = this.innerWrap.selectAll("rect.bar");
+			rect = this.viewport.selectAll("rect.bar");
 		}
 
 		if (g) {
@@ -285,7 +290,7 @@ export class BarChart extends BaseAxisChart {
 		this.setYAxis(true);
 
 		// Apply new data to the bars
-		const g = this.innerWrap.selectAll("g.bars g");
+		const g = this.viewport.selectAll("g.bars g");
 		this.updateElements(false, null, g);
 
 		super.resizeChart();

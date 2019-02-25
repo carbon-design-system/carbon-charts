@@ -16,7 +16,7 @@ import PatternsService from "./services/patterns";
 // Misc
 import ResizeObserver from "resize-observer-polyfill";
 
-export class BaseChart {
+export abstract class BaseChart {
 	static chartCount = 1;
 
 	id = "";
@@ -276,6 +276,9 @@ export class BaseChart {
 	setSVG(): any {
 		const chartSize = this.getChartSize();
 		this.svg = this.container.append("svg")
+			.attr("view-box", "0 0 100 100")
+			.attr("width", "100%")
+			.attr("height", "100%")
 			.classed("chart-svg " + this.options.type, true);
 
 		this.innerWrap = this.svg.append("g")
@@ -304,21 +307,11 @@ export class BaseChart {
 	/*
 	 * called when the chart needs to be drawn initially
 	 */
-	initialDraw() {
-		console.warn("You should implement your own `initialDraw()` function.");
-	}
+	abstract initialDraw();
 
-	updateChart() {
-		console.warn("You should implement your own `updateChart()` function.");
-	}
+	abstract resizeChart();
 
-	resizeChart() {
-		console.warn("You should implement your own `resizeChart()` function.");
-	}
-
-	update(value?: any) {
-		console.warn("You should implement your own `update()` function.");
-	}
+	abstract update(value?: any);
 
 	resizeWhenContainerChange() {
 		let containerWidth = this.holder.clientWidth;

@@ -1,6 +1,7 @@
 // D3 Imports
-import { select, selectAll, mouse } from "d3-selection";
+import { select, mouse, event } from "d3-selection";
 import { line } from "d3-shape";
+import { zoom } from "d3-zoom";
 
 import { BaseAxisChart } from "./base-axis-chart";
 import * as Configuration from "./configuration";
@@ -78,7 +79,7 @@ export class LineChart extends BaseAxisChart {
 			.y((d: any) => this.y(d))
 			.curve(getD3Curve(curveName, curveOptions));
 
-		const gLines = this.innerWrap.selectAll("g.lines")
+		const gLines = this.viewport.selectAll("g.lines")
 			.data(this.displayData.datasets)
 			.enter()
 				.append("g")
@@ -115,11 +116,11 @@ export class LineChart extends BaseAxisChart {
 		const width = chartSize.width - margins.left - margins.right;
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
-		this.innerWrap.selectAll(".removed")
+		this.viewport.selectAll(".removed")
 			.remove();
 
 		// Apply new data to the lines
-		const gLines = this.innerWrap.selectAll("g.lines")
+		const gLines = this.viewport.selectAll("g.lines")
 			.data(newData.datasets);
 
 		this.updateElements(true, gLines);
@@ -171,6 +172,17 @@ export class LineChart extends BaseAxisChart {
 		this.dispatchEvent("update");
 	}
 
+	onZoom () {
+		super.onZoom();
+
+		// line charts can also zoom/scroll the x-axis
+		this.x.range(this.getOriginalXRange().map(d => event.transform.applyX(d)));
+		this.setXAxis(true);
+		this.drawXGrid();
+
+		this.updateElements(false);
+	}
+
 	updateElements(animate: boolean, gLines?: any) {
 		const { scales } = this.options;
 
@@ -178,7 +190,7 @@ export class LineChart extends BaseAxisChart {
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
 		if (!gLines) {
-			gLines = this.innerWrap.selectAll("g.lines");
+			gLines = this.viewport.selectAll("g.lines");
 		}
 
 		const transitionToUse = animate ? this.getFillTransition() : this.getInstantTransition();
@@ -246,7 +258,7 @@ export class LineChart extends BaseAxisChart {
 
 	resetOpacity() {
 		const circleRadius = this.getCircleRadius();
-		this.innerWrap.selectAll("circle")
+		this.viewport.selectAll("circle")
 			.attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
 			.attr("fill", d => this.getCircleFill(circleRadius, d));
 	}

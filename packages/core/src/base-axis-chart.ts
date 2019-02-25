@@ -1,15 +1,17 @@
 // D3 Imports
-import { select } from "d3-selection";
+import { select, event } from "d3-selection";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { axisBottom, axisLeft, axisRight } from "d3-axis";
 import { min, max } from "d3-array";
+import { zoom } from "d3-zoom";
 
 import { BaseChart } from "./base-chart";
 
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
 
-export class BaseAxisChart extends BaseChart {
+export abstract class BaseAxisChart extends BaseChart {
+	viewport: any;
 	x: any;
 	y: any;
 	y2: any;
@@ -29,15 +31,42 @@ export class BaseAxisChart extends BaseChart {
 				this.y2 = axis.y2;
 			}
 		}
+
+		const zoomBehaviour = zoom()
+			.on("zoom", this.onZoom.bind(this));
+		this.container
+			.call(zoomBehaviour);
+	}
+
+	onZoom () {
+		if (!this.x || !this.y) {
+			return; // no axis set yet
+		}
+
+		this.y.range(this.getOriginalYRange()
+			.map(d => event.transform.applyY(d))
+		);
+		this.y.domain(this.getOriginalYDomain()
+			.map(d => event.transform.invertY(d)) // apply the inverse domain transform twice
+			.map(d => event.transform.invertY(d)) // this is because we also transform the range
+		);
+		this.setYAxis(true);
+		this.drawYGrid();
 	}
 
 	setSVG(): any {
 		super.setSVG();
 
 		this.container.classed("chart-axis", true);
-		this.innerWrap.append("g")
+		this.viewport = this.innerWrap.append("g")
+			.attr("class", "viewport")
+			.attr("clip-path", "url(#viewportclip)");
+		this.viewport.append("clipPath")
+			.attr("id", "viewportclip")
+			.append("rect");
+		this.viewport.append("g")
 			.attr("class", "x grid");
-		this.innerWrap.append("g")
+		this.viewport.append("g")
 			.attr("class", "y grid");
 
 		return this.svg;
@@ -63,6 +92,8 @@ export class BaseAxisChart extends BaseChart {
 			// Draw the x & y grid
 			this.drawXGrid();
 			this.drawYGrid();
+
+			this.setClipping();
 
 			this.addOrUpdateLegend();
 		} else {
@@ -138,13 +169,9 @@ export class BaseAxisChart extends BaseChart {
 		}));
 	}
 
-	draw() {
-		console.warn("You should implement your own `draw()` function.");
-	}
+	abstract draw();
 
-	interpolateValues(newData: any) {
-		console.warn("You should implement your own `interpolateValues()` function.");
-	}
+	abstract interpolateValues(newData: any);
 
 	/**************************************
 	 *  Computations/Calculations         *
@@ -185,7 +212,16 @@ export class BaseAxisChart extends BaseChart {
 			this.repositionYAxisTitle();
 		}
 
+		this.setClipping();
+
 		this.dispatchEvent("resize");
+	}
+
+	setClipping() {
+		const yHeight = this.getChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
+		const node = document.querySelector("clipPath rect"); // we cannot use d3-select here - SVG attributes won't propogate
+		node.setAttribute("width", this.getChartSize().width.toString());
+		node.setAttribute("height", yHeight.toString());
 	}
 
 	/**************************************
@@ -196,15 +232,19 @@ export class BaseAxisChart extends BaseChart {
 		if (xScale) {
 			this.x = xScale;
 		} else {
-			const { bar: margins } = Configuration.charts.margin;
-			const { scales } = this.options;
-
-			const chartSize = this.getChartSize();
-			const width = chartSize.width - margins.left - margins.right;
-
-			this.x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
+			this.x = scaleBand().range(this.getOriginalXRange()).padding(Configuration.scales.x.padding);
 			this.x.domain(this.displayData.labels);
 		}
+	}
+
+	getOriginalXRange() : [number, number] {
+		const { bar: margins } = Configuration.charts.margin;
+		const { scales } = this.options;
+
+		const chartSize = this.getChartSize();
+		const width = chartSize.width - margins.left - margins.right;
+
+		return [0, width];
 	}
 
 	setXAxis(noAnimation?: boolean) {
@@ -256,6 +296,9 @@ export class BaseAxisChart extends BaseChart {
 		// get the yHeight after the height of the axis has settled
 		const yHeight = this.getChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
 		xAxisRef.attr("transform", `translate(0, ${yHeight})`);
+
+		this.svg.select("g.x.axis path.domain")
+			.remove();
 	}
 
 	repositionXAxisTitle() {
@@ -327,24 +370,36 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	setYScale(yScale?: any) {
-		const chartSize = this.getChartSize();
-		const height = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
-
 		const { scales } = this.options;
 
-		const yMin = this.getYMin();
-		const yMax = this.getYMax();
 		if (yScale) {
 			this.y = yScale;
 		} else {
-			this.y = scaleLinear().range([height, 0]);
-			this.y.domain([Math.min(yMin, 0), yMax]);
+			this.y = scaleLinear().range(this.getOriginalYRange());
+			this.y.domain(this.getOriginalYDomain());
 		}
 
 		if (scales.y2 && scales.y2.ticks.max) {
-			this.y2 = scaleLinear().rangeRound([height, 0]);
-			this.y2.domain([scales.y2.ticks.min, scales.y2.ticks.max]);
+			this.y2 = scaleLinear().range(this.getOriginalYRange());
+			this.y2.domain(this.getOriginalY2Domain());
 		}
+	}
+
+	getOriginalYRange () {
+		const chartSize = this.getChartSize();
+		const height = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
+		return [height, 0];
+	}
+
+	getOriginalYDomain () {
+		const yMin = this.getYMin();
+		const yMax = this.getYMax();
+		return [Math.min(yMin, 0), yMax];
+	}
+
+	getOriginalY2Domain () {
+		const { scales } = this.options;
+		return [scales.y2.ticks.min, scales.y2.ticks.max];
 	}
 
 	setYAxis(noAnimation?: boolean) {
@@ -359,10 +414,7 @@ export class BaseAxisChart extends BaseChart {
 			.tickFormat(scales.y.formatter);
 
 		let yAxisRef = this.svg.select("g.y.axis");
-		const horizontalLine = this.svg.select("line.domain");
-
-		this.svg.select("g.x.axis path.domain")
-			.remove();
+		const horizontalLine = this.viewport.select("line.domain");
 
 		// If the <g class="y axis"> exists in the chart SVG, just update it
 		if (yAxisRef.nodes().length > 0) {
@@ -381,10 +433,10 @@ export class BaseAxisChart extends BaseChart {
 
 			yAxisRef.call(yAxis);
 
-			yAxisRef.append("line")
+			this.viewport.append("line")
 				.classed("domain", true)
-				.attr("y1", this.y(0))
-				.attr("y2", this.y(0))
+				.attr("y1", () => this.y(0))
+				.attr("y2", () => this.y(0))
 				.attr("x1", 0)
 				.attr("x2", chartSize.width)
 				.attr("stroke", Configuration.scales.domain.color)
@@ -481,8 +533,8 @@ export class BaseAxisChart extends BaseChart {
 		// Check if the thresholds container <g> exists
 		const thresholdContainerExists = this.innerWrap.select("g.thresholds").nodes().length > 0;
 		const thresholdRects = thresholdContainerExists
-			? this.innerWrap.selectAll("g.thresholds rect")
-			: this.innerWrap.append("g").classed("thresholds", true).selectAll("rect").data(thresholds);
+			? this.viewport.selectAll("g.thresholds rect")
+			: this.viewport.append("g").classed("thresholds", true).selectAll("rect").data(thresholds);
 
 		const calculateYPosition = d => {
 			return Math.max(0, this.y(d.range[1]));
@@ -645,7 +697,5 @@ export class BaseAxisChart extends BaseChart {
 	/**************************************
 	 *  Events & User interactions        *
 	 *************************************/
-	addDataPointEventListener() {
-		console.warn("You should implement your own `addDataPointEventListener()` function.");
-	}
+	abstract addDataPointEventListener();
 }
