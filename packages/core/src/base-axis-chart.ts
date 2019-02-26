@@ -184,16 +184,17 @@ export class BaseAxisChart extends BaseChart {
 		// When a mousedown action is detected on the slider, calculate the cursor's relative position on the slider
 		// to be used as a grab point for dragging
 		const setGrabPoint = d => {
-			const maxClickRange = Math.abs(Configuration.scales.maxYAxisClickEventValue - Configuration.scales.minYAxisClickEventValue);
-			const cursorRelativePosition = (Math.abs(event.y - Configuration.scales.minYAxisClickEventValue) / maxClickRange);
-			const sliderRelativePosition = maxHeight + Math.abs(maxHeight - minHeight) * cursorRelativePosition;
-			sliderLength = Math.abs(sliderTop - sliderBottom);
-			cursorLocationOnSlider = Math.abs(sliderTop - sliderRelativePosition) / sliderLength;
+			const minClickValue = this.svg.select(`#${this.chartContainerID}-slider-circle-bottom`).node().getBoundingClientRect().bottom;
+			const maxClickValue = this.svg.select(`#${this.chartContainerID}-slider-circle-top`).node().getBoundingClientRect().top;
+			const maxClickRange = Math.abs(maxClickValue - minClickValue);
+			sliderLength = Math.abs(maxClickValue - minClickValue);
+			cursorLocationOnSlider = (Math.abs(event.y - minClickValue) / maxClickRange);
+			const sliderRelativePosition = maxHeight + Math.abs(maxHeight - minHeight) * cursorLocationOnSlider;
 		};
 
 		const dragSlider = d => {
 
-			/*// Get the cursor's y location.
+			// Get the cursor's y location.
 			let y = event.y;
 
 			// y must be between the two ends of the line.
@@ -209,7 +210,7 @@ export class BaseAxisChart extends BaseChart {
 			const newBottomHandleLocation = y - ((sliderTop - sliderBottom) * (1 - cursorLocationOnSlider));
 
 			// Move the slider
-			if (newTopHandleLocation + radius > maxHeight && newBottomHandleLocation + radius < minHeight) {
+			if (newTopHandleLocation + radius > maxHeight && newBottomHandleLocation - radius < minHeight) {
 
 				// Scale the min and max axis values
 				this.upperScaleY = 1 - (newTopHandleLocation - maxHeight) / dragAreaLength;
@@ -233,7 +234,7 @@ export class BaseAxisChart extends BaseChart {
 				lowerCircle.datum({"y": sliderBottom});
 			}
 
-			this.update();*/
+			this.update();
 		};
 
 		const upperDragged = d => {
