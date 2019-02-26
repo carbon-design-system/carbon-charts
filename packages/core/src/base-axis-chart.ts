@@ -189,11 +189,12 @@ export class BaseAxisChart extends BaseChart {
 			const sliderRelativePosition = maxHeight + Math.abs(maxHeight - minHeight) * cursorRelativePosition;
 			sliderLength = Math.abs(sliderTop - sliderBottom);
 			cursorLocationOnSlider = Math.abs(sliderTop - sliderRelativePosition) / sliderLength;
+			console.log(cursorLocationOnSlider)
 		};
 
 		const dragSlider = d => {
 
-			// Get the cursor's y location.
+			/*// Get the cursor's y location.
 			let y = event.y;
 
 			// y must be between the two ends of the line.
@@ -233,7 +234,7 @@ export class BaseAxisChart extends BaseChart {
 				lowerCircle.datum({"y": sliderBottom});
 			}
 
-			this.update();
+			this.update();*/
 		};
 
 		const upperDragged = d => {
