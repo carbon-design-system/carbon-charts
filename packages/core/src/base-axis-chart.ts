@@ -158,7 +158,7 @@ export class BaseAxisChart extends BaseChart {
 		const diameter = 2 * radius;
 
 		// The max height of the upper handle
-		const maxHeight = margins.top;
+		const maxHeight = 0;
 
 		// The minimum height of the lower handle
 		const minHeight = Configuration.sliders.height;
@@ -171,6 +171,7 @@ export class BaseAxisChart extends BaseChart {
 		// Slider is intially fit to the top and bottom of the axis
 		let sliderTop = maxHeight;
 		let sliderBottom = minHeight;
+		let sliderLength = Math.abs(sliderTop - sliderBottom);;
 
 		// Slider components
 		let lowerCircle: any;
@@ -186,9 +187,11 @@ export class BaseAxisChart extends BaseChart {
 			const maxClickRange = Math.abs(Configuration.scales.maxYAxisClickEventValue - Configuration.scales.minYAxisClickEventValue);
 			const cursorRelativePosition = (Math.abs(event.y - Configuration.scales.minYAxisClickEventValue) / maxClickRange);
 			const sliderRelativePosition = maxHeight + Math.abs(maxHeight - minHeight) * cursorRelativePosition;
-			const sliderLength = Math.abs(sliderTop - sliderBottom);
+			sliderLength = Math.abs(sliderTop - sliderBottom);
 			cursorLocationOnSlider = Math.abs(sliderTop - sliderRelativePosition) / sliderLength;
 		};
+
+		console.log("slider length: " + sliderLength)
 
 		const dragSlider = d => {
 
@@ -523,25 +526,30 @@ export class BaseAxisChart extends BaseChart {
 			yMax = scales.y.yMaxAdjuster(yMax);
 		}
 
-		return yMax  * this.upperScaleY;;
+		return yMax * this.upperScaleY;
 	}
 
 	getYMin() {
 		const { datasets } = this.displayData;
 		const { scales } = this.options;
-		let yMin;
+		let yMin, yMax;
 
 		if (datasets.length === 1) {
 			yMin = min(datasets[0].data);
+			yMax = max(datasets[0].data);
 		} else {
 			yMin = min(datasets, (d: any) => (min(d.data)));
+			yMax = max(datasets, (d: any) => (max(d.data)));
 		}
 
 		if (scales.y.yMinAdjuster) {
 			yMin = scales.y.yMinAdjuster(yMin);
 		}
 
-		return yMin  * this.lowerScaleY;;
+		console.log((yMax - yMin)*this.lowerScaleY)
+console.log(yMin + " " + this.lowerScaleY)
+
+		return (yMax - yMin)*(1-this.lowerScaleY);
 	}
 
 	setYScale(yScale?: any) {
@@ -555,8 +563,15 @@ export class BaseAxisChart extends BaseChart {
 		if (yScale) {
 			this.y = yScale;
 		} else {
+			console.log(yMin)
 			this.y = scaleLinear().range([height, 0]);
-			this.y.domain([Math.min(yMin, 0), yMax]);
+
+			if (this.lowerScaleY === 1) {
+				console.log("hi")
+				this.y.domain([Math.min(yMin, 0), yMax]);
+			} else {
+				this.y.domain([yMin, yMax]);
+			}
 		}
 
 		if (scales.y2 && scales.y2.ticks.max) {
