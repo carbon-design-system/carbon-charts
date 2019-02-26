@@ -149,7 +149,9 @@ export class BarChart extends BaseAxisChart {
 						.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
 						.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.label) : null)
 						.attr("stroke-width", Configuration.bars.default.strokeWidth)
-						.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
+						.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
+						// Make the data element accessible and pass x and y values for the data point, and the dataset label
+						.call(this.makeAccessible, "axis");
 
 		// Hide the overlay
 		this.updateOverlay().hide();

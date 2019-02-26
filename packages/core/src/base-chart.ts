@@ -395,7 +395,8 @@ export class BaseChart {
 			chartId = this.id;
 			container = parent.append("div");
 			container.attr("chart-id", chartId)
-				.classed("chart-wrapper", true);
+				.classed("chart-wrapper", true)
+				.call(this.makeAccessible, "chart-container");
 			if (container.select(".legend-wrapper").nodes().length === 0) {
 				const legendWrapper = container.append("div")
 					.attr("class", "legend-wrapper")
@@ -501,7 +502,8 @@ export class BaseChart {
 			.attr("class", "legend-btn active");
 
 		legendEnter.append("div")
-			.attr("class", "legend-circle");
+			.attr("class", "legend-circle")
+			.call(this.makeAccessible, "legend-item");
 
 		legendEnter.append("text");
 
@@ -534,7 +536,8 @@ export class BaseChart {
 			const containerWidth = this.container.node().clientWidth;
 			const legendWidth = containerWidth - svgWidth;
 			this.container.select(".legend").classed("right-legend", true)
-				.style("width", legendWidth + "px");
+				.style("width", legendWidth + "px")
+				.call(this.makeAccessible, "legend-container");
 		} else {
 			this.container.select(".legend-wrapper").style("height", Configuration.legend.wrapperHeight);
 		}
@@ -951,4 +954,28 @@ export class BaseChart {
 	getBBox(selector: any) {
 		return this.innerWrap.select(selector).node().getBBox();
 	}
+// ================================================================================
+	// Makes chart data components more screen reader friendly
+	// ================================================================================
+	makeAccessible (element?: any, type?: any, dataList?: any) {
+		// Make chart data components tabbable
+		element.attr("tabindex", 0);
+		// Aria label contains the x value, y value, and dataset for the data element
+		if (type === "axis") {
+			element.attr("aria-label", (d) => `Label: ${d.label}, Value: ${d.value}, belongs to ${d.datasetLabel}`);
+		} else if (type === "slice") {
+			element.attr("aria-label", (d) => `Label: ${d.data.label}, Value: ${d.value},
+			percentage is ${Tools.convertValueToPercentage(d.data.value, dataList)} percent`);
+		} else if (type === "legend-item") {
+			element.attr("aria-label", (d) => `Legend Item: ${d.key}, Status: ${d.value ? "enabled" : "disabled"},
+			Click to ${d.value ? "disable" : "enable"}`);
+		} else if (type === "chart-container") {
+			// TODO aria-labelledby title
+			element.attr("aria-label", "New chart")
+			.attr("role", "alert");
+		} else if (type === "legend-container") {
+			element.attr("aria-label", "Chart legend - click items to add or remove them from the chart");
+		}
+	}
 }
+
