@@ -189,7 +189,6 @@ export class BaseAxisChart extends BaseChart {
 			const sliderRelativePosition = maxHeight + Math.abs(maxHeight - minHeight) * cursorRelativePosition;
 			sliderLength = Math.abs(sliderTop - sliderBottom);
 			cursorLocationOnSlider = Math.abs(sliderTop - sliderRelativePosition) / sliderLength;
-			console.log(cursorLocationOnSlider)
 		};
 
 		const dragSlider = d => {
