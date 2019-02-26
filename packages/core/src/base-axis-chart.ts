@@ -171,7 +171,7 @@ export class BaseAxisChart extends BaseChart {
 		// Slider is intially fit to the top and bottom of the axis
 		let sliderTop = maxHeight;
 		let sliderBottom = minHeight;
-		let sliderLength = Math.abs(sliderTop - sliderBottom);;
+		let sliderLength = Math.abs(sliderTop - sliderBottom);
 
 		// Slider components
 		let lowerCircle: any;
@@ -190,8 +190,6 @@ export class BaseAxisChart extends BaseChart {
 			sliderLength = Math.abs(sliderTop - sliderBottom);
 			cursorLocationOnSlider = Math.abs(sliderTop - sliderRelativePosition) / sliderLength;
 		};
-
-		console.log("slider length: " + sliderLength)
 
 		const dragSlider = d => {
 
@@ -528,7 +526,11 @@ export class BaseAxisChart extends BaseChart {
 			yMax = scales.y.yMaxAdjuster(yMax);
 		}
 
-		return (yMax - Math.min(yMin, 0))*this.upperScaleY;
+		if (yMin < 0) {
+			return yMin + ((yMax - Math.min(yMin, 0)) * this.upperScaleY);
+		} else {
+			return (yMax - Math.min(yMin, 0)) * this.upperScaleY;
+		}
 	}
 
 	getYMin() {
@@ -548,7 +550,11 @@ export class BaseAxisChart extends BaseChart {
 			yMin = scales.y.yMinAdjuster(yMin);
 		}
 
-		return (yMax - Math.min(yMin, 0))*(1-this.lowerScaleY);
+		if (yMin < 0) {
+			return yMin + ((yMax - yMin) * (1 - this.lowerScaleY));
+		} else {
+			return (yMax - 0) * (1 - this.lowerScaleY);
+		}
 	}
 
 	setYScale(yScale?: any) {
@@ -562,7 +568,6 @@ export class BaseAxisChart extends BaseChart {
 		if (yScale) {
 			this.y = yScale;
 		} else {
-			console.log(yMin)
 			this.y = scaleLinear().range([height, 0]);
 
 			if (this.lowerScaleY === 1) {
