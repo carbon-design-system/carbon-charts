@@ -31,7 +31,8 @@ export class StackedBarChart extends BaseAxisChart {
 	getYMax() {
 		const { datasets, labels } = this.displayData;
 		const { scales } = this.options;
-		let yMax;
+		const yMin = 0;
+		let axisRange, yMax;
 
 		if (datasets.length === 1) {
 			yMax = max(datasets[0].data);
@@ -48,7 +49,13 @@ export class StackedBarChart extends BaseAxisChart {
 			yMax = scales.y.yMaxAdjuster(yMax);
 		}
 
-		return yMax;
+		if (yMin < 0) {
+			axisRange = yMax - Math.min(yMin, 0);
+			return yMin + axisRange * this.upperScaleY;
+		} else {
+			axisRange = yMax - Math.min(yMin, 0);
+			return axisRange * this.upperScaleY;
+		}
 	}
 
 	getStackData() {
@@ -95,6 +102,7 @@ export class StackedBarChart extends BaseAxisChart {
 					.classed("bar", true)
 					.attr("x", d => this.x(d.data.label))
 					.attr("y", d => this.y(d[1]))
+					.attr("clip-path", "url(#clip)")
 					.attr("height", d => this.y(d[0]) - this.y(d[1]))
 					.attr("width", d => this.x.bandwidth())
 					.attr("fill", d => this.getFillScale()[d.datasetLabel](d.data.label))

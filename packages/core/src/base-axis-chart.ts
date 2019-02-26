@@ -512,7 +512,7 @@ export class BaseAxisChart extends BaseChart {
 	getYMax() {
 		const { datasets } = this.displayData;
 		const { scales } = this.options;
-		let yMin, yMax;
+		let axisRange, yMin, yMax;
 
 		if (datasets.length === 1) {
 			yMin = min(datasets[0].data);
@@ -527,16 +527,18 @@ export class BaseAxisChart extends BaseChart {
 		}
 
 		if (yMin < 0) {
-			return yMin + ((yMax - Math.min(yMin, 0)) * this.upperScaleY);
+			axisRange = yMax - Math.min(yMin, 0);
+			return yMin + axisRange * this.upperScaleY;
 		} else {
-			return (yMax - Math.min(yMin, 0)) * this.upperScaleY;
+			axisRange = yMax - Math.min(yMin, 0);
+			return axisRange * this.upperScaleY;
 		}
 	}
 
 	getYMin() {
 		const { datasets } = this.displayData;
 		const { scales } = this.options;
-		let yMin, yMax;
+		let axisRange, yMin, yMax;
 
 		if (datasets.length === 1) {
 			yMin = min(datasets[0].data);
@@ -551,9 +553,11 @@ export class BaseAxisChart extends BaseChart {
 		}
 
 		if (yMin < 0) {
-			return yMin + ((yMax - yMin) * (1 - this.lowerScaleY));
+			axisRange = ((yMax - yMin));
+			return yMin + axisRange * (1 - this.lowerScaleY);
 		} else {
-			return (yMax - 0) * (1 - this.lowerScaleY);
+			axisRange = (yMax - 0);
+			return axisRange * (1 - this.lowerScaleY);
 		}
 	}
 
