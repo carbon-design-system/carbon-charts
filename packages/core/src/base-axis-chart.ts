@@ -1,8 +1,13 @@
 // D3 Imports
-import { select } from "d3-selection";
+import {
+	mouse,
+	select,
+	event
+} from "d3-selection";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { axisBottom, axisLeft, axisRight } from "d3-axis";
 import { min, max } from "d3-array";
+import { drag } from "d3-drag";
 
 import { BaseChart } from "./base-chart";
 
@@ -14,6 +19,11 @@ export class BaseAxisChart extends BaseChart {
 	y: any;
 	y2: any;
 	thresholdDimensions: any;
+
+	// Represents the rescale value obtained from sliders
+	lowerScaleY = 1;
+	upperScaleY = 1;
+	scaleX = 1;
 
 	options: any = Object.assign({}, Configuration.options.AXIS);
 
@@ -63,6 +73,9 @@ export class BaseAxisChart extends BaseChart {
 			// Draw the x & y grid
 			this.drawXGrid();
 			this.drawYGrid();
+
+			// Create y axis slider
+			this.createYSlider();
 
 			this.addOrUpdateLegend();
 		} else {
@@ -136,6 +149,211 @@ export class BaseAxisChart extends BaseChart {
 			datasetLabel: dataset.label,
 			value: dataset.data[index]
 		}));
+	}
+
+	createYSlider() {
+		const margins = Configuration.charts.margin;
+		const width = this.getChartSize().width + margins.left;
+		const radius = Configuration.sliders.handles.radius;
+		const diameter = 2 * radius;
+
+		// The max height of the upper handle
+		const maxHeight = margins.top;
+
+		// The minimum height of the lower handle
+		const minHeight = Configuration.sliders.height;
+
+		const dragAreaLength = minHeight - maxHeight;
+
+		const clipboxWidth = this.getChartSize().width;
+		const clipBoxHeight = this.getChartSize().height - margins.top - margins.bottom;
+
+		// Slider is intially fit to the top and bottom of the axis
+		let sliderTop = maxHeight;
+		let sliderBottom = minHeight;
+
+		// Slider components
+		let lowerCircle: any;
+		let upperCircle: any;
+		let line: any;
+
+		// Represents the grab point location on the slider
+		let cursorLocationOnSlider: any;
+
+		// When a mousedown action is detected on the slider, calculate the cursor's relative position on the slider
+		// to be used as a grab point for dragging
+		const setGrabPoint = d => {
+			const maxClickRange = Math.abs(Configuration.scales.maxYAxisClickEventValue - Configuration.scales.minYAxisClickEventValue);
+			const cursorRelativePosition = (Math.abs(event.y - Configuration.scales.minYAxisClickEventValue) / maxClickRange);
+			const sliderRelativePosition = maxHeight + Math.abs(maxHeight - minHeight) * cursorRelativePosition;
+			const sliderLength = Math.abs(sliderTop - sliderBottom);
+			cursorLocationOnSlider = Math.abs(sliderTop - sliderRelativePosition) / sliderLength;
+		};
+
+		const dragSlider = d => {
+
+			// Get the cursor's y location.
+			let y = event.y;
+
+			// y must be between the two ends of the line.
+			if (y < maxHeight) {
+				y = maxHeight;
+			} else {
+				if (y > minHeight) {
+					y = minHeight;
+				}
+			}
+
+			const newTopHandleLocation = y + ((sliderTop - sliderBottom) * cursorLocationOnSlider);
+			const newBottomHandleLocation = y - ((sliderTop - sliderBottom) * (1 - cursorLocationOnSlider));
+
+			// Move the slider
+			if (newTopHandleLocation + radius > maxHeight && newBottomHandleLocation + radius < minHeight) {
+
+				// Scale the min and max axis values
+				this.upperScaleY = 1 - (newTopHandleLocation - maxHeight) / dragAreaLength;
+				this.lowerScaleY = (newBottomHandleLocation - maxHeight) / dragAreaLength;
+
+				sliderTop = newTopHandleLocation;
+				sliderBottom = newBottomHandleLocation;
+
+				// This assignment is necessary for multiple drag gestures.
+				// It makes the drag.origin function yield the correct value.
+				// Set slider top/bottom attributes
+				d.y1 = sliderTop;
+				d.y2 = sliderBottom;
+
+				line.attr("y1", sliderTop + radius);
+				upperCircle.attr("cy", sliderTop);
+				upperCircle.datum({"y": sliderTop});
+
+				line.attr("y2", sliderBottom - radius);
+				lowerCircle.attr("cy", sliderBottom);
+				lowerCircle.datum({"y": sliderBottom});
+			}
+
+			this.update();
+		};
+
+		const upperDragged = d => {
+
+			// Get the cursor's y location.
+			let y = event.y;
+
+			// y must be between the two ends of the line.
+			if (y < maxHeight) {
+				y = maxHeight;
+			} else {
+				if (y > sliderBottom - diameter) {
+					y = sliderBottom - diameter;
+				}
+			}
+
+			// This assignment is necessary for multiple drag gestures.
+			// It makes the drag.origin function yield the correct value.
+			// Set upper handle position
+			d.y = y;
+
+			// Update axis range
+			this.upperScaleY = 1 - ((y - maxHeight) / dragAreaLength);
+			sliderTop = y;
+
+			// Update the handle location on the slider
+			upperCircle.attr("cy", sliderTop);
+			line.attr("y1", sliderTop + radius);
+			line.datum({"y1": sliderTop + radius});
+
+			this.update();
+		};
+
+		const lowerDragged = d => {
+
+			// Get the cursor's y location.
+			let y = event.y;
+
+			// y must be between the two ends of the line.
+			if (y < (sliderTop + diameter)) {
+				y = (sliderTop + diameter);
+			} else {
+				if (y > minHeight) {
+					y = minHeight;
+				}
+			}
+
+			// This assignment is necessary for multiple drag gestures.
+			// It makes the drag.origin function yield the correct value.
+			// Set lower handle position
+			d.y = y;
+
+			// Update axis range
+			this.lowerScaleY = (y - maxHeight) / dragAreaLength;
+
+			sliderBottom = y;
+
+			// Update the circle location on the slider
+			lowerCircle.attr("cy", sliderBottom);
+			line.attr("y2", sliderBottom - radius);
+			line.datum({"y2": sliderBottom - radius});
+
+			this.update();
+		};
+
+		// Insert the slider element into the action bar. A slider consists of a line and a two circles
+		line = this.innerWrap.append("line")
+			.attr("id", `${this.chartContainerID}-slider-line`)
+			.attr("x1", Configuration.sliders.margin.left)
+			.attr("x2", Configuration.sliders.margin.left)
+			.attr("y1", sliderTop + radius)
+			.attr("y2", sliderBottom - radius)
+			.style("stroke", Configuration.sliders.colour)
+			.style("opacity", Configuration.sliders.line.opacity)
+			.style("stroke-linecap", "round")
+			.style("stroke-width", radius)
+			.style("cursor", "grab")
+			.on("mousedown", setGrabPoint)
+			.datum({
+				y1: sliderTop,
+				y2: sliderBottom
+			}).call(drag()
+			.on("drag", dragSlider));
+
+		// Make handles draggable
+		lowerCircle = this.innerWrap.append("circle")
+			.attr("width", width)
+			.attr("height", Configuration.sliders.height)
+			.datum({
+				x: Configuration.sliders.margin.left,
+				y: sliderBottom
+			}).call(drag()
+			.on("drag", lowerDragged))
+			.attr("id", `${this.chartContainerID}-slider-circle-top`)
+			.attr("r", radius)
+			.attr("cy", d => d.y)
+			.attr("cx", d => d.x)
+			.style("fill", Configuration.sliders.colour)
+			.style("cursor", "ns-resize");
+
+		upperCircle = this.innerWrap.append("circle")
+			.attr("width", width)
+			.attr("height", Configuration.sliders.height)
+			.datum({
+				x: Configuration.sliders.margin.left,
+				y: sliderTop
+			}).call(drag()
+			.on("drag", upperDragged))
+			.attr("id", `${this.chartContainerID}-slider-circle-bottom`)
+			.attr("r", radius)
+			.attr("cy", d => d.y)
+			.attr("cx", d => d.x)
+			.style("fill", Configuration.sliders.colour)
+			.style("cursor", "ns-resize");
+
+		// Keep chart data elements within the boundaires of the chart
+		const svg = this.innerWrap.append("clipPath")
+			.attr("id", "clip")
+			.append("rect")
+			.attr("width", clipboxWidth)
+			.attr("height", clipBoxHeight);
 	}
 
 	draw() {
@@ -305,7 +523,7 @@ export class BaseAxisChart extends BaseChart {
 			yMax = scales.y.yMaxAdjuster(yMax);
 		}
 
-		return yMax;
+		return yMax  * this.upperScaleY;;
 	}
 
 	getYMin() {
@@ -323,7 +541,7 @@ export class BaseAxisChart extends BaseChart {
 			yMin = scales.y.yMinAdjuster(yMin);
 		}
 
-		return yMin;
+		return yMin  * this.lowerScaleY;;
 	}
 
 	setYScale(yScale?: any) {

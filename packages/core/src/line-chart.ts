@@ -82,6 +82,8 @@ export class LineChart extends BaseAxisChart {
 			.data(this.displayData.datasets)
 			.enter()
 				.append("g")
+
+				.attr("clip-path", "url(#clip)")
 				.classed("lines", true);
 
 		gLines.append("path")
@@ -98,6 +100,7 @@ export class LineChart extends BaseAxisChart {
 				.attr("class", "dot")
 				.attr("cx", d => this.x(d.label) + this.x.step() / 2)
 				.attr("cy", d => this.y(d.value))
+				.attr("clip-path", "url(#clip)")
 				.attr("r", circleRadius)
 				.attr("fill", d => this.getCircleFill(circleRadius, d))
 				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));

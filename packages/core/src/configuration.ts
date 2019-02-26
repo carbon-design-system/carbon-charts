@@ -55,6 +55,20 @@ export const options = {
 	AXIS: axisOptions
 };
 
+export const sliders = {
+	height: 348,
+	colour: "red",
+	margin: {
+		left: 15
+	},
+	handles: {
+		radius: 7
+	},
+	line: {
+		opacity: 0.5
+	}
+};
+
 export const charts = {
 	margin: {
 		top: 20,
@@ -104,6 +118,8 @@ export const charts = {
 };
 
 export const scales = {
+	maxYAxisClickEventValue: 672,
+	minYAxisClickEventValue: 359,
 	maxWidthOfAxisLabel: 175,
 	maxNumOfAxisLabelLetters: 60,
 	yAxisAngle: -90,
