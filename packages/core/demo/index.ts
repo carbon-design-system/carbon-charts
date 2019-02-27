@@ -59,6 +59,7 @@ const {
 	curvedLineData,
 	lineData,
 	lineOptions,
+	scatterData,
 	// Combo
 	comboData,
 	comboOptions
@@ -135,7 +136,7 @@ const chartTypes = [
 		id: "scatter",
 		name: "scatter",
 		options: lineOptions,
-		data: lineData
+		data: scatterData
 	}
 ];
 
@@ -296,15 +297,15 @@ chartTypes.forEach(type => {
 
 				break;
 			case "scatter":
-					classyCharts[type.id] = new ScatterChart(
-						classyContainer,
-						{
-							data: type.data,
-							options: Object.assign({}, type.options, {type: type.id}),
-						}
-					);
+				classyCharts[type.id] = new ScatterChart(
+					classyContainer,
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id}),
+					}
+				);
 
-					setDemoActionsEventListener(type.id, type.data);
+				setDemoActionsEventListener(type.id, type.data);
 				break;
 			case "curved-line":
 			case "line":
