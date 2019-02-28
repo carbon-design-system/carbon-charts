@@ -138,7 +138,6 @@ const classyCharts = {};
 const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 	const classyChartObject = classyCharts[chartType];
 	let newData;
-
 	const removeADataset = Math.random() > 0.5;
 
 	// Function to be used to randomize a value
