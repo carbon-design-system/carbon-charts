@@ -487,7 +487,7 @@ var comboOptions = {
 /*!*********************************!*\
   !*** ./demo/demo-data/index.ts ***!
   \*********************************/
-/*! exports provided: colors, groupedBarData, groupedBarOptions, simpleBarData, simpleBarOptions, stackedBarData, stackedBarOptions, pieOptions, donutOptions, pieData, curvedLineData, curvedLineOptions, lineData, lineOptions, comboData, comboOptions */
+/*! exports provided: colors, groupedBarData, groupedBarOptions, simpleBarData, simpleBarOptions, stackedBarData, stackedBarOptions, pieOptions, donutOptions, pieData, curvedLineData, curvedLineOptions, lineData, lineOptions, scatterData, comboData, comboOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -524,6 +524,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineOptions"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterData", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["scatterData"]; });
+
 /* harmony import */ var _combo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./combo */ "./demo/demo-data/combo.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "comboData", function() { return _combo__WEBPACK_IMPORTED_MODULE_4__["comboData"]; });
 
@@ -542,7 +544,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************!*\
   !*** ./demo/demo-data/line.ts ***!
   \********************************/
-/*! exports provided: curvedLineData, curvedLineOptions, lineData, lineOptions */
+/*! exports provided: curvedLineData, curvedLineOptions, lineData, lineOptions, scatterData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -551,6 +553,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "curvedLineOptions", function() { return curvedLineOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineData", function() { return lineData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineOptions", function() { return lineOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterData", function() { return scatterData; });
 /* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./demo/demo-data/colors.ts");
 
 var curvedLineData = {
@@ -687,6 +690,44 @@ var lineOptions = {
     legendClickable: true,
     containerResizable: true
 };
+var scatterData = {
+    labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+    datasets: [
+        {
+            label: "Dataset 1",
+            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
+            data: [
+                32100,
+                23500,
+                53100,
+                42300,
+                12300
+            ]
+        },
+        {
+            label: "Dataset 2",
+            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
+            data: [
+                34200,
+                53200,
+                42300,
+                21400,
+                0
+            ]
+        },
+        {
+            label: "Dataset 3",
+            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
+            data: [
+                41200,
+                23400,
+                34210,
+                1400,
+                42100
+            ]
+        }
+    ]
+};
 
 
 /***/ }),
@@ -796,7 +837,7 @@ groupedBarOptions = _a.groupedBarOptions, groupedBarData = _a.groupedBarData, si
 // Pie & donut
 pieOptions = _a.pieOptions, pieData = _a.pieData, donutOptions = _a.donutOptions, 
 // Line
-curvedLineOptions = _a.curvedLineOptions, curvedLineData = _a.curvedLineData, lineData = _a.lineData, lineOptions = _a.lineOptions, 
+curvedLineOptions = _a.curvedLineOptions, curvedLineData = _a.curvedLineData, lineData = _a.lineData, lineOptions = _a.lineOptions, scatterData = _a.scatterData, 
 // Combo
 comboData = _a.comboData, comboOptions = _a.comboOptions;
 var chartTypes = [
@@ -865,6 +906,12 @@ var chartTypes = [
         name: "donut",
         options: donutOptions,
         data: pieData
+    },
+    {
+        id: "scatter",
+        name: "scatter",
+        options: lineOptions,
+        data: scatterData
     }
 ];
 var classyCharts = {};
@@ -993,6 +1040,13 @@ chartTypes.forEach(function (type) {
                 break;
             case "combo":
                 classyCharts[type.id] = new _src_index__WEBPACK_IMPORTED_MODULE_0__["ComboChart"](classyContainer, {
+                    data: type.data,
+                    options: Object.assign({}, type.options, { type: type.id }),
+                });
+                setDemoActionsEventListener(type.id, type.data);
+                break;
+            case "scatter":
+                classyCharts[type.id] = new _src_index__WEBPACK_IMPORTED_MODULE_0__["ScatterChart"](classyContainer, {
                     data: type.data,
                     options: Object.assign({}, type.options, { type: type.id }),
                 });
@@ -3508,7 +3562,7 @@ function donutCenterNumberTween(d3Ref, newNumber) {
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/*! exports provided: defaultColors, BaseChart, BaseAxisChart, PieChart, DonutChart, DonutCenter, BarChart, LineChart, ComboChart */
+/*! exports provided: defaultColors, BaseChart, BaseAxisChart, PieChart, DonutChart, DonutCenter, BarChart, LineChart, ComboChart, ScatterChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3537,9 +3591,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _combo_chart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./combo-chart */ "./src/combo-chart.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ComboChart", function() { return _combo_chart__WEBPACK_IMPORTED_MODULE_6__["ComboChart"]; });
 
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _scatter_chart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./scatter-chart */ "./src/scatter-chart.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScatterChart", function() { return _scatter_chart__WEBPACK_IMPORTED_MODULE_7__["ScatterChart"]; });
+
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_9__);
 __webpack_require__(/*! ./polyfills */ "./src/polyfills.ts");
 
 
@@ -3549,7 +3606,8 @@ __webpack_require__(/*! ./polyfills */ "./src/polyfills.ts");
 
 
 
-var defaultColors = _configuration__WEBPACK_IMPORTED_MODULE_7__["options"].BASE.colors;
+
+var defaultColors = _configuration__WEBPACK_IMPORTED_MODULE_8__["options"].BASE.colors;
 
 
 
@@ -3568,7 +3626,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LineChart", function() { return LineChart; });
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/index.js");
 /* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-shape */ "../../node_modules/d3-shape/index.js");
-/* harmony import */ var _base_axis_chart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base-axis-chart */ "./src/base-axis-chart.ts");
+/* harmony import */ var _scatter_chart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./scatter-chart */ "./src/scatter-chart.ts");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
 /* harmony import */ var _services_curves__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/curves */ "./src/services/curves.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
@@ -3594,24 +3652,6 @@ var LineChart = /** @class */ (function (_super) {
         _this.options.type = "line";
         return _this;
     }
-    LineChart.prototype.getLegendType = function () {
-        return _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.SERIES;
-    };
-    LineChart.prototype.addLabelsToDataPoints = function (d, index) {
-        var labels = this.displayData.labels;
-        return d.data.map(function (datum, i) { return ({
-            label: labels[i],
-            datasetLabel: d.label,
-            value: datum
-        }); });
-    };
-    LineChart.prototype.getCircleRadius = function () {
-        return this.options.points.radius || _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].points.radius;
-    };
-    LineChart.prototype.getCircleFill = function (radius, d) {
-        var circleShouldBeFilled = radius < _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.minNonFilledRadius;
-        return circleShouldBeFilled ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : "white";
-    };
     LineChart.prototype.draw = function () {
         var _this = this;
         this.innerWrap.style("width", "100%")
@@ -3651,21 +3691,7 @@ var LineChart = /** @class */ (function (_super) {
             .datum(function (d) { return d.data; })
             .attr("class", "line")
             .attr("d", this.lineGenerator);
-        var circleRadius = this.getCircleRadius();
-        gLines.selectAll("circle.dot")
-            .data(function (d, i) { return _this.addLabelsToDataPoints(d, i); })
-            .enter()
-            .append("circle")
-            .attr("class", "dot")
-            .attr("cx", function (d) { return _this.x(d.label) + _this.x.step() / 2; })
-            .attr("cy", function (d) { return _this.y(d.value); })
-            .attr("r", circleRadius)
-            .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
-            .attr("stroke", function (d) { return _this.getStrokeColor(d.datasetLabel, d.label, d.value); });
-        // Hide the overlay
-        this.updateOverlay().hide();
-        // Dispatch the load event
-        this.dispatchEvent("load");
+        _super.prototype.draw.call(this);
     };
     LineChart.prototype.interpolateValues = function (newData) {
         var _this = this;
@@ -3691,36 +3717,15 @@ var LineChart = /** @class */ (function (_super) {
             .style("opacity", 1)
             .attr("class", "line")
             .attr("d", this.lineGenerator);
-        // Add line circles
-        var circleRadius = this.getCircleRadius();
-        addedLineGroups.selectAll("circle.dot")
-            .data(function (d, i) { return _this.addLabelsToDataPoints(d, i); })
-            .enter()
-            .append("circle")
-            .attr("class", "dot")
-            .attr("cx", function (d, i) { return _this.x(d.label) + _this.x.step() / 2; })
-            .attr("cy", function (d) { return _this.y(d.value); })
-            .attr("r", circleRadius)
-            .style("opacity", 0)
-            .transition(this.getDefaultTransition())
-            .style("opacity", 1)
-            .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
-            .attr("stroke", function (d) { return _this.getStrokeColor(d.datasetLabel, d.label, d.value); });
         // Remove lines that are no longer needed
         gLines.exit()
             .classed("removed", true) // mark this element with "removed" class so it isn't reused
             .transition(this.getDefaultTransition())
             .style("opacity", 0)
             .remove();
-        // Add slice hover actions, and clear any slice borders present
-        this.addDataPointEventListener();
-        // Hide the overlay
-        this.updateOverlay().hide();
-        // Dispatch the update event
-        this.dispatchEvent("update");
+        _super.prototype.interpolateValues.call(this, newData);
     };
     LineChart.prototype.updateElements = function (animate, gLines) {
-        var _this = this;
         var scales = this.options.scales;
         var chartSize = this.getChartSize();
         var height = chartSize.height - this.getBBox(".x.axis").height;
@@ -3742,87 +3747,10 @@ var LineChart = /** @class */ (function (_super) {
         })
             .attr("class", "line")
             .attr("d", this.lineGenerator);
-        var margins = _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].margin.line;
-        var circleRadius = this.getCircleRadius();
-        gLines.selectAll("circle.dot")
-            .data(function (d, i) {
-            var parentDatum = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this).datum();
-            return self.addLabelsToDataPoints(parentDatum, i);
-        })
-            .transition(transitionToUse)
-            .attr("cx", function (d) { return _this.x(d.label) + _this.x.step() / 2; })
-            .attr("cy", function (d) { return _this.y(d.value); })
-            .attr("r", circleRadius)
-            .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
-            .attr("stroke", function (d) { return _this.getStrokeColor(d.datasetLabel, d.label, d.value); });
-    };
-    LineChart.prototype.resizeChart = function () {
-        var chartSize = this.getChartSize(this.container);
-        var dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
-        // Resize the SVG
-        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.holder).select("svg")
-            .attr("width", dimensionToUseForScale + "px")
-            .attr("height", dimensionToUseForScale + "px");
-        this.updateXandYGrid(true);
-        // Scale out the domains
-        this.setXScale();
-        this.setYScale();
-        // Set the x & y axis as well as their labels
-        this.setXAxis(true);
-        this.setYAxis(true);
-        this.updateElements(false, null);
-        _super.prototype.resizeChart.call(this);
-    };
-    LineChart.prototype.setXScale = function () {
-        _super.prototype.setXScale.call(this);
-        this.x.padding(0); // override BaseAxisChart padding so points aren't misaligned by a few pixels
-    };
-    LineChart.prototype.resetOpacity = function () {
-        var _this = this;
-        var circleRadius = this.getCircleRadius();
-        this.innerWrap.selectAll("circle")
-            .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].resetOpacity.opacity)
-            .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); });
-    };
-    LineChart.prototype.reduceOpacity = function (exception) {
-        var _this = this;
-        var circleRadius = this.getCircleRadius();
-        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill-opacity", false);
-        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].reduceOpacity.opacity);
-        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); });
-    };
-    LineChart.prototype.addDataPointEventListener = function () {
-        var self = this;
-        var accessibility = this.options.accessibility;
-        this.svg.selectAll("circle.dot")
-            .on("click", function (d) {
-            self.dispatchEvent("line-onClick", d);
-        })
-            .on("mouseover", function (d) {
-            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
-                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseover.strokeWidth)
-                .attr("stroke", self.getStrokeColor(d.datasetLabel, d.label, d.value))
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseover.strokeOpacity);
-            self.showTooltip(d, this);
-            self.reduceOpacity(this);
-        })
-            .on("mousemove", function (d) {
-            var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(self.holder).select("div.chart-tooltip");
-            var relativeMousePosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(self.holder);
-            tooltipRef.style("left", relativeMousePosition[0] + _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].magicLeft2 + "px")
-                .style("top", relativeMousePosition[1] + "px");
-        })
-            .on("mouseout", function (d) {
-            var _a = _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
-            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
-                .attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
-                .attr("stroke", self.getStrokeColor(d.datasetLabel, d.label, d.value))
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseout.strokeOpacity);
-            self.hideTooltip();
-        });
+        _super.prototype.updateElements.call(this, animate);
     };
     return LineChart;
-}(_base_axis_chart__WEBPACK_IMPORTED_MODULE_2__["BaseAxisChart"]));
+}(_scatter_chart__WEBPACK_IMPORTED_MODULE_2__["ScatterChart"]));
 
 
 
@@ -4229,6 +4157,229 @@ function idempotentBabelPolyfill() {
 idempotentBabelPolyfill();
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/global.js */ "../../node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./src/scatter-chart.ts":
+/*!******************************!*\
+  !*** ./src/scatter-chart.ts ***!
+  \******************************/
+/*! exports provided: ScatterChart */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ScatterChart", function() { return ScatterChart; });
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/index.js");
+/* harmony import */ var _base_axis_chart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base-axis-chart */ "./src/base-axis-chart.ts");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+// D3 Imports
+
+
+
+var ScatterChart = /** @class */ (function (_super) {
+    __extends(ScatterChart, _super);
+    function ScatterChart(holder, configs) {
+        var _this = _super.call(this, holder, configs) || this;
+        _this.options.type = "scatter";
+        return _this;
+    }
+    ScatterChart.prototype.draw = function () {
+        var _this = this;
+        this.innerWrap.style("width", "100%")
+            .style("height", "100%");
+        var margins = _configuration__WEBPACK_IMPORTED_MODULE_2__["charts"].margin.line;
+        var scales = this.options.scales;
+        var chartSize = this.getChartSize();
+        var width = chartSize.width - margins.left - margins.right;
+        var height = chartSize.height - this.getBBox(".x.axis").height;
+        this.innerWrap.style("width", "100%")
+            .style("height", "100%");
+        this.innerWrap.attr("transform", "translate(" + margins.left + ", " + margins.top + ")");
+        var gDots = this.innerWrap.selectAll("g.dots")
+            .data(this.displayData.datasets)
+            .enter()
+            .append("g")
+            .classed("dots", true);
+        var circleRadius = this.getCircleRadius();
+        gDots.selectAll("circle.dot")
+            .data(function (d, i) { return _this.addLabelsToDataPoints(d, i); })
+            .enter()
+            .append("circle")
+            .attr("class", "dot")
+            .attr("cx", function (d) { return _this.x(d.label) + _this.x.step() / 2; })
+            .attr("cy", function (d) { return _this.y(d.value); })
+            .attr("r", circleRadius)
+            .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
+            .attr("stroke", function (d) { return _this.getStrokeColor(d.datasetLabel, d.label, d.value); });
+        // Hide the overlay
+        this.updateOverlay().hide();
+        // Dispatch the load event
+        this.dispatchEvent("load");
+    };
+    ScatterChart.prototype.getLegendType = function () {
+        return _configuration__WEBPACK_IMPORTED_MODULE_2__["legend"].basedOn.SERIES;
+    };
+    ScatterChart.prototype.addLabelsToDataPoints = function (d, index) {
+        var labels = this.displayData.labels;
+        return d.data.map(function (datum, i) { return ({
+            label: labels[i],
+            datasetLabel: d.label,
+            value: datum
+        }); });
+    };
+    ScatterChart.prototype.getCircleRadius = function () {
+        return this.options.points.radius || _configuration__WEBPACK_IMPORTED_MODULE_2__["charts"].points.radius;
+    };
+    ScatterChart.prototype.getCircleFill = function (radius, d) {
+        var circleShouldBeFilled = radius < _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.minNonFilledRadius;
+        return circleShouldBeFilled ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : "white";
+    };
+    ScatterChart.prototype.interpolateValues = function (newData) {
+        var _this = this;
+        var margins = _configuration__WEBPACK_IMPORTED_MODULE_2__["charts"].margin.line;
+        var chartSize = this.getChartSize();
+        var width = chartSize.width - margins.left - margins.right;
+        var height = chartSize.height - this.getBBox(".x.axis").height;
+        // Apply new data to the lines
+        var gDots = this.innerWrap.selectAll("g.dots")
+            .data(newData.datasets);
+        this.updateElements(true, gDots);
+        // Add lines that need to be added now
+        var addedDotGroups = gDots.enter()
+            .append("g")
+            .classed("dots", true);
+        // Add line circles
+        var circleRadius = this.getCircleRadius();
+        addedDotGroups.selectAll("circle.dot")
+            .data(function (d, i) { return _this.addLabelsToDataPoints(d, i); })
+            .enter()
+            .append("circle")
+            .attr("class", "dot")
+            .attr("cx", function (d, i) { return _this.x(d.label) + _this.x.step() / 2; })
+            .attr("cy", function (d) { return _this.y(d.value); })
+            .attr("r", circleRadius)
+            .style("opacity", 0)
+            .transition(this.getDefaultTransition())
+            .style("opacity", 1)
+            .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
+            .attr("stroke", function (d) { return _this.getStrokeColor(d.datasetLabel, d.label, d.value); });
+        // Remove dots that are no longer needed
+        gDots.exit()
+            .classed("removed", true)
+            .transition(this.getDefaultTransition())
+            .style("opacity", 0)
+            .remove();
+        // Add slice hover actions, and clear any slice borders present
+        this.addDataPointEventListener();
+        // Hide the overlay
+        this.updateOverlay().hide();
+        // Dispatch the update event
+        this.dispatchEvent("update");
+    };
+    ScatterChart.prototype.updateElements = function (animate, gDots) {
+        var _this = this;
+        var scales = this.options.scales;
+        var chartSize = this.getChartSize();
+        var height = chartSize.height - this.getBBox(".x.axis").height;
+        if (!gDots) {
+            gDots = this.innerWrap.selectAll("g.dots");
+        }
+        var transitionToUse = animate ? this.getFillTransition() : this.getInstantTransition();
+        var self = this;
+        var margins = _configuration__WEBPACK_IMPORTED_MODULE_2__["charts"].margin.line;
+        var circleRadius = this.getCircleRadius();
+        gDots.selectAll("circle.dot")
+            .data(function (d, i) {
+            var parentDatum = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this).datum();
+            return self.addLabelsToDataPoints(parentDatum, i);
+        })
+            .transition(transitionToUse)
+            .attr("cx", function (d) { return _this.x(d.label) + _this.x.step() / 2; })
+            .attr("cy", function (d) { return _this.y(d.value); })
+            .attr("r", circleRadius)
+            .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
+            .attr("stroke", function (d) { return _this.getStrokeColor(d.datasetLabel, d.label, d.value); });
+    };
+    ScatterChart.prototype.resizeChart = function () {
+        var chartSize = this.getChartSize(this.container);
+        var dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
+        // Resize the SVG
+        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.holder).select("svg")
+            .attr("width", dimensionToUseForScale + "px")
+            .attr("height", dimensionToUseForScale + "px");
+        this.updateXandYGrid(true);
+        // Scale out the domains
+        this.setXScale();
+        this.setYScale();
+        // Set the x & y axis as well as their labels
+        this.setXAxis(true);
+        this.setYAxis(true);
+        this.updateElements(false, null);
+        _super.prototype.resizeChart.call(this);
+    };
+    ScatterChart.prototype.setXScale = function () {
+        _super.prototype.setXScale.call(this);
+        this.x.padding(0); // override BaseAxisChart padding so points aren't misaligned by a few pixels.
+    };
+    ScatterChart.prototype.resetOpacity = function () {
+        var _this = this;
+        var circleRadius = this.getCircleRadius();
+        this.innerWrap.selectAll("circle")
+            .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_2__["charts"].resetOpacity.opacity)
+            .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); });
+    };
+    ScatterChart.prototype.reduceOpacity = function (exception) {
+        var _this = this;
+        var circleRadius = this.getCircleRadius();
+        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill-opacity", false);
+        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_2__["charts"].reduceOpacity.opacity);
+        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); });
+    };
+    ScatterChart.prototype.addDataPointEventListener = function () {
+        var self = this;
+        var accessibility = this.options.accessibility;
+        this.svg.selectAll("circle.dot")
+            .on("click", function (d) {
+            self.dispatchEvent("line-onClick", d);
+        })
+            .on("mouseover", function (d) {
+            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
+                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.mouseover.strokeWidth)
+                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.mouseover.strokeOpacity);
+            self.showTooltip(d, this);
+            self.reduceOpacity(this);
+        })
+            .on("mousemove", function (d) {
+            var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(self.holder).select("div.chart-tooltip");
+            var relativeMousePosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(self.holder);
+            tooltipRef.style("left", relativeMousePosition[0] + _configuration__WEBPACK_IMPORTED_MODULE_2__["tooltip"].magicLeft2 + "px")
+                .style("top", relativeMousePosition[1] + "px");
+        })
+            .on("mouseout", function (d) {
+            var _a = _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
+            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
+                .attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
+                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.mouseout.strokeOpacity);
+            self.hideTooltip();
+        });
+    };
+    return ScatterChart;
+}(_base_axis_chart__WEBPACK_IMPORTED_MODULE_1__["BaseAxisChart"]));
+
+
 
 /***/ }),
 
