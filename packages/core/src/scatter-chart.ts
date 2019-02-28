@@ -16,20 +16,6 @@ export class ScatterChart extends BaseAxisChart {
 		this.options.type = "scatter";
 	}
 
-	getLegendType() {
-		return Configuration.legend.basedOn.SERIES;
-	}
-
-	addLabelsToDataPoints(d, index) {
-		const { labels } = this.displayData;
-
-		return d.data.map((datum, i) => ({
-			label: labels[i],
-			datasetLabel: d.label,
-			value: datum
-		}));
-	}
-
 	draw() {
 		this.innerWrap.style("width", "100%")
 			.style("height", "100%");
@@ -52,6 +38,7 @@ export class ScatterChart extends BaseAxisChart {
 				.append("g")
 				.classed("dots", true);
 
+		const circleRadius = this.getCircleRadius();
 		gDots.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i))
 			.enter()
@@ -59,14 +46,38 @@ export class ScatterChart extends BaseAxisChart {
 				.attr("class", "dot")
 				.attr("cx", d => this.x(d.label) + this.x.step() / 2)
 				.attr("cy", d => this.y(d.value))
-				.attr("r", Configuration.charts.pointCircles.radius)
-				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+				.attr("r", circleRadius)
+				.attr("fill", d => this.getCircleFill(circleRadius, d))
+				.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 
 		// Hide the overlay
 		this.updateOverlay().hide();
 
 		// Dispatch the load event
 		this.dispatchEvent("load");
+	}
+
+	getLegendType() {
+		return Configuration.legend.basedOn.SERIES;
+	}
+
+	addLabelsToDataPoints(d, index) {
+		const { labels } = this.displayData;
+
+		return d.data.map((datum, i) => ({
+			label: labels[i],
+			datasetLabel: d.label,
+			value: datum
+		}));
+	}
+
+	getCircleRadius() {
+		return this.options.points.radius || Configuration.charts.points.radius;
+	}
+
+	getCircleFill(radius, d) {
+		const circleShouldBeFilled = radius < Configuration.lines.points.minNonFilledRadius;
+		return circleShouldBeFilled ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : "white";
 	}
 
 	interpolateValues(newData: any) {
@@ -87,6 +98,7 @@ export class ScatterChart extends BaseAxisChart {
 			.classed("dots", true);
 
 		// Add line circles
+		const circleRadius = this.getCircleRadius();
 		addedDotGroups.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i))
 			.enter()
@@ -94,14 +106,16 @@ export class ScatterChart extends BaseAxisChart {
 				.attr("class", "dot")
 				.attr("cx", (d, i) => this.x(d.label) + this.x.step() / 2)
 				.attr("cy", (d: any) => this.y(d.value))
-				.attr("r", 4)
+				.attr("r", circleRadius)
 				.style("opacity", 0)
 				.transition(this.getDefaultTransition())
 				.style("opacity", 1)
-				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+				.attr("fill", d => this.getCircleFill(circleRadius, d))
+				.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 
-		// Remove lines that are no longer needed
+		// Remove dots that are no longer needed
 		gDots.exit()
+			.classed("removed", true)
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
@@ -130,6 +144,7 @@ export class ScatterChart extends BaseAxisChart {
 		const self = this;
 
 		const { line: margins } = Configuration.charts.margin;
+		const circleRadius = this.getCircleRadius();
 		gDots.selectAll("circle.dot")
 			.data(function(d, i) {
 				const parentDatum = select(this).datum() as any;
@@ -139,8 +154,9 @@ export class ScatterChart extends BaseAxisChart {
 			.transition(transitionToUse)
 			.attr("cx", d => this.x(d.label) + this.x.step() / 2)
 			.attr("cy", d => this.y(d.value))
-			.attr("r", Configuration.lines.points.strokeWidth)
-			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+			.attr("r", circleRadius)
+			.attr("fill", d => this.getCircleFill(circleRadius, d))
+			.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 	}
 
 	resizeChart() {
@@ -170,6 +186,20 @@ export class ScatterChart extends BaseAxisChart {
 		super.setXScale();
 
 		this.x.padding(0); // override BaseAxisChart padding so points aren't misaligned by a few pixels.
+	}
+
+	resetOpacity() {
+		const circleRadius = this.getCircleRadius();
+		this.innerWrap.selectAll("circle")
+			.attr("stroke-opacity", Configuration.charts.resetOpacity.opacity)
+			.attr("fill", d => this.getCircleFill(circleRadius, d));
+	}
+
+	reduceOpacity(exception) {
+		const circleRadius = this.getCircleRadius();
+		select(exception).attr("fill-opacity", false);
+		select(exception).attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
+		select(exception).attr("fill", (d: any) => this.getCircleFill(circleRadius, d));
 	}
 
 	addDataPointEventListener() {

@@ -56,6 +56,7 @@ export const groupedBarOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
+			title: "Dollars (CAD)",
 			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 		},
@@ -66,6 +67,9 @@ export const groupedBarOptions = {
 			},
 			formatter: axisValue => `${axisValue * 100}%`
 		}
+	},
+	tooltip: {
+		size: "compact"
 	},
 	legendClickable: true,
 	containerResizable: true
@@ -96,13 +100,17 @@ export const simpleBarOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
+			title: "Dollars (CAD)",
 			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 			stacked: false
 		}
 	},
 	legendClickable: true,
-	containerResizable: true
+	containerResizable: true,
+	bars: {
+		maxWidth: 50
+	}
 };
 
 // Stacked bar
@@ -163,10 +171,14 @@ export const stackedBarOptions = {
 			title: "2018 Annual Sales Figures",
 		},
 		y: {
+			title: "Dollars (CAD)",
 			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 			stacked: true
 		}
+	},
+	tooltip: {
+		size: "compact"
 	},
 	legendClickable: true,
 	containerResizable: true

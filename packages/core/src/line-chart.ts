@@ -1,5 +1,5 @@
 // D3 Imports
-import { select, mouse } from "d3-selection";
+import { select, selectAll, mouse } from "d3-selection";
 import { line } from "d3-shape";
 
 import { ScatterChart } from "./scatter-chart";
@@ -57,7 +57,7 @@ export class LineChart extends ScatterChart {
 				.classed("lines", true);
 
 		gLines.append("path")
-			.attr("stroke", d => this.colorScale[d.label]())
+			.attr("stroke", d => this.getStrokeColor(d.label))
 			.datum(d => d.data)
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);
@@ -71,6 +71,9 @@ export class LineChart extends ScatterChart {
 		const width = chartSize.width - margins.left - margins.right;
 		const height = chartSize.height - this.getBBox(".x.axis").height;
 
+		this.innerWrap.selectAll(".removed")
+			.remove();
+
 		// Apply new data to the lines
 		const gLines = this.innerWrap.selectAll("g.lines")
 			.data(newData.datasets);
@@ -83,7 +86,7 @@ export class LineChart extends ScatterChart {
 			.classed("lines", true);
 
 		addedLineGroups.append("path")
-			.attr("stroke", d => this.colorScale[d.label]())
+			.attr("stroke", d => this.getStrokeColor(d.label))
 			.datum(d => d.data)
 			.style("opacity", 0)
 			.transition(this.getDefaultTransition())
@@ -93,6 +96,7 @@ export class LineChart extends ScatterChart {
 
 		// Remove lines that are no longer needed
 		gLines.exit()
+			.classed("removed", true) // mark this element with "removed" class so it isn't reused
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
@@ -119,14 +123,14 @@ export class LineChart extends ScatterChart {
 				return parentDatum.data;
 			})
 			.transition(transitionToUse)
+			.style("opacity", 1)
 			.attr("stroke", function(d) {
 				const parentDatum = select(this.parentNode).datum() as any;
-
-				return self.colorScale[parentDatum.label]();
+				return self.getStrokeColor(parentDatum.label);
 			})
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);
 
-		super.updateElements(animate, null);
+		super.updateElements(animate);
 	}
 }
