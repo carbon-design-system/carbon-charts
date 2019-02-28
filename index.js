@@ -1348,8 +1348,8 @@ var BarChart = /** @class */ (function (_super) {
             .attr("y", function (d) { return _this.y(Math.max(0, d.value)); })
             .attr("width", this.x1.bandwidth())
             .attr("height", function (d) { return Math.abs(_this.y(d.value) - _this.y(0)); })
-            .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.label); })
-            .attr("stroke", function (d) { return _this.options.accessibility ? _this.colorScale[d.datasetLabel](d.label) : null; })
+            .attr("fill", function (d) { return _this.getFillColor(d.datasetLabel, d.label, d.value); })
+            .attr("stroke", function (d) { return _this.options.accessibility ? _this.getStrokeColor(d.datasetLabel, d.label, d.value) : null; })
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; });
         // Hide the overlay
@@ -1388,9 +1388,9 @@ var BarChart = /** @class */ (function (_super) {
             .attr("height", function (d) { return Math.abs(_this.y(d.value) - _this.y(0)); })
             .style("opacity", 0)
             .transition(this.getFillTransition())
-            .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.label); })
+            .attr("fill", function (d) { return _this.getFillColor(d.datasetLabel, d.label, d.value); })
             .style("opacity", 1)
-            .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); })
+            .attr("stroke", function (d) { return _this.getStrokeColor(d.datasetLabel, d.label, d.value); })
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].default.strokeWidth);
         addedBars.selectAll("rect.bar")
             .data(function (d, index) { return _this.addLabelsToDataPoints(d, index); })
@@ -1403,9 +1403,9 @@ var BarChart = /** @class */ (function (_super) {
             .attr("height", function (d) { return Math.abs(_this.y(d.value) - _this.y(0)); })
             .style("opacity", 0)
             .transition(this.getFillTransition())
-            .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.label); })
+            .attr("fill", function (d) { return _this.getFillColor(d.datasetLabel, d.label, d.value); })
             .style("opacity", 1)
-            .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); })
+            .attr("stroke", function (d) { return _this.getStrokeColor(d.datasetLabel, d.label, d.value); })
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].default.strokeWidth);
         // Remove bar groups are no longer needed
         g.exit()
@@ -1445,8 +1445,8 @@ var BarChart = /** @class */ (function (_super) {
             .attr("y", function (d) { return _this.y(Math.max(0, d.value)); })
             .attr("width", this.x1.bandwidth())
             .attr("height", function (d) { return Math.abs(_this.y(d.value) - _this.y(0)); })
-            .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.label); })
-            .attr("stroke", function (d) { return _this.options.accessibility ? _this.colorScale[d.datasetLabel](d.label) : null; });
+            .attr("fill", function (d) { return _this.getFillColor(d.datasetLabel, d.label, d.value); })
+            .attr("stroke", function (d) { return _this.options.accessibility ? _this.getStrokeColor(d.datasetLabel, d.label, d.value) : null; });
     };
     BarChart.prototype.resizeChart = function () {
         var actualChartSize = this.getChartSize(this.container);
@@ -1477,7 +1477,7 @@ var BarChart = /** @class */ (function (_super) {
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseover.strokeWidth)
-                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
+                .attr("stroke", self.getStrokeColor(d.datasetLabel, d.label, d.value))
                 .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseover.strokeOpacity);
             self.showTooltip(d, this);
             self.reduceOpacity(this);
@@ -1492,7 +1492,7 @@ var BarChart = /** @class */ (function (_super) {
             var _a = _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
-                .attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
+                .attr("stroke", accessibility ? self.getStrokeColor(d.datasetLabel, d.label, d.value) : "none")
                 .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseout.strokeOpacity);
             self.hideTooltip();
         });
@@ -2280,6 +2280,22 @@ var BaseChart = /** @class */ (function () {
             });
         }
     };
+    BaseChart.prototype.getFillColor = function (datasetLabel, label, value) {
+        if (this.options.getFillColor && !this.options.accessibility) {
+            return this.options.getFillColor(datasetLabel, label, value) || this.getFillScale()[datasetLabel](label);
+        }
+        else {
+            return this.getFillScale()[datasetLabel](label);
+        }
+    };
+    BaseChart.prototype.getStrokeColor = function (datasetLabel, label, value) {
+        if (this.options.getStrokeColor) {
+            return this.options.getStrokeColor(datasetLabel, label, value) || this.colorScale[datasetLabel](label);
+        }
+        else {
+            return this.colorScale[datasetLabel](label);
+        }
+    };
     // TODO - Refactor
     BaseChart.prototype.getChartSize = function (container) {
         if (container === void 0) { container = this.container; }
@@ -2437,7 +2453,7 @@ var BaseChart = /** @class */ (function () {
         var exceptedElementData = exceptedElement.datum();
         Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill-opacity", false);
         Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].reduceOpacity.opacity);
-        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](exceptedElementData.label); });
+        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill", function (d) { return _this.getFillColor(d.datasetLabel, exceptedElementData.label, exceptedElementData.value); });
     };
     // ================================================================================
     // Legend
@@ -2512,10 +2528,10 @@ var BaseChart = /** @class */ (function () {
             .merge(legendItems.selectAll("div"))
             .style("background-color", function (d, i) {
             if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS && d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE) {
-                return _this.colorScale[_this.displayData.datasets[0].label](d.key);
+                return _this.getStrokeColor(_this.displayData.datasets[0].label, d.key, d.value);
             }
             else if (d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE) {
-                return _this.colorScale[d.key]();
+                return _this.getStrokeColor(d.key);
             }
             return "white";
         });
@@ -2669,19 +2685,19 @@ var BaseChart = /** @class */ (function () {
                         .select("div.legend-circle")
                         .style("background-color", function (d, i) {
                         if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS && d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE) {
-                            return _this.colorScale[_this.displayData.datasets[0].label](d.key);
+                            return _this.getStrokeColor(_this.displayData.datasets[0].label, d.key, d.value);
                         }
                         else if (d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE) {
-                            return _this.colorScale[d.key]();
+                            return _this.getStrokeColor(d.key);
                         }
                         return "white";
                     })
                         .style("border-color", function (d) {
                         if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS) {
-                            return _this.colorScale[_this.displayData.datasets[0].label](d.key);
+                            return _this.getStrokeColor(_this.displayData.datasets[0].label, d.key, d.value);
                         }
                         else {
-                            return _this.colorScale[d.key]();
+                            return _this.getStrokeColor(d.key);
                         }
                     })
                         .style("border-style", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].inactive.borderStyle)
@@ -2699,19 +2715,19 @@ var BaseChart = /** @class */ (function () {
                 .attr("class", "legend-circle")
                 .style("background-color", function (d, i) {
                 if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS && d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE) {
-                    return _this.colorScale[_this.displayData.datasets[0].label](d.key);
+                    return _this.getStrokeColor(_this.displayData.datasets[0].label, d.key, d.value);
                 }
                 else if (d.value === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].items.status.ACTIVE) {
-                    return _this.colorScale[d.key]();
+                    return _this.getStrokeColor(d.key);
                 }
                 return "white";
             })
                 .style("border-color", function (d) {
                 if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS) {
-                    return _this.colorScale[_this.displayData.datasets[0].label](d.key);
+                    return _this.getStrokeColor(_this.displayData.datasets[0].label, d.key, d.value);
                 }
                 else {
-                    return _this.colorScale[d.key]();
+                    return _this.getStrokeColor(d.key);
                 }
             })
                 .style("border-style", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].inactive.borderStyle)
@@ -3594,7 +3610,7 @@ var LineChart = /** @class */ (function (_super) {
     };
     LineChart.prototype.getCircleFill = function (radius, d) {
         var circleShouldBeFilled = radius < _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.minNonFilledRadius;
-        return circleShouldBeFilled ? this.colorScale[d.datasetLabel](d.label) : "white";
+        return circleShouldBeFilled ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : "white";
     };
     LineChart.prototype.draw = function () {
         var _this = this;
@@ -3631,7 +3647,7 @@ var LineChart = /** @class */ (function (_super) {
             .append("g")
             .classed("lines", true);
         gLines.append("path")
-            .attr("stroke", function (d) { return _this.colorScale[d.label](); })
+            .attr("stroke", function (d) { return _this.getStrokeColor(d.label); })
             .datum(function (d) { return d.data; })
             .attr("class", "line")
             .attr("d", this.lineGenerator);
@@ -3645,7 +3661,7 @@ var LineChart = /** @class */ (function (_super) {
             .attr("cy", function (d) { return _this.y(d.value); })
             .attr("r", circleRadius)
             .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
-            .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); });
+            .attr("stroke", function (d) { return _this.getStrokeColor(d.datasetLabel, d.label, d.value); });
         // Hide the overlay
         this.updateOverlay().hide();
         // Dispatch the load event
@@ -3668,7 +3684,7 @@ var LineChart = /** @class */ (function (_super) {
             .append("g")
             .classed("lines", true);
         addedLineGroups.append("path")
-            .attr("stroke", function (d) { return _this.colorScale[d.label](); })
+            .attr("stroke", function (d) { return _this.getStrokeColor(d.label); })
             .datum(function (d) { return d.data; })
             .style("opacity", 0)
             .transition(this.getDefaultTransition())
@@ -3689,7 +3705,7 @@ var LineChart = /** @class */ (function (_super) {
             .transition(this.getDefaultTransition())
             .style("opacity", 1)
             .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
-            .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); });
+            .attr("stroke", function (d) { return _this.getStrokeColor(d.datasetLabel, d.label, d.value); });
         // Remove lines that are no longer needed
         gLines.exit()
             .classed("removed", true) // mark this element with "removed" class so it isn't reused
@@ -3722,7 +3738,7 @@ var LineChart = /** @class */ (function (_super) {
             .style("opacity", 1)
             .attr("stroke", function (d) {
             var parentDatum = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.parentNode).datum();
-            return self.colorScale[parentDatum.label]();
+            return self.getStrokeColor(parentDatum.label);
         })
             .attr("class", "line")
             .attr("d", this.lineGenerator);
@@ -3738,7 +3754,7 @@ var LineChart = /** @class */ (function (_super) {
             .attr("cy", function (d) { return _this.y(d.value); })
             .attr("r", circleRadius)
             .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
-            .attr("stroke", function (d) { return _this.colorScale[d.datasetLabel](d.label); });
+            .attr("stroke", function (d) { return _this.getStrokeColor(d.datasetLabel, d.label, d.value); });
     };
     LineChart.prototype.resizeChart = function () {
         var chartSize = this.getChartSize(this.container);
@@ -3785,7 +3801,7 @@ var LineChart = /** @class */ (function (_super) {
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseover.strokeWidth)
-                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
+                .attr("stroke", self.getStrokeColor(d.datasetLabel, d.label, d.value))
                 .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseover.strokeOpacity);
             self.showTooltip(d, this);
             self.reduceOpacity(this);
@@ -3800,7 +3816,7 @@ var LineChart = /** @class */ (function (_super) {
             var _a = _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
-                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
+                .attr("stroke", self.getStrokeColor(d.datasetLabel, d.label, d.value))
                 .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["lines"].points.mouseout.strokeOpacity);
             self.hideTooltip();
         });
@@ -3935,8 +3951,8 @@ var PieChart = /** @class */ (function (_super) {
             .enter()
             .append("path")
             .attr("d", this.arc)
-            .attr("fill", function (d) { return _this.getFillScale()[_this.displayData.datasets[0].label](d.data.label); }) // Support multiple datasets
-            .attr("stroke", function (d) { return _this.colorScale[_this.displayData.datasets[0].label](d.data.label); })
+            .attr("fill", function (d) { return _this.getFillColor(_this.displayData.datasets[0].label, d.data.label, d.data.value); }) // Support multiple datasets
+            .attr("stroke", function (d) { return _this.getStrokeColor(_this.displayData.datasets[0].label, d.data.label, d.data.value); })
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; })
             .each(function (d) { this._current = d; });
@@ -3966,13 +3982,13 @@ var PieChart = /** @class */ (function (_super) {
         path
             .transition()
             .duration(0)
-            .attr("stroke", function (d) { return _this.colorScale[_this.displayData.datasets[0].label](d.data.label); })
+            .attr("stroke", function (d) { return _this.getStrokeColor(_this.displayData.datasets[0].label, d.data.label, d.data.value); })
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; })
             .transition()
             .style("opacity", 1)
             .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration)
-            .attr("fill", function (d) { return _this.getFillScale()[_this.displayData.datasets[0].label](d.data.label); })
+            .attr("fill", function (d) { return _this.getFillColor(_this.displayData.datasets[0].label, d.data.label, d.data.value); })
             .attrTween("d", function (a) {
             return arcTween.bind(this)(a, self.arc);
         });
@@ -3982,12 +3998,12 @@ var PieChart = /** @class */ (function (_super) {
             .transition()
             .duration(0)
             .style("opacity", 0)
-            .attr("stroke", function (d) { return _this.colorScale[_this.displayData.datasets[0].label](d.data.label); })
+            .attr("stroke", function (d) { return _this.getStrokeColor(_this.displayData.datasets[0].label, d.data.label, d.data.value); })
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; })
             .transition()
             .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration)
-            .attr("fill", function (d) { return _this.getFillScale()[_this.displayData.datasets[0].label](d.data.label); })
+            .attr("fill", function (d) { return _this.getFillColor(_this.displayData.datasets[0].label, d.data.label, d.data.value); })
             .style("opacity", 1)
             .attrTween("d", function (a) {
             return arcTween.bind(this)(a, self.arc);
@@ -4052,7 +4068,7 @@ var PieChart = /** @class */ (function (_super) {
             // Fade everything out except for this element
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill-opacity", false);
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].reduceOpacity.opacity);
-            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill", function (d) { return _this.getFillScale()[_this.displayData.datasets[0].label](d.data.label); });
+            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill", function (d) { return _this.getFillColor(_this.displayData.datasets[0].label, d.data.label, d.data.value); });
         }
     };
     // TODO - Should inherit most logic from base-chart
@@ -4091,7 +4107,7 @@ var PieChart = /** @class */ (function (_super) {
             sliceElement
                 .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseover.strokeWidth)
                 .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseover.strokeOpacity)
-                .attr("stroke", self.colorScale[self.displayData.datasets[0].label](d.data.label));
+                .attr("stroke", self.getStrokeColor(self.displayData.datasets[0].label, d.data.label, d.data.value));
             self.showTooltip(d);
             self.reduceOpacity(this);
         })
@@ -4104,7 +4120,7 @@ var PieChart = /** @class */ (function (_super) {
             .on("mouseout", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", accessibility ? _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].default.strokeWidth : _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseout.strokeWidth)
-                .attr("stroke", accessibility ? self.colorScale[self.displayData.datasets[0].label](d.data.label) : "none")
+                .attr("stroke", accessibility ? self.getStrokeColor(self.displayData.datasets[0].label, d.data.label, d.data.value) : "none")
                 .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseout.strokeOpacity);
             self.hideTooltip();
         });
@@ -4499,8 +4515,8 @@ var StackedBarChart = /** @class */ (function (_super) {
             .attr("y", function (d) { return _this.y(d[1]); })
             .attr("height", function (d) { return _this.y(d[0]) - _this.y(d[1]); })
             .attr("width", function (d) { return _this.x.bandwidth(); })
-            .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.data.label); })
-            .attr("stroke", function (d) { return _this.options.accessibility ? _this.colorScale[d.datasetLabel](d.data.label) : null; })
+            .attr("fill", function (d) { return _this.getFillColor(d.datasetLabel, d.data.label, d.data.value); })
+            .attr("stroke", function (d) { return _this.options.accessibility ? _this.getStrokeColor(d.datasetLabel, d.label, d.value) : null; })
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; });
         // Hide the overlay
@@ -4528,11 +4544,11 @@ var StackedBarChart = /** @class */ (function (_super) {
                 .attr("y", function (d) { return _this.y(d[1]); })
                 .attr("height", function (d) { return _this.y(d[0]) - _this.y(d[1]); })
                 .attr("width", function (d) { return _this.x.bandwidth(); })
-                .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.data.label); })
+                .attr("fill", function (d) { return _this.getFillColor(d.datasetLabel, d.data.label, d.data.value); })
                 .style("opacity", 0)
                 .transition(_this.getFillTransition())
                 .style("opacity", 1)
-                .attr("stroke", function (d) { return _this.options.accessibility ? _this.colorScale[d.datasetLabel](d.data.label) : null; })
+                .attr("stroke", function (d) { return _this.options.accessibility ? _this.getStrokeColor(d.datasetLabel, d.label, d.value) : null; })
                 .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].default.strokeWidth)
                 .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; });
         };
@@ -4592,8 +4608,8 @@ var StackedBarChart = /** @class */ (function (_super) {
             .attr("y", function (d) { return _this.y(d[1]); })
             .attr("height", function (d) { return _this.y(d[0]) - _this.y(d[1]); })
             .attr("width", function (d) { return _this.x.bandwidth(); })
-            .attr("fill", function (d) { return _this.getFillScale()[d.datasetLabel](d.data.label); })
-            .attr("stroke", function (d) { return _this.options.accessibility ? _this.colorScale[d.datasetLabel](d.data.label) : null; })
+            .attr("fill", function (d) { return _this.getFillColor(d.datasetLabel, d.data.label, d.data.value); })
+            .attr("stroke", function (d) { return _this.options.accessibility ? _this.getStrokeColor(d.datasetLabel, d.label, d.value) : null; })
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; });
     };
@@ -4607,7 +4623,7 @@ var StackedBarChart = /** @class */ (function (_super) {
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].mouseover.strokeWidth)
-                .attr("stroke", self.colorScale[d.datasetLabel](d.label))
+                .attr("stroke", self.getStrokeColor(d.datasetLabel, d.label, d.value))
                 .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].mouseover.strokeOpacity);
             self.showTooltip(d, this);
             self.reduceOpacity(this);
@@ -4622,7 +4638,7 @@ var StackedBarChart = /** @class */ (function (_super) {
             var _a = _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
-                .attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
+                .attr("stroke", accessibility ? self.getStrokeColor(d.datasetLabel, d.label, d.value) : "none")
                 .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].mouseout.strokeOpacity);
             self.hideTooltip();
         });
