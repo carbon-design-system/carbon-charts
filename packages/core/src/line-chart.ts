@@ -41,7 +41,7 @@ export class LineChart extends BaseAxisChart {
 
 	getCircleFill(radius, d) {
 		const circleShouldBeFilled = radius < Configuration.lines.points.minNonFilledRadius;
-		return circleShouldBeFilled ? this.colorScale[d.datasetLabel](d.label) : "white";
+		return circleShouldBeFilled ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : "white";
 	}
 
 	draw() {
@@ -85,7 +85,7 @@ export class LineChart extends BaseAxisChart {
 				.classed("lines", true);
 
 		gLines.append("path")
-			.attr("stroke", d => this.colorScale[d.label]())
+			.attr("stroke", d => this.getStrokeColor(d.label))
 			.datum(d => d.data)
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);
@@ -100,7 +100,7 @@ export class LineChart extends BaseAxisChart {
 				.attr("cy", d => this.y(d.value))
 				.attr("r", circleRadius)
 				.attr("fill", d => this.getCircleFill(circleRadius, d))
-				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+				.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 
 		// Hide the overlay
 		this.updateOverlay().hide();
@@ -130,7 +130,7 @@ export class LineChart extends BaseAxisChart {
 			.classed("lines", true);
 
 		addedLineGroups.append("path")
-			.attr("stroke", d => this.colorScale[d.label]())
+			.attr("stroke", d => this.getStrokeColor(d.label))
 			.datum(d => d.data)
 			.style("opacity", 0)
 			.transition(this.getDefaultTransition())
@@ -152,7 +152,7 @@ export class LineChart extends BaseAxisChart {
 				.transition(this.getDefaultTransition())
 				.style("opacity", 1)
 				.attr("fill", d => this.getCircleFill(circleRadius, d))
-				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+				.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 
 		// Remove lines that are no longer needed
 		gLines.exit()
@@ -193,8 +193,7 @@ export class LineChart extends BaseAxisChart {
 			.style("opacity", 1)
 			.attr("stroke", function(d) {
 				const parentDatum = select(this.parentNode).datum() as any;
-
-				return self.colorScale[parentDatum.label]();
+				return self.getStrokeColor(parentDatum.label);
 			})
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);
@@ -212,7 +211,7 @@ export class LineChart extends BaseAxisChart {
 			.attr("cy", d => this.y(d.value))
 			.attr("r", circleRadius)
 			.attr("fill", d => this.getCircleFill(circleRadius, d))
-			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+			.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 	}
 
 	resizeChart() {
@@ -269,7 +268,7 @@ export class LineChart extends BaseAxisChart {
 			.on("mouseover", function(d) {
 				select(this)
 					.attr("stroke-width", Configuration.lines.points.mouseover.strokeWidth)
-					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
+					.attr("stroke", self.getStrokeColor(d.datasetLabel, d.label, d.value))
 					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
 
 				self.showTooltip(d, this);
@@ -286,7 +285,7 @@ export class LineChart extends BaseAxisChart {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.lines.points.mouseout;
 				select(this)
 					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
-					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
+					.attr("stroke", self.getStrokeColor(d.datasetLabel, d.label, d.value))
 					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
 
 				self.hideTooltip();
