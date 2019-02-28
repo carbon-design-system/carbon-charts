@@ -3,7 +3,8 @@ import {
 	LineChart,
 	PieChart,
 	DonutChart,
-	ComboChart
+	ComboChart,
+	ScatterChart
 } from "../src/index";
 
 // Styles
@@ -58,6 +59,7 @@ const {
 	curvedLineData,
 	lineData,
 	lineOptions,
+	scatterData,
 	// Combo
 	comboData,
 	comboOptions
@@ -129,6 +131,12 @@ const chartTypes = [
 		name: "donut",
 		options: donutOptions,
 		data: pieData
+	},
+	{
+		id: "scatter",
+		name: "scatter",
+		options: lineOptions,
+		data: scatterData
 	}
 ];
 
@@ -136,10 +144,6 @@ const classyCharts = {};
 
 // TODO - removeADataset shouldn't be used if chart legend is label based
 const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
-	const classyChartObject = classyCharts[chartType];
-	let newData;
-	const removeADataset = Math.random() > 0.5;
-
 	// Function to be used to randomize a value
 	const randomizeValue = currentVal => {
 		const firstTry = Math.max(0.5 * currentVal, currentVal * Math.random() * (Math.random() * 5));
@@ -155,18 +159,40 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		}
 	};
 
+	// Function to be used to randomize all datapoints
+	const updateChartData = currentData => {
+		const result = Object.assign({}, currentData);
+		result.datasets = currentData.datasets.map(dataset => {
+			const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
+
+			const newDataset = Object.assign({}, dataset, { data: datasetNewData });
+
+			return newDataset;
+		});
+
+		return result;
+	};
+
+	const classyChartObject = classyCharts[chartType];
+	let newData;
+
+	const removeADataset = Math.random() > 0.5;
+
 	switch (chartType) {
 		case "donut":
+			// Randomize old data values
+			newData = updateChartData(oldData);
+
+			// Update donut center configurations
+			classyChartObject.options.center = {
+				label: "New Title",
+				number: randomizeValue(classyChartObject.center.configs.number)
+			};
+
+			break;
 		case "pie":
 			// Randomize old data values
-			newData = Object.assign({}, oldData);
-			newData.datasets = oldData.datasets.map(dataset => {
-				const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
-
-				const newDataset = Object.assign({}, dataset, { data: datasetNewData });
-
-				return newDataset;
-			});
+			newData = updateChartData(oldData);
 
 			break;
 		default:
@@ -175,14 +201,7 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		case "simple-bar-accessible":
 		case "stacked-bar":
 		case "stacked-bar-accessible":
-			newData = Object.assign({}, oldData);
-			newData.datasets = oldData.datasets.map(dataset => {
-				const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
-
-				const newDataset = Object.assign({}, dataset, { data: datasetNewData });
-
-				return newDataset;
-			});
+			newData = updateChartData(oldData);
 
 			if (removeADataset && chartType !== "combo") {
 				const randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));
@@ -286,6 +305,17 @@ chartTypes.forEach(type => {
 
 				setDemoActionsEventListener(type.id, type.data);
 
+				break;
+			case "scatter":
+				classyCharts[type.id] = new ScatterChart(
+					classyContainer,
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id}),
+					}
+				);
+
+				setDemoActionsEventListener(type.id, type.data);
 				break;
 			case "curved-line":
 			case "line":
