@@ -238,6 +238,22 @@ export class BaseChart {
 		}
 	}
 
+	getFillColor(datasetLabel: any, label?: any, value?: any) {
+		if (this.options.getFillColor && !this.options.accessibility) {
+			return this.options.getFillColor(datasetLabel, label, value) || this.getFillScale()[datasetLabel](label);
+		} else {
+			return this.getFillScale()[datasetLabel](label);
+		}
+	}
+
+	getStrokeColor(datasetLabel: any, label?: any, value?: any) {
+		if (this.options.getStrokeColor) {
+			return this.options.getStrokeColor(datasetLabel, label, value) || this.colorScale[datasetLabel](label);
+		} else {
+			return this.colorScale[datasetLabel](label);
+		}
+	}
+
 	// TODO - Refactor
 	getChartSize(container = this.container) {
 		let ratio, marginForLegendTop;
@@ -420,7 +436,7 @@ export class BaseChart {
 		const exceptedElementData = exceptedElement.datum() as any;
 		select(exception).attr("fill-opacity", false);
 		select(exception).attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
-		select(exception).attr("fill", (d: any) => this.getFillScale()[d.datasetLabel](exceptedElementData.label));
+		select(exception).attr("fill", (d: any) => this.getFillColor(d.datasetLabel, exceptedElementData.label, exceptedElementData.value));
 	}
 
 	// ================================================================================
@@ -513,9 +529,9 @@ export class BaseChart {
 			.merge(legendItems.selectAll("div"))
 			.style("background-color", (d, i) => {
 				if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
-					return this.colorScale[this.displayData.datasets[0].label](d.key);
+					return this.getStrokeColor(this.displayData.datasets[0].label, d.key, d.value);
 				} else if (d.value === Configuration.legend.items.status.ACTIVE) {
-					return this.colorScale[d.key]();
+					return this.getStrokeColor(d.key);
 				}
 
 				return "white";
@@ -699,18 +715,18 @@ export class BaseChart {
 								.select("div.legend-circle")
 								.style("background-color", (d, i) => {
 									if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
-										return this.colorScale[this.displayData.datasets[0].label](d.key);
+										return this.getStrokeColor(this.displayData.datasets[0].label, d.key, d.value);
 									} else if (d.value === Configuration.legend.items.status.ACTIVE) {
-										return this.colorScale[d.key]();
+										return this.getStrokeColor(d.key);
 									}
 
 									return "white";
 								})
 								.style("border-color", d => {
 									if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
-										return this.colorScale[this.displayData.datasets[0].label](d.key);
+										return this.getStrokeColor(this.displayData.datasets[0].label, d.key, d.value);
 									} else {
-										return this.colorScale[d.key]();
+										return this.getStrokeColor(d.key);
 									}
 								})
 								.style("border-style", Configuration.legend.inactive.borderStyle)
@@ -731,18 +747,18 @@ export class BaseChart {
 				.attr("class", "legend-circle")
 				.style("background-color", (d, i) => {
 					if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
-						return this.colorScale[this.displayData.datasets[0].label](d.key);
+						return this.getStrokeColor(this.displayData.datasets[0].label, d.key, d.value);
 					} else if (d.value === Configuration.legend.items.status.ACTIVE) {
-						return this.colorScale[d.key]();
+						return this.getStrokeColor(d.key);
 					}
 
 					return "white";
 				})
 				.style("border-color", d => {
 					if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
-						return this.colorScale[this.displayData.datasets[0].label](d.key);
+						return this.getStrokeColor(this.displayData.datasets[0].label, d.key, d.value);
 					} else {
-						return this.colorScale[d.key]();
+						return this.getStrokeColor(d.key);
 					}
 				})
 				.style("border-style", Configuration.legend.inactive.borderStyle)
