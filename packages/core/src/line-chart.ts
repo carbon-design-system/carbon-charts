@@ -101,7 +101,7 @@ export class LineChart extends BaseAxisChart {
 				.attr("r", circleRadius)
 				.attr("fill", d => this.getCircleFill(circleRadius, d))
 				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label))
-				.call(this.makeAccessible, "axis");
+				.call(this.makeAccessible);
 
 		// Hide the overlay
 		this.updateOverlay().hide();
