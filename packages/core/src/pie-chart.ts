@@ -120,8 +120,8 @@ export class PieChart extends BaseChart {
 			.enter()
 			.append("path")
 			.attr("d", this.arc)
-			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label)) // Support multiple datasets
-			.attr("stroke", d => this.colorScale[this.displayData.datasets[0].label](d.data.label))
+			.attr("fill", d => this.getFillColor(this.displayData.datasets[0].label, d.data.label, d.data.value)) // Support multiple datasets
+			.attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
 			.attr("stroke-width", Configuration.pie.default.strokeWidth)
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.each(function(d) { this._current = d; });
@@ -155,12 +155,13 @@ export class PieChart extends BaseChart {
 		path
 			.transition()
 			.duration(0)
-			.attr("stroke", d => this.colorScale[this.displayData.datasets[0].label](d.data.label))
+			.attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
 			.attr("stroke-width", Configuration.pie.default.strokeWidth)
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.transition()
+			.style("opacity", 1)
 			.duration(Configuration.transitions.default.duration)
-			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
+			.attr("fill", d => this.getFillColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
 			.attrTween("d", function (a) {
 				return arcTween.bind(this)(a, self.arc);
 			});
@@ -171,12 +172,12 @@ export class PieChart extends BaseChart {
 			.transition()
 			.duration(0)
 			.style("opacity", 0)
-			.attr("stroke", d => this.colorScale[this.displayData.datasets[0].label](d.data.label))
+			.attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
 			.attr("stroke-width", Configuration.pie.default.strokeWidth)
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.transition()
 			.duration(Configuration.transitions.default.duration)
-			.attr("fill", d => this.getFillScale()[this.displayData.datasets[0].label](d.data.label))
+			.attr("fill", d => this.getFillColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
 			.style("opacity", 1)
 			.attrTween("d", function (a) {
 				return arcTween.bind(this)(a, self.arc);
@@ -250,7 +251,7 @@ export class PieChart extends BaseChart {
 			// Fade everything out except for this element
 			select(exception).attr("fill-opacity", false);
 			select(exception).attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
-			select(exception).attr("fill", (d: any) => this.getFillScale()[this.displayData.datasets[0].label](d.data.label));
+			select(exception).attr("fill", (d: any) => this.getFillColor(this.displayData.datasets[0].label, d.data.label, d.data.value));
 		}
 	}
 
@@ -264,10 +265,7 @@ export class PieChart extends BaseChart {
 			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
 		const dVal = d.value.toLocaleString();
-		const tooltipHTML = `
-			<p class='bignum'>${dVal}</p>
-			<p>${d.data.label}</p>
-		`;
+		const tooltipHTML = this.generateTooltipHTML(d.data.label, dVal);
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
@@ -303,7 +301,7 @@ export class PieChart extends BaseChart {
 				sliceElement
 					.attr("stroke-width", Configuration.pie.mouseover.strokeWidth)
 					.attr("stroke-opacity", Configuration.pie.mouseover.strokeOpacity)
-					.attr("stroke", self.colorScale[self.displayData.datasets[0].label](d.data.label));
+					.attr("stroke", self.getStrokeColor(self.displayData.datasets[0].label, d.data.label, d.data.value));
 
 				self.showTooltip(d);
 				self.reduceOpacity(this);
@@ -318,7 +316,7 @@ export class PieChart extends BaseChart {
 			.on("mouseout", function(d) {
 				select(this)
 					.attr("stroke-width", accessibility ? Configuration.pie.default.strokeWidth : Configuration.pie.mouseout.strokeWidth)
-					.attr("stroke", accessibility ? self.colorScale[self.displayData.datasets[0].label](d.data.label) : "none")
+					.attr("stroke", accessibility ? self.getStrokeColor(self.displayData.datasets[0].label, d.data.label, d.data.value) : "none")
 					.attr("stroke-opacity", Configuration.pie.mouseout.strokeOpacity);
 
 				self.hideTooltip();
