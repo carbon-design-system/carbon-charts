@@ -399,7 +399,7 @@ export class BaseChart {
 				.call(this.makeAccessible);
 			if (container.select(".legend-wrapper").nodes().length === 0) {
 				const legendWrapper = container.append("div")
-					.attr("class", "legend-wrapper")
+					.attr("class", "legend-wrapper");
 
 				legendWrapper.append("ul")
 					.attr("class", "legend");
@@ -972,7 +972,7 @@ export class BaseChart {
 		// Chart containers
 		} else if (element.attr("chart-id")) {
 			element.attr("aria-label", `${element.attr("chart-id")}`);
-		//Legend containers
+		// Legend containers
 		} else if (element.attr("class") === "legend right-legend") {
 			element.attr("aria-label", "Legend - click items to add or remove them from the chart");
 		}
