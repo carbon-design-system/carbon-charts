@@ -554,7 +554,7 @@ export class BaseChart {
 			this.container.select(".legend").classed("right-legend", true)
 				.style("width", legendWidth + "px");
 		} else if (Configuration.charts.rtlSupport) {
-			this.container.selectAll(".expand-btn").remove();
+			this.container.selectAll(".expand-btn-rtl").remove();
 			this.container.select(".legend-wrapper").style("height", 0);
 			const containerWidth = this.container.node().clientWidth;
 			const legendWidth = containerWidth - svgWidth;
@@ -675,7 +675,7 @@ export class BaseChart {
 		const self = this;
 		const thisLegend = this.container.select(".legend");
 		thisLegend.append("div")
-			.attr("class", "expand-btn")
+			.attr("class", Configuration.charts.rtlSupport ? "expand-btn-rtl" : "expand-btn")
 			.style("cursor", "pointer")
 			.on("click", function() {
 				self.openLegendTooltip(this);
