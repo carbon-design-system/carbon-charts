@@ -14,6 +14,7 @@ import * as Configuration from "./configuration";
 const defaultColors = Configuration.options.BASE.colors;
 
 import "./style.scss";
+import "./rtl.scss";
 
 export {
 	defaultColors,
