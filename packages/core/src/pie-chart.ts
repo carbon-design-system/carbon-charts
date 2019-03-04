@@ -259,16 +259,16 @@ export class PieChart extends BaseChart {
 	showTooltip(d) {
 		this.resetOpacity();
 
-		selectAll(".tooltip").remove();
+		selectAll(".chart-tooltip").remove();
 		const tooltip = select(this.holder).append("div")
-			.attr("class", "tooltip chart-tooltip")
+			.attr("class", Configuration.charts.rtlSupport ? "tooltip-rtl chart-tooltip" : "tooltip chart-tooltip" )
 			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
 		const dVal = d.value.toLocaleString();
 		const tooltipHTML = this.generateTooltipHTML(d.data.label, dVal);
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
-		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
+		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth || Configuration.charts.rtlSupport) {
 			tooltip.style(
 				"left",
 				mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
@@ -310,12 +310,17 @@ export class PieChart extends BaseChart {
 				const tooltipRef = select(self.holder).select("div.chart-tooltip");
 
 				const relativeMousePosition = mouse(self.holder as HTMLElement);
-				tooltipRef.style("left", relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px")
+				tooltipRef.style(
+					"left", 
+					!Configuration.charts.rtlSupport ? 
+						relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px" : 
+							relativeMousePosition[0] - (tooltipRef.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px")
 					.style("top", relativeMousePosition[1] + "px");
 			})
 			.on("mouseout", function(d) {
+				const { strokeWidth, strokeWidthAccessible } = Configuration.pie.mouseout;
 				select(this)
-					.attr("stroke-width", accessibility ? Configuration.pie.default.strokeWidth : Configuration.pie.mouseout.strokeWidth)
+					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
 					.attr("stroke", accessibility ? self.getStrokeColor(self.displayData.datasets[0].label, d.data.label, d.data.value) : "none")
 					.attr("stroke-opacity", Configuration.pie.mouseout.strokeOpacity);
 

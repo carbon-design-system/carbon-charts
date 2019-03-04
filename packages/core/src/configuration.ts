@@ -197,6 +197,7 @@ export const pie = {
 	},
 	mouseout: {
 		strokeWidth: 0,
+		strokeWidthAccessible: 2,
 		strokeOpacity: 1
 	},
 	sliceLimit: 6,
