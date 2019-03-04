@@ -173,7 +173,8 @@ div.chart-holder {
 		padding: 0;
 		border: none;
 		.legend-tooltip-header {
-			color: white;
+			float:right;
+			color: rgb(7, 7, 7);
 			font-size: 15px;
 			font-weight: 700;
 			padding: 13px 20px;
@@ -184,15 +185,20 @@ div.chart-holder {
 			width: 100%;
 		}
 		text {
+			float:right;
 			max-width: 145px;
 		}
 		button {
+			float:left;
 			position: absolute;
 			top: 7px;
-			right: 10px;
+			left: 10px;
 		}
 		.legend-tooltip-content {
 			padding: 0 7px 15px 7px;
+		}
+		.legend-circle {
+			float:right;
 		}
 	}
 
