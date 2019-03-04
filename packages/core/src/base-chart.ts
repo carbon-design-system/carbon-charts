@@ -925,7 +925,7 @@ export class BaseChart {
 			);
 		} else if (Configuration.charts.rtlSupport) {
 			tooltip.style(
-				"left", 
+				"left",
 				mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px");
 		} else {
 			tooltip.style("left", mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
