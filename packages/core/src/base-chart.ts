@@ -541,8 +541,10 @@ export class BaseChart {
 	}
 
 	positionLegend() {
-		if (this.container.select(Configuration.charts.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip").nodes().length > 0
-			&& this.container.select(Configuration.charts.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip").node().style.display === "block") { return; }
+		if (this.container.select(Configuration.charts.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip")
+				.nodes().length > 0
+			&& this.container.select(Configuration.charts.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip")
+				.node().style.display === "block") { return; }
 
 		this.container.selectAll(".legend-btn").style("display", "inline-block");
 		const svgWidth = this.container.select("g.inner-wrap").node().getBBox().width;
@@ -684,7 +686,7 @@ export class BaseChart {
 
 	// TODO - Refactor
 	openLegendTooltip(target) {
-		selectAll(Configuration.charts.rtlSupport ?  ".legend-tooltip-rtl" :".legend-tooltip").remove();
+		selectAll(Configuration.charts.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip").remove();
 		const mouseXPoint = mouse(this.container.node())[0];
 		const windowXPoint = event.x;
 		let tooltip;
@@ -693,7 +695,7 @@ export class BaseChart {
 			tooltip.select("arrow").remove();
 		} else {
 			tooltip = this.container.append("div")
-				.attr("class", Configuration.charts.rtlSupport ? "tooltip chart-tooltip legend-tooltip-rtl" :"tooltip chart-tooltip legend-tooltip")
+				.attr("class", Configuration.charts.rtlSupport ? "tooltip chart-tooltip legend-tooltip-rtl" : "tooltip chart-tooltip legend-tooltip")
 				.style("display", "block")
 				.style("top", (mouse(this.container.node())[1] - Configuration.legend.margin.top) + "px");
 			tooltip.append("p").text("Legend")
@@ -792,7 +794,7 @@ export class BaseChart {
 		// Position the tooltip
 		tooltip.classed("arrow-right", true);
 		tooltip.append("div").attr("class", "arrow");
-		//tooltip.style("left", `${mouseXPoint - Configuration.tooltip.width - Configuration.tooltip.arrowWidth}px`);
+		// tooltip.style("left", `${mouseXPoint - Configuration.tooltip.width - Configuration.tooltip.arrowWidth}px`);
 
 		if (this.options.legendClickable) {
 			this.addLegendCircleHoverEffect();
@@ -916,14 +918,17 @@ export class BaseChart {
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 
 		// Draw tooltip arrow in the right direction
-		//console.log(mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth  );
 		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
 			tooltip.style(
 				"left",
 				mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
 			);
+		} else if (Configuration.charts.rtlSupport) {
+			tooltip.style(
+				"left", 
+				mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px");
 		} else {
-			tooltip.style("left", mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px");
+			tooltip.style("left", mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
 		}
 
 		tooltip.style("opacity", 0)
