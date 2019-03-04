@@ -268,8 +268,8 @@ export class PieChart extends BaseChart {
 		const tooltipHTML = this.generateTooltipHTML(d.data.label, dVal);
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
-		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth || Configuration.charts.rtlSupport) {
-			tooltip.style(
+		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth ||
+			Configuration.charts.rtlSupport) { tooltip.style(
 				"left",
 				mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
 			);
@@ -311,9 +311,9 @@ export class PieChart extends BaseChart {
 
 				const relativeMousePosition = mouse(self.holder as HTMLElement);
 				tooltipRef.style(
-					"left", 
-					!Configuration.charts.rtlSupport ? 
-						relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px" : 
+					"left",
+					!Configuration.charts.rtlSupport ?
+						relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px" :
 							relativeMousePosition[0] - (tooltipRef.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px")
 					.style("top", relativeMousePosition[1] + "px");
 			})
