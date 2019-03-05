@@ -1,15 +1,13 @@
 // D3 Imports
 import { select, mouse } from "d3-selection";
 import { area } from "d3-shape";
-import { scaleTime, extent, timeFormat, timeParse, scaleBand } from "d3";
-import { axisBottom, axisLeft, axisRight } from "d3-axis";
 
-import { BaseAxisChart } from "./base-axis-chart";
 import * as Configuration from "./configuration";
 
 import { getD3Curve } from "./services/curves";
+import { ScatterChart } from "./scatter-chart";
 
-export class AreaChart extends BaseAxisChart {
+export class AreaChart extends ScatterChart {
 	x: any;
 	y: any;
 
@@ -23,142 +21,45 @@ export class AreaChart extends BaseAxisChart {
 		this.options.type = "area";
 	}
 
-	getLegendType() {
-		return Configuration.legend.basedOn.SERIES;
-	}
-
-	addLabelsToDataPoints(d, index) {
-		const { labels } = this.displayData;
-		return d.data.map((datum, i) => ({
-			label: labels[i],
-			datasetLabel: d.label,
-			value: datum
-		}));
-	}
-
-
-	setXScale(xScale?: any) {
-		const { line: margins } = Configuration.charts.margin;
-
-		const chartSize = this.getChartSize();
-		const width = chartSize.width - margins.left - margins.right;
-
-		const formatTime = timeParse("%Y/%m/%d");
-		if (xScale) {
-			this.x = xScale;
-		} else {
-
-			// console.log(this.displayData.labels.map(dataset => formatTime(dataset)));
-
-			this.x = scaleTime();
-			this.x.domain(extent(this.displayData.labels.map(dataset => formatTime(dataset))));
-			this.x.range([0, width]);
-
-			// console.log(this.x.ticks());
-		}
-	}
-
-
-	setXAxis(noAnimation?: boolean) {
-		const { bar: margins } = Configuration.charts.margin;
-		const chartSize = this.getChartSize();
-		const height = chartSize.height - margins.top - margins.bottom;
-
-		const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
-		const formatTime = timeParse("%Y/%m/%d");
-
-		const xAxis = axisBottom(this.x)
-			.tickSize(0)
-			.tickSizeOuter(0)
-			.tickFormat(timeFormat("%Y/%m/%d")).tickValues(this.displayData.labels.map(dataset => formatTime(dataset)));
-		let xAxisRef = this.svg.select("g.x.axis");
-
-		// If the <g class="x axis"> exists in the chart SVG, just update it
-		if (xAxisRef.nodes().length > 0) {
-			xAxisRef = this.svg.select("g.x.axis")
-				.transition(t)
-				.attr("transform", `translate(0, ${height})`)
-				// Casting to any because d3 does not offer appropriate typings for the .call() function
-				.call(xAxis);
-		} else {
-			xAxisRef = this.innerWrap.append("g")
-				.attr("class", "x axis");
-
-			xAxisRef.call(xAxis);
-		}
-
-		// Update the position of the pieces of text inside x-axis
-		xAxisRef.selectAll("g.tick text")
-			.attr("y", Configuration.scales.magicY1)
-			.attr("x", Configuration.scales.magicX1)
-			.attr("dy", ".35em")
-			.attr("transform", `rotate(${Configuration.scales.xAxisAngle})`)
-			.style("text-anchor", "end")
-			.call(text => this.wrapTick(text));
-
-		// get the tickHeight after the ticks have been wrapped
-		const tickHeight = this.getLargestTickHeight(xAxisRef.selectAll(".tick")) + Configuration.scales.tick.heightAddition;
-		// Add x-axis title
-		if (this.innerWrap.select(".axis-label.x").nodes().length === 0 && this.options.scales.x.title) {
-			xAxisRef.append("text")
-				.attr("class", "x axis-label")
-				.attr("text-anchor", "middle")
-				.attr("transform", `translate(${xAxisRef.node().getBBox().width / 2}, ${tickHeight})`)
-				.text(this.options.scales.x.title);
-		}
-
-		// get the yHeight after the height of the axis has settled
-		const yHeight = this.getChartSize().height - this.svg.select(".x.axis").node().getBBox().height;
-		xAxisRef.attr("transform", `translate(0, ${yHeight})`);
-	}
-
 	draw() {
 		this.innerWrap.style("width", "100%")
 			.style("height", "100%");
 
 		const { line: margins } = Configuration.charts.margin;
-		const { scales } = this.options;
-
-		const chartSize = this.getChartSize();
-		const width = chartSize.width - margins.left - margins.right;
-		const height = chartSize.height - this.getBBox(".x.axis").height;
-
-		this.innerWrap.style("width", "100%")
-			.style("height", "100%");
 
 		this.innerWrap.attr("transform", `translate(${margins.left}, ${margins.top})`);
 
 		// D3 area generator function
 		this.areaGenerator = area()
-			.x((d, i) => this.x(new Date(this.displayData.labels[i])))
-			.y1((d) => this.y(d))
+			.x((d, i) => this.x(this.displayData.labels[i]) + this.x.step() / 2)
+			.y1((d: any) => this.y(d))
 			.y0(d => this.y(0))
 			.curve(getD3Curve("curveLinear"));
 
-		const gLines = this.innerWrap.selectAll("g.lines")
+		const gArea = this.innerWrap.selectAll("g.areas")
 			.data(this.displayData.datasets)
 			.enter()
 				.append("g")
-				.classed("lines", true);
+				.classed("areas", true);
 
-		gLines.append("path")
-			.attr("stroke", d => this.colorScale[d.label]())
+		gArea.append("path")
 			.attr("fill", d => this.colorScale[d.label]())
-			.attr("opacity", 0.4)
 			.datum(d => d.data)
+			.attr("opacity", 0.8)
 			.attr("class", "area")
 			.attr("d", this.areaGenerator);
 
-
-		gLines.selectAll("circle.dot")
+		const circleRadius = super.getCircleRadius();
+		gArea.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i))
 			.enter()
 				.append("circle")
 				.attr("class", "dot")
-				.attr("cx", d => this.x(new Date(d.label)))
+				.attr("cx", d => this.x(d.label) + this.x.step() / 2)
 				.attr("cy", d => this.y(d.value))
-				.attr("r", Configuration.charts.pointCircles.radius)
-				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+				.attr("r", circleRadius)
+				.attr("fill", d => this.getCircleFill(circleRadius, d))
+				.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 
 		// Hide the overlay
 		this.updateOverlay().hide();
@@ -168,50 +69,51 @@ export class AreaChart extends BaseAxisChart {
 	}
 
 	interpolateValues(newData: any) {
-		const { line: margins } = Configuration.charts.margin;
-		const chartSize = this.getChartSize();
-		const width = chartSize.width - margins.left - margins.right;
-		const height = chartSize.height - this.getBBox(".x.axis").height;
+		this.innerWrap.selectAll(".removed")
+			.remove();
 
-		// Apply new data to the lines
-		const gLines = this.innerWrap.selectAll("g.lines")
+		// Apply new data to the area
+		const gArea = this.innerWrap.selectAll("g.areas")
 			.data(newData.datasets);
 
-		this.updateElements(true, gLines);
+		this.updateElements(true, gArea);
 
-		// Add lines that need to be added now, area under line is calculated
-		const addedLineGroups = gLines.enter()
+		// Add areas that need to be added now
+		const addedAreaGroups = gArea.enter()
 			.append("g")
-			.classed("lines", true);
+			.classed("areas", true);
 
-		addedLineGroups.append("path")
-			.attr("stroke", d => this.colorScale[d.label]())
+		addedAreaGroups.append("path")
+			.attr("fill", d => this.colorScale[d.label]())
 			.datum(d => d.data)
 			.style("opacity", 0)
 			.transition(this.getDefaultTransition())
-			.style("opacity", 1)
+			.style("opacity", 0.8)
 			.attr("class", "area")
 			.attr("d", this.areaGenerator);
 
-		// Add line circles
-		addedLineGroups.selectAll("circle.dot")
+		// Add point circles
+		const circleRadius = this.getCircleRadius();
+		addedAreaGroups.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i))
 			.enter()
 				.append("circle")
 				.attr("class", "dot")
-				.attr("cx", (d, i) => this.x(new Date(d.label))  )
+				.attr("cx", (d, i) => this.x(d.label) + this.x.step() / 2)
 				.attr("cy", (d: any) => this.y(d.value))
 				.attr("r", 4)
 				.style("opacity", 0)
 				.transition(this.getDefaultTransition())
 				.style("opacity", 1)
-				.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+				.attr("fill", d => this.getCircleFill(circleRadius, d))
+				.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 
-		// Remove lines that are no longer needed
-		// gLines.exit()
-		// 	.transition(this.getDefaultTransition())
-		// 	.style("opacity", 0)
-		// 	.remove();
+		// Remove areas that are no longer needed
+		gArea.exit()
+			.classed("removed", true) // mark this element with "removed" class so it isn't reused
+			.transition(this.getDefaultTransition())
+			.style("opacity", 0)
+			.remove();
 
 		// Add slice hover actions, and clear any slice borders present
 		this.addDataPointEventListener();
@@ -223,72 +125,43 @@ export class AreaChart extends BaseAxisChart {
 		this.dispatchEvent("update");
 	}
 
-	updateElements(animate: boolean, gLines?: any) {
-		console.log("updated called at start");
-		const { scales } = this.options;
-
-		const chartSize = this.getChartSize();
-		const height = chartSize.height - this.getBBox(".x.axis").height;
-
-		if (!gLines) {
-			gLines = this.innerWrap.selectAll("g.lines");
+	updateElements(animate: boolean, gArea?: any) {
+		if (!gArea) {
+			gArea = this.innerWrap.selectAll("g.areas");
 		}
 
 		const transitionToUse = animate ? this.getFillTransition() : this.getInstantTransition();
 		const self = this;
-		gLines.selectAll("path.line")
+		gArea.selectAll("path.area")
 			.datum(function(d) {
 				const parentDatum = select(this.parentNode).datum() as any;
 
 				return parentDatum.data;
 			})
 			.transition(transitionToUse)
-			.attr("stroke", function(d) {
+			.style("opacity", 0.8)
+			.attr("fill", function(d) {
 				const parentDatum = select(this.parentNode).datum() as any;
 
 				return self.colorScale[parentDatum.label]();
 			})
-			.attr("class", "line")
+			.attr("class", "area")
 			.attr("d", this.areaGenerator);
 
-		const { line: margins } = Configuration.charts.margin;
-		gLines.selectAll("circle.dot")
+		const circleRadius = this.getCircleRadius();
+		gArea.selectAll("circle.dot")
 			.data(function(d, i) {
 				const parentDatum = select(this).datum() as any;
 
 				return self.addLabelsToDataPoints(parentDatum, i);
 			})
 			.transition(transitionToUse)
-			.attr("cx", d => this.x(new Date(d.label)))
+			.attr("cx",d => this.x(d.label) + this.x.step() / 2)
 			.attr("cy", d => this.y(d.value))
 			.attr("r", Configuration.lines.points.strokeWidth)
-			.attr("stroke", d => this.colorScale[d.datasetLabel](d.label));
+			.attr("fill", d => this.getCircleFill(circleRadius, d))
+			.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 	}
-
-	resizeChart() {
-		const chartSize: any = this.getChartSize(this.container);
-		const dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
-
-		// Resize the SVG
-		select(this.holder).select("svg")
-				.attr("width", `${dimensionToUseForScale}px`)
-				.attr("height", `${dimensionToUseForScale}px`);
-
-		this.updateXandYGrid(true);
-		// Scale out the domains
-		this.setXScale();
-		this.setYScale();
-
-		// Set the x & y axis as well as their labels
-		this.setXAxis(true);
-		this.setYAxis(true);
-
-		this.updateElements(false, null);
-
-		super.resizeChart();
-	}
-
-
 
 	addDataPointEventListener() {
 		const self = this;
@@ -300,15 +173,15 @@ export class AreaChart extends BaseAxisChart {
 			})
 			.on("mouseover", function(d) {
 				select(this.parentNode)
-					.raise()
-					.attr("opacity", 1);
+					.raise();
 				select(this)
+					.style("opacity", 1)
 					.attr("stroke-width", Configuration.lines.points.mouseover.strokeWidth)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
 					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
 
 				self.showTooltip(d, this);
-				self.reduceOpacity(this);
+				//self.reduceOpacity(this);
 			})
 			.on("mousemove", function(d) {
 				const tooltipRef = select(self.holder).select("div.chart-tooltip");

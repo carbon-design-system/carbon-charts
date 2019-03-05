@@ -2,7 +2,6 @@ import { colors } from "./colors";
 
 export const areaData = {
 	labels: ["2019/01/01", "2019/02/01", "2019/03/01", "2019/04/01", "2019/05/01"],
-	// labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
 		{
 			label: "Dataset 1",
@@ -25,6 +24,17 @@ export const areaData = {
 				48484,
 				85856
 			]
+		},
+		{
+			label: "Dataset 3",
+			backgroundColors: [colors[2]],
+			data: [
+				12312,
+				34232,
+				39232,
+				12312,
+				34234
+			]
 		}
 		
 	]
@@ -34,9 +44,10 @@ export const areaOptions = {
 	accessibility: false,
 	scales: {
 		x: {
-			title: "2018 Monthly Sales Figures",
+			title: "Month",
 		},
 		y: {
+			title: "Monthly Sales Figures",
 			yMaxAdjuster: yMax => yMax * 1.2,
 			yMinAdjuster: yMin => yMin * 1.2,
 			formatter: axisValue => `${axisValue / 1000}k`
@@ -45,7 +56,7 @@ export const areaOptions = {
 	curve: {
 		name: "curveLinear"
 	},
-	legendClickable: false,
+	legendClickable: true,
 	containerResizable: true
 };
 
