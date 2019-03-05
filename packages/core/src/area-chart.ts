@@ -156,7 +156,7 @@ export class AreaChart extends ScatterChart {
 				return self.addLabelsToDataPoints(parentDatum, i);
 			})
 			.transition(transitionToUse)
-			.attr("cx",d => this.x(d.label) + this.x.step() / 2)
+			.attr("cx", d => this.x(d.label) + this.x.step() / 2)
 			.attr("cy", d => this.y(d.value))
 			.attr("r", Configuration.lines.points.strokeWidth)
 			.attr("fill", d => this.getCircleFill(circleRadius, d))
@@ -181,7 +181,7 @@ export class AreaChart extends ScatterChart {
 					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
 
 				self.showTooltip(d, this);
-				//self.reduceOpacity(this);
+				self.reduceOpacity(this);
 			})
 			.on("mousemove", function(d) {
 				const tooltipRef = select(self.holder).select("div.chart-tooltip");
