@@ -146,8 +146,8 @@ export class BarChart extends BaseAxisChart {
 						.attr("y", d => this.y(Math.max(0, d.value)))
 						.attr("width", this.x1.bandwidth())
 						.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
-						.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
-						.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.label) : null)
+						.attr("fill", d => this.getFillColor(d.datasetLabel, d.label, d.value))
+						.attr("stroke", d => this.options.accessibility ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : null)
 						.attr("stroke-width", Configuration.bars.default.strokeWidth)
 						.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
 
@@ -193,9 +193,9 @@ export class BarChart extends BaseAxisChart {
 			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
 			.style("opacity", 0)
 			.transition(this.getFillTransition())
-			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
+			.attr("fill", d => this.getFillColor(d.datasetLabel, d.label, d.value))
 			.style("opacity", 1)
-			.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
+			.attr("stroke", (d: any) => this.getStrokeColor(d.datasetLabel, d.label, d.value))
 			.attr("stroke-width", Configuration.bars.default.strokeWidth);
 
 		addedBars.selectAll("rect.bar")
@@ -209,9 +209,9 @@ export class BarChart extends BaseAxisChart {
 			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
 			.style("opacity", 0)
 			.transition(this.getFillTransition())
-			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
+			.attr("fill", d => this.getFillColor(d.datasetLabel, d.label, d.value))
 			.style("opacity", 1)
-			.attr("stroke", (d: any) => this.colorScale[d.datasetLabel](d.label))
+			.attr("stroke", (d: any) => this.getStrokeColor(d.datasetLabel, d.label, d.value))
 			.attr("stroke-width", Configuration.bars.default.strokeWidth);
 
 		// Remove bar groups are no longer needed
@@ -262,8 +262,8 @@ export class BarChart extends BaseAxisChart {
 			.attr("y", d => this.y(Math.max(0, d.value)))
 			.attr("width", this.x1.bandwidth())
 			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
-			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
-			.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.label) : null);
+			.attr("fill", d => this.getFillColor(d.datasetLabel, d.label, d.value))
+			.attr("stroke", d => this.options.accessibility ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : null);
 	}
 
 	resizeChart() {
@@ -302,7 +302,7 @@ export class BarChart extends BaseAxisChart {
 			.on("mouseover", function(d) {
 				select(this)
 					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
-					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
+					.attr("stroke", self.getStrokeColor(d.datasetLabel, d.label, d.value))
 					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
 
 				self.showTooltip(d, this);
@@ -319,7 +319,7 @@ export class BarChart extends BaseAxisChart {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.bars.mouseout;
 				select(this)
 					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
-					.attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
+					.attr("stroke", accessibility ? self.getStrokeColor(d.datasetLabel, d.label, d.value) : "none")
 					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
 
 				self.hideTooltip();
