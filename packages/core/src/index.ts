@@ -9,6 +9,7 @@ import { BarChart } from "./bar-chart";
 import { LineChart } from "./line-chart";
 import { AreaChart } from "./area-chart";
 import { ComboChart } from "./combo-chart";
+import { ScatterChart } from "./scatter-chart";
 
 import * as Configuration from "./configuration";
 const defaultColors = Configuration.options.BASE.colors;
@@ -25,5 +26,6 @@ export {
 	BarChart,
 	LineChart,
 	AreaChart,
-	ComboChart
+	ComboChart,
+	ScatterChart
 };

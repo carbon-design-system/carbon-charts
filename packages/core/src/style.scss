@@ -65,7 +65,6 @@ div.chart-holder {
 
 		circle {
 			&.dot {
-				fill: #fff;
 				stroke-width: 2;
 			}
 		}
@@ -77,6 +76,11 @@ div.chart-holder {
 		stroke: $gray_60;
 		stroke-width: .3;
 		@include fonts();
+
+		&.title{
+			font-size: 18px;
+			font-weight: bold;
+		}
 
 		&.donut {
 			&-figure {
