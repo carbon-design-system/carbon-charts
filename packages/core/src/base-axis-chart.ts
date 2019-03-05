@@ -275,11 +275,15 @@ export class BaseAxisChart extends BaseChart {
 
 		const yAxisTitleRef = this.svg.select("g.y.axis text.y.axis-label");
 
+		const yAxisCenter = yAxisRef.node().getBBox().height / 2;
+		const yAxisLabelWidth = this.innerWrap.select(".axis-label.y").node().getBBox().width;
+
 		const yAxisTitleTranslate = {
-			x: - (yAxisRef.node().getBBox().height / 2),
-			y: - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5
+			x: - yAxisCenter + yAxisLabelWidth / 2,
+			y: - (tickHeight + Configuration.scales.tick.heightAddition)
 		};
 
+		// Align y axis title with y axis
 		yAxisTitleRef.attr("class", "y axis-label")
 		.attr("text-align", "center")
 		.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`)
@@ -390,20 +394,23 @@ export class BaseAxisChart extends BaseChart {
 
 		const tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
 
-		const yAxisTitleTranslate = {
-			x: - (yAxisRef.node().getBBox().height / 2),
-			y: - (tickHeight + Configuration.scales.tick.heightAddition) * 1.5
-		};
-
 		// Add y-axis title
 		if (this.innerWrap.select(".axis-label.y").nodes().length === 0 && this.options.scales.y.title) {
 			yAxisRef.append("text")
 				.attr("class", "y axis-label")
-				.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`)
-				.attr("text-align", "center")
 				.text(this.options.scales.y.title);
 
-			this.svg.attr("transform", `translate(${this.innerWrap.select(".axis-label.y").node().getBBox().height}, 0)`);
+			const yAxisCenter = yAxisRef.node().getBBox().height / 2;
+			const yAxisLabelWidth = this.innerWrap.select(".axis-label.y").node().getBBox().width;
+
+			const yAxisTitleTranslate = {
+				x: - yAxisCenter + yAxisLabelWidth / 2,
+				y: - (tickHeight + Configuration.scales.tick.heightAddition)
+			};
+
+			// Align y axis title on the y axis
+			this.innerWrap.select(".axis-label.y")
+				.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
 		}
 
 		Tools.moveToFront(horizontalLine);

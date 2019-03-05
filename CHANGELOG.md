@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.1](https://github.com/IBM/carbon-charts/compare/v0.10.0...v0.10.1) (2019-02-28)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+# [0.10.0](https://github.com/IBM/carbon-charts/compare/v0.9.7...v0.10.0) (2019-02-28)
+
+
+### Features
+
+* **$core:** Adds getStrokeColor and getFillColor options ([e1766d3](https://github.com/IBM/carbon-charts/commit/e1766d3)), closes [#136](https://github.com/IBM/carbon-charts/issues/136)
+
+
+
+
+
+## [0.9.7](https://github.com/IBM/carbon-charts/compare/v0.9.6...v0.9.7) (2019-02-22)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.9.6](https://github.com/IBM/carbon-charts/compare/v0.9.4...v0.9.6) (2019-02-21)
+
+
+### Bug Fixes
+
+* **bar:** add maxWidth and other bar fixes ([3866d86](https://github.com/IBM/carbon-charts/commit/3866d86))
+
+
+
+
+
 ## [0.9.5](https://github.com/IBM/carbon-charts/compare/v0.9.4...v0.9.5) (2019-02-20)
 
 
