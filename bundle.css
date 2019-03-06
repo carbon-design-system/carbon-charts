@@ -41,8 +41,6 @@ div.chart-holder {
     .chart-wrapper text.donut-title {
       font-size: 15px;
       fill: #595859; }
-  .chart-wrapper tspan {
-    cursor: pointer; }
   .chart-wrapper .legend-wrapper {
     height: 40px;
     width: 100%; }
@@ -112,6 +110,7 @@ div.chart-holder {
       top: 7px;
       right: 10px; }
     .chart-wrapper .legend-tooltip .legend-tooltip-content {
+      text-align: left;
       padding: 0 7px 15px 7px; }
   .chart-wrapper .right-legend {
     position: absolute;

@@ -2077,26 +2077,43 @@ var BaseAxisChart = /** @class */ (function (_super) {
     // TODO - Refactor
     BaseAxisChart.prototype.wrapTick = function (ticks) {
         var self = this;
-        var letNum = _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].tick.maxLetNum;
+        var lineHeight = _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].tick.lineHeight;
         ticks.each(function (t) {
-            if (t && t.length > letNum / 2) {
-                var tick = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this);
-                var y = tick.attr("y");
-                tick.text("");
-                var tspan1 = tick.append("tspan")
-                    .attr("x", 0).attr("y", y).attr("dx", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].dx).attr("dy", "-" + _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].tick.dy);
-                var tspan2 = tick.append("tspan")
-                    .attr("x", 0).attr("y", y).attr("dx", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].dx).attr("dy", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].tick.dy);
-                if (t.length < letNum - 3) {
-                    tspan1.text(t.substring(0, t.length / 2));
-                    tspan2.text(t.substring(t.length / 2 + 1, t.length));
-                }
-                else {
-                    tspan1.text(t.substring(0, letNum / 2));
-                    tspan2.text(t.substring(letNum / 2, letNum - 3) + "...");
-                    tick.on("click", function (dd) {
-                        self.showLabelTooltip(dd, true);
-                    });
+            var text = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this);
+            var textContent = text.text();
+            // If the text has already been broken down into parts
+            if (text.selectAll("tspan").nodes().length > 1) {
+                textContent = text.selectAll("tspan")
+                    .nodes()
+                    .map(function (node) { return Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(node).text(); })
+                    .join(" ");
+            }
+            var words = textContent.split(/\s+/).reverse();
+            var y = text.attr("y");
+            var dy = parseFloat(text.attr("dy"));
+            var word;
+            var line = [];
+            var lineNumber = 0;
+            var tspan = text.text(null)
+                .append("tspan")
+                .attr("x", 0);
+            // Set max length allowed to length of datapoints
+            // In the x-scale
+            var maxTextLengthAllowed = self.x.bandwidth();
+            while (word = words.pop()) {
+                line.push(word);
+                tspan.text(line.join(" "));
+                // Get text length and compare to maximum length allowed
+                var tspanTextLength = tspan.node().getComputedTextLength();
+                if (tspanTextLength > maxTextLengthAllowed) {
+                    line.pop();
+                    tspan.text(line.join(" "));
+                    line = [word];
+                    tspan = text.append("tspan")
+                        .attr("x", 0)
+                        .attr("y", y)
+                        .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                        .text(word);
                 }
             }
         });
@@ -3217,7 +3234,7 @@ var scales = {
         widthAdditionY: 25,
         widthAdditionY2: 15,
         heightAddition: 16,
-        maxLetNum: 28
+        lineHeight: 1.1
     },
     magicDy1: "0.71em",
     magicY1: 9,
