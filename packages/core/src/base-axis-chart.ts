@@ -425,7 +425,7 @@ export class BaseAxisChart extends BaseChart {
 			};
 
 			// Align y axis title on the y axis
-			if (!Configuration.charts.rtlSupport){
+			if (!Configuration.charts.rtlSupport) {
 				this.innerWrap.select(".axis-label.y")
 				.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
 			} else {
