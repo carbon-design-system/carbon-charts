@@ -415,14 +415,25 @@ export class BaseAxisChart extends BaseChart {
 			const yAxisCenter = yAxisRef.node().getBBox().height / 2;
 			const yAxisLabelWidth = this.innerWrap.select(".axis-label.y").node().getBBox().width;
 
-			const yAxisTitleTranslate = {
-				x: - yAxisCenter + yAxisLabelWidth / 2,
-				y: - (tickHeight + Configuration.scales.tick.heightAddition)
-			};
+			const yAxisTitleTranslate = !Configuration.charts.rtlSupport ? 
+			{
+				x: - yAxisCenter + yAxisLabelWidth  / 2,
+				y: -(tickHeight + Configuration.scales.tick.heightAddition )
+			} : {
+				x: yAxisCenter - yAxisLabelWidth  / 2,
+				y: -(tickHeight + Configuration.scales.tick.heightAddition )
+			}
 
+
+			console.log(yAxisTitleTranslate.x,yAxisTitleTranslate.y)
 			// Align y axis title on the y axis
-			this.innerWrap.select(".axis-label.y")
+			if (!Configuration.charts.rtlSupport){
+				this.innerWrap.select(".axis-label.y")
 				.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
+			}else {
+				this.innerWrap.select(".axis-label.y")
+				.attr("transform", `rotate(90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
+			}
 		}
 
 		Tools.moveToFront(horizontalLine);
