@@ -415,7 +415,8 @@ export class BaseChart {
 				.call(this.makeAccessible);
 			if (container.select(".legend-wrapper").nodes().length === 0) {
 				const legendWrapper = container.append("div")
-					.attr("class", "legend-wrapper");
+					.attr("class", "legend-wrapper")
+					.call(this.makeAccessible);
 
 				legendWrapper.append("ul")
 					.attr("class", "legend");
@@ -550,8 +551,7 @@ export class BaseChart {
 			const containerWidth = this.container.node().clientWidth;
 			const legendWidth = containerWidth - svgWidth;
 			this.container.select(".legend").classed("right-legend", true)
-				.style("width", legendWidth + "px")
-				.call(this.makeAccessible);
+				.style("width", legendWidth + "px");
 		} else {
 			this.container.select(".legend-wrapper").style("height", Configuration.legend.wrapperHeight);
 		}
@@ -989,7 +989,7 @@ export class BaseChart {
 		} else if (element.attr("chart-id")) {
 			element.attr("aria-label", `${element.attr("chart-id")}`);
 		// Legend containers
-		} else if (element.attr("class") === "legend right-legend") {
+		} else if (element.attr("class") === "legend-wrapper") {
 			element.attr("aria-label", "Legend - click items to add or remove them from the chart");
 		}
 	}
