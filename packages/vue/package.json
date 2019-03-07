@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts-vue",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "description": "Carbon charting components for Vue",
   "main": "index.js",
   "files": [
@@ -19,8 +19,8 @@
     "format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\""
   },
   "dependencies": {
-    "vue": "^2.6.6",
-    "@carbon/charts": "^0.10.2"
+    "@carbon/charts": "^0.10.2",
+    "vue": "^2.6.6"
   },
   "devDependencies": {
     "@babel/core": "7.3.4",
