@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Carbon charting components",
   "files": [
     "dist",
