@@ -29,5 +29,11 @@ npm run build
 npm run build-storybook
 cp -a storybook-dist/. ../../pages/react
 
+# Build Vue demos
+cd ../vue
+npm run build
+npm run build-storybook
+cp -a storybook-dist/. ../../pages/vue
+
 # Go back to project root folder
 cd ../..
