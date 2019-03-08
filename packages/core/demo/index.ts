@@ -3,13 +3,46 @@ import {
 	LineChart,
 	PieChart,
 	DonutChart,
-	ComboChart
+	ComboChart,
+	ScatterChart
 } from "../src/index";
 
 // Styles
 import "./index.scss";
 
-import {
+//
+// Experimental Switch Toggle
+//
+const experimentalSwitchWrapper = document.querySelector("fieldset.experimental-switch");
+const experimentalCheckbox = (experimentalSwitchWrapper.querySelector("input#toggleInput") as HTMLInputElement);
+const { location } = window;
+
+if (location) {
+	window["isExperimental"] = location.search.replace("?experimental=", "") === "true";
+	experimentalCheckbox.checked = window["isExperimental"];
+
+	experimentalSwitchWrapper.querySelector("label.bx--toggle__label").addEventListener("click", () => {
+		// Need the setTimeout
+		// Here since carbon toggle
+		// Does not provide a callback
+		// Therefore we wait until the change in toggle
+		// Status takes effect
+		setTimeout(() => {
+			const experimentalMode = experimentalCheckbox.checked;
+
+			// It's not necessary to process the location pathname
+			// Since we're using the location origin
+			// And since we don't use any other query params
+			location.href = `${location.origin}${location.pathname}?experimental=${experimentalMode}`;
+		});
+	});
+} else {
+	// Hide experimental switch altogether
+	experimentalSwitchWrapper.parentNode.removeChild(experimentalSwitchWrapper);
+}
+
+
+const {
 	// Bar
 	groupedBarOptions,
 	groupedBarData,
@@ -26,10 +59,11 @@ import {
 	curvedLineData,
 	lineData,
 	lineOptions,
+	scatterData,
 	// Combo
 	comboData,
 	comboOptions
-} from "./demo-data/index";
+} = require("./demo-data/index");
 
 const chartTypes = [
 	{
@@ -97,6 +131,12 @@ const chartTypes = [
 		name: "donut",
 		options: donutOptions,
 		data: pieData
+	},
+	{
+		id: "scatter",
+		name: "scatter",
+		options: lineOptions,
+		data: scatterData
 	}
 ];
 
@@ -104,11 +144,6 @@ const classyCharts = {};
 
 // TODO - removeADataset shouldn't be used if chart legend is label based
 const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
-	const classyChartObject = classyCharts[chartType];
-	let newData;
-
-	const removeADataset = Math.random() > 0.5;
-
 	// Function to be used to randomize a value
 	const randomizeValue = currentVal => {
 		const firstTry = Math.max(0.5 * currentVal, currentVal * Math.random() * (Math.random() * 5));
@@ -124,18 +159,40 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		}
 	};
 
+	// Function to be used to randomize all datapoints
+	const updateChartData = currentData => {
+		const result = Object.assign({}, currentData);
+		result.datasets = currentData.datasets.map(dataset => {
+			const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
+
+			const newDataset = Object.assign({}, dataset, { data: datasetNewData });
+
+			return newDataset;
+		});
+
+		return result;
+	};
+
+	const classyChartObject = classyCharts[chartType];
+	let newData;
+
+	const removeADataset = Math.random() > 0.5;
+
 	switch (chartType) {
 		case "donut":
+			// Randomize old data values
+			newData = updateChartData(oldData);
+
+			// Update donut center configurations
+			classyChartObject.options.center = {
+				label: "New Title",
+				number: randomizeValue(classyChartObject.center.configs.number)
+			};
+
+			break;
 		case "pie":
 			// Randomize old data values
-			newData = Object.assign({}, oldData);
-			newData.datasets = oldData.datasets.map(dataset => {
-				const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
-
-				const newDataset = Object.assign({}, dataset, { data: datasetNewData });
-
-				return newDataset;
-			});
+			newData = updateChartData(oldData);
 
 			break;
 		default:
@@ -144,14 +201,7 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		case "simple-bar-accessible":
 		case "stacked-bar":
 		case "stacked-bar-accessible":
-			newData = Object.assign({}, oldData);
-			newData.datasets = oldData.datasets.map(dataset => {
-				const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
-
-				const newDataset = Object.assign({}, dataset, { data: datasetNewData });
-
-				return newDataset;
-			});
+			newData = updateChartData(oldData);
 
 			if (removeADataset && chartType !== "combo") {
 				const randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));
@@ -255,6 +305,17 @@ chartTypes.forEach(type => {
 
 				setDemoActionsEventListener(type.id, type.data);
 
+				break;
+			case "scatter":
+				classyCharts[type.id] = new ScatterChart(
+					classyContainer,
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id}),
+					}
+				);
+
+				setDemoActionsEventListener(type.id, type.data);
 				break;
 			case "curved-line":
 			case "line":

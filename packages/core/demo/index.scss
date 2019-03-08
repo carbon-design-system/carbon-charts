@@ -133,13 +133,7 @@ header.m-demo-header {
 	}
 }
 
-.resizable {
-	resize: both;
-}
-.demo-title {
-	margin-top: 20px;
-}
-.chart-holder {
+.demo-chart-holder {
 	background-color: #fff;
 	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
 	margin: 0 auto 60px auto;
@@ -148,7 +142,6 @@ header.m-demo-header {
 	min-width: 300px;
 	max-width: 800px;
 	padding: 30px;
-	position: relative;
 	transition: box-shadow .1s ease-out;
 	overflow: hidden;
 	resize: both;
@@ -188,17 +181,14 @@ header.m-demo-header {
 	}
 }
 
-.chart-title {
-	display: block;
-	font-size: 16px;
-	font-weight: bold;
-}
-
-#classy-bar-chart-holder {
-	overflow: hidden;
-	resize: both;
-}
-
-div#carbon-charts-patterns svg {
-	height: 0;
+div.experimental-switch {
+	display: table;
+    width: 100%;
+	max-width: 800px;
+	margin: auto;
+	margin-bottom: 30px;
+	padding: 30px;
+	padding-bottom: 0;
+	background-color: #fff;
+    box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
 }

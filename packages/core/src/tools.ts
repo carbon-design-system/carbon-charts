@@ -210,4 +210,16 @@ export namespace Tools {
 
 		return transformMatrixArray[4];
 	}
+
+	export const getProperty = (object, ...propPath) => {
+		let position = object;
+		for (const prop of propPath) {
+			if (position[prop]) {
+				position = position[prop];
+			} else {
+				return null;
+			}
+		}
+		return position;
+	};
 }

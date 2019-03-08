@@ -68,6 +68,9 @@ export class StackedBarChart extends BaseAxisChart {
 		return stackDataArray;
 	}
 
+	// currently unused, but required to match the BarChart class
+	getBarX(d) {}
+
 	draw() {
 		this.innerWrap.style("width", "100%")
 			.style("height", "100%");
@@ -94,8 +97,8 @@ export class StackedBarChart extends BaseAxisChart {
 					.attr("y", d => this.y(d[1]))
 					.attr("height", d => this.y(d[0]) - this.y(d[1]))
 					.attr("width", d => this.x.bandwidth())
-					.attr("fill", d => this.getFillScale()[d.datasetLabel](d.data.label))
-					.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.data.label) : null)
+					.attr("fill", d => this.getFillColor(d.datasetLabel, d.data.label, d.data.value))
+					.attr("stroke", d => this.options.accessibility ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : null)
 					.attr("stroke-width", Configuration.bars.default.strokeWidth)
 					.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
 
@@ -109,6 +112,9 @@ export class StackedBarChart extends BaseAxisChart {
 	interpolateValues(newData: any) {
 		const stackDataArray = this.getStackData();
 		const stackKeys = this.displayData.datasets.map(dataset => dataset.label);
+
+		this.innerWrap.selectAll(".removed")
+			.remove();
 
 		const g = this.innerWrap.selectAll("g.bars-wrapper")
 			.selectAll("g")
@@ -127,11 +133,11 @@ export class StackedBarChart extends BaseAxisChart {
 				.attr("y", d => this.y(d[1]))
 				.attr("height", d => this.y(d[0]) - this.y(d[1]))
 				.attr("width", d => this.x.bandwidth())
-				.attr("fill", d => this.getFillScale()[d.datasetLabel](d.data.label))
-				.attr("opacity", 0)
+				.attr("fill", d => this.getFillColor(d.datasetLabel, d.data.label, d.data.value))
+				.style("opacity", 0)
 				.transition(this.getFillTransition())
-				.attr("opacity", 1)
-				.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.data.label) : null)
+				.style("opacity", 1)
+				.attr("stroke", d => this.options.accessibility ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : null)
 				.attr("stroke-width", Configuration.bars.default.strokeWidth)
 				.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
 		};
@@ -146,11 +152,13 @@ export class StackedBarChart extends BaseAxisChart {
 		addRect(rect);
 
 		g.exit()
+			.classed("removed", true) // mark this element with "removed" class so it isn't reused
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
 
 		rect.exit()
+			.classed("removed", true) // mark this element with "removed" class so it isn't reused
 			.transition(this.getDefaultTransition())
 			.style("opacity", 0)
 			.remove();
@@ -198,12 +206,13 @@ export class StackedBarChart extends BaseAxisChart {
 		// Update existing bars
 		rect
 			.transition(animate ? this.getFillTransition() : this.getInstantTransition())
+			.style("opacity", 1)
 			.attr("x", d => this.x(d.data.label))
 			.attr("y", d => this.y(d[1]))
 			.attr("height", d => this.y(d[0]) - this.y(d[1]))
 			.attr("width", d => this.x.bandwidth())
-			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.data.label))
-			.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.data.label) : null)
+			.attr("fill", d => this.getFillColor(d.datasetLabel, d.data.label, d.data.value))
+			.attr("stroke", d => this.options.accessibility ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : null)
 			.attr("stroke-width", Configuration.bars.default.strokeWidth)
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
 	}
@@ -219,7 +228,7 @@ export class StackedBarChart extends BaseAxisChart {
 			.on("mouseover", function(d) {
 				select(this)
 					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
-					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
+					.attr("stroke", self.getStrokeColor(d.datasetLabel, d.label, d.value))
 					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
 
 				self.showTooltip(d, this);
@@ -236,7 +245,7 @@ export class StackedBarChart extends BaseAxisChart {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.bars.mouseout;
 				select(this)
 					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
-					.attr("stroke", accessibility ? self.colorScale[d.datasetLabel](d.label) : "none")
+					.attr("stroke", accessibility ? self.getStrokeColor(d.datasetLabel, d.label, d.value) : "none")
 					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
 
 				self.hideTooltip();

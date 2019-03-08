@@ -43,6 +43,10 @@ const axisOptions: any = Object.assign({}, baseOptions, {
 			domain: null,
 			ticks: 10
 		}
+	},
+	// Only used for line chart
+	points: {
+		radius: null
 	}
 });
 
@@ -81,7 +85,7 @@ export const charts = {
 		opacity: 0.25,
 		outline: "grey"
 	},
-	pointCircles: {
+	points: {
 		radius: 4
 	},
 	patternFills: {
@@ -117,7 +121,7 @@ export const scales = {
 		widthAdditionY: 25,
 		widthAdditionY2: 15,
 		heightAddition: 16,
-		maxLetNum: 28
+		lineHeight: 1.1
 	},
 	magicDy1: "0.71em",
 	magicY1: 9,
@@ -162,12 +166,16 @@ export const bars = {
 	spacing: {
 		bars: 0.2,
 		datasets: 0.25
+	},
+	bars: {
+		maxWidth: null
 	}
 };
 
 export const lines = {
 	points: {
 		strokeWidth: 4,
+		minNonFilledRadius: 4,
 		mouseover: {
 			strokeWidth: 4,
 			strokeOpacity: 0.5
@@ -193,7 +201,7 @@ export const pie = {
 	sliceLimit: 6,
 	label: {
 		dy: ".32em",
-		margin: 15,
+		margin: 8,
 		other: "Other"
 	},
 	default: {
@@ -258,6 +266,9 @@ export const tooltip = {
 	},
 	fadeOut: {
 		duration: 250
+	},
+	size: {
+		COMPACT: "compact"
 	}
 };
 
