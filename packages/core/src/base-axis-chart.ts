@@ -602,6 +602,8 @@ export class BaseAxisChart extends BaseChart {
 		let yAxisRef = this.svg.select("g.y.axis");
 		const horizontalLine = this.svg.select("line.domain");
 
+		horizontalLine.attr("clip-path", "url(#clip)");
+
 		this.svg.select("g.x.axis path.domain")
 			.remove();
 
