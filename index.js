@@ -2407,17 +2407,6 @@ var BaseChart = /** @class */ (function () {
             .classed("inner-wrap", true);
         return this.svg;
     };
-    BaseChart.prototype.updateSVG = function () {
-        var chartSize = this.getChartSize();
-        this.svg.select(".x.axis")
-            .attr("transform", "translate(0, " + chartSize.height + ")");
-        var grid = this.svg.select(".grid")
-            .attr("clip-path", "url(" + window.location.origin + window.location.pathname + "#clip)");
-        grid.select(".x.grid")
-            .attr("transform", "translate(0, " + chartSize.width + ")");
-        grid.select(".y.grid")
-            .attr("transform", "translate(0, 0)");
-    };
     // Default fallback when no data processing is needed
     BaseChart.prototype.dataProcessor = function (data) {
         return data;
