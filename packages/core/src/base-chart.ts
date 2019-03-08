@@ -300,18 +300,6 @@ export class BaseChart {
 		return this.svg;
 	}
 
-	updateSVG() {
-		const chartSize = this.getChartSize();
-		this.svg.select(".x.axis")
-			.attr("transform", `translate(0, ${chartSize.height})`);
-		const grid = this.svg.select(".grid")
-			.attr("clip-path", `url(${window.location.origin}${window.location.pathname}#clip)`);
-		grid.select(".x.grid")
-			.attr("transform", `translate(0, ${chartSize.width})`);
-		grid.select(".y.grid")
-			.attr("transform", `translate(0, 0)`);
-	}
-
 	// Default fallback when no data processing is needed
 	dataProcessor(data: any) {
 		return data;
