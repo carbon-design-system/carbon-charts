@@ -98,6 +98,20 @@ export class ComboChart extends BaseAxisChart {
 	}
 
 	draw() {
+
+		this.innerWrap.style("width", "100%").style("height", "100%");
+
+		const { line: margins } = Configuration.charts.margin;
+		const { scales } = this.options;
+
+		const chartSize = this.getChartSize();
+		const width = chartSize.width - margins.left - margins.right;
+		const height = chartSize.height - this.getBBox(".x.axis").height;
+
+		this.innerWrap.style("width", "100%")
+			.style("height", "100%");
+
+		this.innerWrap.attr("transform", `translate(${margins.left}, ${margins.top})`);
 		// If charts have been initialized
 		if (this.charts.length) {
 			return;
