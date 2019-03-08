@@ -169,6 +169,7 @@ export class BarChart extends BaseAxisChart {
 		const g = this.innerWrap.select("g.bars")
 			.attr("width", width)
 			.selectAll("g")
+			.attr("clip-path", "url(#clip)")
 			.data(this.displayData.labels);
 
 		const rect = g.selectAll("rect.bar")
