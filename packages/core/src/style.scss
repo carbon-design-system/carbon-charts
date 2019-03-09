@@ -87,10 +87,6 @@ div.chart-holder {
 		}
 	}
 
-	tspan {
-		cursor: pointer;
-	}
-
 	.legend-wrapper {
 		height: 40px;
 		width: 100%;
@@ -195,6 +191,7 @@ div.chart-holder {
 			left: 10px;
 		}
 		.legend-tooltip-content {
+			text-align: left;
 			padding: 0 7px 15px 7px;
 		}
 		.legend-circle {
