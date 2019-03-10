@@ -179,7 +179,7 @@ export class BaseAxisChart extends BaseChart {
 		const dragAreaLength = minHeight - maxHeight;
 
 		const clipboxWidth = this.getChartSize().width;
-		const clipBoxHeight = this.getChartSize().height - margins.top - margins.bottom;
+		const clipBoxHeight = this.getChartSize().height - margins.bottom - margins.top + Configuration.sliders.bottomPadding;
 
 		// Slider is intially fit to the top and bottom of the axis
 		let sliderTop = maxHeight;
@@ -395,8 +395,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("id", `${this.chartContainerID}-clip`)
 			.append("rect")
 			.attr("width", clipboxWidth)
-			.attr("height", clipBoxHeight)
-			.style("fill", "#fff8ee");
+			.attr("height", clipBoxHeight);
 	}
 
 	draw() {

@@ -66,7 +66,8 @@ export const sliders = {
 	},
 	line: {
 		opacity: 0.5
-	}
+	},
+	bottomPadding: 4
 };
 
 export const charts = {
