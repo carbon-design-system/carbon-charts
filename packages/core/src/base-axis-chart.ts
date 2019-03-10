@@ -67,7 +67,7 @@ export class BaseAxisChart extends BaseChart {
 			// Set the x & y axis as well as their labels
 			this.setXScale();
 			this.setXAxis();
-			this.setYScale();
+			this.setYScale(false);
 			this.setYAxis();
 
 			// Draw the x & y grid
@@ -96,7 +96,7 @@ export class BaseAxisChart extends BaseChart {
 		this.updateXandYGrid();
 		this.setXScale();
 		this.setXAxis();
-		this.setYScale();
+		this.setYScale(false);
 		this.setYAxis();
 		this.interpolateValues(this.displayData);
 	}
@@ -151,6 +151,17 @@ export class BaseAxisChart extends BaseChart {
 		}));
 	}
 
+	/*setYSliderHeight(height){
+		let line = this.svg.selectAll(`#${this.chartContainerID}-slider-line`)
+		let upperCircle = this.svg.selectAll(`#${this.chartContainerID}-slider-circle-top`)
+
+		line.attr("y2", height - radius);
+		upperCircle.attr("cy", height);
+		upperCircle.datum({"y": sliderBottom});
+
+
+	}*/
+
 	createYSlider() {
 		const margins = Configuration.charts.margin;
 		const width = this.getChartSize().width + margins.left;
@@ -161,7 +172,9 @@ export class BaseAxisChart extends BaseChart {
 		const maxHeight = 0;
 
 		// The minimum height of the lower handle
-		const minHeight = Configuration.sliders.height;
+		//const minHeight = Configuration.sliders.height;
+		const chartSize = this.getChartSize();
+		const minHeight = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
 
 		const dragAreaLength = minHeight - maxHeight;
 
@@ -234,10 +247,18 @@ export class BaseAxisChart extends BaseChart {
 				lowerCircle.datum({"y": sliderBottom});
 			}
 
-			this.update();
+			this.displayData = this.updateDisplayData();
+
+			this.updateXandYGrid();
+			this.setYScale(true);
+			this.setYAxis();
+			this.interpolateValues(this.displayData);
 		};
 
 		const upperDragged = d => {
+
+			//let line = this.svg.select(`#${this.chartContainerID}-slider-line`)
+			//let upperCircle = this.svg.select(`#${this.chartContainerID}-slider-circle-top`)
 
 			// Get the cursor's y location.
 			let y = event.y;
@@ -265,10 +286,22 @@ export class BaseAxisChart extends BaseChart {
 			line.attr("y1", sliderTop + radius);
 			line.datum({"y1": sliderTop + radius});
 
-			this.update();
+			this.displayData = this.updateDisplayData();
+
+			this.updateXandYGrid();
+			this.setYScale(true);
+			this.setYAxis();
+			this.interpolateValues(this.displayData);
 		};
 
 		const lowerDragged = d => {
+
+			//let line = this.svg.select(`#${this.chartContainerID}-slider-line`).data([1])
+			//let lowerCircle = this.svg.select(`#${this.chartContainerID}-slider-circle-top`)
+
+			//lowerCircle.enter().append("line").attr("cy", 1000)
+
+			//console.log(lowerCircle.attr("cy"))
 
 			// Get the cursor's y location.
 			let y = event.y;
@@ -296,8 +329,13 @@ export class BaseAxisChart extends BaseChart {
 			lowerCircle.attr("cy", sliderBottom);
 			line.attr("y2", sliderBottom - radius);
 			line.datum({"y2": sliderBottom - radius});
+			
+			this.displayData = this.updateDisplayData();
 
-			this.update();
+			this.updateXandYGrid();
+			this.setYScale(true);
+			this.setYAxis();
+			this.interpolateValues(this.displayData);
 		};
 
 		// Insert the slider element into the action bar. A slider consists of a line and a two circles
@@ -322,7 +360,8 @@ export class BaseAxisChart extends BaseChart {
 		// Make handles draggable
 		lowerCircle = this.innerWrap.append("circle")
 			.attr("width", width)
-			.attr("height", Configuration.sliders.height)
+			//.attr("height", Configuration.sliders.height)
+			.attr("height", minHeight)
 			.datum({
 				x: Configuration.sliders.margin.left,
 				y: sliderBottom
@@ -337,7 +376,8 @@ export class BaseAxisChart extends BaseChart {
 
 		upperCircle = this.innerWrap.append("circle")
 			.attr("width", width)
-			.attr("height", Configuration.sliders.height)
+			//.attr("height", Configuration.sliders.height)
+			.attr("height", minHeight)
 			.datum({
 				x: Configuration.sliders.margin.left,
 				y: sliderTop
@@ -352,10 +392,11 @@ export class BaseAxisChart extends BaseChart {
 
 		// Keep chart data elements within the boundaires of the chart
 		const svg = this.innerWrap.append("clipPath")
-			.attr("id", "clip")
+			.attr("id", `${this.chartContainerID}-clip`)
 			.append("rect")
 			.attr("width", clipboxWidth)
-			.attr("height", clipBoxHeight);
+			.attr("height", clipBoxHeight)
+			.style("fill", "#fff8ee");
 	}
 
 	draw() {
@@ -562,7 +603,7 @@ export class BaseAxisChart extends BaseChart {
 		}
 	}
 
-	setYScale(yScale?: any) {
+	setYScale(zoom:any, yScale?: any) {
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
 
@@ -586,6 +627,29 @@ export class BaseAxisChart extends BaseChart {
 			this.y2 = scaleLinear().rangeRound([height, 0]);
 			this.y2.domain([scales.y2.ticks.min, scales.y2.ticks.max]);
 		}
+
+		const radius = Configuration.sliders.handles.radius;
+		let sliderTop = 0;
+		let sliderBottom = height;
+		let sliderLength = Math.abs(sliderTop - sliderBottom);
+
+		if (zoom === false){
+			let line = this.svg.select(`#${this.chartContainerID}-slider-line`)
+			let upperCircle = this.svg.select(`#${this.chartContainerID}-slider-circle-top`)
+			let clipBox = this.svg.select(`#${this.chartContainerID}-clip`).selectAll("rect")
+
+			const margins = Configuration.charts.margin;
+			const clipboxWidth = this.getChartSize().width;
+			const clipBoxHeight = this.getChartSize().height - margins.top - margins.bottom;
+	
+			line.attr("y2", sliderBottom - radius);
+			upperCircle.attr("cy", sliderBottom);
+			upperCircle.datum({"y": sliderBottom});
+			clipBox.attr("width", clipboxWidth);
+			clipBox.attr("height", clipBoxHeight);
+
+			console.log(clipBoxHeight)
+		}
 	}
 
 	setYAxis(noAnimation?: boolean) {
@@ -602,7 +666,7 @@ export class BaseAxisChart extends BaseChart {
 		let yAxisRef = this.svg.select("g.y.axis");
 		const horizontalLine = this.svg.select("line.domain");
 
-		horizontalLine.attr("clip-path", "url(#clip)");
+		horizontalLine.attr("clip-path", `url(#${this.chartContainerID}-clip)`)
 
 		this.svg.select("g.x.axis path.domain")
 			.remove();

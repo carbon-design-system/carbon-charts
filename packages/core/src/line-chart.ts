@@ -230,7 +230,7 @@ export class LineChart extends BaseAxisChart {
 		this.updateXandYGrid(true);
 		// Scale out the domains
 		this.setXScale();
-		this.setYScale();
+		this.setYScale(false);
 
 		// Set the x & y axis as well as their labels
 		this.setXAxis(true);

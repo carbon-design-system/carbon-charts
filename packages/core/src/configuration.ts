@@ -59,7 +59,7 @@ export const sliders = {
 	height: 348,
 	colour: "red",
 	margin: {
-		left: 15
+		left: "2%"
 	},
 	handles: {
 		radius: 7
