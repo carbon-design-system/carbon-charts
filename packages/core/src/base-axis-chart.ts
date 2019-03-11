@@ -20,6 +20,9 @@ export class BaseAxisChart extends BaseChart {
 	y2: any;
 	minSliderHeight: any;
 	dragAreaLength: any;
+	sliderTop: any;
+	sliderBottom: any;
+	sliderLength: any;
 	thresholdDimensions: any;
 
 	// Represents the rescale value obtained from sliders
@@ -186,9 +189,9 @@ export class BaseAxisChart extends BaseChart {
 		const clipBoxHeight = this.getChartSize().height - margins.bottom - margins.top + Configuration.sliders.bottomPadding;
 
 		// Slider is intially fit to the top and bottom of the axis
-		let sliderTop = maxHeight;
-		let sliderBottom = this.minSliderHeight;
-		let sliderLength = Math.abs(sliderTop - sliderBottom);
+		this.sliderTop = maxHeight;
+		this.sliderBottom = this.minSliderHeight;
+		this.sliderLength = Math.abs(this.sliderTop - this.sliderBottom);
 
 		// Slider components
 		let lowerCircle: any;
@@ -204,7 +207,7 @@ export class BaseAxisChart extends BaseChart {
 			const minClickValue = this.svg.select(`#${this.chartContainerID}-slider-circle-bottom`).node().getBoundingClientRect().bottom;
 			const maxClickValue = this.svg.select(`#${this.chartContainerID}-slider-circle-top`).node().getBoundingClientRect().top;
 			const maxClickRange = Math.abs(maxClickValue - minClickValue);
-			sliderLength = Math.abs(maxClickValue - minClickValue);
+			this.sliderLength = Math.abs(maxClickValue - minClickValue);
 			cursorLocationOnSlider = (Math.abs(event.y - minClickValue) / maxClickRange);
 			const sliderRelativePosition = maxHeight + Math.abs(maxHeight - this.minSliderHeight) * cursorLocationOnSlider;
 		};
@@ -223,8 +226,8 @@ export class BaseAxisChart extends BaseChart {
 				}
 			}
 
-			const newTopHandleLocation = y + ((sliderTop - sliderBottom) * cursorLocationOnSlider);
-			const newBottomHandleLocation = y - ((sliderTop - sliderBottom) * (1 - cursorLocationOnSlider));
+			const newTopHandleLocation = y + ((this.sliderTop - this.sliderBottom) * cursorLocationOnSlider);
+			const newBottomHandleLocation = y - ((this.sliderTop - this.sliderBottom) * (1 - cursorLocationOnSlider));
 
 			// Move the slider
 			if (newTopHandleLocation + radius > maxHeight && newBottomHandleLocation - radius < this.minSliderHeight) {
@@ -233,22 +236,22 @@ export class BaseAxisChart extends BaseChart {
 				this.upperScaleY = 1 - (newTopHandleLocation - maxHeight) / this.dragAreaLength;
 				this.lowerScaleY = (newBottomHandleLocation - maxHeight) / this.dragAreaLength;
 
-				sliderTop = newTopHandleLocation;
-				sliderBottom = newBottomHandleLocation;
+				this.sliderTop = newTopHandleLocation;
+				this.sliderBottom = newBottomHandleLocation;
 
 				// This assignment is necessary for multiple drag gestures.
 				// It makes the drag.origin function yield the correct value.
 				// Set slider top/bottom attributes
-				d.y1 = sliderTop;
-				d.y2 = sliderBottom;
+				d.y1 = this.sliderTop;
+				d.y2 = this.sliderBottom;
 
-				line.attr("y1", sliderTop + radius);
-				upperCircle.attr("cy", sliderTop);
-				upperCircle.datum({"y": sliderTop});
+				line.attr("y1", this.sliderTop + radius);
+				upperCircle.attr("cy", this.sliderTop);
+				upperCircle.datum({"y": this.sliderTop});
 
-				line.attr("y2", sliderBottom - radius);
-				lowerCircle.attr("cy", sliderBottom);
-				lowerCircle.datum({"y": sliderBottom});
+				line.attr("y2", this.sliderBottom - radius);
+				lowerCircle.attr("cy", this.sliderBottom);
+				lowerCircle.datum({"y": this.sliderBottom});
 			}
 
 			this.displayData = this.updateDisplayData();
@@ -271,8 +274,8 @@ export class BaseAxisChart extends BaseChart {
 			if (y < maxHeight) {
 				y = maxHeight;
 			} else {
-				if (y > sliderBottom - diameter) {
-					y = sliderBottom - diameter;
+				if (y > this.sliderBottom - diameter) {
+					y = this.sliderBottom - diameter;
 				}
 			}
 
@@ -283,14 +286,14 @@ export class BaseAxisChart extends BaseChart {
 
 			// Update axis range
 			this.upperScaleY = 1 - ((y - maxHeight) / this.dragAreaLength);
-			sliderTop = y;
+			this.sliderTop = y;
 
 			// Update the handle location on the slider
-			upperCircle.attr("cy", sliderTop);
-			line.attr("y1", sliderTop + radius);
-			line.datum({"y1": sliderTop + radius});
+			upperCircle.attr("cy", this.sliderTop);
+			line.attr("y1", this.sliderTop + radius);
+			line.datum({"y1": this.sliderTop + radius});
 
-			this.relativeSliderTop = sliderTop/this.dragAreaLength;
+			this.relativeSliderTop = this.sliderTop/this.dragAreaLength;
 
 			this.displayData = this.updateDisplayData();
 
@@ -313,8 +316,8 @@ export class BaseAxisChart extends BaseChart {
 			let y = event.y;
 
 			// y must be between the two ends of the line.
-			if (y < (sliderTop + diameter)) {
-				y = (sliderTop + diameter);
+			if (y < (this.sliderTop + diameter)) {
+				y = (this.sliderTop + diameter);
 			} else {
 				if (y > this.minSliderHeight) {
 					y = this.minSliderHeight;
@@ -329,15 +332,15 @@ export class BaseAxisChart extends BaseChart {
 			// Update axis range
 			this.lowerScaleY = (y - maxHeight) / this.dragAreaLength;
 
-			sliderBottom = y;
+			this.sliderBottom = y;
 
 			// Update the circle location on the slider
-			lowerCircle.attr("cy", sliderBottom);
-			line.attr("y2", sliderBottom - radius);
-			line.datum({"y2": sliderBottom - radius});
+			lowerCircle.attr("cy", this.sliderBottom);
+			line.attr("y2", this.sliderBottom - radius);
+			line.datum({"y2": this.sliderBottom - radius});
 
-			console.log(sliderBottom + " " + this.dragAreaLength)
-			this.relativeSliderBottom = sliderBottom/this.dragAreaLength;
+			console.log(this.sliderBottom + " " + this.dragAreaLength)
+			this.relativeSliderBottom = this.sliderBottom/this.dragAreaLength;
 			
 			this.displayData = this.updateDisplayData();
 
@@ -352,8 +355,8 @@ export class BaseAxisChart extends BaseChart {
 			.attr("id", `${this.chartContainerID}-slider-line`)
 			.attr("x1", Configuration.sliders.margin.left)
 			.attr("x2", Configuration.sliders.margin.left)
-			.attr("y1", sliderTop + radius)
-			.attr("y2", sliderBottom - radius)
+			.attr("y1", this.sliderTop + radius)
+			.attr("y2", this.sliderBottom - radius)
 			.style("stroke", Configuration.sliders.colour)
 			.style("opacity", Configuration.sliders.line.opacity)
 			.style("stroke-linecap", "round")
@@ -361,8 +364,8 @@ export class BaseAxisChart extends BaseChart {
 			.style("cursor", "grab")
 			.on("mousedown", setGrabPoint)
 			.datum({
-				y1: sliderTop,
-				y2: sliderBottom
+				y1: this.sliderTop,
+				y2: this.sliderBottom
 			}).call(drag()
 			.on("drag", dragSlider));
 
@@ -373,7 +376,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("height", this.minSliderHeight)
 			.datum({
 				x: Configuration.sliders.margin.left,
-				y: sliderBottom
+				y: this.sliderBottom
 			}).call(drag()
 			.on("drag", lowerDragged))
 			.attr("id", `${this.chartContainerID}-slider-circle-top`)
@@ -389,7 +392,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("height", this.minSliderHeight)
 			.datum({
 				x: Configuration.sliders.margin.left,
-				y: sliderTop
+				y: this.sliderTop
 			}).call(drag()
 			.on("drag", upperDragged))
 			.attr("id", `${this.chartContainerID}-slider-circle-bottom`)
@@ -641,14 +644,19 @@ export class BaseAxisChart extends BaseChart {
 		let sliderBottom = height;
 		let sliderLength = Math.abs(sliderTop - sliderBottom);
 
+		// When a resize that does not occur as a result of using a lsider to zoom
 		if (zoom === false){
 
+			// Update slider when chart resizes
 			let line = this.svg.select(`#${this.chartContainerID}-slider-line`)
 			let upperCircle = this.svg.select(`#${this.chartContainerID}-slider-circle-top`)
 			let lowerCircle = this.svg.select(`#${this.chartContainerID}-slider-circle-bottom`)
 			let clipBox = this.svg.select(`#${this.chartContainerID}-clip`).selectAll("rect")
 			this.minSliderHeight = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
 			this.dragAreaLength = this.minSliderHeight;
+			this.sliderTop = 0;
+			this.sliderBottom = this.minSliderHeight;
+			this.sliderLength = Math.abs(sliderTop - sliderBottom);
 
 			sliderBottom = this.relativeSliderBottom*this.dragAreaLength;
 			sliderTop = this.relativeSliderTop*this.dragAreaLength;
