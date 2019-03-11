@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.4](https://github.com/IBM/carbon-charts/compare/v0.10.3...v0.10.4) (2019-03-08)
+
+
+### Bug Fixes
+
+* **core:** remove updateSVG() ([38f7e83](https://github.com/IBM/carbon-charts/commit/38f7e83)), closes [#185](https://github.com/IBM/carbon-charts/issues/185)
+
+
+
+
+
+## [0.10.2](https://github.com/IBM/carbon-charts/compare/v0.10.1...v0.10.2) (2019-03-06)
+
+
+### Bug Fixes
+
+* **core:** Enforce text alignment of legend popup in the styles ([#203](https://github.com/IBM/carbon-charts/issues/203)) ([6a4fe1e](https://github.com/IBM/carbon-charts/commit/6a4fe1e))
+* **core:** Fix loss of letters in labels in wrapTicks() ([#202](https://github.com/IBM/carbon-charts/issues/202)) ([8635e7b](https://github.com/IBM/carbon-charts/commit/8635e7b))
+
+
+
+
+
+## [0.10.1](https://github.com/IBM/carbon-charts/compare/v0.10.0...v0.10.1) (2019-02-28)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+# [0.10.0](https://github.com/IBM/carbon-charts/compare/v0.9.7...v0.10.0) (2019-02-28)
+
+
+### Features
+
+* **$core:** Adds getStrokeColor and getFillColor options ([e1766d3](https://github.com/IBM/carbon-charts/commit/e1766d3)), closes [#136](https://github.com/IBM/carbon-charts/issues/136)
+
+
+
+
+
 ## [0.9.7](https://github.com/IBM/carbon-charts/compare/v0.9.6...v0.9.7) (2019-02-22)
 
 **Note:** Version bump only for package @carbon/charts

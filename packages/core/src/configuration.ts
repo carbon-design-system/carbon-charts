@@ -136,7 +136,7 @@ export const scales = {
 		widthAdditionY: 25,
 		widthAdditionY2: 15,
 		heightAddition: 16,
-		maxLetNum: 28
+		lineHeight: 1.1
 	},
 	magicDy1: "0.71em",
 	magicY1: 9,
