@@ -26,6 +26,8 @@ export class BaseAxisChart extends BaseChart {
 	lowerScaleY = 1;
 	upperScaleY = 1;
 	scaleX = 1;
+	relativeSliderBottom = 1;
+	relativeSliderTop = 0;
 
 	options: any = Object.assign({}, Configuration.options.AXIS);
 
@@ -288,6 +290,8 @@ export class BaseAxisChart extends BaseChart {
 			line.attr("y1", sliderTop + radius);
 			line.datum({"y1": sliderTop + radius});
 
+			this.relativeSliderTop = sliderTop/this.dragAreaLength;
+
 			this.displayData = this.updateDisplayData();
 
 			this.updateXandYGrid();
@@ -331,6 +335,9 @@ export class BaseAxisChart extends BaseChart {
 			lowerCircle.attr("cy", sliderBottom);
 			line.attr("y2", sliderBottom - radius);
 			line.datum({"y2": sliderBottom - radius});
+
+			console.log(sliderBottom + " " + this.dragAreaLength)
+			this.relativeSliderBottom = sliderBottom/this.dragAreaLength;
 			
 			this.displayData = this.updateDisplayData();
 
@@ -635,19 +642,27 @@ export class BaseAxisChart extends BaseChart {
 		let sliderLength = Math.abs(sliderTop - sliderBottom);
 
 		if (zoom === false){
+
 			let line = this.svg.select(`#${this.chartContainerID}-slider-line`)
 			let upperCircle = this.svg.select(`#${this.chartContainerID}-slider-circle-top`)
+			let lowerCircle = this.svg.select(`#${this.chartContainerID}-slider-circle-bottom`)
 			let clipBox = this.svg.select(`#${this.chartContainerID}-clip`).selectAll("rect")
 			this.minSliderHeight = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
 			this.dragAreaLength = this.minSliderHeight;
 
+			sliderBottom = this.relativeSliderBottom*this.dragAreaLength;
+			sliderTop = this.relativeSliderTop*this.dragAreaLength;
+
 			const margins = Configuration.charts.margin;
 			const clipboxWidth = this.getChartSize().width;
-			const clipBoxHeight = this.getChartSize().height - margins.top - margins.bottom;
+			const clipBoxHeight = this.getChartSize().height - margins.bottom - margins.top + Configuration.sliders.bottomPadding;
 	
 			line.attr("y2", sliderBottom - radius);
+			line.attr("y1", sliderTop + radius);
 			upperCircle.attr("cy", sliderBottom);
 			upperCircle.datum({"y": sliderBottom});
+			lowerCircle.attr("cy", sliderTop);
+			lowerCircle.datum({"y": sliderTop});
 			clipBox.attr("width", clipboxWidth);
 			clipBox.attr("height", clipBoxHeight);
 
