@@ -179,7 +179,6 @@ export class BaseAxisChart extends BaseChart {
 		const maxHeight = 0;
 
 		// The minimum height of the lower handle
-		//const this.minSliderHeight = Configuration.sliders.height;
 		const chartSize = this.getChartSize();
 		this.minSliderHeight = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
 
@@ -230,7 +229,7 @@ export class BaseAxisChart extends BaseChart {
 			const newBottomHandleLocation = y - ((this.sliderTop - this.sliderBottom) * (1 - cursorLocationOnSlider));
 
 			// Move the slider
-			if (newTopHandleLocation + radius > maxHeight && newBottomHandleLocation - radius < this.minSliderHeight) {
+			if (newTopHandleLocation - radius > maxHeight && newBottomHandleLocation + radius < this.minSliderHeight) {
 
 				// Scale the min and max axis values
 				this.upperScaleY = 1 - (newTopHandleLocation - maxHeight) / this.dragAreaLength;
@@ -264,9 +263,6 @@ export class BaseAxisChart extends BaseChart {
 
 		const upperDragged = d => {
 
-			//let line = this.svg.select(`#${this.chartContainerID}-slider-line`)
-			//let upperCircle = this.svg.select(`#${this.chartContainerID}-slider-circle-top`)
-
 			// Get the cursor's y location.
 			let y = event.y;
 
@@ -293,8 +289,7 @@ export class BaseAxisChart extends BaseChart {
 			line.attr("y1", this.sliderTop + radius);
 			line.datum({"y1": this.sliderTop + radius});
 
-			this.relativeSliderTop = this.sliderTop/this.dragAreaLength;
-
+			this.relativeSliderTop = this.sliderTop / this.dragAreaLength;
 			this.displayData = this.updateDisplayData();
 
 			this.updateXandYGrid();
@@ -304,13 +299,6 @@ export class BaseAxisChart extends BaseChart {
 		};
 
 		const lowerDragged = d => {
-
-			//let line = this.svg.select(`#${this.chartContainerID}-slider-line`).data([1])
-			//let lowerCircle = this.svg.select(`#${this.chartContainerID}-slider-circle-top`)
-
-			//lowerCircle.enter().append("line").attr("cy", 1000)
-
-			//console.log(lowerCircle.attr("cy"))
 
 			// Get the cursor's y location.
 			let y = event.y;
@@ -338,10 +326,7 @@ export class BaseAxisChart extends BaseChart {
 			lowerCircle.attr("cy", this.sliderBottom);
 			line.attr("y2", this.sliderBottom - radius);
 			line.datum({"y2": this.sliderBottom - radius});
-
-			console.log(this.sliderBottom + " " + this.dragAreaLength)
-			this.relativeSliderBottom = this.sliderBottom/this.dragAreaLength;
-			
+			this.relativeSliderBottom = this.sliderBottom / this.dragAreaLength;
 			this.displayData = this.updateDisplayData();
 
 			this.updateXandYGrid();
@@ -372,7 +357,6 @@ export class BaseAxisChart extends BaseChart {
 		// Make handles draggable
 		lowerCircle = this.innerWrap.append("circle")
 			.attr("width", width)
-			//.attr("height", Configuration.sliders.height)
 			.attr("height", this.minSliderHeight)
 			.datum({
 				x: Configuration.sliders.margin.left,
@@ -388,7 +372,6 @@ export class BaseAxisChart extends BaseChart {
 
 		upperCircle = this.innerWrap.append("circle")
 			.attr("width", width)
-			//.attr("height", Configuration.sliders.height)
 			.attr("height", this.minSliderHeight)
 			.datum({
 				x: Configuration.sliders.margin.left,
@@ -614,7 +597,7 @@ export class BaseAxisChart extends BaseChart {
 		}
 	}
 
-	setYScale(zoom:any, yScale?: any) {
+	setYScale(zoom: any, yScale?: any) {
 		const chartSize = this.getChartSize();
 		const height = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
 
@@ -640,34 +623,26 @@ export class BaseAxisChart extends BaseChart {
 		}
 
 		const radius = Configuration.sliders.handles.radius;
-		//let sliderTop = 0;
-		//let sliderBottom = height;
-		//let sliderLength = Math.abs(sliderTop - sliderBottom);
 
 		// When a resize that does not occur as a result of using a lsider to zoom
-		if (zoom === false){
+		if (zoom === false) {
 
 			// Update slider when chart resizes
-			let line = this.svg.select(`#${this.chartContainerID}-slider-line`)
-			let upperCircle = this.svg.select(`#${this.chartContainerID}-slider-circle-bottom`)
-			let lowerCircle = this.svg.select(`#${this.chartContainerID}-slider-circle-top`)
-			let clipBox = this.svg.select(`#${this.chartContainerID}-clip`).selectAll("rect")
+			const line = this.svg.select(`#${this.chartContainerID}-slider-line`);
+			const upperCircle = this.svg.select(`#${this.chartContainerID}-slider-circle-bottom`);
+			const lowerCircle = this.svg.select(`#${this.chartContainerID}-slider-circle-top`);
+			const clipBox = this.svg.select(`#${this.chartContainerID}-clip`).selectAll("rect");
 			this.minSliderHeight = chartSize.height - this.innerWrap.select(".x.axis").node().getBBox().height;
 			this.dragAreaLength = this.minSliderHeight;
 
-			//sliderTop = 0;
-			
-			//this.sliderBottom = this.minSliderHeight;
-			
-
-			this.sliderBottom = this.relativeSliderBottom*this.dragAreaLength;
-			this.sliderTop = this.relativeSliderTop*this.dragAreaLength;
+			this.sliderBottom = this.relativeSliderBottom * this.dragAreaLength;
+			this.sliderTop = this.relativeSliderTop * this.dragAreaLength;
 			this.sliderLength = Math.abs(this.sliderTop - this.sliderBottom);
 
 			const margins = Configuration.charts.margin;
 			const clipboxWidth = this.getChartSize().width;
 			const clipBoxHeight = this.getChartSize().height - margins.bottom - margins.top + Configuration.sliders.bottomPadding;
-	
+
 			line.attr("y2", this.sliderBottom - radius);
 			line.attr("y1", this.sliderTop + radius);
 			upperCircle.attr("cy", this.sliderTop);
@@ -676,8 +651,6 @@ export class BaseAxisChart extends BaseChart {
 			lowerCircle.datum({"y": this.sliderBottom});
 			clipBox.attr("width", clipboxWidth);
 			clipBox.attr("height", clipBoxHeight);
-
-			console.log(clipBoxHeight)
 		}
 	}
 
@@ -695,7 +668,7 @@ export class BaseAxisChart extends BaseChart {
 		let yAxisRef = this.svg.select("g.y.axis");
 		const horizontalLine = this.svg.select("line.domain");
 
-		horizontalLine.attr("clip-path", `url(#${this.chartContainerID}-clip)`)
+		horizontalLine.attr("clip-path", `url(#${this.chartContainerID}-clip)`);
 
 		this.svg.select("g.x.axis path.domain")
 			.remove();
