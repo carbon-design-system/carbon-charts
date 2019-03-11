@@ -169,7 +169,6 @@ export class BarChart extends BaseAxisChart {
 		const g = this.innerWrap.select("g.bars")
 			.attr("width", width)
 			.selectAll("g")
-			.attr("clip-path", `url(#${this.chartContainerID}-clip)`)
 			.data(this.displayData.labels);
 
 		const rect = g.selectAll("rect.bar")
@@ -262,13 +261,10 @@ export class BarChart extends BaseAxisChart {
 			.style("opacity", 1)
 			.attr("x", this.getBarX.bind(this))
 			.attr("y", d => this.y(Math.max(0, d.value)))
-			.attr("clip-path", `url(#${this.chartContainerID}-clip)`)
 			.attr("width", this.x1.bandwidth())
 			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
 			.attr("fill", d => this.getFillScale()[d.datasetLabel](d.label))
 			.attr("stroke", d => this.options.accessibility ? this.colorScale[d.datasetLabel](d.label) : null);
-
-			console.log(rect.attr("clip-path"))
 	}
 
 	resizeChart() {

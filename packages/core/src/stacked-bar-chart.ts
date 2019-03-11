@@ -102,7 +102,7 @@ export class StackedBarChart extends BaseAxisChart {
 					.classed("bar", true)
 					.attr("x", d => this.x(d.data.label))
 					.attr("y", d => this.y(d[1]))
-					.attr("clip-path", "url(#clip)")
+					.attr("clip-path", `url(#${this.chartContainerID}-clip)`)
 					.attr("height", d => this.y(d[0]) - this.y(d[1]))
 					.attr("width", d => this.x.bandwidth())
 					.attr("fill", d => this.getFillScale()[d.datasetLabel](d.data.label))
