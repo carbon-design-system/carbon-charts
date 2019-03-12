@@ -251,6 +251,9 @@ header.m-demo-header {
             width: 25px;
             height: 25px;
             margin-left: -5px; }
+          header.m-demo-header div.content div.links .bx--btn svg.vue {
+            width: 18px;
+            height: 18px; }
   header.m-demo-header div h1 {
     margin-bottom: 5px; }
 
