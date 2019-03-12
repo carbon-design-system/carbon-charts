@@ -17,6 +17,15 @@ export class LineChart extends ScatterChart {
 	constructor(holder: Element, configs: ChartConfig<LineChartOptions>) {
 		super(holder, configs);
 
+		console.log(configs.options, Configuration.options.LINE);
+
+		// initialize options
+		if (configs.options) {
+			this.options = Tools.merge({}, Configuration.options.LINE, configs.options);
+		} else {
+			this.options = Tools.merge({}, Configuration.options.LINE);
+		}
+
 		this.options.type = ChartType.LINE;
 	}
 

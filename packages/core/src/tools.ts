@@ -48,7 +48,7 @@ export namespace Tools {
 			for (const key in object) {
 				if (object.hasOwnProperty(key)) {
 					// since we're dealing relatively simple objects this should work fine
-					if (typeof object[key] === "object") {
+					if (object[key] && typeof object[key] === "object") {
 						if (!target[key]) {
 							target[key] = {};
 						}
