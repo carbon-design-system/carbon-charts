@@ -6,7 +6,7 @@ import { min } from "d3-array";
 import { BaseAxisChart } from "./base-axis-chart";
 import { StackedBarChart } from "./stacked-bar-chart";
 import * as Configuration from "./configuration";
-import { ChartConfig, BarChartOptions, ChartTypes } from "./configuration";
+import { ChartConfig, BarChartOptions, ChartType } from "./configuration";
 
 import { Tools } from "./tools";
 
@@ -89,7 +89,7 @@ export class BarChart extends BaseAxisChart {
 				.rangeRound([0, getMaxBarWidth(Tools.getProperty(this.options, "bars", "maxWidth"), this.x.bandwidth())]);
 		}
 
-		this.options.type = ChartTypes.BAR;
+		this.options.type = ChartType.BAR;
 	}
 
 	setXScale(xScale?: any) {

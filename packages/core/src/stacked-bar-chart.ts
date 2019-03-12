@@ -4,7 +4,7 @@ import { stack } from "d3-shape";
 import { max } from "d3-array";
 
 import * as Configuration from "./configuration";
-import { ChartConfig, StackedBarChartOptions, ChartTypes } from "./configuration";
+import { ChartConfig, StackedBarChartOptions, ChartType } from "./configuration";
 import { BaseAxisChart } from "./base-axis-chart";
 
 // Add datasetLabel to each piece of data
@@ -26,7 +26,7 @@ export class StackedBarChart extends BaseAxisChart {
 	constructor(holder: Element, configs: ChartConfig<StackedBarChartOptions>) {
 		super(holder, configs);
 
-		this.options.type = ChartTypes.BAR;
+		this.options.type = ChartType.BAR;
 	}
 
 	getYMax() {

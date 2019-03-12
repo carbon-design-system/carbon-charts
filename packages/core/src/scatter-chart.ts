@@ -3,13 +3,13 @@ import { select, mouse } from "d3-selection";
 
 import { BaseAxisChart } from "./base-axis-chart";
 import * as Configuration from "./configuration";
-import { ChartConfig, ScatterChartOptions, ChartTypes } from "./configuration";
+import { ChartConfig, ScatterChartOptions, ChartType } from "./configuration";
 
 export class ScatterChart extends BaseAxisChart {
 	constructor(holder: Element, configs: ChartConfig<ScatterChartOptions>) {
 		super(holder, configs);
 
-		this.options.type = ChartTypes.SCATTER;
+		this.options.type = ChartType.SCATTER;
 	}
 
 	draw() {
