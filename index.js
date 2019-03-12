@@ -1283,6 +1283,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
+
 var getYMin = function (configs) {
     var datasets = configs.data.datasets;
     var scales = configs.options.scales;
@@ -1310,7 +1311,7 @@ var getMaxBarWidth = function (maxWidth, currentBandWidth) {
     }
     return maxWidth;
 };
-// returns true if the calculated bandwidth is greater than the maxWidth (if deinfed)
+// returns true if the calculated bandwidth is greater than the maxWidth (if defined)
 // i.e. if we should be constraining ourselves to a specific bar width
 var isWidthConstrained = function (maxWidth, currentBandWidth) {
     if (!maxWidth) {
@@ -1335,6 +1336,13 @@ var BarChart = /** @class */ (function (_super) {
             }
         }
         _this = _super.call(this, holder, configs) || this;
+        // initialize options
+        if (configs.options) {
+            _this.options = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].merge({}, _configuration__WEBPACK_IMPORTED_MODULE_5__["options"].BAR, configs.options);
+        }
+        else {
+            _this.options = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].merge({}, _configuration__WEBPACK_IMPORTED_MODULE_5__["options"].BAR);
+        }
         // To be used for combo chart instances of a bar chart
         var axis = configs.options.axis;
         if (axis) {
@@ -1342,10 +1350,10 @@ var BarChart = /** @class */ (function (_super) {
             var chartSize = _this.getChartSize();
             var width = chartSize.width - margins.left - margins.right;
             _this.x1 = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].spacing.bars);
-            _this.x1.domain(configs.data.datasets.map(function (dataset) { return dataset.label; }))
+            _this.x1.domain(_this.data.datasets.map(function (dataset) { return dataset.label; }))
                 .rangeRound([0, getMaxBarWidth(_tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getProperty(_this.options, "bars", "maxWidth"), _this.x.bandwidth())]);
         }
-        _this.options.type = "bar";
+        _this.options.type = _configuration__WEBPACK_IMPORTED_MODULE_5__["ChartType"].BAR;
         return _this;
     }
     BarChart.prototype.setXScale = function (xScale) {
@@ -1480,9 +1488,6 @@ var BarChart = /** @class */ (function (_super) {
     };
     BarChart.prototype.updateElements = function (animate, rect, g) {
         var _this = this;
-        var scales = this.options.scales;
-        var chartSize = this.getChartSize();
-        var height = chartSize.height - this.getBBox(".x.axis").height;
         if (!rect) {
             rect = this.innerWrap.selectAll("rect.bar");
         }
@@ -1597,9 +1602,9 @@ var BaseAxisChart = /** @class */ (function (_super) {
     __extends(BaseAxisChart, _super);
     function BaseAxisChart(holder, configs) {
         var _this = _super.call(this, holder, configs) || this;
-        _this.options = Object.assign({}, _configuration__WEBPACK_IMPORTED_MODULE_5__["options"].AXIS);
+        _this.options = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].merge({}, _configuration__WEBPACK_IMPORTED_MODULE_5__["options"].AXIS);
         if (configs.options) {
-            _this.options = Object.assign({}, _this.options, configs.options);
+            _this.options = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].merge({}, _this.options, configs.options);
             var axis = configs.options.axis;
             if (axis) {
                 _this.x = axis.x;
@@ -2179,7 +2184,7 @@ var BaseChart = /** @class */ (function () {
     function BaseChart(holder, configs) {
         this.id = "";
         this.chartContainerID = "";
-        this.options = Object.assign({}, _configuration__WEBPACK_IMPORTED_MODULE_3__["options"].BASE);
+        this.options = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].merge({}, _configuration__WEBPACK_IMPORTED_MODULE_3__["options"].BASE);
         // Fill scales & fill related objects
         this.patternScale = {};
         this.colorScale = {};
@@ -2188,7 +2193,7 @@ var BaseChart = /** @class */ (function () {
         };
         this.id = "chart-" + BaseChart.chartCount++;
         if (configs.options) {
-            this.options = Object.assign({}, this.options, configs.options);
+            this.options = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].merge({}, this.options, configs.options);
         }
         // Save holder element reference, and initialize it by applying appropriate styling
         this.holder = holder;
@@ -2282,7 +2287,6 @@ var BaseChart = /** @class */ (function () {
     };
     BaseChart.prototype.getKeysFromData = function () {
         var _this = this;
-        var datasets = this.displayData.datasets;
         var keys = {};
         if (this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS) {
             // Build out the keys array of objects to represent the legend items
@@ -2983,6 +2987,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComboChart", function() { return ComboChart; });
 /* harmony import */ var _base_axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base-axis-chart */ "./src/base-axis-chart.ts");
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index */ "./src/index.ts");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -2995,6 +3001,8 @@ var __extends = (undefined && undefined.__extends) || (function () {
 })();
 
 
+
+
 // TODO - Support adding/removing charts when updating data
 var ComboChart = /** @class */ (function (_super) {
     __extends(ComboChart, _super);
@@ -3002,12 +3010,12 @@ var ComboChart = /** @class */ (function (_super) {
         var _this = _super.call(this, holder, configs) || this;
         // Includes all the sub-charts
         _this.charts = [];
-        _this.options.type = "combo";
+        _this.options.type = _configuration__WEBPACK_IMPORTED_MODULE_2__["ChartType"].COMBO;
         return _this;
     }
     // Extract data related to the specific sub-chart
     ComboChart.prototype.extractDataForChart = function (chartType) {
-        return Object.assign({}, this.displayData, {
+        return _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].merge({}, this.displayData, {
             datasets: this.displayData.datasets.filter(function (_dataset) { return _dataset.chartType === chartType; })
         });
     };
@@ -3040,7 +3048,7 @@ var ComboChart = /** @class */ (function (_super) {
                     if (_index__WEBPACK_IMPORTED_MODULE_1__[dataset.chartType].prototype instanceof _base_axis_chart__WEBPACK_IMPORTED_MODULE_0__["BaseAxisChart"]) {
                         var chartConfigs = {
                             data: _this.extractDataForChart(dataset.chartType),
-                            options: Object.assign({}, _this.options, {
+                            options: _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].merge({}, _this.options, {
                                 axis: {
                                     x: _this.x,
                                     y: _this.y,
@@ -3098,11 +3106,14 @@ var ComboChart = /** @class */ (function (_super) {
 /*!******************************!*\
   !*** ./src/configuration.ts ***!
   \******************************/
-/*! exports provided: options, charts, scales, grid, bars, lines, pie, donut, legend, tooltip, transitions, selectors */
+/*! exports provided: ChartType, TooltipSize, ThresholdTheme, options, charts, scales, grid, bars, lines, pie, donut, legend, tooltip, transitions, selectors */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChartType", function() { return ChartType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TooltipSize", function() { return TooltipSize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ThresholdTheme", function() { return ThresholdTheme; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "options", function() { return options; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "charts", function() { return charts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scales", function() { return scales; });
@@ -3115,10 +3126,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tooltip", function() { return tooltip; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transitions", function() { return transitions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectors", function() { return selectors; });
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
+
+/*
+ **********************
+ * chart config enums *
+ **********************
+ */
+/**
+ * enum of all supported charts
+ */
+var ChartType;
+(function (ChartType) {
+    ChartType["BAR"] = "bar";
+    ChartType["LINE"] = "line";
+    ChartType["SCATTER"] = "scatter";
+    ChartType["PIE"] = "pie";
+    ChartType["DONUT"] = "donut";
+    ChartType["COMBO"] = "combo";
+})(ChartType || (ChartType = {}));
+/**
+ * enum of all possible tooltip sizes
+ */
+var TooltipSize;
+(function (TooltipSize) {
+    TooltipSize["COMPACT"] = "compact";
+    TooltipSize["FULL"] = "";
+})(TooltipSize || (TooltipSize = {}));
+/**
+ * enum of all possible threshold themes
+ */
+var ThresholdTheme;
+(function (ThresholdTheme) {
+    ThresholdTheme["SUCCESS"] = "success";
+    ThresholdTheme["ERROR"] = "error";
+    ThresholdTheme["WARNING"] = "warning";
+})(ThresholdTheme || (ThresholdTheme = {}));
+/**
+ * Base chart options common to any chart
+ */
 var baseOptions = {
     legendClickable: true,
     containerResizable: true,
-    type: "basic",
     colors: [
         "#00a68f",
         "#3b1a40",
@@ -3127,14 +3176,22 @@ var baseOptions = {
         "#56D2BB"
     ],
     tooltip: {
+        size: TooltipSize.FULL,
         formatter: null
     },
     loadingOverlay: {
         innerHTML: "\n\t\t<div class=\"loading-overlay-content\">\n\t\t  <div data-loading class=\"bx--loading bx--loading--small\">\n\t\t\t<svg class=\"bx--loading__svg\" viewBox=\"-75 -75 150 150\">\n\t\t\t\t<title>Loading</title>\n\t\t\t\t<circle cx=\"0\" cy=\"0\" r=\"37.5\" />\n\t\t\t</svg>\n\t\t  </div>\n\n\t\t  <p>Loading</p>\n\t\t</div>\n\t\t"
     }
 };
-var axisOptions = Object.assign({}, baseOptions, {
-    series: [],
+/**
+ * Options specific to pie charts
+ */
+var pieOptions = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, baseOptions);
+var donutOptions = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, baseOptions);
+/**
+ * Options common to any chart with an axis
+ */
+var axisOptions = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, baseOptions, {
     scales: {
         x: {
             domain: null,
@@ -3148,16 +3205,58 @@ var axisOptions = Object.assign({}, baseOptions, {
             domain: null,
             ticks: 10
         }
-    },
-    // Only used for line chart
-    points: {
-        radius: null
     }
 });
+/**
+ * options specific to line charts
+ */
+var lineOptions = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, axisOptions, {
+    points: {
+        // default point radius to 4
+        radius: 4
+    }
+});
+/**
+ * options specific to line charts
+ */
+var scatterOptions = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, axisOptions, {
+    points: {
+        // default point radius to 4
+        radius: 4
+    }
+});
+/**
+ * options specific to bar charts
+ */
+var barOptions = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, axisOptions);
+/**
+ * options specific to bar charts
+ */
+var stackedBarOptions = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, barOptions);
+/**
+ * Options specific to combo charts.
+ *
+ */
+var comboOptions = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, axisOptions, barOptions, lineOptions, scatterOptions);
 var options = {
     BASE: baseOptions,
-    AXIS: axisOptions
+    AXIS: axisOptions,
+    LINE: lineOptions,
+    SCATTER: scatterOptions,
+    BAR: barOptions,
+    STACKED_BAR: stackedBarOptions,
+    COMBO: comboOptions,
+    PIE: pieOptions,
+    DONUT: donutOptions
 };
+/*
+ ********************************************
+ * Internal (non-user configurable) options *
+ ********************************************
+ */
+/**
+ * General chart options. margins, min/max widths, etc
+ */
 var charts = {
     margin: {
         top: 20,
@@ -3205,6 +3304,9 @@ var charts = {
         minHeight: 200
     }
 };
+/**
+ * Options to render scales to spec
+ */
 var scales = {
     maxWidthOfAxisLabel: 175,
     maxNumOfAxisLabelLetters: 60,
@@ -3246,9 +3348,15 @@ var scales = {
         numberOfTicks: 5
     }
 };
+/**
+ * Grid options
+ */
 var grid = {
     strokeColor: "#ECEEEF"
 };
+/**
+ * Options for bar behaviour
+ */
 var bars = {
     mouseover: {
         strokeWidth: 4,
@@ -3270,6 +3378,9 @@ var bars = {
         maxWidth: null
     }
 };
+/**
+ * Options for line behaviour
+ */
 var lines = {
     points: {
         strokeWidth: 4,
@@ -3285,6 +3396,9 @@ var lines = {
         }
     }
 };
+/**
+ * Options for pie behaviour
+ */
 var pie = {
     maxWidth: 516.6,
     mouseover: {
@@ -3305,6 +3419,9 @@ var pie = {
         strokeWidth: 2
     }
 };
+/**
+ * Options for donut behaviour
+ */
 var donut = {
     centerText: {
         title: {
@@ -3316,6 +3433,9 @@ var donut = {
         titleFontSize: 15
     }
 };
+/**
+ * Legend configuration
+ */
 var legend = {
     countBreak: 4,
     fontSize: 12,
@@ -3347,6 +3467,9 @@ var legend = {
         LABELS: "labels"
     }
 };
+/**
+ * Tooltip options
+ */
 var tooltip = {
     width: 200,
     arrowWidth: 10,
@@ -3365,11 +3488,17 @@ var tooltip = {
         COMPACT: "compact"
     }
 };
+/**
+ * Base transition configuration
+ */
 var transitions = {
     default: {
         duration: 750
     }
 };
+/**
+ * Selectors to standardize querying parts of the chart
+ */
 var selectors = {
     OUTERSVG: "svg.chart-svg",
     INNERWRAP: "g.inner-wrap",
@@ -3399,6 +3528,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var d3_interpolate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-interpolate */ "../../node_modules/d3-interpolate/index.js");
 /* harmony import */ var _pie_chart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pie-chart */ "./src/pie-chart.ts");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3414,12 +3544,14 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
+
+
 var DonutCenter = /** @class */ (function () {
     function DonutCenter(configs) {
         if (configs) {
             this.configs = configs;
             // Keep track of changes to the configs above
-            this.oldConfigs = Object.assign({}, configs);
+            this.oldConfigs = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].merge({}, configs);
         }
         else {
             console.error("Configuration object is missing for DonutCenter");
@@ -3455,7 +3587,7 @@ var DonutCenter = /** @class */ (function () {
             this.donutSVG.select("text.donut-title")
                 .text(this.configs.label);
             // Set the latest configs in record to keep track of future config updates
-            this.oldConfigs = Object.assign({}, this.configs);
+            this.oldConfigs = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].merge({}, this.configs);
         }
     };
     DonutCenter.prototype.resize = function (svgElement, actualChartSize) {
@@ -3478,7 +3610,7 @@ var DonutCenter = /** @class */ (function () {
 var DonutChart = /** @class */ (function (_super) {
     __extends(DonutChart, _super);
     function DonutChart(holder, configs) {
-        var _this = _super.call(this, holder, configs, "donut") || this;
+        var _this = _super.call(this, holder, configs, _configuration__WEBPACK_IMPORTED_MODULE_3__["ChartType"].DONUT) || this;
         // Check if the DonutCenter object is provided
         // in the chart configurations
         var _a = configs.options, center = _a.center, centerLabel = _a.centerLabel, centerNumber = _a.centerNumber;
@@ -3635,6 +3767,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scatter_chart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./scatter-chart */ "./src/scatter-chart.ts");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
 /* harmony import */ var _services_curves__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/curves */ "./src/services/curves.ts");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3651,11 +3784,20 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
+
+
 var LineChart = /** @class */ (function (_super) {
     __extends(LineChart, _super);
     function LineChart(holder, configs) {
         var _this = _super.call(this, holder, configs) || this;
-        _this.options.type = "line";
+        // initialize options
+        if (configs.options) {
+            _this.options = _tools__WEBPACK_IMPORTED_MODULE_5__["Tools"].merge({}, _configuration__WEBPACK_IMPORTED_MODULE_3__["options"].LINE, configs.options);
+        }
+        else {
+            _this.options = _tools__WEBPACK_IMPORTED_MODULE_5__["Tools"].merge({}, _configuration__WEBPACK_IMPORTED_MODULE_3__["options"].LINE);
+        }
+        _this.options.type = _configuration__WEBPACK_IMPORTED_MODULE_3__["ChartType"].LINE;
         return _this;
     }
     LineChart.prototype.draw = function () {
@@ -3663,12 +3805,7 @@ var LineChart = /** @class */ (function (_super) {
         this.innerWrap.style("width", "100%")
             .style("height", "100%");
         var margins = _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].margin.line;
-        var scales = this.options.scales;
-        var chartSize = this.getChartSize();
-        var width = chartSize.width - margins.left - margins.right;
-        var height = chartSize.height - this.getBBox(".x.axis").height;
-        this.innerWrap.style("width", "100%")
-            .style("height", "100%");
+        this.innerWrap.style("width", "100%").style("height", "100%");
         this.innerWrap.attr("transform", "translate(" + margins.left + ", " + margins.top + ")");
         var curveName;
         var curveOptions;
@@ -3732,9 +3869,6 @@ var LineChart = /** @class */ (function (_super) {
         _super.prototype.interpolateValues.call(this, newData);
     };
     LineChart.prototype.updateElements = function (animate, gLines) {
-        var scales = this.options.scales;
-        var chartSize = this.getChartSize();
-        var height = chartSize.height - this.getBBox(".x.axis").height;
         if (!gLines) {
             gLines = this.innerWrap.selectAll("g.lines");
         }
@@ -3797,10 +3931,11 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
+
 var PieChart = /** @class */ (function (_super) {
     __extends(PieChart, _super);
     function PieChart(holder, configs, type) {
-        if (type === void 0) { type = "pie"; }
+        if (type === void 0) { type = _configuration__WEBPACK_IMPORTED_MODULE_5__["ChartType"].PIE; }
         var _this = _super.call(this, holder, configs) || this;
         _this.options.type = type;
         // Assign colors to each slice using their label
@@ -3840,10 +3975,20 @@ var PieChart = /** @class */ (function (_super) {
                     items: rest
                 }]);
         }
-        // Sort labels based on the order made above
-        dataObject.labels = sortedData.map(function (datum, i) { return datum.label; });
-        dataObject.datasets[0].data = sortedData;
-        return dataObject;
+        return {
+            // Sort labels based on the order made above
+            labels: sortedData.map(function (datum, i) { return datum.label; }),
+            datasets: [
+                {
+                    // copy all the relevant properties
+                    backgroundColors: dataObject.datasets[0].backgroundColors,
+                    chartType: dataObject.datasets[0].chartType,
+                    label: dataObject.datasets[0].label,
+                    // add our sorted data
+                    data: sortedData
+                }
+            ]
+        };
     };
     // If there isn't a chart already drawn in the container
     // This function is called and will do that
@@ -3871,7 +4016,6 @@ var PieChart = /** @class */ (function (_super) {
             .attr("height", diameter + "px")
             .attr("preserveAspectRatio", "xMinYMin");
         // Compute the correct inner & outer radius
-        var pieConfigs = _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"];
         var marginedRadius = this.computeRadius();
         this.arc = Object(d3_shape__WEBPACK_IMPORTED_MODULE_2__["arc"])()
             .innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
@@ -4068,7 +4212,6 @@ var PieChart = /** @class */ (function (_super) {
         this.interpolateValues(newDisplayData);
     };
     PieChart.prototype.resizeChart = function () {
-        var pieConfigs = _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"];
         var chartSize = this.getChartSize(this.container);
         var dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
         var radius = this.computeRadius();
@@ -4179,6 +4322,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/index.js");
 /* harmony import */ var _base_axis_chart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base-axis-chart */ "./src/base-axis-chart.ts");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -4193,11 +4337,14 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
+
+
 var ScatterChart = /** @class */ (function (_super) {
     __extends(ScatterChart, _super);
     function ScatterChart(holder, configs) {
         var _this = _super.call(this, holder, configs) || this;
-        _this.options.type = "scatter";
+        _this.options = _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].merge({}, _configuration__WEBPACK_IMPORTED_MODULE_2__["options"].SCATTER);
+        _this.options.type = _configuration__WEBPACK_IMPORTED_MODULE_2__["ChartType"].SCATTER;
         return _this;
     }
     ScatterChart.prototype.draw = function () {
@@ -4205,12 +4352,7 @@ var ScatterChart = /** @class */ (function (_super) {
         this.innerWrap.style("width", "100%")
             .style("height", "100%");
         var margins = _configuration__WEBPACK_IMPORTED_MODULE_2__["charts"].margin.line;
-        var scales = this.options.scales;
-        var chartSize = this.getChartSize();
-        var width = chartSize.width - margins.left - margins.right;
-        var height = chartSize.height - this.getBBox(".x.axis").height;
-        this.innerWrap.style("width", "100%")
-            .style("height", "100%");
+        this.innerWrap.style("width", "100%").style("height", "100%");
         this.innerWrap.attr("transform", "translate(" + margins.left + ", " + margins.top + ")");
         var gDots = this.innerWrap.selectAll("g.dots")
             .data(this.displayData.datasets)
@@ -4295,15 +4437,11 @@ var ScatterChart = /** @class */ (function (_super) {
     };
     ScatterChart.prototype.updateElements = function (animate, gDots) {
         var _this = this;
-        var scales = this.options.scales;
-        var chartSize = this.getChartSize();
-        var height = chartSize.height - this.getBBox(".x.axis").height;
         if (!gDots) {
             gDots = this.innerWrap.selectAll("g.dots");
         }
         var transitionToUse = animate ? this.getFillTransition() : this.getInstantTransition();
         var self = this;
-        var margins = _configuration__WEBPACK_IMPORTED_MODULE_2__["charts"].margin.line;
         var circleRadius = this.getCircleRadius();
         gDots.selectAll("circle.dot")
             .data(function (d, i) {
@@ -4593,6 +4731,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
+
 // Add datasetLabel to each piece of data
 // To be used to get the fill color
 var addLabelsAndValueToData = function (d) {
@@ -4610,7 +4749,7 @@ var StackedBarChart = /** @class */ (function (_super) {
     __extends(StackedBarChart, _super);
     function StackedBarChart(holder, configs) {
         var _this = _super.call(this, holder, configs) || this;
-        _this.options.type = "bar";
+        _this.options.type = _configuration__WEBPACK_IMPORTED_MODULE_3__["ChartType"].BAR;
         return _this;
     }
     StackedBarChart.prototype.getYMax = function () {
@@ -4646,7 +4785,7 @@ var StackedBarChart = /** @class */ (function (_super) {
         return stackDataArray;
     };
     // currently unused, but required to match the BarChart class
-    StackedBarChart.prototype.getBarX = function (d) { };
+    StackedBarChart.prototype.getBarX = function (d) { return 0; };
     StackedBarChart.prototype.draw = function () {
         var _this = this;
         this.innerWrap.style("width", "100%")
@@ -4870,6 +5009,33 @@ var Tools;
         return JSON.parse(JSON.stringify(obj));
     }
     Tools.clone = clone;
+    // custom deep object merge
+    Tools.merge = function (target) {
+        var objects = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            objects[_i - 1] = arguments[_i];
+        }
+        for (var _a = 0, objects_1 = objects; _a < objects_1.length; _a++) {
+            var object = objects_1[_a];
+            for (var key in object) {
+                if (object.hasOwnProperty(key)) {
+                    // since we're dealing relatively simple objects this should work fine
+                    if (object[key] && typeof object[key] === "object") {
+                        if (!target[key]) {
+                            target[key] = {};
+                        }
+                        // recursively merge into the target
+                        // configs only run 3 or 4 levels deep, so no stack explosions
+                        target[key] = Tools.merge(target[key], object[key]);
+                    }
+                    else {
+                        target[key] = object[key];
+                    }
+                }
+            }
+        }
+        return target;
+    };
     /**************************************
      *  DOM-related operations            *
      *************************************/
