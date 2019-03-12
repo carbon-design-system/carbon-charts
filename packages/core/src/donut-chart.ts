@@ -4,6 +4,8 @@ import { interpolateNumber } from "d3-interpolate";
 
 import { PieChart } from "./pie-chart";
 import * as Configuration from "./configuration";
+import { ChartConfig, DonutChartOptions, ChartType } from "./configuration";
+import { Tools } from "./tools";
 
 export class DonutCenter {
 	configs: any;
@@ -15,7 +17,7 @@ export class DonutCenter {
 			this.configs = configs;
 
 			// Keep track of changes to the configs above
-			this.oldConfigs = Object.assign({}, configs);
+			this.oldConfigs = Tools.merge({}, configs);
 		} else {
 			console.error("Configuration object is missing for DonutCenter");
 		}
@@ -56,7 +58,7 @@ export class DonutCenter {
 				.text(this.configs.label);
 
 			// Set the latest configs in record to keep track of future config updates
-			this.oldConfigs = Object.assign({}, this.configs);
+			this.oldConfigs = Tools.merge({}, this.configs);
 		}
 	}
 
@@ -83,9 +85,10 @@ export class DonutCenter {
 export class DonutChart extends PieChart {
 	center: DonutCenter;
 
-	constructor(holder: Element, configs: any) {
-		super(holder, configs, "donut");
+	options: DonutChartOptions;
 
+	constructor(holder: Element, configs: ChartConfig<DonutChartOptions>) {
+		super(holder, configs, ChartType.DONUT);
 		// Check if the DonutCenter object is provided
 		// in the chart configurations
 		const { center, centerLabel, centerNumber } = configs.options;
