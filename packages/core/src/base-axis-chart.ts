@@ -251,6 +251,52 @@ export class BaseAxisChart extends BaseChart {
 				line.attr("y2", this.sliderBottom - radius);
 				lowerCircle.attr("cy", this.sliderBottom);
 				lowerCircle.datum({"y": this.sliderBottom});
+
+			} else if (newBottomHandleLocation + radius < this.minSliderHeight) {
+
+				this.sliderTop = maxHeight;
+				this.sliderBottom = this.sliderLength;
+
+				// Scale the min and max axis values
+				this.upperScaleY = 1 - (this.sliderTop - maxHeight) / this.dragAreaLength;
+				this.lowerScaleY = (this.sliderBottom - maxHeight) / this.dragAreaLength;
+
+				// This assignment is necessary for multiple drag gestures.
+				// It makes the drag.origin function yield the correct value.
+				// Set slider top/bottom attributes
+				d.y1 = this.sliderTop;
+				d.y2 = this.sliderBottom;
+
+				line.attr("y1", this.sliderTop + radius);
+				upperCircle.attr("cy", this.sliderTop);
+				upperCircle.datum({"y": this.sliderTop});
+
+				line.attr("y2", this.sliderBottom - radius);
+				lowerCircle.attr("cy", this.sliderBottom);
+				lowerCircle.datum({"y": this.sliderBottom});
+
+			} else if (newTopHandleLocation - radius > maxHeight) {
+
+				this.sliderTop = this.minSliderHeight - this.sliderLength;
+				this.sliderBottom = this.minSliderHeight;
+
+				// Scale the min and max axis values
+				this.upperScaleY = 1 - (this.sliderTop - maxHeight) / this.dragAreaLength;
+				this.lowerScaleY = (this.sliderBottom - maxHeight) / this.dragAreaLength;
+
+				// This assignment is necessary for multiple drag gestures.
+				// It makes the drag.origin function yield the correct value.
+				// Set slider top/bottom attributes
+				d.y1 = this.sliderTop;
+				d.y2 = this.sliderBottom;
+
+				line.attr("y1", this.sliderTop + radius);
+				upperCircle.attr("cy", this.sliderTop);
+				upperCircle.datum({"y": this.sliderTop});
+
+				line.attr("y2", this.sliderBottom - radius);
+				lowerCircle.attr("cy", this.sliderBottom);
+				lowerCircle.datum({"y": this.sliderBottom});
 			}
 
 			this.displayData = this.updateDisplayData();
