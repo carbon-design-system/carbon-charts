@@ -3,17 +3,13 @@ import { select, mouse } from "d3-selection";
 
 import { BaseAxisChart } from "./base-axis-chart";
 import * as Configuration from "./configuration";
+import { ChartConfig, ScatterChartOptions, ChartTypes } from "./configuration";
 
 export class ScatterChart extends BaseAxisChart {
-	x: any;
-	y: any;
-
-	colorScale: any;
-
-	constructor(holder: Element, configs: any) {
+	constructor(holder: Element, configs: ChartConfig<ScatterChartOptions>) {
 		super(holder, configs);
 
-		this.options.type = "scatter";
+		this.options.type = ChartTypes.SCATTER;
 	}
 
 	draw() {
@@ -21,14 +17,8 @@ export class ScatterChart extends BaseAxisChart {
 			.style("height", "100%");
 
 		const { line: margins } = Configuration.charts.margin;
-		const { scales } = this.options;
 
-		const chartSize = this.getChartSize();
-		const width = chartSize.width - margins.left - margins.right;
-		const height = chartSize.height - this.getBBox(".x.axis").height;
-
-		this.innerWrap.style("width", "100%")
-			.style("height", "100%");
+		this.innerWrap.style("width", "100%").style("height", "100%");
 
 		this.innerWrap.attr("transform", `translate(${margins.left}, ${margins.top})`);
 
@@ -131,11 +121,6 @@ export class ScatterChart extends BaseAxisChart {
 	}
 
 	updateElements(animate: boolean, gDots?: any) {
-		const { scales } = this.options;
-
-		const chartSize = this.getChartSize();
-		const height = chartSize.height - this.getBBox(".x.axis").height;
-
 		if (!gDots) {
 			gDots = this.innerWrap.selectAll("g.dots");
 		}
@@ -143,7 +128,6 @@ export class ScatterChart extends BaseAxisChart {
 		const transitionToUse = animate ? this.getFillTransition() : this.getInstantTransition();
 		const self = this;
 
-		const { line: margins } = Configuration.charts.margin;
 		const circleRadius = this.getCircleRadius();
 		gDots.selectAll("circle.dot")
 			.data(function(d, i) {

@@ -4,16 +4,19 @@ import { line } from "d3-shape";
 
 import { ScatterChart } from "./scatter-chart";
 import * as Configuration from "./configuration";
+import { ChartConfig, LineChartOptions, ChartTypes } from "./configuration";
 
 import { getD3Curve } from "./services/curves";
 
 export class LineChart extends ScatterChart {
 	lineGenerator: any;
 
-	constructor(holder: Element, configs: any) {
+	options: LineChartOptions = Object.assign({}, Configuration.options.LINE);
+
+	constructor(holder: Element, configs: ChartConfig<LineChartOptions>) {
 		super(holder, configs);
 
-		this.options.type = "line";
+		this.options.type = ChartTypes.LINE;
 	}
 
 	draw() {
@@ -21,14 +24,8 @@ export class LineChart extends ScatterChart {
 			.style("height", "100%");
 
 		const { line: margins } = Configuration.charts.margin;
-		const { scales } = this.options;
 
-		const chartSize = this.getChartSize();
-		const width = chartSize.width - margins.left - margins.right;
-		const height = chartSize.height - this.getBBox(".x.axis").height;
-
-		this.innerWrap.style("width", "100%")
-			.style("height", "100%");
+		this.innerWrap.style("width", "100%").style("height", "100%");
 
 		this.innerWrap.attr("transform", `translate(${margins.left}, ${margins.top})`);
 
@@ -105,11 +102,6 @@ export class LineChart extends ScatterChart {
 	}
 
 	updateElements(animate: boolean, gLines?: any) {
-		const { scales } = this.options;
-
-		const chartSize = this.getChartSize();
-		const height = chartSize.height - this.getBBox(".x.axis").height;
-
 		if (!gLines) {
 			gLines = this.innerWrap.selectAll("g.lines");
 		}

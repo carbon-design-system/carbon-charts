@@ -1,22 +1,22 @@
 // D3 Imports
 import { select, selectAll, mouse } from "d3-selection";
 import { scaleOrdinal } from "d3-scale";
-import { pie, arc } from "d3-shape";
+import { pie, arc, Pie, Arc } from "d3-shape";
 import { interpolate } from "d3-interpolate";
 
 import { BaseChart } from "./base-chart";
 import * as Configuration from "./configuration";
+import { ChartConfig, PieChartOptions, ChartTypes } from "./configuration";
 import { Tools } from "./tools";
 
 export class PieChart extends BaseChart {
-	pie: any;
-	arc: any;
+	pie: Pie<PieChart, any>;
+	arc: Arc<PieChart, any>;
 	path: any;
 
-	// Used to assign colors to each slice by their label
-	colorScale: any;
+	options: PieChartOptions = Object.assign({}, Configuration.options.PIE);
 
-	constructor(holder: Element, configs: any, type: string = "pie") {
+	constructor(holder: Element, configs: ChartConfig<PieChartOptions>, type: ChartTypes.PIE | ChartTypes.DONUT = ChartTypes.PIE) {
 		super(holder, configs);
 
 		this.options.type = type;
@@ -104,7 +104,6 @@ export class PieChart extends BaseChart {
 			.attr("preserveAspectRatio", "xMinYMin");
 
 		// Compute the correct inner & outer radius
-		const { pie: pieConfigs } = Configuration;
 		const marginedRadius = this.computeRadius();
 		this.arc = arc()
 				.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
@@ -336,8 +335,6 @@ export class PieChart extends BaseChart {
 	}
 
 	resizeChart() {
-		const { pie: pieConfigs } = Configuration;
-
 		const chartSize: any = this.getChartSize(this.container);
 		const dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
 		const radius: number = this.computeRadius();
