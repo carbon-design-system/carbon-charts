@@ -49,7 +49,6 @@ export class BaseChart {
 
 	constructor(holder: Element, configs: ChartConfig<BaseChartOptions>) {
 		this.id = `chart-${BaseChart.chartCount++}`;
-		console.log(this.options);
 		if (configs.options) {
 			this.options = Tools.merge({}, this.options, configs.options);
 		}
