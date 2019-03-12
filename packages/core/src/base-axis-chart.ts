@@ -203,8 +203,8 @@ export class BaseAxisChart extends BaseChart {
 		// When a mousedown action is detected on the slider, calculate the cursor's relative position on the slider
 		// to be used as a grab point for dragging
 		const setGrabPoint = d => {
-			const minClickValue = this.svg.select(`#${this.chartContainerID}-slider-circle-bottom`).node().getBoundingClientRect().bottom;
-			const maxClickValue = this.svg.select(`#${this.chartContainerID}-slider-circle-top`).node().getBoundingClientRect().top;
+			const minClickValue = this.svg.select(`#${this.chartContainerID}-slider-circle-bottom`).node().getBoundingClientRect().bottom - radius;
+			const maxClickValue = this.svg.select(`#${this.chartContainerID}-slider-circle-top`).node().getBoundingClientRect().top + radius;
 			const maxClickRange = Math.abs(maxClickValue - minClickValue);
 			this.sliderLength = Math.abs(maxClickValue - minClickValue);
 			cursorLocationOnSlider = (Math.abs(event.y - minClickValue) / maxClickRange);
