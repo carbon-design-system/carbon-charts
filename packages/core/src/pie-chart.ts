@@ -6,7 +6,7 @@ import { interpolate } from "d3-interpolate";
 
 import { BaseChart } from "./base-chart";
 import * as Configuration from "./configuration";
-import { ChartConfig, PieChartOptions, ChartTypes } from "./configuration";
+import { ChartConfig, PieChartOptions, ChartType } from "./configuration";
 import { Tools } from "./tools";
 
 export class PieChart extends BaseChart {
@@ -16,7 +16,7 @@ export class PieChart extends BaseChart {
 
 	options: PieChartOptions = Object.assign({}, Configuration.options.PIE);
 
-	constructor(holder: Element, configs: ChartConfig<PieChartOptions>, type: ChartTypes.PIE | ChartTypes.DONUT = ChartTypes.PIE) {
+	constructor(holder: Element, configs: ChartConfig<PieChartOptions>, type: ChartType.PIE | ChartType.DONUT = ChartType.PIE) {
 		super(holder, configs);
 
 		this.options.type = type;

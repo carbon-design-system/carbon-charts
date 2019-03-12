@@ -2,7 +2,7 @@ import { BaseAxisChart } from "./base-axis-chart";
 
 import * as ChartInstances from "./index";
 import * as Configuration from "./configuration";
-import { ChartConfig, ComboChartOptions, ChartTypes } from "./configuration";
+import { ChartConfig, ComboChartOptions, ChartType } from "./configuration";
 
 // TODO - Support adding/removing charts when updating data
 export class ComboChart extends BaseAxisChart {
@@ -14,7 +14,7 @@ export class ComboChart extends BaseAxisChart {
 	constructor(holder: Element, configs: ChartConfig<ComboChartOptions>) {
 		super(holder, configs);
 
-		this.options.type = ChartTypes.COMBO;
+		this.options.type = ChartType.COMBO;
 	}
 
 	// Extract data related to the specific sub-chart

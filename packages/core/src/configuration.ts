@@ -9,7 +9,7 @@ import { ScaleBand, ScaleLinear } from "d3-scale";
 /**
  * enum of all supported charts
  */
-export enum ChartTypes {
+export enum ChartType {
 	BAR = "bar",
 	LINE = "line",
 	SCATTER = "scatter",
@@ -48,7 +48,7 @@ export interface BaseChartOptions {
 	/**
 	 * Internal property to track what type of chart should be instantiated
 	 */
-	type?: ChartTypes;
+	type?: ChartType;
 	/**
 	 * boolean to enable accessibility mode
 	 */
@@ -408,7 +408,7 @@ export interface DataSet {
 	/**
 	 * chartType - only used with combo charts
 	 */
-	chartType?: ChartTypes;
+	chartType?: ChartType;
 }
 
 export interface ChartData {

@@ -4,7 +4,7 @@ import { interpolateNumber } from "d3-interpolate";
 
 import { PieChart } from "./pie-chart";
 import * as Configuration from "./configuration";
-import { ChartConfig, DonutChartOptions, ChartTypes } from "./configuration";
+import { ChartConfig, DonutChartOptions, ChartType } from "./configuration";
 
 export class DonutCenter {
 	configs: any;
@@ -87,7 +87,7 @@ export class DonutChart extends PieChart {
 	options: DonutChartOptions = Object.assign({}, Configuration.options.DONUT);
 
 	constructor(holder: Element, configs: ChartConfig<DonutChartOptions>) {
-		super(holder, configs, Configuration.ChartTypes.DONUT);
+		super(holder, configs, Configuration.ChartType.DONUT);
 
 		// Check if the DonutCenter object is provided
 		// in the chart configurations

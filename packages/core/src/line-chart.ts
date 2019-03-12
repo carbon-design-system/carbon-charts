@@ -4,7 +4,7 @@ import { line } from "d3-shape";
 
 import { ScatterChart } from "./scatter-chart";
 import * as Configuration from "./configuration";
-import { ChartConfig, LineChartOptions, ChartTypes } from "./configuration";
+import { ChartConfig, LineChartOptions, ChartType } from "./configuration";
 
 import { getD3Curve } from "./services/curves";
 
@@ -16,7 +16,7 @@ export class LineChart extends ScatterChart {
 	constructor(holder: Element, configs: ChartConfig<LineChartOptions>) {
 		super(holder, configs);
 
-		this.options.type = ChartTypes.LINE;
+		this.options.type = ChartType.LINE;
 	}
 
 	draw() {
