@@ -4,8 +4,11 @@ import { select, mouse } from "d3-selection";
 import { BaseAxisChart } from "./base-axis-chart";
 import * as Configuration from "./configuration";
 import { ChartConfig, ScatterChartOptions, ChartType } from "./configuration";
+import { Tools } from "./tools";
 
 export class ScatterChart extends BaseAxisChart {
+	options: ScatterChartOptions = Tools.merge({}, Configuration.options.SCATTER);
+
 	constructor(holder: Element, configs: ChartConfig<ScatterChartOptions>) {
 		super(holder, configs);
 

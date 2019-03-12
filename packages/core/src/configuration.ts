@@ -1,4 +1,5 @@
 import { ScaleBand, ScaleLinear } from "d3-scale";
+import { Tools } from "./tools";
 
 /*
  **********************
@@ -152,7 +153,7 @@ export type PieChartOptions = BaseChartOptions;
 /**
  * Options specific to pie charts
  */
-const pieOptions: PieChartOptions = Object.assign({}, baseOptions);
+const pieOptions: PieChartOptions = Tools.merge({}, baseOptions);
 
 /**
  * Options specific to donut charts
@@ -166,7 +167,7 @@ export interface DonutChartOptions extends PieChartOptions {
 	centerNumber?: string;
 }
 
-const donutOptions: DonutChartOptions = Object.assign({}, baseOptions);
+const donutOptions: DonutChartOptions = Tools.merge({}, baseOptions);
 
 /**
  * represents a threshold visually bringing attention to specific values/issues
@@ -259,7 +260,7 @@ export interface AxisChartOptions extends BaseChartOptions {
 /**
  * Options common to any chart with an axis
  */
-const axisOptions: AxisChartOptions = Object.assign({}, baseOptions, {
+const axisOptions: AxisChartOptions = Tools.merge({}, baseOptions, {
 	scales: {
 		x: {
 			domain: null,
@@ -299,7 +300,7 @@ export interface LineChartOptions extends AxisChartOptions {
 /**
  * options specific to line charts
  */
-const lineOptions: LineChartOptions = Object.assign({}, axisOptions, {
+const lineOptions: LineChartOptions = Tools.merge({}, axisOptions, {
 	points: {
 		// default point radius to 4
 		radius: 4
@@ -323,7 +324,7 @@ export interface ScatterChartOptions extends AxisChartOptions {
 /**
  * options specific to line charts
  */
-const scatterOptions: ScatterChartOptions = Object.assign({}, axisOptions, {
+const scatterOptions: ScatterChartOptions = Tools.merge({}, axisOptions, {
 	points: {
 		// default point radius to 4
 		radius: 4
@@ -339,7 +340,7 @@ export interface BarChartOptions extends AxisChartOptions {
 	 */
 	bars?: {
 		/**
-		 * constrains the bars to a maxium width
+		 * constrains the bars to a maximum width
 		 */
 		maxWidth: number;
 	};
@@ -347,7 +348,7 @@ export interface BarChartOptions extends AxisChartOptions {
 /**
  * options specific to bar charts
  */
-const barOptions: BarChartOptions = Object.assign({}, axisOptions);
+const barOptions: BarChartOptions = Tools.merge({}, axisOptions);
 
 /**
  * options specific to bar charts
@@ -356,7 +357,7 @@ export type StackedBarChartOptions = BarChartOptions;
 /**
  * options specific to bar charts
  */
-const stackedBarOptions: StackedBarChartOptions = Object.assign({}, barOptions);
+const stackedBarOptions: StackedBarChartOptions = Tools.merge({}, barOptions);
 
 /**
  * Options specific to combo charts.
@@ -368,7 +369,7 @@ export interface ComboChartOptions extends AxisChartOptions, BarChartOptions, Li
  * Options specific to combo charts.
  *
  */
-const comboOptions: ComboChartOptions = Object.assign({}, axisOptions, barOptions, lineOptions, scatterOptions);
+const comboOptions: ComboChartOptions = Tools.merge({}, axisOptions, barOptions, lineOptions, scatterOptions);
 
 /**
  * Configuration passed to the chart.
@@ -377,7 +378,7 @@ const comboOptions: ComboChartOptions = Object.assign({}, axisOptions, barOption
  */
 export interface ChartConfig<T extends BaseChartOptions> {
 	options: T;
-	data: ChartData;
+	data: ChartData | Promise<ChartData>;
 }
 
 export const options = {
@@ -404,7 +405,7 @@ export interface DataSet {
 	/**
 	 * Array of data values
 	 */
-	data: Array<number>;
+	data: Array<any>;
 	/**
 	 * chartType - only used with combo charts
 	 */

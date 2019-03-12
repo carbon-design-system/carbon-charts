@@ -6,15 +6,30 @@ import { interpolate } from "d3-interpolate";
 
 import { BaseChart } from "./base-chart";
 import * as Configuration from "./configuration";
-import { ChartConfig, PieChartOptions, ChartType } from "./configuration";
+import { ChartConfig, PieChartOptions, ChartType, ChartData } from "./configuration";
 import { Tools } from "./tools";
+
+export interface PieDatum {
+	label: string;
+	value: number;
+	items?: Array<PieDatum>;
+}
+
+export interface PieDataSet extends Configuration.DataSet {
+	data: Array<PieDatum>;
+}
+
+export interface PieData {
+	labels: Array<string>;
+	datasets: Array<PieDataSet>;
+}
 
 export class PieChart extends BaseChart {
 	pie: Pie<PieChart, any>;
 	arc: Arc<PieChart, any>;
 	path: any;
 
-	options: PieChartOptions = Object.assign({}, Configuration.options.PIE);
+	options: PieChartOptions;
 
 	constructor(holder: Element, configs: ChartConfig<PieChartOptions>, type: ChartType.PIE | ChartType.DONUT = ChartType.PIE) {
 		super(holder, configs);
@@ -27,7 +42,7 @@ export class PieChart extends BaseChart {
 
 	// Sort data by value (descending)
 	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
-	dataProcessor(dataObject: any) {
+	dataProcessor(dataObject: ChartData): PieData {
 		// TODO - Support multiple datasets
 		// Check for duplicate keys in the data
 		const duplicates = Tools.getDuplicateValues(dataObject.labels);
@@ -37,7 +52,7 @@ export class PieChart extends BaseChart {
 
 		// TODO - Support multiple datasets
 		// let sortedData = data.datasets[0];
-		const dataList = dataObject.datasets[0].data.map((datum, i) => ({
+		const dataList: Array<any> = dataObject.datasets[0].data.map((datum, i) => ({
 			label: dataObject.labels[i],
 			value: datum,
 			// datasetLabel: data.datasets[0].label
@@ -63,12 +78,21 @@ export class PieChart extends BaseChart {
 				}]);
 		}
 
-		// Sort labels based on the order made above
-		dataObject.labels = sortedData.map((datum, i) => datum.label);
+		return {
+			// Sort labels based on the order made above
+			labels: sortedData.map((datum, i) => datum.label),
+			datasets: [
+				{
+					// copy all the relevant properties
+					backgroundColors: dataObject.datasets[0].backgroundColors,
+					chartType: dataObject.datasets[0].chartType,
+					label: dataObject.datasets[0].label,
+					// add our sorted data
+					data: sortedData
+				}
+			]
+		};
 
-		dataObject.datasets[0].data = sortedData;
-
-		return dataObject;
 	}
 
 	// If there isn't a chart already drawn in the container

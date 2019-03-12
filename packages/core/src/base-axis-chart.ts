@@ -16,13 +16,13 @@ export class BaseAxisChart extends BaseChart {
 	y2: ScaleLinear<any, any>;
 	thresholdDimensions: any;
 
-	options: any = Object.assign({}, Configuration.options.AXIS);
+	options: any = Tools.merge({}, Configuration.options.AXIS);
 
 	constructor(holder: Element, configs: ChartConfig<AxisChartOptions>) {
 		super(holder, configs);
 
 		if (configs.options) {
-			this.options = Object.assign({}, this.options, configs.options);
+			this.options = Tools.merge({}, this.options, configs.options);
 			const { axis } = configs.options;
 			if (axis) {
 				this.x = axis.x;

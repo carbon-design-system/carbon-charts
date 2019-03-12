@@ -7,11 +7,12 @@ import * as Configuration from "./configuration";
 import { ChartConfig, LineChartOptions, ChartType } from "./configuration";
 
 import { getD3Curve } from "./services/curves";
+import { Tools } from "./tools";
 
 export class LineChart extends ScatterChart {
 	lineGenerator: any;
 
-	options: LineChartOptions = Object.assign({}, Configuration.options.LINE);
+	options: LineChartOptions;
 
 	constructor(holder: Element, configs: ChartConfig<LineChartOptions>) {
 		super(holder, configs);

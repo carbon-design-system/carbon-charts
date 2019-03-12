@@ -41,7 +41,7 @@ const getMaxBarWidth = (maxWidth, currentBandWidth) => {
 	return maxWidth;
 };
 
-// returns true if the calculated bandwidth is greater than the maxWidth (if deinfed)
+// returns true if the calculated bandwidth is greater than the maxWidth (if defined)
 // i.e. if we should be constraining ourselves to a specific bar width
 const isWidthConstrained = (maxWidth, currentBandWidth) => {
 	if (!maxWidth) {
@@ -72,9 +72,9 @@ export class BarChart extends BaseAxisChart {
 
 		// initialize options
 		if (configs.options) {
-			this.options = Object.assign({}, Configuration.options.BAR, configs.options);
+			this.options = Tools.merge({}, Configuration.options.BAR, configs.options);
 		} else {
-			this.options = Object.assign({}, Configuration.options.BAR);
+			this.options = Tools.merge({}, Configuration.options.BAR);
 		}
 
 		// To be used for combo chart instances of a bar chart
@@ -85,7 +85,7 @@ export class BarChart extends BaseAxisChart {
 			const width = chartSize.width - margins.left - margins.right;
 
 			this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
-			this.x1.domain(configs.data.datasets.map(dataset => dataset.label))
+			this.x1.domain(this.data.datasets.map(dataset => dataset.label))
 				.rangeRound([0, getMaxBarWidth(Tools.getProperty(this.options, "bars", "maxWidth"), this.x.bandwidth())]);
 		}
 

@@ -29,7 +29,7 @@ export class BaseChart {
 	svg: any;
 	innerWrap: any;
 
-	options: BaseChartOptions = Object.assign({}, Configuration.options.BASE);
+	options: BaseChartOptions = Tools.merge({}, Configuration.options.BASE);
 
 	// Data
 	data: ChartData;
@@ -49,9 +49,9 @@ export class BaseChart {
 
 	constructor(holder: Element, configs: ChartConfig<BaseChartOptions>) {
 		this.id = `chart-${BaseChart.chartCount++}`;
-
+		console.log(this.options);
 		if (configs.options) {
-			this.options = Object.assign({}, this.options, configs.options);
+			this.options = Tools.merge({}, this.options, configs.options);
 		}
 
 		// Save holder element reference, and initialize it by applying appropriate styling
@@ -301,7 +301,7 @@ export class BaseChart {
 	}
 
 	// Default fallback when no data processing is needed
-	dataProcessor(data: any) {
+	dataProcessor(data: ChartData): any {
 		return data;
 	}
 
