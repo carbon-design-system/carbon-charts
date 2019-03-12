@@ -1,27 +1,28 @@
 // D3 Imports
 import { select } from "d3-selection";
-import { scaleBand, scaleLinear } from "d3-scale";
-import { axisBottom, axisLeft, axisRight } from "d3-axis";
+import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from "d3-scale";
+import { axisBottom, axisLeft, axisRight, AxisScale, AxisDomain } from "d3-axis";
 import { min, max } from "d3-array";
 
 import { BaseChart } from "./base-chart";
 
 import * as Configuration from "./configuration";
+import { ChartConfig, AxisChartOptions } from "./configuration";
 import { Tools } from "./tools";
 
 export class BaseAxisChart extends BaseChart {
-	x: any;
-	y: any;
-	y2: any;
+	x: ScaleBand<any>;
+	y: ScaleLinear<any, any>;
+	y2: ScaleLinear<any, any>;
 	thresholdDimensions: any;
 
-	options: any = Object.assign({}, Configuration.options.AXIS);
+	options: any = Tools.merge({}, Configuration.options.AXIS);
 
-	constructor(holder: Element, configs: any) {
+	constructor(holder: Element, configs: ChartConfig<AxisChartOptions>) {
 		super(holder, configs);
 
 		if (configs.options) {
-			this.options = Object.assign({}, this.options, configs.options);
+			this.options = Tools.merge({}, this.options, configs.options);
 			const { axis } = configs.options;
 			if (axis) {
 				this.x = axis.x;

@@ -9,6 +9,7 @@ import {
 
 // Styles
 import "./index.scss";
+import { ChartData } from "./configuration";
 
 //
 // Experimental Switch Toggle
@@ -335,7 +336,7 @@ chartTypes.forEach(type => {
 				classyCharts[type.id] = new PieChart(
 					classyContainer,
 					{
-						data: new Promise((resolve, reject) => {
+						data: new Promise<ChartData>((resolve, reject) => {
 							setTimeout(() => {
 								resolve(type.data);
 							}, 0);
