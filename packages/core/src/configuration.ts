@@ -55,6 +55,11 @@ export interface BaseChartOptions {
 	 */
 	accessibility?: boolean;
 	/**
+	 * boolean to enable right-to-left mode
+	 */
+	rtlEnabled?: boolean;
+
+	/**
 	 * boolean to disable animations (enabled by default)
 	 */
 	animations?: boolean;

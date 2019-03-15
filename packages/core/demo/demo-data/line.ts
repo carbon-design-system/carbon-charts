@@ -63,7 +63,7 @@ export const curvedLineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	rtlSupport: true
+	rtlEnabled: true
 };
 
 
@@ -138,7 +138,7 @@ export const lineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	rtlSupport: true
+	rtlEnabled: true
 };
 
 export const scatterData = {
