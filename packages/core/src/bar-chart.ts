@@ -271,7 +271,6 @@ export class BarChart extends BaseAxisChart {
 		const actualChartSize: any = this.getChartSize(this.container);
 		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
 
-		console.log(dimensionToUseForScale)
 		// Resize the SVG
 		select(this.holder).select("svg")
 			.attr("width", `${dimensionToUseForScale}px`)
