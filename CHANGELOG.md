@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.1](https://github.com/IBM/carbon-charts/compare/v0.11.0...v0.11.1) (2019-03-13)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+# [0.11.0](https://github.com/IBM/carbon-charts/compare/v0.10.5...v0.11.0) (2019-03-12)
+
+
+### Features
+
+* **core:** specify config as interfaces ([e474fb6](https://github.com/IBM/carbon-charts/commit/e474fb6))
+
+
+
+
+
+## [0.10.5](https://github.com/IBM/carbon-charts/compare/v0.10.4...v0.10.5) (2019-03-12)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 ## [0.10.4](https://github.com/IBM/carbon-charts/compare/v0.10.3...v0.10.4) (2019-03-08)
 
 

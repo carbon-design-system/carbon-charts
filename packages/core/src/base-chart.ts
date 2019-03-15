@@ -10,6 +10,7 @@ import { transition, Transition } from "d3-transition";
 
 // Internal Imports
 import * as Configuration from "./configuration";
+import { ChartConfig, BaseChartOptions, ChartData } from "./configuration";
 import { Tools } from "./tools";
 import PatternsService from "./services/patterns";
 
@@ -28,11 +29,11 @@ export class BaseChart {
 	svg: any;
 	innerWrap: any;
 
-	options: any = Object.assign({}, Configuration.options.BASE);
+	options: BaseChartOptions = Tools.merge({}, Configuration.options.BASE);
 
 	// Data
-	data: any;
-	displayData: any;
+	data: ChartData;
+	displayData: ChartData;
 	fixedDataLabels;
 
 	// Fill scales & fill related objects
@@ -46,11 +47,10 @@ export class BaseChart {
 		tooltips: null
 	};
 
-	constructor(holder: Element, configs: any) {
+	constructor(holder: Element, configs: ChartConfig<BaseChartOptions>) {
 		this.id = `chart-${BaseChart.chartCount++}`;
-
 		if (configs.options) {
-			this.options = Object.assign({}, this.options, configs.options);
+			this.options = Tools.merge({}, this.options, configs.options);
 		}
 
 		// Save holder element reference, and initialize it by applying appropriate styling
@@ -165,7 +165,6 @@ export class BaseChart {
 	}
 
 	getKeysFromData() {
-		const { datasets } = this.displayData;
 		const keys = {};
 
 		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
@@ -301,7 +300,7 @@ export class BaseChart {
 	}
 
 	// Default fallback when no data processing is needed
-	dataProcessor(data: any) {
+	dataProcessor(data: ChartData): any {
 		return data;
 	}
 

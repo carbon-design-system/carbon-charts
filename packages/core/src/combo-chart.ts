@@ -1,21 +1,26 @@
 import { BaseAxisChart } from "./base-axis-chart";
 
-import * as ChartTypes from "./index";
+import * as ChartInstances from "./index";
+import * as Configuration from "./configuration";
+import { ChartConfig, ComboChartOptions, ChartType } from "./configuration";
+import { Tools } from "./tools";
 
 // TODO - Support adding/removing charts when updating data
 export class ComboChart extends BaseAxisChart {
 	// Includes all the sub-charts
 	charts = [];
 
-	constructor(holder: Element, configs: any) {
+	options: ComboChartOptions;
+
+	constructor(holder: Element, configs: ChartConfig<ComboChartOptions>) {
 		super(holder, configs);
 
-		this.options.type = "combo";
+		this.options.type = ChartType.COMBO;
 	}
 
 	// Extract data related to the specific sub-chart
 	extractDataForChart(chartType: string) {
-		return Object.assign({}, this.displayData, {
+		return Tools.merge({}, this.displayData, {
 			datasets: this.displayData.datasets.filter(_dataset => _dataset.chartType === chartType)
 		});
 	}
@@ -47,13 +52,13 @@ export class ComboChart extends BaseAxisChart {
 
 		this.displayData.datasets.forEach(dataset => {
 			// If the chart type is valid
-			if (ChartTypes[dataset.chartType]) {
+			if (ChartInstances[dataset.chartType]) {
 				// If the chart for this dataset has not already been created
 				if (this.charts.findIndex(chart => chart.type === dataset.chartType) === -1) {
-					if (ChartTypes[dataset.chartType].prototype instanceof BaseAxisChart) {
+					if (ChartInstances[dataset.chartType].prototype instanceof BaseAxisChart) {
 						const chartConfigs = {
 							data: this.extractDataForChart(dataset.chartType),
-							options: Object.assign({}, this.options, {
+							options: Tools.merge({}, this.options, {
 								axis: {
 									x: this.x,
 									y: this.y,
@@ -62,7 +67,7 @@ export class ComboChart extends BaseAxisChart {
 							})
 						};
 
-						const chart = new ChartTypes[dataset.chartType](
+						const chart = new ChartInstances[dataset.chartType](
 							this.holder,
 							chartConfigs
 						);
