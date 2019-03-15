@@ -72,7 +72,8 @@ export const groupedBarOptions = {
 		size: "compact"
 	},
 	legendClickable: true,
-	containerResizable: true
+	rtlSupport: true,
+	containerResizable: true,
 };
 
 // Simple bar
@@ -110,7 +111,8 @@ export const simpleBarOptions = {
 	containerResizable: true,
 	bars: {
 		maxWidth: 50
-	}
+	},
+	rtlSupport: true
 };
 
 // Stacked bar
@@ -181,5 +183,6 @@ export const stackedBarOptions = {
 		size: "compact"
 	},
 	legendClickable: true,
-	containerResizable: true
+	containerResizable: true,
+	rtlSupport: true
 };

@@ -93,7 +93,7 @@ export class BarChart extends BaseAxisChart {
 		if (xScale) {
 			this.x = xScale;
 		} else {
-			this.x = Configuration.charts.rtlSupport ?  scaleBand().rangeRound([width, 0]) : scaleBand().rangeRound([0, width]);
+			this.x = this.options.rtlSupport ?  scaleBand().rangeRound([width, 0]) : scaleBand().rangeRound([0, width]);
 			this.x.padding(Configuration.bars.spacing.datasets);
 			this.x.domain(this.displayData.labels);
 		}
@@ -271,6 +271,7 @@ export class BarChart extends BaseAxisChart {
 		const actualChartSize: any = this.getChartSize(this.container);
 		const dimensionToUseForScale = Math.min(actualChartSize.width, actualChartSize.height);
 
+		console.log(dimensionToUseForScale)
 		// Resize the SVG
 		select(this.holder).select("svg")
 			.attr("width", `${dimensionToUseForScale}px`)
@@ -294,7 +295,7 @@ export class BarChart extends BaseAxisChart {
 
 	addDataPointEventListener() {
 		const self = this;
-		const { accessibility } = this.options;
+		const { accessibility, rtlSupport } = this.options;
 
 		this.svg.selectAll("rect.bar")
 			.on("click", function(d) {
@@ -315,7 +316,7 @@ export class BarChart extends BaseAxisChart {
 				const relativeMousePosition = mouse(self.holder as HTMLElement);
 				tooltipRef.style(
 					"left",
-					!Configuration.charts.rtlSupport ?
+					!rtlSupport ?
 						relativeMousePosition[0] - Configuration.tooltip.magicLeft2 + "px" :
 							relativeMousePosition[0] - (tooltipRef.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px")
 					.style("top", relativeMousePosition[1] + "px");

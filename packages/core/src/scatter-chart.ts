@@ -204,7 +204,7 @@ export class ScatterChart extends BaseAxisChart {
 
 	addDataPointEventListener() {
 		const self = this;
-		const { accessibility } = this.options;
+		const { accessibility, rtlSupport } = this.options;
 
 		this.svg.selectAll("circle.dot")
 			.on("click", function(d) {
@@ -225,7 +225,7 @@ export class ScatterChart extends BaseAxisChart {
 				const relativeMousePosition = mouse(self.holder as HTMLElement);
 				tooltipRef.style(
 					"left",
-					!Configuration.charts.rtlSupport ?
+					!rtlSupport ?
 						relativeMousePosition[0] - Configuration.tooltip.magicLeft2 + "px" :
 							relativeMousePosition[0] - (tooltipRef.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px")
 					.style("top", relativeMousePosition[1] + "px");

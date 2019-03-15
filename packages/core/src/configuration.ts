@@ -63,15 +63,15 @@ export const charts = {
 		right: 20,
 		bar: {
 			top: 0,
-			right: -40,
+			right: 40,
 			bottom: 50,
-			left: 40
+			left: 0
 		},
 		line: {
 			top: 0,
-			right: -40,
+			right: 40,
 			bottom: 50,
-			left: 40
+			left: 0
 		}
 	},
 	resetOpacity: {
@@ -101,7 +101,6 @@ export const charts = {
 		minWidth: 100,
 		minHeight: 200
 	},
-	rtlSupport: true
 };
 
 export const scales = {

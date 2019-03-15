@@ -62,7 +62,8 @@ export const curvedLineOptions = {
 		name: "curveNatural"
 	},
 	legendClickable: true,
-	containerResizable: true
+	containerResizable: true,
+	rtlSupport: true
 };
 
 
@@ -136,7 +137,8 @@ export const lineOptions = {
 		radius: 4
 	},
 	legendClickable: true,
-	containerResizable: true
+	containerResizable: true,
+	rtlSupport: true
 };
 
 export const scatterData = {

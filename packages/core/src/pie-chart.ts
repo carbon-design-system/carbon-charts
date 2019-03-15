@@ -261,7 +261,7 @@ export class PieChart extends BaseChart {
 
 		selectAll(".chart-tooltip").remove();
 		const tooltip = select(this.holder).append("div")
-			.attr("class", Configuration.charts.rtlSupport ? "tooltip-rtl chart-tooltip" : "tooltip chart-tooltip" )
+			.attr("class", this.options.rtlSupport ? "tooltip-rtl chart-tooltip" : "tooltip chart-tooltip" )
 			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
 		const dVal = d.value.toLocaleString();
@@ -269,7 +269,7 @@ export class PieChart extends BaseChart {
 
 		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
 		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth ||
-			Configuration.charts.rtlSupport) { tooltip.style(
+			this.options.rtlSupport) { tooltip.style(
 				"left",
 				mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
 			);
@@ -288,7 +288,7 @@ export class PieChart extends BaseChart {
 	// TODO - Refactor
 	addDataPointEventListener() {
 		const self = this;
-		const { accessibility } = this.options;
+		const { accessibility, rtlSupport } = this.options;
 
 		this.innerWrap.selectAll("path")
 			.on("click", function(d) {
@@ -312,7 +312,7 @@ export class PieChart extends BaseChart {
 				const relativeMousePosition = mouse(self.holder as HTMLElement);
 				tooltipRef.style(
 					"left",
-					!Configuration.charts.rtlSupport ?
+					!rtlSupport ?
 						relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px" :
 							relativeMousePosition[0] - (tooltipRef.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px")
 					.style("top", relativeMousePosition[1] + "px");

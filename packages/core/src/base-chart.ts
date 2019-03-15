@@ -335,7 +335,7 @@ export class BaseChart {
 					containerWidth = this.holder.clientWidth;
 					containerHeight = this.holder.clientHeight;
 
-					selectAll(Configuration.charts.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip").style("display", "none");
+					selectAll(this.options.rtlSupportt ?  ".legend-tooltip-rtl" : ".legend-tooltip").style("display", "none");
 
 					this.hideTooltip();
 
@@ -487,7 +487,7 @@ export class BaseChart {
 	}
 
 	addLegend() {
-		if (this.container.select(Configuration.charts.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip").nodes().length > 0) {
+		if (this.container.select(this.options.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip").nodes().length > 0) {
 			return;
 		}
 
@@ -529,9 +529,9 @@ export class BaseChart {
 	}
 
 	positionLegend() {
-		if (this.container.select(Configuration.charts.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip")
+		if (this.container.select(this.options.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip")
 				.nodes().length > 0
-			&& this.container.select(Configuration.charts.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip")
+			&& this.container.select(this.options.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip")
 				.node().style.display === "block") { return; }
 
 		this.container.selectAll(".legend-btn").style("display", "inline-block");
@@ -543,7 +543,7 @@ export class BaseChart {
 			const legendWidth = containerWidth - svgWidth;
 			this.container.select(".legend").classed("right-legend", true)
 				.style("width", legendWidth + "px");
-		} else if (Configuration.charts.rtlSupport) {
+		} else if (this.options.rtlSupport) {
 			this.container.selectAll(".expand-btn-rtl").remove();
 			this.container.select(".legend-wrapper").style("height", 0);
 			const containerWidth = this.container.node().clientWidth;
@@ -555,7 +555,7 @@ export class BaseChart {
 		}
 
 		if (this.hasLegendExpandBtn()) {
-			if (Configuration.charts.rtlSupport) {
+			if (this.options.rtlSupport) {
 				this.container.select(".legend").classed("left-legend", false);
 			} else {
 				this.container.select(".legend").classed("right-legend", false);
@@ -614,7 +614,7 @@ export class BaseChart {
 
 	isLegendOnRight() {
 		return (
-			!Configuration.charts.rtlSupport &&
+			!this.options.rtlSupport &&
 				this.container.node().clientWidth > Configuration.charts.widthBreak &&
 					this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight
 
@@ -624,7 +624,7 @@ export class BaseChart {
 
 	isLegendOnLeft() {
 		return (
-			Configuration.charts.rtlSupport &&
+			this.options.rtlSupport &&
 				this.container.node().clientWidth > Configuration.charts.widthBreak &&
 					this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight
 		);
@@ -665,7 +665,7 @@ export class BaseChart {
 		const self = this;
 		const thisLegend = this.container.select(".legend");
 		thisLegend.append("div")
-			.attr("class", Configuration.charts.rtlSupport ? "expand-btn-rtl" : "expand-btn")
+			.attr("class", this.options.rtlSupport ? "expand-btn-rtl" : "expand-btn")
 			.style("cursor", "pointer")
 			.on("click", function() {
 				self.openLegendTooltip(this);
@@ -674,16 +674,16 @@ export class BaseChart {
 
 	// TODO - Refactor
 	openLegendTooltip(target) {
-		selectAll(Configuration.charts.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip").remove();
+		selectAll(this.options.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip").remove();
 		const mouseXPoint = mouse(this.container.node())[0];
 		const windowXPoint = event.x;
 		let tooltip;
-		if (this.container.select(Configuration.charts.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip").nodes().length > 0) {
-			tooltip = selectAll(Configuration.charts.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip").style("display", "block");
+		if (this.container.select(this.options.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip").nodes().length > 0) {
+			tooltip = selectAll(this.options.rtlSupport ?  ".legend-tooltip-rtl" : ".legend-tooltip").style("display", "block");
 			tooltip.select("arrow").remove();
 		} else {
 			tooltip = this.container.append("div")
-				.attr("class", Configuration.charts.rtlSupport ? "tooltip chart-tooltip legend-tooltip-rtl" : "tooltip chart-tooltip legend-tooltip")
+				.attr("class", this.options.rtlSupport ? "tooltip chart-tooltip legend-tooltip-rtl" : "tooltip chart-tooltip legend-tooltip")
 				.style("display", "block")
 				.style("top", (mouse(this.container.node())[1] - Configuration.legend.margin.top) + "px");
 			tooltip.append("p").text("Legend")
@@ -693,7 +693,7 @@ export class BaseChart {
 				.attr("font-size", Configuration.legend.fontSize);
 			Tools.addCloseBtn(tooltip, "md", "white")
 				.on("click", () => {
-					selectAll(Configuration.charts.rtlSupport ? ".legend-tooltip-rtl" : ".legend-tooltip").style("display", "none");
+					selectAll(this.options.rtlSupport ? ".legend-tooltip-rtl" : ".legend-tooltip").style("display", "none");
 				});
 
 			const activeLegendItems = this.getActiveLegendItems();
@@ -891,7 +891,7 @@ export class BaseChart {
 
 		// Draw tooltip
 		const tooltip = select(this.holder).append("div")
-			.attr("class", Configuration.charts.rtlSupport ? "tooltip-rtl chart-tooltip" : "tooltip chart-tooltip")
+			.attr("class", this.options.rtlSupport ? "tooltip-rtl chart-tooltip" : "tooltip chart-tooltip")
 			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
 
@@ -911,7 +911,7 @@ export class BaseChart {
 				"left",
 				mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
 			);
-		} else if (Configuration.charts.rtlSupport) {
+		} else if (this.options.rtlSupport) {
 			tooltip.style(
 				"left",
 				mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px");
