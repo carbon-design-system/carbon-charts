@@ -57,8 +57,7 @@ export interface BaseChartOptions {
 	/**
 	 * boolean to enable right-to-left mode
 	 */
-	rtlEnabled?: boolean;
-
+	rtl?: boolean;
 	/**
 	 * boolean to disable animations (enabled by default)
 	 */
@@ -330,6 +329,7 @@ export interface ScatterChartOptions extends AxisChartOptions {
  * options specific to line charts
  */
 const scatterOptions: ScatterChartOptions = Tools.merge({}, axisOptions, {
+	rtl: true,
 	points: {
 		// default point radius to 4
 		radius: 4

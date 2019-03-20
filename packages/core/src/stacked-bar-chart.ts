@@ -220,7 +220,7 @@ export class StackedBarChart extends BaseAxisChart {
 
 	addDataPointEventListener() {
 		const self = this;
-		const { accessibility, rtlEnabled } = this.options;
+		const { accessibility, rtl } = this.options;
 
 		this.svg.selectAll("rect")
 			.on("click", function(d) {
@@ -241,7 +241,7 @@ export class StackedBarChart extends BaseAxisChart {
 				const relativeMousePosition = mouse(self.holder as HTMLElement);
 				tooltipRef.style(
 					"left",
-					!rtlEnabled ?
+					!rtl ?
 						relativeMousePosition[0] - Configuration.tooltip.magicLeft2 + "px" :
 							relativeMousePosition[0] - (tooltipRef.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px")
 					.style("top", relativeMousePosition[1] + "px");

@@ -198,12 +198,12 @@ export class BaseAxisChart extends BaseChart {
 			this.x = xScale;
 		} else {
 			const { bar: margins } = Configuration.charts.margin;
-			const { scales } = this.options;
 
 			const chartSize = this.getChartSize();
 			const width = chartSize.width - margins.left - margins.right;
 
-			this.x = this.options.rtlEnabled ?  scaleBand().rangeRound([width, 0]) : scaleBand().rangeRound([0, width]);
+			//console.log(this.options.type,rtl);
+			this.x = this.options.rtl ?  scaleBand().rangeRound([width, 0]) : scaleBand().rangeRound([0, width]);
 			this.x.padding(Configuration.scales.x.padding);
 			this.x.domain(this.displayData.labels);
 		}
@@ -287,9 +287,14 @@ export class BaseAxisChart extends BaseChart {
 
 		// Align y axis title with y axis
 		yAxisTitleRef.attr("class", "y axis-label")
-		.attr("text-align", "center")
-		.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`)
-		.text(this.options.scales.y.title);
+		.attr("text-align", "center");
+
+		if (!this.options.rtl) {
+			yAxisTitleRef.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
+		} else {
+			yAxisTitleRef.attr("transform", `rotate(90) translate(${-yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
+		}
+		yAxisTitleRef.text(this.options.scales.y.title);
 	}
 
 	getYMax() {
@@ -353,10 +358,10 @@ export class BaseAxisChart extends BaseChart {
 	setYAxis(noAnimation?: boolean) {
 		const chartSize = this.getChartSize();
 
-		const { scales, rtlEnabled } = this.options;
+		const { scales, rtl } = this.options;
 		const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
-		const yAxis = rtlEnabled ? axisRight(this.y) : axisLeft(this.y);
+		const yAxis = rtl ? axisRight(this.y) : axisLeft(this.y);
 		yAxis.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks)
 			.tickSize(0)
 			.tickFormat(scales.y.formatter);
@@ -371,7 +376,7 @@ export class BaseAxisChart extends BaseChart {
 		if (yAxisRef.nodes().length > 0) {
 			yAxisRef.transition(t)
 				.attr("transform", function () {
-					if (rtlEnabled) {
+					if (rtl) {
 						return `translate(${chartSize.width}, 0)`;
 					} else { return `translate(0, 0)`; }
 				})
@@ -382,12 +387,12 @@ export class BaseAxisChart extends BaseChart {
 				.attr("y1", this.y(0))
 				.attr("y2", this.y(0))
 				.attr("x1", 0)
-				.attr("x2", this.options.rtlEnabled ? -chartSize.width : chartSize.width);
+				.attr("x2", this.options.rtl ? -chartSize.width : chartSize.width);
 		} else {
 			yAxisRef = this.innerWrap.append("g")
 				.attr("class", "y axis yAxes")
 				.attr("transform", function () {
-					if (rtlEnabled) {
+					if (rtl) {
 						return `translate(${chartSize.width}, 0)`;
 					} else { return `translate(0, 0)`; }
 				});
@@ -399,7 +404,7 @@ export class BaseAxisChart extends BaseChart {
 				.attr("y1", this.y(0))
 				.attr("y2", this.y(0))
 				.attr("x1", 0)
-				.attr("x2", this.options.rtlEnabled ? -chartSize.width : chartSize.width)
+				.attr("x2", this.options.rtl ? -chartSize.width : chartSize.width)
 				.attr("stroke", Configuration.scales.domain.color)
 				.attr("fill", Configuration.scales.domain.color)
 				.attr("stroke-width", Configuration.scales.domain.strokeWidth);
@@ -422,7 +427,7 @@ export class BaseAxisChart extends BaseChart {
 			};
 
 			// Align y axis title on the y axis
-			if (!rtlEnabled) {
+			if (!rtl) {
 				this.innerWrap.select(".axis-label.y")
 				.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
 			} else {
@@ -434,7 +439,7 @@ export class BaseAxisChart extends BaseChart {
 		Tools.moveToFront(horizontalLine);
 
 		if (scales.y2 && scales.y2.ticks.max) {
-			const secondaryYAxis = this.options.rtlEnabled ? axisLeft(this.y2) : axisRight(this.y2);
+			const secondaryYAxis = this.options.rtl ? axisLeft(this.y2) : axisRight(this.y2);
 
 			secondaryYAxis.ticks(scales.y2.numberOfTicks || Configuration.scales.y2.numberOfTicks)
 				.tickSize(0)
@@ -445,7 +450,7 @@ export class BaseAxisChart extends BaseChart {
 			if (secondaryYAxisRef.nodes().length > 0) {
 				secondaryYAxisRef.transition(t)
 					.attr("transform", function () {
-						if (rtlEnabled) {
+						if (rtl) {
 							return `translate(0, 0)`;
 						} else { return `translate(${chartSize.width}, 0)`; }
 					})
@@ -456,7 +461,7 @@ export class BaseAxisChart extends BaseChart {
 				this.innerWrap.append("g")
 					.attr("class", "y2 axis yAxes")
 					.attr("transform", function () {
-						if (rtlEnabled) {
+						if (rtl) {
 							return `translate(0, 0)`;
 						} else {
 							return `translate(${chartSize.width}, 0)`;

@@ -100,7 +100,7 @@ export class BarChart extends BaseAxisChart {
 		if (xScale) {
 			this.x = xScale;
 		} else {
-			this.x = this.options.rtlEnabled ?  scaleBand().rangeRound([width, 0]) : scaleBand().rangeRound([0, width]);
+			this.x = this.options.rtl ?  scaleBand().rangeRound([width, 0]) : scaleBand().rangeRound([0, width]);
 			this.x.padding(Configuration.bars.spacing.datasets);
 			this.x.domain(this.displayData.labels);
 		}
@@ -296,7 +296,7 @@ export class BarChart extends BaseAxisChart {
 
 	addDataPointEventListener() {
 		const self = this;
-		const { accessibility, rtlEnabled } = this.options;
+		const { accessibility, rtl } = this.options;
 
 		this.svg.selectAll("rect.bar")
 			.on("click", function(d) {
@@ -317,7 +317,7 @@ export class BarChart extends BaseAxisChart {
 				const relativeMousePosition = mouse(self.holder as HTMLElement);
 				tooltipRef.style(
 					"left",
-					!rtlEnabled ?
+					!rtl ?
 						relativeMousePosition[0] - Configuration.tooltip.magicLeft2 + "px" :
 							relativeMousePosition[0] - (tooltipRef.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px")
 					.style("top", relativeMousePosition[1] + "px");

@@ -72,5 +72,5 @@ export const comboOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	rtlEnabled: true
+	rtl: true
 };

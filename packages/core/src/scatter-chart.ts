@@ -13,6 +13,7 @@ export class ScatterChart extends BaseAxisChart {
 		super(holder, configs);
 
 		this.options.type = ChartType.SCATTER;
+		//console.log(this.options.rtl);
 	}
 
 	draw() {
@@ -21,7 +22,9 @@ export class ScatterChart extends BaseAxisChart {
 
 		const { line: margins } = Configuration.charts.margin;
 
-		this.innerWrap.style("width", "100%").style("height", "100%");
+		console.log(this.options.type,this.options.rtl);
+
+		//this.innerWrap.style("width", "100%").style("height", "100%");
 
 		this.innerWrap.attr("transform", `translate(${margins.left}, ${margins.top})`);
 
@@ -191,7 +194,7 @@ export class ScatterChart extends BaseAxisChart {
 
 	addDataPointEventListener() {
 		const self = this;
-		const { accessibility, rtlEnabled } = this.options;
+		const { accessibility, rtl } = this.options;
 
 		this.svg.selectAll("circle.dot")
 			.on("click", function(d) {
@@ -212,7 +215,7 @@ export class ScatterChart extends BaseAxisChart {
 				const relativeMousePosition = mouse(self.holder as HTMLElement);
 				tooltipRef.style(
 					"left",
-					!rtlEnabled ?
+					!rtl ?
 						relativeMousePosition[0] - Configuration.tooltip.magicLeft2 + "px" :
 							relativeMousePosition[0] - (tooltipRef.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px")
 					.style("top", relativeMousePosition[1] + "px");

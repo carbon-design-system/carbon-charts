@@ -33,7 +33,7 @@ export class LineChart extends ScatterChart {
 
 		const { line: margins } = Configuration.charts.margin;
 
-		this.innerWrap.style("width", "100%").style("height", "100%");
+		//this.innerWrap.style("width", "100%").style("height", "100%");
 
 		this.innerWrap.attr("transform", `translate(${margins.left}, ${margins.top})`);
 

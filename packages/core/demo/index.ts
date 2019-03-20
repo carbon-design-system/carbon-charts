@@ -61,6 +61,7 @@ const {
 	lineData,
 	lineOptions,
 	scatterData,
+	scatterOptions,
 	// Combo
 	comboData,
 	comboOptions

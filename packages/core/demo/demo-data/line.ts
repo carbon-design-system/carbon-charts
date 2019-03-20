@@ -63,7 +63,7 @@ export const curvedLineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	rtlEnabled: true
+	rtl: true
 };
 
 
@@ -138,7 +138,7 @@ export const lineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	rtlEnabled: true
+	rtl: true
 };
 
 export const scatterData = {
@@ -178,4 +178,25 @@ export const scatterData = {
 			]
 		}
 	]
-}
+};
+
+export const scatterOptions = {
+	accessibility: false,
+	scales: {
+		x: {
+			title: "2018 Annual Sales Figures",
+		},
+		y: {
+			title: "Dollars (CAD)",
+			yMaxAdjuster: yMax => yMax * 1.2,
+			yMinAdjuster: yMin => yMin * 1.2,
+			formatter: axisValue => `${axisValue / 1000}k`
+		}
+	},
+	points: {
+		radius: 4
+	},
+	legendClickable: true,
+	containerResizable: true,
+	rtl: true
+};

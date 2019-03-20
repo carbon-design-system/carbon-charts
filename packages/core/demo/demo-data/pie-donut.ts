@@ -4,7 +4,7 @@ export const pieOptions = {
 	accessibility: false,
 	legendClickable: true,
 	containerResizable: true,
-	rtlEnabled: true,
+	rtl: true,
 	colors
 };
 
@@ -12,7 +12,7 @@ export const donutOptions = {
 	accessibility: false,
 	legendClickable: true,
 	containerResizable: true,
-	rtlEnabled: true,
+	rtl: true,
 	colors,
 	center: {
 		label: "Products",
