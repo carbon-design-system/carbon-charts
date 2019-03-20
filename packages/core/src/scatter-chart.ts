@@ -13,7 +13,6 @@ export class ScatterChart extends BaseAxisChart {
 		super(holder, configs);
 
 		this.options.type = ChartType.SCATTER;
-		//console.log(this.options.rtl);
 	}
 
 	draw() {
@@ -21,10 +20,6 @@ export class ScatterChart extends BaseAxisChart {
 			.style("height", "100%");
 
 		const { line: margins } = Configuration.charts.margin;
-
-		console.log(this.options.type,this.options.rtl);
-
-		//this.innerWrap.style("width", "100%").style("height", "100%");
 
 		this.innerWrap.attr("transform", `translate(${margins.left}, ${margins.top})`);
 

@@ -202,8 +202,7 @@ export class BaseAxisChart extends BaseChart {
 			const chartSize = this.getChartSize();
 			const width = chartSize.width - margins.left - margins.right;
 
-			//console.log(this.options.type,rtl);
-			this.x = this.options.rtl ?  scaleBand().rangeRound([width, 0]) : scaleBand().rangeRound([0, width]);
+			this.x = this.options.rtl ? scaleBand().rangeRound([width, 0]) : scaleBand().rangeRound([0, width]);
 			this.x.padding(Configuration.scales.x.padding);
 			this.x.domain(this.displayData.labels);
 		}
