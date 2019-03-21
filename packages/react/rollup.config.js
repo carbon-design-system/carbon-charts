@@ -5,7 +5,10 @@ module.exports = {
     output: {
         file: "./dist/bundle/bundle.js",
 		format: "umd",
-		globals: "charts"
+		globals: {
+			"react": "React",
+			"@carbon/charts": "charts"
+		}
     },
     plugins: [
         babel({
@@ -13,5 +16,5 @@ module.exports = {
             plugins: ["external-helpers"]
         })
 	],
-	external: ["react", "react-dom"]
+	external: ["react", "react-dom", "@carbon/charts"]
 };

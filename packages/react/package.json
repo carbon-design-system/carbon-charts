@@ -4,7 +4,7 @@
 	"description": "Carbon charting components for React",
 	"main": "index.js",
 	"files": [
-		"dist",
+		"bundle",
 		"index.js",
 		"CHANGELOG.md",
 		"README.md"
