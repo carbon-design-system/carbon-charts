@@ -36,7 +36,7 @@
   "devDependencies": {
     "@types/d3": "4.11.0",
     "@types/jasmine": "2.8.7",
-    "@types/node": "10.0.8",
+    "@types/node": "11.11.4",
     "babel-polyfill": "6.26.0",
     "copy-webpack-plugin": "4.5.2",
     "css-loader": "0.28.7",
