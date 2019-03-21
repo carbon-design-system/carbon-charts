@@ -4,13 +4,14 @@
   "description": "Carbon charting components for Vue",
   "main": "index.js",
   "files": [
-    "dist",
-    "index.js",
+    "charts-view.common.js",
+    "charts-view.umd.js",
+    "charts-view.umd.min.js",
     "CHANGELOG.md",
     "README.md"
   ],
   "scripts": {
-    "build": "vue-cli-service build --target lib --name charts-vue ./src/index.js --no-clean",
+    "build": "bash build.sh",
     "lint": "vue-cli-service lint ./src/index.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o storybook-dist",
