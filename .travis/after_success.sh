@@ -3,6 +3,9 @@ set -e
 
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
+# This script builds all package bundles (for NPM) & demos (for gh-pages)
+./scripts/build-packages-and-demos.sh
+
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo "We are in a pull request, not releasing"
   exit 0
@@ -23,9 +26,6 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
   git config credential.helper "store --file=.git/credentials"
   echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
 
-  # This script builds all package bundles (for NPM) & demos (for gh-pages)
-  ./scripts/build-packages-and-demos.sh
-  
   # Perform git & npm publish
   git update-index --assume-unchanged `git diff --name-only`
 
