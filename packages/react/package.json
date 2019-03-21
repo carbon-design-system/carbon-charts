@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "0.11.0",
+	"version": "0.11.2",
 	"description": "Carbon charting components for React",
 	"main": "index.js",
 	"files": [
@@ -27,9 +27,11 @@
 	},
 	"homepage": "https://github.com/IBM/carbon-charts#readme",
 	"dependencies": {
-		"@carbon/charts": "^0.11.0",
-		"react": "16.6.3",
-		"react-dom": "16.6.3"
+		"@carbon/charts": "^0.11.0"
+	},
+	"peerDependencies": {
+		"react": "^16.6.3",
+		"react-dom": "^16.6.3"
 	},
 	"devDependencies": {
 		"@storybook/addon-options": "4.0.7",
@@ -47,6 +49,8 @@
 		"css-loader": "0.28.7",
 		"img-loader": "2.0.0",
 		"node-sass": "4.10.0",
+		"react": "16.6.3",
+		"react-dom": "16.6.3",
 		"rollup": "0.67.3",
 		"rollup-plugin-babel": "3.0.4",
 		"rollup-plugin-commonjs": "9.2.0",

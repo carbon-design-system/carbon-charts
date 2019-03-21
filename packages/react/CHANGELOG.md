@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.2](https://github.com/IBM/carbon-charts/compare/v0.11.1...v0.11.2) (2019-03-20)
+
+
+### Bug Fixes
+
+* **react:** Move react and react-dom to peerDependencies ([#217](https://github.com/IBM/carbon-charts/issues/217)) ([e1d0b36](https://github.com/IBM/carbon-charts/commit/e1d0b36))
+
+
+
+
+
 # [0.11.0](https://github.com/IBM/carbon-charts/compare/v0.10.5...v0.11.0) (2019-03-12)
 
 **Note:** Version bump only for package @carbon/charts-react
