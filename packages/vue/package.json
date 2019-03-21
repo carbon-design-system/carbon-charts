@@ -4,9 +4,9 @@
   "description": "Carbon charting components for Vue",
   "main": "index.js",
   "files": [
-    "charts-view.common.js",
-    "charts-view.umd.js",
-    "charts-view.umd.min.js",
+    "charts-vue.common.js",
+    "charts-vue.umd.js",
+    "charts-vue.umd.min.js",
     "CHANGELOG.md",
     "README.md"
   ],
@@ -14,7 +14,7 @@
     "build": "bash build.sh",
     "lint": "vue-cli-service lint ./src/index.js",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o storybook-dist",
+    "demo:build": "build-storybook -o demo/bundle/vue",
     "ci-check": "yarn format:diff",
     "format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
     "format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\""

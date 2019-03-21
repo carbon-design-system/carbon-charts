@@ -4,7 +4,7 @@ set -e
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
 # This script builds all package bundles (for NPM) & demos (for gh-pages)
-./scripts/build-packages-and-demos.sh
+npm run build-all
 
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo "We are in a pull request, not releasing"

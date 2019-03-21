@@ -14,7 +14,7 @@
 		"start": "npm run storybook",
 		"build": "bash build.sh",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
-		"build-storybook": "build-storybook -o storybook-dist"
+		"demo:build": "build-storybook -o demo/bundle/react"
 	},
 	"repository": {
 		"type": "git",
