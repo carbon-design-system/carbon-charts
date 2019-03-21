@@ -12,7 +12,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "npm run storybook",
-		"build": "rollup -c",
+		"build": "bash build.sh",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
 		"build-storybook": "build-storybook -o storybook-dist"
 	},

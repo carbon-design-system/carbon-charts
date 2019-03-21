@@ -1,35 +1,36 @@
-# Generate all assets
-# needed for push to gh-page
+# README:
+# each package should build a dist folder that contains everything needed to publish that package
+# including:
+#  - package.json
+#  - .js files and .d.ts files (no raw .ts files!)
+#  - README.md
+#  - and any specialty files
+
+# Generate all assets needed for push to gh-pages
 mkdir pages
 touch pages/.nojekyll
 # echo "charts.carbondesignsystem.com" > pages/CNAME
 
-# Build Core demos and copy to `pages` directory
+# Core build
 cd packages/core
 npm run build
 npm run demo:build
 typedoc --out ./demo/bundle/documentation ./src/index.ts
 cp -a demo/bundle/. ../../pages
 
-# Build Angular demos and copy to `pages` directory
+# Angular build
 cd ../angular
-# Build angular demos
+npm run build
 npm run build-storybook
 cp -a storybook-dist/. ../../pages/angular
-# Build angular bundle for release
-npm run build
-mv dist ../charts-angular-dist
-cd ..
-rm -rf angular
-mv charts-angular-dist angular
 
-# Build React demos
-cd react
+# React build
+cd ../react
 npm run build
 npm run build-storybook
 cp -a storybook-dist/. ../../pages/react
 
-# Build Vue demos
+# Vue build
 cd ../vue
 npm run build
 npm run build-storybook

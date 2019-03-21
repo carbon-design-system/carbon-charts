@@ -25,13 +25,13 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
 
   # This script builds all package bundles (for NPM) & demos (for gh-pages)
   ./scripts/build-packages-and-demos.sh
-  
+
   # Perform git & npm publish
   git update-index --assume-unchanged `git diff --name-only`
 
-  lerna publish --conventional-commits --yes
+  lerna publish --conventional-commits --yes --contents dist
 fi
 
 if [[ echo $TRAVIS_BRANCH | grep "^v[0-9]\+\.[0-9]\+\.[0-9]\+\$" ]]; then
-  lerna publish from-git
+  lerna publish from-git --contents dist
 fi
