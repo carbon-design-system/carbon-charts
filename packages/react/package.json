@@ -3,18 +3,13 @@
 	"version": "0.11.4",
 	"description": "Carbon charting components for React",
 	"main": "index.js",
-	"files": [
-		"bundle",
-		"index.js",
-		"CHANGELOG.md",
-		"README.md"
-	],
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "npm run storybook",
 		"build": "bash build.sh",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
-		"demo:build": "build-storybook -o demo/bundle/react"
+		"demo:build": "build-storybook -o demo/bundle/react",
+		"clean": "rm -rf dist demo/bundle"
 	},
 	"repository": {
 		"type": "git",
@@ -34,9 +29,9 @@
 		"react-dom": "^16.6.3"
 	},
 	"devDependencies": {
-		"@storybook/addon-options": "4.0.7",
-		"@storybook/react": "4.0.7",
-		"@storybook/storybook-deployer": "2.3.0",
+		"@storybook/addon-options": "5.0.5",
+		"@storybook/react": "5.0.5",
+		"@storybook/storybook-deployer": "2.8.1",
 		"babel-cli": "6.26.0",
 		"babel-core": "6.26.0",
 		"babel-loader": "7.1.2",
