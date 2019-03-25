@@ -12,11 +12,13 @@
 	"license": "Apache-2.0",
 	"scripts": {
 		"postinstall": "lerna bootstrap --hoist --no-ci",
+		"clean": "lerna clean",
 		"commit": "git-cz",
 		"test": "lerna run test",
 		"lint": "lerna run lint",
 		"contributors:add": "all-contributors add",
-		"contributors:generate": "all-contributors generate"
+		"contributors:generate": "all-contributors generate",
+		"build-all": "bash scripts/build-packages-and-demos.sh"
 	},
 	"husky": {
 		"hooks": {

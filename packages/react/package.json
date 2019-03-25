@@ -4,7 +4,7 @@
 	"description": "Carbon charting components for React",
 	"main": "index.js",
 	"files": [
-		"dist",
+		"bundle",
 		"index.js",
 		"CHANGELOG.md",
 		"README.md"
@@ -12,9 +12,9 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "npm run storybook",
-		"build": "rollup -c",
+		"build": "bash build.sh",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
-		"build-storybook": "build-storybook -o storybook-dist"
+		"demo:build": "build-storybook -o demo/bundle/react"
 	},
 	"repository": {
 		"type": "git",
