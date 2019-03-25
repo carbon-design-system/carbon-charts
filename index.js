@@ -800,8 +800,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/index */ "./src/index.ts");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.scss */ "./demo/index.scss");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _src_style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../src/style.scss */ "./src/style.scss");
+/* harmony import */ var _src_style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_src_style_scss__WEBPACK_IMPORTED_MODULE_2__);
 
 // Styles
+
 
 //
 // Experimental Switch Toggle
@@ -3733,8 +3736,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScatterChart", function() { return _scatter_chart__WEBPACK_IMPORTED_MODULE_7__["ScatterChart"]; });
 
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_9__);
 __webpack_require__(/*! ./polyfills */ "./src/polyfills.ts");
 
 
@@ -3746,7 +3747,6 @@ __webpack_require__(/*! ./polyfills */ "./src/polyfills.ts");
 
 
 var defaultColors = _configuration__WEBPACK_IMPORTED_MODULE_8__["options"].BASE.colors;
-
 
 
 
@@ -4283,15 +4283,15 @@ function arcTween(a, arcFunc) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {(function () {
-    if (typeof window["CustomEvent"] === "function")
+    if (typeof window["CustomEvent"] === "function") {
         return false;
+    }
     function CustomEvent(event, params) {
         params = params || { bubbles: false, cancelable: false, detail: undefined };
         var evt = document.createEvent("CustomEvent");
         evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
         return evt;
     }
-    ;
     CustomEvent.prototype = window["Event"].prototype;
     window["CustomEvent"] = CustomEvent;
 })();
@@ -4302,7 +4302,6 @@ function idempotentBabelPolyfill() {
     }
     return null;
 }
-;
 idempotentBabelPolyfill();
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/global.js */ "../../node_modules/webpack/buildin/global.js")))
