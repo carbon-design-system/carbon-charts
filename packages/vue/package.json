@@ -35,6 +35,9 @@
     "prettier": "1.16.4",
     "vue-template-compiler": "2.5.21"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "lint-staged": {
     "*.{scss,css,js,md,vue}": [
       "yarn format",
