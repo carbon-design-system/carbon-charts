@@ -24,7 +24,8 @@
   "license": "Apache-2.0",
   "dependencies": {
     "d3": "4.13.0",
-    "resize-observer-polyfill": "1.5.0"
+	"resize-observer-polyfill": "1.5.0",
+	"babel-polyfill": "6.26.0"
   },
   "peerDependencies": {
     "d3": ">=4.11.0 <=5.7.0"
