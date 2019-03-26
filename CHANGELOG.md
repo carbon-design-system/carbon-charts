@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.6](https://github.com/IBM/carbon-charts/compare/v0.11.5...v0.11.6) (2019-03-26)
+
+
+### Bug Fixes
+
+* **build:** add npm credentials ([#226](https://github.com/IBM/carbon-charts/issues/226)) ([93e0ff7](https://github.com/IBM/carbon-charts/commit/93e0ff7))
+* **core:** export patterns as strings of svgs ([#227](https://github.com/IBM/carbon-charts/issues/227)) ([14391ae](https://github.com/IBM/carbon-charts/commit/14391ae))
+
+
+
+
+
 ## [0.11.5](https://github.com/IBM/carbon-charts/compare/v0.11.4...v0.11.5) (2019-03-26)
 
 
