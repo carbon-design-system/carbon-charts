@@ -16,11 +16,15 @@ import { ChartData } from "./configuration";
 //
 const experimentalSwitchWrapper = document.querySelector("fieldset.experimental-switch");
 const experimentalCheckbox = (experimentalSwitchWrapper.querySelector("input#toggleInput") as HTMLInputElement);
+const rtlSwitchWrapper = document.querySelector("fieldset.rtl-switch");
+const rtlCheckbox = (rtlSwitchWrapper.querySelector("input#toggleRTLInput") as HTMLInputElement);
 const { location } = window;
 
 if (location) {
 	window["isExperimental"] = location.search.replace("?experimental=", "") === "true";
+	window["isRTL"] = location.search.replace("?rtl=", "") === "true";
 	experimentalCheckbox.checked = window["isExperimental"];
+	rtlCheckbox.checked = window["isRTL"];
 
 	experimentalSwitchWrapper.querySelector("label.bx--toggle__label").addEventListener("click", () => {
 		// Need the setTimeout
@@ -35,6 +39,22 @@ if (location) {
 			// Since we're using the location origin
 			// And since we don't use any other query params
 			location.href = `${location.origin}${location.pathname}?experimental=${experimentalMode}`;
+		});
+	});
+
+	rtlSwitchWrapper.querySelector("label.bx--toggle__label").addEventListener("click", () => {
+		// Need the setTimeout
+		// Here since carbon toggle
+		// Does not provide a callback
+		// Therefore we wait until the change in toggle
+		// Status takes effect
+		setTimeout(() => {
+			const rtlMode = rtlCheckbox.checked;
+
+			// It's not necessary to process the location pathname
+			// Since we're using the location origin
+			// And since we don't use any other query params
+			location.href = `${location.origin}${location.pathname}?rtl=${rtlMode}`;
 		});
 	});
 } else {

@@ -1,10 +1,16 @@
 import { colors } from "./colors";
+import {
+	demoLabels,
+	demoDatasetLabels,
+	demoYAxisTitle,
+	demoXAxisTitle
+} from "./commons";
 
 export const curvedLineData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	labels: demoLabels,
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: demoDatasetLabels[0],
 			backgroundColors: [colors[0]],
 			data: [
 				65000,
@@ -15,7 +21,7 @@ export const curvedLineData = {
 			]
 		},
 		{
-			label: "Dataset 2",
+			label: demoDatasetLabels[1],
 			backgroundColors: [colors[1]],
 			data: [
 				80000,
@@ -26,7 +32,7 @@ export const curvedLineData = {
 			]
 		},
 		{
-			label: "Dataset 3",
+			label: demoDatasetLabels[2],
 			backgroundColors: [colors[2]],
 			data: [
 				12312,
@@ -43,10 +49,10 @@ export const curvedLineOptions = {
 	accessibility: false,
 	scales: {
 		x: {
-			title: "2018 Annual Sales Figures",
+			title: demoXAxisTitle,
 		},
 		y: {
-			title: "Dollars (CAD)",
+			title: demoYAxisTitle,
 			yMaxAdjuster: yMax => yMax * 1.2,
 			yMinAdjuster: yMin => yMin * 1.2,
 			formatter: axisValue => `${axisValue / 1000}k`
@@ -68,10 +74,10 @@ export const curvedLineOptions = {
 
 
 export const lineData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	labels: demoLabels,
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: demoDatasetLabels[0],
 			backgroundColors: [colors[0]],
 			data: [
 				2000,
@@ -82,7 +88,7 @@ export const lineData = {
 			]
 		},
 		{
-			label: "Dataset 2",
+			label: demoDatasetLabels[1],
 			backgroundColors: [colors[1]],
 			data: [
 				0,
@@ -93,7 +99,7 @@ export const lineData = {
 			]
 		},
 		{
-			label: "Dataset 3",
+			label: demoDatasetLabels[2],
 			backgroundColors: [colors[2]],
 			data: [
 				0,
@@ -110,10 +116,10 @@ export const lineOptions = {
 	accessibility: false,
 	scales: {
 		x: {
-			title: "2018 Annual Sales Figures",
+			title: demoXAxisTitle,
 		},
 		y: {
-			title: "Dollars (CAD)",
+			title: demoYAxisTitle,
 			yMaxAdjuster: yMax => yMax * 1.2,
 			yMinAdjuster: yMin => yMin * 1.2,
 			formatter: axisValue => `${axisValue / 1000}k`,
@@ -142,10 +148,10 @@ export const lineOptions = {
 };
 
 export const scatterData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	labels: demoLabels,
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: demoDatasetLabels[0],
 			backgroundColors: [colors[0]],
 			data: [
 				32100,
@@ -156,7 +162,7 @@ export const scatterData = {
 			]
 		},
 		{
-			label: "Dataset 2",
+			label: demoDatasetLabels[1],
 			backgroundColors: [colors[1]],
 			data: [
 				34200,
@@ -167,7 +173,7 @@ export const scatterData = {
 			]
 		},
 		{
-			label: "Dataset 3",
+			label: demoDatasetLabels[2],
 			backgroundColors: [colors[2]],
 			data: [
 				41200,
@@ -184,10 +190,10 @@ export const scatterOptions = {
 	accessibility: false,
 	scales: {
 		x: {
-			title: "2018 Annual Sales Figures",
+			title: demoXAxisTitle,
 		},
 		y: {
-			title: "Dollars (CAD)",
+			title: demoYAxisTitle,
 			yMaxAdjuster: yMax => yMax * 1.2,
 			yMinAdjuster: yMin => yMin * 1.2,
 			formatter: axisValue => `${axisValue / 1000}k`

@@ -1,10 +1,16 @@
 import { colors } from "./colors";
+import {
+	demoLabels,
+	demoDatasetLabels,
+	demoYAxisTitle,
+	demoXAxisTitle
+} from "./commons";
 
 export const groupedBarData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	labels: demoLabels,
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: demoDatasetLabels[0],
 			backgroundColors: [colors[0]],
 			data: [
 				65000,
@@ -15,7 +21,7 @@ export const groupedBarData = {
 			]
 		},
 		{
-			label: "Dataset 2",
+			label: demoDatasetLabels[1],
 			backgroundColors: [colors[1]],
 			data: [
 				32432,
@@ -26,7 +32,7 @@ export const groupedBarData = {
 			]
 		},
 		{
-			label: "Dataset 3",
+			label: demoDatasetLabels[2],
 			backgroundColors: [colors[2]],
 			data: [
 				-12312,
@@ -37,7 +43,7 @@ export const groupedBarData = {
 			]
 		},
 		{
-			label: "Dataset 4",
+			label: demoDatasetLabels[3],
 			backgroundColors: [colors[3]],
 			data: [
 				-32423,
@@ -53,10 +59,10 @@ export const groupedBarData = {
 export const groupedBarOptions = {
 	scales: {
 		x: {
-			title: "2018 Annual Sales Figures",
+			title: demoXAxisTitle,
 		},
 		y: {
-			title: "Dollars (CAD)",
+			title: demoYAxisTitle,
 			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 		},
@@ -78,10 +84,10 @@ export const groupedBarOptions = {
 
 // Simple bar
 export const simpleBarData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	labels: demoLabels,
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: demoDatasetLabels[0],
 			backgroundColors: colors,
 			data: [
 				65000,
@@ -98,10 +104,10 @@ export const simpleBarOptions = {
 	accessibility: false,
 	scales: {
 		x: {
-			title: "2018 Annual Sales Figures",
+			title: demoXAxisTitle,
 		},
 		y: {
-			title: "Dollars (CAD)",
+			title: demoYAxisTitle,
 			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 			stacked: false
@@ -117,10 +123,10 @@ export const simpleBarOptions = {
 
 // Stacked bar
 export const stackedBarData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	labels: demoLabels,
 	datasets: [
 		{
-			label: "Dataset 1",
+			label: demoDatasetLabels[0],
 			backgroundColors: [colors[0]],
 			data: [
 				65000,
@@ -131,7 +137,7 @@ export const stackedBarData = {
 			]
 		},
 		{
-			label: "Dataset 2",
+			label: demoDatasetLabels[1],
 			backgroundColors: [colors[1]],
 			data: [
 				32432,
@@ -142,7 +148,7 @@ export const stackedBarData = {
 			]
 		},
 		{
-			label: "Dataset 3",
+			label: demoDatasetLabels[2],
 			backgroundColors: [colors[2]],
 			data: [
 				12312,
@@ -153,7 +159,7 @@ export const stackedBarData = {
 			]
 		},
 		{
-			label: "Dataset 4",
+			label: demoDatasetLabels[3],
 			backgroundColors: [colors[3]],
 			data: [
 				32423,
@@ -170,10 +176,10 @@ export const stackedBarOptions = {
 	accessibility: false,
 	scales: {
 		x: {
-			title: "2018 Annual Sales Figures",
+			title: demoXAxisTitle,
 		},
 		y: {
-			title: "Dollars (CAD)",
+			title: demoYAxisTitle,
 			formatter: axisValue => `${axisValue / 1000}k`,
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 			stacked: true
