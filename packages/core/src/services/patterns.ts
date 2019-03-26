@@ -10,7 +10,6 @@ const selectors = {
 
 // Helper functions
 const trimSVG = (htmlString: string) => {
-	console.log(htmlString);
 	// Remove the CSS style block
 	const htmlBeforeStyleBlock = htmlString.substring(0, htmlString.indexOf("<style type=\"text/css\">"));
 	const htmlAfterStyleBlock = htmlString.substring(htmlString.indexOf("</style>") + "</style>".length);
