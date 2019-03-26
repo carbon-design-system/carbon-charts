@@ -8,6 +8,14 @@ npm run build-all
 # adding package-lock.json to every package after npm install
 rm -rf **/package-lock.json
 
+# Git user info configs
+git config --global user.email "carbon@us.ibm.com"
+git config --global user.name "carbon-bot"
+
+# Add github token to git credentials
+git config credential.helper "store --file=.git/credentials"
+echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
+
 # checkout master to get out of detached HEAD state
 git checkout master
 
