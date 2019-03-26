@@ -4,20 +4,26 @@ export default `<?xml version="1.0" encoding="utf-8"?>
 	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:none;}
-	.st1{fill:#231F20;}
-	.st2{fill:url(#Triangle);}
+	.st1{fill:url(#diamond);}
 </style>
-<pattern  width="100" height="100" patternUnits="userSpaceOnUse" id="Triangle" viewBox="15 -112.99 100 100" style="overflow:visible;">
-	<g id="XMLID_10_">
-		<polygon id="XMLID_23_" class="st0" points="15,-112.99 115,-112.99 115,-12.99 15,-12.99 		"/>
-		<polygon id="XMLID_21_" class="st1" points="100,-25 115,-50.981 130,-25 		"/>
-		<polygon id="XMLID_20_" class="st1" points="50,0 65,-25.981 80,0 		"/>
-		<polygon id="XMLID_19_" class="st1" points="0,-25 15,-50.981 30,-25 		"/>
-		<polygon id="XMLID_15_" class="st1" points="100,-75 115,-100.981 130,-75 		"/>
-		<polygon id="XMLID_14_" class="st1" points="50,-50 65,-75.981 80,-50 		"/>
-		<polygon id="XMLID_13_" class="st1" points="0,-75 15,-100.981 30,-75 		"/>
-		<polygon id="XMLID_12_" class="st1" points="50,-100 65,-125.981 80,-100 		"/>
+<pattern  width="100" height="100" patternUnits="userSpaceOnUse" id="diamond" viewBox="21.213 -121.213 100 100" style="overflow:visible;">
+	<g id="XMLID_15_">
+		<polygon id="XMLID_52_" class="st0" points="21.213,-121.213 121.213,-121.213 121.213,-21.213 21.213,-21.213 		"/>
+		<path id="XMLID_49_" d="M96.213-28.284l7.071,7.071l-7.071,7.071l-7.071-7.071L96.213-28.284 M96.213-42.427L75-21.213L96.213,0
+			l21.213-21.213L96.213-42.427L96.213-42.427z"/>
+		<path id="XMLID_40_" d="M46.213-28.284l7.071,7.071l-7.071,7.071l-7.071-7.071L46.213-28.284 M46.213-42.427L25-21.213L46.213,0
+			l21.213-21.213L46.213-42.427L46.213-42.427z"/>
+		<path id="XMLID_37_" d="M121.213-78.284l7.071,7.071l-7.071,7.071l-7.071-7.071L121.213-78.284 M121.213-92.427L100-71.213
+			L121.213-50l21.213-21.213L121.213-92.427L121.213-92.427z"/>
+		<path id="XMLID_28_" d="M71.213-78.284l7.071,7.071l-7.071,7.071l-7.071-7.071L71.213-78.284 M71.213-92.427L50-71.213L71.213-50
+			l21.213-21.213L71.213-92.427L71.213-92.427z"/>
+		<path id="XMLID_25_" d="M21.213-78.284l7.071,7.071l-7.071,7.071l-7.071-7.071L21.213-78.284 M21.213-92.427L0-71.213L21.213-50
+			l21.213-21.213L21.213-92.427L21.213-92.427z"/>
+		<path id="XMLID_22_" d="M96.213-128.284l7.071,7.071l-7.071,7.071l-7.071-7.071L96.213-128.284 M96.213-142.427L75-121.213
+			L96.213-100l21.213-21.213L96.213-142.427L96.213-142.427z"/>
+		<path id="XMLID_16_" d="M46.213-128.284l7.071,7.071l-7.071,7.071l-7.071-7.071L46.213-128.284 M46.213-142.427L25-121.213
+			L46.213-100l21.213-21.213L46.213-142.427L46.213-142.427z"/>
 	</g>
 </pattern>
-<rect id="XMLID_1_" class="st2" width="100" height="100"/>
+<rect id="XMLID_1_" class="st1" width="100" height="100"/>
 </svg>`;

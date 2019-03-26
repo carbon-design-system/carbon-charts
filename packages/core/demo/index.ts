@@ -10,7 +10,9 @@ import {
 // Styles
 import "./index.scss";
 import "./../src/style.scss";
-import { ChartData } from "./configuration";
+
+// Interfaces
+import { ChartData } from "./../src/configuration";
 
 //
 // Experimental Switch Toggle
