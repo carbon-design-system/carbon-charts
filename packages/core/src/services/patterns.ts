@@ -10,6 +10,7 @@ const selectors = {
 
 // Helper functions
 const trimSVG = (htmlString: string) => {
+	console.log(htmlString);
 	// Remove the CSS style block
 	const htmlBeforeStyleBlock = htmlString.substring(0, htmlString.indexOf("<style type=\"text/css\">"));
 	const htmlAfterStyleBlock = htmlString.substring(htmlString.indexOf("</style>") + "</style>".length);
@@ -67,7 +68,7 @@ export default class PatternsService {
 				const id = ++this.idAccum;
 
 				if (!datasetPattern || legendType === Configuration.legend.basedOn.LABELS) {
-					datasetPattern = PATTERN_SVGS[this.patternAccum++];
+					datasetPattern = PATTERN_SVGS[this.patternAccum++].default;
 				}
 
 				// Create SVG container div

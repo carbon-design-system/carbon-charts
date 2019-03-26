@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+export default `<?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
@@ -7,7 +7,8 @@
 	.st1{fill:#231F20;}
 	.st2{fill:url(#lines_-_left_to_right);}
 </style>
-<pattern  width="50" height="50" patternUnits="userSpaceOnUse" id="lines_-_left_to_right" viewBox="101.277 -147.008 50 50" style="overflow:visible;">
+<pattern  width="50" height="50"
+patternUnits="userSpaceOnUse" id="lines_-_left_to_right" viewBox="101.277 -147.008 50 50" style="overflow:visible;">
 	<g id="XMLID_8_">
 		<polygon id="XMLID_32_" class="st0" points="101.277,-147.008 151.277,-147.008 151.277,-97.008 101.277,-97.008 		"/>
 		<polygon id="XMLID_31_" class="st1" points="264.058,0 150,-114.058 160.606,-124.665 274.665,-10.607 		"/>
@@ -25,4 +26,4 @@
 	</g>
 </pattern>
 <rect id="XMLID_1_" class="st2" width="100" height="100"/>
-</svg>
+</svg>`;
