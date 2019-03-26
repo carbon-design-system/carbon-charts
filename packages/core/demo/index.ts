@@ -10,6 +10,8 @@ import {
 // Styles
 import "./index.scss";
 import "./../src/style.scss";
+
+// Interfaces
 import { ChartData } from "./../src/configuration";
 
 //
