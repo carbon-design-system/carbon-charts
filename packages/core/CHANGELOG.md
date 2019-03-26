@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.6](https://github.com/IBM/carbon-charts/compare/v0.11.5...v0.11.6) (2019-03-26)
+
+
+### Bug Fixes
+
+* **core:** export patterns as strings of svgs ([#227](https://github.com/IBM/carbon-charts/issues/227)) ([14391ae](https://github.com/IBM/carbon-charts/commit/14391ae))
+
+
+
+
+
+## [0.11.5](https://github.com/IBM/carbon-charts/compare/v0.11.4...v0.11.5) (2019-03-26)
+
+
+### Bug Fixes
+
+* **build:** refactor deploy and update package.jsons  ([#223](https://github.com/IBM/carbon-charts/issues/223)) ([fb512cb](https://github.com/IBM/carbon-charts/commit/fb512cb))
+
+
+
+
+
+## [0.11.4](https://github.com/IBM/carbon-charts/compare/v0.11.3...v0.11.4) (2019-03-25)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
 # [0.11.0](https://github.com/IBM/carbon-charts/compare/v0.10.5...v0.11.0) (2019-03-12)
 
 
