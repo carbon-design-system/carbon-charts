@@ -8,4 +8,7 @@ npm run build-all
 # adding package-lock.json to every package after npm install
 rm -rf **/package-lock.json
 
+# checkout master to get out of detached HEAD state
+git checkout master
+
 lerna publish --conventional-commits --yes --github-release --contents dist
