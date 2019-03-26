@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.8](https://github.com/IBM/carbon-charts/compare/v0.11.7...v0.11.8) (2019-03-26)
+
+
+### Bug Fixes
+
+* **core:** add babel-polyfill as a hard dependency ([#230](https://github.com/IBM/carbon-charts/issues/230)) ([d3e8c0c](https://github.com/IBM/carbon-charts/commit/d3e8c0c))
+
+
+
+
+
 ## [0.11.7](https://github.com/IBM/carbon-charts/compare/v0.11.6...v0.11.7) (2019-03-26)
 
 
