@@ -7,7 +7,8 @@
 	"scripts": {
 		"build": "ng-packagr -p package.json",
 		"storybook": "start-storybook -p 9005 -c .storybook -s ./.storybook/assets",
-		"demo:build": "build-storybook -o demo/bundle/angular"
+		"demo:build": "build-storybook -o demo/bundle/angular",
+		"clean": "rm -rf dist demo/bundle"
 	},
 	"repository": {
 		"type": "git",
@@ -36,7 +37,7 @@
 		"@angular/platform-browser": "6.1.0",
 		"@angular/platform-browser-dynamic": "6.1.0",
 		"@babel/core": "7.3.4",
-		"@storybook/angular": "5.0.3",
+		"@storybook/angular": "5.0.5",
 		"@types/node": "8.5.2",
 		"babel-loader": "8.0.5",
 		"core-js": "2.6.5",

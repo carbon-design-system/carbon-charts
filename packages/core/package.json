@@ -2,12 +2,6 @@
   "name": "@carbon/charts",
   "version": "0.11.4",
   "description": "Carbon charting components",
-  "files": [
-    "dist",
-    "index.js",
-    "CHANGELOG.md",
-    "README.md"
-  ],
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
     "demo:build": "webpack --config webpack.config.js && typedoc --out ./demo/bundle/documentation ./src/index.ts",
@@ -16,7 +10,8 @@
     "bundle:analyzer": "rm -rf dist && webpack --config webpack.build.js --env.bundleAnalyzer",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "karma start --single-run",
-    "test:watch": "karma start --no-single-run"
+	"test:watch": "karma start --no-single-run",
+	"clean": "rm -rf dist demo/bundle"
   },
   "repository": {
     "type": "git",

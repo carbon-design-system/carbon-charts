@@ -3,13 +3,6 @@
   "version": "0.11.4",
   "description": "Carbon charting components for Vue",
   "main": "index.js",
-  "files": [
-    "charts-vue.common.js",
-    "charts-vue.umd.js",
-    "charts-vue.umd.min.js",
-    "CHANGELOG.md",
-    "README.md"
-  ],
   "scripts": {
     "build": "bash build.sh",
     "lint": "vue-cli-service lint ./src/index.js",
@@ -17,7 +10,8 @@
     "demo:build": "build-storybook -o demo/bundle/vue",
     "ci-check": "yarn format:diff",
     "format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
-    "format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\""
+	"format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\"",
+	"clean": "rm -rf dist demo/bundle"
   },
   "dependencies": {
     "@carbon/charts": "^0.11.4",
@@ -25,10 +19,10 @@
   },
   "devDependencies": {
     "@babel/core": "7.3.4",
-    "@storybook/addon-actions": "4.0.7",
-    "@storybook/addon-links": "4.0.7",
-    "@storybook/addons": "4.0.7",
-    "@storybook/vue": "4.0.7",
+    "@storybook/addon-actions": "5.0.5",
+    "@storybook/addon-links": "5.0.5",
+    "@storybook/addons": "5.0.5",
+    "@storybook/vue": "5.0.5",
     "@vue/cli-plugin-babel": "3.4.0",
     "@vue/cli-plugin-eslint": "3.4.0",
     "@vue/cli-service": "3.4.0",
