@@ -22,4 +22,4 @@ echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
 # checkout master to get out of detached HEAD state
 git checkout master
 
-lerna publish --conventional-commits --yes --github-release --contents dist
+lerna publish --conventional-commits --yes --github-release --force-publish=* --contents dist
