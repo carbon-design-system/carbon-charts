@@ -2,6 +2,9 @@
 
 set -e # exit with nonzero exit code if anything fails
 
+# authenticate with the npm registry
+npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
+
 npm run build-all
 
 # Should remove once lerna stops mistakenly
