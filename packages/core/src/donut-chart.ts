@@ -28,7 +28,12 @@ export class DonutCenter {
 		innerWrap.append("text")
 			.attr("class", "donut-figure")
 			.attr("text-anchor", "middle")
-			.text(this.configs.number.toLocaleString());
+			.text(
+				Tools.translateText(
+					this.configs.number.toLocaleString(),
+					{ rtl: this.configs.rtl }
+				)
+			);
 
 		// Add the label below the number in the center of the donut
 		innerWrap.append("text")
@@ -167,7 +172,8 @@ export class DonutChart extends PieChart {
 
 		return {
 			label,
-			number
+			number,
+			rtl: this.options.rtl
 		};
 	}
 

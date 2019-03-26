@@ -1,8 +1,10 @@
 import { colors } from "./colors";
 import {
+	isRTL,
 	demoLabels,
 	demoDatasetLabels,
 	demoYAxisTitle,
+	demoYAxisFormatter,
 	demoXAxisTitle
 } from "./commons";
 
@@ -55,7 +57,7 @@ export const curvedLineOptions = {
 			title: demoYAxisTitle,
 			yMaxAdjuster: yMax => yMax * 1.2,
 			yMinAdjuster: yMin => yMin * 1.2,
-			formatter: axisValue => `${axisValue / 1000}k`
+			formatter: demoYAxisFormatter
 		},
 		y2: {
 			ticks: {
@@ -69,7 +71,7 @@ export const curvedLineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	rtl: true
+	rtl: isRTL
 };
 
 
@@ -122,7 +124,7 @@ export const lineOptions = {
 			title: demoYAxisTitle,
 			yMaxAdjuster: yMax => yMax * 1.2,
 			yMinAdjuster: yMin => yMin * 1.2,
-			formatter: axisValue => `${axisValue / 1000}k`,
+			formatter: demoYAxisFormatter,
 			thresholds: [
 				{
 					range: [-20000, 30000],
@@ -144,7 +146,7 @@ export const lineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	rtl: true
+	rtl: isRTL
 };
 
 export const scatterData = {
@@ -196,7 +198,7 @@ export const scatterOptions = {
 			title: demoYAxisTitle,
 			yMaxAdjuster: yMax => yMax * 1.2,
 			yMinAdjuster: yMin => yMin * 1.2,
-			formatter: axisValue => `${axisValue / 1000}k`
+			formatter: demoYAxisFormatter
 		}
 	},
 	points: {
@@ -204,5 +206,5 @@ export const scatterOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	rtl: true
+	rtl: isRTL
 };

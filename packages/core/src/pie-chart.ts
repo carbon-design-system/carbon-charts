@@ -70,9 +70,10 @@ export class PieChart extends BaseChart {
 		if (otherLabelIndex !== -1) {
 			sortedData.push(sortedData.splice(otherLabelIndex, 1)[0]);
 		} else if (rest.length > 0) {
+			const { otherLabel } = this.options
 			sortedData = sortedData.slice(0, stopAt)
 				.concat([{
-					label: Configuration.pie.label.other,
+					label: (otherLabel ? otherLabel : Configuration.pie.label.other),
 					value: restAccumulatedValue,
 					items: rest
 				}]);
@@ -159,7 +160,16 @@ export class PieChart extends BaseChart {
 			.classed("chart-label", true)
 			.attr("dy", Configuration.pie.label.dy)
 			.style("text-anchor", "middle")
-			.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
+			.text(d => {
+				return Tools.translateText(
+					Tools.convertValueToPercentage(
+						d.data.value,
+						dataList,
+						{ rtl: this.options.rtl }
+					),
+					{ rtl: this.options.rtl }
+				)
+			})
 			.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); });
 
 		// Hide overlay

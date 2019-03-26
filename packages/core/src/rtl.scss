@@ -4,6 +4,10 @@
 }
 
 .chart-wrapper {
+	&.rtl {
+		// TODO
+		// direction: rtl;
+	}
 
 	.legend {
 		float: left;

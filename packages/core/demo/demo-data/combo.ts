@@ -1,4 +1,7 @@
 import { colors } from "./colors";
+import {
+	isRTL
+} from "./commons";
 
 export const comboData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -72,5 +75,5 @@ export const comboOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	rtl: true
+	rtl: isRTL
 };

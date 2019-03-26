@@ -363,7 +363,12 @@ export class BaseAxisChart extends BaseChart {
 		const yAxis = rtl ? axisRight(this.y) : axisLeft(this.y);
 		yAxis.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks)
 			.tickSize(0)
-			.tickFormat(scales.y.formatter);
+			.tickFormat(
+				Tools.createFormatter(
+					[scales.y.formatter],
+					{ rtl }
+				)
+			);
 
 		let yAxisRef  = this.svg.select("g.y.axis");
 		const horizontalLine = this.svg.select("line.domain");
@@ -442,7 +447,12 @@ export class BaseAxisChart extends BaseChart {
 
 			secondaryYAxis.ticks(scales.y2.numberOfTicks || Configuration.scales.y2.numberOfTicks)
 				.tickSize(0)
-				.tickFormat(scales.y2.formatter);
+				.tickFormat(
+					Tools.createFormatter(
+						[scales.y2.formatter],
+						{ rtl }
+					)
+				);
 
 			const secondaryYAxisRef = this.svg.select("g.y2.axis");
 			// If the <g class="y axis"> exists in the chart SVG, just update it

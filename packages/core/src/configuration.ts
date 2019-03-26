@@ -153,7 +153,10 @@ const baseOptions: BaseChartOptions = {
 /**
  * Options specific to pie charts
  */
-export type PieChartOptions = BaseChartOptions;
+export interface PieChartOptions extends BaseChartOptions {
+	otherLabel?: string;
+};
+
 /**
  * Options specific to pie charts
  */

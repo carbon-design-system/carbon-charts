@@ -1,9 +1,11 @@
 import { colors } from "./colors";
 import {
+	isRTL,
 	demoLabels,
 	demoDatasetLabels,
 	demoYAxisTitle,
-	demoXAxisTitle
+	demoXAxisTitle,
+	demoY2AxisFormatter
 } from "./commons";
 
 export const groupedBarData = {
@@ -71,14 +73,14 @@ export const groupedBarOptions = {
 				max: 1,
 				min: 0
 			},
-			formatter: axisValue => `${axisValue * 100}%`
+			formatter: demoY2AxisFormatter
 		}
 	},
 	tooltip: {
 		size: "compact"
 	},
 	legendClickable: true,
-	rtl: true,
+	rtl: isRTL,
 	containerResizable: true,
 };
 
@@ -118,7 +120,7 @@ export const simpleBarOptions = {
 	bars: {
 		maxWidth: 50
 	},
-	rtl: true
+	rtl: isRTL
 };
 
 // Stacked bar
@@ -190,5 +192,5 @@ export const stackedBarOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	rtl: true
+	rtl: isRTL
 };
