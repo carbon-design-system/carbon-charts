@@ -1102,17 +1102,17 @@ chartTypes.forEach(function (type) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var PATTERN_1 = __webpack_require__(/*! ./pattern-1.svg */ "./src/assets/patterns/pattern-1.svg");
-var PATTERN_2 = __webpack_require__(/*! ./pattern-2.svg */ "./src/assets/patterns/pattern-2.svg");
-var PATTERN_3 = __webpack_require__(/*! ./pattern-3.svg */ "./src/assets/patterns/pattern-3.svg");
-var PATTERN_4 = __webpack_require__(/*! ./pattern-4.svg */ "./src/assets/patterns/pattern-4.svg");
-var PATTERN_5 = __webpack_require__(/*! ./pattern-5.svg */ "./src/assets/patterns/pattern-5.svg");
-var PATTERN_6 = __webpack_require__(/*! ./pattern-6.svg */ "./src/assets/patterns/pattern-6.svg");
-var PATTERN_7 = __webpack_require__(/*! ./pattern-7.svg */ "./src/assets/patterns/pattern-7.svg");
-var PATTERN_8 = __webpack_require__(/*! ./pattern-8.svg */ "./src/assets/patterns/pattern-8.svg");
-var PATTERN_9 = __webpack_require__(/*! ./pattern-9.svg */ "./src/assets/patterns/pattern-9.svg");
-var PATTERN_10 = __webpack_require__(/*! ./pattern-10.svg */ "./src/assets/patterns/pattern-10.svg");
-var PATTERN_11 = __webpack_require__(/*! ./pattern-11.svg */ "./src/assets/patterns/pattern-11.svg");
+var PATTERN_1 = __webpack_require__(/*! ./pattern-1.ts */ "./src/assets/patterns/pattern-1.ts");
+var PATTERN_2 = __webpack_require__(/*! ./pattern-2.ts */ "./src/assets/patterns/pattern-2.ts");
+var PATTERN_3 = __webpack_require__(/*! ./pattern-3.ts */ "./src/assets/patterns/pattern-3.ts");
+var PATTERN_4 = __webpack_require__(/*! ./pattern-4.ts */ "./src/assets/patterns/pattern-4.ts");
+var PATTERN_5 = __webpack_require__(/*! ./pattern-5.ts */ "./src/assets/patterns/pattern-5.ts");
+var PATTERN_6 = __webpack_require__(/*! ./pattern-6.ts */ "./src/assets/patterns/pattern-6.ts");
+var PATTERN_7 = __webpack_require__(/*! ./pattern-7.ts */ "./src/assets/patterns/pattern-7.ts");
+var PATTERN_8 = __webpack_require__(/*! ./pattern-8.ts */ "./src/assets/patterns/pattern-8.ts");
+var PATTERN_9 = __webpack_require__(/*! ./pattern-9.ts */ "./src/assets/patterns/pattern-9.ts");
+var PATTERN_10 = __webpack_require__(/*! ./pattern-10.ts */ "./src/assets/patterns/pattern-10.ts");
+var PATTERN_11 = __webpack_require__(/*! ./pattern-11.ts */ "./src/assets/patterns/pattern-11.ts");
 /* harmony default export */ __webpack_exports__["default"] = ([
     PATTERN_1,
     PATTERN_2,
@@ -1130,124 +1130,157 @@ var PATTERN_11 = __webpack_require__(/*! ./pattern-11.svg */ "./src/assets/patte
 
 /***/ }),
 
-/***/ "./src/assets/patterns/pattern-1.svg":
+/***/ "./src/assets/patterns/pattern-1.ts":
+/*!******************************************!*\
+  !*** ./src/assets/patterns/pattern-1.ts ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\n<style type=\"text/css\">\n\t.st0{fill:none;}\n\t.st1{fill:#231F20;}\n\t.st2{fill:url(#lines_-_right_to_left);}\n</style>\n<pattern  width=\"50\" height=\"50\"\npatternUnits=\"userSpaceOnUse\" id=\"lines_-_right_to_left\" viewBox=\"97.78 -148.535 50 50\" style=\"overflow:visible;\">\n\t<g id=\"XMLID_16_\">\n\t\t<polygon id=\"XMLID_26_\" class=\"st0\" points=\"97.78,-148.535 147.78,-148.535 147.78,-98.535 97.78,-98.535 \t\t\"/>\n\t\t<polygon id=\"XMLID_25_\" class=\"st1\" points=\"110.606,0 100,-10.607 214.117,-124.724 224.723,-114.117 \t\t\"/>\n\t\t<polygon id=\"XMLID_24_\" class=\"st1\" points=\"60.606,0 50,-10.607 164.117,-124.724 174.723,-114.117 \t\t\"/>\n\t\t<polygon id=\"XMLID_23_\" class=\"st1\" points=\"10.606,0 0,-10.607 114.117,-124.724 124.723,-114.117 \t\t\"/>\n\t\t<polygon id=\"XMLID_22_\" class=\"st1\" points=\"110.606,-50 100,-60.607 214.117,-174.724 224.723,-164.117 \t\t\"/>\n\t\t<polygon id=\"XMLID_21_\" class=\"st1\" points=\"60.606,-50 50,-60.607 164.117,-174.724 174.723,-164.117 \t\t\"/>\n\t\t<polygon id=\"XMLID_20_\" class=\"st1\" points=\"10.606,-50 0,-60.607 114.117,-174.724 124.723,-164.117 \t\t\"/>\n\t\t<polygon id=\"XMLID_19_\" class=\"st1\" points=\"110.606,-100 100,-110.607 214.117,-224.724 224.723,-214.117 \t\t\"/>\n\t\t<polygon id=\"XMLID_18_\" class=\"st1\" points=\"60.606,-100 50,-110.607 164.117,-224.724 174.723,-214.117 \t\t\"/>\n\t\t<polygon id=\"XMLID_17_\" class=\"st1\" points=\"10.606,-100 0,-110.607 114.117,-224.724 124.723,-214.117 \t\t\"/>\n\t</g>\n</pattern>\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\n</svg>");
+
+
+/***/ }),
+
+/***/ "./src/assets/patterns/pattern-10.ts":
 /*!*******************************************!*\
-  !*** ./src/assets/patterns/pattern-1.svg ***!
+  !*** ./src/assets/patterns/pattern-10.ts ***!
   \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\r\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\r\n<style type=\"text/css\">\r\n\t.st0{fill:none;}\r\n\t.st1{fill:#231F20;}\r\n\t.st2{fill:url(#lines_-_right_to_left);}\r\n</style>\r\n<pattern  width=\"50\" height=\"50\" patternUnits=\"userSpaceOnUse\" id=\"lines_-_right_to_left\" viewBox=\"97.78 -148.535 50 50\" style=\"overflow:visible;\">\r\n\t<g id=\"XMLID_16_\">\r\n\t\t<polygon id=\"XMLID_26_\" class=\"st0\" points=\"97.78,-148.535 147.78,-148.535 147.78,-98.535 97.78,-98.535 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_25_\" class=\"st1\" points=\"110.606,0 100,-10.607 214.117,-124.724 224.723,-114.117 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_24_\" class=\"st1\" points=\"60.606,0 50,-10.607 164.117,-124.724 174.723,-114.117 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_23_\" class=\"st1\" points=\"10.606,0 0,-10.607 114.117,-124.724 124.723,-114.117 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_22_\" class=\"st1\" points=\"110.606,-50 100,-60.607 214.117,-174.724 224.723,-164.117 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_21_\" class=\"st1\" points=\"60.606,-50 50,-60.607 164.117,-174.724 174.723,-164.117 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_20_\" class=\"st1\" points=\"10.606,-50 0,-60.607 114.117,-174.724 124.723,-164.117 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_19_\" class=\"st1\" points=\"110.606,-100 100,-110.607 214.117,-224.724 224.723,-214.117 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_18_\" class=\"st1\" points=\"60.606,-100 50,-110.607 164.117,-224.724 174.723,-214.117 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_17_\" class=\"st1\" points=\"10.606,-100 0,-110.607 114.117,-224.724 124.723,-214.117 \t\t\"/>\r\n\t</g>\r\n</pattern>\r\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\r\n</svg>\r\n"
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\n<style type=\"text/css\">\n\t.st0{fill:none;}\n\t.st1{fill:#231F20;}\n\t.st2{fill:url(#square_pattern);}\n</style>\n<pattern  width=\"100\" height=\"100\" patternUnits=\"userSpaceOnUse\" id=\"square_pattern\" viewBox=\"15 -115 100 100\" style=\"overflow:visible;\">\n\t<g id=\"XMLID_18_\">\n\t\t<polygon id=\"XMLID_52_\" class=\"st0\" points=\"15,-115 115,-115 115,-15 15,-15 \t\t\"/>\n\t\t<path id=\"XMLID_49_\" class=\"st1\" d=\"M120-45v10h-10v-10H120 M130-55h-30v30h30V-55L130-55z\"/>\n\t\t<path id=\"XMLID_46_\" class=\"st1\" d=\"M70-20v10H60v-10H70 M80-30H50V0h30V-30L80-30z\"/>\n\t\t<path id=\"XMLID_34_\" class=\"st1\" d=\"M20-45v10H10v-10H20 M30-55H0v30h30V-55L30-55z\"/>\n\t\t<path id=\"XMLID_31_\" class=\"st1\" d=\"M120-95v10h-10v-10H120 M130-105h-30v30h30V-105L130-105z\"/>\n\t\t<path id=\"XMLID_28_\" class=\"st1\" d=\"M70-70v10H60v-10H70 M80-80H50v30h30V-80L80-80z\"/>\n\t\t<path id=\"XMLID_25_\" class=\"st1\" d=\"M20-95v10H10v-10H20 M30-105H0v30h30V-105L30-105z\"/>\n\t\t<path id=\"XMLID_19_\" class=\"st1\" d=\"M70-120v10H60v-10H70 M80-130H50v30h30V-130L80-130z\"/>\n\t</g>\n</pattern>\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\n</svg>");
 
-/***/ }),
-
-/***/ "./src/assets/patterns/pattern-10.svg":
-/*!********************************************!*\
-  !*** ./src/assets/patterns/pattern-10.svg ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\r\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\r\n<style type=\"text/css\">\r\n\t.st0{fill:none;}\r\n\t.st1{fill:#231F20;}\r\n\t.st2{fill:url(#square_pattern);}\r\n</style>\r\n<pattern  width=\"100\" height=\"100\" patternUnits=\"userSpaceOnUse\" id=\"square_pattern\" viewBox=\"15 -115 100 100\" style=\"overflow:visible;\">\r\n\t<g id=\"XMLID_18_\">\r\n\t\t<polygon id=\"XMLID_52_\" class=\"st0\" points=\"15,-115 115,-115 115,-15 15,-15 \t\t\"/>\r\n\t\t<path id=\"XMLID_49_\" class=\"st1\" d=\"M120-45v10h-10v-10H120 M130-55h-30v30h30V-55L130-55z\"/>\r\n\t\t<path id=\"XMLID_46_\" class=\"st1\" d=\"M70-20v10H60v-10H70 M80-30H50V0h30V-30L80-30z\"/>\r\n\t\t<path id=\"XMLID_34_\" class=\"st1\" d=\"M20-45v10H10v-10H20 M30-55H0v30h30V-55L30-55z\"/>\r\n\t\t<path id=\"XMLID_31_\" class=\"st1\" d=\"M120-95v10h-10v-10H120 M130-105h-30v30h30V-105L130-105z\"/>\r\n\t\t<path id=\"XMLID_28_\" class=\"st1\" d=\"M70-70v10H60v-10H70 M80-80H50v30h30V-80L80-80z\"/>\r\n\t\t<path id=\"XMLID_25_\" class=\"st1\" d=\"M20-95v10H10v-10H20 M30-105H0v30h30V-105L30-105z\"/>\r\n\t\t<path id=\"XMLID_19_\" class=\"st1\" d=\"M70-120v10H60v-10H70 M80-130H50v30h30V-130L80-130z\"/>\r\n\t</g>\r\n</pattern>\r\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\r\n</svg>\r\n"
 
 /***/ }),
 
-/***/ "./src/assets/patterns/pattern-11.svg":
-/*!********************************************!*\
-  !*** ./src/assets/patterns/pattern-11.svg ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\r\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\r\n<style type=\"text/css\">\r\n\t.st0{fill:none;}\r\n\t.st1{fill:#231F20;}\r\n\t.st2{fill:url(#tight_diamond);}\r\n</style>\r\n<pattern  width=\"70\" height=\"45\" patternUnits=\"userSpaceOnUse\" id=\"tight_diamond\" viewBox=\"21.213 -66.213 70 45\" style=\"overflow:visible;\">\r\n\t<g id=\"XMLID_9_\">\r\n\t\t<polygon id=\"XMLID_16_\" class=\"st0\" points=\"21.213,-66.213 91.213,-66.213 91.213,-21.213 21.213,-21.213 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_15_\" class=\"st1\" points=\"91.213,0 70,-21.213 91.213,-42.427 112.427,-21.213 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_14_\" class=\"st1\" points=\"21.213,0 0,-21.213 21.213,-42.427 42.427,-21.213 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_13_\" class=\"st1\" points=\"91.213,-45 70,-66.213 91.213,-87.427 112.427,-66.213 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_12_\" class=\"st1\" points=\"56.213,-22.5 35,-43.713 56.213,-64.927 77.427,-43.713 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_11_\" class=\"st1\" points=\"21.213,-45 0,-66.213 21.213,-87.427 42.427,-66.213 \t\t\"/>\r\n\t</g>\r\n</pattern>\r\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\r\n</svg>\r\n"
-
-/***/ }),
-
-/***/ "./src/assets/patterns/pattern-2.svg":
+/***/ "./src/assets/patterns/pattern-11.ts":
 /*!*******************************************!*\
-  !*** ./src/assets/patterns/pattern-2.svg ***!
+  !*** ./src/assets/patterns/pattern-11.ts ***!
   \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\r\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\r\n<style type=\"text/css\">\r\n\t.st0{fill:none;}\r\n\t.st1{fill:#2d74da;}\r\n\t.st2{fill:url(#Circle_pattern);}\r\n</style>\r\n<pattern  width=\"100\" height=\"100\" patternUnits=\"userSpaceOnUse\" id=\"Circle_pattern\" viewBox=\"15 -115 100 100\" style=\"overflow:visible;\">\r\n\t<g id=\"XMLID_11_\">\r\n\t\t<polygon id=\"XMLID_39_\" class=\"st0\" points=\"15,-115 115,-115 115,-15 15,-15 \t\t\"/>\r\n\t\t<path id=\"XMLID_34_\" class=\"st1\" d=\"M130-40c0,8.284-6.716,15-15,15s-15-6.716-15-15s6.716-15,15-15S130-48.284,130-40z\"/>\r\n\t\t<path id=\"XMLID_33_\" class=\"st1\" d=\"M80-15c0,8.284-6.716,15-15,15S50-6.716,50-15s6.716-15,15-15S80-23.284,80-15z\"/>\r\n\t\t<path id=\"XMLID_32_\" class=\"st1\" d=\"M30-40c0,8.284-6.716,15-15,15S0-31.716,0-40s6.716-15,15-15S30-48.284,30-40z\"/>\r\n\t\t<path id=\"XMLID_24_\" class=\"st1\" d=\"M130-90c0,8.284-6.716,15-15,15s-15-6.716-15-15s6.716-15,15-15S130-98.284,130-90z\"/>\r\n\t\t<path id=\"XMLID_22_\" class=\"st1\" d=\"M80-65c0,8.284-6.716,15-15,15s-15-6.716-15-15s6.716-15,15-15S80-73.284,80-65z\"/>\r\n\t\t<path id=\"XMLID_18_\" class=\"st1\" d=\"M30-90c0,8.284-6.716,15-15,15S0-81.716,0-90s6.716-15,15-15S30-98.284,30-90z\"/>\r\n\t\t<path id=\"XMLID_17_\" class=\"st1\" d=\"M80-115c0,8.284-6.716,15-15,15s-15-6.716-15-15s6.716-15,15-15S80-123.284,80-115z\"/>\r\n\t</g>\r\n</pattern>\r\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\r\n</svg>\r\n"
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\n<style type=\"text/css\">\n\t.st0{fill:none;}\n\t.st1{fill:#231F20;}\n\t.st2{fill:url(#tight_diamond);}\n</style>\n<pattern  width=\"70\" height=\"45\" patternUnits=\"userSpaceOnUse\" id=\"tight_diamond\" viewBox=\"21.213 -66.213 70 45\" style=\"overflow:visible;\">\n\t<g id=\"XMLID_9_\">\n\t\t<polygon id=\"XMLID_16_\" class=\"st0\" points=\"21.213,-66.213 91.213,-66.213 91.213,-21.213 21.213,-21.213 \t\t\"/>\n\t\t<polygon id=\"XMLID_15_\" class=\"st1\" points=\"91.213,0 70,-21.213 91.213,-42.427 112.427,-21.213 \t\t\"/>\n\t\t<polygon id=\"XMLID_14_\" class=\"st1\" points=\"21.213,0 0,-21.213 21.213,-42.427 42.427,-21.213 \t\t\"/>\n\t\t<polygon id=\"XMLID_13_\" class=\"st1\" points=\"91.213,-45 70,-66.213 91.213,-87.427 112.427,-66.213 \t\t\"/>\n\t\t<polygon id=\"XMLID_12_\" class=\"st1\" points=\"56.213,-22.5 35,-43.713 56.213,-64.927 77.427,-43.713 \t\t\"/>\n\t\t<polygon id=\"XMLID_11_\" class=\"st1\" points=\"21.213,-45 0,-66.213 21.213,-87.427 42.427,-66.213 \t\t\"/>\n\t</g>\n</pattern>\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\n</svg>");
+
 
 /***/ }),
 
-/***/ "./src/assets/patterns/pattern-3.svg":
-/*!*******************************************!*\
-  !*** ./src/assets/patterns/pattern-3.svg ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./src/assets/patterns/pattern-2.ts":
+/*!******************************************!*\
+  !*** ./src/assets/patterns/pattern-2.ts ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\r\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\r\n<style type=\"text/css\">\r\n\t.st0{fill:none;}\r\n\t.st1{fill:#231F20;}\r\n\t.st2{fill:url(#Square_diamond);}\r\n</style>\r\n<pattern  width=\"40\" height=\"40\" patternUnits=\"userSpaceOnUse\" id=\"Square_diamond\" viewBox=\"0 -40 40 40\" style=\"overflow:visible;\">\r\n\t<g id=\"XMLID_10_\">\r\n\t\t<polygon id=\"XMLID_14_\" class=\"st0\" points=\"0,-40 40,-40 40,0 0,0 \t\t\"/>\r\n\t\t<path id=\"XMLID_11_\" class=\"st1\" d=\"M5-35v30h30v-30H5z M20-9.393L9.393-20L20-30.607L30.607-20L20-9.393z\"/>\r\n\t</g>\r\n</pattern>\r\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\r\n</svg>\r\n"
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\n<style type=\"text/css\">\n\t.st0{fill:none;}\n\t.st1{fill:#2d74da;}\n\t.st2{fill:url(#Circle_pattern);}\n</style>\n<pattern  width=\"100\" height=\"100\" patternUnits=\"userSpaceOnUse\" id=\"Circle_pattern\" viewBox=\"15 -115 100 100\" style=\"overflow:visible;\">\n\t<g id=\"XMLID_11_\">\n\t\t<polygon id=\"XMLID_39_\" class=\"st0\" points=\"15,-115 115,-115 115,-15 15,-15 \t\t\"/>\n\t\t<path id=\"XMLID_34_\" class=\"st1\" d=\"M130-40c0,8.284-6.716,15-15,15s-15-6.716-15-15s6.716-15,15-15S130-48.284,130-40z\"/>\n\t\t<path id=\"XMLID_33_\" class=\"st1\" d=\"M80-15c0,8.284-6.716,15-15,15S50-6.716,50-15s6.716-15,15-15S80-23.284,80-15z\"/>\n\t\t<path id=\"XMLID_32_\" class=\"st1\" d=\"M30-40c0,8.284-6.716,15-15,15S0-31.716,0-40s6.716-15,15-15S30-48.284,30-40z\"/>\n\t\t<path id=\"XMLID_24_\" class=\"st1\" d=\"M130-90c0,8.284-6.716,15-15,15s-15-6.716-15-15s6.716-15,15-15S130-98.284,130-90z\"/>\n\t\t<path id=\"XMLID_22_\" class=\"st1\" d=\"M80-65c0,8.284-6.716,15-15,15s-15-6.716-15-15s6.716-15,15-15S80-73.284,80-65z\"/>\n\t\t<path id=\"XMLID_18_\" class=\"st1\" d=\"M30-90c0,8.284-6.716,15-15,15S0-81.716,0-90s6.716-15,15-15S30-98.284,30-90z\"/>\n\t\t<path id=\"XMLID_17_\" class=\"st1\" d=\"M80-115c0,8.284-6.716,15-15,15s-15-6.716-15-15s6.716-15,15-15S80-123.284,80-115z\"/>\n\t</g>\n</pattern>\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\n</svg>");
 
-/***/ }),
-
-/***/ "./src/assets/patterns/pattern-4.svg":
-/*!*******************************************!*\
-  !*** ./src/assets/patterns/pattern-4.svg ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\r\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\r\n<style type=\"text/css\">\r\n\t.st0{fill:none;}\r\n\t.st1{fill:#231F20;}\r\n\t.st2{fill:url(#Triangle);}\r\n</style>\r\n<pattern  width=\"100\" height=\"100\" patternUnits=\"userSpaceOnUse\" id=\"Triangle\" viewBox=\"15 -112.99 100 100\" style=\"overflow:visible;\">\r\n\t<g id=\"XMLID_10_\">\r\n\t\t<polygon id=\"XMLID_23_\" class=\"st0\" points=\"15,-112.99 115,-112.99 115,-12.99 15,-12.99 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_21_\" class=\"st1\" points=\"100,-25 115,-50.981 130,-25 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_20_\" class=\"st1\" points=\"50,0 65,-25.981 80,0 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_19_\" class=\"st1\" points=\"0,-25 15,-50.981 30,-25 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_15_\" class=\"st1\" points=\"100,-75 115,-100.981 130,-75 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_14_\" class=\"st1\" points=\"50,-50 65,-75.981 80,-50 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_13_\" class=\"st1\" points=\"0,-75 15,-100.981 30,-75 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_12_\" class=\"st1\" points=\"50,-100 65,-125.981 80,-100 \t\t\"/>\r\n\t</g>\r\n</pattern>\r\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\r\n</svg>\r\n"
 
 /***/ }),
 
-/***/ "./src/assets/patterns/pattern-5.svg":
-/*!*******************************************!*\
-  !*** ./src/assets/patterns/pattern-5.svg ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./src/assets/patterns/pattern-3.ts":
+/*!******************************************!*\
+  !*** ./src/assets/patterns/pattern-3.ts ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\r\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\r\n<style type=\"text/css\">\r\n\t.st0{fill:none;}\r\n\t.st1{fill:url(#diamond);}\r\n</style>\r\n<pattern  width=\"100\" height=\"100\" patternUnits=\"userSpaceOnUse\" id=\"diamond\" viewBox=\"21.213 -121.213 100 100\" style=\"overflow:visible;\">\r\n\t<g id=\"XMLID_15_\">\r\n\t\t<polygon id=\"XMLID_52_\" class=\"st0\" points=\"21.213,-121.213 121.213,-121.213 121.213,-21.213 21.213,-21.213 \t\t\"/>\r\n\t\t<path id=\"XMLID_49_\" d=\"M96.213-28.284l7.071,7.071l-7.071,7.071l-7.071-7.071L96.213-28.284 M96.213-42.427L75-21.213L96.213,0\r\n\t\t\tl21.213-21.213L96.213-42.427L96.213-42.427z\"/>\r\n\t\t<path id=\"XMLID_40_\" d=\"M46.213-28.284l7.071,7.071l-7.071,7.071l-7.071-7.071L46.213-28.284 M46.213-42.427L25-21.213L46.213,0\r\n\t\t\tl21.213-21.213L46.213-42.427L46.213-42.427z\"/>\r\n\t\t<path id=\"XMLID_37_\" d=\"M121.213-78.284l7.071,7.071l-7.071,7.071l-7.071-7.071L121.213-78.284 M121.213-92.427L100-71.213\r\n\t\t\tL121.213-50l21.213-21.213L121.213-92.427L121.213-92.427z\"/>\r\n\t\t<path id=\"XMLID_28_\" d=\"M71.213-78.284l7.071,7.071l-7.071,7.071l-7.071-7.071L71.213-78.284 M71.213-92.427L50-71.213L71.213-50\r\n\t\t\tl21.213-21.213L71.213-92.427L71.213-92.427z\"/>\r\n\t\t<path id=\"XMLID_25_\" d=\"M21.213-78.284l7.071,7.071l-7.071,7.071l-7.071-7.071L21.213-78.284 M21.213-92.427L0-71.213L21.213-50\r\n\t\t\tl21.213-21.213L21.213-92.427L21.213-92.427z\"/>\r\n\t\t<path id=\"XMLID_22_\" d=\"M96.213-128.284l7.071,7.071l-7.071,7.071l-7.071-7.071L96.213-128.284 M96.213-142.427L75-121.213\r\n\t\t\tL96.213-100l21.213-21.213L96.213-142.427L96.213-142.427z\"/>\r\n\t\t<path id=\"XMLID_16_\" d=\"M46.213-128.284l7.071,7.071l-7.071,7.071l-7.071-7.071L46.213-128.284 M46.213-142.427L25-121.213\r\n\t\t\tL46.213-100l21.213-21.213L46.213-142.427L46.213-142.427z\"/>\r\n\t</g>\r\n</pattern>\r\n<rect id=\"XMLID_1_\" class=\"st1\" width=\"100\" height=\"100\"/>\r\n</svg>\r\n"
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\n<style type=\"text/css\">\n\t.st0{fill:none;}\n\t.st1{fill:#231F20;}\n\t.st2{fill:url(#Square_diamond);}\n</style>\n<pattern  width=\"40\" height=\"40\" patternUnits=\"userSpaceOnUse\" id=\"Square_diamond\" viewBox=\"0 -40 40 40\" style=\"overflow:visible;\">\n\t<g id=\"XMLID_10_\">\n\t\t<polygon id=\"XMLID_14_\" class=\"st0\" points=\"0,-40 40,-40 40,0 0,0 \t\t\"/>\n\t\t<path id=\"XMLID_11_\" class=\"st1\" d=\"M5-35v30h30v-30H5z M20-9.393L9.393-20L20-30.607L30.607-20L20-9.393z\"/>\n\t</g>\n</pattern>\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\n</svg>");
 
-/***/ }),
-
-/***/ "./src/assets/patterns/pattern-6.svg":
-/*!*******************************************!*\
-  !*** ./src/assets/patterns/pattern-6.svg ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\r\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\r\n<style type=\"text/css\">\r\n\t.st0{fill:none;}\r\n\t.st1{fill:#231F20;}\r\n\t.st2{fill:url(#half_circle);}\r\n</style>\r\n<pattern  width=\"60\" height=\"70\" patternUnits=\"userSpaceOnUse\" id=\"half_circle\" viewBox=\"15 -77.5 60 70\" style=\"overflow:visible;\">\r\n\t<g id=\"XMLID_8_\">\r\n\t\t<polygon id=\"XMLID_22_\" class=\"st0\" points=\"15,-77.5 75,-77.5 75,-7.5 15,-7.5 \t\t\"/>\r\n\t\t<path id=\"XMLID_20_\" class=\"st1\" d=\"M75-15c0,8.284-6.716,15-15,15S45-6.716,45-15H75z\"/>\r\n\t\t<path id=\"XMLID_19_\" class=\"st1\" d=\"M45-15c0,8.284-6.716,15-15,15S15-6.716,15-15H45z\"/>\r\n\t\t<path id=\"XMLID_16_\" class=\"st1\" d=\"M90-50c0,8.284-6.716,15-15,15s-15-6.716-15-15H90z\"/>\r\n\t\t<path id=\"XMLID_15_\" class=\"st1\" d=\"M60-50c0,8.284-6.716,15-15,15s-15-6.716-15-15H60z\"/>\r\n\t\t<path id=\"XMLID_12_\" class=\"st1\" d=\"M30-50c0,8.284-6.716,15-15,15S0-41.716,0-50H30z\"/>\r\n\t\t<path id=\"XMLID_11_\" class=\"st1\" d=\"M75-85c0,8.284-6.716,15-15,15s-15-6.716-15-15H75z\"/>\r\n\t\t<path id=\"XMLID_10_\" class=\"st1\" d=\"M45-85c0,8.284-6.716,15-15,15s-15-6.716-15-15H45z\"/>\r\n\t</g>\r\n</pattern>\r\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\r\n</svg>\r\n"
 
 /***/ }),
 
-/***/ "./src/assets/patterns/pattern-7.svg":
-/*!*******************************************!*\
-  !*** ./src/assets/patterns/pattern-7.svg ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./src/assets/patterns/pattern-4.ts":
+/*!******************************************!*\
+  !*** ./src/assets/patterns/pattern-4.ts ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\r\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\r\n<style type=\"text/css\">\r\n\t.st0{fill:none;}\r\n\t.st1{fill:#231F20;}\r\n\t.st2{fill:url(#lines_-_left_to_right);}\r\n</style>\r\n<pattern  width=\"50\" height=\"50\" patternUnits=\"userSpaceOnUse\" id=\"lines_-_left_to_right\" viewBox=\"101.277 -147.008 50 50\" style=\"overflow:visible;\">\r\n\t<g id=\"XMLID_8_\">\r\n\t\t<polygon id=\"XMLID_32_\" class=\"st0\" points=\"101.277,-147.008 151.277,-147.008 151.277,-97.008 101.277,-97.008 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_31_\" class=\"st1\" points=\"264.058,0 150,-114.058 160.606,-124.665 274.665,-10.607 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_30_\" class=\"st1\" points=\"214.058,0 100,-114.058 110.606,-124.665 224.665,-10.607 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_29_\" class=\"st1\" points=\"164.058,0 50,-114.058 60.606,-124.665 174.665,-10.607 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_28_\" class=\"st1\" points=\"114.058,0 0,-114.058 10.606,-124.665 124.665,-10.607 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_27_\" class=\"st1\" points=\"264.058,-50 150,-164.058 160.606,-174.665 274.665,-60.607 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_26_\" class=\"st1\" points=\"214.058,-50 100,-164.058 110.606,-174.665 224.665,-60.607 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_25_\" class=\"st1\" points=\"164.058,-50 50,-164.058 60.606,-174.665 174.665,-60.607 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_24_\" class=\"st1\" points=\"114.058,-50 0,-164.058 10.606,-174.665 124.665,-60.607 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_23_\" class=\"st1\" points=\"264.058,-100 150,-214.058 160.606,-224.665 274.665,-110.607 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_22_\" class=\"st1\" points=\"214.058,-100 100,-214.058 110.606,-224.665 224.665,-110.607 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_16_\" class=\"st1\" points=\"164.058,-100 50,-214.058 60.606,-224.665 174.665,-110.607 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_15_\" class=\"st1\" points=\"114.058,-100 0,-214.058 10.606,-224.665 124.665,-110.607 \t\t\"/>\r\n\t</g>\r\n</pattern>\r\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\r\n</svg>\r\n"
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\n<style type=\"text/css\">\n\t.st0{fill:none;}\n\t.st1{fill:#231F20;}\n\t.st2{fill:url(#Triangle);}\n</style>\n<pattern  width=\"100\" height=\"100\" patternUnits=\"userSpaceOnUse\" id=\"Triangle\" viewBox=\"15 -112.99 100 100\" style=\"overflow:visible;\">\n\t<g id=\"XMLID_10_\">\n\t\t<polygon id=\"XMLID_23_\" class=\"st0\" points=\"15,-112.99 115,-112.99 115,-12.99 15,-12.99 \t\t\"/>\n\t\t<polygon id=\"XMLID_21_\" class=\"st1\" points=\"100,-25 115,-50.981 130,-25 \t\t\"/>\n\t\t<polygon id=\"XMLID_20_\" class=\"st1\" points=\"50,0 65,-25.981 80,0 \t\t\"/>\n\t\t<polygon id=\"XMLID_19_\" class=\"st1\" points=\"0,-25 15,-50.981 30,-25 \t\t\"/>\n\t\t<polygon id=\"XMLID_15_\" class=\"st1\" points=\"100,-75 115,-100.981 130,-75 \t\t\"/>\n\t\t<polygon id=\"XMLID_14_\" class=\"st1\" points=\"50,-50 65,-75.981 80,-50 \t\t\"/>\n\t\t<polygon id=\"XMLID_13_\" class=\"st1\" points=\"0,-75 15,-100.981 30,-75 \t\t\"/>\n\t\t<polygon id=\"XMLID_12_\" class=\"st1\" points=\"50,-100 65,-125.981 80,-100 \t\t\"/>\n\t</g>\n</pattern>\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\n</svg>");
 
-/***/ }),
-
-/***/ "./src/assets/patterns/pattern-8.svg":
-/*!*******************************************!*\
-  !*** ./src/assets/patterns/pattern-8.svg ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\r\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\r\n<style type=\"text/css\">\r\n\t.st0{fill:none;}\r\n\t.st1{fill:#231F20;}\r\n\t.st2{fill:url(#hex_pattern);}\r\n</style>\r\n<pattern  width=\"100\" height=\"100\" patternUnits=\"userSpaceOnUse\" id=\"hex_pattern\" viewBox=\"20 -117.32 100 100\" style=\"overflow:visible;\">\r\n\t<g id=\"XMLID_10_\">\r\n\t\t<polygon id=\"XMLID_23_\" class=\"st0\" points=\"20,-117.32 120,-117.32 120,-17.32 20,-17.32 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_21_\" class=\"st1\" points=\"110,-25 100,-42.32 110,-59.641 130,-59.641 140,-42.32 130,-25 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_20_\" class=\"st1\" points=\"60,0 50,-17.32 60,-34.641 80,-34.641 90,-17.32 80,0 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_19_\" class=\"st1\" points=\"10,-25 0,-42.32 10,-59.641 30,-59.641 40,-42.32 30,-25 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_15_\" class=\"st1\" points=\"110,-75 100,-92.32 110,-109.641 130,-109.641 140,-92.32 130,-75 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_14_\" class=\"st1\" points=\"60,-50 50,-67.32 60,-84.641 80,-84.641 90,-67.32 80,-50 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_13_\" class=\"st1\" points=\"10,-75 0,-92.32 10,-109.641 30,-109.641 40,-92.32 30,-75 \t\t\"/>\r\n\t\t<polygon id=\"XMLID_12_\" class=\"st1\" points=\"60,-100 50,-117.32 60,-134.641 80,-134.641 90,-117.32 80,-100 \t\t\"/>\r\n\t</g>\r\n</pattern>\r\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\r\n</svg>\r\n"
 
 /***/ }),
 
-/***/ "./src/assets/patterns/pattern-9.svg":
-/*!*******************************************!*\
-  !*** ./src/assets/patterns/pattern-9.svg ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./src/assets/patterns/pattern-5.ts":
+/*!******************************************!*\
+  !*** ./src/assets/patterns/pattern-5.ts ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\r\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\r\n<style type=\"text/css\">\r\n\t.st0{fill:none;}\r\n\t.st1{fill:#231F20;}\r\n\t.st2{fill:url(#arrow_pattern);}\r\n</style>\r\n<pattern  width=\"52\" height=\"50\" patternUnits=\"userSpaceOnUse\" id=\"arrow_pattern\" viewBox=\"0 -68.556 52 50\" style=\"overflow:visible;\">\r\n\t<g id=\"XMLID_10_\">\r\n\t\t<polygon id=\"XMLID_62_\" class=\"st0\" points=\"0,-68.556 52,-68.556 52,-18.556 0,-18.556 \t\t\"/>\r\n\t\t<g id=\"XMLID_44_\">\r\n\t\t\t<polygon id=\"XMLID_61_\" class=\"st1\" points=\"23.5,-5.899 23.485,0 2.272,-21.213 2.287,-27.112 \t\t\t\"/>\r\n\t\t\t<polygon id=\"XMLID_45_\" class=\"st1\" points=\"28.5,-5.899 28.515,0 49.728,-21.213 49.713,-27.112 \t\t\t\"/>\r\n\t\t</g>\r\n\t\t<g id=\"XMLID_41_\">\r\n\t\t\t<polygon id=\"XMLID_43_\" class=\"st1\" points=\"23.5,-15.899 23.485,-10 2.272,-31.213 2.287,-37.112 \t\t\t\"/>\r\n\t\t\t<polygon id=\"XMLID_42_\" class=\"st1\" points=\"28.5,-15.899 28.515,-10 49.728,-31.213 49.713,-37.112 \t\t\t\"/>\r\n\t\t</g>\r\n\t\t<g id=\"XMLID_31_\">\r\n\t\t\t<polygon id=\"XMLID_37_\" class=\"st1\" points=\"23.5,-25.899 23.485,-20 2.272,-41.213 2.287,-47.112 \t\t\t\"/>\r\n\t\t\t<polygon id=\"XMLID_32_\" class=\"st1\" points=\"28.5,-25.899 28.515,-20 49.728,-41.213 49.713,-47.112 \t\t\t\"/>\r\n\t\t</g>\r\n\t\t<g id=\"XMLID_25_\">\r\n\t\t\t<polygon id=\"XMLID_27_\" class=\"st1\" points=\"23.5,-35.899 23.485,-30 2.272,-51.213 2.287,-57.112 \t\t\t\"/>\r\n\t\t\t<polygon id=\"XMLID_26_\" class=\"st1\" points=\"28.5,-35.899 28.515,-30 49.728,-51.213 49.713,-57.112 \t\t\t\"/>\r\n\t\t</g>\r\n\t\t<g id=\"XMLID_17_\">\r\n\t\t\t<polygon id=\"XMLID_24_\" class=\"st1\" points=\"23.5,-45.899 23.485,-40 2.272,-61.213 2.287,-67.112 \t\t\t\"/>\r\n\t\t\t<polygon id=\"XMLID_18_\" class=\"st1\" points=\"28.5,-45.899 28.515,-40 49.728,-61.213 49.713,-67.112 \t\t\t\"/>\r\n\t\t</g>\r\n\t\t<g id=\"XMLID_14_\">\r\n\t\t\t<polygon id=\"XMLID_16_\" class=\"st1\" points=\"23.5,-55.899 23.485,-50 2.272,-71.213 2.287,-77.112 \t\t\t\"/>\r\n\t\t\t<polygon id=\"XMLID_15_\" class=\"st1\" points=\"28.5,-55.899 28.515,-50 49.728,-71.213 49.713,-77.112 \t\t\t\"/>\r\n\t\t</g>\r\n\t\t<g id=\"XMLID_11_\">\r\n\t\t\t<polygon id=\"XMLID_13_\" class=\"st1\" points=\"23.5,-65.899 23.485,-60 2.272,-81.213 2.287,-87.112 \t\t\t\"/>\r\n\t\t\t<polygon id=\"XMLID_12_\" class=\"st1\" points=\"28.5,-65.899 28.515,-60 49.728,-81.213 49.713,-87.112 \t\t\t\"/>\r\n\t\t</g>\r\n\t</g>\r\n</pattern>\r\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\r\n</svg>\r\n"
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\n<style type=\"text/css\">\n\t.st0{fill:none;}\n\t.st1{fill:url(#diamond);}\n</style>\n<pattern  width=\"100\" height=\"100\" patternUnits=\"userSpaceOnUse\" id=\"diamond\" viewBox=\"21.213 -121.213 100 100\" style=\"overflow:visible;\">\n\t<g id=\"XMLID_15_\">\n\t\t<polygon id=\"XMLID_52_\" class=\"st0\" points=\"21.213,-121.213 121.213,-121.213 121.213,-21.213 21.213,-21.213 \t\t\"/>\n\t\t<path id=\"XMLID_49_\" d=\"M96.213-28.284l7.071,7.071l-7.071,7.071l-7.071-7.071L96.213-28.284 M96.213-42.427L75-21.213L96.213,0\n\t\t\tl21.213-21.213L96.213-42.427L96.213-42.427z\"/>\n\t\t<path id=\"XMLID_40_\" d=\"M46.213-28.284l7.071,7.071l-7.071,7.071l-7.071-7.071L46.213-28.284 M46.213-42.427L25-21.213L46.213,0\n\t\t\tl21.213-21.213L46.213-42.427L46.213-42.427z\"/>\n\t\t<path id=\"XMLID_37_\" d=\"M121.213-78.284l7.071,7.071l-7.071,7.071l-7.071-7.071L121.213-78.284 M121.213-92.427L100-71.213\n\t\t\tL121.213-50l21.213-21.213L121.213-92.427L121.213-92.427z\"/>\n\t\t<path id=\"XMLID_28_\" d=\"M71.213-78.284l7.071,7.071l-7.071,7.071l-7.071-7.071L71.213-78.284 M71.213-92.427L50-71.213L71.213-50\n\t\t\tl21.213-21.213L71.213-92.427L71.213-92.427z\"/>\n\t\t<path id=\"XMLID_25_\" d=\"M21.213-78.284l7.071,7.071l-7.071,7.071l-7.071-7.071L21.213-78.284 M21.213-92.427L0-71.213L21.213-50\n\t\t\tl21.213-21.213L21.213-92.427L21.213-92.427z\"/>\n\t\t<path id=\"XMLID_22_\" d=\"M96.213-128.284l7.071,7.071l-7.071,7.071l-7.071-7.071L96.213-128.284 M96.213-142.427L75-121.213\n\t\t\tL96.213-100l21.213-21.213L96.213-142.427L96.213-142.427z\"/>\n\t\t<path id=\"XMLID_16_\" d=\"M46.213-128.284l7.071,7.071l-7.071,7.071l-7.071-7.071L46.213-128.284 M46.213-142.427L25-121.213\n\t\t\tL46.213-100l21.213-21.213L46.213-142.427L46.213-142.427z\"/>\n\t</g>\n</pattern>\n<rect id=\"XMLID_1_\" class=\"st1\" width=\"100\" height=\"100\"/>\n</svg>");
+
+
+/***/ }),
+
+/***/ "./src/assets/patterns/pattern-6.ts":
+/*!******************************************!*\
+  !*** ./src/assets/patterns/pattern-6.ts ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\n<style type=\"text/css\">\n\t.st0{fill:none;}\n\t.st1{fill:#231F20;}\n\t.st2{fill:url(#half_circle);}\n</style>\n<pattern  width=\"60\" height=\"70\" patternUnits=\"userSpaceOnUse\" id=\"half_circle\" viewBox=\"15 -77.5 60 70\" style=\"overflow:visible;\">\n\t<g id=\"XMLID_8_\">\n\t\t<polygon id=\"XMLID_22_\" class=\"st0\" points=\"15,-77.5 75,-77.5 75,-7.5 15,-7.5 \t\t\"/>\n\t\t<path id=\"XMLID_20_\" class=\"st1\" d=\"M75-15c0,8.284-6.716,15-15,15S45-6.716,45-15H75z\"/>\n\t\t<path id=\"XMLID_19_\" class=\"st1\" d=\"M45-15c0,8.284-6.716,15-15,15S15-6.716,15-15H45z\"/>\n\t\t<path id=\"XMLID_16_\" class=\"st1\" d=\"M90-50c0,8.284-6.716,15-15,15s-15-6.716-15-15H90z\"/>\n\t\t<path id=\"XMLID_15_\" class=\"st1\" d=\"M60-50c0,8.284-6.716,15-15,15s-15-6.716-15-15H60z\"/>\n\t\t<path id=\"XMLID_12_\" class=\"st1\" d=\"M30-50c0,8.284-6.716,15-15,15S0-41.716,0-50H30z\"/>\n\t\t<path id=\"XMLID_11_\" class=\"st1\" d=\"M75-85c0,8.284-6.716,15-15,15s-15-6.716-15-15H75z\"/>\n\t\t<path id=\"XMLID_10_\" class=\"st1\" d=\"M45-85c0,8.284-6.716,15-15,15s-15-6.716-15-15H45z\"/>\n\t</g>\n</pattern>\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\n</svg>");
+
+
+/***/ }),
+
+/***/ "./src/assets/patterns/pattern-7.ts":
+/*!******************************************!*\
+  !*** ./src/assets/patterns/pattern-7.ts ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\n<style type=\"text/css\">\n\t.st0{fill:none;}\n\t.st1{fill:#231F20;}\n\t.st2{fill:url(#lines_-_left_to_right);}\n</style>\n<pattern  width=\"50\" height=\"50\"\npatternUnits=\"userSpaceOnUse\" id=\"lines_-_left_to_right\" viewBox=\"101.277 -147.008 50 50\" style=\"overflow:visible;\">\n\t<g id=\"XMLID_8_\">\n\t\t<polygon id=\"XMLID_32_\" class=\"st0\" points=\"101.277,-147.008 151.277,-147.008 151.277,-97.008 101.277,-97.008 \t\t\"/>\n\t\t<polygon id=\"XMLID_31_\" class=\"st1\" points=\"264.058,0 150,-114.058 160.606,-124.665 274.665,-10.607 \t\t\"/>\n\t\t<polygon id=\"XMLID_30_\" class=\"st1\" points=\"214.058,0 100,-114.058 110.606,-124.665 224.665,-10.607 \t\t\"/>\n\t\t<polygon id=\"XMLID_29_\" class=\"st1\" points=\"164.058,0 50,-114.058 60.606,-124.665 174.665,-10.607 \t\t\"/>\n\t\t<polygon id=\"XMLID_28_\" class=\"st1\" points=\"114.058,0 0,-114.058 10.606,-124.665 124.665,-10.607 \t\t\"/>\n\t\t<polygon id=\"XMLID_27_\" class=\"st1\" points=\"264.058,-50 150,-164.058 160.606,-174.665 274.665,-60.607 \t\t\"/>\n\t\t<polygon id=\"XMLID_26_\" class=\"st1\" points=\"214.058,-50 100,-164.058 110.606,-174.665 224.665,-60.607 \t\t\"/>\n\t\t<polygon id=\"XMLID_25_\" class=\"st1\" points=\"164.058,-50 50,-164.058 60.606,-174.665 174.665,-60.607 \t\t\"/>\n\t\t<polygon id=\"XMLID_24_\" class=\"st1\" points=\"114.058,-50 0,-164.058 10.606,-174.665 124.665,-60.607 \t\t\"/>\n\t\t<polygon id=\"XMLID_23_\" class=\"st1\" points=\"264.058,-100 150,-214.058 160.606,-224.665 274.665,-110.607 \t\t\"/>\n\t\t<polygon id=\"XMLID_22_\" class=\"st1\" points=\"214.058,-100 100,-214.058 110.606,-224.665 224.665,-110.607 \t\t\"/>\n\t\t<polygon id=\"XMLID_16_\" class=\"st1\" points=\"164.058,-100 50,-214.058 60.606,-224.665 174.665,-110.607 \t\t\"/>\n\t\t<polygon id=\"XMLID_15_\" class=\"st1\" points=\"114.058,-100 0,-214.058 10.606,-224.665 124.665,-110.607 \t\t\"/>\n\t</g>\n</pattern>\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\n</svg>");
+
+
+/***/ }),
+
+/***/ "./src/assets/patterns/pattern-8.ts":
+/*!******************************************!*\
+  !*** ./src/assets/patterns/pattern-8.ts ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\n<style type=\"text/css\">\n\t.st0{fill:none;}\n\t.st1{fill:#231F20;}\n\t.st2{fill:url(#hex_pattern);}\n</style>\n<pattern  width=\"100\" height=\"100\"\npatternUnits=\"userSpaceOnUse\" id=\"hex_pattern\" viewBox=\"20 -117.32 100 100\" style=\"overflow:visible;\">\n\t<g id=\"XMLID_10_\">\n\t\t<polygon id=\"XMLID_23_\" class=\"st0\" points=\"20,-117.32 120,-117.32 120,-17.32 20,-17.32 \t\t\"/>\n\t\t<polygon id=\"XMLID_21_\" class=\"st1\" points=\"110,-25 100,-42.32 110,-59.641 130,-59.641 140,-42.32 130,-25 \t\t\"/>\n\t\t<polygon id=\"XMLID_20_\" class=\"st1\" points=\"60,0 50,-17.32 60,-34.641 80,-34.641 90,-17.32 80,0 \t\t\"/>\n\t\t<polygon id=\"XMLID_19_\" class=\"st1\" points=\"10,-25 0,-42.32 10,-59.641 30,-59.641 40,-42.32 30,-25 \t\t\"/>\n\t\t<polygon id=\"XMLID_15_\" class=\"st1\" points=\"110,-75 100,-92.32 110,-109.641 130,-109.641 140,-92.32 130,-75 \t\t\"/>\n\t\t<polygon id=\"XMLID_14_\" class=\"st1\" points=\"60,-50 50,-67.32 60,-84.641 80,-84.641 90,-67.32 80,-50 \t\t\"/>\n\t\t<polygon id=\"XMLID_13_\" class=\"st1\" points=\"10,-75 0,-92.32 10,-109.641 30,-109.641 40,-92.32 30,-75 \t\t\"/>\n\t\t<polygon id=\"XMLID_12_\" class=\"st1\" points=\"60,-100 50,-117.32 60,-134.641 80,-134.641 90,-117.32 80,-100 \t\t\"/>\n\t</g>\n</pattern>\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\n</svg>");
+
+
+/***/ }),
+
+/***/ "./src/assets/patterns/pattern-9.ts":
+/*!******************************************!*\
+  !*** ./src/assets/patterns/pattern-9.ts ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\n<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n\t viewBox=\"0 0 100 100\" style=\"enable-background:new 0 0 100 100;\" xml:space=\"preserve\">\n<style type=\"text/css\">\n\t.st0{fill:none;}\n\t.st1{fill:#231F20;}\n\t.st2{fill:url(#arrow_pattern);}\n</style>\n<pattern  width=\"52\" height=\"50\" patternUnits=\"userSpaceOnUse\" id=\"arrow_pattern\" viewBox=\"0 -68.556 52 50\" style=\"overflow:visible;\">\n\t<g id=\"XMLID_10_\">\n\t\t<polygon id=\"XMLID_62_\" class=\"st0\" points=\"0,-68.556 52,-68.556 52,-18.556 0,-18.556 \t\t\"/>\n\t\t<g id=\"XMLID_44_\">\n\t\t\t<polygon id=\"XMLID_61_\" class=\"st1\" points=\"23.5,-5.899 23.485,0 2.272,-21.213 2.287,-27.112 \t\t\t\"/>\n\t\t\t<polygon id=\"XMLID_45_\" class=\"st1\" points=\"28.5,-5.899 28.515,0 49.728,-21.213 49.713,-27.112 \t\t\t\"/>\n\t\t</g>\n\t\t<g id=\"XMLID_41_\">\n\t\t\t<polygon id=\"XMLID_43_\" class=\"st1\" points=\"23.5,-15.899 23.485,-10 2.272,-31.213 2.287,-37.112 \t\t\t\"/>\n\t\t\t<polygon id=\"XMLID_42_\" class=\"st1\" points=\"28.5,-15.899 28.515,-10 49.728,-31.213 49.713,-37.112 \t\t\t\"/>\n\t\t</g>\n\t\t<g id=\"XMLID_31_\">\n\t\t\t<polygon id=\"XMLID_37_\" class=\"st1\" points=\"23.5,-25.899 23.485,-20 2.272,-41.213 2.287,-47.112 \t\t\t\"/>\n\t\t\t<polygon id=\"XMLID_32_\" class=\"st1\" points=\"28.5,-25.899 28.515,-20 49.728,-41.213 49.713,-47.112 \t\t\t\"/>\n\t\t</g>\n\t\t<g id=\"XMLID_25_\">\n\t\t\t<polygon id=\"XMLID_27_\" class=\"st1\" points=\"23.5,-35.899 23.485,-30 2.272,-51.213 2.287,-57.112 \t\t\t\"/>\n\t\t\t<polygon id=\"XMLID_26_\" class=\"st1\" points=\"28.5,-35.899 28.515,-30 49.728,-51.213 49.713,-57.112 \t\t\t\"/>\n\t\t</g>\n\t\t<g id=\"XMLID_17_\">\n\t\t\t<polygon id=\"XMLID_24_\" class=\"st1\" points=\"23.5,-45.899 23.485,-40 2.272,-61.213 2.287,-67.112 \t\t\t\"/>\n\t\t\t<polygon id=\"XMLID_18_\" class=\"st1\" points=\"28.5,-45.899 28.515,-40 49.728,-61.213 49.713,-67.112 \t\t\t\"/>\n\t\t</g>\n\t\t<g id=\"XMLID_14_\">\n\t\t\t<polygon id=\"XMLID_16_\" class=\"st1\" points=\"23.5,-55.899 23.485,-50 2.272,-71.213 2.287,-77.112 \t\t\t\"/>\n\t\t\t<polygon id=\"XMLID_15_\" class=\"st1\" points=\"28.5,-55.899 28.515,-50 49.728,-71.213 49.713,-77.112 \t\t\t\"/>\n\t\t</g>\n\t\t<g id=\"XMLID_11_\">\n\t\t\t<polygon id=\"XMLID_13_\" class=\"st1\" points=\"23.5,-65.899 23.485,-60 2.272,-81.213 2.287,-87.112 \t\t\t\"/>\n\t\t\t<polygon id=\"XMLID_12_\" class=\"st1\" points=\"28.5,-65.899 28.515,-60 49.728,-81.213 49.713,-87.112 \t\t\t\"/>\n\t\t</g>\n\t</g>\n</pattern>\n<rect id=\"XMLID_1_\" class=\"st2\" width=\"100\" height=\"100\"/>\n</svg>");
+
 
 /***/ }),
 
@@ -4641,7 +4674,7 @@ var PatternsService = /** @class */ (function () {
                 var index = i + 1;
                 var id = ++_this.idAccum;
                 if (!datasetPattern || legendType === _configuration__WEBPACK_IMPORTED_MODULE_2__["legend"].basedOn.LABELS) {
-                    datasetPattern = _assets_patterns_index__WEBPACK_IMPORTED_MODULE_1__["default"][_this.patternAccum++];
+                    datasetPattern = _assets_patterns_index__WEBPACK_IMPORTED_MODULE_1__["default"][_this.patternAccum++].default;
                 }
                 // Create SVG container div
                 var svgContainer = document.createElement("div");
