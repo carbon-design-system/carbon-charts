@@ -70,7 +70,7 @@ export class PieChart extends BaseChart {
 		if (otherLabelIndex !== -1) {
 			sortedData.push(sortedData.splice(otherLabelIndex, 1)[0]);
 		} else if (rest.length > 0) {
-			const { otherLabel } = this.options
+			const { otherLabel } = this.options;
 			sortedData = sortedData.slice(0, stopAt)
 				.concat([{
 					label: (otherLabel ? otherLabel : Configuration.pie.label.other),
@@ -168,7 +168,7 @@ export class PieChart extends BaseChart {
 						{ rtl: this.options.rtl }
 					),
 					{ rtl: this.options.rtl }
-				)
+				);
 			})
 			.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); });
 

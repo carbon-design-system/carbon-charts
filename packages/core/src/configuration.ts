@@ -155,7 +155,7 @@ const baseOptions: BaseChartOptions = {
  */
 export interface PieChartOptions extends BaseChartOptions {
 	otherLabel?: string;
-};
+}
 
 /**
  * Options specific to pie charts

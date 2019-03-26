@@ -136,7 +136,7 @@ export namespace Tools {
 	 * @returns The percentage in the form of a string "87%"
 	 */
 	export function convertValueToPercentage(item, fullData, options?) {
-		const percentage = Math.floor(item / fullData.reduce((accum, val) => accum + val.value, 0) * 100)
+		const percentage = Math.floor(item / fullData.reduce((accum, val) => accum + val.value, 0) * 100);
 
 		if (options && options.rtl) {
 			return `٪${percentage}`;
@@ -258,25 +258,25 @@ export namespace Tools {
 
 		const arabicNumerals = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
 
-        str = String(str);
+		str = String(str);
 		return str.replace(/[0-9]/g, num => arabicNumerals[num]);
-	}
+	};
 
 	export const createFormatter = (formatters, options) => orgValue => {
-		let result = orgValue
-		
+		let result = orgValue;
+
 		// Apply all provided formatters
 		formatters.forEach(formatter => {
 			if (formatter) {
-				result = formatter(result)
+				result = formatter(result);
 			}
 		});
 
 		// Check for RTL compatibility
 		if (options.rtl) {
-			result = Tools.translateText(result)
+			result = Tools.translateText(result);
 		}
 
-		return result
-	}
+		return result;
+	};
 }
