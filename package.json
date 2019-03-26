@@ -19,7 +19,8 @@
 		"contributors:add": "all-contributors add",
 		"contributors:generate": "all-contributors generate",
 		"build-all": "bash scripts/build-packages-and-demos.sh",
-		"build-all-demos": "bash scripts/build-demos.sh"
+		"build-all-demos": "bash scripts/build-demos.sh",
+		"deploy": "bash scripts/deploy.sh"
 	},
 	"husky": {
 		"hooks": {
