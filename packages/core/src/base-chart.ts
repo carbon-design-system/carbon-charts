@@ -898,6 +898,34 @@ export class BaseChart {
 		this.addTooltipEventListeners(tooltip);
 	}
 
+	saveToSVG(filename?) {
+		const svgClone = this.svg.node().cloneNode(true);
+		const tempSVGHolder = document.createElement("div");
+		tempSVGHolder.appendChild(svgClone);
+
+		select(tempSVGHolder)
+			.select("svg")
+			.attr("xmlns", "http://www.w3.org/2000/svg");
+
+		// Setup the file to download, as well as the filename
+		const downloadLink = document.createElement("a");
+		downloadLink.download = `${filename || "chart"}.svg`;
+
+		// Fill file contents
+		const blob = new Blob(
+			[
+				"<?xml version=\"1.0\" encoding=\"utf-8\"?>" + select(tempSVGHolder).html()
+			],
+			{
+				type: "text/plain"
+			}
+		);
+
+		// Set download link based off of the file Blob
+		downloadLink.href = window.URL.createObjectURL(blob);
+		downloadLink.click();
+	}
+
 	getFillScale() {
 		return this.options.accessibility ? this.patternScale : this.colorScale;
 	}

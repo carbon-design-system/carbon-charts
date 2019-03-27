@@ -249,6 +249,16 @@ const setDemoActionsEventListener = (chartType: any, oldData: any) => {
 					changeDemoData(chartType, oldData, parseInt(element.getAttribute("data-promise-delay"), 10));
 				};
 			});
+
+			const saveToImageButton = <HTMLElement> actionsElement.querySelector("button.save-to-image");
+			if (saveToImageButton) {
+				saveToImageButton.onclick = e => {
+					e.preventDefault();
+
+					const chartRef = classyCharts[chartType];
+					chartRef.saveToSVG();
+				};
+			}
 		}
 	}
 };
