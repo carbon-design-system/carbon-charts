@@ -910,7 +910,7 @@ export class BaseChart {
 		if (this.options.accessibility) {
 			const patternsWrapper = select("div#carbon-charts-patterns");
 			const patternContainers = Array.prototype.slice.call((<HTMLElement>patternsWrapper.node()).children);
-			
+
 			// Loop through the SVG patterns on the page
 			// Mounted through the patterns service
 			patternContainers.forEach(patternContainer => {
