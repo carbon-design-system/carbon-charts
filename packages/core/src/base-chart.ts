@@ -903,9 +903,29 @@ export class BaseChart {
 		const tempSVGHolder = document.createElement("div");
 		tempSVGHolder.appendChild(svgClone);
 
-		select(tempSVGHolder)
-			.select("svg")
+		select(tempSVGHolder).select("svg")
 			.attr("xmlns", "http://www.w3.org/2000/svg");
+
+		// If there are patterns in the chart
+		if (this.options.accessibility) {
+			const patternsWrapper = select("div#carbon-charts-patterns");
+			const patternContainers = Array.prototype.slice.call((<HTMLElement>patternsWrapper.node()).children);
+			
+			// Loop through the SVG patterns on the page
+			// Mounted through the patterns service
+			patternContainers.forEach(patternContainer => {
+				// If the pattern belongs to this chart
+				if (patternContainer.id.indexOf(this.chartContainerID) !== -1) {
+					const patternElement = patternContainer.querySelector("pattern");
+
+					if (patternElement) {
+						// Add the pattern to the final SVG
+						const tempPattern = patternElement.cloneNode(true);
+						tempSVGHolder.querySelector("svg").appendChild(tempPattern);
+					}
+				}
+			});
+		}
 
 		// Setup the file to download, as well as the filename
 		const downloadLink = document.createElement("a");
