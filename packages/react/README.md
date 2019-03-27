@@ -1,16 +1,19 @@
-## How to run the demo app:
-1. In this directory, run:
-```sh
-npm i
-npm run build
-npm link
-npm start
+# `@carbon/charts-react`
+
+> Carbon Charting React Wrappers
+
+**[Storybook Demos](https://carbon-design-system.github.io/carbon-charts/react)**
+
+## Getting Started
+Run the following command using [npm](https://www.npmjs.com/):
+
+```bash
+npm install -S @carbon/charts-react
 ```
 
-2. Open a separate tab in Terminal, then run:
-```sh
-cd demo
-npm i
-npm link @carbon/charts-react
-npm start
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
+instead:
+
+```bash
+yarn add @carbon/charts-react
 ```

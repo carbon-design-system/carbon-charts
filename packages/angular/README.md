@@ -1,6 +1,8 @@
-# `@carbon/charts-angular`
+# `@carbon/charts-vue`
 
-> Angular wrappers for the Carbon charting components
+> Carbon Charting Angular Wrappers
+
+**[Storybook Demos](https://carbon-design-system.github.io/carbon-charts/angular)**
 
 ## Getting Started
 
