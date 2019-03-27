@@ -1,10 +1,10 @@
 import {
 	BarChart,
+	ScatterChart,
 	LineChart,
 	PieChart,
 	DonutChart,
-	ComboChart,
-	ScatterChart
+	ComboChart
 } from "../src/index";
 
 // Styles
@@ -58,12 +58,14 @@ const {
 	pieOptions,
 	pieData,
 	donutOptions,
+	// Scatter
+	scatterData,
+	scatterOptions,
 	// Line
 	curvedLineOptions,
 	curvedLineData,
 	lineData,
 	lineOptions,
-	scatterData,
 	// Combo
 	comboData,
 	comboOptions
@@ -113,6 +115,12 @@ const chartTypes = [
 		data: curvedLineData
 	},
 	{
+		id: "scatter",
+		name: "scatter",
+		options: scatterOptions,
+		data: scatterData
+	},
+	{
 		id: "line",
 		name: "Line",
 		options: lineOptions,
@@ -135,12 +143,6 @@ const chartTypes = [
 		name: "donut",
 		options: donutOptions,
 		data: pieData
-	},
-	{
-		id: "scatter",
-		name: "scatter",
-		options: lineOptions,
-		data: scatterData
 	}
 ];
 

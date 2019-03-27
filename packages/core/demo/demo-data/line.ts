@@ -65,7 +65,6 @@ export const curvedLineOptions = {
 	containerResizable: true
 };
 
-
 export const lineData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
@@ -138,42 +137,3 @@ export const lineOptions = {
 	legendClickable: true,
 	containerResizable: true
 };
-
-export const scatterData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
-	datasets: [
-		{
-			label: "Dataset 1",
-			backgroundColors: [colors[0]],
-			data: [
-				32100,
-				23500,
-				53100,
-				42300,
-				12300
-			]
-		},
-		{
-			label: "Dataset 2",
-			backgroundColors: [colors[1]],
-			data: [
-				34200,
-				53200,
-				42300,
-				21400,
-				0
-			]
-		},
-		{
-			label: "Dataset 3",
-			backgroundColors: [colors[2]],
-			data: [
-				41200,
-				23400,
-				34210,
-				1400,
-				42100
-			]
-		}
-	]
-}
