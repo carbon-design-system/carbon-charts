@@ -937,7 +937,7 @@ export class BaseChart {
 				"<?xml version=\"1.0\" encoding=\"utf-8\"?>" + select(tempSVGHolder).html()
 			],
 			{
-				type: "text/plain"
+				type: "image/svg+xml"
 			}
 		);
 
