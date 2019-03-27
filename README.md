@@ -55,7 +55,7 @@ npm install @carbon/charts --save
 </p>
 
 <p align="center">
-	<a href="https://codesandbox.io/s/2plrn2jp7r">
+	<a href="https://codesandbox.io/s/149vrzo62l">
 		<img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit Carbon Charts - Vanilla" />
 	</a>
 </p>
