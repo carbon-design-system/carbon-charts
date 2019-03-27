@@ -1,31 +1,20 @@
-# vue
+# `@carbon/charts-vue`
 
-## Project setup
+> Carbon Charting Vue Wrappers
 
-```
-npm install
-```
+**[Storybook Demos](https://carbon-design-system.github.io/carbon-charts/vue)**
 
-### Compiles and hot-reloads for development
+## Getting Started
 
-```
-npm run storybook
-```
+Run the following command using [npm](https://www.npmjs.com/):
 
-### Compiles and minifies for production
-
-```
-npm run build
+```bash
+npm install -S @carbon/charts-vue
 ```
 
-### Run your tests (TODO)
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
+instead:
 
-```
-npm run test
-```
-
-### Lints and fixes files
-
-```
-npm run lint
+```bash
+yarn add @carbon/charts-vue
 ```
