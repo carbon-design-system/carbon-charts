@@ -63,3 +63,42 @@ lineStories.add('Monotone X Curve', () => ({
 	template:
 		'<ccv-line-chart :data="curvedLineData" :options="curveMonotoneXOptions"></ccv-line-chart>',
 }));
+
+
+const stepStories = storiesOf("Step", module);
+
+stepStories.add("Middle", () => ({
+	components: { CcvLineChart },
+	data() {
+		return {
+			lineData,
+			curveStepOptions: Object.assign({}, lineOptions, {curve: "curveStep"})
+		}
+	},
+	template:
+		'<ccv-line-chart :data="lineData" :options="curveStepOptions"></ccv-line-chart>',
+}));
+
+stepStories.add("Before", () => ({
+	components: { CcvLineChart },
+	data() {
+		return {
+			lineData,
+			curveStepBeforeOptions: Object.assign({}, lineOptions, {curve: "curveStepBefore"})
+		}
+	},
+	template:
+		'<ccv-line-chart :data="lineData" :options="curveStepBeforeOptions"></ccv-line-chart>',
+}));
+
+stepStories.add("After (Regular)", () => ({
+	components: { CcvLineChart },
+	data() {
+		return {
+			lineData,
+			curveStepAfterOptions: Object.assign({}, lineOptions, {curve: "curveStepAfter"})
+		}
+	},
+	template:
+		'<ccv-line-chart :data="lineData" :options="curveStepAfterOptions"></ccv-line-chart>',
+}));
