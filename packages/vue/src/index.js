@@ -1,5 +1,5 @@
 const ctx = require.context(
-	'./components/',
+	'./',
 	true,
 	/^(?!.*(?:\/_|-story\.vue|-test\.vue)).*\.vue$/
 );

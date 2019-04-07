@@ -5,8 +5,9 @@ node_modules
 .vscode/
 .idea/
 *.log
-packages/core/demo/bundle/
-packages/react/build/
+!packages/core/demo/
+demo
 storybook-dist
 package-lock.json
 .cache/
+pages/

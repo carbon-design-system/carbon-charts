@@ -13,8 +13,6 @@ import { ScatterChart } from "./scatter-chart";
 import * as Configuration from "./configuration";
 const defaultColors = Configuration.options.BASE.colors;
 
-import "./style.scss";
-
 export {
 	defaultColors,
 	BaseChart,
