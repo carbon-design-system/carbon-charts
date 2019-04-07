@@ -299,6 +299,9 @@ export class BaseAxisChart extends BaseChart {
 				lowerCircle.datum({"y": this.sliderBottom});
 			}
 
+			//Update global slider position
+			this.relativeSliderTop = this.sliderTop / this.dragAreaLength;
+			this.relativeSliderBottom = this.sliderBottom / this.dragAreaLength;
 			this.displayData = this.updateDisplayData();
 
 			this.updateXandYGrid();
@@ -672,6 +675,8 @@ export class BaseAxisChart extends BaseChart {
 
 		// When a resize that does not occur as a result of using a lsider to zoom
 		if (zoom === false) {
+
+			console.log("here")
 
 			// Update slider when chart resizes
 			const line = this.svg.select(`#${this.chartContainerID}-slider-line`);
