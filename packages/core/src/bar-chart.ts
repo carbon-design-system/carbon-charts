@@ -190,6 +190,7 @@ export class BarChart extends BaseAxisChart {
 			.attr("class", "bar")
 			.attr("x", this.getBarX.bind(this))
 			.attr("y", d => this.y(Math.max(0, d.value)))
+			.attr("clip-path", `url(#${this.chartContainerID}-clip)`)
 			.attr("width", this.x1.bandwidth())
 			.attr("height", d => Math.abs(this.y(d.value) - this.y(0)))
 			.style("opacity", 0)
