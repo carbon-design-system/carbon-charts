@@ -79,7 +79,7 @@ header.m-demo-header {
 			div.links {
 				display: table;
 				margin: auto;
-				
+
 				.bx--btn {
 					float: left;
 					margin-right: 5px;
@@ -87,7 +87,7 @@ header.m-demo-header {
 					&.last {
 						margin-right: 0;
 					}
-					
+
 					svg {
 						margin-right: 5px;
 
@@ -100,6 +100,11 @@ header.m-demo-header {
 							width: 25px;
 							height: 25px;
 							margin-left: -5px;
+						}
+
+						&.vue {
+							width: 18px;
+							height: 18px;
 						}
 					}
 				}

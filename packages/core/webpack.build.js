@@ -12,7 +12,7 @@ module.exports = env => {
 		entry: "./src/index.ts",
 		output: {
 			path: __dirname + "/dist",
-			filename: "index.js",
+			filename: "index.umd.js",
 			chunkFilename: "[name].chunk.js",
 			libraryTarget: "umd",
 			library: "Charts"
