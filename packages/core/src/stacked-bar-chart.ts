@@ -100,7 +100,9 @@ export class StackedBarChart extends BaseAxisChart {
 					.attr("fill", d => this.getFillColor(d.datasetLabel, d.data.label, d.data.value))
 					.attr("stroke", d => this.options.accessibility ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : null)
 					.attr("stroke-width", Configuration.bars.default.strokeWidth)
-					.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
+					.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
+					// Make the data element accessible and pass x and y values for the data point, and the dataset label
+					.call(this.makeAccessible);
 
 		// Hide the overlay
 		this.updateOverlay().hide();
