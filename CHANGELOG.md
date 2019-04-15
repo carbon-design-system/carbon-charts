@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.11](https://github.com/IBM/carbon-charts/compare/v0.11.10...v0.11.11) (2019-04-15)
+
+
+### Bug Fixes
+
+* **react:** use es6 style exports in index.js ([#241](https://github.com/IBM/carbon-charts/issues/241)) ([65964ae](https://github.com/IBM/carbon-charts/commit/65964ae))
+
+
+
+
+
 ## [0.11.10](https://github.com/IBM/carbon-charts/compare/v0.11.9...v0.11.10) (2019-04-02)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
