@@ -35,7 +35,6 @@ export class BaseChart {
 	data: ChartData;
 	displayData: ChartData;
 	fixedDataLabels;
-	originalDisplayDataItems = 0;
 
 	// Fill scales & fill related objects
 	patternScale = {};
@@ -128,10 +127,8 @@ export class BaseChart {
 			this.dispatchEvent("data-load");
 
 			// Process data
-			// this.data = this.dataProcessor(Tools.clone(value));
 			this.data = Tools.clone(value);
 			this.displayData = this.dataProcessor(Tools.clone(value));
-			this.originalDisplayDataItems = this.displayData.datasets.length;
 
 			const keys = this.getKeysFromData();
 
@@ -555,34 +552,12 @@ export class BaseChart {
 
 	positionLegend() {
 
-		let visibleLegendItems = 0;
-
-		// Count visible legend items
-		this.container.selectAll(".legend-btn.clickable").each(function(d) {
-
-			const node = select(this);
-
-			if (node.style("display") === "inline-block") {
-				visibleLegendItems++;
-			}
-		});
-
-		// If some legend items are not visible due to chart resizing, show the legend tooltip
-		if (this.originalDisplayDataItems > visibleLegendItems) {
-			if (this.container.select(".expand-btn").nodes().length === 0) {
-				this.addTooltipOpenButtonToLegend();
-			}
-		} else {
-			this.container.selectAll(".expand-btn").remove();
-		}
-
 		if (this.container.select(".legend-tooltip").nodes().length > 0
 			&& this.container.select(".legend-tooltip").node().style.display === "block") { return; }
 
 		this.container.selectAll(".legend-btn").style("display", "inline-block");
 		const svgWidth = this.container.select("g.inner-wrap").node().getBBox().width;
 		if (this.isLegendOnRight()) {
-			this.container.selectAll(".expand-btn").remove();
 			this.container.select(".legend-wrapper").style("height", 0);
 			const containerWidth = this.container.node().clientWidth;
 			const legendWidth = containerWidth - svgWidth;
@@ -604,6 +579,30 @@ export class BaseChart {
 					btnsWidth += btn.clientWidth;
 				}
 			});
+		}
+
+		let visibleLegendItems = 0;
+		let totalLegendItems = 0;
+
+		// Count visible legend items
+		this.container.selectAll(".legend-btn.clickable").each(function(d) {
+
+			totalLegendItems++;
+
+			const node = select(this);
+
+			if (node.style("display") === "inline-block") {
+				visibleLegendItems++;
+			}
+		});
+
+		// If some legend items are not visible due to chart resizing, show the legend tooltip
+		if (totalLegendItems > visibleLegendItems) {
+			if (this.container.select(".expand-btn").nodes().length === 0) {
+				this.addTooltipOpenButtonToLegend();
+			}
+		} else {
+			this.container.selectAll(".expand-btn").remove();
 		}
 	}
 
