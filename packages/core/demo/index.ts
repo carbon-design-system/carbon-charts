@@ -3,11 +3,16 @@ import {
 	LineChart,
 	PieChart,
 	DonutChart,
-	ComboChart
+	ComboChart,
+	ScatterChart
 } from "../src/index";
 
 // Styles
 import "./index.scss";
+import "./../src/style.scss";
+
+// Interfaces
+import { ChartData } from "./../src/configuration";
 
 //
 // Experimental Switch Toggle
@@ -58,6 +63,7 @@ const {
 	curvedLineData,
 	lineData,
 	lineOptions,
+	scatterData,
 	// Combo
 	comboData,
 	comboOptions
@@ -129,6 +135,12 @@ const chartTypes = [
 		name: "donut",
 		options: donutOptions,
 		data: pieData
+	},
+	{
+		id: "scatter",
+		name: "scatter",
+		options: lineOptions,
+		data: scatterData
 	}
 ];
 
@@ -298,6 +310,17 @@ chartTypes.forEach(type => {
 				setDemoActionsEventListener(type.id, type.data);
 
 				break;
+			case "scatter":
+				classyCharts[type.id] = new ScatterChart(
+					classyContainer,
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id}),
+					}
+				);
+
+				setDemoActionsEventListener(type.id, type.data);
+				break;
 			case "curved-line":
 			case "line":
 			case "line-step":
@@ -316,7 +339,7 @@ chartTypes.forEach(type => {
 				classyCharts[type.id] = new PieChart(
 					classyContainer,
 					{
-						data: new Promise((resolve, reject) => {
+						data: new Promise<ChartData>((resolve, reject) => {
 							setTimeout(() => {
 								resolve(type.data);
 							}, 0);

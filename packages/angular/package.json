@@ -1,13 +1,14 @@
 {
 	"$schema": "./node_modules/ng-packagr/package.schema.json",
 	"name": "@carbon/charts-angular",
-	"version": "0.7.10",
+	"version": "0.11.11",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"scripts": {
 		"build": "ng-packagr -p package.json",
 		"storybook": "start-storybook -p 9005 -c .storybook -s ./.storybook/assets",
-		"build-storybook": "build-storybook -o storybook-dist"
+		"demo:build": "build-storybook -o demo/bundle/angular",
+		"clean": "rm -rf dist demo/bundle"
 	},
 	"repository": {
 		"type": "git",
@@ -19,39 +20,33 @@
 		"@carbon/charts": "^0.7.11"
 	},
 	"peerDependencies": {
-		"@angular/common": "^6.0.0",
-		"@angular/compiler": "^6.0.0",
-		"@angular/core": "^6.0.0"
+		"@angular/common": "^6.0.0 || ^7.0.0",
+		"@angular/compiler": "^6.0.0 || ^7.0.0",
+		"@angular/core": "^6.0.0 || ^7.0.0",
+		"rxjs": "^6.0.0",
+		"zone.js": "^0.8.29"
 	},
 	"devDependencies": {
-		"@angular-devkit/core": "7.1.0",
-		"@angular/animations": "6.0.0",
-		"@angular/common": "6.0.0",
-		"@angular/compiler": "6.0.0",
-		"@angular/compiler-cli": "6.0.0",
-		"@angular/core": "6.0.0",
-		"@angular/forms": "6.0.0",
-		"@angular/http": "6.0.0",
-		"@angular/platform-browser": "6.0.0",
-		"@angular/platform-browser-dynamic": "6.0.0",
-		"@angular/platform-server": "7.1.1",
-		"@angular/router": "6.0.0",
-		"@storybook/addon-actions": "4.0.0-alpha.16",
-		"@storybook/addon-backgrounds": "4.0.0-alpha.16",
-		"@storybook/addon-centered": "4.0.0-alpha.16",
-		"@storybook/addon-jest": "4.0.0-alpha.16",
-		"@storybook/addon-knobs": "4.0.0-alpha.16",
-		"@storybook/addon-links": "4.0.0-alpha.16",
-		"@storybook/addon-notes": "4.0.0-alpha.16",
-		"@storybook/addon-options": "4.0.0-alpha.16",
-		"@storybook/addon-storyshots": "4.0.0-alpha.16",
-		"@storybook/addon-storysource": "4.0.0-alpha.16",
-		"@storybook/addons": "4.0.0-alpha.16",
-		"@storybook/angular": "4.0.0-alpha.16",
-		"@storybook/storybook-deployer": "2.3.0",
+		"@angular-devkit/core": "0.8.9",
+		"@angular/animations": "6.1.0",
+		"@angular/common": "6.1.0",
+		"@angular/compiler": "6.1.0",
+		"@angular/compiler-cli": "6.1.0",
+		"@angular/core": "6.1.0",
+		"@angular/forms": "6.1.0",
+		"@angular/platform-browser": "6.1.0",
+		"@angular/platform-browser-dynamic": "6.1.0",
+		"@babel/core": "7.3.4",
+		"@storybook/angular": "5.0.5",
 		"@types/node": "8.5.2",
-		"ng-packagr": "4.4.0",
-		"typescript": "2.7.2"
+		"babel-loader": "8.0.5",
+		"core-js": "2.6.5",
+		"d3": "4.11.0",
+		"ng-packagr": "4.7.1",
+		"rxjs": "6.3.3",
+		"tslint": "5.14.0",
+		"typescript": "2.7.2",
+		"zone.js": "0.8.29"
 	},
 	"ngPackage": {
 		"lib": {

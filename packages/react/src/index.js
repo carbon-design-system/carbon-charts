@@ -3,7 +3,7 @@ import DonutChart from "./donut-chart";
 import LineChart from "./line-chart";
 import BarChart from "./bar-chart";
 
-module.exports = {
+export {
 	PieChart,
 	DonutChart,
 	LineChart,

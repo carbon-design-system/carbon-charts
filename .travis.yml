@@ -2,18 +2,18 @@ dist: trusty
 language: node_js
 node_js:
  - '8'
-# addons:
-#   chrome: stable
-# before_install:
-# - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 before_install: .travis/before_install.sh
 install:
   - npm install
-after_success: .travis/after_success.sh
-# script: lerna run lint && lerna run test
 script: lerna run lint
 sudo: false
 deploy:
+  -
+    provider: script
+    script: "bash ./scripts/deploy.sh"
+    skip_cleanup: true
+    true:
+      branch: master
   -
     allow-empty-commit: true
     email: carbon@us.ibm.com

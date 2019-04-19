@@ -10,6 +10,7 @@ import { transition, Transition } from "d3-transition";
 
 // Internal Imports
 import * as Configuration from "./configuration";
+import { ChartConfig, BaseChartOptions, ChartData } from "./configuration";
 import { Tools } from "./tools";
 import PatternsService from "./services/patterns";
 
@@ -28,11 +29,11 @@ export class BaseChart {
 	svg: any;
 	innerWrap: any;
 
-	options: any = Object.assign({}, Configuration.options.BASE);
+	options: BaseChartOptions = Tools.merge({}, Configuration.options.BASE);
 
 	// Data
-	data: any;
-	displayData: any;
+	data: ChartData;
+	displayData: ChartData;
 	fixedDataLabels;
 
 	// Fill scales & fill related objects
@@ -46,11 +47,10 @@ export class BaseChart {
 		tooltips: null
 	};
 
-	constructor(holder: Element, configs: any) {
+	constructor(holder: Element, configs: ChartConfig<BaseChartOptions>) {
 		this.id = `chart-${BaseChart.chartCount++}`;
-
 		if (configs.options) {
-			this.options = Object.assign({}, this.options, configs.options);
+			this.options = Tools.merge({}, this.options, configs.options);
 		}
 
 		// Save holder element reference, and initialize it by applying appropriate styling
@@ -165,7 +165,6 @@ export class BaseChart {
 	}
 
 	getKeysFromData() {
-		const { datasets } = this.displayData;
 		const keys = {};
 
 		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
@@ -238,6 +237,22 @@ export class BaseChart {
 		}
 	}
 
+	getFillColor(datasetLabel: any, label?: any, value?: any) {
+		if (this.options.getFillColor && !this.options.accessibility) {
+			return this.options.getFillColor(datasetLabel, label, value) || this.getFillScale()[datasetLabel](label);
+		} else {
+			return this.getFillScale()[datasetLabel](label);
+		}
+	}
+
+	getStrokeColor(datasetLabel: any, label?: any, value?: any) {
+		if (this.options.getStrokeColor) {
+			return this.options.getStrokeColor(datasetLabel, label, value) || this.colorScale[datasetLabel](label);
+		} else {
+			return this.colorScale[datasetLabel](label);
+		}
+	}
+
 	// TODO - Refactor
 	getChartSize(container = this.container) {
 		let ratio, marginForLegendTop;
@@ -284,20 +299,8 @@ export class BaseChart {
 		return this.svg;
 	}
 
-	updateSVG() {
-		const chartSize = this.getChartSize();
-		this.svg.select(".x.axis")
-			.attr("transform", `translate(0, ${chartSize.height})`);
-		const grid = this.svg.select(".grid")
-			.attr("clip-path", `url(${window.location.origin}${window.location.pathname}#clip)`);
-		grid.select(".x.grid")
-			.attr("transform", `translate(0, ${chartSize.width})`);
-		grid.select(".y.grid")
-			.attr("transform", `translate(0, 0)`);
-	}
-
 	// Default fallback when no data processing is needed
-	dataProcessor(data: any) {
+	dataProcessor(data: ChartData): any {
 		return data;
 	}
 
@@ -421,7 +424,7 @@ export class BaseChart {
 		const exceptedElementData = exceptedElement.datum() as any;
 		select(exception).attr("fill-opacity", false);
 		select(exception).attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
-		select(exception).attr("fill", (d: any) => this.getFillScale()[d.datasetLabel](exceptedElementData.label));
+		select(exception).attr("fill", (d: any) => this.getFillColor(d.datasetLabel, exceptedElementData.label, exceptedElementData.value));
 	}
 
 	// ================================================================================
@@ -513,9 +516,9 @@ export class BaseChart {
 			.merge(legendItems.selectAll("div"))
 			.style("background-color", (d, i) => {
 				if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
-					return this.colorScale[this.displayData.datasets[0].label](d.key);
+					return this.getStrokeColor(this.displayData.datasets[0].label, d.key, d.value);
 				} else if (d.value === Configuration.legend.items.status.ACTIVE) {
-					return this.colorScale[d.key]();
+					return this.getStrokeColor(d.key);
 				}
 
 				return "white";
@@ -698,18 +701,18 @@ export class BaseChart {
 								.select("div.legend-circle")
 								.style("background-color", (d, i) => {
 									if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
-										return this.colorScale[this.displayData.datasets[0].label](d.key);
+										return this.getStrokeColor(this.displayData.datasets[0].label, d.key, d.value);
 									} else if (d.value === Configuration.legend.items.status.ACTIVE) {
-										return this.colorScale[d.key]();
+										return this.getStrokeColor(d.key);
 									}
 
 									return "white";
 								})
 								.style("border-color", d => {
 									if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
-										return this.colorScale[this.displayData.datasets[0].label](d.key);
+										return this.getStrokeColor(this.displayData.datasets[0].label, d.key, d.value);
 									} else {
-										return this.colorScale[d.key]();
+										return this.getStrokeColor(d.key);
 									}
 								})
 								.style("border-style", Configuration.legend.inactive.borderStyle)
@@ -730,18 +733,18 @@ export class BaseChart {
 				.attr("class", "legend-circle")
 				.style("background-color", (d, i) => {
 					if (this.getLegendType() === Configuration.legend.basedOn.LABELS && d.value === Configuration.legend.items.status.ACTIVE) {
-						return this.colorScale[this.displayData.datasets[0].label](d.key);
+						return this.getStrokeColor(this.displayData.datasets[0].label, d.key, d.value);
 					} else if (d.value === Configuration.legend.items.status.ACTIVE) {
-						return this.colorScale[d.key]();
+						return this.getStrokeColor(d.key);
 					}
 
 					return "white";
 				})
 				.style("border-color", d => {
 					if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
-						return this.colorScale[this.displayData.datasets[0].label](d.key);
+						return this.getStrokeColor(this.displayData.datasets[0].label, d.key, d.value);
 					} else {
-						return this.colorScale[d.key]();
+						return this.getStrokeColor(d.key);
 					}
 				})
 				.style("border-style", Configuration.legend.inactive.borderStyle)

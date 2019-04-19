@@ -1,17 +1,21 @@
 import babel from "rollup-plugin-babel";
-import commonjs from "rollup-plugin-commonjs";
 
 module.exports = {
-    input: "./src/index.js",
-    output: {
-        file: "./dist/bundle.js",
-        format: "cjs" 
-    },
-    plugins: [
-        babel({
-            exclude: "node_modules/**",
-            plugins: ["external-helpers"]
-        }),
-        commonjs()
-    ],
+	input: "./src/index.js",
+	output: {
+		name: "chartsReact",
+		file: "./dist/bundle/bundle.js",
+		format: "umd",
+		globals: {
+			"react": "React",
+			"@carbon/charts": "charts"
+		}
+	},
+	plugins: [
+		babel({
+			exclude: "node_modules/**",
+			plugins: ["external-helpers"]
+		})
+	],
+	external: ["react", "react-dom", "@carbon/charts"]
 };

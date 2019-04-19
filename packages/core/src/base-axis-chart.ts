@@ -1,27 +1,28 @@
 // D3 Imports
 import { select } from "d3-selection";
-import { scaleBand, scaleLinear } from "d3-scale";
-import { axisBottom, axisLeft, axisRight } from "d3-axis";
+import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from "d3-scale";
+import { axisBottom, axisLeft, axisRight, AxisScale, AxisDomain } from "d3-axis";
 import { min, max } from "d3-array";
 
 import { BaseChart } from "./base-chart";
 
 import * as Configuration from "./configuration";
+import { ChartConfig, AxisChartOptions } from "./configuration";
 import { Tools } from "./tools";
 
 export class BaseAxisChart extends BaseChart {
-	x: any;
-	y: any;
-	y2: any;
+	x: ScaleBand<any>;
+	y: ScaleLinear<any, any>;
+	y2: ScaleLinear<any, any>;
 	thresholdDimensions: any;
 
-	options: any = Object.assign({}, Configuration.options.AXIS);
+	options: any = Tools.merge({}, Configuration.options.AXIS);
 
-	constructor(holder: Element, configs: any) {
+	constructor(holder: Element, configs: ChartConfig<AxisChartOptions>) {
 		super(holder, configs);
 
 		if (configs.options) {
-			this.options = Object.assign({}, this.options, configs.options);
+			this.options = Tools.merge({}, this.options, configs.options);
 			const { axis } = configs.options;
 			if (axis) {
 				this.x = axis.x;
@@ -290,12 +291,18 @@ export class BaseAxisChart extends BaseChart {
 		const yAxisCenter = yAxisRef.node().getBBox().height / 2;
 		const yAxisLabelWidth = this.innerWrap.select(".axis-label.y").node().getBBox().width;
 
+<<<<<<< HEAD
 		// Title position depends on the width of the largest y axis label to prevent overlap
 		const tickWidth = this.getLargestTickWidth(yAxisRef.selectAll(".tick"));
 
 		const yAxisTitleTranslate = {
 			x: - yAxisCenter + yAxisLabelWidth / 2,
 			y: - (this.innerWrap.select(".axis-label.y").node().getBBox().height + tickWidth)
+=======
+		const yAxisTitleTranslate = {
+			x: - yAxisCenter + yAxisLabelWidth / 2,
+			y: - (tickHeight + Configuration.scales.tick.heightAddition)
+>>>>>>> 7556cef950f95ef3c5eb7886571996e652c1c859
 		};
 
 		// Align y axis title with y axis
@@ -418,6 +425,7 @@ export class BaseAxisChart extends BaseChart {
 			const yAxisCenter = yAxisRef.node().getBBox().height / 2;
 			const yAxisLabelWidth = this.innerWrap.select(".axis-label.y").node().getBBox().width;
 
+<<<<<<< HEAD
 			// Title position depends on the width of the largest y axis label to prevent overlap
 			const tickWidth = this.getLargestTickWidth(yAxisRef.selectAll(".tick"));
 
@@ -428,6 +436,13 @@ export class BaseAxisChart extends BaseChart {
 
 			const yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
 
+=======
+			const yAxisTitleTranslate = {
+				x: - yAxisCenter + yAxisLabelWidth / 2,
+				y: - (tickHeight + Configuration.scales.tick.heightAddition)
+			};
+
+>>>>>>> 7556cef950f95ef3c5eb7886571996e652c1c859
 			// Align y axis title on the y axis
 			this.innerWrap.select(".axis-label.y")
 				.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
@@ -620,25 +635,50 @@ export class BaseAxisChart extends BaseChart {
 	// TODO - Refactor
 	wrapTick(ticks) {
 		const self = this;
-		const letNum = Configuration.scales.tick.maxLetNum;
-		ticks.each(function(t) {
-			if (t && t.length > letNum / 2) {
-				const tick = select(this);
-				const y = tick.attr("y");
-				tick.text("");
-				const tspan1 = tick.append("tspan")
-					.attr("x", 0).attr("y", y).attr("dx", Configuration.scales.dx).attr("dy", `-${Configuration.scales.tick.dy}`);
-				const tspan2 = tick.append("tspan")
-					.attr("x", 0).attr("y", y).attr("dx", Configuration.scales.dx).attr("dy", Configuration.scales.tick.dy);
-				if (t.length < letNum - 3) {
-					tspan1.text(t.substring(0, t.length / 2));
-					tspan2.text(t.substring(t.length / 2 + 1, t.length));
-				} else {
-					tspan1.text(t.substring(0, letNum / 2));
-					tspan2.text(t.substring(letNum / 2, letNum - 3) + "...");
-					tick.on("click", dd => {
-						self.showLabelTooltip(dd, true);
-					});
+		const lineHeight = Configuration.scales.tick.lineHeight;
+
+		ticks.each(function (t) {
+			const text = select(this);
+			let textContent = text.text();
+
+			// If the text has already been broken down into parts
+			if (text.selectAll("tspan").nodes().length > 1) {
+				textContent = text.selectAll("tspan")
+					.nodes()
+					.map(node => select(node).text())
+					.join(" ");
+			}
+
+			const words = textContent.split(/\s+/).reverse();
+			const y = text.attr("y");
+			const dy = parseFloat(text.attr("dy"));
+
+			let word;
+			let line = [];
+			let lineNumber = 0;
+			let tspan = text.text(null)
+				.append("tspan")
+				.attr("x", 0);
+
+			// Set max length allowed to length of datapoints
+			// In the x-scale
+			const maxTextLengthAllowed = self.x.bandwidth();
+			while (word = words.pop()) {
+				line.push(word);
+				tspan.text(line.join(" "));
+
+				// Get text length and compare to maximum length allowed
+				const tspanTextLength = tspan.node().getComputedTextLength();
+				if (tspanTextLength > maxTextLengthAllowed) {
+					line.pop();
+					tspan.text(line.join(" "));
+					line = [word];
+
+					tspan = text.append("tspan")
+						.attr("x", 0)
+						.attr("y", y)
+						.attr("dy", ++lineNumber * lineHeight + dy + "em")
+						.text(word);
 				}
 			}
 		});

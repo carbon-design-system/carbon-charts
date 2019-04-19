@@ -3,6 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.11](https://github.com/IBM/carbon-charts/compare/v0.11.10...v0.11.11) (2019-04-15)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
+## [0.11.10](https://github.com/IBM/carbon-charts/compare/v0.11.9...v0.11.10) (2019-04-02)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
+## [0.11.9](https://github.com/IBM/carbon-charts/compare/v0.11.8...v0.11.9) (2019-03-28)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
+## [0.11.8](https://github.com/IBM/carbon-charts/compare/v0.11.7...v0.11.8) (2019-03-26)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
+## [0.11.7](https://github.com/IBM/carbon-charts/compare/v0.11.6...v0.11.7) (2019-03-26)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
+## [0.11.5](https://github.com/IBM/carbon-charts/compare/v0.11.4...v0.11.5) (2019-03-26)
+
+
+### Bug Fixes
+
+* **build:** refactor deploy and update package.jsons  ([#223](https://github.com/IBM/carbon-charts/issues/223)) ([fb512cb](https://github.com/IBM/carbon-charts/commit/fb512cb))
+
+
+
+
+
+## [0.11.4](https://github.com/IBM/carbon-charts/compare/v0.11.3...v0.11.4) (2019-03-25)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
 ## [0.7.10](https://github.com/IBM/carbon-charts/compare/v0.7.9...v0.7.10) (2018-11-28)
 
 **Note:** Version bump only for package @carbon/charts-angular

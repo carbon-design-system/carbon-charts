@@ -3,6 +3,193 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.11](https://github.com/IBM/carbon-charts/compare/v0.11.10...v0.11.11) (2019-04-15)
+
+
+### Bug Fixes
+
+* **react:** use es6 style exports in index.js ([#241](https://github.com/IBM/carbon-charts/issues/241)) ([65964ae](https://github.com/IBM/carbon-charts/commit/65964ae))
+
+
+
+
+
+## [0.11.10](https://github.com/IBM/carbon-charts/compare/v0.11.9...v0.11.10) (2019-04-02)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.11.9](https://github.com/IBM/carbon-charts/compare/v0.11.8...v0.11.9) (2019-03-28)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.11.8](https://github.com/IBM/carbon-charts/compare/v0.11.7...v0.11.8) (2019-03-26)
+
+
+### Bug Fixes
+
+* **core:** add babel-polyfill as a hard dependency ([#230](https://github.com/IBM/carbon-charts/issues/230)) ([d3e8c0c](https://github.com/IBM/carbon-charts/commit/d3e8c0c))
+
+
+
+
+
+## [0.11.7](https://github.com/IBM/carbon-charts/compare/v0.11.6...v0.11.7) (2019-03-26)
+
+
+### Bug Fixes
+
+* **core:** remove suffixes to use regular module resolution, and force publish all packages with every release ([#229](https://github.com/IBM/carbon-charts/issues/229)) ([2e33ca6](https://github.com/IBM/carbon-charts/commit/2e33ca6))
+
+
+
+
+
+## [0.11.6](https://github.com/IBM/carbon-charts/compare/v0.11.5...v0.11.6) (2019-03-26)
+
+
+### Bug Fixes
+
+* **build:** add npm credentials ([#226](https://github.com/IBM/carbon-charts/issues/226)) ([93e0ff7](https://github.com/IBM/carbon-charts/commit/93e0ff7))
+* **core:** export patterns as strings of svgs ([#227](https://github.com/IBM/carbon-charts/issues/227)) ([14391ae](https://github.com/IBM/carbon-charts/commit/14391ae))
+
+
+
+
+
+## [0.11.5](https://github.com/IBM/carbon-charts/compare/v0.11.4...v0.11.5) (2019-03-26)
+
+
+### Bug Fixes
+
+* **build:** add github credentials ([#225](https://github.com/IBM/carbon-charts/issues/225)) ([118196a](https://github.com/IBM/carbon-charts/commit/118196a))
+* **build:** checkout master to rejoin head ([#224](https://github.com/IBM/carbon-charts/issues/224)) ([bdbe0ca](https://github.com/IBM/carbon-charts/commit/bdbe0ca))
+* **build:** refactor deploy and update package.jsons  ([#223](https://github.com/IBM/carbon-charts/issues/223)) ([fb512cb](https://github.com/IBM/carbon-charts/commit/fb512cb))
+
+
+
+
+
+## [0.11.4](https://github.com/IBM/carbon-charts/compare/v0.11.3...v0.11.4) (2019-03-25)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.11.3](https://github.com/IBM/carbon-charts/compare/v0.11.2...v0.11.3) (2019-03-21)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.11.2](https://github.com/IBM/carbon-charts/compare/v0.11.1...v0.11.2) (2019-03-20)
+
+
+### Bug Fixes
+
+* **angular:** Fix demos and build process ([245bb12](https://github.com/IBM/carbon-charts/commit/245bb12))
+* **react:** Move react and react-dom to peerDependencies ([#217](https://github.com/IBM/carbon-charts/issues/217)) ([e1d0b36](https://github.com/IBM/carbon-charts/commit/e1d0b36))
+
+
+
+
+
+## [0.11.1](https://github.com/IBM/carbon-charts/compare/v0.11.0...v0.11.1) (2019-03-13)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+# [0.11.0](https://github.com/IBM/carbon-charts/compare/v0.10.5...v0.11.0) (2019-03-12)
+
+
+### Features
+
+* **core:** specify config as interfaces ([e474fb6](https://github.com/IBM/carbon-charts/commit/e474fb6))
+
+
+
+
+
+## [0.10.5](https://github.com/IBM/carbon-charts/compare/v0.10.4...v0.10.5) (2019-03-12)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.10.4](https://github.com/IBM/carbon-charts/compare/v0.10.3...v0.10.4) (2019-03-08)
+
+
+### Bug Fixes
+
+* **core:** remove updateSVG() ([38f7e83](https://github.com/IBM/carbon-charts/commit/38f7e83)), closes [#185](https://github.com/IBM/carbon-charts/issues/185)
+
+
+
+
+
+## [0.10.3](https://github.com/IBM/carbon-charts/compare/v0.10.2...v0.10.3) (2019-03-07)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.10.2](https://github.com/IBM/carbon-charts/compare/v0.10.1...v0.10.2) (2019-03-06)
+
+
+### Bug Fixes
+
+* **core:** Enforce text alignment of legend popup in the styles ([#203](https://github.com/IBM/carbon-charts/issues/203)) ([6a4fe1e](https://github.com/IBM/carbon-charts/commit/6a4fe1e))
+* **core:** Fix loss of letters in labels in wrapTicks() ([#202](https://github.com/IBM/carbon-charts/issues/202)) ([8635e7b](https://github.com/IBM/carbon-charts/commit/8635e7b))
+
+
+
+
+
+## [0.10.1](https://github.com/IBM/carbon-charts/compare/v0.10.0...v0.10.1) (2019-02-28)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+# [0.10.0](https://github.com/IBM/carbon-charts/compare/v0.9.7...v0.10.0) (2019-02-28)
+
+
+### Features
+
+* **$core:** Adds getStrokeColor and getFillColor options ([e1766d3](https://github.com/IBM/carbon-charts/commit/e1766d3)), closes [#136](https://github.com/IBM/carbon-charts/issues/136)
+
+
+
+
+
+## [0.9.7](https://github.com/IBM/carbon-charts/compare/v0.9.6...v0.9.7) (2019-02-22)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 ## [0.9.6](https://github.com/IBM/carbon-charts/compare/v0.9.4...v0.9.6) (2019-02-21)
 
 

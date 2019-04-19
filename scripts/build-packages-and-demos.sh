@@ -1,33 +1,23 @@
-# Generate all assets
-# needed for push to gh-page
-mkdir pages
+#!/usr/bin/env bash
+
+set -e
+
+# README:
+# each package should build a dist folder that contains everything needed to publish that package
+# including:
+#  - package.json
+#  - .js files and .d.ts files (no raw .ts files!)
+#  - README.md
+#  - and any specialty files
+
+# Generate all assets needed for push to gh-pages
+mkdir -p pages
 touch pages/.nojekyll
 # echo "charts.carbondesignsystem.com" > pages/CNAME
 
-# Build Core demos and copy to `pages` directory
-cd packages/core
-npm run build
-npm run demo:build
-typedoc --out ./demo/bundle/documentation ./src/index.ts
-cp -a demo/bundle/. ../../pages
 
-# Build Angular demos and copy to `pages` directory
-cd ../angular
-# Build angular demos
-npm run build-storybook
-cp -a storybook-dist/. ../../pages/angular
-# Build angular bundle for release
-npm run build
-mv dist ../charts-angular-dist
-cd ..
-rm -rf angular
-mv charts-angular-dist angular
-
-# Build React demos
-cd react
-npm run build
-npm run build-storybook
-cp -a storybook-dist/. ../../pages/react
-
-# Go back to project root folder
-cd ../..
+# run the build and demo:build script in all packages
+lerna run --parallel build
+lerna run --parallel demo:build
+# copy all the demos/{package name here} folders to the pages deploy directory
+lerna exec -- cp -a demo/bundle/. \$LERNA_ROOT_PATH/pages
