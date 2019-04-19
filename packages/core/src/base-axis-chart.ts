@@ -73,6 +73,7 @@ export class BaseAxisChart extends BaseChart {
 		}
 
 		this.draw();
+		this.adjustForYAxisTitle();
 
 		this.addDataPointEventListener();
 	}
@@ -85,7 +86,19 @@ export class BaseAxisChart extends BaseChart {
 		this.setXAxis();
 		this.setYScale();
 		this.setYAxis();
+		this.adjustForYAxisTitle();
 		this.interpolateValues(this.displayData);
+	}
+
+	adjustForYAxisTitle() {
+
+		// Y axis title position is set based on max tick width
+		// Shift the chart accordingly
+		const yAxisRef = this.svg.select("g.y.axis");
+		const tickWidth = this.getLargestTickWidth(yAxisRef.selectAll(".tick"));
+
+		this.innerWrap
+			.attr("transform", `translate(${2 * tickWidth},0)`);
 	}
 
 	updateDisplayData() {
@@ -278,9 +291,12 @@ export class BaseAxisChart extends BaseChart {
 		const yAxisCenter = yAxisRef.node().getBBox().height / 2;
 		const yAxisLabelWidth = this.innerWrap.select(".axis-label.y").node().getBBox().width;
 
+		// Title position depends on the width of the largest y axis label to prevent overlap
+		const tickWidth = this.getLargestTickWidth(yAxisRef.selectAll(".tick"));
+
 		const yAxisTitleTranslate = {
 			x: - yAxisCenter + yAxisLabelWidth / 2,
-			y: - (tickHeight + Configuration.scales.tick.heightAddition)
+			y: - (this.innerWrap.select(".axis-label.y").node().getBBox().height + tickWidth)
 		};
 
 		// Align y axis title with y axis
@@ -403,10 +419,15 @@ export class BaseAxisChart extends BaseChart {
 			const yAxisCenter = yAxisRef.node().getBBox().height / 2;
 			const yAxisLabelWidth = this.innerWrap.select(".axis-label.y").node().getBBox().width;
 
+			// Title position depends on the width of the largest y axis label to prevent overlap
+			const tickWidth = this.getLargestTickWidth(yAxisRef.selectAll(".tick"));
+
 			const yAxisTitleTranslate = {
 				x: - yAxisCenter + yAxisLabelWidth / 2,
-				y: - (tickHeight + Configuration.scales.tick.heightAddition)
+				y: - (this.innerWrap.select(".axis-label.y").node().getBBox().height + tickWidth)
 			};
+
+			const yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
 
 			// Align y axis title on the y axis
 			this.innerWrap.select(".axis-label.y")
@@ -426,7 +447,7 @@ export class BaseAxisChart extends BaseChart {
 			if (secondaryYAxisRef.nodes().length > 0) {
 				secondaryYAxisRef.transition(t)
 					.attr("transform", `translate(${this.getChartSize().width}, 0)`)
-					// Being cast to any because d3 does not offer appropriate typings for the .call() function
+					// Being cast to any because d3 does noy-at offer appropriate typings for the .call() function
 					.call(secondaryYAxis as any);
 			} else {
 				this.innerWrap.append("g")
@@ -462,7 +483,7 @@ export class BaseAxisChart extends BaseChart {
 		yGrid.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
 
 		const g = this.innerWrap.select(".y.grid")
-			.attr("transform", "translate(0, 0)")
+			.attr("transform", `translate(0, 0)`)
 			.call(yGrid);
 
 		this.cleanGrid(g);
@@ -640,6 +661,23 @@ export class BaseAxisChart extends BaseChart {
 
 		});
 		return largestHeight;
+	}
+
+	getLargestTickWidth(ticks) {
+		let largestWidth = 0;
+		ticks.each(function() {
+			let tickLength = 0;
+			try {
+				tickLength = this.getBBox().width;
+			} catch (e) {
+				console.log(e);
+			}
+			if (tickLength > largestWidth) {
+				largestWidth = tickLength;
+			}
+
+		});
+		return largestWidth;
 	}
 
 	/**************************************
