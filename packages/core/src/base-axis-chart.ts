@@ -91,12 +91,11 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	adjustForYAxisTitle() {
-
-		// Y axis title position is set based on max tick width
-		// Shift the chart accordingly
 		const yAxisRef = this.svg.select("g.y.axis");
 		const tickWidth = this.getLargestTickWidth(yAxisRef.selectAll(".tick"));
 
+		// Y axis title position is set based on max tick width
+		// Shift the chart accordingly
 		this.innerWrap
 			.attr("transform", `translate(${2 * tickWidth},0)`);
 	}
