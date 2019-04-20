@@ -7,7 +7,7 @@ export const groupedBarData = {
 			label: "Dataset 1",
 			backgroundColors: [colors[0]],
 			data: [
-				65000,
+				6500000,
 				-29123,
 				-35213,
 				51213,

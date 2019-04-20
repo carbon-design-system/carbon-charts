@@ -662,6 +662,8 @@ export const tooltip = {
 	magicTop2: 22,
 	magicLeft1: 11,
 	magicLeft2: 12,
+	shiftThreshold: 400,
+	marginThreshold: 360,
 	fadeIn: {
 		duration: 250
 	},
@@ -670,6 +672,15 @@ export const tooltip = {
 	},
 	size: {
 		COMPACT: "compact"
+	},
+	margins: {
+		right: 6,
+		smallCharts: {
+			left: 1.5
+		},
+		largeCharts: {
+			left: 2
+		}
 	}
 };
 
