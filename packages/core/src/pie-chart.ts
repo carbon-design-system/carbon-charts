@@ -289,19 +289,19 @@ export class PieChart extends BaseChart {
 
 		const bounds = this.getChartSize().width / (1 + (1 / Configuration.tooltip.margins.right));
 		const outOfBounds = mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 > bounds;
-		let leftPos = 0;
+		let tooltipPosition = 0;
 
 		// Set the tooltip to the right of the cursor if window is too small
 		if (outOfBounds === true && this.getChartSize().width < Configuration.tooltip.shiftThreshold) {
 
 			// The tooltip is shifted further to the left for smaller charts
 			if (this.getChartSize().width < Configuration.tooltip.marginThreshold) {
-				leftPos = mouse(this.holder as SVGSVGElement)[0] - (this.getChartSize().width / Configuration.tooltip.margins.smallCharts.left);
+				tooltipPosition = mouse(this.holder as SVGSVGElement)[0] - (this.getChartSize().width / Configuration.tooltip.margins.smallCharts.left);
 			} else {
-				leftPos = mouse(this.holder as SVGSVGElement)[0] - (this.getChartSize().width / Configuration.tooltip.margins.largeCharts.left);
+				tooltipPosition = mouse(this.holder as SVGSVGElement)[0] - (this.getChartSize().width / Configuration.tooltip.margins.largeCharts.left);
 			}
 		} else {
-			leftPos = (this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2;
+			tooltipPosition = (this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2;
 		}
 
 		const dVal = d.value.toLocaleString();
@@ -311,7 +311,7 @@ export class PieChart extends BaseChart {
 		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
 			tooltip.style(
 				"left",
-				leftPos + "px"
+				tooltipPosition + "px"
 			);
 		} else {
 			tooltip.style("left", mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
@@ -352,22 +352,22 @@ export class PieChart extends BaseChart {
 				const relativeMousePosition = mouse(self.holder as HTMLElement);
 				const bounds = self.getChartSize().width / (1 + (1 / Configuration.tooltip.margins.right));
 				const outOfBounds = relativeMousePosition[0] + Configuration.tooltip.magicLeft2 > bounds;
-				let leftPos = 0;
+				let tooltipPosition = 0;
 
 				// Set the tooltip to the right of the cursor if window is too small
 				if (outOfBounds === true && self.getChartSize().width < Configuration.tooltip.shiftThreshold) {
 
 					// The tooltip is shifted further to the left for smaller charts
 					if (self.getChartSize().width < Configuration.tooltip.marginThreshold) {
-						leftPos = relativeMousePosition[0] - (self.getChartSize().width / Configuration.tooltip.margins.smallCharts.left);
+						tooltipPosition = relativeMousePosition[0] - (self.getChartSize().width / Configuration.tooltip.margins.smallCharts.left);
 					} else {
-						leftPos = relativeMousePosition[0] - (self.getChartSize().width / Configuration.tooltip.margins.largeCharts.left);
+						tooltipPosition = relativeMousePosition[0] - (self.getChartSize().width / Configuration.tooltip.margins.largeCharts.left);
 					}
 				} else {
-					leftPos = relativeMousePosition[0] + Configuration.tooltip.magicLeft2;
+					tooltipPosition = relativeMousePosition[0] + Configuration.tooltip.magicLeft2;
 				}
 
-				tooltipRef.style("left", leftPos + "px")
+				tooltipRef.style("left", tooltipPosition + "px")
 					.style("top", relativeMousePosition[1] + "px");
 			})
 			.on("mouseout", function(d) {
