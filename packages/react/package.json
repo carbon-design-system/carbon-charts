@@ -1,20 +1,15 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "0.8.1",
+	"version": "0.11.11",
 	"description": "Carbon charting components for React",
 	"main": "index.js",
-	"files": [
-		"dist",
-		"index.js",
-		"CHANGELOG.md",
-		"README.md"
-	],
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "npm run storybook",
-		"build": "rollup -c",
+		"build": "bash build.sh",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
-		"build-storybook": "build-storybook -o storybook-dist"
+		"demo:build": "build-storybook -o demo/bundle/react",
+		"clean": "rm -rf dist demo/bundle"
 	},
 	"repository": {
 		"type": "git",
@@ -27,14 +22,16 @@
 	},
 	"homepage": "https://github.com/IBM/carbon-charts#readme",
 	"dependencies": {
-		"@carbon/charts": "^0.8.1",
-		"react": "16.6.3",
-		"react-dom": "16.6.3"
+		"@carbon/charts": "^0.11.11"
+	},
+	"peerDependencies": {
+		"react": "^16.6.3",
+		"react-dom": "^16.6.3"
 	},
 	"devDependencies": {
-		"@storybook/addon-options": "4.0.7",
-		"@storybook/react": "4.0.7",
-		"@storybook/storybook-deployer": "2.3.0",
+		"@storybook/addon-options": "5.0.5",
+		"@storybook/react": "5.0.5",
+		"@storybook/storybook-deployer": "2.8.1",
 		"babel-cli": "6.26.0",
 		"babel-core": "6.26.0",
 		"babel-loader": "7.1.2",
@@ -47,6 +44,8 @@
 		"css-loader": "0.28.7",
 		"img-loader": "2.0.0",
 		"node-sass": "4.10.0",
+		"react": "16.6.3",
+		"react-dom": "16.6.3",
 		"rollup": "0.67.3",
 		"rollup-plugin-babel": "3.0.4",
 		"rollup-plugin-commonjs": "9.2.0",

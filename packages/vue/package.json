@@ -1,0 +1,76 @@
+{
+  "name": "@carbon/charts-vue",
+  "version": "0.11.11",
+  "description": "Carbon charting components for Vue",
+  "main": "index.js",
+  "scripts": {
+    "build": "bash build.sh",
+    "lint": "vue-cli-service lint ./src/index.js",
+    "storybook": "start-storybook -p 6006",
+    "demo:build": "build-storybook -o demo/bundle/vue",
+    "ci-check": "yarn format:diff",
+    "format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
+    "format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\"",
+    "clean": "rm -rf dist demo/bundle"
+  },
+  "dependencies": {
+    "@carbon/charts": "^0.11.11",
+    "vue": "2.5.21"
+  },
+  "devDependencies": {
+    "@babel/core": "7.3.4",
+    "@storybook/addon-actions": "5.0.5",
+    "@storybook/addon-links": "5.0.5",
+    "@storybook/addons": "5.0.5",
+    "@storybook/vue": "5.0.5",
+    "@vue/cli-plugin-babel": "3.4.0",
+    "@vue/cli-plugin-eslint": "3.4.0",
+    "@vue/cli-service": "3.4.0",
+    "babel-eslint": "10.0.1",
+    "babel-loader": "8.0.5",
+    "babel-preset-vue": "2.0.2",
+    "eslint": "5.8.0",
+    "eslint-plugin-vue": "5.0.0",
+    "lint-staged": "8.1.5",
+    "prettier": "1.16.4",
+    "vue-template-compiler": "2.5.21"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "lint-staged": {
+    "*.{scss,css,js,md,vue}": [
+      "yarn format",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}

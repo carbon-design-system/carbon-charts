@@ -1,28 +1,34 @@
 // D3 Imports
 import { select } from "d3-selection";
-import { scaleBand, scaleLinear } from "d3-scale";
-import { axisBottom, axisLeft, axisRight } from "d3-axis";
+import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from "d3-scale";
+import { axisBottom, axisLeft, axisRight, AxisScale, AxisDomain } from "d3-axis";
 import { min, max } from "d3-array";
 
 import { BaseChart } from "./base-chart";
 
 import * as Configuration from "./configuration";
+import { ChartConfig, AxisChartOptions } from "./configuration";
 import { Tools } from "./tools";
 
 export class BaseAxisChart extends BaseChart {
-	x: any;
-	y: any;
-	y2: any;
+	x: ScaleBand<any>;
+	y: ScaleLinear<any, any>;
+	y2: ScaleLinear<any, any>;
 	thresholdDimensions: any;
 
-	constructor(holder: Element, configs: any) {
+	options: any = Tools.merge({}, Configuration.options.AXIS);
+
+	constructor(holder: Element, configs: ChartConfig<AxisChartOptions>) {
 		super(holder, configs);
 
-		const { axis } = configs.options;
-		if (axis) {
-			this.x = axis.x;
-			this.y = axis.y;
-			this.y2 = axis.y2;
+		if (configs.options) {
+			this.options = Tools.merge({}, this.options, configs.options);
+			const { axis } = configs.options;
+			if (axis) {
+				this.x = axis.x;
+				this.y = axis.y;
+				this.y2 = axis.y2;
+			}
 		}
 	}
 
@@ -172,8 +178,12 @@ export class BaseAxisChart extends BaseChart {
 		// Reposition the legend
 		this.positionLegend();
 
-		if (this.innerWrap.select(".axis-label.x").nodes().length > 0 && this.options.scales.x.title) {
+		if (this.innerWrap.select(".axis-label.x").nodes().length > 0 || this.options.scales.x.title) {
 			this.repositionXAxisTitle();
+		}
+
+		if (this.innerWrap.select(".axis-label.y").nodes().length > 0 || this.options.scales.y.title) {
+			this.repositionYAxisTitle();
 		}
 
 		this.dispatchEvent("resize");
@@ -258,6 +268,27 @@ export class BaseAxisChart extends BaseChart {
 			.attr("text-anchor", "middle")
 			.attr("transform", `translate(${xAxisRef.node().getBBox().width / 2}, ${tickHeight})`)
 			.text(this.options.scales.x.title);
+	}
+
+	repositionYAxisTitle() {
+		const yAxisRef = this.svg.select("g.y.axis");
+		const tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
+
+		const yAxisTitleRef = this.svg.select("g.y.axis text.y.axis-label");
+
+		const yAxisCenter = yAxisRef.node().getBBox().height / 2;
+		const yAxisLabelWidth = this.innerWrap.select(".axis-label.y").node().getBBox().width;
+
+		const yAxisTitleTranslate = {
+			x: - yAxisCenter + yAxisLabelWidth / 2,
+			y: - (tickHeight + Configuration.scales.tick.heightAddition)
+		};
+
+		// Align y axis title with y axis
+		yAxisTitleRef.attr("class", "y axis-label")
+		.attr("text-align", "center")
+		.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`)
+		.text(this.options.scales.y.title);
 	}
 
 	getYMax() {
@@ -360,6 +391,27 @@ export class BaseAxisChart extends BaseChart {
 				.attr("stroke", Configuration.scales.domain.color)
 				.attr("fill", Configuration.scales.domain.color)
 				.attr("stroke-width", Configuration.scales.domain.strokeWidth);
+		}
+
+		const tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
+
+		// Add y-axis title
+		if (this.innerWrap.select(".axis-label.y").nodes().length === 0 && this.options.scales.y.title) {
+			yAxisRef.append("text")
+				.attr("class", "y axis-label")
+				.text(this.options.scales.y.title);
+
+			const yAxisCenter = yAxisRef.node().getBBox().height / 2;
+			const yAxisLabelWidth = this.innerWrap.select(".axis-label.y").node().getBBox().width;
+
+			const yAxisTitleTranslate = {
+				x: - yAxisCenter + yAxisLabelWidth / 2,
+				y: - (tickHeight + Configuration.scales.tick.heightAddition)
+			};
+
+			// Align y axis title on the y axis
+			this.innerWrap.select(".axis-label.y")
+				.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
 		}
 
 		Tools.moveToFront(horizontalLine);
@@ -469,15 +521,15 @@ export class BaseAxisChart extends BaseChart {
 		// Applies to thresholds being added
 		thresholdRects.enter()
 			.append("rect")
-			.classed("bar", true)
+			.classed("threshold-bar", true)
 			.attr("x", 0)
 			.attr("y", d => calculateYPosition(d))
 			.attr("width", width)
 			.attr("height", d => calculateHeight(d))
 			.attr("fill", d => Configuration.scales.y.thresholds.colors[d.theme])
-			.attr("opacity", 0)
+			.style("opacity", 0)
 			.transition(t)
-			.attr("opacity", d => calculateOpacity(d));
+			.style("opacity", d => calculateOpacity(d));
 
 		// Update thresholds
 		thresholdRects
@@ -486,7 +538,7 @@ export class BaseAxisChart extends BaseChart {
 			.attr("y", d => calculateYPosition(d))
 			.attr("width", width)
 			.attr("height", d => calculateHeight(d))
-			.attr("opacity", d => calculateOpacity(d))
+			.style("opacity", d => calculateOpacity(d))
 			.attr("fill", d => Configuration.scales.y.thresholds.colors[d.theme]);
 
 		// Applies to thresholds getting removed
@@ -549,25 +601,50 @@ export class BaseAxisChart extends BaseChart {
 	// TODO - Refactor
 	wrapTick(ticks) {
 		const self = this;
-		const letNum = Configuration.scales.tick.maxLetNum;
-		ticks.each(function(t) {
-			if (t && t.length > letNum / 2) {
-				const tick = select(this);
-				const y = tick.attr("y");
-				tick.text("");
-				const tspan1 = tick.append("tspan")
-					.attr("x", 0).attr("y", y).attr("dx", Configuration.scales.dx).attr("dy", `-${Configuration.scales.tick.dy}`);
-				const tspan2 = tick.append("tspan")
-					.attr("x", 0).attr("y", y).attr("dx", Configuration.scales.dx).attr("dy", Configuration.scales.tick.dy);
-				if (t.length < letNum - 3) {
-					tspan1.text(t.substring(0, t.length / 2));
-					tspan2.text(t.substring(t.length / 2 + 1, t.length));
-				} else {
-					tspan1.text(t.substring(0, letNum / 2));
-					tspan2.text(t.substring(letNum / 2, letNum - 3) + "...");
-					tick.on("click", dd => {
-						self.showLabelTooltip(dd, true);
-					});
+		const lineHeight = Configuration.scales.tick.lineHeight;
+
+		ticks.each(function (t) {
+			const text = select(this);
+			let textContent = text.text();
+
+			// If the text has already been broken down into parts
+			if (text.selectAll("tspan").nodes().length > 1) {
+				textContent = text.selectAll("tspan")
+					.nodes()
+					.map(node => select(node).text())
+					.join(" ");
+			}
+
+			const words = textContent.split(/\s+/).reverse();
+			const y = text.attr("y");
+			const dy = parseFloat(text.attr("dy"));
+
+			let word;
+			let line = [];
+			let lineNumber = 0;
+			let tspan = text.text(null)
+				.append("tspan")
+				.attr("x", 0);
+
+			// Set max length allowed to length of datapoints
+			// In the x-scale
+			const maxTextLengthAllowed = self.x.bandwidth();
+			while (word = words.pop()) {
+				line.push(word);
+				tspan.text(line.join(" "));
+
+				// Get text length and compare to maximum length allowed
+				const tspanTextLength = tspan.node().getComputedTextLength();
+				if (tspanTextLength > maxTextLengthAllowed) {
+					line.pop();
+					tspan.text(line.join(" "));
+					line = [word];
+
+					tspan = text.append("tspan")
+						.attr("x", 0)
+						.attr("y", y)
+						.attr("dy", ++lineNumber * lineHeight + dy + "em")
+						.text(word);
 				}
 			}
 		});

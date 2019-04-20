@@ -42,6 +42,28 @@ export namespace Tools {
 		return JSON.parse(JSON.stringify(obj));
 	}
 
+	// custom deep object merge
+	export const merge = (target, ...objects) => {
+		for (const object of objects) {
+			for (const key in object) {
+				if (object.hasOwnProperty(key)) {
+					// since we're dealing relatively simple objects this should work fine
+					if (object[key] && typeof object[key] === "object") {
+						if (!target[key]) {
+							target[key] = {};
+						}
+						// recursively merge into the target
+						// configs only run 3 or 4 levels deep, so no stack explosions
+						target[key] = merge(target[key], object[key]);
+					} else {
+						target[key] = object[key];
+					}
+				}
+			}
+		}
+		return target;
+	};
+
 	/**************************************
 	 *  DOM-related operations            *
 	 *************************************/
@@ -210,4 +232,16 @@ export namespace Tools {
 
 		return transformMatrixArray[4];
 	}
+
+	export const getProperty = (object, ...propPath) => {
+		let position = object;
+		for (const prop of propPath) {
+			if (position[prop]) {
+				position = position[prop];
+			} else {
+				return null;
+			}
+		}
+		return position;
+	};
 }
