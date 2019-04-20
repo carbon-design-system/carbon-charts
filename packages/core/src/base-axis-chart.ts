@@ -314,6 +314,15 @@ export class BaseAxisChart extends BaseChart {
 		if (scales.y2 && scales.y2.ticks.max) {
 			this.y2 = scaleLinear().rangeRound([height, 0]);
 			this.y2.domain([scales.y2.ticks.min, scales.y2.ticks.max]);
+
+			const clipBox = this.svg.select(`#${this.chartContainerID}-clip`).selectAll("rect");
+
+			const margins = Configuration.charts.margin;
+			const clipboxWidth = this.getChartSize().width;
+			const clipBoxHeight = this.getChartSize().height - margins.bottom - margins.top + margins.clipPaths.bottom;
+	
+			clipBox.attr("width", clipboxWidth);
+			clipBox.attr("height", clipBoxHeight);
 		}
 	}
 
@@ -330,6 +339,8 @@ export class BaseAxisChart extends BaseChart {
 
 		let yAxisRef = this.svg.select("g.y.axis");
 		const horizontalLine = this.svg.select("line.domain");
+
+		horizontalLine.attr("clip-path", `url(#${this.chartContainerID}-clip)`);
 
 		this.svg.select("g.x.axis path.domain")
 			.remove();
@@ -395,6 +406,16 @@ export class BaseAxisChart extends BaseChart {
 		const g = this.innerWrap.select(".x.grid")
 			.attr("transform", `translate(0, ${yHeight})`)
 			.call(xGrid);
+
+		const margins = Configuration.charts.margin;
+		const clipboxWidth = this.getChartSize().width;
+		const clipBoxHeight = this.getChartSize().height - margins.bottom - margins.top + margins.clipPaths.bottom;
+
+		const clipPath = this.innerWrap.append("clipPath")
+			.attr("id", `${this.chartContainerID}-clip`)
+			.append("rect")
+			.attr("width", clipboxWidth)
+			.attr("height", clipBoxHeight);
 
 		this.cleanGrid(g);
 	}

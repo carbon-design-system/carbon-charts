@@ -68,6 +68,9 @@ export const charts = {
 			right: -40,
 			bottom: 50,
 			left: 40
+		},
+		clipPaths: {
+			bottom: 6
 		}
 	},
 	resetOpacity: {

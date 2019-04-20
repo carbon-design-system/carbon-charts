@@ -73,6 +73,7 @@ export class LineChart extends BaseAxisChart {
 			.data(this.displayData.datasets)
 			.enter()
 				.append("g")
+				.attr("clip-path", `url(#${this.chartContainerID}-clip)`)
 				.classed("lines", true);
 
 		gLines.append("path")

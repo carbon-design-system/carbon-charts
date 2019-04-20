@@ -7,33 +7,30 @@ export const curvedLineData = {
 			label: "Dataset 1",
 			backgroundColors: [colors[0]],
 			data: [
-				65000,
-				79000,
-				49213,
-				51213,
-				16932
+				0,
+				100,
+				0,
+				100
 			]
 		},
 		{
 			label: "Dataset 2",
 			backgroundColors: [colors[1]],
 			data: [
-				80000,
-				21312,
-				56456,
-				21312,
-				0
+				0,
+				100,
+				0,
+				100
 			]
 		},
 		{
 			label: "Dataset 3",
 			backgroundColors: [colors[2]],
 			data: [
-				12312,
-				34232,
-				39232,
-				12312,
-				34234
+				0,
+				100,
+				0,
+				100
 			]
 		}
 	]
