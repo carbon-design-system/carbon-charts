@@ -3,5 +3,5 @@ npm i
 
 ./.travis/before_install.sh
 
-# This script builds all package bundles (for NPM) & demos (for gh-pages)
-./scripts/build-packages-and-demos.sh
+# This script builds all demos for netlify
+npm run build-all-demos

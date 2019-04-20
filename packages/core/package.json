@@ -1,22 +1,17 @@
 {
   "name": "@carbon/charts",
-  "version": "0.8.1",
+  "version": "0.11.11",
   "description": "Carbon charting components",
-  "files": [
-    "dist",
-    "index.js",
-    "CHANGELOG.md",
-    "README.md"
-  ],
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
-    "demo:build": "webpack --config webpack.config.js",
-    "build": "rm -rf dist && webpack --config webpack.build.js",
+    "demo:build": "webpack --config webpack.config.js && typedoc --out ./demo/bundle/documentation ./src/index.ts",
+    "build": "bash build.sh",
     "build:watch": "rm -rf dist && webpack -w --config webpack.build.js",
     "bundle:analyzer": "rm -rf dist && webpack --config webpack.build.js --env.bundleAnalyzer",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "karma start --single-run",
-    "test:watch": "karma start --no-single-run"
+    "test:watch": "karma start --no-single-run",
+    "clean": "rm -rf dist demo/bundle"
   },
   "repository": {
     "type": "git",
@@ -28,6 +23,8 @@
   "author": "IBM",
   "license": "Apache-2.0",
   "dependencies": {
+    "babel-polyfill": "6.26.0",
+    "d3": "4.13.0",
     "resize-observer-polyfill": "1.5.0"
   },
   "peerDependencies": {
@@ -67,7 +64,7 @@
     "webpack": "4.18.0",
     "webpack-bundle-analyzer": "2.13.1",
     "webpack-cli": "3.1.0",
-    "webpack-dev-server": "3.1.8",
+    "webpack-dev-server": "3.1.14",
     "webpack-node-externals": "1.6.0"
   },
   "publishConfig": {
