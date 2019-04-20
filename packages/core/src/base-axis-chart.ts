@@ -320,7 +320,7 @@ export class BaseAxisChart extends BaseChart {
 			const margins = Configuration.charts.margin;
 			const clipboxWidth = this.getChartSize().width;
 			const clipBoxHeight = this.getChartSize().height - margins.bottom - margins.top + margins.clipPaths.bottom;
-	
+
 			clipBox.attr("width", clipboxWidth);
 			clipBox.attr("height", clipBoxHeight);
 		}
