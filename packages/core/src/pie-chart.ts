@@ -280,7 +280,6 @@ export class PieChart extends BaseChart {
 
 	// TODO - Should inherit most logic from base-chart
 	showTooltip(d) {
-		console.log(this.getChartSize().width)
 		this.resetOpacity();
 
 		selectAll(".tooltip").remove();
@@ -301,7 +300,7 @@ export class PieChart extends BaseChart {
 				leftPos = mouse(this.holder as SVGSVGElement)[0] - (this.getChartSize().width / Configuration.tooltip.margins.largeCharts.left);
 			}
 		} else {
-			leftPos = (this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2
+			leftPos = (this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2;
 		}
 
 		const dVal = d.value.toLocaleString();
@@ -317,7 +316,6 @@ export class PieChart extends BaseChart {
 			tooltip.style("left", mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
 		}
 
-		console.log(tooltip.style("left"))
 		tooltip.style("opacity", 0)
 			.transition()
 			.duration(Configuration.tooltip.fadeIn.duration)
@@ -364,7 +362,7 @@ export class PieChart extends BaseChart {
 				} else {
 					leftPos = relativeMousePosition[0] + Configuration.tooltip.magicLeft2;
 				}
-				//const leftPos = Math.min(relativeMousePosition[0] + Configuration.tooltip.magicLeft2, chartSize - 100)
+
 				tooltipRef.style("left", leftPos + "px")
 					.style("top", relativeMousePosition[1] + "px");
 			})
