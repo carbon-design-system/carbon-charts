@@ -294,6 +294,7 @@ export class PieChart extends BaseChart {
 		// Set the tooltip to the right of the cursor if window is too small
 		if (outOfBounds === true && this.getChartSize().width < Configuration.tooltip.shiftThreshold) {
 
+			// The tooltip is shifted further to the left for smaller charts
 			if (this.getChartSize().width < Configuration.tooltip.marginThreshold) {
 				leftPos = mouse(this.holder as SVGSVGElement)[0] - (this.getChartSize().width / Configuration.tooltip.margins.smallCharts.left);
 			} else {
@@ -355,6 +356,8 @@ export class PieChart extends BaseChart {
 
 				// Set the tooltip to the right of the cursor if window is too small
 				if (outOfBounds === true && self.getChartSize().width < Configuration.tooltip.shiftThreshold) {
+
+					// The tooltip is shifted further to the left for smaller charts
 					if (self.getChartSize().width < Configuration.tooltip.marginThreshold) {
 						leftPos = relativeMousePosition[0] - (self.getChartSize().width / Configuration.tooltip.margins.smallCharts.left);
 					} else {
