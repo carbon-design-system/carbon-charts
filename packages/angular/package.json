@@ -1,7 +1,7 @@
 {
 	"$schema": "./node_modules/ng-packagr/package.schema.json",
 	"name": "@carbon/charts-angular",
-	"version": "0.11.11",
+	"version": "0.11.12",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"scripts": {
