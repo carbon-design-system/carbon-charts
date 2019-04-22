@@ -2,7 +2,7 @@
   "name": "@carbon/charts-vue",
   "version": "0.11.11",
   "description": "Carbon charting components for Vue",
-  "main": "index.js",
+  "main": "charts-vue.umd.min.js",
   "scripts": {
     "build": "bash build.sh",
     "lint": "vue-cli-service lint ./src/index.js",
