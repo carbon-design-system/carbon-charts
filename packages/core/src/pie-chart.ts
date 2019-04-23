@@ -130,7 +130,7 @@ export class PieChart extends BaseChart {
 		// Compute the correct inner & outer radius
 		const marginedRadius = this.computeRadius();
 		this.arc = arc()
-				.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
+			.innerRadius(this.options.type === "donut" ? (marginedRadius - (24 * 2)) : 0)
 				.outerRadius(marginedRadius);
 
 		this.pie = pie()
@@ -144,9 +144,13 @@ export class PieChart extends BaseChart {
 			.append("path")
 			.attr("d", this.arc)
 			.attr("fill", d => this.getFillColor(this.displayData.datasets[0].label, d.data.label, d.data.value)) // Support multiple datasets
-			.attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
-			.attr("stroke-width", Configuration.pie.default.strokeWidth)
-			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
+			.attr("stroke", "white")
+			// .attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
+			.attr("stroke-width", 1)
+			// .attr("stroke-width", Configuration.pie.default.strokeWidth)
+			.attr("stroke-opacity", 1)
+			// .attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
+
 			.each(function(d) { this._current = d; });
 
 		// Draw the slice labels
@@ -178,9 +182,12 @@ export class PieChart extends BaseChart {
 		path
 			.transition()
 			.duration(0)
-			.attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
-			.attr("stroke-width", Configuration.pie.default.strokeWidth)
-			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
+			.attr("stroke", "white")
+			// .attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
+			.attr("stroke-width", 1)
+			// .attr("stroke-width", Configuration.pie.default.strokeWidth)
+			.attr("stroke-opacity", 1)
+			// .attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.transition()
 			.style("opacity", 1)
 			.duration(Configuration.transitions.default.duration)
@@ -195,9 +202,12 @@ export class PieChart extends BaseChart {
 			.transition()
 			.duration(0)
 			.style("opacity", 0)
-			.attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
-			.attr("stroke-width", Configuration.pie.default.strokeWidth)
-			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
+			.attr("stroke", "white")
+			// .attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
+			.attr("stroke-width", 1)
+			// .attr("stroke-width", Configuration.pie.default.strokeWidth)
+			.attr("stroke-opacity", 1)
+			// .attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.transition()
 			.duration(Configuration.transitions.default.duration)
 			.attr("fill", d => this.getFillColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
@@ -338,9 +348,12 @@ export class PieChart extends BaseChart {
 			})
 			.on("mouseout", function(d) {
 				select(this)
-					.attr("stroke-width", accessibility ? Configuration.pie.default.strokeWidth : Configuration.pie.mouseout.strokeWidth)
-					.attr("stroke", accessibility ? self.getStrokeColor(self.displayData.datasets[0].label, d.data.label, d.data.value) : "none")
-					.attr("stroke-opacity", Configuration.pie.mouseout.strokeOpacity);
+					.attr("stroke", "white")
+					// .attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
+					.attr("stroke-width", 1)
+					// .attr("stroke-width", Configuration.pie.default.strokeWidth)
+					.attr("stroke-opacity", 1);
+					// .attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 
 				self.hideTooltip();
 			});
@@ -372,7 +385,7 @@ export class PieChart extends BaseChart {
 
 		// Resize the arc
 		this.arc = arc()
-			.innerRadius(this.options.type === "donut" ? (radius * (2 / 3)) : 0)
+			.innerRadius(this.options.type === "donut" ? (radius - (24 * 2)) : 0)
 			.outerRadius(radius);
 
 		this.innerWrap.selectAll("path")

@@ -303,7 +303,7 @@ export interface LineChartOptions extends AxisChartOptions {
 const lineOptions: LineChartOptions = Tools.merge({}, axisOptions, {
 	points: {
 		// default point radius to 4
-		radius: 4
+		radius: 3
 	}
 });
 
@@ -534,7 +534,7 @@ export const grid = {
 };
 
 /**
- * Options for bar behaviour
+ * Options for bar behavior
  */
 export const bars = {
 	mouseover: {
@@ -559,12 +559,12 @@ export const bars = {
 };
 
 /**
- * Options for line behaviour
+ * Options for line behavior
  */
 export const lines = {
 	points: {
 		strokeWidth: 4,
-		minNonFilledRadius: 4,
+		minNonFilledRadius: 3,
 		mouseover: {
 			strokeWidth: 4,
 			strokeOpacity: 0.5
@@ -578,7 +578,7 @@ export const lines = {
 };
 
 /**
- * Options for pie behaviour
+ * Options for pie behavior
  */
 export const pie = {
 	maxWidth: 516.6,
@@ -602,7 +602,7 @@ export const pie = {
 };
 
 /**
- * Options for donut behaviour
+ * Options for donut behavior
  */
 export const donut = {
 	centerText: {

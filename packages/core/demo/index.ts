@@ -17,34 +17,21 @@ import { ChartData } from "./../src/configuration";
 //
 // Experimental Switch Toggle
 //
-const experimentalSwitchWrapper = document.querySelector("fieldset.experimental-switch");
-const experimentalCheckbox = (experimentalSwitchWrapper.querySelector("input#toggleInput") as HTMLInputElement);
-const { location } = window;
 
-if (location) {
-	window["isExperimental"] = location.search.replace("?experimental=", "") === "true";
-	experimentalCheckbox.checked = window["isExperimental"];
+const experimentalCheckbox = document.querySelector("#toggleInput") as HTMLInputElement;
 
-	experimentalSwitchWrapper.querySelector("label.bx--toggle__label").addEventListener("click", () => {
-		// Need the setTimeout
-		// Here since carbon toggle
-		// Does not provide a callback
-		// Therefore we wait until the change in toggle
-		// Status takes effect
-		setTimeout(() => {
-			const experimentalMode = experimentalCheckbox.checked;
-
-			// It's not necessary to process the location pathname
-			// Since we're using the location origin
-			// And since we don't use any other query params
-			location.href = `${location.origin}${location.pathname}?experimental=${experimentalMode}`;
-		});
-	});
+const params = new URLSearchParams(window.location.search);
+if (params.has("experimental")) {
+	window["isExperimental"] = params.get("experimental") === "true";
 } else {
-	// Hide experimental switch altogether
-	experimentalSwitchWrapper.parentNode.removeChild(experimentalSwitchWrapper);
+	window["isExperimental"] = true;
 }
+experimentalCheckbox.checked = window["isExperimental"];
 
+experimentalCheckbox.addEventListener("change", () => {
+	params.set("experimental", experimentalCheckbox.checked.toString());
+	window.location.search = params.toString();
+});
 
 const {
 	// Bar
