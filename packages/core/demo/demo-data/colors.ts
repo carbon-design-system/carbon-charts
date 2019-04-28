@@ -1,12 +1,17 @@
+import {
+	colors as colorsService,
+	themes
+} from "../../src/index"
+
 export const colors = window["isExperimental"] ?
 	[
-		"#418cff", // Blue 60
-		"#3dbb61", // Green 40
-		"#ee538b", // Magenta 50
-		"#0058a1", // Cyan 70
-		"#fb4b53", // Red 50
-		"#8a3ffc", // Purple 60
-		"#00bab6" // Teal 40
+		colorsService.purple(60),
+		colorsService.teal(30),
+		colorsService.magenta(50),
+		colorsService.cyan(40),
+		colorsService.magenta(60),
+		colorsService.purple(30),
+		colorsService.cyan(80)		
 	]:
 	[
 		"#00a68f",
