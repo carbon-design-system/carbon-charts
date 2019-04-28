@@ -130,7 +130,7 @@ export class PieChart extends BaseChart {
 		// Compute the correct inner & outer radius
 		const marginedRadius = this.computeRadius();
 		this.arc = arc()
-				.innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 1)
+				.innerRadius(this.options.type === "donut" ? (marginedRadius * (3 / 4)) : 2)
 				.outerRadius(marginedRadius);
 
 		this.pie = pie()
@@ -373,7 +373,7 @@ export class PieChart extends BaseChart {
 
 		// Resize the arc
 		this.arc = arc()
-			.innerRadius(this.options.type === "donut" ? (radius * (2 / 3)) : 0)
+			.innerRadius(this.options.type === "donut" ? (radius * (3 / 4)) : 2)
 			.outerRadius(radius);
 
 		this.innerWrap.selectAll("path")
