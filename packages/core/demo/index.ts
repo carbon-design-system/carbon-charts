@@ -22,7 +22,8 @@ const experimentalCheckbox = (experimentalSwitchWrapper.querySelector("input#tog
 const { location } = window;
 
 if (location) {
-	window["isExperimental"] = location.search.replace("?experimental=", "") === "true";
+	const urlParams = new URLSearchParams(window.location.search);
+	window["isExperimental"] = urlParams.get('experimental');
 	experimentalCheckbox.checked = window["isExperimental"];
 
 	experimentalSwitchWrapper.querySelector("label.bx--toggle__label").addEventListener("click", () => {
