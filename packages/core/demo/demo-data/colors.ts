@@ -5,7 +5,6 @@ import {
 
 const urlParams = new URLSearchParams(window.location.search);
 const theme = parseInt(urlParams.get('theme'));
-
 let themeToUse = [
 	colorsService.purple(60),
 	colorsService.teal(30),
