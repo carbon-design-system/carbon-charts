@@ -81,7 +81,7 @@ export class ScatterChart extends BaseAxisChart {
 	getCircleFillOpacity() {
 		// If the chart is only a scatter chart
 		// And not a line chart for instance
-		if (this.constructor === ScatterChart){
+		if (this.constructor === ScatterChart) {
 			return Configuration.options.SCATTER.points.fillOpacity;
 		}
 
