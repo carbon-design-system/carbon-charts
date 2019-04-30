@@ -44,7 +44,7 @@ export class ScatterChart extends BaseAxisChart {
 				.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 
 		// Hide the overlay
-		this.updateOverlay().hide();
+		this.chartOverlay.hide();
 
 		// Dispatch the load event
 		this.dispatchEvent("load");
@@ -117,7 +117,7 @@ export class ScatterChart extends BaseAxisChart {
 		this.addDataPointEventListener();
 
 		// Hide the overlay
-		this.updateOverlay().hide();
+		this.chartOverlay.hide();
 
 		// Dispatch the update event
 		this.dispatchEvent("update");
