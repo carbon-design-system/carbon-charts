@@ -45,10 +45,13 @@ export enum ThresholdTheme {
  * customize the overlay contents
  */
 export interface ChartOverlayOptions {
+	/**
+	 * types of overlay states
+	 */
 	types: {
 		loading: string;
 		noData: string;
-	}
+	};
 	/**
 	 * raw html to be injected into the overlay container
 	 */
