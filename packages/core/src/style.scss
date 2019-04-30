@@ -47,6 +47,7 @@ div.chart-holder {
 			&.line {
 				fill: none;
 				stroke-width: 2;
+				mix-blend-mode: multiply;
 
 				&:hover {
 					cursor: default;
