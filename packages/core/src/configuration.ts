@@ -295,6 +295,7 @@ export interface LineChartOptions extends AxisChartOptions {
 		 * sets the radius of the point
 		 */
 		radius: number;
+		fillOpacity?: number;
 	};
 }
 /**
@@ -302,8 +303,8 @@ export interface LineChartOptions extends AxisChartOptions {
  */
 const lineOptions: LineChartOptions = Tools.merge({}, axisOptions, {
 	points: {
-		// default point radius to 4
-		radius: 4
+		// default point radius to 3
+		radius: 3
 	}
 });
 
@@ -319,6 +320,7 @@ export interface ScatterChartOptions extends AxisChartOptions {
 		 * sets the radius of the point
 		 */
 		radius: number;
+		fillOpacity?: number;
 	};
 }
 /**
@@ -327,7 +329,8 @@ export interface ScatterChartOptions extends AxisChartOptions {
 const scatterOptions: ScatterChartOptions = Tools.merge({}, axisOptions, {
 	points: {
 		// default point radius to 4
-		radius: 4
+		radius: 4,
+		fillOpacity: 0.3
 	}
 });
 
@@ -463,7 +466,7 @@ export const charts = {
 		outline: "grey"
 	},
 	points: {
-		radius: 4
+		radius: 3
 	},
 	patternFills: {
 		width: 20,
@@ -564,7 +567,7 @@ export const bars = {
 export const lines = {
 	points: {
 		strokeWidth: 4,
-		minNonFilledRadius: 4,
+		minNonFilledRadius: 3,
 		mouseover: {
 			strokeWidth: 4,
 			strokeOpacity: 0.5
