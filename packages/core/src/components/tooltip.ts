@@ -4,10 +4,10 @@ import * as Configuration from "../configuration";
 import { select, selectAll, mouse } from "d3-selection";
 
 export class ChartTooltip {
-    holder: Element;
+	holder: Element;
 
 	constructor(holder: Element) {
-        this.holder = holder;
+		this.holder = holder;
 	}
 
 	show(contentHTML) {
@@ -20,10 +20,10 @@ export class ChartTooltip {
 			.attr("class", "tooltip chart-tooltip")
 			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
-        // Apply html content to the tooltip
-        tooltip.append("div")
-            .attr("class", "text-box")
-            .html(contentHTML);
+		// Apply html content to the tooltip
+		tooltip.append("div")
+			.attr("class", "text-box")
+			.html(contentHTML);
 
 		// Position tooltip
 		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
@@ -33,53 +33,53 @@ export class ChartTooltip {
 			);
 		} else {
 			tooltip.style(
-                "left",
-                mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px"
-            );
+				"left",
+				mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px"
+			);
 		}
 
-        // Fade in
+		// Fade in
 		tooltip.style("opacity", 0)
 			.transition()
 			.duration(Configuration.tooltip.fadeIn.duration)
 			.style("opacity", 1);
 
-        this.addEventListeners();
-    }
+		this.addEventListeners();
+	}
 
 	hide() {
-        const tooltipRef = select(this.holder).select("div.chart-tooltip");
+		const tooltipRef = select(this.holder).select("div.chart-tooltip");
 
-        // Fade out and remove
+		// Fade out and remove
 		tooltipRef.style("opacity", 1)
 			.transition()
 			.duration(Configuration.tooltip.fadeOut.duration)
 			.style("opacity", 0)
-            .remove();
+			.remove();
 
-        this.removeEventLinteners();
-    }
+		this.removeEventLinteners();
+	}
 
-    handleTooltipEvents(evt: Event) {
-        
+	handleTooltipEvents(evt: Event) {
 
-        // If keyboard event
-        if (evt["key"]) {
-            if (evt["key"] === "Escape" || evt["key"] === "Esc") {
-                this.hide();
-            }
-        } else {
-            const targetTagName = evt.target["tagName"];
-            const targetsToBeSkipped = Configuration.options.BASE.tooltip.targetsToSkip;
-            if (targetsToBeSkipped.indexOf(targetTagName) === -1) {
-                // If mouse event
-                this.hide();
-            }
-        }
-    }
 
-    addEventListeners() {
-        const tooltipRef = select(this.holder).select("div.chart-tooltip");
+		// If keyboard event
+		if (evt["key"]) {
+			if (evt["key"] === "Escape" || evt["key"] === "Esc") {
+				this.hide();
+			}
+		} else {
+			const targetTagName = evt.target["tagName"];
+			const targetsToBeSkipped = Configuration.options.BASE.tooltip.targetsToSkip;
+			if (targetsToBeSkipped.indexOf(targetTagName) === -1) {
+				// If mouse event
+				this.hide();
+			}
+		}
+	}
+
+	addEventListeners() {
+		const tooltipRef = select(this.holder).select("div.chart-tooltip");
 
 		// Apply the event listeners to close the tooltip
 		// setTimeout is there to avoid catching the click event that opened the tooltip
@@ -96,12 +96,12 @@ export class ChartTooltip {
 			});
 		}, 0);
 	}
-    
-    removeEventLinteners() {
-        // Remove eventlistener to close tooltip when ESC is pressed
+
+	removeEventLinteners() {
+		// Remove eventlistener to close tooltip when ESC is pressed
 		window.removeEventListener("keydown", this.handleTooltipEvents);
 
 		// Remove eventlistener to close tooltip when clicked outside
 		this.holder.removeEventListener("click", this.handleTooltipEvents);
-    }
+	}
 }
