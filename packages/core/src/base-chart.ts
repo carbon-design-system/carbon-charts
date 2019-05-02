@@ -14,6 +14,7 @@ import { ChartConfig, BaseChartOptions, ChartData } from "./configuration";
 import { Tools } from "./tools";
 import PatternsService from "./services/patterns";
 import { ChartOverlay } from "./components/index";
+import { ChartTooltip } from "./components/tooltip";
 
 // Misc
 import ResizeObserver from "resize-observer-polyfill";
@@ -50,6 +51,7 @@ export class BaseChart {
 
 	// Misc
 	chartOverlay: ChartOverlay;
+	tooltip: ChartTooltip;
 
 	constructor(holder: Element, configs: ChartConfig<BaseChartOptions>) {
 		this.id = `chart-${BaseChart.chartCount++}`;
@@ -70,6 +72,10 @@ export class BaseChart {
 		}
 
 		this.events = document.createDocumentFragment();
+
+		// Initialize charting components
+		this.chartOverlay = new ChartOverlay(this.holder, this.options.overlay);
+		this.tooltip = new ChartTooltip(this.holder);
 
 		if (configs.data) {
 			this.setData(configs.data);
@@ -118,7 +124,6 @@ export class BaseChart {
 		this.dispatchEvent("data-change");
 
 		if (initialDraw || newDataIsAPromise) {
-			this.chartOverlay = new ChartOverlay(this.holder, this.options.overlay);
 			this.chartOverlay.show();
 		}
 
@@ -295,7 +300,9 @@ export class BaseChart {
 	 * removes the chart and any tooltips
 	 */
 	removeChart() {
-		this.holder.remove();
+		// this.holder.remove();
+		this.holder.querySelector("div.chart-wrapper").parentNode.removeChild(this.holder.querySelector("div.chart-wrapper"));
+
 	}
 
 	setSVG(): any {
@@ -803,56 +810,7 @@ export class BaseChart {
 	hideTooltip() {
 		this.resetOpacity();
 
-		const tooltipRef = select(this.holder).select("div.chart-tooltip");
-		tooltipRef.style("opacity", 1)
-			.transition()
-			.duration(Configuration.tooltip.fadeOut.duration)
-			.style("opacity", 0)
-			.remove();
-
-		this.removeTooltipEventListeners();
-	}
-
-	addTooltipEventListeners(tooltip: any) {
-		this.eventHandlers.tooltips = (evt: Event) => {
-			const targetTagName = evt.target["tagName"];
-			const targetsToBeSkipped = ["rect", "circle", "path"];
-
-			// If keyboard event
-			if (evt["key"]) {
-				if (evt["key"] === "Escape" || evt["key"] === "Esc") {
-					this.hideTooltip();
-				}
-			} else if (targetsToBeSkipped.indexOf(targetTagName) === -1) {
-				// If mouse event
-				this.hideTooltip();
-			}
-		};
-
-		// Apply the event listeners to close the tooltip
-		// setTimeout is there to avoid catching the click event that opened the tooltip
-		setTimeout(() => {
-			// When ESC is pressed
-			window.addEventListener("keydown", this.eventHandlers.tooltips);
-
-			// TODO - Don't bind on window
-			// If clicked outside
-			this.holder.addEventListener("click", this.eventHandlers.tooltips);
-
-			// Stop clicking inside tooltip from bubbling up to window
-			tooltip.on("click", () => {
-				event.stopPropagation();
-			});
-		}, 0);
-	}
-
-	removeTooltipEventListeners() {
-		// TODO - Don't bind on window
-		// Remove eventlistener to close tooltip when ESC is pressed
-		window.removeEventListener("keydown", this.eventHandlers.tooltips);
-
-		// Remove eventlistener to close tooltip when clicked outside
-		this.holder.removeEventListener("click", this.eventHandlers.tooltips);
+		this.tooltip.hide();
 	}
 
 	generateTooltipHTML(label, value) {
@@ -870,42 +828,15 @@ export class BaseChart {
 		// Rest opacity of all elements in the chart
 		this.resetOpacity();
 
-		// Remove existing tooltips on the page
-		// TODO - Update class to not conflict with other elements on page
-		selectAll(".chart-tooltip").remove();
-
-		// Draw tooltip
-		const tooltip = select(this.holder).append("div")
-			.attr("class", "tooltip chart-tooltip")
-			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
-
-
-		let tooltipHTML = "";
+		let contentHTML = "";
 		const formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString("en");
 		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
-			tooltipHTML += this.generateTooltipHTML(d.label, formattedValue);
+			contentHTML += this.generateTooltipHTML(d.label, formattedValue);
 		} else {
-			tooltipHTML += this.generateTooltipHTML(d.datasetLabel, formattedValue);
+			contentHTML += this.generateTooltipHTML(d.datasetLabel, formattedValue);
 		}
 
-		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
-
-		// Draw tooltip arrow in the right direction
-		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
-			tooltip.style(
-				"left",
-				mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
-			);
-		} else {
-			tooltip.style("left", mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
-		}
-
-		tooltip.style("opacity", 0)
-			.transition()
-			.duration(Configuration.tooltip.fadeIn.duration)
-			.style("opacity", 1);
-
-		this.addTooltipEventListeners(tooltip);
+		this.tooltip.show(contentHTML);
 	}
 
 	getFillScale() {

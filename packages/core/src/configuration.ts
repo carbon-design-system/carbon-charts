@@ -101,6 +101,10 @@ export interface BaseChartOptions {
 		 * a function to format the tooltip contents
 		 */
 		formatter: Function;
+		/**
+		 * elements onto which a hover or click would not trigger the tooltip to hide
+		 */
+		targetsToSkip: Array<String>;
 	};
 	overlay?: ChartOverlayOptions;
 	/**
@@ -139,7 +143,8 @@ const baseOptions: BaseChartOptions = {
 	],
 	tooltip: {
 		size: TooltipSize.FULL,
-		formatter: null
+		formatter: null,
+		targetsToSkip: ["rect", "circle", "path"]
 	},
 	overlay: {
 		types: {

@@ -305,7 +305,7 @@ export class PieChart extends BaseChart {
 			.duration(Configuration.tooltip.fadeIn.duration)
 			.style("opacity", 1);
 
-		this.addTooltipEventListeners(tooltip);
+		// this.addTooltipEventListeners(tooltip);
 	}
 
 	// TODO - Refactor
