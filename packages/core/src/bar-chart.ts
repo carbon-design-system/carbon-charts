@@ -313,9 +313,9 @@ export class BarChart extends BaseAxisChart {
 			.on("mousemove", function(d) {
 				const tooltipRef = select(self.holder).select("div.chart-tooltip");
 
-				const relativeMousePosition = mouse(self.holder as HTMLElement);
-				tooltipRef.style("left", relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px")
-					.style("top", relativeMousePosition[1] + "px");
+				// const relativeMousePosition = mouse(self.holder as HTMLElement);
+				// tooltipRef.style("left", relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px")
+				// 	.style("top", relativeMousePosition[1] + "px");
 			})
 			.on("mouseout", function(d) {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.bars.mouseout;

@@ -1,10 +1,14 @@
 import * as Configuration from "../configuration";
 
+// Carbon position service
+import Position, { position } from "@carbon/utils-position";
+
 // D3 Imports
 import { select, selectAll, mouse } from "d3-selection";
 
 export class ChartTooltip {
 	holder: Element;
+	positionService: Position = new Position();
 
 	constructor(holder: Element) {
 		this.holder = holder;
@@ -17,26 +21,33 @@ export class ChartTooltip {
 
 		// Draw tooltip
 		const tooltip = select(this.holder).append("div")
-			.attr("class", "tooltip chart-tooltip")
-			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
+			.attr("class", "tooltip chart-tooltip");
+			// .style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
 		// Apply html content to the tooltip
 		tooltip.append("div")
 			.attr("class", "text-box")
 			.html(contentHTML);
 
+		const reference = this.holder;
+		const target = tooltip.node();
+
+		const pos = this.positionService.findPosition(reference, target, "left");
+
+		this.positionService.setElement(target, pos);
+
 		// Position tooltip
-		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
-			tooltip.style(
-				"left",
-				mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
-			);
-		} else {
-			tooltip.style(
-				"left",
-				mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px"
-			);
-		}
+		// if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
+		// 	tooltip.style(
+		// 		"left",
+		// 		mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
+		// 	);
+		// } else {
+		// 	tooltip.style(
+		// 		"left",
+		// 		mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px"
+		// 	);
+		// }
 
 		// Fade in
 		tooltip.style("opacity", 0)
@@ -44,7 +55,7 @@ export class ChartTooltip {
 			.duration(Configuration.tooltip.fadeIn.duration)
 			.style("opacity", 1);
 
-		this.addEventListeners();
+		// this.addEventListeners();
 	}
 
 	hide() {
@@ -61,8 +72,6 @@ export class ChartTooltip {
 	}
 
 	handleTooltipEvents(evt: Event) {
-
-
 		// If keyboard event
 		if (evt["key"]) {
 			if (evt["key"] === "Escape" || evt["key"] === "Esc") {
