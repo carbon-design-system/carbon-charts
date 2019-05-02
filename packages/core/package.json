@@ -23,6 +23,7 @@
   "author": "IBM",
   "license": "Apache-2.0",
   "dependencies": {
+    "@carbon/utils-position": "1.0.0",
     "babel-polyfill": "6.26.0",
     "d3": "4.13.0",
     "resize-observer-polyfill": "1.5.0"
