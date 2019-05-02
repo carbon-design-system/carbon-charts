@@ -77,7 +77,7 @@ export const groupedBarOptions = {
 
 // Simple bar
 export const simpleBarData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	labels: ["Qty", "More", "Sold", "Restocking", "Miscella Hello"],
 	datasets: [
 		{
 			label: "Dataset 1",
