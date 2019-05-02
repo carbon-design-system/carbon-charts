@@ -256,6 +256,7 @@ div.chart-overlay {
 	position: absolute;
 	padding: 10px;
 	border-radius: 3px;
+	min-width: 110px;
 	max-width: 200px;
 	word-wrap: break-word;
 	z-index: 1059;

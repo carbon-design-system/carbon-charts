@@ -1,7 +1,8 @@
 import * as Configuration from "../configuration";
 
 // Carbon position service
-import Position, { position } from "@carbon/utils-position";
+// import Position, { position } from "@carbon/utils-position";
+import Position, { PLACEMENTS } from "./positionService";
 
 // D3 Imports
 import { select, selectAll, mouse } from "d3-selection";
@@ -14,6 +15,39 @@ export class ChartTooltip {
 		this.holder = holder;
 	}
 
+	getRef = () => select(this.holder).select("div.chart-tooltip").node() as HTMLElement;
+
+	positionTooltip() {
+		const target = this.getRef();
+		const mouseRelativePos = mouse(this.holder as SVGSVGElement);
+
+		// Find out whether tooltip should be shown on the left or right side
+		const bestPlacementOption = this.positionService.findBestPlacementAt(
+			{
+				left: mouseRelativePos[0],
+				top: mouseRelativePos[1]
+			},
+			this.holder,
+			target,
+			[
+				PLACEMENTS.RIGHT,
+				PLACEMENTS.LEFT
+			]
+		);
+
+		// Get coordinates to where tooltip should be positioned
+		const pos = this.positionService.findPositionAt(
+			{
+				left: mouseRelativePos[0] +  (bestPlacementOption === PLACEMENTS.RIGHT ? Configuration.tooltip.magicLeft2 : -Configuration.tooltip.magicLeft2),
+				top: mouseRelativePos[1]
+			},
+			target,
+			bestPlacementOption
+		);
+
+		this.positionService.setElement(target, pos);
+	}
+
 	show(contentHTML) {
 		// Remove existing tooltips on the page
 		// TODO - Update class to not conflict with other elements on page
@@ -22,32 +56,14 @@ export class ChartTooltip {
 		// Draw tooltip
 		const tooltip = select(this.holder).append("div")
 			.attr("class", "tooltip chart-tooltip");
-			// .style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
 
 		// Apply html content to the tooltip
 		tooltip.append("div")
 			.attr("class", "text-box")
 			.html(contentHTML);
 
-		const reference = this.holder;
-		const target = tooltip.node();
-
-		const pos = this.positionService.findPosition(reference, target, "left");
-
-		this.positionService.setElement(target, pos);
-
-		// Position tooltip
-		// if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
-		// 	tooltip.style(
-		// 		"left",
-		// 		mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
-		// 	);
-		// } else {
-		// 	tooltip.style(
-		// 		"left",
-		// 		mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px"
-		// 	);
-		// }
+		// Position the tooltip
+		this.positionTooltip();
 
 		// Fade in
 		tooltip.style("opacity", 0)
