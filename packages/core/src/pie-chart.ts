@@ -1,5 +1,5 @@
 // D3 Imports
-import { select, selectAll, mouse } from "d3-selection";
+import { select } from "d3-selection";
 import { scaleOrdinal } from "d3-scale";
 import { pie, arc, Pie, Arc } from "d3-shape";
 import { interpolate } from "d3-interpolate";
@@ -44,6 +44,10 @@ export class PieChart extends BaseChart {
 	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
 	dataProcessor(dataObject: ChartData): PieData {
 		// TODO - Support multiple datasets
+		if (dataObject.datasets.length > 1) {
+			console.warn("Currently the Pie & Donut charts support a single dataset, you appear to have more than that. Will only use your first provided dataset.");
+		}
+
 		// Check for duplicate keys in the data
 		const duplicates = Tools.getDuplicateValues(dataObject.labels);
 		if (duplicates.length > 0) {
@@ -313,6 +317,7 @@ export class PieChart extends BaseChart {
 		const oldData = Tools.clone(this.displayData);
 		const activeLegendItems = this.getActiveLegendItems();
 
+		// TODO - Support multiple datasets
 		const newDisplayData = Object.assign({}, oldData);
 		newDisplayData.datasets[0].data = oldData.datasets[0].data.filter(dataPoint => activeLegendItems.indexOf(dataPoint.label) !== -1);
 
