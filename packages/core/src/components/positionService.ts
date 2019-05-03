@@ -3,10 +3,10 @@
  */
 
 export const PLACEMENTS = {
-    LEFT: "left",
-    RIGHT: "right",
-    TOP: "top",
-    BOTTOM: "bottom"
+	LEFT: "left",
+	RIGHT: "right",
+	TOP: "top",
+	BOTTOM: "bottom"
 }
 
 export interface AbsolutePosition {
@@ -127,7 +127,7 @@ export default class Position {
 	}
 
 	findPositionAt(offset: Offset, target: Element, placement: string): AbsolutePosition {
-		return this.calculatePosition(offset, {height: 0, width: 0}, target, placement);
+		return this.calculatePosition(offset, { height: 0, width: 0 }, target, placement);
 	}
 
 	/**
@@ -164,7 +164,7 @@ export default class Position {
 		 */
 		const weightedPlacements = placements.map(placement => {
 			const pos = this.findPosition(reference, target, placement);
-            let box = this.getPlacementBox((target as HTMLElement), pos);
+			let box = this.getPlacementBox((target as HTMLElement), pos);
 			let hiddenHeight = box.bottom - window.innerHeight - window.scrollY;
 			let hiddenWidth = box.right - window.innerWidth - window.scrollX;
 			// if the hiddenHeight or hiddenWidth is negative, reset to offsetHeight or offsetWidth
@@ -186,26 +186,26 @@ export default class Position {
 		weightedPlacements.sort((a, b) => b.weight - a.weight);
 		// pick the best!
 		return weightedPlacements[0].placement;
-    }
+	}
 
-    findBestPlacementAt(offset: Offset, reference: Element, target: Element, placements: string[]) {
+	findBestPlacementAt(offset: Offset, reference: Element, target: Element, placements: string[]) {
 		/**
 		 * map over the array of placements and weight them based on the percentage of visible area
 		 * where visible area is defined as the area not obscured by the reference borders
 		 */
 		const weightedPlacements = placements.map(placement => {
 			const pos = this.findPositionAt(offset, target, placement);
-            let box = this.getPlacementBox((target as HTMLElement), pos);
+			let box = this.getPlacementBox((target as HTMLElement), pos);
 			let hiddenHeight = box.bottom - (reference as HTMLElement).offsetHeight;
-            let hiddenWidth = box.right - (reference as HTMLElement).offsetWidth;
+			let hiddenWidth = box.right - (reference as HTMLElement).offsetWidth;
 			// if the hiddenHeight or hiddenWidth is negative, reset to offsetHeight or offsetWidth
 			hiddenHeight = hiddenHeight < 0 ? (target as HTMLElement).offsetHeight : hiddenHeight;
-            hiddenWidth = hiddenWidth < 0 ? (target as HTMLElement).offsetWidth : hiddenWidth;
+			hiddenWidth = hiddenWidth < 0 ? (target as HTMLElement).offsetWidth : hiddenWidth;
 			const area = (target as HTMLElement).offsetHeight * (target as HTMLElement).offsetWidth;
 			const hiddenArea = hiddenHeight * hiddenWidth;
 			let visibleArea = area - hiddenArea;
 			// if the visibleArea is 0 set it back to area (to calculate the percentage in a useful way)
-            visibleArea = visibleArea === 0 ? area : visibleArea;
+			visibleArea = visibleArea === 0 ? area : visibleArea;
 
 			const visiblePercent = visibleArea / area;
 			return {

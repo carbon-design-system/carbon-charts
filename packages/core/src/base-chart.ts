@@ -824,16 +824,25 @@ export class BaseChart {
 		}
 	}
 
-	showTooltip(d, clickedElement) {
-		// Rest opacity of all elements in the chart
-		this.resetOpacity();
-
-		let contentHTML = "";
+	getTooltipHTML = d => {
 		const formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString("en");
 		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
-			contentHTML += this.generateTooltipHTML(d.label, formattedValue);
+			return this.generateTooltipHTML(d.label, formattedValue);
+		}
+
+		return this.generateTooltipHTML(d.datasetLabel, formattedValue);
+	}
+
+	showTooltip(d, clickedElement?: Element) {
+		// Reset opacity of all elements in the chart
+		this.resetOpacity();
+
+		const { customHTML } = this.options.tooltip;
+		let contentHTML;
+		if (customHTML) {
+			contentHTML = customHTML;
 		} else {
-			contentHTML += this.generateTooltipHTML(d.datasetLabel, formattedValue);
+			contentHTML = this.getTooltipHTML(d);
 		}
 
 		this.tooltip.show(contentHTML);
