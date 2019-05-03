@@ -298,9 +298,7 @@ export class BarChart extends BaseAxisChart {
 		const { accessibility } = this.options;
 
 		this.svg.selectAll("rect.bar")
-			.on("click", function(d) {
-				self.dispatchEvent("bar-onClick", d);
-			})
+			.on("click", d => self.dispatchEvent("bar-onClick", d))
 			.on("mouseover", function(d) {
 				select(this)
 					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
