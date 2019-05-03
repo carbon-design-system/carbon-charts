@@ -105,6 +105,10 @@ export interface BaseChartOptions {
 		 * elements onto which a hover or click would not trigger the tooltip to hide
 		 */
 		targetsToSkip: Array<String>;
+		/**
+		 * custom HTML content for tooltip provided by user
+		 */
+		customHTML?: string;
 	};
 	overlay?: ChartOverlayOptions;
 	/**
