@@ -45,7 +45,8 @@ export class PieChart extends BaseChart {
 	dataProcessor(dataObject: ChartData): PieData {
 		// TODO - Support multiple datasets
 		if (dataObject.datasets.length > 1) {
-			console.warn("Currently the Pie & Donut charts support a single dataset, you appear to have more than that. Will only use your first provided dataset.");
+			console.warn(`Currently the Pie & Donut charts support a single dataset,
+				you appear to have more than that. Will only use your first provided dataset.`);
 		}
 
 		// Check for duplicate keys in the data

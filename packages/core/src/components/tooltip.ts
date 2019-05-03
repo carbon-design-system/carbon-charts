@@ -7,18 +7,18 @@ import Position, { PLACEMENTS } from "@carbon/utils-position";
 import { select, selectAll, mouse } from "d3-selection";
 
 export class ChartTooltip {
-	container: Element;
+	container: HTMLElement;
 	positionService: Position = new Position();
 
 	constructor(container: Element) {
-		this.container = container;
+		this.container = container as HTMLElement;
 	}
 
 	getRef = () => select(this.container).select("div.chart-tooltip").node() as HTMLElement;
 
 	positionTooltip() {
 		const target = this.getRef();
-		const mouseRelativePos = mouse(this.container as SVGSVGElement);
+		const mouseRelativePos = mouse(this.container);
 
 		// Find out whether tooltip should be shown on the left or right side
 		const bestPlacementOption = this.positionService.findBestPlacementAt(
@@ -32,15 +32,20 @@ export class ChartTooltip {
 				PLACEMENTS.LEFT
 			],
 			() => ({
-				width: (this.container as HTMLElement).offsetWidth,
-				height: (this.container as HTMLElement).offsetHeight
+				width: this.container.offsetWidth,
+				height: this.container.offsetHeight
 			})
 		);
+
+		let { magicLeft2: horizontalOffset } = Configuration.tooltip;
+		if (bestPlacementOption === PLACEMENTS.LEFT) {
+			horizontalOffset *= -1;
+		}
 
 		// Get coordinates to where tooltip should be positioned
 		const pos = this.positionService.findPositionAt(
 			{
-				left: mouseRelativePos[0] +  (bestPlacementOption === PLACEMENTS.RIGHT ? Configuration.tooltip.magicLeft2 : -Configuration.tooltip.magicLeft2),
+				left: mouseRelativePos[0] + horizontalOffset,
 				top: mouseRelativePos[1]
 			},
 			target,
