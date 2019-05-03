@@ -75,7 +75,7 @@ export class BaseChart {
 
 		// Initialize charting components
 		this.chartOverlay = new ChartOverlay(this.holder, this.options.overlay);
-		this.tooltip = new ChartTooltip(this.holder);
+		this.tooltip = new ChartTooltip(this.container.node());
 
 		if (configs.data) {
 			this.setData(configs.data);

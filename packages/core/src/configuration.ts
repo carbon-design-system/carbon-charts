@@ -692,7 +692,7 @@ export const tooltip = {
 	magicTop1: 21,
 	magicTop2: 22,
 	magicLeft1: 11,
-	magicLeft2: 12,
+	magicLeft2: 10,
 	fadeIn: {
 		duration: 250
 	},
