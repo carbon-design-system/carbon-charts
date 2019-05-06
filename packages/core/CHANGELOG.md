@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.14](https://github.com/IBM/carbon-charts/compare/v0.11.12...v0.11.14) (2019-05-06)
+
+
+### Bug Fixes
+
+* **core:** Show empty state for when there is no data ([b5db127](https://github.com/IBM/carbon-charts/commit/b5db127))
+
+
+
+
+
 ## [0.11.13](https://github.com/IBM/carbon-charts/compare/v0.11.12...v0.11.13) (2019-04-30)
 
 
