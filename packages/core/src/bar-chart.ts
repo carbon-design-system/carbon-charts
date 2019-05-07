@@ -159,7 +159,7 @@ export class BarChart extends BaseAxisChart {
 						.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
 
 		// Hide the overlay
-		this.updateOverlay().hide();
+		this.chartOverlay.hide();
 
 		// Dispatch the load event
 		this.dispatchEvent("load");
@@ -237,7 +237,7 @@ export class BarChart extends BaseAxisChart {
 		this.addDataPointEventListener();
 
 		// Hide the overlay
-		this.updateOverlay().hide();
+		this.chartOverlay.hide();
 
 		// Dispatch the update event
 		this.dispatchEvent("update");
