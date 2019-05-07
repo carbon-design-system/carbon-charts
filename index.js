@@ -256,7 +256,7 @@ var groupedBarOptions = {
 };
 // Simple bar
 var simpleBarData = {
-    labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+    labels: ["Qty", "More", "Sold", "Restocking", "Miscellaneous"],
     datasets: [
         {
             label: "Dataset 1",
@@ -763,8 +763,8 @@ var donutOptions = {
     }
 };
 var pieData = {
-    labels: ["2V2N-9KYPM version 1", "L22I-P66EP-L22I-P66EP-L22I-P66EP", "JQAI-2M4L1", "J9DZ-F37AP",
-        "YEL48-Q6XK-YEL48", "P66EP-L22I-L22I", "Q6XK-YEL48", "XKB5-L6EP", "YEL48-Q6XK", "L22I-P66EP-L22I"],
+    labels: ["2V2N 9KYPM version 1", "L22I P66EP L22I P66EP L22I P66EP", "JQAI 2M4L1", "J9DZ F37AP",
+        "YEL48 Q6XK YEL48", "P66EP L22I L22I", "Q6XK YEL48", "XKB5 L6EP", "YEL48 Q6XK", "L22I P66EP L22I"],
     datasets: [
         {
             label: "Dataset 1",
@@ -1403,7 +1403,7 @@ var BarChart = /** @class */ (function (_super) {
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; });
         // Hide the overlay
-        this.updateOverlay().hide();
+        this.chartOverlay.hide();
         // Dispatch the load event
         this.dispatchEvent("load");
     };
@@ -1470,7 +1470,7 @@ var BarChart = /** @class */ (function (_super) {
         // Add slice hover actions, and clear any slice borders present
         this.addDataPointEventListener();
         // Hide the overlay
-        this.updateOverlay().hide();
+        this.chartOverlay.hide();
         // Dispatch the update event
         this.dispatchEvent("update");
     };
@@ -1515,12 +1515,11 @@ var BarChart = /** @class */ (function (_super) {
         _super.prototype.resizeChart.call(this);
     };
     BarChart.prototype.addDataPointEventListener = function () {
+        var _this = this;
         var self = this;
         var accessibility = this.options.accessibility;
         this.svg.selectAll("rect.bar")
-            .on("click", function (d) {
-            self.dispatchEvent("bar-onClick", d);
-        })
+            .on("click", function (d) { return self.dispatchEvent("bar-onClick", d); })
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseover.strokeWidth)
@@ -1529,12 +1528,7 @@ var BarChart = /** @class */ (function (_super) {
             self.showTooltip(d, this);
             self.reduceOpacity(this);
         })
-            .on("mousemove", function (d) {
-            var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(self.holder).select("div.chart-tooltip");
-            var relativeMousePosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(self.holder);
-            tooltipRef.style("left", relativeMousePosition[0] + _configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].magicLeft2 + "px")
-                .style("top", relativeMousePosition[1] + "px");
-        })
+            .on("mousemove", function (d) { return _this.tooltip.positionTooltip(); })
             .on("mouseout", function (d) {
             var _a = _configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
@@ -2157,7 +2151,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
 /* harmony import */ var _services_patterns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/patterns */ "./src/services/patterns.ts");
-/* harmony import */ var resize_observer_polyfill__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! resize-observer-polyfill */ "../../node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js");
+/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/index */ "./src/components/index.ts");
+/* harmony import */ var _components_tooltip__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/tooltip */ "./src/components/tooltip.ts");
+/* harmony import */ var resize_observer_polyfill__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! resize-observer-polyfill */ "../../node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js");
 // D3 Imports
 
 
@@ -2166,10 +2162,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 // Misc
 
 var BaseChart = /** @class */ (function () {
     function BaseChart(holder, configs) {
+        var _this = this;
         this.id = "";
         this.chartContainerID = "";
         this.options = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].merge({}, _configuration__WEBPACK_IMPORTED_MODULE_3__["options"].BASE);
@@ -2178,6 +2177,13 @@ var BaseChart = /** @class */ (function () {
         this.colorScale = {};
         this.eventHandlers = {
             tooltips: null
+        };
+        this.getTooltipHTML = function (d) {
+            var formattedValue = _this.options.tooltip.formatter ? _this.options.tooltip.formatter(d.value) : d.value.toLocaleString("en");
+            if (_this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS) {
+                return _this.generateTooltipHTML(d.label, formattedValue);
+            }
+            return _this.generateTooltipHTML(d.datasetLabel, formattedValue);
         };
         this.id = "chart-" + BaseChart.chartCount++;
         if (configs.options) {
@@ -2193,6 +2199,9 @@ var BaseChart = /** @class */ (function () {
             this.resizeWhenContainerChange();
         }
         this.events = document.createDocumentFragment();
+        // Initialize charting components
+        this.chartOverlay = new _components_index__WEBPACK_IMPORTED_MODULE_6__["ChartOverlay"](this.holder, this.options.overlay);
+        this.tooltip = new _components_tooltip__WEBPACK_IMPORTED_MODULE_7__["ChartTooltip"](this.container.node());
         if (configs.data) {
             this.setData(configs.data);
         }
@@ -2233,7 +2242,7 @@ var BaseChart = /** @class */ (function () {
         // Dispatch the update event
         this.dispatchEvent("data-change");
         if (initialDraw || newDataIsAPromise) {
-            this.updateOverlay().show();
+            this.chartOverlay.show();
         }
         // Hide current showing tooltip
         if (!initialDraw) {
@@ -2245,31 +2254,36 @@ var BaseChart = /** @class */ (function () {
             // Process data
             // this.data = this.dataProcessor(Tools.clone(value));
             _this.data = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].clone(value);
-            _this.displayData = _this.dataProcessor(_tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].clone(value));
-            var keys = _this.getKeysFromData();
-            // Grab the old legend items, the keys from the current data
-            // Compare the two, if there are any differences (additions/removals)
-            // Completely remove the legend and render again
-            var oldLegendItems = _this.getActiveLegendItems();
-            var keysArray = Object.keys(keys);
-            var _a = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].arrayDifferences(oldLegendItems, keysArray), removedItems = _a.missing, newItems = _a.added;
-            // Update keys for legend use the latest data keys
-            _this.options.keys = keys;
-            // Set the color scale based on the keys present in the data
-            _this.setColorScale();
-            // Add patterns to page, set pattern scales
-            if (_this.options.accessibility) {
-                _this.setPatterns();
-            }
-            // Perform the draw or update chart
-            if (initialDraw) {
-                _this.initialDraw();
+            if (_this.data.datasets && _this.data.datasets.length > 0) {
+                _this.displayData = _this.dataProcessor(_tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].clone(value));
+                var keys = _this.getKeysFromData();
+                // Grab the old legend items, the keys from the current data
+                // Compare the two, if there are any differences (additions/removals)
+                // Completely remove the legend and render again
+                var oldLegendItems = _this.getActiveLegendItems();
+                var keysArray = Object.keys(keys);
+                var _a = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].arrayDifferences(oldLegendItems, keysArray), removedItems = _a.missing, newItems = _a.added;
+                // Update keys for legend use the latest data keys
+                _this.options.keys = keys;
+                // Set the color scale based on the keys present in the data
+                _this.setColorScale();
+                // Add patterns to page, set pattern scales
+                if (_this.options.accessibility) {
+                    _this.setPatterns();
+                }
+                // Perform the draw or update chart
+                if (initialDraw) {
+                    _this.initialDraw();
+                }
+                else {
+                    if (removedItems.length > 0 || newItems.length > 0) {
+                        _this.addOrUpdateLegend();
+                    }
+                    _this.update();
+                }
             }
             else {
-                if (removedItems.length > 0 || newItems.length > 0) {
-                    _this.addOrUpdateLegend();
-                }
-                _this.update();
+                _this.chartOverlay.show(_configuration__WEBPACK_IMPORTED_MODULE_3__["options"].BASE.overlay.types.noData);
             }
         });
     };
@@ -2389,7 +2403,8 @@ var BaseChart = /** @class */ (function () {
      * removes the chart and any tooltips
      */
     BaseChart.prototype.removeChart = function () {
-        this.holder.remove();
+        // this.holder.remove();
+        this.holder.querySelector("div.chart-wrapper").parentNode.removeChild(this.holder.querySelector("div.chart-wrapper"));
     };
     BaseChart.prototype.setSVG = function () {
         var chartSize = this.getChartSize();
@@ -2422,7 +2437,7 @@ var BaseChart = /** @class */ (function () {
         var _this = this;
         var containerWidth = this.holder.clientWidth;
         var containerHeight = this.holder.clientHeight;
-        var resizeObserver = new resize_observer_polyfill__WEBPACK_IMPORTED_MODULE_6__["default"](function (entries, observer) {
+        var resizeObserver = new resize_observer_polyfill__WEBPACK_IMPORTED_MODULE_8__["default"](function (entries, observer) {
             for (var _i = 0, entries_1 = entries; _i < entries_1.length; _i++) {
                 var entry = entries_1[_i];
                 if (Math.abs(containerWidth - _this.holder.clientWidth) > 1
@@ -2822,50 +2837,7 @@ var BaseChart = /** @class */ (function () {
     };
     BaseChart.prototype.hideTooltip = function () {
         this.resetOpacity();
-        var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.holder).select("div.chart-tooltip");
-        tooltipRef.style("opacity", 1)
-            .transition()
-            .duration(_configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].fadeOut.duration)
-            .style("opacity", 0)
-            .remove();
-        this.removeTooltipEventListeners();
-    };
-    BaseChart.prototype.addTooltipEventListeners = function (tooltip) {
-        var _this = this;
-        this.eventHandlers.tooltips = function (evt) {
-            var targetTagName = evt.target["tagName"];
-            var targetsToBeSkipped = ["rect", "circle", "path"];
-            // If keyboard event
-            if (evt["key"]) {
-                if (evt["key"] === "Escape" || evt["key"] === "Esc") {
-                    _this.hideTooltip();
-                }
-            }
-            else if (targetsToBeSkipped.indexOf(targetTagName) === -1) {
-                // If mouse event
-                _this.hideTooltip();
-            }
-        };
-        // Apply the event listeners to close the tooltip
-        // setTimeout is there to avoid catching the click event that opened the tooltip
-        setTimeout(function () {
-            // When ESC is pressed
-            window.addEventListener("keydown", _this.eventHandlers.tooltips);
-            // TODO - Don't bind on window
-            // If clicked outside
-            _this.holder.addEventListener("click", _this.eventHandlers.tooltips);
-            // Stop clicking inside tooltip from bubbling up to window
-            tooltip.on("click", function () {
-                d3_selection__WEBPACK_IMPORTED_MODULE_0__["event"].stopPropagation();
-            });
-        }, 0);
-    };
-    BaseChart.prototype.removeTooltipEventListeners = function () {
-        // TODO - Don't bind on window
-        // Remove eventlistener to close tooltip when ESC is pressed
-        window.removeEventListener("keydown", this.eventHandlers.tooltips);
-        // Remove eventlistener to close tooltip when clicked outside
-        this.holder.removeEventListener("click", this.eventHandlers.tooltips);
+        this.tooltip.hide();
     };
     BaseChart.prototype.generateTooltipHTML = function (label, value) {
         if (this.options.tooltip.size === _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].size.COMPACT) {
@@ -2876,36 +2848,17 @@ var BaseChart = /** @class */ (function () {
         }
     };
     BaseChart.prototype.showTooltip = function (d, clickedElement) {
-        // Rest opacity of all elements in the chart
+        // Reset opacity of all elements in the chart
         this.resetOpacity();
-        // Remove existing tooltips on the page
-        // TODO - Update class to not conflict with other elements on page
-        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["selectAll"])(".chart-tooltip").remove();
-        // Draw tooltip
-        var tooltip = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.holder).append("div")
-            .attr("class", "tooltip chart-tooltip")
-            .style("top", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[1] - _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].magicTop2 + "px");
-        var tooltipHTML = "";
-        var formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString("en");
-        if (this.getLegendType() === _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].basedOn.LABELS) {
-            tooltipHTML += this.generateTooltipHTML(d.label, formattedValue);
+        var customHTML = this.options.tooltip.customHTML;
+        var contentHTML;
+        if (customHTML) {
+            contentHTML = customHTML;
         }
         else {
-            tooltipHTML += this.generateTooltipHTML(d.datasetLabel, formattedValue);
+            contentHTML = this.getTooltipHTML(d);
         }
-        tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
-        // Draw tooltip arrow in the right direction
-        if (Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] + tooltip.node().clientWidth > this.holder.clientWidth) {
-            tooltip.style("left", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] - tooltip.node().clientWidth - _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].magicLeft1 + "px");
-        }
-        else {
-            tooltip.style("left", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] + _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].magicLeft2 + "px");
-        }
-        tooltip.style("opacity", 0)
-            .transition()
-            .duration(_configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].fadeIn.duration)
-            .style("opacity", 1);
-        this.addTooltipEventListeners(tooltip);
+        this.tooltip.show(contentHTML);
     };
     BaseChart.prototype.getFillScale = function () {
         return this.options.accessibility ? this.patternScale : this.colorScale;
@@ -2926,31 +2879,6 @@ var BaseChart = /** @class */ (function () {
             return this.getInstantTransition();
         }
         return Object(d3_transition__WEBPACK_IMPORTED_MODULE_2__["transition"])().duration(animate === false ? 0 : _configuration__WEBPACK_IMPORTED_MODULE_3__["transitions"].default.duration);
-    };
-    // ================================================================================
-    // Loading overlay
-    // ================================================================================
-    BaseChart.prototype.updateOverlay = function () {
-        var _this = this;
-        var overlayElement = this.holder.querySelector("div.chart-overlay");
-        return {
-            show: function () {
-                // If overlay element has already been added to the chart container
-                // Just show it
-                if (overlayElement) {
-                    overlayElement.style.display = "block";
-                }
-                else {
-                    var loadingOverlay = document.createElement("div");
-                    loadingOverlay.classList.add("chart-overlay");
-                    loadingOverlay.innerHTML = _this.options.loadingOverlay.innerHTML;
-                    _this.holder.appendChild(loadingOverlay);
-                }
-            },
-            hide: function () {
-                overlayElement.style.display = "none";
-            }
-        };
     };
     BaseChart.prototype.getBBox = function (selector) {
         return this.innerWrap.select(selector).node().getBBox();
@@ -3090,6 +3018,191 @@ var ComboChart = /** @class */ (function (_super) {
 
 /***/ }),
 
+/***/ "./src/components/index.ts":
+/*!*********************************!*\
+  !*** ./src/components/index.ts ***!
+  \*********************************/
+/*! exports provided: ChartOverlay */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _overlay__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./overlay */ "./src/components/overlay.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ChartOverlay", function() { return _overlay__WEBPACK_IMPORTED_MODULE_0__["ChartOverlay"]; });
+
+
+
+
+/***/ }),
+
+/***/ "./src/components/overlay.ts":
+/*!***********************************!*\
+  !*** ./src/components/overlay.ts ***!
+  \***********************************/
+/*! exports provided: ChartOverlay */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChartOverlay", function() { return ChartOverlay; });
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../configuration */ "./src/configuration.ts");
+
+var ChartOverlay = /** @class */ (function () {
+    function ChartOverlay(holder, options) {
+        this.holder = holder;
+        this.overlayElement = this.holder.querySelector("div.chart-overlay");
+        if (options) {
+            this.overlayOptions = options;
+        }
+        else {
+            this.overlayOptions = _configuration__WEBPACK_IMPORTED_MODULE_0__["options"].BASE.overlay;
+        }
+    }
+    ChartOverlay.prototype.show = function (type) {
+        if (this.overlayElement) {
+            this.overlayElement.parentNode.removeChild(this.overlayElement);
+        }
+        var overlay = document.createElement("div");
+        overlay.classList.add("chart-overlay");
+        overlay.innerHTML = this.overlayOptions.innerHTML[type ? type : "loading"];
+        this.overlayElement = this.holder.appendChild(overlay);
+    };
+    ChartOverlay.prototype.hide = function () {
+        this.overlayElement.style.display = "none";
+    };
+    return ChartOverlay;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/components/tooltip.ts":
+/*!***********************************!*\
+  !*** ./src/components/tooltip.ts ***!
+  \***********************************/
+/*! exports provided: ChartTooltip */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChartTooltip", function() { return ChartTooltip; });
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../configuration */ "./src/configuration.ts");
+/* harmony import */ var _carbon_utils_position__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @carbon/utils-position */ "../../node_modules/@carbon/utils-position/index.js");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/index.js");
+
+// Carbon position service
+
+// D3 Imports
+
+var ChartTooltip = /** @class */ (function () {
+    function ChartTooltip(container) {
+        var _this = this;
+        this.positionService = new _carbon_utils_position__WEBPACK_IMPORTED_MODULE_1__["default"]();
+        this.getRef = function () { return Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(_this.container).select("div.chart-tooltip").node(); };
+        this.container = container;
+    }
+    ChartTooltip.prototype.positionTooltip = function () {
+        var _this = this;
+        var target = this.getRef();
+        var mouseRelativePos = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["mouse"])(this.container);
+        // Find out whether tooltip should be shown on the left or right side
+        var bestPlacementOption = this.positionService.findBestPlacementAt({
+            left: mouseRelativePos[0],
+            top: mouseRelativePos[1]
+        }, target, [
+            _carbon_utils_position__WEBPACK_IMPORTED_MODULE_1__["PLACEMENTS"].RIGHT,
+            _carbon_utils_position__WEBPACK_IMPORTED_MODULE_1__["PLACEMENTS"].LEFT
+        ], function () { return ({
+            width: _this.container.offsetWidth,
+            height: _this.container.offsetHeight
+        }); });
+        var horizontalOffset = _configuration__WEBPACK_IMPORTED_MODULE_0__["tooltip"].magicLeft2;
+        if (bestPlacementOption === _carbon_utils_position__WEBPACK_IMPORTED_MODULE_1__["PLACEMENTS"].LEFT) {
+            horizontalOffset *= -1;
+        }
+        // Get coordinates to where tooltip should be positioned
+        var pos = this.positionService.findPositionAt({
+            left: mouseRelativePos[0] + horizontalOffset,
+            top: mouseRelativePos[1]
+        }, target, bestPlacementOption);
+        this.positionService.setElement(target, pos);
+    };
+    ChartTooltip.prototype.show = function (contentHTML) {
+        // Remove existing tooltips on the page
+        // TODO - Update class to not conflict with other elements on page
+        Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["selectAll"])(".chart-tooltip").remove();
+        // Draw tooltip
+        var tooltip = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this.container).append("div")
+            .attr("class", "tooltip chart-tooltip");
+        // Apply html content to the tooltip
+        tooltip.append("div")
+            .attr("class", "text-box")
+            .html(contentHTML);
+        // Position the tooltip
+        this.positionTooltip();
+        // Fade in
+        tooltip.style("opacity", 0)
+            .transition()
+            .duration(_configuration__WEBPACK_IMPORTED_MODULE_0__["tooltip"].fadeIn.duration)
+            .style("opacity", 1);
+        // this.addEventListeners();
+    };
+    ChartTooltip.prototype.hide = function () {
+        var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this.container).select("div.chart-tooltip");
+        // Fade out and remove
+        tooltipRef.style("opacity", 1)
+            .transition()
+            .duration(_configuration__WEBPACK_IMPORTED_MODULE_0__["tooltip"].fadeOut.duration)
+            .style("opacity", 0)
+            .remove();
+        this.removeEventLinteners();
+    };
+    ChartTooltip.prototype.handleTooltipEvents = function (evt) {
+        // If keyboard event
+        if (evt["key"]) {
+            if (evt["key"] === "Escape" || evt["key"] === "Esc") {
+                this.hide();
+            }
+        }
+        else {
+            var targetTagName = evt.target["tagName"];
+            var targetsToBeSkipped = _configuration__WEBPACK_IMPORTED_MODULE_0__["options"].BASE.tooltip.targetsToSkip;
+            if (targetsToBeSkipped.indexOf(targetTagName) === -1) {
+                // If mouse event
+                this.hide();
+            }
+        }
+    };
+    ChartTooltip.prototype.addEventListeners = function () {
+        var _this = this;
+        var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this.container).select("div.chart-tooltip");
+        // Apply the event listeners to close the tooltip
+        // setTimeout is there to avoid catching the click event that opened the tooltip
+        setTimeout(function () {
+            // When ESC is pressed
+            window.addEventListener("keydown", _this.handleTooltipEvents);
+            // If clicked outside
+            _this.container.addEventListener("click", _this.handleTooltipEvents);
+            // Stop clicking inside tooltip from bubbling up to window
+            tooltipRef.on("click", function () {
+                event.stopPropagation();
+            });
+        }, 0);
+    };
+    ChartTooltip.prototype.removeEventLinteners = function () {
+        // Remove eventlistener to close tooltip when ESC is pressed
+        window.removeEventListener("keydown", this.handleTooltipEvents);
+        // Remove eventlistener to close tooltip when clicked outside
+        this.container.removeEventListener("click", this.handleTooltipEvents);
+    };
+    return ChartTooltip;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/configuration.ts":
 /*!******************************!*\
   !*** ./src/configuration.ts ***!
@@ -3165,10 +3278,18 @@ var baseOptions = {
     ],
     tooltip: {
         size: TooltipSize.FULL,
-        formatter: null
+        formatter: null,
+        targetsToSkip: ["rect", "circle", "path"]
     },
-    loadingOverlay: {
-        innerHTML: "\n\t\t<div class=\"loading-overlay-content\">\n\t\t  <div data-loading class=\"bx--loading bx--loading--small\">\n\t\t\t<svg class=\"bx--loading__svg\" viewBox=\"-75 -75 150 150\">\n\t\t\t\t<title>Loading</title>\n\t\t\t\t<circle cx=\"0\" cy=\"0\" r=\"37.5\" />\n\t\t\t</svg>\n\t\t  </div>\n\n\t\t  <p>Loading</p>\n\t\t</div>\n\t\t"
+    overlay: {
+        types: {
+            loading: "loading",
+            noData: "noData"
+        },
+        innerHTML: {
+            loading: "\n\t\t\t<div class=\"ccharts-overlay-content\">\n\t\t\t\t<div data-loading class=\"bx--loading bx--loading--small\">\n\t\t\t\t\t<svg class=\"bx--loading__svg\" viewBox=\"-75 -75 150 150\">\n\t\t\t\t\t\t<title>Loading</title>\n\t\t\t\t\t\t<circle cx=\"0\" cy=\"0\" r=\"37.5\" />\n\t\t\t\t\t</svg>\n\t\t\t\t</div>\n\n\t\t\t\t<p>Loading</p>\n\t\t\t</div>\n\t\t\t",
+            noData: "\n\t\t\t<div class=\"ccharts-overlay-content\">\n\t\t\t\tNo data available\n\t\t\t</div>\n\t\t\t"
+        }
     }
 };
 /**
@@ -3465,7 +3586,7 @@ var tooltip = {
     magicTop1: 21,
     magicTop2: 22,
     magicLeft1: 11,
-    magicLeft2: 12,
+    magicLeft2: 10,
     fadeIn: {
         duration: 250
     },
@@ -3922,6 +4043,7 @@ var PieChart = /** @class */ (function (_super) {
     function PieChart(holder, configs, type) {
         if (type === void 0) { type = _configuration__WEBPACK_IMPORTED_MODULE_5__["ChartType"].PIE; }
         var _this = _super.call(this, holder, configs) || this;
+        _this.getTooltipHTML = function (d) { return _this.generateTooltipHTML(d.data.label, d.value.toLocaleString()); };
         _this.options.type = type;
         // Assign colors to each slice using their label
         _this.colorScale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleOrdinal"])(_this.options.colors);
@@ -3931,6 +4053,9 @@ var PieChart = /** @class */ (function (_super) {
     // Cap number of slices at a specific number, and group the remaining items into the label "Other"
     PieChart.prototype.dataProcessor = function (dataObject) {
         // TODO - Support multiple datasets
+        if (dataObject.datasets.length > 1) {
+            console.warn("Currently the Pie & Donut charts support a single dataset,\n\t\t\t\tyou appear to have more than that. Will only use your first provided dataset.");
+        }
         // Check for duplicate keys in the data
         var duplicates = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getDuplicateValues(dataObject.labels);
         if (duplicates.length > 0) {
@@ -4032,7 +4157,7 @@ var PieChart = /** @class */ (function (_super) {
             .text(function (d) { return _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].convertValueToPercentage(d.data.value, dataList); })
             .attr("transform", function (d) { return self.deriveTransformString(this, d, radius); });
         // Hide overlay
-        this.updateOverlay().hide();
+        this.chartOverlay.hide();
     };
     // Interpolated transitions for older data points to reflect the new data changes
     PieChart.prototype.interpolateValues = function (newData) {
@@ -4121,7 +4246,7 @@ var PieChart = /** @class */ (function (_super) {
         this.addDataPointEventListener();
         this.reduceOpacity();
         // Hide the overlay
-        this.updateOverlay().hide();
+        this.chartOverlay.hide();
     };
     // TODO - Possible inherits from base-chart
     PieChart.prototype.reduceOpacity = function (exception) {
@@ -4134,52 +4259,22 @@ var PieChart = /** @class */ (function (_super) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill", function (d) { return _this.getFillColor(_this.displayData.datasets[0].label, d.data.label, d.data.value); });
         }
     };
-    // TODO - Should inherit most logic from base-chart
-    PieChart.prototype.showTooltip = function (d) {
-        this.resetOpacity();
-        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["selectAll"])(".tooltip").remove();
-        var tooltip = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.holder).append("div")
-            .attr("class", "tooltip chart-tooltip")
-            .style("top", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[1] - _configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].magicTop2 + "px");
-        var dVal = d.value.toLocaleString();
-        var tooltipHTML = this.generateTooltipHTML(d.data.label, dVal);
-        tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
-        if (Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] + tooltip.node().clientWidth > this.holder.clientWidth) {
-            tooltip.style("left", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] - tooltip.node().clientWidth - _configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].magicLeft1 + "px");
-        }
-        else {
-            tooltip.style("left", Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(this.holder)[0] + _configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].magicLeft2 + "px");
-        }
-        tooltip.style("opacity", 0)
-            .transition()
-            .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].fadeIn.duration)
-            .style("opacity", 1);
-        this.addTooltipEventListeners(tooltip);
-    };
     // TODO - Refactor
     PieChart.prototype.addDataPointEventListener = function () {
         var self = this;
         var accessibility = this.options.accessibility;
         this.innerWrap.selectAll("path")
-            .on("click", function (d) {
-            self.dispatchEvent("pie-slice-onClick", d);
-        })
+            .on("click", function (d) { return self.dispatchEvent("pie-slice-onClick", d); })
             .on("mouseover", function (d) {
             var sliceElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this);
             _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].moveToFront(sliceElement);
-            sliceElement
-                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseover.strokeWidth)
+            sliceElement.attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseover.strokeWidth)
                 .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseover.strokeOpacity)
                 .attr("stroke", self.getStrokeColor(self.displayData.datasets[0].label, d.data.label, d.data.value));
             self.showTooltip(d);
             self.reduceOpacity(this);
         })
-            .on("mousemove", function (d) {
-            var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(self.holder).select("div.chart-tooltip");
-            var relativeMousePosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(self.holder);
-            tooltipRef.style("left", relativeMousePosition[0] + _configuration__WEBPACK_IMPORTED_MODULE_5__["tooltip"].magicLeft2 + "px")
-                .style("top", relativeMousePosition[1] + "px");
-        })
+            .on("mousemove", function (d) { return self.tooltip.positionTooltip(); })
             .on("mouseout", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", accessibility ? _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].default.strokeWidth : _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseout.strokeWidth)
@@ -4191,6 +4286,7 @@ var PieChart = /** @class */ (function (_super) {
     PieChart.prototype.update = function (newData) {
         var oldData = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].clone(this.displayData);
         var activeLegendItems = this.getActiveLegendItems();
+        // TODO - Support multiple datasets
         var newDisplayData = Object.assign({}, oldData);
         newDisplayData.datasets[0].data = oldData.datasets[0].data.filter(function (dataPoint) { return activeLegendItems.indexOf(dataPoint.label) !== -1; });
         newDisplayData.labels = newDisplayData.datasets[0].data.map(function (datum) { return datum.label; });
@@ -4355,7 +4451,7 @@ var ScatterChart = /** @class */ (function (_super) {
             .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
             .attr("stroke", function (d) { return _this.getStrokeColor(d.datasetLabel, d.label, d.value); });
         // Hide the overlay
-        this.updateOverlay().hide();
+        this.chartOverlay.hide();
         // Dispatch the load event
         this.dispatchEvent("load");
     };
@@ -4415,7 +4511,7 @@ var ScatterChart = /** @class */ (function (_super) {
         // Add slice hover actions, and clear any slice borders present
         this.addDataPointEventListener();
         // Hide the overlay
-        this.updateOverlay().hide();
+        this.chartOverlay.hide();
         // Dispatch the update event
         this.dispatchEvent("update");
     };
@@ -4478,9 +4574,7 @@ var ScatterChart = /** @class */ (function (_super) {
         var self = this;
         var accessibility = this.options.accessibility;
         this.svg.selectAll("circle.dot")
-            .on("click", function (d) {
-            self.dispatchEvent("line-onClick", d);
-        })
+            .on("click", function (d) { return self.dispatchEvent("line-onClick", d); })
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.mouseover.strokeWidth)
@@ -4489,12 +4583,7 @@ var ScatterChart = /** @class */ (function (_super) {
             self.showTooltip(d, this);
             self.reduceOpacity(this);
         })
-            .on("mousemove", function (d) {
-            var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(self.holder).select("div.chart-tooltip");
-            var relativeMousePosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(self.holder);
-            tooltipRef.style("left", relativeMousePosition[0] + _configuration__WEBPACK_IMPORTED_MODULE_2__["tooltip"].magicLeft2 + "px")
-                .style("top", relativeMousePosition[1] + "px");
-        })
+            .on("mousemove", function (d) { return self.tooltip.positionTooltip(); })
             .on("mouseout", function (d) {
             var _a = _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
@@ -4800,7 +4889,7 @@ var StackedBarChart = /** @class */ (function (_super) {
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].default.strokeWidth)
             .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; });
         // Hide the overlay
-        this.updateOverlay().hide();
+        this.chartOverlay.hide();
         // Dispatch the load event
         this.dispatchEvent("load");
     };
@@ -4852,7 +4941,7 @@ var StackedBarChart = /** @class */ (function (_super) {
         // Add slice hover actions, and clear any slice borders present
         this.addDataPointEventListener();
         // Hide the overlay
-        this.updateOverlay().hide();
+        this.chartOverlay.hide();
         // Dispatch the update event
         this.dispatchEvent("update");
     };
@@ -4897,9 +4986,7 @@ var StackedBarChart = /** @class */ (function (_super) {
         var self = this;
         var accessibility = this.options.accessibility;
         this.svg.selectAll("rect")
-            .on("click", function (d) {
-            self.dispatchEvent("bar-onClick", d);
-        })
+            .on("click", function (d) { return self.dispatchEvent("bar-onClick", d); })
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].mouseover.strokeWidth)
@@ -4908,12 +4995,7 @@ var StackedBarChart = /** @class */ (function (_super) {
             self.showTooltip(d, this);
             self.reduceOpacity(this);
         })
-            .on("mousemove", function (d) {
-            var tooltipRef = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(self.holder).select("div.chart-tooltip");
-            var relativeMousePosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["mouse"])(self.holder);
-            tooltipRef.style("left", relativeMousePosition[0] + _configuration__WEBPACK_IMPORTED_MODULE_3__["tooltip"].magicLeft2 + "px")
-                .style("top", relativeMousePosition[1] + "px");
-        })
+            .on("mousemove", function (d) { return self.tooltip.positionTooltip(); })
             .on("mouseout", function (d) {
             var _a = _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].mouseout, strokeWidth = _a.strokeWidth, strokeWidthAccessible = _a.strokeWidthAccessible;
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)

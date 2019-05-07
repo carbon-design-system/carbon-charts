@@ -285,13 +285,13 @@ div.chart-overlay {
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%); }
-  div.chart-overlay div.loading-overlay-content {
+  div.chart-overlay div.ccharts-overlay-content {
     position: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%); }
-    div.chart-overlay div.loading-overlay-content div.bx--loading {
+    div.chart-overlay div.ccharts-overlay-content div.bx--loading {
       margin: auto; }
 
 .tooltip {
@@ -306,7 +306,8 @@ div.chart-overlay {
   position: absolute;
   padding: 10px;
   border-radius: 3px;
-  max-width: 200px;
+  min-width: 80px;
+  max-width: 70%;
   word-wrap: break-word;
   z-index: 1059; }
   .tooltip p {

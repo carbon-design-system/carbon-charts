@@ -1,5 +1,204 @@
 (window["webpackJsonpCharts"] = window["webpackJsonpCharts"] || []).push([["vendors~main"],{
 
+/***/ "../../node_modules/@carbon/utils-position/index.js":
+/*!**********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/@carbon/utils-position/index.js ***!
+  \**********************************************************************************************************/
+/*! exports provided: PLACEMENTS, defaultPositions, default, position */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLACEMENTS", function() { return PLACEMENTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultPositions", function() { return defaultPositions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "position", function() { return position; });
+/**
+ * Utilites to manipulate the position of elements relative to other elements
+ */
+var _a;
+var PLACEMENTS;
+(function (PLACEMENTS) {
+    PLACEMENTS["LEFT"] = "left";
+    PLACEMENTS["RIGHT"] = "right";
+    PLACEMENTS["TOP"] = "top";
+    PLACEMENTS["BOTTOM"] = "bottom";
+})(PLACEMENTS || (PLACEMENTS = {}));
+var defaultPositions = (_a = {},
+    _a[PLACEMENTS.LEFT] = function (referenceOffset, target, referenceRect) { return ({
+        top: referenceOffset.top - Math.round(target.offsetHeight / 2) + Math.round(referenceRect.height / 2),
+        left: Math.round(referenceOffset.left - target.offsetWidth)
+    }); },
+    _a[PLACEMENTS.RIGHT] = function (referenceOffset, target, referenceRect) { return ({
+        top: referenceOffset.top - Math.round(target.offsetHeight / 2) + Math.round(referenceRect.height / 2),
+        left: Math.round(referenceOffset.left + referenceRect.width)
+    }); },
+    _a[PLACEMENTS.TOP] = function (referenceOffset, target, referenceRect) { return ({
+        top: Math.round(referenceOffset.top - target.offsetHeight),
+        left: referenceOffset.left - Math.round(target.offsetWidth / 2) + Math.round(referenceRect.width / 2)
+    }); },
+    _a[PLACEMENTS.BOTTOM] = function (referenceOffset, target, referenceRect) { return ({
+        top: Math.round(referenceOffset.top + referenceRect.height),
+        left: referenceOffset.left - Math.round(target.offsetWidth / 2) + Math.round(referenceRect.width / 2)
+    }); },
+    _a);
+var Position = /** @class */ (function () {
+    function Position(positions) {
+        if (positions === void 0) { positions = {}; }
+        this.positions = defaultPositions;
+        this.positions = Object.assign({}, defaultPositions, positions);
+    }
+    Position.prototype.getRelativeOffset = function (target) {
+        // start with the initial element offsets
+        var offsets = {
+            left: target.offsetLeft,
+            top: target.offsetTop
+        };
+        // get each static (i.e. not absolute or relative) offsetParent and sum the left/right offsets
+        while (target.offsetParent && getComputedStyle(target.offsetParent).position === "static") {
+            offsets.left += target.offsetLeft;
+            offsets.top += target.offsetTop;
+            target = target.offsetParent;
+        }
+        return offsets;
+    };
+    Position.prototype.getAbsoluteOffset = function (target) {
+        var currentNode = target;
+        var margins = {
+            top: 0,
+            left: 0
+        };
+        // searches for containing elements with additional margins
+        while (currentNode.offsetParent) {
+            var computed = getComputedStyle(currentNode.offsetParent);
+            // find static elements with additional margins
+            // since they tend to throw off our positioning
+            // (usually this is just the body)
+            if (computed.position === "static" &&
+                computed.marginLeft &&
+                computed.marginTop) {
+                if (parseInt(computed.marginTop, 10)) {
+                    margins.top += parseInt(computed.marginTop, 10);
+                }
+                if (parseInt(computed.marginLeft, 10)) {
+                    margins.left += parseInt(computed.marginLeft, 10);
+                }
+            }
+            currentNode = currentNode.offsetParent;
+        }
+        var targetRect = target.getBoundingClientRect();
+        var relativeRect = document.body.getBoundingClientRect();
+        return {
+            top: targetRect.top - relativeRect.top + margins.top,
+            left: targetRect.left - relativeRect.left + margins.left
+        };
+    };
+    // finds the position relative to the `reference` element
+    Position.prototype.findRelative = function (reference, target, placement) {
+        var referenceOffset = this.getRelativeOffset(reference);
+        var referenceRect = reference.getBoundingClientRect();
+        return this.calculatePosition(referenceOffset, referenceRect, target, placement);
+    };
+    Position.prototype.findAbsolute = function (reference, target, placement) {
+        var referenceOffset = this.getAbsoluteOffset(reference);
+        var referenceRect = reference.getBoundingClientRect();
+        return this.calculatePosition(referenceOffset, referenceRect, target, placement);
+    };
+    Position.prototype.findPosition = function (reference, target, placement, offsetFunction) {
+        if (offsetFunction === void 0) { offsetFunction = this.getAbsoluteOffset; }
+        var referenceOffset = offsetFunction(reference);
+        var referenceRect = reference.getBoundingClientRect();
+        return this.calculatePosition(referenceOffset, referenceRect, target, placement);
+    };
+    Position.prototype.findPositionAt = function (offset, target, placement) {
+        return this.calculatePosition(offset, { height: 0, width: 0 }, target, placement);
+    };
+    /**
+     * Get the dimensions of an element from an AbsolutePosition and a reference element
+     */
+    Position.prototype.getPlacementBox = function (target, position) {
+        var targetBottom = target.offsetHeight + position.top;
+        var targetRight = target.offsetWidth + position.left;
+        return {
+            top: position.top,
+            bottom: targetBottom,
+            left: position.left,
+            right: targetRight
+        };
+    };
+    Position.prototype.addOffset = function (position, top, left) {
+        if (top === void 0) { top = 0; }
+        if (left === void 0) { left = 0; }
+        return Object.assign({}, position, {
+            top: position.top + top,
+            left: position.left + left
+        });
+    };
+    Position.prototype.setElement = function (element, position) {
+        element.style.top = position.top + "px";
+        element.style.left = position.left + "px";
+    };
+    Position.prototype.findBestPlacement = function (reference, target, placements, containerFunction, positionFunction) {
+        var _this = this;
+        if (containerFunction === void 0) { containerFunction = this.defaultContainerFunction; }
+        if (positionFunction === void 0) { positionFunction = this.findPosition; }
+        /**
+         * map over the array of placements and weight them based on the percentage of visible area
+         * where visible area is defined as the area not obscured by the window borders
+         */
+        var weightedPlacements = placements.map(function (placement) {
+            var pos = positionFunction(reference, target, placement);
+            var box = _this.getPlacementBox(target, pos);
+            var hiddenHeight = box.bottom - containerFunction().height;
+            var hiddenWidth = box.right - containerFunction().width;
+            // if the hiddenHeight or hiddenWidth is negative, reset to offsetHeight or offsetWidth
+            hiddenHeight = hiddenHeight < 0 ? target.offsetHeight : hiddenHeight;
+            hiddenWidth = hiddenWidth < 0 ? target.offsetWidth : hiddenWidth;
+            var area = target.offsetHeight * target.offsetWidth;
+            var hiddenArea = hiddenHeight * hiddenWidth;
+            var visibleArea = area - hiddenArea;
+            // if the visibleArea is 0 set it back to area (to calculate the percentage in a useful way)
+            visibleArea = visibleArea === 0 ? area : visibleArea;
+            var visiblePercent = visibleArea / area;
+            return {
+                placement: placement,
+                weight: visiblePercent
+            };
+        });
+        // sort the placements from best to worst
+        weightedPlacements.sort(function (a, b) { return b.weight - a.weight; });
+        // pick the best!
+        return weightedPlacements[0].placement;
+    };
+    Position.prototype.findBestPlacementAt = function (offset, target, placements, containerFunction) {
+        var _this = this;
+        if (containerFunction === void 0) { containerFunction = this.defaultContainerFunction; }
+        var positionAt = function (_, target, placement) {
+            return _this.findPositionAt(offset, target, placement);
+        };
+        return this.findBestPlacement(null, target, placements, containerFunction, positionAt);
+    };
+    Position.prototype.defaultContainerFunction = function () {
+        return {
+            // we go with window here, because that's going to be the simple/common case
+            width: window.innerHeight - window.scrollY,
+            height: window.innerWidth - window.scrollX
+        };
+    };
+    Position.prototype.calculatePosition = function (referenceOffset, referenceRect, target, placement) {
+        if (this.positions[placement]) {
+            return this.positions[placement](referenceOffset, target, referenceRect);
+        }
+        console.error("No function found for placement, defaulting to 0,0");
+        return { left: 0, top: 0 };
+    };
+    return Position;
+}());
+/* harmony default export */ __webpack_exports__["default"] = (Position);
+var position = new Position();
+//# sourceMappingURL=../src/index.js.map
+
+/***/ }),
+
 /***/ "../../node_modules/babel-polyfill/lib/index.js":
 /*!******************************************************************************************************!*\
   !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/babel-polyfill/lib/index.js ***!
