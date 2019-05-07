@@ -23,6 +23,9 @@
 		"build-all-demos": "bash scripts/build-demos.sh",
 		"deploy": "bash scripts/deploy.sh"
 	},
+	"engines": {
+		"yarn": "1.6.0"
+	},
 	"workspaces": {
 		"packages": [
 			"packages/*"
@@ -32,9 +35,6 @@
 		"hooks": {
 			"pre-push": "bash scripts/prepush.sh"
 		}
-	},
-	"engines": {
-		"npm": "5.6.0"
 	},
 	"release": {
 		"branch": "master"
