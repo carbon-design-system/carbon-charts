@@ -1,31 +1,23 @@
-# vue
+# `@carbon/charts-vue`
 
-## Project setup
+> Carbon Charting components
 
-```
-npm install
-```
+## Getting Started
 
-### Compiles and hot-reloads for development
+Run the following command using [npm](https://www.npmjs.com/):
 
-```
-npm run storybook
+```bash
+npm install -S @carbon/charts-vue
 ```
 
-### Compiles and minifies for production
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
+instead:
 
-```
-npm run build
-```
-
-### Run your tests (TODO)
-
-```
-npm run test
+```bash
+yarn add @carbon/charts-vue
 ```
 
-### Lints and fixes files
+## Sample Code
+Checkout a sample app we've made on Codesandbox:
 
-```
-npm run lint
-```
+[![Edit Carbon Charts - Vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/pjkrw2omq0?fontsize=14)
