@@ -1,9 +1,10 @@
 {
 	"lerna": "3.2.1",
 	"packages": [
-		"packages/*",
-		"packages/*/demo"
+		"packages/*"
 	],
+	"npmClient": "yarn",
+	"useWorkspaces": true,
 	"command": {
 		"bootstrap": {
 			"npmClientArgs": [

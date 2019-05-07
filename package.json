@@ -22,6 +22,11 @@
 		"build-all-demos": "bash scripts/build-demos.sh",
 		"deploy": "bash scripts/deploy.sh"
 	},
+	"workspaces": {
+		"packages": [
+			"packages/*"
+		]
+	},
 	"husky": {
 		"hooks": {
 			"pre-push": "bash scripts/prepush.sh"
