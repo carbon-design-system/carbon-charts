@@ -13,6 +13,7 @@ import * as Configuration from "./configuration";
 import { ChartConfig, BaseChartOptions, ChartData } from "./configuration";
 import { Tools } from "./tools";
 import PatternsService from "./services/patterns";
+import { ChartOverlay } from "./components/index";
 
 // Misc
 import ResizeObserver from "resize-observer-polyfill";
@@ -46,6 +47,9 @@ export class BaseChart {
 	eventHandlers = {
 		tooltips: null
 	};
+
+	// Misc
+	chartOverlay: ChartOverlay;
 
 	constructor(holder: Element, configs: ChartConfig<BaseChartOptions>) {
 		this.id = `chart-${BaseChart.chartCount++}`;
@@ -114,7 +118,8 @@ export class BaseChart {
 		this.dispatchEvent("data-change");
 
 		if (initialDraw || newDataIsAPromise) {
-			this.updateOverlay().show();
+			this.chartOverlay = new ChartOverlay(this.holder, this.options.overlay);
+			this.chartOverlay.show();
 		}
 
 		// Hide current showing tooltip
@@ -129,37 +134,42 @@ export class BaseChart {
 			// Process data
 			// this.data = this.dataProcessor(Tools.clone(value));
 			this.data = Tools.clone(value);
-			this.displayData = this.dataProcessor(Tools.clone(value));
 
-			const keys = this.getKeysFromData();
+			if (this.data.datasets && this.data.datasets.length > 0) {
+				this.displayData = this.dataProcessor(Tools.clone(value));
 
-			// Grab the old legend items, the keys from the current data
-			// Compare the two, if there are any differences (additions/removals)
-			// Completely remove the legend and render again
-			const oldLegendItems = this.getActiveLegendItems();
-			const keysArray = Object.keys(keys);
-			const { missing: removedItems, added: newItems } = Tools.arrayDifferences(oldLegendItems, keysArray);
+				const keys = this.getKeysFromData();
 
-			// Update keys for legend use the latest data keys
-			this.options.keys = keys;
+				// Grab the old legend items, the keys from the current data
+				// Compare the two, if there are any differences (additions/removals)
+				// Completely remove the legend and render again
+				const oldLegendItems = this.getActiveLegendItems();
+				const keysArray = Object.keys(keys);
+				const { missing: removedItems, added: newItems } = Tools.arrayDifferences(oldLegendItems, keysArray);
 
-			// Set the color scale based on the keys present in the data
-			this.setColorScale();
+				// Update keys for legend use the latest data keys
+				this.options.keys = keys;
 
-			// Add patterns to page, set pattern scales
-			if (this.options.accessibility) {
-				this.setPatterns();
-			}
+				// Set the color scale based on the keys present in the data
+				this.setColorScale();
 
-			// Perform the draw or update chart
-			if (initialDraw) {
-				this.initialDraw();
-			} else {
-				if (removedItems.length > 0 || newItems.length > 0) {
-					this.addOrUpdateLegend();
+				// Add patterns to page, set pattern scales
+				if (this.options.accessibility) {
+					this.setPatterns();
 				}
 
-				this.update();
+				// Perform the draw or update chart
+				if (initialDraw) {
+					this.initialDraw();
+				} else {
+					if (removedItems.length > 0 || newItems.length > 0) {
+						this.addOrUpdateLegend();
+					}
+
+					this.update();
+				}
+			} else {
+				this.chartOverlay.show(Configuration.options.BASE.overlay.types.noData);
 			}
 		});
 	}
@@ -922,33 +932,6 @@ export class BaseChart {
 		}
 
 		return transition().duration(animate === false ? 0 : Configuration.transitions.default.duration);
-	}
-
-	// ================================================================================
-	// Loading overlay
-	// ================================================================================
-	updateOverlay() {
-		const overlayElement = <HTMLElement>this.holder.querySelector("div.chart-overlay");
-
-		return {
-			show: () => {
-				// If overlay element has already been added to the chart container
-				// Just show it
-				if (overlayElement) {
-					overlayElement.style.display = "block";
-				} else {
-					const loadingOverlay = document.createElement("div");
-
-					loadingOverlay.classList.add("chart-overlay");
-					loadingOverlay.innerHTML = this.options.loadingOverlay.innerHTML;
-
-					this.holder.appendChild(loadingOverlay);
-				}
-			},
-			hide: () => {
-				overlayElement.style.display = "none";
-			}
-		};
 	}
 
 	getBBox(selector: any) {

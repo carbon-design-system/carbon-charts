@@ -163,7 +163,7 @@ export class PieChart extends BaseChart {
 			.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); });
 
 		// Hide overlay
-		this.updateOverlay().hide();
+		this.chartOverlay.hide();
 	}
 
 	// Interpolated transitions for older data points to reflect the new data changes
@@ -263,7 +263,7 @@ export class PieChart extends BaseChart {
 		this.reduceOpacity();
 
 		// Hide the overlay
-		this.updateOverlay().hide();
+		this.chartOverlay.hide();
 	}
 
 	// TODO - Possible inherits from base-chart
