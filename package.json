@@ -23,9 +23,6 @@
 		"build-all-demos": "bash scripts/build-demos.sh",
 		"deploy": "bash scripts/deploy.sh"
 	},
-	"engines": {
-		"yarn": "1.6.0"
-	},
 	"workspaces": {
 		"packages": [
 			"packages/*"
