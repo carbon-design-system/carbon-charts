@@ -7,7 +7,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const theme = parseInt(urlParams.get('theme'));
 let themeToUse = themes.LIGHT_1;
 
-switch(theme) {
+switch (theme) {
 	case 2:
 		themeToUse = themes.LIGHT_2;
 		break;
@@ -15,15 +15,12 @@ switch(theme) {
 		themeToUse = themes.LIGHT_3;
 		break;
 	case 4:
-		themeToUse = themes.HC_3;
-		break;
-	case 5:
-		themeToUse = themes.HC_4;
+		themeToUse = themes.DARK_1;
 		break;
 }
 
 export const colors = window["isExperimental"] ?
-	themeToUse:
+	themeToUse :
 	[
 		"#00a68f",
 		"#3b1a40",

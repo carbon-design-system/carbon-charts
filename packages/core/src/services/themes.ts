@@ -50,6 +50,16 @@ export const LIGHT_3 = [
 	colors.cyan(70)
 ];
 
+export const DARK_1 = [
+	colors.purple(60),
+	colors.teal(30),
+	colors.magenta(50),
+	colors.green(40),
+	colors.purple(20),
+	colors.teal(60),
+	colors.magenta(30)
+];
+
 export const HC_1 = generateTheme(80, 50);
 export const HC_2 = generateTheme(70, 40);
 export const HC_3 = generateTheme(60, 40);
