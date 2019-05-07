@@ -1,5 +1,5 @@
 // D3 Imports
-import { select, selectAll, mouse } from "d3-selection";
+import { select } from "d3-selection";
 import { scaleOrdinal } from "d3-scale";
 import { pie, arc, Pie, Arc } from "d3-shape";
 import { interpolate } from "d3-interpolate";
@@ -44,6 +44,11 @@ export class PieChart extends BaseChart {
 	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
 	dataProcessor(dataObject: ChartData): PieData {
 		// TODO - Support multiple datasets
+		if (dataObject.datasets.length > 1) {
+			console.warn(`Currently the Pie & Donut charts support a single dataset,
+				you appear to have more than that. Will only use your first provided dataset.`);
+		}
+
 		// Check for duplicate keys in the data
 		const duplicates = Tools.getDuplicateValues(dataObject.labels);
 		if (duplicates.length > 0) {
@@ -278,35 +283,7 @@ export class PieChart extends BaseChart {
 		}
 	}
 
-	// TODO - Should inherit most logic from base-chart
-	showTooltip(d) {
-		this.resetOpacity();
-
-		selectAll(".tooltip").remove();
-		const tooltip = select(this.holder).append("div")
-			.attr("class", "tooltip chart-tooltip")
-			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
-
-		const dVal = d.value.toLocaleString();
-		const tooltipHTML = this.generateTooltipHTML(d.data.label, dVal);
-
-		tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
-		if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
-			tooltip.style(
-				"left",
-				mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
-			);
-		} else {
-			tooltip.style("left", mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
-		}
-
-		tooltip.style("opacity", 0)
-			.transition()
-			.duration(Configuration.tooltip.fadeIn.duration)
-			.style("opacity", 1);
-
-		this.addTooltipEventListeners(tooltip);
-	}
+	getTooltipHTML = d => this.generateTooltipHTML(d.data.label, d.value.toLocaleString());
 
 	// TODO - Refactor
 	addDataPointEventListener() {
@@ -314,28 +291,19 @@ export class PieChart extends BaseChart {
 		const { accessibility } = this.options;
 
 		this.innerWrap.selectAll("path")
-			.on("click", function(d) {
-				self.dispatchEvent("pie-slice-onClick", d);
-			})
+			.on("click", d => self.dispatchEvent("pie-slice-onClick", d))
 			.on("mouseover", function(d) {
 				const sliceElement = select(this);
 				Tools.moveToFront(sliceElement);
 
-				sliceElement
-					.attr("stroke-width", Configuration.pie.mouseover.strokeWidth)
+				sliceElement.attr("stroke-width", Configuration.pie.mouseover.strokeWidth)
 					.attr("stroke-opacity", Configuration.pie.mouseover.strokeOpacity)
 					.attr("stroke", self.getStrokeColor(self.displayData.datasets[0].label, d.data.label, d.data.value));
 
 				self.showTooltip(d);
 				self.reduceOpacity(this);
 			})
-			.on("mousemove", function(d) {
-				const tooltipRef = select(self.holder).select("div.chart-tooltip");
-
-				const relativeMousePosition = mouse(self.holder as HTMLElement);
-				tooltipRef.style("left", relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px")
-					.style("top", relativeMousePosition[1] + "px");
-			})
+			.on("mousemove", d => self.tooltip.positionTooltip())
 			.on("mouseout", function(d) {
 				select(this)
 					.attr("stroke-width", accessibility ? Configuration.pie.default.strokeWidth : Configuration.pie.mouseout.strokeWidth)
@@ -350,6 +318,7 @@ export class PieChart extends BaseChart {
 		const oldData = Tools.clone(this.displayData);
 		const activeLegendItems = this.getActiveLegendItems();
 
+		// TODO - Support multiple datasets
 		const newDisplayData = Object.assign({}, oldData);
 		newDisplayData.datasets[0].data = oldData.datasets[0].data.filter(dataPoint => activeLegendItems.indexOf(dataPoint.label) !== -1);
 
