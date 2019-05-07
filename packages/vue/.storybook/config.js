@@ -3,7 +3,8 @@ import { setOptions } from '@storybook/addon-options';
 
 setOptions({
   name: 'Carbon Charts - Vue Wrappers',
-  showDownPanel: false
+  showDownPanel: false,
+  showAddonPanel: false
 });
 
 // load global styles
