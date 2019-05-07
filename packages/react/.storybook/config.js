@@ -3,11 +3,8 @@ import { setOptions } from '@storybook/addon-options';
 
 setOptions({
   name: 'Carbon Charts - React Wrappers',
-  showDownPanel: false
-  // goFullScreen: false,
-  // showLeftPanel: true,
-//   showSearchBox: false,
-  // downPanelInRight: true,
+  showDownPanel: false,
+  showAddonPanel: false
 });
 
 // load global styles
