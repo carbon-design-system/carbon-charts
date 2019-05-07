@@ -11,7 +11,7 @@ let themeToUse = [
 	colorsService.magenta(50),
 	colorsService.cyan(40),
 	colorsService.magenta(80),
-	colorsService.purple(80),
+	colorsService.purple(30),
 	colorsService.cyan(80)		
 ]
 
