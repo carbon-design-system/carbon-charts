@@ -14,14 +14,14 @@
     "clean": "rm -rf dist demo/bundle"
   },
   "dependencies": {
-    "@carbon/charts": "^0.11.14",
+    "@carbon/charts": "^0.7.11",
     "vue": "2.5.21"
   },
   "devDependencies": {
     "@babel/core": "7.3.4",
-    "@storybook/addon-actions": "5.0.11",
     "@storybook/addon-links": "5.0.11",
     "@storybook/addons": "5.0.11",
+    "@storybook/theming": "^5.0.11",
     "@storybook/vue": "5.0.11",
     "@vue/cli-plugin-babel": "3.4.0",
     "@vue/cli-plugin-eslint": "3.4.0",
@@ -33,6 +33,7 @@
     "eslint-plugin-vue": "5.0.0",
     "lint-staged": "8.1.5",
     "prettier": "1.16.4",
+    "vue-loader": "^15.7.0",
     "vue-template-compiler": "2.5.21"
   },
   "publishConfig": {
