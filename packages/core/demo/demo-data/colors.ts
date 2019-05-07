@@ -5,22 +5,14 @@ import {
 
 const urlParams = new URLSearchParams(window.location.search);
 const theme = parseInt(urlParams.get('theme'));
-let themeToUse = [
-	colorsService.purple(60),
-	colorsService.teal(30),
-	colorsService.magenta(50),
-	colorsService.cyan(40),
-	colorsService.magenta(80),
-	colorsService.purple(30),
-	colorsService.cyan(80)		
-]
+let themeToUse = themes.LIGHT_1;
 
 switch(theme) {
 	case 2:
-		themeToUse = themes.HC_1;
+		themeToUse = themes.LIGHT_2;
 		break;
 	case 3:
-		themeToUse = themes.HC_2;
+		themeToUse = themes.LIGHT_3;
 		break;
 	case 4:
 		themeToUse = themes.HC_3;

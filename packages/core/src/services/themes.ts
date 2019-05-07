@@ -20,6 +20,36 @@ const generateTheme = (firstShade, secondShade) => {
 	return firstPalette.concat(secondPalette);
 };
 
+export const LIGHT_1 = [
+	colors.purple(60),
+	colors.teal(30),
+	colors.magenta(50),
+	colors.cyan(40),
+	colors.magenta(80),
+	colors.purple(30),
+	colors.cyan(80)
+];
+
+export const LIGHT_2 = [
+	colors.purple(60),
+	colors.magenta(30),
+	colors.teal(80),
+	colors.cyan(40),
+	colors.magenta(70),
+	colors.teal(30),
+	colors.cyan(70)
+];
+
+export const LIGHT_3 = [
+	colors.purple(60),
+	colors.magenta(30),
+	colors.teal(70),
+	colors.cyan(40),
+	colors.magenta(70),
+	colors.teal(30),
+	colors.cyan(70)
+];
+
 export const HC_1 = generateTheme(80, 50);
 export const HC_2 = generateTheme(70, 40);
 export const HC_3 = generateTheme(60, 40);
