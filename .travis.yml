@@ -3,8 +3,6 @@ language: node_js
 node_js:
  - '8'
 before_install: .travis/before_install.sh
-install:
-  - npm install
 script: lerna run lint
 sudo: false
 deploy:
