@@ -41,6 +41,25 @@ export enum ThresholdTheme {
  * User configurable options *
  *****************************
  */
+/**
+ * customize the overlay contents
+ */
+export interface ChartOverlayOptions {
+	/**
+	 * types of overlay states
+	 */
+	types: {
+		loading: string;
+		noData: string;
+	};
+	/**
+	 * raw html to be injected into the overlay container
+	 */
+	innerHTML: {
+		loading: string;
+		noData: string;
+	};
+}
 
 /**
  * Base chart options common to any chart
@@ -82,16 +101,16 @@ export interface BaseChartOptions {
 		 * a function to format the tooltip contents
 		 */
 		formatter: Function;
-	};
-	/**
-	 * customize the loading overlay contents
-	 */
-	loadingOverlay?: {
 		/**
-		 * raw html to be injected into the loading container
+		 * elements onto which a hover or click would not trigger the tooltip to hide
 		 */
-		innerHTML: string;
+		targetsToSkip: Array<String>;
+		/**
+		 * custom HTML content for tooltip provided by user
+		 */
+		customHTML?: string;
 	};
+	overlay?: ChartOverlayOptions;
 	/**
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
 	 */
@@ -128,21 +147,33 @@ const baseOptions: BaseChartOptions = {
 	],
 	tooltip: {
 		size: TooltipSize.FULL,
-		formatter: null
+		formatter: null,
+		targetsToSkip: ["rect", "circle", "path"]
 	},
-	loadingOverlay: {
-		innerHTML: `
-		<div class="loading-overlay-content">
-		  <div data-loading class="bx--loading bx--loading--small">
-			<svg class="bx--loading__svg" viewBox="-75 -75 150 150">
-				<title>Loading</title>
-				<circle cx="0" cy="0" r="37.5" />
-			</svg>
-		  </div>
+	overlay: {
+		types: {
+			loading: "loading",
+			noData: "noData"
+		},
+		innerHTML: {
+			loading: `
+			<div class="ccharts-overlay-content">
+				<div data-loading class="bx--loading bx--loading--small">
+					<svg class="bx--loading__svg" viewBox="-75 -75 150 150">
+						<title>Loading</title>
+						<circle cx="0" cy="0" r="37.5" />
+					</svg>
+				</div>
 
-		  <p>Loading</p>
-		</div>
-		`
+				<p>Loading</p>
+			</div>
+			`,
+			noData: `
+			<div class="ccharts-overlay-content">
+				No data available
+			</div>
+			`
+		}
 	}
 };
 
@@ -664,7 +695,7 @@ export const tooltip = {
 	magicTop1: 21,
 	magicTop2: 22,
 	magicLeft1: 11,
-	magicLeft2: 12,
+	magicLeft2: 10,
 	fadeIn: {
 		duration: 250
 	},

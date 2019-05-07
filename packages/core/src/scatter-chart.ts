@@ -45,7 +45,7 @@ export class ScatterChart extends BaseAxisChart {
 				.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 
 		// Hide the overlay
-		this.updateOverlay().hide();
+		this.chartOverlay.hide();
 
 		// Dispatch the load event
 		this.dispatchEvent("load");
@@ -133,7 +133,7 @@ export class ScatterChart extends BaseAxisChart {
 		this.addDataPointEventListener();
 
 		// Hide the overlay
-		this.updateOverlay().hide();
+		this.chartOverlay.hide();
 
 		// Dispatch the update event
 		this.dispatchEvent("update");
@@ -210,9 +210,7 @@ export class ScatterChart extends BaseAxisChart {
 		const { accessibility } = this.options;
 
 		this.svg.selectAll("circle.dot")
-			.on("click", function(d) {
-				self.dispatchEvent("line-onClick", d);
-			})
+			.on("click", d => self.dispatchEvent("line-onClick", d))
 			.on("mouseover", function(d) {
 				select(this)
 					.attr("stroke-width", Configuration.lines.points.mouseover.strokeWidth)
@@ -222,13 +220,7 @@ export class ScatterChart extends BaseAxisChart {
 				self.showTooltip(d, this);
 				self.reduceOpacity(this);
 			})
-			.on("mousemove", function(d) {
-				const tooltipRef = select(self.holder).select("div.chart-tooltip");
-
-				const relativeMousePosition = mouse(self.holder as HTMLElement);
-				tooltipRef.style("left", relativeMousePosition[0] + Configuration.tooltip.magicLeft2 + "px")
-					.style("top", relativeMousePosition[1] + "px");
-			})
+			.on("mousemove", d => self.tooltip.positionTooltip())
 			.on("mouseout", function(d) {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.lines.points.mouseout;
 				select(this)

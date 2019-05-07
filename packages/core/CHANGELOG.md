@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.15](https://github.com/IBM/carbon-charts/compare/v0.11.14...v0.11.15) (2019-05-07)
+
+
+### Bug Fixes
+
+* **core:** Fix tooltip positioning ([dd17048](https://github.com/IBM/carbon-charts/commit/dd17048))
+
+
+
+
+
+## [0.11.14](https://github.com/IBM/carbon-charts/compare/v0.11.12...v0.11.14) (2019-05-06)
+
+
+### Bug Fixes
+
+* **core:** Show empty state for when there is no data ([b5db127](https://github.com/IBM/carbon-charts/commit/b5db127))
+
+
+
+
+
+## [0.11.13](https://github.com/IBM/carbon-charts/compare/v0.11.12...v0.11.13) (2019-04-30)
+
+
+### Bug Fixes
+
+* **core:** Show empty state for when there is no data ([b5db127](https://github.com/IBM/carbon-charts/commit/b5db127))
+
+
+
+
+
 ## [0.11.12](https://github.com/IBM/carbon-charts/compare/v0.11.11...v0.11.12) (2019-04-22)
 
 **Note:** Version bump only for package @carbon/charts
