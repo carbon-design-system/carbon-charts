@@ -1,5 +1,6 @@
 import { ScaleBand, ScaleLinear } from "d3-scale";
 import { Tools } from "./tools";
+import * as themes from "./services/themes";
 
 /*
  **********************
@@ -138,13 +139,7 @@ export interface BaseChartOptions {
 const baseOptions: BaseChartOptions = {
 	legendClickable: true,
 	containerResizable: true,
-	colors: [
-		"#00a68f",
-		"#3b1a40",
-		"#473793",
-		"#3c6df0",
-		"#56D2BB"
-	],
+	colors: themes.LIGHT_1,
 	tooltip: {
 		size: TooltipSize.FULL,
 		formatter: null,

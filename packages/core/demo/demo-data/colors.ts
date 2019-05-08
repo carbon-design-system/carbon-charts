@@ -1,30 +1,8 @@
-import {
-	colors as colorsService,
-	themes
-} from "../../src/index"
+import { themes, defaultColors } from "../../src/index";
 
 const urlParams = new URLSearchParams(window.location.search);
-const theme = parseInt(urlParams.get('theme'));
-let themeToUse = themes.LIGHT_1;
 
-switch (theme) {
-	case 2:
-		themeToUse = themes.LIGHT_2;
-		break;
-	case 3:
-		themeToUse = themes.LIGHT_3;
-		break;
-	case 4:
-		themeToUse = themes.DARK_1;
-		break;
-}
+// Grab "theme" param from query string
+let themeToUse = urlParams.has("theme") ? themes[urlParams.get("theme")] : defaultColors;
 
-export const colors = window["isExperimental"] ?
-	themeToUse :
-	[
-		"#00a68f",
-		"#3b1a40",
-		"#473793",
-		"#3c6df0",
-		"#56D2BB"
-	];
+export const colors = themeToUse;
