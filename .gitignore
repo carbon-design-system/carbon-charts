@@ -1,12 +1,11 @@
 dist
-demo/bundle
+**/demo/bundle
+**/demo/dist
 node_modules
 .DS_Store
 .vscode/
 .idea/
 *.log
-!packages/core/demo/
-demo
 storybook-dist
 package-lock.json
 .cache/
