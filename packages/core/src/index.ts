@@ -10,16 +10,13 @@ import { LineChart } from "./line-chart";
 import { ComboChart } from "./combo-chart";
 import { ScatterChart } from "./scatter-chart";
 
-import colors from "./services/colors";
-import * as Configuration from "./configuration";
-const defaultColors = Configuration.options.BASE.colors;
-
-import * as themes from "./services/themes";
+import * as colorPalettes from "./services/colorPalettes";
+// TODO 1.0 - Remove deprecated API
+const defaultColors = colorPalettes.DEFAULT;
 
 export {
-	colors,
 	defaultColors,
-	themes,
+	colorPalettes,
 	BaseChart,
 	BaseAxisChart,
 	PieChart,

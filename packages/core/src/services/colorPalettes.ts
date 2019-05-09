@@ -29,3 +29,5 @@ export const DARK_1 = [
 	colors.teal(60),
 	colors.magenta(30)
 ];
+
+export const DEFAULT = LIGHT_1;
