@@ -164,6 +164,103 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
+/***/ "./demo/chart-types.ts":
+/*!*****************************!*\
+  !*** ./demo/chart-types.ts ***!
+  \*****************************/
+/*! exports provided: chartTypes */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "chartTypes", function() { return chartTypes; });
+var _a = __webpack_require__(/*! ./demo-data/index */ "./demo/demo-data/index.ts"), 
+// Bar
+groupedBarOptions = _a.groupedBarOptions, groupedBarData = _a.groupedBarData, simpleBarOptions = _a.simpleBarOptions, simpleBarData = _a.simpleBarData, stackedBarData = _a.stackedBarData, stackedBarOptions = _a.stackedBarOptions, 
+// Pie & donut
+pieOptions = _a.pieOptions, pieData = _a.pieData, donutOptions = _a.donutOptions, 
+// Line
+curvedLineOptions = _a.curvedLineOptions, curvedLineData = _a.curvedLineData, lineData = _a.lineData, lineOptions = _a.lineOptions, scatterData = _a.scatterData, 
+// Combo
+comboData = _a.comboData, comboOptions = _a.comboOptions;
+var chartTypes = [
+    {
+        id: "grouped-bar",
+        name: "Grouped Bar",
+        options: groupedBarOptions,
+        data: groupedBarData
+    },
+    {
+        id: "simple-bar",
+        name: "Bar",
+        options: simpleBarOptions,
+        data: simpleBarData
+    },
+    {
+        id: "combo",
+        name: "Combo",
+        options: comboOptions,
+        data: comboData
+    },
+    {
+        id: "stacked-bar",
+        name: "Bar",
+        options: stackedBarOptions,
+        data: stackedBarData
+    },
+    {
+        id: "simple-bar-accessible",
+        name: "Accessible Bar",
+        options: Object.assign({}, simpleBarOptions, { accessibility: true }),
+        data: simpleBarData
+    },
+    {
+        id: "stacked-bar-accessible",
+        name: "Bar",
+        options: Object.assign({}, stackedBarOptions, { accessibility: true }),
+        data: stackedBarData
+    },
+    {
+        id: "curved-line",
+        name: "Curved Line",
+        options: curvedLineOptions,
+        data: curvedLineData
+    },
+    {
+        id: "line",
+        name: "Line",
+        options: lineOptions,
+        data: lineData
+    },
+    {
+        id: "line-step",
+        name: "Step",
+        options: Object.assign({}, lineOptions, { curve: "curveStepAfter" }),
+        data: lineData
+    },
+    {
+        id: "pie",
+        name: "pie",
+        options: pieOptions,
+        data: pieData
+    },
+    {
+        id: "donut",
+        name: "donut",
+        options: donutOptions,
+        data: pieData
+    },
+    {
+        id: "scatter",
+        name: "scatter",
+        options: lineOptions,
+        data: scatterData
+    }
+];
+
+
+/***/ }),
+
 /***/ "./demo/demo-data/bar.ts":
 /*!*******************************!*\
   !*** ./demo/demo-data/bar.ts ***!
@@ -373,23 +470,15 @@ var stackedBarOptions = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colors", function() { return colors; });
-var colors = window["isExperimental"] ?
-    [
-        "#418cff",
-        "#3dbb61",
-        "#ee538b",
-        "#0058a1",
-        "#fb4b53",
-        "#8a3ffc",
-        "#00bab6" // Teal 40
-    ] :
-    [
-        "#00a68f",
-        "#3b1a40",
-        "#473793",
-        "#3c6df0",
-        "#56D2BB"
-    ];
+/* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../src/index */ "./src/index.ts");
+
+var urlParams = new URLSearchParams(window.location.search);
+// Grab "theme" param from query string
+var themeToUse = _src_index__WEBPACK_IMPORTED_MODULE_0__["colorPalettes"].DEFAULT;
+if (urlParams.has("theme") && _src_index__WEBPACK_IMPORTED_MODULE_0__["colorPalettes"][urlParams.get("theme")]) {
+    themeToUse = _src_index__WEBPACK_IMPORTED_MODULE_0__["colorPalettes"][urlParams.get("theme")];
+}
+var colors = themeToUse;
 
 
 /***/ }),
@@ -684,9 +773,6 @@ var lineOptions = {
             ]
         }
     },
-    points: {
-        radius: 4
-    },
     legendClickable: true,
     containerResizable: true
 };
@@ -777,6 +863,58 @@ var pieData = {
 
 /***/ }),
 
+/***/ "./demo/demo-options.ts":
+/*!******************************!*\
+  !*** ./demo/demo-options.ts ***!
+  \******************************/
+/*! exports provided: setOrUpdateParam, initializeDemoOptions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setOrUpdateParam", function() { return setOrUpdateParam; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeDemoOptions", function() { return initializeDemoOptions; });
+/* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/index */ "./src/index.ts");
+
+var setOrUpdateParam = function (name, value) {
+    var params = new URLSearchParams(location.search);
+    // Remove any existing "theme" param
+    if (params.has(name)) {
+        params.delete(name);
+    }
+    params.append(name, value);
+    location.search = params.toString();
+};
+// Theme selector
+var initializeThemeSelector = function () {
+    var dropdownOptions = Array.prototype.slice.call(document.querySelectorAll("div.theme-selector a.bx--dropdown-link"));
+    // Set click listeners for the dropdown options
+    dropdownOptions.forEach(function (dropdownOption) {
+        dropdownOption.addEventListener("click", function (e) {
+            e.preventDefault();
+            setOrUpdateParam("theme", e.target.parentNode.getAttribute("data-value"));
+        });
+    });
+    // Set state for current theme
+    var params = new URLSearchParams(location.search);
+    var themeName;
+    if (params.has("theme") && _src_index__WEBPACK_IMPORTED_MODULE_0__["colorPalettes"][params.get("theme")]) {
+        themeName = params.get("theme");
+    }
+    else {
+        themeName = "DEFAULT";
+    }
+    var dropdownDefaultOption = document.querySelector("div.theme-selector li.bx--dropdown-text");
+    var selectedOption = dropdownOptions.find(function (dO) { return dO.parentNode.getAttribute("data-value") === themeName; });
+    dropdownDefaultOption.innerHTML = selectedOption.innerText;
+};
+var initializeDemoOptions = function () {
+    initializeThemeSelector();
+};
+
+
+/***/ }),
+
 /***/ "./demo/index.scss":
 /*!*************************!*\
   !*** ./demo/index.scss ***!
@@ -802,121 +940,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _src_style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../src/style.scss */ "./src/style.scss");
 /* harmony import */ var _src_style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_src_style_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _demo_options__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./demo-options */ "./demo/demo-options.ts");
+/* harmony import */ var _chart_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chart-types */ "./demo/chart-types.ts");
 
 // Styles
 
 
-//
-// Experimental Switch Toggle
-//
-var experimentalSwitchWrapper = document.querySelector("fieldset.experimental-switch");
-var experimentalCheckbox = experimentalSwitchWrapper.querySelector("input#toggleInput");
-var location = window.location;
-if (location) {
-    window["isExperimental"] = location.search.replace("?experimental=", "") === "true";
-    experimentalCheckbox.checked = window["isExperimental"];
-    experimentalSwitchWrapper.querySelector("label.bx--toggle__label").addEventListener("click", function () {
-        // Need the setTimeout
-        // Here since carbon toggle
-        // Does not provide a callback
-        // Therefore we wait until the change in toggle
-        // Status takes effect
-        setTimeout(function () {
-            var experimentalMode = experimentalCheckbox.checked;
-            // It's not necessary to process the location pathname
-            // Since we're using the location origin
-            // And since we don't use any other query params
-            location.href = "" + location.origin + location.pathname + "?experimental=" + experimentalMode;
-        });
-    });
-}
-else {
-    // Hide experimental switch altogether
-    experimentalSwitchWrapper.parentNode.removeChild(experimentalSwitchWrapper);
-}
-var _a = __webpack_require__(/*! ./demo-data/index */ "./demo/demo-data/index.ts"), 
-// Bar
-groupedBarOptions = _a.groupedBarOptions, groupedBarData = _a.groupedBarData, simpleBarOptions = _a.simpleBarOptions, simpleBarData = _a.simpleBarData, stackedBarData = _a.stackedBarData, stackedBarOptions = _a.stackedBarOptions, 
-// Pie & donut
-pieOptions = _a.pieOptions, pieData = _a.pieData, donutOptions = _a.donutOptions, 
-// Line
-curvedLineOptions = _a.curvedLineOptions, curvedLineData = _a.curvedLineData, lineData = _a.lineData, lineOptions = _a.lineOptions, scatterData = _a.scatterData, 
-// Combo
-comboData = _a.comboData, comboOptions = _a.comboOptions;
-var chartTypes = [
-    {
-        id: "grouped-bar",
-        name: "Grouped Bar",
-        options: groupedBarOptions,
-        data: groupedBarData
-    },
-    {
-        id: "simple-bar",
-        name: "Bar",
-        options: simpleBarOptions,
-        data: simpleBarData
-    },
-    {
-        id: "combo",
-        name: "Combo",
-        options: comboOptions,
-        data: comboData
-    },
-    {
-        id: "stacked-bar",
-        name: "Bar",
-        options: stackedBarOptions,
-        data: stackedBarData
-    },
-    {
-        id: "simple-bar-accessible",
-        name: "Accessible Bar",
-        options: Object.assign({}, simpleBarOptions, { accessibility: true }),
-        data: simpleBarData
-    },
-    {
-        id: "stacked-bar-accessible",
-        name: "Bar",
-        options: Object.assign({}, stackedBarOptions, { accessibility: true }),
-        data: stackedBarData
-    },
-    {
-        id: "curved-line",
-        name: "Curved Line",
-        options: curvedLineOptions,
-        data: curvedLineData
-    },
-    {
-        id: "line",
-        name: "Line",
-        options: lineOptions,
-        data: lineData
-    },
-    {
-        id: "line-step",
-        name: "Step",
-        options: Object.assign({}, lineOptions, { curve: "curveStepAfter" }),
-        data: lineData
-    },
-    {
-        id: "pie",
-        name: "pie",
-        options: pieOptions,
-        data: pieData
-    },
-    {
-        id: "donut",
-        name: "donut",
-        options: donutOptions,
-        data: pieData
-    },
-    {
-        id: "scatter",
-        name: "scatter",
-        options: lineOptions,
-        data: scatterData
-    }
-];
+// Functionality for demo options toolbar
+
+// Chart types
+
+Object(_demo_options__WEBPACK_IMPORTED_MODULE_3__["initializeDemoOptions"])();
 var classyCharts = {};
 // TODO - removeADataset shouldn't be used if chart legend is label based
 var changeDemoData = function (chartType, oldData, delay) {
@@ -1007,7 +1041,7 @@ var setDemoActionsEventListener = function (chartType, oldData) {
         }
     }
 };
-chartTypes.forEach(function (type) {
+_chart_types__WEBPACK_IMPORTED_MODULE_4__["chartTypes"].forEach(function (type) {
     var classyContainer = document.getElementById("classy-" + type.id + "-chart-holder");
     if (classyContainer) {
         switch (type.id) {
@@ -3228,6 +3262,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transitions", function() { return transitions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectors", function() { return selectors; });
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
+/* harmony import */ var _services_colorPalettes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/colorPalettes */ "./src/services/colorPalettes.ts");
+
 
 /*
  **********************
@@ -3269,13 +3305,7 @@ var ThresholdTheme;
 var baseOptions = {
     legendClickable: true,
     containerResizable: true,
-    colors: [
-        "#00a68f",
-        "#3b1a40",
-        "#473793",
-        "#3c6df0",
-        "#56D2BB"
-    ],
+    colors: _services_colorPalettes__WEBPACK_IMPORTED_MODULE_1__["DEFAULT"],
     tooltip: {
         size: TooltipSize.FULL,
         formatter: null,
@@ -3321,8 +3351,8 @@ var axisOptions = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, baseOpt
  */
 var lineOptions = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, axisOptions, {
     points: {
-        // default point radius to 4
-        radius: 4
+        // default point radius to 3
+        radius: 3
     }
 });
 /**
@@ -3331,7 +3361,8 @@ var lineOptions = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, axisOpt
 var scatterOptions = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, axisOptions, {
     points: {
         // default point radius to 4
-        radius: 4
+        radius: 4,
+        fillOpacity: 0.3
     }
 });
 /**
@@ -3397,7 +3428,7 @@ var charts = {
         outline: "grey"
     },
     points: {
-        radius: 4
+        radius: 3
     },
     patternFills: {
         width: 20,
@@ -3493,7 +3524,7 @@ var bars = {
 var lines = {
     points: {
         strokeWidth: 4,
-        minNonFilledRadius: 4,
+        minNonFilledRadius: 3,
         mouseover: {
             strokeWidth: 4,
             strokeOpacity: 0.5
@@ -3809,7 +3840,7 @@ function donutCenterNumberTween(d3Ref, newNumber) {
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/*! exports provided: defaultColors, BaseChart, BaseAxisChart, PieChart, DonutChart, DonutCenter, BarChart, LineChart, ComboChart, ScatterChart */
+/*! exports provided: defaultColors, colorPalettes, BaseChart, BaseAxisChart, PieChart, DonutChart, DonutCenter, BarChart, LineChart, ComboChart, ScatterChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3841,7 +3872,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scatter_chart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./scatter-chart */ "./src/scatter-chart.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScatterChart", function() { return _scatter_chart__WEBPACK_IMPORTED_MODULE_7__["ScatterChart"]; });
 
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
+/* harmony import */ var _services_colorPalettes__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/colorPalettes */ "./src/services/colorPalettes.ts");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "colorPalettes", function() { return _services_colorPalettes__WEBPACK_IMPORTED_MODULE_8__; });
 __webpack_require__(/*! ./polyfills */ "./src/polyfills.ts");
 
 
@@ -3852,7 +3884,8 @@ __webpack_require__(/*! ./polyfills */ "./src/polyfills.ts");
 
 
 
-var defaultColors = _configuration__WEBPACK_IMPORTED_MODULE_8__["options"].BASE.colors;
+// TODO 1.0 - Remove deprecated API
+var defaultColors = _services_colorPalettes__WEBPACK_IMPORTED_MODULE_8__["DEFAULT"];
 
 
 
@@ -4128,11 +4161,12 @@ var PieChart = /** @class */ (function (_super) {
         // Compute the correct inner & outer radius
         var marginedRadius = this.computeRadius();
         this.arc = Object(d3_shape__WEBPACK_IMPORTED_MODULE_2__["arc"])()
-            .innerRadius(this.options.type === "donut" ? (marginedRadius * (2 / 3)) : 0)
+            .innerRadius(this.options.type === "donut" ? (marginedRadius * (3 / 4)) : 2)
             .outerRadius(marginedRadius);
         this.pie = Object(d3_shape__WEBPACK_IMPORTED_MODULE_2__["pie"])()
             .value(function (d) { return d.value; })
-            .sort(null);
+            .sort(null)
+            .padAngle(0.007);
         // Draw the slices
         this.path = this.innerWrap.selectAll("path")
             .data(this.pie(dataList))
@@ -4304,7 +4338,7 @@ var PieChart = /** @class */ (function (_super) {
             .style("transform", "translate(" + radius + "px," + radius + "px)");
         // Resize the arc
         this.arc = Object(d3_shape__WEBPACK_IMPORTED_MODULE_2__["arc"])()
-            .innerRadius(this.options.type === "donut" ? (radius * (2 / 3)) : 0)
+            .innerRadius(this.options.type === "donut" ? (radius * (3 / 4)) : 2)
             .outerRadius(radius);
         this.innerWrap.selectAll("path")
             .attr("d", this.arc);
@@ -4449,6 +4483,7 @@ var ScatterChart = /** @class */ (function (_super) {
             .attr("cy", function (d) { return _this.y(d.value); })
             .attr("r", circleRadius)
             .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
+            .attr("fill-opacity", function (d) { return _this.getCircleFillOpacity(); })
             .attr("stroke", function (d) { return _this.getStrokeColor(d.datasetLabel, d.label, d.value); });
         // Hide the overlay
         this.chartOverlay.hide();
@@ -4470,8 +4505,19 @@ var ScatterChart = /** @class */ (function (_super) {
         return this.options.points.radius || _configuration__WEBPACK_IMPORTED_MODULE_2__["charts"].points.radius;
     };
     ScatterChart.prototype.getCircleFill = function (radius, d) {
-        var circleShouldBeFilled = radius < _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.minNonFilledRadius;
+        // If the radius of the point is smaller than minimum
+        // Or the chart is only a scatter chart
+        // And not a line chart for instance
+        var circleShouldBeFilled = radius < _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.minNonFilledRadius || this.constructor === ScatterChart;
         return circleShouldBeFilled ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : "white";
+    };
+    ScatterChart.prototype.getCircleFillOpacity = function () {
+        // If the chart is only a scatter chart
+        // And not a line chart for instance
+        if (this.constructor === ScatterChart) {
+            return _configuration__WEBPACK_IMPORTED_MODULE_2__["options"].SCATTER.points.fillOpacity;
+        }
+        return null;
     };
     ScatterChart.prototype.interpolateValues = function (newData) {
         var _this = this;
@@ -4501,6 +4547,7 @@ var ScatterChart = /** @class */ (function (_super) {
             .transition(this.getDefaultTransition())
             .style("opacity", 1)
             .attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); })
+            .attr("fill-opacity", function (d) { return _this.getCircleFillOpacity(); })
             .attr("stroke", function (d) { return _this.getStrokeColor(d.datasetLabel, d.label, d.value); });
         // Remove dots that are no longer needed
         gDots.exit()
@@ -4566,7 +4613,7 @@ var ScatterChart = /** @class */ (function (_super) {
     ScatterChart.prototype.reduceOpacity = function (exception) {
         var _this = this;
         var circleRadius = this.getCircleRadius();
-        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill-opacity", false);
+        Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill-opacity", this.getCircleFillOpacity());
         Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_2__["charts"].reduceOpacity.opacity);
         Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill", function (d) { return _this.getCircleFill(circleRadius, d); });
     };
@@ -4596,6 +4643,77 @@ var ScatterChart = /** @class */ (function (_super) {
     return ScatterChart;
 }(_base_axis_chart__WEBPACK_IMPORTED_MODULE_1__["BaseAxisChart"]));
 
+
+
+/***/ }),
+
+/***/ "./src/services/colorPalettes.ts":
+/*!***************************************!*\
+  !*** ./src/services/colorPalettes.ts ***!
+  \***************************************/
+/*! exports provided: LIGHT_1, LIGHT_2, DARK_1, DEFAULT */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LIGHT_1", function() { return LIGHT_1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LIGHT_2", function() { return LIGHT_2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DARK_1", function() { return DARK_1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT", function() { return DEFAULT; });
+/* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./src/services/colors.ts");
+
+var LIGHT_1 = [
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(60),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(30),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(50),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].cyan(40),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(80),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(30),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].cyan(80)
+];
+var LIGHT_2 = [
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(60),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(30),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(70),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].cyan(40),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(70),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(30),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].cyan(80)
+];
+var DARK_1 = [
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(60),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(30),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(50),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].green(40),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(20),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(60),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(30)
+];
+var DEFAULT = LIGHT_1;
+
+
+/***/ }),
+
+/***/ "./src/services/colors.ts":
+/*!********************************!*\
+  !*** ./src/services/colors.ts ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _carbon_colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @carbon/colors */ "../../node_modules/@carbon/colors/es/index.js");
+
+var getColor = function (obj, shade) { return obj[shade]; };
+/* harmony default export */ __webpack_exports__["default"] = ({
+    cyan: function (shade) { return getColor(_carbon_colors__WEBPACK_IMPORTED_MODULE_0__["cyan"], shade); },
+    green: function (shade) { return getColor(_carbon_colors__WEBPACK_IMPORTED_MODULE_0__["green"], shade); },
+    magenta: function (shade) { return getColor(_carbon_colors__WEBPACK_IMPORTED_MODULE_0__["magenta"], shade); },
+    purple: function (shade) { return getColor(_carbon_colors__WEBPACK_IMPORTED_MODULE_0__["purple"], shade); },
+    red: function (shade) { return getColor(_carbon_colors__WEBPACK_IMPORTED_MODULE_0__["red"], shade); },
+    teal: function (shade) { return getColor(_carbon_colors__WEBPACK_IMPORTED_MODULE_0__["teal"], shade); }
+});
 
 
 /***/ }),

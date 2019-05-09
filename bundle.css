@@ -6,34 +6,6 @@ body {
   background-color: #fbfbfb;
   font-family: "IBM Plex Sans", Arial, sans-serif; }
 
-h1 {
-  font-weight: 600; }
-
-h3 {
-  margin-bottom: 40px; }
-
-.button {
-  display: table;
-  padding: 12px 15px;
-  margin-bottom: 10px;
-  background: #0063ff;
-  color: #fff;
-  border: none;
-  font-size: 15px;
-  text-decoration: none; }
-
-.bx--btn--primary {
-  background: #0063ff;
-  outline: none !important;
-  border: none !important; }
-  .bx--btn--primary:hover {
-    background: #0059e4; }
-  .bx--btn--primary:active {
-    background: #003992; }
-
-.bx--overflow-menu-options {
-  outline: none; }
-
 header.m-demo-header {
   margin-bottom: 20px;
   padding: 50px 0;
@@ -58,7 +30,9 @@ header.m-demo-header {
       margin: auto; }
       header.m-demo-header div.content div.links .bx--btn {
         float: left;
-        margin-right: 5px; }
+        margin-right: 5px;
+        max-height: 30px;
+        padding-right: 15px; }
         header.m-demo-header div.content div.links .bx--btn.last {
           margin-right: 0; }
         header.m-demo-header div.content div.links .bx--btn svg {
@@ -74,7 +48,14 @@ header.m-demo-header {
             width: 18px;
             height: 18px; }
   header.m-demo-header div h1 {
-    margin-bottom: 5px; }
+    font-size: 2.25rem;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 10px; }
+  header.m-demo-header div h3 {
+    font-size: 1.25rem;
+    font-weight: 300;
+    margin-bottom: 45px; }
 
 .chart-type-selection {
   display: inline;
@@ -129,14 +110,13 @@ header.m-demo-header {
   .chart-demo-actions button {
     float: left; }
 
-div.experimental-switch {
+div.options {
   display: table;
   width: 100%;
   max-width: 800px;
   margin: auto;
   margin-bottom: 30px;
   padding: 30px;
-  padding-bottom: 0;
   background-color: #fff;
   box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1); }
 
@@ -162,11 +142,12 @@ div.chart-holder {
       stroke: #eceeef; }
     .chart-wrapper svg.chart-svg path.line {
       fill: none;
-      stroke-width: 2; }
+      stroke-width: 2;
+      mix-blend-mode: multiply; }
       .chart-wrapper svg.chart-svg path.line:hover {
         cursor: default; }
     .chart-wrapper svg.chart-svg circle.dot {
-      stroke-width: 2; }
+      stroke-width: 1.5; }
   .chart-wrapper text {
     font-size: 12px;
     fill: #595859;
