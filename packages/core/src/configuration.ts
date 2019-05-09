@@ -1,5 +1,6 @@
 import { ScaleBand, ScaleLinear } from "d3-scale";
 import { Tools } from "./tools";
+import * as colorPalettes from "./services/colorPalettes";
 
 /*
  **********************
@@ -138,13 +139,7 @@ export interface BaseChartOptions {
 const baseOptions: BaseChartOptions = {
 	legendClickable: true,
 	containerResizable: true,
-	colors: [
-		"#00a68f",
-		"#3b1a40",
-		"#473793",
-		"#3c6df0",
-		"#56D2BB"
-	],
+	colors: colorPalettes.DEFAULT,
 	tooltip: {
 		size: TooltipSize.FULL,
 		formatter: null,
@@ -326,6 +321,7 @@ export interface LineChartOptions extends AxisChartOptions {
 		 * sets the radius of the point
 		 */
 		radius: number;
+		fillOpacity?: number;
 	};
 }
 /**
@@ -333,8 +329,8 @@ export interface LineChartOptions extends AxisChartOptions {
  */
 const lineOptions: LineChartOptions = Tools.merge({}, axisOptions, {
 	points: {
-		// default point radius to 4
-		radius: 4
+		// default point radius to 3
+		radius: 3
 	}
 });
 
@@ -350,6 +346,7 @@ export interface ScatterChartOptions extends AxisChartOptions {
 		 * sets the radius of the point
 		 */
 		radius: number;
+		fillOpacity?: number;
 	};
 }
 /**
@@ -358,7 +355,8 @@ export interface ScatterChartOptions extends AxisChartOptions {
 const scatterOptions: ScatterChartOptions = Tools.merge({}, axisOptions, {
 	points: {
 		// default point radius to 4
-		radius: 4
+		radius: 4,
+		fillOpacity: 0.3
 	}
 });
 
@@ -494,7 +492,7 @@ export const charts = {
 		outline: "grey"
 	},
 	points: {
-		radius: 4
+		radius: 3
 	},
 	patternFills: {
 		width: 20,
@@ -595,7 +593,7 @@ export const bars = {
 export const lines = {
 	points: {
 		strokeWidth: 4,
-		minNonFilledRadius: 4,
+		minNonFilledRadius: 3,
 		mouseover: {
 			strokeWidth: 4,
 			strokeOpacity: 0.5
