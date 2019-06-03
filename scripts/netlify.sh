@@ -1,5 +1,5 @@
 # Netlify will run this anyways, this is to override the cache
-yarn
+yarn --offline
 
 ./.travis/before_install.sh
 
