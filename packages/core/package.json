@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts",
-  "version": "0.11.14",
+  "version": "0.12.0",
   "description": "Carbon charting components",
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
@@ -23,6 +23,8 @@
   "author": "IBM",
   "license": "Apache-2.0",
   "dependencies": {
+    "@carbon/colors": "10.1.1",
+    "@carbon/utils-position": "1.1.0",
     "babel-polyfill": "6.26.0",
     "resize-observer-polyfill": "1.5.0"
   },
