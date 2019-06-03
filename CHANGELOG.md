@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/IBM/carbon-charts/compare/v0.11.15...v0.12.0) (2019-05-09)
+
+
+### Features
+
+* **core:** Colors, themes & more design updates ([#261](https://github.com/IBM/carbon-charts/issues/261)) ([b0b9070](https://github.com/IBM/carbon-charts/commit/b0b9070))
+* **feat(core:** Color palettes): ([edcf601](https://github.com/IBM/carbon-charts/commit/edcf601))
+
+
+
+
+
+## [0.11.15](https://github.com/IBM/carbon-charts/compare/v0.11.14...v0.11.15) (2019-05-07)
+
+
+### Bug Fixes
+
+* **core:** Fix tooltip positioning ([dd17048](https://github.com/IBM/carbon-charts/commit/dd17048))
+
+
+
+
+
 ## [0.11.14](https://github.com/IBM/carbon-charts/compare/v0.11.12...v0.11.14) (2019-05-06)
 
 
