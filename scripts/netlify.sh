@@ -1,7 +1,35 @@
 # Netlify will run this anyways, this is to override the cache
-yarn --offline
+# yarn --offline
 
-./.travis/before_install.sh
+# ./.travis/before_install.sh
 
-# This script builds all demos for netlify
-yarn run build-all-demos
+# Grab netlify app type from the netlify app URL
+# e.g. core, angular or react (translate to ./packages/NAME
+PKG_NAME=`echo $URL | sed s/"https:\/\/carbon-charts-"// | sed s/"\..*"//`
+
+if [ $PKG_NAME == "core" ]; then
+    PKG_TO_BUILD="@carbon/charts"
+else
+    PKG_TO_BUILD="@carbon/charts-$PKG_NAME"
+fi
+
+if [ $CONTEXT == "deploy-preview" ]; then
+    echo "We're in a PR preview"
+
+    # create the folder we'll deploy in netlify
+    mkdir -p pages
+
+    # bootstrap the package we're building
+    lerna bootstrap --scope $PKG_TO_BUILD
+
+    # cd into the package directory
+    cd packages/$PKG_TO_BUILD
+
+    # run the demo:build script in all packages
+    yarn demo:build
+
+    # copy all the demo files to the pages deploy directory
+    cp -a demo/bundle/. \$LERNA_ROOT_PATH/pages
+else
+    echo "We're not in a PR preview, do nothing!"
+fi
