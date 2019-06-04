@@ -17,13 +17,13 @@ if [ $CONTEXT == "deploy-preview" ]; then
     mkdir -p pages
 
     # bootstrap the package we're building
-    lerna bootstrap --scope $PKG_TO_BUILD
+    # lerna bootstrap --scope $PKG_TO_BUILD
 
     # cd into the package directory
     cd packages/$PKG_NAME
 
     # run the demo:build script in all packages
-    yarn demo:build
+    yarn run demo:build
 
     # copy all the demo files to the pages deploy directory
     cp -a demo/bundle/. ../../pages
