@@ -29,7 +29,7 @@ if [ $CONTEXT == "deploy-preview" ]; then
     yarn demo:build
 
     # copy all the demo files to the pages deploy directory
-    cp -a demo/bundle/. \$LERNA_ROOT_PATH/pages
+    cp -a demo/bundle/. ../../pages
 else
     echo "We're not in a PR preview, do nothing!"
 fi
