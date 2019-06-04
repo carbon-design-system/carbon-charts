@@ -62,7 +62,7 @@
     "typedoc": "0.11.1",
     "typescript": "2.7.2",
     "url-loader": "0.6.2",
-    "webpack": "4.30.0",
+    "webpack": "4.32.2",
     "webpack-bundle-analyzer": "2.13.1",
     "webpack-cli": "3.3.2",
     "webpack-dev-server": "3.5.1",
