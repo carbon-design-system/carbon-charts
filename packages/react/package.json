@@ -8,7 +8,7 @@
 		"start": "yarn run storybook",
 		"build": "bash build.sh",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
-		"demo:build": "build-storybook -o demo/bundle/react",
+		"demo:build": "build-storybook -o demo/bundle",
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"repository": {
