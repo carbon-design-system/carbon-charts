@@ -23,7 +23,7 @@ if [ $CONTEXT == "deploy-preview" ]; then
     lerna bootstrap --scope $PKG_TO_BUILD
 
     # cd into the package directory
-    cd packages/$PKG_TO_BUILD
+    cd packages/$PKG_NAME
 
     # run the demo:build script in all packages
     yarn demo:build
