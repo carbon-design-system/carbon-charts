@@ -12,7 +12,7 @@
 	"author": "IBM",
 	"license": "Apache-2.0",
 	"scripts": {
-		"postinstall": "lerna bootstrap",
+		"lerna-bootstrap": "lerna bootstrap",
 		"clean": "lerna clean && lerna run clean && rm -rf node_modules",
 		"commit": "git-cz",
 		"test": "lerna run test",
