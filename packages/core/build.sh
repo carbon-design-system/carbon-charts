@@ -2,7 +2,6 @@
 
 set -e
 
-rm -rf dist
 webpack --config webpack.build.js
 tsc
 cp *.md dist/

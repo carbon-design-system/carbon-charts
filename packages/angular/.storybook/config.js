@@ -8,6 +8,7 @@ setOptions({
 
 // load global styles
 require("!style-loader!css-loader!sass-loader!./previews.scss");
+require("!style-loader!css-loader!@carbon/charts/dist/style.css");
 
 const req = require.context("../stories", true, /.stories.ts$/);
 function loadStories() {
