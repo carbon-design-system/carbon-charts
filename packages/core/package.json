@@ -62,11 +62,10 @@
     "typedoc": "0.11.1",
     "typescript": "2.7.2",
     "url-loader": "0.6.2",
-    "webpack": "4.32.2",
+    "webpack": "4.33.0",
     "webpack-bundle-analyzer": "2.13.1",
     "webpack-cli": "3.3.2",
-    "webpack-dev-server": "3.5.1",
-    "webpack-node-externals": "1.6.0"
+    "webpack-dev-server": "3.7.0"
   },
   "publishConfig": {
     "access": "public"
