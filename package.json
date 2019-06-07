@@ -1,5 +1,6 @@
 {
 	"name": "@carbon/charts-monorepo",
+	"private": true,
 	"description": "Carbon charting components, lerna monorepo",
 	"repository": {
 		"type": "git",
@@ -11,7 +12,7 @@
 	"author": "IBM",
 	"license": "Apache-2.0",
 	"scripts": {
-		"postinstall": "lerna bootstrap --hoist --no-ci",
+		"postinstall": "lerna bootstrap && cd packages/core && yarn run build",
 		"clean": "lerna clean && lerna run clean && rm -rf node_modules",
 		"commit": "git-cz",
 		"test": "lerna run test",
@@ -22,13 +23,15 @@
 		"build-all-demos": "bash scripts/build-demos.sh",
 		"deploy": "bash scripts/deploy.sh"
 	},
+	"workspaces": {
+		"packages": [
+			"packages/*"
+		]
+	},
 	"husky": {
 		"hooks": {
 			"pre-push": "bash scripts/prepush.sh"
 		}
-	},
-	"engines": {
-		"npm": "5.6.0"
 	},
 	"release": {
 		"branch": "master"
@@ -38,7 +41,7 @@
 		"commitizen": "2.10.1",
 		"cz-conventional-changelog": "2.1.0",
 		"husky": "1.1.2",
-		"lerna": "3.2.1"
+		"lerna": "3.13.4"
 	},
 	"config": {
 		"commitizen": {
