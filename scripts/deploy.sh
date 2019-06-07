@@ -7,11 +7,7 @@ then
     # authenticate with the npm registry
     npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
-    npm run build-all
-
-    # Should remove once lerna stops mistakenly
-    # adding package-lock.json to every package after npm install
-    rm -rf **/package-lock.json
+    yarn run build-all
 
     # Git user info configs
     git config --global user.email "carbon@us.ibm.com"

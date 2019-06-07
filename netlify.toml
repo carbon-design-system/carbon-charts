@@ -1,0 +1,4 @@
+[context.deploy-preview]
+  command = "./scripts/netlify.sh"
+  publish = "pages"
+  environment = { YARN_FLAGS = "--offline --ignore-optional" }

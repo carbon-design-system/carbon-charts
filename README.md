@@ -32,6 +32,13 @@
 
 Run:
 ```bash
+yarn global add @storybook/cli
+
+yarn add @carbon/charts
+```
+
+Or if you use NPM:
+```bash
 npm i -g @storybook/cli
 
 npm install @carbon/charts --save
@@ -72,8 +79,8 @@ npm install @carbon/charts --save
    cd carbon-charts
    ```
 
-2. Run `npm install` to install Node.js dependencies.
-3. Run `npm run demo:server` to serve up the demo locally.
+2. Run `yarn` to install Node.js dependencies.
+3. Run `yarn run demo:server` to serve up the demo locally.
 4. Finally, open <http://localhost:9001/> in your browser. SPOILER ALERT: There's no "Hello, World!"
 
 ## Component status
