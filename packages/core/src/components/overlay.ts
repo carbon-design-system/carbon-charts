@@ -1,6 +1,8 @@
 import * as Configuration from "../configuration";
 
-export class ChartOverlay {
+export class Overlay {
+	static slug: string = "overlay";
+
 	holder: HTMLElement;
 	overlayElement: HTMLElement;
 	overlayOptions: Configuration.ChartOverlayOptions;
@@ -15,6 +17,12 @@ export class ChartOverlay {
 			this.overlayOptions = Configuration.options.BASE.overlay;
 		}
 	}
+
+	// render() { /* Overlays aren't rendered by default */ }
+
+	// update(newData, newOptions) {
+
+	// }
 
 	show(type?: string) {
 		if (this.overlayElement) {
