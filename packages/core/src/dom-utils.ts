@@ -7,22 +7,22 @@ import { BaseChartOptions } from "./configuration";
 import ResizeObserver from "resize-observer-polyfill";
 
 export class DOMUtils {
-    private holder: Element;
-    private options: BaseChartOptions;
+	private holder: Element;
+	private options: BaseChartOptions;
 
-    constructor(holder: Element, options: BaseChartOptions) {
-        this.options = options;
-        this.holder = holder;
+	constructor(holder: Element, options: BaseChartOptions) {
+		this.options = options;
+		this.holder = holder;
 
-        // Add width & height to the chart holder if necessary, and add a classname
-        this.styleHolderElement();
+		// Add width & height to the chart holder if necessary, and add a classname
+		this.styleHolderElement();
 
-        if (this.options.containerResizable) {
+		if (this.options.containerResizable) {
 			this.addResizeListener();
 		}
-    }
+	}
 
-    styleHolderElement() {
+	styleHolderElement() {
 		const holderElement = this.holder as HTMLElement;
 		const { width, height } = this.options;
 
@@ -40,27 +40,27 @@ export class DOMUtils {
 			// Apply formatted height attribute to chart
 			holderElement.style.height = Tools.formatWidthHeightValues(height);
 		}
-    }
-    
-    addResizeListener() {
-        let containerWidth = this.holder.clientWidth;
+	}
+
+	addResizeListener() {
+		let containerWidth = this.holder.clientWidth;
 		let containerHeight = this.holder.clientHeight;
 
 		const resizeObserver = new ResizeObserver((entries, observer) => {
-            if (Math.abs(containerWidth - this.holder.clientWidth) > 1
-                || Math.abs(containerHeight - this.holder.clientHeight) > 1) {
-                containerWidth = this.holder.clientWidth;
-                containerHeight = this.holder.clientHeight;
+			if (Math.abs(containerWidth - this.holder.clientWidth) > 1
+				|| Math.abs(containerHeight - this.holder.clientHeight) > 1) {
+				containerWidth = this.holder.clientWidth;
+				containerHeight = this.holder.clientHeight;
 
-                console.log("RESIZE CHART NOW");
-                // selectAll(".legend-tooltip").style("display", "none");
+				console.log("RESIZE CHART NOW");
+				// selectAll(".legend-tooltip").style("display", "none");
 
-                // this.hideTooltip();
+				// this.hideTooltip();
 
-                // this.resizeChart();
-            }
+				// this.resizeChart();
+			}
 		});
 
 		resizeObserver.observe(this.holder);
-    }
+	}
 }

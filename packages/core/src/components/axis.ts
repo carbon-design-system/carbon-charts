@@ -1,11 +1,11 @@
-import { ChartComponent } from "../element";
+import { ChartComponent } from "./base-component";
 
 export class Axis extends ChartComponent {
-    render() {
-        console.log("rander AXIS");
-    }
+	render() {
+		console.log("rander AXIS");
+	}
 
-    update() {
-        console.log("UPDATE AXIS")
-    }
+	update() {
+		console.log("UPDATE AXIS");
+	}
 }

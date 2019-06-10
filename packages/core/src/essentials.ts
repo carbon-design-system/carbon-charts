@@ -5,21 +5,21 @@ import { ChartConfig, BaseChartOptions } from "./configuration";
 import { DOMUtils } from "./dom-utils";
 
 export class ChartEssentials {
-    holder: Element;
-    options: BaseChartOptions = Tools.merge({}, Configuration.options.BASE);
-    domUtils: DOMUtils;
+	holder: Element;
+	options: BaseChartOptions = Tools.merge({}, Configuration.options.BASE);
+	domUtils: DOMUtils;
 
-    // DOM Event target
+	// DOM Event target
 	events: any;
 
-    constructor(holder: Element, configs: ChartConfig<BaseChartOptions>) {
-        if (configs.options) {
+	constructor(holder: Element, configs: ChartConfig<BaseChartOptions>) {
+		if (configs.options) {
 			this.options = Tools.merge({}, this.options, configs.options);
-        }
+		}
 
-        this.holder = holder;
+		this.holder = holder;
 
-        // Setup the event fragment on the DOM
-        this.events = document.createDocumentFragment();
-    }
+		// Setup the event fragment on the DOM
+		this.events = document.createDocumentFragment();
+	}
 }
