@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts",
-  "version": "0.12.1",
+  "version": "0.12.2",
   "description": "Carbon charting components",
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
