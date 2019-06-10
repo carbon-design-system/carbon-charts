@@ -1,8 +1,6 @@
 import * as Configuration from "../configuration";
 
 export class Overlay {
-	static slug: string = "overlay";
-
 	holder: HTMLElement;
 	overlayElement: HTMLElement;
 	overlayOptions: Configuration.ChartOverlayOptions;
