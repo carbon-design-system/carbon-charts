@@ -6,6 +6,7 @@ import { scaleOrdinal } from "d3-scale";
 
 export class ChartModel {
 	// Chart configs
+	private _rawData;
 	private _data;
 	private _options: BaseChartOptions = Tools.merge({}, Configuration.options.BASE);
 
@@ -37,15 +38,14 @@ export class ChartModel {
 	}
 
 	setData(newData) {
-		this._data = newData;
-
 		return Promise.resolve(newData)
-			.then(value => {
-				this._data = value;
+			.then(resolvedData => {
+				this._rawData = resolvedData;
+				this._data = resolvedData;
 
 				this.modelUpdated();
 
-				this._dataCallback(value);
+				this._dataCallback(resolvedData);
 
 				return this._data;
 			});
