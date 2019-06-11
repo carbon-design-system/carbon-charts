@@ -6,7 +6,7 @@ import errorHandler from "../services/error-handling";
 import { ChartModel } from "src/model";
 
 export class ChartComponent {
-	protected model: ChartModel;
+	protected _model: ChartModel;
 
 	protected componentHasRendered = false;
 
@@ -30,6 +30,6 @@ export class ChartComponent {
 
 	// Used to pass down information to the components
 	setModel(newModel) {
-		this.model = newModel;
+		this._model = newModel;
 	}
 }

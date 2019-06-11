@@ -66,11 +66,16 @@ export class Chart {
 
 		this.setComponents();
 
+		// Create a new model
 		this.model = new ChartModel(configs.data);
-		// Notify all components on data updates
-		this.model.setCallback(() => {
-			this.modelUpdated();
+
+		// Add the model to all components
+		this.components.forEach(component => {
+			component.setModel(this.model);
 		});
+
+		// Notify all components on data updates
+		this.model.setUpdateCallback(this.modelUpdated.bind(this));
 	}
 
 	setupEssentials(holder: Element, configs: ChartConfig<BaseChartOptions>) {
@@ -95,8 +100,6 @@ export class Chart {
 
 	modelUpdated() {
 		this.components.forEach(component => {
-			component.setModel(this.model);
-
 			component.updateOrInitialize();
 		});
 	}
