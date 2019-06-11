@@ -70,7 +70,7 @@ export class ChartModel {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param newData The new raw data to be set
 	 * @return {Promise} The new display data that has been set
 	 */
@@ -104,7 +104,7 @@ export class ChartModel {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param newOptions New options to be set
 	 * @return {Object} The chart's options
 	 */
@@ -115,7 +115,7 @@ export class ChartModel {
 	}
 
 	/**
-	 * 
+	 *
 	 * Updates miscellanous information within the model
 	 * such as the color scales, or the legend data labels
 	 */
