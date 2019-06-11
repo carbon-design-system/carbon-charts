@@ -1,10 +1,11 @@
 import * as Configuration from "../configuration";
 import { ChartComponent } from "./base-component";
+import { OverlayOptions } from "../interfaces/index";
 
 export class Overlay extends ChartComponent {
 	holder: HTMLElement;
 	overlayElement: HTMLElement;
-	overlayOptions: Configuration.ChartOverlayOptions;
+	overlayOptions: OverlayOptions;
 
 	render() {
 		const { overlay: overlayOptions } = this._model.getOptions();

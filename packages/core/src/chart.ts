@@ -1,25 +1,10 @@
-// D3 Imports
-import {
-	event,
-	mouse,
-	select,
-	selectAll
-} from "d3-selection";
-import { scaleOrdinal } from "d3-scale";
-import { transition, Transition } from "d3-transition";
-
 // Internal Imports
-import * as Configuration from "./configuration";
-import { ChartConfig, BaseChartOptions, ChartData } from "./configuration";
-import { Tools } from "./tools";
-import PatternsService from "./services/patterns";
-import { Overlay, ChartTooltip } from "./components/index";
+import { ChartConfig, BaseChartOptions, ChartData } from "./interfaces/index";
 import errorHandler from "./services/error-handling";
 
 // Misc
 import { ChartEssentials } from "./essentials";
 import { DOMUtils } from "./dom-utils";
-import { Axis } from "./components/Axis";
 import { ChartModel } from "./model";
 import { ChartComponent } from "./components/base-component";
 
@@ -34,25 +19,15 @@ export class Chart {
 	svg: any;
 	innerWrap: any;
 
-	// Data
-	data: ChartData;
-	displayData: ChartData;
-	fixedDataLabels;
-
-	// Fill scales & fill related objects
-	patternScale = {};
-	colorScale = {};
-	patternsService: PatternsService;
-
 	// Event target
-	events: any;
-	eventHandlers = {
-		tooltips: null
-	};
+	// events: any;
+	// eventHandlers = {
+	// 	tooltips: null
+	// };
 
 	// Misc
-	chartOverlay: Overlay;
-	tooltip: ChartTooltip;
+	// chartOverlay: Overlay;
+	// tooltip: ChartTooltip;
 
 	essentials: ChartEssentials;
 
@@ -89,7 +64,7 @@ export class Chart {
 		this.essentials.domUtils = domUtils;
 	}
 
-	setData(data: any) {
+	setData(data: ChartData) {
 		return this.model.setData(data);
 	}
 

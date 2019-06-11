@@ -12,7 +12,7 @@ import "./index.scss";
 import "./../src/style.scss";
 
 // Interfaces
-import { ChartData } from "./../src/configuration";
+import { ChartData } from "./../src/interfaces/index";
 
 // Functionality for demo options toolbar
 import { initializeDemoOptions } from "./demo-options";

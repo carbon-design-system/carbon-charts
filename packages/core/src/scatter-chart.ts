@@ -1,9 +1,7 @@
 // D3 Imports
-import { select, mouse } from "d3-selection";
-
 import { Chart } from "./chart";
 import * as Configuration from "./configuration";
-import { ChartConfig, ScatterChartOptions, ChartType } from "./configuration";
+import { ChartConfig, ScatterChartOptions, ChartType } from "./interfaces/index";
 import { Tools } from "./tools";
 import { Axis, Legend, Overlay } from "./components/index";
 
