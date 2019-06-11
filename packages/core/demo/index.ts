@@ -20,6 +20,9 @@ import { initializeDemoOptions } from "./demo-options";
 // Chart types
 import { chartTypes } from "./chart-types";
 
+// MISC
+import { Tools } from "../src/tools";
+
 initializeDemoOptions();
 
 const classyCharts = {};
@@ -43,8 +46,8 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 
 	// Function to be used to randomize all datapoints
 	const updateChartData = currentData => {
-		const result = Object.assign({}, currentData);
-		result.datasets = currentData.datasets.map(dataset => {
+		const result = Tools.clone(currentData);
+		result.datasets = result.datasets.map(dataset => {
 			dataset.label = `new dataset ${Math.random()}`
 			const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
 

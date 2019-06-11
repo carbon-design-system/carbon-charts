@@ -4,13 +4,33 @@ import { Tools } from "./tools";
 import { BaseChartOptions } from "./configuration";
 import { scaleOrdinal } from "d3-scale";
 
+/** The charting model layer which includes mainly the chart data and options,
+ * as well as some misc. information to be shared among components */
 export class ChartModel {
 	// Chart configs & data
-	private _rawData;
-	private _data;
+	/**
+	 * Raw data before any possible processing or formatters were applied
+	 * @type ChartData
+	 */
+	private _rawData: Configuration.ChartData;
+
+	/**
+	 * Display data that was yielded after applying possible processing or formatters
+	 * @type ChartData
+	 */
+	private _data: Configuration.ChartData;
+
+	/**
+	 * Chart options
+	 * @type BaseChartOptions
+	 */
 	private _options: BaseChartOptions = Tools.merge({}, Configuration.options.BASE);
 
 	// Callbacks
+	/**
+	 * Function to be called when data updates within the model
+	 * @type Function
+	 */
 	private _dataCallback: Function;
 
 	// Loading state
@@ -19,13 +39,21 @@ export class ChartModel {
 	};
 
 	// Data labels
-	private _fixedDataLabels;
+	/**
+	 * A list of all the labels that have existed within the lifetime of the chart
+	 * @type Array<string>
+	 */
+	private _fixedDataLabels: Array<string>;
 
 	// Fill scales & fill related objects
 	private _patternScale = {};
 	private _colorScale = {};
 	// patternsService: PatternsService;
 
+	/**
+     * Sets the chart data, and if not present, throws an Error() instance
+     * @param  {Configuration.ChartData} data The data to be set to the chart
+     */
 	constructor(data) {
 		if (data) {
 			this.setData(data);
@@ -34,14 +62,18 @@ export class ChartModel {
 		}
 	}
 
-	/*
-	 * Chart data & options
-	 *
-	*/
+	/**
+	 * @return {Array} The chart's display data
+	 */
 	getData() {
 		return this._data;
 	}
 
+	/**
+	 * 
+	 * @param newData The new raw data to be set
+	 * @return {Promise} The new display data that has been set
+	 */
 	setData(newData) {
 		this._setState({
 			loading: true
@@ -64,16 +96,29 @@ export class ChartModel {
 			});
 	}
 
+	/**
+	 * @return {Object} The chart's options
+	 */
 	getOptions() {
 		return this._options;
 	}
 
+	/**
+	 * 
+	 * @param newOptions New options to be set
+	 * @return {Object} The chart's options
+	 */
 	setOptions(newOptions) {
 		this._options = newOptions;
 
 		this.modelUpdated();
 	}
 
+	/**
+	 * 
+	 * Updates miscellanous information within the model
+	 * such as the color scales, or the legend data labels
+	 */
 	modelUpdated() {
 		this.updateFixedLabels();
 		this.setColorScale();
@@ -150,5 +195,10 @@ export class ChartModel {
 	*/
 	private _setState(newState) {
 		this._state = Object.assign({}, this._state, newState);
+
+		if (this._dataCallback) {
+			this.modelUpdated();
+			this._dataCallback();
+		}
 	}
 }
