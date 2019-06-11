@@ -1,7 +1,14 @@
+// Internal Imports
+import * as Configuration from "../configuration";
+import { Tools } from "../tools";
+import { BaseChartOptions } from "../configuration";
 import errorHandler from "../services/error-handling";
+import { ChartModel } from "src/model";
 
 export class ChartComponent {
-	private componentHasRendered = false;
+	protected model: ChartModel;
+
+	protected componentHasRendered = false;
 
 	render() {
 		errorHandler.INTERNAL.CHART.MISSING_METHOD("render");
@@ -19,5 +26,10 @@ export class ChartComponent {
 		} else {
 			return this.update();
 		}
+	}
+
+	// Used to pass down information to the components
+	setModel(newModel) {
+		this.model = newModel;
 	}
 }

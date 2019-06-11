@@ -6,13 +6,13 @@ import { DOMUtils } from "./dom-utils";
 
 export class ChartModel {
 	private _data;
-	private options: BaseChartOptions = Tools.merge({}, Configuration.options.BASE);
+	private _options: BaseChartOptions = Tools.merge({}, Configuration.options.BASE);
 
 	private _dataCallback: Function;
 
 	constructor(data) {
 		if (data) {
-			this._data = data;
+			this.setData(data);
 		} else {
 			throw Error("Your configurations are missing the `data` field");
 		}
@@ -39,7 +39,11 @@ export class ChartModel {
 			});
 	}
 
-	setOptions() {
+	getOptions() {
+		return this._options;
+	}
 
+	setOptions(newOptions) {
+		this._options = newOptions;
 	}
 }

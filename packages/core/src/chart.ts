@@ -69,10 +69,8 @@ export class Chart {
 		this.model = new ChartModel(configs.data);
 		// Notify all components on data updates
 		this.model.setCallback(() => {
-			this.updateComponents();
+			this.modelUpdated();
 		});
-
-		this.setData({ test: true });
 	}
 
 	setupEssentials(holder: Element, configs: ChartConfig<BaseChartOptions>) {
@@ -95,8 +93,12 @@ export class Chart {
 		return null;
 	}
 
-	updateComponents() {
-		this.components.forEach(element => element.updateOrInitialize());
+	modelUpdated() {
+		this.components.forEach(component => {
+			component.setModel(this.model);
+
+			component.updateOrInitialize();
+		});
 	}
 
 	setComponents() {
