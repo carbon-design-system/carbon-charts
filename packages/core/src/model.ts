@@ -42,10 +42,6 @@ export class ChartModel {
 		return this._data;
 	}
 
-	private _setState(newState) {
-		this._state = Object.assign({}, this._state, newState);
-	}
-
 	setData(newData) {
 		this._setState({
 			loading: true
@@ -146,5 +142,13 @@ export class ChartModel {
 
 	getFillScale() {
 		return this._options.accessibility ? this._patternScale : this._colorScale;
+	}
+
+	/*
+	 * Chart data & options
+	 *
+	*/
+	private _setState(newState) {
+		this._state = Object.assign({}, this._state, newState);
 	}
 }
