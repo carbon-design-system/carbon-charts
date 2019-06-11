@@ -10,7 +10,7 @@ export class Legend extends ChartComponent {
 	performRender() {
 		let svg;
 		if (select("#classy-scatter-chart-holder svg").nodes().length > 0) {
-			svg = select("#classy-scatter-chart-holder svg")
+			svg = select("#classy-scatter-chart-holder svg");
 		} else {
 			svg = select("#classy-scatter-chart-holder")
 				.append("svg")
@@ -18,17 +18,22 @@ export class Legend extends ChartComponent {
 				.attr("width", 450);
 		}
 
-		console.log("this.getLegendItemArray()", this.getLegendItemArray())
 		const legendItems = svg.selectAll("g")
-			.data(this.getLegendItemArray())
+			.data(this.getLegendItemArray());
 
-		const addedLegendItems = legendItems.enter().append("g");		
+		const addedLegendItems = legendItems.enter().append("g");
 		addedLegendItems.append("circle")
 			.merge(legendItems.select("circle"))
 				.attr("cx", 200)
 				.attr("cy", (d, i) => 130 + (30 * i))
 				.attr("r", 6)
-				.style("fill", "#69b3a2");
+				.style("fill", (d, i) => {
+					if (d.value === Configuration.legend.items.status.ACTIVE) {
+						return this._model.getStrokeColor(d.key);
+					}
+
+					return "white";
+				});
 
 		addedLegendItems.append("text")
 			.merge(legendItems.select("text"))
@@ -47,11 +52,9 @@ export class Legend extends ChartComponent {
 	}
 
 	update() {
-		console.log("UPDATE legend");
-
 		this.performRender();
 	}
-	
+
 	getLegendItemArray() {
 		const legendItems = this.getKeysFromData();
 		const legendItemKeys = Object.keys(legendItems);
@@ -65,7 +68,7 @@ export class Legend extends ChartComponent {
 	getKeysFromData() {
 		const keys = {};
 
-		this.model.getData().datasets.forEach(dataset => {
+		this._model.getData().datasets.forEach(dataset => {
 			keys[dataset.label] = Configuration.legend.items.status.ACTIVE;
 		});
 
