@@ -1,7 +1,7 @@
 // Internal Imports
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
-import { ChartConfig, BaseChartOptions } from "./configuration";
+import { ChartConfig, BaseChartOptions } from "./interfaces/index";
 import { DOMUtils } from "./dom-utils";
 
 export class ChartEssentials {

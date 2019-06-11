@@ -1,7 +1,7 @@
 // Internal Imports
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
-import { BaseChartOptions } from "./configuration";
+import { BaseChartOptions, ChartData } from "./interfaces/index";
 import { scaleOrdinal } from "d3-scale";
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -12,13 +12,13 @@ export class ChartModel {
 	 * Raw data before any possible processing or formatters were applied
 	 * @type ChartData
 	 */
-	private _rawData: Configuration.ChartData;
+	private _rawData: ChartData;
 
 	/**
 	 * Display data that was yielded after applying possible processing or formatters
 	 * @type ChartData
 	 */
-	private _data: Configuration.ChartData;
+	private _data: ChartData;
 
 	/**
 	 * Chart options

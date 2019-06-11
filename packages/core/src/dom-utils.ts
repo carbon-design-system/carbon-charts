@@ -1,7 +1,7 @@
 // D3 Imports
-import { select, selectAll } from "d3-selection";
+import { select } from "d3-selection";
 import { Tools } from "./tools";
-import { BaseChartOptions } from "./configuration";
+import { BaseChartOptions } from "./interfaces/index";
 
 // MISC
 import ResizeObserver from "resize-observer-polyfill";
