@@ -5,13 +5,18 @@ import { BaseChartOptions } from "./configuration";
 import { scaleOrdinal } from "d3-scale";
 
 export class ChartModel {
-	// Chart configs
+	// Chart configs & data
 	private _rawData;
 	private _data;
 	private _options: BaseChartOptions = Tools.merge({}, Configuration.options.BASE);
 
 	// Callbacks
 	private _dataCallback: Function;
+
+	// Loading state
+	private _state = {
+		loading: false
+	};
 
 	// Data labels
 	private _fixedDataLabels;
@@ -37,11 +42,23 @@ export class ChartModel {
 		return this._data;
 	}
 
+	private _setState(newState) {
+		this._state = Object.assign({}, this._state, newState);
+	}
+
 	setData(newData) {
+		this._setState({
+			loading: true
+		});
+
 		return Promise.resolve(newData)
 			.then(resolvedData => {
 				this._rawData = resolvedData;
 				this._data = resolvedData;
+
+				this._setState({
+					loading: false
+				});
 
 				this.modelUpdated();
 
@@ -68,6 +85,14 @@ export class ChartModel {
 
 	setUpdateCallback(cb: Function) {
 		this._dataCallback = cb;
+	}
+
+	/*
+	 * Loading
+	 *
+	*/
+	getState() {
+		return this._state;
 	}
 
 	/*

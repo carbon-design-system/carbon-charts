@@ -1,28 +1,22 @@
 import * as Configuration from "../configuration";
+import { ChartComponent } from "./base-component";
 
-export class Overlay {
+export class Overlay extends ChartComponent {
 	holder: HTMLElement;
 	overlayElement: HTMLElement;
 	overlayOptions: Configuration.ChartOverlayOptions;
 
-	constructor(holder: Element, options: Configuration.ChartOverlayOptions) {
-		this.holder = <HTMLElement>holder;
-		this.overlayElement = this.holder.querySelector("div.chart-overlay");
+	render() {
+		const { overlay: overlayOptions } = this._model.getOptions();
+		const { holder } = this._essentials;
+		this.overlayElement = holder.querySelector("div.chart-overlay");
 
-		if (options) {
-			this.overlayOptions = options;
+		if (overlayOptions) {
+			this.overlayOptions = overlayOptions;
 		} else {
 			this.overlayOptions = Configuration.options.BASE.overlay;
 		}
-	}
 
-	// render() { /* Overlays aren't rendered by default */ }
-
-	// update(newData, newOptions) {
-
-	// }
-
-	show(type?: string) {
 		if (this.overlayElement) {
 			this.overlayElement.parentNode.removeChild(this.overlayElement);
 		}
@@ -30,12 +24,10 @@ export class Overlay {
 		const overlay = document.createElement("div");
 
 		overlay.classList.add("chart-overlay");
-		overlay.innerHTML = this.overlayOptions.innerHTML[type ? type : "loading"];
+		overlay.innerHTML = this.overlayOptions.innerHTML["loading"];
 
-		this.overlayElement = this.holder.appendChild(overlay);
-	}
-
-	hide() {
-		this.overlayElement.style.display = "none";
+		if (this._model.getState().loading) {
+			this.overlayElement = holder.appendChild(overlay);
+		}
 	}
 }

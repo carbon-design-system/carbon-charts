@@ -5,7 +5,7 @@ import { Chart } from "./chart";
 import * as Configuration from "./configuration";
 import { ChartConfig, ScatterChartOptions, ChartType } from "./configuration";
 import { Tools } from "./tools";
-import { Axis, Legend } from "./components/index";
+import { Axis, Legend, Overlay } from "./components/index";
 
 export class ScatterChart extends Chart {
 	options: ScatterChartOptions = Tools.merge({}, Configuration.options.SCATTER);
@@ -17,9 +17,8 @@ export class ScatterChart extends Chart {
 	}
 
 	getComponents() {
-		console.log("get components");
-
 		return [
+			new Overlay(),
 			new Axis(),
 			new Legend()
 		];

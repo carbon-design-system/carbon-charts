@@ -1,12 +1,12 @@
 // Internal Imports
-import * as Configuration from "../configuration";
-import { Tools } from "../tools";
-import { BaseChartOptions } from "../configuration";
-import errorHandler from "../services/error-handling";
 import { ChartModel } from "src/model";
+import { ChartEssentials } from "src/essentials";
+
+import errorHandler from "../services/error-handling";
 
 export class ChartComponent {
 	protected _model: ChartModel;
+	protected _essentials: ChartEssentials;
 
 	protected componentHasRendered = false;
 
@@ -29,7 +29,13 @@ export class ChartComponent {
 	}
 
 	// Used to pass down information to the components
-	setModel(newModel) {
-		this._model = newModel;
+	setModel(newObj) {
+		this._model = newObj;
+	}
+
+
+	// Used to pass down information to the components
+	setEssentials(newObj) {
+		this._essentials = newObj;
 	}
 }
