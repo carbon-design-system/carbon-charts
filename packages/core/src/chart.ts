@@ -36,13 +36,19 @@ export class Chart {
 	model: ChartModel;
 
 	constructor(holder: Element, configs: ChartConfig<BaseChartOptions>) {
+		// Create a new model
+		this.model = new ChartModel(configs);
+
 		// Put together the essential references of this chart for all components to use
-		this.setupEssentials(holder, configs);
+		this.essentials = new ChartEssentials();
+
+		// Generate DOM utilies instance
+		const domUtils = new DOMUtils(holder, this.model.getOptions());
+
+		// Save DOM utilities object reference to the chart essentials
+		this.essentials.domUtils = domUtils;
 
 		this.setComponents();
-
-		// Create a new model
-		this.model = new ChartModel(configs.data);
 
 		// Add the model to all components
 		this.components.forEach(component => {
@@ -52,16 +58,6 @@ export class Chart {
 
 		// Notify all components on data updates
 		this.model.setUpdateCallback(this.modelUpdated.bind(this));
-	}
-
-	setupEssentials(holder: Element, configs: ChartConfig<BaseChartOptions>) {
-		this.essentials = new ChartEssentials(holder, configs);
-
-		// Generate DOM utilies instance
-		const domUtils = new DOMUtils(this.essentials.holder, this.essentials.options);
-
-		// Save DOM utilities object reference to the chart essentials
-		this.essentials.domUtils = domUtils;
 	}
 
 	setData(data: ChartData) {

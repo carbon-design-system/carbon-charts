@@ -9,7 +9,7 @@ export class Overlay extends ChartComponent {
 
 	render() {
 		const { overlay: overlayOptions } = this._model.getOptions();
-		const { holder } = this._essentials;
+		const holder = this._essentials.domUtils.getHolder();
 		this.overlayElement = holder.querySelector("div.chart-overlay");
 
 		if (overlayOptions) {

@@ -1,4 +1,4 @@
-import { BaseChartOptions } from "./charts";
+import { AxisChartOptions } from "./charts";
 import { ChartType } from "./enums";
 
 /**
@@ -6,7 +6,7 @@ import { ChartType } from "./enums";
  *
  * Includes options and data
  */
-export interface ChartConfig<T extends BaseChartOptions> {
+export interface ChartConfig<T extends AxisChartOptions> {
 	options: T;
 	data: ChartData | Promise<ChartData>;
 }
