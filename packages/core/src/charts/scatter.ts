@@ -1,9 +1,9 @@
-// D3 Imports
-import { Chart } from "./chart";
-import * as Configuration from "./configuration";
-import { ChartConfig, ScatterChartOptions, ChartType } from "./interfaces/index";
-import { Tools } from "./tools";
-import { Axis, Legend, Overlay } from "./components/index";
+// Internal Imports
+import { Chart } from "../chart";
+import * as Configuration from "../configuration";
+import { ChartConfig, ScatterChartOptions, ChartType } from "../interfaces/index";
+import { Tools } from "../tools";
+import { Axis, Legend, Overlay } from "../components/index";
 
 export class ScatterChart extends Chart {
 	options: ScatterChartOptions = Tools.merge({}, Configuration.options.SCATTER);

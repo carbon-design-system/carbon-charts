@@ -7,21 +7,15 @@ import { select } from "d3-selection";
 import { ChartComponent } from "./base-component";
 
 export class Legend extends ChartComponent {
-	performRender() {
-		let svg;
-		if (select("#classy-scatter-chart-holder svg").nodes().length > 0) {
-			svg = select("#classy-scatter-chart-holder svg");
-		} else {
-			svg = select("#classy-scatter-chart-holder")
-				.append("svg")
-				.attr("height", 350)
-				.attr("width", 450);
-		}
+	render() {
+		const svg = select(this._essentials.domUtils.getSVG());
 
-		const legendItems = svg.selectAll("g")
+		const legendItems = svg.selectAll("g.legend")
 			.data(this.getLegendItemArray());
 
-		const addedLegendItems = legendItems.enter().append("g");
+		const addedLegendItems = legendItems.enter()
+			.append("g")
+			.classed("legend", true);
 		addedLegendItems.append("circle")
 			.merge(legendItems.select("circle"))
 				.attr("cx", 200)
@@ -47,12 +41,8 @@ export class Legend extends ChartComponent {
 		legendItems.exit().remove();
 	}
 
-	render() {
-		this.performRender();
-	}
-
 	update() {
-		this.performRender();
+		this.render();
 	}
 
 	getLegendItemArray() {

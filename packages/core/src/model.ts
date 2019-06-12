@@ -1,7 +1,7 @@
 // Internal Imports
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
-import { BaseChartOptions, ChartData } from "./interfaces/index";
+import { AxisChartOptions, ChartData, ChartConfig } from "./interfaces/index";
 import { scaleOrdinal } from "d3-scale";
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -24,7 +24,7 @@ export class ChartModel {
 	 * Chart options
 	 * @type BaseChartOptions
 	 */
-	private _options: BaseChartOptions = Tools.merge({}, Configuration.options.BASE);
+	private _options: AxisChartOptions = Tools.merge({}, Configuration.options.BASE);
 
 	// Callbacks
 	/**
@@ -52,11 +52,13 @@ export class ChartModel {
 
 	/**
      * Sets the chart data, and if not present, throws an Error() instance
-     * @param  {Configuration.ChartData} data The data to be set to the chart
+     * @param ChartData data The data to be set to the chart
      */
-	constructor(data) {
-		if (data) {
-			this.setData(data);
+	constructor(configs: ChartConfig<any>) {
+		this._options = configs.options;
+
+		if (configs.data) {
+			this.setData(configs.data);
 		} else {
 			throw Error("Your configurations are missing the `data` field");
 		}

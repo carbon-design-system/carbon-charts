@@ -1,33 +1,39 @@
+// Internal Imports
+import * as Configuration from "./configuration";
+
 // D3 Imports
 import { select } from "d3-selection";
 import { Tools } from "./tools";
-import { BaseChartOptions } from "./interfaces/index";
+import { AxisChartOptions } from "./interfaces/index";
 
 // MISC
 import ResizeObserver from "resize-observer-polyfill";
 
 export class DOMUtils {
-	private holder: Element;
-	private options: BaseChartOptions;
+	private _holder: Element;
+	private _svg: Element;
+	private _options: AxisChartOptions;
 
-	constructor(holder: Element, options: BaseChartOptions) {
-		this.options = options;
-		this.holder = holder;
+	constructor(holder: Element, options: AxisChartOptions) {
+		this._options = options;
+		this._holder = holder;
 
 		// Add width & height to the chart holder if necessary, and add a classname
 		this.styleHolderElement();
 
-		if (this.options.containerResizable) {
+		this.addSVGElement();
+
+		if (this._options.containerResizable) {
 			this.addResizeListener();
 		}
 	}
 
 	styleHolderElement() {
-		const holderElement = this.holder as HTMLElement;
-		const { width, height } = this.options;
+		const holderElement = this._holder as HTMLElement;
+		const { width, height } = this._options;
 
 		// Add class to chart holder
-		select(this.holder).classed("chart-holder", true);
+		select(this._holder).classed("chart-holder", true);
 
 		// If width exists in options
 		if (width) {
@@ -42,15 +48,32 @@ export class DOMUtils {
 		}
 	}
 
+	getHolder() {
+		return this._holder;
+	}
+
+	addSVGElement() {
+		const svg = select(this._holder)
+				.append("svg")
+				.attr("height", 350)
+				.attr("width", 450);
+
+		this._svg = svg.node();
+	}
+
+	getSVG() {
+		return this._svg;
+	}
+
 	addResizeListener() {
-		let containerWidth = this.holder.clientWidth;
-		let containerHeight = this.holder.clientHeight;
+		let containerWidth = this._holder.clientWidth;
+		let containerHeight = this._holder.clientHeight;
 
 		const resizeObserver = new ResizeObserver((entries, observer) => {
-			if (Math.abs(containerWidth - this.holder.clientWidth) > 1
-				|| Math.abs(containerHeight - this.holder.clientHeight) > 1) {
-				containerWidth = this.holder.clientWidth;
-				containerHeight = this.holder.clientHeight;
+			if (Math.abs(containerWidth - this._holder.clientWidth) > 1
+				|| Math.abs(containerHeight - this._holder.clientHeight) > 1) {
+				containerWidth = this._holder.clientWidth;
+				containerHeight = this._holder.clientHeight;
 
 				console.log("RESIZE CHART NOW");
 				// selectAll(".legend-tooltip").style("display", "none");
@@ -61,6 +84,29 @@ export class DOMUtils {
 			}
 		});
 
-		resizeObserver.observe(this.holder);
+		resizeObserver.observe(this._holder);
+	}
+
+	getChartSize() {
+		let ratio, marginForLegendTop;
+		if (this._holder.clientWidth > Configuration.charts.widthBreak) {
+			ratio = Configuration.charts.magicRatio;
+			marginForLegendTop = 0;
+		} else {
+			marginForLegendTop = Configuration.charts.marginForLegendTop;
+			ratio = 1;
+		}
+
+		// Store computed actual size, to be considered for change if chart does not support axis
+		const marginsToExclude = Configuration.charts.margin.left + Configuration.charts.margin.right;
+		const computedChartSize = {
+			height: this._holder.clientHeight - marginForLegendTop,
+			width: (this._holder.clientWidth - marginsToExclude) * ratio
+		};
+
+		return {
+			height: Math.max(computedChartSize.height, Configuration.charts.axisCharts.minHeight),
+			width: Math.max(computedChartSize.width, Configuration.charts.axisCharts.minWidth)
+		};
 	}
 }
