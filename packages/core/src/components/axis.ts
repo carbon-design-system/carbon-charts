@@ -27,7 +27,7 @@ export class Axis extends ChartComponent {
 	}
 
 	updateXandYGrid() {
-		
+
 	}
 
 	setXScale() {
@@ -38,8 +38,6 @@ export class Axis extends ChartComponent {
 
 		this.x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
 		this.x.domain(this._model.getData().labels);
-
-		console.log(this.x.domain())
 	}
 
 	setXAxis(noAnimation?: boolean) {
@@ -75,7 +73,7 @@ export class Axis extends ChartComponent {
 			.attr("x", Configuration.scales.magicX1)
 			.attr("dy", ".35em")
 			.attr("transform", `rotate(${Configuration.scales.xAxisAngle})`)
-			.style("text-anchor", "end")
+			.style("text-anchor", "end");
 			// .call(text => this.wrapTick(text));
 
 		// // get the tickHeight after the ticks have been wrapped
