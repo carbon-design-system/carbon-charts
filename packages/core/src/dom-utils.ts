@@ -111,15 +111,15 @@ export class DOMUtils {
 	}
 
 	appendOrSelect(parent, query) {
-        const l = query.split(".");
+		const l = query.split(".");
 		const elementToAppend = l[0];
 
 		const g = parent.select(query);
 		if (g.empty()) {
 			return parent.append(elementToAppend)
-				.attr("class", l.slice(1).join(" "))
+				.attr("class", l.slice(1).join(" "));
 		}
 
-        return g;
-    }
+		return g;
+	}
 }
