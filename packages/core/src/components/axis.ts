@@ -125,7 +125,6 @@ export class Axis extends ChartComponent {
 	setYScale(yScale?: any) {
 		const svg = select(this._essentials.domUtils.getSVG());
 		const chartSize = this._essentials.domUtils.getChartSize();
-		console.log("chartSize", chartSize)
 
 		const height = chartSize.height - (svg.select(".x.axis").node() as SVGSVGElement).getBBox().height;
 
@@ -149,7 +148,7 @@ export class Axis extends ChartComponent {
 
 		const { scales } = this._model.getOptions();
 		// const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
-console.log(scales)
+
 		const yAxis = axisLeft(this.y)
 			.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks)
 			.tickSize(0)
