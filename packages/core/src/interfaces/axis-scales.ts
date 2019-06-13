@@ -46,9 +46,21 @@ export interface ScaleOptions {
  */
 export interface YScaleOptions extends ScaleOptions {
 	/**
-	 * boolean to indicate whether data should be stacked
+	 * boolean to indicate whether bars should be stacked
 	 */
 	stacked?: boolean;
+	/**
+	 * custom formatter function to adjust the maximum y-value of the scale
+	 */
+	yMaxAdjuster?: Function;
+	/**
+	 * custom formatter function to adjust the minimum y-value of the scale
+	 */
+	yMinAdjuster?: Function;
+	/**
+	 * number of ticks to show on axis
+	 */
+	numberOfTicks?: Number;
 }
 
 /**

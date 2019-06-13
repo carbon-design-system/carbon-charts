@@ -55,8 +55,8 @@ export class DOMUtils {
 	addSVGElement() {
 		const svg = select(this._holder)
 				.append("svg")
-				.attr("height", 350)
-				.attr("width", 450);
+				.attr("height", "100%")
+				.attr("width", "100%");
 
 		this._svg = svg.node();
 	}
@@ -88,20 +88,20 @@ export class DOMUtils {
 	}
 
 	getChartSize() {
-		let ratio, marginForLegendTop;
-		if (this._holder.clientWidth > Configuration.charts.widthBreak) {
-			ratio = Configuration.charts.magicRatio;
-			marginForLegendTop = 0;
-		} else {
-			marginForLegendTop = Configuration.charts.marginForLegendTop;
-			ratio = 1;
-		}
+		// let ratio, marginForLegendTop;
+		// if (this._holder.clientWidth > Configuration.charts.widthBreak) {
+		// 	ratio = Configuration.charts.magicRatio;
+		// 	marginForLegendTop = 0;
+		// } else {
+		// 	marginForLegendTop = Configuration.charts.marginForLegendTop;
+		// 	ratio = 1;
+		// }
 
 		// Store computed actual size, to be considered for change if chart does not support axis
-		const marginsToExclude = Configuration.charts.margin.left + Configuration.charts.margin.right;
+		// const marginsToExclude = Configuration.charts.margin.left + Configuration.charts.margin.right;
 		const computedChartSize = {
-			height: this._holder.clientHeight - marginForLegendTop,
-			width: (this._holder.clientWidth - marginsToExclude) * ratio
+			height: this._svg.clientHeight,
+			width: this._svg.clientWidth
 		};
 
 		return {
@@ -109,4 +109,17 @@ export class DOMUtils {
 			width: Math.max(computedChartSize.width, Configuration.charts.axisCharts.minWidth)
 		};
 	}
+
+	appendOrSelect(parent, query) {
+        const l = query.split(".");
+		const elementToAppend = l[0];
+
+		const g = parent.select(query);
+		if (g.empty()) {
+			return parent.append(elementToAppend)
+				.attr("class", l.slice(1).join(" "))
+		}
+
+        return g;
+    }
 }
