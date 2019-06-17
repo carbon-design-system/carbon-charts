@@ -7,35 +7,84 @@ export const curvedLineData = {
 			label: "Dataset 1",
 			backgroundColors: [colors[0]],
 			data: [
-				65000,
-				79000,
-				49213,
-				51213,
-				16932
+				{
+					key: new Date(2019, 0, 1),
+					value: 0
+				},
+				{
+					key: new Date(2019, 0, 5),
+					value: 65000
+				},
+				{
+					key: new Date(2019, 0, 8),
+					value: null
+				},
+				{
+					key: new Date(2019, 0, 13),
+					value: 49213
+				},
+				{
+					key: new Date(2019, 0, 17),
+					value: 51213
+				},
+				{
+					key: new Date(2019, 0, 22),
+					value: 0
+				},
 			]
 		},
 		{
 			label: "Dataset 2",
 			backgroundColors: [colors[1]],
 			data: [
-				80000,
-				21312,
-				56456,
-				21312,
-				0
+				{
+					key: new Date(2019, 0, 2),
+					value: 0
+				},
+				{
+					key: new Date(2019, 0, 6),
+					value: 57312
+				},
+				{
+					key: new Date(2019, 0, 8),
+					value: 21432
+				},
+				{
+					key: new Date(2019, 0, 15),
+					value: 70323
+				},
+				{
+					key: new Date(2019, 0, 19),
+					value: 21300
+				},
+				{
+					key: new Date(2019, 0, 25),
+					value: 0
+				},
 			]
 		},
-		{
-			label: "Dataset 3",
-			backgroundColors: [colors[2]],
-			data: [
-				12312,
-				34232,
-				39232,
-				12312,
-				34234
-			]
-		}
+		// {
+		// 	label: "Dataset 2",
+		// 	backgroundColors: [colors[1]],
+		// 	data: [
+		// 		80000,
+		// 		21312,
+		// 		56456,
+		// 		21312,
+		// 		0
+		// 	]
+		// },
+		// {
+		// 	label: "Dataset 3",
+		// 	backgroundColors: [colors[2]],
+		// 	data: [
+		// 		12312,
+		// 		34232,
+		// 		39232,
+		// 		12312,
+		// 		34234
+		// 	]
+		// }
 	]
 };
 
@@ -44,11 +93,12 @@ export const curvedLineOptions = {
 	scales: {
 		x: {
 			title: "2018 Annual Sales Figures",
+			type: "time"
 		},
 		y: {
 			title: "Dollars (CAD)",
-			yMaxAdjuster: yMax => yMax * 1.2,
-			yMinAdjuster: yMin => yMin * 1.2,
+			yMaxAdjuster: yMax => yMax * 1.1,
+			// yMinAdjuster: yMin => yMin * 1.2,
 			formatter: axisValue => `${axisValue / 1000}k`
 		},
 		y2: {

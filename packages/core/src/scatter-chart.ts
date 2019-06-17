@@ -37,12 +37,22 @@ export class ScatterChart extends BaseAxisChart {
 			.enter()
 				.append("circle")
 				.attr("class", "dot")
-				.attr("cx", d => this.x(d.label) + this.x.step() / 2)
-				.attr("cy", d => this.y(d.value))
+				.attr("cx", d => {
+					if (this.options.scales.x.type === Configuration.ScaleTypes.TIME) {
+						return this.x(new Date(d.value.key));
+					}
+
+					return this.x(d.label) + this.x.step() / 2;
+				})
+				.attr("cy", d => this.y(d.value.value))
 				.attr("r", circleRadius)
 				.attr("fill", d => this.getCircleFill(circleRadius, d))
 				.attr("fill-opacity", d => this.getCircleFillOpacity())
-				.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
+				.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value.value))
+				.attr("opacity", (d: any) => {
+					const valueToConsider = typeof d.value === "number" ? d.value : d.value.value;
+					return (valueToConsider !== undefined && valueToConsider !== null) ? 1 : 0;
+				});
 
 		// Hide the overlay
 		this.chartOverlay.hide();
@@ -155,7 +165,13 @@ export class ScatterChart extends BaseAxisChart {
 				return self.addLabelsToDataPoints(parentDatum, i);
 			})
 			.transition(transitionToUse)
-			.attr("cx", d => this.x(d.label) + this.x.step() / 2)
+			.attr("cx", d => {
+				if (this.options.scales.x.type === Configuration.ScaleTypes.TIME) {
+					return this.x(d.key);
+				}
+
+				return this.x(d.label) + this.x.step() / 2;
+			})
 			.attr("cy", d => this.y(d.value))
 			.attr("r", circleRadius)
 			.attr("fill", d => this.getCircleFill(circleRadius, d))
@@ -188,7 +204,9 @@ export class ScatterChart extends BaseAxisChart {
 	setXScale () {
 		super.setXScale();
 
-		this.x.padding(0); // override BaseAxisChart padding so points aren't misaligned by a few pixels.
+		if (this.options.scales.x.type !== Configuration.ScaleTypes.TIME) {
+			this.x.padding(0); // override BaseAxisChart padding so points aren't misaligned by a few pixels.
+		}
 	}
 
 	resetOpacity() {

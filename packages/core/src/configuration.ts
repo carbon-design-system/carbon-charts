@@ -37,6 +37,14 @@ export enum ThresholdTheme {
 	WARNING = "warning"
 }
 
+
+/**
+ * enum of all possible scale types
+ */
+export enum ScaleTypes {
+	TIME = "time"
+}
+
 /*
  *****************************
  * User configurable options *
@@ -217,6 +225,10 @@ export interface ScaleOptions {
 	 * optional title for the scales
 	 */
 	title?: string;
+	/**
+	 * scale type
+	 */
+	type?: ScaleTypes;
 	/**
 	 * function to adjust the min value
 	 */

@@ -1,7 +1,8 @@
 // D3 Imports
 import { select } from "d3-selection";
-import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from "d3-scale";
+import { scaleBand, scaleLinear, scaleTime, ScaleBand, ScaleLinear, ScaleTime } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, AxisScale, AxisDomain } from "d3-axis";
+import { timeFormat } from "d3-time-format";
 import { min, max } from "d3-array";
 
 import { BaseChart } from "./base-chart";
@@ -11,7 +12,7 @@ import { ChartConfig, AxisChartOptions } from "./configuration";
 import { Tools } from "./tools";
 
 export class BaseAxisChart extends BaseChart {
-	x: ScaleBand<any>;
+	x: ScaleBand<any> | ScaleTime<any, any>;
 	y: ScaleLinear<any, any>;
 	y2: ScaleLinear<any, any>;
 	thresholdDimensions: any;
@@ -203,8 +204,17 @@ export class BaseAxisChart extends BaseChart {
 			const chartSize = this.getChartSize();
 			const width = chartSize.width - margins.left - margins.right;
 
-			this.x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
-			this.x.domain(this.displayData.labels);
+			if (scales.x.type === Configuration.ScaleTypes.TIME) {
+				this.x = scaleTime()
+					.domain([
+						new Date(2019, 0, 1),
+						new Date(2019, 0, 25)
+					])
+					.range([0, width]);
+			} else {
+				this.x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
+				this.x.domain(this.displayData.labels);
+			}
 		}
 	}
 
@@ -297,9 +307,19 @@ export class BaseAxisChart extends BaseChart {
 		let yMax;
 
 		if (datasets.length === 1) {
-			yMax = max(datasets[0].data);
+			if (this.options.scales.x.type === Configuration.ScaleTypes.TIME) {
+				yMax = max(datasets[0].data, d => d.value);
+			} else {
+				yMax = max(datasets[0].data);
+			}
 		} else {
-			yMax = max(datasets, (d: any) => (max(d.data)));
+			if (this.options.scales.x.type === Configuration.ScaleTypes.TIME) {
+				yMax = max(datasets, (d: any) => {
+					return max(d.data, (datum: any) => datum.value);
+				});
+			} else {
+				yMax = max(datasets, (d: any) => (max(d.data)));
+			}
 		}
 
 		if (scales.y.yMaxAdjuster) {
@@ -315,9 +335,19 @@ export class BaseAxisChart extends BaseChart {
 		let yMin;
 
 		if (datasets.length === 1) {
-			yMin = min(datasets[0].data);
+			if (this.options.scales.x.type === Configuration.ScaleTypes.TIME) {
+				yMin = min(datasets[0].data, d => d.value);
+			} else {
+				yMin = min(datasets[0].data);
+			}
 		} else {
-			yMin = min(datasets, (d: any) => (min(d.data)));
+			if (this.options.scales.x.type === Configuration.ScaleTypes.TIME) {
+				yMin = min(datasets, (d: any) => {
+					return min(d.data, (datum: any) => datum.value);
+				});
+			} else {
+				yMin = min(datasets, (d: any) => (min(d.data)));
+			}
 		}
 
 		if (scales.y.yMinAdjuster) {
@@ -628,7 +658,7 @@ export class BaseAxisChart extends BaseChart {
 
 			// Set max length allowed to length of datapoints
 			// In the x-scale
-			const maxTextLengthAllowed = self.x.bandwidth();
+			const maxTextLengthAllowed = self.x.bandwidth ? self.x.bandwidth() : 100;
 			while (word = words.pop()) {
 				line.push(word);
 				tspan.text(line.join(" "));

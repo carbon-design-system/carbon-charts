@@ -51,8 +51,18 @@ export class LineChart extends ScatterChart {
 
 		// D3 line generator function
 		this.lineGenerator = line()
-			.x((d, i) => this.x(this.displayData.labels[i]) + this.x.step() / 2)
-			.y((d: any) => this.y(d))
+			.x((d, i) => {
+				if (this.options.scales.x.type === Configuration.ScaleTypes.TIME) {
+					return this.x(new Date(d.key));
+				}
+
+				return this.x(this.displayData.labels[i]) + this.x.step() / 2;
+			})
+			.y((d: any) => this.y(d.value))
+			.defined((d: any) => {
+				const valueToConsider = typeof d === "number" ? d : d.value;
+				return valueToConsider !== undefined && valueToConsider !== null;
+			})
 			.curve(getD3Curve(curveName, curveOptions));
 
 		const gLines = this.innerWrap.selectAll("g.lines")
