@@ -14,6 +14,10 @@ export class Axis extends ChartComponent {
 	y2: ScaleLinear<any, any>;
 	thresholdDimensions: any;
 
+	constructor(options?: any) {
+		super();
+	}
+
 	render() {
 		console.log("rander AXIS");
 		this.updateXandYGrid();

@@ -11,11 +11,11 @@ export class ChartComponent {
 	protected componentHasRendered = false;
 
 	render() {
-		errorHandler.INTERNAL.CHART.MISSING_METHOD("render");
+		errorHandler.INTERNAL.COMPONENT.MISSING_METHOD("render");
 	}
 
 	update() {
-		errorHandler.INTERNAL.CHART.MISSING_METHOD("update");
+		errorHandler.INTERNAL.COMPONENT.MISSING_METHOD("update");
 	}
 
 	updateOrInitialize() {
