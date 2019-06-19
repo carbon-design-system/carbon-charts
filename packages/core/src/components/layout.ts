@@ -170,72 +170,81 @@ export class LayoutComponent extends ChartComponent {
 		this.children = {
 			children: children
 		};
+
+		// setInterval(() => {
+		// 	this.render();
+		// }, 500);
 	}
 
 	render() {
-		// set the dimensions and margins of the graph
-		const margin = {top: 10, right: 10, bottom: 10, left: 10},
-		chartSize = this._essentials.domUtils.getChartSize(),
-		width = chartSize.width,
-		height = chartSize.height;
+		const { width, height } = this._essentials.domUtils.getChartSize();
 
-		// append the svg object to the body of the page
+		// Find chart SVG
+		// TODORF - This should be an internal referefce
 		const svg = select("#classy-scatter-chart-holder svg");
-			// .append("g");
 
-		// Give the data to this cluster layout:
+		// Pass children data to the hierarchy layout
+		// And calculate sum of sizes
 		const root = hierarchy(this.children)
-			.sum(function(d: any) {
-				return d.size;
-			}); // Here the size of each leave is given in the "value" field in input data
+			.sum((d: any) => d.size)
 
-		// Then d3.treemap computes the position of each element of the hierarchy
+		const tileType = this.options.direction === LayoutDirection.ROW ? treemapDice : treemapSlice;
+		// Compute the position of all elements within the layout
 		treemap()
-			.tile(this.options.direction === LayoutDirection.ROW ? treemapDice : treemapSlice)
+			.tile(tileType)
 			.size([width, height])
 			.padding(0)
 			(root);
 
+		// TODORF - Remove
 		const color = scaleLinear()
 			.domain([-1, 5])
 			.range(["green" as any, "slateblue"]);
 
-		// use this information to add rectangles:
+		// Add new SVGs to the DOM for each layout child
 		svg
 			.selectAll("svg")
 			.data(root.leaves())
 			.enter()
 			.append("svg")
-				.attr("x", function (d: any) { return d.x0; })
-				.attr("y", function (d: any) { return d.y0; })
-				.attr("width", function (d: any) { return d.x1 - d.x0; })
-				.attr("height", function (d: any) { return d.y1 - d.y0; })
+				.attr("x", (d: any) => d.x0)
+				.attr("y", (d: any) => d.y0)
+				.attr("width", (d: any) => d.x1 - d.x0)
+				.attr("height", (d: any) => d.y1 - d.y0)
 				.append("rect")
-					.attr("width", function (d: any) { return d.x1 - d.x0; })
-					.attr("height", function (d: any) { return d.y1 - d.y0; })
+					.attr("width", (d: any) => d.x1 - d.x0)
+					.attr("height", (d: any) => d.y1 - d.y0)
 					.style("stroke", "black")
 					.style("stroke-width", 2)
 					.style("fill", (d, i) => color(i));
 
-		// and to add the text labels
+		// svg
+		// 	.selectAll("svg")
+		// 	.data(root.leaves())
+		// 		.attr("x", function (d: any) { return d.x0; })
+		// 		.attr("y", function (d: any) { return d.y0; })
+		// 		.attr("width", function (d: any) { return d.x1 - d.x0; })
+		// 		.attr("height", function (d: any) { return d.y1 - d.y0; })
+		// 		.append("rect")
+		// 			.attr("width", function (d: any) { return d.x1 - d.x0; })
+		// 			.attr("height", function (d: any) { return d.y1 - d.y0; })
+		// 			.style("stroke", "black")
+		// 			.style("stroke-width", 2)
+		// 			.style("fill", (d, i) => color(i));
+
+		// TODORF - Remove
 		svg
 			.selectAll("text")
 			.data(root.leaves())
 			.enter()
 			.append("text")
-			.attr("x", function(d: any) { return d.x0 + 5; })    // +10 to adjust position (more right)
-			.attr("y", function(d: any) { return d.y0 + 20; })    // +20 to adjust position (lower)
-			// .style("transform", "rotate(90deg)")
-			.text(function(d: any) {
-				// return d.data.name;
-
-				return d.data.component.constructor.name;
-			})
+			.attr("x", (d: any) => d.x0 + 5)    // +10 to adjust position (more right)
+			.attr("y", (d: any) => d.y0 + 20)    // +20 to adjust position (lower)
+			.text((d: any) => d.data.component.constructor.name)
 			.attr("font-size", "15px")
 			.attr("fill", "white");
 	}
 
 	update() {
-
 	}
 }
