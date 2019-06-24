@@ -40,11 +40,8 @@ export class Axis extends ChartComponent {
 	}
 
 	setXScale() {
-		const { bar: margins } = Configuration.charts.margin;
-
-		const chartSize = this._essentials.domUtils.getChartSize();
-		const width = chartSize.width - margins.left - margins.right;
-
+		const { width } = this._essentials.domUtils.getSVGSize(this._parent);
+console.log("width", width)
 		this.x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
 		this.x.domain(this._model.getData().labels);
 	}
@@ -55,7 +52,7 @@ export class Axis extends ChartComponent {
 		const chartSize = this._essentials.domUtils.getChartSize();
 		const height = chartSize.height - margins.top - margins.bottom;
 
-		const svg = select(this._essentials.domUtils.getSVG());
+		const svg = this._parent;
 		// const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
 		const xAxis = axisBottom(this.x)
@@ -148,7 +145,7 @@ export class Axis extends ChartComponent {
 
 	setYAxis(noAnimation?: boolean) {
 		const chartSize = this._essentials.domUtils.getChartSize();
-		const svg = select(this._essentials.domUtils.getSVG());
+		const svg = this._parent;
 
 		const { scales } = this._model.getOptions();
 		// const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
@@ -167,6 +164,7 @@ export class Axis extends ChartComponent {
 		// If the <g class="y axis"> exists in the chart SVG, just update it
 		if (yAxisRef.nodes().length > 0) {
 			yAxisRef
+				.attr("transform", "translate(30, 0)")
 				// .transition(t)
 				// Casting to any because d3 does not offer appropriate typings for the .call() function
 				.call(yAxis as any);
@@ -179,7 +177,8 @@ export class Axis extends ChartComponent {
 				.attr("x2", chartSize.width);
 		} else {
 			yAxisRef = svg.append("g")
-				.attr("class", "y axis yAxes");
+				.attr("class", "y axis yAxes")
+				.attr("transform", "translate(30, 0)");
 
 			yAxisRef.call(yAxis);
 

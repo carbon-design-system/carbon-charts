@@ -47,11 +47,22 @@ export enum ThresholdTheme {
 
 
 /**
- * enum of all possible threshold themes
+ * enum of all possible layout directions
  */
 export enum LayoutDirection {
 	ROW = "row",
 	COLUMN = "column",
 	ROW_REVERSE = "row-reverse",
 	COLUMN_REVERSE = "column-reverse"
+}
+
+
+
+/**
+ * enum of all possible layout growth values
+ */
+export enum LayoutGrowth {
+	FIXED = "fixed",
+	PREFERRED = "preferred",
+	STRETCH = "stretch",
 }

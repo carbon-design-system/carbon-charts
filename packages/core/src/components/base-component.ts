@@ -1,8 +1,10 @@
 // Internal Imports
-import { ChartModel } from "src/model";
-import { ChartEssentials } from "src/essentials";
-
+import { ChartModel } from "../model";
+import { ChartEssentials } from "../essentials";
 import errorHandler from "../services/error-handling";
+
+// D3 Imports
+import { select } from "d3-selection";
 
 export class ChartComponent {
 	protected _model: ChartModel;
@@ -10,22 +12,10 @@ export class ChartComponent {
 
 	protected componentHasRendered = false;
 
+	protected _parent: any;
+
 	render() {
 		errorHandler.INTERNAL.COMPONENT.MISSING_METHOD("render");
-	}
-
-	update() {
-		errorHandler.INTERNAL.COMPONENT.MISSING_METHOD("update");
-	}
-
-	updateOrInitialize() {
-		if (!this.componentHasRendered) {
-			this.componentHasRendered = true;
-
-			return this.render();
-		} else {
-			return this.update();
-		}
 	}
 
 	// Used to pass down information to the components
@@ -37,5 +27,16 @@ export class ChartComponent {
 	// Used to pass down information to the components
 	setEssentials(newObj) {
 		this._essentials = newObj;
+
+		// Set parent element to shell SVG if no parent exists for component
+		if (!this._parent) {
+			this.setParent(
+				select(this._essentials.domUtils.getSVG())
+			);
+		}
+	}
+
+	setParent(parent) {
+		this._parent = parent;
 	}
 }

@@ -1,25 +1,22 @@
 // Internal Imports
 import * as Configuration from "../configuration";
 
-// D3 Imports
-import { select } from "d3-selection";
-
 import { ChartComponent } from "./base-component";
 
 export class Legend extends ChartComponent {
 	render() {
-		const svg = select(this._essentials.domUtils.getSVG());
+		const svg = this._parent;
 
 		const legendItems = svg.selectAll("g.legend")
 			.data(this.getLegendItemArray());
 
 		const addedLegendItems = legendItems.enter()
 			.append("g")
-			.classed("legend", true);
+			.classed("legend-item", true);
 		addedLegendItems.append("circle")
 			.merge(legendItems.select("circle"))
-				.attr("cx", 200)
-				.attr("cy", (d, i) => 130 + (30 * i))
+				.attr("cx", 7)
+				.attr("cy", (d, i) => 7 + (30 * i))
 				.attr("r", 6)
 				.style("fill", (d, i) => {
 					if (d.value === Configuration.legend.items.status.ACTIVE) {
@@ -31,8 +28,8 @@ export class Legend extends ChartComponent {
 
 		addedLegendItems.append("text")
 			.merge(legendItems.select("text"))
-				.attr("x", 220)
-				.attr("y", (d, i) => 130 + (30 * i))
+				.attr("x", 20)
+				.attr("y", (d, i) => 9 + (30 * i))
 				.text(d => d.key)
 				.style("font-size", "15px")
 				.attr("alignment-baseline", "middle");
