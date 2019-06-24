@@ -110,6 +110,14 @@ export class DOMUtils {
 		};
 	}
 
+	getSVGSize(svg: any) {
+		console.log("svg.node().getBBox().width", svg.node().getBBox().width)
+		return {
+			height: svg.node().getBBox().height || svg.node().clientHeight || svg.attr("height"),
+			width: svg.node().getBBox().width || svg.node().clientWidth || svg.attr("width")
+		};
+	}
+
 	appendOrSelect(parent, query) {
 		const l = query.split(".");
 		const elementToAppend = l[0];

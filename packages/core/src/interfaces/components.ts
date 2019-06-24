@@ -1,4 +1,27 @@
-import { ThresholdTheme } from "./enums";
+import { ThresholdTheme, LayoutGrowth } from "./enums";
+import { ChartComponent } from "../components/base-component";
+
+/**
+ * customize the overlay contents
+ */
+export interface LayoutComponentChild {
+	/**
+	 * the component that'll be rendered inside layout child
+	 */
+	component: ChartComponent,
+	/**
+	 * size of the layout child
+	 */
+	size: Number,
+	/**
+	 * how the layout child will grow or shrink in x & y directions
+	 */
+	growth: {
+		x: LayoutGrowth,
+		y: LayoutGrowth
+	}
+}
+
 
 /**
  * customize the overlay contents

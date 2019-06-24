@@ -52,8 +52,8 @@ export class Chart {
 
 		// Add the model to all components
 		this.components.forEach(component => {
-			component.setModel(this.model);
 			component.setEssentials(this.essentials);
+			component.setModel(this.model);
 		});
 
 		// Notify all components on data updates
@@ -72,7 +72,7 @@ export class Chart {
 
 	modelUpdated() {
 		this.components.forEach(component => {
-			component.updateOrInitialize();
+			component.render();
 		});
 	}
 
