@@ -710,7 +710,7 @@ export const transitions = {
 		duration: 750
 	},
 	pie_slice_hover: {
-		duration: 750
+		duration: 100
 	},
 };
 
