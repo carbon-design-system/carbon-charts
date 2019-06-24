@@ -27,6 +27,7 @@ export interface PieData {
 export class PieChart extends BaseChart {
 	pie: Pie<PieChart, any>;
 	arc: Arc<PieChart, any>;
+	hoverArc: Arc<PieChart, any>;
 	path: any;
 
 	options: PieChartOptions;
@@ -138,6 +139,10 @@ export class PieChart extends BaseChart {
 				.innerRadius(this.options.type === "donut" ? (marginedRadius * (3 / 4)) : 2)
 				.outerRadius(marginedRadius);
 
+		this.hoverArc = arc()
+				.innerRadius(this.options.type === "donut" ? (marginedRadius * (3 / 4)) : 2)
+				.outerRadius(marginedRadius + 3);
+
 		this.pie = pie()
 			.value((d: any) => d.value)
 			.sort(null)
@@ -150,9 +155,6 @@ export class PieChart extends BaseChart {
 			.append("path")
 			.attr("d", this.arc)
 			.attr("fill", d => this.getFillColor(this.displayData.datasets[0].label, d.data.label, d.data.value)) // Support multiple datasets
-			.attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
-			.attr("stroke-width", Configuration.pie.default.strokeWidth)
-			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.each(function(d) { this._current = d; });
 
 		// Draw the slice labels
@@ -184,9 +186,6 @@ export class PieChart extends BaseChart {
 		path
 			.transition()
 			.duration(0)
-			.attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
-			.attr("stroke-width", Configuration.pie.default.strokeWidth)
-			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.transition()
 			.style("opacity", 1)
 			.duration(Configuration.transitions.default.duration)
@@ -201,9 +200,6 @@ export class PieChart extends BaseChart {
 			.transition()
 			.duration(0)
 			.style("opacity", 0)
-			.attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
-			.attr("stroke-width", Configuration.pie.default.strokeWidth)
-			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.transition()
 			.duration(Configuration.transitions.default.duration)
 			.attr("fill", d => this.getFillColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
@@ -279,7 +275,6 @@ export class PieChart extends BaseChart {
 
 			// Fade everything out except for this element
 			select(exception).attr("fill-opacity", false);
-			select(exception).attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
 			select(exception).attr("fill", (d: any) => this.getFillColor(this.displayData.datasets[0].label, d.data.label, d.data.value));
 		}
 	}
@@ -289,7 +284,6 @@ export class PieChart extends BaseChart {
 	// TODO - Refactor
 	addDataPointEventListener() {
 		const self = this;
-		const { accessibility } = this.options;
 
 		this.innerWrap.selectAll("path")
 			.on("click", d => self.dispatchEvent("pie-slice-onClick", d))
@@ -297,19 +291,16 @@ export class PieChart extends BaseChart {
 				const sliceElement = select(this);
 				Tools.moveToFront(sliceElement);
 
-				sliceElement.attr("stroke-width", Configuration.pie.mouseover.strokeWidth)
-					.attr("stroke-opacity", Configuration.pie.mouseover.strokeOpacity)
-					.attr("stroke", self.getStrokeColor(self.displayData.datasets[0].label, d.data.label, d.data.value));
+				sliceElement.transition(self.getDefaultTransition("pie_slice_hover"))
+					.attr("d", self.hoverArc);
 
 				self.showTooltip(d);
 				self.reduceOpacity(this);
 			})
 			.on("mousemove", d => self.tooltip.positionTooltip())
 			.on("mouseout", function(d) {
-				select(this)
-					.attr("stroke-width", accessibility ? Configuration.pie.default.strokeWidth : Configuration.pie.mouseout.strokeWidth)
-					.attr("stroke", accessibility ? self.getStrokeColor(self.displayData.datasets[0].label, d.data.label, d.data.value) : "none")
-					.attr("stroke-opacity", Configuration.pie.mouseout.strokeOpacity);
+				select(this).transition(self.getDefaultTransition("pie_slice_hover"))
+					.attr("d", self.arc);
 
 				self.hideTooltip();
 			});

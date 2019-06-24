@@ -708,7 +708,10 @@ export const tooltip = {
 export const transitions = {
 	default: {
 		duration: 750
-	}
+	},
+	pie_slice_hover: {
+		duration: 750
+	},
 };
 
 /**
