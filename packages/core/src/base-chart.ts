@@ -852,9 +852,11 @@ export class BaseChart {
 		return this.options.accessibility ? this.patternScale : this.colorScale;
 	}
 
-	getDefaultTransition(): Transition<any, any, any, any> {
+	getDefaultTransition(type?: string): Transition<any, any, any, any> {
 		if (this.options.animations === false) {
 			return this.getInstantTransition();
+		} else if (Configuration.transitions[type]) {
+			return transition().duration(Configuration.transitions[type].duration);
 		}
 
 		return transition().duration(Configuration.transitions.default.duration);
