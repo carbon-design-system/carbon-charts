@@ -24,7 +24,6 @@ export class ScatterChart extends Chart {
 				[
 					{
 						component: new Axis(),
-						size: 80,
 						growth: {
 							x: LayoutGrowth.STRETCH,
 							y: LayoutGrowth.FIXED
@@ -32,7 +31,6 @@ export class ScatterChart extends Chart {
 					},
 					{
 						component: new Legend(),
-						size: 20,
 						growth: {
 							x: LayoutGrowth.PREFERRED,
 							y: LayoutGrowth.FIXED
@@ -40,7 +38,7 @@ export class ScatterChart extends Chart {
 					}
 				],
 				{
-					direction: LayoutDirection.ROW
+					direction: LayoutDirection.COLUMN_REVERSE
 				}
 			)
 		];
