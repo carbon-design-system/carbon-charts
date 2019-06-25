@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BarChart as BC } from "@carbon/charts";
+import { BarChart as BC } from "@carbon/charts/dist/index.umd.js";
 import BaseChart from "./base-chart";
 
 export default class BarChart extends BaseChart {
