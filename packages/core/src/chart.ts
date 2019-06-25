@@ -71,6 +71,7 @@ export class Chart {
 	}
 
 	modelUpdated() {
+		console.log("MODEL UPDATED 14123$@#$")
 		this.components.forEach(component => {
 			component.render();
 		});

@@ -41,7 +41,7 @@ export class Axis extends ChartComponent {
 
 	setXScale() {
 		const { width } = this._essentials.domUtils.getSVGSize(this._parent);
-console.log("width", width)
+
 		this.x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
 		this.x.domain(this._model.getData().labels);
 	}

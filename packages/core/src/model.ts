@@ -90,9 +90,9 @@ export class ChartModel {
 					loading: false
 				});
 
-				this.modelUpdated();
+				// this.modelUpdated();
 
-				this._dataCallback(resolvedData);
+				// this._dataCallback(resolvedData);
 
 				return this._data;
 			});
