@@ -1,6 +1,6 @@
 import React from "react";
 
-import { LineChart as LC } from "@carbon/charts/dist/index.umd.js";
+import { LineChart as LC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 
 export default class LineChart extends BaseChart {
