@@ -42,7 +42,6 @@ export class PieChart extends BaseChart {
 	}
 
 	// Sort data by value (descending)
-	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
 	dataProcessor(dataObject: ChartData): PieData {
 		// TODO - Support multiple datasets
 		if (dataObject.datasets.length > 1) {
@@ -67,23 +66,6 @@ export class PieChart extends BaseChart {
 		// Sort data by value
 		let sortedData = dataList.sort((a, b) => b.value - a.value);
 
-		// Keep a certain number of slices, and add an "Other" slice for the rest
-		const { sliceLimit: stopAt } = Configuration.pie;
-		const rest = sortedData.slice(stopAt);
-		const restAccumulatedValue = rest.reduce((accum, item) => accum + item.value, 0);
-
-		const otherLabelIndex = sortedData.findIndex(dataPoint => dataPoint.label === "Other");
-		if (otherLabelIndex !== -1) {
-			sortedData.push(sortedData.splice(otherLabelIndex, 1)[0]);
-		} else if (rest.length > 0) {
-			sortedData = sortedData.slice(0, stopAt)
-				.concat([{
-					label: Configuration.pie.label.other,
-					value: restAccumulatedValue,
-					items: rest
-				}]);
-		}
-
 		return {
 			// Sort labels based on the order made above
 			labels: sortedData.map((datum, i) => datum.label),
@@ -98,7 +80,6 @@ export class PieChart extends BaseChart {
 				}
 			]
 		};
-
 	}
 
 	// If there isn't a chart already drawn in the container
@@ -331,10 +312,15 @@ export class PieChart extends BaseChart {
 		this.innerWrap
 			.style("transform", `translate(${radius}px,${radius}px)`);
 
-		// Resize the arc
+		// Resize the arcs
 		this.arc = arc()
 			.innerRadius(this.options.type === "donut" ? (radius * (3 / 4)) : 2)
 			.outerRadius(radius);
+
+		// Resize the arc
+		this.hoverArc = arc()
+			.innerRadius(this.options.type === "donut" ? (radius * (3 / 4)) : 2)
+			.outerRadius(radius + 3);
 
 		this.innerWrap.selectAll("path")
 			.attr("d", this.arc);
