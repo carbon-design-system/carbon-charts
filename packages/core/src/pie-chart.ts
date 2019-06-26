@@ -56,7 +56,6 @@ export class PieChart extends BaseChart {
 		}
 
 		// TODO - Support multiple datasets
-		// let sortedData = data.datasets[0];
 		const dataList: Array<any> = dataObject.datasets[0].data.map((datum, i) => ({
 			label: dataObject.labels[i],
 			value: datum,
@@ -64,7 +63,7 @@ export class PieChart extends BaseChart {
 		}));
 
 		// Sort data by value
-		let sortedData = dataList.sort((a, b) => b.value - a.value);
+		const sortedData = dataList.sort((a, b) => b.value - a.value);
 
 		return {
 			// Sort labels based on the order made above
