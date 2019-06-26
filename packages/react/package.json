@@ -2,7 +2,7 @@
 	"name": "@carbon/charts-react",
 	"version": "0.12.2",
 	"description": "Carbon charting components for React",
-	"main": "index.js",
+	"main": "./bundle/bundle.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "yarn run storybook",
