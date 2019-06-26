@@ -261,6 +261,7 @@ div.chart-overlay {
 	max-width: 70%;
 	word-wrap: break-word;
 	z-index: 1059;
+	pointer-events: none;
 
 	p {
 		margin: 0;
