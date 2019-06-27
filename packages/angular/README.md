@@ -18,3 +18,8 @@ instead:
 ```bash
 yarn add @carbon/charts-angular
 ```
+
+## Sample Code
+Checkout a sample app we've made on Codesandbox:
+
+[![Edit Carbon Charts - Angular](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/k32kjy5qnr?fontsize=14)

@@ -5,6 +5,7 @@
 **[Storybook Demos](https://carbon-design-system.github.io/carbon-charts/react)**
 
 ## Getting Started
+
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
@@ -17,3 +18,8 @@ instead:
 ```bash
 yarn add @carbon/charts-react
 ```
+
+## Sample Code
+Checkout a sample app we've made on Codesandbox:
+
+[![Edit Carbon Charts - React](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/pppmo3ollx?fontsize=14)

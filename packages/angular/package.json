@@ -1,13 +1,13 @@
 {
-	"$schema": "./node_modules/ng-packagr/package.schema.json",
+	"$schema": "../../node_modules/ng-packagr/package.schema.json",
 	"name": "@carbon/charts-angular",
-	"version": "0.11.8",
+	"version": "0.12.4",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"scripts": {
 		"build": "ng-packagr -p package.json",
 		"storybook": "start-storybook -p 9005 -c .storybook -s ./.storybook/assets",
-		"demo:build": "build-storybook -o demo/bundle/angular",
+		"demo:build": "build-storybook -o demo/bundle",
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"repository": {
@@ -40,7 +40,7 @@
 		"scss"
 	],
 	"dependencies": {
-		"@carbon/charts": "^0.7.11"
+		"@carbon/charts": "^0.12.4"
 	},
 	"peerDependencies": {
 		"@angular/common": "^6.0.0 || ^7.0.0",
@@ -60,7 +60,8 @@
 		"@angular/platform-browser": "6.1.0",
 		"@angular/platform-browser-dynamic": "6.1.0",
 		"@babel/core": "7.3.4",
-		"@storybook/angular": "5.0.5",
+		"@storybook/addon-options": "5.0.11",
+		"@storybook/angular": "5.0.11",
 		"@types/node": "8.5.2",
 		"babel-loader": "8.0.5",
 		"core-js": "2.6.5",
