@@ -17,9 +17,21 @@ div.chart-holder {
 	position: relative;
 	@include fonts();
 
+
 	// Chart elements
 	svg.chart-svg {
 		overflow: visible !important;
+
+		/*
+		Chart titles
+		*/
+		.chart-title {
+			font-size: 14px;
+			line-height: 16px;
+			font-weight: 600;
+			padding-bottom: 8px;
+			dominant-baseline: hanging;
+		}
 
 		/*
 		Axes
@@ -148,7 +160,9 @@ div.chart-holder {
 		}
 
 		text {
+			font-family: "IBM Plex Sans condensed";
 			font-size: 12px;
+			line-height: 16px;
 			max-width: 100px;
 			text-overflow: ellipsis;
 			white-space: nowrap;

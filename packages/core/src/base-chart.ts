@@ -166,6 +166,7 @@ export class BaseChart {
 				// Perform the draw or update chart
 				if (initialDraw) {
 					this.initialDraw();
+					this.drawTitle(this.options.chartTitle);
 				} else {
 					if (removedItems.length > 0 || newItems.length > 0) {
 						this.addOrUpdateLegend();
@@ -270,7 +271,7 @@ export class BaseChart {
 
 	// TODO - Refactor
 	getChartSize(container = this.container) {
-		let ratio, marginForLegendTop;
+		let ratio, marginForLegendTop, marginForChartTitle;
 		if (container.node().clientWidth > Configuration.charts.widthBreak) {
 			ratio = Configuration.charts.magicRatio;
 			marginForLegendTop = 0;
@@ -281,8 +282,11 @@ export class BaseChart {
 
 		// Store computed actual size, to be considered for change if chart does not support axis
 		const marginsToExclude = 0;
+
+		marginForChartTitle = this.options.chartTitle ? Configuration.charts.marginForChartTitle : 0;
+
 		const computedChartSize = {
-			height: container.node().clientHeight - marginForLegendTop,
+			height: container.node().clientHeight - marginForLegendTop - marginForChartTitle,
 			width: (container.node().clientWidth - marginsToExclude) * ratio
 		};
 
@@ -361,6 +365,32 @@ export class BaseChart {
 		});
 
 		resizeObserver.observe(this.holder);
+	}
+
+	/**
+	 * Draws title within the Chart's svg element.
+	 * @param title
+	 */
+	drawTitle(title: string) {
+		if (title) {
+			this.svg
+			.append("text")
+			.classed("chart-title", true)
+			.text(title);
+		}
+		const titleMargin = Configuration.charts.marginForChartTitle;
+
+
+		// retrieve the current transformations (specific to each chart type)
+		const transform = this.innerWrap.attr("transform");
+		const translateArr = transform.substring(transform.indexOf("(") + 1, transform.indexOf(")")).split(",");
+
+
+		// add padding for title, keep other translations
+		this.innerWrap
+		.attr("transform", `translate(${translateArr[0]}, ${+translateArr[1] + titleMargin})`);
+
+
 	}
 
 	setClickableLegend() {
