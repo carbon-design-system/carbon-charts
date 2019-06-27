@@ -3,6 +3,124 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.4](https://github.com/IBM/carbon-charts/compare/v0.12.3...v0.12.4) (2019-06-26)
+
+
+### Bug Fixes
+
+* **react core:** change main bundle to umd in core, and update imports in react ([df9c7c3](https://github.com/IBM/carbon-charts/commit/df9c7c3))
+
+
+
+
+
+## [0.12.3](https://github.com/IBM/carbon-charts/compare/v0.12.2...v0.12.3) (2019-06-26)
+
+
+### Bug Fixes
+
+* **react:** handle data updates from state, and fix errors with width/height prop ([a00294f](https://github.com/IBM/carbon-charts/commit/a00294f))
+
+
+
+
+
+## [0.12.2](https://github.com/IBM/carbon-charts/compare/v0.12.1...v0.12.2) (2019-06-07)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.12.1](https://github.com/IBM/carbon-charts/compare/v0.12.0...v0.12.1) (2019-06-06)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+# [0.12.0](https://github.com/IBM/carbon-charts/compare/v0.11.15...v0.12.0) (2019-05-09)
+
+
+### Features
+
+* **core:** Colors, themes & more design updates ([#261](https://github.com/IBM/carbon-charts/issues/261)) ([b0b9070](https://github.com/IBM/carbon-charts/commit/b0b9070))
+* **feat(core:** Color palettes): ([edcf601](https://github.com/IBM/carbon-charts/commit/edcf601))
+
+
+
+
+
+## [0.11.15](https://github.com/IBM/carbon-charts/compare/v0.11.14...v0.11.15) (2019-05-07)
+
+
+### Bug Fixes
+
+* **core:** Fix tooltip positioning ([dd17048](https://github.com/IBM/carbon-charts/commit/dd17048))
+
+
+
+
+
+## [0.11.14](https://github.com/IBM/carbon-charts/compare/v0.11.12...v0.11.14) (2019-05-06)
+
+
+### Bug Fixes
+
+* **core:** Show empty state for when there is no data ([b5db127](https://github.com/IBM/carbon-charts/commit/b5db127))
+
+
+
+
+
+## [0.11.13](https://github.com/IBM/carbon-charts/compare/v0.11.12...v0.11.13) (2019-04-30)
+
+
+### Bug Fixes
+
+* **core:** Show empty state for when there is no data ([b5db127](https://github.com/IBM/carbon-charts/commit/b5db127))
+
+
+
+
+
+## [0.11.12](https://github.com/IBM/carbon-charts/compare/v0.11.11...v0.11.12) (2019-04-22)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.11.11](https://github.com/IBM/carbon-charts/compare/v0.11.10...v0.11.11) (2019-04-15)
+
+
+### Bug Fixes
+
+* **react:** use es6 style exports in index.js ([#241](https://github.com/IBM/carbon-charts/issues/241)) ([65964ae](https://github.com/IBM/carbon-charts/commit/65964ae))
+
+
+
+
+
+## [0.11.10](https://github.com/IBM/carbon-charts/compare/v0.11.9...v0.11.10) (2019-04-02)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.11.9](https://github.com/IBM/carbon-charts/compare/v0.11.8...v0.11.9) (2019-03-28)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 ## [0.11.8](https://github.com/IBM/carbon-charts/compare/v0.11.7...v0.11.8) (2019-03-26)
 
 

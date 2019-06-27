@@ -18,3 +18,8 @@ instead:
 ```bash
 yarn add @carbon/charts-vue
 ```
+
+## Sample Code
+Checkout a sample app we've made on Codesandbox:
+
+[![Edit Carbon Charts - Vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/pjkrw2omq0?fontsize=14)

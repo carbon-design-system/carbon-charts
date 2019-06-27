@@ -3,15 +3,13 @@ import { setOptions } from '@storybook/addon-options';
 
 setOptions({
   name: 'Carbon Charts - React Wrappers',
-  showDownPanel: false
-  // goFullScreen: false,
-  // showLeftPanel: true,
-//   showSearchBox: false,
-  // downPanelInRight: true,
+  showDownPanel: false,
+  showAddonPanel: false
 });
 
 // load global styles
 require("!style-loader!css-loader!sass-loader!./previews.scss");
+require("!style-loader!css-loader!@carbon/charts/dist/style.css");
 
 const req = require.context("../stories/", true, /.stories.js$/);
 function loadStories() {
