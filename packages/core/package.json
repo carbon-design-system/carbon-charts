@@ -1,7 +1,8 @@
 {
   "name": "@carbon/charts",
-  "version": "0.12.2",
+  "version": "0.12.4",
   "description": "Carbon charting components",
+  "main": "./index.umd.js",
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
     "demo:build": "webpack --config webpack.config.js && typedoc --out ./demo/bundle/documentation ./src/index.ts",
