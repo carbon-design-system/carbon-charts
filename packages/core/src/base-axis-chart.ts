@@ -164,7 +164,7 @@ export class BaseAxisChart extends BaseChart {
 		// Store computed actual size, to be considered for change if chart does not support axis
 		const marginsToExclude = Configuration.charts.margin.left + Configuration.charts.margin.right;
 
-		marginForChartTitle = this.options.chartTitle ? Configuration.charts.marginForChartTitle : 0;
+		marginForChartTitle = this.options.title ? Configuration.charts.title.marginBottom : 0;
 
 		const computedChartSize = {
 			height: container.node().clientHeight - marginForLegendTop - marginForChartTitle,

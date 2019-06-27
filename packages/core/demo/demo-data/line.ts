@@ -63,7 +63,7 @@ export const curvedLineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	chartTitle: "Line Chart"
+	title: "Line Chart"
 };
 
 
@@ -135,7 +135,7 @@ export const lineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	chartTitle: "Line Chart"
+	title: "Line Chart"
 };
 
 export const scatterData = {

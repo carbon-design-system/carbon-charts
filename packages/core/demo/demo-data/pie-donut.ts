@@ -5,7 +5,7 @@ export const pieOptions = {
 	legendClickable: true,
 	containerResizable: true,
 	colors,
-	chartTitle: "Pie Chart",
+	title: "Pie Chart",
 	theme: "dark"
 };
 
@@ -18,7 +18,7 @@ export const donutOptions = {
 		label: "Products",
 		number: 300000
 	},
-	chartTitle: "Donut Chart"
+	title: "Donut Chart"
 };
 
 export const pieData = {

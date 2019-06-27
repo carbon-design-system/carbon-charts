@@ -233,6 +233,16 @@ export namespace Tools {
 		return transformMatrixArray[4];
 	}
 
+	/**
+	 * Returns an array of the translations from the element's attributes.
+	 * @param elementRef
+	 */
+	export function getTranslations(elementRef: any) {
+		const transform = elementRef.attr("transform");
+		const translateArr = transform.substring(transform.indexOf("(") + 1, transform.indexOf(")")).split(",");
+		return translateArr;
+	}
+
 	export const getProperty = (object, ...propPath) => {
 		let position = object;
 		for (const prop of propPath) {
