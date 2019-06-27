@@ -1,4 +1,4 @@
-# `@carbon/charts-vue`
+# `@carbon/charts-angular`
 
 > Carbon Charting Angular Wrappers
 
