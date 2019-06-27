@@ -166,7 +166,7 @@ export class BaseChart {
 				// Perform the draw or update chart
 				if (initialDraw) {
 					this.initialDraw();
-					this.drawTitle(this.options.chartTitle);
+					this.drawTitle();
 				} else {
 					if (removedItems.length > 0 || newItems.length > 0) {
 						this.addOrUpdateLegend();
@@ -283,7 +283,7 @@ export class BaseChart {
 		// Store computed actual size, to be considered for change if chart does not support axis
 		const marginsToExclude = 0;
 
-		marginForChartTitle = this.options.chartTitle ? Configuration.charts.marginForChartTitle : 0;
+		marginForChartTitle = this.options.title ? Configuration.charts.title.marginBottom : 0;
 
 		const computedChartSize = {
 			height: container.node().clientHeight - marginForLegendTop - marginForChartTitle,
@@ -371,26 +371,19 @@ export class BaseChart {
 	 * Draws title within the Chart's svg element.
 	 * @param title
 	 */
-	drawTitle(title: string) {
-		if (title) {
+	drawTitle() {
+		if (this.options.title) {
 			this.svg
 			.append("text")
 			.classed("chart-title", true)
-			.text(title);
+			.text(this.options.title);
 		}
-		const titleMargin = Configuration.charts.marginForChartTitle;
-
-
-		// retrieve the current transformations (specific to each chart type)
-		const transform = this.innerWrap.attr("transform");
-		const translateArr = transform.substring(transform.indexOf("(") + 1, transform.indexOf(")")).split(",");
-
+		const titleMargin = Configuration.charts.title.marginBottom;
+		const translateArr = Tools.getTranslations(this.innerWrap);
 
 		// add padding for title, keep other translations
 		this.innerWrap
 		.attr("transform", `translate(${translateArr[0]}, ${+translateArr[1] + titleMargin})`);
-
-
 	}
 
 	setClickableLegend() {

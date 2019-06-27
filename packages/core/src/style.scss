@@ -21,11 +21,10 @@ div.chart-holder {
 	// Chart elements
 	svg.chart-svg {
 		overflow: visible !important;
-
 		/*
 		Chart titles
 		*/
-		.chart-title {
+		text.chart-title {
 			font-size: 14px;
 			line-height: 16px;
 			font-weight: 600;

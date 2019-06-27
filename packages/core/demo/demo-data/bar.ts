@@ -73,7 +73,7 @@ export const groupedBarOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	chartTitle: "Bar Chart"
+	title: "Bar Chart"
 };
 
 // Simple bar
@@ -112,7 +112,7 @@ export const simpleBarOptions = {
 	bars: {
 		maxWidth: 50
 	},
-	chartTitle: "Simple Bar Chart"
+	title: "Simple Bar Chart"
 };
 
 // Stacked bar
@@ -184,5 +184,5 @@ export const stackedBarOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	chartTitle: "Stacked Bar Chart",
+	title: "Stacked Bar Chart",
 };

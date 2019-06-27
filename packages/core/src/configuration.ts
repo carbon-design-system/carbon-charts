@@ -85,7 +85,7 @@ export interface BaseChartOptions {
 	/**
 	 * optional title for chart
 	 */
-	chartTitle?: string;
+	title?: string;
 	/**
 	 * boolean to prevent the container from resizing
 	 */
@@ -505,7 +505,9 @@ export const charts = {
 	minWidth: 150,
 	widthBreak: 600,
 	marginForLegendTop: 40,
-	marginForChartTitle: 24,
+	title: {
+		marginBottom: 24
+	},
 	magicRatio: 0.7,
 	magicMoreForY2Axis: 70,
 	axisCharts: {
