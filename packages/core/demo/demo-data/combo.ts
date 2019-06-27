@@ -71,5 +71,6 @@ export const comboOptions = {
 		}
 	},
 	legendClickable: true,
-	containerResizable: true
+	containerResizable: true,
+	chartTitle: "Combo Chart"
 };
