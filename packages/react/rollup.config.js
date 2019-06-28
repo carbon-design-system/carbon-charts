@@ -3,6 +3,7 @@ import babel from "rollup-plugin-babel";
 module.exports = {
 	input: "./src/index.js",
 	output: {
+		name: "chartsReact",
 		file: "./dist/bundle/bundle.js",
 		format: "umd",
 		globals: {

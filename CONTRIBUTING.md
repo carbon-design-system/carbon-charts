@@ -26,18 +26,18 @@ We use Lerna to manage all packages in Charts.
 To get charts running locally on your machine:
 1. Fork this repo
 2. Clone your fork
-3. Run `npm install` (this would install all packages and get **lerna** setup)
+3. Run `yarn` (this would install all packages and get **lerna** setup)
 
 The **core** package (vanilla JS) demos can be launched using:
 
 ```sh
-npm run demo:server
+yarn run demo:server
 ```
 
 All wrapper packages (currently **react** & **angular**) use Storybook for demos:
 
 ```sh
-npm run storybook
+yarn run storybook
 ```
 
 ## Issue guidelines
@@ -106,7 +106,7 @@ npm run storybook
    message guidelines](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
    to maintain consistency.
    
-	**To commit changes, please use `npm run commit` rather than `git commit`**
+	**To commit changes, please use `yarn run commit` rather than `git commit`**
 
 4. If time passes between development, **locally merge (or rebase) the upstream master branch** into your topic branch to avoid conflicts in your pull request. We recommend using Git's [interactive rebase](https://help.github.com/articles/interactive-rebase) feature to tidy up a messy commit history.
 
