@@ -1,20 +1,16 @@
 {
-	"lerna": "3.2.1",
+	"lerna": "3.13.4",
 	"packages": [
-		"packages/*",
-		"packages/*/demo"
+		"packages/*"
 	],
+	"npmClient": "yarn",
+	"useWorkspaces": true,
 	"command": {
-		"bootstrap": {
-			"npmClientArgs": [
-				"--no-package-lock"
-			]
-		},
 		"publish": {
 			"ignoreChanges": [
 				"packages/*/demo"
 			]
 		}
 	},
-	"version": "0.11.8"
+	"version": "0.12.4"
 }

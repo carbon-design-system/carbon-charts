@@ -160,7 +160,7 @@ export class BarChart extends BaseAxisChart {
 						.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
 
 		// Hide the overlay
-		this.updateOverlay().hide();
+		this.chartOverlay.hide();
 
 		// Dispatch the load event
 		this.dispatchEvent("load");
@@ -238,7 +238,7 @@ export class BarChart extends BaseAxisChart {
 		this.addDataPointEventListener();
 
 		// Hide the overlay
-		this.updateOverlay().hide();
+		this.chartOverlay.hide();
 
 		// Dispatch the update event
 		this.dispatchEvent("update");
@@ -299,9 +299,7 @@ export class BarChart extends BaseAxisChart {
 		const { accessibility, rtl } = this.options;
 
 		this.svg.selectAll("rect.bar")
-			.on("click", function(d) {
-				self.dispatchEvent("bar-onClick", d);
-			})
+			.on("click", d => self.dispatchEvent("bar-onClick", d))
 			.on("mouseover", function(d) {
 				select(this)
 					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
@@ -311,17 +309,7 @@ export class BarChart extends BaseAxisChart {
 				self.showTooltip(d, this);
 				self.reduceOpacity(this);
 			})
-			.on("mousemove", function(d) {
-				const tooltipRef = select(self.holder).select("div.chart-tooltip");
-
-				const relativeMousePosition = mouse(self.holder as HTMLElement);
-				tooltipRef.style(
-					"left",
-					!rtl ?
-						relativeMousePosition[0] - Configuration.tooltip.magicLeft2 + "px" :
-							relativeMousePosition[0] - (tooltipRef.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px")
-					.style("top", relativeMousePosition[1] + "px");
-			})
+			.on("mousemove", d => this.tooltip.positionTooltip())
 			.on("mouseout", function(d) {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.bars.mouseout;
 				select(this)

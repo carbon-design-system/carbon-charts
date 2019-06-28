@@ -39,10 +39,11 @@ export class ScatterChart extends BaseAxisChart {
 				.attr("cy", d => this.y(d.value))
 				.attr("r", circleRadius)
 				.attr("fill", d => this.getCircleFill(circleRadius, d))
+				.attr("fill-opacity", d => this.getCircleFillOpacity())
 				.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 
 		// Hide the overlay
-		this.updateOverlay().hide();
+		this.chartOverlay.hide();
 
 		// Dispatch the load event
 		this.dispatchEvent("load");
@@ -67,8 +68,22 @@ export class ScatterChart extends BaseAxisChart {
 	}
 
 	getCircleFill(radius, d) {
-		const circleShouldBeFilled = radius < Configuration.lines.points.minNonFilledRadius;
+		// If the radius of the point is smaller than minimum
+		// Or the chart is only a scatter chart
+		// And not a line chart for instance
+		const circleShouldBeFilled = radius < Configuration.lines.points.minNonFilledRadius || this.constructor === ScatterChart;
+
 		return circleShouldBeFilled ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : "white";
+	}
+
+	getCircleFillOpacity() {
+		// If the chart is only a scatter chart
+		// And not a line chart for instance
+		if (this.constructor === ScatterChart) {
+			return Configuration.options.SCATTER.points.fillOpacity;
+		}
+
+		return null;
 	}
 
 	interpolateValues(newData: any) {
@@ -102,6 +117,7 @@ export class ScatterChart extends BaseAxisChart {
 				.transition(this.getDefaultTransition())
 				.style("opacity", 1)
 				.attr("fill", d => this.getCircleFill(circleRadius, d))
+				.attr("fill-opacity", d => this.getCircleFillOpacity())
 				.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 
 		// Remove dots that are no longer needed
@@ -115,7 +131,7 @@ export class ScatterChart extends BaseAxisChart {
 		this.addDataPointEventListener();
 
 		// Hide the overlay
-		this.updateOverlay().hide();
+		this.chartOverlay.hide();
 
 		// Dispatch the update event
 		this.dispatchEvent("update");
@@ -182,7 +198,7 @@ export class ScatterChart extends BaseAxisChart {
 
 	reduceOpacity(exception) {
 		const circleRadius = this.getCircleRadius();
-		select(exception).attr("fill-opacity", false);
+		select(exception).attr("fill-opacity", this.getCircleFillOpacity());
 		select(exception).attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
 		select(exception).attr("fill", (d: any) => this.getCircleFill(circleRadius, d));
 	}
@@ -192,9 +208,7 @@ export class ScatterChart extends BaseAxisChart {
 		const { accessibility, rtl } = this.options;
 
 		this.svg.selectAll("circle.dot")
-			.on("click", function(d) {
-				self.dispatchEvent("line-onClick", d);
-			})
+			.on("click", d => self.dispatchEvent("line-onClick", d))
 			.on("mouseover", function(d) {
 				select(this)
 					.attr("stroke-width", Configuration.lines.points.mouseover.strokeWidth)
@@ -204,17 +218,7 @@ export class ScatterChart extends BaseAxisChart {
 				self.showTooltip(d, this);
 				self.reduceOpacity(this);
 			})
-			.on("mousemove", function(d) {
-				const tooltipRef = select(self.holder).select("div.chart-tooltip");
-
-				const relativeMousePosition = mouse(self.holder as HTMLElement);
-				tooltipRef.style(
-					"left",
-					!rtl ?
-						relativeMousePosition[0] - Configuration.tooltip.magicLeft2 + "px" :
-							relativeMousePosition[0] - (tooltipRef.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px")
-					.style("top", relativeMousePosition[1] + "px");
-			})
+			.on("mousemove", d => self.tooltip.positionTooltip())
 			.on("mouseout", function(d) {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.lines.points.mouseout;
 				select(this)

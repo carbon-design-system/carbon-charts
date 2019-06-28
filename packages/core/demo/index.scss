@@ -10,46 +10,6 @@ body {
 	font-family: "IBM Plex Sans", Arial, sans-serif;
 }
 
-h1 {
-	font-weight: 600;
-}
-
-h3 {
-	margin-bottom: 40px;
-}
-
-.button {
-	display: table;
-	padding: 12px 15px;
-    margin-bottom: 10px;
-	background: #0063ff;
-	color: #fff;
-	border: none;
-	font-size: 15px;
-    text-decoration: none;
-}
-
-// Carbon overrides
-$due_blue: #0063ff;
-
-.bx--btn--primary {
-	background: $due_blue;
-	outline: none !important;
-    border: none !important;
-
-	&:hover {
-		background: #0059e4;
-	}
-
-	&:active {
-		background: #003992;
-	}
-}
-
-.bx--overflow-menu-options {
-	outline: none;
-}
-
 header.m-demo-header {
 	margin-bottom: 20px;
 	padding: 50px 0;
@@ -83,6 +43,8 @@ header.m-demo-header {
 				.bx--btn {
 					float: left;
 					margin-right: 5px;
+					max-height: 30px;
+					padding-right: 15px;
 
 					&.last {
 						margin-right: 0;
@@ -112,7 +74,16 @@ header.m-demo-header {
 		}
 
 		h1 {
-			margin-bottom: 5px;
+			font-size: 2.25rem;
+			font-weight: 600;
+			margin-top: 20px;
+			margin-bottom: 10px;
+		}
+
+		h3 {
+			font-size: 1.25rem;
+			font-weight: 300;
+			margin-bottom: 45px;
 		}
 	}
 }
@@ -186,19 +157,13 @@ header.m-demo-header {
 	}
 }
 
-div.experimental-switch {
+div.options {
 	display: table;
     width: 100%;
 	max-width: 800px;
 	margin: auto;
 	margin-bottom: 30px;
 	padding: 30px;
-	padding-bottom: 0;
 	background-color: #fff;
 	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
-
-	fieldset:first-child {
-		float: left;
-		margin-right: 45px;
-	}
 }
