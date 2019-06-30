@@ -201,10 +201,14 @@ export class BaseAxisChart extends BaseChart {
 
 			const chartSize = this.getChartSize();
 			const width = chartSize.width - margins.left - margins.right;
-
-			this.x = this.options.rtl ? scaleBand().rangeRound([width, 0]) : scaleBand().rangeRound([0, width]);
-			this.x.padding(Configuration.scales.x.padding);
-			this.x.domain(this.displayData.labels);
+			this.x = scaleBand();
+			let xrange = [width, 0];
+			if (this.options.rtl) {
+				xrange = xrange.reverse();
+			}
+			this.x.rangeRound([xrange[0], xrange[1]]);
+			this.x.padding(Configuration.bars.spacing.datasets)
+				.domain(this.displayData.labels);
 		}
 	}
 
@@ -286,11 +290,10 @@ export class BaseAxisChart extends BaseChart {
 
 		// Align y axis title with y axis
 		yAxisTitleRef.attr("class", "y axis-label")
-		.attr("text-align", "center");
+			.attr("text-align", "center")
+			.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
 
-		if (!this.options.rtl) {
-			yAxisTitleRef.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
-		} else {
+		if (this.options.rtl) {
 			yAxisTitleRef.attr("transform", `rotate(90) translate(${-yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
 		}
 		yAxisTitleRef.text(this.options.scales.y.title);
@@ -358,6 +361,11 @@ export class BaseAxisChart extends BaseChart {
 		const chartSize = this.getChartSize();
 
 		const { scales, rtl } = this.options;
+		let chartSizeWidth = chartSize.width;
+		if (rtl) {
+			chartSizeWidth = chartSizeWidth * (-1);
+		}
+
 		const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
 		const yAxis = rtl ? axisRight(this.y) : axisLeft(this.y);
@@ -382,7 +390,9 @@ export class BaseAxisChart extends BaseChart {
 				.attr("transform", function () {
 					if (rtl) {
 						return `translate(${chartSize.width}, 0)`;
-					} else { return `translate(0, 0)`; }
+					} else {
+						return `translate(0, 0)`;
+					}
 				})
 				// Being cast to any because d3 does not offer appropriate typings for the .call() function
 				.call(yAxis as any);
@@ -391,14 +401,16 @@ export class BaseAxisChart extends BaseChart {
 				.attr("y1", this.y(0))
 				.attr("y2", this.y(0))
 				.attr("x1", 0)
-				.attr("x2", this.options.rtl ? -chartSize.width : chartSize.width);
+				.attr("x2", chartSizeWidth);
 		} else {
 			yAxisRef = this.innerWrap.append("g")
 				.attr("class", "y axis yAxes")
 				.attr("transform", function () {
 					if (rtl) {
 						return `translate(${chartSize.width}, 0)`;
-					} else { return `translate(0, 0)`; }
+					} else {
+						return `translate(0, 0)`;
+					}
 				});
 
 			yAxisRef.call(yAxis);
@@ -408,7 +420,7 @@ export class BaseAxisChart extends BaseChart {
 				.attr("y1", this.y(0))
 				.attr("y2", this.y(0))
 				.attr("x1", 0)
-				.attr("x2", this.options.rtl ? -chartSize.width : chartSize.width)
+				.attr("x2", chartSizeWidth)
 				.attr("stroke", Configuration.scales.domain.color)
 				.attr("fill", Configuration.scales.domain.color)
 				.attr("stroke-width", Configuration.scales.domain.strokeWidth);
@@ -431,12 +443,11 @@ export class BaseAxisChart extends BaseChart {
 			};
 
 			// Align y axis title on the y axis
-			if (!rtl) {
-				this.innerWrap.select(".axis-label.y")
-				.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
+			const yAxisLabel = this.innerWrap.select(".axis-label.y");
+			if (rtl) {
+				yAxisLabel.attr("transform", `rotate(90) translate(${-yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
 			} else {
-				this.innerWrap.select(".axis-label.y")
-				.attr("transform", `rotate(90) translate(${-yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
+				yAxisLabel.attr("transform", `rotate(-90) translate(${yAxisTitleTranslate.x}, ${yAxisTitleTranslate.y})`);
 			}
 		}
 
@@ -461,7 +472,9 @@ export class BaseAxisChart extends BaseChart {
 					.attr("transform", function () {
 						if (rtl) {
 							return `translate(0, 0)`;
-						} else { return `translate(${chartSize.width}, 0)`; }
+						} else {
+							return `translate(${chartSize.width}, 0)`;
+						}
 					})
 
 					// Being cast to any because d3 does not offer appropriate typings for the .call() function

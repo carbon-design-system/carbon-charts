@@ -100,9 +100,14 @@ export class BarChart extends BaseAxisChart {
 		if (xScale) {
 			this.x = xScale;
 		} else {
-			this.x = this.options.rtl ?  scaleBand().rangeRound([width, 0]) : scaleBand().rangeRound([0, width]);
-			this.x.padding(Configuration.bars.spacing.datasets);
-			this.x.domain(this.displayData.labels);
+			this.x = scaleBand();
+			let xrange = [width, 0];
+			if (this.options.rtl) {
+				xrange = xrange.reverse();
+			}
+			this.x.rangeRound([xrange[0], xrange[1]]);
+			this.x.padding(Configuration.bars.spacing.datasets)
+				.domain(this.displayData.labels);
 		}
 
 		// if it's a grouped bar, use additoinal padding so the bars don't group up

@@ -509,9 +509,7 @@ export class BaseChart {
 		}
 
 		const legendItemsArray = this.getLegendItemArray();
-		// const legendItems = Configuration.charts.rtl ? this.container.select(".legend-rtl") : this.container.select(".legend") ;
 		const legendItems = this.container.select(".legend")
-			.attr("font-size", Configuration.legend.fontSize)
 			.attr("font-size", Configuration.legend.fontSize)
 			.selectAll("li.legend-btn")
 			.data(legendItemsArray, d => d.key);
