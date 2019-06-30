@@ -41,6 +41,42 @@ const initializeThemeSelector = () => {
     dropdownDefaultOption.innerHTML = selectedOption.innerText;
 };
 
+const initializeRightToLeftEnabler = () => {
+    const rtlSwitchWrapper = document.querySelector("fieldset.rtl-switch");
+    const rtlCheckbox = (rtlSwitchWrapper.querySelector("input#toggleRTLInput") as HTMLInputElement);
+    const params = new URLSearchParams(location.search);
+
+    // global
+    window["isRTL"] = params.get("rtl") === "true";
+	rtlCheckbox.checked = window["isRTL"];
+
+    // Set click listener for rtl options
+    rtlSwitchWrapper.querySelector("label.bx--toggle__label").addEventListener("click", () => {
+		// Need the setTimeout
+		// Here since carbon toggle
+		// Does not provide a callback
+		// Therefore we wait until the change in toggle
+		// Status takes effect
+        setTimeout(() => {
+            const rtlMode = rtlCheckbox.checked;
+
+            setOrUpdateParam("rtl", rtlMode);
+        });
+    });
+
+    // Set state for right-to-left support
+    if (params.has("rtl") && params.get("rtl") === "true") {
+        rtlCheckbox.checked = true;
+    } else {
+        rtlCheckbox.checked = false;
+    }
+
+    const rtlDefaultOptions = document.querySelector("fieldset.rtl-switch .bx--toggle");
+    const selectedOption = (rtlSwitchWrapper.querySelector("label.bx--toggle__label") as HTMLInputElement);
+    rtlDefaultOptions.innerHTML = selectedOption.innerHTML;
+};
+
 export const initializeDemoOptions = () => {
     initializeThemeSelector();
+    initializeRightToLeftEnabler();
 };

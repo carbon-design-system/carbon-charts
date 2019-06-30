@@ -166,4 +166,9 @@ div.options {
 	padding: 30px;
 	background-color: #fff;
 	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
+
+	fieldset:first-child {
+		float: left;
+		margin-right: 45px;
+	}
 }

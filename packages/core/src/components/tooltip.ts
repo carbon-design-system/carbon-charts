@@ -55,6 +55,52 @@ export class ChartTooltip {
 		this.positionService.setElement(target, pos);
 	}
 
+	// showTooltip(d, clickedElement) {
+	// 	// Rest opacity of all elements in the chart
+	// 	this.resetOpacity();
+
+	// 	// Remove existing tooltips on the page
+	// 	// TODO - Update class to not conflict with other elements on page
+	// 	selectAll(".chart-tooltip").remove();
+
+	// 	// Draw tooltip
+	// 	const tooltip = select(this.holder).append("div")
+	// 		.attr("class", this.options.rtl ? "tooltip-rtl chart-tooltip" : "tooltip chart-tooltip")
+	// 		.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop2 + "px");
+
+
+	// 	let tooltipHTML = "";
+	// 	const formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString("en");
+	// 	if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
+	// 		tooltipHTML += this.generateTooltipHTML(d.label, formattedValue);
+	// 	} else {
+	// 		tooltipHTML += this.generateTooltipHTML(d.datasetLabel, formattedValue);
+	// 	}
+
+	// 	tooltip.append("div").attr("class", "text-box").html(tooltipHTML);
+
+	// 	// Draw tooltip arrow in the right direction
+	// 	if (mouse(this.holder as SVGSVGElement)[0] + (tooltip.node() as Element).clientWidth > this.holder.clientWidth) {
+	// 		tooltip.style(
+	// 			"left",
+	// 			mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft1 + "px"
+	// 		);
+	// 	} else if (this.options.rtl) {
+	// 		tooltip.style(
+	// 			"left",
+	// 			mouse(this.holder as SVGSVGElement)[0] - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicLeft2 + "px");
+	// 	} else {
+	// 		tooltip.style("left", mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.magicLeft2 + "px");
+	// 	}
+
+	// 	tooltip.style("opacity", 0)
+	// 		.transition()
+	// 		.duration(Configuration.tooltip.fadeIn.duration)
+	// 		.style("opacity", 1);
+
+	// 	this.addTooltipEventListeners(tooltip);
+	// }
+
 	show(contentHTML) {
 		// Remove existing tooltips on the page
 		// TODO - Update class to not conflict with other elements on page
