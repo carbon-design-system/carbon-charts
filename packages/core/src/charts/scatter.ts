@@ -38,7 +38,7 @@ export class ScatterChart extends Chart {
 					}
 				],
 				{
-					direction: LayoutDirection.COLUMN_REVERSE
+					direction: LayoutDirection.ROW
 				}
 			)
 		];

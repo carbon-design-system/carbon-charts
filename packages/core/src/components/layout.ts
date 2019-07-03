@@ -52,7 +52,7 @@ export class LayoutComponent extends ChartComponent {
 		// And calculate sum of sizes
 		const directionIsReversed = this.options.direction === LayoutDirection.ROW_REVERSE || this.options.direction === LayoutDirection.COLUMN_REVERSE;
 		const hierarchyChildren = directionIsReversed ? this.children.reverse() : this.children;
-		const root = hierarchy({
+		let root = hierarchy({
 				children: hierarchyChildren
 			})
 			.sum((d: any) => d.size);
@@ -121,23 +121,23 @@ console.log("root.leaves()", root.leaves())
 
 		// Pass children data to the hierarchy layout
 		// And calculate sum of sizes
-		const root2 = hierarchy({
+		root = hierarchy({
 			children: hierarchyChildren
 		})
 		.sum((d: any) => d.size)
-		console.log("root2.leaves()", root2.leaves())
+		console.log("root2.leaves()", root.leaves())
 
 		// Compute the position of all elements within the layout
 		treemap()
 			.tile(tileType)
 			.size([width, height])
 			.padding(0)
-			(root2);
+			(root);
 
 		// Add new SVGs to the DOM for each layout child
 		svg
 			.selectAll("svg")
-			.data(root2.leaves())
+			.data(root.leaves())
 			.attr("x", (d: any) => d.x0)
 			.attr("y", (d: any) => d.y0)
 			.attr("width", (d: any) => d.x1 - d.x0)
