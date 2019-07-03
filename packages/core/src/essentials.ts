@@ -1,5 +1,4 @@
 // Internal Imports
-import { ChartConfig, BaseChartOptions } from "./interfaces/index";
 import { DOMUtils } from "./dom-utils";
 
 export class ChartEssentials {
