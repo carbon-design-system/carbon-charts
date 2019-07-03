@@ -166,7 +166,6 @@ export class BaseChart {
 				// Perform the draw or update chart
 				if (initialDraw) {
 					this.initialDraw();
-					this.drawTitle();
 				} else {
 					if (removedItems.length > 0 || newItems.length > 0) {
 						this.addOrUpdateLegend();
@@ -174,6 +173,7 @@ export class BaseChart {
 
 					this.update();
 				}
+				this.drawTitle();
 			} else {
 				this.chartOverlay.show(Configuration.options.BASE.overlay.types.noData);
 			}
@@ -379,11 +379,11 @@ export class BaseChart {
 			.text(this.options.title);
 		}
 		const titleMargin = Configuration.charts.title.marginBottom;
-		const translateArr = Tools.getTranslations(this.innerWrap);
+		const translateObj = Tools.getTranslationValues(this.innerWrap.node());
 
 		// add padding for title, keep other translations
 		this.innerWrap
-		.attr("transform", `translate(${translateArr[0]}, ${+translateArr[1] + titleMargin})`);
+		.attr("transform", `translate(${translateObj.tx}, ${+translateObj.ty + titleMargin})`);
 	}
 
 	setClickableLegend() {

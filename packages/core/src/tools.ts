@@ -81,6 +81,17 @@ export namespace Tools {
 			height: parseFloat(el.style.height.replace("px", "") || el.offsetHeight)
 		};
 	}
+	/**
+	 * Returns an elements's x and y translations from its computed style
+	 * @param {HTMLElement} element
+	 * @returns an object containing the x and y translations
+	 */
+	export function getTranslationValues(elementRef: HTMLElement) {
+		const transformMatrix = window.getComputedStyle(elementRef).getPropertyValue("transform").replace(/\s/g, "");
+		// returns matrix(a, b, c, d, tx, ty) of transformation values (2d transform)
+		const transformValues = transformMatrix.substring(transformMatrix.indexOf("(") + 1, transformMatrix.indexOf(")")).split(",");
+		return {tx: transformValues[4], ty: transformValues[5]};
+	}
 
 	/**************************************
 	 *  Formatting & calculations         *
@@ -220,28 +231,7 @@ export namespace Tools {
 
 	// ================================================================================
 	// Style Helpers
-	/**
-	 * Retrieves the element transform matrix string, and returns the translateX string
-	 *
-	 * @export
-	 * @param {HTMLElement} element
-	 * @returns The translateX value for element
-	 */
-	export function getXTransformsValue(element: HTMLElement) {
-		const transformMatrixArray = window.getComputedStyle(element).getPropertyValue("transform").split(",");
-
-		return transformMatrixArray[4];
-	}
-
-	/**
-	 * Returns an array of the translations from the element's attributes.
-	 * @param elementRef
-	 */
-	export function getTranslations(elementRef: any) {
-		const transform = elementRef.attr("transform");
-		const translateArr = transform.substring(transform.indexOf("(") + 1, transform.indexOf(")")).split(",");
-		return translateArr;
-	}
+	// ================================================================================
 
 	export const getProperty = (object, ...propPath) => {
 		let position = object;
