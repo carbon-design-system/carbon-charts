@@ -1,4 +1,4 @@
-# `@carbon/charts-vue`
+# `@carbon/charts-angular`
 
 > Carbon Charting Angular Wrappers
 
@@ -18,3 +18,6 @@ instead:
 ```bash
 yarn add @carbon/charts-angular
 ```
+
+## Sample Project
+[Edit on Stackblitz](https://stackblitz.com/edit/carbon-charts-angular-vznxot)

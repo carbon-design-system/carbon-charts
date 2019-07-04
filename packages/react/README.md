@@ -17,3 +17,6 @@ instead:
 ```bash
 yarn add @carbon/charts-react
 ```
+
+## Sample Project
+[![Edit Carbon Charts - React](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/pppmo3ollx?fontsize=14)
