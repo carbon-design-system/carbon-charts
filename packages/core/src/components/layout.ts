@@ -152,6 +152,7 @@ export class LayoutComponent extends ChartComponent {
 				.lower();
 	}
 
+	// Pass on model to children as well
 	setModel(newObj) {
 		super.setModel(newObj);
 
@@ -160,6 +161,7 @@ export class LayoutComponent extends ChartComponent {
 		});
 	}
 
+	// Pass on essentials to children as well
 	setEssentials(newObj) {
 		super.setEssentials(newObj);
 
