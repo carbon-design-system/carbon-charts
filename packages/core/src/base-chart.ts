@@ -373,17 +373,19 @@ export class BaseChart {
 	 */
 	drawTitle() {
 		if (this.options.title) {
-			this.svg
-			.append("text")
-			.classed("chart-title", true)
-			.text(this.options.title);
-		}
-		const titleMargin = Configuration.charts.title.marginBottom;
-		const translateObj = Tools.getTranslationValues(this.innerWrap.node());
+			// to add the padding only once
+			if (this.svg.select("text.chart-title").empty()) {
+				const titleMargin = Configuration.charts.title.marginBottom;
+				const translateObj = Tools.getTranslationValues(this.innerWrap.node());
 
-		// add padding for title, keep other translations
-		this.innerWrap
-		.attr("transform", `translate(${translateObj.tx}, ${+translateObj.ty + titleMargin})`);
+				// add padding for title, keep other translations
+				this.innerWrap
+				.attr("transform", `translate(${translateObj.tx}, ${+translateObj.ty + titleMargin})`);
+			}
+			// adds title or gets reference to title
+			const titleRef = Tools.appendOrSelect(this.svg, "text.chart-title");
+			titleRef.text(this.options.title);
+		}
 	}
 
 	setClickableLegend() {
