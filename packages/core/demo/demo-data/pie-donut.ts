@@ -6,7 +6,6 @@ export const pieOptions = {
 	containerResizable: true,
 	colors,
 	title: "Pie Chart",
-	theme: "dark"
 };
 
 export const donutOptions = {
