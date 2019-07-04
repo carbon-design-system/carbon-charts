@@ -2,7 +2,10 @@
   "name": "@carbon/charts-vue",
   "version": "0.12.4",
   "description": "Carbon charting components for Vue",
+<<<<<<< HEAD
   "main": "charts-vue.umd.min.js",
+=======
+>>>>>>> 636278037520bda426727cd55fa84228bf7fc19a
   "repository": {
 		"type": "git",
 		"url": "git@github.com:IBM/carbon-charts.git"
@@ -32,6 +35,10 @@
 		"sass",
 		"scss"
 	],
+<<<<<<< HEAD
+=======
+  "main": "charts-vue.umd.min.js",
+>>>>>>> 636278037520bda426727cd55fa84228bf7fc19a
   "scripts": {
     "build": "bash build.sh",
     "lint": "vue-cli-service lint ./src/index.js",
