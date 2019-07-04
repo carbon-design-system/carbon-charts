@@ -2,9 +2,11 @@ dist: trusty
 language: node_js
 node_js:
  - '8'
-before_install: .travis/before_install.sh
-install:
-  - npm install
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.6.0
+  - export PATH="$HOME/.yarn/bin:$PATH"
+  - .travis/before_install.sh
+install: yarn --offline
 script: lerna run lint
 sudo: false
 deploy:
