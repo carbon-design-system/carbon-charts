@@ -9,9 +9,6 @@
 		<a href="https://travis-ci.org/carbon-design-system/carbon-charts">
 			<img src="https://api.travis-ci.org/carbon-design-system/carbon-charts.svg?branch=master" />
 		</a>
-		<a href="https://app.netlify.com/sites/carbon-charts/deploys">
-			<img src="https://api.netlify.com/api/v1/badges/8dd7641f-6f80-498d-aa95-4716a0fa44e3/deploy-status" />
-		</a>
 		<a href="https://www.npmjs.com/package/@carbon/charts">
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
 		</a>
@@ -35,6 +32,13 @@
 
 Run:
 ```bash
+yarn global add @storybook/cli
+
+yarn add @carbon/charts
+```
+
+Or if you use NPM:
+```bash
 npm i -g @storybook/cli
 
 npm install @carbon/charts --save
@@ -45,15 +49,25 @@ npm install @carbon/charts --save
 - [Vanilla JS](https://carbon-design-system.github.io/carbon-charts/)
 - [Angular](https://carbon-design-system.github.io/carbon-charts/angular)
 - [React](https://carbon-design-system.github.io/carbon-charts/react)
+- [Vue](https://carbon-design-system.github.io/carbon-charts/vue)
 
 **Docs:** <https://carbon-design-system.github.io/carbon-charts/documentation/>
 
-### Code Sample
+### Code Samples
 <p align="center">
-	<img src="assets/demo-stacked-bar.png" alt="Stacked Bar Chart" width=600 />
+	<img src="assets/demo-stacked-bar.png" alt="Stacked Bar Chart" width="600" />
 </p>
 
-[![Edit Carbon Charts - Vanilla](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/2plrn2jp7r)
+<p align="center">
+	<a href="https://codesandbox.io/s/149vrzo62l">
+		<img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit Carbon Charts - Vanilla" />
+	</a>
+</p>
+
+- [Vanilla JS](https://codesandbox.io/s/149vrzo62l)
+- [Angular](https://codesandbox.io/s/k32kjy5qnr)
+- [React](https://codesandbox.io/s/pppmo3ollx)
+- [Vue](https://codesandbox.io/s/040w2rqrxp)
 
 ### Run Charts locally
 1. Fork the project and clone your fork:
@@ -65,25 +79,25 @@ npm install @carbon/charts --save
    cd carbon-charts
    ```
 
-2. Run `npm install` to install Node.js dependencies.
-3. Run `npm run demo:server` to serve up the demo locally.
+2. Run `yarn` to install Node.js dependencies.
+3. Run `yarn run demo:server` to serve up the demo locally.
 4. Finally, open <http://localhost:9001/> in your browser. SPOILER ALERT: There's no "Hello, World!"
 
 ## Component status
 :white_check_mark: Stable :hourglass_flowing_sand: In progress
 
-| Component   | Vanilla            | Angular                  | React |
-|-------------|--------------------|--------------------------|-------|
-| Simple Bar  | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
-| Grouped Bar | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
-| Stacked Bar | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
-| Donut       | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
-| Line        | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
-| Curved Line | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
-| Pie         | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
-| Step        | :white_check_mark: | :white_check_mark:       | :white_check_mark:  |
-| Combo       | :hourglass_flowing_sand:               | :hourglass_flowing_sand:                     | :hourglass_flowing_sand:  |
-| Area        | Soon               | Soon                     | :hourglass_flowing_sand:  |
+| Component   | Vanilla            | Angular                  | React | Vue |
+|-------------|--------------------|--------------------------|-------|-------|
+| Simple Bar  | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Grouped Bar | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Stacked Bar | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Donut       | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Line        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Curved Line | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Pie         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Step        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :hourglass_flowing_sand:
+| Combo       | :hourglass_flowing_sand: | - | - | -
+| Area        | Soon | - | - | - |
 
 ## Bugs and feature requests
 
