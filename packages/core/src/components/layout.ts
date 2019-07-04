@@ -42,11 +42,9 @@ export class LayoutComponent extends ChartComponent {
 	render() {
 		const self = this;
 
-		console.log("rend 21341")
-		const { width, height } = this._essentials.domUtils.getChartSize();
-
 		// Get parent SVG to render inside of
 		const svg = this._parent;
+		const { width, height } = this._essentials.domUtils.getSVGSize(svg);
 
 		// Pass children data to the hierarchy layout
 		// And calculate sum of sizes
@@ -65,10 +63,7 @@ export class LayoutComponent extends ChartComponent {
 		treemap()
 			.tile(tileType)
 			.size([width, height])
-			.padding(0)
 			(root);
-
-console.log("root.leaves()", root.leaves())
 
 		// TODORF - Remove
 		const testColors = ["e41a1c", "377eb8", "4daf4a", "984ea3", "ff7f00", "ffff33", "a65628", "f781bf", "999999"]
@@ -92,7 +87,6 @@ console.log("root.leaves()", root.leaves())
 					// Render preffered & fixed items
 					const growth = Tools.getProperty(d, "data", "growth", "x");
 					if (growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED) {
-						console.log("ITEM render", d)
 						itemComponent.render();
 					}
 				})
@@ -101,8 +95,8 @@ console.log("root.leaves()", root.leaves())
 					const growth = Tools.getProperty(d, "data", "growth", "x");
 					if (growth === LayoutGrowth.PREFERRED) {
 						const matchingSVGWidth = self._essentials.domUtils.getSVGSize(select(this)).width;
-						const svgWidth = (svg.node() as any).clientWidth;
-		
+						const svgWidth = (svg.node() as any).clientWidth || svg.attr("width");
+
 						d.data.size = (matchingSVGWidth / svgWidth) * 100;
 					}
 				});
@@ -117,15 +111,12 @@ console.log("root.leaves()", root.leaves())
 				child.size = 100 - (this.getPrefferedAndFixedSizeSum() as any);
 			});
 
-		console.log("this.children", this.children);
-
 		// Pass children data to the hierarchy layout
 		// And calculate sum of sizes
 		root = hierarchy({
 			children: hierarchyChildren
 		})
 		.sum((d: any) => d.size)
-		console.log("root2.leaves()", root.leaves())
 
 		// Compute the position of all elements within the layout
 		treemap()
@@ -146,12 +137,13 @@ console.log("root.leaves()", root.leaves())
 				const itemComponent = d.data.component;
 				const growth = Tools.getProperty(d, "data", "growth", "x");
 				if (growth === LayoutGrowth.STRETCH) {
-					console.log("item RENDER", d)
 					itemComponent.render();
 				}
 			})
 			.append("rect")
-				.attr("width", (d: any) => d.x1 - d.x0)
+				.attr("width", (d: any) => {
+					return d.x1 - d.x0
+				})
 				.attr("height", (d: any) => d.y1 - d.y0)
 				.style("stroke", (d, i) => testColors[i])
 				.style("stroke-width", 2)

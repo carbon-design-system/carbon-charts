@@ -23,7 +23,61 @@ export class ScatterChart extends Chart {
 			new LayoutComponent(
 				[
 					{
-						component: new Axis(),
+						component: new LayoutComponent(
+							[
+								{
+									component: new Legend(),
+									growth: {
+										x: LayoutGrowth.PREFERRED,
+										y: LayoutGrowth.FIXED
+									}
+								},
+								{
+									component: new LayoutComponent(
+										[
+											{
+												component: new Legend(),
+												growth: {
+													x: LayoutGrowth.PREFERRED,
+													y: LayoutGrowth.FIXED
+												}
+											},
+											{
+												component: new Legend(),
+												growth: {
+													x: LayoutGrowth.STRETCH,
+													y: LayoutGrowth.FIXED
+												}
+											},
+											{
+												component: new Legend(),
+												growth: {
+													x: LayoutGrowth.PREFERRED,
+													y: LayoutGrowth.FIXED
+												}
+											},
+										],
+										{
+											direction: LayoutDirection.ROW
+										}
+									),
+									growth: {
+										x: LayoutGrowth.STRETCH,
+										y: LayoutGrowth.FIXED
+									}
+								},
+								{
+									component: new Legend(),
+									growth: {
+										x: LayoutGrowth.PREFERRED,
+										y: LayoutGrowth.FIXED
+									}
+								},
+							],
+							{
+								direction: LayoutDirection.COLUMN
+							}
+						),
 						growth: {
 							x: LayoutGrowth.STRETCH,
 							y: LayoutGrowth.FIXED
@@ -35,12 +89,12 @@ export class ScatterChart extends Chart {
 							x: LayoutGrowth.PREFERRED,
 							y: LayoutGrowth.FIXED
 						}
-					}
+					},
 				],
 				{
 					direction: LayoutDirection.ROW
 				}
 			)
-		];
+		]
 	}
 }
