@@ -67,8 +67,11 @@ export class LayoutComponent extends ChartComponent {
 
 		// TODORF - Remove
 		const testColors = ["e41a1c", "377eb8", "4daf4a", "984ea3", "ff7f00", "ffff33", "a65628", "f781bf", "999999"]
-		// Add new SVGs to the DOM for each layout child
+	
+		// TODORF - Remove
+		const horizontal = (this.options.direction === LayoutDirection.ROW || this.options.direction === LayoutDirection.ROW_REVERSE);
 
+		// Add new SVGs to the DOM for each layout child
 		svg
 			.selectAll("svg")
 			.data(root.leaves())
@@ -94,8 +97,8 @@ export class LayoutComponent extends ChartComponent {
 					// Calculate preffered children sizes after internal rendering
 					const growth = Tools.getProperty(d, "data", "growth", "x");
 					if (growth === LayoutGrowth.PREFERRED) {
-						const matchingSVGWidth = self._essentials.domUtils.getSVGSize(select(this)).width;
-						const svgWidth = (svg.node() as any).clientWidth || svg.attr("width");
+						const matchingSVGWidth = horizontal ? self._essentials.domUtils.getSVGSize(select(this)).width : self._essentials.domUtils.getSVGSize(select(this)).height;
+						const svgWidth = horizontal ? (svg.node() as any).clientWidth || svg.attr("width") : (svg.node() as any).clientHeight || svg.attr("height");
 
 						d.data.size = (matchingSVGWidth / svgWidth) * 100;
 					}
@@ -145,8 +148,8 @@ export class LayoutComponent extends ChartComponent {
 					return d.x1 - d.x0
 				})
 				.attr("height", (d: any) => d.y1 - d.y0)
-				.style("stroke", (d, i) => testColors[i])
-				.style("stroke-width", 2)
+				// .style("stroke", (d, i) => testColors[i])
+				// .style("stroke-width", 2)
 				.style("fill-opacity", 0.2)
 				.style("fill", (d, i) => testColors[i])
 				.lower();

@@ -22,10 +22,10 @@ export enum ChartType {
  * enum of all possible axis positions
  */
 export enum AxisPositions {
-	LEFT = "left",
-	RIGHT = "right",
-	TOP = "top",
-	BOTTOM = "bottom"
+	LEFT = "axisLeft",
+	RIGHT = "axisRight",
+	TOP = "axisTop",
+	BOTTOM = "axisBottom"
 }
 
 /**
