@@ -1,10 +1,11 @@
 // Internal Imports
 import { ChartComponent } from "./base-component";
 import * as Configuration from "../configuration";
+import { AxisPositions } from "../interfaces";
 
 // D3 Imports
 import { scaleBand, ScaleBand, ScaleLinear, scaleLinear } from "d3-scale";
-import { axisBottom, axisLeft, axisRight, AxisScale, AxisDomain } from "d3-axis";
+import { axisBottom, axisLeft, axisRight, AxisScale, AxisDomain, axisTop } from "d3-axis";
 import { select } from "d3-selection";
 import { min, max } from "d3-array";
 
@@ -13,18 +14,25 @@ export class Axis extends ChartComponent {
 	y: ScaleLinear<any, any>;
 	y2: ScaleLinear<any, any>;
 	thresholdDimensions: any;
+	options: any;
 
 	constructor(options?: any) {
 		super();
+
+		this.options = options;
 	}
 
 	render() {
 		console.log("rander AXIS");
 		this.updateXandYGrid();
-		this.setXScale();
-		this.setXAxis();
-		this.setYScale();
-		this.setYAxis();
+
+		if (this.options.axisType === AxisPositions.TOP || this.options.axisType === AxisPositions.BOTTOM) {
+			this.setXScale();
+			this.setXAxis();
+		} else {
+			this.setYScale();
+			this.setYAxis();
+		}
 	}
 
 	update() {
@@ -55,20 +63,27 @@ export class Axis extends ChartComponent {
 		const svg = this._parent;
 		// const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
-		const xAxis = axisBottom(this.x)
-			.tickSize(0)
-			.tickSizeOuter(0);
+		const axisFunction = this.options.axisType === AxisPositions.TOP ? axisTop : axisBottom;
+		console.log("axisFunction", axisFunction)
+		const xAxis = axisFunction(this.x)
+			// .tickSize(0)
+			// .tickSizeOuter(0);
 
 		const xAxisRef = appendOrSelect(svg, "g.x.axis")
 			.call(xAxis);
 
+		if (this.options.axisType === AxisPositions.TOP) {
+			const heightShift = this._essentials.domUtils.getSVGSize(xAxisRef).height;
+			xAxisRef.attr("transform", `translate(0, ${heightShift - 1})`);
+		}
+
 		// Update the position of the pieces of text inside x-axis
-		xAxisRef.selectAll("g.tick text")
-			.attr("y", Configuration.scales.magicY1)
-			.attr("x", Configuration.scales.magicX1)
-			.attr("dy", ".35em")
-			// .attr("transform", `rotate(${Configuration.scales.xAxisAngle})`)
-			.style("text-anchor", "end");
+		// xAxisRef.selectAll("g.tick text")
+		// 	.attr("y", Configuration.scales.magicY1)
+		// 	.attr("x", Configuration.scales.magicX1)
+		// 	.attr("dy", ".35em")
+		// 	// .attr("transform", `rotate(${Configuration.scales.xAxisAngle})`)
+		// 	.style("text-anchor", "end");
 			// .call(text => this.wrapTick(text));
 
 		// // get the tickHeight after the ticks have been wrapped
@@ -150,10 +165,11 @@ export class Axis extends ChartComponent {
 		const { scales } = this._model.getOptions();
 		// const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
-		const yAxis = axisLeft(this.y)
+		const axisFunction = this.options.axisType === AxisPositions.LEFT ? axisLeft : axisRight;
+		const yAxis = axisFunction(this.y)
 			.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks)
 			.tickSize(0)
-			.tickFormat(scales.y.formatter as any);
+			// .tickFormat(scales.y.formatter as any);
 
 		let yAxisRef = svg.select("g.y.axis");
 		const horizontalLine = svg.select("line.domain");
@@ -164,7 +180,7 @@ export class Axis extends ChartComponent {
 		// If the <g class="y axis"> exists in the chart SVG, just update it
 		if (yAxisRef.nodes().length > 0) {
 			yAxisRef
-				.attr("transform", "translate(30, 0)")
+				// .attr("transform", "translate(30, 0)")
 				// .transition(t)
 				// Casting to any because d3 does not offer appropriate typings for the .call() function
 				.call(yAxis as any);
@@ -178,7 +194,7 @@ export class Axis extends ChartComponent {
 		} else {
 			yAxisRef = svg.append("g")
 				.attr("class", "y axis yAxes")
-				.attr("transform", "translate(30, 0)");
+				// .attr("transform", "translate(30, 0)");
 
 			yAxisRef.call(yAxis);
 
@@ -191,6 +207,11 @@ export class Axis extends ChartComponent {
 			// 	.attr("stroke", Configuration.scales.domain.color)
 			// 	.attr("fill", Configuration.scales.domain.color)
 			// 	.attr("stroke-width", Configuration.scales.domain.strokeWidth);
+		}
+
+		if (this.options.axisType === AxisPositions.LEFT) {
+			const widthShift = this._essentials.domUtils.getSVGSize(yAxisRef).width;
+			yAxisRef.attr("transform", `translate(${widthShift - 1}, 0)`);
 		}
 
 		// const tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
