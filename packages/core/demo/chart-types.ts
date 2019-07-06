@@ -15,7 +15,9 @@ const {
 	curvedLineData,
 	lineData,
 	lineOptions,
+	// Scatter
 	scatterData,
+	scatterOptions,
 	// Combo
 	comboData,
 	comboOptions
@@ -91,7 +93,7 @@ export const chartTypes = [
 	{
 		id: "scatter",
 		name: "scatter",
-		options: lineOptions,
+		options: scatterOptions,
 		data: scatterData
 	}
 ];

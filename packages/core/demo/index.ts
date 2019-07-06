@@ -1,10 +1,10 @@
 import {
 	BarChart,
+	ScatterChart,
 	LineChart,
 	PieChart,
 	DonutChart,
-	ComboChart,
-	ScatterChart
+	ComboChart
 } from "../src/index";
 
 // Styles

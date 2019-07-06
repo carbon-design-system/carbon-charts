@@ -7,10 +7,17 @@ import { ChartConfig, ScatterChartOptions, ChartType } from "./configuration";
 import { Tools } from "./tools";
 
 export class ScatterChart extends BaseAxisChart {
-	options: ScatterChartOptions = Tools.merge({}, Configuration.options.SCATTER);
+	options: ScatterChartOptions;
 
 	constructor(holder: Element, configs: ChartConfig<ScatterChartOptions>) {
 		super(holder, configs);
+
+		// initialize options
+		if (configs.options) {
+			this.options = Tools.merge({}, Configuration.options.SCATTER, configs.options);
+		} else {
+			this.options = Tools.merge({}, Configuration.options.SCATTER);
+		}
 
 		this.options.type = ChartType.SCATTER;
 	}
