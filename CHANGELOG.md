@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/IBM/carbon-charts/compare/v0.12.5...v1.0.0) (2019-07-06)
+
+
+### Bug Fixes
+
+* **core:** Fix axis labels for scatter-chart and seperate demo data ([79dbe6c](https://github.com/IBM/carbon-charts/commit/79dbe6c)), closes [#215](https://github.com/IBM/carbon-charts/issues/215)
+
+
+### BREAKING CHANGES
+
+* **core:** N/A
+
+
+
+
+
 ## [0.12.5](https://github.com/IBM/carbon-charts/compare/v0.12.4...v0.12.5) (2019-07-04)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
