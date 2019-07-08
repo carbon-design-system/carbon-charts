@@ -131,8 +131,17 @@ div.chart-holder {
   .chart-wrapper svg.chart-svg {
     overflow: visible !important;
     /*
+		Chart titles
+		*/
+    /*
 		Axes
 		*/ }
+    .chart-wrapper svg.chart-svg text.chart-title {
+      font-size: 14px;
+      line-height: 16px;
+      font-weight: 600;
+      padding-bottom: 8px;
+      dominant-baseline: hanging; }
     .chart-wrapper svg.chart-svg g.yAxes.axis path.domain {
       stroke: none; }
     .chart-wrapper svg.chart-svg g.x.axis path.domain {
@@ -203,7 +212,9 @@ div.chart-holder {
     .chart-wrapper .legend-btn span {
       display: inline; }
     .chart-wrapper .legend-btn text {
+      font-family: "IBM Plex Sans condensed";
       font-size: 12px;
+      line-height: 16px;
       max-width: 100px;
       text-overflow: ellipsis;
       white-space: nowrap;

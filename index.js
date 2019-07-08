@@ -350,7 +350,8 @@ var groupedBarOptions = {
         size: "compact"
     },
     legendClickable: true,
-    containerResizable: true
+    containerResizable: true,
+    title: "Bar Chart"
 };
 // Simple bar
 var simpleBarData = {
@@ -386,7 +387,8 @@ var simpleBarOptions = {
     containerResizable: true,
     bars: {
         maxWidth: 50
-    }
+    },
+    title: "Simple Bar Chart"
 };
 // Stacked bar
 var stackedBarData = {
@@ -455,7 +457,8 @@ var stackedBarOptions = {
         size: "compact"
     },
     legendClickable: true,
-    containerResizable: true
+    containerResizable: true,
+    title: "Stacked Bar Chart",
 };
 
 
@@ -567,7 +570,8 @@ var comboOptions = {
         }
     },
     legendClickable: true,
-    containerResizable: true
+    containerResizable: true,
+    title: "Combo Chart"
 };
 
 
@@ -707,7 +711,8 @@ var curvedLineOptions = {
         name: "curveNatural"
     },
     legendClickable: true,
-    containerResizable: true
+    containerResizable: true,
+    title: "Line Chart"
 };
 var lineData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -775,7 +780,8 @@ var lineOptions = {
         }
     },
     legendClickable: true,
-    containerResizable: true
+    containerResizable: true,
+    title: "Line Chart"
 };
 var scatterData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -837,7 +843,8 @@ var pieOptions = {
     accessibility: false,
     legendClickable: true,
     containerResizable: true,
-    colors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"]
+    colors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
+    title: "Pie Chart",
 };
 var donutOptions = {
     accessibility: false,
@@ -847,7 +854,8 @@ var donutOptions = {
     center: {
         label: "Products",
         number: 300000
-    }
+    },
+    title: "Donut Chart"
 };
 var pieData = {
     labels: ["2V2N 9KYPM version 1", "L22I P66EP L22I P66EP L22I P66EP", "JQAI 2M4L1", "J9DZ F37AP",
@@ -1729,7 +1737,7 @@ var BaseAxisChart = /** @class */ (function (_super) {
     // TODO - Refactor
     BaseAxisChart.prototype.getChartSize = function (container) {
         if (container === void 0) { container = this.container; }
-        var ratio, marginForLegendTop;
+        var ratio, marginForLegendTop, marginForChartTitle;
         if (container.node().clientWidth > _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].widthBreak) {
             ratio = _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].magicRatio;
             marginForLegendTop = 0;
@@ -1740,8 +1748,9 @@ var BaseAxisChart = /** @class */ (function (_super) {
         }
         // Store computed actual size, to be considered for change if chart does not support axis
         var marginsToExclude = _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].margin.left + _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].margin.right;
+        marginForChartTitle = this.options.title ? _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].title.marginBottom : 0;
         var computedChartSize = {
-            height: container.node().clientHeight - marginForLegendTop,
+            height: container.node().clientHeight - marginForLegendTop - marginForChartTitle,
             width: (container.node().clientWidth - marginsToExclude) * ratio
         };
         return {
@@ -2316,6 +2325,7 @@ var BaseChart = /** @class */ (function () {
                     }
                     _this.update();
                 }
+                _this.drawTitle();
             }
             else {
                 _this.chartOverlay.show(_configuration__WEBPACK_IMPORTED_MODULE_3__["options"].BASE.overlay.types.noData);
@@ -2411,7 +2421,7 @@ var BaseChart = /** @class */ (function () {
     // TODO - Refactor
     BaseChart.prototype.getChartSize = function (container) {
         if (container === void 0) { container = this.container; }
-        var ratio, marginForLegendTop;
+        var ratio, marginForLegendTop, marginForChartTitle;
         if (container.node().clientWidth > _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].widthBreak) {
             ratio = _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].magicRatio;
             marginForLegendTop = 0;
@@ -2422,8 +2432,9 @@ var BaseChart = /** @class */ (function () {
         }
         // Store computed actual size, to be considered for change if chart does not support axis
         var marginsToExclude = 0;
+        marginForChartTitle = this.options.title ? _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].title.marginBottom : 0;
         var computedChartSize = {
-            height: container.node().clientHeight - marginForLegendTop,
+            height: container.node().clientHeight - marginForLegendTop - marginForChartTitle,
             width: (container.node().clientWidth - marginsToExclude) * ratio
         };
         // If chart is of type pie or donut, width and height should equal to the min of the width and height computed
@@ -2486,6 +2497,25 @@ var BaseChart = /** @class */ (function () {
             }
         });
         resizeObserver.observe(this.holder);
+    };
+    /**
+     * Draws title within the Chart's svg element.
+     * @param title
+     */
+    BaseChart.prototype.drawTitle = function () {
+        if (this.options.title) {
+            // to add the padding only once
+            if (this.svg.select("text.chart-title").empty()) {
+                var titleMargin = _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].title.marginBottom;
+                var translateObj = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].getTranslationValues(this.innerWrap.node());
+                // add padding for title, keep other translations
+                this.innerWrap
+                    .attr("transform", "translate(" + translateObj.tx + ", " + (+translateObj.ty + titleMargin) + ")");
+            }
+            // adds title or gets reference to title
+            var titleRef = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].appendOrSelect(this.svg, "text.chart-title");
+            titleRef.text(this.options.title);
+        }
     };
     BaseChart.prototype.setClickableLegend = function () {
         var self = this;
@@ -3438,6 +3468,9 @@ var charts = {
     minWidth: 150,
     widthBreak: 600,
     marginForLegendTop: 40,
+    title: {
+        marginBottom: 24
+    },
     magicRatio: 0.7,
     magicMoreForY2Axis: 70,
     axisCharts: {
@@ -4155,7 +4188,7 @@ var PieChart = /** @class */ (function (_super) {
             .attr("width", diameter + "px")
             .attr("height", diameter + "px");
         this.innerWrap
-            .style("transform", "translate(" + radius + "px," + radius + "px)")
+            .attr("transform", "translate(" + radius + "," + radius + ")")
             .attr("width", diameter + "px")
             .attr("height", diameter + "px")
             .attr("preserveAspectRatio", "xMinYMin");
@@ -5238,6 +5271,34 @@ var Tools;
         };
     }
     Tools.getDimensions = getDimensions;
+    /**
+     * Returns element if it  exists, otherwise creates and returns reference to item
+     * @param parent Element parent to query within
+     * @param query The element to return from the DOM
+     */
+    function appendOrSelect(parent, query) {
+        var l = query.split(".");
+        var elementToAppend = l[0];
+        var g = parent.select(query);
+        if (g.empty()) {
+            return parent.append(elementToAppend)
+                .attr("class", l.slice(1).join(" "));
+        }
+        return g;
+    }
+    Tools.appendOrSelect = appendOrSelect;
+    /**
+     * Returns an elements's x and y translations from its computed style
+     * @param {HTMLElement} element
+     * @returns an object containing the x and y translations
+     */
+    function getTranslationValues(elementRef) {
+        var transformMatrix = window.getComputedStyle(elementRef).getPropertyValue("transform").replace(/\s/g, "");
+        // returns matrix(a, b, c, d, tx, ty) of transformation values (2d transform)
+        var transformValues = transformMatrix.substring(transformMatrix.indexOf("(") + 1, transformMatrix.indexOf(")")).split(",");
+        return { tx: transformValues[4], ty: transformValues[5] };
+    }
+    Tools.getTranslationValues = getTranslationValues;
     /**************************************
      *  Formatting & calculations         *
      *************************************/
@@ -5365,18 +5426,7 @@ var Tools;
     Tools.moveToFront = moveToFront;
     // ================================================================================
     // Style Helpers
-    /**
-     * Retrieves the element transform matrix string, and returns the translateX string
-     *
-     * @export
-     * @param {HTMLElement} element
-     * @returns The translateX value for element
-     */
-    function getXTransformsValue(element) {
-        var transformMatrixArray = window.getComputedStyle(element).getPropertyValue("transform").split(",");
-        return transformMatrixArray[4];
-    }
-    Tools.getXTransformsValue = getXTransformsValue;
+    // ================================================================================
     Tools.getProperty = function (object) {
         var propPath = [];
         for (var _i = 1; _i < arguments.length; _i++) {

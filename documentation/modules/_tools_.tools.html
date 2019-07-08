@@ -77,6 +77,7 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_tools_.tools.html#addclosebtn" class="tsd-kind-icon">add<wbr>Close<wbr>Btn</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_tools_.tools.html#appendorselect" class="tsd-kind-icon">append<wbr>OrSelect</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_tools_.tools.html#arraydifferences" class="tsd-kind-icon">array<wbr>Differences</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_tools_.tools.html#capitalizefirstletter" class="tsd-kind-icon">capitalize<wbr>First<wbr>Letter</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_tools_.tools.html#clone" class="tsd-kind-icon">clone</a></li>
@@ -87,7 +88,7 @@
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_tools_.tools.html#getduplicatevalues" class="tsd-kind-icon">get<wbr>Duplicate<wbr>Values</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_tools_.tools.html#getproperty" class="tsd-kind-icon">get<wbr>Property</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_tools_.tools.html#gettranformoffsets" class="tsd-kind-icon">get<wbr>Tranform<wbr>Offsets</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_tools_.tools.html#getxtransformsvalue" class="tsd-kind-icon">getXTransforms<wbr>Value</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_tools_.tools.html#gettranslationvalues" class="tsd-kind-icon">get<wbr>Translation<wbr>Values</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_tools_.tools.html#merge" class="tsd-kind-icon">merge</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_tools_.tools.html#movetofront" class="tsd-kind-icon">move<wbr>ToFront</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="_tools_.tools.html#removearrayduplicates" class="tsd-kind-icon">remove<wbr>Array<wbr>Duplicates</a></li>
@@ -108,7 +109,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L22">tools.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L22">tools.ts:22</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -128,6 +129,43 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-external">
+					<a name="appendorselect" class="tsd-anchor"></a>
+					<h3>append<wbr>OrSelect</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">append<wbr>OrSelect<span class="tsd-signature-symbol">(</span>parent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, query<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L90">tools.ts:90</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns element if it  exists, otherwise creates and returns reference to item</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>parent: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Element parent to query within</p>
+									</div>
+								</li>
+								<li>
+									<h5>query: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The element to return from the DOM</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-external">
 					<a name="arraydifferences" class="tsd-anchor"></a>
 					<h3>array<wbr>Differences</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-external">
@@ -137,7 +175,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L153">tools.ts:153</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L182">tools.ts:182</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -181,7 +219,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L126">tools.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L155">tools.ts:155</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -217,7 +255,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L41">tools.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L41">tools.ts:41</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -240,7 +278,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L138">tools.ts:138</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L167">tools.ts:167</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -276,7 +314,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L3">tools.ts:3</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L3">tools.ts:3</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -305,7 +343,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L107">tools.ts:107</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L136">tools.ts:136</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -328,7 +366,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L78">tools.ts:78</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L78">tools.ts:78</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -372,7 +410,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L181">tools.ts:181</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L210">tools.ts:210</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -405,7 +443,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L236">tools.ts:236</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L254">tools.ts:254</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -431,7 +469,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L96">tools.ts:96</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L125">tools.ts:125</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -466,35 +504,39 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-external">
-					<a name="getxtransformsvalue" class="tsd-anchor"></a>
-					<h3>getXTransforms<wbr>Value</h3>
+					<a name="gettranslationvalues" class="tsd-anchor"></a>
+					<h3>get<wbr>Translation<wbr>Values</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">getXTransforms<wbr>Value<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Translation<wbr>Values<span class="tsd-signature-symbol">(</span>elementRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L230">tools.ts:230</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L107">tools.ts:107</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Retrieves the element transform matrix string, and returns the translateX string</p>
+									<p>Returns an elements&#39;s x and y translations from its computed style</p>
 								</div>
-								<dl class="tsd-comment-tags">
-									<dt>export</dt>
-									<dd></dd>
-								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>element: <span class="tsd-signature-type">HTMLElement</span></h5>
+									<h5>elementRef: <span class="tsd-signature-type">HTMLElement</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<p>The translateX value for element</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+							<p>an object containing the x and y translations</p>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>tx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>ty<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</section>
@@ -508,7 +550,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L46">tools.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L46">tools.ts:46</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -534,7 +576,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L215">tools.ts:215</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L244">tools.ts:244</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -567,7 +609,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/956ea2f/packages/core/src/tools.ts#L196">tools.ts:196</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/4354c9c/packages/core/src/tools.ts#L225">tools.ts:225</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -667,6 +709,9 @@
 						<a href="_tools_.tools.html#addclosebtn" class="tsd-kind-icon">add<wbr>Close<wbr>Btn</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-external">
+						<a href="_tools_.tools.html#appendorselect" class="tsd-kind-icon">append<wbr>OrSelect</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-external">
 						<a href="_tools_.tools.html#arraydifferences" class="tsd-kind-icon">array<wbr>Differences</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-external">
@@ -697,7 +742,7 @@
 						<a href="_tools_.tools.html#gettranformoffsets" class="tsd-kind-icon">get<wbr>Tranform<wbr>Offsets</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-external">
-						<a href="_tools_.tools.html#getxtransformsvalue" class="tsd-kind-icon">getXTransforms<wbr>Value</a>
+						<a href="_tools_.tools.html#gettranslationvalues" class="tsd-kind-icon">get<wbr>Translation<wbr>Values</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-external">
 						<a href="_tools_.tools.html#merge" class="tsd-kind-icon">merge</a>
