@@ -415,7 +415,8 @@ export class BaseChart {
 			chartId = this.id;
 			container = parent.append("div");
 			container.attr("chart-id", chartId)
-				.classed("chart-wrapper", true);
+				.classed("chart-wrapper", true)
+				.classed(`carbon--theme--${this.options.theme}`, true);
 			if (container.select(".legend-wrapper").nodes().length === 0) {
 				const legendWrapper = container.append("div")
 					.attr("class", "legend-wrapper")

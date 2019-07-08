@@ -20,6 +20,15 @@ export enum ChartType {
 	COMBO = "combo"
 }
 
+
+/**
+ * enum of all supported chart themes
+ */
+export enum ChartTheme {
+	LIGHT = "white",
+	DARK = "g100"
+}
+
 /**
  * enum of all possible tooltip sizes
  */
@@ -91,6 +100,10 @@ export interface BaseChartOptions {
 	 */
 	colors: Array<string>;
 	/**
+	 * supported chart theme
+	 */
+	theme?: ChartTheme;
+	/**
 	 * tooltip configuration
 	 */
 	tooltip?: {
@@ -145,6 +158,7 @@ const baseOptions: BaseChartOptions = {
 		formatter: null,
 		targetsToSkip: ["rect", "circle", "path"]
 	},
+	theme: ChartTheme.LIGHT,
 	overlay: {
 		types: {
 			loading: "loading",

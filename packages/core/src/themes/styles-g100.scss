@@ -1,0 +1,35 @@
+@import "../../node_modules/@carbon/themes/scss/themes";
+$gray_50: #8c8c8c;
+
+.carbon--theme--g100 {
+  @include carbon--theme($carbon--theme--g100) {
+    svg.chart-svg {
+      g.inner-wrap {
+        rect.chart-grid-backdrop {
+          fill: #000;
+        }
+        .chart-wrapper text {
+          fill: $ui-05;
+          stroke: $ui-05;
+        }
+        g.x.grid,
+        g.y.grid {
+          g.tick line {
+            stroke: $ui-01;
+          }
+        }
+        .yAxes line.domain {
+          stroke: $ui-04;
+        }
+        text {
+			fill: $gray_50;
+			stroke: $gray_50;
+			&.axis-label {
+			  fill: $text-01;
+			  stroke: $text-01;
+			}
+		  }
+      }
+    }
+  }
+}
