@@ -38,7 +38,16 @@ const initializeThemeSelector = () => {
     }
     const dropdownDefaultOption = document.querySelector("div.theme-selector li.bx--dropdown-text");
     const selectedOption = dropdownOptions.find(dO => dO.parentNode.getAttribute("data-value") === themeName);
-    dropdownDefaultOption.innerHTML = selectedOption.innerText;
+	dropdownDefaultOption.innerHTML = selectedOption.innerText;
+
+	// Set dark theme on the window
+	switch (themeName) {
+		case "DARK_1":
+			document.body.classList.add("carbon--dark");
+			break;
+		default:
+			break;
+	}
 };
 
 export const initializeDemoOptions = () => {
