@@ -1,3 +1,5 @@
+@import "./themes/styles-white.scss";
+@import "./themes/styles-g100.scss";
 $gray_60: #595859;
 
 $default_transition: all .1s ease-out;
@@ -24,22 +26,24 @@ div.chart-holder {
 		/*
 		Axes
 		*/
-		g.yAxes.axis {
-			path.domain {
+		g.yAxes {
+			line.domain {
+				stroke-width: 1px;
+			}
+			.axis path.domain {
 				stroke: none;
 			}
 		}
 
 		g.x.axis {
 			path.domain {
-				stroke: #959595;
-				stroke-width: 2;
+				stroke-width: 1px;
 			}
 		}
 
 		g.x.grid, g.y.grid {
 			g.tick line {
-				stroke: rgb(236, 238, 239);
+				stroke-width: 1px;
 			}
 		}
 
@@ -61,19 +65,22 @@ div.chart-holder {
 			}
 		}
 	}
-
+	g.tick text {
+		font-family: "IBM Plex Sans Condensed";
+	}
 	text {
 		font-size: 12px;
-		fill: $gray_60;
-		stroke: $gray_60;
+		line-height: 16px;
 		stroke-width: .3;
 		@include fonts();
-
+		font-weight: 400;
 		&.title{
 			font-size: 18px;
 			font-weight: bold;
 		}
-
+		&.chart-label {
+			font-family: "IBM Plex Sans Condensed";
+		}
 		&.donut {
 			&-figure {
 				font-size: 24px;

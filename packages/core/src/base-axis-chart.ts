@@ -64,6 +64,8 @@ export class BaseAxisChart extends BaseChart {
 			// Draw the x & y grid
 			this.drawXGrid();
 			this.drawYGrid();
+			// Draw the backdrop
+			this.drawBackdrop();
 
 			this.addOrUpdateLegend();
 		} else {
@@ -387,10 +389,7 @@ export class BaseAxisChart extends BaseChart {
 				.attr("y1", this.y(0))
 				.attr("y2", this.y(0))
 				.attr("x1", 0)
-				.attr("x2", chartSize.width)
-				.attr("stroke", Configuration.scales.domain.color)
-				.attr("fill", Configuration.scales.domain.color)
-				.attr("stroke-width", Configuration.scales.domain.strokeWidth);
+				.attr("x2", chartSize.width);
 		}
 
 		const tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
@@ -471,6 +470,21 @@ export class BaseAxisChart extends BaseChart {
 		if (thresholds && thresholds.length > 0) {
 			this.addOrUpdateThresholds(g, false);
 		}
+	}
+
+	drawBackdrop() {
+		// Get height from the grid
+		const xgrid = this.innerWrap.select(".x.grid").node().getBBox().height;
+		const ygrid = this.innerWrap.select(".y.grid").node().getBBox();
+
+		this.innerWrap
+			.append("rect")
+			.classed("chart-grid-backdrop", true)
+			.attr("x", ygrid.x)
+			.attr("y", ygrid.y)
+			.attr("width", ygrid.width)
+			.attr("height", xgrid)
+			.lower();
 	}
 
 	addOrUpdateThresholds(yGrid, animate?) {
