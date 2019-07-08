@@ -11,12 +11,13 @@ $gray_60: #6f6f6f;
       stroke: $ui-01;
     }
   }
-  .yAxes line.domain, path.domain {
+  .yAxes line.domain,
+  path.domain {
     stroke: $ui-04;
   }
   text {
-	fill: $gray_60;
-	stroke: $gray_60;
+    fill: $gray_60;
+    stroke: $gray_60;
     &.axis-label {
       fill: $text-01;
       stroke: $text-01;
