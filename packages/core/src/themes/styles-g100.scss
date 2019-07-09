@@ -8,9 +8,8 @@ $gray_50: #8c8c8c;
         rect.chart-grid-backdrop {
           fill: #000;
         }
-        .chart-wrapper text {
-          fill: $ui-05;
-          stroke: $ui-05;
+        g.lines path.line {
+			mix-blend-mode: unset;
         }
         g.x.grid,
         g.y.grid {
