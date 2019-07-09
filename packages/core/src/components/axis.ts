@@ -169,7 +169,7 @@ export class Axis extends ChartComponent {
 		const yAxis = axisFunction(this.y)
 			.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks)
 			.tickSize(0)
-			// .tickFormat(scales.y.formatter as any);
+			.tickFormat(scales.y.formatter as any);
 
 		let yAxisRef = svg.select("g.y.axis");
 		const horizontalLine = svg.select("line.domain");

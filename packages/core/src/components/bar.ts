@@ -85,7 +85,7 @@ export class Bar extends ChartComponent {
 			{
 				"Expt": 1,
 				"Run": 11,
-				"Speed": 1000
+				"Speed": 1050
 			},
 			{
 				"Expt": 1,
@@ -120,7 +120,7 @@ export class Bar extends ChartComponent {
 			{
 				"Expt": 1,
 				"Run": 18,
-				"Speed": 1000
+				"Speed": 1040
 			},
 			{
 				"Expt": 1,
