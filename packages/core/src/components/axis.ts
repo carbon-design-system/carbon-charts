@@ -56,10 +56,6 @@ export class Axis extends ChartComponent {
 
 	setXAxis(noAnimation?: boolean) {
 		const { appendOrSelect } = this._essentials.domUtils;
-		const { bar: margins } = Configuration.charts.margin;
-		const chartSize = this._essentials.domUtils.getChartSize();
-		const height = chartSize.height - margins.top - margins.bottom;
-
 		const svg = this._parent;
 		// const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
@@ -71,6 +67,8 @@ export class Axis extends ChartComponent {
 
 		const xAxisRef = appendOrSelect(svg, "g.x.axis")
 			.call(xAxis);
+
+		xAxisRef.select("path.domain").remove();
 
 		if (this.options.axisType === AxisPositions.TOP) {
 			const heightShift = this._essentials.domUtils.getSVGSize(xAxisRef).height;
@@ -139,11 +137,7 @@ export class Axis extends ChartComponent {
 	}
 
 	setYScale(yScale?: any) {
-		const svg = select(this._essentials.domUtils.getSVG());
-		const chartSize = this._essentials.domUtils.getChartSize();
-
-		const height = chartSize.height - (svg.select(".x.axis").node() as SVGSVGElement).getBBox().height;
-
+		const height = this._essentials.domUtils.getSVGSize(this._parent).height;
 		const { scales } = this._model.getOptions();
 
 		const yMin = this.getYMin();

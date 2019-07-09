@@ -9,7 +9,8 @@ import { hierarchy, treemap, treemapSlice, treemapDice } from "d3-hierarchy";
 
 
 // TODORF - Remove
-window["testColors"] = ["e41a1c", "377eb8", "4daf4a", "984ea3", "ff7f00", "ffff33", "a65628", "f781bf", "999999"]
+const testColors = ["e41a1c", "377eb8", "4daf4a", "984ea3", "ff7f00", "ffff33", "a65628", "f781bf", "999999"];
+window["testColors"] = Tools.clone(testColors);
 
 export class LayoutComponent extends ChartComponent {
 	children: Array<LayoutComponentChild>;
@@ -161,7 +162,12 @@ export class LayoutComponent extends ChartComponent {
 						// .style("stroke-width", 2)
 						.style("fill-opacity", 0.2)
 						.style("fill", d => {
+							if (window["testColors"].length === 0) {
+								window["testColors"] = Tools.clone(testColors);
+							}
+
 							const col = window["testColors"].shift();
+
 							return col;
 						})
 						.lower();
