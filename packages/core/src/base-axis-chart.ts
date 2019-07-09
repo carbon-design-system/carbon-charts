@@ -61,11 +61,8 @@ export class BaseAxisChart extends BaseChart {
 			this.setYScale();
 			this.setYAxis();
 
-			// Draw the x & y grid
-			this.drawXGrid();
-			this.drawYGrid();
-			// Draw the backdrop
-			this.drawBackdrop();
+			// Draws the grid
+			this.drawGrid();
 
 			this.addOrUpdateLegend();
 		} else {
@@ -440,6 +437,14 @@ export class BaseAxisChart extends BaseChart {
 		}
 	}
 
+	drawGrid() {
+		// Draw the x & y grid
+		this.drawXGrid();
+		this.drawYGrid();
+		// Draw the backdrop
+		this.drawBackdrop();
+	}
+
 	drawXGrid() {
 		const yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
 		const xGrid = axisBottom(this.x)
@@ -477,16 +482,16 @@ export class BaseAxisChart extends BaseChart {
 
 	drawBackdrop() {
 		// Get height from the grid
-		const xgrid = this.innerWrap.select(".x.grid").node().getBBox().height;
-		const ygrid = this.innerWrap.select(".y.grid").node().getBBox();
+		const xGridHeight = this.innerWrap.select(".x.grid").node().getBBox().height;
+		const yGridBBox = this.innerWrap.select(".y.grid").node().getBBox();
 
 		this.innerWrap
 			.append("rect")
 			.classed("chart-grid-backdrop", true)
-			.attr("x", ygrid.x)
-			.attr("y", ygrid.y)
-			.attr("width", ygrid.width)
-			.attr("height", xgrid)
+			.attr("x", yGridBBox.x)
+			.attr("y", yGridBBox.y)
+			.attr("width", yGridBBox.width)
+			.attr("height", xGridHeight)
 			.lower();
 	}
 

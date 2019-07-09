@@ -1093,7 +1093,7 @@
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-10.2.0.tgz#a9b0f2372fdf231a34b070ec8cff3f9d7a044fbd"
   integrity sha512-WH6IQNt/HfqExMhTcgIBJN6Cqunrr+udtEKZAE3k8eMlBceKpiidfzgVNbAVKAujGjgwDR60XF+gQGRbteCWUg==
 
-"@carbon/themes@^10.3.1":
+"@carbon/themes@10.3.1":
   version "10.3.1"
   resolved "https://registry.yarnpkg.com/@carbon/themes/-/themes-10.3.1.tgz#f951af77d49bc8146f691a290f1d76afa27da0a3"
   integrity sha512-5UviZgzQriksQIBgrJ6I/qkmI8pR3GWw4WQ+tdHyw5LpDstzwxRIUf3emz/lBEPPxsEYOaf31nJ4DOFETMCr0Q==
