@@ -112,8 +112,8 @@ export class DOMUtils {
 
 	getSVGSize(svg: any) {
 		return {
-			height: svg.node().getBBox().height || svg.node().clientHeight || svg.attr("height"),
-			width: svg.node().getBBox().width || svg.node().clientWidth || svg.attr("width")
+			height: svg.node().clientHeight || svg.node().getBBox().height || svg.attr("height"),
+			width: svg.node().clientWidth || svg.node().getBBox().width || svg.attr("width")
 		};
 	}
 

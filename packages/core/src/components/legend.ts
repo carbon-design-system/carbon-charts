@@ -4,15 +4,24 @@ import * as Configuration from "../configuration";
 import { ChartComponent } from "./base-component";
 
 export class Legend extends ChartComponent {
+	constructor() {
+		super();
+
+		console.log("NEW LEGEND");
+	}
+
 	render() {
+		console.log("#@G PARENT", this._parent.node())
 		const svg = this._parent;
 
-		const legendItems = svg.selectAll("g.legend")
+		const legendItems = svg.selectAll("g.legend-item")
 			.data(this.getLegendItemArray());
 
 		const addedLegendItems = legendItems.enter()
+			// .each((d, i) => console.log(">> ENTER", i))
 			.append("g")
 			.classed("legend-item", true);
+
 		addedLegendItems.append("circle")
 			.merge(legendItems.select("circle"))
 				.attr("cx", 7)
@@ -35,7 +44,9 @@ export class Legend extends ChartComponent {
 				.attr("alignment-baseline", "middle");
 
 		// Remove old elements as needed.
-		legendItems.exit().remove();
+		legendItems.exit()
+			// .each((d, i) => console.log(">> EXIT", i))
+			.remove();
 	}
 
 	update() {

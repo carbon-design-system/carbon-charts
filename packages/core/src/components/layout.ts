@@ -7,6 +7,10 @@ import { Tools } from "../tools";
 import { select } from "d3-selection";
 import { hierarchy, treemap, treemapSlice, treemapDice } from "d3-hierarchy";
 
+
+// TODORF - Remove
+window["testColors"] = ["e41a1c", "377eb8", "4daf4a", "984ea3", "ff7f00", "ffff33", "a65628", "f781bf", "999999"]
+
 export class LayoutComponent extends ChartComponent {
 	children: Array<LayoutComponentChild>;
 	options: LayoutOptions;
@@ -66,15 +70,14 @@ export class LayoutComponent extends ChartComponent {
 			(root);
 
 		// TODORF - Remove
-		const testColors = ["e41a1c", "377eb8", "4daf4a", "984ea3", "ff7f00", "ffff33", "a65628", "f781bf", "999999"]
-	
-		// TODORF - Remove
 		const horizontal = (this.options.direction === LayoutDirection.ROW || this.options.direction === LayoutDirection.ROW_REVERSE);
 
 		// Add new SVGs to the DOM for each layout child
-		svg
+		const updatedSVGs = svg
 			.selectAll("svg")
-			.data(root.leaves())
+			.data(root.leaves());
+
+		updatedSVGs
 			.enter()
 			.append("svg")
 				.attr("class", (d: any) => d.data.component.constructor.name.toLowerCase())
@@ -104,6 +107,10 @@ export class LayoutComponent extends ChartComponent {
 					}
 				});
 
+		updatedSVGs
+			.exit()
+			.remove();
+
 		// Run through stretch x-items
 		this.children
 			.filter(child => {
@@ -119,7 +126,7 @@ export class LayoutComponent extends ChartComponent {
 		root = hierarchy({
 			children: hierarchyChildren
 		})
-		.sum((d: any) => d.size)
+		.sum((d: any) => d.size);
 
 		// Compute the position of all elements within the layout
 		treemap()
@@ -136,23 +143,30 @@ export class LayoutComponent extends ChartComponent {
 			.attr("y", (d: any) => d.y0)
 			.attr("width", (d: any) => d.x1 - d.x0)
 			.attr("height", (d: any) => d.y1 - d.y0)
-			.each(function(d: any) {
+			.each(function(d: any, i) {
 				const itemComponent = d.data.component;
 				const growth = Tools.getProperty(d, "data", "growth", "x");
 				if (growth === LayoutGrowth.STRETCH) {
 					itemComponent.render();
 				}
-			})
-			.append("rect")
-				.attr("width", (d: any) => {
-					return d.x1 - d.x0
-				})
-				.attr("height", (d: any) => d.y1 - d.y0)
-				// .style("stroke", (d, i) => testColors[i])
-				// .style("stroke-width", 2)
-				.style("fill-opacity", 0.2)
-				.style("fill", (d, i) => testColors[i])
-				.lower();
+
+				if (select(this).select("rect.bg").empty()) {
+					select(this).append("rect")
+						.classed("bg", true)
+						.attr("width", (d: any) => {
+							return d.x1 - d.x0
+						})
+						.attr("height", (d: any) => d.y1 - d.y0)
+						// .style("stroke", (d, i) => testColors[i])
+						// .style("stroke-width", 2)
+						.style("fill-opacity", 0.2)
+						.style("fill", d => {
+							const col = window["testColors"].shift();
+							return col;
+						})
+						.lower();
+				}
+			});
 	}
 
 	// Pass on model to children as well
