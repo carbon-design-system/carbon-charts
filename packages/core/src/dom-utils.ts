@@ -55,6 +55,7 @@ export class DOMUtils {
 	addSVGElement() {
 		const svg = select(this._holder)
 				.append("svg")
+				.classed("chart-svg", true)
 				.attr("height", "100%")
 				.attr("width", "100%");
 
