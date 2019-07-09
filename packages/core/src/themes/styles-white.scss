@@ -18,7 +18,7 @@ $gray_60: #6f6f6f;
   text {
     fill: $gray_60;
     stroke: $gray_60;
-    &.axis-label {
+    &.axis-label, &.chart-title {
       fill: $text-01;
       stroke: $text-01;
     }

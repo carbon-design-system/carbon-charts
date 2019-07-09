@@ -9,7 +9,7 @@ $gray_50: #8c8c8c;
           fill: #000;
         }
         g.lines path.line {
-			mix-blend-mode: unset;
+          mix-blend-mode: unset;
         }
         g.x.grid,
         g.y.grid {
@@ -28,6 +28,10 @@ $gray_50: #8c8c8c;
             stroke: $text-01;
           }
         }
+      }
+      text.chart-title {
+        fill: $text-01;
+        stroke: $text-01;
       }
     }
   }
