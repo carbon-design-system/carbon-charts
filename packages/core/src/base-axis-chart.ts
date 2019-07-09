@@ -154,7 +154,7 @@ export class BaseAxisChart extends BaseChart {
 	 *************************************/
 	// TODO - Refactor
 	getChartSize(container = this.container) {
-		let ratio, marginForLegendTop;
+		let ratio, marginForLegendTop, marginForChartTitle;
 		if (container.node().clientWidth > Configuration.charts.widthBreak) {
 			ratio = Configuration.charts.magicRatio;
 			marginForLegendTop = 0;
@@ -165,8 +165,11 @@ export class BaseAxisChart extends BaseChart {
 
 		// Store computed actual size, to be considered for change if chart does not support axis
 		const marginsToExclude = Configuration.charts.margin.left + Configuration.charts.margin.right;
+
+		marginForChartTitle = this.options.title ? Configuration.charts.title.marginBottom : 0;
+
 		const computedChartSize = {
-			height: container.node().clientHeight - marginForLegendTop,
+			height: container.node().clientHeight - marginForLegendTop - marginForChartTitle,
 			width: (container.node().clientWidth - marginsToExclude) * ratio
 		};
 
