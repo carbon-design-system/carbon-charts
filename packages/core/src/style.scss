@@ -145,6 +145,7 @@ div.chart-holder {
 	}
 
 	.legend-btn {
+		display: inline-flex;
 		flex-direction: row;
 		align-items: center;
 		line-height: 20px;
