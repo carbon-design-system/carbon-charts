@@ -23,4 +23,8 @@ $gray_60: #6f6f6f;
       stroke: $text-01;
     }
   }
+  .legend-btn text {
+    fill: $gray_60;
+    stroke: $gray_60;
+  }
 }
