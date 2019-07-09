@@ -127,7 +127,7 @@ export class PieChart extends BaseChart {
 			.attr("height", `${diameter}px`);
 
 		this.innerWrap
-			.style("transform", `translate(${radius}px,${radius}px)`)
+			.attr("transform", `translate(${radius},${radius})`)
 			.attr("width", `${diameter}px`)
 			.attr("height", `${diameter}px`)
 			.attr("preserveAspectRatio", "xMinYMin");

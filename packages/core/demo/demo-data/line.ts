@@ -62,7 +62,8 @@ export const curvedLineOptions = {
 		name: "curveNatural"
 	},
 	legendClickable: true,
-	containerResizable: true
+	containerResizable: true,
+	title: "Line Chart"
 };
 
 
@@ -133,7 +134,8 @@ export const lineOptions = {
 		}
 	},
 	legendClickable: true,
-	containerResizable: true
+	containerResizable: true,
+	title: "Line Chart"
 };
 
 export const scatterData = {
