@@ -128,7 +128,6 @@ div.chart-holder {
 		float: right;
 		margin-top: 0;
 		margin-right: 20px;
-		color: #586464;
 		overflow: hidden;
 		padding-left: 0;
 		white-space: nowrap;
@@ -146,9 +145,10 @@ div.chart-holder {
 	}
 
 	.legend-btn {
-		display: flex;
 		flex-direction: row;
 		align-items: center;
+		line-height: 20px;
+		font-size: 12px;
 		margin-bottom: 0;
 
 		.legend-circle {

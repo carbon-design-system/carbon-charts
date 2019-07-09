@@ -572,7 +572,7 @@ export class BaseChart {
 		if (this.container.select(".legend-tooltip").nodes().length > 0
 			&& this.container.select(".legend-tooltip").node().style.display === "block") { return; }
 
-		this.container.selectAll(".legend-btn");
+		this.container.selectAll(".legend-btn").style("display", "inline-flex");
 		const svgWidth = this.container.select("g.inner-wrap").node().getBBox().width;
 		if (this.isLegendOnRight()) {
 			this.container.selectAll(".expand-btn").remove();
