@@ -9,5 +9,7 @@ export const getTheme = () => {
 			default:
 				return "white";
 		}
+	} else {
+		return "white";
 	}
 };

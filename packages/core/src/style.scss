@@ -146,9 +146,9 @@ div.chart-holder {
 	}
 
 	.legend-btn {
-		display: inline-block;
-		line-height: 20px;
-		font-size: 12px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
 		margin-bottom: 0;
 
 		.legend-circle {

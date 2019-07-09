@@ -32,7 +32,11 @@ $gray_50: #8c8c8c;
       text.chart-title {
         fill: $text-01;
         stroke: $text-01;
-      }
-    }
+	  }
+	}
+	.legend-btn text {
+		fill: $text-03;
+		stroke: $text-03;
+	}
   }
 }
