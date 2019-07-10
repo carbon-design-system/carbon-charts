@@ -173,6 +173,7 @@ export class BaseChart {
 
 					this.update();
 				}
+				this.drawTitle();
 			} else {
 				this.chartOverlay.show(Configuration.options.BASE.overlay.types.noData);
 			}
@@ -270,7 +271,7 @@ export class BaseChart {
 
 	// TODO - Refactor
 	getChartSize(container = this.container) {
-		let ratio, marginForLegendTop;
+		let ratio, marginForLegendTop, marginForChartTitle;
 		if (container.node().clientWidth > Configuration.charts.widthBreak) {
 			ratio = Configuration.charts.magicRatio;
 			marginForLegendTop = 0;
@@ -281,8 +282,11 @@ export class BaseChart {
 
 		// Store computed actual size, to be considered for change if chart does not support axis
 		const marginsToExclude = 0;
+
+		marginForChartTitle = this.options.title ? Configuration.charts.title.marginBottom : 0;
+
 		const computedChartSize = {
-			height: container.node().clientHeight - marginForLegendTop,
+			height: container.node().clientHeight - marginForLegendTop - marginForChartTitle,
 			width: (container.node().clientWidth - marginsToExclude) * ratio
 		};
 
@@ -361,6 +365,27 @@ export class BaseChart {
 		});
 
 		resizeObserver.observe(this.holder);
+	}
+
+	/**
+	 * Draws title within the Chart's svg element.
+	 * @param title
+	 */
+	drawTitle() {
+		if (this.options.title) {
+			// to add the padding only once
+			if (this.svg.select("text.chart-title").empty()) {
+				const titleMargin = Configuration.charts.title.marginBottom;
+				const translateObj = Tools.getTranslationValues(this.innerWrap.node());
+
+				// add padding for title, keep other translations
+				this.innerWrap
+				.attr("transform", `translate(${translateObj.tx}, ${+translateObj.ty + titleMargin})`);
+			}
+			// adds title or gets reference to title
+			const titleRef = Tools.appendOrSelect(this.svg, "text.chart-title");
+			titleRef.text(this.options.title);
+		}
 	}
 
 	setClickableLegend() {

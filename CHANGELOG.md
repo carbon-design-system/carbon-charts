@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/IBM/carbon-charts/compare/v0.13.0...v0.14.0) (2019-07-10)
+
+
+### Features
+
+* **Angular:** Add Scatter to the Angular package, storybook and readme ([3f62714](https://github.com/IBM/carbon-charts/commit/3f62714))
+* **scatter:** Add Scatter to the Angular package and storybook ([2aac850](https://github.com/IBM/carbon-charts/commit/2aac850))
+
+
+
+
+
+# [0.13.0](https://github.com/IBM/carbon-charts/compare/v0.12.5...v0.13.0) (2019-07-08)
+
+
+### Features
+
+* **core:** addition of titles within svg chart ([56380bb](https://github.com/IBM/carbon-charts/commit/56380bb))
+
+
+
+
+
+## [0.12.5](https://github.com/IBM/carbon-charts/compare/v0.12.4...v0.12.5) (2019-07-04)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 ## [0.12.4](https://github.com/IBM/carbon-charts/compare/v0.12.3...v0.12.4) (2019-06-26)
 
 

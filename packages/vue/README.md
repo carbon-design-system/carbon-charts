@@ -1,6 +1,8 @@
 # `@carbon/charts-vue`
 
-> Carbon Charting components
+> Carbon Charting Vue Wrappers
+
+**[Storybook Demos](https://carbon-design-system.github.io/carbon-charts/vue)**
 
 ## Getting Started
 
@@ -17,7 +19,5 @@ instead:
 yarn add @carbon/charts-vue
 ```
 
-## Sample Code
-Checkout a sample app we've made on Codesandbox:
-
-[![Edit Carbon Charts - Vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/pjkrw2omq0?fontsize=14)
+## Sample Project
+[![Edit Carbon Charts - Vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/carbon-charts-vue-ghlq0?fontsize=14)
