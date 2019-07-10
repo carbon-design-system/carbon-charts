@@ -17,7 +17,7 @@ $gray_50: #8c8c8c;
             stroke: $ui-01;
           }
         }
-        .yAxes line.domain {
+        .yAxes line.domain, path.domain {
           stroke: $ui-04;
         }
         text {
