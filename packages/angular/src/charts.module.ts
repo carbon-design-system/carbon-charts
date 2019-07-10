@@ -22,6 +22,7 @@ import { LineChartComponent } from "./line-chart.component";
 		LineChartComponent
 	],
 	exports: [
+		BaseChart,
 		DonutChartComponent,
 		PieChartComponent,
 		BarChartComponent,
