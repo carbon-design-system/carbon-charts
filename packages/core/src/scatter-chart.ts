@@ -74,8 +74,12 @@ export class ScatterChart extends BaseAxisChart {
 		// Or the chart is only a scatter chart
 		// And not a line chart for instance
 		const circleShouldBeFilled = radius < Configuration.lines.points.minNonFilledRadius || this.constructor === ScatterChart;
-
-		return circleShouldBeFilled ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : "white";
+		if (circleShouldBeFilled) {
+			return this.getStrokeColor(d.datasetLabel, d.label, d.value);
+		}
+		// return the chart-grid-backdrop color or default to white
+		const circleFillColor = this.innerWrap.selectAll("rect.chart-grid-backdrop").style("fill");
+		return circleFillColor ? circleFillColor : "white";
 	}
 
 	getCircleFillOpacity() {
