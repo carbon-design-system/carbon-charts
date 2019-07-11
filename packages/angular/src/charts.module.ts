@@ -24,6 +24,7 @@ import { ScatterChartComponent } from "./scatter-chart.component";
 		ScatterChartComponent
 	],
 	exports: [
+		BaseChart,
 		DonutChartComponent,
 		PieChartComponent,
 		BarChartComponent,
