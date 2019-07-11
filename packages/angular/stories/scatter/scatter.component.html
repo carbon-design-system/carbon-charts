@@ -1,0 +1,11 @@
+<div style="margin: 30px;">
+	<n-scatter-chart
+		class="n-chart"
+		[data]="scatterData"
+    [options]="scatterOptions"
+    style="height: 500px;"
+    #scatterChart>
+	</n-scatter-chart>
+
+	<button class="btn--primary" (click)="changeDemoData()">Change Data</button>
+</div>
