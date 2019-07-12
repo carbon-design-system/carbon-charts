@@ -152,25 +152,25 @@ export class LayoutComponent extends ChartComponent {
 				}
 
 				if (select(this).select("rect.bg").empty()) {
-					select(this).append("rect")
-						.classed("bg", true)
-						.attr("width", (d: any) => {
-							return d.x1 - d.x0
-						})
-						.attr("height", (d: any) => d.y1 - d.y0)
-						// .style("stroke", (d, i) => testColors[i])
-						// .style("stroke-width", 2)
-						.style("fill-opacity", 0.2)
-						.style("fill", d => {
-							if (window["testColors"].length === 0) {
-								window["testColors"] = Tools.clone(testColors);
-							}
+					// select(this).append("rect")
+					// 	.classed("bg", true)
+					// 	.attr("width", (d: any) => {
+					// 		return d.x1 - d.x0
+					// 	})
+					// 	.attr("height", (d: any) => d.y1 - d.y0)
+					// 	// .style("stroke", (d, i) => testColors[i])
+					// 	// .style("stroke-width", 2)
+					// 	.style("fill-opacity", 0.2)
+					// 	.style("fill", d => {
+					// 		if (window["testColors"].length === 0) {
+					// 			window["testColors"] = Tools.clone(testColors);
+					// 		}
 
-							const col = window["testColors"].shift();
+					// 		const col = window["testColors"].shift();
 
-							return col;
-						})
-						.lower();
+					// 		return col;
+					// 	})
+					// 	.lower();
 				}
 			});
 	}

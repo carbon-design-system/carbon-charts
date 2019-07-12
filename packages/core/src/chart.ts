@@ -14,7 +14,7 @@ export class Chart {
 
 	model: ChartModel;
 
-	private services = {
+	private services: any = {
 		events: Events,
 		domUtils: DOMUtils
 	};
@@ -44,6 +44,12 @@ export class Chart {
 		});
 
 		this.update();
+
+		this.services.events
+			.getDocumentFragment()
+			.addEventListener("chart-resize", () => {
+				this.update();
+			});
 	}
 
 	initializeServices() {
@@ -62,6 +68,7 @@ export class Chart {
 
 	update() {
 		if (this.components) {
+			console.log("RE RENDER STUFF");
 			this.components.forEach(component => {
 				component.render();
 			});
