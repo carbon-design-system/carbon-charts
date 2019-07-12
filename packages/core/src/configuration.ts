@@ -683,7 +683,7 @@ export const legend = {
 		borderWidth: false
 	},
 	inactive: {
-		backgroundColor: "white",
+		backgroundColor: "transparent",
 		borderStyle: "solid",
 		borderWidth: "2px"
 	},
