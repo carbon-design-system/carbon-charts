@@ -49,7 +49,7 @@ export class LayoutComponent extends ChartComponent {
 
 		// Get parent SVG to render inside of
 		const svg = this._parent;
-		const { width, height } = this._essentials.domUtils.getSVGSize(svg);
+		const { width, height } = this._services.domUtils.getSVGSize(svg);
 
 		// Pass children data to the hierarchy layout
 		// And calculate sum of sizes
@@ -101,7 +101,7 @@ export class LayoutComponent extends ChartComponent {
 					// Calculate preffered children sizes after internal rendering
 					const growth = Tools.getProperty(d, "data", "growth", "x");
 					if (growth === LayoutGrowth.PREFERRED) {
-						const matchingSVGWidth = horizontal ? self._essentials.domUtils.getSVGSize(select(this)).width : self._essentials.domUtils.getSVGSize(select(this)).height;
+						const matchingSVGWidth = horizontal ? self._services.domUtils.getSVGSize(select(this)).width : self._services.domUtils.getSVGSize(select(this)).height;
 						const svgWidth = horizontal ? (svg.node() as any).clientWidth || svg.attr("width") : (svg.node() as any).clientHeight || svg.attr("height");
 
 						d.data.size = (matchingSVGWidth / svgWidth) * 100;
@@ -185,11 +185,11 @@ export class LayoutComponent extends ChartComponent {
 	}
 
 	// Pass on essentials to children as well
-	setEssentials(newObj) {
-		super.setEssentials(newObj);
+	setServices(newObj) {
+		super.setServices(newObj);
 
 		this.children.forEach(child => {
-			child.component.setEssentials(newObj);
+			child.component.setServices(newObj);
 		});
 	}
 }

@@ -1,5 +1,8 @@
 // Internal Imports
 import * as Configuration from "./configuration";
+import { Tools } from "./tools";
+
+// D3
 import { scaleOrdinal } from "d3-scale";
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -28,10 +31,6 @@ export class ChartModel {
 	private _patternScale = {};
 	private _colorScale = {};
 	// patternsService: PatternsService;
-
-	constructor(updateCallback: Function) {
-		this.setUpdateCallback(updateCallback);
-	}
 
 	/**
 	 * @return {Array} The chart's display data
@@ -66,8 +65,12 @@ export class ChartModel {
 		this.update();
 	}
 
-	get() {
-		return this._state;
+	get(property?: string) {
+		if (property) {
+			return this._state[property];
+		} else {
+			return this._state;
+		}
 	}
 
 	/**
