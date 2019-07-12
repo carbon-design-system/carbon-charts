@@ -62,25 +62,22 @@ export class DOMUtils extends Service {
 	}
 
 	addResizeListener() {
-		let containerWidth = this._model.get("holder").clientWidth;
-		let containerHeight = this._model.get("holder").clientHeight;
+		const holder = this._model.get("holder");
+
+		let containerWidth = holder.clientWidth;
+		let containerHeight = holder.clientHeight;
 
 		const resizeObserver = new ResizeObserver((entries, observer) => {
-			if (Math.abs(containerWidth - this._model.get("holder").clientWidth) > 1
-				|| Math.abs(containerHeight - this._model.get("holder").clientHeight) > 1) {
-				containerWidth = this._model.get("holder").clientWidth;
-				containerHeight = this._model.get("holder").clientHeight;
+			if (Math.abs(containerWidth - holder.clientWidth) > 1
+				|| Math.abs(containerHeight - holder.clientHeight) > 1) {
+				containerWidth = holder.clientWidth;
+				containerHeight = holder.clientHeight;
 
-				console.log("RESIZE CHART NOW");
-				// selectAll(".legend-tooltip").style("display", "none");
-
-				// this.hideTooltip();
-
-				// this.resizeChart();
+				this._services.events.dispatchEvent("chart-resize");
 			}
 		});
 
-		resizeObserver.observe(this._model.get("holder"));
+		resizeObserver.observe(holder);
 	}
 
 	getChartSize() {
