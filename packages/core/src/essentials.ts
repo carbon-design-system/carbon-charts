@@ -1,5 +1,6 @@
 // Internal Imports
 import { DOMUtils } from "./dom-utils";
+import { ChartConfig, BaseChartOptions, AxisChartOptions } from "./interfaces";
 
 export class ChartEssentials {
 	holder: Element;
@@ -9,8 +10,10 @@ export class ChartEssentials {
 	// DOM Event target
 	events: any;
 
-	constructor() {
+	constructor(holder: Element, options: AxisChartOptions) {
 		// Setup the event fragment on the DOM
 		this.events = document.createDocumentFragment();
+
+		this.domUtils = new DOMUtils(holder, options);
 	}
 }

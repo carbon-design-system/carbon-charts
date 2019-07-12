@@ -105,7 +105,7 @@ export const lineData = {
 	]
 };
 
-export const lineOptions = {
+export const lineOptions = () => ({
 	accessibility: false,
 	scales: {
 		x: {
@@ -115,7 +115,7 @@ export const lineOptions = {
 			title: "Dollars (CAD)",
 			yMaxAdjuster: yMax => yMax * 1.2,
 			yMinAdjuster: yMin => yMin * 1.2,
-			formatter: axisValue => `${axisValue / 1000}k`,
+			formatter: Math.random() > 0.5 ? null : val => `${val} gweg werg weg`,
 			thresholds: [
 				{
 					range: [-20000, 30000],
@@ -134,7 +134,7 @@ export const lineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true
-};
+});
 
 export const scatterData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],

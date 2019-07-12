@@ -105,9 +105,10 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 			}, delay || 0);
 		});
 
-		classyChartObject.setData(dataPromise);
+		// classyChartObject.setData(dataPromise);
 	} else {
-		classyChartObject.setData(newData);
+		classyChartObject.model.setData(newData);
+		classyChartObject.model.setOptions(chartTypes[11].options());
 	}
 };
 
@@ -197,7 +198,7 @@ chartTypes.forEach(type => {
 					classyContainer,
 					{
 						data: type.data,
-						options: Object.assign({}, type.options, {type: type.id}),
+						options: Object.assign({}, type.options(), {type: type.id}),
 					}
 				);
 
