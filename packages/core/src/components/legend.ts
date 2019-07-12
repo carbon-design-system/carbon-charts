@@ -4,14 +4,7 @@ import * as Configuration from "../configuration";
 import { ChartComponent } from "./base-component";
 
 export class Legend extends ChartComponent {
-	constructor() {
-		super();
-
-		console.log("NEW LEGEND");
-	}
-
 	render() {
-		console.log("#@G PARENT", this._parent.node())
 		const svg = this._parent;
 
 		const legendItems = svg.selectAll("g.legend-item")

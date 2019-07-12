@@ -27,7 +27,7 @@ export class Overlay extends ChartComponent {
 		overlay.classList.add("chart-overlay");
 		overlay.innerHTML = this.overlayOptions.innerHTML["loading"];
 
-		if (this._model.getState().loading) {
+		if (this._model.get().loading) {
 			this.overlayElement = holder.appendChild(overlay);
 		}
 	}

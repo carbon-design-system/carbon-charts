@@ -6,7 +6,6 @@ import { AxisPositions } from "../interfaces";
 // D3 Imports
 import { scaleBand, ScaleBand, ScaleLinear, scaleLinear } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, AxisScale, AxisDomain, axisTop } from "d3-axis";
-import { select } from "d3-selection";
 import { min, max } from "d3-array";
 
 export class Axis extends ChartComponent {
@@ -23,7 +22,6 @@ export class Axis extends ChartComponent {
 	}
 
 	render() {
-		console.log("rander AXIS");
 		this.updateXandYGrid();
 
 		if (this.options.axisType === AxisPositions.TOP || this.options.axisType === AxisPositions.BOTTOM) {
@@ -36,7 +34,6 @@ export class Axis extends ChartComponent {
 	}
 
 	update() {
-		// console.log("UPDATE AXIS");
 		this.setXScale();
 		this.setXAxis();
 		this.setYScale();
@@ -60,7 +57,6 @@ export class Axis extends ChartComponent {
 		// const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
 		const axisFunction = this.options.axisType === AxisPositions.TOP ? axisTop : axisBottom;
-		console.log("axisFunction", axisFunction)
 		const xAxis = axisFunction(this.x)
 			// .tickSize(0)
 			// .tickSizeOuter(0);
@@ -158,7 +154,7 @@ export class Axis extends ChartComponent {
 
 		const { scales } = this._model.getOptions();
 		// const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
-
+console.log("scales.y.formatter", scales.y.formatter)
 		const axisFunction = this.options.axisType === AxisPositions.LEFT ? axisLeft : axisRight;
 		const yAxis = axisFunction(this.y)
 			.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks)
