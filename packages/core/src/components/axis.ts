@@ -45,14 +45,14 @@ export class Axis extends ChartComponent {
 	}
 
 	setXScale() {
-		const { width } = this._essentials.domUtils.getSVGSize(this._parent);
+		const { width } = this._services.domUtils.getSVGSize(this._parent);
 
 		this.x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
 		this.x.domain(this._model.getData().labels);
 	}
 
 	setXAxis(noAnimation?: boolean) {
-		const { appendOrSelect } = this._essentials.domUtils;
+		const { appendOrSelect } = this._services.domUtils;
 		const svg = this._parent;
 		// const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
@@ -67,7 +67,7 @@ export class Axis extends ChartComponent {
 		xAxisRef.select("path.domain").remove();
 
 		if (this.options.axisType === AxisPositions.TOP) {
-			const heightShift = this._essentials.domUtils.getSVGSize(xAxisRef).height;
+			const heightShift = this._services.domUtils.getSVGSize(xAxisRef).height;
 			xAxisRef.attr("transform", `translate(0, ${heightShift - 1})`);
 		}
 
@@ -133,7 +133,7 @@ export class Axis extends ChartComponent {
 	}
 
 	setYScale(yScale?: any) {
-		const height = this._essentials.domUtils.getSVGSize(this._parent).height;
+		const height = this._services.domUtils.getSVGSize(this._parent).height;
 		const { scales } = this._model.getOptions();
 
 		const yMin = this.getYMin();
@@ -149,7 +149,7 @@ export class Axis extends ChartComponent {
 	}
 
 	setYAxis(noAnimation?: boolean) {
-		const chartSize = this._essentials.domUtils.getChartSize();
+		const chartSize = this._services.domUtils.getChartSize();
 		const svg = this._parent;
 
 		const { scales } = this._model.getOptions();
@@ -200,7 +200,7 @@ console.log("scales.y.formatter", scales.y.formatter)
 		}
 
 		if (this.options.axisType === AxisPositions.LEFT) {
-			const widthShift = this._essentials.domUtils.getSVGSize(yAxisRef).width;
+			const widthShift = this._services.domUtils.getSVGSize(yAxisRef).width;
 			yAxisRef.attr("transform", `translate(${widthShift - 1}, 0)`);
 		}
 
