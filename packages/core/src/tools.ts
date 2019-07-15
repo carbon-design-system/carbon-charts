@@ -105,11 +105,16 @@ export namespace Tools {
 	 * @returns an object containing the x and y translations
 	 */
 	export function getTranslationValues(elementRef: HTMLElement) {
-		const transformMatrix = window.getComputedStyle(elementRef).getPropertyValue("transform").replace(/\s/g, "");
 		// returns matrix(a, b, c, d, tx, ty) of transformation values (2d transform)
+		const transformMatrix = window.getComputedStyle(elementRef).getPropertyValue("transform").replace(/\s/g, "");
+
 		const transformValues = transformMatrix.substring(transformMatrix.indexOf("(") + 1, transformMatrix.indexOf(")")).split(",");
+
 		// if there are no translations, return { dx: 0,  dy: 0 } instead of undefined
-		return {tx: transformValues[4] ? transformValues[4] : 0 , ty: transformValues[5] ? transformValues[5] : 0};
+		return {
+			tx: transformValues[4] ? transformValues[4] : 0,
+			ty: transformValues[5] ? transformValues[5] : 0
+		};
 	}
 
 	/**************************************
