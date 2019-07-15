@@ -31,8 +31,7 @@ export class LayoutComponent extends ChartComponent {
 		const svg = this._parent;
 		let sum = 0;
 
-		svg
-			.selectAll("svg")
+		svg.selectAll("svg.layout-child")
 			.filter((d: any) => {
 				const growth = Tools.getProperty(d, "data", "growth", "x");
 				return growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED;
@@ -42,6 +41,17 @@ export class LayoutComponent extends ChartComponent {
 			});
 
 		return sum;
+	}
+
+	getNumOfStretchChildren(): Number {
+		const svg = this._parent;
+
+		return svg.selectAll("svg.layout-child")
+			.filter((d: any) => {
+				const growth = Tools.getProperty(d, "data", "growth", "x");
+				return growth === LayoutGrowth.STRETCH;
+			})
+			.size();
 	}
 
 	render() {
@@ -74,14 +84,13 @@ export class LayoutComponent extends ChartComponent {
 		const horizontal = (this.options.direction === LayoutDirection.ROW || this.options.direction === LayoutDirection.ROW_REVERSE);
 
 		// Add new SVGs to the DOM for each layout child
-		const updatedSVGs = svg
-			.selectAll("svg")
+		const updatedSVGs = svg.selectAll("svg.layout-child")
 			.data(root.leaves());
 
 		updatedSVGs
 			.enter()
 			.append("svg")
-				.attr("class", (d: any) => d.data.component.constructor.name.toLowerCase())
+				.attr("class", (d: any) => `layout-child ${d.data.component.constructor.name.toLowerCase()} ${+new Date()}`)
 				.attr("x", (d: any) => d.x0)
 				.attr("y", (d: any) => d.y0)
 				.attr("width", (d: any) => d.x1 - d.x0)
@@ -96,17 +105,20 @@ export class LayoutComponent extends ChartComponent {
 					if (growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED) {
 						itemComponent.render();
 					}
-				})
-				.each(function(d: any) {
-					// Calculate preffered children sizes after internal rendering
-					const growth = Tools.getProperty(d, "data", "growth", "x");
-					if (growth === LayoutGrowth.PREFERRED) {
-						const matchingSVGWidth = horizontal ? self._services.domUtils.getSVGSize(select(this)).width : self._services.domUtils.getSVGSize(select(this)).height;
-						const svgWidth = horizontal ? (svg.node() as any).clientWidth || svg.attr("width") : (svg.node() as any).clientHeight || svg.attr("height");
-
-						d.data.size = (matchingSVGWidth / svgWidth) * 100;
-					}
 				});
+
+		svg.selectAll("svg.layout-child")
+		.each(function(d: any) {
+			// Calculate preffered children sizes after internal rendering
+			const growth = Tools.getProperty(d, "data", "growth", "x");
+
+			if (growth === LayoutGrowth.PREFERRED) {
+				const matchingSVGWidth = horizontal ? self._services.domUtils.getSVGSize(select(this)).width : self._services.domUtils.getSVGSize(select(this)).height;
+				const svgWidth = horizontal ? (svg.node() as any).clientWidth || svg.attr("width") : (svg.node() as any).clientHeight || svg.attr("height");
+
+				d.data.size = (matchingSVGWidth / svgWidth) * 100;
+			}
+		})
 
 		updatedSVGs
 			.exit()
@@ -119,7 +131,7 @@ export class LayoutComponent extends ChartComponent {
 				return growth === LayoutGrowth.STRETCH;
 			})
 			.forEach((child, i) => {
-				child.size = 100 - (this.getPrefferedAndFixedSizeSum() as any);
+				child.size = (100 - (+this.getPrefferedAndFixedSizeSum())) / (+this.getNumOfStretchChildren());
 			});
 
 		// Pass children data to the hierarchy layout
@@ -151,26 +163,26 @@ export class LayoutComponent extends ChartComponent {
 					itemComponent.render();
 				}
 
-				if (select(this).select("rect.bg").empty()) {
-					// select(this).append("rect")
-					// 	.classed("bg", true)
-					// 	.attr("width", (d: any) => {
-					// 		return d.x1 - d.x0
-					// 	})
-					// 	.attr("height", (d: any) => d.y1 - d.y0)
-					// 	// .style("stroke", (d, i) => testColors[i])
-					// 	// .style("stroke-width", 2)
-					// 	.style("fill-opacity", 0.2)
-					// 	.style("fill", d => {
-					// 		if (window["testColors"].length === 0) {
-					// 			window["testColors"] = Tools.clone(testColors);
-					// 		}
+				const bgRect = self._services.domUtils.appendOrSelect(select(this), "rect.bg");
+				bgRect
+					.classed("bg", true)
+					.attr("width", (d: any) => {
+						return d.x1 - d.x0
+					})
+					.attr("height", (d: any) => d.y1 - d.y0)
+					.lower();
 
-					// 		const col = window["testColors"].shift();
+				if (!bgRect.attr("fill")) {
+					bgRect.attr("fill-opacity", 0.2)
+					.attr("fill", d => {
+						if (window["testColors"].length === 0) {
+							window["testColors"] = Tools.clone(testColors);
+						}
 
-					// 		return col;
-					// 	})
-					// 	.lower();
+						const col = window["testColors"].shift();
+
+						return `#${col}`;
+					})
 				}
 			});
 	}

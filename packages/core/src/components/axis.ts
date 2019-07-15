@@ -154,7 +154,7 @@ export class Axis extends ChartComponent {
 
 		const { scales } = this._model.getOptions();
 		// const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
-console.log("scales.y.formatter", scales.y.formatter)
+
 		const axisFunction = this.options.axisType === AxisPositions.LEFT ? axisLeft : axisRight;
 		const yAxis = axisFunction(this.y)
 			.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks)

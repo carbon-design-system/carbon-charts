@@ -18,7 +18,7 @@ export class Bar extends ChartComponent {
 		},
 			width = +svg.attr("width") - margin.left - margin.right,
 			height = +svg.attr("height") - margin.top - margin.bottom,
-			g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+			g = this._services.domUtils.appendOrSelect(svg, "g.bars")
 
 		var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
 			'#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
@@ -148,21 +148,27 @@ export class Bar extends ChartComponent {
 			return Number(d.Speed);
 		})]);
 
-		g.selectAll(".bar")
-			.data(data)
-			.enter().append("rect")
-			.attr("class", "bar")
-			.attr("x", function (d) {
-				return x(d.Run);
-			})
-			.attr("y", function (d) {
-				return y(Number(d.Speed));
-			})
-			.attr("width", x.bandwidth())
-			.attr("height", function (d) {
-				return height - y(Number(d.Speed));
-			})
-			.attr("fill", (d, i) => colorArray[i]);
+		const updatedRects = g.selectAll("rect.bar").data(data);
+
+		const enteringRects = updatedRects
+			.enter()
+				.each(() => console.log("NEW BARS ENTERING"))
+				.append("rect")
+				.attr("class", "bar");
+
+		enteringRects.merge(g.selectAll("rect.bar"))
+				.attr("x", function (d) {
+					return x(d.Run);
+				})
+				.attr("y", function (d) {
+					return y(Number(d.Speed));
+				})
+				.attr("width", x.bandwidth())
+				.attr("height", function (d) {
+					return height - y(Number(d.Speed));
+				})
+				.attr("fill", (d, i) => colorArray[i])
+
 	}
 
 	update() {
