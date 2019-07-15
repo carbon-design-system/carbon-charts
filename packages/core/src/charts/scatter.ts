@@ -106,6 +106,13 @@ export class ScatterChart extends Chart {
 										y: LayoutGrowth.FIXED
 									}
 								},
+								// {
+								// 	component: new Bar(),
+								// 	growth: {
+								// 		x: LayoutGrowth.STRETCH,
+								// 		y: LayoutGrowth.FIXED
+								// 	}
+								// }
 							],
 							{
 								direction: LayoutDirection.ROW
@@ -122,6 +129,30 @@ export class ScatterChart extends Chart {
 				}
 			)
 		]
+
+		// return [
+		// 	new LayoutComponent(
+		// 		[
+		// 			{
+		// 				component: new Bar(),
+		// 				growth: {
+		// 					x: LayoutGrowth.STRETCH,
+		// 					y: LayoutGrowth.FIXED
+		// 				}
+		// 			},
+		// 			{
+		// 				component: new Legend(),
+		// 				growth: {
+		// 					x: LayoutGrowth.PREFERRED,
+		// 					y: LayoutGrowth.FIXED
+		// 				}
+		// 			}
+		// 		],
+		// 		{
+		// 			direction: LayoutDirection.ROW
+		// 		}
+		// 	)
+		// ]
 
 		// return [
 		// 	new Overlay(),
