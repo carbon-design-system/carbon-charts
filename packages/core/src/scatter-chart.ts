@@ -233,8 +233,8 @@ export class ScatterChart extends BaseAxisChart {
 					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
 					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity)
-					.style("fill", d => self.getCircleFill(circleRadius, d))
-					.attr("fill-opacity", d => self.getCircleFillOpacity());
+					.style("fill", self.getCircleFill(circleRadius, d))
+					.attr("fill-opacity", self.getCircleFillOpacity());
 
 				self.hideTooltip();
 			});
