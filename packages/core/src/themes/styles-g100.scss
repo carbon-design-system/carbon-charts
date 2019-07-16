@@ -1,5 +1,4 @@
 @import "../../node_modules/@carbon/themes/scss/themes";
-$gray_50: #8c8c8c;
 
 .carbon--theme--g100 {
   @include carbon--theme($carbon--theme--g100) {
@@ -21,8 +20,7 @@ $gray_50: #8c8c8c;
           stroke: $ui-04;
         }
         text {
-          fill: $gray_50;
-          stroke: $gray_50;
+          fill: $text-02;
           &.axis-label {
             fill: $text-01;
             stroke: $text-01;
@@ -35,7 +33,10 @@ $gray_50: #8c8c8c;
 	  }
 	}
 	.legend-btn text {
-		color:$text-03;
+		color:$text-02;
+	}
+	.donut-label, .donut-figure {
+		fill: $text-02;
 	}
   }
 }

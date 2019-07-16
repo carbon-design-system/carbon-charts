@@ -1,14 +1,16 @@
 @import "../../node_modules/@carbon/themes/scss/themes";
-$gray_60: #6f6f6f;
 
 .carbon--theme--white {
   rect.chart-grid-backdrop {
-    fill: white;
+    fill: $ui-01;
+  }
+  g.lines path.line {
+	mix-blend-mode: multiply;
   }
   g.x.grid,
   g.y.grid {
     g.tick line {
-      stroke: $ui-01;
+      stroke: $ui-03;
     }
   }
   .yAxes line.domain,
@@ -16,14 +18,18 @@ $gray_60: #6f6f6f;
     stroke: $ui-04;
   }
   text {
-    fill: $gray_60;
-    stroke: $gray_60;
-    &.axis-label, &.chart-title {
+    fill: $text-02;
+    &.axis-label,
+    &.chart-title {
       fill: $text-01;
       stroke: $text-01;
     }
   }
   .legend-btn text {
-	color: $gray_60;
+    color: $text-02;
+  }
+  .donut-label,
+  .donut-figure {
+    fill: $text-02;
   }
 }

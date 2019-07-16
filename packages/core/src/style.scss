@@ -1,5 +1,8 @@
-@import "./themes/styles-white.scss";
 @import "./themes/styles-g100.scss";
+@import "./themes/styles-g90.scss";
+@import "./themes/styles-g10.scss";
+@import "./themes/styles-white.scss";
+
 $gray_60: #595859;
 
 $default_transition: all .1s ease-out;
@@ -61,7 +64,6 @@ div.chart-holder {
 			&.line {
 				fill: none;
 				stroke-width: 2;
-				mix-blend-mode: multiply;
 
 				&:hover {
 					cursor: default;
@@ -95,12 +97,9 @@ div.chart-holder {
 			&-figure {
 				font-size: 24px;
 				font-weight: normal;
-				fill: $gray_60;
 			}
-
 			&-title {
 				font-size: 15px;
-				fill: $gray_60;
 			}
 		}
 	}

@@ -40,10 +40,17 @@ const initializeThemeSelector = () => {
     const selectedOption = dropdownOptions.find(dO => dO.parentNode.getAttribute("data-value") === themeName);
 	dropdownDefaultOption.innerHTML = selectedOption.innerText;
 
+
 	// Set dark theme on the window
 	switch (themeName) {
-		case "DARK_1":
-			document.body.classList.add("carbon--dark");
+		case "G10":
+			document.body.classList.add("carbon--dark-g10");
+			break;
+		case "G90":
+			document.body.classList.add("carbon--dark-g90");
+			break;
+		case "G100":
+			document.body.classList.add("carbon--dark-g100");
 			break;
 		default:
 			break;
