@@ -24,8 +24,10 @@ export enum ChartType {
  * enum of all supported chart themes
  */
 export enum ChartTheme {
-	LIGHT = "white",
-	DARK = "g100"
+	WHITE = "white",
+	G100 = "g100",
+	G90 = "g90",
+	G10 = "g10"
 }
 /**
  * enum of all possible tooltip sizes
@@ -160,7 +162,7 @@ const baseOptions: BaseChartOptions = {
 		formatter: null,
 		targetsToSkip: ["rect", "circle", "path"]
 	},
-	theme: ChartTheme.LIGHT,
+	theme: ChartTheme.WHITE,
 	overlay: {
 		types: {
 			loading: "loading",
@@ -615,7 +617,8 @@ export const lines = {
 		minNonFilledRadius: 3,
 		mouseover: {
 			strokeWidth: 4,
-			strokeOpacity: 0.5
+			strokeOpacity: 0.5,
+			fillOpacity: 1,
 		},
 		mouseout: {
 			strokeWidth: 0,

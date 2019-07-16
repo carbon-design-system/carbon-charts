@@ -212,6 +212,7 @@ export class ScatterChart extends BaseAxisChart {
 	addDataPointEventListener() {
 		const self = this;
 		const { accessibility } = this.options;
+		const circleRadius = this.getCircleRadius();
 
 		this.svg.selectAll("circle.dot")
 			.on("click", d => self.dispatchEvent("line-onClick", d))
@@ -219,10 +220,11 @@ export class ScatterChart extends BaseAxisChart {
 				select(this)
 					.attr("stroke-width", Configuration.lines.points.mouseover.strokeWidth)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
-					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
+					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity)
+					.style("fill", self.colorScale[d.datasetLabel](d.label))
+					.attr("fill-opacity", Configuration.lines.points.mouseover.fillOpacity);
 
 				self.showTooltip(d, this);
-				self.reduceOpacity(this);
 			})
 			.on("mousemove", d => self.tooltip.positionTooltip())
 			.on("mouseout", function(d) {
@@ -230,7 +232,9 @@ export class ScatterChart extends BaseAxisChart {
 				select(this)
 					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
-					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
+					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity)
+					.style("fill", d => self.getCircleFill(circleRadius, d))
+					.attr("fill-opacity", d => self.getCircleFillOpacity());
 
 				self.hideTooltip();
 			});
