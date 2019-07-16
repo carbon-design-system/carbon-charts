@@ -77,9 +77,8 @@ export class ScatterChart extends BaseAxisChart {
 		if (circleShouldBeFilled) {
 			return this.getStrokeColor(d.datasetLabel, d.label, d.value);
 		}
-		// return the chart-grid-backdrop color or default to white
-		const circleFillColor = this.innerWrap.selectAll("rect.chart-grid-backdrop").style("fill");
-		return circleFillColor ? circleFillColor : "white";
+		// returns null which discards any attribute allocations using return value
+		return null;
 	}
 
 	getCircleFillOpacity() {
