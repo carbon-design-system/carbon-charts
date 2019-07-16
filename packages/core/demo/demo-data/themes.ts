@@ -1,4 +1,3 @@
-
 const urlParams = new URLSearchParams(window.location.search);
 const { ChartTheme } = require("./../../src/configuration");
 
