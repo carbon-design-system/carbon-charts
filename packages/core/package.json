@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts",
-  "version": "0.14.1",
+  "version": "0.15.0",
   "description": "Carbon charting components",
   "main": "./index.umd.js",
   "scripts": {
