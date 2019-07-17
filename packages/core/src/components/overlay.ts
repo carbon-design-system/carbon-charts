@@ -7,7 +7,7 @@ export class ChartOverlay {
 
 	constructor(holder: Element, options: Configuration.ChartOverlayOptions) {
 		this.holder = <HTMLElement>holder;
-		this.overlayElement = this.holder.querySelector("div.chart-overlay");
+		this.overlayElement = this.holder.querySelector("div.chart-wrapper div.chart-overlay");
 
 		if (options) {
 			this.overlayOptions = options;
@@ -26,7 +26,7 @@ export class ChartOverlay {
 		overlay.classList.add("chart-overlay");
 		overlay.innerHTML = this.overlayOptions.innerHTML[type ? type : "loading"];
 
-		this.overlayElement = this.holder.appendChild(overlay);
+		this.overlayElement = this.holder.querySelector("div.chart-wrapper").appendChild(overlay);
 	}
 
 	hide() {
