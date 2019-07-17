@@ -43,6 +43,7 @@ div.chart-holder {
 			line.domain {
 				stroke-width: 1px;
 			}
+
 			.axis path.domain {
 				stroke: none;
 			}
@@ -77,27 +78,33 @@ div.chart-holder {
 			}
 		}
 	}
+
 	g.tick text {
 		font-family: "IBM Plex Sans Condensed";
 	}
+
 	text {
 		font-size: 12px;
 		line-height: 16px;
 		stroke-width: .3;
 		@include fonts();
 		font-weight: 400;
-		&.title{
+
+		&.title {
 			font-size: 18px;
 			font-weight: bold;
 		}
+
 		&.chart-label {
 			font-family: "IBM Plex Sans Condensed";
 		}
+
 		&.donut {
 			&-figure {
 				font-size: 24px;
 				font-weight: normal;
 			}
+
 			&-title {
 				font-size: 15px;
 			}
@@ -188,6 +195,7 @@ div.chart-holder {
 	.legend-tooltip {
 		padding: 0;
 		border: none;
+
 		.legend-tooltip-header {
 			color: white;
 			font-size: 15px;
