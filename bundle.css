@@ -598,6 +598,12 @@ body.carbon--dark-g10 {
 .carbon--theme--g100 .donut-figure {
   fill: #bebebe; }
 
+.carbon--theme--g100 div.chart-overlay {
+  background: #3d3d3d;
+  background: rgba(61, 61, 61, 0.6); }
+  .carbon--theme--g100 div.chart-overlay .ccharts-overlay-content {
+    color: #ffffff; }
+
 .carbon--theme--g90 rect.chart-grid-backdrop {
   fill: #171717; }
 
@@ -625,6 +631,12 @@ body.carbon--dark-g10 {
 .carbon--theme--g90 .donut-figure {
   fill: #bebebe; }
 
+.carbon--theme--g90 div.chart-overlay {
+  background: #565656;
+  background: rgba(86, 86, 86, 0.6); }
+  .carbon--theme--g90 div.chart-overlay .ccharts-overlay-content {
+    color: #ffffff; }
+
 .carbon--theme--g10 rect.chart-grid-backdrop {
   fill: #ffffff; }
 
@@ -651,6 +663,10 @@ body.carbon--dark-g10 {
 .carbon--theme--g10 .donut-label,
 .carbon--theme--g10 .donut-figure {
   fill: #565656; }
+
+.carbon--theme--g10 div.chart-overlay {
+  background: #f3f3f3;
+  background: rgba(243, 243, 243, 0.6); }
 
 .carbon--theme--white rect.chart-grid-backdrop {
   fill: #f3f3f3; }
@@ -681,6 +697,9 @@ body.carbon--dark-g10 {
 .carbon--theme--white .donut-label,
 .carbon--theme--white .donut-figure {
   fill: #565656; }
+
+.carbon--theme--white div.chart-overlay {
+  background: rgba(255, 255, 255, 0.6); }
 
 div.chart-holder {
   position: relative; }
@@ -835,8 +854,7 @@ div.chart-overlay {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.75); }
+  height: 100%; }
   div.chart-overlay span {
     position: absolute;
     top: 50%;

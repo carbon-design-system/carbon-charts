@@ -1008,8 +1008,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/index */ "./src/index.ts");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.scss */ "./demo/index.scss");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _src_style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../src/style.scss */ "./src/style.scss");
-/* harmony import */ var _src_style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_src_style_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _src_styles_style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../src/styles/style.scss */ "./src/styles/style.scss");
+/* harmony import */ var _src_styles_style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_src_styles_style_scss__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _demo_options__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./demo-options */ "./demo/demo-options.ts");
 /* harmony import */ var _chart_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chart-types */ "./demo/chart-types.ts");
 
@@ -1742,6 +1742,7 @@ var BaseAxisChart = /** @class */ (function (_super) {
         this.setXAxis();
         this.setYScale();
         this.setYAxis();
+        this.drawBackdrop();
         this.interpolateValues(this.displayData);
     };
     BaseAxisChart.prototype.updateDisplayData = function () {
@@ -1827,6 +1828,7 @@ var BaseAxisChart = /** @class */ (function (_super) {
         if (this.innerWrap.select(".axis-label.y").nodes().length > 0 || this.options.scales.y.title) {
             this.repositionYAxisTitle();
         }
+        this.drawBackdrop();
         this.dispatchEvent("resize");
     };
     /**************************************
@@ -2065,13 +2067,15 @@ var BaseAxisChart = /** @class */ (function (_super) {
             this.addOrUpdateThresholds(g, false);
         }
     };
+    /**
+     * Draws the background for the chart grid
+     */
     BaseAxisChart.prototype.drawBackdrop = function () {
         // Get height from the grid
         var xGridHeight = this.innerWrap.select(".x.grid").node().getBBox().height;
         var yGridBBox = this.innerWrap.select(".y.grid").node().getBBox();
-        this.innerWrap
-            .append("rect")
-            .classed("chart-grid-backdrop", true)
+        var backdrop = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].appendOrSelect(this.innerWrap, "rect.chart-grid-backdrop");
+        backdrop
             .attr("x", yGridBBox.x)
             .attr("y", yGridBBox.y)
             .attr("width", yGridBBox.width)
@@ -3192,7 +3196,7 @@ __webpack_require__.r(__webpack_exports__);
 var ChartOverlay = /** @class */ (function () {
     function ChartOverlay(holder, options) {
         this.holder = holder;
-        this.overlayElement = this.holder.querySelector("div.chart-overlay");
+        this.overlayElement = this.holder.querySelector("div.chart-wrapper div.chart-overlay");
         if (options) {
             this.overlayOptions = options;
         }
@@ -3207,7 +3211,7 @@ var ChartOverlay = /** @class */ (function () {
         var overlay = document.createElement("div");
         overlay.classList.add("chart-overlay");
         overlay.innerHTML = this.overlayOptions.innerHTML[type ? type : "loading"];
-        this.overlayElement = this.holder.appendChild(overlay);
+        this.overlayElement = this.holder.querySelector("div.chart-wrapper").appendChild(overlay);
     };
     ChartOverlay.prototype.hide = function () {
         this.overlayElement.style.display = "none";
@@ -5266,10 +5270,10 @@ var StackedBarChart = /** @class */ (function (_super) {
 
 /***/ }),
 
-/***/ "./src/style.scss":
-/*!************************!*\
-  !*** ./src/style.scss ***!
-  \************************/
+/***/ "./src/styles/style.scss":
+/*!*******************************!*\
+  !*** ./src/styles/style.scss ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
