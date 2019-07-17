@@ -85,6 +85,7 @@ export class BaseAxisChart extends BaseChart {
 		this.setXAxis();
 		this.setYScale();
 		this.setYAxis();
+		this.drawBackdrop();
 		this.interpolateValues(this.displayData);
 	}
 
@@ -188,6 +189,7 @@ export class BaseAxisChart extends BaseChart {
 			this.repositionYAxisTitle();
 		}
 
+		this.drawBackdrop();
 		this.dispatchEvent("resize");
 	}
 
@@ -441,6 +443,7 @@ export class BaseAxisChart extends BaseChart {
 		// Draw the x & y grid
 		this.drawXGrid();
 		this.drawYGrid();
+
 		// Draw the backdrop
 		this.drawBackdrop();
 	}
@@ -480,14 +483,16 @@ export class BaseAxisChart extends BaseChart {
 		}
 	}
 
+	/**
+	 * Draws the background for the chart grid
+	 */
 	drawBackdrop() {
 		// Get height from the grid
 		const xGridHeight = this.innerWrap.select(".x.grid").node().getBBox().height;
 		const yGridBBox = this.innerWrap.select(".y.grid").node().getBBox();
+		const backdrop = Tools.appendOrSelect(this.innerWrap, "rect.chart-grid-backdrop");
 
-		this.innerWrap
-			.append("rect")
-			.classed("chart-grid-backdrop", true)
+		backdrop
 			.attr("x", yGridBBox.x)
 			.attr("y", yGridBBox.y)
 			.attr("width", yGridBBox.width)
