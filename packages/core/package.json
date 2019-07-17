@@ -44,8 +44,10 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@carbon/colors": "10.1.1",
+    "@carbon/themes": "10.3.1",
     "@carbon/utils-position": "1.1.0",
     "babel-polyfill": "6.26.0",
+    "carbon-components": "10.3.2",
     "resize-observer-polyfill": "1.5.0"
   },
   "peerDependencies": {

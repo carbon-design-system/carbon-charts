@@ -21,6 +21,15 @@ export enum ChartType {
 }
 
 /**
+ * enum of all supported chart themes
+ */
+export enum ChartTheme {
+	WHITE = "white",
+	G100 = "g100",
+	G90 = "g90",
+	G10 = "g10"
+}
+/**
  * enum of all possible tooltip sizes
  */
 export enum TooltipSize {
@@ -95,6 +104,10 @@ export interface BaseChartOptions {
 	 */
 	colors: Array<string>;
 	/**
+	 * supported chart theme
+	 */
+	theme?: ChartTheme;
+	/**
 	 * tooltip configuration
 	 */
 	tooltip?: {
@@ -149,6 +162,7 @@ const baseOptions: BaseChartOptions = {
 		formatter: null,
 		targetsToSkip: ["rect", "circle", "path"]
 	},
+	theme: ChartTheme.WHITE,
 	overlay: {
 		types: {
 			loading: "loading",
@@ -603,7 +617,8 @@ export const lines = {
 		minNonFilledRadius: 3,
 		mouseover: {
 			strokeWidth: 4,
-			strokeOpacity: 0.5
+			strokeOpacity: 0.5,
+			fillOpacity: 1,
 		},
 		mouseout: {
 			strokeWidth: 0,
@@ -671,7 +686,7 @@ export const legend = {
 		borderWidth: false
 	},
 	inactive: {
-		backgroundColor: "white",
+		backgroundColor: "transparent",
 		borderStyle: "solid",
 		borderWidth: "2px"
 	},

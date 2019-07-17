@@ -1,6 +1,6 @@
 import colors from "./colors";
 
-export const LIGHT_1 = [
+export const WHITE = [
 	colors.purple(60),
 	colors.teal(30),
 	colors.magenta(50),
@@ -10,7 +10,7 @@ export const LIGHT_1 = [
 	colors.cyan(80)
 ];
 
-export const LIGHT_2 = [
+export const WHITE_2 = [
 	colors.purple(60),
 	colors.magenta(30),
 	colors.teal(70),
@@ -20,7 +20,7 @@ export const LIGHT_2 = [
 	colors.cyan(80)
 ];
 
-export const DARK_1 = [
+export const G10 = [
 	colors.purple(60),
 	colors.teal(30),
 	colors.magenta(50),
@@ -30,4 +30,7 @@ export const DARK_1 = [
 	colors.magenta(30)
 ];
 
-export const DEFAULT = LIGHT_1;
+export const G90 = G10;
+export const G100 = G10;
+
+export const DEFAULT = WHITE;

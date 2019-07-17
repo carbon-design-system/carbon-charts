@@ -74,8 +74,11 @@ export class ScatterChart extends BaseAxisChart {
 		// Or the chart is only a scatter chart
 		// And not a line chart for instance
 		const circleShouldBeFilled = radius < Configuration.lines.points.minNonFilledRadius || this.constructor === ScatterChart;
-
-		return circleShouldBeFilled ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : "white";
+		if (circleShouldBeFilled) {
+			return this.getStrokeColor(d.datasetLabel, d.label, d.value);
+		}
+		// returns null which discards any attribute allocations using return value
+		return null;
 	}
 
 	getCircleFillOpacity() {
@@ -208,6 +211,7 @@ export class ScatterChart extends BaseAxisChart {
 	addDataPointEventListener() {
 		const self = this;
 		const { accessibility } = this.options;
+		const circleRadius = this.getCircleRadius();
 
 		this.svg.selectAll("circle.dot")
 			.on("click", d => self.dispatchEvent("line-onClick", d))
@@ -215,10 +219,11 @@ export class ScatterChart extends BaseAxisChart {
 				select(this)
 					.attr("stroke-width", Configuration.lines.points.mouseover.strokeWidth)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
-					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity);
+					.attr("stroke-opacity", Configuration.lines.points.mouseover.strokeOpacity)
+					.style("fill", self.colorScale[d.datasetLabel](d.label))
+					.attr("fill-opacity", Configuration.lines.points.mouseover.fillOpacity);
 
 				self.showTooltip(d, this);
-				self.reduceOpacity(this);
 			})
 			.on("mousemove", d => self.tooltip.positionTooltip())
 			.on("mouseout", function(d) {
@@ -226,7 +231,9 @@ export class ScatterChart extends BaseAxisChart {
 				select(this)
 					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
 					.attr("stroke", self.colorScale[d.datasetLabel](d.label))
-					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity);
+					.attr("stroke-opacity", Configuration.lines.points.mouseout.strokeOpacity)
+					.style("fill", self.getCircleFill(circleRadius, d))
+					.attr("fill-opacity", self.getCircleFillOpacity());
 
 				self.hideTooltip();
 			});

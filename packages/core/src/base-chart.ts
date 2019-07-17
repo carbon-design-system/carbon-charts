@@ -440,7 +440,8 @@ export class BaseChart {
 			chartId = this.id;
 			container = parent.append("div");
 			container.attr("chart-id", chartId)
-				.classed("chart-wrapper", true);
+				.classed("chart-wrapper", true)
+				.classed(`carbon--theme--${this.options.theme}`, true);
 			if (container.select(".legend-wrapper").nodes().length === 0) {
 				const legendWrapper = container.append("div")
 					.attr("class", "legend-wrapper")
@@ -571,7 +572,6 @@ export class BaseChart {
 		if (this.container.select(".legend-tooltip").nodes().length > 0
 			&& this.container.select(".legend-tooltip").node().style.display === "block") { return; }
 
-		this.container.selectAll(".legend-btn").style("display", "inline-block");
 		const svgWidth = this.container.select("g.inner-wrap").node().getBBox().width;
 		if (this.isLegendOnRight()) {
 			this.container.selectAll(".expand-btn").remove();
