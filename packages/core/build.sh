@@ -6,5 +6,5 @@ webpack --config webpack.build.js
 tsc
 cp *.md dist/
 cp package.json dist/
-cp src/styles/style.scss dist/style.scss
+cp -a src/styles/. dist/styles
 node-sass dist/style.scss > dist/style.css
