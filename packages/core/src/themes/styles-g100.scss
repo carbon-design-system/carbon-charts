@@ -4,22 +4,19 @@
   @include carbon--theme($carbon--theme--g100) {
 
 	svg.chart-svg {
-
 		&.line {
-
 			circle.dot {
 					fill: $ui-01;
 			}
 		}
 
 		g.inner-wrap {
-
 			rect.chart-grid-backdrop {
           		fill: #000;
 			}
 
 			g.lines path.line {
-			mix-blend-mode: unset;
+				mix-blend-mode: unset;
 			}
 
 			g.x.grid, g.y.grid {
@@ -33,7 +30,7 @@
 			}
 
 			text {
-			fill: $text-02;
+				fill: $text-02;
 
 				&.axis-label {
 					fill: $text-01;

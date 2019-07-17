@@ -9,14 +9,12 @@ $gray100: #171717;
 		}
 
 		svg.chart-svg.line {
-
 			circle.dot {
 				  fill: $gray100;
 			}
 		}
 
 		g.x.grid, g.y.grid {
-
 			g.tick line {
 				stroke: $ui-01;
 			}
