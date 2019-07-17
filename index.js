@@ -278,6 +278,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stackedBarData", function() { return stackedBarData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stackedBarOptions", function() { return stackedBarOptions; });
 /* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./demo/demo-data/colors.ts");
+/* harmony import */ var _themes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./themes */ "./demo/demo-data/themes.ts");
+
 
 var groupedBarData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -351,7 +353,8 @@ var groupedBarOptions = {
     },
     legendClickable: true,
     containerResizable: true,
-    title: "Bar Chart"
+    title: "Bar Chart",
+    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
 };
 // Simple bar
 var simpleBarData = {
@@ -385,6 +388,7 @@ var simpleBarOptions = {
     },
     legendClickable: true,
     containerResizable: true,
+    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])(),
     bars: {
         maxWidth: 50
     },
@@ -459,6 +463,7 @@ var stackedBarOptions = {
     legendClickable: true,
     containerResizable: true,
     title: "Stacked Bar Chart",
+    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
 };
 
 
@@ -499,6 +504,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "comboData", function() { return comboData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "comboOptions", function() { return comboOptions; });
 /* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./demo/demo-data/colors.ts");
+/* harmony import */ var _themes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./themes */ "./demo/demo-data/themes.ts");
+
 
 var comboData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -571,7 +578,8 @@ var comboOptions = {
     },
     legendClickable: true,
     containerResizable: true,
-    title: "Combo Chart"
+    title: "Combo Chart",
+    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
 };
 
 
@@ -649,6 +657,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineOptions", function() { return lineOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterData", function() { return scatterData; });
 /* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./demo/demo-data/colors.ts");
+/* harmony import */ var _themes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./themes */ "./demo/demo-data/themes.ts");
+
 
 var curvedLineData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -712,7 +722,8 @@ var curvedLineOptions = {
     },
     legendClickable: true,
     containerResizable: true,
-    title: "Line Chart"
+    title: "Line Chart",
+    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
 };
 var lineData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -781,7 +792,8 @@ var lineOptions = {
     },
     legendClickable: true,
     containerResizable: true,
-    title: "Line Chart"
+    title: "Line Chart",
+    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
 };
 var scatterData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -838,6 +850,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "donutOptions", function() { return donutOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pieData", function() { return pieData; });
 /* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./demo/demo-data/colors.ts");
+/* harmony import */ var _themes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./themes */ "./demo/demo-data/themes.ts");
+
 
 var pieOptions = {
     accessibility: false,
@@ -845,11 +859,13 @@ var pieOptions = {
     containerResizable: true,
     colors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
     title: "Pie Chart",
+    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
 };
 var donutOptions = {
     accessibility: false,
     legendClickable: true,
     containerResizable: true,
+    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])(),
     colors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
     center: {
         label: "Products",
@@ -867,6 +883,39 @@ var pieData = {
             data: [70000, 40000, 90000, 50000, 60000, 45000, 90000, 70000, 80000, 120000]
         }
     ]
+};
+
+
+/***/ }),
+
+/***/ "./demo/demo-data/themes.ts":
+/*!**********************************!*\
+  !*** ./demo/demo-data/themes.ts ***!
+  \**********************************/
+/*! exports provided: getTheme */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTheme", function() { return getTheme; });
+var urlParams = new URLSearchParams(window.location.search);
+var ChartTheme = __webpack_require__(/*! ./../../src/configuration */ "./src/configuration.ts").ChartTheme;
+var getTheme = function () {
+    if (urlParams.has("theme")) {
+        switch (urlParams.get("theme")) {
+            case "G10":
+                return ChartTheme.G10;
+            case "G90":
+                return ChartTheme.G90;
+            case "G100":
+                return ChartTheme.G100;
+            default:
+                return ChartTheme.WHITE;
+        }
+    }
+    else {
+        return ChartTheme.WHITE;
+    }
 };
 
 
@@ -916,6 +965,18 @@ var initializeThemeSelector = function () {
     var dropdownDefaultOption = document.querySelector("div.theme-selector li.bx--dropdown-text");
     var selectedOption = dropdownOptions.find(function (dO) { return dO.parentNode.getAttribute("data-value") === themeName; });
     dropdownDefaultOption.innerHTML = selectedOption.innerText;
+    // Set dark theme on the window
+    switch (themeName) {
+        case "G10":
+            document.body.classList.add("carbon--dark-g10");
+            break;
+        case "G90":
+            document.body.classList.add("carbon--dark-g90");
+            break;
+        case "G100":
+            document.body.classList.add("carbon--dark-g100");
+            break;
+    }
 };
 var initializeDemoOptions = function () {
     initializeThemeSelector();
@@ -1662,9 +1723,8 @@ var BaseAxisChart = /** @class */ (function (_super) {
             this.setXAxis();
             this.setYScale();
             this.setYAxis();
-            // Draw the x & y grid
-            this.drawXGrid();
-            this.drawYGrid();
+            // Draws the grid
+            this.drawGrid();
             this.addOrUpdateLegend();
         }
         else {
@@ -1933,10 +1993,7 @@ var BaseAxisChart = /** @class */ (function (_super) {
                 .attr("y1", this.y(0))
                 .attr("y2", this.y(0))
                 .attr("x1", 0)
-                .attr("x2", chartSize.width)
-                .attr("stroke", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].domain.color)
-                .attr("fill", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].domain.color)
-                .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["scales"].domain.strokeWidth);
+                .attr("x2", chartSize.width);
         }
         var tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
         // Add y-axis title
@@ -1975,6 +2032,13 @@ var BaseAxisChart = /** @class */ (function (_super) {
             }
         }
     };
+    BaseAxisChart.prototype.drawGrid = function () {
+        // Draw the x & y grid
+        this.drawXGrid();
+        this.drawYGrid();
+        // Draw the backdrop
+        this.drawBackdrop();
+    };
     BaseAxisChart.prototype.drawXGrid = function () {
         var yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
         var xGrid = Object(d3_axis__WEBPACK_IMPORTED_MODULE_2__["axisBottom"])(this.x)
@@ -2000,6 +2064,19 @@ var BaseAxisChart = /** @class */ (function (_super) {
         if (thresholds && thresholds.length > 0) {
             this.addOrUpdateThresholds(g, false);
         }
+    };
+    BaseAxisChart.prototype.drawBackdrop = function () {
+        // Get height from the grid
+        var xGridHeight = this.innerWrap.select(".x.grid").node().getBBox().height;
+        var yGridBBox = this.innerWrap.select(".y.grid").node().getBBox();
+        this.innerWrap
+            .append("rect")
+            .classed("chart-grid-backdrop", true)
+            .attr("x", yGridBBox.x)
+            .attr("y", yGridBBox.y)
+            .attr("width", yGridBBox.width)
+            .attr("height", xGridHeight)
+            .lower();
     };
     BaseAxisChart.prototype.addOrUpdateThresholds = function (yGrid, animate) {
         var _this = this;
@@ -2561,7 +2638,8 @@ var BaseChart = /** @class */ (function () {
             chartId = this.id;
             container = parent.append("div");
             container.attr("chart-id", chartId)
-                .classed("chart-wrapper", true);
+                .classed("chart-wrapper", true)
+                .classed("carbon--theme--" + this.options.theme, true);
             if (container.select(".legend-wrapper").nodes().length === 0) {
                 var legendWrapper = container.append("div")
                     .attr("class", "legend-wrapper")
@@ -2673,7 +2751,6 @@ var BaseChart = /** @class */ (function () {
             && this.container.select(".legend-tooltip").node().style.display === "block") {
             return;
         }
-        this.container.selectAll(".legend-btn").style("display", "inline-block");
         var svgWidth = this.container.select("g.inner-wrap").node().getBBox().width;
         if (this.isLegendOnRight()) {
             this.container.selectAll(".expand-btn").remove();
@@ -3272,12 +3349,13 @@ var ChartTooltip = /** @class */ (function () {
 /*!******************************!*\
   !*** ./src/configuration.ts ***!
   \******************************/
-/*! exports provided: ChartType, TooltipSize, ThresholdTheme, options, charts, scales, grid, bars, lines, pie, donut, legend, tooltip, transitions, selectors */
+/*! exports provided: ChartType, ChartTheme, TooltipSize, ThresholdTheme, options, charts, scales, grid, bars, lines, pie, donut, legend, tooltip, transitions, selectors */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChartType", function() { return ChartType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChartTheme", function() { return ChartTheme; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TooltipSize", function() { return TooltipSize; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ThresholdTheme", function() { return ThresholdTheme; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "options", function() { return options; });
@@ -3314,6 +3392,16 @@ var ChartType;
     ChartType["COMBO"] = "combo";
 })(ChartType || (ChartType = {}));
 /**
+ * enum of all supported chart themes
+ */
+var ChartTheme;
+(function (ChartTheme) {
+    ChartTheme["WHITE"] = "white";
+    ChartTheme["G100"] = "g100";
+    ChartTheme["G90"] = "g90";
+    ChartTheme["G10"] = "g10";
+})(ChartTheme || (ChartTheme = {}));
+/**
  * enum of all possible tooltip sizes
  */
 var TooltipSize;
@@ -3342,6 +3430,7 @@ var baseOptions = {
         formatter: null,
         targetsToSkip: ["rect", "circle", "path"]
     },
+    theme: ChartTheme.WHITE,
     overlay: {
         types: {
             loading: "loading",
@@ -3561,7 +3650,8 @@ var lines = {
         minNonFilledRadius: 3,
         mouseover: {
             strokeWidth: 4,
-            strokeOpacity: 0.5
+            strokeOpacity: 0.5,
+            fillOpacity: 1,
         },
         mouseout: {
             strokeWidth: 0,
@@ -3626,7 +3716,7 @@ var legend = {
         borderWidth: false
     },
     inactive: {
-        backgroundColor: "white",
+        backgroundColor: "transparent",
         borderStyle: "solid",
         borderWidth: "2px"
     },
@@ -4543,7 +4633,11 @@ var ScatterChart = /** @class */ (function (_super) {
         // Or the chart is only a scatter chart
         // And not a line chart for instance
         var circleShouldBeFilled = radius < _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.minNonFilledRadius || this.constructor === ScatterChart;
-        return circleShouldBeFilled ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : "white";
+        if (circleShouldBeFilled) {
+            return this.getStrokeColor(d.datasetLabel, d.label, d.value);
+        }
+        // returns null which discards any attribute allocations using return value
+        return null;
     };
     ScatterChart.prototype.getCircleFillOpacity = function () {
         // If the chart is only a scatter chart
@@ -4654,15 +4748,17 @@ var ScatterChart = /** @class */ (function (_super) {
     ScatterChart.prototype.addDataPointEventListener = function () {
         var self = this;
         var accessibility = this.options.accessibility;
+        var circleRadius = this.getCircleRadius();
         this.svg.selectAll("circle.dot")
             .on("click", function (d) { return self.dispatchEvent("line-onClick", d); })
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.mouseover.strokeWidth)
                 .attr("stroke", self.colorScale[d.datasetLabel](d.label))
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.mouseover.strokeOpacity);
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.mouseover.strokeOpacity)
+                .style("fill", self.colorScale[d.datasetLabel](d.label))
+                .attr("fill-opacity", _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.mouseover.fillOpacity);
             self.showTooltip(d, this);
-            self.reduceOpacity(this);
         })
             .on("mousemove", function (d) { return self.tooltip.positionTooltip(); })
             .on("mouseout", function (d) {
@@ -4670,7 +4766,9 @@ var ScatterChart = /** @class */ (function (_super) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
                 .attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
                 .attr("stroke", self.colorScale[d.datasetLabel](d.label))
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.mouseout.strokeOpacity);
+                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_2__["lines"].points.mouseout.strokeOpacity)
+                .style("fill", self.getCircleFill(circleRadius, d))
+                .attr("fill-opacity", self.getCircleFillOpacity());
             self.hideTooltip();
         });
     };
@@ -4685,18 +4783,20 @@ var ScatterChart = /** @class */ (function (_super) {
 /*!***************************************!*\
   !*** ./src/services/colorPalettes.ts ***!
   \***************************************/
-/*! exports provided: LIGHT_1, LIGHT_2, DARK_1, DEFAULT */
+/*! exports provided: WHITE, WHITE_2, G10, G90, G100, DEFAULT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LIGHT_1", function() { return LIGHT_1; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LIGHT_2", function() { return LIGHT_2; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DARK_1", function() { return DARK_1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WHITE", function() { return WHITE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WHITE_2", function() { return WHITE_2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G10", function() { return G10; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G90", function() { return G90; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G100", function() { return G100; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT", function() { return DEFAULT; });
 /* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./src/services/colors.ts");
 
-var LIGHT_1 = [
+var WHITE = [
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(60),
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(30),
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(50),
@@ -4705,7 +4805,7 @@ var LIGHT_1 = [
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(30),
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].cyan(80)
 ];
-var LIGHT_2 = [
+var WHITE_2 = [
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(60),
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(30),
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(70),
@@ -4714,7 +4814,7 @@ var LIGHT_2 = [
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(30),
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].cyan(80)
 ];
-var DARK_1 = [
+var G10 = [
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(60),
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(30),
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(50),
@@ -4723,7 +4823,9 @@ var DARK_1 = [
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(60),
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(30)
 ];
-var DEFAULT = LIGHT_1;
+var G90 = G10;
+var G100 = G10;
+var DEFAULT = WHITE;
 
 
 /***/ }),
@@ -5293,10 +5395,14 @@ var Tools;
      * @returns an object containing the x and y translations
      */
     function getTranslationValues(elementRef) {
-        var transformMatrix = window.getComputedStyle(elementRef).getPropertyValue("transform").replace(/\s/g, "");
         // returns matrix(a, b, c, d, tx, ty) of transformation values (2d transform)
+        var transformMatrix = window.getComputedStyle(elementRef).getPropertyValue("transform").replace(/\s/g, "");
         var transformValues = transformMatrix.substring(transformMatrix.indexOf("(") + 1, transformMatrix.indexOf(")")).split(",");
-        return { tx: transformValues[4], ty: transformValues[5] };
+        // if there are no translations, return { dx: 0,  dy: 0 } instead of undefined
+        return {
+            tx: transformValues[4] ? transformValues[4] : 0,
+            ty: transformValues[5] ? transformValues[5] : 0
+        };
     }
     Tools.getTranslationValues = getTranslationValues;
     /**************************************
