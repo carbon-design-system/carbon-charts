@@ -443,6 +443,7 @@ export class BaseAxisChart extends BaseChart {
 		// Draw the x & y grid
 		this.drawXGrid();
 		this.drawYGrid();
+
 		// Draw the backdrop
 		this.drawBackdrop();
 	}
