@@ -54,5 +54,13 @@
 		.donut-figure {
 			fill: $text-02;
 		}
+
+		div.chart-overlay {
+			@include background-opacity($ui-02, 0.6);
+
+			.ccharts-overlay-content {
+				color: $text-04;
+			}
+		}
 	}
 }

@@ -1,15 +1,13 @@
-@import "./themes/styles-g100.scss";
-@import "./themes/styles-g90.scss";
-@import "./themes/styles-g10.scss";
-@import "./themes/styles-white.scss";
+@import "./mixins.scss";
+@import "./g100.scss";
+@import "./g90.scss";
+@import "./g10.scss";
+@import "./white.scss";
 
 $gray_60: #595859;
 
 $default_transition: all 0.1s ease-out;
 
-@mixin fonts() {
-	font-family: "IBM Plex Sans", Arial, sans-serif;
-}
 
 div.chart-holder {
 	position: relative;
@@ -252,7 +250,6 @@ div.chart-overlay {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(256, 256, 256, 0.75);
 
 	span {
 		position: absolute;
