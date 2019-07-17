@@ -1,6 +1,11 @@
+@import "./themes/styles-g100.scss";
+@import "./themes/styles-g90.scss";
+@import "./themes/styles-g10.scss";
+@import "./themes/styles-white.scss";
+
 $gray_60: #595859;
 
-$default_transition: all .1s ease-out;
+$default_transition: all 0.1s ease-out;
 
 @mixin fonts() {
 	font-family: "IBM Plex Sans", Arial, sans-serif;
@@ -34,22 +39,26 @@ div.chart-holder {
 		/*
 		Axes
 		*/
-		g.yAxes.axis {
-			path.domain {
+		g.yAxes {
+			line.domain {
+				stroke-width: 1px;
+			}
+
+			.axis path.domain {
 				stroke: none;
 			}
 		}
 
 		g.x.axis {
 			path.domain {
-				stroke: #959595;
-				stroke-width: 2;
+				stroke-width: 1px;
 			}
 		}
 
-		g.x.grid, g.y.grid {
+		g.x.grid,
+		g.y.grid {
 			g.tick line {
-				stroke: rgb(236, 238, 239);
+				stroke-width: 1px;
 			}
 		}
 
@@ -57,7 +66,6 @@ div.chart-holder {
 			&.line {
 				fill: none;
 				stroke-width: 2;
-				mix-blend-mode: multiply;
 
 				&:hover {
 					cursor: default;
@@ -72,28 +80,34 @@ div.chart-holder {
 		}
 	}
 
+	g.tick text {
+		font-family: "IBM Plex Sans Condensed";
+	}
+
 	text {
 		font-size: 12px;
-		fill: $gray_60;
-		stroke: $gray_60;
-		stroke-width: .3;
+		line-height: 16px;
+		stroke-width: 0.3;
 		@include fonts();
+		font-weight: 400;
 
-		&.title{
+		&.title {
 			font-size: 18px;
 			font-weight: bold;
+		}
+
+		&.chart-label {
+			font-family: "IBM Plex Sans Condensed";
 		}
 
 		&.donut {
 			&-figure {
 				font-size: 24px;
 				font-weight: normal;
-				fill: $gray_60;
 			}
 
 			&-title {
 				font-size: 15px;
-				fill: $gray_60;
 			}
 		}
 	}
@@ -121,7 +135,6 @@ div.chart-holder {
 		float: right;
 		margin-top: 0;
 		margin-right: 20px;
-		color: #586464;
 		overflow: hidden;
 		padding-left: 0;
 		white-space: nowrap;
@@ -139,7 +152,9 @@ div.chart-holder {
 	}
 
 	.legend-btn {
-		display: inline-block;
+		display: inline-flex;
+		flex-direction: row;
+		align-items: center;
 		line-height: 20px;
 		font-size: 12px;
 		margin-bottom: 0;
@@ -181,6 +196,7 @@ div.chart-holder {
 	.legend-tooltip {
 		padding: 0;
 		border: none;
+
 		.legend-tooltip-header {
 			color: white;
 			font-size: 15px;
@@ -219,7 +235,7 @@ div.chart-holder {
 		}
 		.legend-btn {
 			width: 100%;
-			text-indent: -.7em;
+			text-indent: -0.7em;
 			text {
 				max-width: 90%;
 			}
@@ -259,10 +275,10 @@ div.chart-overlay {
 
 .tooltip {
 	background-color: #fff;
-	border: 1px solid #DFE3E6;
-	padding: .25rem .5rem;
+	border: 1px solid #dfe3e6;
+	padding: 0.25rem 0.5rem;
 	display: block;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .1);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
 	@include fonts();
 	font-size: 12px;
 	font-weight: 300;
@@ -290,7 +306,5 @@ div.chart-overlay {
 }
 
 #carbon-charts-patterns svg {
-    height: 0;
+	height: 0;
 }
-
-

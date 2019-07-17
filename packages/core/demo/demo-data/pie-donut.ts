@@ -1,4 +1,5 @@
 import { colors } from "./colors";
+import { getTheme } from "./themes";
 
 export const pieOptions = {
 	accessibility: false,
@@ -6,12 +7,14 @@ export const pieOptions = {
 	containerResizable: true,
 	colors,
 	title: "Pie Chart",
+	theme: getTheme()
 };
 
 export const donutOptions = {
 	accessibility: false,
 	legendClickable: true,
 	containerResizable: true,
+	theme: getTheme(),
 	colors,
 	center: {
 		label: "Products",

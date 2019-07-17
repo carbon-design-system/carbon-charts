@@ -1,4 +1,5 @@
 import { colors } from "./colors";
+import { getTheme } from "./themes";
 
 export const curvedLineData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -63,7 +64,8 @@ export const curvedLineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	title: "Line Chart"
+	title: "Line Chart",
+	theme: getTheme()
 };
 
 
@@ -135,7 +137,8 @@ export const lineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	title: "Line Chart"
+	title: "Line Chart",
+	theme: getTheme()
 };
 
 export const scatterData = {
@@ -175,4 +178,4 @@ export const scatterData = {
 			]
 		}
 	]
-}
+};
