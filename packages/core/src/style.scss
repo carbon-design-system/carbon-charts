@@ -5,7 +5,7 @@
 
 $gray_60: #595859;
 
-$default_transition: all .1s ease-out;
+$default_transition: all 0.1s ease-out;
 
 @mixin fonts() {
 	font-family: "IBM Plex Sans", Arial, sans-serif;
@@ -55,7 +55,8 @@ div.chart-holder {
 			}
 		}
 
-		g.x.grid, g.y.grid {
+		g.x.grid,
+		g.y.grid {
 			g.tick line {
 				stroke-width: 1px;
 			}
@@ -86,7 +87,7 @@ div.chart-holder {
 	text {
 		font-size: 12px;
 		line-height: 16px;
-		stroke-width: .3;
+		stroke-width: 0.3;
 		@include fonts();
 		font-weight: 400;
 
@@ -234,7 +235,7 @@ div.chart-holder {
 		}
 		.legend-btn {
 			width: 100%;
-			text-indent: -.7em;
+			text-indent: -0.7em;
 			text {
 				max-width: 90%;
 			}
@@ -274,10 +275,10 @@ div.chart-overlay {
 
 .tooltip {
 	background-color: #fff;
-	border: 1px solid #DFE3E6;
-	padding: .25rem .5rem;
+	border: 1px solid #dfe3e6;
+	padding: 0.25rem 0.5rem;
 	display: block;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .1);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
 	@include fonts();
 	font-size: 12px;
 	font-weight: 300;
@@ -305,7 +306,5 @@ div.chart-overlay {
 }
 
 #carbon-charts-patterns svg {
-    height: 0;
+	height: 0;
 }
-
-
