@@ -1,22 +1,21 @@
 @import "../../node_modules/@carbon/themes/scss/themes";
-$gray100: #171717;
 
-.carbon--theme--g90 {
-	@include carbon--theme($carbon--theme--g90) {
+.carbon--theme--g10 {
+	@include carbon--theme($carbon--theme--g10) {
 		rect.chart-grid-backdrop {
-			fill: $gray100;
+			fill: $ui-01;
 		}
 
 		svg.chart-svg.line {
 			circle.dot {
-				fill: $gray100;
+				fill: $ui-01;
 			}
 		}
 
 		g.x.grid,
 		g.y.grid {
 			g.tick line {
-				stroke: $ui-01;
+				stroke: $ui-03;
 			}
 		}
 
@@ -42,6 +41,10 @@ $gray100: #171717;
 		.donut-label,
 		.donut-figure {
 			fill: $text-02;
+		}
+
+		div.chart-overlay {
+			@include background-opacity($ui-02, 0.6);
 		}
 	}
 }
