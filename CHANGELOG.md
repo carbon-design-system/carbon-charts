@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.1](https://github.com/IBM/carbon-charts/compare/v0.15.0...v0.15.1) (2019-07-17)
+
+
+### Bug Fixes
+
+* **core:** backdrop resize with chart ([bbc288d](https://github.com/IBM/carbon-charts/commit/bbc288d))
+
+
+
+
+
 # [0.15.0](https://github.com/IBM/carbon-charts/compare/v0.14.1...v0.15.0) (2019-07-17)
 
 
