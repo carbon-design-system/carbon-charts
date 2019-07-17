@@ -2,172 +2,172 @@ $default_transition: all 0.1s ease-out;
 @import "~@carbon/themes/scss/themes";
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  background-color: #fbfbfb;
-  font-family: "IBM Plex Sans", Arial, sans-serif;
+	margin: 0;
+	background-color: #fbfbfb;
+	font-family: "IBM Plex Sans", Arial, sans-serif;
 }
 
 header.m-demo-header {
-  margin-bottom: 20px;
-  padding: 50px 0;
-  text-align: center;
+	margin-bottom: 20px;
+	padding: 50px 0;
+	text-align: center;
 
-  div {
-	&.logo {
-	  border-radius: 20px;
-	  border: 1px solid #cad3e0;
-	  width: 100px;
-	  height: 100px;
-	  margin: auto;
-	  margin-bottom: 15px;
+	div {
+		&.logo {
+			border-radius: 20px;
+			border: 1px solid #cad3e0;
+			width: 100px;
+			height: 100px;
+			margin: auto;
+			margin-bottom: 15px;
 
-	  img {
-		width: 75px;
-		height: 75px;
-		margin-top: 12.5px;
-	  }
-	}
-
-	&.content {
-	  width: 80%;
-	  max-width: 800px;
-	  margin: auto;
-
-	  div.links {
-		display: table;
-		margin: auto;
-
-		.bx--btn {
-		  float: left;
-		  margin-right: 5px;
-		  max-height: 30px;
-		  padding-right: 15px;
-
-		  &.last {
-			margin-right: 0;
-		  }
-
-		  svg {
-			margin-right: 5px;
-
-			&.angular {
-			  width: 22px;
-			  height: 22px;
+			img {
+				width: 75px;
+				height: 75px;
+				margin-top: 12.5px;
 			}
-
-			&.react {
-			  width: 25px;
-			  height: 25px;
-			  margin-left: -5px;
-			}
-
-			&.vue {
-			  width: 18px;
-			  height: 18px;
-			}
-		  }
 		}
-	  }
-	}
 
-	h1 {
-	  font-size: 2.25rem;
-	  font-weight: 600;
-	  margin-top: 20px;
-	  margin-bottom: 10px;
-	}
+		&.content {
+			width: 80%;
+			max-width: 800px;
+			margin: auto;
 
-	h3 {
-	  font-size: 1.25rem;
-	  font-weight: 300;
-	  margin-bottom: 45px;
+			div.links {
+				display: table;
+				margin: auto;
+
+				.bx--btn {
+					float: left;
+					margin-right: 5px;
+					max-height: 30px;
+					padding-right: 15px;
+
+					&.last {
+						margin-right: 0;
+					}
+
+					svg {
+						margin-right: 5px;
+
+						&.angular {
+							width: 22px;
+							height: 22px;
+						}
+
+						&.react {
+							width: 25px;
+							height: 25px;
+							margin-left: -5px;
+						}
+
+						&.vue {
+							width: 18px;
+							height: 18px;
+						}
+					}
+				}
+			}
+		}
+
+		h1 {
+			font-size: 2.25rem;
+			font-weight: 600;
+			margin-top: 20px;
+			margin-bottom: 10px;
+		}
+
+		h3 {
+			font-size: 1.25rem;
+			font-weight: 300;
+			margin-bottom: 45px;
+		}
 	}
-  }
 }
 
 .chart-type-selection {
-  display: inline;
-  line-height: 50px;
-
-  li {
-	color: white;
-	cursor: pointer;
-	background-color: #009bef;
 	display: inline;
-	padding: 5px 10px;
-	margin: 5px;
-	min-width: 50px;
-  }
-  .active {
-	background-color: #ffb000;
-  }
-  .disabled {
-	background-color: #959595;
-	cursor: not-allowed;
-  }
+	line-height: 50px;
+
+	li {
+		color: white;
+		cursor: pointer;
+		background-color: #009bef;
+		display: inline;
+		padding: 5px 10px;
+		margin: 5px;
+		min-width: 50px;
+	}
+	.active {
+		background-color: #ffb000;
+	}
+	.disabled {
+		background-color: #959595;
+		cursor: not-allowed;
+	}
 }
 
 .demo-chart-holder {
-  background-color: #fff;
-  box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
-  margin: 0 auto 60px auto;
-  display: block;
-  height: 500px;
-  min-width: 300px;
-  max-width: 800px;
-  padding: 30px;
-  transition: box-shadow 0.1s ease-out;
-  overflow: hidden;
-  resize: both;
-  font-weight: 400;
-
-  h3 {
-	border-bottom: 1px solid lightgray;
-	margin: 0;
-  }
-
-  &:hover {
-	box-shadow: 0 15px 45px -11px rgba(22, 56, 107, 0.15);
+	background-color: #fff;
+	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
+	margin: 0 auto 60px auto;
+	display: block;
+	height: 500px;
+	min-width: 300px;
+	max-width: 800px;
+	padding: 30px;
 	transition: box-shadow 0.1s ease-out;
-  }
+	overflow: hidden;
+	resize: both;
+	font-weight: 400;
 
-  &:last-child {
-	margin-bottom: 30px;
-  }
+	h3 {
+		border-bottom: 1px solid lightgray;
+		margin: 0;
+	}
 
-  &.has-actions {
-	margin: auto;
-  }
+	&:hover {
+		box-shadow: 0 15px 45px -11px rgba(22, 56, 107, 0.15);
+		transition: box-shadow 0.1s ease-out;
+	}
+
+	&:last-child {
+		margin-bottom: 30px;
+	}
+
+	&.has-actions {
+		margin: auto;
+	}
 }
 
 .chart-demo-actions {
-  display: table;
-  width: 100%;
-  min-width: 300px;
-  max-width: 800px;
-  margin: auto;
-  margin-top: -1px;
-  margin-bottom: 45px;
-  overflow: hidden;
+	display: table;
+	width: 100%;
+	min-width: 300px;
+	max-width: 800px;
+	margin: auto;
+	margin-top: -1px;
+	margin-bottom: 45px;
+	overflow: hidden;
 
-  button {
-	float: left;
-  }
+	button {
+		float: left;
+	}
 }
 
 div.options {
-  display: table;
-  width: 100%;
-  max-width: 800px;
-  margin: auto;
-  margin-bottom: 30px;
-  padding: 30px;
-  background-color: #fff;
-  box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
+	display: table;
+	width: 100%;
+	max-width: 800px;
+	margin: auto;
+	margin-bottom: 30px;
+	padding: 30px;
+	background-color: #fff;
+	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
 }
 //**********************************************
 // Themes
@@ -181,79 +181,79 @@ $gray10: #f3f3f3;
 // g100
 //***********************************************
 body.carbon--dark-g100 {
-  @include carbon--theme($carbon--theme--g100) {
-	background-color: $gray100;
+	@include carbon--theme($carbon--theme--g100) {
+		background-color: $gray100;
 
-	.bx--dropdown__wrapper {
-	  $css--reset: false;
-	  @import "~carbon-components/scss/components/dropdown/_dropdown";
-	}
+		.bx--dropdown__wrapper {
+			$css--reset: false;
+			@import "~carbon-components/scss/components/dropdown/_dropdown";
+		}
 
-	div.content {
-	  color: $gray10;
-	}
+		div.content {
+			color: $gray10;
+		}
 
-	div.options {
-	  background: $gray90;
-	  box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.123);
-	}
+		div.options {
+			background: $gray90;
+			box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.123);
+		}
 
-	div.demo-chart-holder {
-	  background: $gray90;
+		div.demo-chart-holder {
+			background: $gray90;
+		}
 	}
-  }
 }
 
 //**********************************************
 // g90
 //***********************************************
 body.carbon--dark-g90 {
-  @include carbon--theme($carbon--theme--g90) {
-	background-color: $gray100;
+	@include carbon--theme($carbon--theme--g90) {
+		background-color: $gray100;
 
-	.bx--dropdown__wrapper {
-	  $css--reset: false;
-	  @import "~carbon-components/scss/components/dropdown/_dropdown";
-	}
+		.bx--dropdown__wrapper {
+			$css--reset: false;
+			@import "~carbon-components/scss/components/dropdown/_dropdown";
+		}
 
-	div.content {
-	  color: $gray10;
-	}
+		div.content {
+			color: $gray10;
+		}
 
-	div.options {
-	  background: $gray90;
-	  box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.123);
-	}
+		div.options {
+			background: $gray90;
+			box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.123);
+		}
 
-	div.demo-chart-holder {
-	  background: $gray90;
+		div.demo-chart-holder {
+			background: $gray90;
+		}
 	}
-  }
 }
 
 //**********************************************
 // g10
 //***********************************************
 body.carbon--dark-g10 {
-  @include carbon--theme($carbon--theme--g10) {
-	background-color: white;
+	@include carbon--theme($carbon--theme--g10) {
+		background-color: white;
 
-	.bx--dropdown__wrapper {
-	  $css--reset: false;
-	  @import "~carbon-components/scss/components/dropdown/_dropdown";
-	}
+		.bx--dropdown__wrapper {
+			$css--reset: false;
+			@import "~carbon-components/scss/components/dropdown/_dropdown";
+		}
 
-	div.content {
-	  color: $gray100;
-	}
+		div.content {
+			color: $gray100;
+		}
 
-	div.options {
-	  background: $gray10;
-	  box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.3);
-	}
+		div.options {
+			background: $gray10;
+			box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.3);
+		}
 
-	div.demo-chart-holder {
-	  background: $gray10;
+		div.demo-chart-holder {
+			background: $gray10;
+		}
 	}
-  }
 }
