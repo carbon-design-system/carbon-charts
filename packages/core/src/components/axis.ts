@@ -33,13 +33,6 @@ export class Axis extends ChartComponent {
 		}
 	}
 
-	update() {
-		this.setXScale();
-		this.setXAxis();
-		this.setYScale();
-		this.setYAxis();
-	}
-
 	updateXandYGrid() {
 
 	}
@@ -47,8 +40,14 @@ export class Axis extends ChartComponent {
 	setXScale() {
 		const { width } = this._services.domUtils.getSVGSize(this._parent);
 
-		this.x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
-		this.x.domain(this._model.getData().labels);
+		const x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
+		x.domain(this._model.getData().labels);
+
+		this._model.set({
+			x
+		}, true);
+
+		this.x = x;
 	}
 
 	setXAxis(noAnimation?: boolean) {
@@ -141,6 +140,10 @@ export class Axis extends ChartComponent {
 
 		this.y = scaleLinear().range([height, 0]);
 		this.y.domain([Math.min(yMin, 0), yMax]);
+
+		this._model.set({
+			y: this.y
+		}, true);
 
 		if (scales.y2 && scales.y2.ticks.max) {
 			this.y2 = scaleLinear().rangeRound([height, 0]);

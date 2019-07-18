@@ -29,14 +29,14 @@ export class ChartModel {
 
 	// Fill scales & fill related objects
 	private _patternScale = {};
-	private _colorScale = {};
+	private _colorScale: any = {};
 	// patternsService: PatternsService;
 
 	/**
 	 * @return {Array} The chart's display data
 	 */
 	getData() {
-		return this._state["data"];
+		return this.get("data");
 	}
 
 	/**
@@ -59,10 +59,12 @@ export class ChartModel {
 		return this._state.options;
 	}
 
-	set(newState: any) {
+	set(newState: any, skipUpdate?: boolean) {
 		this._state = Object.assign({}, this._state, newState);
 
-		this.update();
+		if (!skipUpdate) {
+			this.update();
+		}
 	}
 
 	get(property?: string) {
@@ -106,7 +108,7 @@ export class ChartModel {
 	 * such as the color scales, or the legend data labels
 	 */
 	update() {
-		if (this._state["data"]) {
+		if (this.get("data")) {
 			this.updateFixedLabels();
 			this.setColorScale();
 
@@ -124,9 +126,9 @@ export class ChartModel {
 	*/
 	updateFixedLabels() {
 		if (!this._fixedDataLabels) {
-			this._fixedDataLabels = this._state["data"].labels;
+			this._fixedDataLabels = this.get("data").labels;
 		} else {
-			this._state["data"].labels.forEach(element => {
+			this.get("data").labels.forEach(element => {
 				if (this._fixedDataLabels.indexOf(element) === -1) {
 					this._fixedDataLabels.push(element);
 				}
@@ -139,35 +141,35 @@ export class ChartModel {
 	 *
 	*/
 	setColorScale() {
-		if (this._state["data"].datasets[0].backgroundColors) {
-			this._state["data"].datasets.forEach(dataset => {
+		if (this.get("data").datasets[0].backgroundColors) {
+			this.get("data").datasets.forEach(dataset => {
 				this._colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this._fixedDataLabels);
 			});
 		} else {
 			const colors = Configuration.options.BASE.colors;
-			this._state["data"].datasets.forEach((dataset, i) => {
+			this.get("data").datasets.forEach((dataset, i) => {
 				this._colorScale[dataset.label] = scaleOrdinal().range([colors[i]]).domain(this._fixedDataLabels);
 			});
 		}
 	}
 
 	getFillColor(datasetLabel: any, label?: any, value?: any) {
-		if (this._state["options"].getFillColor && !this._state["options"].accessibility) {
-			return this._state["options"].getFillColor(datasetLabel, label, value) || this.getFillScale()[datasetLabel](label);
+		if (this.get("options").getFillColor && !this.get("options").accessibility) {
+			return this.get("options").getFillColor(datasetLabel, label, value) || this.getFillScale()[datasetLabel](label);
 		} else {
 			return this.getFillScale()[datasetLabel](label);
 		}
 	}
 
 	getStrokeColor(datasetLabel: any, label?: any, value?: any) {
-		if (this._state["options"].getStrokeColor) {
-			return this._state["options"].getStrokeColor(datasetLabel, label, value) || this._colorScale[datasetLabel](label);
+		if (this.get("options").getStrokeColor) {
+			return this.get("options").getStrokeColor(datasetLabel, label, value) || this._colorScale[datasetLabel](label);
 		} else {
 			return this._colorScale[datasetLabel](label);
 		}
 	}
 
 	getFillScale() {
-		return this._state["options"].accessibility ? this._patternScale : this._colorScale;
+		return this.get("options").accessibility ? this._patternScale : this._colorScale;
 	}
 }

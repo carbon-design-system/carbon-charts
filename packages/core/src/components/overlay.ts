@@ -31,8 +31,4 @@ export class Overlay extends ChartComponent {
 			this.overlayElement = holder.appendChild(overlay);
 		}
 	}
-
-	update() {
-		this.render();
-	}
 }
