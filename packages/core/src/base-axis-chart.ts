@@ -61,9 +61,8 @@ export class BaseAxisChart extends BaseChart {
 			this.setYScale();
 			this.setYAxis();
 
-			// Draw the x & y grid
-			this.drawXGrid();
-			this.drawYGrid();
+			// Draws the grid
+			this.drawGrid();
 
 			this.addOrUpdateLegend();
 		} else {
@@ -86,6 +85,7 @@ export class BaseAxisChart extends BaseChart {
 		this.setXAxis();
 		this.setYScale();
 		this.setYAxis();
+		this.drawBackdrop();
 		this.interpolateValues(this.displayData);
 	}
 
@@ -152,7 +152,7 @@ export class BaseAxisChart extends BaseChart {
 	 *************************************/
 	// TODO - Refactor
 	getChartSize(container = this.container) {
-		let ratio, marginForLegendTop;
+		let ratio, marginForLegendTop, marginForChartTitle;
 		if (container.node().clientWidth > Configuration.charts.widthBreak) {
 			ratio = Configuration.charts.magicRatio;
 			marginForLegendTop = 0;
@@ -163,8 +163,11 @@ export class BaseAxisChart extends BaseChart {
 
 		// Store computed actual size, to be considered for change if chart does not support axis
 		const marginsToExclude = Configuration.charts.margin.left + Configuration.charts.margin.right;
+
+		marginForChartTitle = this.options.title ? Configuration.charts.title.marginBottom : 0;
+
 		const computedChartSize = {
-			height: container.node().clientHeight - marginForLegendTop,
+			height: container.node().clientHeight - marginForLegendTop - marginForChartTitle,
 			width: (container.node().clientWidth - marginsToExclude) * ratio
 		};
 
@@ -186,6 +189,7 @@ export class BaseAxisChart extends BaseChart {
 			this.repositionYAxisTitle();
 		}
 
+		this.drawBackdrop();
 		this.dispatchEvent("resize");
 	}
 
@@ -387,10 +391,7 @@ export class BaseAxisChart extends BaseChart {
 				.attr("y1", this.y(0))
 				.attr("y2", this.y(0))
 				.attr("x1", 0)
-				.attr("x2", chartSize.width)
-				.attr("stroke", Configuration.scales.domain.color)
-				.attr("fill", Configuration.scales.domain.color)
-				.attr("stroke-width", Configuration.scales.domain.strokeWidth);
+				.attr("x2", chartSize.width);
 		}
 
 		const tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
@@ -438,6 +439,15 @@ export class BaseAxisChart extends BaseChart {
 		}
 	}
 
+	drawGrid() {
+		// Draw the x & y grid
+		this.drawXGrid();
+		this.drawYGrid();
+
+		// Draw the backdrop
+		this.drawBackdrop();
+	}
+
 	drawXGrid() {
 		const yHeight = this.getChartSize().height - this.getBBox(".x.axis").height;
 		const xGrid = axisBottom(this.x)
@@ -471,6 +481,23 @@ export class BaseAxisChart extends BaseChart {
 		if (thresholds && thresholds.length > 0) {
 			this.addOrUpdateThresholds(g, false);
 		}
+	}
+
+	/**
+	 * Draws the background for the chart grid
+	 */
+	drawBackdrop() {
+		// Get height from the grid
+		const xGridHeight = this.innerWrap.select(".x.grid").node().getBBox().height;
+		const yGridBBox = this.innerWrap.select(".y.grid").node().getBBox();
+		const backdrop = Tools.appendOrSelect(this.innerWrap, "rect.chart-grid-backdrop");
+
+		backdrop
+			.attr("x", yGridBBox.x)
+			.attr("y", yGridBBox.y)
+			.attr("width", yGridBBox.width)
+			.attr("height", xGridHeight)
+			.lower();
 	}
 
 	addOrUpdateThresholds(yGrid, animate?) {

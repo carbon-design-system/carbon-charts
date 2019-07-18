@@ -1088,6 +1088,18 @@
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-10.1.1.tgz#854c33ccdf02ac319c06923268ba89cf83a58c93"
   integrity sha512-hni1iN0FUfQgnATqAT971WMAosl9YK7kQqp1V0vkF3d8rB/id+Y3K1GhDsXLKPfEAxdgE4+swGvID9tAY+a9kQ==
 
+"@carbon/colors@10.2.0":
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-10.2.0.tgz#a9b0f2372fdf231a34b070ec8cff3f9d7a044fbd"
+  integrity sha512-WH6IQNt/HfqExMhTcgIBJN6Cqunrr+udtEKZAE3k8eMlBceKpiidfzgVNbAVKAujGjgwDR60XF+gQGRbteCWUg==
+
+"@carbon/themes@10.3.1":
+  version "10.3.1"
+  resolved "https://registry.yarnpkg.com/@carbon/themes/-/themes-10.3.1.tgz#f951af77d49bc8146f691a290f1d76afa27da0a3"
+  integrity sha512-5UviZgzQriksQIBgrJ6I/qkmI8pR3GWw4WQ+tdHyw5LpDstzwxRIUf3emz/lBEPPxsEYOaf31nJ4DOFETMCr0Q==
+  dependencies:
+    "@carbon/colors" "10.2.0"
+
 "@carbon/utils-position@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@carbon/utils-position/-/utils-position-1.1.0.tgz#dbe6fe48ada221db20f1dfc8973ae4aec2caeeae"
@@ -5675,6 +5687,21 @@ capture-stack-trace@^1.0.0:
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
   integrity sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw==
 
+carbon-components@10.3.2:
+  version "10.3.2"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.3.2.tgz#1d1571ce43ccbef06fa506605d60fbc5d75b6fa9"
+  integrity sha512-u6EoEBr7f/QoxuGA3yqv/1qvjwgtnqBQxge3kVXpTIyhq2oGE9fOl6g2fk4KlMNu1zV2hlbyhr+2vvsJuS3n4g==
+  dependencies:
+    carbon-icons "^7.0.7"
+    flatpickr "4.6.1"
+    lodash.debounce "^4.0.8"
+    warning "^3.0.0"
+
+carbon-icons@^7.0.7:
+  version "7.0.7"
+  resolved "https://registry.yarnpkg.com/carbon-icons/-/carbon-icons-7.0.7.tgz#ebafe3e9fa25df973796a8eca06d8a7c501cc610"
+  integrity sha512-3vgkdXJRgCViCrH3fLUdyAXo0I8wmohO6QETv7vWFx6yc7s+SirWFBSFL38zUx4MHtR8iTxIlLEzkeU6FlFtXg==
+
 case-sensitive-paths-webpack-plugin@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/case-sensitive-paths-webpack-plugin/-/case-sensitive-paths-webpack-plugin-2.2.0.tgz#3371ef6365ef9c25fa4b81c16ace0e9c7dc58c3e"
@@ -9407,6 +9434,11 @@ flat@^4.1.0:
   integrity sha512-Px/TiLIznH7gEDlPXcUD4KnBusa6kR6ayRUVcnEAbreRIuhkqow/mun59BuRXwoYk7ZQOLW1ZM05ilIvK38hFw==
   dependencies:
     is-buffer "~2.0.3"
+
+flatpickr@4.6.1:
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.1.tgz#9eb498ab805dd27f5ae02e1ac6ac6c099ce45e94"
+  integrity sha512-3ULSxbXmcMIRzer/2jLNweoqHpwDvsjEawO2FUd9UFR8uPwLM+LruZcPDpuZStcEgbQKhuFOfXo4nYdGladSNw==
 
 flatten@^1.0.2:
   version "1.0.2"

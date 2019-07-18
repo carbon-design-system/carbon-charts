@@ -1,4 +1,5 @@
-$default_transition: all .1s ease-out;
+$default_transition: all 0.1s ease-out;
+@import "~@carbon/themes/scss/themes";
 
 * {
 	box-sizing: border-box;
@@ -91,17 +92,18 @@ header.m-demo-header {
 .chart-type-selection {
 	display: inline;
 	line-height: 50px;
+
 	li {
 		color: white;
 		cursor: pointer;
-		background-color: #009BEF;
+		background-color: #009bef;
 		display: inline;
 		padding: 5px 10px;
 		margin: 5px;
 		min-width: 50px;
 	}
 	.active {
-		background-color: #FFB000;
+		background-color: #ffb000;
 	}
 	.disabled {
 		background-color: #959595;
@@ -118,7 +120,7 @@ header.m-demo-header {
 	min-width: 300px;
 	max-width: 800px;
 	padding: 30px;
-	transition: box-shadow .1s ease-out;
+	transition: box-shadow 0.1s ease-out;
 	overflow: hidden;
 	resize: both;
 	font-weight: 400;
@@ -130,7 +132,7 @@ header.m-demo-header {
 
 	&:hover {
 		box-shadow: 0 15px 45px -11px rgba(22, 56, 107, 0.15);
-		transition: box-shadow .1s ease-out;
+		transition: box-shadow 0.1s ease-out;
 	}
 
 	&:last-child {
@@ -159,11 +161,99 @@ header.m-demo-header {
 
 div.options {
 	display: table;
-    width: 100%;
+	width: 100%;
 	max-width: 800px;
 	margin: auto;
 	margin-bottom: 30px;
 	padding: 30px;
 	background-color: #fff;
 	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
+}
+//**********************************************
+// Themes
+//***********************************************
+
+$gray100: #171717;
+$gray90: #282828;
+$gray10: #f3f3f3;
+
+//**********************************************
+// g100
+//***********************************************
+body.carbon--dark-g100 {
+	@include carbon--theme($carbon--theme--g100) {
+		background-color: $gray100;
+
+		.bx--dropdown__wrapper {
+			$css--reset: false;
+			@import "~carbon-components/scss/components/dropdown/_dropdown";
+		}
+
+		div.content {
+			color: $gray10;
+		}
+
+		div.options {
+			background: $gray90;
+			box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.123);
+		}
+
+		div.demo-chart-holder {
+			background: $gray90;
+		}
+	}
+}
+
+//**********************************************
+// g90
+//***********************************************
+body.carbon--dark-g90 {
+	@include carbon--theme($carbon--theme--g90) {
+		background-color: $gray100;
+
+		.bx--dropdown__wrapper {
+			$css--reset: false;
+			@import "~carbon-components/scss/components/dropdown/_dropdown";
+		}
+
+		div.content {
+			color: $gray10;
+		}
+
+		div.options {
+			background: $gray90;
+			box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.123);
+		}
+
+		div.demo-chart-holder {
+			background: $gray90;
+		}
+	}
+}
+
+//**********************************************
+// g10
+//***********************************************
+body.carbon--dark-g10 {
+	@include carbon--theme($carbon--theme--g10) {
+		background-color: white;
+
+		.bx--dropdown__wrapper {
+			$css--reset: false;
+			@import "~carbon-components/scss/components/dropdown/_dropdown";
+		}
+
+		div.content {
+			color: $gray100;
+		}
+
+		div.options {
+			background: $gray10;
+			box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.3);
+		}
+
+		div.demo-chart-holder {
+			background: $gray10;
+		}
+	}
 }

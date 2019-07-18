@@ -1,6 +1,8 @@
 # `@carbon/charts-angular`
 
-> Angular wrappers for the Carbon charting components
+> Carbon Charting Angular Wrappers
+
+**[Storybook Demos](https://carbon-design-system.github.io/carbon-charts/angular)**
 
 ## Getting Started
 
@@ -17,7 +19,5 @@ instead:
 yarn add @carbon/charts-angular
 ```
 
-## Sample Code
-Checkout a sample app we've made on Codesandbox:
-
-[![Edit Carbon Charts - Angular](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/k32kjy5qnr?fontsize=14)
+## Sample Project
+[Edit on Stackblitz](https://stackblitz.com/edit/carbon-charts-angular-vznxot)

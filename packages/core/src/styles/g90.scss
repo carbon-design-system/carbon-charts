@@ -1,0 +1,55 @@
+@import "../../node_modules/@carbon/themes/scss/themes";
+$gray100: #171717;
+
+.carbon--theme--g90 {
+	@include carbon--theme($carbon--theme--g90) {
+		rect.chart-grid-backdrop {
+			fill: $gray100;
+		}
+
+		svg.chart-svg.line {
+			circle.dot {
+				fill: $gray100;
+			}
+		}
+
+		g.x.grid,
+		g.y.grid {
+			g.tick line {
+				stroke: $ui-01;
+			}
+		}
+
+		.yAxes line.domain,
+		path.domain {
+			stroke: $ui-04;
+		}
+
+		text {
+			fill: $text-02;
+
+			&.axis-label,
+			&.chart-title {
+				fill: $text-01;
+				stroke: $text-01;
+			}
+		}
+
+		.legend-btn text {
+			color: $text-02;
+		}
+
+		.donut-label,
+		.donut-figure {
+			fill: $text-02;
+		}
+
+		div.chart-overlay {
+			@include background-opacity($ui-02, 0.6);
+
+			.ccharts-overlay-content {
+				color: $text-04;
+			}
+		}
+	}
+}

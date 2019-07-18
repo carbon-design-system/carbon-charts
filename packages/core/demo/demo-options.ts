@@ -38,7 +38,20 @@ const initializeThemeSelector = () => {
     }
     const dropdownDefaultOption = document.querySelector("div.theme-selector li.bx--dropdown-text");
     const selectedOption = dropdownOptions.find(dO => dO.parentNode.getAttribute("data-value") === themeName);
-    dropdownDefaultOption.innerHTML = selectedOption.innerText;
+	dropdownDefaultOption.innerHTML = selectedOption.innerText;
+
+	// Set dark theme on the window
+	switch (themeName) {
+		case "G10":
+			document.body.classList.add("carbon--dark-g10");
+			break;
+		case "G90":
+			document.body.classList.add("carbon--dark-g90");
+			break;
+		case "G100":
+			document.body.classList.add("carbon--dark-g100");
+			break;
+	}
 };
 
 export const initializeDemoOptions = () => {

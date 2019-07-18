@@ -1,0 +1,50 @@
+@import "../../node_modules/@carbon/themes/scss/themes";
+
+.carbon--theme--g10 {
+	@include carbon--theme($carbon--theme--g10) {
+		rect.chart-grid-backdrop {
+			fill: $ui-01;
+		}
+
+		svg.chart-svg.line {
+			circle.dot {
+				fill: $ui-01;
+			}
+		}
+
+		g.x.grid,
+		g.y.grid {
+			g.tick line {
+				stroke: $ui-03;
+			}
+		}
+
+		.yAxes line.domain,
+		path.domain {
+			stroke: $ui-04;
+		}
+
+		text {
+			fill: $text-02;
+
+			&.axis-label,
+			&.chart-title {
+				fill: $text-01;
+				stroke: $text-01;
+			}
+		}
+
+		.legend-btn text {
+			color: $text-02;
+		}
+
+		.donut-label,
+		.donut-figure {
+			fill: $text-02;
+		}
+
+		div.chart-overlay {
+			@include background-opacity($ui-02, 0.6);
+		}
+	}
+}

@@ -3,6 +3,92 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.1](https://github.com/IBM/carbon-charts/compare/v0.15.0...v0.15.1) (2019-07-17)
+
+
+### Bug Fixes
+
+* **core:** backdrop resize with chart ([bbc288d](https://github.com/IBM/carbon-charts/commit/bbc288d))
+
+
+
+
+
+# [0.15.0](https://github.com/IBM/carbon-charts/compare/v0.14.1...v0.15.0) (2019-07-17)
+
+
+### Features
+
+* **core:** adding carbon themes ([a31fbcf](https://github.com/IBM/carbon-charts/commit/a31fbcf))
+
+
+
+
+
+## [0.14.1](https://github.com/IBM/carbon-charts/compare/v0.14.0...v0.14.1) (2019-07-11)
+
+
+### Bug Fixes
+
+* **Angular:** Export base chart in Angular module ([99fdd29](https://github.com/IBM/carbon-charts/commit/99fdd29))
+
+
+
+
+
+# [0.14.0](https://github.com/IBM/carbon-charts/compare/v0.13.0...v0.14.0) (2019-07-10)
+
+
+### Features
+
+* **Angular:** Add Scatter to the Angular package, storybook and readme ([3f62714](https://github.com/IBM/carbon-charts/commit/3f62714))
+* **scatter:** Add Scatter to the Angular package and storybook ([2aac850](https://github.com/IBM/carbon-charts/commit/2aac850))
+
+
+
+
+
+# [0.13.0](https://github.com/IBM/carbon-charts/compare/v0.12.5...v0.13.0) (2019-07-08)
+
+
+### Features
+
+* **core:** addition of titles within svg chart ([56380bb](https://github.com/IBM/carbon-charts/commit/56380bb))
+
+
+
+
+
+## [0.12.5](https://github.com/IBM/carbon-charts/compare/v0.12.4...v0.12.5) (2019-07-04)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.12.4](https://github.com/IBM/carbon-charts/compare/v0.12.3...v0.12.4) (2019-06-26)
+
+
+### Bug Fixes
+
+* **react core:** change main bundle to umd in core, and update imports in react ([df9c7c3](https://github.com/IBM/carbon-charts/commit/df9c7c3))
+
+
+
+
+
+## [0.12.3](https://github.com/IBM/carbon-charts/compare/v0.12.2...v0.12.3) (2019-06-26)
+
+
+### Bug Fixes
+
+* **react:** handle data updates from state, and fix errors with width/height prop ([a00294f](https://github.com/IBM/carbon-charts/commit/a00294f))
+
+
+
+
+
 ## [0.12.2](https://github.com/IBM/carbon-charts/compare/v0.12.1...v0.12.2) (2019-06-07)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
