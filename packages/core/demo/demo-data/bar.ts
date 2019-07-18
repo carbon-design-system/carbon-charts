@@ -1,4 +1,5 @@
 import { colors } from "./colors";
+import { getTheme } from "./themes";
 
 export const groupedBarData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -72,7 +73,9 @@ export const groupedBarOptions = {
 		size: "compact"
 	},
 	legendClickable: true,
-	containerResizable: true
+	containerResizable: true,
+	title: "Bar Chart",
+	theme: getTheme()
 };
 
 // Simple bar
@@ -108,9 +111,11 @@ export const simpleBarOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
+	theme: getTheme(),
 	bars: {
 		maxWidth: 50
-	}
+	},
+	title: "Simple Bar Chart"
 };
 
 // Stacked bar
@@ -181,5 +186,7 @@ export const stackedBarOptions = {
 		size: "compact"
 	},
 	legendClickable: true,
-	containerResizable: true
+	containerResizable: true,
+	title: "Stacked Bar Chart",
+	theme: getTheme()
 };

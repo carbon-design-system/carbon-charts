@@ -82,6 +82,41 @@ export namespace Tools {
 		};
 	}
 
+	/**
+	 * Returns element if it  exists, otherwise creates and returns reference to item
+	 * @param parent Element parent to query within
+	 * @param query The element to return from the DOM
+	 */
+	export function appendOrSelect(parent, query) {
+		const l = query.split(".");
+		const elementToAppend = l[0];
+
+		const g = parent.select(query);
+		if (g.empty()) {
+			return parent.append(elementToAppend)
+				.attr("class", l.slice(1).join(" "));
+		}
+		return g;
+	}
+
+	/**
+	 * Returns an elements's x and y translations from its computed style
+	 * @param {HTMLElement} element
+	 * @returns an object containing the x and y translations
+	 */
+	export function getTranslationValues(elementRef: HTMLElement) {
+		// returns matrix(a, b, c, d, tx, ty) of transformation values (2d transform)
+		const transformMatrix = window.getComputedStyle(elementRef).getPropertyValue("transform").replace(/\s/g, "");
+
+		const transformValues = transformMatrix.substring(transformMatrix.indexOf("(") + 1, transformMatrix.indexOf(")")).split(",");
+
+		// if there are no translations, return { dx: 0,  dy: 0 } instead of undefined
+		return {
+			tx: transformValues[4] ? transformValues[4] : 0,
+			ty: transformValues[5] ? transformValues[5] : 0
+		};
+	}
+
 	/**************************************
 	 *  Formatting & calculations         *
 	 *************************************/
@@ -220,18 +255,7 @@ export namespace Tools {
 
 	// ================================================================================
 	// Style Helpers
-	/**
-	 * Retrieves the element transform matrix string, and returns the translateX string
-	 *
-	 * @export
-	 * @param {HTMLElement} element
-	 * @returns The translateX value for element
-	 */
-	export function getXTransformsValue(element: HTMLElement) {
-		const transformMatrixArray = window.getComputedStyle(element).getPropertyValue("transform").split(",");
-
-		return transformMatrixArray[4];
-	}
+	// ================================================================================
 
 	export const getProperty = (object, ...propPath) => {
 		let position = object;

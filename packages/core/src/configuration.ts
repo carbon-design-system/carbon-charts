@@ -21,6 +21,15 @@ export enum ChartType {
 }
 
 /**
+ * enum of all supported chart themes
+ */
+export enum ChartTheme {
+	WHITE = "white",
+	G100 = "g100",
+	G90 = "g90",
+	G10 = "g10"
+}
+/**
  * enum of all possible tooltip sizes
  */
 export enum TooltipSize {
@@ -83,6 +92,10 @@ export interface BaseChartOptions {
 	 */
 	legendClickable?: boolean;
 	/**
+	 * optional title for chart
+	 */
+	title?: string;
+	/**
 	 * boolean to prevent the container from resizing
 	 */
 	containerResizable?: boolean;
@@ -90,6 +103,10 @@ export interface BaseChartOptions {
 	 * array of hex colors for the chart to render from
 	 */
 	colors: Array<string>;
+	/**
+	 * supported chart theme
+	 */
+	theme?: ChartTheme;
 	/**
 	 * tooltip configuration
 	 */
@@ -145,6 +162,7 @@ const baseOptions: BaseChartOptions = {
 		formatter: null,
 		targetsToSkip: ["rect", "circle", "path"]
 	},
+	theme: ChartTheme.WHITE,
 	overlay: {
 		types: {
 			loading: "loading",
@@ -501,6 +519,9 @@ export const charts = {
 	minWidth: 150,
 	widthBreak: 600,
 	marginForLegendTop: 40,
+	title: {
+		marginBottom: 24
+	},
 	magicRatio: 0.7,
 	magicMoreForY2Axis: 70,
 	axisCharts: {
@@ -596,7 +617,8 @@ export const lines = {
 		minNonFilledRadius: 3,
 		mouseover: {
 			strokeWidth: 4,
-			strokeOpacity: 0.5
+			strokeOpacity: 0.5,
+			fillOpacity: 1,
 		},
 		mouseout: {
 			strokeWidth: 0,
@@ -664,7 +686,7 @@ export const legend = {
 		borderWidth: false
 	},
 	inactive: {
-		backgroundColor: "white",
+		backgroundColor: "transparent",
 		borderStyle: "solid",
 		borderWidth: "2px"
 	},
