@@ -40,10 +40,8 @@ export class Legend extends ChartComponent {
 		legendItems.exit()
 			// .each((d, i) => console.log(">> EXIT", i))
 			.remove();
-	}
 
-	update() {
-		this.render();
+		this.addEventListeners();
 	}
 
 	getLegendItemArray() {
@@ -95,4 +93,12 @@ export class Legend extends ChartComponent {
 	// 		return Configuration.legend.basedOn.SERIES;
 	// 	}
 	// }
+
+	addEventListeners() {
+		const svg = this._parent;
+		svg.selectAll("g.legend-item")
+			.on("mouseover", () => {
+				console.log("YOU HOVERED")
+			})
+	}
 }
