@@ -5,8 +5,9 @@ import { AxisPositions, ModelStateKeys } from "../../interfaces";
 
 // D3 Imports
 import { scaleBand, ScaleBand, ScaleLinear, scaleLinear } from "d3-scale";
-import { axisBottom, axisLeft, axisRight, AxisScale, AxisDomain, axisTop } from "d3-axis";
+import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { min, max } from "d3-array";
+import { select } from "d3-selection";
 
 export class Axis extends Component {
 	x: ScaleBand<any>;
@@ -211,10 +212,19 @@ export class Axis extends Component {
 			// 	.attr("stroke-width", Configuration.scales.domain.strokeWidth);
 		}
 
+		let widthShift = 0;
+		let heightShift = 0;
 		if (this.options.axisType === AxisPositions.LEFT) {
-			const widthShift = this._services.domUtils.getSVGElementSize(yAxisRef).width;
-			yAxisRef.attr("transform", `translate(${widthShift - 1}, 0)`);
+			widthShift = this._services.domUtils.getSVGElementSize(yAxisRef).width - 1;
 		}
+
+		if (this.options.axisType === AxisPositions.LEFT || this.options.axisType === AxisPositions.RIGHT) {
+			const tickElements = yAxisRef.selectAll("g.tick");
+			const lastTickElement = select(tickElements.nodes()[0]);
+			heightShift = -1 * this._services.domUtils.getSVGElementSize(lastTickElement.select("text")).height / 2;
+		}
+
+		yAxisRef.attr("transform", `translate(${widthShift}, ${heightShift})`);
 
 		// const tickHeight = this.getLargestTickHeight(yAxisRef.selectAll(".tick"));
 
