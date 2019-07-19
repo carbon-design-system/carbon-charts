@@ -2,7 +2,7 @@
 import { ModelStateKeys } from "../../interfaces";
 import { Component } from "../component";
 
-export class Bar extends Component {
+export class Scatter extends Component {
 	render() {
 		const svg = this._parent;
 
