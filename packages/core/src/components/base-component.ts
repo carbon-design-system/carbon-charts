@@ -6,6 +6,8 @@ import errorHandler from "../services/error-handling";
 import { select } from "d3-selection";
 
 export class ChartComponent {
+	public type: string;
+
 	protected _parent: any;
 
 	protected _model: ChartModel;
@@ -33,6 +35,15 @@ export class ChartComponent {
 	}
 
 	setParent(parent) {
+		const oldParent = this._parent;
 		this._parent = parent;
+
+		if (this.type) {
+			this._parent.classed(this.type, true);
+
+			if (oldParent) {
+				oldParent.classed(this.type, false);
+			}
+		}
 	}
 }

@@ -1,9 +1,13 @@
 // Internal Imports
 import * as Configuration from "../configuration";
-
 import { ChartComponent } from "./base-component";
 
+// D3 Imports
+import { select } from "d3-selection";
+
 export class Legend extends ChartComponent {
+	type = "cc-legend";
+
 	render() {
 		const svg = this._parent;
 
@@ -15,18 +19,23 @@ export class Legend extends ChartComponent {
 			.append("g")
 			.classed("legend-item", true);
 
-		addedLegendItems.append("circle")
-			.merge(legendItems.select("circle"))
-				.attr("cx", 7)
-				.attr("cy", (d, i) => 7 + (30 * i))
+		addedLegendItems.append("rect")
+			.merge(legendItems.select("rect"))
+				.attr("width", 12)
+				.attr("height", 12)
+				.attr("x", 1)
+				.attr("y", (d, i) => 2 + (30 * i))
 				.attr("r", 6)
-				.style("fill", (d, i) => {
+				.attr("rx", 3)
+				.attr("ry", 3)
+				.style("fill", d => {
 					if (d.value === Configuration.legend.items.status.ACTIVE) {
 						return this._model.getStrokeColor(d.key);
 					}
 
 					return "white";
-				});
+				})
+				.attr("stroke", d => this._model.getStrokeColor(d.key));
 
 		addedLegendItems.append("text")
 			.merge(legendItems.select("text"))
@@ -41,7 +50,26 @@ export class Legend extends ChartComponent {
 			// .each((d, i) => console.log(">> EXIT", i))
 			.remove();
 
-		this.addEventListeners();
+
+		if (this._model.getOptions().legendClickable) {
+			svg.classed("clickable", true);
+			this.setClickableLegend();
+
+			this.addEventListeners();
+		}
+	}
+
+	setClickableLegend() {
+		// const self = this;
+		// const c = select(this.container);
+		// const tooltip = c.select(".legend-tooltip-content");
+		// tooltip.selectAll(".legend-btn").each(function() {
+		// 	select(this).on("click", function() {
+		// 		self.updateLegend(this);
+
+		// 		// TODO - setClickableLegendInTooltip()
+		// 	});
+		// });
 	}
 
 	getLegendItemArray() {
@@ -99,6 +127,9 @@ export class Legend extends ChartComponent {
 		svg.selectAll("g.legend-item")
 			.on("mouseover", () => {
 				console.log("YOU HOVERED")
+			})
+			.on("click", function() {
+				console.log("clicked", select(this))
 			})
 	}
 }

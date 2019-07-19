@@ -1,7 +1,7 @@
 // Internal Imports
 import { ChartComponent } from "./base-component";
 import * as Configuration from "../configuration";
-import { AxisPositions } from "../interfaces";
+import { AxisPositions, ModelStateKeys } from "../interfaces";
 
 // D3 Imports
 import { scaleBand, ScaleBand, ScaleLinear, scaleLinear } from "d3-scale";
@@ -40,14 +40,42 @@ export class Axis extends ChartComponent {
 	setXScale() {
 		const { width } = this._services.domUtils.getSVGSize(this._parent);
 
-		const x = scaleBand().rangeRound([0, width]).padding(Configuration.scales.x.padding);
-		x.domain(this._model.getData().labels);
+		// Grab x-scale object from model
+		const xScale = this._model.get(ModelStateKeys.AXIS_SECONDARY) || scaleBand();
+		xScale.rangeRound([0, width]).padding(Configuration.scales.x.padding);
+		xScale.domain(this._model.getData().labels);
 
-		this._model.set({
-			x
-		}, true);
+		// If x-scale doesn't exist on the model, store it
+		if (!this._model.get(ModelStateKeys.AXIS_SECONDARY)) {
+			this._model.set({
+				[ModelStateKeys.AXIS_SECONDARY]: xScale
+			});
+		}
+	}
 
-		this.x = x;
+	setYScale() {
+		const height = this._services.domUtils.getSVGSize(this._parent).height;
+		const { scales } = this._model.getOptions();
+
+		const yMin = this.getYMin();
+		const yMax = this.getYMax();
+
+		// Grab x-scale object from model
+		const yScale = this._model.get(ModelStateKeys.AXIS_PRIMARY) || scaleLinear();
+		yScale.range([height, 0]);
+		yScale.domain([Math.min(yMin, 0), yMax]);
+
+		// If y-scale doesn't exist on the model, store it
+		if (!this._model.get(ModelStateKeys.AXIS_PRIMARY)) {
+			this._model.set({
+				[ModelStateKeys.AXIS_PRIMARY]: yScale
+			});
+		}
+
+		if (scales.y2 && scales.y2.ticks.max) {
+			this.y2 = scaleLinear().rangeRound([height, 0]);
+			this.y2.domain([scales.y2.ticks.min, scales.y2.ticks.max]);
+		}
 	}
 
 	setXAxis(noAnimation?: boolean) {
@@ -55,8 +83,9 @@ export class Axis extends ChartComponent {
 		const svg = this._parent;
 		// const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
+		const xScale = this._model.get(ModelStateKeys.AXIS_SECONDARY);
 		const axisFunction = this.options.axisType === AxisPositions.TOP ? axisTop : axisBottom;
-		const xAxis = axisFunction(this.x)
+		const xAxis = axisFunction(xScale)
 			// .tickSize(0)
 			// .tickSizeOuter(0);
 
@@ -131,26 +160,6 @@ export class Axis extends ChartComponent {
 		return yMin;
 	}
 
-	setYScale(yScale?: any) {
-		const height = this._services.domUtils.getSVGSize(this._parent).height;
-		const { scales } = this._model.getOptions();
-
-		const yMin = this.getYMin();
-		const yMax = this.getYMax();
-
-		this.y = scaleLinear().range([height, 0]);
-		this.y.domain([Math.min(yMin, 0), yMax]);
-
-		this._model.set({
-			y: this.y
-		}, true);
-
-		if (scales.y2 && scales.y2.ticks.max) {
-			this.y2 = scaleLinear().rangeRound([height, 0]);
-			this.y2.domain([scales.y2.ticks.min, scales.y2.ticks.max]);
-		}
-	}
-
 	setYAxis(noAnimation?: boolean) {
 		const chartSize = this._services.domUtils.getChartSize();
 		const svg = this._parent;
@@ -158,8 +167,9 @@ export class Axis extends ChartComponent {
 		const { scales } = this._model.getOptions();
 		// const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
 
+		const yScale = this._model.get(ModelStateKeys.AXIS_PRIMARY);
 		const axisFunction = this.options.axisType === AxisPositions.LEFT ? axisLeft : axisRight;
-		const yAxis = axisFunction(this.y)
+		const yAxis = axisFunction(yScale)
 			.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks)
 			.tickSize(0)
 			.tickFormat(scales.y.formatter as any);
@@ -180,8 +190,8 @@ export class Axis extends ChartComponent {
 
 			horizontalLine
 				// .transition(t)
-				.attr("y1", this.y(0))
-				.attr("y2", this.y(0))
+				.attr("y1", yScale(0))
+				.attr("y2", yScale(0))
 				.attr("x1", 0)
 				.attr("x2", chartSize.width);
 		} else {
