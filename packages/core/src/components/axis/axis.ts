@@ -1,14 +1,14 @@
 // Internal Imports
-import { ChartComponent } from "./base-component";
-import * as Configuration from "../configuration";
-import { AxisPositions, ModelStateKeys } from "../interfaces";
+import { Component } from "../component";
+import * as Configuration from "../../configuration";
+import { AxisPositions, ModelStateKeys } from "../../interfaces";
 
 // D3 Imports
 import { scaleBand, ScaleBand, ScaleLinear, scaleLinear } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, AxisScale, AxisDomain, axisTop } from "d3-axis";
 import { min, max } from "d3-array";
 
-export class Axis extends ChartComponent {
+export class Axis extends Component {
 	x: ScaleBand<any>;
 	y: ScaleLinear<any, any>;
 	y2: ScaleLinear<any, any>;
@@ -38,7 +38,7 @@ export class Axis extends ChartComponent {
 	}
 
 	setXScale() {
-		const { width } = this._services.domUtils.getSVGSize(this._parent);
+		const { width } = this._services.domUtils.getSVGElementSize(this._parent);
 
 		// Grab x-scale object from model
 		const xScale = this._model.get(ModelStateKeys.AXIS_SECONDARY) || scaleBand();
@@ -54,7 +54,7 @@ export class Axis extends ChartComponent {
 	}
 
 	setYScale() {
-		const height = this._services.domUtils.getSVGSize(this._parent).height;
+		const height = this._services.domUtils.getSVGElementSize(this._parent).height;
 		const { scales } = this._model.getOptions();
 
 		const yMin = this.getYMin();
@@ -95,7 +95,7 @@ export class Axis extends ChartComponent {
 		xAxisRef.select("path.domain").remove();
 
 		if (this.options.axisType === AxisPositions.TOP) {
-			const heightShift = this._services.domUtils.getSVGSize(xAxisRef).height;
+			const heightShift = this._services.domUtils.getSVGElementSize(xAxisRef).height;
 			xAxisRef.attr("transform", `translate(0, ${heightShift - 1})`);
 		}
 
@@ -161,7 +161,6 @@ export class Axis extends ChartComponent {
 	}
 
 	setYAxis(noAnimation?: boolean) {
-		const chartSize = this._services.domUtils.getChartSize();
 		const svg = this._parent;
 
 		const { scales } = this._model.getOptions();
@@ -188,12 +187,12 @@ export class Axis extends ChartComponent {
 				// Casting to any because d3 does not offer appropriate typings for the .call() function
 				.call(yAxis as any);
 
-			horizontalLine
-				// .transition(t)
-				.attr("y1", yScale(0))
-				.attr("y2", yScale(0))
-				.attr("x1", 0)
-				.attr("x2", chartSize.width);
+			// horizontalLine
+			// 	// .transition(t)
+			// 	.attr("y1", yScale(0))
+			// 	.attr("y2", yScale(0))
+			// 	.attr("x1", 0)
+			// 	.attr("x2", chartSize.width);
 		} else {
 			yAxisRef = svg.append("g")
 				.attr("class", "y axis yAxes")
@@ -213,7 +212,7 @@ export class Axis extends ChartComponent {
 		}
 
 		if (this.options.axisType === AxisPositions.LEFT) {
-			const widthShift = this._services.domUtils.getSVGSize(yAxisRef).width;
+			const widthShift = this._services.domUtils.getSVGElementSize(yAxisRef).width;
 			yAxisRef.attr("transform", `translate(${widthShift - 1}, 0)`);
 		}
 

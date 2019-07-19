@@ -61,8 +61,15 @@ export enum LayoutGrowth {
  * enum of all possible layout growth values
  */
 export enum ModelStateKeys {
+	/*
+	 * AXIS RELATED KEYS
+	 */
 	AXIS_PRIMARY = "axis-primary",
 	AXIS_SECONDARY = "axis-secondary",
 	AXIS_THIRD = "axis-third",
-	AXIS_FOURTH = "axis-fourth"
+	AXIS_FOURTH = "axis-fourth",
+	/*
+	 * DOM Elements
+	 */
+	HOLDER = "holder"
 }

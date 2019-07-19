@@ -1,9 +1,7 @@
 // Internal Imports
-import * as Configuration from "../configuration";
+import { Component } from "../component";
 
-import { ChartComponent } from "./base-component";
-
-export class Title extends ChartComponent {
+export class Title extends Component {
 	render() {
 		const svg = this._parent;
 		svg.append("text")

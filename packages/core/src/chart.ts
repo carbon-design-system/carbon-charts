@@ -4,13 +4,13 @@ import errorHandler from "./services/error-handling";
 
 // Misc
 import { ChartModel } from "./model";
-import { ChartComponent } from "./components/base-component";
+import { Component } from "./components/component";
 
 // Services
 import { Events, DOMUtils } from "./services/index";
 
 export class Chart {
-	components: Array<ChartComponent>;
+	components: Array<Component>;
 
 	model: ChartModel;
 
@@ -60,7 +60,7 @@ export class Chart {
 		});
 	}
 
-	getComponents(): Array<ChartComponent> {
+	getComponents(): Array<Component> {
 		errorHandler.INTERNAL.CHART.MISSING_METHOD("getComponents");
 
 		return null;
