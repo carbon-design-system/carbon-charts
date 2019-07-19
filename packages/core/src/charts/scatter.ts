@@ -3,9 +3,13 @@ import { Chart } from "../chart";
 import * as Configuration from "../configuration";
 import { ChartConfig, ScatterChartOptions, ChartType, LayoutDirection, LayoutGrowth, AxisPositions } from "../interfaces/index";
 import { Tools } from "../tools";
-import { Axis, Bar, Legend, Overlay, Title } from "../components/index";
+import { Axis, Bar, Grid, Legend, Overlay, Title } from "../components/index";
 import { LayoutComponent } from "../components/index";
 
+
+// TODO
+// - Support nested layout components
+// - What if there is no "growth" object?
 export class ScatterChart extends Chart {
 	options: ScatterChartOptions = Tools.merge({}, Configuration.options.SCATTER);
 
@@ -21,104 +25,125 @@ export class ScatterChart extends Chart {
 			new LayoutComponent(
 				[
 					{
-						component: new Title(),
+						components: [
+							new Title()
+						],
 						growth: {
 							x: LayoutGrowth.PREFERRED,
 							y: LayoutGrowth.FIXED
 						}
 					},
 					{
-						component: new LayoutComponent(
-							[
-								{
-									component: new LayoutComponent(
-										[
-											{
-												component: new Axis({
-													axisType: AxisPositions.TOP
-												}),
-												growth: {
-													x: LayoutGrowth.PREFERRED,
-													y: LayoutGrowth.FIXED
-												}
-											},
-											{
-												component: new LayoutComponent(
-													[
-														{
-															component: new Axis({
-																axisType: AxisPositions.LEFT
-															}),
-															growth: {
-																x: LayoutGrowth.PREFERRED,
-																y: LayoutGrowth.FIXED
-															}
-														},
-														{
-															component: new Bar(),
-															growth: {
-																x: LayoutGrowth.STRETCH,
-																y: LayoutGrowth.FIXED
-															}
-														},
-														{
-															component: new Axis({
-																axisType: AxisPositions.RIGHT
-															}),
-															growth: {
-																x: LayoutGrowth.PREFERRED,
-																y: LayoutGrowth.FIXED
-															}
-														},
-													],
+						components: [
+							new LayoutComponent(
+								[
+									{
+										components: [
+											new LayoutComponent(
+												[
 													{
-														direction: LayoutDirection.ROW
-													}
-												),
-												growth: {
-													x: LayoutGrowth.STRETCH,
-													y: LayoutGrowth.FIXED
+														components: [
+															new Axis({
+																axisType: AxisPositions.TOP
+															})
+														],
+														growth: {
+															x: LayoutGrowth.PREFERRED,
+															y: LayoutGrowth.FIXED
+														}
+													},
+													{
+														components: [
+															new LayoutComponent(
+																[
+																	{
+																		components: [
+																			new Axis({
+																				axisType: AxisPositions.LEFT
+																			})
+																		],
+																		growth: {
+																			x: LayoutGrowth.PREFERRED,
+																			y: LayoutGrowth.FIXED
+																		}
+																	},
+																	{
+																		components: [
+																			new Grid(),
+																			new Bar()
+																		],
+																		growth: {
+																			x: LayoutGrowth.STRETCH,
+																			y: LayoutGrowth.FIXED
+																		}
+																	},
+																	{
+																		components: [
+																			new Axis({
+																				axisType: AxisPositions.RIGHT
+																			})
+																		],
+																		growth: {
+																			x: LayoutGrowth.PREFERRED,
+																			y: LayoutGrowth.FIXED
+																		}
+																	},
+																],
+																{
+																	direction: LayoutDirection.ROW
+																}
+															)
+														],
+														growth: {
+															x: LayoutGrowth.STRETCH,
+															y: LayoutGrowth.FIXED
+														}
+													},
+													{
+														components: [
+															new Axis({
+																axisType: AxisPositions.BOTTOM
+															})
+														],
+														growth: {
+															x: LayoutGrowth.PREFERRED,
+															y: LayoutGrowth.FIXED
+														},
+														// syncWith: "chart-frame"
+													},
+												],
+												{
+													direction: LayoutDirection.COLUMN
 												}
-											},
-											{
-												component: new Axis({
-													axisType: AxisPositions.BOTTOM
-												}),
-												growth: {
-													x: LayoutGrowth.PREFERRED,
-													y: LayoutGrowth.FIXED
-												},
-												// syncWith: "chart-frame"
-											},
+											)
 										],
-										{
-											direction: LayoutDirection.COLUMN
+										growth: {
+											x: LayoutGrowth.STRETCH,
+											y: LayoutGrowth.FIXED
 										}
-									),
-									growth: {
-										x: LayoutGrowth.STRETCH,
-										y: LayoutGrowth.FIXED
-									}
-								},
+									},
+									{
+										components: [
+											new Legend()
+										],
+										growth: {
+											x: LayoutGrowth.PREFERRED,
+											y: LayoutGrowth.FIXED
+										}
+									},
+									// {
+									// 	components: new Bar(),
+									// 	growth: {
+									// 		x: LayoutGrowth.STRETCH,
+									// 		y: LayoutGrowth.FIXED
+									// 	}
+									// }
+								],
 								{
-									component: new Legend(),
-									growth: {
-										x: LayoutGrowth.PREFERRED,
-										y: LayoutGrowth.FIXED
-									}
-								},
-								// {
-								// 	component: new Bar(),
-								// 	growth: {
-								// 		x: LayoutGrowth.STRETCH,
-								// 		y: LayoutGrowth.FIXED
-								// 	}
-								// }
-							],
-							{
-								direction: LayoutDirection.ROW
-							}
-						),
+									direction: LayoutDirection.ROW
+								}
+							)
+						],
 						growth: {
 							x: LayoutGrowth.STRETCH,
 							y: LayoutGrowth.FIXED
@@ -135,14 +160,14 @@ export class ScatterChart extends Chart {
 		// 	new LayoutComponent(
 		// 		[
 		// 			{
-		// 				component: new Bar(),
+		// 				components: new Bar(),
 		// 				growth: {
 		// 					x: LayoutGrowth.STRETCH,
 		// 					y: LayoutGrowth.FIXED
 		// 				}
 		// 			},
 		// 			{
-		// 				component: new Legend(),
+		// 				components: new Legend(),
 		// 				growth: {
 		// 					x: LayoutGrowth.PREFERRED,
 		// 					y: LayoutGrowth.FIXED
@@ -160,14 +185,14 @@ export class ScatterChart extends Chart {
 		// 	new LayoutComponent(
 		// 		[
 		// 			{
-		// 				component: new Legend(),
+		// 				components: new Legend(),
 		// 				growth: {
 		// 					x: LayoutGrowth.STRETCH,
 		//  					y: LayoutGrowth.FIXED
 		// 				}
 		// 			},
 		// 			{
-		// 				component: new Legend,
+		// 				components: new Legend,
 		// 				growth: {
 		// 					x: LayoutGrowth.PREFERRED,
 		//  					y: LayoutGrowth.FIXED

@@ -8,7 +8,7 @@ export interface LayoutComponentChild {
 	/**
 	 * the component that'll be rendered inside layout child
 	 */
-	component: Component,
+	components: Array<Component>,
 	/**
 	 * size of the layout child
 	 */

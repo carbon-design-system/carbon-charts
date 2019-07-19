@@ -90,21 +90,22 @@ export class LayoutComponent extends Component {
 		updatedSVGs
 			.enter()
 			.append("svg")
-				.attr("class", (d: any) => `layout-child ${d.data.component.constructor.name.toLowerCase()} ${+new Date()}`)
+				.attr("class", (d: any) => `layout-child ${+new Date()}`)
 				.attr("x", (d: any) => d.x0)
 				.attr("y", (d: any) => d.y0)
 				.attr("width", (d: any) => d.x1 - d.x0)
 				.attr("height", (d: any) => d.y1 - d.y0)
 				.each(function(d: any) {
 					// Set parent component for each child
-					const itemComponent = d.data.component;
-					itemComponent.setParent(select(this));
+					d.data.components.forEach(itemComponent => {
+						itemComponent.setParent(select(this));
 
-					// Render preffered & fixed items
-					const growth = Tools.getProperty(d, "data", "growth", "x");
-					if (growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED) {
-						itemComponent.render();
-					}
+						// Render preffered & fixed items
+						const growth = Tools.getProperty(d, "data", "growth", "x");
+						if (growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED) {
+							itemComponent.render();
+						}
+					});
 				});
 
 		svg.selectAll("svg.layout-child")
@@ -157,33 +158,34 @@ export class LayoutComponent extends Component {
 			.attr("width", (d: any) => d.x1 - d.x0)
 			.attr("height", (d: any) => d.y1 - d.y0)
 			.each(function(d: any, i) {
-				const itemComponent = d.data.component;
-				const growth = Tools.getProperty(d, "data", "growth", "x");
-				if (growth === LayoutGrowth.STRETCH) {
-					itemComponent.render();
-				}
+				d.data.components.forEach(itemComponent => {
+					const growth = Tools.getProperty(d, "data", "growth", "x");
+					if (growth === LayoutGrowth.STRETCH) {
+						itemComponent.render();
+					}
+				});
 
-				const bgRect = self._services.domUtils.appendOrSelect(select(this), "rect.bg");
-				bgRect
-					.classed("bg", true)
-					.attr("width", (d: any) => {
-						return d.x1 - d.x0
-					})
-					.attr("height", (d: any) => d.y1 - d.y0)
-					.lower();
+				// const bgRect = self._services.domUtils.appendOrSelect(select(this), "rect.bg");
+				// bgRect
+				// 	.classed("bg", true)
+				// 	.attr("width", (d: any) => {
+				// 		return d.x1 - d.x0
+				// 	})
+				// 	.attr("height", (d: any) => d.y1 - d.y0)
+				// 	.lower();
 
-				if (!bgRect.attr("fill")) {
-					bgRect.attr("fill-opacity", 0.2)
-					.attr("fill", d => {
-						if (window["testColors"].length === 0) {
-							window["testColors"] = Tools.clone(testColors);
-						}
+				// if (!bgRect.attr("fill")) {
+				// 	bgRect.attr("fill-opacity", 0.2)
+				// 	.attr("fill", d => {
+				// 		if (window["testColors"].length === 0) {
+				// 			window["testColors"] = Tools.clone(testColors);
+				// 		}
 
-						const col = window["testColors"].shift();
+				// 		const col = window["testColors"].shift();
 
-						return `#${col}`;
-					})
-				}
+				// 		return `#${col}`;
+				// 	})
+				// }
 			});
 	}
 
@@ -192,7 +194,7 @@ export class LayoutComponent extends Component {
 		super.setModel(newObj);
 
 		this.children.forEach(child => {
-			child.component.setModel(newObj);
+			child.components.forEach(component => component.setModel(newObj));
 		});
 	}
 
@@ -201,7 +203,7 @@ export class LayoutComponent extends Component {
 		super.setServices(newObj);
 
 		this.children.forEach(child => {
-			child.component.setServices(newObj);
+			child.components.map(component => component.setServices(newObj));
 		});
 	}
 }
