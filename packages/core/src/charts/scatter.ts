@@ -3,7 +3,7 @@ import { Chart } from "../chart";
 import * as Configuration from "../configuration";
 import { ChartConfig, ScatterChartOptions, ChartType, LayoutDirection, LayoutGrowth, AxisPositions } from "../interfaces/index";
 import { Tools } from "../tools";
-import { Axis, Bar, Grid, Legend, Overlay, Title } from "../components/index";
+import { Axis, Grid, Legend, Overlay, Scatter, Title } from "../components/index";
 import { LayoutComponent } from "../components/index";
 
 
@@ -70,7 +70,7 @@ export class ScatterChart extends Chart {
 																	{
 																		components: [
 																			new Grid(),
-																			new Bar()
+																			new Scatter()
 																		],
 																		growth: {
 																			x: LayoutGrowth.STRETCH,

@@ -50,7 +50,6 @@ export class Legend extends Component {
 			// .each((d, i) => console.log(">> EXIT", i))
 			.remove();
 
-
 		if (this._model.getOptions().legendClickable) {
 			svg.classed("clickable", true);
 			this.setClickableLegend();
