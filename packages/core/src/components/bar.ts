@@ -1,10 +1,7 @@
 // Internal Imports
 import * as Configuration from "../configuration";
-
+import { ModelStateKeys } from "../interfaces";
 import { ChartComponent } from "./base-component";
-import { scaleBand, scaleLinear } from "d3-scale";
-import { max } from "d3-array";
-import { timeParse } from "d3-time-format";
 
 export class Bar extends ChartComponent {
 	render() {
@@ -18,14 +15,14 @@ export class Bar extends ChartComponent {
 				.append("g")
 				.classed("dots", true);
 
-		const xScale = this._model.get("x");
+		const xScale = this._model.get(ModelStateKeys.AXIS_SECONDARY);
 		gDots.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i))
 			.enter()
 				.append("circle")
 				.attr("class", "dot")
 				.attr("cx", d => xScale(d.label) + xScale.step() / 2)
-				.attr("cy", d => this._model.get("y")(d.value))
+				.attr("cy", d => this._model.get(ModelStateKeys.AXIS_PRIMARY)(d.value))
 				.attr("r", 5)
 				.attr("fill", d => this._model.getFillScale()[d.datasetLabel](d.label) as any)
 				// .attr("fill-opacity", d => this.getCircleFillOpacity())

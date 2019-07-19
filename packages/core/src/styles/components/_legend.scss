@@ -1,0 +1,20 @@
+svg.cc-legend {
+	&.clickable {
+		g.legend-item {
+			&:hover {
+				cursor: pointer;
+
+				rect {
+					stroke-opacity: 0.2;
+				}
+			}
+		}
+	}
+
+	g.legend-item {
+		rect {
+			stroke-width: 6px;
+			stroke-opacity: 0;
+		}
+	}
+}

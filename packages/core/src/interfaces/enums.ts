@@ -1,9 +1,3 @@
-/*
- **********************
- * chart config enums *
- **********************
- */
-
 /**
  * enum of all supported charts
  */
@@ -15,8 +9,6 @@ export enum ChartType {
 	DONUT = "donut",
 	COMBO = "combo"
 }
-
-
 
 /**
  * enum of all possible axis positions
@@ -45,7 +37,6 @@ export enum ThresholdTheme {
 	WARNING = "warning"
 }
 
-
 /**
  * enum of all possible layout directions
  */
@@ -56,8 +47,6 @@ export enum LayoutDirection {
 	COLUMN_REVERSE = "column-reverse"
 }
 
-
-
 /**
  * enum of all possible layout growth values
  */
@@ -65,4 +54,15 @@ export enum LayoutGrowth {
 	FIXED = "fixed",
 	PREFERRED = "preferred",
 	STRETCH = "stretch",
+}
+
+
+/**
+ * enum of all possible layout growth values
+ */
+export enum ModelStateKeys {
+	AXIS_PRIMARY = "axis-primary",
+	AXIS_SECONDARY = "axis-secondary",
+	AXIS_THIRD = "axis-third",
+	AXIS_FOURTH = "axis-fourth"
 }

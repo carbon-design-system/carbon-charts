@@ -9,7 +9,8 @@ export class Title extends ChartComponent {
 		svg.append("text")
 			.attr("x", 0)
 			.attr("y", 20)
-			.attr("font-size", 20)
+			.style("font-size", "18px")
+			.style("font-weight", 700)
 			.text("Scatter Chart");
 	}
 }
