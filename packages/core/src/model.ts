@@ -1,6 +1,5 @@
 // Internal Imports
 import * as Configuration from "./configuration";
-import { Tools } from "./tools";
 
 // D3
 import { scaleOrdinal } from "d3-scale";

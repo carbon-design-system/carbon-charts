@@ -1,9 +1,9 @@
 // Internal Imports
-import * as Configuration from "../../configuration";
 import { Service } from "../service";
+import { ModelStateKeys } from "../../interfaces";
 
 // D3 Imports
-import { select } from "d3-selection";
+import { select, Selection } from "d3-selection";
 import { Tools } from "../../tools";
 
 // MISC
@@ -24,11 +24,11 @@ export class DOMUtils extends Service {
 	}
 
 	styleHolderElement() {
-		const holderElement = this._model.get("holder") as HTMLElement;
+		const holderElement = this._model.get(ModelStateKeys.HOLDER) as HTMLElement;
 		const { width, height } = this._model.getOptions();
 
 		// Add class to chart holder
-		select(this._model.get("holder")).classed("chart-holder", true);
+		select(this._model.get(ModelStateKeys.HOLDER)).classed("chart-holder", true);
 
 		// If width exists in options
 		if (width) {
@@ -44,11 +44,11 @@ export class DOMUtils extends Service {
 	}
 
 	getHolder() {
-		return this._model.get("holder");
+		return this._model.get(ModelStateKeys.HOLDER);
 	}
 
 	addSVGElement() {
-		const svg = select(this._model.get("holder"))
+		const svg = select(this._model.get(ModelStateKeys.HOLDER))
 				.append("svg")
 				.classed("chart-svg", true)
 				.attr("height", "100%")
@@ -57,12 +57,12 @@ export class DOMUtils extends Service {
 		this._svg = svg.node();
 	}
 
-	getSVG() {
+	getMainSVG() {
 		return this._svg;
 	}
 
 	addResizeListener() {
-		const holder = this._model.get("holder");
+		const holder = this._model.get(ModelStateKeys.HOLDER);
 
 		let containerWidth = holder.clientWidth;
 		let containerHeight = holder.clientHeight;
@@ -80,33 +80,10 @@ export class DOMUtils extends Service {
 		resizeObserver.observe(holder);
 	}
 
-	getChartSize() {
-		// let ratio, marginForLegendTop;
-		// if (this._model.get("holder").clientWidth > Configuration.charts.widthBreak) {
-		// 	ratio = Configuration.charts.magicRatio;
-		// 	marginForLegendTop = 0;
-		// } else {
-		// 	marginForLegendTop = Configuration.charts.marginForLegendTop;
-		// 	ratio = 1;
-		// }
-
-		// Store computed actual size, to be considered for change if chart does not support axis
-		// const marginsToExclude = Configuration.charts.margin.left + Configuration.charts.margin.right;
-		const computedChartSize = {
-			height: this._svg.clientHeight,
-			width: this._svg.clientWidth
-		};
-
+	getSVGElementSize(svgSelector: Selection<any, any, any, any>) {
 		return {
-			height: Math.max(computedChartSize.height, Configuration.charts.axisCharts.minHeight),
-			width: Math.max(computedChartSize.width, Configuration.charts.axisCharts.minWidth)
-		};
-	}
-
-	getSVGSize(svg: any) {
-		return {
-			height: svg.node().clientHeight || svg.node().getBBox().height || svg.attr("height"),
-			width: svg.node().clientWidth || svg.node().getBBox().width || svg.attr("width")
+			height: svgSelector.node().clientHeight || svgSelector.node().getBBox().height || svgSelector.attr("height"),
+			width: svgSelector.node().clientWidth || svgSelector.node().getBBox().width || svgSelector.attr("width")
 		};
 	}
 

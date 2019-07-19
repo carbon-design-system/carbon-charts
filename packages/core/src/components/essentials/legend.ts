@@ -1,11 +1,11 @@
 // Internal Imports
-import * as Configuration from "../configuration";
-import { ChartComponent } from "./base-component";
+import * as Configuration from "../../configuration";
+import { Component } from "../component";
 
 // D3 Imports
 import { select } from "d3-selection";
 
-export class Legend extends ChartComponent {
+export class Legend extends Component {
 	type = "cc-legend";
 
 	render() {

@@ -1,13 +1,10 @@
 // Internal Imports
-import * as Configuration from "../configuration";
-import { ModelStateKeys } from "../interfaces";
-import { ChartComponent } from "./base-component";
+import { ModelStateKeys } from "../../interfaces";
+import { Component } from "../component";
 
-export class Bar extends ChartComponent {
+export class Bar extends Component {
 	render() {
 		const svg = this._parent;
-
-		const { line: margins } = Configuration.charts.margin;
 
 		const gDots = svg.selectAll("g.dots")
 			.data(this._model.getData().datasets)

@@ -1,8 +1,8 @@
-import * as Configuration from "../configuration";
-import { ChartComponent } from "./base-component";
-import { OverlayOptions } from "../interfaces/index";
+import * as Configuration from "../../configuration";
+import { Component } from "../component";
+import { OverlayOptions } from "../../interfaces/index";
 
-export class Overlay extends ChartComponent {
+export class Overlay extends Component {
 	holder: HTMLElement;
 	overlayElement: HTMLElement;
 	overlayOptions: OverlayOptions;

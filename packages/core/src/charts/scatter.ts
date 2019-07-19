@@ -4,7 +4,7 @@ import * as Configuration from "../configuration";
 import { ChartConfig, ScatterChartOptions, ChartType, LayoutDirection, LayoutGrowth, AxisPositions } from "../interfaces/index";
 import { Tools } from "../tools";
 import { Axis, Bar, Legend, Overlay, Title } from "../components/index";
-import { LayoutComponent } from "../components/layout";
+import { LayoutComponent } from "../components/index";
 
 export class ScatterChart extends Chart {
 	options: ScatterChartOptions = Tools.merge({}, Configuration.options.SCATTER);

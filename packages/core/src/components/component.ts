@@ -5,7 +5,7 @@ import errorHandler from "../services/error-handling";
 // D3 Imports
 import { select } from "d3-selection";
 
-export class ChartComponent {
+export class Component {
 	public type: string;
 
 	protected _parent: any;
@@ -29,7 +29,7 @@ export class ChartComponent {
 		// Set parent element to shell SVG if no parent exists for component
 		if (!this._parent) {
 			this.setParent(
-				select(this._services.domUtils.getSVG())
+				select(this._services.domUtils.getMainSVG())
 			);
 		}
 	}

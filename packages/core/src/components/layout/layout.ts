@@ -1,7 +1,7 @@
 // Internal Imports
-import { ChartComponent } from "./base-component";
-import { LayoutOptions, LayoutDirection, LayoutGrowth, LayoutComponentChild } from "../interfaces/index";
-import { Tools } from "../tools";
+import { Component } from "../component";
+import { LayoutOptions, LayoutDirection, LayoutGrowth, LayoutComponentChild } from "../../interfaces/index";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -12,7 +12,7 @@ import { hierarchy, treemap, treemapSlice, treemapDice } from "d3-hierarchy";
 const testColors = ["e41a1c", "377eb8", "4daf4a", "984ea3", "ff7f00", "ffff33", "a65628", "f781bf", "999999"];
 window["testColors"] = Tools.clone(testColors);
 
-export class LayoutComponent extends ChartComponent {
+export class LayoutComponent extends Component {
 	children: Array<LayoutComponentChild>;
 	options: LayoutOptions;
 
@@ -59,7 +59,7 @@ export class LayoutComponent extends ChartComponent {
 
 		// Get parent SVG to render inside of
 		const svg = this._parent;
-		const { width, height } = this._services.domUtils.getSVGSize(svg);
+		const { width, height } = this._services.domUtils.getSVGElementSize(svg);
 
 		// Pass children data to the hierarchy layout
 		// And calculate sum of sizes
@@ -113,7 +113,7 @@ export class LayoutComponent extends ChartComponent {
 			const growth = Tools.getProperty(d, "data", "growth", "x");
 
 			if (growth === LayoutGrowth.PREFERRED) {
-				const matchingSVGWidth = horizontal ? self._services.domUtils.getSVGSize(select(this)).width : self._services.domUtils.getSVGSize(select(this)).height;
+				const matchingSVGWidth = horizontal ? self._services.domUtils.getSVGElementSize(select(this)).width : self._services.domUtils.getSVGElementSize(select(this)).height;
 				const svgWidth = horizontal ? (svg.node() as any).clientWidth || svg.attr("width") : (svg.node() as any).clientHeight || svg.attr("height");
 
 				d.data.size = (matchingSVGWidth / svgWidth) * 100;

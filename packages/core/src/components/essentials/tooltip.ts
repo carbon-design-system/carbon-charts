@@ -1,4 +1,4 @@
-import * as Configuration from "../configuration";
+import * as Configuration from "../../configuration";
 
 // Carbon position service
 import Position, { PLACEMENTS } from "@carbon/utils-position";
