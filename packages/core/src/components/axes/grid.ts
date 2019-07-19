@@ -23,6 +23,9 @@ export class Grid extends Component {
 
 		this.drawXGrid();
 		this.drawYGrid();
+
+		// Draw the backdrop
+		this.drawBackdrop();
 	}
 
 	drawXGrid() {
@@ -62,6 +65,23 @@ export class Grid extends Component {
 		// if (thresholds && thresholds.length > 0) {
 		// 	this.addOrUpdateThresholds(g, false);
 		// }
+	}
+
+	drawBackdrop() {
+		const svg = this._parent;
+
+		// Get height from the grid
+		const xGridHeight = svg.select(".x.grid").node().getBBox().height;
+		const yGridBBox = svg.select(".y.grid").node().getBBox();
+		const backdrop = this._services.domUtils.appendOrSelect(svg, "rect.chart-grid-backdrop");
+
+		backdrop
+			.attr("x", yGridBBox.x)
+			.attr("y", yGridBBox.y)
+			.attr("width", yGridBBox.width)
+			.attr("height", xGridHeight)
+			.attr("fill", "#f3f3f3")
+			.lower();
 	}
 
 	cleanGrid(g) {
