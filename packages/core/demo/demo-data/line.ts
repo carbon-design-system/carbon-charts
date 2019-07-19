@@ -113,9 +113,9 @@ export const lineOptions = () => ({
 		},
 		y: {
 			title: "Dollars (CAD)",
-			yMaxAdjuster: yMax => yMax * 1.2,
-			yMinAdjuster: yMin => yMin * 1.2,
-			formatter: Math.random() > 0.5 ? null : val => `${val} gweg werg weg`,
+			// yMaxAdjuster: yMax => yMax * 1.2,
+			// yMinAdjuster: yMin => yMin * 1.2,
+			// formatter: Math.random() > 0.5 ? null : val => `${val} gweg werg weg`,
 			thresholds: [
 				{
 					range: [-20000, 30000],
