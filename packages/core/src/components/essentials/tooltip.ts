@@ -1,20 +1,44 @@
 import * as Configuration from "../../configuration";
+import { Component } from "../component";
 
 // Carbon position service
 import Position, { PLACEMENTS } from "@carbon/utils-position";
 
 // D3 Imports
 import { select, selectAll, mouse } from "d3-selection";
-
-export class ChartTooltip {
+import { transition } from "d3-transition";
+export class Tooltip extends Component {
 	container: HTMLElement;
 	positionService: Position = new Position();
 
-	constructor(container: Element) {
-		this.container = container as HTMLElement;
-	}
-
 	getRef = () => select(this.container).select("div.chart-tooltip").node() as HTMLElement;
+
+	render() {
+		// this._parent.append("rect")
+		// 	.attr("x", 0)
+		// 	.attr("y", 0)
+		// 	.attr("width", 20)
+		// 	.attr("height", 20);
+
+		// Draw tooltip
+		const holder = select(this._services.domUtils.getHolder());
+		const tooltip = this._services.domUtils.appendOrSelect(holder, "div.tooltip.chart-tooltip");
+
+		// Apply html content to the tooltip
+		const tooltipTextConainter = this._services.domUtils.appendOrSelect(tooltip, "div.text-box");
+		tooltipTextConainter.html("yo");
+
+		// Position the tooltip
+		// this.positionTooltip();
+
+		// Fade in
+		tooltip.style("opacity", 0)
+			.transition(transition().duration(750))
+			// .duration(Configuration.tooltip.fadeIn.duration)
+			.style("opacity", 1);
+
+		// this.addEventListeners();
+	}
 
 	positionTooltip() {
 		const target = this.getRef();
@@ -56,29 +80,7 @@ export class ChartTooltip {
 	}
 
 	show(contentHTML) {
-		// Remove existing tooltips on the page
-		// TODO - Update class to not conflict with other elements on page
-		selectAll(".chart-tooltip").remove();
-
-		// Draw tooltip
-		const tooltip = select(this.container).append("div")
-			.attr("class", "tooltip chart-tooltip");
-
-		// Apply html content to the tooltip
-		tooltip.append("div")
-			.attr("class", "text-box")
-			.html(contentHTML);
-
-		// Position the tooltip
-		this.positionTooltip();
-
-		// Fade in
-		tooltip.style("opacity", 0)
-			.transition()
-			.duration(Configuration.tooltip.fadeIn.duration)
-			.style("opacity", 1);
-
-		// this.addEventListeners();
+		
 	}
 
 	hide() {
