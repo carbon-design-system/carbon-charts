@@ -3,8 +3,18 @@ import { Chart } from "../chart";
 import * as Configuration from "../configuration";
 import { ChartConfig, ScatterChartOptions, ChartType, LayoutDirection, LayoutGrowth, AxisPositions } from "../interfaces/index";
 import { Tools } from "../tools";
-import { Axis, Grid, Legend, Overlay, Scatter, Title } from "../components/index";
-import { LayoutComponent } from "../components/index";
+
+// Components
+import {
+	Axis,
+	Grid,
+	LayoutComponent,
+	Legend,
+	Overlay,
+	Scatter,
+	Title,
+	Tooltip
+} from "../components/index";
 
 
 // TODO
@@ -22,6 +32,7 @@ export class ScatterChart extends Chart {
 	getComponents() {
 		return [
 			new Overlay(),
+			new Tooltip(),
 			new LayoutComponent(
 				[
 					{

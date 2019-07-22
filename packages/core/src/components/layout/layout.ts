@@ -165,27 +165,27 @@ export class LayoutComponent extends Component {
 					}
 				});
 
-				// const bgRect = self._services.domUtils.appendOrSelect(select(this), "rect.bg");
-				// bgRect
-				// 	.classed("bg", true)
-				// 	.attr("width", (d: any) => {
-				// 		return d.x1 - d.x0
-				// 	})
-				// 	.attr("height", (d: any) => d.y1 - d.y0)
-				// 	.lower();
+				const bgRect = self._services.domUtils.appendOrSelect(select(this), "rect.bg");
+				bgRect
+					.classed("bg", true)
+					.attr("width", (d: any) => {
+						return d.x1 - d.x0
+					})
+					.attr("height", (d: any) => d.y1 - d.y0)
+					.lower();
 
-				// if (!bgRect.attr("fill")) {
-				// 	bgRect.attr("fill-opacity", 0.2)
-				// 	.attr("fill", d => {
-				// 		if (window["testColors"].length === 0) {
-				// 			window["testColors"] = Tools.clone(testColors);
-				// 		}
+				if (!bgRect.attr("fill")) {
+					bgRect.attr("fill-opacity", 0.2)
+					.attr("fill", d => {
+						if (window["testColors"].length === 0) {
+							window["testColors"] = Tools.clone(testColors);
+						}
 
-				// 		const col = window["testColors"].shift();
+						const col = window["testColors"].shift();
 
-				// 		return `#${col}`;
-				// 	})
-				// }
+						return `#${col}`;
+					})
+				}
 			});
 	}
 
