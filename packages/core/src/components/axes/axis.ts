@@ -56,7 +56,7 @@ console.log("width", width)
 	}
 
 	setYScale() {
-		const height = this._services.domUtils.getSVGElementSize(this._parent).height;
+		const { height } = this._services.domUtils.getSVGElementSize(this._parent, true);
 		const { scales } = this._model.getOptions();
 
 		const yMin = this.getYMin();

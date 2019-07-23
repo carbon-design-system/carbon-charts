@@ -86,26 +86,28 @@ export class LayoutComponent extends Component {
 		const updatedSVGs = svg.selectAll(`svg.layout-child-${this.uid}`)
 			.data(root.leaves(), (d: any) => d.data.id);
 
-		updatedSVGs
+		const enteringSVGs = updatedSVGs
 			.enter()
 			.append("svg")
 				.attr("class", (d: any) => `layout-child layout-child-${this.uid} ${+new Date()} ${d.data.id}`)
 				.attr("x", (d: any) => d.x0)
 				.attr("y", (d: any) => d.y0)
 				.attr("width", (d: any) => d.x1 - d.x0)
-				.attr("height", (d: any) => d.y1 - d.y0)
-				.each(function(d: any) {
-					// Set parent component for each child
-					d.data.components.forEach(itemComponent => {
-						itemComponent.setParent(select(this));
+				.attr("height", (d: any) => d.y1 - d.y0);
 
-						// Render preffered & fixed items
-						const growth = Tools.getProperty(d, "data", "growth", "x");
-						if (growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED) {
-							itemComponent.render();
-						}
-					});
+		enteringSVGs.merge(svg.selectAll(`svg.layout-child-${this.uid}`))
+			.each(function(d: any) {
+				// Set parent component for each child
+				d.data.components.forEach(itemComponent => {
+					itemComponent.setParent(select(this));
+
+					// Render preffered & fixed items
+					const growth = Tools.getProperty(d, "data", "growth", "x");
+					if (growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED) {
+						itemComponent.render();
+					}
 				});
+			});
 
 		svg.selectAll(`svg.layout-child-${this.uid}`)
 		.each(function(d: any) {
