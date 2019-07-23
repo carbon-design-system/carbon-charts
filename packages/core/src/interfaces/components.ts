@@ -5,6 +5,7 @@ import { Component } from "../components/component";
  * customize the overlay contents
  */
 export interface LayoutComponentChild {
+	id: string;
 	/**
 	 * the component that'll be rendered inside layout child
 	 */

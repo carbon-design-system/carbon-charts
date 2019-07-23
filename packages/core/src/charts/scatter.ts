@@ -30,142 +30,303 @@ export class ScatterChart extends Chart {
 	}
 
 	getComponents() {
+		const titleComponent = {
+			id: "title",
+			components: [
+				new Title()
+			],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		const legendComponent = {
+			id: "legend",
+			components: [
+				new Legend()
+			],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		const graphFrame = {
+			id: "graph-frame",
+			components: [
+				new Grid(),
+				new Scatter()
+			],
+			growth: {
+				x: LayoutGrowth.STRETCH,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		const graphAxisFrame = {
+			id: "graph-axis-frame",
+			components: [
+				new LayoutComponent(
+					[
+						{
+							id: "axisLeft",
+							components: [
+								new Axis({
+									axisType: AxisPositions.LEFT
+								})
+							],
+							growth: {
+								x: LayoutGrowth.PREFERRED,
+								y: LayoutGrowth.FIXED
+							}
+						},
+						graphFrame,
+						{
+							id: "axisRight",
+							components: [
+								new Axis({
+									axisType: AxisPositions.RIGHT
+								})
+							],
+							growth: {
+								x: LayoutGrowth.PREFERRED,
+								y: LayoutGrowth.FIXED
+							}
+						},
+					],
+					{
+						direction: LayoutDirection.ROW
+					}
+				)
+			],
+			growth: {
+				x: LayoutGrowth.STRETCH,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		const axisFrameComponent = {
+			id: "axis-frame",
+			components: [
+				new LayoutComponent(
+					[
+						{
+							id: "axisTop",
+							components: [
+								new Axis({
+									axisType: AxisPositions.TOP
+								})
+							],
+							growth: {
+								x: LayoutGrowth.PREFERRED,
+								y: LayoutGrowth.FIXED
+							}
+						},
+						graphAxisFrame,
+						{
+							id: "axisBottom",
+							components: [
+								new Axis({
+									axisType: AxisPositions.BOTTOM
+								})
+							],
+							growth: {
+								x: LayoutGrowth.PREFERRED,
+								y: LayoutGrowth.FIXED
+							}
+						}
+					],
+					{
+						direction: LayoutDirection.COLUMN
+					}
+				)
+			],
+			growth: {
+				x: LayoutGrowth.STRETCH,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		const fullFrameComponent = {
+			id: "full-frame",
+			components: [
+				new LayoutComponent(
+					[
+						axisFrameComponent,
+						legendComponent
+					],
+					{
+						direction: LayoutDirection.ROW
+					}
+				)
+			],
+			growth: {
+				x: LayoutGrowth.STRETCH,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
 		return [
 			new Overlay(),
-			new Tooltip(),
+			// new Tooltip(),
 			new LayoutComponent(
 				[
-					{
-						components: [
-							new Title()
-						],
-						growth: {
-							x: LayoutGrowth.PREFERRED,
-							y: LayoutGrowth.FIXED
-						}
-					},
-					{
-						components: [
-							new LayoutComponent(
-								[
-									{
-										components: [
-											new LayoutComponent(
-												[
-													{
-														components: [
-															new Axis({
-																axisType: AxisPositions.TOP
-															})
-														],
-														growth: {
-															x: LayoutGrowth.PREFERRED,
-															y: LayoutGrowth.FIXED
-														}
-													},
-													{
-														components: [
-															new LayoutComponent(
-																[
-																	{
-																		components: [
-																			new Axis({
-																				axisType: AxisPositions.LEFT
-																			})
-																		],
-																		growth: {
-																			x: LayoutGrowth.PREFERRED,
-																			y: LayoutGrowth.FIXED
-																		}
-																	},
-																	{
-																		components: [
-																			new Grid(),
-																			new Scatter()
-																		],
-																		growth: {
-																			x: LayoutGrowth.STRETCH,
-																			y: LayoutGrowth.FIXED
-																		}
-																	},
-																	{
-																		components: [
-																			new Axis({
-																				axisType: AxisPositions.RIGHT
-																			})
-																		],
-																		growth: {
-																			x: LayoutGrowth.PREFERRED,
-																			y: LayoutGrowth.FIXED
-																		}
-																	},
-																],
-																{
-																	direction: LayoutDirection.ROW
-																}
-															)
-														],
-														growth: {
-															x: LayoutGrowth.STRETCH,
-															y: LayoutGrowth.FIXED
-														}
-													},
-													{
-														components: [
-															new Axis({
-																axisType: AxisPositions.BOTTOM
-															})
-														],
-														growth: {
-															x: LayoutGrowth.PREFERRED,
-															y: LayoutGrowth.FIXED
-														},
-														// syncWith: "chart-frame"
-													},
-												],
-												{
-													direction: LayoutDirection.COLUMN
-												}
-											)
-										],
-										growth: {
-											x: LayoutGrowth.STRETCH,
-											y: LayoutGrowth.FIXED
-										}
-									},
-									{
-										components: [
-											new Legend()
-										],
-										growth: {
-											x: LayoutGrowth.PREFERRED,
-											y: LayoutGrowth.FIXED
-										}
-									},
-									// {
-									// 	components: new Bar(),
-									// 	growth: {
-									// 		x: LayoutGrowth.STRETCH,
-									// 		y: LayoutGrowth.FIXED
-									// 	}
-									// }
-								],
-								{
-									direction: LayoutDirection.ROW
-								}
-							)
-						],
-						growth: {
-							x: LayoutGrowth.STRETCH,
-							y: LayoutGrowth.FIXED
-						}
-					}
+					titleComponent,
+					fullFrameComponent
 				],
 				{
 					direction: LayoutDirection.COLUMN
 				}
 			)
 		]
+
+		// return [
+		// 	new Overlay(),
+		// 	new Tooltip(),
+		// 	new LayoutComponent(
+		// 		[
+		// 			{
+		// 				id: "title",
+		// 				components: [
+		// 					new Title()
+		// 				],
+		// 				growth: {
+		// 					x: LayoutGrowth.PREFERRED,
+		// 					y: LayoutGrowth.FIXED
+		// 				}
+		// 			},
+		// 			{
+		// 				id: "full-frame",
+		// 				components: [
+		// 					new LayoutComponent(
+		// 						[
+		// 							{
+		// 								id: "full-frame-2",
+		// 								components: [
+		// 									new LayoutComponent(
+		// 										[
+		// 											{
+		// 												id: "topAxis",
+		// 												components: [
+		// 													new Axis({
+		// 														axisType: AxisPositions.TOP
+		// 													})
+		// 												],
+		// 												growth: {
+		// 													x: LayoutGrowth.PREFERRED,
+		// 													y: LayoutGrowth.FIXED
+		// 												}
+		// 											},
+		// 											{
+		// 												id: "chartFrame-tbAxis",
+		// 												components: [
+		// 													new LayoutComponent(
+		// 														[
+		// 															{
+		// 																id: "leftAxis",
+		// 																components: [
+		// 																	new Axis({
+		// 																		axisType: AxisPositions.LEFT
+		// 																	})
+		// 																],
+		// 																growth: {
+		// 																	x: LayoutGrowth.PREFERRED,
+		// 																	y: LayoutGrowth.FIXED
+		// 																}
+		// 															},
+		// 															{
+		// 																id: "chartFrame",
+		// 																components: [
+		// 																	new Grid(),
+		// 																	new Scatter()
+		// 																],
+		// 																growth: {
+		// 																	x: LayoutGrowth.STRETCH,
+		// 																	y: LayoutGrowth.FIXED
+		// 																}
+		// 															},
+		// 															{
+		// 																id: "rightAxis",
+		// 																components: [
+		// 																	new Axis({
+		// 																		axisType: AxisPositions.RIGHT
+		// 																	})
+		// 																],
+		// 																growth: {
+		// 																	x: LayoutGrowth.PREFERRED,
+		// 																	y: LayoutGrowth.FIXED
+		// 																}
+		// 															},
+		// 														],
+		// 														{
+		// 															direction: LayoutDirection.ROW
+		// 														}
+		// 													)
+		// 												],
+		// 												growth: {
+		// 													x: LayoutGrowth.STRETCH,
+		// 													y: LayoutGrowth.FIXED
+		// 												}
+		// 											},
+		// 											{
+		// 												id: "bottomAxis",
+		// 												components: [
+		// 													new Axis({
+		// 														axisType: AxisPositions.BOTTOM
+		// 													})
+		// 												],
+		// 												growth: {
+		// 													x: LayoutGrowth.PREFERRED,
+		// 													y: LayoutGrowth.FIXED
+		// 												},
+		// 												// syncWith: "chart-frame"
+		// 											},
+		// 										],
+		// 										{
+		// 											direction: LayoutDirection.COLUMN
+		// 										}
+		// 									)
+		// 								],
+		// 								growth: {
+		// 									x: LayoutGrowth.STRETCH,
+		// 									y: LayoutGrowth.FIXED
+		// 								}
+		// 							},
+		// 							{
+		// 								id: "legend",
+		// 								components: [
+		// 									new Legend()
+		// 								],
+		// 								growth: {
+		// 									x: LayoutGrowth.PREFERRED,
+		// 									y: LayoutGrowth.FIXED
+		// 								}
+		// 							},
+		// 							// {
+		// 							// 	components: new Bar(),
+		// 							// 	growth: {
+		// 							// 		x: LayoutGrowth.STRETCH,
+		// 							// 		y: LayoutGrowth.FIXED
+		// 							// 	}
+		// 							// }
+		// 						],
+		// 						{
+		// 							direction: LayoutDirection.ROW
+		// 						}
+		// 					)
+		// 				],
+		// 				growth: {
+		// 					x: LayoutGrowth.STRETCH,
+		// 					y: LayoutGrowth.FIXED
+		// 				}
+		// 			}
+		// 		],
+		// 		{
+		// 			direction: LayoutDirection.COLUMN
+		// 		}
+		// 	)
+		// ]
 
 		// return [
 		// 	new LayoutComponent(

@@ -46,4 +46,8 @@ export class Component {
 			}
 		}
 	}
+
+	getParent() {
+		return this._parent;
+	}
 }
