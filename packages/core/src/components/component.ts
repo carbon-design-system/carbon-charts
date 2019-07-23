@@ -50,4 +50,12 @@ export class Component {
 	getParent() {
 		return this._parent;
 	}
+
+	getContainerSVG() {
+		if (this.type) {
+			return this._services.domUtils.appendOrSelect(this._parent, `g.${this.type}`);
+		}
+
+		return this._parent;
+	}
 }

@@ -7,8 +7,10 @@ import * as Configuration from "../../configuration";
 import { axisBottom, axisLeft } from "d3-axis";
 
 export class Grid extends Component {
+	type = "cc-grid";
+
 	render() {
-		const svg = this._parent;
+		const svg = this.getContainerSVG();
 
 		this._services.domUtils.appendOrSelect(svg, "g.x.grid");
 		this._services.domUtils.appendOrSelect(svg, "g.y.grid");
@@ -36,23 +38,23 @@ export class Grid extends Component {
 	}
 
 	drawYGrid() {
-		// const svg = this._parent;
+		const svg = this._parent;
 
-		// const { scales } = this._model.getOptions();
-		// // const { thresholds } = scales.y;
-		// const { width } = this._services.domUtils.getSVGElementSize(this._parent, true);
+		const { scales } = this._model.getOptions();
+		// const { thresholds } = scales.y;
+		const { width } = this._services.domUtils.getSVGElementSize(this._parent, true);
 
-		// const yGrid = axisLeft(this._model.get(ModelStateKeys.AXIS_SECONDARY))
-		// 	.tickSizeInner(-width)
-		// 	.tickSizeOuter(0);
+		const yGrid = axisLeft(this._model.get(ModelStateKeys.AXIS_SECONDARY))
+			.tickSizeInner(-width)
+			.tickSizeOuter(0);
 
-		// yGrid.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
+		yGrid.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
 
-		// const g = svg.select(".y.grid")
-		// 	.attr("transform", "translate(0, 0)")
-		// 	.call(yGrid);
+		const g = svg.select(".y.grid")
+			.attr("transform", "translate(0, 0)")
+			.call(yGrid);
 
-		// this.cleanGrid(g);
+		this.cleanGrid(g);
 
 		// if (thresholds && thresholds.length > 0) {
 		// 	this.addOrUpdateThresholds(g, false);

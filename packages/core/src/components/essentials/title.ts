@@ -2,8 +2,10 @@
 import { Component } from "../component";
 
 export class Title extends Component {
+	type = "cc-title";
+
 	render() {
-		const svg = this._parent;
+		const svg = this.getContainerSVG();
 
 		const text = this._services.domUtils.appendOrSelect(svg, "text.title");
 		text.attr("x", 0)

@@ -3,8 +3,10 @@ import { ModelStateKeys } from "../../interfaces";
 import { Component } from "../component";
 
 export class Scatter extends Component {
+	type = "cc-scatter";
+
 	render() {
-		const svg = this._parent;
+		const svg = this.getContainerSVG();
 
 		const gDots = svg.selectAll("g.dots")
 			.data(this._model.getData().datasets)
