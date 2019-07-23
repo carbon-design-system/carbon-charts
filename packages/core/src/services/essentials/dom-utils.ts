@@ -80,7 +80,20 @@ export class DOMUtils extends Service {
 		resizeObserver.observe(holder);
 	}
 
-	getSVGElementSize(svgSelector: Selection<any, any, any, any>) {
+	getSVGElementSize(svgSelector: Selection<any, any, any, any>, attrsPreffered?: boolean) {
+		const attrHeight = parseInt(svgSelector.attr("height"));
+		const attrWidth = parseInt(svgSelector.attr("width"));
+
+		// If both attribute values are numbers
+		// And not percentages or NaN
+		if (attrsPreffered && !isNaN(attrHeight) && !isNaN(attrWidth) &&
+			(svgSelector.attr("height") + svgSelector.attr("width")).indexOf("%") === -1) {
+			return {
+				height: svgSelector.attr("height"),
+				width: svgSelector.attr("width")
+			};
+		}
+
 		return {
 			height: svgSelector.node().clientHeight || svgSelector.node().getBBox().height || svgSelector.attr("height"),
 			width: svgSelector.node().clientWidth || svgSelector.node().getBBox().width || svgSelector.attr("width")

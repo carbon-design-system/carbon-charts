@@ -11,10 +11,11 @@ import { hierarchy, treemap, treemapSlice, treemapDice } from "d3-hierarchy";
 // TODORF - Remove
 const testColors = ["e41a1c", "377eb8", "4daf4a", "984ea3", "ff7f00", "ffff33", "a65628", "f781bf", "999999"];
 window["testColors"] = Tools.clone(testColors);
-
+window["uidd"] = 0;
 export class LayoutComponent extends Component {
 	children: Array<LayoutComponentChild>;
 	options: LayoutOptions;
+	uid: Number;
 
 	constructor(children: Array<LayoutComponentChild>, options?: LayoutOptions) {
 		super();
@@ -22,16 +23,14 @@ export class LayoutComponent extends Component {
 		this.options = options;
 		this.children = children;
 
-		// setInterval(() => {
-		// 	this.render();
-		// }, 500);
+		this.uid = window["uidd"]++;
 	}
 
 	getPrefferedAndFixedSizeSum(): Number {
 		const svg = this._parent;
 		let sum = 0;
 
-		svg.selectAll("svg.layout-child")
+		svg.selectAll(`svg.layout-child-${this.uid}`)
 			.filter((d: any) => {
 				const growth = Tools.getProperty(d, "data", "growth", "x");
 				return growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED;
@@ -46,7 +45,7 @@ export class LayoutComponent extends Component {
 	getNumOfStretchChildren(): Number {
 		const svg = this._parent;
 
-		return svg.selectAll("svg.layout-child")
+		return svg.selectAll(`svg.layout-child-${this.uid}`)
 			.filter((d: any) => {
 				const growth = Tools.getProperty(d, "data", "growth", "x");
 				return growth === LayoutGrowth.STRETCH;
@@ -59,7 +58,7 @@ export class LayoutComponent extends Component {
 
 		// Get parent SVG to render inside of
 		const svg = this._parent;
-		const { width, height } = this._services.domUtils.getSVGElementSize(svg);
+		const { width, height } = this._services.domUtils.getSVGElementSize(svg, true);
 
 		// Pass children data to the hierarchy layout
 		// And calculate sum of sizes
@@ -84,13 +83,13 @@ export class LayoutComponent extends Component {
 		const horizontal = (this.options.direction === LayoutDirection.ROW || this.options.direction === LayoutDirection.ROW_REVERSE);
 
 		// Add new SVGs to the DOM for each layout child
-		const updatedSVGs = svg.selectAll("svg.layout-child")
-			.data(root.leaves());
+		const updatedSVGs = svg.selectAll(`svg.layout-child-${this.uid}`)
+			.data(root.leaves(), (d: any) => d.data.id);
 
 		updatedSVGs
 			.enter()
 			.append("svg")
-				.attr("class", (d: any) => `layout-child ${+new Date()}`)
+				.attr("class", (d: any) => `layout-child layout-child-${this.uid} ${+new Date()} ${d.data.id}`)
 				.attr("x", (d: any) => d.x0)
 				.attr("y", (d: any) => d.y0)
 				.attr("width", (d: any) => d.x1 - d.x0)
@@ -108,7 +107,7 @@ export class LayoutComponent extends Component {
 					});
 				});
 
-		svg.selectAll("svg.layout-child")
+		svg.selectAll(`svg.layout-child-${this.uid}`)
 		.each(function(d: any) {
 			// Calculate preffered children sizes after internal rendering
 			const growth = Tools.getProperty(d, "data", "growth", "x");
@@ -123,6 +122,7 @@ export class LayoutComponent extends Component {
 
 		updatedSVGs
 			.exit()
+			.each(function() { console.log("REMOVING#$3@$2", this) })
 			.remove();
 
 		// Run through stretch x-items
@@ -135,58 +135,58 @@ export class LayoutComponent extends Component {
 				child.size = (100 - (+this.getPrefferedAndFixedSizeSum())) / (+this.getNumOfStretchChildren());
 			});
 
-		// Pass children data to the hierarchy layout
-		// And calculate sum of sizes
-		root = hierarchy({
-			children: hierarchyChildren
-		})
-		.sum((d: any) => d.size);
+		setTimeout(() => {
+			// Pass children data to the hierarchy layout
+			// And calculate sum of sizes
+			root = hierarchy({
+				children: hierarchyChildren
+			})
+			.sum((d: any) => d.size);
 
-		// Compute the position of all elements within the layout
-		treemap()
-			.tile(tileType)
-			.size([width, height])
-			.padding(0)
-			(root);
+			// Compute the position of all elements within the layout
+			treemap()
+				.tile(tileType)
+				.size([width, height])
+				.padding(0)
+				(root);
 
-		// Add new SVGs to the DOM for each layout child
-		svg
-			.selectAll("svg")
-			.data(root.leaves())
-			.attr("x", (d: any) => d.x0)
-			.attr("y", (d: any) => d.y0)
-			.attr("width", (d: any) => d.x1 - d.x0)
-			.attr("height", (d: any) => d.y1 - d.y0)
-			.each(function(d: any, i) {
-				d.data.components.forEach(itemComponent => {
-					const growth = Tools.getProperty(d, "data", "growth", "x");
-					if (growth === LayoutGrowth.STRETCH) {
-						itemComponent.render();
-					}
-				});
-
-				const bgRect = self._services.domUtils.appendOrSelect(select(this), "rect.bg");
-				bgRect
-					.classed("bg", true)
-					.attr("width", (d: any) => {
-						return d.x1 - d.x0
-					})
-					.attr("height", (d: any) => d.y1 - d.y0)
-					.lower();
-
-				if (!bgRect.attr("fill")) {
-					bgRect.attr("fill-opacity", 0.2)
-					.attr("fill", d => {
-						if (window["testColors"].length === 0) {
-							window["testColors"] = Tools.clone(testColors);
+			// Add new SVGs to the DOM for each layout child
+			svg
+				.selectAll(`svg.layout-child-${this.uid}`)
+				.data(root.leaves(), (d: any) => d.data.id)
+				.attr("x", (d: any) => d.x0)
+				.attr("y", (d: any) => d.y0)
+				.attr("width", (d: any) => d.x1 - d.x0)
+				.attr("height", (d: any) => d.y1 - d.y0)
+				.each(function(d: any, i) {
+					d.data.components.forEach(itemComponent => {
+						const growth = Tools.getProperty(d, "data", "growth", "x");
+						if (growth === LayoutGrowth.STRETCH) {
+							itemComponent.render();
 						}
+					});
 
-						const col = window["testColors"].shift();
+					// const bgRect = self._services.domUtils.appendOrSelect(select(this), "rect.bg");
+					// bgRect
+					// 	.classed("bg", true)
+					// 	.attr("width", "100%")
+					// 	.attr("height", "100%")
+					// 	.lower();
 
-						return `#${col}`;
-					})
-				}
-			});
+					// if (!bgRect.attr("fill")) {
+					// 	bgRect.attr("fill-opacity", 0.2)
+					// 	.attr("fill", d => {
+					// 		if (window["testColors"].length === 0) {
+					// 			window["testColors"] = Tools.clone(testColors);
+					// 		}
+
+					// 		const col = window["testColors"].shift();
+
+					// 		return `#${col}`;
+					// 	})
+					// }
+				});
+		}, 0);
 	}
 
 	// Pass on model to children as well
