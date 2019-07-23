@@ -9,7 +9,7 @@ export class Legend extends Component {
 	type = "cc-legend";
 
 	render() {
-		const svg = this._parent;
+		const svg = this.getContainerSVG();
 
 		const legendItems = svg.selectAll("g.legend-item")
 			.data(this.getLegendItemArray());
