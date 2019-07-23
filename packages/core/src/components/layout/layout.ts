@@ -15,7 +15,11 @@ window["uidd"] = 0;
 export class LayoutComponent extends Component {
 	children: Array<LayoutComponentChild>;
 	options: LayoutOptions;
-	uid: Number;
+
+	// Give every layout component a distinct ID
+	// so they don't interfere when querying elements
+	static instanceCount = 0;
+	private _instanceCount: Number;
 
 	constructor(children: Array<LayoutComponentChild>, options?: LayoutOptions) {
 		super();
@@ -23,14 +27,14 @@ export class LayoutComponent extends Component {
 		this.options = options;
 		this.children = children;
 
-		this.uid = window["uidd"]++;
+		this._instanceCount = LayoutComponent.instanceCount++;
 	}
 
 	getPrefferedAndFixedSizeSum(): Number {
 		const svg = this._parent;
 		let sum = 0;
 
-		svg.selectAll(`svg.layout-child-${this.uid}`)
+		svg.selectAll(`svg.layout-child-${this._instanceCount}`)
 			.filter((d: any) => {
 				const growth = Tools.getProperty(d, "data", "growth", "x");
 				return growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED;
@@ -45,7 +49,7 @@ export class LayoutComponent extends Component {
 	getNumOfStretchChildren(): Number {
 		const svg = this._parent;
 
-		return svg.selectAll(`svg.layout-child-${this.uid}`)
+		return svg.selectAll(`svg.layout-child-${this._instanceCount}`)
 			.filter((d: any) => {
 				const growth = Tools.getProperty(d, "data", "growth", "x");
 				return growth === LayoutGrowth.STRETCH;
@@ -83,19 +87,19 @@ export class LayoutComponent extends Component {
 		const horizontal = (this.options.direction === LayoutDirection.ROW || this.options.direction === LayoutDirection.ROW_REVERSE);
 
 		// Add new SVGs to the DOM for each layout child
-		const updatedSVGs = svg.selectAll(`svg.layout-child-${this.uid}`)
+		const updatedSVGs = svg.selectAll(`svg.layout-child-${this._instanceCount}`)
 			.data(root.leaves(), (d: any) => d.data.id);
 
 		const enteringSVGs = updatedSVGs
 			.enter()
 			.append("svg")
-				.attr("class", (d: any) => `layout-child layout-child-${this.uid} ${+new Date()} ${d.data.id}`)
+				.attr("class", (d: any) => `layout-child layout-child-${this._instanceCount} ${+new Date()} ${d.data.id}`)
 				.attr("x", (d: any) => d.x0)
 				.attr("y", (d: any) => d.y0)
 				.attr("width", (d: any) => d.x1 - d.x0)
 				.attr("height", (d: any) => d.y1 - d.y0);
 
-		enteringSVGs.merge(svg.selectAll(`svg.layout-child-${this.uid}`))
+		enteringSVGs.merge(svg.selectAll(`svg.layout-child-${this._instanceCount}`))
 			.each(function(d: any) {
 				// Set parent component for each child
 				d.data.components.forEach(itemComponent => {
@@ -109,7 +113,7 @@ export class LayoutComponent extends Component {
 				});
 			});
 
-		svg.selectAll(`svg.layout-child-${this.uid}`)
+		svg.selectAll(`svg.layout-child-${this._instanceCount}`)
 		.each(function(d: any) {
 			// Calculate preffered children sizes after internal rendering
 			const growth = Tools.getProperty(d, "data", "growth", "x");
@@ -154,7 +158,7 @@ export class LayoutComponent extends Component {
 
 			// Add new SVGs to the DOM for each layout child
 			svg
-				.selectAll(`svg.layout-child-${this.uid}`)
+				.selectAll(`svg.layout-child-${this._instanceCount}`)
 				.data(root.leaves(), (d: any) => d.data.id)
 				.attr("x", (d: any) => d.x0)
 				.attr("y", (d: any) => d.y0)
