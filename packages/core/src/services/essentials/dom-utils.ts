@@ -83,8 +83,8 @@ export class DOMUtils extends Service {
 	}
 
 	getSVGElementSize(svgSelector: Selection<any, any, any, any>, attrsPreffered?: boolean) {
-		const attrHeight = parseInt(svgSelector.attr("height"));
-		const attrWidth = parseInt(svgSelector.attr("width"));
+		const attrHeight = parseInt(svgSelector.attr("height"), 10);
+		const attrWidth = parseInt(svgSelector.attr("width"), 10);
 
 		// If both attribute values are numbers
 		// And not percentages or NaN
@@ -124,5 +124,5 @@ export class DOMUtils extends Service {
 			args.unshift(this);
 			timer = setTimeout(fn.bind.apply(fn, args), ms);
 		};
-	};
+	}
 }

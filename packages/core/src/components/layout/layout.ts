@@ -13,12 +13,13 @@ const testColors = ["e41a1c", "377eb8", "4daf4a", "984ea3", "ff7f00", "ffff33", 
 window["testColors"] = Tools.clone(testColors);
 window["uidd"] = 0;
 export class LayoutComponent extends Component {
-	children: Array<LayoutComponentChild>;
-	options: LayoutOptions;
-
 	// Give every layout component a distinct ID
 	// so they don't interfere when querying elements
 	static instanceCount = 0;
+
+	children: Array<LayoutComponentChild>;
+	options: LayoutOptions;
+
 	private _instanceCount: Number;
 
 	private _renderCallbacks = [];
@@ -68,11 +69,12 @@ export class LayoutComponent extends Component {
 
 		// Pass children data to the hierarchy layout
 		// And calculate sum of sizes
-		const directionIsReversed = this.options.direction === LayoutDirection.ROW_REVERSE || this.options.direction === LayoutDirection.COLUMN_REVERSE;
+		const directionIsReversed = (this.options.direction === LayoutDirection.ROW_REVERSE) ||
+			(this.options.direction === LayoutDirection.COLUMN_REVERSE);
 		const hierarchyChildren = directionIsReversed ? this.children.reverse() : this.children;
 		let root = hierarchy({
-				children: hierarchyChildren
-			})
+			children: hierarchyChildren
+		})
 			.sum((d: any) => d.size);
 
 		// Grab the correct treemap tile function based on direction
@@ -112,7 +114,7 @@ export class LayoutComponent extends Component {
 
 						const renderCallback = () => {
 							const elToMatch = select(self._services.domUtils.getMainSVG()).select(`svg.${d.data.syncWith}`);
-							
+
 							if (!elToMatch.empty()) {
 								select(this)
 									.attr("x", elToMatch.attr("x"))
@@ -140,16 +142,20 @@ export class LayoutComponent extends Component {
 			const growth = Tools.getProperty(d, "data", "growth", "x");
 
 			if (growth === LayoutGrowth.PREFERRED) {
-				const matchingSVGWidth = horizontal ? self._services.domUtils.getSVGElementSize(select(this)).width : self._services.domUtils.getSVGElementSize(select(this)).height;
-				const svgWidth = horizontal ? (svg.node() as any).clientWidth || svg.attr("width") : (svg.node() as any).clientHeight || svg.attr("height");
+				const matchingSVGWidth = horizontal ?
+					self._services.domUtils.getSVGElementSize(select(this)).width :
+					self._services.domUtils.getSVGElementSize(select(this)).height;
+				const svgWidth = horizontal ?
+					(svg.node() as any).clientWidth || svg.attr("width") :
+					(svg.node() as any).clientHeight || svg.attr("height");
 
 				d.data.size = (matchingSVGWidth / svgWidth) * 100;
 			}
-		})
+		});
 
 		updatedSVGs
 			.exit()
-			.each(function() { console.log("REMOVING#$3@$2", this) })
+			.each(function() { console.log("REMOVING#$3@$2", this); })
 			.remove();
 
 		// Run through stretch x-items
@@ -214,7 +220,7 @@ export class LayoutComponent extends Component {
 					// }
 				});
 
-			this._renderCallbacks.forEach(rCb => rCb())
+			this._renderCallbacks.forEach(rCb => rCb());
 		}, 0);
 	}
 
@@ -237,7 +243,7 @@ export class LayoutComponent extends Component {
 			child.components.map(component => component.setServices(newObj));
 		});
 	}
-	
+
 	addRenderCallback(cb: Function) {
 		this._renderCallbacks.push(cb);
 	}

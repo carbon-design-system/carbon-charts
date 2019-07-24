@@ -83,11 +83,13 @@ export class Axis extends Component {
 		const { appendOrSelect } = this._services.domUtils;
 		const svg = this._parent;
 
-		const t = this._model.get("animations") ? this._services.transitions.getInstantTransition() : this._services.transitions.getDefaultTransition();
+		const t = this._model.get("animations") ?
+			this._services.transitions.getInstantTransition() :
+			this._services.transitions.getDefaultTransition();
 
 		const xScale = this._model.get(ModelStateKeys.AXIS_SECONDARY);
 		const axisFunction = this.options.axisType === AxisPositions.TOP ? axisTop : axisBottom;
-		const xAxis = axisFunction(xScale)
+		const xAxis = axisFunction(xScale);
 			// .tickSize(0)
 			// .tickSizeOuter(0);
 
@@ -198,7 +200,7 @@ export class Axis extends Component {
 			// 	.attr("x2", chartSize.width);
 		} else {
 			yAxisRef = svg.append("g")
-				.attr("class", "y axis yAxes")
+				.attr("class", "y axis yAxes");
 				// .attr("transform", "translate(30, 0)");
 
 			yAxisRef.call(yAxis);

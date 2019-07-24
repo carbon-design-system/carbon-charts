@@ -13,7 +13,7 @@ export class Scatter extends Component {
 
 		const dotGroupsEnter = dotGroups.enter()
 			.append("g")
-				.classed("dots", true);		
+				.classed("dots", true);
 
 		const xScale = this._model.get(ModelStateKeys.AXIS_SECONDARY);
 		const dots = dotGroupsEnter.merge(dotGroups)
