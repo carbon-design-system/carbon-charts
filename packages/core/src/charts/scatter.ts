@@ -121,7 +121,8 @@ export class ScatterChart extends Chart {
 							growth: {
 								x: LayoutGrowth.PREFERRED,
 								y: LayoutGrowth.FIXED
-							}
+							},
+							syncWith: "graph-frame"
 						},
 						graphAxisFrame,
 						{
@@ -134,7 +135,8 @@ export class ScatterChart extends Chart {
 							growth: {
 								x: LayoutGrowth.PREFERRED,
 								y: LayoutGrowth.FIXED
-							}
+							},
+							syncWith: "graph-frame"
 						}
 					],
 					{

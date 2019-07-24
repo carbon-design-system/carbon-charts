@@ -21,6 +21,8 @@ export class LayoutComponent extends Component {
 	static instanceCount = 0;
 	private _instanceCount: Number;
 
+	private _renderCallbacks = [];
+
 	constructor(children: Array<LayoutComponentChild>, options?: LayoutOptions) {
 		super();
 
@@ -104,6 +106,25 @@ export class LayoutComponent extends Component {
 				// Set parent component for each child
 				d.data.components.forEach(itemComponent => {
 					itemComponent.setParent(select(this));
+
+					if (d.data.syncWith) {
+						const layoutComponent = window[`lc-${d.data.syncWith}`];
+
+						const renderCallback = () => {
+							const elToMatch = select(self._services.domUtils.getMainSVG()).select(`svg.${d.data.syncWith}`);
+							
+							if (!elToMatch.empty()) {
+								select(this)
+									.attr("x", elToMatch.attr("x"))
+									.attr("width", elToMatch.attr("width"));
+
+								itemComponent.render();
+							}
+						};
+
+						renderCallback();
+						layoutComponent.addRenderCallback(renderCallback);
+					}
 
 					// Render preffered & fixed items
 					const growth = Tools.getProperty(d, "data", "growth", "x");
@@ -192,6 +213,8 @@ export class LayoutComponent extends Component {
 					// 	})
 					// }
 				});
+
+			this._renderCallbacks.forEach(rCb => rCb())
 		}, 0);
 	}
 
@@ -201,6 +224,8 @@ export class LayoutComponent extends Component {
 
 		this.children.forEach(child => {
 			child.components.forEach(component => component.setModel(newObj));
+
+			window[`lc-${child.id}`] = this;
 		});
 	}
 
@@ -211,5 +236,9 @@ export class LayoutComponent extends Component {
 		this.children.forEach(child => {
 			child.components.map(component => component.setServices(newObj));
 		});
+	}
+	
+	addRenderCallback(cb: Function) {
+		this._renderCallbacks.push(cb);
 	}
 }

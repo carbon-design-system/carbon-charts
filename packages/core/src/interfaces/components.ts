@@ -20,7 +20,8 @@ export interface LayoutComponentChild {
 	growth?: {
 		x: LayoutGrowth,
 		y: LayoutGrowth
-	}
+	},
+	syncWith?: Object;
 }
 
 

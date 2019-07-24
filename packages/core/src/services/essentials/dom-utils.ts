@@ -49,10 +49,10 @@ export class DOMUtils extends Service {
 
 	addSVGElement() {
 		const svg = select(this._model.get(ModelStateKeys.HOLDER))
-				.append("svg")
-				.classed("chart-svg", true)
-				.attr("height", "100%")
-				.attr("width", "100%");
+			.append("svg")
+			.classed("chart-svg", true)
+			.attr("height", "100%")
+			.attr("width", "100%");
 
 		this._svg = svg.node();
 	}
@@ -67,7 +67,7 @@ export class DOMUtils extends Service {
 		let containerWidth = holder.clientWidth;
 		let containerHeight = holder.clientHeight;
 
-		const resizeObserver = new ResizeObserver((entries, observer) => {
+		const resizeCallback = this.debounce(10, (entries, observer) => {
 			if (Math.abs(containerWidth - holder.clientWidth) > 1
 				|| Math.abs(containerHeight - holder.clientHeight) > 1) {
 				containerWidth = holder.clientWidth;
@@ -76,6 +76,8 @@ export class DOMUtils extends Service {
 				this._services.events.dispatchEvent("chart-resize");
 			}
 		});
+
+		const resizeObserver = new ResizeObserver(resizeCallback);
 
 		resizeObserver.observe(holder);
 	}
@@ -112,4 +114,15 @@ export class DOMUtils extends Service {
 
 		return g;
 	}
+
+	debounce(ms, fn) {
+		let timer;
+
+		return function () {
+			clearTimeout(timer);
+			const args = Array.prototype.slice.call(arguments);
+			args.unshift(this);
+			timer = setTimeout(fn.bind.apply(fn, args), ms);
+		};
+	};
 }
