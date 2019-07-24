@@ -11,9 +11,6 @@ import {
 import "./index.scss";
 import "./../src/styles/style.scss";
 
-// Interfaces
-import { ChartData } from "./../src/interfaces/index";
-
 // Functionality for demo options toolbar
 import { initializeDemoOptions } from "./demo-options";
 
