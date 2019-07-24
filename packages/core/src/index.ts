@@ -1,7 +1,7 @@
 // import { BaseChart } from "./base-chart";
 // import { BaseAxisChart } from "./base-axis-chart";
 
-import "./style.scss";
+import "./styles/style.scss";
 
 import { ScatterChart } from "./charts/scatter";
 

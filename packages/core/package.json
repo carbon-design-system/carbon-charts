@@ -5,8 +5,8 @@
   "main": "./index.umd.js",
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
-	"demo:build": "webpack --config webpack.config.js && yarn run docs:build",
-	"docs:build": "typedoc --out ./demo/bundle/documentation ./src/index.ts",
+    "demo:build": "webpack --config webpack.config.js && yarn run docs:build",
+    "docs:build": "typedoc --out ./demo/bundle/documentation ./src/index.ts",
     "build": "bash build.sh",
     "build:watch": "rm -rf dist && webpack -w --config webpack.build.js",
     "bundle:analyzer": "rm -rf dist && webpack --config webpack.build.js --env.bundleAnalyzer",
@@ -45,7 +45,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@carbon/colors": "10.1.1",
-    "@carbon/themes": "10.3.1",
+    "@carbon/themes": "10.4.0",
     "@carbon/utils-position": "1.1.0",
     "babel-polyfill": "6.26.0",
     "carbon-components": "10.3.2",
