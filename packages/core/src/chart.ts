@@ -7,7 +7,7 @@ import { ChartModel } from "./model";
 import { Component } from "./components/component";
 
 // Services
-import { Events, DOMUtils } from "./services/index";
+import { DOMUtils, Events, Transitions } from "./services/index";
 
 export class Chart {
 	components: Array<Component>;
@@ -15,8 +15,9 @@ export class Chart {
 	model: ChartModel;
 
 	private services: any = {
+		domUtils: DOMUtils,
 		events: Events,
-		domUtils: DOMUtils
+		transitions: Transitions
 	};
 
 	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
@@ -48,7 +49,7 @@ export class Chart {
 		this.services.events
 			.getDocumentFragment()
 			.addEventListener("chart-resize", () => {
-				this.update();
+				this.update(true);
 			});
 	}
 
@@ -66,12 +67,16 @@ export class Chart {
 		return null;
 	}
 
-	update() {
+	update(animations?: boolean) {
 		if (this.components) {
 			console.log("RE RENDER STUFF");
 			this.components.forEach(component => {
 				component.render();
 			});
+
+			this.model.set({
+				animations
+			}, true);
 		}
 	}
 }

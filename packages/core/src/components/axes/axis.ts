@@ -82,7 +82,8 @@ export class Axis extends Component {
 	setXAxis(noAnimation?: boolean) {
 		const { appendOrSelect } = this._services.domUtils;
 		const svg = this._parent;
-		// const t = noAnimation ? this.getInstantTransition() : this.getDefaultTransition();
+
+		const t = this._model.get("animations") ? this._services.transitions.getInstantTransition() : this._services.transitions.getDefaultTransition();
 
 		const xScale = this._model.get(ModelStateKeys.AXIS_SECONDARY);
 		const axisFunction = this.options.axisType === AxisPositions.TOP ? axisTop : axisBottom;
@@ -91,6 +92,7 @@ export class Axis extends Component {
 			// .tickSizeOuter(0);
 
 		const xAxisRef = appendOrSelect(svg, "g.x.axis")
+			.transition(t)
 			.call(xAxis);
 
 		xAxisRef.select("path.domain").remove();

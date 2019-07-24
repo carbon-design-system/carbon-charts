@@ -21,7 +21,8 @@ export class Scatter extends Component {
 			.data((d, i) => this.addLabelsToDataPoints(d, i));
 
 		const dotsEnter = dots.enter()
-			.append("circle");
+			.append("circle")
+			.attr("opacity", 0);
 
 		dotsEnter.merge(dots)
 			.attr("class", "dot")
@@ -30,8 +31,16 @@ export class Scatter extends Component {
 			.attr("r", 5)
 			.attr("fill", d => this._model.getFillScale()[d.datasetLabel](d.label) as any)
 			.attr("fill-opacity", d => 0.2)
-			.attr("stroke", d => this._model.getStrokeColor(d.datasetLabel, d.label, d.value));
+			.attr("stroke", d => this._model.getStrokeColor(d.datasetLabel, d.label, d.value))
+			.transition()
+			.duration(750)
+			.attr("opacity", 1);
 
+		dotGroups.exit()
+			.transition()
+			.duration(750)
+			.attr("opacity", 0)
+			.remove();
 		// Hide the overlay
 		// this.chartOverlay.hide();
 
