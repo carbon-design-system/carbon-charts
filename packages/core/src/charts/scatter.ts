@@ -181,7 +181,7 @@ export class ScatterChart extends Chart {
 					direction: LayoutDirection.COLUMN
 				}
 			)
-		]
+		];
 
 		// return [
 		// 	new Overlay(),

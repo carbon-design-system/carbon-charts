@@ -125,10 +125,10 @@ export class Legend extends Component {
 		const svg = this._parent;
 		svg.selectAll("g.legend-item")
 			.on("mouseover", () => {
-				console.log("YOU HOVERED")
+				console.log("YOU HOVERED");
 			})
 			.on("click", function() {
-				console.log("clicked", select(this))
-			})
+				console.log("clicked", select(this));
+			});
 	}
 }

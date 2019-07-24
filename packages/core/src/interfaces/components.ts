@@ -9,18 +9,18 @@ export interface LayoutComponentChild {
 	/**
 	 * the component that'll be rendered inside layout child
 	 */
-	components: Array<Component>,
+	components: Array<Component>;
 	/**
 	 * size of the layout child
 	 */
-	size?: Number,
+	size?: Number;
 	/**
 	 * how the layout child will grow or shrink in x & y directions
 	 */
 	growth?: {
 		x: LayoutGrowth,
 		y: LayoutGrowth
-	},
+	};
 	syncWith?: Object;
 }
 
