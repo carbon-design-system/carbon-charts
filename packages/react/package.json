@@ -1,8 +1,8 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "0.12.2",
+	"version": "0.15.1",
 	"description": "Carbon charting components for React",
-	"main": "index.js",
+	"main": "./bundle/bundle.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "yarn run storybook",
@@ -17,12 +17,35 @@
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",
+	"keywords": [
+		"carbon",
+		"charts",
+		"react",
+		"dataviz",
+		"data-visualization",
+		"visualizations",
+		"d3",
+		"svg",
+		"component",
+		"components",
+		"css",
+		"html",
+		"ibm",
+		"typescript",
+		"javascript",
+		"js",
+		"library",
+		"pattern",
+		"patterns",
+		"sass",
+		"scss"
+	],
 	"bugs": {
 		"url": "https://github.com/IBM/carbon-charts/issues"
 	},
 	"homepage": "https://github.com/IBM/carbon-charts#readme",
 	"dependencies": {
-		"@carbon/charts": "^0.12.2"
+		"@carbon/charts": "^0.15.1"
 	},
 	"peerDependencies": {
 		"react": "^16.6.3",

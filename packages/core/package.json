@@ -1,7 +1,8 @@
 {
   "name": "@carbon/charts",
-  "version": "0.12.2",
+  "version": "0.15.1",
   "description": "Carbon charting components",
+  "main": "./index.umd.js",
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
 	"demo:build": "webpack --config webpack.config.js && yarn run docs:build",
@@ -19,14 +20,35 @@
     "url": "git@github.com:IBM/carbon-charts.git"
   },
   "keywords": [
-    "charts"
+    "carbon",
+    "charts",
+    "dataviz",
+    "data-visualization",
+    "visualizations",
+    "d3",
+    "svg",
+    "component",
+    "components",
+    "css",
+    "html",
+    "ibm",
+    "typescript",
+    "javascript",
+    "js",
+    "library",
+    "pattern",
+    "patterns",
+    "sass",
+    "scss"
   ],
   "author": "IBM",
   "license": "Apache-2.0",
   "dependencies": {
     "@carbon/colors": "10.1.1",
+    "@carbon/themes": "10.3.1",
     "@carbon/utils-position": "1.1.0",
     "babel-polyfill": "6.26.0",
+    "carbon-components": "10.3.2",
     "resize-observer-polyfill": "1.5.0"
   },
   "peerDependencies": {
