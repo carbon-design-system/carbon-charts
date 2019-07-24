@@ -23,7 +23,6 @@ export class Axis extends Component {
 	}
 
 	render() {
-		console.log("RE RENDER AXS")
 		this.updateXandYGrid();
 
 		if (this.options.axisType === AxisPositions.TOP || this.options.axisType === AxisPositions.BOTTOM) {
@@ -41,10 +40,10 @@ export class Axis extends Component {
 
 	setXScale() {
 		const { width } = this._services.domUtils.getSVGElementSize(this._parent, true);
-console.log("width", width)
+
 		// Grab x-scale object from model
 		const xScale = this._model.get(ModelStateKeys.AXIS_SECONDARY) || scaleBand();
-		xScale.rangeRound([0, width]).padding(Configuration.scales.x.padding);
+		xScale.rangeRound([0, width]);
 		xScale.domain(this._model.getData().labels);
 
 		// If x-scale doesn't exist on the model, store it
