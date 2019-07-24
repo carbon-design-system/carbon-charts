@@ -1,7 +1,7 @@
 {
 	"$schema": "../../node_modules/ng-packagr/package.schema.json",
 	"name": "@carbon/charts-angular",
-	"version": "0.12.2",
+	"version": "0.15.1",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"scripts": {
@@ -16,8 +16,31 @@
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",
+	"keywords": [
+		"carbon",
+		"charts",
+		"angular",
+		"dataviz",
+		"data-visualization",
+		"visualizations",
+		"d3",
+		"svg",
+		"component",
+		"components",
+		"css",
+		"html",
+		"ibm",
+		"typescript",
+		"javascript",
+		"js",
+		"library",
+		"pattern",
+		"patterns",
+		"sass",
+		"scss"
+	],
 	"dependencies": {
-		"@carbon/charts": "^0.12.2"
+		"@carbon/charts": "^0.15.1"
 	},
 	"peerDependencies": {
 		"@angular/common": "^6.0.0 || ^7.0.0",

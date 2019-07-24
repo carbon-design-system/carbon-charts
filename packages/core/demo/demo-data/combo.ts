@@ -1,4 +1,5 @@
 import { colors } from "./colors";
+import { getTheme } from "./themes";
 
 export const comboData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -71,5 +72,7 @@ export const comboOptions = {
 		}
 	},
 	legendClickable: true,
-	containerResizable: true
+	containerResizable: true,
+	title: "Combo Chart",
+	theme: getTheme()
 };

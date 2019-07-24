@@ -9,7 +9,7 @@ import {
 
 // Styles
 import "./index.scss";
-import "./../src/style.scss";
+import "./../src/styles/style.scss";
 
 // Interfaces
 import { ChartData } from "./../src/interfaces/index";

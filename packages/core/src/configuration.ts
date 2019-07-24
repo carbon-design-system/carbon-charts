@@ -189,6 +189,9 @@ export const charts = {
 	minWidth: 150,
 	widthBreak: 600,
 	marginForLegendTop: 40,
+	title: {
+		marginBottom: 24
+	},
 	magicRatio: 0.7,
 	magicMoreForY2Axis: 70,
 	axisCharts: {
@@ -284,7 +287,8 @@ export const lines = {
 		minNonFilledRadius: 3,
 		mouseover: {
 			strokeWidth: 4,
-			strokeOpacity: 0.5
+			strokeOpacity: 0.5,
+			fillOpacity: 1,
 		},
 		mouseout: {
 			strokeWidth: 0,
@@ -352,7 +356,7 @@ export const legend = {
 		borderWidth: false
 	},
 	inactive: {
-		backgroundColor: "white",
+		backgroundColor: "transparent",
 		borderStyle: "solid",
 		borderWidth: "2px"
 	},
