@@ -72,6 +72,8 @@ export class Chart {
 			console.log("RE RENDER STUFF");
 			this.components.forEach(component => {
 				component.render();
+
+				console.log("RENDER", ++window["ccount"])
 			});
 
 			this.model.set({
