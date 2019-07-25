@@ -5,6 +5,7 @@ import Position, { PLACEMENTS } from "@carbon/utils-position";
 
 // D3 Imports
 import { select, selectAll, mouse } from "d3-selection";
+import { Tools } from "../tools";
 
 export class ChartTooltip {
 	container: HTMLElement;
@@ -55,11 +56,62 @@ export class ChartTooltip {
 		this.positionService.setElement(target, pos);
 	}
 
-	show(contentHTML) {
+	// Tooltips should aim to be beside the corresponding datapoints, however they should not overlap
+	positionGridTooltips() {
+		console.log('here');
+		const tooltips = selectAll(".gridline-tooltip");
+		console.log(tooltips);
+		// .each(function(d) {
+		// 	console.log(d);
+
+		// });
+		// translate them up half the object size
+
+
+		// translate them RIGHT the distance in config
+	}
+
+	show(contentHTML, gridlineTooltips?: any) {
 		// Remove existing tooltips on the page
 		// TODO - Update class to not conflict with other elements on page
 		selectAll(".chart-tooltip").remove();
 
+
+		// check if supplied a list of tooltips or just one
+		if (gridlineTooltips) {
+
+			// until the refactor comes out we need to account for when charts have a title or not
+			const translateWrap = Tools.getTranslationValues(this.container);
+
+			// iterate through all the tooltips and add them
+			gridlineTooltips.forEach(datapoint => {
+
+				// draw tooltips
+				const tooltip = select(this.container).append("div")
+				.attr("class", "tooltip chart-tooltip gridline-tooltip")
+				.html(datapoint.html)
+				.style("opacity", 0);
+
+				tooltip
+				.transition()
+				.duration(Configuration.tooltip.fadeIn.duration)
+				.style("opacity", 1);
+
+				const elRef = tooltip.node() as HTMLElement;
+				const elBound = elRef.getBoundingClientRect();
+				const position = {
+					top: datapoint.dataPosition.y  - (elBound.height/2),
+					left: +datapoint.dataPosition.x + Configuration.tooltip.axisTooltip.paddingLeft + (elBound.width/2)  };
+
+
+				// add to data position
+				this.positionService.setElement(elRef, position);
+
+			});
+			// This repositions the tooltips so that they don't overlap
+			//this.positionGridTooltips();
+
+		} else {
 		// Draw tooltip
 		const tooltip = select(this.container).append("div")
 			.attr("class", "tooltip chart-tooltip");
@@ -77,12 +129,13 @@ export class ChartTooltip {
 			.transition()
 			.duration(Configuration.tooltip.fadeIn.duration)
 			.style("opacity", 1);
+		}
 
 		// this.addEventListeners();
 	}
 
 	hide() {
-		const tooltipRef = select(this.container).select("div.chart-tooltip");
+		const tooltipRef = select(this.container).selectAll("div.chart-tooltip");
 
 		// Fade out and remove
 		tooltipRef.style("opacity", 1)

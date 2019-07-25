@@ -272,7 +272,6 @@ div.chart-overlay {
 
 .tooltip {
 	background-color: #fff;
-	border: 1px solid #dfe3e6;
 	padding: 0.25rem 0.5rem;
 	display: block;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
@@ -281,11 +280,23 @@ div.chart-overlay {
 	font-weight: 300;
 	position: absolute;
 	padding: 10px;
-	border-radius: 3px;
 	min-width: 80px;
 	max-width: 70%;
 	word-wrap: break-word;
 	z-index: 1059;
+
+	&.gridline-tooltip {
+		.tooltip-color {
+			position: absolute;
+			left:0;
+			top: 0;
+			width: 4px;
+			height: 100%;
+		}
+		p {
+			margin-left: 4px;
+		}
+	}
 
 	p {
 		margin: 0;

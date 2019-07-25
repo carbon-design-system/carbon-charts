@@ -704,8 +704,34 @@ export const legend = {
 
 /**
  * Tooltip options
+ * TODO refactor configs to separate tooltips and grid tooltips
+ * and update all refs
  */
 export const tooltip = {
+	dataLabel: {
+		width: 200,
+		arrowWidth: 10,
+		magicXPoint2: 20,
+		magicTop1: 21,
+		magicTop2: 22,
+		magicLeft1: 11,
+		magicLeft2: 10,
+		fadeIn: {
+			duration: 250
+		},
+		fadeOut: {
+			duration: 250
+		},
+		size: {
+			COMPACT: "compact"
+		}
+	},
+	axisTooltip: {
+		marginLeft: 4,
+		axisThreshold: 10,
+		paddingLeft: 12
+
+	},
 	width: 200,
 	arrowWidth: 10,
 	magicXPoint2: 20,

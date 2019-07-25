@@ -619,8 +619,6 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	cleanGrid(g) {
-		g.selectAll("line")
-			.attr("stroke", Configuration.grid.strokeColor);
 		g.selectAll("text").style("display", "none").remove();
 		g.select(".domain").style("stroke", "none");
 	}
@@ -700,5 +698,42 @@ export class BaseAxisChart extends BaseChart {
 	 *************************************/
 	addDataPointEventListener() {
 		console.warn("You should implement your own `addDataPointEventListener()` function.");
+	}
+
+	/**
+	 * Gridline Tooltip functions
+	 */
+
+	/**
+	 * Axis charts should let you add gridline tooltips for datapoints on the value line.
+	 * @param d Data points
+	 * @param clickedElement
+	 */
+	_showGridlineTooltip(d, clickedElement?: Element) {
+		const tooltips = this.getGridlineTooltipHTML(d);
+		// if tooltip is supplied both argu
+		this.tooltip.show(null, tooltips);
+	}
+
+	// Gets the tooltip html for all points and returns an array containing the (data) position and html for the tooltip.
+	getGridlineTooltipHTML = points => {
+		const datapoints = new Array();
+		const self = this;
+
+		points.each(function(d) {
+			const indicatorColor = self.getStrokeColor(d.datasetLabel, d.label , d.value);
+			const dataPosition = {x: this.attributes.cx.value, y: this.attributes.cy.value};
+			const html = self.generateGridlineTooltipHTML(indicatorColor, d.value);
+			datapoints.push({dataPosition, html});
+		});
+
+		return datapoints;
+	}
+
+	/**
+	 * Each gridline tooltip has an indicator color for the dataset and the value at the highlighted gridline.
+	 */
+	generateGridlineTooltipHTML = (color: String, value: any) => {
+		return `<a style="background-color:${color}" class="tooltip-color"></a><p>${value}</p>`;
 	}
 }

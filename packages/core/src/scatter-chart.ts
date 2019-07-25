@@ -28,24 +28,29 @@ export class ScatterChart extends BaseAxisChart {
 		const gDots = this.innerWrap.selectAll("g.dots")
 			.data(this.displayData.datasets)
 			.enter()
-				.append("g")
-				.classed("dots", true);
+			.append("g")
+			.classed("dots", true);
 
 		const circleRadius = this.getCircleRadius();
 		gDots.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i))
 			.enter()
-				.append("circle")
-				.attr("class", "dot")
-				.attr("cx", d => this.x(d.label) + this.x.step() / 2)
-				.attr("cy", d => this.y(d.value))
-				.attr("r", circleRadius)
-				.attr("fill", d => this.getCircleFill(circleRadius, d))
-				.attr("fill-opacity", d => this.getCircleFillOpacity())
-				.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
+			.append("circle")
+			.attr("class", "dot")
+			.attr("cx", d => this.x(d.label) + this.x.step() / 2)
+			.attr("cy", d => this.y(d.value))
+			.attr("r", circleRadius)
+			.attr("fill", d => this.getCircleFill(circleRadius, d))
+			.attr("fill-opacity", d => this.getCircleFillOpacity())
+			.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 
 		// Hide the overlay
 		this.chartOverlay.hide();
+
+		// Add axis tooltip support only ONCE since the grid persists
+		// Check if we need to add an event listener for grid X and Y
+		// this only adds X grid so far
+		this.addGridEventListener();
 
 		// Dispatch the load event
 		this.dispatchEvent("load");
@@ -113,17 +118,17 @@ export class ScatterChart extends BaseAxisChart {
 		addedDotGroups.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i))
 			.enter()
-				.append("circle")
-				.attr("class", "dot")
-				.attr("cx", (d, i) => this.x(d.label) + this.x.step() / 2)
-				.attr("cy", (d: any) => this.y(d.value))
-				.attr("r", circleRadius)
-				.style("opacity", 0)
-				.transition(this.getDefaultTransition())
-				.style("opacity", 1)
-				.attr("fill", d => this.getCircleFill(circleRadius, d))
-				.attr("fill-opacity", d => this.getCircleFillOpacity())
-				.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
+			.append("circle")
+			.attr("class", "dot")
+			.attr("cx", (d, i) => this.x(d.label) + this.x.step() / 2)
+			.attr("cy", (d: any) => this.y(d.value))
+			.attr("r", circleRadius)
+			.style("opacity", 0)
+			.transition(this.getDefaultTransition())
+			.style("opacity", 1)
+			.attr("fill", d => this.getCircleFill(circleRadius, d))
+			.attr("fill-opacity", d => this.getCircleFillOpacity())
+			.attr("stroke", d => this.getStrokeColor(d.datasetLabel, d.label, d.value));
 
 		// Remove dots that are no longer needed
 		gDots.exit()
@@ -134,6 +139,8 @@ export class ScatterChart extends BaseAxisChart {
 
 		// Add slice hover actions, and clear any slice borders present
 		this.addDataPointEventListener();
+
+		this.addGridEventListener();
 
 		// Hide the overlay
 		this.chartOverlay.hide();
@@ -237,5 +244,81 @@ export class ScatterChart extends BaseAxisChart {
 
 				self.hideTooltip();
 			});
+	}
+
+	/**
+	 * Retrieves the d3 selection of all points with domain label
+	 * @param domain The X-Axis domain label associated with data group
+	 */
+	getDataWithDomain(domain: any) {
+		return this.svg.selectAll("circle.dot")
+		.filter(function(d) { return d.label === domain; });
+	}
+
+	/**
+	 * Returns d3 selection of all data points at xPosition
+	 * @param xPosition position along the X-Axis to get data points
+	 */
+	getDataWithXValue(xPosition) {
+		return this.svg.selectAll("circle.dot")
+		.filter(function() { return Number(this.attributes.cx.value) === xPosition; });
+	}
+
+	/**
+	 * Filter the gridlines using the threshold to find the ones that should be active
+	 */
+	getActiveGridLines(pos) {
+		const gridlinesX = this.svg.selectAll(".x.grid .tick")
+		.filter(function() {
+			const translations = Tools.getTranslationValues(this);
+
+			// threshold for when to display a gridline tooltip
+			const bounds = {
+				min: +translations.tx - Configuration.tooltip.axisTooltip.axisThreshold,
+				max: +translations.tx + Configuration.tooltip.axisTooltip.axisThreshold };
+
+			return (bounds.min <= pos[0] && pos[0] <= bounds.max) ? this : null;
+		});
+
+		return gridlinesX.empty() ? null : gridlinesX;
+	}
+
+	addGridEventListener() {
+		const self = this;
+		const grid = Tools.appendOrSelect(this.svg, "rect.chart-grid-backdrop");
+
+		grid
+		.on("mousemove", function() {
+			const chartContainer = this.parentNode;
+			const pos = mouse(chartContainer);
+
+			const allgridlines = self.svg.selectAll(".x.grid .tick");
+			allgridlines.attr("stroke-dasharray", "unset");
+
+			const activeGridlines = self.getActiveGridLines(pos);
+			if (!activeGridlines) {
+				return;
+			}
+
+			// set dash array
+			activeGridlines
+			.attr("stroke-dasharray", "4px");
+
+			// get the items that should be highlighted
+			let highlightItems;
+			activeGridlines.each(function(d) {
+				if (d) {
+					// use domain to get all points
+					highlightItems = self.getDataWithDomain(d);
+				} else {
+					const translatePos = Tools.getTranslationValues(this);
+					highlightItems = self.getDataWithXValue(+translatePos.tx - 0.5);
+				}
+			});
+			self._showGridlineTooltip(highlightItems, this);
+		})
+		.on("mouseout", function() {
+			self.hideTooltip();
+		});
 	}
 }

@@ -13,8 +13,7 @@ import * as Configuration from "./configuration";
 import { ChartConfig, BaseChartOptions, ChartData } from "./configuration";
 import { Tools } from "./tools";
 import PatternsService from "./services/patterns";
-import { ChartOverlay } from "./components/index";
-import { ChartTooltip } from "./components/tooltip";
+import { ChartOverlay, ChartTooltip } from "./components/index";
 
 // Misc
 import ResizeObserver from "resize-observer-polyfill";
@@ -173,7 +172,8 @@ export class BaseChart {
 
 					this.update();
 				}
-				this.drawTitle();
+				// title will have to be refactored before merge
+				//this.drawTitle();
 			} else {
 				this.chartOverlay.show(Configuration.options.BASE.overlay.types.noData);
 			}
