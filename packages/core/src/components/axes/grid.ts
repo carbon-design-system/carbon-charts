@@ -9,29 +9,31 @@ import { axisBottom, axisLeft } from "d3-axis";
 export class Grid extends Component {
 	type = "cc-grid";
 
+	backdrop: any;
+
 	render() {
 		const svg = this.getContainerSVG();
 
 		this._services.domUtils.appendOrSelect(svg, "g.x.grid");
 		this._services.domUtils.appendOrSelect(svg, "g.y.grid");
 
+		// Draw the backdrop
+		this.drawBackdrop();
 		this.drawXGrid();
 		this.drawYGrid();
 
-		// Draw the backdrop
-		this.drawBackdrop();
 	}
 
 	drawXGrid() {
 		const svg = this._parent;
 
-		const { height } = this._services.domUtils.getSVGElementSize(this._parent, true);
+		const height = this.backdrop.attr("height");
 		const xGrid = axisBottom(this._model.get(ModelStateKeys.AXIS_SECONDARY))
 			.tickSizeInner(-height)
 			.tickSizeOuter(0);
 
 		const g = svg.select(".x.grid")
-			.attr("transform", `translate(0, ${height})`)
+			.attr("transform", `translate(0, ${this.backdrop.attr("height")})`)
 			.call(xGrid);
 
 		this.cleanGrid(g);
@@ -42,7 +44,7 @@ export class Grid extends Component {
 
 		const { scales } = this._model.getOptions();
 		// const { thresholds } = scales.y;
-		const { width } = this._services.domUtils.getSVGElementSize(this._parent, true);
+		const width = this.backdrop.attr("width");
 
 		const yGrid = axisLeft(this._model.get(ModelStateKeys.AXIS_SECONDARY))
 			.tickSizeInner(-width)
@@ -51,7 +53,7 @@ export class Grid extends Component {
 		yGrid.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
 
 		const g = svg.select(".y.grid")
-			.attr("transform", "translate(0, 0)")
+			.attr("transform", `translate(${this.backdrop.attr("x")}, 0)`)
 			.call(yGrid);
 
 		this.cleanGrid(g);
@@ -64,14 +66,16 @@ export class Grid extends Component {
 	drawBackdrop() {
 		const svg = this._parent;
 
+		const [primaryScaleEnd, primaryScaleStart] = this._model.get(ModelStateKeys.AXIS_PRIMARY).range();
+		const [secondaryScaleStart, secondaryScaleEnd] = this._model.get(ModelStateKeys.AXIS_SECONDARY).range();
 		// Get height from the grid
-		const backdrop = this._services.domUtils.appendOrSelect(svg, "rect.chart-grid-backdrop");
-console.log("drawBackdrop", this._model.get(ModelStateKeys.AXIS_SECONDARY).range())
-		backdrop
-			.attr("x", 0)
-			.attr("y", 0)
-			.attr("width", this._model.get(ModelStateKeys.AXIS_SECONDARY).range()[1])
-			.attr("height", this._model.get(ModelStateKeys.AXIS_PRIMARY).range()[0])
+		this.backdrop = this._services.domUtils.appendOrSelect(svg, "rect.chart-grid-backdrop");
+
+		this.backdrop
+			.attr("x", secondaryScaleStart)
+			.attr("y", primaryScaleStart)
+			.attr("width", secondaryScaleEnd - secondaryScaleStart)
+			.attr("height", primaryScaleEnd - primaryScaleStart)
 			.attr("fill", "#f3f3f3")
 			.lower();
 	}

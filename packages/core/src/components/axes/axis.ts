@@ -35,11 +35,11 @@ export class Axis extends Component {
 	renderPrimaryAxis() {
 		const svg = this.getContainerSVG();
 		const { height } = this._services.domUtils.getSVGElementSize(this._parent, true);
-
+console.log("max height", [height - margins.bottom, margins.top])
 		// Grab the scale off of the model, and initialize if it doesn't exist
 		let primaryScale = this._model.get(ModelStateKeys.AXIS_PRIMARY) || scaleLinear();
 		primaryScale
-			.domain([0, this.getYMax()])
+			.domain([this.getYMin(), this.getYMax()])
 			.range([height - margins.bottom, margins.top]);
 
 		// If scale doesn't exist in the model, store it
