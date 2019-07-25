@@ -26,11 +26,7 @@ export class Scatter extends Component {
 		dotsEnter.merge(dots)
 			.attr("class", "dot")
 			.attr("cx", d => xScale(d.label) + xScale.step() / 2)
-			.attr("cy", d => {
-				console.log("$G#$G#$G3", this._model.get(ModelStateKeys.AXIS_PRIMARY)(d.value), d.value)
-
-				return this._model.get(ModelStateKeys.AXIS_PRIMARY)(d.value)
-			})
+			.attr("cy", d => this._model.get(ModelStateKeys.AXIS_PRIMARY)(d.value))
 			.attr("r", 5)
 			.attr("fill", d => this._model.getFillScale()[d.datasetLabel](d.label) as any)
 			.attr("fill-opacity", d => 0.2)

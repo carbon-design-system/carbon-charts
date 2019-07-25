@@ -103,12 +103,6 @@ export class LayoutComponent extends Component {
 				.attr("y", (d: any) => d.y0)
 				.attr("width", (d: any) => d.x1 - d.x0)
 				.attr("height", (d: any) => d.y1 - d.y0);
-				const throttle = (method, scope?) => {
-					clearTimeout(method._tId);
-					method._tId= setTimeout(function(){
-						method.call(scope);
-					}, 500);
-				}
 
 		enteringSVGs.merge(svg.selectAll(`svg.layout-child-${this._instanceCount}`))
 			.each(function(d: any) {
@@ -132,7 +126,7 @@ export class LayoutComponent extends Component {
 					const growth = Tools.getProperty(d, "data", "growth", "x");
 					if (growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED) {
 						itemComponent.render();
-						console.log("RENDER", ++window["ccount"])
+						console.log("RENDER", ++window["ccount"]);
 					}
 				});
 			});
@@ -197,8 +191,7 @@ export class LayoutComponent extends Component {
 						const growth = Tools.getProperty(d, "data", "growth", "x");
 						if (growth === LayoutGrowth.STRETCH) {
 							itemComponent.render();
-							console.log("RENDER", ++window["ccount"])
-
+							console.log("RENDER", ++window["ccount"]);
 						}
 					});
 
@@ -222,9 +215,9 @@ export class LayoutComponent extends Component {
 					// 	})
 					// }
 				});
-console.log("HOW MANY", this._renderCallbacks)
+			console.log("HOW MANY", this._renderCallbacks);
 			if (this._renderCallback) {
-				console.log("EXISTS")
+				console.log("EXISTS");
 				this._renderCallback();
 			}
 		}, 0);
@@ -251,14 +244,13 @@ console.log("HOW MANY", this._renderCallbacks)
 	}
 
 	renderCallback(elToMatch: any, svg: any, itemComponent: any) {
-		console.log("elToMatch", elToMatch)
 		if (!elToMatch.empty()) {
 			select(svg)
 				.attr("x", elToMatch.attr("x"))
 				.attr("width", elToMatch.attr("width"));
 
 			itemComponent.render();
-			console.log("RENDER", ++window["ccount"])
+			console.log("RENDER", ++window["ccount"]);
 		}
 	}
 
@@ -266,7 +258,7 @@ console.log("HOW MANY", this._renderCallbacks)
 		if (this._renderCallbacks.indexOf(cb) === -1) {
 			this._renderCallbacks.push(cb);
 		} else {
-			console.log("CALLBACK NOT ADDED")
+			console.log("CALLBACK NOT ADDED");
 		}
 	}
 }
