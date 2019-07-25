@@ -173,7 +173,7 @@ export class BaseChart {
 					this.update();
 				}
 				// title will have to be refactored before merge
-				//this.drawTitle();
+				// this.drawTitle();
 			} else {
 				this.chartOverlay.show(Configuration.options.BASE.overlay.types.noData);
 			}

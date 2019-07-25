@@ -58,13 +58,7 @@ export class ChartTooltip {
 
 	// Tooltips should aim to be beside the corresponding datapoints, however they should not overlap
 	positionGridTooltips() {
-		console.log('here');
 		const tooltips = selectAll(".gridline-tooltip");
-		console.log(tooltips);
-		// .each(function(d) {
-		// 	console.log(d);
-
-		// });
 		// translate them up half the object size
 
 
@@ -100,8 +94,8 @@ export class ChartTooltip {
 				const elRef = tooltip.node() as HTMLElement;
 				const elBound = elRef.getBoundingClientRect();
 				const position = {
-					top: datapoint.dataPosition.y  - (elBound.height/2),
-					left: +datapoint.dataPosition.x + Configuration.tooltip.axisTooltip.paddingLeft + (elBound.width/2)  };
+					top: datapoint.dataPosition.y  - (elBound.height / 2),
+					left: +datapoint.dataPosition.x + Configuration.tooltip.axisTooltip.paddingLeft + (elBound.width / 2)  };
 
 
 				// add to data position
@@ -109,7 +103,7 @@ export class ChartTooltip {
 
 			});
 			// This repositions the tooltips so that they don't overlap
-			//this.positionGridTooltips();
+			// this.positionGridTooltips();
 
 		} else {
 		// Draw tooltip
