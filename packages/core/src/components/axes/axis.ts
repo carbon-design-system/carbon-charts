@@ -8,7 +8,7 @@ import { scaleBand, scaleLinear } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { min, max } from "d3-array";
 
-var margins = {
+const margins = {
 	top: 20,
 	right: 45,
 	bottom: 20,
@@ -35,9 +35,9 @@ export class Axis extends Component {
 	renderPrimaryAxis() {
 		const svg = this.getContainerSVG();
 		const { height } = this._services.domUtils.getSVGElementSize(this._parent, true);
-console.log("max height", [height - margins.bottom, margins.top])
+
 		// Grab the scale off of the model, and initialize if it doesn't exist
-		let primaryScale = this._model.get(ModelStateKeys.AXIS_PRIMARY) || scaleLinear();
+		const primaryScale = this._model.get(ModelStateKeys.AXIS_PRIMARY) || scaleLinear();
 		primaryScale
 			.domain([this.getYMin(), this.getYMax()])
 			.range([height - margins.bottom, margins.top]);
@@ -65,10 +65,10 @@ console.log("max height", [height - margins.bottom, margins.top])
 		const { width, height } = this._services.domUtils.getSVGElementSize(this._parent, true);
 
 		// Grab the scale off of the model, and initialize if it doesn't exist
-		let secondaryScale = this._model.get(ModelStateKeys.AXIS_SECONDARY) || scaleBand();
+		const secondaryScale = this._model.get(ModelStateKeys.AXIS_SECONDARY) || scaleBand();
 
-		let startPosition = this.options.axes[ModelStateKeys.AXIS_PRIMARY] ? margins.left : 0;
-		let endPosition = this.options.axes[ModelStateKeys.AXIS_THIRD] ? width - margins.right : width;
+		const startPosition = this.options.axes[ModelStateKeys.AXIS_PRIMARY] ? margins.left : 0;
+		const endPosition = this.options.axes[ModelStateKeys.AXIS_THIRD] ? width - margins.right : width;
 		secondaryScale.rangeRound([startPosition, endPosition])
 			.domain(this._model.getData().labels);
 
@@ -82,7 +82,7 @@ console.log("max height", [height - margins.bottom, margins.top])
 		// Initialize axis object
 		const secondaryAxis = axisBottom(secondaryScale)
 			.ticks(5);
- 
+
 		// Add axis into the parent
 		this._services.domUtils.appendOrSelect(svg, "g.axis.secondary")
 			.attr("transform", "translate(0," + (height - margins.bottom) + ")")
@@ -95,7 +95,7 @@ console.log("max height", [height - margins.bottom, margins.top])
 		const { width, height } = this._services.domUtils.getSVGElementSize(this._parent, true);
 
 		// Grab the scale off of the model, and initialize if it doesn't exist
-		let thirdScale = this._model.get(ModelStateKeys.AXIS_THIRD) || scaleLinear();
+		const thirdScale = this._model.get(ModelStateKeys.AXIS_THIRD) || scaleLinear();
 		thirdScale
 			.domain([0, this.getYMax()])
 			.range([height - margins.bottom, margins.top]);
@@ -123,10 +123,10 @@ console.log("max height", [height - margins.bottom, margins.top])
 		const { width, height } = this._services.domUtils.getSVGElementSize(this._parent, true);
 
 		// Grab the scale off of the model, and initialize if it doesn't exist
-		let fourthScale = this._model.get(ModelStateKeys.AXIS_SECONDARY) || scaleBand();
+		const fourthScale = this._model.get(ModelStateKeys.AXIS_SECONDARY) || scaleBand();
 
-		let startPosition = this.options.axes[ModelStateKeys.AXIS_PRIMARY] ? margins.left : 0;
-		let endPosition = this.options.axes[ModelStateKeys.AXIS_FOURTH] ? width - margins.right : width;
+		const startPosition = this.options.axes[ModelStateKeys.AXIS_PRIMARY] ? margins.left : 0;
+		const endPosition = this.options.axes[ModelStateKeys.AXIS_FOURTH] ? width - margins.right : width;
 		fourthScale.rangeRound([startPosition, endPosition])
 			.domain(this._model.getData().labels);
 
@@ -140,7 +140,7 @@ console.log("max height", [height - margins.bottom, margins.top])
 		// Initialize axis object
 		const fourthAxis = axisTop(fourthScale)
 			.ticks(5);
- 
+
 		// Add axis into the parent
 		this._services.domUtils.appendOrSelect(svg, "g.axis.fourth")
 			.attr("transform", "translate(0," + (margins.top) + ")")
@@ -152,34 +152,34 @@ console.log("max height", [height - margins.bottom, margins.top])
 		const { scales } = this._model.getOptions();
 		let yMax;
 
- 		if (datasets.length === 1) {
+		if (datasets.length === 1) {
 			yMax = max(datasets[0].data);
 		} else {
 			yMax = max(datasets, (d: any) => (max(d.data)));
 		}
 
- 		if (scales.y.yMaxAdjuster) {
+		if (scales.y.yMaxAdjuster) {
 			yMax = scales.y.yMaxAdjuster(yMax);
 		}
 
- 		return yMax;
+		return yMax;
 	}
 
- 	getYMin() {
+	getYMin() {
 		const { datasets } = this._model.getData();
 		const { scales } = this._model.getOptions();
 		let yMin;
 
- 		if (datasets.length === 1) {
+		if (datasets.length === 1) {
 			yMin = min(datasets[0].data);
 		} else {
 			yMin = min(datasets, (d: any) => (min(d.data)));
 		}
 
- 		if (scales.y.yMinAdjuster) {
+		if (scales.y.yMinAdjuster) {
 			yMin = scales.y.yMinAdjuster(yMin);
 		}
 
- 		return yMin;
+		return yMin;
 	}
 }

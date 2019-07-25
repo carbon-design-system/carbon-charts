@@ -1,7 +1,14 @@
 // Internal Imports
 import { Chart } from "../chart";
 import * as Configuration from "../configuration";
-import { ChartConfig, ScatterChartOptions, ChartType, LayoutDirection, LayoutGrowth, AxisPositions, ModelStateKeys } from "../interfaces/index";
+import {
+	ChartConfig,
+	ScatterChartOptions,
+	ChartType,
+	LayoutDirection,
+	LayoutGrowth,
+	ModelStateKeys
+} from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
