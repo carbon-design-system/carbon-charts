@@ -1,7 +1,7 @@
 // Internal Imports
 import { Chart } from "../chart";
 import * as Configuration from "../configuration";
-import { ChartConfig, ScatterChartOptions, ChartType, LayoutDirection, LayoutGrowth, AxisPositions } from "../interfaces/index";
+import { ChartConfig, ScatterChartOptions, ChartType, LayoutDirection, LayoutGrowth, AxisPositions, ModelStateKeys } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
@@ -55,8 +55,16 @@ export class ScatterChart extends Chart {
 		const graphFrame = {
 			id: "graph-frame",
 			components: [
-				new Grid(),
-				new Scatter()
+				new Axis({
+					axes: {
+						[ModelStateKeys.AXIS_PRIMARY]: true,
+						[ModelStateKeys.AXIS_SECONDARY]: true,
+						[ModelStateKeys.AXIS_THIRD]: true,
+						[ModelStateKeys.AXIS_FOURTH]: true
+					}
+				}),
+				// new Grid(),
+				// new Scatter(),
 			],
 			growth: {
 				x: LayoutGrowth.STRETCH,
@@ -69,31 +77,7 @@ export class ScatterChart extends Chart {
 			components: [
 				new LayoutComponent(
 					[
-						{
-							id: "axisLeft",
-							components: [
-								new Axis({
-									axisType: AxisPositions.LEFT
-								})
-							],
-							growth: {
-								x: LayoutGrowth.PREFERRED,
-								y: LayoutGrowth.FIXED
-							}
-						},
-						graphFrame,
-						{
-							id: "axisRight",
-							components: [
-								new Axis({
-									axisType: AxisPositions.RIGHT
-								})
-							],
-							growth: {
-								x: LayoutGrowth.PREFERRED,
-								y: LayoutGrowth.FIXED
-							}
-						},
+						graphFrame
 					],
 					{
 						direction: LayoutDirection.ROW
@@ -111,33 +95,7 @@ export class ScatterChart extends Chart {
 			components: [
 				new LayoutComponent(
 					[
-						{
-							id: "axisTop",
-							components: [
-								new Axis({
-									axisType: AxisPositions.TOP
-								})
-							],
-							growth: {
-								x: LayoutGrowth.PREFERRED,
-								y: LayoutGrowth.FIXED
-							},
-							syncWith: "graph-frame"
-						},
-						graphAxisFrame,
-						{
-							id: "axisBottom",
-							components: [
-								new Axis({
-									axisType: AxisPositions.BOTTOM
-								})
-							],
-							growth: {
-								x: LayoutGrowth.PREFERRED,
-								y: LayoutGrowth.FIXED
-							},
-							syncWith: "graph-frame"
-						}
+						graphAxisFrame
 					],
 					{
 						direction: LayoutDirection.COLUMN

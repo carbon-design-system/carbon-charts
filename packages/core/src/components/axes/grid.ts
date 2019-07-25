@@ -66,12 +66,12 @@ export class Grid extends Component {
 
 		// Get height from the grid
 		const backdrop = this._services.domUtils.appendOrSelect(svg, "rect.chart-grid-backdrop");
-
+console.log("drawBackdrop", this._model.get(ModelStateKeys.AXIS_SECONDARY).range())
 		backdrop
 			.attr("x", 0)
 			.attr("y", 0)
-			.attr("width", "100%")
-			.attr("height", "100%")
+			.attr("width", this._model.get(ModelStateKeys.AXIS_SECONDARY).range()[1])
+			.attr("height", this._model.get(ModelStateKeys.AXIS_PRIMARY).range()[0])
 			.attr("fill", "#f3f3f3")
 			.lower();
 	}

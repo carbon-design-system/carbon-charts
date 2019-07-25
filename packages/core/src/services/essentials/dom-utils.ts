@@ -67,7 +67,7 @@ export class DOMUtils extends Service {
 		let containerWidth = holder.clientWidth;
 		let containerHeight = holder.clientHeight;
 
-		const resizeCallback = this.debounce(10, (entries, observer) => {
+		const resizeCallback = this.debounce(15, (entries, observer) => {
 			if (Math.abs(containerWidth - holder.clientWidth) > 1
 				|| Math.abs(containerHeight - holder.clientHeight) > 1) {
 				containerWidth = holder.clientWidth;

@@ -11,7 +11,7 @@ import { hierarchy, treemap, treemapSlice, treemapDice } from "d3-hierarchy";
 // TODORF - Remove
 const testColors = ["e41a1c", "377eb8", "4daf4a", "984ea3", "ff7f00", "ffff33", "a65628", "f781bf", "999999"];
 window["testColors"] = Tools.clone(testColors);
-window["uidd"] = 0;
+window["ccount"] = 0;
 export class LayoutComponent extends Component {
 	// Give every layout component a distinct ID
 	// so they don't interfere when querying elements
@@ -23,6 +23,7 @@ export class LayoutComponent extends Component {
 	private _instanceCount: Number;
 
 	private _renderCallbacks = [];
+	private _renderCallback: Function;
 
 	constructor(children: Array<LayoutComponentChild>, options?: LayoutOptions) {
 		super();
@@ -102,6 +103,12 @@ export class LayoutComponent extends Component {
 				.attr("y", (d: any) => d.y0)
 				.attr("width", (d: any) => d.x1 - d.x0)
 				.attr("height", (d: any) => d.y1 - d.y0);
+				const throttle = (method, scope?) => {
+					clearTimeout(method._tId);
+					method._tId= setTimeout(function(){
+						method.call(scope);
+					}, 500);
+				}
 
 		enteringSVGs.merge(svg.selectAll(`svg.layout-child-${this._instanceCount}`))
 			.each(function(d: any) {
@@ -112,26 +119,20 @@ export class LayoutComponent extends Component {
 					if (d.data.syncWith) {
 						const layoutComponent = window[`lc-${d.data.syncWith}`];
 
-						const renderCallback = () => {
-							const elToMatch = select(self._services.domUtils.getMainSVG()).select(`svg.${d.data.syncWith}`);
+						const elToMatch = select(self._services.domUtils.getMainSVG()).select(`svg.graph-frame`);
 
-							if (!elToMatch.empty()) {
-								select(this)
-									.attr("x", elToMatch.attr("x"))
-									.attr("width", elToMatch.attr("width"));
-
-								itemComponent.render();
-							}
-						};
-
-						renderCallback();
-						layoutComponent.addRenderCallback(renderCallback);
+						if (layoutComponent && !self._renderCallback) {
+							self._renderCallback = self.renderCallback.bind(self, elToMatch, this, itemComponent);
+						} else {
+							itemComponent.render();
+						}
 					}
 
 					// Render preffered & fixed items
 					const growth = Tools.getProperty(d, "data", "growth", "x");
 					if (growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED) {
 						itemComponent.render();
+						console.log("RENDER", ++window["ccount"])
 					}
 				});
 			});
@@ -196,31 +197,36 @@ export class LayoutComponent extends Component {
 						const growth = Tools.getProperty(d, "data", "growth", "x");
 						if (growth === LayoutGrowth.STRETCH) {
 							itemComponent.render();
+							console.log("RENDER", ++window["ccount"])
+
 						}
 					});
 
-					// const bgRect = self._services.domUtils.appendOrSelect(select(this), "rect.bg");
-					// bgRect
-					// 	.classed("bg", true)
-					// 	.attr("width", "100%")
-					// 	.attr("height", "100%")
-					// 	.lower();
+					const bgRect = self._services.domUtils.appendOrSelect(select(this), "rect.bg");
+					bgRect
+						.classed("bg", true)
+						.attr("width", "100%")
+						.attr("height", "100%")
+						.lower();
 
-					// if (!bgRect.attr("fill")) {
-					// 	bgRect.attr("fill-opacity", 0.2)
-					// 	.attr("fill", d => {
-					// 		if (window["testColors"].length === 0) {
-					// 			window["testColors"] = Tools.clone(testColors);
-					// 		}
+					if (!bgRect.attr("fill")) {
+						bgRect.attr("fill-opacity", 0.2)
+						.attr("fill", d => {
+							if (window["testColors"].length === 0) {
+								window["testColors"] = Tools.clone(testColors);
+							}
 
-					// 		const col = window["testColors"].shift();
+							const col = window["testColors"].shift();
 
-					// 		return `#${col}`;
-					// 	})
-					// }
+							return `#${col}`;
+						})
+					}
 				});
-
-			this._renderCallbacks.forEach(rCb => rCb());
+console.log("HOW MANY", this._renderCallbacks)
+			if (this._renderCallback) {
+				console.log("EXISTS")
+				this._renderCallback();
+			}
 		}, 0);
 	}
 
@@ -244,7 +250,23 @@ export class LayoutComponent extends Component {
 		});
 	}
 
+	renderCallback(elToMatch: any, svg: any, itemComponent: any) {
+		console.log("elToMatch", elToMatch)
+		if (!elToMatch.empty()) {
+			select(svg)
+				.attr("x", elToMatch.attr("x"))
+				.attr("width", elToMatch.attr("width"));
+
+			itemComponent.render();
+			console.log("RENDER", ++window["ccount"])
+		}
+	}
+
 	addRenderCallback(cb: Function) {
-		this._renderCallbacks.push(cb);
+		if (this._renderCallbacks.indexOf(cb) === -1) {
+			this._renderCallbacks.push(cb);
+		} else {
+			console.log("CALLBACK NOT ADDED")
+		}
 	}
 }
