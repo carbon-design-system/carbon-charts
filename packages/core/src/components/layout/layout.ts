@@ -202,25 +202,25 @@ export class LayoutComponent extends Component {
 						}
 					});
 
-					const bgRect = self._services.domUtils.appendOrSelect(select(this), "rect.bg");
-					bgRect
-						.classed("bg", true)
-						.attr("width", "100%")
-						.attr("height", "100%")
-						.lower();
+					// const bgRect = self._services.domUtils.appendOrSelect(select(this), "rect.bg");
+					// bgRect
+					// 	.classed("bg", true)
+					// 	.attr("width", "100%")
+					// 	.attr("height", "100%")
+					// 	.lower();
 
-					if (!bgRect.attr("fill")) {
-						bgRect.attr("fill-opacity", 0.2)
-						.attr("fill", d => {
-							if (window["testColors"].length === 0) {
-								window["testColors"] = Tools.clone(testColors);
-							}
+					// if (!bgRect.attr("fill")) {
+					// 	bgRect.attr("fill-opacity", 0.2)
+					// 	.attr("fill", d => {
+					// 		if (window["testColors"].length === 0) {
+					// 			window["testColors"] = Tools.clone(testColors);
+					// 		}
 
-							const col = window["testColors"].shift();
+					// 		const col = window["testColors"].shift();
 
-							return `#${col}`;
-						})
-					}
+					// 		return `#${col}`;
+					// 	})
+					// }
 				});
 console.log("HOW MANY", this._renderCallbacks)
 			if (this._renderCallback) {

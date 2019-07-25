@@ -63,8 +63,8 @@ export class ScatterChart extends Chart {
 						[ModelStateKeys.AXIS_FOURTH]: true
 					}
 				}),
-				// new Grid(),
-				// new Scatter(),
+				new Grid(),
+				new Scatter(),
 			],
 			growth: {
 				x: LayoutGrowth.STRETCH,
