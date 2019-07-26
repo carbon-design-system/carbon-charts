@@ -109,6 +109,7 @@ export const lineData = {
 };
 
 export const lineOptions = () => ({
+	// animations: false,
 	accessibility: false,
 	scales: {
 		x: {

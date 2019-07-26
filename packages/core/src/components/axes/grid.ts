@@ -33,7 +33,7 @@ export class Grid extends Component {
 			.tickSizeOuter(0);
 
 		const g = svg.select(".x.grid")
-			.attr("transform", `translate(0, ${this.backdrop.attr("height")})`)
+			.attr("transform", `translate(0, ${+this.backdrop.attr("height") + 50})`)
 			.call(xGrid);
 
 		this.cleanGrid(g);
