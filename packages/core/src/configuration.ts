@@ -226,6 +226,8 @@ export const scales = {
 	magicDy1: "0.71em",
 	magicY1: 9,
 	magicX1: -4,
+	magicY2: -9,
+	magicX2: 4,
 	y: {
 		numberOfTicks: 5,
 		thresholds: {

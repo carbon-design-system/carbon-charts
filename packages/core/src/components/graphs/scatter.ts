@@ -23,16 +23,16 @@ export class Scatter extends Component {
 		const dotsEnter = dots.enter()
 			.append("circle")
 			.attr("opacity", 0);
+
 		dotsEnter.merge(dots)
 			.attr("class", "dot")
 			.attr("cx", d => xScale(d.label) + xScale.step() / 2)
+			.transition(this._services.transitions.getDefaultTransition())
 			.attr("cy", d => this._model.get(ModelStateKeys.AXIS_PRIMARY)(d.value))
-			.attr("r", 5)
+			.attr("r", 4)
 			.attr("fill", d => this._model.getFillScale()[d.datasetLabel](d.label) as any)
 			.attr("fill-opacity", d => 0.2)
 			.attr("stroke", d => this._model.getStrokeColor(d.datasetLabel, d.label, d.value))
-			.transition()
-			.duration(750)
 			.attr("opacity", 1);
 
 		dotGroups.exit()

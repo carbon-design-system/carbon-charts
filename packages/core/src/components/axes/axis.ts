@@ -8,27 +8,42 @@ import { scaleBand, scaleLinear } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { min, max } from "d3-array";
 
-const margins = {
-	top: 20,
-	right: 45,
-	bottom: 20,
-	left: 45
-};
-
 export class Axis extends Component {
+	type = "cc-axes";
+
 	options: any;
+
+	margins: any;
 
 	constructor(options?: any) {
 		super();
 
 		this.options = options;
+
+		this.margins = {
+			top: this.options.axes[ModelStateKeys.AXIS_FOURTH] ? 51 : 0,
+			right: this.options.axes[ModelStateKeys.AXIS_THIRD] ? 45 : 0,
+			bottom: this.options.axes[ModelStateKeys.AXIS_SECONDARY] ? 50 : 0,
+			left: this.options.axes[ModelStateKeys.AXIS_PRIMARY] ? 45 : 0
+		};
 	}
 
 	render() {
-		this.renderPrimaryAxis();
-		this.renderSecondaryAxis();
-		this.renderThirdAxis();
-		this.renderFourthAxis();
+		if (this.options.axes[ModelStateKeys.AXIS_PRIMARY]) {
+			this.renderPrimaryAxis();
+		}
+
+		if (this.options.axes[ModelStateKeys.AXIS_SECONDARY]) {
+			this.renderSecondaryAxis();
+		}
+
+		if (this.options.axes[ModelStateKeys.AXIS_THIRD]) {
+			this.renderThirdAxis();
+		}
+
+		if (this.options.axes[ModelStateKeys.AXIS_FOURTH]) {
+			this.renderFourthAxis();
+		}
 	}
 
 	// Render left y-axis
@@ -40,7 +55,7 @@ export class Axis extends Component {
 		const primaryScale = this._model.get(ModelStateKeys.AXIS_PRIMARY) || scaleLinear();
 		primaryScale
 			.domain([this.getYMin(), this.getYMax()])
-			.range([height - margins.bottom, margins.top]);
+			.range([height - this.margins.bottom, this.margins.top]);
 
 		// If scale doesn't exist in the model, store it
 		if (!this._model.get(ModelStateKeys.AXIS_PRIMARY)) {
@@ -51,11 +66,14 @@ export class Axis extends Component {
 
 		// Initialize axis object
 		const primaryAxis = axisLeft(primaryScale)
-			.ticks(5);
+			.ticks(5)
+			.tickSizeOuter(0)
+			// .tickFormat(this._model.getOptions().scales.y.formatter);
 
 		// Add axis into the parent
 		this._services.domUtils.appendOrSelect(svg, "g.axis.primary")
-			.attr("transform", "translate(" + margins.left + ",0)")
+			.attr("transform", "translate(" + this.margins.left + ",0)")
+			.transition(this._services.transitions.getDefaultTransition())
 			.call(primaryAxis);
 	}
 
@@ -67,8 +85,8 @@ export class Axis extends Component {
 		// Grab the scale off of the model, and initialize if it doesn't exist
 		const secondaryScale = this._model.get(ModelStateKeys.AXIS_SECONDARY) || scaleBand();
 
-		const startPosition = this.options.axes[ModelStateKeys.AXIS_PRIMARY] ? margins.left : 0;
-		const endPosition = this.options.axes[ModelStateKeys.AXIS_THIRD] ? width - margins.right : width;
+		const startPosition = this.options.axes[ModelStateKeys.AXIS_PRIMARY] ? this.margins.left : 0;
+		const endPosition = this.options.axes[ModelStateKeys.AXIS_THIRD] ? width - this.margins.right : width;
 		secondaryScale.rangeRound([startPosition, endPosition])
 			.domain(this._model.getData().labels);
 
@@ -81,12 +99,24 @@ export class Axis extends Component {
 
 		// Initialize axis object
 		const secondaryAxis = axisBottom(secondaryScale)
-			.ticks(5);
+			.ticks(5)
+			.tickSizeOuter(0);
 
 		// Add axis into the parent
-		this._services.domUtils.appendOrSelect(svg, "g.axis.secondary")
-			.attr("transform", "translate(0," + (height - margins.bottom) + ")")
+		const axisRef = this._services.domUtils.appendOrSelect(svg, "g.axis.secondary");
+		axisRef.attr("transform", "translate(0," + (height - this.margins.bottom) + ")")
+			.transition(this._services.transitions.getDefaultTransition())
 			.call(secondaryAxis);
+
+		
+		// Update the position of the pieces of text inside x-axis
+		axisRef.selectAll("g.tick text")
+			.attr("y", Configuration.scales.magicY1)
+			.attr("x", Configuration.scales.magicX1)
+			.attr("dy", ".35em")
+			.attr("transform", `rotate(${Configuration.scales.xAxisAngle})`)
+			.style("text-anchor", "end")
+			// .call(text => this.wrapTick(text));
 	}
 
 	// Render right y-axis
@@ -98,7 +128,7 @@ export class Axis extends Component {
 		const thirdScale = this._model.get(ModelStateKeys.AXIS_THIRD) || scaleLinear();
 		thirdScale
 			.domain([0, this.getYMax()])
-			.range([height - margins.bottom, margins.top]);
+			.range([height - this.margins.bottom, this.margins.top]);
 
 		// If scale doesn't exist in the model, store it
 		if (!this._model.get(ModelStateKeys.AXIS_THIRD)) {
@@ -109,11 +139,13 @@ export class Axis extends Component {
 
 		// Initialize axis object
 		const thirdAxis = axisRight(thirdScale)
-			.ticks(5);
+			.ticks(5)
+			.tickSizeOuter(0);
 
 		// Add axis into the parent
 		this._services.domUtils.appendOrSelect(svg, "g.axis.third")
-			.attr("transform", "translate(" + (width - margins.right) + ",0)")
+			.attr("transform", "translate(" + (width - this.margins.right) + ",0)")
+			.transition(this._services.transitions.getDefaultTransition())
 			.call(thirdAxis);
 	}
 
@@ -125,8 +157,8 @@ export class Axis extends Component {
 		// Grab the scale off of the model, and initialize if it doesn't exist
 		const fourthScale = this._model.get(ModelStateKeys.AXIS_SECONDARY) || scaleBand();
 
-		const startPosition = this.options.axes[ModelStateKeys.AXIS_PRIMARY] ? margins.left : 0;
-		const endPosition = this.options.axes[ModelStateKeys.AXIS_FOURTH] ? width - margins.right : width;
+		const startPosition = this.options.axes[ModelStateKeys.AXIS_PRIMARY] ? this.margins.left : 0;
+		const endPosition = this.options.axes[ModelStateKeys.AXIS_FOURTH] ? width - this.margins.right : width;
 		fourthScale.rangeRound([startPosition, endPosition])
 			.domain(this._model.getData().labels);
 
@@ -139,12 +171,22 @@ export class Axis extends Component {
 
 		// Initialize axis object
 		const fourthAxis = axisTop(fourthScale)
-			.ticks(5);
+			.ticks(5)
+			.tickSizeOuter(0);
 
 		// Add axis into the parent
-		this._services.domUtils.appendOrSelect(svg, "g.axis.fourth")
-			.attr("transform", "translate(0," + (margins.top) + ")")
+		const axisRef = this._services.domUtils.appendOrSelect(svg, "g.axis.fourth");
+		axisRef.attr("transform", "translate(0," + (this.margins.top) + ")")
+			.transition(this._services.transitions.getDefaultTransition())
 			.call(fourthAxis);
+
+		// Update the position of the pieces of text inside x-axis
+		axisRef.selectAll("g.tick text")
+			.attr("y", Configuration.scales.magicY2)
+			.attr("x", Configuration.scales.magicX2)
+			.attr("dy", ".35em")
+			.attr("transform", `rotate(${Configuration.scales.xAxisAngle})`)
+			.style("text-anchor", "start")
 	}
 
 	getYMax() {

@@ -14,7 +14,7 @@ export class Transitions extends Service {
 	}
 
 	getDefaultTransition(): Transition<any, any, any, any> {
-		if (this._model.getOptions().animations === false) {
+		if (this._model.getOptions().animations === false || this._model.get("animations") === false) {
 			return this.getInstantTransition();
 		}
 

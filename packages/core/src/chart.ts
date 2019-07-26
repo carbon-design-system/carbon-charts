@@ -67,7 +67,7 @@ export class Chart {
 		return null;
 	}
 
-	update(animations?: boolean) {
+	update(noAnimations?: boolean) {
 		if (this.components) {
 			console.log("RE RENDER STUFF");
 			this.components.forEach(component => {
@@ -77,7 +77,7 @@ export class Chart {
 			});
 
 			this.model.set({
-				animations
+				animations: !noAnimations
 			}, true);
 		}
 	}
