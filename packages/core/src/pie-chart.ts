@@ -148,7 +148,7 @@ export class PieChart extends BaseChart {
 			.attr("dy", Configuration.pie.label.dy)
 			.style("text-anchor", "middle")
 			.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
-			.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); });
+			.attr("transform", function (d) { return self.getChartLabelPosition(this, d, radius, dataList.length); });
 
 		// Hide overlay
 		this.chartOverlay.hide();
@@ -208,6 +208,30 @@ export class PieChart extends BaseChart {
 					.style("opacity", 1);
 			});
 
+		// fade out left callout
+		this.innerWrap.select("g.callout-lines-left")
+			.transition()
+			.duration(Configuration.transitions.default.duration / 2)
+			.style("opacity", 0)
+			.on("end", function(d) {
+				select(this)
+					.transition()
+					.duration(Configuration.transitions.default.duration / 2)
+					.style("opacity", 1);
+		});
+
+		// fade out right callout
+		this.innerWrap.select("g.callout-lines-right")
+			.transition()
+			.duration(Configuration.transitions.default.duration / 2)
+			.style("opacity", 0)
+			.on("end", function(d) {
+				select(this)
+					.transition()
+					.duration(Configuration.transitions.default.duration / 2)
+					.style("opacity", 1);
+		});
+
 		// Move text labels to their new location, and fade them in again
 		const radius = this.computeRadius();
 		setTimeout(() => {
@@ -221,7 +245,7 @@ export class PieChart extends BaseChart {
 				.attr("dy", Configuration.pie.label.dy)
 				.style("text-anchor", "middle")
 				.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
-				.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); })
+				.attr("transform", function (d) { return self.getChartLabelPosition(this, d, radius, dataList.length); })
 				.style("opacity", 0)
 				.transition()
 				.duration(Configuration.transitions.default.duration / 2)
@@ -230,7 +254,7 @@ export class PieChart extends BaseChart {
 			text
 				.style("text-anchor", "middle")
 				.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
-				.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); })
+				.attr("transform", function (d) { return self.getChartLabelPosition(this, d, radius); })
 				.transition()
 				.duration(Configuration.transitions.default.duration / 2)
 				.style("opacity", 1);
@@ -325,9 +349,12 @@ export class PieChart extends BaseChart {
 			.attr("d", this.arc);
 
 		const self = this;
+		// not using the actual data in case "Other" category functionality is present
+		const totalSlices = this.innerWrap.selectAll("text.chart-label").size();
+
 		this.innerWrap
 			.selectAll("text.chart-label")
-			.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); });
+			.attr("transform", function (d) { return self.getChartLabelPosition(this, d, radius, totalSlices); });
 
 		// Reposition the legend
 		this.positionLegend();
@@ -342,15 +369,13 @@ export class PieChart extends BaseChart {
 	}
 
 	/**
-	 * Return the css transform string to be used for the slice
-	 *
-	 * @private
-	 * @param {any} d - d3 data item for slice
-	 * @param {any} radius - computed radius of the chart
-	 * @returns final transform string to be applied to the <text> element
-	 * @memberof PieChart
+	 * Returns the calculated position for the slice labels
+	 * @param element the text label element
+	 * @param d the d3 slice object
+	 * @param radius the radius of the pie or donut chart
+	 * @param totalSlices total number of slices rendered
 	 */
-	private deriveTransformString(element, d, radius) {
+	private getChartLabelPosition(element, d, radius, totalSlices?) {
 		const textLength = element.getComputedTextLength();
 		const textOffsetX = textLength / 2;
 		const textOffsetY = parseFloat(getComputedStyle(element).fontSize) / 2;
@@ -358,10 +383,91 @@ export class PieChart extends BaseChart {
 		const marginedRadius = radius + Configuration.pie.label.margin;
 
 		const theta = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+		const sliceAngleDeg = (d.endAngle - d.startAngle) * (180 / Math.PI);
+
 		const xPosition = (textOffsetX + marginedRadius) * Math.sin(theta);
 		const yPosition = (textOffsetY + marginedRadius) * -Math.cos(theta);
 
+		if (!totalSlices) {
+			return `translate(${xPosition}, ${yPosition})`;
+		}
+		// check if last 2 slices (or just last) are < 3 degrees
+		if (d.index === totalSlices - 1) {
+			if (sliceAngleDeg < Configuration.pie.label.sliceDegreeThreshold) {
+				// start at the same location as a non-called out label
+				const startPos = {
+					x: xPosition,
+					y: yPosition + textOffsetY
+				};
+				// end position for the callout line
+				const endPos = {
+					x: xPosition + Configuration.pie.label.calloutOffsetX - textOffsetX - Configuration.pie.label.calloutTextMargin,
+					y: yPosition - Configuration.pie.label.calloutOffsetY
+				};
+				// last slice always gets callout to the right side
+				this.drawCallout(startPos, endPos, "right");
+				return `translate(${xPosition + Configuration.pie.label.calloutOffsetX}, ${yPosition - Configuration.pie.label.calloutOffsetY})`;
+			}
+			// remove any unneeded callout for last slice
+			this.removeCallout("right");
+		}
+		if (d.index === totalSlices - 2) {
+			if (sliceAngleDeg < Configuration.pie.label.sliceDegreeThreshold) {
+				// start position for the callout line
+				const startPos = {
+					x: xPosition,
+					y: yPosition + textOffsetY
+				};
+				// end position for the callout line
+				const endPos = {
+					x: xPosition - Configuration.pie.label.calloutOffsetX + textOffsetX + Configuration.pie.label.calloutTextMargin,
+					y: yPosition - Configuration.pie.label.calloutOffsetY
+				};
+				this.drawCallout(startPos, endPos, "left");
+				return `translate(${xPosition - Configuration.pie.label.calloutOffsetX}, ${yPosition - Configuration.pie.label.calloutOffsetY})`;
+			}
+			// remove any leftover unneeded callout
+			this.removeCallout("left");
+		}
 		return `translate(${xPosition}, ${yPosition})`;
+	}
+
+	/**
+	 * Removes the callout with the specified direction.
+	 * @param dir callout direction "right" or "left"
+	 */
+	private removeCallout(dir) {
+		this.innerWrap.select(`g.callout-lines-${dir}`).remove();
+	}
+
+	/**
+	 * Draws a line to the text label associated with the slice.
+	 * @param startPos x,y coordinate to start the callout line
+	 * @param endPos x,y coordinate to end the callout line
+	 * @param dir direction of callout (right/left)
+	 */
+	private drawCallout(startPos, endPos, dir) {
+		// Clean up the label callouts
+		const callout = Tools.appendOrSelect(this.innerWrap, `g.callout-lines-${dir}`);
+		const midpointX = (endPos.x + startPos.x) / 2 ;
+
+		// draw vertical line
+		const verticalLine = Tools.appendOrSelect(callout, "line.vertical-line");
+		verticalLine
+		.style("stroke-width", "1px")
+			.attr("x1", startPos.x)
+			.attr("y1", startPos.y)
+			.attr("x2", midpointX)
+			.attr("y2", endPos.y);
+
+		// draw horizontal line
+		const horizontalLine = Tools.appendOrSelect(callout, "line.horizontal-line");
+		horizontalLine
+		.style("stroke-width", "1px")
+			.attr("x1", midpointX)
+			.attr("y1", endPos.y)
+			.attr("x2", endPos.x)
+			.attr("y2", endPos.y);
 	}
 }
 

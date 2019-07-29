@@ -645,6 +645,11 @@ export const pie = {
 	label: {
 		dy: ".32em",
 		margin: 8,
+		calloutMargin: 4,
+		calloutOffsetX: 30,
+		calloutOffsetY: 15,
+		calloutTextMargin: 2,
+		sliceDegreeThreshold: 5,
 		other: "Other"
 	},
 	default: {
