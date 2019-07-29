@@ -69,6 +69,6 @@ export class Scatter extends Component {
 			})
 			.on("mouseout", function() {
 				select(this).attr("fill-opacity", 0.2);
-			})
+			});
 	}
 }
