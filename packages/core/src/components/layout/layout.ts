@@ -215,9 +215,8 @@ export class LayoutComponent extends Component {
 					// 	})
 					// }
 				});
-			console.log("HOW MANY", this._renderCallbacks);
+
 			if (this._renderCallback) {
-				console.log("EXISTS");
 				this._renderCallback();
 			}
 		}, 0);
