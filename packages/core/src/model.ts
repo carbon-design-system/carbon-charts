@@ -147,9 +147,6 @@ export class ChartModel {
 		const oldStatus = keys[changedLabel];
 
 		keys[changedLabel] = (oldStatus === ACTIVE ? DISABLED : ACTIVE);
-		if (!keys[changedLabel]) {
-			
-		}
 		this.set(
 			keys,
 			data

@@ -67,7 +67,7 @@ export class Axis extends Component {
 		// Initialize axis object
 		const primaryAxis = axisLeft(primaryScale)
 			.ticks(5)
-			.tickSizeOuter(0)
+			.tickSizeOuter(0);
 			// .tickFormat(this._model.getOptions().scales.y.formatter);
 
 		// Add axis into the parent
@@ -108,14 +108,13 @@ export class Axis extends Component {
 			.transition(this._services.transitions.getDefaultTransition())
 			.call(secondaryAxis);
 
-		
 		// Update the position of the pieces of text inside x-axis
 		axisRef.selectAll("g.tick text")
 			.attr("y", Configuration.scales.magicY1)
 			.attr("x", Configuration.scales.magicX1)
 			.attr("dy", ".35em")
 			.attr("transform", `rotate(${Configuration.scales.xAxisAngle})`)
-			.style("text-anchor", "end")
+			.style("text-anchor", "end");
 			// .call(text => this.wrapTick(text));
 	}
 
@@ -186,7 +185,7 @@ export class Axis extends Component {
 			.attr("x", Configuration.scales.magicX2)
 			.attr("dy", ".35em")
 			.attr("transform", `rotate(${Configuration.scales.xAxisAngle})`)
-			.style("text-anchor", "start")
+			.style("text-anchor", "start");
 	}
 
 	getYMax() {
