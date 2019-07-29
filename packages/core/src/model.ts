@@ -44,11 +44,16 @@ export class ChartModel {
 	 * @return {Promise} The new display data that has been set
 	 */
 	setData(newData) {
+		const keys = {};
+		newData.datasets.forEach(dataset => {
+			keys[dataset.label] = Configuration.legend.items.status.ACTIVE;
+		});
 		this.set({
-			data: newData
+			data: newData,
+			keys
 		});
 
-		return this._state.options;
+		return this._state.data;
 	}
 
 	/**
@@ -133,6 +138,24 @@ export class ChartModel {
 				}
 			});
 		}
+	}
+
+	applyDataFilter(changedLabel: string) {
+		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
+		const keys = this.get("keys");
+		const data = this.getData();
+		const oldStatus = keys[changedLabel];
+
+		keys[changedLabel] = (oldStatus === ACTIVE ? DISABLED : ACTIVE);
+		if (!keys[changedLabel]) {
+			
+		}
+		this.set(
+			keys,
+			data
+		);
+
+		this.update();
 	}
 
 	/*
