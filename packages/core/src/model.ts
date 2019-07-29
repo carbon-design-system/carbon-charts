@@ -3,6 +3,7 @@ import * as Configuration from "./configuration";
 
 // D3
 import { scaleOrdinal } from "d3-scale";
+import { Tools } from "./tools";
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
@@ -34,8 +35,15 @@ export class ChartModel {
 	/**
 	 * @return {Array} The chart's display data
 	 */
-	getData() {
+	getDisplayData() {
 		return this.get("data");
+	}
+
+	/**
+	 * @return {Array} The chart's display data
+	 */
+	getRawData() {
+		return this.get("rawData");
 	}
 
 	/**
@@ -44,13 +52,15 @@ export class ChartModel {
 	 * @return {Promise} The new display data that has been set
 	 */
 	setData(newData) {
-		const keys = {};
+		const dataLabels = {};
 		newData.datasets.forEach(dataset => {
-			keys[dataset.label] = Configuration.legend.items.status.ACTIVE;
+			dataLabels[dataset.label] = Configuration.legend.items.status.ACTIVE;
 		});
+
 		this.set({
 			data: newData,
-			keys
+			rawData: newData,
+			dataLabels
 		});
 
 		return this._state.data;
@@ -112,7 +122,7 @@ export class ChartModel {
 	 * such as the color scales, or the legend data labels
 	 */
 	update() {
-		if (this.get("data")) {
+		if (this.getDisplayData()) {
 			this.updateFixedLabels();
 			this.setColorScale();
 
@@ -130,9 +140,9 @@ export class ChartModel {
 	*/
 	updateFixedLabels() {
 		if (!this._fixedDataLabels) {
-			this._fixedDataLabels = this.get("data").labels;
+			this._fixedDataLabels = this.getDisplayData().labels;
 		} else {
-			this.get("data").labels.forEach(element => {
+			this.getDisplayData().labels.forEach(element => {
 				if (this._fixedDataLabels.indexOf(element) === -1) {
 					this._fixedDataLabels.push(element);
 				}
@@ -142,15 +152,18 @@ export class ChartModel {
 
 	applyDataFilter(changedLabel: string) {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
-		const keys = this.get("keys");
-		const data = this.getData();
-		const oldStatus = keys[changedLabel];
+		const dataLabels = this.get("dataLabels");
+		const rawData = Tools.clone(this.getRawData());
+		const oldStatus = dataLabels[changedLabel];
 
-		keys[changedLabel] = (oldStatus === ACTIVE ? DISABLED : ACTIVE);
-		this.set(
-			keys,
-			data
-		);
+		dataLabels[changedLabel] = (oldStatus === ACTIVE ? DISABLED : ACTIVE);
+		const newDisplayData = rawData;
+		newDisplayData.datasets = newDisplayData.datasets.filter(dataset => dataLabels[dataset.label] === ACTIVE)
+
+		this.set({
+			dataLabels,
+			data: newDisplayData
+		});
 
 		this.update();
 	}
@@ -160,13 +173,13 @@ export class ChartModel {
 	 *
 	*/
 	setColorScale() {
-		if (this.get("data").datasets[0].backgroundColors) {
-			this.get("data").datasets.forEach(dataset => {
+		if (this.getDisplayData().datasets[0].backgroundColors) {
+			this.getDisplayData().datasets.forEach(dataset => {
 				this._colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this._fixedDataLabels);
 			});
 		} else {
 			const colors = Configuration.options.BASE.colors;
-			this.get("data").datasets.forEach((dataset, i) => {
+			this.getDisplayData().datasets.forEach((dataset, i) => {
 				this._colorScale[dataset.label] = scaleOrdinal().range([colors[i]]).domain(this._fixedDataLabels);
 			});
 		}

@@ -71,7 +71,7 @@ export class Legend extends Component {
 	}
 
 	getLegendItemArray() {
-		const legendItems = this._model.get("keys");
+		const legendItems = this._model.get("dataLabels");
 		const legendItemKeys = Object.keys(legendItems);
 
 		return legendItemKeys.map(key => ({
@@ -83,7 +83,7 @@ export class Legend extends Component {
 	getKeysFromData() {
 		const keys = {};
 
-		this._model.getData().datasets.forEach(dataset => {
+		this._model.getDisplayData().datasets.forEach(dataset => {
 			keys[dataset.label] = Configuration.legend.items.status.ACTIVE;
 		});
 

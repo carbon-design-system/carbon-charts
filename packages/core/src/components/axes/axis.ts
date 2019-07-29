@@ -88,7 +88,7 @@ export class Axis extends Component {
 		const startPosition = this.options.axes[ModelStateKeys.AXIS_PRIMARY] ? this.margins.left : 0;
 		const endPosition = this.options.axes[ModelStateKeys.AXIS_THIRD] ? width - this.margins.right : width;
 		secondaryScale.rangeRound([startPosition, endPosition])
-			.domain(this._model.getData().labels);
+			.domain(this._model.getDisplayData().labels);
 
 		// If scale doesn't exist in the model, store it
 		if (!this._model.get(ModelStateKeys.AXIS_SECONDARY)) {
@@ -159,7 +159,7 @@ export class Axis extends Component {
 		const startPosition = this.options.axes[ModelStateKeys.AXIS_PRIMARY] ? this.margins.left : 0;
 		const endPosition = this.options.axes[ModelStateKeys.AXIS_FOURTH] ? width - this.margins.right : width;
 		fourthScale.rangeRound([startPosition, endPosition])
-			.domain(this._model.getData().labels);
+			.domain(this._model.getDisplayData().labels);
 
 		// If scale doesn't exist in the model, store it
 		if (!this._model.get(ModelStateKeys.AXIS_FOURTH)) {
@@ -189,7 +189,7 @@ export class Axis extends Component {
 	}
 
 	getYMax() {
-		const { datasets } = this._model.getData();
+		const { datasets } = this._model.getDisplayData();
 		const { scales } = this._model.getOptions();
 		let yMax;
 
@@ -207,7 +207,7 @@ export class Axis extends Component {
 	}
 
 	getYMin() {
-		const { datasets } = this._model.getData();
+		const { datasets } = this._model.getDisplayData();
 		const { scales } = this._model.getOptions();
 		let yMin;
 

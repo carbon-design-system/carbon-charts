@@ -9,7 +9,7 @@ export class Scatter extends Component {
 		const svg = this.getContainerSVG();
 
 		const dotGroups = svg.selectAll("g.dots")
-			.data(this._model.getData().datasets);
+			.data(this._model.getDisplayData().datasets);
 
 		const dotGroupsEnter = dotGroups.enter()
 			.append("g")
@@ -48,7 +48,7 @@ export class Scatter extends Component {
 	}
 
 	addLabelsToDataPoints(d, index) {
-		const { labels } = this._model.getData();
+		const { labels } = this._model.getDisplayData();
 
 		return d.data.map((datum, i) => ({
 			label: labels[i],
