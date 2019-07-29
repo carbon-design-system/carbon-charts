@@ -158,7 +158,7 @@ export class ChartModel {
 
 		dataLabels[changedLabel] = (oldStatus === ACTIVE ? DISABLED : ACTIVE);
 		const newDisplayData = rawData;
-		newDisplayData.datasets = newDisplayData.datasets.filter(dataset => dataLabels[dataset.label] === ACTIVE)
+		newDisplayData.datasets = newDisplayData.datasets.filter(dataset => dataLabels[dataset.label] === ACTIVE);
 
 		this.set({
 			dataLabels,
