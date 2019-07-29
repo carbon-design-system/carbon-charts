@@ -2,6 +2,9 @@
 import { ModelStateKeys } from "../../interfaces";
 import { Component } from "../component";
 
+// D3 Imports
+import { select } from "d3-selection";
+
 export class Scatter extends Component {
 	type = "cc-scatter";
 
@@ -45,6 +48,8 @@ export class Scatter extends Component {
 
 		// // Dispatch the load event
 		// this.dispatchEvent("load");
+
+		this.addEventListeners();
 	}
 
 	addLabelsToDataPoints(d, index) {
@@ -55,5 +60,15 @@ export class Scatter extends Component {
 			datasetLabel: d.label,
 			value: datum
 		}));
+	}
+
+	addEventListeners() {
+		this._parent.selectAll("circle")
+			.on("mouseover", function() {
+				select(this).attr("fill-opacity", 1);
+			})
+			.on("mouseout", function() {
+				select(this).attr("fill-opacity", 0.2);
+			})
 	}
 }
