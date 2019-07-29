@@ -49,7 +49,7 @@ export class Chart {
 		this.services.events
 			.getDocumentFragment()
 			.addEventListener("chart-resize", () => {
-				this.update(true);
+				this.update(false);
 			});
 	}
 
@@ -67,18 +67,18 @@ export class Chart {
 		return null;
 	}
 
-	update(noAnimations?: boolean) {
+	update(animations = true) {
 		if (this.components) {
+			this.model.set({
+				animations
+			}, true);
+
 			console.log("RE RENDER STUFF");
 			this.components.forEach(component => {
 				component.render();
 
 				console.log("RENDER", ++window["ccount"]);
 			});
-
-			this.model.set({
-				animations: !noAnimations
-			}, true);
 		}
 	}
 }

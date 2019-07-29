@@ -12,10 +12,9 @@ export class Legend extends Component {
 		const svg = this.getContainerSVG();
 
 		const legendItems = svg.selectAll("g.legend-item")
-			.data(this.getLegendItemArray());
+			.data(this.getLegendItemArray(), d => d.key);
 
 		const addedLegendItems = legendItems.enter()
-			// .each((d, i) => console.log(">> ENTER", i))
 			.append("g")
 			.classed("legend-item", true);
 
@@ -72,7 +71,7 @@ export class Legend extends Component {
 	}
 
 	getLegendItemArray() {
-		const legendItems = this.getKeysFromData();
+		const legendItems = this._model.get("keys");
 		const legendItemKeys = Object.keys(legendItems);
 
 		return legendItemKeys.map(key => ({
@@ -122,13 +121,18 @@ export class Legend extends Component {
 	// }
 
 	addEventListeners() {
+		const self = this;
 		const svg = this._parent;
 		svg.selectAll("g.legend-item")
 			.on("mouseover", () => {
 				console.log("YOU HOVERED");
 			})
 			.on("click", function() {
-				console.log("clicked", select(this));
+				const clickedItem = select(this);
+				const clickedItemData = clickedItem.datum() as any;
+				console.log("clicked", clickedItemData);
+
+				self._model.applyDataFilter(clickedItemData.key);
 			});
 	}
 }

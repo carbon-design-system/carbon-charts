@@ -136,7 +136,7 @@ export class ScatterChart extends Chart {
 
 		return [
 			new Overlay(),
-			// new Tooltip(),
+			new Tooltip(),
 			new LayoutComponent(
 				[
 					titleComponent,
