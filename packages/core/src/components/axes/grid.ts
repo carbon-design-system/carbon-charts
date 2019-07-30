@@ -21,7 +21,6 @@ export class Grid extends Component {
 		this.drawBackdrop();
 		this.drawXGrid();
 		this.drawYGrid();
-
 	}
 
 	drawXGrid() {
