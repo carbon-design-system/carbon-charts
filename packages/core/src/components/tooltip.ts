@@ -90,9 +90,10 @@ export class ChartTooltip {
 
 		// adjust padding to be on the left or right of the tooltip
 		if (bestPlacementOption === PLACEMENTS.LEFT) {
-			pos.left -= Configuration.tooltip.axisTooltip.paddingLeft;
+			pos.left -= +Configuration.tooltip.axisTooltip.horizontalOffset;
+		} else {
+			pos.left += Configuration.tooltip.axisTooltip.horizontalOffset;
 		}
-		pos.left += Configuration.tooltip.axisTooltip.paddingLeft;
 
 		// add to data position
 		this.positionService.setElement(elRef, pos);

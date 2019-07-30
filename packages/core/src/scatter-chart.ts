@@ -8,6 +8,7 @@ import { Tools } from "./tools";
 
 export class ScatterChart extends BaseAxisChart {
 	options: ScatterChartOptions = Tools.merge({}, Configuration.options.SCATTER);
+	gridlineThreshold: Number;
 
 	constructor(holder: Element, configs: ChartConfig<ScatterChartOptions>) {
 		super(holder, configs);
@@ -186,6 +187,8 @@ export class ScatterChart extends BaseAxisChart {
 		this.setXAxis(true);
 		this.setYAxis(true);
 
+		this.setGridlineThreshold();
+
 		this.updateElements(false, null);
 
 		super.resizeChart();
@@ -243,6 +246,24 @@ export class ScatterChart extends BaseAxisChart {
 	}
 
 	/**
+	 * Sets the threshold for the gridline tooltips. On resize, the threshold needs to be
+	 * updated.
+	 */
+	setGridlineThreshold() {
+		const allTicks = this.svg.selectAll(".x.grid");
+
+		// select the first and the second tick to calculate the distance between
+		const first = allTicks.select(".tick");
+		const second = allTicks.select(".tick + g.tick");
+
+		// get space between axis grid ticks
+		const gridSpacing = (+Tools.getTranslationValues(second.node()).tx - +Tools.getTranslationValues(first.node()).tx);
+
+		// adjust the threshold for the tooltips
+		this.gridlineThreshold = gridSpacing * Configuration.tooltip.axisTooltip.axisThreshold;
+	}
+
+	/**
 	 * Retrieves the d3 selection of all points with domain label
 	 * @param domain The X-Axis domain label associated with data group
 	 */
@@ -264,14 +285,15 @@ export class ScatterChart extends BaseAxisChart {
 	 * Filter the gridlines using the threshold to find the ones that should be active
 	 */
 	getActiveGridLines(pos) {
+		const self = this;
 		const gridlinesX = this.svg.selectAll(".x.grid .tick")
 		.filter(function() {
 			const translations = Tools.getTranslationValues(this);
 
 			// threshold for when to display a gridline tooltip
 			const bounds = {
-				min: +translations.tx - Configuration.tooltip.axisTooltip.axisThreshold,
-				max: +translations.tx + Configuration.tooltip.axisTooltip.axisThreshold };
+				min: +translations.tx - +self.gridlineThreshold,
+				max: +translations.tx + +self.gridlineThreshold };
 
 			return (bounds.min <= pos[0] && pos[0] <= bounds.max) ? this : null;
 		});
@@ -279,9 +301,14 @@ export class ScatterChart extends BaseAxisChart {
 		return gridlinesX.empty() ? null : gridlinesX;
 	}
 
+	/**
+	 * Adds the listener on the X grid to trigger axis line tooltips.
+	 */
 	addGridXEventListener() {
 		const self = this;
 		const grid = Tools.appendOrSelect(this.svg, "rect.chart-grid-backdrop");
+
+		this.setGridlineThreshold();
 
 		grid
 		.on("mousemove", function() {
@@ -289,7 +316,8 @@ export class ScatterChart extends BaseAxisChart {
 			const pos = mouse(chartContainer);
 
 			const allgridlines = self.svg.selectAll(".x.grid .tick");
-			allgridlines.attr("stroke-dasharray", "unset");
+			// remove the styling on the lines
+			allgridlines.classed("active", false);
 
 			const activeGridlines = self.getActiveGridLines(pos);
 			if (!activeGridlines) {
@@ -297,15 +325,16 @@ export class ScatterChart extends BaseAxisChart {
 				return;
 			}
 
-			// set dash array
+			// set active class to control dasharray and theme colors
 			activeGridlines
-			.attr("stroke-dasharray", "4px");
+			.classed("active", true);
 
 			// get the items that should be highlighted
 			let highlightItems;
 			activeGridlines.each(function(d) {
 				if (d) {
-					// use domain to get all points
+					// prioritize using domain to get all points
+					// in case there are axis lines without labels
 					highlightItems = self.getDataWithDomain(d);
 				} else {
 					const translatePos = Tools.getTranslationValues(this);
@@ -315,6 +344,8 @@ export class ScatterChart extends BaseAxisChart {
 			self.showGridlineTooltip(highlightItems);
 		})
 		.on("mouseout", function() {
+			self.svg.selectAll(".x.grid .tick")
+			.classed("active", false);
 			self.hideTooltip();
 		});
 	}

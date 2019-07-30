@@ -58,6 +58,9 @@ div.chart-holder {
 			g.tick line {
 				stroke-width: 1px;
 			}
+			g.tick.active {
+				stroke-dasharray: 4px;
+			}
 		}
 
 		path {

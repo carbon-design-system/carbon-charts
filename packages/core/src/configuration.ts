@@ -726,11 +726,11 @@ export const tooltip = {
 	},
 	axisTooltip: {
 		marginLeft: 4,
-		axisThreshold: 10,
-		paddingLeft: 12,
+		axisThreshold: 0.25,
+		horizontalOffset: 12,
 		stackedPadding: 2,
 		fadeOut: {
-			duration: 100
+			duration: 80
 		},
 	},
 
