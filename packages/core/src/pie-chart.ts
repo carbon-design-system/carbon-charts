@@ -304,7 +304,7 @@ export class PieChart extends BaseChart {
 				self.showTooltip(d);
 				self.reduceOpacity(this);
 			})
-			.on("mousemove", d => self.tooltip.positionTooltip())
+			.on("mousemove", d => self.tooltip.positionMouseTooltip())
 			.on("mouseout", function(d) {
 				select(this)
 					.attr("stroke-width", accessibility ? Configuration.pie.default.strokeWidth : Configuration.pie.mouseout.strokeWidth)

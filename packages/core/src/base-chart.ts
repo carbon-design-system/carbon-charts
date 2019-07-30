@@ -172,8 +172,7 @@ export class BaseChart {
 
 					this.update();
 				}
-				// title will have to be refactored before merge
-				// this.drawTitle();
+				this.drawTitle();
 			} else {
 				this.chartOverlay.show(Configuration.options.BASE.overlay.types.noData);
 			}
@@ -799,7 +798,7 @@ export class BaseChart {
 		// Position the tooltip
 		tooltip.classed("arrow-right", true);
 		tooltip.append("div").attr("class", "arrow");
-		tooltip.style("left", `${mouseXPoint - Configuration.tooltip.width - Configuration.tooltip.arrowWidth}px`);
+		tooltip.style("left", `${mouseXPoint - Configuration.tooltip.dataLabel.width - Configuration.tooltip.dataLabel.arrowWidth}px`);
 
 		if (this.options.legendClickable) {
 			this.addLegendCircleHoverEffect();
@@ -808,10 +807,10 @@ export class BaseChart {
 
 	showLabelTooltip(d, leftSide) {
 		selectAll(".label-tooltip").remove();
-		const mouseXPoint = mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.arrowWidth;
+		const mouseXPoint = mouse(this.holder as SVGSVGElement)[0] + Configuration.tooltip.dataLabel.arrowWidth;
 		const tooltip = this.container.append("div")
 			.attr("class", "tooltip label-tooltip")
-			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.magicTop1 + "px");
+			.style("top", mouse(this.holder as SVGSVGElement)[1] - Configuration.tooltip.dataLabel.magicTop1 + "px");
 		Tools.addCloseBtn(tooltip, "xs")
 			.on("click", () => {
 				this.resetOpacity();
@@ -826,7 +825,7 @@ export class BaseChart {
 		} else {
 			tooltip.classed("arrow-right", true);
 
-			const xPoint = mouseXPoint - (tooltip.node() as Element).clientWidth - Configuration.tooltip.magicXPoint2;
+			const xPoint = mouseXPoint - (tooltip.node() as Element).clientWidth - Configuration.tooltip.dataLabel.magicXPoint2;
 			tooltip.style("left", xPoint + "px")
 					.append("div").attr("class", "arrow");
 		}
@@ -839,7 +838,7 @@ export class BaseChart {
 	}
 
 	generateTooltipHTML(label, value) {
-		if (this.options.tooltip.size === Configuration.tooltip.size.COMPACT) {
+		if (this.options.tooltip.size === Configuration.tooltip.dataLabel.size.COMPACT) {
 			return `<b>${label}:</b> ${value}<br/>`;
 		} else {
 			return `

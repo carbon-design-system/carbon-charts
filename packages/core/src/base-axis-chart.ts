@@ -700,26 +700,29 @@ export class BaseAxisChart extends BaseChart {
 		console.warn("You should implement your own `addDataPointEventListener()` function.");
 	}
 
-	/**
-	 * Gridline Tooltip functions
-	 */
+	/**************************************
+	 *  Gridline tooltip functions        *
+	 *************************************/
 
 	/**
-	 * Axis charts should let you add gridline tooltips for datapoints on the value line.
-	 * @param d Data points
-	 * @param clickedElement
+	 * Shows the gridline tooltips for the datapoints supplied
+	 * @param d Data points to create tooltips
 	 */
-	_showGridlineTooltip(d, clickedElement?: Element) {
+	showGridlineTooltip(d) {
 		const tooltips = this.getGridlineTooltipHTML(d);
-		// if tooltip is supplied both argu
+		// if tooltip is supplied both arguments, should default to using single data tooltip rather than gridline
 		this.tooltip.show(null, tooltips);
 	}
 
-	// Gets the tooltip html for all points and returns an array containing the (data) position and html for the tooltip.
+	/**
+	 * Gets the tooltip html for all points and returns an array containing the (data) position and html for the tooltip.
+	 * @param points the points that need to be highlighted on the chart with a tooltip
+	 */
 	getGridlineTooltipHTML = points => {
 		const datapoints = new Array();
 		const self = this;
 
+		// generate html structure for each datapoint using the dataset color and value
 		points.each(function(d) {
 			const indicatorColor = self.getStrokeColor(d.datasetLabel, d.label , d.value);
 			const dataPosition = {x: this.attributes.cx.value, y: this.attributes.cy.value};
@@ -732,6 +735,8 @@ export class BaseAxisChart extends BaseChart {
 
 	/**
 	 * Each gridline tooltip has an indicator color for the dataset and the value at the highlighted gridline.
+	 * @param color the color associated with the dataset
+	 * @param value the value of the datapoint
 	 */
 	generateGridlineTooltipHTML = (color: String, value: any) => {
 		return `<a style="background-color:${color}" class="tooltip-color"></a><p>${value}</p>`;

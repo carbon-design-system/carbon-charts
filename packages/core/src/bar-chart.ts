@@ -308,7 +308,7 @@ export class BarChart extends BaseAxisChart {
 				self.showTooltip(d, this);
 				self.reduceOpacity(this);
 			})
-			.on("mousemove", d => this.tooltip.positionTooltip())
+			.on("mousemove", d => this.tooltip.positionMouseTooltip())
 			.on("mouseout", function(d) {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.bars.mouseout;
 				select(this)

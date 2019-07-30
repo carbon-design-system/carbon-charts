@@ -48,9 +48,7 @@ export class ScatterChart extends BaseAxisChart {
 		this.chartOverlay.hide();
 
 		// Add axis tooltip support only ONCE since the grid persists
-		// Check if we need to add an event listener for grid X and Y
-		// this only adds X grid so far
-		this.addGridEventListener();
+		this.addGridXEventListener();
 
 		// Dispatch the load event
 		this.dispatchEvent("load");
@@ -139,8 +137,6 @@ export class ScatterChart extends BaseAxisChart {
 
 		// Add slice hover actions, and clear any slice borders present
 		this.addDataPointEventListener();
-
-		this.addGridEventListener();
 
 		// Hide the overlay
 		this.chartOverlay.hide();
@@ -232,7 +228,7 @@ export class ScatterChart extends BaseAxisChart {
 
 				self.showTooltip(d, this);
 			})
-			.on("mousemove", d => self.tooltip.positionTooltip())
+			.on("mousemove", d => self.tooltip.positionMouseTooltip())
 			.on("mouseout", function(d) {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.lines.points.mouseout;
 				select(this)
@@ -283,7 +279,7 @@ export class ScatterChart extends BaseAxisChart {
 		return gridlinesX.empty() ? null : gridlinesX;
 	}
 
-	addGridEventListener() {
+	addGridXEventListener() {
 		const self = this;
 		const grid = Tools.appendOrSelect(this.svg, "rect.chart-grid-backdrop");
 
@@ -297,6 +293,7 @@ export class ScatterChart extends BaseAxisChart {
 
 			const activeGridlines = self.getActiveGridLines(pos);
 			if (!activeGridlines) {
+				self.hideTooltip();
 				return;
 			}
 
@@ -315,7 +312,7 @@ export class ScatterChart extends BaseAxisChart {
 					highlightItems = self.getDataWithXValue(+translatePos.tx - 0.5);
 				}
 			});
-			self._showGridlineTooltip(highlightItems, this);
+			self.showGridlineTooltip(highlightItems);
 		})
 		.on("mouseout", function() {
 			self.hideTooltip();

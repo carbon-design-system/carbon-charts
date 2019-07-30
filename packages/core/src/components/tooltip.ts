@@ -17,7 +17,7 @@ export class ChartTooltip {
 
 	getRef = () => select(this.container).select("div.chart-tooltip").node() as HTMLElement;
 
-	positionTooltip() {
+	positionMouseTooltip() {
 		const target = this.getRef();
 		const mouseRelativePos = mouse(this.container);
 
@@ -38,7 +38,7 @@ export class ChartTooltip {
 			})
 		);
 
-		let { magicLeft2: horizontalOffset } = Configuration.tooltip;
+		let { magicLeft2: horizontalOffset } = Configuration.tooltip.dataLabel;
 		if (bestPlacementOption === PLACEMENTS.LEFT) {
 			horizontalOffset *= -1;
 		}
@@ -56,85 +56,160 @@ export class ChartTooltip {
 		this.positionService.setElement(target, pos);
 	}
 
-	// Tooltips should aim to be beside the corresponding datapoints, however they should not overlap
-	positionGridTooltips() {
-		const tooltips = selectAll(".gridline-tooltip");
-		// translate them up half the object size
+	/**
+	 * Finds the best placement for the tooltip with respect to the datapoint and places element at that position.
+	 * @param elRef The HTML element reference
+	 * @param position Ideal position for the datapoint
+	 */
+	positionGridTooltip(elRef, position) {
+		// find the best placement in respect to the data point position and the container for the tooltip (this.container)
+		const bestPlacementOption = this.positionService.findBestPlacementAt(
+			{
+				left: position.left,
+				top: position.top
+			},
+			elRef,
+			[
+				PLACEMENTS.RIGHT,
+				PLACEMENTS.LEFT
+			],
+			() => ({
+				width: this.container.offsetWidth,
+				height: this.container.offsetHeight
+			})
+		);
 
+		const pos = this.positionService.findPositionAt(
+			{
+				left: position.left,
+				top: position.top
+			},
+			elRef,
+			bestPlacementOption
+		);
 
-		// translate them RIGHT the distance in config
+		// adjust padding to be on the left or right of the tooltip
+		if (bestPlacementOption === PLACEMENTS.LEFT) {
+			pos.left -= Configuration.tooltip.axisTooltip.paddingLeft;
+		}
+		pos.left += Configuration.tooltip.axisTooltip.paddingLeft;
+
+		// add to data position
+		this.positionService.setElement(elRef, pos);
 	}
 
+	/**
+	 * Formatter to make sure grid tooltips do not overlap for points that are close or the same Y value.
+	 * Sorts the tooltips by the Y value (ascending) and translates tooltips down sequentially.
+	 */
+	distributeGridTooltips() {
+		const tooltips = Array.from(this.container.querySelectorAll(".gridline-tooltip"));
+		// sort them by the y value, points that are lower should be translated down (list view)
+		tooltips.sort(function (a, b) {
+			return a.getBoundingClientRect().top <= b.getBoundingClientRect().top ? -1 : 1;
+		});
+
+		for (let i = 0; i < tooltips.length; i++) {
+			if (tooltips[i + 1]) {
+				// get the tooltip location (bound) and use next sibling's top location to check for overlap
+				const tooltipBound = parseFloat(getComputedStyle(tooltips[i]).top) + +tooltips[i].getBoundingClientRect().height;
+				// use the original location to check, and then translate the sibling tooltip lower
+				const siblingPos = {
+					top: parseFloat(getComputedStyle(tooltips[i + 1]).top),
+					left: parseFloat(getComputedStyle(tooltips[i + 1]).left)
+				};
+				// if a tooltip's next sibling is overlapping, translate it down
+				if (siblingPos.top < (tooltipBound + Configuration.tooltip.axisTooltip.stackedPadding)) {
+					siblingPos.top = tooltipBound + Configuration.tooltip.axisTooltip.stackedPadding;
+					this.positionService.setElement(tooltips[i + 1], siblingPos);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Shows a tooltip for the Chart. Tooltip can be a single datapoint or gridline tooltip with multiple datapoints.
+	 * @param contentHTML HTML content for single datapoint tooltip
+	 * @param gridlineTooltips Array containing HTML and position data for gridline tooltips
+	 */
 	show(contentHTML, gridlineTooltips?: any) {
 		// Remove existing tooltips on the page
 		// TODO - Update class to not conflict with other elements on page
 		selectAll(".chart-tooltip").remove();
 
 
-		// check if supplied a list of tooltips or just one
-		if (gridlineTooltips) {
+		// check if supplied ONE tooltip (takes precedence over gridline tooltips)
+		if (contentHTML) {
+			// Draw tooltip
+			const tooltip = select(this.container).append("div")
+				.attr("class", "tooltip chart-tooltip");
 
-			// until the refactor comes out we need to account for when charts have a title or not
-			const translateWrap = Tools.getTranslationValues(this.container);
+			// Apply html content to the tooltip
+			tooltip.append("div")
+				.attr("class", "text-box")
+				.html(contentHTML);
+
+			// Position the tooltip
+			this.positionMouseTooltip();
+
+			// Fade in
+			tooltip
+			.style("opacity", 0)
+				.transition()
+				.duration(Configuration.tooltip.dataLabel.fadeIn.duration)
+				.style("opacity", 1);
+
+		} else {
+
+			if (!gridlineTooltips) {
+				return;
+			}
+
+			// until the refactor comes out we need to account for when charts have a title any other reason
+			// the innerWrap is translated
+			const innerWrap = this.container.querySelector("g.inner-wrap") as HTMLElement;
+			const translateWrap = Tools.getTranslationValues(innerWrap);
 
 			// iterate through all the tooltips and add them
 			gridlineTooltips.forEach(datapoint => {
 
 				// draw tooltips
 				const tooltip = select(this.container).append("div")
-				.attr("class", "tooltip chart-tooltip gridline-tooltip")
-				.html(datapoint.html)
-				.style("opacity", 0);
-
-				tooltip
-				.transition()
-				.duration(Configuration.tooltip.fadeIn.duration)
-				.style("opacity", 1);
+					.attr("class", "tooltip chart-tooltip gridline-tooltip")
+					.html(datapoint.html);
 
 				const elRef = tooltip.node() as HTMLElement;
-				const elBound = elRef.getBoundingClientRect();
+
+				// aim to position each tip vertically centered at the best position (left or right) of the datapoint
+				// take any translations on the innerwrap (use as offset to the datapoint position) until refactor
 				const position = {
-					top: datapoint.dataPosition.y  - (elBound.height / 2),
-					left: +datapoint.dataPosition.x + Configuration.tooltip.axisTooltip.paddingLeft + (elBound.width / 2)  };
+					top: +datapoint.dataPosition.y + (+translateWrap.ty),
+					left: +datapoint.dataPosition.x + (+translateWrap.tx)
+				};
 
-
-				// add to data position
-				this.positionService.setElement(elRef, position);
+				// uses position service to find appripriate position (Left or Right)
+				this.positionGridTooltip(elRef, position);
 
 			});
-			// This repositions the tooltips so that they don't overlap
-			// this.positionGridTooltips();
-
-		} else {
-		// Draw tooltip
-		const tooltip = select(this.container).append("div")
-			.attr("class", "tooltip chart-tooltip");
-
-		// Apply html content to the tooltip
-		tooltip.append("div")
-			.attr("class", "text-box")
-			.html(contentHTML);
-
-		// Position the tooltip
-		this.positionTooltip();
-
-		// Fade in
-		tooltip.style("opacity", 0)
-			.transition()
-			.duration(Configuration.tooltip.fadeIn.duration)
-			.style("opacity", 1);
+			// repositions all the tooltips (if needed) so that they don't overlap
+			this.distributeGridTooltips();
 		}
 
 		// this.addEventListeners();
 	}
 
 	hide() {
+		// hide all tooltips (might be multiple for gridline tooltips)
 		const tooltipRef = select(this.container).selectAll("div.chart-tooltip");
 
 		// Fade out and remove
-		tooltipRef.style("opacity", 1)
+		tooltipRef
+			.style("opacity", 1)
 			.transition()
-			.duration(Configuration.tooltip.fadeOut.duration)
+			.duration(
+				tooltipRef.size() > 1 ?
+				Configuration.tooltip.dataLabel.fadeOut.duration :
+				Configuration.tooltip.axisTooltip.fadeOut.duration)
 			.style("opacity", 0)
 			.remove();
 
