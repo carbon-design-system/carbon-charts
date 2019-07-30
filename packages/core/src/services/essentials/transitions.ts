@@ -18,7 +18,7 @@ export class Transitions extends Service {
 			return this.getInstantTransition();
 		}
 
-		return transition().duration(750);
+		return transition().duration(400);
 	}
 
 	getInstantTransition(): Transition<any, any, any, any>  {

@@ -28,7 +28,7 @@ export class Scatter extends Component {
 			.attr("opacity", 0);
 
 		dotsEnter.merge(dots)
-			.attr("class", "dot")
+			.classed("dot", true)
 			.attr("cx", d => xScale(d.label) + xScale.step() / 2)
 			.transition(this._services.transitions.getDefaultTransition())
 			.attr("cy", d => this._model.get(ModelStateKeys.AXIS_PRIMARY)(d.value))
@@ -63,12 +63,21 @@ export class Scatter extends Component {
 	}
 
 	addEventListeners() {
+		const self = this;
 		this._parent.selectAll("circle")
 			.on("mouseover", function() {
-				select(this).attr("fill-opacity", 1);
+				select(this).classed("hovered", true);
+
+				self._model.set({
+					tooltip: true
+				});
 			})
 			.on("mouseout", function() {
-				select(this).attr("fill-opacity", 0.2);
+				select(this).classed("hovered", false);
+
+				self._model.set({
+					tooltip: false
+				});
 			});
 	}
 }
