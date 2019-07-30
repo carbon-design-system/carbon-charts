@@ -49,4 +49,12 @@
 	div.chart-overlay {
 		background: rgba($ui-02, 0.6);
 	}
+	// chart tooltip styles
+	.tooltip{
+		background-color: $ui-02;
+
+		p, .text-box {
+			color: $text-01;
+		}
+	}
 }

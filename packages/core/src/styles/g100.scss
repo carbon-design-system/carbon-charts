@@ -62,5 +62,13 @@
 				color: $text-04;
 			}
 		}
+
+		.tooltip {
+			background-color: $ui-02;
+
+			p, .text-box {
+				color: $text-01;
+			}
+		}
 	}
 }

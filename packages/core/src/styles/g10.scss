@@ -46,5 +46,13 @@
 		div.chart-overlay {
 			@include background-opacity($ui-02, 0.6);
 		}
+
+		.tooltip{
+			background-color: $ui-02;
+
+			p, .text-box {
+				color: $text-01;
+			}
+		}
 	}
 }

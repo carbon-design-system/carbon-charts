@@ -274,7 +274,6 @@ div.chart-overlay {
 }
 
 .tooltip {
-	background-color: #fff;
 	display: block;
 	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
 	@include fonts();
@@ -289,6 +288,7 @@ div.chart-overlay {
 
 	&.gridline-tooltip {
 		padding: 4px;
+
 		.tooltip-color {
 			position: absolute;
 			left:0;
@@ -296,6 +296,7 @@ div.chart-overlay {
 			width: 4px;
 			height: 100%;
 		}
+
 		p {
 			white-space: nowrap;
 			overflow: hidden;
