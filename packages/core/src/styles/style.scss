@@ -59,7 +59,7 @@ div.chart-holder {
 				stroke-width: 1px;
 			}
 			g.tick.active {
-				stroke-dasharray: 4px;
+				stroke-dasharray: 2px;
 			}
 		}
 
@@ -288,8 +288,9 @@ div.chart-overlay {
 
 	&.gridline-tooltip {
 		padding: 4px;
-		min-width: unset;
-		max-width: unset;
+		width: auto;
+		min-width: 20px;
+		max-width: 128px;
 
 		.tooltip-color {
 			position: absolute;
