@@ -369,7 +369,7 @@ export class PieChart extends BaseChart {
 	}
 
 	/**
-	 * Returns the calculated position for the slice labels
+	 * Returns the translate string for the calculated position of the slice labels.
 	 * @param element the text label element
 	 * @param d the d3 slice object
 	 * @param radius the radius of the pie or donut chart
@@ -391,9 +391,9 @@ export class PieChart extends BaseChart {
 		if (!totalSlices) {
 			return `translate(${xPosition}, ${yPosition})`;
 		}
-		// check if last 2 slices (or just last) are < 3 degrees
+		// check if last 2 slices (or just last) are < the threshold
 		if (d.index === totalSlices - 1) {
-			if (sliceAngleDeg < Configuration.pie.label.sliceDegreeThreshold) {
+			if (sliceAngleDeg < Configuration.pie.callout.sliceDegreeThreshold) {
 				// start at the same location as a non-called out label
 				const startPos = {
 					x: xPosition,
@@ -401,33 +401,35 @@ export class PieChart extends BaseChart {
 				};
 				// end position for the callout line
 				const endPos = {
-					x: xPosition + Configuration.pie.label.calloutOffsetX - textOffsetX - Configuration.pie.label.calloutTextMargin,
-					y: yPosition - Configuration.pie.label.calloutOffsetY
+					x: xPosition + Configuration.pie.callout.calloutOffsetX,
+					y: yPosition - Configuration.pie.callout.calloutOffsetY + textOffsetY
 				};
 				// last slice always gets callout to the right side
-				this.drawCallout(startPos, endPos, "right");
-				return `translate(${xPosition + Configuration.pie.label.calloutOffsetX}, ${yPosition - Configuration.pie.label.calloutOffsetY})`;
+				this.drawCallout(startPos, endPos, Configuration.pie.callout.direction.RIGHT);
+				return `translate(${endPos.x + Configuration.pie.callout.calloutTextMargin + textOffsetX},
+					${yPosition - Configuration.pie.callout.calloutOffsetY})`;
 			}
 			// remove any unneeded callout for last slice
-			this.removeCallout("right");
+			this.removeCallout(Configuration.pie.callout.direction.RIGHT);
 		}
 		if (d.index === totalSlices - 2) {
-			if (sliceAngleDeg < Configuration.pie.label.sliceDegreeThreshold) {
+			if (sliceAngleDeg < Configuration.pie.callout.sliceDegreeThreshold) {
 				// start position for the callout line
 				const startPos = {
 					x: xPosition,
 					y: yPosition + textOffsetY
 				};
-				// end position for the callout line
+				// end position for the callout line should be bottom aligned to the title
 				const endPos = {
-					x: xPosition - Configuration.pie.label.calloutOffsetX + textOffsetX + Configuration.pie.label.calloutTextMargin,
-					y: yPosition - Configuration.pie.label.calloutOffsetY
+					x: xPosition - Configuration.pie.callout.calloutOffsetX,
+					y: yPosition - Configuration.pie.callout.calloutOffsetY + textOffsetY
 				};
-				this.drawCallout(startPos, endPos, "left");
-				return `translate(${xPosition - Configuration.pie.label.calloutOffsetX}, ${yPosition - Configuration.pie.label.calloutOffsetY})`;
+				this.drawCallout(startPos, endPos, Configuration.pie.callout.direction.LEFT);
+				return `translate(${endPos.x - textOffsetX - Configuration.pie.callout.calloutTextMargin},
+					${yPosition - Configuration.pie.callout.calloutOffsetY})`;
 			}
 			// remove any leftover unneeded callout
-			this.removeCallout("left");
+			this.removeCallout(Configuration.pie.callout.direction.LEFT);
 		}
 		return `translate(${xPosition}, ${yPosition})`;
 	}
@@ -449,7 +451,9 @@ export class PieChart extends BaseChart {
 	private drawCallout(startPos, endPos, dir) {
 		// Clean up the label callouts
 		const callout = Tools.appendOrSelect(this.innerWrap, `g.callout-lines-${dir}`);
-		const midpointX = (endPos.x + startPos.x) / 2 ;
+		const intersectPointX = dir === Configuration.pie.callout.direction.RIGHT ?
+			endPos.x - Configuration.pie.callout.horizontalLineLength :
+			endPos.x + Configuration.pie.callout.horizontalLineLength;
 
 		// draw vertical line
 		const verticalLine = Tools.appendOrSelect(callout, "line.vertical-line");
@@ -457,14 +461,14 @@ export class PieChart extends BaseChart {
 		.style("stroke-width", "1px")
 			.attr("x1", startPos.x)
 			.attr("y1", startPos.y)
-			.attr("x2", midpointX)
+			.attr("x2", intersectPointX)
 			.attr("y2", endPos.y);
 
 		// draw horizontal line
 		const horizontalLine = Tools.appendOrSelect(callout, "line.horizontal-line");
 		horizontalLine
 		.style("stroke-width", "1px")
-			.attr("x1", midpointX)
+			.attr("x1", intersectPointX)
 			.attr("y1", endPos.y)
 			.attr("x2", endPos.x)
 			.attr("y2", endPos.y);
