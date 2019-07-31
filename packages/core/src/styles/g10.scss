@@ -17,6 +17,9 @@
 			g.tick line {
 				stroke: $ui-03;
 			}
+			g.tick.active line {
+				stroke: $focus;
+			}
 		}
 
 		.yAxes line.domain,

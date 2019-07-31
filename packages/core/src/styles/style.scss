@@ -288,6 +288,8 @@ div.chart-overlay {
 
 	&.gridline-tooltip {
 		padding: 4px;
+		min-width: unset;
+		max-width: unset;
 
 		.tooltip-color {
 			position: absolute;

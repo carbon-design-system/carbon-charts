@@ -18,6 +18,9 @@ $gray100: #171717;
 			g.tick line {
 				stroke: $ui-01;
 			}
+			g.tick.active line {
+				stroke: $focus;
+			}
 		}
 
 		.yAxes line.domain,
