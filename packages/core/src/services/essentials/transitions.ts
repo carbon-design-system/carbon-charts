@@ -1,8 +1,8 @@
 // Internal Imports
 import { Service } from "../service";
 
-// Carbon motion package
-import { easings, motion } from '@carbon/motion';
+// // Carbon motion package
+// import { easings, motion } from "@carbon/motion";
 
 // D3 Imports
 import { Transition, transition } from "d3-transition";
@@ -21,7 +21,7 @@ export class Transitions extends Service {
 			return this.getInstantTransition();
 		}
 
-		return transition().duration(400)
+		return transition().duration(400);
 			// .ease();
 	}
 
