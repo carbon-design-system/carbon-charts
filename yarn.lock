@@ -1093,7 +1093,12 @@
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-10.3.0.tgz#99df98f141c6d3a237d72ac9b21ad58a07112348"
   integrity sha512-LI+ZINCwf7iKXtaE3BkTdRtHpSwOe5FJtLwWxkqdsy69X4nMDKPc41ZJOW/lYAemeN4EHvm+LL9GD66eQpcVQQ==
 
-"@carbon/themes@^10.4.0":
+"@carbon/motion@^10.3.0":
+  version "10.3.0"
+  resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-10.3.0.tgz#894c3241aaab8fcae2a47bad31c6e409078913da"
+  integrity sha512-eGCUBDdc23ye6IKMjx/+TO1Xnalha18sRJXxA0pdWE+wHUiugs3vVRG08fkxt2vm2QLZfaXPF3Pzmc0w9Janvw==
+
+"@carbon/themes@10.4.0":
   version "10.4.0"
   resolved "https://registry.yarnpkg.com/@carbon/themes/-/themes-10.4.0.tgz#c957feb6315006f16e98d5fd319f9f5821393daf"
   integrity sha512-KVaSkp9XgK8yAmhJyua2DE+klRt7+R85ymQ0O79A3aOko1GWm1J2L/v+Gk8xQpU/wkNT8TFOaJtHBgGOz28Qkg==

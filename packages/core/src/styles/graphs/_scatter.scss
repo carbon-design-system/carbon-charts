@@ -1,5 +1,9 @@
+@import '@carbon/motion/scss/motion.scss';
+
 g.cc-scatter {
 	circle.hovered {
 		fill-opacity: 1;
+		transition: all .1s;
+		@include carbon--motion(standard, expressive);
 	}
 }
