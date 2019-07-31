@@ -645,12 +645,18 @@ export const pie = {
 	label: {
 		dy: ".32em",
 		margin: 8,
-		calloutMargin: 4,
-		calloutOffsetX: 30,
-		calloutOffsetY: 15,
-		calloutTextMargin: 2,
-		sliceDegreeThreshold: 5,
 		other: "Other"
+	},
+	callout : {
+		sliceDegreeThreshold: 5,
+		calloutOffsetX: 15,
+		calloutOffsetY: 12,
+		calloutTextMargin: 2,
+		horizontalLineLength: 8,
+		direction: {
+			LEFT: "left",
+			RIGHT: "right"
+		}
 	},
 	default: {
 		strokeWidth: 2

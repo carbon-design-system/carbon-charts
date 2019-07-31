@@ -96,6 +96,7 @@ div.chart-holder {
 
 		&.chart-label {
 			font-family: "IBM Plex Sans Condensed";
+			dominant-baseline: middle;
 		}
 
 		&.donut {
@@ -242,6 +243,10 @@ div.chart-holder {
 			margin: 5px;
 		}
 	}
+	g.callout-lines-left line,
+	g.callout-lines-right line {
+		stroke-width: 1px;
+	}
 }
 
 div.chart-overlay {
@@ -302,7 +307,6 @@ div.chart-overlay {
 		font-weight: 600;
 	}
 }
-
 #carbon-charts-patterns svg {
 	height: 0;
 }
