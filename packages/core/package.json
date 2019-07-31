@@ -45,6 +45,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@carbon/colors": "10.1.1",
+    "@carbon/motion": "^10.3.0",
     "@carbon/themes": "10.4.0",
     "@carbon/utils-position": "1.1.0",
     "babel-polyfill": "6.26.0",

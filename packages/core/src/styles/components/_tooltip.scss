@@ -1,5 +1,13 @@
+@import '@carbon/motion/scss/motion.scss';
+
 div.cc-tooltip {
+	pointer-events: none;
+	transition: opacity .1s;
+	@include carbon--motion(standard, expressive);
+
 	&.hidden {
 		opacity: 0;
+		transition: opacity .1s;
+		@include carbon--motion(standard, expressive);
 	}
 }
