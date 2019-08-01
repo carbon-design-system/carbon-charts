@@ -1,6 +1,7 @@
 // Internal Imports
 import { ModelStateKeys } from "../../interfaces";
 import { Component } from "../component";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -29,7 +30,13 @@ export class Scatter extends Component {
 
 		dotsEnter.merge(dots)
 			.classed("dot", true)
-			.attr("cx", d => xScale(d.label) + xScale.step() / 2)
+			.attr("cx", d => {
+				if (Tools.getProperty(this._model.getOptions(), "scales", "bottom", "type") === "time") {
+					return xScale(new Date(d.label));
+				}
+
+				return xScale(d.label) + xScale.step() / 2;
+			})
 			.transition(this._services.transitions.getDefaultTransition())
 			.attr("cy", d => this._model.get(ModelStateKeys.AXIS_PRIMARY)(d.value))
 			.attr("r", 4)
@@ -56,9 +63,9 @@ export class Scatter extends Component {
 		const { labels } = this._model.getDisplayData();
 
 		return d.data.map((datum, i) => ({
-			label: labels[i],
+			label: datum.key || labels[i],
 			datasetLabel: d.label,
-			value: datum
+			value: isNaN(datum) ? datum.value : datum
 		}));
 	}
 
