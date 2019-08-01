@@ -7,6 +7,7 @@ import Position, { PLACEMENTS } from "@carbon/utils-position";
 
 // D3 Imports
 import { select, mouse, event } from "d3-selection";
+import { timeFormat } from "d3-time-format";
 
 export class Tooltip extends Component {
 	type = "cc-tooltip";
@@ -25,7 +26,6 @@ export class Tooltip extends Component {
 
 		if (this._model.get("tooltip") === true) {
 			const data = select(event.target).datum() as any;
-
 			if (Tools.getProperty(this._model.getOptions(), "tooltip", "size") === Configuration.tooltip.size.COMPACT) {
 				tooltipTextConainter.html(`<b>${data.datasetLabel}:</b> ${data.value}<br/>`);
 			} else {

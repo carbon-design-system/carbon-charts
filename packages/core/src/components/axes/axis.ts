@@ -2,11 +2,13 @@
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
 import { ModelStateKeys } from "../../interfaces";
+import { Tools } from "../../tools";
 
 // D3 Imports
-import { scaleBand, scaleLinear } from "d3-scale";
+import { scaleBand, scaleLinear, scaleTime } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { min, max } from "d3-array";
+import { timeFormat } from "d3-time-format";
 
 export class Axis extends Component {
 	type = "cc-axes";
@@ -46,26 +48,31 @@ export class Axis extends Component {
 		}
 	}
 
+	createOrGrabScale(scaleT, scaleFunction: any = scaleLinear) {
+		// Grab the scale off of the model, and initialize if it doesn't exist
+		const scale = this._model.get(scaleT) || scaleFunction();
+
+		// If scale doesn't exist in the model, store it
+		if (!this._model.get(scaleT)) {
+			this._model.set({
+				[scaleT]: scale
+			});
+		}
+
+		return scale;
+	}
+
 	// Render left y-axis
 	renderPrimaryAxis() {
 		const svg = this.getContainerSVG();
 		const { height } = this._services.domUtils.getSVGElementSize(this._parent, true);
 
-		// Grab the scale off of the model, and initialize if it doesn't exist
-		const primaryScale = this._model.get(ModelStateKeys.AXIS_PRIMARY) || scaleLinear();
-		primaryScale
-			.domain([this.getYMin(), this.getYMax()])
+		const scale = this.createOrGrabScale(ModelStateKeys.AXIS_PRIMARY);
+		scale.domain([this.getYMin(), this.getYMax()])
 			.range([height - this.margins.bottom, this.margins.top]);
 
-		// If scale doesn't exist in the model, store it
-		if (!this._model.get(ModelStateKeys.AXIS_PRIMARY)) {
-			this._model.set({
-				[ModelStateKeys.AXIS_PRIMARY]: primaryScale
-			});
-		}
-
 		// Initialize axis object
-		const primaryAxis = axisLeft(primaryScale)
+		const primaryAxis = axisLeft(scale)
 			.ticks(5)
 			.tickSizeOuter(0);
 			// .tickFormat(this._model.getOptions().scales.y.formatter);
@@ -83,24 +90,33 @@ export class Axis extends Component {
 		const { width, height } = this._services.domUtils.getSVGElementSize(this._parent, true);
 
 		// Grab the scale off of the model, and initialize if it doesn't exist
-		const secondaryScale = this._model.get(ModelStateKeys.AXIS_SECONDARY) || scaleBand();
+		// const scale = this.createOrGrabScale(ModelStateKeys.AXIS_SECONDARY, scaleBand);
 
-		const startPosition = this.options.axes[ModelStateKeys.AXIS_PRIMARY] ? this.margins.left : 0;
-		const endPosition = this.options.axes[ModelStateKeys.AXIS_THIRD] ? width - this.margins.right : width;
-		secondaryScale.rangeRound([startPosition, endPosition])
-			.domain(this._model.getDisplayData().labels);
+		// Grab the scale off of the model, and initialize if it doesn't exist
+		const scale = this._model.get(ModelStateKeys.AXIS_SECONDARY) || scaleTime();
 
 		// If scale doesn't exist in the model, store it
 		if (!this._model.get(ModelStateKeys.AXIS_SECONDARY)) {
 			this._model.set({
-				[ModelStateKeys.AXIS_SECONDARY]: secondaryScale
+				[ModelStateKeys.AXIS_SECONDARY]: scale
 			});
 		}
 
+		const startPosition = this.options.axes[ModelStateKeys.AXIS_PRIMARY] ? this.margins.left : 0;
+		const endPosition = this.options.axes[ModelStateKeys.AXIS_THIRD] ? width - this.margins.right : width;
+		// scale.rangeRound([startPosition, endPosition])
+		// 	.domain(this._model.getDisplayData().labels);
+		scale.domain([
+			new Date(2019, 0, 1),
+			new Date(2019, 0, 25)
+		])
+		.range([startPosition, endPosition])
+		.nice();
 		// Initialize axis object
-		const secondaryAxis = axisBottom(secondaryScale)
-			.ticks(5)
-			.tickSizeOuter(0);
+		const secondaryAxis = axisBottom(scale)
+			.ticks(width > 400 ? 8 : 3)
+			.tickSizeOuter(0)
+			.tickFormat(timeFormat("%b %d, %Y"));
 
 		// Add axis into the parent
 		const axisRef = this._services.domUtils.appendOrSelect(svg, "g.axis.secondary");
@@ -124,20 +140,13 @@ export class Axis extends Component {
 		const { width, height } = this._services.domUtils.getSVGElementSize(this._parent, true);
 
 		// Grab the scale off of the model, and initialize if it doesn't exist
-		const thirdScale = this._model.get(ModelStateKeys.AXIS_THIRD) || scaleLinear();
-		thirdScale
+		const scale = this.createOrGrabScale(ModelStateKeys.AXIS_THIRD, scaleLinear);
+		scale
 			.domain([0, this.getYMax()])
 			.range([height - this.margins.bottom, this.margins.top]);
 
-		// If scale doesn't exist in the model, store it
-		if (!this._model.get(ModelStateKeys.AXIS_THIRD)) {
-			this._model.set({
-				[ModelStateKeys.AXIS_THIRD]: thirdScale
-			});
-		}
-
 		// Initialize axis object
-		const thirdAxis = axisRight(thirdScale)
+		const thirdAxis = axisRight(scale)
 			.ticks(5)
 			.tickSizeOuter(0);
 
@@ -154,22 +163,15 @@ export class Axis extends Component {
 		const { width, height } = this._services.domUtils.getSVGElementSize(this._parent, true);
 
 		// Grab the scale off of the model, and initialize if it doesn't exist
-		const fourthScale = this._model.get(ModelStateKeys.AXIS_SECONDARY) || scaleBand();
+		const scale = this.createOrGrabScale(ModelStateKeys.AXIS_FOURTH, scaleBand);
 
 		const startPosition = this.options.axes[ModelStateKeys.AXIS_PRIMARY] ? this.margins.left : 0;
 		const endPosition = this.options.axes[ModelStateKeys.AXIS_FOURTH] ? width - this.margins.right : width;
-		fourthScale.rangeRound([startPosition, endPosition])
+		scale.rangeRound([startPosition, endPosition])
 			.domain(this._model.getDisplayData().labels);
 
-		// If scale doesn't exist in the model, store it
-		if (!this._model.get(ModelStateKeys.AXIS_FOURTH)) {
-			this._model.set({
-				[ModelStateKeys.AXIS_FOURTH]: fourthScale
-			});
-		}
-
 		// Initialize axis object
-		const fourthAxis = axisTop(fourthScale)
+		const fourthAxis = axisTop(scale)
 			.ticks(5)
 			.tickSizeOuter(0);
 
@@ -194,9 +196,19 @@ export class Axis extends Component {
 		let yMax;
 
 		if (datasets.length === 1) {
-			yMax = max(datasets[0].data);
+			if (Tools.getProperty(scales, "bottom", "type") === "time") {
+				yMax = max(datasets[0].data, (d: any) => d.value);
+			} else {
+				yMax = max(datasets[0].data);
+			}
 		} else {
-			yMax = max(datasets, (d: any) => (max(d.data)));
+			if (Tools.getProperty(scales, "bottom", "type") === "time") {
+				yMax = max(datasets, (d: any) => {
+					return max(d.data, (datum: any) => datum.value);
+				});
+			} else {
+				yMax = max(datasets, (d: any) => (max(d.data)));
+			}
 		}
 
 		if (scales.y.yMaxAdjuster) {
@@ -212,9 +224,19 @@ export class Axis extends Component {
 		let yMin;
 
 		if (datasets.length === 1) {
-			yMin = min(datasets[0].data);
+			if (Tools.getProperty(scales, "bottom", "type") === "time") {
+				yMin = min(datasets[0].data, (d: any) => d.value);
+			} else {
+				yMin = min(datasets[0].data);
+			}
 		} else {
-			yMin = min(datasets, (d: any) => (min(d.data)));
+			if (Tools.getProperty(scales, "bottom", "type") === "time") {
+				yMin = min(datasets, (d: any) => {
+					return min(d.data, (datum: any) => datum.value);
+				});
+			} else {
+				yMin = min(datasets, (d: any) => (min(d.data)));
+			}
 		}
 
 		if (scales.y.yMinAdjuster) {
