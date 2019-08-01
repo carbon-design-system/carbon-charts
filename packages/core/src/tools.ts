@@ -163,15 +163,18 @@ export namespace Tools {
 	}
 
 	/**
-	 * Get the percentage of a datapoint compared to the entire data-set
-	 *
+	 * Get the percentage of a datapoint compared to the entire data-set.
+	 * Returns 1 significant digit if percentage is less than 1%.
 	 * @export
 	 * @param {any} item
 	 * @param {any} fullData
-	 * @returns The percentage in the form of a string "87%"
+	 * @returns The percentage in the form of a number
 	 */
 	export function convertValueToPercentage(item, fullData) {
-		return Math.floor(item / fullData.reduce((accum, val) => accum + val.value, 0) * 100) + "%";
+		const percentage = item / fullData.reduce((accum, val) => accum + val.value, 0) * 100;
+		return percentage < 1 ?
+			(item / fullData.reduce((accum, val) => accum + val.value, 0) * 100).toPrecision(1) :
+			Math.floor(percentage);
 	}
 
 	/**************************************
