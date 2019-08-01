@@ -147,8 +147,8 @@ export class PieChart extends BaseChart {
 			.classed("chart-label", true)
 			.attr("dy", Configuration.pie.label.dy)
 			.style("text-anchor", "middle")
-			.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
-			.attr("transform", function (d) { return self.getChartLabelPosition(this, d, radius, dataList.length); });
+			.text(d => self.getSliceLabelText(d.data.value, dataList))
+			.attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius, dataList.length); });
 
 		// Hide overlay
 		this.chartOverlay.hide();
@@ -244,8 +244,8 @@ export class PieChart extends BaseChart {
 				.classed("chart-label", true)
 				.attr("dy", Configuration.pie.label.dy)
 				.style("text-anchor", "middle")
-				.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
-				.attr("transform", function (d) { return self.getChartLabelPosition(this, d, radius, dataList.length); })
+				.text(d => self.getSliceLabelText(d.data.value, dataList))
+				.attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius, dataList.length); })
 				.style("opacity", 0)
 				.transition()
 				.duration(Configuration.transitions.default.duration / 2)
@@ -253,8 +253,8 @@ export class PieChart extends BaseChart {
 
 			text
 				.style("text-anchor", "middle")
-				.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
-				.attr("transform", function (d) { return self.getChartLabelPosition(this, d, radius); })
+				.text(d => self.getSliceLabelText(d.data.value, dataList))
+				.attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius); })
 				.transition()
 				.duration(Configuration.transitions.default.duration / 2)
 				.style("opacity", 1);
@@ -354,7 +354,7 @@ export class PieChart extends BaseChart {
 
 		this.innerWrap
 			.selectAll("text.chart-label")
-			.attr("transform", function (d) { return self.getChartLabelPosition(this, d, radius, totalSlices); });
+			.attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius, totalSlices); });
 
 		// Reposition the legend
 		this.positionLegend();
@@ -369,13 +369,22 @@ export class PieChart extends BaseChart {
 	}
 
 	/**
+	 * Returns the string for the slice labels.
+	 * @param datapoint data value to get the percentage
+	 * @param dataset dataset containing all data values
+	 */
+	private getSliceLabelText(datapoint, dataset) {
+		return Tools.convertValueToPercentage(datapoint, dataset) + "%";
+	}
+
+	/**
 	 * Returns the translate string for the calculated position of the slice labels.
 	 * @param element the text label element
 	 * @param d the d3 slice object
 	 * @param radius the radius of the pie or donut chart
 	 * @param totalSlices total number of slices rendered
 	 */
-	private getChartLabelPosition(element, d, radius, totalSlices?) {
+	private getChartLabelTranslateString(element, d, radius, totalSlices?) {
 		const textLength = element.getComputedTextLength();
 		const textOffsetX = textLength / 2;
 		const textOffsetY = parseFloat(getComputedStyle(element).fontSize) / 2;
