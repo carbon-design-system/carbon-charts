@@ -408,11 +408,13 @@ export class PieChart extends BaseChart {
 					x: xPosition,
 					y: yPosition + textOffsetY
 				};
+
 				// end position for the callout line
 				const endPos = {
 					x: xPosition + Configuration.pie.callout.calloutOffsetX,
 					y: yPosition - Configuration.pie.callout.calloutOffsetY + textOffsetY
 				};
+
 				// last slice always gets callout to the right side
 				this.drawCallout(startPos, endPos, Configuration.pie.callout.direction.RIGHT);
 				return `translate(${endPos.x + Configuration.pie.callout.calloutTextMargin + textOffsetX},
@@ -428,11 +430,13 @@ export class PieChart extends BaseChart {
 					x: xPosition,
 					y: yPosition + textOffsetY
 				};
+
 				// end position for the callout line should be bottom aligned to the title
 				const endPos = {
 					x: xPosition - Configuration.pie.callout.calloutOffsetX,
 					y: yPosition - Configuration.pie.callout.calloutOffsetY + textOffsetY
 				};
+
 				this.drawCallout(startPos, endPos, Configuration.pie.callout.direction.LEFT);
 				return `translate(${endPos.x - textOffsetX - Configuration.pie.callout.calloutTextMargin},
 					${yPosition - Configuration.pie.callout.calloutOffsetY})`;
