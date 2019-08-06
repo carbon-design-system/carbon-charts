@@ -745,6 +745,9 @@ export const transitions = {
 	pie_slice_hover: {
 		duration: 100
 	},
+	pie_chart_titles: {
+		duration: 375
+	}
 };
 
 /**

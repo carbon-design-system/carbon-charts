@@ -172,9 +172,7 @@ export namespace Tools {
 	 */
 	export function convertValueToPercentage(item, fullData) {
 		const percentage = item / fullData.reduce((accum, val) => accum + val.value, 0) * 100;
-		return percentage < 1 ?
-			(item / fullData.reduce((accum, val) => accum + val.value, 0) * 100).toPrecision(1) :
-			Math.floor(percentage);
+		return percentage < 1 ? percentage.toPrecision(1) : Math.floor(percentage);
 	}
 
 	/**************************************
