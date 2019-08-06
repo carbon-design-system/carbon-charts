@@ -198,39 +198,25 @@ export class PieChart extends BaseChart {
 
 		// Fade out all text labels
 		this.innerWrap.selectAll("text.chart-label")
-			.transition()
-			.duration(Configuration.transitions.default.duration / 2)
+			.transition(self.getDefaultTransition("pie_chart_titles"))
 			.style("opacity", 0)
-			.on("end", function(d) {
-				select(this)
-					.transition()
-					.duration(Configuration.transitions.default.duration / 2)
-					.style("opacity", 1);
-			});
+			.transition(self.getDefaultTransition("pie_chart_titles"))
+			.style("opacity", 1);
+
 
 		// fade out left callout
 		this.innerWrap.select("g.callout-lines-left")
-			.transition()
-			.duration(Configuration.transitions.default.duration / 2)
+			.transition(self.getDefaultTransition("pie_chart_titles"))
 			.style("opacity", 0)
-			.on("end", function(d) {
-				select(this)
-					.transition()
-					.duration(Configuration.transitions.default.duration / 2)
-					.style("opacity", 1);
-		});
+			.transition(self.getDefaultTransition("pie_chart_titles"))
+			.style("opacity", 1);
 
 		// fade out right callout
 		this.innerWrap.select("g.callout-lines-right")
-			.transition()
-			.duration(Configuration.transitions.default.duration / 2)
+			.transition(self.getDefaultTransition("pie_chart_titles"))
 			.style("opacity", 0)
-			.on("end", function(d) {
-				select(this)
-					.transition()
-					.duration(Configuration.transitions.default.duration / 2)
-					.style("opacity", 1);
-		});
+			.transition(self.getDefaultTransition("pie_chart_titles"))
+			.style("opacity", 1);
 
 		// Move text labels to their new location, and fade them in again
 		const radius = this.computeRadius();
@@ -247,22 +233,20 @@ export class PieChart extends BaseChart {
 				.text(d => self.getSliceLabelText(d.data.value, dataList))
 				.attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius, dataList.length); })
 				.style("opacity", 0)
-				.transition()
-				.duration(Configuration.transitions.default.duration / 2)
+				.transition(this.getDefaultTransition("pie_chart_titles"))
 				.style("opacity", 1);
 
 			text
 				.style("text-anchor", "middle")
 				.text(d => self.getSliceLabelText(d.data.value, dataList))
 				.attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius); })
-				.transition()
-				.duration(Configuration.transitions.default.duration / 2)
+				.transition(this.getDefaultTransition("pie_chart_titles"))
 				.style("opacity", 1);
 
 			text
 				.exit()
 				.remove();
-		}, Configuration.transitions.default.duration / 2);
+		}, Configuration.transitions.pie_chart_titles.duration);
 
 		// Add slice hover actions, and clear any slice borders present
 		this.addDataPointEventListener();
@@ -295,7 +279,8 @@ export class PieChart extends BaseChart {
 				const sliceElement = select(this);
 				Tools.moveToFront(sliceElement);
 
-				sliceElement.transition(self.getDefaultTransition("pie_slice_hover"))
+				sliceElement
+					.transition(self.getDefaultTransition("pie_slice_hover"))
 					.attr("d", self.hoverArc);
 
 				self.showTooltip(d);
@@ -303,7 +288,8 @@ export class PieChart extends BaseChart {
 			})
 			.on("mousemove", d => self.tooltip.positionTooltip())
 			.on("mouseout", function(d) {
-				select(this).transition(self.getDefaultTransition("pie_slice_hover"))
+				select(this)
+					.transition(self.getDefaultTransition("pie_slice_hover"))
 					.attr("d", self.arc);
 
 				self.hideTooltip();
@@ -471,7 +457,7 @@ export class PieChart extends BaseChart {
 		// draw vertical line
 		const verticalLine = Tools.appendOrSelect(callout, "line.vertical-line");
 		verticalLine
-		.style("stroke-width", "1px")
+			.style("stroke-width", "1px")
 			.attr("x1", startPos.x)
 			.attr("y1", startPos.y)
 			.attr("x2", intersectPointX)
@@ -480,7 +466,7 @@ export class PieChart extends BaseChart {
 		// draw horizontal line
 		const horizontalLine = Tools.appendOrSelect(callout, "line.horizontal-line");
 		horizontalLine
-		.style("stroke-width", "1px")
+			.style("stroke-width", "1px")
 			.attr("x1", intersectPointX)
 			.attr("y1", endPos.y)
 			.attr("x2", endPos.x)
