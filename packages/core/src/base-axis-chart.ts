@@ -1,7 +1,7 @@
 // D3 Imports
 import { select } from "d3-selection";
 import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from "d3-scale";
-import { axisBottom, axisLeft, axisRight, AxisScale, AxisDomain } from "d3-axis";
+import { axisBottom, axisLeft, axisRight } from "d3-axis";
 import { min, max } from "d3-array";
 
 import { BaseChart } from "./base-chart";
@@ -9,6 +9,9 @@ import { BaseChart } from "./base-chart";
 import * as Configuration from "./configuration";
 import { ChartConfig, AxisChartOptions } from "./configuration";
 import { Tools } from "./tools";
+
+// Misc
+import ResizeObserver from "resize-observer-polyfill";
 
 export class BaseAxisChart extends BaseChart {
 	x: ScaleBand<any>;
@@ -75,6 +78,7 @@ export class BaseAxisChart extends BaseChart {
 		this.draw();
 
 		this.addDataPointEventListener();
+		this.gridResizeObserver();
 	}
 
 	update() {
@@ -177,6 +181,22 @@ export class BaseAxisChart extends BaseChart {
 		};
 	}
 
+	/**
+	 * Adds a resize observer to the x and y grid and resizes the backdrop on change
+	 */
+	gridResizeObserver() {
+		const gridWidth = this.holder.querySelector(".y.grid");
+		const gridHeight = this.holder.querySelector(".x.grid");
+
+		const resizeObserver = new ResizeObserver((entries) => {
+			this.drawBackdrop();
+		});
+
+		// watch resizing of both grids
+		resizeObserver.observe(gridWidth);
+		resizeObserver.observe(gridHeight);
+	}
+
 	resizeChart() {
 		// Reposition the legend
 		this.positionLegend();
@@ -189,7 +209,6 @@ export class BaseAxisChart extends BaseChart {
 			this.repositionYAxisTitle();
 		}
 
-		this.drawBackdrop();
 		this.dispatchEvent("resize");
 	}
 
@@ -487,17 +506,17 @@ export class BaseAxisChart extends BaseChart {
 	 * Draws the background for the chart grid
 	 */
 	drawBackdrop() {
-		// Get height from the grid
-		const xGridHeight = this.innerWrap.select(".x.grid").node().getBBox().height;
-		const yGridBBox = this.innerWrap.select(".y.grid").node().getBBox();
-		const backdrop = Tools.appendOrSelect(this.innerWrap, "rect.chart-grid-backdrop");
+			// Get height from the grid
+			const xGridHeight = this.innerWrap.select(".x.grid").node().getBBox().height;
+			const yGridBBox = this.innerWrap.select(".y.grid").node().getBBox();
+			const backdrop = Tools.appendOrSelect(this.innerWrap, "rect.chart-grid-backdrop");
 
-		backdrop
-			.attr("x", yGridBBox.x)
-			.attr("y", yGridBBox.y)
-			.attr("width", yGridBBox.width)
-			.attr("height", xGridHeight)
-			.lower();
+			backdrop
+				.attr("x", yGridBBox.x)
+				.attr("y", yGridBBox.y)
+				.attr("width", yGridBBox.width)
+				.attr("height", xGridHeight)
+				.lower();
 	}
 
 	addOrUpdateThresholds(yGrid, animate?) {
