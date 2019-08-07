@@ -8,6 +8,7 @@ export * from "./essentials/tooltip";
 export * from "./graphs/scatter";
 
 // MISC
+export * from "./axes/four-axes";
 export * from "./axes/axis";
 export * from "./axes/grid";
 export * from "./layout/layout";

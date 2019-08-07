@@ -1,5 +1,5 @@
 // Internal Imports
-import { ModelStateKeys } from "../../interfaces";
+import { AxisPositions } from "../../interfaces";
 import { Component } from "../component";
 import { Tools } from "../../tools";
 
@@ -19,7 +19,7 @@ export class Scatter extends Component {
 			.append("g")
 				.classed("dots", true);
 
-		const xScale = this._model.get(ModelStateKeys.AXIS_SECONDARY);
+		const xScale = this._model.get(AxisPositions.BOTTOM);
 		const dots = dotGroupsEnter.merge(dotGroups)
 			.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i));
@@ -27,18 +27,18 @@ export class Scatter extends Component {
 		const dotsEnter = dots.enter()
 			.append("circle")
 			.attr("opacity", 0);
-
+console.log("LA", this._model.get(AxisPositions.LEFT).getValueFromScale({ value: 0 }))
 		dotsEnter.merge(dots)
 			.classed("dot", true)
 			.attr("cx", d => {
 				if (Tools.getProperty(this._model.getOptions(), "scales", "bottom", "type") === "time") {
-					return xScale(new Date(d.label));
+					return xScale.getValueFromScale(d);
 				}
 
-				return xScale(d.label) + xScale.step() / 2;
+				return xScale.getValueFromScale(d);
 			})
 			.transition(this._services.transitions.getDefaultTransition())
-			.attr("cy", d => this._model.get(ModelStateKeys.AXIS_PRIMARY)(d.value))
+			.attr("cy", d => this._model.get(AxisPositions.LEFT).getValueFromScale(d))
 			.attr("r", 4)
 			.attr("fill", d => this._model.getFillScale()[d.datasetLabel](d.label) as any)
 			.attr("fill-opacity", d => 0.2)

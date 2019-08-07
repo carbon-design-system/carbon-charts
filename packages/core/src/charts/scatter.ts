@@ -7,13 +7,14 @@ import {
 	ChartType,
 	LayoutDirection,
 	LayoutGrowth,
-	ModelStateKeys
+	ModelStateKeys,
+	AxisPositions
 } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
 import {
-	Axis,
+	FourAxes,
 	Grid,
 	LayoutComponent,
 	Legend,
@@ -62,12 +63,12 @@ export class ScatterChart extends Chart {
 		const graphFrame = {
 			id: "graph-frame",
 			components: [
-				new Axis({
+				new FourAxes({
 					axes: {
-						[ModelStateKeys.AXIS_PRIMARY]: true,
-						[ModelStateKeys.AXIS_SECONDARY]: true,
-						[ModelStateKeys.AXIS_THIRD]: true,
-						[ModelStateKeys.AXIS_FOURTH]: true
+						[AxisPositions.LEFT]: true,
+						[AxisPositions.BOTTOM]: true,
+						[AxisPositions.RIGHT]: true,
+						[AxisPositions.TOP]: true
 					}
 				}),
 				new Grid(),

@@ -14,10 +14,29 @@ export enum ChartType {
  * enum of all possible axis positions
  */
 export enum AxisPositions {
-	LEFT = "axisLeft",
-	RIGHT = "axisRight",
-	TOP = "axisTop",
-	BOTTOM = "axisBottom"
+	LEFT = "left",
+	RIGHT = "right",
+	TOP = "top",
+	BOTTOM = "bottom"
+}
+
+
+/**
+ * enum of all possible scale types
+ */
+export enum ScaleTypes {
+	TIME = "time",
+	LINEAR = "linear",
+	LOG = "log",
+}
+
+
+/**
+ * enum of all possible scale identifiers
+ */
+export enum ScaleIdentifiers {
+	LABEL = "label",
+	VALUE = "value"
 }
 
 /**
