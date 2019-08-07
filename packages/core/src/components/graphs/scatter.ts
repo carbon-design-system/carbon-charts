@@ -27,16 +27,10 @@ export class Scatter extends Component {
 		const dotsEnter = dots.enter()
 			.append("circle")
 			.attr("opacity", 0);
-console.log("LA", this._model.get(AxisPositions.LEFT).getValueFromScale({ value: 0 }))
+
 		dotsEnter.merge(dots)
 			.classed("dot", true)
-			.attr("cx", d => {
-				if (Tools.getProperty(this._model.getOptions(), "scales", "bottom", "type") === "time") {
-					return xScale.getValueFromScale(d);
-				}
-
-				return xScale.getValueFromScale(d);
-			})
+			.attr("cx", (d, i) => xScale.getValueFromScale(d, i))
 			.transition(this._services.transitions.getDefaultTransition())
 			.attr("cy", d => this._model.get(AxisPositions.LEFT).getValueFromScale(d))
 			.attr("r", 4)
