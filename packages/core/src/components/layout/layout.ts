@@ -20,7 +20,7 @@ export class LayoutComponent extends Component {
 	children: Array<LayoutComponentChild>;
 	options: LayoutOptions;
 
-	private _instanceCount: Number;
+	private _instanceCount: number;
 
 	private _renderCallbacks = [];
 	private _renderCallback: Function;
@@ -34,7 +34,7 @@ export class LayoutComponent extends Component {
 		this._instanceCount = LayoutComponent.instanceCount++;
 	}
 
-	getPrefferedAndFixedSizeSum(): Number {
+	getPrefferedAndFixedSizeSum(): number {
 		const svg = this._parent;
 		let sum = 0;
 
@@ -50,7 +50,7 @@ export class LayoutComponent extends Component {
 		return sum;
 	}
 
-	getNumOfStretchChildren(): Number {
+	getNumOfStretchChildren(): number {
 		const svg = this._parent;
 
 		return svg.selectAll(`svg.layout-child-${this._instanceCount}`)

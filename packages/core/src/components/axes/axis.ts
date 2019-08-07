@@ -5,7 +5,7 @@ import { ModelStateKeys, AxisPositions, ScaleTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
-import { scaleBand, scaleLinear, scaleTime, scaleLog } from "d3-scale";
+import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { min, max } from "d3-array";
 import { timeFormat } from "d3-time-format";
@@ -47,6 +47,8 @@ export class Axis extends Component {
 			scaleFunction = scaleTime();
 		} else if (scaleOptions && scaleOptions.type === ScaleTypes.LOG) {
 			scaleFunction = scaleLog().base(scaleOptions.base || 10);
+		} else if (scaleOptions && scaleOptions.type === ScaleTypes.LABELS) {
+			scaleFunction = scaleBand();
 		} else {
 			scaleFunction = scaleLinear();
 		}
@@ -79,6 +81,13 @@ export class Axis extends Component {
 			];
 		} else if (scaleOptions && scaleOptions.type === ScaleTypes.LOG) {
 			return [16, 2 ** 20];
+		} else if (scaleOptions && scaleOptions.type === ScaleTypes.LABELS) {
+			const labels = this._model.getDisplayData().labels;
+			// if (labels) {
+				return labels;
+			// } else {
+			// 	return this._model.getDisplayData().datasets[0].data.map((d, i) => i + 1);
+			// }
 		} else {
 			return [this.getYMin(), this.getYMax()];
 		}
@@ -86,6 +95,7 @@ export class Axis extends Component {
 
 	render() {
 		const { position: axisPosition } = this.options;
+		const axisOptions = Tools.getProperty(this._model.getOptions(), "axes", axisPosition);
 
 		const svg = this.getContainerSVG();
 		const { width, height } = this._services.domUtils.getSVGElementSize(this._parent, true);
@@ -100,10 +110,15 @@ export class Axis extends Component {
 		}
 
 		// Grab the scale off of the model, and initialize if it doesn't exist
-		const scale = this.createOrGrabScale();
-		scale.domain(this.getScaleDomain())
-			.range([startPosition, endPosition])
-			.nice();
+		const scale = this.createOrGrabScale()
+			.domain(this.getScaleDomain());
+
+		if (axisOptions && axisOptions.type === ScaleTypes.LABELS) {
+			scale.rangeRound([startPosition, endPosition]);
+		} else {
+			scale.range([startPosition, endPosition])
+				.nice();
+		}
 
 		// Identify the corresponding d3 axis function
 		let axisFunction;
@@ -124,10 +139,17 @@ export class Axis extends Component {
 
 		// Initialize axis object
 		const axis = axisFunction(scale)
-			.ticks(5)
 			.tickSizeOuter(0)
-			// .tickFormat(this._model.getOptions().scales.y.formatter);
+			.tickFormat(axisOptions ? axisOptions.formatter : null);
 			// .tickFormat(timeFormat("%b %d, %Y"));
+
+		if (scale.ticks) {
+			axis.ticks(5);
+
+			if (this.scaleType === ScaleTypes.TIME) {
+				axis.tickValues(scale.ticks(5).concat(scale.domain()));
+			}
+		}
 
 		// Add axis into the parent
 		const axisRef = this._services.domUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
@@ -153,11 +175,12 @@ export class Axis extends Component {
 			.call(axis);
 	}
 
-	getValueFromScale(datum: any) {
-		console.log("get val", this.scale(datum.label))
-
-		if (this.scaleType === ScaleTypes.TIME) {
-			return this.scale(datum.label);
+	getValueFromScale(datum: any, index?: number) {
+		if (this.scaleType === ScaleTypes.LABELS) {
+			const correspondingLabel = this._model.getDisplayData().labels[index];
+			return this.scale(correspondingLabel) + this.scale.step() / 2;
+		} else if (this.scaleType === ScaleTypes.TIME) {
+			return this.scale(new Date(datum.label));
 		} else {
 			return this.scale(datum.value);
 		}

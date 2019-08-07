@@ -112,8 +112,9 @@ export const lineOptions = () => ({
 	// animations: false,
 	accessibility: false,
 	axes: {
-		x: {
+		bottom: {
 			title: "2018 Annual Sales Figures",
+			type: "labels"
 		},
 		y: {
 			title: "Dollars (CAD)",
@@ -153,7 +154,10 @@ export const lineTimeSeriesOptions = () => ({
 		left: {
 			type: "linear",
 			base: 10,
-			title: "2018 Annual Sales Figures",
+			title: "2018 Annual Sales Figures"
+		},
+		right: {
+			formatter: val => `${(val/80000) * 100}%`
 		},
 		y: {
 			title: "Dollars (CAD)",

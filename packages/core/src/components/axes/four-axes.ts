@@ -100,12 +100,12 @@ export class FourAxes extends Component {
 		const endPosition = this.options.axes[AxisPositions.RIGHT] ? width - this.margins.right : width;
 		// scale.rangeRound([startPosition, endPosition])
 		//  .domain(this._model.getDisplayData().labels);
-		scale.domain([this.getYMin(), this.getYMax()]).range([startPosition, endPosition])
+		scale.domain([this.getYMin(), this.getYMax()]).range([startPosition, endPosition]);
 
 		// Initialize axis object
 		const secondaryAxis = axisBottom(scale)
 			.ticks(width > 400 ? 8 : 3)
-			.tickSizeOuter(0)
+			.tickSizeOuter(0);
 
 		// Add axis into the parent
 		const axisRef = this._services.domUtils.appendOrSelect(svg, "g.axis.secondary");
@@ -122,7 +122,7 @@ export class FourAxes extends Component {
 			.style("text-anchor", "end");
 		// .call(text => this.wrapTick(text));
 
-		console.log("scale", scale.domain())
+		console.log("scale", scale.domain());
 	}
 
 	// Render right y-axis

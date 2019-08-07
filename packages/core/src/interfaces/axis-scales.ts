@@ -60,7 +60,7 @@ export interface YScaleOptions extends ScaleOptions {
 	/**
 	 * number of ticks to show on axis
 	 */
-	numberOfTicks?: Number;
+	numberOfTicks?: number;
 }
 
 /**
