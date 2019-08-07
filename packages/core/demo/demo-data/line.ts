@@ -111,7 +111,7 @@ export const lineData = {
 export const lineOptions = () => ({
 	// animations: false,
 	accessibility: false,
-	scales: {
+	axes: {
 		x: {
 			title: "2018 Annual Sales Figures",
 		},
@@ -144,9 +144,15 @@ export const lineOptions = () => ({
 export const lineTimeSeriesOptions = () => ({
 	// animations: false,
 	accessibility: false,
-	scales: {
+	axes: {
 		bottom: {
 			type: "time",
+			base: 2,
+			title: "2018 Annual Sales Figures",
+		},
+		left: {
+			type: "linear",
+			base: 10,
 			title: "2018 Annual Sales Figures",
 		},
 		y: {

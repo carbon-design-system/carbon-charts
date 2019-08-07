@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { ModelStateKeys } from "../../interfaces";
+import { AxisPositions } from "../../interfaces";
 import * as Configuration from "../../configuration";
 
 // D3 Imports
@@ -27,7 +27,9 @@ export class Grid extends Component {
 		const svg = this._parent;
 
 		const height = this.backdrop.attr("height");
-		const xGrid = axisBottom(this._model.get(ModelStateKeys.AXIS_SECONDARY))
+
+		const bottomScale = this._model.get(AxisPositions.BOTTOM).getScale();
+		const xGrid = axisBottom(bottomScale)
 			.tickSizeInner(-height)
 			.tickSizeOuter(0);
 
@@ -41,15 +43,16 @@ export class Grid extends Component {
 	drawYGrid() {
 		const svg = this._parent;
 
-		const { scales } = this._model.getOptions();
+		const { axes } = this._model.getOptions();
 		// const { thresholds } = scales.y;
 		const width = this.backdrop.attr("width");
 
-		const yGrid = axisLeft(this._model.get(ModelStateKeys.AXIS_SECONDARY))
+		const bottomScale = this._model.get(AxisPositions.BOTTOM).getScale();
+		const yGrid = axisLeft(bottomScale)
 			.tickSizeInner(-width)
 			.tickSizeOuter(0);
 
-		yGrid.ticks(scales.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
+		yGrid.ticks(axes.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
 
 		const g = svg.select(".y.grid")
 			.attr("transform", `translate(${this.backdrop.attr("x")}, 0)`)
@@ -65,8 +68,11 @@ export class Grid extends Component {
 	drawBackdrop() {
 		const svg = this._parent;
 
-		const [primaryScaleEnd, primaryScaleStart] = this._model.get(ModelStateKeys.AXIS_PRIMARY).range();
-		const [secondaryScaleStart, secondaryScaleEnd] = this._model.get(ModelStateKeys.AXIS_SECONDARY).range();
+		const leftScale = this._model.get(AxisPositions.LEFT).getScale();
+		const bottomScale = this._model.get(AxisPositions.BOTTOM).getScale();
+
+		const [primaryScaleEnd, primaryScaleStart] = leftScale.range();
+		const [secondaryScaleStart, secondaryScaleEnd] = bottomScale.range();
 		// Get height from the grid
 		this.backdrop = this._services.domUtils.appendOrSelect(svg, "rect.chart-grid-backdrop");
 
