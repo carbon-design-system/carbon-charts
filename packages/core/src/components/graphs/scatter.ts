@@ -13,7 +13,7 @@ export class Scatter extends Component {
 		const svg = this.getContainerSVG();
 
 		const dotGroups = svg.selectAll("g.dots")
-			.data(this._model.getDisplayData().datasets);
+			.data(this._model.getDisplayData().datasets, dataset => dataset.label);
 
 		const dotGroupsEnter = dotGroups.enter()
 			.append("g")
