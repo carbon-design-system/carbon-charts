@@ -12,7 +12,7 @@ import { min, max } from "d3-array";
 import { timeFormat } from "d3-time-format";
 
 export class FourAxes extends Component {
-	type = "cc-four-axes";
+	type = "four-axes";
 
 	options: any;
 

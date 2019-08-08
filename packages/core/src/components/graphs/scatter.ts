@@ -1,13 +1,12 @@
 // Internal Imports
 import { AxisPositions } from "../../interfaces";
 import { Component } from "../component";
-import { Tools } from "../../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
 
 export class Scatter extends Component {
-	type = "cc-scatter";
+	type = "scatter";
 
 	render() {
 		const svg = this.getContainerSVG();
