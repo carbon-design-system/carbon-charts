@@ -14,7 +14,7 @@ const labelIdentifiers = ["label", "key", "date"];
 const valueIdentifiers = ["value"];
 
 export class Axis extends Component {
-	type = "cc-axes";
+	type = "axes";
 
 	options: any;
 
@@ -180,7 +180,7 @@ export class Axis extends Component {
 			const correspondingLabel = this._model.getDisplayData().labels[index];
 			return this.scale(correspondingLabel) + this.scale.step() / 2;
 		} else if (this.scaleType === ScaleTypes.TIME) {
-			return this.scale(new Date(datum.label));
+			return this.scale(new Date(datum.label || datum.key));
 		} else {
 			return this.scale(datum.value);
 		}

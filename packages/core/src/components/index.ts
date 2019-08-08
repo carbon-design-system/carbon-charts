@@ -5,6 +5,7 @@ export * from "./essentials/title";
 export * from "./essentials/tooltip";
 
 // GRAPHS
+export * from "./graphs/line";
 export * from "./graphs/scatter";
 
 // MISC

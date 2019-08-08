@@ -7,7 +7,7 @@ import * as Configuration from "../../configuration";
 import { axisBottom, axisLeft } from "d3-axis";
 
 export class Grid extends Component {
-	type = "cc-grid";
+	type = "grid";
 
 	backdrop: any;
 

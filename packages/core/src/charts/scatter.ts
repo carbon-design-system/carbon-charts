@@ -18,6 +18,7 @@ import {
 	Grid,
 	LayoutComponent,
 	Legend,
+	Line,
 	Overlay,
 	Scatter,
 	Title,
@@ -73,6 +74,7 @@ export class ScatterChart extends Chart {
 				}),
 				new Grid(),
 				new Scatter(),
+				new Line(),
 			],
 			growth: {
 				x: LayoutGrowth.STRETCH,

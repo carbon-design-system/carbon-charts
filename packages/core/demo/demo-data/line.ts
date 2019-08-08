@@ -145,15 +145,13 @@ export const lineOptions = () => ({
 export const lineTimeSeriesOptions = () => ({
 	// animations: false,
 	accessibility: false,
+	curve: "curveStep",
 	axes: {
 		bottom: {
 			type: "time",
-			base: 2,
 			title: "2018 Annual Sales Figures",
 		},
 		left: {
-			type: "linear",
-			base: 10,
 			title: "2018 Annual Sales Figures"
 		},
 		right: {
@@ -194,7 +192,7 @@ export const scatterTimeSeriesData = {
 			data: [
 				{
 					key: new Date(2019, 0, 1),
-					value: 0
+					value: 10000
 				},
 				{
 					key: new Date(2019, 0, 5),
@@ -214,7 +212,7 @@ export const scatterTimeSeriesData = {
 				},
 				{
 					key: new Date(2019, 0, 22),
-					value: 0
+					value: 20000
 				}
 			]
 		},

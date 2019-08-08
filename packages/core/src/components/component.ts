@@ -39,10 +39,10 @@ export class Component {
 		this._parent = parent;
 
 		if (this.type) {
-			this._parent.classed(this.type, true);
+			this._parent.classed(`cc-${this.type}`, true);
 
 			if (oldParent) {
-				oldParent.classed(this.type, false);
+				oldParent.classed(`cc-${this.type}`, false);
 			}
 		}
 	}
@@ -53,7 +53,7 @@ export class Component {
 
 	getContainerSVG() {
 		if (this.type) {
-			return this._services.domUtils.appendOrSelect(this._parent, `g.${this.type}`);
+			return this._services.domUtils.appendOrSelect(this._parent, `g.cc-${this.type}`);
 		}
 
 		return this._parent;

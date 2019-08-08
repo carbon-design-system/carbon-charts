@@ -7,7 +7,7 @@ import { ChartModel } from "./model";
 import { Component } from "./components/component";
 
 // Services
-import { DOMUtils, Events, Transitions } from "./services/index";
+import { Curves, DOMUtils, Events, Transitions } from "./services/index";
 
 export class Chart {
 	components: Array<Component>;
@@ -15,6 +15,7 @@ export class Chart {
 	model: ChartModel;
 
 	private services: any = {
+		curves: Curves,
 		domUtils: DOMUtils,
 		events: Events,
 		transitions: Transitions
