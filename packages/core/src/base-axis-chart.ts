@@ -10,9 +10,6 @@ import * as Configuration from "./configuration";
 import { ChartConfig, AxisChartOptions } from "./configuration";
 import { Tools } from "./tools";
 
-// Misc
-import ResizeObserver from "resize-observer-polyfill";
-
 export class BaseAxisChart extends BaseChart {
 	x: ScaleBand<any>;
 	y: ScaleLinear<any, any>;
@@ -78,7 +75,6 @@ export class BaseAxisChart extends BaseChart {
 		this.draw();
 
 		this.addDataPointEventListener();
-		this.gridResizeObserver();
 	}
 
 	update() {
@@ -179,22 +175,6 @@ export class BaseAxisChart extends BaseChart {
 			height: Math.max(computedChartSize.height, Configuration.charts.axisCharts.minHeight),
 			width: Math.max(computedChartSize.width, Configuration.charts.axisCharts.minWidth)
 		};
-	}
-
-	/**
-	 * Adds a resize observer to the x and y grid and resizes the backdrop on change
-	 */
-	gridResizeObserver() {
-		const gridWidth = this.holder.querySelector(".y.grid");
-		const gridHeight = this.holder.querySelector(".x.grid");
-
-		const resizeObserver = new ResizeObserver((entries) => {
-			this.drawBackdrop();
-		});
-
-		// watch resizing of both grids
-		resizeObserver.observe(gridWidth);
-		resizeObserver.observe(gridHeight);
 	}
 
 	resizeChart() {
@@ -634,6 +614,10 @@ export class BaseAxisChart extends BaseChart {
 			if (thresholds && thresholds.length > 0) {
 				this.addOrUpdateThresholds(g_yGrid, !noAnimation);
 			}
+
+			// use the set timeout to queue drawing the backdrop after the X and Y Grid have properly updated
+			// needed because there is a settimeout for repositioning the grid, this needs to run after that
+			setTimeout(() => this.drawBackdrop(), 0);
 		}, 0);
 	}
 
