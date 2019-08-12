@@ -2,6 +2,12 @@ module.exports = function (config) {
 	config.set({
 		plugins: ['karma-webpack', 'karma-jasmine', 'karma-chrome-launcher'],
 		browsers: ['ChromeHeadless'],
+		customLaunchers:{
+			HeadlessChrome:{
+				base: 'ChromeHeadless',
+				flags: ['--no-sandbox']
+			}
+		},
 		frameworks: ['jasmine'],
 		files: [{
 			pattern: '**/*.spec.ts',
