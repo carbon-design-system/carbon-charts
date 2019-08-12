@@ -16,32 +16,40 @@ import {
 	curveNatural,
 	curveStep,
 	curveStepAfter,
-	curveStepBefore
+	curveStepBefore,
+	// the imports below are needed because of typescript bug (error TS4029)
+	CurveBundleFactory,
+	CurveCardinalFactory,
+	CurveCatmullRomFactory,
+	CurveGenerator
 } from "d3-shape";
+
+// this import is needed because of typescript bug (error TS4029)
+import { Path } from "d3-path";
 
 // Internal Imports
 import { Service } from "./service";
 
 export class Curves extends Service {
 	curveTypes = {
-		"curveLinear": curveLinear,
-		"curveLinearClosed": curveLinearClosed,
-		"curveBasis": curveBasis,
-		"curveBasisClosed": curveBasisClosed,
-		"curveBasisOpen": curveBasisOpen,
-		"curveBundle": curveBundle,
-		"curveCardinal": curveCardinal,
-		"curveCardinalClosed": curveCardinalClosed,
-		"curveCardinalOpen": curveCardinalOpen,
-		"curveCatmullRom": curveCatmullRom,
-		"curveCatmullRomClosed": curveCatmullRomClosed,
-		"curveCatmullRomOpen": curveCatmullRomOpen,
-		"curveMonotoneX": curveMonotoneX,
-		"curveMonotoneY": curveMonotoneY,
-		"curveNatural": curveNatural,
-		"curveStep": curveStep,
-		"curveStepAfter": curveStepAfter,
-		"curveStepBefore": curveStepBefore
+		curveLinear,
+		curveLinearClosed,
+		curveBasis,
+		curveBasisClosed,
+		curveBasisOpen,
+		curveBundle,
+		curveCardinal,
+		curveCardinalClosed,
+		curveCardinalOpen,
+		curveCatmullRom,
+		curveCatmullRomClosed,
+		curveCatmullRomOpen,
+		curveMonotoneX,
+		curveMonotoneY,
+		curveNatural,
+		curveStep,
+		curveStepAfter,
+		curveStepBefore
 	};
 
 	getD3Curve() {
