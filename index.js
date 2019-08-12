@@ -1828,7 +1828,6 @@ var BaseAxisChart = /** @class */ (function (_super) {
         if (this.innerWrap.select(".axis-label.y").nodes().length > 0 || this.options.scales.y.title) {
             this.repositionYAxisTitle();
         }
-        this.drawBackdrop();
         this.dispatchEvent("resize");
     };
     /**************************************
@@ -2178,6 +2177,9 @@ var BaseAxisChart = /** @class */ (function (_super) {
             if (thresholds && thresholds.length > 0) {
                 _this.addOrUpdateThresholds(g_yGrid, !noAnimation);
             }
+            // use the set timeout to queue drawing the backdrop after the X and Y Grid have properly updated
+            // needed because there is a settimeout for repositioning the grid, this needs to run after that
+            setTimeout(function () { return _this.drawBackdrop(); }, 0);
         }, 0);
     };
     BaseAxisChart.prototype.cleanGrid = function (g) {
