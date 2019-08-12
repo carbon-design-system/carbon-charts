@@ -1,7 +1,7 @@
 // D3 Imports
 import { select } from "d3-selection";
 import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from "d3-scale";
-import { axisBottom, axisLeft, axisRight, AxisScale, AxisDomain } from "d3-axis";
+import { axisBottom, axisLeft, axisRight } from "d3-axis";
 import { min, max } from "d3-array";
 
 import { BaseChart } from "./base-chart";
@@ -189,7 +189,6 @@ export class BaseAxisChart extends BaseChart {
 			this.repositionYAxisTitle();
 		}
 
-		this.drawBackdrop();
 		this.dispatchEvent("resize");
 	}
 
@@ -615,6 +614,10 @@ export class BaseAxisChart extends BaseChart {
 			if (thresholds && thresholds.length > 0) {
 				this.addOrUpdateThresholds(g_yGrid, !noAnimation);
 			}
+
+			// use the set timeout to queue drawing the backdrop after the X and Y Grid have properly updated
+			// needed because there is a settimeout for repositioning the grid, this needs to run after that
+			setTimeout(() => this.drawBackdrop(), 0);
 		}, 0);
 	}
 
