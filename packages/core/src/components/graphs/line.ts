@@ -20,7 +20,7 @@ export class Line extends Component {
 		// D3 line generator function
 		this.lineGenerator = line()
 			.x((d, i) => bottomAxis.getValueFromScale(d, i))
-			.y((d: any) => leftAxis.getValueFromScale(d))
+			.y((d, i) => leftAxis.getValueFromScale(d, i))
 			.curve(this._services.curves.getD3Curve());
 
 		const gLines = svg.selectAll("g.lines")
