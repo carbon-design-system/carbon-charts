@@ -31,7 +31,7 @@ export class Scatter extends Component {
 			.classed("dot", true)
 			.attr("cx", (d, i) => xScale.getValueFromScale(d, i))
 			.transition(this._services.transitions.getDefaultTransition())
-			.attr("cy", d => this._model.get(AxisPositions.LEFT).getValueFromScale(d))
+			.attr("cy", (d, i) => this._model.get(AxisPositions.LEFT).getValueFromScale(d, i))
 			.attr("r", 4)
 			.attr("fill", d => this._model.getFillScale()[d.datasetLabel](d.label) as any)
 			.attr("fill-opacity", d => 0.2)
