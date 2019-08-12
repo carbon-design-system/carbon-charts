@@ -86,6 +86,10 @@ export class PieChart extends BaseChart {
 	initialDraw() {
 		this.setSVG();
 
+		// need to draw the title for pie and donut before draw() so that it calculates the right
+		// diameter for the graph to stay within the bounds
+		this.drawTitle();
+
 		// Add legend
 		this.addOrUpdateLegend();
 
@@ -99,9 +103,9 @@ export class PieChart extends BaseChart {
 	draw() {
 		const dataList = this.displayData.datasets[0].data;
 
-		const chartSize = this.getChartSize(this.container);
+		const chartSize = this._getChartSize(this.container);
 		const diameter = Math.min(chartSize.width, chartSize.height);
-		const radius: number = diameter / 2;
+		const radius: number = this.computeRadius();
 
 		select(this.holder).select("svg")
 			.attr("width", `${diameter}px`)
@@ -310,7 +314,7 @@ export class PieChart extends BaseChart {
 	}
 
 	resizeChart() {
-		const chartSize: any = this.getChartSize(this.container);
+		const chartSize: any = this._getChartSize(this.container);
 		const dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
 		const radius: number = this.computeRadius();
 
@@ -319,7 +323,7 @@ export class PieChart extends BaseChart {
 				.attr("width", `${dimensionToUseForScale}px`)
 				.attr("height", `${dimensionToUseForScale}px`);
 		this.innerWrap
-			.style("transform", `translate(${radius}px,${radius}px)`);
+			.attr("transform", `translate(${radius},${radius})`);
 
 		// Resize the arcs
 		this.arc = arc()
@@ -346,9 +350,23 @@ export class PieChart extends BaseChart {
 		this.positionLegend();
 	}
 
+	/**
+	 * The chart sizing function for pie and donut need to return the size of the
+	 * graph container while accounting for slice labels. Without adding padding, the
+	 * pie/donut will try to use all space for the circle and labels fall outside.
+	 * @param container
+	 */
+	protected _getChartSize(container) {
+		const containerSize = this.getChartSize(container);
+		return {
+			height: containerSize.height - Configuration.pie.chartPadding,
+			width: containerSize.width - Configuration.pie.chartPadding
+		};
+	}
+
 	// Helper functions
 	private computeRadius() {
-		const chartSize: any = this.getChartSize(this.container);
+		const chartSize: any = this._getChartSize(this.container);
 		const radius: number = Math.min(chartSize.width, chartSize.height) / 2;
 
 		return radius;

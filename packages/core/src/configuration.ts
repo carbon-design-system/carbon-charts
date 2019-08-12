@@ -520,7 +520,7 @@ export const charts = {
 	widthBreak: 600,
 	marginForLegendTop: 40,
 	title: {
-		marginBottom: 24
+		marginBottom: 8
 	},
 	magicRatio: 0.7,
 	magicMoreForY2Axis: 70,
@@ -660,7 +660,8 @@ export const pie = {
 	},
 	default: {
 		strokeWidth: 2
-	}
+	},
+	chartPadding: 20
 };
 
 /**
