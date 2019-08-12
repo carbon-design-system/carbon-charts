@@ -103,7 +103,7 @@ export class PieChart extends BaseChart {
 	draw() {
 		const dataList = this.displayData.datasets[0].data;
 
-		const chartSize = this._getChartSize(this.container);
+		const chartSize = this.getChartSize(this.container);
 		const diameter = Math.min(chartSize.width, chartSize.height);
 		const radius: number = this.computeRadius();
 
@@ -314,7 +314,7 @@ export class PieChart extends BaseChart {
 	}
 
 	resizeChart() {
-		const chartSize: any = this._getChartSize(this.container);
+		const chartSize: any = this.getChartSize(this.container);
 		const dimensionToUseForScale = Math.min(chartSize.width, chartSize.height);
 		const radius: number = this.computeRadius();
 
@@ -356,8 +356,8 @@ export class PieChart extends BaseChart {
 	 * pie/donut will try to use all space for the circle and labels fall outside.
 	 * @param container
 	 */
-	protected _getChartSize(container) {
-		const containerSize = this.getChartSize(container);
+	getChartSize(container) {
+		const containerSize = super.getChartSize(container);
 		return {
 			height: containerSize.height - Configuration.pie.chartPadding,
 			width: containerSize.width - Configuration.pie.chartPadding
@@ -366,7 +366,7 @@ export class PieChart extends BaseChart {
 
 	// Helper functions
 	private computeRadius() {
-		const chartSize: any = this._getChartSize(this.container);
+		const chartSize: any = this.getChartSize(this.container);
 		const radius: number = Math.min(chartSize.width, chartSize.height) / 2;
 
 		return radius;
