@@ -121,7 +121,7 @@ export class DonutChart extends PieChart {
 
 			if (this.center) {
 				// Trigger resize on DonutCenter as well
-				this.center.resize(this.innerWrap, this.getChartSize(this.container));
+				this.center.resize(this.innerWrap, this._getChartSize(this.container));
 			}
 		}
 	}
