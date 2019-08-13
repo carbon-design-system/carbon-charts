@@ -1,5 +1,5 @@
 // Internal Imports
-import { AxisPositions } from "../../interfaces";
+import { AxisPositions, AxisTypes } from "../../interfaces";
 import { Component } from "../component";
 
 // D3 Imports
@@ -14,13 +14,10 @@ export class Line extends Component {
 	render() {
 		const svg = this.getContainerSVG();
 
-		const bottomAxis = this._model.get(AxisPositions.BOTTOM);
-		const leftAxis = this._model.get(AxisPositions.LEFT);
-
 		// D3 line generator function
 		this.lineGenerator = line()
-			.x((d, i) => bottomAxis.getValueFromScale(d, i))
-			.y((d, i) => leftAxis.getValueFromScale(d, i))
+			.x((d, i) => this._services.axes.getXValue(d, i))
+			.y((d, i) => this._services.axes.getYValue(d, i))
 			.curve(this._services.curves.getD3Curve());
 
 		const gLines = svg.selectAll("g.lines")

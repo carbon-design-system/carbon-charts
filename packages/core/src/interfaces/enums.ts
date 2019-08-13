@@ -20,6 +20,10 @@ export enum AxisPositions {
 	BOTTOM = "bottom"
 }
 
+export enum AxisTypes {
+	PRIMARY = "primary",
+	SECONDARY = "secondary"
+}
 
 /**
  * enum of all possible scale types
