@@ -359,8 +359,8 @@ export class PieChart extends BaseChart {
 	getChartSize(container) {
 		const containerSize = super.getChartSize(container);
 		return {
-			height: containerSize.height - Configuration.pie.chartPadding,
-			width: containerSize.width - Configuration.pie.chartPadding
+			height: containerSize.height - Configuration.pie.padding,
+			width: containerSize.width - Configuration.pie.padding
 		};
 	}
 
