@@ -1,6 +1,7 @@
 import {
 	BarChart,
 	LineChart,
+	AreaChart,
 	PieChart,
 	DonutChart,
 	ComboChart,
@@ -34,7 +35,8 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		if (Math.random() > 0.5
 			|| chartType.indexOf("stacked") !== -1
 			|| chartType.indexOf("pie") !== -1
-			|| chartType.indexOf("donut") !== -1) {
+			|| chartType.indexOf("donut") !== -1
+			|| chartType.indexOf("area") !== -1) {
 			return Math.floor(result);
 		} else {
 			return Math.floor(result) * -1;
@@ -198,6 +200,18 @@ chartTypes.forEach(type => {
 				);
 
 				setDemoActionsEventListener(type.id, type.data);
+				break;
+			case "area":
+				classyCharts[type.id] = new AreaChart(
+					classyContainer,
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id}),
+					}
+				);
+
+				setDemoActionsEventListener(type.id, type.data);
+
 				break;
 			case "curved-line":
 			case "line":

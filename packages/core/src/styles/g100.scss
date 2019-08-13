@@ -3,7 +3,8 @@
 .carbon--theme--g100 {
 	@include carbon--theme($carbon--theme--g100) {
 		svg.chart-svg {
-			&.line {
+			&.line,
+			&.area {
 				circle.dot {
 					fill: $ui-01;
 				}

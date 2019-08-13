@@ -2,9 +2,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import LineChart from "../src/line-chart";
+import AreaChart from "../src/area-chart";
 import {
 	curvedLineData,
 	curvedLineOptions,
+	areaData,
 	lineData,
 	lineOptions
 } from "./line-demo-data";
@@ -13,6 +15,13 @@ const lineStories = storiesOf("Line", module);
 lineStories.add("Basic", () => (
 	<LineChart
 		data={lineData}
+		options={lineOptions}
+	/>
+));
+
+lineStories.add("Area", () => (
+	<AreaChart
+		data={areaData}
 		options={lineOptions}
 	/>
 ));

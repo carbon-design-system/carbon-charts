@@ -61,6 +61,24 @@ export const curvedLineOptions = {
 };
 
 
+export const areaData = {
+	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			backgroundColors: [colors[0]],
+			data: [
+				0,
+				20000,
+				40000,
+				60000,
+				80000
+			]
+		}
+	]
+};
+
+
 export const lineData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [

@@ -16,6 +16,9 @@ const {
 	lineData,
 	lineOptions,
 	scatterData,
+	// Area
+	areaOptions,
+	areaData,
 	// Combo
 	comboData,
 	comboOptions
@@ -69,6 +72,12 @@ export const chartTypes = [
 		name: "Line",
 		options: lineOptions,
 		data: lineData
+	},
+	{
+		id: "area",
+		name: "Area",
+		options: areaOptions,
+		data: areaData
 	},
 	{
 		id: "line-step",

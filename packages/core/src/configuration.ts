@@ -14,6 +14,7 @@ import * as colorPalettes from "./services/colorPalettes";
 export enum ChartType {
 	BAR = "bar",
 	LINE = "line",
+	AREA = "area",
 	SCATTER = "scatter",
 	PIE = "pie",
 	DONUT = "donut",
@@ -353,6 +354,37 @@ const lineOptions: LineChartOptions = Tools.merge({}, axisOptions, {
 });
 
 /**
+ * options specific to area charts
+ */
+export interface AreaChartOptions extends AxisChartOptions {
+	/**
+	 * options for the curve of the line
+	 */
+	curve?: string | {
+		name: string;
+	};
+	/**
+	 * options for the line points
+	 */
+	points?: {
+		/**
+		 * sets the radius of the point
+		 */
+		radius: number;
+		fillOpacity?: number;
+	};
+}
+/**
+ * options specific to area charts
+ */
+const areaOptions: AreaChartOptions = Tools.merge({}, axisOptions, {
+	points: {
+		// default point radius to 3
+		radius: 3
+	}
+});
+
+/**
  * options specific to scatter charts
  */
 export interface ScatterChartOptions extends AxisChartOptions {
@@ -432,6 +464,7 @@ export const options = {
 	BASE: baseOptions,
 	AXIS: axisOptions,
 	LINE: lineOptions,
+	AREA: areaOptions,
 	SCATTER: scatterOptions,
 	BAR: barOptions,
 	STACKED_BAR: stackedBarOptions,

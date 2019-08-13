@@ -7,6 +7,7 @@ import { PieChart } from "./pie-chart";
 import { DonutChart, DonutCenter } from "./donut-chart";
 import { BarChart } from "./bar-chart";
 import { LineChart } from "./line-chart";
+import { AreaChart } from "./area-chart";
 import { ComboChart } from "./combo-chart";
 import { ScatterChart } from "./scatter-chart";
 
@@ -24,6 +25,7 @@ export {
 	DonutCenter,
 	BarChart,
 	LineChart,
+	AreaChart,
 	ComboChart,
 	ScatterChart
 };

@@ -5,7 +5,8 @@
 		fill: $ui-01;
 	}
 
-	svg.chart-svg.line {
+	svg.chart-svg.line,
+	svg.chart-svg.area {
 		circle.dot {
 			fill: $ui-01;
 		}

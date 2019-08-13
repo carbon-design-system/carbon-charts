@@ -2,10 +2,12 @@ import { storiesOf } from "@storybook/angular";
 
 import { ChartsModule } from "../src/charts.module";
 import { LineComponent } from "./line/line.component";
+import { AreaComponent } from "./area/area.component";
 
 import {
 	curvedLineData,
 	curvedLineOptions,
+	areaData,
 	lineData,
 	lineOptions
 } from "./line-demo-data";
@@ -18,6 +20,17 @@ lineStories.add("Basic", () => ({
 	},
 	props: {
 		lineData: lineData,
+		lineOptions: lineOptions
+	}
+}));
+
+lineStories.add("Area", () => ({
+	component: AreaComponent,
+	moduleMetadata: {
+		imports: [ChartsModule]
+	},
+	props: {
+		areaData: areaData,
 		lineOptions: lineOptions
 	}
 }));

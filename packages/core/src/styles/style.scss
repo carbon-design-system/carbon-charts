@@ -62,13 +62,18 @@ div.chart-holder {
 
 		path {
 			&.line {
-				fill: none;
 				stroke-width: 2;
 
 				&:hover {
 					cursor: default;
 				}
 			}
+		}
+		&:not(.area) path.line {
+			fill: none;
+		}
+		&.area path.line {
+			stroke-width: 1px;
 		}
 
 		circle {
