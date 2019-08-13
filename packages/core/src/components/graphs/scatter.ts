@@ -1,5 +1,5 @@
 // Internal Imports
-import { AxisPositions } from "../../interfaces";
+import { AxisPositions, AxisTypes } from "../../interfaces";
 import { Component } from "../component";
 
 // D3 Imports
@@ -18,7 +18,7 @@ export class Scatter extends Component {
 			.append("g")
 				.classed("dots", true);
 
-		const xScale = this._model.get(AxisPositions.BOTTOM);
+		const xScale = this._model.get(AxisTypes.SECONDARY);
 		const dots = dotGroupsEnter.merge(dotGroups)
 			.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i));
@@ -29,9 +29,9 @@ export class Scatter extends Component {
 
 		dotsEnter.merge(dots)
 			.classed("dot", true)
-			.attr("cx", (d, i) => xScale.getValueFromScale(d, i))
+			.attr("cx", (d, i) => this._services.axes.getXValue(d, i))
 			.transition(this._services.transitions.getDefaultTransition())
-			.attr("cy", (d, i) => this._model.get(AxisPositions.LEFT).getValueFromScale(d, i))
+			.attr("cy", (d, i) => this._services.axes.getYValue(d, i))
 			.attr("r", 4)
 			.attr("fill", d => this._model.getFillScale()[d.datasetLabel](d.label) as any)
 			.attr("fill-opacity", d => 0.2)

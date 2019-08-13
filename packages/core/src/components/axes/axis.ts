@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
-import { ModelStateKeys, AxisPositions, ScaleTypes } from "../../interfaces";
+import { ModelStateKeys, AxisPositions, ScaleTypes, AxisTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -55,9 +55,21 @@ export class Axis extends Component {
 
 		// If scale doesn't exist in the model, store it
 		if (!this._model.get(position)) {
-			this._model.set({
+			const modelUpdates = {
 				[position]: this
-			});
+			};
+
+			if (scaleOptions) {
+				if (scaleOptions.primary === true) {
+					modelUpdates[AxisTypes.PRIMARY] = this;
+				}
+
+				if (scaleOptions.secondary === true) {
+					modelUpdates[AxisTypes.SECONDARY] = this;
+				}
+			}
+
+			this._model.set(modelUpdates);
 		}
 
 		this.scale = scaleFunction;

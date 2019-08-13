@@ -118,7 +118,7 @@ export class DOMUtils extends Service {
 	debounce(ms, fn) {
 		let timer;
 
-		return function () {
+		return function() {
 			clearTimeout(timer);
 			const args = Array.prototype.slice.call(arguments);
 			args.unshift(this);
