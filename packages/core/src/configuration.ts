@@ -661,7 +661,7 @@ export const pie = {
 	default: {
 		strokeWidth: 2
 	},
-	chartPadding: 20
+	padding: 30
 };
 
 /**
