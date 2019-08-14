@@ -29,13 +29,6 @@ export enum ChartTheme {
 	G90 = "g90",
 	G10 = "g10"
 }
-/**
- * enum of all possible tooltip sizes
- */
-export enum TooltipSize {
-	COMPACT = "compact",
-	FULL = ""
-}
 
 /**
  * enum of all possible threshold themes
@@ -69,6 +62,21 @@ export interface ChartOverlayOptions {
 		loading: string;
 		noData: string;
 	};
+}
+
+export interface TooltipOptions {
+	/**
+	 * a function to format the tooltip value contents
+	 */
+	valueFormatter: Function;
+	/**
+	 * elements onto which a hover or click would not trigger the tooltip to hide
+	 */
+	targetsToSkip: Array<String>;
+	/**
+	 * custom HTML function to create a single or multipoint tooltip
+	 */
+	html: Function;
 }
 
 /**
@@ -110,24 +118,7 @@ export interface BaseChartOptions {
 	/**
 	 * tooltip configuration
 	 */
-	tooltip?: {
-		/**
-		 * specify the size of the tooltip
-		 */
-		size: TooltipSize;
-		/**
-		 * a function to format the tooltip contents
-		 */
-		formatter: Function;
-		/**
-		 * elements onto which a hover or click would not trigger the tooltip to hide
-		 */
-		targetsToSkip: Array<String>;
-		/**
-		 * custom HTML content for tooltip provided by user
-		 */
-		customHTML?: string;
-	};
+	tooltip?: TooltipOptions;
 	overlay?: ChartOverlayOptions;
 	/**
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
@@ -158,9 +149,9 @@ const baseOptions: BaseChartOptions = {
 	containerResizable: true,
 	colors: colorPalettes.DEFAULT,
 	tooltip: {
-		size: TooltipSize.FULL,
-		formatter: null,
-		targetsToSkip: ["rect", "circle", "path"]
+		valueFormatter: null,
+		targetsToSkip: ["rect", "circle", "path"],
+		html: null,
 	},
 	theme: ChartTheme.WHITE,
 	overlay: {
@@ -291,6 +282,10 @@ export interface Axis {
 	y2: ScaleLinear<any, any>;
 }
 
+export interface AxisChartTooltipOptions extends TooltipOptions {
+	gridline?: boolean;
+}
+
 /**
  * Options common to any chart with an axis
  */
@@ -300,7 +295,9 @@ export interface AxisChartOptions extends BaseChartOptions {
 	 */
 	scales?: Scales;
 	axis?: Axis;
+	tooltip?: AxisChartTooltipOptions;
 }
+
 /**
  * Options common to any chart with an axis
  */
@@ -706,6 +703,12 @@ export const legend = {
  * Tooltip options
  */
 export const tooltip = {
+	fadeIn: {
+		duration: 250
+	},
+	fadeOut: {
+		duration: 250
+	},
 	dataLabel: {
 		width: 200,
 		arrowWidth: 10,
@@ -714,24 +717,9 @@ export const tooltip = {
 		magicTop2: 22,
 		magicLeft1: 11,
 		magicLeft2: 10,
-		size: {
-			COMPACT: "compact"
-		},
-		fadeIn: {
-			duration: 250
-		},
-		fadeOut: {
-			duration: 250
-		},
 	},
 	axisTooltip: {
-		marginLeft: 4,
 		axisThreshold: 0.25,
-		horizontalOffset: 12,
-		stackedPadding: 2,
-		fadeOut: {
-			duration: 80
-		},
 	},
 
 };

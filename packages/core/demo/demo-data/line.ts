@@ -37,7 +37,7 @@ export const curvedLineData = {
 				34234
 			]
 		}
-	]
+	],
 };
 
 export const curvedLineOptions = {
@@ -65,7 +65,10 @@ export const curvedLineOptions = {
 	legendClickable: true,
 	containerResizable: true,
 	title: "Line Chart",
-	theme: getTheme()
+	theme: getTheme(),
+	tooltip: {
+		gridline: true
+	}
 };
 
 
@@ -138,7 +141,11 @@ export const lineOptions = {
 	legendClickable: true,
 	containerResizable: true,
 	title: "Line Chart",
-	theme: getTheme()
+	theme: getTheme(),
+	tooltip: {
+		//html: (d) => { console.log(d); return `<p> hello </p>`; },
+		gridline: true
+	}
 };
 
 export const scatterData = {

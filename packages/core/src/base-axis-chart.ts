@@ -1,5 +1,5 @@
 // D3 Imports
-import { select } from "d3-selection";
+import { select, mouse } from "d3-selection";
 import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, AxisScale, AxisDomain } from "d3-axis";
 import { min, max } from "d3-array";
@@ -15,6 +15,7 @@ export class BaseAxisChart extends BaseChart {
 	y: ScaleLinear<any, any>;
 	y2: ScaleLinear<any, any>;
 	thresholdDimensions: any;
+	gridlineThreshold;
 
 	options: any = Tools.merge({}, Configuration.options.AXIS);
 
@@ -74,7 +75,14 @@ export class BaseAxisChart extends BaseChart {
 
 		this.draw();
 
+
+
 		this.addDataPointEventListener();
+
+		// check if gridline tooltips are set on
+		if (this.options.tooltip.gridline) {
+			this.addGridXEventListener();
+		}
 	}
 
 	update() {
@@ -693,52 +701,130 @@ export class BaseAxisChart extends BaseChart {
 		return largestHeight;
 	}
 
-	/**************************************
-	 *  Events & User interactions        *
-	 *************************************/
-	addDataPointEventListener() {
-		console.warn("You should implement your own `addDataPointEventListener()` function.");
-	}
-
-	/**************************************
-	 *  Gridline tooltip functions        *
-	 *************************************/
-
-	/**
-	 * Shows the gridline tooltips for the datapoints supplied
-	 * @param d Data points to create tooltips
-	 */
-	showGridlineTooltip(d) {
-		const tooltips = this.getGridlineTooltipHTML(d);
-		// if tooltip is supplied both arguments, should default to using single data tooltip rather than gridline
-		this.tooltip.show(null, tooltips);
-	}
-
-	/**
-	 * Gets the tooltip html for all points and returns an array containing the (data) position and html for the tooltip.
-	 * @param points the points that need to be highlighted on the chart with a tooltip
-	 */
-	getGridlineTooltipHTML = points => {
-		const datapoints = new Array();
-		const self = this;
-
-		// generate html structure for each datapoint using the dataset color and value
-		points.each(function(d) {
-			const indicatorColor = self.getStrokeColor(d.datasetLabel, d.label , d.value);
-			const dataPosition = {x: this.attributes.cx.value, y: this.attributes.cy.value};
-			const html = self.generateGridlineTooltipHTML(indicatorColor, d.value);
-			datapoints.push({dataPosition, html});
-		});
-
-		return datapoints;
-	}
-
 	/**
 	 * Each gridline tooltip has an indicator color for the dataset and the value at the highlighted gridline.
 	 * @param color the color associated with the dataset
 	 * @param value the value of the datapoint
 	 */
-	generateGridlineTooltipHTML = (color: String, value: any) => {
-		return `<a style="background-color:${color}" class="tooltip-color"></a><p>${value}</p>`;
+	generateTooltipHTML = ( label: any, value: any, color?: String) => {
+		return `<div class="datapoint-tooltip">
+			<a style="background-color:${color}" class="tooltip-color"></a>
+			<p>${value}</p>
+			</div>`;
 	}
+
+	/**
+	 * Filter the gridlines using the threshold to find the ones that should be active (within threshold of mouse pos)
+	 * Used to apply active styles for multipoint tooltips.
+	 * @param pos the mouse position
+	 */
+	getActiveGridLines(pos) {
+		const self = this;
+		const gridlinesX = this.svg.selectAll(".x.grid .tick")
+		.filter(function() {
+			const translations = Tools.getTranslationValues(this);
+
+			// threshold for when to display a gridline tooltip
+			const bounds = {
+				min: +translations.tx - +self.gridlineThreshold,
+				max: +translations.tx + +self.gridlineThreshold };
+
+			return (bounds.min <= pos[0] && pos[0] <= bounds.max) ? this : null;
+		});
+
+		return gridlinesX.empty() ? null : gridlinesX;
+	}
+
+	/**
+	 * Gets the datapoints associated with the label.
+	 * @param d domain label
+	 */
+	getDataWithDomain(d: any) {
+		console.warn("Each Chart needs it's own getDataWithDomain() function until refactor ");
+	}
+
+	/**
+	 * Gets Data at the given X value.
+	 * @param x x position value
+	 */
+	getDataWithXValue(x: any) {
+		console.warn("Each Chart needs it's own getDataWithXValue() function until refactor ");
+	}
+
+	/**************************************
+	 *  Events & User interactions        *
+	 *************************************/
+
+	addDataPointEventListener() {
+		console.warn("You should implement your own `addDataPointEventListener()` function.");
+	}
+
+	/**
+	 * Sets the threshold for the gridline tooltips. On resize, the threshold needs to be
+	 * updated.
+	 */
+	setGridlineThreshold() {
+		const allTicks = this.svg.selectAll(".x.grid");
+
+		// select the first and the second tick to calculate the distance between
+		const first = allTicks.select(".tick");
+		const second = allTicks.select(".tick + g.tick");
+
+		// get space between axis grid ticks
+		const gridSpacing = (+Tools.getTranslationValues(second.node()).tx - +Tools.getTranslationValues(first.node()).tx);
+
+		// adjust the threshold for the tooltips
+		this.gridlineThreshold = gridSpacing * Configuration.tooltip.axisTooltip.axisThreshold;
+	}
+
+	/**
+	 * Adds the listener on the X grid to trigger multiple point tooltips along the x axis.
+	 */
+	addGridXEventListener() {
+		const self = this;
+		const grid = Tools.appendOrSelect(this.svg, "rect.chart-grid-backdrop");
+
+		this.setGridlineThreshold();
+
+		grid
+		.on("mousemove", function() {
+			const chartContainer = this.parentNode;
+			const pos = mouse(chartContainer);
+
+			const allgridlines = self.svg.selectAll(".x.grid .tick");
+			// remove the styling on the lines
+			allgridlines.classed("active", false);
+
+			const activeGridlines = self.getActiveGridLines(pos);
+			if (!activeGridlines) {
+				self.hideTooltip();
+				return;
+			}
+
+			// set active class to control dasharray and theme colors
+			activeGridlines
+			.classed("active", true);
+
+			// get the items that should be highlighted
+			let highlightItems;
+			activeGridlines.each(function(d) {
+				if (d) {
+					// prioritize using domain to get all points
+					// in case there are axis lines without labels
+					highlightItems = self.getDataWithDomain(d);
+				} else {
+					const translatePos = Tools.getTranslationValues(this);
+					highlightItems = self.getDataWithXValue(+translatePos.tx - 0.5);
+				}
+			});
+			self.showTooltip(highlightItems.data());
+		})
+		.on("mouseout", function() {
+			self.svg.selectAll(".x.grid .tick")
+			.classed("active", false);
+			self.hideTooltip();
+		});
+	}
+
+
 }

@@ -284,6 +284,18 @@ export class PieChart extends BaseChart {
 		}
 	}
 
+	/**
+	 * Each gridline tooltip has an indicator color for the dataset and the value at the highlighted gridline.
+	 * @param color the color associated with the dataset
+	 * @param value the value of the datapoint
+	 */
+	// generateTooltipHTML = ( label:any, value: any, color?: String) => {
+	// 	return `<div class="datapoint-tooltip">
+	// 		<a style="background-color:${color}" class="tooltip-color"></a>
+	// 		<p>${value}</p>
+	// 		</div>`;
+	// }
+
 	getTooltipHTML = d => this.generateTooltipHTML(d.data.label, d.value.toLocaleString());
 
 	// TODO - Refactor
@@ -304,7 +316,7 @@ export class PieChart extends BaseChart {
 				self.showTooltip(d);
 				self.reduceOpacity(this);
 			})
-			.on("mousemove", d => self.tooltip.positionMouseTooltip())
+			.on("mousemove", d => self.tooltip.positionTooltip())
 			.on("mouseout", function(d) {
 				select(this)
 					.attr("stroke-width", accessibility ? Configuration.pie.default.strokeWidth : Configuration.pie.mouseout.strokeWidth)

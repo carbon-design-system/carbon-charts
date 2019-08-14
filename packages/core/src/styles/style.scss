@@ -274,50 +274,51 @@ div.chart-overlay {
 }
 
 .tooltip {
-	display: block;
+	display: inline;
 	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
 	@include fonts();
-	font-size: 12px;
 	font-weight: 300;
 	position: absolute;
-	padding: 4px 8px 4px 8px;
-	min-width: 80px;
-	max-width: 70%;
 	word-wrap: break-word;
 	z-index: 1059;
-
-	&.gridline-tooltip {
-		padding: 4px;
-		width: auto;
-		min-width: 20px;
-		max-width: 128px;
-
-		.tooltip-color {
-			position: absolute;
-			left:0;
-			top: 0;
-			width: 4px;
-			height: 100%;
+	.content-box {
+		.datapoint-tooltip {
+			padding: 4px;
 		}
-
-		p {
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			margin-left: 4px;
-			line-height: 16px;
+		ul.multi-tooltip li {
+			padding: 2px;
+			padding-left: 4px;
+			list-style: none;
+			position: relative;
+			&:not(:last-child){
+				margin-bottom: 2px;
+			}
 		}
+	}
+
+
+	width: auto;
+	min-width: 20px;
+	max-width: 128px;
+
+	.tooltip-color {
+		position: absolute;
+		left:0;
+		top: 0;
+		width: 4px;
+		height: 100%;
 	}
 
 	p {
-		margin: 0;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		margin-left: 4px;
+		line-height: 16px;
 		font-size: 12px;
-
-		&.bignum {
-			font-size: 19px;
-			font-weight: 600;
-		}
+		display: inline;
 	}
+
 
 	b {
 		font-weight: 600;

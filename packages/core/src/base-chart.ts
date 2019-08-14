@@ -837,39 +837,76 @@ export class BaseChart {
 		this.tooltip.hide();
 	}
 
-	generateTooltipHTML(label, value) {
-		if (this.options.tooltip.size === Configuration.tooltip.dataLabel.size.COMPACT) {
-			return `<b>${label}:</b> ${value}<br/>`;
-		} else {
-			return `
-				<p class='bignum'>${label}</p>
-				<p>${value}</p>
-			`;
-		}
+	/**
+	 * Each gridline tooltip has an indicator color for the dataset and the value at the highlighted gridline.
+	 * @param color the color associated with the dataset
+	 * @param value the value of the datapoint
+	 */
+	generateTooltipHTML = (label: any, value: any, color?: string) => {
+		return `<p class='bignum'>${label}</p><p>${value}</p>`;
 	}
 
 	getTooltipHTML = d => {
-		const formattedValue = this.options.tooltip.formatter ? this.options.tooltip.formatter(d.value) : d.value.toLocaleString("en");
+		const formattedValue = this.options.tooltip.valueFormatter ? this.options.tooltip.valueFormatter(d.value) : d.value.toLocaleString("en");
+		let indicatorColor;
 		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
-			return this.generateTooltipHTML(d.label, formattedValue);
+			indicatorColor = this.getStrokeColor(d.datasetLabel, d.label);
+			return this.generateTooltipHTML( d.label, formattedValue, indicatorColor);
 		}
-
-		return this.generateTooltipHTML(d.datasetLabel, formattedValue);
+		indicatorColor = this.getStrokeColor(d.datasetLabel);
+		return this.generateTooltipHTML( d.datasetLabel, formattedValue, indicatorColor);
 	}
 
+	/**
+	 * Checks whether there is a custom html function for tooltips or defaults to carbon styles.
+	 * @param d The data point(s) to be passed into the tooltip.
+	 * @param clickedElement
+	 */
 	showTooltip(d, clickedElement?: Element) {
 		// Reset opacity of all elements in the chart
 		this.resetOpacity();
 
-		const { customHTML } = this.options.tooltip;
+		const { html } = this.options.tooltip;
 		let contentHTML;
-		if (customHTML) {
-			contentHTML = customHTML;
+		if (html) {
+			// use the injected html constructor
+			// it can return html or a array of html
+			contentHTML = html(d);
 		} else {
-			contentHTML = this.getTooltipHTML(d);
+			if (d.length > 1 ) {
+				// create a multipoint tooltip
+				contentHTML = this.getMultiPointTooltipHTML(d);
+			} else {
+				// create a single datapoint tooltip
+				contentHTML = this.getTooltipHTML(d);
+			}
 		}
 
 		this.tooltip.show(contentHTML);
+	}
+
+	/**************************************
+	 *  Multi-Point tooltip functions        *
+	 *************************************/
+
+	/**
+	 * Gets the tooltip html for all points and returns html for the tooltip.
+	 * @param points the points that need to be highlighted on the chart with a tooltip
+	 */
+	getMultiPointTooltipHTML = points => {
+		const self = this;
+
+		// sort the tooltips so the list matches the graph
+		points.sort(function (a, b) {
+			return a.value > b.value ? -1 : 1;
+		});
+
+		let listHTML = "<ul class='multi-tooltip'>";
+		points.forEach(datapoint => {
+			listHTML += `<li>${self.getTooltipHTML(datapoint)}</li>`;
+		});
+
+		return listHTML + "</ul>" ;
 	}
 
 	getFillScale() {

@@ -233,7 +233,7 @@ export class StackedBarChart extends BaseAxisChart {
 				self.showTooltip(d, this);
 				self.reduceOpacity(this);
 			})
-			.on("mousemove", d => self.tooltip.positionMouseTooltip())
+			.on("mousemove", d => self.tooltip.positionTooltip())
 			.on("mouseout", function(d) {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.bars.mouseout;
 				select(this)
