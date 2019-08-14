@@ -55,9 +55,7 @@ export class BaseChart {
 
 	constructor(holder: Element, configs: ChartConfig<BaseChartOptions>) {
 		this.id = `chart-${BaseChart.chartCount++}`;
-		if (configs.options) {
-			this.options = Tools.merge({}, this.options, configs.options);
-		}
+		this.options = Tools.merge({}, this.options, Tools.getProperty(configs, "options"));
 
 		// Save holder element reference, and initialize it by applying appropriate styling
 		this.holder = holder;

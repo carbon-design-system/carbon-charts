@@ -21,14 +21,12 @@ export class BaseAxisChart extends BaseChart {
 	constructor(holder: Element, configs: ChartConfig<AxisChartOptions>) {
 		super(holder, configs);
 
-		if (configs.options) {
-			this.options = Tools.merge({}, this.options, configs.options);
-			const { axis } = configs.options;
-			if (axis) {
-				this.x = axis.x;
-				this.y = axis.y;
-				this.y2 = axis.y2;
-			}
+		this.options = Tools.merge({}, this.options, Tools.getProperty(configs, "options"));
+		const { axis } = configs.options;
+		if (axis) {
+			this.x = axis.x;
+			this.y = axis.y;
+			this.y2 = axis.y2;
 		}
 	}
 

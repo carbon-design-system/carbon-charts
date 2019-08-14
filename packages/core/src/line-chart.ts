@@ -12,17 +12,13 @@ import { Tools } from "./tools";
 export class LineChart extends ScatterChart {
 	lineGenerator: any;
 
-	options: LineChartOptions;
+	options: LineChartOptions = Tools.merge({}, Configuration.options.LINE);
 
 	constructor(holder: Element, configs: ChartConfig<LineChartOptions>) {
 		super(holder, configs);
 
 		// initialize options
-		if (configs.options) {
-			this.options = Tools.merge({}, Configuration.options.LINE, configs.options);
-		} else {
-			this.options = Tools.merge({}, Configuration.options.LINE);
-		}
+		this.options = Tools.merge(this.options, Tools.getProperty(configs, "options"));
 
 		this.options.type = ChartType.LINE;
 	}

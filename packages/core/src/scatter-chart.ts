@@ -12,6 +12,9 @@ export class ScatterChart extends BaseAxisChart {
 	constructor(holder: Element, configs: ChartConfig<ScatterChartOptions>) {
 		super(holder, configs);
 
+		// initalize options
+		this.options = Tools.merge(this.options, Tools.getProperty(configs, "options"));
+
 		this.options.type = ChartType.SCATTER;
 	}
 

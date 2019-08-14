@@ -71,11 +71,7 @@ export class BarChart extends BaseAxisChart {
 		super(holder, configs);
 
 		// initialize options
-		if (configs.options) {
-			this.options = Tools.merge({}, Configuration.options.BAR, configs.options);
-		} else {
-			this.options = Tools.merge({}, Configuration.options.BAR);
-		}
+		this.options = Tools.merge({}, Tools.getProperty(configs, "options"), Configuration.options.BAR);
 
 		// To be used for combo chart instances of a bar chart
 		const { axis } = configs.options;
