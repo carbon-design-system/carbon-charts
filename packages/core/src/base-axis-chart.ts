@@ -85,6 +85,7 @@ export class BaseAxisChart extends BaseChart {
 		this.setXAxis();
 		this.setYScale();
 		this.setYAxis();
+		this.drawBackdrop();
 		this.interpolateValues(this.displayData);
 	}
 
@@ -189,7 +190,7 @@ export class BaseAxisChart extends BaseChart {
 		}
 
 		this.dispatchEvent("resize");
-		setTimeout(() => this.drawBackdrop(), 0);
+		this.drawBackdrop();
 	}
 
 	/**************************************
@@ -483,35 +484,18 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	/**
-	 * Returns an object with bounding box properties for the Chart's grid.
-	 * The grid is different than the overall chart size (which includes axis titles and other elements).
-	 * Uses the axis to get a combined bounding box for the chart's grid.
-	 */
-	getGridContainer() {
-		const xAxis = this.innerWrap.selectAll(".x path.domain").node().getBBox();
-		const yAxis = this.innerWrap.selectAll(".y path.domain").node().getBBox();
-
-		const gridBox = {
-			height: yAxis.height,
-			width: xAxis.width,
-			x: yAxis.x,
-			y: yAxis.y
-		};
-		return gridBox;
-	}
-
-	/**
 	 * Draws the background for the chart grid. Uses the axis to get the bounds and position of the backdrop.
 	 */
 	drawBackdrop() {
 		const backdrop = Tools.appendOrSelect(this.innerWrap, "rect.chart-grid-backdrop");
-		const gridContainer = this.getGridContainer();
+		const [xScaleStart, xScaleEnd] = this.x.range();
+		const [yScaleEnd, yScaleStart] = this.y.range();
 
 		backdrop
-		.attr("x", gridContainer.x)
-		.attr("y", gridContainer.y)
-		.attr("width", gridContainer.width)
-		.attr("height", gridContainer.height)
+		.attr("x", xScaleStart)
+		.attr("y", yScaleStart)
+		.attr("width", xScaleEnd)
+		.attr("height", yScaleEnd)
 		.lower();
 	}
 
@@ -630,7 +614,6 @@ export class BaseAxisChart extends BaseChart {
 			if (thresholds && thresholds.length > 0) {
 				this.addOrUpdateThresholds(g_yGrid, !noAnimation);
 			}
-			this.drawBackdrop();
 		}, 0);
 	}
 
