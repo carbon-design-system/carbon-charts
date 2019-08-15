@@ -35,7 +35,7 @@ export class Line extends Component {
 			.attr("stroke", function(d) {
 				const parentDatum = select(this.parentNode).datum() as any;
 
-				return self._model.getStrokeColor(parentDatum.label)
+				return self._model.getStrokeColor(parentDatum.label);
 			})
 			.datum(function(d) {
 				const parentDatum = select(this.parentNode).datum() as any;
