@@ -85,7 +85,6 @@ export class BaseAxisChart extends BaseChart {
 		this.setXAxis();
 		this.setYScale();
 		this.setYAxis();
-		this.drawBackdrop();
 		this.interpolateValues(this.displayData);
 	}
 
@@ -190,6 +189,7 @@ export class BaseAxisChart extends BaseChart {
 		}
 
 		this.dispatchEvent("resize");
+		setTimeout(() => this.drawBackdrop(), 0);
 	}
 
 	/**************************************
@@ -483,19 +483,35 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	/**
-	 * Draws the background for the chart grid
+	 * Returns an object with bounding box properties for the Chart's grid.
+	 * The grid is different than the overall chart size (which includes axis titles and other elements).
+	 * Uses the axis to get a combined bounding box for the chart's grid.
+	 */
+	getGridContainer() {
+		const xAxis = this.innerWrap.selectAll(".x path.domain").node().getBBox();
+		const yAxis = this.innerWrap.selectAll(".y path.domain").node().getBBox();
+
+		const gridBox = {
+			height: yAxis.height,
+			width: xAxis.width,
+			x: yAxis.x,
+			y: yAxis.y
+		};
+		return gridBox;
+	}
+
+	/**
+	 * Draws the background for the chart grid. Uses the axis to get the bounds and position of the backdrop.
 	 */
 	drawBackdrop() {
-		// Get height from the grid
-		const xGridHeight = this.innerWrap.select(".x.grid").node().getBBox().height;
-		const yGridBBox = this.innerWrap.select(".y.grid").node().getBBox();
 		const backdrop = Tools.appendOrSelect(this.innerWrap, "rect.chart-grid-backdrop");
+			const gridContainer = this.getGridContainer();
 
-		backdrop
-			.attr("x", yGridBBox.x)
-			.attr("y", yGridBBox.y)
-			.attr("width", yGridBBox.width)
-			.attr("height", xGridHeight)
+			backdrop
+			.attr("x", gridContainer.x)
+			.attr("y", gridContainer.y)
+			.attr("width", gridContainer.width)
+			.attr("height", gridContainer.height)
 			.lower();
 	}
 
@@ -614,10 +630,7 @@ export class BaseAxisChart extends BaseChart {
 			if (thresholds && thresholds.length > 0) {
 				this.addOrUpdateThresholds(g_yGrid, !noAnimation);
 			}
-
-			// use the set timeout to queue drawing the backdrop after the X and Y Grid have properly updated
-			// needed because there is a settimeout for repositioning the grid, this needs to run after that
-			setTimeout(() => this.drawBackdrop(), 0);
+			this.drawBackdrop();
 		}, 0);
 	}
 
