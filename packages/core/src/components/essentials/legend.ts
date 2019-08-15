@@ -6,7 +6,7 @@ import { Component } from "../component";
 import { select } from "d3-selection";
 
 export class Legend extends Component {
-	type = "cc-legend";
+	type = "legend";
 
 	render() {
 		const svg = this.getContainerSVG();
