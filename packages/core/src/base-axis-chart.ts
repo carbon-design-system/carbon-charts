@@ -505,14 +505,14 @@ export class BaseAxisChart extends BaseChart {
 	 */
 	drawBackdrop() {
 		const backdrop = Tools.appendOrSelect(this.innerWrap, "rect.chart-grid-backdrop");
-			const gridContainer = this.getGridContainer();
+		const gridContainer = this.getGridContainer();
 
-			backdrop
-			.attr("x", gridContainer.x)
-			.attr("y", gridContainer.y)
-			.attr("width", gridContainer.width)
-			.attr("height", gridContainer.height)
-			.lower();
+		backdrop
+		.attr("x", gridContainer.x)
+		.attr("y", gridContainer.y)
+		.attr("width", gridContainer.width)
+		.attr("height", gridContainer.height)
+		.lower();
 	}
 
 	addOrUpdateThresholds(yGrid, animate?) {
