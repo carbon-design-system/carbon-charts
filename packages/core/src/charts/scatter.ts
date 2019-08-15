@@ -66,8 +66,8 @@ export class ScatterChart extends Chart {
 			components: [
 				new FourAxes({
 					axes: {
-						[AxisPositions.LEFT]: false,
-						[AxisPositions.BOTTOM]: false,
+						[AxisPositions.LEFT]: true,
+						[AxisPositions.BOTTOM]: true,
 						[AxisPositions.RIGHT]: true,
 						[AxisPositions.TOP]: true
 					}
