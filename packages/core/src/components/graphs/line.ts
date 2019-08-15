@@ -20,50 +20,37 @@ export class Line extends Component {
 			.y((d, i) => this._services.axes.getYValue(d, i))
 			.curve(this._services.curves.getD3Curve());
 
-		const gLines = svg.selectAll("g.lines")
+		const lineGroups = svg.selectAll("g.lines")
 			.data(this._model.getDisplayData().datasets, dataset => dataset.label);
 
-		const enteringGLines = gLines.enter()
+		const enteringLineGroups = lineGroups.enter()
 			.append("g")
-				.classed("lines", true)
-				.append("path");
+				.classed("lines", true);
 
-		enteringGLines.merge(svg.selectAll("g.lines path"))
-			.attr("stroke", d => this._model.getStrokeColor(d.label))
-			.datum(d => d.data)
+		const self = this;
+
+		const enteringPaths = enteringLineGroups.append("path");
+		enteringPaths.attr("opacity", 0);
+		enteringPaths.merge(svg.selectAll("g.lines path"))
+			.attr("stroke", function(d) {
+				const parentDatum = select(this.parentNode).datum() as any;
+
+				return self._model.getStrokeColor(parentDatum.label)
+			})
+			.datum(function(d) {
+				const parentDatum = select(this.parentNode).datum() as any;
+				this._datasetLabel = parentDatum.label;
+
+				return parentDatum.data;
+			})
+			.transition(this._services.transitions.getDefaultTransition())
+			.attr("opacity", 1)
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);
 
-		gLines.exit()
+		lineGroups.exit()
+			.transition(this._services.transitions.getDefaultTransition())
+			.attr("opacity", 0)
 			.remove();
-	}
-
-	addLabelsToDataPoints(d, index) {
-		const { labels } = this._model.getDisplayData();
-
-		return d.data.map((datum, i) => ({
-			label: datum.key || labels[i],
-			datasetLabel: d.label,
-			value: isNaN(datum) ? datum.value : datum
-		}));
-	}
-
-	addEventListeners() {
-		const self = this;
-		this._parent.selectAll("circle")
-			.on("mouseover", function() {
-				select(this).classed("hovered", true);
-
-				self._model.set({
-					tooltip: true
-				});
-			})
-			.on("mouseout", function() {
-				select(this).classed("hovered", false);
-
-				self._model.set({
-					tooltip: false
-				});
-			});
 	}
 }
