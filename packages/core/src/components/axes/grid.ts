@@ -28,8 +28,8 @@ export class Grid extends Component {
 
 		const height = this.backdrop.attr("height");
 
-		const bottomScale = this._model.get(AxisPositions.BOTTOM).getScale();
-		const xGrid = axisBottom(bottomScale)
+		const mainXScale = this._services.axes.getMainXAxis().getScale();
+		const xGrid = axisBottom(mainXScale)
 			.tickSizeInner(-height)
 			.tickSizeOuter(0);
 
@@ -47,8 +47,8 @@ export class Grid extends Component {
 		// const { thresholds } = scales.y;
 		const width = this.backdrop.attr("width");
 
-		const bottomScale = this._model.get(AxisPositions.BOTTOM).getScale();
-		const yGrid = axisLeft(bottomScale)
+		const mainXScale = this._services.axes.getMainXAxis().getScale();
+		const yGrid = axisLeft(mainXScale)
 			.tickSizeInner(-width)
 			.tickSizeOuter(0);
 
@@ -68,19 +68,20 @@ export class Grid extends Component {
 	drawBackdrop() {
 		const svg = this._parent;
 
-		const leftScale = this._model.get(AxisPositions.LEFT).getScale();
-		const bottomScale = this._model.get(AxisPositions.BOTTOM).getScale();
+		const mainXScale = this._services.axes.getMainXAxis().getScale();
+		const mainYScale = this._services.axes.getMainYAxis().getScale();
 
-		const [primaryScaleEnd, primaryScaleStart] = leftScale.range();
-		const [secondaryScaleStart, secondaryScaleEnd] = bottomScale.range();
+		const [xScaleStart, xScaleEnd] = mainXScale.range();
+		const [yScaleEnd, yScaleStart] = mainYScale.range();
+
 		// Get height from the grid
 		this.backdrop = this._services.domUtils.appendOrSelect(svg, "rect.chart-grid-backdrop");
 
 		this.backdrop
-			.attr("x", secondaryScaleStart)
-			.attr("y", primaryScaleStart)
-			.attr("width", secondaryScaleEnd - secondaryScaleStart)
-			.attr("height", primaryScaleEnd - primaryScaleStart)
+			.attr("x", xScaleStart)
+			.attr("y", yScaleStart)
+			.attr("width", xScaleEnd - xScaleStart)
+			.attr("height", yScaleEnd - yScaleStart)
 			.attr("fill", "#f3f3f3")
 			.lower();
 	}

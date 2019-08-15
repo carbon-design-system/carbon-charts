@@ -18,7 +18,6 @@ export class Scatter extends Component {
 			.append("g")
 				.classed("dots", true);
 
-		const xScale = this._model.get(AxisTypes.SECONDARY);
 		const dots = dotGroupsEnter.merge(dotGroups)
 			.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i));
@@ -39,8 +38,7 @@ export class Scatter extends Component {
 			.attr("opacity", 1);
 
 		dotGroups.exit()
-			.transition()
-			.duration(750)
+			.transition(this._services.transitions.getDefaultTransition())
 			.attr("opacity", 0)
 			.remove();
 		// Hide the overlay
