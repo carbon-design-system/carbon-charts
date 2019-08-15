@@ -21,16 +21,21 @@ export class Line extends Component {
 			.curve(this._services.curves.getD3Curve());
 
 		const gLines = svg.selectAll("g.lines")
-			.data(this._model.getDisplayData().datasets)
-			.enter()
-				.append("g")
-				.classed("lines", true);
+			.data(this._model.getDisplayData().datasets, dataset => dataset.label);
 
-		gLines.append("path")
+		const enteringGLines = gLines.enter()
+			.append("g")
+				.classed("lines", true)
+				.append("path");
+
+		enteringGLines.merge(svg.selectAll("g.lines path"))
 			.attr("stroke", d => this._model.getStrokeColor(d.label))
 			.datum(d => d.data)
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);
+
+		gLines.exit()
+			.remove();
 	}
 
 	addLabelsToDataPoints(d, index) {
