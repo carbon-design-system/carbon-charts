@@ -492,11 +492,11 @@ export class BaseAxisChart extends BaseChart {
 		const [yScaleEnd, yScaleStart] = this.y.range();
 
 		backdrop
-		.attr("x", xScaleStart)
-		.attr("y", yScaleStart)
-		.attr("width", xScaleEnd)
-		.attr("height", yScaleEnd)
-		.lower();
+			.attr("x", xScaleStart)
+			.attr("y", yScaleStart)
+			.attr("width", xScaleEnd)
+			.attr("height", yScaleEnd)
+			.lower();
 	}
 
 	addOrUpdateThresholds(yGrid, animate?) {
