@@ -190,6 +190,7 @@ export class BaseAxisChart extends BaseChart {
 		}
 
 		this.dispatchEvent("resize");
+		this.drawBackdrop();
 	}
 
 	/**************************************
@@ -483,19 +484,18 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	/**
-	 * Draws the background for the chart grid
+	 * Draws the background for the chart grid. Uses the axis to get the bounds and position of the backdrop.
 	 */
 	drawBackdrop() {
-		// Get height from the grid
-		const xGridHeight = this.innerWrap.select(".x.grid").node().getBBox().height;
-		const yGridBBox = this.innerWrap.select(".y.grid").node().getBBox();
 		const backdrop = Tools.appendOrSelect(this.innerWrap, "rect.chart-grid-backdrop");
+		const [xScaleStart, xScaleEnd] = this.x.range();
+		const [yScaleEnd, yScaleStart] = this.y.range();
 
 		backdrop
-			.attr("x", yGridBBox.x)
-			.attr("y", yGridBBox.y)
-			.attr("width", yGridBBox.width)
-			.attr("height", xGridHeight)
+			.attr("x", xScaleStart)
+			.attr("y", yScaleStart)
+			.attr("width", xScaleEnd)
+			.attr("height", yScaleEnd)
 			.lower();
 	}
 
@@ -614,10 +614,6 @@ export class BaseAxisChart extends BaseChart {
 			if (thresholds && thresholds.length > 0) {
 				this.addOrUpdateThresholds(g_yGrid, !noAnimation);
 			}
-
-			// use the set timeout to queue drawing the backdrop after the X and Y Grid have properly updated
-			// needed because there is a settimeout for repositioning the grid, this needs to run after that
-			setTimeout(() => this.drawBackdrop(), 0);
 		}, 0);
 	}
 
