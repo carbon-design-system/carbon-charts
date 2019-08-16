@@ -645,7 +645,8 @@ export const pie = {
 	label: {
 		dy: ".32em",
 		margin: 8,
-		other: "Other"
+		other: "Other",
+		fontSize: 12
 	},
 	callout : {
 		sliceDegreeThreshold: 5,
@@ -661,7 +662,7 @@ export const pie = {
 	default: {
 		strokeWidth: 2
 	},
-	padding: 30
+	paddingLeft: 20
 };
 
 /**
