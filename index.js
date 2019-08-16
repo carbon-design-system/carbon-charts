@@ -1821,6 +1821,7 @@ var BaseAxisChart = /** @class */ (function (_super) {
             this.repositionYAxisTitle();
         }
         this.dispatchEvent("resize");
+        this.drawBackdrop();
     };
     /**************************************
      *  Axis & Grids                      *
@@ -2059,18 +2060,17 @@ var BaseAxisChart = /** @class */ (function (_super) {
         }
     };
     /**
-     * Draws the background for the chart grid
+     * Draws the background for the chart grid. Uses the axis to get the bounds and position of the backdrop.
      */
     BaseAxisChart.prototype.drawBackdrop = function () {
-        // Get height from the grid
-        var xGridHeight = this.innerWrap.select(".x.grid").node().getBBox().height;
-        var yGridBBox = this.innerWrap.select(".y.grid").node().getBBox();
         var backdrop = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].appendOrSelect(this.innerWrap, "rect.chart-grid-backdrop");
+        var _a = this.x.range(), xScaleStart = _a[0], xScaleEnd = _a[1];
+        var _b = this.y.range(), yScaleEnd = _b[0], yScaleStart = _b[1];
         backdrop
-            .attr("x", yGridBBox.x)
-            .attr("y", yGridBBox.y)
-            .attr("width", yGridBBox.width)
-            .attr("height", xGridHeight)
+            .attr("x", xScaleStart)
+            .attr("y", yScaleStart)
+            .attr("width", xScaleEnd)
+            .attr("height", yScaleEnd)
             .lower();
     };
     BaseAxisChart.prototype.addOrUpdateThresholds = function (yGrid, animate) {
@@ -2169,9 +2169,6 @@ var BaseAxisChart = /** @class */ (function (_super) {
             if (thresholds && thresholds.length > 0) {
                 _this.addOrUpdateThresholds(g_yGrid, !noAnimation);
             }
-            // use the set timeout to queue drawing the backdrop after the X and Y Grid have properly updated
-            // needed because there is a settimeout for repositioning the grid, this needs to run after that
-            setTimeout(function () { return _this.drawBackdrop(); }, 0);
         }, 0);
     };
     BaseAxisChart.prototype.cleanGrid = function (g) {
