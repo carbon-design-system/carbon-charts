@@ -183,7 +183,7 @@ chartTypes.forEach(type => {
 					classyContainer,
 					{
 						data: type.data,
-						options: Object.assign({}, type.options, {type: type.id}),
+						options: Object.assign({}, type.options, {type: type.id})
 					}
 				);
 
@@ -195,7 +195,7 @@ chartTypes.forEach(type => {
 					classyContainer,
 					{
 						data: type.data,
-						options: Object.assign({}, type.options, {type: type.id}),
+						options: Object.assign({}, type.options, {type: type.id})
 					}
 				);
 
@@ -206,7 +206,7 @@ chartTypes.forEach(type => {
 					classyContainer,
 					{
 						data: type.data,
-						options: Object.assign({}, type.options, {type: type.id}),
+						options: Object.assign({}, type.options, {type: type.id})
 					}
 				);
 
@@ -220,7 +220,7 @@ chartTypes.forEach(type => {
 						classyContainer,
 						{
 							data: type.data,
-							options: Object.assign({}, type.options, {type: type.id}),
+							options: Object.assign({}, type.options, {type: type.id})
 						}
 					);
 
