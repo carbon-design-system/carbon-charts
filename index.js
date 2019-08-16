@@ -353,7 +353,6 @@ var groupedBarOptions = {
     },
     legendClickable: true,
     containerResizable: true,
-    title: "Bar Chart",
     theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
 };
 // Simple bar
@@ -392,7 +391,6 @@ var simpleBarOptions = {
     bars: {
         maxWidth: 50
     },
-    title: "Simple Bar Chart"
 };
 // Stacked bar
 var stackedBarData = {
@@ -462,7 +460,6 @@ var stackedBarOptions = {
     },
     legendClickable: true,
     containerResizable: true,
-    title: "Stacked Bar Chart",
     theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
 };
 
@@ -578,7 +575,6 @@ var comboOptions = {
     },
     legendClickable: true,
     containerResizable: true,
-    title: "Combo Chart",
     theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
 };
 
@@ -722,7 +718,6 @@ var curvedLineOptions = {
     },
     legendClickable: true,
     containerResizable: true,
-    title: "Line Chart",
     theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
 };
 var lineData = {
@@ -792,7 +787,6 @@ var lineOptions = {
     },
     legendClickable: true,
     containerResizable: true,
-    title: "Line Chart",
     theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
 };
 var scatterData = {
@@ -858,7 +852,6 @@ var pieOptions = {
     legendClickable: true,
     containerResizable: true,
     colors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
-    title: "Pie Chart",
     theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
 };
 var donutOptions = {
@@ -871,7 +864,6 @@ var donutOptions = {
         label: "Products",
         number: 300000
     },
-    title: "Donut Chart"
 };
 var pieData = {
     labels: ["2V2N 9KYPM version 1", "L22I P66EP L22I P66EP L22I P66EP", "JQAI 2M4L1", "J9DZ F37AP",
