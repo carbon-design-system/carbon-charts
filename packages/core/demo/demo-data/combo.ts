@@ -73,6 +73,5 @@ export const comboOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	title: "Combo Chart",
 	theme: getTheme()
 };
