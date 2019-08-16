@@ -64,7 +64,6 @@ export const curvedLineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	title: "Line Chart",
 	theme: getTheme()
 };
 
@@ -137,7 +136,6 @@ export const lineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	title: "Line Chart",
 	theme: getTheme()
 };
 
