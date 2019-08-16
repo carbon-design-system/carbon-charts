@@ -1,5 +1,9 @@
 g.cc-axes {
 	g.axis {
+		path.domain {
+			stroke: #8c8c8c;
+		}
+
 		g.tick {
 			line {
 				display: none;

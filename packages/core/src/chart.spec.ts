@@ -1,4 +1,4 @@
-import * as Charts from "../dist/index.umd";
+import * as Charts from "./index";
 
 import { createChartHolder } from "./test-tools";
 
@@ -47,7 +47,11 @@ export const options = () => ({
 	axes: {
 		bottom: {
 			title: "2018 Annual Sales Figures",
-			type: "labels"
+			type: "labels",
+			primary: true
+		},
+		left: {
+			secondary: true
 		},
 		y: {
 			title: "Dollars (CAD)",
@@ -78,9 +82,8 @@ export const options = () => ({
 describe('Array', () => {
 	describe('#indexOf()', () => {
 		it('should return -1 when the value is not present', () => {
-			console.log("ewgewg", createChartHolder)
 			const div = createChartHolder("scatter");
-			console.log("div", div)
+
 			new Charts.ScatterChart(
 				div,
 				{

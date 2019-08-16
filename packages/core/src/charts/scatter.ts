@@ -61,7 +61,7 @@ export class ScatterChart extends Chart {
 			}
 		};
 
-		const graphFrame = {
+		const axisFrameComponent = {
 			id: "graph-frame",
 			components: [
 				new FourAxes({
@@ -75,42 +75,6 @@ export class ScatterChart extends Chart {
 				new Grid(),
 				new Scatter(),
 				new Line(),
-			],
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED
-			}
-		};
-
-		const graphAxisFrame = {
-			id: "graph-axis-frame",
-			components: [
-				new LayoutComponent(
-					[
-						graphFrame
-					],
-					{
-						direction: LayoutDirection.ROW
-					}
-				)
-			],
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED
-			}
-		};
-
-		const axisFrameComponent = {
-			id: "axis-frame",
-			components: [
-				new LayoutComponent(
-					[
-						graphAxisFrame
-					],
-					{
-						direction: LayoutDirection.COLUMN
-					}
-				)
 			],
 			growth: {
 				x: LayoutGrowth.STRETCH,
