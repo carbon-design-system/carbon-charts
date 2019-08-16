@@ -112,7 +112,7 @@ export class PieChart extends BaseChart {
 			.attr("height", `${diameter}px`);
 
 		this.innerWrap
-			.attr("transform", `translate(${radius},${radius})`)
+			.attr("transform", `translate(${radius + Configuration.pie.paddingLeft},${radius})`)
 			.attr("width", `${diameter}px`)
 			.attr("height", `${diameter}px`)
 			.attr("preserveAspectRatio", "xMinYMin");
@@ -120,12 +120,12 @@ export class PieChart extends BaseChart {
 		// Compute the correct inner & outer radius
 		const marginedRadius = this.computeRadius();
 		this.arc = arc()
-				.innerRadius(this.options.type === "donut" ? (marginedRadius * (3 / 4)) : 2)
-				.outerRadius(marginedRadius);
+			.innerRadius(this.options.type === "donut" ? (marginedRadius * (3 / 4)) : 2)
+			.outerRadius(marginedRadius);
 
 		this.hoverArc = arc()
-				.innerRadius(this.options.type === "donut" ? (marginedRadius * (3 / 4)) : 2)
-				.outerRadius(marginedRadius + 3);
+			.innerRadius(this.options.type === "donut" ? (marginedRadius * (3 / 4)) : 2)
+			.outerRadius(marginedRadius + 3);
 
 		this.pie = pie()
 			.value((d: any) => d.value)
@@ -139,7 +139,7 @@ export class PieChart extends BaseChart {
 			.append("path")
 			.attr("d", this.arc)
 			.attr("fill", d => this.getFillColor(this.displayData.datasets[0].label, d.data.label, d.data.value)) // Support multiple datasets
-			.each(function(d) { this._current = d; });
+			.each(function (d) { this._current = d; });
 
 		// Draw the slice labels
 		const self = this;
@@ -226,7 +226,7 @@ export class PieChart extends BaseChart {
 		const radius = this.computeRadius();
 		setTimeout(() => {
 			const text = this.innerWrap.selectAll("text.chart-label")
-				.data(this.pie(dataList), d => d.label );
+				.data(this.pie(dataList), d => d.label);
 
 			text
 				.enter()
@@ -279,7 +279,7 @@ export class PieChart extends BaseChart {
 
 		this.innerWrap.selectAll("path")
 			.on("click", d => self.dispatchEvent("pie-slice-onClick", d))
-			.on("mouseover", function(d) {
+			.on("mouseover", function (d) {
 				const sliceElement = select(this);
 				Tools.moveToFront(sliceElement);
 
@@ -291,7 +291,7 @@ export class PieChart extends BaseChart {
 				self.reduceOpacity(this);
 			})
 			.on("mousemove", d => self.tooltip.positionTooltip())
-			.on("mouseout", function(d) {
+			.on("mouseout", function (d) {
 				select(this)
 					.transition(self.getDefaultTransition("pie_slice_hover"))
 					.attr("d", self.arc);
@@ -320,10 +320,10 @@ export class PieChart extends BaseChart {
 
 		// Resize the SVG
 		select(this.holder).select("svg")
-				.attr("width", `${dimensionToUseForScale}px`)
-				.attr("height", `${dimensionToUseForScale}px`);
+			.attr("width", `${dimensionToUseForScale}px`)
+			.attr("height", `${dimensionToUseForScale}px`);
 		this.innerWrap
-			.attr("transform", `translate(${radius},${radius})`);
+			.attr("transform", `translate(${radius + Configuration.pie.paddingLeft},${radius})`);
 
 		// Resize the arcs
 		this.arc = arc()
@@ -351,24 +351,29 @@ export class PieChart extends BaseChart {
 	}
 
 	/**
-	 * The chart sizing function for pie and donut need to return the size of the
-	 * graph container while accounting for slice labels. Without adding padding, the
-	 * pie/donut will try to use all space for the circle and labels fall outside.
+	 * The getChartSize function for pie and donut need to return the size of the
+	 * graph container while accounting for slice labels, callouts and a top legend.
+	 * Without accounting for padding, the pie/donut will try to use all space for the circle and labels fall outside.
 	 * @param container
 	 */
 	getChartSize(container) {
 		const containerSize = super.getChartSize(container);
-		return {
-			height: containerSize.height - Configuration.pie.padding,
-			width: containerSize.width - Configuration.pie.padding
-		};
+		// if legend is on the top, we want the chart container to take that into account
+		const legendHeight = this.container.select(".legend-wrapper").node().getBoundingClientRect().height;
+		// padding for labels on top and below
+		// accounting for callouts even when there are none so that the radius does not need to change on update
+		const labelPadding = (Configuration.pie.label.fontSize * 2) + Configuration.pie.callout.calloutOffsetY;
+		// to get the margin between slices and text/callouts, we convert the em value to pixels
+		const textMargin = Configuration.pie.label.fontSize + +Configuration.pie.label.dy.replace(/[^0-9.,]+/, "");
+		containerSize.height -= (legendHeight + labelPadding + (2 * textMargin));
+
+		return containerSize;
 	}
 
 	// Helper functions
 	private computeRadius() {
 		const chartSize: any = this.getChartSize(this.container);
 		const radius: number = Math.min(chartSize.width, chartSize.height) / 2;
-
 		return radius;
 	}
 
