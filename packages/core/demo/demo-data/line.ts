@@ -64,7 +64,6 @@ export const curvedLineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	title: "Line Chart",
 	theme: getTheme()
 };
 
