@@ -31,10 +31,10 @@ export class Axis extends Component {
 		}
 
 		this.margins = {
-			top: 51,
+			top: 22,
 			right: 45,
 			bottom: 50,
-			left: 45
+			left: 65
 		};
 	}
 

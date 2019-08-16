@@ -23,8 +23,14 @@ module.exports = env => {
 		module: {
 			rules: [
 				// all files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
-				{ test: /\.ts$/, loader: "ts-loader" },
-				{ test: /\.html?$/, loader: "html-loader" },
+				{
+					test: /\.ts$/,
+					loader: "ts-loader"
+				},
+				{
+					test: /\.html?$/,
+					loader: "html-loader"
+				},
 				{
 					test: /\.scss$/,
 					use: [

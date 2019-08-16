@@ -17,12 +17,14 @@
 		"typeRoots": [
 			"./node_modules/@types",
 			"./custom.d.ts"
-		]
+		],
 	},
 	"include": [
 		"./src/**/*"
 	],
 	"exclude": [
-		"./src/**/*.spec.ts"
+		"./src/**/*.spec.ts",
+		"./node_modules",
+		"../../node_modules"
 	]
 }
