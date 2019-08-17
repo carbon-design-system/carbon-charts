@@ -154,6 +154,8 @@ export class PieChart extends BaseChart {
 			.text(d => self.getSliceLabelText(d.data.value, dataList))
 			.attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius, dataList.length); });
 
+		this.positionChart();
+
 		// Hide overlay
 		this.chartOverlay.hide();
 	}
@@ -348,6 +350,9 @@ export class PieChart extends BaseChart {
 
 		// Reposition the legend
 		this.positionLegend();
+
+		// position the entire chart after titles, legend and labels are added
+		this.positionChart();
 	}
 
 	/**
@@ -375,6 +380,32 @@ export class PieChart extends BaseChart {
 		const chartSize: any = this.getChartSize(this.container);
 		const radius: number = Math.min(chartSize.width, chartSize.height) / 2;
 		return radius;
+	}
+
+	/**
+	 * This positions the entire chart after it is drawn to account for the labels and callouts
+	 */
+	private positionChart() {
+		// align the chart to the top of the chart container OR legend if its on top
+		const legendHeight = this.container.select(".legend-wrapper").node().getBoundingClientRect().height;
+
+		// get the difference in position of the innerwrap to the chart container
+		const containerPos = this.container.node().getBoundingClientRect().top;
+		const innerWrapPos = this.innerWrap.node().getBoundingClientRect().top;
+		let	diff = innerWrapPos - containerPos;
+
+		if (diff < 0) {
+			// inner wrap to be just within the container at top
+			diff = Math.abs(diff) + legendHeight;
+		} else {
+			// the innerwrap is aligned below
+			diff = -diff + legendHeight;
+		}
+
+		// get current translations to add the additional difference
+		const innerWrapTranslation = Tools.getTranslationValues(this.innerWrap.node());
+		this.innerWrap
+			.attr("transform", `translate(${innerWrapTranslation.tx}, ${(+innerWrapTranslation.ty + diff)})`);
 	}
 
 	/**
