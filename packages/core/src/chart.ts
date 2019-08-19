@@ -75,12 +75,18 @@ export class Chart {
 				animations
 			}, true);
 
-			console.log("RE RENDER STUFF");
+			// console.log("RE RENDER STUFF");
 			this.components.forEach(component => {
 				component.render();
 
-				console.log("RENDER", ++window["ccount"]);
+				// console.log("RENDER", ++window["ccount"]);
 			});
+
+			this.services.events.dispatchEvent("render-finished");
 		}
+	}
+
+	destroy() {
+		this.services.domUtils.getHolder().remove();
 	}
 }

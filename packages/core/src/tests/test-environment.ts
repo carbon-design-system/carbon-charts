@@ -65,7 +65,7 @@ export const options = {
 
 export class TestEnvironment {
 	chartOptions = options;
-	chartData: any;
+	chartData = data;
 	chart: Chart;
 
 	render() {
@@ -74,10 +74,14 @@ export class TestEnvironment {
 		this.chart = new Charts.ScatterChart(
 			holder,
 			{
-				data: data,
+				data: this.chartData,
 				options: this.chartOptions
 			}
 		);
+	}
+
+	destroy() {
+		this.chart.destroy();
 	}
 
 	setChartOptions(func: Function) {

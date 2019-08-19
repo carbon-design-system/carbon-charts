@@ -126,7 +126,7 @@ export class LayoutComponent extends Component {
 					const growth = Tools.getProperty(d, "data", "growth", "x");
 					if (growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED) {
 						itemComponent.render();
-						console.log("RENDER", ++window["ccount"]);
+						// console.log("RENDER", ++window["ccount"]);
 					}
 				});
 			});
@@ -191,7 +191,7 @@ export class LayoutComponent extends Component {
 						const growth = Tools.getProperty(d, "data", "growth", "x");
 						if (growth === LayoutGrowth.STRETCH) {
 							itemComponent.render();
-							console.log("RENDER", ++window["ccount"]);
+							// console.log("RENDER", ++window["ccount"]);
 						}
 					});
 
@@ -249,7 +249,7 @@ export class LayoutComponent extends Component {
 				.attr("width", elToMatch.attr("width"));
 
 			itemComponent.render();
-			console.log("RENDER", ++window["ccount"]);
+			// console.log("RENDER", ++window["ccount"]);
 		}
 	}
 
