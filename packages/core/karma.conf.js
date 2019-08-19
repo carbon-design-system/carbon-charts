@@ -82,7 +82,7 @@ module.exports = function(config) {
 		browsers,
 		browserConsoleLogOptions: {
 			terminal: true,
-			level: "debug"
+			level: "warn"
 		},
         customLaunchers: {
             FirefoxHeadless: {
