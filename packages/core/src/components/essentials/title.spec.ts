@@ -8,6 +8,7 @@ describe("title component", () => {
 		testEnvironment.render();
 
 		this._chart = testEnvironment.getChartReference();
+		this._testEnvironment = testEnvironment;
 	});
 
 	describe("content", () => {
@@ -23,5 +24,9 @@ describe("title component", () => {
 			const title = getComponentContainer(Title);
 			expect(title.querySelector("text").innerHTML).toEqual(sampleTitle);
 		});
+	});
+
+	afterEach(function() {
+		this._testEnvironment.destroy();
 	});
 });
