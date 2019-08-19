@@ -1083,15 +1083,15 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@carbon/colors@10.1.1":
-  version "10.1.1"
-  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-10.1.1.tgz#854c33ccdf02ac319c06923268ba89cf83a58c93"
-  integrity sha512-hni1iN0FUfQgnATqAT971WMAosl9YK7kQqp1V0vkF3d8rB/id+Y3K1GhDsXLKPfEAxdgE4+swGvID9tAY+a9kQ==
-
 "@carbon/colors@10.3.0":
   version "10.3.0"
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-10.3.0.tgz#99df98f141c6d3a237d72ac9b21ad58a07112348"
   integrity sha512-LI+ZINCwf7iKXtaE3BkTdRtHpSwOe5FJtLwWxkqdsy69X4nMDKPc41ZJOW/lYAemeN4EHvm+LL9GD66eQpcVQQ==
+
+"@carbon/colors@10.4.0":
+  version "10.4.0"
+  resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-10.4.0.tgz#8c21127926bc389dcb4d415b55d4eae278f3d525"
+  integrity sha512-UERU07hWXAjsaWu6JPJDyJnwVLkJr+8wTvFrbCkubCfl/MZjKoyLgz0CNypu8hSg8ZaDUzl/NfXMgRpprzuSjQ==
 
 "@carbon/motion@10.4.0":
   version "10.4.0"
@@ -5688,10 +5688,10 @@ capture-stack-trace@^1.0.0:
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.1.tgz#a6c0bbe1f38f3aa0b92238ecb6ff42c344d4135d"
   integrity sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw==
 
-carbon-components@10.3.2:
-  version "10.3.2"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.3.2.tgz#1d1571ce43ccbef06fa506605d60fbc5d75b6fa9"
-  integrity sha512-u6EoEBr7f/QoxuGA3yqv/1qvjwgtnqBQxge3kVXpTIyhq2oGE9fOl6g2fk4KlMNu1zV2hlbyhr+2vvsJuS3n4g==
+carbon-components@10.5.0:
+  version "10.5.0"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.5.0.tgz#f9d0d4da57b41ba958a30745cb4ada902e491345"
+  integrity sha512-ptsULtugjrrnj7rb2BYK3KAvNjbTdphh62OmOMNaLLswB7jA7S3rnXJrOOWt8o7PeEad3U0ewW49G9OlbpX+mg==
   dependencies:
     carbon-icons "^7.0.7"
     flatpickr "4.6.1"
