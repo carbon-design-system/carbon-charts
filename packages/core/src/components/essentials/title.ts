@@ -2,7 +2,7 @@
 import { Component } from "../component";
 
 export class Title extends Component {
-	type = "cc-title";
+	type = "title";
 
 	render() {
 		const svg = this.getContainerSVG();
@@ -12,6 +12,6 @@ export class Title extends Component {
 			.attr("y", 20)
 			.style("font-size", "18px")
 			.style("font-weight", 700)
-			.text("Scatter Chart");
+			.text(this._model.getOptions().title || "Scatter Chart");
 	}
 }
