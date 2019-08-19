@@ -12,9 +12,10 @@ Object.prototype["containsKeysAndValuesFrom"] = sourceObject => {
 };
 
 // Functions
+export const makeChartID = chartType => `${chartType}-chart-holder`;
 export const createChartHolder = chartType => {
 	const chartHolder = document.createElement("div");
-	chartHolder.id = `${chartType}-chart-holder`;
+	chartHolder.id = makeChartID(chartType);
 	chartHolder.classList.add("chart-holder");
 
 	document.body.appendChild(chartHolder);
@@ -22,15 +23,18 @@ export const createChartHolder = chartType => {
 	return chartHolder;
 };
 
-export const grabClassyContainer = chartType => {
-	return document.getElementById(`classy-${chartType}-chart-holder`);
-};
+export const getChartHolder = chartType => document.getElementById(makeChartID(chartType));
 
 export const removeChart = chartType => {
-	const oldClassyContainer = grabClassyContainer(chartType);
-	if (oldClassyContainer) {
-		oldClassyContainer.parentNode.removeChild(oldClassyContainer);
+	const chartHolder = getChartHolder(chartType);
+	if (chartHolder) {
+		chartHolder.parentNode.removeChild(chartHolder);
 	}
+};
+
+export const getComponentContainer = component => {
+	const type = new component().type;
+	return document.querySelector(`.cc-${type}`);
 };
 
 export const inputAndProcessedDataMatch = (chartObj, inputData) => {
@@ -63,28 +67,3 @@ export const inputAndProcessedDataMatch = (chartObj, inputData) => {
 	// TODO - Implement Deeper check
 	return chartObj.displayData.datasets.length === inputData.datasets.length;
 };
-
-// Objects/data
-export const selectors = {
-	OUTERSVG: "svg.chart-svg",
-	INNERWRAP: "g.inner-wrap",
-	TOOLTIP: "div.chart-tooltip",
-	LEGEND_BTN: "li.legend-btn",
-	pie: {
-		SLICE: "path"
-	}
-};
-export const colors = [
-	"#009BEF",
-	"#95D13C",
-	"#785EF0",
-	"#F87EAC",
-	"#FFB000",
-	"#00B6CB",
-	"#FF5C49",
-	"#047CC0",
-	"#FE8500",
-	"#5A3EC8",
-	"#40D5BB",
-	"#FF509E"
-];
