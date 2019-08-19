@@ -14,7 +14,7 @@ describe("legend component", () => {
 	});
 
 	describe("content", () => {
-		it("should have same amount of datasets", function() {
+		it("should have same amount of datasets", function(done) {
 			const data = this._testEnvironment.chartData;
 			const numberOfDatasets = data.datasets.length;
 
@@ -27,6 +27,8 @@ describe("legend component", () => {
 				chartEventsFragment.removeEventListener("render-finished", renderCb);
 
 				expect(componentContainer.selectAll("g.legend-item").size()).toEqual(numberOfDatasets);
+
+				done();
 			};
 			// Add event listener for when chart render is finished
 			chartEventsFragment.addEventListener("render-finished", renderCb);
