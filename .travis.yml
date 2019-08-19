@@ -2,12 +2,25 @@ dist: trusty
 language: node_js
 node_js:
  - '8'
+env:
+  - MOZ_HEADLESS=1
+addons:
+  chrome: stable
+  firefox: latest
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.6.0
   - export PATH="$HOME/.yarn/bin:$PATH"
   - .travis/before_install.sh
+  - "google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &"
 install: yarn --offline
-script: lerna run lint
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - "sleep 3"
+  - "sudo chown root /opt/google/chrome/chrome-sandbox"
+script:
+  - lerna run lint
+  - lerna run test
 sudo: false
 deploy:
   -
