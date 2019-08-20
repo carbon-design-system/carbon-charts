@@ -82,7 +82,9 @@ export class Chart {
 				console.log("RENDER", ++window["ccount"]);
 			});
 
-			this.services.events.dispatchEvent("render-finished");
+			setTimeout(() => {
+				this.services.events.dispatchEvent("render-finished");
+			});
 		}
 	}
 
