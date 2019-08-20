@@ -83,42 +83,44 @@ export class DOMUtils extends Service {
 	}
 
 	getSVGElementSize(svgSelector: Selection<any, any, any, any>, options?: any) {
-		const attrHeight = parseInt(svgSelector.attr("height"), 10);
-		const attrWidth = parseInt(svgSelector.attr("width"), 10);
+		const attrDimensions = {
+			width: parseInt(svgSelector.attr("width"), 10),
+			height: parseInt(svgSelector.attr("height"), 10)
+		};
 
 		const bbox = svgSelector.node().getBBox();
+		const bboxDimensions = {
+			width: bbox.width,
+			height: bbox.height
+		};
+
+		const clientDimensions = {
+			width: svgSelector.node().clientWidth,
+			height: svgSelector.node().clientHeight
+		};
 
 		// If both attribute values are numbers
 		// And not percentages or NaN
 		if (options) {
-			if (options.useAttrs && !isNaN(attrHeight) && !isNaN(attrWidth) &&
+			if (options.useAttrs && !isNaN(attrDimensions.height) && !isNaN(attrDimensions.width) &&
 				(svgSelector.attr("height") + svgSelector.attr("width")).indexOf("%") === -1 &&
-					attrWidth > 0 && attrHeight > 0) {
-				return {
-					height: svgSelector.attr("height"),
-					width: svgSelector.attr("width")
-				};
+					attrDimensions.width > 0 && attrDimensions.height > 0) {
+				return attrDimensions;
 			}
 
 			if (options.useClientDimensions) {
-				return {
-					height: svgSelector.node().clientHeight,
-					width: svgSelector.node().clientWidth
-				};
+				return clientDimensions;
 			}
 
-			if (options.useBBox && !isNaN(bbox.width) && !isNaN(bbox.height) &&
-				bbox.width > 0 && bbox.height > 0) {
-				return {
-					height: bbox.height,
-					width: bbox.width
-				};
+			if (options.useBBox && !isNaN(bboxDimensions.width) && !isNaN(bboxDimensions.height) &&
+				bboxDimensions.width > 0 && bboxDimensions.height > 0) {
+				return bboxDimensions;
 			}
 		}
 
 		return {
-			height: svgSelector.node().clientHeight || bbox.height || svgSelector.attr("height"),
-			width: svgSelector.node().clientWidth || bbox.width || svgSelector.attr("width")
+			height: svgSelector.node().height.baseVal.value,
+			width: svgSelector.node().width.baseVal.value
 		};
 	}
 
