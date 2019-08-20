@@ -82,23 +82,43 @@ export class DOMUtils extends Service {
 		resizeObserver.observe(holder);
 	}
 
-	getSVGElementSize(svgSelector: Selection<any, any, any, any>, attrsPreffered?: boolean) {
+	getSVGElementSize(svgSelector: Selection<any, any, any, any>, options?: any) {
 		const attrHeight = parseInt(svgSelector.attr("height"), 10);
 		const attrWidth = parseInt(svgSelector.attr("width"), 10);
 
+		const bbox = svgSelector.node().getBBox();
+
 		// If both attribute values are numbers
 		// And not percentages or NaN
-		if (attrsPreffered && !isNaN(attrHeight) && !isNaN(attrWidth) &&
-			(svgSelector.attr("height") + svgSelector.attr("width")).indexOf("%") === -1) {
-			return {
-				height: svgSelector.attr("height"),
-				width: svgSelector.attr("width")
-			};
+		if (options) {
+			if (options.useAttrs && !isNaN(attrHeight) && !isNaN(attrWidth) &&
+				(svgSelector.attr("height") + svgSelector.attr("width")).indexOf("%") === -1 &&
+					attrWidth > 0 && attrHeight > 0) {
+				return {
+					height: svgSelector.attr("height"),
+					width: svgSelector.attr("width")
+				};
+			}
+
+			if (options.useClientDimensions) {
+				return {
+					height: svgSelector.node().clientHeight,
+					width: svgSelector.node().clientWidth
+				};
+			}
+
+			if (options.useBBox && !isNaN(bbox.width) && !isNaN(bbox.height) &&
+				bbox.width > 0 && bbox.height > 0) {
+				return {
+					height: bbox.height,
+					width: bbox.width
+				};
+			}
 		}
 
 		return {
-			height: svgSelector.node().clientHeight || svgSelector.node().getBBox().height || svgSelector.attr("height"),
-			width: svgSelector.node().clientWidth || svgSelector.node().getBBox().width || svgSelector.attr("width")
+			height: svgSelector.node().clientHeight || bbox.height || svgSelector.attr("height"),
+			width: svgSelector.node().clientWidth || bbox.width || svgSelector.attr("width")
 		};
 	}
 
