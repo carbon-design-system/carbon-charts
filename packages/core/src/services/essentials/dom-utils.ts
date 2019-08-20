@@ -125,24 +125,28 @@ export class DOMUtils extends Service {
 			}
 		}
 
-		const nativeDimensions = {
-			width: Tools.getProperty(svgSelector.node(), "width", "baseVal", "value"),
-			height: Tools.getProperty(svgSelector.node(), "height", "baseVal", "value")
-		};
-		if (validateDimensions(nativeDimensions)) {
-			return nativeDimensions;
-		}
+		try {
+			const nativeDimensions = {
+				width: Tools.getProperty(svgSelector.node(), "width", "baseVal", "value"),
+				height: Tools.getProperty(svgSelector.node(), "height", "baseVal", "value")
+			};
+			if (validateDimensions(nativeDimensions)) {
+				return nativeDimensions;
+			}
+		} catch (e) {
+			if (validateDimensions(clientDimensions)) {
+				return clientDimensions;
+			}
 
-		if (validateDimensions(clientDimensions)) {
+			if (validateDimensions(bboxDimensions)) {
+				return bboxDimensions;
+			}
+
+			if (validateDimensions(attrDimensions)) {
+				return attrDimensions;
+			}
+
 			return clientDimensions;
-		}
-
-		if (validateDimensions(bboxDimensions)) {
-			return bboxDimensions;
-		}
-
-		if (validateDimensions(attrDimensions)) {
-			return attrDimensions;
 		}
 	}
 
@@ -162,7 +166,7 @@ export class DOMUtils extends Service {
 	debounce(ms, fn) {
 		let timer;
 
-		return function() {
+		return function () {
 			clearTimeout(timer);
 			const args = Array.prototype.slice.call(arguments);
 			args.unshift(this);
