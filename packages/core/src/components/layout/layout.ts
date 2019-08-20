@@ -127,7 +127,7 @@ export class LayoutComponent extends Component {
 			if (growth === LayoutGrowth.PREFERRED) {
 				const matchingSVGWidth = horizontal ? matchingSVGDimensions.width : matchingSVGDimensions.height;
 				const svgWidth = horizontal ? width : height;
-console.log("matchingSVGWidth", matchingSVGDimensions)
+
 				d.data.size = (matchingSVGWidth / svgWidth) * 100;
 			}
 		});
