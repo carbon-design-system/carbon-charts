@@ -21,7 +21,6 @@ describe("legend component", () => {
 			const chartEventsFragment = this._chart.services.events.getDocumentFragment();
 
 			const renderCb = () => {
-				console.log("CALLBACK CALLED")
 				const componentContainer = select(getComponentContainer(Legend));
 
 				// Remove render event listener
@@ -31,12 +30,15 @@ describe("legend component", () => {
 
 				done();
 			};
+
 			// Add event listener for when chart render is finished
 			chartEventsFragment.addEventListener("render-finished", renderCb);
+
+			this._chart.update();
 		});
 	});
 
-	// afterEach(function() {
-	// 	this._testEnvironment.destroy();
-	// });
+	afterEach(function() {
+		this._testEnvironment.destroy();
+	});
 });
