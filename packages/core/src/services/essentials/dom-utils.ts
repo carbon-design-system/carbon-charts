@@ -84,8 +84,8 @@ export class DOMUtils extends Service {
 
 	getSVGElementSize(svgSelector: Selection<any, any, any, any>, options?: any) {
 		const attrDimensions = {
-			width: parseInt(svgSelector.attr("width"), 10),
-			height: parseInt(svgSelector.attr("height"), 10)
+			width: svgSelector.attr("width"),
+			height: svgSelector.attr("height")
 		};
 
 		const bbox = svgSelector.node().getBBox();
@@ -99,29 +99,52 @@ export class DOMUtils extends Service {
 			height: svgSelector.node().clientHeight
 		};
 
+		const validateDimensions = dimensions => {
+			if (!isNaN(dimensions.height) && !isNaN(dimensions.width) &&
+				("" + dimensions.width + dimensions.height).indexOf("%") === -1 &&
+				dimensions.width > 0 && dimensions.height > 0) {
+					console.log("validate dimensions", true, dimensions)
+				return true;
+			}
+
+			return false;
+		}
+
 		// If both attribute values are numbers
 		// And not percentages or NaN
 		if (options) {
-			if (options.useAttrs && !isNaN(attrDimensions.height) && !isNaN(attrDimensions.width) &&
-				(svgSelector.attr("height") + svgSelector.attr("width")).indexOf("%") === -1 &&
-					attrDimensions.width > 0 && attrDimensions.height > 0) {
+			if (options.useAttrs && validateDimensions(attrDimensions)) {
 				return attrDimensions;
 			}
 
-			if (options.useClientDimensions) {
+			if (options.useClientDimensions && validateDimensions(clientDimensions)) {
 				return clientDimensions;
 			}
 
-			if (options.useBBox && !isNaN(bboxDimensions.width) && !isNaN(bboxDimensions.height) &&
-				bboxDimensions.width > 0 && bboxDimensions.height > 0) {
+			if (options.useBBox && validateDimensions(bboxDimensions)) {
 				return bboxDimensions;
 			}
 		}
 
-		return {
-			height: svgSelector.node().height.baseVal.value,
-			width: svgSelector.node().width.baseVal.value
+		const nativeDimensions = {
+			width: Tools.getProperty(svgSelector.node(), "width", "baseVal", "value"),
+			height: Tools.getProperty(svgSelector.node(), "height", "baseVal", "value")
 		};
+		if (validateDimensions(nativeDimensions)) {
+			return nativeDimensions;
+		}
+
+		if (validateDimensions(clientDimensions)) {
+			return clientDimensions;
+		}
+
+		if (validateDimensions(bboxDimensions)) {
+			return bboxDimensions;
+		}
+
+		if (validateDimensions(attrDimensions)) {
+			return attrDimensions;
+		}
 	}
 
 	appendOrSelect(parent, query) {
