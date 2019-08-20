@@ -22,9 +22,6 @@ export class LayoutComponent extends Component {
 
 	private _instanceCount: number;
 
-	private _renderCallbacks = [];
-	private _renderCallback: Function;
-
 	constructor(children: Array<LayoutComponentChild>, options?: LayoutOptions) {
 		super();
 
@@ -66,7 +63,7 @@ export class LayoutComponent extends Component {
 
 		// Get parent SVG to render inside of
 		const svg = this._parent;
-		const { width, height } = this._services.domUtils.getSVGElementSize(svg, true);
+		const { width, height } = this._services.domUtils.getSVGElementSize(svg, { useAttrs: true });
 
 		// Pass children data to the hierarchy layout
 		// And calculate sum of sizes
@@ -95,14 +92,16 @@ export class LayoutComponent extends Component {
 		const updatedSVGs = svg.selectAll(`svg.layout-child-${this._instanceCount}`)
 			.data(root.leaves(), (d: any) => d.data.id);
 
+		updatedSVGs
+			.attr("width", (d: any) => d.x1 - d.x0)
+			.attr("height", (d: any) => d.y1 - d.y0);
+
 		const enteringSVGs = updatedSVGs
 			.enter()
 			.append("svg")
 				.attr("class", (d: any) => `layout-child layout-child-${this._instanceCount} ${+new Date()} ${d.data.id}`)
 				.attr("x", (d: any) => d.x0)
-				.attr("y", (d: any) => d.y0)
-				.attr("width", (d: any) => d.x1 - d.x0)
-				.attr("height", (d: any) => d.y1 - d.y0);
+				.attr("y", (d: any) => d.y0);
 
 		enteringSVGs.merge(svg.selectAll(`svg.layout-child-${this._instanceCount}`))
 			.each(function(d: any) {
@@ -110,23 +109,11 @@ export class LayoutComponent extends Component {
 				d.data.components.forEach(itemComponent => {
 					itemComponent.setParent(select(this));
 
-					if (d.data.syncWith) {
-						const layoutComponent = window[`lc-${d.data.syncWith}`];
-
-						const elToMatch = select(self._services.domUtils.getMainSVG()).select(`svg.graph-frame`);
-
-						if (layoutComponent && !self._renderCallback) {
-							self._renderCallback = self.renderCallback.bind(self, elToMatch, this, itemComponent);
-						} else {
-							itemComponent.render();
-						}
-					}
-
 					// Render preffered & fixed items
 					const growth = Tools.getProperty(d, "data", "growth", "x");
 					if (growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED) {
 						itemComponent.render();
-						// console.log("RENDER", ++window["ccount"]);
+						console.log("RENDER", ++window["ccount"]);
 					}
 				});
 			});
@@ -135,11 +122,9 @@ export class LayoutComponent extends Component {
 		.each(function(d: any) {
 			// Calculate preffered children sizes after internal rendering
 			const growth = Tools.getProperty(d, "data", "growth", "x");
-
+			const dimensions = self._services.domUtils.getSVGElementSize(select(this), { useBBox: true });
 			if (growth === LayoutGrowth.PREFERRED) {
-				const matchingSVGWidth = horizontal ?
-					self._services.domUtils.getSVGElementSize(select(this)).width :
-					self._services.domUtils.getSVGElementSize(select(this)).height;
+				const matchingSVGWidth = horizontal ? dimensions.width : dimensions.height;
 				const svgWidth = horizontal ?
 					(svg.node() as any).clientWidth || svg.attr("width") :
 					(svg.node() as any).clientHeight || svg.attr("height");
@@ -171,6 +156,8 @@ export class LayoutComponent extends Component {
 			})
 			.sum((d: any) => d.size);
 
+			console.log("hierarchyChildren", hierarchyChildren)
+
 			// Compute the position of all elements within the layout
 			treemap()
 				.tile(tileType)
@@ -191,7 +178,7 @@ export class LayoutComponent extends Component {
 						const growth = Tools.getProperty(d, "data", "growth", "x");
 						if (growth === LayoutGrowth.STRETCH) {
 							itemComponent.render();
-							// console.log("RENDER", ++window["ccount"]);
+							console.log("RENDER", ++window["ccount"]);
 						}
 					});
 
@@ -215,10 +202,6 @@ export class LayoutComponent extends Component {
 					// 	})
 					// }
 				});
-
-			if (this._renderCallback) {
-				this._renderCallback();
-			}
 		}, 0);
 	}
 
@@ -240,24 +223,5 @@ export class LayoutComponent extends Component {
 		this.children.forEach(child => {
 			child.components.map(component => component.setServices(newObj));
 		});
-	}
-
-	renderCallback(elToMatch: any, svg: any, itemComponent: any) {
-		if (!elToMatch.empty()) {
-			select(svg)
-				.attr("x", elToMatch.attr("x"))
-				.attr("width", elToMatch.attr("width"));
-
-			itemComponent.render();
-			// console.log("RENDER", ++window["ccount"]);
-		}
-	}
-
-	addRenderCallback(cb: Function) {
-		if (this._renderCallbacks.indexOf(cb) === -1) {
-			this._renderCallbacks.push(cb);
-		} else {
-			console.log("CALLBACK NOT ADDED");
-		}
 	}
 }

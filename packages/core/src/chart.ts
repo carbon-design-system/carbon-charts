@@ -79,7 +79,7 @@ export class Chart {
 			this.components.forEach(component => {
 				component.render();
 
-				// console.log("RENDER", ++window["ccount"]);
+				console.log("RENDER", ++window["ccount"]);
 			});
 
 			this.services.events.dispatchEvent("render-finished");

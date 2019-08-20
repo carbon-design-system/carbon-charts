@@ -74,7 +74,7 @@ export class ScatterChart extends Chart {
 				}),
 				new Grid(),
 				new Scatter(),
-				// new Line(),
+				new Line(),
 			],
 			growth: {
 				x: LayoutGrowth.STRETCH,

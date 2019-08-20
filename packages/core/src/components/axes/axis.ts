@@ -69,7 +69,7 @@ export class Axis extends Component {
 				}
 			}
 
-			this._model.set(modelUpdates);
+			this._model.set(modelUpdates, true);
 		}
 
 		this.scale = scaleFunction;
@@ -110,7 +110,7 @@ export class Axis extends Component {
 		const axisOptions = Tools.getProperty(this._model.getOptions(), "axes", axisPosition);
 
 		const svg = this.getContainerSVG();
-		const { width, height } = this._services.domUtils.getSVGElementSize(this._parent, true);
+		const { width, height } = this._services.domUtils.getSVGElementSize(this._parent, { useAttrs: true });
 
 		let startPosition, endPosition;
 		if (axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP) {
