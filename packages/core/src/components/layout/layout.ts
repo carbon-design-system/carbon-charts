@@ -156,8 +156,6 @@ export class LayoutComponent extends Component {
 			})
 			.sum((d: any) => d.size);
 
-			console.log("hierarchyChildren", hierarchyChildren)
-
 			// Compute the position of all elements within the layout
 			treemap()
 				.tile(tileType)
