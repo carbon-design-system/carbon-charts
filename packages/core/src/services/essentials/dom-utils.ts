@@ -103,12 +103,11 @@ export class DOMUtils extends Service {
 			if (!isNaN(dimensions.height) && !isNaN(dimensions.width) &&
 				("" + dimensions.width + dimensions.height).indexOf("%") === -1 &&
 				dimensions.width > 0 && dimensions.height > 0) {
-					console.log("validate dimensions", true, dimensions)
 				return true;
 			}
 
 			return false;
-		}
+		};
 
 		// If both attribute values are numbers
 		// And not percentages or NaN
