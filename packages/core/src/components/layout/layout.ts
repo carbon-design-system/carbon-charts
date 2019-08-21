@@ -123,7 +123,6 @@ export class LayoutComponent extends Component {
 			// Calculate preffered children sizes after internal rendering
 			const growth = Tools.getProperty(d, "data", "growth", "x");
 			const matchingSVGDimensions = self._services.domUtils.getSVGElementSize(select(this), { useBBox: true });
-
 			if (growth === LayoutGrowth.PREFERRED) {
 				const matchingSVGWidth = horizontal ? matchingSVGDimensions.width : matchingSVGDimensions.height;
 				const svgWidth = horizontal ? width : height;
