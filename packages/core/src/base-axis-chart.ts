@@ -1,7 +1,7 @@
 // D3 Imports
 import { select, mouse } from "d3-selection";
 import { scaleBand, scaleLinear, ScaleBand, ScaleLinear } from "d3-scale";
-import { axisBottom, axisLeft, axisRight, AxisScale, AxisDomain } from "d3-axis";
+import { axisBottom, axisLeft, axisRight } from "d3-axis";
 import { min, max } from "d3-array";
 
 import { BaseChart } from "./base-chart";
@@ -197,8 +197,8 @@ export class BaseAxisChart extends BaseChart {
 			this.repositionYAxisTitle();
 		}
 
-		this.drawBackdrop();
 		this.dispatchEvent("resize");
+		this.drawBackdrop();
 	}
 
 	/**************************************
@@ -492,19 +492,18 @@ export class BaseAxisChart extends BaseChart {
 	}
 
 	/**
-	 * Draws the background for the chart grid
+	 * Draws the background for the chart grid. Uses the axis to get the bounds and position of the backdrop.
 	 */
 	drawBackdrop() {
-		// Get height from the grid
-		const xGridHeight = this.innerWrap.select(".x.grid").node().getBBox().height;
-		const yGridBBox = this.innerWrap.select(".y.grid").node().getBBox();
 		const backdrop = Tools.appendOrSelect(this.innerWrap, "rect.chart-grid-backdrop");
+		const [xScaleStart, xScaleEnd] = this.x.range();
+		const [yScaleEnd, yScaleStart] = this.y.range();
 
 		backdrop
-			.attr("x", yGridBBox.x)
-			.attr("y", yGridBBox.y)
-			.attr("width", yGridBBox.width)
-			.attr("height", xGridHeight)
+			.attr("x", xScaleStart)
+			.attr("y", yScaleStart)
+			.attr("width", xScaleEnd)
+			.attr("height", yScaleEnd)
 			.lower();
 	}
 
