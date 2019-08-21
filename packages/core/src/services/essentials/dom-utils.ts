@@ -68,7 +68,12 @@ export class DOMUtils extends Service {
 		let containerHeight = holder.clientHeight;
 
 		const resizeCallback = this.debounce(15, (entries, observer) => {
-			if (Math.abs(containerWidth - holder.clientWidth) > 1
+			if (this._model.get("destroyed") === true) {
+				// On some versions of Chrome the resize observer is notified
+				// When chart is destroyed and the holder is removed
+				console.log("Cancel resize, chart has been destroyed");
+			} else if (
+				Math.abs(containerWidth - holder.clientWidth) > 1
 				|| Math.abs(containerHeight - holder.clientHeight) > 1) {
 				containerWidth = holder.clientWidth;
 				containerHeight = holder.clientHeight;
@@ -88,11 +93,16 @@ export class DOMUtils extends Service {
 			height: svgSelector.attr("height")
 		};
 
-		const bbox = svgSelector.node().getBBox();
-		const bboxDimensions = {
-			width: bbox.width,
-			height: bbox.height
-		};
+		let bbox, bboxDimensions;
+		// In many versions of Firefox
+		// getBBox will cause an "NSFailure" error
+		try {
+			bbox = svgSelector.node().getBBox();
+			bboxDimensions = {
+				width: bbox.width,
+				height: bbox.height
+			};
+		} catch (e) {}
 
 		const clientDimensions = {
 			width: svgSelector.node().clientWidth,
@@ -100,7 +110,8 @@ export class DOMUtils extends Service {
 		};
 
 		const validateDimensions = dimensions => {
-			if (!isNaN(dimensions.height) && !isNaN(dimensions.width) &&
+			if (dimensions && dimensions.width && dimensions.height &&
+				!isNaN(dimensions.height) && !isNaN(dimensions.width) &&
 				("" + dimensions.width + dimensions.height).indexOf("%") === -1 &&
 				dimensions.width > 0 && dimensions.height > 0) {
 				return true;

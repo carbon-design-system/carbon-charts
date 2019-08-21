@@ -90,5 +90,7 @@ export class Chart {
 
 	destroy() {
 		this.services.domUtils.getHolder().remove();
+
+		this.model.set({ destroyed: true }, true);
 	}
 }
