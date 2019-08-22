@@ -71,16 +71,14 @@ export class AreaChart extends ScatterChart {
 		gLines.append("path")
 			.attr("stroke", d => this.getStrokeColor(d.label))
 			.datum(d => d.data)
-			.attr("class", "line")
-			.attr("data-area-component", "stroke")
+			.attr("class", "line area-stroke")
 			.attr("d", this.areaGeneratorStroke);
 
 		gLines.append("path")
 			.attr("fill", d => this.getStrokeColor(d.label))
 			.attr("fill-opacity", 0.3)
 			.datum(d => d.data)
-			.attr("class", "line")
-			.attr("data-area-component", "fill")
+			.attr("class", "line area-fill")
 			.attr("d", this.areaGeneratorFill);
 
 		super.draw();
@@ -112,7 +110,7 @@ export class AreaChart extends ScatterChart {
 			.style("opacity", 0)
 			.transition(this.getDefaultTransition())
 			.style("opacity", 1)
-			.attr("class", "line")
+			.attr("class", "line area-stroke")
 			.attr("d", this.areaGeneratorStroke);
 
 		addedLineGroups.append("path")
@@ -122,7 +120,7 @@ export class AreaChart extends ScatterChart {
 			.style("opacity", 0)
 			.transition(this.getDefaultTransition())
 			.style("opacity", 1)
-			.attr("class", "line")
+			.attr("class", "line area-fill")
 			.attr("d", this.areaGeneratorFill);
 
 		// Remove lines that are no longer needed
@@ -142,7 +140,7 @@ export class AreaChart extends ScatterChart {
 
 		const transitionToUse = animate ? this.getFillTransition() : this.getInstantTransition();
 		const self = this;
-		gLines.selectAll("path.line[data-area-component='fill']")
+		gLines.selectAll("path.area-fill")
 			.datum(function(d) {
 				const parentDatum = select(this.parentNode).datum() as any;
 
@@ -154,9 +152,9 @@ export class AreaChart extends ScatterChart {
 				const parentDatum = select(this.parentNode).datum() as any;
 				return self.getStrokeColor(parentDatum.label);
 			})
-			.attr("class", "line")
+			.attr("class", "line area-fill")
 			.attr("d", this.areaGeneratorFill);
-		gLines.selectAll("path.line[data-area-component='stroke']")
+		gLines.selectAll("path.area-stroke")
 			.datum(function(d) {
 				const parentDatum = select(this.parentNode).datum() as any;
 
@@ -168,7 +166,7 @@ export class AreaChart extends ScatterChart {
 				const parentDatum = select(this.parentNode).datum() as any;
 				return self.getStrokeColor(parentDatum.label);
 			})
-			.attr("class", "line")
+			.attr("class", "line area-stroke")
 			.attr("d", this.areaGeneratorStroke);
 
 		super.updateElements(animate);
