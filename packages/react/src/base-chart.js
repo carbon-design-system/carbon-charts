@@ -24,9 +24,7 @@ export default class BaseChart extends React.Component {
 		Object.assign(this, this.chart);
 	}
 
-	componentDidUpdate(newProps) {
-		const { data } = newProps;
-
-		this.chart.setData(data);
+	componentDidUpdate() {
+		this.chart.setData(this.props.data);
 	}
 }
