@@ -259,13 +259,17 @@ export namespace Tools {
 
 	export const getProperty = (object, ...propPath) => {
 		let position = object;
-		for (const prop of propPath) {
-			if (position[prop]) {
-				position = position[prop];
-			} else {
-				return null;
+		if (position) {
+			for (const prop of propPath) {
+				if (position[prop]) {
+					position = position[prop];
+				} else {
+					return null;
+				}
 			}
+			return position;
 		}
-		return position;
+
+		return null;
 	};
 }

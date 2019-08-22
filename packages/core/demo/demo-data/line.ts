@@ -146,6 +146,7 @@ export const lineOptions = () => ({
 
 
 export const lineTimeSeriesOptions = () => ({
+	title: "Line",
 	// animations: false,
 	accessibility: false,
 	curve: "curveNatural",

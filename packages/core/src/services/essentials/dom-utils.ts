@@ -93,7 +93,7 @@ export class DOMUtils extends Service {
 			height: svgSelector.attr("height")
 		};
 
-		let bbox, bboxDimensions;
+		let bbox, bboxDimensions, boundingRect, boundingRectDimensions;
 		// In many versions of Firefox
 		// getBBox will cause an "NSFailure" error
 		try {
@@ -101,6 +101,14 @@ export class DOMUtils extends Service {
 			bboxDimensions = {
 				width: bbox.width,
 				height: bbox.height
+			};
+		} catch (e) {}
+
+		try {
+			boundingRect = svgSelector.node().getBoundingClientRect();
+			boundingRectDimensions = {
+				width: boundingRect.width,
+				height: boundingRect.height
 			};
 		} catch (e) {}
 
@@ -133,6 +141,10 @@ export class DOMUtils extends Service {
 
 			if (options.useBBox && validateDimensions(bboxDimensions)) {
 				return bboxDimensions;
+			}
+
+			if (options.useBoundingRect && validateDimensions(boundingRectDimensions)) {
+				return boundingRectDimensions;
 			}
 		}
 

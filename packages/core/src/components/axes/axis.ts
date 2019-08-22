@@ -30,12 +30,7 @@ export class Axis extends Component {
 			this.options = options;
 		}
 
-		this.margins = {
-			top: 22,
-			right: 45,
-			bottom: 50,
-			left: 65
-		};
+		this.margins = this.options.margins;
 	}
 
 	createOrGrabScale() {
@@ -105,7 +100,7 @@ export class Axis extends Component {
 		}
 	}
 
-	render() {
+	render(options?: any) {
 		const { position: axisPosition } = this.options;
 		const axisOptions = Tools.getProperty(this._model.getOptions(), "axes", axisPosition);
 
@@ -183,18 +178,23 @@ export class Axis extends Component {
 		}
 
 		// Apply new axis to the axis element
-		axisRef.transition(this._services.transitions.getDefaultTransition())
-			.call(axis);
+		if (options.animate === false) {
+			axisRef.call(axis);
+		} else {
+			axisRef.transition(this._services.transitions.getDefaultTransition())
+				.call(axis);
+		}
 	}
 
 	getValueFromScale(datum: any, index?: number) {
+		const value = isNaN(datum) ? datum.value : datum;
 		if (this.scaleType === ScaleTypes.LABELS) {
 			const correspondingLabel = this._model.getDisplayData().labels[index];
 			return this.scale(correspondingLabel) + this.scale.step() / 2;
 		} else if (this.scaleType === ScaleTypes.TIME) {
 			return this.scale(new Date(datum.label || datum.key));
 		} else {
-			return this.scale(datum.value);
+			return this.scale(value);
 		}
 	}
 
@@ -232,5 +232,11 @@ export class Axis extends Component {
 		}
 
 		return yMin;
+	}
+
+	getElementRef() {
+		const { position } = this.options;
+
+		return this._services.domUtils.appendOrSelect(this.getContainerSVG(), `g.axis.${position}`);
 	}
 }

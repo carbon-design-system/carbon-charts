@@ -1,24 +1,20 @@
 // Internal Imports
 import { Component } from "../component";
-import * as Configuration from "../../configuration";
-import { ModelStateKeys, AxisPositions } from "../../interfaces";
-import { Tools } from "../../tools";
+import { AxisPositions } from "../../interfaces";
 import { Axis } from "./axis";
-
-// D3 Imports
-import { scaleBand, scaleLinear, scaleTime } from "d3-scale";
-import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
-import { min, max } from "d3-array";
-import { timeFormat } from "d3-time-format";
 
 export class FourAxes extends Component {
 	type = "four-axes";
 
 	options: any;
-
-	margins: any;
-
 	children: Array<Axis> = [];
+
+	margins = {
+		top: 0,
+		right: 0,
+		bottom: 0,
+		left: 0
+	};
 
 	constructor(options?: any) {
 		super();
@@ -31,7 +27,8 @@ export class FourAxes extends Component {
 			if (this.options.axes[axisPosition]) {
 				const axisComponent = new Axis({
 					position: axisPosition,
-					axes: this.options.axes
+					axes: this.options.axes,
+					margins: this.margins
 				});
 
 				this.children.push(axisComponent);
@@ -39,10 +36,50 @@ export class FourAxes extends Component {
 		});
 	}
 
-	render() {
+	render(animate = false) {
 		this.children.forEach(child => {
-			child.render();
+			child.render({
+				animate
+			});
 		});
+
+		const margins = {} as any;
+
+		this.children.forEach(child => {
+			const axisPosition = child.options.position;
+			const { width, height } = this._services.domUtils.getSVGElementSize(child.getElementRef(), { useBBox: true });
+
+			switch (axisPosition) {
+				case AxisPositions.TOP:
+					margins.top = height;
+					break;
+				case AxisPositions.BOTTOM:
+					margins.bottom = height;
+					break;
+				case AxisPositions.LEFT:
+					margins.left = width;
+					break;
+				case AxisPositions.RIGHT:
+					margins.right = width;
+					break;
+			}
+		});
+
+		// If the new margins are different than the existing ones
+		const isNotEqual = Object.keys(margins).some(marginKey => {
+			const marginVal = margins[marginKey];
+			return this.margins[marginKey] !== marginVal;
+		})
+
+		if (isNotEqual) {
+			this.margins = margins;
+
+			this.children.forEach(child => {
+				child.margins = this.margins;
+			});
+
+			this.render(true);
+		}
 	}
 
 	setParent(parent: any) {
