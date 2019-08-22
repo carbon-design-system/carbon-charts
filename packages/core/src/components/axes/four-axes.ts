@@ -69,7 +69,7 @@ export class FourAxes extends Component {
 		const isNotEqual = Object.keys(margins).some(marginKey => {
 			const marginVal = margins[marginKey];
 			return this.margins[marginKey] !== marginVal;
-		})
+		});
 
 		if (isNotEqual) {
 			this.margins = margins;
