@@ -10,10 +10,10 @@ export class Scatter extends Component {
 
 	render() {
 		const svg = this.getContainerSVG();
-console.log("DISPLAYDATA", this._model.getDisplayData().datasets)
+
 		const dotGroups = svg.selectAll("g.dots")
 			.data(this._model.getDisplayData().datasets, dataset => dataset.label);
-console.log("EWGWE", dotGroups)
+
 		const dotGroupsEnter = dotGroups.enter()
 			.append("g")
 				.classed("dots", true);
