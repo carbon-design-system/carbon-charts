@@ -87,11 +87,11 @@ export class ScatterChart extends Chart {
 			components: [
 				new LayoutComponent(
 					[
-						axisFrameComponent,
-						legendComponent
+						legendComponent,
+						axisFrameComponent
 					],
 					{
-						direction: LayoutDirection.ROW
+						direction: LayoutDirection.COLUMN
 					}
 				)
 			],

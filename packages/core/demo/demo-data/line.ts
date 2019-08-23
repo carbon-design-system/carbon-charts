@@ -252,6 +252,58 @@ export const scatterTimeSeriesData = {
 				}
 			]
 		},
+		{
+			label: "Dataset 3",
+			backgroundColors: [colors[2]],
+			data: [
+				{
+					key: new Date(2019, 0, 1),
+					value: 50000
+				},
+				{
+					key: new Date(2019, 0, 5),
+					value: 15000
+				},
+				{
+					key: new Date(2019, 0, 8),
+					value: 20000
+				},
+				{
+					key: new Date(2019, 0, 13),
+					value: 39213
+				},
+				{
+					key: new Date(2019, 0, 17),
+					value: 61213
+				}
+			]
+		},
+		{
+			label: "Dataset 4",
+			backgroundColors: [colors[3]],
+			data: [
+				{
+					key: new Date(2019, 0, 2),
+					value: 10
+				},
+				{
+					key: new Date(2019, 0, 6),
+					value: 37312
+				},
+				{
+					key: new Date(2019, 0, 8),
+					value: 51432
+				},
+				{
+					key: new Date(2019, 0, 15),
+					value: 40323
+				},
+				{
+					key: new Date(2019, 0, 19),
+					value: 31300
+				}
+			]
+		},
 		// {
 		// 	label: "Dataset 3",
 		// 	backgroundColors: [colors[2]],
@@ -292,7 +344,7 @@ export const scatterData = {
 			]
 		},
 		{
-			label: "Dataset 3",
+			label: "Dataset 3 long name",
 			backgroundColors: [colors[2]],
 			data: [
 				41200,
@@ -300,6 +352,40 @@ export const scatterData = {
 				34210,
 				1400,
 				42100
+			]
+		},
+
+		{
+			label: "Dataset 4 long name",
+			backgroundColors: [colors[3]],
+			data: [
+				22000,
+				1200,
+				9000,
+				24000,
+				3000
+			]
+		},
+		{
+			label: "Dataset 5 long name",
+			backgroundColors: [colors[4]],
+			data: [
+				2412,
+				30000,
+				10000,
+				5000,
+				31000
+			]
+		},
+		{
+			label: "Dataset 6 long name",
+			backgroundColors: [colors[5]],
+			data: [
+				0,
+				20000,
+				40000,
+				60000,
+				80000
 			]
 		}
 	]

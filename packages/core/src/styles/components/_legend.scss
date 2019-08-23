@@ -1,4 +1,6 @@
 g.cc-legend {
+	user-select: none;
+
 	&.clickable {
 		g.legend-item {
 			&:hover {
