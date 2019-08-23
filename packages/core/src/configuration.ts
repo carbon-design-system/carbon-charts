@@ -39,6 +39,16 @@ export enum ThresholdTheme {
 	WARNING = "warning"
 }
 
+/**
+ * enum of supported tooltip position relative to
+ */
+export enum TooltipPosition {
+	MOUSE = "mouse",
+	TOP = "top",
+	BOTTOM = "bottom"
+}
+
+
 /*
  *****************************
  * User configurable options *
@@ -721,6 +731,9 @@ export const tooltip = {
 	axisTooltip: {
 		axisThreshold: 0.25,
 	},
+	barTooltip : {
+		paddingTop: 4
+	}
 
 };
 

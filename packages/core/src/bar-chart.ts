@@ -293,6 +293,67 @@ export class BarChart extends BaseAxisChart {
 		super.resizeChart();
 	}
 
+	/**
+	 * The default tooltip style for single data values (in bar).
+	 * @param color the color associated with the dataset (optional)
+	 * @param value the value of the datapoint
+	 * @param label the associated label for the data
+	 */
+	generateTooltipHTML(label: any, value: any, color?: string) {
+		return `<div class="datapoint-tooltip"><p class="value">${value}</p></div>`;
+	}
+
+	/**
+	 * Overriding the showTooltip to allow bar charts to have their own tooltip positioning based on bar heights and data.
+	 * All axis charts do not conform to or build on this tooltip.
+	 * @param d
+	 * @param clickedElement
+	 */
+	showTooltip(d, clickedElement?: Element) {
+		// Reset opacity of all elements in the chart
+		this.resetOpacity();
+
+		const { html } = this.options.tooltip;
+		let contentHTML;
+		if (html) {
+			// use the injected html constructor
+			// it can return html or a array of html
+			contentHTML = html(d);
+		} else {
+			if (d.length > 1 ) {
+				// create a multipoint tooltip
+				contentHTML = this.getMultiPointTooltipHTML(d);
+			} else {
+				// create a single datapoint tooltip
+				contentHTML = this.getTooltipHTML(d);
+			}
+		}
+
+		// until refactor we need to account for the legend height (40 or 0 if its right align)
+		// as well as the inner wrap translations
+		const legendHeight = this.container.select(".legend-wrapper").node().getBoundingClientRect().height;
+		const translateWrap = Tools.getTranslationValues(this.innerWrap.node());
+		const rect = clickedElement.getBoundingClientRect();
+
+		// tooltip to be placed directly above bar (or below if it is bar with negative values)
+		const tooltipPos = {
+			left: this.x(d.label) + this.x.step() - +translateWrap.tx, //
+			top: this.y(d.value) - +translateWrap.ty + legendHeight };
+
+		// if there are multiple datasets grouped, we need to get the x location and the offset per dataset
+		// if there isnt not multiple datasets, we just need to use the bar to get the mid point to center the tooltip
+		tooltipPos.left += this.displayData.datasets.length > 1 ? this.getBarX(d) : rect.width / 2;
+
+		// if there is a negative value bar chart, need to place the tooltip below the bar
+		if (d.value <= 0) {
+			tooltipPos.top += Configuration.tooltip.barTooltip.paddingTop;
+			this.tooltip.show(contentHTML, {placement: Configuration.TooltipPosition.BOTTOM, position: tooltipPos});
+		} else {
+			tooltipPos.top -= Configuration.tooltip.barTooltip.paddingTop;
+			this.tooltip.show(contentHTML, {placement: Configuration.TooltipPosition.TOP, position: tooltipPos});
+		}
+	}
+
 	addDataPointEventListener() {
 		const self = this;
 		const { accessibility } = this.options;
@@ -308,7 +369,6 @@ export class BarChart extends BaseAxisChart {
 				self.showTooltip(d, this);
 				self.reduceOpacity(this);
 			})
-			.on("mousemove", d => this.tooltip.positionTooltip())
 			.on("mouseout", function(d) {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.bars.mouseout;
 				select(this)

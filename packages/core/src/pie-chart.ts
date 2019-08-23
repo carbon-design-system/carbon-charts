@@ -285,16 +285,14 @@ export class PieChart extends BaseChart {
 	}
 
 	/**
-	 * Each gridline tooltip has an indicator color for the dataset and the value at the highlighted gridline.
-	 * @param color the color associated with the dataset
+	 * The default tooltip style for single data values.
+	 * @param color the color associated with the dataset (optional)
 	 * @param value the value of the datapoint
+	 * @param label the associated label for the data
 	 */
-	// generateTooltipHTML = ( label:any, value: any, color?: String) => {
-	// 	return `<div class="datapoint-tooltip">
-	// 		<a style="background-color:${color}" class="tooltip-color"></a>
-	// 		<p>${value}</p>
-	// 		</div>`;
-	// }
+	generateTooltipHTML(label: any, value: any, color?: string) {
+		return `<div class="datapoint-tooltip"><p class="label">${label}</p><p class="value">${value}</p></div>`;
+	}
 
 	getTooltipHTML = d => this.generateTooltipHTML(d.data.label, d.value.toLocaleString());
 

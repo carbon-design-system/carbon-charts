@@ -139,16 +139,10 @@ export const lineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-<<<<<<< HEAD
-	title: "Line Chart",
-	theme: getTheme(),
 	tooltip: {
-		//html: (d) => { console.log(d); return `<p> hello </p>`; },
 		gridline: true
-	}
-=======
+	},
 	theme: getTheme()
->>>>>>> c4bbf3fb1c1dec81876c610089d9af9fc0cd376f
 };
 
 export const scatterData = {

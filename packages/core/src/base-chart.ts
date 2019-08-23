@@ -838,12 +838,13 @@ export class BaseChart {
 	}
 
 	/**
-	 * Each gridline tooltip has an indicator color for the dataset and the value at the highlighted gridline.
-	 * @param color the color associated with the dataset
+	 * The default tooltip style for single data values.
+	 * @param color the color associated with the dataset (optional)
 	 * @param value the value of the datapoint
+	 * @param label the associated label for the data
 	 */
-	generateTooltipHTML = (label: any, value: any, color?: string) => {
-		return `<p class='bignum'>${label}</p><p>${value}</p>`;
+	generateTooltipHTML(label: any, value: any, color?: string){
+		return `<div class="datapoint-tooltip"><p class="value">${value}</p></div>`;
 	}
 
 	getTooltipHTML = d => {
@@ -881,7 +882,6 @@ export class BaseChart {
 				contentHTML = this.getTooltipHTML(d);
 			}
 		}
-
 		this.tooltip.show(contentHTML);
 	}
 

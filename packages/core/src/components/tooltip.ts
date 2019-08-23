@@ -16,8 +16,27 @@ export class ChartTooltip {
 
 	getRef = () => select(this.container).select("div.chart-tooltip").node() as HTMLElement;
 
-	positionTooltip() {
+
+	positionTooltip(positionOverride?: any) {
 		const target = this.getRef();
+
+		// override position to place tooltip at {placement:.., position:{top:.. , left:..}}
+		if (positionOverride) {
+			// placement determines whether the tooltip is centered above or below the position provided
+			const placement = positionOverride.placement === Configuration.TooltipPosition.TOP ? PLACEMENTS.TOP : PLACEMENTS.BOTTOM;
+
+			// Get coordinates to where tooltip should be positioned
+			const position = this.positionService.findPositionAt(
+				positionOverride.position,
+				target,
+				placement
+			);
+
+			this.positionService.setElement(target, position);
+			return;
+		}
+
+		// otherwise/default place the tooltip using the mouse
 		const mouseRelativePos = mouse(this.container);
 
 		// Find out whether tooltip should be shown on the left or right side
@@ -59,7 +78,7 @@ export class ChartTooltip {
 	 * Shows a tooltip for the Chart. Tooltip can be a single datapoint or multi datapoint tooltip.
 	 * @param contentHTML an array of HTML content for all points to display
 	 */
-	show(contentHTML) {
+	show(contentHTML, positionOverride?) {
 		// Remove existing tooltips on the page
 		// TODO - Update class to not conflict with other elements on page
 		const existingTooltips = selectAll(".chart-tooltip");
@@ -76,8 +95,7 @@ export class ChartTooltip {
 				.attr("class", "content-box")
 				.html(contentHTML);
 
-			// Position the tooltip
-			this.positionTooltip();
+			this.positionTooltip(positionOverride);
 
 			// only want to fade in if a tooltip doesn't already exist
 			if (fadeIn) {

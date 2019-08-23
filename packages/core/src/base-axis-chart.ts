@@ -705,10 +705,11 @@ export class BaseAxisChart extends BaseChart {
 	 * @param color the color associated with the dataset
 	 * @param value the value of the datapoint
 	 */
-	generateTooltipHTML = ( label: any, value: any, color?: String) => {
+	generateTooltipHTML( label: any, value: any, color?: String){
 		return `<div class="datapoint-tooltip">
 			<a style="background-color:${color}" class="tooltip-color"></a>
-			<p>${value}</p>
+			<p class="label">${label}</p>
+			<p class="value">${value}</p>
 			</div>`;
 	}
 
@@ -739,7 +740,7 @@ export class BaseAxisChart extends BaseChart {
 	 * @param d domain label
 	 */
 	getDataWithDomain(d: any) {
-		console.warn("Each Chart needs it's own getDataWithDomain() function until refactor ");
+		console.warn("Each Chart that implements gridline tooltips needs it's own getDataWithDomain() function until refactor ");
 	}
 
 	/**
@@ -747,7 +748,7 @@ export class BaseAxisChart extends BaseChart {
 	 * @param x x position value
 	 */
 	getDataWithXValue(x: any) {
-		console.warn("Each Chart needs it's own getDataWithXValue() function until refactor ");
+		console.warn("Each Chart that implements gridline tooltips needs it's own getDataWithXValue() function until refactor");
 	}
 
 	/**************************************
