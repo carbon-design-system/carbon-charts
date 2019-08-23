@@ -705,7 +705,7 @@ export class BaseAxisChart extends BaseChart {
 	 * @param color the color associated with the dataset
 	 * @param value the value of the datapoint
 	 */
-	generateTooltipHTML( label: any, value: any, color?: String){
+	generateTooltipHTML( label: any, value: any, color?: String) {
 		return `<div class="datapoint-tooltip">
 			<a style="background-color:${color}" class="tooltip-color"></a>
 			<p class="label">${label}</p>

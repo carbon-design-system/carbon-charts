@@ -122,7 +122,7 @@ export class ChartTooltip {
 		// 	.style("opacity", 0)
 		// 	.remove();
 
-		//this.removeEventListeners();
+		// this.removeEventListeners();
 	}
 
 	handleTooltipEvents(evt: Event) {

@@ -843,7 +843,7 @@ export class BaseChart {
 	 * @param value the value of the datapoint
 	 * @param label the associated label for the data
 	 */
-	generateTooltipHTML(label: any, value: any, color?: string){
+	generateTooltipHTML(label: any, value: any, color?: string) {
 		return `<div class="datapoint-tooltip"><p class="value">${value}</p></div>`;
 	}
 
