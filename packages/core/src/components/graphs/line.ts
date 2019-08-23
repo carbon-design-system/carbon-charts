@@ -29,8 +29,9 @@ export class Line extends Component {
 
 		const self = this;
 
-		const enteringPaths = enteringLineGroups.append("path");
-		enteringPaths.attr("opacity", 0);
+		const enteringPaths = enteringLineGroups.append("path")
+			.attr("opacity", 0);
+
 		enteringPaths.merge(svg.selectAll("g.lines path"))
 			.attr("stroke", function(d) {
 				const parentDatum = select(this.parentNode).datum() as any;
@@ -49,7 +50,6 @@ export class Line extends Component {
 			.attr("d", this.lineGenerator);
 
 		lineGroups.exit()
-			.transition(this._services.transitions.getDefaultTransition())
 			.attr("opacity", 0)
 			.remove();
 	}
