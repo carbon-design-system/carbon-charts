@@ -72,7 +72,7 @@ export class FourAxes extends Component {
 		});
 
 		if (isNotEqual) {
-			this.margins = margins;
+			this.margins = Object.assign(this.margins, margins);
 
 			this.children.forEach(child => {
 				child.margins = this.margins;
