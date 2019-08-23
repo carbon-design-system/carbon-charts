@@ -18,31 +18,78 @@ export class Legend extends Component {
 			.append("g")
 			.classed("legend-item", true);
 
+		// Configs
+		const checkboxRadius = Configuration.legend.checkbox.radius;
+		const legendItemsHorizontalSpacing = Configuration.legend.items.horizontalSpace;
+		const legendItemsVerticalSpacing = Configuration.legend.items.verticalSpace;
+		const spaceNeededForCheckbox = (checkboxRadius * 2) + Configuration.legend.checkbox.spaceAfter;
+
 		addedLegendItems.append("rect")
 			.merge(legendItems.select("rect"))
-				.attr("width", 12)
-				.attr("height", 12)
-				.attr("x", 1)
-				.attr("y", (d, i) => 2 + (30 * i))
-				.attr("r", 6)
-				.attr("rx", 3)
-				.attr("ry", 3)
-				.style("fill", d => {
-					if (d.value === Configuration.legend.items.status.ACTIVE) {
-						return this._model.getStrokeColor(d.key);
-					}
+			.attr("width", 12)
+			.attr("height", 12)
+			.attr("r", checkboxRadius)
+			.attr("rx", 1)
+			.attr("ry", 1)
+			.style("fill", d => {
+				if (d.value === Configuration.legend.items.status.ACTIVE) {
+					return this._model.getStrokeColor(d.key);
+				}
 
-					return "white";
-				})
-				.attr("stroke", d => this._model.getStrokeColor(d.key));
+				return "white";
+			})
+			.attr("stroke", d => this._model.getStrokeColor(d.key));
 
 		addedLegendItems.append("text")
 			.merge(legendItems.select("text"))
-				.attr("x", 20)
-				.attr("y", (d, i) => 9 + (30 * i))
-				.text(d => d.key)
-				.style("font-size", "15px")
-				.attr("alignment-baseline", "middle");
+			.text(d => d.key)
+			.style("font-size", "15px")
+			.attr("alignment-baseline", "middle");
+
+		const self = this;
+		let startingPoint = 0;
+		let lineNumber = 0;
+		let itemIndexInLine = 0;
+		addedLegendItems.merge(svg.selectAll("g.legend-item"))
+			.each(function (d, i) {
+				const legendItem = select(this);
+				const previousLegendItem = select(svg.selectAll("g.legend-item").nodes()[i - 1]);
+
+				if (itemIndexInLine === 0 || previousLegendItem.empty()) {
+					// Position checkbox
+					legendItem.select("rect")
+						.attr("x", 0)
+						.attr("y", lineNumber * legendItemsVerticalSpacing);
+
+					// Position text
+					legendItem.select("text")
+						.attr("x", spaceNeededForCheckbox)
+						.attr("y", 7 + (lineNumber * legendItemsVerticalSpacing));
+				} else {
+					const svgDimensions = self._services.domUtils.getSVGElementSize(self._parent, { useAttr: true });
+					const legendItemTextDimensions = self._services.domUtils.getSVGElementSize(select(this).select("text"), { useBBox: true });
+					const lastLegendItemTextDimensions = self._services.domUtils.getSVGElementSize(previousLegendItem.select("text"), { useBBox: true });
+					startingPoint = startingPoint + lastLegendItemTextDimensions.width + spaceNeededForCheckbox + legendItemsHorizontalSpacing;
+
+					if (startingPoint + spaceNeededForCheckbox + legendItemTextDimensions.width > svgDimensions.width) {
+						lineNumber++;
+						startingPoint = 0;
+						itemIndexInLine = 0;
+					}
+
+					// Position checkbox
+					legendItem.select("rect")
+						.attr("x", startingPoint)
+						.attr("y", lineNumber * legendItemsVerticalSpacing);
+
+					// Position text
+					legendItem.select("text")
+						.attr("x", startingPoint + spaceNeededForCheckbox)
+						.attr("y", 7 + (lineNumber * legendItemsVerticalSpacing));
+				}
+
+				itemIndexInLine++;
+			});
 
 		// Remove old elements as needed.
 		legendItems.exit()
@@ -51,23 +98,9 @@ export class Legend extends Component {
 
 		if (this._model.getOptions().legendClickable) {
 			svg.classed("clickable", true);
-			this.setClickableLegend();
 
 			this.addEventListeners();
 		}
-	}
-
-	setClickableLegend() {
-		// const self = this;
-		// const c = select(this.container);
-		// const tooltip = c.select(".legend-tooltip-content");
-		// tooltip.selectAll(".legend-btn").each(function() {
-		// 	select(this).on("click", function() {
-		// 		self.updateLegend(this);
-
-		// 		// TODO - setClickableLegendInTooltip()
-		// 	});
-		// });
 	}
 
 	getLegendItemArray() {
@@ -80,46 +113,6 @@ export class Legend extends Component {
 		}));
 	}
 
-	getKeysFromData() {
-		const keys = {};
-
-		this._model.getDisplayData().datasets.forEach(dataset => {
-			keys[dataset.label] = Configuration.legend.items.status.ACTIVE;
-		});
-
-		// Apply disabled legend items from previous data
-		// That also are applicable to the new data
-		// const disabledLegendItems = this.getDisabledLegendItems();
-		// Object.keys(keys).forEach(key => {
-		// 	if (disabledLegendItems.indexOf(key) !== -1) {
-		// 		keys[key] = Configuration.legend.items.status.DISABLED;
-		// 	}
-		// });
-
-		// if (!this.fixedDataLabels) {
-		// 	this.fixedDataLabels = this.displayData.labels;
-		// } else {
-		// 	this.displayData.labels.forEach(element => {
-		// 		if (this.fixedDataLabels.indexOf(element) === -1) {
-		// 			this.fixedDataLabels.push(element);
-		// 		}
-		// 	});
-		// }
-
-		return keys;
-	}
-
-	// getLegendType() {
-	// 	const { datasets } = this.displayData;
-
-	// 	// TODO - Support the labels based legend for line chart
-	// 	if (datasets.length === 1 && datasets[0].backgroundColors && datasets[0].backgroundColors.length > 1) {
-	// 		return Configuration.legend.basedOn.LABELS;
-	// 	} else {
-	// 		return Configuration.legend.basedOn.SERIES;
-	// 	}
-	// }
-
 	addEventListeners() {
 		const self = this;
 		const svg = this._parent;
@@ -127,7 +120,7 @@ export class Legend extends Component {
 			.on("mouseover", () => {
 				console.log("YOU HOVERED");
 			})
-			.on("click", function() {
+			.on("click", function () {
 				const clickedItem = select(this);
 				const clickedItemData = clickedItem.datum() as any;
 				console.log("clicked", clickedItemData);

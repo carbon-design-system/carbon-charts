@@ -1,5 +1,4 @@
 // Internal Imports
-import { AxisPositions, AxisTypes } from "../../interfaces";
 import { Component } from "../component";
 
 // D3 Imports

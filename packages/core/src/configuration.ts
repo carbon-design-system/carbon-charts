@@ -343,34 +343,20 @@ export const donut = {
  * Legend configuration
  */
 export const legend = {
-	countBreak: 4,
-	fontSize: 12,
-	wrapperHeight: "40px",
-	widthTolerance: 15,
-	hoverShadowSize: "3px",
-	hoverShadowTransparency: 0.2,
-	margin: {
-		top: 19
-	},
-	active: {
-		borderColor: false,
-		borderStyle: false,
-		borderWidth: false
-	},
-	inactive: {
-		backgroundColor: "transparent",
-		borderStyle: "solid",
-		borderWidth: "2px"
-	},
 	items: {
 		status: {
 			ACTIVE: 1,
 			DISABLED: 0
 		},
+		horizontalSpace: 12,
+		verticalSpace: 24
 	},
-	basedOn: {
-		SERIES: "series",
-		LABELS: "labels"
+	checkbox: {
+		radius: 6,
+		spaceAfter: 4
+	},
+	text: {
+
 	}
 };
 

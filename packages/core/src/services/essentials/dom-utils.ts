@@ -88,6 +88,10 @@ export class DOMUtils extends Service {
 	}
 
 	getSVGElementSize(svgSelector: Selection<any, any, any, any>, options?: any) {
+		if (!svgSelector.attr) {
+			svgSelector = select(svgSelector as any);
+		}
+
 		const attrDimensions = {
 			width: svgSelector.attr("width"),
 			height: svgSelector.attr("height")
