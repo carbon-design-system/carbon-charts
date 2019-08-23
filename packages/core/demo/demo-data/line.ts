@@ -152,20 +152,24 @@ export const lineTimeSeriesOptions = () => ({
 	curve: "curveNatural",
 	axes: {
 		bottom: {
-			type: "linear",
-			title: "2018 Annual Sales Figures"
+			type: "labels",
+			title: "2018 Annual Sales Figures",
+
 		},
 		left: {
-			type: "labels",
-			title: "2018 Annual Sales Figures"
+			type: "log",
+			title: "2018 Annual Sales Figures",
+
 		},
 		right: {
 			// formatter: val => `${(val/80000) * 100}%`,
-			primary: true
+			secondary: true,
+
 		},
 		top: {
-			secondary: true,
-			type: "labels"
+			type: "labels",
+			primary: true
+
 		},
 		y: {
 			title: "Dollars (CAD)",
