@@ -16,7 +16,11 @@ export class ChartTooltip {
 
 	getRef = () => select(this.container).select("div.chart-tooltip").node() as HTMLElement;
 
-
+	/**
+	 * Positions the tooltip using mouse relative spacing unless an override is present,
+	 * in which case it will use the override placement and position for the tooltip.
+	 * @param positionOverride object containing the placement (top/bottom) and a position object that uses top, left for absolute positioning
+	 */
 	positionTooltip(positionOverride?: any) {
 		const target = this.getRef();
 
@@ -115,12 +119,12 @@ export class ChartTooltip {
 		const tooltipRef = select(this.container).selectAll("div.chart-tooltip");
 
 		// Fade out and remove
-		// tooltipRef
-		// 	.style("opacity", 1)
-		// 	.transition()
-		// 	.duration(Configuration.tooltip.fadeOut.duration)
-		// 	.style("opacity", 0)
-		// 	.remove();
+		tooltipRef
+			.style("opacity", 1)
+			.transition()
+			.duration(Configuration.tooltip.fadeOut.duration)
+			.style("opacity", 0)
+			.remove();
 
 		// this.removeEventListeners();
 	}

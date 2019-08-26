@@ -218,6 +218,42 @@ export class StackedBarChart extends BaseAxisChart {
 			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0);
 	}
 
+	/**
+	 * Overrides the multi tooltip in order to add totals and keep sorting to match the display data, rather than ascending order.
+	 * @param points the points that need to be highlighted on the chart with a tooltip
+	 */
+	getMultiPointTooltipHTML = points => {
+		// total to display
+		let total = 0;
+		points.forEach(item => total += item.value);
+
+		const self = this;
+
+		// sorted by drawing order (bottom up)
+		points.reverse();
+
+		// creates the list html
+		let listHTML = "<ul class='multi-tooltip'>";
+		points.forEach(datapoint => {
+			listHTML += `<li>${self.getTooltipHTML(datapoint)}</li>`;
+		});
+
+		// returns with total
+		return `${listHTML}<li><div class='total-val'><p class='label'>Total</p><p class='value'>${total}</p></li></div></ul>` ;
+	}
+
+	/**
+	 * Returns the stacked data that is associated with the datapoint (shares same label).
+	 * @param datapoint hovered data that contains the entire stack data (for all sets)
+	 */
+	getStackedTooltip(datapoint) {
+		const sharedLabel = datapoint.label;
+		// data contains the stack data (associated label and other dataset values)
+		const data = datapoint.data;
+		return Object.keys(data).filter(key => { return  key !== "label"; })
+			.map((key) => { return {datasetLabel: key, value: data[key], label: sharedLabel }; });
+	}
+
 	addDataPointEventListener() {
 		const self = this;
 		const { accessibility } = this.options;
@@ -225,13 +261,19 @@ export class StackedBarChart extends BaseAxisChart {
 		this.svg.selectAll("rect")
 			.on("click", d => self.dispatchEvent("bar-onClick", d))
 			.on("mouseover", function(d) {
-				select(this)
-					.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
-					.attr("stroke", self.getStrokeColor(d.datasetLabel, d.label, d.value))
-					.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
+				if (typeof d !== "undefined") {
 
-				self.showTooltip(d, this);
-				self.reduceOpacity(this);
+					select(this)
+						.attr("stroke-width", Configuration.bars.mouseover.strokeWidth)
+						.attr("stroke", self.getStrokeColor(d.datasetLabel, d.label, d.value))
+						.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
+
+					// gets the content for the stacked tooltip from stackdata
+					const tooltipContent = self.getStackedTooltip(d);
+
+					self.showTooltip(tooltipContent, this);
+					self.reduceOpacity(this);
+				}
 			})
 			.on("mousemove", d => self.tooltip.positionTooltip())
 			.on("mouseout", function(d) {

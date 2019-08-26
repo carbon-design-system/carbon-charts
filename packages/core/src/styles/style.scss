@@ -283,7 +283,7 @@ div.chart-overlay {
 	z-index: 1059;
 
 	.content-box {
-		.datapoint-tooltip {
+		.datapoint-tooltip, .total-val {
 			display: flex;
 			padding: 4px;
 			flex-flow: row nowrap;
@@ -311,6 +311,10 @@ div.chart-overlay {
 					width: auto;
 				}
 			}
+		}
+
+		.total-val {
+			font-weight: 500;
 		}
 
 		ul.multi-tooltip li {
