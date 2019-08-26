@@ -84,7 +84,7 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		case "stacked-bar-accessible":
 			newData = updateChartData(oldData);
 
-			if (removeADataset && chartType !== "combo") {
+			if (removeADataset) {
 				const randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));
 				newData.datasets.splice(randomIndex, randomIndex);
 			}

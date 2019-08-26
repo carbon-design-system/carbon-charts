@@ -16,9 +16,6 @@ const {
 	lineData,
 	lineOptions,
 	scatterData,
-	// Combo
-	comboData,
-	comboOptions
 } = require("./demo-data/index");
 
 export const chartTypes = [
@@ -33,12 +30,6 @@ export const chartTypes = [
 		name: "Bar",
 		options: simpleBarOptions,
 		data: simpleBarData
-	},
-	{
-		id: "combo",
-		name: "Combo",
-		options: comboOptions,
-		data: comboData
 	},
 	{
 		id: "stacked-bar",
