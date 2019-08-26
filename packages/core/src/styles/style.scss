@@ -315,6 +315,9 @@ div.chart-overlay {
 
 		.total-val {
 			font-weight: 500;
+			.label {
+				margin-left: 4px;
+			}
 		}
 
 		ul.multi-tooltip li {

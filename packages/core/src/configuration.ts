@@ -17,7 +17,6 @@ export enum ChartType {
 	SCATTER = "scatter",
 	PIE = "pie",
 	DONUT = "donut",
-	COMBO = "combo"
 }
 
 /**
@@ -292,7 +291,7 @@ export interface Axis {
 	y2: ScaleLinear<any, any>;
 }
 
-export interface AxisChartTooltipOptions extends TooltipOptions {
+export interface ScatterChartTooltipOptions extends TooltipOptions {
 	gridline?: boolean;
 }
 
@@ -305,7 +304,6 @@ export interface AxisChartOptions extends BaseChartOptions {
 	 */
 	scales?: Scales;
 	axis?: Axis;
-	tooltip?: AxisChartTooltipOptions;
 }
 
 /**
@@ -373,6 +371,7 @@ export interface ScatterChartOptions extends AxisChartOptions {
 		radius: number;
 		fillOpacity?: number;
 	};
+	tooltip?: ScatterChartTooltipOptions;
 }
 /**
  * options specific to line charts
@@ -414,18 +413,6 @@ export type StackedBarChartOptions = BarChartOptions;
 const stackedBarOptions: StackedBarChartOptions = Tools.merge({}, barOptions);
 
 /**
- * Options specific to combo charts.
- *
- * This interface also extends all other AxisChartOption interfaces as the single config is shared across all charts in a combo
- */
-export interface ComboChartOptions extends AxisChartOptions, BarChartOptions, LineChartOptions, ScatterChartOptions { }
-/**
- * Options specific to combo charts.
- *
- */
-const comboOptions: ComboChartOptions = Tools.merge({}, axisOptions, barOptions, lineOptions, scatterOptions);
-
-/**
  * Configuration passed to the chart.
  *
  * Includes options and data
@@ -442,7 +429,6 @@ export const options = {
 	SCATTER: scatterOptions,
 	BAR: barOptions,
 	STACKED_BAR: stackedBarOptions,
-	COMBO: comboOptions,
 	PIE: pieOptions,
 	DONUT: donutOptions
 };

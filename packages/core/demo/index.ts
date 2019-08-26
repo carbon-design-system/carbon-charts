@@ -3,7 +3,6 @@ import {
 	LineChart,
 	PieChart,
 	DonutChart,
-	ComboChart,
 	ScatterChart
 } from "../src/index";
 
@@ -172,18 +171,6 @@ chartTypes.forEach(type => {
 				chartObject.events.addEventListener("resize", e => {
 					console.log("Bar Chart - RESIZE");
 				}, false);
-
-				setDemoActionsEventListener(type.id, type.data);
-
-				break;
-			case "combo":
-				classyCharts[type.id] = new ComboChart(
-					classyContainer,
-					{
-						data: type.data,
-						options: Object.assign({}, type.options, {type: type.id}),
-					}
-				);
 
 				setDemoActionsEventListener(type.id, type.data);
 

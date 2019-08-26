@@ -75,14 +75,7 @@ export class BaseAxisChart extends BaseChart {
 
 		this.draw();
 
-
-
 		this.addDataPointEventListener();
-
-		// check if gridline tooltips are set on
-		if (this.options.tooltip.gridline) {
-			this.addGridXEventListener();
-		}
 	}
 
 	update() {
@@ -700,6 +693,13 @@ export class BaseAxisChart extends BaseChart {
 		return largestHeight;
 	}
 
+	/**************************************
+	 *  Events & User interactions        *
+	 *************************************/
+	addDataPointEventListener() {
+		console.warn("You should implement your own `addDataPointEventListener()` function.");
+	}
+
 	/**
 	 * Each gridline tooltip has an indicator color for the dataset and the value at the highlighted gridline.
 	 * @param color the color associated with the dataset
@@ -734,97 +734,4 @@ export class BaseAxisChart extends BaseChart {
 
 		return gridlinesX.empty() ? null : gridlinesX;
 	}
-
-	/**
-	 * Gets the datapoints associated with the label.
-	 * @param d domain label
-	 */
-	getDataWithDomain(d: any) {
-		console.warn("Each Chart that implements gridline tooltips needs it's own getDataWithDomain() function until refactor ");
-	}
-
-	/**
-	 * Gets Data at the given X value.
-	 * @param x x position value
-	 */
-	getDataWithXValue(x: any) {
-		console.warn("Each Chart that implements gridline tooltips needs it's own getDataWithXValue() function until refactor");
-	}
-
-	/**************************************
-	 *  Events & User interactions        *
-	 *************************************/
-
-	addDataPointEventListener() {
-		console.warn("You should implement your own `addDataPointEventListener()` function.");
-	}
-
-	/**
-	 * Sets the threshold for the gridline tooltips. On resize, the threshold needs to be
-	 * updated.
-	 */
-	setGridlineThreshold() {
-		const allTicks = this.svg.selectAll(".x.grid");
-
-		// select the first and the second tick to calculate the distance between
-		const first = allTicks.select(".tick");
-		const second = allTicks.select(".tick + g.tick");
-
-		// get space between axis grid ticks
-		const gridSpacing = (+Tools.getTranslationValues(second.node()).tx - +Tools.getTranslationValues(first.node()).tx);
-
-		// adjust the threshold for the tooltips
-		this.gridlineThreshold = gridSpacing * Configuration.tooltip.axisTooltip.axisThreshold;
-	}
-
-	/**
-	 * Adds the listener on the X grid to trigger multiple point tooltips along the x axis.
-	 */
-	addGridXEventListener() {
-		const self = this;
-		const grid = Tools.appendOrSelect(this.svg, "rect.chart-grid-backdrop");
-
-		this.setGridlineThreshold();
-
-		grid
-		.on("mousemove", function() {
-			const chartContainer = this.parentNode;
-			const pos = mouse(chartContainer);
-
-			const allgridlines = self.svg.selectAll(".x.grid .tick");
-			// remove the styling on the lines
-			allgridlines.classed("active", false);
-
-			const activeGridlines = self.getActiveGridLines(pos);
-			if (!activeGridlines) {
-				self.hideTooltip();
-				return;
-			}
-
-			// set active class to control dasharray and theme colors
-			activeGridlines
-			.classed("active", true);
-
-			// get the items that should be highlighted
-			let highlightItems;
-			activeGridlines.each(function(d) {
-				if (d) {
-					// prioritize using domain to get all points
-					// in case there are axis lines without labels
-					highlightItems = self.getDataWithDomain(d);
-				} else {
-					const translatePos = Tools.getTranslationValues(this);
-					highlightItems = self.getDataWithXValue(+translatePos.tx - 0.5);
-				}
-			});
-			self.showTooltip(highlightItems.data());
-		})
-		.on("mouseout", function() {
-			self.svg.selectAll(".x.grid .tick")
-			.classed("active", false);
-			self.hideTooltip();
-		});
-	}
-
-
 }

@@ -19,7 +19,8 @@ export class ChartTooltip {
 	/**
 	 * Positions the tooltip using mouse relative spacing unless an override is present,
 	 * in which case it will use the override placement and position for the tooltip.
-	 * @param positionOverride object containing the placement (top/bottom) and a position object that uses top, left for absolute positioning
+	 * @param positionOverride object containing the placement (top/bottom) and a target position object that
+	 * uses top, left for absolute positioning
 	 */
 	positionTooltip(positionOverride?: any) {
 		const target = this.getRef();
@@ -94,22 +95,23 @@ export class ChartTooltip {
 			.append("div")
 			.attr("class", "tooltip chart-tooltip");
 
-			// Apply html content to the tooltip
-			tooltip.append("div")
-				.attr("class", "content-box")
-				.html(contentHTML);
+		// Apply html content to the tooltip
+		tooltip.append("div")
+			.attr("class", "content-box")
+			.html(contentHTML);
 
-			this.positionTooltip(positionOverride);
+		this.positionTooltip(positionOverride);
 
-			// only want to fade in if a tooltip doesn't already exist
-			if (fadeIn) {
-			// Fade in
-				tooltip
-				.style("opacity", 0)
-					.transition()
-					.duration(Configuration.tooltip.fadeIn.duration)
-					.style("opacity", 1);
-			}
+		// only want to fade in if a tooltip doesn't already exist
+		// if we always fade in, we get some blinking if the tooltip is placed using mouse relative
+		if (fadeIn) {
+		// Fade in
+			tooltip
+			.style("opacity", 0)
+				.transition()
+				.duration(Configuration.tooltip.fadeIn.duration)
+				.style("opacity", 1);
+		}
 
 		// this.addEventListeners();
 	}

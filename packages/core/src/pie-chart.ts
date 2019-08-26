@@ -285,7 +285,7 @@ export class PieChart extends BaseChart {
 	}
 
 	/**
-	 * The default tooltip style for single data values.
+	 * The default tooltip style for single data values on pie/donut.
 	 * @param color the color associated with the dataset (optional)
 	 * @param value the value of the datapoint
 	 * @param label the associated label for the data

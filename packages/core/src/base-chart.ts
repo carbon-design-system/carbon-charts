@@ -859,6 +859,26 @@ export class BaseChart {
 	}
 
 	/**
+	 * Gets the tooltip html for all points and returns html for the tooltip.
+	 * @param points the points that need to be highlighted on the chart with a tooltip
+	 */
+	getMultiPointTooltipHTML = points => {
+		const self = this;
+
+		// sort the tooltips so the list matches the graph
+		points.sort(function (a, b) {
+			return a.value > b.value ? -1 : 1;
+		});
+
+		let listHTML = "<ul class='multi-tooltip'>";
+		points.forEach(datapoint => {
+			listHTML += `<li>${self.getTooltipHTML(datapoint)}</li>`;
+		});
+
+		return listHTML + "</ul>" ;
+	}
+
+	/**
 	 * Checks whether there is a custom html function for tooltips or defaults to carbon styles.
 	 * @param d The data point(s) to be passed into the tooltip.
 	 * @param clickedElement
@@ -883,30 +903,6 @@ export class BaseChart {
 			}
 		}
 		this.tooltip.show(contentHTML);
-	}
-
-	/**************************************
-	 *  Multi-Point tooltip functions        *
-	 *************************************/
-
-	/**
-	 * Gets the tooltip html for all points and returns html for the tooltip.
-	 * @param points the points that need to be highlighted on the chart with a tooltip
-	 */
-	getMultiPointTooltipHTML = points => {
-		const self = this;
-
-		// sort the tooltips so the list matches the graph
-		points.sort(function (a, b) {
-			return a.value > b.value ? -1 : 1;
-		});
-
-		let listHTML = "<ul class='multi-tooltip'>";
-		points.forEach(datapoint => {
-			listHTML += `<li>${self.getTooltipHTML(datapoint)}</li>`;
-		});
-
-		return listHTML + "</ul>" ;
 	}
 
 	getFillScale() {

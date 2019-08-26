@@ -219,17 +219,16 @@ export class StackedBarChart extends BaseAxisChart {
 	}
 
 	/**
-	 * Overrides the multi tooltip in order to add totals and keep sorting to match the display data, rather than ascending order.
+	 * Overrides the multi tooltip in order to add totals and sort to match the display data, rather than ascending order.
 	 * @param points the points that need to be highlighted on the chart with a tooltip
 	 */
 	getMultiPointTooltipHTML = points => {
-		// total to display
+		const self = this;
+		// get total to display
 		let total = 0;
 		points.forEach(item => total += item.value);
 
-		const self = this;
-
-		// sorted by drawing order (bottom up)
+		// sorted by drawing order (bottom up/reverse order from stack data)
 		points.reverse();
 
 		// creates the list html
@@ -250,6 +249,8 @@ export class StackedBarChart extends BaseAxisChart {
 		const sharedLabel = datapoint.label;
 		// data contains the stack data (associated label and other dataset values)
 		const data = datapoint.data;
+		// filter to remove the label (since they share the same label as the hovered datapoint)
+		// map each dataset's name, value and label to an obj to send to tooltip
 		return Object.keys(data).filter(key => { return  key !== "label"; })
 			.map((key) => { return {datasetLabel: key, value: data[key], label: sharedLabel }; });
 	}
@@ -261,6 +262,7 @@ export class StackedBarChart extends BaseAxisChart {
 		this.svg.selectAll("rect")
 			.on("click", d => self.dispatchEvent("bar-onClick", d))
 			.on("mouseover", function(d) {
+				// to avoid an event without data throwing an error
 				if (typeof d !== "undefined") {
 
 					select(this)
@@ -269,20 +271,22 @@ export class StackedBarChart extends BaseAxisChart {
 						.attr("stroke-opacity", Configuration.bars.mouseover.strokeOpacity);
 
 					// gets the content for the stacked tooltip from stackdata
+					// adds the totals to the bottom of the ul
 					const tooltipContent = self.getStackedTooltip(d);
 
 					self.showTooltip(tooltipContent, this);
 					self.reduceOpacity(this);
 				}
 			})
-			.on("mousemove", d => self.tooltip.positionTooltip())
+			.on("mousemove", function(d) { if (typeof d !== "undefined") { self.tooltip.positionTooltip(); }})
 			.on("mouseout", function(d) {
 				const { strokeWidth, strokeWidthAccessible } = Configuration.bars.mouseout;
-				select(this)
+				if (typeof d !== "undefined") {
+					select(this)
 					.attr("stroke-width", accessibility ? strokeWidthAccessible : strokeWidth)
 					.attr("stroke", accessibility ? self.getStrokeColor(d.datasetLabel, d.label, d.value) : "none")
 					.attr("stroke-opacity", Configuration.bars.mouseout.strokeOpacity);
-
+				}
 				self.hideTooltip();
 			});
 	}
