@@ -291,7 +291,10 @@ export interface Axis {
 	y2: ScaleLinear<any, any>;
 }
 
-export interface ScatterChartTooltipOptions extends TooltipOptions {
+/**
+ * extends tooltip options to provide support for multiple gridline tooltips
+ */
+export interface AxisTooltipOptions extends TooltipOptions {
 	gridline?: boolean;
 }
 
@@ -346,6 +349,7 @@ export interface LineChartOptions extends AxisChartOptions {
 		radius: number;
 		fillOpacity?: number;
 	};
+	tooltips?: AxisTooltipOptions;
 }
 /**
  * options specific to line charts
@@ -354,6 +358,9 @@ const lineOptions: LineChartOptions = Tools.merge({}, axisOptions, {
 	points: {
 		// default point radius to 3
 		radius: 3
+	},
+	tooltips: {
+		gridline: true
 	}
 });
 
@@ -371,7 +378,7 @@ export interface ScatterChartOptions extends AxisChartOptions {
 		radius: number;
 		fillOpacity?: number;
 	};
-	tooltip?: ScatterChartTooltipOptions;
+	tooltip?: AxisTooltipOptions;
 }
 /**
  * options specific to line charts
@@ -381,6 +388,9 @@ const scatterOptions: ScatterChartOptions = Tools.merge({}, axisOptions, {
 		// default point radius to 4
 		radius: 4,
 		fillOpacity: 0.3
+	},
+	tooltip: {
+		gridline: true
 	}
 });
 
