@@ -115,7 +115,7 @@ export namespace Tools {
 
 			return {
 					tx: transforms[0],
-					ty: transforms[0]
+					ty: transforms[1]
 				};
 		}
 		return null;
