@@ -349,7 +349,7 @@ export interface LineChartOptions extends AxisChartOptions {
 		radius: number;
 		fillOpacity?: number;
 	};
-	tooltips?: AxisTooltipOptions;
+	tooltip?: AxisTooltipOptions;
 }
 /**
  * options specific to line charts
@@ -359,7 +359,7 @@ const lineOptions: LineChartOptions = Tools.merge({}, axisOptions, {
 		// default point radius to 3
 		radius: 3
 	},
-	tooltips: {
+	tooltip: {
 		gridline: true
 	}
 });
