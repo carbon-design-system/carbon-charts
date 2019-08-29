@@ -79,7 +79,7 @@ div.chart-holder {
 	}
 
 	g.tick text {
-		font-family: "IBM Plex Sans Condensed";
+		font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
 	}
 
 	text {
@@ -95,7 +95,7 @@ div.chart-holder {
 		}
 
 		&.chart-label {
-			font-family: "IBM Plex Sans Condensed";
+			font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
 			dominant-baseline: middle;
 		}
 
@@ -172,7 +172,7 @@ div.chart-holder {
 		}
 
 		text {
-			font-family: "IBM Plex Sans condensed";
+			font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
 			font-size: 12px;
 			line-height: 16px;
 			max-width: 100px;
