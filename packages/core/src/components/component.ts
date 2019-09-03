@@ -10,8 +10,14 @@ export class Component {
 
 	protected _parent: any;
 
+	protected options: any = {};
+
 	protected _model: ChartModel;
 	protected _services: any;
+
+	constructor(options?: any) {
+		this.options = options;
+	}
 
 	render() {
 		errorHandler.INTERNAL.COMPONENT.MISSING_METHOD("render");

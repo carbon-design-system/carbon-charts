@@ -133,7 +133,6 @@ export class LayoutComponent extends Component {
 
 		updatedSVGs
 			.exit()
-			.each(function() { console.log("REMOVING#$3@$2", this); })
 			.remove();
 
 		// Run through stretch x-items

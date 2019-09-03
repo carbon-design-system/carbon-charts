@@ -12,7 +12,7 @@ export class Legend extends Component {
 		const svg = this.getContainerSVG();
 
 		const legendItems = svg.selectAll("g.legend-item")
-			.data(this.getLegendItemArray(), d => d.key);
+			.data(this.getLegendItemArray());
 
 		const addedLegendItems = legendItems.enter()
 			.append("g")
@@ -24,11 +24,16 @@ export class Legend extends Component {
 		const legendItemsVerticalSpacing = Configuration.legend.items.verticalSpace;
 		const spaceNeededForCheckbox = (checkboxRadius * 2) + Configuration.legend.checkbox.spaceAfter;
 
+		// Check if there are disabled legend items
+		const { DISABLED } = Configuration.legend.items.status;
+		const dataLabels = this._model.get("dataLabels");
+		const hasDeactivatedItems = Object.keys(dataLabels).some(label => dataLabels[label] === DISABLED);
+
 		addedLegendItems.append("rect")
-			.merge(legendItems.select("rect"))
-			.attr("width", 12)
-			.attr("height", 12)
-			.attr("r", checkboxRadius)
+			.classed("checkbox", true)
+			.merge(legendItems.select("rect.checkbox"))
+			.attr("width", checkboxRadius * 2)
+			.attr("height", checkboxRadius * 2)
 			.attr("rx", 1)
 			.attr("ry", 1)
 			.style("fill", d => {
@@ -38,7 +43,13 @@ export class Legend extends Component {
 
 				return "white";
 			})
-			.attr("stroke", d => this._model.getStrokeColor(d.key));
+			.attr("stroke", d => {
+				if (d.value === Configuration.legend.items.status.ACTIVE) {
+					return "white";
+				}
+
+				return "black";
+			});
 
 		addedLegendItems.append("text")
 			.merge(legendItems.select("text"))
@@ -46,6 +57,7 @@ export class Legend extends Component {
 			.style("font-size", "15px")
 			.attr("alignment-baseline", "middle");
 
+		// Crop legend items into lines
 		const self = this;
 		let startingPoint = 0;
 		let lineNumber = 0;
@@ -57,14 +69,14 @@ export class Legend extends Component {
 
 				if (itemIndexInLine === 0 || previousLegendItem.empty()) {
 					// Position checkbox
-					legendItem.select("rect")
+					legendItem.select("rect.checkbox")
 						.attr("x", 0)
 						.attr("y", lineNumber * legendItemsVerticalSpacing);
 
 					// Position text
 					legendItem.select("text")
 						.attr("x", spaceNeededForCheckbox)
-						.attr("y", 7 + (lineNumber * legendItemsVerticalSpacing));
+						.attr("y", 8 + (lineNumber * legendItemsVerticalSpacing));
 				} else {
 					const svgDimensions = self._services.domUtils.getSVGElementSize(self._parent, { useAttr: true });
 					const legendItemTextDimensions = self._services.domUtils.getSVGElementSize(select(this).select("text"), { useBBox: true });
@@ -78,14 +90,41 @@ export class Legend extends Component {
 					}
 
 					// Position checkbox
-					legendItem.select("rect")
+					legendItem.select("rect.checkbox")
 						.attr("x", startingPoint)
 						.attr("y", lineNumber * legendItemsVerticalSpacing);
 
 					// Position text
 					legendItem.select("text")
 						.attr("x", startingPoint + spaceNeededForCheckbox)
-						.attr("y", 7 + (lineNumber * legendItemsVerticalSpacing));
+						.attr("y", 8 + (lineNumber * legendItemsVerticalSpacing));
+				}
+
+				// Render checkbox check icon
+				if (hasDeactivatedItems && legendItem.select("g.check").empty()) {
+					legendItem.append("g")
+						.classed("check", true)
+						.html(`
+							<svg focusable="false" preserveAspectRatio="xMidYMid meet"
+								xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+								viewBox="0 0 32 32" aria-hidden="true"
+								style="will-change: transform;">
+								<path d="M13 21.2l-7.1-7.1-1.4 1.4 7.1 7.1L13 24 27.1 9.9l-1.4-1.5z"></path>
+								<title>Checkmark</title>
+							</svg>
+						`);
+
+					legendItem.select("g.check svg")
+						.attr("width", checkboxRadius * 2 - 1)
+						.attr("height", checkboxRadius * 2 - 1)
+						.attr("x", parseFloat(legendItem.select("rect.checkbox").attr("x")) + 0.5)
+						.attr("y", parseFloat(legendItem.select("rect.checkbox").attr("y")) + 0.5);
+
+					legendItem.select("g.check svg path")
+						.attr("stroke", "#fff")
+						.attr("fill", "#fff");
+				} else if (!hasDeactivatedItems && !legendItem.select("g.check").empty()) {
+					legendItem.select("g.check").remove();
 				}
 
 				itemIndexInLine++;
@@ -93,12 +132,15 @@ export class Legend extends Component {
 
 		// Remove old elements as needed.
 		legendItems.exit()
-			// .each((d, i) => console.log(">> EXIT", i))
+			.on("mouseover", null)
+			.on("click", null)
+			.on("mouseout", null)
 			.remove();
 
-		if (this._model.getOptions().legendClickable) {
-			svg.classed("clickable", true);
+		const { legendClickable } = this._model.getOptions();
+		svg.classed("clickable", legendClickable);
 
+		if (legendClickable && addedLegendItems.size() > 0) {
 			this.addEventListeners();
 		}
 	}
@@ -115,17 +157,46 @@ export class Legend extends Component {
 
 	addEventListeners() {
 		const self = this;
-		const svg = this._parent;
+		const svg = this.getContainerSVG();
+
 		svg.selectAll("g.legend-item")
-			.on("mouseover", () => {
-				console.log("YOU HOVERED");
+			.on("mouseover", function () {
+				self._services.events.dispatchEvent("legend-item-onhover", {
+					hoveredElement: select(this)
+				});
+
+				// Configs
+				const checkboxRadius = Configuration.legend.checkbox.radius;
+
+				const hoveredItem = select(this);
+				hoveredItem.append("rect")
+					.classed("hover-stroke", true)
+					.attr("x", parseFloat(hoveredItem.select("rect.checkbox").attr("x")) - 2.5)
+					.attr("y", parseFloat(hoveredItem.select("rect.checkbox").attr("y")) - 2.5)
+					.attr("width", checkboxRadius * 2 + 5)
+					.attr("height", checkboxRadius * 2 + 5)
+					.attr("rx", 3)
+					.attr("ry", 3)
+					.attr("fill", "#0061ff")
+					.lower();
 			})
 			.on("click", function () {
+				self._services.events.dispatchEvent("legend-item-onclick", {
+					clickedElement: select(this)
+				});
+
 				const clickedItem = select(this);
 				const clickedItemData = clickedItem.datum() as any;
-				console.log("clicked", clickedItemData);
 
 				self._model.applyDataFilter(clickedItemData.key);
+			})
+			.on("mouseout", function () {
+				const hoveredItem = select(this);
+				hoveredItem.select("rect.hover-stroke").remove();
+
+				self._services.events.dispatchEvent("legend-item-onmouseout", {
+					hoveredElement: hoveredItem
+				});
 			});
 	}
 }

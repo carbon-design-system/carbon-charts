@@ -154,17 +154,27 @@ export class ChartModel {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 		const dataLabels = this.get("dataLabels");
 		const rawData = Tools.clone(this.getRawData());
-		const oldStatus = dataLabels[changedLabel];
 
-		dataLabels[changedLabel] = (oldStatus === ACTIVE ? DISABLED : ACTIVE);
+		const hasDeactivatedItems = Object.keys(dataLabels).some(label => dataLabels[label] === DISABLED);
+		if (hasDeactivatedItems) {
+			dataLabels[changedLabel] = dataLabels[changedLabel] === DISABLED ? ACTIVE : DISABLED;
+		} else {
+			Object.keys(dataLabels).forEach(label => {
+				dataLabels[label] = (label === changedLabel ? ACTIVE : DISABLED);
+			});
+		}
+
+		// Update display data
 		const newDisplayData = rawData;
 		newDisplayData.datasets = newDisplayData.datasets.filter(dataset => dataLabels[dataset.label] === ACTIVE);
 
+		// Update model
 		this.set({
 			dataLabels,
 			data: newDisplayData
 		});
 
+		// Update chart
 		this.update();
 	}
 

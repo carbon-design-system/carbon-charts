@@ -172,9 +172,12 @@ export class DOMUtils extends Service {
 			if (validateDimensions(attrDimensions)) {
 				return attrDimensions;
 			}
-
-			return clientDimensions;
 		}
+
+		return {
+			width: 0,
+			height: 0
+		};
 	}
 
 	appendOrSelect(parent, query) {

@@ -15,6 +15,8 @@ export class Tooltip extends Component {
 	tooltip: any;
 	positionService: Position = new Position();
 
+	eventListenerSet = false;
+
 	render() {
 		// Draw tooltip
 		const holder = select(this._services.domUtils.getHolder());
@@ -24,24 +26,30 @@ export class Tooltip extends Component {
 		// Apply html content to the tooltip
 		const tooltipTextConainter = this._services.domUtils.appendOrSelect(this.tooltip, "div.text-box");
 
-		if (this._model.get("tooltip") === true) {
-			const data = select(event.target).datum() as any;
-			if (Tools.getProperty(this._model.getOptions(), "tooltip", "size") === Configuration.tooltip.size.COMPACT) {
-				tooltipTextConainter.html(`<b>${data.datasetLabel}:</b> ${data.value}<br/>`);
-			} else {
-				tooltipTextConainter.html(`
-					<p class='bignum'>${data.datasetLabel}</p>
-					<p>${data.value}</p>
-				`);
-			}
+		if (!this.eventListenerSet) {
+			// listen to show-tooltip Custom Events to render the tooltip
+			this._services.events.getDocumentFragment().addEventListener("show-tooltip", e => {
+				const data = select(event.target).datum() as any;
+				if (Tools.getProperty(this._model.getOptions(), "tooltip", "size") === Configuration.tooltip.size.COMPACT) {
+					tooltipTextConainter.html(`<b>${data.datasetLabel}:</b> ${data.value}<br/>`);
+				} else {
+					tooltipTextConainter.html(`
+						<p class='bignum'>${data.datasetLabel}</p>
+						<p>${data.value}</p>
+					`);
+				}
 
-			// Position the tooltip
-			this.positionTooltip();
+				// Position the tooltip
+				this.positionTooltip();
 
-			// Fade in
-			this.tooltip.classed("hidden", false);
+				// Fade in
+				this.tooltip.classed("hidden", false);
+			});
 
-			// this.addEventListeners();
+			// listen to show-tooltip Custom Events to render the tooltip
+			this._services.events.getDocumentFragment().addEventListener("hide-tooltip", e => {
+				this.tooltip.classed("hidden", true);
+			});
 		}
 	}
 
