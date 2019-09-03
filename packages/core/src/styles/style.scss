@@ -76,6 +76,10 @@ div.chart-holder {
 		circle {
 			&.dot {
 				stroke-width: 1.5;
+
+				&.dot.filled {
+					stroke-width: 2;
+				}
 			}
 		}
 	}

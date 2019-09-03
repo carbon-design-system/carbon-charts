@@ -8,15 +8,15 @@ import { Service } from "../service";
 import { Transition, transition } from "d3-transition";
 
 export class Transitions extends Service {
-	getDefaultTransition(): Transition<any, any, any, any> {
+	getDefaultTransition(name?: string): Transition<any, any, any, any> {
 		if (this._model.getOptions().animations === false || this._model.get("animations") === false) {
-			return this.getInstantTransition();
+			return this.getInstantTransition(name);
 		}
 
-		return transition().duration(300);
+		return transition(name).duration(300);
 	}
 
-	getInstantTransition(): Transition<any, any, any, any>  {
-		return transition().duration(0);
+	getInstantTransition(name?: string): Transition<any, any, any, any>  {
+		return transition(name).duration(0);
 	}
 }

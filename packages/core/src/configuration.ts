@@ -352,7 +352,7 @@ export const legend = {
 		verticalSpace: 24
 	},
 	checkbox: {
-		radius: 6,
+		radius: 6.5,
 		spaceAfter: 4
 	},
 	text: {

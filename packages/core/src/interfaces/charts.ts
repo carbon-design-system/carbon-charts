@@ -31,7 +31,7 @@ export interface BaseChartOptions {
 	/**
 	 * array of hex colors for the chart to render from
 	 */
-	colors: Array<string>;
+	colors?: Array<string>;
 	/**
 	 * tooltip configuration
 	 */
