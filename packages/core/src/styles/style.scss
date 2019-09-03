@@ -331,10 +331,6 @@ div.chart-overlay {
 				list-style: none;
 				position: relative;
 
-				.datapoint-tooltip {
-					margin-left: 4px;
-				}
-
 				&:not(:last-child){
 					margin-bottom: 2px;
 				}
@@ -348,7 +344,7 @@ div.chart-overlay {
 		top: 0;
 		width: 4px;
 		height: 100%;
-		& + p {
+		& + p.label {
 			margin-left: 4px;
 		}
 	}

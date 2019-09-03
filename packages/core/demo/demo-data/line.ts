@@ -64,9 +64,6 @@ export const curvedLineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	tooltip: {
-		gridline: true
-	},
 	theme: getTheme()
 };
 
@@ -139,9 +136,6 @@ export const lineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	tooltip: {
-		gridline: true
-	},
 	theme: getTheme()
 };
 

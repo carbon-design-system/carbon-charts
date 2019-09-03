@@ -77,15 +77,15 @@ export interface TooltipOptions {
 	/**
 	 * a function to format the tooltip value contents
 	 */
-	valueFormatter: Function;
+	valueFormatter?: Function;
 	/**
 	 * elements onto which a hover or click would not trigger the tooltip to hide
 	 */
-	targetsToSkip: Array<String>;
+	targetsToSkip?: Array<String>;
 	/**
 	 * custom HTML function to create a single or multipoint tooltip
 	 */
-	html: Function;
+	html?: Function;
 }
 
 /**

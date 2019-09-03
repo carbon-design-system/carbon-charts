@@ -892,7 +892,7 @@ export class BaseChart {
 		if (html) {
 			// use the injected html constructor
 			// it can return html or a array of html
-			contentHTML = html(d);
+			contentHTML = html(d, clickedElement);
 		} else {
 			if (d.length > 1 ) {
 				// create a multipoint tooltip

@@ -253,17 +253,8 @@ export class ScatterChart extends BaseAxisChart {
 	 * updated.
 	 */
 	setGridlineThreshold() {
-		const allTicks = this.svg.selectAll(".x.grid");
-
-		// select the first and the second tick to calculate the distance between
-		const first = allTicks.select(".tick");
-		const second = allTicks.select(".tick + g.tick");
-
-		// get space between axis grid ticks
-		const gridSpacing = (+Tools.getTranslationValues(second.node()).tx - +Tools.getTranslationValues(first.node()).tx);
-
-		// adjust the threshold for the tooltips
-		this.gridlineThreshold = gridSpacing * Configuration.tooltip.axisTooltip.axisThreshold;
+		// use the space between axis grid ticks to adjust the threshold for the tooltips
+		this.gridlineThreshold = this.x.step() * Configuration.tooltip.axisTooltip.axisThreshold;
 	}
 
 	/**
@@ -303,7 +294,7 @@ export class ScatterChart extends BaseAxisChart {
 			allgridlines.classed("active", false);
 
 			const activeGridlines = self.getActiveGridLines(pos);
-			if (!activeGridlines) {
+			if (activeGridlines.empty()) {
 				self.hideTooltip();
 				return;
 			}

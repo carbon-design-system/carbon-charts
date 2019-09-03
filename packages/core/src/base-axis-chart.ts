@@ -729,9 +729,9 @@ export class BaseAxisChart extends BaseChart {
 				min: +translations.tx - +self.gridlineThreshold,
 				max: +translations.tx + +self.gridlineThreshold };
 
-			return (bounds.min <= pos[0] && pos[0] <= bounds.max) ? this : null;
+			return bounds.min <= pos[0] && pos[0] <= bounds.max;
 		});
 
-		return gridlinesX.empty() ? null : gridlinesX;
+		return gridlinesX;
 	}
 }
