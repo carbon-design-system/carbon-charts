@@ -300,6 +300,9 @@ div.chart-overlay {
 				line-height: 16px;
 				font-size: 12px;
 				display: inline-block;
+				margin: 0;
+				padding: 0;
+				border: 0;
 
 				&.label {
 					flex: 1;
@@ -320,11 +323,21 @@ div.chart-overlay {
 			}
 		}
 
-		ul.multi-tooltip li {
-			list-style: none;
-			position: relative;
-			&:not(:last-child){
-				margin-bottom: 2px;
+		ul.multi-tooltip {
+			margin: 0;
+			padding: 0;
+
+			li {
+				list-style: none;
+				position: relative;
+
+				.datapoint-tooltip {
+					margin-left: 4px;
+				}
+
+				&:not(:last-child){
+					margin-bottom: 2px;
+				}
 			}
 		}
 	}
