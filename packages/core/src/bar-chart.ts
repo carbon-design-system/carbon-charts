@@ -333,16 +333,15 @@ export class BarChart extends BaseAxisChart {
 		// as well as the inner wrap translations
 		const legendHeight = this.container.select(".legend-wrapper").node().getBoundingClientRect().height;
 		const translateWrap = Tools.getTranslationValues(this.innerWrap.node());
+
+		// use the bar rect to get the relative offset to the container (offset within the chart)
 		const rect = clickedElement.getBoundingClientRect();
+		const container = this.container.node().getBoundingClientRect();
 
 		// tooltip to be placed directly above bar (or below if it is bar with negative values)
 		const tooltipPos = {
-			left: this.x(d.label) + this.x.step() - +translateWrap.tx, //
+			left: rect.left - container.left + rect.width / 2,
 			top: this.y(d.value) - +translateWrap.ty + legendHeight };
-
-		// if there are multiple datasets grouped, we need to get the x location and the offset per dataset
-		// if there isnt not multiple datasets, we just need to use the bar to get the mid point to center the tooltip
-		tooltipPos.left += this.displayData.datasets.length > 1 ? this.getBarX(d) : rect.width / 2;
 
 		// if there is a negative value bar chart, need to place the tooltip below the bar
 		if (d.value <= 0) {

@@ -24,57 +24,54 @@ export class ChartTooltip {
 	 */
 	positionTooltip(positionOverride?: any) {
 		const target = this.getRef();
+		let pos;
 
 		// override position to place tooltip at {placement:.., position:{top:.. , left:..}}
 		if (positionOverride) {
 			// placement determines whether the tooltip is centered above or below the position provided
 			const placement = positionOverride.placement === Configuration.TooltipPosition.TOP ? PLACEMENTS.TOP : PLACEMENTS.BOTTOM;
 
-			// Get coordinates to where tooltip should be positioned
-			const position = this.positionService.findPositionAt(
+			pos = this.positionService.findPositionAt(
 				positionOverride.position,
 				target,
 				placement
 			);
+		} else {
+			// otherwise/default place the tooltip using the mouse
+			const mouseRelativePos = mouse(this.container);
 
-			this.positionService.setElement(target, position);
-			return;
+			// Find out whether tooltip should be shown on the left or right side
+			const bestPlacementOption = this.positionService.findBestPlacementAt(
+				{
+					left: mouseRelativePos[0],
+					top: mouseRelativePos[1]
+				},
+				target,
+				[
+					PLACEMENTS.RIGHT,
+					PLACEMENTS.LEFT
+				],
+				() => ({
+					width: this.container.offsetWidth,
+					height: this.container.offsetHeight
+				})
+			);
+
+			let { magicLeft2: horizontalOffset } = Configuration.tooltip.dataLabel;
+			if (bestPlacementOption === PLACEMENTS.LEFT) {
+				horizontalOffset *= -1;
+			}
+
+			// Get coordinates to where tooltip should be positioned
+			pos = this.positionService.findPositionAt(
+				{
+					left: mouseRelativePos[0] + horizontalOffset,
+					top: mouseRelativePos[1]
+				},
+				target,
+				bestPlacementOption
+			);
 		}
-
-		// otherwise/default place the tooltip using the mouse
-		const mouseRelativePos = mouse(this.container);
-
-		// Find out whether tooltip should be shown on the left or right side
-		const bestPlacementOption = this.positionService.findBestPlacementAt(
-			{
-				left: mouseRelativePos[0],
-				top: mouseRelativePos[1]
-			},
-			target,
-			[
-				PLACEMENTS.RIGHT,
-				PLACEMENTS.LEFT
-			],
-			() => ({
-				width: this.container.offsetWidth,
-				height: this.container.offsetHeight
-			})
-		);
-
-		let { magicLeft2: horizontalOffset } = Configuration.tooltip.dataLabel;
-		if (bestPlacementOption === PLACEMENTS.LEFT) {
-			horizontalOffset *= -1;
-		}
-
-		// Get coordinates to where tooltip should be positioned
-		const pos = this.positionService.findPositionAt(
-			{
-				left: mouseRelativePos[0] + horizontalOffset,
-				top: mouseRelativePos[1]
-			},
-			target,
-			bestPlacementOption
-		);
 
 		this.positionService.setElement(target, pos);
 	}
