@@ -852,10 +852,10 @@ export class BaseChart {
 		let indicatorColor;
 		if (this.getLegendType() === Configuration.legend.basedOn.LABELS) {
 			indicatorColor = this.getStrokeColor(d.datasetLabel, d.label);
-			return this.generateTooltipHTML( d.label, formattedValue, indicatorColor);
+			return this.generateTooltipHTML(d.label, formattedValue, indicatorColor);
 		}
 		indicatorColor = this.getStrokeColor(d.datasetLabel);
-		return this.generateTooltipHTML( d.datasetLabel, formattedValue, indicatorColor);
+		return this.generateTooltipHTML(d.datasetLabel, formattedValue, indicatorColor);
 	}
 
 	/**
@@ -867,7 +867,7 @@ export class BaseChart {
 
 		// sort the tooltips so the list matches the graph
 		points.sort(function (a, b) {
-			return a.value > b.value ? -1 : 1;
+			return a.value - b.value;
 		});
 
 		let listHTML = "<ul class='multi-tooltip'>";

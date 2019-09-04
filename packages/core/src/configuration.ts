@@ -158,9 +158,7 @@ const baseOptions: BaseChartOptions = {
 	containerResizable: true,
 	colors: colorPalettes.DEFAULT,
 	tooltip: {
-		valueFormatter: null,
 		targetsToSkip: ["rect", "circle", "path"],
-		html: null,
 	},
 	theme: ChartTheme.WHITE,
 	overlay: {

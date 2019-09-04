@@ -83,8 +83,8 @@ export class ChartTooltip {
 	show(contentHTML, positionOverride?) {
 		// Remove existing tooltips on the page
 		// TODO - Update class to not conflict with other elements on page
-		const existingTooltips = selectAll(".chart-tooltip");
-		const fadeIn = existingTooltips.size() > 0 ? false : true;
+		const existingTooltips = select(this.container).selectAll(".chart-tooltip");
+		const fadeIn = existingTooltips.size() === 0;
 		existingTooltips.remove();
 
 		// Draw tooltip
