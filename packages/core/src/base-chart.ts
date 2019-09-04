@@ -886,7 +886,7 @@ export class BaseChart {
 
 		// sort the tooltips so the list matches the graph
 		points.sort(function (a, b) {
-			return a.value - b.value;
+			return b.value - a.value;
 		});
 
 		let listHTML = "<ul class='multi-tooltip'>";
