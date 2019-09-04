@@ -1,11 +1,13 @@
 // D3 Imports
-import { select, mouse } from "d3-selection";
+import { select } from "d3-selection";
 import { stack } from "d3-shape";
 import { max } from "d3-array";
 
+// Internal imports
 import * as Configuration from "./configuration";
 import { ChartConfig, StackedBarChartOptions, ChartType } from "./configuration";
 import { BaseAxisChart } from "./base-axis-chart";
+import { getBarWidth } from "./bar-chart";
 
 // Add datasetLabel to each piece of data
 // To be used to get the fill color
@@ -70,7 +72,9 @@ export class StackedBarChart extends BaseAxisChart {
 	}
 
 	// currently unused, but required to match the BarChart class
-	getBarX(d): number { return 0; }
+	getBarX(d): number {
+		return this.x(d.data.label) + this.x.step() / 2 - getBarWidth.bind(this)() / 2 - (Configuration.scales.x.padding * this.x.bandwidth()) / 2;
+	}
 
 	draw() {
 		this.innerWrap.style("width", "100%")
@@ -94,10 +98,10 @@ export class StackedBarChart extends BaseAxisChart {
 				.enter()
 					.append("rect")
 					.classed("bar", true)
-					.attr("x", d => this.x(d.data.label))
+					.attr("x", this.getBarX.bind(this))
 					.attr("y", d => this.y(d[1]))
 					.attr("height", d => this.y(d[0]) - this.y(d[1]))
-					.attr("width", d => this.x.bandwidth())
+					.attr("width", getBarWidth.bind(this))
 					.attr("fill", d => this.getFillColor(d.datasetLabel, d.data.label, d.data.value))
 					.attr("stroke", d => this.options.accessibility ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : null)
 					.attr("stroke-width", Configuration.bars.default.strokeWidth)
@@ -130,10 +134,10 @@ export class StackedBarChart extends BaseAxisChart {
 			selection.enter()
 				.append("rect")
 				.classed("bar", true)
-				.attr("x", d => this.x(d.data.label))
+				.attr("x", this.getBarX.bind(this))
 				.attr("y", d => this.y(d[1]))
 				.attr("height", d => this.y(d[0]) - this.y(d[1]))
-				.attr("width", d => this.x.bandwidth())
+				.attr("width", getBarWidth.bind(this))
 				.attr("fill", d => this.getFillColor(d.datasetLabel, d.data.label, d.data.value))
 				.style("opacity", 0)
 				.transition(this.getFillTransition())
@@ -208,10 +212,10 @@ export class StackedBarChart extends BaseAxisChart {
 		rect
 			.transition(animate ? this.getFillTransition() : this.getInstantTransition())
 			.style("opacity", 1)
-			.attr("x", d => this.x(d.data.label))
+			.attr("x", this.getBarX.bind(this))
 			.attr("y", d => this.y(d[1]))
 			.attr("height", d => this.y(d[0]) - this.y(d[1]))
-			.attr("width", d => this.x.bandwidth())
+			.attr("width", getBarWidth.bind(this))
 			.attr("fill", d => this.getFillColor(d.datasetLabel, d.data.label, d.data.value))
 			.attr("stroke", d => this.options.accessibility ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : null)
 			.attr("stroke-width", Configuration.bars.default.strokeWidth)
@@ -222,7 +226,7 @@ export class StackedBarChart extends BaseAxisChart {
 		const self = this;
 		const { accessibility } = this.options;
 
-		this.svg.selectAll("rect")
+		this.svg.selectAll("rect.bar")
 			.on("click", d => self.dispatchEvent("bar-onClick", d))
 			.on("mouseover", function(d) {
 				select(this)
