@@ -100,21 +100,25 @@ export namespace Tools {
 	}
 
 	/**
-	 * Returns an elements's x and y translations from its computed style
+	 * Returns an elements's x and y translations from attribute transform
 	 * @param {HTMLElement} element
-	 * @returns an object containing the x and y translations
+	 * @returns an object containing the x and y translations or null
 	 */
 	export function getTranslationValues(elementRef: HTMLElement) {
-		// returns matrix(a, b, c, d, tx, ty) of transformation values (2d transform)
-		const transformMatrix = window.getComputedStyle(elementRef).getPropertyValue("transform").replace(/\s/g, "");
+		// regex to ONLY get values for translate (instead of all rotate, translate, skew, etc)
+		const translateRegex = /translate\([0-9]+\.?[0-9]*,[0-9]+\.?[0-9]*\)/;
 
-		const transformValues = transformMatrix.substring(transformMatrix.indexOf("(") + 1, transformMatrix.indexOf(")")).split(",");
+		const transformStr = elementRef.getAttribute("transform").match(translateRegex);
+		// check for the match
+		if (transformStr[0]) {
+			const transforms = transformStr[0].replace(/translate\(/, "").replace(/\)/, "").split(",");
 
-		// if there are no translations, return { dx: 0,  dy: 0 } instead of undefined
-		return {
-			tx: transformValues[4] ? transformValues[4] : 0,
-			ty: transformValues[5] ? transformValues[5] : 0
-		};
+			return {
+					tx: transforms[0],
+					ty: transforms[1]
+				};
+		}
+		return null;
 	}
 
 	/**************************************
@@ -163,15 +167,16 @@ export namespace Tools {
 	}
 
 	/**
-	 * Get the percentage of a datapoint compared to the entire data-set
-	 *
+	 * Get the percentage of a datapoint compared to the entire data-set.
+	 * Returns 1 significant digit if percentage is less than 1%.
 	 * @export
 	 * @param {any} item
 	 * @param {any} fullData
-	 * @returns The percentage in the form of a string "87%"
+	 * @returns The percentage in the form of a number
 	 */
 	export function convertValueToPercentage(item, fullData) {
-		return Math.floor(item / fullData.reduce((accum, val) => accum + val.value, 0) * 100) + "%";
+		const percentage = item / fullData.reduce((accum, val) => accum + val.value, 0) * 100;
+		return percentage < 1 ? percentage.toPrecision(1) : Math.floor(percentage);
 	}
 
 	/**************************************
