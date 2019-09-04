@@ -38,29 +38,17 @@ export class AreaChart extends ScatterChart {
 
 		this.innerWrap.attr("transform", `translate(${margins.left}, ${margins.top})`);
 
-		let curveName;
-		let curveOptions;
-		this.options.curve = this.options.curve || "curveLinear";
-		if (typeof this.options.curve === "string") { // curve: 'string'
-			curveName = this.options.curve;
-			curveOptions = {};
-		} else { // curve: { name: 'string' }
-			curveName = this.options.curve.name || "curveLinear";
-			curveOptions = this.options.curve;
-			delete curveOptions["name"];
-		}
-
 		// D3 area generator function
 		this.areaGeneratorFill = area()
 			.x((d, i) => this.x(this.displayData.labels[i]) + this.x.step() / 2)
 			.y1(this.y(0))
 			.y0((d: any) => this.y(d))
-			.curve(getD3Curve(curveName, curveOptions));
+			.curve(getD3Curve(this.options.curve));
 
 		this.areaGeneratorStroke = area()
 			.x((d, i) => this.x(this.displayData.labels[i]) + this.x.step() / 2)
 			.y((d: any) => this.y(d))
-			.curve(getD3Curve(curveName, curveOptions));
+			.curve(getD3Curve(this.options.curve));
 
 		const gLines = this.innerWrap.selectAll("g.lines")
 			.data(this.displayData.datasets)

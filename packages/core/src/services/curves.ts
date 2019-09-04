@@ -40,7 +40,20 @@ const curveTypes = {
 	"curveStepBefore": curveStepBefore
 };
 
-export const getD3Curve = (curveName = "curveLinear", curveOptions = {}) => {
+export const getD3Curve = (config?) => {
+	let curveName = "curveLinear";
+	let curveOptions = {};
+	if (config !== undefined) {
+		if (typeof config === "string") { // curve: 'string'
+			curveName = config;
+		} else if (config.hasOwnProperty("name")) { // curve: { name: 'string' }
+			curveName = config.name;
+			curveOptions = config;
+			delete curveOptions["name"];
+		} else {
+			curveOptions = config;
+		}
+	}
 	if (curveTypes[curveName]) {
 		let curve = curveTypes[curveName];
 		Object.keys(curveOptions).forEach(optionName => {
