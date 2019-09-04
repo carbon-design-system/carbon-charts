@@ -73,7 +73,9 @@ export class StackedBarChart extends BaseAxisChart {
 
 	// currently unused, but required to match the BarChart class
 	getBarX(d): number {
-		return this.x(d.data.label) + this.x.step() / 2 - getBarWidth.bind(this)() / 2 - (Configuration.scales.x.padding * this.x.bandwidth()) / 2;
+		const barWidth = getBarWidth.bind(this)();
+		const paddingDeductions = (Configuration.scales.x.padding * this.x.bandwidth()) / 2;
+		return this.x(d.data.label) + (this.x.step() / 2) - (barWidth / 2) - paddingDeductions;
 	}
 
 	draw() {
