@@ -31,10 +31,10 @@ const getYMin = configs => {
 // returns the configured max width or the calculated bandwidth
 // whichever is lower
 // defaults to the calculated bandwidth if no maxWidth is defined
-export const getBarWidth = function() {
-	const width = Tools.getProperty(this.options, "bars", "width");
-	const maxWidth = Tools.getProperty(this.options, "bars", "maxWidth");
-	const currentBandWidth = this.x.bandwidth();
+export const getBarWidth = function(chart) {
+	const width = Tools.getProperty(chart.options, "bars", "width");
+	const maxWidth = Tools.getProperty(chart.options, "bars", "maxWidth");
+	const currentBandWidth = chart.x.bandwidth();
 
 	if (width) {
 		if (maxWidth) {
@@ -58,9 +58,9 @@ export const getBarWidth = function() {
 
 // returns true if the calculated bandwidth is greater than the maxWidth (if defined)
 // i.e. if we should be constraining ourselves to a specific bar width
-export const isWidthConstrained = function() {
-	const maxWidth = Tools.getProperty(this.options, "bars", "maxWidth");
-	const currentBandWidth = this.x.bandwidth();
+export const isWidthConstrained = function(chart) {
+	const maxWidth = Tools.getProperty(chart.options, "bars", "maxWidth");
+	const currentBandWidth = chart.x.bandwidth();
 
 	if (!maxWidth) {
 		return false;
@@ -103,7 +103,7 @@ export class BarChart extends BaseAxisChart {
 			const width = chartSize.width - margins.left - margins.right;
 			this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
 			this.x1.domain(this.data.datasets.map(dataset => dataset.label))
-				.rangeRound([0, getBarWidth.bind(this)()]);
+				.rangeRound([0, getBarWidth(this)]);
 		}
 
 		this.options.type = ChartType.BAR;
@@ -129,11 +129,11 @@ export class BarChart extends BaseAxisChart {
 		}
 
 		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label))
-			.rangeRound([0, getBarWidth.bind(this)()]);
+			.rangeRound([0, getBarWidth(this)]);
 	}
 
 	getBarX(d) {
-		if (!isWidthConstrained.bind(this)()) {
+		if (!isWidthConstrained(this)) {
 			return this.x1(d.datasetLabel);
 		}
 
