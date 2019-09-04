@@ -100,9 +100,9 @@ export namespace Tools {
 	}
 
 	/**
-	 * Returns an elements's x and y translations from its computed style
+	 * Returns an elements's x and y translations from attribute transform
 	 * @param {HTMLElement} element
-	 * @returns an object containing the x and y translations
+	 * @returns an object containing the x and y translations or null
 	 */
 	export function getTranslationValues(elementRef: HTMLElement) {
 		// regex to ONLY get values for translate (instead of all rotate, translate, skew, etc)
@@ -168,15 +168,16 @@ export namespace Tools {
 	}
 
 	/**
-	 * Get the percentage of a datapoint compared to the entire data-set
-	 *
+	 * Get the percentage of a datapoint compared to the entire data-set.
+	 * Returns 1 significant digit if percentage is less than 1%.
 	 * @export
 	 * @param {any} item
 	 * @param {any} fullData
-	 * @returns The percentage in the form of a string "87%"
+	 * @returns The percentage in the form of a number
 	 */
 	export function convertValueToPercentage(item, fullData) {
-		return Math.floor(item / fullData.reduce((accum, val) => accum + val.value, 0) * 100) + "%";
+		const percentage = item / fullData.reduce((accum, val) => accum + val.value, 0) * 100;
+		return percentage < 1 ? percentage.toPrecision(1) : Math.floor(percentage);
 	}
 
 	/**************************************

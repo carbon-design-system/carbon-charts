@@ -57,5 +57,10 @@
 				color: $text-01;
 			}
 		}
+
+		g.callout-lines-left line,
+		g.callout-lines-right line {
+			stroke: $text-02;
+		}
 	}
 }

@@ -52,12 +52,17 @@
 	div.chart-overlay {
 		background: rgba($ui-02, 0.6);
 	}
-	// chart tooltip styles
+
 	.tooltip{
 		background-color: $ui-02;
 
 		p, .content-box {
 			color: $text-01;
 		}
+	}
+
+	g.callout-lines-left line,
+	g.callout-lines-right line {
+		stroke: $text-02;
 	}
 }
