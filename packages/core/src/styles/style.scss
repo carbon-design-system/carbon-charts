@@ -79,7 +79,7 @@ div.chart-holder {
 	}
 
 	g.tick text {
-		font-family: "IBM Plex Sans Condensed";
+		font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
 	}
 
 	text {
@@ -95,7 +95,8 @@ div.chart-holder {
 		}
 
 		&.chart-label {
-			font-family: "IBM Plex Sans Condensed";
+			font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+			dominant-baseline: middle;
 		}
 
 		&.donut {
@@ -171,7 +172,7 @@ div.chart-holder {
 		}
 
 		text {
-			font-family: "IBM Plex Sans condensed";
+			font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
 			font-size: 12px;
 			line-height: 16px;
 			max-width: 100px;
@@ -242,6 +243,10 @@ div.chart-holder {
 			margin: 5px;
 		}
 	}
+	g.callout-lines-left line,
+	g.callout-lines-right line {
+		stroke-width: 1px;
+	}
 }
 
 div.chart-overlay {
@@ -286,6 +291,7 @@ div.chart-overlay {
 	max-width: 70%;
 	word-wrap: break-word;
 	z-index: 1059;
+	pointer-events: none;
 
 	p {
 		margin: 0;
@@ -301,7 +307,6 @@ div.chart-overlay {
 		font-weight: 600;
 	}
 }
-
 #carbon-charts-patterns svg {
 	height: 0;
 }
