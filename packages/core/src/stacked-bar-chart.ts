@@ -73,7 +73,7 @@ export class StackedBarChart extends BaseAxisChart {
 
 	// currently unused, but required to match the BarChart class
 	getBarX(d): number {
-		const barWidth = getBarWidth.bind(this)();
+		const barWidth = getBarWidth(this);
 		const paddingDeductions = (Configuration.scales.x.padding * this.x.bandwidth()) / 2;
 		return this.x(d.data.label) + (this.x.step() / 2) - (barWidth / 2) - paddingDeductions;
 	}
@@ -103,7 +103,7 @@ export class StackedBarChart extends BaseAxisChart {
 					.attr("x", this.getBarX.bind(this))
 					.attr("y", d => this.y(d[1]))
 					.attr("height", d => this.y(d[0]) - this.y(d[1]))
-					.attr("width", getBarWidth.bind(this))
+					.attr("width", () => getBarWidth(this))
 					.attr("fill", d => this.getFillColor(d.datasetLabel, d.data.label, d.data.value))
 					.attr("stroke", d => this.options.accessibility ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : null)
 					.attr("stroke-width", Configuration.bars.default.strokeWidth)
@@ -139,7 +139,7 @@ export class StackedBarChart extends BaseAxisChart {
 				.attr("x", this.getBarX.bind(this))
 				.attr("y", d => this.y(d[1]))
 				.attr("height", d => this.y(d[0]) - this.y(d[1]))
-				.attr("width", getBarWidth.bind(this))
+				.attr("width", () => getBarWidth(this))
 				.attr("fill", d => this.getFillColor(d.datasetLabel, d.data.label, d.data.value))
 				.style("opacity", 0)
 				.transition(this.getFillTransition())
@@ -217,7 +217,7 @@ export class StackedBarChart extends BaseAxisChart {
 			.attr("x", this.getBarX.bind(this))
 			.attr("y", d => this.y(d[1]))
 			.attr("height", d => this.y(d[0]) - this.y(d[1]))
-			.attr("width", getBarWidth.bind(this))
+			.attr("width", () => getBarWidth(this))
 			.attr("fill", d => this.getFillColor(d.datasetLabel, d.data.label, d.data.value))
 			.attr("stroke", d => this.options.accessibility ? this.getStrokeColor(d.datasetLabel, d.label, d.value) : null)
 			.attr("stroke-width", Configuration.bars.default.strokeWidth)
