@@ -604,6 +604,10 @@ body.carbon--dark-g10 {
   .carbon--theme--g100 div.chart-overlay .ccharts-overlay-content {
     color: #ffffff; }
 
+.carbon--theme--g100 g.callout-lines-left line,
+.carbon--theme--g100 g.callout-lines-right line {
+  stroke: #bebebe; }
+
 .carbon--theme--g90 rect.chart-grid-backdrop {
   fill: #171717; }
 
@@ -637,6 +641,10 @@ body.carbon--dark-g10 {
   .carbon--theme--g90 div.chart-overlay .ccharts-overlay-content {
     color: #ffffff; }
 
+.carbon--theme--g90 g.callout-lines-left line,
+.carbon--theme--g90 g.callout-lines-right line {
+  stroke: #bebebe; }
+
 .carbon--theme--g10 rect.chart-grid-backdrop {
   fill: #ffffff; }
 
@@ -667,6 +675,10 @@ body.carbon--dark-g10 {
 .carbon--theme--g10 div.chart-overlay {
   background: #f3f3f3;
   background: rgba(243, 243, 243, 0.6); }
+
+.carbon--theme--g10 g.callout-lines-left line,
+.carbon--theme--g10 g.callout-lines-right line {
+  stroke: #565656; }
 
 .carbon--theme--white rect.chart-grid-backdrop {
   fill: #f3f3f3; }
@@ -700,6 +712,10 @@ body.carbon--dark-g10 {
 
 .carbon--theme--white div.chart-overlay {
   background: rgba(255, 255, 255, 0.6); }
+
+.carbon--theme--white g.callout-lines-left line,
+.carbon--theme--white g.callout-lines-right line {
+  stroke: #565656; }
 
 div.chart-holder {
   position: relative; }
@@ -740,7 +756,7 @@ div.chart-holder {
     .chart-wrapper svg.chart-svg circle.dot {
       stroke-width: 1.5; }
   .chart-wrapper g.tick text {
-    font-family: "IBM Plex Sans Condensed"; }
+    font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif; }
   .chart-wrapper text {
     font-size: 12px;
     line-height: 16px;
@@ -751,7 +767,8 @@ div.chart-holder {
       font-size: 18px;
       font-weight: bold; }
     .chart-wrapper text.chart-label {
-      font-family: "IBM Plex Sans Condensed"; }
+      font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+      dominant-baseline: middle; }
     .chart-wrapper text.donut-figure {
       font-size: 24px;
       font-weight: normal; }
@@ -797,7 +814,7 @@ div.chart-holder {
     .chart-wrapper .legend-btn span {
       display: inline; }
     .chart-wrapper .legend-btn text {
-      font-family: "IBM Plex Sans condensed";
+      font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
       font-size: 12px;
       line-height: 16px;
       max-width: 100px;
@@ -848,6 +865,9 @@ div.chart-holder {
         max-width: 90%; }
     .chart-wrapper .right-legend .legend-circle {
       margin: 5px; }
+  .chart-wrapper g.callout-lines-left line,
+  .chart-wrapper g.callout-lines-right line {
+    stroke-width: 1px; }
 
 div.chart-overlay {
   position: absolute;
@@ -885,7 +905,8 @@ div.chart-overlay {
   min-width: 80px;
   max-width: 70%;
   word-wrap: break-word;
-  z-index: 1059; }
+  z-index: 1059;
+  pointer-events: none; }
   .tooltip p {
     margin: 0;
     font-size: 12px; }

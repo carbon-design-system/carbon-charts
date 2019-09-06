@@ -387,10 +387,7 @@ var simpleBarOptions = {
     },
     legendClickable: true,
     containerResizable: true,
-    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])(),
-    bars: {
-        maxWidth: 50
-    },
+    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
 };
 // Stacked bar
 var stackedBarData = {
@@ -867,12 +864,12 @@ var donutOptions = {
 };
 var pieData = {
     labels: ["2V2N 9KYPM version 1", "L22I P66EP L22I P66EP L22I P66EP", "JQAI 2M4L1", "J9DZ F37AP",
-        "YEL48 Q6XK YEL48", "P66EP L22I L22I", "Q6XK YEL48", "XKB5 L6EP", "YEL48 Q6XK", "L22I P66EP L22I"],
+        "YEL48 Q6XK YEL48", "P66EP L22I L22I"],
     datasets: [
         {
             label: "Dataset 1",
             backgroundColors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
-            data: [70000, 40000, 90000, 50000, 60000, 45000, 90000, 70000, 80000, 120000]
+            data: [75000, 65000, 1300, 25000, 1200, 20000]
         }
     ]
 };
@@ -1336,11 +1333,13 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************!*\
   !*** ./src/bar-chart.ts ***!
   \**************************/
-/*! exports provided: BarChart */
+/*! exports provided: getBarWidth, isWidthConstrained, BarChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBarWidth", function() { return getBarWidth; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isWidthConstrained", function() { return isWidthConstrained; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BarChart", function() { return BarChart; });
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 /* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-scale */ "./node_modules/d3-scale/src/index.js");
@@ -1386,7 +1385,19 @@ var getYMin = function (configs) {
 // returns the configured max width or the calculated bandwidth
 // whichever is lower
 // defaults to the calculated bandwidth if no maxWidth is defined
-var getMaxBarWidth = function (maxWidth, currentBandWidth) {
+var getBarWidth = function (chart) {
+    var width = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getProperty(chart.options, "bars", "width");
+    var maxWidth = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getProperty(chart.options, "bars", "maxWidth");
+    var currentBandWidth = chart.x.bandwidth();
+    if (width) {
+        if (maxWidth) {
+            if (width <= maxWidth) {
+                return width;
+            }
+            return maxWidth;
+        }
+        return width;
+    }
     if (!maxWidth) {
         return currentBandWidth;
     }
@@ -1397,7 +1408,9 @@ var getMaxBarWidth = function (maxWidth, currentBandWidth) {
 };
 // returns true if the calculated bandwidth is greater than the maxWidth (if defined)
 // i.e. if we should be constraining ourselves to a specific bar width
-var isWidthConstrained = function (maxWidth, currentBandWidth) {
+var isWidthConstrained = function (chart) {
+    var maxWidth = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getProperty(chart.options, "bars", "maxWidth");
+    var currentBandWidth = chart.x.bandwidth();
     if (!maxWidth) {
         return false;
     }
@@ -1435,7 +1448,7 @@ var BarChart = /** @class */ (function (_super) {
             var width = chartSize.width - margins.left - margins.right;
             _this.x1 = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]).padding(_configuration__WEBPACK_IMPORTED_MODULE_5__["bars"].spacing.bars);
             _this.x1.domain(_this.data.datasets.map(function (dataset) { return dataset.label; }))
-                .rangeRound([0, getMaxBarWidth(_tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getProperty(_this.options, "bars", "maxWidth"), _this.x.bandwidth())]);
+                .rangeRound([0, getBarWidth(_this)]);
         }
         _this.options.type = _configuration__WEBPACK_IMPORTED_MODULE_5__["ChartType"].BAR;
         return _this;
@@ -1459,10 +1472,10 @@ var BarChart = /** @class */ (function (_super) {
             this.x1 = Object(d3_scale__WEBPACK_IMPORTED_MODULE_1__["scaleBand"])().rangeRound([0, width]);
         }
         this.x1.domain(this.displayData.datasets.map(function (dataset) { return dataset.label; }))
-            .rangeRound([0, getMaxBarWidth(_tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getProperty(this.options, "bars", "maxWidth"), this.x.bandwidth())]);
+            .rangeRound([0, getBarWidth(this)]);
     };
     BarChart.prototype.getBarX = function (d) {
-        if (!isWidthConstrained(_tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getProperty(this.options, "bars", "maxWidth"), this.x.bandwidth())) {
+        if (!isWidthConstrained(this)) {
             return this.x1(d.datasetLabel);
         }
         return (this.x.bandwidth() / 2) - (_tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getProperty(this.options, "bars", "maxWidth") / 2);
@@ -2504,7 +2517,8 @@ var BaseChart = /** @class */ (function () {
         }
         // Store computed actual size, to be considered for change if chart does not support axis
         var marginsToExclude = 0;
-        marginForChartTitle = this.options.title ? _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].title.marginBottom : 0;
+        var titleRef = container.select("text.chart-title");
+        marginForChartTitle = titleRef.empty() ? 0 : this.svg.select("text.chart-title").node().getBoundingClientRect().height;
         var computedChartSize = {
             height: container.node().clientHeight - marginForLegendTop - marginForChartTitle,
             width: (container.node().clientWidth - marginsToExclude) * ratio
@@ -2565,6 +2579,7 @@ var BaseChart = /** @class */ (function () {
                     Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["selectAll"])(".legend-tooltip").style("display", "none");
                     _this.hideTooltip();
                     _this.resizeChart();
+                    _this.drawTitle();
                 }
             }
         });
@@ -2576,17 +2591,32 @@ var BaseChart = /** @class */ (function () {
      */
     BaseChart.prototype.drawTitle = function () {
         if (this.options.title) {
-            // to add the padding only once
-            if (this.svg.select("text.chart-title").empty()) {
-                var titleMargin = _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].title.marginBottom;
-                var translateObj = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].getTranslationValues(this.innerWrap.node());
-                // add padding for title, keep other translations
-                this.innerWrap
-                    .attr("transform", "translate(" + translateObj.tx + ", " + (+translateObj.ty + titleMargin) + ")");
-            }
             // adds title or gets reference to title
             var titleRef = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].appendOrSelect(this.svg, "text.chart-title");
             titleRef.text(this.options.title);
+            // position of the title element
+            var titlePos = titleRef.node().getBoundingClientRect().bottom;
+            // the translations on the inner wrap and the current position
+            var translateObj = _tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].getTranslationValues(this.innerWrap.node());
+            var innerWrapPos = this.innerWrap.node().getBoundingClientRect().top;
+            // check that the inner wrap is below the title text
+            var diff = innerWrapPos - titlePos;
+            if (diff < 0) {
+                // we want the inner wrap to be under the title and add some padding
+                diff = Math.abs(diff) + _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].title.marginBottom;
+            }
+            else {
+                // the innerwrap is below the title, we assert the title bottom padding
+                if (diff < _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].title.marginBottom) {
+                    diff = _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].title.marginBottom - diff;
+                }
+                else {
+                    // does not need to move
+                    return;
+                }
+            }
+            this.innerWrap
+                .attr("transform", "translate(" + translateObj.tx + ", " + (+translateObj.ty + diff) + ")");
         }
     };
     BaseChart.prototype.setClickableLegend = function () {
@@ -3000,9 +3030,12 @@ var BaseChart = /** @class */ (function () {
     BaseChart.prototype.getFillScale = function () {
         return this.options.accessibility ? this.patternScale : this.colorScale;
     };
-    BaseChart.prototype.getDefaultTransition = function () {
+    BaseChart.prototype.getDefaultTransition = function (type) {
         if (this.options.animations === false) {
             return this.getInstantTransition();
+        }
+        else if (_configuration__WEBPACK_IMPORTED_MODULE_3__["transitions"][type]) {
+            return Object(d3_transition__WEBPACK_IMPORTED_MODULE_2__["transition"])().duration(_configuration__WEBPACK_IMPORTED_MODULE_3__["transitions"][type].duration);
         }
         return Object(d3_transition__WEBPACK_IMPORTED_MODULE_2__["transition"])().duration(_configuration__WEBPACK_IMPORTED_MODULE_3__["transitions"].default.duration);
     };
@@ -3553,7 +3586,7 @@ var charts = {
     widthBreak: 600,
     marginForLegendTop: 40,
     title: {
-        marginBottom: 24
+        marginBottom: 8
     },
     magicRatio: 0.7,
     magicMoreForY2Axis: 70,
@@ -3672,11 +3705,24 @@ var pie = {
     label: {
         dy: ".32em",
         margin: 8,
-        other: "Other"
+        other: "Other",
+        fontSize: 12
+    },
+    callout: {
+        sliceDegreeThreshold: 5,
+        calloutOffsetX: 15,
+        calloutOffsetY: 12,
+        calloutTextMargin: 2,
+        horizontalLineLength: 8,
+        direction: {
+            LEFT: "left",
+            RIGHT: "right"
+        }
     },
     default: {
         strokeWidth: 2
-    }
+    },
+    paddingLeft: 20
 };
 /**
  * Options for donut behaviour
@@ -3753,6 +3799,12 @@ var tooltip = {
 var transitions = {
     default: {
         duration: 750
+    },
+    pie_slice_hover: {
+        duration: 100
+    },
+    pie_chart_titles: {
+        duration: 375
     }
 };
 /**
@@ -4202,7 +4254,6 @@ var PieChart = /** @class */ (function (_super) {
         return _this;
     }
     // Sort data by value (descending)
-    // Cap number of slices at a specific number, and group the remaining items into the label "Other"
     PieChart.prototype.dataProcessor = function (dataObject) {
         // TODO - Support multiple datasets
         if (dataObject.datasets.length > 1) {
@@ -4214,29 +4265,12 @@ var PieChart = /** @class */ (function (_super) {
             console.error(_tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].capitalizeFirstLetter(this.options.type) + " Chart - You have duplicate keys", duplicates);
         }
         // TODO - Support multiple datasets
-        // let sortedData = data.datasets[0];
         var dataList = dataObject.datasets[0].data.map(function (datum, i) { return ({
             label: dataObject.labels[i],
             value: datum,
         }); });
         // Sort data by value
         var sortedData = dataList.sort(function (a, b) { return b.value - a.value; });
-        // Keep a certain number of slices, and add an "Other" slice for the rest
-        var stopAt = _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].sliceLimit;
-        var rest = sortedData.slice(stopAt);
-        var restAccumulatedValue = rest.reduce(function (accum, item) { return accum + item.value; }, 0);
-        var otherLabelIndex = sortedData.findIndex(function (dataPoint) { return dataPoint.label === "Other"; });
-        if (otherLabelIndex !== -1) {
-            sortedData.push(sortedData.splice(otherLabelIndex, 1)[0]);
-        }
-        else if (rest.length > 0) {
-            sortedData = sortedData.slice(0, stopAt)
-                .concat([{
-                    label: _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.other,
-                    value: restAccumulatedValue,
-                    items: rest
-                }]);
-        }
         return {
             // Sort labels based on the order made above
             labels: sortedData.map(function (datum, i) { return datum.label; }),
@@ -4256,6 +4290,9 @@ var PieChart = /** @class */ (function (_super) {
     // This function is called and will do that
     PieChart.prototype.initialDraw = function () {
         this.setSVG();
+        // need to draw the title for pie and donut before draw() so that it calculates the right
+        // diameter for the graph to stay within the bounds
+        this.drawTitle();
         // Add legend
         this.addOrUpdateLegend();
         // Draw slices & labels
@@ -4268,12 +4305,12 @@ var PieChart = /** @class */ (function (_super) {
         var dataList = this.displayData.datasets[0].data;
         var chartSize = this.getChartSize(this.container);
         var diameter = Math.min(chartSize.width, chartSize.height);
-        var radius = diameter / 2;
+        var radius = this.computeRadius();
         Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this.holder).select("svg")
             .attr("width", diameter + "px")
             .attr("height", diameter + "px");
         this.innerWrap
-            .attr("transform", "translate(" + radius + "," + radius + ")")
+            .attr("transform", "translate(" + (radius + _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].paddingLeft) + "," + radius + ")")
             .attr("width", diameter + "px")
             .attr("height", diameter + "px")
             .attr("preserveAspectRatio", "xMinYMin");
@@ -4282,6 +4319,9 @@ var PieChart = /** @class */ (function (_super) {
         this.arc = Object(d3_shape__WEBPACK_IMPORTED_MODULE_2__["arc"])()
             .innerRadius(this.options.type === "donut" ? (marginedRadius * (3 / 4)) : 2)
             .outerRadius(marginedRadius);
+        this.hoverArc = Object(d3_shape__WEBPACK_IMPORTED_MODULE_2__["arc"])()
+            .innerRadius(this.options.type === "donut" ? (marginedRadius * (3 / 4)) : 2)
+            .outerRadius(marginedRadius + 3);
         this.pie = Object(d3_shape__WEBPACK_IMPORTED_MODULE_2__["pie"])()
             .value(function (d) { return d.value; })
             .sort(null)
@@ -4293,9 +4333,6 @@ var PieChart = /** @class */ (function (_super) {
             .append("path")
             .attr("d", this.arc)
             .attr("fill", function (d) { return _this.getFillColor(_this.displayData.datasets[0].label, d.data.label, d.data.value); }) // Support multiple datasets
-            .attr("stroke", function (d) { return _this.getStrokeColor(_this.displayData.datasets[0].label, d.data.label, d.data.value); })
-            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].default.strokeWidth)
-            .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; })
             .each(function (d) { this._current = d; });
         // Draw the slice labels
         var self = this;
@@ -4307,8 +4344,9 @@ var PieChart = /** @class */ (function (_super) {
             .classed("chart-label", true)
             .attr("dy", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.dy)
             .style("text-anchor", "middle")
-            .text(function (d) { return _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].convertValueToPercentage(d.data.value, dataList); })
-            .attr("transform", function (d) { return self.deriveTransformString(this, d, radius); });
+            .text(function (d) { return self.getSliceLabelText(d.data.value, dataList); })
+            .attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius, dataList.length); });
+        this.positionChart();
         // Hide overlay
         this.chartOverlay.hide();
     };
@@ -4323,9 +4361,6 @@ var PieChart = /** @class */ (function (_super) {
         path
             .transition()
             .duration(0)
-            .attr("stroke", function (d) { return _this.getStrokeColor(_this.displayData.datasets[0].label, d.data.label, d.data.value); })
-            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].default.strokeWidth)
-            .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; })
             .transition()
             .style("opacity", 1)
             .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration)
@@ -4339,9 +4374,6 @@ var PieChart = /** @class */ (function (_super) {
             .transition()
             .duration(0)
             .style("opacity", 0)
-            .attr("stroke", function (d) { return _this.getStrokeColor(_this.displayData.datasets[0].label, d.data.label, d.data.value); })
-            .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].default.strokeWidth)
-            .attr("stroke-opacity", function (d) { return _this.options.accessibility ? 1 : 0; })
             .transition()
             .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration)
             .attr("fill", function (d) { return _this.getFillColor(_this.displayData.datasets[0].label, d.data.label, d.data.value); })
@@ -4358,15 +4390,22 @@ var PieChart = /** @class */ (function (_super) {
             .remove();
         // Fade out all text labels
         this.innerWrap.selectAll("text.chart-label")
-            .transition()
-            .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration / 2)
+            .transition(self.getDefaultTransition("pie_chart_titles"))
             .style("opacity", 0)
-            .on("end", function (d) {
-            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
-                .transition()
-                .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration / 2)
-                .style("opacity", 1);
-        });
+            .transition(self.getDefaultTransition("pie_chart_titles"))
+            .style("opacity", 1);
+        // fade out left callout
+        this.innerWrap.select("g.callout-lines-left")
+            .transition(self.getDefaultTransition("pie_chart_titles"))
+            .style("opacity", 0)
+            .transition(self.getDefaultTransition("pie_chart_titles"))
+            .style("opacity", 1);
+        // fade out right callout
+        this.innerWrap.select("g.callout-lines-right")
+            .transition(self.getDefaultTransition("pie_chart_titles"))
+            .style("opacity", 0)
+            .transition(self.getDefaultTransition("pie_chart_titles"))
+            .style("opacity", 1);
         // Move text labels to their new location, and fade them in again
         var radius = this.computeRadius();
         setTimeout(function () {
@@ -4378,23 +4417,21 @@ var PieChart = /** @class */ (function (_super) {
                 .classed("chart-label", true)
                 .attr("dy", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.dy)
                 .style("text-anchor", "middle")
-                .text(function (d) { return _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].convertValueToPercentage(d.data.value, dataList); })
-                .attr("transform", function (d) { return self.deriveTransformString(this, d, radius); })
+                .text(function (d) { return self.getSliceLabelText(d.data.value, dataList); })
+                .attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius, dataList.length); })
                 .style("opacity", 0)
-                .transition()
-                .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration / 2)
+                .transition(_this.getDefaultTransition("pie_chart_titles"))
                 .style("opacity", 1);
             text
                 .style("text-anchor", "middle")
-                .text(function (d) { return _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].convertValueToPercentage(d.data.value, dataList); })
-                .attr("transform", function (d) { return self.deriveTransformString(this, d, radius); })
-                .transition()
-                .duration(_configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration / 2)
+                .text(function (d) { return self.getSliceLabelText(d.data.value, dataList); })
+                .attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius); })
+                .transition(_this.getDefaultTransition("pie_chart_titles"))
                 .style("opacity", 1);
             text
                 .exit()
                 .remove();
-        }, _configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].default.duration / 2);
+        }, _configuration__WEBPACK_IMPORTED_MODULE_5__["transitions"].pie_chart_titles.duration);
         // Add slice hover actions, and clear any slice borders present
         this.addDataPointEventListener();
         this.reduceOpacity();
@@ -4408,31 +4445,28 @@ var PieChart = /** @class */ (function (_super) {
             // this.innerWrap.selectAll("path").attr("fill-opacity", Configuration.charts.reduceOpacity.opacity);
             // Fade everything out except for this element
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill-opacity", false);
-            Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["charts"].reduceOpacity.opacity);
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(exception).attr("fill", function (d) { return _this.getFillColor(_this.displayData.datasets[0].label, d.data.label, d.data.value); });
         }
     };
     // TODO - Refactor
     PieChart.prototype.addDataPointEventListener = function () {
         var self = this;
-        var accessibility = this.options.accessibility;
         this.innerWrap.selectAll("path")
             .on("click", function (d) { return self.dispatchEvent("pie-slice-onClick", d); })
             .on("mouseover", function (d) {
             var sliceElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this);
             _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].moveToFront(sliceElement);
-            sliceElement.attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseover.strokeWidth)
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseover.strokeOpacity)
-                .attr("stroke", self.getStrokeColor(self.displayData.datasets[0].label, d.data.label, d.data.value));
+            sliceElement
+                .transition(self.getDefaultTransition("pie_slice_hover"))
+                .attr("d", self.hoverArc);
             self.showTooltip(d);
             self.reduceOpacity(this);
         })
             .on("mousemove", function (d) { return self.tooltip.positionTooltip(); })
             .on("mouseout", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
-                .attr("stroke-width", accessibility ? _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].default.strokeWidth : _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseout.strokeWidth)
-                .attr("stroke", accessibility ? self.getStrokeColor(self.displayData.datasets[0].label, d.data.label, d.data.value) : "none")
-                .attr("stroke-opacity", _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].mouseout.strokeOpacity);
+                .transition(self.getDefaultTransition("pie_slice_hover"))
+                .attr("d", self.arc);
             self.hideTooltip();
         });
     };
@@ -4454,19 +4488,45 @@ var PieChart = /** @class */ (function (_super) {
             .attr("width", dimensionToUseForScale + "px")
             .attr("height", dimensionToUseForScale + "px");
         this.innerWrap
-            .style("transform", "translate(" + radius + "px," + radius + "px)");
-        // Resize the arc
+            .attr("transform", "translate(" + (radius + _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].paddingLeft) + "," + radius + ")");
+        // Resize the arcs
         this.arc = Object(d3_shape__WEBPACK_IMPORTED_MODULE_2__["arc"])()
             .innerRadius(this.options.type === "donut" ? (radius * (3 / 4)) : 2)
             .outerRadius(radius);
+        // Resize the arc
+        this.hoverArc = Object(d3_shape__WEBPACK_IMPORTED_MODULE_2__["arc"])()
+            .innerRadius(this.options.type === "donut" ? (radius * (3 / 4)) : 2)
+            .outerRadius(radius + 3);
         this.innerWrap.selectAll("path")
             .attr("d", this.arc);
         var self = this;
+        // not using the actual data in case "Other" category functionality is present
+        var totalSlices = this.innerWrap.selectAll("text.chart-label").size();
         this.innerWrap
             .selectAll("text.chart-label")
-            .attr("transform", function (d) { return self.deriveTransformString(this, d, radius); });
+            .attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius, totalSlices); });
         // Reposition the legend
         this.positionLegend();
+        // position the entire chart after titles, legend and labels are added
+        this.positionChart();
+    };
+    /**
+     * The getChartSize function for pie and donut need to return the size of the
+     * graph container while accounting for slice labels, callouts and a top legend.
+     * Without accounting for padding, the pie/donut will try to use all space for the circle and labels fall outside.
+     * @param container
+     */
+    PieChart.prototype.getChartSize = function (container) {
+        var containerSize = _super.prototype.getChartSize.call(this, container);
+        // if legend is on the top, we want the chart container to take that into account
+        var legendHeight = this.container.select(".legend-wrapper").node().getBoundingClientRect().height;
+        // padding for labels on top and below
+        // accounting for callouts even when there are none so that the radius does not need to change on update
+        var labelPadding = (_configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.fontSize * 2) + _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.calloutOffsetY;
+        // to get the margin between slices and text/callouts, we convert the em value to pixels
+        var textMargin = _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.fontSize + +_configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.dy.replace(/[^0-9.,]+/, "");
+        containerSize.height -= (legendHeight + labelPadding + (2 * textMargin));
+        return containerSize;
     };
     // Helper functions
     PieChart.prototype.computeRadius = function () {
@@ -4475,23 +4535,130 @@ var PieChart = /** @class */ (function (_super) {
         return radius;
     };
     /**
-     * Return the css transform string to be used for the slice
-     *
-     * @private
-     * @param {any} d - d3 data item for slice
-     * @param {any} radius - computed radius of the chart
-     * @returns final transform string to be applied to the <text> element
-     * @memberof PieChart
+     * This positions the entire chart after it is drawn to account for the labels and callouts
      */
-    PieChart.prototype.deriveTransformString = function (element, d, radius) {
+    PieChart.prototype.positionChart = function () {
+        // align the chart to the top of the chart container OR legend if its on top
+        var legendHeight = this.container.select(".legend-wrapper").node().getBoundingClientRect().height;
+        // get the difference in position of the innerwrap to the chart container
+        var containerPos = this.container.node().getBoundingClientRect().top;
+        var innerWrapPos = this.innerWrap.node().getBoundingClientRect().top;
+        var diff = innerWrapPos - containerPos;
+        if (diff < 0) {
+            // inner wrap to be just within the container at top
+            diff = Math.abs(diff) + legendHeight;
+        }
+        else {
+            // the innerwrap is aligned below
+            diff = -diff + legendHeight;
+        }
+        // get current translations to add the additional difference
+        var innerWrapTranslation = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].getTranslationValues(this.innerWrap.node());
+        this.innerWrap
+            .attr("transform", "translate(" + innerWrapTranslation.tx + ", " + (+innerWrapTranslation.ty + diff) + ")");
+    };
+    /**
+     * Returns the string for the slice labels.
+     * @param datapoint data value to get the percentage
+     * @param dataset dataset containing all data values
+     */
+    PieChart.prototype.getSliceLabelText = function (datapoint, dataset) {
+        return _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].convertValueToPercentage(datapoint, dataset) + "%";
+    };
+    /**
+     * Returns the translate string for the calculated position of the slice labels.
+     * @param element the text label element
+     * @param d the d3 slice object
+     * @param radius the radius of the pie or donut chart
+     * @param totalSlices total number of slices rendered
+     */
+    PieChart.prototype.getChartLabelTranslateString = function (element, d, radius, totalSlices) {
         var textLength = element.getComputedTextLength();
         var textOffsetX = textLength / 2;
         var textOffsetY = parseFloat(getComputedStyle(element).fontSize) / 2;
         var marginedRadius = radius + _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].label.margin;
         var theta = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+        var sliceAngleDeg = (d.endAngle - d.startAngle) * (180 / Math.PI);
         var xPosition = (textOffsetX + marginedRadius) * Math.sin(theta);
         var yPosition = (textOffsetY + marginedRadius) * -Math.cos(theta);
+        if (!totalSlices) {
+            return "translate(" + xPosition + ", " + yPosition + ")";
+        }
+        // check if last 2 slices (or just last) are < the threshold
+        if (d.index === totalSlices - 1) {
+            if (sliceAngleDeg < _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.sliceDegreeThreshold) {
+                // start at the same location as a non-called out label
+                var startPos = {
+                    x: xPosition,
+                    y: yPosition + textOffsetY
+                };
+                // end position for the callout line
+                var endPos = {
+                    x: xPosition + _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.calloutOffsetX,
+                    y: yPosition - _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.calloutOffsetY + textOffsetY
+                };
+                // last slice always gets callout to the right side
+                this.drawCallout(startPos, endPos, _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.direction.RIGHT);
+                return "translate(" + (endPos.x + _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.calloutTextMargin + textOffsetX) + ",\n\t\t\t\t\t" + (yPosition - _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.calloutOffsetY) + ")";
+            }
+            // remove any unneeded callout for last slice
+            this.removeCallout(_configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.direction.RIGHT);
+        }
+        if (d.index === totalSlices - 2) {
+            if (sliceAngleDeg < _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.sliceDegreeThreshold) {
+                // start position for the callout line
+                var startPos = {
+                    x: xPosition,
+                    y: yPosition + textOffsetY
+                };
+                // end position for the callout line should be bottom aligned to the title
+                var endPos = {
+                    x: xPosition - _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.calloutOffsetX,
+                    y: yPosition - _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.calloutOffsetY + textOffsetY
+                };
+                this.drawCallout(startPos, endPos, _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.direction.LEFT);
+                return "translate(" + (endPos.x - textOffsetX - _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.calloutTextMargin) + ",\n\t\t\t\t\t" + (yPosition - _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.calloutOffsetY) + ")";
+            }
+            // remove any leftover unneeded callout
+            this.removeCallout(_configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.direction.LEFT);
+        }
         return "translate(" + xPosition + ", " + yPosition + ")";
+    };
+    /**
+     * Removes the callout with the specified direction.
+     * @param dir callout direction "right" or "left"
+     */
+    PieChart.prototype.removeCallout = function (dir) {
+        this.innerWrap.select("g.callout-lines-" + dir).remove();
+    };
+    /**
+     * Draws a line to the text label associated with the slice.
+     * @param startPos x,y coordinate to start the callout line
+     * @param endPos x,y coordinate to end the callout line
+     * @param dir direction of callout (right/left)
+     */
+    PieChart.prototype.drawCallout = function (startPos, endPos, dir) {
+        // Clean up the label callouts
+        var callout = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].appendOrSelect(this.innerWrap, "g.callout-lines-" + dir);
+        var intersectPointX = dir === _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.direction.RIGHT ?
+            endPos.x - _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.horizontalLineLength :
+            endPos.x + _configuration__WEBPACK_IMPORTED_MODULE_5__["pie"].callout.horizontalLineLength;
+        // draw vertical line
+        var verticalLine = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].appendOrSelect(callout, "line.vertical-line");
+        verticalLine
+            .style("stroke-width", "1px")
+            .attr("x1", startPos.x)
+            .attr("y1", startPos.y)
+            .attr("x2", intersectPointX)
+            .attr("y2", endPos.y);
+        // draw horizontal line
+        var horizontalLine = _tools__WEBPACK_IMPORTED_MODULE_6__["Tools"].appendOrSelect(callout, "line.horizontal-line");
+        horizontalLine
+            .style("stroke-width", "1px")
+            .attr("x1", intersectPointX)
+            .attr("y1", endPos.y)
+            .attr("x2", endPos.x)
+            .attr("y2", endPos.y);
     };
     return PieChart;
 }(_base_chart__WEBPACK_IMPORTED_MODULE_4__["BaseChart"]));
@@ -4964,7 +5131,7 @@ var PatternsService = /** @class */ (function () {
                 var index = i + 1;
                 var id = ++_this.idAccum;
                 if (!datasetPattern || legendType === _configuration__WEBPACK_IMPORTED_MODULE_2__["legend"].basedOn.LABELS) {
-                    datasetPattern = _assets_patterns_index__WEBPACK_IMPORTED_MODULE_1__["default"][_this.patternAccum++].default;
+                    datasetPattern = _assets_patterns_index__WEBPACK_IMPORTED_MODULE_1__["default"][_this.patternAccum++ % _assets_patterns_index__WEBPACK_IMPORTED_MODULE_1__["default"].length].default;
                 }
                 // Create SVG container div
                 var svgContainer = document.createElement("div");
@@ -5037,6 +5204,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-array */ "../../node_modules/d3-array/src/index.js");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
 /* harmony import */ var _base_axis_chart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./base-axis-chart */ "./src/base-axis-chart.ts");
+/* harmony import */ var _bar_chart__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./bar-chart */ "./src/bar-chart.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -5050,6 +5218,8 @@ var __extends = (undefined && undefined.__extends) || (function () {
 // D3 Imports
 
 
+
+// Internal imports
 
 
 
@@ -5107,7 +5277,11 @@ var StackedBarChart = /** @class */ (function (_super) {
         return stackDataArray;
     };
     // currently unused, but required to match the BarChart class
-    StackedBarChart.prototype.getBarX = function (d) { return 0; };
+    StackedBarChart.prototype.getBarX = function (d) {
+        var barWidth = Object(_bar_chart__WEBPACK_IMPORTED_MODULE_5__["getBarWidth"])(this);
+        var paddingDeductions = (_configuration__WEBPACK_IMPORTED_MODULE_3__["scales"].x.padding * this.x.bandwidth()) / 2;
+        return this.x(d.data.label) + (this.x.step() / 2) - (barWidth / 2) - paddingDeductions;
+    };
     StackedBarChart.prototype.draw = function () {
         var _this = this;
         this.innerWrap.style("width", "100%")
@@ -5129,10 +5303,10 @@ var StackedBarChart = /** @class */ (function (_super) {
             .enter()
             .append("rect")
             .classed("bar", true)
-            .attr("x", function (d) { return _this.x(d.data.label); })
+            .attr("x", this.getBarX.bind(this))
             .attr("y", function (d) { return _this.y(d[1]); })
             .attr("height", function (d) { return _this.y(d[0]) - _this.y(d[1]); })
-            .attr("width", function (d) { return _this.x.bandwidth(); })
+            .attr("width", function () { return Object(_bar_chart__WEBPACK_IMPORTED_MODULE_5__["getBarWidth"])(_this); })
             .attr("fill", function (d) { return _this.getFillColor(d.datasetLabel, d.data.label, d.data.value); })
             .attr("stroke", function (d) { return _this.options.accessibility ? _this.getStrokeColor(d.datasetLabel, d.label, d.value) : null; })
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].default.strokeWidth)
@@ -5158,10 +5332,10 @@ var StackedBarChart = /** @class */ (function (_super) {
             selection.enter()
                 .append("rect")
                 .classed("bar", true)
-                .attr("x", function (d) { return _this.x(d.data.label); })
+                .attr("x", _this.getBarX.bind(_this))
                 .attr("y", function (d) { return _this.y(d[1]); })
                 .attr("height", function (d) { return _this.y(d[0]) - _this.y(d[1]); })
-                .attr("width", function (d) { return _this.x.bandwidth(); })
+                .attr("width", function () { return Object(_bar_chart__WEBPACK_IMPORTED_MODULE_5__["getBarWidth"])(_this); })
                 .attr("fill", function (d) { return _this.getFillColor(d.datasetLabel, d.data.label, d.data.value); })
                 .style("opacity", 0)
                 .transition(_this.getFillTransition())
@@ -5222,10 +5396,10 @@ var StackedBarChart = /** @class */ (function (_super) {
         rect
             .transition(animate ? this.getFillTransition() : this.getInstantTransition())
             .style("opacity", 1)
-            .attr("x", function (d) { return _this.x(d.data.label); })
+            .attr("x", this.getBarX.bind(this))
             .attr("y", function (d) { return _this.y(d[1]); })
             .attr("height", function (d) { return _this.y(d[0]) - _this.y(d[1]); })
-            .attr("width", function (d) { return _this.x.bandwidth(); })
+            .attr("width", function () { return Object(_bar_chart__WEBPACK_IMPORTED_MODULE_5__["getBarWidth"])(_this); })
             .attr("fill", function (d) { return _this.getFillColor(d.datasetLabel, d.data.label, d.data.value); })
             .attr("stroke", function (d) { return _this.options.accessibility ? _this.getStrokeColor(d.datasetLabel, d.label, d.value) : null; })
             .attr("stroke-width", _configuration__WEBPACK_IMPORTED_MODULE_3__["bars"].default.strokeWidth)
@@ -5234,7 +5408,7 @@ var StackedBarChart = /** @class */ (function (_super) {
     StackedBarChart.prototype.addDataPointEventListener = function () {
         var self = this;
         var accessibility = this.options.accessibility;
-        this.svg.selectAll("rect")
+        this.svg.selectAll("rect.bar")
             .on("click", function (d) { return self.dispatchEvent("bar-onClick", d); })
             .on("mouseover", function (d) {
             Object(d3_selection__WEBPACK_IMPORTED_MODULE_0__["select"])(this)
@@ -5385,19 +5559,23 @@ var Tools;
     }
     Tools.appendOrSelect = appendOrSelect;
     /**
-     * Returns an elements's x and y translations from its computed style
+     * Returns an elements's x and y translations from attribute transform
      * @param {HTMLElement} element
-     * @returns an object containing the x and y translations
+     * @returns an object containing the x and y translations or null
      */
     function getTranslationValues(elementRef) {
-        // returns matrix(a, b, c, d, tx, ty) of transformation values (2d transform)
-        var transformMatrix = window.getComputedStyle(elementRef).getPropertyValue("transform").replace(/\s/g, "");
-        var transformValues = transformMatrix.substring(transformMatrix.indexOf("(") + 1, transformMatrix.indexOf(")")).split(",");
-        // if there are no translations, return { dx: 0,  dy: 0 } instead of undefined
-        return {
-            tx: transformValues[4] ? transformValues[4] : 0,
-            ty: transformValues[5] ? transformValues[5] : 0
-        };
+        // regex to ONLY get values for translate (instead of all rotate, translate, skew, etc)
+        var translateRegex = /translate\([0-9]+\.?[0-9]*,[0-9]+\.?[0-9]*\)/;
+        var transformStr = elementRef.getAttribute("transform").match(translateRegex);
+        // check for the match
+        if (transformStr[0]) {
+            var transforms = transformStr[0].replace(/translate\(/, "").replace(/\)/, "").split(",");
+            return {
+                tx: transforms[0],
+                ty: transforms[1]
+            };
+        }
+        return null;
     }
     Tools.getTranslationValues = getTranslationValues;
     /**************************************
@@ -5442,15 +5620,16 @@ var Tools;
     }
     Tools.capitalizeFirstLetter = capitalizeFirstLetter;
     /**
-     * Get the percentage of a datapoint compared to the entire data-set
-     *
+     * Get the percentage of a datapoint compared to the entire data-set.
+     * Returns 1 significant digit if percentage is less than 1%.
      * @export
      * @param {any} item
      * @param {any} fullData
-     * @returns The percentage in the form of a string "87%"
+     * @returns The percentage in the form of a number
      */
     function convertValueToPercentage(item, fullData) {
-        return Math.floor(item / fullData.reduce(function (accum, val) { return accum + val.value; }, 0) * 100) + "%";
+        var percentage = item / fullData.reduce(function (accum, val) { return accum + val.value; }, 0) * 100;
+        return percentage < 1 ? percentage.toPrecision(1) : Math.floor(percentage);
     }
     Tools.convertValueToPercentage = convertValueToPercentage;
     /**************************************
