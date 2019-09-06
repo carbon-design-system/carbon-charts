@@ -110,10 +110,7 @@ export const simpleBarOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	theme: getTheme(),
-	bars: {
-		maxWidth: 50
-	},
+	theme: getTheme()
 };
 
 // Stacked bar
