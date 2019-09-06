@@ -31,7 +31,7 @@ const getYMin = configs => {
 // returns the configured max width or the calculated bandwidth
 // whichever is lower
 // defaults to the calculated bandwidth if no maxWidth is defined
-export const getBarWidth = function(chart) {
+export const getBarWidth = chart => {
 	const width = Tools.getProperty(chart.options, "bars", "width");
 	const maxWidth = Tools.getProperty(chart.options, "bars", "maxWidth");
 	const currentBandWidth = chart.x.bandwidth();
@@ -58,7 +58,7 @@ export const getBarWidth = function(chart) {
 
 // returns true if the calculated bandwidth is greater than the maxWidth (if defined)
 // i.e. if we should be constraining ourselves to a specific bar width
-export const isWidthConstrained = function(chart) {
+export const isWidthConstrained = chart => {
 	const maxWidth = Tools.getProperty(chart.options, "bars", "maxWidth");
 	const currentBandWidth = chart.x.bandwidth();
 
