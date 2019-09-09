@@ -2780,10 +2780,7 @@ var BaseChart = /** @class */ (function () {
         if (this.isLegendOnRight()) {
             this.container.selectAll(".expand-btn").remove();
             this.container.select(".legend-wrapper").style("height", 0);
-            var containerWidth = this.container.node().clientWidth;
-            var legendWidth = containerWidth - svgWidth;
-            this.container.select(".legend").classed("right-legend", true)
-                .style("width", legendWidth + "px");
+            this.container.select(".legend").classed("right-legend", true);
         }
         else {
             this.container.select(".legend-wrapper").style("height", _configuration__WEBPACK_IMPORTED_MODULE_3__["legend"].wrapperHeight);
@@ -2805,6 +2802,9 @@ var BaseChart = /** @class */ (function () {
                 this.addTooltipOpenButtonToLegend();
             }
         }
+        else {
+            this.container.selectAll(".legend-btn").style("display", null);
+        }
     };
     BaseChart.prototype.addOrUpdateLegend = function () {
         this.addLegend();
@@ -2825,12 +2825,12 @@ var BaseChart = /** @class */ (function () {
         });
     };
     BaseChart.prototype.hasLegendExpandBtn = function () {
-        return (this.container.node().clientWidth < _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].widthBreak ||
-            this.container.node().clientHeight < this.container.select("ul.legend").node().clientHeight);
+        return this.container.node().clientWidth < _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].widthBreak ||
+            this.container.node().clientHeight < this.container.select("ul.legend").node().clientHeight;
     };
     BaseChart.prototype.isLegendOnRight = function () {
-        return (this.container.node().clientWidth > _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].widthBreak &&
-            this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight);
+        return this.container.node().clientWidth >= _configuration__WEBPACK_IMPORTED_MODULE_3__["charts"].widthBreak &&
+            this.container.node().clientHeight >= this.container.select("ul.legend").node().clientHeight;
     };
     /**
      *
@@ -4683,27 +4683,29 @@ function arcTween(a, arcFunc) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {(function () {
-    if (typeof window["CustomEvent"] === "function") {
-        return false;
+/* WEBPACK VAR INJECTION */(function(global) {if (typeof window !== "undefined") {
+    (function () {
+        if (typeof window["CustomEvent"] === "function") {
+            return false;
+        }
+        function CustomEvent(event, params) {
+            params = params || { bubbles: false, cancelable: false, detail: undefined };
+            var evt = document.createEvent("CustomEvent");
+            evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+            return evt;
+        }
+        CustomEvent.prototype = window["Event"].prototype;
+        window["CustomEvent"] = CustomEvent;
+    })();
+    // Avoid multiple instances of babel-polyfill
+    function idempotentBabelPolyfill() {
+        if (!global["_babelPolyfill"] && (typeof window === "undefined" || !window["_babelPolyfill"])) {
+            return __webpack_require__(/*! babel-polyfill */ "../../node_modules/babel-polyfill/lib/index.js");
+        }
+        return null;
     }
-    function CustomEvent(event, params) {
-        params = params || { bubbles: false, cancelable: false, detail: undefined };
-        var evt = document.createEvent("CustomEvent");
-        evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
-        return evt;
-    }
-    CustomEvent.prototype = window["Event"].prototype;
-    window["CustomEvent"] = CustomEvent;
-})();
-// Avoid multiple instances of babel-polyfill
-function idempotentBabelPolyfill() {
-    if (!global["_babelPolyfill"] && (typeof window === "undefined" || !window["_babelPolyfill"])) {
-        return __webpack_require__(/*! babel-polyfill */ "../../node_modules/babel-polyfill/lib/index.js");
-    }
-    return null;
+    idempotentBabelPolyfill();
 }
-idempotentBabelPolyfill();
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/global.js */ "../../node_modules/webpack/buildin/global.js")))
 

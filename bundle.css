@@ -829,7 +829,8 @@ div.chart-holder {
         box-shadow: none !important; }
   .chart-wrapper .legend-tooltip {
     padding: 0;
-    border: none; }
+    border: none;
+    pointer-events: auto; }
     .chart-wrapper .legend-tooltip .legend-tooltip-header {
       color: white;
       font-size: 15px;
