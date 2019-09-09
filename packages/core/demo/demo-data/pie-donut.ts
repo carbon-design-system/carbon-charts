@@ -4,7 +4,7 @@ import { getTheme } from "./themes";
 export const pieOptions = {
 	accessibility: false,
 	legendClickable: true,
-	containerResizable: true,
+	resizable: true,
 	colors,
 	theme: getTheme()
 };
@@ -12,7 +12,7 @@ export const pieOptions = {
 export const donutOptions = {
 	accessibility: false,
 	legendClickable: true,
-	containerResizable: true,
+	resizable: true,
 	theme: getTheme(),
 	colors,
 	center: {

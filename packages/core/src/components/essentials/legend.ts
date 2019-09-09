@@ -1,6 +1,8 @@
 // Internal Imports
 import * as Configuration from "../../configuration";
 import { Component } from "../component";
+import { Tools } from "../../tools";
+import { LegendOrientations } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -57,6 +59,8 @@ export class Legend extends Component {
 			.style("font-size", "15px")
 			.attr("alignment-baseline", "middle");
 
+		const legendOrientation = Tools.getProperty(this._model.getOptions(), "legend", "orientation");
+		
 		// Crop legend items into lines
 		const self = this;
 		let startingPoint = 0;
@@ -67,7 +71,7 @@ export class Legend extends Component {
 				const legendItem = select(this);
 				const previousLegendItem = select(svg.selectAll("g.legend-item").nodes()[i - 1]);
 
-				if (itemIndexInLine === 0 || previousLegendItem.empty()) {
+				if (itemIndexInLine === 0 || previousLegendItem.empty() || legendOrientation === LegendOrientations.VERTICAL) {
 					// Position checkbox
 					legendItem.select("rect.checkbox")
 						.attr("x", 0)
@@ -77,6 +81,10 @@ export class Legend extends Component {
 					legendItem.select("text")
 						.attr("x", spaceNeededForCheckbox)
 						.attr("y", 8 + (lineNumber * legendItemsVerticalSpacing));
+
+					if (legendOrientation === LegendOrientations.VERTICAL) {
+						lineNumber++;
+					}
 				} else {
 					const svgDimensions = self._services.domUtils.getSVGElementSize(self._parent, { useAttr: true });
 					const legendItemTextDimensions = self._services.domUtils.getSVGElementSize(select(this).select("text"), { useBBox: true });

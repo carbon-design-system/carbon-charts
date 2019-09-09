@@ -73,7 +73,7 @@ export const groupedBarOptions = {
 		size: "compact"
 	},
 	legendClickable: true,
-	containerResizable: true,
+	resizable: true,
 	theme: getTheme()
 };
 
@@ -109,7 +109,7 @@ export const simpleBarOptions = {
 		}
 	},
 	legendClickable: true,
-	containerResizable: true,
+	resizable: true,
 	theme: getTheme(),
 	bars: {
 		maxWidth: 50
@@ -184,6 +184,6 @@ export const stackedBarOptions = {
 		size: "compact"
 	},
 	legendClickable: true,
-	containerResizable: true,
+	resizable: true,
 	theme: getTheme()
 };

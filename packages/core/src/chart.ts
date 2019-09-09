@@ -63,7 +63,7 @@ export class Chart {
 		});
 	}
 
-	getComponents(): Array<Component> {
+	getComponents(): Array<any> {
 		errorHandler.INTERNAL.CHART.MISSING_METHOD("getComponents");
 
 		return null;

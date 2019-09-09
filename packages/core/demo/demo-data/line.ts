@@ -63,7 +63,7 @@ export const curvedLineOptions = {
 		name: "curveNatural"
 	},
 	legendClickable: true,
-	containerResizable: true,
+	resizable: true,
 	theme: getTheme()
 };
 
@@ -141,7 +141,7 @@ export const lineOptions = () => ({
 		}
 	},
 	legendClickable: true,
-	containerResizable: true
+	resizable: true
 });
 
 
@@ -193,7 +193,7 @@ export const lineTimeSeriesOptions = () => ({
 		}
 	},
 	legendClickable: true,
-	containerResizable: true
+	resizable: true
 });
 
 

@@ -72,6 +72,6 @@ export const comboOptions = {
 		}
 	},
 	legendClickable: true,
-	containerResizable: true,
+	resizable: true,
 	theme: getTheme()
 };

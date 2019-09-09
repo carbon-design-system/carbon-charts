@@ -27,7 +27,7 @@ export interface BaseChartOptions {
 	/**
 	 * boolean to prevent the container from resizing
 	 */
-	containerResizable?: boolean;
+	resizable?: boolean;
 	/**
 	 * array of hex colors for the chart to render from
 	 */
