@@ -60,7 +60,7 @@ export class Legend extends Component {
 			.attr("alignment-baseline", "middle");
 
 		const legendOrientation = Tools.getProperty(this._model.getOptions(), "legend", "orientation");
-		
+
 		// Crop legend items into lines
 		const self = this;
 		let startingPoint = 0;
