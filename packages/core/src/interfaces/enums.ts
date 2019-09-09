@@ -45,6 +45,24 @@ export enum ScaleIdentifiers {
 }
 
 /**
+ * enum of all possible legend positions
+ */
+export enum LegendPositions {
+	RIGHT = "right",
+	LEFT = "left",
+	TOP = "top",
+	BOTTOM = "bottom"
+}
+
+/**
+ * enum of all possible legend orientations
+ */
+export enum LegendOrientations {
+	HORIZONTAL = "horizontal",
+	VERTICAL = "vertical"
+}
+
+/**
  * enum of all possible tooltip sizes
  */
 export enum TooltipSize {

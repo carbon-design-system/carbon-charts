@@ -18,7 +18,7 @@ export class DOMUtils extends Service {
 
 		this.addSVGElement();
 
-		if (this._model.getOptions().containerResizable) {
+		if (this._model.getOptions().resizable) {
 			this.addResizeListener();
 		}
 	}

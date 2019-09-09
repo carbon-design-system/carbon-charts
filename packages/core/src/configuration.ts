@@ -22,7 +22,7 @@ import {
  */
 const baseOptions: BaseChartOptions = {
 	legendClickable: true,
-	containerResizable: true,
+	resizable: true,
 	colors: colorPalettes.DEFAULT,
 	tooltip: {
 		size: TooltipSize.FULL,

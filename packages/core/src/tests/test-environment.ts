@@ -59,7 +59,7 @@ export const options = {
 		}
 	},
 	legendClickable: true,
-	containerResizable: true,
+	resizable: true,
 	height: 500
 };
 
