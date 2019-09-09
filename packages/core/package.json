@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts",
-  "version": "0.15.8",
+  "version": "0.16.1",
   "description": "Carbon charting components",
   "main": "./index.umd.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "demo:build": "webpack --config webpack.config.js && yarn run docs:build",
     "docs:build": "typedoc --out ./demo/bundle/documentation ./src/index.ts",
     "build": "bash build.sh",
-    "build:watch": "rm -rf dist && webpack -w --config webpack.build.js",
+    "build:watch": "webpack -w --config webpack.build.js",
     "bundle:analyzer": "rm -rf dist && webpack --config webpack.build.js --env.bundleAnalyzer",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "karma start --single-run",
