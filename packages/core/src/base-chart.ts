@@ -595,10 +595,7 @@ export class BaseChart {
 		if (this.isLegendOnRight()) {
 			this.container.selectAll(".expand-btn").remove();
 			this.container.select(".legend-wrapper").style("height", 0);
-			const containerWidth = this.container.node().clientWidth;
-			const legendWidth = containerWidth - svgWidth;
-			this.container.select(".legend").classed("right-legend", true)
-				.style("width", legendWidth + "px");
+			this.container.select(".legend").classed("right-legend", true);
 		} else {
 			this.container.select(".legend-wrapper").style("height", Configuration.legend.wrapperHeight);
 		}
@@ -618,6 +615,8 @@ export class BaseChart {
 			if (this.container.select(".expand-btn").nodes().length === 0) {
 				this.addTooltipOpenButtonToLegend();
 			}
+		} else {
+			this.container.selectAll(".legend-btn").style("display", null);
 		}
 	}
 
@@ -649,21 +648,13 @@ export class BaseChart {
 	}
 
 	hasLegendExpandBtn() {
-		return (
-			this.container.node().clientWidth < Configuration.charts.widthBreak ||
-				this.container.node().clientHeight < this.container.select("ul.legend").node().clientHeight
-
-			// && this.getLegendItems().length > Configuration.legend.countBreak
-		);
+		return this.container.node().clientWidth < Configuration.charts.widthBreak ||
+			this.container.node().clientHeight < this.container.select("ul.legend").node().clientHeight;
 	}
 
 	isLegendOnRight() {
-		return (
-			this.container.node().clientWidth > Configuration.charts.widthBreak &&
-				this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight
-
-			// && this.getLegendItems().length > Configuration.legend.countBreak
-		);
+		return this.container.node().clientWidth >= Configuration.charts.widthBreak &&
+			this.container.node().clientHeight >= this.container.select("ul.legend").node().clientHeight;
 	}
 
 	/**
