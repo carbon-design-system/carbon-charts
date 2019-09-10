@@ -1,5 +1,5 @@
 // D3 Imports
-import { select, mouse } from "d3-selection";
+import { select } from "d3-selection";
 import { scaleBand, ScaleBand } from "d3-scale";
 import { min } from "d3-array";
 
@@ -31,7 +31,22 @@ const getYMin = configs => {
 // returns the configured max width or the calculated bandwidth
 // whichever is lower
 // defaults to the calculated bandwidth if no maxWidth is defined
-const getMaxBarWidth = (maxWidth, currentBandWidth) => {
+export const getBarWidth = chart => {
+	const width = Tools.getProperty(chart.options, "bars", "width");
+	const maxWidth = Tools.getProperty(chart.options, "bars", "maxWidth");
+	const currentBandWidth = chart.x.bandwidth();
+
+	if (width) {
+		if (maxWidth) {
+			if (width <= maxWidth) {
+				return width;
+			}
+
+			return maxWidth;
+		}
+
+		return width;
+	}
 	if (!maxWidth) {
 		return currentBandWidth;
 	}
@@ -43,7 +58,10 @@ const getMaxBarWidth = (maxWidth, currentBandWidth) => {
 
 // returns true if the calculated bandwidth is greater than the maxWidth (if defined)
 // i.e. if we should be constraining ourselves to a specific bar width
-const isWidthConstrained = (maxWidth, currentBandWidth) => {
+export const isWidthConstrained = chart => {
+	const maxWidth = Tools.getProperty(chart.options, "bars", "maxWidth");
+	const currentBandWidth = chart.x.bandwidth();
+
 	if (!maxWidth) {
 		return false;
 	}
@@ -83,10 +101,9 @@ export class BarChart extends BaseAxisChart {
 			const { bar: margins } = Configuration.charts.margin;
 			const chartSize = this.getChartSize();
 			const width = chartSize.width - margins.left - margins.right;
-
 			this.x1 = scaleBand().rangeRound([0, width]).padding(Configuration.bars.spacing.bars);
 			this.x1.domain(this.data.datasets.map(dataset => dataset.label))
-				.rangeRound([0, getMaxBarWidth(Tools.getProperty(this.options, "bars", "maxWidth"), this.x.bandwidth())]);
+				.rangeRound([0, getBarWidth(this)]);
 		}
 
 		this.options.type = ChartType.BAR;
@@ -112,11 +129,11 @@ export class BarChart extends BaseAxisChart {
 		}
 
 		this.x1.domain(this.displayData.datasets.map(dataset => dataset.label))
-			.rangeRound([0, getMaxBarWidth(Tools.getProperty(this.options, "bars", "maxWidth"), this.x.bandwidth())]);
+			.rangeRound([0, getBarWidth(this)]);
 	}
 
 	getBarX(d) {
-		if (!isWidthConstrained(Tools.getProperty(this.options, "bars", "maxWidth"), this.x.bandwidth())) {
+		if (!isWidthConstrained(this)) {
 			return this.x1(d.datasetLabel);
 		}
 
