@@ -56,11 +56,8 @@ export class ScatterChart extends BaseAxisChart {
 		// Dispatch the load event
 		this.dispatchEvent("load");
 
-		console.log(this.options);
 		// check if gridline tooltips are set on
-		console.log(this.options.tooltip);
 		if (this.options.tooltip.gridline) {
-
 			this.addGridXEventListener();
 		}
 	}
