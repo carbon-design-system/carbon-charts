@@ -97,7 +97,9 @@ export class PieChart extends BaseChart {
 		this.draw();
 
 		// Add event listeners to slices
-		this.addDataPointEventListener();
+		if (this.options.tooltip.enabled) {
+			this.addDataPointEventListener();
+		}
 	}
 
 	draw() {
@@ -255,8 +257,10 @@ export class PieChart extends BaseChart {
 		}, Configuration.transitions.pie_chart_titles.duration);
 
 		// Add slice hover actions, and clear any slice borders present
-		this.addDataPointEventListener();
-		this.reduceOpacity();
+		if (this.options.tooltip.enabled) {
+			this.addDataPointEventListener();
+		}
+		//this.reduceOpacity();
 
 		// Hide the overlay
 		this.chartOverlay.hide();

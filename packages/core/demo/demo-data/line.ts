@@ -136,7 +136,7 @@ export const lineOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	theme: getTheme()
+	theme: getTheme(),
 };
 
 export const scatterData = {

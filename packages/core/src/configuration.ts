@@ -86,6 +86,10 @@ export interface TooltipOptions {
 	 * custom HTML function to create a single or multipoint tooltip
 	 */
 	html?: Function;
+	/**
+	 * configuration for disabling tooltip
+	 */
+	enabled?: Boolean;
 }
 
 /**
@@ -158,6 +162,7 @@ const baseOptions: BaseChartOptions = {
 	containerResizable: true,
 	colors: colorPalettes.DEFAULT,
 	tooltip: {
+		enabled: true,
 		targetsToSkip: ["rect", "circle", "path"],
 	},
 	theme: ChartTheme.WHITE,

@@ -170,8 +170,10 @@ export class StackedBarChart extends BaseAxisChart {
 			.style("opacity", 0)
 			.remove();
 
-		// Add slice hover actions, and clear any slice borders present
-		this.addDataPointEventListener();
+		// Add tooltip hover data
+		if (this.options.tooltip.enabled) {
+			this.addDataPointEventListener();
+		}
 
 		// Hide the overlay
 		this.chartOverlay.hide();

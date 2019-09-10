@@ -14,6 +14,10 @@ export class ScatterChart extends BaseAxisChart {
 	constructor(holder: Element, configs: ChartConfig<ScatterChartOptions>) {
 		super(holder, configs);
 
+		if (configs.options) {
+			this.options = Tools.merge({}, this.options, configs.options);
+		}
+
 		this.options.type = ChartType.SCATTER;
 	}
 
@@ -52,8 +56,11 @@ export class ScatterChart extends BaseAxisChart {
 		// Dispatch the load event
 		this.dispatchEvent("load");
 
+		console.log(this.options);
 		// check if gridline tooltips are set on
+		console.log(this.options.tooltip);
 		if (this.options.tooltip.gridline) {
+
 			this.addGridXEventListener();
 		}
 	}
@@ -139,8 +146,10 @@ export class ScatterChart extends BaseAxisChart {
 			.style("opacity", 0)
 			.remove();
 
-		// Add slice hover actions, and clear any slice borders present
-		this.addDataPointEventListener();
+		// Add hover tooltips
+		if (this.options.tooltip.enabled) {
+			this.addDataPointEventListener();
+		}
 
 		// Hide the overlay
 		this.chartOverlay.hide();

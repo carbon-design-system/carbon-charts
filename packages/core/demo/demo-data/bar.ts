@@ -69,9 +69,6 @@ export const groupedBarOptions = {
 			formatter: axisValue => `${axisValue * 100}%`
 		}
 	},
-	tooltip: {
-		size: "compact"
-	},
 	legendClickable: true,
 	containerResizable: true,
 	theme: getTheme()
@@ -176,9 +173,6 @@ export const stackedBarOptions = {
 			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
 			stacked: true
 		}
-	},
-	tooltip: {
-		size: "compact"
 	},
 	legendClickable: true,
 	containerResizable: true,
