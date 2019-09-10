@@ -260,7 +260,6 @@ export class PieChart extends BaseChart {
 		if (this.options.tooltip.enabled) {
 			this.addDataPointEventListener();
 		}
-		//this.reduceOpacity();
 
 		// Hide the overlay
 		this.chartOverlay.hide();
