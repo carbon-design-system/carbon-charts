@@ -37,14 +37,7 @@ export class ScatterChart extends AxisChart {
 
 	getComponents() {
 		const graphFrameComponents = [
-			new FourAxes({
-				axes: {
-					// [AxisPositions.LEFT]: true,
-					// [AxisPositions.BOTTOM]: true,
-					[AxisPositions.RIGHT]: true,
-					[AxisPositions.TOP]: true
-				}
-			}),
+			this.get2DAxisComponent(),
 			new Grid(),
 			new Line(),
 			new Scatter({

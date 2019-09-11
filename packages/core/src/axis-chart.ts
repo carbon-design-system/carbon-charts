@@ -4,14 +4,16 @@ import { Component } from "./components/component";
 import {
 	LayoutDirection,
 	LayoutGrowth,
-	LegendOrientations
+	LegendOrientations,
+	AxisPositions
 } from "./interfaces/index";
 import {
 	LayoutComponent,
 	Legend,
 	Overlay,
 	Title,
-	Tooltip
+	Tooltip,
+	FourAxes
 } from "./components/index";
 import { Tools } from "./tools";
 
@@ -98,5 +100,16 @@ export class AxisChart extends Chart {
 				}
 			)
 		];
+	}
+
+	protected get2DAxisComponent() {
+		return new FourAxes({
+			axes: {
+				[AxisPositions.LEFT]: true,
+				[AxisPositions.BOTTOM]: true,
+				[AxisPositions.RIGHT]: true,
+				[AxisPositions.TOP]: true
+			}
+		});
 	}
 }
