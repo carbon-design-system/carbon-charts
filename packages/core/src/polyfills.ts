@@ -15,7 +15,7 @@ if (typeof window !== "undefined") {
 
 	// Avoid multiple instances of babel-polyfill
 	function idempotentBabelPolyfill() {
-		if ((typeof global !== undefined && !global["_babelPolyfill"]) || !window["_babelPolyfill"]) {
+		if ((typeof global !== "undefined" && !global["_babelPolyfill"]) || !window["_babelPolyfill"]) {
 			return require("babel-polyfill");
 		}
 
