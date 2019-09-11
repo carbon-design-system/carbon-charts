@@ -201,6 +201,7 @@ div.chart-holder {
 	.legend-tooltip {
 		padding: 0;
 		border: none;
+		pointer-events: auto;
 
 		.legend-tooltip-header {
 			color: white;
