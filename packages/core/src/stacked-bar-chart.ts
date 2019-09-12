@@ -171,9 +171,7 @@ export class StackedBarChart extends BaseAxisChart {
 			.remove();
 
 		// Add tooltip hover data
-		if (this.options.tooltip.enabled) {
-			this.addDataPointEventListener();
-		}
+		this.addDataPointEventListener();
 
 		// Hide the overlay
 		this.chartOverlay.hide();

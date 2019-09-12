@@ -97,9 +97,7 @@ export class PieChart extends BaseChart {
 		this.draw();
 
 		// Add event listeners to slices
-		if (this.options.tooltip.enabled) {
-			this.addDataPointEventListener();
-		}
+		this.addDataPointEventListener();
 	}
 
 	draw() {
@@ -257,9 +255,7 @@ export class PieChart extends BaseChart {
 		}, Configuration.transitions.pie_chart_titles.duration);
 
 		// Add slice hover actions, and clear any slice borders present
-		if (this.options.tooltip.enabled) {
-			this.addDataPointEventListener();
-		}
+		this.addDataPointEventListener();
 
 		// Hide the overlay
 		this.chartOverlay.hide();
@@ -286,7 +282,10 @@ export class PieChart extends BaseChart {
 		return `<div class="datapoint-tooltip"><p class="label">${label}</p><p class="value">${value}</p></div>`;
 	}
 
-	getTooltipHTML = d => this.generateTooltipHTML(d.data.label, d.value.toLocaleString());
+	getTooltipHTML = (d) => {
+		const formattedValue = this.options.tooltip.valueFormatter ? this.options.tooltip.valueFormatter(d.data) : d.value.toLocaleString("en");
+		return this.generateTooltipHTML(d.data.label, formattedValue);
+	}
 
 	// TODO - Refactor
 	addDataPointEventListener() {

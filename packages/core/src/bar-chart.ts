@@ -251,9 +251,7 @@ export class BarChart extends BaseAxisChart {
 			.remove();
 
 		// Add slice hover actions, and clear any slice borders present
-		if (this.options.tooltip.enabled) {
-			this.addDataPointEventListener();
-		}
+		this.addDataPointEventListener();
 
 		// Hide the overlay
 		this.chartOverlay.hide();

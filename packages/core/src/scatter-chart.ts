@@ -144,9 +144,7 @@ export class ScatterChart extends BaseAxisChart {
 			.remove();
 
 		// Add hover tooltips
-		if (this.options.tooltip.enabled) {
-			this.addDataPointEventListener();
-		}
+		this.addDataPointEventListener();
 
 		// Hide the overlay
 		this.chartOverlay.hide();

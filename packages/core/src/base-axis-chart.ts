@@ -75,9 +75,7 @@ export class BaseAxisChart extends BaseChart {
 
 		this.draw();
 
-		if (this.options.tooltip.enabled) {
-			this.addDataPointEventListener();
-		}
+		this.addDataPointEventListener();
 	}
 
 	update() {
