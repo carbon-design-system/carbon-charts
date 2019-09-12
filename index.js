@@ -3592,7 +3592,7 @@ var charts = {
     magicMoreForY2Axis: 70,
     axisCharts: {
         minWidth: 100,
-        minHeight: 200
+        minHeight: 100
     }
 };
 /**
