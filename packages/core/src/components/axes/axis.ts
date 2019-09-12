@@ -209,9 +209,9 @@ export class Axis extends Component {
 			});
 		});
 
-		if (axes.y.yMaxAdjuster) {
-			yMax = axes.y.yMaxAdjuster(yMax);
-		}
+		// if (axes.y.yMaxAdjuster) {
+		// 	yMax = axes.y.yMaxAdjuster(yMax);
+		// }
 
 		return yMax;
 	}
@@ -227,9 +227,9 @@ export class Axis extends Component {
 			});
 		});
 
-		if (axes.y.yMinAdjuster) {
-			yMin = axes.y.yMinAdjuster(yMin);
-		}
+		// if (axes.y.yMinAdjuster) {
+		// 	yMin = axes.y.yMinAdjuster(yMin);
+		// }
 
 		return yMin;
 	}

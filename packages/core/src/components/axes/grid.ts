@@ -2,6 +2,7 @@
 import { Component } from "../component";
 import { AxisPositions } from "../../interfaces";
 import * as Configuration from "../../configuration";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { axisBottom, axisLeft } from "d3-axis";
@@ -50,7 +51,7 @@ export class Grid extends Component {
 			.tickSizeInner(-width)
 			.tickSizeOuter(0);
 
-		yGrid.ticks(axes.y.numberOfTicks || Configuration.scales.y.numberOfTicks);
+		yGrid.ticks(Tools.getProperty(axes, "y", "numberOfTicks") || Configuration.scales.y.numberOfTicks);
 
 		const g = svg.select(".y.grid")
 			.attr("transform", `translate(0, ${-this.backdrop.attr("y")})`)

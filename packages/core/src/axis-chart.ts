@@ -1,11 +1,11 @@
 import { Chart } from "./chart";
-import { Component } from "./components/component";
 
 import {
 	LayoutDirection,
 	LayoutGrowth,
 	LegendOrientations,
-	AxisPositions
+	AxisPositions,
+	ScaleTypes
 } from "./interfaces/index";
 import {
 	LayoutComponent,
@@ -13,7 +13,7 @@ import {
 	Overlay,
 	Title,
 	Tooltip,
-	FourAxes
+	TwoDimensionalAxes
 } from "./components/index";
 import { Tools } from "./tools";
 
@@ -50,6 +50,7 @@ export class AxisChart extends Chart {
 			}
 		};
 
+		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
 		const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
 		if (legendPosition === "left") {
@@ -103,13 +104,6 @@ export class AxisChart extends Chart {
 	}
 
 	protected get2DAxisComponent() {
-		return new FourAxes({
-			axes: {
-				[AxisPositions.LEFT]: true,
-				[AxisPositions.BOTTOM]: true,
-				[AxisPositions.RIGHT]: true,
-				[AxisPositions.TOP]: true
-			}
-		});
+		return new TwoDimensionalAxes();
 	}
 }

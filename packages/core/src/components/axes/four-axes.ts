@@ -1,12 +1,13 @@
 // Internal Imports
 import { Component } from "../component";
-import { AxisPositions } from "../../interfaces";
+import { AxisPositions, ScaleTypes } from "../../interfaces";
 import { Axis } from "./axis";
+import { Tools } from "../../tools";
 
-export class FourAxes extends Component {
+export class TwoDimensionalAxes extends Component {
 	type = "four-axes";
 
-	options: any;
+	options: any = {};
 	children: Array<Axis> = [];
 
 	margins = {
@@ -18,12 +19,47 @@ export class FourAxes extends Component {
 
 	constructor(options?: any) {
 		super();
+	}
 
-		this.options = options;
+	render(animate = false) {
+		const axes = {};
+
+		const axisPositions = Object.keys(AxisPositions);
+		const axesOptions = Tools.getProperty(this._model.getOptions(), "axes");
+		if (axesOptions) {
+			let primaryAxisOptions, secondaryAxisOptions;
+			axisPositions.forEach(axisPosition => {
+				const axisOptions = axesOptions[AxisPositions[axisPosition]];
+				if (axisOptions) {
+					axes[AxisPositions[axisPosition]] = true;
+
+					if (axisOptions.primary === true) {
+						primaryAxisOptions = axisOptions;
+					} else if (axisOptions.secondary === true) {
+						secondaryAxisOptions = axisOptions;
+					}
+				}
+			});
+		} else {
+			this._model.getOptions().axes = {
+				left: {
+					primary: true
+				},
+				bottom: {
+					secondary: true,
+					type: this._model.getDisplayData().labels ? ScaleTypes.LABELS : undefined
+				}
+			};
+
+			axes[AxisPositions.LEFT] = true;
+			axes[AxisPositions.BOTTOM] = true;
+		}
+
+		this.options.axes = axes;
 
 		// Check the configs to know which axes need to be rendered
-		const axisPositions = Object.keys(AxisPositions).map(axisPositionKey => AxisPositions[axisPositionKey]);
-		axisPositions.forEach(axisPosition => {
+		const axisPositionss = Object.keys(AxisPositions).map(axisPositionKey => AxisPositions[axisPositionKey]);
+		axisPositionss.forEach(axisPosition => {
 			if (this.options.axes[axisPosition]) {
 				const axisComponent = new Axis({
 					position: axisPosition,
@@ -34,9 +70,7 @@ export class FourAxes extends Component {
 				this.children.push(axisComponent);
 			}
 		});
-	}
 
-	render(animate = false) {
 		this.children.forEach(child => {
 			child.render({
 				animate
