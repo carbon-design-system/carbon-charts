@@ -110,36 +110,16 @@ export const lineData = {
 export const lineOptions = () => ({
 	// animations: false,
 	accessibility: false,
-	axes: {
-		top: {
-			title: "2018 Annual Sales Figures",
-			type: "labels",
-			secondary: true
-		},
-		right: {
-			primary: true
-		},
-		y: {
-			title: "Dollars (CAD)",
-			// yMaxAdjuster: yMax => yMax * 1.2,
-			// yMinAdjuster: yMin => yMin * 1.2,
-			// formatter: Math.random() > 0.5 ? null : val => `${val} gweg werg weg`,
-			thresholds: [
-				{
-					range: [-20000, 30000],
-					theme: "success"
-				},
-				{
-					range: [30000, 40000],
-					theme: "danger"
-				},
-				{
-					range: [40000, 70000],
-					theme: "warning"
-				}
-			]
-		}
-	},
+	// axes: {
+	// 	top: {
+	// 		title: "2018 Annual Sales Figures",
+	// 		type: "labels",
+	// 		secondary: true
+	// 	},
+	// 	right: {
+	// 		primary: true
+	// 	}
+	// },
 	legendClickable: true,
 	resizable: true
 });
@@ -150,48 +130,45 @@ export const lineTimeSeriesOptions = () => ({
 	// animations: false,
 	accessibility: false,
 	curve: "curveNatural",
-	axes: {
-		bottom: {
-			type: "labels",
-			title: "2018 Annual Sales Figures",
+	// axes: {
+	// 	bottom: {
+	// 		type: "labels",
+	// 		title: "2018 Annual Sales Figures",
 
-		},
-		left: {
-			type: "log",
-			title: "2018 Annual Sales Figures",
+	// 	},
+	// 	left: {
+	// 		type: "log",
+	// 		title: "2018 Annual Sales Figures",
 
-		},
-		right: {
-			// formatter: val => `${(val/80000) * 100}%`,
-			secondary: true,
+	// 	},
+	// 	right: {
+	// 		// formatter: val => `${(val/80000) * 100}%`,
 
-		},
-		top: {
-			type: "labels",
-			primary: true
-
-		},
-		y: {
-			title: "Dollars (CAD)",
-			// yMaxAdjuster: yMax => yMax * 1.2,
-			// yMinAdjuster: yMin => yMin * 1.2,
-			// formatter: Math.random() > 0.5 ? null : val => `${val} gweg werg weg`,
-			thresholds: [
-				{
-					range: [-20000, 30000],
-					theme: "success"
-				},
-				{
-					range: [30000, 40000],
-					theme: "danger"
-				},
-				{
-					range: [40000, 70000],
-					theme: "warning"
-				}
-			]
-		}
-	},
+	// 	},
+	// 	top: {
+	// 		type: "labels",
+	// 	},
+	// 	y: {
+	// 		title: "Dollars (CAD)",
+	// 		// yMaxAdjuster: yMax => yMax * 1.2,
+	// 		// yMinAdjuster: yMin => yMin * 1.2,
+	// 		// formatter: Math.random() > 0.5 ? null : val => `${val} gweg werg weg`,
+	// 		thresholds: [
+	// 			{
+	// 				range: [-20000, 30000],
+	// 				theme: "success"
+	// 			},
+	// 			{
+	// 				range: [30000, 40000],
+	// 				theme: "danger"
+	// 			},
+	// 			{
+	// 				range: [40000, 70000],
+	// 				theme: "warning"
+	// 			}
+	// 		]
+	// 	}
+	// },
 	legendClickable: true,
 	resizable: true
 });

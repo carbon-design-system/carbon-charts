@@ -11,7 +11,6 @@ import { Tools } from "../tools";
 
 // Components
 import {
-	FourAxes,
 	Grid,
 	Line,
 	Scatter,
