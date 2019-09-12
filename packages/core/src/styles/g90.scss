@@ -52,5 +52,10 @@ $gray100: #171717;
 				color: $text-04;
 			}
 		}
+
+		g.callout-lines-left line,
+		g.callout-lines-right line {
+			stroke: $text-02;
+		}
 	}
 }

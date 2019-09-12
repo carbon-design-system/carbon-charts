@@ -283,7 +283,9 @@ export class BaseChart {
 		// Store computed actual size, to be considered for change if chart does not support axis
 		const marginsToExclude = 0;
 
-		marginForChartTitle = this.options.title ? Configuration.charts.title.marginBottom : 0;
+
+		const titleRef = container.select("text.chart-title");
+		marginForChartTitle = titleRef.empty() ? 0 : this.svg.select("text.chart-title").node().getBoundingClientRect().height;
 
 		const computedChartSize = {
 			height: container.node().clientHeight - marginForLegendTop - marginForChartTitle,
@@ -360,6 +362,7 @@ export class BaseChart {
 					this.hideTooltip();
 
 					this.resizeChart();
+					this.drawTitle();
 				}
 			}
 		});
@@ -373,18 +376,34 @@ export class BaseChart {
 	 */
 	drawTitle() {
 		if (this.options.title) {
-			// to add the padding only once
-			if (this.svg.select("text.chart-title").empty()) {
-				const titleMargin = Configuration.charts.title.marginBottom;
-				const translateObj = Tools.getTranslationValues(this.innerWrap.node());
-
-				// add padding for title, keep other translations
-				this.innerWrap
-				.attr("transform", `translate(${translateObj.tx}, ${+translateObj.ty + titleMargin})`);
-			}
 			// adds title or gets reference to title
 			const titleRef = Tools.appendOrSelect(this.svg, "text.chart-title");
 			titleRef.text(this.options.title);
+
+			// position of the title element
+			const titlePos = titleRef.node().getBoundingClientRect().bottom;
+
+			// the translations on the inner wrap and the current position
+			const translateObj = Tools.getTranslationValues(this.innerWrap.node());
+			const innerWrapPos = this.innerWrap.node().getBoundingClientRect().top;
+
+			// check that the inner wrap is below the title text
+			let diff = innerWrapPos - titlePos;
+			if (diff < 0) {
+				// we want the inner wrap to be under the title and add some padding
+				diff = Math.abs(diff) + Configuration.charts.title.marginBottom;
+			} else {
+				// the innerwrap is below the title, we assert the title bottom padding
+				if (diff < Configuration.charts.title.marginBottom) {
+					diff = Configuration.charts.title.marginBottom - diff;
+				} else {
+					// does not need to move
+					return;
+				}
+			}
+
+			this.innerWrap
+				.attr("transform", `translate(${translateObj.tx}, ${(+translateObj.ty + diff)})`);
 		}
 	}
 
@@ -576,10 +595,7 @@ export class BaseChart {
 		if (this.isLegendOnRight()) {
 			this.container.selectAll(".expand-btn").remove();
 			this.container.select(".legend-wrapper").style("height", 0);
-			const containerWidth = this.container.node().clientWidth;
-			const legendWidth = containerWidth - svgWidth;
-			this.container.select(".legend").classed("right-legend", true)
-				.style("width", legendWidth + "px");
+			this.container.select(".legend").classed("right-legend", true);
 		} else {
 			this.container.select(".legend-wrapper").style("height", Configuration.legend.wrapperHeight);
 		}
@@ -599,6 +615,8 @@ export class BaseChart {
 			if (this.container.select(".expand-btn").nodes().length === 0) {
 				this.addTooltipOpenButtonToLegend();
 			}
+		} else {
+			this.container.selectAll(".legend-btn").style("display", null);
 		}
 	}
 
@@ -630,21 +648,13 @@ export class BaseChart {
 	}
 
 	hasLegendExpandBtn() {
-		return (
-			this.container.node().clientWidth < Configuration.charts.widthBreak ||
-				this.container.node().clientHeight < this.container.select("ul.legend").node().clientHeight
-
-			// && this.getLegendItems().length > Configuration.legend.countBreak
-		);
+		return this.container.node().clientWidth < Configuration.charts.widthBreak ||
+			this.container.node().clientHeight < this.container.select("ul.legend").node().clientHeight;
 	}
 
 	isLegendOnRight() {
-		return (
-			this.container.node().clientWidth > Configuration.charts.widthBreak &&
-				this.container.node().clientHeight > this.container.select("ul.legend").node().clientHeight
-
-			// && this.getLegendItems().length > Configuration.legend.countBreak
-		);
+		return this.container.node().clientWidth >= Configuration.charts.widthBreak &&
+			this.container.node().clientHeight >= this.container.select("ul.legend").node().clientHeight;
 	}
 
 	/**
@@ -877,9 +887,11 @@ export class BaseChart {
 		return this.options.accessibility ? this.patternScale : this.colorScale;
 	}
 
-	getDefaultTransition(): Transition<any, any, any, any> {
+	getDefaultTransition(type?: string): Transition<any, any, any, any> {
 		if (this.options.animations === false) {
 			return this.getInstantTransition();
+		} else if (Configuration.transitions[type]) {
+			return transition().duration(Configuration.transitions[type].duration);
 		}
 
 		return transition().duration(Configuration.transitions.default.duration);

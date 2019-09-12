@@ -74,7 +74,6 @@ export const groupedBarOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	title: "Bar Chart",
 	theme: getTheme()
 };
 
@@ -111,11 +110,7 @@ export const simpleBarOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	theme: getTheme(),
-	bars: {
-		maxWidth: 50
-	},
-	title: "Simple Bar Chart"
+	theme: getTheme()
 };
 
 // Stacked bar
@@ -187,6 +182,5 @@ export const stackedBarOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	title: "Stacked Bar Chart",
 	theme: getTheme()
 };

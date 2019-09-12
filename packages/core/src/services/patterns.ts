@@ -67,7 +67,7 @@ export default class PatternsService {
 				const id = ++this.idAccum;
 
 				if (!datasetPattern || legendType === Configuration.legend.basedOn.LABELS) {
-					datasetPattern = PATTERN_SVGS[this.patternAccum++].default;
+					datasetPattern = PATTERN_SVGS[this.patternAccum++ % PATTERN_SVGS.length].default;
 				}
 
 				// Create SVG container div

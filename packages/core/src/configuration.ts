@@ -553,7 +553,7 @@ export const charts = {
 	widthBreak: 600,
 	marginForLegendTop: 40,
 	title: {
-		marginBottom: 24
+		marginBottom: 8
 	},
 	magicRatio: 0.7,
 	magicMoreForY2Axis: 70,
@@ -678,11 +678,24 @@ export const pie = {
 	label: {
 		dy: ".32em",
 		margin: 8,
-		other: "Other"
+		other: "Other",
+		fontSize: 12
+	},
+	callout : {
+		sliceDegreeThreshold: 5,
+		calloutOffsetX: 15,
+		calloutOffsetY: 12,
+		calloutTextMargin: 2,
+		horizontalLineLength: 8,
+		direction: {
+			LEFT: "left",
+			RIGHT: "right"
+		}
 	},
 	default: {
 		strokeWidth: 2
-	}
+	},
+	paddingLeft: 20
 };
 
 /**
@@ -763,6 +776,12 @@ export const tooltip = {
 export const transitions = {
 	default: {
 		duration: 750
+	},
+	pie_slice_hover: {
+		duration: 100
+	},
+	pie_chart_titles: {
+		duration: 375
 	}
 };
 

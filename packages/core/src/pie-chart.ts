@@ -27,6 +27,7 @@ export interface PieData {
 export class PieChart extends BaseChart {
 	pie: Pie<PieChart, any>;
 	arc: Arc<PieChart, any>;
+	hoverArc: Arc<PieChart, any>;
 	path: any;
 
 	options: PieChartOptions;
@@ -41,7 +42,6 @@ export class PieChart extends BaseChart {
 	}
 
 	// Sort data by value (descending)
-	// Cap number of slices at a specific number, and group the remaining items into the label "Other"
 	dataProcessor(dataObject: ChartData): PieData {
 		// TODO - Support multiple datasets
 		if (dataObject.datasets.length > 1) {
@@ -56,7 +56,6 @@ export class PieChart extends BaseChart {
 		}
 
 		// TODO - Support multiple datasets
-		// let sortedData = data.datasets[0];
 		const dataList: Array<any> = dataObject.datasets[0].data.map((datum, i) => ({
 			label: dataObject.labels[i],
 			value: datum,
@@ -64,24 +63,7 @@ export class PieChart extends BaseChart {
 		}));
 
 		// Sort data by value
-		let sortedData = dataList.sort((a, b) => b.value - a.value);
-
-		// Keep a certain number of slices, and add an "Other" slice for the rest
-		const { sliceLimit: stopAt } = Configuration.pie;
-		const rest = sortedData.slice(stopAt);
-		const restAccumulatedValue = rest.reduce((accum, item) => accum + item.value, 0);
-
-		const otherLabelIndex = sortedData.findIndex(dataPoint => dataPoint.label === "Other");
-		if (otherLabelIndex !== -1) {
-			sortedData.push(sortedData.splice(otherLabelIndex, 1)[0]);
-		} else if (rest.length > 0) {
-			sortedData = sortedData.slice(0, stopAt)
-				.concat([{
-					label: Configuration.pie.label.other,
-					value: restAccumulatedValue,
-					items: rest
-				}]);
-		}
+		const sortedData = dataList.sort((a, b) => b.value - a.value);
 
 		return {
 			// Sort labels based on the order made above
@@ -97,13 +79,16 @@ export class PieChart extends BaseChart {
 				}
 			]
 		};
-
 	}
 
 	// If there isn't a chart already drawn in the container
 	// This function is called and will do that
 	initialDraw() {
 		this.setSVG();
+
+		// need to draw the title for pie and donut before draw() so that it calculates the right
+		// diameter for the graph to stay within the bounds
+		this.drawTitle();
 
 		// Add legend
 		this.addOrUpdateLegend();
@@ -120,14 +105,14 @@ export class PieChart extends BaseChart {
 
 		const chartSize = this.getChartSize(this.container);
 		const diameter = Math.min(chartSize.width, chartSize.height);
-		const radius: number = diameter / 2;
+		const radius: number = this.computeRadius();
 
 		select(this.holder).select("svg")
 			.attr("width", `${diameter}px`)
 			.attr("height", `${diameter}px`);
 
 		this.innerWrap
-			.attr("transform", `translate(${radius},${radius})`)
+			.attr("transform", `translate(${radius + Configuration.pie.paddingLeft},${radius})`)
 			.attr("width", `${diameter}px`)
 			.attr("height", `${diameter}px`)
 			.attr("preserveAspectRatio", "xMinYMin");
@@ -135,8 +120,12 @@ export class PieChart extends BaseChart {
 		// Compute the correct inner & outer radius
 		const marginedRadius = this.computeRadius();
 		this.arc = arc()
-				.innerRadius(this.options.type === "donut" ? (marginedRadius * (3 / 4)) : 2)
-				.outerRadius(marginedRadius);
+			.innerRadius(this.options.type === "donut" ? (marginedRadius * (3 / 4)) : 2)
+			.outerRadius(marginedRadius);
+
+		this.hoverArc = arc()
+			.innerRadius(this.options.type === "donut" ? (marginedRadius * (3 / 4)) : 2)
+			.outerRadius(marginedRadius + 3);
 
 		this.pie = pie()
 			.value((d: any) => d.value)
@@ -150,10 +139,7 @@ export class PieChart extends BaseChart {
 			.append("path")
 			.attr("d", this.arc)
 			.attr("fill", d => this.getFillColor(this.displayData.datasets[0].label, d.data.label, d.data.value)) // Support multiple datasets
-			.attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
-			.attr("stroke-width", Configuration.pie.default.strokeWidth)
-			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
-			.each(function(d) { this._current = d; });
+			.each(function (d) { this._current = d; });
 
 		// Draw the slice labels
 		const self = this;
@@ -165,8 +151,10 @@ export class PieChart extends BaseChart {
 			.classed("chart-label", true)
 			.attr("dy", Configuration.pie.label.dy)
 			.style("text-anchor", "middle")
-			.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
-			.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); });
+			.text(d => self.getSliceLabelText(d.data.value, dataList))
+			.attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius, dataList.length); });
+
+		this.positionChart();
 
 		// Hide overlay
 		this.chartOverlay.hide();
@@ -184,9 +172,6 @@ export class PieChart extends BaseChart {
 		path
 			.transition()
 			.duration(0)
-			.attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
-			.attr("stroke-width", Configuration.pie.default.strokeWidth)
-			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.transition()
 			.style("opacity", 1)
 			.duration(Configuration.transitions.default.duration)
@@ -201,9 +186,6 @@ export class PieChart extends BaseChart {
 			.transition()
 			.duration(0)
 			.style("opacity", 0)
-			.attr("stroke", d => this.getStrokeColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
-			.attr("stroke-width", Configuration.pie.default.strokeWidth)
-			.attr("stroke-opacity", d => this.options.accessibility ? 1 : 0)
 			.transition()
 			.duration(Configuration.transitions.default.duration)
 			.attr("fill", d => this.getFillColor(this.displayData.datasets[0].label, d.data.label, d.data.value))
@@ -222,21 +204,31 @@ export class PieChart extends BaseChart {
 
 		// Fade out all text labels
 		this.innerWrap.selectAll("text.chart-label")
-			.transition()
-			.duration(Configuration.transitions.default.duration / 2)
+			.transition(self.getDefaultTransition("pie_chart_titles"))
 			.style("opacity", 0)
-			.on("end", function(d) {
-				select(this)
-					.transition()
-					.duration(Configuration.transitions.default.duration / 2)
-					.style("opacity", 1);
-			});
+			.transition(self.getDefaultTransition("pie_chart_titles"))
+			.style("opacity", 1);
+
+
+		// fade out left callout
+		this.innerWrap.select("g.callout-lines-left")
+			.transition(self.getDefaultTransition("pie_chart_titles"))
+			.style("opacity", 0)
+			.transition(self.getDefaultTransition("pie_chart_titles"))
+			.style("opacity", 1);
+
+		// fade out right callout
+		this.innerWrap.select("g.callout-lines-right")
+			.transition(self.getDefaultTransition("pie_chart_titles"))
+			.style("opacity", 0)
+			.transition(self.getDefaultTransition("pie_chart_titles"))
+			.style("opacity", 1);
 
 		// Move text labels to their new location, and fade them in again
 		const radius = this.computeRadius();
 		setTimeout(() => {
 			const text = this.innerWrap.selectAll("text.chart-label")
-				.data(this.pie(dataList), d => d.label );
+				.data(this.pie(dataList), d => d.label);
 
 			text
 				.enter()
@@ -244,25 +236,23 @@ export class PieChart extends BaseChart {
 				.classed("chart-label", true)
 				.attr("dy", Configuration.pie.label.dy)
 				.style("text-anchor", "middle")
-				.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
-				.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); })
+				.text(d => self.getSliceLabelText(d.data.value, dataList))
+				.attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius, dataList.length); })
 				.style("opacity", 0)
-				.transition()
-				.duration(Configuration.transitions.default.duration / 2)
+				.transition(this.getDefaultTransition("pie_chart_titles"))
 				.style("opacity", 1);
 
 			text
 				.style("text-anchor", "middle")
-				.text(d => Tools.convertValueToPercentage(d.data.value, dataList))
-				.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); })
-				.transition()
-				.duration(Configuration.transitions.default.duration / 2)
+				.text(d => self.getSliceLabelText(d.data.value, dataList))
+				.attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius); })
+				.transition(this.getDefaultTransition("pie_chart_titles"))
 				.style("opacity", 1);
 
 			text
 				.exit()
 				.remove();
-		}, Configuration.transitions.default.duration / 2);
+		}, Configuration.transitions.pie_chart_titles.duration);
 
 		// Add slice hover actions, and clear any slice borders present
 		this.addDataPointEventListener();
@@ -279,7 +269,6 @@ export class PieChart extends BaseChart {
 
 			// Fade everything out except for this element
 			select(exception).attr("fill-opacity", false);
-			select(exception).attr("stroke-opacity", Configuration.charts.reduceOpacity.opacity);
 			select(exception).attr("fill", (d: any) => this.getFillColor(this.displayData.datasets[0].label, d.data.label, d.data.value));
 		}
 	}
@@ -289,27 +278,25 @@ export class PieChart extends BaseChart {
 	// TODO - Refactor
 	addDataPointEventListener() {
 		const self = this;
-		const { accessibility } = this.options;
 
 		this.innerWrap.selectAll("path")
 			.on("click", d => self.dispatchEvent("pie-slice-onClick", d))
-			.on("mouseover", function(d) {
+			.on("mouseover", function (d) {
 				const sliceElement = select(this);
 				Tools.moveToFront(sliceElement);
 
-				sliceElement.attr("stroke-width", Configuration.pie.mouseover.strokeWidth)
-					.attr("stroke-opacity", Configuration.pie.mouseover.strokeOpacity)
-					.attr("stroke", self.getStrokeColor(self.displayData.datasets[0].label, d.data.label, d.data.value));
+				sliceElement
+					.transition(self.getDefaultTransition("pie_slice_hover"))
+					.attr("d", self.hoverArc);
 
 				self.showTooltip(d);
 				self.reduceOpacity(this);
 			})
 			.on("mousemove", d => self.tooltip.positionTooltip())
-			.on("mouseout", function(d) {
+			.on("mouseout", function (d) {
 				select(this)
-					.attr("stroke-width", accessibility ? Configuration.pie.default.strokeWidth : Configuration.pie.mouseout.strokeWidth)
-					.attr("stroke", accessibility ? self.getStrokeColor(self.displayData.datasets[0].label, d.data.label, d.data.value) : "none")
-					.attr("stroke-opacity", Configuration.pie.mouseout.strokeOpacity);
+					.transition(self.getDefaultTransition("pie_slice_hover"))
+					.attr("d", self.arc);
 
 				self.hideTooltip();
 			});
@@ -335,46 +322,109 @@ export class PieChart extends BaseChart {
 
 		// Resize the SVG
 		select(this.holder).select("svg")
-				.attr("width", `${dimensionToUseForScale}px`)
-				.attr("height", `${dimensionToUseForScale}px`);
+			.attr("width", `${dimensionToUseForScale}px`)
+			.attr("height", `${dimensionToUseForScale}px`);
 		this.innerWrap
-			.style("transform", `translate(${radius}px,${radius}px)`);
+			.attr("transform", `translate(${radius + Configuration.pie.paddingLeft},${radius})`);
 
-		// Resize the arc
+		// Resize the arcs
 		this.arc = arc()
 			.innerRadius(this.options.type === "donut" ? (radius * (3 / 4)) : 2)
 			.outerRadius(radius);
+
+		// Resize the arc
+		this.hoverArc = arc()
+			.innerRadius(this.options.type === "donut" ? (radius * (3 / 4)) : 2)
+			.outerRadius(radius + 3);
 
 		this.innerWrap.selectAll("path")
 			.attr("d", this.arc);
 
 		const self = this;
+		// not using the actual data in case "Other" category functionality is present
+		const totalSlices = this.innerWrap.selectAll("text.chart-label").size();
+
 		this.innerWrap
 			.selectAll("text.chart-label")
-			.attr("transform", function (d) { return self.deriveTransformString(this, d, radius); });
+			.attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius, totalSlices); });
 
 		// Reposition the legend
 		this.positionLegend();
+
+		// position the entire chart after titles, legend and labels are added
+		this.positionChart();
+	}
+
+	/**
+	 * The getChartSize function for pie and donut need to return the size of the
+	 * graph container while accounting for slice labels, callouts and a top legend.
+	 * Without accounting for padding, the pie/donut will try to use all space for the circle and labels fall outside.
+	 * @param container
+	 */
+	getChartSize(container) {
+		const containerSize = super.getChartSize(container);
+		// if legend is on the top, we want the chart container to take that into account
+		const legendHeight = this.container.select(".legend-wrapper").node().getBoundingClientRect().height;
+		// padding for labels on top and below
+		// accounting for callouts even when there are none so that the radius does not need to change on update
+		const labelPadding = (Configuration.pie.label.fontSize * 2) + Configuration.pie.callout.calloutOffsetY;
+		// to get the margin between slices and text/callouts, we convert the em value to pixels
+		const textMargin = Configuration.pie.label.fontSize + +Configuration.pie.label.dy.replace(/[^0-9.,]+/, "");
+		containerSize.height -= (legendHeight + labelPadding + (2 * textMargin));
+
+		return containerSize;
 	}
 
 	// Helper functions
 	private computeRadius() {
 		const chartSize: any = this.getChartSize(this.container);
 		const radius: number = Math.min(chartSize.width, chartSize.height) / 2;
-
 		return radius;
 	}
 
 	/**
-	 * Return the css transform string to be used for the slice
-	 *
-	 * @private
-	 * @param {any} d - d3 data item for slice
-	 * @param {any} radius - computed radius of the chart
-	 * @returns final transform string to be applied to the <text> element
-	 * @memberof PieChart
+	 * This positions the entire chart after it is drawn to account for the labels and callouts
 	 */
-	private deriveTransformString(element, d, radius) {
+	private positionChart() {
+		// align the chart to the top of the chart container OR legend if its on top
+		const legendHeight = this.container.select(".legend-wrapper").node().getBoundingClientRect().height;
+
+		// get the difference in position of the innerwrap to the chart container
+		const containerPos = this.container.node().getBoundingClientRect().top;
+		const innerWrapPos = this.innerWrap.node().getBoundingClientRect().top;
+		let	diff = innerWrapPos - containerPos;
+
+		if (diff < 0) {
+			// inner wrap to be just within the container at top
+			diff = Math.abs(diff) + legendHeight;
+		} else {
+			// the innerwrap is aligned below
+			diff = -diff + legendHeight;
+		}
+
+		// get current translations to add the additional difference
+		const innerWrapTranslation = Tools.getTranslationValues(this.innerWrap.node());
+		this.innerWrap
+			.attr("transform", `translate(${innerWrapTranslation.tx}, ${(+innerWrapTranslation.ty + diff)})`);
+	}
+
+	/**
+	 * Returns the string for the slice labels.
+	 * @param datapoint data value to get the percentage
+	 * @param dataset dataset containing all data values
+	 */
+	private getSliceLabelText(datapoint, dataset) {
+		return Tools.convertValueToPercentage(datapoint, dataset) + "%";
+	}
+
+	/**
+	 * Returns the translate string for the calculated position of the slice labels.
+	 * @param element the text label element
+	 * @param d the d3 slice object
+	 * @param radius the radius of the pie or donut chart
+	 * @param totalSlices total number of slices rendered
+	 */
+	private getChartLabelTranslateString(element, d, radius, totalSlices?) {
 		const textLength = element.getComputedTextLength();
 		const textOffsetX = textLength / 2;
 		const textOffsetY = parseFloat(getComputedStyle(element).fontSize) / 2;
@@ -382,10 +432,99 @@ export class PieChart extends BaseChart {
 		const marginedRadius = radius + Configuration.pie.label.margin;
 
 		const theta = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+		const sliceAngleDeg = (d.endAngle - d.startAngle) * (180 / Math.PI);
+
 		const xPosition = (textOffsetX + marginedRadius) * Math.sin(theta);
 		const yPosition = (textOffsetY + marginedRadius) * -Math.cos(theta);
 
+		if (!totalSlices) {
+			return `translate(${xPosition}, ${yPosition})`;
+		}
+		// check if last 2 slices (or just last) are < the threshold
+		if (d.index === totalSlices - 1) {
+			if (sliceAngleDeg < Configuration.pie.callout.sliceDegreeThreshold) {
+				// start at the same location as a non-called out label
+				const startPos = {
+					x: xPosition,
+					y: yPosition + textOffsetY
+				};
+
+				// end position for the callout line
+				const endPos = {
+					x: xPosition + Configuration.pie.callout.calloutOffsetX,
+					y: yPosition - Configuration.pie.callout.calloutOffsetY + textOffsetY
+				};
+
+				// last slice always gets callout to the right side
+				this.drawCallout(startPos, endPos, Configuration.pie.callout.direction.RIGHT);
+				return `translate(${endPos.x + Configuration.pie.callout.calloutTextMargin + textOffsetX},
+					${yPosition - Configuration.pie.callout.calloutOffsetY})`;
+			}
+			// remove any unneeded callout for last slice
+			this.removeCallout(Configuration.pie.callout.direction.RIGHT);
+		}
+		if (d.index === totalSlices - 2) {
+			if (sliceAngleDeg < Configuration.pie.callout.sliceDegreeThreshold) {
+				// start position for the callout line
+				const startPos = {
+					x: xPosition,
+					y: yPosition + textOffsetY
+				};
+
+				// end position for the callout line should be bottom aligned to the title
+				const endPos = {
+					x: xPosition - Configuration.pie.callout.calloutOffsetX,
+					y: yPosition - Configuration.pie.callout.calloutOffsetY + textOffsetY
+				};
+
+				this.drawCallout(startPos, endPos, Configuration.pie.callout.direction.LEFT);
+				return `translate(${endPos.x - textOffsetX - Configuration.pie.callout.calloutTextMargin},
+					${yPosition - Configuration.pie.callout.calloutOffsetY})`;
+			}
+			// remove any leftover unneeded callout
+			this.removeCallout(Configuration.pie.callout.direction.LEFT);
+		}
 		return `translate(${xPosition}, ${yPosition})`;
+	}
+
+	/**
+	 * Removes the callout with the specified direction.
+	 * @param dir callout direction "right" or "left"
+	 */
+	private removeCallout(dir) {
+		this.innerWrap.select(`g.callout-lines-${dir}`).remove();
+	}
+
+	/**
+	 * Draws a line to the text label associated with the slice.
+	 * @param startPos x,y coordinate to start the callout line
+	 * @param endPos x,y coordinate to end the callout line
+	 * @param dir direction of callout (right/left)
+	 */
+	private drawCallout(startPos, endPos, dir) {
+		// Clean up the label callouts
+		const callout = Tools.appendOrSelect(this.innerWrap, `g.callout-lines-${dir}`);
+		const intersectPointX = dir === Configuration.pie.callout.direction.RIGHT ?
+			endPos.x - Configuration.pie.callout.horizontalLineLength :
+			endPos.x + Configuration.pie.callout.horizontalLineLength;
+
+		// draw vertical line
+		const verticalLine = Tools.appendOrSelect(callout, "line.vertical-line");
+		verticalLine
+			.style("stroke-width", "1px")
+			.attr("x1", startPos.x)
+			.attr("y1", startPos.y)
+			.attr("x2", intersectPointX)
+			.attr("y2", endPos.y);
+
+		// draw horizontal line
+		const horizontalLine = Tools.appendOrSelect(callout, "line.horizontal-line");
+		horizontalLine
+			.style("stroke-width", "1px")
+			.attr("x1", intersectPointX)
+			.attr("y1", endPos.y)
+			.attr("x2", endPos.x)
+			.attr("y2", endPos.y);
 	}
 }
 

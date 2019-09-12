@@ -47,5 +47,10 @@
 		div.chart-overlay {
 			@include background-opacity($ui-02, 0.6);
 		}
+
+		g.callout-lines-left line,
+		g.callout-lines-right line {
+			stroke: $text-02;
+		}
 	}
 }
