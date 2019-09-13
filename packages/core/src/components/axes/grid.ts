@@ -1,6 +1,5 @@
 // Internal Imports
 import { Component } from "../component";
-import { AxisPositions } from "../../interfaces";
 import * as Configuration from "../../configuration";
 import { Tools } from "../../tools";
 
@@ -32,6 +31,10 @@ export class Grid extends Component {
 			.tickSizeInner(-height)
 			.tickSizeOuter(0);
 
+		// Determine number of ticks
+		const numberOfTicks = Tools.getProperty(this._model.getOptions(), "grid", "x", "numberOfTicks") || Configuration.grid.x.numberOfTicks;
+		xGrid.ticks(numberOfTicks);
+
 		const g = svg.select(".x.grid")
 			.attr("transform", `translate(${-this.backdrop.attr("x")}, ${height})`)
 			.call(xGrid);
@@ -41,9 +44,6 @@ export class Grid extends Component {
 
 	drawYGrid() {
 		const svg = this._parent;
-
-		const { axes } = this._model.getOptions();
-		// const { thresholds } = scales.y;
 		const width = this.backdrop.attr("width");
 
 		const mainXScale = this._services.axes.getMainXAxis().getScale();
@@ -51,17 +51,15 @@ export class Grid extends Component {
 			.tickSizeInner(-width)
 			.tickSizeOuter(0);
 
-		yGrid.ticks(Tools.getProperty(axes, "y", "numberOfTicks") || Configuration.scales.y.numberOfTicks);
+		// Determine number of ticks
+		const numberOfTicks = Tools.getProperty(this._model.getOptions(), "grid", "y", "numberOfTicks") || Configuration.grid.y.numberOfTicks;
+		yGrid.ticks(numberOfTicks);
 
 		const g = svg.select(".y.grid")
 			.attr("transform", `translate(0, ${-this.backdrop.attr("y")})`)
 			.call(yGrid);
 
 		this.cleanGrid(g);
-
-		// if (thresholds && thresholds.length > 0) {
-		// 	this.addOrUpdateThresholds(g, false);
-		// }
 	}
 
 	drawBackdrop() {

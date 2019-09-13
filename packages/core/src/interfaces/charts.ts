@@ -1,8 +1,6 @@
 import { ChartType } from "./enums";
-import { LegendOptions, TooltipOptions } from "./components";
+import { LegendOptions, TooltipOptions, GridOptions } from "./components";
 import { AxisOptions } from "./axis-scales";
-
-import { PieChartOptions } from "../configuration";
 
 /**
  * Base chart options common to any chart
@@ -51,21 +49,6 @@ export interface BaseChartOptions {
 }
 
 /**
- * Options specific to donut charts
- */
-export interface DonutChartOptions extends PieChartOptions {
-	donut?: {
-		center?: {
-			label: string;
-			number: string;
-		};
-		centerLabel?: string;
-		centerNumber?: string;
-	}
-}
-
-
-/**
  * Options common to any chart with an axis
  */
 export interface AxisChartOptions extends BaseChartOptions {
@@ -74,29 +57,8 @@ export interface AxisChartOptions extends BaseChartOptions {
 		bottom?: AxisOptions;
 		right?: AxisOptions;
 		top?: AxisOptions;
-	}
-}
-
-/**
- * options specific to line charts
- */
-export interface LineChartOptions extends AxisChartOptions {
-	/**
-	 * options for the curve of the line
-	 */
-	curve?: string | {
-		name: string;
 	};
-	/**
-	 * options for the line points
-	 */
-	points?: {
-		/**
-		 * sets the radius of the point
-		 */
-		radius: number;
-		fillOpacity?: number;
-	};
+	grid?: GridOptions;
 }
 
 /**
@@ -117,23 +79,13 @@ export interface ScatterChartOptions extends AxisChartOptions {
 
 
 /**
- * options specific to bar charts
+ * options specific to line charts
  */
-export interface BarChartOptions extends AxisChartOptions {
+export interface LineChartOptions extends ScatterChartOptions {
 	/**
-	 * options for all bars
+	 * options for the curve of the line
 	 */
-	bars?: {
-		/**
-		 * constrains the bars to a maximum width
-		 */
-		maxWidth: number;
+	curve?: string | {
+		name: string;
 	};
 }
-
-/**
- * Options specific to combo charts.
- *
- * This interface also extends all other AxisChartOption interfaces as the single config is shared across all charts in a combo
- */
-export interface ComboChartOptions extends AxisChartOptions, BarChartOptions, LineChartOptions, ScatterChartOptions { }

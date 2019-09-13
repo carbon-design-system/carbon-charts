@@ -9,9 +9,6 @@ import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { min, max } from "d3-array";
 import { timeFormat } from "d3-time-format";
 
-const labelIdentifiers = ["label", "key", "date"];
-const valueIdentifiers = ["value"];
-
 export class Axis extends Component {
 	type = "axes";
 

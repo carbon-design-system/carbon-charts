@@ -1,13 +1,9 @@
 import { Tools } from "./tools";
-import * as colorPalettes from "./services/colorPalettes";
 import {
 	BaseChartOptions,
-	DonutChartOptions,
 	AxisChartOptions,
 	ScatterChartOptions,
-	BarChartOptions,
 	LineChartOptions,
-	ComboChartOptions,
 } from "./interfaces/index";
 
 /*
@@ -29,16 +25,16 @@ const baseOptions: BaseChartOptions = {
 	}
 };
 
-/**
- * Options specific to pie charts
- */
-export type PieChartOptions = BaseChartOptions;
-/**
- * Options specific to pie charts
- */
-const pieOptions: PieChartOptions = Tools.merge({}, baseOptions);
+// /**
+//  * Options specific to pie charts
+//  */
+// export type PieChartOptions = BaseChartOptions;
+// /**
+//  * Options specific to pie charts
+//  */
+// const pieOptions: PieChartOptions = Tools.merge({}, baseOptions);
 
-const donutOptions: DonutChartOptions = Tools.merge({}, baseOptions);
+// const donutOptions: DonutChartOptions = Tools.merge({}, baseOptions);
 
 /**
  * Options common to any chart with an axis
@@ -81,36 +77,31 @@ const scatterOptions: ScatterChartOptions = Tools.merge({}, axisOptions, {
 	}
 });
 
-/**
- * options specific to bar charts
- */
-const barOptions: BarChartOptions = Tools.merge({}, axisOptions);
+// /**
+//  * options specific to bar charts
+//  */
+// const barOptions: BarChartOptions = Tools.merge({}, axisOptions);
 
-/**
- * options specific to bar charts
- */
-export type StackedBarChartOptions = BarChartOptions;
-/**
- * options specific to bar charts
- */
-const stackedBarOptions: StackedBarChartOptions = Tools.merge({}, barOptions);
+// /**
+//  * options specific to bar charts
+//  */
+// export type StackedBarChartOptions = BarChartOptions;
+// /**
+//  * options specific to bar charts
+//  */
+// const stackedBarOptions: StackedBarChartOptions = Tools.merge({}, barOptions);
 
-/**
- * Options specific to combo charts.
- *
- */
-const comboOptions: ComboChartOptions = Tools.merge({}, axisOptions, barOptions, lineOptions, scatterOptions);
+// /**
+//  * Options specific to combo charts.
+//  *
+//  */
+// const comboOptions: ComboChartOptions = Tools.merge({}, axisOptions, barOptions, lineOptions, scatterOptions);
 
 export const options = {
 	BASE: baseOptions,
 	AXIS: axisOptions,
 	LINE: lineOptions,
-	SCATTER: scatterOptions,
-	BAR: barOptions,
-	STACKED_BAR: stackedBarOptions,
-	COMBO: comboOptions,
-	PIE: pieOptions,
-	DONUT: donutOptions
+	SCATTER: scatterOptions
 };
 
 /*
@@ -123,134 +114,115 @@ export const options = {
  * General chart options. margins, min/max widths, etc
  */
 export const charts = {
-	margin: {
-		top: 20,
-		bottom: 60,
-		left: 60,
-		right: 20,
-		bar: {
-			top: 0,
-			right: -40,
-			bottom: 50,
-			left: 40
-		},
-		line: {
-			top: 0,
-			right: -40,
-			bottom: 50,
-			left: 40
-		}
-	},
-	resetOpacity: {
-		opacity: 1,
-		circle: {
-			fill: "white"
-		},
-		outline: "grey"
-	},
-	reduceOpacity: {
-		opacity: 0.25,
-		outline: "grey"
-	},
-	points: {
-		radius: 3
-	},
-	patternFills: {
-		width: 20,
-		height: 20
-	},
-	minWidth: 150,
-	widthBreak: 600,
-	marginForLegendTop: 40,
-	title: {
-		marginBottom: 8
-	},
-	magicRatio: 0.7,
-	magicMoreForY2Axis: 70,
-	axisCharts: {
-		minWidth: 100,
-		minHeight: 200
-	}
+	// margin: {
+	// 	top: 20,
+	// 	bottom: 60,
+	// 	left: 60,
+	// 	right: 20,
+	// 	bar: {
+	// 		top: 0,
+	// 		right: -40,
+	// 		bottom: 50,
+	// 		left: 40
+	// 	},
+	// 	line: {
+	// 		top: 0,
+	// 		right: -40,
+	// 		bottom: 50,
+	// 		left: 40
+	// 	}
+	// },
+	// resetOpacity: {
+	// 	opacity: 1,
+	// 	circle: {
+	// 		fill: "white"
+	// 	},
+	// 	outline: "grey"
+	// },
+	// reduceOpacity: {
+	// 	opacity: 0.25,
+	// 	outline: "grey"
+	// },
+	// points: {
+	// 	radius: 3
+	// },
+	// patternFills: {
+	// 	width: 20,
+	// 	height: 20
+	// },
+	// minWidth: 150,
+	// widthBreak: 600,
+	// marginForLegendTop: 40,
+	// title: {
+	// 	marginBottom: 8
+	// },
+	// magicRatio: 0.7,
+	// magicMoreForY2Axis: 70,
+	// axisCharts: {
+	// 	minWidth: 100,
+	// 	minHeight: 200
+	// }
 };
 
 /**
  * Options to render scales to spec
  */
 export const scales = {
-	maxWidthOfAxisLabel: 175,
-	maxNumOfAxisLabelLetters: 60,
-	yAxisAngle: -90,
-	xAxisAngle: -45,
-	domain: {
-		color: "#959595",
-		strokeWidth: 2
-	},
-	dx: "-1em",
-	label: {
-		dy: "1em"
-	},
-	tick: {
-		dy: "0.5em",
-		widthAdditionY: 25,
-		widthAdditionY2: 15,
-		heightAddition: 16,
-		lineHeight: 1.1
-	},
-	magicDy1: "0.71em",
-	magicY1: 9,
-	magicX1: -4,
-	magicY2: -9,
-	magicX2: 4,
-	y: {
-		numberOfTicks: 5,
-		thresholds: {
-			colors: {
-				"danger": "rgba(255, 39, 41, 0.1)",
-				"success": "rgba(0, 212, 117, 0.1)",
-				"warning": "rgba(255, 214, 0, 0.1)"
+	// maxWidthOfAxisLabel: 175,
+	// maxNumOfAxisLabelLetters: 60,
+	// yAxisAngle: -90,
+	// xAxisAngle: -45,
+	// domain: {
+	// 	color: "#959595",
+	// 	strokeWidth: 2
+	// },
+	// dx: "-1em",
+	// label: {
+	// 	dy: "1em"
+	// },
+	// tick: {
+	// 	dy: "0.5em",
+	// 	widthAdditionY: 25,
+	// 	widthAdditionY2: 15,
+	// 	heightAddition: 16,
+	// 	lineHeight: 1.1
+	// },
+	// magicDy1: "0.71em",
+	// magicY1: 9,
+	// magicX1: -4,
+	// magicY2: -9,
+	// magicX2: 4,
+	// y: {
+	// 	numberOfTicks: 5,
+	// 	thresholds: {
+	// 		colors: {
+	// 			"danger": "rgba(255, 39, 41, 0.1)",
+	// 			"success": "rgba(0, 212, 117, 0.1)",
+	// 			"warning": "rgba(255, 214, 0, 0.1)"
 
-			}
-		}
-	},
-	x: {
-		numberOfTicks: 5,
-		padding: 0.2
-	},
-	y2: {
-		numberOfTicks: 5
-	}
+	// 		}
+	// 	}
+	// },
+	// x: {
+	// 	numberOfTicks: 5,
+	// 	padding: 0.2
+	// },
+	// y2: {
+	// 	numberOfTicks: 5
+	// }
 };
 
 /**
  * Grid options
  */
 export const grid = {
+	x: {
+		numberOfTicks: 5
+	},
+	y: {
+		numberOfTicks: 5
+	},
 	strokeColor: "#ECEEEF"
-};
-
-/**
- * Options for bar behaviour
- */
-export const bars = {
-	mouseover: {
-		strokeWidth: 4,
-		strokeOpacity: 0.5
-	},
-	mouseout: {
-		strokeWidth: 0,
-		strokeWidthAccessible: 2,
-		strokeOpacity: 1
-	},
-	default: {
-		strokeWidth: 2
-	},
-	spacing: {
-		bars: 0.2,
-		datasets: 0.25
-	},
-	bars: {
-		maxWidth: null
-	}
 };
 
 /**
@@ -259,7 +231,6 @@ export const bars = {
 export const lines = {
 	points: {
 		strokeWidth: 4,
-		minNonFilledRadius: 3,
 		mouseover: {
 			strokeWidth: 4,
 			strokeOpacity: 0.5,
@@ -273,57 +244,57 @@ export const lines = {
 	}
 };
 
-/**
- * Options for pie behaviour
- */
-export const pie = {
-	maxWidth: 516.6,
-	mouseover: {
-		strokeWidth: 6,
-		strokeOpacity: 0.5
-	},
-	mouseout: {
-		strokeWidth: 0,
-		strokeOpacity: 1
-	},
-	sliceLimit: 6,
-	label: {
-		dy: ".32em",
-		margin: 8,
-		other: "Other",
-		fontSize: 12
-	},
-	callout : {
-		sliceDegreeThreshold: 5,
-		calloutOffsetX: 15,
-		calloutOffsetY: 12,
-		calloutTextMargin: 2,
-		horizontalLineLength: 8,
-		direction: {
-			LEFT: "left",
-			RIGHT: "right"
-		}
-	},
-	default: {
-		strokeWidth: 2
-	},
-	paddingLeft: 20
-};
+// /**
+//  * Options for pie behaviour
+//  */
+// export const pie = {
+// 	maxWidth: 516.6,
+// 	mouseover: {
+// 		strokeWidth: 6,
+// 		strokeOpacity: 0.5
+// 	},
+// 	mouseout: {
+// 		strokeWidth: 0,
+// 		strokeOpacity: 1
+// 	},
+// 	sliceLimit: 6,
+// 	label: {
+// 		dy: ".32em",
+// 		margin: 8,
+// 		other: "Other",
+// 		fontSize: 12
+// 	},
+// 	callout : {
+// 		sliceDegreeThreshold: 5,
+// 		calloutOffsetX: 15,
+// 		calloutOffsetY: 12,
+// 		calloutTextMargin: 2,
+// 		horizontalLineLength: 8,
+// 		direction: {
+// 			LEFT: "left",
+// 			RIGHT: "right"
+// 		}
+// 	},
+// 	default: {
+// 		strokeWidth: 2
+// 	},
+// 	paddingLeft: 20
+// };
 
-/**
- * Options for donut behaviour
- */
-export const donut = {
-	centerText: {
-		title: {
-			y: 22
-		},
-		breakpoint: 175,
-		magicScaleRatio: 2.5,
-		numberFontSize: 24,
-		titleFontSize: 15
-	}
-};
+// /**
+//  * Options for donut behaviour
+//  */
+// export const donut = {
+// 	centerText: {
+// 		title: {
+// 			y: 22
+// 		},
+// 		breakpoint: 175,
+// 		magicScaleRatio: 2.5,
+// 		numberFontSize: 24,
+// 		titleFontSize: 15
+// 	}
+// };
 
 /**
  * Legend configuration
