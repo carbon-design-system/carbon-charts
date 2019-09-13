@@ -1,6 +1,6 @@
-import { ChartType, TooltipSize } from "./enums";
-import { OverlayOptions } from "./components";
-import { Scales, Axis } from "./axis-scales";
+import { ChartType } from "./enums";
+import { LegendOptions, TooltipOptions } from "./components";
+import { AxisOptions } from "./axis-scales";
 
 import { PieChartOptions } from "../configuration";
 
@@ -21,47 +21,9 @@ export interface BaseChartOptions {
 	 */
 	animations?: boolean;
 	/**
-	 * boolean to enable/disable legend interactivity
-	 */
-	legendClickable?: boolean;
-	/**
 	 * boolean to prevent the container from resizing
 	 */
 	resizable?: boolean;
-	/**
-	 * array of hex colors for the chart to render from
-	 */
-	colors?: Array<string>;
-	/**
-	 * tooltip configuration
-	 */
-	tooltip?: {
-		/**
-		 * specify the size of the tooltip
-		 */
-		size: TooltipSize;
-		/**
-		 * a function to format the tooltip contents
-		 */
-		formatter: Function;
-		/**
-		 * elements onto which a hover or click would not trigger the tooltip to hide
-		 */
-		targetsToSkip: Array<String>;
-		/**
-		 * custom HTML content for tooltip provided by user
-		 */
-		customHTML?: string;
-	};
-	overlay?: OverlayOptions;
-	/**
-	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
-	 */
-	getFillColor?: (datasetLabel: any, label?: any, value?: any) => string;
-	/**
-	 * Optional function to generate the stroke color based on datasetLabel, label, and/or value
-	 */
-	getStrokeColor?: (datasetLabel: any, label?: any, value?: any) => string;
 	/**
 	 * Optionally specify a width for the chart
 	 */
@@ -71,21 +33,35 @@ export interface BaseChartOptions {
 	 */
 	height?: number;
 	/**
-	 * Internal property to track keys in the legend
+	 * tooltip configuration
 	 */
-	keys?: Object;
+	tooltip?: TooltipOptions;
+	/**
+	 * legend configuration
+	 */
+	legend?: LegendOptions;
+	/**
+	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
+	 */
+	getFillColor?: (datasetLabel: any, label?: any, value?: any) => string;
+	/**
+	 * Optional function to generate the stroke color based on datasetLabel, label, and/or value
+	 */
+	getStrokeColor?: (datasetLabel: any, label?: any, value?: any) => string;
 }
 
 /**
  * Options specific to donut charts
  */
 export interface DonutChartOptions extends PieChartOptions {
-	center?: {
-		label: string;
-		number: string;
-	};
-	centerLabel?: string;
-	centerNumber?: string;
+	donut?: {
+		center?: {
+			label: string;
+			number: string;
+		};
+		centerLabel?: string;
+		centerNumber?: string;
+	}
 }
 
 
@@ -93,11 +69,12 @@ export interface DonutChartOptions extends PieChartOptions {
  * Options common to any chart with an axis
  */
 export interface AxisChartOptions extends BaseChartOptions {
-	/**
-	 * scale configuration
-	 */
-	scales?: Scales;
-	axis?: Axis;
+	axes?: {
+		left?: AxisOptions;
+		bottom?: AxisOptions;
+		right?: AxisOptions;
+		top?: AxisOptions;
+	}
 }
 
 /**

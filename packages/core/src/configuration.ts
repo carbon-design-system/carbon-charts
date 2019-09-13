@@ -8,7 +8,6 @@ import {
 	BarChartOptions,
 	LineChartOptions,
 	ComboChartOptions,
-	TooltipSize
 } from "./interfaces/index";
 
 /*
@@ -21,38 +20,12 @@ import {
  * Base chart options common to any chart
  */
 const baseOptions: BaseChartOptions = {
-	legendClickable: true,
-	resizable: true,
-	colors: colorPalettes.DEFAULT,
-	tooltip: {
-		size: TooltipSize.FULL,
-		formatter: null,
-		targetsToSkip: ["rect", "circle", "path"]
+	legend: {
+		clickable: true
 	},
-	overlay: {
-		types: {
-			loading: "loading",
-			noData: "noData"
-		},
-		innerHTML: {
-			loading: `
-			<div class="ccharts-overlay-content">
-				<div data-loading class="bx--loading bx--loading--small">
-					<svg class="bx--loading__svg" viewBox="-75 -75 150 150">
-						<title>Loading</title>
-						<circle cx="0" cy="0" r="37.5" />
-					</svg>
-				</div>
-
-				<p>Loading</p>
-			</div>
-			`,
-			noData: `
-			<div class="ccharts-overlay-content">
-				No data available
-			</div>
-			`
-		}
+	resizable: true,
+	tooltip: {
+		formatter: null
 	}
 };
 

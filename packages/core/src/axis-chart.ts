@@ -10,7 +10,6 @@ import {
 import {
 	LayoutComponent,
 	Legend,
-	Overlay,
 	Title,
 	Tooltip,
 	TwoDimensionalAxes
@@ -89,7 +88,6 @@ export class AxisChart extends Chart {
 		};
 
 		return [
-			new Overlay(),
 			new Tooltip(),
 			new LayoutComponent(
 				[
