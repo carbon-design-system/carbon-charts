@@ -41,7 +41,7 @@ export class AreaChart extends ScatterChart {
 		// D3 area generator function
 		this.areaGeneratorFill = area()
 			.x((d, i) => this.x(this.displayData.labels[i]) + this.x.step() / 2)
-			.y1(this.y(0))
+			.y1(() => this.y(0))
 			.y0((d: any) => this.y(d))
 			.curve(getD3Curve(this.options.curve));
 

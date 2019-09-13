@@ -35,6 +35,5 @@ export const areaOptions = {
 	},
 	legendClickable: true,
 	containerResizable: true,
-	title: "Area Chart",
 	theme: getTheme()
 };
