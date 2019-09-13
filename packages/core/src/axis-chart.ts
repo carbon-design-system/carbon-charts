@@ -102,8 +102,4 @@ export class AxisChart extends Chart {
 			)
 		];
 	}
-
-	protected get2DAxisComponent() {
-		return new TwoDimensionalAxes();
-	}
 }

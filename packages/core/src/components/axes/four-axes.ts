@@ -8,7 +8,7 @@ export class TwoDimensionalAxes extends Component {
 	type = "four-axes";
 
 	options: any = {};
-	children: Array<Axis> = [];
+	children: any = {};
 
 	margins = {
 		top: 0,
@@ -16,10 +16,6 @@ export class TwoDimensionalAxes extends Component {
 		bottom: 0,
 		left: 0
 	};
-
-	constructor(options?: any) {
-		super();
-	}
 
 	render(animate = false) {
 		const axes = {};
@@ -60,18 +56,24 @@ export class TwoDimensionalAxes extends Component {
 		// Check the configs to know which axes need to be rendered
 		const axisPositionss = Object.keys(AxisPositions).map(axisPositionKey => AxisPositions[axisPositionKey]);
 		axisPositionss.forEach(axisPosition => {
-			if (this.options.axes[axisPosition]) {
+			if (this.options.axes[axisPosition] && !this.children[axisPosition]) {
 				const axisComponent = new Axis({
 					position: axisPosition,
 					axes: this.options.axes,
 					margins: this.margins
 				});
 
-				this.children.push(axisComponent);
+				// Set model, services & parent for the new axis component
+				axisComponent.setModel(this._model);
+				axisComponent.setServices(this._services);
+				axisComponent.setParent(this._parent);
+
+				this.children[axisPosition] = axisComponent;
 			}
 		});
 
-		this.children.forEach(child => {
+		Object.keys(this.children).forEach(childKey => {
+			const child = this.children[childKey];
 			child.render({
 				animate
 			});
@@ -79,7 +81,8 @@ export class TwoDimensionalAxes extends Component {
 
 		const margins = {} as any;
 
-		this.children.forEach(child => {
+		Object.keys(this.children).forEach(childKey => {
+			const child = this.children[childKey];
 			const axisPosition = child.options.position;
 			const { width, height } = this._services.domUtils.getSVGElementSize(child.getElementRef(), { useBBox: true });
 
@@ -108,7 +111,8 @@ export class TwoDimensionalAxes extends Component {
 		if (isNotEqual) {
 			this.margins = Object.assign(this.margins, margins);
 
-			this.children.forEach(child => {
+			Object.keys(this.children).forEach(childKey => {
+				const child = this.children[childKey];
 				child.margins = this.margins;
 			});
 
@@ -119,7 +123,8 @@ export class TwoDimensionalAxes extends Component {
 	setParent(parent: any) {
 		super.setParent(parent);
 
-		this.children.forEach(child => {
+		Object.keys(this.children).forEach(childKey => {
+			const child = this.children[childKey];
 			child.setParent(this._parent);
 		});
 	}
@@ -129,7 +134,8 @@ export class TwoDimensionalAxes extends Component {
 	setModel(newObj) {
 		super.setModel(newObj);
 
-		this.children.forEach(child => {
+		Object.keys(this.children).forEach(childKey => {
+			const child = this.children[childKey];
 			child.setModel(newObj);
 		});
 	}
@@ -138,7 +144,8 @@ export class TwoDimensionalAxes extends Component {
 	setServices(newObj) {
 		super.setServices(newObj);
 
-		this.children.forEach(child => {
+		Object.keys(this.children).forEach(childKey => {
+			const child = this.children[childKey];
 			child.setServices(newObj);
 		});
 	}
