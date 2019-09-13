@@ -17,7 +17,6 @@ import {
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
-	Overlay,
 	Legend,
 	LayoutComponent
 } from "../components/index";

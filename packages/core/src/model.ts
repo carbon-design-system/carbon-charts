@@ -1,9 +1,10 @@
 // Internal Imports
 import * as Configuration from "./configuration";
+import { Tools } from "./tools";
+import * as colorPalettes from "./services/colorPalettes";
 
 // D3
 import { scaleOrdinal } from "d3-scale";
-import { Tools } from "./tools";
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
@@ -188,7 +189,7 @@ export class ChartModel {
 				this._colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this._fixedDataLabels);
 			});
 		} else {
-			const colors = Configuration.options.BASE.colors;
+			const colors = colorPalettes.DEFAULT;
 			this.getDisplayData().datasets.forEach((dataset, i) => {
 				this._colorScale[dataset.label] = scaleOrdinal().range([colors[i]]).domain(this._fixedDataLabels);
 			});

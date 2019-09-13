@@ -1,7 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import * as Configuration from "../../configuration";
-import { ModelStateKeys, AxisPositions, ScaleTypes, AxisTypes } from "../../interfaces";
+import { AxisPositions, ScaleTypes, AxisTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports

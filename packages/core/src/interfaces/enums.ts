@@ -35,15 +35,6 @@ export enum ScaleTypes {
 	LABELS = "labels"
 }
 
-
-/**
- * enum of all possible scale identifiers
- */
-export enum ScaleIdentifiers {
-	LABEL = "label",
-	VALUE = "value"
-}
-
 /**
  * enum of all possible legend positions
  */
@@ -60,23 +51,6 @@ export enum LegendPositions {
 export enum LegendOrientations {
 	HORIZONTAL = "horizontal",
 	VERTICAL = "vertical"
-}
-
-/**
- * enum of all possible tooltip sizes
- */
-export enum TooltipSize {
-	COMPACT = "compact",
-	FULL = ""
-}
-
-/**
- * enum of all possible threshold themes
- */
-export enum ThresholdTheme {
-	SUCCESS = "success",
-	ERROR = "error",
-	WARNING = "warning"
 }
 
 /**
@@ -103,13 +77,6 @@ export enum LayoutGrowth {
  * enum of all possible layout growth values
  */
 export enum ModelStateKeys {
-	/*
-	 * AXIS RELATED KEYS
-	 */
-	AXIS_PRIMARY = "axis-primary",
-	AXIS_SECONDARY = "axis-secondary",
-	AXIS_THIRD = "axis-third",
-	AXIS_FOURTH = "axis-fourth",
 	/*
 	 * DOM Elements
 	 */

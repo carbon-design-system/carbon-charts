@@ -1,4 +1,4 @@
-import { ThresholdTheme, LayoutGrowth } from "./enums";
+import { LayoutGrowth } from "./enums";
 import { Component } from "../components/component";
 
 /**
@@ -26,35 +26,22 @@ export interface LayoutComponentChild {
 
 
 /**
- * customize the overlay contents
+ * customize the legend component
  */
-export interface OverlayOptions {
+export interface LegendOptions {
 	/**
-	 * types of overlay states
+	 * the clickability of legend items
 	 */
-	types: {
-		loading: string;
-		noData: string;
-	};
-	/**
-	 * raw html to be injected into the overlay container
-	 */
-	innerHTML: {
-		loading: string;
-		noData: string;
-	};
+	clickable: boolean;
 }
 
-/**
- * represents a threshold visually bringing attention to specific values/issues
- */
-export interface Threshold {
+export interface TooltipOptions {
 	/**
-	 * range of values the threshold should apply to
+	 * a function to format the tooltip contents
 	 */
-	range: Array<number>;
+	formatter: Function;
 	/**
-	 * theme of the threshold
+	 * custom HTML content for tooltip provided by user
 	 */
-	theme: ThresholdTheme;
+	customHTML?: string;
 }
