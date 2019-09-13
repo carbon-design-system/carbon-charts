@@ -48,8 +48,8 @@ export interface TooltipOptions {
 export interface GridOptions {
 	y?: {
 		numberOfTicks?: number;
-	},
+	};
 	x?: {
 		numberOfTicks?: number;
-	}
+	};
 }
