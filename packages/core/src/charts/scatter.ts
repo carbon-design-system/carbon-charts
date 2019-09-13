@@ -14,6 +14,7 @@ import {
 	Grid,
 	Line,
 	Scatter,
+	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
 	Overlay,
@@ -36,12 +37,12 @@ export class ScatterChart extends AxisChart {
 
 	getComponents() {
 		const graphFrameComponents = [
-			this.get2DAxisComponent(),
+			new TwoDimensionalAxes(),
 			new Grid(),
 			new Line(),
 			new Scatter({
 				filled: true
-			}),
+			})
 		];
 
 		return this.getAxisChartComponents(graphFrameComponents);

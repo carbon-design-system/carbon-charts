@@ -110,16 +110,16 @@ export const lineData = {
 export const lineOptions = () => ({
 	// animations: false,
 	accessibility: false,
-	// axes: {
-	// 	top: {
-	// 		title: "2018 Annual Sales Figures",
-	// 		type: "labels",
-	// 		secondary: true
-	// 	},
-	// 	right: {
-	// 		primary: true
-	// 	}
-	// },
+	axes: {
+		top: {
+			title: "2018 Annual Sales Figures",
+			type: Math.random() > 0.5 ? "labels" : "linear",
+			secondary: true
+		},
+		right: {
+			primary: true
+		}
+	},
 	legendClickable: true,
 	resizable: true
 });
