@@ -21,7 +21,6 @@ export interface LayoutComponentChild {
 		x: LayoutGrowth,
 		y: LayoutGrowth
 	};
-	syncWith?: Object;
 }
 
 
@@ -44,4 +43,13 @@ export interface TooltipOptions {
 	 * custom HTML content for tooltip provided by user
 	 */
 	customHTML?: string;
+}
+
+export interface GridOptions {
+	y?: {
+		numberOfTicks?: number;
+	},
+	x?: {
+		numberOfTicks?: number;
+	}
 }
