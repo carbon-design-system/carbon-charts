@@ -44,6 +44,7 @@ export class Chart {
 		this.components.forEach(component => {
 			component.setServices(this.services);
 			component.setModel(this.model);
+			component.init();
 		});
 
 		this.update();
@@ -89,6 +90,10 @@ export class Chart {
 	}
 
 	destroy() {
+		this.components.forEach(component => {
+			component.destroy();
+		});
+
 		this.services.domUtils.getHolder().remove();
 
 		this.model.set({ destroyed: true }, true);

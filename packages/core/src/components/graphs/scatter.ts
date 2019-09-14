@@ -7,7 +7,15 @@ import { select } from "d3-selection";
 export class Scatter extends Component {
 	type = "scatter";
 
-	legendListenersApplied = false;
+	init() {
+		const eventsFragment = this._services.events.getDocumentFragment();
+
+		// Highlight correct circle on legend item hovers
+		eventsFragment.addEventListener("legend-item-onhover", this.handleLegendOnHover);
+
+		// Un-highlight circles on legend item mouseouts
+		eventsFragment.addEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
+	}
 
 	render() {
 		const svg = this.getContainerSVG();
@@ -54,6 +62,26 @@ export class Scatter extends Component {
 		this.addEventListeners();
 	}
 
+	handleLegendOnHover = e => {
+		const { hoveredElement } = e.detail;
+
+		this._parent.selectAll("circle.dot")
+			.transition(this._services.transitions.getDefaultTransition("legend-hover-scatter"))
+			.attr("opacity", d => {
+				if (d.datasetLabel !== hoveredElement.datum()["key"]) {
+					return 0.3;
+				}
+
+				return 1;
+			});
+	}
+
+	handleLegendMouseOut = e => {
+		this._parent.selectAll("circle.dot")
+			.transition(this._services.transitions.getDefaultTransition("legend-mouseout-scatter"))
+			.attr("opacity", 1);
+	}
+
 	addLabelsToDataPoints(d, index) {
 		const { labels } = this._model.getDisplayData();
 
@@ -93,31 +121,17 @@ export class Scatter extends Component {
 					hoveredElement
 				});
 			});
+	}
 
-		if (!this.legendListenersApplied) {
-			// Highlight correct circle on legend item hovers
-			this._services.events.getDocumentFragment().addEventListener("legend-item-onhover", e => {
-				const { hoveredElement } = e.detail;
+	destroy() {
+		// Remove event listeners
+		this._parent.selectAll("circle")
+			.on("mouseover", null)
+			.on("mouseout", null);
 
-				self._parent.selectAll("circle.dot")
-					.transition(this._services.transitions.getDefaultTransition("legend-hover-scatter"))
-					.attr("opacity", d => {
-						if (d.datasetLabel !== hoveredElement.datum()["key"]) {
-							return 0.3;
-						}
-
-						return 1;
-					});
-			});
-
-			// Un-highlight circles on legend item mouseouts
-			this._services.events.getDocumentFragment().addEventListener("legend-item-onmouseout", e => {
-				this._parent.selectAll("circle.dot")
-					.transition(this._services.transitions.getDefaultTransition("legend-mouseout-scatter"))
-					.attr("opacity", 1);
-			});
-
-			this.legendListenersApplied = true;
-		}
+		// Remove legend listeners
+		const eventsFragment = this._services.events.getDocumentFragment();
+		eventsFragment.removeEventListener("legend-item-onhover", this.handleLegendOnHover);
+		eventsFragment.removeEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
 	}
 }
