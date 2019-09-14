@@ -89,7 +89,7 @@ export class Grid extends Component {
 
 	cleanGrid(g) {
 		g.selectAll("line")
-			.attr("stroke", "#333"); // Configuration.grid.strokeColor
+			.attr("stroke", Configuration.grid.strokeColor);
 
 		// Remove extra elements
 		g.selectAll("text").remove();

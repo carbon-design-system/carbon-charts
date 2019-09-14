@@ -31,6 +31,14 @@ export class LayoutComponent extends Component {
 		this._instanceCount = LayoutComponent.instanceCount++;
 	}
 
+	init() {
+		this.children.forEach(child => {
+			child.components.forEach(component => {
+				component.init();
+			});
+		});
+	}
+
 	getPrefferedAndFixedSizeSum(): number {
 		const svg = this._parent;
 		let sum = 0;
@@ -217,6 +225,14 @@ export class LayoutComponent extends Component {
 
 		this.children.forEach(child => {
 			child.components.map(component => component.setServices(newObj));
+		});
+	}
+
+	destroy() {
+		this.children.forEach(child => {
+			child.components.forEach(component => {
+				component.destroy();
+			});
 		});
 	}
 }

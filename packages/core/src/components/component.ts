@@ -15,12 +15,20 @@ export class Component {
 	protected _model: ChartModel;
 	protected _services: any;
 
-	constructor(options?: any) {
+	constructor(model: ChartModel, services: any, options?: any) {
+		this._model = model;
+		this._services = services;
 		this.options = options;
+	}
+
+	init() {
 	}
 
 	render() {
 		errorHandler.INTERNAL.COMPONENT.MISSING_METHOD("render");
+	}
+
+	destroy() {
 	}
 
 	// Used to pass down information to the components

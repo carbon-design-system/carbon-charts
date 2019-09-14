@@ -10,7 +10,29 @@ export class Line extends Component {
 
 	lineGenerator: any;
 
-	legendListenersApplied = false;
+	init() {
+		// Highlight correct scatter on legend item hovers
+		this._services.events.getDocumentFragment().addEventListener("legend-item-onhover", e => {
+			const { hoveredElement } = e.detail;
+
+			this._parent.selectAll("g.lines")
+				.transition(this._services.transitions.getDefaultTransition("legend-hover-line"))
+				.attr("opacity", d => {
+					if (d.label !== hoveredElement.datum()["key"]) {
+						return 0.3;
+					}
+
+					return 1;
+				});
+		});
+
+		// Un-highlight lines on legend item mouseouts
+		this._services.events.getDocumentFragment().addEventListener("legend-item-onmouseout", e => {
+			this._parent.selectAll("g.lines")
+				.transition(this._services.transitions.getDefaultTransition("legend-mouseout-line"))
+				.attr("opacity", 1);
+		});
+	}
 
 	render() {
 		const svg = this.getContainerSVG();
@@ -53,35 +75,5 @@ export class Line extends Component {
 		lineGroups.exit()
 			.attr("opacity", 0)
 			.remove();
-
-		this.addEventListeners();
-	}
-
-	addEventListeners() {
-		if (!this.legendListenersApplied) {
-			// Highlight correct scatter on legend item hovers
-			this._services.events.getDocumentFragment().addEventListener("legend-item-onhover", e => {
-				const { hoveredElement } = e.detail;
-
-				this._parent.selectAll("g.lines")
-					.transition(this._services.transitions.getDefaultTransition("legend-hover-line"))
-					.attr("opacity", d => {
-						if (d.label !== hoveredElement.datum()["key"]) {
-							return 0.3;
-						}
-
-						return 1;
-					});
-			});
-
-			// Un-highlight lines on legend item mouseouts
-			this._services.events.getDocumentFragment().addEventListener("legend-item-onmouseout", e => {
-				this._parent.selectAll("g.lines")
-					.transition(this._services.transitions.getDefaultTransition("legend-mouseout-line"))
-					.attr("opacity", 1);
-			});
-
-			this.legendListenersApplied = true;
-		}
 	}
 }
