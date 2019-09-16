@@ -16,7 +16,7 @@ export class Line extends Component {
 			const { hoveredElement } = e.detail;
 
 			this._parent.selectAll("g.lines")
-				.transition(this._services.transitions.getDefaultTransition("legend-hover-line"))
+				.transition(this._services.transitions.getTransition("legend-hover-line"))
 				.attr("opacity", d => {
 					if (d.label !== hoveredElement.datum()["key"]) {
 						return 0.3;
@@ -29,12 +29,12 @@ export class Line extends Component {
 		// Un-highlight lines on legend item mouseouts
 		this._services.events.getDocumentFragment().addEventListener("legend-item-onmouseout", e => {
 			this._parent.selectAll("g.lines")
-				.transition(this._services.transitions.getDefaultTransition("legend-mouseout-line"))
+				.transition(this._services.transitions.getTransition("legend-mouseout-line"))
 				.attr("opacity", 1);
 		});
 	}
 
-	render() {
+	render(animate = true) {
 		const svg = this.getContainerSVG();
 
 		// D3 line generator function
@@ -67,7 +67,7 @@ export class Line extends Component {
 
 				return parentDatum.data;
 			})
-			.transition(this._services.transitions.getDefaultTransition("line-update-enter"))
+			.transition(this._services.transitions.getTransition("line-update-enter", animate))
 			.attr("opacity", 1)
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);

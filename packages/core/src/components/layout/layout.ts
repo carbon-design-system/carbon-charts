@@ -14,11 +14,11 @@ const testColors = ["e41a1c", "377eb8", "4daf4a", "984ea3", "ff7f00", "ffff33", 
 window["testColors"] = Tools.clone(testColors);
 window["ccount"] = 0;
 export class LayoutComponent extends Component {
-	type = "layout";
-
 	// Give every layout component a distinct ID
 	// so they don't interfere when querying elements
 	static instanceCount = 0;
+
+	type = "layout";
 
 	children: Array<LayoutComponentChild>;
 	options: LayoutOptions;
@@ -69,7 +69,7 @@ export class LayoutComponent extends Component {
 			.size();
 	}
 
-	render() {
+	render(animate = true) {
 		const self = this;
 
 		// Get parent SVG to render inside of
@@ -123,7 +123,7 @@ export class LayoutComponent extends Component {
 					// Render preffered & fixed items
 					const growth = Tools.getProperty(d, "data", "growth", "x");
 					if (growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED) {
-						itemComponent.render();
+						itemComponent.render(animate);
 						console.log("RENDER", ++window["ccount"]);
 					}
 				});
@@ -183,7 +183,7 @@ export class LayoutComponent extends Component {
 					d.data.components.forEach(itemComponent => {
 						const growth = Tools.getProperty(d, "data", "growth", "x");
 						if (growth === LayoutGrowth.STRETCH) {
-							itemComponent.render();
+							itemComponent.render(animate);
 							console.log("RENDER", ++window["ccount"]);
 						}
 					});

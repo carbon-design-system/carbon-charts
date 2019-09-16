@@ -8,8 +8,8 @@ import { Service } from "../service";
 import { Transition, transition } from "d3-transition";
 
 export class Transitions extends Service {
-	getDefaultTransition(name?: string): Transition<any, any, any, any> {
-		if (this._model.getOptions().animations === false || this._model.get("animations") === false) {
+	getTransition(name?: string, animate?: boolean): Transition<any, any, any, any> {
+		if (this._model.getOptions().animations === false || animate === false) {
 			return this.getInstantTransition(name);
 		}
 

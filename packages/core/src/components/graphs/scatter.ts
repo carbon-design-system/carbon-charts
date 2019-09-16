@@ -17,7 +17,7 @@ export class Scatter extends Component {
 		eventsFragment.addEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
 	}
 
-	render() {
+	render(animate: boolean) {
 		const svg = this.getContainerSVG();
 
 		const dotGroups = svg.selectAll("g.dots")
@@ -40,7 +40,7 @@ export class Scatter extends Component {
 			.classed("dot", true)
 			.classed("filled", this.options.filled)
 			.attr("cx", (d, i) => this._services.axes.getXValue(d, i))
-			.transition(this._services.transitions.getDefaultTransition("scatter-update-enter"))
+			.transition(this._services.transitions.getTransition("scatter-update-enter", animate))
 			.attr("cy", (d, i) => this._services.axes.getYValue(d, i))
 			.attr("r", 4)
 			.attr("fill", d => {
@@ -66,7 +66,7 @@ export class Scatter extends Component {
 		const { hoveredElement } = e.detail;
 
 		this._parent.selectAll("circle.dot")
-			.transition(this._services.transitions.getDefaultTransition("legend-hover-scatter"))
+			.transition(this._services.transitions.getTransition("legend-hover-scatter"))
 			.attr("opacity", d => {
 				if (d.datasetLabel !== hoveredElement.datum()["key"]) {
 					return 0.3;
@@ -78,7 +78,7 @@ export class Scatter extends Component {
 
 	handleLegendMouseOut = e => {
 		this._parent.selectAll("circle.dot")
-			.transition(this._services.transitions.getDefaultTransition("legend-mouseout-scatter"))
+			.transition(this._services.transitions.getTransition("legend-mouseout-scatter"))
 			.attr("opacity", 1);
 	}
 

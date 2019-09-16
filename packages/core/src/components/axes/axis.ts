@@ -97,7 +97,7 @@ export class Axis extends Component {
 		}
 	}
 
-	render(options?: any) {
+	render(animate = true) {
 		const { position: axisPosition } = this.options;
 		const axisOptions = Tools.getProperty(this._model.getOptions(), "axes", axisPosition);
 
@@ -156,6 +156,7 @@ export class Axis extends Component {
 		}
 
 		// Add axis into the parent
+		const axisRefExists = !svg.select(`g.axis.${axisPosition}`).empty();
 		const axisRef = this._services.domUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
 
 		// Position and transition the axis
@@ -175,10 +176,10 @@ export class Axis extends Component {
 		}
 
 		// Apply new axis to the axis element
-		if (options.animate === false) {
+		if (!animate || !axisRefExists) {
 			axisRef.call(axis);
 		} else {
-			axisRef.transition(this._services.transitions.getDefaultTransition())
+			axisRef.transition(this._services.transitions.getTransition())
 				.call(axis);
 		}
 	}
