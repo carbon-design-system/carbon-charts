@@ -15,7 +15,7 @@ export class Component {
 	protected _model: ChartModel;
 	protected _services: any;
 
-	constructor(model: ChartModel, services: any, options?: any) {
+	constructor(model?: ChartModel, services?: any, options?: any) {
 		this._model = model;
 		this._services = services;
 		this.options = options;

@@ -39,7 +39,7 @@ export class ScatterChart extends AxisChart {
 			new TwoDimensionalAxes(),
 			new Grid(),
 			new Line(),
-			new Scatter({
+			new Scatter(null, null, {
 				filled: true
 			})
 		];
