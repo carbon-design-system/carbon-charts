@@ -37,12 +37,16 @@ export class Chart {
 
 	// Contains the code that uses properties that are overridable by the super-class
 	init() {
-		// Put together the essential references of this chart for all components to use
-		this.initializeServices();
+		// Initialize all services
+		Object.keys(this.services).forEach(serviceName => {
+			const serviceObj = this.services[serviceName];
+			this.services[serviceName] = new serviceObj(this.model, this.services);
+		});
 
-		// Grab all of the chart's components and store them
+		// Generate all of the chart's components and store them
 		this.components = this.getComponents();
 
+		// Set chart resize event listener
 		this.services.events
 			.getDocumentFragment()
 			.addEventListener("chart-resize", () => {
@@ -51,15 +55,7 @@ export class Chart {
 
 		// Run this.update() after the init() method of components run
 		setTimeout(() => {
-			this.update();	
-		});
-	}
-
-	initializeServices() {
-		Object.keys(this.services).forEach(serviceName => {
-			const serviceObj = this.services[serviceName];
-
-			this.services[serviceName] = new serviceObj(this.model, this.services);
+			this.update();
 		});
 	}
 
@@ -69,16 +65,12 @@ export class Chart {
 		return null;
 	}
 
-	update(animations = true) {
+	update(animate = true) {
 		if (this.components) {
-			console.log("UPDATE")
-			this.model.set({
-				animations
-			}, true);
+			console.log("UPDATE");
 
-			// console.log("RE RENDER STUFF");
 			this.components.forEach(component => {
-				component.render();
+				component.render(animate);
 
 				console.log("RENDER", ++window["ccount"]);
 			});

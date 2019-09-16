@@ -10,7 +10,7 @@ import { select, mouse, event } from "d3-selection";
 import { timeFormat } from "d3-time-format";
 
 export class Tooltip extends Component {
-	type = "cc-tooltip";
+	type = "tooltip";
 
 	tooltip: any;
 	positionService: Position = new Position();

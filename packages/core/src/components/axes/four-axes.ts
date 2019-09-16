@@ -78,9 +78,7 @@ export class TwoDimensionalAxes extends Component {
 
 		Object.keys(this.children).forEach(childKey => {
 			const child = this.children[childKey];
-			child.render({
-				animate
-			});
+			child.render(animate);
 		});
 
 		const margins = {} as any;

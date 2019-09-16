@@ -36,7 +36,7 @@ export class Component {
 	init() {
 	}
 
-	render() {
+	render(animate = true) {
 		errorHandler.INTERNAL.COMPONENT.MISSING_METHOD("render");
 	}
 
