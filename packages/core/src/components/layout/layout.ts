@@ -6,6 +6,7 @@ import { Tools } from "../../tools";
 // D3 Imports
 import { select } from "d3-selection";
 import { hierarchy, treemap, treemapSlice, treemapDice } from "d3-hierarchy";
+import { ChartModel } from "src/model";
 
 
 // TODORF - Remove
@@ -13,6 +14,8 @@ const testColors = ["e41a1c", "377eb8", "4daf4a", "984ea3", "ff7f00", "ffff33", 
 window["testColors"] = Tools.clone(testColors);
 window["ccount"] = 0;
 export class LayoutComponent extends Component {
+	type = "layout";
+
 	// Give every layout component a distinct ID
 	// so they don't interfere when querying elements
 	static instanceCount = 0;
@@ -22,8 +25,8 @@ export class LayoutComponent extends Component {
 
 	private _instanceCount: number;
 
-	constructor(children: Array<LayoutComponentChild>, options?: LayoutOptions) {
-		super();
+	constructor(model: ChartModel, services: any, children: Array<LayoutComponentChild>, options?: LayoutOptions) {
+		super(model, services, options);
 
 		this.options = options;
 		this.children = children;
@@ -214,8 +217,6 @@ export class LayoutComponent extends Component {
 
 		this.children.forEach(child => {
 			child.components.forEach(component => component.setModel(newObj));
-
-			window[`lc-${child.id}`] = this;
 		});
 	}
 

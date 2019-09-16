@@ -36,12 +36,10 @@ export class ScatterChart extends AxisChart {
 
 	getComponents() {
 		const graphFrameComponents = [
-			new TwoDimensionalAxes(),
-			new Grid(),
-			new Line(),
-			new Scatter(null, null, {
-				filled: true
-			})
+			new TwoDimensionalAxes(this.model, this.services),
+			new Grid(this.model, this.services),
+			new Line(this.model, this.services),
+			new Scatter(this.model, this.services, { filled: true })
 		];
 
 		return this.getAxisChartComponents(graphFrameComponents);
