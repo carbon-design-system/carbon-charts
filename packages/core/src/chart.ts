@@ -7,16 +7,12 @@ import { ChartModel } from "./model";
 import { Component } from "./components/component";
 
 // Services
-import { Axes, Curves, DOMUtils, Events, Transitions } from "./services/index";
+import { DOMUtils, Events, Transitions } from "./services/index";
 
 export class Chart {
 	components: Array<Component>;
-
 	model: ChartModel;
-
-	private services: any = {
-		axes: Axes,
-		curves: Curves,
+	protected services: any = {
 		domUtils: DOMUtils,
 		events: Events,
 		transitions: Transitions
@@ -34,26 +30,29 @@ export class Chart {
 		// Set model data & options
 		this.model.setDataAndOptions(chartConfigs.data, chartConfigs.options);
 
+		setTimeout(() => {
+			this.init();
+		});
+	}
+
+	// Contains the code that uses properties that are overridable by the super-class
+	init() {
 		// Put together the essential references of this chart for all components to use
 		this.initializeServices();
 
 		// Grab all of the chart's components and store them
 		this.components = this.getComponents();
 
-		// Add the model to all components
-		this.components.forEach(component => {
-			component.setServices(this.services);
-			component.setModel(this.model);
-			component.init();
-		});
-
-		this.update();
-
 		this.services.events
 			.getDocumentFragment()
 			.addEventListener("chart-resize", () => {
 				this.update(false);
 			});
+
+		// Run this.update() after the init() method of components run
+		setTimeout(() => {
+			this.update();	
+		});
 	}
 
 	initializeServices() {
@@ -72,6 +71,7 @@ export class Chart {
 
 	update(animations = true) {
 		if (this.components) {
+			console.log("UPDATE")
 			this.model.set({
 				animations
 			}, true);

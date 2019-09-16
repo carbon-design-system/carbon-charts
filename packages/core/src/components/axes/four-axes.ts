@@ -57,11 +57,15 @@ export class TwoDimensionalAxes extends Component {
 		const axisPositionss = Object.keys(AxisPositions).map(axisPositionKey => AxisPositions[axisPositionKey]);
 		axisPositionss.forEach(axisPosition => {
 			if (this.options.axes[axisPosition] && !this.children[axisPosition]) {
-				const axisComponent = new Axis({
-					position: axisPosition,
-					axes: this.options.axes,
-					margins: this.margins
-				});
+				const axisComponent = new Axis(
+					this._model,
+					this._services,
+					{
+						position: axisPosition,
+						axes: this.options.axes,
+						margins: this.margins
+					}
+				);
 
 				// Set model, services & parent for the new axis component
 				axisComponent.setModel(this._model);
@@ -120,33 +124,23 @@ export class TwoDimensionalAxes extends Component {
 		}
 	}
 
-	setParent(parent: any) {
-		super.setParent(parent);
+	// // Pass on model to children as well
+	// setModel(newObj) {
+	// 	super.setModel(newObj);
 
-		Object.keys(this.children).forEach(childKey => {
-			const child = this.children[childKey];
-			child.setParent(this._parent);
-		});
-	}
+	// 	Object.keys(this.children).forEach(childKey => {
+	// 		const child = this.children[childKey];
+	// 		child.setModel(newObj);
+	// 	});
+	// }
 
+	// // Pass on essentials to children as well
+	// setServices(newObj) {
+	// 	super.setServices(newObj);
 
-	// Pass on model to children as well
-	setModel(newObj) {
-		super.setModel(newObj);
-
-		Object.keys(this.children).forEach(childKey => {
-			const child = this.children[childKey];
-			child.setModel(newObj);
-		});
-	}
-
-	// Pass on essentials to children as well
-	setServices(newObj) {
-		super.setServices(newObj);
-
-		Object.keys(this.children).forEach(childKey => {
-			const child = this.children[childKey];
-			child.setServices(newObj);
-		});
-	}
+	// 	Object.keys(this.children).forEach(childKey => {
+	// 		const child = this.children[childKey];
+	// 		child.setServices(newObj);
+	// 	});
+	// }
 }

@@ -2,6 +2,7 @@
 import { Component } from "../component";
 import { AxisPositions, ScaleTypes, AxisTypes } from "../../interfaces";
 import { Tools } from "../../tools";
+import { ChartModel } from "src/model";
 
 // D3 Imports
 import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
@@ -19,8 +20,8 @@ export class Axis extends Component {
 	scale: any;
 	scaleType: ScaleTypes;
 
-	constructor(options?: any) {
-		super();
+	constructor(model: ChartModel, services: any, options?: any) {
+		super(model, services, options);
 
 		if (options) {
 			this.options = options;

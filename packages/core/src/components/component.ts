@@ -15,10 +15,22 @@ export class Component {
 	protected _model: ChartModel;
 	protected _services: any;
 
-	constructor(model?: ChartModel, services?: any, options?: any) {
+	constructor(model: ChartModel, services: any, options?: any) {
 		this._model = model;
 		this._services = services;
 		this.options = options;
+
+		// Set parent element to shell SVG if no parent exists for component
+		if (!this._parent) {
+			this.setParent(
+				select(this._services.domUtils.getMainSVG())
+			);
+		}
+
+		// Call init() asynchronously after constructor runs
+		setTimeout(() => {
+			this.init();
+		});
 	}
 
 	init() {
@@ -39,13 +51,6 @@ export class Component {
 	// Used to pass down information to the components
 	setServices(newObj) {
 		this._services = newObj;
-
-		// Set parent element to shell SVG if no parent exists for component
-		if (!this._parent) {
-			this.setParent(
-				select(this._services.domUtils.getMainSVG())
-			);
-		}
 	}
 
 	setParent(parent) {

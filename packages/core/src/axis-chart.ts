@@ -3,25 +3,29 @@ import { Chart } from "./chart";
 import {
 	LayoutDirection,
 	LayoutGrowth,
-	LegendOrientations,
-	AxisPositions,
-	ScaleTypes
+	LegendOrientations
 } from "./interfaces/index";
 import {
 	LayoutComponent,
 	Legend,
 	Title,
-	Tooltip,
-	TwoDimensionalAxes
+	Tooltip
 } from "./components/index";
 import { Tools } from "./tools";
 
+import { Axes, Curves } from "./services/index";
+
 export class AxisChart extends Chart {
+	protected services: any = Object.assign(this.services, {
+		axes: Axes,
+		curves: Curves
+	});
+
 	protected getAxisChartComponents(graphFrameComponents: Array<any>) {
 		const titleComponent = {
 			id: "title",
 			components: [
-				new Title()
+				new Title(this.model, this.services)
 			],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
@@ -32,7 +36,7 @@ export class AxisChart extends Chart {
 		const legendComponent = {
 			id: "legend",
 			components: [
-				new Legend()
+				new Legend(this.model, this.services)
 			],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
@@ -40,7 +44,7 @@ export class AxisChart extends Chart {
 			}
 		};
 
-		const axisFrameComponent = {
+		const graphFrameComponent = {
 			id: "graph-frame",
 			components: graphFrameComponents,
 			growth: {
@@ -72,9 +76,11 @@ export class AxisChart extends Chart {
 			id: "full-frame",
 			components: [
 				new LayoutComponent(
+					this.model,
+					this.services,
 					[
 						legendComponent,
-						axisFrameComponent
+						graphFrameComponent
 					],
 					{
 						direction: fullFrameComponentDirection
@@ -88,8 +94,10 @@ export class AxisChart extends Chart {
 		};
 
 		return [
-			new Tooltip(),
+			new Tooltip(this.model, this.services),
 			new LayoutComponent(
+				this.model,
+				this.services,
 				[
 					titleComponent,
 					fullFrameComponent
