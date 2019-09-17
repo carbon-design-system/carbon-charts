@@ -1,5 +1,6 @@
 // Internal Imports
 import { Service } from "../service";
+import * as Configuration from "../../configuration";
 
 // // Carbon motion package
 // import { easings, motion } from "@carbon/motion";
@@ -13,7 +14,7 @@ export class Transitions extends Service {
 			return this.getInstantTransition(name);
 		}
 
-		return transition(name).duration(300);
+		return transition(name).duration(Configuration.transitions.default.duration);
 	}
 
 	getInstantTransition(name?: string): Transition<any, any, any, any>  {

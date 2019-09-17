@@ -19,25 +19,6 @@ export namespace Tools {
 		};
 	}
 
-	export function addCloseBtn(tooltip, size, color?) {
-		const closeBtn = tooltip.append("button");
-		let classNames = `close--${size}`;
-		classNames = color ? " close--" + color : classNames;
-
-		const iconHolder = document.createElement("span");
-		iconHolder.innerHTML = `Close`;
-		closeBtn.attr("class", classNames)
-			.attr("type", "button")
-			.attr("aria-label", "Close");
-
-		closeBtn.node()
-			.appendChild(iconHolder);
-
-			// TODO - Finish
-			// console.log(iconHolder);
-		return closeBtn;
-	}
-
 	export function clone(obj) {
 		return JSON.parse(JSON.stringify(obj));
 	}

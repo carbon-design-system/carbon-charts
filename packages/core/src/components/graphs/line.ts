@@ -1,5 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
+import * as Configuration from "../../configuration";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -19,10 +20,10 @@ export class Line extends Component {
 				.transition(this.services.transitions.getTransition("legend-hover-line"))
 				.attr("opacity", d => {
 					if (d.label !== hoveredElement.datum()["key"]) {
-						return 0.3;
+						return Configuration.lines.opacity.unselected;
 					}
 
-					return 1;
+					return Configuration.lines.opacity.selected;
 				});
 		});
 
@@ -30,7 +31,7 @@ export class Line extends Component {
 		this.services.events.getDocumentFragment().addEventListener("legend-item-onmouseout", e => {
 			this.parent.selectAll("g.lines")
 				.transition(this.services.transitions.getTransition("legend-mouseout-line"))
-				.attr("opacity", 1);
+				.attr("opacity", Configuration.lines.opacity.selected);
 		});
 	}
 

@@ -14,25 +14,23 @@ import { timeFormat } from "d3-time-format";
 export class Axis extends Component {
 	type = "axes";
 
-	options: any;
-
 	margins: any;
 
 	scale: any;
 	scaleType: ScaleTypes;
 
-	constructor(model: ChartModel, services: any, options?: any) {
-		super(model, services, options);
+	constructor(model: ChartModel, services: any, configs?: any) {
+		super(model, services, configs);
 
-		if (options) {
-			this.options = options;
+		if (configs) {
+			this.configs = configs;
 		}
 
-		this.margins = this.options.margins;
+		this.margins = this.configs.margins;
 	}
 
 	createOrGrabScale() {
-		const { position } = this.options;
+		const { position } = this.configs;
 		const scaleOptions = Tools.getProperty(this.model.getOptions(), "axes", position);
 
 		let scaleFunction;
@@ -76,7 +74,7 @@ export class Axis extends Component {
 	}
 
 	getScaleDomain() {
-		const { position } = this.options;
+		const { position } = this.configs;
 		const scaleOptions = Tools.getProperty(this.model.getOptions(), "axes", position);
 
 		if (scaleOptions && scaleOptions.type === ScaleTypes.TIME) {
@@ -99,7 +97,7 @@ export class Axis extends Component {
 	}
 
 	render(animate = true) {
-		const { position: axisPosition } = this.options;
+		const { position: axisPosition } = this.configs;
 		const axisOptions = Tools.getProperty(this.model.getOptions(), "axes", axisPosition);
 
 		const svg = this.getContainerSVG();
@@ -107,8 +105,8 @@ export class Axis extends Component {
 
 		let startPosition, endPosition;
 		if (axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP) {
-			startPosition = this.options.axes[AxisPositions.LEFT] ? this.margins.left : 0;
-	        endPosition = this.options.axes[AxisPositions.RIGHT] ? width - this.margins.right : width;
+			startPosition = this.configs.axes[AxisPositions.LEFT] ? this.margins.left : 0;
+	        endPosition = this.configs.axes[AxisPositions.RIGHT] ? width - this.margins.right : width;
 		} else {
 			startPosition = height - this.margins.bottom;
 			endPosition = this.margins.top;
@@ -234,7 +232,7 @@ export class Axis extends Component {
 	}
 
 	getElementRef() {
-		const { position } = this.options;
+		const { position } = this.configs;
 
 		return DOMUtils.appendOrSelect(this.getContainerSVG(), `g.axis.${position}`);
 	}

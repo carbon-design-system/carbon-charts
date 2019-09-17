@@ -6,9 +6,8 @@ import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 
 export class TwoDimensionalAxes extends Component {
-	type = "four-axes";
+	type = "2D-axes";
 
-	options: any = {};
 	children: any = {};
 
 	margins = {
@@ -52,18 +51,18 @@ export class TwoDimensionalAxes extends Component {
 			axes[AxisPositions.BOTTOM] = true;
 		}
 
-		this.options.axes = axes;
+		this.configs.axes = axes;
 
 		// Check the configs to know which axes need to be rendered
 		const axisPositionss = Object.keys(AxisPositions).map(axisPositionKey => AxisPositions[axisPositionKey]);
 		axisPositionss.forEach(axisPosition => {
-			if (this.options.axes[axisPosition] && !this.children[axisPosition]) {
+			if (this.configs.axes[axisPosition] && !this.children[axisPosition]) {
 				const axisComponent = new Axis(
 					this.model,
 					this.services,
 					{
 						position: axisPosition,
-						axes: this.options.axes,
+						axes: this.configs.axes,
 						margins: this.margins
 					}
 				);
@@ -86,7 +85,7 @@ export class TwoDimensionalAxes extends Component {
 
 		Object.keys(this.children).forEach(childKey => {
 			const child = this.children[childKey];
-			const axisPosition = child.options.position;
+			const axisPosition = child.configs.position;
 			const { width, height } = DOMUtils.getSVGElementSize(child.getElementRef(), { useBBox: true });
 
 			switch (axisPosition) {
