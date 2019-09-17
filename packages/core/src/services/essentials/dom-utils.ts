@@ -10,7 +10,7 @@ import { Tools } from "../../tools";
 import ResizeObserver from "resize-observer-polyfill";
 
 export class DOMUtils extends Service {
-	private _svg: Element;
+	protected svg: Element;
 
 	init() {
 		// Add width & height to the chart holder if necessary, and add a classname
@@ -18,17 +18,17 @@ export class DOMUtils extends Service {
 
 		this.addSVGElement();
 
-		if (this._model.getOptions().resizable) {
+		if (this.model.getOptions().resizable) {
 			this.addResizeListener();
 		}
 	}
 
 	styleHolderElement() {
-		const holderElement = this._model.get(ModelStateKeys.HOLDER) as HTMLElement;
-		const { width, height } = this._model.getOptions();
+		const holderElement = this.model.get(ModelStateKeys.HOLDER) as HTMLElement;
+		const { width, height } = this.model.getOptions();
 
 		// Add class to chart holder
-		select(this._model.get(ModelStateKeys.HOLDER)).classed("chart-holder", true);
+		select(this.model.get(ModelStateKeys.HOLDER)).classed("chart-holder", true);
 
 		// If width exists in options
 		if (width) {
@@ -44,50 +44,55 @@ export class DOMUtils extends Service {
 	}
 
 	getHolder() {
-		return this._model.get(ModelStateKeys.HOLDER);
+		return this.model.get(ModelStateKeys.HOLDER);
 	}
 
 	addSVGElement() {
-		const svg = select(this._model.get(ModelStateKeys.HOLDER))
+		const svg = select(this.model.get(ModelStateKeys.HOLDER))
 			.append("svg")
 			.classed("chart-svg", true)
 			.attr("height", "100%")
 			.attr("width", "100%");
 
-		this._svg = svg.node();
+		this.svg = svg.node();
 	}
 
 	getMainSVG() {
-		return this._svg;
+		return this.svg;
 	}
 
 	addResizeListener() {
-		const holder = this._model.get(ModelStateKeys.HOLDER);
+		const holder = this.model.get(ModelStateKeys.HOLDER);
 
+		if (!holder) {
+			return;
+		}
+
+		// Grab current dimensions of the chart holder
 		let containerWidth = holder.clientWidth;
 		let containerHeight = holder.clientHeight;
 
+		// The resize callback function
 		const resizeCallback = this.debounce(15, (entries, observer) => {
-			if (this._model.get("destroyed") === true) {
-				// On some versions of Chrome the resize observer is notified
-				// When chart is destroyed and the holder is removed
-				console.log("Cancel resize, chart has been destroyed");
-			} else if (
-				Math.abs(containerWidth - holder.clientWidth) > 1
+			if (!holder) {
+				return;
+			}
+
+			if (Math.abs(containerWidth - holder.clientWidth) > 1
 				|| Math.abs(containerHeight - holder.clientHeight) > 1) {
 				containerWidth = holder.clientWidth;
 				containerHeight = holder.clientHeight;
 
-				this._services.events.dispatchEvent("chart-resize");
+				this.services.events.dispatchEvent("chart-resize");
 			}
 		});
 
+		// Observe the behaviour of resizing on the holder
 		const resizeObserver = new ResizeObserver(resizeCallback);
-
 		resizeObserver.observe(holder);
 	}
 
-	getSVGElementSize(svgSelector: Selection<any, any, any, any>, options?: any) {
+	static getSVGElementSize(svgSelector: Selection<any, any, any, any>, options?: any) {
 		if (!svgSelector.attr) {
 			svgSelector = select(svgSelector as any);
 		}

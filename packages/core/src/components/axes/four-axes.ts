@@ -3,6 +3,7 @@ import { Component } from "../component";
 import { AxisPositions, ScaleTypes } from "../../interfaces";
 import { Axis } from "./axis";
 import { Tools } from "../../tools";
+import { DOMUtils } from "../../services";
 
 export class TwoDimensionalAxes extends Component {
 	type = "four-axes";
@@ -21,7 +22,7 @@ export class TwoDimensionalAxes extends Component {
 		const axes = {};
 
 		const axisPositions = Object.keys(AxisPositions);
-		const axesOptions = Tools.getProperty(this._model.getOptions(), "axes");
+		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
 		if (axesOptions) {
 			let primaryAxisOptions, secondaryAxisOptions;
 			axisPositions.forEach(axisPosition => {
@@ -37,13 +38,13 @@ export class TwoDimensionalAxes extends Component {
 				}
 			});
 		} else {
-			this._model.getOptions().axes = {
+			this.model.getOptions().axes = {
 				left: {
 					primary: true
 				},
 				bottom: {
 					secondary: true,
-					type: this._model.getDisplayData().labels ? ScaleTypes.LABELS : undefined
+					type: this.model.getDisplayData().labels ? ScaleTypes.LABELS : undefined
 				}
 			};
 
@@ -58,8 +59,8 @@ export class TwoDimensionalAxes extends Component {
 		axisPositionss.forEach(axisPosition => {
 			if (this.options.axes[axisPosition] && !this.children[axisPosition]) {
 				const axisComponent = new Axis(
-					this._model,
-					this._services,
+					this.model,
+					this.services,
 					{
 						position: axisPosition,
 						axes: this.options.axes,
@@ -68,9 +69,9 @@ export class TwoDimensionalAxes extends Component {
 				);
 
 				// Set model, services & parent for the new axis component
-				axisComponent.setModel(this._model);
-				axisComponent.setServices(this._services);
-				axisComponent.setParent(this._parent);
+				axisComponent.setModel(this.model);
+				axisComponent.setServices(this.services);
+				axisComponent.setParent(this.parent);
 
 				this.children[axisPosition] = axisComponent;
 			}
@@ -86,7 +87,7 @@ export class TwoDimensionalAxes extends Component {
 		Object.keys(this.children).forEach(childKey => {
 			const child = this.children[childKey];
 			const axisPosition = child.options.position;
-			const { width, height } = this._services.domUtils.getSVGElementSize(child.getElementRef(), { useBBox: true });
+			const { width, height } = DOMUtils.getSVGElementSize(child.getElementRef(), { useBBox: true });
 
 			switch (axisPosition) {
 				case AxisPositions.TOP:

@@ -7,15 +7,15 @@ export class Title extends Component {
 	render() {
 		const svg = this.getContainerSVG();
 
-		const text = this._services.domUtils.appendOrSelect(svg, "text.title");
+		const text = this.services.domUtils.appendOrSelect(svg, "text.title");
 		text.attr("x", 0)
 			.attr("y", 20)
 			.style("font-size", "18px")
 			.style("font-weight", 700)
-			.text(this._model.getOptions().title || "Scatter Chart");
+			.text(this.model.getOptions().title || "Scatter Chart");
 
 		// TODO - Replace with layout component margins
-		this._services.domUtils.appendOrSelect(svg, "rect.spacer")
+		this.services.domUtils.appendOrSelect(svg, "rect.spacer")
 			.attr("x", 0)
 			.attr("y", 20)
 			.attr("width", "100%")
