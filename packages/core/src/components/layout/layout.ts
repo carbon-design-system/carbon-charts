@@ -189,7 +189,7 @@ export class LayoutComponent extends Component {
 						}
 					});
 
-					// const bgRect = self.services.domUtils.appendOrSelect(select(this), "rect.bg");
+					// const bgRect = DOMUtils.appendOrSelect(select(this), "rect.bg");
 					// bgRect
 					// 	.classed("bg", true)
 					// 	.attr("width", "100%")

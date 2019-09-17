@@ -43,18 +43,30 @@ export class Line extends Component {
 			.y((d, i) => this.services.axes.getYValue(d, i))
 			.curve(this.services.curves.getD3Curve());
 
+		// Update the bound data on line groups
 		const lineGroups = svg.selectAll("g.lines")
 			.data(this.model.getDisplayData().datasets, dataset => dataset.label);
 
+		// Remove elements that need to be exited
+		// We need exit at the top here to make sure that
+		// Data filters are processed before entering new elements
+		// Or updating existing ones
+		lineGroups.exit()
+			.attr("opacity", 0)
+			.remove();
+
+		// Add line groups that need to be introduced
 		const enteringLineGroups = lineGroups.enter()
 			.append("g")
 			.classed("lines", true);
 
 		const self = this;
 
+		// Enter paths that need to be introduced
 		const enteringPaths = enteringLineGroups.append("path")
 			.attr("opacity", 0);
 
+		// Apply styles and datum
 		enteringPaths.merge(svg.selectAll("g.lines path"))
 			.attr("stroke", function (d) {
 				const parentDatum = select(this.parentNode).datum() as any;
@@ -71,9 +83,5 @@ export class Line extends Component {
 			.attr("opacity", 1)
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);
-
-		lineGroups.exit()
-			.attr("opacity", 0)
-			.remove();
 	}
 }

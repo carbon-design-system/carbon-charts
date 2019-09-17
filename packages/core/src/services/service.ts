@@ -11,6 +11,10 @@ export class Service {
 		this.init();
 	}
 
+	init() {
+
+	}
+
 	// Used to pass down information to the components
 	setModel(newObj) {
 		this.model = newObj;
@@ -19,9 +23,5 @@ export class Service {
 	// Used to pass down services to the components
 	setServices(newObj) {
 		this.services = newObj;
-	}
-
-	init() {
-
 	}
 }

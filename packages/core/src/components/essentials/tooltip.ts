@@ -1,6 +1,7 @@
 import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
+import { DOMUtils } from "../../services";
 
 // Carbon position service
 import Position, { PLACEMENTS } from "@carbon/utils-position";
@@ -20,10 +21,10 @@ export class Tooltip extends Component {
 	init() {
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
-		this.tooltip = this.services.domUtils.appendOrSelect(holder, "div.tooltip.chart-tooltip.cc-tooltip");
+		this.tooltip = DOMUtils.appendOrSelect(holder, "div.tooltip.chart-tooltip.cc-tooltip");
 
 		// Apply html content to the tooltip
-		const tooltipTextConainter = this.services.domUtils.appendOrSelect(this.tooltip, "div.text-box");
+		const tooltipTextConainter = DOMUtils.appendOrSelect(this.tooltip, "div.text-box");
 
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.getDocumentFragment().addEventListener("show-tooltip", e => {
