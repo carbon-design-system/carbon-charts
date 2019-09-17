@@ -10,88 +10,6 @@ import { Tools } from "../../tools";
 import ResizeObserver from "resize-observer-polyfill";
 
 export class DOMUtils extends Service {
-	protected svg: Element;
-
-	init() {
-		// Add width & height to the chart holder if necessary, and add a classname
-		this.styleHolderElement();
-
-		this.addSVGElement();
-
-		if (this.model.getOptions().resizable) {
-			this.addResizeListener();
-		}
-	}
-
-	styleHolderElement() {
-		const holderElement = this.model.get(ModelStateKeys.HOLDER) as HTMLElement;
-		const { width, height } = this.model.getOptions();
-
-		// Add class to chart holder
-		select(this.model.get(ModelStateKeys.HOLDER)).classed("chart-holder", true);
-
-		// If width exists in options
-		if (width) {
-			// Apply formatted width attribute to chart
-			holderElement.style.width = Tools.formatWidthHeightValues(width);
-		}
-
-		// If height exists in options
-		if (height) {
-			// Apply formatted height attribute to chart
-			holderElement.style.height = Tools.formatWidthHeightValues(height);
-		}
-	}
-
-	getHolder() {
-		return this.model.get(ModelStateKeys.HOLDER);
-	}
-
-	addSVGElement() {
-		const svg = select(this.model.get(ModelStateKeys.HOLDER))
-			.append("svg")
-			.classed("chart-svg", true)
-			.attr("height", "100%")
-			.attr("width", "100%");
-
-		this.svg = svg.node();
-	}
-
-	getMainSVG() {
-		return this.svg;
-	}
-
-	addResizeListener() {
-		const holder = this.model.get(ModelStateKeys.HOLDER);
-
-		if (!holder) {
-			return;
-		}
-
-		// Grab current dimensions of the chart holder
-		let containerWidth = holder.clientWidth;
-		let containerHeight = holder.clientHeight;
-
-		// The resize callback function
-		const resizeCallback = this.debounce(15, (entries, observer) => {
-			if (!holder) {
-				return;
-			}
-
-			if (Math.abs(containerWidth - holder.clientWidth) > 1
-				|| Math.abs(containerHeight - holder.clientHeight) > 1) {
-				containerWidth = holder.clientWidth;
-				containerHeight = holder.clientHeight;
-
-				this.services.events.dispatchEvent("chart-resize");
-			}
-		});
-
-		// Observe the behaviour of resizing on the holder
-		const resizeObserver = new ResizeObserver(resizeCallback);
-		resizeObserver.observe(holder);
-	}
-
 	static getSVGElementSize(svgSelector: Selection<any, any, any, any>, options?: any) {
 		if (!svgSelector.attr) {
 			svgSelector = select(svgSelector as any);
@@ -183,6 +101,88 @@ export class DOMUtils extends Service {
 			width: 0,
 			height: 0
 		};
+	}
+
+	protected svg: Element;
+
+	init() {
+		// Add width & height to the chart holder if necessary, and add a classname
+		this.styleHolderElement();
+
+		this.addSVGElement();
+
+		if (this.model.getOptions().resizable) {
+			this.addResizeListener();
+		}
+	}
+
+	styleHolderElement() {
+		const holderElement = this.model.get(ModelStateKeys.HOLDER) as HTMLElement;
+		const { width, height } = this.model.getOptions();
+
+		// Add class to chart holder
+		select(this.model.get(ModelStateKeys.HOLDER)).classed("chart-holder", true);
+
+		// If width exists in options
+		if (width) {
+			// Apply formatted width attribute to chart
+			holderElement.style.width = Tools.formatWidthHeightValues(width);
+		}
+
+		// If height exists in options
+		if (height) {
+			// Apply formatted height attribute to chart
+			holderElement.style.height = Tools.formatWidthHeightValues(height);
+		}
+	}
+
+	getHolder() {
+		return this.model.get(ModelStateKeys.HOLDER);
+	}
+
+	addSVGElement() {
+		const svg = select(this.model.get(ModelStateKeys.HOLDER))
+			.append("svg")
+			.classed("chart-svg", true)
+			.attr("height", "100%")
+			.attr("width", "100%");
+
+		this.svg = svg.node();
+	}
+
+	getMainSVG() {
+		return this.svg;
+	}
+
+	addResizeListener() {
+		const holder = this.model.get(ModelStateKeys.HOLDER);
+
+		if (!holder) {
+			return;
+		}
+
+		// Grab current dimensions of the chart holder
+		let containerWidth = holder.clientWidth;
+		let containerHeight = holder.clientHeight;
+
+		// The resize callback function
+		const resizeCallback = this.debounce(15, (entries, observer) => {
+			if (!holder) {
+				return;
+			}
+
+			if (Math.abs(containerWidth - holder.clientWidth) > 1
+				|| Math.abs(containerHeight - holder.clientHeight) > 1) {
+				containerWidth = holder.clientWidth;
+				containerHeight = holder.clientHeight;
+
+				this.services.events.dispatchEvent("chart-resize");
+			}
+		});
+
+		// Observe the behaviour of resizing on the holder
+		const resizeObserver = new ResizeObserver(resizeCallback);
+		resizeObserver.observe(holder);
 	}
 
 	appendOrSelect(parent, query) {
