@@ -14,25 +14,25 @@ export class Grid extends Component {
 	render() {
 		// Draw the backdrop
 		this.drawBackdrop();
-		this._services.domUtils.appendOrSelect(this.backdrop, "g.x.grid");
-		this._services.domUtils.appendOrSelect(this.backdrop, "g.y.grid");
+		this.services.domUtils.appendOrSelect(this.backdrop, "g.x.grid");
+		this.services.domUtils.appendOrSelect(this.backdrop, "g.y.grid");
 
 		this.drawXGrid();
 		this.drawYGrid();
 	}
 
 	drawXGrid() {
-		const svg = this._parent;
+		const svg = this.parent;
 
 		const height = this.backdrop.attr("height");
 
-		const mainXScale = this._services.axes.getMainXAxis().getScale();
+		const mainXScale = this.services.axes.getMainXAxis().getScale();
 		const xGrid = axisBottom(mainXScale)
 			.tickSizeInner(-height)
 			.tickSizeOuter(0);
 
 		// Determine number of ticks
-		const numberOfTicks = Tools.getProperty(this._model.getOptions(), "grid", "x", "numberOfTicks") || Configuration.grid.x.numberOfTicks;
+		const numberOfTicks = Tools.getProperty(this.model.getOptions(), "grid", "x", "numberOfTicks") || Configuration.grid.x.numberOfTicks;
 		xGrid.ticks(numberOfTicks);
 
 		const g = svg.select(".x.grid")
@@ -43,16 +43,16 @@ export class Grid extends Component {
 	}
 
 	drawYGrid() {
-		const svg = this._parent;
+		const svg = this.parent;
 		const width = this.backdrop.attr("width");
 
-		const mainXScale = this._services.axes.getMainXAxis().getScale();
+		const mainXScale = this.services.axes.getMainXAxis().getScale();
 		const yGrid = axisLeft(mainXScale)
 			.tickSizeInner(-width)
 			.tickSizeOuter(0);
 
 		// Determine number of ticks
-		const numberOfTicks = Tools.getProperty(this._model.getOptions(), "grid", "y", "numberOfTicks") || Configuration.grid.y.numberOfTicks;
+		const numberOfTicks = Tools.getProperty(this.model.getOptions(), "grid", "y", "numberOfTicks") || Configuration.grid.y.numberOfTicks;
 		yGrid.ticks(numberOfTicks);
 
 		const g = svg.select(".y.grid")
@@ -63,17 +63,17 @@ export class Grid extends Component {
 	}
 
 	drawBackdrop() {
-		const svg = this._parent;
+		const svg = this.parent;
 
-		const mainXScale = this._services.axes.getMainXAxis().getScale();
-		const mainYScale = this._services.axes.getMainYAxis().getScale();
+		const mainXScale = this.services.axes.getMainXAxis().getScale();
+		const mainYScale = this.services.axes.getMainYAxis().getScale();
 
 		const [xScaleStart, xScaleEnd] = mainXScale.range();
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
 
 		// Get height from the grid
-		this.backdrop = this._services.domUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
-		const backdropRect = this._services.domUtils.appendOrSelect(this.backdrop, "rect.chart-grid-backdrop");
+		this.backdrop = this.services.domUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
+		const backdropRect = this.services.domUtils.appendOrSelect(this.backdrop, "rect.chart-grid-backdrop");
 
 		this.backdrop.merge(backdropRect)
 			.attr("x", xScaleStart)

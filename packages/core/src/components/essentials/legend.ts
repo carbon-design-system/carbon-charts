@@ -3,6 +3,7 @@ import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
 import { LegendOrientations } from "../../interfaces";
+import { DOMUtils } from "../../services";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -28,7 +29,7 @@ export class Legend extends Component {
 
 		// Check if there are disabled legend items
 		const { DISABLED } = Configuration.legend.items.status;
-		const dataLabels = this._model.get("dataLabels");
+		const dataLabels = this.model.get("dataLabels");
 		const hasDeactivatedItems = Object.keys(dataLabels).some(label => dataLabels[label] === DISABLED);
 
 		addedLegendItems.append("rect")
@@ -40,7 +41,7 @@ export class Legend extends Component {
 			.attr("ry", 1)
 			.style("fill", d => {
 				if (d.value === Configuration.legend.items.status.ACTIVE) {
-					return this._model.getStrokeColor(d.key);
+					return this.model.getStrokeColor(d.key);
 				}
 
 				return "white";
@@ -59,7 +60,7 @@ export class Legend extends Component {
 			.style("font-size", "15px")
 			.attr("alignment-baseline", "middle");
 
-		const legendOrientation = Tools.getProperty(this._model.getOptions(), "legend", "orientation");
+		const legendOrientation = Tools.getProperty(this.model.getOptions(), "legend", "orientation");
 
 		// Crop legend items into lines
 		const self = this;
@@ -86,9 +87,9 @@ export class Legend extends Component {
 						lineNumber++;
 					}
 				} else {
-					const svgDimensions = self._services.domUtils.getSVGElementSize(self._parent, { useAttr: true });
-					const legendItemTextDimensions = self._services.domUtils.getSVGElementSize(select(this).select("text"), { useBBox: true });
-					const lastLegendItemTextDimensions = self._services.domUtils.getSVGElementSize(previousLegendItem.select("text"), { useBBox: true });
+					const svgDimensions = DOMUtils.getSVGElementSize(self.parent, { useAttr: true });
+					const legendItemTextDimensions = DOMUtils.getSVGElementSize(select(this).select("text"), { useBBox: true });
+					const lastLegendItemTextDimensions = DOMUtils.getSVGElementSize(previousLegendItem.select("text"), { useBBox: true });
 					startingPoint = startingPoint + lastLegendItemTextDimensions.width + spaceNeededForCheckbox + legendItemsHorizontalSpacing;
 
 					if (startingPoint + spaceNeededForCheckbox + legendItemTextDimensions.width > svgDimensions.width) {
@@ -145,7 +146,7 @@ export class Legend extends Component {
 			.on("mouseout", null)
 			.remove();
 
-		const { legendClickable } = this._model.getOptions();
+		const { legendClickable } = this.model.getOptions();
 		svg.classed("clickable", legendClickable);
 
 		if (legendClickable && addedLegendItems.size() > 0) {
@@ -154,7 +155,7 @@ export class Legend extends Component {
 	}
 
 	getLegendItemArray() {
-		const legendItems = this._model.get("dataLabels");
+		const legendItems = this.model.get("dataLabels");
 		const legendItemKeys = Object.keys(legendItems);
 
 		return legendItemKeys.map(key => ({
@@ -169,7 +170,7 @@ export class Legend extends Component {
 
 		svg.selectAll("g.legend-item")
 			.on("mouseover", function () {
-				self._services.events.dispatchEvent("legend-item-onhover", {
+				self.services.events.dispatchEvent("legend-item-onhover", {
 					hoveredElement: select(this)
 				});
 
@@ -189,20 +190,20 @@ export class Legend extends Component {
 					.lower();
 			})
 			.on("click", function () {
-				self._services.events.dispatchEvent("legend-item-onclick", {
+				self.services.events.dispatchEvent("legend-item-onclick", {
 					clickedElement: select(this)
 				});
 
 				const clickedItem = select(this);
 				const clickedItemData = clickedItem.datum() as any;
 
-				self._model.applyDataFilter(clickedItemData.key);
+				self.model.applyDataFilter(clickedItemData.key);
 			})
 			.on("mouseout", function () {
 				const hoveredItem = select(this);
 				hoveredItem.select("rect.hover-stroke").remove();
 
-				self._services.events.dispatchEvent("legend-item-onmouseout", {
+				self.services.events.dispatchEvent("legend-item-onmouseout", {
 					hoveredElement: hoveredItem
 				});
 			});

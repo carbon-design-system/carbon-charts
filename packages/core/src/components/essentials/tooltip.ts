@@ -19,16 +19,16 @@ export class Tooltip extends Component {
 
 	init() {
 		// Grab the tooltip element
-		const holder = select(this._services.domUtils.getHolder());
-		this.tooltip = this._services.domUtils.appendOrSelect(holder, "div.tooltip.chart-tooltip.cc-tooltip");
+		const holder = select(this.services.domUtils.getHolder());
+		this.tooltip = this.services.domUtils.appendOrSelect(holder, "div.tooltip.chart-tooltip.cc-tooltip");
 
 		// Apply html content to the tooltip
-		const tooltipTextConainter = this._services.domUtils.appendOrSelect(this.tooltip, "div.text-box");
+		const tooltipTextConainter = this.services.domUtils.appendOrSelect(this.tooltip, "div.text-box");
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this._services.events.getDocumentFragment().addEventListener("show-tooltip", e => {
+		this.services.events.getDocumentFragment().addEventListener("show-tooltip", e => {
 			const data = select(event.target).datum() as any;
-			if (Tools.getProperty(this._model.getOptions(), "tooltip", "size") === Configuration.tooltip.size.COMPACT) {
+			if (Tools.getProperty(this.model.getOptions(), "tooltip", "size") === Configuration.tooltip.size.COMPACT) {
 				tooltipTextConainter.html(`<b>${data.datasetLabel}:</b> ${data.value}<br/>`);
 			} else {
 				tooltipTextConainter.html(`
@@ -45,7 +45,7 @@ export class Tooltip extends Component {
 		});
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this._services.events.getDocumentFragment().addEventListener("hide-tooltip", e => {
+		this.services.events.getDocumentFragment().addEventListener("hide-tooltip", e => {
 			this.tooltip.classed("hidden", true);
 		});
 	}
@@ -55,7 +55,7 @@ export class Tooltip extends Component {
 	}
 
 	positionTooltip() {
-		const holder = this._services.domUtils.getHolder();
+		const holder = this.services.domUtils.getHolder();
 		const target = this.tooltip.node();
 		const mouseRelativePos = mouse(holder);
 

@@ -2,6 +2,7 @@
 import { Component } from "../component";
 import { LayoutOptions, LayoutDirection, LayoutGrowth, LayoutComponentChild } from "../../interfaces/index";
 import { Tools } from "../../tools";
+import { DOMUtils } from "../../services";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -43,7 +44,7 @@ export class LayoutComponent extends Component {
 	}
 
 	getPrefferedAndFixedSizeSum(): number {
-		const svg = this._parent;
+		const svg = this.parent;
 		let sum = 0;
 
 		svg.selectAll(`svg.layout-child-${this._instanceCount}`)
@@ -59,7 +60,7 @@ export class LayoutComponent extends Component {
 	}
 
 	getNumOfStretchChildren(): number {
-		const svg = this._parent;
+		const svg = this.parent;
 
 		return svg.selectAll(`svg.layout-child-${this._instanceCount}`)
 			.filter((d: any) => {
@@ -73,8 +74,8 @@ export class LayoutComponent extends Component {
 		const self = this;
 
 		// Get parent SVG to render inside of
-		const svg = this._parent;
-		const { width, height } = this._services.domUtils.getSVGElementSize(svg, { useAttrs: true });
+		const svg = this.parent;
+		const { width, height } = DOMUtils.getSVGElementSize(svg, { useAttrs: true });
 
 		// Pass children data to the hierarchy layout
 		// And calculate sum of sizes
@@ -133,7 +134,7 @@ export class LayoutComponent extends Component {
 		.each(function(d: any) {
 			// Calculate preffered children sizes after internal rendering
 			const growth = Tools.getProperty(d, "data", "growth", "x");
-			const matchingSVGDimensions = self._services.domUtils.getSVGElementSize(select(this), { useBBox: true });
+			const matchingSVGDimensions = DOMUtils.getSVGElementSize(select(this), { useBBox: true });
 			if (growth === LayoutGrowth.PREFERRED) {
 				const matchingSVGWidth = horizontal ? matchingSVGDimensions.width : matchingSVGDimensions.height;
 				const svgWidth = horizontal ? width : height;
@@ -188,7 +189,7 @@ export class LayoutComponent extends Component {
 						}
 					});
 
-					// const bgRect = self._services.domUtils.appendOrSelect(select(this), "rect.bg");
+					// const bgRect = self.services.domUtils.appendOrSelect(select(this), "rect.bg");
 					// bgRect
 					// 	.classed("bg", true)
 					// 	.attr("width", "100%")

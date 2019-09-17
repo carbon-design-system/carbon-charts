@@ -69,12 +69,17 @@ export class Chart {
 		if (this.components) {
 			console.log("UPDATE");
 
+			// Render all components
 			this.components.forEach(component => {
 				component.render(animate);
 
 				console.log("RENDER", ++window["ccount"]);
 			});
 
+			// Asynchronously dispatch a "render-finished" event
+			// This is needed because of d3-transitions
+			// Since at the start of the transition
+			// Elements do not hold their final size or position
 			setTimeout(() => {
 				this.services.events.dispatchEvent("render-finished");
 			});
@@ -82,10 +87,12 @@ export class Chart {
 	}
 
 	destroy() {
+		// Call the destroy() method on all components
 		this.components.forEach(component => {
 			component.destroy();
 		});
 
+		// Remove the chart holder
 		this.services.domUtils.getHolder().remove();
 
 		this.model.set({ destroyed: true }, true);

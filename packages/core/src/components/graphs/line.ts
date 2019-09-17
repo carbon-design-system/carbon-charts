@@ -12,11 +12,11 @@ export class Line extends Component {
 
 	init() {
 		// Highlight correct scatter on legend item hovers
-		this._services.events.getDocumentFragment().addEventListener("legend-item-onhover", e => {
+		this.services.events.getDocumentFragment().addEventListener("legend-item-onhover", e => {
 			const { hoveredElement } = e.detail;
 
-			this._parent.selectAll("g.lines")
-				.transition(this._services.transitions.getTransition("legend-hover-line"))
+			this.parent.selectAll("g.lines")
+				.transition(this.services.transitions.getTransition("legend-hover-line"))
 				.attr("opacity", d => {
 					if (d.label !== hoveredElement.datum()["key"]) {
 						return 0.3;
@@ -27,9 +27,9 @@ export class Line extends Component {
 		});
 
 		// Un-highlight lines on legend item mouseouts
-		this._services.events.getDocumentFragment().addEventListener("legend-item-onmouseout", e => {
-			this._parent.selectAll("g.lines")
-				.transition(this._services.transitions.getTransition("legend-mouseout-line"))
+		this.services.events.getDocumentFragment().addEventListener("legend-item-onmouseout", e => {
+			this.parent.selectAll("g.lines")
+				.transition(this.services.transitions.getTransition("legend-mouseout-line"))
 				.attr("opacity", 1);
 		});
 	}
@@ -39,12 +39,12 @@ export class Line extends Component {
 
 		// D3 line generator function
 		this.lineGenerator = line()
-			.x((d, i) => this._services.axes.getXValue(d, i))
-			.y((d, i) => this._services.axes.getYValue(d, i))
-			.curve(this._services.curves.getD3Curve());
+			.x((d, i) => this.services.axes.getXValue(d, i))
+			.y((d, i) => this.services.axes.getYValue(d, i))
+			.curve(this.services.curves.getD3Curve());
 
 		const lineGroups = svg.selectAll("g.lines")
-			.data(this._model.getDisplayData().datasets, dataset => dataset.label);
+			.data(this.model.getDisplayData().datasets, dataset => dataset.label);
 
 		const enteringLineGroups = lineGroups.enter()
 			.append("g")
@@ -59,7 +59,7 @@ export class Line extends Component {
 			.attr("stroke", function (d) {
 				const parentDatum = select(this.parentNode).datum() as any;
 
-				return self._model.getStrokeColor(parentDatum.label);
+				return self.model.getStrokeColor(parentDatum.label);
 			})
 			.datum(function (d) {
 				const parentDatum = select(this.parentNode).datum() as any;
@@ -67,7 +67,7 @@ export class Line extends Component {
 
 				return parentDatum.data;
 			})
-			.transition(this._services.transitions.getTransition("line-update-enter", animate))
+			.transition(this.services.transitions.getTransition("line-update-enter", animate))
 			.attr("opacity", 1)
 			.attr("class", "line")
 			.attr("d", this.lineGenerator);

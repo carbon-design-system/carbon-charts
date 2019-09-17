@@ -54,7 +54,7 @@ export class Curves extends Service {
 
 	getD3Curve() {
 		let curveName;
-		const curveOptions = this._model.getOptions().curve;
+		const curveOptions = this.model.getOptions().curve;
 
 		if (curveOptions) {
 			if (typeof curveOptions === "string") { // curve: 'string'

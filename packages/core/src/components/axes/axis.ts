@@ -2,7 +2,8 @@
 import { Component } from "../component";
 import { AxisPositions, ScaleTypes, AxisTypes } from "../../interfaces";
 import { Tools } from "../../tools";
-import { ChartModel } from "src/model";
+import { ChartModel } from "../../model";
+import { DOMUtils } from "../../services";
 
 // D3 Imports
 import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
@@ -32,7 +33,7 @@ export class Axis extends Component {
 
 	createOrGrabScale() {
 		const { position } = this.options;
-		const scaleOptions = Tools.getProperty(this._model.getOptions(), "axes", position);
+		const scaleOptions = Tools.getProperty(this.model.getOptions(), "axes", position);
 
 		let scaleFunction;
 		if (scaleOptions && scaleOptions.type === ScaleTypes.TIME) {
@@ -46,7 +47,7 @@ export class Axis extends Component {
 		}
 
 		// If scale doesn't exist in the model, store it
-		if (!this._model.get(position)) {
+		if (!this.model.get(position)) {
 			const modelUpdates = {
 				[position]: this
 			};
@@ -61,7 +62,7 @@ export class Axis extends Component {
 				}
 			}
 
-			this._model.set(modelUpdates, true);
+			this.model.set(modelUpdates, true);
 		}
 
 		this.scale = scaleFunction;
@@ -76,7 +77,7 @@ export class Axis extends Component {
 
 	getScaleDomain() {
 		const { position } = this.options;
-		const scaleOptions = Tools.getProperty(this._model.getOptions(), "axes", position);
+		const scaleOptions = Tools.getProperty(this.model.getOptions(), "axes", position);
 
 		if (scaleOptions && scaleOptions.type === ScaleTypes.TIME) {
 			return [
@@ -86,11 +87,11 @@ export class Axis extends Component {
 		} else if (scaleOptions && scaleOptions.type === ScaleTypes.LOG) {
 			return [16, 2 ** 20];
 		} else if (scaleOptions && scaleOptions.type === ScaleTypes.LABELS) {
-			const labels = this._model.getDisplayData().labels;
+			const labels = this.model.getDisplayData().labels;
 			// if (labels) {
 				return labels;
 			// } else {
-			// 	return this._model.getDisplayData().datasets[0].data.map((d, i) => i + 1);
+			// 	return this.model.getDisplayData().datasets[0].data.map((d, i) => i + 1);
 			// }
 		} else {
 			return [this.getYMin(), this.getYMax()];
@@ -99,10 +100,10 @@ export class Axis extends Component {
 
 	render(animate = true) {
 		const { position: axisPosition } = this.options;
-		const axisOptions = Tools.getProperty(this._model.getOptions(), "axes", axisPosition);
+		const axisOptions = Tools.getProperty(this.model.getOptions(), "axes", axisPosition);
 
 		const svg = this.getContainerSVG();
-		const { width, height } = this._services.domUtils.getSVGElementSize(this._parent, { useAttrs: true });
+		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
 
 		let startPosition, endPosition;
 		if (axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP) {
@@ -157,7 +158,7 @@ export class Axis extends Component {
 
 		// Add axis into the parent
 		const axisRefExists = !svg.select(`g.axis.${axisPosition}`).empty();
-		const axisRef = this._services.domUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
+		const axisRef = this.services.domUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
 
 		// Position and transition the axis
 		switch (axisPosition) {
@@ -179,7 +180,7 @@ export class Axis extends Component {
 		if (!animate || !axisRefExists) {
 			axisRef.call(axis);
 		} else {
-			axisRef.transition(this._services.transitions.getTransition())
+			axisRef.transition(this.services.transitions.getTransition())
 				.call(axis);
 		}
 	}
@@ -187,7 +188,7 @@ export class Axis extends Component {
 	getValueFromScale(datum: any, index?: number) {
 		const value = isNaN(datum) ? datum.value : datum;
 		if (this.scaleType === ScaleTypes.LABELS) {
-			const correspondingLabel = this._model.getDisplayData().labels[index];
+			const correspondingLabel = this.model.getDisplayData().labels[index];
 			return this.scale(correspondingLabel) + this.scale.step() / 2;
 		} else if (this.scaleType === ScaleTypes.TIME) {
 			return this.scale(new Date(datum.label || datum.key));
@@ -197,8 +198,8 @@ export class Axis extends Component {
 	}
 
 	getYMax() {
-		const { datasets } = this._model.getDisplayData();
-		const { axes } = this._model.getOptions();
+		const { datasets } = this.model.getDisplayData();
+		const { axes } = this.model.getOptions();
 		let yMax;
 
 		yMax = max(datasets, (d: any) => {
@@ -215,8 +216,8 @@ export class Axis extends Component {
 	}
 
 	getYMin() {
-		const { datasets } = this._model.getDisplayData();
-		const { axes } = this._model.getOptions();
+		const { datasets } = this.model.getDisplayData();
+		const { axes } = this.model.getOptions();
 		let yMin;
 
 		yMin = min(datasets, (d: any) => {
@@ -235,6 +236,6 @@ export class Axis extends Component {
 	getElementRef() {
 		const { position } = this.options;
 
-		return this._services.domUtils.appendOrSelect(this.getContainerSVG(), `g.axis.${position}`);
+		return this.services.domUtils.appendOrSelect(this.getContainerSVG(), `g.axis.${position}`);
 	}
 }

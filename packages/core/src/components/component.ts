@@ -8,22 +8,22 @@ import { select } from "d3-selection";
 export class Component {
 	public type: string;
 
-	protected _parent: any;
+	protected parent: any;
 
 	protected options: any = {};
 
-	protected _model: ChartModel;
-	protected _services: any;
+	protected model: ChartModel;
+	protected services: any;
 
 	constructor(model: ChartModel, services: any, options?: any) {
-		this._model = model;
-		this._services = services;
+		this.model = model;
+		this.services = services;
 		this.options = options;
 
 		// Set parent element to shell SVG if no parent exists for component
-		if (!this._parent) {
+		if (!this.parent) {
 			this.setParent(
-				select(this._services.domUtils.getMainSVG())
+				select(this.services.domUtils.getMainSVG())
 			);
 		}
 
@@ -45,20 +45,20 @@ export class Component {
 
 	// Used to pass down information to the components
 	setModel(newObj) {
-		this._model = newObj;
+		this.model = newObj;
 	}
 
 	// Used to pass down information to the components
 	setServices(newObj) {
-		this._services = newObj;
+		this.services = newObj;
 	}
 
 	setParent(parent) {
-		const oldParent = this._parent;
-		this._parent = parent;
+		const oldParent = this.parent;
+		this.parent = parent;
 
 		if (this.type) {
-			this._parent.classed(`cc-${this.type}`, true);
+			this.parent.classed(`cc-${this.type}`, true);
 
 			if (oldParent) {
 				oldParent.classed(`cc-${this.type}`, false);
@@ -67,14 +67,14 @@ export class Component {
 	}
 
 	getParent() {
-		return this._parent;
+		return this.parent;
 	}
 
 	getContainerSVG() {
 		if (this.type) {
-			return this._services.domUtils.appendOrSelect(this._parent, `g.cc-${this.type}`);
+			return this.services.domUtils.appendOrSelect(this.parent, `g.cc-${this.type}`);
 		}
 
-		return this._parent;
+		return this.parent;
 	}
 }

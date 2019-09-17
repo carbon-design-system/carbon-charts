@@ -9,7 +9,7 @@ import { Transition, transition } from "d3-transition";
 
 export class Transitions extends Service {
 	getTransition(name?: string, animate?: boolean): Transition<any, any, any, any> {
-		if (this._model.getOptions().animations === false || animate === false) {
+		if (this.model.getOptions().animations === false || animate === false) {
 			return this.getInstantTransition(name);
 		}
 
