@@ -148,22 +148,6 @@ export class ChartModel {
 	 * Data labels
 	 *
 	*/
-	protected updateAllDataLabels() {
-		// If allDataLabels hasn't been initialized yet
-		// Set it to the current set of chart labels
-		if (!this.allDataLabels) {
-			this.allDataLabels = this.getDisplayData().labels;
-		} else {
-			// Loop through current chart labels
-			this.getDisplayData().labels.forEach(label => {
-				// If label hasn't been stored yet, store it
-				if (this.allDataLabels.indexOf(label) === -1) {
-					this.allDataLabels.push(label);
-				}
-			});
-		}
-	}
-
 	toggleDataset(changedLabel: string) {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 		const dataLabels = this.get("dataLabels");
@@ -221,5 +205,26 @@ export class ChartModel {
 	getFillScale() {
 		// Choose patternScale or colorScale based on the "accessibility" flag
 		return this.get("options").accessibility ? this.patternScale : this.colorScale;
+	}
+
+
+	/*
+	 * Data labels
+	 *
+	*/
+	protected updateAllDataLabels() {
+		// If allDataLabels hasn't been initialized yet
+		// Set it to the current set of chart labels
+		if (!this.allDataLabels) {
+			this.allDataLabels = this.getDisplayData().labels;
+		} else {
+			// Loop through current chart labels
+			this.getDisplayData().labels.forEach(label => {
+				// If label hasn't been stored yet, store it
+				if (this.allDataLabels.indexOf(label) === -1) {
+					this.allDataLabels.push(label);
+				}
+			});
+		}
 	}
 }
