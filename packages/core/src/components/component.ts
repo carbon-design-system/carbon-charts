@@ -1,6 +1,6 @@
 // Internal Imports
 import { ChartModel } from "../model";
-import errorHandler from "../services/error-handling";
+import { DOMUtils } from "../services";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -37,7 +37,7 @@ export class Component {
 	}
 
 	render(animate = true) {
-		errorHandler.INTERNAL.COMPONENT.MISSING_METHOD("render");
+		console.error("render() method is not implemented");
 	}
 
 	destroy() {
@@ -72,7 +72,7 @@ export class Component {
 
 	getContainerSVG() {
 		if (this.type) {
-			return this.services.domUtils.appendOrSelect(this.parent, `g.cc-${this.type}`);
+			return DOMUtils.appendOrSelect(this.parent, `g.cc-${this.type}`);
 		}
 
 		return this.parent;

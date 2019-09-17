@@ -158,7 +158,7 @@ export class Axis extends Component {
 
 		// Add axis into the parent
 		const axisRefExists = !svg.select(`g.axis.${axisPosition}`).empty();
-		const axisRef = this.services.domUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
+		const axisRef = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
 
 		// Position and transition the axis
 		switch (axisPosition) {
@@ -236,6 +236,6 @@ export class Axis extends Component {
 	getElementRef() {
 		const { position } = this.options;
 
-		return this.services.domUtils.appendOrSelect(this.getContainerSVG(), `g.axis.${position}`);
+		return DOMUtils.appendOrSelect(this.getContainerSVG(), `g.axis.${position}`);
 	}
 }

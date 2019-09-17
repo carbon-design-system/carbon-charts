@@ -197,7 +197,7 @@ export class Legend extends Component {
 				const clickedItem = select(this);
 				const clickedItemData = clickedItem.datum() as any;
 
-				self.model.applyDataFilter(clickedItemData.key);
+				self.model.toggleDataset(clickedItemData.key);
 			})
 			.on("mouseout", function () {
 				const hoveredItem = select(this);

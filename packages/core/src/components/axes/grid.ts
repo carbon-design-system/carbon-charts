@@ -2,6 +2,7 @@
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
 import { Tools } from "../../tools";
+import { DOMUtils } from "../../services";
 
 // D3 Imports
 import { axisBottom, axisLeft } from "d3-axis";
@@ -14,8 +15,8 @@ export class Grid extends Component {
 	render() {
 		// Draw the backdrop
 		this.drawBackdrop();
-		this.services.domUtils.appendOrSelect(this.backdrop, "g.x.grid");
-		this.services.domUtils.appendOrSelect(this.backdrop, "g.y.grid");
+		DOMUtils.appendOrSelect(this.backdrop, "g.x.grid");
+		DOMUtils.appendOrSelect(this.backdrop, "g.y.grid");
 
 		this.drawXGrid();
 		this.drawYGrid();
@@ -72,8 +73,8 @@ export class Grid extends Component {
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
 
 		// Get height from the grid
-		this.backdrop = this.services.domUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
-		const backdropRect = this.services.domUtils.appendOrSelect(this.backdrop, "rect.chart-grid-backdrop");
+		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
+		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, "rect.chart-grid-backdrop");
 
 		this.backdrop.merge(backdropRect)
 			.attr("x", xScaleStart)

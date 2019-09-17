@@ -53,21 +53,24 @@ export class Curves extends Service {
 	};
 
 	getD3Curve() {
-		let curveName;
+		let curveName = "curveLinear";
 		const curveOptions = this.model.getOptions().curve;
 
+		// Parse curve type whether the user provided a string
+		// Or an object with more options
 		if (curveOptions) {
 			if (typeof curveOptions === "string") { // curve: 'string'
 				curveName = curveOptions;
 			} else { // curve: { name: 'string' }
-				curveName = curveOptions.name || "curveLinear";
+				curveName = curveOptions.name;
 			}
-		} else {
-			curveName = "curveLinear";
 		}
 
 		if (this.curveTypes[curveName]) {
+			// Grab correct d3 curve function
 			let curve = this.curveTypes[curveName];
+
+			// Apply user-provided options to the d3 curve
 			if (curveOptions) {
 				Object.keys(curveOptions).forEach(optionName => {
 					if (curve[optionName]) {
@@ -79,6 +82,7 @@ export class Curves extends Service {
 			return curve;
 		}
 
-		return null;
+		console.warn(`The curve type '${curveName}' is invalid, using 'curveLinear' instead`);
+		return this.curveTypes["curveLinear"];
 	}
 }

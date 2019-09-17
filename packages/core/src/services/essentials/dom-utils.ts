@@ -103,6 +103,19 @@ export class DOMUtils extends Service {
 		};
 	}
 
+	static appendOrSelect(parent, query) {
+		const l = query.split(".");
+		const elementToAppend = l[0];
+
+		const selection = parent.select(query);
+		if (selection.empty()) {
+			return parent.append(elementToAppend)
+				.attr("class", l.slice(1).join(" "));
+		}
+
+		return selection;
+	}
+
 	protected svg: Element;
 
 	init() {
@@ -166,7 +179,7 @@ export class DOMUtils extends Service {
 		let containerHeight = holder.clientHeight;
 
 		// The resize callback function
-		const resizeCallback = this.debounce(15, (entries, observer) => {
+		const resizeCallback = Tools.debounce((entries, observer) => {
 			if (!holder) {
 				return;
 			}
@@ -178,34 +191,10 @@ export class DOMUtils extends Service {
 
 				this.services.events.dispatchEvent("chart-resize");
 			}
-		});
+		}, 15, false);
 
 		// Observe the behaviour of resizing on the holder
 		const resizeObserver = new ResizeObserver(resizeCallback);
 		resizeObserver.observe(holder);
-	}
-
-	appendOrSelect(parent, query) {
-		const l = query.split(".");
-		const elementToAppend = l[0];
-
-		const g = parent.select(query);
-		if (g.empty()) {
-			return parent.append(elementToAppend)
-				.attr("class", l.slice(1).join(" "));
-		}
-
-		return g;
-	}
-
-	debounce(ms, fn) {
-		let timer;
-
-		return function () {
-			clearTimeout(timer);
-			const args = Array.prototype.slice.call(arguments);
-			args.unshift(this);
-			timer = setTimeout(fn.bind.apply(fn, args), ms);
-		};
 	}
 }

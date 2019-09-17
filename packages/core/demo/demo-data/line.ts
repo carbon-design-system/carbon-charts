@@ -120,6 +120,7 @@ export const lineOptions = () => ({
 			primary: true
 		}
 	},
+	curve: "curveNatural",
 	legendClickable: true,
 	resizable: true
 });

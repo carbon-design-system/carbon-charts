@@ -1,6 +1,5 @@
 // Internal Imports
 import { ChartConfig, BaseChartOptions } from "./interfaces/index";
-import errorHandler from "./services/error-handling";
 
 // Misc
 import { ChartModel } from "./model";
@@ -60,7 +59,7 @@ export class Chart {
 	}
 
 	getComponents(): Array<any> {
-		errorHandler.INTERNAL.CHART.MISSING_METHOD("getComponents");
+		console.error("getComponents() method is not implemented");
 
 		return null;
 	}

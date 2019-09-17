@@ -14,37 +14,47 @@ export class ChartModel {
 	 * Function to be called when data or options update within the model
 	 * @type Function
 	 */
-	private _updateCallback: Function;
+	protected updateCallback: Function;
 
 	// Internal Model state
-	private _state: any = {
-		loading: false
-	};
+	protected state: any = {};
 
 	// Data labels
 	/**
 	 * A list of all the labels that have existed within the lifetime of the chart
 	 * @type Array<string>
 	 */
-	private _fixedDataLabels: Array<string>;
+	protected allDataLabels: Array<string>;
 
 	// Fill scales & fill related objects
-	private _patternScale = {};
-	private _colorScale: any = {};
-	// patternsService: PatternsService;
+	protected patternScale = {};
+	protected colorScale: any = {};
 
 	/**
 	 * @return {Array} The chart's display data
 	 */
-	getDisplayData() {
-		return this.get("data");
+	getDisplayData(processor?: Function) {
+		const { ACTIVE } = Configuration.legend.items.status;
+		const dataLabels = this.get("dataLabels");
+
+		if (this.get("data")) {
+			// Remove datasets that have been disabled
+			const displayData = Tools.clone(this.get("data"));
+			displayData.datasets = displayData.datasets.filter(dataset => {
+				return dataLabels[dataset.label] === ACTIVE;
+			});
+
+			return displayData;
+		}
+
+		return null;
 	}
 
 	/**
 	 * @return {Array} The chart's display data
 	 */
-	getRawData() {
-		return this.get("rawData");
+	getData() {
+		return this.get("data");
 	}
 
 	/**
@@ -60,22 +70,21 @@ export class ChartModel {
 
 		this.set({
 			data: newData,
-			rawData: newData,
 			dataLabels
 		});
 
-		return this._state.data;
+		return this.state.data;
 	}
 
 	/**
 	 * @return {Object} The chart's options
 	 */
 	getOptions() {
-		return this._state.options;
+		return this.state.options;
 	}
 
 	set(newState: any, skipUpdate?: boolean) {
-		this._state = Object.assign({}, this._state, newState);
+		this.state = Object.assign({}, this.state, newState);
 
 		if (!skipUpdate) {
 			this.update();
@@ -84,9 +93,9 @@ export class ChartModel {
 
 	get(property?: string) {
 		if (property) {
-			return this._state[property];
+			return this.state[property];
 		} else {
-			return this._state;
+			return this.state;
 		}
 	}
 
@@ -124,59 +133,56 @@ export class ChartModel {
 	 */
 	update() {
 		if (this.getDisplayData()) {
-			this.updateFixedLabels();
+			this.updateAllDataLabels();
 			this.setColorScale();
 
-			this._updateCallback();
+			this.updateCallback();
 		}
 	}
 
 	setUpdateCallback(cb: Function) {
-		this._updateCallback = cb;
+		this.updateCallback = cb;
 	}
 
 	/*
 	 * Data labels
 	 *
 	*/
-	updateFixedLabels() {
-		if (!this._fixedDataLabels) {
-			this._fixedDataLabels = this.getDisplayData().labels;
+	protected updateAllDataLabels() {
+		// If allDataLabels hasn't been initialized yet
+		// Set it to the current set of chart labels
+		if (!this.allDataLabels) {
+			this.allDataLabels = this.getDisplayData().labels;
 		} else {
-			this.getDisplayData().labels.forEach(element => {
-				if (this._fixedDataLabels.indexOf(element) === -1) {
-					this._fixedDataLabels.push(element);
+			// Loop through current chart labels
+			this.getDisplayData().labels.forEach(label => {
+				// If label hasn't been stored yet, store it
+				if (this.allDataLabels.indexOf(label) === -1) {
+					this.allDataLabels.push(label);
 				}
 			});
 		}
 	}
 
-	applyDataFilter(changedLabel: string) {
+	toggleDataset(changedLabel: string) {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 		const dataLabels = this.get("dataLabels");
-		const rawData = Tools.clone(this.getRawData());
 
 		const hasDeactivatedItems = Object.keys(dataLabels).some(label => dataLabels[label] === DISABLED);
+		// If there are deactivated items, toggle "changedLabel"
 		if (hasDeactivatedItems) {
 			dataLabels[changedLabel] = dataLabels[changedLabel] === DISABLED ? ACTIVE : DISABLED;
 		} else {
+			// If every item is active, then enable "changedLabel" and disable all other items
 			Object.keys(dataLabels).forEach(label => {
 				dataLabels[label] = (label === changedLabel ? ACTIVE : DISABLED);
 			});
 		}
 
-		// Update display data
-		const newDisplayData = rawData;
-		newDisplayData.datasets = newDisplayData.datasets.filter(dataset => dataLabels[dataset.label] === ACTIVE);
-
 		// Update model
 		this.set({
-			dataLabels,
-			data: newDisplayData
+			dataLabels
 		});
-
-		// Update chart
-		this.update();
 	}
 
 	/*
@@ -186,12 +192,12 @@ export class ChartModel {
 	setColorScale() {
 		if (this.getDisplayData().datasets[0].backgroundColors) {
 			this.getDisplayData().datasets.forEach(dataset => {
-				this._colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this._fixedDataLabels);
+				this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.allDataLabels);
 			});
 		} else {
 			const colors = colorPalettes.DEFAULT;
 			this.getDisplayData().datasets.forEach((dataset, i) => {
-				this._colorScale[dataset.label] = scaleOrdinal().range([colors[i]]).domain(this._fixedDataLabels);
+				this.colorScale[dataset.label] = scaleOrdinal().range([colors[i]]).domain(this.allDataLabels);
 			});
 		}
 	}
@@ -206,13 +212,14 @@ export class ChartModel {
 
 	getStrokeColor(datasetLabel: any, label?: any, value?: any) {
 		if (this.get("options").getStrokeColor) {
-			return this.get("options").getStrokeColor(datasetLabel, label, value) || this._colorScale[datasetLabel](label);
+			return this.get("options").getStrokeColor(datasetLabel, label, value) || this.colorScale[datasetLabel](label);
 		} else {
-			return this._colorScale[datasetLabel](label);
+			return this.colorScale[datasetLabel](label);
 		}
 	}
 
 	getFillScale() {
-		return this.get("options").accessibility ? this._patternScale : this._colorScale;
+		// Choose patternScale or colorScale based on the "accessibility" flag
+		return this.get("options").accessibility ? this.patternScale : this.colorScale;
 	}
 }
