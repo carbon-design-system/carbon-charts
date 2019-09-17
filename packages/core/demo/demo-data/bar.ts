@@ -182,5 +182,5 @@ export const stackedBarOptions = {
 	},
 	legendClickable: true,
 	resizable: true,
-	theme: getTheme()
+	theme: getTheme(),
 };

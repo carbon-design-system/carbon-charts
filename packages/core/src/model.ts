@@ -17,7 +17,9 @@ export class ChartModel {
 	protected updateCallback: Function;
 
 	// Internal Model state
-	protected state: any = {};
+	protected state: any = {
+		options: {}
+	};
 
 	// Data labels
 	/**
@@ -83,7 +85,7 @@ export class ChartModel {
 		return this.state.options;
 	}
 
-	set(newState: any, skipUpdate?: boolean) {
+	set(newState: any, skipUpdate = false) {
 		this.state = Object.assign({}, this.state, newState);
 
 		if (!skipUpdate) {
@@ -102,28 +104,11 @@ export class ChartModel {
 	/**
 	 *
 	 * @param newOptions New options to be set
-	 * @return {Object} The chart's options
 	 */
 	setOptions(newOptions) {
 		this.set({
-			options: newOptions
+			options: Tools.merge(this.getOptions(), newOptions)
 		});
-	}
-
-
-	/**
-	 *
-	 * @param newData New data to be set
-	 * @param newOptions New options to be set
-	 */
-	setDataAndOptions(newData, newOptions) {
-		if (newOptions) {
-			this.setOptions(newOptions);
-		}
-
-		if (newData) {
-			this.setData(newData);
-		}
 	}
 
 	/**

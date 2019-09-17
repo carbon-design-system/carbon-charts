@@ -24,10 +24,12 @@ export class Chart {
 		// Set model update callback
 		this.model.setUpdateCallback(this.update.bind(this));
 
-		this.model.set({ holder });
+		this.model.set({
+			holder
+		});
 
 		// Set model data & options
-		this.model.setDataAndOptions(chartConfigs.data, chartConfigs.options);
+		this.model.setData(chartConfigs.data);
 
 		setTimeout(() => {
 			this.init();

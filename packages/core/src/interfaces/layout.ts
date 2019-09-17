@@ -1,6 +1,6 @@
 import { LayoutDirection } from "./enums";
 
-export interface LayoutOptions {
+export interface LayoutConfigs {
 	/**
 	 * Direction/orientation of the layout
 	 */

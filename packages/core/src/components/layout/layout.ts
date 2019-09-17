@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { LayoutOptions, LayoutDirection, LayoutGrowth, LayoutComponentChild } from "../../interfaces/index";
+import { LayoutDirection, LayoutGrowth, LayoutComponentChild, LayoutConfigs } from "../../interfaces/index";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 
@@ -22,14 +22,13 @@ export class LayoutComponent extends Component {
 	type = "layout";
 
 	children: Array<LayoutComponentChild>;
-	options: LayoutOptions;
 
 	private _instanceCount: number;
 
-	constructor(model: ChartModel, services: any, children: Array<LayoutComponentChild>, options?: LayoutOptions) {
-		super(model, services, options);
+	constructor(model: ChartModel, services: any, children: Array<LayoutComponentChild>, configs?: LayoutConfigs) {
+		super(model, services, configs);
 
-		this.options = options;
+		this.configs = configs;
 		this.children = children;
 
 		this._instanceCount = LayoutComponent.instanceCount++;
@@ -79,8 +78,8 @@ export class LayoutComponent extends Component {
 
 		// Pass children data to the hierarchy layout
 		// And calculate sum of sizes
-		const directionIsReversed = (this.options.direction === LayoutDirection.ROW_REVERSE) ||
-			(this.options.direction === LayoutDirection.COLUMN_REVERSE);
+		const directionIsReversed = (this.configs.direction === LayoutDirection.ROW_REVERSE) ||
+			(this.configs.direction === LayoutDirection.COLUMN_REVERSE);
 		const hierarchyChildren = directionIsReversed ? this.children.reverse() : this.children;
 		let root = hierarchy({
 			children: hierarchyChildren
@@ -88,7 +87,7 @@ export class LayoutComponent extends Component {
 			.sum((d: any) => d.size);
 
 		// Grab the correct treemap tile function based on direction
-		const tileType = (this.options.direction === LayoutDirection.ROW || this.options.direction === LayoutDirection.ROW_REVERSE)
+		const tileType = (this.configs.direction === LayoutDirection.ROW || this.configs.direction === LayoutDirection.ROW_REVERSE)
 			? treemapDice : treemapSlice;
 
 		// Compute the position of all elements within the layout
@@ -98,7 +97,7 @@ export class LayoutComponent extends Component {
 			(root);
 
 		// TODORF - Remove
-		const horizontal = (this.options.direction === LayoutDirection.ROW || this.options.direction === LayoutDirection.ROW_REVERSE);
+		const horizontal = (this.configs.direction === LayoutDirection.ROW || this.configs.direction === LayoutDirection.ROW_REVERSE);
 
 		// Add new SVGs to the DOM for each layout child
 		const updatedSVGs = svg.selectAll(`svg.layout-child-${this._instanceCount}`)

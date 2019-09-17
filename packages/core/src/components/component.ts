@@ -10,15 +10,18 @@ export class Component {
 
 	protected parent: any;
 
-	protected options: any = {};
+	protected configs: any = {};
 
 	protected model: ChartModel;
 	protected services: any;
 
-	constructor(model: ChartModel, services: any, options?: any) {
+	constructor(model: ChartModel, services: any, configs?: any) {
 		this.model = model;
 		this.services = services;
-		this.options = options;
+
+		if (configs) {
+			this.configs = configs;
+		}
 
 		// Set parent element to shell SVG if no parent exists for component
 		if (!this.parent) {

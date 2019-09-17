@@ -62,7 +62,8 @@ const axisOptions: AxisChartOptions = Tools.merge({}, baseOptions, {
 const lineOptions: LineChartOptions = Tools.merge({}, axisOptions, {
 	points: {
 		// default point radius to 3
-		radius: 3
+		radius: 3,
+		filled: true
 	}
 });
 
@@ -229,18 +230,9 @@ export const grid = {
  * Options for line behaviour
  */
 export const lines = {
-	points: {
-		strokeWidth: 4,
-		mouseover: {
-			strokeWidth: 4,
-			strokeOpacity: 0.5,
-			fillOpacity: 1,
-		},
-		mouseout: {
-			strokeWidth: 0,
-			strokeWidthAccessible: 2,
-			strokeOpacity: 1
-		}
+	opacity: {
+		unselected: 0.3,
+		selected: 1
 	}
 };
 
@@ -344,7 +336,7 @@ export const tooltip = {
  */
 export const transitions = {
 	default: {
-		duration: 750
+		duration: 300
 	},
 	pie_slice_hover: {
 		duration: 100

@@ -122,7 +122,11 @@ export const lineOptions = () => ({
 	},
 	curve: "curveNatural",
 	legendClickable: true,
-	resizable: true
+	resizable: true,
+	points: {
+		filled: Math.random() < 0.5,
+		radius: Math.random() * 15
+	}
 });
 
 

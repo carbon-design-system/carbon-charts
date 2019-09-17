@@ -1,5 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
+import * as Configuration from "../../configuration";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -18,45 +20,57 @@ export class Scatter extends Component {
 	}
 
 	render(animate: boolean) {
+		// Chart options mixed with the internal configurations
+		const options = this.model.getOptions();
+
+		// Grab container SVG
 		const svg = this.getContainerSVG();
 
+		// Update data on dot groups
 		const dotGroups = svg.selectAll("g.dots")
 			.data(this.model.getDisplayData().datasets, dataset => dataset.label);
 
+
+		// Remove dot groups that need to be removed
+		dotGroups.exit()
+			.attr("opacity", 0)
+			.remove();
+
+		// Add the dot groups that need to be introduced
 		const dotGroupsEnter = dotGroups.enter()
 			.append("g")
 				.classed("dots", true);
 
+		// Update data on all circles
 		const dots = dotGroupsEnter.merge(dotGroups)
 			.selectAll("circle.dot")
 			.data((d, i) => this.addLabelsToDataPoints(d, i));
 
+		// Add the circles that need to be introduced
 		const dotsEnter = dots.enter()
 			.append("circle")
 			.attr("opacity", 0);
 
+		const { filled } = options.points;
+		// Apply styling & position
 		dotsEnter.merge(dots)
 			.raise()
 			.classed("dot", true)
-			.classed("filled", this.options.filled)
+			.classed("filled", filled)
 			.attr("cx", (d, i) => this.services.axes.getXValue(d, i))
 			.transition(this.services.transitions.getTransition("scatter-update-enter", animate))
 			.attr("cy", (d, i) => this.services.axes.getYValue(d, i))
-			.attr("r", 4)
+			.attr("r", options.points.radius)
 			.attr("fill", d => {
-				if (this.options.filled) {
+				if (filled) {
 					return "#f3f3f3";
 				} else {
 					return this.model.getFillScale()[d.datasetLabel](d.label) as any;
 				}
 			})
-			.attr("fill-opacity", this.options.filled ? 1 : 0.2)
+			.attr("fill-opacity", filled ? 1 : 0.2)
 			.attr("stroke", d => this.model.getStrokeColor(d.datasetLabel, d.label, d.value))
 			.attr("opacity", 1);
-
-		dotGroups.exit()
-			.attr("opacity", 0)
-			.remove();
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
@@ -99,7 +113,7 @@ export class Scatter extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true);
 
-				if (self.options.filled) {
+				if (self.configs.filled) {
 					hoveredElement.style("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
 				}
 
@@ -112,7 +126,7 @@ export class Scatter extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
-				if (self.options.filled) {
+				if (self.configs.filled) {
 					hoveredElement.style("fill", null);
 				}
 
