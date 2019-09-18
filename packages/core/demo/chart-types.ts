@@ -17,6 +17,7 @@ const {
 	lineOptions,
 	lineTimeSeriesOptions,
 	scatterTimeSeriesData,
+	scatterOptions,
 	scatterData,
 	// Combo
 	comboData,
@@ -93,7 +94,7 @@ export const chartTypes = [
 	{
 		id: "scatter",
 		name: "scatter",
-		options: lineOptions,
+		options: scatterOptions,
 		data: scatterData
 	},
 	{

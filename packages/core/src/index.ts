@@ -1,9 +1,9 @@
-// import { BaseChart } from "./base-chart";
-// import { BaseAxisChart } from "./base-axis-chart";
-
 import "./styles/style.scss";
 
-import { ScatterChart } from "./charts/scatter";
+import {
+	LineChart,
+	ScatterChart
+} from "./charts/index";
 
 import * as colorPalettes from "./services/colorPalettes";
 // TODO 1.0 - Remove deprecated API
@@ -14,5 +14,6 @@ export {
 	colorPalettes,
 	// BaseChart,
 	// BaseAxisChart,
+	LineChart,
 	ScatterChart
 };

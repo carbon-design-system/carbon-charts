@@ -23,7 +23,7 @@ import {
 // TODO
 // - Support nested layout components
 // - What if there is no "growth" object?
-export class ScatterChart extends AxisChart {
+export class LineChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<ScatterChartOptions>) {
 		super(holder, chartConfigs);
 
@@ -31,7 +31,7 @@ export class ScatterChart extends AxisChart {
 			// Merge the default options for this chart
 			// With the user provided options
 			this.model.setOptions(
-				Tools.merge(Configuration.options.scatterChart, chartConfigs.options)
+				Tools.merge(Configuration.options.lineChart, chartConfigs.options)
 			);
 		}
 	}
@@ -41,6 +41,7 @@ export class ScatterChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
+			new Line(this.model, this.services),
 			new Scatter(this.model, this.services)
 		];
 

@@ -8,65 +8,122 @@ export const curvedLineData = {
 			label: "Dataset 1",
 			backgroundColors: [colors[0]],
 			data: [
-				65000,
-				79000,
-				49213,
-				51213,
-				16932
+				{
+					date: new Date(2019, 0, 1),
+					value: 10000
+				},
+				{
+					date: new Date(2019, 0, 5),
+					value: 65000
+				},
+				{
+					date: new Date(2019, 0, 8),
+					value: 10000
+				},
+				{
+					date: new Date(2019, 0, 13),
+					value: 49213
+				},
+				{
+					date: new Date(2019, 0, 17),
+					value: 51213
+				}
 			]
 		},
 		{
 			label: "Dataset 2",
 			backgroundColors: [colors[1]],
 			data: [
-				80000,
-				21312,
-				56456,
-				21312,
-				0
+				{
+					date: new Date(2019, 0, 2),
+					value: 0
+				},
+				{
+					date: new Date(2019, 0, 6),
+					value: 57312
+				},
+				{
+					date: new Date(2019, 0, 8),
+					value: 21432
+				},
+				{
+					date: new Date(2019, 0, 15),
+					value: 70323
+				},
+				{
+					date: new Date(2019, 0, 19),
+					value: 21300
+				}
 			]
 		},
 		{
 			label: "Dataset 3",
 			backgroundColors: [colors[2]],
 			data: [
-				12312,
-				34232,
-				39232,
-				12312,
-				34234
+				{
+					date: new Date(2019, 0, 1),
+					value: 50000
+				},
+				{
+					date: new Date(2019, 0, 5),
+					value: 15000
+				},
+				{
+					date: new Date(2019, 0, 8),
+					value: 20000
+				},
+				{
+					date: new Date(2019, 0, 13),
+					value: 39213
+				},
+				{
+					date: new Date(2019, 0, 17),
+					value: 61213
+				}
+			]
+		},
+		{
+			label: "Dataset 4",
+			backgroundColors: [colors[3]],
+			data: [
+				{
+					date: new Date(2019, 0, 2),
+					value: 10
+				},
+				{
+					date: new Date(2019, 0, 6),
+					value: 37312
+				},
+				{
+					date: new Date(2019, 0, 8),
+					value: 51432
+				},
+				{
+					date: new Date(2019, 0, 15),
+					value: 40323
+				},
+				{
+					date: new Date(2019, 0, 19),
+					value: 31300
+				}
 			]
 		}
 	]
 };
 
 export const curvedLineOptions = {
-	accessibility: false,
-	scales: {
-		x: {
-			title: "2018 Annual Sales Figures",
+	title: "Line Chart (Time Series)",
+	axes: {
+		right: {
+			secondary: true
 		},
-		y: {
-			title: "Dollars (CAD)",
-			yMaxAdjuster: yMax => yMax * 1.2,
-			yMinAdjuster: yMin => yMin * 1.2,
-			formatter: axisValue => `${axisValue / 1000}k`
-		},
-		y2: {
-			ticks: {
-				max: 1,
-				min: 0
-			}
+		top: {
+			type: "time",
+			primary: true
 		}
 	},
-	curve: {
-		name: "curveNatural"
-	},
-	legendClickable: true,
-	resizable: true,
-	theme: getTheme()
+	curve: "curveNatural"
 };
-
 
 export const lineData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -107,7 +164,7 @@ export const lineData = {
 	]
 };
 
-export const lineOptions = () => ({
+export const lineOptions = {
 	// animations: false,
 	accessibility: false,
 	axes: {
@@ -129,162 +186,6 @@ export const lineOptions = () => ({
 		filled: Math.random() < 0.5,
 		radius: 3 + Math.random() * 8
 	}
-});
-
-
-export const lineTimeSeriesOptions = () => ({
-	title: "Line",
-	// animations: false,
-	accessibility: false,
-	curve: "curveNatural",
-	axes: {
-		bottom: {
-			type: "labels",
-			title: "2018 Annual Sales Figures",
-
-		},
-		left: {
-			type: "log",
-			title: "2018 Annual Sales Figures",
-
-		},
-		right: {
-			// formatter: val => `${(val/80000) * 100}%`,
-
-		},
-		top: {
-			type: "labels",
-		}
-	},
-	grid: {
-		y: {
-			numberOfTicks: 20
-		}
-	},
-	legendClickable: true,
-	resizable: true
-});
-
-
-export const scatterTimeSeriesData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
-	datasets: [
-		{
-			label: "Dataset 1",
-			backgroundColors: [colors[0]],
-			data: [
-				{
-					key: new Date(2019, 0, 1),
-					value: 10000
-				},
-				{
-					key: new Date(2019, 0, 5),
-					value: 65000
-				},
-				{
-					key: new Date(2019, 0, 8),
-					value: 10000
-				},
-				{
-					key: new Date(2019, 0, 13),
-					value: 49213
-				},
-				{
-					key: new Date(2019, 0, 17),
-					value: 51213
-				}
-			]
-		},
-		{
-			label: "Dataset 2",
-			backgroundColors: [colors[1]],
-			data: [
-				{
-					key: new Date(2019, 0, 2),
-					value: 0
-				},
-				{
-					key: new Date(2019, 0, 6),
-					value: 57312
-				},
-				{
-					key: new Date(2019, 0, 8),
-					value: 21432
-				},
-				{
-					key: new Date(2019, 0, 15),
-					value: 70323
-				},
-				{
-					key: new Date(2019, 0, 19),
-					value: 21300
-				}
-			]
-		},
-		{
-			label: "Dataset 3",
-			backgroundColors: [colors[2]],
-			data: [
-				{
-					key: new Date(2019, 0, 1),
-					value: 50000
-				},
-				{
-					key: new Date(2019, 0, 5),
-					value: 15000
-				},
-				{
-					key: new Date(2019, 0, 8),
-					value: 20000
-				},
-				{
-					key: new Date(2019, 0, 13),
-					value: 39213
-				},
-				{
-					key: new Date(2019, 0, 17),
-					value: 61213
-				}
-			]
-		},
-		{
-			label: "Dataset 4",
-			backgroundColors: [colors[3]],
-			data: [
-				{
-					key: new Date(2019, 0, 2),
-					value: 10
-				},
-				{
-					key: new Date(2019, 0, 6),
-					value: 37312
-				},
-				{
-					key: new Date(2019, 0, 8),
-					value: 51432
-				},
-				{
-					key: new Date(2019, 0, 15),
-					value: 40323
-				},
-				{
-					key: new Date(2019, 0, 19),
-					value: 31300
-				}
-			]
-		},
-		// {
-		// 	label: "Dataset 3",
-		// 	backgroundColors: [colors[2]],
-		// 	data: [
-		// 		41200,
-		// 		23400,
-		// 		34210,
-		// 		1400,
-		// 		42100
-		// 	]
-		// }
-	]
 };
 
 export const scatterData = {
@@ -358,4 +259,18 @@ export const scatterData = {
 			]
 		}
 	]
+};
+
+export const scatterOptions = {
+	title: "Scatter Chart",
+	axes: {
+		top: {
+			title: "2018 Annual Sales Figures",
+			type: "labels",
+			secondary: true
+		},
+		right: {
+			primary: true
+		}
+	}
 };
