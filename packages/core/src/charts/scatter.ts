@@ -31,7 +31,10 @@ export class ScatterChart extends AxisChart {
 			// Merge the default options for this chart
 			// With the user provided options
 			this.model.setOptions(
-				Tools.merge(Configuration.options.scatterChart, chartConfigs.options)
+				Tools.merge(
+					Tools.clone(Configuration.options.scatterChart),
+					chartConfigs.options
+				)
 			);
 		}
 	}

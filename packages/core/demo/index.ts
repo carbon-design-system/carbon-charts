@@ -204,17 +204,17 @@ chartTypes.forEach(type => {
 			case "curved-line":
 			case "line":
 			case "line-step":
-					classyCharts[type.id] = new LineChart(
-						classyContainer,
-						{
-							data: type.data,
-							options: Object.assign({}, type.options, {type: type.id}),
-						}
-					);
+				classyCharts[type.id] = new LineChart(
+					classyContainer,
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id}),
+					}
+				);
 
-					setDemoActionsEventListener(type.id, type.data);
+				setDemoActionsEventListener(type.id, type.data);
 
-					break;
+				break;
 			case "pie":
 				// classyCharts[type.id] = new PieChart(
 				// 	classyContainer,

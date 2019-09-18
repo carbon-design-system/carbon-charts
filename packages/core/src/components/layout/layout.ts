@@ -17,7 +17,7 @@ window["ccount"] = 0;
 export class LayoutComponent extends Component {
 	// Give every layout component a distinct ID
 	// so they don't interfere when querying elements
-	static instanceCount = 0;
+	static instanceCount = Math.floor(Math.random() * 99999999999);
 
 	type = "layout";
 
