@@ -69,14 +69,17 @@ export const chartTypes = [
 	},
 	{
 		id: "line",
-		name: "Line",
+		name: "Line Chart (Time Series)",
 		options: lineOptions,
 		data: lineData
 	},
 	{
 		id: "line-step",
 		name: "Step",
-		options: Object.assign({}, lineOptions, {curve: "curveStepAfter"}),
+		options: Object.assign({}, lineOptions, {
+			title: "Step Chart (Time Series)",
+			curve: "curveStepAfter"
+		}),
 		data: lineData
 	},
 	{
