@@ -1,6 +1,5 @@
 import { ChartType } from "./enums";
-import { LegendOptions, TooltipOptions, GridOptions } from "./components";
-import { AxisOptions } from "./axis-scales";
+import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
 
 /**
  * Base chart options common to any chart
@@ -52,12 +51,7 @@ export interface BaseChartOptions {
  * Options common to any chart with an axis
  */
 export interface AxisChartOptions extends BaseChartOptions {
-	axes?: {
-		left?: AxisOptions;
-		bottom?: AxisOptions;
-		right?: AxisOptions;
-		top?: AxisOptions;
-	};
+	axes?: AxesOptions;
 	grid?: GridOptions;
 }
 

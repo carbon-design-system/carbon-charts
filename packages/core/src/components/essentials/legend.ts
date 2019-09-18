@@ -146,7 +146,7 @@ export class Legend extends Component {
 			.on("mouseout", null)
 			.remove();
 
-		const { legendClickable } = this.model.getOptions();
+		const legendClickable = Tools.getProperty(this.model.getOptions(), "legend", "clickable");
 		svg.classed("clickable", legendClickable);
 
 		if (legendClickable && addedLegendItems.size() > 0) {

@@ -120,12 +120,14 @@ export const lineOptions = () => ({
 			primary: true
 		}
 	},
+	grid: {
+		strokeColor: "red"
+	},
 	curve: "curveNatural",
-	legendClickable: true,
 	resizable: true,
 	points: {
 		filled: Math.random() < 0.5,
-		radius: Math.random() * 15
+		radius: 3 + Math.random() * 8
 	}
 });
 

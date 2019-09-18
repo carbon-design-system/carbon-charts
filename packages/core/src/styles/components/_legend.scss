@@ -6,8 +6,10 @@ g.cc-legend {
 			stroke-width: 1px;
 			stroke-opacity: 1;
 		}
+	}
 
-		&:hover {
+	&.clickable {
+		g.legend-item:hover {
 			cursor: pointer;
 		}
 	}

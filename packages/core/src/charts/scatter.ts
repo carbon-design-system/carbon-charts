@@ -3,10 +3,7 @@ import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
 import {
 	ChartConfig,
-	ScatterChartOptions,
-	ChartType,
-	AxisPositions,
-	BaseChartOptions
+	ScatterChartOptions
 } from "../interfaces/index";
 import { Tools } from "../tools";
 
@@ -31,13 +28,16 @@ export class ScatterChart extends AxisChart {
 		super(holder, chartConfigs);
 
 		if (chartConfigs.options) {
+			// Merge the default options for this chart
+			// With the user provided options
 			this.model.setOptions(
-				Tools.merge(Configuration.options.LINE, chartConfigs.options)
+				Tools.merge(Configuration.options.lineChart, chartConfigs.options)
 			);
 		}
 	}
 
 	getComponents() {
+		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
@@ -45,6 +45,7 @@ export class ScatterChart extends AxisChart {
 			new Scatter(this.model, this.services)
 		];
 
+		// Grab base axis chart components from AxisChart
 		return this.getAxisChartComponents(graphFrameComponents);
 	}
 }
