@@ -105,7 +105,7 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		// classyChartObject.setData(dataPromise);
 	} else {
 		classyChartObject.model.setData(newData);
-		classyChartObject.model.setOptions(chartTypes[11].options);
+		// classyChartObject.model.setOptions(chartTypes[11].options);
 	}
 };
 
