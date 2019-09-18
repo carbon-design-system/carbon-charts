@@ -114,9 +114,7 @@ export class Scatter extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true);
 
-				if (self.configs.filled) {
-					hoveredElement.style("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
-				}
+				hoveredElement.style("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
@@ -127,8 +125,8 @@ export class Scatter extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
-				if (self.configs.filled) {
-					hoveredElement.style("fill", null);
+				if (!self.configs.filled) {
+					hoveredElement.style("fill", "#f3f3f3");
 				}
 
 				// Hide tooltip
