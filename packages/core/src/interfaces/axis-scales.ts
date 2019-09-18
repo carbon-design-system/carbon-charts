@@ -36,3 +36,14 @@ export interface AxisOptions {
 		formatter?: Function;
 	};
 }
+
+
+/**
+ * customize the axes components
+ */
+export interface AxesOptions {
+	left?: AxisOptions;
+	bottom?: AxisOptions;
+	right?: AxisOptions;
+	top?: AxisOptions;
+}

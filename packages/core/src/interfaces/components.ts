@@ -52,4 +52,5 @@ export interface GridOptions {
 	x?: {
 		numberOfTicks?: number;
 	};
+	strokeColor?: string;
 }
