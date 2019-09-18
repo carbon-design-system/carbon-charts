@@ -165,26 +165,16 @@ export const lineData = {
 };
 
 export const lineOptions = {
-	// animations: false,
-	accessibility: false,
+	title: "yoyo",
 	axes: {
 		top: {
 			title: "2018 Annual Sales Figures",
-			type: Math.random() > 0.5 ? "labels" : "linear",
+			type: "labels",
 			secondary: true
 		},
 		right: {
 			primary: true
 		}
-	},
-	grid: {
-		strokeColor: "red"
-	},
-	curve: "curveNatural",
-	resizable: true,
-	points: {
-		filled: Math.random() < 0.5,
-		radius: 3 + Math.random() * 8
 	}
 };
 
