@@ -8,7 +8,7 @@ import { DOMUtils } from "../../services";
 // D3 Imports
 import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
-import { min, max } from "d3-array";
+import { min, max, extent } from "d3-array";
 import { timeFormat } from "d3-time-format";
 
 export class Axis extends Component {
@@ -77,23 +77,39 @@ export class Axis extends Component {
 		const { position } = this.configs;
 		const scaleOptions = Tools.getProperty(this.model.getOptions(), "axes", position);
 
-		if (scaleOptions && scaleOptions.type === ScaleTypes.TIME) {
-			return [
-				new Date(2019, 0, 1),
-				new Date(2019, 0, 25)
-			];
-		} else if (scaleOptions && scaleOptions.type === ScaleTypes.LOG) {
-			return [16, 2 ** 20];
-		} else if (scaleOptions && scaleOptions.type === ScaleTypes.LABELS) {
+		if (scaleOptions && scaleOptions.type === ScaleTypes.LABELS) {
 			const labels = this.model.getDisplayData().labels;
-			// if (labels) {
+			if (labels) {
 				return labels;
-			// } else {
-			// 	return this.model.getDisplayData().datasets[0].data.map((d, i) => i + 1);
-			// }
-		} else {
-			return [this.getYMin(), this.getYMax()];
+			} else {
+				return this.model.getDisplayData().datasets[0].data.map((d, i) => i + 1);
+			}
 		}
+
+		const { datasets } = this.model.getDisplayData();
+		const domain = extent(
+			// Get all the chart's data values in a flat array
+			datasets.reduce((m, dataset: any) => {
+				dataset.data.forEach((datum: any) => {
+					if (scaleOptions.type === ScaleTypes.TIME) {
+						m = m.concat(datum.date);
+					} else {
+						m = m.concat(isNaN(datum) ? datum.value : datum);
+					}
+				});
+
+				return m;
+			}, [])
+		);
+
+		if (scaleOptions.type === ScaleTypes.TIME) {
+			return [
+				new Date(domain[0]),
+				new Date(domain[1])
+			];
+		}
+
+		return domain;
 	}
 
 	render(animate = true) {
@@ -189,7 +205,7 @@ export class Axis extends Component {
 			const correspondingLabel = this.model.getDisplayData().labels[index];
 			return this.scale(correspondingLabel) + this.scale.step() / 2;
 		} else if (this.scaleType === ScaleTypes.TIME) {
-			return this.scale(new Date(datum.label || datum.key));
+			return this.scale(new Date(datum.date));
 		} else {
 			return this.scale(value);
 		}

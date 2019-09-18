@@ -63,12 +63,12 @@ export class Scatter extends Component {
 			.attr("r", options.points.radius)
 			.attr("fill", d => {
 				if (filled) {
-					return "#f3f3f3";
-				} else {
 					return this.model.getFillScale()[d.datasetLabel](d.label) as any;
+				} else {
+					return "#f3f3f3";
 				}
 			})
-			.attr("fill-opacity", filled ? 1 : 0.2)
+			.attr("fill-opacity", filled ? 0.2 : 1)
 			.attr("stroke", d => this.model.getStrokeColor(d.datasetLabel, d.label, d.value))
 			.attr("opacity", 1);
 
@@ -100,7 +100,8 @@ export class Scatter extends Component {
 		const { labels } = this.model.getDisplayData();
 
 		return d.data.map((datum, i) => ({
-			label: datum.key || labels[i],
+			date: datum.date,
+			label: labels[i],
 			datasetLabel: d.label,
 			value: isNaN(datum) ? datum.value : datum
 		}));

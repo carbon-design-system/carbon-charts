@@ -93,15 +93,19 @@ export class AxisChart extends Chart {
 			}
 		};
 
+		// Add chart title if it exists
+		const topLevelLayoutComponents = [];
+		if (this.model.getOptions().title) {
+			topLevelLayoutComponents.push(titleComponent);
+		}
+		topLevelLayoutComponents.push(fullFrameComponent);
+
 		return [
 			new Tooltip(this.model, this.services),
 			new LayoutComponent(
 				this.model,
 				this.services,
-				[
-					titleComponent,
-					fullFrameComponent
-				],
+				topLevelLayoutComponents,
 				{
 					direction: LayoutDirection.COLUMN
 				}

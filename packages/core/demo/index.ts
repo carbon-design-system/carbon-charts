@@ -1,6 +1,6 @@
 import {
 	// BarChart,
-	// LineChart,
+	LineChart,
 	// PieChart,
 	// DonutChart,
 	// ComboChart,
@@ -105,7 +105,7 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		// classyChartObject.setData(dataPromise);
 	} else {
 		classyChartObject.model.setData(newData);
-		classyChartObject.model.setOptions(chartTypes[11].options());
+		classyChartObject.model.setOptions(chartTypes[11].options);
 	}
 };
 
@@ -195,7 +195,7 @@ chartTypes.forEach(type => {
 					classyContainer,
 					{
 						data: type.data,
-						options: Object.assign({}, type.options(), {type: type.id}),
+						options: Object.assign({}, type.options, {type: type.id}),
 					}
 				);
 
@@ -204,17 +204,17 @@ chartTypes.forEach(type => {
 			case "curved-line":
 			case "line":
 			case "line-step":
-					// classyCharts[type.id] = new LineChart(
-					// 	classyContainer,
-					// 	{
-					// 		data: type.data,
-					// 		options: Object.assign({}, type.options, {type: type.id}),
-					// 	}
-					// );
+					classyCharts[type.id] = new LineChart(
+						classyContainer,
+						{
+							data: type.data,
+							options: Object.assign({}, type.options, {type: type.id}),
+						}
+					);
 
-					// setDemoActionsEventListener(type.id, type.data);
+					setDemoActionsEventListener(type.id, type.data);
 
-					// break;
+					break;
 			case "pie":
 				// classyCharts[type.id] = new PieChart(
 				// 	classyContainer,
