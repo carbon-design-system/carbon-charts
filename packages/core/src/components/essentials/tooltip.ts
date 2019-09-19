@@ -29,11 +29,12 @@ export class Tooltip extends Component {
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.getDocumentFragment().addEventListener("show-tooltip", e => {
 			const data = select(event.target).datum() as any;
+
 			if (Tools.getProperty(this.model.getOptions(), "tooltip", "size") === Configuration.tooltip.size.COMPACT) {
-				tooltipTextConainter.html(`<b>${data.datasetLabel}:</b> ${data.value}<br/>`);
+				tooltipTextConainter.html(`<b>${data.datasetLabel || data.data.label}:</b> ${data.value}<br/>`);
 			} else {
 				tooltipTextConainter.html(`
-					<p class='bignum'>${data.datasetLabel}</p>
+					<p class='bignum'>${data.datasetLabel || data.data.label}</p>
 					<p>${data.value}</p>
 				`);
 			}
