@@ -49,13 +49,13 @@ export class Pie extends Component {
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
 		this.arc = arc()
-			.innerRadius(2)
+			.innerRadius(options.pie.innerRadius)
 			.outerRadius(radius);
 
 		// Set the hover arc radius
 		this.hoverArc = arc()
-			.innerRadius(2)
-			.outerRadius(radius + 3);
+			.innerRadius(options.pie.innerRadius)
+			.outerRadius(radius + options.pie.hoverArc.outerRadiusOffset);
 
 		// Setup the pie layout
 		const pieLayout = pie()
@@ -63,7 +63,7 @@ export class Pie extends Component {
 			.sort(function(a: any, b: any) {
 				return b.value - a.value;
 			})
-			.padAngle(0.007);
+			.padAngle(options.pie.padAngle);
 
 		// Update data on all slices
 		const paths = svg.selectAll("path.slice")
@@ -158,9 +158,12 @@ export class Pie extends Component {
 
 	// Helper functions
 	protected computeRadius() {
+		const options = this.model.getOptions();
+
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
 		const radius: number = Math.min(width, height) / 2;
-		return radius - 15;
+
+		return radius + options.pie.radiusOffset;
 	}
 
 	/**
@@ -181,8 +184,8 @@ export class Pie extends Component {
 	 */
 	protected getChartLabelTranslateString(element, d, radius, totalSlices?) {
 		const textLength = element.getComputedTextLength();
-		const textOffsetX = textLength / 2;
-		const textOffsetY = parseFloat(getComputedStyle(element).fontSize) / 2;
+		const textOffsetX = textLength / 2 + 5;
+		const textOffsetY = parseFloat(getComputedStyle(element).fontSize) / 2 + 5;
 
 		const marginedRadius = radius + 2;
 		// const marginedRadius = radius + Configuration.pie.label.margin;
