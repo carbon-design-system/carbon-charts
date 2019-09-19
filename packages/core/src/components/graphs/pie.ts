@@ -79,6 +79,43 @@ export class Pie extends Component {
 		// Position Pie
 		const { width, height } = DOMUtils.getSVGElementSize(svg, { useBBox: true });
 		svg.attr("transform", `translate(${width / 2}, ${height / 2 + 5})`);
+
+		this.addEventListeners();
+	}
+
+	addEventListeners() {
+		const self = this;
+		this.parent.selectAll("path.slice")
+			.on("mouseover", function() {
+				const hoveredElement = select(this);
+
+				hoveredElement.classed("hovered", true)
+					.transition(self.services.transitions.getTransition("pie_slice_hover"))
+					.attr("d", self.hoverArc);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent("pie-slice-mouseover", hoveredElement);
+
+				// Show tooltip
+				self.services.events.dispatchEvent("show-tooltip", {
+					hoveredElement
+				});
+			})
+			.on("mouseout", function() {
+				const hoveredElement = select(this);
+				hoveredElement.classed("hovered", false)
+					.transition(self.services.transitions.getTransition("pie_slice_hover"))
+					.attr("d", self.arc);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent("pie-slice-mouseout", hoveredElement);
+
+				// Hide tooltip
+				self.services.events.dispatchEvent("hide-tooltip", {
+					hoveredElement
+				});
+			})
+			.on("click", d => self.services.events.dispatchEvent("pie-slice-click", d));
 	}
 
 	// Helper functions
