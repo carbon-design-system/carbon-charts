@@ -77,17 +77,16 @@ export class Axis extends Component {
 		const { position } = this.configs;
 		const scaleOptions = Tools.getProperty(this.model.getOptions(), "axes", position);
 
+		const { datasets, labels } = this.model.getDisplayData();
+
 		// If scale is a LABELS scale, return some labels as the domain
 		if (scaleOptions && scaleOptions.type === ScaleTypes.LABELS) {
-			const labels = this.model.getDisplayData().labels;
 			if (labels) {
 				return labels;
 			} else {
 				return this.model.getDisplayData().datasets[0].data.map((d, i) => i + 1);
 			}
 		}
-
-		const { datasets, labels } = this.model.getDisplayData();
 
 		// Get the extent of the domain
 		let domain;
@@ -97,7 +96,7 @@ export class Axis extends Component {
 				labels.reduce((m, label: any, i) => {
 					const correspondingValues = datasets.map(dataset => dataset.data[i]);
 					const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
-	
+
 					// Save both the total value and the minimum
 					return m.concat(totalValue, min(correspondingValues));
 				}, [])
@@ -155,7 +154,7 @@ export class Axis extends Component {
 		if (axisOptions && axisOptions.type === ScaleTypes.LABELS) {
 			scale.rangeRound([startPosition, endPosition]);
 		} else {
-			scale.range([startPosition, endPosition])
+			scale.range([startPosition, endPosition]);
 				// .nice();
 		}
 
