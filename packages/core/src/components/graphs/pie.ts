@@ -7,14 +7,26 @@ import { Tools } from "../../tools";
 // D3 Imports
 import { select } from "d3-selection";
 import { arc, pie } from "d3-shape";
+import { interpolate } from "d3-interpolate";
+
+// Pie slice tween function
+function arcTween(a, arcFunc) {
+	const i = interpolate(this._current, a);
+
+	return t => {
+		this._current = i(t);
+		return arcFunc(this._current);
+	};
+}
 
 export class Pie extends Component {
 	type = "pie";
 
+	// We need to store our arcs
+	// So that addEventListeners()
+	// Can access them
 	arc: any;
 	hoverArc: any;
-	pie: any;
-	path: any;
 
 	init() {
 
@@ -34,44 +46,70 @@ export class Pie extends Component {
 
 		const dataList = this.getDataList();
 
-		// Compute the correct inner & outer radius
+		// Compute the outer radius needed
 		const radius = this.computeRadius();
 		this.arc = arc()
 			.innerRadius(2)
 			.outerRadius(radius);
 
+		// Set the hover arc radius
 		this.hoverArc = arc()
 			.innerRadius(2)
 			.outerRadius(radius + 3);
 
-		this.pie = pie()
+		// Setup the pie layout
+		const pieLayout = pie()
 			.value((d: any) => d.value)
 			.sort(function(a: any, b: any) {
 				return b.value - a.value;
 			})
 			.padAngle(0.007);
 
-		// Draw the slices
-		this.path = svg.selectAll("path.slice")
-			.data(this.pie(dataList))
-			.enter()
+		// Update data on all slices
+		const paths = svg.selectAll("path.slice")
+			.data(pieLayout(dataList));
+
+		// Remove slices that need to be exited
+		paths.exit()
+			.attr("opacity", 0)
+			.remove();
+
+		// Add new slices that are being introduced
+		const enteringPaths = paths.enter()
 			.append("path")
 			.classed("slice", true)
-			.attr("d", this.arc)
+			.attr("opacity", 0);
+
+		// Update styles & position on existing and entering slices
+		enteringPaths.merge(paths)
 			.attr("fill", d => {
 				const datasetLabel = this.model.getDisplayData().datasets[0].label;
 				return this.model.getFillScale()[datasetLabel](d.data.label);
 			})
-			.each(function (d) { this._current = d; });
+			.attr("d", this.arc)
+			.transition(this.services.transitions.getTransition("pie-slice-enter-update", animate))
+			.attr("opacity", 1)
+			.attrTween("d", function (a) {
+				return arcTween.bind(this)(a, self.arc);
+			});
 
 		// Draw the slice labels
 		const self = this;
-		svg.selectAll("text.chart-label")
-			.data(this.pie(dataList), (d: any) => d.data.label)
-			.enter()
+		const labels = svg.selectAll("text.chart-label")
+			.data(pieLayout(dataList), (d: any) => d.data.label);
+
+		// Remove labels that are existing
+		labels.exit()
+			.attr("opacity", 0)
+			.remove();
+
+		// Add labels that are being introduced
+		const enteringLabels = labels.enter()
 			.append("text")
-			.classed("chart-label", true)
-			// .attr("dy", Configuration.pie.label.dy)
+			.classed("chart-label", true);
+
+		// Update styles & position on existing & entering labels
+		enteringLabels.merge(labels)
 			.style("text-anchor", "middle")
 			.text(d => self.getSliceLabelText(d.data.value, dataList))
 			.attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius, dataList.length); });
@@ -80,6 +118,7 @@ export class Pie extends Component {
 		const { width, height } = DOMUtils.getSVGElementSize(svg, { useBBox: true });
 		svg.attr("transform", `translate(${width / 2}, ${height / 2 + 5})`);
 
+		// Add event listeners
 		this.addEventListeners();
 	}
 

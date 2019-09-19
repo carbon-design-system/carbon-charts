@@ -7,9 +7,9 @@ export const pieOptions = {
 	resizable: true,
 	colors,
 	theme: getTheme(),
-	legend: {
-		position: "right"
-	}
+	// legend: {
+	// 	position: "right"
+	// }
 };
 
 export const donutOptions = {
