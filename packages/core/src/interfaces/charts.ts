@@ -60,7 +60,8 @@ export interface AxisChartOptions extends BaseChartOptions {
  */
 export interface BarChartOptions extends AxisChartOptions {
 	bars?: {
-
+		width?: number;
+		maxWidth?: number;
 	};
 }
 

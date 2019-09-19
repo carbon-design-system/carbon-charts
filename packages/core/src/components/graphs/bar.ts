@@ -90,6 +90,12 @@ export class Bar extends Component {
 		bars.exit()
 			.remove();
 
+		const getBarWidth = () => {
+			return Math.min(
+				options.bars.maxWidth,
+				this.services.axes.getMainXAxis().scale.step() / 2
+			);
+		}
 		// Update styling and position on existing bars
 		// As well as bars that were just added
 		bars.enter()
@@ -97,10 +103,10 @@ export class Bar extends Component {
 			.merge(bars)
 				.classed("bar", true)
 				.attr("x", (d, i) => {
-					const barWidth = this.services.axes.getMainXAxis().scale.step() / 2;
+					const barWidth = getBarWidth();
 					return this.services.axes.getXValue(d, i) - (barWidth / 2);
 				})
-				.attr("width", this.services.axes.getMainXAxis().scale.step() / 2)
+				.attr("width", getBarWidth)
 				.transition(this.services.transitions.getTransition("bar-update-enter", animate))
 				.attr("y", (d, i) => this.services.axes.getYValue(d[1], i))
 				.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
