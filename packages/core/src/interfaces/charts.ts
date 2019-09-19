@@ -98,6 +98,6 @@ export interface LineChartOptions extends ScatterChartOptions {
  */
 export interface PieChartOptions extends BaseChartOptions {
 	margin?: {
-		
-	}
+
+	};
 }
