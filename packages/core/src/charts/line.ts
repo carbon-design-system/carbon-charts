@@ -19,10 +19,6 @@ import {
 	LayoutComponent
 } from "../components/index";
 
-
-// TODO
-// - Support nested layout components
-// - What if there is no "growth" object?
 export class LineChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<ScatterChartOptions>) {
 		super(holder, chartConfigs);

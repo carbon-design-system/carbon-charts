@@ -165,22 +165,16 @@ export const stackedBarData = {
 };
 
 export const stackedBarOptions = {
-	accessibility: false,
-	scales: {
-		x: {
-			title: "2018 Annual Sales Figures",
-		},
-		y: {
-			title: "Dollars (CAD)",
-			formatter: axisValue => `${axisValue / 1000}k`,
-			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
+	title: "Stacked Bar Chart",
+	axes: {
+		left: {
+			primary: true,
 			stacked: true
+		},
+		top: {
+			type: "labels",
+			secondary: true,
 		}
 	},
-	tooltip: {
-		size: "compact"
-	},
-	legendClickable: true,
-	resizable: true,
-	theme: getTheme(),
+	theme: getTheme()
 };

@@ -6,6 +6,7 @@ import {
 	LineChartOptions,
 	GridOptions,
 	AxesOptions,
+	BarChartOptions,
 } from "./interfaces/index";
 
 /*
@@ -66,6 +67,13 @@ const axisChart: AxisChartOptions = Tools.merge({}, baseOptions, {
 /**
  * options specific to line charts
  */
+const stackedBarChart: BarChartOptions = Tools.merge({}, axisChart, {
+
+});
+
+/**
+ * options specific to line charts
+ */
 const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
 	points: {
 		// default point radius to 3
@@ -109,6 +117,7 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
 export const options = {
 	baseOptions,
 	axisChart,
+	stackedBarChart,
 	lineChart,
 	scatterChart
 };
