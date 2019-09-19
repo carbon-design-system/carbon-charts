@@ -28,7 +28,6 @@ export class Scatter extends Component {
 		const dotGroups = svg.selectAll("g.dots")
 			.data(this.model.getDisplayData().datasets, dataset => dataset.label);
 
-
 		// Remove dot groups that need to be removed
 		dotGroups.exit()
 			.attr("opacity", 0)

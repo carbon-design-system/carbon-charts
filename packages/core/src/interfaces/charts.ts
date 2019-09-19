@@ -92,3 +92,10 @@ export interface LineChartOptions extends ScatterChartOptions {
 		name: string;
 	};
 }
+
+/**
+ * options specific to scatter charts
+ */
+export interface PieChartOptions extends BaseChartOptions {
+
+}

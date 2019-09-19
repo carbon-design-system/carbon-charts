@@ -4,7 +4,8 @@ import {
 	// PieChart,
 	// DonutChart,
 	// ComboChart,
-	ScatterChart
+	ScatterChart,
+	PieChart
 } from "../src/index";
 
 // Styles
@@ -216,23 +217,19 @@ chartTypes.forEach(type => {
 
 				break;
 			case "pie":
-				// classyCharts[type.id] = new PieChart(
-				// 	classyContainer,
-				// 	{
-				// 		data: new Promise<ChartData>((resolve, reject) => {
-				// 			setTimeout(() => {
-				// 				resolve(type.data);
-				// 			}, 0);
-				// 		}),
-				// 		options: Object.assign({}, type.options, {type: type.id})
-				// 	}
-				// );
+				classyCharts[type.id] = new PieChart(
+					classyContainer,
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id})
+					}
+				);
 				// const pieChartObject = classyCharts[type.id];
 				// pieChartObject.events.addEventListener("pie-slice-onClick", e => {
 				// 	console.log("Pie chart - Slice clicked", e.detail);
 				// });
 
-				// setDemoActionsEventListener(type.id, type.data);
+				setDemoActionsEventListener(type.id, type.data);
 
 				break;
 			case "donut":

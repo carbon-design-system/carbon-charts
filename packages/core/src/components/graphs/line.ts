@@ -11,6 +11,7 @@ export class Line extends Component {
 
 	lineGenerator: any;
 
+	// TODORF - Remove these listeners in destroy()
 	init() {
 		// Highlight correct scatter on legend item hovers
 		this.services.events.getDocumentFragment().addEventListener("legend-item-onhover", e => {

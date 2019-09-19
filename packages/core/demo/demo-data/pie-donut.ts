@@ -6,7 +6,10 @@ export const pieOptions = {
 	legendClickable: true,
 	resizable: true,
 	colors,
-	theme: getTheme()
+	theme: getTheme(),
+	legend: {
+		position: "right"
+	}
 };
 
 export const donutOptions = {
