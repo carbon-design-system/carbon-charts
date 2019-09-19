@@ -41,9 +41,9 @@ export class Pie extends Component {
 	}
 
 	render(animate = true) {
+		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
-
 		const dataList = this.getDataList();
 
 		// Compute the outer radius needed
@@ -94,7 +94,6 @@ export class Pie extends Component {
 			});
 
 		// Draw the slice labels
-		const self = this;
 		const labels = svg.selectAll("text.chart-label")
 			.data(pieLayout(dataList), (d: any) => d.data.label);
 
