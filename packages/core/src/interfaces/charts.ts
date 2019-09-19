@@ -98,5 +98,11 @@ export interface LineChartOptions extends ScatterChartOptions {
  */
 export interface PieChartOptions extends BaseChartOptions {
 	pie?: {
+		radiusOffset?: number;
+		innerRadius?: number;
+		padAngle?: number;
+		hoverArc?: {
+			outerRadiusOffset?: number;
+		};
 	};
 }

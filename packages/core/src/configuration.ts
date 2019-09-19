@@ -102,6 +102,12 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
  */
 const pieChart: PieChartOptions = Tools.merge({}, chart, {
 	pie: {
+		radiusOffset: -15,
+		innerRadius: 2,
+		padAngle: 0.007,
+		hoverArc: {
+			outerRadiusOffset: 3
+		}
 	}
 });
 
