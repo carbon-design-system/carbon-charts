@@ -17,7 +17,7 @@ export class Pie extends Component {
 	path: any;
 
 	init() {
-		
+
 	}
 
 	getDataList() {
@@ -78,7 +78,7 @@ export class Pie extends Component {
 
 		// Position Pie
 		const { width, height } = DOMUtils.getSVGElementSize(svg, { useBBox: true });
-		svg.attr("transform", `translate(${width / 2}, ${height / 2 + 5})`)
+		svg.attr("transform", `translate(${width / 2}, ${height / 2 + 5})`);
 	}
 
 	// Helper functions
