@@ -1,9 +1,10 @@
 // Internal Imports
-import { ChartConfig, BaseChartOptions } from "./interfaces/index";
+import { ChartConfig, BaseChartOptions, LayoutGrowth, LayoutDirection, LegendOrientations } from "./interfaces/index";
 
 // Misc
 import { ChartModel } from "./model";
-import { Component } from "./components/component";
+import { Component, Title, Legend, LayoutComponent, Tooltip } from "./components";
+import { Tools } from "./tools";
 
 // Services
 import { DOMUtils, Events, Transitions } from "./services/index";
@@ -97,5 +98,99 @@ export class Chart {
 		this.services.domUtils.getHolder().remove();
 
 		this.model.set({ destroyed: true }, true);
+	}
+
+
+	protected getChartComponents(graphFrameComponents: Array<any>) {
+		const titleComponent = {
+			id: "title",
+			components: [
+				new Title(this.model, this.services)
+			],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		const legendComponent = {
+			id: "legend",
+			components: [
+				new Legend(this.model, this.services)
+			],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		const graphFrameComponent = {
+			id: "graph-frame",
+			components: graphFrameComponents,
+			growth: {
+				x: LayoutGrowth.STRETCH,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		// TODORF - REUSE BETWEEN AXISCHART & CHART
+		// Decide the position of the legend in reference to the chart
+		let fullFrameComponentDirection = LayoutDirection.COLUMN;
+		const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
+		if (legendPosition === "left") {
+			fullFrameComponentDirection = LayoutDirection.ROW;
+
+			if (!this.model.getOptions().legend.orientation) {
+				this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+			}
+		} else if (legendPosition === "right") {
+			fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
+
+			if (!this.model.getOptions().legend.orientation) {
+				this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+			}
+		} else if (legendPosition === "bottom") {
+			fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
+		}
+
+		const fullFrameComponent = {
+			id: "full-frame",
+			components: [
+				new LayoutComponent(
+					this.model,
+					this.services,
+					[
+						legendComponent,
+						graphFrameComponent
+					],
+					{
+						direction: fullFrameComponentDirection
+					}
+				)
+			],
+			growth: {
+				x: LayoutGrowth.STRETCH,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		// Add chart title if it exists
+		const topLevelLayoutComponents = [];
+		if (this.model.getOptions().title) {
+			topLevelLayoutComponents.push(titleComponent);
+		}
+		topLevelLayoutComponents.push(fullFrameComponent);
+
+		return [
+			new Tooltip(this.model, this.services),
+			new LayoutComponent(
+				this.model,
+				this.services,
+				topLevelLayoutComponents,
+				{
+					direction: LayoutDirection.COLUMN
+				}
+			)
+		];
 	}
 }

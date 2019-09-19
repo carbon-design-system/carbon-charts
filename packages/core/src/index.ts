@@ -3,7 +3,8 @@ import "./styles/style.scss";
 import {
 	StackedBarChart,
 	LineChart,
-	ScatterChart
+	ScatterChart,
+	PieChart
 } from "./charts/index";
 
 import * as colorPalettes from "./services/colorPalettes";
@@ -17,5 +18,6 @@ export {
 	// BaseAxisChart,
 	StackedBarChart,
 	LineChart,
-	ScatterChart
+	ScatterChart,
+	PieChart
 };

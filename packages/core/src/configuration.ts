@@ -7,6 +7,7 @@ import {
 	GridOptions,
 	AxesOptions,
 	BarChartOptions,
+	PieChartOptions,
 } from "./interfaces/index";
 
 /*
@@ -18,7 +19,7 @@ import {
 /**
  * Base chart options common to any chart
  */
-const baseOptions: BaseChartOptions = {
+const chart: BaseChartOptions = {
 	legend: {
 		clickable: true
 	},
@@ -59,7 +60,7 @@ export const axes: AxesOptions = {};
 /**
  * Options common to any chart with an axis
  */
-const axisChart: AxisChartOptions = Tools.merge({}, baseOptions, {
+const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	grid
 });
@@ -96,32 +97,20 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
 	}
 });
 
-// /**
-//  * options specific to bar charts
-//  */
-// const barOptions: BarChartOptions = Tools.merge({}, axisOptions);
+/**
+ * options specific to line charts
+ */
+const pieChart: PieChartOptions = Tools.merge({}, chart, {
 
-// /**
-//  * options specific to bar charts
-//  */
-// export type StackedBarChartOptions = BarChartOptions;
-// /**
-//  * options specific to bar charts
-//  */
-// const stackedBarOptions: StackedBarChartOptions = Tools.merge({}, barOptions);
-
-// /**
-//  * Options specific to combo charts.
-//  *
-//  */
-// const comboOptions: ComboChartOptions = Tools.merge({}, axisOptions, barOptions, lineOptions, scatterOptions);
+});
 
 export const options = {
-	baseOptions,
+	chart,
 	axisChart,
 	stackedBarChart,
 	lineChart,
-	scatterChart
+	scatterChart,
+	pieChart
 };
 
 /**

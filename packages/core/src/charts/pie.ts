@@ -1,26 +1,23 @@
 // Internal Imports
-import { AxisChart } from "../axis-chart";
+import { Chart } from "../chart";
 import * as Configuration from "../configuration";
 import {
 	ChartConfig,
-	LineChartOptions
+	PieChartOptions
 } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
 import {
-	Grid,
-	Line,
-	Scatter,
-	TwoDimensionalAxes,
+	Pie,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
 	Legend,
 	LayoutComponent
 } from "../components/index";
 
-export class LineChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<LineChartOptions>) {
+export class PieChart extends Chart {
+	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>) {
 		super(holder, chartConfigs);
 
 		if (chartConfigs.options) {
@@ -28,7 +25,7 @@ export class LineChart extends AxisChart {
 			// With the user provided options
 			this.model.setOptions(
 				Tools.merge(
-					Tools.clone(Configuration.options.lineChart),
+					Tools.clone(Configuration.options.pieChart),
 					chartConfigs.options
 				)
 			);
@@ -38,13 +35,10 @@ export class LineChart extends AxisChart {
 	getComponents() {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [
-			new TwoDimensionalAxes(this.model, this.services),
-			new Grid(this.model, this.services),
-			new Line(this.model, this.services),
-			new Scatter(this.model, this.services)
+			new Pie(this.model, this.services)
 		];
 
-		// Grab base axis chart components from AxisChart
-		return this.getAxisChartComponents(graphFrameComponents);
+		// Grab base chart components from AxisChart
+		return this.getChartComponents(graphFrameComponents);
 	}
 }
