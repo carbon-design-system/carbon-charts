@@ -68,8 +68,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, baseOptions, {
  * options specific to line charts
  */
 const stackedBarChart: BarChartOptions = Tools.merge({}, axisChart, {
-
-});
+} as BarChartOptions);
 
 /**
  * options specific to line charts
