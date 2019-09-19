@@ -90,12 +90,14 @@ export class Bar extends Component {
 		bars.exit()
 			.remove();
 
+		// Gets the correct width for bars based on options & configurations
 		const getBarWidth = () => {
 			return Math.min(
 				options.bars.maxWidth,
 				this.services.axes.getMainXAxis().scale.step() / 2
 			);
-		}
+		};
+
 		// Update styling and position on existing bars
 		// As well as bars that were just added
 		bars.enter()
