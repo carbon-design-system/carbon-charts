@@ -216,6 +216,26 @@ export class Axis extends Component {
 			axisRef.transition(this.services.transitions.getTransition())
 				.call(axis);
 		}
+
+		if (scale.step &&
+			(axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP)) {
+			const textNodes = axisRef.selectAll("g.tick text").nodes();
+
+			// If any ticks are any larger than the scale step size
+			if (textNodes.some(textNode => DOMUtils.getSVGElementSize(textNode, { useBBox: true }).width >= scale.step())) {
+				axisRef.selectAll("g.tick text")
+					.attr("dy", ".35em")
+					.attr("transform", `rotate(45)`)
+					.style("text-anchor", "end");
+
+				return;
+			}
+
+			axisRef.selectAll("g.tick text")
+				.attr("dy", null)
+				.attr("transform",  null)
+				.style("text-anchor", null);
+		}
 	}
 
 	getValueFromScale(datum: any, index?: number) {
