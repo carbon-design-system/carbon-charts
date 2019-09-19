@@ -68,6 +68,9 @@ const axisChart: AxisChartOptions = Tools.merge({}, baseOptions, {
  * options specific to line charts
  */
 const stackedBarChart: BarChartOptions = Tools.merge({}, axisChart, {
+	bars: {
+		maxWidth: 16
+	}
 } as BarChartOptions);
 
 /**
