@@ -1,6 +1,7 @@
 import "./styles/style.scss";
 
 import {
+	StackedBarChart,
 	LineChart,
 	ScatterChart
 } from "./charts/index";
@@ -14,6 +15,7 @@ export {
 	colorPalettes,
 	// BaseChart,
 	// BaseAxisChart,
+	StackedBarChart,
 	LineChart,
 	ScatterChart
 };

@@ -1,5 +1,5 @@
 import {
-	// BarChart,
+	StackedBarChart,
 	LineChart,
 	// PieChart,
 	// DonutChart,
@@ -142,13 +142,13 @@ chartTypes.forEach(type => {
 			case "grouped-bar":
 			case "stacked-bar":
 			case "stacked-bar-accessible":
-				// classyCharts[type.id] = new BarChart(
-				// 	classyContainer,
-				// 	{
-				// 		data: type.data,
-				// 		options: Object.assign({}, type.options, {type: type.id}),
-				// 	}
-				// );
+				classyCharts[type.id] = new StackedBarChart(
+					classyContainer,
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id}),
+					}
+				);
 
 				// const chartObject = classyCharts[type.id];
 				// chartObject.events.addEventListener("bar-onClick", e => {
@@ -175,9 +175,9 @@ chartTypes.forEach(type => {
 				// 	console.log("Bar Chart - RESIZE");
 				// }, false);
 
-				// setDemoActionsEventListener(type.id, type.data);
+				setDemoActionsEventListener(type.id, type.data);
 
-				// break;
+				break;
 			case "combo":
 				// classyCharts[type.id] = new ComboChart(
 				// 	classyContainer,

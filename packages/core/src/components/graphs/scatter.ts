@@ -1,7 +1,5 @@
 // Internal Imports
 import { Component } from "../component";
-import * as Configuration from "../../configuration";
-import { Tools } from "../../tools";
 
 // D3 Imports
 import { select } from "d3-selection";

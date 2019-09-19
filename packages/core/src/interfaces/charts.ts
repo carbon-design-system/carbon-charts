@@ -56,6 +56,25 @@ export interface AxisChartOptions extends BaseChartOptions {
 }
 
 /**
+ * options specific to line charts
+ */
+export interface BarChartOptions extends AxisChartOptions {
+
+}
+
+/**
+ * options specific to line charts
+ */
+export interface LineChartOptions extends ScatterChartOptions {
+	/**
+	 * options for the curve of the line
+	 */
+	curve?: string | {
+		name: string;
+	};
+}
+
+/**
  * options specific to scatter charts
  */
 export interface ScatterChartOptions extends AxisChartOptions {
@@ -68,18 +87,5 @@ export interface ScatterChartOptions extends AxisChartOptions {
 		 */
 		radius: number;
 		fillOpacity?: number;
-	};
-}
-
-
-/**
- * options specific to line charts
- */
-export interface LineChartOptions extends ScatterChartOptions {
-	/**
-	 * options for the curve of the line
-	 */
-	curve?: string | {
-		name: string;
 	};
 }

@@ -14,6 +14,8 @@ import { ChartModel } from "src/model";
 const testColors = ["e41a1c", "377eb8", "4daf4a", "984ea3", "ff7f00", "ffff33", "a65628", "f781bf", "999999"];
 window["testColors"] = Tools.clone(testColors);
 window["ccount"] = 0;
+
+// TODO - What if there is no "growth" object?
 export class LayoutComponent extends Component {
 	// Give every layout component a distinct ID
 	// so they don't interfere when querying elements

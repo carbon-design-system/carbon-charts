@@ -77,6 +77,7 @@ export class Axis extends Component {
 		const { position } = this.configs;
 		const scaleOptions = Tools.getProperty(this.model.getOptions(), "axes", position);
 
+		// If scale is a LABELS scale, return some labels as the domain
 		if (scaleOptions && scaleOptions.type === ScaleTypes.LABELS) {
 			const labels = this.model.getDisplayData().labels;
 			if (labels) {
@@ -86,21 +87,40 @@ export class Axis extends Component {
 			}
 		}
 
-		const { datasets } = this.model.getDisplayData();
-		const domain = extent(
-			// Get all the chart's data values in a flat array
-			datasets.reduce((m, dataset: any) => {
-				dataset.data.forEach((datum: any) => {
-					if (scaleOptions.type === ScaleTypes.TIME) {
-						m = m.concat(datum.date);
-					} else {
-						m = m.concat(isNaN(datum) ? datum.value : datum);
-					}
-				});
+		const { datasets, labels } = this.model.getDisplayData();
 
-				return m;
-			}, [])
-		);
+		// Get the extent of the domain
+		let domain;
+		// If the scale is stacked
+		if (scaleOptions.stacked) {
+			domain = extent(
+				labels.reduce((m, label: any, i) => {
+					const correspondingValues = datasets.map(dataset => dataset.data[i]);
+					const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
+	
+					// Save both the total value and the minimum
+					return m.concat(totalValue, min(correspondingValues));
+				}, [])
+				// Currently stack layouts in the library
+				// Only support positive values
+				.concat(0)
+			);
+		} else {
+			domain = extent(
+				// Get all the chart's data values in a flat array
+				datasets.reduce((m, dataset: any) => {
+					dataset.data.forEach((datum: any) => {
+						if (scaleOptions.type === ScaleTypes.TIME) {
+							m = m.concat(datum.date);
+						} else {
+							m = m.concat(isNaN(datum) ? datum.value : datum);
+						}
+					});
+
+					return m;
+				}, [])
+			);
+		}
 
 		if (scaleOptions.type === ScaleTypes.TIME) {
 			return [
@@ -136,7 +156,7 @@ export class Axis extends Component {
 			scale.rangeRound([startPosition, endPosition]);
 		} else {
 			scale.range([startPosition, endPosition])
-				.nice();
+				// .nice();
 		}
 
 		// Identify the corresponding d3 axis function
