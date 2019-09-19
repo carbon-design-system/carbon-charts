@@ -101,7 +101,8 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
  * options specific to line charts
  */
 const pieChart: PieChartOptions = Tools.merge({}, chart, {
-
+	pie: {
+	}
 });
 
 export const options = {
