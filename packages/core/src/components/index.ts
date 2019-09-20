@@ -10,6 +10,7 @@ export * from "./graphs/bar";
 export * from "./graphs/line";
 export * from "./graphs/scatter";
 export * from "./graphs/pie";
+export * from "./graphs/donut";
 
 // MISC
 export * from "./axes/two-dimensional-axes";

@@ -42,12 +42,16 @@ export class Pie extends Component {
 		const displayData = this.model.getDisplayData();
 		const dataset = displayData.datasets[0];
 		return dataset.data.map((datum, i) => {
-			console.log("datum", datum)
 			return {
 				label: displayData.labels[i],
 				value: datum
-			}
+			};
 		});
+	}
+
+	getInnerRadius() {
+		const options = this.model.getOptions();
+		return options.pie.innerRadius;
 	}
 
 	render(animate = true) {
@@ -59,12 +63,12 @@ export class Pie extends Component {
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
 		this.arc = arc()
-			.innerRadius(options.pie.innerRadius)
+			.innerRadius(this.getInnerRadius())
 			.outerRadius(radius);
 
 		// Set the hover arc radius
 		this.hoverArc = arc()
-			.innerRadius(options.pie.innerRadius)
+			.innerRadius(this.getInnerRadius())
 			.outerRadius(radius + options.pie.hoverArc.outerRadiusOffset);
 
 		// Setup the pie layout
