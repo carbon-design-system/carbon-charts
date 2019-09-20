@@ -29,15 +29,25 @@ export class Pie extends Component {
 	hoverArc: any;
 
 	init() {
+		const eventsFragment = this.services.events.getDocumentFragment();
 
+		// Highlight correct circle on legend item hovers
+		eventsFragment.addEventListener("legend-item-onhover", this.handleLegendOnHover);
+
+		// Un-highlight circles on legend item mouseouts
+		eventsFragment.addEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
 	}
 
 	getDataList() {
 		const displayData = this.model.getDisplayData();
-		return displayData.datasets[0].data.map((datum, i) => ({
-			label: displayData.labels[i],
-			value: datum,
-		}));
+		const dataset = displayData.datasets[0];
+		return dataset.data.map((datum, i) => {
+			console.log("datum", datum)
+			return {
+				label: displayData.labels[i],
+				value: datum
+			}
+		});
 	}
 
 	render(animate = true) {
@@ -67,7 +77,7 @@ export class Pie extends Component {
 
 		// Update data on all slices
 		const paths = svg.selectAll("path.slice")
-			.data(pieLayout(dataList));
+			.data(pieLayout(dataList), d => d.data.label);
 
 		// Remove slices that need to be exited
 		paths.exit()
@@ -82,10 +92,7 @@ export class Pie extends Component {
 
 		// Update styles & position on existing and entering slices
 		enteringPaths.merge(paths)
-			.attr("fill", d => {
-				const datasetLabel = this.model.getDisplayData().datasets[0].label;
-				return this.model.getFillScale()[datasetLabel](d.data.label);
-			})
+			.attr("fill", d => this.model.getFillScale()(d.data.label))
 			.attr("d", this.arc)
 			.transition(this.services.transitions.getTransition("pie-slice-enter-update", animate))
 			.attr("opacity", 1)
@@ -119,6 +126,28 @@ export class Pie extends Component {
 
 		// Add event listeners
 		this.addEventListeners();
+	}
+
+	// Highlight elements that match the hovered legend item
+	handleLegendOnHover = e => {
+		const { hoveredElement } = e.detail;
+
+		this.parent.selectAll("path.slice")
+			.transition(this.services.transitions.getTransition("legend-hover-bar"))
+			.attr("opacity", d => {
+				if (d.data.label !== hoveredElement.datum()["key"]) {
+					return 0.3;
+				}
+
+				return 1;
+			});
+	}
+
+	// Un-highlight all elements
+	handleLegendMouseOut = e => {
+		this.parent.selectAll("path.slice")
+			.transition(this.services.transitions.getTransition("legend-mouseout-bar"))
+			.attr("opacity", 1);
 	}
 
 	addEventListeners() {
