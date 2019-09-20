@@ -5,7 +5,8 @@ import {
 	// DonutChart,
 	// ComboChart,
 	ScatterChart,
-	PieChart
+	PieChart,
+	DonutChart
 } from "../src/index";
 
 // Styles
@@ -233,15 +234,15 @@ chartTypes.forEach(type => {
 
 				break;
 			case "donut":
-				// classyCharts[type.id] = new DonutChart(
-				// 	classyContainer,
-				// 	{
-				// 		data: type.data,
-				// 		options: Object.assign({}, type.options, {type: type.id})
-				// 	}
-				// );
+				classyCharts[type.id] = new DonutChart(
+					classyContainer,
+					{
+						data: type.data,
+						options: Object.assign({}, type.options, {type: type.id})
+					}
+				);
 
-				// setDemoActionsEventListener(type.id, type.data);
+				setDemoActionsEventListener(type.id, type.data);
 
 				break;
 		}

@@ -4,7 +4,8 @@ import {
 	StackedBarChart,
 	LineChart,
 	ScatterChart,
-	PieChart
+	PieChart,
+	DonutChart,
 } from "./charts/index";
 
 import * as colorPalettes from "./services/colorPalettes";
@@ -19,5 +20,6 @@ export {
 	StackedBarChart,
 	LineChart,
 	ScatterChart,
-	PieChart
+	PieChart,
+	DonutChart
 };

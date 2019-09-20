@@ -111,13 +111,23 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 	}
 });
 
+
+/**
+ * options specific to line charts
+ */
+const donutChart: PieChartOptions = Tools.merge({}, chart, {
+	donut: {
+	}
+});
+
 export const options = {
 	chart,
 	axisChart,
 	stackedBarChart,
 	lineChart,
 	scatterChart,
-	pieChart
+	pieChart,
+	donutChart
 };
 
 /**
