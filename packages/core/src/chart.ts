@@ -11,7 +11,7 @@ import { DOMUtils, Events, Transitions } from "./services/index";
 
 export class Chart {
 	components: Array<Component>;
-	model: ChartModel;
+	model: ChartModel = new ChartModel();
 	protected services: any = {
 		domUtils: DOMUtils,
 		events: Events,
@@ -19,9 +19,13 @@ export class Chart {
 	};
 
 	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
-		// Create a new model
-		this.model = new ChartModel();
+		setTimeout(() => {
+			this.init(holder, chartConfigs);
+		});
+	}
 
+	// Contains the code that uses properties that are overridable by the super-class
+	init(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
 		// Set model update callback
 		this.model.setUpdateCallback(this.update.bind(this));
 
@@ -32,13 +36,6 @@ export class Chart {
 		// Set model data & options
 		this.model.setData(chartConfigs.data);
 
-		setTimeout(() => {
-			this.init();
-		});
-	}
-
-	// Contains the code that uses properties that are overridable by the super-class
-	init() {
 		// Initialize all services
 		Object.keys(this.services).forEach(serviceName => {
 			const serviceObj = this.services[serviceName];

@@ -1,4 +1,5 @@
 // Internal Imports
+import { PieChartModel } from "../model-pie";
 import { Chart } from "../chart";
 import * as Configuration from "../configuration";
 import {
@@ -17,6 +18,8 @@ import {
 } from "../components/index";
 
 export class PieChart extends Chart {
+	model = new PieChartModel();
+
 	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>) {
 		super(holder, chartConfigs);
 

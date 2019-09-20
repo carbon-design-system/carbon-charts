@@ -32,10 +32,7 @@ export class ChartModel {
 	protected patternScale = {};
 	protected colorScale: any = {};
 
-	/**
-	 * @return {Array} The chart's display data
-	 */
-	getDisplayData(processor?: Function) {
+	getDisplayData() {
 		const { ACTIVE } = Configuration.legend.items.status;
 		const dataLabels = this.get("dataLabels");
 
@@ -52,9 +49,6 @@ export class ChartModel {
 		return null;
 	}
 
-	/**
-	 * @return {Array} The chart's display data
-	 */
 	getData() {
 		return this.get("data");
 	}
@@ -62,13 +56,9 @@ export class ChartModel {
 	/**
 	 *
 	 * @param newData The new raw data to be set
-	 * @return {Promise} The new display data that has been set
 	 */
 	setData(newData) {
-		const dataLabels = {};
-		newData.datasets.forEach(dataset => {
-			dataLabels[dataset.label] = Configuration.legend.items.status.ACTIVE;
-		});
+		const dataLabels = this.generateDataLabels(newData);
 
 		this.set({
 			data: newData,
@@ -76,6 +66,15 @@ export class ChartModel {
 		});
 
 		return this.state.data;
+	}
+
+	generateDataLabels(newData) {
+		const dataLabels = {};
+		newData.datasets.forEach(dataset => {
+			dataLabels[dataset.label] = Configuration.legend.items.status.ACTIVE;
+		});
+
+		return dataLabels;
 	}
 
 	/**
@@ -133,7 +132,7 @@ export class ChartModel {
 	 * Data labels
 	 *
 	*/
-	toggleDataset(changedLabel: string) {
+	toggleDataLabel(changedLabel: string) {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 		const dataLabels = this.get("dataLabels");
 
@@ -172,16 +171,18 @@ export class ChartModel {
 	}
 
 	getFillColor(datasetLabel: any, label?: any, value?: any) {
-		if (this.get("options").getFillColor && !this.get("options").accessibility) {
-			return this.get("options").getFillColor(datasetLabel, label, value) || this.getFillScale()[datasetLabel](label);
+		const options = this.getOptions();
+		if (options.getFillColor) {
+			return options.getFillColor(datasetLabel, label, value);
 		} else {
 			return this.getFillScale()[datasetLabel](label);
 		}
 	}
 
 	getStrokeColor(datasetLabel: any, label?: any, value?: any) {
-		if (this.get("options").getStrokeColor) {
-			return this.get("options").getStrokeColor(datasetLabel, label, value) || this.colorScale[datasetLabel](label);
+		const options = this.getOptions();
+		if (options.getStrokeColor) {
+			return options.getStrokeColor(datasetLabel, label, value);
 		} else {
 			return this.colorScale[datasetLabel](label);
 		}
@@ -189,7 +190,8 @@ export class ChartModel {
 
 	getFillScale() {
 		// Choose patternScale or colorScale based on the "accessibility" flag
-		return this.get("options").accessibility ? this.patternScale : this.colorScale;
+		// return this.get("options").accessibility ? this.patternScale : this.colorScale;
+		return this.colorScale;
 	}
 
 
