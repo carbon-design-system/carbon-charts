@@ -27,20 +27,37 @@ initializeDemoOptions();
 const classyCharts = {};
 
 // TODO - removeADataset shouldn't be used if chart legend is label based
-const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
+const changeDemoData = (chartType: any, chartObj: any, delay?: number) => {
+	const oldData = chartObj.model.getData();
+
 	// Function to be used to randomize a value
-	const randomizeValue = currentVal => {
+	const randomizeValue = datum => {
+		const currentVal = datum.value !== undefined ? datum.value : datum;
 		const firstTry = Math.max(0.5 * currentVal, currentVal * Math.random() * (Math.random() * 5));
-		const result = currentVal > 0 ? Math.min(2 * currentVal, firstTry) : Math.max(2 * currentVal, firstTry);
+		let result = currentVal > 0 ? Math.min(2 * currentVal, firstTry) : Math.max(2 * currentVal, firstTry);
 
 		if (Math.random() > 0.5
 			|| chartType.indexOf("stacked") !== -1
 			|| chartType.indexOf("pie") !== -1
 			|| chartType.indexOf("donut") !== -1) {
-			return Math.floor(result);
+			result = Math.floor(result);
 		} else {
-			return Math.floor(result) * -1;
+			result = Math.floor(result) * -1;
 		}
+
+		if (datum.value !== undefined) {
+			datum.value = result;
+
+			if (datum.date) {
+				console.log("datum.date", datum.date)
+				datum.date = new Date(datum.date);
+				datum.date.setDate(datum.date.getDate() + 2);
+			}
+
+			return datum;
+		}
+
+		return result;
 	};
 
 	// Function to be used to randomize all datapoints
@@ -48,7 +65,9 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		const result = Tools.clone(currentData);
 		result.datasets = result.datasets.map(dataset => {
 			dataset.label = `new dataset ${Math.random().toFixed(2)}`
-			const datasetNewData = dataset.data.map(dataPoint => randomizeValue(dataPoint));
+			const datasetNewData = dataset.data.map(dataPoint => {
+				return randomizeValue(dataPoint)
+			});
 
 			const newDataset = Object.assign({}, dataset, { data: datasetNewData });
 
@@ -103,13 +122,13 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 	}
 };
 
-const setDemoActionsEventListener = (chartType: any, oldData: any) => {
+const setDemoActionsEventListener = (chartType: any, chartObj: any) => {
 	const changeDataButton = document.getElementById(`change-data-${chartType}`);
 	if (changeDataButton) {
 		changeDataButton.onclick = e => {
 			e.preventDefault();
 
-			changeDemoData(chartType, oldData);
+			changeDemoData(chartType, chartObj);
 		};
 
 		const actionsElement = document.getElementById(`actions-${chartType}`);
@@ -120,7 +139,7 @@ const setDemoActionsEventListener = (chartType: any, oldData: any) => {
 				element.onclick = e => {
 					e.preventDefault();
 
-					changeDemoData(chartType, oldData, parseInt(element.getAttribute("data-promise-delay"), 10));
+					changeDemoData(chartType, chartObj, parseInt(element.getAttribute("data-promise-delay"), 10));
 				};
 			});
 		}
@@ -140,7 +159,7 @@ chartTypes.forEach(type => {
 					classyContainer,
 					{
 						data: type.data,
-						options: Object.assign({}, type.options, {type: type.id}),
+						options: type.options,
 					}
 				);
 
@@ -169,7 +188,7 @@ chartTypes.forEach(type => {
 				// 	console.log("Bar Chart - RESIZE");
 				// }, false);
 
-				setDemoActionsEventListener(type.id, type.data);
+				setDemoActionsEventListener(type.id, classyCharts[type.id]);
 
 				break;
 			case "combo":
@@ -189,11 +208,11 @@ chartTypes.forEach(type => {
 					classyContainer,
 					{
 						data: type.data,
-						options: Object.assign({}, type.options, {type: type.id}),
+						options: type.options,
 					}
 				);
 
-				setDemoActionsEventListener(type.id, type.data);
+				setDemoActionsEventListener(type.id, classyCharts[type.id]);
 				break;
 			case "curved-line":
 			case "line":
@@ -202,11 +221,11 @@ chartTypes.forEach(type => {
 					classyContainer,
 					{
 						data: type.data,
-						options: Object.assign({}, type.options, {type: type.id}),
+						options: type.options,
 					}
 				);
 
-				setDemoActionsEventListener(type.id, type.data);
+				setDemoActionsEventListener(type.id, classyCharts[type.id]);
 
 				break;
 			case "pie":
@@ -214,7 +233,7 @@ chartTypes.forEach(type => {
 					classyContainer,
 					{
 						data: type.data,
-						options: Object.assign({}, type.options, {type: type.id})
+						options: type.options
 					}
 				);
 				// const pieChartObject = classyCharts[type.id];
@@ -222,7 +241,7 @@ chartTypes.forEach(type => {
 				// 	console.log("Pie chart - Slice clicked", e.detail);
 				// });
 
-				setDemoActionsEventListener(type.id, type.data);
+				setDemoActionsEventListener(type.id, classyCharts[type.id]);
 
 				break;
 			case "donut":
@@ -230,11 +249,11 @@ chartTypes.forEach(type => {
 					classyContainer,
 					{
 						data: type.data,
-						options: Object.assign({}, type.options, {type: type.id})
+						options: type.options
 					}
 				);
 
-				setDemoActionsEventListener(type.id, type.data);
+				setDemoActionsEventListener(type.id, classyCharts[type.id]);
 
 				break;
 		}
