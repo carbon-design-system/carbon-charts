@@ -17,7 +17,7 @@ const donutCenterNumberTween = (d3Ref, newNumber: number) => {
 	return t => {
 		d3Ref.text(formatInterpolatedValue(i(t)));
 	};
-}
+};
 
 export class Donut extends Pie {
 	type = "donut";
