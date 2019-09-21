@@ -19,8 +19,7 @@ export const donutOptions = {
 	theme: getTheme(),
 	colors,
 	center: {
-		label: "Products",
-		number: 300000
+		label: "Products"
 	},
 };
 

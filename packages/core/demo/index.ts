@@ -67,18 +67,10 @@ const changeDemoData = (chartType: any, oldData: any, delay?: number) => {
 		case "donut":
 			// Randomize old data values
 			newData = updateChartData(oldData);
-
-			// Update donut center configurations
-			classyChartObject.options.center = {
-				label: "New Title",
-				number: randomizeValue(classyChartObject.center.configs.number)
-			};
-
 			break;
 		case "pie":
 			// Randomize old data values
 			newData = updateChartData(oldData);
-
 			break;
 		default:
 		case "grouped-bar":
