@@ -8,6 +8,7 @@ import {
 	AxesOptions,
 	BarChartOptions,
 	PieChartOptions,
+	DonutChartOptions,
 } from "./interfaces/index";
 
 /*
@@ -107,7 +108,9 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 		padAngle: 0.007,
 		hoverArc: {
 			outerRadiusOffset: 3
-		}
+		},
+		xOffset: 30,
+		yOffset: 20
 	}
 });
 
@@ -115,8 +118,13 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 /**
  * options specific to line charts
  */
-const donutChart: PieChartOptions = Tools.merge({}, chart, {
+const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	donut: {
+		center: {
+			numberFontSize: radius => Math.min((radius / 100) * 24, 24) + "px",
+			titleFontSize: radius => Math.min((radius / 100) * 15, 15) + "px",
+			titleYPosition: radius => Math.min((radius / 80) * 20, 20)
+		}
 	}
 });
 

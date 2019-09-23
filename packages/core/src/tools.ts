@@ -1,49 +1,18 @@
+import {
+	debounce as lodashDebounce,
+	merge as lodashMerge,
+	cloneDeep as lodashCloneDeep,
+	// the imports below are needed because of typescript bug (error TS4029)
+	Cancelable,
+	DebounceSettings
+} from "lodash";
+
 // Functions
 export namespace Tools {
-	export function debounce(func, wait, immediate) {
-		let timeout;
-		return function() {
-			const context = this, args = arguments;
-			const later = function() {
-				timeout = null;
-				if (!immediate) {
-					func.apply(context, args);
-				}
-			};
-			const callNow = immediate && !timeout;
-			clearTimeout(timeout);
-			timeout = setTimeout(later, wait);
-			if (callNow) {
-				func.apply(context, args);
-			}
-		};
-	}
-
-	export function clone(obj) {
-		return JSON.parse(JSON.stringify(obj));
-	}
-
-	// custom deep object merge
-	export const merge = (target, ...objects) => {
-		for (const object of objects) {
-			for (const key in object) {
-				if (object.hasOwnProperty(key)) {
-					// since we're dealing relatively simple objects this should work fine
-					if (object[key] && typeof object[key] === "object") {
-						if (!target[key]) {
-							target[key] = {};
-						}
-						// recursively merge into the target
-						// configs only run 3 or 4 levels deep, so no stack explosions
-						target[key] = merge(target[key], object[key]);
-					} else {
-						target[key] = object[key];
-					}
-				}
-			}
-		}
-		return target;
-	};
+	// Export these functions from lodash
+	export const debounce = lodashDebounce;
+	export const clone = lodashCloneDeep;
+	export const merge = lodashMerge;
 
 	/**************************************
 	 *  DOM-related operations            *

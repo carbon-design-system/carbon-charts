@@ -1,7 +1,5 @@
 // Internal Imports
-import { PieChartModel } from "../model-pie";
 import { PieChart } from "./index";
-import { Donut } from "../components/index";
 import * as Configuration from "../configuration";
 import {
 	ChartConfig,
@@ -11,7 +9,7 @@ import { Tools } from "../tools";
 
 // Components
 import {
-	Pie,
+	Donut,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
 	Legend,

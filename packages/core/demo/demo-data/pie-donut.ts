@@ -18,9 +18,11 @@ export const donutOptions = {
 	resizable: true,
 	theme: getTheme(),
 	colors,
-	center: {
-		label: "Products"
-	},
+	donut: {
+		center: {
+			label: "Browsers"
+		}
+	}
 };
 
 export const pieData = {
