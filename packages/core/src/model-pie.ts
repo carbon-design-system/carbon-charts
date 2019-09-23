@@ -28,15 +28,15 @@ export class PieChartModel extends ChartModel {
 			const displayData = Tools.clone(this.get("data"));
 			const dataset = displayData.datasets[0];
 
-			// Remove labels that are disabled
-			displayData.labels = displayData.labels.filter(label => dataLabels[label] === ACTIVE);
-
 			// Remove data values that correspond to labels that are disabled
 			dataset.data = dataset.data.filter((datum, i) => {
 				const label = displayData.labels[i];
 
 				return dataLabels[label] === ACTIVE;
 			});
+
+			// Remove labels that are disabled
+			displayData.labels = displayData.labels.filter(label => dataLabels[label] === ACTIVE);
 
 			return displayData;
 		}

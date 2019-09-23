@@ -56,7 +56,7 @@ export interface AxisChartOptions extends BaseChartOptions {
 }
 
 /**
- * options specific to line charts
+ * options specific to bar charts
  */
 export interface BarChartOptions extends AxisChartOptions {
 	bars?: {
@@ -94,7 +94,7 @@ export interface LineChartOptions extends ScatterChartOptions {
 }
 
 /**
- * options specific to scatter charts
+ * options specific to pie charts
  */
 export interface PieChartOptions extends BaseChartOptions {
 	pie?: {
@@ -103,6 +103,21 @@ export interface PieChartOptions extends BaseChartOptions {
 		padAngle?: number;
 		hoverArc?: {
 			outerRadiusOffset?: number;
+		};
+	};
+}
+
+
+
+/**
+ * options specific to donut charts
+ */
+export interface DonutChartOptions extends PieChartOptions {
+	donut?: {
+		center?: {
+			numberFontSize?: Function;
+			titleFontSize?: Function;
+			titleYPosition?: Function;
 		};
 	};
 }

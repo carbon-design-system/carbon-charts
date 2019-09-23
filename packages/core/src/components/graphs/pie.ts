@@ -62,6 +62,7 @@ export class Pie extends Component {
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
+
 		this.arc = arc()
 			.innerRadius(this.getInnerRadius())
 			.outerRadius(radius);
@@ -125,8 +126,7 @@ export class Pie extends Component {
 			.attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius, dataList.length); });
 
 		// Position Pie
-		const { width, height } = DOMUtils.getSVGElementSize(svg, { useBBox: true });
-		svg.attr("transform", `translate(${width / 2}, ${height / 2 + 5})`);
+		svg.attr("transform", `translate(${radius + options.pie.xOffset}, ${radius + options.pie.yOffset})`);
 
 		// Add event listeners
 		this.addEventListeners();

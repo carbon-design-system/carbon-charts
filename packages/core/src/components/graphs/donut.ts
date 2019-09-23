@@ -29,6 +29,9 @@ export class Donut extends Pie {
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
 
+		// Compute the outer radius needed
+		const radius = this.computeRadius();
+
 		let donutCenterFigure = Tools.getProperty(options, "center", "number");
 		if (!donutCenterFigure) {
 			donutCenterFigure = this.getDataList().reduce((accumulator, d) => {
@@ -39,6 +42,7 @@ export class Donut extends Pie {
 		// Add the number shown in the center of the donut
 		DOMUtils.appendOrSelect(svg, "text.donut-figure")
 			.attr("text-anchor", "middle")
+			.style("font-size", () => options.donut.center.numberFontSize(radius))
 			.transition(this.services.transitions.getTransition("donut-figure-enter-update", animate))
 			.tween("text", function() {
 				return donutCenterNumberTween(select(this), donutCenterFigure);
@@ -47,8 +51,9 @@ export class Donut extends Pie {
 		// Add the label below the number in the center of the donut
 		DOMUtils.appendOrSelect(svg, "text.donut-title")
 			.attr("text-anchor", "middle")
-			.attr("y", 20)
-			.text(options.center.label);
+			.style("font-size", () => options.donut.center.titleFontSize(radius))
+			.attr("y", options.donut.center.titleYPosition(radius))
+			.text(options.donut.center.label);
 	}
 
 	getInnerRadius() {
