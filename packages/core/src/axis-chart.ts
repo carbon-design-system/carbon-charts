@@ -1,9 +1,9 @@
 import { Chart } from "./chart";
-
 import {
 	LayoutDirection,
 	LayoutGrowth,
-	LegendOrientations
+	LegendOrientations,
+	LegendPositions
 } from "./interfaces/index";
 import {
 	LayoutComponent,
@@ -56,19 +56,19 @@ export class AxisChart extends Chart {
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
 		const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
-		if (legendPosition === "left") {
+		if (legendPosition === LegendPositions.LEFT) {
 			fullFrameComponentDirection = LayoutDirection.ROW;
 
 			if (!this.model.getOptions().legend.orientation) {
 				this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
 			}
-		} else if (legendPosition === "right") {
+		} else if (legendPosition === LegendPositions.RIGHT) {
 			fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
 
 			if (!this.model.getOptions().legend.orientation) {
 				this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
 			}
-		} else if (legendPosition === "bottom") {
+		} else if (legendPosition === LegendPositions.BOTTOM) {
 			fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
 		}
 

@@ -82,3 +82,11 @@ export enum ModelStateKeys {
 	 */
 	HOLDER = "holder"
 }
+
+/**
+ * enum of all possible callout directions
+ */
+export enum CalloutDirections {
+	LEFT = "left",
+	RIGHT = "right"
+}

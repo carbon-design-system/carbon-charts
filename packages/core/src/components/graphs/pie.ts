@@ -1,8 +1,8 @@
 // Internal Imports
 import { Component } from "../component";
-import * as Configuration from "../../configuration";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
+import { CalloutDirections } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -80,9 +80,14 @@ export class Pie extends Component {
 			})
 			.padAngle(options.pie.padAngle);
 
+		// Sort pie layout data based off of the indecies the layout creates
+		const pieLayoutData = pieLayout(dataList).sort(function(a: any, b: any) {
+			return a.index - b.index;
+		});
+
 		// Update data on all slices
-		const paths = svg.selectAll("path.slice")
-			.data(pieLayout(dataList), d => d.data.label);
+		const paths = DOMUtils.appendOrSelect(svg, "g.slices").selectAll("path.slice")
+			.data(pieLayoutData, d => d.data.label);
 
 		// Remove slices that need to be exited
 		paths.exit()
@@ -106,8 +111,9 @@ export class Pie extends Component {
 			});
 
 		// Draw the slice labels
-		const labels = svg.selectAll("text.chart-label")
-			.data(pieLayout(dataList), (d: any) => d.data.label);
+		const labels = DOMUtils.appendOrSelect(svg, "g.labels")
+			.selectAll("text.chart-label")
+			.data(pieLayoutData, (d: any) => d.data.label);
 
 		// Remove labels that are existing
 		labels.exit()
@@ -120,16 +126,153 @@ export class Pie extends Component {
 			.classed("chart-label", true);
 
 		// Update styles & position on existing & entering labels
+		const calloutData = [];
 		enteringLabels.merge(labels)
 			.style("text-anchor", "middle")
-			.text(d => self.getSliceLabelText(d.data.value, dataList))
-			.attr("transform", function (d) { return self.getChartLabelTranslateString(this, d, radius, dataList.length); });
+			.text(d => Tools.convertValueToPercentage(d.data.value, dataList) + "%")
+			// Calculate dimensions in order to transform
+			.datum(function(d) {
+				const textLength = this.getComputedTextLength();
+				d.textOffsetX = textLength / 2;
+				d.textOffsetY = parseFloat(getComputedStyle(this).fontSize) / 2;
+
+				const marginedRadius = radius + 2;
+
+				const theta = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+
+				d.xPosition = (d.textOffsetX + marginedRadius) * Math.sin(theta);
+				d.yPosition = (d.textOffsetY + marginedRadius) * -Math.cos(theta);
+
+				return d;
+			})
+			.attr("transform", function (d, i) {
+				const totalSlices = dataList.length;
+				const sliceAngleDeg = (d.endAngle - d.startAngle) * (180 / Math.PI);
+
+				// check if last 2 slices (or just last) are < the threshold
+				if (i >= totalSlices - 2) {
+					if (sliceAngleDeg < options.pie.callout.minSliceDegree) {
+						let labelTranslateX, labelTranslateY;
+						if (d.index === totalSlices - 1) {
+							labelTranslateX = d.xPosition + options.pie.callout.offsetX + options.pie.callout.textMargin + d.textOffsetX;
+							labelTranslateY = d.yPosition - options.pie.callout.offsetY;
+
+							// Set direction of callout
+							d.direction = CalloutDirections.RIGHT;
+							calloutData.push(d);
+						} else {
+							labelTranslateX = d.xPosition - options.pie.callout.offsetX - d.textOffsetX - options.pie.callout.textMargin;
+							labelTranslateY = d.yPosition - options.pie.callout.offsetY;
+
+							// Set direction of callout
+							d.direction = CalloutDirections.LEFT;
+							calloutData.push(d);
+						}
+
+						return `translate(${labelTranslateX}, ${labelTranslateY})`;
+					}
+				}
+
+				return `translate(${d.xPosition}, ${d.yPosition})`;
+			});
+
+		// Render pie label callouts
+		this.renderCallouts(calloutData);
 
 		// Position Pie
-		svg.attr("transform", `translate(${radius + options.pie.xOffset}, ${radius + options.pie.yOffset})`);
+		const pieTranslateX = radius + options.pie.xOffset;
+		let pieTranslateY = radius + options.pie.yOffset;
+		if (calloutData.length > 0) {
+			pieTranslateY += options.pie.yOffsetCallout;
+		}
+		svg.attr("transform", `translate(${pieTranslateX}, ${pieTranslateY})`);
 
 		// Add event listeners
 		this.addEventListeners();
+	}
+
+	renderCallouts(calloutData: Array<any>) {
+		const svg = DOMUtils.appendOrSelect(this.getContainerSVG(), "g.callouts");
+		const options = this.model.getOptions();
+
+		// Update data on callouts
+		const callouts = svg.selectAll("g.callout")
+			.data(calloutData);
+
+		callouts.exit().remove();
+
+		const enteringCallouts = callouts.enter()
+			.append("g")
+			.classed("callout", true);
+
+		// Update data values for each callout
+		// For the horizontal and vertical lines to use
+		enteringCallouts.merge(callouts)
+		.datum(function(d) {
+			const { xPosition, yPosition, direction } = d;
+
+			if (direction === CalloutDirections.RIGHT) {
+				d.startPos = {
+					x: xPosition,
+					y: yPosition + d.textOffsetY
+				};
+
+				// end position for the callout line
+				d.endPos = {
+					x: xPosition + options.pie.callout.offsetX,
+					y: yPosition - options.pie.callout.offsetY + d.textOffsetY
+				};
+
+				// the intersection point of the vertical and horizontal line
+				d.intersectPointX = d.endPos.x - options.pie.callout.horizontalLineLength;
+			} else {
+				// start position for the callout line
+				d.startPos = {
+					x: xPosition,
+					y: yPosition + d.textOffsetY
+				};
+
+				// end position for the callout line should be bottom aligned to the title
+				d.endPos = {
+					x: xPosition - options.pie.callout.offsetX,
+					y: yPosition - options.pie.callout.offsetY + d.textOffsetY
+				};
+
+				// the intersection point of the vertical and horizontal line
+				d.intersectPointX = d.endPos.x + options.pie.callout.horizontalLineLength;
+			}
+
+			// Store the necessary data in the DOM element
+			return d;
+		});
+
+		// draw vertical line
+		const enteringVerticalLines = enteringCallouts.append("line")
+			.classed("vertical-line", true);
+
+		enteringVerticalLines.merge(svg.selectAll("line.vertical-line"))
+			.datum(function(d: any) {
+				return select(this.parentNode).datum();
+			})
+			.style("stroke-width", "1px")
+			.attr("x1", d => d.startPos.x)
+			.attr("y1", d => d.startPos.y)
+			.attr("x2", d => d.intersectPointX)
+			.attr("y2", d => d.endPos.y);
+
+		// draw horizontal line
+		const enteringHorizontalLines = enteringCallouts.append("line")
+			.classed("horizontal-line", true);
+
+		enteringHorizontalLines.merge(callouts.selectAll("line.horizontal-line"))
+			.datum(function(d: any) {
+				return select(this.parentNode).datum();
+			})
+			.style("stroke-width", "1px")
+			.attr("x1", d => d.intersectPointX)
+			.attr("y1", d => d.endPos.y)
+			.attr("x2", d => d.endPos.x)
+			.attr("y2", d => d.endPos.y);
 	}
 
 	// Highlight elements that match the hovered legend item
@@ -197,85 +340,5 @@ export class Pie extends Component {
 		const radius: number = Math.min(width, height) / 2;
 
 		return radius + options.pie.radiusOffset;
-	}
-
-	/**
-	 * Returns the string for the slice labels.
-	 * @param datapoint data value to get the percentage
-	 * @param dataset dataset containing all data values
-	 */
-	protected getSliceLabelText(datapoint, dataset) {
-		return Tools.convertValueToPercentage(datapoint, dataset) + "%";
-	}
-
-	/**
-	 * Returns the translate string for the calculated position of the slice labels.
-	 * @param element the text label element
-	 * @param d the d3 slice object
-	 * @param radius the radius of the pie or donut chart
-	 * @param totalSlices total number of slices rendered
-	 */
-	protected getChartLabelTranslateString(element, d, radius, totalSlices?) {
-		const textLength = element.getComputedTextLength();
-		const textOffsetX = textLength / 2 + 5;
-		const textOffsetY = parseFloat(getComputedStyle(element).fontSize) / 2 + 5;
-
-		const marginedRadius = radius + 2;
-		// const marginedRadius = radius + Configuration.pie.label.margin;
-
-		const theta = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
-		const sliceAngleDeg = (d.endAngle - d.startAngle) * (180 / Math.PI);
-
-		const xPosition = (textOffsetX + marginedRadius) * Math.sin(theta);
-		const yPosition = (textOffsetY + marginedRadius) * -Math.cos(theta);
-
-		if (!totalSlices) {
-			return `translate(${xPosition}, ${yPosition})`;
-		}
-		// // check if last 2 slices (or just last) are < the threshold
-		// if (d.index === totalSlices - 1) {
-		// 	if (sliceAngleDeg < Configuration.pie.callout.sliceDegreeThreshold) {
-		// 		// start at the same location as a non-called out label
-		// 		const startPos = {
-		// 			x: xPosition,
-		// 			y: yPosition + textOffsetY
-		// 		};
-
-		// 		// end position for the callout line
-		// 		const endPos = {
-		// 			x: xPosition + Configuration.pie.callout.calloutOffsetX,
-		// 			y: yPosition - Configuration.pie.callout.calloutOffsetY + textOffsetY
-		// 		};
-
-		// 		// last slice always gets callout to the right side
-		// 		this.drawCallout(startPos, endPos, Configuration.pie.callout.direction.RIGHT);
-		// 		return `translate(${endPos.x + Configuration.pie.callout.calloutTextMargin + textOffsetX},
-		// 			${yPosition - Configuration.pie.callout.calloutOffsetY})`;
-		// 	}
-		// 	// remove any unneeded callout for last slice
-		// 	this.removeCallout(Configuration.pie.callout.direction.RIGHT);
-		// }
-		// if (d.index === totalSlices - 2) {
-		// 	if (sliceAngleDeg < Configuration.pie.callout.sliceDegreeThreshold) {
-		// 		// start position for the callout line
-		// 		const startPos = {
-		// 			x: xPosition,
-		// 			y: yPosition + textOffsetY
-		// 		};
-
-		// 		// end position for the callout line should be bottom aligned to the title
-		// 		const endPos = {
-		// 			x: xPosition - Configuration.pie.callout.calloutOffsetX,
-		// 			y: yPosition - Configuration.pie.callout.calloutOffsetY + textOffsetY
-		// 		};
-
-		// 		this.drawCallout(startPos, endPos, Configuration.pie.callout.direction.LEFT);
-		// 		return `translate(${endPos.x - textOffsetX - Configuration.pie.callout.calloutTextMargin},
-		// 			${yPosition - Configuration.pie.callout.calloutOffsetY})`;
-		// 	}
-		// 	// remove any leftover unneeded callout
-		// 	this.removeCallout(Configuration.pie.callout.direction.LEFT);
-		// }
-		return `translate(${xPosition}, ${yPosition})`;
 	}
 }

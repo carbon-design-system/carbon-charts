@@ -32,7 +32,7 @@ export const pieData = {
 		{
 			label: "Dataset 1",
 			backgroundColors: colors,
-			data: [75000, 65000, 1300, 25000, 1200, 20000]
+			data: [75000, 65000, 10000, 25000, 1200, 20000]
 		}
 	]
 };
