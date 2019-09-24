@@ -1,6 +1,6 @@
-import { getComponentContainer, TestEnvironment } from "../../tests/index";
+import { TestEnvironment } from "../../tests/index";
 
-import { Title } from "../index";
+import { select } from "d3-selection";
 
 describe("title component", () => {
 	beforeEach(function() {
@@ -12,25 +12,25 @@ describe("title component", () => {
 	});
 
 	describe("content", () => {
-		it("should match text provided in options", async function(done) {
-			const sampleTitle = "My chart";
+		it("should match text provided in options", function(done) {
+			setTimeout(() => {
+				const sampleTitle = "My chart";
 
-			const newOptions = Object.assign(
-				this._chart.model.getOptions(),
-				{ title: sampleTitle }
-			);
+				const chartEventsFragment = this._chart.services.events.getDocumentFragment();
+				const renderCb = () => {
+					const title = select("g.cc-title");
 
-			this._chart.model.setOptions(newOptions);
+					// Remove event listener for when chart render is finished
+					chartEventsFragment.removeEventListener("render-finished", renderCb);
 
-			await new Promise(resolve => {
+					expect(title.select("text").html()).toEqual(sampleTitle);
+
+					done();
+				};
+
 				// Add event listener for when chart render is finished
-				this._chart.services.events.getDocumentFragment().addEventListener("render-finished", resolve);
+				chartEventsFragment.addEventListener("render-finished", renderCb);
 			});
-
-			const title = getComponentContainer(Title);
-			expect(title.querySelector("text").innerHTML).toEqual(sampleTitle);
-
-			done();
 		});
 	});
 
