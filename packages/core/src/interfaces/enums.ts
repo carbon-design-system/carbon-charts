@@ -11,6 +11,16 @@ export enum ChartType {
 }
 
 /**
+ * enum of all supported chart themes
+ */
+export enum ChartTheme {
+	WHITE = "white",
+	G100 = "g100",
+	G90 = "g90",
+	G10 = "g10"
+}
+
+/**
  * enum of all possible axis positions
  */
 export enum AxisPositions {
