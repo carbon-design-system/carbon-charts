@@ -122,7 +122,10 @@ export const curvedLineOptions = {
 			primary: true
 		}
 	},
-	curve: "curveNatural"
+	curve: "curveNatural",
+	tooltip: {
+		gridline: true
+	}
 };
 
 export const lineData = {

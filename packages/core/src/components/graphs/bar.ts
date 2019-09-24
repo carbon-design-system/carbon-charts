@@ -146,13 +146,21 @@ export class Bar extends Component {
 	addEventListeners() {
 		const self = this;
 		this.parent.selectAll("rect.bar")
-			.on("mouseover", function() {
+			.on("mousemove", function() {
 				const hoveredElement = select(this);
+				const itemData = select(this).datum();
 				hoveredElement.classed("hovered", true);
+
+				const stackedData = itemData["data"];
+				const sharedLabel = stackedData["label"];
+
+				// filter out the label from the datasets' and associated values
+				const activePoints =  Object.keys(stackedData).filter(key => { return  key !== "label"; })
+				.map((key) => { return {datasetLabel: key, value: stackedData[key], label: sharedLabel }; });
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
-					hoveredElement
+					multidata: activePoints
 				});
 			})
 			.on("mouseout", function() {
@@ -169,7 +177,7 @@ export class Bar extends Component {
 	destroy() {
 		// Remove event listeners
 		this.parent.selectAll("rect.bar")
-			.on("mouseover", null)
+			.on("mousemove", null)
 			.on("mouseout", null);
 
 		// Remove legend listeners

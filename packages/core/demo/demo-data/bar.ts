@@ -69,9 +69,6 @@ export const groupedBarOptions = {
 			formatter: axisValue => `${axisValue * 100}%`
 		}
 	},
-	tooltip: {
-		size: "compact"
-	},
 	legendClickable: true,
 	resizable: true,
 	theme: getTheme()

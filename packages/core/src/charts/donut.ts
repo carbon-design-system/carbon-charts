@@ -11,9 +11,9 @@ import { Tools } from "../tools";
 import {
 	Donut,
 	// the imports below are needed because of typescript bug (error TS4029)
-	Tooltip,
 	Legend,
-	LayoutComponent
+	LayoutComponent,
+	Tooltip
 } from "../components/index";
 
 export class DonutChart extends PieChart {
@@ -38,7 +38,8 @@ export class DonutChart extends PieChart {
 			new Donut(this.model, this.services)
 		];
 
-		// Grab base chart components from AxisChart
-		return this.getChartComponents(graphFrameComponents);
+		const components: any[] = this.getChartComponents(graphFrameComponents);
+		components.push(new Tooltip(this.model, this.services));
+		return components;
 	}
 }

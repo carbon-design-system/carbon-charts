@@ -1,5 +1,5 @@
 // Internal Imports
-import { ChartConfig, BaseChartOptions, LayoutGrowth, LayoutDirection, LegendOrientations } from "./interfaces/index";
+import { ChartConfig, BaseChartOptions, LayoutGrowth, LayoutDirection, LegendOrientations, ChartTheme } from "./interfaces/index";
 
 // Misc
 import { ChartModel } from "./model";
@@ -56,6 +56,8 @@ export class Chart {
 		setTimeout(() => {
 			this.update();
 		});
+
+		//this.setTheme();
 	}
 
 	getComponents(): Array<any> {
@@ -63,6 +65,17 @@ export class Chart {
 
 		return null;
 	}
+
+	// setTheme() {
+	// 	const theme = Tools.getProperty(this.model.getOptions(), "theme") ?
+	// 		Tools.getProperty(this.model.getOptions(), "theme") : ChartTheme.WHITE;
+	// 	const holder = this.model.get("holder");
+
+	// 	holder.classed()
+
+	// 	 //console.log(this.model.get("holder"))
+
+	// }
 
 	update(animate = true) {
 		if (this.components) {
@@ -179,7 +192,6 @@ export class Chart {
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [
-			new Tooltip(this.model, this.services),
 			new LayoutComponent(
 				this.model,
 				this.services,

@@ -53,6 +53,36 @@ export class ChartModel {
 		return this.get("data");
 	}
 
+	/** Uses the primary Y Axis as domain to get data items associated.  */
+	getDataWithDomain(domainValue) {
+		let displayData = this.getDisplayData();
+		const domainKey = Object.keys(displayData.datasets[0].data[0]).filter(key => { return key !== "value"; })[0];
+
+		let active = [];
+
+		displayData.datasets.forEach(dataset => {
+			const sharedLabel = dataset.label;
+
+			// filter the items in each dataset for the points associated with the Domain
+			const dataItems = dataset.data.filter(item => {
+				const date1 = new Date(item[domainKey]);
+				const date2 = new Date(domainValue);
+				return date1.getTime() === date2.getTime();
+			});
+
+			// assign the shared label on the data items and add them to the array
+			dataItems.forEach(item => {
+				active.push(
+					Object.assign({datasetLabel: sharedLabel,
+						value: item.value,
+					}, item)
+				);
+			});
+		});
+
+		return active;
+	}
+
 	/**
 	 *
 	 * @param newData The new raw data to be set

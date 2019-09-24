@@ -24,10 +24,7 @@ const chart: BaseChartOptions = {
 	legend: {
 		clickable: true
 	},
-	resizable: true,
-	tooltip: {
-		formatter: null
-	}
+	resizable: true
 };
 
 // /**
@@ -243,9 +240,9 @@ export const tooltip = {
 	fadeOut: {
 		duration: 250
 	},
-	size: {
-		COMPACT: "compact"
-	}
+	axisTooltip: {
+		axisThreshold: 0.25,
+	},
 };
 
 /**
