@@ -8,6 +8,7 @@ import { Tools } from "./tools";
 
 // Services
 import { DOMUtils, Events, Transitions } from "./services/index";
+import { select } from "d3-selection";
 
 export class Chart {
 	components: Array<Component>;
@@ -57,7 +58,7 @@ export class Chart {
 			this.update();
 		});
 
-		//this.setTheme();
+		this.setTheme();
 	}
 
 	getComponents(): Array<any> {
@@ -66,16 +67,13 @@ export class Chart {
 		return null;
 	}
 
-	// setTheme() {
-	// 	const theme = Tools.getProperty(this.model.getOptions(), "theme") ?
-	// 		Tools.getProperty(this.model.getOptions(), "theme") : ChartTheme.WHITE;
-	// 	const holder = this.model.get("holder");
+	setTheme() {
+		const theme = Tools.getProperty(this.model.getOptions(), "theme") ?
+			Tools.getProperty(this.model.getOptions(), "theme") : ChartTheme.WHITE;
+		const holder = select(this.model.get("holder"));
 
-	// 	holder.classed()
-
-	// 	 //console.log(this.model.get("holder"))
-
-	// }
+		holder.classed(`carbon--theme--${theme}`, true);
+	}
 
 	update(animate = true) {
 		if (this.components) {
