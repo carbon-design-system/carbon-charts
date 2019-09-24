@@ -104,6 +104,16 @@ export interface PieChartOptions extends BaseChartOptions {
 		hoverArc?: {
 			outerRadiusOffset?: number;
 		};
+		xOffset?: number;
+		yOffset?: number;
+		yOffsetCallout?: number;
+		callout?: {
+			minSliceDegree?: number;
+			offsetX?: number,
+			offsetY?: number;
+			horizontalLineLength?: number;
+			textMargin?: number;
+		}
 	};
 }
 

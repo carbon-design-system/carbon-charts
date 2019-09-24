@@ -110,7 +110,15 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 			outerRadiusOffset: 3
 		},
 		xOffset: 30,
-		yOffset: 20
+		yOffset: 20,
+		yOffsetCallout: 10,
+		callout: {
+			minSliceDegree: 5,
+			offsetX: 15,
+			offsetY: 12,
+			horizontalLineLength: 8,
+			textMargin: 2
+		}
 	}
 });
 
