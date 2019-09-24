@@ -300,7 +300,7 @@ export class Pie extends Component {
 	addEventListeners() {
 		const self = this;
 		this.parent.selectAll("path.slice")
-			.on("mouseover", function() {
+			.on("mousemove", function() {
 				const hoveredElement = select(this);
 
 				hoveredElement.classed("hovered", true)
@@ -310,9 +310,10 @@ export class Pie extends Component {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent("pie-slice-mouseover", hoveredElement);
 
+				const itemData = select(this).datum();
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
-					hoveredElement
+					itemData
 				});
 			})
 			.on("mouseout", function() {

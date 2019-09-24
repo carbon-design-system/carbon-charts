@@ -1,5 +1,5 @@
 import * as Configuration from "../../configuration";
-import { Component } from "../component";
+import { Tooltip } from "./tooltip";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 
@@ -9,7 +9,7 @@ import Position, { PLACEMENTS } from "@carbon/utils-position";
 // D3 Imports
 import { select, mouse, event } from "d3-selection";
 
-export class Tooltip extends Component {
+export class TooltipBar extends Tooltip {
 	type = "tooltip";
 
 	tooltip: any;
@@ -27,14 +27,15 @@ export class Tooltip extends Component {
 
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.getDocumentFragment().addEventListener("show-tooltip", e => {
+
 			let data = select(event.target).datum() as any;
 
-			// if there is a provided tooltip HTML function
+			// if there is a provided tooltip HTML function use that
 			if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
 				tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data));
 			} else {
 				if (e.detail.multidata) {
-					// multi tooltip
+					// multi tooltip data
 					data = e.detail.multidata;
 					tooltipTextContainer.html(this.getMultiTooltipHTML(data));
 				} else {
@@ -56,27 +57,24 @@ export class Tooltip extends Component {
 	}
 
 	getTooltipHTML(data: any) {
-
-		// this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
-		const dataVal = Tools.getProperty(data, "data") ? data.data : data;
-
-		// format the value if needed
 		const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-		this.model.getOptions().tooltip.valueFormatter(dataVal.value) : dataVal.value.toLocaleString("en");
+		this.model.getOptions().tooltip.valueFormatter(data.value) : data.value.toLocaleString("en");
 
-		// pie charts don't have a dataset label since they only support one dataset
-		const label = dataVal.datasetLabel ? dataVal.datasetLabel : dataVal.label;
-
-		return `<div class="datapoint-tooltip"><p class="label">${label}</p><p class="value">${formattedValue}</p></div>`;
+		return `<div class="datapoint-tooltip"><p class="label">${data.datasetLabel}</p><p class="value">${formattedValue}</p></div>`;
 	}
 
+	/**
+	 * Multip tooltips for bar charts include totals for each stack
+	 * @param data
+	 */
 	getMultiTooltipHTML(data: any) {
 		const points = data;
+		let total = 0;
 
-		// sort them so they are in the same order as the graph
-		points.sort(function (a, b) {
-			return b.value - a.value;
-		});
+		points.reverse();
+
+		// get the total for the tooltip
+		points.forEach(item => total += item.value);
 
 		let listHTML = "<ul class='multi-tooltip'>";
 
@@ -87,13 +85,13 @@ export class Tooltip extends Component {
 			const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
 
 			listHTML += `<li><div class="datapoint-tooltip">
-			<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
-			<p class="label">${datapoint.datasetLabel}</p>
-			<p class="value">${formattedValue}</p>
-			</div></li>`;
+				<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
+				<p class="label">${datapoint.datasetLabel}</p>
+				<p class="value">${formattedValue}</p>
+				</div></li>`;
 		});
 
-		return listHTML + `</ul>` ;
+		return listHTML + `<li><div class='total-val'><p class='label'>Total</p><p class='value'>${total}</p></div></li></ul>` ;
 	}
 
 	render() {
