@@ -60,7 +60,8 @@ export const options = {
 	},
 	legendClickable: true,
 	resizable: true,
-	height: 500
+	height: 500,
+	title: "My chart"
 };
 
 export class TestEnvironment {
