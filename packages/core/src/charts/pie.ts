@@ -43,7 +43,9 @@ export class PieChart extends Chart {
 			new Pie(this.model, this.services)
 		];
 
-		// Grab base chart components from AxisChart
-		return this.getChartComponents(graphFrameComponents);
+		// get the base chart components and export with tooltip
+		const components: any[] = this.getChartComponents(graphFrameComponents);
+		components.push(new Tooltip(this.model, this.services));
+		return components;
 	}
 }

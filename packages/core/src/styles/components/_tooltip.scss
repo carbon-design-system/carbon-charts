@@ -1,13 +1,140 @@
 @import '@carbon/motion/scss/motion.scss';
+@import "../../node_modules/@carbon/themes/scss/themes";
 
 div.cc-tooltip {
 	pointer-events: none;
 	transition: opacity .1s;
 	@include carbon--motion(standard, expressive);
+	display: inline;
+	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+	@include fonts();
+	font-weight: 300;
+	position: absolute;
+	word-wrap: break-word;
+	z-index: 1059;
+	pointer-events: none;
 
 	&.hidden {
 		opacity: 0;
 		transition: opacity .1s;
 		@include carbon--motion(standard, expressive);
 	}
+
+	.content-box {
+		.datapoint-tooltip, .total-val {
+			display: flex;
+			padding: 4px;
+			flex-flow: row nowrap;
+			width: auto;
+			min-width: 20px;
+			justify-content: flex-start;
+			align-items: center;
+
+			p {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				line-height: 16px;
+				font-size: 12px;
+				display: inline-block;
+				margin: 0;
+				padding: 0;
+				border: 0;
+
+				&.label {
+					flex: 1;
+					margin-right: 8px;
+				}
+
+				&.value {
+					width: auto;
+				}
+			}
+		}
+
+		.total-val {
+			font-weight: 500;
+			.label {
+				margin-left: 4px;
+			}
+		}
+
+		ul.multi-tooltip {
+			margin: 0;
+			padding: 0;
+
+			li {
+				list-style: none;
+				position: relative;
+
+				&:not(:last-child){
+					margin-bottom: 2px;
+				}
+			}
+		}
+	}
+
+	.tooltip-color {
+		position: absolute;
+		left:0;
+		top: 0;
+		width: 4px;
+		height: 100%;
+		& + p.label {
+			margin-left: 4px;
+		}
+	}
 }
+
+/////////////////////////////////////////////
+///          Theme styles                ////
+/////////////////////////////////////////////
+
+
+.carbon--theme--white {
+	.tooltip {
+		background-color: $ui-02;
+
+		p, .content-box {
+			color: $text-01;
+		}
+	}
+}
+
+.carbon--theme--g10 {
+	@include carbon--theme($carbon--theme--g10) {
+		.tooltip {
+			background-color: $ui-02;
+
+			p, .content-box {
+				color: $text-01;
+			}
+		}
+	}
+}
+
+.carbon--theme--g90 {
+    @include carbon--theme($carbon--theme--g90) {
+		.tooltip{
+			background-color: $ui-02;
+
+			p, .content-box {
+				color: $text-01;
+			}
+		}
+	}
+}
+
+.carbon--theme--g100 {
+	@include carbon--theme($carbon--theme--g100) {
+		.tooltip {
+			background-color: $ui-02;
+
+			p, .content-box {
+				color: $text-01;
+			}
+		}
+	}
+}
+
+

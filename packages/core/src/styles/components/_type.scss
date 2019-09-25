@@ -1,0 +1,100 @@
+@import "../../node_modules/@carbon/themes/scss/themes";
+
+svg.chart-svg {
+	text {
+		font-size: 12px;
+		line-height: 16px;
+		stroke-width: 0.3;
+		@include fonts();
+		font-weight: 400;
+
+		&.title {
+			font-size: 18px;
+			font-weight: bold;
+		}
+
+		&.chart-label {
+			font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+			dominant-baseline: middle;
+		}
+
+		&.chart-title {
+			font-size: 14px;
+			line-height: 16px;
+			font-weight: 600;
+			padding-bottom: 8px;
+			dominant-baseline: hanging;
+		}
+	}
+	g.tick {
+		text {
+			font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+		}
+	}
+ }
+
+
+/////////////////////////////////////////////
+///          Theme styles                ////
+/////////////////////////////////////////////
+
+.carbon--theme--white {
+	text {
+		fill: $text-02;
+
+		&.axis-label,
+		&.chart-title {
+			fill: $text-01;
+			stroke: $text-01;
+		}
+	}
+}
+
+.carbon--theme--g10 {
+	@include carbon--theme($carbon--theme--g10) {
+		text {
+			fill: $text-02;
+
+			&.axis-label,
+			&.chart-title {
+				fill: $text-01;
+				stroke: $text-01;
+			}
+		}
+	}
+}
+
+$gray100: #171717;
+
+.carbon--theme--g90 {
+	@include carbon--theme($carbon--theme--g90) {
+		text {
+			fill: $text-02;
+
+			&.axis-label,
+			&.chart-title {
+				fill: $text-01;
+				stroke: $text-01;
+			}
+		}
+	}
+}
+
+.carbon--theme--g100 {
+	@include carbon--theme($carbon--theme--g100) {
+		text {
+			fill: $text-02;
+
+			&.axis-label {
+				fill: $text-01;
+				stroke: $text-01;
+			}
+
+			&.chart-title {
+				fill: $text-01;
+				stroke: $text-01;
+			}
+		}
+	}
+}
+

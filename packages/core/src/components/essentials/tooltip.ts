@@ -8,7 +8,6 @@ import Position, { PLACEMENTS } from "@carbon/utils-position";
 
 // D3 Imports
 import { select, mouse, event } from "d3-selection";
-import { timeFormat } from "d3-time-format";
 
 export class Tooltip extends Component {
 	type = "tooltip";
@@ -24,19 +23,23 @@ export class Tooltip extends Component {
 		this.tooltip = DOMUtils.appendOrSelect(holder, "div.tooltip.chart-tooltip.cc-tooltip");
 
 		// Apply html content to the tooltip
-		const tooltipTextConainter = DOMUtils.appendOrSelect(this.tooltip, "div.text-box");
+		const tooltipTextContainer = DOMUtils.appendOrSelect(this.tooltip, "div.content-box");
 
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.getDocumentFragment().addEventListener("show-tooltip", e => {
-			const data = select(event.target).datum() as any;
+			let data = select(event.target).datum() as any;
 
-			if (Tools.getProperty(this.model.getOptions(), "tooltip", "size") === Configuration.tooltip.size.COMPACT) {
-				tooltipTextConainter.html(`<b>${data.datasetLabel || data.data.label}:</b> ${data.value}<br/>`);
+			// if there is a provided tooltip HTML function
+			if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
+				tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data));
 			} else {
-				tooltipTextConainter.html(`
-					<p class='bignum'>${data.datasetLabel || data.data.label}</p>
-					<p>${data.value}</p>
-				`);
+				if (e.detail.multidata) {
+					// multi tooltip
+					data = e.detail.multidata;
+					tooltipTextContainer.html(this.getMultiTooltipHTML(data));
+				} else {
+					tooltipTextContainer.html(this.getTooltipHTML(data));
+				}
 			}
 
 			// Position the tooltip
@@ -46,10 +49,51 @@ export class Tooltip extends Component {
 			this.tooltip.classed("hidden", false);
 		});
 
-		// listen to show-tooltip Custom Events to render the tooltip
+		// listen to hide-tooltip Custom Events to hide the tooltip
 		this.services.events.getDocumentFragment().addEventListener("hide-tooltip", e => {
 			this.tooltip.classed("hidden", true);
 		});
+	}
+
+	getTooltipHTML(data: any) {
+
+		// this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
+		const dataVal = Tools.getProperty(data, "data") ? data.data : data;
+
+		// format the value if needed
+		const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
+		this.model.getOptions().tooltip.valueFormatter(dataVal.value) : dataVal.value.toLocaleString("en");
+
+		// pie charts don't have a dataset label since they only support one dataset
+		const label = dataVal.datasetLabel ? dataVal.datasetLabel : dataVal.label;
+
+		return `<div class="datapoint-tooltip"><p class="label">${label}</p><p class="value">${formattedValue}</p></div>`;
+	}
+
+	getMultiTooltipHTML(data: any) {
+		const points = data;
+
+		// sort them so they are in the same order as the graph
+		points.sort(function (a, b) {
+			return b.value - a.value;
+		});
+
+		let listHTML = "<ul class='multi-tooltip'>";
+
+		points.forEach(datapoint => {
+			const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
+			this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
+
+			const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
+
+			listHTML += `<li><div class="datapoint-tooltip">
+			<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
+			<p class="label">${datapoint.datasetLabel}</p>
+			<p class="value">${formattedValue}</p>
+			</div></li>`;
+		});
+
+		return listHTML + `</ul>` ;
 	}
 
 	render() {

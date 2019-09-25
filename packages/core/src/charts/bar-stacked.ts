@@ -15,7 +15,8 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
 	Legend,
-	LayoutComponent
+	LayoutComponent,
+	TooltipBar
 } from "../components/index";
 
 export class StackedBarChart extends AxisChart {
@@ -42,7 +43,8 @@ export class StackedBarChart extends AxisChart {
 			new Bar(this.model, this.services)
 		];
 
-		// Grab base axis chart components from AxisChart
-		return this.getAxisChartComponents(graphFrameComponents);
+		const components: any[] = this.getAxisChartComponents(graphFrameComponents);
+		components.push(new TooltipBar(this.model, this.services));
+		return components;
 	}
 }

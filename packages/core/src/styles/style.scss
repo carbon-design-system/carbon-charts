@@ -23,44 +23,44 @@ div.chart-holder {
 		/*
 		Chart titles
 		*/
-		text.chart-title {
-			font-size: 14px;
-			line-height: 16px;
-			font-weight: 600;
-			padding-bottom: 8px;
-			dominant-baseline: hanging;
-		}
+		// text.chart-title {
+		// 	font-size: 14px;
+		// 	line-height: 16px;
+		// 	font-weight: 600;
+		// 	padding-bottom: 8px;
+		// 	dominant-baseline: hanging;
+		// }
 
 		/*
 		Axes
 		*/
-		g.yAxes {
-			line.domain {
-				stroke-width: 1px;
-			}
+		// g.yAxes {
+		// 	line.domain {
+		// 		stroke-width: 1px;
+		// 	}
 
-			.axis path.domain {
-				stroke: none;
-			}
-		}
+		// 	.axis path.domain {
+		// 		stroke: none;
+		// 	}
+		// }
 
-		g.x.axis {
-			path.domain {
-				stroke: none;
-				stroke-width: 2;
-			}
+		// g.x.axis {
+		// 	path.domain {
+		// 		stroke: none;
+		// 		stroke-width: 2;
+		// 	}
 
-			g.tick line {
-				stroke: none;
-			}
-		}
+		// 	g.tick line {
+		// 		stroke: none;
+		// 	}
+		// }
 
-		g.x.grid,
-		g.y.grid {
-			g.tick line {
-				stroke: #dcdcdc;
-			}
-		}
+		// g.x.grid,
+		// g.y.grid {
+		// 	g.tick line {
+		// 		stroke: #dcdcdc;
+		// 	}
+		// }
 
 		path {
 			&.line {
@@ -84,138 +84,138 @@ div.chart-holder {
 		}
 	}
 
-	g.tick text {
-		font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
-	}
+	// g.tick text {
+	// 	font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+	// }
 
-	text {
-		font-size: 12px;
-		line-height: 16px;
-		stroke-width: 0.3;
-		@include fonts();
-		font-weight: 400;
+	// text {
+	// 	font-size: 12px;
+	// 	line-height: 16px;
+	// 	stroke-width: 0.3;
+	// 	@include fonts();
+	// 	font-weight: 400;
 
-		&.title {
-			font-size: 18px;
-			font-weight: bold;
-		}
+	// 	&.title {
+	// 		font-size: 18px;
+	// 		font-weight: bold;
+	// 	}
 
-		&.chart-label {
-			font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
-			dominant-baseline: middle;
-		}
-	}
+	// 	&.chart-label {
+	// 		font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+	// 		dominant-baseline: middle;
+	// 	}
+	// }
 
-	.legend-wrapper {
-		height: 40px;
-		width: 100%;
-	}
+	// .legend-wrapper {
+	// 	height: 40px;
+	// 	width: 100%;
+	// }
 
-	.legend-btn {
-		&.clickable {
-			&:hover {
-				cursor: pointer;
-			}
+	// .legend-btn {
+	// 	&.clickable {
+	// 		&:hover {
+	// 			cursor: pointer;
+	// 		}
 
-			.legend-circle {
-				&:hover {
-					cursor: pointer;
-				}
-			}
-		}
-	}
+	// 		.legend-circle {
+	// 			&:hover {
+	// 				cursor: pointer;
+	// 			}
+	// 		}
+	// 	}
+	// }
 
-	.legend {
-		float: right;
-		margin-top: 0;
-		margin-right: 20px;
-		overflow: hidden;
-		padding-left: 0;
-		white-space: nowrap;
+	// .legend {
+	// 	float: right;
+	// 	margin-top: 0;
+	// 	margin-right: 20px;
+	// 	overflow: hidden;
+	// 	padding-left: 0;
+	// 	white-space: nowrap;
 
-		.expand-btn {
-			background-repeat: no-repeat;
-			background-image: url("data:image/svg+xml;utf8,<svg width='13px' height='13px' viewBox='0 0 13 13' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch --><title>icoPlus</title><desc>Created with Sketch.</desc><defs></defs><g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='Artboard' transform='translate(-496.000000, -162.000000)'><g id='icoPlus' transform='translate(496.000000, 162.000000)'><g id='open-modal-' fill='%234178BE'><rect id='Rectangle' x='0' y='0' width='13' height='13'></rect><g id='Expand-20px' fill-rule='nonzero'><path d='M12.1875,12.1875 L0.8125,12.1875 L0.8125,0.8125 L12.1875,0.8125 L12.1875,12.1875 Z M13,0 L0,0 L0,13 L13,13 L13,0 Z' id='Shape'></path></g></g><g id='Add,-Plus-16px' transform='translate(2.000000, 2.000000)' fill-rule='nonzero' fill='%23FFFFFF'><polygon id='Shape' points='9 3.85714286 5.14285714 3.85714286 5.14285714 0 3.85714286 0 3.85714286 3.85714286 0 3.85714286 0 5.14285714 3.85714286 5.14285714 3.85714286 9 5.14285714 9 5.14285714 5.14285714 9 5.14285714'></polygon></g></g></g></g></svg>");
-			position: absolute;
-			right: 0;
-			top: 2px;
-			height: 16px;
-			width: 16px;
-			cursor: pointer;
-		}
-	}
+	// 	.expand-btn {
+	// 		background-repeat: no-repeat;
+	// 		background-image: url("data:image/svg+xml;utf8,<svg width='13px' height='13px' viewBox='0 0 13 13' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch --><title>icoPlus</title><desc>Created with Sketch.</desc><defs></defs><g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='Artboard' transform='translate(-496.000000, -162.000000)'><g id='icoPlus' transform='translate(496.000000, 162.000000)'><g id='open-modal-' fill='%234178BE'><rect id='Rectangle' x='0' y='0' width='13' height='13'></rect><g id='Expand-20px' fill-rule='nonzero'><path d='M12.1875,12.1875 L0.8125,12.1875 L0.8125,0.8125 L12.1875,0.8125 L12.1875,12.1875 Z M13,0 L0,0 L0,13 L13,13 L13,0 Z' id='Shape'></path></g></g><g id='Add,-Plus-16px' transform='translate(2.000000, 2.000000)' fill-rule='nonzero' fill='%23FFFFFF'><polygon id='Shape' points='9 3.85714286 5.14285714 3.85714286 5.14285714 0 3.85714286 0 3.85714286 3.85714286 0 3.85714286 0 5.14285714 3.85714286 5.14285714 3.85714286 9 5.14285714 9 5.14285714 5.14285714 9 5.14285714'></polygon></g></g></g></g></svg>");
+	// 		position: absolute;
+	// 		right: 0;
+	// 		top: 2px;
+	// 		height: 16px;
+	// 		width: 16px;
+	// 		cursor: pointer;
+	// 	}
+	// }
 
-	.legend-btn {
-		display: inline-flex;
-		flex-direction: row;
-		align-items: center;
-		line-height: 20px;
-		font-size: 12px;
-		margin-bottom: 0;
+	// .legend-btn {
+	// 	display: inline-flex;
+	// 	flex-direction: row;
+	// 	align-items: center;
+	// 	line-height: 20px;
+	// 	font-size: 12px;
+	// 	margin-bottom: 0;
 
-		.legend-circle {
-			display: inherit;
-			height: 12px;
-			width: 12px;
-			border-radius: 3px;
-			margin: 0 5px 5px 15px;
-			box-sizing: border-box;
-		}
+	// 	.legend-circle {
+	// 		display: inherit;
+	// 		height: 12px;
+	// 		width: 12px;
+	// 		border-radius: 3px;
+	// 		margin: 0 5px 5px 15px;
+	// 		box-sizing: border-box;
+	// 	}
 
-		span {
-			display: inline;
-		}
+	// 	span {
+	// 		display: inline;
+	// 	}
 
-		text {
-			font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
-			font-size: 12px;
-			line-height: 16px;
-			max-width: 100px;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			overflow: hidden;
-			display: inherit;
-		}
+	// 	text {
+	// 		font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+	// 		font-size: 12px;
+	// 		line-height: 16px;
+	// 		max-width: 100px;
+	// 		text-overflow: ellipsis;
+	// 		white-space: nowrap;
+	// 		overflow: hidden;
+	// 		display: inherit;
+	// 	}
 
-		&.not-allowed {
-			cursor: default;
+	// 	&.not-allowed {
+	// 		cursor: default;
 
-			.legend-circle:hover {
-				cursor: default;
-				box-shadow: none !important;
-			}
-		}
-	}
+	// 		.legend-circle:hover {
+	// 			cursor: default;
+	// 			box-shadow: none !important;
+	// 		}
+	// 	}
+	// }
 
-	.legend-tooltip {
-		padding: 0;
-		border: none;
-		pointer-events: auto;
+	// .legend-tooltip {
+	// 	padding: 0;
+	// 	border: none;
+	// 	pointer-events: auto;
 
-		.legend-tooltip-header {
-			color: white;
-			font-size: 15px;
-			font-weight: 700;
-			padding: 13px 20px;
-			margin: 0;
-		}
-		.legend-btn {
-			display: inline-block;
-			width: 100%;
-		}
-		text {
-			max-width: 145px;
-		}
-		button {
-			position: absolute;
-			top: 7px;
-			right: 10px;
-		}
-		.legend-tooltip-content {
-			text-align: left;
-			padding: 0 7px 15px 7px;
-		}
-	}
+	// 	.legend-tooltip-header {
+	// 		color: white;
+	// 		font-size: 15px;
+	// 		font-weight: 700;
+	// 		padding: 13px 20px;
+	// 		margin: 0;
+	// 	}
+	// 	.legend-btn {
+	// 		display: inline-block;
+	// 		width: 100%;
+	// 	}
+	// 	text {
+	// 		max-width: 145px;
+	// 	}
+	// 	button {
+	// 		position: absolute;
+	// 		top: 7px;
+	// 		right: 10px;
+	// 	}
+	// 	.legend-tooltip-content {
+	// 		text-align: left;
+	// 		padding: 0 7px 15px 7px;
+	// 	}
+	// }
 
 	.right-legend {
 		position: absolute;
@@ -272,38 +272,6 @@ div.chart-overlay {
 	}
 }
 
-.tooltip {
-	background-color: #fff;
-	border: 1px solid #dfe3e6;
-	padding: 0.25rem 0.5rem;
-	display: block;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-	@include fonts();
-	font-size: 12px;
-	font-weight: 300;
-	position: absolute;
-	padding: 10px;
-	border-radius: 3px;
-	min-width: 80px;
-	max-width: 70%;
-	word-wrap: break-word;
-	z-index: 1059;
-	pointer-events: none;
-
-	p {
-		margin: 0;
-		font-size: 12px;
-
-		&.bignum {
-			font-size: 19px;
-			font-weight: 600;
-		}
-	}
-
-	b {
-		font-weight: 600;
-	}
-}
 #carbon-charts-patterns svg {
 	height: 0;
 }
