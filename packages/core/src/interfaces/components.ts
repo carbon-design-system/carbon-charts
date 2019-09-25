@@ -36,14 +36,28 @@ export interface LegendOptions {
 
 export interface TooltipOptions {
 	/**
-	 * a function to format the tooltip contents
+	 * a function to format the tooltip values
 	 */
-	formatter: Function;
+	formatter?: Function;
 	/**
-	 * custom HTML content for tooltip provided by user
+	 * custom function for returning tooltip HTML
 	 */
-	customHTML?: string;
+	customHTML?: Function;
 }
+
+/**
+ * extends tooltip options to provide support for multiple gridline tooltips
+ */
+export interface AxisTooltipOptions extends TooltipOptions {
+	/** options for gridline event listeners */
+	gridline?: {
+		/**
+		 * controls whether the gridlines are active for tooltip support
+		 */
+		enabled?: boolean
+	};
+}
+
 
 export interface GridOptions {
 	y?: {

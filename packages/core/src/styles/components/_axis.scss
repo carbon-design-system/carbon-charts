@@ -1,13 +1,114 @@
-g.cc-axes {
-	g.axis {
-		path.domain {
-			stroke: #8c8c8c;
-		}
+@import "../../node_modules/@carbon/themes/scss/themes";
 
-		g.tick {
-			line {
-				display: none;
+
+.cc-axes {
+	g.x.grid,
+	g.y.grid {
+		g.tick line {
+			stroke-width: 1px;
+		}
+		g.tick.active line {
+			stroke-dasharray: 2px;
+		}
+	}
+}
+
+
+
+/////////////////////////////////////////////
+///          Theme styles                ////
+/////////////////////////////////////////////
+
+.carbon--theme--white {
+	.cc-axes {
+		g.x.grid,
+		g.y.grid {
+			g.tick line {
+				stroke: $ui-03;
+			}
+
+			g.tick.active line {
+				stroke: $focus;
 			}
 		}
+
+		g.axis {
+			path.domain {
+				stroke: $ui-04;
+			}
+		}
+	}
+}
+
+.carbon--theme--g10 {
+	@include carbon--theme($carbon--theme--g10) {
+		.cc-axes {
+			g.x.grid,
+			g.y.grid {
+				g.tick line {
+					stroke: $ui-03;
+				}
+
+				g.tick.active line {
+					stroke: $focus;
+				}
+			}
+
+			g.axis {
+				path.domain {
+					stroke: $ui-04;
+				}
+			}
+		}
+	}
+}
+
+
+.carbon--theme--g90 {
+	@include carbon--theme($carbon--theme--g90) {
+		.cc-axes {
+			g.x.grid,
+			g.y.grid {
+				g.tick line {
+					stroke: $ui-01;
+				}
+
+				g.tick.active line {
+					stroke: $focus;
+				}
+			}
+
+			g.axis {
+				path.domain {
+					stroke: $ui-04;
+				}
+			}
+		}
+
+	}
+}
+
+
+.carbon--theme--g100 {
+	@include carbon--theme($carbon--theme--g100) {
+		.cc-axes {
+			g.x.grid,
+			g.y.grid {
+				g.tick line {
+					stroke: $ui-01;
+				}
+
+				g.tick.active line {
+					stroke: $focus;
+				}
+			}
+
+			g.axis {
+				path.domain {
+					stroke: $ui-04;
+				}
+			}
+		}
+
 	}
 }

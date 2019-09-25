@@ -1,5 +1,5 @@
 // Internal Imports
-import { ChartConfig, BaseChartOptions, LayoutGrowth, LayoutDirection, LegendOrientations } from "./interfaces/index";
+import { ChartConfig, BaseChartOptions, LayoutGrowth, LayoutDirection, LegendOrientations, ChartTheme } from "./interfaces/index";
 
 // Misc
 import { ChartModel } from "./model";
@@ -8,6 +8,7 @@ import { Tools } from "./tools";
 
 // Services
 import { DOMUtils, Events, Transitions } from "./services/index";
+import { select } from "d3-selection";
 
 export class Chart {
 	components: Array<Component>;
@@ -51,12 +52,22 @@ export class Chart {
 			// Set model data & options
 			this.model.setData(chartConfigs.data);
 		});
+
+		this.setTheme();
 	}
 
 	getComponents(): Array<any> {
 		console.error("getComponents() method is not implemented");
 
 		return null;
+	}
+
+	setTheme() {
+		const theme = Tools.getProperty(this.model.getOptions(), "theme") ?
+			Tools.getProperty(this.model.getOptions(), "theme") : ChartTheme.WHITE;
+		const holder = select(this.model.get("holder"));
+
+		holder.classed(`carbon--theme--${theme}`, true);
 	}
 
 	update(animate = true) {
@@ -174,7 +185,6 @@ export class Chart {
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [
-			new Tooltip(this.model, this.services),
 			new LayoutComponent(
 				this.model,
 				this.services,
