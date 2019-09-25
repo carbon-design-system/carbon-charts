@@ -62,7 +62,7 @@ export class Scatter extends Component {
 				if (filled) {
 					return this.model.getFillScale()[d.datasetLabel](d.label) as any;
 				} else {
-					return "#f3f3f3";
+					return;
 				}
 			})
 			.attr("fill-opacity", filled ? 0.2 : 1)
@@ -124,7 +124,7 @@ export class Scatter extends Component {
 				hoveredElement.classed("hovered", false);
 
 				if (!self.configs.filled) {
-					hoveredElement.style("fill", "#f3f3f3");
+					hoveredElement.style("fill", "unset");
 				}
 
 				const itemData = select(this).datum();
