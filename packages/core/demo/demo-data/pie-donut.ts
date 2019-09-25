@@ -2,6 +2,7 @@ import { colors } from "./colors";
 import { getTheme } from "./themes";
 
 export const pieOptions = {
+	title: "Pie Chart",
 	accessibility: false,
 	legendClickable: true,
 	resizable: true,
@@ -13,6 +14,7 @@ export const pieOptions = {
 };
 
 export const donutOptions = {
+	title: "Donut Chart",
 	accessibility: false,
 	legendClickable: true,
 	resizable: true,
