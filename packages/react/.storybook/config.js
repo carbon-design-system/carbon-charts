@@ -14,7 +14,7 @@ addDecorator(
 
 // load global styles
 require("!style-loader!css-loader!sass-loader!./previews.scss");
-require("!style-loader!css-loader!@carbon/charts/dist/style.css");
+require("!style-loader!css-loader!@carbon/charts/dist/styles.css");
 
 const req = require.context("../stories/", true, /.stories.js$/);
 function loadStories() {

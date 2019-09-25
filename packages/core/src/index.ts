@@ -1,5 +1,3 @@
-import "./styles/style.scss";
-
 import {
 	StackedBarChart,
 	LineChart,
