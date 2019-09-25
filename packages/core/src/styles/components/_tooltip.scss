@@ -12,7 +12,6 @@ div.cc-tooltip {
 	position: absolute;
 	word-wrap: break-word;
 	z-index: 1059;
-	pointer-events: none;
 
 	&.hidden {
 		opacity: 0;
