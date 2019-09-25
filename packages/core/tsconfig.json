@@ -2,7 +2,10 @@
 	"compilerOptions": {
 		"baseUrl": "",
 		"declaration": true,
-		"lib": ["es2015", "dom"],
+		"lib": [
+			"es2015",
+			"dom"
+		],
 		"sourceMap": true,
 		"mapRoot": "./",
 		"module": "es2015",
@@ -12,12 +15,13 @@
 		"target": "es5",
 		"inlineSources": true,
 		"types": [
-			"node", "jasmine"
+			"node",
+			"jasmine"
 		],
 		"typeRoots": [
 			"./node_modules/@types",
 			"./custom.d.ts"
-		],
+		]
 	},
 	"include": [
 		"./src/**/*"

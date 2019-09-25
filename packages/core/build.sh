@@ -2,7 +2,7 @@
 
 set -e
 
-webpack --config webpack.build.js
+rollup -c
 tsc
 cp *.md dist/
 cp package.json dist/
