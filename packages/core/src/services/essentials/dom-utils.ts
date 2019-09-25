@@ -122,6 +122,7 @@ export class DOMUtils extends Service {
 		// Add width & height to the chart holder if necessary, and add a classname
 		this.styleHolderElement();
 
+		// Add main SVG
 		this.addSVGElement();
 
 		if (this.model.getOptions().resizable) {

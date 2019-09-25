@@ -19,9 +19,6 @@ export class Chart {
 	};
 
 	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
-		setTimeout(() => {
-			this.init(holder, chartConfigs);
-		});
 	}
 
 	// Contains the code that uses properties that are overridable by the super-class
@@ -29,12 +26,10 @@ export class Chart {
 		// Set model update callback
 		this.model.setUpdateCallback(this.update.bind(this));
 
+		// Store the holder in the model
 		this.model.set({
 			holder
-		});
-
-		// Set model data & options
-		this.model.setData(chartConfigs.data);
+		}, true);
 
 		// Initialize all services
 		Object.keys(this.services).forEach(serviceName => {
@@ -52,9 +47,9 @@ export class Chart {
 				this.update(false);
 			});
 
-		// Run this.update() after the init() method of components run
 		setTimeout(() => {
-			this.update();
+			// Set model data & options
+			this.model.setData(chartConfigs.data);
 		});
 	}
 
