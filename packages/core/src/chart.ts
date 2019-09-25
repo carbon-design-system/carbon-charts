@@ -26,10 +26,13 @@ export class Chart {
 		// Set model update callback
 		this.model.setUpdateCallback(this.update.bind(this));
 
-		// Store holder in the model
+		// Store the holder in the model
 		this.model.set({
 			holder
 		}, true);
+
+		// Set model data & options
+		this.model.setData(chartConfigs.data);
 
 		// Initialize all services
 		Object.keys(this.services).forEach(serviceName => {
@@ -43,14 +46,10 @@ export class Chart {
 			.addEventListener("chart-resize", () => {
 				this.update(false);
 			});
-		// Run this.update() after the init() method of components run
-		setTimeout(() => {
-			// Generate all of the chart's components and store them
-			this.components = this.getComponents();
 
-			// Set model data & options
-			this.model.setData(chartConfigs.data);
-		});
+		this.components = this.getComponents();
+
+		this.update();
 
 		this.setTheme();
 	}

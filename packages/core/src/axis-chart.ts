@@ -26,8 +26,6 @@ export class AxisChart extends Chart {
 
 	constructor(holder: Element, chartConfigs: ChartConfig<AxisChartOptions>) {
 		super(holder, chartConfigs);
-
-		this.init(holder, chartConfigs);
 	}
 
 	protected getAxisChartComponents(graphFrameComponents: Array<any>) {
