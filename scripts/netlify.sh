@@ -11,13 +11,18 @@ if [ $CONTEXT == "deploy-preview" ]; then
         PKG_TO_BUILD="@carbon/charts"
     else
         PKG_TO_BUILD="@carbon/charts-$PKG_NAME"
+
+
+		cd packages/core
+		yarn build
+		cd ../..
     fi
 
     # create the folder we'll deploy in netlify
     mkdir -p pages
 
     # bootstrap the package we're building
-    # lerna bootstrap --scope $PKG_TO_BUILD
+    lerna bootstrap --scope $PKG_TO_BUILD
 
     # cd into the package directory
     cd packages/$PKG_NAME
