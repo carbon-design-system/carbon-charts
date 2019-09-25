@@ -7,7 +7,7 @@ $default_transition: all 0.1s ease-out;
 
 body {
 	margin: 0;
-	background-color: #fbfbfb;
+	background-color: #f3f3f3;
 	font-family: "IBM Plex Sans", Arial, sans-serif;
 }
 
@@ -113,7 +113,6 @@ header.m-demo-header {
 
 .demo-chart-holder {
 	background-color: #fff;
-	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
 	margin: 0 auto 60px auto;
 	display: block;
 	height: 500px;
@@ -121,7 +120,6 @@ header.m-demo-header {
 	min-height: 300px;
 	max-width: 800px;
 	padding: 30px;
-	transition: box-shadow 0.1s ease-out;
 	overflow: hidden;
 	resize: both;
 	font-weight: 400;
@@ -129,11 +127,6 @@ header.m-demo-header {
 	h3 {
 		border-bottom: 1px solid lightgray;
 		margin: 0;
-	}
-
-	&:hover {
-		box-shadow: 0 15px 45px -11px rgba(22, 56, 107, 0.15);
-		transition: box-shadow 0.1s ease-out;
 	}
 
 	&:last-child {
@@ -168,8 +161,8 @@ div.options {
 	margin-bottom: 30px;
 	padding: 30px;
 	background-color: #fff;
-	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
 }
+
 //**********************************************
 // Themes
 //***********************************************
@@ -196,7 +189,6 @@ body.carbon--dark-g100 {
 
 		div.options {
 			background: $gray90;
-			box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.123);
 		}
 
 		div.demo-chart-holder {
@@ -223,7 +215,6 @@ body.carbon--dark-g90 {
 
 		div.options {
 			background: $gray90;
-			box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.123);
 		}
 
 		div.demo-chart-holder {
@@ -250,7 +241,6 @@ body.carbon--dark-g10 {
 
 		div.options {
 			background: $gray10;
-			box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.3);
 		}
 
 		div.demo-chart-holder {
