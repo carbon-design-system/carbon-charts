@@ -3,7 +3,9 @@ import {
 	LayoutDirection,
 	LayoutGrowth,
 	LegendOrientations,
-	LegendPositions
+	LegendPositions,
+	ChartConfig,
+	AxisChartOptions
 } from "./interfaces/index";
 import {
 	LayoutComponent,
@@ -17,6 +19,12 @@ import { Tools } from "./tools";
 import { Axes, Curves } from "./services/index";
 
 export class AxisChart extends Chart {
+	constructor(holder: Element, chartConfigs: ChartConfig<AxisChartOptions>) {
+		super(holder, chartConfigs);
+
+		this.init(holder, chartConfigs);
+	}
+
 	protected services: any = Object.assign(this.services, {
 		axes: Axes,
 		curves: Curves

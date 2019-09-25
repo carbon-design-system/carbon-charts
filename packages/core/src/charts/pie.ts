@@ -23,6 +23,8 @@ export class PieChart extends Chart {
 	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>) {
 		super(holder, chartConfigs);
 
+		this.init(holder, chartConfigs);
+
 		if (chartConfigs.options) {
 			// Merge the default options for this chart
 			// With the user provided options

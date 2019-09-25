@@ -19,23 +19,17 @@ export class Chart {
 		transitions: Transitions
 	};
 
-	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
-		setTimeout(() => {
-			this.init(holder, chartConfigs);
-		});
-	}
+	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {}
 
 	// Contains the code that uses properties that are overridable by the super-class
 	init(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
 		// Set model update callback
 		this.model.setUpdateCallback(this.update.bind(this));
 
+		// Store holder in the model
 		this.model.set({
 			holder
-		});
-
-		// Set model data & options
-		this.model.setData(chartConfigs.data);
+		}, true);
 
 		// Initialize all services
 		Object.keys(this.services).forEach(serviceName => {
@@ -43,19 +37,19 @@ export class Chart {
 			this.services[serviceName] = new serviceObj(this.model, this.services);
 		});
 
-		// Generate all of the chart's components and store them
-		this.components = this.getComponents();
-
 		// Set chart resize event listener
 		this.services.events
 			.getDocumentFragment()
 			.addEventListener("chart-resize", () => {
 				this.update(false);
 			});
-
 		// Run this.update() after the init() method of components run
 		setTimeout(() => {
-			this.update();
+			// Generate all of the chart's components and store them
+			this.components = this.getComponents();
+
+			// Set model data & options
+			this.model.setData(chartConfigs.data);
 		});
 
 		this.setTheme();
