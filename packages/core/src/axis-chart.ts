@@ -3,7 +3,9 @@ import {
 	LayoutDirection,
 	LayoutGrowth,
 	LegendOrientations,
-	LegendPositions
+	LegendPositions,
+	ChartConfig,
+	AxisChartOptions
 } from "./interfaces/index";
 import {
 	LayoutComponent,
@@ -20,6 +22,12 @@ export class AxisChart extends Chart {
 		axes: Axes,
 		curves: Curves
 	});
+
+	constructor(holder: Element, chartConfigs: ChartConfig<AxisChartOptions>) {
+		super(holder, chartConfigs);
+
+		this.init(holder, chartConfigs);
+	}
 
 	protected getAxisChartComponents(graphFrameComponents: Array<any>) {
 		const titleComponent = {
