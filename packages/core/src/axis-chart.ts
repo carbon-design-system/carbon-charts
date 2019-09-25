@@ -19,16 +19,16 @@ import { Tools } from "./tools";
 import { Axes, Curves } from "./services/index";
 
 export class AxisChart extends Chart {
+	protected services: any = Object.assign(this.services, {
+		axes: Axes,
+		curves: Curves
+	});
+
 	constructor(holder: Element, chartConfigs: ChartConfig<AxisChartOptions>) {
 		super(holder, chartConfigs);
 
 		this.init(holder, chartConfigs);
 	}
-
-	protected services: any = Object.assign(this.services, {
-		axes: Axes,
-		curves: Curves
-	});
 
 	protected getAxisChartComponents(graphFrameComponents: Array<any>) {
 		const titleComponent = {
