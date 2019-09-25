@@ -1,3 +1,48 @@
-g.cc-grid {
-	
+@import "../../node_modules/@carbon/themes/scss/themes";
+
+.cc-grid {}
+
+/////////////////////////////////////////////
+///          Theme styles                ////
+/////////////////////////////////////////////
+
+.carbon--theme--white {
+	.cc-grid {
+		rect.chart-grid-backdrop {
+			fill: $ui-01;
+		}
+	}
 }
+
+.carbon--theme--g10 {
+	@include carbon--theme($carbon--theme--g10) {
+		.cc-grid {
+			rect.chart-grid-backdrop {
+				fill: $ui-01;
+			}
+		}
+	}
+}
+
+$gray100: #171717;
+
+.carbon--theme--g90 {
+	@include carbon--theme($carbon--theme--g90) {
+		.cc-grid {
+			rect.chart-grid-backdrop {
+				fill: $gray100;
+			}
+		}
+	}
+}
+
+.carbon--theme--g100 {
+	@include carbon--theme($carbon--theme--g100) {
+		.cc-grid {
+			rect.chart-grid-backdrop {
+				fill: #000;
+			}
+		}
+	}
+}
+

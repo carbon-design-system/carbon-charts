@@ -86,6 +86,21 @@ div.cc-tooltip {
 	}
 }
 
+/////////////////////////////////////////////
+///          Theme styles                ////
+/////////////////////////////////////////////
+
+
+.carbon--theme--white {
+	.tooltip {
+		background-color: $ui-02;
+
+		p, .content-box {
+			color: $text-01;
+		}
+	}
+}
+
 .carbon--theme--g10 {
 	@include carbon--theme($carbon--theme--g10) {
 		.tooltip {
@@ -122,12 +137,4 @@ div.cc-tooltip {
 	}
 }
 
-.carbon--theme--white {
-	.tooltip {
-		background-color: $ui-02;
 
-		p, .content-box {
-			color: $text-01;
-		}
-	}
-}

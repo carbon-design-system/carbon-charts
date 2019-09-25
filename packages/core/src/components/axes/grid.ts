@@ -183,8 +183,7 @@ export class Grid extends Component {
 			.lower();
 
 		backdropRect.attr("width", "100%")
-			.attr("height", "100%")
-			.attr("fill", "#f3f3f3");
+			.attr("height", "100%");
 	}
 
 	cleanGrid(g) {
