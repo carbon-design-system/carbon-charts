@@ -1,9 +1,8 @@
 import typescript from 'rollup-plugin-typescript2';
-import pkg from './package.json';
 import { terser } from "rollup-plugin-terser";
-import sass from 'rollup-plugin-sass';
+import pkg from './package.json';
 
-const outputDir = process.env.ENV === "demo" ? "./demo/dist" : "./dist"
+const outputDir = "./dist";
 export default {
 	input: 'src/index.ts',
 	output: [
@@ -28,13 +27,6 @@ export default {
 		typescript({
 			typescript: require('typescript'),
 		}),
-		terser(),
-		// CSS plugins
-		sass({
-			// Write all styles to the bundle destination where .js is replaced by .css
-			output: true,
-			// Filename to write all styles
-			output: `${outputDir}/styles.css`
-		})
+		terser()
 	]
 };

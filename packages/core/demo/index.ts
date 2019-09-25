@@ -11,7 +11,7 @@ import {
 
 // Styles
 import "./index.scss";
-import "./../src/styles/style.scss";
+import "./../src/styles/styles.scss";
 
 // Functionality for demo options toolbar
 import { initializeDemoOptions } from "./demo-options";

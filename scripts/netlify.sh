@@ -21,9 +21,6 @@ if [ $CONTEXT == "deploy-preview" ]; then
     # create the folder we'll deploy in netlify
     mkdir -p pages
 
-    # bootstrap the package we're building
-    lerna bootstrap --scope $PKG_TO_BUILD
-
     # cd into the package directory
     cd packages/$PKG_NAME
 
