@@ -24,16 +24,17 @@ export class LineChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<LineChartOptions>) {
 		super(holder, chartConfigs);
 
-		if (chartConfigs.options) {
-			// Merge the default options for this chart
-			// With the user provided options
-			this.model.setOptions(
-				Tools.merge(
-					Tools.clone(Configuration.options.lineChart),
-					chartConfigs.options
-				)
-			);
-		}
+		// Merge the default options for this chart
+		// With the user provided options
+		this.model.setOptions(
+			Tools.merge(
+				Tools.clone(Configuration.options.lineChart),
+				chartConfigs.options
+			)
+		);
+
+		// Initialize data, services, components etc.
+		this.init(holder, chartConfigs);
 	}
 
 	getComponents() {

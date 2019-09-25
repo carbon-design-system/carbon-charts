@@ -29,11 +29,6 @@ export class Component {
 				select(this.services.domUtils.getMainSVG())
 			);
 		}
-
-		// Call init() asynchronously after constructor runs
-		setTimeout(() => {
-			this.init();
-		});
 	}
 
 	init() {

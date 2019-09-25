@@ -2,6 +2,7 @@ import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
+import { ChartModel } from "../../model";
 
 // Carbon position service
 import Position, { PLACEMENTS } from "@carbon/utils-position";
@@ -15,7 +16,11 @@ export class Tooltip extends Component {
 	tooltip: any;
 	positionService: Position = new Position();
 
-	eventListenerSet = false;
+	constructor(model: ChartModel, services: any, configs?: any) {
+		super(model, services, configs);
+
+		this.init();
+	}
 
 	init() {
 		// Grab the tooltip element

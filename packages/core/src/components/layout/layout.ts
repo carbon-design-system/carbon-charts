@@ -34,6 +34,8 @@ export class LayoutComponent extends Component {
 		this.children = children;
 
 		this._instanceCount = LayoutComponent.instanceCount++;
+
+		this.init();
 	}
 
 	init() {
@@ -72,8 +74,6 @@ export class LayoutComponent extends Component {
 	}
 
 	render(animate = true) {
-		const self = this;
-
 		// Get parent SVG to render inside of
 		const svg = this.parent;
 		const { width, height } = DOMUtils.getSVGElementSize(svg, { useAttrs: true });
