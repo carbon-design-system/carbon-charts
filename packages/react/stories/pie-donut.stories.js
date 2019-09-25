@@ -31,10 +31,10 @@ const demoDonutOptions = {
 	legendClickable: true,
 	containerResizable: true,
 	colors,
-	center: new DonutCenter({
-		number: 25423,
-		label: "Browsers"
-	})
+	// center: new DonutCenter({
+	// 	number: 25423,
+	// 	label: "Browsers"
+	// })
 };
 
 const pieStories = storiesOf("Pie", module);
