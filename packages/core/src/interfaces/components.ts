@@ -54,7 +54,11 @@ export interface AxisTooltipOptions extends TooltipOptions {
 		/**
 		 * controls whether the gridlines are active for tooltip support
 		 */
-		enabled?: boolean
+		enabled?: boolean,
+		/**
+		 * optional set threshold (value between 0 and 1) for active gridlines
+		 */
+		threshold?: number
 	};
 }
 

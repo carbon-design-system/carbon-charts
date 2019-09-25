@@ -1,6 +1,17 @@
 @import "../../node_modules/@carbon/themes/scss/themes";
 
-.cc-grid {}
+.cc-grid {
+	g.x.grid,
+	g.y.grid {
+		g.tick line {
+			pointer-events: none;
+			stroke-width: 1px;
+		}
+		g.tick.active line {
+			stroke-dasharray: 2px;
+		}
+	}
+}
 
 /////////////////////////////////////////////
 ///          Theme styles                ////
@@ -11,6 +22,17 @@
 		rect.chart-grid-backdrop {
 			fill: $ui-01;
 		}
+
+		g.x.grid,
+		g.y.grid {
+			g.tick line {
+				stroke: $ui-03;
+			}
+
+			g.tick.active line {
+				stroke: $focus;
+			}
+		}
 	}
 }
 
@@ -19,6 +41,17 @@
 		.cc-grid {
 			rect.chart-grid-backdrop {
 				fill: $ui-01;
+			}
+
+			g.x.grid,
+			g.y.grid {
+				g.tick line {
+					stroke: $ui-03;
+				}
+
+				g.tick.active line {
+					stroke: $focus;
+				}
 			}
 		}
 	}
@@ -32,6 +65,17 @@ $gray100: #171717;
 			rect.chart-grid-backdrop {
 				fill: $gray100;
 			}
+
+			g.x.grid,
+			g.y.grid {
+				g.tick line {
+					stroke: $ui-01;
+				}
+
+				g.tick.active line {
+					stroke: $focus;
+				}
+			}
 		}
 	}
 }
@@ -41,6 +85,17 @@ $gray100: #171717;
 		.cc-grid {
 			rect.chart-grid-backdrop {
 				fill: #000;
+			}
+
+			g.x.grid,
+			g.y.grid {
+				g.tick line {
+					stroke: $ui-01;
+				}
+
+				g.tick.active line {
+					stroke: $focus;
+				}
 			}
 		}
 	}

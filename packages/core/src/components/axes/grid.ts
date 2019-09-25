@@ -12,7 +12,6 @@ export class Grid extends Component {
 	type = "grid";
 
 	backdrop: any;
-	gridlineThreshold: number;
 
 	render() {
 		// Draw the backdrop
@@ -70,31 +69,59 @@ export class Grid extends Component {
 	}
 
 	/**
-	 * Sets the threshold for the gridline tooltips. On resize, the threshold needs to be
-	 * updated.
+	 * Returns the threshold for the gridline tooltips based on the mouse location.
+	 * Calculated based on the mouse position between the two closest gridlines or edges of chart.
 	 */
-	setGridlineThreshold() {
+	getGridlineThreshold(mousePos) {
 		// use the space between axis grid ticks to adjust the threshold for the tooltips
 		const svg = this.parent;
 
-		const gridlinesX = svg.selectAll(".x.grid .tick")
-		.filter((d, i) => { return i === 0 || i === 1; })._groups[0];
+		// sort in ascending x translation value order
+		const gridlinesX = svg.selectAll(".x.grid .tick").nodes()
+		.sort(function (a, b) {
+			return +Tools.getTranslationValues(a).tx - +Tools.getTranslationValues(b).tx;
+		});
 
-		const line1 = gridlinesX[0];
-		const line2 = gridlinesX[1];
+		// find the 2 gridlines on either side of the mouse
+		let floor = -1; let ceiling;
+		gridlinesX.forEach((line: HTMLElement, i: any) => {
+			if (mousePos[0] >= +Tools.getTranslationValues(line).tx) {
+				floor ++;
+			}
+		});
+		ceiling = ( floor + 1 < gridlinesX.length) ? floor + 1 : gridlinesX.length;
 
-		// use this to get the 'step' between chart gridlines
-		const lineSpacing = Math.abs(+Tools.getTranslationValues(line1).tx - +Tools.getTranslationValues(line2).tx);
+		// get the 'step' between chart gridlines
+		const line1 = gridlinesX[floor];
+		const line2 = gridlinesX[ceiling];
+		let lineSpacing;
 
-		this.gridlineThreshold = lineSpacing * Configuration.tooltip.axisTooltip.axisThreshold;
+		// if the mouse is on edge of charts (mouseX < first gridline || mouseX > last gridline)
+		// we can use the chart edge to determind the threshold for the gridlines
+		if (!line1) {
+			// we are between the first gridline and the chart edge
+			lineSpacing = +Tools.getTranslationValues(line2).tx;
+		} else if (!line2) {
+			// we need to use the chart right bounds in case there isnt a domain axis
+			const gridEl = svg.select(".cc-grid rect.chart-grid-backdrop").node();
+			const width = DOMUtils.getSVGElementSize(gridEl).width;
+
+			lineSpacing = width - +Tools.getTranslationValues(line1).tx;
+		} else {
+			// there are two gridlines to use
+			lineSpacing = +Tools.getTranslationValues(line2).tx - +Tools.getTranslationValues(line1).tx;
+		}
+		// return the threshold
+		return lineSpacing * Configuration.tooltip.axisTooltip.axisThreshold;
 	}
 
 	/**
 	 * Returns the active gridlines based on the gridline threshold and mouse position.
 	 * @param position mouse positon
 	 */
-	getActiveGridlines(position) {
-		const self = this;
+	getActiveGridline(position) {
+		const threshold = Tools.getProperty(this.model.getOptions, "tooltip", "gridline", "threshold") ?
+			Tools.getProperty(this.model.getOptions, "tooltip", "gridline", "threshold") : this.getGridlineThreshold(position);
 		const svg = this.parent;
 
 		const gridlinesX = svg.selectAll(".x.grid .tick")
@@ -103,8 +130,8 @@ export class Grid extends Component {
 
 			// threshold for when to display a gridline tooltip
 			const bounds = {
-				min: +translations.tx - +self.gridlineThreshold,
-				max: +translations.tx + +self.gridlineThreshold };
+				min: +translations.tx - threshold,
+				max: +translations.tx + threshold };
 
 			return bounds.min <= position[0] && position[0] <= bounds.max;
 		});
@@ -120,35 +147,30 @@ export class Grid extends Component {
 		const svg = this.parent;
 		const grid = DOMUtils.appendOrSelect(svg, "rect.chart-grid-backdrop");
 
-
-		// move this to on mousemove so it can calculate the threshold between grids of unequal distance
-		this.setGridlineThreshold();
-
 		grid
 		.on("mousemove", function() {
 			const chartContainer = self.services.domUtils.getMainSVG();
 			const pos = mouse(chartContainer);
 
-			const allgridlines = svg.selectAll(".x.grid .tick");
-
 			// remove the styling on the lines
+			const allgridlines = svg.selectAll(".x.grid .tick");
 			allgridlines.classed("active", false);
 
-
-			const activeGridlines = self.getActiveGridlines(pos);
-			if (activeGridlines.empty()) {
+			const activeGridline = self.getActiveGridline(pos);
+			if (activeGridline.empty()) {
+				self.services.events.dispatchEvent("hide-tooltip", {});
 				return;
 			}
 
 			// set active class to control dasharray and theme colors
-			activeGridlines
+			activeGridline
 			.classed("active", true);
 
 			// get the items that should be highlighted
 			let highlightItems;
 
 
-			activeGridlines.each(function(d) {
+			activeGridline.each(function(d) {
 				highlightItems = self.model.getDataWithDomain(d);
 			});
 
@@ -159,6 +181,9 @@ export class Grid extends Component {
 		.on("mouseout", function() {
 			svg.selectAll(".x.grid .tick")
 			.classed("active", false);
+
+			self.services.events.dispatchEvent("hide-tooltip", {
+			});
 		});
 	}
 

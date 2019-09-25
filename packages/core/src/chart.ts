@@ -79,6 +79,7 @@ export class Chart {
 				console.log("RENDER", ++window["ccount"]);
 			});
 
+			this.setTheme();
 			// Asynchronously dispatch a "render-finished" event
 			// This is needed because of d3-transitions
 			// Since at the start of the transition
