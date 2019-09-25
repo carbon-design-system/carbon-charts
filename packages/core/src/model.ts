@@ -53,37 +53,67 @@ export class ChartModel {
 		return this.get("data");
 	}
 
-	/** Uses the primary Y Axis as domain to get data items associated.  */
+	getScaleYType() {
+		const axes = this.getOptions().axes;
+		let scaleType;
+		if (Tools.getProperty(axes, "top", "type")) {
+			scaleType = axes.top.type;
+		} else {
+			if (Tools.getProperty(scaleType, "bottom", "type")) {
+				scaleType = axes.bottom.type;
+			}
+		}
+
+		return scaleType;
+
+	}
+
+	/** Uses the primary Y Axis to get data items associated with that value.  */
 	getDataWithDomain(domainValue) {
 		const displayData = this.getDisplayData();
-		const domainKey = Object.keys(displayData.datasets[0].data[0]).filter(key => { return key !== "value"; })[0];
+		const activePts = [];
+		const scaleType = this.getScaleYType();
 
-		const active = [];
+		switch (scaleType) {
+			case "labels":
+				// based on labels we use the index to get the associated data
+				const index = displayData.labels.indexOf(domainValue);
 
-		displayData.datasets.forEach(dataset => {
-			const sharedLabel = dataset.label;
+				displayData.datasets.forEach(dataset => {
+					activePts.push(
+						{
+							datasetLabel: dataset.label,
+							value: dataset.data[index],
+						}
+					);
+				});
+				break;
+			case "time":
+				// time series we filter using the date
+				const domainKey = Object.keys(displayData.datasets[0].data[0]).filter(key => { return key !== "value"; })[0];
 
-			// filter the items in each dataset for the points associated with the Domain
-			const dataItems = dataset.data.filter(item => {
-				if ( domainKey === ("date" || "time")) {
-					const date1 = new Date(item[domainKey]);
-					const date2 = new Date(domainValue);
-					return date1.getTime() === date2.getTime();
-				}
-				return item[domainKey] === domainValue;
-			});
+				displayData.datasets.forEach(dataset => {
+					const sharedLabel = dataset.label;
 
-			// assign the shared label on the data items and add them to the array
-			dataItems.forEach(item => {
-				active.push(
-					Object.assign({datasetLabel: sharedLabel,
-						value: item.value,
-					}, item)
-				);
-			});
-		});
+					// filter the items in each dataset for the points associated with the Domain
+					const dataItems = dataset.data.filter(item => {
+						const date1 = new Date(item[domainKey]);
+						const date2 = new Date(domainValue);
+						return date1.getTime() === date2.getTime();
+					});
 
-		return active;
+					// assign the shared label on the data items and add them to the array
+					dataItems.forEach(item => {
+						activePts.push(
+							Object.assign({datasetLabel: sharedLabel,
+								value: item.value,
+							}, item)
+						);
+					});
+				});
+				break;
+		}
+		return activePts;
 	}
 
 	/**
