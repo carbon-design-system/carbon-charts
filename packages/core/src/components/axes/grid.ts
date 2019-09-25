@@ -147,10 +147,10 @@ export class Grid extends Component {
 			// get the items that should be highlighted
 			let highlightItems;
 
+
 			activeGridlines.each(function(d) {
 				highlightItems = self.model.getDataWithDomain(d);
 			});
-
 
 			self.services.events.dispatchEvent("show-tooltip", {
 				multidata: highlightItems
