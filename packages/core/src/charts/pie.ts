@@ -20,21 +20,26 @@ import {
 export class PieChart extends Chart {
 	model = new PieChartModel();
 
-	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>) {
+	// TODO - Optimize the use of "extending"
+	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>, extending = false) {
 		super(holder, chartConfigs);
 
-		this.init(holder, chartConfigs);
-
-		if (chartConfigs.options) {
-			// Merge the default options for this chart
-			// With the user provided options
-			this.model.setOptions(
-				Tools.merge(
-					Tools.clone(Configuration.options.pieChart),
-					chartConfigs.options
-				)
-			);
+		// TODO - Optimize the use of "extending"
+		if (extending) {
+			return;
 		}
+
+		// Merge the default options for this chart
+		// With the user provided options
+		this.model.setOptions(
+			Tools.merge(
+				Tools.clone(Configuration.options.pieChart),
+				chartConfigs.options
+			)
+		);
+
+		// Initialize data, services, components etc.
+		this.init(holder, chartConfigs);
 	}
 
 	getComponents() {
