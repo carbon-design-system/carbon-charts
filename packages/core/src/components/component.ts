@@ -55,6 +55,10 @@ export class Component {
 		const oldParent = this.parent;
 		this.parent = parent;
 
+		if (oldParent && oldParent.node() === parent.node()) {
+			return;
+		}
+
 		if (this.type) {
 			this.parent.classed(`cc-${this.type}`, true);
 
