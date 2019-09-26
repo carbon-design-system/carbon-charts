@@ -125,7 +125,8 @@ export const curvedLineOptions = {
 	curve: "curveNatural",
 	tooltip: {
 		gridline: true
-	}
+	},
+	theme: getTheme()
 };
 
 export const lineData = {
@@ -249,7 +250,11 @@ export const lineOptions = {
 		right: {
 			primary: true
 		}
-	}
+	},
+	tooltip: {
+		gridline: true
+	},
+	theme: getTheme()
 };
 
 export const scatterData = {
@@ -336,5 +341,9 @@ export const scatterOptions = {
 		right: {
 			primary: true
 		}
-	}
+	},
+	tooltip: {
+		gridline: true
+	},
+	theme: getTheme()
 };

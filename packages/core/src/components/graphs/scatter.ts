@@ -124,7 +124,7 @@ export class Scatter extends Component {
 				hoveredElement.classed("hovered", false);
 
 				if (!self.configs.filled) {
-					hoveredElement.style("fill", "unset");
+					hoveredElement.style("fill", null);
 				}
 
 				const itemData = select(this).datum();
