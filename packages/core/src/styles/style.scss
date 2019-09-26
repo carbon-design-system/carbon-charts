@@ -2,14 +2,11 @@
 @import "./components/index.scss";
 @import "./graphs/index.scss";
 @import "./type";
+@import "./chart-holder";
 
 $gray_60: #595859;
 
 $default_transition: all 0.1s ease-out;
-
-div.chart-holder {
-	position: relative;
-}
 
 
 	svg.chart-svg {
@@ -38,28 +35,7 @@ div.chart-holder {
 		}
 	}
 
-	.right-legend {
-		position: absolute;
-		right: 0;
-		overflow: auto;
-		margin: 0;
-		max-width: 30%;
-		padding-left: 30px;
-		white-space: inherit;
-		text {
-			padding-left: 15px;
-		}
-		.legend-btn {
-			width: 100%;
-			text-indent: -0.7em;
-			text {
-				max-width: 90%;
-			}
-		}
-		.legend-circle {
-			margin: 5px;
-		}
-	}
+
 
 
 div.chart-overlay {

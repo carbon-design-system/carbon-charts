@@ -1,65 +1,42 @@
 @import "../../node_modules/@carbon/themes/scss/themes";
 
-
-.cc-axes {
-	.axis g.tick line {
-		display: none;
-	}
+div.chart-holder {
+	position: relative;
 }
-
-
 
 /////////////////////////////////////////////
 ///          Theme styles                ////
 /////////////////////////////////////////////
 
 .carbon--theme--white {
-	.cc-axes {
-
-		g.axis {
-			path.domain {
-				stroke: $ui-04;
-			}
-		}
+	&.chart-holder {
+		background-color: $ui-background;
 	}
 }
 
 .carbon--theme--g10 {
 	@include carbon--theme($carbon--theme--g10) {
-		.cc-axes {
-			g.axis {
-				path.domain {
-					stroke: $ui-04;
-				}
-			}
+		&.chart-holder {
+			background-color: $ui-background;
 		}
 	}
 }
 
+$gray100: #171717;
 
 .carbon--theme--g90 {
 	@include carbon--theme($carbon--theme--g90) {
-		.cc-axes {
-			g.axis {
-				path.domain {
-					stroke: $ui-04;
-				}
-			}
+		&.chart-holder {
+			background-color: $ui-background;
 		}
-
 	}
 }
-
 
 .carbon--theme--g100 {
 	@include carbon--theme($carbon--theme--g100) {
-		.cc-axes {
-			g.axis {
-				path.domain {
-					stroke: $ui-04;
-				}
-			}
+		&.chart-holder {
+			background-color: $ui-background;
 		}
-
 	}
 }
+

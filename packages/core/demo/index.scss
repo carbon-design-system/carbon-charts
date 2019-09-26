@@ -112,7 +112,6 @@ header.m-demo-header {
 }
 
 .demo-chart-holder {
-	background-color: #fff;
 	margin: 0 auto 60px auto;
 	display: block;
 	height: 500px;
@@ -167,6 +166,7 @@ div.options {
 // Themes
 //***********************************************
 
+
 $gray100: #171717;
 $gray90: #282828;
 $gray10: #f3f3f3;
@@ -176,7 +176,7 @@ $gray10: #f3f3f3;
 //***********************************************
 body.carbon--dark-g100 {
 	@include carbon--theme($carbon--theme--g100) {
-		background-color: $gray100;
+		background-color: #020202;
 
 		.bx--dropdown__wrapper {
 			$css--reset: false;
@@ -188,11 +188,7 @@ body.carbon--dark-g100 {
 		}
 
 		div.options {
-			background: $gray90;
-		}
-
-		div.demo-chart-holder {
-			background: $gray90;
+			background: $ui-background;
 		}
 	}
 }
@@ -216,10 +212,6 @@ body.carbon--dark-g90 {
 		div.options {
 			background: $gray90;
 		}
-
-		div.demo-chart-holder {
-			background: $gray90;
-		}
 	}
 }
 
@@ -240,10 +232,6 @@ body.carbon--dark-g10 {
 		}
 
 		div.options {
-			background: $gray10;
-		}
-
-		div.demo-chart-holder {
 			background: $gray10;
 		}
 	}
