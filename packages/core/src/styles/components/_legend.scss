@@ -7,6 +7,10 @@ g.cc-legend {
 		rect.checkbox {
 			stroke-width: 1px;
 			stroke-opacity: 1;
+
+			&:not(.active) ~ g.check {
+				display: none;
+			}
 		}
 	}
 
@@ -26,7 +30,12 @@ g.cc-legend {
 	g.cc-legend {
 		g.legend-item {
 			rect.checkbox {
-				stroke: $ui-01;
+				stroke: $ui-background;
+
+				&:not(.active) {
+					stroke: $text-02;
+					fill: $ui-background;
+				}
 			}
 		}
 	}
@@ -37,7 +46,12 @@ g.cc-legend {
 		g.cc-legend {
 			g.legend-item {
 				rect.checkbox {
-					stroke: $ui-01;
+					stroke: $ui-background;
+
+					&:not(.active) {
+						stroke: $text-02;
+						fill: $ui-background;
+					}
 				}
 			}
 		}
@@ -50,7 +64,12 @@ $gray100: #171717;
 		g.cc-legend {
 			g.legend-item {
 				rect.checkbox {
-					stroke: $gray100;
+					stroke: $ui-background;
+
+					&:not(.active) {
+						stroke: $text-02;
+						fill: $ui-background;
+					}
 				}
 			}
 		}
@@ -62,7 +81,8 @@ $gray100: #171717;
 		g.cc-legend {
 			g.legend-item {
 				rect.checkbox {
-					stroke: #000;
+					stroke: $ui-background;
+					fill: $ui-background;
 				}
 			}
 		}
