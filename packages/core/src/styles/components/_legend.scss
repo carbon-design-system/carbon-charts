@@ -82,7 +82,11 @@ $gray100: #171717;
 			g.legend-item {
 				rect.checkbox {
 					stroke: $ui-background;
-					fill: $ui-background;
+
+					&:not(.active) {
+						stroke: $text-02;
+						fill: $ui-background;
+					}
 				}
 			}
 		}
