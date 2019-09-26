@@ -7,4 +7,4 @@ tsc
 cp *.md dist/
 cp package.json dist/
 cp -a src/styles/. dist/styles
-node-sass dist/styles/style.scss > dist/style.css
+node-sass dist/styles/styles.scss > dist/styles.css
