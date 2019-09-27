@@ -14,7 +14,7 @@ import {
 @Component({
 	selector: "n-base-chart",
 	template: `
-		<div #nChart class='n-chart-container'>
+		<div #nChart class="n-chart-container">
 		</div>
 	`
 })

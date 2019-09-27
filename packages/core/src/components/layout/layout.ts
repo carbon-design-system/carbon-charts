@@ -3,11 +3,11 @@ import { Component } from "../component";
 import { LayoutDirection, LayoutGrowth, LayoutComponentChild, LayoutConfigs } from "../../interfaces/index";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
+import { ChartModel } from "../../model";
 
 // D3 Imports
 import { select } from "d3-selection";
 import { hierarchy, treemap, treemapSlice, treemapDice } from "d3-hierarchy";
-import { ChartModel } from "src/model";
 
 
 // TODORF - Remove
