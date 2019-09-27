@@ -15,7 +15,7 @@ import { DonutChart } from "@carbon/charts";
 @Component({
 	selector: "n-donut-chart",
 	template: `
-		<div #nChart class='n-chart-container'>
+		<div #nChart class="n-chart-container">
 		</div>
 	`
 })

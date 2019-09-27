@@ -15,7 +15,7 @@ import { LineChart } from "@carbon/charts";
 @Component({
 	selector: "n-line-chart",
 	template: `
-		<div #nChart class='n-chart-container'>
+		<div #nChart class="n-chart-container">
 		</div>
 	`
 })
