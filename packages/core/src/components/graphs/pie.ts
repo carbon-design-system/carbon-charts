@@ -304,7 +304,7 @@ export class Pie extends Component {
 				const hoveredElement = select(this);
 
 				hoveredElement.classed("hovered", true)
-					.transition(self.services.transitions.getTransition("pie_slice_hover"))
+					.transition(self.services.transitions.getTransition("pie_slice_mouseover"))
 					.attr("d", self.hoverArc);
 
 				// Dispatch mouse event
@@ -319,7 +319,7 @@ export class Pie extends Component {
 			.on("mouseout", function() {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false)
-					.transition(self.services.transitions.getTransition("pie_slice_hover"))
+					.transition(self.services.transitions.getTransition("pie_slice_mouseover"))
 					.attr("d", self.arc);
 
 				// Dispatch mouse event

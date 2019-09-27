@@ -1,11 +1,10 @@
 // Internal Imports
 import { Component } from "../component";
-import { Tools } from "../../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
 import { stack } from "d3-shape";
-
+import { color } from "d3-color";
 
 // Add datasetLabel to each piece of data
 // To be used to get the fill color
@@ -146,6 +145,12 @@ export class Bar extends Component {
 	addEventListeners() {
 		const self = this;
 		this.parent.selectAll("rect.bar")
+			.on("mouseover", function() {
+				const hoveredElement = select(this);
+
+				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
+					.attr("fill", color(hoveredElement.attr("fill")).darker(0.7).toString());
+			})
 			.on("mousemove", function() {
 				const hoveredElement = select(this);
 				const itemData = select(this).datum();
@@ -166,6 +171,9 @@ export class Bar extends Component {
 			.on("mouseout", function() {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
+
+				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
+					.attr("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
 
 				// Hide tooltip
 				self.services.events.dispatchEvent("hide-tooltip", {

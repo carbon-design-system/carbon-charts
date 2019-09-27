@@ -252,10 +252,16 @@ export const transitions = {
 	default: {
 		duration: 300
 	},
-	pie_slice_hover: {
+	pie_slice_mouseover: {
 		duration: 100
 	},
 	pie_chart_titles: {
 		duration: 375
+	},
+	graph_element_mouseover_fill_update: {
+		duration: 100
+	},
+	graph_element_mouseout_fill_update: {
+		duration: 100
 	}
 };
