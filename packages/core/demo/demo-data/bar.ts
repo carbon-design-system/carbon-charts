@@ -175,3 +175,69 @@ export const stackedBarOptions = {
 	},
 	theme: getTheme()
 };
+
+
+export const stackedBarTimeSeriesData = {
+	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			backgroundColors: [colors[0]],
+			data: [
+				65000,
+				29123,
+				35213,
+				51213,
+				16932
+			]
+		},
+		{
+			label: "Dataset 2",
+			backgroundColors: [colors[1]],
+			data: [
+				32432,
+				21312,
+				56456,
+				21312,
+				34234
+			]
+		},
+		{
+			label: "Dataset 3",
+			backgroundColors: [colors[2]],
+			data: [
+				12312,
+				23232,
+				34232,
+				12312,
+				34234
+			]
+		},
+		{
+			label: "Dataset 4",
+			backgroundColors: [colors[3]],
+			data: [
+				32423,
+				21313,
+				64353,
+				24134,
+				32423
+			]
+		}
+	]
+};
+
+export const stackedBarTimeSeriesOptions = {
+	title: "Stacked Bar Chart - Time Series",
+	axes: {
+		left: {
+			primary: true,
+			stacked: true
+		},
+		top: {
+			type: "time",
+			secondary: true,
+		}
+	},
+	theme: getTheme()
+};
