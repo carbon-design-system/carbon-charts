@@ -2,6 +2,7 @@ import {
 	debounce as lodashDebounce,
 	merge as lodashMerge,
 	cloneDeep as lodashCloneDeep,
+	uniq as lodashUnique,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Cancelable,
 	DebounceSettings
@@ -13,6 +14,7 @@ export namespace Tools {
 	export const debounce = lodashDebounce;
 	export const clone = lodashCloneDeep;
 	export const merge = lodashMerge;
+	export const removeArrayDuplicates = lodashUnique;
 
 	/**************************************
 	 *  DOM-related operations            *
@@ -181,15 +183,6 @@ export namespace Tools {
 		});
 
 		return duplicateValues;
-	}
-
-	export function removeArrayDuplicates(arr): any[] {
-		// Casting to any because of the lack of typescript types
-		// Set removes duplicates automatically
-		const result = new Set(arr) as any;
-
-		// Spread operator appends all elements from result into []
-		return [...result];
 	}
 
 	// ================================================================================

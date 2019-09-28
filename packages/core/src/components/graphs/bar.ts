@@ -1,5 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
+import { ScaleTypes } from "../../interfaces";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -34,20 +36,50 @@ export class Bar extends Component {
 	}
 
 	getStackData() {
+		let stackDataArray;
 		const displayData = this.model.getDisplayData();
 
-		// Create the stack datalist
-		const stackDataArray = displayData.labels.map((label, i) => {
-			const correspondingData = {};
+		const timeSeries = this.services.axes.getMainXAxis().scaleType === ScaleTypes.TIME;
 
+		if (timeSeries) {
+			// Get all date values provided in data
+			// TODO - Could be re-used through the model
+			let allDates = [];
 			displayData.datasets.forEach(dataset => {
-				correspondingData[dataset.label] = dataset.data[i];
+				allDates = allDates.concat(dataset.data.map(datum => +datum.date));
 			});
+			allDates = Tools.removeArrayDuplicates(allDates).sort();
 
-			correspondingData["label"] = label;
+			// Go through all date values
+			// And get corresponding data from each dataset
+			stackDataArray = allDates.map((date, i) => {
+				const correspondingData = {};
 
-			return correspondingData;
-		});
+				displayData.datasets.forEach(dataset => {
+					const correspondingDatum = dataset.data.find(datum => +datum.date === +date);
+					if (correspondingDatum) {
+						correspondingData[dataset.label] = correspondingDatum.value;
+					} else {
+						correspondingData[dataset.label] = 0;
+					}
+				});
+				correspondingData["label"] = date;
+
+				return correspondingData;
+			});
+		} else {
+			// Create the stack datalist
+			stackDataArray = displayData.labels.map((label, i) => {
+				const correspondingData = {};
+
+				displayData.datasets.forEach(dataset => {
+					correspondingData[dataset.label] = !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
+				});
+				correspondingData["label"] = label;
+
+				return correspondingData;
+			});
+		}
 
 		return stackDataArray;
 	}
@@ -91,10 +123,14 @@ export class Bar extends Component {
 
 		// Gets the correct width for bars based on options & configurations
 		const getBarWidth = () => {
-			return Math.min(
-				options.bars.maxWidth,
-				this.services.axes.getMainXAxis().scale.step() / 2
-			);
+			if (!this.services.axes.getMainXAxis().scale.step) {
+				return options.bars.maxWidth;
+			} else {
+				return Math.min(
+					options.bars.maxWidth,
+					this.services.axes.getMainXAxis().scale.step() / 2
+				);
+			}
 		};
 
 		// Update styling and position on existing bars

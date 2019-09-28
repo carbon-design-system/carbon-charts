@@ -49,7 +49,6 @@ const changeDemoData = (chartType: any, chartObj: any, delay?: number) => {
 			datum.value = result;
 
 			if (datum.date) {
-				console.log("datum.date", datum.date)
 				datum.date = new Date(datum.date);
 				datum.date.setDate(datum.date.getDate() + 2);
 			}
@@ -96,7 +95,7 @@ const changeDemoData = (chartType: any, chartObj: any, delay?: number) => {
 		case "simple-bar":
 		case "simple-bar-accessible":
 		case "stacked-bar":
-		case "stacked-bar-accessible":
+		case "stacked-bar-time-series":
 			newData = updateChartData(oldData);
 
 			if (removeADataset && chartType !== "combo") {
@@ -154,7 +153,7 @@ chartTypes.forEach(type => {
 			case "simple-bar":
 			case "grouped-bar":
 			case "stacked-bar":
-			case "stacked-bar-accessible":
+			case "stacked-bar-time-series":
 				classyCharts[type.id] = new StackedBarChart(
 					classyContainer,
 					{
@@ -191,18 +190,6 @@ chartTypes.forEach(type => {
 				setDemoActionsEventListener(type.id, classyCharts[type.id]);
 
 				break;
-			case "combo":
-				// classyCharts[type.id] = new ComboChart(
-				// 	classyContainer,
-				// 	{
-				// 		data: type.data,
-				// 		options: Object.assign({}, type.options, {type: type.id}),
-				// 	}
-				// );
-
-				// setDemoActionsEventListener(type.id, type.data);
-
-				// break;
 			case "scatter":
 				classyCharts[type.id] = new ScatterChart(
 					classyContainer,

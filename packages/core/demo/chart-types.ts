@@ -6,6 +6,8 @@ const {
 	simpleBarData,
 	stackedBarData,
 	stackedBarOptions,
+	stackedBarTimeSeriesOptions,
+	stackedBarTimeSeriesData,
 	// Pie & donut
 	pieOptions,
 	pieData,
@@ -48,6 +50,12 @@ export const chartTypes = [
 		name: "Bar",
 		options: stackedBarOptions,
 		data: stackedBarData
+	},
+	{
+		id: "stacked-bar-time-series",
+		name: "Bar",
+		options: stackedBarTimeSeriesOptions,
+		data: stackedBarTimeSeriesData
 	},
 	{
 		id: "simple-bar-accessible",

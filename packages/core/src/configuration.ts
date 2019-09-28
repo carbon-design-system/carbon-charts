@@ -153,58 +153,6 @@ export const lines = {
 	}
 };
 
-// /**
-//  * Options for pie behaviour
-//  */
-// export const pie = {
-// 	maxWidth: 516.6,
-// 	mouseover: {
-// 		strokeWidth: 6,
-// 		strokeOpacity: 0.5
-// 	},
-// 	mouseout: {
-// 		strokeWidth: 0,
-// 		strokeOpacity: 1
-// 	},
-// 	sliceLimit: 6,
-// 	label: {
-// 		dy: ".32em",
-// 		margin: 8,
-// 		other: "Other",
-// 		fontSize: 12
-// 	},
-// 	callout : {
-// 		sliceDegreeThreshold: 5,
-// 		calloutOffsetX: 15,
-// 		calloutOffsetY: 12,
-// 		calloutTextMargin: 2,
-// 		horizontalLineLength: 8,
-// 		direction: {
-// 			LEFT: "left",
-// 			RIGHT: "right"
-// 		}
-// 	},
-// 	default: {
-// 		strokeWidth: 2
-// 	},
-// 	paddingLeft: 20
-// };
-
-// /**
-//  * Options for donut behaviour
-//  */
-// export const donut = {
-// 	centerText: {
-// 		title: {
-// 			y: 22
-// 		},
-// 		breakpoint: 175,
-// 		magicScaleRatio: 2.5,
-// 		numberFontSize: 24,
-// 		titleFontSize: 15
-// 	}
-// };
-
 /**
  * Legend configuration
  */
