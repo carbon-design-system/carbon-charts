@@ -23,14 +23,6 @@ export class Legend extends Component {
 
 		// Configs
 		const checkboxRadius = Configuration.legend.checkbox.radius;
-		const legendItemsHorizontalSpacing = Configuration.legend.items.horizontalSpace;
-		const legendItemsVerticalSpacing = Configuration.legend.items.verticalSpace;
-		const spaceNeededForCheckbox = (checkboxRadius * 2) + Configuration.legend.checkbox.spaceAfter;
-
-		// Check if there are disabled legend items
-		const { DISABLED } = Configuration.legend.items.status;
-		const dataLabels = this.model.get("dataLabels");
-		const hasDeactivatedItems = Object.keys(dataLabels).some(label => dataLabels[label] === DISABLED);
 
 		addedLegendItems.append("rect")
 			.classed("checkbox", true)
@@ -56,10 +48,41 @@ export class Legend extends Component {
 			.style("font-size", "15px")
 			.attr("alignment-baseline", "middle");
 
+		this.breakItemsIntoLines(addedLegendItems);
+
+		// Remove old elements as needed.
+		legendItems.exit()
+			.on("mouseover", null)
+			.on("click", null)
+			.on("mouseout", null)
+			.remove();
+
+		const legendClickable = Tools.getProperty(this.model.getOptions(), "legend", "clickable");
+		svg.classed("clickable", legendClickable);
+
+		if (legendClickable && addedLegendItems.size() > 0) {
+			this.addEventListeners();
+		}
+	}
+
+	breakItemsIntoLines(addedLegendItems) {
+		const self = this;
+		const svg = this.getContainerSVG();
+
+		// Configs
+		const checkboxRadius = Configuration.legend.checkbox.radius;
+		const legendItemsHorizontalSpacing = Configuration.legend.items.horizontalSpace;
+		const legendItemsVerticalSpacing = Configuration.legend.items.verticalSpace;
+		const spaceNeededForCheckbox = (checkboxRadius * 2) + Configuration.legend.checkbox.spaceAfter;
+
+		// Check if there are disabled legend items
+		const { DISABLED } = Configuration.legend.items.status;
+		const dataLabels = this.model.get("dataLabels");
+		const hasDeactivatedItems = Object.keys(dataLabels).some(label => dataLabels[label] === DISABLED);
+
 		const legendOrientation = Tools.getProperty(this.model.getOptions(), "legend", "orientation");
 
-		// Crop legend items into lines
-		const self = this;
+		// Keep track of line numbers and positions
 		let startingPoint = 0;
 		let lineNumber = 0;
 		let itemIndexInLine = 0;
@@ -134,20 +157,6 @@ export class Legend extends Component {
 
 				itemIndexInLine++;
 			});
-
-		// Remove old elements as needed.
-		legendItems.exit()
-			.on("mouseover", null)
-			.on("click", null)
-			.on("mouseout", null)
-			.remove();
-
-		const legendClickable = Tools.getProperty(this.model.getOptions(), "legend", "clickable");
-		svg.classed("clickable", legendClickable);
-
-		if (legendClickable && addedLegendItems.size() > 0) {
-			this.addEventListeners();
-		}
 	}
 
 	getLegendItemArray() {
