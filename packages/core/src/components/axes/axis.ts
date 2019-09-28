@@ -94,7 +94,9 @@ export class Axis extends Component {
 		if (scaleOptions.stacked) {
 			domain = extent(
 				labels.reduce((m, label: any, i) => {
-					const correspondingValues = datasets.map(dataset => dataset.data[i]);
+					const correspondingValues = datasets.map(dataset => {
+						return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
+					});
 					const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
 
 					// Save both the total value and the minimum
@@ -244,7 +246,7 @@ export class Axis extends Component {
 			const correspondingLabel = this.model.getDisplayData().labels[index];
 			return this.scale(correspondingLabel) + this.scale.step() / 2;
 		} else if (this.scaleType === ScaleTypes.TIME) {
-			return this.scale(new Date(datum.date));
+			return this.scale(new Date(datum.date || datum.label));
 		} else {
 			return this.scale(value);
 		}

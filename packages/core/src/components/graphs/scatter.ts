@@ -93,6 +93,7 @@ export class Scatter extends Component {
 			.attr("opacity", 1);
 	}
 
+	// TODO - This method could be re-used in more graphs
 	addLabelsToDataPoints(d, index) {
 		const { labels } = this.model.getDisplayData();
 
