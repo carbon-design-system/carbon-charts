@@ -36,61 +36,61 @@ export const chartTypes = [
 		options: simpleBarOptions,
 		data: simpleBarData
 	},
-	// {
-	// 	id: "stacked-bar",
-	// 	name: "Stacked Bar",
-	// 	options: stackedBarOptions,
-	// 	data: stackedBarData
-	// },
-	// {
-	// 	id: "stacked-bar-time-series",
-	// 	name: "Stacked Bar (Time Series)",
-	// 	options: stackedBarTimeSeriesOptions,
-	// 	data: stackedBarTimeSeriesData
-	// },
-	// {
-	// 	id: "curved-line",
-	// 	name: "Curved Line",
-	// 	options: curvedLineOptions,
-	// 	data: curvedLineData
-	// },
-	// {
-	// 	id: "line",
-	// 	name: "Line Chart (Time Series)",
-	// 	options: lineOptions,
-	// 	data: lineData
-	// },
-	// {
-	// 	id: "line-step",
-	// 	name: "Step",
-	// 	options: Object.assign({}, lineOptions, {
-	// 		title: "Step Chart (Time Series)",
-	// 		curve: "curveStepAfter"
-	// 	}),
-	// 	data: lineData
-	// },
-	// {
-	// 	id: "pie",
-	// 	name: "pie",
-	// 	options: pieOptions,
-	// 	data: pieData
-	// },
-	// {
-	// 	id: "donut",
-	// 	name: "donut",
-	// 	options: donutOptions,
-	// 	data: pieData
-	// },
-	// {
-	// 	id: "scatter",
-	// 	name: "scatter",
-	// 	options: scatterOptions,
-	// 	data: scatterData
-	// },
-	// {
-	// 	id: "scatter-time",
-	// 	name: "scatter",
-	// 	options: lineTimeSeriesOptions,
-	// 	data: scatterTimeSeriesData
-	// }
+	{
+		id: "stacked-bar",
+		name: "Stacked Bar",
+		options: stackedBarOptions,
+		data: stackedBarData
+	},
+	{
+		id: "stacked-bar-time-series",
+		name: "Stacked Bar (Time Series)",
+		options: stackedBarTimeSeriesOptions,
+		data: stackedBarTimeSeriesData
+	},
+	{
+		id: "curved-line",
+		name: "Curved Line",
+		options: curvedLineOptions,
+		data: curvedLineData
+	},
+	{
+		id: "line",
+		name: "Line Chart (Time Series)",
+		options: lineOptions,
+		data: lineData
+	},
+	{
+		id: "line-step",
+		name: "Step",
+		options: Object.assign({}, lineOptions, {
+			title: "Step Chart (Time Series)",
+			curve: "curveStepAfter"
+		}),
+		data: lineData
+	},
+	{
+		id: "pie",
+		name: "pie",
+		options: pieOptions,
+		data: pieData
+	},
+	{
+		id: "donut",
+		name: "donut",
+		options: donutOptions,
+		data: pieData
+	},
+	{
+		id: "scatter",
+		name: "scatter",
+		options: scatterOptions,
+		data: scatterData
+	},
+	{
+		id: "scatter-time",
+		name: "scatter",
+		options: lineTimeSeriesOptions,
+		data: scatterTimeSeriesData
+	}
 ];
