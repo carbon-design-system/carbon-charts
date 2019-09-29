@@ -107,20 +107,25 @@ export class Axis extends Component {
 				.concat(0)
 			);
 		} else {
-			domain = extent(
-				// Get all the chart's data values in a flat array
-				datasets.reduce((m, dataset: any) => {
-					dataset.data.forEach((datum: any) => {
-						if (scaleOptions.type === ScaleTypes.TIME) {
-							m = m.concat(datum.date);
-						} else {
-							m = m.concat(isNaN(datum) ? datum.value : datum);
-						}
-					});
+			// Get all the chart's data values in a flat array
+			let allDataValues = datasets.reduce((m, dataset: any) => {
+				dataset.data.forEach((datum: any) => {
+					if (scaleOptions.type === ScaleTypes.TIME) {
+						m = m.concat(datum.date);
+					} else {
+						m = m.concat(isNaN(datum) ? datum.value : datum);
+					}
+				});
 
-					return m;
-				}, [])
-				.concat(0)
+				return m;
+			}, []);
+
+			if (scaleOptions.type !== ScaleTypes.TIME) {
+				allDataValues = allDataValues.concat(0);
+			}
+
+			domain = extent(
+				allDataValues
 			);
 		}
 
