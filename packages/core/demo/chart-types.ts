@@ -39,6 +39,12 @@ export const chartTypes = [
 		data: simpleBarData
 	},
 	{
+		id: "scatter",
+		name: "scatter",
+		options: scatterOptions,
+		data: scatterData
+	},
+	{
 		id: "simple-bar-time-series",
 		name: "Simple Bar (Time Series)",
 		options: simpleBarTimeSeriesOptions,
@@ -88,12 +94,6 @@ export const chartTypes = [
 		name: "donut",
 		options: donutOptions,
 		data: pieData
-	},
-	{
-		id: "scatter",
-		name: "scatter",
-		options: scatterOptions,
-		data: scatterData
 	},
 	{
 		id: "scatter-time-series",

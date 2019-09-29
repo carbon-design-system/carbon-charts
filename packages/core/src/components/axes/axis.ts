@@ -221,7 +221,7 @@ export class Axis extends Component {
 		if (!animate || !axisRefExists) {
 			axisRef.call(axis);
 		} else {
-			axisRef.transition(this.services.transitions.getTransition())
+			axisRef.transition(this.services.transitions.getTransition("axis-update"))
 				.call(axis);
 		}
 
@@ -232,15 +232,13 @@ export class Axis extends Component {
 			// If any ticks are any larger than the scale step size
 			if (textNodes.some(textNode => DOMUtils.getSVGElementSize(textNode, { useBBox: true }).width >= scale.step())) {
 				axisRef.selectAll("g.tick text")
-					.attr("dy", ".35em")
 					.attr("transform", `rotate(45)`)
-					.style("text-anchor", "end");
+					.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
 
 				return;
 			}
 
 			axisRef.selectAll("g.tick text")
-				.attr("dy", null)
 				.attr("transform",  null)
 				.style("text-anchor", null);
 		}
