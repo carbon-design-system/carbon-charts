@@ -86,6 +86,7 @@ export class Legend extends Component {
 		let startingPoint = 0;
 		let lineNumber = 0;
 		let itemIndexInLine = 0;
+		let lastYPosition;
 		addedLegendItems.merge(svg.selectAll("g.legend-item"))
 			.each(function (d, i) {
 				const legendItem = select(this);
@@ -98,9 +99,12 @@ export class Legend extends Component {
 						.attr("y", lineNumber * legendItemsVerticalSpacing);
 
 					// Position text
+					const yPosition = 8 + (lineNumber * legendItemsVerticalSpacing);
 					legendItem.select("text")
 						.attr("x", spaceNeededForCheckbox)
-						.attr("y", 8 + (lineNumber * legendItemsVerticalSpacing));
+						.attr("y", yPosition);
+					lastYPosition = yPosition;
+					
 
 					if (legendOrientation === LegendOrientations.VERTICAL) {
 						lineNumber++;
@@ -123,9 +127,11 @@ export class Legend extends Component {
 						.attr("y", lineNumber * legendItemsVerticalSpacing);
 
 					// Position text
+					const yPosition = 8 + (lineNumber * legendItemsVerticalSpacing);
 					legendItem.select("text")
 						.attr("x", startingPoint + spaceNeededForCheckbox)
-						.attr("y", 8 + (lineNumber * legendItemsVerticalSpacing));
+						.attr("y", yPosition);
+					lastYPosition = yPosition;
 				}
 
 				// Render checkbox check icon
@@ -157,6 +163,14 @@ export class Legend extends Component {
 
 				itemIndexInLine++;
 			});
+
+		// TODO - Replace with layout component margins
+		DOMUtils.appendOrSelect(svg, "rect.spacer")
+			.attr("x", 0)
+			.attr("y", lastYPosition)
+			.attr("width", 16)
+			.attr("height", 16)
+			.attr("fill", "none");
 	}
 
 	getLegendItemArray() {

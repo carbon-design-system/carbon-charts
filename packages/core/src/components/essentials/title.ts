@@ -13,14 +13,14 @@ export class Title extends Component {
 			.attr("y", 20)
 			.style("font-size", "18px")
 			.style("font-weight", 700)
-			.text(this.model.getOptions().title || "Scatter Chart");
+			.text(this.model.getOptions().title);
 
 		// TODO - Replace with layout component margins
 		DOMUtils.appendOrSelect(svg, "rect.spacer")
 			.attr("x", 0)
 			.attr("y", 20)
-			.attr("width", "100%")
-			.attr("height", 15)
+			.attr("width", 16)
+			.attr("height", 16)
 			.attr("fill", "none");
 	}
 }
