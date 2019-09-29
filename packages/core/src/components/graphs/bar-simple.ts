@@ -3,6 +3,7 @@ import { Component } from "../component";
 
 // D3 Imports
 import { select } from "d3-selection";
+import { color } from "d3-color";
 
 export class SimpleBar extends Component {
 	type = "simple-bar";
@@ -53,7 +54,12 @@ export class SimpleBar extends Component {
 		// Update data on all bars
 		const bars = barGroupsEnter.merge(barGroups)
 			.selectAll("rect.bar")
-			.data((d, i) => this.addLabelsToDataPoints(d, i));
+			.data((d, i) => this.addLabelsToDataPoints(d, i), d => d.label);
+
+		// Remove bars that are no longer needed
+		bars.exit()
+			.attr("opacity", 0)
+			.remove();
 
 		// Add the circles that need to be introduced
 		const barsEnter = bars.enter()
@@ -70,7 +76,7 @@ export class SimpleBar extends Component {
 			.attr("width", getBarWidth)
 			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
 			.attr("y", (d, i) => this.services.axes.getYValue(Math.max(0, d.value)))
-			.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
+			.attr("fill", d => this.model.getFillScale()(d.label))
 			.attr("height", (d, i) => {
 				return Math.abs(this.services.axes.getYValue(d, i) - this.services.axes.getYValue(0));
 			})
@@ -83,10 +89,10 @@ export class SimpleBar extends Component {
 	handleLegendOnHover = e => {
 		const { hoveredElement } = e.detail;
 
-		this.parent.selectAll("circle.dot")
-			.transition(this.services.transitions.getTransition("legend-hover-scatter"))
+		this.parent.selectAll("rect.bar")
+			.transition(this.services.transitions.getTransition("legend-hover-simple-bar"))
 			.attr("opacity", d => {
-				if (d.datasetLabel !== hoveredElement.datum()["key"]) {
+				if (d.label !== hoveredElement.datum()["key"]) {
 					return 0.3;
 				}
 
@@ -95,8 +101,8 @@ export class SimpleBar extends Component {
 	}
 
 	handleLegendMouseOut = e => {
-		this.parent.selectAll("circle.dot")
-			.transition(this.services.transitions.getTransition("legend-mouseout-scatter"))
+		this.parent.selectAll("rect.bar")
+			.transition(this.services.transitions.getTransition("legend-mouseout-simple-bar"))
 			.attr("opacity", 1);
 	}
 
@@ -114,12 +120,16 @@ export class SimpleBar extends Component {
 
 	addEventListeners() {
 		const self = this;
-		this.parent.selectAll("circle")
+		this.parent.selectAll("rect.bar")
+			.on("mouseover", function() {
+				const hoveredElement = select(this);
+
+				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
+					.attr("fill", color(hoveredElement.attr("fill")).darker(0.7).toString());
+			})
 			.on("mousemove", function() {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true);
-
-				hoveredElement.style("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
 
 				const itemData = select(this).datum();
 				// Show tooltip
@@ -131,22 +141,19 @@ export class SimpleBar extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
-				if (!self.configs.filled) {
-					hoveredElement.style("fill", null);
-				}
-
-				const itemData = select(this).datum();
+				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
+					.attr("fill", (d: any) => self.model.getFillScale()(d.label));
 
 				// Hide tooltip
 				self.services.events.dispatchEvent("hide-tooltip", {
-					itemData
+					hoveredElement
 				});
 			});
 	}
 
 	destroy() {
 		// Remove event listeners
-		this.parent.selectAll("circle")
+		this.parent.selectAll("rect.bar")
 			.on("mousemove", null)
 			.on("mouseout", null);
 

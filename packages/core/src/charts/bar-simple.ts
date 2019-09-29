@@ -6,6 +6,7 @@ import {
 	ScatterChartOptions
 } from "../interfaces/index";
 import { Tools } from "../tools";
+import { SimpleBarChartModel } from "../model-simple-bar";
 
 // Components
 import {
@@ -21,6 +22,8 @@ import {
 } from "../components/index";
 
 export class SimpleBarChart extends AxisChart {
+	model = new SimpleBarChartModel();
+
 	constructor(holder: Element, chartConfigs: ChartConfig<ScatterChartOptions>) {
 		super(holder, chartConfigs);
 
