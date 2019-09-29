@@ -120,6 +120,7 @@ export class Axis extends Component {
 
 					return m;
 				}, [])
+				.concat(0)
 			);
 		}
 
