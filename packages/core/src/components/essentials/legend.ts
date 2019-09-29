@@ -104,7 +104,6 @@ export class Legend extends Component {
 						.attr("x", spaceNeededForCheckbox)
 						.attr("y", yPosition);
 					lastYPosition = yPosition;
-					
 
 					if (legendOrientation === LegendOrientations.VERTICAL) {
 						lineNumber++;

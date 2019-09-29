@@ -37,7 +37,6 @@ export interface AxisOptions {
 	};
 }
 
-
 /**
  * customize the axes components
  */
@@ -46,4 +45,11 @@ export interface AxesOptions {
 	bottom?: AxisOptions;
 	right?: AxisOptions;
 	top?: AxisOptions;
+}
+
+/**
+ * customize time series scales
+ */
+export interface TimeScaleOptions {
+	addSpaceOnEdges?: boolean;
 }
