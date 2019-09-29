@@ -181,6 +181,7 @@ chartTypes.forEach(type => {
 	if (holder) {
 		switch (type.id) {
 			case "simple-bar":
+			case "simple-bar-time-series":
 				classyCharts[type.id] = new SimpleBarChart(
 					holder,
 					{

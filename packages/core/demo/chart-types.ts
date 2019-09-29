@@ -4,6 +4,8 @@ const {
 	groupedBarData,
 	simpleBarOptions,
 	simpleBarData,
+	simpleBarTimeSeriesOptions,
+	simpleBarTimeSeriesData,
 	stackedBarData,
 	stackedBarOptions,
 	stackedBarTimeSeriesOptions,
@@ -35,6 +37,12 @@ export const chartTypes = [
 		name: "Simple Bar",
 		options: simpleBarOptions,
 		data: simpleBarData
+	},
+	{
+		id: "simple-bar-time-series",
+		name: "Simple Bar (Time Series)",
+		options: simpleBarTimeSeriesOptions,
+		data: simpleBarTimeSeriesData
 	},
 	{
 		id: "stacked-bar",

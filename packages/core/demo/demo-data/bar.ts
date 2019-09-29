@@ -93,12 +93,60 @@ export const simpleBarData = {
 };
 
 export const simpleBarOptions = {
+	title: "Simple Bar Chart",
 	axes: {
 		left: {
 			primary: true
 		},
 		bottom: {
 			type: "labels",
+			secondary: true,
+		}
+	},
+	theme: getTheme()
+};
+
+
+export const simpleBarTimeSeriesData = {
+	labels: ["Qty", "More", "Sold", "Restocking", "Miscellaneous"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			backgroundColors: colors,
+			data: [
+				{
+					date: new Date(2019, 0, 1),
+					value: 10000
+				},
+				{
+					date: new Date(2019, 0, 2),
+					value: 65000
+				},
+				{
+					date: new Date(2019, 0, 3),
+					value: 10000
+				},
+				{
+					date: new Date(2019, 0, 6),
+					value: 49213
+				},
+				{
+					date: new Date(2019, 0, 7),
+					value: 51213
+				}
+			]
+		}
+	]
+};
+
+export const simpleBarTimeSeriesOptions = {
+	title: "Simple Bar Chart (Time Series)",
+	axes: {
+		left: {
+			primary: true
+		},
+		bottom: {
+			type: "time",
 			secondary: true,
 		}
 	},
