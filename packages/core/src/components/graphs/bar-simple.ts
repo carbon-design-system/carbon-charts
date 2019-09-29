@@ -72,7 +72,7 @@ export class SimpleBar extends Component {
 			.attr("y", (d, i) => this.services.axes.getYValue(Math.max(0, d.value)))
 			.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
 			.attr("height", (d, i) => {
-				return Math.abs(this.services.axes.getYValue(d, i) - this.services.axes.getYValue(0))
+				return Math.abs(this.services.axes.getYValue(d, i) - this.services.axes.getYValue(0));
 			})
 			.attr("opacity", 1);
 
