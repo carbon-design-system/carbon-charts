@@ -1,32 +1,22 @@
 @import "../../node_modules/@carbon/themes/scss/themes";
 
-.cc-axes {
-	.axis g.tick line {
-		display: none;
-	}
-}
-
 /////////////////////////////////////////////
 ///          Theme styles                ////
 /////////////////////////////////////////////
 
 .carbon--theme--white {
-	.cc-axes {
-		g.axis {
-			path.domain {
-				stroke: $ui-04;
-			}
+	.cc-horizontal-zero-line {
+		line.domain {
+			stroke: $ui-04;
 		}
 	}
 }
 
 .carbon--theme--g10 {
 	@include carbon--theme($carbon--theme--g10) {
-		.cc-axes {
-			g.axis {
-				path.domain {
-					stroke: $ui-04;
-				}
+		.cc-horizontal-zero-line {
+			line.domain {
+				stroke: $ui-04;
 			}
 		}
 	}
@@ -35,25 +25,23 @@
 
 .carbon--theme--g90 {
 	@include carbon--theme($carbon--theme--g90) {
-		.cc-axes {
-			g.axis {
-				path.domain {
-					stroke: $ui-04;
-				}
+		.cc-horizontal-zero-line {
+			line.domain {
+				stroke: $ui-04;
 			}
 		}
+
 	}
 }
 
 
 .carbon--theme--g100 {
 	@include carbon--theme($carbon--theme--g100) {
-		.cc-axes {
-			g.axis {
-				path.domain {
-					stroke: $ui-04;
-				}
+		.cc-horizontal-zero-line {
+			line.domain {
+				stroke: $ui-04;
 			}
 		}
+
 	}
 }
