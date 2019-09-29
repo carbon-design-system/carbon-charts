@@ -93,20 +93,15 @@ export const simpleBarData = {
 };
 
 export const simpleBarOptions = {
-	accessibility: false,
-	scales: {
-		x: {
-			title: "2018 Annual Sales Figures",
+	axes: {
+		left: {
+			primary: true
 		},
-		y: {
-			title: "Dollars (CAD)",
-			formatter: axisValue => `${axisValue / 1000}k`,
-			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
-			stacked: false
+		bottom: {
+			type: "labels",
+			secondary: true,
 		}
 	},
-	legendClickable: true,
-	resizable: true,
 	theme: getTheme()
 };
 
@@ -168,7 +163,7 @@ export const stackedBarOptions = {
 			primary: true,
 			stacked: true
 		},
-		top: {
+		bottom: {
 			type: "labels",
 			secondary: true,
 		}
@@ -294,7 +289,7 @@ export const stackedBarTimeSeriesOptions = {
 			primary: true,
 			stacked: true
 		},
-		top: {
+		bottom: {
 			type: "time",
 			secondary: true,
 		}

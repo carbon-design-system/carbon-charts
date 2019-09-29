@@ -27,17 +27,6 @@ const chart: BaseChartOptions = {
 	resizable: true
 };
 
-// /**
-//  * Options specific to pie charts
-//  */
-// export type PieChartOptions = BaseChartOptions;
-// /**
-//  * Options specific to pie charts
-//  */
-// const pieOptions: PieChartOptions = Tools.merge({}, baseOptions);
-
-// const donutOptions: DonutChartOptions = Tools.merge({}, baseOptions);
-
 /**
  * Grid options
  */
@@ -61,7 +50,16 @@ export const axes: AxesOptions = {};
 const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	grid
-});
+} as AxisChartOptions);
+
+/**
+ * options specific to line charts
+ */
+const simpleBarChart: BarChartOptions = Tools.merge({}, axisChart, {
+	bars: {
+		maxWidth: 16
+	}
+} as BarChartOptions);
 
 /**
  * options specific to line charts
@@ -81,7 +79,7 @@ const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
 		radius: 3,
 		filled: false
 	}
-});
+} as LineChartOptions);
 
 /**
  * options specific to line charts
@@ -93,7 +91,7 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
 		fillOpacity: 0.3,
 		filled: true
 	}
-});
+} as ScatterChartOptions);
 
 /**
  * options specific to line charts
@@ -117,8 +115,7 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 			textMargin: 2
 		}
 	}
-});
-
+} as PieChartOptions);
 
 /**
  * options specific to line charts
@@ -131,11 +128,12 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 			titleYPosition: radius => Math.min((radius / 80) * 20, 20)
 		}
 	}
-});
+} as DonutChartOptions);
 
 export const options = {
 	chart,
 	axisChart,
+	simpleBarChart,
 	stackedBarChart,
 	lineChart,
 	scatterChart,
@@ -189,8 +187,8 @@ export const tooltip = {
 		duration: 250
 	},
 	axisTooltip: {
-		axisThreshold: 0.25,
-	},
+		axisThreshold: 0.25
+	}
 };
 
 /**

@@ -10,7 +10,7 @@ import { Tools } from "../tools";
 // Components
 import {
 	Grid,
-	StackedBar,
+	SimpleBar,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
@@ -19,7 +19,7 @@ import {
 	TooltipBar
 } from "../components/index";
 
-export class StackedBarChart extends AxisChart {
+export class SimpleBarChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<ScatterChartOptions>) {
 		super(holder, chartConfigs);
 
@@ -27,7 +27,7 @@ export class StackedBarChart extends AxisChart {
 		// With the user provided options
 		this.model.setOptions(
 			Tools.merge(
-				Tools.clone(Configuration.options.stackedBarChart),
+				Tools.clone(Configuration.options.simpleBarChart),
 				chartConfigs.options
 			)
 		);
@@ -41,7 +41,7 @@ export class StackedBarChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
-			new StackedBar(this.model, this.services)
+			new SimpleBar(this.model, this.services)
 		];
 
 		const components: any[] = this.getAxisChartComponents(graphFrameComponents);

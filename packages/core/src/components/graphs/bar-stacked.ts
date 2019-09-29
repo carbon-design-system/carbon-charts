@@ -22,8 +22,8 @@ const addLabelsAndValueToData = (d) => {
 	return d;
 };
 
-export class Bar extends Component {
-	type = "bar";
+export class StackedBar extends Component {
+	type = "stacked-bar";
 
 	init() {
 		const eventsFragment = this.services.events.getDocumentFragment();

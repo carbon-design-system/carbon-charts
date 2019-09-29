@@ -1,4 +1,5 @@
 import {
+	SimpleBarChart,
 	StackedBarChart,
 	LineChart,
 	ScatterChart,
@@ -13,8 +14,7 @@ const defaultColors = colorPalettes.DEFAULT;
 export {
 	defaultColors,
 	colorPalettes,
-	// BaseChart,
-	// BaseAxisChart,
+	SimpleBarChart,
 	StackedBarChart,
 	LineChart,
 	ScatterChart,

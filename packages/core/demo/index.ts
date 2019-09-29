@@ -1,9 +1,7 @@
 import {
+	SimpleBarChart,
 	StackedBarChart,
 	LineChart,
-	// PieChart,
-	// DonutChart,
-	// ComboChart,
 	ScatterChart,
 	PieChart,
 	DonutChart
@@ -90,15 +88,21 @@ const changeDemoData = (chartType: any, chartObj: any, delay?: number) => {
 			// Randomize old data values
 			newData = updateChartData(oldData);
 			break;
-		default:
 		case "grouped-bar":
 		case "simple-bar":
-		case "simple-bar-accessible":
+			newData = updateChartData(oldData);
+
+			if (removeADataset) {
+				const randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));
+				newData.datasets.splice(randomIndex, randomIndex);
+			}
+
+			break;
 		case "stacked-bar":
 		case "stacked-bar-time-series":
 			newData = updateChartData(oldData);
 
-			if (removeADataset && chartType !== "combo") {
+			if (removeADataset) {
 				const randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));
 				newData.datasets.splice(randomIndex, randomIndex);
 			}
@@ -145,17 +149,54 @@ const setDemoActionsEventListener = (chartType: any, chartObj: any) => {
 	}
 };
 
+const createChartContainer = chartType => {
+	// Chart holder
+	const holder = document.createElement("div");
+	holder.className = "demo-chart-holder has-actions";
+	holder.id = `classy-${chartType.id}-chart-holder`;
+
+	document.body.appendChild(holder);
+
+	// Chart demo actions container
+	const chartDemoActions = document.createElement("div");
+	chartDemoActions.className = "chart-demo-actions";
+	chartDemoActions.id = `actions-${chartType.id}`;
+	chartDemoActions.setAttribute("role", "region");
+	chartDemoActions.setAttribute("aria-label", `${chartType} chart actions`);
+
+	// Add update data button
+	const updateDataButton = document.createElement("button");
+	updateDataButton.className = "bx--btn bx--btn--primary";
+	updateDataButton.id = `change-data-${chartType.id}`;
+	updateDataButton.innerHTML = "Update data";
+
+	chartDemoActions.appendChild(updateDataButton);
+	document.body.appendChild(chartDemoActions);
+
+	return holder;
+};
+
 chartTypes.forEach(type => {
-	const classyContainer = document.getElementById(`classy-${type.id}-chart-holder`);
-	if (classyContainer) {
+	const holder = createChartContainer(type);
+	if (holder) {
 		switch (type.id) {
-			default:
 			case "simple-bar":
+				classyCharts[type.id] = new SimpleBarChart(
+					holder,
+					{
+						data: type.data,
+						options: type.options,
+					}
+				);
+
+				setDemoActionsEventListener(type.id, classyCharts[type.id]);
+
+				break;
 			case "grouped-bar":
 			case "stacked-bar":
 			case "stacked-bar-time-series":
 				classyCharts[type.id] = new StackedBarChart(
-					classyContainer,
+					holder,
 					{
 						data: type.data,
 						options: type.options,
@@ -192,7 +233,7 @@ chartTypes.forEach(type => {
 				break;
 			case "scatter":
 				classyCharts[type.id] = new ScatterChart(
-					classyContainer,
+					holder,
 					{
 						data: type.data,
 						options: type.options,
@@ -205,7 +246,7 @@ chartTypes.forEach(type => {
 			case "line":
 			case "line-step":
 				classyCharts[type.id] = new LineChart(
-					classyContainer,
+					holder,
 					{
 						data: type.data,
 						options: type.options,
@@ -217,7 +258,7 @@ chartTypes.forEach(type => {
 				break;
 			case "pie":
 				classyCharts[type.id] = new PieChart(
-					classyContainer,
+					holder,
 					{
 						data: type.data,
 						options: type.options
@@ -233,7 +274,7 @@ chartTypes.forEach(type => {
 				break;
 			case "donut":
 				classyCharts[type.id] = new DonutChart(
-					classyContainer,
+					holder,
 					{
 						data: type.data,
 						options: type.options
