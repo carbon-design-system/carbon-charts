@@ -9,6 +9,7 @@ import { DOMUtils } from "../../services";
 import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { min, max, extent } from "d3-array";
+import { timeFormat } from "d3-time-format";
 
 export class Axis extends Component {
 	type = "axes";
@@ -73,8 +74,9 @@ export class Axis extends Component {
 	}
 
 	getScaleDomain() {
+		const options = this.model.getOptions();
 		const { position } = this.configs;
-		const scaleOptions = Tools.getProperty(this.model.getOptions(), "axes", position);
+		const scaleOptions = Tools.getProperty(options, "axes", position);
 
 		const { datasets, labels } = this.model.getDisplayData();
 
@@ -129,6 +131,13 @@ export class Axis extends Component {
 		}
 
 		if (scaleOptions.type === ScaleTypes.TIME) {
+			if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges")) {
+				// TODO - Need to account for non-day incrementals as well
+				const [startDate, endDate] = domain;
+				startDate.setDate(startDate.getDate() - 1);
+				endDate.setDate(endDate.getDate() + 1);
+			}
+
 			return [
 				new Date(domain[0]),
 				new Date(domain[1])
@@ -140,7 +149,8 @@ export class Axis extends Component {
 
 	render(animate = true) {
 		const { position: axisPosition } = this.configs;
-		const axisOptions = Tools.getProperty(this.model.getOptions(), "axes", axisPosition);
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
 
 		const svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
@@ -184,15 +194,24 @@ export class Axis extends Component {
 
 		// Initialize axis object
 		const axis = axisFunction(scale)
-			.tickSizeOuter(0)
-			.tickFormat(axisOptions ? axisOptions.formatter : null);
-			// .tickFormat(timeFormat("%b %d, %Y"));
+			.tickSizeOuter(0);
 
 		if (scale.ticks) {
-			axis.ticks(5);
+			const numberOfTicks = 7;
+			axis.ticks(numberOfTicks);
 
 			if (this.scaleType === ScaleTypes.TIME) {
-				axis.tickValues(scale.ticks(5).concat(scale.domain()));
+				let tickValues = scale.ticks(numberOfTicks).concat(scale.domain())
+					.map(date => +date).sort();
+				tickValues = Tools.removeArrayDuplicates(tickValues);
+
+				// Remove labels on the edges
+				if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges")) {
+					tickValues.splice(tickValues.length - 1, 1);
+					tickValues.splice(0, 1);
+				}
+
+				axis.tickValues(tickValues);
 			}
 		}
 

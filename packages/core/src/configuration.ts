@@ -4,11 +4,13 @@ import {
 	AxisChartOptions,
 	ScatterChartOptions,
 	LineChartOptions,
-	GridOptions,
-	AxesOptions,
 	BarChartOptions,
 	PieChartOptions,
 	DonutChartOptions,
+	// Components
+	GridOptions,
+	AxesOptions,
+	TimeScaleOptions
 } from "./interfaces/index";
 
 /*
@@ -42,32 +44,45 @@ export const grid: GridOptions = {
 
 // We setup no axes by default, the TwoDimensionalAxes component
 // Will setup axes options based on what user provides
-export const axes: AxesOptions = {};
+export const axes: AxesOptions = { };
+
+export const timeScale: TimeScaleOptions = {
+	addSpaceOnEdges: false
+};
 
 /**
  * Options common to any chart with an axis
  */
 const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
+	timeScale,
 	grid
 } as AxisChartOptions);
 
 /**
- * options specific to line charts
+ * options specific to simple bar charts
  */
-const simpleBarChart: BarChartOptions = Tools.merge({}, axisChart, {
+const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 	bars: {
 		maxWidth: 16
-	}
+	},
+	timeScale: Tools.merge(timeScale, {
+		addSpaceOnEdges: true
+	} as TimeScaleOptions)
 } as BarChartOptions);
 
 /**
- * options specific to line charts
+ * options specific to simple bar charts
  */
-const stackedBarChart: BarChartOptions = Tools.merge({}, axisChart, {
-	bars: {
-		maxWidth: 16
-	}
+const simpleBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
+
+} as BarChartOptions);
+
+/**
+ * options specific to stacked bar charts
+ */
+const stackedBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
+
 } as BarChartOptions);
 
 /**
@@ -82,7 +97,7 @@ const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
 } as LineChartOptions);
 
 /**
- * options specific to line charts
+ * options specific to scatter charts
  */
 const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
 	points: {
@@ -94,7 +109,7 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
 } as ScatterChartOptions);
 
 /**
- * options specific to line charts
+ * options specific to pie charts
  */
 const pieChart: PieChartOptions = Tools.merge({}, chart, {
 	pie: {
@@ -118,7 +133,7 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 } as PieChartOptions);
 
 /**
- * options specific to line charts
+ * options specific to donut charts
  */
 const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	donut: {
