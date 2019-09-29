@@ -9,7 +9,6 @@ import { DOMUtils } from "../../services";
 import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { min, max, extent } from "d3-array";
-import { timeFormat } from "d3-time-format";
 
 export class Axis extends Component {
 	type = "axes";
