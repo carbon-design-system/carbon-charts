@@ -19,7 +19,7 @@ const {
 	curvedLineData,
 	lineData,
 	lineOptions,
-	lineTimeSeriesOptions,
+	scatterTimeSeriesOptions,
 	scatterTimeSeriesData,
 	scatterOptions,
 	scatterData
@@ -96,9 +96,9 @@ export const chartTypes = [
 		data: scatterData
 	},
 	{
-		id: "scatter-time",
+		id: "scatter-time-series",
 		name: "scatter",
-		options: lineTimeSeriesOptions,
+		options: scatterTimeSeriesOptions,
 		data: scatterTimeSeriesData
 	}
 ];

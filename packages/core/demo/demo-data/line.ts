@@ -347,3 +347,23 @@ export const scatterOptions = {
 	},
 	theme: getTheme()
 };
+
+export const scatterTimeSeriesData = curvedLineData;
+
+export const scatterTimeSeriesOptions = {
+	title: "Scatter Chart (Time Series)",
+	axes: {
+		bottom: {
+			title: "2018 Annual Sales Figures",
+			type: "time",
+			secondary: true
+		},
+		right: {
+			primary: true
+		}
+	},
+	tooltip: {
+		gridline: true
+	},
+	theme: getTheme()
+};

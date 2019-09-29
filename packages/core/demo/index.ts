@@ -207,7 +207,8 @@ chartTypes.forEach(type => {
 				setDemoActionsEventListener(type.id, charts[type.id]);
 
 				break;
-			case "scatter":
+				case "scatter":
+				case "scatter-time-series":
 				charts[type.id] = new ScatterChart(
 					holder,
 					{
