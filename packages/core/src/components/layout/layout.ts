@@ -112,7 +112,7 @@ export class LayoutComponent extends Component {
 		const enteringSVGs = updatedSVGs
 			.enter()
 			.append("svg")
-				.attr("class", (d: any) => `layout-child layout-child-${this._instanceCount} ${+new Date()} ${d.data.id}`)
+				.attr("class", (d: any) => `layout-child layout-child-${this._instanceCount} ${d.data.id}`)
 				.attr("x", (d: any) => d.x0)
 				.attr("y", (d: any) => d.y0);
 
