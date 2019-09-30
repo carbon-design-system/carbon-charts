@@ -1,8 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import PieChart from "../src/pie-chart";
-import DonutChart from "../src/donut-chart";
+import {
+	PieChart,
+	DonutChart
+} from "../src/index";
 
 import {
 	// Pie & donut

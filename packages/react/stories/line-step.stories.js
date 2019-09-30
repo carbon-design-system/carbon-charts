@@ -1,8 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import LineChart from "../src/line-chart";
-import ScatterChart from "../src/scatter-chart";
+import {
+	LineChart,
+	ScatterChart
+} from "../src/index";
+
 import {
 	// Line
 	lineTimeSeriesOptions,
