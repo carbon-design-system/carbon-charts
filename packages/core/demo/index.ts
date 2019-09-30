@@ -169,8 +169,8 @@ chartTypes.forEach(type => {
 				setDemoActionsEventListener(type.id, charts[type.id]);
 
 				break;
-			case "grouped-bar":
-				charts[type.id] = new GroupedBarChart(
+				case "grouped-bar":
+					charts[type.id] = new GroupedBarChart(
 					holder,
 					{
 						data: type.data,
