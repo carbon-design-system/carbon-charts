@@ -1,12 +1,17 @@
 // Internal Imports
-import { Component } from "../component";
+import { DOMUtils } from "../../services";
+import { Tools } from "../../tools";
+import { Bar } from "./bar";
 
 // D3 Imports
 import { select } from "d3-selection";
 import { color } from "d3-color";
+import { ScaleBand, scaleBand } from "d3-scale";
 
-export class GroupedBar extends Component {
+export class GroupedBar extends Bar {
 	type = "grouped-bar";
+
+	groupScale: ScaleBand<any>;
 
 	init() {
 		const eventsFragment = this.services.events.getDocumentFragment();
@@ -18,28 +23,42 @@ export class GroupedBar extends Component {
 		eventsFragment.addEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
 	}
 
+	getGroupWidth() {
+		const { datasets } = this.model.getDisplayData();
+		const padding = 5;
+
+		return datasets.length * this.getBarWidth() + (padding * (datasets.length - 1));
+	}
+
+	setGroupScale() {
+		const { datasets } = this.model.getDisplayData();
+
+		this.groupScale = scaleBand()
+			.domain(datasets.map(dataset => dataset.label))
+			.rangeRound([0, this.getGroupWidth()]);
+	}
+
+	// Gets the correct width for bars based on options & configurations
+	getBarWidth() {
+		const { datasets } = this.model.getDisplayData();
+		return Math.min(
+			this.services.axes.getMainXAxis().scale.step() / 2 / datasets.length,
+			super.getBarWidth()
+		);
+	}
+
 	render(animate: boolean) {
 		// Chart options mixed with the internal configurations
-		const options = this.model.getOptions();
+		const displayData = this.model.getDisplayData();
+
+		this.setGroupScale();
 
 		// Grab container SVG
 		const svg = this.getContainerSVG();
 
-		// Gets the correct width for bars based on options & configurations
-		const getBarWidth = () => {
-			if (!this.services.axes.getMainXAxis().scale.step) {
-				return options.bars.maxWidth;
-			} else {
-				return Math.min(
-					options.bars.maxWidth,
-					this.services.axes.getMainXAxis().scale.step() / 2
-				);
-			}
-		};
-
 		// Update data on bar groups
 		const barGroups = svg.selectAll("g.bars")
-			.data(this.model.getDisplayData().datasets, dataset => dataset.label);
+			.data(displayData.labels);
 
 		// Remove dot groups that need to be removed
 		barGroups.exit()
@@ -53,8 +72,12 @@ export class GroupedBar extends Component {
 
 		// Update data on all bars
 		const bars = barGroupsEnter.merge(barGroups)
+			.attr("transform", (d, i) => {
+				const xValue = this.services.axes.getXValue(d, i);
+				return `translate(${xValue - this.getGroupWidth() / 2}, 0)`;
+			})
 			.selectAll("rect.bar")
-			.data((d, i) => this.addLabelsToDataPoints(d, i), d => d.label);
+			.data((d, i) => this.addLabelsToDataPoints(d, i));
 
 		// Remove bars that are no longer needed
 		bars.exit()
@@ -68,31 +91,39 @@ export class GroupedBar extends Component {
 
 		barsEnter.merge(bars)
 			.classed("bar", true)
-			.attr("x", (d, i) => {
-				const barWidth = getBarWidth();
-
-				return this.services.axes.getXValue(d, i) - barWidth / 2;
-			})
-			.attr("width", getBarWidth)
+			.attr("x", d => this.groupScale(d.datasetLabel))
+			.attr("width", this.getBarWidth.bind(this))
 			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
 			.attr("y", (d, i) => this.services.axes.getYValue(Math.max(0, d.value)))
-			.attr("fill", d => this.model.getFillScale()(d.label))
 			.attr("height", (d, i) => {
 				return Math.abs(this.services.axes.getYValue(d, i) - this.services.axes.getYValue(0));
 			})
+			.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
 			.attr("opacity", 1);
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
 	}
 
+	// TODO - This method could be re-used in more graphs
+	addLabelsToDataPoints(d, index) {
+		const { datasets } = this.model.getDisplayData();
+
+		return datasets.map(dataset => ({
+			label: d,
+			datasetLabel: dataset.label,
+			value: dataset.data[index]
+		}));
+	}
+
+	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = e => {
 		const { hoveredElement } = e.detail;
 
 		this.parent.selectAll("rect.bar")
-			.transition(this.services.transitions.getTransition("legend-hover-simple-bar"))
+			.transition(this.services.transitions.getTransition("legend-hover-bar"))
 			.attr("opacity", d => {
-				if (d.label !== hoveredElement.datum()["key"]) {
+				if (d.datasetLabel !== hoveredElement.datum()["key"]) {
 					return 0.3;
 				}
 
@@ -100,22 +131,11 @@ export class GroupedBar extends Component {
 			});
 	}
 
+	// Un-highlight all elements
 	handleLegendMouseOut = e => {
 		this.parent.selectAll("rect.bar")
-			.transition(this.services.transitions.getTransition("legend-mouseout-simple-bar"))
+			.transition(this.services.transitions.getTransition("legend-mouseout-bar"))
 			.attr("opacity", 1);
-	}
-
-	// TODO - This method could be re-used in more graphs
-	addLabelsToDataPoints(d, index) {
-		const { labels } = this.model.getDisplayData();
-
-		return d.data.map((datum, i) => ({
-			date: datum.date,
-			label: labels[i],
-			datasetLabel: d.label,
-			value: isNaN(datum) ? datum.value : datum
-		}));
 	}
 
 	addEventListeners() {
@@ -128,10 +148,8 @@ export class GroupedBar extends Component {
 					.attr("fill", color(hoveredElement.attr("fill")).darker(0.7).toString());
 			})
 			.on("mousemove", function() {
-				const hoveredElement = select(this);
-				hoveredElement.classed("hovered", true);
-
 				const itemData = select(this).datum();
+
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
 					itemData
@@ -142,7 +160,7 @@ export class GroupedBar extends Component {
 				hoveredElement.classed("hovered", false);
 
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
-					.attr("fill", (d: any) => self.model.getFillScale()(d.label));
+					.attr("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
 
 				// Hide tooltip
 				self.services.events.dispatchEvent("hide-tooltip", {
@@ -154,6 +172,7 @@ export class GroupedBar extends Component {
 	destroy() {
 		// Remove event listeners
 		this.parent.selectAll("rect.bar")
+			.on("mouseover", null)
 			.on("mousemove", null)
 			.on("mouseout", null);
 

@@ -52,25 +52,16 @@ export const groupedBarData = {
 };
 
 export const groupedBarOptions = {
-	scales: {
-		x: {
-			title: "2018 Annual Sales Figures",
+	title: "Grouped Bar Chart",
+	axes: {
+		left: {
+			primary: true
 		},
-		y: {
-			title: "Dollars (CAD)",
-			formatter: axisValue => `${axisValue / 1000}k`,
-			yMaxAdjuster: yMaxValue => yMaxValue * 1.1,
-		},
-		y2: {
-			ticks: {
-				max: 1,
-				min: 0
-			},
-			formatter: axisValue => `${axisValue * 100}%`
+		bottom: {
+			type: "labels",
+			secondary: true,
 		}
 	},
-	legendClickable: true,
-	resizable: true,
 	theme: getTheme()
 };
 

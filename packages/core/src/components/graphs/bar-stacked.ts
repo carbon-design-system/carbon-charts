@@ -1,7 +1,7 @@
 // Internal Imports
-import { Component } from "../component";
 import { ScaleTypes } from "../../interfaces";
 import { Tools } from "../../tools";
+import { Bar } from "./bar";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -22,7 +22,7 @@ const addLabelsAndValueToData = (d) => {
 	return d;
 };
 
-export class StackedBar extends Component {
+export class StackedBar extends Bar {
 	type = "stacked-bar";
 
 	init() {
@@ -121,18 +121,6 @@ export class StackedBar extends Component {
 		bars.exit()
 			.remove();
 
-		// Gets the correct width for bars based on options & configurations
-		const getBarWidth = () => {
-			if (!this.services.axes.getMainXAxis().scale.step) {
-				return options.bars.maxWidth;
-			} else {
-				return Math.min(
-					options.bars.maxWidth,
-					this.services.axes.getMainXAxis().scale.step() / 2
-				);
-			}
-		};
-
 		// Update styling and position on existing bars
 		// As well as bars that were just added
 		bars.enter()
@@ -140,10 +128,10 @@ export class StackedBar extends Component {
 			.merge(bars)
 				.classed("bar", true)
 				.attr("x", (d, i) => {
-					const barWidth = getBarWidth();
+					const barWidth = this.getBarWidth();
 					return this.services.axes.getXValue(d, i) - (barWidth / 2);
 				})
-				.attr("width", getBarWidth)
+				.attr("width", this.getBarWidth.bind(this))
 				.transition(this.services.transitions.getTransition("bar-update-enter", animate))
 				.attr("y", (d, i) => this.services.axes.getYValue(d[1], i))
 				.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
@@ -221,6 +209,7 @@ export class StackedBar extends Component {
 	destroy() {
 		// Remove event listeners
 		this.parent.selectAll("rect.bar")
+			.on("mouseover", null)
 			.on("mousemove", null)
 			.on("mouseout", null);
 

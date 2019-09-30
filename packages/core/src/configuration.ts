@@ -79,6 +79,13 @@ const simpleBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
 } as BarChartOptions);
 
 /**
+ * options specific to simple bar charts
+ */
+const groupedBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
+
+} as BarChartOptions);
+
+/**
  * options specific to stacked bar charts
  */
 const stackedBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
@@ -149,6 +156,7 @@ export const options = {
 	chart,
 	axisChart,
 	simpleBarChart,
+	groupedBarChart,
 	stackedBarChart,
 	lineChart,
 	scatterChart,
