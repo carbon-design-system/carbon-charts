@@ -1,9 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import SimpleBarChart from "../src/bar-chart-simple";
-import GroupedBarChart from "../src/bar-chart-grouped";
-import StackedBarChart from "../src/bar-chart-stacked";
+import {
+	SimpleBarChart,
+	GroupedBarChart,
+	StackedBarChart
+} from "../src/index";
 
 import {
 	// Bar
