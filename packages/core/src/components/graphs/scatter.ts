@@ -54,6 +54,7 @@ export class Scatter extends Component {
 			.raise()
 			.classed("dot", true)
 			.classed("filled", filled)
+			.classed("unfilled", !filled)
 			.attr("cx", (d, i) => this.services.axes.getXValue(d, i))
 			.transition(this.services.transitions.getTransition("scatter-update-enter", animate))
 			.attr("cy", (d, i) => this.services.axes.getYValue(d, i))
