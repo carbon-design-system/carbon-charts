@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import LineChart from "../src/line-chart";
+import ScatterChart from "../src/scatter-chart";
 import {
 	curvedLineData,
 	curvedLineOptions,
@@ -18,7 +19,7 @@ lineStories.add("Basic", () => (
 ));
 
 lineStories.add("Natural Curve", () => (
-	<LineChart
+	<ScatterChart
 		data={curvedLineData}
 		options={curvedLineOptions}
 	/>
