@@ -3,7 +3,8 @@ import { setOptions } from "@storybook/addon-options";
 
 setOptions({
   name: "Carbon Charts - Angular Wrappers",
-  showAddonPanel: false
+  showAddonPanel: false,
+  sortStoriesByKind: true
 });
 
 // load global styles

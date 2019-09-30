@@ -51,6 +51,7 @@
 	},
 	"devDependencies": {
 		"@angular-devkit/core": "0.8.9",
+		"@angular-devkit/build-angular": "0.8.9",
 		"@angular/animations": "6.1.0",
 		"@angular/common": "6.1.0",
 		"@angular/compiler": "6.1.0",
@@ -64,7 +65,7 @@
 		"@storybook/angular": "5.0.11",
 		"@types/node": "8.5.2",
 		"babel-loader": "8.0.5",
-		"core-js": "2.6.5",
+		"core-js": "3.0.0",
 		"d3": "4.11.0",
 		"ng-packagr": "4.7.1",
 		"rxjs": "6.3.3",
