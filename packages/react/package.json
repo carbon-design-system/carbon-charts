@@ -51,9 +51,9 @@
 		"react-dom": "^16.6.3"
 	},
 	"devDependencies": {
-		"@storybook/addon-info": "5.2.0",
-		"@storybook/addon-options": "5.2.0",
-		"@storybook/react": "5.2.0",
+		"@storybook/addon-info": "5.0.11",
+		"@storybook/addon-options": "5.0.11",
+		"@storybook/react": "5.0.11",
 		"@storybook/storybook-deployer": "2.8.1",
 		"babel-cli": "6.26.0",
 		"babel-core": "6.26.0",
