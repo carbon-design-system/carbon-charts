@@ -9,6 +9,7 @@ export const WHITE = [
 	colors.purple(30),
 	colors.cyan(80)
 ];
+console.log("WHITE", WHITE)
 
 export const WHITE_2 = [
 	colors.purple(60),
