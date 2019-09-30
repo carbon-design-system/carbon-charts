@@ -5458,6 +5458,8 @@ var StackedBarChart = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tools", function() { return Tools; });
+/* harmony import */ var lodash_es__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash-es */ "../../node_modules/lodash-es/lodash.js");
+
 // Functions
 var Tools;
 (function (Tools) {
@@ -5501,32 +5503,7 @@ var Tools;
     }
     Tools.clone = clone;
     // custom deep object merge
-    Tools.merge = function (target) {
-        var objects = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            objects[_i - 1] = arguments[_i];
-        }
-        for (var _a = 0, objects_1 = objects; _a < objects_1.length; _a++) {
-            var object = objects_1[_a];
-            for (var key in object) {
-                if (object.hasOwnProperty(key)) {
-                    // since we're dealing relatively simple objects this should work fine
-                    if (object[key] && typeof object[key] === "object") {
-                        if (!target[key]) {
-                            target[key] = {};
-                        }
-                        // recursively merge into the target
-                        // configs only run 3 or 4 levels deep, so no stack explosions
-                        target[key] = Tools.merge(target[key], object[key]);
-                    }
-                    else {
-                        target[key] = object[key];
-                    }
-                }
-            }
-        }
-        return target;
-    };
+    Tools.merge = lodash_es__WEBPACK_IMPORTED_MODULE_0__["merge"];
     /**************************************
      *  DOM-related operations            *
      *************************************/
