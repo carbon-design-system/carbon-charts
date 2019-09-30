@@ -19,7 +19,7 @@ lineStories.add("Basic", () => (
 ));
 
 lineStories.add("Natural Curve", () => (
-	<ScatterChart
+	<LineChart
 		data={curvedLineData}
 		options={curvedLineOptions}
 	/>
