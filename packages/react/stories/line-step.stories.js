@@ -3,7 +3,6 @@ import { storiesOf } from '@storybook/react';
 
 import LineChart from "../src/line-chart";
 import ScatterChart from "../src/scatter-chart";
-
 import {
 	// Line
 	lineTimeSeriesOptions,
