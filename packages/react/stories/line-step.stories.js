@@ -2,66 +2,69 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import LineChart from "../src/line-chart";
+import ScatterChart from "../src/scatter-chart";
+
 import {
-	curvedLineData,
-	curvedLineOptions,
+	// Line
+	lineTimeSeriesOptions,
+	lineTimeSeriesData,
 	lineData,
-	lineOptions
-} from "./line-demo-data";
+	lineOptions,
+	// Step
+	stepOptions,
+	stepData,
+	stepTimeSeriesOptions,
+	stepTimeSeriesData,
+	// Scatter
+	scatterTimeSeriesOptions,
+	scatterTimeSeriesData,
+	scatterOptions,
+	scatterData
+} from "../../core/demo/demo-data/index";
+
+import { addWidthAndHeight } from "./commons";
 
 const lineStories = storiesOf("Line", module);
-lineStories.add("Basic", () => (
+lineStories.add(lineOptions.title, () => (
 	<LineChart
 		data={lineData}
-		options={lineOptions}
+		options={addWidthAndHeight(lineOptions)}
 	/>
 ));
 
-lineStories.add("Natural Curve", () => (
+lineStories.add(lineTimeSeriesOptions.title, () => (
 	<LineChart
-		data={curvedLineData}
-		options={curvedLineOptions}
-	/>
-));
-
-lineStories.add("Bundle Curve", () => (
-	<LineChart
-		data={curvedLineData}
-		options={Object.assign({}, curvedLineOptions, {curve: "curveBundle"})}
-	/>
-));
-
-lineStories.add("Monotone Y Curve", () => (
-	<LineChart
-		data={curvedLineData}
-		options={Object.assign({}, curvedLineOptions, {curve: "curveMonotoneY"})}
-	/>
-));
-
-lineStories.add("Monotone X Curve", () => (
-	<LineChart
-		data={curvedLineData}
-		options={Object.assign({}, curvedLineOptions, {curve: "curveMonotoneX"})}
+		data={lineTimeSeriesData}
+		options={addWidthAndHeight(lineTimeSeriesOptions)}
 	/>
 ));
 
 const stepStories = storiesOf("Step", module);
-stepStories.add("Middle", () => (
+stepStories.add(stepOptions.title, () => (
 	<LineChart
-		data={lineData}
-		options={Object.assign({}, lineOptions, {curve: "curveStep"})}
+		data={stepData}
+		options={addWidthAndHeight(stepOptions)}
 	/>
 ));
 
-stepStories.add("Before", () => (
+stepStories.add(stepTimeSeriesOptions.title, () => (
 	<LineChart
-		data={lineData}
-		options={Object.assign({}, lineOptions, {curve: "curveStepBefore"})}
+		data={stepTimeSeriesData}
+		options={addWidthAndHeight(stepTimeSeriesOptions)}
 	/>
 ));
-stepStories.add("After (Regular)", () => (
-	<LineChart
-		data={lineData}
-		options={Object.assign({}, lineOptions, {curve: "curveStepAfter"})}
+
+const scatterStories = storiesOf("Scatter", module);
+scatterStories.add(scatterOptions.title, () => (
+	<ScatterChart
+		data={scatterData}
+		options={addWidthAndHeight(scatterOptions)}
+	/>
+));
+
+scatterStories.add(scatterTimeSeriesOptions.title, () => (
+	<ScatterChart
+		data={scatterTimeSeriesData}
+		options={addWidthAndHeight(scatterTimeSeriesOptions)}
 	/>
 ));

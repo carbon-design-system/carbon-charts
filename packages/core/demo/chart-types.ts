@@ -14,11 +14,18 @@ const {
 	pieOptions,
 	pieData,
 	donutOptions,
+	donutData,
 	// Line
-	curvedLineOptions,
-	curvedLineData,
+	lineTimeSeriesOptions,
+	lineTimeSeriesData,
 	lineData,
 	lineOptions,
+	// Step
+	stepOptions,
+	stepData,
+	stepTimeSeriesOptions,
+	stepTimeSeriesData,
+	// Scatter
 	scatterTimeSeriesOptions,
 	scatterTimeSeriesData,
 	scatterOptions,
@@ -28,76 +35,66 @@ const {
 export const chartTypes = [
 	{
 		id: "grouped-bar",
-		name: "Grouped Bar",
 		options: groupedBarOptions,
 		data: groupedBarData
 	},
 	{
 		id: "simple-bar",
-		name: "Simple Bar",
 		options: simpleBarOptions,
 		data: simpleBarData
 	},
 	{
 		id: "scatter",
-		name: "scatter",
 		options: scatterOptions,
 		data: scatterData
 	},
 	{
 		id: "simple-bar-time-series",
-		name: "Simple Bar (Time Series)",
 		options: simpleBarTimeSeriesOptions,
 		data: simpleBarTimeSeriesData
 	},
 	{
 		id: "stacked-bar",
-		name: "Stacked Bar",
 		options: stackedBarOptions,
 		data: stackedBarData
 	},
 	{
 		id: "stacked-bar-time-series",
-		name: "Stacked Bar (Time Series)",
 		options: stackedBarTimeSeriesOptions,
 		data: stackedBarTimeSeriesData
 	},
 	{
-		id: "curved-line",
-		name: "Curved Line",
-		options: curvedLineOptions,
-		data: curvedLineData
+		id: "line-time-series",
+		options: lineTimeSeriesOptions,
+		data: lineTimeSeriesData
 	},
 	{
 		id: "line",
-		name: "Line Chart (Time Series)",
 		options: lineOptions,
 		data: lineData
 	},
 	{
 		id: "line-step",
-		name: "Step",
-		options: Object.assign({}, lineOptions, {
-			title: "Step Chart (Time Series)",
-			curve: "curveStepAfter"
-		}),
-		data: lineData
+		options: stepOptions,
+		data: stepData
+	},
+	{
+		id: "line-step-time-series",
+		options: stepTimeSeriesOptions,
+		data: stepTimeSeriesData
 	},
 	{
 		id: "pie",
-		name: "pie",
 		options: pieOptions,
 		data: pieData
 	},
 	{
 		id: "donut",
-		name: "donut",
 		options: donutOptions,
-		data: pieData
+		data: donutData
 	},
 	{
 		id: "scatter-time-series",
-		name: "scatter",
 		options: scatterTimeSeriesOptions,
 		data: scatterTimeSeriesData
 	}
