@@ -1,5 +1,6 @@
 import {
 	SimpleBarChart,
+	GroupedBarChart,
 	StackedBarChart,
 	LineChart,
 	ScatterChart,
@@ -169,6 +170,17 @@ chartTypes.forEach(type => {
 
 				break;
 			case "grouped-bar":
+				charts[type.id] = new GroupedBarChart(
+					holder,
+					{
+						data: type.data,
+						options: type.options,
+					}
+				);
+
+				setDemoActionsEventListener(type.id, charts[type.id]);
+
+				break;
 			case "stacked-bar":
 			case "stacked-bar-time-series":
 				charts[type.id] = new StackedBarChart(

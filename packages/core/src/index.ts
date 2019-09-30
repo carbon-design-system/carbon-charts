@@ -1,5 +1,6 @@
 import {
 	SimpleBarChart,
+	GroupedBarChart,
 	StackedBarChart,
 	LineChart,
 	ScatterChart,
@@ -15,6 +16,7 @@ export {
 	defaultColors,
 	colorPalettes,
 	SimpleBarChart,
+	GroupedBarChart,
 	StackedBarChart,
 	LineChart,
 	ScatterChart,

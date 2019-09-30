@@ -9,6 +9,7 @@ export * from "./essentials/tooltip-scatter";
 
 // GRAPHS
 export * from "./graphs/bar-simple";
+export * from "./graphs/bar-grouped";
 export * from "./graphs/bar-stacked";
 export * from "./graphs/line";
 export * from "./graphs/scatter";

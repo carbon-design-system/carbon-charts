@@ -192,7 +192,7 @@ export class DOMUtils extends Service {
 
 				this.services.events.dispatchEvent("chart-resize");
 			}
-		}, 15);
+		}, 12.5);
 
 		// Observe the behaviour of resizing on the holder
 		const resizeObserver = new ResizeObserver(resizeCallback);

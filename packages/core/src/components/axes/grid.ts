@@ -52,8 +52,8 @@ export class Grid extends Component {
 		const svg = this.parent;
 		const width = this.backdrop.attr("width");
 
-		const mainXScale = this.services.axes.getMainXAxis().getScale();
-		const yGrid = axisLeft(mainXScale)
+		const mainYScale = this.services.axes.getMainYAxis().getScale();
+		const yGrid = axisLeft(mainYScale)
 			.tickSizeInner(-width)
 			.tickSizeOuter(0);
 
