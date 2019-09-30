@@ -14,5 +14,5 @@ export class Bar extends Component {
 				this.services.axes.getMainXAxis().scale.step() / 2
 			);
 		}
-	};
+	}
 }

@@ -1,6 +1,4 @@
 // Internal Imports
-import { DOMUtils } from "../../services";
-import { Tools } from "../../tools";
 import { Bar } from "./bar";
 
 // D3 Imports
