@@ -20,7 +20,7 @@ g.cc-scatter {
 
 .carbon--theme--white {
 	g.cc-scatter {
-		circle.dot {
+		circle.dot.unfilled {
 			fill: $ui-01;
 		}
 	}
@@ -29,7 +29,7 @@ g.cc-scatter {
 .carbon--theme--g10 {
 	@include carbon--theme($carbon--theme--g10) {
 		g.cc-scatter {
-			circle.dot {
+			circle.dot.unfilled {
 				fill: $ui-01;
 			}
 		}
@@ -40,7 +40,7 @@ $gray100: #171717;
 .carbon--theme--g90 {
 	@include carbon--theme($carbon--theme--g90) {
 		g.cc-scatter {
-			circle.dot {
+			circle.dot.unfilled {
 				fill: $gray100;
 			}
 		}
@@ -50,7 +50,7 @@ $gray100: #171717;
 .carbon--theme--g100 {
 	@include carbon--theme($carbon--theme--g100) {
 		g.cc-scatter {
-			circle.dot {
+			circle.dot.unfilled {
 				fill: $ui-01;
 			}
 			g.lines path.line {

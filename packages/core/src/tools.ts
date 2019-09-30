@@ -6,7 +6,7 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Cancelable,
 	DebounceSettings
-} from "lodash";
+} from "lodash-es";
 
 // Functions
 export namespace Tools {
