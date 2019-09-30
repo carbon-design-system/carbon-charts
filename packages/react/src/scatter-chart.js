@@ -20,6 +20,6 @@ export default class ScatterChart extends BaseChart {
 				ref={chartRef => this.chartRef = chartRef}
 				className="chart-holder">
 			</div>
-		)
+		);
 	}
 }
