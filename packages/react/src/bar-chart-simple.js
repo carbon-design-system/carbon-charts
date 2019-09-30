@@ -1,11 +1,11 @@
 import React from "react";
 
-import { StackedBarChart as BC } from "@carbon/charts";
+import { SimpleBarChart as SBC } from "@carbon/charts";
 import BaseChart from "./base-chart";
 
-export default class BarChart extends BaseChart {
+export default class SimpleBarChart extends BaseChart {
 	componentDidMount() {
-		this.chart = new BC(
+		this.chart = new SBC(
 			this.chartRef,
 			{
 				data: this.props.data,

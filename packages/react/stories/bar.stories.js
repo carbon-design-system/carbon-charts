@@ -1,55 +1,58 @@
-// import React from 'react';
-// import { storiesOf } from '@storybook/react';
+import React from 'react';
+import { storiesOf } from '@storybook/react';
 
-// import BarChart from "../src/bar-chart";
-// import {
-// 	groupedBarData,
-// 	groupedBarOptions,
-// 	simpleBarData,
-// 	simpleBarOptions,
-// 	stackedBarData,
-// 	stackedBarOptions
-// } from "./bar-demo-data";
+import SimpleBarChart from "../src/bar-chart-simple";
+import GroupedBarChart from "../src/bar-chart-grouped";
+import StackedBarChart from "../src/bar-chart-stacked";
 
-// const barStories = storiesOf("Bar", module);
-// barStories.add("Label-based legend", () => (
-// 	<BarChart
-// 		data={simpleBarData}
-// 		options={simpleBarOptions}
-// 	/>
-// ));
+import {
+	// Bar
+	groupedBarOptions,
+	groupedBarData,
+	simpleBarOptions,
+	simpleBarData,
+	simpleBarTimeSeriesOptions,
+	simpleBarTimeSeriesData,
+	stackedBarData,
+	stackedBarOptions,
+	stackedBarTimeSeriesOptions,
+	stackedBarTimeSeriesData,
+} from "../../core/demo/demo-data/index";
 
-// barStories.add("Label-based legend (Accessible)", () => (
-// 	<BarChart
-// 		data={simpleBarData}
-// 		options={Object.assign({}, simpleBarOptions, {accessibility: true})}
-// 	/>
-// ));
+import { addWidthAndHeight } from "./commons";
 
-// barStories.add("Grouped", () => (
-// 	<BarChart
-// 		data={groupedBarData}
-// 		options={groupedBarOptions}
-// 	/>
-// ));
+const barStories = storiesOf("Bar", module);
+barStories.add(simpleBarOptions.title, () => (
+	<SimpleBarChart
+		data={simpleBarData}
+		options={addWidthAndHeight(simpleBarOptions)}
+	/>
+));
 
-// barStories.add("Grouped (Accessible)", () => (
-// 	<BarChart
-// 		data={groupedBarData}
-// 		options={Object.assign({}, groupedBarOptions, {accessibility: true})}
-// 	/>
-// ));
+barStories.add(groupedBarOptions.title, () => (
+	<GroupedBarChart
+		data={groupedBarData}
+		options={addWidthAndHeight(groupedBarOptions)}
+	/>
+));
 
-// barStories.add("Stacked", () => (
-// 	<BarChart
-// 		data={stackedBarData}
-// 		options={stackedBarOptions}
-// 	/>
-// ));
+barStories.add(simpleBarTimeSeriesOptions.title, () => (
+	<SimpleBarChart
+		data={simpleBarTimeSeriesData}
+		options={addWidthAndHeight(simpleBarTimeSeriesOptions)}
+	/>
+));
 
-// barStories.add("Stacked (Accessible)", () => (
-// 	<BarChart
-// 		data={stackedBarData}
-// 		options={Object.assign({}, stackedBarOptions, {accessibility: true})}
-// 	/>
-// ));
+barStories.add(stackedBarOptions.title, () => (
+	<StackedBarChart
+		data={stackedBarData}
+		options={addWidthAndHeight(stackedBarOptions)}
+	/>
+));
+
+barStories.add(stackedBarTimeSeriesOptions.title, () => (
+	<StackedBarChart
+		data={stackedBarTimeSeriesData}
+		options={addWidthAndHeight(stackedBarTimeSeriesOptions)}
+	/>
+));
