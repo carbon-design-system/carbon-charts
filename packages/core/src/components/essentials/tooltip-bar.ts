@@ -134,7 +134,7 @@ export class TooltipBar extends Tooltip {
 		// override position to place tooltip at {placement:.., position:{top:.. , left:..}}
 		if (positionOverride) {
 			// placement determines whether the tooltip is centered above or below the position provided
-			const placement = positionOverride.placement === TooltipPosition.TOP ? PLACEMENTS.TOP : PLACEMENTS.BOTTOM;;
+			const placement = positionOverride.placement === TooltipPosition.TOP ? PLACEMENTS.TOP : PLACEMENTS.BOTTOM;
 
 			pos = this.positionService.findPositionAt(
 				positionOverride.position,
