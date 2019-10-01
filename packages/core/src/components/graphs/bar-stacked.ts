@@ -189,7 +189,8 @@ export class StackedBar extends Bar {
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
-					multidata: activePoints
+					multidata: activePoints,
+					hoveredElement
 				});
 			})
 			.on("mouseout", function() {

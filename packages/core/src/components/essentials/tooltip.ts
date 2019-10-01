@@ -127,7 +127,7 @@ export class Tooltip extends Component {
 			})
 		);
 
-		let { magicLeft2: horizontalOffset } = Configuration.tooltip;
+		let { horizontalOffset } = this.model.getOptions().tooltip.datapoint;
 		if (bestPlacementOption === PLACEMENTS.LEFT) {
 			horizontalOffset *= -1;
 		}
