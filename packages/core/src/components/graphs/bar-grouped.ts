@@ -150,14 +150,6 @@ export class GroupedBar extends Bar {
 					hoveredElement
 				});
 			})
-			.on("mousemove", function() {
-				const hoveredElement = select(this);
-
-				// Show tooltip
-				self.services.events.dispatchEvent("show-tooltip", {
-					hoveredElement
-				});
-			})
 			.on("mouseout", function() {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);

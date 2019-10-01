@@ -124,9 +124,6 @@ export const lineTimeSeriesOptions = {
 		}
 	},
 	curve: "curveNatural",
-	tooltip: {
-		gridline: true
-	},
 	theme: getTheme()
 };
 
@@ -214,9 +211,6 @@ export const lineOptions = {
 		right: {
 			primary: true
 		}
-	},
-	tooltip: {
-		gridline: true
 	},
 	theme: getTheme()
 };
@@ -322,9 +316,6 @@ export const scatterOptions = {
 			primary: true
 		}
 	},
-	tooltip: {
-		gridline: true
-	},
 	theme: getTheme()
 };
 
@@ -341,9 +332,6 @@ export const scatterTimeSeriesOptions = {
 		right: {
 			primary: true
 		}
-	},
-	tooltip: {
-		gridline: true
 	},
 	theme: getTheme()
 };
