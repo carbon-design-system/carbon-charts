@@ -2,9 +2,7 @@
   "name": "@carbon/charts",
   "version": "0.16.7",
   "description": "Carbon charting components",
-  "main": "index.js",
-  "module": "index.cjs.js",
-  "browser": "index.browser.js",
+  "main": "index.umd.js",
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
     "demo:build": "webpack --config webpack.config.js && yarn run docs:build",
@@ -93,8 +91,8 @@
     "typedoc": "0.11.1",
     "typescript": "2.7.2",
     "url-loader": "0.6.2",
-    "webpack": "4.33.0",
-    "webpack-cli": "3.3.2",
+    "webpack": "4.41.0",
+    "webpack-cli": "3.3.9",
     "webpack-dev-server": "3.7.0"
   },
   "publishConfig": {

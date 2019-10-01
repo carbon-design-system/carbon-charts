@@ -7,15 +7,16 @@ export default {
 	input: "src/index.ts",
 	output: [
 		{
-			file: `${outputDir}/${pkg.main}`,
-			format: "es"
+			file: `${outputDir}/index.js`,
+			format: "esm"
 		},
 		{
-			file: `${outputDir}/${pkg.module}`,
-			format: "cjs"
+			file: `${outputDir}/index.umd.js`,
+			format: "umd",
+			name: "Charts"
 		},
 		{
-			file: `${outputDir}/${pkg.browser}`,
+			file: `${outputDir}/index.iife.js`,
 			format: "iife",
 			name: "Charts"
 		}
