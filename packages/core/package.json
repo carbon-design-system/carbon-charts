@@ -10,8 +10,6 @@
     "demo:build": "webpack --config webpack.config.js && yarn run docs:build",
     "docs:build": "typedoc --out ./demo/bundle/documentation ./src/index.ts",
     "build": "bash build.sh",
-    "build:watch": "webpack -w --config webpack.build.js",
-    "bundle:analyzer": "rm -rf dist && webpack --config webpack.build.js --env.bundleAnalyzer",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "karma start --single-run",
     "test:watch": "karma start --no-single-run",
@@ -96,7 +94,6 @@
     "typescript": "2.7.2",
     "url-loader": "0.6.2",
     "webpack": "4.33.0",
-    "webpack-bundle-analyzer": "2.13.1",
     "webpack-cli": "3.3.2",
     "webpack-dev-server": "3.7.0"
   },
