@@ -1,6 +1,5 @@
-import { addDecorator, configure } from '@storybook/react';
+import { configure } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
-import { withInfo } from '@storybook/addon-info';
 
 setOptions({
   name: 'Carbon Charts - React Wrappers',
@@ -8,10 +7,6 @@ setOptions({
   showAddonPanel: false,
   sortStoriesByKind: true
 });
-
-addDecorator(
-  withInfo()
-);
 
 // load global styles
 require("!style-loader!css-loader!sass-loader!./previews.scss");
