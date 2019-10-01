@@ -1,9 +1,20 @@
-import CcvBarChart from './ccv-bar-chart.vue';
-import CcvDonutChart from './ccv-donut-chart.vue';
+import CcvSimpleBarChart from './ccv-simple-bar-chart.vue';
+import CcvGroupedBarChart from './ccv-grouped-bar-chart.vue';
+import CcvStackedBarChart from './ccv-stacked-bar-chart.vue';
 import CcvLineChart from './ccv-line-chart.vue';
+import CcvScatterChart from './ccv-scatter-chart.vue';
+import CcvDonutChart from './ccv-donut-chart.vue';
 import CcvPieChart from './ccv-pie-chart.vue';
 
-const components = [CcvBarChart, CcvDonutChart, CcvLineChart, CcvPieChart];
+const components = [
+	CcvSimpleBarChart,
+	CcvGroupedBarChart,
+	CcvStackedBarChart,
+	CcvLineChart,
+	CcvScatterChart,
+	CcvDonutChart,
+	CcvPieChart
+];
 
 /*
   Allows the module to be used as a Vue plug-in, and has an install()
@@ -37,4 +48,12 @@ export default {
   Allows import of individual components from the module, as an
   alternative to loading them all via a Vue plug-in.
 */
-export { CcvBarChart, CcvDonutChart, CcvLineChart, CcvPieChart };
+export {
+	CcvSimpleBarChart,
+	CcvGroupedBarChart,
+	CcvStackedBarChart,
+	CcvLineChart,
+	CcvScatterChart,
+	CcvDonutChart,
+	CcvPieChart
+};
