@@ -6,7 +6,7 @@ import { DOMUtils } from "../../services";
 
 // D3 Imports
 import { axisBottom, axisLeft } from "d3-axis";
-import { mouse } from "d3-selection";
+import { mouse, select } from "d3-selection";
 
 export class Grid extends Component {
 	type = "grid";
@@ -22,7 +22,7 @@ export class Grid extends Component {
 		this.drawXGrid();
 		this.drawYGrid();
 
-		if (Tools.getProperty(this.model.getOptions(), "tooltip", "gridline")) {
+		if (Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) {
 			this.addGridEventListeners();
 		}
 	}
@@ -103,16 +103,17 @@ export class Grid extends Component {
 			lineSpacing = +Tools.getTranslationValues(line2).tx;
 		} else if (!line2) {
 			// we need to use the chart right bounds in case there isnt a domain axis
-			const gridEl = svg.select(".cc-grid rect.chart-grid-backdrop").node();
-			const width = DOMUtils.getSVGElementSize(gridEl).width;
+			const gridElement = svg.select(".cc-grid rect.chart-grid-backdrop").node();
+			const width = DOMUtils.getSVGElementSize(gridElement).width;
 
 			lineSpacing = width - +Tools.getTranslationValues(line1).tx;
 		} else {
 			// there are two gridlines to use
 			lineSpacing = +Tools.getTranslationValues(line2).tx - +Tools.getTranslationValues(line1).tx;
 		}
+		const { threshold }  = this.model.getOptions().tooltip.gridline;
 		// return the threshold
-		return lineSpacing * Configuration.tooltip.axisTooltip.axisThreshold;
+		return lineSpacing * threshold;
 	}
 
 	/**
@@ -148,9 +149,10 @@ export class Grid extends Component {
 		const grid = DOMUtils.appendOrSelect(svg, "rect.chart-grid-backdrop");
 
 		grid
-		.on("mousemove", function() {
+		.on("mousemove mouseover", function() {
 			const chartContainer = self.services.domUtils.getMainSVG();
 			const pos = mouse(chartContainer);
+			const hoveredElement = select(this);
 
 			// remove the styling on the lines
 			const allgridlines = svg.selectAll(".x.grid .tick");
@@ -169,12 +171,13 @@ export class Grid extends Component {
 			// get the items that should be highlighted
 			let highlightItems;
 
-
+			// use the selected gridline to get the data with associated domain
 			activeGridline.each(function(d) {
 				highlightItems = self.model.getDataWithDomain(d);
 			});
 
 			self.services.events.dispatchEvent("show-tooltip", {
+				hoveredElement,
 				multidata: highlightItems
 			});
 		})
