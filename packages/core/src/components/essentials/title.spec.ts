@@ -31,8 +31,4 @@ describe("title component", () => {
 			chartEventsFragment.addEventListener("render-finished", renderCb);
 		});
 	});
-
-	afterEach(function() {
-		this._testEnvironment.destroy();
-	});
 });
