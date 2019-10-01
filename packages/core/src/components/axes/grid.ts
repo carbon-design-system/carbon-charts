@@ -22,7 +22,7 @@ export class Grid extends Component {
 		this.drawXGrid();
 		this.drawYGrid();
 
-		if (Tools.getProperty(this.model.getOptions(), "tooltip", "gridline")) {
+		if (Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) {
 			this.addGridEventListeners();
 		}
 	}
@@ -103,16 +103,17 @@ export class Grid extends Component {
 			lineSpacing = +Tools.getTranslationValues(line2).tx;
 		} else if (!line2) {
 			// we need to use the chart right bounds in case there isnt a domain axis
-			const gridEl = svg.select(".cc-grid rect.chart-grid-backdrop").node();
-			const width = DOMUtils.getSVGElementSize(gridEl).width;
+			const gridElement = svg.select(".cc-grid rect.chart-grid-backdrop").node();
+			const width = DOMUtils.getSVGElementSize(gridElement).width;
 
 			lineSpacing = width - +Tools.getTranslationValues(line1).tx;
 		} else {
 			// there are two gridlines to use
 			lineSpacing = +Tools.getTranslationValues(line2).tx - +Tools.getTranslationValues(line1).tx;
 		}
+		const { threshold }  = this.model.getOptions().tooltip.gridline;
 		// return the threshold
-		return lineSpacing * Configuration.tooltip.axisTooltip.axisThreshold;
+		return lineSpacing * threshold;
 	}
 
 	/**

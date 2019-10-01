@@ -65,19 +65,20 @@ export class TooltipBar extends Tooltip {
 		const holderPosition = select(this.services.domUtils.getHolder()).node().getBoundingClientRect();
 		const barPosition = hoveredElement.getBoundingClientRect();
 
+		const { padding } = this.model.getOptions().tooltip.bar;
 		// if there is a negative value bar chart, need to place the tooltip below the bar
 		if (data.value <= 0) {
 			// negative bars
 			const tooltipPos = {
 				left: (barPosition.left - holderPosition.left) + barPosition.width / 2,
-				top: (barPosition.bottom - holderPosition.top) + Configuration.tooltip.barTooltip.padding };
+				top: (barPosition.bottom - holderPosition.top) + padding };
 
 			return {placement: TooltipPosition.BOTTOM, position: tooltipPos};
 		} else {
 			// positive bars
 			const tooltipPos = {
 				left: (barPosition.left - holderPosition.left) + barPosition.width / 2,
-				top: (barPosition.top - holderPosition.top) - Configuration.tooltip.barTooltip.padding };
+				top: (barPosition.top - holderPosition.top) - padding };
 
 			return {placement: TooltipPosition.TOP, position: tooltipPos};
 		}
@@ -159,7 +160,7 @@ export class TooltipBar extends Tooltip {
 				})
 			);
 
-			let { magicLeft2: horizontalOffset } = Configuration.tooltip;
+			let { horizontalOffset } = this.model.getOptions().tooltip.datapoint;
 			if (bestPlacementOption === PLACEMENTS.LEFT) {
 				horizontalOffset *= -1;
 			}

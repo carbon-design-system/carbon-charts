@@ -10,7 +10,10 @@ import {
 	// Components
 	GridOptions,
 	AxesOptions,
-	TimeScaleOptions
+	TimeScaleOptions,
+	TooltipOptions,
+	AxisTooltipOptions,
+	BarTooltipOptions
 } from "./interfaces/index";
 
 /*
@@ -26,7 +29,7 @@ const chart: BaseChartOptions = {
 	legend: {
 		clickable: true
 	},
-	resizable: true
+	resizable: true,
 };
 
 /**
@@ -42,6 +45,31 @@ export const grid: GridOptions = {
 	strokeColor: "#ECEEEF"
 };
 
+/**
+ * Tooltip options
+ */
+export const tooltip: TooltipOptions = {
+	datapoint: {
+		horizontalOffset: 10,
+	},
+};
+
+export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, tooltip, {
+	gridline: {
+		enabled: true,
+		threshold: 0.25
+	}
+} as AxisTooltipOptions);
+
+export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip , {
+	bar: {
+		padding: 4
+	},
+	gridline: {
+		enabled: false
+	}
+} as BarTooltipOptions);
+
 // We setup no axes by default, the TwoDimensionalAxes component
 // Will setup axes options based on what user provides
 export const axes: AxesOptions = { };
@@ -56,7 +84,8 @@ export const timeScale: TimeScaleOptions = {
 const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	timeScale,
-	grid
+	grid,
+	tooltip: axisChartTooltip
 } as AxisChartOptions);
 
 /**
@@ -68,7 +97,8 @@ const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 	},
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: true
-	} as TimeScaleOptions)
+	} as TimeScaleOptions),
+	tooltip: barChartTooltip
 } as BarChartOptions);
 
 /**
@@ -189,31 +219,6 @@ export const legend = {
 	checkbox: {
 		radius: 6.5,
 		spaceAfter: 4
-	}
-};
-
-/**
- * Tooltip options
- */
-export const tooltip = {
-	width: 200,
-	arrowWidth: 10,
-	magicXPoint2: 20,
-	magicTop1: 21,
-	magicTop2: 22,
-	magicLeft1: 11,
-	magicLeft2: 10,
-	fadeIn: {
-		duration: 250
-	},
-	fadeOut: {
-		duration: 250
-	},
-	axisTooltip: {
-		axisThreshold: 0.25
-	},
-	barTooltip: {
-		padding: 4
 	}
 };
 

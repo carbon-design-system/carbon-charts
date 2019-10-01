@@ -43,6 +43,15 @@ export interface TooltipOptions {
 	 * custom function for returning tooltip HTML
 	 */
 	customHTML?: Function;
+	/**
+	 *  options to configure the datapoint tooltip
+	 */
+	datapoint?: {
+		/**
+		 * offset of the tooltip from the mouse position
+		 */
+		horizontalOffset: number;
+	};
 }
 
 /**
@@ -61,6 +70,19 @@ export interface AxisTooltipOptions extends TooltipOptions {
 		threshold?: number
 	};
 }
+
+/**
+ * extends tooltip for bar tooltip
+ */
+export interface BarTooltipOptions extends TooltipOptions {
+	bar: {
+		/**
+		 * padding between the bar items and the tooltip
+		 */
+		padding: number;
+	};
+}
+
 
 
 export interface GridOptions {
