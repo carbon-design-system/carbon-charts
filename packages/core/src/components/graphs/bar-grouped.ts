@@ -144,13 +144,18 @@ export class GroupedBar extends Bar {
 
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
 					.attr("fill", color(hoveredElement.attr("fill")).darker(0.7).toString());
-			})
-			.on("mousemove", function() {
-				const itemData = select(this).datum();
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
-					itemData
+					hoveredElement
+				});
+			})
+			.on("mousemove", function() {
+				const hoveredElement = select(this);
+
+				// Show tooltip
+				self.services.events.dispatchEvent("show-tooltip", {
+					hoveredElement
 				});
 			})
 			.on("mouseout", function() {

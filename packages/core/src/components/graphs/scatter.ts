@@ -109,16 +109,15 @@ export class Scatter extends Component {
 	addEventListeners() {
 		const self = this;
 		this.parent.selectAll("circle")
-			.on("mousemove", function() {
+			.on("mouseover mousemove", function() {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true);
 
 				hoveredElement.style("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
 
-				const itemData = select(this).datum();
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
-					itemData
+					hoveredElement
 				});
 			})
 			.on("mouseout", function() {
@@ -129,11 +128,9 @@ export class Scatter extends Component {
 					hoveredElement.style("fill", null);
 				}
 
-				const itemData = select(this).datum();
-
 				// Hide tooltip
 				self.services.events.dispatchEvent("hide-tooltip", {
-					itemData
+					hoveredElement
 				});
 			});
 	}

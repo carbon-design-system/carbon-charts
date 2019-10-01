@@ -59,13 +59,12 @@ export class ChartModel {
 		if (Tools.getProperty(axes, "top", "type")) {
 			scaleType = axes.top.type;
 		} else {
-			if (Tools.getProperty(scaleType, "bottom", "type")) {
+			if (Tools.getProperty(axes, "bottom", "type")) {
 				scaleType = axes.bottom.type;
 			}
 		}
 
 		return scaleType;
-
 	}
 
 	/** Uses the primary Y Axis to get data items associated with that value.  */
