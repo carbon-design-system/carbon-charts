@@ -211,6 +211,9 @@ export const tooltip = {
 	},
 	axisTooltip: {
 		axisThreshold: 0.25
+	},
+	barTooltip: {
+		padding: 4
 	}
 };
 

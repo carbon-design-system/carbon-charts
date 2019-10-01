@@ -119,10 +119,9 @@ export class SimpleBar extends Bar {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true);
 
-				const itemData = select(this).datum();
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
-					itemData
+					hoveredElement
 				});
 			})
 			.on("mouseout", function() {
