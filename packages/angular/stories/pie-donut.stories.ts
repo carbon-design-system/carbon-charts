@@ -8,7 +8,7 @@ import {
 	pieData,
 	donutOptions,
 	donutData
-} from "@carbon/charts/demo/demo-data";
+} from "../../core/demo/demo-data/index";
 import { addWidthAndHeight } from "./commons";
 
 const pieStories = storiesOf("Pie", module);

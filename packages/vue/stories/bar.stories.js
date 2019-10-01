@@ -1,55 +1,76 @@
 import { storiesOf } from '@storybook/vue';
 
-import CcvBarChart from '../src/ccv-bar-chart';
+import CcvSimpleBarChart from '../src/ccv-simple-bar-chart.vue';
+import CcvGroupedBarChart from '../src/ccv-grouped-bar-chart.vue';
+import CcvStackedBarChart from '../src/ccv-stacked-bar-chart.vue';
 import {
-  groupedBarData,
-  groupedBarOptions,
-  simpleBarData,
-  simpleBarOptions,
-  stackedBarData,
-  stackedBarOptions
-} from './bar-demo-data';
+	// Bar
+	groupedBarOptions,
+	groupedBarData,
+	simpleBarOptions,
+	simpleBarData,
+	simpleBarTimeSeriesOptions,
+	simpleBarTimeSeriesData,
+	stackedBarData,
+	stackedBarOptions,
+	stackedBarTimeSeriesOptions,
+	stackedBarTimeSeriesData
+} from "../../core/demo/demo-data/index";
 
-const barStories = storiesOf("Bar", module);
+import { addWidthAndHeight } from "./commons";
 
-barStories.add("Label-based legend", () => ({
-    components: { CcvBarChart },
-	data() { return { simpleBarData, simpleBarOptions }; },
-    template: '<ccv-bar-chart :data="simpleBarData" :options="simpleBarOptions"></ccv-bar-chart>',
-  })
-);
+const stories = storiesOf("Bar", module);
+stories.add(simpleBarOptions.title, () => ({
+	components: { CcvSimpleBarChart },
+	data() {
+		return {
+			data: simpleBarData,
+			options: addWidthAndHeight(simpleBarOptions)
+		};
+	},
+	template: '<ccv-simple-bar-chart :data="data" :options="options"></ccv-simple-bar-chart>'
+}));
 
-barStories.add("Label-based legend (Accessible)", () => ({
-    components: { CcvBarChart },
-	data() { return { simpleBarData, simpleBarOptions }; },
-    template: '<ccv-bar-chart :data="simpleBarData" :options="Object.assign({}, simpleBarOptions, {accessibility: true})"></ccv-bar-chart>',
-  })
-);
+stories.add(simpleBarTimeSeriesOptions.title, () => ({
+	components: { CcvSimpleBarChart },
+	data() {
+		return {
+			data: simpleBarTimeSeriesData,
+			options: addWidthAndHeight(simpleBarTimeSeriesOptions)
+		};
+	},
+	template: '<ccv-simple-bar-chart :data="data" :options="options"></ccv-simple-bar-chart>'
+}));
 
-barStories.add("Grouped", () => ({
-    components: { CcvBarChart },
-	data() { return { groupedBarData, groupedBarOptions }; },
-    template: '<ccv-bar-chart :data="groupedBarData" :options="groupedBarOptions"></ccv-bar-chart>',
-  })
-);
+stories.add(groupedBarOptions.title, () => ({
+	components: { CcvGroupedBarChart },
+	data() {
+		return {
+			data: groupedBarData,
+			options: addWidthAndHeight(groupedBarOptions)
+		};
+	},
+	template: '<ccv-grouped-bar-chart :data="data" :options="options"></ccv-grouped-bar-chart>'
+}));
 
-barStories.add("Grouped (Accessible)", () => ({
-    components: { CcvBarChart },
-	data() { return { groupedBarData, groupedBarOptions }; },
-    template: '<ccv-bar-chart :data="groupedBarData" :options="Object.assign({}, groupedBarOptions, {accessibility: true})"></ccv-bar-chart>',
-  })
-);
+stories.add(stackedBarOptions.title, () => ({
+	components: { CcvStackedBarChart },
+	data() {
+		return {
+			data: stackedBarData,
+			options: addWidthAndHeight(stackedBarOptions)
+		};
+	},
+	template: '<ccv-stacked-bar-chart :data="data" :options="options"></ccv-stacked-bar-chart>'
+}));
 
-barStories.add("Stacked", () => ({
-    components: { CcvBarChart },
-	data() { return { stackedBarData, stackedBarOptions }; },
-    template: '<ccv-bar-chart :data="stackedBarData" :options="stackedBarOptions"></ccv-bar-chart>',
-  })
-);
-
-barStories.add("Stacked (Accessible)", () => ({
-    components: { CcvBarChart },
-	data() { return { stackedBarData, stackedBarOptions }; },
-    template: '<ccv-bar-chart :data="stackedBarData" :options="Object.assign({}, stackedBarOptions, {accessibility: true})"></ccv-bar-chart>',
-  })
-);
+stories.add(stackedBarTimeSeriesOptions.title, () => ({
+	components: { CcvStackedBarChart },
+	data() {
+		return {
+			data: stackedBarTimeSeriesData,
+			options: addWidthAndHeight(stackedBarTimeSeriesOptions)
+		};
+	},
+	template: '<ccv-stacked-bar-chart :data="data" :options="options"></ccv-stacked-bar-chart>'
+}));

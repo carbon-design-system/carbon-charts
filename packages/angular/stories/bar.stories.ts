@@ -14,7 +14,7 @@ import {
 	stackedBarOptions,
 	stackedBarTimeSeriesOptions,
 	stackedBarTimeSeriesData,
-} from "@carbon/charts/demo/demo-data";
+} from "../../core/demo/demo-data/index";
 import { addWidthAndHeight } from "./commons";
 
 const template = barType => `
