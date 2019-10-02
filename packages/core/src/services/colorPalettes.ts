@@ -20,6 +20,8 @@ export const WHITE = [
 	colors.purple(50)
 ];
 
+console.log("WHITE", WHITE)
+
 export const DARK = [
 	colors.purple(60),
 	colors.cyan(40),
