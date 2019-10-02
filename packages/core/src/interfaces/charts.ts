@@ -144,5 +144,5 @@ export interface DonutChartOptions extends PieChartOptions {
  * options specific to network charts
  */
 export interface NetworkChartOptions extends ZoomableChartOptions {
-	
+	collapsed?: boolean;
 }

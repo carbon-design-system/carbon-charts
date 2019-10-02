@@ -200,7 +200,7 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
  * options specific to donut charts
  */
 const networkChart: NetworkChartOptions = Tools.merge({}, pieChart, {
-	
+	collapsed: false
 } as NetworkChartOptions);
 
 export const options = {
