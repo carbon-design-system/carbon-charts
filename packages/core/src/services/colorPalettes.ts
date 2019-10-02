@@ -19,7 +19,7 @@ export const WHITE = [
 	"#8a3800", // Orange 70
 	colors.purple(50)
 ];
-console.log("white", WHITE)
+
 export const DARK = [
 	colors.purple(60),
 	colors.cyan(40),
