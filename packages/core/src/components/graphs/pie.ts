@@ -2,7 +2,7 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import { CalloutDirections } from "../../interfaces";
+import { CalloutDirections, TooltipTypes } from "../../interfaces/enums";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -312,7 +312,8 @@ export class Pie extends Component {
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
-					hoveredElement
+					hoveredElement,
+					type: TooltipTypes.DATAPOINT
 				});
 			})
 			.on("mouseout", function() {
