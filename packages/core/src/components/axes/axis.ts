@@ -9,7 +9,6 @@ import { DOMUtils } from "../../services";
 import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { min, max, extent } from "d3-array";
-import { timeFormat } from "d3-time-format";
 
 export class Axis extends Component {
 	type = "axes";
@@ -206,7 +205,8 @@ export class Axis extends Component {
 				tickValues = Tools.removeArrayDuplicates(tickValues);
 
 				// Remove labels on the edges
-				if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges")) {
+				// If there are more than 2 labels to show
+				if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges") && tickValues.length > 2) {
 					tickValues.splice(tickValues.length - 1, 1);
 					tickValues.splice(0, 1);
 				}

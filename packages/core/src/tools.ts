@@ -35,23 +35,6 @@ export namespace Tools {
 	}
 
 	/**
-	 * Returns element if it  exists, otherwise creates and returns reference to item
-	 * @param parent Element parent to query within
-	 * @param query The element to return from the DOM
-	 */
-	export function appendOrSelect(parent, query) {
-		const l = query.split(".");
-		const elementToAppend = l[0];
-
-		const g = parent.select(query);
-		if (g.empty()) {
-			return parent.append(elementToAppend)
-				.attr("class", l.slice(1).join(" "));
-		}
-		return g;
-	}
-
-	/**
 	 * Returns an elements's x and y translations from attribute transform
 	 * @param {HTMLElement} element
 	 * @returns an object containing the x and y translations or null

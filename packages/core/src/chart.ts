@@ -70,13 +70,9 @@ export class Chart {
 
 	update(animate = true) {
 		if (this.components) {
-			console.log("UPDATE");
-
 			// Render all components
 			this.components.forEach(component => {
 				component.render(animate);
-
-				console.log("RENDER", ++window["ccount"]);
 			});
 
 			this.setTheme();
