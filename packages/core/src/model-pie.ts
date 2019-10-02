@@ -2,7 +2,7 @@
 import * as Configuration from "./configuration";
 import { ChartModel } from "./model";
 import { Tools } from "./tools";
-import { colorPalettes } from "./index";
+import * as colorPalettes from "./services/colorPalettes";
 
 // D3 Imports
 import { scaleOrdinal } from "d3-scale";
