@@ -9,6 +9,7 @@ import Position, { PLACEMENTS } from "@carbon/utils-position";
 
 // D3 Imports
 import { select, mouse, event } from "d3-selection";
+import { TooltipTypes } from "../../interfaces";
 
 export class Tooltip extends Component {
 	type = "tooltip";
@@ -32,26 +33,31 @@ export class Tooltip extends Component {
 
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.getDocumentFragment().addEventListener("show-tooltip", e => {
-			let data = select(event.target).datum() as any;
+			// check the type of tooltip and that it is enabled
+			if ((e.detail.type === TooltipTypes.DATAPOINT && Tools.getProperty(this.model.getOptions(), "tooltip", "datapoint", "enabled"))
+				|| (e.detail.type === TooltipTypes.GRIDLINE && Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) ) {
 
-			// if there is a provided tooltip HTML function
-			if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
-				tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data));
-			} else {
-				if (e.detail.multidata) {
-					// multi tooltip
-					data = e.detail.multidata;
-					tooltipTextContainer.html(this.getMultiTooltipHTML(data));
+				let data = select(event.target).datum() as any;
+
+				// if there is a provided tooltip HTML function
+				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
+					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data));
 				} else {
-					tooltipTextContainer.html(this.getTooltipHTML(data));
+					if (e.detail.multidata) {
+						// multi tooltip
+						data = e.detail.multidata;
+						tooltipTextContainer.html(this.getMultiTooltipHTML(data));
+					} else {
+						tooltipTextContainer.html(this.getTooltipHTML(data));
+					}
 				}
+
+				// Position the tooltip
+				this.positionTooltip();
+
+				// Fade in
+				this.tooltip.classed("hidden", false);
 			}
-
-			// Position the tooltip
-			this.positionTooltip();
-
-			// Fade in
-			this.tooltip.classed("hidden", false);
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip

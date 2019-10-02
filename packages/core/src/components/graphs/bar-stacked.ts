@@ -1,5 +1,5 @@
 // Internal Imports
-import { ScaleTypes } from "../../interfaces";
+import { ScaleTypes, TooltipTypes } from "../../interfaces/enums";
 import { Tools } from "../../tools";
 import { Bar } from "./bar";
 
@@ -190,7 +190,8 @@ export class StackedBar extends Bar {
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
 					multidata: activePoints,
-					hoveredElement
+					hoveredElement,
+					type: TooltipTypes.DATAPOINT
 				});
 			})
 			.on("mouseout", function() {

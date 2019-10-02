@@ -55,6 +55,14 @@ export enum TooltipPosition {
 }
 
 /**
+ * enum of tooltip types for custom tooltip event
+ */
+export enum TooltipTypes {
+	DATAPOINT = "datapoint",
+	GRIDLINE = "gridline",
+}
+
+/**
  * enum of all possible legend positions
  */
 export enum LegendPositions {
