@@ -1,5 +1,5 @@
 // Internal Imports
-import { PieChart } from "./index";
+import { PieChart } from "./pie";
 import * as Configuration from "../configuration";
 import {
 	ChartConfig,
