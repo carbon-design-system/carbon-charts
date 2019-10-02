@@ -115,10 +115,10 @@ export const lineTimeSeriesData = {
 export const lineTimeSeriesOptions = {
 	title: "Line Chart (Time Series)",
 	axes: {
-		right: {
+		left: {
 			secondary: true
 		},
-		top: {
+		bottom: {
 			type: "time",
 			primary: true
 		}
@@ -203,12 +203,12 @@ export const lineData = {
 export const lineOptions = {
 	title: "Line Chart (Linear Curve)",
 	axes: {
-		top: {
+		bottom: {
 			title: "2018 Annual Sales Figures",
 			type: "labels",
 			secondary: true
 		},
-		right: {
+		left: {
 			primary: true
 		}
 	},
@@ -307,12 +307,12 @@ export const scatterData = {
 export const scatterOptions = {
 	title: "Scatter Chart",
 	axes: {
-		top: {
+		bottom: {
 			title: "2018 Annual Sales Figures",
 			type: "labels",
 			secondary: true
 		},
-		right: {
+		left: {
 			primary: true
 		}
 	},
@@ -329,7 +329,7 @@ export const scatterTimeSeriesOptions = {
 			type: "time",
 			secondary: true
 		},
-		right: {
+		left: {
 			primary: true
 		}
 	},

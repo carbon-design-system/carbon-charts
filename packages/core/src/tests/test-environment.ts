@@ -43,7 +43,6 @@ export const data = {
 };
 
 export const options = {
-	// animations: false,
 	accessibility: false,
 	axes: {
 		bottom: {

@@ -2,7 +2,7 @@
 import * as Configuration from "./configuration";
 import { ChartModel } from "./model";
 import { Tools } from "./tools";
-import { colorPalettes } from "./index";
+import * as colorPalettes from "./services/colorPalettes";
 
 // D3 Imports
 import { scaleOrdinal } from "d3-scale";
@@ -54,9 +54,19 @@ export class PieChartModel extends ChartModel {
 		const dataLabels = this.get("dataLabels");
 
 		const hasDeactivatedItems = Object.keys(dataLabels).some(label => dataLabels[label] === DISABLED);
+		const activeItems = Object.keys(dataLabels).filter(label => dataLabels[label] === ACTIVE);
 		// If there are deactivated items, toggle "changedLabel"
 		if (hasDeactivatedItems) {
-			dataLabels[changedLabel] = dataLabels[changedLabel] === DISABLED ? ACTIVE : DISABLED;
+			// If the only active item is being toggled
+			// Activate all items
+			if (activeItems.length === 1 && activeItems[0] === changedLabel) {
+				// If every item is active, then enable "changedLabel" and disable all other items
+				Object.keys(dataLabels).forEach(label => {
+					dataLabels[label] = ACTIVE;
+				});
+			} else {
+				dataLabels[changedLabel] = dataLabels[changedLabel] === DISABLED ? ACTIVE : DISABLED;
+			}
 		} else {
 			// If every item is active, then enable "changedLabel" and disable all other items
 			Object.keys(dataLabels).forEach(label => {

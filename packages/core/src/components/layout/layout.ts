@@ -9,12 +9,6 @@ import { ChartModel } from "../../model";
 import { select } from "d3-selection";
 import { hierarchy, treemap, treemapSlice, treemapDice } from "d3-hierarchy";
 
-
-// TODORF - Remove
-const testColors = ["e41a1c", "377eb8", "4daf4a", "984ea3", "ff7f00", "ffff33", "a65628", "f781bf", "999999"];
-window["testColors"] = Tools.clone(testColors);
-window["ccount"] = 0;
-
 // TODO - What if there is no "growth" object?
 export class LayoutComponent extends Component {
 	// Give every layout component a distinct ID
@@ -126,7 +120,6 @@ export class LayoutComponent extends Component {
 					const growth = Tools.getProperty(d, "data", "growth", "x");
 					if (growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED) {
 						itemComponent.render(animate);
-						console.log("RENDER", ++window["ccount"]);
 					}
 				});
 			});
@@ -186,29 +179,8 @@ export class LayoutComponent extends Component {
 						const growth = Tools.getProperty(d, "data", "growth", "x");
 						if (growth === LayoutGrowth.STRETCH) {
 							itemComponent.render(animate);
-							console.log("RENDER", ++window["ccount"]);
 						}
 					});
-
-					// const bgRect = DOMUtils.appendOrSelect(select(this), "rect.bg");
-					// bgRect
-					// 	.classed("bg", true)
-					// 	.attr("width", "100%")
-					// 	.attr("height", "100%")
-					// 	.lower();
-
-					// if (!bgRect.attr("fill")) {
-					// 	bgRect.attr("fill-opacity", 0.2)
-					// 	.attr("fill", d => {
-					// 		if (window["testColors"].length === 0) {
-					// 			window["testColors"] = Tools.clone(testColors);
-					// 		}
-
-					// 		const col = window["testColors"].shift();
-
-					// 		return `#${col}`;
-					// 	})
-					// }
 				});
 		}, 0);
 	}
