@@ -1,4 +1,5 @@
 import {
+	// Basic charts
 	SimpleBarChart,
 	GroupedBarChart,
 	StackedBarChart,
@@ -6,6 +7,8 @@ import {
 	ScatterChart,
 	PieChart,
 	DonutChart,
+	// Advanced charts
+	NetworkChart
 } from "./charts/index";
 
 import * as colorPalettes from "./services/colorPalettes";
@@ -15,11 +18,14 @@ const defaultColors = colorPalettes.DEFAULT;
 export {
 	defaultColors,
 	colorPalettes,
+	// Basic charts
 	SimpleBarChart,
 	GroupedBarChart,
 	StackedBarChart,
 	LineChart,
 	ScatterChart,
 	PieChart,
-	DonutChart
+	DonutChart,
+	// Advanced charts
+	NetworkChart
 };

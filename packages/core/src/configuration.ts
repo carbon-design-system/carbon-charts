@@ -2,6 +2,8 @@ import { Tools } from "./tools";
 import {
 	BaseChartOptions,
 	AxisChartOptions,
+	ZoomableChartOptions,
+	// Basic Charts
 	ScatterChartOptions,
 	LineChartOptions,
 	BarChartOptions,
@@ -13,7 +15,9 @@ import {
 	TimeScaleOptions,
 	TooltipOptions,
 	AxisTooltipOptions,
-	BarTooltipOptions
+	BarTooltipOptions,
+	// Advanced Charts
+	NetworkChartOptions,
 } from "./interfaces/index";
 
 /*
@@ -90,6 +94,13 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	grid,
 	tooltip: axisChartTooltip
 } as AxisChartOptions);
+
+/**
+ * Options common to any chart with an axis
+ */
+const zoomableChart: ZoomableChartOptions = Tools.merge({}, chart, {
+	initialZoom: 1
+} as ZoomableChartOptions);
 
 /**
  * options specific to simple bar charts
@@ -185,16 +196,28 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	}
 } as DonutChartOptions);
 
+/**
+ * options specific to donut charts
+ */
+const networkChart: NetworkChartOptions = Tools.merge({}, pieChart, {
+	
+} as NetworkChartOptions);
+
 export const options = {
+	// Base options
 	chart,
 	axisChart,
+	zoomableChart,
+	// Basic Charts
 	simpleBarChart,
 	groupedBarChart,
 	stackedBarChart,
 	lineChart,
 	scatterChart,
 	pieChart,
-	donutChart
+	donutChart,
+	// Advanced Charts
+	networkChart
 };
 
 /**

@@ -58,6 +58,13 @@ export interface AxisChartOptions extends BaseChartOptions {
 }
 
 /**
+ * Options common to any chart that is zoomable
+ */
+export interface ZoomableChartOptions extends BaseChartOptions {
+	initialZoom?: number;
+}
+
+/**
  * options specific to bar charts
  */
 export interface BarChartOptions extends AxisChartOptions {
@@ -120,8 +127,6 @@ export interface PieChartOptions extends BaseChartOptions {
 	};
 }
 
-
-
 /**
  * options specific to donut charts
  */
@@ -133,4 +138,11 @@ export interface DonutChartOptions extends PieChartOptions {
 			titleYPosition?: Function;
 		};
 	};
+}
+
+/**
+ * options specific to network charts
+ */
+export interface NetworkChartOptions extends ZoomableChartOptions {
+	
 }

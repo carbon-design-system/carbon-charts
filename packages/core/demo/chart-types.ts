@@ -33,6 +33,13 @@ const {
 } = require("./demo-data/index");
 
 export const chartTypes = [
+	// Advanced charts
+	{
+		id: "network",
+		options: groupedBarOptions,
+		data: groupedBarData
+	},
+	// Basic charts
 	{
 		id: "grouped-bar",
 		options: groupedBarOptions,

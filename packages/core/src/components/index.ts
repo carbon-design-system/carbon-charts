@@ -15,6 +15,8 @@ export * from "./graphs/line";
 export * from "./graphs/scatter";
 export * from "./graphs/pie";
 export * from "./graphs/donut";
+// Advanced charts graphs
+export * from "./graphs/network";
 
 // MISC
 export * from "./axes/two-dimensional-axes";

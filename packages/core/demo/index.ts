@@ -1,11 +1,14 @@
 import {
+	// Basic charts
 	SimpleBarChart,
 	GroupedBarChart,
 	StackedBarChart,
 	LineChart,
 	ScatterChart,
 	PieChart,
-	DonutChart
+	DonutChart,
+	// Advanced charts
+	NetworkChart
 } from "../src/index";
 
 // Styles
@@ -156,6 +159,18 @@ chartTypes.forEach(type => {
 	const holder = createChartContainer(type);
 	if (holder) {
 		switch (type.id) {
+			case "network":
+				charts[type.id] = new NetworkChart(
+					holder,
+					{
+						data: type.data,
+						options: type.options,
+					}
+				);
+
+				setDemoActionsEventListener(type.id, charts[type.id]);
+
+				break;
 			case "simple-bar":
 			case "simple-bar-time-series":
 				charts[type.id] = new SimpleBarChart(
