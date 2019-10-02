@@ -156,7 +156,9 @@ export class TooltipBar extends Tooltip {
 				target,
 				[
 					PLACEMENTS.RIGHT,
-					PLACEMENTS.LEFT
+					PLACEMENTS.LEFT,
+					PLACEMENTS.TOP,
+					PLACEMENTS.BOTTOM
 				],
 				() => ({
 					width: holder.offsetWidth,
