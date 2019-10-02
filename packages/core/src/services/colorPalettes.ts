@@ -37,7 +37,7 @@ export const DARK = [
 	colors.purple(30)
 ];
 
-export const G10 = DARK;
+export const G10 = WHITE;
 export const G90 = DARK;
 export const G100 = DARK;
 
