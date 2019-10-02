@@ -11,7 +11,7 @@ export const randomizeValue = (currentVal, negativeValueAllowed?) => {
 };
 
 export const colors = [
-	"#8a3ffc",
+	"#6e32c9",
 	"#1191e6",
 	"#006161",
 	"#a11950",

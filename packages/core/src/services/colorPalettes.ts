@@ -4,7 +4,7 @@ import colors from "./colors";
 // in @carbon/colors yet. We should look at adding those
 // colors
 export const WHITE = [
-	colors.purple(60),
+	colors.purple(70),
 	colors.cyan(50),
 	colors.teal(70),
 	colors.magenta(70),
@@ -19,7 +19,7 @@ export const WHITE = [
 	"#8a3800", // Orange 70
 	colors.purple(50)
 ];
-
+console.log("white", WHITE)
 export const DARK = [
 	colors.purple(60),
 	colors.cyan(40),
