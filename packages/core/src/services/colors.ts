@@ -1,4 +1,5 @@
 import {
+	blue,
 	cyan,
 	green,
 	magenta,
@@ -10,6 +11,7 @@ import {
 const getColor = (obj, shade) => obj[shade];
 
 export default {
+	blue: shade => getColor(cyan, shade),
 	cyan: shade => getColor(cyan, shade),
 	green: shade => getColor(green, shade),
 	magenta: shade => getColor(magenta, shade),
