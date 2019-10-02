@@ -79,7 +79,6 @@
     "lerna": "3.13.4",
     "mini-css-extract-plugin": "0.4.4",
     "node-sass": "4.10.0",
-    "postcss-loader": "2.0.8",
     "raw-loader": "0.5.1",
     "rollup": "^1.21.4",
     "rollup-plugin-sass": "^1.2.2",
