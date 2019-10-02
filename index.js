@@ -4947,48 +4947,57 @@ var ScatterChart = /** @class */ (function (_super) {
 /*!***************************************!*\
   !*** ./src/services/colorPalettes.ts ***!
   \***************************************/
-/*! exports provided: WHITE, WHITE_2, G10, G90, G100, DEFAULT */
+/*! exports provided: WHITE, DARK, G10, G90, G100, DEFAULT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WHITE", function() { return WHITE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WHITE_2", function() { return WHITE_2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DARK", function() { return DARK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G10", function() { return G10; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G90", function() { return G90; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G100", function() { return G100; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT", function() { return DEFAULT; });
 /* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./src/services/colors.ts");
 
+// TODO - Some hardcoded values aren't available
+// in @carbon/colors yet. We should look at adding those
+// colors
 var WHITE = [
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(60),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(30),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(50),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].cyan(40),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(80),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(30),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].cyan(80)
-];
-var WHITE_2 = [
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(60),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(30),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(70),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].cyan(50),
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(70),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].cyan(40),
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(70),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(30),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].cyan(80)
-];
-var G10 = [
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(60),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(30),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].red(50),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].red(90),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].green(60),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].blue(80),
     _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(50),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].green(40),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(20),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(60),
-    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(30)
+    "#b28600",
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(50),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].cyan(90),
+    "#8a3800",
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(50)
 ];
-var G90 = G10;
-var G100 = G10;
+var DARK = [
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(60),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].cyan(40),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(60),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(40),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].red(50),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].red(10),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].green(30),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].blue(50),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].magenta(60),
+    "#d2a106",
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].teal(40),
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].cyan(20),
+    "#ba4e00",
+    _colors__WEBPACK_IMPORTED_MODULE_0__["default"].purple(30)
+];
+var G10 = WHITE;
+var G90 = DARK;
+var G100 = DARK;
 var DEFAULT = WHITE;
 
 
@@ -5007,6 +5016,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var getColor = function (obj, shade) { return obj[shade]; };
 /* harmony default export */ __webpack_exports__["default"] = ({
+    blue: function (shade) { return getColor(_carbon_colors__WEBPACK_IMPORTED_MODULE_0__["blue"], shade); },
     cyan: function (shade) { return getColor(_carbon_colors__WEBPACK_IMPORTED_MODULE_0__["cyan"], shade); },
     green: function (shade) { return getColor(_carbon_colors__WEBPACK_IMPORTED_MODULE_0__["green"], shade); },
     magenta: function (shade) { return getColor(_carbon_colors__WEBPACK_IMPORTED_MODULE_0__["magenta"], shade); },
