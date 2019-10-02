@@ -22,15 +22,6 @@ import {
  *****************************
  */
 
-/**
- * Base chart options common to any chart
- */
-const chart: BaseChartOptions = {
-	legend: {
-		clickable: true
-	},
-	resizable: true,
-};
 
 /**
  * Grid options
@@ -48,13 +39,14 @@ export const grid: GridOptions = {
 /**
  * Tooltip options
  */
-export const tooltip: TooltipOptions = {
+export const baseTooltip: TooltipOptions = {
 	datapoint: {
 		horizontalOffset: 10,
+		enabled: true,
 	},
 };
 
-export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, tooltip, {
+export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip, {
 	gridline: {
 		enabled: true,
 		threshold: 0.25
@@ -62,8 +54,8 @@ export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, tooltip, {
 } as AxisTooltipOptions);
 
 export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip , {
-	bar: {
-		padding: 4
+	datapoint: {
+		verticalOffset: 4
 	},
 	gridline: {
 		enabled: false
@@ -76,6 +68,17 @@ export const axes: AxesOptions = { };
 
 export const timeScale: TimeScaleOptions = {
 	addSpaceOnEdges: false
+};
+
+/**
+ * Base chart options common to any chart
+ */
+const chart: BaseChartOptions = {
+	legend: {
+		clickable: true
+	},
+	resizable: true,
+	tooltip: baseTooltip
 };
 
 /**

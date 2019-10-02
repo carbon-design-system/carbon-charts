@@ -3,6 +3,7 @@ import { Component } from "../component";
 
 // D3 Imports
 import { select } from "d3-selection";
+import { TooltipTypes } from "../../interfaces";
 
 export class Scatter extends Component {
 	type = "scatter";
@@ -117,7 +118,8 @@ export class Scatter extends Component {
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
-					hoveredElement
+					hoveredElement,
+					type: TooltipTypes.DATAPOINT
 				});
 			})
 			.on("mouseout", function() {

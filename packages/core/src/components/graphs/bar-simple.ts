@@ -4,6 +4,7 @@ import { Bar } from "./bar";
 // D3 Imports
 import { select } from "d3-selection";
 import { color } from "d3-color";
+import { TooltipTypes } from "../../interfaces";
 
 export class SimpleBar extends Bar {
 	type = "simple-bar";
@@ -116,7 +117,8 @@ export class SimpleBar extends Bar {
 					.attr("fill", color(hoveredElement.attr("fill")).darker(0.7).toString());
 
 				self.services.events.dispatchEvent("show-tooltip", {
-					hoveredElement
+					hoveredElement,
+					type: TooltipTypes.DATAPOINT
 				});
 			})
 			.on("mouseout", function() {
