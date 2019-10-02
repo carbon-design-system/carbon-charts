@@ -2,7 +2,7 @@ import * as Configuration from "../../configuration";
 import { Tooltip } from "./tooltip";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
-import { TooltipPosition } from "./../../interfaces/enums";
+import { TooltipPosition, TooltipTypes } from "./../../interfaces/enums";
 
 // Carbon position service
 import Position, { PLACEMENTS } from "@carbon/utils-position";
@@ -22,30 +22,34 @@ export class TooltipBar extends Tooltip {
 
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.getDocumentFragment().addEventListener("show-tooltip", e => {
-			const hoveredElement = e.detail.hoveredElement.node();
+			// check the type of tooltip and that it is enabled
+			if ((e.detail.type === TooltipTypes.DATAPOINT && Tools.getProperty(this.model.getOptions(), "tooltip", "datapoint", "enabled"))
+				|| (e.detail.type === TooltipTypes.GRIDLINE && Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) ) {
 
-			// if there is a provided tooltip HTML function
-			if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
-				tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement));
-			} else {
-				if (e.detail.multidata) {
-					// multi tooltip
-					tooltipTextContainer.html(this.getMultiTooltipHTML(e.detail.multidata));
-					// Position the tooltip
-					this.positionTooltip();
+				const hoveredElement = e.detail.hoveredElement.node();
+
+				// if there is a provided tooltip HTML function
+				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
+					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement));
 				} else {
-					const data = e.detail.hoveredElement.datum();
-					tooltipTextContainer.html(this.getTooltipHTML(data));
+					if (e.detail.multidata) {
+						// multi tooltip
+						tooltipTextContainer.html(this.getMultiTooltipHTML(e.detail.multidata));
+						// Position the tooltip
+						this.positionTooltip();
+					} else {
+						const data = e.detail.hoveredElement.datum();
+						tooltipTextContainer.html(this.getTooltipHTML(data));
 
-					const position = this.getTooltipPosition(hoveredElement);
+						const position = this.getTooltipPosition(hoveredElement);
 
-					// Position the tooltip relative to the bars
-					this.positionTooltip(position);
+						// Position the tooltip relative to the bars
+						this.positionTooltip(position);
+					}
 				}
+				// Fade in
+				this.tooltip.classed("hidden", false);
 			}
-
-			// Fade in
-			this.tooltip.classed("hidden", false);
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
@@ -65,20 +69,20 @@ export class TooltipBar extends Tooltip {
 		const holderPosition = select(this.services.domUtils.getHolder()).node().getBoundingClientRect();
 		const barPosition = hoveredElement.getBoundingClientRect();
 
-		const { padding } = this.model.getOptions().tooltip.bar;
+		const { verticalOffset } = this.model.getOptions().tooltip.datapoint;
 		// if there is a negative value bar chart, need to place the tooltip below the bar
 		if (data.value <= 0) {
 			// negative bars
 			const tooltipPos = {
 				left: (barPosition.left - holderPosition.left) + barPosition.width / 2,
-				top: (barPosition.bottom - holderPosition.top) + padding };
+				top: (barPosition.bottom - holderPosition.top) + verticalOffset };
 
 			return {placement: TooltipPosition.BOTTOM, position: tooltipPos};
 		} else {
 			// positive bars
 			const tooltipPos = {
 				left: (barPosition.left - holderPosition.left) + barPosition.width / 2,
-				top: (barPosition.top - holderPosition.top) - padding };
+				top: (barPosition.top - holderPosition.top) - verticalOffset };
 
 			return {placement: TooltipPosition.TOP, position: tooltipPos};
 		}

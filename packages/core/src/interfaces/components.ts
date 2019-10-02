@@ -50,7 +50,15 @@ export interface TooltipOptions {
 		/**
 		 * offset of the tooltip from the mouse position
 		 */
-		horizontalOffset: number;
+		horizontalOffset?: number;
+		/**
+		 * toggles on/off datapoint tooltips.
+		 */
+		enabled?: boolean;
+		/**
+		 * vertical offset for tooltip placement
+		 */
+		verticalOffset?: number
 	};
 }
 
@@ -75,15 +83,13 @@ export interface AxisTooltipOptions extends TooltipOptions {
  * extends tooltip for bar tooltip
  */
 export interface BarTooltipOptions extends TooltipOptions {
-	bar: {
+	datapoint: {
 		/**
 		 * padding between the bar items and the tooltip
 		 */
-		padding: number;
+		verticalOffset: number;
 	};
 }
-
-
 
 export interface GridOptions {
 	y?: {

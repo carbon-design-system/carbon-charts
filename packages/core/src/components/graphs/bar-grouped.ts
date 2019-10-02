@@ -5,6 +5,7 @@ import { Bar } from "./bar";
 import { select } from "d3-selection";
 import { color } from "d3-color";
 import { ScaleBand, scaleBand } from "d3-scale";
+import { TooltipTypes } from "../../interfaces";
 
 export class GroupedBar extends Bar {
 	type = "grouped-bar";
@@ -147,7 +148,8 @@ export class GroupedBar extends Bar {
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
-					hoveredElement
+					hoveredElement,
+					type: TooltipTypes.DATAPOINT
 				});
 			})
 			.on("mouseout", function() {

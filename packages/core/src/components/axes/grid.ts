@@ -7,6 +7,7 @@ import { DOMUtils } from "../../services";
 // D3 Imports
 import { axisBottom, axisLeft } from "d3-axis";
 import { mouse, select } from "d3-selection";
+import { TooltipTypes } from "../../interfaces";
 
 export class Grid extends Component {
 	type = "grid";
@@ -178,7 +179,8 @@ export class Grid extends Component {
 
 			self.services.events.dispatchEvent("show-tooltip", {
 				hoveredElement,
-				multidata: highlightItems
+				multidata: highlightItems,
+				type: TooltipTypes.GRIDLINE
 			});
 		})
 		.on("mouseout", function() {
