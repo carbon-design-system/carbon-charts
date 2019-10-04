@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.8](https://github.com/IBM/carbon-charts/compare/v0.16.7...v0.16.8) (2019-10-02)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 ## [0.16.7](https://github.com/IBM/carbon-charts/compare/v0.16.6...v0.16.7) (2019-09-30)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
