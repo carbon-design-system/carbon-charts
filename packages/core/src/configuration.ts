@@ -32,8 +32,7 @@ export const grid: GridOptions = {
 	},
 	y: {
 		numberOfTicks: 5
-	},
-	strokeColor: "#ECEEEF"
+	}
 };
 
 /**

@@ -4,13 +4,12 @@
 @import "./type";
 @import "./chart-holder";
 
-$gray_60: #595859;
 
 $default_transition: all 0.1s ease-out;
 
 
 	svg.chart-svg {
-		overflow: visible !important;
+		overflow: visible;
 
 
 		path {

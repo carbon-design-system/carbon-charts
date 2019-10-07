@@ -12,6 +12,11 @@ g.cc-legend {
 				display: none;
 			}
 		}
+
+		g.check > svg path {
+			fill: $ui-background;
+			stroke: $ui-background;
+		}
 	}
 
 	&.clickable {
@@ -58,7 +63,6 @@ g.cc-legend {
 	}
 }
 
-$gray100: #171717;
 .carbon--theme--g90 {
 	@include carbon--theme($carbon--theme--g90) {
 		g.cc-legend {

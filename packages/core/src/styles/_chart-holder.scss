@@ -22,8 +22,6 @@ div.chart-holder {
 	}
 }
 
-$gray100: #171717;
-
 .carbon--theme--g90 {
 	@include carbon--theme($carbon--theme--g90) {
 		&.chart-holder {
