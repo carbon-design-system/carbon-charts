@@ -1,9 +1,6 @@
 // Karma configuration
 module.exports = function(config) {
-    let browsers = ["ChromeHeadless", "FirefoxHeadless"];
-    if (process.env.CI) {
-        browsers = ["ChromeNoSandbox", "FirefoxHeadless"];
-    }
+    const browsers = ["ChromeHeadless", "FirefoxHeadless"];
     config.set({
         // base path that will be used to resolve all patterns (eg. files, exclude)
         basePath: "./",

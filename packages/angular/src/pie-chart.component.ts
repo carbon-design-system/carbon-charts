@@ -13,9 +13,9 @@ import { PieChart } from "@carbon/charts";
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: "n-pie-chart",
+	selector: "ibm-pie-chart",
 	template: `
-		<div #nChart class="n-chart-container">
+		<div #nChart class="ibm-chart-container">
 		</div>
 	`
 })

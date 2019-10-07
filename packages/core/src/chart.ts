@@ -1,9 +1,21 @@
 // Internal Imports
-import { ChartConfig, BaseChartOptions, LayoutGrowth, LayoutDirection, LegendOrientations, ChartTheme } from "./interfaces/index";
+import {
+	ChartConfig,
+	BaseChartOptions,
+	LayoutGrowth,
+	LayoutDirection,
+	LegendOrientations,
+	ChartTheme
+} from "./interfaces/index";
 
 // Misc
 import { ChartModel } from "./model";
-import { Component, Title, Legend, LayoutComponent, Tooltip } from "./components";
+import { Component,
+	Title,
+	Legend,
+	LayoutComponent,
+	Tooltip
+} from "./components";
 import { Tools } from "./tools";
 
 // Services

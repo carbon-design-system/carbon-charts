@@ -12,12 +12,12 @@ import {
 import { addWidthAndHeight } from "./commons";
 
 const template = `
-<n-scatter-chart
+<ibm-scatter-chart
 	class="n-chart"
 	[data]="data"
 	[options]="options"
 	#scatterChart>
-</n-scatter-chart>
+</ibm-scatter-chart>
 `;
 
 const stories = storiesOf("Scatter", module);
