@@ -1,5 +1,8 @@
-@import "../../node_modules/@carbon/motion/scss/motion.scss";
-@import "../../node_modules/@carbon/themes/scss/themes";
+@import "~@carbon/motion/scss/motion.scss";
+@import "~@carbon/themes/scss/themes";
+@import '~@carbon/type/scss/type';
+@import '~@carbon/type/scss/font-face/mono';
+@import '~@carbon/type/scss/font-face/sans';
 
 div.cc-tooltip {
 	pointer-events: none;
@@ -7,8 +10,6 @@ div.cc-tooltip {
 	@include carbon--motion(standard, expressive);
 	display: inline;
 	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
-	@include fonts();
-	font-weight: 300;
 	position: absolute;
 	word-wrap: break-word;
 	z-index: 1059;
@@ -52,7 +53,7 @@ div.cc-tooltip {
 		}
 
 		.total-val {
-			font-weight: 500;
+			font-weight: carbon--font-weight('semibold');
 			.label {
 				margin-left: 4px;
 			}

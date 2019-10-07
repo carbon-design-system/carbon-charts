@@ -1,15 +1,15 @@
-@import "../../node_modules/@carbon/themes/scss/themes";
-$gray100: #171717;
+@import "~@carbon/themes/scss/themes";
+@import "~@carbon/colors/scss/colors";
 
 .carbon--theme--g90 {
 	@include carbon--theme($carbon--theme--g90) {
 		rect.chart-grid-backdrop {
-			fill: $gray100;
+			fill: $carbon--gray-100;
 		}
 
 		svg.chart-svg.line {
 			circle.dot {
-				fill: $gray100;
+				fill: $carbon--gray-100;
 			}
 		}
 

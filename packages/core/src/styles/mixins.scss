@@ -2,7 +2,3 @@
     background: $color; // fallback
     background: rgba($color, $opacity);
 }
-
-@mixin fonts() {
-	font-family: "IBM Plex Sans", Arial, sans-serif;
-}
