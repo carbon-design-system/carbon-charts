@@ -18,12 +18,12 @@ import {
 import { addWidthAndHeight } from "./commons";
 
 const template = barType => `
-<n-${barType}-bar-chart
+<ibm-${barType}-bar-chart
 	class="n-chart"
 	[data]="data"
 	[options]="options"
 	#${barType}BarChart>
-</n-${barType}-bar-chart>
+</ibm-${barType}-bar-chart>
 `;
 
 const stories = storiesOf("Bar", module);

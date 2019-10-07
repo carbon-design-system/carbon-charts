@@ -12,9 +12,9 @@ import {
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: "n-base-chart",
+	selector: "ibm-base-chart",
 	template: `
-		<div #nChart class="n-chart-container">
+		<div #nChart class="ibm-chart-container">
 		</div>
 	`
 })
@@ -46,12 +46,12 @@ export class BaseChart implements AfterViewInit, OnInit {
 	 * Chart width
 	 */
 	@Input() width: any;
-	
+
 	/**
 	 * Chart height
 	 */
 	@Input() height: any;
-	
+
 	/**
 	 * Chart container element ref
 	 */

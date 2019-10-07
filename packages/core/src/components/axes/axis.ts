@@ -28,7 +28,7 @@ export class Axis extends Component {
 		this.margins = this.configs.margins;
 	}
 
-	createOrGrabScale() {
+	createOrGetScale() {
 		const { position } = this.configs;
 		const scaleOptions = Tools.getProperty(this.model.getOptions(), "axes", position);
 
@@ -164,7 +164,7 @@ export class Axis extends Component {
 		}
 
 		// Grab the scale off of the model, and initialize if it doesn't exist
-		const scale = this.createOrGrabScale()
+		const scale = this.createOrGetScale()
 			.domain(this.getScaleDomain());
 
 		if (axisOptions && axisOptions.type === ScaleTypes.LABELS) {
