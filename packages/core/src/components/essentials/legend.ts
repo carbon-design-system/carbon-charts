@@ -153,9 +153,6 @@ export class Legend extends Component {
 						.attr("x", parseFloat(legendItem.select("rect.checkbox").attr("x")) + 0.5)
 						.attr("y", parseFloat(legendItem.select("rect.checkbox").attr("y")) + 0.5);
 
-					legendItem.select("g.check svg path")
-						.attr("stroke", "#fff")
-						.attr("fill", "#fff");
 				} else if (!hasDeactivatedItems && !legendItem.select("g.check").empty()) {
 					legendItem.select("g.check").remove();
 				}
@@ -204,7 +201,7 @@ export class Legend extends Component {
 					.attr("height", checkboxRadius * 2 + 5)
 					.attr("rx", 3)
 					.attr("ry", 3)
-					.attr("fill", "#0061ff")
+					// .attr("fill", "#0061ff")
 					.lower();
 			})
 			.on("click", function () {
