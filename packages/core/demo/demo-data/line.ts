@@ -123,7 +123,7 @@ export const lineTimeSeriesOptions = {
 			primary: true
 		}
 	},
-	curve: "curveNatural",
+	curve: "curveMonotoneX",
 	theme: getTheme()
 };
 
