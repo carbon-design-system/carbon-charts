@@ -1,34 +1,36 @@
-@import "../../node_modules/@carbon/themes/scss/themes";
+@import "~@carbon/themes/scss/themes";
+@import "~@carbon/type/scss/type";
+@import "~@carbon/type/scss/font-face/mono";
+@import "~@carbon/type/scss/font-face/sans";
+
+@include carbon--type-reset();
+@include carbon--font-face-mono();
+@include carbon--font-face-sans();
 
 svg.chart-svg {
+	font-family: carbon--font-family('sans');
+
 	text {
 		font-size: 12px;
-		line-height: 16px;
-		stroke-width: 0.3;
-		@include fonts();
-		font-weight: 400;
-
-		&.title {
-			font-size: 18px;
-			font-weight: bold;
-		}
+		font-weight: carbon--font-weight('regular');
 
 		&.chart-label {
 			font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
-			dominant-baseline: middle;
 		}
 
-		&.chart-title {
-			font-size: 14px;
-			line-height: 16px;
-			font-weight: 600;
-			padding-bottom: 8px;
-			dominant-baseline: hanging;
+		&.title {
+			font-size: 18px;
+			font-weight: carbon--font-weight('semibold');
 		}
 	}
+
+	g.legend-item text {
+		font-size: 15px;
+	}
+
 	g.tick {
 		text {
-			font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+			font-family: carbon--font-family('sans-condensed');
 		}
 	}
  }

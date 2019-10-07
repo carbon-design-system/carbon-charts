@@ -1,5 +1,6 @@
-@import "../../node_modules/@carbon/motion/scss/motion.scss";
-@import "../../node_modules/@carbon/themes/scss/themes";
+@import "~@carbon/motion/scss/motion.scss";
+@import "~@carbon/themes/scss/themes";
+@import "~@carbon/colors/scss/colors";
 
 g.cc-scatter {
 	circle.hovered {
@@ -36,12 +37,11 @@ g.cc-scatter {
 	}
 }
 
-$gray100: #171717;
 .carbon--theme--g90 {
 	@include carbon--theme($carbon--theme--g90) {
 		g.cc-scatter {
 			circle.dot.unfilled {
-				fill: $gray100;
+				fill: $carbon--gray-100;
 			}
 		}
 	}

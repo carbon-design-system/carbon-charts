@@ -1,4 +1,5 @@
-@import "../../node_modules/@carbon/themes/scss/themes";
+@import "~@carbon/themes/scss/themes";
+@import "~@carbon/colors/scss/colors";
 
 .cc-grid {
 	g.x.grid,
@@ -57,13 +58,11 @@
 	}
 }
 
-$gray100: #171717;
-
 .carbon--theme--g90 {
 	@include carbon--theme($carbon--theme--g90) {
 		.cc-grid {
 			rect.chart-grid-backdrop {
-				fill: $gray100;
+				fill: $carbon--gray-100;
 			}
 
 			g.x.grid,
@@ -84,7 +83,7 @@ $gray100: #171717;
 	@include carbon--theme($carbon--theme--g100) {
 		.cc-grid {
 			rect.chart-grid-backdrop {
-				fill: #000;
+				fill: $carbon--black-100;
 			}
 
 			g.x.grid,

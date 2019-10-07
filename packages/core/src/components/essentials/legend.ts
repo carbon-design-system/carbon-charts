@@ -45,7 +45,6 @@ export class Legend extends Component {
 		addedLegendItems.append("text")
 			.merge(legendItems.select("text"))
 			.text(d => d.key)
-			.style("font-size", "15px")
 			.attr("alignment-baseline", "middle");
 
 		this.breakItemsIntoLines(addedLegendItems);

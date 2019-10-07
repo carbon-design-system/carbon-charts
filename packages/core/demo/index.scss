@@ -1,5 +1,6 @@
 $default_transition: all 0.1s ease-out;
 @import "~@carbon/themes/scss/themes";
+@import "~@carbon/colors/scss/colors";
 
 * {
 	box-sizing: border-box;
@@ -167,10 +168,6 @@ div.options {
 //***********************************************
 
 
-$gray100: #171717;
-$gray90: #282828;
-$gray10: #f3f3f3;
-
 //**********************************************
 // g100
 //***********************************************
@@ -184,7 +181,7 @@ body.carbon--dark-g100 {
 		}
 
 		div.content {
-			color: $gray10;
+			color: $carbon--gray-10;
 		}
 
 		div.options {
@@ -198,7 +195,7 @@ body.carbon--dark-g100 {
 //***********************************************
 body.carbon--dark-g90 {
 	@include carbon--theme($carbon--theme--g90) {
-		background-color: $gray100;
+		background-color: $carbon--gray-100;
 
 		.bx--dropdown__wrapper {
 			$css--reset: false;
@@ -206,11 +203,11 @@ body.carbon--dark-g90 {
 		}
 
 		div.content {
-			color: $gray10;
+			color: $carbon--gray-10;
 		}
 
 		div.options {
-			background: $gray90;
+			background: $carbon--gray-90;
 		}
 	}
 }
@@ -220,7 +217,7 @@ body.carbon--dark-g90 {
 //***********************************************
 body.carbon--dark-g10 {
 	@include carbon--theme($carbon--theme--g10) {
-		background-color: white;
+		background-color: $carbon--white-0;
 
 		.bx--dropdown__wrapper {
 			$css--reset: false;
@@ -228,11 +225,11 @@ body.carbon--dark-g10 {
 		}
 
 		div.content {
-			color: $gray100;
+			color: $carbon--gray-100;
 		}
 
 		div.options {
-			background: $gray10;
+			background: $carbon--gray-10;
 		}
 	}
 }
