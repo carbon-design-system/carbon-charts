@@ -3,6 +3,8 @@ import { storiesOf } from '@storybook/react';
 
 import LineChart from "../src/line-chart";
 import AreaChart from "../src/area-chart";
+import ScatterChart from "../src/scatter-chart";
+
 import {
 	curvedLineData,
 	curvedLineOptions,

@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.9](https://github.com/IBM/carbon-charts/compare/v0.16.8...v0.16.9) (2019-10-07)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
+## [0.16.8](https://github.com/IBM/carbon-charts/compare/v0.16.7...v0.16.8) (2019-10-02)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
+## [0.16.7](https://github.com/IBM/carbon-charts/compare/v0.16.6...v0.16.7) (2019-09-30)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
+## [0.16.6](https://github.com/IBM/carbon-charts/compare/v0.16.5...v0.16.6) (2019-09-30)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
+## [0.16.5](https://github.com/IBM/carbon-charts/compare/v0.16.4...v0.16.5) (2019-09-30)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
+## [0.16.4](https://github.com/IBM/carbon-charts/compare/v0.16.3...v0.16.4) (2019-09-12)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
 ## [0.16.3](https://github.com/IBM/carbon-charts/compare/v0.16.2...v0.16.3) (2019-09-11)
 
 **Note:** Version bump only for package @carbon/charts-vue
