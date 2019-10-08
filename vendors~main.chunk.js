@@ -424,13 +424,14 @@ function rgba(hexcode, opacity) {
 /*!**********************************************************************************************************!*\
   !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/@carbon/utils-position/index.js ***!
   \**********************************************************************************************************/
-/*! exports provided: PLACEMENTS, defaultPositions, default, position */
+/*! exports provided: PLACEMENTS, defaultPositions, Position, position, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLACEMENTS", function() { return PLACEMENTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultPositions", function() { return defaultPositions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Position", function() { return Position; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "position", function() { return position; });
 /**
  * Utilites to manipulate the position of elements relative to other elements
@@ -461,6 +462,12 @@ var defaultPositions = (_a = {},
         left: referenceOffset.left - Math.round(target.offsetWidth / 2) + Math.round(referenceRect.width / 2)
     }); },
     _a);
+var windowRef = typeof window !== "undefined" ? window : {
+    innerHeight: 0,
+    scrollY: 0,
+    innerWidth: 0,
+    scrollX: 0
+};
 var Position = /** @class */ (function () {
     function Position(positions) {
         if (positions === void 0) { positions = {}; }
@@ -600,8 +607,8 @@ var Position = /** @class */ (function () {
     Position.prototype.defaultContainerFunction = function () {
         return {
             // we go with window here, because that's going to be the simple/common case
-            width: window.innerHeight - window.scrollY,
-            height: window.innerWidth - window.scrollX
+            width: windowRef.innerHeight - windowRef.scrollY,
+            height: windowRef.innerWidth - windowRef.scrollX
         };
     };
     Position.prototype.calculatePosition = function (referenceOffset, referenceRect, target, placement) {
@@ -613,8 +620,9 @@ var Position = /** @class */ (function () {
     };
     return Position;
 }());
-/* harmony default export */ __webpack_exports__["default"] = (Position);
+
 var position = new Position();
+/* harmony default export */ __webpack_exports__["default"] = (Position);
 //# sourceMappingURL=../src/index.js.map
 
 /***/ }),

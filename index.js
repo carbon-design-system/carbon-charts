@@ -4011,11 +4011,12 @@ function donutCenterNumberTween(d3Ref, newNumber) {
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/*! exports provided: defaultColors, colorPalettes, BaseChart, BaseAxisChart, PieChart, DonutChart, DonutCenter, BarChart, LineChart, ComboChart, ScatterChart */
+/*! exports provided: enums, defaultColors, colorPalettes, BaseChart, BaseAxisChart, PieChart, DonutChart, DonutCenter, BarChart, LineChart, ComboChart, ScatterChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enums", function() { return enums; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultColors", function() { return defaultColors; });
 /* harmony import */ var _base_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base-chart */ "./src/base-chart.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BaseChart", function() { return _base_chart__WEBPACK_IMPORTED_MODULE_0__["BaseChart"]; });
@@ -4043,10 +4044,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scatter_chart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./scatter-chart */ "./src/scatter-chart.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScatterChart", function() { return _scatter_chart__WEBPACK_IMPORTED_MODULE_7__["ScatterChart"]; });
 
-/* harmony import */ var _services_colorPalettes__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/colorPalettes */ "./src/services/colorPalettes.ts");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "colorPalettes", function() { return _services_colorPalettes__WEBPACK_IMPORTED_MODULE_8__; });
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
+/* harmony import */ var _services_colorPalettes__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./services/colorPalettes */ "./src/services/colorPalettes.ts");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "colorPalettes", function() { return _services_colorPalettes__WEBPACK_IMPORTED_MODULE_9__; });
 __webpack_require__(/*! ./polyfills */ "./src/polyfills.ts");
+// Base classes
 
+
+// Chart components
 
 
 
@@ -4056,7 +4061,11 @@ __webpack_require__(/*! ./polyfills */ "./src/polyfills.ts");
 
 
 // TODO 1.0 - Remove deprecated API
-var defaultColors = _services_colorPalettes__WEBPACK_IMPORTED_MODULE_8__["DEFAULT"];
+var defaultColors = _services_colorPalettes__WEBPACK_IMPORTED_MODULE_9__["DEFAULT"];
+// Expose important ENUMs here
+var enums = {
+    ChartTheme: _configuration__WEBPACK_IMPORTED_MODULE_8__["ChartTheme"]
+};
 
 
 
