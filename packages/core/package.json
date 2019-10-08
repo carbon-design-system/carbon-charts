@@ -2,7 +2,7 @@
   "name": "@carbon/charts",
   "version": "0.16.9",
   "description": "Carbon charting components",
-  "main": "./index.js",
+  "main": "./bundle.js",
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
     "demo:build": "webpack --config webpack.config.js && typedoc --out ./demo/bundle/documentation ./src/index.ts",
@@ -45,7 +45,7 @@
   "dependencies": {
     "@carbon/colors": "10.1.1",
     "@carbon/themes": "10.3.1",
-    "@carbon/utils-position": "1.1.0",
+    "@carbon/utils-position": "1.1.1",
     "babel-polyfill": "6.26.0",
     "carbon-components": "10.3.2",
     "lodash-es": "4.17.15",
