@@ -15,6 +15,8 @@ export class Service {
 
 	}
 
+	update() {}
+
 	// Used to pass down information to the components
 	setModel(newObj) {
 		this.model = newObj;
