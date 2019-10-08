@@ -2,7 +2,7 @@
   "name": "@carbon/charts",
   "version": "0.16.9",
   "description": "Carbon charting components",
-  "main": "./index.js",
+  "main": "./bundle.js",
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
     "demo:build": "webpack --config webpack.config.js && typedoc --out ./demo/bundle/documentation ./src/index.ts",
