@@ -1,8 +1,8 @@
 {
   "name": "@carbon/charts",
-  "version": "0.16.9",
+  "version": "0.16.10",
   "description": "Carbon charting components",
-  "main": "index.umd.js",
+  "main": "./bundle.js",
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
     "demo:build": "webpack --config webpack.config.js && yarn run docs:build",
@@ -43,18 +43,16 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@carbon/colors": "10.4.0",
-    "@carbon/import-once": "^10.3.0",
-    "@carbon/layout": "^10.5.0",
+    "@carbon/import-once": "10.3.0",
+    "@carbon/layout": "10.5.0",
     "@carbon/motion": "10.4.0",
     "@carbon/themes": "10.4.0",
-    "@carbon/type": "^10.5.1",
+    "@carbon/type": "10.5.1",
     "@carbon/utils-position": "1.1.1",
     "babel-polyfill": "6.26.0",
     "carbon-components": "10.5.0",
     "lodash-es": "4.17.15",
-    "resize-observer-polyfill": "1.5.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0"
+    "resize-observer-polyfill": "1.5.0"
   },
   "peerDependencies": {
     "d3": ">=5.0.0 <=5.9.2"
@@ -83,11 +81,13 @@
     "mini-css-extract-plugin": "0.4.4",
     "node-sass": "4.10.0",
     "raw-loader": "0.5.1",
-    "rollup": "^1.21.4",
-    "rollup-plugin-sass": "^1.2.2",
-    "rollup-plugin-terser": "^5.1.2",
-    "rollup-plugin-typescript2": "^0.24.2",
-    "sass-loader": "7.1.0",
+	"rollup": "1.21.4",
+    "rollup-plugin-commonjs": "10.1.0",
+    "rollup-plugin-node-resolve": "5.2.0",
+    "rollup-plugin-sass": "1.2.2",
+    "rollup-plugin-terser": "5.1.2",
+    "rollup-plugin-typescript2": "0.24.2",
+    "sass-loader": "8.0.0",
     "style-loader": "0.19.0",
     "ts-loader": "5.1.0",
     "tslint": "5.8.0",
