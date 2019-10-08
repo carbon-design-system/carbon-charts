@@ -96,7 +96,8 @@ npm install @carbon/charts --save
 | Curved Line | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Pie         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Step        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Scatter     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Scatter     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Area        | :hourglass_flowing_sand: | - | - | - |
 
 ## Bugs and feature requests
 
