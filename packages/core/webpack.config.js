@@ -1,3 +1,5 @@
+const path = require("path");
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -11,7 +13,7 @@ module.exports = {
 		filename: "index.js",
 		chunkFilename: "[name].chunk.js",
 		libraryTarget: "umd",
-    	library: "Charts"
+		library: "Charts"
 	},
 	optimization: {
 		splitChunks: {
@@ -34,7 +36,14 @@ module.exports = {
 						loader: MiniCssExtractPlugin.loader
 					},
 					"css-loader",
-					"sass-loader"
+					{
+						loader: "sass-loader",
+						options: {
+							sassOptions: {
+								includePaths: [path.resolve(__dirname + "/../../node_modules")]
+							}
+						}
+					}
 				]
 			},
 			{
