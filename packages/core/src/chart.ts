@@ -21,6 +21,7 @@ import { Tools } from "./tools";
 // Services
 import { DOMUtils, Events, Transitions } from "./services/index";
 import { select } from "d3-selection";
+import { Themes } from "./services/essentials/themes";
 
 export class Chart {
 	components: Array<Component>;
@@ -28,7 +29,8 @@ export class Chart {
 	protected services: any = {
 		domUtils: DOMUtils,
 		events: Events,
-		transitions: Transitions
+		transitions: Transitions,
+		themes: Themes
 	};
 
 	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {}
@@ -62,8 +64,6 @@ export class Chart {
 		this.components = this.getComponents();
 
 		this.update();
-
-		this.setTheme();
 	}
 
 	getComponents(): Array<any> {
@@ -72,13 +72,7 @@ export class Chart {
 		return null;
 	}
 
-	setTheme() {
-		const theme = Tools.getProperty(this.model.getOptions(), "theme") ?
-			Tools.getProperty(this.model.getOptions(), "theme") : ChartTheme.WHITE;
-		const holder = select(this.model.get("holder"));
 
-		holder.classed(`carbon--theme--${theme}`, true);
-	}
 
 	update(animate = true) {
 		if (this.components) {
@@ -87,7 +81,6 @@ export class Chart {
 				component.render(animate);
 			});
 
-			this.setTheme();
 			// Asynchronously dispatch a "render-finished" event
 			// This is needed because of d3-transitions
 			// Since at the start of the transition
