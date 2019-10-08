@@ -1,8 +1,8 @@
-@import "~@carbon/motion/scss/motion.scss";
-@import "~@carbon/themes/scss/themes";
-@import '~@carbon/type/scss/type';
-@import '~@carbon/type/scss/font-face/mono';
-@import '~@carbon/type/scss/font-face/sans';
+@import "@carbon/motion/scss/motion.scss";
+@import "@carbon/themes/scss/themes";
+@import "@carbon/type/scss/type";
+@import "@carbon/type/scss/font-face/mono";
+@import "@carbon/type/scss/font-face/sans";
 
 div.cc-tooltip {
 	pointer-events: none;
@@ -53,7 +53,7 @@ div.cc-tooltip {
 		}
 
 		.total-val {
-			font-weight: carbon--font-weight('semibold');
+			font-weight: carbon--font-weight("semibold");
 			.label {
 				margin-left: 4px;
 			}

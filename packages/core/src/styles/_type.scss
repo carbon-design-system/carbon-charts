@@ -1,7 +1,7 @@
-@import "~@carbon/themes/scss/themes";
-@import "~@carbon/type/scss/type";
-@import "~@carbon/type/scss/font-face/mono";
-@import "~@carbon/type/scss/font-face/sans";
+@import "@carbon/themes/scss/themes";
+@import "@carbon/type/scss/type";
+@import "@carbon/type/scss/font-face/mono";
+@import "@carbon/type/scss/font-face/sans";
 
 @include carbon--type-reset();
 @include carbon--font-face-mono();
