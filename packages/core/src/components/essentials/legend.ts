@@ -195,7 +195,6 @@ export class Legend extends Component {
 					.attr("height", checkboxRadius * 2 + 5)
 					.attr("rx", 3)
 					.attr("ry", 3)
-					// .attr("fill", "#0061ff")
 					.lower();
 			})
 			.on("click", function () {
