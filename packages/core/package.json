@@ -45,7 +45,7 @@
   "dependencies": {
     "@carbon/colors": "10.1.1",
     "@carbon/themes": "10.3.1",
-    "@carbon/utils-position": "1.1.0",
+    "@carbon/utils-position": "1.1.1",
     "babel-polyfill": "6.26.0",
     "carbon-components": "10.3.2",
     "lodash-es": "4.17.15",
