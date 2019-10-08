@@ -187,8 +187,7 @@ export class Grid extends Component {
 			svg.selectAll(".x.grid .tick")
 			.classed("active", false);
 
-			self.services.events.dispatchEvent("hide-tooltip", {
-			});
+			self.services.events.dispatchEvent("hide-tooltip", {});
 		});
 	}
 

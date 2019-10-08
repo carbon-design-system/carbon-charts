@@ -32,14 +32,9 @@ export class Legend extends Component {
 			.attr("rx", 1)
 			.attr("ry", 1)
 			.style("fill", d => {
-				if (d.value === Configuration.legend.items.status.ACTIVE) {
-					return this.model.getStrokeColor(d.key);
-				}
-				return null;
+				return d.value === Configuration.legend.items.status.ACTIVE ? this.model.getStrokeColor(d.key) : null;
 			}).classed("active", function (d, i) {
-				if (d.value === Configuration.legend.items.status.ACTIVE) {
-					return true;
-				}
+				return d.value === Configuration.legend.items.status.ACTIVE;
 			});
 
 		addedLegendItems.append("text")

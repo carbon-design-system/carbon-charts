@@ -122,24 +122,4 @@ export class TwoDimensionalAxes extends Component {
 			this.render(true);
 		}
 	}
-
-	// // Pass on model to children as well
-	// setModel(newObj) {
-	// 	super.setModel(newObj);
-
-	// 	Object.keys(this.children).forEach(childKey => {
-	// 		const child = this.children[childKey];
-	// 		child.setModel(newObj);
-	// 	});
-	// }
-
-	// // Pass on essentials to children as well
-	// setServices(newObj) {
-	// 	super.setServices(newObj);
-
-	// 	Object.keys(this.children).forEach(childKey => {
-	// 		const child = this.children[childKey];
-	// 		child.setServices(newObj);
-	// 	});
-	// }
 }

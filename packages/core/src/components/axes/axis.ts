@@ -69,7 +69,7 @@ export class Axis extends Component {
 	}
 
 	getScale() {
-		return this.scale;
+		return this.scale === undefined ? this.createOrGetScale() : this.scale;
 	}
 
 	getScaleDomain() {
@@ -157,21 +157,19 @@ export class Axis extends Component {
 		let startPosition, endPosition;
 		if (axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP) {
 			startPosition = this.configs.axes[AxisPositions.LEFT] ? this.margins.left : 0;
-	        endPosition = this.configs.axes[AxisPositions.RIGHT] ? width - this.margins.right : width;
+			endPosition = this.configs.axes[AxisPositions.RIGHT] ? width - this.margins.right : width;
 		} else {
 			startPosition = height - this.margins.bottom;
 			endPosition = this.margins.top;
 		}
 
 		// Grab the scale off of the model, and initialize if it doesn't exist
-		const scale = this.createOrGetScale()
-			.domain(this.getScaleDomain());
+		const scale = this.createOrGetScale().domain(this.getScaleDomain());
 
 		if (axisOptions && axisOptions.type === ScaleTypes.LABELS) {
 			scale.rangeRound([startPosition, endPosition]);
 		} else {
 			scale.range([startPosition, endPosition]);
-				// .nice();
 		}
 
 		// Identify the corresponding d3 axis function
@@ -285,10 +283,6 @@ export class Axis extends Component {
 			});
 		});
 
-		// if (axes.y.yMaxAdjuster) {
-		// 	yMax = axes.y.yMaxAdjuster(yMax);
-		// }
-
 		return yMax;
 	}
 
@@ -302,10 +296,6 @@ export class Axis extends Component {
 				return isNaN(datum) ? datum.value : datum;
 			});
 		});
-
-		// if (axes.y.yMinAdjuster) {
-		// 	yMin = axes.y.yMinAdjuster(yMin);
-		// }
 
 		return yMin;
 	}

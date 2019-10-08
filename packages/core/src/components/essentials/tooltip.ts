@@ -78,7 +78,9 @@ export class Tooltip extends Component {
 		// pie charts don't have a dataset label since they only support one dataset
 		const label = dataVal.datasetLabel ? dataVal.datasetLabel : dataVal.label;
 
-		return `<div class="datapoint-tooltip"><p class="label">${label}</p><p class="value">${formattedValue}</p></div>`;
+		return `<div class="datapoint-tooltip">
+			<p class="label">${label}</p>
+			<p class="value">${formattedValue}</p></div>`;
 	}
 
 	getMultiTooltipHTML(data: any) {
@@ -89,22 +91,19 @@ export class Tooltip extends Component {
 			return b.value - a.value;
 		});
 
-		let listHTML = "<ul class='multi-tooltip'>";
+		return  "<ul class='multi-tooltip'>" +
+			points.map(datapoint => {
+				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
+				this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
 
-		points.forEach(datapoint => {
-			const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-			this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
+				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
 
-			const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
-
-			listHTML += `<li><div class="datapoint-tooltip">
-			<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
-			<p class="label">${datapoint.datasetLabel}</p>
-			<p class="value">${formattedValue}</p>
-			</div></li>`;
-		});
-
-		return listHTML + `</ul>` ;
+				return `<li><div class="datapoint-tooltip">
+					<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
+					<p class="label">${datapoint.datasetLabel}</p>
+					<p class="value">${formattedValue}</p>
+					</div></li>`;
+			}).join("") + "</ul>";
 	}
 
 	render() {
