@@ -105,29 +105,31 @@ export class TooltipBar extends Tooltip {
 	 */
 	getMultiTooltipHTML(data: any) {
 		const points = data;
-		let total = 0;
 
 		points.reverse();
 
-		// get the total for the tooltip
-		points.forEach(item => total += item.value);
+		// get the total for the stacked tooltip
+		let total = points.reduce(function(sum, item) {
+			return sum + item.value;
+		}, 0);
 
-		let listHTML = "<ul class='multi-tooltip'>";
+		// format the total value
+		total = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
+		this.model.getOptions().tooltip.valueFormatter(total) : total.toLocaleString("en");
 
-		points.forEach(datapoint => {
-			const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-			this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
+		return  "<ul class='multi-tooltip'>" +
+			points.map(datapoint => {
+				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
+				this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
 
-			const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
+				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
 
-			listHTML += `<li><div class="datapoint-tooltip">
-				<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
-				<p class="label">${datapoint.datasetLabel}</p>
-				<p class="value">${formattedValue}</p>
-				</div></li>`;
-		});
-
-		return listHTML + `<li><div class='total-val'><p class='label'>Total</p><p class='value'>${total}</p></div></li></ul>` ;
+				return `<li><div class="datapoint-tooltip">
+					<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
+					<p class="label">${datapoint.datasetLabel}</p>
+					<p class="value">${formattedValue}</p>
+					</div></li>`;
+			}).join("") + `<li><div class='total-val'><p class='label'>Total</p><p class='value'>${total}</p></div></li></ul>`;
 	}
 
 	positionTooltip(positionOverride?: any) {
