@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.11](https://github.com/IBM/carbon-charts/compare/v0.16.10...v0.16.11) (2019-10-09)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
 ## [0.16.10](https://github.com/IBM/carbon-charts/compare/v0.16.9...v0.16.10) (2019-10-08)
 
 **Note:** Version bump only for package @carbon/charts
