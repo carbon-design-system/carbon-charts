@@ -17,7 +17,7 @@ if [ -z "$TRAVIS_TAG" ]
 then
 	echo "The commit is not a tag, get lerna to version packages, and publish to Github."
 
-	lerna version --conventional-commits --yes
+	lerna version --conventional-commits --yes --force-publish
 else
 	echo "The commit is a tag, publish to NPM!"
 
@@ -26,5 +26,5 @@ else
 
 	yarn run build-all
 
-	lerna publish from-git --yes --contents dist
+	lerna publish from-git --yes --force-publish --contents dist
 fi
