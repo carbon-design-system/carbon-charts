@@ -3351,7 +3351,9 @@ var ChartTooltip = /** @class */ (function () {
         // setTimeout is there to avoid catching the click event that opened the tooltip
         setTimeout(function () {
             // When ESC is pressed
-            window.addEventListener("keydown", _this.handleTooltipEvents);
+            if (typeof window !== "undefined") {
+                window.addEventListener("keydown", _this.handleTooltipEvents);
+            }
             // If clicked outside
             _this.container.addEventListener("click", _this.handleTooltipEvents);
             // Stop clicking inside tooltip from bubbling up to window
@@ -3361,8 +3363,10 @@ var ChartTooltip = /** @class */ (function () {
         }, 0);
     };
     ChartTooltip.prototype.removeEventLinteners = function () {
-        // Remove eventlistener to close tooltip when ESC is pressed
-        window.removeEventListener("keydown", this.handleTooltipEvents);
+        if (typeof window !== "undefined") {
+            // Remove eventlistener to close tooltip when ESC is pressed
+            window.removeEventListener("keydown", this.handleTooltipEvents);
+        }
         // Remove eventlistener to close tooltip when clicked outside
         this.container.removeEventListener("click", this.handleTooltipEvents);
     };
