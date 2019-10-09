@@ -3,6 +3,7 @@
   "version": "0.16.14",
   "description": "Carbon charting components",
   "main": "./bundle.js",
+  "module": "./index.js",
   "scripts": {
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
     "demo:build": "webpack --config webpack.config.js && typedoc --out ./demo/bundle/documentation ./src/index.ts",
