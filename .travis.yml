@@ -33,6 +33,6 @@ deploy:
     provider: pages
     skip_cleanup: true
     true:
-      branch: master
+      tags: true
 notifications:
   email: false
