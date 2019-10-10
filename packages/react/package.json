@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "0.16.15",
+	"version": "0.16.16",
 	"description": "Carbon charting components for React",
 	"main": "./bundle.js",
 	"scripts": {
@@ -45,7 +45,7 @@
 	},
 	"homepage": "https://github.com/IBM/carbon-charts#readme",
 	"dependencies": {
-		"@carbon/charts": "^0.16.15"
+		"@carbon/charts": "^0.16.16"
 	},
 	"peerDependencies": {
 		"react": "^16.6.3",
