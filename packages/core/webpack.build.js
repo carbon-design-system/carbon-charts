@@ -15,7 +15,8 @@ module.exports = env => {
 			filename: "bundle.js",
 			chunkFilename: "[name].chunk.js",
 			libraryTarget: "umd",
-			library: "Charts"
+			library: "Charts",
+			globalObject: "(typeof self !== 'undefined' ? self : this)"
 		},
 		optimization: {
 			minimize: true
