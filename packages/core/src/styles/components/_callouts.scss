@@ -1,12 +1,8 @@
 @import "@carbon/themes/scss/themes";
 
-g.callouts {}
-
-
 /////////////////////////////////////////////
 ///          Theme styles                ////
 /////////////////////////////////////////////
-
 .carbon--theme--white {
 	g.callouts {
 		stroke: $text-02;
@@ -36,4 +32,3 @@ g.callouts {}
 		}
 	}
 }
-

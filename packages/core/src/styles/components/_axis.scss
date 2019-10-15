@@ -9,7 +9,6 @@
 /////////////////////////////////////////////
 ///          Theme styles                ////
 /////////////////////////////////////////////
-
 .carbon--theme--white {
 	.cc-axes {
 		g.axis {
@@ -32,7 +31,6 @@
 	}
 }
 
-
 .carbon--theme--g90 {
 	@include carbon--theme($carbon--theme--g90) {
 		.cc-axes {
@@ -44,7 +42,6 @@
 		}
 	}
 }
-
 
 .carbon--theme--g100 {
 	@include carbon--theme($carbon--theme--g100) {
