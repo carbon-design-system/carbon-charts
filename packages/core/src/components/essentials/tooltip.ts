@@ -87,9 +87,7 @@ export class Tooltip extends Component {
 		const points = data;
 
 		// sort them so they are in the same order as the graph
-		points.sort(function (a, b) {
-			return b.value - a.value;
-		});
+		points.sort((a, b) => b.value - a.value);
 
 		return  "<ul class='multi-tooltip'>" +
 			points.map(datapoint => {

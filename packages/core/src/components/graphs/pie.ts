@@ -75,15 +75,12 @@ export class Pie extends Component {
 		// Setup the pie layout
 		const pieLayout = pie()
 			.value((d: any) => d.value)
-			.sort(function(a: any, b: any) {
-				return b.value - a.value;
-			})
+			.sort((a: any, b: any) => b.value - a.value)
 			.padAngle(options.pie.padAngle);
 
 		// Sort pie layout data based off of the indecies the layout creates
-		const pieLayoutData = pieLayout(dataList).sort(function(a: any, b: any) {
-			return a.index - b.index;
-		});
+		const pieLayoutData = pieLayout(dataList)
+			.sort((a: any, b: any) => a.index - b.index);
 
 		// Update data on all slices
 		const paths = DOMUtils.appendOrSelect(svg, "g.slices").selectAll("path.slice")
