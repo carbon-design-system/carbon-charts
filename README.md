@@ -96,9 +96,8 @@ npm install @carbon/charts --save
 | Curved Line | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Pie         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Step        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Scatter     | :white_check_mark: | :hourglass_flowing_sand: | - | -
-| Combo       | :hourglass_flowing_sand: | - | - | -
-| Area        | Soon | - | - | - |
+| Scatter     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Area        | :hourglass_flowing_sand: | - | - | - |
 
 ## Bugs and feature requests
 
@@ -118,7 +117,8 @@ We use the **semantic-release** library to automatically version our releases wi
 
 See our [releases notes](https://github.com/carbon-design-system/carbon-charts/releases) for the changelog of each version of Charts.
 
-## Contributors
+
+## Core Team
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
 <table>
@@ -127,17 +127,32 @@ See our [releases notes](https://github.com/carbon-design-system/carbon-charts/r
 	<td align="center"><a href="https://github.com/natashadecoste"><img src="https://avatars0.githubusercontent.com/u/14351335?v=4" width="100px;" alt="natashadecoste"/><br /><sub><b>natashadecoste</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon-charts/commits?author=natashadecoste" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=natashadecoste" title="Documentation">📖</a> <a href="#example-natashadecoste" title="Examples">💡</a></td>
     <td align="center"><a href="http://www.zvonimirfras.com"><img src="https://avatars0.githubusercontent.com/u/9692126?v=4" width="100px;" alt="Zvonimir Fras"/><br /><sub><b>Zvonimir Fras</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon-charts/commits?author=zvonimirfras" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=zvonimirfras" title="Documentation">📖</a> <a href="#review-zvonimirfras" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="http://reallyawesomedomain.com"><img src="https://avatars1.githubusercontent.com/u/1744185?v=4" width="100px;" alt="Callum Smith"/><br /><sub><b>Callum Smith</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon-charts/commits?author=cal-smith" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=cal-smith" title="Documentation">📖</a> <a href="#review-cal-smith" title="Reviewed Pull Requests">👀</a></td>
-    <td align="center"><a href="https://github.com/michc"><img src="https://avatars0.githubusercontent.com/u/1393278?v=4" width="100px;" alt="MichC"/><br /><sub><b>MichC</b></sub></a><br /><a href="#design-michc" title="Design">🎨</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=michc" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+## Contributors
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/shixiedesign"><img src="https://avatars3.githubusercontent.com/u/15144993?&v=4" width="100px;" alt="shixiedesign"/><br /><sub><b>shixiedesign</b></sub></a><br /><a href="#design-shixiedesign" title="Design">🎨</a></td>
+	<td align="center"><a href="https://github.com/cameroncalder"><img src="https://avatars0.githubusercontent.com/u/50155706?&v=4" width="100px;" alt="cameroncalder"/><br /><sub><b>cameroncalder</b></sub></a><br /><a href="#design-cameroncalder" title="Design">🎨</a></td>
+    <td align="center"><a href="https://github.com/dianatran18"><img src="https://avatars3.githubusercontent.com/u/43549567?v=4" width="100px;" alt="Diana Tran"/><br /><sub><b>Diana Tran</b></sub></a><br /><a href="#design-dianatran18" title="Design">🎨</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=dianatran18" title="Documentation">📖</a></td>
+	<td align="center"><a href="https://github.com/nicoleroppel"><img src="https://avatars0.githubusercontent.com/u/43546639?v=4" width="100px;" alt="nicoleroppel"/><br /><sub><b>nicoleroppel</b></sub></a><br /><a href="#design-nicoleroppel" title="Design">🎨</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=nicoleroppel" title="Documentation">📖</a></td>
   </tr>
   <tr>
-    <td align="center"><a href="https://github.com/nicoleroppel"><img src="https://avatars0.githubusercontent.com/u/43546639?v=4" width="100px;" alt="nicoleroppel"/><br /><sub><b>nicoleroppel</b></sub></a><br /><a href="#design-nicoleroppel" title="Design">🎨</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=nicoleroppel" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/dianatran18"><img src="https://avatars3.githubusercontent.com/u/43549567?v=4" width="100px;" alt="Diana Tran"/><br /><sub><b>Diana Tran</b></sub></a><br /><a href="#design-dianatran18" title="Design">🎨</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=dianatran18" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/JaimeMae"><img src="https://avatars0.githubusercontent.com/u/43579539?v=4" width="100px;" alt="Jaime Stockton"/><br /><sub><b>Jaime Stockton</b></sub></a><br /><a href="#design-JaimeMae" title="Design">🎨</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=JaimeMae" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/PLopezD"><img src="https://avatars1.githubusercontent.com/u/5810053?v=4" width="100px;" alt="Pablo Lopez Domowicz"/><br /><sub><b>Pablo Lopez Domowicz</b></sub></a><br /><a href="#design-PLopezD" title="Design">🎨</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=PLopezD" title="Documentation">📖</a></td>
-    <td align="center"><a href="http://www.johnpeng47.com"><img src="https://avatars3.githubusercontent.com/u/9957837?v=4" width="100px;" alt="John Peng"/><br /><sub><b>John Peng</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon-charts/commits?author=JohnPeng47" title="Code">💻</a></td>
+	<td align="center"><a href="https://github.com/ZrianinaMariia"><img src="https://avatars0.githubusercontent.com/u/5481483?&v=4" width="100px;" alt="ZrianinaMariia"/><br /><sub><b>ZrianinaMariia</b></sub></a><br /> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=ZrianinaMariia" title="Code">💻</a></td>
+	<td align="center"><a href="https://github.com/moores2"><img src="https://avatars0.githubusercontent.com/u/6977424?v=4" width="100px;" alt="moores2"/><br /><sub><b>moores2</b></sub></a><br /> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=moores2" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/stanislavgeorgiev"><img src="https://avatars2.githubusercontent.com/u/1253469?&v=4" width="100px;" alt="stanislavgeorgiev"/><br /><sub><b>stanislavgeorgiev</b></sub></a><br /> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=stanislavgeorgiev" title="Code">💻</a></td>
+	<td align="center"><a href="https://github.com/jendowns"><img src="https://avatars2.githubusercontent.com/u/9057921?&v=4" width="100px;" alt="jendowns"/><br /><sub><b>jendowns</b></sub></a><br /> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=jendowns" title="Code">💻</a></td>
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/t-mullen"><img src="https://avatars0.githubusercontent.com/u/14932492?v=4" width="100px;" alt="Thomas Mullen"/><br /><sub><b>Thomas Mullen</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon-charts/commits?author=t-mullen" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/JaimeMae"><img src="https://avatars0.githubusercontent.com/u/43579539?v=4" width="100px;" alt="Jaime Stockton"/><br /><sub><b>Jaime Stockton</b></sub></a><br /><a href="#design-JaimeMae" title="Design">🎨</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=JaimeMae" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/PLopezD"><img src="https://avatars1.githubusercontent.com/u/5810053?v=4" width="100px;" alt="Pablo Lopez Domowicz"/><br /><sub><b>Pablo Lopez Domowicz</b></sub></a><br /><a href="#design-PLopezD" title="Design">🎨</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=PLopezD" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://www.johnpeng47.com"><img src="https://avatars3.githubusercontent.com/u/9957837?v=4" width="100px;" alt="John Peng"/><br /><sub><b>John Peng</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon-charts/commits?author=JohnPeng47" title="Code">💻</a></td>
   </tr>
 </table>
 
