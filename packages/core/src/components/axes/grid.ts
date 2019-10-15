@@ -90,7 +90,7 @@ export class Grid extends Component {
 				floor ++;
 			}
 		});
-		ceiling = ( floor + 1 < gridlinesX.length) ? floor + 1 : gridlinesX.length;
+		ceiling = (floor + 1 < gridlinesX.length) ? floor + 1 : gridlinesX.length;
 
 		// get the 'step' between chart gridlines
 		const line1 = gridlinesX[floor];
