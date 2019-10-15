@@ -30,7 +30,7 @@ export default {
 	],
 	plugins: [
 		typescript({
-			typescript: require("typescript"),
+			typescript: require("typescript")
 		}),
 		terser(),
 		resolve(),

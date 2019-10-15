@@ -36,17 +36,17 @@ export class ChartModel {
 		const { ACTIVE } = Configuration.legend.items.status;
 		const dataLabels = this.get("dataLabels");
 
-		if (this.get("data")) {
-			// Remove datasets that have been disabled
-			const displayData = Tools.clone(this.get("data"));
-			displayData.datasets = displayData.datasets.filter(dataset => {
-				return dataLabels[dataset.label] === ACTIVE;
-			});
-
-			return displayData;
+		if (!this.get("data")) {
+			return null;
 		}
 
-		return null;
+		// Remove datasets that have been disabled
+		const displayData = Tools.clone(this.get("data"));
+		displayData.datasets = displayData.datasets.filter(dataset => {
+			return dataLabels[dataset.label] === ACTIVE;
+		});
+
+		return displayData;
 	}
 
 	getData() {
