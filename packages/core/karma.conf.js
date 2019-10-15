@@ -40,7 +40,10 @@ module.exports = function (config) {
 							transpileOnly: true
 						}
 					},
-					{ test: /\.html?$/, loader: "html-loader" },
+					{
+						test: /\.html?$/,
+						loader: "html-loader"
+					},
 					{
 						test: /\.scss$/,
 						use: [

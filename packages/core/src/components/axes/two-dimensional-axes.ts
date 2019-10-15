@@ -55,8 +55,8 @@ export class TwoDimensionalAxes extends Component {
 		this.configs.axes = axes;
 
 		// Check the configs to know which axes need to be rendered
-		const axisPositionss = Object.keys(AxisPositions).map(axisPositionKey => AxisPositions[axisPositionKey]);
-		axisPositionss.forEach(axisPosition => {
+		axisPositions.forEach(axisPositionKey => {
+			const axisPosition = AxisPositions[axisPositionKey];
 			if (this.configs.axes[axisPosition] && !this.children[axisPosition]) {
 				const axisComponent = new Axis(
 					this.model,
@@ -107,8 +107,7 @@ export class TwoDimensionalAxes extends Component {
 
 		// If the new margins are different than the existing ones
 		const isNotEqual = Object.keys(margins).some(marginKey => {
-			const marginVal = margins[marginKey];
-			return this.margins[marginKey] !== marginVal;
+			return this.margins[marginKey] !== margins[marginKey];
 		});
 
 		if (isNotEqual) {
