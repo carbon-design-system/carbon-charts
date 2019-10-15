@@ -1,13 +1,23 @@
 // Internal Imports
 import { Component } from "../component";
-import { LayoutDirection, LayoutGrowth, LayoutComponentChild, LayoutConfigs } from "../../interfaces/index";
+import {
+	LayoutDirection,
+	LayoutGrowth,
+	LayoutComponentChild,
+	LayoutConfigs
+} from "../../interfaces/index";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 import { ChartModel } from "../../model";
 
 // D3 Imports
 import { select } from "d3-selection";
-import { hierarchy, treemap, treemapSlice, treemapDice } from "d3-hierarchy";
+import {
+	hierarchy,
+	treemap,
+	treemapSlice,
+	treemapDice
+} from "d3-hierarchy";
 
 // TODO - What if there is no "growth" object?
 export class LayoutComponent extends Component {
@@ -40,7 +50,7 @@ export class LayoutComponent extends Component {
 		});
 	}
 
-	getPrefferedAndFixedSizeSum(): number {
+	getPreferedAndFixedSizeSum(): number {
 		const svg = this.parent;
 		let sum = 0;
 
@@ -148,7 +158,7 @@ export class LayoutComponent extends Component {
 				return growth === LayoutGrowth.STRETCH;
 			})
 			.forEach((child, i) => {
-				child.size = (100 - (+this.getPrefferedAndFixedSizeSum())) / (+this.getNumOfStretchChildren());
+				child.size = (100 - (+this.getPreferedAndFixedSizeSum())) / (+this.getNumOfStretchChildren());
 			});
 
 		setTimeout(() => {

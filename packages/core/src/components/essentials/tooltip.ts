@@ -15,7 +15,7 @@ export class Tooltip extends Component {
 	type = "tooltip";
 
 	tooltip: any;
-	positionService: Position = new Position();
+	positionService = new Position();
 
 	constructor(model: ChartModel, services: any, configs?: any) {
 		super(model, services, configs);
@@ -42,14 +42,12 @@ export class Tooltip extends Component {
 				// if there is a provided tooltip HTML function
 				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
 					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data));
+				} else if (e.detail.multidata) {
+					// multi tooltip
+					data = e.detail.multidata;
+					tooltipTextContainer.html(this.getMultiTooltipHTML(data));
 				} else {
-					if (e.detail.multidata) {
-						// multi tooltip
-						data = e.detail.multidata;
-						tooltipTextContainer.html(this.getMultiTooltipHTML(data));
-					} else {
-						tooltipTextContainer.html(this.getTooltipHTML(data));
-					}
+					tooltipTextContainer.html(this.getTooltipHTML(data));
 				}
 
 				// Position the tooltip
@@ -67,7 +65,6 @@ export class Tooltip extends Component {
 	}
 
 	getTooltipHTML(data: any) {
-
 		// this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
 		const dataVal = Tools.getProperty(data, "data") ? data.data : data;
 

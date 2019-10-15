@@ -11,7 +11,6 @@ import Position, { PLACEMENTS } from "@carbon/utils-position";
 import { mouse, select } from "d3-selection";
 
 export class TooltipBar extends Tooltip {
-
 	init() {
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
@@ -75,14 +74,16 @@ export class TooltipBar extends Tooltip {
 			// negative bars
 			const tooltipPos = {
 				left: (barPosition.left - holderPosition.left) + barPosition.width / 2,
-				top: (barPosition.bottom - holderPosition.top) + verticalOffset };
+				top: (barPosition.bottom - holderPosition.top) + verticalOffset
+			};
 
 			return {placement: TooltipPosition.BOTTOM, position: tooltipPos};
 		} else {
 			// positive bars
 			const tooltipPos = {
 				left: (barPosition.left - holderPosition.left) + barPosition.width / 2,
-				top: (barPosition.top - holderPosition.top) - verticalOffset };
+				top: (barPosition.top - holderPosition.top) - verticalOffset
+			};
 
 			return {placement: TooltipPosition.TOP, position: tooltipPos};
 		}
@@ -109,9 +110,7 @@ export class TooltipBar extends Tooltip {
 		points.reverse();
 
 		// get the total for the stacked tooltip
-		let total = points.reduce(function(sum, item) {
-			return sum + item.value;
-		}, 0);
+		let total = points.reduce((sum, item) => sum + item.value, 0);
 
 		// format the total value
 		total = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
@@ -129,7 +128,8 @@ export class TooltipBar extends Tooltip {
 					<p class="label">${datapoint.datasetLabel}</p>
 					<p class="value">${formattedValue}</p>
 					</div></li>`;
-			}).join("") + `<li><div class='total-val'><p class='label'>Total</p><p class='value'>${total}</p></div></li></ul>`;
+			}).join("") +
+			`<li><div class='total-val'><p class='label'>Total</p><p class='value'>${total}</p></div></li></ul>`;
 	}
 
 	positionTooltip(positionOverride?: any) {

@@ -1,5 +1,4 @@
 import { AxisChartOptions } from "./charts";
-import { ChartType } from "./enums";
 
 /**
  * Configuration passed to the chart.
@@ -24,10 +23,6 @@ export interface DataSet {
 	 * Array of data values
 	 */
 	data: any[];
-	/**
-	 * chartType - only used with combo charts
-	 */
-	chartType?: ChartType;
 }
 
 export interface ChartData {

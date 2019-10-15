@@ -39,7 +39,7 @@ export class Grid extends Component {
 			.tickSizeOuter(0);
 
 		// Determine number of ticks
-		const numberOfTicks = Tools.getProperty(this.model.getOptions(), "grid", "x", "numberOfTicks") || Configuration.grid.x.numberOfTicks;
+		const numberOfTicks = Tools.getProperty(this.model.getOptions(), "grid", "x", "numberOfTicks");
 		xGrid.ticks(numberOfTicks);
 
 		const g = svg.select(".x.grid")
@@ -59,7 +59,7 @@ export class Grid extends Component {
 			.tickSizeOuter(0);
 
 		// Determine number of ticks
-		const numberOfTicks = Tools.getProperty(this.model.getOptions(), "grid", "y", "numberOfTicks") || Configuration.grid.y.numberOfTicks;
+		const numberOfTicks = Tools.getProperty(this.model.getOptions(), "grid", "y", "numberOfTicks");
 		yGrid.ticks(numberOfTicks);
 
 		const g = svg.select(".y.grid")

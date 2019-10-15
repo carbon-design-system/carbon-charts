@@ -4,15 +4,16 @@ import { Component } from "../component";
 export class Bar extends Component {
 	// Gets the correct width for bars based on options & configurations
 	protected getBarWidth() {
+		const mainXAxis = this.services.axes.getMainXAxis();
 		const options = this.model.getOptions();
 
-		if (!this.services.axes.getMainXAxis().scale.step) {
+		if (!mainXAxis.scale.step) {
 			return options.bars.maxWidth;
-		} else {
-			return Math.min(
-				options.bars.maxWidth,
-				this.services.axes.getMainXAxis().scale.step() / 2
-			);
 		}
+
+		return Math.min(
+			options.bars.maxWidth,
+			mainXAxis.scale.step() / 2
+		);
 	}
 }

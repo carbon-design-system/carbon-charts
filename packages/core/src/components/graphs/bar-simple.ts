@@ -80,13 +80,7 @@ export class SimpleBar extends Bar {
 
 		this.parent.selectAll("rect.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-simple-bar"))
-			.attr("opacity", d => {
-				if (d.label !== hoveredElement.datum()["key"]) {
-					return 0.3;
-				}
-
-				return 1;
-			});
+			.attr("opacity", d => (d.label !== hoveredElement.datum()["key"]) ? 0.3 : 1);
 	}
 
 	handleLegendMouseOut = e => {
