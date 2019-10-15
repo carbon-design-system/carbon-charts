@@ -12,10 +12,11 @@ module.exports = env => {
 		entry: "./src/index.ts",
 		output: {
 			path: __dirname + "/dist",
-			filename: "index.umd.js",
+			filename: "bundle.js",
 			chunkFilename: "[name].chunk.js",
 			libraryTarget: "umd",
-			library: "Charts"
+			library: "Charts",
+			globalObject: "(typeof self !== 'undefined' ? self : this)"
 		},
 		optimization: {
 			minimize: true

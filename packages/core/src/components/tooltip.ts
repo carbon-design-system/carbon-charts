@@ -116,9 +116,6 @@ export class ChartTooltip {
 		// Apply the event listeners to close the tooltip
 		// setTimeout is there to avoid catching the click event that opened the tooltip
 		setTimeout(() => {
-			// When ESC is pressed
-			window.addEventListener("keydown", this.handleTooltipEvents);
-
 			// If clicked outside
 			this.container.addEventListener("click", this.handleTooltipEvents);
 
@@ -130,9 +127,6 @@ export class ChartTooltip {
 	}
 
 	removeEventLinteners() {
-		// Remove eventlistener to close tooltip when ESC is pressed
-		window.removeEventListener("keydown", this.handleTooltipEvents);
-
 		// Remove eventlistener to close tooltip when clicked outside
 		this.container.removeEventListener("click", this.handleTooltipEvents);
 	}

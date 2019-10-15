@@ -1100,10 +1100,10 @@
   dependencies:
     "@carbon/colors" "10.2.0"
 
-"@carbon/utils-position@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@carbon/utils-position/-/utils-position-1.1.0.tgz#dbe6fe48ada221db20f1dfc8973ae4aec2caeeae"
-  integrity sha512-GFDdYkjYgMRjRcHjbN2vTreOXsRc0KGS4DPDt8WTUaU2ijAeyDzHWwg+w3XQ0JqEKOLAy+1ZWYafBxk1SaTljg==
+"@carbon/utils-position@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@carbon/utils-position/-/utils-position-1.1.1.tgz#bea463b833608902ea37ac30bec36e3c0a3b547f"
+  integrity sha512-W8ykraEzr9WsH8+6+FgI6lmK4elFxH8Uy9+XDbDTvyVbF6fq5jgi4dPCDd1AoCtUBCcLAehInhReDaFM3DrM6w==
 
 "@emotion/cache@^10.0.9":
   version "10.0.9"
@@ -12417,6 +12417,11 @@ locate-path@^3.0.0:
   dependencies:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
+
+lodash-es@4.17.15:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
+  integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
 
 lodash-es@^4.17.11:
   version "4.17.11"
