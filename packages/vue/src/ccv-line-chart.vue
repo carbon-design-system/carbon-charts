@@ -9,12 +9,11 @@ import CcvBaseChart from './ccv-base-chart.vue';
 export default {
 	name: 'CcvLineChart',
 	extends: CcvBaseChart,
-
 	mounted() {
 		this.coreChart = new LineChart(this.$el, {
 			data: this.data,
-			options: this.options,
+			options: this.options
 		});
-	},
+	}
 };
 </script>

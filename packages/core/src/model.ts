@@ -24,9 +24,9 @@ export class ChartModel {
 	// Data labels
 	/**
 	 * A list of all the labels that have existed within the lifetime of the chart
-	 * @type Array<string>
+	 * @type string[]
 	 */
-	protected allDataLabels: Array<string>;
+	protected allDataLabels: string[];
 
 	// Fill scales & fill related objects
 	protected patternScale = {};

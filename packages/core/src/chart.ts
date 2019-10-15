@@ -27,7 +27,7 @@ import {
 } from "./services/index";
 
 export class Chart {
-	components: Array<Component>;
+	components: Component[];
 	model: ChartModel = new ChartModel();
 	protected services: any = {
 		domUtils: DOMUtils,
@@ -69,7 +69,7 @@ export class Chart {
 		this.update();
 	}
 
-	getComponents(): Array<any> {
+	getComponents(): any[] {
 		console.error("getComponents() method is not implemented");
 
 		return null;
@@ -103,7 +103,7 @@ export class Chart {
 	}
 
 
-	protected getChartComponents(graphFrameComponents: Array<any>) {
+	protected getChartComponents(graphFrameComponents: any[]) {
 		const titleComponent = {
 			id: "title",
 			components: [
