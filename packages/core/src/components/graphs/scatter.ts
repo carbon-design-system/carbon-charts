@@ -63,8 +63,6 @@ export class Scatter extends Component {
 			.attr("fill", d => {
 				if (filled) {
 					return this.model.getFillScale()[d.datasetLabel](d.label) as any;
-				} else {
-					return;
 				}
 			})
 			.attr("fill-opacity", filled ? 0.2 : 1)
@@ -80,13 +78,7 @@ export class Scatter extends Component {
 
 		this.parent.selectAll("circle.dot")
 			.transition(this.services.transitions.getTransition("legend-hover-scatter"))
-			.attr("opacity", d => {
-				if (d.datasetLabel !== hoveredElement.datum()["key"]) {
-					return 0.3;
-				}
-
-				return 1;
-			});
+			.attr("opacity", d => (d.datasetLabel !== hoveredElement.datum()["key"]) ? 0.3 : 1);
 	}
 
 	handleLegendMouseOut = e => {

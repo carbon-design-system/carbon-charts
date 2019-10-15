@@ -121,13 +121,7 @@ export class GroupedBar extends Bar {
 
 		this.parent.selectAll("rect.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => {
-				if (d.datasetLabel !== hoveredElement.datum()["key"]) {
-					return 0.3;
-				}
-
-				return 1;
-			});
+			.attr("opacity", d => (d.datasetLabel !== hoveredElement.datum()["key"]) ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements

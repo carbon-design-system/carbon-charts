@@ -10,7 +10,7 @@ import { color } from "d3-color";
 
 // Add datasetLabel to each piece of data
 // To be used to get the fill color
-const addLabelsAndValueToData = (d) => {
+const addLabelsAndValueToData = d => {
 	Object.keys(d).map(key => {
 		if (typeof d[key] === "object") {
 			d[key]["datasetLabel"] = d.key;
@@ -150,13 +150,7 @@ export class StackedBar extends Bar {
 
 		this.parent.selectAll("rect.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => {
-				if (d.datasetLabel !== hoveredElement.datum()["key"]) {
-					return 0.3;
-				}
-
-				return 1;
-			});
+			.attr("opacity", d => (d.datasetLabel !== hoveredElement.datum()["key"]) ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements

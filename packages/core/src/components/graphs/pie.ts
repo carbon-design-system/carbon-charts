@@ -41,12 +41,10 @@ export class Pie extends Component {
 	getDataList() {
 		const displayData = this.model.getDisplayData();
 		const dataset = displayData.datasets[0];
-		return dataset.data.map((datum, i) => {
-			return {
-				label: displayData.labels[i],
-				value: datum
-			};
-		});
+		return dataset.data.map((datum, i) => ({
+			label: displayData.labels[i],
+			value: datum
+		}));
 	}
 
 	getInnerRadius() {
@@ -278,13 +276,7 @@ export class Pie extends Component {
 
 		this.parent.selectAll("path.slice")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => {
-				if (d.data.label !== hoveredElement.datum()["key"]) {
-					return 0.3;
-				}
-
-				return 1;
-			});
+			.attr("opacity", d => (d.data.label !== hoveredElement.datum()["key"]) ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements

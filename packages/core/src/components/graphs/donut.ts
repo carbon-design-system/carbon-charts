@@ -14,9 +14,7 @@ const donutCenterNumberTween = (d3Ref, newNumber: number) => {
 
 	const formatInterpolatedValue = number => Math.floor(number).toLocaleString();
 
-	return t => {
-		d3Ref.text(formatInterpolatedValue(i(t)));
-	};
+	return t => d3Ref.text(formatInterpolatedValue(i(t)));
 };
 
 export class Donut extends Pie {

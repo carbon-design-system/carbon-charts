@@ -3,7 +3,6 @@ import { Tools } from "../../tools";
 
 
 export class TooltipScatter extends Tooltip {
-
 	getTooltipHTML(data: any) {
 		const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
 		this.model.getOptions().tooltip.valueFormatter(data.value) : data.value.toLocaleString("en");
@@ -16,5 +15,4 @@ export class TooltipScatter extends Tooltip {
 			<p class="value">${formattedValue}</p>
 			</div>`;
 	}
-
 }

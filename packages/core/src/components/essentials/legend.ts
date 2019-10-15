@@ -13,6 +13,7 @@ export class Legend extends Component {
 
 	render() {
 		const svg = this.getContainerSVG();
+		const options = this.model.getOptions();
 
 		const legendItems = svg.selectAll("g.legend-item")
 			.data(this.getLegendItemArray());
@@ -22,7 +23,7 @@ export class Legend extends Component {
 			.classed("legend-item", true);
 
 		// Configs
-		const checkboxRadius = Configuration.legend.checkbox.radius;
+		const checkboxRadius = options.legend.checkbox.radius;
 
 		addedLegendItems.append("rect")
 			.classed("checkbox", true)
@@ -32,9 +33,9 @@ export class Legend extends Component {
 			.attr("rx", 1)
 			.attr("ry", 1)
 			.style("fill", d => {
-				return d.value === Configuration.legend.items.status.ACTIVE ? this.model.getStrokeColor(d.key) : null;
+				return d.value === options.legend.items.status.ACTIVE ? this.model.getStrokeColor(d.key) : null;
 			}).classed("active", function (d, i) {
-				return d.value === Configuration.legend.items.status.ACTIVE;
+				return d.value === options.legend.items.status.ACTIVE;
 			});
 
 		addedLegendItems.append("text")
@@ -167,6 +168,7 @@ export class Legend extends Component {
 	addEventListeners() {
 		const self = this;
 		const svg = this.getContainerSVG();
+		const options = this.model.getOptions();
 
 		svg.selectAll("g.legend-item")
 			.on("mouseover", function () {
@@ -175,7 +177,7 @@ export class Legend extends Component {
 				});
 
 				// Configs
-				const checkboxRadius = Configuration.legend.checkbox.radius;
+				const checkboxRadius = options.legend.checkbox.radius;
 
 				const hoveredItem = select(this);
 				hoveredItem.append("rect")

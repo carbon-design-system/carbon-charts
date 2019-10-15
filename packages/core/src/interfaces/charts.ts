@@ -1,4 +1,3 @@
-import { ChartType } from "./enums";
 import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
 import { AxisTooltipOptions, BarTooltipOptions } from "./components";
 
@@ -6,10 +5,6 @@ import { AxisTooltipOptions, BarTooltipOptions } from "./components";
  * Base chart options common to any chart
  */
 export interface BaseChartOptions {
-	/**
-	 * Internal property to track what type of chart should be instantiated
-	 */
-	type?: ChartType;
 	/**
 	 * boolean to enable accessibility mode
 	 */
