@@ -3,3 +3,7 @@
 @import "./graphs/index.scss";
 @import "./type";
 @import "./chart-holder";
+
+svg.chart-svg {
+	overflow: visible;
+}

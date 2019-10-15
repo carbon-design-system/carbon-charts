@@ -62,19 +62,21 @@ export class Legend extends Component {
 	breakItemsIntoLines(addedLegendItems) {
 		const self = this;
 		const svg = this.getContainerSVG();
+		const options = this.model.getOptions();
 
 		// Configs
-		const checkboxRadius = Configuration.legend.checkbox.radius;
-		const legendItemsHorizontalSpacing = Configuration.legend.items.horizontalSpace;
-		const legendItemsVerticalSpacing = Configuration.legend.items.verticalSpace;
-		const spaceNeededForCheckbox = (checkboxRadius * 2) + Configuration.legend.checkbox.spaceAfter;
+		const checkboxRadius = options.legend.checkbox.radius;
+		const legendItemsHorizontalSpacing = options.legend.items.horizontalSpace;
+		const legendItemsVerticalSpacing = options.legend.items.verticalSpace;
+		const legendTextYOffset = options.legend.items.textYOffset;
+		const spaceNeededForCheckbox = (checkboxRadius * 2) + options.legend.checkbox.spaceAfter;
 
 		// Check if there are disabled legend items
-		const { DISABLED } = Configuration.legend.items.status;
+		const { DISABLED } = options.legend.items.status;
 		const dataLabels = this.model.get("dataLabels");
 		const hasDeactivatedItems = Object.keys(dataLabels).some(label => dataLabels[label] === DISABLED);
 
-		const legendOrientation = Tools.getProperty(this.model.getOptions(), "legend", "orientation");
+		const legendOrientation = Tools.getProperty(options, "legend", "orientation");
 
 		// Keep track of line numbers and positions
 		let startingPoint = 0;
@@ -87,18 +89,6 @@ export class Legend extends Component {
 				const previousLegendItem = select(svg.selectAll("g.legend-item").nodes()[i - 1]);
 
 				if (itemIndexInLine === 0 || previousLegendItem.empty() || legendOrientation === LegendOrientations.VERTICAL) {
-					// Position checkbox
-					legendItem.select("rect.checkbox")
-						.attr("x", 0)
-						.attr("y", lineNumber * legendItemsVerticalSpacing);
-
-					// Position text
-					const yPosition = 8 + (lineNumber * legendItemsVerticalSpacing);
-					legendItem.select("text")
-						.attr("x", spaceNeededForCheckbox)
-						.attr("y", yPosition);
-					lastYPosition = yPosition;
-
 					if (legendOrientation === LegendOrientations.VERTICAL) {
 						lineNumber++;
 					}
@@ -113,19 +103,20 @@ export class Legend extends Component {
 						startingPoint = 0;
 						itemIndexInLine = 0;
 					}
-
-					// Position checkbox
-					legendItem.select("rect.checkbox")
-						.attr("x", startingPoint)
-						.attr("y", lineNumber * legendItemsVerticalSpacing);
-
-					// Position text
-					const yPosition = 8 + (lineNumber * legendItemsVerticalSpacing);
-					legendItem.select("text")
-						.attr("x", startingPoint + spaceNeededForCheckbox)
-						.attr("y", yPosition);
-					lastYPosition = yPosition;
 				}
+
+				// Position checkbox
+				legendItem.select("rect.checkbox")
+					.attr("x", startingPoint)
+					.attr("y", lineNumber * legendItemsVerticalSpacing);
+
+				// Position text
+				const yPosition = legendTextYOffset + (lineNumber * legendItemsVerticalSpacing);
+				legendItem.select("text")
+					.attr("x", startingPoint + spaceNeededForCheckbox)
+					.attr("y", yPosition);
+
+				lastYPosition = yPosition;
 
 				// Render checkbox check icon
 				if (hasDeactivatedItems && legendItem.select("g.check").empty()) {
@@ -189,10 +180,10 @@ export class Legend extends Component {
 				const hoveredItem = select(this);
 				hoveredItem.append("rect")
 					.classed("hover-stroke", true)
-					.attr("x", parseFloat(hoveredItem.select("rect.checkbox").attr("x")) - 2.5)
-					.attr("y", parseFloat(hoveredItem.select("rect.checkbox").attr("y")) - 2.5)
-					.attr("width", checkboxRadius * 2 + 5)
-					.attr("height", checkboxRadius * 2 + 5)
+					.attr("x", parseFloat(hoveredItem.select("rect.checkbox").attr("x")) - 2)
+					.attr("y", parseFloat(hoveredItem.select("rect.checkbox").attr("y")) - 2)
+					.attr("width", checkboxRadius * 2 + 4)
+					.attr("height", checkboxRadius * 2 + 4)
 					.attr("rx", 3)
 					.attr("ry", 3)
 					.lower();

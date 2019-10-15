@@ -31,7 +31,20 @@ export interface LegendOptions {
 	/**
 	 * the clickability of legend items
 	 */
-	clickable: boolean;
+	clickable?: boolean;
+	items?: {
+		status?: {
+			ACTIVE?: Number;
+			DISABLED?: Number;
+		};
+		horizontalSpace?: Number;
+		verticalSpace?: Number;
+		textYOffset?: Number;
+	},
+	checkbox?: {
+		radius?: Number;
+		spaceAfter?: Number;
+	}
 }
 
 export interface TooltipOptions {

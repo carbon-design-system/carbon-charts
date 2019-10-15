@@ -13,7 +13,8 @@ import {
 	TimeScaleOptions,
 	TooltipOptions,
 	AxisTooltipOptions,
-	BarTooltipOptions
+	BarTooltipOptions,
+	LegendOptions
 } from "./interfaces/index";
 
 /*
@@ -22,6 +23,25 @@ import {
  *****************************
  */
 
+/**
+ * Legend options
+ */
+export const legend: LegendOptions = {
+	clickable: true,
+	items: {
+		status: {
+			ACTIVE: 1,
+			DISABLED: 0
+		},
+		horizontalSpace: 12,
+		verticalSpace: 24,
+		textYOffset: 8
+	},
+	checkbox: {
+		radius: 6.5,
+		spaceAfter: 4
+	}
+};
 
 /**
  * Grid options
@@ -73,9 +93,7 @@ export const timeScale: TimeScaleOptions = {
  * Base chart options common to any chart
  */
 const chart: BaseChartOptions = {
-	legend: {
-		clickable: true
-	},
+	legend,
 	resizable: true,
 	tooltip: baseTooltip
 };
@@ -203,24 +221,6 @@ export const lines = {
 	opacity: {
 		unselected: 0.3,
 		selected: 1
-	}
-};
-
-/**
- * Legend configuration
- */
-export const legend = {
-	items: {
-		status: {
-			ACTIVE: 1,
-			DISABLED: 0
-		},
-		horizontalSpace: 12,
-		verticalSpace: 24
-	},
-	checkbox: {
-		radius: 6.5,
-		spaceAfter: 4
 	}
 };
 

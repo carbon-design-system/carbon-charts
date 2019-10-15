@@ -1,4 +1,5 @@
 @import "@carbon/themes/scss/themes";
+@import "@carbon/colors/scss/colors";
 
 g.cc-legend {
 	user-select: none;
@@ -11,6 +12,12 @@ g.cc-legend {
 			&:not(.active) ~ g.check {
 				display: none;
 			}
+		}
+
+		rect.hover-stroke {
+			fill: none;
+			stroke: $carbon--blue-60;
+			stroke-width: 2;
 		}
 
 		g.check > svg path {
