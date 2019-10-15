@@ -79,8 +79,8 @@ export class Grid extends Component {
 
 		// sort in ascending x translation value order
 		const gridlinesX = svg.selectAll(".x.grid .tick").nodes()
-		.sort(function (a, b) {
-			return +Tools.getTranslationValues(a).tx - +Tools.getTranslationValues(b).tx;
+		.sort((a, b) => {
+			return Number(Tools.getTranslationValues(a).tx) - Number(Tools.getTranslationValues(b).tx);
 		});
 
 		// find the 2 gridlines on either side of the mouse
