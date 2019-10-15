@@ -3,7 +3,6 @@
 /////////////////////////////////////////////
 ///          Theme styles                ////
 /////////////////////////////////////////////
-
 .carbon--theme--white {
 	.cc-horizontal-zero-line {
 		line.domain {
@@ -22,7 +21,6 @@
 	}
 }
 
-
 .carbon--theme--g90 {
 	@include carbon--theme($carbon--theme--g90) {
 		.cc-horizontal-zero-line {
@@ -33,7 +31,6 @@
 
 	}
 }
-
 
 .carbon--theme--g100 {
 	@include carbon--theme($carbon--theme--g100) {
