@@ -40,11 +40,11 @@ export interface LegendOptions {
 		horizontalSpace?: Number;
 		verticalSpace?: Number;
 		textYOffset?: Number;
-	},
+	};
 	checkbox?: {
 		radius?: Number;
 		spaceAfter?: Number;
-	}
+	};
 }
 
 export interface TooltipOptions {
