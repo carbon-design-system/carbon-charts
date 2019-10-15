@@ -69,7 +69,7 @@ export class Axis extends Component {
 	}
 
 	getScale() {
-		return this.scale === undefined ? this.createOrGetScale() : this.scale;
+		return !this.scale ? this.createOrGetScale() : this.scale;
 	}
 
 	getScaleDomain() {
