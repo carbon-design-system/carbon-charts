@@ -19,9 +19,12 @@ import { Component,
 import { Tools } from "./tools";
 
 // Services
-import { DOMUtils, Events, Transitions } from "./services/index";
-import { select } from "d3-selection";
-import { Themes } from "./services/essentials/themes";
+import {
+	DOMUtils,
+	Events,
+	Themes,
+	Transitions
+} from "./services/index";
 
 export class Chart {
 	components: Array<Component>;
@@ -77,9 +80,7 @@ export class Chart {
 	update(animate = true) {
 		if (this.components) {
 			// Render all components
-			this.components.forEach(component => {
-				component.render(animate);
-			});
+			this.components.forEach(component => component.render(animate));
 
 			// Asynchronously dispatch a "render-finished" event
 			// This is needed because of d3-transitions
@@ -93,9 +94,7 @@ export class Chart {
 
 	destroy() {
 		// Call the destroy() method on all components
-		this.components.forEach(component => {
-			component.destroy();
-		});
+		this.components.forEach(component => component.destroy());
 
 		// Remove the chart holder
 		this.services.domUtils.getHolder().remove();

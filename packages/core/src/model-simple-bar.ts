@@ -23,25 +23,25 @@ export class SimpleBarChartModel extends ChartModel {
 		const { ACTIVE } = Configuration.legend.items.status;
 		const dataLabels = this.get("dataLabels");
 
-		if (this.get("data")) {
-			// Remove datasets that have been disabled
-			const displayData = Tools.clone(this.get("data"));
-			const dataset = displayData.datasets[0];
-
-			// Remove data values that correspond to labels that are disabled
-			dataset.data = dataset.data.filter((datum, i) => {
-				const label = displayData.labels[i];
-
-				return dataLabels[label] === ACTIVE;
-			});
-
-			// Remove labels that are disabled
-			displayData.labels = displayData.labels.filter(label => dataLabels[label] === ACTIVE);
-
-			return displayData;
+		if (!this.get("data")) {
+			return null;
 		}
 
-		return null;
+		// Remove datasets that have been disabled
+		const displayData = Tools.clone(this.get("data"));
+		const dataset = displayData.datasets[0];
+
+		// Remove data values that correspond to labels that are disabled
+		dataset.data = dataset.data.filter((datum, i) => {
+			const label = displayData.labels[i];
+
+			return dataLabels[label] === ACTIVE;
+		});
+
+		// Remove labels that are disabled
+		displayData.labels = displayData.labels.filter(label => dataLabels[label] === ACTIVE);
+
+		return displayData;
 	}
 
 	/*
