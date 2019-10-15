@@ -46,7 +46,7 @@ export class StackedBar extends Bar {
 			// TODO - Could be re-used through the model
 			let allDates = [];
 			displayData.datasets.forEach(dataset => {
-				allDates = allDates.concat(dataset.data.map(datum => +datum.date));
+				allDates = allDates.concat(dataset.data.map(datum => Number(datum.date)));
 			});
 			allDates = Tools.removeArrayDuplicates(allDates).sort();
 
@@ -56,7 +56,7 @@ export class StackedBar extends Bar {
 				const correspondingData = {};
 
 				displayData.datasets.forEach(dataset => {
-					const correspondingDatum = dataset.data.find(datum => +datum.date === +date);
+					const correspondingDatum = dataset.data.find(datum => Number(datum.date) === Number(date));
 					if (correspondingDatum) {
 						correspondingData[dataset.label] = correspondingDatum.value;
 					} else {

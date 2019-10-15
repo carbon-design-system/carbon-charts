@@ -28,7 +28,7 @@ export class AxisChart extends Chart {
 		super(holder, chartConfigs);
 	}
 
-	protected getAxisChartComponents(graphFrameComponents: Array<any>) {
+	protected getAxisChartComponents(graphFrameComponents: any[]) {
 		const titleComponent = {
 			id: "title",
 			components: [

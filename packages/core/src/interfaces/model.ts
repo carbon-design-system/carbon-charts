@@ -19,11 +19,11 @@ export interface DataSet {
 	/**
 	 * Array of hex background colors
 	 */
-	backgroundColors: Array<string>;
+	backgroundColors: string[];
 	/**
 	 * Array of data values
 	 */
-	data: Array<any>;
+	data: any[];
 	/**
 	 * chartType - only used with combo charts
 	 */
@@ -34,9 +34,9 @@ export interface ChartData {
 	/**
 	 * Labels for the x (horizontal) axis. Should match the number of items in each dataset data array
 	 */
-	labels: Array<string>;
+	labels: string[];
 	/**
 	 * Array of datasets to display in the chart
 	 */
-	datasets: Array<DataSet>;
+	datasets: DataSet[];
 }

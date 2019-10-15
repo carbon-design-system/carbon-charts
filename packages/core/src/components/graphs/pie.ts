@@ -191,7 +191,7 @@ export class Pie extends Component {
 		this.addEventListeners();
 	}
 
-	renderCallouts(calloutData: Array<any>) {
+	renderCallouts(calloutData: any[]) {
 		const svg = DOMUtils.appendOrSelect(this.getContainerSVG(), "g.callouts");
 		const options = this.model.getOptions();
 

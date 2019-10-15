@@ -17,11 +17,11 @@ export class LayoutComponent extends Component {
 
 	type = "layout";
 
-	children: Array<LayoutComponentChild>;
+	children: LayoutComponentChild[];
 
 	private _instanceCount: number;
 
-	constructor(model: ChartModel, services: any, children: Array<LayoutComponentChild>, configs?: LayoutConfigs) {
+	constructor(model: ChartModel, services: any, children: LayoutComponentChild[], configs?: LayoutConfigs) {
 		super(model, services, configs);
 
 		this.configs = configs;
@@ -199,15 +199,13 @@ export class LayoutComponent extends Component {
 		super.setServices(newObj);
 
 		this.children.forEach(child => {
-			child.components.map(component => component.setServices(newObj));
+			child.components.forEach(component => component.setServices(newObj));
 		});
 	}
 
 	destroy() {
 		this.children.forEach(child => {
-			child.components.forEach(component => {
-				component.destroy();
-			});
+			child.components.forEach(component => component.destroy());
 		});
 	}
 }

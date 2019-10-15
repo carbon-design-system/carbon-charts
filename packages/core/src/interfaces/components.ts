@@ -9,7 +9,7 @@ export interface LayoutComponentChild {
 	/**
 	 * the component that'll be rendered inside layout child
 	 */
-	components: Array<Component>;
+	components: Component[];
 	/**
 	 * size of the layout child
 	 */
