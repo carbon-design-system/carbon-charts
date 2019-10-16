@@ -14,7 +14,8 @@ import {
 	TooltipOptions,
 	AxisTooltipOptions,
 	BarTooltipOptions,
-	LegendOptions
+	LegendOptions,
+	ChartTheme
 } from "./interfaces/index";
 
 /*
@@ -93,9 +94,10 @@ export const timeScale: TimeScaleOptions = {
  * Base chart options common to any chart
  */
 const chart: BaseChartOptions = {
-	legend,
 	resizable: true,
-	tooltip: baseTooltip
+	theme: ChartTheme.WHITE,
+	tooltip: baseTooltip,
+	legend
 };
 
 /**

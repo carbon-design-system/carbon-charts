@@ -104,13 +104,13 @@ export class DOMUtils extends Service {
 	}
 
 	static appendOrSelect(parent, query) {
-		const l = query.split(".");
-		const elementToAppend = l[0];
+		const querySections = query.split(".");
+		const elementToAppend = querySections[0];
 
 		const selection = parent.select(query);
 		if (selection.empty()) {
 			return parent.append(elementToAppend)
-				.attr("class", l.slice(1).join(" "));
+				.attr("class", querySections.slice(1).join(" "));
 		}
 
 		return selection;
