@@ -12,6 +12,8 @@ export class Axes extends Service {
 			return primaryAxis;
 		} else if (secondaryAxis === this.model.get(AxisPositions.TOP) || secondaryAxis === this.model.get(AxisPositions.BOTTOM)) {
 			return secondaryAxis;
+		} else {
+			return this.model.get(AxisPositions.BOTTOM);
 		}
 	}
 
@@ -24,6 +26,8 @@ export class Axes extends Service {
 			return primaryAxis;
 		} else if (secondaryAxis === this.model.get(AxisPositions.LEFT) || secondaryAxis === this.model.get(AxisPositions.RIGHT)) {
 			return secondaryAxis;
+		} else {
+			return this.model.get(AxisPositions.LEFT);
 		}
 	}
 

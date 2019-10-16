@@ -8,7 +8,6 @@ import { select } from "d3-selection";
 export class Themes extends Service {
 	init() {
 		this.setTheme();
-
 	}
 
 	update() {
@@ -17,8 +16,7 @@ export class Themes extends Service {
 
 	setTheme() {
 		const holderElement = this.model.get(ModelStateKeys.HOLDER) as HTMLElement;
-		const theme = Tools.getProperty(this.model.getOptions(), "theme") ?
-			Tools.getProperty(this.model.getOptions(), "theme") : ChartTheme.WHITE;
+		const theme = Tools.getProperty(this.model.getOptions(), "theme");
 
 		select(holderElement).classed(`carbon--theme--${theme}`, true);
 	}

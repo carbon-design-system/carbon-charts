@@ -47,7 +47,6 @@ export class PieChartModel extends ChartModel {
 
 	/*
 	 * Data labels
-	 *
 	*/
 	toggleDataLabel(changedLabel: string) {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
@@ -82,7 +81,6 @@ export class PieChartModel extends ChartModel {
 
 	/*
 	 * Fill scales
-	 *
 	*/
 	setColorScale() {
 		const dataset = this.getDisplayData().datasets[0];
@@ -99,17 +97,17 @@ export class PieChartModel extends ChartModel {
 		const options = this.getOptions();
 		if (options.getFillColor) {
 			return options.getFillColor(label);
-		} else {
-			return this.getFillScale()(label);
 		}
+
+		return this.getFillScale()(label);
 	}
 
 	getStrokeColor(label: string) {
 		const options = this.getOptions();
 		if (options.getStrokeColor) {
 			return options.getStrokeColor(label);
-		} else {
-			return this.colorScale(label);
 		}
+
+		return this.colorScale(label);
 	}
 }

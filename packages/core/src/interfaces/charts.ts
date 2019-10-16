@@ -1,5 +1,6 @@
 import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
 import { AxisTooltipOptions, BarTooltipOptions } from "./components";
+import { ChartTheme } from "./enums";
 
 /**
  * Base chart options common to any chart
@@ -25,6 +26,10 @@ export interface BaseChartOptions {
 	 * Optionally specify a height for the chart
 	 */
 	height?: number;
+	/**
+	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
+	 */
+	theme?: ChartTheme;
 	/**
 	 * tooltip configuration
 	 */

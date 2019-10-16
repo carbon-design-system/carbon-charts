@@ -7,32 +7,24 @@ div.chart-holder {
 /////////////////////////////////////////////
 ///          Theme styles                ////
 /////////////////////////////////////////////
-.carbon--theme--white {
-	&.chart-holder {
+.carbon--theme--white.chart-holder {
+	background-color: $ui-background;
+}
+
+.carbon--theme--g10.chart-holder {
+	@include carbon--theme($carbon--theme--g10) {
 		background-color: $ui-background;
 	}
 }
 
-.carbon--theme--g10 {
-	@include carbon--theme($carbon--theme--g10) {
-		&.chart-holder {
-			background-color: $ui-background;
-		}
-	}
-}
-
-.carbon--theme--g90 {
+.carbon--theme--g90.chart-holder {
 	@include carbon--theme($carbon--theme--g90) {
-		&.chart-holder {
-			background-color: $ui-background;
-		}
+		background-color: $ui-background;
 	}
 }
 
-.carbon--theme--g100 {
+.carbon--theme--g100.chart-holder {
 	@include carbon--theme($carbon--theme--g100) {
-		&.chart-holder {
-			background-color: $ui-background;
-		}
+		background-color: $ui-background;
 	}
 }

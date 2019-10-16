@@ -178,12 +178,14 @@ export class ChartModel {
 	 * such as the color scales, or the legend data labels
 	 */
 	update() {
-		if (this.getDisplayData()) {
-			this.updateAllDataLabels();
-			this.setColorScale();
-
-			this.updateCallback();
+		if (!this.getDisplayData()) {
+			return;
 		}
+
+		this.updateAllDataLabels();
+		this.setColorScale();
+
+		this.updateCallback();
 	}
 
 	setUpdateCallback(cb: Function) {
@@ -192,7 +194,6 @@ export class ChartModel {
 
 	/*
 	 * Data labels
-	 *
 	*/
 	toggleDataLabel(changedLabel: string) {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
@@ -227,7 +228,6 @@ export class ChartModel {
 
 	/*
 	 * Fill scales
-	 *
 	*/
 	setColorScale() {
 		if (this.getDisplayData().datasets[0].backgroundColors) {
@@ -269,7 +269,6 @@ export class ChartModel {
 
 	/*
 	 * Data labels
-	 *
 	*/
 	protected updateAllDataLabels() {
 		// If allDataLabels hasn't been initialized yet
