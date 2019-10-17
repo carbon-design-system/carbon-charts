@@ -33,7 +33,7 @@ export class TooltipBar extends Tooltip {
 				} else {
 					if (e.detail.multidata) {
 						// multi tooltip
-						tooltipTextContainer.html(this.getMultiTooltipHTML(e.detail.multidata));
+						tooltipTextContainer.html(this.getMultilineTooltipHTML(e.detail.multidata));
 						// Position the tooltip
 						this.positionTooltip();
 					} else {
@@ -104,7 +104,7 @@ export class TooltipBar extends Tooltip {
 	 * Multip tooltips for bar charts include totals for each stack
 	 * @param data
 	 */
-	getMultiTooltipHTML(data: any) {
+	getMultilineTooltipHTML(data: any) {
 		const points = data;
 
 		points.reverse();
