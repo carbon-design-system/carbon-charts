@@ -44,7 +44,7 @@ export const data = {
 
 export const options = {
 	accessibility: false,
-	animation: false,
+	animations: false,
 	axes: {
 		bottom: {
 			title: "2018 Annual Sales Figures",
