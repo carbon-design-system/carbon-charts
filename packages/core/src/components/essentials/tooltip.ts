@@ -45,7 +45,7 @@ export class Tooltip extends Component {
 				} else if (e.detail.multidata) {
 					// multi tooltip
 					data = e.detail.multidata;
-					tooltipTextContainer.html(this.getMultiTooltipHTML(data));
+					tooltipTextContainer.html(this.getMultilineTooltipHTML(data));
 				} else {
 					tooltipTextContainer.html(this.getTooltipHTML(data));
 				}
@@ -80,7 +80,7 @@ export class Tooltip extends Component {
 			<p class="value">${formattedValue}</p></div>`;
 	}
 
-	getMultiTooltipHTML(data: any) {
+	getMultilineTooltipHTML(data: any) {
 		const points = data;
 
 		// sort them so they are in the same order as the graph
