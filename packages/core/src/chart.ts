@@ -86,9 +86,7 @@ export class Chart {
 			// This is needed because of d3-transitions
 			// Since at the start of the transition
 			// Elements do not hold their final size or position
-			setTimeout(() => {
-				this.services.events.dispatchEvent("render-finished");
-			});
+			setTimeout(() => { this.services.events.dispatchEvent("render-finished"); });
 		}
 	}
 

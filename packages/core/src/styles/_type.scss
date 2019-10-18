@@ -22,24 +22,30 @@ svg.chart-svg {
 /////////////////////////////////////////////
 .carbon--theme--g10 {
 	@include carbon--theme($carbon--theme--g10) {
-		text {
-			fill: $text-02;
+		svg.chart-svg {
+			text {
+				fill: $text-02;
+			}
 		}
 	}
 }
 
 .carbon--theme--g90 {
 	@include carbon--theme($carbon--theme--g90) {
-		text {
-			fill: $text-02;
+		svg.chart-svg {
+			text {
+				fill: $text-02;
+			}
 		}
 	}
 }
 
 .carbon--theme--g100 {
 	@include carbon--theme($carbon--theme--g100) {
-		text {
-			fill: $text-02;
+		svg.chart-svg {
+			text {
+				fill: $text-02;
+			}
 		}
 	}
 }
