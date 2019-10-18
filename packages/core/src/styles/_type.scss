@@ -1,4 +1,3 @@
-@import "@carbon/themes/scss/themes";
 @import "@carbon/type/scss/type";
 @import "@carbon/type/scss/font-face/mono";
 @import "@carbon/type/scss/font-face/sans";
@@ -14,32 +13,5 @@ svg.chart-svg {
 		font-size: 12px;
 		font-weight: carbon--font-weight("regular");
 		fill: $text-02;
-	}
-}
-
-/////////////////////////////////////////////
-///          Theme styles                ////
-/////////////////////////////////////////////
-.carbon--theme--g10 {
-	@include carbon--theme($carbon--theme--g10) {
-		text {
-			fill: $text-02;
-		}
-	}
-}
-
-.carbon--theme--g90 {
-	@include carbon--theme($carbon--theme--g90) {
-		text {
-			fill: $text-02;
-		}
-	}
-}
-
-.carbon--theme--g100 {
-	@include carbon--theme($carbon--theme--g100) {
-		text {
-			fill: $text-02;
-		}
 	}
 }

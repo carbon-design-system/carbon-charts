@@ -1,34 +1,5 @@
 @import "@carbon/themes/scss/themes";
 
-/////////////////////////////////////////////
-///          Theme styles                ////
-/////////////////////////////////////////////
-.carbon--theme--white {
-	g.callouts {
-		stroke: $text-02;
-	}
-}
-
-.carbon--theme--g10 {
-	@include carbon--theme($carbon--theme--g10) {
-		g.callouts {
-			stroke: $text-02;
-		}
-	}
-}
-
-.carbon--theme--g90 {
-	@include carbon--theme($carbon--theme--g90) {
-		g.callouts {
-			stroke: $text-02;
-		}
-	}
-}
-
-.carbon--theme--g100 {
-	@include carbon--theme($carbon--theme--g100) {
-		g.callouts {
-			stroke: $text-02;
-		}
-	}
+g.callouts {
+	stroke: $text-02;
 }

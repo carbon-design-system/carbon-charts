@@ -1,4 +1,3 @@
-@import "@carbon/themes/scss/themes";
 @import "@carbon/type/scss/type";
 @import "@carbon/type/scss/font-face/sans";
 
@@ -14,50 +13,5 @@
 
 	g.axis path.domain {
 		stroke: $ui-04;
-	}
-}
-
-/////////////////////////////////////////////
-///          Theme styles                ////
-/////////////////////////////////////////////
-.carbon--theme--g10 {
-	@include carbon--theme($carbon--theme--g10) {
-		.cc-axes {
-			g.axis path.domain {
-				stroke: $ui-04;
-			}
-
-			g.axis g.tick text {
-				fill: $text-02;
-			}
-		}
-	}
-}
-
-.carbon--theme--g90 {
-	@include carbon--theme($carbon--theme--g90) {
-		.cc-axes {
-			g.axis path.domain {
-				stroke: $ui-04;
-			}
-
-			g.axis g.tick text {
-				fill: $text-02;
-			}
-		}
-	}
-}
-
-.carbon--theme--g100 {
-	@include carbon--theme($carbon--theme--g100) {
-		.cc-axes {
-			g.axis path.domain {
-				stroke: $ui-04;
-			}
-
-			g.axis g.tick text {
-				fill: $text-02;
-			}
-		}
 	}
 }
