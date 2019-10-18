@@ -95,7 +95,7 @@ export const timeScale: TimeScaleOptions = {
  */
 const chart: BaseChartOptions = {
 	resizable: true,
-	theme: ChartTheme.WHITE,
+	theme: ChartTheme.DEFAULT,
 	tooltip: baseTooltip,
 	legend
 };

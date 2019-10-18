@@ -5,6 +5,7 @@
 @import "@carbon/type/scss/font-face/sans";
 
 div.cc-tooltip {
+	background-color: $ui-02;
 	pointer-events: none;
 	transition: opacity .1s;
 	@include carbon--motion(standard, expressive);
@@ -91,7 +92,7 @@ div.cc-tooltip {
 /////////////////////////////////////////////
 .carbon--theme--white {
 	.tooltip {
-		background-color: $ui-02;
+		
 
 		p, .content-box {
 			color: $text-01;

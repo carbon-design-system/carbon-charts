@@ -18,6 +18,8 @@ export class Themes extends Service {
 		const holderElement = this.model.get(ModelStateKeys.HOLDER) as HTMLElement;
 		const theme = Tools.getProperty(this.model.getOptions(), "theme");
 
-		select(holderElement).classed(`carbon--theme--${theme}`, true);
+		if (theme !== ChartTheme.DEFAULT) {
+			select(holderElement).classed(`carbon--theme--${theme}`, true);
+		}
 	}
 }
