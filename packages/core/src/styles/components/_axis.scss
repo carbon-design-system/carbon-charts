@@ -1,31 +1,34 @@
 @import "@carbon/themes/scss/themes";
+@import "@carbon/type/scss/type";
+@import "@carbon/type/scss/font-face/sans";
 
 .cc-axes {
-	.axis g.tick line {
+	g.axis g.tick text {
+		font-family: carbon--font-family("sans-condensed");
+		fill: $text-02;
+	}
+
+	g.axis g.tick line {
 		display: none;
+	}
+
+	g.axis path.domain {
+		stroke: $ui-04;
 	}
 }
 
 /////////////////////////////////////////////
 ///          Theme styles                ////
 /////////////////////////////////////////////
-.carbon--theme--white {
-	.cc-axes {
-		g.axis {
-			path.domain {
-				stroke: $ui-04;
-			}
-		}
-	}
-}
-
 .carbon--theme--g10 {
 	@include carbon--theme($carbon--theme--g10) {
 		.cc-axes {
-			g.axis {
-				path.domain {
-					stroke: $ui-04;
-				}
+			g.axis path.domain {
+				stroke: $ui-04;
+			}
+
+			g.axis g.tick text {
+				fill: $text-02;
 			}
 		}
 	}
@@ -34,10 +37,12 @@
 .carbon--theme--g90 {
 	@include carbon--theme($carbon--theme--g90) {
 		.cc-axes {
-			g.axis {
-				path.domain {
-					stroke: $ui-04;
-				}
+			g.axis path.domain {
+				stroke: $ui-04;
+			}
+
+			g.axis g.tick text {
+				fill: $text-02;
 			}
 		}
 	}
@@ -46,10 +51,12 @@
 .carbon--theme--g100 {
 	@include carbon--theme($carbon--theme--g100) {
 		.cc-axes {
-			g.axis {
-				path.domain {
-					stroke: $ui-04;
-				}
+			g.axis path.domain {
+				stroke: $ui-04;
+			}
+
+			g.axis g.tick text {
+				fill: $text-02;
 			}
 		}
 	}

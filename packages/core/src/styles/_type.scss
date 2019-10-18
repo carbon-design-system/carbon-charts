@@ -8,58 +8,22 @@
 @include carbon--font-face-sans();
 
 svg.chart-svg {
-	font-family: carbon--font-family('sans');
+	font-family: carbon--font-family("sans");
 
 	text {
 		font-size: 12px;
-		font-weight: carbon--font-weight('regular');
-
-		&.chart-label {
-			font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
-		}
-
-		&.title {
-			font-size: 18px;
-			font-weight: carbon--font-weight('semibold');
-		}
-	}
-
-	g.legend-item text {
-		font-size: 15px;
-	}
-
-	g.tick {
-		text {
-			font-family: carbon--font-family('sans-condensed');
-		}
+		font-weight: carbon--font-weight("regular");
+		fill: $text-02;
 	}
 }
 
 /////////////////////////////////////////////
 ///          Theme styles                ////
 /////////////////////////////////////////////
-.carbon--theme--white {
-	text {
-		fill: $text-02;
-
-		&.axis-label,
-		&.chart-title {
-			fill: $text-01;
-			stroke: $text-01;
-		}
-	}
-}
-
 .carbon--theme--g10 {
 	@include carbon--theme($carbon--theme--g10) {
 		text {
 			fill: $text-02;
-
-			&.axis-label,
-			&.chart-title {
-				fill: $text-01;
-				stroke: $text-01;
-			}
 		}
 	}
 }
@@ -68,12 +32,6 @@ svg.chart-svg {
 	@include carbon--theme($carbon--theme--g90) {
 		text {
 			fill: $text-02;
-
-			&.axis-label,
-			&.chart-title {
-				fill: $text-01;
-				stroke: $text-01;
-			}
 		}
 	}
 }
@@ -82,16 +40,6 @@ svg.chart-svg {
 	@include carbon--theme($carbon--theme--g100) {
 		text {
 			fill: $text-02;
-
-			&.axis-label {
-				fill: $text-01;
-				stroke: $text-01;
-			}
-
-			&.chart-title {
-				fill: $text-01;
-				stroke: $text-01;
-			}
 		}
 	}
 }

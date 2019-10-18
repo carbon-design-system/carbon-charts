@@ -24,6 +24,10 @@ g.cc-legend {
 			fill: $ui-background;
 			stroke: $ui-background;
 		}
+
+		text {
+			font-size: 15px;
+		}
 	}
 
 	&.clickable {
@@ -36,8 +40,25 @@ g.cc-legend {
 /////////////////////////////////////////////
 ///          Theme styles                ////
 /////////////////////////////////////////////
-.carbon--theme--white {
-	g.cc-legend {
+.carbon--theme--white g.cc-legend {
+	g.legend-item {
+		rect.checkbox {
+			stroke: $ui-background;
+
+			&:not(.active) {
+				stroke: $text-02;
+				fill: $ui-background;
+			}
+		}
+
+		text {
+			fill: $text-02;
+		}
+	}
+}
+
+.carbon--theme--g10 g.cc-legend {
+	@include carbon--theme($carbon--theme--g10) {
 		g.legend-item {
 			rect.checkbox {
 				stroke: $ui-background;
@@ -47,56 +68,47 @@ g.cc-legend {
 					fill: $ui-background;
 				}
 			}
-		}
-	}
-}
 
-.carbon--theme--g10 {
-	@include carbon--theme($carbon--theme--g10) {
-		g.cc-legend {
-			g.legend-item {
-				rect.checkbox {
-					stroke: $ui-background;
-
-					&:not(.active) {
-						stroke: $text-02;
-						fill: $ui-background;
-					}
-				}
+			text {
+				fill: $text-02;
 			}
 		}
 	}
 }
 
-.carbon--theme--g90 {
+.carbon--theme--g90 g.cc-legend {
 	@include carbon--theme($carbon--theme--g90) {
-		g.cc-legend {
-			g.legend-item {
-				rect.checkbox {
-					stroke: $ui-background;
+		g.legend-item {
+			rect.checkbox {
+				stroke: $ui-background;
 
-					&:not(.active) {
-						stroke: $text-02;
-						fill: $ui-background;
-					}
+				&:not(.active) {
+					stroke: $text-02;
+					fill: $ui-background;
 				}
+			}
+
+			text {
+				fill: $text-02;
 			}
 		}
 	}
 }
 
-.carbon--theme--g100 {
+.carbon--theme--g100 g.cc-legend {
 	@include carbon--theme($carbon--theme--g100) {
-		g.cc-legend {
-			g.legend-item {
-				rect.checkbox {
-					stroke: $ui-background;
+		g.legend-item {
+			rect.checkbox {
+				stroke: $ui-background;
 
-					&:not(.active) {
-						stroke: $text-02;
-						fill: $ui-background;
-					}
+				&:not(.active) {
+					stroke: $text-02;
+					fill: $ui-background;
 				}
+			}
+
+			text {
+				fill: $text-02;
 			}
 		}
 	}

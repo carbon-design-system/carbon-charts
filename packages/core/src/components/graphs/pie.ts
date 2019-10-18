@@ -107,7 +107,7 @@ export class Pie extends Component {
 
 		// Draw the slice labels
 		const labels = DOMUtils.appendOrSelect(svg, "g.labels")
-			.selectAll("text.chart-label")
+			.selectAll("text.pie-label")
 			.data(pieLayoutData, (d: any) => d.data.label);
 
 		// Remove labels that are existing
@@ -118,7 +118,7 @@ export class Pie extends Component {
 		// Add labels that are being introduced
 		const enteringLabels = labels.enter()
 			.append("text")
-			.classed("chart-label", true);
+			.classed("pie-label", true);
 
 		// Update styles & position on existing & entering labels
 		const calloutData = [];

@@ -2,7 +2,7 @@
  * enum of all supported chart themes
  */
 export enum ChartTheme {
-	WHITE = "white",
+	DEFAULT = "default",
 	G100 = "g100",
 	G90 = "g90",
 	G10 = "g10"

@@ -1,16 +1,14 @@
 @import "@carbon/themes/scss/themes";
 
-/////////////////////////////////////////////
-///          Theme styles                ////
-/////////////////////////////////////////////
-.carbon--theme--white {
-	.cc-horizontal-zero-line {
-		line.domain {
-			stroke: $ui-04;
-		}
+.cc-horizontal-zero-line {
+	line.domain {
+		stroke: $ui-04;
 	}
 }
 
+/////////////////////////////////////////////
+///          Theme styles                ////
+/////////////////////////////////////////////
 .carbon--theme--g10 {
 	@include carbon--theme($carbon--theme--g10) {
 		.cc-horizontal-zero-line {
