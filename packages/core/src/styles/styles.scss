@@ -1,3 +1,5 @@
+// Carbon imports
+@import "@carbon/colors/scss/colors";
 // Carbon theme initializations
 @import "@carbon/themes/scss/themes";
 @include carbon--theme();
