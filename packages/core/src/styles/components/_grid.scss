@@ -1,6 +1,3 @@
-@import "@carbon/themes/scss/themes";
-@import "@carbon/colors/scss/colors";
-
 .cc-grid {
 	rect.chart-grid-backdrop {
 		@if $carbon--theme == $carbon--theme--g90 {
