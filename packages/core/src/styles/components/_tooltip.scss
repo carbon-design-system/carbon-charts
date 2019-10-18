@@ -114,7 +114,7 @@ div.cc-tooltip {
 
 .carbon--theme--g90 {
     @include carbon--theme($carbon--theme--g90) {
-		.tooltip{
+		.tooltip {
 			background-color: $ui-02;
 
 			p, .content-box {

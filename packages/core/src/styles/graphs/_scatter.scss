@@ -18,29 +18,23 @@ g.cc-scatter {
 ///          Theme styles                ////
 /////////////////////////////////////////////
 .carbon--theme--white {
-	g.cc-scatter {
-		circle.dot.unfilled {
-			fill: $ui-01;
-		}
+	g.cc-scatter circle.dot.unfilled {
+		fill: $ui-01;
 	}
 }
 
 .carbon--theme--g10 {
 	@include carbon--theme($carbon--theme--g10) {
-		g.cc-scatter {
-			circle.dot.unfilled {
-				fill: $ui-01;
-			}
+		g.cc-scatter circle.dot.unfilled {
+			fill: $ui-01;
 		}
 	}
 }
 
 .carbon--theme--g90 {
 	@include carbon--theme($carbon--theme--g90) {
-		g.cc-scatter {
-			circle.dot.unfilled {
-				fill: $carbon--gray-100;
-			}
+		g.cc-scatter circle.dot.unfilled {
+			fill: $carbon--gray-100;
 		}
 	}
 }

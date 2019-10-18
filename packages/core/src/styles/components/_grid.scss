@@ -6,19 +6,21 @@
 		fill: $ui-01;
 	}
 
-	g.x.grid,
-	g.y.grid {
-		g.tick line {
+	g.x.grid g.tick,
+	g.y.grid g.tick {
+		line {
 			pointer-events: none;
 			stroke-width: 1px;
 			stroke: $ui-03;
 		}
-		g.tick.active line {
+
+		&.active line {
 			stroke-dasharray: 2px;
 			stroke: $focus;
 		}
 	}
 }
+
 
 /////////////////////////////////////////////
 ///          Theme styles                ////
@@ -30,13 +32,13 @@
 				fill: $ui-01;
 			}
 
-			g.x.grid,
-			g.y.grid {
-				g.tick line {
+			g.x.grid g.tick,
+			g.y.grid g.tick {
+				line {
 					stroke: $ui-03;
 				}
 
-				g.tick.active line {
+				&.active line {
 					stroke: $focus;
 				}
 			}
@@ -51,13 +53,13 @@
 				fill: $carbon--gray-100;
 			}
 
-			g.x.grid,
-			g.y.grid {
-				g.tick line {
+			g.x.grid g.tick,
+			g.y.grid g.tick {
+				line {
 					stroke: $ui-01;
 				}
 
-				g.tick.active line {
+				&.active line {
 					stroke: $focus;
 				}
 			}
@@ -72,13 +74,13 @@
 				fill: $carbon--black-100;
 			}
 
-			g.x.grid,
-			g.y.grid {
-				g.tick line {
+			g.x.grid g.tick,
+			g.y.grid g.tick {
+				line {
 					stroke: $ui-01;
 				}
 
-				g.tick.active line {
+				&.active line {
 					stroke: $focus;
 				}
 			}

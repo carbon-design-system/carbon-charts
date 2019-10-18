@@ -1,6 +1,6 @@
 // Internal Imports
 import { Service } from "./service";
-import { AxisPositions, AxisTypes } from "../interfaces";
+import { AxisPositions, AxisTypes, ScaleTypes } from "../interfaces";
 
 export class Axes extends Service {
 	// Find the main x-axis out of the 2 x-axis on the chart (when 2D axis is used)
@@ -37,5 +37,53 @@ export class Axes extends Service {
 
 	getYValue(d, i) {
 		return this.getMainYAxis().getValueFromScale(d, i);
+	}
+
+	/** Uses the primary Y Axis to get data items associated with that value.  */
+	getDataWithDomain(domainValue) {
+		const displayData = this.model.getDisplayData();
+		const activePoints = [];
+		const scaleType = this.model.getScaleYType();
+
+		switch (scaleType) {
+			case ScaleTypes.LABELS:
+				// based on labels we use the index to get the associated data
+				const index = displayData.labels.indexOf(domainValue);
+
+				displayData.datasets.forEach(dataset => {
+					activePoints.push(
+						{
+							datasetLabel: dataset.label,
+							value: dataset.data[index],
+						}
+					);
+				});
+				break;
+			case ScaleTypes.TIME:
+				// time series we filter using the date
+				const domainKey = Object.keys(displayData.datasets[0].data[0]).filter(key =>  key !== "value" )[0];
+
+				displayData.datasets.forEach(dataset => {
+					const sharedLabel = dataset.label;
+
+					// filter the items in each dataset for the points associated with the Domain
+					const dataItems = dataset.data.filter(item => {
+						const date1 = new Date(item[domainKey]);
+						const date2 = new Date(domainValue);
+						return date1.getTime() === date2.getTime();
+					});
+
+					// assign the shared label on the data items and add them to the array
+					dataItems.forEach(item => {
+						activePoints.push(
+							Object.assign({datasetLabel: sharedLabel,
+								value: item.value,
+							}, item)
+						);
+					});
+				});
+				break;
+		}
+		return activePoints;
 	}
 }

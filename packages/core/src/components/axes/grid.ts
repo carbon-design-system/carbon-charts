@@ -174,7 +174,7 @@ export class Grid extends Component {
 
 			// use the selected gridline to get the data with associated domain
 			activeGridline.each(function(d) {
-				highlightItems = self.model.getDataWithDomain(d);
+				highlightItems = self.services.axes.getDataWithDomain(d);
 			});
 
 			self.services.events.dispatchEvent("show-tooltip", {

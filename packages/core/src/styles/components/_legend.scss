@@ -27,23 +27,26 @@ g.cc-legend {
 
 		text {
 			font-size: 15px;
+			fill: $text-02;
 		}
 	}
 
-	&.clickable {
-		g.legend-item:hover {
-			cursor: pointer;
-		}
+	&.clickable g.legend-item:hover {
+		cursor: pointer;
 	}
 }
 
 /////////////////////////////////////////////
 ///          Theme styles                ////
 /////////////////////////////////////////////
-.carbon--theme--white g.cc-legend {
-	g.legend-item {
-		rect.checkbox {
-			stroke: $ui-background;
+
+
+.carbon--theme--g10 g.cc-legend {
+	@include carbon--theme($carbon--theme--g10) {
+		g.legend-item {
+			rect.checkbox {
+				stroke: $ui-background;
+			}
 
 			&:not(.active) {
 				stroke: $text-02;
@@ -57,9 +60,10 @@ g.cc-legend {
 	}
 }
 
-.carbon--theme--g10 g.cc-legend {
+
+.carbon--theme--g10 {
 	@include carbon--theme($carbon--theme--g10) {
-		g.legend-item {
+		g.cc-legend g.legend-item {
 			rect.checkbox {
 				stroke: $ui-background;
 
