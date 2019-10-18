@@ -15,6 +15,7 @@ export class ChartModel {
 	 * @type Function
 	 */
 	protected updateCallback: Function;
+	protected services: any;
 
 	// Internal Model state
 	protected state: any = {
@@ -31,6 +32,11 @@ export class ChartModel {
 	// Fill scales & fill related objects
 	protected patternScale = {};
 	protected colorScale: any = {};
+
+
+	constructor(services: any) {
+		this.services = services;
+	}
 
 	getDisplayData() {
 		const { ACTIVE } = Configuration.legend.items.status;
@@ -185,7 +191,7 @@ export class ChartModel {
 		this.updateAllDataLabels();
 		this.setColorScale();
 
-		this.updateCallback();
+		this.services.events.dispatchEvent("model-update");
 	}
 
 	setUpdateCallback(cb: Function) {
