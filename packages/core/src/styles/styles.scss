@@ -1,3 +1,8 @@
+// Carbon theme initializations
+@import "@carbon/themes/scss/themes";
+@include carbon--theme();
+
+// Internal
 @import "./mixins.scss";
 @import "./components/index.scss";
 @import "./graphs/index.scss";
