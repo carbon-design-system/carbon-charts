@@ -28,34 +28,38 @@ import {
 
 export class Chart {
 	components: Component[];
-	model: ChartModel = new ChartModel();
-	protected services: any = {
+	services: any = {
 		domUtils: DOMUtils,
 		events: Events,
 		transitions: Transitions,
 		themes: Themes
 	};
+	model: ChartModel = new ChartModel(this.services);
 
 	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {}
 
 	// Contains the code that uses properties that are overridable by the super-class
 	init(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
-		// Set model update callback
-		this.model.setUpdateCallback(this.update.bind(this));
-
 		// Store the holder in the model
 		this.model.set({
 			holder
 		}, true);
-
-		// Set model data & options
-		this.model.setData(chartConfigs.data);
 
 		// Initialize all services
 		Object.keys(this.services).forEach(serviceName => {
 			const serviceObj = this.services[serviceName];
 			this.services[serviceName] = new serviceObj(this.model, this.services);
 		});
+
+		// Call update() when model has been updated
+		this.services.events
+			.getDocumentFragment()
+			.addEventListener("model-update", () => {
+				this.update(true);
+			});
+
+		// Set model data & options
+		this.model.setData(chartConfigs.data);
 
 		// Set chart resize event listener
 		this.services.events
@@ -86,9 +90,18 @@ export class Chart {
 			// This is needed because of d3-transitions
 			// Since at the start of the transition
 			// Elements do not hold their final size or position
-			setTimeout(() => {
-				this.services.events.dispatchEvent("render-finished");
-			});
+			const pendingTransitions = this.services.transitions.getPendingTransitions();
+			const promises = Object.keys(pendingTransitions)
+				.map(transitionID => {
+					const transition = pendingTransitions[transitionID];
+					return transition.end()
+						.catch(e => e); // Skip rejects since we don't care about those;
+				});
+
+			Promise.all(promises)
+				.then(() => {
+					this.services.events.dispatchEvent("render-finished");
+				});
 		}
 	}
 

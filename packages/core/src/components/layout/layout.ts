@@ -161,38 +161,36 @@ export class LayoutComponent extends Component {
 				child.size = (100 - (+this.getPreferedAndFixedSizeSum())) / (+this.getNumOfStretchChildren());
 			});
 
-		setTimeout(() => {
-			// Pass children data to the hierarchy layout
-			// And calculate sum of sizes
-			root = hierarchy({
-				children: hierarchyChildren
-			})
-			.sum((d: any) => d.size);
+		// Pass children data to the hierarchy layout
+		// And calculate sum of sizes
+		root = hierarchy({
+			children: hierarchyChildren
+		})
+		.sum((d: any) => d.size);
 
-			// Compute the position of all elements within the layout
-			treemap()
-				.tile(tileType)
-				.size([width, height])
-				.padding(0)
-				(root);
+		// Compute the position of all elements within the layout
+		treemap()
+			.tile(tileType)
+			.size([width, height])
+			.padding(0)
+			(root);
 
-			// Add new SVGs to the DOM for each layout child
-			svg
-				.selectAll(`svg.layout-child-${this._instanceCount}`)
-				.data(root.leaves(), (d: any) => d.data.id)
-				.attr("x", (d: any) => d.x0)
-				.attr("y", (d: any) => d.y0)
-				.attr("width", (d: any) => d.x1 - d.x0)
-				.attr("height", (d: any) => d.y1 - d.y0)
-				.each(function(d: any, i) {
-					d.data.components.forEach(itemComponent => {
-						const growth = Tools.getProperty(d, "data", "growth", "x");
-						if (growth === LayoutGrowth.STRETCH) {
-							itemComponent.render(animate);
-						}
-					});
+		// Add new SVGs to the DOM for each layout child
+		svg
+			.selectAll(`svg.layout-child-${this._instanceCount}`)
+			.data(root.leaves(), (d: any) => d.data.id)
+			.attr("x", (d: any) => d.x0)
+			.attr("y", (d: any) => d.y0)
+			.attr("width", (d: any) => d.x1 - d.x0)
+			.attr("height", (d: any) => d.y1 - d.y0)
+			.each(function(d: any, i) {
+				d.data.components.forEach(itemComponent => {
+					const growth = Tools.getProperty(d, "data", "growth", "x");
+					if (growth === LayoutGrowth.STRETCH) {
+						itemComponent.render(animate);
+					}
 				});
-		}, 0);
+			});
 	}
 
 	// Pass on model to children as well

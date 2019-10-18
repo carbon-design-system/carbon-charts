@@ -10,6 +10,10 @@ import { scaleOrdinal } from "d3-scale";
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
 export class SimpleBarChartModel extends ChartModel {
+	constructor(services: any) {
+		super(services);
+	}
+
 	generateDataLabels(newData) {
 		const dataLabels = {};
 		newData.labels.forEach(label => {

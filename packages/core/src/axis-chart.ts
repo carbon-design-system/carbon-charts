@@ -19,7 +19,7 @@ import { Tools } from "./tools";
 import { Axes, Curves } from "./services/index";
 
 export class AxisChart extends Chart {
-	protected services: any = Object.assign(this.services, {
+	services: any = Object.assign(this.services, {
 		axes: Axes,
 		curves: Curves
 	});
