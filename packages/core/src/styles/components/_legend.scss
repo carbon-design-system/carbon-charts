@@ -9,6 +9,11 @@ g.cc-legend {
 			stroke-width: 1px;
 			stroke-opacity: 1;
 
+			&:not(.active) {
+				stroke: $text-02;
+				fill: $ui-background;
+			}
+
 			&:not(.active) ~ g.check {
 				display: none;
 			}
