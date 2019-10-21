@@ -55,11 +55,20 @@ export const groupedBarOptions = {
 	title: "Grouped Bar Chart",
 	axes: {
 		left: {
-			primary: true
+			primary: true,
+			// title: "left"
 		},
 		bottom: {
 			type: "labels",
 			secondary: true,
+			// title: "what about us"
+		},
+		right: {
+			// title: "right titl"
+		},
+		top: {
+			type: "labels",
+			// title: "top wadup"
 		}
 	},
 	theme: getTheme()
