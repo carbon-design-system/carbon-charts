@@ -212,30 +212,63 @@ export class Axis extends Component {
 		}
 
 		// Add axis into the parent
-		const axisRefExists = !svg.select(`g.axis.${axisPosition}`).empty();
-		const axisRef = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
+		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
+		const axisRefExists = !container.select(`g.ticks`).empty();
+		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
 
 		// Position and transition the axis
 		switch (axisPosition) {
 			case AxisPositions.LEFT:
-				axisRef.attr("transform", "translate(" + this.margins.left + ",0)");
+				axisRef.attr("transform", `translate(${this.margins.left}, 0)`);
 				break;
 			case AxisPositions.BOTTOM:
-				axisRef.attr("transform", "translate(0," + (height - this.margins.bottom) + ")");
+				axisRef.attr("transform", `translate(0, ${height - this.margins.bottom})`);
 				break;
 			case AxisPositions.RIGHT:
-				axisRef.attr("transform", "translate(" + (width - this.margins.right) + ",0)");
+				axisRef.attr("transform", `translate(${width - this.margins.right}, 0)`);
 				break;
 			case AxisPositions.TOP:
-		        axisRef.attr("transform", "translate(0," + (this.margins.top) + ")");
+		        axisRef.attr("transform", `translate(0, ${this.margins.top})`);
 				break;
+		}
+
+		// Position the axis title
+		if (axisOptions.title) {
+			const axisTitleRef = DOMUtils.appendOrSelect(container, `text.axis-title`)
+				.text(axisOptions.title);
+
+			switch (axisPosition) {
+				case AxisPositions.LEFT:
+					axisTitleRef.attr("transform", "rotate(-90)")
+						.attr("y", 0)
+						.attr("x", -(scale.range()[0] / 2))
+						.attr("dy", "1em")
+						.style("text-anchor", "middle");
+					break;
+				case AxisPositions.BOTTOM:
+					axisTitleRef.attr("transform", `translate(${this.margins.left / 2 + scale.range()[1] / 2}, ${height})`)
+						.style("text-anchor", "middle");
+					break;
+				case AxisPositions.RIGHT:
+					axisTitleRef.attr("transform", "rotate(90)")
+						.attr("y", -width)
+						.attr("x", scale.range()[0] / 2)
+						.attr("dy", "1em")
+						.style("text-anchor", "middle");
+					break;
+				case AxisPositions.TOP:
+					const { height: titleHeight } = DOMUtils.getSVGElementSize(axisTitleRef, { useBBox: true });
+					axisTitleRef.attr("transform", `translate(${this.margins.left / 2 + scale.range()[1] / 2}, ${titleHeight / 2})`)
+						.style("text-anchor", "middle");
+					break;
+			}
 		}
 
 		// Apply new axis to the axis element
 		if (!animate || !axisRefExists) {
-			axisRef.call(axis);
+			axisRef = axisRef.call(axis);
 		} else {
-			axisRef.transition(this.services.transitions.getTransition("axis-update"))
+			axisRef = axisRef.transition(this.services.transitions.getTransition("axis-update"))
 				.call(axis);
 		}
 
@@ -298,9 +331,17 @@ export class Axis extends Component {
 		return yMin;
 	}
 
-	getElementRef() {
-		const { position } = this.configs;
+	getAxisRef() {
+		const { position: axisPosition } = this.configs;
 
-		return DOMUtils.appendOrSelect(this.getContainerSVG(), `g.axis.${position}`);
+		return this.getContainerSVG()
+			.select(`g.axis.${axisPosition} g.ticks`);
+	}
+
+	getTitleRef() {
+		const { position: axisPosition } = this.configs;
+
+		return this.getContainerSVG()
+			.select(`g.axis.${axisPosition} text.axis-title`);
 	}
 }

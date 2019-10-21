@@ -87,20 +87,26 @@ export class TwoDimensionalAxes extends Component {
 		Object.keys(this.children).forEach(childKey => {
 			const child = this.children[childKey];
 			const axisPosition = child.configs.position;
-			const { width, height } = DOMUtils.getSVGElementSize(child.getElementRef(), { useBBox: true });
+			const { width, height } = DOMUtils.getSVGElementSize(child.getAxisRef(), { useBBox: true });
+			let offset;
+			if (child.getTitleRef().empty()) {
+				offset = 0;
+			} else {
+				offset = DOMUtils.getSVGElementSize(child.getTitleRef(), { useBBox: true }).height;
+			}
 
 			switch (axisPosition) {
 				case AxisPositions.TOP:
-					margins.top = height;
+					margins.top = height + offset;
 					break;
 				case AxisPositions.BOTTOM:
-					margins.bottom = height;
+					margins.bottom = height + offset;
 					break;
 				case AxisPositions.LEFT:
-					margins.left = width;
+					margins.left = width + offset;
 					break;
 				case AxisPositions.RIGHT:
-					margins.right = width;
+					margins.right = width + offset;
 					break;
 			}
 		});
