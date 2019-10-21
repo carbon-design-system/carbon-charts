@@ -1,33 +1,5 @@
-@import "@carbon/themes/scss/themes";
-
-
-.cc-horizontal-zero-line line.domain {
-	stroke: $ui-04;
-}
-
-/////////////////////////////////////////////
-///          Theme styles                ////
-/////////////////////////////////////////////
-.carbon--theme--g10 {
-	@include carbon--theme($carbon--theme--g10) {
-		.cc-horizontal-zero-line line.domain {
-			stroke: $ui-04;
-		}
-	}
-}
-
-.carbon--theme--g90 {
-	@include carbon--theme($carbon--theme--g90) {
-		.cc-horizontal-zero-line line.domain {
-			stroke: $ui-04;
-		}
-	}
-}
-
-.carbon--theme--g100 {
-	@include carbon--theme($carbon--theme--g100) {
-		.cc-horizontal-zero-line line.domain {
-			stroke: $ui-04;
-		}
+.cc-horizontal-zero-line {
+	line.domain {
+		stroke: $ui-04;
 	}
 }

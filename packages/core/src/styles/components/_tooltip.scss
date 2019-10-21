@@ -1,5 +1,4 @@
 @import "@carbon/motion/scss/motion.scss";
-@import "@carbon/themes/scss/themes";
 @import "@carbon/type/scss/type";
 @import "@carbon/type/scss/font-face/mono";
 @import "@carbon/type/scss/font-face/sans";
@@ -22,6 +21,8 @@ div.cc-tooltip {
 	}
 
 	.content-box {
+		color: $text-01;
+
 		.datapoint-tooltip, .total-val {
 			display: flex;
 			padding: 4px;
@@ -83,55 +84,6 @@ div.cc-tooltip {
 		height: 100%;
 		& + p.label {
 			margin-left: 4px;
-		}
-	}
-}
-
-/////////////////////////////////////////////
-///          Theme styles                ////
-/////////////////////////////////////////////
-.carbon--theme--white {
-	.tooltip {
-		
-
-		p, .content-box {
-			color: $text-01;
-		}
-	}
-}
-
-.carbon--theme--g10 {
-	@include carbon--theme($carbon--theme--g10) {
-		.tooltip {
-			background-color: $ui-02;
-
-			p, .content-box {
-				color: $text-01;
-			}
-		}
-	}
-}
-
-.carbon--theme--g90 {
-    @include carbon--theme($carbon--theme--g90) {
-		.tooltip {
-			background-color: $ui-02;
-
-			p, .content-box {
-				color: $text-01;
-			}
-		}
-	}
-}
-
-.carbon--theme--g100 {
-	@include carbon--theme($carbon--theme--g100) {
-		.tooltip {
-			background-color: $ui-02;
-
-			p, .content-box {
-				color: $text-01;
-			}
 		}
 	}
 }

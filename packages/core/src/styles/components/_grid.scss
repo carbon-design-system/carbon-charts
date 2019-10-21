@@ -1,9 +1,12 @@
-@import "@carbon/themes/scss/themes";
-@import "@carbon/colors/scss/colors";
-
 .cc-grid {
 	rect.chart-grid-backdrop {
-		fill: $ui-01;
+		@if $carbon--theme == $carbon--theme--g90 {
+			fill: $carbon--gray-100;
+		} @else if $carbon--theme == $carbon--theme--g100 {
+			fill: $carbon--black-100;
+		} @else {
+			fill: $ui-01;
+		}
 	}
 
 	g.x.grid g.tick,
@@ -17,73 +20,6 @@
 		&.active line {
 			stroke-dasharray: 2px;
 			stroke: $focus;
-		}
-	}
-}
-
-
-/////////////////////////////////////////////
-///          Theme styles                ////
-/////////////////////////////////////////////
-.carbon--theme--g10 {
-	@include carbon--theme($carbon--theme--g10) {
-		.cc-grid {
-			rect.chart-grid-backdrop {
-				fill: $ui-01;
-			}
-
-			g.x.grid g.tick,
-			g.y.grid g.tick {
-				line {
-					stroke: $ui-03;
-				}
-
-				&.active line {
-					stroke: $focus;
-				}
-			}
-		}
-	}
-}
-
-.carbon--theme--g90 {
-	@include carbon--theme($carbon--theme--g90) {
-		.cc-grid {
-			rect.chart-grid-backdrop {
-				fill: $carbon--gray-100;
-			}
-
-			g.x.grid g.tick,
-			g.y.grid g.tick {
-				line {
-					stroke: $ui-01;
-				}
-
-				&.active line {
-					stroke: $focus;
-				}
-			}
-		}
-	}
-}
-
-.carbon--theme--g100 {
-	@include carbon--theme($carbon--theme--g100) {
-		.cc-grid {
-			rect.chart-grid-backdrop {
-				fill: $carbon--black-100;
-			}
-
-			g.x.grid g.tick,
-			g.y.grid g.tick {
-				line {
-					stroke: $ui-01;
-				}
-
-				&.active line {
-					stroke: $focus;
-				}
-			}
 		}
 	}
 }

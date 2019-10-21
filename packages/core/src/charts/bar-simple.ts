@@ -22,7 +22,7 @@ import {
 } from "../components/index";
 
 export class SimpleBarChart extends AxisChart {
-	model = new SimpleBarChartModel();
+	model = new SimpleBarChartModel(this.services);
 
 	constructor(holder: Element, chartConfigs: ChartConfig<ScatterChartOptions>) {
 		super(holder, chartConfigs);

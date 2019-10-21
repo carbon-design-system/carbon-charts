@@ -1,6 +1,3 @@
-@import "@carbon/themes/scss/themes";
-@import "@carbon/colors/scss/colors";
-
 g.cc-legend {
 	user-select: none;
 
@@ -8,6 +5,11 @@ g.cc-legend {
 		rect.checkbox {
 			stroke-width: 1px;
 			stroke-opacity: 1;
+
+			&:not(.active) {
+				stroke: $text-02;
+				fill: $ui-background;
+			}
 
 			&:not(.active) ~ g.check {
 				display: none;
@@ -33,87 +35,5 @@ g.cc-legend {
 
 	&.clickable g.legend-item:hover {
 		cursor: pointer;
-	}
-}
-
-/////////////////////////////////////////////
-///          Theme styles                ////
-/////////////////////////////////////////////
-
-
-.carbon--theme--g10 g.cc-legend {
-	@include carbon--theme($carbon--theme--g10) {
-		g.legend-item {
-			rect.checkbox {
-				stroke: $ui-background;
-			}
-
-			&:not(.active) {
-				stroke: $text-02;
-				fill: $ui-background;
-			}
-		}
-
-		text {
-			fill: $text-02;
-		}
-	}
-}
-
-
-.carbon--theme--g10 {
-	@include carbon--theme($carbon--theme--g10) {
-		g.cc-legend g.legend-item {
-			rect.checkbox {
-				stroke: $ui-background;
-
-				&:not(.active) {
-					stroke: $text-02;
-					fill: $ui-background;
-				}
-			}
-
-			text {
-				fill: $text-02;
-			}
-		}
-	}
-}
-
-.carbon--theme--g90 g.cc-legend {
-	@include carbon--theme($carbon--theme--g90) {
-		g.legend-item {
-			rect.checkbox {
-				stroke: $ui-background;
-
-				&:not(.active) {
-					stroke: $text-02;
-					fill: $ui-background;
-				}
-			}
-
-			text {
-				fill: $text-02;
-			}
-		}
-	}
-}
-
-.carbon--theme--g100 g.cc-legend {
-	@include carbon--theme($carbon--theme--g100) {
-		g.legend-item {
-			rect.checkbox {
-				stroke: $ui-background;
-
-				&:not(.active) {
-					stroke: $text-02;
-					fill: $ui-background;
-				}
-			}
-
-			text {
-				fill: $text-02;
-			}
-		}
 	}
 }
