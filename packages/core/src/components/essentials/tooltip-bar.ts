@@ -9,7 +9,6 @@ import Position, { PLACEMENTS } from "@carbon/utils-position";
 
 // import the settings for the css prefix
 import settings from "carbon-components/src/globals/js/settings";
-const chartprefix = "cc";
 
 // D3 Imports
 import { mouse, select } from "d3-selection";
@@ -18,6 +17,7 @@ export class TooltipBar extends Tooltip {
 	init() {
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
+		const chartprefix = Tools.getProperty(this.model.getOptions(), "prefix");
 		this.tooltip = DOMUtils.appendOrSelect(holder, `div.${settings.prefix}--${chartprefix}--tooltip`);
 
 		// Apply html content to the tooltip
