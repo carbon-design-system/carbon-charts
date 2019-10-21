@@ -1,27 +1,4 @@
-@import "@carbon/themes/scss/themes";
-
 div.chart-holder {
 	background-color: $ui-background;
 	position: relative;
-}
-
-/////////////////////////////////////////////
-///          Theme styles                ////
-/////////////////////////////////////////////
-.carbon--theme--g10.chart-holder {
-	@include carbon--theme($carbon--theme--g10) {
-		background-color: $ui-background;
-	}
-}
-
-.carbon--theme--g90.chart-holder {
-	@include carbon--theme($carbon--theme--g90) {
-		background-color: $ui-background;
-	}
-}
-
-.carbon--theme--g100.chart-holder {
-	@include carbon--theme($carbon--theme--g100) {
-		background-color: $ui-background;
-	}
 }

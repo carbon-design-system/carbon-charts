@@ -8,30 +8,3 @@
 		font-weight: carbon--font-weight("semibold");
 	}
 }
-
-/////////////////////////////////////////////
-///          Theme styles                ////
-/////////////////////////////////////////////
-.carbon--theme--g10 .cc-title {
-	@include carbon--theme($carbon--theme--g10) {
-		text.title {
-			fill: $text-01;
-		}
-	}
-}
-
-.carbon--theme--g90 .cc-title {
-	@include carbon--theme($carbon--theme--g90) {
-		text.title {
-			fill: $text-01;
-		}
-	}
-}
-
-.carbon--theme--g100 .cc-title {
-	@include carbon--theme($carbon--theme--g100) {
-		text.title {
-			fill: $text-01;
-		}
-	}
-}

@@ -1,53 +1,17 @@
 @import "@carbon/motion/scss/motion.scss";
-@import "@carbon/themes/scss/themes";
-@import "@carbon/colors/scss/colors";
 
 g.cc-scatter {
-	circle.hovered {
+	circle.dot.hovered {
 		fill-opacity: 1;
 		transition: all .1s;
 		@include carbon--motion(standard, expressive);
 	}
 
-	g.lines path.line {
-		mix-blend-mode: multiply;
-	}
-}
-
-/////////////////////////////////////////////
-///          Theme styles                ////
-/////////////////////////////////////////////
-.carbon--theme--white {
-	g.cc-scatter circle.dot.unfilled {
+	circle.dot.unfilled {
 		fill: $ui-01;
 	}
-}
 
-.carbon--theme--g10 {
-	@include carbon--theme($carbon--theme--g10) {
-		g.cc-scatter circle.dot.unfilled {
-			fill: $ui-01;
-		}
-	}
-}
-
-.carbon--theme--g90 {
-	@include carbon--theme($carbon--theme--g90) {
-		g.cc-scatter circle.dot.unfilled {
-			fill: $carbon--gray-100;
-		}
-	}
-}
-
-.carbon--theme--g100 {
-	@include carbon--theme($carbon--theme--g100) {
-		g.cc-scatter {
-			circle.dot.unfilled {
-				fill: $ui-01;
-			}
-			g.lines path.line {
-				mix-blend-mode: unset;
-			}
-		}
+	g.lines path.line {
+		mix-blend-mode: multiply;
 	}
 }
