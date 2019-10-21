@@ -1,5 +1,5 @@
 // import the settings for the css prefix
-import settings from "./../../../../../node_modules/carbon-components/src/globals/js/settings";
+import settings from "carbon-components/src/globals/js/settings";
 
 // Functions
 export const makeChartID = chartType => `${chartType}-chart-holder`;
