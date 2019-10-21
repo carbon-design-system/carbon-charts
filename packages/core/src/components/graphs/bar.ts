@@ -8,7 +8,10 @@ export class Bar extends Component {
 		const options = this.model.getOptions();
 
 		if (!mainXAxis.scale.step) {
-			return options.bars.maxWidth;
+			return Math.min(
+				options.bars.maxWidth,
+				(5 / mainXAxis.scale.ticks().length) * options.bars.maxWidth
+			);
 		}
 
 		return Math.min(
