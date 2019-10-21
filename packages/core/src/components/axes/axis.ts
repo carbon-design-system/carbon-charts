@@ -272,17 +272,28 @@ export class Axis extends Component {
 				.call(axis);
 		}
 
-		if (scale.step &&
-			(axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP)) {
-			const textNodes = axisRef.selectAll("g.tick text").nodes();
+		if (axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP) {
+			if (scale.step) {
+				const textNodes = axisRef.selectAll("g.tick text").nodes();
 
-			// If any ticks are any larger than the scale step size
-			if (textNodes.some(textNode => DOMUtils.getSVGElementSize(textNode, { useBBox: true }).width >= scale.step())) {
-				axisRef.selectAll("g.tick text")
+				// If any ticks are any larger than the scale step size
+				if (textNodes.some(textNode => DOMUtils.getSVGElementSize(textNode, { useBBox: true }).width >= scale.step())) {
+					axisRef.selectAll("g.tick text")
+						.attr("transform", `rotate(45)`)
+						.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
+
+					return;
+				}
+			} else {
+				const estimatedTickSize = width / scale.ticks().length / 2;
+
+				if (estimatedTickSize < 30) {
+					axisRef.selectAll("g.tick text")
 					.attr("transform", `rotate(45)`)
 					.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
 
-				return;
+					return;
+				}
 			}
 
 			axisRef.selectAll("g.tick text")
