@@ -6,6 +6,9 @@ import { ModelStateKeys } from "../../interfaces";
 import { select, Selection } from "d3-selection";
 import { Tools } from "../../tools";
 
+// import the settings for the css prefix
+import settings from "./../../../../../node_modules/carbon-components/src/globals/js/settings";
+
 // MISC
 import ResizeObserver from "resize-observer-polyfill";
 
@@ -135,7 +138,7 @@ export class DOMUtils extends Service {
 		const { width, height } = this.model.getOptions();
 
 		// Add class to chart holder
-		select(this.model.get(ModelStateKeys.HOLDER)).classed("chart-holder", true);
+		select(this.model.get(ModelStateKeys.HOLDER)).classed(`${settings.prefix}--chart-holder`, true);
 
 		// If width exists in options
 		if (width) {
@@ -157,7 +160,7 @@ export class DOMUtils extends Service {
 	addSVGElement() {
 		const svg = select(this.model.get(ModelStateKeys.HOLDER))
 			.append("svg")
-			.classed("chart-svg", true)
+			.classed(`${settings.prefix}--chart-svg`, true)
 			.attr("height", "100%")
 			.attr("width", "100%");
 

@@ -1,3 +1,6 @@
+@import '~carbon-components/src/globals/scss/vars';
+$charts-prefix: "cc";
+
 // Carbon imports
 @import "@carbon/colors/scss/colors";
 // Carbon theme initializations
@@ -11,6 +14,6 @@
 @import "./type";
 @import "./chart-holder";
 
-svg.chart-svg {
+svg.#{$prefix}--#{$charts-prefix}--chart-svg {
 	overflow: visible;
 }

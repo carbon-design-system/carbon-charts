@@ -5,6 +5,10 @@ import { DOMUtils } from "../services";
 // D3 Imports
 import { select } from "d3-selection";
 
+// import the settings for the css prefix
+import settings from "./../../../../node_modules/carbon-components/src/globals/js/settings";
+const chartprefix = "cc";
+
 export class Component {
 	public type: string;
 
@@ -60,10 +64,10 @@ export class Component {
 		}
 
 		if (this.type) {
-			this.parent.classed(`cc-${this.type}`, true);
+			this.parent.classed(`${settings.prefix}--${chartprefix}--${this.type}`, true);
 
 			if (oldParent) {
-				oldParent.classed(`cc-${this.type}`, false);
+				oldParent.classed(`${settings.prefix}--${chartprefix}--${this.type}`, false);
 			}
 		}
 	}
@@ -74,7 +78,7 @@ export class Component {
 
 	getContainerSVG() {
 		if (this.type) {
-			return DOMUtils.appendOrSelect(this.parent, `g.cc-${this.type}`);
+			return DOMUtils.appendOrSelect(this.parent, `g.${settings.prefix}--${chartprefix}--${this.type}`);
 		}
 
 		return this.parent;

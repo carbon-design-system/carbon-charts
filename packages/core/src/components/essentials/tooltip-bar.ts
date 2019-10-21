@@ -7,6 +7,10 @@ import { TooltipPosition, TooltipTypes } from "./../../interfaces/enums";
 // Carbon position service
 import Position, { PLACEMENTS } from "@carbon/utils-position";
 
+// import the settings for the css prefix
+import settings from "./../../../../../node_modules/carbon-components/src/globals/js/settings";
+const chartprefix = "cc";
+
 // D3 Imports
 import { mouse, select } from "d3-selection";
 
@@ -14,7 +18,7 @@ export class TooltipBar extends Tooltip {
 	init() {
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
-		this.tooltip = DOMUtils.appendOrSelect(holder, "div.tooltip.chart-tooltip.cc-tooltip");
+		this.tooltip = DOMUtils.appendOrSelect(holder, `div.${settings.prefix}--${chartprefix}--tooltip`);
 
 		// Apply html content to the tooltip
 		const tooltipTextContainer = DOMUtils.appendOrSelect(this.tooltip, "div.content-box");

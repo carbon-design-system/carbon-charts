@@ -1,6 +1,6 @@
 @import "@carbon/motion/scss/motion.scss";
 
-g.cc-scatter {
+g.#{$prefix}--#{$charts-prefix}--scatter {
 	circle.dot.hovered {
 		fill-opacity: 1;
 		transition: all .1s;

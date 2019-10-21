@@ -3,7 +3,7 @@
 @import "@carbon/type/scss/font-face/mono";
 @import "@carbon/type/scss/font-face/sans";
 
-div.cc-tooltip {
+div.#{$prefix}--#{$charts-prefix}--tooltip {
 	background-color: $ui-02;
 	pointer-events: none;
 	transition: opacity .1s;
