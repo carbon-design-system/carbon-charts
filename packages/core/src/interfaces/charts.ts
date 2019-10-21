@@ -46,6 +46,10 @@ export interface BaseChartOptions {
 	 * Optional function to generate the stroke color based on datasetLabel, label, and/or value
 	 */
 	getStrokeColor?: (datasetLabel: any, label?: any, value?: any) => string;
+	/**
+	 * optional prefixing string for css classes (defaults to 'cc')
+	 */
+	prefix?: String;
 }
 
 /**

@@ -97,7 +97,8 @@ const chart: BaseChartOptions = {
 	resizable: true,
 	theme: ChartTheme.DEFAULT,
 	tooltip: baseTooltip,
-	legend
+	legend,
+	prefix: "cc"
 };
 
 /**

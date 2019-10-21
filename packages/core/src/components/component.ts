@@ -7,7 +7,7 @@ import { select } from "d3-selection";
 
 // import the settings for the css prefix
 import settings from "carbon-components/src/globals/js/settings";
-const chartprefix = "cc";
+import { Tools } from "src/tools";
 
 export class Component {
 	public type: string;
@@ -64,6 +64,7 @@ export class Component {
 		}
 
 		if (this.type) {
+			const chartprefix = Tools.getProperty(this.model.getOptions(), "prefix");
 			this.parent.classed(`${settings.prefix}--${chartprefix}--${this.type}`, true);
 
 			if (oldParent) {
@@ -78,6 +79,7 @@ export class Component {
 
 	getContainerSVG() {
 		if (this.type) {
+			const chartprefix = Tools.getProperty(this.model.getOptions(), "prefix");
 			return DOMUtils.appendOrSelect(this.parent, `g.${settings.prefix}--${chartprefix}--${this.type}`);
 		}
 
