@@ -1,4 +1,4 @@
-.cc-grid {
+.#{$prefix}--#{$charts-prefix}--grid {
 	rect.chart-grid-backdrop {
 		@if $carbon--theme == $carbon--theme--g90 {
 			fill: $carbon--gray-100;

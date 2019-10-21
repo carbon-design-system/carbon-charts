@@ -1,4 +1,4 @@
-.cc-horizontal-zero-line {
+.#{$prefix}--#{$charts-prefix}--horizontal-zero-line {
 	line.domain {
 		stroke: $ui-04;
 	}

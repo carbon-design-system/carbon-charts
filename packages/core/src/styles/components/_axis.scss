@@ -1,7 +1,7 @@
 @import "@carbon/type/scss/type";
 @import "@carbon/type/scss/font-face/sans";
 
-.cc-axes {
+.#{$prefix}--#{$charts-prefix}--axes {
 	g.axis {
 		g.tick {
 			text {
