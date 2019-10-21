@@ -1,13 +1,14 @@
 // Internal Imports
 import { ChartModel } from "../model";
 import { DOMUtils } from "../services";
+import { Tools } from "../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
 
 // import the settings for the css prefix
 import settings from "carbon-components/src/globals/js/settings";
-import { Tools } from "src/tools";
+
 
 export class Component {
 	public type: string;
