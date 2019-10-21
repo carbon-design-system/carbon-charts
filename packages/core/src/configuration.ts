@@ -87,7 +87,7 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartToolt
 export const axes: AxesOptions = { };
 
 export const timeScale: TimeScaleOptions = {
-	addSpaceOnEdges: false
+	addSpaceOnEdges: true
 };
 
 /**
