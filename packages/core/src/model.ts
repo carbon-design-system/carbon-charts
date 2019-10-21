@@ -64,10 +64,8 @@ export class ChartModel {
 		let scaleType;
 		if (Tools.getProperty(axes, "top", "type")) {
 			scaleType = axes.top.type;
-		} else {
-			if (Tools.getProperty(axes, "bottom", "type")) {
-				scaleType = axes.bottom.type;
-			}
+		} else if (Tools.getProperty(axes, "bottom", "type")) {
+			scaleType = axes.bottom.type;
 		}
 
 		return scaleType;
