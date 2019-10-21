@@ -6,7 +6,7 @@ import { DOMUtils } from "../services";
 import { select } from "d3-selection";
 
 // import the settings for the css prefix
-import settings from "./../../../../node_modules/carbon-components/src/globals/js/settings";
+import settings from "carbon-components/src/globals/js/settings";
 const chartprefix = "cc";
 
 export class Component {

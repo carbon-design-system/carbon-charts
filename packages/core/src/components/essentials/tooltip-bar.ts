@@ -8,7 +8,7 @@ import { TooltipPosition, TooltipTypes } from "./../../interfaces/enums";
 import Position, { PLACEMENTS } from "@carbon/utils-position";
 
 // import the settings for the css prefix
-import settings from "./../../../../../node_modules/carbon-components/src/globals/js/settings";
+import settings from "carbon-components/src/globals/js/settings";
 const chartprefix = "cc";
 
 // D3 Imports
