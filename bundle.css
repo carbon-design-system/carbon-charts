@@ -591,6 +591,9 @@ body.carbon--dark-g10 {
   fill: #f3f3f3;
   stroke: #f3f3f3; }
 
+.carbon--theme--g100 .chart-tooltip {
+  color: #282828; }
+
 .carbon--theme--g100 .legend-btn text {
   color: #bebebe; }
 
@@ -627,6 +630,9 @@ body.carbon--dark-g10 {
   .carbon--theme--g90 text.axis-label, .carbon--theme--g90 text.chart-title {
     fill: #f3f3f3;
     stroke: #f3f3f3; }
+
+.carbon--theme--g90 .chart-tooltip {
+  color: #3d3d3d; }
 
 .carbon--theme--g90 .legend-btn text {
   color: #bebebe; }
@@ -665,6 +671,9 @@ body.carbon--dark-g10 {
     fill: #171717;
     stroke: #171717; }
 
+.carbon--theme--g10 .chart-tooltip {
+  color: #171717; }
+
 .carbon--theme--g10 .legend-btn text {
   color: #565656; }
 
@@ -702,6 +711,9 @@ body.carbon--dark-g10 {
   .carbon--theme--white text.axis-label, .carbon--theme--white text.chart-title {
     fill: #171717;
     stroke: #171717; }
+
+.carbon--theme--white .chart-tooltip {
+  color: #171717; }
 
 .carbon--theme--white .legend-btn text {
   color: #565656; }
@@ -891,7 +903,7 @@ div.chart-overlay {
     div.chart-overlay div.ccharts-overlay-content div.bx--loading {
       margin: auto; }
 
-.tooltip {
+.chart-tooltip {
   background-color: #fff;
   border: 1px solid #dfe3e6;
   padding: 0.25rem 0.5rem;
@@ -908,13 +920,13 @@ div.chart-overlay {
   word-wrap: break-word;
   z-index: 1059;
   pointer-events: none; }
-  .tooltip p {
+  .chart-tooltip p {
     margin: 0;
     font-size: 12px; }
-    .tooltip p.bignum {
+    .chart-tooltip p.bignum {
       font-size: 19px;
       font-weight: 600; }
-  .tooltip b {
+  .chart-tooltip b {
     font-weight: 600; }
 
 #carbon-charts-patterns svg {
