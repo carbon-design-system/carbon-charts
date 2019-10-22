@@ -2,10 +2,6 @@
 @import "@carbon/type/scss/font-face/mono";
 @import "@carbon/type/scss/font-face/sans";
 
-@include carbon--type-reset();
-@include carbon--font-face-mono();
-@include carbon--font-face-sans();
-
 svg.#{$prefix}--#{$charts-prefix}--chart-svg {
 	font-family: carbon--font-family("sans");
 
