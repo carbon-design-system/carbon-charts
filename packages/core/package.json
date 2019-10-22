@@ -44,12 +44,6 @@
   "author": "IBM",
   "license": "Apache-2.0",
   "dependencies": {
-    "@carbon/colors": "10.4.0",
-    "@carbon/import-once": "10.3.0",
-    "@carbon/layout": "10.5.0",
-    "@carbon/motion": "10.4.0",
-    "@carbon/themes": "10.4.0",
-    "@carbon/type": "10.5.1",
     "@carbon/utils-position": "1.1.1",
     "babel-polyfill": "6.26.0",
     "carbon-components": "10.5.0",
@@ -99,7 +93,13 @@
     "url-loader": "0.6.2",
     "webpack": "4.41.0",
     "webpack-cli": "3.3.9",
-    "webpack-dev-server": "3.7.0"
+	"webpack-dev-server": "3.7.0",
+	"@carbon/layout": "10.5.0",
+    "@carbon/motion": "10.4.0",
+    "@carbon/themes": "10.4.0",
+	"@carbon/type": "10.5.1",
+	"@carbon/colors": "10.4.0",
+	"@carbon/import-once": "10.3.0"
   },
   "publishConfig": {
     "access": "public"
