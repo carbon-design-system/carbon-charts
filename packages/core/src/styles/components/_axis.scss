@@ -1,5 +1,5 @@
-@import "@carbon/type/scss/type";
-@import "@carbon/type/scss/font-face/sans";
+@import "./vendor/@carbon/type/scss/type";
+@import "./vendor/@carbon/type/scss/font-face/sans";
 
 .#{$prefix}--#{$charts-prefix}--axes {
 	g.axis {

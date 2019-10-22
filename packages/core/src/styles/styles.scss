@@ -1,10 +1,10 @@
-@import '~carbon-components/src/globals/scss/vars';
+@import 'carbon-components/src/globals/scss/vars';
 $charts-prefix: "cc";
 
 // Carbon imports
-@import "@carbon/colors/scss/colors";
+@import "./vendor/@carbon/colors/scss/colors";
 // Carbon theme initializations
-@import "@carbon/themes/scss/themes";
+@import "./vendor/@carbon/themes/scss/themes";
 @include carbon--theme();
 
 // Internal
