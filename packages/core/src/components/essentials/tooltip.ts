@@ -12,7 +12,7 @@ import settings from "carbon-components/src/globals/js/settings";
 
 // D3 Imports
 import { select, mouse, event } from "d3-selection";
-import { TooltipTypes } from "../../interfaces";
+import { TooltipTypes, ScaleTypes } from "../../interfaces";
 
 export class Tooltip extends Component {
 	type = "tooltip";
@@ -63,7 +63,7 @@ export class Tooltip extends Component {
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
-		this.services.events.getDocumentFragment().addEventListener("hide-tooltip", e => {
+		this.services.events.getDocumentFragment().addEventListener("hide-tooltip", () => {
 			this.tooltip.classed("hidden", true);
 		});
 	}
@@ -80,8 +80,9 @@ export class Tooltip extends Component {
 		const label = dataVal.datasetLabel ? dataVal.datasetLabel : dataVal.label;
 
 		return `<div class="datapoint-tooltip">
-			<p class="label">${label}</p>
-			<p class="value">${formattedValue}</p></div>`;
+					<p class="label">${label}</p>
+					<p class="value">${formattedValue}</p>
+				</div>`;
 	}
 
 	getMultilineTooltipHTML(data: any) {
@@ -90,19 +91,30 @@ export class Tooltip extends Component {
 		// sort them so they are in the same order as the graph
 		points.sort((a, b) => b.value - a.value);
 
+		// tells us which value to use
+		const scaleType = this.model.getScaleYType();
+
 		return  "<ul class='multi-tooltip'>" +
 			points.map(datapoint => {
+				// check if the datapoint has multiple values associates (multiple axes)
+				let datapointValue = datapoint.value;
+				if (datapointValue instanceof Object) {
+					// scale type determines which value we care about since it should align with the scale data
+					datapointValue = scaleType === ScaleTypes.TIME ? datapoint.value.date : datapoint.value.value;
+				}
 				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-				this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
+				this.model.getOptions().tooltip.valueFormatter(datapointValue) : datapointValue.toLocaleString("en");
 
-				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
+				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label);
 
-				return `<li><div class="datapoint-tooltip">
-					<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
-					<p class="label">${datapoint.datasetLabel}</p>
-					<p class="value">${formattedValue}</p>
-					</div></li>`;
-			}).join("") + "</ul>";
+				return `<li>
+							<div class="datapoint-tooltip">
+								<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
+								<p class="label">${datapoint.datasetLabel}</p>
+								<p class="value">${formattedValue}</p>
+							</div>
+					</li>`;
+				}).join("") + "</ul>";
 	}
 
 	render() {

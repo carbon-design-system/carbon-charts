@@ -17,7 +17,7 @@ export class Axes extends Service {
 		}
 	}
 
-	// Find the main y-axis out of the 2 x-axis on the chart (when 2D axis is used)
+	// Find the main y-axis out of the 2 y-axis on the chart (when 2D axis is used)
 	getMainYAxis() {
 		const primaryAxis = this.model.get(AxisTypes.PRIMARY);
 		const secondaryAxis = this.model.get(AxisTypes.SECONDARY);
@@ -40,7 +40,7 @@ export class Axes extends Service {
 	}
 
 	/** Uses the primary Y Axis to get data items associated with that value.  */
-	getDataWithDomain(domainValue) {
+	getDataFromDomain(domainValue) {
 		const displayData = this.model.getDisplayData();
 		const activePoints = [];
 		const scaleType = this.model.getScaleYType();
