@@ -56,7 +56,7 @@ export class TooltipBar extends Tooltip {
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
-		this.services.events.getDocumentFragment().addEventListener("hide-tooltip", e => {
+		this.services.events.getDocumentFragment().addEventListener("hide-tooltip", () => {
 			this.tooltip.classed("hidden", true);
 		});
 	}
@@ -127,13 +127,21 @@ export class TooltipBar extends Tooltip {
 
 				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
 
-				return `<li><div class="datapoint-tooltip">
-					<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
-					<p class="label">${datapoint.datasetLabel}</p>
-					<p class="value">${formattedValue}</p>
-					</div></li>`;
-			}).join("") +
-			`<li><div class='total-val'><p class='label'>Total</p><p class='value'>${total}</p></div></li></ul>`;
+				return `<li>
+							<div class="datapoint-tooltip">
+								<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
+								<p class="label">${datapoint.datasetLabel}</p>
+								<p class="value">${formattedValue}</p>
+							</div>
+						</li>`;
+					}).join("") +
+					`<li>
+						<div class='total-val'>
+							<p class='label'>Total</p>
+							<p class='value'>${total}</p>
+						</div>
+					</li>
+				</ul>`;
 	}
 
 	positionTooltip(positionOverride?: any) {
