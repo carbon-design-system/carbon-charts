@@ -17,7 +17,7 @@ describe("title component", () => {
 
 			const chartEventsFragment = this._chart.services.events.getDocumentFragment();
 			const renderCb = () => {
-				const title = select("g.cc-title");
+				const title = select("g.bx--cc--title");
 
 				// Remove event listener for when chart render is finished
 				chartEventsFragment.removeEventListener("render-finished", renderCb);

@@ -65,7 +65,7 @@ export class Component {
 		}
 
 		if (this.type) {
-			const chartprefix = Tools.getProperty(this.model.getOptions(), "prefix");
+			const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
 			this.parent.classed(`${settings.prefix}--${chartprefix}--${this.type}`, true);
 
 			if (oldParent) {
@@ -80,7 +80,7 @@ export class Component {
 
 	getContainerSVG() {
 		if (this.type) {
-			const chartprefix = Tools.getProperty(this.model.getOptions(), "prefix");
+			const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
 			return DOMUtils.appendOrSelect(this.parent, `g.${settings.prefix}--${chartprefix}--${this.type}`);
 		}
 
