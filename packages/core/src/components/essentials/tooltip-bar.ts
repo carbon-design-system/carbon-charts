@@ -17,7 +17,7 @@ export class TooltipBar extends Tooltip {
 	init() {
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
-		const chartprefix = Tools.getProperty(this.model.getOptions(), "prefix");
+		const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
 		this.tooltip = DOMUtils.appendOrSelect(holder, `div.${settings.prefix}--${chartprefix}--tooltip`);
 
 		// Apply html content to the tooltip
