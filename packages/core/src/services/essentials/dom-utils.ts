@@ -1,6 +1,5 @@
 // Internal Imports
 import { Service } from "../service";
-import { ModelStateKeys } from "../../interfaces";
 
 // D3 Imports
 import { select, Selection } from "d3-selection";
@@ -134,11 +133,11 @@ export class DOMUtils extends Service {
 	}
 
 	styleHolderElement() {
-		const holderElement = this.model.get(ModelStateKeys.HOLDER) as HTMLElement;
+		const holderElement = this.getHolder() as HTMLElement;
 		const { width, height } = this.model.getOptions();
 
 		// Add class to chart holder
-		select(this.model.get(ModelStateKeys.HOLDER)).classed(`${settings.prefix}--chart-holder`, true);
+		select(this.getHolder()).classed(`${settings.prefix}--chart-holder`, true);
 
 		// If width exists in options
 		if (width) {
@@ -154,12 +153,12 @@ export class DOMUtils extends Service {
 	}
 
 	getHolder() {
-		return this.model.get(ModelStateKeys.HOLDER);
+		return this.model.get("holder");
 	}
 
 	addSVGElement() {
 		const chartsprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
-		const svg = select(this.model.get(ModelStateKeys.HOLDER))
+		const svg = select(this.getHolder())
 			.append("svg")
 			.classed(`${settings.prefix}--${chartsprefix}--chart-svg`, true)
 			.attr("height", "100%")
@@ -173,7 +172,7 @@ export class DOMUtils extends Service {
 	}
 
 	addResizeListener() {
-		const holder = this.model.get(ModelStateKeys.HOLDER);
+		const holder = this.getHolder();
 
 		if (!holder) {
 			return;
