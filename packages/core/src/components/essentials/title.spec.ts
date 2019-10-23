@@ -1,5 +1,9 @@
 import { TestEnvironment } from "../../tests/index";
 
+// import the settings for the css prefixes
+import settings from "carbon-components/src/globals/js/settings";
+import { options } from "./../../configuration";
+
 import { select } from "d3-selection";
 
 describe("title component", () => {
@@ -7,17 +11,17 @@ describe("title component", () => {
 		const testEnvironment = new TestEnvironment();
 		testEnvironment.render();
 
-		this._chart = testEnvironment.getChartReference();
-		this._testEnvironment = testEnvironment;
+		this.chart = testEnvironment.getChartReference();
+		this.testEnvironment = testEnvironment;
 	});
 
 	describe("content", () => {
 		it("should match text provided in options", function(done) {
 			const sampleTitle = "My chart";
 
-			const chartEventsFragment = this._chart.services.events.getDocumentFragment();
+			const chartEventsFragment = this.chart.services.events.getDocumentFragment();
 			const renderCb = () => {
-				const title = select("g.bx--cc--title");
+				const title = select(`g.${settings.prefix}--${options.chart.style.prefix}--title`);
 
 				// Remove event listener for when chart render is finished
 				chartEventsFragment.removeEventListener("render-finished", renderCb);
