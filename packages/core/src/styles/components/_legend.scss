@@ -29,6 +29,7 @@ g.#{$prefix}--#{$charts-prefix}--legend {
 
 		text {
 			font-size: 12px;
+			font-family: carbon--font-family("sans-condensed");
 			fill: $text-02;
 		}
 	}
