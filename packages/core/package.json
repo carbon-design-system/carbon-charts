@@ -8,7 +8,8 @@
     "demo:server": "webpack-dev-server --config webpack.config.js --watch",
     "demo:build": "webpack --config webpack.config.js && yarn run docs:build",
     "docs:build": "typedoc --out ./demo/bundle/documentation ./src/index.ts",
-    "build": "bash build.sh",
+	"build": "bash build.sh",
+	"postinstall": "bash build-vendor.sh",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "karma start --single-run",
     "test:watch": "karma start --no-single-run",
@@ -43,12 +44,6 @@
   "author": "IBM",
   "license": "Apache-2.0",
   "dependencies": {
-    "@carbon/colors": "10.4.0",
-    "@carbon/import-once": "10.3.0",
-    "@carbon/layout": "10.5.0",
-    "@carbon/motion": "10.4.0",
-    "@carbon/themes": "10.4.0",
-    "@carbon/type": "10.5.1",
     "@carbon/utils-position": "1.1.1",
     "babel-polyfill": "6.26.0",
     "carbon-components": "10.5.0",
@@ -98,7 +93,13 @@
     "url-loader": "0.6.2",
     "webpack": "4.41.0",
     "webpack-cli": "3.3.9",
-    "webpack-dev-server": "3.7.0"
+	"webpack-dev-server": "3.7.0",
+	"@carbon/layout": "10.5.0",
+    "@carbon/motion": "10.4.0",
+    "@carbon/themes": "10.4.0",
+	"@carbon/type": "10.5.1",
+	"@carbon/colors": "10.4.0",
+	"@carbon/import-once": "10.3.0"
   },
   "publishConfig": {
     "access": "public"

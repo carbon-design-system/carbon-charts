@@ -1,7 +1,7 @@
-@import "@carbon/motion/scss/motion.scss";
-@import "@carbon/type/scss/type";
-@import "@carbon/type/scss/font-face/mono";
-@import "@carbon/type/scss/font-face/sans";
+@import "./../vendor/@carbon/motion/scss/motion.scss";
+@import "./../vendor/@carbon/type/scss/type";
+@import "./../vendor/@carbon/type/scss/font-face/mono";
+@import "./../vendor/@carbon/type/scss/font-face/sans";
 
 div.#{$prefix}--#{$charts-prefix}--tooltip {
 	background-color: $ui-02;

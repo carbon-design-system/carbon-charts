@@ -21,8 +21,8 @@ describe("legend component", () => {
 			const renderCb = () => {
 				// Remove render event listener
 				chartEventsFragment.removeEventListener("render-finished", renderCb);
-				
-				const numberOfLegendItems = select("g.cc-legend").selectAll("g.legend-item").size();
+
+				const numberOfLegendItems = select("g.bx--cc--legend").selectAll("g.legend-item").size();
 				expect(numberOfLegendItems).toEqual(numberOfDatasets);
 
 				done();

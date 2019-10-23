@@ -47,9 +47,14 @@ export interface BaseChartOptions {
 	 */
 	getStrokeColor?: (datasetLabel: any, label?: any, value?: any) => string;
 	/**
-	 * optional prefixing string for css classes (defaults to 'cc')
+	 * stylesheet options
 	 */
-	prefix?: String;
+	style?: {
+		/**
+		 * optional prefixing string for css classes (defaults to 'cc')
+		 */
+		prefix?: String;
+	};
 }
 
 /**
