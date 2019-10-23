@@ -34,21 +34,19 @@ export class TooltipBar extends Tooltip {
 				// if there is a provided tooltip HTML function
 				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
 					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement));
+				} else if (e.detail.multidata) {
+					// multi tooltip
+					tooltipTextContainer.html(this.getMultilineTooltipHTML(e.detail.multidata));
+					// Position the tooltip
+					this.positionTooltip();
 				} else {
-					if (e.detail.multidata) {
-						// multi tooltip
-						tooltipTextContainer.html(this.getMultilineTooltipHTML(e.detail.multidata));
-						// Position the tooltip
-						this.positionTooltip();
-					} else {
-						const data = e.detail.hoveredElement.datum();
-						tooltipTextContainer.html(this.getTooltipHTML(data));
+					const data = e.detail.hoveredElement.datum();
+					tooltipTextContainer.html(this.getTooltipHTML(data));
 
-						const position = this.getTooltipPosition(hoveredElement);
+					const position = this.getTooltipPosition(hoveredElement);
 
-						// Position the tooltip relative to the bars
-						this.positionTooltip(position);
-					}
+					// Position the tooltip relative to the bars
+					this.positionTooltip(position);
 				}
 				// Fade in
 				this.tooltip.classed("hidden", false);
@@ -134,7 +132,7 @@ export class TooltipBar extends Tooltip {
 								<p class="value">${formattedValue}</p>
 							</div>
 						</li>`;
-					}).join("") +
+			}).join("") +
 					`<li>
 						<div class='total-val'>
 							<p class='label'>Total</p>
