@@ -5,6 +5,7 @@ import {
 	ScatterChartOptions,
 	LineChartOptions,
 	BarChartOptions,
+	StackedBarChartOptions,
 	PieChartOptions,
 	DonutChartOptions,
 	// Components
@@ -16,7 +17,8 @@ import {
 	BarTooltipOptions,
 	LegendOptions,
 	ChartTheme,
-	LegendPositions
+	LegendPositions,
+	StackedBarOptions,
 } from "./interfaces/index";
 
 /*
@@ -145,8 +147,10 @@ const groupedBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
 /**
  * options specific to stacked bar charts
  */
-const stackedBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
-
+const stackedBarChart: StackedBarChartOptions = Tools.merge({}, baseBarChart, {
+	bars: Tools.merge({}, baseBarChart.bars, {
+		dividerSize: 1.5
+	} as StackedBarOptions)
 } as BarChartOptions);
 
 /**

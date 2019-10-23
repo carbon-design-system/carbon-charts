@@ -114,3 +114,12 @@ export interface GridOptions {
 	};
 	strokeColor?: string;
 }
+
+export interface BarOptions {
+	width?: number;
+	maxWidth?: number;
+}
+
+export interface StackedBarOptions extends BarOptions {
+	dividerSize?: number;
+}

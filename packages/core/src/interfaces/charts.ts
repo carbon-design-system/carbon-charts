@@ -1,5 +1,5 @@
 import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
-import { AxisTooltipOptions, BarTooltipOptions } from "./components";
+import { AxisTooltipOptions, BarTooltipOptions, BarOptions, StackedBarOptions } from "./components";
 import { ChartTheme } from "./enums";
 
 /**
@@ -70,11 +70,15 @@ export interface AxisChartOptions extends BaseChartOptions {
  * options specific to bar charts
  */
 export interface BarChartOptions extends AxisChartOptions {
-	bars?: {
-		width?: number;
-		maxWidth?: number;
-	};
+	bars?: BarOptions;
 	tooltip?: BarTooltipOptions;
+}
+
+/**
+ * options specific to stacked bar charts
+ */
+export interface StackedBarChartOptions extends BarChartOptions {
+	bars?: StackedBarOptions;
 }
 
 /**
