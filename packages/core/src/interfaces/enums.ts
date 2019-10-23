@@ -87,17 +87,6 @@ export enum LayoutGrowth {
 	STRETCH = "stretch",
 }
 
-
-/**
- * enum of all possible layout growth values
- */
-export enum ModelStateKeys {
-	/*
-	 * DOM Elements
-	 */
-	HOLDER = "holder"
-}
-
 /**
  * enum of all possible callout directions
  */

@@ -3,9 +3,6 @@ import { Service } from "../service";
 import * as Configuration from "../../configuration";
 import { Tools } from "../../tools";
 
-// // Carbon motion package
-// import { easings, motion } from "@carbon/motion";
-
 // D3 Imports
 import { Transition, transition } from "d3-transition";
 
