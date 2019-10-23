@@ -15,7 +15,8 @@ import {
 	AxisTooltipOptions,
 	BarTooltipOptions,
 	LegendOptions,
-	ChartTheme
+	ChartTheme,
+	LegendPositions
 } from "./interfaces/index";
 
 /*
@@ -28,6 +29,7 @@ import {
  * Legend options
  */
 export const legend: LegendOptions = {
+	position: LegendPositions.BOTTOM,
 	clickable: true,
 	items: {
 		status: {
