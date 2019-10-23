@@ -100,7 +100,9 @@ const chart: BaseChartOptions = {
 	theme: ChartTheme.DEFAULT,
 	tooltip: baseTooltip,
 	legend,
-	prefix: "cc"
+	style: {
+		prefix: "cc"
+	}
 };
 
 /**

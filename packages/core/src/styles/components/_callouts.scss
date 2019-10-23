@@ -1,3 +1,5 @@
-g.callouts {
-	stroke: $text-02;
+.#{$prefix}--#{$charts-prefix}--chart-svg {
+	g.callouts {
+		stroke: $text-02;
+	}
 }

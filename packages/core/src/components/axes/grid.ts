@@ -104,7 +104,7 @@ export class Grid extends Component {
 			lineSpacing = +Tools.getTranslationValues(line2).tx;
 		} else if (!line2) {
 			// we need to use the chart right bounds in case there isnt a domain axis
-			const gridElement = svg.select(".cc-grid rect.chart-grid-backdrop").node();
+			const gridElement = svg.select("rect.chart-grid-backdrop").node();
 			const width = DOMUtils.getSVGElementSize(gridElement).width;
 
 			lineSpacing = width - +Tools.getTranslationValues(line1).tx;
@@ -132,8 +132,8 @@ export class Grid extends Component {
 
 			// threshold for when to display a gridline tooltip
 			const bounds = {
-				min: +translations.tx - threshold,
-				max: +translations.tx + threshold };
+				min: Number(translations.tx) - threshold,
+				max: Number(translations.tx) + threshold };
 
 			return bounds.min <= position[0] && position[0] <= bounds.max;
 		});
@@ -174,7 +174,7 @@ export class Grid extends Component {
 
 			// use the selected gridline to get the data with associated domain
 			activeGridline.each(function(d) {
-				highlightItems = self.services.axes.getDataWithDomain(d);
+				highlightItems = self.services.axes.getDataFromDomain(d);
 			});
 
 			self.services.events.dispatchEvent("show-tooltip", {

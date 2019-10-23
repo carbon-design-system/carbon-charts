@@ -12,7 +12,7 @@ import {
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: "ibm-base-chart, n-base-chart",
+	selector: "ibm-base-chart",
 	template: `
 		<div #nChart class="ibm-chart-container">
 		</div>
@@ -84,15 +84,15 @@ export class BaseChart implements AfterViewInit, OnInit {
 	ngOnInit() {
 		// Width prop is mandatory for the wrappers
 		if (this.width) {
-			this._options.width = this.width;
-		} else if (!this._options.width) {
+			this.options.width = this.width;
+		} else if (!this.options.width) {
 			console.error("Missing `width` Input!");
 		}
 
 		// Height prop is mandatory for the wrappers
 		if (this.height) {
-			this._options.height = this.height;
-		} else if (!this._options.height) {
+			this.options.height = this.height;
+		} else if (!this.options.height) {
 			console.error("Missing `height` Input!");
 		}
 	}
