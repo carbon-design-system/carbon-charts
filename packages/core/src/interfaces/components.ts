@@ -1,4 +1,4 @@
-import { LayoutGrowth } from "./enums";
+import { LayoutGrowth, LegendPositions } from "./enums";
 import { Component } from "../components/component";
 
 /**
@@ -28,6 +28,7 @@ export interface LayoutComponentChild {
  * customize the legend component
  */
 export interface LegendOptions {
+	position?: LegendPositions;
 	/**
 	 * the clickability of legend items
 	 */
