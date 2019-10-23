@@ -136,7 +136,15 @@ export class StackedBar extends Bar {
 				.attr("y", (d, i) => this.services.axes.getYValue(d[1], i))
 				.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
 				.attr("height", (d, i) => {
-					return this.services.axes.getYValue(d[0]) - this.services.axes.getYValue(d[1]);
+					const { datasetLabel } = d;
+					const datasetLabelIndex = stackKeys.indexOf(datasetLabel);
+					const height = this.services.axes.getYValue(d[0]) - this.services.axes.getYValue(d[1]);
+
+					if (datasetLabelIndex > 0 && height >= options.bars.dividerSize) {
+						return height - options.bars.dividerSize;
+					}
+
+					return height;
 				})
 				.attr("opacity", 1);
 
@@ -177,9 +185,16 @@ export class StackedBar extends Bar {
 				const stackedData = itemData["data"];
 				const sharedLabel = stackedData["label"];
 
+				// Remove the label field
+				delete stackedData["label"];
+
 				// filter out the label from the datasets' and associated values
-				const activePoints =  Object.keys(stackedData).filter(key => { return  key !== "label"; })
-				.map((key) => { return {datasetLabel: key, value: stackedData[key], label: sharedLabel }; });
+				const activePoints =  Object.keys(stackedData)
+					.map(key => ({
+						datasetLabel: key,
+						value: stackedData[key],
+						label: sharedLabel
+					}));
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
