@@ -123,9 +123,7 @@ export class Scatter extends Component {
 				}
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement
-				});
+				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
 			});
 	}
 

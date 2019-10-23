@@ -315,9 +315,7 @@ export class Pie extends Component {
 				self.services.events.dispatchEvent("pie-slice-mouseout", hoveredElement);
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement
-				});
+				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
 			})
 			.on("click", d => self.services.events.dispatchEvent("pie-slice-click", d));
 	}
