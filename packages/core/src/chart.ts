@@ -82,27 +82,27 @@ export class Chart {
 
 
 	update(animate = true) {
-		if (this.components) {
-			// Render all components
-			this.components.forEach(component => component.render(animate));
-
-			// Asynchronously dispatch a "render-finished" event
-			// This is needed because of d3-transitions
-			// Since at the start of the transition
-			// Elements do not hold their final size or position
-			const pendingTransitions = this.services.transitions.getPendingTransitions();
-			const promises = Object.keys(pendingTransitions)
-				.map(transitionID => {
-					const transition = pendingTransitions[transitionID];
-					return transition.end()
-						.catch(e => e); // Skip rejects since we don't care about those;
-				});
-
-			Promise.all(promises)
-				.then(() => {
-					this.services.events.dispatchEvent("render-finished");
-				});
+		if (!this.components) {
+			return;
 		}
+
+		// Render all components
+		this.components.forEach(component => component.render(animate));
+
+		// Asynchronously dispatch a "render-finished" event
+		// This is needed because of d3-transitions
+		// Since at the start of the transition
+		// Elements do not hold their final size or position
+		const pendingTransitions = this.services.transitions.getPendingTransitions();
+		const promises = Object.keys(pendingTransitions)
+			.map(transitionID => {
+				const transition = pendingTransitions[transitionID];
+				return transition.end()
+					.catch(e => e); // Skip rejects since we don't care about those;
+			});
+
+		Promise.all(promises)
+			.then(() => this.services.events.dispatchEvent("render-finished"));
 	}
 
 	destroy() {

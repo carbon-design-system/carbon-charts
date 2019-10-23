@@ -47,7 +47,7 @@ const initializeThemeSelector = () => {
 
 		// Update selected dropdown item
 		const dropdownDefaultOption = document.querySelector("div.theme-selector li.bx--dropdown-text");
-		const selectedOption = dropdownOptions.find(dO => dO.parentNode.getAttribute("data-value") === themeName);
+		const selectedOption = dropdownOptions.find(option => option.parentNode.getAttribute("data-value") === themeName);
 		dropdownDefaultOption.innerHTML = selectedOption.innerText;
 	}
 };
