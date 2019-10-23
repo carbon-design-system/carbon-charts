@@ -102,9 +102,9 @@ export class Axis extends Component {
 					// Save both the total value and the minimum
 					return m.concat(totalValue, min(correspondingValues));
 				}, [])
-				// Currently stack layouts in the library
-				// Only support positive values
-				.concat(0)
+					// Currently stack layouts in the library
+					// Only support positive values
+					.concat(0)
 			);
 		} else {
 			// Get all the chart's data values in a flat array
@@ -228,7 +228,7 @@ export class Axis extends Component {
 				axisRef.attr("transform", `translate(${width - this.margins.right}, 0)`);
 				break;
 			case AxisPositions.TOP:
-		        axisRef.attr("transform", `translate(0, ${this.margins.top})`);
+				axisRef.attr("transform", `translate(0, ${this.margins.top})`);
 				break;
 		}
 
@@ -289,15 +289,15 @@ export class Axis extends Component {
 
 				if (estimatedTickSize < 30) {
 					axisRef.selectAll("g.tick text")
-					.attr("transform", `rotate(45)`)
-					.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
+						.attr("transform", `rotate(45)`)
+						.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
 
 					return;
 				}
 			}
 
 			axisRef.selectAll("g.tick text")
-				.attr("transform",  null)
+				.attr("transform", null)
 				.style("text-anchor", null);
 		}
 	}

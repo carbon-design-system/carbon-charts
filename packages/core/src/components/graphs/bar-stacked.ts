@@ -185,9 +185,16 @@ export class StackedBar extends Bar {
 				const stackedData = itemData["data"];
 				const sharedLabel = stackedData["label"];
 
+				// Remove the label field
+				delete stackedData["label"];
+
 				// filter out the label from the datasets' and associated values
-				const activePoints =  Object.keys(stackedData).filter(key => { return  key !== "label"; })
-				.map((key) => { return {datasetLabel: key, value: stackedData[key], label: sharedLabel }; });
+				const activePoints =  Object.keys(stackedData)
+					.map(key => ({
+						datasetLabel: key,
+						value: stackedData[key],
+						label: sharedLabel
+					}));
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
