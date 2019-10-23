@@ -163,7 +163,6 @@ export const lineData = {
 				42100
 			]
 		},
-
 		{
 			label: "Dataset 4 long name",
 			backgroundColors: [colors[3]],
