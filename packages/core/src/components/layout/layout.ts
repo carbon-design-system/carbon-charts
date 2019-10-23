@@ -39,6 +39,13 @@ export class LayoutComponent extends Component {
 
 		this._instanceCount = LayoutComponent.instanceCount++;
 
+		// Pass children data to the hierarchy layout
+		// And calculate sum of sizes
+		const directionIsReversed = (this.configs.direction === LayoutDirection.ROW_REVERSE) ||
+			(this.configs.direction === LayoutDirection.COLUMN_REVERSE);
+		if (directionIsReversed) {
+			this.children = this.children.reverse();
+		}
 		this.init();
 	}
 
@@ -82,13 +89,8 @@ export class LayoutComponent extends Component {
 		const svg = this.parent;
 		const { width, height } = DOMUtils.getSVGElementSize(svg, { useAttrs: true });
 
-		// Pass children data to the hierarchy layout
-		// And calculate sum of sizes
-		const directionIsReversed = (this.configs.direction === LayoutDirection.ROW_REVERSE) ||
-			(this.configs.direction === LayoutDirection.COLUMN_REVERSE);
-		const hierarchyChildren = directionIsReversed ? this.children.reverse() : this.children;
 		let root = hierarchy({
-			children: hierarchyChildren
+			children: this.children
 		})
 			.sum((d: any) => d.size);
 
@@ -164,7 +166,7 @@ export class LayoutComponent extends Component {
 		// Pass children data to the hierarchy layout
 		// And calculate sum of sizes
 		root = hierarchy({
-			children: hierarchyChildren
+			children: this.children
 		})
 		.sum((d: any) => d.size);
 
