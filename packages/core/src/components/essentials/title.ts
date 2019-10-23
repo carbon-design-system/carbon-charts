@@ -17,8 +17,8 @@ export class Title extends Component {
 		DOMUtils.appendOrSelect(svg, "rect.spacer")
 			.attr("x", 0)
 			.attr("y", 20)
-			.attr("width", 16)
-			.attr("height", 16)
+			.attr("width", 20)
+			.attr("height", 20)
 			.attr("fill", "none");
 	}
 }

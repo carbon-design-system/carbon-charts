@@ -2,7 +2,7 @@
 import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { LegendOrientations } from "../../interfaces";
+import { LegendOrientations, LegendPositions } from "../../interfaces";
 import { DOMUtils } from "../../services";
 
 // D3 Imports
@@ -58,6 +58,17 @@ export class Legend extends Component {
 		if (legendClickable && addedLegendItems.size() > 0) {
 			this.addEventListeners();
 		}
+
+		const legendPosition = Tools.getProperty(options, "legend", "position");
+		if (legendPosition === LegendPositions.BOTTOM || legendPosition === LegendPositions.TOP) {
+			// TODO - Replace with layout component margins
+			DOMUtils.appendOrSelect(svg, "rect.spacer")
+				.attr("x", 0)
+				.attr("y", 10)
+				.attr("width", 20)
+				.attr("height", 20)
+				.attr("fill", "none");
+		}
 	}
 
 	breakItemsIntoLines(addedLegendItems) {
@@ -106,16 +117,24 @@ export class Legend extends Component {
 					}
 				}
 
+				const legendPosition = Tools.getProperty(options, "legend", "position");
+				let yOffset = 0;
+				if (legendPosition === LegendPositions.BOTTOM) {
+					yOffset = 20;
+				}
+
 				// Position checkbox
+				// TODO - Replace with layout component margins
 				legendItem.select("rect.checkbox")
 					.attr("x", startingPoint)
-					.attr("y", lineNumber * legendItemsVerticalSpacing);
+					.attr("y", yOffset + lineNumber * legendItemsVerticalSpacing);
 
 				// Position text
+				// TODO - Replace with layout component margins
 				const yPosition = legendTextYOffset + (lineNumber * legendItemsVerticalSpacing);
 				legendItem.select("text")
 					.attr("x", startingPoint + spaceNeededForCheckbox)
-					.attr("y", yPosition);
+					.attr("y", yOffset + yPosition);
 
 				lastYPosition = yPosition;
 
