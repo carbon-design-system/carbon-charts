@@ -23,13 +23,13 @@ import {
 export class LayoutComponent extends Component {
 	// Give every layout component a distinct ID
 	// so they don't interfere when querying elements
-	static instanceCount = Math.floor(Math.random() * 99999999999);
+	static instanceID = Math.floor(Math.random() * 99999999999);
 
 	type = "layout";
 
 	children: LayoutComponentChild[];
 
-	private _instanceCount: number;
+	private _instanceID: number;
 
 	constructor(model: ChartModel, services: any, children: LayoutComponentChild[], configs?: LayoutConfigs) {
 		super(model, services, configs);
@@ -37,7 +37,7 @@ export class LayoutComponent extends Component {
 		this.configs = configs;
 		this.children = children;
 
-		this._instanceCount = LayoutComponent.instanceCount++;
+		this._instanceID = LayoutComponent.instanceID++;
 
 		// Pass children data to the hierarchy layout
 		// And calculate sum of sizes
@@ -61,7 +61,7 @@ export class LayoutComponent extends Component {
 		const svg = this.parent;
 		let sum = 0;
 
-		svg.selectAll(`svg.layout-child-${this._instanceCount}`)
+		svg.selectAll(`svg.layout-child-${this._instanceID}`)
 			.filter((d: any) => {
 				const growth = Tools.getProperty(d, "data", "growth", "x");
 				return growth === LayoutGrowth.PREFERRED || growth === LayoutGrowth.FIXED;
@@ -76,7 +76,7 @@ export class LayoutComponent extends Component {
 	getNumOfStretchChildren(): number {
 		const svg = this.parent;
 
-		return svg.selectAll(`svg.layout-child-${this._instanceCount}`)
+		return svg.selectAll(`svg.layout-child-${this._instanceID}`)
 			.filter((d: any) => {
 				const growth = Tools.getProperty(d, "data", "growth", "x");
 				return growth === LayoutGrowth.STRETCH;
@@ -108,7 +108,7 @@ export class LayoutComponent extends Component {
 		const horizontal = (this.configs.direction === LayoutDirection.ROW || this.configs.direction === LayoutDirection.ROW_REVERSE);
 
 		// Add new SVGs to the DOM for each layout child
-		const updatedSVGs = svg.selectAll(`svg.layout-child-${this._instanceCount}`)
+		const updatedSVGs = svg.selectAll(`svg.layout-child-${this._instanceID}`)
 			.data(root.leaves(), (d: any) => d.data.id);
 
 		updatedSVGs
@@ -118,11 +118,11 @@ export class LayoutComponent extends Component {
 		const enteringSVGs = updatedSVGs
 			.enter()
 			.append("svg")
-				.attr("class", (d: any) => `layout-child layout-child-${this._instanceCount} ${d.data.id}`)
+				.attr("class", (d: any) => `layout-child layout-child-${this._instanceID} ${d.data.id}`)
 				.attr("x", (d: any) => d.x0)
 				.attr("y", (d: any) => d.y0);
 
-		enteringSVGs.merge(svg.selectAll(`svg.layout-child-${this._instanceCount}`))
+		enteringSVGs.merge(svg.selectAll(`svg.layout-child-${this._instanceID}`))
 			.each(function(d: any) {
 				// Set parent component for each child
 				d.data.components.forEach(itemComponent => {
@@ -136,7 +136,7 @@ export class LayoutComponent extends Component {
 				});
 			});
 
-		svg.selectAll(`svg.layout-child-${this._instanceCount}`)
+		svg.selectAll(`svg.layout-child-${this._instanceID}`)
 		.each(function(d: any) {
 			// Calculate preffered children sizes after internal rendering
 			const growth = Tools.getProperty(d, "data", "growth", "x");
@@ -179,7 +179,7 @@ export class LayoutComponent extends Component {
 
 		// Add new SVGs to the DOM for each layout child
 		svg
-			.selectAll(`svg.layout-child-${this._instanceCount}`)
+			.selectAll(`svg.layout-child-${this._instanceID}`)
 			.data(root.leaves(), (d: any) => d.data.id)
 			.attr("x", (d: any) => d.x0)
 			.attr("y", (d: any) => d.y0)
