@@ -40,7 +40,7 @@ export default {
 		// logs the circular dependencies inside the d3 codebase
 		if (warning.code === "CIRCULAR_DEPENDENCY" &&
 			warning.importer.indexOf("d3") !== -1) {
-			console.log(
+			console.warn(
 				"Circular dependency found in D3:",
 				warning.toString().replace("Circular dependency:", "")
 			);
