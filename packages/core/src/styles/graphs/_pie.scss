@@ -1,6 +1,7 @@
 @import "./../vendor/@carbon/type/scss/type";
 @import "./../vendor/@carbon/type/scss/font-face/sans";
 
-text.pie-label {
+.#{$prefix}--#{$charts-prefix}--chart-svg text.pie-label {
 	font-family: carbon--font-family("sans-condensed");
 }
+

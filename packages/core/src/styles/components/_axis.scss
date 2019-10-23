@@ -1,21 +1,20 @@
 @import "./../vendor/@carbon/type/scss/type";
 @import "./../vendor/@carbon/type/scss/font-face/sans";
 
-.#{$prefix}--#{$charts-prefix}--axes {
-	g.axis {
-		g.tick {
-			text {
-				font-family: carbon--font-family("sans-condensed");
-				fill: $text-02;
-			}
-
-			line {
-				display: none;
-			}
+.#{$prefix}--#{$charts-prefix}--axes g.axis {
+	g.tick {
+		text {
+			font-family: carbon--font-family("sans-condensed");
+			fill: $text-02;
 		}
 
-		path.domain {
-			stroke: $ui-04;
+		line {
+			display: none;
 		}
 	}
+
+	path.domain {
+		stroke: $ui-04;
+	}
 }
+

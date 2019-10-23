@@ -20,9 +20,6 @@ export class SimpleBar extends Bar {
 	}
 
 	render(animate: boolean) {
-		// Chart options mixed with the internal configurations
-		const options = this.model.getOptions();
-
 		// Grab container SVG
 		const svg = this.getContainerSVG();
 
@@ -75,15 +72,15 @@ export class SimpleBar extends Bar {
 		this.addEventListeners();
 	}
 
-	handleLegendOnHover = e => {
-		const { hoveredElement } = e.detail;
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
 
 		this.parent.selectAll("rect.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-simple-bar"))
 			.attr("opacity", d => (d.label !== hoveredElement.datum()["key"]) ? 0.3 : 1);
 	}
 
-	handleLegendMouseOut = e => {
+	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent.selectAll("rect.bar")
 			.transition(this.services.transitions.getTransition("legend-mouseout-simple-bar"))
 			.attr("opacity", 1);
