@@ -1,6 +1,6 @@
 // Internal Imports
 import { Service } from "../service";
-import { ModelStateKeys, ChartTheme } from "../../interfaces";
+import { ChartTheme } from "../../interfaces";
 
 import { Tools } from "../../tools";
 import { select } from "d3-selection";
@@ -15,7 +15,7 @@ export class Themes extends Service {
 	}
 
 	setTheme() {
-		const holderElement = this.model.get(ModelStateKeys.HOLDER) as HTMLElement;
+		const holderElement = this.services.domUtils.getHolder() as HTMLElement;
 		const theme = Tools.getProperty(this.model.getOptions(), "theme");
 
 		if (theme !== ChartTheme.DEFAULT) {

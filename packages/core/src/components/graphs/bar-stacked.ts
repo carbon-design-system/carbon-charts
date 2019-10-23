@@ -145,8 +145,8 @@ export class StackedBar extends Bar {
 	}
 
 	// Highlight elements that match the hovered legend item
-	handleLegendOnHover = e => {
-		const { hoveredElement } = e.detail;
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
 
 		this.parent.selectAll("rect.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
@@ -154,7 +154,7 @@ export class StackedBar extends Bar {
 	}
 
 	// Un-highlight all elements
-	handleLegendMouseOut = e => {
+	handleLegendMouseOut = (event: CustomEvent)  => {
 		this.parent.selectAll("rect.bar")
 			.transition(this.services.transitions.getTransition("legend-mouseout-bar"))
 			.attr("opacity", 1);
