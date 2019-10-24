@@ -4,8 +4,17 @@ export default class BaseChart extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.data = props.data;
-		this.options = props.options;
+		const { options, data } = props;
+		if (!options) {
+			console.error("Missing options!");
+		}
+
+		if (!data) {
+			console.error("Missing data!");
+		}
+
+		this.data = props.data || {};
+		this.options = props.options || {};
 
 		// Width prop is mandatory for the wrappers
 		if (props.width) {

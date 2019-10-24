@@ -1,5 +1,6 @@
 $default_transition: all 0.1s ease-out;
 @import "~@carbon/themes/scss/themes";
+@import "~@carbon/colors/scss/colors";
 
 * {
 	box-sizing: border-box;
@@ -7,7 +8,7 @@ $default_transition: all 0.1s ease-out;
 
 body {
 	margin: 0;
-	background-color: #fbfbfb;
+	background-color: #f3f3f3;
 	font-family: "IBM Plex Sans", Arial, sans-serif;
 }
 
@@ -112,15 +113,13 @@ header.m-demo-header {
 }
 
 .demo-chart-holder {
-	background-color: #fff;
-	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
 	margin: 0 auto 60px auto;
 	display: block;
 	height: 500px;
 	min-width: 300px;
+	min-height: 300px;
 	max-width: 800px;
 	padding: 30px;
-	transition: box-shadow 0.1s ease-out;
 	overflow: hidden;
 	resize: both;
 	font-weight: 400;
@@ -128,11 +127,6 @@ header.m-demo-header {
 	h3 {
 		border-bottom: 1px solid lightgray;
 		margin: 0;
-	}
-
-	&:hover {
-		box-shadow: 0 15px 45px -11px rgba(22, 56, 107, 0.15);
-		transition: box-shadow 0.1s ease-out;
 	}
 
 	&:last-child {
@@ -167,22 +161,19 @@ div.options {
 	margin-bottom: 30px;
 	padding: 30px;
 	background-color: #fff;
-	box-shadow: 0 15px 34px -11px rgba(22, 56, 107, 0.1);
 }
+
 //**********************************************
 // Themes
 //***********************************************
 
-$gray100: #171717;
-$gray90: #282828;
-$gray10: #f3f3f3;
 
 //**********************************************
 // g100
 //***********************************************
 body.carbon--dark-g100 {
 	@include carbon--theme($carbon--theme--g100) {
-		background-color: $gray100;
+		background-color: #020202;
 
 		.bx--dropdown__wrapper {
 			$css--reset: false;
@@ -190,16 +181,11 @@ body.carbon--dark-g100 {
 		}
 
 		div.content {
-			color: $gray10;
+			color: $carbon--gray-10;
 		}
 
 		div.options {
-			background: $gray90;
-			box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.123);
-		}
-
-		div.demo-chart-holder {
-			background: $gray90;
+			background: $ui-background;
 		}
 	}
 }
@@ -209,7 +195,7 @@ body.carbon--dark-g100 {
 //***********************************************
 body.carbon--dark-g90 {
 	@include carbon--theme($carbon--theme--g90) {
-		background-color: $gray100;
+		background-color: $carbon--gray-100;
 
 		.bx--dropdown__wrapper {
 			$css--reset: false;
@@ -217,16 +203,11 @@ body.carbon--dark-g90 {
 		}
 
 		div.content {
-			color: $gray10;
+			color: $carbon--gray-10;
 		}
 
 		div.options {
-			background: $gray90;
-			box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.123);
-		}
-
-		div.demo-chart-holder {
-			background: $gray90;
+			background: $carbon--gray-90;
 		}
 	}
 }
@@ -236,7 +217,7 @@ body.carbon--dark-g90 {
 //***********************************************
 body.carbon--dark-g10 {
 	@include carbon--theme($carbon--theme--g10) {
-		background-color: white;
+		background-color: $carbon--white-0;
 
 		.bx--dropdown__wrapper {
 			$css--reset: false;
@@ -244,16 +225,11 @@ body.carbon--dark-g10 {
 		}
 
 		div.content {
-			color: $gray100;
+			color: $carbon--gray-100;
 		}
 
 		div.options {
-			background: $gray10;
-			box-shadow: 0 15px 34px -11px rgba(14, 34, 65, 0.3);
-		}
-
-		div.demo-chart-holder {
-			background: $gray10;
+			background: $carbon--gray-10;
 		}
 	}
 }

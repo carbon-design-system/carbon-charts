@@ -1,5 +1,5 @@
 const urlParams = new URLSearchParams(window.location.search);
-const { ChartTheme } = require("./../../src/configuration");
+const { ChartTheme } = require("./../../src/interfaces/enums");
 
 export const getTheme = () => {
 	if (urlParams.has("theme")) {

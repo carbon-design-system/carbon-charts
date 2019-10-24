@@ -1,0 +1,25 @@
+.#{$prefix}--#{$charts-prefix}--grid {
+	rect.chart-grid-backdrop {
+		@if $carbon--theme == $carbon--theme--g90 {
+			fill: $carbon--gray-100;
+		} @else if $carbon--theme == $carbon--theme--g100 {
+			fill: $carbon--black-100;
+		} @else {
+			fill: $ui-01;
+		}
+	}
+
+	g.x.grid g.tick,
+	g.y.grid g.tick {
+		line {
+			pointer-events: none;
+			stroke-width: 1px;
+			stroke: $ui-03;
+		}
+
+		&.active line {
+			stroke-dasharray: 2px;
+			stroke: $focus;
+		}
+	}
+}

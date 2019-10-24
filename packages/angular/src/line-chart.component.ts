@@ -13,9 +13,9 @@ import { LineChart } from "@carbon/charts";
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: "n-line-chart",
+	selector: "ibm-line-chart",
 	template: `
-		<div #nChart class='n-chart-container'>
+		<div #nChart class="ibm-chart-container">
 		</div>
 	`
 })

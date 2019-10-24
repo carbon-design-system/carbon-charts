@@ -1,0 +1,13 @@
+@import "./vendor/@carbon/type/scss/type";
+@import "./vendor/@carbon/type/scss/font-face/mono";
+@import "./vendor/@carbon/type/scss/font-face/sans";
+
+svg.#{$prefix}--#{$charts-prefix}--chart-svg {
+	font-family: carbon--font-family("sans-condensed");
+
+	text {
+		font-size: 12px;
+		font-weight: carbon--font-weight("regular");
+		fill: $text-02;
+	}
+}

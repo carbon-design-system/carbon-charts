@@ -14,12 +14,12 @@ export default class LineChart extends BaseChart {
 		);
 	}
 
-    render() {
-      return (
-		<div
-			ref={chartRef => this.chartRef = chartRef}
-			className="chart-holder">
-		</div>
-      )
-    }
+	render() {
+		return (
+			<div
+				ref={chartRef => this.chartRef = chartRef}
+				className="chart-holder">
+			</div>
+		);
+	}
 }
