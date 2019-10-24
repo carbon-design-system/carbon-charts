@@ -120,9 +120,7 @@ export class SimpleBar extends Bar {
 					.attr("fill", (d: any) => self.model.getFillScale()(d.label));
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement
-				});
+				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
 			});
 	}
 

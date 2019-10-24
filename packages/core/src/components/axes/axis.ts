@@ -309,9 +309,9 @@ export class Axis extends Component {
 			return this.scale(correspondingLabel) + this.scale.step() / 2;
 		} else if (this.scaleType === ScaleTypes.TIME) {
 			return this.scale(new Date(datum.date || datum.label));
-		} else {
-			return this.scale(value);
 		}
+
+		return this.scale(value);
 	}
 
 	getYMax() {

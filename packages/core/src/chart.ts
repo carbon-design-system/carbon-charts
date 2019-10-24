@@ -41,9 +41,7 @@ export class Chart {
 	// Contains the code that uses properties that are overridable by the super-class
 	init(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
 		// Store the holder in the model
-		this.model.set({
-			holder
-		}, true);
+		this.model.set({ holder }, true);
 
 		// Initialize all services
 		Object.keys(this.services).forEach(serviceName => {
