@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.21](https://github.com/IBM/carbon-charts/compare/v0.16.20...v0.16.21) (2019-10-24)
+
+
+### Bug Fixes
+
+* **core:** update typescript version ([949379f](https://github.com/IBM/carbon-charts/commit/949379f))
+
+
+
+
+
 ## [0.16.20](https://github.com/IBM/carbon-charts/compare/v0.16.19...v0.16.20) (2019-10-24)
 
 **Note:** Version bump only for package @carbon/charts
