@@ -4,7 +4,6 @@
 .#{$prefix}--#{$charts-prefix}--axes g.axis {
 	g.tick {
 		text {
-			font-family: carbon--font-family("sans-condensed");
 			fill: $text-02;
 		}
 
@@ -15,6 +14,10 @@
 
 	path.domain {
 		stroke: $ui-04;
+	}
+
+	.axis-title {
+		font-family: carbon--font-family("sans");
 	}
 }
 
