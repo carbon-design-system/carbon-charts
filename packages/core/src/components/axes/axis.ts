@@ -141,6 +141,8 @@ export class Axis extends Component {
 			];
 		}
 
+		// TODO - Work with design to improve logic
+		domain[1] = domain[1] * 1.1;
 		return domain;
 	}
 
@@ -312,34 +314,6 @@ export class Axis extends Component {
 		}
 
 		return this.scale(value);
-	}
-
-	getYMax() {
-		const { datasets } = this.model.getDisplayData();
-		const { axes } = this.model.getOptions();
-		let yMax;
-
-		yMax = max(datasets, (d: any) => {
-			return max(d.data, (datum: any) => {
-				return isNaN(datum) ? datum.value : datum;
-			});
-		});
-
-		return yMax;
-	}
-
-	getYMin() {
-		const { datasets } = this.model.getDisplayData();
-		const { axes } = this.model.getOptions();
-		let yMin;
-
-		yMin = min(datasets, (d: any) => {
-			return min(d.data, (datum: any) => {
-				return isNaN(datum) ? datum.value : datum;
-			});
-		});
-
-		return yMin;
 	}
 
 	getAxisRef() {
