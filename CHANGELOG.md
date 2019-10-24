@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.20](https://github.com/IBM/carbon-charts/compare/v0.16.19...v0.16.20) (2019-10-24)
+
+
+### Features
+
+* **core:** run lerna builds in a stream ([ce35e40](https://github.com/IBM/carbon-charts/commit/ce35e40))
+
+
+
+
+
 ## [0.16.19](https://github.com/IBM/carbon-charts/compare/v0.16.18...v0.16.19) (2019-10-24)
 
 
