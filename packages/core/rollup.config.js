@@ -12,7 +12,7 @@ export default {
 			format: "esm"
 		},
 		{
-			file: `${outputDir}/index.umd.js`,
+			file: `${outputDir}/bundle.js`,
 			format: "umd",
 			name: "Charts",
 			globals: {
