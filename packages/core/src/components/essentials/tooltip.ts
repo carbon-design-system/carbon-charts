@@ -107,13 +107,14 @@ export class Tooltip extends Component {
 
 				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label);
 
-				return `<li>
-							<div class="datapoint-tooltip">
-								<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
-								<p class="label">${datapoint.datasetLabel}</p>
-								<p class="value">${formattedValue}</p>
-							</div>
-					</li>`;
+				return `
+				<li>
+					<div class="datapoint-tooltip">
+						<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
+						<p class="label">${datapoint.datasetLabel}</p>
+						<p class="value">${formattedValue}</p>
+					</div>
+				</li>`;
 				}).join("") + "</ul>";
 	}
 
