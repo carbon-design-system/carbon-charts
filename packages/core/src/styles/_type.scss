@@ -3,7 +3,7 @@
 @import "./vendor/@carbon/type/scss/font-face/sans";
 
 svg.#{$prefix}--#{$charts-prefix}--chart-svg {
-	font-family: carbon--font-family("sans");
+	font-family: carbon--font-family("sans-condensed");
 
 	text {
 		font-size: 12px;
