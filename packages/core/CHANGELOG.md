@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.19](https://github.com/IBM/carbon-charts/compare/v0.16.18...v0.16.19) (2019-10-24)
+
+
+### Bug Fixes
+
+* **tooltip:** fix to be multiline instead of multitooltip ([0f90325](https://github.com/IBM/carbon-charts/commit/0f90325))
+
+
+
+
+
 ## [0.16.18](https://github.com/IBM/carbon-charts/compare/v0.16.17...v0.16.18) (2019-10-21)
 
 **Note:** Version bump only for package @carbon/charts
