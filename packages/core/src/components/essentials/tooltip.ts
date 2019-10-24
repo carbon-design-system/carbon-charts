@@ -36,7 +36,7 @@ export class Tooltip extends Component {
 		const tooltipTextContainer = DOMUtils.appendOrSelect(this.tooltip, "div.content-box");
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this.services.events.getDocumentFragment().addEventListener("show-tooltip", e => {
+		this.services.events.addEventListener("show-tooltip", e => {
 			// check the type of tooltip and that it is enabled
 			if ((e.detail.type === TooltipTypes.DATAPOINT && Tools.getProperty(this.model.getOptions(), "tooltip", "datapoint", "enabled"))
 				|| (e.detail.type === TooltipTypes.GRIDLINE && Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) ) {
@@ -63,7 +63,7 @@ export class Tooltip extends Component {
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
-		this.services.events.getDocumentFragment().addEventListener("hide-tooltip", () => {
+		this.services.events.addEventListener("hide-tooltip", () => {
 			this.tooltip.classed("hidden", true);
 		});
 	}

@@ -9,7 +9,7 @@ export class Scatter extends Component {
 	type = "scatter";
 
 	init() {
-		const eventsFragment = this.services.events.getDocumentFragment();
+		const eventsFragment = this.services.events;
 
 		// Highlight correct circle on legend item hovers
 		eventsFragment.addEventListener("legend-item-onhover", this.handleLegendOnHover);
@@ -136,7 +136,7 @@ export class Scatter extends Component {
 			.on("mouseout", null);
 
 		// Remove legend listeners
-		const eventsFragment = this.services.events.getDocumentFragment();
+		const eventsFragment = this.services.events;
 		eventsFragment.removeEventListener("legend-item-onhover", this.handleLegendOnHover);
 		eventsFragment.removeEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
 	}

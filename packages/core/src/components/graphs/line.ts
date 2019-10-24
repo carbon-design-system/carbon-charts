@@ -14,7 +14,7 @@ export class Line extends Component {
 	// TODORF - Remove these listeners in destroy()
 	init() {
 		// Highlight correct scatter on legend item hovers
-		this.services.events.getDocumentFragment().addEventListener("legend-item-onhover", e => {
+		this.services.events.addEventListener("legend-item-onhover", e => {
 			const { hoveredElement } = e.detail;
 
 			this.parent.selectAll("g.lines")
@@ -29,7 +29,7 @@ export class Line extends Component {
 		});
 
 		// Un-highlight lines on legend item mouseouts
-		this.services.events.getDocumentFragment().addEventListener("legend-item-onmouseout", e => {
+		this.services.events.addEventListener("legend-item-onmouseout", e => {
 			this.parent.selectAll("g.lines")
 				.transition(this.services.transitions.getTransition("legend-mouseout-line"))
 				.attr("opacity", Configuration.lines.opacity.selected);

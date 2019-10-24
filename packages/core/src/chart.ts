@@ -53,7 +53,6 @@ export class Chart {
 
 		// Call update() when model has been updated
 		this.services.events
-			.getDocumentFragment()
 			.addEventListener("model-update", () => {
 				this.update(true);
 			});
@@ -63,7 +62,6 @@ export class Chart {
 
 		// Set chart resize event listener
 		this.services.events
-			.getDocumentFragment()
 			.addEventListener("chart-resize", () => {
 				this.update(false);
 			});
