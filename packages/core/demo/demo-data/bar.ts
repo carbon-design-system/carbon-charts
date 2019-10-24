@@ -52,7 +52,7 @@ export const groupedBarData = {
 };
 
 export const groupedBarOptions = {
-	title: "Grouped Bar Chart",
+	title: "Grouped bar (discrete)",
 	axes: {
 		left: {
 			primary: true,
@@ -87,7 +87,7 @@ export const simpleBarData = {
 };
 
 export const simpleBarOptions = {
-	title: "Simple Bar Chart",
+	title: "Simple bar (discrete)",
 	axes: {
 		left: {
 			primary: true
@@ -134,7 +134,7 @@ export const simpleBarTimeSeriesData = {
 };
 
 export const simpleBarTimeSeriesOptions = {
-	title: "Simple Bar Chart (Time Series)",
+	title: "Simple bar (time series)",
 	axes: {
 		left: {
 			primary: true
@@ -199,7 +199,7 @@ export const stackedBarData = {
 };
 
 export const stackedBarOptions = {
-	title: "Stacked Bar Chart",
+	title: "Stacked bar (discrete)",
 	axes: {
 		left: {
 			primary: true,
@@ -325,7 +325,7 @@ export const stackedBarTimeSeriesData = {
 };
 
 export const stackedBarTimeSeriesOptions = {
-	title: "Stacked Bar Chart - Time Series",
+	title: "Stacked bar (time series)",
 	axes: {
 		left: {
 			primary: true,

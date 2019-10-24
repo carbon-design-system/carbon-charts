@@ -113,7 +113,7 @@ export const lineTimeSeriesData = {
 };
 
 export const lineTimeSeriesOptions = {
-	title: "Line Chart (Time Series)",
+	title: "Line (time series)",
 	axes: {
 		left: {
 			secondary: true
@@ -200,7 +200,7 @@ export const lineData = {
 };
 
 export const lineOptions = {
-	title: "Line Chart (Linear Curve)",
+	title: "Line (discrete)",
 	axes: {
 		bottom: {
 			title: "2018 Annual Sales Figures",
@@ -216,14 +216,14 @@ export const lineOptions = {
 
 // Step
 export const stepOptions = Tools.merge({}, lineOptions, {
-	title: "Step Chart",
+	title: "Step (discrete)",
 	curve: "curveStepAfter"
 });
 
 export const stepData = lineData;
 
 export const stepTimeSeriesOptions = Tools.merge({}, lineTimeSeriesOptions, {
-	title: "Step Chart (Time Series)",
+	title: "Step (time series)",
 	curve: "curveStepAfter"
 });
 
@@ -303,7 +303,7 @@ export const scatterData = {
 };
 
 export const scatterOptions = {
-	title: "Scatter Chart",
+	title: "Scatter (discrete)",
 	axes: {
 		bottom: {
 			title: "2018 Annual Sales Figures",
@@ -320,7 +320,7 @@ export const scatterOptions = {
 export const scatterTimeSeriesData = lineTimeSeriesData;
 
 export const scatterTimeSeriesOptions = {
-	title: "Scatter Chart (Time Series)",
+	title: "Scatter (time series)",
 	legend: {
 		position: "top"
 	},
