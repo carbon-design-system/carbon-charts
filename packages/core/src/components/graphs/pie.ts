@@ -271,8 +271,8 @@ export class Pie extends Component {
 	}
 
 	// Highlight elements that match the hovered legend item
-	handleLegendOnHover = e => {
-		const { hoveredElement } = e.detail;
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
 
 		this.parent.selectAll("path.slice")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
@@ -280,7 +280,7 @@ export class Pie extends Component {
 	}
 
 	// Un-highlight all elements
-	handleLegendMouseOut = e => {
+	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent.selectAll("path.slice")
 			.transition(this.services.transitions.getTransition("legend-mouseout-bar"))
 			.attr("opacity", 1);
@@ -315,9 +315,7 @@ export class Pie extends Component {
 				self.services.events.dispatchEvent("pie-slice-mouseout", hoveredElement);
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement
-				});
+				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
 			})
 			.on("click", d => self.services.events.dispatchEvent("pie-slice-click", d));
 	}

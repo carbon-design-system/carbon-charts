@@ -52,7 +52,7 @@ export const options = {
 		left: {
 			secondary: true
 		},
-		y: {
+		top: {
 			title: "Dollars (CAD)"
 		}
 	},

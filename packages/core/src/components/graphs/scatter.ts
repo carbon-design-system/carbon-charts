@@ -73,15 +73,15 @@ export class Scatter extends Component {
 		this.addEventListeners();
 	}
 
-	handleLegendOnHover = e => {
-		const { hoveredElement } = e.detail;
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
 
 		this.parent.selectAll("circle.dot")
 			.transition(this.services.transitions.getTransition("legend-hover-scatter"))
 			.attr("opacity", d => (d.datasetLabel !== hoveredElement.datum()["key"]) ? 0.3 : 1);
 	}
 
-	handleLegendMouseOut = e => {
+	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent.selectAll("circle.dot")
 			.transition(this.services.transitions.getTransition("legend-mouseout-scatter"))
 			.attr("opacity", 1);
@@ -123,9 +123,7 @@ export class Scatter extends Component {
 				}
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement
-				});
+				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
 			});
 	}
 
