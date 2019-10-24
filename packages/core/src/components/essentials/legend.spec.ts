@@ -20,7 +20,7 @@ describe("legend component", () => {
 			const data = this.testEnvironment.chartData;
 			const numberOfDatasets = data.datasets.length;
 
-			const chartEventsService = this._chart.services.events;
+			const chartEventsService = this.chart.services.events;
 
 			const renderCb = () => {
 				// Remove render event listener
