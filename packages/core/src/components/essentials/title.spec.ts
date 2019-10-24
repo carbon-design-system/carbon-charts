@@ -19,7 +19,7 @@ describe("title component", () => {
 		it("should match text provided in options", function(done) {
 			const sampleTitle = "My chart";
 
-			const chartEventsService = this._chart.services.events;
+			const chartEventsService = this.chart.services.events;
 			const renderCb = () => {
 				const title = select(`g.${settings.prefix}--${options.chart.style.prefix}--title`);
 
