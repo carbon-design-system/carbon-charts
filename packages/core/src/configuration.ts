@@ -1,739 +1,237 @@
-import { ScaleBand, ScaleLinear } from "d3-scale";
 import { Tools } from "./tools";
-import * as colorPalettes from "./services/colorPalettes";
-
-/*
- **********************
- * chart config enums *
- **********************
- */
-
-/**
- * enum of all supported charts
- */
-export enum ChartType {
-	BAR = "bar",
-	LINE = "line",
-	SCATTER = "scatter",
-	PIE = "pie",
-	DONUT = "donut",
-	COMBO = "combo"
-}
-
-/**
- * enum of all supported chart themes
- */
-export enum ChartTheme {
-	WHITE = "white",
-	G100 = "g100",
-	G90 = "g90",
-	G10 = "g10"
-}
-/**
- * enum of all possible tooltip sizes
- */
-export enum TooltipSize {
-	COMPACT = "compact",
-	FULL = ""
-}
-
-/**
- * enum of all possible threshold themes
- */
-export enum ThresholdTheme {
-	SUCCESS = "success",
-	ERROR = "error",
-	WARNING = "warning"
-}
+import {
+	BaseChartOptions,
+	AxisChartOptions,
+	ScatterChartOptions,
+	LineChartOptions,
+	BarChartOptions,
+	StackedBarChartOptions,
+	PieChartOptions,
+	DonutChartOptions,
+	// Components
+	GridOptions,
+	AxesOptions,
+	TimeScaleOptions,
+	TooltipOptions,
+	AxisTooltipOptions,
+	BarTooltipOptions,
+	LegendOptions,
+	ChartTheme,
+	LegendPositions,
+	StackedBarOptions,
+} from "./interfaces/index";
 
 /*
  *****************************
  * User configurable options *
  *****************************
  */
-/**
- * customize the overlay contents
- */
-export interface ChartOverlayOptions {
-	/**
-	 * types of overlay states
-	 */
-	types: {
-		loading: string;
-		noData: string;
-	};
-	/**
-	 * raw html to be injected into the overlay container
-	 */
-	innerHTML: {
-		loading: string;
-		noData: string;
-	};
-}
 
 /**
- * Base chart options common to any chart
+ * Legend options
  */
-export interface BaseChartOptions {
-	/**
-	 * Internal property to track what type of chart should be instantiated
-	 */
-	type?: ChartType;
-	/**
-	 * boolean to enable accessibility mode
-	 */
-	accessibility?: boolean;
-	/**
-	 * boolean to disable animations (enabled by default)
-	 */
-	animations?: boolean;
-	/**
-	 * boolean to enable/disable legend interactivity
-	 */
-	legendClickable?: boolean;
-	/**
-	 * optional title for chart
-	 */
-	title?: string;
-	/**
-	 * boolean to prevent the container from resizing
-	 */
-	containerResizable?: boolean;
-	/**
-	 * array of hex colors for the chart to render from
-	 */
-	colors: Array<string>;
-	/**
-	 * supported chart theme
-	 */
-	theme?: ChartTheme;
-	/**
-	 * tooltip configuration
-	 */
-	tooltip?: {
-		/**
-		 * specify the size of the tooltip
-		 */
-		size: TooltipSize;
-		/**
-		 * a function to format the tooltip contents
-		 */
-		formatter: Function;
-		/**
-		 * elements onto which a hover or click would not trigger the tooltip to hide
-		 */
-		targetsToSkip: Array<String>;
-		/**
-		 * custom HTML content for tooltip provided by user
-		 */
-		customHTML?: string;
-	};
-	overlay?: ChartOverlayOptions;
-	/**
-	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
-	 */
-	getFillColor?: (datasetLabel: any, label?: any, value?: any) => string;
-	/**
-	 * Optional function to generate the stroke color based on datasetLabel, label, and/or value
-	 */
-	getStrokeColor?: (datasetLabel: any, label?: any, value?: any) => string;
-	/**
-	 * Optionally specify a width for the chart
-	 */
-	width?: number;
-	/**
-	 * Optionally specify a height for the chart
-	 */
-	height?: number;
-	/**
-	 * Internal property to track keys in the legend
-	 */
-	keys?: Object;
-}
-/**
- * Base chart options common to any chart
- */
-const baseOptions: BaseChartOptions = {
-	legendClickable: true,
-	containerResizable: true,
-	colors: colorPalettes.DEFAULT,
-	tooltip: {
-		size: TooltipSize.FULL,
-		formatter: null,
-		targetsToSkip: ["rect", "circle", "path"]
-	},
-	theme: ChartTheme.WHITE,
-	overlay: {
-		types: {
-			loading: "loading",
-			noData: "noData"
+export const legend: LegendOptions = {
+	position: LegendPositions.BOTTOM,
+	clickable: true,
+	items: {
+		status: {
+			ACTIVE: 1,
+			DISABLED: 0
 		},
-		innerHTML: {
-			loading: `
-			<div class="ccharts-overlay-content">
-				<div data-loading class="bx--loading bx--loading--small">
-					<svg class="bx--loading__svg" viewBox="-75 -75 150 150">
-						<title>Loading</title>
-						<circle cx="0" cy="0" r="37.5" />
-					</svg>
-				</div>
-
-				<p>Loading</p>
-			</div>
-			`,
-			noData: `
-			<div class="ccharts-overlay-content">
-				No data available
-			</div>
-			`
-		}
-	}
-};
-
-/**
- * Options specific to pie charts
- */
-export type PieChartOptions = BaseChartOptions;
-/**
- * Options specific to pie charts
- */
-const pieOptions: PieChartOptions = Tools.merge({}, baseOptions);
-
-/**
- * Options specific to donut charts
- */
-export interface DonutChartOptions extends PieChartOptions {
-	center?: {
-		label: string;
-		number: string;
-	};
-	centerLabel?: string;
-	centerNumber?: string;
-}
-
-const donutOptions: DonutChartOptions = Tools.merge({}, baseOptions);
-
-/**
- * represents a threshold visually bringing attention to specific values/issues
- */
-export interface Threshold {
-	/**
-	 * range of values the threshold should apply to
-	 */
-	range: Array<number>;
-	/**
-	 * theme of the threshold
-	 */
-	theme: ThresholdTheme;
-}
-
-/**
- * options to configure a scale. not all options are used by all scales
- */
-export interface ScaleOptions {
-	/**
-	 * optional title for the scales
-	 */
-	title?: string;
-	/**
-	 * function to adjust the min value
-	 */
-	maxValueAdjuster?: Function;
-	/**
-	 * function to adjust the max value
-	 */
-	minValueAdjuster?: Function;
-	/**
-	 * function to format the ticks
-	 */
-	formatter?: Function;
-	/**
-	 * tick configuration
-	 */
-	ticks?: {
-		/**
-		 * maximum ... number of ticks?
-		 */
-		max: number;
-		/**
-		 * minumum ... number of ticks?
-		 */
-		min: number;
-	};
-	/**
-	 * configuration for the thresholds
-	 */
-	thresholds?: Array<Threshold>;
-}
-
-/**
- * options to configure a Y (vertical) scale
- */
-export interface YScaleOptions extends ScaleOptions {
-	/**
-	 * boolean to indicate whether data should be stacked
-	 */
-	stacked?: boolean;
-}
-
-/**
- * options for the x, y, and y2 scales/axis
- */
-export interface Scales {
-	x: ScaleOptions;
-	y: YScaleOptions;
-	y2?: YScaleOptions;
-}
-
-export interface Axis {
-	x: ScaleBand<any>;
-	y: ScaleLinear<any, any>;
-	y2: ScaleLinear<any, any>;
-}
-
-/**
- * Options common to any chart with an axis
- */
-export interface AxisChartOptions extends BaseChartOptions {
-	/**
-	 * scale configuration
-	 */
-	scales?: Scales;
-	axis?: Axis;
-}
-/**
- * Options common to any chart with an axis
- */
-const axisOptions: AxisChartOptions = Tools.merge({}, baseOptions, {
-	scales: {
-		x: {
-			domain: null,
-			ticks: 5
-		},
-		y: {
-			domain: null,
-			ticks: 5
-		},
-		ySecondary: {
-			domain: null,
-			ticks: 10
-		}
-	}
-});
-
-/**
- * options specific to line charts
- */
-export interface LineChartOptions extends AxisChartOptions {
-	/**
-	 * options for the curve of the line
-	 */
-	curve?: string | {
-		name: string;
-	};
-	/**
-	 * options for the line points
-	 */
-	points?: {
-		/**
-		 * sets the radius of the point
-		 */
-		radius: number;
-		fillOpacity?: number;
-	};
-}
-/**
- * options specific to line charts
- */
-const lineOptions: LineChartOptions = Tools.merge({}, axisOptions, {
-	points: {
-		// default point radius to 3
-		radius: 3
-	}
-});
-
-/**
- * options specific to scatter charts
- */
-export interface ScatterChartOptions extends AxisChartOptions {
-	/**
-	 * options for the points
-	 */
-	points?: {
-		/**
-		 * sets the radius of the point
-		 */
-		radius: number;
-		fillOpacity?: number;
-	};
-}
-/**
- * options specific to line charts
- */
-const scatterOptions: ScatterChartOptions = Tools.merge({}, axisOptions, {
-	points: {
-		// default point radius to 4
-		radius: 4,
-		fillOpacity: 0.3
-	}
-});
-
-/**
- * options specific to bar charts
- */
-export interface BarChartOptions extends AxisChartOptions {
-	/**
-	 * options for all bars
-	 */
-	bars?: {
-		/**
-		 * constrains the bars to a maximum width
-		 */
-		maxWidth: number;
-	};
-}
-/**
- * options specific to bar charts
- */
-const barOptions: BarChartOptions = Tools.merge({}, axisOptions);
-
-/**
- * options specific to bar charts
- */
-export type StackedBarChartOptions = BarChartOptions;
-/**
- * options specific to bar charts
- */
-const stackedBarOptions: StackedBarChartOptions = Tools.merge({}, barOptions);
-
-/**
- * Options specific to combo charts.
- *
- * This interface also extends all other AxisChartOption interfaces as the single config is shared across all charts in a combo
- */
-export interface ComboChartOptions extends AxisChartOptions, BarChartOptions, LineChartOptions, ScatterChartOptions { }
-/**
- * Options specific to combo charts.
- *
- */
-const comboOptions: ComboChartOptions = Tools.merge({}, axisOptions, barOptions, lineOptions, scatterOptions);
-
-/**
- * Configuration passed to the chart.
- *
- * Includes options and data
- */
-export interface ChartConfig<T extends BaseChartOptions> {
-	options: T;
-	data: ChartData | Promise<ChartData>;
-}
-
-export const options = {
-	BASE: baseOptions,
-	AXIS: axisOptions,
-	LINE: lineOptions,
-	SCATTER: scatterOptions,
-	BAR: barOptions,
-	STACKED_BAR: stackedBarOptions,
-	COMBO: comboOptions,
-	PIE: pieOptions,
-	DONUT: donutOptions
-};
-
-export interface DataSet {
-	/**
-	 * Label for the dataset
-	 */
-	label: string;
-	/**
-	 * Array of hex background colors
-	 */
-	backgroundColors: Array<string>;
-	/**
-	 * Array of data values
-	 */
-	data: Array<any>;
-	/**
-	 * chartType - only used with combo charts
-	 */
-	chartType?: ChartType;
-}
-
-export interface ChartData {
-	/**
-	 * Labels for the x (horizontal) axis. Should match the number of items in each dataset data array
-	 */
-	labels: Array<string>;
-	/**
-	 * Array of datasets to display in the chart
-	 */
-	datasets: Array<DataSet>;
-}
-
-/*
- ********************************************
- * Internal (non-user configurable) options *
- ********************************************
- */
-
-/**
- * General chart options. margins, min/max widths, etc
- */
-export const charts = {
-	margin: {
-		top: 20,
-		bottom: 60,
-		left: 60,
-		right: 20,
-		bar: {
-			top: 0,
-			right: -40,
-			bottom: 50,
-			left: 40
-		},
-		line: {
-			top: 0,
-			right: -40,
-			bottom: 50,
-			left: 40
-		}
+		horizontalSpace: 12,
+		verticalSpace: 24,
+		textYOffset: 8
 	},
-	resetOpacity: {
-		opacity: 1,
-		circle: {
-			fill: "white"
-		},
-		outline: "grey"
-	},
-	reduceOpacity: {
-		opacity: 0.25,
-		outline: "grey"
-	},
-	points: {
-		radius: 3
-	},
-	patternFills: {
-		width: 20,
-		height: 20
-	},
-	minWidth: 150,
-	widthBreak: 600,
-	marginForLegendTop: 40,
-	title: {
-		marginBottom: 8
-	},
-	magicRatio: 0.7,
-	magicMoreForY2Axis: 70,
-	axisCharts: {
-		minWidth: 100,
-		minHeight: 100
-	}
-};
-
-/**
- * Options to render scales to spec
- */
-export const scales = {
-	maxWidthOfAxisLabel: 175,
-	maxNumOfAxisLabelLetters: 60,
-	yAxisAngle: -90,
-	xAxisAngle: -45,
-	domain: {
-		color: "#959595",
-		strokeWidth: 2
-	},
-	dx: "-1em",
-	label: {
-		dy: "1em"
-	},
-	tick: {
-		dy: "0.5em",
-		widthAdditionY: 25,
-		widthAdditionY2: 15,
-		heightAddition: 16,
-		lineHeight: 1.1
-	},
-	magicDy1: "0.71em",
-	magicY1: 9,
-	magicX1: -4,
-	y: {
-		numberOfTicks: 5,
-		thresholds: {
-			colors: {
-				"danger": "rgba(255, 39, 41, 0.1)",
-				"success": "rgba(0, 212, 117, 0.1)",
-				"warning": "rgba(255, 214, 0, 0.1)"
-
-			}
-		}
-	},
-	x: {
-		numberOfTicks: 5,
-		padding: 0.2
-	},
-	y2: {
-		numberOfTicks: 5
+	checkbox: {
+		radius: 6.5,
+		spaceAfter: 4
 	}
 };
 
 /**
  * Grid options
  */
-export const grid = {
-	strokeColor: "#ECEEEF"
-};
-
-/**
- * Options for bar behaviour
- */
-export const bars = {
-	mouseover: {
-		strokeWidth: 4,
-		strokeOpacity: 0.5
+export const grid: GridOptions = {
+	x: {
+		numberOfTicks: 5
 	},
-	mouseout: {
-		strokeWidth: 0,
-		strokeWidthAccessible: 2,
-		strokeOpacity: 1
-	},
-	default: {
-		strokeWidth: 2
-	},
-	spacing: {
-		bars: 0.2,
-		datasets: 0.25
-	},
-	bars: {
-		maxWidth: null
-	}
-};
-
-/**
- * Options for line behaviour
- */
-export const lines = {
-	points: {
-		strokeWidth: 4,
-		minNonFilledRadius: 3,
-		mouseover: {
-			strokeWidth: 4,
-			strokeOpacity: 0.5,
-			fillOpacity: 1,
-		},
-		mouseout: {
-			strokeWidth: 0,
-			strokeWidthAccessible: 2,
-			strokeOpacity: 1
-		}
-	}
-};
-
-/**
- * Options for pie behaviour
- */
-export const pie = {
-	maxWidth: 516.6,
-	mouseover: {
-		strokeWidth: 6,
-		strokeOpacity: 0.5
-	},
-	mouseout: {
-		strokeWidth: 0,
-		strokeOpacity: 1
-	},
-	sliceLimit: 6,
-	label: {
-		dy: ".32em",
-		margin: 8,
-		other: "Other",
-		fontSize: 12
-	},
-	callout : {
-		sliceDegreeThreshold: 5,
-		calloutOffsetX: 15,
-		calloutOffsetY: 12,
-		calloutTextMargin: 2,
-		horizontalLineLength: 8,
-		direction: {
-			LEFT: "left",
-			RIGHT: "right"
-		}
-	},
-	default: {
-		strokeWidth: 2
-	},
-	paddingLeft: 20
-};
-
-/**
- * Options for donut behaviour
- */
-export const donut = {
-	centerText: {
-		title: {
-			y: 22
-		},
-		breakpoint: 175,
-		magicScaleRatio: 2.5,
-		numberFontSize: 24,
-		titleFontSize: 15
-	}
-};
-
-/**
- * Legend configuration
- */
-export const legend = {
-	countBreak: 4,
-	fontSize: 12,
-	wrapperHeight: "40px",
-	widthTolerance: 15,
-	hoverShadowSize: "3px",
-	hoverShadowTransparency: 0.2,
-	margin: {
-		top: 19
-	},
-	active: {
-		borderColor: false,
-		borderStyle: false,
-		borderWidth: false
-	},
-	inactive: {
-		backgroundColor: "transparent",
-		borderStyle: "solid",
-		borderWidth: "2px"
-	},
-	items: {
-		status: {
-			ACTIVE: 1,
-			DISABLED: 0
-		},
-	},
-	basedOn: {
-		SERIES: "series",
-		LABELS: "labels"
+	y: {
+		numberOfTicks: 5
 	}
 };
 
 /**
  * Tooltip options
  */
-export const tooltip = {
-	width: 200,
-	arrowWidth: 10,
-	magicXPoint2: 20,
-	magicTop1: 21,
-	magicTop2: 22,
-	magicLeft1: 11,
-	magicLeft2: 10,
-	fadeIn: {
-		duration: 250
+export const baseTooltip: TooltipOptions = {
+	datapoint: {
+		horizontalOffset: 10,
+		enabled: true,
 	},
-	fadeOut: {
-		duration: 250
+};
+
+export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip, {
+	gridline: {
+		enabled: true,
+		threshold: 0.25
+	}
+} as AxisTooltipOptions);
+
+export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip , {
+	datapoint: {
+		verticalOffset: 4
 	},
-	size: {
-		COMPACT: "compact"
+	gridline: {
+		enabled: false
+	}
+} as BarTooltipOptions);
+
+// We setup no axes by default, the TwoDimensionalAxes component
+// Will setup axes options based on what user provides
+export const axes: AxesOptions = { };
+
+export const timeScale: TimeScaleOptions = {
+	addSpaceOnEdges: true
+};
+
+/**
+ * Base chart options common to any chart
+ */
+const chart: BaseChartOptions = {
+	resizable: true,
+	theme: ChartTheme.DEFAULT,
+	tooltip: baseTooltip,
+	legend,
+	style: {
+		prefix: "cc"
+	}
+};
+
+/**
+ * Options common to any chart with an axis
+ */
+const axisChart: AxisChartOptions = Tools.merge({}, chart, {
+	axes,
+	timeScale,
+	grid,
+	tooltip: axisChartTooltip
+} as AxisChartOptions);
+
+/**
+ * options specific to simple bar charts
+ */
+const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
+	bars: {
+		maxWidth: 16
+	},
+	timeScale: Tools.merge(timeScale, {
+		addSpaceOnEdges: true
+	} as TimeScaleOptions),
+	tooltip: barChartTooltip
+} as BarChartOptions);
+
+/**
+ * options specific to simple bar charts
+ */
+const simpleBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
+
+} as BarChartOptions);
+
+/**
+ * options specific to simple bar charts
+ */
+const groupedBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
+
+} as BarChartOptions);
+
+/**
+ * options specific to stacked bar charts
+ */
+const stackedBarChart: StackedBarChartOptions = Tools.merge({}, baseBarChart, {
+	bars: Tools.merge({}, baseBarChart.bars, {
+		dividerSize: 1.5
+	} as StackedBarOptions)
+} as BarChartOptions);
+
+/**
+ * options specific to line charts
+ */
+const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
+	points: {
+		// default point radius to 3
+		radius: 3,
+		filled: false
+	}
+} as LineChartOptions);
+
+/**
+ * options specific to scatter charts
+ */
+const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
+	points: {
+		// default point radius to 4
+		radius: 4,
+		fillOpacity: 0.3,
+		filled: true
+	}
+} as ScatterChartOptions);
+
+/**
+ * options specific to pie charts
+ */
+const pieChart: PieChartOptions = Tools.merge({}, chart, {
+	pie: {
+		radiusOffset: -15,
+		innerRadius: 2,
+		padAngle: 0.007,
+		hoverArc: {
+			outerRadiusOffset: 3
+		},
+		xOffset: 30,
+		yOffset: 20,
+		yOffsetCallout: 10,
+		callout: {
+			minSliceDegree: 5,
+			offsetX: 15,
+			offsetY: 12,
+			horizontalLineLength: 8,
+			textMargin: 2
+		}
+	}
+} as PieChartOptions);
+
+/**
+ * options specific to donut charts
+ */
+const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
+	donut: {
+		center: {
+			numberFontSize: radius => Math.min((radius / 100) * 24, 24) + "px",
+			titleFontSize: radius => Math.min((radius / 100) * 15, 15) + "px",
+			titleYPosition: radius => Math.min((radius / 80) * 20, 20)
+		}
+	}
+} as DonutChartOptions);
+
+export const options = {
+	chart,
+	axisChart,
+	simpleBarChart,
+	groupedBarChart,
+	stackedBarChart,
+	lineChart,
+	scatterChart,
+	pieChart,
+	donutChart
+};
+
+/**
+ * Options for line behaviour
+ */
+export const lines = {
+	opacity: {
+		unselected: 0.3,
+		selected: 1
 	}
 };
 
@@ -742,26 +240,18 @@ export const tooltip = {
  */
 export const transitions = {
 	default: {
-		duration: 750
+		duration: 300
 	},
-	pie_slice_hover: {
+	pie_slice_mouseover: {
 		duration: 100
 	},
 	pie_chart_titles: {
 		duration: 375
-	}
-};
-
-/**
- * Selectors to standardize querying parts of the chart
- */
-export const selectors = {
-	OUTERSVG: "svg.chart-svg",
-	INNERWRAP: "g.inner-wrap",
-	CHARTWRAPPER: "div.chart-wrapper",
-	TOOLTIP: "div.chart-tooltip",
-	LEGEND_BTN: "li.legend-btn",
-	pie: {
-		SLICE: "path"
+	},
+	graph_element_mouseover_fill_update: {
+		duration: 100
+	},
+	graph_element_mouseout_fill_update: {
+		duration: 100
 	}
 };

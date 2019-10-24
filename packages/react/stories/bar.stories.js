@@ -1,55 +1,60 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import BarChart from "../src/bar-chart";
 import {
-	groupedBarData,
+	SimpleBarChart,
+	GroupedBarChart,
+	StackedBarChart
+} from "../src/index";
+
+import {
+	// Bar
 	groupedBarOptions,
-	simpleBarData,
+	groupedBarData,
 	simpleBarOptions,
+	simpleBarData,
+	simpleBarTimeSeriesOptions,
+	simpleBarTimeSeriesData,
 	stackedBarData,
-	stackedBarOptions
-} from "./bar-demo-data";
+	stackedBarOptions,
+	stackedBarTimeSeriesOptions,
+	stackedBarTimeSeriesData,
+} from "../../core/demo/demo-data/index";
+
+import { addWidthAndHeight } from "./commons";
 
 const barStories = storiesOf("Bar", module);
-barStories.add("Label-based legend", () => (
-	<BarChart
+barStories.add(simpleBarOptions.title, () => (
+	<SimpleBarChart
 		data={simpleBarData}
-		options={simpleBarOptions}
+		options={addWidthAndHeight(simpleBarOptions)}
 	/>
 ));
 
-barStories.add("Label-based legend (Accessible)", () => (
-	<BarChart
-		data={simpleBarData}
-		options={Object.assign({}, simpleBarOptions, {accessibility: true})}
-	/>
-));
-
-barStories.add("Grouped", () => (
-	<BarChart
+barStories.add(groupedBarOptions.title, () => (
+	<GroupedBarChart
 		data={groupedBarData}
-		options={groupedBarOptions}
+		options={addWidthAndHeight(groupedBarOptions)}
 	/>
 ));
 
-barStories.add("Grouped (Accessible)", () => (
-	<BarChart
-		data={groupedBarData}
-		options={Object.assign({}, groupedBarOptions, {accessibility: true})}
+barStories.add(simpleBarTimeSeriesOptions.title, () => (
+	<SimpleBarChart
+		data={simpleBarTimeSeriesData}
+		options={addWidthAndHeight(simpleBarTimeSeriesOptions)}
 	/>
 ));
 
-barStories.add("Stacked", () => (
-	<BarChart
+barStories.add(stackedBarOptions.title, () => (
+	<StackedBarChart
 		data={stackedBarData}
-		options={stackedBarOptions}
+		options={addWidthAndHeight(stackedBarOptions)}
 	/>
 ));
 
-barStories.add("Stacked (Accessible)", () => (
-	<BarChart
-		data={stackedBarData}
-		options={Object.assign({}, stackedBarOptions, {accessibility: true})}
+barStories.add(stackedBarTimeSeriesOptions.title, () => (
+	<StackedBarChart
+		data={stackedBarTimeSeriesData}
+		options={addWidthAndHeight(stackedBarTimeSeriesOptions)}
 	/>
 ));

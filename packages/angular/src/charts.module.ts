@@ -6,7 +6,9 @@ import { BaseChart } from "./base-chart.component";
 
 import { DonutChartComponent } from "./donut-chart.component";
 import { PieChartComponent } from "./pie-chart.component";
-import { BarChartComponent } from "./bar-chart.component";
+import { SimpleBarChartComponent } from "./bar-chart-simple.component";
+import { GroupedBarChartComponent } from "./bar-chart-grouped.component";
+import { StackedBarChartComponent } from "./bar-chart-stacked.component";
 import { LineChartComponent } from "./line-chart.component";
 import { ScatterChartComponent } from "./scatter-chart.component";
 
@@ -19,7 +21,9 @@ import { ScatterChartComponent } from "./scatter-chart.component";
 		BaseChart,
 		DonutChartComponent,
 		PieChartComponent,
-		BarChartComponent,
+		SimpleBarChartComponent,
+		GroupedBarChartComponent,
+		StackedBarChartComponent,
 		LineChartComponent,
 		ScatterChartComponent
 	],
@@ -27,7 +31,9 @@ import { ScatterChartComponent } from "./scatter-chart.component";
 		BaseChart,
 		DonutChartComponent,
 		PieChartComponent,
-		BarChartComponent,
+		SimpleBarChartComponent,
+		GroupedBarChartComponent,
+		StackedBarChartComponent,
 		LineChartComponent,
 		ScatterChartComponent
 	]

@@ -1,53 +1,20 @@
 import {
-	merge as lodashMerge
+	debounce as lodashDebounce,
+	merge as lodashMerge,
+	cloneDeep as lodashCloneDeep,
+	uniq as lodashUnique,
+	// the imports below are needed because of typescript bug (error TS4029)
+	Cancelable,
+	DebounceSettings
 } from "lodash-es";
 
 // Functions
 export namespace Tools {
-	export function debounce(func, wait, immediate) {
-		let timeout;
-		return function() {
-			const context = this, args = arguments;
-			const later = function() {
-				timeout = null;
-				if (!immediate) {
-					func.apply(context, args);
-				}
-			};
-			const callNow = immediate && !timeout;
-			clearTimeout(timeout);
-			timeout = setTimeout(later, wait);
-			if (callNow) {
-				func.apply(context, args);
-			}
-		};
-	}
-
-	export function addCloseBtn(tooltip, size, color?) {
-		const closeBtn = tooltip.append("button");
-		let classNames = `close--${size}`;
-		classNames = color ? " close--" + color : classNames;
-
-		const iconHolder = document.createElement("span");
-		iconHolder.innerHTML = `Close`;
-		closeBtn.attr("class", classNames)
-			.attr("type", "button")
-			.attr("aria-label", "Close");
-
-		closeBtn.node()
-			.appendChild(iconHolder);
-
-			// TODO - Finish
-			// console.log(iconHolder);
-		return closeBtn;
-	}
-
-	export function clone(obj) {
-		return JSON.parse(JSON.stringify(obj));
-	}
-
-	// custom deep object merge
+	// Export these functions from lodash
+	export const debounce = lodashDebounce;
+	export const clone = lodashCloneDeep;
 	export const merge = lodashMerge;
+	export const removeArrayDuplicates = lodashUnique;
 
 	/**************************************
 	 *  DOM-related operations            *
@@ -65,23 +32,6 @@ export namespace Tools {
 			width: parseFloat(el.style.width.replace("px", "") || el.offsetWidth),
 			height: parseFloat(el.style.height.replace("px", "") || el.offsetHeight)
 		};
-	}
-
-	/**
-	 * Returns element if it  exists, otherwise creates and returns reference to item
-	 * @param parent Element parent to query within
-	 * @param query The element to return from the DOM
-	 */
-	export function appendOrSelect(parent, query) {
-		const l = query.split(".");
-		const elementToAppend = l[0];
-
-		const g = parent.select(query);
-		if (g.empty()) {
-			return parent.append(elementToAppend)
-				.attr("class", l.slice(1).join(" "));
-		}
-		return g;
 	}
 
 	/**
@@ -218,15 +168,6 @@ export namespace Tools {
 		return duplicateValues;
 	}
 
-	export function removeArrayDuplicates(arr): any[] {
-		// Casting to any because of the lack of typescript types
-		// Set removes duplicates automatically
-		const result = new Set(arr) as any;
-
-		// Spread operator appends all elements from result into []
-		return [...result];
-	}
-
 	// ================================================================================
 	// D3 Extensions
 	// ================================================================================
@@ -249,13 +190,17 @@ export namespace Tools {
 
 	export const getProperty = (object, ...propPath) => {
 		let position = object;
-		for (const prop of propPath) {
-			if (position[prop]) {
-				position = position[prop];
-			} else {
-				return null;
+		if (position) {
+			for (const prop of propPath) {
+				if (position[prop]) {
+					position = position[prop];
+				} else {
+					return null;
+				}
 			}
+			return position;
 		}
-		return position;
+
+		return null;
 	};
 }

@@ -1,80 +1,83 @@
 import { storiesOf } from "@storybook/angular";
 
 import { ChartsModule } from "../src/charts.module";
-import { BarComponent } from "./bar/bar.component";
 
 import {
-	groupedBarData,
+	// Bar
 	groupedBarOptions,
-	simpleBarData,
+	groupedBarData,
 	simpleBarOptions,
+	simpleBarData,
+	simpleBarTimeSeriesOptions,
+	simpleBarTimeSeriesData,
 	stackedBarData,
-	stackedBarOptions
-} from "./bar-demo-data";
+	stackedBarOptions,
+	stackedBarTimeSeriesOptions,
+	stackedBarTimeSeriesData,
+} from "../../core/demo/demo-data/index";
+import { addWidthAndHeight } from "./commons";
 
-const barStories = storiesOf("Bar", module);
-barStories.add("Label-based legend", () => ({
-	component: BarComponent,
+const template = barType => `
+<ibm-${barType}-bar-chart
+	class="n-chart"
+	[data]="data"
+	[options]="options"
+	#${barType}BarChart>
+</ibm-${barType}-bar-chart>
+`;
+
+const stories = storiesOf("Bar", module);
+stories.add(simpleBarOptions.title, () => ({
+	template: template("simple"),
 	moduleMetadata: {
 		imports: [ChartsModule]
 	},
 	props: {
-		barData: simpleBarData,
-		barOptions: simpleBarOptions
+		data: simpleBarData,
+		options: addWidthAndHeight(simpleBarOptions)
 	}
 }));
 
-barStories.add("Label-based legend (Accessible)", () => ({
-	component: BarComponent,
+stories.add(simpleBarTimeSeriesOptions.title, () => ({
+	template: template("simple"),
 	moduleMetadata: {
 		imports: [ChartsModule]
 	},
 	props: {
-		barData: simpleBarData,
-		barOptions: Object.assign({}, simpleBarOptions, {accessibility: true})
+		data: simpleBarTimeSeriesData,
+		options: addWidthAndHeight(simpleBarTimeSeriesOptions)
 	}
 }));
 
-barStories.add("Grouped", () => ({
-	component: BarComponent,
+stories.add(groupedBarOptions.title, () => ({
+	template: template("grouped"),
 	moduleMetadata: {
 		imports: [ChartsModule]
 	},
 	props: {
-		barData: groupedBarData,
-		barOptions: groupedBarOptions
+		data: groupedBarData,
+		options: addWidthAndHeight(groupedBarOptions)
 	}
 }));
 
-barStories.add("Grouped (Accessible)", () => ({
-	component: BarComponent,
+stories.add(stackedBarOptions.title, () => ({
+	template: template("stacked"),
 	moduleMetadata: {
 		imports: [ChartsModule]
 	},
 	props: {
-		barData: groupedBarData,
-		barOptions: Object.assign({}, groupedBarOptions, {accessibility: true})
+		data: stackedBarData,
+		options: addWidthAndHeight(stackedBarOptions)
 	}
 }));
 
-barStories.add("Stacked", () => ({
-	component: BarComponent,
+stories.add(stackedBarTimeSeriesOptions.title, () => ({
+	template: template("stacked"),
 	moduleMetadata: {
 		imports: [ChartsModule]
 	},
 	props: {
-		barData: stackedBarData,
-		barOptions: stackedBarOptions
-	}
-}));
-
-barStories.add("Stacked (Accessible)", () => ({
-	component: BarComponent,
-	moduleMetadata: {
-		imports: [ChartsModule]
-	},
-	props: {
-		barData: stackedBarData,
-		barOptions: Object.assign({}, stackedBarOptions, {accessibility: true})
+		data: stackedBarTimeSeriesData,
+		options: addWidthAndHeight(stackedBarTimeSeriesOptions)
 	}
 }));

@@ -1,72 +1,131 @@
 import { colors } from "./colors";
 import { getTheme } from "./themes";
+import { Tools } from "../../src/tools";
 
-export const curvedLineData = {
+export const lineTimeSeriesData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
 		{
 			label: "Dataset 1",
 			backgroundColors: [colors[0]],
 			data: [
-				65000,
-				79000,
-				49213,
-				51213,
-				16932
+				{
+					date: new Date(2019, 0, 1),
+					value: 10000
+				},
+				{
+					date: new Date(2019, 0, 5),
+					value: 65000
+				},
+				{
+					date: new Date(2019, 0, 8),
+					value: 10000
+				},
+				{
+					date: new Date(2019, 0, 13),
+					value: 49213
+				},
+				{
+					date: new Date(2019, 0, 17),
+					value: 51213
+				}
 			]
 		},
 		{
 			label: "Dataset 2",
 			backgroundColors: [colors[1]],
 			data: [
-				80000,
-				21312,
-				56456,
-				21312,
-				0
+				{
+					date: new Date(2019, 0, 2),
+					value: 0
+				},
+				{
+					date: new Date(2019, 0, 6),
+					value: 57312
+				},
+				{
+					date: new Date(2019, 0, 8),
+					value: 21432
+				},
+				{
+					date: new Date(2019, 0, 15),
+					value: 70323
+				},
+				{
+					date: new Date(2019, 0, 19),
+					value: 21300
+				}
 			]
 		},
 		{
 			label: "Dataset 3",
 			backgroundColors: [colors[2]],
 			data: [
-				12312,
-				34232,
-				39232,
-				12312,
-				34234
+				{
+					date: new Date(2019, 0, 1),
+					value: 50000
+				},
+				{
+					date: new Date(2019, 0, 5),
+					value: 15000
+				},
+				{
+					date: new Date(2019, 0, 8),
+					value: 20000
+				},
+				{
+					date: new Date(2019, 0, 13),
+					value: 39213
+				},
+				{
+					date: new Date(2019, 0, 17),
+					value: 61213
+				}
+			]
+		},
+		{
+			label: "Dataset 4",
+			backgroundColors: [colors[3]],
+			data: [
+				{
+					date: new Date(2019, 0, 2),
+					value: 10
+				},
+				{
+					date: new Date(2019, 0, 6),
+					value: 37312
+				},
+				{
+					date: new Date(2019, 0, 8),
+					value: 51432
+				},
+				{
+					date: new Date(2019, 0, 15),
+					value: 40323
+				},
+				{
+					date: new Date(2019, 0, 19),
+					value: 31300
+				}
 			]
 		}
 	]
 };
 
-export const curvedLineOptions = {
-	accessibility: false,
-	scales: {
-		x: {
-			title: "2018 Annual Sales Figures",
+export const lineTimeSeriesOptions = {
+	title: "Line (time series)",
+	axes: {
+		left: {
+			secondary: true
 		},
-		y: {
-			title: "Dollars (CAD)",
-			yMaxAdjuster: yMax => yMax * 1.2,
-			yMinAdjuster: yMin => yMin * 1.2,
-			formatter: axisValue => `${axisValue / 1000}k`
-		},
-		y2: {
-			ticks: {
-				max: 1,
-				min: 0
-			}
+		bottom: {
+			type: "time",
+			primary: true
 		}
 	},
-	curve: {
-		name: "curveNatural"
-	},
-	legendClickable: true,
-	containerResizable: true,
+	curve: "curveMonotoneX",
 	theme: getTheme()
 };
-
 
 export const lineData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -75,27 +134,60 @@ export const lineData = {
 			label: "Dataset 1",
 			backgroundColors: [colors[0]],
 			data: [
-				2000,
-				4200,
-				7000,
-				4000,
-				19000
+				32100,
+				23500,
+				53100,
+				42300,
+				12300
 			]
 		},
 		{
 			label: "Dataset 2",
 			backgroundColors: [colors[1]],
 			data: [
-				0,
-				10000,
-				20000,
-				30000,
-				40000
+				34200,
+				53200,
+				42300,
+				21400,
+				0
 			]
 		},
 		{
-			label: "Dataset 3",
+			label: "Dataset 3 long name",
 			backgroundColors: [colors[2]],
+			data: [
+				41200,
+				23400,
+				34210,
+				1400,
+				42100
+			]
+		},
+		{
+			label: "Dataset 4 long name",
+			backgroundColors: [colors[3]],
+			data: [
+				22000,
+				1200,
+				9000,
+				24000,
+				3000
+			]
+		},
+		{
+			label: "Dataset 5 long name",
+			backgroundColors: [colors[4]],
+			data: [
+				2412,
+				30000,
+				10000,
+				5000,
+				31000
+			]
+		},
+		{
+			label: "Dataset 6 long name",
+			backgroundColors: [colors[5]],
 			data: [
 				0,
 				20000,
@@ -108,37 +200,36 @@ export const lineData = {
 };
 
 export const lineOptions = {
-	accessibility: false,
-	scales: {
-		x: {
+	title: "Line (discrete)",
+	axes: {
+		bottom: {
 			title: "2018 Annual Sales Figures",
+			type: "labels",
+			secondary: true
 		},
-		y: {
-			title: "Dollars (CAD)",
-			yMaxAdjuster: yMax => yMax * 1.2,
-			yMinAdjuster: yMin => yMin * 1.2,
-			formatter: axisValue => `${axisValue / 1000}k`,
-			thresholds: [
-				{
-					range: [-20000, 30000],
-					theme: "success"
-				},
-				{
-					range: [30000, 40000],
-					theme: "danger"
-				},
-				{
-					range: [40000, 70000],
-					theme: "warning"
-				}
-			]
+		left: {
+			primary: true
 		}
 	},
-	legendClickable: true,
-	containerResizable: true,
 	theme: getTheme()
 };
 
+// Step
+export const stepOptions = Tools.merge({}, lineOptions, {
+	title: "Step (discrete)",
+	curve: "curveStepAfter"
+});
+
+export const stepData = lineData;
+
+export const stepTimeSeriesOptions = Tools.merge({}, lineTimeSeriesOptions, {
+	title: "Step (time series)",
+	curve: "curveStepAfter"
+});
+
+export const stepTimeSeriesData = lineTimeSeriesData;
+
+// Scatter
 export const scatterData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
@@ -165,7 +256,7 @@ export const scatterData = {
 			]
 		},
 		{
-			label: "Dataset 3",
+			label: "Dataset 3 long name",
 			backgroundColors: [colors[2]],
 			data: [
 				41200,
@@ -174,6 +265,74 @@ export const scatterData = {
 				1400,
 				42100
 			]
+		},
+		{
+			label: "Dataset 4 long name",
+			backgroundColors: [colors[3]],
+			data: [
+				22000,
+				1200,
+				9000,
+				24000,
+				3000
+			]
+		},
+		{
+			label: "Dataset 5 long name",
+			backgroundColors: [colors[4]],
+			data: [
+				2412,
+				30000,
+				10000,
+				5000,
+				31000
+			]
+		},
+		{
+			label: "Dataset 6 long name",
+			backgroundColors: [colors[5]],
+			data: [
+				0,
+				20000,
+				40000,
+				60000,
+				80000
+			]
 		}
 	]
+};
+
+export const scatterOptions = {
+	title: "Scatter (discrete)",
+	axes: {
+		bottom: {
+			title: "2018 Annual Sales Figures",
+			type: "labels",
+			secondary: true
+		},
+		left: {
+			primary: true
+		}
+	},
+	theme: getTheme()
+};
+
+export const scatterTimeSeriesData = lineTimeSeriesData;
+
+export const scatterTimeSeriesOptions = {
+	title: "Scatter (time series)",
+	legend: {
+		position: "top"
+	},
+	axes: {
+		bottom: {
+			title: "2018 Annual Sales Figures",
+			type: "labels",
+			secondary: true
+		},
+		left: {
+			primary: true
+		}
+	},
+	theme: getTheme()
 };

@@ -4,7 +4,6 @@
 	"description": "Carbon charting components for React",
 	"main": "./bundle.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "yarn run storybook",
 		"build": "bash build.sh",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
@@ -52,7 +51,6 @@
 		"react-dom": "^16.6.3"
 	},
 	"devDependencies": {
-		"@storybook/addon-info": "5.0.11",
 		"@storybook/addon-options": "5.0.11",
 		"@storybook/react": "5.0.11",
 		"@storybook/storybook-deployer": "2.8.1",
@@ -75,6 +73,7 @@
 		"rollup-plugin-commonjs": "9.2.0",
 		"sass-loader": "7.1.0",
 		"style-loader": "0.19.0",
+		"ts-loader": "6.2.0",
 		"url-loader": "0.6.2"
 	},
 	"publishConfig": {

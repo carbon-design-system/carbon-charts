@@ -13,9 +13,9 @@ import { ScatterChart } from "@carbon/charts";
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: "n-scatter-chart",
+	selector: "ibm-scatter-chart",
 	template: `
-		<div #nChart class='n-chart-container'>
+		<div #nChart class="ibm-chart-container">
 		</div>
 	`
 })

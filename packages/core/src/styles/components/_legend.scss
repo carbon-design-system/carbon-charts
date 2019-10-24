@@ -1,0 +1,39 @@
+g.#{$prefix}--#{$charts-prefix}--legend {
+	user-select: none;
+
+	g.legend-item {
+		rect.checkbox {
+			stroke-width: 1px;
+			stroke-opacity: 1;
+
+			&:not(.active) {
+				stroke: $text-02;
+				fill: $ui-background;
+			}
+
+			&:not(.active) ~ g.check {
+				display: none;
+			}
+		}
+
+		rect.hover-stroke {
+			fill: none;
+			stroke: $carbon--blue-60;
+			stroke-width: 2;
+		}
+
+		g.check > svg path {
+			fill: $ui-background;
+			stroke: $ui-background;
+		}
+
+		text {
+			font-size: 12px;
+			fill: $text-02;
+		}
+	}
+
+	&.clickable g.legend-item:hover {
+		cursor: pointer;
+	}
+}

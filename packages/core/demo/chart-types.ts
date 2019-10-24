@@ -4,94 +4,98 @@ const {
 	groupedBarData,
 	simpleBarOptions,
 	simpleBarData,
+	simpleBarTimeSeriesOptions,
+	simpleBarTimeSeriesData,
 	stackedBarData,
 	stackedBarOptions,
+	stackedBarTimeSeriesOptions,
+	stackedBarTimeSeriesData,
 	// Pie & donut
 	pieOptions,
 	pieData,
 	donutOptions,
+	donutData,
 	// Line
-	curvedLineOptions,
-	curvedLineData,
+	lineTimeSeriesOptions,
+	lineTimeSeriesData,
 	lineData,
 	lineOptions,
-	scatterData,
-	// Combo
-	comboData,
-	comboOptions
+	// Step
+	stepOptions,
+	stepData,
+	stepTimeSeriesOptions,
+	stepTimeSeriesData,
+	// Scatter
+	scatterTimeSeriesOptions,
+	scatterTimeSeriesData,
+	scatterOptions,
+	scatterData
 } = require("./demo-data/index");
 
 export const chartTypes = [
 	{
 		id: "grouped-bar",
-		name: "Grouped Bar",
 		options: groupedBarOptions,
 		data: groupedBarData
 	},
 	{
 		id: "simple-bar",
-		name: "Bar",
 		options: simpleBarOptions,
 		data: simpleBarData
 	},
 	{
-		id: "combo",
-		name: "Combo",
-		options: comboOptions,
-		data: comboData
+		id: "scatter",
+		options: scatterOptions,
+		data: scatterData
+	},
+	{
+		id: "simple-bar-time-series",
+		options: simpleBarTimeSeriesOptions,
+		data: simpleBarTimeSeriesData
 	},
 	{
 		id: "stacked-bar",
-		name: "Bar",
 		options: stackedBarOptions,
 		data: stackedBarData
 	},
 	{
-		id: "simple-bar-accessible",
-		name: "Accessible Bar",
-		options: Object.assign({}, simpleBarOptions, {accessibility: true}),
-		data: simpleBarData
+		id: "stacked-bar-time-series",
+		options: stackedBarTimeSeriesOptions,
+		data: stackedBarTimeSeriesData
 	},
 	{
-		id: "stacked-bar-accessible",
-		name: "Bar",
-		options: Object.assign({}, stackedBarOptions, {accessibility: true}),
-		data: stackedBarData
-	},
-	{
-		id: "curved-line",
-		name: "Curved Line",
-		options: curvedLineOptions,
-		data: curvedLineData
+		id: "line-time-series",
+		options: lineTimeSeriesOptions,
+		data: lineTimeSeriesData
 	},
 	{
 		id: "line",
-		name: "Line",
 		options: lineOptions,
 		data: lineData
 	},
 	{
 		id: "line-step",
-		name: "Step",
-		options: Object.assign({}, lineOptions, {curve: "curveStepAfter"}),
-		data: lineData
+		options: stepOptions,
+		data: stepData
+	},
+	{
+		id: "line-step-time-series",
+		options: stepTimeSeriesOptions,
+		data: stepTimeSeriesData
 	},
 	{
 		id: "pie",
-		name: "pie",
 		options: pieOptions,
 		data: pieData
 	},
 	{
 		id: "donut",
-		name: "donut",
 		options: donutOptions,
-		data: pieData
+		data: donutData
 	},
 	{
-		id: "scatter",
-		name: "scatter",
-		options: lineOptions,
-		data: scatterData
+		id: "scatter-time-series",
+		options: scatterTimeSeriesOptions,
+		data: scatterTimeSeriesData
 	}
 ];

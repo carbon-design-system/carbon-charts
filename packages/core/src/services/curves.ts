@@ -16,39 +16,73 @@ import {
 	curveNatural,
 	curveStep,
 	curveStepAfter,
-	curveStepBefore
+	curveStepBefore,
+	// the imports below are needed because of typescript bug (error TS4029)
+	CurveBundleFactory,
+	CurveCardinalFactory,
+	CurveCatmullRomFactory,
+	CurveGenerator
 } from "d3-shape";
 
-const curveTypes = {
-	"curveLinear": curveLinear,
-	"curveLinearClosed": curveLinearClosed,
-	"curveBasis": curveBasis,
-	"curveBasisClosed": curveBasisClosed,
-	"curveBasisOpen": curveBasisOpen,
-	"curveBundle": curveBundle,
-	"curveCardinal": curveCardinal,
-	"curveCardinalClosed": curveCardinalClosed,
-	"curveCardinalOpen": curveCardinalOpen,
-	"curveCatmullRom": curveCatmullRom,
-	"curveCatmullRomClosed": curveCatmullRomClosed,
-	"curveCatmullRomOpen": curveCatmullRomOpen,
-	"curveMonotoneX": curveMonotoneX,
-	"curveMonotoneY": curveMonotoneY,
-	"curveNatural": curveNatural,
-	"curveStep": curveStep,
-	"curveStepAfter": curveStepAfter,
-	"curveStepBefore": curveStepBefore
-};
+// this import is needed because of typescript bug (error TS4029)
+import { Path } from "d3-path";
 
-export const getD3Curve = (curveName = "curveLinear", curveOptions = {}) => {
-	if (curveTypes[curveName]) {
-		let curve = curveTypes[curveName];
-		Object.keys(curveOptions).forEach(optionName => {
-			if (curve[optionName]) {
-				curve = curve[optionName](curveOptions[optionName]);
+// Internal Imports
+import { Service } from "./service";
+
+export class Curves extends Service {
+	curveTypes = {
+		curveLinear,
+		curveLinearClosed,
+		curveBasis,
+		curveBasisClosed,
+		curveBasisOpen,
+		curveBundle,
+		curveCardinal,
+		curveCardinalClosed,
+		curveCardinalOpen,
+		curveCatmullRom,
+		curveCatmullRomClosed,
+		curveCatmullRomOpen,
+		curveMonotoneX,
+		curveMonotoneY,
+		curveNatural,
+		curveStep,
+		curveStepAfter,
+		curveStepBefore
+	};
+
+	getD3Curve() {
+		let curveName = "curveLinear";
+		const curveOptions = this.model.getOptions().curve;
+
+		// Parse curve type whether the user provided a string
+		// Or an object with more options
+		if (curveOptions) {
+			if (typeof curveOptions === "string") { // curve: 'string'
+				curveName = curveOptions;
+			} else { // curve: { name: 'string' }
+				curveName = curveOptions.name;
 			}
-		});
-		return curve;
+		}
+
+		if (this.curveTypes[curveName]) {
+			// Grab correct d3 curve function
+			let curve = this.curveTypes[curveName];
+
+			// Apply user-provided options to the d3 curve
+			if (curveOptions) {
+				Object.keys(curveOptions).forEach(optionName => {
+					if (curve[optionName]) {
+						curve = curve[optionName](curveOptions[optionName]);
+					}
+				});
+			}
+
+			return curve;
+		}
+
+		console.warn(`The curve type '${curveName}' is invalid, using 'curveLinear' instead`);
+		return this.curveTypes["curveLinear"];
 	}
-	return null;
-};
+}
