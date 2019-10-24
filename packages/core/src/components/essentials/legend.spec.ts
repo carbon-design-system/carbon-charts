@@ -16,11 +16,11 @@ describe("legend component", () => {
 			const data = this._testEnvironment.chartData;
 			const numberOfDatasets = data.datasets.length;
 
-			const chartEventsFragment = this._chart.services.events.getDocumentFragment();
+			const chartEventsService= this._chart.services.events;
 
 			const renderCb = () => {
 				// Remove render event listener
-				chartEventsFragment.removeEventListener("render-finished", renderCb);
+				chartEventsService.removeEventListener("render-finished", renderCb);
 
 				const numberOfLegendItems = select("g.bx--cc--legend").selectAll("g.legend-item").size();
 				expect(numberOfLegendItems).toEqual(numberOfDatasets);
@@ -29,7 +29,7 @@ describe("legend component", () => {
 			};
 
 			// Add event listener for when chart render is finished
-			chartEventsFragment.addEventListener("render-finished", renderCb);
+			chartEventsService.addEventListener("render-finished", renderCb);
 		});
 	});
 

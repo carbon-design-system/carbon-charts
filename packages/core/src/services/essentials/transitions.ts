@@ -12,7 +12,6 @@ export class Transitions extends Service {
 
 	init() {
 		this.services.events
-			.getDocumentFragment()
 			.addEventListener("model-update", () => {
 				this.pendingTransitions = {};
 			});

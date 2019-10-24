@@ -15,12 +15,12 @@ describe("title component", () => {
 		it("should match text provided in options", function(done) {
 			const sampleTitle = "My chart";
 
-			const chartEventsFragment = this._chart.services.events.getDocumentFragment();
+			const chartEventsService = this._chart.services.events;
 			const renderCb = () => {
 				const title = select("g.bx--cc--title");
 
 				// Remove event listener for when chart render is finished
-				chartEventsFragment.removeEventListener("render-finished", renderCb);
+				chartEventsService.removeEventListener("render-finished", renderCb);
 
 				expect(title.select("text").html()).toEqual(sampleTitle);
 
@@ -28,7 +28,7 @@ describe("title component", () => {
 			};
 
 			// Add event listener for when chart render is finished
-			chartEventsFragment.addEventListener("render-finished", renderCb);
+			chartEventsService.addEventListener("render-finished", renderCb);
 		});
 	});
 });
