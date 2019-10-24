@@ -131,7 +131,7 @@ export class Pie extends Component {
 				d.textOffsetX = textLength / 2;
 				d.textOffsetY = parseFloat(getComputedStyle(this).fontSize) / 2;
 
-				const marginedRadius = radius + 2;
+				const marginedRadius = radius + 7;
 
 				const theta = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
 

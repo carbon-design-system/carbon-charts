@@ -14,7 +14,7 @@ export const pieData = {
 };
 
 export const pieOptions = {
-	title: "Pie Chart",
+	title: "Pie",
 	accessibility: false,
 	legendClickable: true,
 	resizable: true,
@@ -25,7 +25,7 @@ export const pieOptions = {
 export const donutData = pieData;
 
 export const donutOptions = {
-	title: "Donut Chart",
+	title: "Donut",
 	accessibility: false,
 	legendClickable: true,
 	resizable: true,
