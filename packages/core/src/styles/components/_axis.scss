@@ -5,6 +5,7 @@
 	g.tick {
 		text {
 			fill: $text-02;
+			font-family: carbon--font-family("sans-condensed");
 		}
 
 		line {
@@ -17,7 +18,6 @@
 	}
 
 	.axis-title {
-		font-family: carbon--font-family("sans");
+		font-family: carbon--font-family("regular");
 	}
 }
-
