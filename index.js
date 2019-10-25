@@ -198,6 +198,11 @@ var chartTypes = [
         data: simpleBarData
     },
     {
+        id: "scatter-time-series",
+        options: scatterTimeSeriesOptions,
+        data: scatterTimeSeriesData
+    },
+    {
         id: "scatter",
         options: scatterOptions,
         data: scatterData
@@ -218,6 +223,16 @@ var chartTypes = [
         data: stackedBarTimeSeriesData
     },
     {
+        id: "pie",
+        options: pieOptions,
+        data: pieData
+    },
+    {
+        id: "donut",
+        options: donutOptions,
+        data: donutData
+    },
+    {
         id: "line-time-series",
         options: lineTimeSeriesOptions,
         data: lineTimeSeriesData
@@ -236,21 +251,6 @@ var chartTypes = [
         id: "line-step-time-series",
         options: stepTimeSeriesOptions,
         data: stepTimeSeriesData
-    },
-    {
-        id: "pie",
-        options: pieOptions,
-        data: pieData
-    },
-    {
-        id: "donut",
-        options: donutOptions,
-        data: donutData
-    },
-    {
-        id: "scatter-time-series",
-        options: scatterTimeSeriesOptions,
-        data: scatterTimeSeriesData
     }
 ];
 
@@ -1043,13 +1043,10 @@ var scatterOptions = {
 var scatterTimeSeriesData = lineTimeSeriesData;
 var scatterTimeSeriesOptions = {
     title: "Scatter (time series)",
-    legend: {
-        position: "top"
-    },
     axes: {
         bottom: {
-            title: "2018 Annual Sales Figures",
-            type: "labels",
+            title: "2019 Annual Sales Figures",
+            type: "time",
             secondary: true
         },
         left: {
