@@ -5256,6 +5256,8 @@ var timeScale = {
  * Base chart options common to any chart
  */
 var chart = {
+    width: "100%",
+    height: "100%",
     resizable: true,
     theme: _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["ChartTheme"].DEFAULT,
     tooltip: baseTooltip,
