@@ -19,21 +19,18 @@ export default class BaseChart extends React.Component {
 		// Width prop is mandatory for the wrappers
 		if (props.width) {
 			this.options.width = props.width;
-		} else if (!this.options.width) {
-			console.error("Missing `width` prop!");
 		}
 
 		// Height prop is mandatory for the wrappers
 		if (props.height) {
 			this.options.height = props.height;
-		} else if (!this.options.height) {
-			console.error("Missing `height` prop!");
 		}
 
 		Object.assign(this, this.chart);
 	}
 
 	componentDidUpdate() {
-		this.chart.setData(this.props.data);
+		this.chart.model.setData(this.props.data);
+		this.chart.model.setOptions(this.props.options);
 	}
 }
