@@ -98,6 +98,8 @@ export const timeScale: TimeScaleOptions = {
  * Base chart options common to any chart
  */
 const chart: BaseChartOptions = {
+	width: "100%",
+	height: "100%",
 	resizable: true,
 	theme: ChartTheme.DEFAULT,
 	tooltip: baseTooltip,

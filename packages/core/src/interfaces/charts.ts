@@ -21,11 +21,11 @@ export interface BaseChartOptions {
 	/**
 	 * Optionally specify a width for the chart
 	 */
-	width?: number;
+	width?: number | string;
 	/**
 	 * Optionally specify a height for the chart
 	 */
-	height?: number;
+	height?: number | string;
 	/**
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
 	 */
