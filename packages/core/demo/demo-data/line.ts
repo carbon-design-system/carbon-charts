@@ -326,8 +326,8 @@ export const scatterTimeSeriesOptions = {
 	},
 	axes: {
 		bottom: {
-			title: "2018 Annual Sales Figures",
-			type: "labels",
+			title: "2019 Annual Sales Figures",
+			type: "time",
 			secondary: true
 		},
 		left: {
