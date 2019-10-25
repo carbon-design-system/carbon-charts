@@ -26,5 +26,7 @@ else
 
 	yarn run build-all
 
+	node scripts/clean-package-jsons.js
+
 	lerna publish from-git --yes --force-publish --contents dist
 fi
