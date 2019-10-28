@@ -8,8 +8,8 @@ import { DOMUtils } from "../../services";
 // D3 Imports
 import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
-import { min, max, extent } from "d3-array";
-import { timeFormat, timeFormatDefaultLocale } from "d3-time-format";
+import { min, extent } from "d3-array";
+import { timeFormatDefaultLocale } from "d3-time-format";
 
 export class Axis extends Component {
 	type = "axes";
