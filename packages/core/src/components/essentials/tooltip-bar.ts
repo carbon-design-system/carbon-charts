@@ -34,9 +34,9 @@ export class TooltipBar extends Tooltip {
 				let defaultTooltip;
 				if (e.detail.multidata) {
 					// multi tooltip
-					defaultTooltip = this.getMultilineTooltipHTML(e.detail.multidata)
+					defaultTooltip = this.getMultilineTooltipHTML(e.detail.multidata);
 				} else {
-					defaultTooltip = this.getTooltipHTML(e.detail.hoveredElement.datum())
+					defaultTooltip = this.getTooltipHTML(e.detail.hoveredElement.datum());
 				}
 
 				// if there is a provided tooltip HTML function call it and pass the defaultTooltip
