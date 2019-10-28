@@ -63,9 +63,6 @@ export const groupedBarOptions = {
 		bottom: {
 			type: "labels",
 			secondary: true,
-		},
-		top: {
-			type: "labels",
 		}
 	},
 	theme: getTheme()
