@@ -321,13 +321,10 @@ export const scatterTimeSeriesData = lineTimeSeriesData;
 
 export const scatterTimeSeriesOptions = {
 	title: "Scatter (time series)",
-	legend: {
-		position: "top"
-	},
 	axes: {
 		bottom: {
-			title: "2018 Annual Sales Figures",
-			type: "labels",
+			title: "2019 Annual Sales Figures",
+			type: "time",
 			secondary: true
 		},
 		left: {

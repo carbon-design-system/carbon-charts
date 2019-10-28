@@ -13,10 +13,16 @@ export default {
 	watch: {
 		data: {
 			handler: function(newData) {
-				this.coreChart.setData(newData);
+				this.coreChart.model.setData(newData);
 			},
 			deep: true,
 		},
+		options: {
+			handler: function(newOptions) {
+				this.coreChart.model.setOptions(newOptions);
+			},
+			deep: true,
+		}
 	},
 };
 </script>
