@@ -9,6 +9,7 @@ import { DOMUtils } from "../../services";
 import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { min, max, extent } from "d3-array";
+import { select } from "d3-selection";
 
 export class Axis extends Component {
 	type = "axes";
@@ -217,6 +218,8 @@ export class Axis extends Component {
 		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
 		const axisRefExists = !container.select(`g.ticks`).empty();
 		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
+		let invisibleAxisRef = DOMUtils.appendOrSelect(container, `g.ticks.invisible`)
+			.style("opacity", "0");
 
 		// Position and transition the axis
 		switch (axisPosition) {
@@ -274,34 +277,32 @@ export class Axis extends Component {
 				.call(axis);
 		}
 
+		invisibleAxisRef.call(axis);
+
 		if (axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP) {
+			let rotateTicks;
 			if (scale.step) {
 				const textNodes = axisRef.selectAll("g.tick text").nodes();
 
 				// If any ticks are any larger than the scale step size
-				if (textNodes.some(textNode => DOMUtils.getSVGElementSize(textNode, { useBBox: true }).width >= scale.step())) {
-					axisRef.selectAll("g.tick text")
-						.attr("transform", `rotate(45)`)
-						.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
-
-					return;
-				}
+				rotateTicks = textNodes.some(textNode => DOMUtils.getSVGElementSize(textNode, { useBBox: true }).width >= scale.step());
 			} else {
 				const estimatedTickSize = width / scale.ticks().length / 2;
-
-				if (estimatedTickSize < 30) {
-					axisRef.selectAll("g.tick text")
-						.attr("transform", `rotate(45)`)
-						.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
-
-					return;
-				}
+				rotateTicks = estimatedTickSize < 30;
 			}
 
-			axisRef.selectAll("g.tick text")
-				.attr("transform", null)
-				.style("text-anchor", null);
+			if (rotateTicks) {
+				container.selectAll("g.ticks g.tick text")
+					.attr("transform", `rotate(45)`)
+					.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
+			} else {
+				container.selectAll("g.ticks g.tick text")
+					.attr("transform", null)
+					.style("text-anchor", null);
+			}
 		}
+
+		return invisibleAxisRef;
 	}
 
 	getValueFromScale(datum: any, index?: number) {
@@ -320,7 +321,7 @@ export class Axis extends Component {
 		const { position: axisPosition } = this.configs;
 
 		return this.getContainerSVG()
-			.select(`g.axis.${axisPosition} g.ticks`);
+			.select(`g.axis.${axisPosition} g.ticks.invisible`);
 	}
 
 	getTitleRef() {

@@ -33,11 +33,11 @@ const {
 } = require("./demo-data/index");
 
 export const chartTypes = [
-	{
-		id: "grouped-bar",
-		options: groupedBarOptions,
-		data: groupedBarData
-	},
+	// {
+	// 	id: "grouped-bar",
+	// 	options: groupedBarOptions,
+	// 	data: groupedBarData
+	// },
 	{
 		id: "simple-bar",
 		options: simpleBarOptions,
