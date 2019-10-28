@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.24](https://github.com/IBM/carbon-charts/compare/v0.16.23...v0.16.24) (2019-10-25)
+
+
+### Bug Fixes
+
+* **core, react, angular, vue:** default width & height to 100%, and call setOptions on option change ([db251b4](https://github.com/IBM/carbon-charts/commit/db251b4))
+
+
+
+
+
+## [0.16.23](https://github.com/IBM/carbon-charts/compare/v0.16.22...v0.16.23) (2019-10-25)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.16.22](https://github.com/IBM/carbon-charts/compare/v0.16.21...v0.16.22) (2019-10-25)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 ## [0.16.21](https://github.com/IBM/carbon-charts/compare/v0.16.20...v0.16.21) (2019-10-24)
 
 

@@ -29,7 +29,7 @@ export class BaseChart implements AfterViewInit, OnInit {
 		this._data = newData;
 
 		if (dataExistsAlready) {
-			this.chart.setData(newData);
+			this.chart.model.setData(newData);
 		}
 	}
 
@@ -47,7 +47,7 @@ export class BaseChart implements AfterViewInit, OnInit {
 		this._options = newOptions;
 
 		if (optionsExistAlready) {
-			this.chart.setOptions(newOptions);
+			this.chart.model.setOptions(newOptions);
 		}
 	}
 
@@ -85,15 +85,11 @@ export class BaseChart implements AfterViewInit, OnInit {
 		// Width prop is mandatory for the wrappers
 		if (this.width) {
 			this.options.width = this.width;
-		} else if (!this.options.width) {
-			console.error("Missing `width` Input!");
 		}
 
 		// Height prop is mandatory for the wrappers
 		if (this.height) {
 			this.options.height = this.height;
-		} else if (!this.options.height) {
-			console.error("Missing `height` Input!");
 		}
 	}
 
