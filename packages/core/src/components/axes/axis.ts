@@ -218,7 +218,7 @@ export class Axis extends Component {
 		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
 		const axisRefExists = !container.select(`g.ticks`).empty();
 		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
-		let invisibleAxisRef = DOMUtils.appendOrSelect(container, `g.ticks.invisible`)
+		const invisibleAxisRef = DOMUtils.appendOrSelect(container, `g.ticks.invisible`)
 			.style("opacity", "0");
 
 		// Position and transition the axis
