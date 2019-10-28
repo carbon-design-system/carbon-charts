@@ -80,7 +80,7 @@ module.exports = {
 	devServer: {
 		contentBase: "./demo",
 		host: "0.0.0.0",
-		port: 9001,
+		port: process.env.PORT || 9001,
 		historyApiFallback: true,
 		disableHostCheck: true
 	}
