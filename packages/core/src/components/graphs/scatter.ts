@@ -62,7 +62,7 @@ export class Scatter extends Component {
 			.attr("r", options.points.radius)
 			.attr("fill", d => {
 				if (filled) {
-					return this.model.getFillScale()[d.datasetLabel](d.label) as any;
+					return this.model.getFillColor(d.datasetLabel, d.label, d.value);
 				}
 			})
 			.attr("fill-opacity", filled ? 0.2 : 1)
@@ -95,6 +95,7 @@ export class Scatter extends Component {
 			date: datum.date,
 			label: labels[i],
 			datasetLabel: d.label,
+			class: datum.class,
 			value: isNaN(datum) ? datum.value : datum
 		}));
 	}
@@ -106,7 +107,7 @@ export class Scatter extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true);
 
-				hoveredElement.style("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
+				hoveredElement.style("fill", (d: any) => self.model.getFillColor(d.datasetLabel, d.label, d.value));
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
