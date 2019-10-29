@@ -92,7 +92,7 @@ export class Tooltip extends Component {
 		points.sort((a, b) => b.value - a.value);
 
 		// tells us which value to use
-		const scaleType = this.model.getScaleYType();
+		const scaleType = this.services.axes.getMainXAxis().scaleType;
 
 		return  "<ul class='multi-tooltip'>" +
 			points.map(datapoint => {

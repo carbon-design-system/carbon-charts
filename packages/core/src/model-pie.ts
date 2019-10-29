@@ -88,8 +88,8 @@ export class PieChartModel extends ChartModel {
 	*/
 	setColorScale() {
 		const dataset = this.getDisplayData().datasets[0];
-		if (dataset.backgroundColors) {
-			this.colorScale = scaleOrdinal().range(dataset.backgroundColors).domain(this.allDataLabels);
+		if (dataset.fillColors) {
+			this.colorScale = scaleOrdinal().range(dataset.fillColors).domain(this.allDataLabels);
 		} else {
 			const colors = colorPalettes.DEFAULT;
 			this.colorScale = scaleOrdinal().range(colors).domain(this.allDataLabels);
