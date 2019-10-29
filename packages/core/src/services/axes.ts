@@ -43,7 +43,7 @@ export class Axes extends Service {
 	getDataFromDomain(domainValue) {
 		const displayData = this.model.getDisplayData();
 		const activePoints = [];
-		const scaleType = this.model.getScaleYType();
+		const scaleType = this.getMainXAxis().scaleType;
 
 		switch (scaleType) {
 			case ScaleTypes.LABELS:

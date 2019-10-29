@@ -59,18 +59,6 @@ export class ChartModel {
 		return this.get("data");
 	}
 
-	getScaleYType() {
-		const axes = this.getOptions().axes;
-		let scaleType;
-		if (Tools.getProperty(axes, "top", "type")) {
-			scaleType = axes.top.type;
-		} else if (Tools.getProperty(axes, "bottom", "type")) {
-			scaleType = axes.bottom.type;
-		}
-
-		return scaleType;
-	}
-
 	/**
 	 *
 	 * @param newData The new raw data to be set
@@ -186,9 +174,9 @@ export class ChartModel {
 	 * Fill scales
 	*/
 	setColorScale() {
-		if (this.getDisplayData().datasets[0].backgroundColors) {
+		if (this.getDisplayData().datasets[0].fillColors) {
 			this.getDisplayData().datasets.forEach(dataset => {
-				this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.allDataLabels);
+				this.colorScale[dataset.label] = scaleOrdinal().range(dataset.fillColors).domain(this.allDataLabels);
 			});
 		} else {
 			const colors = colorPalettes.DEFAULT;
