@@ -143,11 +143,10 @@ export const simpleBarTimeSeriesOptions = {
 			scaleType: "time",
 			secondary: true,
 		}
-	}
+	},
 	locale: {
 		time: turkishLocale
-	},
-	theme: getTheme()
+	}
 };
 
 // Stacked bar
