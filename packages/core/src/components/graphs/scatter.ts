@@ -54,14 +54,14 @@ export class Scatter extends Component {
 		dotsEnter.merge(dots)
 			.raise()
 			.classed("dot", true)
-			.classed("filled", filled)
-			.classed("unfilled", !filled)
+			.classed("filled", d => this.model.getIsFilled(d.datasetLabel, d.label, d.value, filled))
+			.classed("unfilled", d => !this.model.getIsFilled(d.datasetLabel, d.label, d.value, filled))
 			.attr("cx", (d, i) => this.services.axes.getXValue(d, i))
 			.transition(this.services.transitions.getTransition("scatter-update-enter", animate))
 			.attr("cy", (d, i) => this.services.axes.getYValue(d, i))
 			.attr("r", options.points.radius)
 			.attr("fill", d => {
-				if (filled) {
+				if (this.model.getIsFilled(d.datasetLabel, d.label, d.value, filled)) {
 					return this.model.getFillColor(d.datasetLabel, d.label, d.value);
 				}
 			})

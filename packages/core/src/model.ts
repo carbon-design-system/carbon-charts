@@ -186,6 +186,22 @@ export class ChartModel {
 		}
 	}
 
+	/**
+	 * Should the data point be filled?
+	 * @param datasetLabel
+	 * @param label
+	 * @param value
+	 * @param defaultFilled the default for this chart
+	 */
+	getIsFilled(datasetLabel: any, label?: any, value?: any, defaultFilled?: boolean) {
+		const options = this.getOptions();
+		if (options.getIsFilled) {
+			return options.getIsFilled(datasetLabel, label, value);
+		} else {
+			return defaultFilled;
+		}
+	}
+
 	getFillColor(datasetLabel: any, label?: any, value?: any) {
 		const options = this.getOptions();
 		const defaultFillColor = this.getFillScale()[datasetLabel](label);
