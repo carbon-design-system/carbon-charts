@@ -63,7 +63,7 @@
 		"@babel/core": "7.3.4",
 		"@storybook/addon-options": "5.0.11",
 		"@storybook/angular": "5.0.11",
-		"@types/node": "8.5.2",
+		"@types/node": "12.11.7",
 		"babel-loader": "8.0.5",
 		"core-js": "3.0.0",
 		"d3": "4.11.0",

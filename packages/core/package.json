@@ -63,7 +63,7 @@
     "@types/d3": "4.11.0",
     "@types/jasmine": "2.8.7",
     "@types/karma": "3.0.2",
-    "@types/node": "10.0.8",
+    "@types/node": "12.11.7",
     "babel-polyfill": "6.26.0",
     "copy-webpack-plugin": "4.5.2",
     "css-loader": "0.28.7",
