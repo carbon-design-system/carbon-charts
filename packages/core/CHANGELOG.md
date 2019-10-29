@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.25](https://github.com/IBM/carbon-charts/compare/v0.16.24...v0.16.25) (2019-10-29)
+
+
+### Bug Fixes
+
+* **core:** update type to scaleType and backgroundColors to fillColors ([3ca0a0f](https://github.com/IBM/carbon-charts/commit/3ca0a0f))
+
+
+
+
+
 ## [0.16.24](https://github.com/IBM/carbon-charts/compare/v0.16.23...v0.16.24) (2019-10-25)
 
 
