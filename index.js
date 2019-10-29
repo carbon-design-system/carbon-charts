@@ -277,15 +277,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stackedBarTimeSeriesData", function() { return stackedBarTimeSeriesData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stackedBarTimeSeriesOptions", function() { return stackedBarTimeSeriesOptions; });
 /* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./demo/demo-data/colors.ts");
-/* harmony import */ var _themes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./themes */ "./demo/demo-data/themes.ts");
-
 
 var groupedBarData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
     datasets: [
         {
             label: "Dataset 1",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
             data: [
                 65000,
                 -29123,
@@ -296,7 +294,7 @@ var groupedBarData = {
         },
         {
             label: "Dataset 2",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
             data: [
                 32432,
                 -21312,
@@ -307,7 +305,7 @@ var groupedBarData = {
         },
         {
             label: "Dataset 3",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
             data: [
                 -12312,
                 23232,
@@ -318,7 +316,7 @@ var groupedBarData = {
         },
         {
             label: "Dataset 4",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
             data: [
                 -32423,
                 21313,
@@ -336,14 +334,13 @@ var groupedBarOptions = {
             primary: true,
         },
         bottom: {
-            type: "labels",
+            scaleType: "labels",
             secondary: true,
         },
         top: {
-            type: "labels",
+            scaleType: "labels",
         }
-    },
-    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
+    }
 };
 // Simple bar
 var simpleBarData = {
@@ -351,7 +348,7 @@ var simpleBarData = {
     datasets: [
         {
             label: "Dataset 1",
-            backgroundColors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
+            fillColors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
             data: [
                 65000,
                 29123,
@@ -369,18 +366,17 @@ var simpleBarOptions = {
             primary: true
         },
         bottom: {
-            type: "labels",
+            scaleType: "labels",
             secondary: true,
         }
-    },
-    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
+    }
 };
 var simpleBarTimeSeriesData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Miscellaneous"],
     datasets: [
         {
             label: "Dataset 1",
-            backgroundColors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
+            fillColors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
             data: [
                 {
                     date: new Date(2019, 0, 1),
@@ -413,11 +409,10 @@ var simpleBarTimeSeriesOptions = {
             primary: true
         },
         bottom: {
-            type: "time",
+            scaleType: "time",
             secondary: true,
         }
-    },
-    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
+    }
 };
 // Stacked bar
 var stackedBarData = {
@@ -425,7 +420,7 @@ var stackedBarData = {
     datasets: [
         {
             label: "Dataset 1",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
             data: [
                 65000,
                 29123,
@@ -436,7 +431,7 @@ var stackedBarData = {
         },
         {
             label: "Dataset 2",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
             data: [
                 32432,
                 21312,
@@ -447,7 +442,7 @@ var stackedBarData = {
         },
         {
             label: "Dataset 3",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
             data: [
                 12312,
                 23232,
@@ -458,7 +453,7 @@ var stackedBarData = {
         },
         {
             label: "Dataset 4",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
             data: [
                 32423,
                 21313,
@@ -477,18 +472,17 @@ var stackedBarOptions = {
             stacked: true
         },
         bottom: {
-            type: "labels",
+            scaleType: "labels",
             secondary: true,
         }
-    },
-    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
+    }
 };
 var stackedBarTimeSeriesData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
     datasets: [
         {
             label: "Dataset 1",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
             data: [
                 {
                     date: new Date(2019, 0, 1),
@@ -514,7 +508,7 @@ var stackedBarTimeSeriesData = {
         },
         {
             label: "Dataset 2",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
             data: [
                 {
                     date: new Date(2019, 0, 3),
@@ -540,7 +534,7 @@ var stackedBarTimeSeriesData = {
         },
         {
             label: "Dataset 3",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
             data: [
                 {
                     date: new Date(2019, 0, 1),
@@ -566,7 +560,7 @@ var stackedBarTimeSeriesData = {
         },
         {
             label: "Dataset 4",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
             data: [
                 {
                     date: new Date(2019, 0, 2),
@@ -600,11 +594,10 @@ var stackedBarTimeSeriesOptions = {
             stacked: true
         },
         bottom: {
-            type: "time",
-            secondary: true,
+            scaleType: "time",
+            secondary: true
         }
-    },
-    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
+    }
 };
 
 
@@ -730,9 +723,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesData", function() { return scatterTimeSeriesData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesOptions", function() { return scatterTimeSeriesOptions; });
 /* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./demo/demo-data/colors.ts");
-/* harmony import */ var _themes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./themes */ "./demo/demo-data/themes.ts");
-/* harmony import */ var _src_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/tools */ "./src/tools.ts");
-
+/* harmony import */ var _src_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../src/tools */ "./src/tools.ts");
 
 
 var lineTimeSeriesData = {
@@ -740,7 +731,7 @@ var lineTimeSeriesData = {
     datasets: [
         {
             label: "Dataset 1",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
             data: [
                 {
                     date: new Date(2019, 0, 1),
@@ -766,7 +757,7 @@ var lineTimeSeriesData = {
         },
         {
             label: "Dataset 2",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
             data: [
                 {
                     date: new Date(2019, 0, 2),
@@ -792,7 +783,7 @@ var lineTimeSeriesData = {
         },
         {
             label: "Dataset 3",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
             data: [
                 {
                     date: new Date(2019, 0, 1),
@@ -818,7 +809,7 @@ var lineTimeSeriesData = {
         },
         {
             label: "Dataset 4",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
             data: [
                 {
                     date: new Date(2019, 0, 2),
@@ -851,19 +842,18 @@ var lineTimeSeriesOptions = {
             secondary: true
         },
         bottom: {
-            type: "time",
+            scaleType: "time",
             primary: true
         }
     },
-    curve: "curveMonotoneX",
-    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
+    curve: "curveMonotoneX"
 };
 var lineData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
     datasets: [
         {
             label: "Dataset 1",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
             data: [
                 32100,
                 23500,
@@ -874,7 +864,7 @@ var lineData = {
         },
         {
             label: "Dataset 2",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
             data: [
                 34200,
                 53200,
@@ -885,7 +875,7 @@ var lineData = {
         },
         {
             label: "Dataset 3 long name",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
             data: [
                 41200,
                 23400,
@@ -896,7 +886,7 @@ var lineData = {
         },
         {
             label: "Dataset 4 long name",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
             data: [
                 22000,
                 1200,
@@ -907,7 +897,7 @@ var lineData = {
         },
         {
             label: "Dataset 5 long name",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][4]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][4]],
             data: [
                 2412,
                 30000,
@@ -918,7 +908,7 @@ var lineData = {
         },
         {
             label: "Dataset 6 long name",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][5]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][5]],
             data: [
                 0,
                 20000,
@@ -934,22 +924,21 @@ var lineOptions = {
     axes: {
         bottom: {
             title: "2018 Annual Sales Figures",
-            type: "labels",
+            scaleType: "labels",
             secondary: true
         },
         left: {
             primary: true
         }
-    },
-    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
+    }
 };
 // Step
-var stepOptions = _src_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].merge({}, lineOptions, {
+var stepOptions = _src_tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].merge({}, lineOptions, {
     title: "Step (discrete)",
     curve: "curveStepAfter"
 });
 var stepData = lineData;
-var stepTimeSeriesOptions = _src_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].merge({}, lineTimeSeriesOptions, {
+var stepTimeSeriesOptions = _src_tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].merge({}, lineTimeSeriesOptions, {
     title: "Step (time series)",
     curve: "curveStepAfter"
 });
@@ -960,7 +949,7 @@ var scatterData = {
     datasets: [
         {
             label: "Dataset 1",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
             data: [
                 32100,
                 23500,
@@ -971,7 +960,7 @@ var scatterData = {
         },
         {
             label: "Dataset 2",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
             data: [
                 34200,
                 53200,
@@ -982,7 +971,7 @@ var scatterData = {
         },
         {
             label: "Dataset 3 long name",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
             data: [
                 41200,
                 23400,
@@ -993,7 +982,7 @@ var scatterData = {
         },
         {
             label: "Dataset 4 long name",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
             data: [
                 22000,
                 1200,
@@ -1004,7 +993,7 @@ var scatterData = {
         },
         {
             label: "Dataset 5 long name",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][4]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][4]],
             data: [
                 2412,
                 30000,
@@ -1015,7 +1004,7 @@ var scatterData = {
         },
         {
             label: "Dataset 6 long name",
-            backgroundColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][5]],
+            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][5]],
             data: [
                 0,
                 20000,
@@ -1031,14 +1020,13 @@ var scatterOptions = {
     axes: {
         bottom: {
             title: "2018 Annual Sales Figures",
-            type: "labels",
+            scaleType: "labels",
             secondary: true
         },
         left: {
             primary: true
         }
-    },
-    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
+    }
 };
 var scatterTimeSeriesData = lineTimeSeriesData;
 var scatterTimeSeriesOptions = {
@@ -1046,14 +1034,13 @@ var scatterTimeSeriesOptions = {
     axes: {
         bottom: {
             title: "2019 Annual Sales Figures",
-            type: "time",
+            scaleType: "time",
             secondary: true
         },
         left: {
             primary: true
         }
-    },
-    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
+    }
 };
 
 
@@ -1073,8 +1060,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "donutData", function() { return donutData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "donutOptions", function() { return donutOptions; });
 /* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./demo/demo-data/colors.ts");
-/* harmony import */ var _themes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./themes */ "./demo/demo-data/themes.ts");
-
 
 var pieData = {
     labels: ["2V2N 9KYPM version 1", "L22I P66EP L22I P66EP L22I P66EP", "JQAI 2M4L1", "J9DZ F37AP",
@@ -1082,64 +1067,23 @@ var pieData = {
     datasets: [
         {
             label: "Dataset 1",
-            backgroundColors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
+            fillColors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
             data: [75000, 65000, 10000, 25000, 1200, 20000]
         }
     ]
 };
 var pieOptions = {
     title: "Pie",
-    accessibility: false,
-    legendClickable: true,
-    resizable: true,
-    colors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
-    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])()
+    resizable: true
 };
 var donutData = pieData;
 var donutOptions = {
     title: "Donut",
-    accessibility: false,
-    legendClickable: true,
     resizable: true,
-    theme: Object(_themes__WEBPACK_IMPORTED_MODULE_1__["getTheme"])(),
-    colors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
     donut: {
         center: {
             label: "Browsers"
         }
-    }
-};
-
-
-/***/ }),
-
-/***/ "./demo/demo-data/themes.ts":
-/*!**********************************!*\
-  !*** ./demo/demo-data/themes.ts ***!
-  \**********************************/
-/*! exports provided: getTheme */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTheme", function() { return getTheme; });
-var urlParams = new URLSearchParams(window.location.search);
-var ChartTheme = __webpack_require__(/*! ./../../src/interfaces/enums */ "./src/interfaces/enums.ts").ChartTheme;
-var getTheme = function () {
-    if (urlParams.has("theme")) {
-        switch (urlParams.get("theme")) {
-            case "G10":
-                return ChartTheme.G10;
-            case "G90":
-                return ChartTheme.G90;
-            case "G100":
-                return ChartTheme.G100;
-            default:
-                return ChartTheme.WHITE;
-        }
-    }
-    else {
-        return ChartTheme.WHITE;
     }
 };
 
@@ -2195,15 +2139,16 @@ var Axis = /** @class */ (function (_super) {
     }
     Axis.prototype.createOrGetScale = function () {
         var position = this.configs.position;
-        var scaleOptions = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(this.model.getOptions(), "axes", position);
+        var axisOptions = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(this.model.getOptions(), "axes", position);
+        this.scaleType = (axisOptions && axisOptions.scaleType) ? axisOptions.scaleType : _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LINEAR;
         var scaleFunction;
-        if (scaleOptions && scaleOptions.type === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
+        if (this.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
             scaleFunction = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleTime"])();
         }
-        else if (scaleOptions && scaleOptions.type === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LOG) {
-            scaleFunction = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleLog"])().base(scaleOptions.base || 10);
+        else if (this.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LOG) {
+            scaleFunction = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleLog"])().base(axisOptions.base || 10);
         }
-        else if (scaleOptions && scaleOptions.type === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LABELS) {
+        else if (this.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LABELS) {
             scaleFunction = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleBand"])();
         }
         else {
@@ -2214,18 +2159,17 @@ var Axis = /** @class */ (function (_super) {
             var modelUpdates = (_a = {},
                 _a[position] = this,
                 _a);
-            if (scaleOptions) {
-                if (scaleOptions.primary === true) {
+            if (axisOptions) {
+                if (axisOptions.primary === true) {
                     modelUpdates[_interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisTypes"].PRIMARY] = this;
                 }
-                if (scaleOptions.secondary === true) {
+                if (axisOptions.secondary === true) {
                     modelUpdates[_interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisTypes"].SECONDARY] = this;
                 }
             }
             this.model.set(modelUpdates, true);
         }
         this.scale = scaleFunction;
-        this.scaleType = (scaleOptions && scaleOptions.type) ? scaleOptions.type : _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LINEAR;
         return scaleFunction;
         var _a;
     };
@@ -2235,10 +2179,10 @@ var Axis = /** @class */ (function (_super) {
     Axis.prototype.getScaleDomain = function () {
         var options = this.model.getOptions();
         var position = this.configs.position;
-        var scaleOptions = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "axes", position);
+        var axisOptions = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "axes", position);
         var _a = this.model.getDisplayData(), datasets = _a.datasets, labels = _a.labels;
         // If scale is a LABELS scale, return some labels as the domain
-        if (scaleOptions && scaleOptions.type === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LABELS) {
+        if (axisOptions && axisOptions.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LABELS) {
             if (labels) {
                 return labels;
             }
@@ -2249,7 +2193,7 @@ var Axis = /** @class */ (function (_super) {
         // Get the extent of the domain
         var domain;
         // If the scale is stacked
-        if (scaleOptions.stacked) {
+        if (axisOptions.stacked) {
             domain = Object(d3_array__WEBPACK_IMPORTED_MODULE_6__["extent"])(labels.reduce(function (m, label, i) {
                 var correspondingValues = datasets.map(function (dataset) {
                     return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
@@ -2266,7 +2210,7 @@ var Axis = /** @class */ (function (_super) {
             // Get all the chart's data values in a flat array
             var allDataValues = datasets.reduce(function (dataValues, dataset) {
                 dataset.data.forEach(function (datum) {
-                    if (scaleOptions.type === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
+                    if (axisOptions.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
                         dataValues = dataValues.concat(datum.date);
                     }
                     else {
@@ -2275,12 +2219,12 @@ var Axis = /** @class */ (function (_super) {
                 });
                 return dataValues;
             }, []);
-            if (scaleOptions.type !== _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
+            if (axisOptions.scaleType !== _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
                 allDataValues = allDataValues.concat(0);
             }
             domain = Object(d3_array__WEBPACK_IMPORTED_MODULE_6__["extent"])(allDataValues);
         }
-        if (scaleOptions.type === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
+        if (axisOptions.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
             if (_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "timeScale", "addSpaceOnEdges")) {
                 // TODO - Need to account for non-day incrementals as well
                 var startDate = domain[0], endDate = domain[1];
@@ -2314,7 +2258,7 @@ var Axis = /** @class */ (function (_super) {
         }
         // Grab the scale off of the model, and initialize if it doesn't exist
         var scale = this.createOrGetScale().domain(this.getScaleDomain());
-        if (axisOptions && axisOptions.type === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LABELS) {
+        if (this.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LABELS) {
             scale.rangeRound([startPosition, endPosition]);
         }
         else {
@@ -3570,7 +3514,7 @@ var Tooltip = /** @class */ (function (_super) {
         // sort them so they are in the same order as the graph
         points.sort(function (a, b) { return b.value - a.value; });
         // tells us which value to use
-        var scaleType = this.model.getScaleYType();
+        var scaleType = this.services.axes.getMainXAxis().scaleType;
         return "<ul class='multi-tooltip'>" +
             points.map(function (datapoint) {
                 // check if the datapoint has multiple values associates (multiple axes)
@@ -5699,8 +5643,8 @@ var PieChartModel = /** @class */ (function (_super) {
     */
     PieChartModel.prototype.setColorScale = function () {
         var dataset = this.getDisplayData().datasets[0];
-        if (dataset.backgroundColors) {
-            this.colorScale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleOrdinal"])().range(dataset.backgroundColors).domain(this.allDataLabels);
+        if (dataset.fillColors) {
+            this.colorScale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleOrdinal"])().range(dataset.fillColors).domain(this.allDataLabels);
         }
         else {
             var colors = _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__["DEFAULT"];
@@ -5798,8 +5742,8 @@ var SimpleBarChartModel = /** @class */ (function (_super) {
     */
     SimpleBarChartModel.prototype.setColorScale = function () {
         var dataset = this.getDisplayData().datasets[0];
-        if (dataset.backgroundColors) {
-            this.colorScale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleOrdinal"])().range(dataset.backgroundColors).domain(this.allDataLabels);
+        if (dataset.fillColors) {
+            this.colorScale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleOrdinal"])().range(dataset.fillColors).domain(this.allDataLabels);
         }
         else {
             var colors = _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__["DEFAULT"];
@@ -5879,17 +5823,6 @@ var ChartModel = /** @class */ (function () {
     };
     ChartModel.prototype.getData = function () {
         return this.get("data");
-    };
-    ChartModel.prototype.getScaleYType = function () {
-        var axes = this.getOptions().axes;
-        var scaleType;
-        if (_tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(axes, "top", "type")) {
-            scaleType = axes.top.type;
-        }
-        else if (_tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(axes, "bottom", "type")) {
-            scaleType = axes.bottom.type;
-        }
-        return scaleType;
     };
     /**
      *
@@ -5994,9 +5927,9 @@ var ChartModel = /** @class */ (function () {
     */
     ChartModel.prototype.setColorScale = function () {
         var _this = this;
-        if (this.getDisplayData().datasets[0].backgroundColors) {
+        if (this.getDisplayData().datasets[0].fillColors) {
             this.getDisplayData().datasets.forEach(function (dataset) {
-                _this.colorScale[dataset.label] = Object(d3_scale__WEBPACK_IMPORTED_MODULE_3__["scaleOrdinal"])().range(dataset.backgroundColors).domain(_this.allDataLabels);
+                _this.colorScale[dataset.label] = Object(d3_scale__WEBPACK_IMPORTED_MODULE_3__["scaleOrdinal"])().range(dataset.fillColors).domain(_this.allDataLabels);
             });
         }
         else {
@@ -6124,7 +6057,7 @@ var Axes = /** @class */ (function (_super) {
     Axes.prototype.getDataFromDomain = function (domainValue) {
         var displayData = this.model.getDisplayData();
         var activePoints = [];
-        var scaleType = this.model.getScaleYType();
+        var scaleType = this.getMainXAxis().scaleType;
         switch (scaleType) {
             case _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LABELS:
                 // based on labels we use the index to get the associated data
