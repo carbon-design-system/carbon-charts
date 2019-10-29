@@ -7,7 +7,7 @@ export interface AxisOptions {
 	/**
 	 * type of the scale used on axis
 	 */
-	scale?: ScaleTypes;
+	scaleType?: ScaleTypes;
 	primary?: boolean;
 	secondary?: boolean;
 	/**
