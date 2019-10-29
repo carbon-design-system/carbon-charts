@@ -186,13 +186,13 @@ export class ChartModel {
 	 * Fill scales
 	*/
 	setColorScale() {
-		if (this.getDisplayData().datasets[0].backgroundColors) {
-			this.getDisplayData().datasets.forEach(dataset => {
+		if (this.getData().datasets[0].backgroundColors) {
+			this.getData().datasets.forEach(dataset => {
 				this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.allDataLabels);
 			});
 		} else {
 			const colors = colorPalettes.DEFAULT;
-			this.getDisplayData().datasets.forEach((dataset, i) => {
+			this.getData().datasets.forEach((dataset, i) => {
 				this.colorScale[dataset.label] = scaleOrdinal().range([colors[i]]).domain(this.allDataLabels);
 			});
 		}
