@@ -41,22 +41,30 @@ export class Title extends Component {
 				.text("...");
 
 			// get the bounding width including the elipses '...'
-			const tspanLength = DOMUtils.appendOrSelect(title, "tspan").node().getComputedTextLength()
+			const tspanLength = DOMUtils.appendOrSelect(title, "tspan").node().getComputedTextLength();
 			const truncatedSize = Math.floor(containerWidth - tspanLength);
 			const titleString = this.model.getOptions().title;
 
 			// get the index for creating the max length substring that fit within the svg
+			// use one less than the index to avoid crowding (the elipsis)
 			const substringIndex = this._getSubstringIndex(title.node(), 0, titleString.length - 1, truncatedSize);
 
+			// use the substring as the title
 			title.text(titleString.substring(0, substringIndex - 1))
 				.append("tspan")
 				.text("...");
 
+			// add events for displaying the tooltip with the title
 			const self = this;
-			title.on("mouseover mouseenter", function() {
+			title.on("mouseenter", function() {
 				self.services.events.dispatchEvent("show-tooltip", {
-					title,
+					hoveredElement: title,
 					type: TooltipTypes.TITLE
+				});
+			})
+			.on("mouseout", function() {
+				self.services.events.dispatchEvent("hide-tooltip", {
+					hoveredElement: title,
 				});
 			});
 		}
@@ -78,12 +86,7 @@ export class Title extends Component {
 			.attr("height", 20)
 			.attr("fill", "none");
 
+		// title needs to first render so that we can check for overflow
 		this.truncateTitle();
-
-		text
-		.on("mouseover", function() {
-
-		});
-
 	}
 }
