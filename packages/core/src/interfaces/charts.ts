@@ -39,6 +39,10 @@ export interface BaseChartOptions {
 	 */
 	legend?: LegendOptions;
 	/**
+	 * Optional function to determine whether is filled based on datasetLabel, label, and/or value
+	 */
+	getIsFilled?: (datasetLabel: any, label?: any, value?: any, defaultFilled?: boolean) => boolean;
+	/**
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
 	 */
 	getFillColor?: (datasetLabel: any, label?: any, value?: any, defaultFillColor?: string) => string;
