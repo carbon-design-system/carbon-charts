@@ -51,7 +51,7 @@ export const groupedBarData = {
 };
 
 export const groupedBarOptions = {
-	title: "Grouped bar with a really looooooooooooooonnnnnnnnnnnnnngggggggggggggg title that should be truncated",
+	title: "Grouped bar (discrete)",
 	axes: {
 		left: {
 			primary: true,
@@ -85,7 +85,7 @@ export const simpleBarData = {
 };
 
 export const simpleBarOptions = {
-	title: "Simple bar (discrete) rwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwhhhhhhhhhhwwwwwwwwwwwwwwwwwwwwwwwwwwhhhhhhhhhhwwwwwwwwwwwwwwwwwwwwwwwwwwhhhhhhhhhhwwwwwwwwwwwwwwwwwwwwwwwwwwhhhhhhhhhhhhhe",
+	title: "Simple bar (discrete)",
 	axes: {
 		left: {
 			primary: true
@@ -131,7 +131,7 @@ export const simpleBarTimeSeriesData = {
 };
 
 export const simpleBarTimeSeriesOptions = {
-	title: "Simple bar (time series) rwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwhhhhhhhhhhwwwwwwwwwwwwwwwwwwwwwwwwwwhhhhhhhhhhwwwwwwwwwwwwwwwwwwwwwwwwwwhhhhhhhhhhwwwwwwwwwwwwwwwwwwwwwwwwwwhhhhhhhhhhhhhe",
+	title: "Simple bar (time series)",
 	axes: {
 		left: {
 			primary: true
