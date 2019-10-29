@@ -52,6 +52,7 @@ export class Tooltip extends Component {
 				} else {
 					defaultTooltip = this.getTooltipHTML(data);
 				}
+
 				// if there is a provided tooltip HTML function call it
 				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
 					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data, defaultTooltip));
