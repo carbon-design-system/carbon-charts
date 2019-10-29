@@ -31,20 +31,20 @@ export class TooltipBar extends Tooltip {
 
 				const hoveredElement = e.detail.hoveredElement.node();
 
-				let defaultTooltip;
+				let defaultHTML;
 				if (e.detail.multidata) {
 					// multi tooltip
-					defaultTooltip = this.getMultilineTooltipHTML(e.detail.multidata);
+					defaultHTML = this.getMultilineTooltipHTML(e.detail.multidata);
 				} else {
-					defaultTooltip = this.getTooltipHTML(e.detail.hoveredElement.datum());
+					defaultHTML = this.getTooltipHTML(e.detail.hoveredElement.datum());
 				}
 
-				// if there is a provided tooltip HTML function call it and pass the defaultTooltip
+				// if there is a provided tooltip HTML function call it and pass the defaultHTML
 				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
-					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement, defaultTooltip));
+					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement, defaultHTML));
 				} else {
 					// default tooltip
-					tooltipTextContainer.html(defaultTooltip);
+					tooltipTextContainer.html(defaultHTML);
 				}
 
 				const position = this.getTooltipPosition(hoveredElement);
