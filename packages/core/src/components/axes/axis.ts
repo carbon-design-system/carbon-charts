@@ -30,14 +30,15 @@ export class Axis extends Component {
 
 	createOrGetScale() {
 		const { position } = this.configs;
-		const scaleOptions = Tools.getProperty(this.model.getOptions(), "axes", position);
+		const axisOptions = Tools.getProperty(this.model.getOptions(), "axes", position);
+		this.scaleType = (axisOptions && axisOptions.scaleType) ? axisOptions.scaleType : ScaleTypes.LINEAR;
 
 		let scaleFunction;
-		if (scaleOptions && scaleOptions.type === ScaleTypes.TIME) {
+		if (this.scaleType === ScaleTypes.TIME) {
 			scaleFunction = scaleTime();
-		} else if (scaleOptions && scaleOptions.type === ScaleTypes.LOG) {
-			scaleFunction = scaleLog().base(scaleOptions.base || 10);
-		} else if (scaleOptions && scaleOptions.type === ScaleTypes.LABELS) {
+		} else if (this.scaleType === ScaleTypes.LOG) {
+			scaleFunction = scaleLog().base(axisOptions.base || 10);
+		} else if (this.scaleType === ScaleTypes.LABELS) {
 			scaleFunction = scaleBand();
 		} else {
 			scaleFunction = scaleLinear();
@@ -49,12 +50,12 @@ export class Axis extends Component {
 				[position]: this
 			};
 
-			if (scaleOptions) {
-				if (scaleOptions.primary === true) {
+			if (axisOptions) {
+				if (axisOptions.primary === true) {
 					modelUpdates[AxisTypes.PRIMARY] = this;
 				}
 
-				if (scaleOptions.secondary === true) {
+				if (axisOptions.secondary === true) {
 					modelUpdates[AxisTypes.SECONDARY] = this;
 				}
 			}
@@ -63,7 +64,6 @@ export class Axis extends Component {
 		}
 
 		this.scale = scaleFunction;
-		this.scaleType = (scaleOptions && scaleOptions.type) ? scaleOptions.type : ScaleTypes.LINEAR;
 
 		return scaleFunction;
 	}
@@ -75,12 +75,12 @@ export class Axis extends Component {
 	getScaleDomain() {
 		const options = this.model.getOptions();
 		const { position } = this.configs;
-		const scaleOptions = Tools.getProperty(options, "axes", position);
+		const axisOptions = Tools.getProperty(options, "axes", position);
 
 		const { datasets, labels } = this.model.getDisplayData();
 
 		// If scale is a LABELS scale, return some labels as the domain
-		if (scaleOptions && scaleOptions.type === ScaleTypes.LABELS) {
+		if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
 			if (labels) {
 				return labels;
 			} else {
@@ -91,7 +91,7 @@ export class Axis extends Component {
 		// Get the extent of the domain
 		let domain;
 		// If the scale is stacked
-		if (scaleOptions.stacked) {
+		if (axisOptions.stacked) {
 			domain = extent(
 				labels.reduce((m, label: any, i) => {
 					const correspondingValues = datasets.map(dataset => {
@@ -110,7 +110,7 @@ export class Axis extends Component {
 			// Get all the chart's data values in a flat array
 			let allDataValues = datasets.reduce((dataValues, dataset: any) => {
 				dataset.data.forEach((datum: any) => {
-					if (scaleOptions.type === ScaleTypes.TIME) {
+					if (axisOptions.scaleType === ScaleTypes.TIME) {
 						dataValues = dataValues.concat(datum.date);
 					} else {
 						dataValues = dataValues.concat(isNaN(datum) ? datum.value : datum);
@@ -120,14 +120,14 @@ export class Axis extends Component {
 				return dataValues;
 			}, []);
 
-			if (scaleOptions.type !== ScaleTypes.TIME) {
+			if (axisOptions.scaleType !== ScaleTypes.TIME) {
 				allDataValues = allDataValues.concat(0);
 			}
 
 			domain = extent(allDataValues);
 		}
 
-		if (scaleOptions.type === ScaleTypes.TIME) {
+		if (axisOptions.scaleType === ScaleTypes.TIME) {
 			if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges")) {
 				// TODO - Need to account for non-day incrementals as well
 				const [startDate, endDate] = domain;
@@ -166,7 +166,7 @@ export class Axis extends Component {
 		// Grab the scale off of the model, and initialize if it doesn't exist
 		const scale = this.createOrGetScale().domain(this.getScaleDomain());
 
-		if (axisOptions && axisOptions.type === ScaleTypes.LABELS) {
+		if (this.scaleType === ScaleTypes.LABELS) {
 			scale.rangeRound([startPosition, endPosition]);
 		} else {
 			scale.range([startPosition, endPosition]);
