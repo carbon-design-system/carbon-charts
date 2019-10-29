@@ -87,7 +87,11 @@ export class TwoDimensionalAxes extends Component {
 		Object.keys(this.children).forEach(childKey => {
 			const child = this.children[childKey];
 			const axisPosition = child.configs.position;
-			const { width, height } = DOMUtils.getSVGElementSize(child.getAxisRef(), { useBBox: true });
+
+			const invisibleAxisRef = child.getInvisibleAxisRef();
+			const { width, height } = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true });
+			invisibleAxisRef.remove();
+
 			let offset;
 			if (child.getTitleRef().empty()) {
 				offset = 0;

@@ -282,7 +282,7 @@ export class Axis extends Component {
 		if (axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP) {
 			let rotateTicks;
 			if (scale.step) {
-				const textNodes = axisRef.selectAll("g.tick text").nodes();
+				const textNodes = invisibleAxisRef.selectAll("g.tick text").nodes();
 
 				// If any ticks are any larger than the scale step size
 				rotateTicks = textNodes.some(textNode => DOMUtils.getSVGElementSize(textNode, { useBBox: true }).width >= scale.step());
@@ -317,7 +317,7 @@ export class Axis extends Component {
 		return this.scale(value);
 	}
 
-	getAxisRef() {
+	getInvisibleAxisRef() {
 		const { position: axisPosition } = this.configs;
 
 		return this.getContainerSVG()
