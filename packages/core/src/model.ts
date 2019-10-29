@@ -188,19 +188,21 @@ export class ChartModel {
 
 	getFillColor(datasetLabel: any, label?: any, value?: any) {
 		const options = this.getOptions();
+		const defaultFillColor = this.getFillScale()[datasetLabel](label);
 		if (options.getFillColor) {
-			return options.getFillColor(datasetLabel, label, value);
+			return options.getFillColor(datasetLabel, label, value, defaultFillColor);
 		} else {
-			return this.getFillScale()[datasetLabel](label);
+			return defaultFillColor;
 		}
 	}
 
 	getStrokeColor(datasetLabel: any, label?: any, value?: any) {
 		const options = this.getOptions();
+		const defaultStrokeColor = this.colorScale[datasetLabel](label);
 		if (options.getStrokeColor) {
-			return options.getStrokeColor(datasetLabel, label, value);
+			return options.getStrokeColor(datasetLabel, label, value, defaultStrokeColor);
 		} else {
-			return this.colorScale[datasetLabel](label);
+			return defaultStrokeColor;
 		}
 	}
 

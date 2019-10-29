@@ -41,11 +41,11 @@ export interface BaseChartOptions {
 	/**
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
 	 */
-	getFillColor?: (datasetLabel: any, label?: any, value?: any) => string;
+	getFillColor?: (datasetLabel: any, label?: any, value?: any, defaultFillColor?: string) => string;
 	/**
 	 * Optional function to generate the stroke color based on datasetLabel, label, and/or value
 	 */
-	getStrokeColor?: (datasetLabel: any, label?: any, value?: any) => string;
+	getStrokeColor?: (datasetLabel: any, label?: any, value?: any, defaultStrokeColor?: string) => string;
 	/**
 	 * stylesheet options
 	 */
