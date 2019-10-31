@@ -1,7 +1,7 @@
 {
-	"name": "@carbon/charts-react",
+	"name": "@sterling/charts-react",
 	"version": "0.16.25",
-	"description": "Carbon charting components for React",
+	"description": "Sterling charting components for React",
 	"main": "./bundle.js",
 	"scripts": {
 		"start": "yarn run storybook",
@@ -12,7 +12,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/carbon-charts.git"
+		"url": "git@github.com:IBM/sterling-charts.git"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",
@@ -40,11 +40,11 @@
 		"scss"
 	],
 	"bugs": {
-		"url": "https://github.com/IBM/carbon-charts/issues"
+		"url": "https://github.com/IBM/sterling-charts/issues"
 	},
-	"homepage": "https://github.com/IBM/carbon-charts#readme",
+	"homepage": "https://github.com/IBM/sterling-charts#readme",
 	"dependencies": {
-		"@carbon/charts": "^0.16.25"
+		"@sterling/charts": "^0.16.25"
 	},
 	"peerDependencies": {
 		"react": "^16.6.3",

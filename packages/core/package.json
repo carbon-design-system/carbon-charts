@@ -1,5 +1,5 @@
 {
-  "name": "@carbon/charts",
+  "name": "@sterling/charts",
   "version": "0.16.25",
   "description": "Carbon charting components",
   "main": "./bundle.js",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:IBM/carbon-charts.git"
+    "url": "git@github.com:IBM/sterling-charts.git"
   },
   "keywords": [
     "carbon",

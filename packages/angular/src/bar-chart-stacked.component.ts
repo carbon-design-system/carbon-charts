@@ -5,7 +5,7 @@ import {
 
 import { BaseChart } from "./base-chart.component";
 
-import { StackedBarChart } from "@carbon/charts";
+import { StackedBarChart } from "@sterling/charts";
 
 /**
  * Wrapper around `StackedBarChart` in carbon charts library

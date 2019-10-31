@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { LineChart } from '@carbon/charts';
+import { LineChart } from '@sterling/charts';
 import CcvBaseChart from './ccv-base-chart.vue';
 
 export default {

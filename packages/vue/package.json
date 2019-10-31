@@ -1,7 +1,7 @@
 {
-	"name": "@carbon/charts-vue",
+	"name": "@sterling/charts-vue",
 	"version": "0.16.25",
-	"description": "Carbon charting components for Vue",
+	"description": "Sterling charting components for Vue",
 	"main": "charts-vue.umd.min.js",
 	"scripts": {
 		"build": "bash build.sh",
@@ -14,7 +14,7 @@
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"dependencies": {
-		"@carbon/charts": "^0.16.25",
+		"@sterling/charts": "^0.16.25",
 		"vue": "2.5.21"
 	},
 	"devDependencies": {
@@ -77,7 +77,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/carbon-charts.git"
+		"url": "git@github.com:IBM/sterling-charts.git"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",

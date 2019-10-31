@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ScatterChart as SC } from "@carbon/charts";
+import { ScatterChart as SC } from "@sterling/charts";
 import BaseChart from "./base-chart";
 
 export default class ScatterChart extends BaseChart {

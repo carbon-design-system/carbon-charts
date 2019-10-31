@@ -5,10 +5,10 @@ import {
 
 import { BaseChart } from "./base-chart.component";
 
-import { ScatterChart } from "@carbon/charts";
+import { ScatterChart } from "@sterling/charts";
 
 /**
- * Wrapper around `ScatterChart` in carbon charts library
+ * Wrapper around `ScatterChart` in sterling charts library
  *
  * Most functions just call their equivalent from the chart library.
  */

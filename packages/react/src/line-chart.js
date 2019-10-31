@@ -1,6 +1,6 @@
 import React from "react";
 
-import { LineChart as LC } from "@carbon/charts";
+import { LineChart as LC } from "@sterling/charts";
 import BaseChart from "./base-chart";
 
 export default class LineChart extends BaseChart {

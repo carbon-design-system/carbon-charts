@@ -5,12 +5,12 @@ if [ $CONTEXT == "deploy-preview" ]; then
 
 	# Grab netlify app type from the netlify app URL
 	# e.g. core, angular or react (translate to ./packages/NAME
-	PKG_NAME=`echo $URL | sed s/"https:\/\/carbon-charts-"// | sed s/"\..*"//`
+	PKG_NAME=`echo $URL | sed s/"https:\/\/sterling-charts-"// | sed s/"\..*"//`
 
 	if [ $PKG_NAME == "core" ]; then
-		PKG_TO_BUILD="@carbon/charts"
+		PKG_TO_BUILD="@sterling/charts"
 	else
-		PKG_TO_BUILD="@carbon/charts-$PKG_NAME"
+		PKG_TO_BUILD="@sterling/charts-$PKG_NAME"
 
 		cd packages/core
 		yarn build

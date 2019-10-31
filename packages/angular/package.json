@@ -1,8 +1,8 @@
 {
 	"$schema": "../../node_modules/ng-packagr/package.schema.json",
-	"name": "@carbon/charts-angular",
+	"name": "@sterling/charts-angular",
 	"version": "0.16.25",
-	"description": "Carbon charting components for Angular",
+	"description": "Sterling charting components for Angular",
 	"main": "index.js",
 	"scripts": {
 		"build": "ng-packagr -p package.json",
@@ -12,7 +12,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/carbon-charts.git"
+		"url": "git@github.com:IBM/sterling-charts.git"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",
@@ -40,7 +40,7 @@
 		"scss"
 	],
 	"dependencies": {
-		"@carbon/charts": "^0.16.25"
+		"@sterling/charts": "^0.16.25"
 	},
 	"peerDependencies": {
 		"@angular/common": "^6.0.0 || ^7.0.0",
@@ -78,7 +78,7 @@
 			"entryFile": "src/charts.module.ts"
 		},
 		"whitelistedNonPeerDependencies": [
-			"@carbon/charts"
+			"@sterling/charts"
 		]
 	},
 	"publishConfig": {

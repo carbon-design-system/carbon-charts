@@ -7,7 +7,7 @@ import {
 } from "@angular/core";
 
 /**
- * Wrapper around `BaseChart` in carbon charts library
+ * Wrapper around `BaseChart` in sterling charts library
  *
  * Most functions just call their equivalent from the chart library.
  */

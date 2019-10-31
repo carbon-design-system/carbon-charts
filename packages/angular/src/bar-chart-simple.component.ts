@@ -5,10 +5,10 @@ import {
 
 import { BaseChart } from "./base-chart.component";
 
-import { SimpleBarChart } from "@carbon/charts";
+import { SimpleBarChart } from "@sterling/charts";
 
 /**
- * Wrapper around `SimpleBarChart` in carbon charts library
+ * Wrapper around `SimpleBarChart` in sterling charts library
  *
  * Most functions just call their equivalent from the chart library.
  */

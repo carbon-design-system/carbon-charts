@@ -1,4 +1,4 @@
-# `@carbon/charts`
+# `@sterling/charts`
 
 > Carbon Charting components
 
@@ -7,15 +7,15 @@
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts
+npm install -S @sterling/charts
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/charts
+yarn add @sterling/charts
 ```
 
 ## Sample Project
-[![Edit Carbon Charts - Vanilla](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/carbon-charts-vanilla-149vrzo62l?fontsize=14)
+[![Edit Sterling Charts - Vanilla](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/sterling-charts-vanilla-149vrzo62l?fontsize=14)

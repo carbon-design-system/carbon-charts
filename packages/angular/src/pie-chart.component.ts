@@ -5,10 +5,10 @@ import {
 
 import { BaseChart } from "./base-chart.component";
 
-import { PieChart } from "@carbon/charts";
+import { PieChart } from "@sterling/charts";
 
 /**
- * Wrapper around `PieChart` in carbon charts library
+ * Wrapper around `PieChart` in sterling charts library
  *
  * Most functions just call their equivalent from the chart library.
  */

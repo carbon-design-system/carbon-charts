@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SimpleBarChart as SBC } from "@carbon/charts";
+import { SimpleBarChart as SBC } from "@sterling/charts";
 import BaseChart from "./base-chart";
 
 export default class SimpleBarChart extends BaseChart {

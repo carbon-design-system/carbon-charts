@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { PieChart } from '@carbon/charts';
+import { PieChart } from '@sterling/charts';
 import CcvBaseChart from './ccv-base-chart.vue';
 
 export default {
