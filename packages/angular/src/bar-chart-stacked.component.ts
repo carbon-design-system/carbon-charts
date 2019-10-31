@@ -8,7 +8,7 @@ import { BaseChart } from "./base-chart.component";
 import { StackedBarChart } from "@sterling/charts";
 
 /**
- * Wrapper around `StackedBarChart` in carbon charts library
+ * Wrapper around `StackedBarChart` in sterling charts library
  *
  * Most functions just call their equivalent from the chart library.
  */

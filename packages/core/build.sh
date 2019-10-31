@@ -3,7 +3,7 @@
 set -e
 
 rollup -c
-tsc
+# tsc
 cp *.md dist/
 cp package.json dist/
 cp -a src/styles/. dist/styles
