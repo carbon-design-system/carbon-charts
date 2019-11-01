@@ -3,12 +3,12 @@
 set -e # exit with nonzero exit code if anything fails
 
 # Git user info configs
-git config --global user.email "carbon@us.ibm.com"
-git config --global user.name "carbon-bot"
+git config --global user.email "iliadm@ca.ibm.com"
+git config --global user.name "iliadm"
 
 # Add github token to git credentials
 git config credential.helper "store --file=.git/credentials"
-echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
+echo "https://${GH_TOKEN}:@github.ibm.com" > .git/credentials 2>/dev/null
 
 if [ -z "$TRAVIS_TAG" ]
 then

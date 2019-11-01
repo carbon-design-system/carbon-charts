@@ -13,8 +13,6 @@ set -e
 # Generate all assets needed for push to gh-pages
 mkdir -p pages
 touch pages/.nojekyll
-# echo "charts.carbondesignsystem.com" > pages/CNAME
-
 
 # run the demo:build script in all packages
 lerna run --stream demo:build

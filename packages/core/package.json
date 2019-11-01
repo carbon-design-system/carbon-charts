@@ -1,7 +1,7 @@
 {
   "name": "@sterling/charts",
   "version": "0.16.25",
-  "description": "Carbon charting components",
+  "description": "Sterling charting components",
   "main": "./bundle.js",
   "module": "./index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "url": "git@github.com:IBM/sterling-charts.git"
   },
   "keywords": [
-    "carbon",
+    "sterling",
     "charts",
     "dataviz",
     "data-visualization",
