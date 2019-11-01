@@ -18,7 +18,7 @@ export interface DataSet {
 	/**
 	 * Array of hex background colors
 	 */
-	backgroundColors: string[];
+	fillColors: string[];
 	/**
 	 * Array of data values
 	 */
