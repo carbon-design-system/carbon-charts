@@ -33,11 +33,11 @@ deploy:
       branch: master
   -
     allow-empty-commit: true
-    email: carbon@us.ibm.com
+    email: iliadm@ca.ibm.com
     github-token: $GH_TOKEN
     keep-history: true
     local-dir: pages
-    name: carbon-bot
+    name: iliadm
     provider: pages
     skip_cleanup: true
     true:
