@@ -2,7 +2,7 @@
 
 set -e
 
-if [ -e ../../node_modules/@carbon/layout ]
+if [ -d "../../node_modules/@carbon/layout" ]
 then
 	cp -r ../../node_modules/@carbon/layout src/styles/vendor/@carbon
 	cp -r ../../node_modules/@carbon/motion src/styles/vendor/@carbon
