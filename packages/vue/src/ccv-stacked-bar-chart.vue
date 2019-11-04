@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { StackedBarChart } from '@sterling/charts';
+import { StackedBarChart } from '@cui/charts';
 import CcvBaseChart from './ccv-base-chart.vue';
 
 export default {

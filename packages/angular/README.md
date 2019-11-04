@@ -1,4 +1,4 @@
-# `@sterling/charts-angular`
+# `@cui/charts-angular`
 
 > Sterling Charting Angular Wrappers
 

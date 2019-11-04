@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DonutChart as DC } from "@sterling/charts";
+import { DonutChart as DC } from "@cui/charts";
 import BaseChart from "./base-chart";
 
 export default class DonutChart extends BaseChart {

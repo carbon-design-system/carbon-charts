@@ -12,5 +12,5 @@ module.exports = {
 			plugins: ["external-helpers"]
 		})
 	],
-	external: ["react", "react-dom", "@sterling/charts"]
+	external: ["react", "react-dom", "@cui/charts"]
 };

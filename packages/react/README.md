@@ -1,4 +1,4 @@
-# `@sterling/charts-react`
+# `@cui/charts-react`
 
 > Sterling Charting React Wrappers
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StackedBarChart as SBC } from "@sterling/charts";
+import { StackedBarChart as SBC } from "@cui/charts";
 import BaseChart from "./base-chart";
 
 export default class StackedBarChart extends BaseChart {

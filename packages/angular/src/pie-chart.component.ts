@@ -5,7 +5,7 @@ import {
 
 import { BaseChart } from "./base-chart.component";
 
-import { PieChart } from "@sterling/charts";
+import { PieChart } from "@cui/charts";
 
 /**
  * Wrapper around `PieChart` in sterling charts library

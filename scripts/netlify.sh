@@ -8,9 +8,9 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	PKG_NAME=`echo $URL | sed s/"https:\/\/sterling-charts-"// | sed s/"\..*"//`
 
 	if [ $PKG_NAME == "core" ]; then
-		PKG_TO_BUILD="@sterling/charts"
+		PKG_TO_BUILD="@cui/charts"
 	else
-		PKG_TO_BUILD="@sterling/charts-$PKG_NAME"
+		PKG_TO_BUILD="@cui/charts-$PKG_NAME"
 
 		cd packages/core
 		yarn build

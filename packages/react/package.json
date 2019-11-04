@@ -44,7 +44,7 @@
 	},
 	"homepage": "https://github.com/IBM/sterling-charts#readme",
 	"dependencies": {
-		"@sterling/charts": "^0.16.25"
+		"@cui/charts": "^0.16.25"
 	},
 	"peerDependencies": {
 		"react": "^16.6.3",

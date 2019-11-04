@@ -5,7 +5,7 @@ import {
 
 import { BaseChart } from "./base-chart.component";
 
-import { ScatterChart } from "@sterling/charts";
+import { ScatterChart } from "@cui/charts";
 
 /**
  * Wrapper around `ScatterChart` in sterling charts library

@@ -1,4 +1,4 @@
-# `@sterling/charts`
+# `@cui/charts`
 
 > Sterling Charting components
 

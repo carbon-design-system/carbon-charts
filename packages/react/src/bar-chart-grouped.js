@@ -1,6 +1,6 @@
 import React from "react";
 
-import { GroupedBarChart as GBC } from "@sterling/charts";
+import { GroupedBarChart as GBC } from "@cui/charts";
 import BaseChart from "./base-chart";
 
 export default class GroupedBarChart extends BaseChart {

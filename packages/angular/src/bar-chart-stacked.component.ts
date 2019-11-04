@@ -5,7 +5,7 @@ import {
 
 import { BaseChart } from "./base-chart.component";
 
-import { StackedBarChart } from "@sterling/charts";
+import { StackedBarChart } from "@cui/charts";
 
 /**
  * Wrapper around `StackedBarChart` in sterling charts library

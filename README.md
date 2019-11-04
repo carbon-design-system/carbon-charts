@@ -9,8 +9,8 @@
 		<a href="https://travis-ci.org/carbon-design-system/sterling-charts">
 			<img src="https://api.travis-ci.org/carbon-design-system/sterling-charts.svg?branch=master" />
 		</a>
-		<a href="https://www.npmjs.com/package/@sterling/charts">
-			<img src="https://img.shields.io/npm/v/@sterling/charts.svg" />
+		<a href="https://www.npmjs.com/package/@cui/charts">
+			<img src="https://img.shields.io/npm/v/@cui/charts.svg" />
 		</a>
 		<img src="https://img.shields.io/badge/comp-IE11%2B-blue.svg" />
 		<img alt="semantic-versioning" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versioning-e10079.svg">
@@ -34,14 +34,14 @@ Run:
 ```bash
 yarn global add @storybook/cli
 
-yarn add @sterling/charts
+yarn add @cui/charts
 ```
 
 Or if you use NPM:
 ```bash
 npm i -g @storybook/cli
 
-npm install @sterling/charts --save
+npm install @cui/charts --save
 ```
 
 ## Demo and documentation

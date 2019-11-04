@@ -1,4 +1,4 @@
-# `@sterling/charts-vue`
+# `@cui/charts-vue`
 
 > Sterling Charting Vue Wrappers
 

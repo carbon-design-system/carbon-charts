@@ -1,6 +1,6 @@
 import React from "react";
 
-import { PieChart as PC } from "@sterling/charts";
+import { PieChart as PC } from "@cui/charts";
 import BaseChart from "./base-chart";
 
 export default class PieChart extends BaseChart {

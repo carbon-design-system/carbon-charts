@@ -14,7 +14,7 @@
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"dependencies": {
-		"@sterling/charts": "^0.16.25",
+		"@cui/charts": "^0.16.25",
 		"vue": "2.5.21"
 	},
 	"devDependencies": {

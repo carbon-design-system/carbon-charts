@@ -5,7 +5,7 @@ import {
 
 import { BaseChart } from "./base-chart.component";
 
-import { DonutChart } from "@sterling/charts";
+import { DonutChart } from "@cui/charts";
 
 /**
  * Wrapper around `DonutChart` in sterling charts library

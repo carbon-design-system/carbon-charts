@@ -40,7 +40,7 @@
 		"scss"
 	],
 	"dependencies": {
-		"@sterling/charts": "^0.16.25"
+		"@cui/charts": "^0.16.25"
 	},
 	"peerDependencies": {
 		"@angular/common": "^6.0.0 || ^7.0.0",
@@ -78,7 +78,7 @@
 			"entryFile": "src/charts.module.ts"
 		},
 		"whitelistedNonPeerDependencies": [
-			"@sterling/charts"
+			"@cui/charts"
 		]
 	},
 	"publishConfig": {
