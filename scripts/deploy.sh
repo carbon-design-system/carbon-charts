@@ -6,10 +6,6 @@ set -e # exit with nonzero exit code if anything fails
 git config --global user.email "iliadm@ca.ibm.com"
 git config --global user.name "Travis CI"
 
-# Add github token to git credentials
-git config credential.helper "store --file=.git/credentials"
-echo "https://${GH_TOKEN}:@github.ibm.com" > .git/credentials 2>/dev/null
-
 if [ -z "$TRAVIS_TAG" ]
 then
 	echo "The commit is not a tag, get lerna to version packages, and publish to Github."
