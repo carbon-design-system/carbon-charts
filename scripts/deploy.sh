@@ -4,7 +4,7 @@ set -e # exit with nonzero exit code if anything fails
 
 # Git user info configs
 git config --global user.email "iliadm@ca.ibm.com"
-git config --global user.name "iliadm"
+git config --global user.name "Travis CI"
 
 # Add github token to git credentials
 git config credential.helper "store --file=.git/credentials"
