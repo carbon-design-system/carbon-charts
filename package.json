@@ -1,5 +1,5 @@
 {
-	"name": "@sterling/charts-monorepo",
+	"name": "@cui/charts-monorepo",
 	"private": true,
 	"description": "Sterling charting components, lerna monorepo",
 	"repository": {
