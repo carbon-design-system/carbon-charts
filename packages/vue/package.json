@@ -1,5 +1,5 @@
 {
-	"name": "@sterling/charts-vue",
+	"name": "@cui/charts-vue",
 	"version": "0.16.25",
 	"description": "Sterling charting components for Vue",
 	"main": "charts-vue.umd.min.js",

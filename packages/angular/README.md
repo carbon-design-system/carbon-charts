@@ -2,4 +2,4 @@
 
 > Sterling Charting Angular Wrappers
 
-**[Storybook Demos](https://pages.github.ibm.com/iliadm/sterling-charts/angular)**
+**[Storybook Demos](https://pages.github.ibm.com/WatsonSupplyChain/sterling-charts/angular)**

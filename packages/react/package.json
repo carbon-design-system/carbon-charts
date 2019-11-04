@@ -1,5 +1,5 @@
 {
-	"name": "@sterling/charts-react",
+	"name": "@cui/charts-react",
 	"version": "0.16.25",
 	"description": "Sterling charting components for React",
 	"main": "./bundle.js",

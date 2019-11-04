@@ -1,6 +1,6 @@
 {
 	"$schema": "../../node_modules/ng-packagr/package.schema.json",
-	"name": "@sterling/charts-angular",
+	"name": "@cui/charts-angular",
 	"version": "0.16.25",
 	"description": "Sterling charting components for Angular",
 	"main": "index.js",

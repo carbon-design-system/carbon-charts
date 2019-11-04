@@ -6,5 +6,5 @@ rm -rf dist
 
 babel src --out-dir dist
 rollup -c
-cp *.md dist/
+cp README.md dist/
 cp package.json dist/
