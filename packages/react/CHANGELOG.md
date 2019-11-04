@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.17.0 (2019-11-04)
+
+
+### Bug Fixes
+
+* **core, react, angular, vue:** default width & height to 100%, and call setOptions on option change ([db251b4](https://github.ibm.com/WatsonSupplyChain/sterling-charts/commit/db251b4))
+
+
+
+
+
 ## [0.16.25](https://github.com/IBM/sterling-charts/compare/v0.16.24...v0.16.25) (2019-10-29)
 
 **Note:** Version bump only for package @carbon/charts-react
