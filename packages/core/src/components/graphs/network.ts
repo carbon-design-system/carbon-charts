@@ -35,6 +35,7 @@ export class Network extends Component {
 	}
 
 	render(animate: boolean) {
+		console.log(this.model.getDisplayData().datasets)
 		const svg = this.getContainerSVG();
 		this.drawCards(svg);
 

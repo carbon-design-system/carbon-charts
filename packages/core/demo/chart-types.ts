@@ -20,6 +20,9 @@ const {
 	lineTimeSeriesData,
 	lineData,
 	lineOptions,
+	// Network,
+	networkData,
+	networkOptions,
 	// Step
 	stepOptions,
 	stepData,
@@ -36,8 +39,8 @@ export const chartTypes = [
 	// Advanced charts
 	{
 		id: "network",
-		options: groupedBarOptions,
-		data: groupedBarData
+		options: networkOptions,
+		data: networkData
 	},
 	// Basic charts
 	{
