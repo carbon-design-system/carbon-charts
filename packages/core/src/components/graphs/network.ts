@@ -12,6 +12,7 @@ const NetworkCards = ({svg, selector, data, accessor, height, width, fill, strok
 			.attr("width", width)
 			.attr("focusable", true)
 			.attr("fill", fill)
+			.attr("tabindex", 0)
 			.attr("stroke-width", "1px")
 			.attr("stroke", strokeColor);
 	return cards;
@@ -26,17 +27,14 @@ export class Network extends Component {
 			selector: "rect.network-card",
 			data: this.model.getDisplayData().datasets,
 			accessor: dataset => dataset.label,
-			height: 80,
-			width: 240,
+			height: 64,
+			width: 220,
 			fill: "#eeeeee",
 			strokeColor: "#000"
 		});
 	}
 
 	render(animate: boolean) {
-		// Define some mock data here
-		// Select all 'network-card'
-		// Enter, append
 		const svg = this.getContainerSVG();
 		this.drawCards(svg);
 
