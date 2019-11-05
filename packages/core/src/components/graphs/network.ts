@@ -1,29 +1,37 @@
 // Internal Imports
 import { Component } from "../component";
 
+// Add a network card and link class here initially? then move to another file
+
+/**
+class NetworkCard extends Component {
+	type = "network-card";
+
+	render() {
+
+	}
+} */
+
 export class Network extends Component {
 	type = "network";
 
 	render(animate: boolean) {
+		// Define some mock data here
+		// Select all 'network-card'
+		// Enter, append
+
 		const svg = this.getContainerSVG();
 
-		const texts = svg.selectAll("text.dataset")
-			.data(this.model.getDisplayData().datasets, dataset => dataset.label);
-
-		texts.exit()
-			.attr("opacity", 0)
-			.remove();
-
-		const enteringTexts = texts.enter()
-			.append("text")
+		const cards = svg.selectAll("rect.network-card")
+			.data(this.model.getDisplayData().datasets, dataset => dataset.label)
+			.enter()
+			.append("rect")
 			.classed("dataset", true)
-			.attr("opacity", 0);
-
-		enteringTexts.merge(texts)
-			.text(d => d.label)
-			.transition(this.services.transitions.getTransition("network-text-update-enter", animate))
-			.attr("y", (d, i) => 16 + i * 20)
-			.attr("opacity", 1)
-			.style("fill", d => this.model.getFillScale()[d.label]());
+			.attr("height", 80)
+			.attr("width", 240)
+			.attr("focusable", true)
+			.attr("fill", "#eeeeee")
+			.attr("stroke-width", "1px")
+			.attr("stroke", "#000");
 	}
 }
