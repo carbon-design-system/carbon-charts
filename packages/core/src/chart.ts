@@ -171,7 +171,7 @@ export class Chart {
 					this.model,
 					this.services,
 					[
-						legendComponent,
+						...((this.model.getOptions().legend.visible !== false) ? [ legendComponent ] : [ ]),
 						graphFrameComponent
 					],
 					{

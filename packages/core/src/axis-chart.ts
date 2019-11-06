@@ -86,7 +86,7 @@ export class AxisChart extends Chart {
 					this.model,
 					this.services,
 					[
-						legendComponent,
+						...((this.model.getOptions().legend.visible !== false) ? [ legendComponent ] : [ ]),
 						graphFrameComponent
 					],
 					{
