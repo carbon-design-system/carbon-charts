@@ -54,19 +54,19 @@ export class Scatter extends Component {
 		dotsEnter.merge(dots)
 			.raise()
 			.classed("dot", true)
-			.classed("filled", d => this.model.getIsFilled(d.datasetLabel, d.label, d.value, filled))
-			.classed("unfilled", d => !this.model.getIsFilled(d.datasetLabel, d.label, d.value, filled))
+			.classed("filled", d => this.model.getIsFilled(d.datasetLabel, d.label, d.value, d, filled))
+			.classed("unfilled", d => !this.model.getIsFilled(d.datasetLabel, d.label, d.value, d, filled))
 			.attr("cx", (d, i) => this.services.axes.getXValue(d, i))
 			.transition(this.services.transitions.getTransition("scatter-update-enter", animate))
 			.attr("cy", (d, i) => this.services.axes.getYValue(d, i))
 			.attr("r", options.points.radius)
 			.attr("fill", d => {
-				if (this.model.getIsFilled(d.datasetLabel, d.label, d.value, filled)) {
-					return this.model.getFillColor(d.datasetLabel, d.label, d.value);
+				if (this.model.getIsFilled(d.datasetLabel, d.label, d.value, d, filled)) {
+					return this.model.getFillColor(d.datasetLabel, d.label, d.value, d);
 				}
 			})
 			.attr("fill-opacity", filled ? 0.2 : 1)
-			.attr("stroke", d => this.model.getStrokeColor(d.datasetLabel, d.label, d.value))
+			.attr("stroke", d => this.model.getStrokeColor(d.datasetLabel, d.label, d.value, d))
 			.attr("opacity", 1);
 
 		// Add event listeners to elements drawn
