@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.ibm.com/WatsonSupplyChain/sterling-charts/compare/v0.18.2...v0.19.0) (2019-11-06)
+
+
+### Features
+
+* **core:** date/time locale support + tick formatting ([86e515f](https://github.ibm.com/WatsonSupplyChain/sterling-charts/commit/86e515f))
+
+
+
+
+
 ## [0.18.2](https://github.ibm.com/WatsonSupplyChain/sterling-charts/compare/v0.18.1...v0.18.2) (2019-11-05)
 
 **Note:** Version bump only for package @cui/charts

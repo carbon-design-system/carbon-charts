@@ -1,7 +1,7 @@
 {
 	"$schema": "../../node_modules/ng-packagr/package.schema.json",
 	"name": "@cui/charts-angular",
-	"version": "0.18.2",
+	"version": "0.19.0",
 	"description": "Sterling charting components for Angular",
 	"main": "index.js",
 	"scripts": {
@@ -40,7 +40,7 @@
 		"scss"
 	],
 	"dependencies": {
-		"@cui/charts": "^0.18.2"
+		"@cui/charts": "^0.19.0"
 	},
 	"peerDependencies": {
 		"@angular/common": "^6.0.0 || ^7.0.0",
