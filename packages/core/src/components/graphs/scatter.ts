@@ -107,7 +107,7 @@ export class Scatter extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true);
 
-				hoveredElement.style("fill", (d: any) => self.model.getFillColor(d.datasetLabel, d.label, d.value));
+				hoveredElement.style("fill", (d: any) => self.model.getFillColor(d.datasetLabel, d.label, d.value, d));
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
