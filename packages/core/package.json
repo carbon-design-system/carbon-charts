@@ -1,6 +1,6 @@
 {
   "name": "@cui/charts",
-  "version": "0.19.1",
+  "version": "0.19.2",
   "description": "Sterling charting components",
   "main": "./bundle.js",
   "module": "./index.js",
