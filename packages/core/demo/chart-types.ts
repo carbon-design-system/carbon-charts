@@ -17,6 +17,7 @@ const {
 	donutData,
 	// Line
 	lineTimeSeriesOptions,
+	lineTimeSeriesWithCustomStroke,
 	lineTimeSeriesData,
 	lineData,
 	lineOptions,
@@ -81,6 +82,11 @@ export const chartTypes = [
 	{
 		id: "line-time-series",
 		options: lineTimeSeriesOptions,
+		data: lineTimeSeriesData
+	},
+	{
+		id: "line-time-series-customstroke",
+		options: lineTimeSeriesWithCustomStroke,
 		data: lineTimeSeriesData
 	},
 	{

@@ -193,30 +193,30 @@ export class ChartModel {
 	 * @param value
 	 * @param defaultFilled the default for this chart
 	 */
-	getIsFilled(datasetLabel: any, label?: any, value?: any, defaultFilled?: boolean) {
+	getIsFilled(datasetLabel: any, label?: any, value?: any, data?: any, defaultFilled?: boolean) {
 		const options = this.getOptions();
 		if (options.getIsFilled) {
-			return options.getIsFilled(datasetLabel, label, value);
+			return options.getIsFilled(datasetLabel, label, value, data, defaultFilled);
 		} else {
 			return defaultFilled;
 		}
 	}
 
-	getFillColor(datasetLabel: any, label?: any, value?: any) {
+	getFillColor(datasetLabel: any, label?: any, value?: any, data?: any) {
 		const options = this.getOptions();
 		const defaultFillColor = this.getFillScale()[datasetLabel](label);
 		if (options.getFillColor) {
-			return options.getFillColor(datasetLabel, label, value, defaultFillColor);
+			return options.getFillColor(datasetLabel, label, value, data, defaultFillColor);
 		} else {
 			return defaultFillColor;
 		}
 	}
 
-	getStrokeColor(datasetLabel: any, label?: any, value?: any) {
+	getStrokeColor(datasetLabel: any, label?: any, value?: any, data?: any) {
 		const options = this.getOptions();
 		const defaultStrokeColor = this.colorScale[datasetLabel](label);
 		if (options.getStrokeColor) {
-			return options.getStrokeColor(datasetLabel, label, value, defaultStrokeColor);
+			return options.getStrokeColor(datasetLabel, label, value, data, defaultStrokeColor);
 		} else {
 			return defaultStrokeColor;
 		}

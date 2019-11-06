@@ -125,6 +125,23 @@ export const lineTimeSeriesOptions = {
 	curve: "curveMonotoneX"
 };
 
+export const lineTimeSeriesWithCustomStroke = {
+	...lineTimeSeriesOptions,
+	title: "Line (custom stroke, fill colors)",
+	getStrokeColor: (datasetLabel, label, value, datum, originalStrokeColor)=>{
+		console.log(`originalStrokeColor: ${originalStrokeColor}`);
+		return value > 60000 ? '#FF0000' : originalStrokeColor;
+	},
+	getFillColor: (datasetLabel, label, value, datum, originalFillColor)=>{
+		console.log(`originalFillColor: ${originalFillColor}`);
+		return value > 60000 ? '#FF0000' : originalFillColor;
+	},
+	getIsFilled: (datasetLabel, label, value, datum, originalIsFilled)=>{
+		console.log(`originalIsFilled: ${originalIsFilled}`);
+		return value > 60000 ? true : originalIsFilled;
+	}
+};
+
 export const lineData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
@@ -210,6 +227,7 @@ export const lineOptions = {
 		}
 	}
 };
+
 
 // Step
 export const stepOptions = Tools.merge({}, lineOptions, {
