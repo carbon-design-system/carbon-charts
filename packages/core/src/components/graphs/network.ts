@@ -1,13 +1,27 @@
 // Internal Imports
 import { Component } from "../component";
 
+const NetworkLines = ({svg, data, accessor, selector, strokeColor}) => {
+	const lines = svg.selectAll(selector)
+		.data(data, accessor)
+		.enter()
+		.append("line")
+		.classed("line", true)
+		.attr("x1", d => d.source.x)
+		.attr("y1", d => d.source.y)
+		.attr("x2", d => d.target.x)
+		.attr("y2", d => d.target.y)
+		.attr("stroke", strokeColor);
+	return lines;
+};
+
 // Add a network card and link class here initially? then move to another file
 const NetworkCards = ({svg, selector, data, accessor, height, width, fill, strokeColor}) => {
 	const cards = svg.selectAll(selector)
 			.data(data, accessor)
 			.enter()
 			.append("rect")
-			.classed("dataset", true)
+			.classed("node", true)
 			.attr("height", height)
 			.attr("width", width)
 			.attr("focusable", true)
@@ -24,11 +38,12 @@ export class Network extends Component {
 	type = "network";
 	data = this.model.getDisplayData().datasets;
 	nodes = this.data[0].data;
-	links = this.data[0].links;
+	links = this.data[1].data;
+	svg = this.getContainerSVG();
 
-	drawCards(svg) {
+	drawCards() {
 		NetworkCards({
-			svg,
+			svg: this.svg,
 			selector: "rect.network-card",
 			data: this.nodes,
 			accessor: d => d,
@@ -39,9 +54,19 @@ export class Network extends Component {
 		});
 	}
 
+	drawLines() {
+		NetworkLines({
+			svg: this.svg,
+			selector: "rect.network-line",
+			data: this.links,
+			accessor: d => d,
+			strokeColor: "#000"
+		});
+	}
+
 	render(animate: boolean) {
-		const svg = this.getContainerSVG();
-		this.drawCards(svg);
+		this.drawCards();
+		this.drawLines();
 
 	}
 }
