@@ -10,6 +10,7 @@
 		"mapRoot": "./",
 		"module": "es2015",
 		"moduleResolution": "node",
+		"resolveJsonModule": true,
 		"outDir": "./dist",
 		"rootDir": "./src",
 		"target": "es5",

@@ -64,7 +64,6 @@
 		"babel-preset-react": "6.24.1",
 		"base64-inline-loader": "1.1.0",
 		"css-loader": "0.28.7",
-		"img-loader": "2.0.0",
 		"node-sass": "4.10.0",
 		"react": "16.6.3",
 		"react-dom": "16.6.3",
