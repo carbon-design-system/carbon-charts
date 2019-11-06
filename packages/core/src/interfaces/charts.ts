@@ -41,15 +41,15 @@ export interface BaseChartOptions {
 	/**
 	 * Optional function to determine whether is filled based on datasetLabel, label, and/or value
 	 */
-	getIsFilled?: (datasetLabel: any, label?: any, value?: any, defaultFilled?: boolean) => boolean;
+	getIsFilled?: (datasetLabel: any, label?: any, value?: any, data?: any, defaultFilled?: boolean) => boolean;
 	/**
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
 	 */
-	getFillColor?: (datasetLabel: any, label?: any, value?: any, defaultFillColor?: string) => string;
+	getFillColor?: (datasetLabel: any, label?: any, value?: any, data?: any, defaultFillColor?: string) => string;
 	/**
 	 * Optional function to generate the stroke color based on datasetLabel, label, and/or value
 	 */
-	getStrokeColor?: (datasetLabel: any, label?: any, value?: any, defaultStrokeColor?: string) => string;
+	getStrokeColor?: (datasetLabel: any, label?: any, value?: any, data?: any, defaultStrokeColor?: string) => string;
 	/**
 	 * stylesheet options
 	 */
