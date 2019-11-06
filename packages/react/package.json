@@ -1,6 +1,6 @@
 {
 	"name": "@cui/charts-react",
-	"version": "0.19.0",
+	"version": "0.19.1",
 	"description": "Sterling charting components for React",
 	"main": "./bundle.js",
 	"scripts": {
@@ -44,7 +44,7 @@
 	},
 	"homepage": "https://github.ibm.com:WatsonSupplyChain/sterling-charts#readme",
 	"dependencies": {
-		"@cui/charts": "^0.19.0"
+		"@cui/charts": "^0.19.1"
 	},
 	"peerDependencies": {
 		"react": "^16.6.3",
