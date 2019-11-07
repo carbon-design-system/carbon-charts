@@ -22,8 +22,6 @@ else
 	# AF_USER and AF_API_KEY are manually set on travis from info in artifactory
 	curl -u${AF_USER}:${AF_API_KEY} "https://na.artifactory.swg-devops.com/artifactory/api/npm/wce-wscui-shell-npm-local/auth/cui" > ~/.npmrc
 
-	yarn run build-all
-
 	node scripts/clean-package-jsons.js
 
 	lerna publish from-git --yes --force-publish --contents dist --no-verify-registry --no-verify-access --registry https://na.artifactory.swg-devops.com/artifactory/api/npm/wce-wscui-shell-npm-local/
