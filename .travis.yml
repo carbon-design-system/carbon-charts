@@ -17,6 +17,7 @@ install: yarn --offline
 script:
   - lerna run lint
   - lerna run test
+  - yarn run build-all
 sudo: false
 deploy:
   -
