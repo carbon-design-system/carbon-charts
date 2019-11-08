@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.ibm.com/WatsonSupplyChain/sterling-charts/compare/v0.19.3...v0.20.0) (2019-11-08)
+
+**Note:** Version bump only for package @cui/charts-vue
+
+
+
+
+
 ## [0.19.3](https://github.ibm.com/WatsonSupplyChain/sterling-charts/compare/v0.19.2...v0.19.3) (2019-11-07)
 
 **Note:** Version bump only for package @cui/charts-vue
