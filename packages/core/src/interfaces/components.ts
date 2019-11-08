@@ -55,6 +55,7 @@ export interface TooltipOptions {
 	formatter?: Function;
 	/**
 	 * custom function for returning tooltip HTML
+	 * passed an array or object with the data, and then the default tooltip markup
 	 */
 	customHTML?: Function;
 	/**
@@ -73,6 +74,16 @@ export interface TooltipOptions {
 		 * vertical offset for tooltip placement
 		 */
 		verticalOffset?: number
+	};
+	title?: {
+		/**
+		 * vertical offset for title tooltip placement. < 0 will shift the tooltip above title, > 0 shifts vertically down
+		 */
+		verticalOffset?: number
+		/**
+		 * max width of title tooltip relative to the width of the chart-svg (percentage should be < 1)
+		 */
+		width?: number
 	};
 }
 

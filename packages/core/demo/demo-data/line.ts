@@ -112,7 +112,7 @@ export const lineTimeSeriesData = {
 };
 
 export const lineTimeSeriesOptions = {
-	title: "Line (time series)",
+	title: "Line (time series) Line (time series) Line (time series) Line (time series) Line (time series) Line (time series) Line (time series)Line (time series)",
 	axes: {
 		left: {
 			secondary: true
