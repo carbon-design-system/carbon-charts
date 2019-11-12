@@ -11,6 +11,8 @@ import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-sc
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { min, extent } from "d3-array";
 import { timeFormatDefaultLocale } from "d3-time-format";
+import moment from "moment";
+
 
 export class Axis extends Component {
 	type = "axes";
@@ -131,16 +133,34 @@ export class Axis extends Component {
 
 		if (axisOptions.scaleType === ScaleTypes.TIME) {
 			if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges")) {
-				// TODO - Need to account for non-day incrementals as well
 				const [startDate, endDate] = domain;
-				startDate.setDate(startDate.getDate() - 1);
-				endDate.setDate(endDate.getDate() + 1);
+				const startMoment = moment(startDate);
+				const endMoment = moment(endDate);
+				if (endMoment.diff(startMoment,'years') > 3) {
+					startMoment.subtract(1, 'year');
+					endMoment.add(1, 'year');
+				}
+				if (endMoment.diff(startMoment,'months') > 3) {
+					startMoment.subtract(1, 'month');
+					endMoment.add(1, 'month');
+				}
+				if (endMoment.diff(startMoment,'days') > 3) {
+					startMoment.subtract(1, 'day');
+					endMoment.add(1, 'day');
+				} else if (endMoment.diff(startMoment,'hours') > 3) {
+					startMoment.subtract(1, 'hour');
+					endMoment.add(1, 'hour');
+				} else if (endMoment.diff(startMoment,'minutes') > 3) {
+					startMoment.subtract(1, 'minute');
+					endMoment.add(1, 'minute');
+				}
+				return [
+					startMoment.toDate(),
+					endMoment.toDate()
+				];
 			}
 
-			return [
-				new Date(domain[0]),
-				new Date(domain[1])
-			];
+
 		}
 
 		// TODO - Work with design to improve logic
