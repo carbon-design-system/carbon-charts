@@ -12,9 +12,6 @@ import settings from "carbon-components/src/globals/js/settings";
 import ResizeObserver from "resize-observer-polyfill";
 
 export class DOMUtils extends Service {
-	width: string;
-	height: string;
-
 	static getSVGElementSize(svgSelector: Selection<any, any, any, any>, options?: any) {
 		if (!svgSelector.attr) {
 			svgSelector = select(svgSelector as any);
@@ -122,6 +119,8 @@ export class DOMUtils extends Service {
 	}
 
 	protected svg: Element;
+	protected width: string;
+	protected height: string;
 
 	init() {
 		// Add width & height to the chart holder if necessary, and add a classname
