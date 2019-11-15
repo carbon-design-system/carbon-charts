@@ -2,7 +2,6 @@ import {
 	Component,
 	Input,
 	ViewChild,
-	OnInit,
 	AfterViewInit
 } from "@angular/core";
 
@@ -18,7 +17,7 @@ import {
 		</div>
 	`
 })
-export class BaseChart implements AfterViewInit, OnInit {
+export class BaseChart implements AfterViewInit {
 	/**
 	 * Data passed to charts library for displaying
 	 */
@@ -56,16 +55,6 @@ export class BaseChart implements AfterViewInit, OnInit {
 	}
 
 	/**
-	 * Chart width
-	 */
-	@Input() width: any;
-
-	/**
-	 * Chart height
-	 */
-	@Input() height: any;
-
-	/**
 	 * Chart container element ref
 	 */
 	@ViewChild("nChart") chartRef;
@@ -80,18 +69,6 @@ export class BaseChart implements AfterViewInit, OnInit {
 
 	private _data: any;
 	private _options: any;
-
-	ngOnInit() {
-		// Width prop is mandatory for the wrappers
-		if (this.width) {
-			this.options.width = this.width;
-		}
-
-		// Height prop is mandatory for the wrappers
-		if (this.height) {
-			this.options.height = this.height;
-		}
-	}
 
 	/**
 	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.

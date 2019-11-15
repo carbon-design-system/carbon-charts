@@ -78,18 +78,6 @@ export namespace Tools {
 		};
 	}
 
-	export function formatWidthHeightValues(value) {
-		const stringValue = value.toString();
-
-		// If the value provided contains any letters
-		// Return it the same way
-		if (stringValue.match(/[a-z]/i)) {
-			return stringValue;
-		}
-
-		return stringValue + "px";
-	}
-
 	/**
 	 * Capitalizes first letter of a string
 	 *

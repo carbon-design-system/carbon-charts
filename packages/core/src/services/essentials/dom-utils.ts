@@ -12,6 +12,9 @@ import settings from "carbon-components/src/globals/js/settings";
 import ResizeObserver from "resize-observer-polyfill";
 
 export class DOMUtils extends Service {
+	width: string;
+	height: string;
+
 	static getSVGElementSize(svgSelector: Selection<any, any, any, any>, options?: any) {
 		if (!svgSelector.attr) {
 			svgSelector = select(svgSelector as any);
@@ -132,23 +135,32 @@ export class DOMUtils extends Service {
 		}
 	}
 
+	update() {
+		this.styleHolderElement();
+	}
+
 	styleHolderElement() {
 		const holderElement = this.getHolder() as HTMLElement;
-		const { width, height } = this.model.getOptions();
 
 		// Add class to chart holder
 		select(this.getHolder()).classed(`${settings.prefix}--chart-holder`, true);
 
-		// If width exists in options
-		if (width) {
+		// In order for resize events to not clash with these updates
+		// We'll check if the width & height values passed in options
+		// Have changed, before setting them to the holder
+		const { width, height } = this.model.getOptions();
+		if (width !== this.width) {
 			// Apply formatted width attribute to chart
-			holderElement.style.width = Tools.formatWidthHeightValues(width);
+			holderElement.style.width = width;
+
+			this.width = width;
 		}
 
-		// If height exists in options
-		if (height) {
-			// Apply formatted height attribute to chart
-			holderElement.style.height = Tools.formatWidthHeightValues(height);
+		if (height !== this.height) {
+			// Apply formatted width attribute to chart
+			holderElement.style.height = height;
+
+			this.height = height;
 		}
 	}
 
