@@ -73,8 +73,6 @@ export class Chart {
 		return null;
 	}
 
-
-
 	update(animate = true) {
 		if (!this.components) {
 			return;
@@ -107,9 +105,6 @@ export class Chart {
 	destroy() {
 		// Call the destroy() method on all components
 		this.components.forEach(component => component.destroy());
-
-		// Remove the chart holder
-		this.services.domUtils.getHolder().remove();
 
 		this.model.set({ destroyed: true }, true);
 	}
