@@ -23,4 +23,8 @@ export default class BaseChart extends React.Component {
 		this.chart.model.setData(this.props.data);
 		this.chart.model.setOptions(this.props.options);
 	}
+
+	componentWillUnmount() {
+		this.chart.destroy();
+	}
 }

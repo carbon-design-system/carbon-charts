@@ -1,8 +1,9 @@
 import {
 	Component,
 	Input,
-	ViewChild,
-	AfterViewInit
+	AfterViewInit,
+	ElementRef,
+	OnDestroy
 } from "@angular/core";
 
 /**
@@ -12,12 +13,11 @@ import {
  */
 @Component({
 	selector: "ibm-base-chart",
-	template: `
-		<div #nChart class="ibm-chart-container">
-		</div>
-	`
+	template: ``
 })
-export class BaseChart implements AfterViewInit {
+export class BaseChart implements AfterViewInit, OnDestroy {
+	constructor(protected elementRef: ElementRef) {}
+
 	/**
 	 * Data passed to charts library for displaying
 	 */
@@ -55,11 +55,6 @@ export class BaseChart implements AfterViewInit {
 	}
 
 	/**
-	 * Chart container element ref
-	 */
-	@ViewChild("nChart") chartRef;
-
-	/**
 	 * Chart object instance
 	 *
 	 * You can use this to do whatever you would normally do with a chart if you used
@@ -75,5 +70,9 @@ export class BaseChart implements AfterViewInit {
 	 */
 	ngAfterViewInit() {
 		console.log("You need to implement your own `ngAfterViewInit()` function");
+	}
+
+	ngOnDestroy() {
+		this.chart.destroy();
 	}
 }
