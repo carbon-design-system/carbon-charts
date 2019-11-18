@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://github.ibm.com/WatsonSupplyChain/sterling-charts/compare/v0.20.0...v0.21.0) (2019-11-18)
+
+
+### Features
+
+* **core, angular, react, vue:** update width & height of the chart with options ([1e99115](https://github.ibm.com/WatsonSupplyChain/sterling-charts/commit/1e99115))
+
+
+
+
+
 # [0.20.0](https://github.ibm.com/WatsonSupplyChain/sterling-charts/compare/v0.19.3...v0.20.0) (2019-11-08)
 
 **Note:** Version bump only for package @cui/charts-angular
