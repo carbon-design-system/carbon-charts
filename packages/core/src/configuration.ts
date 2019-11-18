@@ -126,9 +126,6 @@ const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 	bars: {
 		maxWidth: 16
 	},
-	timeScale: Tools.merge(timeScale, {
-		addSpaceOnEdges: true
-	} as TimeScaleOptions),
 	tooltip: barChartTooltip
 } as BarChartOptions);
 
