@@ -22,7 +22,6 @@ import { Tools } from "./tools";
 import {
 	DOMUtils,
 	Events,
-	Themes,
 	Transitions
 } from "./services/index";
 
@@ -31,8 +30,7 @@ export class Chart {
 	services: any = {
 		domUtils: DOMUtils,
 		events: Events,
-		transitions: Transitions,
-		themes: Themes
+		transitions: Transitions
 	};
 	model: ChartModel = new ChartModel(this.services);
 
@@ -75,13 +73,16 @@ export class Chart {
 		return null;
 	}
 
-
-
 	update(animate = true) {
 		if (!this.components) {
 			return;
 		}
 
+		// Update all services
+		Object.keys(this.services).forEach(serviceName => {
+			const serviceObj = this.services[serviceName];
+			serviceObj.update();
+		});
 		// Render all components
 		this.components.forEach(component => component.render(animate));
 
@@ -104,9 +105,6 @@ export class Chart {
 	destroy() {
 		// Call the destroy() method on all components
 		this.components.forEach(component => component.destroy());
-
-		// Remove the chart holder
-		this.services.domUtils.getHolder().remove();
 
 		this.model.set({ destroyed: true }, true);
 	}

@@ -185,6 +185,7 @@ chartTypes.forEach(type => {
 				break;
 		}
 
+		type.options.height = "500px";
 
 		// Initialize chart
 		charts[type.id] = new classToInitialize(
