@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://github.com/IBM/sterling-charts/compare/v0.21.0...v0.22.0) (2019-11-19)
+
+
+### Features
+
+* **core, angular, react, vue:** allow customizations to pie labels and donut center number ([20793e8](https://github.com/IBM/sterling-charts/commit/20793e8))
+
+
+
+
+
 # [0.21.0](https://github.com/IBM/sterling-charts/compare/v0.20.0...v0.21.0) (2019-11-18)
 
 

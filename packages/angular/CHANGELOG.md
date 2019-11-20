@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://github.ibm.com/WatsonSupplyChain/sterling-charts/compare/v0.21.0...v0.22.0) (2019-11-19)
+
+**Note:** Version bump only for package @cui/charts-angular
+
+
+
+
+
 # [0.21.0](https://github.ibm.com/WatsonSupplyChain/sterling-charts/compare/v0.20.0...v0.21.0) (2019-11-18)
 
 
