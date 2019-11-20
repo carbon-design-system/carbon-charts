@@ -99,8 +99,8 @@ export class Tooltip extends Component {
 		const dataVal = Tools.getProperty(data, "data") ? data.data : data;
 
 		// format the value if needed
-		const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-			this.model.getOptions().tooltip.valueFormatter(dataVal.value) : dataVal.value.toLocaleString("en");
+		const valueFormatter = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter");
+		const formattedValue = valueFormatter ? valueFormatter(dataVal.value) : dataVal.value.toLocaleString("en");
 
 		// pie charts don't have a dataset label since they only support one dataset
 		const label = dataVal.datasetLabel ? dataVal.datasetLabel : dataVal.label;
@@ -128,8 +128,8 @@ export class Tooltip extends Component {
 					// scale type determines which value we care about since it should align with the scale data
 					datapointValue = scaleType === ScaleTypes.TIME ? datapoint.value.date : datapoint.value.value;
 				}
-				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-					this.model.getOptions().tooltip.valueFormatter(datapointValue) : datapointValue.toLocaleString("en");
+				const valueFormatter = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter");
+				const formattedValue = valueFormatter ? valueFormatter(datapointValue) : datapointValue.toLocaleString("en");
 
 				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label);
 

@@ -10,8 +10,8 @@ export class TooltipScatter extends Tooltip {
 			return super.getTooltipHTML(data, type);
 		}
 
-		const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-			this.model.getOptions().tooltip.valueFormatter(data.value) : data.value.toLocaleString("en");
+		const valueFormatter = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter");
+		const formattedValue = valueFormatter ? valueFormatter(data.value) : data.value.toLocaleString("en");
 
 		const indicatorColor = this.model.getStrokeColor(data.datasetLabel, data.label, data.value);
 

@@ -114,8 +114,8 @@ export class TooltipBar extends Tooltip {
 	 * @param data associated values for the hovered bar
 	 */
 	getTooltipHTML(data: any) {
-		const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-			this.model.getOptions().tooltip.valueFormatter(data.value) : data.value.toLocaleString("en");
+		const valueFormatter = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter");
+		const formattedValue = valueFormatter ? valueFormatter(data.value) : data.value.toLocaleString("en");
 
 		return `<div class="datapoint-tooltip"><p class="value">${formattedValue}</p></div>`;
 	}
@@ -133,14 +133,12 @@ export class TooltipBar extends Tooltip {
 		let total = points.reduce((sum, item) => sum + item.value, 0);
 
 		// format the total value
-		total = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-			this.model.getOptions().tooltip.valueFormatter(total) : total.toLocaleString("en");
+		const valueFormatter = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter");
+		total = valueFormatter ? valueFormatter(total) : total.toLocaleString("en");
 
 		return "<ul class='multi-tooltip'>" +
 			points.map(datapoint => {
-				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-					this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
-
+				const formattedValue = valueFormatter ? valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
 				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
 
 				return `
