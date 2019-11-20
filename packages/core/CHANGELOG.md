@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.23.0 (2019-11-20)
+
+
+### Bug Fixes
+
+* **core:** update type to scaleType and backgroundColors to fillColors ([3ca0a0f](https://github.com/ibm/sterling-dataviz/commit/3ca0a0f))
+* **core:** update typescript version ([949379f](https://github.com/ibm/sterling-dataviz/commit/949379f))
+* **core, react, angular, vue:** default width & height to 100%, and call setOptions on option change ([db251b4](https://github.com/ibm/sterling-dataviz/commit/db251b4))
+
+
+### Features
+
+* **core:** date/time locale support + tick formatting ([86e515f](https://github.com/ibm/sterling-dataviz/commit/86e515f))
+* **core:** export interfaces and configurations ([f255966](https://github.com/ibm/sterling-dataviz/commit/f255966))
+* **core:** title truncation with tooltip ([2a02101](https://github.com/ibm/sterling-dataviz/commit/2a02101))
+* **core, angular, react, vue:** allow customizations to pie labels and donut center number ([20793e8](https://github.com/ibm/sterling-dataviz/commit/20793e8))
+* **core, angular, react, vue:** update width & height of the chart with options ([1e99115](https://github.com/ibm/sterling-dataviz/commit/1e99115))
+
+
+
+
+
 # [0.22.0](https://github.com/ibm/sterling-dataviz/compare/v0.21.0...v0.22.0) (2019-11-19)
 
 

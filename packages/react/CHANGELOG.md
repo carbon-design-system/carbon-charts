@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.23.0 (2019-11-20)
+
+
+### Bug Fixes
+
+* **core, react, angular, vue:** default width & height to 100%, and call setOptions on option change ([db251b4](https://github.com/ibm/sterling-dataviz/commit/db251b4))
+
+
+### Features
+
+* **core, angular, react, vue:** update width & height of the chart with options ([1e99115](https://github.com/ibm/sterling-dataviz/commit/1e99115))
+
+
+
+
+
 # [0.22.0](https://github.com/ibm/sterling-dataviz/compare/v0.21.0...v0.22.0) (2019-11-19)
 
 **Note:** Version bump only for package @ibm-sterling/charts-react
