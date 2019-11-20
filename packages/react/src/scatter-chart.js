@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ScatterChart as SC } from "@cui/charts";
+import { ScatterChart as SC } from "@ibm-sterling/charts";
 import BaseChart from "./base-chart";
 
 export default class ScatterChart extends BaseChart {

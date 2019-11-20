@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { ScatterChart } from '@cui/charts';
+import { ScatterChart } from '@ibm-sterling/charts';
 import CcvBaseChart from './ccv-base-chart.vue';
 
 export default {

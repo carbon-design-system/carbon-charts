@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { SimpleBarChart } from '@cui/charts';
+import { SimpleBarChart } from '@ibm-sterling/charts';
 import CcvBaseChart from './ccv-base-chart.vue';
 
 export default {

@@ -5,7 +5,7 @@ import {
 
 import { BaseChart } from "./base-chart.component";
 
-import { GroupedBarChart } from "@cui/charts";
+import { GroupedBarChart } from "@ibm-sterling/charts";
 
 /**
  * Wrapper around `GroupedBarChart` in sterling charts library
