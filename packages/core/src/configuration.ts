@@ -19,6 +19,7 @@ import {
 	ChartTheme,
 	LegendPositions,
 	StackedBarOptions,
+	BarOrientationOptions,
 } from "./interfaces/index";
 
 /*
@@ -133,7 +134,8 @@ const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: true
 	} as TimeScaleOptions),
-	tooltip: barChartTooltip
+	tooltip: barChartTooltip,
+	orientation: BarOrientationOptions.VERTICAL
 } as BarChartOptions);
 
 /**
