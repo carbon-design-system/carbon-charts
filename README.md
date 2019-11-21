@@ -6,78 +6,24 @@
 	<p align="center">
 		A reusable framework-agnostic D3 charting library.
 		<br /><br />
-		<a href="https://travis-ci.org/ibm/sterling-dataviz">
-			<img src="https://api.travis-ci.org/ibm/sterling-dataviz.svg?branch=master" />
+		<a href="https://travis-ci.com/ibm/sterling-dataviz">
+			<img src="https://api.travis-ci.com/ibm/sterling-dataviz.svg?branch=master" />
 		</a>
 		<a href="https://www.npmjs.com/package/@ibm-sterling/charts">
 			<img src="https://img.shields.io/npm/v/@ibm-sterling/charts.svg" />
 		</a>
 		<img src="https://img.shields.io/badge/comp-IE11%2B-blue.svg" />
-		<img alt="semantic-versioning" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versioning-e10079.svg">
+		<a href="https://semver.org">
+			<img alt="semantic-versioning" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versioning-e10079.svg">
+		</a>
 	</p>
 </p>
 
-## Table of contents
-
-- [Installation](#installation)
-- [Demo & Docs](#demo-and-documentation)
-- [Run Charts locally](#run-charts-locally)
-- [Component status](#component-status)
-- [Bugs and feature requests](#bugs-and-feature-requests)
-- [Contributing](#contributing)
-
-## Getting started
-
-### Installation
-
-Run:
-```bash
-yarn add @ibm-sterling/charts
-```
-
-Or if you use NPM:
-```bash
-npm install @ibm-sterling/charts --save
-```
-
-## Demo and documentation
-**Charts demos:**
-- [Vanilla JS](https://ibm.github.io/sterling-dataviz)
-- [Angular](https://ibm.github.io/sterling-dataviz/angular)
-- [React](https://ibm.github.io/sterling-dataviz/react)
-- [Vue](https://ibm.github.io/sterling-dataviz/vue)
-
-**Docs:** <https://ibm.github.io/sterling-dataviz/documentation/>
-
-### Code Samples
-<p align="center">
-	<img src="assets/demo-stacked-bar.png" alt="Stacked Bar Chart" width="600" />
-</p>
-
-<p align="center">
-	<a href="https://codesandbox.io/s/149vrzo62l">
-		<img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit Sterling Charts - Vanilla" />
-	</a>
-</p>
-
-- [Vanilla JS](https://codesandbox.io/s/149vrzo62l)
-- [Angular](https://codesandbox.io/s/k32kjy5qnr)
-- [React](https://codesandbox.io/s/pppmo3ollx)
-- [Vue](https://codesandbox.io/s/040w2rqrxp)
-
-### Run Charts locally
-1. Fork the project and clone your fork:
-
-   ```bash
-   # Clone your fork of the repo into the current directory
-   git clone git@github.com:<your-username>/sterling-dataviz.git
-   # Navigate to the newly cloned directory
-   cd sterling-dataviz
-   ```
-
-2. Run `yarn` to install Node.js dependencies.
-3. Run `yarn run demo:server` to serve up the demo locally.
-4. Finally, open <http://localhost:9001/> in your browser. SPOILER ALERT: There's no "Hello, World!"
+## Packages
+- [Vanilla](./packages/core)
+- [Angular](./packages/angular)
+- [React](./packages/react)
+- [Vue](./packages/vue)
 
 ## Component status
 :white_check_mark: Stable :hourglass_flowing_sand: In progress
@@ -101,6 +47,19 @@ Have a bug or a feature request? First read the [issue guidelines](https://githu
 
 ## Contributing
 
+1. Fork the project and clone your fork:
+
+   ```bash
+   # Clone your fork of the repo into the current directory
+   git clone git@github.com:<your-username>/sterling-dataviz.git
+   # Navigate to the newly cloned directory
+   cd sterling-dataviz
+   ```
+
+2. Run `yarn` to install Node.js dependencies.
+3. Run `yarn run demo:server` to serve up the demo locally.
+4. Finally, open <http://localhost:9001/> in your browser. SPOILER ALERT: There's no "Hello, World!"
+
 See our [contributing guidelines](https://github.com/ibm/sterling-dataviz/blob/master/CONTRIBUTING.md). Included are instructions for opening issues, coding guidelines, and submitting pull requests.
 
 <!-- ## Community
@@ -112,7 +71,6 @@ Get updates on Charts' development and chat with the core team and community. --
 We use the **semantic-release** library to automatically version our releases within the guidelines of Semantic Versioning [Semantic Versioning guidelines](http://semver.org/).
 
 See our [releases notes](https://github.com/ibm/sterling-dataviz/releases) for the changelog of each version of Charts.
-
 
 ## Core Team
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
