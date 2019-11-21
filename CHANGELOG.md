@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.1](https://github.com/IBM/sterling-dataviz/compare/v0.23.0...v0.23.1) (2019-11-21)
+
+**Note:** Version bump only for package @ibm-sterling/charts-monorepo
+
+
+
+
+
 # 0.23.0 (2019-11-20)
 
 
