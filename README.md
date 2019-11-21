@@ -46,20 +46,6 @@
 Have a bug or a feature request? First read the [issue guidelines](https://github.com/ibm/sterling-dataviz/blob/master/CONTRIBUTING.md#issue-guidelines) and search for existing and closed issues. If your problem or idea is not addressed yet, [open a new issue](https://github.com/ibm/sterling-dataviz/issues/new).
 
 ## Contributing
-
-1. Fork the project and clone your fork:
-
-   ```bash
-   # Clone your fork of the repo into the current directory
-   git clone git@github.com:<your-username>/sterling-dataviz.git
-   # Navigate to the newly cloned directory
-   cd sterling-dataviz
-   ```
-
-2. Run `yarn` to install Node.js dependencies.
-3. Run `yarn run demo:server` to serve up the demo locally.
-4. Finally, open <http://localhost:9001/> in your browser. SPOILER ALERT: There's no "Hello, World!"
-
 See our [contributing guidelines](https://github.com/ibm/sterling-dataviz/blob/master/CONTRIBUTING.md). Included are instructions for opening issues, coding guidelines, and submitting pull requests.
 
 <!-- ## Community
