@@ -4,7 +4,7 @@ import { Bar } from "./bar";
 // D3 Imports
 import { select } from "d3-selection";
 import { color } from "d3-color";
-import { TooltipTypes } from "../../interfaces";
+import { TooltipTypes, ScaleTypes } from "../../interfaces";
 
 export class SimpleBar extends Bar {
 	type = "simple-bar";
@@ -35,7 +35,7 @@ export class SimpleBar extends Bar {
 		// Add the bar groups that need to be introduced
 		const barGroupsEnter = barGroups.enter()
 			.append("g")
-				.classed("bars", true);
+			.classed("bars", true);
 
 		// Update data on all bars
 		const bars = barGroupsEnter.merge(barGroups)
@@ -47,26 +47,64 @@ export class SimpleBar extends Bar {
 			.attr("opacity", 0)
 			.remove();
 
-		// Add the circles that need to be introduced
+		// Add the rects that need to be introduced
 		const barsEnter = bars.enter()
 			.append("rect")
 			.attr("opacity", 0);
 
-		barsEnter.merge(bars)
-			.classed("bar", true)
-			.attr("x", (d, i) => {
-				const barWidth = this.getBarWidth();
 
-				return this.services.axes.getXValue(d, i) - barWidth / 2;
-			})
-			.attr("width", this.getBarWidth.bind(this))
-			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-			.attr("y", (d, i) => this.services.axes.getYValue(Math.max(0, d.value)))
-			.attr("fill", d => this.model.getFillScale()(d.label))
-			.attr("height", (d, i) => {
-				return Math.abs(this.services.axes.getYValue(d, i) - this.services.axes.getYValue(0));
-			})
-			.attr("opacity", 1);
+		// the mapping of rect attributes switches for horizontal bar charts
+		if (this.model.getOptions().orientation === "horizontal") {
+			barsEnter.merge(bars)
+				.classed("bar", true)
+				.attr("x", (d, i) => {
+					const xScale = this.services.axes.getMainXAxis();
+					if (xScale.scaleType === ScaleTypes.LABELS ) {
+						return xScale.scale.range()[0];
+					}
+					return d.value > 0 ? this.services.axes.getXValue(0) : this.services.axes.getXValue(d, i);
+				})
+				.attr("width", (d, i) => {
+					const scale = this.services.axes.getMainXAxis();
+					if (scale.scaleType === ScaleTypes.LABELS ) {
+						return Math.abs(this.services.axes.getXValue(d.label, i) - scale.scale.range()[1]);
+					}
+					return Math.abs(this.services.axes.getXValue(d, i) - this.services.axes.getXValue(0));
+				})
+				.transition(this.services.transitions.getTransition("bar-update-enter", animate))
+				.attr("y", (d, i) =>  this.services.axes.getYValue(d, i) - (this.getBarWidth() / 2))
+				.attr("fill", d => this.model.getFillScale()(d.label))
+				.attr("height", this.getBarWidth.bind(this))
+				.attr("opacity", 1);
+		} else {
+			barsEnter.merge(bars)
+				.classed("bar", true)
+				.attr("x", (d, i) => {
+					const barWidth = this.getBarWidth();
+
+					return this.services.axes.getXValue(d, i) - barWidth / 2;
+				})
+				.attr("width", this.getBarWidth.bind(this))
+				.transition(this.services.transitions.getTransition("bar-update-enter", animate))
+				.attr("y", (d, i) => {
+						const scale = this.services.axes.getMainYAxis().scaleType;
+						if (scale === ScaleTypes.LABELS ) {
+							return this.services.axes.getYValue(d.label, i);
+						} else {
+							return this.services.axes.getYValue(Math.max(this.services.axes.getYValue(0), d.value));
+						}
+					}
+				)
+				.attr("fill", d => this.model.getFillScale()(d.label))
+				.attr("height", (d, i) => {
+					const yScale = this.services.axes.getMainYAxis();
+					if (yScale.scaleType === ScaleTypes.LABELS ) {
+						return Math.abs(this.services.axes.getYValue(d, i) - yScale.scale.range()[0]);
+					}
+					return Math.abs(this.services.axes.getYValue(d, i) - this.services.axes.getYValue(0));
+				})
+				.attr("opacity", 1);
+		}
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
