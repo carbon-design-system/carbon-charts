@@ -1,4 +1,4 @@
-import { getAttributes, toString } from '@carbon/icon-helpers';
+import { getAttributes, toString } from "@carbon/icon-helpers";
 
 export default (icon) => {
 	return toString({
