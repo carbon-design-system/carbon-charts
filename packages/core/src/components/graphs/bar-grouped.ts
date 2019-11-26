@@ -67,7 +67,7 @@ export class GroupedBar extends Bar {
 		// Add the bar groups that need to be introduced
 		const barGroupsEnter = barGroups.enter()
 			.append("g")
-				.classed("bars", true);
+			.classed("bars", true);
 
 		// Update data on all bars
 		const bars = barGroupsEnter.merge(barGroups)

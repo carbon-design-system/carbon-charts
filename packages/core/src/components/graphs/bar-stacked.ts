@@ -123,30 +123,77 @@ export class StackedBar extends Bar {
 
 		// Update styling and position on existing bars
 		// As well as bars that were just added
-		bars.enter()
-			.append("rect")
-			.merge(bars)
+		// horizontal bars need to map across the opposite axis
+		if (this.model.getOptions().orientation === "horizontal") {
+			bars.enter()
+				.append("rect")
+				.merge(bars)
 				.classed("bar", true)
 				.attr("x", (d, i) => {
-					const barWidth = this.getBarWidth();
-					return this.services.axes.getXValue(d, i) - (barWidth / 2);
+					const xScale = this.services.axes.getMainXAxis();
+					let height;
+					if (xScale.scaleType === ScaleTypes.LABELS ) {
+						height = Math.abs(this.services.axes.getXValue(d.label, i) - xScale.scale.range()[0]);
+						return this.services.axes.getXValue(d.label, i) - height;
+					}
+					height = Math.abs(this.services.axes.getXValue(d[0]) - this.services.axes.getXValue(d[1]));
+					return this.services.axes.getXValue(d[1], i) - height;
 				})
-				.attr("width", this.getBarWidth.bind(this))
-				.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-				.attr("y", (d, i) => this.services.axes.getYValue(d[1], i))
-				.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
-				.attr("height", (d, i) => {
+				.attr("width", (d, i) => {
+					const xScale = this.services.axes.getMainXAxis();
+					let height;
+					if (xScale.scaleType === ScaleTypes.LABELS ) {
+						height = Math.abs(this.services.axes.getXValue(d.label, i) - xScale.scale.range()[0]);
+					} else {
+						height = Math.abs(this.services.axes.getXValue(d[0]) - this.services.axes.getXValue(d[1]));
+					}
 					const { datasetLabel } = d;
 					const datasetLabelIndex = stackKeys.indexOf(datasetLabel);
-					const height = this.services.axes.getYValue(d[0]) - this.services.axes.getYValue(d[1]);
-
-					if (datasetLabelIndex > 0 && height >= options.bars.dividerSize) {
+					// create dividers between every bar
+					if (datasetLabelIndex < (datasetLabel.length - 1) && height >= options.bars.dividerSize) {
 						return height - options.bars.dividerSize;
 					}
-
 					return height;
-				})
+				} )
+				.transition(this.services.transitions.getTransition("bar-update-enter", animate))
+				.attr("y", (d, i) => this.services.axes.getYValue(d, i))
+				.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
+				.attr("height", this.getBarWidth.bind(this))
 				.attr("opacity", 1);
+			} else {
+				// vertical stacked bar code
+				bars.enter()
+					.append("rect")
+					.merge(bars)
+						.classed("bar", true)
+						.attr("x", (d, i) => {
+							const barWidth = this.getBarWidth();
+							return this.services.axes.getXValue(d, i) - (barWidth / 2);
+						})
+						.attr("width", this.getBarWidth.bind(this))
+						.transition(this.services.transitions.getTransition("bar-update-enter", animate))
+						.attr("y", (d, i) => this.services.axes.getYValue(d[1], i))
+						.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
+						.attr("height", (d, i) => {
+							const yScale = this.services.axes.getMainYAxis();
+							const { datasetLabel } = d;
+							const datasetLabelIndex = stackKeys.indexOf(datasetLabel);
+							let height;
+							// determine height based on the y axis
+							if (yScale.scaleType === ScaleTypes.LABELS ) {
+								height = Math.abs(yScale.scale.range()[0] - this.services.axes.getYValue(d.label, i));
+							} else {
+								height = this.services.axes.getYValue(d[0]) - this.services.axes.getYValue(d[1]);
+							}
+							// create dividers between bars
+							if (datasetLabelIndex > 0 && height >= options.bars.dividerSize) {
+								return height - options.bars.dividerSize;
+							}
+
+							return height;
+						})
+						.attr("opacity", 1);
+			}
 
 		// Add event listeners for the above elements
 		this.addEventListeners();
