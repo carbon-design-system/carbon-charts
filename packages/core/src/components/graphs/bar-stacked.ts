@@ -1,5 +1,5 @@
 // Internal Imports
-import { ScaleTypes, TooltipTypes } from "../../interfaces/enums";
+import { ScaleTypes, TooltipTypes, BarOrientationOptions } from "../../interfaces/enums";
 import { Tools } from "../../tools";
 import { Bar } from "./bar";
 
@@ -39,7 +39,10 @@ export class StackedBar extends Bar {
 		let stackDataArray;
 		const displayData = this.model.getDisplayData();
 
-		const timeSeries = this.services.axes.getMainXAxis().scaleType === ScaleTypes.TIME;
+		// the main axis for stack data depends on the orientation of the bar chart
+		const isVertical = this.model.getOptions().orientation === BarOrientationOptions.VERTICAL;
+		const mainAxis = isVertical ? this.services.axes.getMainXAxis() : this.services.axes.getMainYAxis();
+		const timeSeries = mainAxis.scaleType === ScaleTypes.TIME;
 
 		if (timeSeries) {
 			// Get all date values provided in data
@@ -125,35 +128,34 @@ export class StackedBar extends Bar {
 		// As well as bars that were just added
 		// horizontal bars need to map across the opposite axis
 		if (this.model.getOptions().orientation === "horizontal") {
+			// bar lengths depend on the primary xscale
+			const xScale = this.services.axes.getMainXAxis();
+			let length;
 			bars.enter()
 				.append("rect")
 				.merge(bars)
 				.classed("bar", true)
 				.attr("x", (d, i) => {
-					const xScale = this.services.axes.getMainXAxis();
-					let height;
 					if (xScale.scaleType === ScaleTypes.LABELS ) {
-						height = Math.abs(this.services.axes.getXValue(d.label, i) - xScale.scale.range()[0]);
-						return this.services.axes.getXValue(d.label, i) - height;
+						length = Math.abs(this.services.axes.getXValue(d.label, i) - xScale.scale.range()[0]);
+						return this.services.axes.getXValue(d.label, i) - length;
 					}
-					height = Math.abs(this.services.axes.getXValue(d[0]) - this.services.axes.getXValue(d[1]));
-					return this.services.axes.getXValue(d[1], i) - height;
+					length = Math.abs(this.services.axes.getXValue(d[0]) - this.services.axes.getXValue(d[1]));
+					return this.services.axes.getXValue(d[1], i) - length;
 				})
 				.attr("width", (d, i) => {
-					const xScale = this.services.axes.getMainXAxis();
-					let height;
 					if (xScale.scaleType === ScaleTypes.LABELS ) {
-						height = Math.abs(this.services.axes.getXValue(d.label, i) - xScale.scale.range()[0]);
+						length = Math.abs(this.services.axes.getXValue(d.label, i) - xScale.scale.range()[0]);
 					} else {
-						height = Math.abs(this.services.axes.getXValue(d[0]) - this.services.axes.getXValue(d[1]));
+						length = Math.abs(this.services.axes.getXValue(d[0]) - this.services.axes.getXValue(d[1]));
 					}
 					const { datasetLabel } = d;
 					const datasetLabelIndex = stackKeys.indexOf(datasetLabel);
 					// create dividers between every bar
-					if (datasetLabelIndex < (datasetLabel.length - 1) && height >= options.bars.dividerSize) {
-						return height - options.bars.dividerSize;
+					if (datasetLabelIndex < (datasetLabel.length - 1) && length >= options.bars.dividerSize) {
+						return length - options.bars.dividerSize;
 					}
-					return height;
+					return length;
 				} )
 				.transition(this.services.transitions.getTransition("bar-update-enter", animate))
 				.attr("y", (d, i) => this.services.axes.getYValue(d, i))
@@ -162,6 +164,7 @@ export class StackedBar extends Bar {
 				.attr("opacity", 1);
 			} else {
 				// vertical stacked bar code
+				const yScale = this.services.axes.getMainYAxis();
 				bars.enter()
 					.append("rect")
 					.merge(bars)
@@ -175,7 +178,6 @@ export class StackedBar extends Bar {
 						.attr("y", (d, i) => this.services.axes.getYValue(d[1], i))
 						.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
 						.attr("height", (d, i) => {
-							const yScale = this.services.axes.getMainYAxis();
 							const { datasetLabel } = d;
 							const datasetLabelIndex = stackKeys.indexOf(datasetLabel);
 							let height;
