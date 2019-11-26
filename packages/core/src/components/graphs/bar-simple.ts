@@ -4,7 +4,7 @@ import { Bar } from "./bar";
 // D3 Imports
 import { select } from "d3-selection";
 import { color } from "d3-color";
-import { TooltipTypes, ScaleTypes } from "../../interfaces";
+import { TooltipTypes, ScaleTypes, BarOrientationOptions } from "../../interfaces";
 
 export class SimpleBar extends Bar {
 	type = "simple-bar";
@@ -53,56 +53,55 @@ export class SimpleBar extends Bar {
 			.attr("opacity", 0);
 
 
-		// the mapping of rect attributes switches for horizontal bar charts
-		if (this.model.getOptions().orientation === "horizontal") {
-			barsEnter.merge(bars)
-				.classed("bar", true)
-				.attr("x", (d, i) => {
-					const xScale = this.services.axes.getMainXAxis();
-					if (xScale.scaleType === ScaleTypes.LABELS ) {
-						return xScale.scale.range()[0];
-					}
-					return d.value > 0 ? this.services.axes.getXValue(0) : this.services.axes.getXValue(d, i);
-				})
-				.attr("width", (d, i) => {
-					const scale = this.services.axes.getMainXAxis();
-					if (scale.scaleType === ScaleTypes.LABELS ) {
-						return Math.abs(this.services.axes.getXValue(d.label, i) - scale.scale.range()[1]);
-					}
-					return Math.abs(this.services.axes.getXValue(d, i) - this.services.axes.getXValue(0));
-				})
-				.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-				.attr("y", (d, i) =>  this.services.axes.getYValue(d, i) - (this.getBarWidth() / 2))
-				.attr("fill", d => this.model.getFillScale()(d.label))
-				.attr("height", this.getBarWidth.bind(this))
-				.attr("opacity", 1);
-		} else {
+		// the mapping of rect attributes switches for horizontal vs vertical bar charts
+		if (this.model.getOptions().orientation === BarOrientationOptions.VERTICAL) {
+			// vertical bar charts needs the main Y axis for bar lengths
+			const yScale = this.services.axes.getMainYAxis();
 			barsEnter.merge(bars)
 				.classed("bar", true)
 				.attr("x", (d, i) => {
 					const barWidth = this.getBarWidth();
-
 					return this.services.axes.getXValue(d, i) - barWidth / 2;
 				})
 				.attr("width", this.getBarWidth.bind(this))
 				.transition(this.services.transitions.getTransition("bar-update-enter", animate))
 				.attr("y", (d, i) => {
-						const scale = this.services.axes.getMainYAxis().scaleType;
-						if (scale === ScaleTypes.LABELS ) {
-							return this.services.axes.getYValue(d.label, i);
-						} else {
-							return this.services.axes.getYValue(Math.max(this.services.axes.getYValue(0), d.value));
-						}
+					if (yScale.scaleType === ScaleTypes.LABELS) {
+						return this.services.axes.getYValue(d.label, i);
+					} else {
+						return this.services.axes.getYValue(Math.max(this.services.axes.getYValue(0), d.value));
 					}
-				)
+				})
 				.attr("fill", d => this.model.getFillScale()(d.label))
 				.attr("height", (d, i) => {
-					const yScale = this.services.axes.getMainYAxis();
-					if (yScale.scaleType === ScaleTypes.LABELS ) {
-						return Math.abs(this.services.axes.getYValue(d, i) - yScale.scale.range()[0]);
-					}
+					if (yScale.scaleType === ScaleTypes.LABELS) {
+						return Math.abs(this.services.axes.getYValue(d, i) - yScale.scale.range()[0]); }
+
 					return Math.abs(this.services.axes.getYValue(d, i) - this.services.axes.getYValue(0));
 				})
+				.attr("opacity", 1);
+
+		} else {
+			// horizontal bars depend on the main X axis for length
+			const xScale = this.services.axes.getMainXAxis();
+			barsEnter.merge(bars)
+				.classed("bar", true)
+				.attr("x", (d, i) => {
+					if (xScale.scaleType === ScaleTypes.LABELS) {
+						return xScale.scale.range()[0];
+					}
+					return d.value > 0 ? this.services.axes.getXValue(0) : this.services.axes.getXValue(d, i);
+				})
+				.attr("width", (d, i) => {
+					if (xScale.scaleType === ScaleTypes.LABELS) {
+						return Math.abs(this.services.axes.getXValue(d.label, i) - xScale.scale.range()[1]);
+					}
+					return Math.abs(this.services.axes.getXValue(d, i) - this.services.axes.getXValue(0));
+				})
+				.transition(this.services.transitions.getTransition("bar-update-enter", animate))
+				.attr("y", (d, i) => this.services.axes.getYValue(d, i) - (this.getBarWidth() / 2))
+				.attr("fill", d => this.model.getFillScale()(d.label))
+				.attr("height", this.getBarWidth.bind(this))
 				.attr("opacity", 1);
 		}
 
@@ -139,7 +138,7 @@ export class SimpleBar extends Bar {
 	addEventListeners() {
 		const self = this;
 		this.parent.selectAll("rect.bar")
-			.on("mouseover", function() {
+			.on("mouseover", function () {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true);
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
@@ -150,7 +149,7 @@ export class SimpleBar extends Bar {
 					type: TooltipTypes.DATAPOINT
 				});
 			})
-			.on("mouseout", function() {
+			.on("mouseout", function () {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
