@@ -1,0 +1,71 @@
+@import '~carbon-components/scss/globals/scss/vars';
+@import '~@carbon/themes/scss/tokens';
+@import '~carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '~carbon-components/scss/globals/scss/_helper-mixins';
+
+@include exports('graph-card') {
+	.#{$prefix}--graph-card {
+		cursor: pointer;
+	}
+
+	.#{$prefix}--graph-card__background {
+		fill: $ui-background;
+		stroke: $ui_03;
+	}
+
+	.#{$prefix}--graph-card__button:focus {
+		@include focus-outline();
+	}
+
+	.#{$prefix}--graph-card__icon-background {
+		fill: $ui_04;
+	}
+
+	.#{$prefix}--graph-card__icon-path {
+		fill: $icon_03;
+	}
+
+	.#{$prefix}--graph-card__heading {
+		font-size: 0.875rem;
+		fill: $text_01;
+		font-weight: 600;
+	}
+
+	.#{$prefix}--graph-card__subheading {
+		font-size: 0.875rem;
+		fill: $interactive_01;
+	}
+
+	// Active state modifier
+	.#{$prefix}--active {
+		.#{$prefix}--graph-card__background {
+			fill: $inverse_02;
+			stroke: $inverse_02;
+		}
+
+		.#{$prefix}--graph-card__heading {
+			fill: $inverse_01;
+		}
+
+		.#{$prefix}--graph-card__subheading {
+			fill: $inverse_01;
+		}
+	}
+
+	// Kind modifier
+	.#{$prefix}--graph-card__icon--warning {
+		.#{$prefix}--graph-card__icon__path {
+			fill: $icon_01;
+		}
+
+		.#{$prefix}--graph-card__icon__background {
+			fill: $support_03;
+		}
+	}
+
+	.#{$prefix}--graph-card__icon--error {
+		.#{$prefix}--graph-card__icon__background {
+			fill: $support_01;
+		}
+	}
+}
