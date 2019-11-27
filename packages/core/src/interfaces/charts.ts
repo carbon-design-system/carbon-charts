@@ -1,6 +1,7 @@
 import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
 import { AxisTooltipOptions, BarTooltipOptions, BarOptions, StackedBarOptions } from "./components";
 import { ChartTheme } from "./enums";
+import { TimeScaleOptions } from "./axis-scales";
 
 /**
  * Base chart options common to any chart
@@ -64,6 +65,7 @@ export interface AxisChartOptions extends BaseChartOptions {
 	axes?: AxesOptions;
 	grid?: GridOptions;
 	tooltip?: AxisTooltipOptions;
+	timeScale?: TimeScaleOptions;
 }
 
 /**
