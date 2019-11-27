@@ -3,8 +3,12 @@
 set -e # exit with nonzero exit code if anything fails
 
 # Git user info configs
-git config --global user.email "sterlingComponents@ca.ibm.com"
+git config --global user.email "sterlingcomponents@ca.ibm.com"
 git config --global user.name "Sterling Bot"
+
+# Add github token to git credentials
+git config credential.helper "store --file=.git/credentials"
+echo "https://${GH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
 
 if [ -z "$TRAVIS_TAG" ]
 then
@@ -18,13 +22,9 @@ else
 	echo "The commit is a tag, publish to NPM!"
 
 	# authenticate with the npm registry
-
-	# AF_USER and AF_API_KEY are manually set on travis from info in artifactory
-	curl -u${AF_USER}:${AF_API_KEY} "https://na.artifactory.swg-devops.com/artifactory/api/npm/wce-wscui-shell-npm-local/auth/cui" > ~/.npmrc
+	npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
 	node scripts/clean-package-jsons.js
 
-	lerna publish from-git --yes --force-publish --contents dist --no-verify-registry --no-verify-access --registry https://na.artifactory.swg-devops.com/artifactory/api/npm/wce-wscui-shell-npm-local/
-
-	curl -d "{\"text\":\"sterling-charts published :partyperetz:\"}" https://hooks.slack.com/services/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
+	lerna publish from-git --yes --force-publish --contents dist
 fi

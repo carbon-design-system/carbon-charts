@@ -5,7 +5,7 @@ import {
 
 import { BaseChart } from "./base-chart.component";
 
-import { LineChart } from "@cui/charts";
+import { LineChart } from "@ibm-sterling/charts";
 
 /**
  * Wrapper around `LineChart` in sterling charts library

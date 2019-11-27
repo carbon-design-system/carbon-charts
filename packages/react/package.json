@@ -1,6 +1,6 @@
 {
-	"name": "@cui/charts-react",
-	"version": "0.21.0",
+	"name": "@ibm-sterling/charts-react",
+	"version": "0.23.1",
 	"description": "Sterling charting components for React",
 	"main": "./bundle.js",
 	"scripts": {
@@ -12,7 +12,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.ibm.com:WatsonSupplyChain/sterling-charts.git"
+		"url": "git@github.com:ibm/sterling-dataviz.git"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",
@@ -40,11 +40,11 @@
 		"scss"
 	],
 	"bugs": {
-		"url": "https://github.ibm.com:WatsonSupplyChain/sterling-charts/issues"
+		"url": "https://github.com/ibm/sterling-dataviz/issues"
 	},
-	"homepage": "https://github.ibm.com:WatsonSupplyChain/sterling-charts#readme",
+	"homepage": "https://github.com/ibm/sterling-dataviz#readme",
 	"dependencies": {
-		"@cui/charts": "^0.21.0"
+		"@ibm-sterling/charts": "^0.23.1"
 	},
 	"peerDependencies": {
 		"react": "^16.6.3",

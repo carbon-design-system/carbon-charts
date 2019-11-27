@@ -1,6 +1,6 @@
 {
-  "name": "@cui/charts",
-  "version": "0.21.0",
+  "name": "@ibm-sterling/charts",
+  "version": "0.23.1",
   "description": "Sterling charting components",
   "main": "./bundle.js",
   "module": "./index.js",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.ibm.com:WatsonSupplyChain/sterling-charts.git"
+    "url": "git@github.com:ibm/sterling-dataviz.git"
   },
   "keywords": [
     "sterling",

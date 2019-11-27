@@ -1,10 +1,10 @@
 {
-	"name": "@cui/charts-monorepo",
+	"name": "@ibm-sterling/charts-monorepo",
 	"private": true,
 	"description": "Sterling charting components, lerna monorepo",
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/sterling-charts.git"
+		"url": "git@github.com:IBM/sterling-dataviz.git"
 	},
 	"keywords": [
 		"charts"
