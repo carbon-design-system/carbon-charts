@@ -1,6 +1,6 @@
 {
 	"name": "@ibm-sterling/charts-react",
-	"version": "0.23.1",
+	"version": "0.23.2",
 	"description": "Sterling charting components for React",
 	"main": "./bundle.js",
 	"scripts": {
@@ -44,7 +44,7 @@
 	},
 	"homepage": "https://github.com/ibm/sterling-dataviz#readme",
 	"dependencies": {
-		"@ibm-sterling/charts": "^0.23.1"
+		"@ibm-sterling/charts": "^0.23.2"
 	},
 	"peerDependencies": {
 		"react": "^16.6.3",

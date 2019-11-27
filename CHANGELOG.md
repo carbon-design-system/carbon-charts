@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.2](https://github.com/IBM/sterling-dataviz/compare/v0.23.1...v0.23.2) (2019-11-27)
+
+
+### Bug Fixes
+
+* **core:** add timeScale options to the BaseAxisChart interface ([22d6de8](https://github.com/IBM/sterling-dataviz/commit/22d6de8))
+
+
+
+
+
 ## [0.23.1](https://github.com/IBM/sterling-dataviz/compare/v0.23.0...v0.23.1) (2019-11-21)
 
 **Note:** Version bump only for package @ibm-sterling/charts-monorepo
