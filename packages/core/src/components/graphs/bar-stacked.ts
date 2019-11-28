@@ -158,7 +158,7 @@ export class StackedBar extends Bar {
 					return length;
 				} )
 				.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-				.attr("y", (d, i) => this.services.axes.getYValue(d, i))
+				.attr("y", (d, i) => { return this.services.axes.getYValue(d, i) - this.getBarWidth() / 2; })
 				.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
 				.attr("height", this.getBarWidth.bind(this))
 				.attr("opacity", 1);
