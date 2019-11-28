@@ -144,6 +144,10 @@ export class Axis extends Component {
 
 		// TODO - Work with design to improve logic
 		domain[1] = domain[1] * 1.1;
+		// if the lower bound of the domain is less than 0, we want to add padding
+		if (domain[0] < 0) {
+			domain[0] = domain[0] * 1.1;
+		}
 		return domain;
 	}
 
