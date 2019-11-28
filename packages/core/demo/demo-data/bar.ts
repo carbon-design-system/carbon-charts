@@ -67,7 +67,6 @@ export const groupedBarOptions = {
 };
 
 // Horizontal Grouped
-
 export const groupedHorizontalBarData = groupedBarData;
 
 export const groupedHorizontalBarOptions = {
@@ -117,7 +116,6 @@ export const simpleBarOptions = {
 };
 
 // Horizontal Simple
-
 export const simpleHorizontalBarData = simpleBarData;
 
 export const simpleHorizontalBarOptions = {
@@ -251,6 +249,7 @@ export const stackedBarData = {
 	]
 };
 
+// Stacked bar
 export const stackedBarOptions = {
 	title: "Stacked bar (discrete)",
 	axes: {
@@ -391,7 +390,6 @@ export const stackedBarTimeSeriesOptions = {
 };
 
 // Stacked horizontal bar
-
 export const stackedHorizontalBarTimeSeriesOptions = {
 	title: "Stacked horizontal bar (time series)",
 	axes: {
