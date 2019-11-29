@@ -11913,6 +11913,17 @@ var c = -0.5,
 
 /***/ }),
 
+/***/ "../../node_modules/d3-time-format/locale/tr-TR.json":
+/*!***********************************************************************************************************!*\
+  !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time-format/locale/tr-TR.json ***!
+  \***********************************************************************************************************/
+/*! exports provided: dateTime, date, time, periods, days, shortDays, months, shortMonths, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"dateTime\":\"%a %e %b %X %Y\",\"date\":\"%d/%m/%Y\",\"time\":\"%H:%M:%S\",\"periods\":[\"AM\",\"PM\"],\"days\":[\"Pazar\",\"Pazartesi\",\"Salı\",\"Çarşamba\",\"Perşembe\",\"Cuma\",\"Cumartesi\"],\"shortDays\":[\"Paz\",\"Pzt\",\"Sal\",\"Çar\",\"Per\",\"Cum\",\"Cmt\"],\"months\":[\"Ocak\",\"Şubat\",\"Mart\",\"Nisan\",\"Mayıs\",\"Haziran\",\"Temmuz\",\"Ağustos\",\"Eylül\",\"Ekim\",\"Kasım\",\"Aralık\"],\"shortMonths\":[\"Oca\",\"Şub\",\"Mar\",\"Nis\",\"May\",\"Haz\",\"Tem\",\"Ağu\",\"Eyl\",\"Eki\",\"Kas\",\"Ara\"]}");
+
+/***/ }),
+
 /***/ "../../node_modules/d3-time-format/src/defaultLocale.js":
 /*!**************************************************************************************************************!*\
   !*** /home/travis/build/carbon-design-system/carbon-charts/node_modules/d3-time-format/src/defaultLocale.js ***!
