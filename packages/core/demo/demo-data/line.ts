@@ -1,5 +1,4 @@
 import { colors } from "./colors";
-import { getTheme } from "./themes";
 import { Tools } from "../../src/tools";
 
 export const lineTimeSeriesData = {
@@ -115,12 +114,11 @@ export const lineTimeSeriesOptions = {
 			secondary: true
 		},
 		bottom: {
-			type: "time",
+			scaleType: "time",
 			primary: true
 		}
 	},
-	curve: "curveMonotoneX",
-	theme: getTheme()
+	curve: "curveMonotoneX"
 };
 
 export const lineData = {
@@ -194,14 +192,13 @@ export const lineOptions = {
 	axes: {
 		bottom: {
 			title: "2018 Annual Sales Figures",
-			type: "labels",
+			scaleType: "labels",
 			secondary: true
 		},
 		left: {
 			primary: true
 		}
-	},
-	theme: getTheme()
+	}
 };
 
 // Step
@@ -291,14 +288,13 @@ export const scatterOptions = {
 	axes: {
 		bottom: {
 			title: "2018 Annual Sales Figures",
-			type: "labels",
+			scaleType: "labels",
 			secondary: true
 		},
 		left: {
 			primary: true
 		}
-	},
-	theme: getTheme()
+	}
 };
 
 export const scatterTimeSeriesData = lineTimeSeriesData;
@@ -308,12 +304,11 @@ export const scatterTimeSeriesOptions = {
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
-			type: "time",
+			scaleType: "time",
 			secondary: true
 		},
 		left: {
 			primary: true
 		}
-	},
-	theme: getTheme()
+	}
 };

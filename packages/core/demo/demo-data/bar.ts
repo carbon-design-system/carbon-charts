@@ -1,5 +1,7 @@
 import { colors } from "./colors";
-import { getTheme } from "./themes";
+
+// Demo turkish locale for simple bar time-series
+const turkishLocale = require("d3-time-format/locale/tr-TR.json");
 
 export const groupedBarData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -54,14 +56,13 @@ export const groupedBarOptions = {
 			primary: true,
 		},
 		bottom: {
-			type: "labels",
+			scaleType: "labels",
 			secondary: true,
 		},
 		top: {
-			type: "labels",
+			scaleType: "labels",
 		}
-	},
-	theme: getTheme()
+	}
 };
 
 // Simple bar
@@ -88,11 +89,10 @@ export const simpleBarOptions = {
 			primary: true
 		},
 		bottom: {
-			type: "labels",
+			scaleType: "labels",
 			secondary: true,
 		}
-	},
-	theme: getTheme()
+	}
 };
 
 
@@ -128,17 +128,19 @@ export const simpleBarTimeSeriesData = {
 };
 
 export const simpleBarTimeSeriesOptions = {
-	title: "Simple bar (time series)",
+	title: "Simple bar (time series - Turkish)",
 	axes: {
 		left: {
 			primary: true
 		},
 		bottom: {
-			type: "time",
+			scaleType: "time",
 			secondary: true,
-		}
-	},
-	theme: getTheme()
+		},
+    locale: {
+		  time: turkishLocale
+    }
+	}
 };
 
 // Stacked bar
@@ -196,11 +198,10 @@ export const stackedBarOptions = {
 			stacked: true
 		},
 		bottom: {
-			type: "labels",
+			scaleType: "labels",
 			secondary: true,
 		}
-	},
-	theme: getTheme()
+	}
 };
 
 
@@ -318,9 +319,8 @@ export const stackedBarTimeSeriesOptions = {
 			stacked: true
 		},
 		bottom: {
-			type: "time",
-			secondary: true,
+			scaleType: "time",
+			secondary: true
 		}
-	},
-	theme: getTheme()
+	}
 };
