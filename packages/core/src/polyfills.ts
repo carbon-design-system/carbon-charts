@@ -10,7 +10,7 @@ if (typeof window !== "undefined") {
 		}
 
 		CustomEvent.prototype = window["Event"].prototype;
-		window["CustomEvent"] = CustomEvent;
+		window["CustomEvent"] = CustomEvent as any;
 	})();
 
 	// Avoid multiple instances of babel-polyfill
