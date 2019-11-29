@@ -7,7 +7,7 @@
 		"build": "bash build.sh",
 		"lint": "vue-cli-service lint ./src/index.js",
 		"storybook": "start-storybook -p 6006",
-		"demo:build": "build-storybook -o demo/bundle",
+		"demo:build": "build-storybook -o demo/bundle --quiet",
 		"ci-check": "yarn format:diff",
 		"format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
 		"format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\"",
