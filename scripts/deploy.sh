@@ -24,8 +24,6 @@ else
 	# authenticate with the npm registry
 	npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
-	yarn run build-all
-
 	node scripts/clean-package-jsons.js
 
 	lerna publish from-git --yes --force-publish --contents dist
