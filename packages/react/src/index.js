@@ -1,3 +1,4 @@
+import AreaChart from "./area-chart";
 import PieChart from "./pie-chart";
 import DonutChart from "./donut-chart";
 import LineChart from "./line-chart";
@@ -7,6 +8,7 @@ import SimpleBarChart from "./bar-chart-simple";
 import StackedBarChart from "./bar-chart-stacked";
 
 export {
+	AreaChart,
 	PieChart,
 	DonutChart,
 	LineChart,

@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import {
+	AreaChart,
 	LineChart,
 	ScatterChart
 } from "../src/index";
@@ -17,12 +18,15 @@ import {
 	stepData,
 	stepTimeSeriesOptions,
 	stepTimeSeriesData,
+	// Area
+	areaTimeSeriesData,
+	areaTimeSeriesOptions,
 	// Scatter
 	scatterTimeSeriesOptions,
 	scatterTimeSeriesData,
 	scatterOptions,
 	scatterData
-} from "../../core/demo/demo-data/index";
+} from "@carbon/charts/demo/demo-data";
 
 import { addWidthAndHeight } from "./commons";
 
@@ -68,5 +72,13 @@ scatterStories.add(scatterTimeSeriesOptions.title, () => (
 	<ScatterChart
 		data={scatterTimeSeriesData}
 		options={addWidthAndHeight(scatterTimeSeriesOptions)}
+	/>
+));
+
+const areaStories = storiesOf("Area", module);
+areaStories.add(areaTimeSeriesOptions.title, () => (
+	<AreaChart
+		data={areaTimeSeriesData}
+		options={addWidthAndHeight(areaTimeSeriesOptions)}
 	/>
 ));
