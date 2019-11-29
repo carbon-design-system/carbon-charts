@@ -8,6 +8,7 @@ export * from "./essentials/tooltip-bar";
 export * from "./essentials/tooltip-scatter";
 
 // GRAPHS
+export * from "./graphs/area";
 export * from "./graphs/bar-simple";
 export * from "./graphs/bar-grouped";
 export * from "./graphs/bar-stacked";

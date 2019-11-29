@@ -4,6 +4,7 @@ import {
 	StackedBarChart,
 	LineChart,
 	ScatterChart,
+	AreaChart,
 	PieChart,
 	DonutChart
 } from "../src/index";
@@ -176,6 +177,9 @@ chartTypes.forEach(type => {
 			case "line-step":
 			case "line-step-time-series":
 				classToInitialize = LineChart;
+				break;
+			case "area-time-series":
+				classToInitialize = AreaChart;
 				break;
 			case "pie":
 				classToInitialize = PieChart;

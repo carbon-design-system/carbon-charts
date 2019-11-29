@@ -1,3 +1,4 @@
+export * from "./area";
 export * from "./bar-simple";
 export * from "./bar-grouped";
 export * from "./bar-stacked";

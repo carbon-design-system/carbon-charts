@@ -4,6 +4,7 @@ import {
 	StackedBarChart,
 	LineChart,
 	ScatterChart,
+	AreaChart,
 	PieChart,
 	DonutChart,
 } from "./charts/index";
@@ -20,6 +21,7 @@ export {
 	StackedBarChart,
 	LineChart,
 	ScatterChart,
+	AreaChart,
 	PieChart,
 	DonutChart
 };

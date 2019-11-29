@@ -6,6 +6,7 @@ import {
 	LineChartOptions,
 	BarChartOptions,
 	StackedBarChartOptions,
+	AreaChartOptions,
 	PieChartOptions,
 	DonutChartOptions,
 	// Components
@@ -18,7 +19,7 @@ import {
 	LegendOptions,
 	ChartTheme,
 	LegendPositions,
-	StackedBarOptions,
+	StackedBarOptions
 } from "./interfaces/index";
 
 /*
@@ -167,6 +168,15 @@ const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
 } as LineChartOptions);
 
 /**
+ * options specific to line charts
+ */
+const areaChart: AreaChartOptions = Tools.merge({}, axisChart, {
+	timeScale: Tools.merge(timeScale, {
+		addSpaceOnEdges: false
+	} as TimeScaleOptions)
+} as LineChartOptions);
+
+/**
  * options specific to scatter charts
  */
 const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
@@ -222,6 +232,7 @@ export const options = {
 	groupedBarChart,
 	stackedBarChart,
 	lineChart,
+	areaChart,
 	scatterChart,
 	pieChart,
 	donutChart

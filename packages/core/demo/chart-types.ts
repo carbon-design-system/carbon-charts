@@ -25,6 +25,9 @@ const {
 	stepData,
 	stepTimeSeriesOptions,
 	stepTimeSeriesData,
+	// Area
+	areaTimeSeriesData,
+	areaTimeSeriesOptions,
 	// Scatter
 	scatterTimeSeriesOptions,
 	scatterTimeSeriesData,
@@ -82,6 +85,11 @@ export const chartTypes = [
 		id: "line-time-series",
 		options: lineTimeSeriesOptions,
 		data: lineTimeSeriesData
+	},
+	{
+		id: "area-time-series",
+		options: areaTimeSeriesOptions,
+		data: areaTimeSeriesData
 	},
 	{
 		id: "line",
