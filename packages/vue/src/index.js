@@ -1,3 +1,4 @@
+import CcvAreaChart from './ccv-area-chart.vue';
 import CcvSimpleBarChart from './ccv-simple-bar-chart.vue';
 import CcvGroupedBarChart from './ccv-grouped-bar-chart.vue';
 import CcvStackedBarChart from './ccv-stacked-bar-chart.vue';
@@ -7,6 +8,7 @@ import CcvDonutChart from './ccv-donut-chart.vue';
 import CcvPieChart from './ccv-pie-chart.vue';
 
 const components = [
+	CcvAreaChart,
 	CcvSimpleBarChart,
 	CcvGroupedBarChart,
 	CcvStackedBarChart,
@@ -49,6 +51,7 @@ export default {
   alternative to loading them all via a Vue plug-in.
 */
 export {
+	CcvAreaChart,
 	CcvSimpleBarChart,
 	CcvGroupedBarChart,
 	CcvStackedBarChart,

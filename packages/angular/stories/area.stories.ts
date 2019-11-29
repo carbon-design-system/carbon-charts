@@ -5,7 +5,7 @@ import { ChartsModule } from "../src/charts.module";
 import {
 	// Area
 	areaTimeSeriesData,
-	areaTimeSeriesOptions,
+	areaTimeSeriesOptions
 } from "../../core/demo/demo-data/index";
 import { addWidthAndHeight } from "./commons";
 
