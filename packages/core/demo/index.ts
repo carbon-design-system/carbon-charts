@@ -157,14 +157,18 @@ chartTypes.forEach(type => {
 		let classToInitialize;
 		switch (type.id) {
 			case "simple-bar":
+			case "simple-horizontal-bar":
 			case "simple-bar-time-series":
+			case "simple-horizontal-bar-time-series":
 				classToInitialize = SimpleBarChart;
 				break;
 			case "grouped-bar":
+			case "grouped-horizontal-bar":
 				classToInitialize = GroupedBarChart;
 				break;
 			case "stacked-bar":
 			case "stacked-bar-time-series":
+			case "stacked-horizontal-bar-time-series":
 				classToInitialize = StackedBarChart;
 				break;
 			case "scatter":

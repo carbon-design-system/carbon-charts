@@ -1,6 +1,6 @@
 import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
 import { AxisTooltipOptions, BarTooltipOptions, BarOptions, StackedBarOptions } from "./components";
-import { ChartTheme } from "./enums";
+import { ChartTheme, BarOrientationOptions } from "./enums";
 import { TimeScaleOptions } from "./axis-scales";
 
 /**
@@ -74,6 +74,7 @@ export interface AxisChartOptions extends BaseChartOptions {
 export interface BarChartOptions extends AxisChartOptions {
 	bars?: BarOptions;
 	tooltip?: BarTooltipOptions;
+	orientation?: BarOrientationOptions;
 }
 
 /**

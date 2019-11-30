@@ -2,7 +2,7 @@ import * as Configuration from "../../configuration";
 import { Tooltip } from "./tooltip";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
-import { TooltipPosition, TooltipTypes } from "./../../interfaces/enums";
+import { TooltipPosition, TooltipTypes, BarOrientationOptions } from "./../../interfaces/enums";
 
 // Carbon position service
 import Position, { PLACEMENTS } from "@carbon/utils-position";
@@ -127,7 +127,11 @@ export class TooltipBar extends Tooltip {
 	getMultilineTooltipHTML(data: any) {
 		const points = data;
 
-		points.reverse();
+		// in a vertical bar chart the tooltip should display in order of the drawn bars
+		// in horizontal stacked bar, the order of the segments from Left to Right are top down in tooltip
+		if (this.model.getOptions().orientation === BarOrientationOptions.VERTICAL ) {
+			points.reverse();
+		}
 
 		// get the total for the stacked tooltip
 		let total = points.reduce((sum, item) => sum + item.value, 0);

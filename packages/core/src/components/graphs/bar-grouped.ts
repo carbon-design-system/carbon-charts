@@ -5,7 +5,7 @@ import { Bar } from "./bar";
 import { select } from "d3-selection";
 import { color } from "d3-color";
 import { ScaleBand, scaleBand } from "d3-scale";
-import { TooltipTypes } from "../../interfaces";
+import { TooltipTypes, BarOrientationOptions, ScaleTypes } from "../../interfaces";
 
 export class GroupedBar extends Bar {
 	type = "grouped-bar";
@@ -40,8 +40,17 @@ export class GroupedBar extends Bar {
 	// Gets the correct width for bars based on options & configurations
 	getBarWidth() {
 		const { datasets } = this.model.getDisplayData();
+		let mainAxis;
+
+		// determine which axis the bar width depends on
+		if (this.model.getOptions().orientation === BarOrientationOptions.HORIZONTAL) {
+			mainAxis =  this.services.axes.getMainYAxis();
+		} else {
+			mainAxis =  this.services.axes.getMainXAxis();
+		}
+
 		return Math.min(
-			this.services.axes.getMainXAxis().scale.step() / 2 / datasets.length,
+			mainAxis.scale.step() / 2 / datasets.length,
 			super.getBarWidth()
 		);
 	}
@@ -67,13 +76,20 @@ export class GroupedBar extends Bar {
 		// Add the bar groups that need to be introduced
 		const barGroupsEnter = barGroups.enter()
 			.append("g")
-				.classed("bars", true);
+			.classed("bars", true);
 
 		// Update data on all bars
 		const bars = barGroupsEnter.merge(barGroups)
 			.attr("transform", (d, i) => {
-				const xValue = this.services.axes.getXValue(d, i);
-				return `translate(${xValue - this.getGroupWidth() / 2}, 0)`;
+				if (this.model.getOptions().orientation === BarOrientationOptions.VERTICAL) {
+					// translate the groups in the X direction for vertical bar charts
+					const xValue = this.services.axes.getXValue(d, i);
+					return `translate(${xValue - this.getGroupWidth() / 2}, 0)`;
+				} else {
+					// translate in the y direction for horixontal groups
+					const yValue = this.services.axes.getYValue(d, i);
+					return `translate(0, ${yValue - this.getGroupWidth() / 2})`;
+				}
 			})
 			.selectAll("rect.bar")
 			.data((d, i) => this.addLabelsToDataPoints(d, i));
@@ -88,7 +104,9 @@ export class GroupedBar extends Bar {
 			.append("rect")
 			.attr("opacity", 0);
 
-		barsEnter.merge(bars)
+		if (this.model.getOptions().orientation === BarOrientationOptions.VERTICAL) {
+			// code for vertical grouped bar charts
+			barsEnter.merge(bars)
 			.classed("bar", true)
 			.attr("x", d => this.groupScale(d.datasetLabel))
 			.attr("width", this.getBarWidth.bind(this))
@@ -99,6 +117,23 @@ export class GroupedBar extends Bar {
 			})
 			.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
 			.attr("opacity", 1);
+		} else {
+			// code for horizontal
+			barsEnter.merge(bars)
+			.classed("bar", true)
+			.attr("x", (d, i) => {
+				return d.value > 0 ? this.services.axes.getXValue(0) : this.services.axes.getXValue(d, i);
+			})
+			.attr("width", (d, i) => {
+				return Math.abs(this.services.axes.getXValue(d, i) - this.services.axes.getXValue(0));
+			})
+			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
+			.attr("y", (d, i) => {
+				return this.groupScale(d.datasetLabel); })
+			.attr("height",  this.getBarWidth.bind(this))
+			.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
+			.attr("opacity", 1);
+		}
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
