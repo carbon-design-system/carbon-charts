@@ -139,17 +139,10 @@ export const simpleBarTimeSeriesOptions = {
 		bottom: {
 			scaleType: "time",
 			secondary: true,
-<<<<<<< HEAD
-		},
-    locale: {
-		  time: turkishLocale
-    }
-=======
 		}
 	},
 	locale: {
 		time: turkishLocale
->>>>>>> faa0087535a6662b429920baea8e0cf09cd2bce1
 	}
 };
 
