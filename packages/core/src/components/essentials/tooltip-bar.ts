@@ -22,35 +22,53 @@ export class TooltipBar extends Tooltip {
 
 		// Apply html content to the tooltip
 		const tooltipTextContainer = DOMUtils.appendOrSelect(this.tooltip, "div.content-box");
+		this.tooltip.style("max-width", null);
 
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener("show-tooltip", e => {
 			// check the type of tooltip and that it is enabled
 			if ((e.detail.type === TooltipTypes.DATAPOINT && Tools.getProperty(this.model.getOptions(), "tooltip", "datapoint", "enabled"))
-				|| (e.detail.type === TooltipTypes.GRIDLINE && Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) ) {
+				|| (e.detail.type === TooltipTypes.GRIDLINE && Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled"))) {
 
 				const hoveredElement = e.detail.hoveredElement.node();
 
-				// if there is a provided tooltip HTML function
-				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
-					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement));
-				} else if (e.detail.multidata) {
+				let defaultTooltip;
+				if (e.detail.multidata) {
 					// multi tooltip
-					tooltipTextContainer.html(this.getMultilineTooltipHTML(e.detail.multidata));
-					// Position the tooltip
-					this.positionTooltip();
+					defaultTooltip = this.getMultilineTooltipHTML(e.detail.multidata);
 				} else {
-					const data = e.detail.hoveredElement.datum();
-					tooltipTextContainer.html(this.getTooltipHTML(data));
-
-					const position = this.getTooltipPosition(hoveredElement);
-
-					// Position the tooltip relative to the bars
-					this.positionTooltip(position);
+					defaultTooltip = this.getTooltipHTML(e.detail.hoveredElement.datum());
 				}
-				// Fade in
-				this.tooltip.classed("hidden", false);
+
+				// if there is a provided tooltip HTML function call it and pass the defaultTooltip
+				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
+					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement, defaultTooltip));
+				} else {
+					// default tooltip
+					tooltipTextContainer.html(defaultTooltip);
+				}
+
+				const position = this.getTooltipPosition(hoveredElement);
+				// Position the tooltip relative to the bars
+				this.positionTooltip(e.detail.multidata ? undefined : position);
+
+			} else if (e.detail.type === TooltipTypes.TITLE) {
+				// use the chart size to enforce a max width on the tooltip
+				const chart = DOMUtils.appendOrSelect(holder, `svg.${settings.prefix}--${chartprefix}--chart-svg`);
+				// use the configs to determine how large the tooltip should be
+				const tooltipMax = DOMUtils.getSVGElementSize(chart).width * Tools.getProperty(this.model.getOptions(), "tooltip", "title", "width");
+				this.tooltip.style("max-width", tooltipMax);
+
+				// use tooltip.ts to get the tooltip html for titles
+				tooltipTextContainer.html(super.getTooltipHTML(e.detail.hoveredElement, TooltipTypes.TITLE));
+
+				// get the position based on the title positioning (static)
+				const position = super.getTooltipPosition(e.detail.hoveredElement.node());
+				this.positionTooltip(position);
 			}
+
+			// Fade in
+			this.tooltip.classed("hidden", false);
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
@@ -79,7 +97,7 @@ export class TooltipBar extends Tooltip {
 				top: (barPosition.bottom - holderPosition.top) + verticalOffset
 			};
 
-			return {placement: TooltipPosition.BOTTOM, position: tooltipPos};
+			return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
 		} else {
 			// positive bars
 			const tooltipPos = {
@@ -87,7 +105,7 @@ export class TooltipBar extends Tooltip {
 				top: (barPosition.top - holderPosition.top) - verticalOffset
 			};
 
-			return {placement: TooltipPosition.TOP, position: tooltipPos};
+			return { placement: TooltipPosition.TOP, position: tooltipPos };
 		}
 	}
 
@@ -96,8 +114,8 @@ export class TooltipBar extends Tooltip {
 	 * @param data associated values for the hovered bar
 	 */
 	getTooltipHTML(data: any) {
-		const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-		this.model.getOptions().tooltip.valueFormatter(data.value) : data.value.toLocaleString("en");
+		const valueFormatter = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter");
+		const formattedValue = valueFormatter ? valueFormatter(data.value) : data.value.toLocaleString("en");
 
 		return `<div class="datapoint-tooltip"><p class="value">${formattedValue}</p></div>`;
 	}
@@ -115,14 +133,12 @@ export class TooltipBar extends Tooltip {
 		let total = points.reduce((sum, item) => sum + item.value, 0);
 
 		// format the total value
-		total = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-		this.model.getOptions().tooltip.valueFormatter(total) : total.toLocaleString("en");
+		const valueFormatter = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter");
+		total = valueFormatter ? valueFormatter(total) : total.toLocaleString("en");
 
-		return  "<ul class='multi-tooltip'>" +
+		return "<ul class='multi-tooltip'>" +
 			points.map(datapoint => {
-				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-				this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
-
+				const formattedValue = valueFormatter ? valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
 				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
 
 				return `
@@ -134,67 +150,12 @@ export class TooltipBar extends Tooltip {
 					</div>
 				</li>`;
 			}).join("") +
-				`<li>
+			`<li>
 					<div class='total-val'>
 						<p class='label'>Total</p>
 						<p class='value'>${total}</p>
 					</div>
 				</li>
 			</ul>`;
-	}
-
-	positionTooltip(positionOverride?: any) {
-		const holder = this.services.domUtils.getHolder();
-		const target = this.tooltip.node();
-		const mouseRelativePos = mouse(holder);
-		let pos;
-
-		// override position to place tooltip at {placement:.., position:{top:.. , left:..}}
-		if (positionOverride) {
-			// placement determines whether the tooltip is centered above or below the position provided
-			const placement = positionOverride.placement === TooltipPosition.TOP ? PLACEMENTS.TOP : PLACEMENTS.BOTTOM;
-
-			pos = this.positionService.findPositionAt(
-				positionOverride.position,
-				target,
-				placement
-			);
-		} else {
-			// Find out whether tooltip should be shown on the left or right side
-			const bestPlacementOption = this.positionService.findBestPlacementAt(
-				{
-					left: mouseRelativePos[0],
-					top: mouseRelativePos[1]
-				},
-				target,
-				[
-					PLACEMENTS.RIGHT,
-					PLACEMENTS.LEFT,
-					PLACEMENTS.TOP,
-					PLACEMENTS.BOTTOM
-				],
-				() => ({
-					width: holder.offsetWidth,
-					height: holder.offsetHeight
-				})
-			);
-
-			let { horizontalOffset } = this.model.getOptions().tooltip.datapoint;
-			if (bestPlacementOption === PLACEMENTS.LEFT) {
-				horizontalOffset *= -1;
-			}
-
-			// Get coordinates to where tooltip should be positioned
-			pos = this.positionService.findPositionAt(
-				{
-					left: mouseRelativePos[0] + horizontalOffset,
-					top: mouseRelativePos[1]
-				},
-				target,
-				bestPlacementOption
-			);
-		}
-
-		this.positionService.setElement(target, pos);
 	}
 }

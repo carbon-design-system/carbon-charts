@@ -68,6 +68,10 @@ export const baseTooltip: TooltipOptions = {
 		horizontalOffset: 10,
 		enabled: true,
 	},
+	title: {
+		verticalOffset: .75,
+		width: .4
+	}
 };
 
 export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip, {
@@ -77,7 +81,7 @@ export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip,
 	}
 } as AxisTooltipOptions);
 
-export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip , {
+export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip, {
 	datapoint: {
 		verticalOffset: 4
 	},
@@ -88,7 +92,7 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartToolt
 
 // We setup no axes by default, the TwoDimensionalAxes component
 // Will setup axes options based on what user provides
-export const axes: AxesOptions = { };
+export const axes: AxesOptions = {};
 
 export const timeScale: TimeScaleOptions = {
 	addSpaceOnEdges: true
@@ -126,9 +130,6 @@ const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 	bars: {
 		maxWidth: 16
 	},
-	timeScale: Tools.merge(timeScale, {
-		addSpaceOnEdges: true
-	} as TimeScaleOptions),
 	tooltip: barChartTooltip
 } as BarChartOptions);
 
@@ -198,6 +199,9 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 			offsetY: 12,
 			horizontalLineLength: 8,
 			textMargin: 2
+		},
+		labels: {
+			formatter: null
 		}
 	}
 } as PieChartOptions);
@@ -210,7 +214,8 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 		center: {
 			numberFontSize: radius => Math.min((radius / 100) * 24, 24) + "px",
 			titleFontSize: radius => Math.min((radius / 100) * 15, 15) + "px",
-			titleYPosition: radius => Math.min((radius / 80) * 20, 20)
+			titleYPosition: radius => Math.min((radius / 80) * 20, 20),
+			numberFormatter: number => Math.floor(number).toLocaleString()
 		}
 	}
 } as DonutChartOptions);

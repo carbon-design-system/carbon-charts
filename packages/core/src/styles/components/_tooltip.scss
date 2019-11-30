@@ -24,6 +24,13 @@
 	.content-box {
 		color: $text-01;
 
+		.title-tooltip {
+			line-height: 16px;
+			font-size: 12px;
+			padding: 4px;
+			min-width: 20px;
+		}
+
 		.datapoint-tooltip, .total-val {
 			display: flex;
 			padding: 4px;

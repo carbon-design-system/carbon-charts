@@ -1,6 +1,7 @@
 import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
 import { AxisTooltipOptions, BarTooltipOptions, BarOptions, StackedBarOptions } from "./components";
 import { ChartTheme } from "./enums";
+import { TimeScaleOptions } from "./axis-scales";
 
 /**
  * Base chart options common to any chart
@@ -21,11 +22,11 @@ export interface BaseChartOptions {
 	/**
 	 * Optionally specify a width for the chart
 	 */
-	width?: number | string;
+	width?: string;
 	/**
 	 * Optionally specify a height for the chart
 	 */
-	height?: number | string;
+	height?: string;
 	/**
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
 	 */
@@ -64,6 +65,7 @@ export interface AxisChartOptions extends BaseChartOptions {
 	axes?: AxesOptions;
 	grid?: GridOptions;
 	tooltip?: AxisTooltipOptions;
+	timeScale?: TimeScaleOptions;
 }
 
 /**
@@ -129,6 +131,9 @@ export interface PieChartOptions extends BaseChartOptions {
 			offsetY?: number;
 			horizontalLineLength?: number;
 			textMargin?: number;
+		},
+		labels?: {
+			formatter?: Function;
 		}
 	};
 }
@@ -144,6 +149,7 @@ export interface DonutChartOptions extends PieChartOptions {
 			numberFontSize?: Function;
 			titleFontSize?: Function;
 			titleYPosition?: Function;
+			numberFormatter?: Function;
 		};
 	};
 }
