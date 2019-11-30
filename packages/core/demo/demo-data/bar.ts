@@ -1,12 +1,14 @@
 import { colors } from "./colors";
-import { getTheme } from "./themes";
+
+// Demo turkish locale for simple bar time-series
+const turkishLocale = require("d3-time-format/locale/tr-TR.json");
 
 export const groupedBarData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
 		{
 			label: "Dataset 1",
-			backgroundColors: [colors[0]],
+			fillColors: [colors[0]],
 			data: [
 				65000,
 				-29123,
@@ -17,7 +19,7 @@ export const groupedBarData = {
 		},
 		{
 			label: "Dataset 2",
-			backgroundColors: [colors[1]],
+			fillColors: [colors[1]],
 			data: [
 				32432,
 				-21312,
@@ -28,7 +30,7 @@ export const groupedBarData = {
 		},
 		{
 			label: "Dataset 3",
-			backgroundColors: [colors[2]],
+			fillColors: [colors[2]],
 			data: [
 				-12312,
 				23232,
@@ -39,7 +41,7 @@ export const groupedBarData = {
 		},
 		{
 			label: "Dataset 4",
-			backgroundColors: [colors[3]],
+			fillColors: [colors[3]],
 			data: [
 				-32423,
 				21313,
@@ -58,14 +60,13 @@ export const groupedBarOptions = {
 			primary: true,
 		},
 		bottom: {
-			type: "labels",
+			scaleType: "labels",
 			secondary: true,
 		},
 		top: {
-			type: "labels",
+			scaleType: "labels",
 		}
-	},
-	theme: getTheme()
+	}
 };
 
 // Simple bar
@@ -74,7 +75,7 @@ export const simpleBarData = {
 	datasets: [
 		{
 			label: "Dataset 1",
-			backgroundColors: colors,
+			fillColors: colors,
 			data: [
 				65000,
 				29123,
@@ -93,11 +94,10 @@ export const simpleBarOptions = {
 			primary: true
 		},
 		bottom: {
-			type: "labels",
+			scaleType: "labels",
 			secondary: true,
 		}
-	},
-	theme: getTheme()
+	}
 };
 
 
@@ -106,7 +106,7 @@ export const simpleBarTimeSeriesData = {
 	datasets: [
 		{
 			label: "Dataset 1",
-			backgroundColors: colors,
+			fillColors: colors,
 			data: [
 				{
 					date: new Date(2019, 0, 1),
@@ -134,17 +134,19 @@ export const simpleBarTimeSeriesData = {
 };
 
 export const simpleBarTimeSeriesOptions = {
-	title: "Simple bar (time series)",
+	title: "Simple bar (time series - Turkish)",
 	axes: {
 		left: {
 			primary: true
 		},
 		bottom: {
-			type: "time",
+			scaleType: "time",
 			secondary: true,
-		}
-	},
-	theme: getTheme()
+		},
+    locale: {
+		  time: turkishLocale
+    }
+	}
 };
 
 // Stacked bar
@@ -153,7 +155,7 @@ export const stackedBarData = {
 	datasets: [
 		{
 			label: "Dataset 1",
-			backgroundColors: [colors[0]],
+			fillColors: [colors[0]],
 			data: [
 				65000,
 				29123,
@@ -164,7 +166,7 @@ export const stackedBarData = {
 		},
 		{
 			label: "Dataset 2",
-			backgroundColors: [colors[1]],
+			fillColors: [colors[1]],
 			data: [
 				32432,
 				21312,
@@ -175,7 +177,7 @@ export const stackedBarData = {
 		},
 		{
 			label: "Dataset 3",
-			backgroundColors: [colors[2]],
+			fillColors: [colors[2]],
 			data: [
 				12312,
 				23232,
@@ -186,7 +188,7 @@ export const stackedBarData = {
 		},
 		{
 			label: "Dataset 4",
-			backgroundColors: [colors[3]],
+			fillColors: [colors[3]],
 			data: [
 				32423,
 				21313,
@@ -206,11 +208,10 @@ export const stackedBarOptions = {
 			stacked: true
 		},
 		bottom: {
-			type: "labels",
+			scaleType: "labels",
 			secondary: true,
 		}
-	},
-	theme: getTheme()
+	}
 };
 
 
@@ -219,7 +220,7 @@ export const stackedBarTimeSeriesData = {
 	datasets: [
 		{
 			label: "Dataset 1",
-			backgroundColors: [colors[0]],
+			fillColors: [colors[0]],
 			data: [
 				{
 					date: new Date(2019, 0, 1),
@@ -245,7 +246,7 @@ export const stackedBarTimeSeriesData = {
 		},
 		{
 			label: "Dataset 2",
-			backgroundColors: [colors[1]],
+			fillColors: [colors[1]],
 			data: [
 				{
 					date: new Date(2019, 0, 3),
@@ -271,7 +272,7 @@ export const stackedBarTimeSeriesData = {
 		},
 		{
 			label: "Dataset 3",
-			backgroundColors: [colors[2]],
+			fillColors: [colors[2]],
 			data: [
 				{
 					date: new Date(2019, 0, 1),
@@ -297,7 +298,7 @@ export const stackedBarTimeSeriesData = {
 		},
 		{
 			label: "Dataset 4",
-			backgroundColors: [colors[3]],
+			fillColors: [colors[3]],
 			data: [
 				{
 					date: new Date(2019, 0, 2),
@@ -332,9 +333,8 @@ export const stackedBarTimeSeriesOptions = {
 			stacked: true
 		},
 		bottom: {
-			type: "time",
-			secondary: true,
+			scaleType: "time",
+			secondary: true
 		}
-	},
-	theme: getTheme()
+	}
 };
