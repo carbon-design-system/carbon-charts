@@ -69,6 +69,10 @@ export const baseTooltip: TooltipOptions = {
 		horizontalOffset: 10,
 		enabled: true,
 	},
+	title: {
+		verticalOffset: .75,
+		width: .4
+	}
 };
 
 export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip, {
