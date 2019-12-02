@@ -8,6 +8,7 @@ import {
 	StackedBarChartOptions,
 	PieChartOptions,
 	DonutChartOptions,
+	ZoomableChartOptions,
 	// Components
 	GridOptions,
 	AxesOptions,
@@ -19,6 +20,8 @@ import {
 	ChartTheme,
 	LegendPositions,
 	StackedBarOptions,
+	// Advanced Charts
+	NetworkChartOptions,
 } from "./interfaces/index";
 
 /*
@@ -120,6 +123,13 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 } as AxisChartOptions);
 
 /**
+ * Options common to any chart with an axis
+ */
+const zoomableChart: ZoomableChartOptions = Tools.merge({}, chart, {
+	initialZoom: 1
+} as ZoomableChartOptions);
+
+/**
  * options specific to simple bar charts
  */
 const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
@@ -215,6 +225,13 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	}
 } as DonutChartOptions);
 
+/**
+ * options specific to donut charts
+ */
+const networkChart: NetworkChartOptions = Tools.merge({}, pieChart, {
+	collapsed: false
+} as NetworkChartOptions);
+
 export const options = {
 	chart,
 	axisChart,
@@ -224,7 +241,9 @@ export const options = {
 	lineChart,
 	scatterChart,
 	pieChart,
-	donutChart
+	donutChart,
+	// Advanced Charts
+	networkChart,
 };
 
 /**

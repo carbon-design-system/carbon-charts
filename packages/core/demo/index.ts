@@ -160,16 +160,7 @@ chartTypes.forEach(type => {
 		let classToInitialize;
 		switch (type.id) {
 			case "network":
-				charts[type.id] = new NetworkChart(
-					holder,
-					{
-						data: type.data,
-						options: type.options,
-					}
-				);
-
-				setDemoActionsEventListener(type.id, charts[type.id]);
-
+				classToInitialize = NetworkChart;
 				break;
 			case "simple-bar":
 			case "simple-bar-time-series":

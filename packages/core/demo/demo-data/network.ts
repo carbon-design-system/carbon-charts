@@ -1,4 +1,4 @@
-import { getTheme } from "./themes";
+import { colors } from "./colors";
 import AddIcon from '@carbon/icons/es/add/20';
 import BugIcon from '@carbon/icons/es/debug/20';
 import ScreenIcon from '@carbon/icons/es/screen/20';
@@ -29,7 +29,7 @@ const linkMapped = linkData.map(link => {
 export const networkOption = {
 	title: "Network diagram",
 	// Todo: try out axis logic here...
-	theme: getTheme()
+	theme: colors
 };
 
 export const networkData = {
