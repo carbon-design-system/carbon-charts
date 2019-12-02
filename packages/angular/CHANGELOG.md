@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/IBM/carbon-charts/compare/v0.18.0...v0.19.0) (2019-12-02)
+
+
+### Bug Fixes
+
+* **angular:** update zone.js peerDependency range ([15cbddd](https://github.com/IBM/carbon-charts/commit/15cbddd))
+
+
+
+
+
 # [0.18.0](https://github.com/IBM/carbon-charts/compare/v0.17.1...v0.18.0) (2019-12-02)
 
 **Note:** Version bump only for package @carbon/charts-angular
