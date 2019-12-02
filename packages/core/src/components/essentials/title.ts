@@ -7,27 +7,6 @@ export class Title extends Component {
 	type = "title";
 
 	/**
-	 * Returns the index for a maximum length substring that is less than the width parameter.
-	 * @param title the title node used for getting the text lengths of substrings
-	 * @param start the start index for the binary search
-	 * @param end the end index for the binary search
-	 * @param width the width of the svg container that holds the title
-	 */
-	_getSubstringIndex(title, start, end, width) {
-		const mid  = Math.floor((end + start) / 2);
-		if (title.getSubStringLength(0, mid) > width) {
-			return this._getSubstringIndex(title, start, mid, width);
-		} else if (title.getSubStringLength(0, mid) < width) {
-			if (title.getSubStringLength(0, mid + 1) > width) {
-				return mid;
-			}
-			return this._getSubstringIndex(title, mid, end, width);
-		} else {
-			return mid;
-		}
-	}
-
-	/**
 	 * Truncates title creating ellipses and attaching tooltip for exposing full title.
 	 */
 	truncateTitle() {
@@ -47,7 +26,7 @@ export class Title extends Component {
 
 			// get the index for creating the max length substring that fit within the svg
 			// use one less than the index to avoid crowding (the elipsis)
-			const substringIndex = this._getSubstringIndex(title.node(), 0, titleString.length - 1, truncatedSize);
+			const substringIndex = this.getSubstringIndex(title.node(), 0, titleString.length - 1, truncatedSize);
 
 			// use the substring as the title
 			title.text(titleString.substring(0, substringIndex - 1))
@@ -88,5 +67,26 @@ export class Title extends Component {
 
 		// title needs to first render so that we can check for overflow
 		this.truncateTitle();
+	}
+
+	/**
+	 * Returns the index for a maximum length substring that is less than the width parameter.
+	 * @param title the title node used for getting the text lengths of substrings
+	 * @param start the start index for the binary search
+	 * @param end the end index for the binary search
+	 * @param width the width of the svg container that holds the title
+	 */
+	protected getSubstringIndex(title, start, end, width) {
+		const mid  = Math.floor((end + start) / 2);
+		if (title.getSubStringLength(0, mid) > width) {
+			return this.getSubstringIndex(title, start, mid, width);
+		} else if (title.getSubStringLength(0, mid) < width) {
+			if (title.getSubStringLength(0, mid + 1) > width) {
+				return mid;
+			}
+			return this.getSubstringIndex(title, mid, end, width);
+		} else {
+			return mid;
+		}
 	}
 }
