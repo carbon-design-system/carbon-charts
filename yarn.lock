@@ -1211,6 +1211,11 @@
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-10.4.0.tgz#8c21127926bc389dcb4d415b55d4eae278f3d525"
   integrity sha512-UERU07hWXAjsaWu6JPJDyJnwVLkJr+8wTvFrbCkubCfl/MZjKoyLgz0CNypu8hSg8ZaDUzl/NfXMgRpprzuSjQ==
 
+"@carbon/icons@^10.6.1":
+  version "10.6.1"
+  resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-10.6.1.tgz#1b7a84c4d03bd30e9575d39d4b98ba3e6fa04297"
+  integrity sha512-g7ciJbLN3l7oiZrWpKOiCDRDIAMG3oEf4STaFDRnqKP9pv4jpqoitSkzXDo9L8EmVi9Mp8IV8tAMlAp7DVZuHQ==
+
 "@carbon/import-once@10.3.0":
   version "10.3.0"
   resolved "https://registry.yarnpkg.com/@carbon/import-once/-/import-once-10.3.0.tgz#58617da4efb6d7a11352d8e6b7209da1d39f364d"
