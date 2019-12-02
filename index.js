@@ -5452,7 +5452,7 @@ var transitions = {
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/*! exports provided: defaultColors, colorPalettes, SimpleBarChart, GroupedBarChart, StackedBarChart, LineChart, ScatterChart, PieChart, DonutChart */
+/*! exports provided: interfaces, configurations, defaultColors, colorPalettes, SimpleBarChart, GroupedBarChart, StackedBarChart, LineChart, ScatterChart, PieChart, DonutChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5473,12 +5473,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DonutChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["DonutChart"]; });
 
-/* harmony import */ var _services_colorPalettes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/colorPalettes */ "./src/services/colorPalettes.ts");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "colorPalettes", function() { return _services_colorPalettes__WEBPACK_IMPORTED_MODULE_1__; });
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "configurations", function() { return _configuration__WEBPACK_IMPORTED_MODULE_1__; });
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./interfaces */ "./src/interfaces/index.ts");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "interfaces", function() { return _interfaces__WEBPACK_IMPORTED_MODULE_2__; });
+/* harmony import */ var _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/colorPalettes */ "./src/services/colorPalettes.ts");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "colorPalettes", function() { return _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__; });
+
+// Configs & interfaces
+
 
 
 // TODO 1.0 - Remove deprecated API
-var defaultColors = _services_colorPalettes__WEBPACK_IMPORTED_MODULE_1__["DEFAULT"];
+var defaultColors = _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__["DEFAULT"];
 
 
 
