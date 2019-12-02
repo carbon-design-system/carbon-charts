@@ -1,5 +1,8 @@
 import { colors } from "./colors";
 
+// Demo turkish locale for simple bar time-series
+const turkishLocale = require("d3-time-format/locale/tr-TR.json");
+
 export const groupedBarData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
@@ -131,15 +134,18 @@ export const simpleBarTimeSeriesData = {
 };
 
 export const simpleBarTimeSeriesOptions = {
-	title: "Simple bar (time series)",
+	title: "Simple bar (time series - Turkish)",
 	axes: {
 		left: {
 			primary: true
 		},
 		bottom: {
 			scaleType: "time",
-			secondary: true,
-		}
+			secondary: true
+		},
+    locale: {
+		  time: turkishLocale
+    }
 	}
 };
 
