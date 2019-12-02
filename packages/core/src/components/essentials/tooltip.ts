@@ -43,15 +43,22 @@ export class Tooltip extends Component {
 
 				let data = select(event.target).datum() as any;
 
-				// if there is a provided tooltip HTML function
-				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
-					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data));
-				} else if (e.detail.multidata) {
+				// Generate default tooltip
+				let defaultHTML;
+				if (e.detail.multidata) {
 					// multi tooltip
 					data = e.detail.multidata;
-					tooltipTextContainer.html(this.getMultilineTooltipHTML(data));
+					defaultHTML = this.getMultilineTooltipHTML(data);
 				} else {
-					tooltipTextContainer.html(this.getTooltipHTML(data));
+					defaultHTML = this.getTooltipHTML(data);
+				}
+
+				// if there is a provided tooltip HTML function call it
+				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
+					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data, defaultHTML));
+				} else {
+					// Use default tooltip
+					tooltipTextContainer.html(defaultHTML);
 				}
 
 				// Position the tooltip
