@@ -92,9 +92,9 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartToolt
 
 // We setup no axes by default, the TwoDimensionalAxes component
 // Will setup axes options based on what user provides
-export const axes: AxesOptions = { };
+const axes: AxesOptions = { };
 
-export const timeScale: TimeScaleOptions = {
+const timeScale: TimeScaleOptions = {
 	addSpaceOnEdges: true
 };
 
@@ -259,5 +259,12 @@ export const transitions = {
 	},
 	graph_element_mouseout_fill_update: {
 		duration: 100
+	}
+};
+
+export const axis = {
+	ticks: {
+		number: 7,
+		rotateIfSmallerThan: 30
 	}
 };
