@@ -413,10 +413,10 @@ var simpleBarTimeSeriesOptions = {
         bottom: {
             scaleType: "time",
             secondary: true
-        },
-        locale: {
-            time: turkishLocale
         }
+    },
+    locale: {
+        time: turkishLocale
     }
 };
 // Stacked bar
@@ -3199,6 +3199,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Title", function() { return Title; });
 /* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../interfaces */ "./src/interfaces/index.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -3215,6 +3216,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 // Internal Imports
 
 
+
 var Title = /** @class */ (function (_super) {
     __extends(Title, _super);
     function Title() {
@@ -3222,6 +3224,43 @@ var Title = /** @class */ (function (_super) {
         _this.type = "title";
         return _this;
     }
+    /**
+     * Truncates title creating ellipses and attaching tooltip for exposing full title.
+     */
+    Title.prototype.truncateTitle = function () {
+        var containerWidth = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].getSVGElementSize(this.parent).width;
+        var title = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].appendOrSelect(this.parent, "text.title");
+        // check if the title is too big for the containing svg
+        if (title.node().getComputedTextLength() > containerWidth) {
+            // append the ellipses to their own tspan to calculate the text length
+            title.append("tspan")
+                .text("...");
+            // get the bounding width including the elipses '...'
+            var tspanLength = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].appendOrSelect(title, "tspan").node().getComputedTextLength();
+            var truncatedSize = Math.floor(containerWidth - tspanLength);
+            var titleString = this.model.getOptions().title;
+            // get the index for creating the max length substring that fit within the svg
+            // use one less than the index to avoid crowding (the elipsis)
+            var substringIndex = this.getSubstringIndex(title.node(), 0, titleString.length - 1, truncatedSize);
+            // use the substring as the title
+            title.text(titleString.substring(0, substringIndex - 1))
+                .append("tspan")
+                .text("...");
+            // add events for displaying the tooltip with the title
+            var self_1 = this;
+            title.on("mouseenter", function () {
+                self_1.services.events.dispatchEvent("show-tooltip", {
+                    hoveredElement: title,
+                    type: _interfaces__WEBPACK_IMPORTED_MODULE_2__["TooltipTypes"].TITLE
+                });
+            })
+                .on("mouseout", function () {
+                self_1.services.events.dispatchEvent("hide-tooltip", {
+                    hoveredElement: title,
+                });
+            });
+        }
+    };
     Title.prototype.render = function () {
         var svg = this.getContainerSVG();
         var text = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].appendOrSelect(svg, "text.title");
@@ -3235,6 +3274,30 @@ var Title = /** @class */ (function (_super) {
             .attr("width", 20)
             .attr("height", 20)
             .attr("fill", "none");
+        // title needs to first render so that we can check for overflow
+        this.truncateTitle();
+    };
+    /**
+     * Returns the index for a maximum length substring that is less than the width parameter.
+     * @param title the title node used for getting the text lengths of substrings
+     * @param start the start index for the binary search
+     * @param end the end index for the binary search
+     * @param width the width of the svg container that holds the title
+     */
+    Title.prototype.getSubstringIndex = function (title, start, end, width) {
+        var mid = Math.floor((end + start) / 2);
+        if (title.getSubStringLength(0, mid) > width) {
+            return this.getSubstringIndex(title, start, mid, width);
+        }
+        else if (title.getSubStringLength(0, mid) < width) {
+            if (title.getSubStringLength(0, mid + 1) > width) {
+                return mid;
+            }
+            return this.getSubstringIndex(title, mid, end, width);
+        }
+        else {
+            return mid;
+        }
     };
     return Title;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
@@ -3257,10 +3320,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
 /* harmony import */ var _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../interfaces/enums */ "./src/interfaces/enums.ts");
-/* harmony import */ var _carbon_utils_position__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @carbon/utils-position */ "../../node_modules/@carbon/utils-position/index.js");
-/* harmony import */ var carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! carbon-components/src/globals/js/settings */ "../../node_modules/carbon-components/src/globals/js/settings.js");
-/* harmony import */ var carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
+/* harmony import */ var carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! carbon-components/src/globals/js/settings */ "../../node_modules/carbon-components/src/globals/js/settings.js");
+/* harmony import */ var carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -3278,8 +3340,6 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
-// Carbon position service
-
 // import the settings for the css prefix
 
 // D3 Imports
@@ -3292,11 +3352,12 @@ var TooltipBar = /** @class */ (function (_super) {
     TooltipBar.prototype.init = function () {
         var _this = this;
         // Grab the tooltip element
-        var holder = Object(d3_selection__WEBPACK_IMPORTED_MODULE_6__["select"])(this.services.domUtils.getHolder());
+        var holder = Object(d3_selection__WEBPACK_IMPORTED_MODULE_5__["select"])(this.services.domUtils.getHolder());
         var chartprefix = _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(this.model.getOptions(), "style", "prefix");
-        this.tooltip = _services__WEBPACK_IMPORTED_MODULE_2__["DOMUtils"].appendOrSelect(holder, "div." + carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_5___default.a.prefix + "--" + chartprefix + "--tooltip");
+        this.tooltip = _services__WEBPACK_IMPORTED_MODULE_2__["DOMUtils"].appendOrSelect(holder, "div." + carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_4___default.a.prefix + "--" + chartprefix + "--tooltip");
         // Apply html content to the tooltip
         var tooltipTextContainer = _services__WEBPACK_IMPORTED_MODULE_2__["DOMUtils"].appendOrSelect(this.tooltip, "div.content-box");
+        this.tooltip.style("max-width", null);
         // listen to show-tooltip Custom Events to render the tooltip
         this.services.events.addEventListener("show-tooltip", function (e) {
             // check the type of tooltip and that it is enabled
@@ -3322,9 +3383,21 @@ var TooltipBar = /** @class */ (function (_super) {
                 var position = _this.getTooltipPosition(hoveredElement);
                 // Position the tooltip relative to the bars
                 _this.positionTooltip(e.detail.multidata ? undefined : position);
-                // Fade in
-                _this.tooltip.classed("hidden", false);
             }
+            else if (e.detail.type === _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__["TooltipTypes"].TITLE) {
+                // use the chart size to enforce a max width on the tooltip
+                var chart = _services__WEBPACK_IMPORTED_MODULE_2__["DOMUtils"].appendOrSelect(holder, "svg." + carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_4___default.a.prefix + "--" + chartprefix + "--chart-svg");
+                // use the configs to determine how large the tooltip should be
+                var tooltipMax = _services__WEBPACK_IMPORTED_MODULE_2__["DOMUtils"].getSVGElementSize(chart).width * _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "title", "width");
+                _this.tooltip.style("max-width", tooltipMax);
+                // use tooltip.ts to get the tooltip html for titles
+                tooltipTextContainer.html(_super.prototype.getTooltipHTML.call(_this, e.detail.hoveredElement, _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__["TooltipTypes"].TITLE));
+                // get the position based on the title positioning (static)
+                var position = _super.prototype.getTooltipPosition.call(_this, e.detail.hoveredElement.node());
+                _this.positionTooltip(position);
+            }
+            // Fade in
+            _this.tooltip.classed("hidden", false);
         });
         // listen to hide-tooltip Custom Events to hide the tooltip
         this.services.events.addEventListener("hide-tooltip", function () {
@@ -3337,8 +3410,8 @@ var TooltipBar = /** @class */ (function (_super) {
      * @param hoveredElement
      */
     TooltipBar.prototype.getTooltipPosition = function (hoveredElement) {
-        var data = Object(d3_selection__WEBPACK_IMPORTED_MODULE_6__["select"])(hoveredElement).datum();
-        var holderPosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_6__["select"])(this.services.domUtils.getHolder()).node().getBoundingClientRect();
+        var data = Object(d3_selection__WEBPACK_IMPORTED_MODULE_5__["select"])(hoveredElement).datum();
+        var holderPosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_5__["select"])(this.services.domUtils.getHolder()).node().getBoundingClientRect();
         var barPosition = hoveredElement.getBoundingClientRect();
         var verticalOffset = this.model.getOptions().tooltip.datapoint.verticalOffset;
         // if there is a negative value bar chart, need to place the tooltip below the bar
@@ -3390,43 +3463,6 @@ var TooltipBar = /** @class */ (function (_super) {
             }).join("") +
             ("<li>\n\t\t\t\t\t<div class='total-val'>\n\t\t\t\t\t\t<p class='label'>Total</p>\n\t\t\t\t\t\t<p class='value'>" + total + "</p>\n\t\t\t\t\t</div>\n\t\t\t\t</li>\n\t\t\t</ul>");
     };
-    TooltipBar.prototype.positionTooltip = function (positionOverride) {
-        var holder = this.services.domUtils.getHolder();
-        var target = this.tooltip.node();
-        var mouseRelativePos = Object(d3_selection__WEBPACK_IMPORTED_MODULE_6__["mouse"])(holder);
-        var pos;
-        // override position to place tooltip at {placement:.., position:{top:.. , left:..}}
-        if (positionOverride) {
-            // placement determines whether the tooltip is centered above or below the position provided
-            var placement = positionOverride.placement === _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__["TooltipPosition"].TOP ? _carbon_utils_position__WEBPACK_IMPORTED_MODULE_4__["PLACEMENTS"].TOP : _carbon_utils_position__WEBPACK_IMPORTED_MODULE_4__["PLACEMENTS"].BOTTOM;
-            pos = this.positionService.findPositionAt(positionOverride.position, target, placement);
-        }
-        else {
-            // Find out whether tooltip should be shown on the left or right side
-            var bestPlacementOption = this.positionService.findBestPlacementAt({
-                left: mouseRelativePos[0],
-                top: mouseRelativePos[1]
-            }, target, [
-                _carbon_utils_position__WEBPACK_IMPORTED_MODULE_4__["PLACEMENTS"].RIGHT,
-                _carbon_utils_position__WEBPACK_IMPORTED_MODULE_4__["PLACEMENTS"].LEFT,
-                _carbon_utils_position__WEBPACK_IMPORTED_MODULE_4__["PLACEMENTS"].TOP,
-                _carbon_utils_position__WEBPACK_IMPORTED_MODULE_4__["PLACEMENTS"].BOTTOM
-            ], function () { return ({
-                width: holder.offsetWidth,
-                height: holder.offsetHeight
-            }); });
-            var horizontalOffset = this.model.getOptions().tooltip.datapoint.horizontalOffset;
-            if (bestPlacementOption === _carbon_utils_position__WEBPACK_IMPORTED_MODULE_4__["PLACEMENTS"].LEFT) {
-                horizontalOffset *= -1;
-            }
-            // Get coordinates to where tooltip should be positioned
-            pos = this.positionService.findPositionAt({
-                left: mouseRelativePos[0] + horizontalOffset,
-                top: mouseRelativePos[1]
-            }, target, bestPlacementOption);
-        }
-        this.positionService.setElement(target, pos);
-    };
     return TooltipBar;
 }(_tooltip__WEBPACK_IMPORTED_MODULE_0__["Tooltip"]));
 
@@ -3446,6 +3482,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TooltipScatter", function() { return TooltipScatter; });
 /* harmony import */ var _tooltip__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tooltip */ "./src/components/essentials/tooltip.ts");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../interfaces */ "./src/interfaces/index.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -3461,12 +3498,17 @@ var __extends = (undefined && undefined.__extends) || (function () {
 })();
 
 
+
 var TooltipScatter = /** @class */ (function (_super) {
     __extends(TooltipScatter, _super);
     function TooltipScatter() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    TooltipScatter.prototype.getTooltipHTML = function (data) {
+    TooltipScatter.prototype.getTooltipHTML = function (data, type) {
+        if (type === _interfaces__WEBPACK_IMPORTED_MODULE_2__["TooltipTypes"].TITLE) {
+            // the main tooltip component handles title styles
+            return _super.prototype.getTooltipHTML.call(this, data, type);
+        }
         var formattedValue = _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
             this.model.getOptions().tooltip.valueFormatter(data.value) : data.value.toLocaleString("en");
         var indicatorColor = this.model.getStrokeColor(data.datasetLabel, data.label, data.value);
@@ -3537,6 +3579,7 @@ var Tooltip = /** @class */ (function (_super) {
         this.tooltip = _services__WEBPACK_IMPORTED_MODULE_2__["DOMUtils"].appendOrSelect(holder, "div." + carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_4___default.a.prefix + "--" + chartprefix + "--tooltip");
         // Apply html content to the tooltip
         var tooltipTextContainer = _services__WEBPACK_IMPORTED_MODULE_2__["DOMUtils"].appendOrSelect(this.tooltip, "div.content-box");
+        this.tooltip.style("max-width", null);
         // listen to show-tooltip Custom Events to render the tooltip
         this.services.events.addEventListener("show-tooltip", function (e) {
             // check the type of tooltip and that it is enabled
@@ -3551,7 +3594,7 @@ var Tooltip = /** @class */ (function (_super) {
                     defaultHTML = _this.getMultilineTooltipHTML(data);
                 }
                 else {
-                    defaultHTML = _this.getTooltipHTML(data);
+                    defaultHTML = _this.getTooltipHTML(data, _interfaces__WEBPACK_IMPORTED_MODULE_6__["TooltipTypes"].DATAPOINT);
                 }
                 // if there is a provided tooltip HTML function call it
                 if (_tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "customHTML")) {
@@ -3563,16 +3606,30 @@ var Tooltip = /** @class */ (function (_super) {
                 }
                 // Position the tooltip
                 _this.positionTooltip();
-                // Fade in
-                _this.tooltip.classed("hidden", false);
             }
+            else if (e.detail.type === _interfaces__WEBPACK_IMPORTED_MODULE_6__["TooltipTypes"].TITLE) {
+                var chart = _services__WEBPACK_IMPORTED_MODULE_2__["DOMUtils"].appendOrSelect(holder, "svg." + carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_4___default.a.prefix + "--" + chartprefix + "--chart-svg");
+                var chartWidth = _services__WEBPACK_IMPORTED_MODULE_2__["DOMUtils"].getSVGElementSize(chart).width * _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "title", "width");
+                _this.tooltip.style("max-width", chartWidth);
+                tooltipTextContainer.html(_this.getTooltipHTML(e.detail.hoveredElement, _interfaces__WEBPACK_IMPORTED_MODULE_6__["TooltipTypes"].TITLE));
+                // get the position based on the title positioning (static)
+                var position = _this.getTooltipPosition(e.detail.hoveredElement.node());
+                _this.positionTooltip(position);
+            }
+            // Fade in
+            _this.tooltip.classed("hidden", false);
         });
         // listen to hide-tooltip Custom Events to hide the tooltip
         this.services.events.addEventListener("hide-tooltip", function () {
             _this.tooltip.classed("hidden", true);
         });
     };
-    Tooltip.prototype.getTooltipHTML = function (data) {
+    Tooltip.prototype.getTooltipHTML = function (data, type) {
+        // check if it is getting styles for a tooltip type
+        if (type === _interfaces__WEBPACK_IMPORTED_MODULE_6__["TooltipTypes"].TITLE) {
+            var title = this.model.getOptions().title;
+            return "<div class=\"title-tooltip\"><text>" + title + "</text></div>";
+        }
         // this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
         var dataVal = _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(data, "data") ? data.data : data;
         // format the value if needed
@@ -3606,32 +3663,53 @@ var Tooltip = /** @class */ (function (_super) {
     Tooltip.prototype.render = function () {
         this.tooltip.classed("hidden", true);
     };
-    Tooltip.prototype.positionTooltip = function () {
+    // returns static position based on the element
+    Tooltip.prototype.getTooltipPosition = function (hoveredElement) {
+        var holderPosition = Object(d3_selection__WEBPACK_IMPORTED_MODULE_5__["select"])(this.services.domUtils.getHolder()).node().getBoundingClientRect();
+        var elementPosition = hoveredElement.getBoundingClientRect();
+        // get the vertical offset
+        var verticalOffset = this.model.getOptions().tooltip.title.verticalOffset;
+        var tooltipPos = {
+            left: (elementPosition.left - holderPosition.left) + elementPosition.width / 2,
+            top: (elementPosition.top - holderPosition.top - verticalOffset)
+        };
+        return { placement: _interfaces__WEBPACK_IMPORTED_MODULE_6__["TooltipPosition"].BOTTOM, position: tooltipPos };
+    };
+    Tooltip.prototype.positionTooltip = function (positionOverride) {
         var holder = this.services.domUtils.getHolder();
         var target = this.tooltip.node();
         var mouseRelativePos = Object(d3_selection__WEBPACK_IMPORTED_MODULE_5__["mouse"])(holder);
-        // Find out whether tooltip should be shown on the left or right side
-        var bestPlacementOption = this.positionService.findBestPlacementAt({
-            left: mouseRelativePos[0],
-            top: mouseRelativePos[1]
-        }, target, [
-            _carbon_utils_position__WEBPACK_IMPORTED_MODULE_3__["PLACEMENTS"].RIGHT,
-            _carbon_utils_position__WEBPACK_IMPORTED_MODULE_3__["PLACEMENTS"].LEFT,
-            _carbon_utils_position__WEBPACK_IMPORTED_MODULE_3__["PLACEMENTS"].TOP,
-            _carbon_utils_position__WEBPACK_IMPORTED_MODULE_3__["PLACEMENTS"].BOTTOM
-        ], function () { return ({
-            width: holder.offsetWidth,
-            height: holder.offsetHeight
-        }); });
-        var horizontalOffset = this.model.getOptions().tooltip.datapoint.horizontalOffset;
-        if (bestPlacementOption === _carbon_utils_position__WEBPACK_IMPORTED_MODULE_3__["PLACEMENTS"].LEFT) {
-            horizontalOffset *= -1;
+        var pos;
+        // override position to place tooltip at {placement:.., position:{top:.. , left:..}}
+        if (positionOverride) {
+            // placement determines whether the tooltip is centered above or below the position provided
+            var placement = positionOverride.placement === _interfaces__WEBPACK_IMPORTED_MODULE_6__["TooltipPosition"].TOP ? _carbon_utils_position__WEBPACK_IMPORTED_MODULE_3__["PLACEMENTS"].TOP : _carbon_utils_position__WEBPACK_IMPORTED_MODULE_3__["PLACEMENTS"].BOTTOM;
+            pos = this.positionService.findPositionAt(positionOverride.position, target, placement);
         }
-        // Get coordinates to where tooltip should be positioned
-        var pos = this.positionService.findPositionAt({
-            left: mouseRelativePos[0] + horizontalOffset,
-            top: mouseRelativePos[1]
-        }, target, bestPlacementOption);
+        else {
+            // Find out whether tooltip should be shown on the left or right side
+            var bestPlacementOption = this.positionService.findBestPlacementAt({
+                left: mouseRelativePos[0],
+                top: mouseRelativePos[1]
+            }, target, [
+                _carbon_utils_position__WEBPACK_IMPORTED_MODULE_3__["PLACEMENTS"].RIGHT,
+                _carbon_utils_position__WEBPACK_IMPORTED_MODULE_3__["PLACEMENTS"].LEFT,
+                _carbon_utils_position__WEBPACK_IMPORTED_MODULE_3__["PLACEMENTS"].TOP,
+                _carbon_utils_position__WEBPACK_IMPORTED_MODULE_3__["PLACEMENTS"].BOTTOM
+            ], function () { return ({
+                width: holder.offsetWidth,
+                height: holder.offsetHeight
+            }); });
+            var horizontalOffset = this.model.getOptions().tooltip.datapoint.horizontalOffset;
+            if (bestPlacementOption === _carbon_utils_position__WEBPACK_IMPORTED_MODULE_3__["PLACEMENTS"].LEFT) {
+                horizontalOffset *= -1;
+            }
+            // Get coordinates to where tooltip should be positioned
+            pos = this.positionService.findPositionAt({
+                left: mouseRelativePos[0] + horizontalOffset,
+                top: mouseRelativePos[1]
+            }, target, bestPlacementOption);
+        }
         this.positionService.setElement(target, pos);
     };
     return Tooltip;
@@ -5276,6 +5354,10 @@ var baseTooltip = {
         horizontalOffset: 10,
         enabled: true,
     },
+    title: {
+        verticalOffset: .75,
+        width: .4
+    }
 };
 var axisChartTooltip = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, baseTooltip, {
     gridline: {
@@ -5562,6 +5644,7 @@ var TooltipTypes;
 (function (TooltipTypes) {
     TooltipTypes["DATAPOINT"] = "datapoint";
     TooltipTypes["GRIDLINE"] = "gridline";
+    TooltipTypes["TITLE"] = "title";
 })(TooltipTypes || (TooltipTypes = {}));
 /**
  * enum of all possible legend positions

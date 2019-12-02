@@ -77,6 +77,11 @@ g.bx--cc--legend {
     transition-timing-function: cubic-bezier(0.4, 0.14, 0.3, 1); }
   .bx--cc--tooltip .content-box {
     color: #171717; }
+    .bx--cc--tooltip .content-box .title-tooltip {
+      line-height: 16px;
+      font-size: 12px;
+      padding: 4px;
+      min-width: 20px; }
     .bx--cc--tooltip .content-box .datapoint-tooltip, .bx--cc--tooltip .content-box .total-val {
       display: flex;
       padding: 4px;
