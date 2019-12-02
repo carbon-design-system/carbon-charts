@@ -51,7 +51,7 @@ export class Tooltip extends Component {
 					data = e.detail.multidata;
 					defaultHTML = this.getMultilineTooltipHTML(data);
 				} else {
-					defaultHTML = this.getTooltipHTML(data, e.detail.type);
+					defaultHTML = this.getTooltipHTML(data, TooltipTypes.DATAPOINT);
 				}
 
 				// if there is a provided tooltip HTML function call it
