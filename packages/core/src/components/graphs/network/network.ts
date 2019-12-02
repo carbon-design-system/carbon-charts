@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../../component";
-import NetworkCards from "./network-cards";
-import NetworkLines from "./network-lines";
+import NetworkCard from "./network-card";
+import NetworkLine from "./network-line";
 
 export class Network extends Component {
 	type = "network";
@@ -11,25 +11,22 @@ export class Network extends Component {
 	svg = this.getContainerSVG();
 
 	drawCards() {
-		NetworkCards({
+		NetworkCard({
 			svg: this.svg,
 			selector: "rect.network-card",
 			data: this.nodes,
 			accessor: d => d,
 			height: 64,
 			width: 220,
-			fill: "#eeeeee",
-			strokeColor: "#000"
 		});
 	}
 
 	drawLines() {
-		NetworkLines({
+		NetworkLine({
 			svg: this.svg,
 			selector: "rect.network-line",
 			data: this.links,
-			accessor: d => d,
-			strokeColor: "#000"
+			accessor: d => d
 		});
 	}
 
