@@ -14,6 +14,8 @@ const {
 	simpleHorizontalBarTimeSeriesData,
 	stackedBarOptions,
 	stackedBarData,
+	stackedHorizontalBarOptions,
+	stackedHorizontalBarData,
 	stackedBarTimeSeriesOptions,
 	stackedBarTimeSeriesData,
 	stackedHorizontalBarTimeSeriesOptions,
@@ -85,6 +87,11 @@ export const chartTypes = [
 		id: "stacked-bar",
 		options: stackedBarOptions,
 		data: stackedBarData
+	},
+	{
+		id: "stacked-horizontal-bar",
+		options: stackedHorizontalBarOptions,
+		data: stackedHorizontalBarData
 	},
 	{
 		id: "stacked-bar-time-series",

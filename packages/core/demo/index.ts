@@ -167,6 +167,7 @@ chartTypes.forEach(type => {
 				classToInitialize = GroupedBarChart;
 				break;
 			case "stacked-bar":
+			case "stacked-horizontal-bar":
 			case "stacked-bar-time-series":
 			case "stacked-horizontal-bar-time-series":
 				classToInitialize = StackedBarChart;

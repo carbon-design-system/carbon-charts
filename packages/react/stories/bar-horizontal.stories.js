@@ -16,7 +16,9 @@ import {
 	simpleHorizontalBarTimeSeriesOptions,
 	simpleHorizontalBarTimeSeriesData,
 	stackedHorizontalBarTimeSeriesOptions,
-	stackedHorizontalBarTimeSeriesData
+	stackedHorizontalBarTimeSeriesData,
+	stackedHorizontalBarOptions,
+	stackedHorizontalBarData
 } from "../../core/demo/demo-data/index";
 
 import { addWidthAndHeight } from "./commons";
@@ -40,6 +42,13 @@ horizontalBarStories.add(simpleHorizontalBarTimeSeriesOptions.title, () => (
 	<SimpleBarChart
 		data={simpleHorizontalBarTimeSeriesData}
 		options={addWidthAndHeight(simpleHorizontalBarTimeSeriesOptions)}
+	/>
+));
+
+horizontalBarStories.add(stackedHorizontalBarOptions.title, () => (
+	<StackedBarChart
+		data={stackedHorizontalBarData}
+		options={addWidthAndHeight(stackedHorizontalBarOptions)}
 	/>
 ));
 

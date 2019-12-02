@@ -264,6 +264,23 @@ export const stackedBarOptions = {
 	}
 };
 
+// horizontal stacked bar
+export const stackedHorizontalBarData = stackedBarData;
+
+export const stackedHorizontalBarOptions = {
+	title: "Stacked horizontal bar (discrete)",
+	axes: {
+		left: {
+			scaleType: "labels",
+			primary: true
+		},
+		bottom: {
+			stacked: true,
+			secondary: true,
+		}
+	},
+	orientation: "horizontal"
+};
 
 export const stackedBarTimeSeriesData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
