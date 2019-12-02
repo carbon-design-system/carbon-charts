@@ -31,23 +31,25 @@ export class TooltipBar extends Tooltip {
 
 				const hoveredElement = e.detail.hoveredElement.node();
 
-				// if there is a provided tooltip HTML function
-				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
-					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement));
-				} else if (e.detail.multidata) {
+				let defaultHTML;
+				if (e.detail.multidata) {
 					// multi tooltip
-					tooltipTextContainer.html(this.getMultilineTooltipHTML(e.detail.multidata));
-					// Position the tooltip
-					this.positionTooltip();
+					defaultHTML = this.getMultilineTooltipHTML(e.detail.multidata);
 				} else {
-					const data = e.detail.hoveredElement.datum();
-					tooltipTextContainer.html(this.getTooltipHTML(data));
-
-					const position = this.getTooltipPosition(hoveredElement);
-
-					// Position the tooltip relative to the bars
-					this.positionTooltip(position);
+					defaultHTML = this.getTooltipHTML(e.detail.hoveredElement.datum());
 				}
+
+				// if there is a provided tooltip HTML function call it and pass the defaultHTML
+				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
+					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement, defaultHTML));
+				} else {
+					// default tooltip
+					tooltipTextContainer.html(defaultHTML);
+				}
+
+				const position = this.getTooltipPosition(hoveredElement);
+				// Position the tooltip relative to the bars
+				this.positionTooltip(e.detail.multidata ? undefined : position );
 				// Fade in
 				this.tooltip.classed("hidden", false);
 			}
