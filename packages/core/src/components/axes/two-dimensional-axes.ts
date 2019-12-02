@@ -88,9 +88,13 @@ export class TwoDimensionalAxes extends Component {
 			const child = this.children[childKey];
 			const axisPosition = child.configs.position;
 
+			// Grab the invisibly rendered axis' width & height, and set margins
+			// Based off of that
+			// We draw the invisible axis because of the async nature of d3 transitions
+			// To be able to tell the final width & height of the axis when initiaing the transition
+			// The invisible axis is updated instantly and without a transition
 			const invisibleAxisRef = child.getInvisibleAxisRef();
 			const { width, height } = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true });
-			invisibleAxisRef.remove();
 
 			let offset;
 			if (child.getTitleRef().empty()) {
