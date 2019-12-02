@@ -1,6 +1,6 @@
 import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
 import { AxisTooltipOptions, BarTooltipOptions, BarOptions, StackedBarOptions } from "./components";
-import { ChartTheme } from "./enums";
+import { ChartTheme, BarOrientationOptions } from "./enums";
 
 /**
  * Base chart options common to any chart
@@ -72,6 +72,7 @@ export interface AxisChartOptions extends BaseChartOptions {
 export interface BarChartOptions extends AxisChartOptions {
 	bars?: BarOptions;
 	tooltip?: BarTooltipOptions;
+	orientation?: BarOrientationOptions;
 }
 
 /**

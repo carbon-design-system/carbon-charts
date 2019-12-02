@@ -69,6 +69,23 @@ export const groupedBarOptions = {
 	}
 };
 
+// Horizontal Grouped
+export const groupedHorizontalBarData = groupedBarData;
+
+export const groupedHorizontalBarOptions = {
+	title: "Grouped horizontal bar (discrete)",
+	axes: {
+		left: {
+			scaleType: "labels",
+			primary: true,
+		},
+		bottom: {
+			secondary: true
+		}
+	},
+	orientation: "horizontal"
+};
+
 // Simple bar
 export const simpleBarData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -100,6 +117,22 @@ export const simpleBarOptions = {
 	}
 };
 
+// Horizontal Simple
+export const simpleHorizontalBarData = simpleBarData;
+
+export const simpleHorizontalBarOptions = {
+	title: "Simple horizontal bar (discrete)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true,
+		}
+	},
+	orientation: "horizontal"
+};
 
 export const simpleBarTimeSeriesData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Miscellaneous"],
@@ -143,11 +176,28 @@ export const simpleBarTimeSeriesOptions = {
 			scaleType: "time",
 			secondary: true
 		},
-    locale: {
-		  time: turkishLocale
-    }
+		locale: {
+			time: turkishLocale
+		}
 	}
 };
+
+// Horizontal simple time series
+export const simpleHorizontalBarTimeSeriesOptions = {
+	title: "Simple horizontal bar (time series)",
+	axes: {
+		left: {
+			scaleType: "time",
+			primary: true
+		},
+		bottom: {
+			secondary: true,
+		}
+	},
+	orientation: "horizontal"
+};
+
+export const simpleHorizontalBarTimeSeriesData = simpleBarTimeSeriesData;
 
 // Stacked bar
 export const stackedBarData = {
@@ -338,3 +388,21 @@ export const stackedBarTimeSeriesOptions = {
 		}
 	}
 };
+
+// Stacked horizontal bar (time series)
+export const stackedHorizontalBarTimeSeriesOptions = {
+	title: "Stacked horizontal bar (time series)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "time"
+		},
+		bottom: {
+			stacked: true,
+			secondary: true
+		}
+	},
+	orientation: "horizontal"
+};
+
+export const stackedHorizontalBarTimeSeriesData = stackedBarTimeSeriesData;
