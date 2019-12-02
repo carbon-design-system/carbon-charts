@@ -56,7 +56,7 @@ export class TooltipBar extends Tooltip {
 				// use the chart size to enforce a max width on the tooltip
 				const chart = DOMUtils.appendOrSelect(holder, `svg.${settings.prefix}--${chartprefix}--chart-svg`);
 				// use the configs to determine how large the tooltip should be
-				const tooltipMax = DOMUtils.getSVGElementSize(chart).width * Tools.getProperty(this.model.getOptions(), "tooltip", "title", "width");
+				const tooltipMax =  DOMUtils.getSVGElementSize(chart).width * Tools.getProperty(this.model.getOptions(), "tooltip", "title", "width");
 				this.tooltip.style("max-width", tooltipMax);
 
 				// use tooltip.ts to get the tooltip html for titles

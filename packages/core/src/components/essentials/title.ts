@@ -7,11 +7,32 @@ export class Title extends Component {
 	type = "title";
 
 	/**
+	 * Returns the index for a maximum length substring that is less than the width parameter.
+	 * @param title the title node used for getting the text lengths of substrings
+	 * @param start the start index for the binary search
+	 * @param end the end index for the binary search
+	 * @param width the width of the svg container that holds the title
+	 */
+	_getSubstringIndex(title, start, end, width) {
+		const mid  = Math.floor((end + start) / 2);
+		if (title.getSubStringLength(0, mid) > width) {
+			return this._getSubstringIndex(title, start, mid, width);
+		} else if (title.getSubStringLength(0, mid) < width) {
+			if (title.getSubStringLength(0, mid + 1) > width) {
+				return mid;
+			}
+			return this._getSubstringIndex(title, mid, end, width);
+		} else {
+			return mid;
+		}
+	}
+
+	/**
 	 * Truncates title creating ellipses and attaching tooltip for exposing full title.
 	 */
 	truncateTitle() {
-		const containerWidth = DOMUtils.getSVGElementSize(this.parent).width;
-		const title = DOMUtils.appendOrSelect(this.parent, "text.title");
+		const containerWidth  = DOMUtils.getSVGElementSize(this.parent).width;
+		const title =  DOMUtils.appendOrSelect(this.parent, "text.title");
 
 		// check if the title is too big for the containing svg
 		if (title.node().getComputedTextLength() > containerWidth) {
@@ -35,7 +56,7 @@ export class Title extends Component {
 
 			// add events for displaying the tooltip with the title
 			const self = this;
-			title.on("mouseenter", function () {
+			title.on("mouseenter", function() {
 				self.services.events.dispatchEvent("show-tooltip", {
 					hoveredElement: title,
 					type: TooltipTypes.TITLE
