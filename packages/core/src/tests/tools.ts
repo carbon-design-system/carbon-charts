@@ -1,9 +1,12 @@
+// import the settings for the css prefix
+import settings from "carbon-components/src/globals/js/settings";
+
 // Functions
 export const makeChartID = chartType => `${chartType}-chart-holder`;
 export const createChartHolder = chartType => {
 	const chartHolder = document.createElement("div");
 	chartHolder.id = makeChartID(chartType);
-	chartHolder.classList.add("chart-holder");
+	chartHolder.classList.add(`${settings.prefix}--chart-holder`);
 
 	document.body.appendChild(chartHolder);
 

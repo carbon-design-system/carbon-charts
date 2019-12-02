@@ -1,69 +1,19 @@
+@import 'carbon-components/src/globals/scss/vars';
+$charts-prefix: "cc";
+
+// Carbon imports
+@import "./vendor/@carbon/colors/scss/colors";
+// Carbon theme initializations
+@import "./vendor/@carbon/themes/scss/themes";
+@include carbon--theme();
+
+// Internal
 @import "./mixins.scss";
 @import "./components/index.scss";
 @import "./graphs/index.scss";
 @import "./type";
 @import "./chart-holder";
 
-$gray_60: #595859;
-
-$default_transition: all 0.1s ease-out;
-
-
-	svg.chart-svg {
-		overflow: visible !important;
-
-
-		path {
-			&.line {
-				fill: none;
-				stroke-width: 2;
-
-				&:hover {
-					cursor: default;
-				}
-			}
-		}
-
-		circle {
-			&.dot {
-				stroke-width: 1.5;
-
-				&.dot.filled {
-					stroke-width: 2;
-				}
-			}
-		}
-	}
-
-
-
-
-div.chart-overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-
-	span {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
-
-	div.ccharts-overlay-content {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-
-		div.bx--loading {
-			margin: auto;
-		}
-	}
-}
-
-#carbon-charts-patterns svg {
-	height: 0;
+svg.#{$prefix}--#{$charts-prefix}--chart-svg {
+	overflow: visible;
 }

@@ -17,8 +17,8 @@ touch pages/.nojekyll
 
 
 # run the build and demo:build script in all packages
-lerna run --parallel build
-lerna run --parallel demo:build
+lerna run --stream build
+lerna run --stream demo:build
 
 # copy all the demos/{package name here} folders to the pages deploy directory
 lerna exec -- \$LERNA_ROOT_PATH/scripts/copy-demos-to-deploy-dir.sh

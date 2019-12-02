@@ -13,9 +13,9 @@ import { SimpleBarChart } from "@carbon/charts";
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: "n-simple-bar-chart",
+	selector: "ibm-simple-bar-chart",
 	template: `
-		<div #nChart class="n-chart-container">
+		<div #nChart class="ibm-chart-container">
 		</div>
 	`
 })

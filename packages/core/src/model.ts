@@ -15,6 +15,7 @@ export class ChartModel {
 	 * @type Function
 	 */
 	protected updateCallback: Function;
+	protected services: any;
 
 	// Internal Model state
 	protected state: any = {
@@ -24,95 +25,38 @@ export class ChartModel {
 	// Data labels
 	/**
 	 * A list of all the labels that have existed within the lifetime of the chart
-	 * @type Array<string>
+	 * @type string[]
 	 */
-	protected allDataLabels: Array<string>;
+	protected allDataLabels: string[];
 
 	// Fill scales & fill related objects
 	protected patternScale = {};
 	protected colorScale: any = {};
 
+
+	constructor(services: any) {
+		this.services = services;
+	}
+
 	getDisplayData() {
 		const { ACTIVE } = Configuration.legend.items.status;
 		const dataLabels = this.get("dataLabels");
 
-		if (this.get("data")) {
-			// Remove datasets that have been disabled
-			const displayData = Tools.clone(this.get("data"));
-			displayData.datasets = displayData.datasets.filter(dataset => {
-				return dataLabels[dataset.label] === ACTIVE;
-			});
-
-			return displayData;
+		if (!this.get("data")) {
+			return null;
 		}
 
-		return null;
+		// Remove datasets that have been disabled
+		const displayData = Tools.clone(this.get("data"));
+		displayData.datasets = displayData.datasets.filter(dataset => {
+			return dataLabels[dataset.label] === ACTIVE;
+		});
+
+		return displayData;
 	}
 
 	getData() {
 		return this.get("data");
-	}
-
-	getScaleYType() {
-		const axes = this.getOptions().axes;
-		let scaleType;
-		if (Tools.getProperty(axes, "top", "type")) {
-			scaleType = axes.top.type;
-		} else {
-			if (Tools.getProperty(axes, "bottom", "type")) {
-				scaleType = axes.bottom.type;
-			}
-		}
-
-		return scaleType;
-	}
-
-	/** Uses the primary Y Axis to get data items associated with that value.  */
-	getDataWithDomain(domainValue) {
-		const displayData = this.getDisplayData();
-		const activePts = [];
-		const scaleType = this.getScaleYType();
-
-		switch (scaleType) {
-			case "labels":
-				// based on labels we use the index to get the associated data
-				const index = displayData.labels.indexOf(domainValue);
-
-				displayData.datasets.forEach(dataset => {
-					activePts.push(
-						{
-							datasetLabel: dataset.label,
-							value: dataset.data[index],
-						}
-					);
-				});
-				break;
-			case "time":
-				// time series we filter using the date
-				const domainKey = Object.keys(displayData.datasets[0].data[0]).filter(key => { return key !== "value"; })[0];
-
-				displayData.datasets.forEach(dataset => {
-					const sharedLabel = dataset.label;
-
-					// filter the items in each dataset for the points associated with the Domain
-					const dataItems = dataset.data.filter(item => {
-						const date1 = new Date(item[domainKey]);
-						const date2 = new Date(domainValue);
-						return date1.getTime() === date2.getTime();
-					});
-
-					// assign the shared label on the data items and add them to the array
-					dataItems.forEach(item => {
-						activePts.push(
-							Object.assign({datasetLabel: sharedLabel,
-								value: item.value,
-							}, item)
-						);
-					});
-				});
-				break;
-		}
-		return activePts;
 	}
 
 	/**
@@ -178,12 +122,14 @@ export class ChartModel {
 	 * such as the color scales, or the legend data labels
 	 */
 	update() {
-		if (this.getDisplayData()) {
-			this.updateAllDataLabels();
-			this.setColorScale();
-
-			this.updateCallback();
+		if (!this.getDisplayData()) {
+			return;
 		}
+
+		this.updateAllDataLabels();
+		this.setColorScale();
+
+		this.services.events.dispatchEvent("model-update");
 	}
 
 	setUpdateCallback(cb: Function) {
@@ -192,7 +138,6 @@ export class ChartModel {
 
 	/*
 	 * Data labels
-	 *
 	*/
 	toggleDataLabel(changedLabel: string) {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
@@ -227,12 +172,11 @@ export class ChartModel {
 
 	/*
 	 * Fill scales
-	 *
 	*/
 	setColorScale() {
-		if (this.getDisplayData().datasets[0].backgroundColors) {
+		if (this.getDisplayData().datasets[0].fillColors) {
 			this.getDisplayData().datasets.forEach(dataset => {
-				this.colorScale[dataset.label] = scaleOrdinal().range(dataset.backgroundColors).domain(this.allDataLabels);
+				this.colorScale[dataset.label] = scaleOrdinal().range(dataset.fillColors).domain(this.allDataLabels);
 			});
 		} else {
 			const colors = colorPalettes.DEFAULT;
@@ -269,7 +213,6 @@ export class ChartModel {
 
 	/*
 	 * Data labels
-	 *
 	*/
 	protected updateAllDataLabels() {
 		// If allDataLabels hasn't been initialized yet

@@ -10,7 +10,7 @@ import { color } from "d3-color";
 
 // Add datasetLabel to each piece of data
 // To be used to get the fill color
-const addLabelsAndValueToData = (d) => {
+const addLabelsAndValueToData = d => {
 	Object.keys(d).map(key => {
 		if (typeof d[key] === "object") {
 			d[key]["datasetLabel"] = d.key;
@@ -26,7 +26,7 @@ export class StackedBar extends Bar {
 	type = "stacked-bar";
 
 	init() {
-		const eventsFragment = this.services.events.getDocumentFragment();
+		const eventsFragment = this.services.events;
 
 		// Highlight correct circle on legend item hovers
 		eventsFragment.addEventListener("legend-item-onhover", this.handleLegendOnHover);
@@ -46,7 +46,7 @@ export class StackedBar extends Bar {
 			// TODO - Could be re-used through the model
 			let allDates = [];
 			displayData.datasets.forEach(dataset => {
-				allDates = allDates.concat(dataset.data.map(datum => +datum.date));
+				allDates = allDates.concat(dataset.data.map(datum => Number(datum.date)));
 			});
 			allDates = Tools.removeArrayDuplicates(allDates).sort();
 
@@ -56,7 +56,7 @@ export class StackedBar extends Bar {
 				const correspondingData = {};
 
 				displayData.datasets.forEach(dataset => {
-					const correspondingDatum = dataset.data.find(datum => +datum.date === +date);
+					const correspondingDatum = dataset.data.find(datum => Number(datum.date) === Number(date));
 					if (correspondingDatum) {
 						correspondingData[dataset.label] = correspondingDatum.value;
 					} else {
@@ -136,7 +136,15 @@ export class StackedBar extends Bar {
 				.attr("y", (d, i) => this.services.axes.getYValue(d[1], i))
 				.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
 				.attr("height", (d, i) => {
-					return this.services.axes.getYValue(d[0]) - this.services.axes.getYValue(d[1]);
+					const { datasetLabel } = d;
+					const datasetLabelIndex = stackKeys.indexOf(datasetLabel);
+					const height = this.services.axes.getYValue(d[0]) - this.services.axes.getYValue(d[1]);
+
+					if (datasetLabelIndex > 0 && height >= options.bars.dividerSize) {
+						return height - options.bars.dividerSize;
+					}
+
+					return height;
 				})
 				.attr("opacity", 1);
 
@@ -145,22 +153,16 @@ export class StackedBar extends Bar {
 	}
 
 	// Highlight elements that match the hovered legend item
-	handleLegendOnHover = e => {
-		const { hoveredElement } = e.detail;
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
 
 		this.parent.selectAll("rect.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => {
-				if (d.datasetLabel !== hoveredElement.datum()["key"]) {
-					return 0.3;
-				}
-
-				return 1;
-			});
+			.attr("opacity", d => (d.datasetLabel !== hoveredElement.datum()["key"]) ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements
-	handleLegendMouseOut = e => {
+	handleLegendMouseOut = (event: CustomEvent)  => {
 		this.parent.selectAll("rect.bar")
 			.transition(this.services.transitions.getTransition("legend-mouseout-bar"))
 			.attr("opacity", 1);
@@ -183,9 +185,16 @@ export class StackedBar extends Bar {
 				const stackedData = itemData["data"];
 				const sharedLabel = stackedData["label"];
 
+				// Remove the label field
+				delete stackedData["label"];
+
 				// filter out the label from the datasets' and associated values
-				const activePoints =  Object.keys(stackedData).filter(key => { return  key !== "label"; })
-				.map((key) => { return {datasetLabel: key, value: stackedData[key], label: sharedLabel }; });
+				const activePoints =  Object.keys(stackedData)
+					.map(key => ({
+						datasetLabel: key,
+						value: stackedData[key],
+						label: sharedLabel
+					}));
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
@@ -202,9 +211,7 @@ export class StackedBar extends Bar {
 					.attr("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement
-				});
+				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
 			});
 	}
 
@@ -216,7 +223,7 @@ export class StackedBar extends Bar {
 			.on("mouseout", null);
 
 		// Remove legend listeners
-		const eventsFragment = this.services.events.getDocumentFragment();
+		const eventsFragment = this.services.events;
 		eventsFragment.removeEventListener("legend-item-onhover", this.handleLegendOnHover);
 		eventsFragment.removeEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
 	}

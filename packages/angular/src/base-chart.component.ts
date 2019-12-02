@@ -12,9 +12,9 @@ import {
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: "n-base-chart",
+	selector: "ibm-base-chart",
 	template: `
-		<div #nChart class="n-chart-container">
+		<div #nChart class="ibm-chart-container">
 		</div>
 	`
 })
@@ -29,7 +29,7 @@ export class BaseChart implements AfterViewInit, OnInit {
 		this._data = newData;
 
 		if (dataExistsAlready) {
-			this.chart.setData(newData);
+			this.chart.model.setData(newData);
 		}
 	}
 
@@ -40,18 +40,31 @@ export class BaseChart implements AfterViewInit, OnInit {
 	/**
 	 * Options passed to charts library
 	 */
-	@Input() options: any;
+	@Input() set options(newOptions) {
+		// If data already exists, that means the chart has been initialized
+		const optionsExistAlready = this._options !== null && this._options !== undefined;
+
+		this._options = newOptions;
+
+		if (optionsExistAlready) {
+			this.chart.model.setOptions(newOptions);
+		}
+	}
+
+	get options() {
+		return this._options;
+	}
 
 	/**
 	 * Chart width
 	 */
 	@Input() width: any;
-	
+
 	/**
 	 * Chart height
 	 */
 	@Input() height: any;
-	
+
 	/**
 	 * Chart container element ref
 	 */
@@ -66,20 +79,17 @@ export class BaseChart implements AfterViewInit, OnInit {
 	chart;
 
 	private _data: any;
+	private _options: any;
 
 	ngOnInit() {
 		// Width prop is mandatory for the wrappers
 		if (this.width) {
 			this.options.width = this.width;
-		} else if (!this.options.width) {
-			console.error("Missing `width` Input!");
 		}
 
 		// Height prop is mandatory for the wrappers
 		if (this.height) {
 			this.options.height = this.height;
-		} else if (!this.options.height) {
-			console.error("Missing `height` Input!");
 		}
 	}
 

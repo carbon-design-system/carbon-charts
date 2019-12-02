@@ -54,6 +54,11 @@ export const chartTypes = [
 		data: simpleBarData
 	},
 	{
+		id: "scatter-time-series",
+		options: scatterTimeSeriesOptions,
+		data: scatterTimeSeriesData
+	},
+	{
 		id: "scatter",
 		options: scatterOptions,
 		data: scatterData
@@ -74,6 +79,16 @@ export const chartTypes = [
 		data: stackedBarTimeSeriesData
 	},
 	{
+		id: "pie",
+		options: pieOptions,
+		data: pieData
+	},
+	{
+		id: "donut",
+		options: donutOptions,
+		data: donutData
+	},
+	{
 		id: "line-time-series",
 		options: lineTimeSeriesOptions,
 		data: lineTimeSeriesData
@@ -92,20 +107,5 @@ export const chartTypes = [
 		id: "line-step-time-series",
 		options: stepTimeSeriesOptions,
 		data: stepTimeSeriesData
-	},
-	{
-		id: "pie",
-		options: pieOptions,
-		data: pieData
-	},
-	{
-		id: "donut",
-		options: donutOptions,
-		data: donutData
-	},
-	{
-		id: "scatter-time-series",
-		options: scatterTimeSeriesOptions,
-		data: scatterTimeSeriesData
 	}
 ];

@@ -9,7 +9,7 @@ export class Scatter extends Component {
 	type = "scatter";
 
 	init() {
-		const eventsFragment = this.services.events.getDocumentFragment();
+		const eventsFragment = this.services.events;
 
 		// Highlight correct circle on legend item hovers
 		eventsFragment.addEventListener("legend-item-onhover", this.handleLegendOnHover);
@@ -63,8 +63,6 @@ export class Scatter extends Component {
 			.attr("fill", d => {
 				if (filled) {
 					return this.model.getFillScale()[d.datasetLabel](d.label) as any;
-				} else {
-					return;
 				}
 			})
 			.attr("fill-opacity", filled ? 0.2 : 1)
@@ -75,21 +73,15 @@ export class Scatter extends Component {
 		this.addEventListeners();
 	}
 
-	handleLegendOnHover = e => {
-		const { hoveredElement } = e.detail;
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
 
 		this.parent.selectAll("circle.dot")
 			.transition(this.services.transitions.getTransition("legend-hover-scatter"))
-			.attr("opacity", d => {
-				if (d.datasetLabel !== hoveredElement.datum()["key"]) {
-					return 0.3;
-				}
-
-				return 1;
-			});
+			.attr("opacity", d => (d.datasetLabel !== hoveredElement.datum()["key"]) ? 0.3 : 1);
 	}
 
-	handleLegendMouseOut = e => {
+	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent.selectAll("circle.dot")
 			.transition(this.services.transitions.getTransition("legend-mouseout-scatter"))
 			.attr("opacity", 1);
@@ -131,9 +123,7 @@ export class Scatter extends Component {
 				}
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement
-				});
+				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
 			});
 	}
 
@@ -144,7 +134,7 @@ export class Scatter extends Component {
 			.on("mouseout", null);
 
 		// Remove legend listeners
-		const eventsFragment = this.services.events.getDocumentFragment();
+		const eventsFragment = this.services.events;
 		eventsFragment.removeEventListener("legend-item-onhover", this.handleLegendOnHover);
 		eventsFragment.removeEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
 	}

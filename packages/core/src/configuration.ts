@@ -2,11 +2,10 @@ import { Tools } from "./tools";
 import {
 	BaseChartOptions,
 	AxisChartOptions,
-	ZoomableChartOptions,
-	// Basic Charts
 	ScatterChartOptions,
 	LineChartOptions,
 	BarChartOptions,
+	StackedBarChartOptions,
 	PieChartOptions,
 	DonutChartOptions,
 	// Components
@@ -16,8 +15,10 @@ import {
 	TooltipOptions,
 	AxisTooltipOptions,
 	BarTooltipOptions,
-	// Advanced Charts
-	NetworkChartOptions,
+	LegendOptions,
+	ChartTheme,
+	LegendPositions,
+	StackedBarOptions,
 } from "./interfaces/index";
 
 /*
@@ -26,6 +27,26 @@ import {
  *****************************
  */
 
+/**
+ * Legend options
+ */
+export const legend: LegendOptions = {
+	position: LegendPositions.BOTTOM,
+	clickable: true,
+	items: {
+		status: {
+			ACTIVE: 1,
+			DISABLED: 0
+		},
+		horizontalSpace: 12,
+		verticalSpace: 24,
+		textYOffset: 8
+	},
+	checkbox: {
+		radius: 6.5,
+		spaceAfter: 4
+	}
+};
 
 /**
  * Grid options
@@ -36,8 +57,7 @@ export const grid: GridOptions = {
 	},
 	y: {
 		numberOfTicks: 5
-	},
-	strokeColor: "#ECEEEF"
+	}
 };
 
 /**
@@ -71,18 +91,22 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartToolt
 export const axes: AxesOptions = { };
 
 export const timeScale: TimeScaleOptions = {
-	addSpaceOnEdges: false
+	addSpaceOnEdges: true
 };
 
 /**
  * Base chart options common to any chart
  */
 const chart: BaseChartOptions = {
-	legend: {
-		clickable: true
-	},
+	width: "100%",
+	height: "100%",
 	resizable: true,
-	tooltip: baseTooltip
+	theme: ChartTheme.DEFAULT,
+	tooltip: baseTooltip,
+	legend,
+	style: {
+		prefix: "cc"
+	}
 };
 
 /**
@@ -94,13 +118,6 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	grid,
 	tooltip: axisChartTooltip
 } as AxisChartOptions);
-
-/**
- * Options common to any chart with an axis
- */
-const zoomableChart: ZoomableChartOptions = Tools.merge({}, chart, {
-	initialZoom: 1
-} as ZoomableChartOptions);
 
 /**
  * options specific to simple bar charts
@@ -132,8 +149,10 @@ const groupedBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
 /**
  * options specific to stacked bar charts
  */
-const stackedBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
-
+const stackedBarChart: StackedBarChartOptions = Tools.merge({}, baseBarChart, {
+	bars: Tools.merge({}, baseBarChart.bars, {
+		dividerSize: 1.5
+	} as StackedBarOptions)
 } as BarChartOptions);
 
 /**
@@ -196,28 +215,16 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	}
 } as DonutChartOptions);
 
-/**
- * options specific to donut charts
- */
-const networkChart: NetworkChartOptions = Tools.merge({}, pieChart, {
-	collapsed: false
-} as NetworkChartOptions);
-
 export const options = {
-	// Base options
 	chart,
 	axisChart,
-	zoomableChart,
-	// Basic Charts
 	simpleBarChart,
 	groupedBarChart,
 	stackedBarChart,
 	lineChart,
 	scatterChart,
 	pieChart,
-	donutChart,
-	// Advanced Charts
-	networkChart
+	donutChart
 };
 
 /**
@@ -227,24 +234,6 @@ export const lines = {
 	opacity: {
 		unselected: 0.3,
 		selected: 1
-	}
-};
-
-/**
- * Legend configuration
- */
-export const legend = {
-	items: {
-		status: {
-			ACTIVE: 1,
-			DISABLED: 0
-		},
-		horizontalSpace: 12,
-		verticalSpace: 24
-	},
-	checkbox: {
-		radius: 6.5,
-		spaceAfter: 4
 	}
 };
 

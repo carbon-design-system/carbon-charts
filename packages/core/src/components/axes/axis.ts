@@ -8,7 +8,8 @@ import { DOMUtils } from "../../services";
 // D3 Imports
 import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
-import { min, max, extent } from "d3-array";
+import { min, extent } from "d3-array";
+import { timeFormatDefaultLocale } from "d3-time-format";
 
 export class Axis extends Component {
 	type = "axes";
@@ -28,16 +29,17 @@ export class Axis extends Component {
 		this.margins = this.configs.margins;
 	}
 
-	createOrGrabScale() {
+	createOrGetScale() {
 		const { position } = this.configs;
-		const scaleOptions = Tools.getProperty(this.model.getOptions(), "axes", position);
+		const axisOptions = Tools.getProperty(this.model.getOptions(), "axes", position);
+		this.scaleType = (axisOptions && axisOptions.scaleType) ? axisOptions.scaleType : ScaleTypes.LINEAR;
 
 		let scaleFunction;
-		if (scaleOptions && scaleOptions.type === ScaleTypes.TIME) {
+		if (this.scaleType === ScaleTypes.TIME) {
 			scaleFunction = scaleTime();
-		} else if (scaleOptions && scaleOptions.type === ScaleTypes.LOG) {
-			scaleFunction = scaleLog().base(scaleOptions.base || 10);
-		} else if (scaleOptions && scaleOptions.type === ScaleTypes.LABELS) {
+		} else if (this.scaleType === ScaleTypes.LOG) {
+			scaleFunction = scaleLog().base(axisOptions.base || 10);
+		} else if (this.scaleType === ScaleTypes.LABELS) {
 			scaleFunction = scaleBand();
 		} else {
 			scaleFunction = scaleLinear();
@@ -49,12 +51,12 @@ export class Axis extends Component {
 				[position]: this
 			};
 
-			if (scaleOptions) {
-				if (scaleOptions.primary === true) {
+			if (axisOptions) {
+				if (axisOptions.primary === true) {
 					modelUpdates[AxisTypes.PRIMARY] = this;
 				}
 
-				if (scaleOptions.secondary === true) {
+				if (axisOptions.secondary === true) {
 					modelUpdates[AxisTypes.SECONDARY] = this;
 				}
 			}
@@ -63,24 +65,23 @@ export class Axis extends Component {
 		}
 
 		this.scale = scaleFunction;
-		this.scaleType = (scaleOptions && scaleOptions.type) ? scaleOptions.type : ScaleTypes.LINEAR;
 
 		return scaleFunction;
 	}
 
 	getScale() {
-		return this.scale;
+		return !this.scale ? this.createOrGetScale() : this.scale;
 	}
 
 	getScaleDomain() {
 		const options = this.model.getOptions();
 		const { position } = this.configs;
-		const scaleOptions = Tools.getProperty(options, "axes", position);
+		const axisOptions = Tools.getProperty(options, "axes", position);
 
 		const { datasets, labels } = this.model.getDisplayData();
 
 		// If scale is a LABELS scale, return some labels as the domain
-		if (scaleOptions && scaleOptions.type === ScaleTypes.LABELS) {
+		if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
 			if (labels) {
 				return labels;
 			} else {
@@ -91,7 +92,7 @@ export class Axis extends Component {
 		// Get the extent of the domain
 		let domain;
 		// If the scale is stacked
-		if (scaleOptions.stacked) {
+		if (axisOptions.stacked) {
 			domain = extent(
 				labels.reduce((m, label: any, i) => {
 					const correspondingValues = datasets.map(dataset => {
@@ -102,34 +103,32 @@ export class Axis extends Component {
 					// Save both the total value and the minimum
 					return m.concat(totalValue, min(correspondingValues));
 				}, [])
-				// Currently stack layouts in the library
-				// Only support positive values
-				.concat(0)
+					// Currently stack layouts in the library
+					// Only support positive values
+					.concat(0)
 			);
 		} else {
 			// Get all the chart's data values in a flat array
-			let allDataValues = datasets.reduce((m, dataset: any) => {
+			let allDataValues = datasets.reduce((dataValues, dataset: any) => {
 				dataset.data.forEach((datum: any) => {
-					if (scaleOptions.type === ScaleTypes.TIME) {
-						m = m.concat(datum.date);
+					if (axisOptions.scaleType === ScaleTypes.TIME) {
+						dataValues = dataValues.concat(datum.date);
 					} else {
-						m = m.concat(isNaN(datum) ? datum.value : datum);
+						dataValues = dataValues.concat(isNaN(datum) ? datum.value : datum);
 					}
 				});
 
-				return m;
+				return dataValues;
 			}, []);
 
-			if (scaleOptions.type !== ScaleTypes.TIME) {
+			if (axisOptions.scaleType !== ScaleTypes.TIME) {
 				allDataValues = allDataValues.concat(0);
 			}
 
-			domain = extent(
-				allDataValues
-			);
+			domain = extent(allDataValues);
 		}
 
-		if (scaleOptions.type === ScaleTypes.TIME) {
+		if (axisOptions.scaleType === ScaleTypes.TIME) {
 			if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges")) {
 				// TODO - Need to account for non-day incrementals as well
 				const [startDate, endDate] = domain;
@@ -143,6 +142,8 @@ export class Axis extends Component {
 			];
 		}
 
+		// TODO - Work with design to improve logic
+		domain[1] = domain[1] * 1.1;
 		return domain;
 	}
 
@@ -157,21 +158,19 @@ export class Axis extends Component {
 		let startPosition, endPosition;
 		if (axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP) {
 			startPosition = this.configs.axes[AxisPositions.LEFT] ? this.margins.left : 0;
-	        endPosition = this.configs.axes[AxisPositions.RIGHT] ? width - this.margins.right : width;
+			endPosition = this.configs.axes[AxisPositions.RIGHT] ? width - this.margins.right : width;
 		} else {
 			startPosition = height - this.margins.bottom;
 			endPosition = this.margins.top;
 		}
 
 		// Grab the scale off of the model, and initialize if it doesn't exist
-		const scale = this.createOrGrabScale()
-			.domain(this.getScaleDomain());
+		const scale = this.createOrGetScale().domain(this.getScaleDomain());
 
-		if (axisOptions && axisOptions.type === ScaleTypes.LABELS) {
+		if (this.scaleType === ScaleTypes.LABELS) {
 			scale.rangeRound([startPosition, endPosition]);
 		} else {
 			scale.range([startPosition, endPosition]);
-				// .nice();
 		}
 
 		// Identify the corresponding d3 axis function
@@ -191,9 +190,18 @@ export class Axis extends Component {
 				break;
 		}
 
+		// Set the date/time locale
+		if (this.scaleType === ScaleTypes.TIME) {
+			const timeLocale = Tools.getProperty(options, "locale", "time");
+			if (timeLocale) {
+				timeFormatDefaultLocale(timeLocale);
+			}
+		}
+
 		// Initialize axis object
 		const axis = axisFunction(scale)
-			.tickSizeOuter(0);
+			.tickSizeOuter(0)
+			.tickFormat(Tools.getProperty(axisOptions, "ticks", "formatter"));
 
 		if (scale.ticks) {
 			const numberOfTicks = 7;
@@ -216,48 +224,92 @@ export class Axis extends Component {
 		}
 
 		// Add axis into the parent
-		const axisRefExists = !svg.select(`g.axis.${axisPosition}`).empty();
-		const axisRef = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
+		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
+		const axisRefExists = !container.select(`g.ticks`).empty();
+		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
 
 		// Position and transition the axis
 		switch (axisPosition) {
 			case AxisPositions.LEFT:
-				axisRef.attr("transform", "translate(" + this.margins.left + ",0)");
+				axisRef.attr("transform", `translate(${this.margins.left}, 0)`);
 				break;
 			case AxisPositions.BOTTOM:
-				axisRef.attr("transform", "translate(0," + (height - this.margins.bottom) + ")");
+				axisRef.attr("transform", `translate(0, ${height - this.margins.bottom})`);
 				break;
 			case AxisPositions.RIGHT:
-				axisRef.attr("transform", "translate(" + (width - this.margins.right) + ",0)");
+				axisRef.attr("transform", `translate(${width - this.margins.right}, 0)`);
 				break;
 			case AxisPositions.TOP:
-		        axisRef.attr("transform", "translate(0," + (this.margins.top) + ")");
+				axisRef.attr("transform", `translate(0, ${this.margins.top})`);
 				break;
+		}
+
+		// Position the axis title
+		if (axisOptions.title) {
+			const axisTitleRef = DOMUtils.appendOrSelect(container, `text.axis-title`)
+				.text(axisOptions.title);
+
+			switch (axisPosition) {
+				case AxisPositions.LEFT:
+					axisTitleRef.attr("transform", "rotate(-90)")
+						.attr("y", 0)
+						.attr("x", -(scale.range()[0] / 2))
+						.attr("dy", "1em")
+						.style("text-anchor", "middle");
+					break;
+				case AxisPositions.BOTTOM:
+					axisTitleRef.attr("transform", `translate(${this.margins.left / 2 + scale.range()[1] / 2}, ${height})`)
+						.style("text-anchor", "middle");
+					break;
+				case AxisPositions.RIGHT:
+					axisTitleRef.attr("transform", "rotate(90)")
+						.attr("y", -width)
+						.attr("x", scale.range()[0] / 2)
+						.attr("dy", "1em")
+						.style("text-anchor", "middle");
+					break;
+				case AxisPositions.TOP:
+					const { height: titleHeight } = DOMUtils.getSVGElementSize(axisTitleRef, { useBBox: true });
+					axisTitleRef.attr("transform", `translate(${this.margins.left / 2 + scale.range()[1] / 2}, ${titleHeight / 2})`)
+						.style("text-anchor", "middle");
+					break;
+			}
 		}
 
 		// Apply new axis to the axis element
 		if (!animate || !axisRefExists) {
-			axisRef.call(axis);
+			axisRef = axisRef.call(axis);
 		} else {
-			axisRef.transition(this.services.transitions.getTransition("axis-update"))
+			axisRef = axisRef.transition(this.services.transitions.getTransition("axis-update"))
 				.call(axis);
 		}
 
-		if (scale.step &&
-			(axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP)) {
-			const textNodes = axisRef.selectAll("g.tick text").nodes();
+		if (axisPosition === AxisPositions.BOTTOM || axisPosition === AxisPositions.TOP) {
+			if (scale.step) {
+				const textNodes = axisRef.selectAll("g.tick text").nodes();
 
-			// If any ticks are any larger than the scale step size
-			if (textNodes.some(textNode => DOMUtils.getSVGElementSize(textNode, { useBBox: true }).width >= scale.step())) {
-				axisRef.selectAll("g.tick text")
-					.attr("transform", `rotate(45)`)
-					.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
+				// If any ticks are any larger than the scale step size
+				if (textNodes.some(textNode => DOMUtils.getSVGElementSize(textNode, { useBBox: true }).width >= scale.step())) {
+					axisRef.selectAll("g.tick text")
+						.attr("transform", `rotate(45)`)
+						.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
 
-				return;
+					return;
+				}
+			} else {
+				const estimatedTickSize = width / scale.ticks().length / 2;
+
+				if (estimatedTickSize < 30) {
+					axisRef.selectAll("g.tick text")
+						.attr("transform", `rotate(45)`)
+						.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
+
+					return;
+				}
 			}
 
 			axisRef.selectAll("g.tick text")
-				.attr("transform",  null)
+				.attr("transform", null)
 				.style("text-anchor", null);
 		}
 	}
@@ -269,50 +321,22 @@ export class Axis extends Component {
 			return this.scale(correspondingLabel) + this.scale.step() / 2;
 		} else if (this.scaleType === ScaleTypes.TIME) {
 			return this.scale(new Date(datum.date || datum.label));
-		} else {
-			return this.scale(value);
 		}
+
+		return this.scale(value);
 	}
 
-	getYMax() {
-		const { datasets } = this.model.getDisplayData();
-		const { axes } = this.model.getOptions();
-		let yMax;
+	getAxisRef() {
+		const { position: axisPosition } = this.configs;
 
-		yMax = max(datasets, (d: any) => {
-			return max(d.data, (datum: any) => {
-				return isNaN(datum) ? datum.value : datum;
-			});
-		});
-
-		// if (axes.y.yMaxAdjuster) {
-		// 	yMax = axes.y.yMaxAdjuster(yMax);
-		// }
-
-		return yMax;
+		return this.getContainerSVG()
+			.select(`g.axis.${axisPosition} g.ticks`);
 	}
 
-	getYMin() {
-		const { datasets } = this.model.getDisplayData();
-		const { axes } = this.model.getOptions();
-		let yMin;
+	getTitleRef() {
+		const { position: axisPosition } = this.configs;
 
-		yMin = min(datasets, (d: any) => {
-			return min(d.data, (datum: any) => {
-				return isNaN(datum) ? datum.value : datum;
-			});
-		});
-
-		// if (axes.y.yMinAdjuster) {
-		// 	yMin = axes.y.yMinAdjuster(yMin);
-		// }
-
-		return yMin;
-	}
-
-	getElementRef() {
-		const { position } = this.configs;
-
-		return DOMUtils.appendOrSelect(this.getContainerSVG(), `g.axis.${position}`);
+		return this.getContainerSVG()
+			.select(`g.axis.${axisPosition} text.axis-title`);
 	}
 }

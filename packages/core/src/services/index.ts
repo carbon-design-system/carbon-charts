@@ -1,6 +1,7 @@
 // Essentials
 export * from "./essentials/dom-utils";
 export * from "./essentials/events";
+export * from "./essentials/themes";
 export * from "./essentials/transitions";
 
 // MISC

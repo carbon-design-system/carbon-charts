@@ -1,6 +1,5 @@
-.cc-line {
-	path.line {
-		pointer-events: none;
-		stroke-width: 1.75;
-	}
+.#{$prefix}--#{$charts-prefix}--line path.line {
+	pointer-events: none;
+	fill: none;
+	stroke-width: 1.75;
 }

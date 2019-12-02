@@ -1,42 +1,4 @@
-@import "../../node_modules/@carbon/themes/scss/themes";
-
-div.chart-holder {
+.#{$prefix}--chart-holder {
+	background-color: $ui-background;
 	position: relative;
 }
-
-/////////////////////////////////////////////
-///          Theme styles                ////
-/////////////////////////////////////////////
-
-.carbon--theme--white {
-	&.chart-holder {
-		background-color: $ui-background;
-	}
-}
-
-.carbon--theme--g10 {
-	@include carbon--theme($carbon--theme--g10) {
-		&.chart-holder {
-			background-color: $ui-background;
-		}
-	}
-}
-
-$gray100: #171717;
-
-.carbon--theme--g90 {
-	@include carbon--theme($carbon--theme--g90) {
-		&.chart-holder {
-			background-color: $ui-background;
-		}
-	}
-}
-
-.carbon--theme--g100 {
-	@include carbon--theme($carbon--theme--g100) {
-		&.chart-holder {
-			background-color: $ui-background;
-		}
-	}
-}
-

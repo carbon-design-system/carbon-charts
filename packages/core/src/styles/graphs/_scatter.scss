@@ -1,62 +1,17 @@
-@import "../../node_modules/@carbon/motion/scss/motion.scss";
-@import "../../node_modules/@carbon/themes/scss/themes";
+@import "./../vendor/@carbon/motion/scss/motion.scss";
 
-g.cc-scatter {
-	circle.hovered {
+g.#{$prefix}--#{$charts-prefix}--scatter {
+	circle.dot.hovered {
 		fill-opacity: 1;
 		transition: all .1s;
 		@include carbon--motion(standard, expressive);
+	}
+
+	circle.dot.unfilled {
+		fill: $ui-01;
 	}
 
 	g.lines path.line {
 		mix-blend-mode: multiply;
 	}
 }
-
-
-/////////////////////////////////////////////
-///          Theme styles                ////
-/////////////////////////////////////////////
-
-.carbon--theme--white {
-	g.cc-scatter {
-		circle.dot.unfilled {
-			fill: $ui-01;
-		}
-	}
-}
-
-.carbon--theme--g10 {
-	@include carbon--theme($carbon--theme--g10) {
-		g.cc-scatter {
-			circle.dot.unfilled {
-				fill: $ui-01;
-			}
-		}
-	}
-}
-
-$gray100: #171717;
-.carbon--theme--g90 {
-	@include carbon--theme($carbon--theme--g90) {
-		g.cc-scatter {
-			circle.dot.unfilled {
-				fill: $gray100;
-			}
-		}
-	}
-}
-
-.carbon--theme--g100 {
-	@include carbon--theme($carbon--theme--g100) {
-		g.cc-scatter {
-			circle.dot.unfilled {
-				fill: $ui-01;
-			}
-			g.lines path.line {
-				mix-blend-mode: unset;
-			}
-		}
-	}
-}
-

@@ -13,9 +13,9 @@ import { DonutChart } from "@carbon/charts";
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: "n-donut-chart",
+	selector: "ibm-donut-chart",
 	template: `
-		<div #nChart class="n-chart-container">
+		<div #nChart class="ibm-chart-container">
 		</div>
 	`
 })

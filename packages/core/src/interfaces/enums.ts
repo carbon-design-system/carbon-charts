@@ -1,20 +1,8 @@
 /**
- * enum of all supported charts
- */
-export enum ChartType {
-	BAR = "bar",
-	LINE = "line",
-	SCATTER = "scatter",
-	PIE = "pie",
-	DONUT = "donut",
-	COMBO = "combo"
-}
-
-/**
  * enum of all supported chart themes
  */
 export enum ChartTheme {
-	WHITE = "white",
+	DEFAULT = "default",
 	G100 = "g100",
 	G90 = "g90",
 	G10 = "g10"
@@ -97,17 +85,6 @@ export enum LayoutGrowth {
 	FIXED = "fixed",
 	PREFERRED = "preferred",
 	STRETCH = "stretch",
-}
-
-
-/**
- * enum of all possible layout growth values
- */
-export enum ModelStateKeys {
-	/*
-	 * DOM Elements
-	 */
-	HOLDER = "holder"
 }
 
 /**

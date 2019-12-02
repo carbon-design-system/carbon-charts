@@ -29,28 +29,26 @@ const initializeThemeSelector = () => {
     });
 
     // Set state for current theme
-    const params = new URLSearchParams(location.search)
-    let themeName;
-    if (params.has("theme") && colorPalettes[params.get("theme")]) {
-        themeName = params.get("theme");
-    } else {
-        themeName = "DEFAULT";
-    }
-    const dropdownDefaultOption = document.querySelector("div.theme-selector li.bx--dropdown-text");
-    const selectedOption = dropdownOptions.find(dO => dO.parentNode.getAttribute("data-value") === themeName);
-	dropdownDefaultOption.innerHTML = selectedOption.innerText;
+	const params = new URLSearchParams(location.search);
+	if (params.has("theme")) {
+		const themeName = params.get("theme");
 
-	// Set dark theme on the window
-	switch (themeName) {
-		case "G10":
-			document.body.classList.add("carbon--dark-g10");
-			break;
-		case "G90":
-			document.body.classList.add("carbon--dark-g90");
-			break;
-		case "G100":
-			document.body.classList.add("carbon--dark-g100");
-			break;
+		if (themeName !== "DEFAULT") {
+			// Add theme CSS bundle
+			const linkElement = document.createElement("link");
+			linkElement.setAttribute("rel", "stylesheet");
+			linkElement.setAttribute("type", "text/css");
+			linkElement.setAttribute("href", `styles-${themeName}.css`);
+			document.head.appendChild(linkElement);
+
+			// Add classname to body for demo site theming
+			document.body.classList.add(`carbon--dark-${themeName}`);
+		}
+
+		// Update selected dropdown item
+		const dropdownDefaultOption = document.querySelector("div.theme-selector li.bx--dropdown-text");
+		const selectedOption = dropdownOptions.find(option => option.parentNode.getAttribute("data-value") === themeName);
+		dropdownDefaultOption.innerHTML = selectedOption.innerText;
 	}
 };
 

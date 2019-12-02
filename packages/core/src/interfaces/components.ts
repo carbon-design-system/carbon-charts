@@ -1,4 +1,4 @@
-import { LayoutGrowth } from "./enums";
+import { LayoutGrowth, LegendPositions } from "./enums";
 import { Component } from "../components/component";
 
 /**
@@ -9,7 +9,7 @@ export interface LayoutComponentChild {
 	/**
 	 * the component that'll be rendered inside layout child
 	 */
-	components: Array<Component>;
+	components: Component[];
 	/**
 	 * size of the layout child
 	 */
@@ -28,10 +28,24 @@ export interface LayoutComponentChild {
  * customize the legend component
  */
 export interface LegendOptions {
+	position?: LegendPositions;
 	/**
 	 * the clickability of legend items
 	 */
-	clickable: boolean;
+	clickable?: boolean;
+	items?: {
+		status?: {
+			ACTIVE?: Number;
+			DISABLED?: Number;
+		};
+		horizontalSpace?: Number;
+		verticalSpace?: Number;
+		textYOffset?: Number;
+	};
+	checkbox?: {
+		radius?: Number;
+		spaceAfter?: Number;
+	};
 }
 
 export interface TooltipOptions {
@@ -41,6 +55,7 @@ export interface TooltipOptions {
 	formatter?: Function;
 	/**
 	 * custom function for returning tooltip HTML
+	 * passed an array or object with the data, and then the default tooltip markup
 	 */
 	customHTML?: Function;
 	/**
@@ -99,4 +114,13 @@ export interface GridOptions {
 		numberOfTicks?: number;
 	};
 	strokeColor?: string;
+}
+
+export interface BarOptions {
+	width?: number;
+	maxWidth?: number;
+}
+
+export interface StackedBarOptions extends BarOptions {
+	dividerSize?: number;
 }

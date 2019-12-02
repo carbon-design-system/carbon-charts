@@ -1,38 +1,47 @@
 // Internal Imports
-import { ChartConfig, BaseChartOptions, LayoutGrowth, LayoutDirection, LegendOrientations, ChartTheme } from "./interfaces/index";
+import {
+	ChartConfig,
+	BaseChartOptions,
+	LayoutGrowth,
+	LayoutDirection,
+	LegendOrientations,
+	ChartTheme
+} from "./interfaces/index";
 
 // Misc
 import { ChartModel } from "./model";
-import { Component, Title, Legend, LayoutComponent, Tooltip } from "./components";
+import { Component,
+	Title,
+	Legend,
+	LayoutComponent,
+	Tooltip
+} from "./components";
 import { Tools } from "./tools";
 
 // Services
-import { DOMUtils, Events, Transitions } from "./services/index";
-import { select } from "d3-selection";
+import {
+	DOMUtils,
+	Events,
+	Themes,
+	Transitions
+} from "./services/index";
 
 export class Chart {
-	components: Array<Component>;
-	model: ChartModel = new ChartModel();
-	protected services: any = {
+	components: Component[];
+	services: any = {
 		domUtils: DOMUtils,
 		events: Events,
-		transitions: Transitions
+		transitions: Transitions,
+		themes: Themes
 	};
+	model: ChartModel = new ChartModel(this.services);
 
 	constructor(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {}
 
 	// Contains the code that uses properties that are overridable by the super-class
 	init(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
-		// Set model update callback
-		this.model.setUpdateCallback(this.update.bind(this));
-
 		// Store the holder in the model
-		this.model.set({
-			holder
-		}, true);
-
-		// Set model data & options
-		this.model.setData(chartConfigs.data);
+		this.model.set({ holder }, true);
 
 		// Initialize all services
 		Object.keys(this.services).forEach(serviceName => {
@@ -40,9 +49,17 @@ export class Chart {
 			this.services[serviceName] = new serviceObj(this.model, this.services);
 		});
 
+		// Call update() when model has been updated
+		this.services.events
+			.addEventListener("model-update", () => {
+				this.update(true);
+			});
+
+		// Set model data & options
+		this.model.setData(chartConfigs.data);
+
 		// Set chart resize event listener
 		this.services.events
-			.getDocumentFragment()
 			.addEventListener("chart-resize", () => {
 				this.update(false);
 			});
@@ -50,47 +67,43 @@ export class Chart {
 		this.components = this.getComponents();
 
 		this.update();
-
-		this.setTheme();
 	}
 
-	getComponents(): Array<any> {
+	getComponents(): any[] {
 		console.error("getComponents() method is not implemented");
 
 		return null;
 	}
 
-	setTheme() {
-		const theme = Tools.getProperty(this.model.getOptions(), "theme") ?
-			Tools.getProperty(this.model.getOptions(), "theme") : ChartTheme.WHITE;
-		const holder = select(this.model.get("holder"));
 
-		holder.classed(`carbon--theme--${theme}`, true);
-	}
 
 	update(animate = true) {
-		if (this.components) {
-			// Render all components
-			this.components.forEach(component => {
-				component.render(animate);
+		if (!this.components) {
+			return;
+		}
+
+		// Render all components
+		this.components.forEach(component => component.render(animate));
+
+		// Asynchronously dispatch a "render-finished" event
+		// This is needed because of d3-transitions
+		// Since at the start of the transition
+		// Elements do not hold their final size or position
+		const pendingTransitions = this.services.transitions.getPendingTransitions();
+		const promises = Object.keys(pendingTransitions)
+			.map(transitionID => {
+				const transition = pendingTransitions[transitionID];
+				return transition.end()
+					.catch(e => e); // Skip rejects since we don't care about those;
 			});
 
-			this.setTheme();
-			// Asynchronously dispatch a "render-finished" event
-			// This is needed because of d3-transitions
-			// Since at the start of the transition
-			// Elements do not hold their final size or position
-			setTimeout(() => {
-				this.services.events.dispatchEvent("render-finished");
-			});
-		}
+		Promise.all(promises)
+			.then(() => this.services.events.dispatchEvent("render-finished"));
 	}
 
 	destroy() {
 		// Call the destroy() method on all components
-		this.components.forEach(component => {
-			component.destroy();
-		});
+		this.components.forEach(component => component.destroy());
 
 		// Remove the chart holder
 		this.services.domUtils.getHolder().remove();
@@ -99,7 +112,7 @@ export class Chart {
 	}
 
 
-	protected getChartComponents(graphFrameComponents: Array<any>) {
+	protected getChartComponents(graphFrameComponents: any[]) {
 		const titleComponent = {
 			id: "title",
 			components: [

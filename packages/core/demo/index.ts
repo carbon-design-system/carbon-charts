@@ -13,7 +13,6 @@ import {
 
 // Styles
 import "./index.scss";
-import "./../src/styles/styles.scss";
 
 // Functionality for demo options toolbar
 import { initializeDemoOptions } from "./demo-options";
@@ -28,7 +27,6 @@ initializeDemoOptions();
 
 const charts = {};
 
-// TODO - removeADataset shouldn't be used if chart legend is label based
 const changeDemoData = (chartType: any, chartObj: any) => {
 	const oldData = chartObj.model.getData();
 
@@ -155,9 +153,11 @@ const createChartContainer = chartType => {
 	return holder;
 };
 
+// Initialize all charts
 chartTypes.forEach(type => {
 	const holder = createChartContainer(type);
 	if (holder) {
+		let classToInitialize;
 		switch (type.id) {
 			case "network":
 				charts[type.id] = new NetworkChart(
@@ -173,122 +173,43 @@ chartTypes.forEach(type => {
 				break;
 			case "simple-bar":
 			case "simple-bar-time-series":
-				charts[type.id] = new SimpleBarChart(
-					holder,
-					{
-						data: type.data,
-						options: type.options,
-					}
-				);
-
-				setDemoActionsEventListener(type.id, charts[type.id]);
-
+				classToInitialize = SimpleBarChart;
 				break;
-				case "grouped-bar":
-					charts[type.id] = new GroupedBarChart(
-					holder,
-					{
-						data: type.data,
-						options: type.options,
-					}
-				);
-
-				setDemoActionsEventListener(type.id, charts[type.id]);
-
+			case "grouped-bar":
+				classToInitialize = GroupedBarChart;
 				break;
 			case "stacked-bar":
 			case "stacked-bar-time-series":
-				charts[type.id] = new StackedBarChart(
-					holder,
-					{
-						data: type.data,
-						options: type.options,
-					}
-				);
-
-				// const chartObject = charts[type.id];
-				// chartObject.events.addEventListener("bar-onClick", e => {
-				// 	console.log("Bar chart - Bar clicked", e.detail);
-				// });
-
-				// chartObject.events.addEventListener("load", e => {
-				// 	console.log("Bar Chart - LOADED");
-				// }, false);
-
-				// chartObject.events.addEventListener("update", e => {
-				// 	console.log("Bar Chart - UPDATED");
-				// }, false);
-
-				// chartObject.events.addEventListener("data-change", e => {
-				// 	console.log("Bar Chart - DATACHANGE");
-				// }, false);
-
-				// chartObject.events.addEventListener("data-load", e => {
-				// 	console.log("Bar Chart - DATALOAD");
-				// }, false);
-
-				// chartObject.events.addEventListener("resize", e => {
-				// 	console.log("Bar Chart - RESIZE");
-				// }, false);
-
-				setDemoActionsEventListener(type.id, charts[type.id]);
-
+				classToInitialize = StackedBarChart;
 				break;
 			case "scatter":
 			case "scatter-time-series":
-				charts[type.id] = new ScatterChart(
-					holder,
-					{
-						data: type.data,
-						options: type.options,
-					}
-				);
-
-				setDemoActionsEventListener(type.id, charts[type.id]);
+				classToInitialize = ScatterChart;
 				break;
 			case "line":
 			case "line-time-series":
 			case "line-step":
 			case "line-step-time-series":
-				charts[type.id] = new LineChart(
-					holder,
-					{
-						data: type.data,
-						options: type.options,
-					}
-				);
-
-				setDemoActionsEventListener(type.id, charts[type.id]);
-
+				classToInitialize = LineChart;
 				break;
 			case "pie":
-				charts[type.id] = new PieChart(
-					holder,
-					{
-						data: type.data,
-						options: type.options
-					}
-				);
-				// const pieChartObject = charts[type.id];
-				// pieChartObject.events.addEventListener("pie-slice-onClick", e => {
-				// 	console.log("Pie chart - Slice clicked", e.detail);
-				// });
-
-				setDemoActionsEventListener(type.id, charts[type.id]);
-
+				classToInitialize = PieChart;
 				break;
 			case "donut":
-				charts[type.id] = new DonutChart(
-					holder,
-					{
-						data: type.data,
-						options: type.options
-					}
-				);
-
-				setDemoActionsEventListener(type.id, charts[type.id]);
-
+				classToInitialize = DonutChart;
 				break;
 		}
+
+
+		// Initialize chart
+		charts[type.id] = new classToInitialize(
+			holder,
+			{
+				data: type.data,
+				options: type.options
+			}
+		);
+
+		setDemoActionsEventListener(type.id, charts[type.id]);
 	}
 });

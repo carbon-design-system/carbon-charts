@@ -1,10 +1,12 @@
 // Internal Imports
 import { Service } from "../service";
-import { ModelStateKeys } from "../../interfaces";
 
 // D3 Imports
 import { select, Selection } from "d3-selection";
 import { Tools } from "../../tools";
+
+// import the settings for the css prefix
+import settings from "carbon-components/src/globals/js/settings";
 
 // MISC
 import ResizeObserver from "resize-observer-polyfill";
@@ -104,13 +106,13 @@ export class DOMUtils extends Service {
 	}
 
 	static appendOrSelect(parent, query) {
-		const l = query.split(".");
-		const elementToAppend = l[0];
+		const querySections = query.split(".");
+		const elementToAppend = querySections[0];
 
 		const selection = parent.select(query);
 		if (selection.empty()) {
 			return parent.append(elementToAppend)
-				.attr("class", l.slice(1).join(" "));
+				.attr("class", querySections.slice(1).join(" "));
 		}
 
 		return selection;
@@ -131,11 +133,11 @@ export class DOMUtils extends Service {
 	}
 
 	styleHolderElement() {
-		const holderElement = this.model.get(ModelStateKeys.HOLDER) as HTMLElement;
+		const holderElement = this.getHolder() as HTMLElement;
 		const { width, height } = this.model.getOptions();
 
 		// Add class to chart holder
-		select(this.model.get(ModelStateKeys.HOLDER)).classed("chart-holder", true);
+		select(this.getHolder()).classed(`${settings.prefix}--chart-holder`, true);
 
 		// If width exists in options
 		if (width) {
@@ -151,13 +153,14 @@ export class DOMUtils extends Service {
 	}
 
 	getHolder() {
-		return this.model.get(ModelStateKeys.HOLDER);
+		return this.model.get("holder");
 	}
 
 	addSVGElement() {
-		const svg = select(this.model.get(ModelStateKeys.HOLDER))
+		const chartsprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
+		const svg = select(this.getHolder())
 			.append("svg")
-			.classed("chart-svg", true)
+			.classed(`${settings.prefix}--${chartsprefix}--chart-svg`, true)
 			.attr("height", "100%")
 			.attr("width", "100%");
 
@@ -169,7 +172,7 @@ export class DOMUtils extends Service {
 	}
 
 	addResizeListener() {
-		const holder = this.model.get(ModelStateKeys.HOLDER);
+		const holder = this.getHolder();
 
 		if (!holder) {
 			return;

@@ -29,7 +29,7 @@ export class Pie extends Component {
 	hoverArc: any;
 
 	init() {
-		const eventsFragment = this.services.events.getDocumentFragment();
+		const eventsFragment = this.services.events;
 
 		// Highlight correct circle on legend item hovers
 		eventsFragment.addEventListener("legend-item-onhover", this.handleLegendOnHover);
@@ -41,12 +41,10 @@ export class Pie extends Component {
 	getDataList() {
 		const displayData = this.model.getDisplayData();
 		const dataset = displayData.datasets[0];
-		return dataset.data.map((datum, i) => {
-			return {
-				label: displayData.labels[i],
-				value: datum
-			};
-		});
+		return dataset.data.map((datum, i) => ({
+			label: displayData.labels[i],
+			value: datum
+		}));
 	}
 
 	getInnerRadius() {
@@ -75,15 +73,12 @@ export class Pie extends Component {
 		// Setup the pie layout
 		const pieLayout = pie()
 			.value((d: any) => d.value)
-			.sort(function(a: any, b: any) {
-				return b.value - a.value;
-			})
+			.sort((a: any, b: any) => b.value - a.value)
 			.padAngle(options.pie.padAngle);
 
 		// Sort pie layout data based off of the indecies the layout creates
-		const pieLayoutData = pieLayout(dataList).sort(function(a: any, b: any) {
-			return a.index - b.index;
-		});
+		const pieLayoutData = pieLayout(dataList)
+			.sort((a: any, b: any) => a.index - b.index);
 
 		// Update data on all slices
 		const paths = DOMUtils.appendOrSelect(svg, "g.slices").selectAll("path.slice")
@@ -112,7 +107,7 @@ export class Pie extends Component {
 
 		// Draw the slice labels
 		const labels = DOMUtils.appendOrSelect(svg, "g.labels")
-			.selectAll("text.chart-label")
+			.selectAll("text.pie-label")
 			.data(pieLayoutData, (d: any) => d.data.label);
 
 		// Remove labels that are existing
@@ -123,7 +118,7 @@ export class Pie extends Component {
 		// Add labels that are being introduced
 		const enteringLabels = labels.enter()
 			.append("text")
-			.classed("chart-label", true);
+			.classed("pie-label", true);
 
 		// Update styles & position on existing & entering labels
 		const calloutData = [];
@@ -136,7 +131,7 @@ export class Pie extends Component {
 				d.textOffsetX = textLength / 2;
 				d.textOffsetY = parseFloat(getComputedStyle(this).fontSize) / 2;
 
-				const marginedRadius = radius + 2;
+				const marginedRadius = radius + 7;
 
 				const theta = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
 
@@ -191,7 +186,7 @@ export class Pie extends Component {
 		this.addEventListeners();
 	}
 
-	renderCallouts(calloutData: Array<any>) {
+	renderCallouts(calloutData: any[]) {
 		const svg = DOMUtils.appendOrSelect(this.getContainerSVG(), "g.callouts");
 		const options = this.model.getOptions();
 
@@ -276,22 +271,16 @@ export class Pie extends Component {
 	}
 
 	// Highlight elements that match the hovered legend item
-	handleLegendOnHover = e => {
-		const { hoveredElement } = e.detail;
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
 
 		this.parent.selectAll("path.slice")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => {
-				if (d.data.label !== hoveredElement.datum()["key"]) {
-					return 0.3;
-				}
-
-				return 1;
-			});
+			.attr("opacity", d => (d.data.label !== hoveredElement.datum()["key"]) ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements
-	handleLegendMouseOut = e => {
+	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent.selectAll("path.slice")
 			.transition(this.services.transitions.getTransition("legend-mouseout-bar"))
 			.attr("opacity", 1);
@@ -326,9 +315,7 @@ export class Pie extends Component {
 				self.services.events.dispatchEvent("pie-slice-mouseout", hoveredElement);
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement
-				});
+				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
 			})
 			.on("click", d => self.services.events.dispatchEvent("pie-slice-click", d));
 	}

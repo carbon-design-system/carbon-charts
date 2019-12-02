@@ -39,7 +39,7 @@ export class Grid extends Component {
 			.tickSizeOuter(0);
 
 		// Determine number of ticks
-		const numberOfTicks = Tools.getProperty(this.model.getOptions(), "grid", "x", "numberOfTicks") || Configuration.grid.x.numberOfTicks;
+		const numberOfTicks = Tools.getProperty(this.model.getOptions(), "grid", "x", "numberOfTicks");
 		xGrid.ticks(numberOfTicks);
 
 		const g = svg.select(".x.grid")
@@ -59,7 +59,7 @@ export class Grid extends Component {
 			.tickSizeOuter(0);
 
 		// Determine number of ticks
-		const numberOfTicks = Tools.getProperty(this.model.getOptions(), "grid", "y", "numberOfTicks") || Configuration.grid.y.numberOfTicks;
+		const numberOfTicks = Tools.getProperty(this.model.getOptions(), "grid", "y", "numberOfTicks");
 		yGrid.ticks(numberOfTicks);
 
 		const g = svg.select(".y.grid")
@@ -79,8 +79,8 @@ export class Grid extends Component {
 
 		// sort in ascending x translation value order
 		const gridlinesX = svg.selectAll(".x.grid .tick").nodes()
-		.sort(function (a, b) {
-			return +Tools.getTranslationValues(a).tx - +Tools.getTranslationValues(b).tx;
+		.sort((a, b) => {
+			return Number(Tools.getTranslationValues(a).tx) - Number(Tools.getTranslationValues(b).tx);
 		});
 
 		// find the 2 gridlines on either side of the mouse
@@ -90,7 +90,7 @@ export class Grid extends Component {
 				floor ++;
 			}
 		});
-		ceiling = ( floor + 1 < gridlinesX.length) ? floor + 1 : gridlinesX.length;
+		ceiling = (floor + 1 < gridlinesX.length) ? floor + 1 : gridlinesX.length;
 
 		// get the 'step' between chart gridlines
 		const line1 = gridlinesX[floor];
@@ -104,7 +104,7 @@ export class Grid extends Component {
 			lineSpacing = +Tools.getTranslationValues(line2).tx;
 		} else if (!line2) {
 			// we need to use the chart right bounds in case there isnt a domain axis
-			const gridElement = svg.select(".cc-grid rect.chart-grid-backdrop").node();
+			const gridElement = svg.select("rect.chart-grid-backdrop").node();
 			const width = DOMUtils.getSVGElementSize(gridElement).width;
 
 			lineSpacing = width - +Tools.getTranslationValues(line1).tx;
@@ -132,8 +132,8 @@ export class Grid extends Component {
 
 			// threshold for when to display a gridline tooltip
 			const bounds = {
-				min: +translations.tx - threshold,
-				max: +translations.tx + threshold };
+				min: Number(translations.tx) - threshold,
+				max: Number(translations.tx) + threshold };
 
 			return bounds.min <= position[0] && position[0] <= bounds.max;
 		});
@@ -174,7 +174,7 @@ export class Grid extends Component {
 
 			// use the selected gridline to get the data with associated domain
 			activeGridline.each(function(d) {
-				highlightItems = self.model.getDataWithDomain(d);
+				highlightItems = self.services.axes.getDataFromDomain(d);
 			});
 
 			self.services.events.dispatchEvent("show-tooltip", {
@@ -187,8 +187,7 @@ export class Grid extends Component {
 			svg.selectAll(".x.grid .tick")
 			.classed("active", false);
 
-			self.services.events.dispatchEvent("hide-tooltip", {
-			});
+			self.services.events.dispatchEvent("hide-tooltip", {});
 		});
 	}
 

@@ -12,7 +12,7 @@ export default {
 			format: "esm"
 		},
 		{
-			file: `${outputDir}/index.umd.js`,
+			file: `${outputDir}/bundle.js`,
 			format: "umd",
 			name: "Charts",
 			globals: {
@@ -30,7 +30,7 @@ export default {
 	],
 	plugins: [
 		typescript({
-			typescript: require("typescript"),
+			typescript: require("typescript")
 		}),
 		terser(),
 		resolve(),
@@ -40,7 +40,7 @@ export default {
 		// logs the circular dependencies inside the d3 codebase
 		if (warning.code === "CIRCULAR_DEPENDENCY" &&
 			warning.importer.indexOf("d3") !== -1) {
-			console.log(
+			console.warn(
 				"Circular dependency found in D3:",
 				warning.toString().replace("Circular dependency:", "")
 			);

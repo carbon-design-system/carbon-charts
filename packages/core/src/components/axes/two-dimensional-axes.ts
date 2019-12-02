@@ -55,8 +55,8 @@ export class TwoDimensionalAxes extends Component {
 		this.configs.axes = axes;
 
 		// Check the configs to know which axes need to be rendered
-		const axisPositionss = Object.keys(AxisPositions).map(axisPositionKey => AxisPositions[axisPositionKey]);
-		axisPositionss.forEach(axisPosition => {
+		axisPositions.forEach(axisPositionKey => {
+			const axisPosition = AxisPositions[axisPositionKey];
 			if (this.configs.axes[axisPosition] && !this.children[axisPosition]) {
 				const axisComponent = new Axis(
 					this.model,
@@ -87,28 +87,33 @@ export class TwoDimensionalAxes extends Component {
 		Object.keys(this.children).forEach(childKey => {
 			const child = this.children[childKey];
 			const axisPosition = child.configs.position;
-			const { width, height } = DOMUtils.getSVGElementSize(child.getElementRef(), { useBBox: true });
+			const { width, height } = DOMUtils.getSVGElementSize(child.getAxisRef(), { useBBox: true });
+			let offset;
+			if (child.getTitleRef().empty()) {
+				offset = 0;
+			} else {
+				offset = DOMUtils.getSVGElementSize(child.getTitleRef(), { useBBox: true }).height;
+			}
 
 			switch (axisPosition) {
 				case AxisPositions.TOP:
-					margins.top = height;
+					margins.top = height + offset;
 					break;
 				case AxisPositions.BOTTOM:
-					margins.bottom = height;
+					margins.bottom = height + offset;
 					break;
 				case AxisPositions.LEFT:
-					margins.left = width;
+					margins.left = width + offset;
 					break;
 				case AxisPositions.RIGHT:
-					margins.right = width;
+					margins.right = width + offset;
 					break;
 			}
 		});
 
 		// If the new margins are different than the existing ones
 		const isNotEqual = Object.keys(margins).some(marginKey => {
-			const marginVal = margins[marginKey];
-			return this.margins[marginKey] !== marginVal;
+			return this.margins[marginKey] !== margins[marginKey];
 		});
 
 		if (isNotEqual) {
@@ -122,24 +127,4 @@ export class TwoDimensionalAxes extends Component {
 			this.render(true);
 		}
 	}
-
-	// // Pass on model to children as well
-	// setModel(newObj) {
-	// 	super.setModel(newObj);
-
-	// 	Object.keys(this.children).forEach(childKey => {
-	// 		const child = this.children[childKey];
-	// 		child.setModel(newObj);
-	// 	});
-	// }
-
-	// // Pass on essentials to children as well
-	// setServices(newObj) {
-	// 	super.setServices(newObj);
-
-	// 	Object.keys(this.children).forEach(childKey => {
-	// 		const child = this.children[childKey];
-	// 		child.setServices(newObj);
-	// 	});
-	// }
 }

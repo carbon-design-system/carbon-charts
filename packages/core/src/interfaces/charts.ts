@@ -1,15 +1,11 @@
-import { ChartType } from "./enums";
 import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
-import { AxisTooltipOptions, BarTooltipOptions } from "./components";
+import { AxisTooltipOptions, BarTooltipOptions, BarOptions, StackedBarOptions } from "./components";
+import { ChartTheme } from "./enums";
 
 /**
  * Base chart options common to any chart
  */
 export interface BaseChartOptions {
-	/**
-	 * Internal property to track what type of chart should be instantiated
-	 */
-	type?: ChartType;
 	/**
 	 * boolean to enable accessibility mode
 	 */
@@ -25,11 +21,15 @@ export interface BaseChartOptions {
 	/**
 	 * Optionally specify a width for the chart
 	 */
-	width?: number;
+	width?: number | string;
 	/**
 	 * Optionally specify a height for the chart
 	 */
-	height?: number;
+	height?: number | string;
+	/**
+	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
+	 */
+	theme?: ChartTheme;
 	/**
 	 * tooltip configuration
 	 */
@@ -46,6 +46,15 @@ export interface BaseChartOptions {
 	 * Optional function to generate the stroke color based on datasetLabel, label, and/or value
 	 */
 	getStrokeColor?: (datasetLabel: any, label?: any, value?: any) => string;
+	/**
+	 * stylesheet options
+	 */
+	style?: {
+		/**
+		 * optional prefixing string for css classes (defaults to 'cc')
+		 */
+		prefix?: String;
+	};
 }
 
 /**
@@ -68,11 +77,15 @@ export interface ZoomableChartOptions extends BaseChartOptions {
  * options specific to bar charts
  */
 export interface BarChartOptions extends AxisChartOptions {
-	bars?: {
-		width?: number;
-		maxWidth?: number;
-	};
+	bars?: BarOptions;
 	tooltip?: BarTooltipOptions;
+}
+
+/**
+ * options specific to stacked bar charts
+ */
+export interface StackedBarChartOptions extends BarChartOptions {
+	bars?: StackedBarOptions;
 }
 
 /**

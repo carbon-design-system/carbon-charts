@@ -7,53 +7,56 @@ import { TooltipPosition, TooltipTypes } from "./../../interfaces/enums";
 // Carbon position service
 import Position, { PLACEMENTS } from "@carbon/utils-position";
 
+// import the settings for the css prefix
+import settings from "carbon-components/src/globals/js/settings";
+
 // D3 Imports
 import { mouse, select } from "d3-selection";
 
 export class TooltipBar extends Tooltip {
-
 	init() {
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
-		this.tooltip = DOMUtils.appendOrSelect(holder, "div.tooltip.chart-tooltip.cc-tooltip");
+		const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
+		this.tooltip = DOMUtils.appendOrSelect(holder, `div.${settings.prefix}--${chartprefix}--tooltip`);
 
 		// Apply html content to the tooltip
 		const tooltipTextContainer = DOMUtils.appendOrSelect(this.tooltip, "div.content-box");
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this.services.events.getDocumentFragment().addEventListener("show-tooltip", e => {
+		this.services.events.addEventListener("show-tooltip", e => {
 			// check the type of tooltip and that it is enabled
 			if ((e.detail.type === TooltipTypes.DATAPOINT && Tools.getProperty(this.model.getOptions(), "tooltip", "datapoint", "enabled"))
 				|| (e.detail.type === TooltipTypes.GRIDLINE && Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) ) {
 
 				const hoveredElement = e.detail.hoveredElement.node();
 
-				// if there is a provided tooltip HTML function
-				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
-					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement));
+				let defaultHTML;
+				if (e.detail.multidata) {
+					// multi tooltip
+					defaultHTML = this.getMultilineTooltipHTML(e.detail.multidata);
 				} else {
-					if (e.detail.multidata) {
-						// multi tooltip
-						tooltipTextContainer.html(this.getMultiTooltipHTML(e.detail.multidata));
-						// Position the tooltip
-						this.positionTooltip();
-					} else {
-						const data = e.detail.hoveredElement.datum();
-						tooltipTextContainer.html(this.getTooltipHTML(data));
-
-						const position = this.getTooltipPosition(hoveredElement);
-
-						// Position the tooltip relative to the bars
-						this.positionTooltip(position);
-					}
+					defaultHTML = this.getTooltipHTML(e.detail.hoveredElement.datum());
 				}
+
+				// if there is a provided tooltip HTML function call it and pass the defaultHTML
+				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
+					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement, defaultHTML));
+				} else {
+					// default tooltip
+					tooltipTextContainer.html(defaultHTML);
+				}
+
+				const position = this.getTooltipPosition(hoveredElement);
+				// Position the tooltip relative to the bars
+				this.positionTooltip(e.detail.multidata ? undefined : position );
 				// Fade in
 				this.tooltip.classed("hidden", false);
 			}
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
-		this.services.events.getDocumentFragment().addEventListener("hide-tooltip", e => {
+		this.services.events.addEventListener("hide-tooltip", () => {
 			this.tooltip.classed("hidden", true);
 		});
 	}
@@ -75,14 +78,16 @@ export class TooltipBar extends Tooltip {
 			// negative bars
 			const tooltipPos = {
 				left: (barPosition.left - holderPosition.left) + barPosition.width / 2,
-				top: (barPosition.bottom - holderPosition.top) + verticalOffset };
+				top: (barPosition.bottom - holderPosition.top) + verticalOffset
+			};
 
 			return {placement: TooltipPosition.BOTTOM, position: tooltipPos};
 		} else {
 			// positive bars
 			const tooltipPos = {
 				left: (barPosition.left - holderPosition.left) + barPosition.width / 2,
-				top: (barPosition.top - holderPosition.top) - verticalOffset };
+				top: (barPosition.top - holderPosition.top) - verticalOffset
+			};
 
 			return {placement: TooltipPosition.TOP, position: tooltipPos};
 		}
@@ -103,31 +108,41 @@ export class TooltipBar extends Tooltip {
 	 * Multip tooltips for bar charts include totals for each stack
 	 * @param data
 	 */
-	getMultiTooltipHTML(data: any) {
+	getMultilineTooltipHTML(data: any) {
 		const points = data;
-		let total = 0;
 
 		points.reverse();
 
-		// get the total for the tooltip
-		points.forEach(item => total += item.value);
+		// get the total for the stacked tooltip
+		let total = points.reduce((sum, item) => sum + item.value, 0);
 
-		let listHTML = "<ul class='multi-tooltip'>";
+		// format the total value
+		total = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
+		this.model.getOptions().tooltip.valueFormatter(total) : total.toLocaleString("en");
 
-		points.forEach(datapoint => {
-			const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-			this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
+		return  "<ul class='multi-tooltip'>" +
+			points.map(datapoint => {
+				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
+				this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
 
-			const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
+				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
 
-			listHTML += `<li><div class="datapoint-tooltip">
-				<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
-				<p class="label">${datapoint.datasetLabel}</p>
-				<p class="value">${formattedValue}</p>
-				</div></li>`;
-		});
-
-		return listHTML + `<li><div class='total-val'><p class='label'>Total</p><p class='value'>${total}</p></div></li></ul>` ;
+				return `
+				<li>
+					<div class="datapoint-tooltip">
+						<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
+						<p class="label">${datapoint.datasetLabel}</p>
+						<p class="value">${formattedValue}</p>
+					</div>
+				</li>`;
+			}).join("") +
+				`<li>
+					<div class='total-val'>
+						<p class='label'>Total</p>
+						<p class='value'>${total}</p>
+					</div>
+				</li>
+			</ul>`;
 	}
 
 	positionTooltip(positionOverride?: any) {

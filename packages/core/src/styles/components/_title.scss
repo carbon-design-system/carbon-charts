@@ -1,0 +1,8 @@
+@import "./../vendor/@carbon/type/scss/type";
+
+.#{$prefix}--#{$charts-prefix}--title text.title {
+	fill: $text-01;
+	font-size: 16px;
+	font-family: carbon--font-family("sans");
+	font-weight: carbon--font-weight("semibold");
+}

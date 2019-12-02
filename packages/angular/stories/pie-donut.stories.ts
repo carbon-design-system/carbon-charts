@@ -13,12 +13,13 @@ import { addWidthAndHeight } from "./commons";
 
 const pieStories = storiesOf("Pie", module);
 pieStories.add(pieOptions.title, () => ({
-	template: `<n-pie-chart
-	class="n-chart"
-	[data]="data"
-	[options]="options"
-	#pieChart>
-</n-pie-chart>`,
+	template: `
+		<ibm-pie-chart
+			class="n-chart"
+			[data]="data"
+			[options]="options"
+			#pieChart>
+		</ibm-pie-chart>`,
 	moduleMetadata: {
 		imports: [ChartsModule]
 	},
@@ -30,12 +31,13 @@ pieStories.add(pieOptions.title, () => ({
 
 const donutStories = storiesOf("Donut", module);
 donutStories.add(donutOptions.title, () => ({
-	template: `<n-donut-chart
-	class="n-chart"
-	[data]="data"
-	[options]="options"
-	#donutChart>
-</n-donut-chart>`,
+	template: `
+		<ibm-donut-chart
+			class="n-chart"
+			[data]="data"
+			[options]="options"
+			#donutChart>
+		</ibm-donut-chart>`,
 	moduleMetadata: {
 		imports: [ChartsModule]
 	},

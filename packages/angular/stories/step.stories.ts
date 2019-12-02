@@ -12,12 +12,12 @@ import {
 import { addWidthAndHeight } from "./commons";
 
 const template = `
-<n-line-chart
+<ibm-line-chart
 	class="n-chart"
 	[data]="data"
 	[options]="options"
 	#lineChart>
-</n-line-chart>
+</ibm-line-chart>
 `;
 
 const stories = storiesOf("Step", module);

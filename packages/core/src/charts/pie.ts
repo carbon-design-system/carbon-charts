@@ -18,7 +18,7 @@ import {
 } from "../components/index";
 
 export class PieChart extends Chart {
-	model = new PieChartModel();
+	model = new PieChartModel(this.services);
 
 	// TODO - Optimize the use of "extending"
 	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>, extending = false) {

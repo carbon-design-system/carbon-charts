@@ -1,9 +1,14 @@
 // Internal Imports
 import { ChartModel } from "../model";
 import { DOMUtils } from "../services";
+import { Tools } from "../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
+
+// import the settings for the css prefix
+import settings from "carbon-components/src/globals/js/settings";
+
 
 export class Component {
 	public type: string;
@@ -60,10 +65,11 @@ export class Component {
 		}
 
 		if (this.type) {
-			this.parent.classed(`cc-${this.type}`, true);
+			const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
+			this.parent.classed(`${settings.prefix}--${chartprefix}--${this.type}`, true);
 
 			if (oldParent) {
-				oldParent.classed(`cc-${this.type}`, false);
+				oldParent.classed(`${settings.prefix}--${chartprefix}--${this.type}`, false);
 			}
 		}
 	}
@@ -74,7 +80,8 @@ export class Component {
 
 	getContainerSVG() {
 		if (this.type) {
-			return DOMUtils.appendOrSelect(this.parent, `g.cc-${this.type}`);
+			const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
+			return DOMUtils.appendOrSelect(this.parent, `g.${settings.prefix}--${chartprefix}--${this.type}`);
 		}
 
 		return this.parent;

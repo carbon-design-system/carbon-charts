@@ -8,7 +8,7 @@ export const data = {
 	datasets: [
 		{
 			label: "Dataset 1",
-			backgroundColors: [Charts.defaultColors[0]],
+			fillColors: [Charts.defaultColors[0]],
 			data: [
 				2000,
 				4200,
@@ -19,7 +19,7 @@ export const data = {
 		},
 		{
 			label: "Dataset 2",
-			backgroundColors: [Charts.defaultColors[1]],
+			fillColors: [Charts.defaultColors[1]],
 			data: [
 				0,
 				10000,
@@ -30,7 +30,7 @@ export const data = {
 		},
 		{
 			label: "Dataset 3",
-			backgroundColors: [Charts.defaultColors[2]],
+			fillColors: [Charts.defaultColors[2]],
 			data: [
 				0,
 				20000,
@@ -43,7 +43,6 @@ export const data = {
 };
 
 export const options = {
-	accessibility: false,
 	axes: {
 		bottom: {
 			title: "2018 Annual Sales Figures",
@@ -53,7 +52,7 @@ export const options = {
 		left: {
 			secondary: true
 		},
-		y: {
+		top: {
 			title: "Dollars (CAD)"
 		}
 	},

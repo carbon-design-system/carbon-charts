@@ -13,9 +13,9 @@ import { StackedBarChart } from "@carbon/charts";
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: "n-stacked-bar-chart",
+	selector: "ibm-stacked-bar-chart",
 	template: `
-		<div #nChart class="n-chart-container">
+		<div #nChart class="ibm-chart-container">
 		</div>
 	`
 })

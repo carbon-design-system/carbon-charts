@@ -11,9 +11,9 @@ export class Service {
 		this.init();
 	}
 
-	init() {
+	init() {}
 
-	}
+	update() {}
 
 	// Used to pass down information to the components
 	setModel(newObj) {

@@ -13,7 +13,7 @@ export class GroupedBar extends Bar {
 	groupScale: ScaleBand<any>;
 
 	init() {
-		const eventsFragment = this.services.events.getDocumentFragment();
+		const eventsFragment = this.services.events;
 
 		// Highlight correct circle on legend item hovers
 		eventsFragment.addEventListener("legend-item-onhover", this.handleLegendOnHover);
@@ -116,22 +116,16 @@ export class GroupedBar extends Bar {
 	}
 
 	// Highlight elements that match the hovered legend item
-	handleLegendOnHover = e => {
-		const { hoveredElement } = e.detail;
+	handleLegendOnHover = (event: CustomEvent)  => {
+		const { hoveredElement } = event.detail;
 
 		this.parent.selectAll("rect.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => {
-				if (d.datasetLabel !== hoveredElement.datum()["key"]) {
-					return 0.3;
-				}
-
-				return 1;
-			});
+			.attr("opacity", d => (d.datasetLabel !== hoveredElement.datum()["key"]) ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements
-	handleLegendMouseOut = e => {
+	handleLegendMouseOut = (event: CustomEvent)  => {
 		this.parent.selectAll("rect.bar")
 			.transition(this.services.transitions.getTransition("legend-mouseout-bar"))
 			.attr("opacity", 1);
@@ -160,9 +154,7 @@ export class GroupedBar extends Bar {
 					.attr("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement
-				});
+				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
 			});
 	}
 
@@ -174,7 +166,7 @@ export class GroupedBar extends Bar {
 			.on("mouseout", null);
 
 		// Remove legend listeners
-		const eventsFragment = this.services.events.getDocumentFragment();
+		const eventsFragment = this.services.events;
 		eventsFragment.removeEventListener("legend-item-onhover", this.handleLegendOnHover);
 		eventsFragment.removeEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
 	}

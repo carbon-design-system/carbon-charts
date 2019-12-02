@@ -10,7 +10,7 @@ export class SimpleBar extends Bar {
 	type = "simple-bar";
 
 	init() {
-		const eventsFragment = this.services.events.getDocumentFragment();
+		const eventsFragment = this.services.events;
 
 		// Highlight correct circle on legend item hovers
 		eventsFragment.addEventListener("legend-item-onhover", this.handleLegendOnHover);
@@ -20,9 +20,6 @@ export class SimpleBar extends Bar {
 	}
 
 	render(animate: boolean) {
-		// Chart options mixed with the internal configurations
-		const options = this.model.getOptions();
-
 		// Grab container SVG
 		const svg = this.getContainerSVG();
 
@@ -75,21 +72,15 @@ export class SimpleBar extends Bar {
 		this.addEventListeners();
 	}
 
-	handleLegendOnHover = e => {
-		const { hoveredElement } = e.detail;
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
 
 		this.parent.selectAll("rect.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-simple-bar"))
-			.attr("opacity", d => {
-				if (d.label !== hoveredElement.datum()["key"]) {
-					return 0.3;
-				}
-
-				return 1;
-			});
+			.attr("opacity", d => (d.label !== hoveredElement.datum()["key"]) ? 0.3 : 1);
 	}
 
-	handleLegendMouseOut = e => {
+	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent.selectAll("rect.bar")
 			.transition(this.services.transitions.getTransition("legend-mouseout-simple-bar"))
 			.attr("opacity", 1);
@@ -129,9 +120,7 @@ export class SimpleBar extends Bar {
 					.attr("fill", (d: any) => self.model.getFillScale()(d.label));
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement
-				});
+				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
 			});
 	}
 
@@ -143,7 +132,7 @@ export class SimpleBar extends Bar {
 			.on("mouseout", null);
 
 		// Remove legend listeners
-		const eventsFragment = this.services.events.getDocumentFragment();
+		const eventsFragment = this.services.events;
 		eventsFragment.removeEventListener("legend-item-onhover", this.handleLegendOnHover);
 		eventsFragment.removeEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
 	}
