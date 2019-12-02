@@ -77,7 +77,7 @@ export interface TooltipOptions {
 	};
 	title?: {
 		/**
-		 * vertical offset for title tooltip placement. < 0 will shift the tooltip above title, > 0 shifts vertically down
+		 * vertical offset for title tooltip placement. < 0 shifts the tooltip above title, > 0 shifts vertically down
 		 */
 		verticalOffset?: number
 		/**
