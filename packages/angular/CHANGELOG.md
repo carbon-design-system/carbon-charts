@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.17.1](https://github.com/IBM/carbon-charts/compare/v0.17.0...v0.17.1) (2019-11-29)
+
+
+### Bug Fixes
+
+* **core:** build optimizations ([fef77e5](https://github.com/IBM/carbon-charts/commit/fef77e5))
+
+
+
+
+
+# [0.17.0](https://github.com/IBM/carbon-charts/compare/v0.16.25...v0.17.0) (2019-11-29)
+
+
+### Features
+
+* **core:** date/time locale support + tick formatting ([bc02012](https://github.com/IBM/carbon-charts/commit/bc02012))
+
+
+
+
+
 ## [0.16.25](https://github.com/IBM/carbon-charts/compare/v0.16.24...v0.16.25) (2019-10-29)
 
 **Note:** Version bump only for package @carbon/charts-angular
