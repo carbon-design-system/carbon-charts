@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/IBM/carbon-charts/compare/v0.17.1...v0.18.0) (2019-12-02)
+
+
+### Bug Fixes
+
+* **bar:** fix lint errors ([0d04b04](https://github.com/IBM/carbon-charts/commit/0d04b04))
+* **tooltip:** rename defaultTooltip defaultHTML ([cf8f34e](https://github.com/IBM/carbon-charts/commit/cf8f34e))
+
+
+### Features
+
+* **bar:** pass default tooltip to customHTML tooltip ([b6f519b](https://github.com/IBM/carbon-charts/commit/b6f519b))
+* **tooltip:** for customHTML pass along the HTML tooltip ([7d1a026](https://github.com/IBM/carbon-charts/commit/7d1a026))
+
+
+
+
+
 ## [0.17.1](https://github.com/IBM/carbon-charts/compare/v0.17.0...v0.17.1) (2019-11-29)
 
 
