@@ -15,15 +15,31 @@ export class ZeroLine extends Component {
 			if (this.services.axes.getMainXAxis().scaleType === ScaleTypes.LABELS) {
 				return;
 			}
-			// Get x & y position of the line
-			const [y1, y2] = this.services.axes.getMainYAxis().scale.range();
-			const xPosition = +this.services.axes.getXValue(0) + 0.5;
+
 
 			const verticalLine = DOMUtils.appendOrSelect(svg, "line.domain");
+			let xPosition;
+			const [y1, y2] =  this.services.axes.getMainYAxis().scale.range();
+
+			// check if the line is existing already, otherwise we set an original position for it
+			if (!verticalLine.attr("x1")) {
+				// set the origin position to the lower bounds on the x axis scale
+				// so it doesn't transition from outside the chart axis
+				xPosition = this.services.axes.getMainXAxis().scale.range()[0];
+
+				verticalLine
+					.attr("y1", y1)
+					.attr("y2", y2)
+					.attr("x1", xPosition)
+					.attr("x2", xPosition);
+			}
+
+			// Get correct x position of the line (the zero value on the X scale)
+			xPosition = +this.services.axes.getXValue(0) + 0.5;
+
+			// update/transition the line into it's correct position
 			verticalLine
 				.transition(this.services.transitions.getTransition("zero-line-update", animate))
-				.attr("y1", y1)
-				.attr("y2", y2)
 				.attr("x1", xPosition)
 				.attr("x2", xPosition);
 		} else {
