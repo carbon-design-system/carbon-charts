@@ -412,7 +412,7 @@ var simpleBarTimeSeriesOptions = {
         },
         bottom: {
             scaleType: "time",
-            secondary: true,
+            secondary: true
         },
         locale: {
             time: turkishLocale
@@ -3303,23 +3303,25 @@ var TooltipBar = /** @class */ (function (_super) {
             if ((e.detail.type === _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__["TooltipTypes"].DATAPOINT && _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "datapoint", "enabled"))
                 || (e.detail.type === _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__["TooltipTypes"].GRIDLINE && _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "gridline", "enabled"))) {
                 var hoveredElement = e.detail.hoveredElement.node();
-                // if there is a provided tooltip HTML function
-                if (_tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "customHTML")) {
-                    tooltipTextContainer.html(_this.model.getOptions().tooltip.customHTML(hoveredElement));
-                }
-                else if (e.detail.multidata) {
+                var defaultHTML = void 0;
+                if (e.detail.multidata) {
                     // multi tooltip
-                    tooltipTextContainer.html(_this.getMultilineTooltipHTML(e.detail.multidata));
-                    // Position the tooltip
-                    _this.positionTooltip();
+                    defaultHTML = _this.getMultilineTooltipHTML(e.detail.multidata);
                 }
                 else {
-                    var data = e.detail.hoveredElement.datum();
-                    tooltipTextContainer.html(_this.getTooltipHTML(data));
-                    var position = _this.getTooltipPosition(hoveredElement);
-                    // Position the tooltip relative to the bars
-                    _this.positionTooltip(position);
+                    defaultHTML = _this.getTooltipHTML(e.detail.hoveredElement.datum());
                 }
+                // if there is a provided tooltip HTML function call it and pass the defaultHTML
+                if (_tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "customHTML")) {
+                    tooltipTextContainer.html(_this.model.getOptions().tooltip.customHTML(hoveredElement, defaultHTML));
+                }
+                else {
+                    // default tooltip
+                    tooltipTextContainer.html(defaultHTML);
+                }
+                var position = _this.getTooltipPosition(hoveredElement);
+                // Position the tooltip relative to the bars
+                _this.positionTooltip(e.detail.multidata ? undefined : position);
                 // Fade in
                 _this.tooltip.classed("hidden", false);
             }
@@ -3541,17 +3543,23 @@ var Tooltip = /** @class */ (function (_super) {
             if ((e.detail.type === _interfaces__WEBPACK_IMPORTED_MODULE_6__["TooltipTypes"].DATAPOINT && _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "datapoint", "enabled"))
                 || (e.detail.type === _interfaces__WEBPACK_IMPORTED_MODULE_6__["TooltipTypes"].GRIDLINE && _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "gridline", "enabled"))) {
                 var data = Object(d3_selection__WEBPACK_IMPORTED_MODULE_5__["select"])(d3_selection__WEBPACK_IMPORTED_MODULE_5__["event"].target).datum();
-                // if there is a provided tooltip HTML function
-                if (_tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "customHTML")) {
-                    tooltipTextContainer.html(_this.model.getOptions().tooltip.customHTML(data));
-                }
-                else if (e.detail.multidata) {
+                // Generate default tooltip
+                var defaultHTML = void 0;
+                if (e.detail.multidata) {
                     // multi tooltip
                     data = e.detail.multidata;
-                    tooltipTextContainer.html(_this.getMultilineTooltipHTML(data));
+                    defaultHTML = _this.getMultilineTooltipHTML(data);
                 }
                 else {
-                    tooltipTextContainer.html(_this.getTooltipHTML(data));
+                    defaultHTML = _this.getTooltipHTML(data);
+                }
+                // if there is a provided tooltip HTML function call it
+                if (_tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "customHTML")) {
+                    tooltipTextContainer.html(_this.model.getOptions().tooltip.customHTML(data, defaultHTML));
+                }
+                else {
+                    // Use default tooltip
+                    tooltipTextContainer.html(defaultHTML);
                 }
                 // Position the tooltip
                 _this.positionTooltip();
