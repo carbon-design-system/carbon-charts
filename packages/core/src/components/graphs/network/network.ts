@@ -17,7 +17,7 @@ export class Network extends Component {
 			data: this.nodes,
 			accessor: d => d,
 			height: 64,
-			width: 220,
+			width: 208,
 		});
 	}
 

@@ -9,8 +9,7 @@
 	}
 
 	.#{$prefix}--graph-card__background {
-		fill: $ui-background;
-		stroke: $ui_03;
+		fill: $ui_01;
 	}
 
 	.#{$prefix}--graph-card__button:focus {
@@ -18,11 +17,11 @@
 	}
 
 	.#{$prefix}--graph-card__icon-background {
-		fill: $ui_04;
+		fill: $ui_01;
 	}
 
 	.#{$prefix}--graph-card__icon-path {
-		fill: $icon_03;
+		fill: $icon-01;
 	}
 
 	.#{$prefix}--graph-card__heading {
