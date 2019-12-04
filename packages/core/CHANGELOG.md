@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.1](https://github.com/IBM/carbon-charts/compare/v0.20.0...v0.20.1) (2019-12-04)
+
+
+### Bug Fixes
+
+* **core:** loop also through non-display data to assign colors to datasets ([#394](https://github.com/IBM/carbon-charts/issues/394)) ([5ba8952](https://github.com/IBM/carbon-charts/commit/5ba8952))
+
+
+
+
+
 # [0.20.0](https://github.com/IBM/carbon-charts/compare/v0.19.0...v0.20.0) (2019-12-02)
 
 
