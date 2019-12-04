@@ -19,6 +19,7 @@ import {
 	ChartTheme,
 	LegendPositions,
 	StackedBarOptions,
+	MeterChartOptions
 } from "./interfaces/index";
 
 /*
@@ -219,6 +220,12 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	}
 } as DonutChartOptions);
 
+const meterChart: MeterChartOptions = Tools.merge({}, chart, {
+	meter: {
+		barHeight: 30
+	}
+});
+
 export const options = {
 	chart,
 	axisChart,
@@ -228,7 +235,8 @@ export const options = {
 	lineChart,
 	scatterChart,
 	pieChart,
-	donutChart
+	donutChart,
+	meterChart
 };
 
 /**

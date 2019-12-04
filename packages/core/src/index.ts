@@ -6,6 +6,7 @@ import {
 	ScatterChart,
 	PieChart,
 	DonutChart,
+	MeterChart
 } from "./charts/index";
 
 // Configs & interfaces
@@ -27,5 +28,6 @@ export {
 	LineChart,
 	ScatterChart,
 	PieChart,
-	DonutChart
+	DonutChart,
+	MeterChart
 };
