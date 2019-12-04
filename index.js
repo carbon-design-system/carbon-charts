@@ -276,8 +276,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stackedBarOptions", function() { return stackedBarOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stackedBarTimeSeriesData", function() { return stackedBarTimeSeriesData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stackedBarTimeSeriesOptions", function() { return stackedBarTimeSeriesOptions; });
-/* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./demo/demo-data/colors.ts");
-
 // Demo turkish locale for simple bar time-series
 var turkishLocale = __webpack_require__(/*! d3-time-format/locale/tr-TR.json */ "../../node_modules/d3-time-format/locale/tr-TR.json");
 var groupedBarData = {
@@ -285,7 +283,6 @@ var groupedBarData = {
     datasets: [
         {
             label: "Dataset 1",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
             data: [
                 65000,
                 -29123,
@@ -296,7 +293,6 @@ var groupedBarData = {
         },
         {
             label: "Dataset 2",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
             data: [
                 32432,
                 -21312,
@@ -307,7 +303,6 @@ var groupedBarData = {
         },
         {
             label: "Dataset 3",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
             data: [
                 -12312,
                 23232,
@@ -318,7 +313,6 @@ var groupedBarData = {
         },
         {
             label: "Dataset 4",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
             data: [
                 -32423,
                 21313,
@@ -350,7 +344,6 @@ var simpleBarData = {
     datasets: [
         {
             label: "Dataset 1",
-            fillColors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
             data: [
                 65000,
                 29123,
@@ -378,7 +371,6 @@ var simpleBarTimeSeriesData = {
     datasets: [
         {
             label: "Dataset 1",
-            fillColors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
             data: [
                 {
                     date: new Date(2019, 0, 1),
@@ -425,7 +417,6 @@ var stackedBarData = {
     datasets: [
         {
             label: "Dataset 1",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
             data: [
                 65000,
                 29123,
@@ -436,7 +427,6 @@ var stackedBarData = {
         },
         {
             label: "Dataset 2",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
             data: [
                 32432,
                 21312,
@@ -447,7 +437,6 @@ var stackedBarData = {
         },
         {
             label: "Dataset 3",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
             data: [
                 12312,
                 23232,
@@ -458,7 +447,6 @@ var stackedBarData = {
         },
         {
             label: "Dataset 4",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
             data: [
                 32423,
                 21313,
@@ -487,7 +475,6 @@ var stackedBarTimeSeriesData = {
     datasets: [
         {
             label: "Dataset 1",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
             data: [
                 {
                     date: new Date(2019, 0, 1),
@@ -513,7 +500,6 @@ var stackedBarTimeSeriesData = {
         },
         {
             label: "Dataset 2",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
             data: [
                 {
                     date: new Date(2019, 0, 3),
@@ -539,7 +525,6 @@ var stackedBarTimeSeriesData = {
         },
         {
             label: "Dataset 3",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
             data: [
                 {
                     date: new Date(2019, 0, 1),
@@ -565,7 +550,6 @@ var stackedBarTimeSeriesData = {
         },
         {
             label: "Dataset 4",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
             data: [
                 {
                     date: new Date(2019, 0, 2),
@@ -727,16 +711,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterOptions", function() { return scatterOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesData", function() { return scatterTimeSeriesData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesOptions", function() { return scatterTimeSeriesOptions; });
-/* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./demo/demo-data/colors.ts");
-/* harmony import */ var _src_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../src/tools */ "./src/tools.ts");
-
+/* harmony import */ var _src_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../src/tools */ "./src/tools.ts");
 
 var lineTimeSeriesData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
     datasets: [
         {
             label: "Dataset 1",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
             data: [
                 {
                     date: new Date(2019, 0, 1),
@@ -762,7 +743,6 @@ var lineTimeSeriesData = {
         },
         {
             label: "Dataset 2",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
             data: [
                 {
                     date: new Date(2019, 0, 2),
@@ -788,7 +768,6 @@ var lineTimeSeriesData = {
         },
         {
             label: "Dataset 3",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
             data: [
                 {
                     date: new Date(2019, 0, 1),
@@ -814,7 +793,6 @@ var lineTimeSeriesData = {
         },
         {
             label: "Dataset 4",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
             data: [
                 {
                     date: new Date(2019, 0, 2),
@@ -858,7 +836,6 @@ var lineData = {
     datasets: [
         {
             label: "Dataset 1",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
             data: [
                 32100,
                 23500,
@@ -869,7 +846,6 @@ var lineData = {
         },
         {
             label: "Dataset 2",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
             data: [
                 34200,
                 53200,
@@ -880,7 +856,6 @@ var lineData = {
         },
         {
             label: "Dataset 3 long name",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
             data: [
                 41200,
                 23400,
@@ -891,7 +866,6 @@ var lineData = {
         },
         {
             label: "Dataset 4 long name",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
             data: [
                 22000,
                 1200,
@@ -902,7 +876,6 @@ var lineData = {
         },
         {
             label: "Dataset 5 long name",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][4]],
             data: [
                 2412,
                 30000,
@@ -913,7 +886,6 @@ var lineData = {
         },
         {
             label: "Dataset 6 long name",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][5]],
             data: [
                 0,
                 20000,
@@ -938,12 +910,12 @@ var lineOptions = {
     }
 };
 // Step
-var stepOptions = _src_tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].merge({}, lineOptions, {
+var stepOptions = _src_tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, lineOptions, {
     title: "Step (discrete)",
     curve: "curveStepAfter"
 });
 var stepData = lineData;
-var stepTimeSeriesOptions = _src_tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].merge({}, lineTimeSeriesOptions, {
+var stepTimeSeriesOptions = _src_tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, lineTimeSeriesOptions, {
     title: "Step (time series)",
     curve: "curveStepAfter"
 });
@@ -954,7 +926,6 @@ var scatterData = {
     datasets: [
         {
             label: "Dataset 1",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][0]],
             data: [
                 32100,
                 23500,
@@ -965,7 +936,6 @@ var scatterData = {
         },
         {
             label: "Dataset 2",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][1]],
             data: [
                 34200,
                 53200,
@@ -976,7 +946,6 @@ var scatterData = {
         },
         {
             label: "Dataset 3 long name",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][2]],
             data: [
                 41200,
                 23400,
@@ -987,7 +956,6 @@ var scatterData = {
         },
         {
             label: "Dataset 4 long name",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][3]],
             data: [
                 22000,
                 1200,
@@ -998,7 +966,6 @@ var scatterData = {
         },
         {
             label: "Dataset 5 long name",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][4]],
             data: [
                 2412,
                 30000,
@@ -1009,7 +976,6 @@ var scatterData = {
         },
         {
             label: "Dataset 6 long name",
-            fillColors: [_colors__WEBPACK_IMPORTED_MODULE_0__["colors"][5]],
             data: [
                 0,
                 20000,
@@ -1064,15 +1030,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pieOptions", function() { return pieOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "donutData", function() { return donutData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "donutOptions", function() { return donutOptions; });
-/* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./demo/demo-data/colors.ts");
-
 var pieData = {
     labels: ["2V2N 9KYPM version 1", "L22I P66EP L22I P66EP L22I P66EP", "JQAI 2M4L1", "J9DZ F37AP",
         "YEL48 Q6XK YEL48", "P66EP L22I L22I"],
     datasets: [
         {
             label: "Dataset 1",
-            fillColors: _colors__WEBPACK_IMPORTED_MODULE_0__["colors"],
             data: [75000, 65000, 10000, 25000, 1200, 20000]
         }
     ]
@@ -2133,10 +2096,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
-/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-scale */ "./node_modules/d3-scale/src/index.js");
-/* harmony import */ var d3_axis__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-axis */ "../../node_modules/d3-axis/src/index.js");
-/* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! d3-array */ "../../node_modules/d3-array/src/index.js");
-/* harmony import */ var d3_time_format__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! d3-time-format */ "../../node_modules/d3-time-format/src/index.js");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../configuration */ "./src/configuration.ts");
+/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-scale */ "./node_modules/d3-scale/src/index.js");
+/* harmony import */ var d3_axis__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! d3-axis */ "../../node_modules/d3-axis/src/index.js");
+/* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! d3-array */ "../../node_modules/d3-array/src/index.js");
+/* harmony import */ var d3_time_format__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! d3-time-format */ "../../node_modules/d3-time-format/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -2151,6 +2115,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
     };
 })();
 // Internal Imports
+
 
 
 
@@ -2178,16 +2143,16 @@ var Axis = /** @class */ (function (_super) {
         this.scaleType = (axisOptions && axisOptions.scaleType) ? axisOptions.scaleType : _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LINEAR;
         var scaleFunction;
         if (this.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
-            scaleFunction = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleTime"])();
+            scaleFunction = Object(d3_scale__WEBPACK_IMPORTED_MODULE_5__["scaleTime"])();
         }
         else if (this.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LOG) {
-            scaleFunction = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleLog"])().base(axisOptions.base || 10);
+            scaleFunction = Object(d3_scale__WEBPACK_IMPORTED_MODULE_5__["scaleLog"])().base(axisOptions.base || 10);
         }
         else if (this.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LABELS) {
-            scaleFunction = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleBand"])();
+            scaleFunction = Object(d3_scale__WEBPACK_IMPORTED_MODULE_5__["scaleBand"])();
         }
         else {
-            scaleFunction = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleLinear"])();
+            scaleFunction = Object(d3_scale__WEBPACK_IMPORTED_MODULE_5__["scaleLinear"])();
         }
         // If scale doesn't exist in the model, store it
         if (!this.model.get(position)) {
@@ -2228,13 +2193,13 @@ var Axis = /** @class */ (function (_super) {
         var domain;
         // If the scale is stacked
         if (axisOptions.stacked) {
-            domain = Object(d3_array__WEBPACK_IMPORTED_MODULE_6__["extent"])(labels.reduce(function (m, label, i) {
+            domain = Object(d3_array__WEBPACK_IMPORTED_MODULE_7__["extent"])(labels.reduce(function (m, label, i) {
                 var correspondingValues = datasets.map(function (dataset) {
                     return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
                 });
                 var totalValue = correspondingValues.reduce(function (a, b) { return a + b; }, 0);
                 // Save both the total value and the minimum
-                return m.concat(totalValue, Object(d3_array__WEBPACK_IMPORTED_MODULE_6__["min"])(correspondingValues));
+                return m.concat(totalValue, Object(d3_array__WEBPACK_IMPORTED_MODULE_7__["min"])(correspondingValues));
             }, [])
                 // Currently stack layouts in the library
                 // Only support positive values
@@ -2256,7 +2221,7 @@ var Axis = /** @class */ (function (_super) {
             if (axisOptions.scaleType !== _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
                 allDataValues = allDataValues.concat(0);
             }
-            domain = Object(d3_array__WEBPACK_IMPORTED_MODULE_6__["extent"])(allDataValues);
+            domain = Object(d3_array__WEBPACK_IMPORTED_MODULE_7__["extent"])(allDataValues);
         }
         if (axisOptions.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
             if (_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "timeScale", "addSpaceOnEdges")) {
@@ -2302,23 +2267,23 @@ var Axis = /** @class */ (function (_super) {
         var axisFunction;
         switch (axisPosition) {
             case _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].LEFT:
-                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_5__["axisLeft"];
+                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_6__["axisLeft"];
                 break;
             case _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].BOTTOM:
-                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_5__["axisBottom"];
+                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_6__["axisBottom"];
                 break;
             case _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].RIGHT:
-                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_5__["axisRight"];
+                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_6__["axisRight"];
                 break;
             case _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].TOP:
-                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_5__["axisTop"];
+                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_6__["axisTop"];
                 break;
         }
         // Set the date/time locale
         if (this.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
             var timeLocale = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "locale", "time");
             if (timeLocale) {
-                Object(d3_time_format__WEBPACK_IMPORTED_MODULE_7__["timeFormatDefaultLocale"])(timeLocale);
+                Object(d3_time_format__WEBPACK_IMPORTED_MODULE_8__["timeFormatDefaultLocale"])(timeLocale);
             }
         }
         // Initialize axis object
@@ -2326,7 +2291,7 @@ var Axis = /** @class */ (function (_super) {
             .tickSizeOuter(0)
             .tickFormat(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(axisOptions, "ticks", "formatter"));
         if (scale.ticks) {
-            var numberOfTicks = 7;
+            var numberOfTicks = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(axisOptions, "ticks", "number") || _configuration__WEBPACK_IMPORTED_MODULE_4__["axis"].ticks.number;
             axis.ticks(numberOfTicks);
             if (this.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
                 var tickValues = scale.ticks(numberOfTicks).concat(scale.domain())
@@ -2345,6 +2310,11 @@ var Axis = /** @class */ (function (_super) {
         var container = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(svg, "g.axis." + axisPosition);
         var axisRefExists = !container.select("g.ticks").empty();
         var axisRef = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(container, "g.ticks");
+        // We draw the invisible axis because of the async nature of d3 transitions
+        // To be able to tell the final width & height of the axis when initiaing the transition
+        // The invisible axis is updated instantly and without a transition
+        var invisibleAxisRef = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(container, "g.ticks.invisible")
+            .style("opacity", "0");
         // Position and transition the axis
         switch (axisPosition) {
             case _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].LEFT:
@@ -2398,29 +2368,33 @@ var Axis = /** @class */ (function (_super) {
             axisRef = axisRef.transition(this.services.transitions.getTransition("axis-update"))
                 .call(axis);
         }
+        invisibleAxisRef.call(axis);
         if (axisPosition === _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].BOTTOM || axisPosition === _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].TOP) {
+            var rotateTicks = false;
+            // If we're dealing with a discrete scale type
+            // We're able to grab the spacing between the ticks
             if (scale.step) {
-                var textNodes = axisRef.selectAll("g.tick text").nodes();
+                var textNodes = invisibleAxisRef.selectAll("g.tick text").nodes();
                 // If any ticks are any larger than the scale step size
-                if (textNodes.some(function (textNode) { return _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].getSVGElementSize(textNode, { useBBox: true }).width >= scale.step(); })) {
-                    axisRef.selectAll("g.tick text")
-                        .attr("transform", "rotate(45)")
-                        .style("text-anchor", axisPosition === _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].TOP ? "end" : "start");
-                    return;
-                }
+                rotateTicks = textNodes.some(function (textNode) { return _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].getSVGElementSize(textNode, { useBBox: true }).width >= scale.step(); });
             }
             else {
+                // When dealing with a continuous scale
+                // We need to calculate an estimated size of the ticks
+                var minTickSize = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(axisOptions, "ticks", "rotateIfSmallerThan") || _configuration__WEBPACK_IMPORTED_MODULE_4__["axis"].ticks.rotateIfSmallerThan;
                 var estimatedTickSize = width / scale.ticks().length / 2;
-                if (estimatedTickSize < 30) {
-                    axisRef.selectAll("g.tick text")
-                        .attr("transform", "rotate(45)")
-                        .style("text-anchor", axisPosition === _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].TOP ? "end" : "start");
-                    return;
-                }
+                rotateTicks = estimatedTickSize < minTickSize;
             }
-            axisRef.selectAll("g.tick text")
-                .attr("transform", null)
-                .style("text-anchor", null);
+            if (rotateTicks) {
+                container.selectAll("g.ticks g.tick text")
+                    .attr("transform", "rotate(45)")
+                    .style("text-anchor", axisPosition === _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].TOP ? "end" : "start");
+            }
+            else {
+                container.selectAll("g.ticks g.tick text")
+                    .attr("transform", null)
+                    .style("text-anchor", null);
+            }
         }
     };
     Axis.prototype.getValueFromScale = function (datum, index) {
@@ -2434,10 +2408,10 @@ var Axis = /** @class */ (function (_super) {
         }
         return this.scale(value);
     };
-    Axis.prototype.getAxisRef = function () {
+    Axis.prototype.getInvisibleAxisRef = function () {
         var axisPosition = this.configs.position;
         return this.getContainerSVG()
-            .select("g.axis." + axisPosition + " g.ticks");
+            .select("g.axis." + axisPosition + " g.ticks.invisible");
     };
     Axis.prototype.getTitleRef = function () {
         var axisPosition = this.configs.position;
@@ -2838,7 +2812,13 @@ var TwoDimensionalAxes = /** @class */ (function (_super) {
         Object.keys(this.children).forEach(function (childKey) {
             var child = _this.children[childKey];
             var axisPosition = child.configs.position;
-            var _a = _services__WEBPACK_IMPORTED_MODULE_4__["DOMUtils"].getSVGElementSize(child.getAxisRef(), { useBBox: true }), width = _a.width, height = _a.height;
+            // Grab the invisibly rendered axis' width & height, and set margins
+            // Based off of that
+            // We draw the invisible axis because of the async nature of d3 transitions
+            // To be able to tell the final width & height of the axis when initiaing the transition
+            // The invisible axis is updated instantly and without a transition
+            var invisibleAxisRef = child.getInvisibleAxisRef();
+            var _a = _services__WEBPACK_IMPORTED_MODULE_4__["DOMUtils"].getSVGElementSize(invisibleAxisRef, { useBBox: true }), width = _a.width, height = _a.height;
             var offset;
             if (child.getTitleRef().empty()) {
                 offset = 0;
@@ -3851,7 +3831,7 @@ var GroupedBar = /** @class */ (function (_super) {
         return datasets.map(function (dataset) { return ({
             label: d,
             datasetLabel: dataset.label,
-            value: dataset.data[index]
+            value: dataset.data[index].value ? dataset.data[index].value : dataset.data[index]
         }); });
     };
     GroupedBar.prototype.addEventListeners = function () {
@@ -4607,7 +4587,7 @@ var Pie = /** @class */ (function (_super) {
         var dataset = displayData.datasets[0];
         return dataset.data.map(function (datum, i) { return ({
             label: displayData.labels[i],
-            value: datum
+            value: datum.value ? datum.value : datum
         }); });
     };
     Pie.prototype.getInnerRadius = function () {
@@ -5291,7 +5271,7 @@ var LayoutComponent = /** @class */ (function (_super) {
 /*!******************************!*\
   !*** ./src/configuration.ts ***!
   \******************************/
-/*! exports provided: legend, grid, baseTooltip, axisChartTooltip, barChartTooltip, axes, timeScale, options, lines, transitions */
+/*! exports provided: legend, grid, baseTooltip, axisChartTooltip, barChartTooltip, options, lines, transitions, axis */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5301,11 +5281,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "baseTooltip", function() { return baseTooltip; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "axisChartTooltip", function() { return axisChartTooltip; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "barChartTooltip", function() { return barChartTooltip; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "axes", function() { return axes; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "timeScale", function() { return timeScale; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "options", function() { return options; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lines", function() { return lines; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transitions", function() { return transitions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "axis", function() { return axis; });
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
 /* harmony import */ var _interfaces_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interfaces/index */ "./src/interfaces/index.ts");
 
@@ -5524,6 +5503,12 @@ var transitions = {
     },
     graph_element_mouseout_fill_update: {
         duration: 100
+    }
+};
+var axis = {
+    ticks: {
+        number: 7,
+        rotateIfSmallerThan: 30
     }
 };
 
@@ -6131,7 +6116,7 @@ var ChartModel = /** @class */ (function () {
         }
         else {
             var colors_1 = _services_colorPalettes__WEBPACK_IMPORTED_MODULE_2__["DEFAULT"];
-            this.getDisplayData().datasets.forEach(function (dataset, i) {
+            this.getData().datasets.forEach(function (dataset, i) {
                 _this.colorScale[dataset.label] = Object(d3_scale__WEBPACK_IMPORTED_MODULE_3__["scaleOrdinal"])().range([colors_1[i]]).domain(_this.allDataLabels);
             });
         }
