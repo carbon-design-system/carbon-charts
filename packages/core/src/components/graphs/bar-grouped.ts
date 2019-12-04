@@ -111,7 +111,7 @@ export class GroupedBar extends Bar {
 		return datasets.map(dataset => ({
 			label: d,
 			datasetLabel: dataset.label,
-			value: dataset.data[index]
+			value: dataset.data[index].value ? dataset.data[index].value : dataset.data[index]
 		}));
 	}
 
