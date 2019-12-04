@@ -11,6 +11,7 @@ import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-sc
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { min, extent } from "d3-array";
 import { timeFormatDefaultLocale } from "d3-time-format";
+const englishLocale = require("d3-time-format/locale/en-US.json");
 
 export class Axis extends Component {
 	type = "axes";
@@ -196,6 +197,8 @@ export class Axis extends Component {
 			const timeLocale = Tools.getProperty(options, "locale", "time");
 			if (timeLocale) {
 				timeFormatDefaultLocale(timeLocale);
+			} else {
+				timeFormatDefaultLocale(englishLocale);
 			}
 		}
 
