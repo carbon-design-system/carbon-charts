@@ -43,7 +43,7 @@ export class Pie extends Component {
 		const dataset = displayData.datasets[0];
 		return dataset.data.map((datum, i) => ({
 			label: displayData.labels[i],
-			value: datum
+			value: datum.value ? datum.value : datum
 		}));
 	}
 
