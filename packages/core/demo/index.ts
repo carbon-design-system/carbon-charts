@@ -2,6 +2,7 @@ import {
 	SimpleBarChart,
 	GroupedBarChart,
 	StackedBarChart,
+	BubbleChart,
 	LineChart,
 	ScatterChart,
 	PieChart,
@@ -166,6 +167,9 @@ chartTypes.forEach(type => {
 			case "stacked-bar":
 			case "stacked-bar-time-series":
 				classToInitialize = StackedBarChart;
+				break;
+			case "bubble":
+				classToInitialize = BubbleChart;
 				break;
 			case "scatter":
 			case "scatter-time-series":

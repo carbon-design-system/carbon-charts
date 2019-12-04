@@ -8,6 +8,7 @@ import {
 	StackedBarChartOptions,
 	PieChartOptions,
 	DonutChartOptions,
+	BubbleChartOptions,
 	// Components
 	GridOptions,
 	AxesOptions,
@@ -183,6 +184,12 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
 } as ScatterChartOptions);
 
 /**
+ * options specific to bubble charts
+ */
+const bubbleChart: BubbleChartOptions = Tools.merge({}, scatterChart, {
+} as BubbleChartOptions);
+
+/**
  * options specific to pie charts
  */
 const pieChart: PieChartOptions = Tools.merge({}, chart, {
@@ -225,6 +232,7 @@ export const options = {
 	simpleBarChart,
 	groupedBarChart,
 	stackedBarChart,
+	bubbleChart,
 	lineChart,
 	scatterChart,
 	pieChart,

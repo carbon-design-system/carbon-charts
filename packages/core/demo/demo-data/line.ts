@@ -1,4 +1,3 @@
-import { colors } from "./colors";
 import { Tools } from "../../src/tools";
 
 export const lineTimeSeriesData = {

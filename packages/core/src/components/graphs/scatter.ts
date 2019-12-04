@@ -1,9 +1,9 @@
 // Internal Imports
 import { Component } from "../component";
+import { TooltipTypes } from "../../interfaces";
 
 // D3 Imports
-import { select } from "d3-selection";
-import { TooltipTypes } from "../../interfaces";
+import { select, Selection } from "d3-selection";
 
 export class Scatter extends Component {
 	type = "scatter";
@@ -51,8 +51,19 @@ export class Scatter extends Component {
 
 		const { filled } = options.points;
 		// Apply styling & position
-		dotsEnter.merge(dots)
-			.raise()
+		const circlesToStyle = dotsEnter.merge(dots);
+		this.styleCircles(circlesToStyle, animate);
+
+		// Add event listeners to elements drawn
+		this.addEventListeners();
+	}
+
+	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
+		// Chart options mixed with the internal configurations
+		const options = this.model.getOptions();
+		const { filled } = options.points;
+
+		selection.raise()
 			.classed("dot", true)
 			.classed("filled", filled)
 			.classed("unfilled", !filled)
@@ -68,9 +79,6 @@ export class Scatter extends Component {
 			.attr("fill-opacity", filled ? 0.2 : 1)
 			.attr("stroke", d => this.model.getStrokeColor(d.datasetLabel, d.label, d.value))
 			.attr("opacity", 1);
-
-		// Add event listeners to elements drawn
-		this.addEventListeners();
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
@@ -104,9 +112,8 @@ export class Scatter extends Component {
 		this.parent.selectAll("circle")
 			.on("mouseover mousemove", function() {
 				const hoveredElement = select(this);
-				hoveredElement.classed("hovered", true);
-
-				hoveredElement.style("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
+				hoveredElement.classed("hovered", true)
+					.style("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {

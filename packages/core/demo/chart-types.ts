@@ -10,6 +10,9 @@ const {
 	stackedBarOptions,
 	stackedBarTimeSeriesOptions,
 	stackedBarTimeSeriesData,
+	// Bubble
+	bubbleData,
+	bubbleOptions,
 	// Pie & donut
 	pieOptions,
 	pieData,
@@ -42,6 +45,11 @@ export const chartTypes = [
 		id: "simple-bar",
 		options: simpleBarOptions,
 		data: simpleBarData
+	},
+	{
+		id: "bubble",
+		options: bubbleOptions,
+		data: bubbleData
 	},
 	{
 		id: "scatter-time-series",

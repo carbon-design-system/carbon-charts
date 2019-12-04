@@ -98,6 +98,11 @@ export interface ScatterChartOptions extends AxisChartOptions {
 }
 
 /**
+ * options specific to bubble charts
+ */
+export type BubbleChartOptions = ScatterChartOptions;
+
+/**
  * options specific to line charts
  */
 export interface LineChartOptions extends ScatterChartOptions {
