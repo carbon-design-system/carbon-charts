@@ -180,7 +180,7 @@ export class ChartModel {
 			});
 		} else {
 			const colors = colorPalettes.DEFAULT;
-			this.getDisplayData().datasets.forEach((dataset, i) => {
+			this.getData().datasets.forEach((dataset, i) => {
 				this.colorScale[dataset.label] = scaleOrdinal().range([colors[i]]).domain(this.allDataLabels);
 			});
 		}
