@@ -135,7 +135,7 @@ export const simpleBarTimeSeriesOptions = {
 		},
 		bottom: {
 			scaleType: "time",
-			secondary: true,
+			secondary: true
 		}
 	},
 	locale: {
