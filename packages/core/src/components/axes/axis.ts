@@ -4,7 +4,6 @@ import { AxisPositions, ScaleTypes, AxisTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
-const englishLocale = require("d3-time-format/locale/en-US.json");
 import * as Configuration from "../../configuration";
 
 // D3 Imports
