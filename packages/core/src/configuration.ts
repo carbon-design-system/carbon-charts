@@ -222,7 +222,10 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 
 const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 	meter: {
-		barHeight: 30
+		barHeight: 15,
+		title: {
+			valueOffset: 5
+		}
 	}
 });
 

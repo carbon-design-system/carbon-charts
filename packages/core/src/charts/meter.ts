@@ -4,7 +4,8 @@ import { Chart } from "../chart";
 import * as Configuration from "../configuration";
 import {
 	ChartConfig,
-	MeterChartOptions
+	MeterChartOptions,
+	LayoutGrowth
 } from "../interfaces/index";
 import { Tools } from "../tools";
 import { Meter } from "./../components/graphs/meter";
@@ -15,7 +16,8 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
 	Legend,
-	LayoutComponent
+	LayoutComponent,
+	TitleMeter
 } from "../components/index";
 
 export class MeterChart extends Chart {
@@ -50,9 +52,24 @@ export class MeterChart extends Chart {
 			new Meter(this.model, this.services)
 		];
 
+		// Meter has an extended title (to render percentages and status)
+		const titleComponent = {
+			id: "title",
+			components: [
+				new TitleMeter(this.model, this.services)
+			],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		// meter has a custom title component and does not need a legend
+		const customElements = [titleComponent];
+
 		// get the base chart components and export with tooltip
-		const components: any[] = this.getChartComponents(graphFrameComponents);
-		components.push(new Tooltip(this.model, this.services));
+		const components: any[] = this.getChartComponents(graphFrameComponents, customElements);
+		// components.push(new Tooltip(this.model, this.services));
 		return components;
 	}
 }

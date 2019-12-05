@@ -12,6 +12,7 @@ import {
 import { ChartModel } from "./model";
 import { Component,
 	Title,
+	TitleMeter,
 	Legend,
 	LayoutComponent,
 	Tooltip
@@ -111,29 +112,13 @@ export class Chart {
 		this.model.set({ destroyed: true }, true);
 	}
 
-
-	protected getChartComponents(graphFrameComponents: any[]) {
-		const titleComponent = {
-			id: "title",
-			components: [
-				new Title(this.model, this.services)
-			],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
-		};
-
-		const legendComponent = {
-			id: "legend",
-			components: [
-				new Legend(this.model, this.services)
-			],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
-		};
+	/**
+	 * @param graphFrameComponents the elements to be rendered within each graph (axis, lines, etc)
+	 * @param customTopLevelElements the graph can specify different top level elements if it doesnt want the presets (title, legend)
+	 */
+	protected getChartComponents(graphFrameComponents: any[], customTopLevelElements?: any[]) {
+		const topLevelLayoutComponents = [];
+		let fullFrameComponent;
 
 		const graphFrameComponent = {
 			id: "graph-frame",
@@ -144,52 +129,105 @@ export class Chart {
 			}
 		};
 
-		// TODORF - REUSE BETWEEN AXISCHART & CHART
-		// Decide the position of the legend in reference to the chart
-		let fullFrameComponentDirection = LayoutDirection.COLUMN;
-		const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
-		if (legendPosition === "left") {
-			fullFrameComponentDirection = LayoutDirection.ROW;
+		// if there are custom top level elements provided, we don't add the default title and legend
+		// unless those are passed into custom elements, but the graph needs to provide the growths/other properties for custom elements
+		if (!customTopLevelElements) {
+			const titleComponent = {
+				id: "title",
+				components: [
+					new Title(this.model, this.services)
+				],
+				growth: {
+					x: LayoutGrowth.PREFERRED,
+					y: LayoutGrowth.FIXED
+				}
+			};
 
-			if (!this.model.getOptions().legend.orientation) {
-				this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
-			}
-		} else if (legendPosition === "right") {
-			fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
+			const legendComponent = {
+				id: "legend",
+				components: [
+					new Legend(this.model, this.services)
+				],
+				growth: {
+					x: LayoutGrowth.PREFERRED,
+					y: LayoutGrowth.FIXED
+				}
+			};
 
-			if (!this.model.getOptions().legend.orientation) {
-				this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+			// TODORF - REUSE BETWEEN AXISCHART & CHART
+			// Decide the position of the legend in reference to the chart
+			let fullFrameComponentDirection = LayoutDirection.COLUMN;
+			const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
+			if (legendPosition === "left") {
+				fullFrameComponentDirection = LayoutDirection.ROW;
+
+				if (!this.model.getOptions().legend.orientation) {
+					this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+				}
+			} else if (legendPosition === "right") {
+				fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
+
+				if (!this.model.getOptions().legend.orientation) {
+					this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+				}
+			} else if (legendPosition === "bottom") {
+				fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
 			}
-		} else if (legendPosition === "bottom") {
-			fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
+
+			fullFrameComponent = {
+				id: "full-frame",
+				components: [
+					new LayoutComponent(
+						this.model,
+						this.services,
+						[
+							legendComponent,
+							graphFrameComponent
+						],
+						{
+							direction: fullFrameComponentDirection
+						}
+					)
+				],
+				growth: {
+					x: LayoutGrowth.STRETCH,
+					y: LayoutGrowth.FIXED
+				}
+			};
+
+			// Add chart title if it exists
+			if (this.model.getOptions().title) {
+				topLevelLayoutComponents.push(titleComponent);
+			}
+
+		// there are specified custom elements to be added to the layout
+		} else {
+			fullFrameComponent = {
+				id: "full-frame",
+				components: [
+					new LayoutComponent(
+						this.model,
+						this.services,
+						[
+							graphFrameComponent
+						],
+						{
+							direction: LayoutDirection.COLUMN
+						}
+					)
+				],
+				growth: {
+					x: LayoutGrowth.STRETCH,
+					y: LayoutGrowth.FIXED
+				}
+			};
+
+			// get all the custom elements into the top level layout components
+			customTopLevelElements.forEach(element => {
+				topLevelLayoutComponents.push(element);
+			});
 		}
 
-		const fullFrameComponent = {
-			id: "full-frame",
-			components: [
-				new LayoutComponent(
-					this.model,
-					this.services,
-					[
-						legendComponent,
-						graphFrameComponent
-					],
-					{
-						direction: fullFrameComponentDirection
-					}
-				)
-			],
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED
-			}
-		};
-
-		// Add chart title if it exists
-		const topLevelLayoutComponents = [];
-		if (this.model.getOptions().title) {
-			topLevelLayoutComponents.push(titleComponent);
-		}
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [
