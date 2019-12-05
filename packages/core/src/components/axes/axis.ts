@@ -4,7 +4,6 @@ import { AxisPositions, ScaleTypes, AxisTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
-const englishLocale = require("d3-time-format/locale/en-US.json");
 
 // D3 Imports
 import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
@@ -196,8 +195,6 @@ export class Axis extends Component {
 			const timeLocale = Tools.getProperty(options, "locale", "time");
 			if (timeLocale) {
 				timeFormatDefaultLocale(timeLocale);
-			} else {
-				timeFormatDefaultLocale(englishLocale);
 			}
 		}
 
