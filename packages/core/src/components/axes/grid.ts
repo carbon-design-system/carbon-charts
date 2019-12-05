@@ -1,6 +1,5 @@
 // Internal Imports
 import { Component } from "../component";
-import * as Configuration from "../../configuration";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 
