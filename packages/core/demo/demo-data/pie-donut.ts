@@ -6,7 +6,6 @@ export const pieData = {
 	datasets: [
 		{
 			label: "Dataset 1",
-			fillColors: colors,
 			data: [75000, 65000, 10000, 25000, 1200, 20000]
 		}
 	]
