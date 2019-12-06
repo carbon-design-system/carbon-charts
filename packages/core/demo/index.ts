@@ -36,6 +36,7 @@ const changeDemoData = (chartType: any, chartObj: any) => {
 
 		if (Math.random() > 0.5
 			|| chartType.indexOf("stacked") !== -1
+			|| chartType.indexOf("meter") !== -1
 			|| chartType.indexOf("pie") !== -1
 			|| chartType.indexOf("donut") !== -1) {
 			result = Math.floor(result);
@@ -62,12 +63,20 @@ const changeDemoData = (chartType: any, chartObj: any) => {
 		const result = Tools.clone(currentData);
 		result.datasets = result.datasets.map(dataset => {
 			dataset.label = `new dataset ${Math.random().toFixed(2)}`;
-			const datasetNewData = dataset.data.map(dataPoint => {
-				return randomizeValue(dataPoint);
-			});
+			let datasetNewData;
+			if (chartType === "meter") {
+				// only randomize a new max and value
+				const newMax = randomizeValue(dataset.data.max);
+				const newValue = randomizeValue(dataset.data.value);
+				datasetNewData = {max: newMax, value: newValue, min: 0};
+
+			} else {
+				datasetNewData = dataset.data.map(dataPoint => {
+					return randomizeValue(dataPoint);
+				});
+			}
 
 			const newDataset = Object.assign({}, dataset, { data: datasetNewData });
-
 			return newDataset;
 		});
 
@@ -184,7 +193,7 @@ chartTypes.forEach(type => {
 			case "donut":
 				classToInitialize = DonutChart;
 				break;
-			case "meter-chart":
+			case "meter":
 				classToInitialize = MeterChart;
 		}
 

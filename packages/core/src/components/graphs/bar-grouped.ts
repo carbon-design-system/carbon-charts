@@ -59,7 +59,7 @@ export class GroupedBar extends Bar {
 		const barGroups = svg.selectAll("g.bars")
 			.data(displayData.labels);
 
-		// Remove dot groups that need to be removed
+		// Remove bar groups that need to be removed
 		barGroups.exit()
 			.attr("opacity", 0)
 			.remove();

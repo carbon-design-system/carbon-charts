@@ -35,7 +35,6 @@ export class MeterChart extends Chart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			// chartConfigs.options
 			Tools.merge(
 				Tools.clone(Configuration.options.meterChart),
 				chartConfigs.options

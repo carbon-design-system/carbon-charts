@@ -27,18 +27,22 @@ export class Meter extends Component {
 
 		// draw the container to hold the value
 		const container = DOMUtils.appendOrSelect(svg, "rect.container")
-			.attr("x", xScale.range()[0] )
+			.attr("x", 0 )
 			.attr("y", 0 )
 			.attr("width", options.width)
 			.attr("height", options.meter.barHeight);
 
 		// draw the rect with the value binded
-		svg.selectAll("rect.value")
-			.data([dataset])
-			.enter()
+		const value = svg.selectAll("rect.value")
+			.data([dataset]);
+
+		value.exit().remove();
+
+		value.enter()
 			.append("rect")
 			.classed("value", true)
-			.attr("x", xScale.range()[0] )
+			.merge(value)
+			.attr("x", 0 )
 			.attr("y", 0 )
 			.attr("width", function(d) {
 				return xScale(d.data.value);

@@ -8,7 +8,7 @@ export const meterData = {
 			fillColors: [colors[0]],
 			data: {
 				min: 0,
-				max: 1200,
+				max: 1500,
 				// peak: 700,
 				value: 550,
 				// threshold: .25
@@ -17,15 +17,4 @@ export const meterData = {
 	]
 };
 
-export const meterOptions = {
-	title: "Meter",
-	// axes: {
-	// 	left: {
-	// 		primary: true,
-	// 	},
-	// 	bottom: {
-	// 		scaleType: "labels",
-	// 		secondary: true,
-	// 	}
-	// }
-};
+export const meterOptions = {};

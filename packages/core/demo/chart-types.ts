@@ -102,7 +102,7 @@ export const chartTypes = [
 	// 	data: stepTimeSeriesData
 	// }
 	{
-		id: "meter-chart",
+		id: "meter",
 		options: meterOptions,
 		data: meterData
 	}
