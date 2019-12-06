@@ -29,14 +29,19 @@ const changeDemoData = (chartType: any, chartObj: any) => {
 	const oldData = chartObj.model.getData();
 
 	// Function to be used to randomize a value
-	const randomizeValue = datum => {
+	const randomizeValue = (datum, bound?) => {
+		// return a bounded value from bound array [lower, upper]
+		if (bound) {
+			const min = Math.ceil(bound[0]);
+			const max = Math.floor(bound[1]);
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
 		const currentVal = datum.value !== undefined ? datum.value : datum;
 		const firstTry = Math.max(0.85 * currentVal, currentVal * Math.random() * (Math.random() * 5));
 		let result = currentVal > 0 ? Math.min(3 * currentVal, firstTry) : Math.max(3 * currentVal, firstTry);
 
 		if (Math.random() > 0.5
 			|| chartType.indexOf("stacked") !== -1
-			|| chartType.indexOf("meter") !== -1
 			|| chartType.indexOf("pie") !== -1
 			|| chartType.indexOf("donut") !== -1) {
 			result = Math.floor(result);
@@ -65,10 +70,10 @@ const changeDemoData = (chartType: any, chartObj: any) => {
 			dataset.label = `new dataset ${Math.random().toFixed(2)}`;
 			let datasetNewData;
 			if (chartType === "meter") {
-				// only randomize a new max and value
-				const newMax = randomizeValue(dataset.data.max);
-				const newValue = randomizeValue(dataset.data.value);
-				datasetNewData = {max: newMax, value: newValue, min: 0};
+				const { value, max } = dataset.data;
+				// only randomize a new value that is less than the max
+				const newValue = randomizeValue(value, [0, max]);
+				datasetNewData = {value: newValue, min: 0, max: max};
 
 			} else {
 				datasetNewData = dataset.data.map(dataPoint => {
