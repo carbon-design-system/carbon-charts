@@ -4,7 +4,7 @@ import BugIcon from "@carbon/icons/es/debug/20";
 import ScreenIcon from "@carbon/icons/es/screen/20";
 
 const nodeData = [
-	{ id: "a", x: 0, y: 0, icon: UserIcon },
+	{ id: "a", x: 0, y: 0, icon: UserIcon, onClick: () => console.log("clicked") },
 	{ id: "b", x: 350, y: 0, icon: ScreenIcon },
 	{ id: "c", x: 350, y: 300, kind: "warning", icon: ScreenIcon },
 	{ id: "d", x: 700, y: 300, kind: "error", icon: BugIcon },

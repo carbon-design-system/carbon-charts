@@ -1,6 +1,7 @@
 import { getIconString } from "./utils";
 import settings from "carbon-components/src/globals/js/settings";
 import classnames from "classnames";
+import { on } from "cluster";
 
 const { prefix } = settings;
 
@@ -30,7 +31,7 @@ const NetworkCard = ({
 			.attr("focusable", true)
 			.attr("tabindex", 0)
 			.attr("class", `${prefix}--graph-card__background`)
-			.attr("stroke-width", "1px");
+			.on("click", (d) => d.onClick && d.onClick());
 
 	const textGroup = cardGroup
 			.append("g")
