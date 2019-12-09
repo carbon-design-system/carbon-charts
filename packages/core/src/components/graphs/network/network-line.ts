@@ -1,4 +1,5 @@
 import settings from "carbon-components/src/globals/js/settings";
+import buildPathString from "./utils/build-path-string";
 
 const { prefix } = settings;
 
@@ -6,18 +7,17 @@ const NetworkLine = ({
 	svg,
 	data,
 	accessor,
-	selector
+	selector,
+	nodeHeight,
+	nodeWidth
 }) => {
 	const lines = svg.selectAll(selector)
 		.data(data, accessor)
 		.enter()
-		.append("line")
+		.append("path")
 		.attr("class", `${prefix}--graph-link__line`)
 		.classed("line", true)
-		.attr("x1", d => d.source.x)
-		.attr("y1", d => d.source.y)
-		.attr("x2", d => d.target.x)
-		.attr("y2", d => d.target.y);
+		.attr("d", d => buildPathString(d.source, d.target, nodeHeight, nodeWidth));
 	return lines;
 };
 

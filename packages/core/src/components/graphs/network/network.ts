@@ -9,6 +9,8 @@ export class Network extends Component {
 	nodes = this.data[0].data;
 	links = this.data[1].data;
 	svg = this.getContainerSVG();
+	nodeHeight = 64;
+	nodeWidth = 208;
 
 	drawCards() {
 		NetworkCard({
@@ -16,8 +18,8 @@ export class Network extends Component {
 			selector: "rect.network-card",
 			data: this.nodes,
 			accessor: d => d,
-			height: 64,
-			width: 208,
+			height: this.nodeHeight,
+			width: this.nodeWidth,
 		});
 	}
 
@@ -26,7 +28,9 @@ export class Network extends Component {
 			svg: this.svg,
 			selector: "rect.network-line",
 			data: this.links,
-			accessor: d => d
+			accessor: d => d,
+			nodeHeight: this.nodeHeight,
+			nodeWidth: this.nodeWidth
 		});
 	}
 
