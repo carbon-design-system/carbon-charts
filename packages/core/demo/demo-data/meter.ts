@@ -9,9 +9,14 @@ export const meterData = {
 			data: {
 				min: 0,
 				max: 1500,
-				// peak: 700,
+				peak: 1200,
 				value: 550,
-				// threshold: .25
+				status: [
+					{ range: [0, 1000], status: "success" },
+					// { range: [500, 1000], status: "custom" },
+					{ range: [1000, 1200], status: "warning"},
+					{ range: [1200, 1500], status: "danger"}
+				],
 			}
 		}
 	]

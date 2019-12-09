@@ -26,18 +26,19 @@ export class Meter extends Component {
 			.range([0, options.width]);
 
 		// draw the container to hold the value
-		const container = DOMUtils.appendOrSelect(svg, "rect.container")
+		DOMUtils.appendOrSelect(svg, "rect.container")
 			.attr("x", 0 )
 			.attr("y", 0 )
 			.attr("width", options.width)
 			.attr("height", options.meter.barHeight);
 
-		// draw the rect with the value binded
+		// rect with the value binded
 		const value = svg.selectAll("rect.value")
 			.data([dataset]);
 
 		value.exit().remove();
 
+		// draw the value bar
 		value.enter()
 			.append("rect")
 			.classed("value", true)
@@ -51,5 +52,25 @@ export class Meter extends Component {
 			.attr("fill", d => {
 				return d.fillColors[0];
 		});
+
+		// if a peak is supplied, we want to render it
+		if (dataset.data.peak) {
+			const peakVal = dataset.data.peak;
+			const peak = DOMUtils.appendOrSelect(svg, "line.peak");
+
+			// if there was previously no peak, transition it from the 0
+			if (!peak.attr("x1")) {
+				peak.attr("y1", 0)
+					.attr("y2", options.meter.barHeight)
+					.attr("x1", xScale(0))
+					.attr("x2", xScale(0));
+			}
+
+			// transitions to its correct location
+			peak
+				.transition(this.services.transitions.getTransition("peak-line-update", animate))
+				.attr("x1", xScale(peakVal) )
+				.attr("x2", xScale(peakVal) );
+		}
 	}
 }

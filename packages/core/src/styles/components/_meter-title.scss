@@ -1,0 +1,23 @@
+@import "./../vendor/@carbon/type/scss/type";
+
+.#{$prefix}--#{$charts-prefix}--meter-title {
+	text.title {
+		fill: $text-01;
+		font-size: 16px;
+		font-family: carbon--font-family("sans");
+		font-weight: carbon--font-weight("semibold");
+	}
+
+	circle.status-indicator {
+		&.status--danger {
+			fill: $support-01;
+		}
+		&.status--warning {
+			fill: $support-03;
+		}
+		&.status--success {
+			fill: $support-02;
+
+		}
+	}
+}

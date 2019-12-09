@@ -224,7 +224,11 @@ const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 	meter: {
 		barHeight: 15,
 		title: {
-			valueOffset: 5
+			paddingRight: 5
+		},
+		status: {
+			indicatorSize: 8,
+			paddingLeft: 15
 		}
 	}
 });
