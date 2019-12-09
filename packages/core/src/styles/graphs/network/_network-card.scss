@@ -16,7 +16,7 @@
 		@include focus-outline();
 	}
 
-	.#{$prefix}--graph-card__icon-background {
+	.#{$prefix}--graph-card__stroke {
 		fill: $ui_01;
 	}
 
