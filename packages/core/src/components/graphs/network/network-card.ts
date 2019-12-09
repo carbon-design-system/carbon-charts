@@ -1,7 +1,6 @@
 import { getIconString } from "./utils";
 import settings from "carbon-components/src/globals/js/settings";
 import classnames from "classnames";
-import { on } from "cluster";
 
 const { prefix } = settings;
 
