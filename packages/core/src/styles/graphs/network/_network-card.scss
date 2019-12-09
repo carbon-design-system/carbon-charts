@@ -1,12 +1,14 @@
 @import '~carbon-components/scss/globals/scss/vars';
 @import '~@carbon/themes/scss/tokens';
 @import '~@carbon/layout/scss/spacing';
+@import '~@carbon/type/scss/font-face/sans';
 @import '~carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '~carbon-components/scss/globals/scss/_helper-mixins';
 
 @include exports('graph-card') {
 	.#{$prefix}--graph-card {
 		cursor: pointer;
+		font-family: carbon--font-family("sans");
 	}
 
 	.#{$prefix}--graph-card__background {
@@ -26,16 +28,23 @@
 		transform: translate($spacing_05,$spacing_04);
 	}
 
-	.#{$prefix}--graph-card__heading {
-		font-size: 0.875rem;
-		fill: $text_01;
-		font-weight: 600;
+	.#{$prefix}--graph-card__content {
+		transform: translate(carbon--mini-units(6.5),$spacing_05);
+
+		// Nesting BEM elements to prevent catching global text styles
+		text.#{$prefix}--graph-card__heading {
+			@include carbon--type-style($name: productive-heading-01);
+			fill: $text_01;
+			transform: translate(0,$spacing_03);
+		}
+
+		text.#{$prefix}--graph-card__subheading {
+			@include carbon--type-style($name: body-short-01);
+			fill: $text_01;
+			transform: translate(0,carbon--mini-units(3.75));
+		}
 	}
 
-	.#{$prefix}--graph-card__subheading {
-		font-size: 0.875rem;
-		fill: $interactive_01;
-	}
 
 	// Active state modifier
 	.#{$prefix}--active {

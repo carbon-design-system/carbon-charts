@@ -32,8 +32,19 @@ const NetworkCard = ({
 			.attr("class", `${prefix}--graph-card__background`)
 			.attr("stroke-width", "1px");
 
-	const cardText = cardGroup
-			.append("text");
+	const textGroup = cardGroup
+			.append("g")
+			.attr("class", `${prefix}--graph-card__content`);
+
+	const heading = textGroup
+			.append("text")
+			.attr("class", `${prefix}--graph-card__heading`)
+			.text("Heading");
+
+	const subHeading = textGroup
+			.append("text")
+			.attr("class", `${prefix}--graph-card__subheading`)
+			.text("Subheading");
 
 	// Create a new icon group here...
 	const cardStroke = cardGroup
