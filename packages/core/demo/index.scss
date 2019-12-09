@@ -136,6 +136,11 @@ header.m-demo-header {
 	&.has-actions {
 		margin: auto;
 	}
+
+	&.compact {
+		min-height: 100px;
+		height: 150px;
+	}
 }
 
 .chart-demo-actions {

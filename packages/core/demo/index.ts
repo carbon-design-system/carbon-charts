@@ -149,6 +149,10 @@ const createChartContainer = chartType => {
 	// Chart holder
 	const holder = document.createElement("div");
 	holder.className = "demo-chart-holder has-actions";
+	// meter need a more compact chart holder
+	if (chartType.id === "meter" ) {
+		holder.className += " compact";
+	}
 	holder.id = `classy-${chartType.id}-chart-holder`;
 
 	document.body.appendChild(holder);
