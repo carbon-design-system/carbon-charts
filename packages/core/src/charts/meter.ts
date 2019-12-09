@@ -68,7 +68,7 @@ export class MeterChart extends Chart {
 
 		// get the base chart components and export with tooltip
 		const components: any[] = this.getChartComponents(graphFrameComponents, customElements);
-		// components.push(new Tooltip(this.model, this.services));
+		components.push(new Tooltip(this.model, this.services));
 		return components;
 	}
 }

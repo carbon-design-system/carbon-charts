@@ -65,7 +65,7 @@ export class TitleMeter extends Title {
 		const percentage =  DOMUtils.appendOrSelect(this.parent, "text.percent-value");
 
 		// the title needs to fit the width of the container without crowding the status, and percentage value
-		const offset = this.model.getOptions().meter.title.valueOffset; // horizontal offset of percent from title
+		const offset = this.model.getOptions().meter.title.paddingRight; // horizontal offset of percent from title
 		const titleWidth = title.node().getComputedTextLength();
 		const percentageWidth = percentage.node().getComputedTextLength();
 		const statusWidth = DOMUtils.appendOrSelect(this.parent, "circle.status-indicator").node().getBBox().width +
