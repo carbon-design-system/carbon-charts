@@ -1,11 +1,11 @@
 import { colors } from "./colors";
-import AddIcon from '@carbon/icons/es/add/20';
-import BugIcon from '@carbon/icons/es/debug/20';
-import ScreenIcon from '@carbon/icons/es/screen/20';
+import UserIcon from "@carbon/icons/es/user/20";
+import BugIcon from "@carbon/icons/es/debug/20";
+import ScreenIcon from "@carbon/icons/es/screen/20";
 
 const nodeData = [
-	{ id: "a", x: 0, y: 0, icon: AddIcon },
-	{ id: "b", x: 350, y: 0 },
+	{ id: "a", x: 0, y: 0, icon: UserIcon },
+	{ id: "b", x: 350, y: 0, icon: ScreenIcon },
 	{ id: "c", x: 350, y: 300, kind: "warning", icon: ScreenIcon },
 	{ id: "d", x: 700, y: 300, kind: "error", icon: BugIcon },
 ];
