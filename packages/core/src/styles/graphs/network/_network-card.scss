@@ -1,5 +1,6 @@
 @import '~carbon-components/scss/globals/scss/vars';
 @import '~@carbon/themes/scss/tokens';
+@import '~@carbon/layout/scss/spacing';
 @import '~carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '~carbon-components/scss/globals/scss/_helper-mixins';
 
@@ -22,6 +23,7 @@
 
 	.#{$prefix}--graph-card__icon-path {
 		fill: $icon-01;
+		transform: translate($spacing_05,$spacing_04);
 	}
 
 	.#{$prefix}--graph-card__heading {
