@@ -45,6 +45,7 @@ export class Meter extends Component {
 			.merge(value)
 			.attr("x", 0 )
 			.attr("y", 0 )
+			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
 			.attr("width", function(d) {
 				return xScale(d.data.value);
 			})
@@ -69,8 +70,8 @@ export class Meter extends Component {
 			// transitions to its correct location
 			peak
 				.transition(this.services.transitions.getTransition("peak-line-update", animate))
-				.attr("x1", xScale(peakVal) )
-				.attr("x2", xScale(peakVal) );
+				.attr("x1", xScale(peakVal))
+				.attr("x2", xScale(peakVal));
 		}
 	}
 }
