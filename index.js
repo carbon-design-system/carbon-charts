@@ -4340,13 +4340,6 @@ var __extends = (undefined && undefined.__extends) || (function () {
 // D3 Imports
 
 
-var donutCenterNumberTween = function (d3Ref, newNumber) {
-    // Remove commas from the current value string, and convert to an int
-    var currentValue = parseInt(d3Ref.text().replace(/[, ]+/g, ""), 10) || 0;
-    var i = Object(d3_interpolate__WEBPACK_IMPORTED_MODULE_4__["interpolateNumber"])(currentValue, newNumber);
-    var formatInterpolatedValue = function (number) { return Math.floor(number).toLocaleString(); };
-    return function (t) { return d3Ref.text(formatInterpolatedValue(i(t))); };
-};
 var Donut = /** @class */ (function (_super) {
     __extends(Donut, _super);
     function Donut() {
@@ -4358,35 +4351,46 @@ var Donut = /** @class */ (function (_super) {
         if (animate === void 0) { animate = true; }
         // Call render() from Pie
         _super.prototype.render.call(this, animate);
+        var self = this;
         var svg = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].appendOrSelect(this.getContainerSVG(), "g.center");
         var options = this.model.getOptions();
         // Compute the outer radius needed
         var radius = this.computeRadius();
-        var donutCenterFigure = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "center", "number");
-        if (!donutCenterFigure) {
-            donutCenterFigure = this.getDataList().reduce(function (accumulator, d) {
-                return accumulator + d.value;
-            }, 0);
-        }
         // Add the number shown in the center of the donut
         _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].appendOrSelect(svg, "text.donut-figure")
             .attr("text-anchor", "middle")
             .style("font-size", function () { return options.donut.center.numberFontSize(radius); })
             .transition(this.services.transitions.getTransition("donut-figure-enter-update", animate))
             .tween("text", function () {
-            return donutCenterNumberTween(Object(d3_selection__WEBPACK_IMPORTED_MODULE_3__["select"])(this), donutCenterFigure);
+            return self.centerNumberTween(Object(d3_selection__WEBPACK_IMPORTED_MODULE_3__["select"])(this));
         });
         // Add the label below the number in the center of the donut
         _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].appendOrSelect(svg, "text.donut-title")
             .attr("text-anchor", "middle")
             .style("font-size", function () { return options.donut.center.titleFontSize(radius); })
             .attr("y", options.donut.center.titleYPosition(radius))
-            .text(options.donut.center.label);
+            .text(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "donut", "center", "label"));
     };
     Donut.prototype.getInnerRadius = function () {
         // Compute the outer radius needed
         var radius = this.computeRadius();
         return radius * (3 / 4);
+    };
+    Donut.prototype.centerNumberTween = function (d3Ref) {
+        var options = this.model.getOptions();
+        var donutCenterFigure = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "donut", "center", "number");
+        if (!donutCenterFigure) {
+            donutCenterFigure = this.getDataList().reduce(function (accumulator, d) {
+                return accumulator + d.value;
+            }, 0);
+        }
+        // Remove commas from the current value string, and convert to an int
+        var currentValue = parseInt(d3Ref.text().replace(/[, ]+/g, ""), 10) || 0;
+        var i = Object(d3_interpolate__WEBPACK_IMPORTED_MODULE_4__["interpolateNumber"])(currentValue, donutCenterFigure);
+        return function (t) {
+            var numberFormatter = options.donut.center.numberFormatter;
+            d3Ref.text(numberFormatter(i(t)));
+        };
     };
     return Donut;
 }(_pie__WEBPACK_IMPORTED_MODULE_0__["Pie"]));
@@ -4655,7 +4659,12 @@ var Pie = /** @class */ (function (_super) {
         var calloutData = [];
         enteringLabels.merge(labels)
             .style("text-anchor", "middle")
-            .text(function (d) { return _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].convertValueToPercentage(d.data.value, dataList) + "%"; })
+            .text(function (d) {
+            if (options.pie.labels.formatter) {
+                return options.pie.labels.formatter(d);
+            }
+            return _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].convertValueToPercentage(d.data.value, dataList) + "%";
+        })
             // Calculate dimensions in order to transform
             .datum(function (d) {
             var textLength = this.getComputedTextLength();
@@ -5450,6 +5459,9 @@ var pieChart = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, chart, {
             offsetY: 12,
             horizontalLineLength: 8,
             textMargin: 2
+        },
+        labels: {
+            formatter: null
         }
     }
 });
@@ -5461,7 +5473,8 @@ var donutChart = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, pieChart
         center: {
             numberFontSize: function (radius) { return Math.min((radius / 100) * 24, 24) + "px"; },
             titleFontSize: function (radius) { return Math.min((radius / 100) * 15, 15) + "px"; },
-            titleYPosition: function (radius) { return Math.min((radius / 80) * 20, 20); }
+            titleYPosition: function (radius) { return Math.min((radius / 80) * 20, 20); },
+            numberFormatter: function (number) { return Math.floor(number).toLocaleString(); }
         }
     }
 });
