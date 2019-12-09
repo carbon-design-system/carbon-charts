@@ -124,7 +124,13 @@ export class Pie extends Component {
 		const calloutData = [];
 		enteringLabels.merge(labels)
 			.style("text-anchor", "middle")
-			.text(d => Tools.convertValueToPercentage(d.data.value, dataList) + "%")
+			.text(d => {
+				if (options.pie.labels.formatter) {
+					return options.pie.labels.formatter(d);
+				}
+
+				return Tools.convertValueToPercentage(d.data.value, dataList) + "%";
+			})
 			// Calculate dimensions in order to transform
 			.datum(function(d) {
 				const textLength = this.getComputedTextLength();
