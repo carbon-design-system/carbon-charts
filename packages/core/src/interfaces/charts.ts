@@ -136,6 +136,9 @@ export interface PieChartOptions extends BaseChartOptions {
 			offsetY?: number;
 			horizontalLineLength?: number;
 			textMargin?: number;
+		},
+		labels?: {
+			formatter?: Function;
 		}
 	};
 }
@@ -149,6 +152,7 @@ export interface DonutChartOptions extends PieChartOptions {
 			numberFontSize?: Function;
 			titleFontSize?: Function;
 			titleYPosition?: Function;
+			numberFormatter?: Function;
 		};
 	};
 }

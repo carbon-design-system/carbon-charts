@@ -212,6 +212,9 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 			offsetY: 12,
 			horizontalLineLength: 8,
 			textMargin: 2
+		},
+		labels: {
+			formatter: null
 		}
 	}
 } as PieChartOptions);
@@ -224,7 +227,8 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 		center: {
 			numberFontSize: radius => Math.min((radius / 100) * 24, 24) + "px",
 			titleFontSize: radius => Math.min((radius / 100) * 15, 15) + "px",
-			titleYPosition: radius => Math.min((radius / 80) * 20, 20)
+			titleYPosition: radius => Math.min((radius / 80) * 20, 20),
+			numberFormatter: number => Math.floor(number).toLocaleString()
 		}
 	}
 } as DonutChartOptions);
