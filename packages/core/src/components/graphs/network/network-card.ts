@@ -1,5 +1,6 @@
 import { getIconString } from "./utils";
 import settings from "carbon-components/src/globals/js/settings";
+import classnames from "classnames";
 
 const { prefix } = settings;
 
@@ -17,6 +18,9 @@ const NetworkCard = ({
 	const cardGroup = cards
 			.enter()
 			.append("g")
+			.attr("class", (d) => classnames(`${prefix}--graph-card`, {
+				[`${prefix}--graph-card--${d.kind}`]: d.kind
+			}))
 			.attr("transform", d => `translate(${d.x},${d.y})`);
 
 	const cardBackground = cardGroup

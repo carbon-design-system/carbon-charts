@@ -52,18 +52,14 @@
 	}
 
 	// Kind modifier
-	.#{$prefix}--graph-card__icon--warning {
-		.#{$prefix}--graph-card__icon__path {
-			fill: $icon_01;
-		}
-
-		.#{$prefix}--graph-card__icon__background {
+	.#{$prefix}--graph-card--warning {
+		.#{$prefix}--graph-card__stroke {
 			fill: $support_03;
 		}
 	}
 
-	.#{$prefix}--graph-card__icon--error {
-		.#{$prefix}--graph-card__icon__background {
+	.#{$prefix}--graph-card--error {
+		.#{$prefix}--graph-card__stroke {
 			fill: $support_01;
 		}
 	}
