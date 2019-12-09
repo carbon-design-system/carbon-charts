@@ -31,6 +31,11 @@ export interface AxisOptions {
 		 */
 		max?: number;
 		/**
+		 * minimum width of a tick
+		 * before getting rotated (in pixels)
+		 */
+		rotateIfSmallerThan?: number;
+		/**
 		 * function to format the ticks
 		 */
 		formatter?: Function;

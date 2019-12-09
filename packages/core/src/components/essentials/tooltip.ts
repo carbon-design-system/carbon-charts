@@ -12,7 +12,7 @@ import settings from "carbon-components/src/globals/js/settings";
 
 // D3 Imports
 import { select, mouse, event } from "d3-selection";
-import { TooltipTypes, ScaleTypes } from "../../interfaces";
+import { TooltipTypes, ScaleTypes, TooltipPosition } from "../../interfaces";
 
 export class Tooltip extends Component {
 	type = "tooltip";
@@ -34,6 +34,7 @@ export class Tooltip extends Component {
 
 		// Apply html content to the tooltip
 		const tooltipTextContainer = DOMUtils.appendOrSelect(this.tooltip, "div.content-box");
+		this.tooltip.style("max-width", null);
 
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener("show-tooltip", e => {
@@ -50,7 +51,7 @@ export class Tooltip extends Component {
 					data = e.detail.multidata;
 					defaultHTML = this.getMultilineTooltipHTML(data);
 				} else {
-					defaultHTML = this.getTooltipHTML(data);
+					defaultHTML = this.getTooltipHTML(data, TooltipTypes.DATAPOINT);
 				}
 
 				// if there is a provided tooltip HTML function call it
@@ -64,9 +65,23 @@ export class Tooltip extends Component {
 				// Position the tooltip
 				this.positionTooltip();
 
-				// Fade in
-				this.tooltip.classed("hidden", false);
+			} else if (e.detail.type === TooltipTypes.TITLE) {
+				const chart = DOMUtils.appendOrSelect(holder, `svg.${settings.prefix}--${chartprefix}--chart-svg`);
+				const chartWidth =  DOMUtils.getSVGElementSize(chart).width * Tools.getProperty(this.model.getOptions(), "tooltip", "title", "width");
+
+				this.tooltip.style("max-width", chartWidth);
+
+
+				tooltipTextContainer.html(this.getTooltipHTML(e.detail.hoveredElement, TooltipTypes.TITLE));
+
+				// get the position based on the title positioning (static)
+				const position = this.getTooltipPosition(e.detail.hoveredElement.node());
+				this.positionTooltip(position);
+
 			}
+
+			// Fade in
+			this.tooltip.classed("hidden", false);
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
@@ -75,7 +90,12 @@ export class Tooltip extends Component {
 		});
 	}
 
-	getTooltipHTML(data: any) {
+	getTooltipHTML(data: any, type: TooltipTypes) {
+		// check if it is getting styles for a tooltip type
+		if (type === TooltipTypes.TITLE) {
+			const title = this.model.getOptions().title;
+			return `<div class="title-tooltip"><text>${title}</text></div>`;
+		}
 		// this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
 		const dataVal = Tools.getProperty(data, "data") ? data.data : data;
 
@@ -129,44 +149,73 @@ export class Tooltip extends Component {
 		this.tooltip.classed("hidden", true);
 	}
 
-	positionTooltip() {
+	// returns static position based on the element
+	getTooltipPosition(hoveredElement) {
+		const holderPosition = select(this.services.domUtils.getHolder()).node().getBoundingClientRect();
+		const elementPosition = hoveredElement.getBoundingClientRect();
+
+		// get the vertical offset
+		const { verticalOffset } = this.model.getOptions().tooltip.title;
+
+		const tooltipPos = {
+			left: (elementPosition.left - holderPosition.left) + elementPosition.width / 2,
+			top: (elementPosition.top - holderPosition.top - verticalOffset)
+		};
+
+		return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
+	}
+
+	positionTooltip(positionOverride?: any) {
 		const holder = this.services.domUtils.getHolder();
 		const target = this.tooltip.node();
 		const mouseRelativePos = mouse(holder);
+		let pos;
 
-		// Find out whether tooltip should be shown on the left or right side
-		const bestPlacementOption = this.positionService.findBestPlacementAt(
-			{
-				left: mouseRelativePos[0],
-				top: mouseRelativePos[1]
-			},
-			target,
-			[
-				PLACEMENTS.RIGHT,
-				PLACEMENTS.LEFT,
-				PLACEMENTS.TOP,
-				PLACEMENTS.BOTTOM
-			],
-			() => ({
-				width: holder.offsetWidth,
-				height: holder.offsetHeight
-			})
-		);
+		// override position to place tooltip at {placement:.., position:{top:.. , left:..}}
+		if (positionOverride) {
+			// placement determines whether the tooltip is centered above or below the position provided
+			const placement = positionOverride.placement === TooltipPosition.TOP ? PLACEMENTS.TOP : PLACEMENTS.BOTTOM;
 
-		let { horizontalOffset } = this.model.getOptions().tooltip.datapoint;
-		if (bestPlacementOption === PLACEMENTS.LEFT) {
-			horizontalOffset *= -1;
+			pos = this.positionService.findPositionAt(
+				positionOverride.position,
+				target,
+				placement
+			);
+		} else {
+			// Find out whether tooltip should be shown on the left or right side
+			const bestPlacementOption = this.positionService.findBestPlacementAt(
+				{
+					left: mouseRelativePos[0],
+					top: mouseRelativePos[1]
+				},
+				target,
+				[
+					PLACEMENTS.RIGHT,
+					PLACEMENTS.LEFT,
+					PLACEMENTS.TOP,
+					PLACEMENTS.BOTTOM
+				],
+				() => ({
+					width: holder.offsetWidth,
+					height: holder.offsetHeight
+				})
+			);
+
+			let { horizontalOffset } = this.model.getOptions().tooltip.datapoint;
+			if (bestPlacementOption === PLACEMENTS.LEFT) {
+				horizontalOffset *= -1;
+			}
+
+			// Get coordinates to where tooltip should be positioned
+			pos = this.positionService.findPositionAt(
+				{
+					left: mouseRelativePos[0] + horizontalOffset,
+					top: mouseRelativePos[1]
+				},
+				target,
+				bestPlacementOption
+			);
 		}
-
-		// Get coordinates to where tooltip should be positioned
-		const pos = this.positionService.findPositionAt(
-			{
-				left: mouseRelativePos[0] + horizontalOffset,
-				top: mouseRelativePos[1]
-			},
-			target,
-			bestPlacementOption
-		);
 
 		this.positionService.setElement(target, pos);
 	}
