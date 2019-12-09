@@ -51,8 +51,6 @@ const NetworkCard = ({
 			.append("rect")
 			.attr("height", height)
 			.attr("width", 4)
-			.attr("focusable", true)
-			.attr("tabindex", 0)
 			.attr("class", `${prefix}--graph-card__stroke`);
 
 	const cardIcon = cardGroup

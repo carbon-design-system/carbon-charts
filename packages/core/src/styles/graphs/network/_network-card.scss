@@ -13,10 +13,10 @@
 
 	.#{$prefix}--graph-card__background {
 		fill: $ui_01;
-	}
 
-	.#{$prefix}--graph-card__button:focus {
-		@include focus-outline();
+		&:focus {
+			@include focus-outline();
+		}
 	}
 
 	.#{$prefix}--graph-card__stroke {
@@ -30,6 +30,7 @@
 
 	.#{$prefix}--graph-card__content {
 		transform: translate(carbon--mini-units(6.5),$spacing_05);
+		pointer-events: none;
 
 		// Nesting BEM elements to prevent catching global text styles
 		text.#{$prefix}--graph-card__heading {
