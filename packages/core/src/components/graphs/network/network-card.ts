@@ -46,7 +46,6 @@ const NetworkCard = ({
 			.attr("class", `${prefix}--graph-card__subheading`)
 			.text("Subheading");
 
-	// Create a new icon group here...
 	const cardStroke = cardGroup
 			.append("rect")
 			.attr("height", height)

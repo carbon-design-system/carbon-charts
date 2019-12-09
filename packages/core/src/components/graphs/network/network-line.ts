@@ -1,5 +1,5 @@
 import settings from "carbon-components/src/globals/js/settings";
-import buildPathString from "./utils/build-path-string";
+import { buildPathString } from "./utils";
 
 const { prefix } = settings;
 
