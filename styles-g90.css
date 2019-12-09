@@ -150,8 +150,9 @@ svg.bx--cc--chart-svg {
     fill: #bebebe; }
 
 .bx--chart-holder {
-  background-color: #282828;
-  position: relative; }
+  position: relative;
+  display: block;
+  background-color: #282828; }
 
 svg.bx--cc--chart-svg {
   overflow: visible; }

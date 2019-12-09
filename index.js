@@ -332,9 +332,6 @@ var groupedBarOptions = {
         bottom: {
             scaleType: "labels",
             secondary: true,
-        },
-        top: {
-            scaleType: "labels",
         }
     }
 };
@@ -1286,6 +1283,8 @@ _chart_types__WEBPACK_IMPORTED_MODULE_3__["chartTypes"].forEach(function (type) 
                 classToInitialize = _src_index__WEBPACK_IMPORTED_MODULE_0__["DonutChart"];
                 break;
         }
+        // Add `height` to the chart options
+        type.options.height = "500px";
         // Initialize chart
         charts[type.id] = new classToInitialize(holder, {
             data: type.data,
@@ -1450,8 +1449,7 @@ var Chart = /** @class */ (function () {
         this.services = {
             domUtils: _services_index__WEBPACK_IMPORTED_MODULE_4__["DOMUtils"],
             events: _services_index__WEBPACK_IMPORTED_MODULE_4__["Events"],
-            transitions: _services_index__WEBPACK_IMPORTED_MODULE_4__["Transitions"],
-            themes: _services_index__WEBPACK_IMPORTED_MODULE_4__["Themes"]
+            transitions: _services_index__WEBPACK_IMPORTED_MODULE_4__["Transitions"]
         };
         this.model = new _model__WEBPACK_IMPORTED_MODULE_1__["ChartModel"](this.services);
     }
@@ -1490,6 +1488,11 @@ var Chart = /** @class */ (function () {
         if (!this.components) {
             return;
         }
+        // Update all services
+        Object.keys(this.services).forEach(function (serviceName) {
+            var serviceObj = _this.services[serviceName];
+            serviceObj.update();
+        });
         // Render all components
         this.components.forEach(function (component) { return component.render(animate); });
         // Asynchronously dispatch a "render-finished" event
@@ -6614,20 +6617,26 @@ var DOMUtils = /** @class */ (function (_super) {
             this.addResizeListener();
         }
     };
+    DOMUtils.prototype.update = function () {
+        this.styleHolderElement();
+    };
     DOMUtils.prototype.styleHolderElement = function () {
         var holderElement = this.getHolder();
-        var _a = this.model.getOptions(), width = _a.width, height = _a.height;
         // Add class to chart holder
         Object(d3_selection__WEBPACK_IMPORTED_MODULE_1__["select"])(this.getHolder()).classed(carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_3___default.a.prefix + "--chart-holder", true);
-        // If width exists in options
-        if (width) {
+        // In order for resize events to not clash with these updates
+        // We'll check if the width & height values passed in options
+        // Have changed, before setting them to the holder
+        var _a = this.model.getOptions(), width = _a.width, height = _a.height;
+        if (width !== this.width) {
             // Apply formatted width attribute to chart
-            holderElement.style.width = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].formatWidthHeightValues(width);
+            holderElement.style.width = width;
+            this.width = width;
         }
-        // If height exists in options
-        if (height) {
-            // Apply formatted height attribute to chart
-            holderElement.style.height = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].formatWidthHeightValues(height);
+        if (height !== this.height) {
+            // Apply formatted width attribute to chart
+            holderElement.style.height = height;
+            this.height = height;
         }
     };
     DOMUtils.prototype.getHolder = function () {
@@ -6744,63 +6753,6 @@ var Events = /** @class */ (function (_super) {
 
 /***/ }),
 
-/***/ "./src/services/essentials/themes.ts":
-/*!*******************************************!*\
-  !*** ./src/services/essentials/themes.ts ***!
-  \*******************************************/
-/*! exports provided: Themes */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Themes", function() { return Themes; });
-/* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service */ "./src/services/service.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-// Internal Imports
-
-
-
-
-var Themes = /** @class */ (function (_super) {
-    __extends(Themes, _super);
-    function Themes() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Themes.prototype.init = function () {
-        this.setTheme();
-    };
-    Themes.prototype.update = function () {
-        this.setTheme();
-    };
-    Themes.prototype.setTheme = function () {
-        var holderElement = this.services.domUtils.getHolder();
-        var theme = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(this.model.getOptions(), "theme");
-        if (theme !== _interfaces__WEBPACK_IMPORTED_MODULE_1__["ChartTheme"].DEFAULT) {
-            Object(d3_selection__WEBPACK_IMPORTED_MODULE_3__["select"])(holderElement).classed("carbon--theme--" + theme, true);
-        }
-    };
-    return Themes;
-}(_service__WEBPACK_IMPORTED_MODULE_0__["Service"]));
-
-
-
-/***/ }),
-
 /***/ "./src/services/essentials/transitions.ts":
 /*!************************************************!*\
   !*** ./src/services/essentials/transitions.ts ***!
@@ -6885,7 +6837,7 @@ var Transitions = /** @class */ (function (_super) {
 /*!*******************************!*\
   !*** ./src/services/index.ts ***!
   \*******************************/
-/*! exports provided: DOMUtils, Events, Themes, Transitions, Axes, Curves */
+/*! exports provided: DOMUtils, Events, Transitions, Axes, Curves */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6896,20 +6848,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _essentials_events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./essentials/events */ "./src/services/essentials/events.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Events", function() { return _essentials_events__WEBPACK_IMPORTED_MODULE_1__["Events"]; });
 
-/* harmony import */ var _essentials_themes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./essentials/themes */ "./src/services/essentials/themes.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Themes", function() { return _essentials_themes__WEBPACK_IMPORTED_MODULE_2__["Themes"]; });
+/* harmony import */ var _essentials_transitions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./essentials/transitions */ "./src/services/essentials/transitions.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Transitions", function() { return _essentials_transitions__WEBPACK_IMPORTED_MODULE_2__["Transitions"]; });
 
-/* harmony import */ var _essentials_transitions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./essentials/transitions */ "./src/services/essentials/transitions.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Transitions", function() { return _essentials_transitions__WEBPACK_IMPORTED_MODULE_3__["Transitions"]; });
+/* harmony import */ var _axes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./axes */ "./src/services/axes.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Axes", function() { return _axes__WEBPACK_IMPORTED_MODULE_3__["Axes"]; });
 
-/* harmony import */ var _axes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./axes */ "./src/services/axes.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Axes", function() { return _axes__WEBPACK_IMPORTED_MODULE_4__["Axes"]; });
-
-/* harmony import */ var _curves__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./curves */ "./src/services/curves.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Curves", function() { return _curves__WEBPACK_IMPORTED_MODULE_5__["Curves"]; });
+/* harmony import */ var _curves__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./curves */ "./src/services/curves.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Curves", function() { return _curves__WEBPACK_IMPORTED_MODULE_4__["Curves"]; });
 
 // Essentials
-
 
 
 
@@ -7030,16 +6978,6 @@ var Tools;
         };
     }
     Tools.getTranformOffsets = getTranformOffsets;
-    function formatWidthHeightValues(value) {
-        var stringValue = value.toString();
-        // If the value provided contains any letters
-        // Return it the same way
-        if (stringValue.match(/[a-z]/i)) {
-            return stringValue;
-        }
-        return stringValue + "px";
-    }
-    Tools.formatWidthHeightValues = formatWidthHeightValues;
     /**
      * Capitalizes first letter of a string
      *
