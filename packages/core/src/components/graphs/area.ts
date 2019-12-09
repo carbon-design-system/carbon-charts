@@ -10,7 +10,7 @@ export class Area extends Component {
 	type = "area";
 
 	init() {
-		// Highlight correct scatter on legend item hovers
+		// Highlight associated area on legend item hovers
 		this.services.events.addEventListener("legend-item-onhover", e => {
 			const { hoveredElement } = e.detail;
 
