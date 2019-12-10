@@ -15,7 +15,7 @@ const NetworkLine = ({
 		.data(data, accessor)
 		.enter()
 		.append("path")
-		.attr("class", `${prefix}--graph-link__line`)
+		.attr("class", `${prefix}--network-link__line`)
 		.classed("line", true)
 		.attr("d", d => buildPathString(d.source, d.target, nodeHeight, nodeWidth));
 	return lines;

@@ -18,8 +18,8 @@ const NetworkCard = ({
 	const cardGroup = cards
 			.enter()
 			.append("g")
-			.attr("class", (d) => classnames(`${prefix}--graph-card`, {
-				[`${prefix}--graph-card--${d.kind}`]: d.kind
+			.attr("class", (d) => classnames(`${prefix}--network-card`, {
+				[`${prefix}--network-card--${d.kind}`]: d.kind
 			}))
 			.attr("transform", d => `translate(${d.x},${d.y})`);
 
@@ -29,32 +29,32 @@ const NetworkCard = ({
 			.attr("width", width)
 			.attr("focusable", true)
 			.attr("tabindex", 0)
-			.attr("class", `${prefix}--graph-card__background`)
+			.attr("class", `${prefix}--network-card__background`)
 			.on("click", (d) => d.onClick && d.onClick());
 
 	const textGroup = cardGroup
 			.append("g")
-			.attr("class", `${prefix}--graph-card__content`);
+			.attr("class", `${prefix}--network-card__content`);
 
 	const heading = textGroup
 			.append("text")
-			.attr("class", `${prefix}--graph-card__heading`)
+			.attr("class", `${prefix}--network-card__heading`)
 			.text("Heading");
 
 	const subHeading = textGroup
 			.append("text")
-			.attr("class", `${prefix}--graph-card__subheading`)
+			.attr("class", `${prefix}--network-card__subheading`)
 			.text("Subheading");
 
 	const cardStroke = cardGroup
 			.append("rect")
 			.attr("height", height)
 			.attr("width", 4)
-			.attr("class", `${prefix}--graph-card__stroke`);
+			.attr("class", `${prefix}--network-card__stroke`);
 
 	const cardIcon = cardGroup
 			.append("g")
-			.attr("class", `${prefix}--graph-card__icon-path`)
+			.attr("class", `${prefix}--network-card__icon-path`)
 			.html(d => d.icon && getIconString(d.icon));
 
 	return cardGroup;

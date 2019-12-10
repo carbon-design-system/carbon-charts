@@ -2,30 +2,30 @@
 @import '~@carbon/themes/scss/tokens';
 @import '~carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
-@include exports('graph-link') {
-	.#{$prefix}--graph-link__line {
+@include exports('network-link') {
+	.#{$prefix}--network-link__line {
 		stroke: $ui_04;
 	}
 
-	.#{$prefix}--graph-link__marker {
+	.#{$prefix}--network-link__marker {
 		fill: $ui_04;
 	}
 
 	// Line kind modifier
-	.#{$prefix}--graph-link__line--warning {
+	.#{$prefix}--network-link__line--warning {
 		stroke: $support_03;
 	}
 
-	.#{$prefix}--graph-link__line--error {
+	.#{$prefix}--network-link__line--error {
 		stroke: $support_01;
 	}
 
 	// Marker kind modifier
-	.#{$prefix}--graph-link__marker--warning {
+	.#{$prefix}--network-link__marker--warning {
 		fill: $support_03;
 	}
 
-	.#{$prefix}--graph-link__marker--error {
+	.#{$prefix}--network-link__marker--error {
 		fill: $support_01;
 	}
 }

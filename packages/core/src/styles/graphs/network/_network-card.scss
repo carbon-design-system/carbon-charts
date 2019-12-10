@@ -5,13 +5,13 @@
 @import '~carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '~carbon-components/scss/globals/scss/_helper-mixins';
 
-@include exports('graph-card') {
-	.#{$prefix}--graph-card {
+@include exports('network-card') {
+	.#{$prefix}--network-card {
 		cursor: pointer;
 		font-family: carbon--font-family("sans");
 	}
 
-	.#{$prefix}--graph-card__background {
+	.#{$prefix}--network-card__background {
 		fill: $ui_01;
 
 		&:focus {
@@ -19,27 +19,27 @@
 		}
 	}
 
-	.#{$prefix}--graph-card__stroke {
+	.#{$prefix}--network-card__stroke {
 		fill: $ui_01;
 	}
 
-	.#{$prefix}--graph-card__icon-path {
+	.#{$prefix}--network-card__icon-path {
 		fill: $icon-01;
 		transform: translate($spacing_05,$spacing_04);
 	}
 
-	.#{$prefix}--graph-card__content {
+	.#{$prefix}--network-card__content {
 		transform: translate(carbon--mini-units(6.5),$spacing_05);
 		pointer-events: none;
 
 		// Nesting BEM elements to prevent catching global text styles
-		text.#{$prefix}--graph-card__heading {
+		text.#{$prefix}--network-card__heading {
 			@include carbon--type-style($name: productive-heading-01);
 			fill: $text_01;
 			transform: translate(0,$spacing_03);
 		}
 
-		text.#{$prefix}--graph-card__subheading {
+		text.#{$prefix}--network-card__subheading {
 			@include carbon--type-style($name: body-short-01);
 			fill: $text_01;
 			transform: translate(0,carbon--mini-units(3.75));
@@ -49,29 +49,29 @@
 
 	// Active state modifier
 	.#{$prefix}--active {
-		.#{$prefix}--graph-card__background {
+		.#{$prefix}--network-card__background {
 			fill: $inverse_02;
 			stroke: $inverse_02;
 		}
 
-		.#{$prefix}--graph-card__heading {
+		.#{$prefix}--network-card__heading {
 			fill: $inverse_01;
 		}
 
-		.#{$prefix}--graph-card__subheading {
+		.#{$prefix}--network-card__subheading {
 			fill: $inverse_01;
 		}
 	}
 
 	// Kind modifier
-	.#{$prefix}--graph-card--warning {
-		.#{$prefix}--graph-card__stroke {
+	.#{$prefix}--network-card--warning {
+		.#{$prefix}--network-card__stroke {
 			fill: $support_03;
 		}
 	}
 
-	.#{$prefix}--graph-card--error {
-		.#{$prefix}--graph-card__stroke {
+	.#{$prefix}--network-card--error {
+		.#{$prefix}--network-card__stroke {
 			fill: $support_01;
 		}
 	}

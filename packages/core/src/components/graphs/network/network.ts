@@ -1,7 +1,14 @@
+import { zoom } from "d3-zoom";
+import { event as d3Event } from "d3";
+import settings from "carbon-components/src/globals/js/settings";
+import { DOMUtils } from "../../../services";
+
 // Internal Imports
 import { Component } from "../../component";
 import NetworkCard from "./network-card";
 import NetworkLine from "./network-line";
+
+const { prefix } = settings;
 
 export class Network extends Component {
 	type = "network";
@@ -35,6 +42,24 @@ export class Network extends Component {
 	}
 
 	render(animate: boolean) {
+		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
+
+		this.svg.append("rect")
+			.attr("height", height)
+			.attr("width", width)
+			.attr("width", width)
+			.attr("class", `${prefix}--network__background`);
+
+		this.svg.call(zoom()
+			.on("zoom", () => {
+				this.svg.attr("transform", d3Event.transform);
+				this.svg.selectAll("text").attr("user-select", "none");
+			})
+			.on("end", () => {
+				this.svg.selectAll("text").attr("user-select", "auto");
+			})
+		);
+
 		this.drawCards();
 		this.drawLines();
 	}
