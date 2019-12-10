@@ -179,6 +179,10 @@ const createChartContainer = chartType => {
 // Initialize all charts
 chartTypes.forEach(type => {
 	const holder = createChartContainer(type);
+
+	// Add `height` to the chart options
+	type.options.height = "500px";
+
 	if (holder) {
 		let classToInitialize;
 		switch (type.id) {
@@ -211,10 +215,10 @@ chartTypes.forEach(type => {
 				break;
 			case "meter":
 				classToInitialize = MeterChart;
+				type.options.height = "150px";
 		}
 
-		// Add `height` to the chart options
-		type.options.height = "500px";
+
 
 		// Initialize chart
 		charts[type.id] = new classToInitialize(

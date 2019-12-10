@@ -176,7 +176,9 @@ export class ChartModel {
 	setColorScale() {
 		if (this.getDisplayData().datasets[0].fillColors) {
 			this.getDisplayData().datasets.forEach(dataset => {
-				this.colorScale[dataset.label] = scaleOrdinal().range(dataset.fillColors).domain(this.allDataLabels);
+				if (this.allDataLabels) {
+					this.colorScale[dataset.label] = scaleOrdinal().range(dataset.fillColors).domain(this.allDataLabels);
+				}
 			});
 		} else {
 			const colors = colorPalettes.DEFAULT;

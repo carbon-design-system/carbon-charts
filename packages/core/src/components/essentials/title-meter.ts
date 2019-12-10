@@ -60,6 +60,7 @@ export class TitleMeter extends Title {
 	}
 
 	truncateTitle() {
+		// get a reference to the title elements to calculate the size the title can be
 		const containerWidth  = DOMUtils.getSVGElementSize(this.parent).width;
 		const title =  DOMUtils.appendOrSelect(this.parent, "text.title");
 		const percentage =  DOMUtils.appendOrSelect(this.parent, "text.percent-value");
@@ -73,14 +74,19 @@ export class TitleMeter extends Title {
 
 		// check if the title is too big for the containing svg
 		if (titleWidth + percentageWidth + offset + statusWidth > containerWidth) {
-			// append the ellipses to their own tspan to calculate the text length
-			title.append("tspan")
+			// the untruncated original title string
+			const titleString = title.text();
+
+			// append the ellipses to their own tspan to calculate the text length including ellipses
+			title
+			.data([titleString])
+				.append("tspan")
 				.text("...");
 
-			// get the bounding width including the elipses '...'
+			// get the bounding width including the elipses '...' and the truncated size for the title text
 			const tspanLength = Math.ceil(DOMUtils.appendOrSelect(title, "tspan").node().getComputedTextLength());
 			const truncatedSize = Math.floor(containerWidth - tspanLength - percentageWidth - statusWidth);
-			const titleString = title.text();
+
 
 			// get the index for creating the max length substring that fits within the svg
 			// use one less than the index to avoid crowding (the elipsis)
@@ -107,7 +113,13 @@ export class TitleMeter extends Title {
 					hoveredElement: title,
 				});
 			});
+		} else {
+			// if we don't truncate we want to remove any events that might have existed for tooltips on the previous title
+			title
+			.on("mouseenter", null)
+			.on("mouseout", null);
 		}
+
 	}
 
 	render() {
