@@ -63,9 +63,9 @@ const changeDemoData = (chartType: any, chartObj: any) => {
 	const updateChartData = currentData => {
 		const result = Tools.clone(currentData);
 		result.datasets = result.datasets.map(dataset => {
-			dataset.label = `new dataset ${Math.random().toFixed(2)}`
+			dataset.label = `new dataset ${Math.random().toFixed(2)}`;
 			const datasetNewData = dataset.data.map(dataPoint => {
-				return randomizeValue(dataPoint)
+				return randomizeValue(dataPoint);
 			});
 
 			const newDataset = Object.assign({}, dataset, { data: datasetNewData });

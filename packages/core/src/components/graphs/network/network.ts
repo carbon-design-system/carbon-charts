@@ -71,7 +71,7 @@ export class Network extends Component {
 			.attr("width", innerWidth)
 			.attr("class", `${prefix}--network__background`);
 
-		this.svg.call(zoomed(container));
+		this.svg.call(zoomed);
 
 		this.drawCards(container);
 		this.drawLines(container);
