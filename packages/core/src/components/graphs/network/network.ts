@@ -57,15 +57,15 @@ export class Network extends Component {
 
 		// TODO Move this into ZoomableChart class
 		const zoomed = zoom()
-				.scaleExtent([0.25, 3])
-				.translateExtent([[-margin, -margin], [innerWidth + margin, innerHeight + margin]])
-				.on("zoom", () => {
-					container.attr("transform", d3Event.transform);
-					container.selectAll("text").attr("user-select", "none");
-				})
-				.on("end", () => {
-					container.selectAll("text").attr("user-select", "auto");
-				});
+			.scaleExtent([0.25, 3])
+			.translateExtent([[-margin, -margin], [innerWidth + margin, innerHeight + margin]])
+			.on("zoom", () => {
+				container.attr("transform", d3Event.transform);
+				container.selectAll("text").attr("user-select", "none");
+			})
+			.on("end", () => {
+				container.selectAll("text").attr("user-select", "auto");
+			});
 
 		this.svg.append("rect")
 			.attr("height", height)
