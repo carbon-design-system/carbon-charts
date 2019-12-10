@@ -1,5 +1,6 @@
 import { zoom } from "d3-zoom";
 import { event as d3Event } from "d3";
+import { max, min } from "d3-array";
 import settings from "carbon-components/src/globals/js/settings";
 import { DOMUtils } from "../../../services";
 
@@ -19,9 +20,9 @@ export class Network extends Component {
 	nodeHeight = 64;
 	nodeWidth = 208;
 
-	drawCards() {
+	drawCards(container) {
 		NetworkCard({
-			svg: this.svg,
+			svg: container,
 			selector: "rect.network-card",
 			data: this.nodes,
 			accessor: d => d,
@@ -30,9 +31,9 @@ export class Network extends Component {
 		});
 	}
 
-	drawLines() {
+	drawLines(container) {
 		NetworkLine({
-			svg: this.svg,
+			svg: container,
 			selector: "rect.network-line",
 			data: this.links,
 			accessor: d => d,
@@ -44,23 +45,34 @@ export class Network extends Component {
 	render(animate: boolean) {
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
 
-		this.svg.append("rect")
-			.attr("height", height)
-			.attr("width", width)
-			.attr("width", width)
-			.attr("class", `${prefix}--network__background`);
+		const xMax = max(this.nodes, node => node.x);
+		const yMax =  max(this.nodes, node  => node.y)
+		const innerWidth = parseFloat(xMax) +  this.nodeWidth;
+		const innerHeight = parseFloat(yMax) + this.nodeHeight;
+		const margin = 80;
 
-		this.svg.call(zoom()
+		const zoomed = (container) => zoom()
+			.scaleExtent([1, 40])
+			.translateExtent([[-margin, -margin], [height + margin, width + margin]])
 			.on("zoom", () => {
-				this.svg.attr("transform", d3Event.transform);
-				this.svg.selectAll("text").attr("user-select", "none");
+				container.attr("transform", d3Event.transform);
+				container.selectAll("text").attr("user-select", "none");
 			})
 			.on("end", () => {
-				this.svg.selectAll("text").attr("user-select", "auto");
-			})
-		);
+				container.selectAll("text").attr("user-select", "auto");
+			});
 
-		this.drawCards();
-		this.drawLines();
+		const container = this.svg.append("g")
+			.attr("class", `${prefix}--network__content`);
+
+		container.append("rect")
+			.attr("height", innerHeight)
+			.attr("width", innerWidth)
+			.attr("class", `${prefix}--network__background`);
+
+		this.svg.call(zoomed(container));
+
+		this.drawCards(container);
+		this.drawLines(container);
 	}
 }
