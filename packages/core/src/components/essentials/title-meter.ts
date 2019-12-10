@@ -16,6 +16,11 @@ export class TitleMeter extends Title {
 		const dataset = displayData.datasets[0];
 		const svg = this.getContainerSVG();
 
+		const containerBounds  = DOMUtils.getSVGElementSize(this.parent, {useAttr: true});
+		// need to check if the width is 0, and try to use the parent attribute
+		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
+		const containerWidth = containerBounds.width ? containerBounds.width : this.parent.node().getAttribute("width");
+
 		// remove any status indicators on the chart to re-render if ranges have been given
 		const status = svg.selectAll("circle.status-indicator");
 		status.remove();
@@ -27,7 +32,7 @@ export class TitleMeter extends Title {
 
 		const self = this;
 		svg.append("circle")
-			.attr("cx", DOMUtils.getSVGElementSize(this.parent, { useAttrs: true }).width - circleSize)
+			.attr("cx", containerWidth - circleSize)
 			.attr("cy", 20 - circleSize)
 			.attr("r", circleSize)
 			.attr("class", function() {
@@ -63,7 +68,7 @@ export class TitleMeter extends Title {
 		// get a reference to the title elements to calculate the size the title can be
 		const containerBounds  = DOMUtils.getSVGElementSize(this.parent, {useAttr: true});
 		// need to check if the width is 0, and try to use the parent attribute
-		const containerWidth = containerBounds.width ? containerBounds.width : this.parent.getAttribute("width");
+		const containerWidth = containerBounds.width ? containerBounds.width : this.parent.node().getAttribute("width");
 
 		const title =  DOMUtils.appendOrSelect(this.parent, "text.title");
 		const percentage =  DOMUtils.appendOrSelect(this.parent, "text.percent-value");
