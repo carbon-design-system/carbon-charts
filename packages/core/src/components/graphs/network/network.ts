@@ -51,6 +51,11 @@ export class Network extends Component {
 		const innerWidth = parseFloat(xMax + nodeWidth);
 		const innerHeight = parseFloat(yMax + nodeHeight);
 
+		this.svg.append("rect")
+			.attr("height", height)
+			.attr("width", width)
+			.attr("class", `${prefix}--network__background`);
+
 		const container = this.svg.append("g")
 			.attr("class", `${prefix}--network__content`)
 			.attr("transform", `translate(0,0)`);
@@ -66,11 +71,6 @@ export class Network extends Component {
 			.on("end", () => {
 				container.selectAll("text").attr("user-select", "auto");
 			});
-
-		this.svg.append("rect")
-			.attr("height", height)
-			.attr("width", width)
-			.attr("class", `${prefix}--network__background`);
 
 		this.svg.call(zoomed);
 
