@@ -51,7 +51,10 @@ export class Network extends Component {
 		const innerHeight = parseFloat(yMax) + this.nodeHeight;
 		const margin = 80;
 
-		const zoomed = (container) => zoom()
+		const container = this.svg.append("g")
+			.attr("class", `${prefix}--network__content`);
+
+		const zoomed = zoom()
 			.scaleExtent([1, 40])
 			.translateExtent([[-margin, -margin], [height + margin, width + margin]])
 			.on("zoom", () => {
@@ -61,9 +64,6 @@ export class Network extends Component {
 			.on("end", () => {
 				container.selectAll("text").attr("user-select", "auto");
 			});
-
-		const container = this.svg.append("g")
-			.attr("class", `${prefix}--network__content`);
 
 		container.append("rect")
 			.attr("height", innerHeight)
