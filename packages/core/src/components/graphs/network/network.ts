@@ -1,6 +1,6 @@
 import { zoom } from "d3-zoom";
 import { event as d3Event } from "d3";
-import { max, min } from "d3-array";
+import { max } from "d3-array";
 import settings from "carbon-components/src/globals/js/settings";
 import { DOMUtils } from "../../../services";
 
@@ -14,64 +14,67 @@ const { prefix } = settings;
 export class Network extends Component {
 	type = "network";
 	data = this.model.getDisplayData().datasets;
+	options = this.model.getOptions();
 	nodes = this.data[0].data;
 	links = this.data[1].data;
 	svg = this.getContainerSVG();
-	nodeHeight = 64;
-	nodeWidth = 208;
 
 	drawCards(container) {
+		const { nodeHeight, nodeWidth } = this.options;
 		NetworkCard({
 			svg: container,
 			selector: "rect.network-card",
 			data: this.nodes,
 			accessor: d => d,
-			height: this.nodeHeight,
-			width: this.nodeWidth,
+			height: nodeHeight,
+			width: nodeWidth,
 		});
 	}
 
 	drawLines(container) {
+		const { nodeHeight, nodeWidth } = this.options;
 		NetworkLine({
 			svg: container,
 			selector: "rect.network-line",
 			data: this.links,
 			accessor: d => d,
-			nodeHeight: this.nodeHeight,
-			nodeWidth: this.nodeWidth
+			nodeHeight: nodeHeight,
+			nodeWidth: nodeWidth
 		});
 	}
 
+
+
 	render(animate: boolean) {
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
-
+		const { nodeHeight = 64, nodeWidth = 208, margin = 80 } = this.options;
 		const xMax = max(this.nodes, ({x}) => x);
 		const yMax =  max(this.nodes, ({y})  => y);
-		const innerWidth = xMax +  this.nodeWidth;
-		const innerHeight = yMax + this.nodeHeight;
-		const margin = 80;
+		const innerWidth = xMax +  nodeWidth;
+		const innerHeight = yMax + nodeHeight;
 
 		const container = this.svg.append("g")
-			.attr("class", `${prefix}--network__content`);
+			.attr("class", `${prefix}--network__content`)
+			.attr("transform", `translate(0,0)`);
 
-		// TODO Move this into ZoomableChart class
+	// TODO Move this into ZoomableChart class
 		const zoomed = zoom()
-			.scaleExtent([1, 40])
-			.translateExtent([[-margin, -margin], [height + margin, width + margin]])
-			.on("zoom", () => {
-				container.attr("transform", d3Event.transform);
-				container.selectAll("text").attr("user-select", "none");
-			})
-			.on("end", () => {
-				container.selectAll("text").attr("user-select", "auto");
-			});
+				.scaleExtent([1, 40])
+				// .translateExtent([[-margin, -margin], [height + margin, width + margin]])
+				.on("zoom", () => {
+					container.attr("transform", d3Event.transform);
+					container.selectAll("text").attr("user-select", "none");
+				})
+				.on("end", () => {
+					container.selectAll("text").attr("user-select", "auto");
+				});
 
 		container.append("rect")
 			.attr("height", innerHeight)
 			.attr("width", innerWidth)
 			.attr("class", `${prefix}--network__background`);
 
-		this.svg.call(zoomed);
+			this.svg.call(zoomed);
 
 		this.drawCards(container);
 		this.drawLines(container);

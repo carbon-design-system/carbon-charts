@@ -26,10 +26,12 @@ const linkMapped = linkData.map(link => {
 	};
 });
 
-export const networkOption = {
+export const networkOptions = {
 	title: "Network diagram",
-	// Todo: try out axis logic here...
-	theme: colors
+	// TODO try out axis logic here...
+	margin: 80,
+	nodeHeight: 64,
+	nodeWidth: 208
 };
 
 export const networkData = {
