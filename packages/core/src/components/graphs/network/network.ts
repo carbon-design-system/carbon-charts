@@ -54,6 +54,7 @@ export class Network extends Component {
 		const container = this.svg.append("g")
 			.attr("class", `${prefix}--network__content`);
 
+		// TODO Move this into ZoomableChart class
 		const zoomed = zoom()
 			.scaleExtent([1, 40])
 			.translateExtent([[-margin, -margin], [height + margin, width + margin]])
