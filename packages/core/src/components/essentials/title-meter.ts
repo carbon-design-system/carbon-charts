@@ -61,9 +61,17 @@ export class TitleMeter extends Title {
 
 	truncateTitle() {
 		// get a reference to the title elements to calculate the size the title can be
-		const containerWidth  = DOMUtils.getSVGElementSize(this.parent).width;
+		const containerBounds  = DOMUtils.getSVGElementSize(this.parent, {useAttr: true});
+		// need to check if the width is 0, and try to use the parent attribute
+		const containerWidth = containerBounds.width ? containerBounds.width : this.parent.getAttribute("width");
+
 		const title =  DOMUtils.appendOrSelect(this.parent, "text.title");
 		const percentage =  DOMUtils.appendOrSelect(this.parent, "text.percent-value");
+
+		// sanity check to prevent stack overflow on binary search
+		if (containerWidth <= 0) {
+			return;
+		}
 
 		// the title needs to fit the width of the container without crowding the status, and percentage value
 		const offset = this.model.getOptions().meter.title.paddingRight; // horizontal offset of percent from title
@@ -151,7 +159,6 @@ export class TitleMeter extends Title {
 
 		// title needs to first render so that we can check for overflow
 		this.truncateTitle();
-
 	}
 
 	/**
