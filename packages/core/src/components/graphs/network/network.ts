@@ -13,18 +13,18 @@ const { prefix } = settings;
 
 export class Network extends Component {
 	type = "network";
-	data = this.model.getDisplayData().datasets;
+	data = this.model.getDisplayData().datasets[0]; // Figure out multiple data sets
 	options = this.model.getOptions();
-	nodes = this.data[0].data;
-	links = this.data[1].data;
 	svg = this.getContainerSVG();
 
 	drawCards(container) {
 		const { nodeHeight, nodeWidth } = this.options;
+		const { nodes } = this.data;
+
 		NetworkCard({
 			svg: container,
 			selector: "rect.network-card",
-			data: this.nodes,
+			data: nodes,
 			accessor: d => d,
 			height: nodeHeight,
 			width: nodeWidth,
@@ -33,10 +33,12 @@ export class Network extends Component {
 
 	drawLines(container) {
 		const { nodeHeight, nodeWidth } = this.options;
+		const { links } = this.data;
+
 		NetworkLine({
 			svg: container,
 			selector: "rect.network-line",
-			data: this.links,
+			data: links,
 			accessor: d => d,
 			nodeHeight: nodeHeight,
 			nodeWidth: nodeWidth
@@ -44,10 +46,11 @@ export class Network extends Component {
 	}
 
 	render(animate: boolean) {
+		const { nodes } = this.data;
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
 		const { nodeHeight = 64, nodeWidth = 208, margin = 80 } = this.options;
-		const xMax = max(this.nodes, ({x}) => x);
-		const yMax =  max(this.nodes, ({y})  => y);
+		const xMax = max(nodes, ({x}) => x);
+		const yMax =  max(nodes, ({y})  => y);
 		const innerWidth = parseFloat(xMax + nodeWidth);
 		const innerHeight = parseFloat(yMax + nodeHeight);
 

@@ -38,12 +38,8 @@ export const networkData = {
 	labels: [], // Todo: Add these as swimlanes?
 	datasets: [
 		{
-			label: "nodes",
-			data: nodeData
-		},
-		{
-			label: "links",
-			data: linkMapped // Todo: decide whether to parse this in the component or not, or give the option to do both
-		},
+			nodes: nodeData,
+			links: linkMapped
+		}
 	]
 };
