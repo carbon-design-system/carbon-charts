@@ -45,8 +45,8 @@ export class Network extends Component {
 	render(animate: boolean) {
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
 
-		const xMax = max(this.nodes, node => node.x);
-		const yMax =  max(this.nodes, node  => node.y);
+		const xMax = max(this.nodes, ({x}) => x);
+		const yMax =  max(this.nodes, ({y})  => y);
 		const innerWidth = parseFloat(xMax) +  this.nodeWidth;
 		const innerHeight = parseFloat(yMax) + this.nodeHeight;
 		const margin = 80;
