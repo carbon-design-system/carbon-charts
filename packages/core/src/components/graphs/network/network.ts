@@ -47,8 +47,8 @@ export class Network extends Component {
 
 		const xMax = max(this.nodes, ({x}) => x);
 		const yMax =  max(this.nodes, ({y})  => y);
-		const innerWidth = parseFloat(xMax) +  this.nodeWidth;
-		const innerHeight = parseFloat(yMax) + this.nodeHeight;
+		const innerWidth = xMax +  this.nodeWidth;
+		const innerHeight = yMax + this.nodeHeight;
 		const margin = 80;
 
 		const container = this.svg.append("g")
