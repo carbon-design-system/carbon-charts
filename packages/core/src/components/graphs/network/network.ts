@@ -43,24 +43,22 @@ export class Network extends Component {
 		});
 	}
 
-
-
 	render(animate: boolean) {
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
 		const { nodeHeight = 64, nodeWidth = 208, margin = 80 } = this.options;
 		const xMax = max(this.nodes, ({x}) => x);
 		const yMax =  max(this.nodes, ({y})  => y);
-		const innerWidth = xMax +  nodeWidth;
-		const innerHeight = yMax + nodeHeight;
+		const innerWidth = parseFloat(xMax + nodeWidth);
+		const innerHeight = parseFloat(yMax + nodeHeight);
 
 		const container = this.svg.append("g")
 			.attr("class", `${prefix}--network__content`)
 			.attr("transform", `translate(0,0)`);
 
-	// TODO Move this into ZoomableChart class
+		// TODO Move this into ZoomableChart class
 		const zoomed = zoom()
-				.scaleExtent([1, 40])
-				// .translateExtent([[-margin, -margin], [height + margin, width + margin]])
+				.scaleExtent([0.25, 3])
+				.translateExtent([[-margin, -margin], [innerWidth + margin, innerHeight + margin]])
 				.on("zoom", () => {
 					container.attr("transform", d3Event.transform);
 					container.selectAll("text").attr("user-select", "none");
@@ -69,12 +67,12 @@ export class Network extends Component {
 					container.selectAll("text").attr("user-select", "auto");
 				});
 
-		container.append("rect")
-			.attr("height", innerHeight)
-			.attr("width", innerWidth)
+		this.svg.append("rect")
+			.attr("height", height)
+			.attr("width", width)
 			.attr("class", `${prefix}--network__background`);
 
-			this.svg.call(zoomed);
+		this.svg.call(zoomed);
 
 		this.drawCards(container);
 		this.drawLines(container);
