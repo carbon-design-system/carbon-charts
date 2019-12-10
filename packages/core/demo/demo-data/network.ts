@@ -12,7 +12,7 @@ const nodeData = [
 
 const linkData = [
 	{ source: "a", target: "b" },
-	{ source: "c", target: "b", kind: "warning", dash: "8 4" },
+	{ source: "c", target: "b", dash: "8, 4" },
 	{ source: "d", target: "c", kind: "error" }];
 
 const linkMapped = linkData.map(link => {
