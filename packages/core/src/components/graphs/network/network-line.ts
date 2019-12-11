@@ -7,7 +7,6 @@ import ChevronRight from "@carbon/icons/es/chevron--right/16";
 import ChevronLeft from "@carbon/icons/es/chevron--left/16";
 import { getIconString } from "./utils";
 
-
 const { prefix } = settings;
 
 const NetworkLine = ({

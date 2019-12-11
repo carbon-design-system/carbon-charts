@@ -21,7 +21,7 @@ const NetworkCard = ({
 			.attr("class", ({kind}) => classnames(`${prefix}--network-card`, {
 				[`${prefix}--network-card--${kind}`]: kind
 			}))
-			.attr("transform", ({x,y}) => `translate(${x},${y})`);
+			.attr("transform", ({x, y}) => `translate(${x},${y})`);
 
 	const cardBackground = cardGroup
 			.append("rect")
