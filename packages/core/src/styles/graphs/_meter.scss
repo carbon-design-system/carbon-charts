@@ -2,6 +2,9 @@
 	rect.container {
 		fill: $ui-01;
 	}
+	rect.value {
+		border-right: 2px;
+	}
 	line.peak {
 		stroke: $ui-05;
 		stroke-width: 2px;

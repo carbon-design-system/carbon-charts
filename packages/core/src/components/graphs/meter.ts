@@ -46,13 +46,31 @@ export class Meter extends Component {
 			.attr("x", 0 )
 			.attr("y", 0 )
 			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
-			.attr("width", function(d) {
-				return xScale(d.data.value);
-			})
+			.attr("width", d =>  xScale(d.data.value))
 			.attr("height", options.meter.barHeight)
-			.attr("fill", d => {
+			.attr("fill", d => d.fillColors[0])
+			.attr("fill-opacity", 0.5)
+			.style("border-color", d => d.fillColors[0]);
+
+
+		// add the border indicating the value
+		const border = svg.selectAll("line.border")
+			.data([dataset]);
+
+		border
+			.enter()
+			.append("line")
+			.classed("border", true)
+			.merge(border)
+			.attr("y1", 0)
+			.attr("y2", options.meter.barHeight)
+			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
+			.attr("x1", d => xScale(d.data.value))
+			.attr("x2", d => xScale(d.data.value))
+			.attr("stroke-width", 2)
+			.attr("stroke",  d => {
 				return d.fillColors[0];
-		});
+			});
 
 		// if a peak is supplied, we want to render it
 		if (dataset.data.peak) {
