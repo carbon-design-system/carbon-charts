@@ -18,10 +18,10 @@ const NetworkCard = ({
 	const cardGroup = cards
 			.enter()
 			.append("g")
-			.attr("class", (d) => classnames(`${prefix}--network-card`, {
-				[`${prefix}--network-card--${d.kind}`]: d.kind
+			.attr("class", ({kind}) => classnames(`${prefix}--network-card`, {
+				[`${prefix}--network-card--${kind}`]: kind
 			}))
-			.attr("transform", d => `translate(${d.x},${d.y})`);
+			.attr("transform", ({x,y}) => `translate(${x},${y})`);
 
 	const cardBackground = cardGroup
 			.append("rect")
@@ -30,7 +30,7 @@ const NetworkCard = ({
 			.attr("focusable", true)
 			.attr("tabindex", 0)
 			.attr("class", `${prefix}--network-card__background`)
-			.on("click", (d) => d.onClick && d.onClick());
+			.on("click", ({onClick}) => onClick && onClick());
 
 	const textGroup = cardGroup
 			.append("g")
@@ -55,7 +55,7 @@ const NetworkCard = ({
 	const cardIcon = cardGroup
 			.append("g")
 			.attr("class", `${prefix}--network-card__icon-path`)
-			.html(d => d.icon && getIconString(d.icon));
+			.html(({icon}) => icon && getIconString(icon));
 
 	return cardGroup;
 };

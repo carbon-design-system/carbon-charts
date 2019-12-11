@@ -6,15 +6,14 @@ import ScreenIcon from "@carbon/icons/es/screen/20";
 const nodeData = [
 	{ id: "a", x: 0, y: 0, icon: UserIcon, onClick: () => console.log("clicked") },
 	{ id: "b", x: 350, y: 0, icon: ScreenIcon },
-	{ id: "c", x: 350, y: 300, kind: "warning", icon: ScreenIcon },
-	{ id: "d", x: 700, y: 300, kind: "error", icon: BugIcon },
+	{ id: "c", x: 350, y: 200, kind: "warning", icon: ScreenIcon },
+	{ id: "d", x: 700, y: 200, kind: "error", icon: BugIcon },
 ];
 
 const linkData = [
-	{ source: "a", target: "b", multiDirectional: true },
-	{ source: "c", target: "b", dash: "8, 4" },
-	{ source: "d", target: "c", kind: "error", multiDirectional: true  },
-	{ source: "d", target: "c", kind: "error", multiDirectional: true }];
+	{ source: "a", target: "b" },
+	{ source: "c", target: "b", dash: "8, 4", multiDirectional: true },
+	{ source: "d", target: "c", kind: "error", directional: true  }];
 
 const linkMapped = linkData.map(link => {
 	const sourceNode = nodeData.find(node => node.id === link.source);

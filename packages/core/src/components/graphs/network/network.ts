@@ -5,11 +5,6 @@ import settings from "carbon-components/src/globals/js/settings";
 import { DOMUtils } from "../../../services";
 import classnames from "classnames";
 
-// Marker icons
-import ChevronRight from "@carbon/icons/es/chevron--right/24";
-import ChevronLeft from "@carbon/icons/es/chevron--left/24";
-import { getIconString } from "./utils";
-
 // Internal Imports
 import { Component } from "../../component";
 import NetworkCard from "./network-card";
@@ -51,46 +46,14 @@ export class Network extends Component {
 		});
 	}
 
-	buildMarkerDefs = (links) => links.reduce((unique, link) => {
-		const { kind, multiDirectional} = link;
-		const id = `marker${kind ? `-${kind}` : ``}-end`;
-		const markerClasses = classnames(`${prefix}--network-marker`, {
-			[`${prefix}--network-marker--${kind}`]: kind
-		});
-		unique[id] = { id, end: true, markerClasses };
-
-		if (multiDirectional) {
-			const startMarkerId = `marker${kind ? `-${kind}` : ``}-start`;
-			unique[startMarkerId] = { id: startMarkerId, end: false, markerClasses };
-		}
-
-		return unique;
-	}, {})
-
 	render(animate: boolean) {
-		const { nodes, links } = this.data;
+		const { nodes } = this.data;
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
 		const { nodeHeight = 64, nodeWidth = 208, margin = 80 } = this.options;
 		const xMax = max(nodes, ({x}) => x);
 		const yMax =  max(nodes, ({y})  => y);
 		const innerWidth = parseFloat(xMax + nodeWidth);
 		const innerHeight = parseFloat(yMax + nodeHeight);
-
-		const markerData = this.buildMarkerDefs(links);
-
-		const markers = this.svg.append("svg:defs")
-			.selectAll("marker")
-			.data(Object.values(markerData))
-			.enter()
-				.append("svg:marker")
-				.attr("id", d => d.id)
-				.attr("class", d => d.markerClasses)
-				.attr("markerHeight", 24)
-				.attr("markerWidth", 24)
-				.attr("orient", "auto")
-				.attr("refX", d => d.end ? 16 : 10)
-				.attr("refY", 12)
-					.html(d => getIconString(d.end ? ChevronRight : ChevronLeft));
 
 		const zoomBox = this.svg.append("rect")
 			.attr("height", height)
