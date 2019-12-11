@@ -2,13 +2,18 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+	"outDir": "./dist",
+	"rootDir": "src",
     "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
+	"inlineSources": true,
+    "declaration": true,
+	"moduleResolution": "node",
+	"module": "es2015",
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es5",
+	"experimentalDecorators": true,
+	"downlevelIteration": true,
+	"importHelpers": true,
+    "target": "es2015",
     "typeRoots": [
       "./node_modules/@types"
     ],
@@ -16,5 +21,16 @@
       "es2017",
       "dom"
     ]
+  },
+  "include": [
+	"src/**/*"
+  ],
+  "angularCompilerOptions": {
+	"annotateForClosureCompiler": true,
+	"skipTemplateCodegen": true,
+	"strictMetadataEmit": true,
+	"fullTemplateTypeCheck": true,
+	"strictInjectionParameters": true,
+	"enableResourceInlining": true
   }
 }

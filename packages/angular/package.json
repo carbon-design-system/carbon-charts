@@ -1,11 +1,10 @@
 {
-	"$schema": "../../node_modules/ng-packagr/package.schema.json",
 	"name": "@carbon/charts-angular",
 	"version": "0.22.0",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"scripts": {
-		"build": "ng-packagr -p package.json",
+		"build": "ng build",
 		"storybook": "start-storybook -p 9005 -c .storybook -s ./.storybook/assets",
 		"demo:build": "build-storybook -o demo/bundle --quiet",
 		"clean": "rm -rf dist demo/bundle"
@@ -50,8 +49,10 @@
 		"zone.js": "^0.8.29 || ^0.9.0"
 	},
 	"devDependencies": {
-		"@angular-devkit/build-angular": "0.8.9",
-		"@angular-devkit/core": "0.8.9",
+		"@angular-devkit/build-angular": "0.13.0",
+		"@angular-devkit/build-ng-packagr": "0.13.0",
+		"@angular-devkit/core": "8.2.2",
+		"@angular/cli": "~7.3.9",
 		"@angular/animations": "7.2.15",
 		"@angular/common": "7.2.15",
 		"@angular/compiler": "7.2.15",
@@ -71,15 +72,9 @@
 		"rxjs": "6.3.3",
 		"tslint": "5.14.0",
 		"typescript": "3.2.2",
-		"zone.js": "0.8.29"
-	},
-	"ngPackage": {
-		"lib": {
-			"entryFile": "src/charts.module.ts"
-		},
-		"whitelistedNonPeerDependencies": [
-			"@carbon/charts"
-		]
+		"zone.js": "0.8.29",
+		"tsickle": "0.37.1",
+		"tslib": "1.10.0"
 	},
 	"publishConfig": {
 		"access": "public"
