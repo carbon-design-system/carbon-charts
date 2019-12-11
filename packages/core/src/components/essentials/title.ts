@@ -45,8 +45,8 @@ export class Title extends Component {
 				self.services.events.dispatchEvent("show-tooltip", {
 					hoveredElement: title,
 					type: TooltipTypes.TITLE
-				});
-			})
+					});
+				})
 				.on("mouseout", function() {
 					self.services.events.dispatchEvent("hide-tooltip", {
 						hoveredElement: title,
