@@ -2,4 +2,4 @@
 
 set -e
 
-yarn global add lerna@3.13.4
+# yarn global add lerna@3.13.4

@@ -70,7 +70,7 @@
 		"d3": "4.11.0",
 		"ng-packagr": "5.7.1",
 		"rxjs": "6.3.3",
-		"tslint": "5.14.0",
+		"tslint": "5.20.1",
 		"typescript": "3.2.2",
 		"zone.js": "0.8.29",
 		"tsickle": "0.37.1",
