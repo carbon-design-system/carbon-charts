@@ -128,7 +128,7 @@ export class StackedBar extends Bar {
 		// Update styling and position on existing bars
 		// As well as bars that were just added
 		// horizontal bars need to map across the opposite axis
-		if (this.model.getOptions().orientation === "horizontal") {
+		if (this.model.getOptions().orientation === BarOrientationOptions.HORIZONTAL) {
 			// bar lengths depend on the primary xscale
 			const xScale = this.services.axes.getMainXAxis();
 			let length;
