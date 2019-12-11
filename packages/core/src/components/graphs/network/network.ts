@@ -5,6 +5,11 @@ import settings from "carbon-components/src/globals/js/settings";
 import { DOMUtils } from "../../../services";
 import classnames from "classnames";
 
+// Marker icons
+import ChevronRight from "@carbon/icons/es/chevron--right/24";
+import ChevronLeft from "@carbon/icons/es/chevron--left/24";
+import { getIconString } from "./utils";
+
 // Internal Imports
 import { Component } from "../../component";
 import NetworkCard from "./network-card";
@@ -14,7 +19,7 @@ const { prefix } = settings;
 
 export class Network extends Component {
 	type = "network";
-	data = this.model.getDisplayData().datasets[0]; // Figure out multiple data sets
+	data = this.model.getDisplayData().datasets[0];
 	options = this.model.getOptions();
 	svg = this.getContainerSVG();
 
@@ -71,20 +76,21 @@ export class Network extends Component {
 		const innerWidth = parseFloat(xMax + nodeWidth);
 		const innerHeight = parseFloat(yMax + nodeHeight);
 
-		const markerDefs = this.buildMarkerDefs(links);
+		const markerData = this.buildMarkerDefs(links);
 
 		const markers = this.svg.append("svg:defs")
 			.selectAll("marker")
-			.data(Object.values(markerDefs))
+			.data(Object.values(markerData))
 			.enter()
 				.append("svg:marker")
 				.attr("id", d => d.id)
 				.attr("class", d => d.markerClasses)
-				.attr("markerHeight", 5)
-				.attr("markerWidth", 5)
+				.attr("markerHeight", 24)
+				.attr("markerWidth", 24)
 				.attr("orient", "auto")
-				.attr("refX", 0)
-				.attr("refY", 0);
+				.attr("refX", d => d.end ? 16 : 10)
+				.attr("refY", 12)
+					.html(d => getIconString(d.end ? ChevronRight : ChevronLeft));
 
 		const zoomBox = this.svg.append("rect")
 			.attr("height", height)
