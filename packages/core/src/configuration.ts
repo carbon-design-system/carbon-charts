@@ -252,6 +252,7 @@ export const options = {
 	donutChart,
 	// Advanced Charts
 	networkChart,
+	zoomableChart
 };
 
 /**

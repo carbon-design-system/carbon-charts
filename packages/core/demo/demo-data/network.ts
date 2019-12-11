@@ -6,8 +6,8 @@ import ScreenIcon from "@carbon/icons/es/screen/20";
 const nodeData = [
 	{ id: "a", x: 0, y: 0, icon: UserIcon, onClick: () => console.log("clicked") },
 	{ id: "b", x: 350, y: 0, icon: ScreenIcon },
-	{ id: "c", x: 350, y: 200, kind: "warning", icon: ScreenIcon },
-	{ id: "d", x: 700, y: 200, kind: "error", icon: BugIcon },
+	{ id: "c", x: 350, y: 180, kind: "warning", icon: ScreenIcon },
+	{ id: "d", x: 700, y: 180, kind: "error", icon: BugIcon },
 ];
 
 const linkData = [
