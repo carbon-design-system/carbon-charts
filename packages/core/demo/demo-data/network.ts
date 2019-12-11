@@ -12,7 +12,7 @@ const nodeData = [
 
 const linkData = [
 	{ source: "a", target: "b" },
-	{ source: "c", target: "b", dash: "8, 4", multiDirectional: true },
+	{ source: "c", target: "b", dash: "4, 4", multiDirectional: true },
 	{ source: "d", target: "c", kind: "error", directional: true  }];
 
 const linkMapped = linkData.map(link => {
