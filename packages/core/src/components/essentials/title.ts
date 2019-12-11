@@ -41,10 +41,11 @@ export class Title extends Component {
 
 			// add events for displaying the tooltip with the title
 			const self = this;
-			title.on("mouseenter", function() {
-				self.services.events.dispatchEvent("show-tooltip", {
-					hoveredElement: title,
-					type: TooltipTypes.TITLE
+			title
+				.on("mouseenter", function() {
+					self.services.events.dispatchEvent("show-tooltip", {
+						hoveredElement: title,
+						type: TooltipTypes.TITLE
 					});
 				})
 				.on("mouseout", function() {
