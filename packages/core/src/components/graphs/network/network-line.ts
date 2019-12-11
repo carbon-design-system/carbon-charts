@@ -19,6 +19,7 @@ const NetworkLine = ({
 }) => {
 	const buildMarkerDefs = () => data.reduce((unique, link) => {
 		const { kind, multiDirectional, directional } = link;
+
 		const markerClasses = classnames(`${prefix}--network-link__marker`, {
 			[`${prefix}--network-link__marker--${kind}`]: kind
 		});
@@ -63,7 +64,8 @@ const NetworkLine = ({
 				(directional || multiDirectional) && `url(#arrow${kind ? `-${kind}` : ``}-end)` )
 			.attr("d", ({source, target}) => buildPathString(source, target, nodeHeight, nodeWidth))
 			.style("stroke-dasharray", ({dash}) => dash);
-	return lines;
+
+			return lines;
 };
 
 export default NetworkLine;

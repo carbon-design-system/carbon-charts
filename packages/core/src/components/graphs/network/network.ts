@@ -47,8 +47,8 @@ export class Network extends Component {
 	}
 
 	render(animate: boolean) {
-		const { nodes } = this.data;
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
+
 		const zoomBox = this.svg.append("rect")
 			.attr("height", height)
 			.attr("width", width)

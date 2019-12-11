@@ -28,14 +28,14 @@ const linkMapped = linkData.map(link => {
 
 export const networkOptions = {
 	title: "Network diagram",
-	// TODO try out axis logic here...
+	// TODO try out axis logic here
 	margin: 80,
 	nodeHeight: 64,
 	nodeWidth: 208
 };
 
 export const networkData = {
-	labels: [], // Todo: Add these as swimlanes?
+	labels: [], // TODO Add these as swim-lanes?
 	datasets: [
 		{
 			nodes: nodeData,
