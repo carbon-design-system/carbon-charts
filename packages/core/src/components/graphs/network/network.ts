@@ -49,14 +49,6 @@ export class Network extends Component {
 	render(animate: boolean) {
 		const { nodes } = this.data;
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
-		const { nodeHeight = 64, nodeWidth = 208, margin = 80 } = this.options;
-		const xMax = max(nodes, ({x}) => x);
-		const yMax =  max(nodes, ({y})  => y);
-		const innerWidth = parseFloat(xMax + nodeWidth);
-		const innerHeight = parseFloat(yMax + nodeHeight);
-
-		console.log(innerWidth, innerHeight);
-
 		const zoomBox = this.svg.append("rect")
 			.attr("height", height)
 			.attr("width", width)
