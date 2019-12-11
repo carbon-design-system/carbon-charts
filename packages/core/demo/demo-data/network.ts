@@ -11,9 +11,10 @@ const nodeData = [
 ];
 
 const linkData = [
-	{ source: "a", target: "b" },
+	{ source: "a", target: "b", multiDirectional: true },
 	{ source: "c", target: "b", dash: "8, 4" },
-	{ source: "d", target: "c", kind: "error" }];
+	{ source: "d", target: "c", kind: "error", multiDirectional: true  },
+	{ source: "d", target: "c", kind: "error", multiDirectional: true }];
 
 const linkMapped = linkData.map(link => {
 	const sourceNode = nodeData.find(node => node.id === link.source);

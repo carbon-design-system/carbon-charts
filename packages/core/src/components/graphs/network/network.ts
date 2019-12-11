@@ -3,6 +3,7 @@ import { event as d3Event } from "d3";
 import { max } from "d3-array";
 import settings from "carbon-components/src/globals/js/settings";
 import { DOMUtils } from "../../../services";
+import classnames from "classnames";
 
 // Internal Imports
 import { Component } from "../../component";
@@ -45,8 +46,24 @@ export class Network extends Component {
 		});
 	}
 
+	buildMarkerDefs = (links) => links.reduce((unique, link) => {
+		const { kind, multiDirectional} = link;
+		const id = `marker${kind ? `-${kind}` : ``}-end`;
+		const markerClasses = classnames(`${prefix}--network-marker`, {
+			[`${prefix}--network-marker--${kind}`]: kind
+		});
+		unique[id] = { id, end: true, markerClasses };
+
+		if (multiDirectional) {
+			const startMarkerId = `marker${kind ? `-${kind}` : ``}-start`;
+			unique[startMarkerId] = { id: startMarkerId, end: false, markerClasses };
+		}
+
+		return unique;
+	}, {})
+
 	render(animate: boolean) {
-		const { nodes } = this.data;
+		const { nodes, links } = this.data;
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
 		const { nodeHeight = 64, nodeWidth = 208, margin = 80 } = this.options;
 		const xMax = max(nodes, ({x}) => x);
@@ -54,7 +71,22 @@ export class Network extends Component {
 		const innerWidth = parseFloat(xMax + nodeWidth);
 		const innerHeight = parseFloat(yMax + nodeHeight);
 
-		this.svg.append("rect")
+		const markerDefs = this.buildMarkerDefs(links);
+
+		const markers = this.svg.append("svg:defs")
+			.selectAll("marker")
+			.data(Object.values(markerDefs))
+			.enter()
+				.append("svg:marker")
+				.attr("id", d => d.id)
+				.attr("class", d => d.markerClasses)
+				.attr("markerHeight", 5)
+				.attr("markerWidth", 5)
+				.attr("orient", "auto")
+				.attr("refX", 0)
+				.attr("refY", 0);
+
+		const zoomBox = this.svg.append("rect")
 			.attr("height", height)
 			.attr("width", width)
 			.attr("class", `${prefix}--network__background`);
