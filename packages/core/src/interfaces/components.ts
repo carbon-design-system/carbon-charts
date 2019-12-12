@@ -79,6 +79,16 @@ export interface TooltipOptions {
 		 */
 		verticalOffset?: number
 	};
+	title?: {
+		/**
+		 * vertical offset for title tooltip placement. < 0 shifts the tooltip above title, > 0 shifts vertically down
+		 */
+		verticalOffset?: number
+		/**
+		 * max width of title tooltip relative to the width of the chart-svg (percentage should be < 1)
+		 */
+		width?: number
+	};
 }
 
 /**

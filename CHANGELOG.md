@@ -3,6 +3,117 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.1](https://github.com/IBM/carbon-charts/compare/v0.22.0...v0.22.1) (2019-12-12)
+
+
+### Bug Fixes
+
+* **charts-angular:** update build toolchain ([aa63925](https://github.com/IBM/carbon-charts/commit/aa63925))
+
+
+
+
+
+# [0.22.0](https://github.com/IBM/carbon-charts/compare/v0.21.0...v0.22.0) (2019-12-09)
+
+
+### Features
+
+* **core, angular, react, vue:** Update chart width & height through options ([f050c35](https://github.com/IBM/carbon-charts/commit/f050c35))
+
+
+
+
+
+# [0.21.0](https://github.com/IBM/carbon-charts/compare/v0.20.1...v0.21.0) (2019-12-09)
+
+
+### Features
+
+* **core, angular, react, vue:** allow customizations to pie labels & the donut center number ([#427](https://github.com/IBM/carbon-charts/issues/427)) ([0446045](https://github.com/IBM/carbon-charts/commit/0446045))
+
+
+
+
+
+## [0.20.1](https://github.com/IBM/carbon-charts/compare/v0.20.0...v0.20.1) (2019-12-04)
+
+
+### Bug Fixes
+
+* **core:** loop also through non-display data to assign colors to datasets ([#394](https://github.com/IBM/carbon-charts/issues/394)) ([5ba8952](https://github.com/IBM/carbon-charts/commit/5ba8952))
+
+
+
+
+
+# [0.20.0](https://github.com/IBM/carbon-charts/compare/v0.19.0...v0.20.0) (2019-12-02)
+
+
+### Features
+
+* **core:** add title truncation to tooltip ([bdd677c](https://github.com/IBM/carbon-charts/commit/bdd677c))
+
+
+
+
+
+# [0.19.0](https://github.com/IBM/carbon-charts/compare/v0.18.0...v0.19.0) (2019-12-02)
+
+
+### Bug Fixes
+
+* **angular:** update zone.js peerDependency range ([15cbddd](https://github.com/IBM/carbon-charts/commit/15cbddd))
+
+
+### Features
+
+* **core:** export interfaces and configurations ([df7f557](https://github.com/IBM/carbon-charts/commit/df7f557))
+
+
+
+
+
+# [0.18.0](https://github.com/IBM/carbon-charts/compare/v0.17.1...v0.18.0) (2019-12-02)
+
+
+### Bug Fixes
+
+* **bar:** fix lint errors ([0d04b04](https://github.com/IBM/carbon-charts/commit/0d04b04))
+* **tooltip:** rename defaultTooltip defaultHTML ([cf8f34e](https://github.com/IBM/carbon-charts/commit/cf8f34e))
+
+
+### Features
+
+* **bar:** pass default tooltip to customHTML tooltip ([b6f519b](https://github.com/IBM/carbon-charts/commit/b6f519b))
+* **tooltip:** for customHTML pass along the HTML tooltip ([7d1a026](https://github.com/IBM/carbon-charts/commit/7d1a026))
+
+
+
+
+
+## [0.17.1](https://github.com/IBM/carbon-charts/compare/v0.17.0...v0.17.1) (2019-11-29)
+
+
+### Bug Fixes
+
+* **core:** build optimizations ([fef77e5](https://github.com/IBM/carbon-charts/commit/fef77e5))
+
+
+
+
+
+# [0.17.0](https://github.com/IBM/carbon-charts/compare/v0.16.25...v0.17.0) (2019-11-29)
+
+
+### Features
+
+* **core:** date/time locale support + tick formatting ([bc02012](https://github.com/IBM/carbon-charts/commit/bc02012))
+
+
+
+
+
 ## [0.16.25](https://github.com/IBM/carbon-charts/compare/v0.16.24...v0.16.25) (2019-10-29)
 
 
