@@ -58,7 +58,7 @@ export const options = {
 	},
 	legendClickable: true,
 	resizable: true,
-	height: 500,
+	height: "500px",
 	title: "My chart"
 };
 
