@@ -60,23 +60,27 @@ export class AxisChart extends Chart {
 			}
 		};
 
+		const isEnabled = this.model.getOptions().legend.enabled !== false;
+
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
-		const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
-		if (legendPosition === LegendPositions.LEFT) {
-			fullFrameComponentDirection = LayoutDirection.ROW;
+		if (isEnabled) {
+			const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
+			if (legendPosition === LegendPositions.LEFT) {
+				fullFrameComponentDirection = LayoutDirection.ROW;
 
-			if (!this.model.getOptions().legend.orientation) {
-				this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
-			}
-		} else if (legendPosition === LegendPositions.RIGHT) {
-			fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
+				if (!this.model.getOptions().legend.orientation) {
+					this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+				}
+			} else if (legendPosition === LegendPositions.RIGHT) {
+				fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
 
-			if (!this.model.getOptions().legend.orientation) {
-				this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+				if (!this.model.getOptions().legend.orientation) {
+					this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+				}
+			} else if (legendPosition === LegendPositions.BOTTOM) {
+				fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
 			}
-		} else if (legendPosition === LegendPositions.BOTTOM) {
-			fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
 		}
 
 		const fullFrameComponent = {
@@ -86,7 +90,7 @@ export class AxisChart extends Chart {
 					this.model,
 					this.services,
 					[
-						...((this.model.getOptions().legend.visible !== false) ? [ legendComponent ] : [ ]),
+						...(isEnabled ? [ legendComponent ] : [ ]),
 						graphFrameComponent
 					],
 					{

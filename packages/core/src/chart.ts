@@ -144,24 +144,27 @@ export class Chart {
 			}
 		};
 
+		const isEnabled = this.model.getOptions().legend.enabled !== false;
 		// TODORF - REUSE BETWEEN AXISCHART & CHART
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
-		const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
-		if (legendPosition === "left") {
-			fullFrameComponentDirection = LayoutDirection.ROW;
+		if (isEnabled) {
+				const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
+			if (legendPosition === "left") {
+				fullFrameComponentDirection = LayoutDirection.ROW;
 
-			if (!this.model.getOptions().legend.orientation) {
-				this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
-			}
-		} else if (legendPosition === "right") {
-			fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
+				if (!this.model.getOptions().legend.orientation) {
+					this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+				}
+			} else if (legendPosition === "right") {
+				fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
 
-			if (!this.model.getOptions().legend.orientation) {
-				this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+				if (!this.model.getOptions().legend.orientation) {
+					this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+				}
+			} else if (legendPosition === "bottom") {
+				fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
 			}
-		} else if (legendPosition === "bottom") {
-			fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
 		}
 
 		const fullFrameComponent = {
@@ -171,7 +174,7 @@ export class Chart {
 					this.model,
 					this.services,
 					[
-						...((this.model.getOptions().legend.visible !== false) ? [ legendComponent ] : [ ]),
+						...(isEnabled ? [ legendComponent ] : [ ]),
 						graphFrameComponent
 					],
 					{

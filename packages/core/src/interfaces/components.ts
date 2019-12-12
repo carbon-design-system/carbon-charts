@@ -33,6 +33,10 @@ export interface LegendOptions {
 	 * the clickability of legend items
 	 */
 	clickable?: boolean;
+	/**
+	 * is the legend visible or not
+	 */
+	enabled?: boolean;
 	items?: {
 		status?: {
 			ACTIVE?: Number;
