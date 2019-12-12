@@ -48,6 +48,7 @@ export enum TooltipPosition {
 export enum TooltipTypes {
 	DATAPOINT = "datapoint",
 	GRIDLINE = "gridline",
+	TITLE = "title"
 }
 
 /**
