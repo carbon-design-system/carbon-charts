@@ -36,12 +36,6 @@ const {
 } = require("./demo-data/index");
 
 export const chartTypes = [
-	// Advanced charts
-	{
-		id: "network",
-		options: networkOptions,
-		data: networkData
-	},
 	// Basic charts
 	{
 		id: "grouped-bar",
@@ -107,5 +101,11 @@ export const chartTypes = [
 		id: "line-step-time-series",
 		options: stepTimeSeriesOptions,
 		data: stepTimeSeriesData
-	}
+	},
+	// Advanced charts
+	{
+		id: "network",
+		options: networkOptions,
+		data: networkData
+	},
 ];
