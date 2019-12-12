@@ -5,7 +5,7 @@ import classnames from "classnames";
 // Marker icons
 import ChevronRight from "@carbon/icons/es/chevron--right/16";
 import ChevronLeft from "@carbon/icons/es/chevron--left/16";
-import { getIconString } from "./utils";
+import { buildIconString } from "./utils";
 
 const { prefix } = settings;
 
@@ -50,7 +50,7 @@ const NetworkLine = ({
 			.attr("orient", "auto")
 			.attr("refX", ({end}) => end ? 10 : 6)
 			.attr("refY", 8)
-				.html(({end}) => getIconString(end ? ChevronRight : ChevronLeft));
+				.html(({end}) => buildIconString(end ? ChevronRight : ChevronLeft));
 
 	const lines = svg.selectAll(selector)
 		.data(data, accessor)

@@ -1,4 +1,4 @@
-import { getIconString } from "./utils";
+import { buildIconString } from "./utils";
 import settings from "carbon-components/src/globals/js/settings";
 import classnames from "classnames";
 
@@ -55,7 +55,7 @@ const NetworkCard = ({
 	const cardIcon = cardGroup
 			.append("g")
 			.attr("class", `${prefix}--network-card__icon-path`)
-			.html(({icon}) => icon && getIconString(icon));
+			.html(({icon}) => icon && buildIconString(icon));
 
 	return cardGroup;
 };
