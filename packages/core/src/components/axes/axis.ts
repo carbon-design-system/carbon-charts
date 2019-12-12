@@ -11,6 +11,23 @@ import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-sc
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { min, extent } from "d3-array";
 import { timeFormatDefaultLocale } from "d3-time-format";
+import {
+	differenceInYears,
+	addYears,
+	subYears,
+	differenceInMonths,
+	addMonths,
+	subMonths,
+	differenceInDays,
+	addDays,
+	subDays,
+	differenceInHours,
+	addHours,
+	subHours,
+	differenceInMinutes,
+	addMinutes,
+	subMinutes
+} from "date-fns";
 
 export class Axis extends Component {
 	type = "axes";
@@ -131,16 +148,25 @@ export class Axis extends Component {
 
 		if (axisOptions.scaleType === ScaleTypes.TIME) {
 			if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges")) {
-				// TODO - Need to account for non-day incrementals as well
-				const [startDate, endDate] = domain;
-				startDate.setDate(startDate.getDate() - 1);
-				endDate.setDate(endDate.getDate() + 1);
-			}
+                const startDate = new Date(domain[0]);
+                const endDate = new Date(domain[1]);
+                if (differenceInYears(endDate, startDate) > 3) {
+                    return [subYears(startDate, 1), addYears(endDate, 1)];
+                }
+                if (differenceInMonths(endDate, startDate) > 3) {
+                    return [subMonths(startDate, 1), addMonths(endDate, 1)];
+                }
+                if (differenceInDays(endDate, startDate) > 3) {
+                    return [subDays(startDate, 1), addDays(endDate, 1)];
+                } else if (differenceInHours(endDate, startDate) > 3) {
+                    return [subHours(startDate, 1), addHours(endDate, 1)];
+                } else if (differenceInMinutes(endDate, startDate) > 3) {
+                    return [subMinutes(startDate, 1), addMinutes(endDate, 1)];
+                }
+                // Other
+                return [startDate, endDate];
+            }
 
-			return [
-				new Date(domain[0]),
-				new Date(domain[1])
-			];
 		}
 
 		// TODO - Work with design to improve logic
