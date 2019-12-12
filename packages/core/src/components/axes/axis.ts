@@ -148,24 +148,24 @@ export class Axis extends Component {
 
 		if (axisOptions.scaleType === ScaleTypes.TIME) {
 			if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges")) {
-                const startDate = new Date(domain[0]);
-                const endDate = new Date(domain[1]);
-                if (differenceInYears(endDate, startDate) > 3) {
-                    return [subYears(startDate, 1), addYears(endDate, 1)];
-                }
-                if (differenceInMonths(endDate, startDate) > 3) {
-                    return [subMonths(startDate, 1), addMonths(endDate, 1)];
-                }
-                if (differenceInDays(endDate, startDate) > 3) {
-                    return [subDays(startDate, 1), addDays(endDate, 1)];
-                } else if (differenceInHours(endDate, startDate) > 3) {
-                    return [subHours(startDate, 1), addHours(endDate, 1)];
-                } else if (differenceInMinutes(endDate, startDate) > 3) {
-                    return [subMinutes(startDate, 1), addMinutes(endDate, 1)];
-                }
-                // Other
-                return [startDate, endDate];
-            }
+				const startDate = new Date(domain[0]);
+				const endDate = new Date(domain[1]);
+				if (differenceInYears(endDate, startDate) > 3) {
+					return [subYears(startDate, 1), addYears(endDate, 1)];
+				}
+				if (differenceInMonths(endDate, startDate) > 3) {
+					return [subMonths(startDate, 1), addMonths(endDate, 1)];
+				}
+				if (differenceInDays(endDate, startDate) > 3) {
+					return [subDays(startDate, 1), addDays(endDate, 1)];
+				} else if (differenceInHours(endDate, startDate) > 3) {
+					return [subHours(startDate, 1), addHours(endDate, 1)];
+				} else if (differenceInMinutes(endDate, startDate) > 3) {
+					return [subMinutes(startDate, 1), addMinutes(endDate, 1)];
+				}
+				// Other
+				return [startDate, endDate];
+			}
 
 		}
 
