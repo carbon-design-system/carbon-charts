@@ -1,0 +1,77 @@
+{
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"newProjectRoot": "projects",
+	"projects": {
+		"charts-angular": {
+			"root": "",
+			"sourceRoot": "src",
+			"projectType": "library",
+			"prefix": "sc",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-ng-packagr:build",
+					"options": {
+						"tsConfig": "./tsconfig.json",
+						"project": "./ng-package.json"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"main": "src/test.ts",
+						"karmaConfig": "./karma.conf.js",
+						"tsConfig": "./tsconfig.spec.json"
+					}
+				},
+				"lint": {
+					"builder": "@angular-devkit/build-angular:tslint",
+					"options": {
+						"tsConfig": [
+							"./tsconfig.json",
+							"./tsconfig.spec.json"
+						],
+						"exclude": [
+							"**/node_modules/**"
+						]
+					}
+				}
+			}
+		},
+		"charts-angular-e2e": {
+			"root": "e2e",
+			"sourceRoot": "e2e",
+			"projectType": "application",
+			"architect": {
+				"e2e": {
+					"builder": "@angular-devkit/build-angular:protractor",
+					"options": {
+						"protractorConfig": "./protractor.conf.js",
+						"devServerTarget": "charts-angular:serve"
+					}
+				},
+				"lint": {
+					"builder": "@angular-devkit/build-angular:tslint",
+					"options": {
+						"tsConfig": [
+							"e2e/tsconfig.e2e.json"
+						],
+						"exclude": [
+							"**/node_modules/**/*"
+						]
+					}
+				}
+			}
+		}
+	},
+	"defaultProject": "charts-angular",
+	"schematics": {
+		"@schematics/angular:component": {
+			"prefix": "ibm",
+			"styleext": "css"
+		},
+		"@schematics/angular:directive": {
+			"prefix": "ibm"
+		}
+	}
+}
