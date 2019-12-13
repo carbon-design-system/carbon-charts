@@ -1,11 +1,12 @@
 import { configure } from '@storybook/react';
-import { setOptions } from '@storybook/addon-options';
+import { withOptions } from '@storybook/addon-options';
 
-setOptions({
-  name: 'Carbon Charts - React Wrappers',
-  showDownPanel: false,
-  showAddonPanel: false,
-  sortStoriesByKind: true
+withOptions({
+	theme: {
+		brandTitle: 'Carbon Charts - React Wrappers'
+	},
+	panelPosition: 'bottom',
+	sortStoriesByKind: true
 });
 
 // load global styles
