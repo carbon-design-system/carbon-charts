@@ -8,5 +8,12 @@ module.exports = ({ config }) => {
 		]
 	});
 	config.resolve.extensions.push(".ts");
+
+	config.module.rules.push({
+		test: /\.stories\.jsx?$/,
+		loaders: [require.resolve('@storybook/source-loader')],
+		enforce: 'pre'
+	});
+
 	return config;
 };
