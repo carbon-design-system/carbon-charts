@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.3](https://github.com/IBM/carbon-charts/compare/v0.22.2...v0.22.3) (2019-12-16)
+
+
+### Bug Fixes
+
+* **core:** update tooltip value formatter ([2a978d8](https://github.com/IBM/carbon-charts/commit/2a978d8))
+
+
+
+
+
 ## [0.22.2](https://github.com/IBM/carbon-charts/compare/v0.22.1...v0.22.2) (2019-12-16)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
