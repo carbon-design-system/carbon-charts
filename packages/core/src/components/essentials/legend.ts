@@ -58,17 +58,6 @@ export class Legend extends Component {
 		if (legendClickable && addedLegendItems.size() > 0) {
 			this.addEventListeners();
 		}
-
-		const legendPosition = Tools.getProperty(options, "legend", "position");
-		if (legendPosition === LegendPositions.BOTTOM || legendPosition === LegendPositions.TOP) {
-			// TODO - Replace with layout component margins
-			DOMUtils.appendOrSelect(svg, "rect.spacer")
-				.attr("x", 0)
-				.attr("y", 10)
-				.attr("width", 20)
-				.attr("height", 20)
-				.attr("fill", "none");
-		}
 	}
 
 	breakItemsIntoLines(addedLegendItems) {
@@ -101,7 +90,7 @@ export class Legend extends Component {
 				const previousLegendItem = select(svg.selectAll("g.legend-item").nodes()[i - 1]);
 
 				if (itemIndexInLine === 0 || previousLegendItem.empty() || legendOrientation === LegendOrientations.VERTICAL) {
-					if (legendOrientation === LegendOrientations.VERTICAL) {
+					if (legendOrientation === LegendOrientations.VERTICAL && i !== 0) {
 						lineNumber++;
 					}
 				} else {
@@ -117,11 +106,7 @@ export class Legend extends Component {
 					}
 				}
 
-				const legendPosition = Tools.getProperty(options, "legend", "position");
-				let yOffset = 0;
-				if (legendPosition === LegendPositions.BOTTOM) {
-					yOffset = 20;
-				}
+				const yOffset = 0;
 
 				// Position checkbox
 				// TODO - Replace with layout component margins
