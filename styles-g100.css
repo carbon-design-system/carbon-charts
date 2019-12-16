@@ -129,7 +129,7 @@ g.bx--cc--legend {
 .bx--cc--line path.line {
   pointer-events: none;
   fill: none;
-  stroke-width: 1.75; }
+  stroke-width: 1.5; }
 
 g.bx--cc--scatter circle.dot.hovered {
   fill-opacity: 1;
@@ -137,7 +137,8 @@ g.bx--cc--scatter circle.dot.hovered {
   transition-timing-function: cubic-bezier(0.4, 0.14, 0.3, 1); }
 
 g.bx--cc--scatter circle.dot.unfilled {
-  fill: #282828; }
+  fill: #282828;
+  stroke-width: 1.5; }
 
 g.bx--cc--scatter g.lines path.line {
   mix-blend-mode: multiply; }
