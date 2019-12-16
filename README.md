@@ -23,6 +23,9 @@
 - [React](./packages/react)
 - [Vue](./packages/vue)
 
+## CHANGELOG
+Read the release change logs [here](./CHANGELOG.md)
+
 ## Component status
 :white_check_mark: Stable :hourglass_flowing_sand: In progress
 
