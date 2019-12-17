@@ -2,7 +2,7 @@
 import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { LegendOrientations, LegendPositions } from "../../interfaces";
+import { LegendOrientations, Roles } from "../../interfaces";
 import { DOMUtils } from "../../services";
 
 // D3 Imports
@@ -12,7 +12,7 @@ export class Legend extends Component {
 	type = "legend";
 
 	render() {
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG().attr("role", Roles.GRAPHICS_DOCUMENT);
 		const options = this.model.getOptions();
 
 		const legendItems = svg.selectAll("g.legend-item")
