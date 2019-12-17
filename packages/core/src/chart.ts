@@ -14,7 +14,8 @@ import { Component,
 	Title,
 	Legend,
 	LayoutComponent,
-	Tooltip
+	Tooltip,
+	Spacer
 } from "./components";
 import { Tools } from "./tools";
 
@@ -168,6 +169,17 @@ export class Chart {
 			fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
 		}
 
+		const legendSpacerComponent = {
+			id: "spacer",
+			components: [
+				new Spacer(this.model, this.services)
+			],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
 		const fullFrameComponent = {
 			id: "full-frame",
 			components: [
@@ -176,6 +188,7 @@ export class Chart {
 					this.services,
 					[
 						legendComponent,
+						legendSpacerComponent,
 						graphFrameComponent
 					],
 					{
@@ -193,6 +206,19 @@ export class Chart {
 		const topLevelLayoutComponents = [];
 		if (this.model.getOptions().title) {
 			topLevelLayoutComponents.push(titleComponent);
+
+			const titleSpacerComponent = {
+				id: "spacer",
+				components: [
+					new Spacer(this.model, this.services)
+				],
+				growth: {
+					x: LayoutGrowth.PREFERRED,
+					y: LayoutGrowth.FIXED
+				}
+			};
+
+			topLevelLayoutComponents.push(titleSpacerComponent);
 		}
 		topLevelLayoutComponents.push(fullFrameComponent);
 

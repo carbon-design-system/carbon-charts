@@ -272,3 +272,9 @@ export const axis = {
 		rotateIfSmallerThan: 30
 	}
 };
+
+export const spacers = {
+	default: {
+		size: 24
+	}
+};
