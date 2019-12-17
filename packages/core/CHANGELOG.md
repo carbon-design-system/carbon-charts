@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/IBM/carbon-charts/compare/v0.23.0...v0.24.0) (2019-12-17)
+
+
+### Features
+
+* **core, react, angular, vue:** add WAI-ARIA tags to elements ([1216ed6](https://github.com/IBM/carbon-charts/commit/1216ed6))
+
+
+
+
+
 # [0.23.0](https://github.com/IBM/carbon-charts/compare/v0.22.4...v0.23.0) (2019-12-17)
 
 
