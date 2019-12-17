@@ -2357,11 +2357,15 @@ var Axis = /** @class */ (function (_super) {
         var container = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(svg, "g.axis." + axisPosition);
         var axisRefExists = !container.select("g.ticks").empty();
         var axisRef = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(container, "g.ticks");
+        if (!axisRefExists) {
+            axisRef.attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_1__["Roles"].GRAPHICS_OBJECT + " " + _interfaces__WEBPACK_IMPORTED_MODULE_1__["Roles"].GROUP);
+        }
         // We draw the invisible axis because of the async nature of d3 transitions
         // To be able to tell the final width & height of the axis when initiaing the transition
         // The invisible axis is updated instantly and without a transition
         var invisibleAxisRef = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(container, "g.ticks.invisible")
-            .style("opacity", "0");
+            .style("opacity", "0")
+            .attr("aria-hidden", true);
         // Position and transition the axis
         switch (axisPosition) {
             case _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].LEFT:
@@ -3032,7 +3036,7 @@ var Legend = /** @class */ (function (_super) {
     }
     Legend.prototype.render = function () {
         var _this = this;
-        var svg = this.getContainerSVG();
+        var svg = this.getContainerSVG().attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_2__["Roles"].GRAPHICS_DOCUMENT);
         var options = this.model.getOptions();
         var legendItems = svg.selectAll("g.legend-item")
             .data(this.getLegendItemArray());
@@ -3736,10 +3740,10 @@ var Tooltip = /** @class */ (function (_super) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GroupedBar", function() { return GroupedBar; });
 /* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bar */ "./src/components/graphs/bar.ts");
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
-/* harmony import */ var d3_color__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-color */ "../../node_modules/d3-color/src/index.js");
-/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-scale */ "./node_modules/d3-scale/src/index.js");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
+/* harmony import */ var d3_color__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-color */ "../../node_modules/d3-color/src/index.js");
+/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-scale */ "./node_modules/d3-scale/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -3755,8 +3759,8 @@ var __extends = (undefined && undefined.__extends) || (function () {
 })();
 // Internal Imports
 
-// D3 Imports
 
+// D3 Imports
 
 
 
@@ -3794,7 +3798,7 @@ var GroupedBar = /** @class */ (function (_super) {
     };
     GroupedBar.prototype.setGroupScale = function () {
         var datasets = this.model.getDisplayData().datasets;
-        this.groupScale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_3__["scaleBand"])()
+        this.groupScale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleBand"])()
             .domain(datasets.map(function (dataset) { return dataset.label; }))
             .rangeRound([0, this.getGroupWidth()]);
     };
@@ -3820,7 +3824,9 @@ var GroupedBar = /** @class */ (function (_super) {
         // Add the bar groups that need to be introduced
         var barGroupsEnter = barGroups.enter()
             .append("g")
-            .classed("bars", true);
+            .classed("bars", true)
+            .attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_1__["Roles"].GROUP)
+            .attr("aria-labelledby", function (d) { return d; });
         // Update data on all bars
         var bars = barGroupsEnter.merge(barGroups)
             .attr("transform", function (d, i) {
@@ -3847,7 +3853,11 @@ var GroupedBar = /** @class */ (function (_super) {
             return Math.abs(_this.services.axes.getYValue(d, i) - _this.services.axes.getYValue(0));
         })
             .attr("fill", function (d) { return _this.model.getFillScale()[d.datasetLabel](d.label); })
-            .attr("opacity", 1);
+            .attr("opacity", 1)
+            // a11y
+            .attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_1__["Roles"].GRAPHICS_SYMBOL)
+            .attr("aria-roledescription", "bar")
+            .attr("aria-label", function (d) { return d.value; });
         // Add event listeners to elements drawn
         this.addEventListeners();
     };
@@ -3864,17 +3874,17 @@ var GroupedBar = /** @class */ (function (_super) {
         var self = this;
         this.parent.selectAll("rect.bar")
             .on("mouseover", function () {
-            var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_1__["select"])(this);
+            var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this);
             hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
-                .attr("fill", Object(d3_color__WEBPACK_IMPORTED_MODULE_2__["color"])(hoveredElement.attr("fill")).darker(0.7).toString());
+                .attr("fill", Object(d3_color__WEBPACK_IMPORTED_MODULE_3__["color"])(hoveredElement.attr("fill")).darker(0.7).toString());
             // Show tooltip
             self.services.events.dispatchEvent("show-tooltip", {
                 hoveredElement: hoveredElement,
-                type: _interfaces__WEBPACK_IMPORTED_MODULE_4__["TooltipTypes"].DATAPOINT
+                type: _interfaces__WEBPACK_IMPORTED_MODULE_1__["TooltipTypes"].DATAPOINT
             });
         })
             .on("mouseout", function () {
-            var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_1__["select"])(this);
+            var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this);
             hoveredElement.classed("hovered", false);
             hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
                 .attr("fill", function (d) { return self.model.getFillScale()[d.datasetLabel](d.label); });
@@ -3911,9 +3921,9 @@ var GroupedBar = /** @class */ (function (_super) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SimpleBar", function() { return SimpleBar; });
 /* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bar */ "./src/components/graphs/bar.ts");
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
-/* harmony import */ var d3_color__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-color */ "../../node_modules/d3-color/src/index.js");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
+/* harmony import */ var d3_color__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-color */ "../../node_modules/d3-color/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -3929,8 +3939,8 @@ var __extends = (undefined && undefined.__extends) || (function () {
 })();
 // Internal Imports
 
-// D3 Imports
 
+// D3 Imports
 
 
 var SimpleBar = /** @class */ (function (_super) {
@@ -3972,7 +3982,8 @@ var SimpleBar = /** @class */ (function (_super) {
         // Add the bar groups that need to be introduced
         var barGroupsEnter = barGroups.enter()
             .append("g")
-            .classed("bars", true);
+            .classed("bars", true)
+            .attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_1__["Roles"].GROUP);
         // Update data on all bars
         var bars = barGroupsEnter.merge(barGroups)
             .selectAll("rect.bar")
@@ -3998,7 +4009,11 @@ var SimpleBar = /** @class */ (function (_super) {
             .attr("height", function (d, i) {
             return Math.abs(_this.services.axes.getYValue(d, i) - _this.services.axes.getYValue(0));
         })
-            .attr("opacity", 1);
+            .attr("opacity", 1)
+            // a11y
+            .attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_1__["Roles"].GRAPHICS_SYMBOL)
+            .attr("aria-roledescription", "bar")
+            .attr("aria-label", function (d) { return d.value; });
         // Add event listeners to elements drawn
         this.addEventListeners();
     };
@@ -4016,17 +4031,17 @@ var SimpleBar = /** @class */ (function (_super) {
         var self = this;
         this.parent.selectAll("rect.bar")
             .on("mouseover", function () {
-            var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_1__["select"])(this);
+            var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this);
             hoveredElement.classed("hovered", true);
             hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
-                .attr("fill", Object(d3_color__WEBPACK_IMPORTED_MODULE_2__["color"])(hoveredElement.attr("fill")).darker(0.7).toString());
+                .attr("fill", Object(d3_color__WEBPACK_IMPORTED_MODULE_3__["color"])(hoveredElement.attr("fill")).darker(0.7).toString());
             self.services.events.dispatchEvent("show-tooltip", {
                 hoveredElement: hoveredElement,
-                type: _interfaces__WEBPACK_IMPORTED_MODULE_3__["TooltipTypes"].DATAPOINT
+                type: _interfaces__WEBPACK_IMPORTED_MODULE_1__["TooltipTypes"].DATAPOINT
             });
         })
             .on("mouseout", function () {
-            var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_1__["select"])(this);
+            var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this);
             hoveredElement.classed("hovered", false);
             hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
                 .attr("fill", function (d) { return self.model.getFillScale()(d.label); });
@@ -4062,9 +4077,9 @@ var SimpleBar = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StackedBar", function() { return StackedBar; });
-/* harmony import */ var _interfaces_enums__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../interfaces/enums */ "./src/interfaces/enums.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
-/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bar */ "./src/components/graphs/bar.ts");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
+/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bar */ "./src/components/graphs/bar.ts");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 /* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-shape */ "../../node_modules/d3-shape/src/index.js");
 /* harmony import */ var d3_color__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-color */ "../../node_modules/d3-color/src/index.js");
@@ -4131,7 +4146,7 @@ var StackedBar = /** @class */ (function (_super) {
     StackedBar.prototype.getStackData = function () {
         var stackDataArray;
         var displayData = this.model.getDisplayData();
-        var timeSeries = this.services.axes.getMainXAxis().scaleType === _interfaces_enums__WEBPACK_IMPORTED_MODULE_0__["ScaleTypes"].TIME;
+        var timeSeries = this.services.axes.getMainXAxis().scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].TIME;
         if (timeSeries) {
             // Get all date values provided in data
             // TODO - Could be re-used through the model
@@ -4139,7 +4154,7 @@ var StackedBar = /** @class */ (function (_super) {
             displayData.datasets.forEach(function (dataset) {
                 allDates_1 = allDates_1.concat(dataset.data.map(function (datum) { return Number(datum.date); }));
             });
-            allDates_1 = _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].removeArrayDuplicates(allDates_1).sort();
+            allDates_1 = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].removeArrayDuplicates(allDates_1).sort();
             // Go through all date values
             // And get corresponding data from each dataset
             stackDataArray = allDates_1.map(function (date, i) {
@@ -4193,7 +4208,8 @@ var StackedBar = /** @class */ (function (_super) {
         // Add bar groups that need to be introduced
         barGroups.enter()
             .append("g")
-            .classed("bars", true);
+            .classed("bars", true)
+            .attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_2__["Roles"].GROUP);
         // Update data on all bars
         var bars = svg.selectAll("g.bars").selectAll("rect.bar")
             .data(function (d) { return addLabelsAndValueToData(d); }, function (d) { return d.label; });
@@ -4223,7 +4239,11 @@ var StackedBar = /** @class */ (function (_super) {
             }
             return height;
         })
-            .attr("opacity", 1);
+            .attr("opacity", 1)
+            // a11y
+            .attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_2__["Roles"].GRAPHICS_SYMBOL)
+            .attr("aria-roledescription", "bar")
+            .attr("aria-label", function (d) { return d.value; });
         // Add event listeners for the above elements
         this.addEventListeners();
     };
@@ -4254,7 +4274,7 @@ var StackedBar = /** @class */ (function (_super) {
             self.services.events.dispatchEvent("show-tooltip", {
                 multidata: activePoints,
                 hoveredElement: hoveredElement,
-                type: _interfaces_enums__WEBPACK_IMPORTED_MODULE_0__["TooltipTypes"].DATAPOINT
+                type: _interfaces__WEBPACK_IMPORTED_MODULE_2__["TooltipTypes"].DATAPOINT
             });
         })
             .on("mouseout", function () {
@@ -4278,7 +4298,7 @@ var StackedBar = /** @class */ (function (_super) {
         eventsFragment.removeEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
     };
     return StackedBar;
-}(_bar__WEBPACK_IMPORTED_MODULE_2__["Bar"]));
+}(_bar__WEBPACK_IMPORTED_MODULE_1__["Bar"]));
 
 
 
@@ -4437,8 +4457,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Line", function() { return Line; });
 /* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../configuration */ "./src/configuration.ts");
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
-/* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-shape */ "../../node_modules/d3-shape/src/index.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
+/* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-shape */ "../../node_modules/d3-shape/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -4453,6 +4474,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
     };
 })();
 // Internal Imports
+
 
 
 // D3 Imports
@@ -4492,7 +4514,7 @@ var Line = /** @class */ (function (_super) {
         if (animate === void 0) { animate = true; }
         var svg = this.getContainerSVG();
         // D3 line generator function
-        this.lineGenerator = Object(d3_shape__WEBPACK_IMPORTED_MODULE_3__["line"])()
+        this.lineGenerator = Object(d3_shape__WEBPACK_IMPORTED_MODULE_4__["line"])()
             .x(function (d, i) { return _this.services.axes.getXValue(d, i); })
             .y(function (d, i) { return _this.services.axes.getYValue(d, i); })
             .curve(this.services.curves.getD3Curve());
@@ -4517,14 +4539,19 @@ var Line = /** @class */ (function (_super) {
         // Apply styles and datum
         enteringPaths.merge(svg.selectAll("g.lines path"))
             .attr("stroke", function (d) {
-            var parentDatum = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this.parentNode).datum();
+            var parentDatum = Object(d3_selection__WEBPACK_IMPORTED_MODULE_3__["select"])(this.parentNode).datum();
             return self.model.getStrokeColor(parentDatum.label);
         })
             .datum(function (d) {
-            var parentDatum = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this.parentNode).datum();
+            var parentDatum = Object(d3_selection__WEBPACK_IMPORTED_MODULE_3__["select"])(this.parentNode).datum();
             this._datasetLabel = parentDatum.label;
             return parentDatum.data;
         })
+            // a11y
+            .attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_2__["Roles"].GRAPHICS_SYMBOL)
+            .attr("aria-roledescription", "line")
+            .attr("aria-label", function (d) { return d.map(function (datum) { return datum.value || datum; }).join(","); })
+            // Transition
             .transition(this.services.transitions.getTransition("line-update-enter", animate))
             .attr("opacity", 1)
             .attr("class", "line")
@@ -4550,7 +4577,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
-/* harmony import */ var _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../interfaces/enums */ "./src/interfaces/enums.ts");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 /* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-shape */ "../../node_modules/d3-shape/src/index.js");
 /* harmony import */ var d3_interpolate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! d3-interpolate */ "../../node_modules/d3-interpolate/src/index.js");
@@ -4649,7 +4676,9 @@ var Pie = /** @class */ (function (_super) {
         var pieLayoutData = pieLayout(dataList)
             .sort(function (a, b) { return a.index - b.index; });
         // Update data on all slices
-        var paths = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].appendOrSelect(svg, "g.slices").selectAll("path.slice")
+        var slicesGroup = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].appendOrSelect(svg, "g.slices")
+            .attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_3__["Roles"].GROUP);
+        var paths = slicesGroup.selectAll("path.slice")
             .data(pieLayoutData, function (d) { return d.data.label; });
         // Remove slices that need to be exited
         paths.exit()
@@ -4666,12 +4695,17 @@ var Pie = /** @class */ (function (_super) {
             .attr("d", this.arc)
             .transition(this.services.transitions.getTransition("pie-slice-enter-update", animate))
             .attr("opacity", 1)
+            // a11y
+            .attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_3__["Roles"].GRAPHICS_SYMBOL)
+            .attr("aria-roledescription", "slice")
+            .attr("aria-label", function (d) { return d.value + ", " + (_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].convertValueToPercentage(d.data.value, dataList) + "%"); })
+            // Tween
             .attrTween("d", function (a) {
             return arcTween.bind(this)(a, self.arc);
         });
         // Draw the slice labels
-        var labels = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].appendOrSelect(svg, "g.labels")
-            .selectAll("text.pie-label")
+        var labelsGroup = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].appendOrSelect(svg, "g.labels").attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_3__["Roles"].GROUP);
+        var labels = labelsGroup.selectAll("text.pie-label")
             .data(pieLayoutData, function (d) { return d.data.label; });
         // Remove labels that are existing
         labels.exit()
@@ -4713,14 +4747,14 @@ var Pie = /** @class */ (function (_super) {
                         labelTranslateX = d.xPosition + options.pie.callout.offsetX + options.pie.callout.textMargin + d.textOffsetX;
                         labelTranslateY = d.yPosition - options.pie.callout.offsetY;
                         // Set direction of callout
-                        d.direction = _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__["CalloutDirections"].RIGHT;
+                        d.direction = _interfaces__WEBPACK_IMPORTED_MODULE_3__["CalloutDirections"].RIGHT;
                         calloutData.push(d);
                     }
                     else {
                         labelTranslateX = d.xPosition - options.pie.callout.offsetX - d.textOffsetX - options.pie.callout.textMargin;
                         labelTranslateY = d.yPosition - options.pie.callout.offsetY;
                         // Set direction of callout
-                        d.direction = _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__["CalloutDirections"].LEFT;
+                        d.direction = _interfaces__WEBPACK_IMPORTED_MODULE_3__["CalloutDirections"].LEFT;
                         calloutData.push(d);
                     }
                     return "translate(" + labelTranslateX + ", " + labelTranslateY + ")";
@@ -4741,7 +4775,8 @@ var Pie = /** @class */ (function (_super) {
         this.addEventListeners();
     };
     Pie.prototype.renderCallouts = function (calloutData) {
-        var svg = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].appendOrSelect(this.getContainerSVG(), "g.callouts");
+        var svg = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].appendOrSelect(this.getContainerSVG(), "g.callouts")
+            .attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_3__["Roles"].GROUP);
         var options = this.model.getOptions();
         // Update data on callouts
         var callouts = svg.selectAll("g.callout")
@@ -4749,13 +4784,16 @@ var Pie = /** @class */ (function (_super) {
         callouts.exit().remove();
         var enteringCallouts = callouts.enter()
             .append("g")
-            .classed("callout", true);
+            .classed("callout", true)
+            // a11y
+            .attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_3__["Roles"].GRAPHICS_SYMBOL + " " + _interfaces__WEBPACK_IMPORTED_MODULE_3__["Roles"].GROUP)
+            .attr("aria-roledescription", "label callout");
         // Update data values for each callout
         // For the horizontal and vertical lines to use
         enteringCallouts.merge(callouts)
             .datum(function (d) {
             var xPosition = d.xPosition, yPosition = d.yPosition, direction = d.direction;
-            if (direction === _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__["CalloutDirections"].RIGHT) {
+            if (direction === _interfaces__WEBPACK_IMPORTED_MODULE_3__["CalloutDirections"].RIGHT) {
                 d.startPos = {
                     x: xPosition,
                     y: yPosition + d.textOffsetY
@@ -4823,7 +4861,7 @@ var Pie = /** @class */ (function (_super) {
             // Show tooltip
             self.services.events.dispatchEvent("show-tooltip", {
                 hoveredElement: hoveredElement,
-                type: _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__["TooltipTypes"].DATAPOINT
+                type: _interfaces__WEBPACK_IMPORTED_MODULE_3__["TooltipTypes"].DATAPOINT
             });
         })
             .on("mouseout", function () {
@@ -4863,8 +4901,8 @@ var Pie = /** @class */ (function (_super) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Scatter", function() { return Scatter; });
 /* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
-/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -4880,8 +4918,8 @@ var __extends = (undefined && undefined.__extends) || (function () {
 })();
 // Internal Imports
 
-// D3 Imports
 
+// D3 Imports
 
 var Scatter = /** @class */ (function (_super) {
     __extends(Scatter, _super);
@@ -4924,7 +4962,8 @@ var Scatter = /** @class */ (function (_super) {
         // Add the dot groups that need to be introduced
         var dotGroupsEnter = dotGroups.enter()
             .append("g")
-            .classed("dots", true);
+            .classed("dots", true)
+            .attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_1__["Roles"].GROUP);
         // Update data on all circles
         var dots = dotGroupsEnter.merge(dotGroups)
             .selectAll("circle.dot")
@@ -4951,7 +4990,11 @@ var Scatter = /** @class */ (function (_super) {
         })
             .attr("fill-opacity", filled ? 0.2 : 1)
             .attr("stroke", function (d) { return _this.model.getStrokeColor(d.datasetLabel, d.label, d.value); })
-            .attr("opacity", 1);
+            .attr("opacity", 1)
+            // a11y
+            .attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_1__["Roles"].GRAPHICS_SYMBOL)
+            .attr("aria-roledescription", "point")
+            .attr("aria-label", function (d) { return d.value; });
         // Add event listeners to elements drawn
         this.addEventListeners();
     };
@@ -4969,17 +5012,17 @@ var Scatter = /** @class */ (function (_super) {
         var self = this;
         this.parent.selectAll("circle")
             .on("mouseover mousemove", function () {
-            var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_1__["select"])(this);
+            var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this);
             hoveredElement.classed("hovered", true);
             hoveredElement.style("fill", function (d) { return self.model.getFillScale()[d.datasetLabel](d.label); });
             // Show tooltip
             self.services.events.dispatchEvent("show-tooltip", {
                 hoveredElement: hoveredElement,
-                type: _interfaces__WEBPACK_IMPORTED_MODULE_2__["TooltipTypes"].DATAPOINT
+                type: _interfaces__WEBPACK_IMPORTED_MODULE_1__["TooltipTypes"].DATAPOINT
             });
         })
             .on("mouseout", function () {
-            var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_1__["select"])(this);
+            var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this);
             hoveredElement.classed("hovered", false);
             if (!self.configs.filled) {
                 hoveredElement.style("fill", null);
@@ -5658,6 +5701,27 @@ var defaultColors = _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__["DEFAUL
 
 /***/ }),
 
+/***/ "./src/interfaces/a11y.ts":
+/*!********************************!*\
+  !*** ./src/interfaces/a11y.ts ***!
+  \********************************/
+/*! exports provided: Roles */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Roles", function() { return Roles; });
+var Roles;
+(function (Roles) {
+    Roles["GRAPHICS_DOCUMENT"] = "graphics-document";
+    Roles["GRAPHICS_OBJECT"] = "graphics-object";
+    Roles["GRAPHICS_SYMBOL"] = "graphics-symbol";
+    Roles["GROUP"] = "group";
+})(Roles || (Roles = {}));
+
+
+/***/ }),
+
 /***/ "./src/interfaces/enums.ts":
 /*!*********************************!*\
   !*** ./src/interfaces/enums.ts ***!
@@ -5784,33 +5848,37 @@ var CalloutDirections;
 /*!*********************************!*\
   !*** ./src/interfaces/index.ts ***!
   \*********************************/
-/*! exports provided: ChartTheme, AxisPositions, AxisTypes, ScaleTypes, TooltipPosition, TooltipTypes, LegendPositions, LegendOrientations, LayoutDirection, LayoutGrowth, CalloutDirections */
+/*! exports provided: Roles, ChartTheme, AxisPositions, AxisTypes, ScaleTypes, TooltipPosition, TooltipTypes, LegendPositions, LegendOrientations, LayoutDirection, LayoutGrowth, CalloutDirections */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _enums__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./enums */ "./src/interfaces/enums.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ChartTheme", function() { return _enums__WEBPACK_IMPORTED_MODULE_0__["ChartTheme"]; });
+/* harmony import */ var _a11y__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./a11y */ "./src/interfaces/a11y.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Roles", function() { return _a11y__WEBPACK_IMPORTED_MODULE_0__["Roles"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AxisPositions", function() { return _enums__WEBPACK_IMPORTED_MODULE_0__["AxisPositions"]; });
+/* harmony import */ var _enums__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./enums */ "./src/interfaces/enums.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ChartTheme", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["ChartTheme"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AxisTypes", function() { return _enums__WEBPACK_IMPORTED_MODULE_0__["AxisTypes"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AxisPositions", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScaleTypes", function() { return _enums__WEBPACK_IMPORTED_MODULE_0__["ScaleTypes"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AxisTypes", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["AxisTypes"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TooltipPosition", function() { return _enums__WEBPACK_IMPORTED_MODULE_0__["TooltipPosition"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScaleTypes", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TooltipTypes", function() { return _enums__WEBPACK_IMPORTED_MODULE_0__["TooltipTypes"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TooltipPosition", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["TooltipPosition"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LegendPositions", function() { return _enums__WEBPACK_IMPORTED_MODULE_0__["LegendPositions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TooltipTypes", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["TooltipTypes"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LegendOrientations", function() { return _enums__WEBPACK_IMPORTED_MODULE_0__["LegendOrientations"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LegendPositions", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["LegendPositions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LayoutDirection", function() { return _enums__WEBPACK_IMPORTED_MODULE_0__["LayoutDirection"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LegendOrientations", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["LegendOrientations"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LayoutGrowth", function() { return _enums__WEBPACK_IMPORTED_MODULE_0__["LayoutGrowth"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LayoutDirection", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["LayoutDirection"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CalloutDirections", function() { return _enums__WEBPACK_IMPORTED_MODULE_0__["CalloutDirections"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LayoutGrowth", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["LayoutGrowth"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CalloutDirections", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["CalloutDirections"]; });
+
 
 
 
