@@ -1387,11 +1387,22 @@ var AxisChart = /** @class */ (function (_super) {
         else if (legendPosition === _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LegendPositions"].BOTTOM) {
             fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LayoutDirection"].COLUMN_REVERSE;
         }
+        var legendSpacerComponent = {
+            id: "spacer",
+            components: [
+                new _components_index__WEBPACK_IMPORTED_MODULE_2__["Spacer"](this.model, this.services)
+            ],
+            growth: {
+                x: _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LayoutGrowth"].PREFERRED,
+                y: _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LayoutGrowth"].FIXED
+            }
+        };
         var fullFrameComponent = {
             id: "full-frame",
             components: [
                 new _components_index__WEBPACK_IMPORTED_MODULE_2__["LayoutComponent"](this.model, this.services, [
                     legendComponent,
+                    legendSpacerComponent,
                     graphFrameComponent
                 ], {
                     direction: fullFrameComponentDirection
@@ -1406,6 +1417,17 @@ var AxisChart = /** @class */ (function (_super) {
         var topLevelLayoutComponents = [];
         if (this.model.getOptions().title) {
             topLevelLayoutComponents.push(titleComponent);
+            var titleSpacerComponent = {
+                id: "spacer",
+                components: [
+                    new _components_index__WEBPACK_IMPORTED_MODULE_2__["Spacer"](this.model, this.services)
+                ],
+                growth: {
+                    x: _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LayoutGrowth"].PREFERRED,
+                    y: _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LayoutGrowth"].FIXED
+                }
+            };
+            topLevelLayoutComponents.push(titleSpacerComponent);
         }
         topLevelLayoutComponents.push(fullFrameComponent);
         return [
@@ -1564,11 +1586,22 @@ var Chart = /** @class */ (function () {
         else if (legendPosition === "bottom") {
             fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LayoutDirection"].COLUMN_REVERSE;
         }
+        var legendSpacerComponent = {
+            id: "spacer",
+            components: [
+                new _components__WEBPACK_IMPORTED_MODULE_2__["Spacer"](this.model, this.services)
+            ],
+            growth: {
+                x: _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LayoutGrowth"].PREFERRED,
+                y: _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LayoutGrowth"].FIXED
+            }
+        };
         var fullFrameComponent = {
             id: "full-frame",
             components: [
                 new _components__WEBPACK_IMPORTED_MODULE_2__["LayoutComponent"](this.model, this.services, [
                     legendComponent,
+                    legendSpacerComponent,
                     graphFrameComponent
                 ], {
                     direction: fullFrameComponentDirection
@@ -1583,6 +1616,17 @@ var Chart = /** @class */ (function () {
         var topLevelLayoutComponents = [];
         if (this.model.getOptions().title) {
             topLevelLayoutComponents.push(titleComponent);
+            var titleSpacerComponent = {
+                id: "spacer",
+                components: [
+                    new _components__WEBPACK_IMPORTED_MODULE_2__["Spacer"](this.model, this.services)
+                ],
+                growth: {
+                    x: _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LayoutGrowth"].PREFERRED,
+                    y: _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LayoutGrowth"].FIXED
+                }
+            };
+            topLevelLayoutComponents.push(titleSpacerComponent);
         }
         topLevelLayoutComponents.push(fullFrameComponent);
         return [
@@ -3025,16 +3069,6 @@ var Legend = /** @class */ (function (_super) {
         if (legendClickable && addedLegendItems.size() > 0) {
             this.addEventListeners();
         }
-        var legendPosition = _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(options, "legend", "position");
-        if (legendPosition === _interfaces__WEBPACK_IMPORTED_MODULE_2__["LegendPositions"].BOTTOM || legendPosition === _interfaces__WEBPACK_IMPORTED_MODULE_2__["LegendPositions"].TOP) {
-            // TODO - Replace with layout component margins
-            _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(svg, "rect.spacer")
-                .attr("x", 0)
-                .attr("y", 10)
-                .attr("width", 20)
-                .attr("height", 20)
-                .attr("fill", "none");
-        }
     };
     Legend.prototype.breakItemsIntoLines = function (addedLegendItems) {
         var self = this;
@@ -3061,7 +3095,7 @@ var Legend = /** @class */ (function (_super) {
             var legendItem = Object(d3_selection__WEBPACK_IMPORTED_MODULE_4__["select"])(this);
             var previousLegendItem = Object(d3_selection__WEBPACK_IMPORTED_MODULE_4__["select"])(svg.selectAll("g.legend-item").nodes()[i - 1]);
             if (itemIndexInLine === 0 || previousLegendItem.empty() || legendOrientation === _interfaces__WEBPACK_IMPORTED_MODULE_2__["LegendOrientations"].VERTICAL) {
-                if (legendOrientation === _interfaces__WEBPACK_IMPORTED_MODULE_2__["LegendOrientations"].VERTICAL) {
+                if (legendOrientation === _interfaces__WEBPACK_IMPORTED_MODULE_2__["LegendOrientations"].VERTICAL && i !== 0) {
                     lineNumber++;
                 }
             }
@@ -3076,11 +3110,7 @@ var Legend = /** @class */ (function (_super) {
                     itemIndexInLine = 0;
                 }
             }
-            var legendPosition = _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(options, "legend", "position");
             var yOffset = 0;
-            if (legendPosition === _interfaces__WEBPACK_IMPORTED_MODULE_2__["LegendPositions"].BOTTOM) {
-                yOffset = 20;
-            }
             // Position checkbox
             // TODO - Replace with layout component margins
             legendItem.select("rect.checkbox")
@@ -3250,13 +3280,6 @@ var Title = /** @class */ (function (_super) {
         text.attr("x", 0)
             .attr("y", 20)
             .text(this.model.getOptions().title);
-        // TODO - Replace with layout component margins
-        _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].appendOrSelect(svg, "rect.spacer")
-            .attr("x", 0)
-            .attr("y", 20)
-            .attr("width", 20)
-            .attr("height", 20)
-            .attr("fill", "none");
         // title needs to first render so that we can check for overflow
         this.truncateTitle();
     };
@@ -4986,7 +5009,7 @@ var Scatter = /** @class */ (function (_super) {
 /*!*********************************!*\
   !*** ./src/components/index.ts ***!
   \*********************************/
-/*! exports provided: Component, Legend, Title, Tooltip, TooltipBar, TooltipScatter, SimpleBar, GroupedBar, StackedBar, Line, Scatter, Pie, Donut, TwoDimensionalAxes, Axis, Grid, HorizontalZeroLine, LayoutComponent */
+/*! exports provided: Component, Legend, Title, Tooltip, TooltipBar, TooltipScatter, SimpleBar, GroupedBar, StackedBar, Line, Scatter, Pie, Donut, Spacer, LayoutComponent, TwoDimensionalAxes, Axis, Grid, HorizontalZeroLine */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5030,20 +5053,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _graphs_donut__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./graphs/donut */ "./src/components/graphs/donut.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Donut", function() { return _graphs_donut__WEBPACK_IMPORTED_MODULE_12__["Donut"]; });
 
-/* harmony import */ var _axes_two_dimensional_axes__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./axes/two-dimensional-axes */ "./src/components/axes/two-dimensional-axes.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TwoDimensionalAxes", function() { return _axes_two_dimensional_axes__WEBPACK_IMPORTED_MODULE_13__["TwoDimensionalAxes"]; });
+/* harmony import */ var _layout_spacer__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./layout/spacer */ "./src/components/layout/spacer.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Spacer", function() { return _layout_spacer__WEBPACK_IMPORTED_MODULE_13__["Spacer"]; });
 
-/* harmony import */ var _axes_axis__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./axes/axis */ "./src/components/axes/axis.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Axis", function() { return _axes_axis__WEBPACK_IMPORTED_MODULE_14__["Axis"]; });
+/* harmony import */ var _layout_layout__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./layout/layout */ "./src/components/layout/layout.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LayoutComponent", function() { return _layout_layout__WEBPACK_IMPORTED_MODULE_14__["LayoutComponent"]; });
 
-/* harmony import */ var _axes_grid__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./axes/grid */ "./src/components/axes/grid.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Grid", function() { return _axes_grid__WEBPACK_IMPORTED_MODULE_15__["Grid"]; });
+/* harmony import */ var _axes_two_dimensional_axes__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./axes/two-dimensional-axes */ "./src/components/axes/two-dimensional-axes.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TwoDimensionalAxes", function() { return _axes_two_dimensional_axes__WEBPACK_IMPORTED_MODULE_15__["TwoDimensionalAxes"]; });
 
-/* harmony import */ var _axes_horizontal_zero_line__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./axes/horizontal-zero-line */ "./src/components/axes/horizontal-zero-line.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "HorizontalZeroLine", function() { return _axes_horizontal_zero_line__WEBPACK_IMPORTED_MODULE_16__["HorizontalZeroLine"]; });
+/* harmony import */ var _axes_axis__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./axes/axis */ "./src/components/axes/axis.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Axis", function() { return _axes_axis__WEBPACK_IMPORTED_MODULE_16__["Axis"]; });
 
-/* harmony import */ var _layout_layout__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./layout/layout */ "./src/components/layout/layout.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LayoutComponent", function() { return _layout_layout__WEBPACK_IMPORTED_MODULE_17__["LayoutComponent"]; });
+/* harmony import */ var _axes_grid__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./axes/grid */ "./src/components/axes/grid.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Grid", function() { return _axes_grid__WEBPACK_IMPORTED_MODULE_17__["Grid"]; });
+
+/* harmony import */ var _axes_horizontal_zero_line__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./axes/horizontal-zero-line */ "./src/components/axes/horizontal-zero-line.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "HorizontalZeroLine", function() { return _axes_horizontal_zero_line__WEBPACK_IMPORTED_MODULE_18__["HorizontalZeroLine"]; });
 
 
 // ESSENTIALS
@@ -5060,8 +5086,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// MISC
+// Layout
 
+
+// MISC
 
 
 
@@ -5279,11 +5307,61 @@ var LayoutComponent = /** @class */ (function (_super) {
 
 /***/ }),
 
+/***/ "./src/components/layout/spacer.ts":
+/*!*****************************************!*\
+  !*** ./src/components/layout/spacer.ts ***!
+  \*****************************************/
+/*! exports provided: Spacer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Spacer", function() { return Spacer; });
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../configuration */ "./src/configuration.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+// Internal Imports
+
+
+var Spacer = /** @class */ (function (_super) {
+    __extends(Spacer, _super);
+    function Spacer() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "spacer";
+        return _this;
+    }
+    Spacer.prototype.render = function () {
+        this.getContainerSVG().append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", this.configs.size || _configuration__WEBPACK_IMPORTED_MODULE_1__["spacers"].default.size)
+            .attr("height", this.configs.size || _configuration__WEBPACK_IMPORTED_MODULE_1__["spacers"].default.size)
+            .attr("opacity", 0);
+    };
+    return Spacer;
+}(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
+
+
+
+/***/ }),
+
 /***/ "./src/configuration.ts":
 /*!******************************!*\
   !*** ./src/configuration.ts ***!
   \******************************/
-/*! exports provided: legend, grid, baseTooltip, axisChartTooltip, barChartTooltip, options, lines, transitions, axis */
+/*! exports provided: legend, grid, baseTooltip, axisChartTooltip, barChartTooltip, options, lines, transitions, axis, spacers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5297,6 +5375,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lines", function() { return lines; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transitions", function() { return transitions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "axis", function() { return axis; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "spacers", function() { return spacers; });
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
 /* harmony import */ var _interfaces_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interfaces/index */ "./src/interfaces/index.ts");
 
@@ -5525,6 +5604,11 @@ var axis = {
     ticks: {
         number: 7,
         rotateIfSmallerThan: 30
+    }
+};
+var spacers = {
+    default: {
+        size: 24
     }
 };
 
