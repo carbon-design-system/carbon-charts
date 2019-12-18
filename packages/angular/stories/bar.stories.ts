@@ -1,4 +1,5 @@
 import { storiesOf } from "@storybook/angular";
+import { withKnobs, object } from "@storybook/addon-knobs";
 
 import { ChartsModule } from "../src/charts.module";
 
@@ -27,14 +28,16 @@ const template = barType => `
 `;
 
 const stories = storiesOf("Bar", module);
+stories.addDecorator(withKnobs);
+
 stories.add(simpleBarOptions.title, () => ({
 	template: template("simple"),
 	moduleMetadata: {
 		imports: [ChartsModule]
 	},
 	props: {
-		data: simpleBarData,
-		options: addWidthAndHeight(simpleBarOptions)
+		data: object("Data", simpleBarData),
+		options: object("Options", addWidthAndHeight(simpleBarOptions))
 	}
 }));
 
@@ -44,8 +47,8 @@ stories.add(simpleBarTimeSeriesOptions.title, () => ({
 		imports: [ChartsModule]
 	},
 	props: {
-		data: simpleBarTimeSeriesData,
-		options: addWidthAndHeight(simpleBarTimeSeriesOptions)
+		data: object("Data", simpleBarTimeSeriesData),
+		options: object("Options", addWidthAndHeight(simpleBarTimeSeriesOptions))
 	}
 }));
 
@@ -55,8 +58,8 @@ stories.add(groupedBarOptions.title, () => ({
 		imports: [ChartsModule]
 	},
 	props: {
-		data: groupedBarData,
-		options: addWidthAndHeight(groupedBarOptions)
+		data: object("Data", groupedBarData),
+		options: object("Options", addWidthAndHeight(groupedBarOptions))
 	}
 }));
 
@@ -66,8 +69,8 @@ stories.add(stackedBarOptions.title, () => ({
 		imports: [ChartsModule]
 	},
 	props: {
-		data: stackedBarData,
-		options: addWidthAndHeight(stackedBarOptions)
+		data: object("Data", stackedBarData),
+		options: object("Options", addWidthAndHeight(stackedBarOptions))
 	}
 }));
 
@@ -77,7 +80,7 @@ stories.add(stackedBarTimeSeriesOptions.title, () => ({
 		imports: [ChartsModule]
 	},
 	props: {
-		data: stackedBarTimeSeriesData,
-		options: addWidthAndHeight(stackedBarTimeSeriesOptions)
+		data: object("Data", stackedBarTimeSeriesData),
+		options: object("Options", addWidthAndHeight(stackedBarTimeSeriesOptions))
 	}
 }));
