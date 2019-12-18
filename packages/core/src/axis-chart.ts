@@ -12,7 +12,8 @@ import {
 	Legend,
 	Title,
 	Tooltip,
-	TooltipBar
+	TooltipBar,
+	Spacer
 } from "./components/index";
 import { Tools } from "./tools";
 
@@ -79,6 +80,17 @@ export class AxisChart extends Chart {
 			fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
 		}
 
+		const legendSpacerComponent = {
+			id: "spacer",
+			components: [
+				new Spacer(this.model, this.services)
+			],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
 		const fullFrameComponent = {
 			id: "full-frame",
 			components: [
@@ -87,6 +99,7 @@ export class AxisChart extends Chart {
 					this.services,
 					[
 						legendComponent,
+						legendSpacerComponent,
 						graphFrameComponent
 					],
 					{
@@ -104,6 +117,19 @@ export class AxisChart extends Chart {
 		const topLevelLayoutComponents = [];
 		if (this.model.getOptions().title) {
 			topLevelLayoutComponents.push(titleComponent);
+
+			const titleSpacerComponent = {
+				id: "spacer",
+				components: [
+					new Spacer(this.model, this.services)
+				],
+				growth: {
+					x: LayoutGrowth.PREFERRED,
+					y: LayoutGrowth.FIXED
+				}
+			};
+
+			topLevelLayoutComponents.push(titleSpacerComponent);
 		}
 		topLevelLayoutComponents.push(fullFrameComponent);
 

@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { AxisPositions, ScaleTypes, AxisTypes } from "../../interfaces";
+import { AxisPositions, ScaleTypes, AxisTypes, Roles } from "../../interfaces";
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
@@ -255,12 +255,16 @@ export class Axis extends Component {
 		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
 		const axisRefExists = !container.select(`g.ticks`).empty();
 		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
+		if (!axisRefExists) {
+			axisRef.attr("role", `${Roles.GRAPHICS_OBJECT} ${Roles.GROUP}`);
+		}
 
 		// We draw the invisible axis because of the async nature of d3 transitions
 		// To be able to tell the final width & height of the axis when initiaing the transition
 		// The invisible axis is updated instantly and without a transition
 		const invisibleAxisRef = DOMUtils.appendOrSelect(container, `g.ticks.invisible`)
-			.style("opacity", "0");
+			.style("opacity", "0")
+			.attr("aria-hidden", true);
 
 		// Position and transition the axis
 		switch (axisPosition) {

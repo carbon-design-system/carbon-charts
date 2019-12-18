@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/IBM/carbon-charts/compare/v0.23.0...v0.24.0) (2019-12-17)
+
+
+### Features
+
+* **core, react, angular, vue:** add WAI-ARIA tags to elements ([1216ed6](https://github.com/IBM/carbon-charts/commit/1216ed6))
+
+
+
+
+
+# [0.23.0](https://github.com/IBM/carbon-charts/compare/v0.22.4...v0.23.0) (2019-12-17)
+
+
+### Features
+
+* **core:** add spacer components ([4e5ab5c](https://github.com/IBM/carbon-charts/commit/4e5ab5c))
+
+
+
+
+
+## [0.22.4](https://github.com/IBM/carbon-charts/compare/v0.22.3...v0.22.4) (2019-12-16)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.22.3](https://github.com/IBM/carbon-charts/compare/v0.22.2...v0.22.3) (2019-12-16)
+
+
+### Bug Fixes
+
+* **core:** update tooltip value formatter ([2a978d8](https://github.com/IBM/carbon-charts/commit/2a978d8))
+
+
+
+
+
+## [0.22.2](https://github.com/IBM/carbon-charts/compare/v0.22.1...v0.22.2) (2019-12-16)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
 ## [0.22.1](https://github.com/IBM/carbon-charts/compare/v0.22.0...v0.22.1) (2019-12-12)
 
 **Note:** Version bump only for package @carbon/charts
