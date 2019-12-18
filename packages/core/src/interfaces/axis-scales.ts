@@ -57,4 +57,5 @@ export interface AxesOptions {
  */
 export interface TimeScaleOptions {
 	addSpaceOnEdges?: boolean;
+	timeRangeToExtend?: number;
 }

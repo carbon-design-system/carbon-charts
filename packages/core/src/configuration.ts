@@ -95,7 +95,9 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartToolt
 const axes: AxesOptions = { };
 
 const timeScale: TimeScaleOptions = {
-	addSpaceOnEdges: true
+	addSpaceOnEdges: true,
+	// Only extends the axes if the timerange is greater than this amount
+	timeRangeToExtend: 3
 };
 
 /**
