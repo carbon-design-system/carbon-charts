@@ -12,7 +12,8 @@
   stroke: #565656; }
 
 .bx--cc--grid rect.chart-grid-backdrop {
-  fill: #ffffff; }
+  fill: #ffffff;
+  stroke: #dcdcdc; }
 
 .bx--cc--grid g.x.grid g.tick line,
 .bx--cc--grid g.y.grid g.tick line {
