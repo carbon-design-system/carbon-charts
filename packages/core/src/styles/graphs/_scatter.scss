@@ -9,6 +9,7 @@ g.#{$prefix}--#{$charts-prefix}--scatter {
 
 	circle.dot.unfilled {
 		fill: $ui-01;
+		stroke-width: 1.5;
 	}
 
 	g.lines path.line {
