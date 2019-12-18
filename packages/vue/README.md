@@ -24,6 +24,9 @@ yarn add @carbon/charts @carbon/charts-vue d3
 ## Step-by-step Instructions
 [Read on carbondesignsystem.com](https://www.carbondesignsystem.com/data-visualization/getting-started/vue)
 
+## Sample Project
+[![Edit Carbon Charts - React](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/carbon-charts-vue-gg15t)
+
 ## Charting Data & Options
 Although we will definitely introduce new models in the future as we start shipping new components such as maps, Data and options follow the same model in all charts, with minor exceptions and differences in specific components, .
 

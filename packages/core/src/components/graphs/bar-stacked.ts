@@ -1,7 +1,7 @@
 // Internal Imports
-import { ScaleTypes, TooltipTypes } from "../../interfaces/enums";
 import { Tools } from "../../tools";
 import { Bar } from "./bar";
+import { Roles, ScaleTypes, TooltipTypes } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -111,7 +111,8 @@ export class StackedBar extends Bar {
 		// Add bar groups that need to be introduced
 		barGroups.enter()
 			.append("g")
-			.classed("bars", true);
+			.classed("bars", true)
+			.attr("role", Roles.GROUP);
 
 		// Update data on all bars
 		const bars = svg.selectAll("g.bars").selectAll("rect.bar")
@@ -146,7 +147,11 @@ export class StackedBar extends Bar {
 
 					return height;
 				})
-				.attr("opacity", 1);
+				.attr("opacity", 1)
+				// a11y
+				.attr("role", Roles.GRAPHICS_SYMBOL)
+				.attr("aria-roledescription", "bar")
+				.attr("aria-label", d => d.value);
 
 		// Add event listeners for the above elements
 		this.addEventListeners();
