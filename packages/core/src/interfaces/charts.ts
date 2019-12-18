@@ -7,10 +7,6 @@ import { ChartTheme } from "./enums";
  */
 export interface BaseChartOptions {
 	/**
-	 * boolean to enable accessibility mode
-	 */
-	accessibility?: boolean;
-	/**
 	 * boolean to disable animations (enabled by default)
 	 */
 	animations?: boolean;
