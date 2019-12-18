@@ -3,6 +3,99 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/IBM/carbon-charts/compare/v0.23.0...v0.24.0) (2019-12-17)
+
+
+### Features
+
+* **core, react, angular, vue:** add WAI-ARIA tags to elements ([1216ed6](https://github.com/IBM/carbon-charts/commit/1216ed6))
+
+
+
+
+
+# [0.23.0](https://github.com/IBM/carbon-charts/compare/v0.22.4...v0.23.0) (2019-12-17)
+
+
+### Features
+
+* **core:** add spacer components ([4e5ab5c](https://github.com/IBM/carbon-charts/commit/4e5ab5c))
+
+
+
+
+
+## [0.22.4](https://github.com/IBM/carbon-charts/compare/v0.22.3...v0.22.4) (2019-12-16)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.22.3](https://github.com/IBM/carbon-charts/compare/v0.22.2...v0.22.3) (2019-12-16)
+
+
+### Bug Fixes
+
+* **core:** update tooltip value formatter ([2a978d8](https://github.com/IBM/carbon-charts/commit/2a978d8))
+
+
+
+
+
+## [0.22.2](https://github.com/IBM/carbon-charts/compare/v0.22.1...v0.22.2) (2019-12-16)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.22.1](https://github.com/IBM/carbon-charts/compare/v0.22.0...v0.22.1) (2019-12-12)
+
+
+### Bug Fixes
+
+* **charts-angular:** update build toolchain ([aa63925](https://github.com/IBM/carbon-charts/commit/aa63925))
+
+
+
+
+
+# [0.22.0](https://github.com/IBM/carbon-charts/compare/v0.21.0...v0.22.0) (2019-12-09)
+
+
+### Features
+
+* **core, angular, react, vue:** Update chart width & height through options ([f050c35](https://github.com/IBM/carbon-charts/commit/f050c35))
+
+
+
+
+
+# [0.21.0](https://github.com/IBM/carbon-charts/compare/v0.20.1...v0.21.0) (2019-12-09)
+
+
+### Features
+
+* **core, angular, react, vue:** allow customizations to pie labels & the donut center number ([#427](https://github.com/IBM/carbon-charts/issues/427)) ([0446045](https://github.com/IBM/carbon-charts/commit/0446045))
+
+
+
+
+
+## [0.20.1](https://github.com/IBM/carbon-charts/compare/v0.20.0...v0.20.1) (2019-12-04)
+
+
+### Bug Fixes
+
+* **core:** loop also through non-display data to assign colors to datasets ([#394](https://github.com/IBM/carbon-charts/issues/394)) ([5ba8952](https://github.com/IBM/carbon-charts/commit/5ba8952))
+
+
+
+
+
 # [0.20.0](https://github.com/IBM/carbon-charts/compare/v0.19.0...v0.20.0) (2019-12-02)
 
 

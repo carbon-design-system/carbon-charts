@@ -190,6 +190,8 @@ chartTypes.forEach(type => {
 				break;
 		}
 
+		// Add `height` to the chart options
+		type.options.height = "500px";
 
 		// Initialize chart
 		charts[type.id] = new classToInitialize(

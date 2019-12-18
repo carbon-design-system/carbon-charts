@@ -1,5 +1,5 @@
 // Internal Imports
-import { ScaleTypes, TooltipTypes, BarOrientationOptions } from "../../interfaces/enums";
+import { BarOrientationOptions, Roles, ScaleTypes, TooltipTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 import { Bar } from "./bar";
 
@@ -115,7 +115,8 @@ export class StackedBar extends Bar {
 		// Add bar groups that need to be introduced
 		barGroups.enter()
 			.append("g")
-			.classed("bars", true);
+			.classed("bars", true)
+			.attr("role", Roles.GROUP);
 
 		// Update data on all bars
 		const bars = svg.selectAll("g.bars").selectAll("rect.bar")
@@ -162,7 +163,11 @@ export class StackedBar extends Bar {
 				.attr("y", (d, i) => { return this.services.axes.getYValue(d, i) - this.getBarWidth() / 2; })
 				.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
 				.attr("height", this.getBarWidth.bind(this))
-				.attr("opacity", 1);
+				.attr("opacity", 1)
+				// a11y
+				.attr("role", Roles.GRAPHICS_SYMBOL)
+				.attr("aria-roledescription", "bar")
+				.attr("aria-label", d => d.value);
 			} else {
 				// vertical stacked bar code
 				const yScale = this.services.axes.getMainYAxis();
@@ -195,7 +200,11 @@ export class StackedBar extends Bar {
 
 							return height;
 						})
-						.attr("opacity", 1);
+						.attr("opacity", 1)
+						// a11y
+						.attr("role", Roles.GRAPHICS_SYMBOL)
+						.attr("aria-roledescription", "bar")
+						.attr("aria-label", d => d.value);
 			}
 
 		// Add event listeners for the above elements

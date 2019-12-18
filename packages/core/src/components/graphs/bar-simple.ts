@@ -1,10 +1,10 @@
 // Internal Imports
 import { Bar } from "./bar";
+import { BarOrientationOptions, Roles, ScaleTypes, TooltipTypes } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
 import { color } from "d3-color";
-import { TooltipTypes, BarOrientationOptions, ScaleTypes } from "../../interfaces";
 
 export class SimpleBar extends Bar {
 	type = "simple-bar";
@@ -35,7 +35,8 @@ export class SimpleBar extends Bar {
 		// Add the bar groups that need to be introduced
 		const barGroupsEnter = barGroups.enter()
 			.append("g")
-			.classed("bars", true);
+				.classed("bars", true)
+				.attr("role", Roles.GROUP);
 
 		// Update data on all bars
 		const bars = barGroupsEnter.merge(barGroups)
@@ -78,7 +79,11 @@ export class SimpleBar extends Bar {
 
 					return Math.abs(this.services.axes.getYValue(d, i) - this.services.axes.getYValue(0));
 				})
-				.attr("opacity", 1);
+				.attr("opacity", 1)
+				// a11y
+				.attr("role", Roles.GRAPHICS_SYMBOL)
+				.attr("aria-roledescription", "bar")
+				.attr("aria-label", d => d.value);
 
 		} else {
 			// horizontal bars depend on the main X axis for length
@@ -101,7 +106,11 @@ export class SimpleBar extends Bar {
 				.attr("y", (d, i) => this.services.axes.getYValue(d, i) - (this.getBarWidth() / 2))
 				.attr("fill", d => this.model.getFillScale()(d.label))
 				.attr("height", this.getBarWidth.bind(this))
-				.attr("opacity", 1);
+				.attr("opacity", 1)
+				// a11y
+				.attr("role", Roles.GRAPHICS_SYMBOL)
+				.attr("aria-roledescription", "bar")
+				.attr("aria-label", d => d.value);
 		}
 
 		// Add event listeners to elements drawn

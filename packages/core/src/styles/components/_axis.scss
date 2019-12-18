@@ -2,15 +2,13 @@
 @import "./../vendor/@carbon/type/scss/font-face/sans";
 
 .#{$prefix}--#{$charts-prefix}--axes g.axis {
-	g.tick {
-		text {
-			fill: $text-02;
-			font-family: carbon--font-family("sans-condensed");
-		}
+	g.tick text {
+		fill: $text-02;
+		font-family: carbon--font-family("sans-condensed");
+	}
 
-		line {
-			display: none;
-		}
+	g.tick line {
+		display: none;
 	}
 
 	path.domain {

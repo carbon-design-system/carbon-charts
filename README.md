@@ -17,71 +17,14 @@
 	</p>
 </p>
 
-## Table of contents
+## Packages
+- [Vanilla](./packages/core)
+- [Angular](./packages/angular)
+- [React](./packages/react)
+- [Vue](./packages/vue)
 
-- [Installation](#installation)
-- [Demo & Docs](#demo-and-documentation)
-- [Run Charts locally](#run-charts-locally)
-- [Component status](#component-status)
-- [Bugs and feature requests](#bugs-and-feature-requests)
-- [Contributing](#contributing)
-
-## Getting started
-
-### Installation
-
-Run:
-```bash
-yarn global add @storybook/cli
-
-yarn add @carbon/charts
-```
-
-Or if you use NPM:
-```bash
-npm i -g @storybook/cli
-
-npm install @carbon/charts --save
-```
-
-## Demo and documentation
-**Charts demos:**
-- [Vanilla JS](https://carbon-design-system.github.io/carbon-charts/)
-- [Angular](https://carbon-design-system.github.io/carbon-charts/angular)
-- [React](https://carbon-design-system.github.io/carbon-charts/react)
-- [Vue](https://carbon-design-system.github.io/carbon-charts/vue)
-
-**Docs:** <https://carbon-design-system.github.io/carbon-charts/documentation/>
-
-### Code Samples
-<p align="center">
-	<img src="assets/demo-stacked-bar.png" alt="Stacked Bar Chart" width="600" />
-</p>
-
-<p align="center">
-	<a href="https://codesandbox.io/s/149vrzo62l">
-		<img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit Carbon Charts - Vanilla" />
-	</a>
-</p>
-
-- [Vanilla JS](https://codesandbox.io/s/149vrzo62l)
-- [Angular](https://codesandbox.io/s/k32kjy5qnr)
-- [React](https://codesandbox.io/s/pppmo3ollx)
-- [Vue](https://codesandbox.io/s/040w2rqrxp)
-
-### Run Charts locally
-1. Fork the project and clone your fork:
-
-   ```bash
-   # Clone your fork of the repo into the current directory
-   git clone git@github.com:<your-username>/carbon-charts.git
-   # Navigate to the newly cloned directory
-   cd carbon-charts
-   ```
-
-2. Run `yarn` to install Node.js dependencies.
-3. Run `yarn run demo:server` to serve up the demo locally.
-4. Finally, open <http://localhost:9001/> in your browser. SPOILER ALERT: There's no "Hello, World!"
+## CHANGELOG
+Read the release change logs [here](./CHANGELOG.md)
 
 ## Component status
 :white_check_mark: Stable :hourglass_flowing_sand: In progress
@@ -115,7 +58,7 @@ Get updates on Charts' development and chat with the core team and community. --
 
 We use the **semantic-release** library to automatically version our releases within the guidelines of Semantic Versioning [Semantic Versioning guidelines](http://semver.org/).
 
-See our [releases notes](https://github.com/carbon-design-system/carbon-charts/releases) for the changelog of each version of Charts.
+See our [release change logs](https://github.com/carbon-design-system/carbon-charts/blob/master/CHANGELOG.md) for the changelog of each version of Charts.
 
 
 ## Core Team
