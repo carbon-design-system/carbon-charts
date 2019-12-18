@@ -148,7 +148,7 @@ export class Axis extends Component {
 
 		if (axisOptions.scaleType === ScaleTypes.TIME) {
 			if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges")) {
-				const timeRangeToExtend = Tools.getProperty(options, "timeScale", "timeRangeToExtend")
+				const timeRangeToExtend = Tools.getProperty(options, "timeScale", "timeRangeToExtend");
 				const startDate = new Date(domain[0]);
 				const endDate = new Date(domain[1]);
 				if (differenceInYears(endDate, startDate) > timeRangeToExtend) {
