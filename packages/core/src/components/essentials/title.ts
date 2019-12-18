@@ -57,14 +57,6 @@ export class Title extends Component {
 			.attr("y", 20)
 			.text(this.model.getOptions().title);
 
-		// TODO - Replace with layout component margins
-		DOMUtils.appendOrSelect(svg, "rect.spacer")
-			.attr("x", 0)
-			.attr("y", 20)
-			.attr("width", 20)
-			.attr("height", 20)
-			.attr("fill", "none");
-
 		// title needs to first render so that we can check for overflow
 		this.truncateTitle();
 	}
