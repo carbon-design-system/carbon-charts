@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withKnobs, object } from "@storybook/addon-knobs";
 
 import {
 	PieChart,
@@ -17,17 +18,21 @@ import {
 import { addWidthAndHeight } from "./commons";
 
 const pieStories = storiesOf("Pie", module);
+pieStories.addDecorator(withKnobs);
+
 pieStories.add(pieOptions.title, () => (
 	<PieChart
-		data={pieData}
-		options={addWidthAndHeight(pieOptions)}
+		data={object("Data", pieData)}
+		options={object("Options", addWidthAndHeight(pieOptions))}
 	/>
 ));
 
 const donutStories = storiesOf("Donut", module);
+donutStories.addDecorator(withKnobs);
+
 donutStories.add(donutOptions.title, () => (
 	<DonutChart
-		data={donutData}
-		options={addWidthAndHeight(donutOptions)}
+		data={object("Data", donutData)}
+		options={object("Options", addWidthAndHeight(donutOptions))}
 	/>
 ));
