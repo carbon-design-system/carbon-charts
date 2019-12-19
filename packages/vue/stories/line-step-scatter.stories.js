@@ -1,4 +1,5 @@
 import { storiesOf } from '@storybook/vue';
+import { withKnobs, object } from '@storybook/addon-knobs';
 
 import CcvLineChart from '../src/ccv-line-chart';
 import CcvScatterChart from '../src/ccv-scatter-chart';
@@ -25,12 +26,14 @@ import { addWidthAndHeight } from "./commons";
 const template = '<ccv-line-chart :data="data" :options="options"></ccv-line-chart>';
 
 const lineStories = storiesOf("Line", module);
+lineStories.addDecorator(withKnobs);
+
 lineStories.add(lineOptions.title, () => ({
 	components: { CcvLineChart },
 	data() {
 		return {
-			data: lineData,
-			options: addWidthAndHeight(lineOptions)
+			data: object("Data", lineData),
+			options: object("Options", addWidthAndHeight(lineOptions))
 		};
 	},
 	template
@@ -40,8 +43,8 @@ lineStories.add(lineTimeSeriesOptions.title, () => ({
 	components: { CcvLineChart },
 	data() {
 		return {
-			data: lineTimeSeriesData,
-			options: addWidthAndHeight(lineTimeSeriesOptions)
+			data: object("Data", lineTimeSeriesData),
+			options: object("Options", addWidthAndHeight(lineTimeSeriesOptions))
 		};
 	},
 	template
@@ -52,8 +55,8 @@ stepStories.add(stepOptions.title, () => ({
 	components: { CcvLineChart },
 	data() {
 		return {
-			data: stepData,
-			options: addWidthAndHeight(stepOptions)
+			data: object("Data", stepData),
+			options: object("Options", addWidthAndHeight(stepOptions))
 		};
 	},
 	template
@@ -63,8 +66,8 @@ stepStories.add(stepTimeSeriesOptions.title, () => ({
 	components: { CcvLineChart },
 	data() {
 		return {
-			data: stepTimeSeriesData,
-			options: addWidthAndHeight(stepTimeSeriesOptions)
+			data: object("Data", stepTimeSeriesData),
+			options: object("Options", addWidthAndHeight(stepTimeSeriesOptions))
 		};
 	},
 	template
@@ -75,8 +78,8 @@ scatterStories.add(scatterOptions.title, () => ({
 	components: { CcvScatterChart },
 	data() {
 		return {
-			data: scatterData,
-			options: addWidthAndHeight(scatterOptions)
+			data: object("Data", scatterData),
+			options: object("Options", addWidthAndHeight(scatterOptions))
 		};
 	},
 	template: '<ccv-scatter-chart :data="data" :options="options"></ccv-scatter-chart>'
@@ -86,8 +89,8 @@ scatterStories.add(scatterTimeSeriesOptions.title, () => ({
 	components: { CcvScatterChart },
 	data() {
 		return {
-			data: scatterTimeSeriesData,
-			options: addWidthAndHeight(scatterTimeSeriesOptions)
+			data: object("Data", scatterTimeSeriesData),
+			options: object("Options", addWidthAndHeight(scatterTimeSeriesOptions))
 		};
 	},
 	template: '<ccv-scatter-chart :data="data" :options="options"></ccv-scatter-chart>'

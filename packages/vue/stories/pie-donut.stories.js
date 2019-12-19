@@ -1,4 +1,5 @@
 import { storiesOf } from '@storybook/vue';
+import { withKnobs, object } from '@storybook/addon-knobs';
 
 import CcvDonutChart from '../src/ccv-donut-chart';
 import CcvPieChart from '../src/ccv-pie-chart';
@@ -14,12 +15,14 @@ import {
 import { addWidthAndHeight } from "./commons";
 
 const pieStories = storiesOf('Pie', module);
+pieStories.addDecorator(withKnobs);
+
 pieStories.add(pieOptions.title, () => ({
 	components: { CcvPieChart },
 	data() {
 		return {
-			data: pieData,
-			options: addWidthAndHeight(pieOptions)
+			data: object("Data", pieData),
+			options: object("Options", addWidthAndHeight(pieOptions))
 		};
 	},
 	template:
@@ -31,8 +34,8 @@ donutStories.add(donutOptions.title, () => ({
 	components: { CcvDonutChart },
 	data() {
 		return {
-			data: donutData,
-			options: addWidthAndHeight(donutOptions)
+			data: object("Data", donutData),
+			options: object("Options", addWidthAndHeight(donutOptions))
 		};
 	},
 	template:
