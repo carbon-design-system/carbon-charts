@@ -6,7 +6,7 @@ withOptions({
   sortStoriesByKind: true,
   showDownPanel: true,
   showAddonPanel: true,
-  panelPosition: 'bottom',
+  panelPosition: 'bottom'
 });
 
 // load global styles
