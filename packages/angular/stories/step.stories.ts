@@ -21,8 +21,7 @@ const template = `
 </ibm-line-chart>
 `;
 
-const stories = storiesOf("Step", module);
-stories.addDecorator(withKnobs);
+const stories = storiesOf("Step", module).addDecorator(withKnobs);
 
 stories.add(stepOptions.title, () => ({
 	template,

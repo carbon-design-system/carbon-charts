@@ -27,8 +27,7 @@ const template = barType => `
 </ibm-${barType}-bar-chart>
 `;
 
-const stories = storiesOf("Bar", module);
-stories.addDecorator(withKnobs);
+const stories = storiesOf("Bar", module).addDecorator(withKnobs);
 
 stories.add(simpleBarOptions.title, () => ({
 	template: template("simple"),

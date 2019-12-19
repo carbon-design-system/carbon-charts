@@ -21,8 +21,7 @@ const template = `
 </ibm-scatter-chart>
 `;
 
-const stories = storiesOf("Scatter", module);
-stories.addDecorator(withKnobs);
+const stories = storiesOf("Scatter", module).addDecorator(withKnobs);
 
 stories.add(scatterOptions.title, () => ({
 	template,
