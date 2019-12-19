@@ -12,8 +12,7 @@ import {
 } from "../../core/demo/demo-data/index";
 import { addWidthAndHeight } from "./commons";
 
-const pieStories = storiesOf("Pie", module);
-pieStories.addDecorator(withKnobs);
+const pieStories = storiesOf("Pie", module).addDecorator(withKnobs);
 
 pieStories.add(pieOptions.title, () => ({
 	template: `
@@ -32,8 +31,7 @@ pieStories.add(pieOptions.title, () => ({
 	}
 }));
 
-const donutStories = storiesOf("Donut", module);
-donutStories.addDecorator(withKnobs);
+const donutStories = storiesOf("Donut", module).addDecorator(withKnobs);
 
 donutStories.add(donutOptions.title, () => ({
 	template: `
