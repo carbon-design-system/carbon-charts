@@ -33,6 +33,8 @@ pieStories.add(pieOptions.title, () => ({
 }));
 
 const donutStories = storiesOf("Donut", module);
+donutStories.addDecorator(withKnobs);
+
 donutStories.add(donutOptions.title, () => ({
 	template: `
 		<ibm-donut-chart
