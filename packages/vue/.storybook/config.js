@@ -1,10 +1,12 @@
 import { configure } from '@storybook/vue';
-import { setOptions } from '@storybook/addon-options';
+import { withOptions } from '@storybook/addon-options';
 
-setOptions({
+withOptions({
   name: 'Carbon Charts - Vue Wrappers',
-  showDownPanel: false,
-  showAddonPanel: false
+  sortStoriesByKind: true,
+  showDownPanel: true,
+  showAddonPanel: true,
+  panelPosition: 'bottom',
 });
 
 // load global styles
