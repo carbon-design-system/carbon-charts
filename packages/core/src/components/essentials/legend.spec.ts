@@ -202,7 +202,7 @@ describe("legend component", () => {
 					const legendCheckBoxes = select(`g.${settings.prefix}--${options.chart.style.prefix}--legend`).selectAll("g.legend-item").select("rect");
 					legendCheckBoxes.each(function(d, i) {
 						if (i > 0) {
-							expect(select(this).style("fill") === "rgb(0, 0, 0)");
+							expect(select(this).style("fill") === "rgb(0, 0, 0)" || select(this).style("fill") === "").toBe(true);
 						}
 						done();
 					});
