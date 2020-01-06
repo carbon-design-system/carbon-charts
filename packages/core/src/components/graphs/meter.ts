@@ -72,10 +72,10 @@ export class Meter extends Component {
 				return d.fillColors[0];
 			});
 
-		// if a peak is supplied, we want to render it
-		if (dataset.data.peak) {
+		// if a peak is supplied within the domain, we want to render it
+		const peak = DOMUtils.appendOrSelect(svg, "line.peak");
+		if (dataset.data.peak && dataset.data.peak >= dataset.data.min &&  dataset.data.peak <= dataset.data.max ) {
 			const peakVal = dataset.data.peak;
-			const peak = DOMUtils.appendOrSelect(svg, "line.peak");
 
 			// if there was previously no peak, transition it from the 0
 			if (!peak.attr("x1")) {
@@ -90,6 +90,9 @@ export class Meter extends Component {
 				.transition(this.services.transitions.getTransition("peak-line-update", animate))
 				.attr("x1", xScale(peakVal))
 				.attr("x2", xScale(peakVal));
+		} else {
+			// remove any stale peak indicators
+			peak.remove();
 		}
 	}
 }
