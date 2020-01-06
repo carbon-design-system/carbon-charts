@@ -18,9 +18,12 @@ export * from "./graphs/donut";
 // Advanced charts graphs
 export * from "./graphs/network";
 
+// Layout
+export * from "./layout/spacer";
+export * from "./layout/layout";
+
 // MISC
 export * from "./axes/two-dimensional-axes";
 export * from "./axes/axis";
 export * from "./axes/grid";
 export * from "./axes/horizontal-zero-line";
-export * from "./layout/layout";
