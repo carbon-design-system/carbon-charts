@@ -118,9 +118,8 @@ export class Chart {
 
 	/**
 	 * @param graphFrameComponents the elements to be rendered within each graph (axis, lines, etc)
-	 * @param customTopLevelElements the graph can specify different top level elements if it doesnt want the presets (title, legend)
 	 */
-	protected getChartComponents(graphFrameComponents: any[], customTopLevelElements?: any[]) {
+	protected getChartComponents(graphFrameComponents: any[]) {
 		const topLevelLayoutComponents = [];
 		// the layout component holding the graph and legend
 		let fullFrameComponent;
@@ -133,13 +132,6 @@ export class Chart {
 				y: LayoutGrowth.FIXED
 			}
 		};
-
-		// if there are custom top level elements provided add them first
-		if (customTopLevelElements) {
-			customTopLevelElements.forEach(element => {
-				topLevelLayoutComponents.push(element);
-			});
-		}
 
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
 

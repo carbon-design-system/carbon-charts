@@ -22,22 +22,23 @@ export class TitleMeter extends Title {
 		const containerWidth = containerBounds.width ? containerBounds.width : this.parent.node().getAttribute("width");
 
 		// remove any status indicators on the chart to re-render if ranges have been given
-		const status = svg.selectAll("circle.status-indicator");
-		status.remove();
+		const status = DOMUtils.appendOrSelect(svg, "circle.status-indicator");
 
-		// if ranges are provided
-		if (dataset.data.status) {
+		// if ranges are provided, and the status indicator is enabled, update it
+		if (dataset.data.status && this.model.getOptions().meter.status.enabled) {
 		// size of the status indicator
 		const circleSize = this.model.getOptions().meter.status.indicatorSize;
 
 		const self = this;
-		svg.append("circle")
-			.attr("cx", containerWidth - circleSize)
+		status.attr("cx", containerWidth - circleSize)
 			.attr("cy", 20 - circleSize)
 			.attr("r", circleSize)
 			.attr("class", function() {
 				return `status-indicator status--${self.getStatus(dataset.data.value, dataset)}`;
 			});
+		} else {
+			// remove any stale status indicators
+			status.remove();
 		}
 	}
 
@@ -56,12 +57,18 @@ export class TitleMeter extends Title {
 		const title = DOMUtils.appendOrSelect(svg, "text.title");
 		const percentage = DOMUtils.appendOrSelect(svg, "text.percent-value");
 
+		// append a percentage if it is enabled, update it
+		if (this.model.getOptions().meter.title.percentageIndicator.enabled) {
 		// the horizontal offset of the percentage value from the title
 		const offset = this.model.getOptions().meter.title.paddingRight;
 
 		percentage.text(`${value}%`)
 			.attr("x", +title.attr("x") + title.node().getComputedTextLength() + offset) // set the position to after the title
 			.attr("y", title.attr("y"));
+		} else {
+			// remove it if it is not longer enabled in options
+			percentage.remove();
+		}
 	}
 
 	truncateTitle() {
@@ -100,7 +107,6 @@ export class TitleMeter extends Title {
 			const tspanLength = Math.ceil(DOMUtils.appendOrSelect(title, "tspan").node().getComputedTextLength());
 			const truncatedSize = Math.floor(containerWidth - tspanLength - percentageWidth - statusWidth);
 
-
 			// get the index for creating the max length substring that fits within the svg
 			// use one less than the index to avoid crowding (the elipsis)
 			const substringIndex = this.getSubstringIndex(title.node(), 0, titleString.length - 1, truncatedSize);
@@ -137,7 +143,7 @@ export class TitleMeter extends Title {
 
 	render() {
 		const displayData = this.model.getDisplayData();
-		// meter only deals with 1 dataset (like pie/donut)
+		// meter only deals with 1 dataset
 		const dataset = displayData.datasets[0];
 
 		const svg = this.getContainerSVG();
@@ -147,14 +153,6 @@ export class TitleMeter extends Title {
 		text.attr("x", 0)
 			.attr("y", 20)
 			.text(dataset.label);
-
-		// TODO - Replace with layout component margins
-		DOMUtils.appendOrSelect(svg, "rect.spacer")
-			.attr("x", 0)
-			.attr("y", 20)
-			.attr("width", 20)
-			.attr("height", 20)
-			.attr("fill", "none");
 
 		// appends the associated percentage after title
 		this.appendPercentage();

@@ -30,27 +30,9 @@ export class AxisChart extends Chart {
 	}
 
 	protected getAxisChartComponents(graphFrameComponents: any[]) {
-		const titleComponent = {
-			id: "title",
-			components: [
-				new Title(this.model, this.services)
-			],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
-		};
-
-		const legendComponent = {
-			id: "legend",
-			components: [
-				new Legend(this.model, this.services)
-			],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
-		};
+		const topLevelLayoutComponents = [];
+		// the layout component holding the graph and legend
+		let fullFrameComponent;
 
 		const graphFrameComponent = {
 			id: "graph-frame",
@@ -63,61 +45,109 @@ export class AxisChart extends Chart {
 
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
-		const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
-		if (legendPosition === LegendPositions.LEFT) {
-			fullFrameComponentDirection = LayoutDirection.ROW;
 
-			if (!this.model.getOptions().legend.orientation) {
-				this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
-			}
-		} else if (legendPosition === LegendPositions.RIGHT) {
-			fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
+		// Check if the legend is enabled for the chart
+		if (this.model.getOptions().legend.enabled) {
+			const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
+			if (legendPosition === LegendPositions.LEFT) {
+				fullFrameComponentDirection = LayoutDirection.ROW;
 
-			if (!this.model.getOptions().legend.orientation) {
-				this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+				if (!this.model.getOptions().legend.orientation) {
+					this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+				}
+			} else if (legendPosition === LegendPositions.RIGHT) {
+				fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
+
+				if (!this.model.getOptions().legend.orientation) {
+					this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+				}
+			} else if (legendPosition === LegendPositions.BOTTOM) {
+				fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
 			}
-		} else if (legendPosition === LegendPositions.BOTTOM) {
-			fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
+
+			// create the legend component and spacer
+			const legendComponent = {
+				id: "legend",
+				components: [
+					new Legend(this.model, this.services)
+				],
+				growth: {
+					x: LayoutGrowth.PREFERRED,
+					y: LayoutGrowth.FIXED
+				}
+			};
+
+			const legendSpacerComponent = {
+				id: "spacer",
+				components: [
+					new Spacer(this.model, this.services)
+				],
+				growth: {
+					x: LayoutGrowth.PREFERRED,
+					y: LayoutGrowth.FIXED
+				}
+			};
+
+			// create the full frame component with the legend
+			fullFrameComponent = {
+				id: "full-frame",
+				components: [
+					new LayoutComponent(
+						this.model,
+						this.services,
+						[
+							legendComponent,
+							legendSpacerComponent,
+							graphFrameComponent
+						],
+						{
+							direction: fullFrameComponentDirection
+						}
+					)
+				],
+				growth: {
+					x: LayoutGrowth.STRETCH,
+					y: LayoutGrowth.FIXED
+				}
+			};
+		} else {
+			// legend is not enabled, create full frame component with column direction and only graph components
+			fullFrameComponent = {
+				id: "full-frame",
+				components: [
+					new LayoutComponent(
+						this.model,
+						this.services,
+						[
+							graphFrameComponent
+						],
+						{
+							direction: fullFrameComponentDirection
+						}
+					)
+				],
+				growth: {
+					x: LayoutGrowth.STRETCH,
+					y: LayoutGrowth.FIXED
+				}
+			};
 		}
 
-		const legendSpacerComponent = {
-			id: "spacer",
-			components: [
-				new Spacer(this.model, this.services)
-			],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
-		};
-
-		const fullFrameComponent = {
-			id: "full-frame",
-			components: [
-				new LayoutComponent(
-					this.model,
-					this.services,
-					[
-						legendComponent,
-						legendSpacerComponent,
-						graphFrameComponent
-					],
-					{
-						direction: fullFrameComponentDirection
-					}
-				)
-			],
-			growth: {
-				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED
-			}
-		};
-
 		// Add chart title if it exists
-		const topLevelLayoutComponents = [];
 		if (this.model.getOptions().title) {
-			topLevelLayoutComponents.push(titleComponent);
+			// create the title component
+			const titleComponent = {
+				id: "title",
+				components: [
+					new Title(this.model, this.services)
+				],
+				growth: {
+					x: LayoutGrowth.PREFERRED,
+					y: LayoutGrowth.FIXED
+				}
+			};
 
+			// create the title spacer
 			const titleSpacerComponent = {
 				id: "spacer",
 				components: [
@@ -129,8 +159,10 @@ export class AxisChart extends Chart {
 				}
 			};
 
+			topLevelLayoutComponents.push(titleComponent);
 			topLevelLayoutComponents.push(titleSpacerComponent);
 		}
+
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [

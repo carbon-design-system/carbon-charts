@@ -28,6 +28,7 @@ export interface LayoutComponentChild {
  * customize the legend component
  */
 export interface LegendOptions {
+	enabled?: boolean;
 	position?: LegendPositions;
 	/**
 	 * the clickability of legend items

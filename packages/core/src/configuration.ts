@@ -32,6 +32,7 @@ import {
  * Legend options
  */
 export const legend: LegendOptions = {
+	enabled: true,
 	position: LegendPositions.BOTTOM,
 	clickable: true,
 	items: {
@@ -225,12 +226,19 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 } as DonutChartOptions);
 
 const meterChart: MeterChartOptions = Tools.merge({}, chart, {
+	legend: {
+		enabled: false
+	},
 	meter: {
 		barHeight: 15,
 		title: {
-			paddingRight: 5
+			paddingRight: 5,
+			percentageIndicator: {
+				enabled: true
+			}
 		},
 		status: {
+			enabled: false,
 			indicatorSize: 8,
 			paddingLeft: 15
 		}

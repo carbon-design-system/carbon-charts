@@ -156,8 +156,18 @@ export interface MeterChartOptions extends BaseChartOptions {
 			 * offsets the percentage value from the title
 			 */
 			valueOffset: number;
+			percentageIndicator?: {
+				/**
+				 * rendering of the percentage value relative to the dataset within title
+				 */
+				enabled?: boolean
+			}
 		},
 		status?: {
+			/**
+			 * visibility of the status indicator
+			 */
+			enabled?: boolean;
 			indicatorSize?: number;
 			paddingLeft?: number;
 		}

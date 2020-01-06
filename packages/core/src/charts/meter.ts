@@ -5,7 +5,8 @@ import * as Configuration from "../configuration";
 import {
 	ChartConfig,
 	MeterChartOptions,
-	LayoutGrowth
+	LayoutGrowth,
+	LayoutDirection
 } from "../interfaces/index";
 import { Tools } from "../tools";
 import { Meter } from "./../components/graphs/meter";
@@ -17,7 +18,8 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TitleMeter
+	TitleMeter,
+	Spacer
 } from "../components/index";
 
 export class MeterChart extends Chart {
@@ -46,12 +48,19 @@ export class MeterChart extends Chart {
 	}
 
 	getComponents() {
-		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [
-			new Meter(this.model, this.services)
-		];
+		// Specify what to render inside the graph only
+		const graph = {
+			id: "meter-graph",
+			components: [
+				new Meter(this.model, this.services)
+			],
+			growth: {
+				x: LayoutGrowth.STRETCH,
+				y: LayoutGrowth.FIXED
+			}
+		};
 
-		// Meter has an extended title (to render percentages and status)
+		// Meter has an unique dataset title within the graph
 		const titleComponent = {
 			id: "title",
 			components: [
@@ -63,11 +72,36 @@ export class MeterChart extends Chart {
 			}
 		};
 
-		// meter has a custom title component and does not need a legend
-		const customElements = [titleComponent];
+		// create the title spacer
+		const titleSpacerComponent = {
+			id: "spacer",
+			components: [
+				new Spacer(this.model, this.services)
+			],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
 
-		// get the base chart components and export with tooltip
-		const components: any[] = this.getChartComponents(graphFrameComponents, customElements);
+		// the graph frame for meter includes the custom title (and spacer)
+		const graphFrame = [new LayoutComponent(
+			this.model,
+			this.services,
+			[
+				titleComponent,
+				titleSpacerComponent,
+				graph
+			],
+			{
+				direction: LayoutDirection.COLUMN
+			}
+		)];
+
+		// add the meter title as a top level component
+		const components: any[] = this.getChartComponents(graphFrame);
+
+		// export with tooltip
 		components.push(new Tooltip(this.model, this.services));
 		return components;
 	}

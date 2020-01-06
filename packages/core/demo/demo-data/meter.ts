@@ -22,4 +22,16 @@ export const meterData = {
 	]
 };
 
-export const meterOptions = {};
+export const meterOptions = {
+	meter: {
+		title: {
+			percentageIndicator: {
+				enabled: true
+			}
+		},
+		status: {
+			enabled: true,
+		}
+	},
+	title: "Meter Chart"
+};
