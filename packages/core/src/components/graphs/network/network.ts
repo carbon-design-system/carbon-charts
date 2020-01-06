@@ -1,9 +1,7 @@
 import { zoom } from "d3-zoom";
 import { event as d3Event } from "d3";
-import { max } from "d3-array";
 import settings from "carbon-components/src/globals/js/settings";
 import { DOMUtils } from "../../../services";
-import classnames from "classnames";
 
 // Internal Imports
 import { Component } from "../../component";
