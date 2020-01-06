@@ -1,12 +1,12 @@
 import { zoom } from "d3-zoom";
 import { event as d3Event } from "d3";
 import settings from "carbon-components/src/globals/js/settings";
-import { DOMUtils } from "../../../services";
 
 // Internal Imports
+import { DOMUtils } from "../../../services";
 import { Component } from "../../component";
-import NetworkCard from "./network-card";
-import NetworkLine from "./network-line";
+import { NetworkCard } from "./network-card";
+import { NetworkLine } from "./network-line";
 
 const { prefix } = settings;
 
@@ -18,33 +18,33 @@ export class Network extends Component {
 
 	drawCards(container) {
 		const { nodeHeight, nodeWidth } = this.options;
-		const { nodes } = this.data;
 
-		NetworkCard({
-			svg: container,
+		const cards = new NetworkCard(this.model, this.services, {
+			container,
 			selector: "rect.network-card",
-			data: nodes,
 			accessor: d => d,
 			height: nodeHeight,
 			width: nodeWidth,
 		});
+
+		cards.render();
 	}
 
 	drawLines(container) {
 		const { nodeHeight, nodeWidth } = this.options;
-		const { links } = this.data;
 
-		NetworkLine({
-			svg: container,
+		const lines = new NetworkLine(this.model, this.services, {
+			container,
 			selector: "rect.network-line",
-			data: links,
 			accessor: d => d,
 			nodeHeight: nodeHeight,
 			nodeWidth: nodeWidth
 		});
+
+		lines.render();
 	}
 
-	render(animate: boolean) {
+	render() {
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
 
 		const zoomBox = this.svg.append("rect")
