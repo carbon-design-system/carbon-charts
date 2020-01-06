@@ -2,7 +2,7 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import { CalloutDirections, TooltipTypes } from "../../interfaces/enums";
+import { CalloutDirections, Roles, TooltipTypes } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -81,7 +81,9 @@ export class Pie extends Component {
 			.sort((a: any, b: any) => a.index - b.index);
 
 		// Update data on all slices
-		const paths = DOMUtils.appendOrSelect(svg, "g.slices").selectAll("path.slice")
+		const slicesGroup = DOMUtils.appendOrSelect(svg, "g.slices")
+			.attr("role", Roles.GROUP);
+		const paths = slicesGroup.selectAll("path.slice")
 			.data(pieLayoutData, d => d.data.label);
 
 		// Remove slices that need to be exited
@@ -101,13 +103,18 @@ export class Pie extends Component {
 			.attr("d", this.arc)
 			.transition(this.services.transitions.getTransition("pie-slice-enter-update", animate))
 			.attr("opacity", 1)
+			// a11y
+			.attr("role", Roles.GRAPHICS_SYMBOL)
+			.attr("aria-roledescription", "slice")
+			.attr("aria-label", d => `${d.value}, ${Tools.convertValueToPercentage(d.data.value, dataList) + "%"}`)
+			// Tween
 			.attrTween("d", function (a) {
 				return arcTween.bind(this)(a, self.arc);
 			});
 
 		// Draw the slice labels
-		const labels = DOMUtils.appendOrSelect(svg, "g.labels")
-			.selectAll("text.pie-label")
+		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels").attr("role", Roles.GROUP);
+		const labels = labelsGroup.selectAll("text.pie-label")
 			.data(pieLayoutData, (d: any) => d.data.label);
 
 		// Remove labels that are existing
@@ -193,7 +200,8 @@ export class Pie extends Component {
 	}
 
 	renderCallouts(calloutData: any[]) {
-		const svg = DOMUtils.appendOrSelect(this.getContainerSVG(), "g.callouts");
+		const svg = DOMUtils.appendOrSelect(this.getContainerSVG(), "g.callouts")
+			.attr("role", Roles.GROUP);
 		const options = this.model.getOptions();
 
 		// Update data on callouts
@@ -204,7 +212,10 @@ export class Pie extends Component {
 
 		const enteringCallouts = callouts.enter()
 			.append("g")
-			.classed("callout", true);
+			.classed("callout", true)
+			// a11y
+			.attr("role", `${Roles.GRAPHICS_SYMBOL} ${Roles.GROUP}`)
+			.attr("aria-roledescription", "label callout");
 
 		// Update data values for each callout
 		// For the horizontal and vertical lines to use

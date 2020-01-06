@@ -12,10 +12,10 @@ import {
 import { ChartModel } from "./model";
 import { Component,
 	Title,
-	TitleMeter,
 	Legend,
 	LayoutComponent,
-	Tooltip
+	Tooltip,
+	Spacer
 } from "./components";
 import { Tools } from "./tools";
 
@@ -122,6 +122,7 @@ export class Chart {
 	 */
 	protected getChartComponents(graphFrameComponents: any[], customTopLevelElements?: any[]) {
 		const topLevelLayoutComponents = [];
+		// the layout component holding the graph and legend
 		let fullFrameComponent;
 
 		const graphFrameComponent = {
@@ -133,34 +134,19 @@ export class Chart {
 			}
 		};
 
-		// if there are custom top level elements provided, we don't add the default title and legend
-		// unless those are passed into custom elements, but the graph needs to provide the growths/other properties for custom elements
-		if (!customTopLevelElements) {
-			const titleComponent = {
-				id: "title",
-				components: [
-					new Title(this.model, this.services)
-				],
-				growth: {
-					x: LayoutGrowth.PREFERRED,
-					y: LayoutGrowth.FIXED
-				}
-			};
+		// if there are custom top level elements provided add them first
+		if (customTopLevelElements) {
+			customTopLevelElements.forEach(element => {
+				topLevelLayoutComponents.push(element);
+			});
+		}
 
-			const legendComponent = {
-				id: "legend",
-				components: [
-					new Legend(this.model, this.services)
-				],
-				growth: {
-					x: LayoutGrowth.PREFERRED,
-					y: LayoutGrowth.FIXED
-				}
-			};
+		let fullFrameComponentDirection = LayoutDirection.COLUMN;
 
+		// Check if the legend is enabled for the chart
+		if (this.model.getOptions().legend.enabled) {
 			// TODORF - REUSE BETWEEN AXISCHART & CHART
 			// Decide the position of the legend in reference to the chart
-			let fullFrameComponentDirection = LayoutDirection.COLUMN;
 			const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
 			if (legendPosition === "left") {
 				fullFrameComponentDirection = LayoutDirection.ROW;
@@ -178,6 +164,31 @@ export class Chart {
 				fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
 			}
 
+			// create the legend component and spacer
+			const legendComponent = {
+				id: "legend",
+				components: [
+					new Legend(this.model, this.services)
+				],
+				growth: {
+					x: LayoutGrowth.PREFERRED,
+					y: LayoutGrowth.FIXED
+				}
+			};
+
+			// legend spacer
+			const legendSpacerComponent = {
+				id: "spacer",
+				components: [
+					new Spacer(this.model, this.services)
+				],
+				growth: {
+					x: LayoutGrowth.PREFERRED,
+					y: LayoutGrowth.FIXED
+				}
+			};
+
+			// create the full frame component with the legend
 			fullFrameComponent = {
 				id: "full-frame",
 				components: [
@@ -186,6 +197,7 @@ export class Chart {
 						this.services,
 						[
 							legendComponent,
+							legendSpacerComponent,
 							graphFrameComponent
 						],
 						{
@@ -199,13 +211,8 @@ export class Chart {
 				}
 			};
 
-			// Add chart title if it exists
-			if (this.model.getOptions().title) {
-				topLevelLayoutComponents.push(titleComponent);
-			}
-
-		// there are specified custom elements to be added to the layout
 		} else {
+			// legend is not enabled, create the full frame component without the legend
 			fullFrameComponent = {
 				id: "full-frame",
 				components: [
@@ -216,7 +223,7 @@ export class Chart {
 							graphFrameComponent
 						],
 						{
-							direction: LayoutDirection.COLUMN
+							direction: fullFrameComponentDirection
 						}
 					)
 				],
@@ -225,11 +232,36 @@ export class Chart {
 					y: LayoutGrowth.FIXED
 				}
 			};
+		}
 
-			// get all the custom elements into the top level layout components
-			customTopLevelElements.forEach(element => {
-				topLevelLayoutComponents.push(element);
-			});
+		// Add chart title if it exists
+		if (this.model.getOptions().title) {
+			// create the title component
+			const titleComponent = {
+				id: "title",
+				components: [
+					new Title(this.model, this.services)
+				],
+				growth: {
+					x: LayoutGrowth.PREFERRED,
+					y: LayoutGrowth.FIXED
+				}
+			};
+
+			// create the title spacer
+			const titleSpacerComponent = {
+				id: "spacer",
+				components: [
+					new Spacer(this.model, this.services)
+				],
+				growth: {
+					x: LayoutGrowth.PREFERRED,
+					y: LayoutGrowth.FIXED
+				}
+			};
+
+			topLevelLayoutComponents.push(titleComponent);
+			topLevelLayoutComponents.push(titleSpacerComponent);
 		}
 
 		topLevelLayoutComponents.push(fullFrameComponent);
