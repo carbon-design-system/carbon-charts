@@ -1,13 +1,13 @@
-import { colors } from "./colors";
 import UserIcon from "@carbon/icons/es/user/20";
 import BugIcon from "@carbon/icons/es/debug/20";
 import ScreenIcon from "@carbon/icons/es/screen/20";
+import WikiIcon from "@carbon/icons/es/wikis/20";
 
 const nodeData = [
-	{ id: "a", heading: "User", subheading: "John Doe", x: 0, y: 0, icon: UserIcon, onClick: () => console.log("clicked") },
-	{ id: "b", heading: "IP", subheading: "192.168.1.1", x: 1, y: 0, icon: ScreenIcon },
-	{ id: "c", heading: "IP", subheading: "0.0.0.0", x: 1, y: 1, kind: "warning", icon: ScreenIcon },
-	{ id: "d", heading: "Malware", subheading: "Description", x: 2, y: 1, kind: "error", icon: BugIcon },
+	{ id: "a", heading: "User", subheading: "John Doe", column: 0, row: 0, icon: UserIcon, onClick: () => console.log("clicked") },
+	{ id: "b", heading: "IP", subheading: "192.168.1.1", column: 1, row: 0, icon: ScreenIcon },
+	{ id: "c", heading: "Domain", subheading: "mydomain.net", column: 1, row: 1, kind: "warning", icon: WikiIcon },
+	{ id: "d", heading: "Malware", subheading: "WannaCry", column: 2, row: 1, kind: "error", icon: BugIcon },
 ];
 
 const linkData = [
@@ -26,6 +26,7 @@ export const networkOptions = {
 };
 
 export const networkData = {
+	labels: [],
 	datasets: [
 		{
 			nodes: nodeData,

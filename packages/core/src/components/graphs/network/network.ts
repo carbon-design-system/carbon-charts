@@ -39,8 +39,8 @@ export class Network extends Component {
 	calculatePositions = () => {
 		const { nodes, links } = this.data;
 
-		this.xMax = max(nodes, ({x}) => x);
-		this.yMax = max(nodes, ({y}) => y);
+		this.xMax = max(nodes, ({column}) => column);
+		this.yMax = max(nodes, ({row}) => row);
 
 		this.innerWidth = this.calculateInnerWidth(this.xMax);
 		this.innerHeight = this.calculateInnerHeight(this.yMax);
@@ -53,13 +53,15 @@ export class Network extends Component {
 			.rangeRound([0, this.innerHeight])
 			.domain([0, this.yMax + 1]);
 
-		this.parsedNodes = nodes.map( ({x, y, ...rest}) => {
-			const xScaled = this.xScale(x);
-			const yScaled = this.yScale(y);
+		this.parsedNodes = nodes.map( ({column, row, ...rest}) => {
+			const xScaled = this.xScale(column);
+			const yScaled = this.yScale(row);
 
 			return {
 				x: xScaled,
 				y: yScaled,
+				column,
+				row,
 				...rest
 			};
 		});
