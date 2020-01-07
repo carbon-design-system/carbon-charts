@@ -26,7 +26,6 @@ export const networkOptions = {
 };
 
 export const networkData = {
-	labels: [], // TODO Add these as swim-lanes?
 	datasets: [
 		{
 			nodes: nodeData,
