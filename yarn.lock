@@ -1496,15 +1496,15 @@
   resolved "https://registry.yarnpkg.com/@carbon/colors/-/colors-10.4.0.tgz#8c21127926bc389dcb4d415b55d4eae278f3d525"
   integrity sha512-UERU07hWXAjsaWu6JPJDyJnwVLkJr+8wTvFrbCkubCfl/MZjKoyLgz0CNypu8hSg8ZaDUzl/NfXMgRpprzuSjQ==
 
-"@carbon/icon-helpers@^10.4.0":
-  version "10.4.0"
-  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.4.0.tgz#771ba51efcaa9d2be03800f8e0f50c7aa779febf"
-  integrity sha512-52H97nT0Hv3mneNaDXBELt/shrO9AUZIpX5TuxRUcdva0xqLNnjhsLw0PTytjQRw3yNCLmDw8hOutzlReXCleQ==
+"@carbon/icon-helpers@^10.5.0":
+  version "10.5.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.5.0.tgz#dca43b95ead0555d308a583983835804b869f810"
+  integrity sha512-ivKSCd3sl+Qm0PCLhGje7FAHnK8anX8Fml0rYgraIptU5JOASWrBKu14EUtGZwL9UP/tzszvufrzwO599cN9Qw==
 
-"@carbon/icons@^10.6.1":
-  version "10.6.1"
-  resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-10.6.1.tgz#1b7a84c4d03bd30e9575d39d4b98ba3e6fa04297"
-  integrity sha512-g7ciJbLN3l7oiZrWpKOiCDRDIAMG3oEf4STaFDRnqKP9pv4jpqoitSkzXDo9L8EmVi9Mp8IV8tAMlAp7DVZuHQ==
+"@carbon/icons@^10.8.0":
+  version "10.8.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-10.8.0.tgz#7dda60e15f14d1e5075e2d6faf56cd5f6bc763f7"
+  integrity sha512-WcFCzNsdOLnEWOs3kH2O4/aNp6x7DrNK+GENWwJDEnwzbc85/TgO2zuN9ThxBL/FcC/PhNVwbSXIbi056PNb2A==
 
 "@carbon/import-once@10.3.0":
   version "10.3.0"
