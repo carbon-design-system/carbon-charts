@@ -18,7 +18,6 @@ const linkData = [
 
 export const networkOptions = {
 	title: "Network diagram",
-	// TODO try out axis logic here
 	margin: 80,
 	nodeHeight: 64,
 	nodeWidth: 208,
