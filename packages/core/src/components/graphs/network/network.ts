@@ -1,5 +1,7 @@
 import { zoom } from "d3-zoom";
 import { event as d3Event } from "d3";
+import { scaleLinear } from "d3-scale";
+import { max } from "d3-array";
 import settings from "carbon-components/src/globals/js/settings";
 
 // Internal Imports
@@ -15,6 +17,64 @@ export class Network extends Component {
 	data = this.model.getDisplayData().datasets[0];
 	options = this.model.getOptions();
 	svg = this.getContainerSVG();
+	xMax;
+	yMax;
+	innerWidth;
+	innerHeight;
+	xScale;
+	yScale;
+	parsedNodes;
+	parsedLinks;
+
+	calculateInnerHeight = (yMax) => {
+		const { cellHeight } = this.options;
+		return (yMax + 1) * cellHeight;
+	}
+
+	calculateInnerWidth = (xMax) => {
+		const { cellWidth } = this.options;
+		return (xMax + 1) * cellWidth;
+	}
+
+	calculatePositions = () => {
+		const { nodes, links } = this.data;
+
+		this.xMax = max(nodes, ({x}) => x);
+		this.yMax = max(nodes, ({y}) => y);
+
+		this.innerWidth = this.calculateInnerWidth(this.xMax);
+		this.innerHeight = this.calculateInnerHeight(this.yMax);
+
+		this.xScale = scaleLinear()
+			.rangeRound([0, this.innerWidth])
+			.domain([0, this.xMax + 1]);
+
+		this.yScale = scaleLinear()
+			.rangeRound([0, this.innerHeight])
+			.domain([0, this.yMax + 1]);
+
+		this.parsedNodes = nodes.map( ({x, y, ...rest}) => {
+			const xScaled = this.xScale(x);
+			const yScaled = this.yScale(y);
+
+			return {
+				x: xScaled,
+				y: yScaled,
+				...rest
+			};
+		});
+
+		this.parsedLinks = links.map(({source, target, ...rest}) => {
+			const sourceNode = this.parsedNodes.find(node => node.id === source);
+			const targetNode = this.parsedNodes.find(node => node.id === target);
+
+			return {
+				source: sourceNode,
+				target: targetNode,
+				...rest
+			};
+		});
+	}
 
 	drawCards(container) {
 		const { nodeHeight, nodeWidth } = this.options;
@@ -25,6 +85,7 @@ export class Network extends Component {
 			accessor: d => d,
 			height: nodeHeight,
 			width: nodeWidth,
+			data: this.parsedNodes
 		});
 
 		cards.render();
@@ -38,7 +99,8 @@ export class Network extends Component {
 			selector: "rect.network-line",
 			accessor: d => d,
 			nodeHeight: nodeHeight,
-			nodeWidth: nodeWidth
+			nodeWidth: nodeWidth,
+			data: this.parsedLinks
 		});
 
 		lines.render();
@@ -69,6 +131,7 @@ export class Network extends Component {
 
 		this.svg.call(zoomed);
 
+		this.calculatePositions();
 		this.drawCards(container);
 		this.drawLines(container);
 	}

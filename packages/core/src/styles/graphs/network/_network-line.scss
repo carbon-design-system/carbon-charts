@@ -6,6 +6,7 @@
 	.#{$prefix}--network-link__line {
 		stroke: $ui_04;
 		stroke-width: carbon--mini-units(0.1875);
+		fill: none;
 	}
 
 	.#{$prefix}--network-link__marker {

@@ -18,9 +18,8 @@ export class NetworkLine extends Component {
 			accessor,
 			nodeHeight,
 			nodeWidth,
+			data
 		} = this.configs;
-
-		const data = this.model.getDisplayData().datasets[0].links;
 
 		const buildMarkerDefs = () => data.reduce((unique, link) => {
 			const { kind, multiDirectional, directional } = link;

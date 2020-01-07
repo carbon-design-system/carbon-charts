@@ -13,9 +13,9 @@ export class NetworkCard extends Component {
 			accessor,
 			height,
 			width,
+			data
 		} = this.configs;
 
-		const data = this.model.getDisplayData().datasets[0].nodes;
 
 		const cards = container.selectAll(selector)
 			.data(data, accessor);
@@ -41,15 +41,15 @@ export class NetworkCard extends Component {
 				.append("g")
 				.attr("class", `${prefix}--network-card__content`);
 
-		const heading = textGroup
+		const textHeading = textGroup
 				.append("text")
 				.attr("class", `${prefix}--network-card__heading`)
-				.text("Heading");
+				.text(({heading}) => heading);
 
-		const subHeading = textGroup
+		const textSubHeading = textGroup
 				.append("text")
 				.attr("class", `${prefix}--network-card__subheading`)
-				.text("Subheading");
+				.text(({subheading}) => subheading);
 
 		const cardStroke = cardGroup
 				.append("rect")
