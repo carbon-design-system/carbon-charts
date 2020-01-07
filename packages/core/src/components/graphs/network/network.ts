@@ -84,7 +84,6 @@ export class Network extends Component {
 		const cards = new NetworkCard(this.model, this.services, {
 			container,
 			selector: "rect.network-card",
-			accessor: d => d,
 			height: nodeHeight,
 			width: nodeWidth,
 			data: this.parsedNodes
@@ -99,7 +98,6 @@ export class Network extends Component {
 		const lines = new NetworkLine(this.model, this.services, {
 			container,
 			selector: "rect.network-line",
-			accessor: d => d,
 			nodeHeight: nodeHeight,
 			nodeWidth: nodeWidth,
 			data: this.parsedLinks

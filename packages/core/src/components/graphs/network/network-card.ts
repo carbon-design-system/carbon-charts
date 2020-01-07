@@ -10,14 +10,13 @@ export class NetworkCard extends Component {
 		const {
 			container,
 			selector,
-			accessor,
 			height,
 			width,
 			data
 		} = this.configs;
 
 		const cards = container.selectAll(selector)
-			.data(data, accessor);
+			.data(data);
 
 		const cardGroup = cards
 				.enter()

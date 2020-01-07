@@ -15,7 +15,6 @@ export class NetworkLine extends Component {
 		const {
 			container,
 			selector,
-			accessor,
 			nodeHeight,
 			nodeWidth,
 			data
@@ -57,7 +56,7 @@ export class NetworkLine extends Component {
 					.html(({end}) => buildIconString(end ? ChevronRight : ChevronLeft));
 
 		const lines = container.selectAll(selector)
-			.data(data, accessor)
+			.data(data)
 			.enter()
 				.append("path")
 				.attr("class", ({kind}) => classnames(`${prefix}--network-link__line`, {
