@@ -16,7 +16,6 @@ export class NetworkCard extends Component {
 			data
 		} = this.configs;
 
-
 		const cards = container.selectAll(selector)
 			.data(data, accessor);
 
