@@ -58,6 +58,6 @@ export class NetworkCard extends Component {
 		const cardIcon = cardGroup
 				.append("g")
 				.attr("class", `${prefix}--network-card__icon-path`)
-				.html(({icon}) => icon && buildIconString(icon));
+				.html(({renderIcon}) => renderIcon && buildIconString(renderIcon));
 	}
 }

@@ -4,10 +4,10 @@ import ScreenIcon from "@carbon/icons/es/screen/20";
 import WikiIcon from "@carbon/icons/es/wikis/20";
 
 const nodeData = [
-	{ id: "a", heading: "User", subheading: "John Doe", column: 0, row: 0, icon: UserIcon, onClick: () => console.log("clicked") },
-	{ id: "b", heading: "IP", subheading: "192.168.1.1", column: 1, row: 0, icon: ScreenIcon },
-	{ id: "c", heading: "Domain", subheading: "mydomain.net", column: 1, row: 1, kind: "warning", icon: WikiIcon },
-	{ id: "d", heading: "Malware", subheading: "WannaCry", column: 2, row: 1, kind: "error", icon: BugIcon },
+	{ id: "a", heading: "User", subheading: "John Doe", column: 0, row: 0, renderIcon: UserIcon, onClick: () => console.log("clicked") },
+	{ id: "b", heading: "IP", subheading: "192.168.1.1", column: 1, row: 0, renderIcon: ScreenIcon },
+	{ id: "c", heading: "Domain", subheading: "mydomain.net", column: 1, row: 1, kind: "warning", renderIcon: WikiIcon },
+	{ id: "d", heading: "Malware", subheading: "WannaCry", column: 2, row: 1, kind: "error", renderIcon: BugIcon },
 ];
 
 const linkData = [
@@ -17,7 +17,7 @@ const linkData = [
 	{ source: "d", target: "c", kind: "error", directional: true  }];
 
 export const networkOptions = {
-	title: "Network diagram",
+	title: "Network diagram (experimental)",
 	margin: 80,
 	nodeHeight: 64,
 	nodeWidth: 208,

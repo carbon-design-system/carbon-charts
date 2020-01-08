@@ -7,9 +7,10 @@ import {
 	ScatterChart,
 	PieChart,
 	DonutChart,
-	// Advanced charts
-	NetworkChart
 } from "../src/index";
+
+// Experimental (unreleased) charts
+import { NetworkChart } from "../src/charts/network";
 
 // Styles
 import "./index.scss";
