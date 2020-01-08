@@ -141,13 +141,16 @@ const createChartContainer = chartType => {
 	chartDemoActions.setAttribute("role", "region");
 	chartDemoActions.setAttribute("aria-label", `${chartType} chart actions`);
 
-	// Add update data button
-	const updateDataButton = document.createElement("button");
-	updateDataButton.className = "bx--btn bx--btn--primary";
-	updateDataButton.id = `change-data-${chartType.id}`;
-	updateDataButton.innerHTML = "Update data";
+	if (chartType.id !== "network") {
+		// Add update data button
+		const updateDataButton = document.createElement("button");
+		updateDataButton.className = "bx--btn bx--btn--primary";
+		updateDataButton.id = `change-data-${chartType.id}`;
+		updateDataButton.innerHTML = "Update data";
 
-	chartDemoActions.appendChild(updateDataButton);
+		chartDemoActions.appendChild(updateDataButton);
+	}
+
 	document.body.appendChild(chartDemoActions);
 
 	return holder;
