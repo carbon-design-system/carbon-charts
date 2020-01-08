@@ -43,7 +43,7 @@ export class NetworkLine extends Component {
 
 		const markers = container.append("svg:defs")
 			.selectAll("marker")
-			.data(Object.values(markerData))
+			.data(Object.keys(markerData).map(key => markerData[key]))
 			.enter()
 				.append("svg:marker")
 				.attr("id", ({id}) => id)
