@@ -6,6 +6,3 @@ export * from "./line";
 export * from "./scatter";
 export * from "./pie";
 export * from "./donut";
-
-// Advanced charts
-export * from "./network";
