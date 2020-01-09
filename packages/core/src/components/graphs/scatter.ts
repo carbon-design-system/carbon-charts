@@ -1,9 +1,9 @@
 // Internal Imports
 import { Component } from "../component";
+import { TooltipTypes, Roles } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
-import { TooltipTypes } from "../../interfaces";
 
 export class Scatter extends Component {
 	type = "scatter";
@@ -37,7 +37,8 @@ export class Scatter extends Component {
 		// Add the dot groups that need to be introduced
 		const dotGroupsEnter = dotGroups.enter()
 			.append("g")
-				.classed("dots", true);
+				.classed("dots", true)
+				.attr("role", Roles.GROUP);
 
 		// Update data on all circles
 		const dots = dotGroupsEnter.merge(dotGroups)
@@ -67,7 +68,11 @@ export class Scatter extends Component {
 			})
 			.attr("fill-opacity", filled ? 0.2 : 1)
 			.attr("stroke", d => this.model.getStrokeColor(d.datasetLabel, d.label, d.value))
-			.attr("opacity", 1);
+			.attr("opacity", 1)
+			// a11y
+			.attr("role", Roles.GRAPHICS_SYMBOL)
+			.attr("aria-roledescription", "point")
+			.attr("aria-label", d => d.value);
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();

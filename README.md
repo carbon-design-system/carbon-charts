@@ -13,7 +13,8 @@
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
 		</a>
 		<img src="https://img.shields.io/badge/comp-IE11%2B-blue.svg" />
-		<img alt="semantic-versioning" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versioning-e10079.svg">
+		<img alt="semantic-versioning" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--ver-e10079.svg" />
+		<img alt="semantic-versioning" src="https://img.shields.io/badge/downloads-+5k%2Fweek-green" />
 	</p>
 </p>
 
@@ -22,6 +23,9 @@
 - [Angular](./packages/angular)
 - [React](./packages/react)
 - [Vue](./packages/vue)
+
+## CHANGELOG
+Read the release change logs [here](./CHANGELOG.md)
 
 ## Component status
 :white_check_mark: Stable :hourglass_flowing_sand: In progress
@@ -55,7 +59,7 @@ Get updates on Charts' development and chat with the core team and community. --
 
 We use the **semantic-release** library to automatically version our releases within the guidelines of Semantic Versioning [Semantic Versioning guidelines](http://semver.org/).
 
-See our [releases notes](https://github.com/carbon-design-system/carbon-charts/releases) for the changelog of each version of Charts.
+See our [release change logs](https://github.com/carbon-design-system/carbon-charts/blob/master/CHANGELOG.md) for the changelog of each version of Charts.
 
 
 ## Core Team
