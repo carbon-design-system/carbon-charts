@@ -1,11 +1,11 @@
 // Internal Imports
 import { Bar } from "./bar";
+import { TooltipTypes, Roles } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
 import { color } from "d3-color";
 import { ScaleBand, scaleBand } from "d3-scale";
-import { TooltipTypes } from "../../interfaces";
 
 export class GroupedBar extends Bar {
 	type = "grouped-bar";
@@ -67,7 +67,9 @@ export class GroupedBar extends Bar {
 		// Add the bar groups that need to be introduced
 		const barGroupsEnter = barGroups.enter()
 			.append("g")
-				.classed("bars", true);
+				.classed("bars", true)
+				.attr("role", Roles.GROUP)
+				.attr("aria-labelledby", d => d);
 
 		// Update data on all bars
 		const bars = barGroupsEnter.merge(barGroups)
@@ -98,7 +100,11 @@ export class GroupedBar extends Bar {
 				return Math.abs(this.services.axes.getYValue(d, i) - this.services.axes.getYValue(0));
 			})
 			.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
-			.attr("opacity", 1);
+			.attr("opacity", 1)
+			// a11y
+			.attr("role", Roles.GRAPHICS_SYMBOL)
+			.attr("aria-roledescription", "bar")
+			.attr("aria-label", d => d.value);
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
