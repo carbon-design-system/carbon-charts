@@ -44,7 +44,15 @@ export class Line extends Component {
 		this.lineGenerator = line()
 			.x((d, i) => this.services.axes.getXValue(d, i))
 			.y((d, i) => this.services.axes.getYValue(d, i))
-			.curve(this.services.curves.getD3Curve());
+			.curve(this.services.curves.getD3Curve())
+			// Describe which parts of the line domain are defined
+			.defined((d: any, i) => {
+				if (!d || d.value === null) {
+					return false;
+				}
+
+				return true;
+			});
 
 		// Update the bound data on line groups
 		const lineGroups = svg.selectAll("g.lines")

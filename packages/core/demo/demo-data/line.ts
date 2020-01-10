@@ -17,7 +17,7 @@ export const lineTimeSeriesData = {
 				},
 				{
 					date: new Date(2019, 0, 8),
-					value: 10000
+					value: null
 				},
 				{
 					date: new Date(2019, 0, 13),
@@ -63,11 +63,11 @@ export const lineTimeSeriesData = {
 				},
 				{
 					date: new Date(2019, 0, 5),
-					value: 15000
+					value: null
 				},
 				{
 					date: new Date(2019, 0, 8),
-					value: 20000
+					value: 18000
 				},
 				{
 					date: new Date(2019, 0, 13),
@@ -96,7 +96,7 @@ export const lineTimeSeriesData = {
 				},
 				{
 					date: new Date(2019, 0, 15),
-					value: 40323
+					value: null
 				},
 				{
 					date: new Date(2019, 0, 19),
