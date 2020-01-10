@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.25.0](https://github.com/IBM/carbon-charts/compare/v0.24.5...v0.25.0) (2020-01-10)
+
+
+### Features
+
+* **angular:** add v8 to angular peerDependencies ([c147419](https://github.com/IBM/carbon-charts/commit/c147419))
+
+
+
+
+
 ## [0.24.5](https://github.com/IBM/carbon-charts/compare/v0.24.4...v0.24.5) (2020-01-10)
 
 
