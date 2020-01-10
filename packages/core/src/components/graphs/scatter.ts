@@ -3,7 +3,7 @@ import { Component } from "../component";
 import { TooltipTypes, Roles, Events } from "../../interfaces";
 
 // D3 Imports
-import { select, event } from "d3-selection";
+import { select, event as d3Event } from "d3-selection";
 
 export class Scatter extends Component {
 	type = "scatter";
@@ -113,7 +113,7 @@ export class Scatter extends Component {
 
 				hoveredElement.style("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
 
-				const eventNameToDispatch = event.type === "mouseover" ? Events.Scatter.SCATTER_MOUSEOVER : Events.Scatter.SCATTER_MOUSEMOVE;
+				const eventNameToDispatch = d3Event.type === "mouseover" ? Events.Scatter.SCATTER_MOUSEOVER : Events.Scatter.SCATTER_MOUSEMOVE;
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(eventNameToDispatch, {
 					element: hoveredElement,
