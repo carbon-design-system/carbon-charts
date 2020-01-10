@@ -3245,8 +3245,13 @@ var Title = /** @class */ (function (_super) {
      * Truncates title creating ellipses and attaching tooltip for exposing full title.
      */
     Title.prototype.truncateTitle = function () {
-        var containerWidth = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].getSVGElementSize(this.parent).width;
+        // get a reference to the title elements to calculate the size the title can be
+        var containerWidth = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].getSVGElementSize(this.services.domUtils.getMainSVG(), { useAttr: true }).width;
         var title = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].appendOrSelect(this.parent, "text.title");
+        // sanity check to prevent stack overflow on binary search
+        if (containerWidth <= 0) {
+            return;
+        }
         // check if the title is too big for the containing svg
         if (title.node().getComputedTextLength() > containerWidth) {
             // append the ellipses to their own tspan to calculate the text length
@@ -3265,7 +3270,8 @@ var Title = /** @class */ (function (_super) {
                 .text("...");
             // add events for displaying the tooltip with the title
             var self_1 = this;
-            title.on("mouseenter", function () {
+            title
+                .on("mouseenter", function () {
                 self_1.services.events.dispatchEvent("show-tooltip", {
                     hoveredElement: title,
                     type: _interfaces__WEBPACK_IMPORTED_MODULE_2__["TooltipTypes"].TITLE
@@ -6961,7 +6967,7 @@ var Transitions = /** @class */ (function (_super) {
         var t = Object(d3_transition__WEBPACK_IMPORTED_MODULE_3__["transition"])(name)
             .duration(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(_configuration__WEBPACK_IMPORTED_MODULE_1__["transitions"], name, "duration") || _configuration__WEBPACK_IMPORTED_MODULE_1__["transitions"].default.duration);
         this.pendingTransitions[t._id] = t;
-        t.on("end", function () {
+        t.on("end interrupt cancel", function () {
             delete _this.pendingTransitions[t._id];
         });
         return t;
@@ -6970,7 +6976,7 @@ var Transitions = /** @class */ (function (_super) {
         var _this = this;
         var t = Object(d3_transition__WEBPACK_IMPORTED_MODULE_3__["transition"])(name).duration(0);
         this.pendingTransitions[t._id] = t;
-        t.on("end", function () {
+        t.on("end interrupt cancel", function () {
             delete _this.pendingTransitions[t._id];
         });
         return t;
