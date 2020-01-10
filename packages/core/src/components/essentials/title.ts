@@ -10,8 +10,14 @@ export class Title extends Component {
 	 * Truncates title creating ellipses and attaching tooltip for exposing full title.
 	 */
 	truncateTitle() {
-		const containerWidth  = DOMUtils.getSVGElementSize(this.parent).width;
-		const title =  DOMUtils.appendOrSelect(this.parent, "text.title");
+		// get a reference to the title elements to calculate the size the title can be
+		const containerWidth = DOMUtils.getSVGElementSize(this.services.domUtils.getMainSVG(), { useAttr: true }).width;
+		const title = DOMUtils.appendOrSelect(this.parent, "text.title");
+
+		// sanity check to prevent stack overflow on binary search
+		if (containerWidth <= 0) {
+			return;
+		}
 
 		// check if the title is too big for the containing svg
 		if (title.node().getComputedTextLength() > containerWidth) {
@@ -35,17 +41,18 @@ export class Title extends Component {
 
 			// add events for displaying the tooltip with the title
 			const self = this;
-			title.on("mouseenter", function() {
-				self.services.events.dispatchEvent("show-tooltip", {
-					hoveredElement: title,
-					type: TooltipTypes.TITLE
+			title
+				.on("mouseenter", function() {
+					self.services.events.dispatchEvent("show-tooltip", {
+						hoveredElement: title,
+						type: TooltipTypes.TITLE
+					});
+				})
+				.on("mouseout", function() {
+					self.services.events.dispatchEvent("hide-tooltip", {
+						hoveredElement: title,
+					});
 				});
-			})
-			.on("mouseout", function() {
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement: title,
-				});
-			});
 		}
 	}
 
@@ -69,7 +76,7 @@ export class Title extends Component {
 	 * @param width the width of the svg container that holds the title
 	 */
 	protected getSubstringIndex(title, start, end, width) {
-		const mid  = Math.floor((end + start) / 2);
+		const mid = Math.floor((end + start) / 2);
 		if (title.getSubStringLength(0, mid) > width) {
 			return this.getSubstringIndex(title, start, mid, width);
 		} else if (title.getSubStringLength(0, mid) < width) {
