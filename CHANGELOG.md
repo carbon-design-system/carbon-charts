@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.5](https://github.com/IBM/carbon-charts/compare/v0.24.4...v0.24.5) (2020-01-10)
+
+
+### Bug Fixes
+
+* **core:** fix to allow chart to toggle on and off using attribute/css properties ([77e26af](https://github.com/IBM/carbon-charts/commit/77e26af))
+
+
+
+
+
 ## [0.24.4](https://github.com/IBM/carbon-charts/compare/v0.24.3...v0.24.4) (2020-01-06)
 
 
