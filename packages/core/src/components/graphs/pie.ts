@@ -346,7 +346,7 @@ export class Pie extends Component {
 					.attr("d", self.arc);
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Pie.SLICK_MOUSEOUT, {
+				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOUT, {
 					element: hoveredElement,
 					datum
 				});
