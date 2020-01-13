@@ -1,7 +1,12 @@
 // Internal Imports
 import { Tools } from "../../tools";
 import { Bar } from "./bar";
-import { Roles, ScaleTypes, TooltipTypes, Events } from "../../interfaces";
+import {
+	Roles,
+	ScaleTypes,
+	TooltipTypes,
+	Events
+} from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
