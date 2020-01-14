@@ -1,4 +1,5 @@
 import { ScaleTypes } from "./enums";
+import { AxisDomain } from "d3";
 
 /**
  * options to configure a scale. not all options are used by all scales
@@ -22,6 +23,7 @@ export interface AxisOptions {
 	 * Range usually follows a linear scale
 	 */
 	useAsRange?: boolean;
+	domain?: AxisDomain[];
 	primary?: boolean;
 	secondary?: boolean;
 	/**
