@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/IBM/carbon-charts/compare/v0.25.0...v0.26.0) (2020-01-16)
+
+
+### Features
+
+* **core:** add event dispatches for mouseover, mousemove, click & mouseout for all graphs ([284012c](https://github.com/IBM/carbon-charts/commit/284012c))
+
+
+
+
+
 # [0.25.0](https://github.com/IBM/carbon-charts/compare/v0.24.5...v0.25.0) (2020-01-10)
 
 **Note:** Version bump only for package @carbon/charts
