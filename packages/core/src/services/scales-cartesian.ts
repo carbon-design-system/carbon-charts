@@ -27,6 +27,14 @@ export class CartesianScales extends Service {
 
 	protected orientation: CartesianOrientations;
 
+	getDomainAxisPosition() {
+		return this.domainAxisPosition;
+	}
+
+	getRangeAxisPosition() {
+		return this.rangeAxisPosition;
+	}
+
 	update(animate = true) {
 		this.determineOrientation();
 		const axisPositions = Object.keys(AxisPositions).map(axisPositionKey => AxisPositions[axisPositionKey]);

@@ -46,11 +46,11 @@ export class StackedBar extends Bar {
 		let stackDataArray;
 		const displayData = this.model.getDisplayData();
 
-		// the main axis for stack data depends on the orientation of the bar chart
-		const isVertical = this.model.getOptions().orientation === BarOrientationOptions.VERTICAL;
-		const mainAxis = isVertical ? this.services.cartesianScales.getDomainScale() : this.services.cartesianScales.getRangeScale();
+		// the domain axis for stack data depends on the orientation of the bar chart
+		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition();
+		const domainScaleType = this.services.cartesianScales.getScaleTypeByPosition(domainAxisPosition);
 		// get scale type for the main axis
-		const timeSeries = mainAxis.scaleType === ScaleTypes.TIME;
+		const timeSeries = domainScaleType === ScaleTypes.TIME;
 
 		if (timeSeries) {
 			// Get all date values provided in data
@@ -165,18 +165,21 @@ export class StackedBar extends Bar {
 					* generateSVGPathString() to decide whether it needs to flip them
 					*/
 					const barWidth = this.getBarWidth();
+					// console.log("this.services.cartesianScales.getDomainValue(d, i)", this.services.cartesianScales.getDomainValue(d, i))
 					const x0 = this.services.cartesianScales.getDomainValue(d, i) - barWidth / 2;
 					const x1 = x0 + barWidth;
 					const y0 = this.services.cartesianScales.getRangeValue(d[0], i);
 					let y1 = this.services.cartesianScales.getRangeValue(d[1], i);
 
 					// Add the divider gap
-					if (this.services.cartesianScales.getOrientation() === CartesianOrientations.VERTICAL) {
-						y1 += 1;
-					} else {
-						y1 -= 1;
+					if (Math.abs(y1 - y0) > 0 && Math.abs(y1 - y0) > options.bars.dividerSize) {
+						if (this.services.cartesianScales.getOrientation() === CartesianOrientations.VERTICAL) {
+							y1 += 1;
+						} else {
+							y1 -= 1;
+						}
 					}
-	
+
 					return Tools.generateSVGPathString(
 						{ x0, x1, y0, y1 },
 						this.services.cartesianScales.getOrientation()
