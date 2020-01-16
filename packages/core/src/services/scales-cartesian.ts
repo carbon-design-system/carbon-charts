@@ -276,7 +276,7 @@ export class CartesianScales extends Service {
 		if (domain[0] < 0) {
 			domain[0] = domain[0] * 1.1;
 		}
-		return domain.reverse();
+		return domain;
 	}
 
 	protected createScale(axisPosition: AxisPositions) {

@@ -110,11 +110,6 @@ export class GroupedBar extends Bar {
 			.classed("bar", true)
 			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
 			.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
-			.attr("opacity", 1)
-			// a11y
-			.attr("role", Roles.GRAPHICS_SYMBOL)
-			.attr("aria-roledescription", "bar")
-			.attr("aria-label", d => d.value)
 			.attr("d", d => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
@@ -132,7 +127,12 @@ export class GroupedBar extends Bar {
 					{ x0, x1, y0, y1 },
 					this.services.cartesianScales.getOrientation()
 				);
-			});
+			})
+			.attr("opacity", 1)
+			// a11y
+			.attr("role", Roles.GRAPHICS_SYMBOL)
+			.attr("aria-roledescription", "bar")
+			.attr("aria-label", d => d.value);
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
