@@ -3879,21 +3879,45 @@ var GroupedBar = /** @class */ (function (_super) {
     GroupedBar.prototype.addEventListeners = function () {
         var self = this;
         this.parent.selectAll("rect.bar")
-            .on("mouseover", function () {
+            .on("mouseover", function (datum) {
             var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this);
             hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
                 .attr("fill", Object(d3_color__WEBPACK_IMPORTED_MODULE_3__["color"])(hoveredElement.attr("fill")).darker(0.7).toString());
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Bar.BAR_MOUSEOVER, {
+                element: hoveredElement,
+                datum: datum
+            });
             // Show tooltip
             self.services.events.dispatchEvent("show-tooltip", {
                 hoveredElement: hoveredElement,
                 type: _interfaces__WEBPACK_IMPORTED_MODULE_1__["TooltipTypes"].DATAPOINT
             });
         })
-            .on("mouseout", function () {
+            .on("mousemove", function (datum) {
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Bar.BAR_MOUSEMOVE, {
+                element: Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this),
+                datum: datum
+            });
+        })
+            .on("click", function (datum) {
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Bar.BAR_CLICK, {
+                element: Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this),
+                datum: datum
+            });
+        })
+            .on("mouseout", function (datum) {
             var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this);
             hoveredElement.classed("hovered", false);
             hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
                 .attr("fill", function (d) { return self.model.getFillScale()[d.datasetLabel](d.label); });
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Bar.BAR_MOUSEOUT, {
+                element: hoveredElement,
+                datum: datum
+            });
             // Hide tooltip
             self.services.events.dispatchEvent("hide-tooltip", { hoveredElement: hoveredElement });
         });
@@ -4036,21 +4060,45 @@ var SimpleBar = /** @class */ (function (_super) {
     SimpleBar.prototype.addEventListeners = function () {
         var self = this;
         this.parent.selectAll("rect.bar")
-            .on("mouseover", function () {
+            .on("mouseover", function (datum) {
             var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this);
             hoveredElement.classed("hovered", true);
             hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
                 .attr("fill", Object(d3_color__WEBPACK_IMPORTED_MODULE_3__["color"])(hoveredElement.attr("fill")).darker(0.7).toString());
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Bar.BAR_MOUSEOVER, {
+                element: hoveredElement,
+                datum: datum
+            });
             self.services.events.dispatchEvent("show-tooltip", {
                 hoveredElement: hoveredElement,
                 type: _interfaces__WEBPACK_IMPORTED_MODULE_1__["TooltipTypes"].DATAPOINT
             });
         })
-            .on("mouseout", function () {
+            .on("mousemove", function (datum) {
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Bar.BAR_MOUSEMOVE, {
+                element: Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this),
+                datum: datum
+            });
+        })
+            .on("click", function (datum) {
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Bar.BAR_CLICK, {
+                element: Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this),
+                datum: datum
+            });
+        })
+            .on("mouseout", function (datum) {
             var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this);
             hoveredElement.classed("hovered", false);
             hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
                 .attr("fill", function (d) { return self.model.getFillScale()(d.label); });
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Bar.BAR_MOUSEOUT, {
+                element: hoveredElement,
+                datum: datum
+            });
             // Hide tooltip
             self.services.events.dispatchEvent("hide-tooltip", { hoveredElement: hoveredElement });
         });
@@ -4256,12 +4304,17 @@ var StackedBar = /** @class */ (function (_super) {
     StackedBar.prototype.addEventListeners = function () {
         var self = this;
         this.parent.selectAll("rect.bar")
-            .on("mouseover", function () {
+            .on("mouseover", function (datum) {
             var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_3__["select"])(this);
             hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
                 .attr("fill", Object(d3_color__WEBPACK_IMPORTED_MODULE_5__["color"])(hoveredElement.attr("fill")).darker(0.7).toString());
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_2__["Events"].Bar.BAR_MOUSEOVER, {
+                element: hoveredElement,
+                datum: datum
+            });
         })
-            .on("mousemove", function () {
+            .on("mousemove", function (datum) {
             var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_3__["select"])(this);
             var itemData = Object(d3_selection__WEBPACK_IMPORTED_MODULE_3__["select"])(this).datum();
             hoveredElement.classed("hovered", true);
@@ -4276,6 +4329,11 @@ var StackedBar = /** @class */ (function (_super) {
                 value: stackedData[key],
                 label: sharedLabel
             }); });
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_2__["Events"].Bar.BAR_MOUSEMOVE, {
+                element: hoveredElement,
+                datum: datum
+            });
             // Show tooltip
             self.services.events.dispatchEvent("show-tooltip", {
                 multidata: activePoints,
@@ -4283,11 +4341,23 @@ var StackedBar = /** @class */ (function (_super) {
                 type: _interfaces__WEBPACK_IMPORTED_MODULE_2__["TooltipTypes"].DATAPOINT
             });
         })
-            .on("mouseout", function () {
+            .on("click", function (datum) {
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_2__["Events"].Bar.BAR_CLICK, {
+                element: Object(d3_selection__WEBPACK_IMPORTED_MODULE_3__["select"])(this),
+                datum: datum
+            });
+        })
+            .on("mouseout", function (datum) {
             var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_3__["select"])(this);
             hoveredElement.classed("hovered", false);
             hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
                 .attr("fill", function (d) { return self.model.getFillScale()[d.datasetLabel](d.label); });
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_2__["Events"].Bar.BAR_MOUSEOUT, {
+                element: hoveredElement,
+                datum: datum
+            });
             // Hide tooltip
             self.services.events.dispatchEvent("hide-tooltip", { hoveredElement: hoveredElement });
         });
@@ -4857,30 +4927,49 @@ var Pie = /** @class */ (function (_super) {
     Pie.prototype.addEventListeners = function () {
         var self = this;
         this.parent.selectAll("path.slice")
-            .on("mousemove", function () {
+            .on("mouseover", function (datum) {
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_3__["Events"].Pie.SLICE_MOUSEOVER, {
+                element: Object(d3_selection__WEBPACK_IMPORTED_MODULE_4__["select"])(this),
+                datum: datum
+            });
+        })
+            .on("mousemove", function (datum) {
             var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_4__["select"])(this);
             hoveredElement.classed("hovered", true)
                 .transition(self.services.transitions.getTransition("pie_slice_mouseover"))
                 .attr("d", self.hoverArc);
             // Dispatch mouse event
-            self.services.events.dispatchEvent("pie-slice-mouseover", hoveredElement);
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_3__["Events"].Pie.SLICE_MOUSEMOVE, {
+                element: hoveredElement,
+                datum: datum
+            });
             // Show tooltip
             self.services.events.dispatchEvent("show-tooltip", {
                 hoveredElement: hoveredElement,
                 type: _interfaces__WEBPACK_IMPORTED_MODULE_3__["TooltipTypes"].DATAPOINT
             });
         })
-            .on("mouseout", function () {
+            .on("click", function (datum) {
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_3__["Events"].Pie.SLICE_CLICK, {
+                element: Object(d3_selection__WEBPACK_IMPORTED_MODULE_4__["select"])(this),
+                datum: datum
+            });
+        })
+            .on("mouseout", function (datum) {
             var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_4__["select"])(this);
             hoveredElement.classed("hovered", false)
                 .transition(self.services.transitions.getTransition("pie_slice_mouseover"))
                 .attr("d", self.arc);
             // Dispatch mouse event
-            self.services.events.dispatchEvent("pie-slice-mouseout", hoveredElement);
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_3__["Events"].Pie.SLICE_MOUSEOUT, {
+                element: hoveredElement,
+                datum: datum
+            });
             // Hide tooltip
             self.services.events.dispatchEvent("hide-tooltip", { hoveredElement: hoveredElement });
-        })
-            .on("click", function (d) { return self.services.events.dispatchEvent("pie-slice-click", d); });
+        });
     };
     // Helper functions
     Pie.prototype.computeRadius = function () {
@@ -5017,22 +5106,40 @@ var Scatter = /** @class */ (function (_super) {
     Scatter.prototype.addEventListeners = function () {
         var self = this;
         this.parent.selectAll("circle")
-            .on("mouseover mousemove", function () {
+            .on("mouseover mousemove", function (datum) {
             var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this);
             hoveredElement.classed("hovered", true);
             hoveredElement.style("fill", function (d) { return self.model.getFillScale()[d.datasetLabel](d.label); });
+            var eventNameToDispatch = d3_selection__WEBPACK_IMPORTED_MODULE_2__["event"].type === "mouseover" ? _interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Scatter.SCATTER_MOUSEOVER : _interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Scatter.SCATTER_MOUSEMOVE;
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(eventNameToDispatch, {
+                element: hoveredElement,
+                datum: datum
+            });
             // Show tooltip
             self.services.events.dispatchEvent("show-tooltip", {
                 hoveredElement: hoveredElement,
                 type: _interfaces__WEBPACK_IMPORTED_MODULE_1__["TooltipTypes"].DATAPOINT
             });
         })
-            .on("mouseout", function () {
+            .on("click", function (datum) {
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Scatter.SCATTER_CLICK, {
+                element: Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this),
+                datum: datum
+            });
+        })
+            .on("mouseout", function (datum) {
             var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this);
             hoveredElement.classed("hovered", false);
             if (!self.configs.filled) {
                 hoveredElement.style("fill", null);
             }
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Scatter.SCATTER_MOUSEOUT, {
+                element: hoveredElement,
+                datum: datum
+            });
             // Hide tooltip
             self.services.events.dispatchEvent("hide-tooltip", { hoveredElement: hoveredElement });
         });
@@ -5732,11 +5839,12 @@ var Roles;
 /*!*********************************!*\
   !*** ./src/interfaces/enums.ts ***!
   \*********************************/
-/*! exports provided: ChartTheme, AxisPositions, AxisTypes, ScaleTypes, TooltipPosition, TooltipTypes, LegendPositions, LegendOrientations, LayoutDirection, LayoutGrowth, CalloutDirections */
+/*! exports provided: Events, ChartTheme, AxisPositions, AxisTypes, ScaleTypes, TooltipPosition, TooltipTypes, LegendPositions, LegendOrientations, LayoutDirection, LayoutGrowth, CalloutDirections */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Events", function() { return Events; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChartTheme", function() { return ChartTheme; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AxisPositions", function() { return AxisPositions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AxisTypes", function() { return AxisTypes; });
@@ -5748,6 +5856,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LayoutDirection", function() { return LayoutDirection; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LayoutGrowth", function() { return LayoutGrowth; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CalloutDirections", function() { return CalloutDirections; });
+/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./events */ "./src/interfaces/events.ts");
+
+var Events = _events__WEBPACK_IMPORTED_MODULE_0__;
 /**
  * enum of all supported chart themes
  */
@@ -5850,11 +5961,68 @@ var CalloutDirections;
 
 /***/ }),
 
+/***/ "./src/interfaces/events.ts":
+/*!**********************************!*\
+  !*** ./src/interfaces/events.ts ***!
+  \**********************************/
+/*! exports provided: Pie, Bar, Scatter, Line */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Pie", function() { return Pie; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Bar", function() { return Bar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Scatter", function() { return Scatter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Line", function() { return Line; });
+/**
+ * enum of all pie graph events
+ */
+var Pie;
+(function (Pie) {
+    Pie["SLICE_MOUSEOVER"] = "pie-slice-mouseover";
+    Pie["SLICE_MOUSEMOVE"] = "pie-slice-mousemove";
+    Pie["SLICE_CLICK"] = "pie-slice-click";
+    Pie["SLICE_MOUSEOUT"] = "pie-slice-mouseout";
+})(Pie || (Pie = {}));
+/**
+ * enum of all bar graph events
+ */
+var Bar;
+(function (Bar) {
+    Bar["BAR_MOUSEOVER"] = "bar-mouseover";
+    Bar["BAR_MOUSEMOVE"] = "bar-mousemove";
+    Bar["BAR_CLICK"] = "bar-click";
+    Bar["BAR_MOUSEOUT"] = "bar-mouseout";
+})(Bar || (Bar = {}));
+/**
+ * enum of all scatter graph events
+ */
+var Scatter;
+(function (Scatter) {
+    Scatter["SCATTER_MOUSEOVER"] = "scatter-mouseover";
+    Scatter["SCATTER_MOUSEMOVE"] = "scatter-mousemove";
+    Scatter["SCATTER_CLICK"] = "scatter-click";
+    Scatter["SCATTER_MOUSEOUT"] = "scatter-mouseout";
+})(Scatter || (Scatter = {}));
+/**
+ * enum of all line graph events
+ */
+var Line;
+(function (Line) {
+    Line["POINT_MOUSEOVER"] = "scatter-mouseover";
+    Line["POINT_MOUSEMOVE"] = "scatter-mousemove";
+    Line["POINT_CLICK"] = "scatter-click";
+    Line["POINT_MOUSEOUT"] = "scatter-mouseout";
+})(Line || (Line = {}));
+
+
+/***/ }),
+
 /***/ "./src/interfaces/index.ts":
 /*!*********************************!*\
   !*** ./src/interfaces/index.ts ***!
   \*********************************/
-/*! exports provided: Roles, ChartTheme, AxisPositions, AxisTypes, ScaleTypes, TooltipPosition, TooltipTypes, LegendPositions, LegendOrientations, LayoutDirection, LayoutGrowth, CalloutDirections */
+/*! exports provided: Roles, Events, ChartTheme, AxisPositions, AxisTypes, ScaleTypes, TooltipPosition, TooltipTypes, LegendPositions, LegendOrientations, LayoutDirection, LayoutGrowth, CalloutDirections */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5863,6 +6031,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Roles", function() { return _a11y__WEBPACK_IMPORTED_MODULE_0__["Roles"]; });
 
 /* harmony import */ var _enums__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./enums */ "./src/interfaces/enums.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Events", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["Events"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ChartTheme", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["ChartTheme"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AxisPositions", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"]; });
