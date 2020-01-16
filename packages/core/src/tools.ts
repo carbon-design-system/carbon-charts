@@ -1,3 +1,6 @@
+// Internal imports
+import { CartesianOrientations } from "./interfaces";
+
 import {
 	debounce as lodashDebounce,
 	merge as lodashMerge,
@@ -190,5 +193,31 @@ export namespace Tools {
 		}
 
 		return null;
+	};
+
+	interface SVGPathCoordinates {
+		x0: number;
+		x1: number;
+		y0: number;
+		y1: number;
+	};
+
+	export const flipSVGCoordinatesBasedOnOrientation = (verticalCoordinates: SVGPathCoordinates, orientation?: CartesianOrientations) => {
+		if (orientation === CartesianOrientations.HORIZONTAL) {
+			return {
+				y0: verticalCoordinates.x0,
+				y1: verticalCoordinates.x1,
+				x0: verticalCoordinates.y0,
+				x1: verticalCoordinates.y1
+			};
+		}
+
+		return verticalCoordinates;
+	};
+
+	export const generateSVGPathString = (verticalCoordinates: SVGPathCoordinates, orientation?: CartesianOrientations) => {
+		const { x0, x1, y0, y1 } = flipSVGCoordinatesBasedOnOrientation(verticalCoordinates, orientation);
+
+		return `M${x0},${y0}L${x0},${y1}L${x1},${y1}L${x1},${y0}L${x0},${y0}`;
 	};
 }

@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { BarOrientationOptions, ScaleTypes } from "../../interfaces";
+import { Tools } from "../../tools";
 
 export class ZeroLine extends Component {
 	type = "zero-line";
@@ -10,54 +10,23 @@ export class ZeroLine extends Component {
 		// Grab container SVG
 		const svg = this.getContainerSVG();
 
-		if (this.model.getOptions().orientation === BarOrientationOptions.HORIZONTAL) {
-			// no zero line should display if its scaled based on labels
-			if (this.services.axes.getMainXAxis().scaleType === ScaleTypes.LABELS) {
-				return;
-			}
+		// Get x & y position of the line
+		const [x1, x2] = this.services.cartesianScales.getDomainScale().range();
+		const yPosition = +this.services.cartesianScales.getRangeValue(0) + 0.5;
 
+		const lineCoordinates = Tools.flipSVGCoordinatesBasedOnOrientation({
+			x0: x1,
+			x1: x2,
+			y0: yPosition,
+			y1: yPosition
+		}, this.services.cartesianScales.getOrientation())
 
-			const verticalLine = DOMUtils.appendOrSelect(svg, "line.domain");
-			let xPosition;
-			const [y1, y2] =  this.services.axes.getMainYAxis().scale.range();
-
-			// check if the line is existing already, otherwise we set an original position for it
-			if (!verticalLine.attr("x1")) {
-				// set the origin position to the lower bounds on the x axis scale
-				// so it doesn't transition from outside the chart axis
-				xPosition = this.services.axes.getMainXAxis().scale.range()[0];
-
-				verticalLine
-					.attr("y1", y1)
-					.attr("y2", y2)
-					.attr("x1", xPosition)
-					.attr("x2", xPosition);
-			}
-
-			// Get correct x position of the line (the zero value on the X scale)
-			xPosition = +this.services.axes.getXValue(0) + 0.5;
-
-			// update/transition the line into it's correct position
-			verticalLine
-				.transition(this.services.transitions.getTransition("zero-line-update", animate))
-				.attr("x1", xPosition)
-				.attr("x2", xPosition);
-		} else {
-			// no zero line should display if its scaled based on labels
-			if (this.services.axes.getMainYAxis().scaleType === ScaleTypes.LABELS) {
-				return;
-			}
-			// Get x & y position of the line
-			const [x1, x2] = this.services.axes.getMainXAxis().scale.range();
-			const yPosition = +this.services.axes.getYValue(0) + 0.5;
-
-			const horizontalLine = DOMUtils.appendOrSelect(svg, "line.domain");
-			horizontalLine
-				.transition(this.services.transitions.getTransition("zero-line-update", animate))
-				.attr("y1", yPosition)
-				.attr("y2", yPosition)
-				.attr("x1", x1)
-				.attr("x2", x2);
-		}
+		const horizontalLine = DOMUtils.appendOrSelect(svg, "line.domain");
+		horizontalLine
+			.transition(this.services.transitions.getTransition("zero-line-update", animate))
+			.attr("y1", lineCoordinates.y0)
+			.attr("y2", lineCoordinates.y1)
+			.attr("x1", lineCoordinates.x0)
+			.attr("x2", lineCoordinates.x1);
 	}
 }

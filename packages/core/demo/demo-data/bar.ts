@@ -75,8 +75,7 @@ export const groupedHorizontalBarOptions = {
 		bottom: {
 			secondary: true
 		}
-	},
-	orientation: "horizontal"
+	}
 };
 
 // Simple bar

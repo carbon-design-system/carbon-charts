@@ -10,21 +10,21 @@ export class Bar extends Component {
 
 		// if its horizontal we want to use the Y axis to determine instead of X
 		if (options.orientation === BarOrientationOptions.HORIZONTAL) {
-			mainAxis =  this.services.axes.getMainYAxis();
+			mainAxis =  this.services.cartesianScales.getMainYAxis();
 		} else {
-			mainAxis =  this.services.axes.getMainXAxis();
+			mainAxis =  this.services.cartesianScales.getMainXAxis();
 		}
 
-		if (!mainAxis.scale.step) {
+		if (!mainAxis.step) {
 			return Math.min(
 				options.bars.maxWidth,
-				(5 / mainAxis.scale.ticks().length) * options.bars.maxWidth
+				(5 / mainAxis.ticks().length) * options.bars.maxWidth
 			);
 		}
 
 		return Math.min(
 			options.bars.maxWidth,
-			mainAxis.scale.step() / 2
+			mainAxis.step() / 2
 		);
 	}
 }

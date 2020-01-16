@@ -8,6 +8,20 @@ export interface AxisOptions {
 	 * type of the scale used on axis
 	 */
 	scaleType?: ScaleTypes;
+	/**
+	 * Whether the Axis should be used as the domain
+	 * axis of the chart. In the case of Cartesian Scales
+	 * you would expect to only have 1 axis (dimension) being used as domain
+	 * Domain usually represents labels, ordinal values, time intervals etc.
+	 */
+	useAsDomain?: boolean;
+	/**
+	 * Whether the Axis should be used as the range
+	 * axis of the chart. In the case of Cartesian Scales
+	 * you would expect to only have 1 axis (dimension) being used as range
+	 * Range usually follows a linear scale
+	 */
+	useAsRange?: boolean;
 	primary?: boolean;
 	secondary?: boolean;
 	/**
