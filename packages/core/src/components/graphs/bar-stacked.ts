@@ -1,7 +1,13 @@
 // Internal Imports
-import { BarOrientationOptions, Roles, ScaleTypes, TooltipTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 import { Bar } from "./bar";
+import {
+	BarOrientationOptions,
+	Roles,
+	ScaleTypes,
+	TooltipTypes,
+	Events
+} from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -230,13 +236,19 @@ export class StackedBar extends Bar {
 	addEventListeners() {
 		const self = this;
 		this.parent.selectAll("rect.bar")
-			.on("mouseover", function() {
+			.on("mouseover", function(datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
 					.attr("fill", color(hoveredElement.attr("fill")).darker(0.7).toString());
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
+					element: hoveredElement,
+					datum
+				});
 			})
-			.on("mousemove", function() {
+			.on("mousemove", function(datum) {
 				const hoveredElement = select(this);
 				const itemData = select(this).datum();
 				hoveredElement.classed("hovered", true);
@@ -255,6 +267,12 @@ export class StackedBar extends Bar {
 						label: sharedLabel
 					}));
 
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
+					element: hoveredElement,
+					datum
+				});
+
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
 					multidata: activePoints,
@@ -262,12 +280,25 @@ export class StackedBar extends Bar {
 					type: TooltipTypes.DATAPOINT
 				});
 			})
-			.on("mouseout", function() {
+			.on("click", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
 					.attr("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
+					element: hoveredElement,
+					datum
+				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
