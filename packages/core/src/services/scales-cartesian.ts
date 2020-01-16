@@ -87,38 +87,28 @@ export class CartesianScales extends Service {
 		return this.scales[this.rangeAxisPosition];
 	}
 
-	// getDomainAxis
-
 	// Find the main x-axis out of the 2 x-axis on the chart (when 2D axis is used)
-	getMainXAxis() {
-		// const primaryAxis = this.model.get(AxisTypes.PRIMARY);
-		// const secondaryAxis = this.model.get(AxisTypes.SECONDARY);
+	getMainXAxisPosition() {
+		const possibleXAxisPositions = [AxisPositions.BOTTOM, AxisPositions.TOP];
 
-		// if (primaryAxis === this.model.get(AxisPositions.TOP) || primaryAxis === this.model.get(AxisPositions.BOTTOM)) {
-		// 	return primaryAxis;
-		// } else if (secondaryAxis === this.model.get(AxisPositions.TOP) || secondaryAxis === this.model.get(AxisPositions.BOTTOM)) {
-		// 	return secondaryAxis;
-		// } else {
-		// 	return this.model.get(AxisPositions.BOTTOM);
-		// }
-
-		return this.scales.bottom ? this.scales.bottom : this.scales.top;
+		return [this.domainAxisPosition, this.rangeAxisPosition]
+			.find(position => possibleXAxisPositions.indexOf(position) > -1);
 	}
 
 	// Find the main y-axis out of the 2 y-axis on the chart (when 2D axis is used)
-	getMainYAxis() {
-		// const primaryAxis = this.model.get(AxisTypes.PRIMARY);
-		// const secondaryAxis = this.model.get(AxisTypes.SECONDARY);
+	getMainYAxisPosition() {
+		const possibleYAxisPositions = [AxisPositions.LEFT, AxisPositions.RIGHT];
 
-		// if (primaryAxis === this.model.get(AxisPositions.LEFT) || primaryAxis === this.model.get(AxisPositions.RIGHT)) {
-		// 	return primaryAxis;
-		// } else if (secondaryAxis === this.model.get(AxisPositions.LEFT) || secondaryAxis === this.model.get(AxisPositions.RIGHT)) {
-		// 	return secondaryAxis;
-		// } else {
-		// 	return this.model.get(AxisPositions.LEFT);
-		// }
+		return [this.domainAxisPosition, this.rangeAxisPosition]
+			.find(position => possibleYAxisPositions.indexOf(position) > -1);
+	}
 
-		return this.scales.left ? this.scales.left : this.scales.right;
+	getMainXScale() {
+		return this.scales[this.getMainXAxisPosition()];
+	}
+
+	getMainYScale() {
+		return this.scales[this.getMainYAxisPosition()];
 	}
 
 	getValueFromScale(axisPosition: AxisPositions, datum: any, index?: number) {
@@ -157,7 +147,7 @@ export class CartesianScales extends Service {
 	getDataFromDomain(domainValue) {
 		const displayData = this.model.getDisplayData();
 		const activePoints = [];
-		const scaleType = this.getMainXAxis().scaleType;
+		const scaleType = this.scaleTypes[this.domainAxisPosition];
 
 		switch (scaleType) {
 			case ScaleTypes.LABELS:

@@ -32,7 +32,7 @@ export class Grid extends Component {
 
 		const height = this.backdrop.attr("height");
 
-		const mainXScale = this.services.cartesianScales.getMainXAxis();
+		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const xGrid = axisBottom(mainXScale)
 			.tickSizeInner(-height)
 			.tickSizeOuter(0);
@@ -52,7 +52,7 @@ export class Grid extends Component {
 		const svg = this.parent;
 		const width = this.backdrop.attr("width");
 
-		const mainYScale = this.services.cartesianScales.getMainYAxis();
+		const mainYScale = this.services.cartesianScales.getMainYScale();
 		const yGrid = axisLeft(mainYScale)
 			.tickSizeInner(-width)
 			.tickSizeOuter(0);
@@ -193,8 +193,8 @@ export class Grid extends Component {
 	drawBackdrop() {
 		const svg = this.parent;
 
-		const mainXScale = this.services.cartesianScales.getMainXAxis();
-		const mainYScale = this.services.cartesianScales.getMainYAxis();
+		const mainXScale = this.services.cartesianScales.getMainXScale();
+		const mainYScale = this.services.cartesianScales.getMainYScale();
 
 		const [xScaleStart, xScaleEnd] = mainXScale.range();
 		const [yScaleEnd, yScaleStart] = mainYScale.range();

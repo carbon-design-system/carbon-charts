@@ -6,7 +6,8 @@ import {
 	Roles,
 	ScaleTypes,
 	TooltipTypes,
-	Events
+	Events,
+	CartesianOrientations
 } from "../../interfaces";
 
 // D3 Imports
@@ -47,7 +48,7 @@ export class StackedBar extends Bar {
 
 		// the main axis for stack data depends on the orientation of the bar chart
 		const isVertical = this.model.getOptions().orientation === BarOrientationOptions.VERTICAL;
-		const mainAxis = isVertical ? this.services.axes.getMainXAxis() : this.services.axes.getMainYAxis();
+		const mainAxis = isVertical ? this.services.cartesianScales.getDomainScale() : this.services.cartesianScales.getRangeScale();
 		// get scale type for the main axis
 		const timeSeries = mainAxis.scaleType === ScaleTypes.TIME;
 
@@ -125,93 +126,67 @@ export class StackedBar extends Bar {
 			.attr("role", Roles.GROUP);
 
 		// Update data on all bars
-		const bars = svg.selectAll("g.bars").selectAll("rect.bar")
+		const bars = svg.selectAll("g.bars").selectAll("path.bar")
 			.data(d => addLabelsAndValueToData(d), d => d.label);
 
 		// Remove bars that need to be removed
 		bars.exit()
 			.remove();
 
-		// Update styling and position on existing bars
-		// As well as bars that were just added
-		// horizontal bars need to map across the opposite axis
-		if (this.model.getOptions().orientation === BarOrientationOptions.HORIZONTAL) {
-			// bar lengths depend on the primary xscale
-			const xScale = this.services.axes.getMainXAxis();
-			let length;
-			bars.enter()
-				.append("rect")
-				.merge(bars)
+		const yScale = this.services.cartesianScales.getRangeScale();
+		bars.enter()
+			.append("path")
+			.merge(bars)
 				.classed("bar", true)
-				.attr("x", (d, i) => {
-					if (xScale.scaleType === ScaleTypes.LABELS ) {
-						length = Math.abs(this.services.axes.getXValue(d.label, i) - xScale.scale.range()[0]);
-						return this.services.axes.getXValue(d.label, i) - length;
-					}
-					length = Math.abs(this.services.axes.getXValue(d[0]) - this.services.axes.getXValue(d[1]));
-					return this.services.axes.getXValue(d[1], i) - length;
-				})
-				.attr("width", (d, i) => {
-					if (xScale.scaleType === ScaleTypes.LABELS ) {
-						length = Math.abs(this.services.axes.getXValue(d.label, i) - xScale.scale.range()[0]);
-					} else {
-						length = Math.abs(this.services.axes.getXValue(d[0]) - this.services.axes.getXValue(d[1]));
-					}
+				.transition(this.services.transitions.getTransition("bar-update-enter", animate))
+				.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
+				.attr("height", (d, i) => {
 					const { datasetLabel } = d;
 					const datasetLabelIndex = stackKeys.indexOf(datasetLabel);
-					// create dividers between every bar
-					if (datasetLabelIndex < (datasetLabel.length - 1) && length >= options.bars.dividerSize) {
-						return length - options.bars.dividerSize;
+					let height;
+					// determine height based on the y axis
+					if (yScale.scaleType === ScaleTypes.LABELS ) {
+						height = Math.abs(yScale.scale.range()[0] - this.services.cartesianScales.getRangeValue(d.label, i));
+					} else {
+						height = this.services.cartesianScales.getRangeValue(d[0]) - this.services.cartesianScales.getRangeValue(d[1]);
 					}
-					return length;
-				} )
-				.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-				.attr("y", (d, i) => { return this.services.axes.getYValue(d, i) - this.getBarWidth() / 2; })
-				.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
-				.attr("height", this.getBarWidth.bind(this))
+					// create dividers between bars
+					if (datasetLabelIndex > 0 && height >= options.bars.dividerSize) {
+						return height - options.bars.dividerSize;
+					}
+
+					return height;
+				})
+				.attr("d", (d, i) => {
+					/*
+					* Orientation support for horizontal/vertical bar charts
+					* Determine coordinates needed for a vertical set of paths
+					* to draw the bars needed, and pass those coordinates down to
+					* generateSVGPathString() to decide whether it needs to flip them
+					*/
+					const barWidth = this.getBarWidth();
+					const x0 = this.services.cartesianScales.getDomainValue(d, i) - barWidth / 2;
+					const x1 = x0 + barWidth;
+					const y0 = this.services.cartesianScales.getRangeValue(d[0], i);
+					let y1 = this.services.cartesianScales.getRangeValue(d[1], i);
+
+					// Add the divider gap
+					if (this.services.cartesianScales.getOrientation() === CartesianOrientations.VERTICAL) {
+						y1 += 1;
+					} else {
+						y1 -= 1;
+					}
+	
+					return Tools.generateSVGPathString(
+						{ x0, x1, y0, y1 },
+						this.services.cartesianScales.getOrientation()
+					);
+				})
 				.attr("opacity", 1)
 				// a11y
 				.attr("role", Roles.GRAPHICS_SYMBOL)
 				.attr("aria-roledescription", "bar")
 				.attr("aria-label", d => d.value);
-			} else {
-				// vertical stacked bar code
-				const yScale = this.services.axes.getMainYAxis();
-				bars.enter()
-					.append("rect")
-					.merge(bars)
-						.classed("bar", true)
-						.attr("x", (d, i) => {
-							const barWidth = this.getBarWidth();
-							return this.services.axes.getXValue(d, i) - (barWidth / 2);
-						})
-						.attr("width", this.getBarWidth.bind(this))
-						.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-						.attr("y", (d, i) => this.services.axes.getYValue(d[1], i))
-						.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
-						.attr("height", (d, i) => {
-							const { datasetLabel } = d;
-							const datasetLabelIndex = stackKeys.indexOf(datasetLabel);
-							let height;
-							// determine height based on the y axis
-							if (yScale.scaleType === ScaleTypes.LABELS ) {
-								height = Math.abs(yScale.scale.range()[0] - this.services.axes.getYValue(d.label, i));
-							} else {
-								height = this.services.axes.getYValue(d[0]) - this.services.axes.getYValue(d[1]);
-							}
-							// create dividers between bars
-							if (datasetLabelIndex > 0 && height >= options.bars.dividerSize) {
-								return height - options.bars.dividerSize;
-							}
-
-							return height;
-						})
-						.attr("opacity", 1)
-						// a11y
-						.attr("role", Roles.GRAPHICS_SYMBOL)
-						.attr("aria-roledescription", "bar")
-						.attr("aria-label", d => d.value);
-			}
 
 		// Add event listeners for the above elements
 		this.addEventListeners();
@@ -221,21 +196,21 @@ export class StackedBar extends Bar {
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
-		this.parent.selectAll("rect.bar")
+		this.parent.selectAll("path.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
 			.attr("opacity", d => (d.datasetLabel !== hoveredElement.datum()["key"]) ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements
 	handleLegendMouseOut = (event: CustomEvent)  => {
-		this.parent.selectAll("rect.bar")
+		this.parent.selectAll("path.bar")
 			.transition(this.services.transitions.getTransition("legend-mouseout-bar"))
 			.attr("opacity", 1);
 	}
 
 	addEventListeners() {
 		const self = this;
-		this.parent.selectAll("rect.bar")
+		this.parent.selectAll("path.bar")
 			.on("mouseover", function(datum) {
 				const hoveredElement = select(this);
 
@@ -307,7 +282,7 @@ export class StackedBar extends Bar {
 
 	destroy() {
 		// Remove event listeners
-		this.parent.selectAll("rect.bar")
+		this.parent.selectAll("path.bar")
 			.on("mouseover", null)
 			.on("mousemove", null)
 			.on("mouseout", null);
