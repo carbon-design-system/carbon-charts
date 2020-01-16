@@ -200,7 +200,7 @@ export namespace Tools {
 		x1: number;
 		y0: number;
 		y1: number;
-	};
+	}
 
 	export const flipSVGCoordinatesBasedOnOrientation = (verticalCoordinates: SVGPathCoordinates, orientation?: CartesianOrientations) => {
 		if (orientation === CartesianOrientations.HORIZONTAL) {

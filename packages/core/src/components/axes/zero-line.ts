@@ -19,7 +19,7 @@ export class ZeroLine extends Component {
 			x1: x2,
 			y0: yPosition,
 			y1: yPosition
-		}, this.services.cartesianScales.getOrientation())
+		}, this.services.cartesianScales.getOrientation());
 
 		const horizontalLine = DOMUtils.appendOrSelect(svg, "line.domain");
 		horizontalLine

@@ -6,7 +6,7 @@ import { Tools } from "../tools";
 // D3 Imports
 import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
 import { min, extent } from "d3-array";
- 
+
 export class CartesianScales extends Service {
 	protected scaleTypes = {
 		top: null,
@@ -28,7 +28,6 @@ export class CartesianScales extends Service {
 	protected orientation: CartesianOrientations;
 
 	update(animate = true) {
-		console.log("update")
 		this.determineOrientation();
 		const axisPositions = Object.keys(AxisPositions).map(axisPositionKey => AxisPositions[axisPositionKey]);
 		axisPositions.forEach(axisPosition => {
@@ -53,7 +52,6 @@ export class CartesianScales extends Service {
 				const scaleType = axisOptions.scaleType || ScaleTypes.LINEAR;
 				this.scaleTypes[axisPosition] = scaleType;
 
-				console.log("scaleType", scaleType)
 				if (scaleType === ScaleTypes.LINEAR) {
 					this.rangeAxisPosition = axisPosition;
 				} else {
@@ -62,15 +60,11 @@ export class CartesianScales extends Service {
 			}
 		});
 
-		console.log("cartesianAxes", this.domainAxisPosition, this.rangeAxisPosition)
-
 		if (this.rangeAxisPosition === AxisPositions.LEFT && this.domainAxisPosition === AxisPositions.BOTTOM) {
 			this.orientation = CartesianOrientations.VERTICAL;
 		} else {
 			this.orientation = CartesianOrientations.HORIZONTAL;
 		}
-
-		console.log(`IS ${this.orientation}`)
 	}
 
 	getOrientation() {
@@ -91,131 +85,6 @@ export class CartesianScales extends Service {
 
 	getRangeScale() {
 		return this.scales[this.rangeAxisPosition];
-	}
-
-	protected getScaleDomain(axisPosition: AxisPositions) {
-		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
-
-		const { datasets, labels } = this.model.getDisplayData();
-
-		// If scale is a LABELS scale, return some labels as the domain
-		if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
-			if (labels) {
-				return labels;
-			} else {
-				return this.model.getDisplayData().datasets[0].data.map((d, i) => i + 1);
-			}
-		}
-
-		// Get the extent of the domain
-		let domain;
-		// If the scale is stacked
-		if (axisOptions.stacked) {
-			domain = extent(
-				labels.reduce((m, label: any, i) => {
-					const correspondingValues = datasets.map(dataset => {
-						return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
-					});
-					const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
-
-					// Save both the total value and the minimum
-					return m.concat(totalValue, min(correspondingValues));
-				}, [])
-					// Currently stack layouts in the library
-					// Only support positive values
-					.concat(0)
-			);
-		} else {
-			// Get all the chart's data values in a flat array
-			let allDataValues = datasets.reduce((dataValues, dataset: any) => {
-				dataset.data.forEach((datum: any) => {
-					if (axisOptions.scaleType === ScaleTypes.TIME) {
-						dataValues = dataValues.concat(datum.date);
-					} else {
-						dataValues = dataValues.concat(isNaN(datum) ? datum.value : datum);
-					}
-				});
-
-				return dataValues;
-			}, []);
-
-			if (axisOptions.scaleType !== ScaleTypes.TIME) {
-				allDataValues = allDataValues.concat(0);
-			}
-
-			domain = extent(allDataValues);
-		}
-
-		if (axisOptions.scaleType === ScaleTypes.TIME) {
-			if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges")) {
-				// TODO - Need to account for non-day incrementals as well
-				const [startDate, endDate] = domain;
-				startDate.setDate(startDate.getDate() - 1);
-				endDate.setDate(endDate.getDate() + 1);
-			}
-
-			return [
-				new Date(domain[0]),
-				new Date(domain[1])
-			];
-		}
-
-		// TODO - Work with design to improve logic
-		domain[1] = domain[1] * 1.1;
-
-		// if the lower bound of the domain is less than 0, we want to add padding
-		if (domain[0] < 0) {
-			domain[0] = domain[0] * 1.1;
-		}
-		return domain.reverse();
-	}
-
-	protected createScale(axisPosition: AxisPositions) {
-		const axisOptions = Tools.getProperty(this.model.getOptions(), "axes", axisPosition);
-
-		if (!axisOptions) {
-			console.log("no options for", axisPosition)
-			return null;
-		}
-		
-		const scaleType = Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
-		this.scaleTypes[axisPosition] = scaleType;
-
-		let scale;
-		if (scaleType === ScaleTypes.TIME) {
-			scale = scaleTime();
-		} else if (scaleType === ScaleTypes.LOG) {
-			scale = scaleLog().base(axisOptions.base || 10);
-		} else if (scaleType === ScaleTypes.LABELS) {
-			scale = scaleBand();
-		} else {
-			scale = scaleLinear();
-		}
-
-		// // If scale doesn't exist in the model, store it
-		// if (!this.model.get(position)) {
-		// 	const modelUpdates = {
-		// 		[position]: this
-		// 	};
-
-		// 	if (axisOptions) {
-		// 		if (axisOptions.primary === true) {
-		// 			modelUpdates[AxisTypes.PRIMARY] = this;
-		// 		}
-
-		// 		if (axisOptions.secondary === true) {
-		// 			modelUpdates[AxisTypes.SECONDARY] = this;
-		// 		}
-		// 	}
-
-		// 	this.model.set(modelUpdates, true);
-		// }
-
-		// this.scale = scale;
-
-		scale.domain(this.getScaleDomain(axisPosition));
-		return scale;
 	}
 
 	// getDomainAxis
@@ -330,5 +199,129 @@ export class CartesianScales extends Service {
 				break;
 		}
 		return activePoints;
+	}
+
+	protected getScaleDomain(axisPosition: AxisPositions) {
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+
+		const { datasets, labels } = this.model.getDisplayData();
+
+		// If scale is a LABELS scale, return some labels as the domain
+		if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
+			if (labels) {
+				return labels;
+			} else {
+				return this.model.getDisplayData().datasets[0].data.map((d, i) => i + 1);
+			}
+		}
+
+		// Get the extent of the domain
+		let domain;
+		// If the scale is stacked
+		if (axisOptions.stacked) {
+			domain = extent(
+				labels.reduce((m, label: any, i) => {
+					const correspondingValues = datasets.map(dataset => {
+						return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
+					});
+					const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
+
+					// Save both the total value and the minimum
+					return m.concat(totalValue, min(correspondingValues));
+				}, [])
+					// Currently stack layouts in the library
+					// Only support positive values
+					.concat(0)
+			);
+		} else {
+			// Get all the chart's data values in a flat array
+			let allDataValues = datasets.reduce((dataValues, dataset: any) => {
+				dataset.data.forEach((datum: any) => {
+					if (axisOptions.scaleType === ScaleTypes.TIME) {
+						dataValues = dataValues.concat(datum.date);
+					} else {
+						dataValues = dataValues.concat(isNaN(datum) ? datum.value : datum);
+					}
+				});
+
+				return dataValues;
+			}, []);
+
+			if (axisOptions.scaleType !== ScaleTypes.TIME) {
+				allDataValues = allDataValues.concat(0);
+			}
+
+			domain = extent(allDataValues);
+		}
+
+		if (axisOptions.scaleType === ScaleTypes.TIME) {
+			if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges")) {
+				// TODO - Need to account for non-day incrementals as well
+				const [startDate, endDate] = domain;
+				startDate.setDate(startDate.getDate() - 1);
+				endDate.setDate(endDate.getDate() + 1);
+			}
+
+			return [
+				new Date(domain[0]),
+				new Date(domain[1])
+			];
+		}
+
+		// TODO - Work with design to improve logic
+		domain[1] = domain[1] * 1.1;
+
+		// if the lower bound of the domain is less than 0, we want to add padding
+		if (domain[0] < 0) {
+			domain[0] = domain[0] * 1.1;
+		}
+		return domain.reverse();
+	}
+
+	protected createScale(axisPosition: AxisPositions) {
+		const axisOptions = Tools.getProperty(this.model.getOptions(), "axes", axisPosition);
+
+		if (!axisOptions) {
+			return null;
+		}
+
+		const scaleType = Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
+		this.scaleTypes[axisPosition] = scaleType;
+
+		let scale;
+		if (scaleType === ScaleTypes.TIME) {
+			scale = scaleTime();
+		} else if (scaleType === ScaleTypes.LOG) {
+			scale = scaleLog().base(axisOptions.base || 10);
+		} else if (scaleType === ScaleTypes.LABELS) {
+			scale = scaleBand();
+		} else {
+			scale = scaleLinear();
+		}
+
+		// // If scale doesn't exist in the model, store it
+		// if (!this.model.get(position)) {
+		// 	const modelUpdates = {
+		// 		[position]: this
+		// 	};
+
+		// 	if (axisOptions) {
+		// 		if (axisOptions.primary === true) {
+		// 			modelUpdates[AxisTypes.PRIMARY] = this;
+		// 		}
+
+		// 		if (axisOptions.secondary === true) {
+		// 			modelUpdates[AxisTypes.SECONDARY] = this;
+		// 		}
+		// 	}
+
+		// 	this.model.set(modelUpdates, true);
+		// }
+
+		// this.scale = scale;
+
+		scale.domain(this.getScaleDomain(axisPosition));
+		return scale;
 	}
 }
