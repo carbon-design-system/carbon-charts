@@ -1,3 +1,6 @@
+import * as EventEnums from "./events";
+export const Events = EventEnums;
+
 /**
  * enum of all supported chart themes
  */
