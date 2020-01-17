@@ -147,22 +147,22 @@ export class Axis extends Component {
 		}
 
 		if (axisOptions.scaleType === ScaleTypes.TIME) {
-			if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges")) {
-				const timeRangeToExtend = Tools.getProperty(options, "timeScale", "timeRangeToExtend");
+			const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
+			if (spaceToAddToEdges) {
 				const startDate = new Date(domain[0]);
 				const endDate = new Date(domain[1]);
-				if (differenceInYears(endDate, startDate) > timeRangeToExtend) {
-					return [subYears(startDate, 1), addYears(endDate, 1)];
+				if (differenceInYears(endDate, startDate) > 1) {
+					return [subYears(startDate, spaceToAddToEdges), addYears(endDate, spaceToAddToEdges)];
 				}
-				if (differenceInMonths(endDate, startDate) > timeRangeToExtend) {
-					return [subMonths(startDate, 1), addMonths(endDate, 1)];
+				if (differenceInMonths(endDate, startDate) > 1) {
+					return [subMonths(startDate, spaceToAddToEdges), addMonths(endDate, spaceToAddToEdges)];
 				}
-				if (differenceInDays(endDate, startDate) > timeRangeToExtend) {
-					return [subDays(startDate, 1), addDays(endDate, 1)];
-				} else if (differenceInHours(endDate, startDate) > timeRangeToExtend) {
-					return [subHours(startDate, 1), addHours(endDate, 1)];
-				} else if (differenceInMinutes(endDate, startDate) > timeRangeToExtend) {
-					return [subMinutes(startDate, 1), addMinutes(endDate, 1)];
+				if (differenceInDays(endDate, startDate) > 1) {
+					return [subDays(startDate, spaceToAddToEdges), addDays(endDate, spaceToAddToEdges)];
+				} else if (differenceInHours(endDate, startDate) > 1) {
+					return [subHours(startDate, spaceToAddToEdges), addHours(endDate, spaceToAddToEdges)];
+				} else if (differenceInMinutes(endDate, startDate) > 1) {
+					return [subMinutes(startDate, spaceToAddToEdges), addMinutes(endDate, spaceToAddToEdges)];
 				}
 				// Other
 				return [startDate, endDate];
