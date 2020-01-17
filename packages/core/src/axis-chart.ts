@@ -61,11 +61,11 @@ export class AxisChart extends Chart {
 			}
 		};
 
-		const isEnabled = this.model.getOptions().legend.enabled !== false;
+		const isLegendEnabled = this.model.getOptions().legend.enabled !== false;
 
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
-		if (isEnabled) {
+		if (isLegendEnabled) {
 			const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
 			if (legendPosition === LegendPositions.LEFT) {
 				fullFrameComponentDirection = LayoutDirection.ROW;
@@ -102,7 +102,7 @@ export class AxisChart extends Chart {
 					this.model,
 					this.services,
 					[
-						...(isEnabled ? [ legendComponent ] : [ ]),
+						...(isLegendEnabled ? [ legendComponent ] : [ ]),
 						legendSpacerComponent,
 						graphFrameComponent
 					],
