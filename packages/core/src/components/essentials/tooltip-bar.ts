@@ -30,11 +30,13 @@ export class TooltipBar extends Tooltip {
 			if ((e.detail.type === TooltipTypes.DATAPOINT && Tools.getProperty(this.model.getOptions(), "tooltip", "datapoint", "enabled"))
 				|| (e.detail.type === TooltipTypes.GRIDLINE && Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) ) {
 
+				let data = e.detail.hoveredElement.datum() as any;
 				const hoveredElement = e.detail.hoveredElement.node();
 
 				let defaultHTML;
 				if (e.detail.multidata) {
 					// multi tooltip
+					data = e.detail.multidata;
 					defaultHTML = this.getMultilineTooltipHTML(e.detail.multidata);
 				} else {
 					defaultHTML = this.getTooltipHTML(e.detail.hoveredElement.datum());
@@ -42,7 +44,7 @@ export class TooltipBar extends Tooltip {
 
 				// if there is a provided tooltip HTML function call it and pass the defaultHTML
 				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
-					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement, defaultHTML));
+					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data, defaultHTML));
 				} else {
 					// default tooltip
 					tooltipTextContainer.html(defaultHTML);
