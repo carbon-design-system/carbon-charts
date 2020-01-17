@@ -124,17 +124,17 @@ export const lineTimeSeriesOptions = {
 export const lineTimeSeriesWithCustomStroke = {
 	...lineTimeSeriesOptions,
 	title: "Line (custom stroke, fill colors)",
-	getStrokeColor: (datasetLabel, label, value, datum, originalStrokeColor)=>{
+	getStrokeColor: (datasetLabel, label, data, originalStrokeColor)=>{
 		console.log(`originalStrokeColor: ${originalStrokeColor}`);
-		return value > 60000 ? '#FF0000' : originalStrokeColor;
+		return data && data.value > 60000 ? '#FF0000' : originalStrokeColor;
 	},
-	getFillColor: (datasetLabel, label, value, datum, originalFillColor)=>{
+	getFillColor: (datasetLabel, label, data, originalFillColor)=>{
 		console.log(`originalFillColor: ${originalFillColor}`);
-		return value > 60000 ? '#FF0000' : originalFillColor;
+		return data && data.value > 60000 ? '#FF0000' : originalFillColor;
 	},
-	getIsFilled: (datasetLabel, label, value, datum, originalIsFilled)=>{
+	getIsFilled: (datasetLabel, label, data, originalIsFilled)=>{
 		console.log(`originalIsFilled: ${originalIsFilled}`);
-		return value > 60000 ? true : originalIsFilled;
+		return data && data.value > 60000 ? true : originalIsFilled;
 	}
 };
 

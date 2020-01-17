@@ -37,7 +37,7 @@ export class TooltipBar extends Tooltip {
 				if (e.detail.multidata) {
 					// multi tooltip
 					data = e.detail.multidata;
-					defaultHTML = this.getMultilineTooltipHTML(e.detail.multidata);
+					defaultHTML = this.getMultilineTooltipHTML(data);
 				} else {
 					defaultHTML = this.getTooltipHTML(e.detail.hoveredElement.datum());
 				}
@@ -143,7 +143,8 @@ export class TooltipBar extends Tooltip {
 				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
 				this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
 
-				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value, datapoint);
+				// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
+				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label);
 
 				return `
 				<li>
