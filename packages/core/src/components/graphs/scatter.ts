@@ -1,9 +1,9 @@
 // Internal Imports
 import { Component } from "../component";
-import { TooltipTypes, Roles } from "../../interfaces";
+import { TooltipTypes, Roles, Events } from "../../interfaces";
 
 // D3 Imports
-import { select } from "d3-selection";
+import { select, event as d3Event } from "d3-selection";
 
 export class Scatter extends Component {
 	type = "scatter";
@@ -107,11 +107,18 @@ export class Scatter extends Component {
 	addEventListeners() {
 		const self = this;
 		this.parent.selectAll("circle")
-			.on("mouseover mousemove", function() {
+			.on("mouseover mousemove", function(datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true);
 
 				hoveredElement.style("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
+
+				const eventNameToDispatch = d3Event.type === "mouseover" ? Events.Scatter.SCATTER_MOUSEOVER : Events.Scatter.SCATTER_MOUSEMOVE;
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(eventNameToDispatch, {
+					element: hoveredElement,
+					datum
+				});
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
@@ -119,13 +126,26 @@ export class Scatter extends Component {
 					type: TooltipTypes.DATAPOINT
 				});
 			})
-			.on("mouseout", function() {
+			.on("click", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Scatter.SCATTER_CLICK, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
 				if (!self.configs.filled) {
 					hoveredElement.style("fill", null);
 				}
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Scatter.SCATTER_MOUSEOUT, {
+					element: hoveredElement,
+					datum
+				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
