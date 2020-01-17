@@ -132,7 +132,8 @@ export class Tooltip extends Component {
 				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
 				this.model.getOptions().tooltip.valueFormatter(datapointValue) : datapointValue.toLocaleString("en");
 
-				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel);
+				// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
+				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label);
 
 				return `
 				<li>

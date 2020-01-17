@@ -55,19 +55,19 @@ export class Scatter extends Component {
 		dotsEnter.merge(dots)
 			.raise()
 			.classed("dot", true)
-			.classed("filled", d => this.model.getIsFilled(d.datasetLabel, d.label, d.value, d, filled))
-			.classed("unfilled", d => !this.model.getIsFilled(d.datasetLabel, d.label, d.value, d, filled))
+			.classed("filled", d => this.model.getIsFilled(d.datasetLabel, d.label, d, filled))
+			.classed("unfilled", d => !this.model.getIsFilled(d.datasetLabel, d.label, d, filled))
 			.attr("cx", (d, i) => this.services.axes.getXValue(d, i))
 			.transition(this.services.transitions.getTransition("scatter-update-enter", animate))
 			.attr("cy", (d, i) => this.services.axes.getYValue(d, i))
 			.attr("r", options.points.radius)
 			.attr("fill", d => {
-				if (this.model.getIsFilled(d.datasetLabel, d.label, d.value, d, filled)) {
-					return this.model.getFillColor(d.datasetLabel, d.label, d.value, d);
+				if (this.model.getIsFilled(d.datasetLabel, d.label, d, filled)) {
+					return this.model.getFillColor(d.datasetLabel, d.label, d);
 				}
 			})
 			.attr("fill-opacity", filled ? 0.2 : 1)
-			.attr("stroke", d => this.model.getStrokeColor(d.datasetLabel, d.label, d.value))
+			.attr("stroke", d => this.model.getStrokeColor(d.datasetLabel, d.label, d))
 			.attr("opacity", 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
@@ -112,7 +112,7 @@ export class Scatter extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true);
 
-				hoveredElement.style("fill", (d: any) => self.model.getFillColor(d.datasetLabel, d.label, d.value, d));
+				hoveredElement.style("fill", (d: any) => self.model.getFillColor(d.datasetLabel, d.label, d));
 
 				const eventNameToDispatch = d3Event.type === "mouseover" ? Events.Scatter.SCATTER_MOUSEOVER : Events.Scatter.SCATTER_MOUSEMOVE;
 				// Dispatch mouse event
