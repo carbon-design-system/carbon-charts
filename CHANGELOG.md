@@ -3,6 +3,74 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/IBM/carbon-charts/compare/v0.25.0...v0.26.0) (2020-01-16)
+
+
+### Features
+
+* **core:** add event dispatches for mouseover, mousemove, click & mouseout for all graphs ([284012c](https://github.com/IBM/carbon-charts/commit/284012c))
+
+
+
+
+
+# [0.25.0](https://github.com/IBM/carbon-charts/compare/v0.24.5...v0.25.0) (2020-01-10)
+
+
+### Features
+
+* **angular:** add v8 to angular peerDependencies ([c147419](https://github.com/IBM/carbon-charts/commit/c147419))
+
+
+
+
+
+## [0.24.5](https://github.com/IBM/carbon-charts/compare/v0.24.4...v0.24.5) (2020-01-10)
+
+
+### Bug Fixes
+
+* **core:** fix to allow chart to toggle on and off using attribute/css properties ([77e26af](https://github.com/IBM/carbon-charts/commit/77e26af))
+
+
+
+
+
+## [0.24.4](https://github.com/IBM/carbon-charts/compare/v0.24.3...v0.24.4) (2020-01-06)
+
+
+### Bug Fixes
+
+* **demos:** add IBM Plex Sans Condensed to the core demo site ([1761a36](https://github.com/IBM/carbon-charts/commit/1761a36))
+
+
+
+
+
+## [0.24.3](https://github.com/IBM/carbon-charts/compare/v0.24.2...v0.24.3) (2019-12-19)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.24.2](https://github.com/IBM/carbon-charts/compare/v0.24.1...v0.24.2) (2019-12-19)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.24.1](https://github.com/IBM/carbon-charts/compare/v0.24.0...v0.24.1) (2019-12-18)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 # [0.24.0](https://github.com/IBM/carbon-charts/compare/v0.23.0...v0.24.0) (2019-12-17)
 
 
