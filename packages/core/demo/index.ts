@@ -30,8 +30,7 @@ const changeDemoData = (chartType: any, chartObj: any) => {
 	// Function to be used to randomize a value
 	const randomizeValue = datum => {
 		const currentVal = datum.value !== undefined ? datum.value : datum;
-		const firstTry = Math.max(0.85 * currentVal, currentVal * Math.random() * (Math.random() * 5));
-		let result = currentVal > 0 ? Math.min(3 * currentVal, firstTry) : Math.max(3 * currentVal, firstTry);
+		let result = Math.random() > 0.5 ? 0.95 * currentVal : 1.05 * currentVal;
 
 		if (Math.random() > 0.5
 			|| chartType.indexOf("stacked") !== -1

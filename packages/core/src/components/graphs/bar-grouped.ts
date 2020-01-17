@@ -118,8 +118,9 @@ export class GroupedBar extends Bar {
 				 * generateSVGPathString() to decide whether it needs to flip them
 				 */
 				const centerX = this.groupScale(d.datasetLabel);
-				const x0 = centerX - 8;
-				const x1 = centerX + 8;
+				const barWidth = this.getBarWidth();
+				const x0 = centerX - barWidth / 2;
+				const x1 = centerX + barWidth / 2;
 				const y0 = this.services.cartesianScales.getRangeValue(0);
 				const y1 = this.services.cartesianScales.getRangeValue(d.value);
 

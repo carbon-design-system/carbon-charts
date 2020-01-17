@@ -298,27 +298,6 @@ export class CartesianScales extends Service {
 			scale = scaleLinear();
 		}
 
-		// // If scale doesn't exist in the model, store it
-		// if (!this.model.get(position)) {
-		// 	const modelUpdates = {
-		// 		[position]: this
-		// 	};
-
-		// 	if (axisOptions) {
-		// 		if (axisOptions.primary === true) {
-		// 			modelUpdates[AxisTypes.PRIMARY] = this;
-		// 		}
-
-		// 		if (axisOptions.secondary === true) {
-		// 			modelUpdates[AxisTypes.SECONDARY] = this;
-		// 		}
-		// 	}
-
-		// 	this.model.set(modelUpdates, true);
-		// }
-
-		// this.scale = scale;
-
 		scale.domain(this.getScaleDomain(axisPosition));
 		return scale;
 	}
