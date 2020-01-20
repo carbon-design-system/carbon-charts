@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://github.com/IBM/carbon-charts/compare/v0.26.1...v0.27.0) (2020-01-20)
+
+
+### Bug Fixes
+
+* **chart:** update isLegendEnabled instead of isEnabled ([d413a8c](https://github.com/IBM/carbon-charts/commit/d413a8c))
+* **enabled:** rename visible to enabled ([ac4862f](https://github.com/IBM/carbon-charts/commit/ac4862f))
+* **lint:** whitespace tslint issue ([53216f5](https://github.com/IBM/carbon-charts/commit/53216f5))
+
+
+### Features
+
+* **chart:** legend.visible = false to hide the legend ([6461128](https://github.com/IBM/carbon-charts/commit/6461128))
+
+
+
+
+
 ## [0.26.1](https://github.com/IBM/carbon-charts/compare/v0.26.0...v0.26.1) (2020-01-20)
 
 
