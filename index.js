@@ -2148,6 +2148,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var d3_axis__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! d3-axis */ "../../node_modules/d3-axis/src/index.js");
 /* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! d3-array */ "../../node_modules/d3-array/src/index.js");
 /* harmony import */ var d3_time_format__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! d3-time-format */ "../../node_modules/d3-time-format/src/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! date-fns */ "../../node_modules/date-fns/esm/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -2168,6 +2169,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 // D3 Imports
+
 
 
 
@@ -2271,16 +2273,28 @@ var Axis = /** @class */ (function (_super) {
             domain = Object(d3_array__WEBPACK_IMPORTED_MODULE_7__["extent"])(allDataValues);
         }
         if (axisOptions.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
-            if (_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "timeScale", "addSpaceOnEdges")) {
-                // TODO - Need to account for non-day incrementals as well
-                var startDate = domain[0], endDate = domain[1];
-                startDate.setDate(startDate.getDate() - 1);
-                endDate.setDate(endDate.getDate() + 1);
+            var spaceToAddToEdges = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "timeScale", "addSpaceOnEdges");
+            if (spaceToAddToEdges) {
+                var startDate = new Date(domain[0]);
+                var endDate = new Date(domain[1]);
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["differenceInYears"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["subYears"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["addYears"])(endDate, spaceToAddToEdges)];
+                }
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["differenceInMonths"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["subMonths"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["addMonths"])(endDate, spaceToAddToEdges)];
+                }
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["differenceInDays"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["subDays"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["addDays"])(endDate, spaceToAddToEdges)];
+                }
+                else if (Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["differenceInHours"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["subHours"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["addHours"])(endDate, spaceToAddToEdges)];
+                }
+                else if (Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["differenceInMinutes"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["subMinutes"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_9__["addMinutes"])(endDate, spaceToAddToEdges)];
+                }
+                // Other
+                return [startDate, endDate];
             }
-            return [
-                new Date(domain[0]),
-                new Date(domain[1])
-            ];
         }
         // TODO - Work with design to improve logic
         domain[1] = domain[1] * 1.1;
@@ -5603,7 +5617,7 @@ var barChartTooltip = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, axi
 // Will setup axes options based on what user provides
 var axes = {};
 var timeScale = {
-    addSpaceOnEdges: true
+    addSpaceOnEdges: 1,
 };
 /**
  * Base chart options common to any chart
@@ -5636,7 +5650,7 @@ var baseBarChart = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, axisCh
         maxWidth: 16
     },
     timeScale: _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge(timeScale, {
-        addSpaceOnEdges: true
+        addSpaceOnEdges: 1
     }),
     tooltip: barChartTooltip
 });
