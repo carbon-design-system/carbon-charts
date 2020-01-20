@@ -1369,23 +1369,26 @@ var AxisChart = /** @class */ (function (_super) {
                 y: _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LayoutGrowth"].FIXED
             }
         };
+        var isLegendEnabled = this.model.getOptions().legend.enabled !== false;
         // Decide the position of the legend in reference to the chart
         var fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LayoutDirection"].COLUMN;
-        var legendPosition = _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].getProperty(this.model.getOptions(), "legend", "position");
-        if (legendPosition === _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LegendPositions"].LEFT) {
-            fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LayoutDirection"].ROW;
-            if (!this.model.getOptions().legend.orientation) {
-                this.model.getOptions().legend.orientation = _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LegendOrientations"].VERTICAL;
+        if (isLegendEnabled) {
+            var legendPosition = _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].getProperty(this.model.getOptions(), "legend", "position");
+            if (legendPosition === _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LegendPositions"].LEFT) {
+                fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LayoutDirection"].ROW;
+                if (!this.model.getOptions().legend.orientation) {
+                    this.model.getOptions().legend.orientation = _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LegendOrientations"].VERTICAL;
+                }
             }
-        }
-        else if (legendPosition === _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LegendPositions"].RIGHT) {
-            fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LayoutDirection"].ROW_REVERSE;
-            if (!this.model.getOptions().legend.orientation) {
-                this.model.getOptions().legend.orientation = _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LegendOrientations"].VERTICAL;
+            else if (legendPosition === _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LegendPositions"].RIGHT) {
+                fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LayoutDirection"].ROW_REVERSE;
+                if (!this.model.getOptions().legend.orientation) {
+                    this.model.getOptions().legend.orientation = _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LegendOrientations"].VERTICAL;
+                }
             }
-        }
-        else if (legendPosition === _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LegendPositions"].BOTTOM) {
-            fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LayoutDirection"].COLUMN_REVERSE;
+            else if (legendPosition === _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LegendPositions"].BOTTOM) {
+                fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LayoutDirection"].COLUMN_REVERSE;
+            }
         }
         var legendSpacerComponent = {
             id: "spacer",
@@ -1400,11 +1403,10 @@ var AxisChart = /** @class */ (function (_super) {
         var fullFrameComponent = {
             id: "full-frame",
             components: [
-                new _components_index__WEBPACK_IMPORTED_MODULE_2__["LayoutComponent"](this.model, this.services, [
-                    legendComponent,
+                new _components_index__WEBPACK_IMPORTED_MODULE_2__["LayoutComponent"](this.model, this.services, (isLegendEnabled ? [legendComponent] : []).concat([
                     legendSpacerComponent,
                     graphFrameComponent
-                ], {
+                ]), {
                     direction: fullFrameComponentDirection
                 })
             ],
@@ -1567,24 +1569,27 @@ var Chart = /** @class */ (function () {
                 y: _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LayoutGrowth"].FIXED
             }
         };
+        var isLegendEnabled = this.model.getOptions().legend.enabled !== false;
         // TODORF - REUSE BETWEEN AXISCHART & CHART
         // Decide the position of the legend in reference to the chart
         var fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LayoutDirection"].COLUMN;
-        var legendPosition = _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].getProperty(this.model.getOptions(), "legend", "position");
-        if (legendPosition === "left") {
-            fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LayoutDirection"].ROW;
-            if (!this.model.getOptions().legend.orientation) {
-                this.model.getOptions().legend.orientation = _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LegendOrientations"].VERTICAL;
+        if (isLegendEnabled) {
+            var legendPosition = _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].getProperty(this.model.getOptions(), "legend", "position");
+            if (legendPosition === "left") {
+                fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LayoutDirection"].ROW;
+                if (!this.model.getOptions().legend.orientation) {
+                    this.model.getOptions().legend.orientation = _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LegendOrientations"].VERTICAL;
+                }
             }
-        }
-        else if (legendPosition === "right") {
-            fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LayoutDirection"].ROW_REVERSE;
-            if (!this.model.getOptions().legend.orientation) {
-                this.model.getOptions().legend.orientation = _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LegendOrientations"].VERTICAL;
+            else if (legendPosition === "right") {
+                fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LayoutDirection"].ROW_REVERSE;
+                if (!this.model.getOptions().legend.orientation) {
+                    this.model.getOptions().legend.orientation = _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LegendOrientations"].VERTICAL;
+                }
             }
-        }
-        else if (legendPosition === "bottom") {
-            fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LayoutDirection"].COLUMN_REVERSE;
+            else if (legendPosition === "bottom") {
+                fullFrameComponentDirection = _interfaces_index__WEBPACK_IMPORTED_MODULE_0__["LayoutDirection"].COLUMN_REVERSE;
+            }
         }
         var legendSpacerComponent = {
             id: "spacer",
@@ -1599,11 +1604,10 @@ var Chart = /** @class */ (function () {
         var fullFrameComponent = {
             id: "full-frame",
             components: [
-                new _components__WEBPACK_IMPORTED_MODULE_2__["LayoutComponent"](this.model, this.services, [
-                    legendComponent,
+                new _components__WEBPACK_IMPORTED_MODULE_2__["LayoutComponent"](this.model, this.services, (isLegendEnabled ? [legendComponent] : []).concat([
                     legendSpacerComponent,
                     graphFrameComponent
-                ], {
+                ]), {
                     direction: fullFrameComponentDirection
                 })
             ],
@@ -5561,6 +5565,7 @@ __webpack_require__.r(__webpack_exports__);
 var legend = {
     position: _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LegendPositions"].BOTTOM,
     clickable: true,
+    enabled: true,
     items: {
         status: {
             ACTIVE: 1,
