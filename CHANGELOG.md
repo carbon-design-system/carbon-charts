@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.26.1](https://github.com/IBM/carbon-charts/compare/v0.26.0...v0.26.1) (2020-01-20)
+
+
+### Bug Fixes
+
+* **axis:** better support small time scales ([8cfa595](https://github.com/IBM/carbon-charts/commit/8cfa595))
+* **axis:** fix lint issue ([debeed9](https://github.com/IBM/carbon-charts/commit/debeed9))
+* **axis:** fix linting errors ([f810d4a](https://github.com/IBM/carbon-charts/commit/f810d4a))
+* **axis:** remove confusing timeRangeToExtend property ([0456e24](https://github.com/IBM/carbon-charts/commit/0456e24))
+* **config:** add additional property to control extension ([2da3404](https://github.com/IBM/carbon-charts/commit/2da3404))
+* **configuration:** fix default baseBarChart options ([1a6dcef](https://github.com/IBM/carbon-charts/commit/1a6dcef))
+* **yarn:** error in the lock file for date-fns ([396e9c4](https://github.com/IBM/carbon-charts/commit/396e9c4))
+
+
+
+
+
 # [0.26.0](https://github.com/IBM/carbon-charts/compare/v0.25.0...v0.26.0) (2020-01-16)
 
 
