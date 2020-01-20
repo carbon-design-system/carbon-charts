@@ -33,6 +33,7 @@ import {
 export const legend: LegendOptions = {
 	position: LegendPositions.BOTTOM,
 	clickable: true,
+	enabled: true,
 	items: {
 		status: {
 			ACTIVE: 1,
