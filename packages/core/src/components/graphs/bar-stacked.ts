@@ -144,7 +144,7 @@ export class StackedBar extends Bar {
 					const datasetLabelIndex = stackKeys.indexOf(datasetLabel);
 					let height;
 					// determine height based on the y axis
-					if (yScale.scaleType === ScaleTypes.LABELS ) {
+					if (yScale.scaleType === ScaleTypes.LABELS) {
 						height = Math.abs(yScale.scale.range()[0] - this.services.cartesianScales.getRangeValue(d.label, i));
 					} else {
 						height = this.services.cartesianScales.getRangeValue(d[0]) - this.services.cartesianScales.getRangeValue(d[1]);
@@ -164,7 +164,6 @@ export class StackedBar extends Bar {
 					* generateSVGPathString() to decide whether it needs to flip them
 					*/
 					const barWidth = this.getBarWidth();
-					// console.log("this.services.cartesianScales.getDomainValue(d, i)", this.services.cartesianScales.getDomainValue(d, i))
 					const x0 = this.services.cartesianScales.getDomainValue(d, i) - barWidth / 2;
 					const x1 = x0 + barWidth;
 					const y0 = this.services.cartesianScales.getRangeValue(d[0], i);

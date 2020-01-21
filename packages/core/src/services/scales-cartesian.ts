@@ -4,7 +4,12 @@ import { AxisPositions, CartesianOrientations, ScaleTypes } from "../interfaces"
 import { Tools } from "../tools";
 
 // D3 Imports
-import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
+import {
+	scaleBand,
+	scaleLinear,
+	scaleTime,
+	scaleLog
+} from "d3-scale";
 import { min, extent } from "d3-array";
 import {
 	differenceInYears,

@@ -83,7 +83,7 @@ export class GroupedBar extends Bar {
 		const bars = barGroupsEnter.merge(barGroups)
 			.attr("transform", (d, i) => {
 				const scaleValue = this.services.cartesianScales.getDomainValue(d, i);
-				const translateBy = scaleValue - this.getGroupWidth() / 2 + 8;
+				const translateBy = scaleValue - this.getGroupWidth() / 2 + this.getBarWidth();
 
 				if (this.services.cartesianScales.getOrientation() === CartesianOrientations.VERTICAL) {
 					return `translate(${translateBy}, 0)`;
