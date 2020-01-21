@@ -1,33 +1,14 @@
 // Internal Imports
 import { Component } from "../component";
-import { AxisPositions, ScaleTypes, AxisTypes, Roles } from "../../interfaces";
+import { AxisPositions, ScaleTypes, Roles } from "../../interfaces";
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
 
 // D3 Imports
-import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
-import { min, extent } from "d3-array";
 import { timeFormatDefaultLocale } from "d3-time-format";
-import {
-	differenceInYears,
-	addYears,
-	subYears,
-	differenceInMonths,
-	addMonths,
-	subMonths,
-	differenceInDays,
-	addDays,
-	subDays,
-	differenceInHours,
-	addHours,
-	subHours,
-	differenceInMinutes,
-	addMinutes,
-	subMinutes
-} from "date-fns";
 
 export class Axis extends Component {
 	type = "axes";
@@ -47,134 +28,6 @@ export class Axis extends Component {
 		this.margins = this.configs.margins;
 	}
 
-	createOrGetScale() {
-		const { position } = this.configs;
-		const axisOptions = Tools.getProperty(this.model.getOptions(), "axes", position);
-		this.scaleType = (axisOptions && axisOptions.scaleType) ? axisOptions.scaleType : ScaleTypes.LINEAR;
-
-		let scaleFunction;
-		if (this.scaleType === ScaleTypes.TIME) {
-			scaleFunction = scaleTime();
-		} else if (this.scaleType === ScaleTypes.LOG) {
-			scaleFunction = scaleLog().base(axisOptions.base || 10);
-		} else if (this.scaleType === ScaleTypes.LABELS) {
-			scaleFunction = scaleBand();
-		} else {
-			scaleFunction = scaleLinear();
-		}
-
-		// If scale doesn't exist in the model, store it
-		if (!this.model.get(position)) {
-			const modelUpdates = {
-				[position]: this
-			};
-
-			if (axisOptions) {
-				if (axisOptions.primary === true) {
-					modelUpdates[AxisTypes.PRIMARY] = this;
-				}
-
-				if (axisOptions.secondary === true) {
-					modelUpdates[AxisTypes.SECONDARY] = this;
-				}
-			}
-
-			this.model.set(modelUpdates, true);
-		}
-
-		this.scale = scaleFunction;
-
-		return scaleFunction;
-	}
-
-	getScale() {
-		return !this.scale ? this.createOrGetScale() : this.scale;
-	}
-
-	getScaleDomain() {
-		const options = this.model.getOptions();
-		const { position } = this.configs;
-		const axisOptions = Tools.getProperty(options, "axes", position);
-
-		const { datasets, labels } = this.model.getDisplayData();
-
-		// If scale is a LABELS scale, return some labels as the domain
-		if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
-			if (labels) {
-				return labels;
-			} else {
-				return this.model.getDisplayData().datasets[0].data.map((d, i) => i + 1);
-			}
-		}
-
-		// Get the extent of the domain
-		let domain;
-		// If the scale is stacked
-		if (axisOptions.stacked) {
-			domain = extent(
-				labels.reduce((m, label: any, i) => {
-					const correspondingValues = datasets.map(dataset => {
-						return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
-					});
-					const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
-
-					// Save both the total value and the minimum
-					return m.concat(totalValue, min(correspondingValues));
-				}, [])
-					// Currently stack layouts in the library
-					// Only support positive values
-					.concat(0)
-			);
-		} else {
-			// Get all the chart's data values in a flat array
-			let allDataValues = datasets.reduce((dataValues, dataset: any) => {
-				dataset.data.forEach((datum: any) => {
-					if (axisOptions.scaleType === ScaleTypes.TIME) {
-						dataValues = dataValues.concat(datum.date);
-					} else {
-						dataValues = dataValues.concat(isNaN(datum) ? datum.value : datum);
-					}
-				});
-
-				return dataValues;
-			}, []);
-
-			if (axisOptions.scaleType !== ScaleTypes.TIME) {
-				allDataValues = allDataValues.concat(0);
-			}
-
-			domain = extent(allDataValues);
-		}
-
-		if (axisOptions.scaleType === ScaleTypes.TIME) {
-			const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
-			if (spaceToAddToEdges) {
-				const startDate = new Date(domain[0]);
-				const endDate = new Date(domain[1]);
-				if (differenceInYears(endDate, startDate) > 1) {
-					return [subYears(startDate, spaceToAddToEdges), addYears(endDate, spaceToAddToEdges)];
-				}
-				if (differenceInMonths(endDate, startDate) > 1) {
-					return [subMonths(startDate, spaceToAddToEdges), addMonths(endDate, spaceToAddToEdges)];
-				}
-				if (differenceInDays(endDate, startDate) > 1) {
-					return [subDays(startDate, spaceToAddToEdges), addDays(endDate, spaceToAddToEdges)];
-				} else if (differenceInHours(endDate, startDate) > 1) {
-					return [subHours(startDate, spaceToAddToEdges), addHours(endDate, spaceToAddToEdges)];
-				} else if (differenceInMinutes(endDate, startDate) > 1) {
-					return [subMinutes(startDate, spaceToAddToEdges), addMinutes(endDate, spaceToAddToEdges)];
-				}
-				// Other
-				return [startDate, endDate];
-			}
-
-		}
-
-		// TODO - Work with design to improve logic
-		domain[1] = domain[1] * 1.1;
-		return domain;
-	}
-
 	render(animate = true) {
 		const { position: axisPosition } = this.configs;
 		const options = this.model.getOptions();
@@ -192,8 +45,8 @@ export class Axis extends Component {
 			endPosition = this.margins.top;
 		}
 
-		// Grab the scale off of the model, and initialize if it doesn't exist
-		const scale = this.createOrGetScale().domain(this.getScaleDomain());
+		// Grab the scale off of the Scales service
+		const scale = this.services.cartesianScales.getScaleByPosition(axisPosition);
 
 		if (this.scaleType === ScaleTypes.LABELS) {
 			scale.rangeRound([startPosition, endPosition]);
@@ -353,18 +206,6 @@ export class Axis extends Component {
 					.style("text-anchor", null);
 			}
 		}
-	}
-
-	getValueFromScale(datum: any, index?: number) {
-		const value = isNaN(datum) ? datum.value : datum;
-		if (this.scaleType === ScaleTypes.LABELS) {
-			const correspondingLabel = this.model.getDisplayData().labels[index];
-			return this.scale(correspondingLabel) + this.scale.step() / 2;
-		} else if (this.scaleType === ScaleTypes.TIME) {
-			return this.scale(new Date(datum.date || datum.label));
-		}
-
-		return this.scale(value);
 	}
 
 	getInvisibleAxisRef() {
