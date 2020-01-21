@@ -1,6 +1,6 @@
 // Internal Imports
 import { Bar } from "./bar";
-import { TooltipTypes, Roles } from "../../interfaces";
+import { TooltipTypes, Roles, Events } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -140,11 +140,17 @@ export class GroupedBar extends Bar {
 	addEventListeners() {
 		const self = this;
 		this.parent.selectAll("rect.bar")
-			.on("mouseover", function() {
+			.on("mouseover", function(datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
 					.attr("fill", color(hoveredElement.attr("fill")).darker(0.7).toString());
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
+					element: hoveredElement,
+					datum
+				});
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
@@ -152,12 +158,32 @@ export class GroupedBar extends Bar {
 					type: TooltipTypes.DATAPOINT
 				});
 			})
-			.on("mouseout", function() {
+			.on("mousemove", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("click", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
 					.attr("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
+					element: hoveredElement,
+					datum
+				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });

@@ -11,6 +11,23 @@ import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-sc
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { min, extent } from "d3-array";
 import { timeFormatDefaultLocale } from "d3-time-format";
+import {
+	differenceInYears,
+	addYears,
+	subYears,
+	differenceInMonths,
+	addMonths,
+	subMonths,
+	differenceInDays,
+	addDays,
+	subDays,
+	differenceInHours,
+	addHours,
+	subHours,
+	differenceInMinutes,
+	addMinutes,
+	subMinutes
+} from "date-fns";
 
 export class Axis extends Component {
 	type = "axes";
@@ -130,17 +147,27 @@ export class Axis extends Component {
 		}
 
 		if (axisOptions.scaleType === ScaleTypes.TIME) {
-			if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges")) {
-				// TODO - Need to account for non-day incrementals as well
-				const [startDate, endDate] = domain;
-				startDate.setDate(startDate.getDate() - 1);
-				endDate.setDate(endDate.getDate() + 1);
+			const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
+			if (spaceToAddToEdges) {
+				const startDate = new Date(domain[0]);
+				const endDate = new Date(domain[1]);
+				if (differenceInYears(endDate, startDate) > 1) {
+					return [subYears(startDate, spaceToAddToEdges), addYears(endDate, spaceToAddToEdges)];
+				}
+				if (differenceInMonths(endDate, startDate) > 1) {
+					return [subMonths(startDate, spaceToAddToEdges), addMonths(endDate, spaceToAddToEdges)];
+				}
+				if (differenceInDays(endDate, startDate) > 1) {
+					return [subDays(startDate, spaceToAddToEdges), addDays(endDate, spaceToAddToEdges)];
+				} else if (differenceInHours(endDate, startDate) > 1) {
+					return [subHours(startDate, spaceToAddToEdges), addHours(endDate, spaceToAddToEdges)];
+				} else if (differenceInMinutes(endDate, startDate) > 1) {
+					return [subMinutes(startDate, spaceToAddToEdges), addMinutes(endDate, spaceToAddToEdges)];
+				}
+				// Other
+				return [startDate, endDate];
 			}
 
-			return [
-				new Date(domain[0]),
-				new Date(domain[1])
-			];
 		}
 
 		// TODO - Work with design to improve logic
