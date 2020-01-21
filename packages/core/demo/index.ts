@@ -150,7 +150,7 @@ const createChartContainer = chartType => {
 	// Chart holder
 	const holder = document.createElement("div");
 	holder.className = "demo-chart-holder has-actions";
-	// meter need a more compact chart holder
+	// meter needs a more compact chart holder
 	if (chartType.id === "meter" ) {
 		holder.className += " compact";
 	}
