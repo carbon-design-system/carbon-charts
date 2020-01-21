@@ -35,7 +35,6 @@ export const legend: LegendOptions = {
 	enabled: true,
 	position: LegendPositions.BOTTOM,
 	clickable: true,
-	enabled: true,
 	items: {
 		status: {
 			ACTIVE: 1,
@@ -108,7 +107,6 @@ const chart: BaseChartOptions = {
 	width: "100%",
 	height: "100%",
 	resizable: true,
-	theme: ChartTheme.DEFAULT,
 	tooltip: baseTooltip,
 	legend,
 	style: {
@@ -136,7 +134,7 @@ const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: 1
 	} as TimeScaleOptions),
-	tooltip: barChartTooltip
+	tooltip: barChartTooltip,
 } as BarChartOptions);
 
 /**
