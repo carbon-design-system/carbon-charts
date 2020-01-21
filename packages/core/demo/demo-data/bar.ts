@@ -57,7 +57,7 @@ export const groupedBarOptions = {
 		},
 		bottom: {
 			scaleType: "labels",
-			secondary: true,
+			secondary: true
 		}
 	}
 };
@@ -103,7 +103,7 @@ export const simpleBarOptions = {
 		},
 		bottom: {
 			scaleType: "labels",
-			secondary: true,
+			secondary: true
 		}
 	}
 };
@@ -119,7 +119,7 @@ export const simpleHorizontalBarOptions = {
 			scaleType: "labels"
 		},
 		bottom: {
-			secondary: true,
+			secondary: true
 		}
 	}
 };
@@ -180,7 +180,7 @@ export const simpleHorizontalBarTimeSeriesOptions = {
 			primary: true
 		},
 		bottom: {
-			secondary: true,
+			secondary: true
 		}
 	}
 };
@@ -243,7 +243,7 @@ export const stackedBarOptions = {
 		},
 		bottom: {
 			scaleType: "labels",
-			secondary: true,
+			secondary: true
 		}
 	}
 };
@@ -260,7 +260,7 @@ export const stackedHorizontalBarOptions = {
 		},
 		bottom: {
 			stacked: true,
-			secondary: true,
+			secondary: true
 		}
 	}
 };
