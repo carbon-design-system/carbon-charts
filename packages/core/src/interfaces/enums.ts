@@ -109,11 +109,3 @@ export enum CalloutDirections {
 	LEFT = "left",
 	RIGHT = "right"
 }
-
-/**
- * enum of possible bar orientations
- */
-export enum BarOrientationOptions {
-	VERTICAL = "vertical",
-	HORIZONTAL = "horizontal"
-}

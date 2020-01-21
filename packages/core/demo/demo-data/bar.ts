@@ -121,8 +121,7 @@ export const simpleHorizontalBarOptions = {
 		bottom: {
 			secondary: true,
 		}
-	},
-	orientation: "horizontal"
+	}
 };
 
 export const simpleBarTimeSeriesData = {
@@ -183,8 +182,7 @@ export const simpleHorizontalBarTimeSeriesOptions = {
 		bottom: {
 			secondary: true,
 		}
-	},
-	orientation: "horizontal"
+	}
 };
 
 export const simpleHorizontalBarTimeSeriesData = simpleBarTimeSeriesData;
@@ -264,8 +262,7 @@ export const stackedHorizontalBarOptions = {
 			stacked: true,
 			secondary: true,
 		}
-	},
-	orientation: "horizontal"
+	}
 };
 
 export const stackedBarTimeSeriesData = {
@@ -400,8 +397,7 @@ export const stackedHorizontalBarTimeSeriesOptions = {
 			stacked: true,
 			secondary: true
 		}
-	},
-	orientation: "horizontal"
+	}
 };
 
 export const stackedHorizontalBarTimeSeriesData = stackedBarTimeSeriesData;

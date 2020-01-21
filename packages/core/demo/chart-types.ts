@@ -44,19 +44,14 @@ const {
 
 export const chartTypes = [
 	{
-		id: "grouped-bar",
-		options: groupedBarOptions,
-		data: groupedBarData
-	},
-	{
-		id: "grouped-horizontal-bar",
-		options: groupedHorizontalBarOptions,
-		data: groupedHorizontalBarData
-	},
-	{
 		id: "simple-bar",
 		options: simpleBarOptions,
 		data: simpleBarData
+	},
+	{
+		id: "simple-horizontal-bar-time-series",
+		options: simpleHorizontalBarTimeSeriesOptions,
+		data: simpleHorizontalBarTimeSeriesData
 	},
 	{
 		id: "simple-horizontal-bar",
@@ -74,14 +69,14 @@ export const chartTypes = [
 		data: scatterData
 	},
 	{
-		id: "simple-bar-time-series",
-		options: simpleBarTimeSeriesOptions,
-		data: simpleBarTimeSeriesData
+		id: "grouped-bar",
+		options: groupedBarOptions,
+		data: groupedBarData
 	},
 	{
-		id: "simple-horizontal-bar-time-series",
-		options: simpleHorizontalBarTimeSeriesOptions,
-		data: simpleHorizontalBarTimeSeriesData
+		id: "grouped-horizontal-bar",
+		options: groupedHorizontalBarOptions,
+		data: groupedHorizontalBarData
 	},
 	{
 		id: "stacked-bar",
@@ -92,6 +87,11 @@ export const chartTypes = [
 		id: "stacked-horizontal-bar",
 		options: stackedHorizontalBarOptions,
 		data: stackedHorizontalBarData
+	},
+	{
+		id: "simple-bar-time-series",
+		options: simpleBarTimeSeriesOptions,
+		data: simpleBarTimeSeriesData
 	},
 	{
 		id: "stacked-bar-time-series",

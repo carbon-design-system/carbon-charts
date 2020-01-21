@@ -2,7 +2,6 @@
 import { Tools } from "../../tools";
 import { Bar } from "./bar";
 import {
-	BarOrientationOptions,
 	Roles,
 	ScaleTypes,
 	TooltipTypes,

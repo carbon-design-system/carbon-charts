@@ -1,17 +1,13 @@
-import * as Configuration from "../../configuration";
 import { Tooltip } from "./tooltip";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
-import { TooltipPosition, TooltipTypes, BarOrientationOptions } from "./../../interfaces/enums";
-
-// Carbon position service
-import Position, { PLACEMENTS } from "@carbon/utils-position";
+import { TooltipPosition, TooltipTypes, CartesianOrientations } from "./../../interfaces/enums";
 
 // import the settings for the css prefix
 import settings from "carbon-components/src/globals/js/settings";
 
 // D3 Imports
-import { mouse, select } from "d3-selection";
+import { select } from "d3-selection";
 
 export class TooltipBar extends Tooltip {
 	init() {
@@ -130,7 +126,7 @@ export class TooltipBar extends Tooltip {
 		points.reverse();
 		// in a vertical bar chart the tooltip should display in order of the drawn bars
 		// in horizontal stacked bar, the order of the segments from Left to Right are displayed top down in tooltip
-		if (this.model.getOptions().orientation === BarOrientationOptions.VERTICAL ) {
+		if (this.services.cartesianScales.getOrientation() === CartesianOrientations.VERTICAL) {
 			points.reverse();
 		}
 

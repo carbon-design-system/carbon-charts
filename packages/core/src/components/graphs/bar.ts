@@ -1,30 +1,23 @@
 // Internal Imports
 import { Component } from "../component";
-import { BarOrientationOptions } from "../../interfaces";
+import { CartesianOrientations } from "../../interfaces";
 
 export class Bar extends Component {
 	// Gets the correct width for bars based on options & configurations
 	protected getBarWidth() {
 		const options = this.model.getOptions();
-		let mainAxis;
+		let mainXScale = this.services.cartesianScales.getMainXScale();
 
-		// if its horizontal we want to use the Y axis to determine instead of X
-		if (options.orientation === BarOrientationOptions.HORIZONTAL) {
-			mainAxis =  this.services.cartesianScales.getRangeScale();
-		} else {
-			mainAxis =  this.services.cartesianScales.getDomainScale();
-		}
-
-		if (!mainAxis.step) {
+		if (!mainXScale.step) {
 			return Math.min(
 				options.bars.maxWidth,
-				(5 / mainAxis.ticks().length) * options.bars.maxWidth
+				(5 / mainXScale.ticks().length) * options.bars.maxWidth
 			);
 		}
 
 		return Math.min(
 			options.bars.maxWidth,
-			mainAxis.step() / 2
+			mainXScale.step() / 2
 		);
 	}
 }
