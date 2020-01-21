@@ -280,20 +280,27 @@ export class CartesianScales extends Service {
 			if (spaceToAddToEdges) {
 				const startDate = new Date(domain[0]);
 				const endDate = new Date(domain[1]);
+
 				if (differenceInYears(endDate, startDate) > 1) {
 					return [subYears(startDate, spaceToAddToEdges), addYears(endDate, spaceToAddToEdges)];
 				}
+
 				if (differenceInMonths(endDate, startDate) > 1) {
 					return [subMonths(startDate, spaceToAddToEdges), addMonths(endDate, spaceToAddToEdges)];
 				}
+
 				if (differenceInDays(endDate, startDate) > 1) {
 					return [subDays(startDate, spaceToAddToEdges), addDays(endDate, spaceToAddToEdges)];
-				} else if (differenceInHours(endDate, startDate) > 1) {
+				}
+
+				if (differenceInHours(endDate, startDate) > 1) {
 					return [subHours(startDate, spaceToAddToEdges), addHours(endDate, spaceToAddToEdges)];
-				} else if (differenceInMinutes(endDate, startDate) > 1) {
+				}
+
+				if (differenceInMinutes(endDate, startDate) > 1) {
 					return [subMinutes(startDate, spaceToAddToEdges), addMinutes(endDate, spaceToAddToEdges)];
 				}
-				// Other
+
 				return [startDate, endDate];
 			}
 
