@@ -253,7 +253,6 @@ export class CartesianScales extends Service {
 			// Get all the chart's data values in a flat array
 			let allDataValues = datasets.reduce((dataValues, dataset: any) => {
 				dataset.data.forEach((datum: any) => {
-					
 					if (axisOptions.scaleType === ScaleTypes.TIME) {
 						dataValues = dataValues.concat(datum.date);
 					} else {
