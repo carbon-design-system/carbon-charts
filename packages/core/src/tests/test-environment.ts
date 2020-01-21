@@ -3,12 +3,14 @@ import { Chart } from "../chart";
 import * as Charts from "../index";
 import { createChartHolder } from "./tools";
 
+import { ChartData } from "../interfaces";
+
 import { groupedBarData, groupedBarOptions } from "../../demo/demo-data";
 
-export const data = groupedBarData;
+export const data = groupedBarData as ChartData;
 export const options = Object.assign(groupedBarOptions, {
 	title: "My chart"
-});
+}) as any;
 
 export class TestEnvironment {
 	chartOptions = options;
