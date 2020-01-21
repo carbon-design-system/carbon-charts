@@ -71,8 +71,7 @@ export class Tooltip extends Component {
 
 				this.tooltip.style("max-width", chartWidth);
 
-
-				tooltipTextContainer.html(this.getTooltipHTML(e.detail.hoveredElement, TooltipTypes.TITLE));
+				tooltipTextContainer.html(this.getTruncatedHTML(e.detail.data));
 
 				// get the position based on the title positioning (static)
 				const position = this.getTooltipPosition(e.detail.hoveredElement.node());
@@ -90,12 +89,15 @@ export class Tooltip extends Component {
 		});
 	}
 
-	getTooltipHTML(data: any, type: TooltipTypes) {
-		// check if it is getting styles for a tooltip type
-		if (type === TooltipTypes.TITLE) {
-			const title = this.model.getOptions().title;
-			return `<div class="title-tooltip"><text>${title ? title : data.datum()}</text></div>`;
+	// to be used for truncation within the chart (titles, legend, etc)
+	getTruncatedHTML(data) {
+		if (!data) {
+			return;
 		}
+		return `<div class="truncation-tooltip"><text>${data}</text></div>`;
+	}
+
+	getTooltipHTML(data: any, type: TooltipTypes) {
 		// this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
 		const dataVal = Tools.getProperty(data, "data") ? data.data : data;
 

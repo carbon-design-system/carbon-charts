@@ -59,8 +59,9 @@ export class TooltipBar extends Tooltip {
 				const tooltipMax =  DOMUtils.getSVGElementSize(chart).width * Tools.getProperty(this.model.getOptions(), "tooltip", "title", "width");
 				this.tooltip.style("max-width", tooltipMax);
 
+
 				// use tooltip.ts to get the tooltip html for titles
-				tooltipTextContainer.html(super.getTooltipHTML(e.detail.hoveredElement, TooltipTypes.TITLE));
+				tooltipTextContainer.html(super.getTruncatedHTML(e.detail.data));
 
 				// get the position based on the title positioning (static)
 				const position = super.getTooltipPosition(e.detail.hoveredElement.node());

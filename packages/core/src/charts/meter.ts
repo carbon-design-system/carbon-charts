@@ -1,5 +1,5 @@
 // Internal Imports
-import { ChartModel } from "../model";
+import { MeterChartModel } from "../model-meter";
 import { Chart } from "../chart";
 import * as Configuration from "../configuration";
 import {
@@ -18,21 +18,16 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TitleMeter,
+	MeterTitle,
 	Spacer
 } from "../components/index";
 
 export class MeterChart extends Chart {
-	model = new ChartModel(this.services);
+	model = new MeterChartModel(this.services);
 
 	// TODO - Optimize the use of "extending"
-	constructor(holder: Element, chartConfigs: ChartConfig<MeterChartOptions>, extending = false) {
+	constructor(holder: Element, chartConfigs: ChartConfig<MeterChartOptions>) {
 		super(holder, chartConfigs);
-
-		// TODO - Optimize the use of "extending"
-		if (extending) {
-			return;
-		}
 
 		// Merge the default options for this chart
 		// With the user provided options
@@ -64,7 +59,7 @@ export class MeterChart extends Chart {
 		const titleComponent = {
 			id: "title",
 			components: [
-				new TitleMeter(this.model, this.services)
+				new MeterTitle(this.model, this.services)
 			],
 			growth: {
 				x: LayoutGrowth.PREFERRED,

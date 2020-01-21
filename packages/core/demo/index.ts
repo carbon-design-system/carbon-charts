@@ -66,31 +66,32 @@ const changeDemoData = (chartType: any, chartObj: any) => {
 	// Function to be used to randomize all datapoints
 	const updateChartData = currentData => {
 		const result = Tools.clone(currentData);
-		result.datasets = result.datasets.map(dataset => {
-			dataset.label = `new dataset ${Math.random().toFixed(2)}`;
-			let datasetNewData;
-			if (chartType === "meter") {
-				const { value, max, peak } = dataset.data;
-				// only randomize a new value that is less than the max
-				// keep other values the same so its possible to view the different states of the chart (status ranges)
-				const newValue = randomizeValue(value, [0, max]);
-				datasetNewData = {
-					value: newValue,
-					min: 0,
-					max: max,
-					peak: randomizeValue(peak, [1000, 1200]), // reassign within the warning/danger status
-					status: dataset.data.status
-				};
+		if (chartType === "meter") {
+			const { value, max, peak } = currentData.data;
+			// only randomize a new value that is less than the max
+			// keep other values the same so its possible to view the different states of the chart (status ranges)
+			const newValue = randomizeValue(value, [0, max]);
+			const datasetNewData = {
+				value: newValue,
+				min: 0,
+				max: max,
+				peak: randomizeValue(peak, [1000, 1200]), // reassign within the warning/danger status
+				//status: dataset.data.status
+			};
 
-			} else {
-				datasetNewData = dataset.data.map(dataPoint => {
-					return randomizeValue(dataPoint);
-				});
-			}
-
-			const newDataset = Object.assign({}, dataset, { data: datasetNewData });
-			return newDataset;
-		});
+			result.data = datasetNewData;
+			result.label = "Lorem ipsum asdhaskdhkasd";
+		} else {
+			result.datasets = result.datasets.map(dataset => {
+				dataset.label = `new dataset ${Math.random().toFixed(2)}`;
+				let datasetNewData;
+					datasetNewData = dataset.data.map(dataPoint => {
+						return randomizeValue(dataPoint);
+					});
+				const newDataset = Object.assign({}, dataset, { data: datasetNewData });
+				return newDataset;
+			});
+		}
 
 		return result;
 	};
@@ -103,6 +104,7 @@ const changeDemoData = (chartType: any, chartObj: any) => {
 	switch (chartType) {
 		case "pie":
 		case "donut":
+		case "meter":
 			// Randomize old data values
 			newData = updateChartData(oldData);
 			break;

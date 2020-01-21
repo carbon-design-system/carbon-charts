@@ -7,7 +7,6 @@ import { Tools } from "../../tools";
 import { select } from "d3-selection";
 import { scaleLinear } from "d3-scale";
 
-
 export class Meter extends Component {
 	type = "meter";
 
@@ -15,10 +14,7 @@ export class Meter extends Component {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
-		const displayData = this.model.getDisplayData();
-
-		// meter only deals with 1 dataset (like pie/donut)
-		const dataset = displayData.datasets[0];
+		const dataset = this.model.getDisplayData();
 
 		// each meter has a scale for the value but no visual axis
 		const xScale = scaleLinear()
@@ -30,13 +26,11 @@ export class Meter extends Component {
 			.attr("x", 0 )
 			.attr("y", 0 )
 			.attr("width", options.width)
-			.attr("height", options.meter.barHeight);
+			.attr("height", options.meter.height);
 
 		// rect with the value binded
 		const value = svg.selectAll("rect.value")
 			.data([dataset]);
-
-		value.exit().remove();
 
 		// draw the value bar
 		value.enter()
@@ -46,53 +40,48 @@ export class Meter extends Component {
 			.attr("x", 0 )
 			.attr("y", 0 )
 			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
-			.attr("width", d =>  xScale(d.data.value))
-			.attr("height", options.meter.barHeight)
-			.attr("fill", d => d.fillColors[0])
+			.attr("width", d => xScale(d.data.value))
+			.attr("height", options.meter.height)
+			.attr("fill", d => self.model.getFillColor(d.label))
 			.attr("fill-opacity", 0.5)
-			.style("border-color", d => d.fillColors[0]);
+			.style("border-color", d => self.model.getFillColor(d.label));
 
 
 		// add the border indicating the value
 		const border = svg.selectAll("line.border")
 			.data([dataset]);
 
-		border
-			.enter()
+		border.enter()
 			.append("line")
 			.classed("border", true)
 			.merge(border)
 			.attr("y1", 0)
-			.attr("y2", options.meter.barHeight)
+			.attr("y2", options.meter.height)
 			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
 			.attr("x1", d => xScale(d.data.value))
 			.attr("x2", d => xScale(d.data.value))
 			.attr("stroke-width", 2)
-			.attr("stroke",  d => {
-				return d.fillColors[0];
-			});
+			.attr("stroke", d => self.model.getFillColor(d.label));
+
+		// draw the peak
+		const peakValue = dataset.data.peak;
+		// we only want to use peak value as a data source if it is within the range of [min,max]
+		const data = peakValue && peakValue >= dataset.data.min && peakValue <= dataset.data.max ? [peakValue] : [] ;
 
 		// if a peak is supplied within the domain, we want to render it
-		const peak = DOMUtils.appendOrSelect(svg, "line.peak");
-		if (dataset.data.peak && dataset.data.peak >= dataset.data.min &&  dataset.data.peak <= dataset.data.max ) {
-			const peakVal = dataset.data.peak;
+		const peak = svg.selectAll("line.peak")
+			.data(data);
 
-			// if there was previously no peak, transition it from the 0
-			if (!peak.attr("x1")) {
-				peak.attr("y1", 0)
-					.attr("y2", options.meter.barHeight)
-					.attr("x1", xScale(0))
-					.attr("x2", xScale(0));
-			}
+		peak.enter()
+			.append("line")
+			.classed("peak", true)
+			.merge(peak)
+			.attr("y1", 0)
+			.attr("y2", options.meter.height)
+			.transition(this.services.transitions.getTransition("peak-line-update", animate))
+			.attr("x1", xScale(peakValue))
+			.attr("x2", xScale(peakValue));
 
-			// transitions to its correct location
-			peak
-				.transition(this.services.transitions.getTransition("peak-line-update", animate))
-				.attr("x1", xScale(peakVal))
-				.attr("x2", xScale(peakVal));
-		} else {
-			// remove any stale peak indicators
-			peak.remove();
-		}
+		peak.exit().remove();
 	}
 }

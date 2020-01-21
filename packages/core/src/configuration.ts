@@ -230,7 +230,7 @@ const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 		enabled: false
 	},
 	meter: {
-		barHeight: 15,
+		height: 15,
 		title: {
 			paddingRight: 5,
 			percentageIndicator: {
