@@ -6,7 +6,7 @@ export class Bar extends Component {
 	// Gets the correct width for bars based on options & configurations
 	protected getBarWidth() {
 		const options = this.model.getOptions();
-		let mainXScale = this.services.cartesianScales.getMainXScale();
+		const mainXScale = this.services.cartesianScales.getMainXScale();
 
 		if (!mainXScale.step) {
 			return Math.min(
