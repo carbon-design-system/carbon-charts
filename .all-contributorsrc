@@ -123,6 +123,16 @@
         "doc",
         "example"
       ]
+    },
+    {
+      "login": "scottdickerson",
+      "name": "Scott Dickerson",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/6663002?v=4",
+      "profile": "https://github.com/scottdickerson",
+      "contributions": [
+        "code"
+      ]
     }
-  ]
+  ],
+  "skipCi": true
 }
