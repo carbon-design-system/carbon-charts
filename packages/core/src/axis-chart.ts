@@ -17,11 +17,11 @@ import {
 } from "./components/index";
 import { Tools } from "./tools";
 
-import { Axes, Curves } from "./services/index";
+import { CartesianScales, Curves } from "./services/index";
 
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {
-		axes: Axes,
+		cartesianScales: CartesianScales,
 		curves: Curves
 	});
 

@@ -1,6 +1,11 @@
 // Internal Imports
 import { Bar } from "./bar";
-import { TooltipTypes, Roles, Events } from "../../interfaces";
+import {
+	Events,
+	Roles,
+	TooltipTypes
+} from "../../interfaces";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -40,7 +45,7 @@ export class SimpleBar extends Bar {
 
 		// Update data on all bars
 		const bars = barGroupsEnter.merge(barGroups)
-			.selectAll("rect.bar")
+			.selectAll("path.bar")
 			.data((d, i) => this.addLabelsToDataPoints(d, i), d => d.label);
 
 		// Remove bars that are no longer needed
@@ -48,24 +53,33 @@ export class SimpleBar extends Bar {
 			.attr("opacity", 0)
 			.remove();
 
-		// Add the circles that need to be introduced
+		// Add the paths that need to be introduced
 		const barsEnter = bars.enter()
-			.append("rect")
+			.append("path")
 			.attr("opacity", 0);
 
 		barsEnter.merge(bars)
 			.classed("bar", true)
-			.attr("x", (d, i) => {
-				const barWidth = this.getBarWidth();
-
-				return this.services.axes.getXValue(d, i) - barWidth / 2;
-			})
 			.attr("width", this.getBarWidth.bind(this))
 			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-			.attr("y", (d, i) => this.services.axes.getYValue(Math.max(0, d.value)))
 			.attr("fill", d => this.model.getFillScale()(d.label))
-			.attr("height", (d, i) => {
-				return Math.abs(this.services.axes.getYValue(d, i) - this.services.axes.getYValue(0));
+			.attr("d", (d, i) => {
+				/*
+				* Orientation support for horizontal/vertical bar charts
+				* Determine coordinates needed for a vertical set of paths
+				* to draw the bars needed, and pass those coordinates down to
+				* generateSVGPathString() to decide whether it needs to flip them
+				*/
+				const barWidth = this.getBarWidth();
+				const x0 = this.services.cartesianScales.getDomainValue(d, i) - barWidth / 2;
+				const x1 = x0 + barWidth;
+				const y0 = this.services.cartesianScales.getRangeValue(0);
+				const y1 = this.services.cartesianScales.getRangeValue(d, i);
+
+				return Tools.generateSVGPathString(
+					{ x0, x1, y0, y1 },
+					this.services.cartesianScales.getOrientation()
+				);
 			})
 			.attr("opacity", 1)
 			// a11y
@@ -80,13 +94,13 @@ export class SimpleBar extends Bar {
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
-		this.parent.selectAll("rect.bar")
+		this.parent.selectAll("path.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-simple-bar"))
 			.attr("opacity", d => (d.label !== hoveredElement.datum()["key"]) ? 0.3 : 1);
 	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent.selectAll("rect.bar")
+		this.parent.selectAll("path.bar")
 			.transition(this.services.transitions.getTransition("legend-mouseout-simple-bar"))
 			.attr("opacity", 1);
 	}
@@ -105,7 +119,7 @@ export class SimpleBar extends Bar {
 
 	addEventListeners() {
 		const self = this;
-		this.parent.selectAll("rect.bar")
+		this.parent.selectAll("path.bar")
 			.on("mouseover", function(datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true);
@@ -157,7 +171,7 @@ export class SimpleBar extends Bar {
 
 	destroy() {
 		// Remove event listeners
-		this.parent.selectAll("rect.bar")
+		this.parent.selectAll("path.bar")
 			.on("mouseover", null)
 			.on("mousemove", null)
 			.on("mouseout", null);
