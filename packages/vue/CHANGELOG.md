@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.28.0](https://github.com/IBM/carbon-charts/compare/v0.27.0...v0.28.0) (2020-01-21)
+
+
+### Features
+
+* **core:** add support for horizontal bar charts ([#415](https://github.com/IBM/carbon-charts/issues/415)) ([6a480f0](https://github.com/IBM/carbon-charts/commit/6a480f0))
+
+
+
+
+
 # [0.27.0](https://github.com/IBM/carbon-charts/compare/v0.26.1...v0.27.0) (2020-01-20)
 
 **Note:** Version bump only for package @carbon/charts-vue
