@@ -70,5 +70,5 @@ export interface AxesOptions {
  * customize time series scales
  */
 export interface TimeScaleOptions {
-	addSpaceOnEdges?: boolean;
+	addSpaceOnEdges?: number;
 }

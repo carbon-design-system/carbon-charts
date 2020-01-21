@@ -1,15 +1,13 @@
 // Internal Imports
 import { Component } from "../component";
-import { AxisPositions, ScaleTypes, AxisTypes, Roles } from "../../interfaces";
+import { AxisPositions, ScaleTypes, Roles } from "../../interfaces";
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
 
 // D3 Imports
-import { scaleBand, scaleLinear, scaleTime, scaleLog, scaleOrdinal } from "d3-scale";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
-import { min, extent } from "d3-array";
 import { timeFormatDefaultLocale } from "d3-time-format";
 
 export class Axis extends Component {
