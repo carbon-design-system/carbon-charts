@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withKnobs, object } from "@storybook/addon-knobs";
 
 import {
 	SimpleBarChart,
@@ -24,44 +25,45 @@ import {
 import { addWidthAndHeight } from "./commons";
 
 const horizontalBarStories = storiesOf("Bar (Horizontal)", module);
+horizontalBarStories.addDecorator(withKnobs);
 horizontalBarStories.add(simpleHorizontalBarOptions.title, () => (
 	<SimpleBarChart
-		data={simpleHorizontalBarData}
-		options={addWidthAndHeight(simpleHorizontalBarOptions)}
+		data={object("Data", simpleHorizontalBarData)}
+		options={object("Options", addWidthAndHeight(simpleHorizontalBarOptions))}
 	/>
 ));
 
 horizontalBarStories.add(groupedHorizontalBarOptions.title, () => (
 	<GroupedBarChart
-		data={groupedHorizontalBarData}
-		options={addWidthAndHeight(groupedHorizontalBarOptions)}
+		data={object("Data", groupedHorizontalBarData)}
+		options={object("Options", addWidthAndHeight(groupedHorizontalBarOptions))}
 	/>
 ));
 
 horizontalBarStories.add(simpleHorizontalBarTimeSeriesOptions.title, () => (
 	<SimpleBarChart
-		data={simpleHorizontalBarTimeSeriesData}
-		options={addWidthAndHeight(simpleHorizontalBarTimeSeriesOptions)}
+		data={object("Data", simpleHorizontalBarTimeSeriesData)}
+		options={object("Options", addWidthAndHeight(simpleHorizontalBarTimeSeriesOptions))}
 	/>
 ));
 
 horizontalBarStories.add(stackedHorizontalBarOptions.title, () => (
 	<StackedBarChart
-		data={stackedHorizontalBarData}
-		options={addWidthAndHeight(stackedHorizontalBarOptions)}
+		data={object("Data", stackedHorizontalBarData)}
+		options={object("Options", addWidthAndHeight(stackedHorizontalBarOptions))}
 	/>
 ));
 
 horizontalBarStories.add(stackedHorizontalBarTimeSeriesOptions.title, () => (
 	<StackedBarChart
-		data={stackedHorizontalBarTimeSeriesData}
-		options={addWidthAndHeight(stackedHorizontalBarTimeSeriesOptions)}
+		data={object("Data", stackedHorizontalBarTimeSeriesData)}
+		options={object("Options", addWidthAndHeight(stackedHorizontalBarTimeSeriesOptions))}
 	/>
 ));
 
 horizontalBarStories.add(stackedHorizontalBarTimeSeriesOptions.title, () => (
 	<StackedBarChart
-		data={stackedHorizontalBarTimeSeriesData}
-		options={addWidthAndHeight(stackedHorizontalBarTimeSeriesOptions)}
+		data={object("Data", stackedHorizontalBarTimeSeriesData)}
+		options={object("Options", addWidthAndHeight(stackedHorizontalBarTimeSeriesOptions))}
 	/>
 ));

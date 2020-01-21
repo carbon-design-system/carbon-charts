@@ -1,4 +1,5 @@
 import { storiesOf } from "@storybook/angular";
+import { withKnobs, object } from "@storybook/addon-knobs";
 
 import { ChartsModule } from "../src/charts.module";
 
@@ -26,15 +27,15 @@ const template = barType => `
 </ibm-${barType}-bar-chart>
 `;
 
-const stories = storiesOf("Bar (Horizontal)", module);
+const stories = storiesOf("Bar (Horizontal)", module).addDecorator(withKnobs);
 stories.add(simpleHorizontalBarOptions.title, () => ({
 	template: template("simple"),
 	moduleMetadata: {
 		imports: [ChartsModule]
 	},
 	props: {
-		data: simpleHorizontalBarData,
-		options: addWidthAndHeight(simpleHorizontalBarOptions)
+		data: object("Data", simpleHorizontalBarData),
+		options: object("Options", addWidthAndHeight(simpleHorizontalBarOptions))
 	}
 }));
 
@@ -44,8 +45,8 @@ stories.add(simpleHorizontalBarTimeSeriesOptions.title, () => ({
 		imports: [ChartsModule]
 	},
 	props: {
-		data: simpleHorizontalBarTimeSeriesData,
-		options: addWidthAndHeight(simpleHorizontalBarTimeSeriesOptions)
+		data: object("Data", simpleHorizontalBarTimeSeriesData),
+		options: object("Options", addWidthAndHeight(simpleHorizontalBarTimeSeriesOptions))
 	}
 }));
 
@@ -55,8 +56,8 @@ stories.add(groupedHorizontalBarOptions.title, () => ({
 		imports: [ChartsModule]
 	},
 	props: {
-		data: groupedHorizontalBarData,
-		options: addWidthAndHeight(groupedHorizontalBarOptions)
+		data: object("Data", groupedHorizontalBarData),
+		options: object("Options", addWidthAndHeight(groupedHorizontalBarOptions))
 	}
 }));
 
@@ -66,8 +67,8 @@ stories.add(stackedHorizontalBarOptions.title, () => ({
 		imports: [ChartsModule]
 	},
 	props: {
-		data: stackedHorizontalBarData,
-		options: addWidthAndHeight(stackedHorizontalBarOptions)
+		data: object("Data", stackedHorizontalBarData),
+		options: object("Options", addWidthAndHeight(stackedHorizontalBarOptions))
 	}
 }));
 
@@ -77,7 +78,7 @@ stories.add(stackedHorizontalBarTimeSeriesOptions.title, () => ({
 		imports: [ChartsModule]
 	},
 	props: {
-		data: stackedHorizontalBarTimeSeriesData,
-		options: addWidthAndHeight(stackedHorizontalBarTimeSeriesOptions)
+		data: object("Data", stackedHorizontalBarTimeSeriesData),
+		options: object("Options", addWidthAndHeight(stackedHorizontalBarTimeSeriesOptions))
 	}
 }));
