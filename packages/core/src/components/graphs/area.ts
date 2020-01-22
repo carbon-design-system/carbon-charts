@@ -1,6 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
+import { CartesianOrientations } from "../../interfaces";
 
 // D3 Imports
 import { area } from "d3-shape";
@@ -36,13 +37,19 @@ export class Area extends Component {
 	render(animate = true) {
 		const svg = this.getContainerSVG();
 
-		const mainYAxis = this.services.axes.getMainYAxis();
-		const [ height ] = mainYAxis.scale.range();
+		const orientation = this.services.cartesianScales.getOrientation();
 		const areaGenerator = area()
-			.x((d, i) => this.services.axes.getXValue(d, i))
-			.y0(height)
-			.y1((d, i) => this.services.axes.getYValue(d, i))
 			.curve(this.services.curves.getD3Curve());
+
+		if (orientation === CartesianOrientations.VERTICAL) {
+			areaGenerator.x((d, i) => this.services.cartesianScales.getXValue(d, i))
+				.y0(this.services.cartesianScales.getYValue(0))
+				.y1((d, i) => this.services.cartesianScales.getYValue(d, i));
+		} else {
+			areaGenerator.x0(this.services.cartesianScales.getXValue(0))
+				.x1((d, i) => this.services.cartesianScales.getXValue(d, i))
+				.y((d, i) => this.services.cartesianScales.getYValue(d, i));
+		}
 
 		// Update the bound data on area groups
 		const areaGroups = svg.selectAll("g.areas")

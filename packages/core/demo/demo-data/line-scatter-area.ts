@@ -318,36 +318,10 @@ export const areaTimeSeriesData = {
 	datasets: [
 		{
 			label: "Dataset 1",
-			fillColors: [colors[0]],
-			data: [
-				{
-					date: new Date(2019, 0, 1),
-					value: 10000
-				},
-				{
-					date: new Date(2019, 0, 5),
-					value: 65000
-				},
-				{
-					date: new Date(2019, 0, 8),
-					value: 10000
-				},
-				{
-					date: new Date(2019, 0, 13),
-					value: 49213
-				},
-				{
-					date: new Date(2019, 0, 19),
-					value: 51213
-				}
-			]
-		},
-		{
-			label: "Dataset 2",
 			fillColors: [colors[1]],
 			data: [
 				{
-					date: new Date(2019, 0, 2),
+					date: new Date(2019, 0, 1),
 					value: 0
 				},
 				{
@@ -369,7 +343,7 @@ export const areaTimeSeriesData = {
 			]
 		},
 		{
-			label: "Dataset 3",
+			label: "Dataset 2",
 			fillColors: [colors[2]],
 			data: [
 				{
@@ -395,7 +369,7 @@ export const areaTimeSeriesData = {
 			]
 		},
 		{
-			label: "Dataset 4",
+			label: "Dataset 3",
 			fillColors: [colors[3]],
 			data: [
 				{
@@ -428,12 +402,84 @@ export const areaTimeSeriesOptions = {
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
-			scaleType: "time",
-			secondary: true
+			secondary: true,
+			scaleType: "time"
+		},
+		left: {
+			primary: true
+		}
+	}
+};
+
+export const areaTimeSeriesCurvedData = {
+	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			fillColors: [colors[1]],
+			data: [
+				{
+					date: new Date(2019, 0, 1),
+					value: 0
+				},
+				{
+					date: new Date(2019, 0, 6),
+					value: -37312
+				},
+				{
+					date: new Date(2019, 0, 8),
+					value: -22392
+				},
+				{
+					date: new Date(2019, 0, 15),
+					value: -52576
+				},
+				{
+					date: new Date(2019, 0, 19),
+					value: 20135
+				}
+			]
+		},
+		{
+			label: "Dataset 2",
+			fillColors: [colors[2]],
+			data: [
+				{
+					date: new Date(2019, 0, 1),
+					value: 47263
+				},
+				{
+					date: new Date(2019, 0, 5),
+					value: 14178
+				},
+				{
+					date: new Date(2019, 0, 8),
+					value: 23094
+				},
+				{
+					date: new Date(2019, 0, 13),
+					value: 45281
+				},
+				{
+					date: new Date(2019, 0, 19),
+					value: -63954
+				}
+			]
+		}
+	]
+};
+
+export const areaTimeSeriesCurvedOptions = {
+	title: "Area (time series - natural curve)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			secondary: true,
+			scaleType: "time"
 		},
 		left: {
 			primary: true
 		}
 	},
-	// curve: "curveNatural"
+	curve: "curveNatural"
 };

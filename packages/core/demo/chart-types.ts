@@ -38,6 +38,8 @@ const {
 	// Area
 	areaTimeSeriesData,
 	areaTimeSeriesOptions,
+	areaTimeSeriesCurvedData,
+	areaTimeSeriesCurvedOptions,
 	// Scatter
 	scatterTimeSeriesOptions,
 	scatterTimeSeriesData,
@@ -46,6 +48,16 @@ const {
 } = require("./demo-data/index");
 
 export const chartTypes = [
+	{
+		id: "area-time-series-curved",
+		options: areaTimeSeriesCurvedOptions,
+		data: areaTimeSeriesCurvedData
+	},
+	{
+		id: "area-time-series",
+		options: areaTimeSeriesOptions,
+		data: areaTimeSeriesData
+	},
 	{
 		id: "simple-bar",
 		options: simpleBarOptions,
@@ -120,11 +132,6 @@ export const chartTypes = [
 		id: "line-time-series",
 		options: lineTimeSeriesOptions,
 		data: lineTimeSeriesData
-	},
-	{
-		id: "area-time-series",
-		options: areaTimeSeriesOptions,
-		data: areaTimeSeriesData
 	},
 	{
 		id: "line",

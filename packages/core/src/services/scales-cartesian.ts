@@ -164,13 +164,13 @@ export class CartesianScales extends Service {
 	}
 
 	getXValue(d, i) {
-		const datum = Object.assign(d, { pos: "bottom" });
-		return this.getValueFromScale(datum, i);
+		const mainXAxisPosition = this.getMainXAxisPosition();
+		return this.getValueFromScale(mainXAxisPosition, d, i);
 	}
 
 	getYValue(d, i) {
-		const datum = Object.assign(d, { pos: "left" });
-		return this.getValueFromScale(datum, i);
+		const mainYAxisPosition = this.getMainYAxisPosition();
+		return this.getValueFromScale(mainYAxisPosition, d, i);
 	}
 
 	/** Uses the primary Y Axis to get data items associated with that value.  */

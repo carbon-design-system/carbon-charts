@@ -183,6 +183,7 @@ chartTypes.forEach(type => {
 				classToInitialize = LineChart;
 				break;
 			case "area-time-series":
+			case "area-time-series-curved":
 				classToInitialize = AreaChart;
 				break;
 			case "pie":
