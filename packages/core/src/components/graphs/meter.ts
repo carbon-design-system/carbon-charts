@@ -39,9 +39,9 @@ export class Meter extends Component {
 			.merge(value)
 			.attr("x", 0 )
 			.attr("y", 0 )
+			.attr("height", options.meter.height)
 			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
 			.attr("width", d => xScale(d.data.value))
-			.attr("height", options.meter.height)
 			.attr("fill", d => self.model.getFillColor(d.label))
 			.attr("fill-opacity", 0.5)
 			.style("border-color", d => self.model.getFillColor(d.label));
@@ -72,6 +72,9 @@ export class Meter extends Component {
 		const peak = svg.selectAll("line.peak")
 			.data(data);
 
+			const x1 = peak.attr("x1");
+			console.log(x1);
+
 		peak.enter()
 			.append("line")
 			.classed("peak", true)
@@ -79,7 +82,7 @@ export class Meter extends Component {
 			.attr("y1", 0)
 			.attr("y2", options.meter.height)
 			.transition(this.services.transitions.getTransition("peak-line-update", animate))
-			.attr("x1", xScale(peakValue))
+			.attr("x1", d => {return xScale(peakValue);})
 			.attr("x2", xScale(peakValue));
 
 		peak.exit().remove();
