@@ -184,7 +184,7 @@ export class Chart {
 					this.services,
 					[
 						...(isLegendEnabled ? [ legendComponent ] : [ ]),
-						legendSpacerComponent,
+						...(isLegendEnabled ? [ legendSpacerComponent ] : [ ]),
 						graphFrameComponent
 					],
 					{
