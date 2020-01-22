@@ -6,7 +6,7 @@ export const meterData = {
 	data: {
 		min: 0,
 		max: 1500,
-		//peak: 1200,
+		peak: 1200,
 		value: 1000,
 		status: [
 			{ range: [0, 1000], status: "success" },
