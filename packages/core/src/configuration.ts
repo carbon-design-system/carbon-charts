@@ -172,7 +172,7 @@ const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
 } as LineChartOptions);
 
 /**
- * options specific to line charts
+ * options specific to area charts
  */
 const areaChart: AreaChartOptions = Tools.merge({}, axisChart, {
 	timeScale: Tools.merge(timeScale, {
