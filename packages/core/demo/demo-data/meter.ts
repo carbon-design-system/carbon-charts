@@ -7,7 +7,7 @@ export const meterData = {
 		min: 0,
 		max: 1500,
 		peak: 1200,
-		value: 550,
+		value: 1000,
 		status: [
 			{ range: [0, 1000], status: "success" },
 			// { range: [500, 1000], status: "custom" },
@@ -18,15 +18,5 @@ export const meterData = {
 };
 
 export const meterOptions = {
-	meter: {
-		title: {
-			percentageIndicator: {
-				enabled: true
-			}
-		},
-		status: {
-			enabled: true,
-		}
-	},
 	title: "Meter Chart"
 };
