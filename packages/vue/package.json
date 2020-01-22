@@ -1,24 +1,25 @@
 {
 	"name": "@carbon/charts-vue",
-	"version": "0.17.0",
+	"version": "0.28.0",
 	"description": "Carbon charting components for Vue",
 	"main": "charts-vue.umd.min.js",
 	"scripts": {
 		"build": "bash build.sh",
 		"lint": "vue-cli-service lint ./src/index.js",
 		"storybook": "start-storybook -p 6006",
-		"demo:build": "build-storybook -o demo/bundle",
+		"demo:build": "build-storybook -o demo/bundle --quiet",
 		"ci-check": "yarn format:diff",
 		"format": "prettier --write \"**/*.{scss,css,js,md,vue}\"",
 		"format:diff": "prettier --list-different \"**/*.{scss,css,js,md,vue}\"",
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"dependencies": {
-		"@carbon/charts": "^0.17.0",
+		"@carbon/charts": "^0.28.0",
 		"vue": "2.5.21"
 	},
 	"devDependencies": {
 		"@babel/core": "7.3.4",
+		"@storybook/addon-knobs": "5.0.11",
 		"@storybook/addon-links": "5.0.11",
 		"@storybook/addons": "5.0.11",
 		"@storybook/theming": "5.0.11",

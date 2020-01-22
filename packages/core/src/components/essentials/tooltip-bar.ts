@@ -1,17 +1,13 @@
-import * as Configuration from "../../configuration";
 import { Tooltip } from "./tooltip";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
-import { TooltipPosition, TooltipTypes } from "./../../interfaces/enums";
-
-// Carbon position service
-import Position, { PLACEMENTS } from "@carbon/utils-position";
+import { TooltipPosition, TooltipTypes, CartesianOrientations } from "./../../interfaces/enums";
 
 // import the settings for the css prefix
 import settings from "carbon-components/src/globals/js/settings";
 
 // D3 Imports
-import { mouse, select } from "d3-selection";
+import { select } from "d3-selection";
 
 export class TooltipBar extends Tooltip {
 	init() {
@@ -22,6 +18,7 @@ export class TooltipBar extends Tooltip {
 
 		// Apply html content to the tooltip
 		const tooltipTextContainer = DOMUtils.appendOrSelect(this.tooltip, "div.content-box");
+		this.tooltip.style("max-width", null);
 
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener("show-tooltip", e => {
@@ -31,26 +28,43 @@ export class TooltipBar extends Tooltip {
 
 				const hoveredElement = e.detail.hoveredElement.node();
 
-				// if there is a provided tooltip HTML function
-				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
-					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement));
-				} else if (e.detail.multidata) {
+				let defaultHTML;
+				if (e.detail.multidata) {
 					// multi tooltip
-					tooltipTextContainer.html(this.getMultilineTooltipHTML(e.detail.multidata));
-					// Position the tooltip
-					this.positionTooltip();
+					defaultHTML = this.getMultilineTooltipHTML(e.detail.multidata);
 				} else {
-					const data = e.detail.hoveredElement.datum();
-					tooltipTextContainer.html(this.getTooltipHTML(data));
-
-					const position = this.getTooltipPosition(hoveredElement);
-
-					// Position the tooltip relative to the bars
-					this.positionTooltip(position);
+					defaultHTML = this.getTooltipHTML(e.detail.hoveredElement.datum());
 				}
-				// Fade in
-				this.tooltip.classed("hidden", false);
+
+				// if there is a provided tooltip HTML function call it and pass the defaultHTML
+				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
+					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement, defaultHTML));
+				} else {
+					// default tooltip
+					tooltipTextContainer.html(defaultHTML);
+				}
+
+				const position = this.getTooltipPosition(hoveredElement);
+				// Position the tooltip relative to the bars
+				this.positionTooltip(e.detail.multidata ? undefined : position );
+
+			} else if (e.detail.type === TooltipTypes.TITLE) {
+				// use the chart size to enforce a max width on the tooltip
+				const chart = DOMUtils.appendOrSelect(holder, `svg.${settings.prefix}--${chartprefix}--chart-svg`);
+				// use the configs to determine how large the tooltip should be
+				const tooltipMax =  DOMUtils.getSVGElementSize(chart).width * Tools.getProperty(this.model.getOptions(), "tooltip", "title", "width");
+				this.tooltip.style("max-width", tooltipMax);
+
+				// use tooltip.ts to get the tooltip html for titles
+				tooltipTextContainer.html(super.getTooltipHTML(e.detail.hoveredElement, TooltipTypes.TITLE));
+
+				// get the position based on the title positioning (static)
+				const position = super.getTooltipPosition(e.detail.hoveredElement.node());
+				this.positionTooltip(position);
 			}
+
+			// Fade in
+			this.tooltip.classed("hidden", false);
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
@@ -110,6 +124,11 @@ export class TooltipBar extends Tooltip {
 		const points = data;
 
 		points.reverse();
+		// in a vertical bar chart the tooltip should display in order of the drawn bars
+		// in horizontal stacked bar, the order of the segments from Left to Right are displayed top down in tooltip
+		if (this.services.cartesianScales.getOrientation() === CartesianOrientations.VERTICAL) {
+			points.reverse();
+		}
 
 		// get the total for the stacked tooltip
 		let total = points.reduce((sum, item) => sum + item.value, 0);
@@ -141,60 +160,5 @@ export class TooltipBar extends Tooltip {
 					</div>
 				</li>
 			</ul>`;
-	}
-
-	positionTooltip(positionOverride?: any) {
-		const holder = this.services.domUtils.getHolder();
-		const target = this.tooltip.node();
-		const mouseRelativePos = mouse(holder);
-		let pos;
-
-		// override position to place tooltip at {placement:.., position:{top:.. , left:..}}
-		if (positionOverride) {
-			// placement determines whether the tooltip is centered above or below the position provided
-			const placement = positionOverride.placement === TooltipPosition.TOP ? PLACEMENTS.TOP : PLACEMENTS.BOTTOM;
-
-			pos = this.positionService.findPositionAt(
-				positionOverride.position,
-				target,
-				placement
-			);
-		} else {
-			// Find out whether tooltip should be shown on the left or right side
-			const bestPlacementOption = this.positionService.findBestPlacementAt(
-				{
-					left: mouseRelativePos[0],
-					top: mouseRelativePos[1]
-				},
-				target,
-				[
-					PLACEMENTS.RIGHT,
-					PLACEMENTS.LEFT,
-					PLACEMENTS.TOP,
-					PLACEMENTS.BOTTOM
-				],
-				() => ({
-					width: holder.offsetWidth,
-					height: holder.offsetHeight
-				})
-			);
-
-			let { horizontalOffset } = this.model.getOptions().tooltip.datapoint;
-			if (bestPlacementOption === PLACEMENTS.LEFT) {
-				horizontalOffset *= -1;
-			}
-
-			// Get coordinates to where tooltip should be positioned
-			pos = this.positionService.findPositionAt(
-				{
-					left: mouseRelativePos[0] + horizontalOffset,
-					top: mouseRelativePos[1]
-				},
-				target,
-				bestPlacementOption
-			);
-		}
-
-		this.positionService.setElement(target, pos);
 	}
 }

@@ -6,7 +6,6 @@ export const lineTimeSeriesData = {
 	datasets: [
 		{
 			label: "Dataset 1",
-			fillColors: [colors[0]],
 			data: [
 				{
 					date: new Date(2019, 0, 1),
@@ -32,7 +31,6 @@ export const lineTimeSeriesData = {
 		},
 		{
 			label: "Dataset 2",
-			fillColors: [colors[1]],
 			data: [
 				{
 					date: new Date(2019, 0, 2),
@@ -58,7 +56,6 @@ export const lineTimeSeriesData = {
 		},
 		{
 			label: "Dataset 3",
-			fillColors: [colors[2]],
 			data: [
 				{
 					date: new Date(2019, 0, 1),
@@ -84,7 +81,6 @@ export const lineTimeSeriesData = {
 		},
 		{
 			label: "Dataset 4",
-			fillColors: [colors[3]],
 			data: [
 				{
 					date: new Date(2019, 0, 2),
@@ -130,7 +126,6 @@ export const lineData = {
 	datasets: [
 		{
 			label: "Dataset 1",
-			fillColors: [colors[0]],
 			data: [
 				32100,
 				23500,
@@ -141,7 +136,6 @@ export const lineData = {
 		},
 		{
 			label: "Dataset 2",
-			fillColors: [colors[1]],
 			data: [
 				34200,
 				53200,
@@ -152,7 +146,6 @@ export const lineData = {
 		},
 		{
 			label: "Dataset 3 long name",
-			fillColors: [colors[2]],
 			data: [
 				41200,
 				23400,
@@ -163,7 +156,6 @@ export const lineData = {
 		},
 		{
 			label: "Dataset 4 long name",
-			fillColors: [colors[3]],
 			data: [
 				22000,
 				1200,
@@ -174,7 +166,6 @@ export const lineData = {
 		},
 		{
 			label: "Dataset 5 long name",
-			fillColors: [colors[4]],
 			data: [
 				2412,
 				30000,
@@ -185,7 +176,6 @@ export const lineData = {
 		},
 		{
 			label: "Dataset 6 long name",
-			fillColors: [colors[5]],
 			data: [
 				0,
 				20000,
@@ -232,7 +222,6 @@ export const scatterData = {
 	datasets: [
 		{
 			label: "Dataset 1",
-			fillColors: [colors[0]],
 			data: [
 				32100,
 				23500,
@@ -243,7 +232,6 @@ export const scatterData = {
 		},
 		{
 			label: "Dataset 2",
-			fillColors: [colors[1]],
 			data: [
 				34200,
 				53200,
@@ -254,7 +242,6 @@ export const scatterData = {
 		},
 		{
 			label: "Dataset 3 long name",
-			fillColors: [colors[2]],
 			data: [
 				41200,
 				23400,
@@ -265,7 +252,6 @@ export const scatterData = {
 		},
 		{
 			label: "Dataset 4 long name",
-			fillColors: [colors[3]],
 			data: [
 				22000,
 				1200,
@@ -276,7 +262,6 @@ export const scatterData = {
 		},
 		{
 			label: "Dataset 5 long name",
-			fillColors: [colors[4]],
 			data: [
 				2412,
 				30000,
@@ -287,7 +272,6 @@ export const scatterData = {
 		},
 		{
 			label: "Dataset 6 long name",
-			fillColors: [colors[5]],
 			data: [
 				0,
 				20000,

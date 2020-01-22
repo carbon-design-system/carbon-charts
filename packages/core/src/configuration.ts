@@ -34,6 +34,7 @@ import {
 export const legend: LegendOptions = {
 	position: LegendPositions.BOTTOM,
 	clickable: true,
+	enabled: true,
 	items: {
 		status: {
 			ACTIVE: 1,
@@ -69,6 +70,10 @@ export const baseTooltip: TooltipOptions = {
 		horizontalOffset: 10,
 		enabled: true,
 	},
+	title: {
+		verticalOffset: .75,
+		width: .4
+	}
 };
 
 export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip, {
@@ -89,10 +94,10 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartToolt
 
 // We setup no axes by default, the TwoDimensionalAxes component
 // Will setup axes options based on what user provides
-export const axes: AxesOptions = { };
+const axes: AxesOptions = { };
 
-export const timeScale: TimeScaleOptions = {
-	addSpaceOnEdges: true
+const timeScale: TimeScaleOptions = {
+	addSpaceOnEdges: 1,
 };
 
 /**
@@ -102,7 +107,6 @@ const chart: BaseChartOptions = {
 	width: "100%",
 	height: "100%",
 	resizable: true,
-	theme: ChartTheme.DEFAULT,
 	tooltip: baseTooltip,
 	legend,
 	style: {
@@ -128,9 +132,9 @@ const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 		maxWidth: 16
 	},
 	timeScale: Tools.merge(timeScale, {
-		addSpaceOnEdges: true
+		addSpaceOnEdges: 1
 	} as TimeScaleOptions),
-	tooltip: barChartTooltip
+	tooltip: barChartTooltip,
 } as BarChartOptions);
 
 /**
@@ -208,6 +212,9 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 			offsetY: 12,
 			horizontalLineLength: 8,
 			textMargin: 2
+		},
+		labels: {
+			formatter: null
 		}
 	}
 } as PieChartOptions);
@@ -220,7 +227,8 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 		center: {
 			numberFontSize: radius => Math.min((radius / 100) * 24, 24) + "px",
 			titleFontSize: radius => Math.min((radius / 100) * 15, 15) + "px",
-			titleYPosition: radius => Math.min((radius / 80) * 20, 20)
+			titleYPosition: radius => Math.min((radius / 80) * 20, 20),
+			numberFormatter: number => Math.floor(number).toLocaleString()
 		}
 	}
 } as DonutChartOptions);
@@ -266,5 +274,18 @@ export const transitions = {
 	},
 	graph_element_mouseout_fill_update: {
 		duration: 100
+	}
+};
+
+export const axis = {
+	ticks: {
+		number: 7,
+		rotateIfSmallerThan: 30
+	}
+};
+
+export const spacers = {
+	default: {
+		size: 24
 	}
 };

@@ -1,13 +1,13 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "0.17.0",
+	"version": "0.28.0",
 	"description": "Carbon charting components for React",
 	"main": "./bundle.js",
 	"scripts": {
 		"start": "yarn run storybook",
 		"build": "bash build.sh",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets",
-		"demo:build": "build-storybook -o demo/bundle",
+		"demo:build": "build-storybook -o demo/bundle --quiet",
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"repository": {
@@ -44,13 +44,14 @@
 	},
 	"homepage": "https://github.com/IBM/carbon-charts#readme",
 	"dependencies": {
-		"@carbon/charts": "^0.17.0"
+		"@carbon/charts": "^0.28.0"
 	},
 	"peerDependencies": {
 		"react": "^16.6.3",
 		"react-dom": "^16.6.3"
 	},
 	"devDependencies": {
+		"@storybook/addon-knobs": "5.0.11",
 		"@storybook/addon-options": "5.0.11",
 		"@storybook/react": "5.0.11",
 		"@storybook/storybook-deployer": "2.8.1",

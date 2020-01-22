@@ -1,6 +1,6 @@
 {
   "name": "@carbon/charts",
-  "version": "0.17.0",
+  "version": "0.28.0",
   "description": "Carbon charting components",
   "main": "./bundle.js",
   "module": "./index.js",
@@ -47,11 +47,12 @@
     "@carbon/utils-position": "1.1.1",
     "babel-polyfill": "6.26.0",
     "carbon-components": "10.5.0",
+    "date-fns": "2.8.1",
     "lodash-es": "4.17.15",
     "resize-observer-polyfill": "1.5.0"
   },
   "peerDependencies": {
-    "d3": ">=5.0.0 <=5.9.2"
+    "d3": ">=5.0.0 <=5.14.2"
   },
   "devDependencies": {
     "@carbon/colors": "10.4.0",
@@ -67,7 +68,7 @@
     "babel-polyfill": "6.26.0",
     "copy-webpack-plugin": "4.5.2",
     "css-loader": "0.28.7",
-    "d3": "5.9.2",
+    "d3": "5.14.2",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
     "html-loader": "0.5.1",
@@ -84,18 +85,18 @@
     "mini-css-extract-plugin": "0.4.4",
     "node-sass": "4.10.0",
     "raw-loader": "0.5.1",
-    "rollup": "1.21.4",
+    "rollup": "1.27.10",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-terser": "5.1.2",
-    "rollup-plugin-typescript2": "0.24.2",
+    "rollup-plugin-typescript2": "0.25.3",
     "sass-loader": "8.0.0",
     "style-loader": "0.19.0",
     "ts-loader": "5.1.0",
-    "tslint": "5.8.0",
+    "tslint": "5.20.1",
     "tslint-loader": "3.5.3",
     "typedoc": "0.11.1",
-    "typescript": "3.6.4",
+    "typescript": "3.2.2",
     "url-loader": "0.6.2",
     "webpack": "4.41.0",
     "webpack-cli": "3.3.9",

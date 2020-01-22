@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withKnobs, object } from "@storybook/addon-knobs";
 
 import {
 	AreaChart,
@@ -31,47 +32,53 @@ import {
 import { addWidthAndHeight } from "./commons";
 
 const lineStories = storiesOf("Line", module);
+lineStories.addDecorator(withKnobs);
+
 lineStories.add(lineOptions.title, () => (
 	<LineChart
-		data={lineData}
-		options={addWidthAndHeight(lineOptions)}
+		data={object("Data", lineData)}
+		options={object("Options", addWidthAndHeight(lineOptions))}
 	/>
 ));
 
 lineStories.add(lineTimeSeriesOptions.title, () => (
 	<LineChart
-		data={lineTimeSeriesData}
-		options={addWidthAndHeight(lineTimeSeriesOptions)}
+		data={object("Data", lineTimeSeriesData)}
+		options={object("Options", addWidthAndHeight(lineTimeSeriesOptions))}
 	/>
 ));
 
 const stepStories = storiesOf("Step", module);
+stepStories.addDecorator(withKnobs);
+
 stepStories.add(stepOptions.title, () => (
 	<LineChart
-		data={stepData}
-		options={addWidthAndHeight(stepOptions)}
+		data={object("Data", stepData)}
+		options={object("Options", addWidthAndHeight(stepOptions))}
 	/>
 ));
 
 stepStories.add(stepTimeSeriesOptions.title, () => (
 	<LineChart
-		data={stepTimeSeriesData}
-		options={addWidthAndHeight(stepTimeSeriesOptions)}
+		data={object("Data", stepTimeSeriesData)}
+		options={object("Options", addWidthAndHeight(stepTimeSeriesOptions))}
 	/>
 ));
 
 const scatterStories = storiesOf("Scatter", module);
+scatterStories.addDecorator(withKnobs);
+
 scatterStories.add(scatterOptions.title, () => (
 	<ScatterChart
-		data={scatterData}
-		options={addWidthAndHeight(scatterOptions)}
+		data={object("Data", scatterData)}
+		options={object("Options", addWidthAndHeight(scatterOptions))}
 	/>
 ));
 
 scatterStories.add(scatterTimeSeriesOptions.title, () => (
 	<ScatterChart
-		data={scatterTimeSeriesData}
-		options={addWidthAndHeight(scatterTimeSeriesOptions)}
+		data={object("Data", scatterTimeSeriesData)}
+		options={object("Options", addWidthAndHeight(scatterTimeSeriesOptions))}
 	/>
 ));
 

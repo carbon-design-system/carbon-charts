@@ -33,6 +33,10 @@ export interface LegendOptions {
 	 * the clickability of legend items
 	 */
 	clickable?: boolean;
+	/**
+	 * is the legend visible or not
+	 */
+	enabled?: boolean;
 	items?: {
 		status?: {
 			ACTIVE?: Number;
@@ -52,9 +56,10 @@ export interface TooltipOptions {
 	/**
 	 * a function to format the tooltip values
 	 */
-	formatter?: Function;
+	valueFormatter?: Function;
 	/**
 	 * custom function for returning tooltip HTML
+	 * passed an array or object with the data, and then the default tooltip markup
 	 */
 	customHTML?: Function;
 	/**
@@ -73,6 +78,16 @@ export interface TooltipOptions {
 		 * vertical offset for tooltip placement
 		 */
 		verticalOffset?: number
+	};
+	title?: {
+		/**
+		 * vertical offset for title tooltip placement. < 0 shifts the tooltip above title, > 0 shifts vertically down
+		 */
+		verticalOffset?: number
+		/**
+		 * max width of title tooltip relative to the width of the chart-svg (percentage should be < 1)
+		 */
+		width?: number
 	};
 }
 

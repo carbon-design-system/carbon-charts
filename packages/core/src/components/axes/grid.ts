@@ -1,6 +1,5 @@
 // Internal Imports
 import { Component } from "../component";
-import * as Configuration from "../../configuration";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 
@@ -33,7 +32,7 @@ export class Grid extends Component {
 
 		const height = this.backdrop.attr("height");
 
-		const mainXScale = this.services.axes.getMainXAxis().getScale();
+		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const xGrid = axisBottom(mainXScale)
 			.tickSizeInner(-height)
 			.tickSizeOuter(0);
@@ -53,7 +52,7 @@ export class Grid extends Component {
 		const svg = this.parent;
 		const width = this.backdrop.attr("width");
 
-		const mainYScale = this.services.axes.getMainYAxis().getScale();
+		const mainYScale = this.services.cartesianScales.getMainYScale();
 		const yGrid = axisLeft(mainYScale)
 			.tickSizeInner(-width)
 			.tickSizeOuter(0);
@@ -174,7 +173,7 @@ export class Grid extends Component {
 
 			// use the selected gridline to get the data with associated domain
 			activeGridline.each(function(d) {
-				highlightItems = self.services.axes.getDataFromDomain(d);
+				highlightItems = self.services.cartesianScales.getDataFromDomain(d);
 			});
 
 			self.services.events.dispatchEvent("show-tooltip", {
@@ -194,8 +193,8 @@ export class Grid extends Component {
 	drawBackdrop() {
 		const svg = this.parent;
 
-		const mainXScale = this.services.axes.getMainXAxis().getScale();
-		const mainYScale = this.services.axes.getMainYAxis().getScale();
+		const mainXScale = this.services.cartesianScales.getMainXScale();
+		const mainYScale = this.services.cartesianScales.getMainYScale();
 
 		const [xScaleStart, xScaleEnd] = mainXScale.range();
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
