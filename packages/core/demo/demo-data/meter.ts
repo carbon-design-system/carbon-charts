@@ -1,12 +1,12 @@
 import { colors } from "./colors";
 
 export const meterData = {
-	label: "CPU LONG NAME sdklfjsdlfjdsjgfsdjfiojgpjfapsjfsopdfjopsdfjopsdfm fsdjafjsdfdjsfpoajsfopjsadf",
+	label: "Dataset 1",
 	fillColor: colors[2],
 	data: {
 		min: 0,
 		max: 1500,
-		// peak: 1200,
+		peak: 1200,
 		value: 550,
 		status: [
 			{ range: [0, 1000], status: "success" },

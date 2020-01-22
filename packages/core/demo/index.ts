@@ -75,11 +75,11 @@ const changeDemoData = (chartType: any, chartObj: any) => {
 				min: 0,
 				max: max,
 				peak: randomizeValue(peak, [1000, 1200]), // reassign within the warning/danger status
-				//status: dataset.data.status
+				status: currentData.data.status
 			};
 
 			result.data = datasetNewData;
-			result.label = "Lorem ipsum asdhaskdhkasd";
+			result.label = `new dataset ${Math.random().toFixed(2)}`;
 		} else {
 			result.datasets = result.datasets.map(dataset => {
 				dataset.label = `new dataset ${Math.random().toFixed(2)}`;
