@@ -72,9 +72,6 @@ export class Meter extends Component {
 		const peak = svg.selectAll("line.peak")
 			.data(data);
 
-			const x1 = peak.attr("x1");
-			console.log(x1);
-
 		peak.enter()
 			.append("line")
 			.classed("peak", true)
@@ -82,7 +79,7 @@ export class Meter extends Component {
 			.attr("y1", 0)
 			.attr("y2", options.meter.height)
 			.transition(this.services.transitions.getTransition("peak-line-update", animate))
-			.attr("x1", d => {return xScale(peakValue);})
+			.attr("x1", xScale(peakValue))
 			.attr("x2", xScale(peakValue));
 
 		peak.exit().remove();
