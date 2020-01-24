@@ -26,7 +26,7 @@ L.MapboxGL = L.Layer.extend({
 		if (options.accessToken) {
 			mapboxgl.accessToken = options.accessToken;
 		} else {
-			throw new Error('You should provide a Mapbox GL access token as a token option.');
+			throw new Error("You should provide a Mapbox GL access token as a token option.");
 		}
 
 		// setup throttling the update event when panning
@@ -83,8 +83,8 @@ L.MapboxGL = L.Layer.extend({
 	},
 
 	getBounds: function () {
-		var halfSize = this.getSize().multiplyBy(0.5);
-		var center = this._map.latLngToContainerPoint(this._map.getCenter());
+		const halfSize = this.getSize().multiplyBy(0.5);
+		const center = this._map.latLngToContainerPoint(this._map.getCenter());
 		return L.latLngBounds(
 			this._map.containerPointToLatLng(center.subtract(halfSize)),
 			this._map.containerPointToLatLng(center.add(halfSize))
@@ -96,22 +96,22 @@ L.MapboxGL = L.Layer.extend({
 	},
 
 	_initContainer: function () {
-		var container = this._container = L.DomUtil.create('div', 'leaflet-gl-layer');
+		const container = this._container = L.DomUtil.create("div", "leaflet-gl-layer");
 
-		var size = this.getSize();
-		var offset = this._map.getSize().multiplyBy(this.options.padding);
-		container.style.width = size.x + 'px';
-		container.style.height = size.y + 'px';
+		const size = this.getSize();
+		const offset = this._map.getSize().multiplyBy(this.options.padding);
+		container.style.width = size.x + "px";
+		container.style.height = size.y + "px";
 
-		var topLeft = this._map.containerPointToLayerPoint([0, 0]).subtract(offset);
+		const topLeft = this._map.containerPointToLayerPoint([0, 0]).subtract(offset);
 
 		L.DomUtil.setPosition(container, topLeft);
 	},
 
 	_initGL: function () {
-		var center = this._map.getCenter();
+		const center = this._map.getCenter();
 
-		var options = L.extend({}, this.options, {
+		const options = L.extend({}, this.options, {
 			container: this._container,
 			center: [center.lng, center.lat],
 			zoom: this._map.getZoom() - 1,
@@ -131,11 +131,11 @@ L.MapboxGL = L.Layer.extend({
 		}
 
 		// treat child <canvas> element like L.ImageOverlay
-		var canvas = this._glMap._actualCanvas;
-		L.DomUtil.addClass(canvas, 'leaflet-image-layer');
-		L.DomUtil.addClass(canvas, 'leaflet-zoom-animated');
+		const canvas = this._glMap._actualCanvas;
+		L.DomUtil.addClass(canvas, "leaflet-image-layer");
+		L.DomUtil.addClass(canvas, "leaflet-zoom-animated");
 		if (this.options.interactive) {
-			L.DomUtil.addClass(canvas, 'leaflet-interactive');
+			L.DomUtil.addClass(canvas, "leaflet-interactive");
 		}
 		if (this.options.className) {
 			L.DomUtil.addClass(canvas, this.options.className);
@@ -150,7 +150,7 @@ L.MapboxGL = L.Layer.extend({
 			return;
 		}
 
-		var size = this.getSize(),
+		const size = this.getSize(),
 			container = this._container,
 			gl = this._glMap,
 			offset = this._map.getSize().multiplyBy(this.options.padding),
@@ -158,18 +158,18 @@ L.MapboxGL = L.Layer.extend({
 
 		L.DomUtil.setPosition(container, topLeft);
 
-		var center = this._map.getCenter();
+		const center = this._map.getCenter();
 
 		// gl.setView([center.lat, center.lng], this._map.getZoom() - 1, 0);
 		// calling setView directly causes sync issues because it uses requestAnimFrame
 
-		var tr = gl.transform;
+		const tr = gl.transform;
 		tr.center = mapboxgl.LngLat.convert([center.lng, center.lat]);
 		tr.zoom = this._map.getZoom() - 1;
 
 		if (gl.transform.width !== size.x || gl.transform.height !== size.y) {
-			container.style.width = size.x + 'px';
-			container.style.height = size.y + 'px';
+			container.style.width = size.x + "px";
+			container.style.height = size.y + "px";
 			if (gl._resize !== null && gl._resize !== undefined) {
 				gl._resize();
 			} else {
@@ -196,16 +196,16 @@ L.MapboxGL = L.Layer.extend({
 	// borrowed from L.ImageOverlay
 	// https://github.com/Leaflet/Leaflet/blob/master/src/layer/ImageOverlay.js#L139-L144
 	_animateZoom: function (e) {
-		var scale = this._map.getZoomScale(e.zoom);
-		var padding = this._map.getSize().multiplyBy(this.options.padding * scale);
-		var viewHalf = this.getSize()._divideBy(2);
+		const scale = this._map.getZoomScale(e.zoom);
+		const padding = this._map.getSize().multiplyBy(this.options.padding * scale);
+		const viewHalf = this.getSize()._divideBy(2);
 		// corrections for padding (scaled), adapted from
 		// https://github.com/Leaflet/Leaflet/blob/master/src/map/Map.js#L1490-L1508
-		var topLeft = this._map.project(e.center, e.zoom)
+		const topLeft = this._map.project(e.center, e.zoom)
 			._subtract(viewHalf)
 			._add(this._map._getMapPanePos()
 				.add(padding))._round();
-		var offset = this._map.project(this._map.getBounds().getNorthWest(), e.zoom)
+		const offset = this._map.project(this._map.getBounds().getNorthWest(), e.zoom)
 			._subtract(topLeft);
 
 		L.DomUtil.setTransform(
@@ -220,7 +220,7 @@ L.MapboxGL = L.Layer.extend({
 	},
 
 	_zoomEnd: function () {
-		var scale = this._map.getZoomScale(this._map.getZoom()),
+		const scale = this._map.getZoomScale(this._map.getZoom()),
 			offset = this._map._latLngToNewLayerPoint(
 				this._map.getBounds().getNorthWest(),
 				this._map.getZoom(),
@@ -237,14 +237,14 @@ L.MapboxGL = L.Layer.extend({
 
 		this._update();
 
-		console.log("position", this._map.getCenter())
+		console.log("position", this._map.getCenter());
 	},
 
 	_transitionEnd: function (e) {
 		L.Util.requestAnimFrame(function () {
-			var zoom = this._map.getZoom();
-			var center = this._map.getCenter();
-			var offset = this._map.latLngToContainerPoint(
+			const zoom = this._map.getZoom();
+			const center = this._map.getCenter();
+			const offset = this._map.latLngToContainerPoint(
 				this._map.getBounds().getNorthWest()
 			);
 
@@ -252,7 +252,7 @@ L.MapboxGL = L.Layer.extend({
 			L.DomUtil.setTransform(this._glMap._actualCanvas, offset, 1);
 
 			// enable panning once the gl map is ready again
-			this._glMap.once('moveend', L.Util.bind(function () {
+			this._glMap.once("moveend", L.Util.bind(function () {
 				this._zoomEnd();
 			}, this));
 
@@ -270,9 +270,9 @@ L.mapboxGL = function (options) {
 };
 
 import CLUSTER from "leaflet.markercluster";
-//An extract of address points from the LINZ bulk extract: http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde
-//Should be this data set: http://data.linz.govt.nz/#/layer/779-nz-street-address-electoral/
-var addressPoints = [
+// An extract of address points from the LINZ bulk extract: http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde
+// Should be this data set: http://data.linz.govt.nz/#/layer/779-nz-street-address-electoral/
+const addressPoints = [
 	[-37.8210922667, 175.2209316333, "2"],
 	[-37.8210819833, 175.2213903167, "3"],
 	[-37.8210881833, 175.2215004833, "3A"],
@@ -667,21 +667,21 @@ export class Map extends Component {
 	type = "title";
 
 	render() {
-		var map = L.map('classy-tiled-map-chart-holder', {maxZoom: 17})
+		const map = L.map("classy-tiled-map-chart-holder", {maxZoom: 17})
 			.setView([ -37.80354511753134, 175.2635192871094 ], 13);
 
-		var gl = L.mapboxGL({
-			accessToken: 'pk.eyJ1IjoiaWxpYWRtIiwiYSI6ImNrNGJwM2wxdTBmdmgzZmp6Z2ppcmxnaWYifQ.-nuo76OMryoLcs2dPbGfUQ',
-			style: 'mapbox://styles/mapbox/streets-v9',
+		const gl = L.mapboxGL({
+			accessToken: "pk.eyJ1IjoiaWxpYWRtIiwiYSI6ImNrNGJwM2wxdTBmdmgzZmp6Z2ppcmxnaWYifQ.-nuo76OMryoLcs2dPbGfUQ",
+			style: "mapbox://styles/mapbox/streets-v9",
 			attribution: "<a href='https://mapbox.com' target='_blank'>Mapbox</a>"
 		}).addTo(map);
 
-		var markers = L.markerClusterGroup();
+		const markers = L.markerClusterGroup();
 
-		for (var i = 0; i < addressPoints.length; i++) {
-			var a = addressPoints[i];
-			var title = a[2];
-			var marker = L.marker(new L.LatLng(a[0], a[1]), { title: title });
+		for (let i = 0; i < addressPoints.length; i++) {
+			const a = addressPoints[i];
+			const title = a[2];
+			const marker = L.marker(new L.LatLng(a[0], a[1]), { title: title });
 			marker.bindPopup(title);
 			markers.addLayer(marker);
 		}
@@ -691,23 +691,23 @@ export class Map extends Component {
 		/*
 		 *
 		 * MAPBOX GL
-		 * 
+		 *
 		 */
-		// mapboxgl.accessToken = 'pk.eyJ1IjoiaWxpYWRtIiwiYSI6ImNrNGJwM2wxdTBmdmgzZmp6Z2ppcmxnaWYifQ.-nuo76OMryoLcs2dPbGfUQ';
+		// mapboxgl.accessToken = "pk.eyJ1IjoiaWxpYWRtIiwiYSI6ImNrNGJwM2wxdTBmdmgzZmp6Z2ppcmxnaWYifQ.-nuo76OMryoLcs2dPbGfUQ";
 		// const map = new mapboxgl.Map({
-		// 	container: 'classy-tiled-map-chart-holder',
-		// 	style: 'mapbox://styles/iliadm/ck4bsqmax0sms1cpcr7zucb8x'
+		// 	container: "classy-tiled-map-chart-holder",
+		// 	style: "mapbox://styles/iliadm/ck4bsqmax0sms1cpcr7zucb8x"
 		// });
 
 		/*
 		 *
 		 * TANGRAM
-		 * 
+		 *
 		 */
-		// var scene_url = 'scene.yaml';
+		// const scene_url = "scene.yaml";
 
 		// // Create Tangram as a Leaflet layer
-		// var layer = Tangram.leafletLayer({
+		// const layer = Tangram.leafletLayer({
 		// 	scene: scene_url,
 		// 	// events: {
 		// 	// 	hover: onHover,     // hover event (defined below)
@@ -716,12 +716,11 @@ export class Map extends Component {
 		// 	// debug: {
 		// 	//     layer_stats: true // enable to collect detailed layer stats, access w/`scene.debug.layerStats()`
 		// 	// },
-		// 	logLevel: 'debug',
-		// 	attribution: '<a href="https://github.com/tangrams/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://www.carbondesignsystem.com/" target="_blank">Carbon</a>'
+		// 	logLevel: "debug",
 		// });
 
 		// // Create a Leaflet map
-		// var map = L.map('classy-tiled-map-chart-holder', {
+		// const map = L.map("classy-tiled-map-chart-holder", {
 		// 	maxZoom: 22,
 		// 	zoomSnap: 0,
 		// 	keyboard: false
@@ -734,8 +733,8 @@ export class Map extends Component {
 		// 	.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
 
 		// L.circle([51.508, -0.11], 500, {
-		// 	color: 'red',
-		// 	fillColor: '#f03',
+		// 	color: "red",
+		// 	fillColor: "#f03",
 		// 	fillOpacity: 0.5
 		// }).addTo(map).bindPopup("I am a circle.");
 

@@ -42,6 +42,6 @@ export class TiledMap extends Chart {
 	getComponents() {
 		return [
 			new Map(this.model, this.services)
-		]
+		];
 	}
 }

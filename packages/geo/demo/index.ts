@@ -56,7 +56,7 @@ chartTypes.forEach(type => {
 
 		// Add `height` to the chart options
 		// type.options.height = "500px";
-console.log("type.data", type.data)
+
 		// Initialize chart
 		charts[type.id] = new classToInitialize(
 			holder,
