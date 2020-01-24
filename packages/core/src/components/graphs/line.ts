@@ -42,8 +42,8 @@ export class Line extends Component {
 
 		// D3 line generator function
 		this.lineGenerator = line()
-			.x((d, i) => this.services.axes.getXValue(d, i))
-			.y((d, i) => this.services.axes.getYValue(d, i))
+			.x((d, i) => this.services.cartesianScales.getDomainValue(d, i))
+			.y((d, i) => this.services.cartesianScales.getRangeValue(d, i))
 			.curve(this.services.curves.getD3Curve());
 
 		// Update the bound data on line groups

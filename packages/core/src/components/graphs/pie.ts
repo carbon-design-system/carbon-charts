@@ -2,7 +2,12 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import { CalloutDirections, Roles, TooltipTypes } from "../../interfaces";
+import {
+	CalloutDirections,
+	Roles,
+	TooltipTypes,
+	Events
+} from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -306,7 +311,14 @@ export class Pie extends Component {
 	addEventListeners() {
 		const self = this;
 		this.parent.selectAll("path.slice")
-			.on("mousemove", function() {
+			.on("mouseover", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mousemove", function(datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement.classed("hovered", true)
@@ -314,7 +326,10 @@ export class Pie extends Component {
 					.attr("d", self.hoverArc);
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent("pie-slice-mouseover", hoveredElement);
+				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEMOVE, {
+					element: hoveredElement,
+					datum
+				});
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
@@ -322,19 +337,28 @@ export class Pie extends Component {
 					type: TooltipTypes.DATAPOINT
 				});
 			})
-			.on("mouseout", function() {
+			.on("click", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Pie.SLICE_CLICK, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false)
 					.transition(self.services.transitions.getTransition("pie_slice_mouseover"))
 					.attr("d", self.arc);
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent("pie-slice-mouseout", hoveredElement);
+				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOUT, {
+					element: hoveredElement,
+					datum
+				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
-			})
-			.on("click", d => self.services.events.dispatchEvent("pie-slice-click", d));
+			});
 	}
 
 	// Helper functions

@@ -34,8 +34,7 @@ const changeDemoData = (chartType: any, chartObj: any) => {
 	// Function to be used to randomize a value
 	const randomizeValue = datum => {
 		const currentVal = datum.value !== undefined ? datum.value : datum;
-		const firstTry = Math.max(0.85 * currentVal, currentVal * Math.random() * (Math.random() * 5));
-		let result = currentVal > 0 ? Math.min(3 * currentVal, firstTry) : Math.max(3 * currentVal, firstTry);
+		let result = Math.random() > 0.5 ? 0.95 * currentVal : 1.05 * currentVal;
 
 		if (Math.random() > 0.5
 			|| chartType.indexOf("stacked") !== -1
@@ -167,14 +166,19 @@ chartTypes.forEach(type => {
 				classToInitialize = NetworkChart;
 				break;
 			case "simple-bar":
+			case "simple-horizontal-bar":
 			case "simple-bar-time-series":
+			case "simple-horizontal-bar-time-series":
 				classToInitialize = SimpleBarChart;
 				break;
 			case "grouped-bar":
+			case "grouped-horizontal-bar":
 				classToInitialize = GroupedBarChart;
 				break;
 			case "stacked-bar":
+			case "stacked-horizontal-bar":
 			case "stacked-bar-time-series":
+			case "stacked-horizontal-bar-time-series":
 				classToInitialize = StackedBarChart;
 				break;
 			case "scatter":
