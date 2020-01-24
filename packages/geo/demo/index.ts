@@ -3,6 +3,7 @@ import {
 } from "../src/index";
 
 // Styles
+import "../src/styles/index.scss";
 import "./index.scss";
 
 // Functionality for demo options toolbar
@@ -32,7 +33,7 @@ const createChartContainer = chartType => {
 
 	// Add update data button
 	const updateDataButton = document.createElement("button");
-	updateDataButton.className = "bx--btn bx--btn--primary";
+	updateDataButton.className = "bx--btn bx--btn--primary bx--btn--disabled";
 	updateDataButton.id = `change-data-${chartType.id}`;
 	updateDataButton.innerHTML = "Update data";
 

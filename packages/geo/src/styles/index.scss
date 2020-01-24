@@ -1,0 +1,16 @@
+div.marker-cluster {
+	background: #8857d0;
+    border-radius: 50%;
+	color: #fff;
+	
+	&:hover {
+		background: #7c4bc3;
+	}
+}
+
+div.marker-cluster span {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

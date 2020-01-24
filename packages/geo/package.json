@@ -47,9 +47,11 @@
     "@carbon/utils-position": "1.1.1",
     "babel-polyfill": "6.26.0",
     "carbon-components": "10.5.0",
-    "date-fns": "2.8.1",
+    "leaflet": "^1.6.0",
+    "leaflet.markercluster": "^1.4.1",
     "lodash-es": "4.17.15",
     "mapbox-gl": "^1.6.1",
+    "mapbox-gl-leaflet": "^0.0.11",
     "resize-observer-polyfill": "1.5.0"
   },
   "peerDependencies": {

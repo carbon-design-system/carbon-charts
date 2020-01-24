@@ -26,8 +26,6 @@ export class TiledMap extends Chart {
 	constructor(holder: any, chartConfigs: any) {
 		super(holder, chartConfigs);
 
-		console.log("YOOOOOO")
-
 		// // Merge the default options for this chart
 		// // With the user provided options
 		// this.model.setOptions(
@@ -42,8 +40,6 @@ export class TiledMap extends Chart {
 	}
 
 	getComponents() {
-		console.log("GETI COMPONENTS")
-
 		return [
 			new Map(this.model, this.services)
 		]
