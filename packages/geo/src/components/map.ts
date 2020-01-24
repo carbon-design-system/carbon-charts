@@ -7,6 +7,8 @@ import L from "leaflet";
 
 window["L"] = L;
 
+import "leaflet.markercluster";
+
 // import * as Hello from "mapbox-gl-leaflet";
 
 L.MapboxGL = L.Layer.extend({
@@ -269,7 +271,6 @@ L.mapboxGL = function (options) {
 	return new L.MapboxGL(options);
 };
 
-import CLUSTER from "leaflet.markercluster";
 // An extract of address points from the LINZ bulk extract: http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde
 // Should be this data set: http://data.linz.govt.nz/#/layer/779-nz-street-address-electoral/
 const addressPoints = [
