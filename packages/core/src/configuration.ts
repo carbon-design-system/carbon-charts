@@ -19,7 +19,9 @@ import {
 	LegendOptions,
 	ChartTheme,
 	LegendPositions,
-	StackedBarOptions
+	StackedBarOptions,
+	// Advanced Charts
+	NetworkChartOptions,
 } from "./interfaces/index";
 
 /*
