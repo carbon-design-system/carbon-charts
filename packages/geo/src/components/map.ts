@@ -666,6 +666,7 @@ const addressPoints = [
 
 export class Map extends Component {
 	type = "title";
+	activeMarker = null;
 
 	render() {
 		const map = L.map("classy-tiled-map-chart-holder", {maxZoom: 17})
@@ -682,12 +683,36 @@ export class Map extends Component {
 		for (let i = 0; i < addressPoints.length; i++) {
 			const a = addressPoints[i];
 			const title = a[2];
-			const marker = L.marker(new L.LatLng(a[0], a[1]), { title: title });
-			marker.bindPopup(title);
+
+			const markerIcon = L.divIcon({
+				className: "marker"
+			});
+			const marker = L.marker(
+				new L.LatLng(a[0], a[1]),
+				{
+					title: title,
+					icon: markerIcon
+				}
+			);
+
+			const self = this;
+			marker.bindPopup(title)
+				.on("click", function(e) {
+					const markerDOMElement = e.originalEvent.target;
+					markerDOMElement.classList.add("active");
+
+					self.activeMarker = markerDOMElement;
+				});
 			markers.addLayer(marker);
 		}
 
 		map.addLayer(markers);
+
+		map.on("popupclose", (e) => {
+			if (this.activeMarker) {
+				this.activeMarker.classList.remove("active");
+			}
+		});
 
 		/*
 		 *
