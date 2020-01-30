@@ -16,8 +16,6 @@
 		"commit": "git-cz",
 		"test": "lerna run test",
 		"lint": "lerna run lint",
-		"contributors:add": "all-contributors add",
-		"contributors:generate": "all-contributors generate",
 		"build-all": "bash scripts/build-packages-and-demos.sh",
 		"build-all-demos": "bash scripts/build-demos.sh",
 		"deploy": "bash scripts/deploy.sh"
@@ -36,7 +34,6 @@
 		"branch": "master"
 	},
 	"devDependencies": {
-		"all-contributors-cli": "5.4.1",
 		"commitizen": "2.10.1",
 		"cz-conventional-changelog": "2.1.0",
 		"husky": "1.1.2",
