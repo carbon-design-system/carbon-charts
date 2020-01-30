@@ -5,8 +5,9 @@ module.exports = ({ config }) => {
 			{
 				loader: "ts-loader?configFile=../../../core/tsconfig-demo.json"
 			}
-		]
+		],
 	});
+
 	config.resolve.extensions.push(".ts");
 	return config;
 };
