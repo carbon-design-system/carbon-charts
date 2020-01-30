@@ -82,7 +82,7 @@
 		"karma-safari-launcher": "1.0.0",
 		"karma-webpack": "3.0.5",
 		"lerna": "3.13.4",
-		"mini-css-extract-plugin": "0.4.4",
+		"mini-css-extract-plugin": "0.9.0",
 		"raw-loader": "0.5.1",
 		"rollup": "1.27.10",
 		"rollup-plugin-commonjs": "10.1.0",
