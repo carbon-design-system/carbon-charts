@@ -1,5 +1,3 @@
-import { colors } from "./colors";
-
 // Demo turkish locale for simple bar time-series
 const turkishLocale = require("d3-time-format/locale/tr-TR.json");
 
