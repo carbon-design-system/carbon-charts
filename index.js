@@ -696,116 +696,89 @@ var stackedHorizontalBarTimeSeriesData = stackedBarTimeSeriesData;
 
 /***/ }),
 
-/***/ "./demo/demo-data/colors.ts":
-/*!**********************************!*\
-  !*** ./demo/demo-data/colors.ts ***!
-  \**********************************/
-/*! exports provided: colors */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colors", function() { return colors; });
-/* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../src/index */ "./src/index.ts");
-
-var urlParams = new URLSearchParams(window.location.search);
-// Grab "theme" param from query string
-var themeToUse = _src_index__WEBPACK_IMPORTED_MODULE_0__["colorPalettes"].DEFAULT;
-if (urlParams.has("theme") && _src_index__WEBPACK_IMPORTED_MODULE_0__["colorPalettes"][urlParams.get("theme")]) {
-    themeToUse = _src_index__WEBPACK_IMPORTED_MODULE_0__["colorPalettes"][urlParams.get("theme")];
-}
-var colors = themeToUse;
-
-
-/***/ }),
-
 /***/ "./demo/demo-data/index.ts":
 /*!*********************************!*\
   !*** ./demo/demo-data/index.ts ***!
   \*********************************/
-/*! exports provided: colors, groupedBarData, groupedBarOptions, groupedHorizontalBarData, groupedHorizontalBarOptions, simpleBarData, simpleBarOptions, simpleHorizontalBarData, simpleHorizontalBarOptions, simpleBarTimeSeriesData, simpleBarTimeSeriesOptions, simpleHorizontalBarTimeSeriesOptions, simpleHorizontalBarTimeSeriesData, stackedBarData, stackedBarOptions, stackedHorizontalBarData, stackedHorizontalBarOptions, stackedBarTimeSeriesData, stackedBarTimeSeriesOptions, stackedHorizontalBarTimeSeriesOptions, stackedHorizontalBarTimeSeriesData, pieData, pieOptions, donutData, donutOptions, lineTimeSeriesData, lineTimeSeriesOptions, lineData, lineOptions, stepOptions, stepData, stepTimeSeriesOptions, stepTimeSeriesData, scatterData, scatterOptions, scatterTimeSeriesData, scatterTimeSeriesOptions */
+/*! exports provided: groupedBarData, groupedBarOptions, groupedHorizontalBarData, groupedHorizontalBarOptions, simpleBarData, simpleBarOptions, simpleHorizontalBarData, simpleHorizontalBarOptions, simpleBarTimeSeriesData, simpleBarTimeSeriesOptions, simpleHorizontalBarTimeSeriesOptions, simpleHorizontalBarTimeSeriesData, stackedBarData, stackedBarOptions, stackedHorizontalBarData, stackedHorizontalBarOptions, stackedBarTimeSeriesData, stackedBarTimeSeriesOptions, stackedHorizontalBarTimeSeriesOptions, stackedHorizontalBarTimeSeriesData, pieData, pieOptions, donutData, donutOptions, lineTimeSeriesData, lineTimeSeriesOptions, lineData, lineOptions, stepOptions, stepData, stepTimeSeriesOptions, stepTimeSeriesData, scatterData, scatterOptions, scatterTimeSeriesData, scatterTimeSeriesOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./demo/demo-data/colors.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "colors", function() { return _colors__WEBPACK_IMPORTED_MODULE_0__["colors"]; });
+/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bar */ "./demo/demo-data/bar.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "groupedBarData", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["groupedBarData"]; });
 
-/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bar */ "./demo/demo-data/bar.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "groupedBarData", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["groupedBarData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "groupedBarOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["groupedBarOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "groupedBarOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["groupedBarOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "groupedHorizontalBarData", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["groupedHorizontalBarData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "groupedHorizontalBarData", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["groupedHorizontalBarData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "groupedHorizontalBarOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["groupedHorizontalBarOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "groupedHorizontalBarOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["groupedHorizontalBarOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleBarData", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["simpleBarData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleBarData", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["simpleBarData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleBarOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["simpleBarOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleBarOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["simpleBarOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleHorizontalBarData", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["simpleHorizontalBarData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleHorizontalBarData", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["simpleHorizontalBarData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleHorizontalBarOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["simpleHorizontalBarOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleHorizontalBarOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["simpleHorizontalBarOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleBarTimeSeriesData", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["simpleBarTimeSeriesData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleBarTimeSeriesData", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["simpleBarTimeSeriesData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleBarTimeSeriesOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["simpleBarTimeSeriesOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleBarTimeSeriesOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["simpleBarTimeSeriesOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleHorizontalBarTimeSeriesOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["simpleHorizontalBarTimeSeriesOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleHorizontalBarTimeSeriesOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["simpleHorizontalBarTimeSeriesOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleHorizontalBarTimeSeriesData", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["simpleHorizontalBarTimeSeriesData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "simpleHorizontalBarTimeSeriesData", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["simpleHorizontalBarTimeSeriesData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedBarData", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["stackedBarData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedBarData", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["stackedBarData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedBarOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["stackedBarOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedBarOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["stackedBarOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedHorizontalBarData", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["stackedHorizontalBarData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedHorizontalBarData", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["stackedHorizontalBarData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedHorizontalBarOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["stackedHorizontalBarOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedHorizontalBarOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["stackedHorizontalBarOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedBarTimeSeriesData", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["stackedBarTimeSeriesData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedBarTimeSeriesData", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["stackedBarTimeSeriesData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedBarTimeSeriesOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["stackedBarTimeSeriesOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedBarTimeSeriesOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["stackedBarTimeSeriesOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedHorizontalBarTimeSeriesOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["stackedHorizontalBarTimeSeriesOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedHorizontalBarTimeSeriesOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["stackedHorizontalBarTimeSeriesOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedHorizontalBarTimeSeriesData", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["stackedHorizontalBarTimeSeriesData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedHorizontalBarTimeSeriesData", function() { return _bar__WEBPACK_IMPORTED_MODULE_1__["stackedHorizontalBarTimeSeriesData"]; });
+/* harmony import */ var _pie_donut__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pie-donut */ "./demo/demo-data/pie-donut.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "pieData", function() { return _pie_donut__WEBPACK_IMPORTED_MODULE_1__["pieData"]; });
 
-/* harmony import */ var _pie_donut__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pie-donut */ "./demo/demo-data/pie-donut.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "pieData", function() { return _pie_donut__WEBPACK_IMPORTED_MODULE_2__["pieData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "pieOptions", function() { return _pie_donut__WEBPACK_IMPORTED_MODULE_1__["pieOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "pieOptions", function() { return _pie_donut__WEBPACK_IMPORTED_MODULE_2__["pieOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "donutData", function() { return _pie_donut__WEBPACK_IMPORTED_MODULE_1__["donutData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "donutData", function() { return _pie_donut__WEBPACK_IMPORTED_MODULE_2__["donutData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "donutOptions", function() { return _pie_donut__WEBPACK_IMPORTED_MODULE_1__["donutOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "donutOptions", function() { return _pie_donut__WEBPACK_IMPORTED_MODULE_2__["donutOptions"]; });
+/* harmony import */ var _line__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./line */ "./demo/demo-data/line.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesData", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["lineTimeSeriesData"]; });
 
-/* harmony import */ var _line__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./line */ "./demo/demo-data/line.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesData", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineTimeSeriesData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["lineTimeSeriesOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineTimeSeriesOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineData", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["lineData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineData", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["lineOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["stepOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["stepOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepData", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["stepData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepData", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["stepData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepTimeSeriesOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["stepTimeSeriesOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepTimeSeriesOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["stepTimeSeriesOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepTimeSeriesData", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["stepTimeSeriesData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepTimeSeriesData", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["stepTimeSeriesData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterData", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["scatterData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterData", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["scatterData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["scatterOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["scatterOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesData", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["scatterTimeSeriesData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesData", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["scatterTimeSeriesData"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["scatterTimeSeriesOptions"]; });
-
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["scatterTimeSeriesOptions"]; });
 
 
 
