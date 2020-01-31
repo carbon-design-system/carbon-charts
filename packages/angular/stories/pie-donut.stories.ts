@@ -1,4 +1,5 @@
 import { storiesOf } from "@storybook/angular";
+import { withKnobs, object } from "@storybook/addon-knobs";
 
 import { ChartsModule } from "../src/charts.module";
 
@@ -11,7 +12,8 @@ import {
 } from "../../core/demo/demo-data/index";
 import { addWidthAndHeight } from "./commons";
 
-const pieStories = storiesOf("Pie", module);
+const pieStories = storiesOf("Pie", module).addDecorator(withKnobs);
+
 pieStories.add(pieOptions.title, () => ({
 	template: `
 		<ibm-pie-chart
@@ -24,12 +26,13 @@ pieStories.add(pieOptions.title, () => ({
 		imports: [ChartsModule]
 	},
 	props: {
-		data: pieData,
-		options: addWidthAndHeight(pieOptions)
+		data: object("Data", pieData),
+		options: object("Options", addWidthAndHeight(pieOptions))
 	}
 }));
 
-const donutStories = storiesOf("Donut", module);
+const donutStories = storiesOf("Donut", module).addDecorator(withKnobs);
+
 donutStories.add(donutOptions.title, () => ({
 	template: `
 		<ibm-donut-chart
@@ -42,7 +45,7 @@ donutStories.add(donutOptions.title, () => ({
 		imports: [ChartsModule]
 	},
 	props: {
-		data: donutData,
-		options: addWidthAndHeight(donutOptions)
+		data: object("Data", donutData),
+		options: object("Options", addWidthAndHeight(donutOptions))
 	}
 }));

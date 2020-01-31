@@ -1,25 +1,42 @@
 // Internal Imports
 import { Scatter } from "./scatter";
+import { DOMUtils } from "../../services";
 
 // D3 Imports
 import { Selection } from "d3-selection";
+import { extent } from "d3-array";
+import { scaleLinear } from "d3-scale";
 
 export class Bubble extends Scatter {
 	type = "bubble";
+
+	getRadiusScale(selection: Selection<any, any, any, any>) {
+		const data = selection.data();
+		const allRadii = data.map(d => d.radius)
+			.filter(d => d);
+
+		const options = this.model.getOptions();
+		const chartSize = DOMUtils.getSVGElementSize(this.services.domUtils.getMainSVG(), { useAttr: true });
+
+		return scaleLinear().domain(extent(allRadii))
+			.range(options.bubble.radiusRange(chartSize, data));
+	}
 
 	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
 		// Chart options mixed with the internal configurations
 		const options = this.model.getOptions();
 		const { filled } = options.points;
 
+		const radiusScale = this.getRadiusScale(selection);
+
 		selection.raise()
 			.classed("dot", true)
 			.classed("filled", filled)
 			.classed("unfilled", !filled)
-			.attr("cx", (d, i) => this.services.axes.getXValue(d, i))
+			.attr("cx", (d, i) => this.services.cartesianScales.getDomainValue(d, i))
 			.transition(this.services.transitions.getTransition("bubble-update-enter", animate))
-			.attr("cy", (d, i) => this.services.axes.getYValue(d, i))
-			.attr("r", d => d.radius)
+			.attr("cy", (d, i) => this.services.cartesianScales.getRangeValue(d, i))
+			.attr("r", d => radiusScale(d.radius))
 			.attr("fill", d => {
 				if (filled) {
 					return this.model.getFillScale()[d.datasetLabel](d.label) as any;

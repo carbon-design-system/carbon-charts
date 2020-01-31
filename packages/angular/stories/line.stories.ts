@@ -1,4 +1,5 @@
 import { storiesOf } from "@storybook/angular";
+import { withKnobs, object } from "@storybook/addon-knobs";
 
 import { ChartsModule } from "../src/charts.module";
 
@@ -20,15 +21,16 @@ const template = `
 </ibm-line-chart>
 `;
 
-const stories = storiesOf("Line", module);
+const stories = storiesOf("Line", module).addDecorator(withKnobs);
+
 stories.add(lineOptions.title, () => ({
 	template,
 	moduleMetadata: {
 		imports: [ChartsModule]
 	},
 	props: {
-		data: lineData,
-		options: addWidthAndHeight(lineOptions)
+		data: object("Data", lineData),
+		options: object("Options", addWidthAndHeight(lineOptions))
 	}
 }));
 
@@ -38,7 +40,7 @@ stories.add(lineTimeSeriesOptions.title, () => ({
 		imports: [ChartsModule]
 	},
 	props: {
-		data: lineTimeSeriesData,
-		options: addWidthAndHeight(lineTimeSeriesOptions)
+		data: object("Data", lineTimeSeriesData),
+		options: object("Options", addWidthAndHeight(lineTimeSeriesOptions))
 	}
 }));

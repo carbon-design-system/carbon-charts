@@ -1,4 +1,5 @@
 .#{$prefix}--chart-holder {
-	background-color: $ui-background;
 	position: relative;
+	display: block;
+	background-color: $ui-background;
 }

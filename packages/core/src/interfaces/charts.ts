@@ -1,15 +1,10 @@
 import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
 import { AxisTooltipOptions, BarTooltipOptions, BarOptions, StackedBarOptions } from "./components";
-import { ChartTheme } from "./enums";
 
 /**
  * Base chart options common to any chart
  */
 export interface BaseChartOptions {
-	/**
-	 * boolean to enable accessibility mode
-	 */
-	accessibility?: boolean;
 	/**
 	 * boolean to disable animations (enabled by default)
 	 */
@@ -21,15 +16,11 @@ export interface BaseChartOptions {
 	/**
 	 * Optionally specify a width for the chart
 	 */
-	width?: number | string;
+	width?: string;
 	/**
 	 * Optionally specify a height for the chart
 	 */
-	height?: number | string;
-	/**
-	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
-	 */
-	theme?: ChartTheme;
+	height?: string;
 	/**
 	 * tooltip configuration
 	 */
@@ -100,7 +91,14 @@ export interface ScatterChartOptions extends AxisChartOptions {
 /**
  * options specific to bubble charts
  */
-export type BubbleChartOptions = ScatterChartOptions;
+export interface BubbleChartOptions extends ScatterChartOptions {
+	/**
+	 * options for the individual bubbles
+	 */
+	bubble?: {
+		radiusRange?: Function;
+	}
+}
 
 /**
  * options specific to line charts
@@ -134,6 +132,9 @@ export interface PieChartOptions extends BaseChartOptions {
 			offsetY?: number;
 			horizontalLineLength?: number;
 			textMargin?: number;
+		},
+		labels?: {
+			formatter?: Function;
 		}
 	};
 }
@@ -149,6 +150,7 @@ export interface DonutChartOptions extends PieChartOptions {
 			numberFontSize?: Function;
 			titleFontSize?: Function;
 			titleYPosition?: Function;
+			numberFormatter?: Function;
 		};
 	};
 }

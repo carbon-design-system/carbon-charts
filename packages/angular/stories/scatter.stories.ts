@@ -1,4 +1,5 @@
 import { storiesOf } from "@storybook/angular";
+import { withKnobs, object } from "@storybook/addon-knobs";
 
 import { ChartsModule } from "../src/charts.module";
 
@@ -20,15 +21,16 @@ const template = `
 </ibm-scatter-chart>
 `;
 
-const stories = storiesOf("Scatter", module);
+const stories = storiesOf("Scatter", module).addDecorator(withKnobs);
+
 stories.add(scatterOptions.title, () => ({
 	template,
 	moduleMetadata: {
 		imports: [ChartsModule]
 	},
 	props: {
-		data: scatterData,
-		options: addWidthAndHeight(scatterOptions)
+		data:  object("Data", scatterData),
+		options: object("Options", addWidthAndHeight(scatterOptions))
 	}
 }));
 
@@ -38,7 +40,7 @@ stories.add(scatterTimeSeriesOptions.title, () => ({
 		imports: [ChartsModule]
 	},
 	props: {
-		data: scatterTimeSeriesData,
-		options: addWidthAndHeight(scatterTimeSeriesOptions)
+		data: object("Data", scatterTimeSeriesData),
+		options: object("Options", addWidthAndHeight(scatterTimeSeriesOptions))
 	}
 }));
