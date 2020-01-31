@@ -2,14 +2,24 @@ const {
 	// Bar
 	groupedBarOptions,
 	groupedBarData,
+	groupedHorizontalBarOptions,
+	groupedHorizontalBarData,
 	simpleBarOptions,
 	simpleBarData,
+	simpleHorizontalBarOptions,
+	simpleHorizontalBarData,
 	simpleBarTimeSeriesOptions,
 	simpleBarTimeSeriesData,
-	stackedBarData,
+	simpleHorizontalBarTimeSeriesOptions,
+	simpleHorizontalBarTimeSeriesData,
 	stackedBarOptions,
+	stackedBarData,
+	stackedHorizontalBarOptions,
+	stackedHorizontalBarData,
 	stackedBarTimeSeriesOptions,
 	stackedBarTimeSeriesData,
+	stackedHorizontalBarTimeSeriesOptions,
+	stackedHorizontalBarTimeSeriesData,
 	// Pie & donut
 	pieOptions,
 	pieData,
@@ -35,14 +45,19 @@ const {
 
 export const chartTypes = [
 	{
-		id: "grouped-bar",
-		options: groupedBarOptions,
-		data: groupedBarData
-	},
-	{
 		id: "simple-bar",
 		options: simpleBarOptions,
 		data: simpleBarData
+	},
+	{
+		id: "simple-horizontal-bar-time-series",
+		options: simpleHorizontalBarTimeSeriesOptions,
+		data: simpleHorizontalBarTimeSeriesData
+	},
+	{
+		id: "simple-horizontal-bar",
+		options: simpleHorizontalBarOptions,
+		data: simpleHorizontalBarData
 	},
 	{
 		id: "scatter-time-series",
@@ -55,9 +70,14 @@ export const chartTypes = [
 		data: scatterData
 	},
 	{
-		id: "simple-bar-time-series",
-		options: simpleBarTimeSeriesOptions,
-		data: simpleBarTimeSeriesData
+		id: "grouped-bar",
+		options: groupedBarOptions,
+		data: groupedBarData
+	},
+	{
+		id: "grouped-horizontal-bar",
+		options: groupedHorizontalBarOptions,
+		data: groupedHorizontalBarData
 	},
 	{
 		id: "stacked-bar",
@@ -65,9 +85,24 @@ export const chartTypes = [
 		data: stackedBarData
 	},
 	{
+		id: "stacked-horizontal-bar",
+		options: stackedHorizontalBarOptions,
+		data: stackedHorizontalBarData
+	},
+	{
+		id: "simple-bar-time-series",
+		options: simpleBarTimeSeriesOptions,
+		data: simpleBarTimeSeriesData
+	},
+	{
 		id: "stacked-bar-time-series",
 		options: stackedBarTimeSeriesOptions,
 		data: stackedBarTimeSeriesData
+	},
+	{
+		id: "stacked-horizontal-bar-time-series",
+		options: stackedHorizontalBarTimeSeriesOptions,
+		data: stackedHorizontalBarTimeSeriesData
 	},
 	{
 		id: "pie",

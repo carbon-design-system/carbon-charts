@@ -12,7 +12,7 @@
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"outDir": "./dist",
-		"rootDir": "./src",
+		"rootDir": ".",
 		"target": "es5",
 		"inlineSources": true,
 		"types": [
