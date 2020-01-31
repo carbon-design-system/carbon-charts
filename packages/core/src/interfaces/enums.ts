@@ -1,3 +1,6 @@
+import * as EventEnums from "./events";
+export const Events = EventEnums;
+
 /**
  * enum of all supported chart themes
  */
@@ -16,6 +19,17 @@ export enum AxisPositions {
 	RIGHT = "right",
 	TOP = "top",
 	BOTTOM = "bottom"
+}
+
+/**
+ * enum of all possible cartesian orientations
+ * to be used for determining the orientation
+ * of graphs being draw over
+ * cartesian scales
+ */
+export enum CartesianOrientations {
+	VERTICAL = "vertical",
+	HORIZONTAL = "horizontal"
 }
 
 export enum AxisTypes {

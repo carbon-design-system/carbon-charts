@@ -1,5 +1,3 @@
-import { colorPalettes } from "../src/index";
-
 export const setOrUpdateParam = (name, value) => {
     const params = new URLSearchParams(location.search)
 

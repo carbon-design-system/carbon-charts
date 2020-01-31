@@ -7,6 +7,7 @@ module.exports = ({ config }) => {
 			}
 		]
 	});
+
 	config.resolve.extensions.push(".ts");
 	return config;
 };

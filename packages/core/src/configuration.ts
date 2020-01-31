@@ -18,7 +18,7 @@ import {
 	LegendOptions,
 	ChartTheme,
 	LegendPositions,
-	StackedBarOptions,
+	StackedBarOptions
 } from "./interfaces/index";
 
 /*
@@ -33,6 +33,7 @@ import {
 export const legend: LegendOptions = {
 	position: LegendPositions.BOTTOM,
 	clickable: true,
+	enabled: true,
 	items: {
 		status: {
 			ACTIVE: 1,
@@ -95,7 +96,7 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartToolt
 const axes: AxesOptions = { };
 
 const timeScale: TimeScaleOptions = {
-	addSpaceOnEdges: true
+	addSpaceOnEdges: 1,
 };
 
 /**
@@ -105,7 +106,6 @@ const chart: BaseChartOptions = {
 	width: "100%",
 	height: "100%",
 	resizable: true,
-	theme: ChartTheme.DEFAULT,
 	tooltip: baseTooltip,
 	legend,
 	style: {
@@ -131,9 +131,9 @@ const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 		maxWidth: 16
 	},
 	timeScale: Tools.merge(timeScale, {
-		addSpaceOnEdges: true
+		addSpaceOnEdges: 1
 	} as TimeScaleOptions),
-	tooltip: barChartTooltip
+	tooltip: barChartTooltip,
 } as BarChartOptions);
 
 /**
