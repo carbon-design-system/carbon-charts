@@ -8,8 +8,8 @@ cp *.md dist/
 cp package.json dist/
 cp -a src/styles/. dist/styles
 
-sass --load-path ../../node_modules dist/styles/styles.scss dist/styles.css
-sass --load-path ../../node_modules dist/styles/styles.scss dist/styles.min.css --style=compressed
+sass --load-path ../../node_modules dist/styles/base-theme.scss dist/styles.css
+sass --load-path ../../node_modules dist/styles/base-theme.scss dist/styles.min.css --style=compressed
 
 sass --load-path ../../node_modules dist/styles/styles-g10.scss dist/styles-g10.css
 sass --load-path ../../node_modules dist/styles/styles-g10.scss dist/styles-g10.min.css --style=compressed
