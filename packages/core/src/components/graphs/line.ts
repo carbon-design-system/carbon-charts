@@ -1,6 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
+import { Roles } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -41,8 +42,8 @@ export class Line extends Component {
 
 		// D3 line generator function
 		this.lineGenerator = line()
-			.x((d, i) => this.services.axes.getXValue(d, i))
-			.y((d, i) => this.services.axes.getYValue(d, i))
+			.x((d, i) => this.services.cartesianScales.getDomainValue(d, i))
+			.y((d, i) => this.services.cartesianScales.getRangeValue(d, i))
 			.curve(this.services.curves.getD3Curve());
 
 		// Update the bound data on line groups
@@ -81,6 +82,11 @@ export class Line extends Component {
 
 				return parentDatum.data;
 			})
+			// a11y
+			.attr("role", Roles.GRAPHICS_SYMBOL)
+			.attr("aria-roledescription", "line")
+			.attr("aria-label", d => d.map(datum => datum.value || datum).join(","))
+			// Transition
 			.transition(this.services.transitions.getTransition("line-update-enter", animate))
 			.attr("opacity", 1)
 			.attr("class", "line")

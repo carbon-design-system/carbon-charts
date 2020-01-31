@@ -3,6 +3,214 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.1](https://github.com/IBM/carbon-charts/compare/v0.28.0...v0.28.1) (2020-01-30)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+# [0.28.0](https://github.com/IBM/carbon-charts/compare/v0.27.0...v0.28.0) (2020-01-21)
+
+
+### Features
+
+* **core:** add support for horizontal bar charts ([#415](https://github.com/IBM/carbon-charts/issues/415)) ([6a480f0](https://github.com/IBM/carbon-charts/commit/6a480f0))
+
+
+
+
+
+# [0.27.0](https://github.com/IBM/carbon-charts/compare/v0.26.1...v0.27.0) (2020-01-20)
+
+
+### Bug Fixes
+
+* **chart:** update isLegendEnabled instead of isEnabled ([d413a8c](https://github.com/IBM/carbon-charts/commit/d413a8c))
+* **enabled:** rename visible to enabled ([ac4862f](https://github.com/IBM/carbon-charts/commit/ac4862f))
+* **lint:** whitespace tslint issue ([53216f5](https://github.com/IBM/carbon-charts/commit/53216f5))
+
+
+### Features
+
+* **chart:** legend.visible = false to hide the legend ([6461128](https://github.com/IBM/carbon-charts/commit/6461128))
+
+
+
+
+
+## [0.26.1](https://github.com/IBM/carbon-charts/compare/v0.26.0...v0.26.1) (2020-01-20)
+
+
+### Bug Fixes
+
+* **axis:** better support small time scales ([8cfa595](https://github.com/IBM/carbon-charts/commit/8cfa595))
+* **axis:** fix lint issue ([debeed9](https://github.com/IBM/carbon-charts/commit/debeed9))
+* **axis:** fix linting errors ([f810d4a](https://github.com/IBM/carbon-charts/commit/f810d4a))
+* **axis:** remove confusing timeRangeToExtend property ([0456e24](https://github.com/IBM/carbon-charts/commit/0456e24))
+* **config:** add additional property to control extension ([2da3404](https://github.com/IBM/carbon-charts/commit/2da3404))
+* **configuration:** fix default baseBarChart options ([1a6dcef](https://github.com/IBM/carbon-charts/commit/1a6dcef))
+
+
+
+
+
+# [0.26.0](https://github.com/IBM/carbon-charts/compare/v0.25.0...v0.26.0) (2020-01-16)
+
+
+### Features
+
+* **core:** add event dispatches for mouseover, mousemove, click & mouseout for all graphs ([284012c](https://github.com/IBM/carbon-charts/commit/284012c))
+
+
+
+
+
+# [0.25.0](https://github.com/IBM/carbon-charts/compare/v0.24.5...v0.25.0) (2020-01-10)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.24.5](https://github.com/IBM/carbon-charts/compare/v0.24.4...v0.24.5) (2020-01-10)
+
+
+### Bug Fixes
+
+* **core:** fix to allow chart to toggle on and off using attribute/css properties ([77e26af](https://github.com/IBM/carbon-charts/commit/77e26af))
+
+
+
+
+
+## [0.24.4](https://github.com/IBM/carbon-charts/compare/v0.24.3...v0.24.4) (2020-01-06)
+
+
+### Bug Fixes
+
+* **demos:** add IBM Plex Sans Condensed to the core demo site ([1761a36](https://github.com/IBM/carbon-charts/commit/1761a36))
+
+
+
+
+
+## [0.24.3](https://github.com/IBM/carbon-charts/compare/v0.24.2...v0.24.3) (2019-12-19)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.24.2](https://github.com/IBM/carbon-charts/compare/v0.24.1...v0.24.2) (2019-12-19)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.24.1](https://github.com/IBM/carbon-charts/compare/v0.24.0...v0.24.1) (2019-12-18)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+# [0.24.0](https://github.com/IBM/carbon-charts/compare/v0.23.0...v0.24.0) (2019-12-17)
+
+
+### Features
+
+* **core, react, angular, vue:** add WAI-ARIA tags to elements ([1216ed6](https://github.com/IBM/carbon-charts/commit/1216ed6))
+
+
+
+
+
+# [0.23.0](https://github.com/IBM/carbon-charts/compare/v0.22.4...v0.23.0) (2019-12-17)
+
+
+### Features
+
+* **core:** add spacer components ([4e5ab5c](https://github.com/IBM/carbon-charts/commit/4e5ab5c))
+
+
+
+
+
+## [0.22.4](https://github.com/IBM/carbon-charts/compare/v0.22.3...v0.22.4) (2019-12-16)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.22.3](https://github.com/IBM/carbon-charts/compare/v0.22.2...v0.22.3) (2019-12-16)
+
+
+### Bug Fixes
+
+* **core:** update tooltip value formatter ([2a978d8](https://github.com/IBM/carbon-charts/commit/2a978d8))
+
+
+
+
+
+## [0.22.2](https://github.com/IBM/carbon-charts/compare/v0.22.1...v0.22.2) (2019-12-16)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.22.1](https://github.com/IBM/carbon-charts/compare/v0.22.0...v0.22.1) (2019-12-12)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+# [0.22.0](https://github.com/IBM/carbon-charts/compare/v0.21.0...v0.22.0) (2019-12-09)
+
+
+### Features
+
+* **core, angular, react, vue:** Update chart width & height through options ([f050c35](https://github.com/IBM/carbon-charts/commit/f050c35))
+
+
+
+
+
+# [0.21.0](https://github.com/IBM/carbon-charts/compare/v0.20.1...v0.21.0) (2019-12-09)
+
+
+### Features
+
+* **core, angular, react, vue:** allow customizations to pie labels & the donut center number ([#427](https://github.com/IBM/carbon-charts/issues/427)) ([0446045](https://github.com/IBM/carbon-charts/commit/0446045))
+
+
+
+
+
+## [0.20.1](https://github.com/IBM/carbon-charts/compare/v0.20.0...v0.20.1) (2019-12-04)
+
+
+### Bug Fixes
+
+* **core:** loop also through non-display data to assign colors to datasets ([#394](https://github.com/IBM/carbon-charts/issues/394)) ([5ba8952](https://github.com/IBM/carbon-charts/commit/5ba8952))
+
+
+
+
+
 # [0.20.0](https://github.com/IBM/carbon-charts/compare/v0.19.0...v0.20.0) (2019-12-02)
 
 

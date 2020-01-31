@@ -1,5 +1,3 @@
-import { colors } from "./colors";
-
 // Demo turkish locale for simple bar time-series
 const turkishLocale = require("d3-time-format/locale/tr-TR.json");
 
@@ -8,7 +6,6 @@ export const groupedBarData = {
 	datasets: [
 		{
 			label: "Dataset 1",
-			fillColors: [colors[0]],
 			data: [
 				65000,
 				-29123,
@@ -19,7 +16,6 @@ export const groupedBarData = {
 		},
 		{
 			label: "Dataset 2",
-			fillColors: [colors[1]],
 			data: [
 				32432,
 				-21312,
@@ -30,7 +26,6 @@ export const groupedBarData = {
 		},
 		{
 			label: "Dataset 3",
-			fillColors: [colors[2]],
 			data: [
 				-12312,
 				23232,
@@ -41,7 +36,6 @@ export const groupedBarData = {
 		},
 		{
 			label: "Dataset 4",
-			fillColors: [colors[3]],
 			data: [
 				-32423,
 				21313,
@@ -61,10 +55,23 @@ export const groupedBarOptions = {
 		},
 		bottom: {
 			scaleType: "labels",
-			secondary: true,
-		},
-		top: {
+			secondary: true
+		}
+	}
+};
+
+// Horizontal Grouped
+export const groupedHorizontalBarData = groupedBarData;
+
+export const groupedHorizontalBarOptions = {
+	title: "Grouped horizontal bar (discrete)",
+	axes: {
+		left: {
 			scaleType: "labels",
+			primary: true,
+		},
+		bottom: {
+			secondary: true
 		}
 	}
 };
@@ -75,7 +82,6 @@ export const simpleBarData = {
 	datasets: [
 		{
 			label: "Dataset 1",
-			fillColors: colors,
 			data: [
 				65000,
 				29123,
@@ -95,18 +101,32 @@ export const simpleBarOptions = {
 		},
 		bottom: {
 			scaleType: "labels",
-			secondary: true,
+			secondary: true
 		}
 	}
 };
 
+// Horizontal Simple
+export const simpleHorizontalBarData = simpleBarData;
+
+export const simpleHorizontalBarOptions = {
+	title: "Simple horizontal bar (discrete)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true
+		}
+	}
+};
 
 export const simpleBarTimeSeriesData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Miscellaneous"],
 	datasets: [
 		{
 			label: "Dataset 1",
-			fillColors: colors,
 			data: [
 				{
 					date: new Date(2019, 0, 1),
@@ -149,13 +169,28 @@ export const simpleBarTimeSeriesOptions = {
 	}
 };
 
+// Horizontal simple time series
+export const simpleHorizontalBarTimeSeriesOptions = {
+	title: "Simple horizontal bar (time series)",
+	axes: {
+		left: {
+			scaleType: "time",
+			primary: true
+		},
+		bottom: {
+			secondary: true
+		}
+	}
+};
+
+export const simpleHorizontalBarTimeSeriesData = simpleBarTimeSeriesData;
+
 // Stacked bar
 export const stackedBarData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
 		{
 			label: "Dataset 1",
-			fillColors: [colors[0]],
 			data: [
 				65000,
 				29123,
@@ -166,7 +201,6 @@ export const stackedBarData = {
 		},
 		{
 			label: "Dataset 2",
-			fillColors: [colors[1]],
 			data: [
 				32432,
 				21312,
@@ -177,7 +211,6 @@ export const stackedBarData = {
 		},
 		{
 			label: "Dataset 3",
-			fillColors: [colors[2]],
 			data: [
 				12312,
 				23232,
@@ -188,7 +221,6 @@ export const stackedBarData = {
 		},
 		{
 			label: "Dataset 4",
-			fillColors: [colors[3]],
 			data: [
 				32423,
 				21313,
@@ -209,18 +241,33 @@ export const stackedBarOptions = {
 		},
 		bottom: {
 			scaleType: "labels",
-			secondary: true,
+			secondary: true
 		}
 	}
 };
 
+// horizontal stacked bar
+export const stackedHorizontalBarData = stackedBarData;
+
+export const stackedHorizontalBarOptions = {
+	title: "Stacked horizontal bar (discrete)",
+	axes: {
+		left: {
+			scaleType: "labels",
+			primary: true
+		},
+		bottom: {
+			stacked: true,
+			secondary: true
+		}
+	}
+};
 
 export const stackedBarTimeSeriesData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
 		{
 			label: "Dataset 1",
-			fillColors: [colors[0]],
 			data: [
 				{
 					date: new Date(2019, 0, 1),
@@ -246,7 +293,6 @@ export const stackedBarTimeSeriesData = {
 		},
 		{
 			label: "Dataset 2",
-			fillColors: [colors[1]],
 			data: [
 				{
 					date: new Date(2019, 0, 3),
@@ -272,7 +318,6 @@ export const stackedBarTimeSeriesData = {
 		},
 		{
 			label: "Dataset 3",
-			fillColors: [colors[2]],
 			data: [
 				{
 					date: new Date(2019, 0, 1),
@@ -298,7 +343,6 @@ export const stackedBarTimeSeriesData = {
 		},
 		{
 			label: "Dataset 4",
-			fillColors: [colors[3]],
 			data: [
 				{
 					date: new Date(2019, 0, 2),
@@ -338,3 +382,20 @@ export const stackedBarTimeSeriesOptions = {
 		}
 	}
 };
+
+// Stacked horizontal bar (time series)
+export const stackedHorizontalBarTimeSeriesOptions = {
+	title: "Stacked horizontal bar (time series)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "time"
+		},
+		bottom: {
+			stacked: true,
+			secondary: true
+		}
+	}
+};
+
+export const stackedHorizontalBarTimeSeriesData = stackedBarTimeSeriesData;

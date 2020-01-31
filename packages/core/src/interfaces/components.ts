@@ -33,6 +33,10 @@ export interface LegendOptions {
 	 * the clickability of legend items
 	 */
 	clickable?: boolean;
+	/**
+	 * is the legend visible or not
+	 */
+	enabled?: boolean;
 	items?: {
 		status?: {
 			ACTIVE?: Number;
@@ -52,7 +56,7 @@ export interface TooltipOptions {
 	/**
 	 * a function to format the tooltip values
 	 */
-	formatter?: Function;
+	valueFormatter?: Function;
 	/**
 	 * custom function for returning tooltip HTML
 	 * passed an array or object with the data, and then the default tooltip markup
