@@ -21,6 +21,17 @@ export enum AxisPositions {
 	BOTTOM = "bottom"
 }
 
+/**
+ * enum of all possible cartesian orientations
+ * to be used for determining the orientation
+ * of graphs being draw over
+ * cartesian scales
+ */
+export enum CartesianOrientations {
+	VERTICAL = "vertical",
+	HORIZONTAL = "horizontal"
+}
+
 export enum AxisTypes {
 	PRIMARY = "primary",
 	SECONDARY = "secondary"

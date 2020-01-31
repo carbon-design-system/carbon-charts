@@ -1,5 +1,3 @@
-import { colors } from "./colors";
-
 // Demo turkish locale for simple bar time-series
 const turkishLocale = require("d3-time-format/locale/tr-TR.json");
 
@@ -57,7 +55,23 @@ export const groupedBarOptions = {
 		},
 		bottom: {
 			scaleType: "labels",
-			secondary: true,
+			secondary: true
+		}
+	}
+};
+
+// Horizontal Grouped
+export const groupedHorizontalBarData = groupedBarData;
+
+export const groupedHorizontalBarOptions = {
+	title: "Grouped horizontal bar (discrete)",
+	axes: {
+		left: {
+			scaleType: "labels",
+			primary: true,
+		},
+		bottom: {
+			secondary: true
 		}
 	}
 };
@@ -87,11 +101,26 @@ export const simpleBarOptions = {
 		},
 		bottom: {
 			scaleType: "labels",
-			secondary: true,
+			secondary: true
 		}
 	}
 };
 
+// Horizontal Simple
+export const simpleHorizontalBarData = simpleBarData;
+
+export const simpleHorizontalBarOptions = {
+	title: "Simple horizontal bar (discrete)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true
+		}
+	}
+};
 
 export const simpleBarTimeSeriesData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Miscellaneous"],
@@ -139,6 +168,22 @@ export const simpleBarTimeSeriesOptions = {
 		time: turkishLocale
 	}
 };
+
+// Horizontal simple time series
+export const simpleHorizontalBarTimeSeriesOptions = {
+	title: "Simple horizontal bar (time series)",
+	axes: {
+		left: {
+			scaleType: "time",
+			primary: true
+		},
+		bottom: {
+			secondary: true
+		}
+	}
+};
+
+export const simpleHorizontalBarTimeSeriesData = simpleBarTimeSeriesData;
 
 // Stacked bar
 export const stackedBarData = {
@@ -196,11 +241,27 @@ export const stackedBarOptions = {
 		},
 		bottom: {
 			scaleType: "labels",
-			secondary: true,
+			secondary: true
 		}
 	}
 };
 
+// horizontal stacked bar
+export const stackedHorizontalBarData = stackedBarData;
+
+export const stackedHorizontalBarOptions = {
+	title: "Stacked horizontal bar (discrete)",
+	axes: {
+		left: {
+			scaleType: "labels",
+			primary: true
+		},
+		bottom: {
+			stacked: true,
+			secondary: true
+		}
+	}
+};
 
 export const stackedBarTimeSeriesData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -321,3 +382,20 @@ export const stackedBarTimeSeriesOptions = {
 		}
 	}
 };
+
+// Stacked horizontal bar (time series)
+export const stackedHorizontalBarTimeSeriesOptions = {
+	title: "Stacked horizontal bar (time series)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "time"
+		},
+		bottom: {
+			stacked: true,
+			secondary: true
+		}
+	}
+};
+
+export const stackedHorizontalBarTimeSeriesData = stackedBarTimeSeriesData;
