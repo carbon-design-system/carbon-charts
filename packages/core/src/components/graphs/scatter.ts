@@ -119,7 +119,6 @@ export class Scatter extends Component {
 		const self = this;
 		this.parent.selectAll("circle")
 			.on("mouseover mousemove", function(datum) {
-				console.log("datum", datum.radius)
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true)
 					.style("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));

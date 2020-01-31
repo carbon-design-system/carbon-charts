@@ -97,7 +97,7 @@ export interface BubbleChartOptions extends ScatterChartOptions {
 	 */
 	bubble?: {
 		radiusRange?: Function;
-	}
+	};
 }
 
 /**

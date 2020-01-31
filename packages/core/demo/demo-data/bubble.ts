@@ -88,7 +88,8 @@ export const bubbleData = {
 					date: new Date(2019, 0, 3),
 					value: 61213,
 					radius: 3
-				},{
+				},
+				{
 					date: new Date(2019, 0, 3),
 					value: 50000,
 					radius: 5
@@ -142,7 +143,8 @@ export const bubbleData = {
 					date: new Date(2019, 0, 19),
 					value: 31300,
 					radius: 2
-				},{
+				},
+				{
 					date: new Date(2019, 0, 4),
 					value: 34242,
 					radius: 5
