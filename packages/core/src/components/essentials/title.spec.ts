@@ -8,8 +8,6 @@ import { select, selectAll } from "d3-selection";
 
 describe("title component", () => {
 	beforeEach(function() {
-		selectAll(`g.${settings.prefix}--${options.chart.style.prefix}--title`).remove();
-
 		const testEnvironment = new TestEnvironment();
 		testEnvironment.render();
 
@@ -92,7 +90,7 @@ describe("title component", () => {
 
 			// Add event listener for when chart render is finished
 			chartEventsService.addEventListener("render-finished", renderCb);
-		});	
+		});
 	});
 
 	afterEach(function() {

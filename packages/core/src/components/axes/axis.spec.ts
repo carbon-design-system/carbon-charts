@@ -1,9 +1,6 @@
 import { TestEnvironment } from "../../tests/index";
 
-import * as Configuration from "../../configuration";
-
-import { select, selectAll } from "d3-selection";
-import { scaleLinear } from "d3";
+import { select } from "d3-selection";
 
 describe("Axis component", () => {
 	beforeEach(function() {
@@ -13,31 +10,22 @@ describe("Axis component", () => {
 		this.chart = testEnvironment.getChartReference();
 		this.testEnvironment = testEnvironment;
     });
-    
+
     describe(("content"), () => {
-        it("should set the correct axis values", async function(done) {
-            const data = this.testEnvironment.chartData;
+        it("should set the left axis values within the range domain", async function(done) {
             const chartEventsService = this.chart.services.events;
+            const scales = this.chart.services.cartesianScales;
 
             const renderCb = () => {
-                // Remove render event listener
                 chartEventsService.removeEventListener("render-finished", renderCb);
-
-                let datasetDomain = [];
-                
-                data.datasets.forEach(dataset => datasetDomain = datasetDomain.concat(dataset.data));
-
-                datasetDomain.sort();
-
-                const datasetDomainMin = datasetDomain.reduce((min, cur) => Math.min(min, cur));
-                const datasetDomainMax = datasetDomain.reduce((max, cur) => Math.max(max, cur));
-
-                let axisTickValues = scaleLinear().domain(datasetDomain).range([datasetDomainMin, datasetDomainMax]).ticks(Configuration.axis.ticks.number);
+                const [min, max] = scales.getRangeScale().domain();
 
                 const leftAxisContent = select("g.left").select("g.ticks").selectAll("g.tick").select("text");
 
-                leftAxisContent.each(function(d, i) {
-                    expect(parseInt(select(this).text().replace(/,/g, '')) === axisTickValues[i]).toBe(true); 
+                leftAxisContent.each(function() {
+                    const leftAxisItem = parseInt(select(this).text().replace(/,/g, ''));
+                    expect(leftAxisItem).toBeLessThanOrEqual(max);
+                    expect(leftAxisItem).toBeGreaterThanOrEqual(min);
                 });
 
                 done();
@@ -46,22 +34,28 @@ describe("Axis component", () => {
 			chartEventsService.addEventListener("render-finished", renderCb);
         });
 
-        it("should set the correct axis title", async function(done) {
-            const options = this.testEnvironment.chartOptions;
+        it("should set the correct labels within the bottom axis", async function(done) {
             const chartEventsService = this.chart.services.events;
+            const scales = this.chart.services.cartesianScales;
 
             const renderCb = () => {
-                // Remove render event listener
                 chartEventsService.removeEventListener("render-finished", renderCb);
+                const bottomAxisDomain = scales.getDomainScale().domain();
 
-                const bottomAxisTitle = select("g.bottom").select("text.axis-title").text();
+                const bottomAxisContent = select("g.bottom").select("g.ticks").selectAll("g.tick").select("text");
 
-                expect(bottomAxisTitle).toBe(options.axes.bottom.title);
+                bottomAxisContent.each(function() {
+                    expect(bottomAxisDomain.includes(select(this).text())).toBe(true);
+                });
 
                 done();
             }
             // Add event listener for when chart render is finished
 			chartEventsService.addEventListener("render-finished", renderCb);
+        });
+
+        afterEach(function() {
+            this.testEnvironment.destroy();
         });
     });
 });

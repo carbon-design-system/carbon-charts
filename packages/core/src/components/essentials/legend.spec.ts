@@ -6,14 +6,10 @@ import { options, legend } from "./../../configuration";
 
 import { select, selectAll } from "d3-selection";
 import { color } from "d3";
+import * as colorPalettes from "../../services/colorPalettes";
 
 describe("legend component", () => {
 	beforeEach(function() {
-		// Manually remove every instance of legend items and scatter dots from the DOM before each test.
-		// This prevents the `too late already running` transition error.
-		selectAll(`g.${settings.prefix}--${options.chart.style.prefix}--legend`).remove();
-		selectAll(`g.${settings.prefix}--${options.chart.style.prefix}--scatter`).remove();
-
 		const testEnvironment = new TestEnvironment();
 		testEnvironment.render();
 
@@ -57,7 +53,7 @@ describe("legend component", () => {
 				legendItems.each(function(d, i) {
 					expect(select(this).text()).toEqual(legendLabels[i]);
 				});
-				
+
 				done();
 			}
 
@@ -75,12 +71,12 @@ describe("legend component", () => {
 
 				const legendCheckBoxes = select(`g.${settings.prefix}--${options.chart.style.prefix}--legend`).selectAll("g.legend-item").select("rect");
 
-				const checkBoxColors= data.datasets.map(dataset => color(dataset.fillColors[0]) + "");
+				const checkBoxColors= colorPalettes.DEFAULT.map(defaultColor => color(defaultColor) + "");
 
 				legendCheckBoxes.each(function(d, i) {
 					expect(select(this).style("fill")).toEqual(checkBoxColors[i]);
 				});
-				
+
 				done();
 			}
 
@@ -96,12 +92,12 @@ describe("legend component", () => {
 				chartEventsService.removeEventListener("render-finished", renderCb);
 
 				const legendCheckBoxes = select(`g.${settings.prefix}--${options.chart.style.prefix}--legend`).selectAll("g.legend-item").select("rect");
-				
+
 				legendCheckBoxes.each(function() {
 					expect(select(this).style("width")).toEqual(`${+legend.checkbox.radius * 2}px`);
 					expect(select(this).style("height")).toEqual(`${+legend.checkbox.radius * 2}px`);
 				});
-				
+
 				done();
 			}
 
@@ -113,7 +109,7 @@ describe("legend component", () => {
 	describe("events", () => {
 		it("should emit the correct events on mouseover, mouseclick and mouseout", async function(done) {
 			const chartEventsService = this.chart.services.events;
-			
+
 			// Used to capture legend events.
 			const legendEventCatcher = {
 				onItemHover: () => {},
@@ -135,7 +131,7 @@ describe("legend component", () => {
 				chartEventsService.addEventListener("legend-item-onclick", legendEventCatcher.onMouseClick());
 
                 const chartLegendItem = select(`g.${settings.prefix}--${options.chart.style.prefix}--legend`).select("g.legend-item");
-                
+
 				chartLegendItem.dispatch("mouseover");
 				expect(legendEventCatcher.onItemHover).toHaveBeenCalled();
 				chartLegendItem.dispatch("mouseclick");
@@ -159,7 +155,7 @@ describe("legend component", () => {
 	describe("functionality", () => {
 		it("should show only one group of dots when legend item is clicked", async function(done) {
 			const chartEventsService = this.chart.services.events;
-			
+
 			const renderCb = () => {
 				// Remove render event listener
 				chartEventsService.removeEventListener("render-finished", renderCb);
@@ -185,7 +181,7 @@ describe("legend component", () => {
 
 		it("should set all but the selected legend rectangle to have no fill", async function(done) {
 			const chartEventsService = this.chart.services.events;
-			
+
 			const renderCb = () => {
 				// Remove render event listener
 				chartEventsService.removeEventListener("render-finished", renderCb);
@@ -195,7 +191,7 @@ describe("legend component", () => {
 				const chartLegendItem: HTMLElement = document
 					.querySelector(`g.${settings.prefix}--${options.chart.style.prefix}--legend`)
 					.querySelector("g.legend-item") as HTMLElement;
-				
+
 				chartLegendItem.dispatchEvent(new Event("click"));
 
 				setTimeout(() => {
@@ -216,11 +212,11 @@ describe("legend component", () => {
 		it("should change opacity of all dots on mouseover of a legend item except the corresponding dots to the hovered item", async function(done) {
 			const data = this.testEnvironment.chartData;
 			const chartEventsService = this.chart.services.events;
-			
+
 			const renderCb = () => {
 				// Remove render event listener
 				chartEventsService.removeEventListener("render-finished", renderCb);
-				
+
 				// Need to used dispatchEvent on an HTMLElement in order for the click
 				// to trigger the expected changes
 				const chartLegendItem: HTMLElement = document
@@ -235,7 +231,7 @@ describe("legend component", () => {
 					scatterDotGroup.each(function() {
 						select(this).selectAll("circle.dot").each(function() {
 							// Only check the opacity of the dots which are not the same color as the hovered legend item.
-							if(!(select(this).style("fill") === color(data.datasets[0].fillColors[0]) + "")) {
+							if(!(select(this).style("fill") === color(colorPalettes.DEFAULT[0]) + "")) {
 								expect(select(this).style("opacity")).not.toBe("1");
 							}
 						});
@@ -248,7 +244,7 @@ describe("legend component", () => {
             // Add event listener for when chart render is finished
 			chartEventsService.addEventListener("render-finished", renderCb);
 		});
-	});	
+	});
 
 	afterEach(function() {
 		this.testEnvironment.destroy();
