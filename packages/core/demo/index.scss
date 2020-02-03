@@ -163,10 +163,6 @@ div.options {
 	background-color: #fff;
 }
 
-ul.multi-tooltip .datapoint-tooltip {
-	border-bottom: 1px solid $carbon--gray-20;
-}
-
 //**********************************************
 // Themes
 //***********************************************
@@ -191,10 +187,6 @@ body.carbon--dark-g100 {
 		div.options {
 			background: $ui-background;
 		}
-
-		ul.multi-tooltip .datapoint-tooltip {
-			border-bottom: 1px solid $carbon--gray-70;
-		}
 	}
 }
 
@@ -217,10 +209,6 @@ body.carbon--dark-g90 {
 		div.options {
 			background: $carbon--gray-90;
 		}
-
-		ul.multi-tooltip .datapoint-tooltip {
-			border-bottom: 1px solid $carbon--gray-80;
-		}
 	}
 }
 
@@ -242,10 +230,6 @@ body.carbon--dark-g10 {
 
 		div.options {
 			background: $carbon--gray-10;
-		}
-
-		ul.multi-tooltip .datapoint-tooltip {
-			border-bottom: 1px solid $carbon--gray-20;
 		}
 	}
 }
