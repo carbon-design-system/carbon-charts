@@ -28,8 +28,11 @@ export class NetworkChart extends ZoomableChart {
 	}
 
 	getComponents() {
-		return [
+		const graphFrameComponents = [
 			new Network(this.model, this.services)
 		];
+
+		const components: any[] = this.getChartComponents(graphFrameComponents);
+		return components;
 	}
 }

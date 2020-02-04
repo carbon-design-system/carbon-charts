@@ -22,7 +22,10 @@ export const networkOptions = {
 	nodeHeight: 64,
 	nodeWidth: 208,
 	cellWidth: 284,
-	cellHeight: 88
+	cellHeight: 88,
+	legend: {
+		enabled: false
+	}
 };
 
 export const networkData = {

@@ -16,7 +16,6 @@ export class Network extends Component {
 	type = "network";
 	data = this.model.getDisplayData().datasets[0];
 	options = this.model.getOptions();
-	svg = this.getContainerSVG();
 	xMax;
 	yMax;
 	innerWidth;
@@ -108,13 +107,14 @@ export class Network extends Component {
 
 	render() {
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
+		const svg = this.getContainerSVG();
 
-		const zoomBox = this.svg.append("rect")
+		const zoomBox = svg.append("rect")
 			.attr("height", height)
 			.attr("width", width)
 			.attr("class", `${prefix}--network__background`);
 
-		const container = this.svg.append("g")
+		const container = svg.append("g")
 			.attr("class", `${prefix}--network__content`)
 			.attr("transform", `translate(0,0)`);
 
@@ -129,7 +129,7 @@ export class Network extends Component {
 				container.selectAll("text").attr("user-select", "auto");
 			});
 
-		this.svg.call(zoomed);
+		svg.call(zoomed);
 
 		this.calculatePositions();
 		this.drawCards(container);
