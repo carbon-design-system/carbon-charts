@@ -58,6 +58,7 @@ export class Scatter extends Component {
 			.classed("filled", filled)
 			.classed("unfilled", !filled)
 			.attr("cx", (d, i) => this.services.cartesianScales.getDomainValue(d, i))
+			.attr("cy", 311)
 			.transition(this.services.transitions.getTransition("scatter-update-enter", animate))
 			.attr("cy", (d, i) => this.services.cartesianScales.getRangeValue(d, i))
 			.attr("r", options.points.radius)
