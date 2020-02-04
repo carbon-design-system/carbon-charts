@@ -177,7 +177,6 @@ chartTypes.forEach(type => {
 				break;
 			case "line":
 			case "line-time-series":
-			case "line-time-series-customstroke":
 			case "line-step":
 			case "line-step-time-series":
 				classToInitialize = LineChart;

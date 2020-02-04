@@ -120,20 +120,6 @@ export const lineTimeSeriesOptions = {
 	curve: "curveMonotoneX"
 };
 
-export const lineTimeSeriesWithCustomStroke = {
-	...lineTimeSeriesOptions,
-	title: "Line (custom stroke, fill colors)",
-	getStrokeColor: (datasetLabel, label, data, originalStrokeColor) => {
-		return data && data.value > 60000 ? "#FF0000" : originalStrokeColor;
-	},
-	getFillColor: (datasetLabel, label, data, originalFillColor) => {
-		return data && data.value > 60000 ? "#FF0000" : originalFillColor;
-	},
-	getIsFilled: (datasetLabel, label, data, originalIsFilled) => {
-		return data && data.value > 60000 ? true : originalIsFilled;
-	}
-};
-
 export const lineData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
