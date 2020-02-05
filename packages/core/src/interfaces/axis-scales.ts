@@ -53,6 +53,16 @@ export interface AxisOptions {
 		 * function to format the ticks
 		 */
 		formatter?: Function;
+		/**
+		 * if it's true, it uses 12-hour clock format,
+		 * 24-hour clock format otherwise
+		 */
+		hour12Format?: boolean;
+		/**
+		 * if it's true, days are shown as mon-sun,
+		 * otherwise days are shown as number 1-31
+		 */
+		showDayName?: boolean;
 	};
 }
 

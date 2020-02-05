@@ -5,9 +5,11 @@ import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
+import { formatTick, computeTimeIntervalName } from "./utils";
 
 // D3 Imports
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
+import { timeFormatDefaultLocale } from "d3-time-format";
 
 export class Axis extends Component {
 	type = "axes";
@@ -70,18 +72,30 @@ export class Axis extends Component {
 				break;
 		}
 
+		const isTimeScaleType = this.scaleType === ScaleTypes.TIME || axisOptions.scaleType === ScaleTypes.TIME;
+
+		// Set the date/time locale
+		if (isTimeScaleType) {
+			const timeLocale = Tools.getProperty(options, "locale", "time");
+			if (timeLocale) {
+				timeFormatDefaultLocale(timeLocale);
+			}
+		}
+
 		// Initialize axis object
 		const axis = axisFunction(scale)
-			.tickSizeOuter(0)
-			.tickFormat(Tools.getProperty(axisOptions, "ticks", "formatter"));
+			.tickSizeOuter(0);
 
 		if (scale.ticks) {
 			const numberOfTicks = Tools.getProperty(axisOptions, "ticks", "number") || Configuration.axis.ticks.number;
 			axis.ticks(numberOfTicks);
 
-			if (this.scaleType === ScaleTypes.TIME) {
-				let tickValues = scale.ticks(numberOfTicks).concat(scale.domain())
-					.map(date => +date).sort();
+			if (isTimeScaleType) {
+				let tickValues = scale
+					.ticks(numberOfTicks)
+					.concat(scale.domain())
+					.map(date => +date)
+					.sort();
 				tickValues = Tools.removeArrayDuplicates(tickValues);
 
 				// Remove labels on the edges
@@ -93,6 +107,32 @@ export class Axis extends Component {
 
 				axis.tickValues(tickValues);
 			}
+			//// WIP ////
+			// if (isTimeScaleType) {
+			// 	if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges") > 0) {
+			// 		scale.nice(numberOfTicks);
+			// 	}
+			// 	const tickValues = scale.ticks(numberOfTicks).map(date => +date);
+
+			// 	axis.tickValues(tickValues);
+			// }
+			//// WIP ////
+
+
+			// create the right ticks formatter
+			let formatter;
+			if (isTimeScaleType) {
+				const hour12Format = Tools.getProperty(axisOptions, "ticks", "hour12Format") !== null ? Tools.getProperty(axisOptions, "ticks", "hour12Format") : Configuration.axis.ticks.hour12Format;
+				const showDayName = Tools.getProperty(axisOptions, "ticks", "showDayName") !== null ? Tools.getProperty(axisOptions, "ticks", "showDayName") : Configuration.axis.ticks.showDayName;
+				const formatOptions = { hour12Format, showDayName };
+				const timeInterval = computeTimeIntervalName(axis.tickValues());
+				formatter = (t: number, i: number) => formatTick(t, axis.tickValues()[i - 1], timeInterval, formatOptions);
+			} else {
+				formatter = Tools.getProperty(axisOptions, "ticks", "formatter");
+			}
+
+			// Set ticks formatter
+			axis.tickFormat(formatter);
 		}
 
 		// Add axis into the parent

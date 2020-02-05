@@ -189,7 +189,7 @@ export class CartesianScales extends Service {
 				break;
 			case ScaleTypes.TIME:
 				// time series we filter using the date
-				const domainKey = Object.keys(displayData.datasets[0].data[0]).filter(key =>  key !== "value" )[0];
+				const domainKey = Object.keys(displayData.datasets[0].data[0]).filter(key => key !== "value")[0];
 
 				displayData.datasets.forEach(dataset => {
 					const sharedLabel = dataset.label;
@@ -204,7 +204,8 @@ export class CartesianScales extends Service {
 					// assign the shared label on the data items and add them to the array
 					dataItems.forEach(item => {
 						activePoints.push(
-							Object.assign({datasetLabel: sharedLabel,
+							Object.assign({
+								datasetLabel: sharedLabel,
 								value: item.value,
 							}, item)
 						);
@@ -270,7 +271,10 @@ export class CartesianScales extends Service {
 		}
 
 		if (axisOptions.scaleType === ScaleTypes.TIME) {
-			const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
+			const spaceToAddToEdges = Tools.getProperty(options, "axes", axisPosition, "timeScale", "addSpaceOnEdges") !== null
+				? Tools.getProperty(options, "axes", axisPosition, "timeScale", "addSpaceOnEdges")
+				: Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
+
 			if (spaceToAddToEdges) {
 				const startDate = new Date(domain[0]);
 				const endDate = new Date(domain[1]);

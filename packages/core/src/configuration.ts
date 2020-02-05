@@ -83,7 +83,7 @@ export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip,
 	}
 } as AxisTooltipOptions);
 
-export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip , {
+export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip, {
 	datapoint: {
 		verticalOffset: 4
 	},
@@ -94,7 +94,7 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartToolt
 
 // We setup no axes by default, the TwoDimensionalAxes component
 // Will setup axes options based on what user provides
-const axes: AxesOptions = { };
+const axes: AxesOptions = {};
 
 const timeScale: TimeScaleOptions = {
 	addSpaceOnEdges: 1,
@@ -287,7 +287,9 @@ export const transitions = {
 export const axis = {
 	ticks: {
 		number: 7,
-		rotateIfSmallerThan: 30
+		rotateIfSmallerThan: 30,
+		hour12Format: true,
+		showDayName: false,
 	}
 };
 

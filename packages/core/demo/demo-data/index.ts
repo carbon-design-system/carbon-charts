@@ -157,7 +157,72 @@ let allDemoGroups = [
 				options: lineDemos.lineOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart
-			}
+			},
+			{
+				options: lineDemos.lineTimeSeries15seconds12hOptions,
+				data: lineDemos.lineTimeSeriesData15seconds12h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeries15seconds24hOptions,
+				data: lineDemos.lineTimeSeriesData15seconds24h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeriesMinute12hOptions,
+				data: lineDemos.lineTimeSeriesDataMinute12h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeriesMinute24hOptions,
+				data: lineDemos.lineTimeSeriesDataMinute24h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeries30minutes12hOptions,
+				data: lineDemos.lineTimeSeriesData30minutes12h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeries30minutes24hOptions,
+				data: lineDemos.lineTimeSeriesData30minutes24h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeriesHourly12hOptions,
+				data: lineDemos.lineTimeSeriesDataHourly12h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeriesHourly24hOptions,
+				data: lineDemos.lineTimeSeriesDataHourly24h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: lineDemos.lineTimeSeriesDataDailyShowDayNumber,
+				options: lineDemos.lineTimeSeriesDailyShowDayNumberOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: lineDemos.lineTimeSeriesDataDailyShowDayName,
+				options: lineDemos.lineTimeSeriesDailyShowDayNameOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: lineDemos.lineTimeSeriesDataMonthly,
+				options: lineDemos.lineTimeSeriesMonthlyOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: lineDemos.lineTimeSeriesDataQuarterly,
+				options: lineDemos.lineTimeSeriesQuarterlyOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: lineDemos.lineTimeSeriesDataYearly,
+				options: lineDemos.lineTimeSeriesYearlyOptions,
+				chartType: chartTypes.LineChart
+			},
 		]
 	},
 	{
