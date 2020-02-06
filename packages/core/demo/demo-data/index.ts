@@ -210,7 +210,9 @@ allDemoGroups = allDemoGroups.map(demoGroup => {
 		demo.id = `${formatTitleString(demoGroup.title)}--${formatTitleString(demo.options.title)}`;
 		demo.options.height = "400px";
 
-		if (!demo.codesandbox) demo.codesandbox = {};
+		if (!demo.codesandbox) {
+			demo.codesandbox = {};
+		}
 		demo.codesandbox.react = createChartSandbox(createReactChartApp(demo));
 
 		return demo;
