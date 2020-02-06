@@ -200,6 +200,7 @@ export const lineOptions = {
 	}
 };
 
+
 // Step
 export const stepOptions = Tools.merge({}, lineOptions, {
 	title: "Step (discrete)",
