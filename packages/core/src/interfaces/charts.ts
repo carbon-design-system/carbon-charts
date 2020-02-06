@@ -96,6 +96,10 @@ export interface BubbleChartOptions extends ScatterChartOptions {
 	 * options for the individual bubbles
 	 */
 	bubble?: {
+		/**
+		 * A function that would determine the range of the bubble radius to use
+		 * Returns an array with the 1st value being the min and the 2nd value being the max radius
+		 */
 		radiusRange?: Function;
 	};
 }
