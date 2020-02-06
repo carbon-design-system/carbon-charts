@@ -38,6 +38,19 @@ export class ChartModel {
 		this.services = services;
 	}
 
+	santizie(data) {
+		// Sanitize all dates
+		data.datasets.forEach(dataset => {
+			dataset.data = dataset.data.map(d => {
+				if (d.date && !d.date.getTime) {
+					d.date = new Date(d.date);
+				}
+
+				return d;
+			});
+		});
+	}
+
 	getDisplayData() {
 		const { ACTIVE } = Configuration.legend.items.status;
 		const dataLabels = this.get("dataLabels");
@@ -71,7 +84,7 @@ export class ChartModel {
 			dataLabels
 		});
 
-		return this.state.data;
+		return this.santizie(this.state.data);
 	}
 
 	generateDataLabels(newData) {

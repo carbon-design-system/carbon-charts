@@ -17,6 +17,8 @@ then
 	# checkout master to get out of detached HEAD state
 	git checkout master
 
+	git stash
+
 	lerna version --conventional-commits --yes --force-publish
 else
 	echo "The commit is a tag, publish to NPM!"
