@@ -14,7 +14,9 @@ export * from "./pie";
 export * from "./scatter";
 export * from "./step";
 
-const chartTypes = {
+import { createChartSandbox, createReactChartApp } from "./create-codesandbox";
+
+export const chartTypes = {
 	SimpleBarChart: {
 		vanilla: "SimpleBarChart",
 		angular: "ibm-simple-bar-chart",
@@ -207,6 +209,9 @@ allDemoGroups = allDemoGroups.map(demoGroup => {
 		demo.title = demo.options.title;
 		demo.id = `${formatTitleString(demoGroup.title)}--${formatTitleString(demo.options.title)}`;
 		demo.options.height = "400px";
+
+		if (!demo.codesandbox) demo.codesandbox = {};
+		demo.codesandbox.react = createChartSandbox(createReactChartApp(demo));
 
 		return demo;
 	});
