@@ -38,19 +38,18 @@ demoGroups.forEach(demoGroup => {
 					data-code-snippet> <div class="bx--snippet-container" aria-label="Code Snippet Text">
 						<pre>
 							<code>
-<span className="token tag">{`<${demo.chartType.vanilla}`}</span>
-{`
+								<span className="token tag">{`<${demo.chartType.vanilla}`}</span>
+								{`
     `}<span className="token attr-name">{`data=`}</span><span className="token attr-value">{`{data}`}</span>
-{`
+								{`
     `}<span className="token attr-name">{`options=`}</span><span className="token attr-value">{`{options}`}</span>
-<span className="token tag">{`
+								<span className="token tag">{`
 />`}</span>
 							</code>
 						</pre>
 					</div>
 				</div>
 			</div>
-		))
-		.addParameters({ component: DemoComponent });
+		));
 	});
 });
