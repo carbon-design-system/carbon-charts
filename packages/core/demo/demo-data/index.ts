@@ -6,6 +6,14 @@ import * as pieDemos from "./pie";
 import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
 
+export * from "./bar";
+export * from "./bubble";
+export * from "./donut";
+export * from "./line";
+export * from "./pie";
+export * from "./scatter";
+export * from "./step";
+
 const chartTypes = {
 	SimpleBarChart: {
 		vanilla: "SimpleBarChart",
@@ -111,6 +119,26 @@ let allDemoGroups = [
 		]
 	},
 	{
+		title: "Bubble",
+		demos: [
+			{
+				options: bubbleDemos.bubbleOptions,
+				data: bubbleDemos.bubbleData,
+				chartType: chartTypes.BubbleChart
+			}
+		]
+	},
+	{
+		title: "Donut",
+		demos: [
+			{
+				options: donutDemos.donutOptions,
+				data: donutDemos.donutData,
+				chartType: chartTypes.DonutChart
+			}
+		]
+	},
+	{
 		title: "Line",
 		demos: [
 			{
@@ -122,6 +150,16 @@ let allDemoGroups = [
 				options: lineDemos.lineOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart
+			}
+		]
+	},
+	{
+		title: "Pie",
+		demos: [
+			{
+				options: pieDemos.pieOptions,
+				data: pieDemos.pieData,
+				chartType: chartTypes.PieChart
 			}
 		]
 	},
@@ -154,42 +192,14 @@ let allDemoGroups = [
 				chartType: chartTypes.LineChart
 			}
 		]
-	},
-	{
-		title: "Pie",
-		demos: [
-			{
-				options: pieDemos.pieOptions,
-				data: pieDemos.pieData,
-				chartType: chartTypes.PieChart
-			}
-		]
-	},
-	{
-		title: "Donut",
-		demos: [
-			{
-				options: donutDemos.donutOptions,
-				data: donutDemos.donutData,
-				chartType: chartTypes.DonutChart
-			}
-		]
 	}
-
-
-
-	// {
-	// 	id: "bubble",
-	// 	options: bubbleOptions,
-	// 	data: bubbleData
-	// },
 ] as any;
 
 const formatTitleString = str => (
-	str.replace(/[^\w\s]/gi, '')
-		.replace(/\s\s+/g, ' ')
+	str.replace(/[^\w\s]/gi, "")
+		.replace(/\s\s+/g, " ")
 		.toLowerCase()
-		.replace(/\s+/g, '-')
+		.replace(/\s+/g, "-")
 );
 
 allDemoGroups = allDemoGroups.map(demoGroup => {
@@ -203,7 +213,5 @@ allDemoGroups = allDemoGroups.map(demoGroup => {
 
 	return demoGroup;
 });
-
-console.log(allDemoGroups)
 
 export const demoGroups = allDemoGroups;
