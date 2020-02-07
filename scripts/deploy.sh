@@ -14,10 +14,10 @@ if [ -z "$TRAVIS_TAG" ]
 then
 	echo "The commit is not a tag, get lerna to version packages, and publish to Github."
 
+	git stash
+
 	# checkout master to get out of detached HEAD state
 	git checkout master
-
-	git stash
 
 	lerna version --conventional-commits --yes --force-publish
 else
