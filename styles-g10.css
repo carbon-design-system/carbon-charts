@@ -117,7 +117,7 @@ g.bx--cc--legend {
         list-style: none;
         position: relative; }
         .bx--cc--tooltip .content-box ul.multi-tooltip li:not(:last-child) {
-          margin-bottom: 2px; }
+          border-bottom: 1px solid #dcdcdc; }
   .bx--cc--tooltip .tooltip-color {
     position: absolute;
     left: 0;

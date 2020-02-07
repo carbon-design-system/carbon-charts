@@ -1133,7 +1133,7 @@ var pieData = {
     datasets: [
         {
             label: "Dataset 1",
-            data: [75000, 65000, 10000, 25000, 1200, 20000]
+            data: [20000, 65000, 75000, 1200, 10000, 25000]
         }
     ]
 };
@@ -3376,18 +3376,20 @@ var TooltipBar = /** @class */ (function (_super) {
             // check the type of tooltip and that it is enabled
             if ((e.detail.type === _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__["TooltipTypes"].DATAPOINT && _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "datapoint", "enabled"))
                 || (e.detail.type === _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__["TooltipTypes"].GRIDLINE && _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "gridline", "enabled"))) {
+                var data = e.detail.hoveredElement.datum();
                 var hoveredElement = e.detail.hoveredElement.node();
                 var defaultHTML = void 0;
                 if (e.detail.multidata) {
                     // multi tooltip
-                    defaultHTML = _this.getMultilineTooltipHTML(e.detail.multidata);
+                    data = e.detail.multidata;
+                    defaultHTML = _this.getMultilineTooltipHTML(data);
                 }
                 else {
                     defaultHTML = _this.getTooltipHTML(e.detail.hoveredElement.datum());
                 }
                 // if there is a provided tooltip HTML function call it and pass the defaultHTML
                 if (_tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "customHTML")) {
-                    tooltipTextContainer.html(_this.model.getOptions().tooltip.customHTML(hoveredElement, defaultHTML));
+                    tooltipTextContainer.html(_this.model.getOptions().tooltip.customHTML(data, defaultHTML));
                 }
                 else {
                     // default tooltip
@@ -3476,7 +3478,8 @@ var TooltipBar = /** @class */ (function (_super) {
             points.map(function (datapoint) {
                 var formattedValue = _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "valueFormatter") ?
                     _this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
-                var indicatorColor = _this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
+                // For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
+                var indicatorColor = _this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label);
                 return "\n\t\t\t\t<li>\n\t\t\t\t\t<div class=\"datapoint-tooltip\">\n\t\t\t\t\t\t<a style=\"background-color:" + indicatorColor + "\" class=\"tooltip-color\"></a>\n\t\t\t\t\t\t<p class=\"label\">" + datapoint.datasetLabel + "</p>\n\t\t\t\t\t\t<p class=\"value\">" + formattedValue + "</p>\n\t\t\t\t\t</div>\n\t\t\t\t</li>";
             }).join("") +
             ("<li>\n\t\t\t\t\t<div class='total-val'>\n\t\t\t\t\t\t<p class='label'>Total</p>\n\t\t\t\t\t\t<p class='value'>" + total + "</p>\n\t\t\t\t\t</div>\n\t\t\t\t</li>\n\t\t\t</ul>");
@@ -3529,7 +3532,8 @@ var TooltipScatter = /** @class */ (function (_super) {
         }
         var formattedValue = _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
             this.model.getOptions().tooltip.valueFormatter(data.value) : data.value.toLocaleString("en");
-        var indicatorColor = this.model.getStrokeColor(data.datasetLabel, data.label, data.value);
+        // For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
+        var indicatorColor = this.model.getStrokeColor(data.datasetLabel, data.label);
         return "\n\t\t\t<div class=\"datapoint-tooltip\">\n\t\t\t\t<a style=\"background-color:" + indicatorColor + "\" class=\"tooltip-color\"></a>\n\t\t\t\t<p class=\"label\">" + data.datasetLabel + "</p>\n\t\t\t\t<p class=\"value\">" + formattedValue + "</p>\n\t\t\t</div>";
     };
     return TooltipScatter;
@@ -3674,6 +3678,7 @@ var Tooltip = /** @class */ (function (_super) {
                 }
                 var formattedValue = _tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].getProperty(_this.model.getOptions(), "tooltip", "valueFormatter") ?
                     _this.model.getOptions().tooltip.valueFormatter(datapointValue) : datapointValue.toLocaleString("en");
+                // For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
                 var indicatorColor = _this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label);
                 return "\n\t\t\t\t<li>\n\t\t\t\t\t<div class=\"datapoint-tooltip\">\n\t\t\t\t\t\t<a style=\"background-color:" + indicatorColor + "\" class=\"tooltip-color\"></a>\n\t\t\t\t\t\t<p class=\"label\">" + datapoint.datasetLabel + "</p>\n\t\t\t\t\t\t<p class=\"value\">" + formattedValue + "</p>\n\t\t\t\t\t</div>\n\t\t\t\t</li>";
             }).join("") + "</ul>";
@@ -4804,7 +4809,7 @@ var Pie = /** @class */ (function (_super) {
         // Setup the pie layout
         var pieLayout = Object(d3_shape__WEBPACK_IMPORTED_MODULE_5__["pie"])()
             .value(function (d) { return d.value; })
-            .sort(function (a, b) { return b.value - a.value; })
+            .sort(null)
             .padAngle(options.pie.padAngle);
         // Sort pie layout data based off of the indecies the layout creates
         var pieLayoutData = pieLayout(dataList)
@@ -5130,19 +5135,19 @@ var Scatter = /** @class */ (function (_super) {
         dotsEnter.merge(dots)
             .raise()
             .classed("dot", true)
-            .classed("filled", filled)
-            .classed("unfilled", !filled)
+            .classed("filled", function (d) { return _this.model.getIsFilled(d.datasetLabel, d.label, d, filled); })
+            .classed("unfilled", function (d) { return !_this.model.getIsFilled(d.datasetLabel, d.label, d, filled); })
             .attr("cx", function (d, i) { return _this.services.cartesianScales.getDomainValue(d, i); })
             .transition(this.services.transitions.getTransition("scatter-update-enter", animate))
             .attr("cy", function (d, i) { return _this.services.cartesianScales.getRangeValue(d, i); })
             .attr("r", options.points.radius)
             .attr("fill", function (d) {
-            if (filled) {
-                return _this.model.getFillScale()[d.datasetLabel](d.label);
+            if (_this.model.getIsFilled(d.datasetLabel, d.label, d, filled)) {
+                return _this.model.getFillColor(d.datasetLabel, d.label, d);
             }
         })
             .attr("fill-opacity", filled ? 0.2 : 1)
-            .attr("stroke", function (d) { return _this.model.getStrokeColor(d.datasetLabel, d.label, d.value); })
+            .attr("stroke", function (d) { return _this.model.getStrokeColor(d.datasetLabel, d.label, d); })
             .attr("opacity", 1)
             // a11y
             .attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_1__["Roles"].GRAPHICS_SYMBOL)
@@ -5158,6 +5163,7 @@ var Scatter = /** @class */ (function (_super) {
             date: datum.date,
             label: labels[i],
             datasetLabel: d.label,
+            class: datum.class,
             value: isNaN(datum) ? datum.value : datum
         }); });
     };
@@ -5167,7 +5173,7 @@ var Scatter = /** @class */ (function (_super) {
             .on("mouseover mousemove", function (datum) {
             var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this);
             hoveredElement.classed("hovered", true);
-            hoveredElement.style("fill", function (d) { return self.model.getFillScale()[d.datasetLabel](d.label); });
+            hoveredElement.style("fill", function (d) { return self.model.getFillColor(d.datasetLabel, d.label, d); });
             var eventNameToDispatch = d3_selection__WEBPACK_IMPORTED_MODULE_2__["event"].type === "mouseover" ? _interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Scatter.SCATTER_MOUSEOVER : _interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Scatter.SCATTER_MOUSEMOVE;
             // Dispatch mouse event
             self.services.events.dispatchEvent(eventNameToDispatch, {
@@ -6175,6 +6181,26 @@ var PieChartModel = /** @class */ (function (_super) {
     function PieChartModel(services) {
         return _super.call(this, services) || this;
     }
+    PieChartModel.prototype.sanitize = function (data) {
+        // Sort data based on value
+        // and sort labels based on the data value order
+        var dataset = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(data, "datasets", 0);
+        if (dataset) {
+            var sortedLabelsAndValues = data.labels.map(function (label, i) {
+                return {
+                    label: label,
+                    value: dataset.data[i],
+                    fillColor: dataset.fillColors ? dataset.fillColors[i] : undefined
+                };
+            }).sort(function (a, b) { return b.value - a.value; });
+            dataset.data = sortedLabelsAndValues.map(function (d) { return d.value; });
+            data.labels = sortedLabelsAndValues.map(function (d) { return d.label; });
+            if (dataset.fillColors) {
+                dataset.fillColors = sortedLabelsAndValues.map(function (d) { return d.fillColor; });
+            }
+        }
+        return data;
+    };
     PieChartModel.prototype.generateDataLabels = function (newData) {
         var dataLabels = {};
         newData.labels.forEach(function (label) {
@@ -6406,6 +6432,18 @@ var ChartModel = /** @class */ (function () {
         this.colorScale = {};
         this.services = services;
     }
+    ChartModel.prototype.sanitize = function (data) {
+        // Sanitize all dates
+        data.datasets.forEach(function (dataset) {
+            dataset.data = dataset.data.map(function (d) {
+                if (d.date && !d.date.getTime) {
+                    d.date = new Date(d.date);
+                }
+                return d;
+            });
+        });
+        return data;
+    };
     ChartModel.prototype.getDisplayData = function () {
         var ACTIVE = _configuration__WEBPACK_IMPORTED_MODULE_0__["legend"].items.status.ACTIVE;
         var dataLabels = this.get("dataLabels");
@@ -6427,12 +6465,13 @@ var ChartModel = /** @class */ (function () {
      * @param newData The new raw data to be set
      */
     ChartModel.prototype.setData = function (newData) {
-        var dataLabels = this.generateDataLabels(newData);
+        var sanitizedData = this.sanitize(newData);
+        var dataLabels = this.generateDataLabels(sanitizedData);
         this.set({
-            data: newData,
+            data: sanitizedData,
             dataLabels: dataLabels
         });
-        return this.state.data;
+        return sanitizedData;
     };
     ChartModel.prototype.generateDataLabels = function (newData) {
         var dataLabels = {};
@@ -6537,22 +6576,40 @@ var ChartModel = /** @class */ (function () {
             });
         }
     };
-    ChartModel.prototype.getFillColor = function (datasetLabel, label, value) {
+    /**
+     * Should the data point be filled?
+     * @param datasetLabel
+     * @param label
+     * @param value
+     * @param defaultFilled the default for this chart
+     */
+    ChartModel.prototype.getIsFilled = function (datasetLabel, label, data, defaultFilled) {
         var options = this.getOptions();
-        if (options.getFillColor) {
-            return options.getFillColor(datasetLabel, label, value);
+        if (options.getIsFilled) {
+            return options.getIsFilled(datasetLabel, label, data, defaultFilled);
         }
         else {
-            return this.getFillScale()[datasetLabel](label);
+            return defaultFilled;
         }
     };
-    ChartModel.prototype.getStrokeColor = function (datasetLabel, label, value) {
+    ChartModel.prototype.getFillColor = function (datasetLabel, label, data) {
         var options = this.getOptions();
-        if (options.getStrokeColor) {
-            return options.getStrokeColor(datasetLabel, label, value);
+        var defaultFillColor = this.getFillScale()[datasetLabel](label);
+        if (options.getFillColor) {
+            return options.getFillColor(datasetLabel, label, data, defaultFillColor);
         }
         else {
-            return this.colorScale[datasetLabel](label);
+            return defaultFillColor;
+        }
+    };
+    ChartModel.prototype.getStrokeColor = function (datasetLabel, label, data) {
+        var options = this.getOptions();
+        var defaultStrokeColor = this.colorScale[datasetLabel](label);
+        if (options.getStrokeColor) {
+            return options.getStrokeColor(datasetLabel, label, data, defaultStrokeColor);
+        }
+        else {
+            return defaultStrokeColor;
         }
     };
     ChartModel.prototype.getFillScale = function () {

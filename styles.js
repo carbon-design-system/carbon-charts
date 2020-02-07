@@ -91,15 +91,15 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/styles/styles.scss");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/styles/styles-white.scss");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/styles/styles.scss":
-/*!********************************!*\
-  !*** ./src/styles/styles.scss ***!
-  \********************************/
+/***/ "./src/styles/styles-white.scss":
+/*!**************************************!*\
+  !*** ./src/styles/styles-white.scss ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
