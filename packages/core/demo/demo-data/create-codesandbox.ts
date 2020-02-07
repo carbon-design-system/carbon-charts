@@ -66,7 +66,7 @@ export const createAngularChartApp = (demo: any) => {
 
 	const appComponentHtml = `<${chartComponent} [data]="data" [options]="options"></${chartComponent}>`;
 	const appComponentTs =
-`import { Component } from "@angular/core";
+		`import { Component } from "@angular/core";
 @Component({
 	selector: "app-root",
 	templateUrl: "./app.component.html"
@@ -74,10 +74,10 @@ export const createAngularChartApp = (demo: any) => {
 export class AppComponent {
 	data = ${chartData};
 	options = ${chartOptions};
-}
-  `;
+}`;
+
 	const appModule =
-`import { NgModule } from "@angular/core";
+		`import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { ChartsModule } from "@carbon/charts-angular";
 import { AppComponent } from "./app.component";
@@ -86,11 +86,10 @@ import { AppComponent } from "./app.component";
 	declarations: [AppComponent],
 	bootstrap: [AppComponent]
 })
-export class AppModule {}
-  `;
+export class AppModule {}`;
 
 	const indexHtml =
-`<!DOCTYPE html>
+		`<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -99,11 +98,10 @@ export class AppModule {}
 	<body>
 		<app-root></app-root>
 	</body>
-</html>
-  `;
+</html>`;
 
 	const mainTs =
-`import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+		`import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { AppModule } from "./app/app.module";
 platformBrowserDynamic()
 	.bootstrapModule(AppModule)
@@ -111,7 +109,7 @@ platformBrowserDynamic()
 `;
 
 	const angularCliJson =
-`{
+		`{
 	"apps": [
 		{
 			"root": "src",
@@ -159,5 +157,74 @@ platformBrowserDynamic()
 		"src/app/app.module.ts": appModule,
 		".angular-cli.json": angularCliJson,
 		"package.json": packageJson
+	};
+};
+
+export const createVueChartApp = (demo: any) => {
+	const chartData = JSON.stringify(demo.data, null, "\t\t");
+	const chartOptions = JSON.stringify(demo.options, null, "\t\t");
+	const chartComponent = demo.chartType.vue;
+
+	const chartVue =
+`<script>
+import Vue from 'vue';
+import '@carbon/charts/styles.css';
+import chartsVue from '@carbon/charts-vue';
+Vue.use(chartsVue);
+export default {
+	name: 'Chart',
+	components: {},
+	data() {
+		return {
+			data: ${chartData},
+			options: ${chartOptions}
+		};
+	},
+	template: '<${chartComponent} :data="data" :options="options"></${chartComponent}>'
+};
+</script>
+  `;
+
+	const appVue =
+`<template>
+	<div id='app'>
+		<Chart/>
+	</div>
+</template>
+<script>
+import Chart from './components/chart';
+export default {
+	name: 'App',
+	components: {
+		Chart
+	}
+};
+</script>
+  `;
+
+	const mainJs =
+`import Vue from 'vue';
+import App from './App.vue';
+Vue.config.productionTip = false;
+new Vue({
+	render: h => h(App)
+}).$mount('#app');
+`;
+
+	const packageJson = JSON.stringify({
+		dependencies: {
+			'@carbon/charts': libraryVersion,
+			'@carbon/charts-vue': libraryVersion,
+			'@vue/cli-plugin-babel': '4.1.1',
+			d3: '5.15.0',
+			vue: '^2.6.11'
+		}
+	}, null, "\t\t");
+
+	return {
+		'src/components/chart.vue': chartVue,
+		'src/App.vue': appVue,
+		'src/main.js': mainJs,
+		'package.json': packageJson
 	};
 };

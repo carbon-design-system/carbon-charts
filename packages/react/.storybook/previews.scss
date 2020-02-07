@@ -43,6 +43,11 @@ p.props {
 	background-color: black;
 	color: white;
 
+	pre {
+		-moz-tab-size: 4;
+		tab-size: 4;
+	}
+
 	.bx--snippet-container pre::after {
 		display: none;
 	}

@@ -17,7 +17,8 @@ export * from "./step";
 import {
 	createChartSandbox,
 	createReactChartApp,
-	createAngularChartApp
+	createAngularChartApp,
+	createVueChartApp
 } from "./create-codesandbox";
 
 export const chartTypes = {
@@ -218,6 +219,7 @@ allDemoGroups = allDemoGroups.map(demoGroup => {
 			demo.codesandbox = {};
 		}
 		demo.codesandbox.react = createChartSandbox(createReactChartApp(demo));
+		demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo));
 
 		if (!demo.code) {
 			demo.code = {};
