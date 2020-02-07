@@ -7,7 +7,7 @@ import "./index.scss";
 import { initializeDemoOptions } from "./demo-options";
 
 // Chart types
-import { demoGroups } from "./demo-data";
+import { demoGroups } from "./demo-data/index";
 
 // MISC
 import { Tools } from "../src/tools";

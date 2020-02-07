@@ -18,7 +18,7 @@ demoGroups.forEach(demoGroup => {
 			<div className="container">
 				<h3>
 					<b>Component:</b>
-					<span class="bx--tag bx--tag--green component-name">{`<${demo.chartType.vanilla} />`}</span>
+					<span className="bx--tag bx--tag--green component-name">{`<${demo.chartType.vanilla} />`}</span>
 				</h3>
 				<p className="props"><b>Props:</b> data, <a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></p>
 
@@ -34,8 +34,8 @@ demoGroups.forEach(demoGroup => {
 					<img src="https://codesandbox.io/static/img/play-codesandbox.svg" className="marginTop" />
 				</a>
 
-				<div class="bx--snippet bx--snippet--multi bx--snippet--expand marginTop-30"
-					data-code-snippet> <div class="bx--snippet-container" aria-label="Code Snippet Text">
+				<div className="bx--snippet bx--snippet--multi bx--snippet--expand marginTop-30" data-code-snippet>
+					<div className="bx--snippet-container" aria-label="Code Snippet Text">
 						<pre>
 							<code>
 								<span className="token tag">{`<${demo.chartType.vanilla}`}</span>

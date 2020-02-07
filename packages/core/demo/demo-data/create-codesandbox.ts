@@ -1,5 +1,7 @@
 import { getParameters } from "codesandbox/lib/api/define";
 
+import { version as libraryVersion } from "../../package.json";
+
 export const createChartSandbox = (chartTemplate: any) => {
 	const files = {};
 
@@ -17,7 +19,7 @@ export const createReactChartApp = (demo: any) => {
 	const indexHtml = `<div id="root"></div>
   `;
 	const indexJs =
-`import React from "react";
+		`import React from "react";
 import ReactDOM from "react-dom";
 import { ${chartComponent} } from "@carbon/charts-react";
 import "@carbon/charts/styles.css";
@@ -41,8 +43,8 @@ ReactDOM.render(<App />, document.getElementById("root"));
   `;
 	const packageJson = {
 		dependencies: {
-			"@carbon/charts": "0.20.1",
-			"@carbon/charts-react": "0.20.1",
+			"@carbon/charts": libraryVersion,
+			"@carbon/charts-react": libraryVersion,
 			d3: "5.12.0",
 			react: "16.12.0",
 			"react-dom": "16.12.0",
@@ -53,6 +55,109 @@ ReactDOM.render(<App />, document.getElementById("root"));
 	return {
 		"src/index.html": indexHtml,
 		"src/index.js": indexJs,
+		"package.json": packageJson
+	};
+};
+
+export const createAngularChartApp = (demo: any) => {
+	const chartData = JSON.stringify(demo.data, null, "\t\t");
+	const chartOptions = JSON.stringify(demo.options, null, "\t\t");
+	const chartComponent = demo.chartType.angular;
+
+	const appComponentHtml = `<${chartComponent} [data]="data" [options]="options"></${chartComponent}>`;
+	const appComponentTs =
+`import { Component } from "@angular/core";
+@Component({
+	selector: "app-root",
+	templateUrl: "./app.component.html"
+})
+export class AppComponent {
+	data = ${chartData};
+	options = ${chartOptions};
+}
+  `;
+	const appModule =
+`import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { ChartsModule } from "@carbon/charts-angular";
+import { AppComponent } from "./app.component";
+@NgModule({
+	imports: [BrowserModule, ChartsModule],
+	declarations: [AppComponent],
+	bootstrap: [AppComponent]
+})
+export class AppModule {}
+  `;
+
+	const indexHtml =
+`<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Angular</title>
+	</head>
+	<body>
+		<app-root></app-root>
+	</body>
+</html>
+  `;
+
+	const mainTs =
+`import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import { AppModule } from "./app/app.module";
+platformBrowserDynamic()
+	.bootstrapModule(AppModule)
+	.catch(err => console.log(err));
+`;
+
+	const angularCliJson =
+`{
+	"apps": [
+		{
+			"root": "src",
+			"outDir": "dist",
+			"assets": ["assets", "favicon.ico"],
+			"index": "index.html",
+			"main": "main.ts",
+			"polyfills": "polyfills.ts",
+			"prefix": "app",
+			"styles": ["styles.css"],
+			"scripts": [],
+			"environmentSource": "environments/environment.ts",
+			"environments": {
+				"dev": "environments/environment.ts",
+				"prod": "environments/environment.prod.ts"
+			}
+		}
+	]
+}`;
+
+	const packageJson = JSON.stringify({
+		dependencies: {
+			"@angular/animations": "8.2.14",
+			"@angular/common": "8.2.14",
+			"@angular/compiler": "8.2.14",
+			"@angular/core": "8.2.14",
+			"@angular/forms": "8.2.14",
+			"@angular/platform-browser": "8.2.14",
+			"@angular/platform-browser-dynamic": "8.2.14",
+			"@angular/router": "8.2.14",
+			"@carbon/charts": libraryVersion,
+			"@carbon/charts-angular": libraryVersion,
+			"core-js": "3.6.0",
+			d3: "5.15.0",
+			rxjs: "6.5.3",
+			"zone.js": "0.10.2"
+		}
+	}, null, "\t");
+
+	return {
+		"src/index.html": indexHtml,
+		"src/main.ts": mainTs,
+		"src/app/app.component.html": appComponentHtml,
+		"src/app/app.component.ts": appComponentTs,
+		"src/app/app.module.ts": appModule,
+		".angular-cli.json": angularCliJson,
 		"package.json": packageJson
 	};
 };
