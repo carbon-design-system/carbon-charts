@@ -38,6 +38,21 @@ export class ChartModel {
 		this.services = services;
 	}
 
+	sanitize(data) {
+		// Sanitize all dates
+		data.datasets.forEach(dataset => {
+			dataset.data = dataset.data.map(d => {
+				if (d.date && !d.date.getTime) {
+					d.date = new Date(d.date);
+				}
+
+				return d;
+			});
+		});
+
+		return data;
+	}
+
 	getDisplayData() {
 		const { ACTIVE } = Configuration.legend.items.status;
 		const dataLabels = this.get("dataLabels");
@@ -64,14 +79,15 @@ export class ChartModel {
 	 * @param newData The new raw data to be set
 	 */
 	setData(newData) {
-		const dataLabels = this.generateDataLabels(newData);
+		const sanitizedData = this.sanitize(newData);
+		const dataLabels = this.generateDataLabels(sanitizedData);
 
 		this.set({
-			data: newData,
+			data: sanitizedData,
 			dataLabels
 		});
 
-		return this.state.data;
+		return sanitizedData;
 	}
 
 	generateDataLabels(newData) {
