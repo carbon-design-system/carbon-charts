@@ -38,6 +38,21 @@ export class ChartModel {
 		this.services = services;
 	}
 
+	sanitize(data) {
+		// Sanitize all dates
+		data.datasets.forEach(dataset => {
+			dataset.data = dataset.data.map(d => {
+				if (d.date && !d.date.getTime) {
+					d.date = new Date(d.date);
+				}
+
+				return d;
+			});
+		});
+
+		return data;
+	}
+
 	getDisplayData() {
 		const { ACTIVE } = Configuration.legend.items.status;
 		const dataLabels = this.get("dataLabels");
@@ -64,14 +79,15 @@ export class ChartModel {
 	 * @param newData The new raw data to be set
 	 */
 	setData(newData) {
-		const dataLabels = this.generateDataLabels(newData);
+		const sanitizedData = this.sanitize(newData);
+		const dataLabels = this.generateDataLabels(sanitizedData);
 
 		this.set({
-			data: newData,
+			data: sanitizedData,
 			dataLabels
 		});
 
-		return this.state.data;
+		return sanitizedData;
 	}
 
 	generateDataLabels(newData) {
@@ -186,21 +202,39 @@ export class ChartModel {
 		}
 	}
 
-	getFillColor(datasetLabel: any, label?: any, value?: any) {
+	/**
+	 * Should the data point be filled?
+	 * @param datasetLabel
+	 * @param label
+	 * @param value
+	 * @param defaultFilled the default for this chart
+	 */
+	getIsFilled(datasetLabel: any, label?: any, data?: any, defaultFilled?: boolean) {
 		const options = this.getOptions();
-		if (options.getFillColor) {
-			return options.getFillColor(datasetLabel, label, value);
+		if (options.getIsFilled) {
+			return options.getIsFilled(datasetLabel, label, data, defaultFilled);
 		} else {
-			return this.getFillScale()[datasetLabel](label);
+			return defaultFilled;
 		}
 	}
 
-	getStrokeColor(datasetLabel: any, label?: any, value?: any) {
+	getFillColor(datasetLabel: any, label?: any, data?: any) {
 		const options = this.getOptions();
-		if (options.getStrokeColor) {
-			return options.getStrokeColor(datasetLabel, label, value);
+		const defaultFillColor = this.getFillScale()[datasetLabel](label);
+		if (options.getFillColor) {
+			return options.getFillColor(datasetLabel, label, data, defaultFillColor);
 		} else {
-			return this.colorScale[datasetLabel](label);
+			return defaultFillColor;
+		}
+	}
+
+	getStrokeColor(datasetLabel: any, label?: any, data?: any) {
+		const options = this.getOptions();
+		const defaultStrokeColor = this.colorScale[datasetLabel](label);
+		if (options.getStrokeColor) {
+			return options.getStrokeColor(datasetLabel, label, data, defaultStrokeColor);
+		} else {
+			return defaultStrokeColor;
 		}
 	}
 

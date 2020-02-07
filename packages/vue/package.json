@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-vue",
-	"version": "0.28.0",
+	"version": "0.29.0",
 	"description": "Carbon charting components for Vue",
 	"main": "charts-vue.umd.min.js",
 	"scripts": {
@@ -14,7 +14,7 @@
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"dependencies": {
-		"@carbon/charts": "^0.28.0",
+		"@carbon/charts": "^0.29.0",
 		"vue": "2.5.21"
 	},
 	"devDependencies": {
@@ -30,6 +30,7 @@
 		"babel-eslint": "10.0.1",
 		"babel-loader": "8.0.5",
 		"babel-preset-vue": "2.0.2",
+		"cache-loader": "4.1.0",
 		"eslint": "5.8.0",
 		"eslint-plugin-vue": "5.0.0",
 		"lint-staged": "8.1.5",
