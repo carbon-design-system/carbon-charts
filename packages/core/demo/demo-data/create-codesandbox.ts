@@ -167,12 +167,12 @@ export const createVueChartApp = (demo: any) => {
 
 	const chartVue =
 `<script>
-import Vue from 'vue';
-import '@carbon/charts/styles.css';
-import chartsVue from '@carbon/charts-vue';
+import Vue from "vue";
+import "@carbon/charts/styles.css";
+import chartsVue from "@carbon/charts-vue";
 Vue.use(chartsVue);
 export default {
-	name: 'Chart',
+	name: "Chart",
 	components: {},
 	data() {
 		return {
@@ -180,21 +180,21 @@ export default {
 			options: ${chartOptions}
 		};
 	},
-	template: '<${chartComponent} :data="data" :options="options"></${chartComponent}>'
+	template: "<${chartComponent} :data="data" :options="options"></${chartComponent}>"
 };
 </script>
   `;
 
 	const appVue =
 `<template>
-	<div id='app'>
+	<div id="app">
 		<Chart/>
 	</div>
 </template>
 <script>
-import Chart from './components/chart';
+import Chart from "./components/chart";
 export default {
-	name: 'App',
+	name: "App",
 	components: {
 		Chart
 	}
@@ -203,28 +203,28 @@ export default {
   `;
 
 	const mainJs =
-`import Vue from 'vue';
-import App from './App.vue';
+`import Vue from "vue";
+import App from "./App.vue";
 Vue.config.productionTip = false;
 new Vue({
 	render: h => h(App)
-}).$mount('#app');
+}).$mount("#app");
 `;
 
 	const packageJson = JSON.stringify({
 		dependencies: {
-			'@carbon/charts': libraryVersion,
-			'@carbon/charts-vue': libraryVersion,
-			'@vue/cli-plugin-babel': '4.1.1',
-			d3: '5.15.0',
-			vue: '^2.6.11'
+			"@carbon/charts": libraryVersion,
+			"@carbon/charts-vue": libraryVersion,
+			"@vue/cli-plugin-babel": "4.1.1",
+			d3: "5.15.0",
+			vue: "^2.6.11"
 		}
 	}, null, "\t\t");
 
 	return {
-		'src/components/chart.vue': chartVue,
-		'src/App.vue': appVue,
-		'src/main.js': mainJs,
-		'package.json': packageJson
+		"src/components/chart.vue": chartVue,
+		"src/App.vue": appVue,
+		"src/main.js": mainJs,
+		"package.json": packageJson
 	};
 };
