@@ -14,7 +14,7 @@ export class PieChartModel extends ChartModel {
 		super(services);
 	}
 
-	santizie(data) {
+	sanitize(data) {
 		// Sort data based on value
 		// and sort labels based on the data value order
 		const dataset = Tools.getProperty(data, "datasets", 0);
@@ -23,7 +23,7 @@ export class PieChartModel extends ChartModel {
 				return {
 					label,
 					value: dataset.data[i]
-				}
+				};
 			}).sort((a: any, b: any) => b.value - a.value);
 
 			dataset.data = sortedLabelsAndValues.map(d => d.value);

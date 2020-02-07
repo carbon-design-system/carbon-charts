@@ -38,7 +38,7 @@ export class ChartModel {
 		this.services = services;
 	}
 
-	santizie(data) {
+	sanitize(data) {
 		// Sanitize all dates
 		data.datasets.forEach(dataset => {
 			dataset.data = dataset.data.map(d => {
@@ -79,7 +79,7 @@ export class ChartModel {
 	 * @param newData The new raw data to be set
 	 */
 	setData(newData) {
-		const sanitizedData = this.santizie(newData);
+		const sanitizedData = this.sanitize(newData);
 		const dataLabels = this.generateDataLabels(sanitizedData);
 
 		this.set({
