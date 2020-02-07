@@ -22,12 +22,17 @@ export class PieChartModel extends ChartModel {
 			const sortedLabelsAndValues = data.labels.map((label, i) => {
 				return {
 					label,
-					value: dataset.data[i]
+					value: dataset.data[i],
+					fillColor: dataset.fillColors ? dataset.fillColors[i] : undefined
 				};
 			}).sort((a: any, b: any) => b.value - a.value);
 
 			dataset.data = sortedLabelsAndValues.map(d => d.value);
 			data.labels = sortedLabelsAndValues.map(d => d.label);
+
+			if (dataset.fillColors) {
+				dataset.fillColors = sortedLabelsAndValues.map(d => d.fillColor);
+			}
 		}
 
 		return data;
