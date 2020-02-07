@@ -49,6 +49,8 @@ export class ChartModel {
 				return d;
 			});
 		});
+
+		return data;
 	}
 
 	getDisplayData() {
@@ -77,14 +79,15 @@ export class ChartModel {
 	 * @param newData The new raw data to be set
 	 */
 	setData(newData) {
-		const dataLabels = this.generateDataLabels(newData);
+		const sanitizedData = this.santizie(newData);
+		const dataLabels = this.generateDataLabels(sanitizedData);
 
 		this.set({
-			data: newData,
+			data: sanitizedData,
 			dataLabels
 		});
 
-		return this.santizie(this.state.data);
+		return sanitizedData;
 	}
 
 	generateDataLabels(newData) {

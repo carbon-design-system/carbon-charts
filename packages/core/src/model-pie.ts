@@ -14,6 +14,25 @@ export class PieChartModel extends ChartModel {
 		super(services);
 	}
 
+	santizie(data) {
+		// Sort data based on value
+		// and sort labels based on the data value order
+		const dataset = Tools.getProperty(data, "datasets", 0);
+		if (dataset) {
+			const sortedLabelsAndValues = data.labels.map((label, i) => {
+				return {
+					label,
+					value: dataset.data[i]
+				}
+			}).sort((a: any, b: any) => b.value - a.value);
+
+			dataset.data = sortedLabelsAndValues.map(d => d.value);
+			data.labels = sortedLabelsAndValues.map(d => d.label);
+		}
+
+		return data;
+	}
+
 	generateDataLabels(newData) {
 		const dataLabels = {};
 		newData.labels.forEach(label => {
