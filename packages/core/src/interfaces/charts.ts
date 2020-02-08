@@ -159,10 +159,6 @@ export interface MeterChartOptions extends BaseChartOptions {
 			}
 		},
 		status?: {
-			/**
-			 * visibility of the status indicator
-			 */
-			enabled?: boolean;
 			indicatorSize?: number;
 			paddingLeft?: number;
 		}

@@ -18,7 +18,7 @@ export class Meter extends Component {
 
 		// each meter has a scale for the value but no visual axis
 		const xScale = scaleLinear()
-			.domain([dataset.data.min, dataset.data.max])
+			.domain([0, 100])
 			.range([0, options.width]);
 
 		// draw the container to hold the value
@@ -41,7 +41,7 @@ export class Meter extends Component {
 			.attr("y", 0 )
 			.attr("height", options.meter.height)
 			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
-			.attr("width", d => xScale(d.data.value))
+			.attr("width", d => xScale(d.data))
 			.attr("fill", d => self.model.getFillColor(d.label))
 			.attr("fill-opacity", 0.5)
 			.style("border-color", d => self.model.getFillColor(d.label));
@@ -58,15 +58,15 @@ export class Meter extends Component {
 			.attr("y1", 0)
 			.attr("y2", options.meter.height)
 			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
-			.attr("x1", d => xScale(d.data.value))
-			.attr("x2", d => xScale(d.data.value))
+			.attr("x1", d => xScale(d.data))
+			.attr("x2", d => xScale(d.data))
 			.attr("stroke-width", 2)
 			.attr("stroke", d => self.model.getFillColor(d.label));
 
 		// draw the peak
-		const peakValue = dataset.data.peak;
-		// we only want to use peak value as a data source if it is within the range of [min,max]
-		const data = peakValue && peakValue >= dataset.data.min && peakValue <= dataset.data.max ? [peakValue] : [] ;
+		const peakValue = Tools.getProperty(options, "meter", "peak");
+		// we only want to use peak value as a data source if it is under 100
+		const data = peakValue && peakValue <= 100 ? [peakValue] : [] ;
 
 		// if a peak is supplied within the domain, we want to render it
 		const peak = svg.selectAll("line.peak")

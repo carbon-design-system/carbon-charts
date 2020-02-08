@@ -237,7 +237,6 @@ const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 			}
 		},
 		status: {
-			enabled: true,
 			indicatorSize: 8,
 			paddingLeft: 15
 		}

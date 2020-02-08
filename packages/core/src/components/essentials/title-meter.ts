@@ -44,7 +44,7 @@ export class MeterTitle extends Title {
 	 * Appends the corresponding status based on the value and the peak.
 	 */
 	displayStatus() {
-		const dataset = this.model.getDisplayData().data;
+		const value = Tools.getProperty(this.model.getDisplayData(), "data");
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
 
@@ -53,10 +53,11 @@ export class MeterTitle extends Title {
 		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
 		const containerWidth = containerBounds.width ? containerBounds.width : this.parent.node().getAttribute("width");
 
-		// check if ranges are provided, and the status indicator is enabled
-		const data = dataset.status && Tools.getProperty(options, "meter", "status", "enabled") === true ? [dataset] : [];
+		const statuses = Tools.getProperty(options, "meter", "status", "ranges");
+		// check if ranges are provided, then bind the status and value
+		const data = statuses ? [{statuses, value}] : [];
 
-		// remove any status indicators on the chart to re-render if ranges have been given
+		// bind status data
 		const status = svg.selectAll("circle.status-indicator")
 			.data(data);
 
@@ -71,7 +72,7 @@ export class MeterTitle extends Title {
 			.attr("cx", containerWidth - circleSize)
 			.attr("cy", 20 - circleSize)
 			.attr("r", circleSize)
-			.attr("class", d => `status-indicator status--${self.getStatus(d.value, dataset)}`);
+			.attr("class", d => `status-indicator status--${self.getStatus(d.value, d.statuses)}`);
 
 		status.exit().remove();
 	}
@@ -80,8 +81,7 @@ export class MeterTitle extends Title {
 	 * Appends the associated percentage to the end of the title
 	 */
 	appendPercentage() {
-		const dataset = this.model.getDisplayData().data;
-		const value = Math.round(dataset.value / dataset.max * 100);
+		const dataValue = Tools.getProperty(this.model.getDisplayData(), "data");
 
 		// use the title's position to append the percentage to the end
 		const svg = this.getContainerSVG();
@@ -89,7 +89,7 @@ export class MeterTitle extends Title {
 
 		// check if it is enabled
 		const data = Tools.getProperty(this.model.getOptions(), "meter", "title", "percentageIndicator", "enabled") === true ?
-			[dataset.value] : [];
+			[dataValue] : [];
 
 		// append a percentage if it is enabled, update it
 		const percentage = svg.selectAll("text.percent-value")
@@ -102,7 +102,7 @@ export class MeterTitle extends Title {
 			.append("text")
 			.classed("percent-value", true)
 			.merge(percentage)
-			.text(`${value}%`)
+			.text(d => `${d}%`)
 			.attr("x", +title.attr("x") + title.node().getComputedTextLength() + offset) // set the position to after the title
 			.attr("y", title.attr("y"));
 
@@ -151,9 +151,8 @@ export class MeterTitle extends Title {
 	 * @param d
 	 * @param dataset
 	 */
-	protected getStatus(d: any, dataset: any) {
-		const allRanges = dataset.status;
-		const result = allRanges.filter(step => (step.range[0] <= d && d <= step.range[1]) );
+	protected getStatus(d: any, statuses: any) {
+		const result = statuses.filter(step => (step.range[0] <= d && d <= step.range[1]) );
 		return result[0].status;
 	}
 }

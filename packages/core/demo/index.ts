@@ -66,19 +66,10 @@ const changeDemoData = (chartType: any, chartObj: any) => {
 	const updateChartData = currentData => {
 		const result = Tools.clone(currentData);
 		if (chartType === "meter") {
-			const { value, max, peak } = currentData.data;
-			// only randomize a new value that is less than the max
-			// keep other values the same so its possible to view the different states of the chart (status ranges)
-			const newValue = randomizeValue(value, [0, max]);
-			const datasetNewData = {
-				value: newValue,
-				min: 0,
-				max: max,
-				peak: randomizeValue(peak, [1000, 1200]), // reassign within the warning/danger status
-				status: currentData.data.status
-			};
-
-			result.data = datasetNewData;
+			const value = currentData.data;
+			// only randomize a new value for data so its possible to view the different states of the chart (status ranges)
+			const newValue = randomizeValue(value, [0, 100]);
+			result.data = newValue;
 			result.label = `new dataset ${Math.random().toFixed(2)}`;
 		} else {
 			result.datasets = result.datasets.map(dataset => {
