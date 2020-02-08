@@ -78,7 +78,13 @@
 				position: relative;
 
 				&:not(:last-child){
-					margin-bottom: 2px;
+					@if $carbon--theme == $carbon--theme--g90 {
+						border-bottom: 1px solid $ui-01;
+					} @else if $carbon--theme == $carbon--theme--g100 {
+						border-bottom: 1px solid $ui-04;
+					} @else {
+						border-bottom: 1px solid $ui-03;
+					}
 				}
 			}
 		}

@@ -1,4 +1,3 @@
-import { colors } from "./colors";
 import { Tools } from "../../src/tools";
 
 export const lineTimeSeriesData = {
@@ -200,6 +199,7 @@ export const lineOptions = {
 		}
 	}
 };
+
 
 // Step
 export const stepOptions = Tools.merge({}, lineOptions, {

@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/IBM/carbon-charts/compare/v0.28.1...v0.29.0) (2020-02-07)
+
+
+### Bug Fixes
+
+* **bar:** tooltip to render bar should provide original datapoint ([ed04f98](https://github.com/IBM/carbon-charts/commit/ed04f98891a783d8d5bbc77f9dfdb8d1ed8a46b1))
+* **charts:** simplify the interface to match ([96da97b](https://github.com/IBM/carbon-charts/commit/96da97b59c2e22cb661b9297f1cb4ace9bb8ec9e))
+* **line:** remove console.logs ([5e0413f](https://github.com/IBM/carbon-charts/commit/5e0413f6c77ae17f74818c04ed2bdf82f386fa58))
+* **lint:** fix linting errors with format ([04cdefd](https://github.com/IBM/carbon-charts/commit/04cdefda021ef1dee948231e8713481b9439f287))
+* **scatter:** custom point colors demo ([f367f83](https://github.com/IBM/carbon-charts/commit/f367f8337df8b45811afbc3eee0a3a6d3b6f8bcc))
+* **scatter:** simplify the callback parameters ([c541e8a](https://github.com/IBM/carbon-charts/commit/c541e8a4a83d026bb5b9c28afe39f749064b3b24))
+* **styles:** don't import and use carbon themes in styles.scss ([1da8b3e](https://github.com/IBM/carbon-charts/commit/1da8b3e2ba770c06dc74fe2bf08393e3d6b6778c))
+* **tooltip:** need to pass the datum along with the tooltip calls ([3bd7bfc](https://github.com/IBM/carbon-charts/commit/3bd7bfc1d435cb4ba3636361cdbbfe16de10d9d5))
+* **tooltip:** stroke color should always be default ([b3b6812](https://github.com/IBM/carbon-charts/commit/b3b6812d9fac5964ae50053332840be8d1b7246f))
+* **tooltip:** use original line color in the tooltip ([f42d245](https://github.com/IBM/carbon-charts/commit/f42d2458bdd104898f79d1b7103bcd055bdb1cdf))
+
+
+### Features
+
+* **core:** parse non JS date objects within the model ([a410fa4](https://github.com/IBM/carbon-charts/commit/a410fa415fb967ef0529495b300a0327cc4d474b))
+* **scatter:** add getIsFilled to model ([a160159](https://github.com/IBM/carbon-charts/commit/a160159ee0fa188ce174ef36f022ad44caf77aeb))
+* **scatter:** enhance custom stroke and fill colors ([64cfbb6](https://github.com/IBM/carbon-charts/commit/64cfbb657c6089ab75cf132f09a49d5da75d4c4f))
+
+
+
+
+
+## [0.28.1](https://github.com/IBM/carbon-charts/compare/v0.28.0...v0.28.1) (2020-01-30)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 # [0.28.0](https://github.com/IBM/carbon-charts/compare/v0.27.0...v0.28.0) (2020-01-21)
 
 
