@@ -8,7 +8,7 @@ import { BaseChart } from "./base-chart.component";
 import { BubbleChart } from "@carbon/charts";
 
 /**
- * Wrapper around `DonutChart` in carbon charts library
+ * Wrapper around `BubbleChart` in carbon charts library
  *
  * Most functions just call their equivalent from the chart library.
  */
