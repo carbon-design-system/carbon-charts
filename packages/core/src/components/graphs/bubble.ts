@@ -13,7 +13,7 @@ export class Bubble extends Scatter {
 	getRadiusScale(selection: Selection<any, any, any, any>) {
 		const data = selection.data();
 		// Filter out any null/undefined values
-		const allRadii = data.map(d => d.radius).filter(d => d);
+		const allRadii = data.map(d => d.radius).filter(radius => radius);
 
 		const options = this.model.getOptions();
 		const chartSize = DOMUtils.getSVGElementSize(this.services.domUtils.getMainSVG(), { useAttr: true });
