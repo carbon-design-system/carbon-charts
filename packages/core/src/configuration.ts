@@ -186,7 +186,7 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
 /**
  * options specific to bubble charts
  */
-const bubbleChart: BubbleChartOptions = Tools.merge({}, scatterChart, {
+const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	bubble: {
 		radiusRange: (chartSize, data) => {
 			const smallerChartDimension = Math.min(chartSize.width, chartSize.height);
@@ -194,7 +194,8 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, scatterChart, {
 				smallerChartDimension * 3 / 400,
 				smallerChartDimension * 25 / 400
 			];
-		}
+		},
+		fillOpacity: 0.2
 	}
 } as BubbleChartOptions);
 

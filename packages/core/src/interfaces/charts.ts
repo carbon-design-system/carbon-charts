@@ -95,7 +95,7 @@ export interface ScatterChartOptions extends AxisChartOptions {
 /**
  * options specific to bubble charts
  */
-export interface BubbleChartOptions extends ScatterChartOptions {
+export interface BubbleChartOptions extends AxisChartOptions {
 	/**
 	 * options for the individual bubbles
 	 */
@@ -105,6 +105,10 @@ export interface BubbleChartOptions extends ScatterChartOptions {
 		 * Returns an array with the 1st value being the min and the 2nd value being the max radius
 		 */
 		radiusRange?: Function;
+		/**
+		 * Opacity of the fills used within each circle
+		 */
+		fillOpacity?: number;
 	};
 }
 

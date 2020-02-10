@@ -50,7 +50,6 @@ export class Scatter extends Component {
 			.append("circle")
 			.attr("opacity", 0);
 
-		const { filled } = options.points;
 		// Apply styling & position
 		const circlesToStyle = dotsEnter.merge(dots);
 		this.styleCircles(circlesToStyle, animate);
