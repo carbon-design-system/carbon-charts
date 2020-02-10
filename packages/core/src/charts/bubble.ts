@@ -17,7 +17,7 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TooltipScatter,
+	TooltipScatter
 } from "../components/index";
 
 export class BubbleChart extends AxisChart {
