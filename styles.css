@@ -127,6 +127,17 @@ g.bx--cc--legend {
     .bx--cc--tooltip .tooltip-color + p.label {
       margin-left: 4px; }
 
+g.bx--cc--bubble circle.dot.hovered {
+  fill-opacity: 1;
+  transition: all .1s;
+  transition-timing-function: cubic-bezier(0.4, 0.14, 0.3, 1); }
+
+g.bx--cc--bubble circle.dot.unfilled {
+  fill: #f3f3f3; }
+
+g.bx--cc--bubble g.lines path.line {
+  mix-blend-mode: multiply; }
+
 .bx--cc--line path.line {
   pointer-events: none;
   fill: none;

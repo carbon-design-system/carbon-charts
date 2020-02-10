@@ -165,123 +165,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
-/***/ "./demo/chart-types.ts":
-/*!*****************************!*\
-  !*** ./demo/chart-types.ts ***!
-  \*****************************/
-/*! exports provided: chartTypes */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "chartTypes", function() { return chartTypes; });
-var _a = __webpack_require__(/*! ./demo-data/index */ "./demo/demo-data/index.ts"), 
-// Bar
-groupedBarOptions = _a.groupedBarOptions, groupedBarData = _a.groupedBarData, groupedHorizontalBarOptions = _a.groupedHorizontalBarOptions, groupedHorizontalBarData = _a.groupedHorizontalBarData, simpleBarOptions = _a.simpleBarOptions, simpleBarData = _a.simpleBarData, simpleHorizontalBarOptions = _a.simpleHorizontalBarOptions, simpleHorizontalBarData = _a.simpleHorizontalBarData, simpleBarTimeSeriesOptions = _a.simpleBarTimeSeriesOptions, simpleBarTimeSeriesData = _a.simpleBarTimeSeriesData, simpleHorizontalBarTimeSeriesOptions = _a.simpleHorizontalBarTimeSeriesOptions, simpleHorizontalBarTimeSeriesData = _a.simpleHorizontalBarTimeSeriesData, stackedBarOptions = _a.stackedBarOptions, stackedBarData = _a.stackedBarData, stackedHorizontalBarOptions = _a.stackedHorizontalBarOptions, stackedHorizontalBarData = _a.stackedHorizontalBarData, stackedBarTimeSeriesOptions = _a.stackedBarTimeSeriesOptions, stackedBarTimeSeriesData = _a.stackedBarTimeSeriesData, stackedHorizontalBarTimeSeriesOptions = _a.stackedHorizontalBarTimeSeriesOptions, stackedHorizontalBarTimeSeriesData = _a.stackedHorizontalBarTimeSeriesData, 
-// Pie & donut
-pieOptions = _a.pieOptions, pieData = _a.pieData, donutOptions = _a.donutOptions, donutData = _a.donutData, 
-// Line
-lineTimeSeriesOptions = _a.lineTimeSeriesOptions, lineTimeSeriesData = _a.lineTimeSeriesData, lineData = _a.lineData, lineOptions = _a.lineOptions, 
-// Step
-stepOptions = _a.stepOptions, stepData = _a.stepData, stepTimeSeriesOptions = _a.stepTimeSeriesOptions, stepTimeSeriesData = _a.stepTimeSeriesData, 
-// Scatter
-scatterTimeSeriesOptions = _a.scatterTimeSeriesOptions, scatterTimeSeriesData = _a.scatterTimeSeriesData, scatterOptions = _a.scatterOptions, scatterData = _a.scatterData;
-var chartTypes = [
-    {
-        id: "simple-bar",
-        options: simpleBarOptions,
-        data: simpleBarData
-    },
-    {
-        id: "simple-horizontal-bar-time-series",
-        options: simpleHorizontalBarTimeSeriesOptions,
-        data: simpleHorizontalBarTimeSeriesData
-    },
-    {
-        id: "simple-horizontal-bar",
-        options: simpleHorizontalBarOptions,
-        data: simpleHorizontalBarData
-    },
-    {
-        id: "scatter-time-series",
-        options: scatterTimeSeriesOptions,
-        data: scatterTimeSeriesData
-    },
-    {
-        id: "scatter",
-        options: scatterOptions,
-        data: scatterData
-    },
-    {
-        id: "grouped-bar",
-        options: groupedBarOptions,
-        data: groupedBarData
-    },
-    {
-        id: "grouped-horizontal-bar",
-        options: groupedHorizontalBarOptions,
-        data: groupedHorizontalBarData
-    },
-    {
-        id: "stacked-bar",
-        options: stackedBarOptions,
-        data: stackedBarData
-    },
-    {
-        id: "stacked-horizontal-bar",
-        options: stackedHorizontalBarOptions,
-        data: stackedHorizontalBarData
-    },
-    {
-        id: "simple-bar-time-series",
-        options: simpleBarTimeSeriesOptions,
-        data: simpleBarTimeSeriesData
-    },
-    {
-        id: "stacked-bar-time-series",
-        options: stackedBarTimeSeriesOptions,
-        data: stackedBarTimeSeriesData
-    },
-    {
-        id: "stacked-horizontal-bar-time-series",
-        options: stackedHorizontalBarTimeSeriesOptions,
-        data: stackedHorizontalBarTimeSeriesData
-    },
-    {
-        id: "pie",
-        options: pieOptions,
-        data: pieData
-    },
-    {
-        id: "donut",
-        options: donutOptions,
-        data: donutData
-    },
-    {
-        id: "line-time-series",
-        options: lineTimeSeriesOptions,
-        data: lineTimeSeriesData
-    },
-    {
-        id: "line",
-        options: lineOptions,
-        data: lineData
-    },
-    {
-        id: "line-step",
-        options: stepOptions,
-        data: stepData
-    },
-    {
-        id: "line-step-time-series",
-        options: stepTimeSeriesOptions,
-        data: stepTimeSeriesData
-    }
-];
-
-
-/***/ }),
-
 /***/ "./demo/demo-data/bar.ts":
 /*!*******************************!*\
   !*** ./demo/demo-data/bar.ts ***!
@@ -696,16 +579,366 @@ var stackedHorizontalBarTimeSeriesData = stackedBarTimeSeriesData;
 
 /***/ }),
 
-/***/ "./demo/demo-data/index.ts":
-/*!*********************************!*\
-  !*** ./demo/demo-data/index.ts ***!
-  \*********************************/
-/*! exports provided: groupedBarData, groupedBarOptions, groupedHorizontalBarData, groupedHorizontalBarOptions, simpleBarData, simpleBarOptions, simpleHorizontalBarData, simpleHorizontalBarOptions, simpleBarTimeSeriesData, simpleBarTimeSeriesOptions, simpleHorizontalBarTimeSeriesOptions, simpleHorizontalBarTimeSeriesData, stackedBarData, stackedBarOptions, stackedHorizontalBarData, stackedHorizontalBarOptions, stackedBarTimeSeriesData, stackedBarTimeSeriesOptions, stackedHorizontalBarTimeSeriesOptions, stackedHorizontalBarTimeSeriesData, pieData, pieOptions, donutData, donutOptions, lineTimeSeriesData, lineTimeSeriesOptions, lineData, lineOptions, stepOptions, stepData, stepTimeSeriesOptions, stepTimeSeriesData, scatterData, scatterOptions, scatterTimeSeriesData, scatterTimeSeriesOptions */
+/***/ "./demo/demo-data/bubble.ts":
+/*!**********************************!*\
+  !*** ./demo/demo-data/bubble.ts ***!
+  \**********************************/
+/*! exports provided: bubbleData, bubbleOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bubbleData", function() { return bubbleData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bubbleOptions", function() { return bubbleOptions; });
+var bubbleData = {
+    labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+    datasets: [
+        {
+            label: "Dataset 1",
+            data: [
+                {
+                    date: new Date(2019, 0, 1),
+                    value: 10000,
+                    radius: 6
+                },
+                {
+                    date: new Date(2019, 0, 5),
+                    value: 45000,
+                    radius: 5
+                },
+                {
+                    date: new Date(2019, 0, 8),
+                    value: 10000,
+                    radius: 8
+                },
+                {
+                    date: new Date(2019, 0, 13),
+                    value: 49213,
+                    radius: 11
+                },
+                {
+                    date: new Date(2019, 0, 17),
+                    value: 51213,
+                    radius: 3
+                }
+            ]
+        },
+        {
+            label: "Dataset 2",
+            data: [
+                {
+                    date: new Date(2019, 0, 2),
+                    value: 12000,
+                    radius: 4
+                },
+                {
+                    date: new Date(2019, 0, 6),
+                    value: 57312,
+                    radius: 6
+                },
+                {
+                    date: new Date(2019, 0, 8),
+                    value: 21432,
+                    radius: 8
+                },
+                {
+                    date: new Date(2019, 0, 15),
+                    value: 70323,
+                    radius: 3
+                },
+                {
+                    date: new Date(2019, 0, 19),
+                    value: 21300,
+                    radius: 5
+                }
+            ]
+        },
+        {
+            label: "Dataset 3",
+            data: [
+                {
+                    date: new Date(2019, 0, 1),
+                    value: 50000,
+                    radius: 5
+                },
+                {
+                    date: new Date(2019, 0, 1),
+                    value: 15000,
+                    radius: 3
+                },
+                {
+                    date: new Date(2019, 0, 2),
+                    value: 20000,
+                    radius: 8
+                },
+                {
+                    date: new Date(2019, 0, 2),
+                    value: 39213,
+                    radius: 4
+                },
+                {
+                    date: new Date(2019, 0, 3),
+                    value: 61213,
+                    radius: 3
+                },
+                {
+                    date: new Date(2019, 0, 3),
+                    value: 50000,
+                    radius: 5
+                },
+                {
+                    date: new Date(2019, 0, 4),
+                    value: 15000,
+                    radius: 3
+                },
+                {
+                    date: new Date(2019, 0, 4),
+                    value: 20000,
+                    radius: 2
+                },
+                {
+                    date: new Date(2019, 0, 5),
+                    value: 39213,
+                    radius: 4
+                },
+                {
+                    date: new Date(2019, 0, 6),
+                    value: 61213,
+                    radius: 3
+                }
+            ]
+        },
+        {
+            label: "Dataset 4",
+            data: [
+                {
+                    date: new Date(2019, 0, 2),
+                    value: 5000,
+                    radius: 2
+                },
+                {
+                    date: new Date(2019, 0, 6),
+                    value: 37312,
+                    radius: 3
+                },
+                {
+                    date: new Date(2019, 0, 8),
+                    value: 51432,
+                    radius: 5
+                },
+                {
+                    date: new Date(2019, 0, 15),
+                    value: 5000,
+                    radius: 7
+                },
+                {
+                    date: new Date(2019, 0, 19),
+                    value: 31300,
+                    radius: 2
+                },
+                {
+                    date: new Date(2019, 0, 4),
+                    value: 34242,
+                    radius: 5
+                },
+                {
+                    date: new Date(2019, 0, 5),
+                    value: 62324,
+                    radius: 12
+                },
+                {
+                    date: new Date(2019, 0, 9),
+                    value: 21321,
+                    radius: 9
+                },
+                {
+                    date: new Date(2019, 0, 12),
+                    value: 13421,
+                    radius: 2
+                },
+                {
+                    date: new Date(2019, 0, 14),
+                    value: 32523,
+                    radius: 15
+                }
+            ]
+        }
+    ]
+};
+var bubbleOptions = {
+    title: "Bubble (time series)",
+    axes: {
+        bottom: {
+            title: "2019 Annual Sales Figures",
+            scaleType: "time",
+            secondary: true
+        },
+        left: {
+            primary: true
+        }
+    }
+};
+
+
+/***/ }),
+
+/***/ "./demo/demo-data/create-codesandbox.ts":
+/*!**********************************************!*\
+  !*** ./demo/demo-data/create-codesandbox.ts ***!
+  \**********************************************/
+/*! exports provided: createChartSandbox, createReactChartApp, createAngularChartApp, createVueChartApp */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createChartSandbox", function() { return createChartSandbox; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createReactChartApp", function() { return createReactChartApp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createAngularChartApp", function() { return createAngularChartApp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createVueChartApp", function() { return createVueChartApp; });
+/* harmony import */ var codesandbox_lib_api_define__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! codesandbox/lib/api/define */ "../../node_modules/codesandbox/lib/api/define.js");
+/* harmony import */ var codesandbox_lib_api_define__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(codesandbox_lib_api_define__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _package_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../package.json */ "./package.json");
+var _package_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../package.json */ "./package.json", 1);
+
+
+var createChartSandbox = function (chartTemplate) {
+    var files = {};
+    Object.keys(chartTemplate)
+        .forEach(function (filePath) { return files[filePath] = { content: chartTemplate[filePath] }; });
+    return "https://codesandbox.io/api/v1/sandboxes/define?parameters=" + Object(codesandbox_lib_api_define__WEBPACK_IMPORTED_MODULE_0__["getParameters"])({ files: files });
+};
+var createReactChartApp = function (demo) {
+    var chartData = JSON.stringify(demo.data, null, "\t");
+    var chartOptions = JSON.stringify(demo.options, null, "\t");
+    var chartComponent = demo.chartType.vanilla;
+    var indexHtml = "<div id=\"root\"></div>\n  ";
+    var indexJs = "import React from \"react\";\nimport ReactDOM from \"react-dom\";\nimport { " + chartComponent + " } from \"@carbon/charts-react\";\nimport \"@carbon/charts/styles.css\";\n// Or\n// import \"@carbon/charts/styles/styles.scss\";\n\nclass App extends React.Component {\n\tstate = {\n\t\tdata: " + chartData + ",\n\t\toptions: " + chartOptions + "\n\t};\n\n\trender = () => (\n\t\t<" + chartComponent + "\n\t\t\tdata={this.state.data}\n\t\t\toptions={this.state.options}>\n\t\t</" + chartComponent + ">\n\t);\n}\nReactDOM.render(<App />, document.getElementById(\"root\"));\n  ";
+    var packageJson = {
+        dependencies: {
+            "@carbon/charts": _package_json__WEBPACK_IMPORTED_MODULE_1__["version"],
+            "@carbon/charts-react": _package_json__WEBPACK_IMPORTED_MODULE_1__["version"],
+            d3: "5.12.0",
+            react: "16.12.0",
+            "react-dom": "16.12.0",
+            "react-scripts": "3.0.1"
+        }
+    };
+    return {
+        "src/index.html": indexHtml,
+        "src/index.js": indexJs,
+        "package.json": packageJson
+    };
+};
+var createAngularChartApp = function (demo) {
+    var chartData = JSON.stringify(demo.data, null, "\t\t");
+    var chartOptions = JSON.stringify(demo.options, null, "\t\t");
+    var chartComponent = demo.chartType.angular;
+    var appComponentHtml = "<" + chartComponent + " [data]=\"data\" [options]=\"options\"></" + chartComponent + ">";
+    var appComponentTs = "import { Component } from \"@angular/core\";\n@Component({\n\tselector: \"app-root\",\n\ttemplateUrl: \"./app.component.html\"\n})\nexport class AppComponent {\n\tdata = " + chartData + ";\n\toptions = " + chartOptions + ";\n}";
+    var appModule = "import { NgModule } from \"@angular/core\";\nimport { BrowserModule } from \"@angular/platform-browser\";\nimport { ChartsModule } from \"@carbon/charts-angular\";\nimport { AppComponent } from \"./app.component\";\n@NgModule({\n\timports: [BrowserModule, ChartsModule],\n\tdeclarations: [AppComponent],\n\tbootstrap: [AppComponent]\n})\nexport class AppModule {}";
+    var indexHtml = "<!DOCTYPE html>\n<html lang=\"en\">\n\t<head>\n\t\t<meta charset=\"utf-8\" />\n\t\t<title>Angular</title>\n\t</head>\n\t<body>\n\t\t<app-root></app-root>\n\t</body>\n</html>";
+    var mainTs = "import { platformBrowserDynamic } from \"@angular/platform-browser-dynamic\";\nimport { AppModule } from \"./app/app.module\";\nplatformBrowserDynamic()\n\t.bootstrapModule(AppModule)\n\t.catch(err => console.log(err));\n";
+    var angularCliJson = "{\n\t\"apps\": [\n\t\t{\n\t\t\t\"root\": \"src\",\n\t\t\t\"outDir\": \"dist\",\n\t\t\t\"assets\": [\"assets\", \"favicon.ico\"],\n\t\t\t\"index\": \"index.html\",\n\t\t\t\"main\": \"main.ts\",\n\t\t\t\"polyfills\": \"polyfills.ts\",\n\t\t\t\"prefix\": \"app\",\n\t\t\t\"styles\": [\"styles.css\"],\n\t\t\t\"scripts\": [],\n\t\t\t\"environmentSource\": \"environments/environment.ts\",\n\t\t\t\"environments\": {\n\t\t\t\t\"dev\": \"environments/environment.ts\",\n\t\t\t\t\"prod\": \"environments/environment.prod.ts\"\n\t\t\t}\n\t\t}\n\t]\n}";
+    var packageJson = JSON.stringify({
+        dependencies: {
+            "@angular/animations": "8.2.14",
+            "@angular/common": "8.2.14",
+            "@angular/compiler": "8.2.14",
+            "@angular/core": "8.2.14",
+            "@angular/forms": "8.2.14",
+            "@angular/platform-browser": "8.2.14",
+            "@angular/platform-browser-dynamic": "8.2.14",
+            "@angular/router": "8.2.14",
+            "@carbon/charts": _package_json__WEBPACK_IMPORTED_MODULE_1__["version"],
+            "@carbon/charts-angular": _package_json__WEBPACK_IMPORTED_MODULE_1__["version"],
+            "core-js": "3.6.0",
+            d3: "5.15.0",
+            rxjs: "6.5.3",
+            "zone.js": "0.10.2"
+        }
+    }, null, "\t");
+    return {
+        "src/index.html": indexHtml,
+        "src/main.ts": mainTs,
+        "src/app/app.component.html": appComponentHtml,
+        "src/app/app.component.ts": appComponentTs,
+        "src/app/app.module.ts": appModule,
+        ".angular-cli.json": angularCliJson,
+        "package.json": packageJson
+    };
+};
+var createVueChartApp = function (demo) {
+    var chartData = JSON.stringify(demo.data, null, "\t\t");
+    var chartOptions = JSON.stringify(demo.options, null, "\t\t");
+    var chartComponent = demo.chartType.vue;
+    var chartVue = "<script>\nimport Vue from \"vue\";\nimport \"@carbon/charts/styles.css\";\nimport chartsVue from \"@carbon/charts-vue\";\nVue.use(chartsVue);\nexport default {\n\tname: \"Chart\",\n\tcomponents: {},\n\tdata() {\n\t\treturn {\n\t\t\tdata: " + chartData + ",\n\t\t\toptions: " + chartOptions + "\n\t\t};\n\t},\n\ttemplate: \"<" + chartComponent + " :data=\"data\" :options=\"options\"></" + chartComponent + ">\"\n};\n</script>\n  ";
+    var appVue = "<template>\n\t<div id=\"app\">\n\t\t<Chart/>\n\t</div>\n</template>\n<script>\nimport Chart from \"./components/chart\";\nexport default {\n\tname: \"App\",\n\tcomponents: {\n\t\tChart\n\t}\n};\n</script>\n  ";
+    var mainJs = "import Vue from \"vue\";\nimport App from \"./App.vue\";\nVue.config.productionTip = false;\nnew Vue({\n\trender: h => h(App)\n}).$mount(\"#app\");\n";
+    var packageJson = JSON.stringify({
+        dependencies: {
+            "@carbon/charts": _package_json__WEBPACK_IMPORTED_MODULE_1__["version"],
+            "@carbon/charts-vue": _package_json__WEBPACK_IMPORTED_MODULE_1__["version"],
+            "@vue/cli-plugin-babel": "4.1.1",
+            d3: "5.15.0",
+            vue: "^2.6.11"
+        }
+    }, null, "\t\t");
+    return {
+        "src/components/chart.vue": chartVue,
+        "src/App.vue": appVue,
+        "src/main.js": mainJs,
+        "package.json": packageJson
+    };
+};
+
+
+/***/ }),
+
+/***/ "./demo/demo-data/donut.ts":
+/*!*********************************!*\
+  !*** ./demo/demo-data/donut.ts ***!
+  \*********************************/
+/*! exports provided: donutData, donutOptions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "donutData", function() { return donutData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "donutOptions", function() { return donutOptions; });
+/* harmony import */ var _pie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pie */ "./demo/demo-data/pie.ts");
+
+var donutData = _pie__WEBPACK_IMPORTED_MODULE_0__["pieData"];
+var donutOptions = {
+    title: "Donut",
+    resizable: true,
+    donut: {
+        center: {
+            label: "Browsers"
+        }
+    }
+};
+
+
+/***/ }),
+
+/***/ "./demo/demo-data/index.ts":
+/*!*********************************!*\
+  !*** ./demo/demo-data/index.ts ***!
+  \*********************************/
+/*! exports provided: chartTypes, demoGroups, groupedBarData, groupedBarOptions, groupedHorizontalBarData, groupedHorizontalBarOptions, simpleBarData, simpleBarOptions, simpleHorizontalBarData, simpleHorizontalBarOptions, simpleBarTimeSeriesData, simpleBarTimeSeriesOptions, simpleHorizontalBarTimeSeriesOptions, simpleHorizontalBarTimeSeriesData, stackedBarData, stackedBarOptions, stackedHorizontalBarData, stackedHorizontalBarOptions, stackedBarTimeSeriesData, stackedBarTimeSeriesOptions, stackedHorizontalBarTimeSeriesOptions, stackedHorizontalBarTimeSeriesData, bubbleData, bubbleOptions, donutData, donutOptions, lineData, lineOptions, lineTimeSeriesData, lineTimeSeriesOptions, pieData, pieOptions, scatterData, scatterOptions, scatterTimeSeriesData, scatterTimeSeriesOptions, stepOptions, stepData, stepTimeSeriesOptions, stepTimeSeriesData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "chartTypes", function() { return chartTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "demoGroups", function() { return demoGroups; });
 /* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bar */ "./demo/demo-data/bar.ts");
+/* harmony import */ var _bubble__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bubble */ "./demo/demo-data/bubble.ts");
+/* harmony import */ var _donut__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./donut */ "./demo/demo-data/donut.ts");
+/* harmony import */ var _line__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./line */ "./demo/demo-data/line.ts");
+/* harmony import */ var _pie__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pie */ "./demo/demo-data/pie.ts");
+/* harmony import */ var _scatter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./scatter */ "./demo/demo-data/scatter.ts");
+/* harmony import */ var _step__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./step */ "./demo/demo-data/step.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "groupedBarData", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["groupedBarData"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "groupedBarOptions", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["groupedBarOptions"]; });
@@ -746,43 +979,260 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stackedHorizontalBarTimeSeriesData", function() { return _bar__WEBPACK_IMPORTED_MODULE_0__["stackedHorizontalBarTimeSeriesData"]; });
 
-/* harmony import */ var _pie_donut__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pie-donut */ "./demo/demo-data/pie-donut.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "pieData", function() { return _pie_donut__WEBPACK_IMPORTED_MODULE_1__["pieData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "bubbleData", function() { return _bubble__WEBPACK_IMPORTED_MODULE_1__["bubbleData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "pieOptions", function() { return _pie_donut__WEBPACK_IMPORTED_MODULE_1__["pieOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "bubbleOptions", function() { return _bubble__WEBPACK_IMPORTED_MODULE_1__["bubbleOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "donutData", function() { return _pie_donut__WEBPACK_IMPORTED_MODULE_1__["donutData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "donutData", function() { return _donut__WEBPACK_IMPORTED_MODULE_2__["donutData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "donutOptions", function() { return _pie_donut__WEBPACK_IMPORTED_MODULE_1__["donutOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "donutOptions", function() { return _donut__WEBPACK_IMPORTED_MODULE_2__["donutOptions"]; });
 
-/* harmony import */ var _line__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./line */ "./demo/demo-data/line.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesData", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["lineTimeSeriesData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineData", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["lineTimeSeriesOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineData", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["lineData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesData", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineTimeSeriesData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["lineOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineTimeSeriesOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["stepOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "pieData", function() { return _pie__WEBPACK_IMPORTED_MODULE_4__["pieData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepData", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["stepData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "pieOptions", function() { return _pie__WEBPACK_IMPORTED_MODULE_4__["pieOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepTimeSeriesOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["stepTimeSeriesOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterData", function() { return _scatter__WEBPACK_IMPORTED_MODULE_5__["scatterData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepTimeSeriesData", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["stepTimeSeriesData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterOptions", function() { return _scatter__WEBPACK_IMPORTED_MODULE_5__["scatterOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterData", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["scatterData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesData", function() { return _scatter__WEBPACK_IMPORTED_MODULE_5__["scatterTimeSeriesData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["scatterOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesOptions", function() { return _scatter__WEBPACK_IMPORTED_MODULE_5__["scatterTimeSeriesOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesData", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["scatterTimeSeriesData"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepOptions", function() { return _step__WEBPACK_IMPORTED_MODULE_6__["stepOptions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_2__["scatterTimeSeriesOptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepData", function() { return _step__WEBPACK_IMPORTED_MODULE_6__["stepData"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepTimeSeriesOptions", function() { return _step__WEBPACK_IMPORTED_MODULE_6__["stepTimeSeriesOptions"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "stepTimeSeriesData", function() { return _step__WEBPACK_IMPORTED_MODULE_6__["stepTimeSeriesData"]; });
+
+/* harmony import */ var _create_codesandbox__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./create-codesandbox */ "./demo/demo-data/create-codesandbox.ts");
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+var chartTypes = {
+    SimpleBarChart: {
+        vanilla: "SimpleBarChart",
+        angular: "ibm-simple-bar-chart",
+        vue: "ccv-simple-bar-chart"
+    },
+    GroupedBarChart: {
+        vanilla: "GroupedBarChart",
+        angular: "ibm-grouped-bar-chart",
+        vue: "ccv-grouped-bar-chart"
+    },
+    StackedBarChart: {
+        vanilla: "StackedBarChart",
+        angular: "ibm-stacked-bar-chart",
+        vue: "ccv-stacked-bar-chart"
+    },
+    BubbleChart: {
+        vanilla: "BubbleChart",
+        angular: "ibm-bubble-chart",
+        vue: "ccv-bubble-chart"
+    },
+    LineChart: {
+        vanilla: "LineChart",
+        angular: "ibm-line-chart",
+        vue: "ccv-line-chart"
+    },
+    ScatterChart: {
+        vanilla: "ScatterChart",
+        angular: "ibm-scatter-chart",
+        vue: "ccv-scatter-chart"
+    },
+    PieChart: {
+        vanilla: "PieChart",
+        angular: "ibm-pie-chart",
+        vue: "ccv-pie-chart"
+    },
+    DonutChart: {
+        vanilla: "DonutChart",
+        angular: "ibm-donut-chart",
+        vue: "ccv-donut-chart"
+    }
+};
+var allDemoGroups = [
+    {
+        title: "Bar (vertical)",
+        demos: [
+            {
+                options: _bar__WEBPACK_IMPORTED_MODULE_0__["simpleBarOptions"],
+                data: _bar__WEBPACK_IMPORTED_MODULE_0__["simpleBarData"],
+                chartType: chartTypes.SimpleBarChart
+            },
+            {
+                options: _bar__WEBPACK_IMPORTED_MODULE_0__["simpleBarTimeSeriesOptions"],
+                data: _bar__WEBPACK_IMPORTED_MODULE_0__["simpleBarTimeSeriesData"],
+                chartType: chartTypes.SimpleBarChart
+            },
+            {
+                options: _bar__WEBPACK_IMPORTED_MODULE_0__["groupedBarOptions"],
+                data: _bar__WEBPACK_IMPORTED_MODULE_0__["groupedBarData"],
+                chartType: chartTypes.GroupedBarChart
+            },
+            {
+                options: _bar__WEBPACK_IMPORTED_MODULE_0__["stackedBarOptions"],
+                data: _bar__WEBPACK_IMPORTED_MODULE_0__["stackedBarData"],
+                chartType: chartTypes.StackedBarChart
+            },
+            {
+                options: _bar__WEBPACK_IMPORTED_MODULE_0__["stackedBarTimeSeriesOptions"],
+                data: _bar__WEBPACK_IMPORTED_MODULE_0__["stackedBarTimeSeriesData"],
+                chartType: chartTypes.StackedBarChart
+            }
+        ]
+    },
+    {
+        title: "Bar (horizontal)",
+        demos: [
+            {
+                options: _bar__WEBPACK_IMPORTED_MODULE_0__["simpleHorizontalBarOptions"],
+                data: _bar__WEBPACK_IMPORTED_MODULE_0__["simpleHorizontalBarData"],
+                chartType: chartTypes.SimpleBarChart
+            },
+            {
+                options: _bar__WEBPACK_IMPORTED_MODULE_0__["simpleHorizontalBarTimeSeriesOptions"],
+                data: _bar__WEBPACK_IMPORTED_MODULE_0__["simpleHorizontalBarTimeSeriesData"],
+                chartType: chartTypes.SimpleBarChart
+            },
+            {
+                options: _bar__WEBPACK_IMPORTED_MODULE_0__["groupedHorizontalBarOptions"],
+                data: _bar__WEBPACK_IMPORTED_MODULE_0__["groupedHorizontalBarData"],
+                chartType: chartTypes.GroupedBarChart
+            },
+            {
+                options: _bar__WEBPACK_IMPORTED_MODULE_0__["stackedHorizontalBarOptions"],
+                data: _bar__WEBPACK_IMPORTED_MODULE_0__["stackedHorizontalBarData"],
+                chartType: chartTypes.StackedBarChart
+            },
+            {
+                options: _bar__WEBPACK_IMPORTED_MODULE_0__["stackedHorizontalBarTimeSeriesOptions"],
+                data: _bar__WEBPACK_IMPORTED_MODULE_0__["stackedHorizontalBarTimeSeriesData"],
+                chartType: chartTypes.StackedBarChart
+            }
+        ]
+    },
+    {
+        title: "Bubble",
+        demos: [
+            {
+                options: _bubble__WEBPACK_IMPORTED_MODULE_1__["bubbleOptions"],
+                data: _bubble__WEBPACK_IMPORTED_MODULE_1__["bubbleData"],
+                chartType: chartTypes.BubbleChart
+            }
+        ]
+    },
+    {
+        title: "Donut",
+        demos: [
+            {
+                options: _donut__WEBPACK_IMPORTED_MODULE_2__["donutOptions"],
+                data: _donut__WEBPACK_IMPORTED_MODULE_2__["donutData"],
+                chartType: chartTypes.DonutChart
+            }
+        ]
+    },
+    {
+        title: "Line",
+        demos: [
+            {
+                options: _line__WEBPACK_IMPORTED_MODULE_3__["lineTimeSeriesOptions"],
+                data: _line__WEBPACK_IMPORTED_MODULE_3__["lineTimeSeriesData"],
+                chartType: chartTypes.LineChart
+            },
+            {
+                options: _line__WEBPACK_IMPORTED_MODULE_3__["lineOptions"],
+                data: _line__WEBPACK_IMPORTED_MODULE_3__["lineData"],
+                chartType: chartTypes.LineChart
+            }
+        ]
+    },
+    {
+        title: "Pie",
+        demos: [
+            {
+                options: _pie__WEBPACK_IMPORTED_MODULE_4__["pieOptions"],
+                data: _pie__WEBPACK_IMPORTED_MODULE_4__["pieData"],
+                chartType: chartTypes.PieChart
+            }
+        ]
+    },
+    {
+        title: "Scatter",
+        demos: [
+            {
+                options: _scatter__WEBPACK_IMPORTED_MODULE_5__["scatterTimeSeriesOptions"],
+                data: _scatter__WEBPACK_IMPORTED_MODULE_5__["scatterTimeSeriesData"],
+                chartType: chartTypes.ScatterChart
+            },
+            {
+                options: _scatter__WEBPACK_IMPORTED_MODULE_5__["scatterOptions"],
+                data: _scatter__WEBPACK_IMPORTED_MODULE_5__["scatterData"],
+                chartType: chartTypes.ScatterChart
+            }
+        ]
+    },
+    {
+        title: "Step",
+        demos: [
+            {
+                options: _step__WEBPACK_IMPORTED_MODULE_6__["stepOptions"],
+                data: _step__WEBPACK_IMPORTED_MODULE_6__["stepData"],
+                chartType: chartTypes.LineChart
+            },
+            {
+                options: _step__WEBPACK_IMPORTED_MODULE_6__["stepTimeSeriesOptions"],
+                data: _step__WEBPACK_IMPORTED_MODULE_6__["stepTimeSeriesData"],
+                chartType: chartTypes.LineChart
+            }
+        ]
+    }
+];
+var formatTitleString = function (str) { return (str.replace(/[^\w\s]/gi, "")
+    .replace(/\s\s+/g, " ")
+    .toLowerCase()
+    .replace(/\s+/g, "-")); };
+allDemoGroups = allDemoGroups.map(function (demoGroup) {
+    demoGroup.demos = demoGroup.demos.map(function (demo) {
+        demo.title = demo.options.title;
+        demo.id = formatTitleString(demoGroup.title) + "--" + formatTitleString(demo.options.title);
+        demo.options.height = "400px";
+        if (!demo.codesandbox) {
+            demo.codesandbox = {};
+        }
+        demo.codesandbox.react = Object(_create_codesandbox__WEBPACK_IMPORTED_MODULE_7__["createChartSandbox"])(Object(_create_codesandbox__WEBPACK_IMPORTED_MODULE_7__["createReactChartApp"])(demo));
+        demo.codesandbox.vue = Object(_create_codesandbox__WEBPACK_IMPORTED_MODULE_7__["createChartSandbox"])(Object(_create_codesandbox__WEBPACK_IMPORTED_MODULE_7__["createVueChartApp"])(demo));
+        if (!demo.code) {
+            demo.code = {};
+        }
+        demo.code.angular = Object(_create_codesandbox__WEBPACK_IMPORTED_MODULE_7__["createAngularChartApp"])(demo);
+        return demo;
+    });
+    return demoGroup;
+});
+var demoGroups = allDemoGroups;
 
 
 /***/ }),
@@ -791,25 +1241,93 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************!*\
   !*** ./demo/demo-data/line.ts ***!
   \********************************/
-/*! exports provided: lineTimeSeriesData, lineTimeSeriesOptions, lineData, lineOptions, stepOptions, stepData, stepTimeSeriesOptions, stepTimeSeriesData, scatterData, scatterOptions, scatterTimeSeriesData, scatterTimeSeriesOptions */
+/*! exports provided: lineData, lineOptions, lineTimeSeriesData, lineTimeSeriesOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesData", function() { return lineTimeSeriesData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesOptions", function() { return lineTimeSeriesOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineData", function() { return lineData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineOptions", function() { return lineOptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stepOptions", function() { return stepOptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stepData", function() { return stepData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stepTimeSeriesOptions", function() { return stepTimeSeriesOptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stepTimeSeriesData", function() { return stepTimeSeriesData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterData", function() { return scatterData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterOptions", function() { return scatterOptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesData", function() { return scatterTimeSeriesData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesOptions", function() { return scatterTimeSeriesOptions; });
-/* harmony import */ var _src_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../src/tools */ "./src/tools.ts");
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesData", function() { return lineTimeSeriesData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesOptions", function() { return lineTimeSeriesOptions; });
+var lineData = {
+    labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+    datasets: [
+        {
+            label: "Dataset 1",
+            data: [
+                32100,
+                23500,
+                53100,
+                42300,
+                12300
+            ]
+        },
+        {
+            label: "Dataset 2",
+            data: [
+                34200,
+                53200,
+                42300,
+                21400,
+                0
+            ]
+        },
+        {
+            label: "Dataset 3 long name",
+            data: [
+                41200,
+                23400,
+                34210,
+                1400,
+                42100
+            ]
+        },
+        {
+            label: "Dataset 4 long name",
+            data: [
+                22000,
+                1200,
+                9000,
+                24000,
+                3000
+            ]
+        },
+        {
+            label: "Dataset 5 long name",
+            data: [
+                2412,
+                30000,
+                10000,
+                5000,
+                31000
+            ]
+        },
+        {
+            label: "Dataset 6 long name",
+            data: [
+                0,
+                20000,
+                40000,
+                60000,
+                80000
+            ]
+        }
+    ]
+};
+var lineOptions = {
+    title: "Line (discrete)",
+    axes: {
+        bottom: {
+            title: "2018 Annual Sales Figures",
+            scaleType: "labels",
+            secondary: true
+        },
+        left: {
+            primary: true
+        }
+    }
+};
 var lineTimeSeriesData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
     datasets: [
@@ -928,96 +1446,54 @@ var lineTimeSeriesOptions = {
     },
     curve: "curveMonotoneX"
 };
-var lineData = {
-    labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
+
+
+/***/ }),
+
+/***/ "./demo/demo-data/pie.ts":
+/*!*******************************!*\
+  !*** ./demo/demo-data/pie.ts ***!
+  \*******************************/
+/*! exports provided: pieData, pieOptions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pieData", function() { return pieData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pieOptions", function() { return pieOptions; });
+var pieData = {
+    labels: ["2V2N 9KYPM version 1", "L22I P66EP L22I P66EP L22I P66EP", "JQAI 2M4L1", "J9DZ F37AP",
+        "YEL48 Q6XK YEL48", "P66EP L22I L22I"],
     datasets: [
         {
             label: "Dataset 1",
-            data: [
-                32100,
-                23500,
-                53100,
-                42300,
-                12300
-            ]
-        },
-        {
-            label: "Dataset 2",
-            data: [
-                34200,
-                53200,
-                42300,
-                21400,
-                0
-            ]
-        },
-        {
-            label: "Dataset 3 long name",
-            data: [
-                41200,
-                23400,
-                34210,
-                1400,
-                42100
-            ]
-        },
-        {
-            label: "Dataset 4 long name",
-            data: [
-                22000,
-                1200,
-                9000,
-                24000,
-                3000
-            ]
-        },
-        {
-            label: "Dataset 5 long name",
-            data: [
-                2412,
-                30000,
-                10000,
-                5000,
-                31000
-            ]
-        },
-        {
-            label: "Dataset 6 long name",
-            data: [
-                0,
-                20000,
-                40000,
-                60000,
-                80000
-            ]
+            data: [20000, 65000, 75000, 1200, 10000, 25000]
         }
     ]
 };
-var lineOptions = {
-    title: "Line (discrete)",
-    axes: {
-        bottom: {
-            title: "2018 Annual Sales Figures",
-            scaleType: "labels",
-            secondary: true
-        },
-        left: {
-            primary: true
-        }
-    }
+var pieOptions = {
+    title: "Pie",
+    resizable: true
 };
-// Step
-var stepOptions = _src_tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, lineOptions, {
-    title: "Step (discrete)",
-    curve: "curveStepAfter"
-});
-var stepData = lineData;
-var stepTimeSeriesOptions = _src_tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, lineTimeSeriesOptions, {
-    title: "Step (time series)",
-    curve: "curveStepAfter"
-});
-var stepTimeSeriesData = lineTimeSeriesData;
-// Scatter
+
+
+/***/ }),
+
+/***/ "./demo/demo-data/scatter.ts":
+/*!***********************************!*\
+  !*** ./demo/demo-data/scatter.ts ***!
+  \***********************************/
+/*! exports provided: scatterData, scatterOptions, scatterTimeSeriesData, scatterTimeSeriesOptions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterData", function() { return scatterData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterOptions", function() { return scatterOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesData", function() { return scatterTimeSeriesData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scatterTimeSeriesOptions", function() { return scatterTimeSeriesOptions; });
+/* harmony import */ var _line__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./line */ "./demo/demo-data/line.ts");
+
 var scatterData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
     datasets: [
@@ -1096,7 +1572,7 @@ var scatterOptions = {
         }
     }
 };
-var scatterTimeSeriesData = lineTimeSeriesData;
+var scatterTimeSeriesData = _line__WEBPACK_IMPORTED_MODULE_0__["lineTimeSeriesData"];
 var scatterTimeSeriesOptions = {
     title: "Scatter (time series)",
     axes: {
@@ -1114,43 +1590,33 @@ var scatterTimeSeriesOptions = {
 
 /***/ }),
 
-/***/ "./demo/demo-data/pie-donut.ts":
-/*!*************************************!*\
-  !*** ./demo/demo-data/pie-donut.ts ***!
-  \*************************************/
-/*! exports provided: pieData, pieOptions, donutData, donutOptions */
+/***/ "./demo/demo-data/step.ts":
+/*!********************************!*\
+  !*** ./demo/demo-data/step.ts ***!
+  \********************************/
+/*! exports provided: stepOptions, stepData, stepTimeSeriesOptions, stepTimeSeriesData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pieData", function() { return pieData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pieOptions", function() { return pieOptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "donutData", function() { return donutData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "donutOptions", function() { return donutOptions; });
-var pieData = {
-    labels: ["2V2N 9KYPM version 1", "L22I P66EP L22I P66EP L22I P66EP", "JQAI 2M4L1", "J9DZ F37AP",
-        "YEL48 Q6XK YEL48", "P66EP L22I L22I"],
-    datasets: [
-        {
-            label: "Dataset 1",
-            data: [20000, 65000, 75000, 1200, 10000, 25000]
-        }
-    ]
-};
-var pieOptions = {
-    title: "Pie",
-    resizable: true
-};
-var donutData = pieData;
-var donutOptions = {
-    title: "Donut",
-    resizable: true,
-    donut: {
-        center: {
-            label: "Browsers"
-        }
-    }
-};
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stepOptions", function() { return stepOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stepData", function() { return stepData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stepTimeSeriesOptions", function() { return stepTimeSeriesOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stepTimeSeriesData", function() { return stepTimeSeriesData; });
+/* harmony import */ var _src_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../src/tools */ "./src/tools.ts");
+/* harmony import */ var _line__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./line */ "./demo/demo-data/line.ts");
+
+
+var stepOptions = _src_tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, _line__WEBPACK_IMPORTED_MODULE_1__["lineOptions"], {
+    title: "Step (discrete)",
+    curve: "curveStepAfter"
+});
+var stepData = _line__WEBPACK_IMPORTED_MODULE_1__["lineData"];
+var stepTimeSeriesOptions = _src_tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, _line__WEBPACK_IMPORTED_MODULE_1__["lineTimeSeriesOptions"], {
+    title: "Step (time series)",
+    curve: "curveStepAfter"
+});
+var stepTimeSeriesData = _line__WEBPACK_IMPORTED_MODULE_1__["lineTimeSeriesData"];
 
 
 /***/ }),
@@ -1236,7 +1702,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.scss */ "./demo/index.scss");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _demo_options__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./demo-options */ "./demo/demo-options.ts");
-/* harmony import */ var _chart_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chart-types */ "./demo/chart-types.ts");
+/* harmony import */ var _demo_data_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./demo-data/index */ "./demo/demo-data/index.ts");
 /* harmony import */ var _src_tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../src/tools */ "./src/tools.ts");
 
 // Styles
@@ -1249,16 +1715,16 @@ __webpack_require__.r(__webpack_exports__);
 
 Object(_demo_options__WEBPACK_IMPORTED_MODULE_2__["initializeDemoOptions"])();
 var charts = {};
-var changeDemoData = function (chartType, chartObj) {
+var changeDemoData = function (id, chartObj) {
     var oldData = chartObj.model.getData();
     // Function to be used to randomize a value
     var randomizeValue = function (datum) {
         var currentVal = datum.value !== undefined ? datum.value : datum;
         var result = Math.random() > 0.5 ? 0.95 * currentVal : 1.05 * currentVal;
         if (Math.random() > 0.5
-            || chartType.indexOf("stacked") !== -1
-            || chartType.indexOf("pie") !== -1
-            || chartType.indexOf("donut") !== -1) {
+            || id.indexOf("stacked") !== -1
+            || id.indexOf("pie") !== -1
+            || id.indexOf("donut") !== -1) {
             result = Math.floor(result);
         }
         else {
@@ -1287,10 +1753,10 @@ var changeDemoData = function (chartType, chartObj) {
         });
         return result;
     };
-    var chartObject = charts[chartType];
+    var chartObject = charts[id];
     var newData;
     var removeADataset = Math.random() > 0.5;
-    switch (chartType) {
+    switch (id) {
         case "pie":
         case "donut":
             // Randomize old data values
@@ -1307,97 +1773,76 @@ var changeDemoData = function (chartType, chartObj) {
     // Handle setting the new data
     chartObject.model.setData(newData);
 };
-var setDemoActionsEventListener = function (chartType, chartObj) {
-    var changeDataButton = document.getElementById("change-data-" + chartType);
+var setDemoActionsEventListener = function (id, chartObj) {
+    var changeDataButton = document.getElementById("change-data-" + id);
     if (changeDataButton) {
         changeDataButton.onclick = function (e) {
             e.preventDefault();
-            changeDemoData(chartType, chartObj);
+            changeDemoData(id, chartObj);
         };
-        var actionsElement = document.getElementById("actions-" + chartType);
+        var actionsElement = document.getElementById("actions-" + id);
         if (actionsElement) {
             var changeDataPromiseButtons = Array.prototype.slice.call(actionsElement.querySelectorAll(".change-data-promise"));
             changeDataPromiseButtons.forEach(function (element) {
                 element = element;
                 element.onclick = function (e) {
                     e.preventDefault();
-                    changeDemoData(chartType, chartObj);
+                    changeDemoData(id, chartObj);
                 };
             });
         }
     }
 };
-var createChartContainer = function (chartType) {
+var createChartContainer = function (demo) {
     // Chart holder
     var holder = document.createElement("div");
     holder.className = "demo-chart-holder has-actions";
-    holder.id = "classy-" + chartType.id + "-chart-holder";
+    holder.id = demo.id;
     document.body.appendChild(holder);
     // Chart demo actions container
     var chartDemoActions = document.createElement("div");
     chartDemoActions.className = "chart-demo-actions";
-    chartDemoActions.id = "actions-" + chartType.id;
+    chartDemoActions.id = "actions-" + demo.id;
     chartDemoActions.setAttribute("role", "region");
-    chartDemoActions.setAttribute("aria-label", chartType + " chart actions");
+    chartDemoActions.setAttribute("aria-label", demo.title + " chart actions");
     // Add update data button
     var updateDataButton = document.createElement("button");
     updateDataButton.className = "bx--btn bx--btn--primary";
-    updateDataButton.id = "change-data-" + chartType.id;
+    updateDataButton.id = "change-data-" + demo.id;
     updateDataButton.innerHTML = "Update data";
     chartDemoActions.appendChild(updateDataButton);
     document.body.appendChild(chartDemoActions);
     return holder;
 };
 // Initialize all charts
-_chart_types__WEBPACK_IMPORTED_MODULE_3__["chartTypes"].forEach(function (type) {
-    var holder = createChartContainer(type);
-    if (holder) {
-        var classToInitialize = void 0;
-        switch (type.id) {
-            case "simple-bar":
-            case "simple-horizontal-bar":
-            case "simple-bar-time-series":
-            case "simple-horizontal-bar-time-series":
-                classToInitialize = _src_index__WEBPACK_IMPORTED_MODULE_0__["SimpleBarChart"];
-                break;
-            case "grouped-bar":
-            case "grouped-horizontal-bar":
-                classToInitialize = _src_index__WEBPACK_IMPORTED_MODULE_0__["GroupedBarChart"];
-                break;
-            case "stacked-bar":
-            case "stacked-horizontal-bar":
-            case "stacked-bar-time-series":
-            case "stacked-horizontal-bar-time-series":
-                classToInitialize = _src_index__WEBPACK_IMPORTED_MODULE_0__["StackedBarChart"];
-                break;
-            case "scatter":
-            case "scatter-time-series":
-                classToInitialize = _src_index__WEBPACK_IMPORTED_MODULE_0__["ScatterChart"];
-                break;
-            case "line":
-            case "line-time-series":
-            case "line-step":
-            case "line-step-time-series":
-                classToInitialize = _src_index__WEBPACK_IMPORTED_MODULE_0__["LineChart"];
-                break;
-            case "pie":
-                classToInitialize = _src_index__WEBPACK_IMPORTED_MODULE_0__["PieChart"];
-                break;
-            case "donut":
-                classToInitialize = _src_index__WEBPACK_IMPORTED_MODULE_0__["DonutChart"];
-                break;
+_demo_data_index__WEBPACK_IMPORTED_MODULE_3__["demoGroups"].forEach(function (demoGroup) {
+    demoGroup.demos.forEach(function (demo) {
+        var holder = createChartContainer(demo);
+        if (holder) {
+            var ClassToInitialize = _src_index__WEBPACK_IMPORTED_MODULE_0__[demo.chartType.vanilla];
+            // Add `height` to the chart options
+            demo.options.height = "500px";
+            // Initialize chart
+            charts[demo.id] = new ClassToInitialize(holder, {
+                data: demo.data,
+                options: demo.options
+            });
+            setDemoActionsEventListener(demo.id, charts[demo.id]);
         }
-        // Add `height` to the chart options
-        type.options.height = "500px";
-        // Initialize chart
-        charts[type.id] = new classToInitialize(holder, {
-            data: type.data,
-            options: type.options
-        });
-        setDemoActionsEventListener(type.id, charts[type.id]);
-    }
+    });
 });
 
+
+/***/ }),
+
+/***/ "./package.json":
+/*!**********************!*\
+  !*** ./package.json ***!
+  \**********************/
+/*! exports provided: name, version, description, main, module, scripts, repository, keywords, author, license, dependencies, peerDependencies, devDependencies, publishConfig, maintainers, contributors, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"name\":\"@carbon/charts\",\"version\":\"0.29.1\",\"description\":\"Carbon charting components\",\"main\":\"./bundle.js\",\"module\":\"./index.js\",\"scripts\":{\"demo:server\":\"webpack-dev-server --config webpack.config.js --watch\",\"demo:build\":\"webpack --config webpack.config.js && yarn run docs:build\",\"docs:build\":\"typedoc --out ./demo/bundle/documentation ./src/index.ts\",\"build\":\"bash build.sh\",\"postinstall\":\"bash build-vendor.sh\",\"lint\":\"tslint -p tsconfig.json -c tslint.json\",\"test\":\"karma start --single-run\",\"test:watch\":\"karma start --no-single-run\",\"clean\":\"rm -rf dist demo/bundle\"},\"repository\":{\"type\":\"git\",\"url\":\"git@github.com:IBM/carbon-charts.git\"},\"keywords\":[\"carbon\",\"charts\",\"dataviz\",\"data-visualization\",\"visualizations\",\"d3\",\"svg\",\"component\",\"components\",\"css\",\"html\",\"ibm\",\"typescript\",\"javascript\",\"js\",\"library\",\"pattern\",\"patterns\",\"sass\",\"scss\"],\"author\":\"IBM\",\"license\":\"Apache-2.0\",\"dependencies\":{\"@carbon/utils-position\":\"1.1.1\",\"babel-polyfill\":\"6.26.0\",\"carbon-components\":\"10.5.0\",\"date-fns\":\"2.8.1\",\"lodash-es\":\"4.17.15\",\"resize-observer-polyfill\":\"1.5.0\"},\"peerDependencies\":{\"d3\":\">=5.0.0 <=5.14.2\"},\"devDependencies\":{\"@carbon/colors\":\"10.4.0\",\"@carbon/import-once\":\"10.3.0\",\"@carbon/layout\":\"10.5.0\",\"@carbon/motion\":\"10.4.0\",\"@carbon/themes\":\"10.4.0\",\"@carbon/type\":\"10.5.1\",\"@types/d3\":\"4.11.0\",\"@types/jasmine\":\"2.8.7\",\"@types/karma\":\"3.0.2\",\"@types/node\":\"12.11.7\",\"babel-polyfill\":\"6.26.0\",\"codesandbox\":\"2.1.11\",\"copy-webpack-plugin\":\"4.5.2\",\"css-loader\":\"0.28.7\",\"d3\":\"5.14.2\",\"extract-text-webpack-plugin\":\"3.0.2\",\"file-loader\":\"1.1.5\",\"html-loader\":\"0.5.1\",\"html-webpack-exclude-assets-plugin\":\"0.0.7\",\"html-webpack-plugin\":\"3.2.0\",\"jasmine-core\":\"3.4.0\",\"karma\":\"4.0.1\",\"karma-chrome-launcher\":\"2.2.0\",\"karma-firefox-launcher\":\"1.1.0\",\"karma-jasmine\":\"2.0.1\",\"karma-safari-launcher\":\"1.0.0\",\"karma-webpack\":\"4.0.2\",\"lerna\":\"3.13.4\",\"mini-css-extract-plugin\":\"0.9.0\",\"raw-loader\":\"0.5.1\",\"rollup\":\"1.27.10\",\"rollup-plugin-commonjs\":\"10.1.0\",\"rollup-plugin-node-resolve\":\"5.2.0\",\"rollup-plugin-terser\":\"5.1.2\",\"rollup-plugin-typescript2\":\"0.25.3\",\"sass\":\"1.25.0\",\"sass-loader\":\"8.0.0\",\"style-loader\":\"0.19.0\",\"ts-loader\":\"5.1.0\",\"tslint\":\"5.20.1\",\"tslint-loader\":\"3.5.3\",\"typedoc\":\"0.11.1\",\"typescript\":\"3.2.2\",\"url-loader\":\"0.6.2\",\"webpack\":\"4.41.0\",\"webpack-cli\":\"3.3.9\",\"webpack-dev-server\":\"3.7.0\"},\"publishConfig\":{\"access\":\"public\"},\"maintainers\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}],\"contributors\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}]}");
 
 /***/ }),
 
@@ -1941,6 +2386,68 @@ var StackedBarChart = /** @class */ (function (_super) {
 
 /***/ }),
 
+/***/ "./src/charts/bubble.ts":
+/*!******************************!*\
+  !*** ./src/charts/bubble.ts ***!
+  \******************************/
+/*! exports provided: BubbleChart */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BubbleChart", function() { return BubbleChart; });
+/* harmony import */ var _axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axis-chart */ "./src/axis-chart.ts");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./src/configuration.ts");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./src/tools.ts");
+/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/index */ "./src/components/index.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+// Internal Imports
+
+
+
+// Components
+
+var BubbleChart = /** @class */ (function (_super) {
+    __extends(BubbleChart, _super);
+    function BubbleChart(holder, chartConfigs) {
+        var _this = _super.call(this, holder, chartConfigs) || this;
+        // Merge the default options for this chart
+        // With the user provided options
+        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].merge(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].clone(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].bubbleChart), chartConfigs.options));
+        // Initialize data, services, components etc.
+        _this.init(holder, chartConfigs);
+        return _this;
+    }
+    BubbleChart.prototype.getComponents = function () {
+        // Specify what to render inside the graph-frame
+        var graphFrameComponents = [
+            new _components_index__WEBPACK_IMPORTED_MODULE_3__["TwoDimensionalAxes"](this.model, this.services),
+            new _components_index__WEBPACK_IMPORTED_MODULE_3__["Grid"](this.model, this.services),
+            new _components_index__WEBPACK_IMPORTED_MODULE_3__["Bubble"](this.model, this.services)
+        ];
+        var components = this.getAxisChartComponents(graphFrameComponents);
+        components.push(new _components_index__WEBPACK_IMPORTED_MODULE_3__["TooltipScatter"](this.model, this.services));
+        return components;
+    };
+    return BubbleChart;
+}(_axis_chart__WEBPACK_IMPORTED_MODULE_0__["AxisChart"]));
+
+
+
+/***/ }),
+
 /***/ "./src/charts/donut.ts":
 /*!*****************************!*\
   !*** ./src/charts/donut.ts ***!
@@ -2005,7 +2512,7 @@ var DonutChart = /** @class */ (function (_super) {
 /*!*****************************!*\
   !*** ./src/charts/index.ts ***!
   \*****************************/
-/*! exports provided: SimpleBarChart, GroupedBarChart, StackedBarChart, LineChart, ScatterChart, PieChart, DonutChart */
+/*! exports provided: SimpleBarChart, GroupedBarChart, StackedBarChart, BubbleChart, LineChart, ScatterChart, PieChart, DonutChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2019,17 +2526,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bar_stacked__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bar-stacked */ "./src/charts/bar-stacked.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StackedBarChart", function() { return _bar_stacked__WEBPACK_IMPORTED_MODULE_2__["StackedBarChart"]; });
 
-/* harmony import */ var _line__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./line */ "./src/charts/line.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LineChart", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["LineChart"]; });
+/* harmony import */ var _bubble__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bubble */ "./src/charts/bubble.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BubbleChart", function() { return _bubble__WEBPACK_IMPORTED_MODULE_3__["BubbleChart"]; });
 
-/* harmony import */ var _scatter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./scatter */ "./src/charts/scatter.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScatterChart", function() { return _scatter__WEBPACK_IMPORTED_MODULE_4__["ScatterChart"]; });
+/* harmony import */ var _line__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./line */ "./src/charts/line.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LineChart", function() { return _line__WEBPACK_IMPORTED_MODULE_4__["LineChart"]; });
 
-/* harmony import */ var _pie__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pie */ "./src/charts/pie.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PieChart", function() { return _pie__WEBPACK_IMPORTED_MODULE_5__["PieChart"]; });
+/* harmony import */ var _scatter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./scatter */ "./src/charts/scatter.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScatterChart", function() { return _scatter__WEBPACK_IMPORTED_MODULE_5__["ScatterChart"]; });
 
-/* harmony import */ var _donut__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./donut */ "./src/charts/donut.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DonutChart", function() { return _donut__WEBPACK_IMPORTED_MODULE_6__["DonutChart"]; });
+/* harmony import */ var _pie__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pie */ "./src/charts/pie.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PieChart", function() { return _pie__WEBPACK_IMPORTED_MODULE_6__["PieChart"]; });
+
+/* harmony import */ var _donut__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./donut */ "./src/charts/donut.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DonutChart", function() { return _donut__WEBPACK_IMPORTED_MODULE_7__["DonutChart"]; });
+
 
 
 
@@ -2253,7 +2764,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../configuration */ "./src/configuration.ts");
 /* harmony import */ var d3_axis__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-axis */ "../../node_modules/d3-axis/src/index.js");
-/* harmony import */ var d3_time_format__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! d3-time-format */ "../../node_modules/d3-time-format/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -2274,7 +2784,6 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 // D3 Imports
-
 
 var Axis = /** @class */ (function (_super) {
     __extends(Axis, _super);
@@ -2326,13 +2835,6 @@ var Axis = /** @class */ (function (_super) {
             case _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].TOP:
                 axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_5__["axisTop"];
                 break;
-        }
-        // Set the date/time locale
-        if (this.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
-            var timeLocale = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "locale", "time");
-            if (timeLocale) {
-                Object(d3_time_format__WEBPACK_IMPORTED_MODULE_6__["timeFormatDefaultLocale"])(timeLocale);
-            }
         }
         // Initialize axis object
         var axis = axisFunction(scale)
@@ -4490,6 +4992,90 @@ var Bar = /** @class */ (function (_super) {
 
 /***/ }),
 
+/***/ "./src/components/graphs/bubble.ts":
+/*!*****************************************!*\
+  !*** ./src/components/graphs/bubble.ts ***!
+  \*****************************************/
+/*! exports provided: Bubble */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Bubble", function() { return Bubble; });
+/* harmony import */ var _scatter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scatter */ "./src/components/graphs/scatter.ts");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
+/* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-array */ "../../node_modules/d3-array/src/index.js");
+/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/src/index.js");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+// Internal Imports
+
+
+
+
+var Bubble = /** @class */ (function (_super) {
+    __extends(Bubble, _super);
+    function Bubble() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = "bubble";
+        return _this;
+    }
+    Bubble.prototype.getRadiusScale = function (selection) {
+        var data = selection.data();
+        // Filter out any null/undefined values
+        var allRadii = data.map(function (d) { return d.radius; }).filter(function (radius) { return radius; });
+        var options = this.model.getOptions();
+        var chartSize = _services__WEBPACK_IMPORTED_MODULE_1__["DOMUtils"].getSVGElementSize(this.services.domUtils.getMainSVG(), { useAttr: true });
+        return Object(d3_scale__WEBPACK_IMPORTED_MODULE_3__["scaleLinear"])().domain(Object(d3_array__WEBPACK_IMPORTED_MODULE_2__["extent"])(allRadii))
+            .range(options.bubble.radiusRange(chartSize, data));
+    };
+    Bubble.prototype.styleCircles = function (selection, animate) {
+        var _this = this;
+        // Chart options mixed with the internal configurations
+        var options = this.model.getOptions();
+        var radiusScale = this.getRadiusScale(selection);
+        selection.raise()
+            .classed("dot", true)
+            .attr("cx", function (d, i) { return _this.services.cartesianScales.getDomainValue(d, i); })
+            .transition(this.services.transitions.getTransition("bubble-update-enter", animate))
+            .attr("cy", function (d, i) { return _this.services.cartesianScales.getRangeValue(d, i); })
+            .attr("r", function (d) { return radiusScale(d.radius); })
+            .attr("fill", function (d) { return _this.model.getFillScale()[d.datasetLabel](d.label); })
+            .attr("fill-opacity", options.bubble.fillOpacity)
+            .attr("stroke", function (d) { return _this.model.getStrokeColor(d.datasetLabel, d.label, d.value); })
+            .attr("opacity", 1);
+    };
+    // TODO - This method could be re-used in more graphs
+    Bubble.prototype.addLabelsToDataPoints = function (d, index) {
+        // Chart options mixed with the internal configurations
+        var options = this.model.getOptions();
+        var labels = this.model.getDisplayData().labels;
+        return d.data.map(function (datum, i) { return ({
+            date: datum.date,
+            label: labels[i],
+            datasetLabel: d.label,
+            value: isNaN(datum) ? datum.value : datum,
+            radius: datum.radius || options.points.radius
+        }); });
+    };
+    return Bubble;
+}(_scatter__WEBPACK_IMPORTED_MODULE_0__["Scatter"]));
+
+
+
+/***/ }),
+
 /***/ "./src/components/graphs/donut.ts":
 /*!****************************************!*\
   !*** ./src/components/graphs/donut.ts ***!
@@ -5130,10 +5716,18 @@ var Scatter = /** @class */ (function (_super) {
         var dotsEnter = dots.enter()
             .append("circle")
             .attr("opacity", 0);
-        var filled = options.points.filled;
         // Apply styling & position
-        dotsEnter.merge(dots)
-            .raise()
+        var circlesToStyle = dotsEnter.merge(dots);
+        this.styleCircles(circlesToStyle, animate);
+        // Add event listeners to elements drawn
+        this.addEventListeners();
+    };
+    Scatter.prototype.styleCircles = function (selection, animate) {
+        var _this = this;
+        // Chart options mixed with the internal configurations
+        var options = this.model.getOptions();
+        var filled = options.points.filled;
+        selection.raise()
             .classed("dot", true)
             .classed("filled", function (d) { return _this.model.getIsFilled(d.datasetLabel, d.label, d, filled); })
             .classed("unfilled", function (d) { return !_this.model.getIsFilled(d.datasetLabel, d.label, d, filled); })
@@ -5172,8 +5766,8 @@ var Scatter = /** @class */ (function (_super) {
         this.parent.selectAll("circle")
             .on("mouseover mousemove", function (datum) {
             var hoveredElement = Object(d3_selection__WEBPACK_IMPORTED_MODULE_2__["select"])(this);
-            hoveredElement.classed("hovered", true);
-            hoveredElement.style("fill", function (d) { return self.model.getFillColor(d.datasetLabel, d.label, d); });
+            hoveredElement.classed("hovered", true)
+                .style("fill", function (d) { return self.model.getFillColor(d.datasetLabel, d.label, d); });
             var eventNameToDispatch = d3_selection__WEBPACK_IMPORTED_MODULE_2__["event"].type === "mouseover" ? _interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Scatter.SCATTER_MOUSEOVER : _interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Scatter.SCATTER_MOUSEMOVE;
             // Dispatch mouse event
             self.services.events.dispatchEvent(eventNameToDispatch, {
@@ -5229,7 +5823,7 @@ var Scatter = /** @class */ (function (_super) {
 /*!*********************************!*\
   !*** ./src/components/index.ts ***!
   \*********************************/
-/*! exports provided: Component, Legend, Title, Tooltip, TooltipBar, TooltipScatter, SimpleBar, GroupedBar, StackedBar, Line, Scatter, Pie, Donut, Spacer, LayoutComponent, TwoDimensionalAxes, Axis, Grid, ZeroLine */
+/*! exports provided: Component, Legend, Title, Tooltip, TooltipBar, TooltipScatter, SimpleBar, GroupedBar, StackedBar, Bubble, Line, Scatter, Pie, Donut, Spacer, LayoutComponent, TwoDimensionalAxes, Axis, Grid, ZeroLine */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5261,35 +5855,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _graphs_bar_stacked__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./graphs/bar-stacked */ "./src/components/graphs/bar-stacked.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StackedBar", function() { return _graphs_bar_stacked__WEBPACK_IMPORTED_MODULE_8__["StackedBar"]; });
 
-/* harmony import */ var _graphs_line__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./graphs/line */ "./src/components/graphs/line.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Line", function() { return _graphs_line__WEBPACK_IMPORTED_MODULE_9__["Line"]; });
+/* harmony import */ var _graphs_bubble__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./graphs/bubble */ "./src/components/graphs/bubble.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Bubble", function() { return _graphs_bubble__WEBPACK_IMPORTED_MODULE_9__["Bubble"]; });
 
-/* harmony import */ var _graphs_scatter__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./graphs/scatter */ "./src/components/graphs/scatter.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Scatter", function() { return _graphs_scatter__WEBPACK_IMPORTED_MODULE_10__["Scatter"]; });
+/* harmony import */ var _graphs_line__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./graphs/line */ "./src/components/graphs/line.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Line", function() { return _graphs_line__WEBPACK_IMPORTED_MODULE_10__["Line"]; });
 
-/* harmony import */ var _graphs_pie__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./graphs/pie */ "./src/components/graphs/pie.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Pie", function() { return _graphs_pie__WEBPACK_IMPORTED_MODULE_11__["Pie"]; });
+/* harmony import */ var _graphs_scatter__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./graphs/scatter */ "./src/components/graphs/scatter.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Scatter", function() { return _graphs_scatter__WEBPACK_IMPORTED_MODULE_11__["Scatter"]; });
 
-/* harmony import */ var _graphs_donut__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./graphs/donut */ "./src/components/graphs/donut.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Donut", function() { return _graphs_donut__WEBPACK_IMPORTED_MODULE_12__["Donut"]; });
+/* harmony import */ var _graphs_pie__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./graphs/pie */ "./src/components/graphs/pie.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Pie", function() { return _graphs_pie__WEBPACK_IMPORTED_MODULE_12__["Pie"]; });
 
-/* harmony import */ var _layout_spacer__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./layout/spacer */ "./src/components/layout/spacer.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Spacer", function() { return _layout_spacer__WEBPACK_IMPORTED_MODULE_13__["Spacer"]; });
+/* harmony import */ var _graphs_donut__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./graphs/donut */ "./src/components/graphs/donut.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Donut", function() { return _graphs_donut__WEBPACK_IMPORTED_MODULE_13__["Donut"]; });
 
-/* harmony import */ var _layout_layout__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./layout/layout */ "./src/components/layout/layout.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LayoutComponent", function() { return _layout_layout__WEBPACK_IMPORTED_MODULE_14__["LayoutComponent"]; });
+/* harmony import */ var _layout_spacer__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./layout/spacer */ "./src/components/layout/spacer.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Spacer", function() { return _layout_spacer__WEBPACK_IMPORTED_MODULE_14__["Spacer"]; });
 
-/* harmony import */ var _axes_two_dimensional_axes__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./axes/two-dimensional-axes */ "./src/components/axes/two-dimensional-axes.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TwoDimensionalAxes", function() { return _axes_two_dimensional_axes__WEBPACK_IMPORTED_MODULE_15__["TwoDimensionalAxes"]; });
+/* harmony import */ var _layout_layout__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./layout/layout */ "./src/components/layout/layout.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LayoutComponent", function() { return _layout_layout__WEBPACK_IMPORTED_MODULE_15__["LayoutComponent"]; });
 
-/* harmony import */ var _axes_axis__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./axes/axis */ "./src/components/axes/axis.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Axis", function() { return _axes_axis__WEBPACK_IMPORTED_MODULE_16__["Axis"]; });
+/* harmony import */ var _axes_two_dimensional_axes__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./axes/two-dimensional-axes */ "./src/components/axes/two-dimensional-axes.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TwoDimensionalAxes", function() { return _axes_two_dimensional_axes__WEBPACK_IMPORTED_MODULE_16__["TwoDimensionalAxes"]; });
 
-/* harmony import */ var _axes_grid__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./axes/grid */ "./src/components/axes/grid.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Grid", function() { return _axes_grid__WEBPACK_IMPORTED_MODULE_17__["Grid"]; });
+/* harmony import */ var _axes_axis__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./axes/axis */ "./src/components/axes/axis.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Axis", function() { return _axes_axis__WEBPACK_IMPORTED_MODULE_17__["Axis"]; });
 
-/* harmony import */ var _axes_zero_line__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./axes/zero-line */ "./src/components/axes/zero-line.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ZeroLine", function() { return _axes_zero_line__WEBPACK_IMPORTED_MODULE_18__["ZeroLine"]; });
+/* harmony import */ var _axes_grid__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./axes/grid */ "./src/components/axes/grid.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Grid", function() { return _axes_grid__WEBPACK_IMPORTED_MODULE_18__["Grid"]; });
+
+/* harmony import */ var _axes_zero_line__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./axes/zero-line */ "./src/components/axes/zero-line.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ZeroLine", function() { return _axes_zero_line__WEBPACK_IMPORTED_MODULE_19__["ZeroLine"]; });
 
 
 // ESSENTIALS
@@ -5299,6 +5896,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // GRAPHS
+
 
 
 
@@ -5742,6 +6340,21 @@ var scatterChart = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, axisCh
     }
 });
 /**
+ * options specific to bubble charts
+ */
+var bubbleChart = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, axisChart, {
+    bubble: {
+        radiusRange: function (chartSize, data) {
+            var smallerChartDimension = Math.min(chartSize.width, chartSize.height);
+            return [
+                smallerChartDimension * 3 / 400,
+                smallerChartDimension * 25 / 400
+            ];
+        },
+        fillOpacity: 0.2
+    }
+});
+/**
  * options specific to pie charts
  */
 var pieChart = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, chart, {
@@ -5786,6 +6399,7 @@ var options = {
     simpleBarChart: simpleBarChart,
     groupedBarChart: groupedBarChart,
     stackedBarChart: stackedBarChart,
+    bubbleChart: bubbleChart,
     lineChart: lineChart,
     scatterChart: scatterChart,
     pieChart: pieChart,
@@ -5839,7 +6453,7 @@ var spacers = {
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/*! exports provided: interfaces, configurations, defaultColors, colorPalettes, SimpleBarChart, GroupedBarChart, StackedBarChart, LineChart, ScatterChart, PieChart, DonutChart */
+/*! exports provided: interfaces, configurations, defaultColors, colorPalettes, SimpleBarChart, GroupedBarChart, StackedBarChart, BubbleChart, LineChart, ScatterChart, PieChart, DonutChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5851,6 +6465,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GroupedBarChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["GroupedBarChart"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StackedBarChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["StackedBarChart"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BubbleChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["BubbleChart"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LineChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["LineChart"]; });
 
@@ -6465,7 +7081,7 @@ var ChartModel = /** @class */ (function () {
      * @param newData The new raw data to be set
      */
     ChartModel.prototype.setData = function (newData) {
-        var sanitizedData = this.sanitize(newData);
+        var sanitizedData = this.sanitize(_tools__WEBPACK_IMPORTED_MODULE_1__["Tools"].clone(newData));
         var dataLabels = this.generateDataLabels(sanitizedData);
         this.set({
             data: sanitizedData,
@@ -7228,7 +7844,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./src/tools.ts");
 /* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/src/index.js");
 /* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-array */ "../../node_modules/d3-array/src/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ "../../node_modules/date-fns/esm/index.js");
+/* harmony import */ var d3_time_format__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-time-format */ "../../node_modules/d3-time-format/src/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns */ "../../node_modules/date-fns/esm/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -7249,6 +7866,9 @@ var __extends = (undefined && undefined.__extends) || (function () {
 // D3 Imports
 
 
+
+var englishLocale = __webpack_require__(/*! d3-time-format/locale/en-US.json */ "../../node_modules/d3-time-format/locale/en-US.json");
+// Misc
 
 var CartesianScales = /** @class */ (function (_super) {
     __extends(CartesianScales, _super);
@@ -7365,14 +7985,6 @@ var CartesianScales = /** @class */ (function (_super) {
     CartesianScales.prototype.getRangeValue = function (d, i) {
         return this.getValueFromScale(this.rangeAxisPosition, d, i);
     };
-    CartesianScales.prototype.getXValue = function (d, i) {
-        var datum = Object.assign(d, { pos: "bottom" });
-        return this.getValueFromScale(datum, i);
-    };
-    CartesianScales.prototype.getYValue = function (d, i) {
-        var datum = Object.assign(d, { pos: "left" });
-        return this.getValueFromScale(datum, i);
-    };
     /** Uses the primary Y Axis to get data items associated with that value.  */
     CartesianScales.prototype.getDataFromDomain = function (domainValue) {
         var displayData = this.model.getDisplayData();
@@ -7463,20 +8075,20 @@ var CartesianScales = /** @class */ (function (_super) {
             if (spaceToAddToEdges) {
                 var startDate = new Date(domain[0]);
                 var endDate = new Date(domain[1]);
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["differenceInYears"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["subYears"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["addYears"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["differenceInYears"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subYears"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addYears"])(endDate, spaceToAddToEdges)];
                 }
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["differenceInMonths"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["subMonths"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["addMonths"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["differenceInMonths"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subMonths"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addMonths"])(endDate, spaceToAddToEdges)];
                 }
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["differenceInDays"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["subDays"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["addDays"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["differenceInDays"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subDays"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addDays"])(endDate, spaceToAddToEdges)];
                 }
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["differenceInHours"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["subHours"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["addHours"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["differenceInHours"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subHours"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addHours"])(endDate, spaceToAddToEdges)];
                 }
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["differenceInMinutes"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["subMinutes"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_5__["addMinutes"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["differenceInMinutes"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subMinutes"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addMinutes"])(endDate, spaceToAddToEdges)];
                 }
                 return [startDate, endDate];
             }
@@ -7494,12 +8106,18 @@ var CartesianScales = /** @class */ (function (_super) {
         return domain;
     };
     CartesianScales.prototype.createScale = function (axisPosition) {
-        var axisOptions = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(this.model.getOptions(), "axes", axisPosition);
+        var options = this.model.getOptions();
+        var axisOptions = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "axes", axisPosition);
         if (!axisOptions) {
             return null;
         }
         var scaleType = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(axisOptions, "scaleType") || _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LINEAR;
         this.scaleTypes[axisPosition] = scaleType;
+        // Set the date/time locale
+        if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
+            var timeLocale = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "locale", "time") || englishLocale;
+            Object(d3_time_format__WEBPACK_IMPORTED_MODULE_5__["timeFormatDefaultLocale"])(timeLocale);
+        }
         var scale;
         if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
             scale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_3__["scaleTime"])();
