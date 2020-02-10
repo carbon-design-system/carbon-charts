@@ -122,7 +122,7 @@ let allDemoGroups = [
 				options: barDemos.stackedHorizontalBarTimeSeriesOptions,
 				data: barDemos.stackedHorizontalBarTimeSeriesData,
 				chartType: chartTypes.StackedBarChart
-			},
+			}
 		]
 	},
 	{

@@ -146,13 +146,13 @@ demoGroups.forEach(demoGroup => {
 	demoGroup.demos.forEach(demo => {
 		const holder = createChartContainer(demo);
 		if (holder) {
-			const classToInitialize = Charts[demo.chartType.vanilla];
+			const ClassToInitialize = Charts[demo.chartType.vanilla];
 
 			// Add `height` to the chart options
 			demo.options.height = "500px";
 
 			// Initialize chart
-			charts[demo.id] = new classToInitialize(
+			charts[demo.id] = new ClassToInitialize(
 				holder,
 				{
 					data: demo.data,
