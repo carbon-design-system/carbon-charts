@@ -3,7 +3,7 @@ import { Component } from "../component";
 import { TooltipTypes, Roles, Events } from "../../interfaces";
 
 // D3 Imports
-import { select, event as d3Event } from "d3-selection";
+import { select, Selection, event as d3Event } from "d3-selection";
 
 export class Scatter extends Component {
 	type = "scatter";
@@ -50,10 +50,20 @@ export class Scatter extends Component {
 			.append("circle")
 			.attr("opacity", 0);
 
-		const { filled } = options.points;
 		// Apply styling & position
-		dotsEnter.merge(dots)
-			.raise()
+		const circlesToStyle = dotsEnter.merge(dots);
+		this.styleCircles(circlesToStyle, animate);
+
+		// Add event listeners to elements drawn
+		this.addEventListeners();
+	}
+
+	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
+		// Chart options mixed with the internal configurations
+		const options = this.model.getOptions();
+		const { filled } = options.points;
+
+		selection.raise()
 			.classed("dot", true)
 			.classed("filled", d => this.model.getIsFilled(d.datasetLabel, d.label, d, filled))
 			.classed("unfilled", d => !this.model.getIsFilled(d.datasetLabel, d.label, d, filled))
@@ -110,9 +120,9 @@ export class Scatter extends Component {
 		this.parent.selectAll("circle")
 			.on("mouseover mousemove", function(datum) {
 				const hoveredElement = select(this);
-				hoveredElement.classed("hovered", true);
 
-				hoveredElement.style("fill", (d: any) => self.model.getFillColor(d.datasetLabel, d.label, d));
+				hoveredElement.classed("hovered", true)
+					.style("fill", (d: any) => self.model.getFillColor(d.datasetLabel, d.label, d));
 
 				const eventNameToDispatch = d3Event.type === "mouseover" ? Events.Scatter.SCATTER_MOUSEOVER : Events.Scatter.SCATTER_MOUSEMOVE;
 				// Dispatch mouse event
