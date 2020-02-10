@@ -141,10 +141,7 @@ export class CartesianScales extends Service {
 		return this.scales[this.getMainYAxisPosition()];
 	}
 
-	getValueFromScale(axisPosition: AxisPositions, datum: any, index?: number) {
-		const value = isNaN(datum) ? datum.value : datum;
-		const scaleType = this.scaleTypes[axisPosition];
-		const scale = this.scales[axisPosition];
+	getValueFromScale(scale: any, scaleType: ScaleTypes, datum: any, index?: number) {
 		if (scaleType === ScaleTypes.LABELS) {
 			const correspondingLabel = this.model.getDisplayData().labels[index];
 			return scale(correspondingLabel) + scale.step() / 2;
@@ -152,25 +149,34 @@ export class CartesianScales extends Service {
 			return scale(new Date(datum.date || datum.label));
 		}
 
+		const value = isNaN(datum) ? datum.value : datum;
 		return scale(value);
 	}
 
+	getValueThroughAxisPosition(axisPosition: AxisPositions, datum: any, index?: number) {
+		const value = isNaN(datum) ? datum.value : datum;
+		const scaleType = this.scaleTypes[axisPosition];
+		const scale = this.scales[axisPosition];
+
+		return this.getValueFromScale(scale, scaleType, datum, index);
+	}
+
 	getDomainValue(d, i) {
-		return this.getValueFromScale(this.domainAxisPosition, d, i);
+		return this.getValueThroughAxisPosition(this.domainAxisPosition, d, i);
 	}
 
 	getRangeValue(d, i) {
-		return this.getValueFromScale(this.rangeAxisPosition, d, i);
+		return this.getValueThroughAxisPosition(this.rangeAxisPosition, d, i);
 	}
 
 	getXValue(d, i) {
-		const datum = Object.assign(d, { pos: "bottom" });
-		return this.getValueFromScale(datum, i);
+		const mainXAxisPosition = this.getMainXAxisPosition();
+		return this.getValueThroughAxisPosition(mainXAxisPosition, d, i);
 	}
 
 	getYValue(d, i) {
-		const datum = Object.assign(d, { pos: "left" });
-		return this.getValueFromScale(datum, i);
+		const mainYAxisPosition = this.getMainYAxisPosition();
+		return this.getValueThroughAxisPosition(mainYAxisPosition, d, i);
 	}
 
 	/** Uses the primary Y Axis to get data items associated with that value.  */
@@ -274,8 +280,12 @@ export class CartesianScales extends Service {
 
 			domain = extent(allDataValues);
 		}
-
 		if (axisOptions.scaleType === ScaleTypes.TIME) {
+
+			const zoomDomain = this.model.get("zoomDomain");
+			if (zoomDomain) {
+				return zoomDomain.map(d => new Date(d));
+			}
 			const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
 			if (spaceToAddToEdges) {
 				const startDate = new Date(domain[0]);

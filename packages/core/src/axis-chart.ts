@@ -13,14 +13,16 @@ import {
 	Title,
 	Tooltip,
 	TooltipBar,
-	Spacer
+	Spacer,
+	ZoomBar
 } from "./components/index";
 import { Tools } from "./tools";
 
-import { CartesianScales, Curves } from "./services/index";
+import { AxisZoom, CartesianScales, Curves } from "./services/index";
 
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {
+		axisZoom: AxisZoom,
 		cartesianScales: CartesianScales,
 		curves: Curves
 	});
@@ -117,6 +119,17 @@ export class AxisChart extends Chart {
 			}
 		};
 
+		const zoomBarComponent = {
+			id: "zoom-bar",
+			components: [
+				new ZoomBar(this.model, this.services)
+			],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
 		// Add chart title if it exists
 		const topLevelLayoutComponents = [];
 		if (this.model.getOptions().title) {
@@ -135,6 +148,7 @@ export class AxisChart extends Chart {
 
 			topLevelLayoutComponents.push(titleSpacerComponent);
 		}
+		topLevelLayoutComponents.push(zoomBarComponent);
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [

@@ -25,3 +25,4 @@ export * from "./axes/two-dimensional-axes";
 export * from "./axes/axis";
 export * from "./axes/grid";
 export * from "./axes/zero-line";
+export * from "./axes/zoom-pan";
