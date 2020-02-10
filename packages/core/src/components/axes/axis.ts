@@ -8,7 +8,6 @@ import * as Configuration from "../../configuration";
 
 // D3 Imports
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
-import { timeFormatDefaultLocale } from "d3-time-format";
 
 export class Axis extends Component {
 	type = "axes";
@@ -69,14 +68,6 @@ export class Axis extends Component {
 			case AxisPositions.TOP:
 				axisFunction = axisTop;
 				break;
-		}
-
-		// Set the date/time locale
-		if (this.scaleType === ScaleTypes.TIME) {
-			const timeLocale = Tools.getProperty(options, "locale", "time");
-			if (timeLocale) {
-				timeFormatDefaultLocale(timeLocale);
-			}
 		}
 
 		// Initialize axis object
