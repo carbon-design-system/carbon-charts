@@ -1,7 +1,20 @@
 // Internal Imports
-import { Chart } from "@carbon/charts/src/chart";
+import { Chart } from "@carbon/charts";
 import { Map } from "../components/map";
 
+// console.log("Chart", Chart)
+// class Chart {
+// 	model: any;
+// 	services: any;
+
+// 	constructor(holder: any, chartConfigs: any) {
+
+// 	}
+
+// 	init(holder: any, chartConfigs: any) {
+
+// 	}
+// }
 // import * as Configuration from "../configuration";
 // import {
 // 	ChartConfig,

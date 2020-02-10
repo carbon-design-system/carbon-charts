@@ -1,5 +1,5 @@
 // Internal Imports
-import { Component } from "@carbon/charts/src/components/component";
+import { Component } from "@carbon/charts";
 
 import mapboxgl from "mapbox-gl";
 
@@ -674,7 +674,7 @@ export class Map extends Component {
 
 		const gl = L.mapboxGL({
 			accessToken: "pk.eyJ1IjoiaWxpYWRtIiwiYSI6ImNrNGJwM2wxdTBmdmgzZmp6Z2ppcmxnaWYifQ.-nuo76OMryoLcs2dPbGfUQ",
-			style: "mapbox://styles/mapbox/streets-v9",
+			style: "mapbox://styles/iliadm/ck6azll7g3nr31io45jvm63qb",
 			attribution: "<a href='https://mapbox.com' target='_blank'>Mapbox</a>"
 		}).addTo(map);
 
