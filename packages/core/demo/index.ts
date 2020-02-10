@@ -1,4 +1,4 @@
-import * as Charts from "../src/index";
+import * as Charts from "@carbon/charts";
 
 // Styles
 import "./index.scss";
@@ -10,7 +10,7 @@ import { initializeDemoOptions } from "./demo-options";
 import { demoGroups } from "./demo-data/index";
 
 // MISC
-import { Tools } from "../src/tools";
+import { Tools } from "@carbon/charts/tools";
 
 initializeDemoOptions();
 
@@ -47,7 +47,7 @@ const changeDemoData = (id: any, chartObj: any) => {
 		return result;
 	};
 
-	// Function to be used to randomize all datapoints
+	// Function to be used to randomize all data points
 	const updateChartData = currentData => {
 		const result = Tools.clone(currentData);
 		result.datasets = result.datasets.map(dataset => {

@@ -41,6 +41,7 @@
 		"vue-template-compiler": "2.5.21"
 	},
 	"publishConfig": {
+		"directory": "dist",
 		"access": "public"
 	},
 	"lint-staged": {
