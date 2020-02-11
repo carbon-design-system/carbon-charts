@@ -1,4 +1,17 @@
 .#{$prefix}--#{$charts-prefix}--grid {
+	line.ruler {
+		stroke: #009bef;
+		stroke-width: 1px;
+		stroke-dasharray: 2;
+		pointer-events: none;
+	}
+
+	text.axis-tooltip-text {
+		fill: white;
+		alignment-baseline: middle;
+		text-anchor: middle;
+	}
+
 	rect.chart-grid-backdrop {
 		@if $carbon--theme == $carbon--theme--g10 {
 			fill: $ui-01;
