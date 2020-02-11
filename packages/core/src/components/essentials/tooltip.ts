@@ -119,7 +119,7 @@ export class Tooltip extends Component {
 		points.sort((a, b) => b.value - a.value);
 
 		// tells us which value to use
-		const scaleType = this.services.axes.getMainXAxis().scaleType;
+		const scaleType = this.services.cartesianScales.getDomainScale().scaleType;
 
 		return  "<ul class='multi-tooltip'>" +
 			points.map(datapoint => {
@@ -132,6 +132,7 @@ export class Tooltip extends Component {
 				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
 				this.model.getOptions().tooltip.valueFormatter(datapointValue) : datapointValue.toLocaleString("en");
 
+				// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
 				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label);
 
 				return `

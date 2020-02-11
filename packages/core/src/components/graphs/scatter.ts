@@ -1,9 +1,9 @@
 // Internal Imports
 import { Component } from "../component";
-import { TooltipTypes, Roles } from "../../interfaces";
+import { TooltipTypes, Roles, Events } from "../../interfaces";
 
 // D3 Imports
-import { select } from "d3-selection";
+import { select, Selection, event as d3Event } from "d3-selection";
 
 export class Scatter extends Component {
 	type = "scatter";
@@ -50,24 +50,34 @@ export class Scatter extends Component {
 			.append("circle")
 			.attr("opacity", 0);
 
-		const { filled } = options.points;
 		// Apply styling & position
-		dotsEnter.merge(dots)
-			.raise()
+		const circlesToStyle = dotsEnter.merge(dots);
+		this.styleCircles(circlesToStyle, animate);
+
+		// Add event listeners to elements drawn
+		this.addEventListeners();
+	}
+
+	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
+		// Chart options mixed with the internal configurations
+		const options = this.model.getOptions();
+		const { filled } = options.points;
+
+		selection.raise()
 			.classed("dot", true)
-			.classed("filled", filled)
-			.classed("unfilled", !filled)
-			.attr("cx", (d, i) => this.services.axes.getXValue(d, i))
+			.classed("filled", d => this.model.getIsFilled(d.datasetLabel, d.label, d, filled))
+			.classed("unfilled", d => !this.model.getIsFilled(d.datasetLabel, d.label, d, filled))
+			.attr("cx", (d, i) => this.services.cartesianScales.getDomainValue(d, i))
 			.transition(this.services.transitions.getTransition("scatter-update-enter", animate))
-			.attr("cy", (d, i) => this.services.axes.getYValue(d, i))
+			.attr("cy", (d, i) => this.services.cartesianScales.getRangeValue(d, i))
 			.attr("r", options.points.radius)
 			.attr("fill", d => {
-				if (filled) {
-					return this.model.getFillScale()[d.datasetLabel](d.label) as any;
+				if (this.model.getIsFilled(d.datasetLabel, d.label, d, filled)) {
+					return this.model.getFillColor(d.datasetLabel, d.label, d);
 				}
 			})
 			.attr("fill-opacity", filled ? 0.2 : 1)
-			.attr("stroke", d => this.model.getStrokeColor(d.datasetLabel, d.label, d.value))
+			.attr("stroke", d => this.model.getStrokeColor(d.datasetLabel, d.label, d))
 			.attr("opacity", 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
@@ -109,6 +119,7 @@ export class Scatter extends Component {
 				date: datum.date,
 				label: labels[i],
 				datasetLabel: d.label,
+        class: datum.class,
 				value: isNaN(datum) ? datum.value : datum
 			}));
 	}
@@ -116,11 +127,18 @@ export class Scatter extends Component {
 	addEventListeners() {
 		const self = this;
 		this.parent.selectAll("circle")
-			.on("mouseover mousemove", function() {
+			.on("mouseover mousemove", function(datum) {
 				const hoveredElement = select(this);
-				hoveredElement.classed("hovered", true);
 
-				hoveredElement.style("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
+				hoveredElement.classed("hovered", true)
+					.style("fill", (d: any) => self.model.getFillColor(d.datasetLabel, d.label, d));
+
+				const eventNameToDispatch = d3Event.type === "mouseover" ? Events.Scatter.SCATTER_MOUSEOVER : Events.Scatter.SCATTER_MOUSEMOVE;
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(eventNameToDispatch, {
+					element: hoveredElement,
+					datum
+				});
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
@@ -128,13 +146,26 @@ export class Scatter extends Component {
 					type: TooltipTypes.DATAPOINT
 				});
 			})
-			.on("mouseout", function() {
+			.on("click", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Scatter.SCATTER_CLICK, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
 				if (!self.configs.filled) {
 					hoveredElement.style("fill", null);
 				}
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Scatter.SCATTER_MOUSEOUT, {
+					element: hoveredElement,
+					datum
+				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });

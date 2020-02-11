@@ -1,12 +1,4 @@
-import {
-	SimpleBarChart,
-	GroupedBarChart,
-	StackedBarChart,
-	LineChart,
-	ScatterChart,
-	PieChart,
-	DonutChart
-} from "../src/index";
+import * as Charts from "../src/index";
 
 // Styles
 import "./index.scss";
@@ -15,7 +7,7 @@ import "./index.scss";
 import { initializeDemoOptions } from "./demo-options";
 
 // Chart types
-import { chartTypes } from "./chart-types";
+import { demoGroups } from "./demo-data/index";
 
 // MISC
 import { Tools } from "../src/tools";
@@ -24,19 +16,18 @@ initializeDemoOptions();
 
 const charts = {};
 
-const changeDemoData = (chartType: any, chartObj: any) => {
+const changeDemoData = (id: any, chartObj: any) => {
 	const oldData = chartObj.model.getData();
 
 	// Function to be used to randomize a value
 	const randomizeValue = datum => {
 		const currentVal = datum.value !== undefined ? datum.value : datum;
-		const firstTry = Math.max(0.85 * currentVal, currentVal * Math.random() * (Math.random() * 5));
-		let result = currentVal > 0 ? Math.min(3 * currentVal, firstTry) : Math.max(3 * currentVal, firstTry);
+		let result = Math.random() > 0.5 ? 0.95 * currentVal : 1.05 * currentVal;
 
 		if (Math.random() > 0.5
-			|| chartType.indexOf("stacked") !== -1
-			|| chartType.indexOf("pie") !== -1
-			|| chartType.indexOf("donut") !== -1) {
+			|| id.indexOf("stacked") !== -1
+			|| id.indexOf("pie") !== -1
+			|| id.indexOf("donut") !== -1) {
 			result = Math.floor(result);
 		} else {
 			result = Math.floor(result) * -1;
@@ -73,12 +64,12 @@ const changeDemoData = (chartType: any, chartObj: any) => {
 		return result;
 	};
 
-	const chartObject = charts[chartType];
+	const chartObject = charts[id];
 	let newData;
 
 	const removeADataset = Math.random() > 0.5;
 
-	switch (chartType) {
+	switch (id) {
 		case "pie":
 		case "donut":
 			// Randomize old data values
@@ -99,16 +90,16 @@ const changeDemoData = (chartType: any, chartObj: any) => {
 	chartObject.model.setData(newData);
 };
 
-const setDemoActionsEventListener = (chartType: any, chartObj: any) => {
-	const changeDataButton = document.getElementById(`change-data-${chartType}`);
+const setDemoActionsEventListener = (id: any, chartObj: any) => {
+	const changeDataButton = document.getElementById(`change-data-${id}`);
 	if (changeDataButton) {
 		changeDataButton.onclick = e => {
 			e.preventDefault();
 
-			changeDemoData(chartType, chartObj);
+			changeDemoData(id, chartObj);
 		};
 
-		const actionsElement = document.getElementById(`actions-${chartType}`);
+		const actionsElement = document.getElementById(`actions-${id}`);
 		if (actionsElement) {
 			const changeDataPromiseButtons = Array.prototype.slice.call(actionsElement.querySelectorAll(".change-data-promise"));
 			changeDataPromiseButtons.forEach(element => {
@@ -116,32 +107,32 @@ const setDemoActionsEventListener = (chartType: any, chartObj: any) => {
 				element.onclick = e => {
 					e.preventDefault();
 
-					changeDemoData(chartType, chartObj);
+					changeDemoData(id, chartObj);
 				};
 			});
 		}
 	}
 };
 
-const createChartContainer = chartType => {
+const createChartContainer = demo => {
 	// Chart holder
 	const holder = document.createElement("div");
 	holder.className = "demo-chart-holder has-actions";
-	holder.id = `classy-${chartType.id}-chart-holder`;
+	holder.id = demo.id;
 
 	document.body.appendChild(holder);
 
 	// Chart demo actions container
 	const chartDemoActions = document.createElement("div");
 	chartDemoActions.className = "chart-demo-actions";
-	chartDemoActions.id = `actions-${chartType.id}`;
+	chartDemoActions.id = `actions-${demo.id}`;
 	chartDemoActions.setAttribute("role", "region");
-	chartDemoActions.setAttribute("aria-label", `${chartType} chart actions`);
+	chartDemoActions.setAttribute("aria-label", `${demo.title} chart actions`);
 
 	// Add update data button
 	const updateDataButton = document.createElement("button");
 	updateDataButton.className = "bx--btn bx--btn--primary";
-	updateDataButton.id = `change-data-${chartType.id}`;
+	updateDataButton.id = `change-data-${demo.id}`;
 	updateDataButton.innerHTML = "Update data";
 
 	chartDemoActions.appendChild(updateDataButton);
@@ -151,52 +142,25 @@ const createChartContainer = chartType => {
 };
 
 // Initialize all charts
-chartTypes.forEach(type => {
-	const holder = createChartContainer(type);
-	if (holder) {
-		let classToInitialize;
-		switch (type.id) {
-			case "simple-bar":
-			case "simple-bar-time-series":
-				classToInitialize = SimpleBarChart;
-				break;
-			case "grouped-bar":
-				classToInitialize = GroupedBarChart;
-				break;
-			case "stacked-bar":
-			case "stacked-bar-time-series":
-				classToInitialize = StackedBarChart;
-				break;
-			case "scatter":
-			case "scatter-time-series":
-				classToInitialize = ScatterChart;
-				break;
-			case "line":
-			case "line-time-series":
-			case "line-step":
-			case "line-step-time-series":
-				classToInitialize = LineChart;
-				break;
-			case "pie":
-				classToInitialize = PieChart;
-				break;
-			case "donut":
-				classToInitialize = DonutChart;
-				break;
+demoGroups.forEach(demoGroup => {
+	demoGroup.demos.forEach(demo => {
+		const holder = createChartContainer(demo);
+		if (holder) {
+			const ClassToInitialize = Charts[demo.chartType.vanilla];
+
+			// Add `height` to the chart options
+			demo.options.height = "500px";
+
+			// Initialize chart
+			charts[demo.id] = new ClassToInitialize(
+				holder,
+				{
+					data: demo.data,
+					options: demo.options
+				}
+			);
+
+			setDemoActionsEventListener(demo.id, charts[demo.id]);
 		}
-
-		// Add `height` to the chart options
-		type.options.height = "500px";
-
-		// Initialize chart
-		charts[type.id] = new classToInitialize(
-			holder,
-			{
-				data: type.data,
-				options: type.options
-			}
-		);
-
-		setDemoActionsEventListener(type.id, charts[type.id]);
-	}
+	});
 });

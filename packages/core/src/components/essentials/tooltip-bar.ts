@@ -1,17 +1,13 @@
-import * as Configuration from "../../configuration";
 import { Tooltip } from "./tooltip";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
-import { TooltipPosition, TooltipTypes } from "./../../interfaces/enums";
-
-// Carbon position service
-import Position, { PLACEMENTS } from "@carbon/utils-position";
+import { TooltipPosition, TooltipTypes, CartesianOrientations } from "./../../interfaces/enums";
 
 // import the settings for the css prefix
 import settings from "carbon-components/src/globals/js/settings";
 
 // D3 Imports
-import { mouse, select } from "d3-selection";
+import { select } from "d3-selection";
 
 export class TooltipBar extends Tooltip {
 	init() {
@@ -30,19 +26,21 @@ export class TooltipBar extends Tooltip {
 			if ((e.detail.type === TooltipTypes.DATAPOINT && Tools.getProperty(this.model.getOptions(), "tooltip", "datapoint", "enabled"))
 				|| (e.detail.type === TooltipTypes.GRIDLINE && Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) ) {
 
+				let data = e.detail.hoveredElement.datum() as any;
 				const hoveredElement = e.detail.hoveredElement.node();
 
 				let defaultHTML;
 				if (e.detail.multidata) {
 					// multi tooltip
-					defaultHTML = this.getMultilineTooltipHTML(e.detail.multidata);
+					data = e.detail.multidata;
+					defaultHTML = this.getMultilineTooltipHTML(data);
 				} else {
 					defaultHTML = this.getTooltipHTML(e.detail.hoveredElement.datum());
 				}
 
 				// if there is a provided tooltip HTML function call it and pass the defaultHTML
 				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
-					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement, defaultHTML));
+					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data, defaultHTML));
 				} else {
 					// default tooltip
 					tooltipTextContainer.html(defaultHTML);
@@ -128,6 +126,11 @@ export class TooltipBar extends Tooltip {
 		const points = data;
 
 		points.reverse();
+		// in a vertical bar chart the tooltip should display in order of the drawn bars
+		// in horizontal stacked bar, the order of the segments from Left to Right are displayed top down in tooltip
+		if (this.services.cartesianScales.getOrientation() === CartesianOrientations.VERTICAL) {
+			points.reverse();
+		}
 
 		// get the total for the stacked tooltip
 		let total = points.reduce((sum, item) => sum + item.value, 0);
@@ -141,7 +144,8 @@ export class TooltipBar extends Tooltip {
 				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
 				this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
 
-				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
+				// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
+				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label);
 
 				return `
 				<li>

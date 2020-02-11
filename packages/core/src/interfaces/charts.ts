@@ -1,6 +1,5 @@
 import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
 import { AxisTooltipOptions, BarTooltipOptions, BarOptions, StackedBarOptions } from "./components";
-import { ChartTheme } from "./enums";
 
 /**
  * Base chart options common to any chart
@@ -23,10 +22,6 @@ export interface BaseChartOptions {
 	 */
 	height?: string;
 	/**
-	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
-	 */
-	theme?: ChartTheme;
-	/**
 	 * tooltip configuration
 	 */
 	tooltip?: TooltipOptions;
@@ -35,13 +30,17 @@ export interface BaseChartOptions {
 	 */
 	legend?: LegendOptions;
 	/**
-	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
+	 * Optional function to determine whether is filled based on datasetLabel, label, and/or data
 	 */
-	getFillColor?: (datasetLabel: any, label?: any, value?: any) => string;
+	getIsFilled?: (datasetLabel: any, label?: any, data?: any, defaultFilled?: boolean) => boolean;
 	/**
-	 * Optional function to generate the stroke color based on datasetLabel, label, and/or value
+	 * Optional function to generate the fill color based on datasetLabel, label, and/or data
 	 */
-	getStrokeColor?: (datasetLabel: any, label?: any, value?: any) => string;
+	getFillColor?: (datasetLabel: any, label?: any, data?: any, defaultFillColor?: string) => string;
+	/**
+	 * Optional function to generate the stroke color based on datasetLabel, label, and/or data
+	 */
+	getStrokeColor?: (datasetLabel: any, label?: any, data?: any, defaultStrokeColor?: string) => string;
 	/**
 	 * stylesheet options
 	 */
@@ -89,6 +88,26 @@ export interface ScatterChartOptions extends AxisChartOptions {
 		 * sets the radius of the point
 		 */
 		radius: number;
+		fillOpacity?: number;
+	};
+}
+
+/**
+ * options specific to bubble charts
+ */
+export interface BubbleChartOptions extends AxisChartOptions {
+	/**
+	 * options for the individual bubbles
+	 */
+	bubble?: {
+		/**
+		 * A function that would determine the range of the bubble radius to use
+		 * Returns an array with the 1st value being the min and the 2nd value being the max radius
+		 */
+		radiusRange?: Function;
+		/**
+		 * Opacity of the fills used within each circle
+		 */
 		fillOpacity?: number;
 	};
 }
