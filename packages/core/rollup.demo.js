@@ -1,6 +1,7 @@
 import { terser } from "rollup-plugin-terser";
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
+import json from "@rollup/plugin-json";
 
 export default {
 	input: "dist/demo/demo-data/index.js",
@@ -24,7 +25,8 @@ export default {
 	plugins: [
 		terser(),
 		resolve(),
-		commonjs()
+		commonjs(),
+		json()
 	],
 	onwarn(warning, next) {
 		// logs the circular dependencies inside the d3 codebase

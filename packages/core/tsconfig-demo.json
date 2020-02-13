@@ -2,7 +2,8 @@
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
 		"outDir": "./dist/demo",
-		"rootDir": "./demo"
+		"rootDir": "./demo",
+		"resolveJsonModule": true
 	},
 	"include": [
 		"./demo/**/*"
