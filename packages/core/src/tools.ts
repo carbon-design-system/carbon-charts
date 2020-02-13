@@ -183,7 +183,7 @@ export namespace Tools {
 		let position = object;
 		if (position) {
 			for (const prop of propPath) {
-				if (position[prop]) {
+				if (position[prop] !== null && position[prop] !== undefined) {
 					position = position[prop];
 				} else {
 					return null;
