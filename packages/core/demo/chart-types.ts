@@ -39,7 +39,10 @@ const {
 	scatterTimeSeriesOptions,
 	scatterTimeSeriesData,
 	scatterOptions,
-	scatterData
+	scatterData,
+	// Map
+	mapData,
+	mapOptions
 } = require("./demo-data/index");
 
 export const chartTypes = [
@@ -132,5 +135,10 @@ export const chartTypes = [
 		id: "line-step-time-series",
 		options: stepTimeSeriesOptions,
 		data: stepTimeSeriesData
+	},
+	{
+		id: "map",
+		options: mapOptions,
+		data: mapData
 	}
 ];

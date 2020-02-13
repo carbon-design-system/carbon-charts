@@ -5,7 +5,8 @@ import {
 	LineChart,
 	ScatterChart,
 	PieChart,
-	DonutChart
+	DonutChart,
+	MapChart
 } from "../src/index";
 
 // Styles
@@ -186,6 +187,9 @@ chartTypes.forEach(type => {
 				break;
 			case "donut":
 				classToInitialize = DonutChart;
+				break;
+			case "map":
+				classToInitialize = MapChart;
 				break;
 		}
 
