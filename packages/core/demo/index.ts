@@ -1,17 +1,4 @@
 import * as Charts from "../src/index";
-import {
-	// Basic charts
-	SimpleBarChart,
-	GroupedBarChart,
-	StackedBarChart,
-	LineChart,
-	ScatterChart,
-	PieChart,
-	DonutChart,
-} from "../src/index";
-
-// Experimental (unreleased) charts
-import { NetworkChart } from "../src/charts/network";
 
 // Styles
 import "./index.scss";
@@ -64,9 +51,9 @@ const changeDemoData = (id: any, chartObj: any) => {
 	const updateChartData = currentData => {
 		const result = Tools.clone(currentData);
 		result.datasets = result.datasets.map(dataset => {
-			dataset.label = `new dataset ${Math.random().toFixed(2)}`;
+			dataset.label = `new dataset ${Math.random().toFixed(2)}`
 			const datasetNewData = dataset.data.map(dataPoint => {
-				return randomizeValue(dataPoint);
+				return randomizeValue(dataPoint)
 			});
 
 			const newDataset = Object.assign({}, dataset, { data: datasetNewData });
@@ -142,7 +129,7 @@ const createChartContainer = demo => {
 	chartDemoActions.setAttribute("role", "region");
 	chartDemoActions.setAttribute("aria-label", `${demo.title} chart actions`);
 
-	if (chartType.id !== "network") {
+	if (demo.id !== "network") {
 		// Add update data button
 		const updateDataButton = document.createElement("button");
 		updateDataButton.className = "bx--btn bx--btn--primary";
