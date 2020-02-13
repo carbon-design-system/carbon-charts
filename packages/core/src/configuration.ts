@@ -8,6 +8,7 @@ import {
 	StackedBarChartOptions,
 	PieChartOptions,
 	DonutChartOptions,
+	BubbleChartOptions,
 	ZoomableChartOptions,
 	// Components
 	GridOptions,
@@ -193,6 +194,22 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
 } as ScatterChartOptions);
 
 /**
+ * options specific to bubble charts
+ */
+const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
+	bubble: {
+		radiusRange: (chartSize, data) => {
+			const smallerChartDimension = Math.min(chartSize.width, chartSize.height);
+			return [
+				smallerChartDimension * 3 / 400,
+				smallerChartDimension * 25 / 400
+			];
+		},
+		fillOpacity: 0.2
+	}
+} as BubbleChartOptions);
+
+/**
  * options specific to pie charts
  */
 const pieChart: PieChartOptions = Tools.merge({}, chart, {
@@ -246,6 +263,7 @@ export const options = {
 	simpleBarChart,
 	groupedBarChart,
 	stackedBarChart,
+	bubbleChart,
 	lineChart,
 	scatterChart,
 	pieChart,

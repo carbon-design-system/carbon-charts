@@ -11,7 +11,7 @@ module.exports = {
 	devtool: "sourcemap",
 	entry: {
 		"index": "./demo/index.ts",
-		"styles": "./src/styles/styles.scss",
+		"styles": "./src/styles/styles-white.scss",
 		"styles-g10": "./src/styles/styles-g10.scss",
 		"styles-g90": "./src/styles/styles-g90.scss",
 		"styles-g100": "./src/styles/styles-g100.scss",

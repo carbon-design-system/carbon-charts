@@ -1,11 +1,13 @@
-@import 'carbon-components/src/globals/scss/vars';
 $charts-prefix: "cc";
 
 // Carbon imports
 @import "./vendor/@carbon/colors/scss/colors";
-// Carbon theme initializations
-@import "./vendor/@carbon/themes/scss/themes";
-@include carbon--theme();
+
+@if global-variable-exists($name: "carbon--theme") == false {
+	@warn "$carbon--theme not found, or is undefined. \
+Either import the Carbon SCSS and set a theme or, if you're using Charts without Carbon, \
+import one of the styles-[theme name here].scss files";
+}
 
 // Internal
 @import "./mixins.scss";
