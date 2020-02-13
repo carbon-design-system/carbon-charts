@@ -126,7 +126,7 @@ export class Axis extends Component {
 				const showDayName = Tools.getProperty(axisOptions, "ticks", "showDayName") !== null ? Tools.getProperty(axisOptions, "ticks", "showDayName") : Configuration.axis.ticks.showDayName;
 				const formatOptions = { hour12Format, showDayName };
 				const timeInterval = computeTimeIntervalName(axis.tickValues());
-				formatter = (t: number, i: number) => formatTick(t, axis.tickValues()[i - 1], timeInterval, formatOptions);
+				formatter = (t: number, i: number) => formatTick(t, i, timeInterval, formatOptions);
 			} else {
 				formatter = Tools.getProperty(axisOptions, "ticks", "formatter");
 			}

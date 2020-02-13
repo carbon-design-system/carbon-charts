@@ -11,30 +11,30 @@ export const TIME_INTERVALS = [
 	["yearly", 12 * 30 * 24 * 60 * 60 * 1000]
 ];
 
+// return true if the day of the month (D = 1-31) is changed, false otherwise
+function isDChanged(timestamp: number): boolean {
+	const { s, m, H } = timestampToFormatTime(timestamp);
+	return H === 0 && m === 0 && s === 0;
+}
+// return true if the month (M = 1-12) is changed, false otherwise
+function isMChanged(timestamp: number): boolean {
+	const { D, s, m, H } = timestampToFormatTime(timestamp);
+	return D === 1 && H === 0 && m === 0 && s === 0;
+}
+// return true if the year (YYYY) is changed, false otherwise
+function isYYYYChanged(timestamp: number): boolean {
+	const { M, D, s, m, H } = timestampToFormatTime(timestamp);
+	return M === 1 && D === 1 && H === 0 && m === 0 && s === 0;
+}
+
 interface Options {
 	hour12Format: boolean;
 	showDayName: boolean;
 }
 
 // Returns the formatted current tick
-export function formatTick(current: number, previous: number | null, interval: string, options: Options): string {
-	const {
-		YYYY,
-		YY,
-		Q,
-		ss,
-		mm,
-		HH,
-		hh,
-		DD,
-		ddd,
-		MMM,
-		A,
-		D,
-		d,
-		M,
-	} = timestampToFormatTime(current);
-	const previousTimeObj = timestampToFormatTime(previous);
+export function formatTick(tick: number, i: number, interval: string, options: Options) {
+	const { YYYY, YY, Q, ss, mm, HH, hh, DD, ddd, MMM, A, D, d } = timestampToFormatTime(tick);
 	const { hour12Format, showDayName } = options;
 
 	switch (interval) {
@@ -43,16 +43,7 @@ export function formatTick(current: number, previous: number | null, interval: s
 			const long = `${MMM} ${DD}, ${hours}`;
 			const short = `${hours}`;
 
-			if (!previous) {
-				return long;
-			}
-			if (D !== previousTimeObj.D) {
-				return long;
-			}
-			if (M !== previousTimeObj.M) {
-				return long;
-			}
-			if (YYYY !== previousTimeObj.YYYY) {
+			if (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick)) {
 				return long;
 			}
 			return short;
@@ -63,16 +54,8 @@ export function formatTick(current: number, previous: number | null, interval: s
 			const long = `${MMM} ${D}, ${hours}`;
 			const short = `${hours}`;
 
-			if (!previous) {
-				return long;
-			}
-			if (D !== previousTimeObj.D) {
-				return long;
-			}
-			if (M !== previousTimeObj.M) {
-				return long;
-			}
-			if (YYYY !== previousTimeObj.YYYY) {
+
+			if (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick)) {
 				return long;
 			}
 			return short;
@@ -83,16 +66,7 @@ export function formatTick(current: number, previous: number | null, interval: s
 			const long = `${MMM} ${D}, ${hours}`;
 			const short = `${hours}`;
 
-			if (!previous) {
-				return long;
-			}
-			if (D !== previousTimeObj.D) {
-				return long;
-			}
-			if (M !== previousTimeObj.M) {
-				return long;
-			}
-			if (YYYY !== previousTimeObj.YYYY) {
+			if (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick)) {
 				return long;
 			}
 			return short;
@@ -103,16 +77,7 @@ export function formatTick(current: number, previous: number | null, interval: s
 			const long = `${MMM} ${D}, ${hours}`;
 			const short = `${hours}`;
 
-			if (!previous) {
-				return long;
-			}
-			if (D !== previousTimeObj.D) {
-				return long;
-			}
-			if (M !== previousTimeObj.M) {
-				return long;
-			}
-			if (YYYY !== previousTimeObj.YYYY) {
+			if (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick)) {
 				return long;
 			}
 			return short;
@@ -123,13 +88,7 @@ export function formatTick(current: number, previous: number | null, interval: s
 				const long = `${ddd}, ${MMM} ${D}`;
 				const short = `${ddd}`;
 
-				if (!previous) {
-					return long;
-				}
-				if (d === 1) {
-					return long; // long label on monday
-				}
-				if (YYYY !== previousTimeObj.YYYY) {
+				if (i === 0 || d === 1 || isYYYYChanged(tick)) {
 					return long;
 				}
 				return short;
@@ -137,13 +96,7 @@ export function formatTick(current: number, previous: number | null, interval: s
 				const long = `${MMM} ${D}`;
 				const short = `${D}`;
 
-				if (!previous) {
-					return long;
-				}
-				if (M !== previousTimeObj.M) {
-					return long;
-				}
-				if (YYYY !== previousTimeObj.YYYY) {
+				if (i === 0 || isMChanged(tick) || isYYYYChanged(tick)) {
 					return long;
 				}
 				return short;
@@ -154,10 +107,7 @@ export function formatTick(current: number, previous: number | null, interval: s
 			const long = `${MMM} ${YYYY}`;
 			const short = `${MMM}`;
 
-			if (!previous) {
-				return long;
-			}
-			if (YYYY !== previousTimeObj.YYYY) {
+			if (i === 0 || isYYYYChanged(tick)) {
 				return long;
 			}
 			return short;
@@ -167,17 +117,14 @@ export function formatTick(current: number, previous: number | null, interval: s
 			const long = `Q${Q} '${YY}`;
 			const short = `Q${Q}`;
 
-			if (!previous) {
-				return long;
-			}
-			if (YYYY !== previousTimeObj.YYYY) {
+			if (i === 0 || Q === 1) {
 				return long;
 			}
 			return short;
 		}
 
 		case "yearly": {
-			return `${YYYY}`;
+			return `${YYYY}`
 		}
 
 		default: {
@@ -194,14 +141,6 @@ function padWithZero(value: number): string {
 // 12 (am) [midnight] ... 12 (pm) [noon] ... 11 (pm)
 function h12StandardFormat(H: number) {
 	return H % 12 || 12;
-}
-
-// 0 (am) [midnight] ... 12 (pm) [noon] ... 11 (pm)
-function h12IbmFormat(H: number) {
-	if (H > 12) {
-		return H % 12;
-	}
-	return H;
 }
 
 // Given a timestamp, returns an object of useful time formats
@@ -227,8 +166,6 @@ export function timestampToFormatTime(timestamp: number) {
 		HH: padWithZero(date.getHours()), // 24-hour clock: 00-23
 		h: h12StandardFormat(date.getHours()), // 12-hour clock: 1-12
 		hh: padWithZero(h12StandardFormat(date.getHours())), // 12-hour clock: 01-12
-		hIbm: h12IbmFormat(date.getHours()), // 12-hour clock: 0-12
-		hhIbm: padWithZero(h12IbmFormat(date.getHours())), // 12-hour clock: 00-12
 		A: date.getHours() < 12 ? "AM" : "PM", // AM/PM
 		m: date.getMinutes(), // minute: 0-59
 		mm: padWithZero(date.getMinutes()), // minutes: 00-59

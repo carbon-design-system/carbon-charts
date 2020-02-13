@@ -9,9 +9,9 @@ interface Options {
 
 const defaultOptions = { hour12Format: true, showDayName: false };
 
-const format = (ticks: number[], timespan: string, options: Options = defaultOptions) => {
+const format = (ticks: number[], timeInterval: string, options: Options = defaultOptions) => {
 	const opt = { ...defaultOptions, ...options };
-	return ticks.map((tick, i) => formatTick(tick, ticks[i - 1], timespan, opt));
+	return ticks.map((tick, i) => formatTick(tick, i, timeInterval, opt));
 };
 
 const getTimestampsAndFormattedTicks = (dataset: Dataset) => {
@@ -20,7 +20,7 @@ const getTimestampsAndFormattedTicks = (dataset: Dataset) => {
 	return { timestamps, formattedTicks };
 };
 
-it("should format ticks with timespan 15seconds", () => {
+it("should format ticks with timeInterval 15seconds", () => {
 	// 12h format
 	const dataset12h: Dataset = [
 		[new Date(2020, 11, 10, 23, 59, 15), "Dec 10, 11:59:15 PM"],
@@ -30,16 +30,11 @@ it("should format ticks with timespan 15seconds", () => {
 		[new Date(2020, 11, 11, 0, 0, 15), "12:00:15 AM"],
 		[new Date(2020, 11, 11, 0, 0, 30), "12:00:30 AM"],
 		[new Date(2020, 11, 11, 0, 0, 45), "12:00:45 AM"],
-		[new Date(2020, 11, 12, 20, 29, 15), "Dec 12, 08:29:15 PM"],
-		[new Date(2020, 11, 12, 20, 29, 30), "08:29:30 PM"],
-		[new Date(2020, 11, 12, 20, 29, 45), "08:29:45 PM"],
-		[new Date(2020, 11, 12, 20, 30, 0), "08:30:00 PM"],
-		[new Date(2020, 11, 12, 20, 30, 15), "08:30:15 PM"],
 	];
 	const { timestamps: timestamps12h, formattedTicks: formattedTicks12h } = getTimestampsAndFormattedTicks(dataset12h);
-	const timespan12h = computeTimeIntervalName(timestamps12h);
-	expect(timespan12h).toEqual("15seconds");
-	expect(format(timestamps12h, timespan12h)).toEqual(formattedTicks12h);
+	const timeInterval12h = computeTimeIntervalName(timestamps12h);
+	expect(timeInterval12h).toEqual("15seconds");
+	expect(format(timestamps12h, timeInterval12h)).toEqual(formattedTicks12h);
 
 	// 24h format
 	const dataset24h: Dataset = [
@@ -50,19 +45,14 @@ it("should format ticks with timespan 15seconds", () => {
 		[new Date(2020, 11, 11, 0, 0, 15), "00:00:15"],
 		[new Date(2020, 11, 11, 0, 0, 30), "00:00:30"],
 		[new Date(2020, 11, 11, 0, 0, 45), "00:00:45"],
-		[new Date(2020, 11, 12, 20, 29, 15), "Dec 12, 20:29:15"],
-		[new Date(2020, 11, 12, 20, 29, 30), "20:29:30"],
-		[new Date(2020, 11, 12, 20, 29, 45), "20:29:45"],
-		[new Date(2020, 11, 12, 20, 30, 0), "20:30:00"],
-		[new Date(2020, 11, 12, 20, 30, 15), "20:30:15"],
 	];
 	const { timestamps: timestamps24h, formattedTicks: formattedTicks24h } = getTimestampsAndFormattedTicks(dataset24h);
-	const timespan24h = computeTimeIntervalName(timestamps24h);
-	expect(timespan24h).toEqual("15seconds");
-	expect(format(timestamps24h, timespan24h, { hour12Format: false })).toEqual(formattedTicks24h);
+	const timeInterval24h = computeTimeIntervalName(timestamps24h);
+	expect(timeInterval24h).toEqual("15seconds");
+	expect(format(timestamps24h, timeInterval24h, { hour12Format: false })).toEqual(formattedTicks24h);
 });
 
-it("should format ticks with timespan minute", () => {
+it("should format ticks with timeInterval minute", () => {
 	// 12h format
 	const dataset12h: Dataset = [
 		[new Date(2020, 4, 21, 23, 47, 0), "May 21, 11:47 PM"],
@@ -79,9 +69,9 @@ it("should format ticks with timespan minute", () => {
 		[new Date(2020, 4, 22, 12, 2, 0), "12:02 PM"],
 	];
 	const { timestamps: timestamps12h, formattedTicks: formattedTicks12h } = getTimestampsAndFormattedTicks(dataset12h);
-	const timespan12h = computeTimeIntervalName(timestamps12h);
-	expect(timespan12h).toEqual("minute");
-	expect(format(timestamps12h, timespan12h)).toEqual(formattedTicks12h);
+	const timeInterval12h = computeTimeIntervalName(timestamps12h);
+	expect(timeInterval12h).toEqual("minute");
+	expect(format(timestamps12h, timeInterval12h)).toEqual(formattedTicks12h);
 
 	// 24h format
 	const dataset24h: Dataset = [
@@ -99,12 +89,12 @@ it("should format ticks with timespan minute", () => {
 		[new Date(2020, 4, 22, 12, 2, 0), "12:02"],
 	];
 	const { timestamps: timestamps24h, formattedTicks: formattedTicks24h } = getTimestampsAndFormattedTicks(dataset24h);
-	const timespan24h = computeTimeIntervalName(timestamps24h);
-	expect(timespan24h).toEqual("minute");
-	expect(format(timestamps24h, timespan24h, { hour12Format: false })).toEqual(formattedTicks24h);
+	const timeInterval24h = computeTimeIntervalName(timestamps24h);
+	expect(timeInterval24h).toEqual("minute");
+	expect(format(timestamps24h, timeInterval24h, { hour12Format: false })).toEqual(formattedTicks24h);
 });
 
-it("should format ticks with timespan 30minutes", () => {
+it("should format ticks with timeInterval 30minutes", () => {
 	// 12h format
 	const dataset12h: Dataset = [
 		[new Date(2020, 11, 10, 22, 30), "Dec 10, 10:30 PM"],
@@ -114,15 +104,11 @@ it("should format ticks with timespan 30minutes", () => {
 		[new Date(2020, 11, 11, 0, 30), "12:30 AM"],
 		[new Date(2020, 11, 11, 1, 0), "01:00 AM"],
 		[new Date(2020, 11, 11, 1, 30), "01:30 AM"],
-		[new Date(2020, 11, 22, 11, 30), "Dec 22, 11:30 AM"],
-		[new Date(2020, 11, 22, 12, 0), "12:00 PM"],
-		[new Date(2020, 11, 22, 13, 0), "01:00 PM"],
-		[new Date(2020, 11, 22, 14, 0), "02:00 PM"],
 	];
 	const { timestamps: timestamps12h, formattedTicks: formattedTicks12h } = getTimestampsAndFormattedTicks(dataset12h);
-	const timespan12h = computeTimeIntervalName(timestamps12h);
-	expect(timespan12h).toEqual("30minutes");
-	expect(format(timestamps12h, timespan12h)).toEqual(formattedTicks12h);
+	const timeInterval12h = computeTimeIntervalName(timestamps12h);
+	expect(timeInterval12h).toEqual("30minutes");
+	expect(format(timestamps12h, timeInterval12h)).toEqual(formattedTicks12h);
 
 	// 24h format
 	const dataset24h: Dataset = [
@@ -133,18 +119,14 @@ it("should format ticks with timespan 30minutes", () => {
 		[new Date(2020, 11, 11, 0, 30), "00:30"],
 		[new Date(2020, 11, 11, 1, 0), "01:00"],
 		[new Date(2020, 11, 11, 1, 30), "01:30"],
-		[new Date(2020, 11, 22, 11, 30), "Dec 22, 11:30"],
-		[new Date(2020, 11, 22, 12, 0), "12:00"],
-		[new Date(2020, 11, 22, 13, 0), "13:00"],
-		[new Date(2020, 11, 22, 14, 0), "14:00"],
 	];
 	const { timestamps: timestamps24h, formattedTicks: formattedTicks24h } = getTimestampsAndFormattedTicks(dataset24h);
-	const timespan24h = computeTimeIntervalName(timestamps24h);
-	expect(timespan24h).toEqual("30minutes");
-	expect(format(timestamps24h, timespan24h, { hour12Format: false })).toEqual(formattedTicks24h);
+	const timeInterval24h = computeTimeIntervalName(timestamps24h);
+	expect(timeInterval24h).toEqual("30minutes");
+	expect(format(timestamps24h, timeInterval24h, { hour12Format: false })).toEqual(formattedTicks24h);
 });
 
-it("should format ticks with timespan hourly", () => {
+it("should format ticks with timeInterval hourly", () => {
 	// 12h format
 	const dataset12h: Dataset = [
 		[new Date(2020, 11, 10, 22, 0), "Dec 10, 10:00 PM"],
@@ -161,9 +143,9 @@ it("should format ticks with timespan hourly", () => {
 		[new Date(2020, 11, 11, 15, 0), "03:00 PM"],
 	];
 	const { timestamps: timestamps12h, formattedTicks: formattedTicks12h } = getTimestampsAndFormattedTicks(dataset12h);
-	const timespan12h = computeTimeIntervalName(timestamps12h);
-	expect(timespan12h).toEqual("hourly");
-	expect(format(timestamps12h, timespan12h)).toEqual(formattedTicks12h);
+	const timeInterval12h = computeTimeIntervalName(timestamps12h);
+	expect(timeInterval12h).toEqual("hourly");
+	expect(format(timestamps12h, timeInterval12h)).toEqual(formattedTicks12h);
 
 	// 24h format
 	const dataset24h: Dataset = [
@@ -181,12 +163,12 @@ it("should format ticks with timespan hourly", () => {
 		[new Date(2020, 11, 11, 15, 0), "15:00"],
 	];
 	const { timestamps: timestamps24h, formattedTicks: formattedTicks24h } = getTimestampsAndFormattedTicks(dataset24h);
-	const timespan24h = computeTimeIntervalName(timestamps24h);
-	expect(timespan24h).toEqual("hourly");
-	expect(format(timestamps24h, timespan24h, { hour12Format: false })).toEqual(formattedTicks24h);
+	const timeInterval24h = computeTimeIntervalName(timestamps24h);
+	expect(timeInterval24h).toEqual("hourly");
+	expect(format(timestamps24h, timeInterval24h, { hour12Format: false })).toEqual(formattedTicks24h);
 });
 
-it("should format ticks with timespan daily", () => {
+it("should format ticks with timeInterval daily", () => {
 	// !showDayName
 	const datasetDayNumber: Dataset = [
 		[new Date(2019, 11, 30), "Dec 30"],
@@ -203,9 +185,9 @@ it("should format ticks with timespan daily", () => {
 		[new Date(2020, 1, 3), "3"],
 	];
 	const { timestamps: timestampsDayNumber, formattedTicks: formattedTicksDayNumber } = getTimestampsAndFormattedTicks(datasetDayNumber);
-	const timespanDayNumber = computeTimeIntervalName(timestampsDayNumber);
-	expect(timespanDayNumber).toEqual("daily");
-	expect(format(timestampsDayNumber, timespanDayNumber)).toEqual(formattedTicksDayNumber);
+	const timeIntervalDayNumber = computeTimeIntervalName(timestampsDayNumber);
+	expect(timeIntervalDayNumber).toEqual("daily");
+	expect(format(timestampsDayNumber, timeIntervalDayNumber)).toEqual(formattedTicksDayNumber);
 
 	// showDayName
 	const datasetDayName: Dataset = [
@@ -223,12 +205,12 @@ it("should format ticks with timespan daily", () => {
 		[new Date(2020, 1, 7), "Fri"],
 	];
 	const { timestamps: timestampsDayName, formattedTicks: formattedTicksDayName } = getTimestampsAndFormattedTicks(datasetDayName);
-	const timespanDayName = computeTimeIntervalName(timestampsDayName);
-	expect(timespanDayName).toEqual("daily");
-	expect(format(timestampsDayName, timespanDayName, { showDayName: true })).toEqual(formattedTicksDayName);
+	const timeIntervalDayName = computeTimeIntervalName(timestampsDayName);
+	expect(timeIntervalDayName).toEqual("daily");
+	expect(format(timestampsDayName, timeIntervalDayName, { showDayName: true })).toEqual(formattedTicksDayName);
 });
 
-it("should format ticks with timespan monthly", () => {
+it("should format ticks with timeInterval monthly", () => {
 	const dataset: Dataset = [
 		[new Date(2018, 9), "Oct 2018"],
 		[new Date(2018, 10), "Nov"],
@@ -244,12 +226,12 @@ it("should format ticks with timespan monthly", () => {
 		[new Date(2020, 2), "Mar"],
 	];
 	const { timestamps, formattedTicks } = getTimestampsAndFormattedTicks(dataset);
-	const timespan = computeTimeIntervalName(timestamps);
-	expect(timespan).toEqual("monthly");
-	expect(format(timestamps, timespan)).toEqual(formattedTicks);
+	const timeInterval = computeTimeIntervalName(timestamps);
+	expect(timeInterval).toEqual("monthly");
+	expect(format(timestamps, timeInterval)).toEqual(formattedTicks);
 });
 
-it("should format ticks with timespan quarterly", () => {
+it("should format ticks with timeInterval quarterly", () => {
 	const dataset: Dataset = [
 		[new Date(2017, 0), `Q1 '17`],
 		[new Date(2017, 3), `Q2`],
@@ -265,12 +247,12 @@ it("should format ticks with timespan quarterly", () => {
 		[new Date(2020, 0), `Q1 '20`],
 	];
 	const { timestamps, formattedTicks } = getTimestampsAndFormattedTicks(dataset);
-	const timespan = computeTimeIntervalName(timestamps);
-	expect(timespan).toEqual("quarterly");
-	expect(format(timestamps, timespan)).toEqual(formattedTicks);
+	const timeInterval = computeTimeIntervalName(timestamps);
+	expect(timeInterval).toEqual("quarterly");
+	expect(format(timestamps, timeInterval)).toEqual(formattedTicks);
 });
 
-it("should format ticks with timespan yearly", () => {
+it("should format ticks with timeInterval yearly", () => {
 	const dataset: Dataset = [
 		[new Date(1977, 0), "1977"],
 		[new Date(1978, 0), "1978"],
@@ -286,7 +268,7 @@ it("should format ticks with timespan yearly", () => {
 		[new Date(2019, 0), "2019"]
 	];
 	const { timestamps, formattedTicks } = getTimestampsAndFormattedTicks(dataset);
-	const timespan = computeTimeIntervalName(timestamps);
-	expect(timespan).toEqual("yearly");
-	expect(format(timestamps, timespan)).toEqual(formattedTicks);
+	const timeInterval = computeTimeIntervalName(timestamps);
+	expect(timeInterval).toEqual("yearly");
+	expect(format(timestamps, timeInterval)).toEqual(formattedTicks);
 });
