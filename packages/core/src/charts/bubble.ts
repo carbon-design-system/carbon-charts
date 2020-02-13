@@ -17,7 +17,8 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TooltipScatter
+	TooltipScatter,
+	Ruler
 } from "../components/index";
 
 export class BubbleChart extends AxisChart {
@@ -42,6 +43,7 @@ export class BubbleChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
+			new Ruler(this.model, this.services),
 			new Bubble(this.model, this.services)
 		];
 

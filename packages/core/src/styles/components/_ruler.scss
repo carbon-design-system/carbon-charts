@@ -1,0 +1,14 @@
+.#{$prefix}--#{$charts-prefix}--ruler {
+	line.ruler-line {
+		stroke: #009bef;
+		stroke-width: 1px;
+		stroke-dasharray: 2;
+		pointer-events: none;
+	}
+
+	text.axis-tooltip-text {
+		fill: white;
+		alignment-baseline: middle;
+		text-anchor: middle;
+	}
+}
