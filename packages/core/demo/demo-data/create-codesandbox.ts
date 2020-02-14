@@ -1,6 +1,6 @@
 import { getParameters } from "codesandbox/lib/api/define";
 
-import { version as libraryVersion } from "@carbon/charts/package.json";
+const { version: libraryVersion } = require("@carbon/charts/package.json");
 
 export const createChartSandbox = (chartTemplate: any) => {
 	const files = {};

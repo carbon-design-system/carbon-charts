@@ -5,22 +5,21 @@ set -e
 # clean dist
 rm -rf dist
 
-echo "compiling ts to js for src"
-tsc -p tsconfig-build.json
-# manually update the symlink before building the demo output
-rm -f ../../node_modules/@carbon/charts
-ln -sf $(pwd)/dist ../../node_modules/@carbon/charts
+echo "compiling ts to js"
+# -b uses project references to build
+# see here for far more detail: https://www.typescriptlang.org/docs/handbook/project-references.html
+tsc -b
+
+# bundle everything
 echo "bundling src..."
 rollup -c
-# copy metadata before building the demo since the demo depends on it
+echo "bundling demo..."
+rollup -c rollup.demo.js
+
+# copy metadata
 echo "copying metadata"
 cp *.md dist/
 cp package.json dist/
-
-echo "compiling ts to js for demo"
-tsc -p tsconfig-demo.json
-echo "bundling demo..."
-rollup -c rollup.demo.js
 
 echo "building styles"
 cp -a src/styles/. dist/styles
