@@ -53,6 +53,11 @@ export class Axis extends Component {
 			scale.range([startPosition, endPosition]);
 		}
 
+		const zoomDomain = this.model.get("zoomDomain");
+		if (zoomDomain && axisPosition === AxisPositions.BOTTOM) {
+			scale.domain(zoomDomain.map(d => new Date(d)));
+		}
+
 		// Identify the corresponding d3 axis function
 		let axisFunction;
 		switch (axisPosition) {

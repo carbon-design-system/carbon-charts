@@ -16,8 +16,19 @@ export class ZoomBar extends Component {
 	render() {
 		const svg = this.getContainerSVG();
 
+		const { cartesianScales } = this.services;
+		const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
+		const mainYAxisPosition = cartesianScales.getMainYAxisPosition();
+		const mainXScale = cartesianScales.getMainXScale();
+		const mainYScale = cartesianScales.getMainYScale();
+		const mainXScaleType = cartesianScales.getScaleTypeByPosition(mainXAxisPosition);
+		const mainYScaleType = cartesianScales.getScaleTypeByPosition(mainYAxisPosition);
+
+		const startX = mainXScale(mainXScale.domain()[0]);
+		console.log("startX", startX)
 		const height = 32;
 		const container = DOMUtils.appendOrSelect(svg, "svg.zoom-container")
+			.attr("transform", "translateX(10)")
 			.attr("width", "100%")
 			.attr("height", height)
 			.attr("opacity", 1);
@@ -29,14 +40,6 @@ export class ZoomBar extends Component {
 			.attr("height", "100%")
 			.attr("fill", "white")
 			.attr("stroke", "#e8e8e8");
-
-		const { cartesianScales } = this.services;
-		const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
-		const mainYAxisPosition = cartesianScales.getMainYAxisPosition();
-		const mainXScale = cartesianScales.getMainXScale();
-		const mainYScale = cartesianScales.getMainYScale();
-		const mainXScaleType = cartesianScales.getScaleTypeByPosition(mainXAxisPosition);
-		const mainYScaleType = cartesianScales.getScaleTypeByPosition(mainYAxisPosition);
 
 		if (mainXScale) {
 			const displayData = this.model.getDisplayData();
