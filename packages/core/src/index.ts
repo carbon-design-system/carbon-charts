@@ -7,7 +7,9 @@ import {
 	LineChart,
 	ScatterChart,
 	PieChart,
-	DonutChart
+	DonutChart,
+	// Advanced charts
+	NetworkChart
 } from "./charts/index";
 
 // Configs & interfaces
@@ -31,5 +33,7 @@ export {
 	LineChart,
 	ScatterChart,
 	PieChart,
-	DonutChart
+	DonutChart,
+	// Advanced charts
+	NetworkChart
 };

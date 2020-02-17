@@ -2,6 +2,7 @@ import * as barDemos from "./bar";
 import * as bubbleDemos from "./bubble";
 import * as donutDemos from "./donut";
 import * as lineDemos from "./line";
+import * as networkDemos from "./network";
 import * as pieDemos from "./pie";
 import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
@@ -62,6 +63,9 @@ export const chartTypes = {
 		vanilla: "DonutChart",
 		angular: "ibm-donut-chart",
 		vue: "ccv-donut-chart"
+	},
+	NetworkChart: {
+		vanilla: "NetworkChart"
 	}
 };
 
@@ -198,6 +202,16 @@ let allDemoGroups = [
 				options: stepDemos.stepTimeSeriesOptions,
 				data: stepDemos.stepTimeSeriesData,
 				chartType: chartTypes.LineChart
+			}
+		]
+	},
+	{
+		title: "Network",
+		demos: [
+			{
+				options: networkDemos.networkOptions,
+				data: networkDemos.networkData,
+				chartType: chartTypes.NetworkChart
 			}
 		]
 	}

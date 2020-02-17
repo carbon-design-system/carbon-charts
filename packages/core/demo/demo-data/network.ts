@@ -33,7 +33,8 @@ export const networkData = {
 	datasets: [
 		{
 			nodes: nodeData,
-			links: linkData
+			links: linkData,
+			data: [],
 		}
 	]
 };

@@ -151,6 +151,8 @@ demoGroups.forEach(demoGroup => {
 		if (holder) {
 			const ClassToInitialize = Charts[demo.chartType.vanilla];
 
+			console.log(demo)
+
 			// Add `height` to the chart options
 			demo.options.height = "500px";
 
