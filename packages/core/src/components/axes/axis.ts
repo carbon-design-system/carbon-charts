@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { AxisPositions, ScaleTypes, Roles } from "../../interfaces";
+import { AxisPositions, ScaleTypes, Roles, AxisOptions } from "../../interfaces";
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
@@ -8,7 +8,7 @@ import * as Configuration from "../../configuration";
 import { formatTick, computeTimeIntervalName } from "./utils";
 
 // D3 Imports
-import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
+import { axisBottom, axisLeft, axisRight, axisTop, Axis as AxisScale } from "d3-axis";
 import { timeFormatDefaultLocale } from "d3-time-format";
 
 export class Axis extends Component {
@@ -122,11 +122,8 @@ export class Axis extends Component {
 			// create the right ticks formatter
 			let formatter;
 			if (isTimeScaleType) {
-				const hour12Format = Tools.getProperty(axisOptions, "ticks", "hour12Format") !== null ? Tools.getProperty(axisOptions, "ticks", "hour12Format") : Configuration.axis.ticks.hour12Format;
-				const showDayName = Tools.getProperty(axisOptions, "ticks", "showDayName") !== null ? Tools.getProperty(axisOptions, "ticks", "showDayName") : Configuration.axis.ticks.showDayName;
-				const formatOptions = { hour12Format, showDayName };
-				const timeInterval = computeTimeIntervalName(axis.tickValues());
-				formatter = (t: number, i: number) => formatTick(t, i, timeInterval, formatOptions);
+				const { options: formatOptions, timeInterval } = getTimeScaleInfo(axisOptions, axis);
+				formatter = (t: number, i: number) => formatTick(t, i, timeInterval, formatOptions).formattedTick;
 			} else {
 				formatter = Tools.getProperty(axisOptions, "ticks", "formatter");
 			}
@@ -199,11 +196,28 @@ export class Axis extends Component {
 		}
 
 		// Apply new axis to the axis element
-		if (!animate || !axisRefExists) {
+		if (isTimeScaleType) {
+			const { options: formatOptions, timeInterval } = getTimeScaleInfo(axisOptions, axis);
+
+			if (animate) {
+				axisRef = axisRef.transition(this.services.transitions.getTransition("axis-update"));
+			}
 			axisRef = axisRef.call(axis);
+
+			// Manipulate tick labels to make bold those that are in long format
+			const ticks = axisRef.selectAll("g.tick > text");
+			ticks.style("font-weight", (tickValue: number, i: number) => {
+				const format = formatTick(tickValue, i, timeInterval, formatOptions).format;
+				return format === "long" ? "bold" : "normal";
+			});
 		} else {
-			axisRef = axisRef.transition(this.services.transitions.getTransition("axis-update"))
-				.call(axis);
+			if (!animate || !axisRefExists) {
+				axisRef = axisRef.call(axis);
+			} else {
+				axisRef = axisRef
+					.transition(this.services.transitions.getTransition("axis-update"))
+					.call(axis);
+			}
 		}
 
 		invisibleAxisRef.call(axis);
@@ -252,4 +266,18 @@ export class Axis extends Component {
 		return this.getContainerSVG()
 			.select(`g.axis.${axisPosition} text.axis-title`);
 	}
+}
+
+// Given the axis options and the timescale, returns
+// an object of options (hour12Format, showDayName) and the time interval
+function getTimeScaleInfo(axisOptions: AxisOptions, scale: AxisScale<number>) {
+	const hour12Format = Tools.getProperty(axisOptions, "ticks", "hour12Format") !== null
+		? Tools.getProperty(axisOptions, "ticks", "hour12Format")
+		: Configuration.axis.ticks.hour12Format;
+	const showDayName = Tools.getProperty(axisOptions, "ticks", "showDayName") !== null
+		? Tools.getProperty(axisOptions, "ticks", "showDayName")
+		: Configuration.axis.ticks.showDayName;
+	const options = { hour12Format, showDayName };
+	const timeInterval = computeTimeIntervalName(scale.tickValues());
+	return { options, timeInterval };
 }

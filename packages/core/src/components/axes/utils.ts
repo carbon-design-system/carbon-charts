@@ -32,8 +32,9 @@ interface Options {
 	showDayName: boolean;
 }
 
-// Returns the formatted current tick
-export function formatTick(tick: number, i: number, interval: string, options: Options) {
+// Returns the formatted current tick and the format used to format it (short or long)
+export function formatTick(tick: number, i: number, interval: string, options: Options)
+	: { formattedTick: string, format: "short" | "long" } {
 	const { YYYY, YY, Q, ss, mm, HH, hh, DD, ddd, MMM, A, D, d } = timestampToFormatTime(tick);
 	const { hour12Format, showDayName } = options;
 
@@ -44,9 +45,9 @@ export function formatTick(tick: number, i: number, interval: string, options: O
 			const short = `${hours}`;
 
 			if (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick)) {
-				return long;
+				return { formattedTick: long, format: "long" };
 			}
-			return short;
+			return { formattedTick: short, format: "short" };
 		}
 
 		case "minute": {
@@ -54,11 +55,10 @@ export function formatTick(tick: number, i: number, interval: string, options: O
 			const long = `${MMM} ${D}, ${hours}`;
 			const short = `${hours}`;
 
-
 			if (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick)) {
-				return long;
+				return { formattedTick: long, format: "long" };
 			}
-			return short;
+			return { formattedTick: short, format: "short" };
 		}
 
 		case "30minutes": {
@@ -67,9 +67,9 @@ export function formatTick(tick: number, i: number, interval: string, options: O
 			const short = `${hours}`;
 
 			if (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick)) {
-				return long;
+				return { formattedTick: long, format: "long" };
 			}
-			return short;
+			return { formattedTick: short, format: "short" };
 		}
 
 		case "hourly": {
@@ -78,9 +78,9 @@ export function formatTick(tick: number, i: number, interval: string, options: O
 			const short = `${hours}`;
 
 			if (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick)) {
-				return long;
+				return { formattedTick: long, format: "long" };
 			}
-			return short;
+			return { formattedTick: short, format: "short" };
 		}
 
 		case "daily": {
@@ -89,17 +89,17 @@ export function formatTick(tick: number, i: number, interval: string, options: O
 				const short = `${ddd}`;
 
 				if (i === 0 || d === 1 || isYYYYChanged(tick)) {
-					return long;
+					return { formattedTick: long, format: "long" };
 				}
-				return short;
+				return { formattedTick: short, format: "short" };
 			} else {
 				const long = `${MMM} ${D}`;
 				const short = `${D}`;
 
 				if (i === 0 || isMChanged(tick) || isYYYYChanged(tick)) {
-					return long;
+					return { formattedTick: long, format: "long" };
 				}
-				return short;
+				return { formattedTick: short, format: "short" };
 			}
 		}
 
@@ -108,9 +108,9 @@ export function formatTick(tick: number, i: number, interval: string, options: O
 			const short = `${MMM}`;
 
 			if (i === 0 || isYYYYChanged(tick)) {
-				return long;
+				return { formattedTick: long, format: "long" };
 			}
-			return short;
+			return { formattedTick: short, format: "short" };
 		}
 
 		case "quarterly": {
@@ -118,13 +118,14 @@ export function formatTick(tick: number, i: number, interval: string, options: O
 			const short = `Q${Q}`;
 
 			if (i === 0 || Q === 1) {
-				return long;
+				return { formattedTick: long, format: "long" };
 			}
-			return short;
+			return { formattedTick: short, format: "short" };
 		}
 
 		case "yearly": {
-			return `${YYYY}`
+			const short = `${YYYY}`;
+			return { formattedTick: short, format: "short" };
 		}
 
 		default: {

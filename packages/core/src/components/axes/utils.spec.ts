@@ -11,7 +11,7 @@ const defaultOptions = { hour12Format: true, showDayName: false };
 
 const format = (ticks: number[], timeInterval: string, options: Options = defaultOptions) => {
 	const opt = { ...defaultOptions, ...options };
-	return ticks.map((tick, i) => formatTick(tick, i, timeInterval, opt));
+	return ticks.map((tick, i) => formatTick(tick, i, timeInterval, opt).formattedTick);
 };
 
 const getTimestampsAndFormattedTicks = (dataset: Dataset) => {
