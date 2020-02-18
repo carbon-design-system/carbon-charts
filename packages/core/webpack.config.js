@@ -21,7 +21,7 @@ module.exports = {
 		filename: "[name].js",
 		chunkFilename: "[name].chunk.js",
 		libraryTarget: "umd",
-		library: "Charts"
+		library: "ChartsDemo"
 	},
 	optimization: {
 		splitChunks: {
@@ -35,7 +35,18 @@ module.exports = {
 	module: {
 		rules: [
 			// all files with a ".ts" or ".tsx" extension will be handled by "ts-loader"
-			{ test: /\.ts$/, loader: "ts-loader?configFile=tsconfig-demo.json" },
+			{
+				test: /\.ts$/,
+				use: [
+					{
+						loader: "ts-loader",
+						options: {
+							configFile: "demo/tsconfig.json",
+							projectReferences: true
+						}
+					}
+				]
+			},
 			{ test: /\.html?$/, loader: "html-loader" },
 			{
 				test: /\.s?css$/,
