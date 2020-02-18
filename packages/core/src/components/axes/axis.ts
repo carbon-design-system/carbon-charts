@@ -5,7 +5,7 @@ import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
-import { formatTick, computeTimeIntervalName } from "./utils";
+import { formatTick, computeTimeIntervalName, isTickPrimary } from "./utils";
 
 // D3 Imports
 import { axisBottom, axisLeft, axisRight, axisTop, Axis as AxisScale } from "d3-axis";
@@ -123,7 +123,7 @@ export class Axis extends Component {
 			let formatter;
 			if (isTimeScaleType) {
 				const { options: formatOptions, timeInterval } = getTimeScaleInfo(axisOptions, axis);
-				formatter = (t: number, i: number) => formatTick(t, i, timeInterval, formatOptions).formattedTick;
+				formatter = (t: number, i: number) => formatTick(t, i, timeInterval, formatOptions, axisOptions);
 			} else {
 				formatter = Tools.getProperty(axisOptions, "ticks", "formatter");
 			}
@@ -207,8 +207,7 @@ export class Axis extends Component {
 			// Manipulate tick labels to make bold those that are in long format
 			const ticks = axisRef.selectAll("g.tick > text");
 			ticks.style("font-weight", (tickValue: number, i: number) => {
-				const format = formatTick(tickValue, i, timeInterval, formatOptions).format;
-				return format === "long" ? "bold" : "normal";
+				return isTickPrimary(tickValue, i, timeInterval, formatOptions) ? "bold" : "normal";
 			});
 		} else {
 			if (!animate || !axisRefExists) {

@@ -1,130 +1,70 @@
 import { min } from "d3-array";
 import { TIME_INTERVALS } from "./constants";
+import { Tools } from "../../tools";
+import * as Configuration from "../../configuration";
+import { format } from "date-fns";
+import * as locales from "date-fns/locale";
+import { AxisOptions } from "src/interfaces";
 
-// return true if the day of the month (D = 1-31) is changed, false otherwise
-function isDChanged(timestamp: number): boolean {
-	const { s, m, H } = timestampToFormatTime(timestamp);
-	return H === 0 && m === 0 && s === 0;
-}
-// return true if the month (M = 1-12) is changed, false otherwise
-function isMChanged(timestamp: number): boolean {
-	const { D, s, m, H } = timestampToFormatTime(timestamp);
-	return D === 1 && H === 0 && m === 0 && s === 0;
-}
-// return true if the year (YYYY) is changed, false otherwise
-function isYYYYChanged(timestamp: number): boolean {
-	const { M, D, s, m, H } = timestampToFormatTime(timestamp);
-	return M === 1 && D === 1 && H === 0 && m === 0 && s === 0;
-}
+const codes = Object.values(locales).map(locale => locale["code"]);
 
 interface Options {
 	hour12Format: boolean;
 	showDayName: boolean;
 }
 
-// Returns the formatted current tick and the format used to format it (short or long)
-export function formatTick(tick: number, i: number, interval: string, options: Options)
-	: { formattedTick: string, format: "short" | "long" } {
-	const { YYYY, YY, Q, ss, mm, HH, hh, DD, ddd, MMM, A, D, d } = timestampToFormatTime(tick);
-	const { hour12Format, showDayName } = options;
+// Return true if the tick is a primary tick, false otherwise
+export function isTickPrimary(tick: number, i: number, interval: string, options: Options) {
+	const { showDayName } = options;
 
 	switch (interval) {
-		case "15seconds": {
-			const hours = hour12Format ? `${hh}:${mm}:${ss} ${A}` : `${HH}:${mm}:${ss}`;
-			const long = `${MMM} ${DD}, ${hours}`;
-			const short = `${hours}`;
-
-			if (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick)) {
-				return { formattedTick: long, format: "long" };
+		case "15seconds": return (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick));
+		case "minute": return (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick));
+		case "30minutes": return (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick));
+		case "hourly": return (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick));
+		case "daily":
+			if (!showDayName) { // daily
+				return (i === 0 || isMChanged(tick) || isYYYYChanged(tick));
+			} else { // weekly
+				// TODO: check that c is always 1 for monday
+				return (i === 0 || Number(format((new Date(tick)), "c")) === 1 || isYYYYChanged(tick));
 			}
-			return { formattedTick: short, format: "short" };
-		}
-
-		case "minute": {
-			const hours = hour12Format ? `${hh}:${mm} ${A}` : `${HH}:${mm}`;
-			const long = `${MMM} ${D}, ${hours}`;
-			const short = `${hours}`;
-
-			if (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick)) {
-				return { formattedTick: long, format: "long" };
-			}
-			return { formattedTick: short, format: "short" };
-		}
-
-		case "30minutes": {
-			const hours = hour12Format ? `${hh}:${mm} ${A}` : `${HH}:${mm}`;
-			const long = `${MMM} ${D}, ${hours}`;
-			const short = `${hours}`;
-
-			if (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick)) {
-				return { formattedTick: long, format: "long" };
-			}
-			return { formattedTick: short, format: "short" };
-		}
-
-		case "hourly": {
-			const hours = hour12Format ? `${hh}:${mm} ${A}` : `${HH}:${mm}`;
-			const long = `${MMM} ${D}, ${hours}`;
-			const short = `${hours}`;
-
-			if (i === 0 || isDChanged(tick) || isMChanged(tick) || isYYYYChanged(tick)) {
-				return { formattedTick: long, format: "long" };
-			}
-			return { formattedTick: short, format: "short" };
-		}
-
-		case "daily": {
-			if (showDayName) {
-				const long = `${ddd}, ${MMM} ${D}`;
-				const short = `${ddd}`;
-
-				if (i === 0 || d === 1 || isYYYYChanged(tick)) {
-					return { formattedTick: long, format: "long" };
-				}
-				return { formattedTick: short, format: "short" };
-			} else {
-				const long = `${MMM} ${D}`;
-				const short = `${D}`;
-
-				if (i === 0 || isMChanged(tick) || isYYYYChanged(tick)) {
-					return { formattedTick: long, format: "long" };
-				}
-				return { formattedTick: short, format: "short" };
-			}
-		}
-
-		case "monthly": {
-			const long = `${MMM} ${YYYY}`;
-			const short = `${MMM}`;
-
-			if (i === 0 || isYYYYChanged(tick)) {
-				return { formattedTick: long, format: "long" };
-			}
-			return { formattedTick: short, format: "short" };
-		}
-
-		case "quarterly": {
-			const long = `Q${Q} '${YY}`;
-			const short = `Q${Q}`;
-
-			if (i === 0 || Q === 1) {
-				return { formattedTick: long, format: "long" };
-			}
-			return { formattedTick: short, format: "short" };
-		}
-
-		case "yearly": {
-			const short = `${YYYY}`;
-			return { formattedTick: short, format: "short" };
-		}
-
-		default: {
-			throw new Error(`${interval} is not a valid time interval.`);
-		}
+		// case "daily": return true;
+		case "monthly": return (i === 0 || isYYYYChanged(tick));
+		case "quarterly": return (i === 0 || Number(format((new Date(tick)), "q")) === 1);
+		case "yearly": return false;
 	}
 }
 
-// pad a number with leading zeroes to make it a fixed width of 2
+// The accepted formats of localeCode are ll and ll-CC
+function getLocale(localeCode: string): Locale {
+	// locales is an object whose keys format is ll or llCC
+	// each locale is an object whose code value format is ll or ll-CC
+	const localeCodeWithoutDash = localeCode.replace(/-/g, "");
+	const foundLocale = locales[localeCodeWithoutDash];
+	if (!foundLocale) {
+		throw new Error(`Locale with code ${localeCode} not found. Avaible codes are: ${codes}.`);
+	}
+	return foundLocale;
+}
+
+// Return the formatted current tick
+export function formatTick(tick: number, i: number, interval: string, options: Options, axisOptions: AxisOptions): string {
+	const { hour12Format, showDayName } = options;
+
+	const date = new Date(tick);
+	const customFormats = Tools.getProperty(axisOptions, "ticks", "timeIntervalFormats");
+	const defaultFormats = Configuration.axis.ticks.timeIntervalFormats[interval];
+	const primary = Tools.getProperty(customFormats, interval, "primary") || defaultFormats.primary;
+	const secondary = Tools.getProperty(customFormats, interval, "secondary") || defaultFormats.secondary;
+	const localeCode = Tools.getProperty(customFormats, interval, "localeCode") || defaultFormats.localeCode;
+	const formatString = isTickPrimary(tick, i, interval, options) ? primary : secondary;
+	const locale = getLocale(localeCode);
+
+	return format(date, formatString, { locale });
+}
+
+// Pad a number with leading zeroes to make it a fixed width of 2
 function padWithZero(value: number): string {
 	return value.toString().padStart(2, "0");
 }
@@ -134,7 +74,7 @@ function h12StandardFormat(H: number) {
 	return H % 12 || 12;
 }
 
-// Given a timestamp, returns an object of useful time formats
+// Given a timestamp, return an object of useful time formats
 export function timestampToFormatTime(timestamp: number) {
 	const date = new Date(timestamp);
 	return {
@@ -173,7 +113,7 @@ function consecutiveDifferences(elements: number[]): number[] {
 	return elements.slice(1).map((elem, i) => elem - elements[i]);
 }
 
-// Given a number, returns the closest TIME_INTERVAL name
+// Given a number, return the closest TIME_INTERVAL name
 function closestTimeIntervalName(ms: number): string {
 	const index = TIME_INTERVALS.reduce((acc, [key, value]: [string, number], i) => {
 		const previousSpan = Math.abs(acc - ms);
@@ -183,10 +123,28 @@ function closestTimeIntervalName(ms: number): string {
 	return TIME_INTERVALS[index][0] as string;
 }
 
-// Given an array of timestamps, returns the interval name
+// Given an array of timestamps, return the interval name
 // between 15seconds, minute, 30minutes, hourly, daily, weekly, monthly, quarterly, yearly
 export function computeTimeIntervalName(ticks: number[]): string {
 	const differences = consecutiveDifferences(ticks);
 	const minDifference = min(differences);
 	return closestTimeIntervalName(minDifference);
+}
+
+// Return true if the day of the month (D = 1-31) is changed, false otherwise
+function isDChanged(timestamp: number): boolean {
+	const { s, m, H } = timestampToFormatTime(timestamp);
+	return H === 0 && m === 0 && s === 0;
+}
+
+// Return true if the month (M = 1-12) is changed, false otherwise
+function isMChanged(timestamp: number): boolean {
+	const { D, s, m, H } = timestampToFormatTime(timestamp);
+	return D === 1 && H === 0 && m === 0 && s === 0;
+}
+
+// Return true if the year (YYYY) is changed, false otherwise
+function isYYYYChanged(timestamp: number): boolean {
+	const { M, D, s, m, H } = timestampToFormatTime(timestamp);
+	return M === 1 && D === 1 && H === 0 && m === 0 && s === 0;
 }

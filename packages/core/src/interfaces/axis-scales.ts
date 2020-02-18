@@ -63,7 +63,31 @@ export interface AxisOptions {
 		 * otherwise days are shown as number 1-31
 		 */
 		showDayName?: boolean;
+		/**
+		 * formats for each time interval
+		 */
+		timeIntervalFormats?: TimeIntervalFormats;
 	};
+}
+
+/**
+ * time scales: customize ticks format for different time intervals
+ */
+export interface TickFormats {
+	primary?: string;
+	secondary?: string;
+	localeCode?: string;
+}
+export interface TimeIntervalFormats {
+	"15seconds"?: TickFormats;
+	"minute"?: TickFormats;
+	"30minutes"?: TickFormats;
+	"hourly"?: TickFormats;
+	"daily"?: TickFormats;
+	"weekly"?: TickFormats;
+	"monthly"?: TickFormats;
+	"quarterly"?: TickFormats;
+	"yearly"?: TickFormats;
 }
 
 /**
