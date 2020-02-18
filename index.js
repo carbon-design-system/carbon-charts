@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["Charts"] = factory();
+		exports["ChartsDemo"] = factory();
 	else
-		root["Charts"] = factory();
+		root["ChartsDemo"] = factory();
 })(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// install a JSONP callback for chunk loading
@@ -149,7 +149,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
-/******/ 	var jsonpArray = window["webpackJsonpCharts"] = window["webpackJsonpCharts"] || [];
+/******/ 	var jsonpArray = window["webpackJsonpChartsDemo"] = window["webpackJsonpChartsDemo"] || [];
 /******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
 /******/ 	jsonpArray.push = webpackJsonpCallback;
 /******/ 	jsonpArray = jsonpArray.slice();
@@ -797,10 +797,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createVueChartApp", function() { return createVueChartApp; });
 /* harmony import */ var codesandbox_lib_api_define__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! codesandbox/lib/api/define */ "../../node_modules/codesandbox/lib/api/define.js");
 /* harmony import */ var codesandbox_lib_api_define__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(codesandbox_lib_api_define__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _package_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../package.json */ "./package.json");
-var _package_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../package.json */ "./package.json", 1);
 
-
+var libraryVersion = __webpack_require__(/*! @carbon/charts/package.json */ "./dist/package.json").version;
 var createChartSandbox = function (chartTemplate) {
     var files = {};
     Object.keys(chartTemplate)
@@ -815,8 +813,8 @@ var createReactChartApp = function (demo) {
     var indexJs = "import React from \"react\";\nimport ReactDOM from \"react-dom\";\nimport { " + chartComponent + " } from \"@carbon/charts-react\";\nimport \"@carbon/charts/styles.css\";\n// Or\n// import \"@carbon/charts/styles/styles.scss\";\n\nclass App extends React.Component {\n\tstate = {\n\t\tdata: " + chartData + ",\n\t\toptions: " + chartOptions + "\n\t};\n\n\trender = () => (\n\t\t<" + chartComponent + "\n\t\t\tdata={this.state.data}\n\t\t\toptions={this.state.options}>\n\t\t</" + chartComponent + ">\n\t);\n}\nReactDOM.render(<App />, document.getElementById(\"root\"));\n  ";
     var packageJson = {
         dependencies: {
-            "@carbon/charts": _package_json__WEBPACK_IMPORTED_MODULE_1__["version"],
-            "@carbon/charts-react": _package_json__WEBPACK_IMPORTED_MODULE_1__["version"],
+            "@carbon/charts": libraryVersion,
+            "@carbon/charts-react": libraryVersion,
             d3: "5.12.0",
             react: "16.12.0",
             "react-dom": "16.12.0",
@@ -849,8 +847,8 @@ var createAngularChartApp = function (demo) {
             "@angular/platform-browser": "8.2.14",
             "@angular/platform-browser-dynamic": "8.2.14",
             "@angular/router": "8.2.14",
-            "@carbon/charts": _package_json__WEBPACK_IMPORTED_MODULE_1__["version"],
-            "@carbon/charts-angular": _package_json__WEBPACK_IMPORTED_MODULE_1__["version"],
+            "@carbon/charts": libraryVersion,
+            "@carbon/charts-angular": libraryVersion,
             "core-js": "3.6.0",
             d3: "5.15.0",
             rxjs: "6.5.3",
@@ -876,8 +874,8 @@ var createVueChartApp = function (demo) {
     var mainJs = "import Vue from \"vue\";\nimport App from \"./App.vue\";\nVue.config.productionTip = false;\nnew Vue({\n\trender: h => h(App)\n}).$mount(\"#app\");\n";
     var packageJson = JSON.stringify({
         dependencies: {
-            "@carbon/charts": _package_json__WEBPACK_IMPORTED_MODULE_1__["version"],
-            "@carbon/charts-vue": _package_json__WEBPACK_IMPORTED_MODULE_1__["version"],
+            "@carbon/charts": libraryVersion,
+            "@carbon/charts-vue": libraryVersion,
             "@vue/cli-plugin-babel": "4.1.1",
             d3: "5.15.0",
             vue: "^2.6.11"
@@ -1603,16 +1601,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stepData", function() { return stepData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stepTimeSeriesOptions", function() { return stepTimeSeriesOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stepTimeSeriesData", function() { return stepTimeSeriesData; });
-/* harmony import */ var _src_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../src/tools */ "./src/tools.ts");
+/* harmony import */ var _carbon_charts_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @carbon/charts/tools */ "./dist/tools.js");
 /* harmony import */ var _line__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./line */ "./demo/demo-data/line.ts");
 
 
-var stepOptions = _src_tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, _line__WEBPACK_IMPORTED_MODULE_1__["lineOptions"], {
+var stepOptions = _carbon_charts_tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, _line__WEBPACK_IMPORTED_MODULE_1__["lineOptions"], {
     title: "Step (discrete)",
     curve: "curveStepAfter"
 });
 var stepData = _line__WEBPACK_IMPORTED_MODULE_1__["lineData"];
-var stepTimeSeriesOptions = _src_tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, _line__WEBPACK_IMPORTED_MODULE_1__["lineTimeSeriesOptions"], {
+var stepTimeSeriesOptions = _carbon_charts_tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, _line__WEBPACK_IMPORTED_MODULE_1__["lineTimeSeriesOptions"], {
     title: "Step (time series)",
     curve: "curveStepAfter"
 });
@@ -1698,12 +1696,12 @@ var initializeDemoOptions = function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/index */ "./src/index.ts");
+/* harmony import */ var _carbon_charts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @carbon/charts */ "./dist/index.js");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.scss */ "./demo/index.scss");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _demo_options__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./demo-options */ "./demo/demo-options.ts");
 /* harmony import */ var _demo_data_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./demo-data/index */ "./demo/demo-data/index.ts");
-/* harmony import */ var _src_tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../src/tools */ "./src/tools.ts");
+/* harmony import */ var _carbon_charts_tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @carbon/charts/tools */ "./dist/tools.js");
 
 // Styles
 
@@ -1740,9 +1738,9 @@ var changeDemoData = function (id, chartObj) {
         }
         return result;
     };
-    // Function to be used to randomize all datapoints
+    // Function to be used to randomize all data points
     var updateChartData = function (currentData) {
-        var result = _src_tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].clone(currentData);
+        var result = _carbon_charts_tools__WEBPACK_IMPORTED_MODULE_4__["Tools"].clone(currentData);
         result.datasets = result.datasets.map(function (dataset) {
             dataset.label = "new dataset " + Math.random().toFixed(2);
             var datasetNewData = dataset.data.map(function (dataPoint) {
@@ -1819,7 +1817,7 @@ _demo_data_index__WEBPACK_IMPORTED_MODULE_3__["demoGroups"].forEach(function (de
     demoGroup.demos.forEach(function (demo) {
         var holder = createChartContainer(demo);
         if (holder) {
-            var ClassToInitialize = _src_index__WEBPACK_IMPORTED_MODULE_0__[demo.chartType.vanilla];
+            var ClassToInitialize = _carbon_charts__WEBPACK_IMPORTED_MODULE_0__[demo.chartType.vanilla];
             // Add `height` to the chart options
             demo.options.height = "500px";
             // Initialize chart
@@ -1835,32 +1833,21 @@ _demo_data_index__WEBPACK_IMPORTED_MODULE_3__["demoGroups"].forEach(function (de
 
 /***/ }),
 
-/***/ "./package.json":
-/*!**********************!*\
-  !*** ./package.json ***!
-  \**********************/
-/*! exports provided: name, version, description, main, module, scripts, repository, keywords, author, license, dependencies, peerDependencies, devDependencies, publishConfig, maintainers, contributors, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"name\":\"@carbon/charts\",\"version\":\"0.29.1\",\"description\":\"Carbon charting components\",\"main\":\"./bundle.js\",\"module\":\"./index.js\",\"scripts\":{\"demo:server\":\"webpack-dev-server --config webpack.config.js --watch\",\"demo:build\":\"webpack --config webpack.config.js && yarn run docs:build\",\"docs:build\":\"typedoc --out ./demo/bundle/documentation ./src/index.ts\",\"build\":\"bash build.sh\",\"postinstall\":\"bash build-vendor.sh\",\"lint\":\"tslint -p tsconfig.json -c tslint.json\",\"test\":\"karma start --single-run\",\"test:watch\":\"karma start --no-single-run\",\"clean\":\"rm -rf dist demo/bundle\"},\"repository\":{\"type\":\"git\",\"url\":\"git@github.com:IBM/carbon-charts.git\"},\"keywords\":[\"carbon\",\"charts\",\"dataviz\",\"data-visualization\",\"visualizations\",\"d3\",\"svg\",\"component\",\"components\",\"css\",\"html\",\"ibm\",\"typescript\",\"javascript\",\"js\",\"library\",\"pattern\",\"patterns\",\"sass\",\"scss\"],\"author\":\"IBM\",\"license\":\"Apache-2.0\",\"dependencies\":{\"@carbon/utils-position\":\"1.1.1\",\"babel-polyfill\":\"6.26.0\",\"carbon-components\":\"10.5.0\",\"date-fns\":\"2.8.1\",\"lodash-es\":\"4.17.15\",\"resize-observer-polyfill\":\"1.5.0\"},\"peerDependencies\":{\"d3\":\">=5.0.0 <=5.14.2\"},\"devDependencies\":{\"@carbon/colors\":\"10.4.0\",\"@carbon/import-once\":\"10.3.0\",\"@carbon/layout\":\"10.5.0\",\"@carbon/motion\":\"10.4.0\",\"@carbon/themes\":\"10.4.0\",\"@carbon/type\":\"10.5.1\",\"@types/d3\":\"4.11.0\",\"@types/jasmine\":\"2.8.7\",\"@types/karma\":\"3.0.2\",\"@types/node\":\"12.11.7\",\"babel-polyfill\":\"6.26.0\",\"codesandbox\":\"2.1.11\",\"copy-webpack-plugin\":\"4.5.2\",\"css-loader\":\"0.28.7\",\"d3\":\"5.14.2\",\"extract-text-webpack-plugin\":\"3.0.2\",\"file-loader\":\"1.1.5\",\"html-loader\":\"0.5.1\",\"html-webpack-exclude-assets-plugin\":\"0.0.7\",\"html-webpack-plugin\":\"3.2.0\",\"jasmine-core\":\"3.4.0\",\"karma\":\"4.0.1\",\"karma-chrome-launcher\":\"2.2.0\",\"karma-firefox-launcher\":\"1.1.0\",\"karma-jasmine\":\"2.0.1\",\"karma-safari-launcher\":\"1.0.0\",\"karma-webpack\":\"4.0.2\",\"lerna\":\"3.13.4\",\"mini-css-extract-plugin\":\"0.9.0\",\"raw-loader\":\"0.5.1\",\"rollup\":\"1.27.10\",\"rollup-plugin-commonjs\":\"10.1.0\",\"rollup-plugin-node-resolve\":\"5.2.0\",\"rollup-plugin-terser\":\"5.1.2\",\"rollup-plugin-typescript2\":\"0.25.3\",\"sass\":\"1.25.0\",\"sass-loader\":\"8.0.0\",\"style-loader\":\"0.19.0\",\"ts-loader\":\"5.1.0\",\"tslint\":\"5.20.1\",\"tslint-loader\":\"3.5.3\",\"typedoc\":\"0.11.1\",\"typescript\":\"3.2.2\",\"url-loader\":\"0.6.2\",\"webpack\":\"4.41.0\",\"webpack-cli\":\"3.3.9\",\"webpack-dev-server\":\"3.7.0\"},\"publishConfig\":{\"access\":\"public\"},\"maintainers\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}],\"contributors\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}]}");
-
-/***/ }),
-
-/***/ "./src/axis-chart.ts":
-/*!***************************!*\
-  !*** ./src/axis-chart.ts ***!
-  \***************************/
+/***/ "./dist/axis-chart.js":
+/*!****************************!*\
+  !*** ./dist/axis-chart.js ***!
+  \****************************/
 /*! exports provided: AxisChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AxisChart", function() { return AxisChart; });
-/* harmony import */ var _chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chart */ "./src/chart.ts");
-/* harmony import */ var _interfaces_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interfaces/index */ "./src/interfaces/index.ts");
-/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/index */ "./src/components/index.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
-/* harmony import */ var _services_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/index */ "./src/services/index.ts");
+/* harmony import */ var _chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chart */ "./dist/chart.js");
+/* harmony import */ var _interfaces_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interfaces/index */ "./dist/interfaces/index.js");
+/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/index */ "./dist/components/index.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tools */ "./dist/tools.js");
+/* harmony import */ var _services_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/index */ "./dist/services/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -1874,6 +1861,13 @@ var __extends = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 
 
 
@@ -1952,7 +1946,7 @@ var AxisChart = /** @class */ (function (_super) {
         var fullFrameComponent = {
             id: "full-frame",
             components: [
-                new _components_index__WEBPACK_IMPORTED_MODULE_2__["LayoutComponent"](this.model, this.services, (isLegendEnabled ? [legendComponent] : []).concat([
+                new _components_index__WEBPACK_IMPORTED_MODULE_2__["LayoutComponent"](this.model, this.services, __spreadArrays((isLegendEnabled ? [legendComponent] : []), [
                     legendSpacerComponent,
                     graphFrameComponent
                 ]), {
@@ -1990,25 +1984,32 @@ var AxisChart = /** @class */ (function (_super) {
     return AxisChart;
 }(_chart__WEBPACK_IMPORTED_MODULE_0__["Chart"]));
 
-
+//# sourceMappingURL=../src/axis-chart.js.map
 
 /***/ }),
 
-/***/ "./src/chart.ts":
-/*!**********************!*\
-  !*** ./src/chart.ts ***!
-  \**********************/
+/***/ "./dist/chart.js":
+/*!***********************!*\
+  !*** ./dist/chart.js ***!
+  \***********************/
 /*! exports provided: Chart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Chart", function() { return Chart; });
-/* harmony import */ var _interfaces_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./interfaces/index */ "./src/interfaces/index.ts");
-/* harmony import */ var _model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./model */ "./src/model.ts");
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components */ "./src/components/index.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
-/* harmony import */ var _services_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/index */ "./src/services/index.ts");
+/* harmony import */ var _interfaces_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./interfaces/index */ "./dist/interfaces/index.js");
+/* harmony import */ var _model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./model */ "./dist/model.js");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components */ "./dist/components/index.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tools */ "./dist/tools.js");
+/* harmony import */ var _services_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/index */ "./dist/services/index.js");
+var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 // Internal Imports
 
 // Misc
@@ -2153,7 +2154,7 @@ var Chart = /** @class */ (function () {
         var fullFrameComponent = {
             id: "full-frame",
             components: [
-                new _components__WEBPACK_IMPORTED_MODULE_2__["LayoutComponent"](this.model, this.services, (isLegendEnabled ? [legendComponent] : []).concat([
+                new _components__WEBPACK_IMPORTED_MODULE_2__["LayoutComponent"](this.model, this.services, __spreadArrays((isLegendEnabled ? [legendComponent] : []), [
                     legendSpacerComponent,
                     graphFrameComponent
                 ]), {
@@ -2191,24 +2192,24 @@ var Chart = /** @class */ (function () {
     return Chart;
 }());
 
-
+//# sourceMappingURL=../src/chart.js.map
 
 /***/ }),
 
-/***/ "./src/charts/bar-grouped.ts":
-/*!***********************************!*\
-  !*** ./src/charts/bar-grouped.ts ***!
-  \***********************************/
+/***/ "./dist/charts/bar-grouped.js":
+/*!************************************!*\
+  !*** ./dist/charts/bar-grouped.js ***!
+  \************************************/
 /*! exports provided: GroupedBarChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GroupedBarChart", function() { return GroupedBarChart; });
-/* harmony import */ var _axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axis-chart */ "./src/axis-chart.ts");
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./src/configuration.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./src/tools.ts");
-/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/index */ "./src/components/index.ts");
+/* harmony import */ var _axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axis-chart */ "./dist/axis-chart.js");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./dist/configuration.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./dist/tools.js");
+/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/index */ "./dist/components/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -2254,25 +2255,25 @@ var GroupedBarChart = /** @class */ (function (_super) {
     return GroupedBarChart;
 }(_axis_chart__WEBPACK_IMPORTED_MODULE_0__["AxisChart"]));
 
-
+//# sourceMappingURL=../../src/charts/bar-grouped.js.map
 
 /***/ }),
 
-/***/ "./src/charts/bar-simple.ts":
-/*!**********************************!*\
-  !*** ./src/charts/bar-simple.ts ***!
-  \**********************************/
+/***/ "./dist/charts/bar-simple.js":
+/*!***********************************!*\
+  !*** ./dist/charts/bar-simple.js ***!
+  \***********************************/
 /*! exports provided: SimpleBarChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SimpleBarChart", function() { return SimpleBarChart; });
-/* harmony import */ var _axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axis-chart */ "./src/axis-chart.ts");
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./src/configuration.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./src/tools.ts");
-/* harmony import */ var _model_simple_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../model-simple-bar */ "./src/model-simple-bar.ts");
-/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/index */ "./src/components/index.ts");
+/* harmony import */ var _axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axis-chart */ "./dist/axis-chart.js");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./dist/configuration.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./dist/tools.js");
+/* harmony import */ var _model_simple_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../model-simple-bar */ "./dist/model-simple-bar.js");
+/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/index */ "./dist/components/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -2320,24 +2321,24 @@ var SimpleBarChart = /** @class */ (function (_super) {
     return SimpleBarChart;
 }(_axis_chart__WEBPACK_IMPORTED_MODULE_0__["AxisChart"]));
 
-
+//# sourceMappingURL=../../src/charts/bar-simple.js.map
 
 /***/ }),
 
-/***/ "./src/charts/bar-stacked.ts":
-/*!***********************************!*\
-  !*** ./src/charts/bar-stacked.ts ***!
-  \***********************************/
+/***/ "./dist/charts/bar-stacked.js":
+/*!************************************!*\
+  !*** ./dist/charts/bar-stacked.js ***!
+  \************************************/
 /*! exports provided: StackedBarChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StackedBarChart", function() { return StackedBarChart; });
-/* harmony import */ var _axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axis-chart */ "./src/axis-chart.ts");
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./src/configuration.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./src/tools.ts");
-/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/index */ "./src/components/index.ts");
+/* harmony import */ var _axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axis-chart */ "./dist/axis-chart.js");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./dist/configuration.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./dist/tools.js");
+/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/index */ "./dist/components/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -2382,24 +2383,24 @@ var StackedBarChart = /** @class */ (function (_super) {
     return StackedBarChart;
 }(_axis_chart__WEBPACK_IMPORTED_MODULE_0__["AxisChart"]));
 
-
+//# sourceMappingURL=../../src/charts/bar-stacked.js.map
 
 /***/ }),
 
-/***/ "./src/charts/bubble.ts":
-/*!******************************!*\
-  !*** ./src/charts/bubble.ts ***!
-  \******************************/
+/***/ "./dist/charts/bubble.js":
+/*!*******************************!*\
+  !*** ./dist/charts/bubble.js ***!
+  \*******************************/
 /*! exports provided: BubbleChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BubbleChart", function() { return BubbleChart; });
-/* harmony import */ var _axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axis-chart */ "./src/axis-chart.ts");
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./src/configuration.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./src/tools.ts");
-/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/index */ "./src/components/index.ts");
+/* harmony import */ var _axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axis-chart */ "./dist/axis-chart.js");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./dist/configuration.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./dist/tools.js");
+/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/index */ "./dist/components/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -2444,24 +2445,24 @@ var BubbleChart = /** @class */ (function (_super) {
     return BubbleChart;
 }(_axis_chart__WEBPACK_IMPORTED_MODULE_0__["AxisChart"]));
 
-
+//# sourceMappingURL=../../src/charts/bubble.js.map
 
 /***/ }),
 
-/***/ "./src/charts/donut.ts":
-/*!*****************************!*\
-  !*** ./src/charts/donut.ts ***!
-  \*****************************/
+/***/ "./dist/charts/donut.js":
+/*!******************************!*\
+  !*** ./dist/charts/donut.js ***!
+  \******************************/
 /*! exports provided: DonutChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DonutChart", function() { return DonutChart; });
-/* harmony import */ var _pie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pie */ "./src/charts/pie.ts");
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./src/configuration.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./src/tools.ts");
-/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/index */ "./src/components/index.ts");
+/* harmony import */ var _pie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pie */ "./dist/charts/pie.js");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./dist/configuration.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./dist/tools.js");
+/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/index */ "./dist/components/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -2504,41 +2505,41 @@ var DonutChart = /** @class */ (function (_super) {
     return DonutChart;
 }(_pie__WEBPACK_IMPORTED_MODULE_0__["PieChart"]));
 
-
+//# sourceMappingURL=../../src/charts/donut.js.map
 
 /***/ }),
 
-/***/ "./src/charts/index.ts":
-/*!*****************************!*\
-  !*** ./src/charts/index.ts ***!
-  \*****************************/
+/***/ "./dist/charts/index.js":
+/*!******************************!*\
+  !*** ./dist/charts/index.js ***!
+  \******************************/
 /*! exports provided: SimpleBarChart, GroupedBarChart, StackedBarChart, BubbleChart, LineChart, ScatterChart, PieChart, DonutChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _bar_simple__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bar-simple */ "./src/charts/bar-simple.ts");
+/* harmony import */ var _bar_simple__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bar-simple */ "./dist/charts/bar-simple.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SimpleBarChart", function() { return _bar_simple__WEBPACK_IMPORTED_MODULE_0__["SimpleBarChart"]; });
 
-/* harmony import */ var _bar_grouped__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bar-grouped */ "./src/charts/bar-grouped.ts");
+/* harmony import */ var _bar_grouped__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bar-grouped */ "./dist/charts/bar-grouped.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GroupedBarChart", function() { return _bar_grouped__WEBPACK_IMPORTED_MODULE_1__["GroupedBarChart"]; });
 
-/* harmony import */ var _bar_stacked__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bar-stacked */ "./src/charts/bar-stacked.ts");
+/* harmony import */ var _bar_stacked__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bar-stacked */ "./dist/charts/bar-stacked.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StackedBarChart", function() { return _bar_stacked__WEBPACK_IMPORTED_MODULE_2__["StackedBarChart"]; });
 
-/* harmony import */ var _bubble__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bubble */ "./src/charts/bubble.ts");
+/* harmony import */ var _bubble__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bubble */ "./dist/charts/bubble.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BubbleChart", function() { return _bubble__WEBPACK_IMPORTED_MODULE_3__["BubbleChart"]; });
 
-/* harmony import */ var _line__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./line */ "./src/charts/line.ts");
+/* harmony import */ var _line__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./line */ "./dist/charts/line.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LineChart", function() { return _line__WEBPACK_IMPORTED_MODULE_4__["LineChart"]; });
 
-/* harmony import */ var _scatter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./scatter */ "./src/charts/scatter.ts");
+/* harmony import */ var _scatter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./scatter */ "./dist/charts/scatter.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScatterChart", function() { return _scatter__WEBPACK_IMPORTED_MODULE_5__["ScatterChart"]; });
 
-/* harmony import */ var _pie__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pie */ "./src/charts/pie.ts");
+/* harmony import */ var _pie__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pie */ "./dist/charts/pie.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PieChart", function() { return _pie__WEBPACK_IMPORTED_MODULE_6__["PieChart"]; });
 
-/* harmony import */ var _donut__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./donut */ "./src/charts/donut.ts");
+/* harmony import */ var _donut__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./donut */ "./dist/charts/donut.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DonutChart", function() { return _donut__WEBPACK_IMPORTED_MODULE_7__["DonutChart"]; });
 
 
@@ -2549,24 +2550,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+//# sourceMappingURL=../../src/charts/index.js.map
 
 /***/ }),
 
-/***/ "./src/charts/line.ts":
-/*!****************************!*\
-  !*** ./src/charts/line.ts ***!
-  \****************************/
+/***/ "./dist/charts/line.js":
+/*!*****************************!*\
+  !*** ./dist/charts/line.js ***!
+  \*****************************/
 /*! exports provided: LineChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LineChart", function() { return LineChart; });
-/* harmony import */ var _axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axis-chart */ "./src/axis-chart.ts");
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./src/configuration.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./src/tools.ts");
-/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/index */ "./src/components/index.ts");
+/* harmony import */ var _axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axis-chart */ "./dist/axis-chart.js");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./dist/configuration.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./dist/tools.js");
+/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/index */ "./dist/components/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -2612,25 +2613,25 @@ var LineChart = /** @class */ (function (_super) {
     return LineChart;
 }(_axis_chart__WEBPACK_IMPORTED_MODULE_0__["AxisChart"]));
 
-
+//# sourceMappingURL=../../src/charts/line.js.map
 
 /***/ }),
 
-/***/ "./src/charts/pie.ts":
-/*!***************************!*\
-  !*** ./src/charts/pie.ts ***!
-  \***************************/
+/***/ "./dist/charts/pie.js":
+/*!****************************!*\
+  !*** ./dist/charts/pie.js ***!
+  \****************************/
 /*! exports provided: PieChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PieChart", function() { return PieChart; });
-/* harmony import */ var _model_pie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../model-pie */ "./src/model-pie.ts");
-/* harmony import */ var _chart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../chart */ "./src/chart.ts");
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../configuration */ "./src/configuration.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools */ "./src/tools.ts");
-/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/index */ "./src/components/index.ts");
+/* harmony import */ var _model_pie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../model-pie */ "./dist/model-pie.js");
+/* harmony import */ var _chart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../chart */ "./dist/chart.js");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../configuration */ "./dist/configuration.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools */ "./dist/tools.js");
+/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/index */ "./dist/components/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -2682,24 +2683,24 @@ var PieChart = /** @class */ (function (_super) {
     return PieChart;
 }(_chart__WEBPACK_IMPORTED_MODULE_1__["Chart"]));
 
-
+//# sourceMappingURL=../../src/charts/pie.js.map
 
 /***/ }),
 
-/***/ "./src/charts/scatter.ts":
-/*!*******************************!*\
-  !*** ./src/charts/scatter.ts ***!
-  \*******************************/
+/***/ "./dist/charts/scatter.js":
+/*!********************************!*\
+  !*** ./dist/charts/scatter.js ***!
+  \********************************/
 /*! exports provided: ScatterChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ScatterChart", function() { return ScatterChart; });
-/* harmony import */ var _axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axis-chart */ "./src/axis-chart.ts");
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./src/configuration.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./src/tools.ts");
-/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/index */ "./src/components/index.ts");
+/* harmony import */ var _axis_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axis-chart */ "./dist/axis-chart.js");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configuration */ "./dist/configuration.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./dist/tools.js");
+/* harmony import */ var _components_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/index */ "./dist/components/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -2744,25 +2745,25 @@ var ScatterChart = /** @class */ (function (_super) {
     return ScatterChart;
 }(_axis_chart__WEBPACK_IMPORTED_MODULE_0__["AxisChart"]));
 
-
+//# sourceMappingURL=../../src/charts/scatter.js.map
 
 /***/ }),
 
-/***/ "./src/components/axes/axis.ts":
-/*!*************************************!*\
-  !*** ./src/components/axes/axis.ts ***!
-  \*************************************/
+/***/ "./dist/components/axes/axis.js":
+/*!**************************************!*\
+  !*** ./dist/components/axes/axis.js ***!
+  \**************************************/
 /*! exports provided: Axis */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Axis", function() { return Axis; });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../configuration */ "./src/configuration.ts");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./dist/components/component.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces */ "./dist/interfaces/index.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services */ "./dist/services/index.js");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../configuration */ "./dist/configuration.js");
 /* harmony import */ var d3_axis__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-axis */ "../../node_modules/d3-axis/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -2964,26 +2965,26 @@ var Axis = /** @class */ (function (_super) {
     return Axis;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
-
+//# sourceMappingURL=../../../src/components/axes/axis.js.map
 
 /***/ }),
 
-/***/ "./src/components/axes/grid.ts":
-/*!*************************************!*\
-  !*** ./src/components/axes/grid.ts ***!
-  \*************************************/
+/***/ "./dist/components/axes/grid.js":
+/*!**************************************!*\
+  !*** ./dist/components/axes/grid.js ***!
+  \**************************************/
 /*! exports provided: Grid */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Grid", function() { return Grid; });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./dist/components/component.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services */ "./dist/services/index.js");
 /* harmony import */ var d3_axis__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-axis */ "../../node_modules/d3-axis/src/index.js");
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../interfaces */ "./dist/interfaces/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -3188,25 +3189,25 @@ var Grid = /** @class */ (function (_super) {
     return Grid;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
-
+//# sourceMappingURL=../../../src/components/axes/grid.js.map
 
 /***/ }),
 
-/***/ "./src/components/axes/two-dimensional-axes.ts":
-/*!*****************************************************!*\
-  !*** ./src/components/axes/two-dimensional-axes.ts ***!
-  \*****************************************************/
+/***/ "./dist/components/axes/two-dimensional-axes.js":
+/*!******************************************************!*\
+  !*** ./dist/components/axes/two-dimensional-axes.js ***!
+  \******************************************************/
 /*! exports provided: TwoDimensionalAxes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TwoDimensionalAxes", function() { return TwoDimensionalAxes; });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
-/* harmony import */ var _axis__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./axis */ "./src/components/axes/axis.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./dist/components/component.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces */ "./dist/interfaces/index.js");
+/* harmony import */ var _axis__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./axis */ "./dist/components/axes/axis.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services */ "./dist/services/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -3344,23 +3345,23 @@ var TwoDimensionalAxes = /** @class */ (function (_super) {
     return TwoDimensionalAxes;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
-
+//# sourceMappingURL=../../../src/components/axes/two-dimensional-axes.js.map
 
 /***/ }),
 
-/***/ "./src/components/axes/zero-line.ts":
-/*!******************************************!*\
-  !*** ./src/components/axes/zero-line.ts ***!
-  \******************************************/
+/***/ "./dist/components/axes/zero-line.js":
+/*!*******************************************!*\
+  !*** ./dist/components/axes/zero-line.js ***!
+  \*******************************************/
 /*! exports provided: ZeroLine */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ZeroLine", function() { return ZeroLine; });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./dist/components/component.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services */ "./dist/services/index.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -3407,22 +3408,22 @@ var ZeroLine = /** @class */ (function (_super) {
     return ZeroLine;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
-
+//# sourceMappingURL=../../../src/components/axes/zero-line.js.map
 
 /***/ }),
 
-/***/ "./src/components/component.ts":
-/*!*************************************!*\
-  !*** ./src/components/component.ts ***!
-  \*************************************/
+/***/ "./dist/components/component.js":
+/*!**************************************!*\
+  !*** ./dist/components/component.js ***!
+  \**************************************/
 /*! exports provided: Component */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Component", function() { return Component; });
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services */ "./src/services/index.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools */ "./src/tools.ts");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services */ "./dist/services/index.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools */ "./dist/tools.js");
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 /* harmony import */ var carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! carbon-components/src/globals/js/settings */ "../../node_modules/carbon-components/src/globals/js/settings.js");
 /* harmony import */ var carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_3__);
@@ -3488,24 +3489,24 @@ var Component = /** @class */ (function () {
     return Component;
 }());
 
-
+//# sourceMappingURL=../../src/components/component.js.map
 
 /***/ }),
 
-/***/ "./src/components/essentials/legend.ts":
-/*!*********************************************!*\
-  !*** ./src/components/essentials/legend.ts ***!
-  \*********************************************/
+/***/ "./dist/components/essentials/legend.js":
+/*!**********************************************!*\
+  !*** ./dist/components/essentials/legend.js ***!
+  \**********************************************/
 /*! exports provided: Legend */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Legend", function() { return Legend; });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./dist/components/component.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../interfaces */ "./dist/interfaces/index.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services */ "./dist/services/index.js");
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -3699,23 +3700,23 @@ var Legend = /** @class */ (function (_super) {
     return Legend;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
-
+//# sourceMappingURL=../../../src/components/essentials/legend.js.map
 
 /***/ }),
 
-/***/ "./src/components/essentials/title.ts":
-/*!********************************************!*\
-  !*** ./src/components/essentials/title.ts ***!
-  \********************************************/
+/***/ "./dist/components/essentials/title.js":
+/*!*********************************************!*\
+  !*** ./dist/components/essentials/title.js ***!
+  \*********************************************/
 /*! exports provided: Title */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Title", function() { return Title; });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./dist/components/component.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services */ "./dist/services/index.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../interfaces */ "./dist/interfaces/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -3817,24 +3818,24 @@ var Title = /** @class */ (function (_super) {
     return Title;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
-
+//# sourceMappingURL=../../../src/components/essentials/title.js.map
 
 /***/ }),
 
-/***/ "./src/components/essentials/tooltip-bar.ts":
-/*!**************************************************!*\
-  !*** ./src/components/essentials/tooltip-bar.ts ***!
-  \**************************************************/
+/***/ "./dist/components/essentials/tooltip-bar.js":
+/*!***************************************************!*\
+  !*** ./dist/components/essentials/tooltip-bar.js ***!
+  \***************************************************/
 /*! exports provided: TooltipBar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TooltipBar", function() { return TooltipBar; });
-/* harmony import */ var _tooltip__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tooltip */ "./src/components/essentials/tooltip.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
-/* harmony import */ var _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../interfaces/enums */ "./src/interfaces/enums.ts");
+/* harmony import */ var _tooltip__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tooltip */ "./dist/components/essentials/tooltip.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services */ "./dist/services/index.js");
+/* harmony import */ var _interfaces_enums__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../interfaces/enums */ "./dist/interfaces/enums.js");
 /* harmony import */ var carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! carbon-components/src/globals/js/settings */ "../../node_modules/carbon-components/src/globals/js/settings.js");
 /* harmony import */ var carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
@@ -3989,23 +3990,23 @@ var TooltipBar = /** @class */ (function (_super) {
     return TooltipBar;
 }(_tooltip__WEBPACK_IMPORTED_MODULE_0__["Tooltip"]));
 
-
+//# sourceMappingURL=../../../src/components/essentials/tooltip-bar.js.map
 
 /***/ }),
 
-/***/ "./src/components/essentials/tooltip-scatter.ts":
-/*!******************************************************!*\
-  !*** ./src/components/essentials/tooltip-scatter.ts ***!
-  \******************************************************/
+/***/ "./dist/components/essentials/tooltip-scatter.js":
+/*!*******************************************************!*\
+  !*** ./dist/components/essentials/tooltip-scatter.js ***!
+  \*******************************************************/
 /*! exports provided: TooltipScatter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TooltipScatter", function() { return TooltipScatter; });
-/* harmony import */ var _tooltip__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tooltip */ "./src/components/essentials/tooltip.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var _tooltip__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tooltip */ "./dist/components/essentials/tooltip.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../interfaces */ "./dist/interfaces/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -4041,28 +4042,28 @@ var TooltipScatter = /** @class */ (function (_super) {
     return TooltipScatter;
 }(_tooltip__WEBPACK_IMPORTED_MODULE_0__["Tooltip"]));
 
-
+//# sourceMappingURL=../../../src/components/essentials/tooltip-scatter.js.map
 
 /***/ }),
 
-/***/ "./src/components/essentials/tooltip.ts":
-/*!**********************************************!*\
-  !*** ./src/components/essentials/tooltip.ts ***!
-  \**********************************************/
+/***/ "./dist/components/essentials/tooltip.js":
+/*!***********************************************!*\
+  !*** ./dist/components/essentials/tooltip.js ***!
+  \***********************************************/
 /*! exports provided: Tooltip */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tooltip", function() { return Tooltip; });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./dist/components/component.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services */ "./dist/services/index.js");
 /* harmony import */ var _carbon_utils_position__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @carbon/utils-position */ "../../node_modules/@carbon/utils-position/index.js");
 /* harmony import */ var carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! carbon-components/src/globals/js/settings */ "../../node_modules/carbon-components/src/globals/js/settings.js");
 /* harmony import */ var carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../interfaces */ "./dist/interfaces/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -4240,23 +4241,23 @@ var Tooltip = /** @class */ (function (_super) {
     return Tooltip;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
-
+//# sourceMappingURL=../../../src/components/essentials/tooltip.js.map
 
 /***/ }),
 
-/***/ "./src/components/graphs/bar-grouped.ts":
-/*!**********************************************!*\
-  !*** ./src/components/graphs/bar-grouped.ts ***!
-  \**********************************************/
+/***/ "./dist/components/graphs/bar-grouped.js":
+/*!***********************************************!*\
+  !*** ./dist/components/graphs/bar-grouped.js ***!
+  \***********************************************/
 /*! exports provided: GroupedBar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GroupedBar", function() { return GroupedBar; });
-/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bar */ "./src/components/graphs/bar.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bar */ "./dist/components/graphs/bar.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../interfaces */ "./dist/interfaces/index.js");
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 /* harmony import */ var d3_color__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-color */ "../../node_modules/d3-color/src/index.js");
 /* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/src/index.js");
@@ -4465,23 +4466,23 @@ var GroupedBar = /** @class */ (function (_super) {
     return GroupedBar;
 }(_bar__WEBPACK_IMPORTED_MODULE_0__["Bar"]));
 
-
+//# sourceMappingURL=../../../src/components/graphs/bar-grouped.js.map
 
 /***/ }),
 
-/***/ "./src/components/graphs/bar-simple.ts":
-/*!*********************************************!*\
-  !*** ./src/components/graphs/bar-simple.ts ***!
-  \*********************************************/
+/***/ "./dist/components/graphs/bar-simple.js":
+/*!**********************************************!*\
+  !*** ./dist/components/graphs/bar-simple.js ***!
+  \**********************************************/
 /*! exports provided: SimpleBar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SimpleBar", function() { return SimpleBar; });
-/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bar */ "./src/components/graphs/bar.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
+/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bar */ "./dist/components/graphs/bar.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces */ "./dist/interfaces/index.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 /* harmony import */ var d3_color__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-color */ "../../node_modules/d3-color/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
@@ -4654,23 +4655,23 @@ var SimpleBar = /** @class */ (function (_super) {
     return SimpleBar;
 }(_bar__WEBPACK_IMPORTED_MODULE_0__["Bar"]));
 
-
+//# sourceMappingURL=../../../src/components/graphs/bar-simple.js.map
 
 /***/ }),
 
-/***/ "./src/components/graphs/bar-stacked.ts":
-/*!**********************************************!*\
-  !*** ./src/components/graphs/bar-stacked.ts ***!
-  \**********************************************/
+/***/ "./dist/components/graphs/bar-stacked.js":
+/*!***********************************************!*\
+  !*** ./dist/components/graphs/bar-stacked.js ***!
+  \***********************************************/
 /*! exports provided: StackedBar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StackedBar", function() { return StackedBar; });
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
-/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bar */ "./src/components/graphs/bar.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
+/* harmony import */ var _bar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bar */ "./dist/components/graphs/bar.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../interfaces */ "./dist/interfaces/index.js");
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 /* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-shape */ "../../node_modules/d3-shape/src/index.js");
 /* harmony import */ var d3_color__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-color */ "../../node_modules/d3-color/src/index.js");
@@ -4941,21 +4942,21 @@ var StackedBar = /** @class */ (function (_super) {
     return StackedBar;
 }(_bar__WEBPACK_IMPORTED_MODULE_1__["Bar"]));
 
-
+//# sourceMappingURL=../../../src/components/graphs/bar-stacked.js.map
 
 /***/ }),
 
-/***/ "./src/components/graphs/bar.ts":
-/*!**************************************!*\
-  !*** ./src/components/graphs/bar.ts ***!
-  \**************************************/
+/***/ "./dist/components/graphs/bar.js":
+/*!***************************************!*\
+  !*** ./dist/components/graphs/bar.js ***!
+  \***************************************/
 /*! exports provided: Bar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Bar", function() { return Bar; });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./dist/components/component.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -4988,22 +4989,22 @@ var Bar = /** @class */ (function (_super) {
     return Bar;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
-
+//# sourceMappingURL=../../../src/components/graphs/bar.js.map
 
 /***/ }),
 
-/***/ "./src/components/graphs/bubble.ts":
-/*!*****************************************!*\
-  !*** ./src/components/graphs/bubble.ts ***!
-  \*****************************************/
+/***/ "./dist/components/graphs/bubble.js":
+/*!******************************************!*\
+  !*** ./dist/components/graphs/bubble.js ***!
+  \******************************************/
 /*! exports provided: Bubble */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Bubble", function() { return Bubble; });
-/* harmony import */ var _scatter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scatter */ "./src/components/graphs/scatter.ts");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
+/* harmony import */ var _scatter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scatter */ "./dist/components/graphs/scatter.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services */ "./dist/services/index.js");
 /* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-array */ "../../node_modules/d3-array/src/index.js");
 /* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
@@ -5072,23 +5073,23 @@ var Bubble = /** @class */ (function (_super) {
     return Bubble;
 }(_scatter__WEBPACK_IMPORTED_MODULE_0__["Scatter"]));
 
-
+//# sourceMappingURL=../../../src/components/graphs/bubble.js.map
 
 /***/ }),
 
-/***/ "./src/components/graphs/donut.ts":
-/*!****************************************!*\
-  !*** ./src/components/graphs/donut.ts ***!
-  \****************************************/
+/***/ "./dist/components/graphs/donut.js":
+/*!*****************************************!*\
+  !*** ./dist/components/graphs/donut.js ***!
+  \*****************************************/
 /*! exports provided: Donut */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Donut", function() { return Donut; });
-/* harmony import */ var _pie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pie */ "./src/components/graphs/pie.ts");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
+/* harmony import */ var _pie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pie */ "./dist/components/graphs/pie.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services */ "./dist/services/index.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 /* harmony import */ var d3_interpolate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-interpolate */ "../../node_modules/d3-interpolate/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
@@ -5166,23 +5167,23 @@ var Donut = /** @class */ (function (_super) {
     return Donut;
 }(_pie__WEBPACK_IMPORTED_MODULE_0__["Pie"]));
 
-
+//# sourceMappingURL=../../../src/components/graphs/donut.js.map
 
 /***/ }),
 
-/***/ "./src/components/graphs/line.ts":
-/*!***************************************!*\
-  !*** ./src/components/graphs/line.ts ***!
-  \***************************************/
+/***/ "./dist/components/graphs/line.js":
+/*!****************************************!*\
+  !*** ./dist/components/graphs/line.js ***!
+  \****************************************/
 /*! exports provided: Line */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Line", function() { return Line; });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../configuration */ "./src/configuration.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./dist/components/component.js");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../configuration */ "./dist/configuration.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../interfaces */ "./dist/interfaces/index.js");
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 /* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-shape */ "../../node_modules/d3-shape/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
@@ -5285,24 +5286,24 @@ var Line = /** @class */ (function (_super) {
     return Line;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
-
+//# sourceMappingURL=../../../src/components/graphs/line.js.map
 
 /***/ }),
 
-/***/ "./src/components/graphs/pie.ts":
-/*!**************************************!*\
-  !*** ./src/components/graphs/pie.ts ***!
-  \**************************************/
+/***/ "./dist/components/graphs/pie.js":
+/*!***************************************!*\
+  !*** ./dist/components/graphs/pie.js ***!
+  \***************************************/
 /*! exports provided: Pie */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Pie", function() { return Pie; });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./dist/components/component.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services */ "./dist/services/index.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../interfaces */ "./dist/interfaces/index.js");
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 /* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-shape */ "../../node_modules/d3-shape/src/index.js");
 /* harmony import */ var d3_interpolate__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! d3-interpolate */ "../../node_modules/d3-interpolate/src/index.js");
@@ -5630,22 +5631,22 @@ var Pie = /** @class */ (function (_super) {
     return Pie;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
-
+//# sourceMappingURL=../../../src/components/graphs/pie.js.map
 
 /***/ }),
 
-/***/ "./src/components/graphs/scatter.ts":
-/*!******************************************!*\
-  !*** ./src/components/graphs/scatter.ts ***!
-  \******************************************/
+/***/ "./dist/components/graphs/scatter.js":
+/*!*******************************************!*\
+  !*** ./dist/components/graphs/scatter.js ***!
+  \*******************************************/
 /*! exports provided: Scatter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Scatter", function() { return Scatter; });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./dist/components/component.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces */ "./dist/interfaces/index.js");
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -5815,77 +5816,77 @@ var Scatter = /** @class */ (function (_super) {
     return Scatter;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
-
+//# sourceMappingURL=../../../src/components/graphs/scatter.js.map
 
 /***/ }),
 
-/***/ "./src/components/index.ts":
-/*!*********************************!*\
-  !*** ./src/components/index.ts ***!
-  \*********************************/
+/***/ "./dist/components/index.js":
+/*!**********************************!*\
+  !*** ./dist/components/index.js ***!
+  \**********************************/
 /*! exports provided: Component, Legend, Title, Tooltip, TooltipBar, TooltipScatter, SimpleBar, GroupedBar, StackedBar, Bubble, Line, Scatter, Pie, Donut, Spacer, LayoutComponent, TwoDimensionalAxes, Axis, Grid, ZeroLine */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component */ "./src/components/component.ts");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component */ "./dist/components/component.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Component", function() { return _component__WEBPACK_IMPORTED_MODULE_0__["Component"]; });
 
-/* harmony import */ var _essentials_legend__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./essentials/legend */ "./src/components/essentials/legend.ts");
+/* harmony import */ var _essentials_legend__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./essentials/legend */ "./dist/components/essentials/legend.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Legend", function() { return _essentials_legend__WEBPACK_IMPORTED_MODULE_1__["Legend"]; });
 
-/* harmony import */ var _essentials_title__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./essentials/title */ "./src/components/essentials/title.ts");
+/* harmony import */ var _essentials_title__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./essentials/title */ "./dist/components/essentials/title.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Title", function() { return _essentials_title__WEBPACK_IMPORTED_MODULE_2__["Title"]; });
 
-/* harmony import */ var _essentials_tooltip__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./essentials/tooltip */ "./src/components/essentials/tooltip.ts");
+/* harmony import */ var _essentials_tooltip__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./essentials/tooltip */ "./dist/components/essentials/tooltip.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Tooltip", function() { return _essentials_tooltip__WEBPACK_IMPORTED_MODULE_3__["Tooltip"]; });
 
-/* harmony import */ var _essentials_tooltip_bar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./essentials/tooltip-bar */ "./src/components/essentials/tooltip-bar.ts");
+/* harmony import */ var _essentials_tooltip_bar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./essentials/tooltip-bar */ "./dist/components/essentials/tooltip-bar.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TooltipBar", function() { return _essentials_tooltip_bar__WEBPACK_IMPORTED_MODULE_4__["TooltipBar"]; });
 
-/* harmony import */ var _essentials_tooltip_scatter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./essentials/tooltip-scatter */ "./src/components/essentials/tooltip-scatter.ts");
+/* harmony import */ var _essentials_tooltip_scatter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./essentials/tooltip-scatter */ "./dist/components/essentials/tooltip-scatter.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TooltipScatter", function() { return _essentials_tooltip_scatter__WEBPACK_IMPORTED_MODULE_5__["TooltipScatter"]; });
 
-/* harmony import */ var _graphs_bar_simple__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./graphs/bar-simple */ "./src/components/graphs/bar-simple.ts");
+/* harmony import */ var _graphs_bar_simple__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./graphs/bar-simple */ "./dist/components/graphs/bar-simple.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SimpleBar", function() { return _graphs_bar_simple__WEBPACK_IMPORTED_MODULE_6__["SimpleBar"]; });
 
-/* harmony import */ var _graphs_bar_grouped__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./graphs/bar-grouped */ "./src/components/graphs/bar-grouped.ts");
+/* harmony import */ var _graphs_bar_grouped__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./graphs/bar-grouped */ "./dist/components/graphs/bar-grouped.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GroupedBar", function() { return _graphs_bar_grouped__WEBPACK_IMPORTED_MODULE_7__["GroupedBar"]; });
 
-/* harmony import */ var _graphs_bar_stacked__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./graphs/bar-stacked */ "./src/components/graphs/bar-stacked.ts");
+/* harmony import */ var _graphs_bar_stacked__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./graphs/bar-stacked */ "./dist/components/graphs/bar-stacked.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StackedBar", function() { return _graphs_bar_stacked__WEBPACK_IMPORTED_MODULE_8__["StackedBar"]; });
 
-/* harmony import */ var _graphs_bubble__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./graphs/bubble */ "./src/components/graphs/bubble.ts");
+/* harmony import */ var _graphs_bubble__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./graphs/bubble */ "./dist/components/graphs/bubble.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Bubble", function() { return _graphs_bubble__WEBPACK_IMPORTED_MODULE_9__["Bubble"]; });
 
-/* harmony import */ var _graphs_line__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./graphs/line */ "./src/components/graphs/line.ts");
+/* harmony import */ var _graphs_line__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./graphs/line */ "./dist/components/graphs/line.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Line", function() { return _graphs_line__WEBPACK_IMPORTED_MODULE_10__["Line"]; });
 
-/* harmony import */ var _graphs_scatter__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./graphs/scatter */ "./src/components/graphs/scatter.ts");
+/* harmony import */ var _graphs_scatter__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./graphs/scatter */ "./dist/components/graphs/scatter.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Scatter", function() { return _graphs_scatter__WEBPACK_IMPORTED_MODULE_11__["Scatter"]; });
 
-/* harmony import */ var _graphs_pie__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./graphs/pie */ "./src/components/graphs/pie.ts");
+/* harmony import */ var _graphs_pie__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./graphs/pie */ "./dist/components/graphs/pie.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Pie", function() { return _graphs_pie__WEBPACK_IMPORTED_MODULE_12__["Pie"]; });
 
-/* harmony import */ var _graphs_donut__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./graphs/donut */ "./src/components/graphs/donut.ts");
+/* harmony import */ var _graphs_donut__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./graphs/donut */ "./dist/components/graphs/donut.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Donut", function() { return _graphs_donut__WEBPACK_IMPORTED_MODULE_13__["Donut"]; });
 
-/* harmony import */ var _layout_spacer__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./layout/spacer */ "./src/components/layout/spacer.ts");
+/* harmony import */ var _layout_spacer__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./layout/spacer */ "./dist/components/layout/spacer.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Spacer", function() { return _layout_spacer__WEBPACK_IMPORTED_MODULE_14__["Spacer"]; });
 
-/* harmony import */ var _layout_layout__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./layout/layout */ "./src/components/layout/layout.ts");
+/* harmony import */ var _layout_layout__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./layout/layout */ "./dist/components/layout/layout.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LayoutComponent", function() { return _layout_layout__WEBPACK_IMPORTED_MODULE_15__["LayoutComponent"]; });
 
-/* harmony import */ var _axes_two_dimensional_axes__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./axes/two-dimensional-axes */ "./src/components/axes/two-dimensional-axes.ts");
+/* harmony import */ var _axes_two_dimensional_axes__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./axes/two-dimensional-axes */ "./dist/components/axes/two-dimensional-axes.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TwoDimensionalAxes", function() { return _axes_two_dimensional_axes__WEBPACK_IMPORTED_MODULE_16__["TwoDimensionalAxes"]; });
 
-/* harmony import */ var _axes_axis__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./axes/axis */ "./src/components/axes/axis.ts");
+/* harmony import */ var _axes_axis__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./axes/axis */ "./dist/components/axes/axis.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Axis", function() { return _axes_axis__WEBPACK_IMPORTED_MODULE_17__["Axis"]; });
 
-/* harmony import */ var _axes_grid__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./axes/grid */ "./src/components/axes/grid.ts");
+/* harmony import */ var _axes_grid__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./axes/grid */ "./dist/components/axes/grid.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Grid", function() { return _axes_grid__WEBPACK_IMPORTED_MODULE_18__["Grid"]; });
 
-/* harmony import */ var _axes_zero_line__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./axes/zero-line */ "./src/components/axes/zero-line.ts");
+/* harmony import */ var _axes_zero_line__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./axes/zero-line */ "./dist/components/axes/zero-line.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ZeroLine", function() { return _axes_zero_line__WEBPACK_IMPORTED_MODULE_19__["ZeroLine"]; });
 
 
@@ -5912,24 +5913,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+//# sourceMappingURL=../../src/components/index.js.map
 
 /***/ }),
 
-/***/ "./src/components/layout/layout.ts":
-/*!*****************************************!*\
-  !*** ./src/components/layout/layout.ts ***!
-  \*****************************************/
+/***/ "./dist/components/layout/layout.js":
+/*!******************************************!*\
+  !*** ./dist/components/layout/layout.js ***!
+  \******************************************/
 /*! exports provided: LayoutComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LayoutComponent", function() { return LayoutComponent; });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
-/* harmony import */ var _interfaces_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces/index */ "./src/interfaces/index.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
-/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services */ "./src/services/index.ts");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./dist/components/component.js");
+/* harmony import */ var _interfaces_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../interfaces/index */ "./dist/interfaces/index.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services */ "./dist/services/index.js");
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
 /* harmony import */ var d3_hierarchy__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-hierarchy */ "../../node_modules/d3-hierarchy/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
@@ -6121,22 +6122,22 @@ var LayoutComponent = /** @class */ (function (_super) {
     return LayoutComponent;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
-
+//# sourceMappingURL=../../../src/components/layout/layout.js.map
 
 /***/ }),
 
-/***/ "./src/components/layout/spacer.ts":
-/*!*****************************************!*\
-  !*** ./src/components/layout/spacer.ts ***!
-  \*****************************************/
+/***/ "./dist/components/layout/spacer.js":
+/*!******************************************!*\
+  !*** ./dist/components/layout/spacer.js ***!
+  \******************************************/
 /*! exports provided: Spacer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Spacer", function() { return Spacer; });
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./src/components/component.ts");
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../configuration */ "./src/configuration.ts");
+/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component */ "./dist/components/component.js");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../configuration */ "./dist/configuration.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -6171,14 +6172,14 @@ var Spacer = /** @class */ (function (_super) {
     return Spacer;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
 
-
+//# sourceMappingURL=../../../src/components/layout/spacer.js.map
 
 /***/ }),
 
-/***/ "./src/configuration.ts":
-/*!******************************!*\
-  !*** ./src/configuration.ts ***!
-  \******************************/
+/***/ "./dist/configuration.js":
+/*!*******************************!*\
+  !*** ./dist/configuration.js ***!
+  \*******************************/
 /*! exports provided: legend, grid, baseTooltip, axisChartTooltip, barChartTooltip, options, lines, transitions, axis, spacers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6194,8 +6195,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transitions", function() { return transitions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "axis", function() { return axis; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "spacers", function() { return spacers; });
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
-/* harmony import */ var _interfaces_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interfaces/index */ "./src/interfaces/index.ts");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./dist/tools.js");
+/* harmony import */ var _interfaces_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interfaces/index */ "./dist/interfaces/index.js");
 
 
 /*
@@ -6445,21 +6446,21 @@ var spacers = {
         size: 24
     }
 };
-
+//# sourceMappingURL=../src/configuration.js.map
 
 /***/ }),
 
-/***/ "./src/index.ts":
-/*!**********************!*\
-  !*** ./src/index.ts ***!
-  \**********************/
+/***/ "./dist/index.js":
+/*!***********************!*\
+  !*** ./dist/index.js ***!
+  \***********************/
 /*! exports provided: interfaces, configurations, defaultColors, colorPalettes, SimpleBarChart, GroupedBarChart, StackedBarChart, BubbleChart, LineChart, ScatterChart, PieChart, DonutChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultColors", function() { return defaultColors; });
-/* harmony import */ var _charts_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./charts/index */ "./src/charts/index.ts");
+/* harmony import */ var _charts_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./charts/index */ "./dist/charts/index.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SimpleBarChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["SimpleBarChart"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GroupedBarChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["GroupedBarChart"]; });
@@ -6476,11 +6477,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DonutChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["DonutChart"]; });
 
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./configuration */ "./dist/configuration.js");
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "configurations", function() { return _configuration__WEBPACK_IMPORTED_MODULE_1__; });
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./interfaces */ "./dist/interfaces/index.js");
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "interfaces", function() { return _interfaces__WEBPACK_IMPORTED_MODULE_2__; });
-/* harmony import */ var _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/colorPalettes */ "./src/services/colorPalettes.ts");
+/* harmony import */ var _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/colorPalettes */ "./dist/services/colorPalettes.js");
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "colorPalettes", function() { return _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__; });
 
 // Configs & interfaces
@@ -6490,14 +6491,14 @@ __webpack_require__.r(__webpack_exports__);
 // TODO 1.0 - Remove deprecated API
 var defaultColors = _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__["DEFAULT"];
 
-
+//# sourceMappingURL=../src/index.js.map
 
 /***/ }),
 
-/***/ "./src/interfaces/a11y.ts":
-/*!********************************!*\
-  !*** ./src/interfaces/a11y.ts ***!
-  \********************************/
+/***/ "./dist/interfaces/a11y.js":
+/*!*********************************!*\
+  !*** ./dist/interfaces/a11y.js ***!
+  \*********************************/
 /*! exports provided: Roles */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6511,14 +6512,14 @@ var Roles;
     Roles["GRAPHICS_SYMBOL"] = "graphics-symbol";
     Roles["GROUP"] = "group";
 })(Roles || (Roles = {}));
-
+//# sourceMappingURL=../../src/interfaces/a11y.js.map
 
 /***/ }),
 
-/***/ "./src/interfaces/enums.ts":
-/*!*********************************!*\
-  !*** ./src/interfaces/enums.ts ***!
-  \*********************************/
+/***/ "./dist/interfaces/enums.js":
+/*!**********************************!*\
+  !*** ./dist/interfaces/enums.js ***!
+  \**********************************/
 /*! exports provided: Events, ChartTheme, AxisPositions, CartesianOrientations, AxisTypes, ScaleTypes, TooltipPosition, TooltipTypes, LegendPositions, LegendOrientations, LayoutDirection, LayoutGrowth, CalloutDirections */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6537,7 +6538,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LayoutDirection", function() { return LayoutDirection; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LayoutGrowth", function() { return LayoutGrowth; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CalloutDirections", function() { return CalloutDirections; });
-/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./events */ "./src/interfaces/events.ts");
+/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./events */ "./dist/interfaces/events.js");
 
 var Events = _events__WEBPACK_IMPORTED_MODULE_0__;
 /**
@@ -6649,14 +6650,14 @@ var CalloutDirections;
     CalloutDirections["LEFT"] = "left";
     CalloutDirections["RIGHT"] = "right";
 })(CalloutDirections || (CalloutDirections = {}));
-
+//# sourceMappingURL=../../src/interfaces/enums.js.map
 
 /***/ }),
 
-/***/ "./src/interfaces/events.ts":
-/*!**********************************!*\
-  !*** ./src/interfaces/events.ts ***!
-  \**********************************/
+/***/ "./dist/interfaces/events.js":
+/*!***********************************!*\
+  !*** ./dist/interfaces/events.js ***!
+  \***********************************/
 /*! exports provided: Pie, Bar, Scatter, Line */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6706,23 +6707,23 @@ var Line;
     Line["POINT_CLICK"] = "scatter-click";
     Line["POINT_MOUSEOUT"] = "scatter-mouseout";
 })(Line || (Line = {}));
-
+//# sourceMappingURL=../../src/interfaces/events.js.map
 
 /***/ }),
 
-/***/ "./src/interfaces/index.ts":
-/*!*********************************!*\
-  !*** ./src/interfaces/index.ts ***!
-  \*********************************/
+/***/ "./dist/interfaces/index.js":
+/*!**********************************!*\
+  !*** ./dist/interfaces/index.js ***!
+  \**********************************/
 /*! exports provided: Roles, Events, ChartTheme, AxisPositions, CartesianOrientations, AxisTypes, ScaleTypes, TooltipPosition, TooltipTypes, LegendPositions, LegendOrientations, LayoutDirection, LayoutGrowth, CalloutDirections */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _a11y__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./a11y */ "./src/interfaces/a11y.ts");
+/* harmony import */ var _a11y__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./a11y */ "./dist/interfaces/a11y.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Roles", function() { return _a11y__WEBPACK_IMPORTED_MODULE_0__["Roles"]; });
 
-/* harmony import */ var _enums__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./enums */ "./src/interfaces/enums.ts");
+/* harmony import */ var _enums__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./enums */ "./dist/interfaces/enums.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Events", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["Events"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ChartTheme", function() { return _enums__WEBPACK_IMPORTED_MODULE_1__["ChartTheme"]; });
@@ -6751,24 +6752,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+//# sourceMappingURL=../../src/interfaces/index.js.map
 
 /***/ }),
 
-/***/ "./src/model-pie.ts":
-/*!**************************!*\
-  !*** ./src/model-pie.ts ***!
-  \**************************/
+/***/ "./dist/model-pie.js":
+/*!***************************!*\
+  !*** ./dist/model-pie.js ***!
+  \***************************/
 /*! exports provided: PieChartModel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PieChartModel", function() { return PieChartModel; });
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
-/* harmony import */ var _model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./model */ "./src/model.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
-/* harmony import */ var _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/colorPalettes */ "./src/services/colorPalettes.ts");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./configuration */ "./dist/configuration.js");
+/* harmony import */ var _model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./model */ "./dist/model.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tools */ "./dist/tools.js");
+/* harmony import */ var _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/colorPalettes */ "./dist/services/colorPalettes.js");
 /* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -6905,24 +6906,24 @@ var PieChartModel = /** @class */ (function (_super) {
     return PieChartModel;
 }(_model__WEBPACK_IMPORTED_MODULE_1__["ChartModel"]));
 
-
+//# sourceMappingURL=../src/model-pie.js.map
 
 /***/ }),
 
-/***/ "./src/model-simple-bar.ts":
-/*!*********************************!*\
-  !*** ./src/model-simple-bar.ts ***!
-  \*********************************/
+/***/ "./dist/model-simple-bar.js":
+/*!**********************************!*\
+  !*** ./dist/model-simple-bar.js ***!
+  \**********************************/
 /*! exports provided: SimpleBarChartModel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SimpleBarChartModel", function() { return SimpleBarChartModel; });
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
-/* harmony import */ var _model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./model */ "./src/model.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
-/* harmony import */ var _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/colorPalettes */ "./src/services/colorPalettes.ts");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./configuration */ "./dist/configuration.js");
+/* harmony import */ var _model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./model */ "./dist/model.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tools */ "./dist/tools.js");
+/* harmony import */ var _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/colorPalettes */ "./dist/services/colorPalettes.js");
 /* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -7011,23 +7012,23 @@ var SimpleBarChartModel = /** @class */ (function (_super) {
     return SimpleBarChartModel;
 }(_model__WEBPACK_IMPORTED_MODULE_1__["ChartModel"]));
 
-
+//# sourceMappingURL=../src/model-simple-bar.js.map
 
 /***/ }),
 
-/***/ "./src/model.ts":
-/*!**********************!*\
-  !*** ./src/model.ts ***!
-  \**********************/
+/***/ "./dist/model.js":
+/*!***********************!*\
+  !*** ./dist/model.js ***!
+  \***********************/
 /*! exports provided: ChartModel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChartModel", function() { return ChartModel; });
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./configuration */ "./src/configuration.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./src/tools.ts");
-/* harmony import */ var _services_colorPalettes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/colorPalettes */ "./src/services/colorPalettes.ts");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./configuration */ "./dist/configuration.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./dist/tools.js");
+/* harmony import */ var _services_colorPalettes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/colorPalettes */ "./dist/services/colorPalettes.js");
 /* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/src/index.js");
 // Internal Imports
 
@@ -7256,14 +7257,25 @@ var ChartModel = /** @class */ (function () {
     return ChartModel;
 }());
 
-
+//# sourceMappingURL=../src/model.js.map
 
 /***/ }),
 
-/***/ "./src/services/colorPalettes.ts":
-/*!***************************************!*\
-  !*** ./src/services/colorPalettes.ts ***!
-  \***************************************/
+/***/ "./dist/package.json":
+/*!***************************!*\
+  !*** ./dist/package.json ***!
+  \***************************/
+/*! exports provided: name, version, description, main, module, scripts, repository, keywords, author, license, dependencies, peerDependencies, devDependencies, publishConfig, maintainers, contributors, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"name\":\"@carbon/charts\",\"version\":\"0.29.2\",\"description\":\"Carbon charting components\",\"main\":\"./dist/bundle.js\",\"module\":\"./dist/index.js\",\"scripts\":{\"demo:server\":\"yarn build && concurrently npm:demo:watch-src npm:demo:watch\",\"demo:watch\":\"webpack-dev-server --config webpack.config.js --watch\",\"demo:watch-src\":\"tsc -b src -w\",\"demo:build\":\"yarn build && webpack --config webpack.config.js && yarn run docs:build\",\"docs:build\":\"typedoc --out ./demo/bundle/documentation ./src/index.ts\",\"build\":\"bash build.sh\",\"postinstall\":\"bash build-vendor.sh\",\"lint\":\"tslint -p tsconfig.json -c tslint.json\",\"test\":\"karma start --single-run\",\"test:watch\":\"karma start --no-single-run\",\"clean\":\"rm -rf dist demo/bundle\"},\"repository\":{\"type\":\"git\",\"url\":\"git@github.com:IBM/carbon-charts.git\"},\"keywords\":[\"carbon\",\"charts\",\"dataviz\",\"data-visualization\",\"visualizations\",\"d3\",\"svg\",\"component\",\"components\",\"css\",\"html\",\"ibm\",\"typescript\",\"javascript\",\"js\",\"library\",\"pattern\",\"patterns\",\"sass\",\"scss\"],\"author\":\"IBM\",\"license\":\"Apache-2.0\",\"dependencies\":{\"@carbon/utils-position\":\"1.1.1\",\"babel-polyfill\":\"6.26.0\",\"carbon-components\":\"10.5.0\",\"date-fns\":\"2.8.1\",\"lodash-es\":\"4.17.15\",\"resize-observer-polyfill\":\"1.5.0\"},\"peerDependencies\":{\"d3\":\">=5.0.0 <=5.14.2\"},\"devDependencies\":{\"@carbon/colors\":\"10.4.0\",\"@carbon/import-once\":\"10.3.0\",\"@carbon/layout\":\"10.5.0\",\"@carbon/motion\":\"10.4.0\",\"@carbon/themes\":\"10.4.0\",\"@carbon/type\":\"10.5.1\",\"@rollup/plugin-json\":\"4.0.2\",\"@types/d3\":\"4.11.0\",\"@types/jasmine\":\"2.8.7\",\"@types/karma\":\"3.0.2\",\"@types/node\":\"12.11.7\",\"babel-polyfill\":\"6.26.0\",\"codesandbox\":\"2.1.11\",\"concurrently\":\"5.1.0\",\"copy-webpack-plugin\":\"4.5.2\",\"css-loader\":\"0.28.7\",\"d3\":\"5.14.2\",\"extract-text-webpack-plugin\":\"3.0.2\",\"file-loader\":\"1.1.5\",\"html-loader\":\"0.5.1\",\"html-webpack-exclude-assets-plugin\":\"0.0.7\",\"html-webpack-plugin\":\"3.2.0\",\"jasmine-core\":\"3.4.0\",\"karma\":\"4.0.1\",\"karma-chrome-launcher\":\"2.2.0\",\"karma-firefox-launcher\":\"1.1.0\",\"karma-jasmine\":\"2.0.1\",\"karma-safari-launcher\":\"1.0.0\",\"karma-webpack\":\"4.0.2\",\"lerna\":\"3.13.4\",\"mini-css-extract-plugin\":\"0.9.0\",\"raw-loader\":\"0.5.1\",\"rollup\":\"1.27.10\",\"rollup-plugin-commonjs\":\"10.1.0\",\"rollup-plugin-node-resolve\":\"5.2.0\",\"rollup-plugin-terser\":\"5.1.2\",\"sass\":\"1.25.0\",\"sass-loader\":\"8.0.0\",\"style-loader\":\"0.19.0\",\"ts-loader\":\"6.2.1\",\"tslint\":\"5.20.1\",\"tslint-loader\":\"3.5.3\",\"typedoc\":\"0.11.1\",\"typescript\":\"3.7.5\",\"url-loader\":\"0.6.2\",\"webpack\":\"4.41.0\",\"webpack-cli\":\"3.3.9\",\"webpack-dev-server\":\"3.7.0\"},\"publishConfig\":{\"directory\":\"dist\",\"access\":\"public\"},\"maintainers\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}],\"contributors\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}]}");
+
+/***/ }),
+
+/***/ "./dist/services/colorPalettes.js":
+/*!****************************************!*\
+  !*** ./dist/services/colorPalettes.js ***!
+  \****************************************/
 /*! exports provided: WHITE, DARK, G10, G90, G100, DEFAULT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7275,7 +7287,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G90", function() { return G90; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G100", function() { return G100; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT", function() { return DEFAULT; });
-/* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./src/services/colors.ts");
+/* harmony import */ var _colors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colors */ "./dist/services/colors.js");
 
 // TODO - Some hardcoded values aren't available
 // in @carbon/colors yet. We should look at adding those
@@ -7316,14 +7328,14 @@ var G10 = WHITE;
 var G90 = DARK;
 var G100 = DARK;
 var DEFAULT = WHITE;
-
+//# sourceMappingURL=../../src/services/colorPalettes.js.map
 
 /***/ }),
 
-/***/ "./src/services/colors.ts":
-/*!********************************!*\
-  !*** ./src/services/colors.ts ***!
-  \********************************/
+/***/ "./dist/services/colors.js":
+/*!*********************************!*\
+  !*** ./dist/services/colors.js ***!
+  \*********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7341,14 +7353,14 @@ var getColor = function (obj, shade) { return obj[shade]; };
     red: function (shade) { return getColor(_carbon_colors__WEBPACK_IMPORTED_MODULE_0__["red"], shade); },
     teal: function (shade) { return getColor(_carbon_colors__WEBPACK_IMPORTED_MODULE_0__["teal"], shade); }
 });
-
+//# sourceMappingURL=../../src/services/colors.js.map
 
 /***/ }),
 
-/***/ "./src/services/curves.ts":
-/*!********************************!*\
-  !*** ./src/services/curves.ts ***!
-  \********************************/
+/***/ "./dist/services/curves.js":
+/*!*********************************!*\
+  !*** ./dist/services/curves.js ***!
+  \*********************************/
 /*! exports provided: Curves */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7356,7 +7368,7 @@ var getColor = function (obj, shade) { return obj[shade]; };
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Curves", function() { return Curves; });
 /* harmony import */ var d3_shape__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-shape */ "../../node_modules/d3-shape/src/index.js");
-/* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./service */ "./src/services/service.ts");
+/* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./service */ "./dist/services/service.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -7431,23 +7443,23 @@ var Curves = /** @class */ (function (_super) {
     return Curves;
 }(_service__WEBPACK_IMPORTED_MODULE_1__["Service"]));
 
-
+//# sourceMappingURL=../../src/services/curves.js.map
 
 /***/ }),
 
-/***/ "./src/services/essentials/dom-utils.ts":
-/*!**********************************************!*\
-  !*** ./src/services/essentials/dom-utils.ts ***!
-  \**********************************************/
+/***/ "./dist/services/essentials/dom-utils.js":
+/*!***********************************************!*\
+  !*** ./dist/services/essentials/dom-utils.js ***!
+  \***********************************************/
 /*! exports provided: DOMUtils */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DOMUtils", function() { return DOMUtils; });
-/* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service */ "./src/services/service.ts");
+/* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service */ "./dist/services/service.js");
 /* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
 /* harmony import */ var carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! carbon-components/src/globals/js/settings */ "../../node_modules/carbon-components/src/globals/js/settings.js");
 /* harmony import */ var carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(carbon_components_src_globals_js_settings__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var resize_observer_polyfill__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! resize-observer-polyfill */ "../../node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js");
@@ -7643,21 +7655,21 @@ var DOMUtils = /** @class */ (function (_super) {
     return DOMUtils;
 }(_service__WEBPACK_IMPORTED_MODULE_0__["Service"]));
 
-
+//# sourceMappingURL=../../../src/services/essentials/dom-utils.js.map
 
 /***/ }),
 
-/***/ "./src/services/essentials/events.ts":
-/*!*******************************************!*\
-  !*** ./src/services/essentials/events.ts ***!
-  \*******************************************/
+/***/ "./dist/services/essentials/events.js":
+/*!********************************************!*\
+  !*** ./dist/services/essentials/events.js ***!
+  \********************************************/
 /*! exports provided: Events */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Events", function() { return Events; });
-/* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service */ "./src/services/service.ts");
+/* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service */ "./dist/services/service.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -7710,23 +7722,23 @@ var Events = /** @class */ (function (_super) {
     return Events;
 }(_service__WEBPACK_IMPORTED_MODULE_0__["Service"]));
 
-
+//# sourceMappingURL=../../../src/services/essentials/events.js.map
 
 /***/ }),
 
-/***/ "./src/services/essentials/transitions.ts":
-/*!************************************************!*\
-  !*** ./src/services/essentials/transitions.ts ***!
-  \************************************************/
+/***/ "./dist/services/essentials/transitions.js":
+/*!*************************************************!*\
+  !*** ./dist/services/essentials/transitions.js ***!
+  \*************************************************/
 /*! exports provided: Transitions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Transitions", function() { return Transitions; });
-/* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service */ "./src/services/service.ts");
-/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../configuration */ "./src/configuration.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./src/tools.ts");
+/* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../service */ "./dist/services/service.js");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../configuration */ "./dist/configuration.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
 /* harmony import */ var d3_transition__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-transition */ "../../node_modules/d3-transition/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -7790,32 +7802,32 @@ var Transitions = /** @class */ (function (_super) {
     return Transitions;
 }(_service__WEBPACK_IMPORTED_MODULE_0__["Service"]));
 
-
+//# sourceMappingURL=../../../src/services/essentials/transitions.js.map
 
 /***/ }),
 
-/***/ "./src/services/index.ts":
-/*!*******************************!*\
-  !*** ./src/services/index.ts ***!
-  \*******************************/
+/***/ "./dist/services/index.js":
+/*!********************************!*\
+  !*** ./dist/services/index.js ***!
+  \********************************/
 /*! exports provided: DOMUtils, Events, Transitions, CartesianScales, Curves */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _essentials_dom_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./essentials/dom-utils */ "./src/services/essentials/dom-utils.ts");
+/* harmony import */ var _essentials_dom_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./essentials/dom-utils */ "./dist/services/essentials/dom-utils.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DOMUtils", function() { return _essentials_dom_utils__WEBPACK_IMPORTED_MODULE_0__["DOMUtils"]; });
 
-/* harmony import */ var _essentials_events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./essentials/events */ "./src/services/essentials/events.ts");
+/* harmony import */ var _essentials_events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./essentials/events */ "./dist/services/essentials/events.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Events", function() { return _essentials_events__WEBPACK_IMPORTED_MODULE_1__["Events"]; });
 
-/* harmony import */ var _essentials_transitions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./essentials/transitions */ "./src/services/essentials/transitions.ts");
+/* harmony import */ var _essentials_transitions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./essentials/transitions */ "./dist/services/essentials/transitions.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Transitions", function() { return _essentials_transitions__WEBPACK_IMPORTED_MODULE_2__["Transitions"]; });
 
-/* harmony import */ var _scales_cartesian__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./scales-cartesian */ "./src/services/scales-cartesian.ts");
+/* harmony import */ var _scales_cartesian__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./scales-cartesian */ "./dist/services/scales-cartesian.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CartesianScales", function() { return _scales_cartesian__WEBPACK_IMPORTED_MODULE_3__["CartesianScales"]; });
 
-/* harmony import */ var _curves__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./curves */ "./src/services/curves.ts");
+/* harmony import */ var _curves__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./curves */ "./dist/services/curves.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Curves", function() { return _curves__WEBPACK_IMPORTED_MODULE_4__["Curves"]; });
 
 // Essentials
@@ -7825,23 +7837,23 @@ __webpack_require__.r(__webpack_exports__);
 // MISC
 
 
-
+//# sourceMappingURL=../../src/services/index.js.map
 
 /***/ }),
 
-/***/ "./src/services/scales-cartesian.ts":
-/*!******************************************!*\
-  !*** ./src/services/scales-cartesian.ts ***!
-  \******************************************/
+/***/ "./dist/services/scales-cartesian.js":
+/*!*******************************************!*\
+  !*** ./dist/services/scales-cartesian.js ***!
+  \*******************************************/
 /*! exports provided: CartesianScales */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CartesianScales", function() { return CartesianScales; });
-/* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./service */ "./src/services/service.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../interfaces */ "./src/interfaces/index.ts");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./src/tools.ts");
+/* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./service */ "./dist/services/service.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../interfaces */ "./dist/interfaces/index.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./dist/tools.js");
 /* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/src/index.js");
 /* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-array */ "../../node_modules/d3-array/src/index.js");
 /* harmony import */ var d3_time_format__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-time-format */ "../../node_modules/d3-time-format/src/index.js");
@@ -8137,14 +8149,14 @@ var CartesianScales = /** @class */ (function (_super) {
     return CartesianScales;
 }(_service__WEBPACK_IMPORTED_MODULE_0__["Service"]));
 
-
+//# sourceMappingURL=../../src/services/scales-cartesian.js.map
 
 /***/ }),
 
-/***/ "./src/services/service.ts":
-/*!*********************************!*\
-  !*** ./src/services/service.ts ***!
-  \*********************************/
+/***/ "./dist/services/service.js":
+/*!**********************************!*\
+  !*** ./dist/services/service.js ***!
+  \**********************************/
 /*! exports provided: Service */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -8170,21 +8182,21 @@ var Service = /** @class */ (function () {
     return Service;
 }());
 
-
+//# sourceMappingURL=../../src/services/service.js.map
 
 /***/ }),
 
-/***/ "./src/tools.ts":
-/*!**********************!*\
-  !*** ./src/tools.ts ***!
-  \**********************/
+/***/ "./dist/tools.js":
+/*!***********************!*\
+  !*** ./dist/tools.js ***!
+  \***********************/
 /*! exports provided: Tools */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tools", function() { return Tools; });
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./interfaces */ "./src/interfaces/index.ts");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./interfaces */ "./dist/interfaces/index.js");
 /* harmony import */ var lodash_es__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash-es */ "../../node_modules/lodash-es/lodash.js");
 // Internal imports
 
@@ -8381,7 +8393,7 @@ var Tools;
         return "M" + x0 + "," + y0 + "L" + x0 + "," + y1 + "L" + x1 + "," + y1 + "L" + x1 + "," + y0 + "L" + x0 + "," + y0;
     };
 })(Tools || (Tools = {}));
-
+//# sourceMappingURL=../src/tools.js.map
 
 /***/ })
 

@@ -1,4 +1,4 @@
-(window["webpackJsonpCharts"] = window["webpackJsonpCharts"] || []).push([["vendors~index"],{
+(window["webpackJsonpChartsDemo"] = window["webpackJsonpChartsDemo"] || []).push([["vendors~index"],{
 
 /***/ "../../node_modules/@carbon/colors/es/index.js":
 /*!*****************************************************************************************************!*\
