@@ -1,11 +1,17 @@
 // Internal Imports
 import { Component } from "../component";
-import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
+import textWidth from "text-width";
 
 // D3 Imports
-import { mouse, select } from "d3-selection";
-import { TooltipTypes } from "../../interfaces";
+import { mouse, event as d3Event } from "d3-selection";
+import { TooltipTypes, Events } from "../../interfaces";
+
+const THRESHOLD = 5;
+
+function pointIsMatch(dx: number, x: number) {
+	return dx > x - THRESHOLD && dx < x + THRESHOLD;
+}
 
 export class Ruler extends Component {
 	type = "ruler";
@@ -14,37 +20,44 @@ export class Ruler extends Component {
 	render() {
 		// Draw the backdrop
 		this.drawBackdrop();
+		this.addBackdropEventListeners();
 		DOMUtils.appendOrSelect(this.backdrop, "g.x.grid");
 		DOMUtils.appendOrSelect(this.backdrop, "g.y.grid");
-
-		if (Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) {
-			this.addGridEventListeners();
-		}
 	}
 
 	showRuler([x, y]: [number, number]) {
 		const svg = this.parent;
 		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler").attr("opacity", 1);
 		const line = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
+		const dataPoints = svg.selectAll("[role=graphics-symbol]");
 
+		// TODO: need to use right accessor
 		const data = Array.prototype.concat(
 			...this.model.getData().datasets.map(dataset => dataset.data.map(d => d.date))
 		);
+
 		const height = Number(this.backdrop.attr("height"));
 		const scale = this.services.cartesianScales.getMainXScale();
-		const dataPoints = data.map(d => Number(scale(d)));
-		const values = dataPoints.filter(d => d > x - 3 && d < x + 3);
+		const values = data.filter(d => pointIsMatch(Number(scale(d)), x));
 		const highlightItems = values.map(v =>
-			this.services.cartesianScales.getDataFromDomain(scale.invert(v))
+			this.services.cartesianScales.getDataFromDomain(v)
 		)[0];
 
 		if (highlightItems && highlightItems.length > 0) {
+			const hoveredElements = dataPoints.filter(d => pointIsMatch(scale(d.date), x));
+			hoveredElements.dispatch("mouseover");
+
 			this.services.events.dispatchEvent("show-tooltip", {
 				hoveredElement: line,
 				multidata: highlightItems,
 				type: TooltipTypes.GRIDLINE
 			});
+
+		} else {
+			dataPoints.dispatch("mouseout");
 		}
+
+		// set line position
 		line.attr("y1", 0)
 			.attr("y2", height)
 			.attr("x1", x)
@@ -57,8 +70,10 @@ export class Ruler extends Component {
 
 		// append axis tooltip
 		const axisTooltip = DOMUtils.appendOrSelect(ruler, "g.ruler-axis-tooltip");
-		const axisTooltipValue = `${scale.invert(x)}`.substring(0, 10);
-		const axisTooltipWidth = 70;
+		const axisTooltipValue = `${scale.invert(x)}`.substr(0, 10);
+		const axisTooltipWidth = textWidth(axisTooltipValue, {
+			size: 12
+		});
 		const axisTooltipHeight = 20;
 		const axisTooltipOffset = 5;
 
@@ -84,7 +99,7 @@ export class Ruler extends Component {
 	/**
 	 * Adds the listener on the X grid to trigger multiple point tooltips along the x axis.
 	 */
-	addGridEventListeners() {
+	addBackdropEventListeners() {
 		const self = this;
 
 		this.backdrop
