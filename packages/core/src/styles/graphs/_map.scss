@@ -1,0 +1,13 @@
+.#{$prefix}--#{$charts-prefix}--map path.country {
+  @if $carbon--theme == $carbon--theme--g90 {
+    fill: #171717;
+    stroke: $ui-03;
+  } @else if $carbon--theme == $carbon--theme--g100{
+    fill: #020202;
+    stroke: $ui-03;
+  } @else {
+    fill: $ui-01;
+    stroke: $ui-04;
+  }
+  stroke-width: 0.8;
+}

@@ -38,11 +38,10 @@ export class Map extends Component {
     const mapPath = mapContainer.selectAll("path").data(features)
       .enter().append("path")
       .attr("class", "country")
-      .attr("d", path)
-      .attr("fill", "gray");
+      .attr("d", path);
     
     // resize the path to fit map frame
-    mapPath.attr('transform', `scale(0.8, 0.7)`);
+    mapPath.attr('transform', `scale(0.77, 0.7)`);
 
     // zoom in
     mapContainer.call(zoom().on('zoom', () => {
