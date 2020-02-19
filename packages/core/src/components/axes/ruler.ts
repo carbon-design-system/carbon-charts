@@ -30,8 +30,10 @@ export class Ruler extends Component {
 		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler").attr("opacity", 1);
 		const line = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
 		const dataPoints = svg.selectAll("[role=graphics-symbol]");
+		const height = Number(this.backdrop.attr("height"));
+		const scale = this.services.cartesianScales.getMainXScale();
+		let lineX = x;
 
-		// TODO: need to use right accessor
 		const data = Array.prototype.concat(
 			...this.model
 				.getData()
@@ -42,14 +44,14 @@ export class Ruler extends Component {
 				)
 		);
 
-		const height = Number(this.backdrop.attr("height"));
-		const scale = this.services.cartesianScales.getMainXScale();
 		const values = data.filter(d => pointIsMatch(d, x));
-		const highlightItems = values.map(v =>
-			this.services.cartesianScales.getDataFromDomain(scale.invert(v))
-		)[0];
 
-		if (highlightItems && highlightItems.length > 0) {
+		// some data point match
+		if (values.length > 0) {
+			const highlightItems = values.map(v =>
+				this.services.cartesianScales.getDataFromDomain(scale.invert(v))
+			)[0];
+
 			const hoveredElements = dataPoints.filter((d, i) =>
 				pointIsMatch(this.services.cartesianScales.getDomainValue(d, i), x)
 			);
@@ -61,15 +63,16 @@ export class Ruler extends Component {
 				multidata: highlightItems,
 				type: TooltipTypes.GRIDLINE
 			});
+
+			lineX = values[0];
 		} else {
 			dataPoints.dispatch("mouseout");
 		}
 
-		// set line position
 		line.attr("y1", 0)
 			.attr("y2", height)
-			.attr("x1", x)
-			.attr("x2", x);
+			.attr("x1", lineX)
+			.attr("x2", lineX);
 
 		// if scale can't be inverted don't show axis tooltip
 		if (!scale.invert) {
@@ -78,7 +81,7 @@ export class Ruler extends Component {
 
 		// append axis tooltip
 		const axisTooltip = DOMUtils.appendOrSelect(ruler, "g.ruler-axis-tooltip");
-		const axisTooltipValue = `${scale.invert(x)}`.substr(0, 10);
+		const axisTooltipValue = `${scale.invert(lineX)}`.substr(0, 10);
 		const axisTooltipWidth = textWidth(axisTooltipValue, {
 			size: 12
 		});
@@ -86,13 +89,13 @@ export class Ruler extends Component {
 		const axisTooltipOffset = 5;
 
 		DOMUtils.appendOrSelect(axisTooltip, "rect.axis-tooltip-box")
-			.attr("x", x - axisTooltipWidth / 2)
+			.attr("x", lineX - axisTooltipWidth / 2)
 			.attr("y", height + axisTooltipOffset)
 			.attr("width", axisTooltipWidth)
 			.attr("height", axisTooltipHeight);
 
 		DOMUtils.appendOrSelect(axisTooltip, "text.axis-tooltip-text")
-			.attr("x", x)
+			.attr("x", lineX)
 			.attr("y", height + axisTooltipOffset + axisTooltipHeight / 2)
 			.text(axisTooltipValue);
 	}
