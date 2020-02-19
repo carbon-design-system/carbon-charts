@@ -16,7 +16,7 @@ interface Options {
 export function isTickPrimary(tick: number, i: number, interval: string, options: Options): boolean {
 	const { showDayName } = options;
 	const isFirstTick = i === 0;
-	const hasANewWeekStarted = Number(format((new Date(tick)), "c")) === 1; // TODO: check that c is always 1 for monday
+	const hasANewWeekStarted = Number(format((new Date(tick)), "c")) === 2;
 	const isFirstQuarter = Number(format((new Date(tick)), "q")) === 1;
 
 	switch (interval) {
