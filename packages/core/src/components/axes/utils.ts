@@ -52,10 +52,11 @@ function getLocale(localeCode: string): Locale {
 // Return the formatted current tick
 export function formatTick(tick: number, i: number, interval: string, options: Options, axisOptions: AxisOptions): string {
 	const { showDayName } = options;
+	const intervalConsideringAlsoShowDayNameOption = interval === "daily" && showDayName ? "weekly" : interval;
 
 	const date = new Date(tick);
 	const customFormats = Tools.getProperty(axisOptions, "ticks", "timeIntervalFormats");
-	const defaultFormats = Configuration.axis.ticks.timeIntervalFormats[interval];
+	const defaultFormats = Configuration.axis.ticks.timeIntervalFormats[intervalConsideringAlsoShowDayNameOption];
 	const primary = Tools.getProperty(customFormats, interval, "primary") || defaultFormats.primary;
 	const secondary = Tools.getProperty(customFormats, interval, "secondary") || defaultFormats.secondary;
 	const localeCode = Tools.getProperty(customFormats, interval, "localeCode") || defaultFormats.localeCode;
