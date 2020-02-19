@@ -9,7 +9,7 @@
 		],
 		"sourceMap": true,
 		"mapRoot": "./",
-		"module": "es2015",
+		"module": "esnext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"outDir": "./dist/build",
