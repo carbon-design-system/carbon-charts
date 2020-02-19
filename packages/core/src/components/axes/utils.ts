@@ -33,6 +33,7 @@ export function isTickPrimary(tick: number, i: number, interval: string, options
 		case "monthly": return (isFirstTick || isYearChanged(tick));
 		case "quarterly": return (isFirstTick || isFirstQuarter);
 		case "yearly": return false;
+		default: throw new Error(`${interval} is not a valid time interval.`);
 	}
 }
 
