@@ -7,12 +7,10 @@ interface Options {
 	showDayName?: boolean;
 }
 
-const defaultOptions = { showDayName: false };
 const axisOptions = {};
 
-const format = (ticks: number[], timeInterval: string, axisOpt: AxisOptions, options: Options = defaultOptions): string[] => {
-	const opt = { ...defaultOptions, ...options };
-	return ticks.map((tick, i) => formatTick(tick, i, timeInterval, opt, axisOpt));
+const format = (ticks: number[], timeInterval: string, axisOpt: AxisOptions, showDayName = false): string[] => {
+	return ticks.map((tick, i) => formatTick(tick, i, timeInterval, showDayName, axisOpt));
 };
 
 const getTimestampsAndFormattedTicks = (dataset: Dataset) => {
@@ -164,7 +162,8 @@ it("should format ticks with timeInterval weekly", () => {
 	const { timestamps, formattedTicks } = getTimestampsAndFormattedTicks(dataset);
 	const timeInterval = computeTimeIntervalName(timestamps);
 	expect(timeInterval).toEqual("daily");
-	expect(format(timestamps, timeInterval, axisOptions, { showDayName: true })).toEqual(formattedTicks);
+	const showDayName = true;
+	expect(format(timestamps, timeInterval, axisOptions, showDayName)).toEqual(formattedTicks);
 });
 
 it("should format ticks with timeInterval monthly", () => {

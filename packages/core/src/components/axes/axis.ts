@@ -122,8 +122,8 @@ export class Axis extends Component {
 			// create the right ticks formatter
 			let formatter;
 			if (isTimeScaleType) {
-				const { options: formatOptions, timeInterval } = getTimeScaleInfo(axisOptions, axis);
-				formatter = (t: number, i: number) => formatTick(t, i, timeInterval, formatOptions, axisOptions);
+				const { showDayName, timeInterval } = getTimeScaleInfo(axisOptions, axis);
+				formatter = (t: number, i: number) => formatTick(t, i, timeInterval, showDayName, axisOptions);
 			} else {
 				formatter = Tools.getProperty(axisOptions, "ticks", "formatter");
 			}
@@ -197,7 +197,7 @@ export class Axis extends Component {
 
 		// Apply new axis to the axis element
 		if (isTimeScaleType) {
-			const { options: formatOptions, timeInterval } = getTimeScaleInfo(axisOptions, axis);
+			const { showDayName, timeInterval } = getTimeScaleInfo(axisOptions, axis);
 
 			if (animate) {
 				axisRef = axisRef.transition(this.services.transitions.getTransition("axis-update"));
@@ -207,7 +207,7 @@ export class Axis extends Component {
 			// Manipulate tick labels to make bold those that are in long format
 			const ticks = axisRef.selectAll("g.tick > text");
 			ticks.style("font-weight", (tickValue: number, i: number) => {
-				return isTickPrimary(tickValue, i, timeInterval, formatOptions) ? "bold" : "normal";
+				return isTickPrimary(tickValue, i, timeInterval, showDayName) ? "bold" : "normal";
 			});
 		} else {
 			if (!animate || !axisRefExists) {
@@ -268,12 +268,11 @@ export class Axis extends Component {
 }
 
 // Given the axis options and the timescale, returns
-// an object of options (showDayName) and the time interval
+// an object of showDayName and the time interval
 function getTimeScaleInfo(axisOptions: AxisOptions, scale: AxisScale<number>) {
 	const showDayName = Tools.getProperty(axisOptions, "ticks", "showDayName") !== null
 		? Tools.getProperty(axisOptions, "ticks", "showDayName")
 		: Configuration.axis.ticks.showDayName;
-	const options = { showDayName };
 	const timeInterval = computeTimeIntervalName(scale.tickValues());
-	return { options, timeInterval };
+	return { showDayName, timeInterval };
 }

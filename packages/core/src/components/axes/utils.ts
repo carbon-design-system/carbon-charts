@@ -8,13 +8,8 @@ import { AxisOptions } from "src/interfaces";
 
 const codes = Object.values(locales).map(locale => locale["code"]);
 
-interface Options {
-	showDayName: boolean;
-}
-
 // Return true if the tick is a primary tick, false otherwise
-export function isTickPrimary(tick: number, i: number, interval: string, options: Options): boolean {
-	const { showDayName } = options;
+export function isTickPrimary(tick: number, i: number, interval: string, showDayName): boolean {
 	const isFirstTick = i === 0;
 	const hasANewWeekStarted = Number(format((new Date(tick)), "c")) === 2;
 	const isFirstQuarter = Number(format((new Date(tick)), "q")) === 1;
@@ -50,8 +45,7 @@ function getLocale(localeCode: string): Locale {
 }
 
 // Return the formatted current tick
-export function formatTick(tick: number, i: number, interval: string, options: Options, axisOptions: AxisOptions): string {
-	const { showDayName } = options;
+export function formatTick(tick: number, i: number, interval: string, showDayName, axisOptions: AxisOptions): string {
 	const intervalConsideringAlsoShowDayNameOption = interval === "daily" && showDayName ? "weekly" : interval;
 
 	const date = new Date(tick);
@@ -60,7 +54,7 @@ export function formatTick(tick: number, i: number, interval: string, options: O
 	const primary = Tools.getProperty(customFormats, interval, "primary") || defaultFormats.primary;
 	const secondary = Tools.getProperty(customFormats, interval, "secondary") || defaultFormats.secondary;
 	const localeCode = Tools.getProperty(customFormats, interval, "localeCode") || defaultFormats.localeCode;
-	const formatString = isTickPrimary(tick, i, interval, options) ? primary : secondary;
+	const formatString = isTickPrimary(tick, i, interval, showDayName) ? primary : secondary;
 	const locale = getLocale(localeCode);
 
 	return format(date, formatString, { locale });
