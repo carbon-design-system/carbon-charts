@@ -5,6 +5,7 @@ import * as lineDemos from "./line";
 import * as pieDemos from "./pie";
 import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
+import * as timeSeriesAxisDemos from "./time-series-axis";
 
 export * from "./bar";
 export * from "./bubble";
@@ -158,71 +159,6 @@ let allDemoGroups = [
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart
 			},
-			{
-				options: lineDemos.lineTimeSeries15seconds12hOptions,
-				data: lineDemos.lineTimeSeriesData15seconds12h,
-				chartType: chartTypes.LineChart
-			},
-			{
-				options: lineDemos.lineTimeSeries15seconds24hOptions,
-				data: lineDemos.lineTimeSeriesData15seconds24h,
-				chartType: chartTypes.LineChart
-			},
-			{
-				options: lineDemos.lineTimeSeriesMinute12hOptions,
-				data: lineDemos.lineTimeSeriesDataMinute12h,
-				chartType: chartTypes.LineChart
-			},
-			{
-				options: lineDemos.lineTimeSeriesMinute24hOptions,
-				data: lineDemos.lineTimeSeriesDataMinute24h,
-				chartType: chartTypes.LineChart
-			},
-			{
-				options: lineDemos.lineTimeSeries30minutes12hOptions,
-				data: lineDemos.lineTimeSeriesData30minutes12h,
-				chartType: chartTypes.LineChart
-			},
-			{
-				options: lineDemos.lineTimeSeries30minutes24hOptions,
-				data: lineDemos.lineTimeSeriesData30minutes24h,
-				chartType: chartTypes.LineChart
-			},
-			{
-				options: lineDemos.lineTimeSeriesHourly12hOptions,
-				data: lineDemos.lineTimeSeriesDataHourly12h,
-				chartType: chartTypes.LineChart
-			},
-			{
-				options: lineDemos.lineTimeSeriesHourly24hOptions,
-				data: lineDemos.lineTimeSeriesDataHourly24h,
-				chartType: chartTypes.LineChart
-			},
-			{
-				data: lineDemos.lineTimeSeriesDataDailyShowDayNumber,
-				options: lineDemos.lineTimeSeriesDailyShowDayNumberOptions,
-				chartType: chartTypes.LineChart
-			},
-			{
-				data: lineDemos.lineTimeSeriesDataDailyShowDayName,
-				options: lineDemos.lineTimeSeriesDailyShowDayNameOptions,
-				chartType: chartTypes.LineChart
-			},
-			{
-				data: lineDemos.lineTimeSeriesDataMonthly,
-				options: lineDemos.lineTimeSeriesMonthlyOptions,
-				chartType: chartTypes.LineChart
-			},
-			{
-				data: lineDemos.lineTimeSeriesDataQuarterly,
-				options: lineDemos.lineTimeSeriesQuarterlyOptions,
-				chartType: chartTypes.LineChart
-			},
-			{
-				data: lineDemos.lineTimeSeriesDataYearly,
-				options: lineDemos.lineTimeSeriesYearlyOptions,
-				chartType: chartTypes.LineChart
-			},
 		]
 	},
 	{
@@ -263,6 +199,76 @@ let allDemoGroups = [
 				data: stepDemos.stepTimeSeriesData,
 				chartType: chartTypes.LineChart
 			}
+		]
+	},
+	{
+		title: "Time series axis",
+		demos: [
+			{
+				options: timeSeriesAxisDemos.lineTimeSeries15seconds12hOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesData15seconds12h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: timeSeriesAxisDemos.lineTimeSeries15seconds24hOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesData15seconds24h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: timeSeriesAxisDemos.lineTimeSeriesMinute12hOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataMinute12h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: timeSeriesAxisDemos.lineTimeSeriesMinute24hOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataMinute24h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: timeSeriesAxisDemos.lineTimeSeries30minutes12hOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesData30minutes12h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: timeSeriesAxisDemos.lineTimeSeries30minutes24hOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesData30minutes24h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: timeSeriesAxisDemos.lineTimeSeriesHourly12hOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataHourly12h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: timeSeriesAxisDemos.lineTimeSeriesHourly24hOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataHourly24h,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataDailyShowDayNumber,
+				options: timeSeriesAxisDemos.lineTimeSeriesDailyShowDayNumberOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataDailyShowDayName,
+				options: timeSeriesAxisDemos.lineTimeSeriesDailyShowDayNameOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataMonthly,
+				options: timeSeriesAxisDemos.lineTimeSeriesMonthlyOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataQuarterly,
+				options: timeSeriesAxisDemos.lineTimeSeriesQuarterlyOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataYearly,
+				options: timeSeriesAxisDemos.lineTimeSeriesYearlyOptions,
+				chartType: chartTypes.LineChart
+			},
 		]
 	}
 ] as any;
