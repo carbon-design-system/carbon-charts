@@ -293,7 +293,7 @@ export const axis = {
 		timeIntervalFormats: {
 			"15seconds": { primary: "MMM d, pp", secondary: "pp", localeCode: defaultLocaleCode },
 			"minute": { primary: "MMM d, p", secondary: "p", localeCode: defaultLocaleCode },
-			"30minutes": { primary: "MMM d, pp", secondary: "p", localeCode: defaultLocaleCode },
+			"30minutes": { primary: "MMM d, p", secondary: "p", localeCode: defaultLocaleCode },
 			"hourly": { primary: "MMM d, hh a", secondary: "hh a", localeCode: defaultLocaleCode },
 			"daily": { primary: "MMM d", secondary: "d", localeCode: defaultLocaleCode },
 			"weekly": { primary: "eee, MMM d", secondary: "eee", localeCode: defaultLocaleCode },
