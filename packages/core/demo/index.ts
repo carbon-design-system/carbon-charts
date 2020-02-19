@@ -143,13 +143,16 @@ const createChartContainer = demo => {
 
 // Initialize all charts
 demoGroups.forEach(demoGroup => {
+	const isTimeSeriesAxisDemoGroup = demoGroup.title === "Time series axis";
 	demoGroup.demos.forEach(demo => {
 		const holder = createChartContainer(demo);
 		if (holder) {
 			const ClassToInitialize = Charts[demo.chartType.vanilla];
 
 			// Add `height` to the chart options
-			demo.options.height = "500px";
+			// use a smaller height if you wnat only to show the "Time series axis"
+			const chartHeight = isTimeSeriesAxisDemoGroup ? 50 : 500;
+			demo.options.height = `${chartHeight}px`;
 
 			// Initialize chart
 			charts[demo.id] = new ClassToInitialize(
