@@ -9,7 +9,6 @@ import { AxisOptions } from "src/interfaces";
 const codes = Object.values(locales).map(locale => locale["code"]);
 
 interface Options {
-	hour12Format: boolean;
 	showDayName: boolean;
 }
 
@@ -29,7 +28,6 @@ export function isTickPrimary(tick: number, i: number, interval: string, options
 				// TODO: check that c is always 1 for monday
 				return (i === 0 || Number(format((new Date(tick)), "c")) === 1 || isYYYYChanged(tick));
 			}
-		// case "daily": return true;
 		case "monthly": return (i === 0 || isYYYYChanged(tick));
 		case "quarterly": return (i === 0 || Number(format((new Date(tick)), "q")) === 1);
 		case "yearly": return false;
@@ -50,7 +48,7 @@ function getLocale(localeCode: string): Locale {
 
 // Return the formatted current tick
 export function formatTick(tick: number, i: number, interval: string, options: Options, axisOptions: AxisOptions): string {
-	const { hour12Format, showDayName } = options;
+	const { showDayName } = options;
 
 	const date = new Date(tick);
 	const customFormats = Tools.getProperty(axisOptions, "ticks", "timeIntervalFormats");

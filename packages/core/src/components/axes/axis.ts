@@ -268,15 +268,12 @@ export class Axis extends Component {
 }
 
 // Given the axis options and the timescale, returns
-// an object of options (hour12Format, showDayName) and the time interval
+// an object of options (showDayName) and the time interval
 function getTimeScaleInfo(axisOptions: AxisOptions, scale: AxisScale<number>) {
-	const hour12Format = Tools.getProperty(axisOptions, "ticks", "hour12Format") !== null
-		? Tools.getProperty(axisOptions, "ticks", "hour12Format")
-		: Configuration.axis.ticks.hour12Format;
 	const showDayName = Tools.getProperty(axisOptions, "ticks", "showDayName") !== null
 		? Tools.getProperty(axisOptions, "ticks", "showDayName")
 		: Configuration.axis.ticks.showDayName;
-	const options = { hour12Format, showDayName };
+	const options = { showDayName };
 	const timeInterval = computeTimeIntervalName(scale.tickValues());
 	return { options, timeInterval };
 }

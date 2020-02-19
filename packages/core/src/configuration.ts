@@ -289,7 +289,6 @@ export const axis = {
 	ticks: {
 		number: 7,
 		rotateIfSmallerThan: 30,
-		hour12Format: true,
 		showDayName: false,
 		timeIntervalFormats: {
 			"15seconds": { primary: "MMM d, pp", secondary: "pp", localeCode: defaultLocaleCode },

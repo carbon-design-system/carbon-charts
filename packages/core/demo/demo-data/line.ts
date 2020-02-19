@@ -242,7 +242,6 @@ export const lineTimeSeries15seconds24hOptions = {
 		bottom: {
 			scaleType: "time",
 			primary: true,
-			ticks: { hour12Format: false },
 		},
 	},
 	curve: "curveMonotoneX"
@@ -294,7 +293,6 @@ export const lineTimeSeriesMinute24hOptions = {
 		bottom: {
 			scaleType: "time",
 			primary: true,
-			ticks: { hour12Format: false },
 			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
@@ -347,7 +345,6 @@ export const lineTimeSeries30minutes24hOptions = {
 		bottom: {
 			scaleType: "time",
 			primary: true,
-			ticks: { hour12Format: false },
 			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
@@ -400,7 +397,6 @@ export const lineTimeSeriesHourly24hOptions = {
 		bottom: {
 			scaleType: "time",
 			primary: true,
-			ticks: { hour12Format: false },
 			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
