@@ -4,8 +4,8 @@ import { DOMUtils } from "../../services";
 import textWidth from "text-width";
 
 // D3 Imports
-import { mouse, event as d3Event } from "d3-selection";
-import { TooltipTypes, Events } from "../../interfaces";
+import { mouse } from "d3-selection";
+import { TooltipTypes } from "../../interfaces";
 
 const THRESHOLD = 5;
 
@@ -33,18 +33,27 @@ export class Ruler extends Component {
 
 		// TODO: need to use right accessor
 		const data = Array.prototype.concat(
-			...this.model.getData().datasets.map(dataset => dataset.data.map(d => d.date))
+			...this.model
+				.getData()
+				.datasets.map(dataset =>
+					dataset.data.map((d, i) =>
+						Number(this.services.cartesianScales.getDomainValue(d, i))
+					)
+				)
 		);
 
 		const height = Number(this.backdrop.attr("height"));
 		const scale = this.services.cartesianScales.getMainXScale();
-		const values = data.filter(d => pointIsMatch(Number(scale(d)), x));
+		const values = data.filter(d => pointIsMatch(d, x));
 		const highlightItems = values.map(v =>
-			this.services.cartesianScales.getDataFromDomain(v)
+			this.services.cartesianScales.getDataFromDomain(scale.invert(v))
 		)[0];
 
 		if (highlightItems && highlightItems.length > 0) {
-			const hoveredElements = dataPoints.filter(d => pointIsMatch(scale(d.date), x));
+			const hoveredElements = dataPoints.filter((d, i) =>
+				pointIsMatch(this.services.cartesianScales.getDomainValue(d, i), x)
+			);
+
 			hoveredElements.dispatch("mouseover");
 
 			this.services.events.dispatchEvent("show-tooltip", {
@@ -52,7 +61,6 @@ export class Ruler extends Component {
 				multidata: highlightItems,
 				type: TooltipTypes.GRIDLINE
 			});
-
 		} else {
 			dataPoints.dispatch("mouseout");
 		}
@@ -103,16 +111,16 @@ export class Ruler extends Component {
 		const self = this;
 
 		this.backdrop
-		.on("mousemove mouseover", function() {
-			const chartContainer = self.services.domUtils.getMainSVG();
-			const pos = mouse(chartContainer);
+			.on("mousemove mouseover", function() {
+				const chartContainer = self.services.domUtils.getMainSVG();
+				const pos = mouse(chartContainer);
 
-			self.showRuler(pos);
-		})
-		.on("mouseout", function() {
-			self.hideRuler();
-			self.services.events.dispatchEvent("hide-tooltip", {});
-		});
+				self.showRuler(pos);
+			})
+			.on("mouseout", function() {
+				self.hideRuler();
+				self.services.events.dispatchEvent("hide-tooltip", {});
+			});
 	}
 
 	drawBackdrop() {
@@ -128,14 +136,14 @@ export class Ruler extends Component {
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
 		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, "rect.chart-grid-backdrop");
 
-		this.backdrop.merge(backdropRect)
+		this.backdrop
+			.merge(backdropRect)
 			.attr("x", xScaleStart)
 			.attr("y", yScaleStart)
 			.attr("width", xScaleEnd - xScaleStart)
 			.attr("height", yScaleEnd - yScaleStart)
 			.lower();
 
-		backdropRect.attr("width", "100%")
-			.attr("height", "100%");
+		backdropRect.attr("width", "100%").attr("height", "100%");
 	}
 }
