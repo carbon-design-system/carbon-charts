@@ -15,14 +15,14 @@ export interface AxisOptions {
 	 * you would expect to only have 1 axis (dimension) being used as domain
 	 * Domain usually represents labels, ordinal values, time intervals etc.
 	 */
-	useAsDomain?: boolean;
+	useAsGraphDomain?: boolean;
 	/**
 	 * Whether the Axis should be used as the range
 	 * axis of the chart. In the case of Cartesian Scales
 	 * you would expect to only have 1 axis (dimension) being used as range
 	 * Range usually follows a linear scale
 	 */
-	useAsRange?: boolean;
+	useAsGraphRange?: boolean;
 	domain?: AxisDomain[];
 	primary?: boolean;
 	secondary?: boolean;
