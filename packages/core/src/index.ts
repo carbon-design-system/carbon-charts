@@ -1,11 +1,17 @@
 export * from "./charts";
 
 // Configs & interfaces
-export * from "./configuration";
-export * from "./interfaces";
+import * as configurations from "./configuration";
+import * as interfaces from "./interfaces";
 
-export * from "./services/colorPalettes";
+import * as colorPalettes from "./services/colorPalettes";
 import { DEFAULT } from "./services/colorPalettes";
 // TODO 1.0 - Remove deprecated API
-export const defaultColors = DEFAULT;
+const defaultColors = DEFAULT;
 
+export {
+	interfaces,
+	configurations,
+	defaultColors,
+	colorPalettes
+};
