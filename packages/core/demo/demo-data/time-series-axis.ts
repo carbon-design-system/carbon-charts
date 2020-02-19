@@ -1,4 +1,5 @@
-export const lineTimeSeriesData15seconds12h = {
+// 15seconds
+export const lineTimeSeriesData15seconds = {
 	labels: ["Qty"],
 	datasets: [
 		{
@@ -16,44 +17,19 @@ export const lineTimeSeriesData15seconds12h = {
 	]
 };
 
-export const lineTimeSeries15seconds12hOptions = {
-	title: "Line (time series) - 15seconds 12h",
+export const lineTimeSeries15secondsOptions = {
+	title: "Line (time series) - Time interval 15seconds",
 	axes: {
-		left: {
-			secondary: true
-		},
-		bottom: {
-			scaleType: "time",
-			primary: true,
-			ticks: {
-				timeIntervalFormats: {
-					"15seconds": { localeCode: "fr" }
-				},
-			}
-		},
-	},
-	curve: "curveMonotoneX"
-};
-
-// 15seconds 24h
-export const lineTimeSeriesData15seconds24h = lineTimeSeriesData15seconds12h;
-
-export const lineTimeSeries15seconds24hOptions = {
-	title: "Line (time series) - 15seconds 24h",
-	axes: {
-		left: {
-			secondary: true
-		},
+		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
 			primary: true,
 		},
 	},
-	curve: "curveMonotoneX"
 };
 
-// minute 12h
-export const lineTimeSeriesDataMinute12h = {
+// minute
+export const lineTimeSeriesDataMinute = {
 	labels: ["Qty"],
 	datasets: [
 		{
@@ -71,41 +47,20 @@ export const lineTimeSeriesDataMinute12h = {
 	]
 };
 
-export const lineTimeSeriesMinute12hOptions = {
-	title: "Line (time series) - minute 12h",
+export const lineTimeSeriesMinuteOptions = {
+	title: "Line (time series) - Time interval minute",
 	axes: {
-		left: {
-			secondary: true
-		},
+		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
 			primary: true,
 			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
-	curve: "curveMonotoneX"
 };
 
-// minute 24h
-export const lineTimeSeriesDataMinute24h = lineTimeSeriesDataMinute12h;
-
-export const lineTimeSeriesMinute24hOptions = {
-	title: "Line (time series) - minute 24h",
-	axes: {
-		left: {
-			secondary: true
-		},
-		bottom: {
-			scaleType: "time",
-			primary: true,
-			timeScale: { addSpaceOnEdges: 0 },
-		},
-	},
-	curve: "curveMonotoneX"
-};
-
-// 30minutes 12h
-export const lineTimeSeriesData30minutes12h = {
+// 30minutes
+export const lineTimeSeriesData30minutes = {
 	labels: ["Qty"],
 	datasets: [
 		{
@@ -123,41 +78,20 @@ export const lineTimeSeriesData30minutes12h = {
 	]
 };
 
-export const lineTimeSeries30minutes12hOptions = {
-	title: "Line (time series) - 30minutes 12h",
+export const lineTimeSeries30minutesOptions = {
+	title: "Line (time series) - Time interval 30minutes",
 	axes: {
-		left: {
-			secondary: true
-		},
+		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
 			primary: true,
 			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
-	curve: "curveMonotoneX"
 };
 
-// 30minutes 24h
-export const lineTimeSeriesData30minutes24h = lineTimeSeriesData30minutes12h;
-
-export const lineTimeSeries30minutes24hOptions = {
-	title: "Line (time series) - 30minutes 24h",
-	axes: {
-		left: {
-			secondary: true
-		},
-		bottom: {
-			scaleType: "time",
-			primary: true,
-			timeScale: { addSpaceOnEdges: 0 },
-		},
-	},
-	curve: "curveMonotoneX"
-};
-
-// hourly 12h
-export const lineTimeSeriesDataHourly12h = {
+// hourly with default ticks formats
+export const lineTimeSeriesDataHourlyDefaultTicksFormats = {
 	labels: ["Qty"],
 	datasets: [
 		{
@@ -175,41 +109,40 @@ export const lineTimeSeriesDataHourly12h = {
 	]
 };
 
-export const lineTimeSeriesHourly12hOptions = {
-	title: "Line (time series) - hourly 12h",
+export const lineTimeSeriesHourlyDefaultLocaleOptions = {
+	title: "Line (time series) - Time interval hourly with default ticks formats ('MMM d, hh a' and 'hh a')",
 	axes: {
-		left: {
-			secondary: true
-		},
+		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
 			primary: true,
 			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
-	curve: "curveMonotoneX"
 };
 
-// hourly 24h
-export const lineTimeSeriesDataHourly24h = lineTimeSeriesDataHourly12h;
+// hourly with custom ticks formats
+export const lineTimeSeriesDataHourlyCustomTicksFormats = lineTimeSeriesDataHourlyDefaultTicksFormats;
 
-export const lineTimeSeriesHourly24hOptions = {
-	title: "Line (time series) - hourly 24h",
+export const lineTimeSeriesHourlyCustomTicksFormatsOptions = {
+	title: "Line (time series) - Time interval hourly with custom ticks formats ('MMM d, HH:mm' and 'HH:mm')",
 	axes: {
-		left: {
-			secondary: true
-		},
+		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
 			primary: true,
+			ticks: {
+				timeIntervalFormats: {
+					hourly: { primary: "MMM d, HH:mm", secondary: "HH:mm" }
+				},
+			},
 			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
-	curve: "curveMonotoneX"
 };
 
-// daily !showDayName
-export const lineTimeSeriesDataDailyShowDayNumber = {
+// daily
+export const lineTimeSeriesDataDaily = {
 	labels: ["Qty"],
 	datasets: [
 		{
@@ -227,23 +160,20 @@ export const lineTimeSeriesDataDailyShowDayNumber = {
 	]
 };
 
-export const lineTimeSeriesDailyShowDayNumberOptions = {
-	title: "Line (time series) - daily show days as number",
+export const lineTimeSeriesDailyOptions = {
+	title: "Line (time series) - Time interval daily",
 	axes: {
-		left: {
-			secondary: true
-		},
+		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
 			primary: true,
 			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
-	curve: "curveMonotoneX"
 };
 
-// daily showDayName (weekly)
-export const lineTimeSeriesDataDailyShowDayName = {
+// weekly
+export const lineTimeSeriesDataWeekly = {
 	labels: ["Qty"],
 	datasets: [
 		{
@@ -262,12 +192,10 @@ export const lineTimeSeriesDataDailyShowDayName = {
 	]
 };
 
-export const lineTimeSeriesDailyShowDayNameOptions = {
-	title: "Line (time series) - daily show days name",
+export const lineTimeSeriesWeeklyOptions = {
+	title: "Line (time series) - Time interval weekly",
 	axes: {
-		left: {
-			secondary: true
-		},
+		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
 			primary: true,
@@ -275,11 +203,10 @@ export const lineTimeSeriesDailyShowDayNameOptions = {
 			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
-	curve: "curveMonotoneX"
 };
 
-// monthly
-export const lineTimeSeriesDataMonthly = {
+// monthly with default locale
+export const lineTimeSeriesDataMonthlyDefaultLocale = {
 	labels: ["Qty"],
 	datasets: [
 		{
@@ -297,19 +224,36 @@ export const lineTimeSeriesDataMonthly = {
 	]
 };
 
-export const lineTimeSeriesMonthlyOptions = {
-	title: "Line (time series) - monthly",
+export const lineTimeSeriesMonthlyDefaultLocaleOptions = {
+	title: "Line (time series) - Time interval monthly with default locale",
 	axes: {
-		left: {
-			secondary: true
-		},
+		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
 			primary: true,
 			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
-	curve: "curveMonotoneX"
+};
+
+// monthly with custom locale
+export const lineTimeSeriesDataMonthlyCustomLocale = lineTimeSeriesDataMonthlyDefaultLocale;
+
+export const lineTimeSeriesMonthlyCustomLocaleOptions = {
+	title: "Line (time series) - Time interval monthly with custom locale (fr)",
+	axes: {
+		left: { secondary: true },
+		bottom: {
+			scaleType: "time",
+			primary: true,
+			ticks: {
+				timeIntervalFormats: {
+					monthly: { localeCode: "fr" }
+				},
+			},
+			timeScale: { addSpaceOnEdges: 0 },
+		},
+	},
 };
 
 // quarterly
@@ -332,18 +276,15 @@ export const lineTimeSeriesDataQuarterly = {
 };
 
 export const lineTimeSeriesQuarterlyOptions = {
-	title: "Line (time series) - quarterly",
+	title: "Line (time series) - Time interval quarterly",
 	axes: {
-		left: {
-			secondary: true
-		},
+		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
 			primary: true,
 			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
-	curve: "curveMonotoneX"
 };
 
 // yearly
@@ -366,16 +307,13 @@ export const lineTimeSeriesDataYearly = {
 };
 
 export const lineTimeSeriesYearlyOptions = {
-	title: "Line (time series) - yearly",
+	title: "Line (time series) - Time interval yearly",
 	axes: {
-		left: {
-			secondary: true
-		},
+		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
 			primary: true,
 			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
-	curve: "curveMonotoneX"
 };

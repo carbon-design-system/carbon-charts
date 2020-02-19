@@ -205,58 +205,48 @@ let allDemoGroups = [
 		title: "Time series axis",
 		demos: [
 			{
-				options: timeSeriesAxisDemos.lineTimeSeries15seconds12hOptions,
-				data: timeSeriesAxisDemos.lineTimeSeriesData15seconds12h,
+				options: timeSeriesAxisDemos.lineTimeSeries15secondsOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesData15seconds,
 				chartType: chartTypes.LineChart
 			},
 			{
-				options: timeSeriesAxisDemos.lineTimeSeries15seconds24hOptions,
-				data: timeSeriesAxisDemos.lineTimeSeriesData15seconds24h,
+				options: timeSeriesAxisDemos.lineTimeSeriesMinuteOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataMinute,
 				chartType: chartTypes.LineChart
 			},
 			{
-				options: timeSeriesAxisDemos.lineTimeSeriesMinute12hOptions,
-				data: timeSeriesAxisDemos.lineTimeSeriesDataMinute12h,
+				options: timeSeriesAxisDemos.lineTimeSeries30minutesOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesData30minutes,
 				chartType: chartTypes.LineChart
 			},
 			{
-				options: timeSeriesAxisDemos.lineTimeSeriesMinute24hOptions,
-				data: timeSeriesAxisDemos.lineTimeSeriesDataMinute24h,
+				options: timeSeriesAxisDemos.lineTimeSeriesHourlyDefaultLocaleOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataHourlyDefaultTicksFormats,
 				chartType: chartTypes.LineChart
 			},
 			{
-				options: timeSeriesAxisDemos.lineTimeSeries30minutes12hOptions,
-				data: timeSeriesAxisDemos.lineTimeSeriesData30minutes12h,
+				options: timeSeriesAxisDemos.lineTimeSeriesHourlyCustomTicksFormatsOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataHourlyCustomTicksFormats,
 				chartType: chartTypes.LineChart
 			},
 			{
-				options: timeSeriesAxisDemos.lineTimeSeries30minutes24hOptions,
-				data: timeSeriesAxisDemos.lineTimeSeriesData30minutes24h,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataDaily,
+				options: timeSeriesAxisDemos.lineTimeSeriesDailyOptions,
 				chartType: chartTypes.LineChart
 			},
 			{
-				options: timeSeriesAxisDemos.lineTimeSeriesHourly12hOptions,
-				data: timeSeriesAxisDemos.lineTimeSeriesDataHourly12h,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataWeekly,
+				options: timeSeriesAxisDemos.lineTimeSeriesWeeklyOptions,
 				chartType: chartTypes.LineChart
 			},
 			{
-				options: timeSeriesAxisDemos.lineTimeSeriesHourly24hOptions,
-				data: timeSeriesAxisDemos.lineTimeSeriesDataHourly24h,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataMonthlyDefaultLocale,
+				options: timeSeriesAxisDemos.lineTimeSeriesMonthlyDefaultLocaleOptions,
 				chartType: chartTypes.LineChart
 			},
 			{
-				data: timeSeriesAxisDemos.lineTimeSeriesDataDailyShowDayNumber,
-				options: timeSeriesAxisDemos.lineTimeSeriesDailyShowDayNumberOptions,
-				chartType: chartTypes.LineChart
-			},
-			{
-				data: timeSeriesAxisDemos.lineTimeSeriesDataDailyShowDayName,
-				options: timeSeriesAxisDemos.lineTimeSeriesDailyShowDayNameOptions,
-				chartType: chartTypes.LineChart
-			},
-			{
-				data: timeSeriesAxisDemos.lineTimeSeriesDataMonthly,
-				options: timeSeriesAxisDemos.lineTimeSeriesMonthlyOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataMonthlyCustomLocale,
+				options: timeSeriesAxisDemos.lineTimeSeriesMonthlyCustomLocaleOptions,
 				chartType: chartTypes.LineChart
 			},
 			{
