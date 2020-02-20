@@ -21,8 +21,6 @@ export class Ruler extends Component {
 		// Draw the backdrop
 		this.drawBackdrop();
 		this.addBackdropEventListeners();
-		DOMUtils.appendOrSelect(this.backdrop, "g.x.grid");
-		DOMUtils.appendOrSelect(this.backdrop, "g.y.grid");
 	}
 
 	showRuler([x, y]: [number, number]) {
