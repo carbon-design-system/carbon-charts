@@ -48,13 +48,13 @@
 	"dependencies": {
 		"@carbon/utils-position": "1.1.1",
 		"babel-polyfill": "6.26.0",
-		"carbon-components": "10.5.0",
 		"date-fns": "2.8.1",
 		"lodash-es": "4.17.15",
 		"resize-observer-polyfill": "1.5.0"
 	},
 	"peerDependencies": {
-		"d3": ">=5.0.0 <=5.14.2"
+		"d3": ">=5.0.0 <=5.14.2",
+		"carbon-components": "10.5.0"
 	},
 	"devDependencies": {
 		"@carbon/colors": "10.4.0",
