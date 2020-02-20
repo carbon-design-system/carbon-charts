@@ -11,6 +11,7 @@ export default {
 		name: "ChartsDemoData",
 		globals: {
 			"@carbon/charts": "Charts",
+			"@carbon/charts/tools": "Charts",
 			"d3-scale": "d3Scale",
 			"d3-selection": "d3Selection",
 			"d3-transition": "d3Transition",
@@ -23,10 +24,10 @@ export default {
 		}
 	},
 	plugins: [
-		terser(),
 		resolve(),
 		commonjs(),
-		json()
+		json(),
+		terser()
 	],
 	onwarn(warning, next) {
 		// logs the circular dependencies inside the d3 codebase
