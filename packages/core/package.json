@@ -46,9 +46,9 @@
 	"author": "IBM",
 	"license": "Apache-2.0",
 	"dependencies": {
+		"@carbon/colors": "10.4.0",
 		"@carbon/utils-position": "1.1.1",
 		"babel-polyfill": "6.26.0",
-		"carbon-components": "10.5.0",
 		"date-fns": "2.8.1",
 		"lodash-es": "4.17.15",
 		"resize-observer-polyfill": "1.5.0"
@@ -57,7 +57,6 @@
 		"d3": ">=5.0.0 <=5.14.2"
 	},
 	"devDependencies": {
-		"@carbon/colors": "10.4.0",
 		"@carbon/import-once": "10.3.0",
 		"@carbon/layout": "10.5.0",
 		"@carbon/motion": "10.4.0",
@@ -69,6 +68,7 @@
 		"@types/karma": "3.0.2",
 		"@types/node": "12.11.7",
 		"babel-polyfill": "6.26.0",
+		"carbon-components": "10.5.0",
 		"codesandbox": "2.1.11",
 		"concurrently": "5.1.0",
 		"copy-webpack-plugin": "4.5.2",
