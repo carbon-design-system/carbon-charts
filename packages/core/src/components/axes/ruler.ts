@@ -30,7 +30,7 @@ export class Ruler extends Component {
 		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler").attr("opacity", 1);
 		const line = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
 		const dataPoints = svg.selectAll("[role=graphics-symbol]");
-		const height = Number(this.backdrop.attr("height"));
+		const height = DOMUtils.getSVGElementSize(this.backdrop).height;
 		const scale = this.services.cartesianScales.getMainXScale();
 		let lineX = x;
 
