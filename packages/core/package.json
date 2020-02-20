@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "0.29.2",
+	"version": "0.29.3",
 	"description": "Carbon charting components",
 	"main": "./bundle.js",
 	"module": "./index.js",
@@ -63,6 +63,7 @@
 		"@carbon/motion": "10.4.0",
 		"@carbon/themes": "10.4.0",
 		"@carbon/type": "10.5.1",
+		"@rollup/plugin-json": "4.0.2",
 		"@types/d3": "4.11.0",
 		"@types/jasmine": "2.8.7",
 		"@types/karma": "3.0.2",
@@ -92,7 +93,6 @@
 		"rollup-plugin-commonjs": "10.1.0",
 		"rollup-plugin-node-resolve": "5.2.0",
 		"rollup-plugin-terser": "5.1.2",
-		"@rollup/plugin-json": "4.0.2",
 		"rollup-plugin-typescript2": "0.26.0",
 		"sass": "1.25.0",
 		"sass-loader": "8.0.0",
