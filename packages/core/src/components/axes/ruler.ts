@@ -101,7 +101,9 @@ export class Ruler extends Component {
 	hideRuler() {
 		const svg = this.parent;
 		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler");
+		const dataPoints = svg.selectAll("[role=graphics-symbol]");
 
+		dataPoints.dispatch("mouseout");
 		ruler.attr("opacity", 0);
 	}
 
