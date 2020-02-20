@@ -6196,7 +6196,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "axis", function() { return axis; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "spacers", function() { return spacers; });
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./dist/tools.js");
-/* harmony import */ var _interfaces_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interfaces/index */ "./dist/interfaces/index.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interfaces */ "./dist/interfaces/index.js");
 
 
 /*
@@ -6208,7 +6208,7 @@ __webpack_require__.r(__webpack_exports__);
  * Legend options
  */
 var legend = {
-    position: _interfaces_index__WEBPACK_IMPORTED_MODULE_1__["LegendPositions"].BOTTOM,
+    position: _interfaces__WEBPACK_IMPORTED_MODULE_1__["LegendPositions"].BOTTOM,
     clickable: true,
     enabled: true,
     items: {
@@ -6460,22 +6460,22 @@ var spacers = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultColors", function() { return defaultColors; });
-/* harmony import */ var _charts_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./charts/index */ "./dist/charts/index.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SimpleBarChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["SimpleBarChart"]; });
+/* harmony import */ var _charts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./charts */ "./dist/charts/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SimpleBarChart", function() { return _charts__WEBPACK_IMPORTED_MODULE_0__["SimpleBarChart"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GroupedBarChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["GroupedBarChart"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GroupedBarChart", function() { return _charts__WEBPACK_IMPORTED_MODULE_0__["GroupedBarChart"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StackedBarChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["StackedBarChart"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StackedBarChart", function() { return _charts__WEBPACK_IMPORTED_MODULE_0__["StackedBarChart"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BubbleChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["BubbleChart"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BubbleChart", function() { return _charts__WEBPACK_IMPORTED_MODULE_0__["BubbleChart"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LineChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["LineChart"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LineChart", function() { return _charts__WEBPACK_IMPORTED_MODULE_0__["LineChart"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScatterChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["ScatterChart"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScatterChart", function() { return _charts__WEBPACK_IMPORTED_MODULE_0__["ScatterChart"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PieChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["PieChart"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PieChart", function() { return _charts__WEBPACK_IMPORTED_MODULE_0__["PieChart"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DonutChart", function() { return _charts_index__WEBPACK_IMPORTED_MODULE_0__["DonutChart"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DonutChart", function() { return _charts__WEBPACK_IMPORTED_MODULE_0__["DonutChart"]; });
 
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./configuration */ "./dist/configuration.js");
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "configurations", function() { return _configuration__WEBPACK_IMPORTED_MODULE_1__; });
@@ -6485,6 +6485,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "colorPalettes", function() { return _services_colorPalettes__WEBPACK_IMPORTED_MODULE_3__; });
 
 // Configs & interfaces
+
 
 
 
@@ -7268,7 +7269,7 @@ var ChartModel = /** @class */ (function () {
 /*! exports provided: name, version, description, main, module, scripts, repository, keywords, author, license, dependencies, peerDependencies, devDependencies, publishConfig, maintainers, contributors, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"@carbon/charts\",\"version\":\"0.29.2\",\"description\":\"Carbon charting components\",\"main\":\"./dist/bundle.js\",\"module\":\"./dist/index.js\",\"scripts\":{\"demo:server\":\"yarn build && concurrently npm:demo:watch-src npm:demo:watch\",\"demo:watch\":\"webpack-dev-server --config webpack.config.js --watch\",\"demo:watch-src\":\"tsc -b src -w\",\"demo:build\":\"yarn build && webpack --config webpack.config.js && yarn run docs:build\",\"docs:build\":\"typedoc --out ./demo/bundle/documentation ./src/index.ts\",\"build\":\"bash build.sh\",\"postinstall\":\"bash build-vendor.sh\",\"lint\":\"tslint -p tsconfig.json -c tslint.json\",\"test\":\"karma start --single-run\",\"test:watch\":\"karma start --no-single-run\",\"clean\":\"rm -rf dist demo/bundle\"},\"repository\":{\"type\":\"git\",\"url\":\"git@github.com:IBM/carbon-charts.git\"},\"keywords\":[\"carbon\",\"charts\",\"dataviz\",\"data-visualization\",\"visualizations\",\"d3\",\"svg\",\"component\",\"components\",\"css\",\"html\",\"ibm\",\"typescript\",\"javascript\",\"js\",\"library\",\"pattern\",\"patterns\",\"sass\",\"scss\"],\"author\":\"IBM\",\"license\":\"Apache-2.0\",\"dependencies\":{\"@carbon/utils-position\":\"1.1.1\",\"babel-polyfill\":\"6.26.0\",\"carbon-components\":\"10.5.0\",\"date-fns\":\"2.8.1\",\"lodash-es\":\"4.17.15\",\"resize-observer-polyfill\":\"1.5.0\"},\"peerDependencies\":{\"d3\":\">=5.0.0 <=5.14.2\"},\"devDependencies\":{\"@carbon/colors\":\"10.4.0\",\"@carbon/import-once\":\"10.3.0\",\"@carbon/layout\":\"10.5.0\",\"@carbon/motion\":\"10.4.0\",\"@carbon/themes\":\"10.4.0\",\"@carbon/type\":\"10.5.1\",\"@rollup/plugin-json\":\"4.0.2\",\"@types/d3\":\"4.11.0\",\"@types/jasmine\":\"2.8.7\",\"@types/karma\":\"3.0.2\",\"@types/node\":\"12.11.7\",\"babel-polyfill\":\"6.26.0\",\"codesandbox\":\"2.1.11\",\"concurrently\":\"5.1.0\",\"copy-webpack-plugin\":\"4.5.2\",\"css-loader\":\"0.28.7\",\"d3\":\"5.14.2\",\"extract-text-webpack-plugin\":\"3.0.2\",\"file-loader\":\"1.1.5\",\"html-loader\":\"0.5.1\",\"html-webpack-exclude-assets-plugin\":\"0.0.7\",\"html-webpack-plugin\":\"3.2.0\",\"jasmine-core\":\"3.4.0\",\"karma\":\"4.0.1\",\"karma-chrome-launcher\":\"2.2.0\",\"karma-firefox-launcher\":\"1.1.0\",\"karma-jasmine\":\"2.0.1\",\"karma-safari-launcher\":\"1.0.0\",\"karma-webpack\":\"4.0.2\",\"lerna\":\"3.13.4\",\"mini-css-extract-plugin\":\"0.9.0\",\"raw-loader\":\"0.5.1\",\"rollup\":\"1.27.10\",\"rollup-plugin-commonjs\":\"10.1.0\",\"rollup-plugin-node-resolve\":\"5.2.0\",\"rollup-plugin-terser\":\"5.1.2\",\"sass\":\"1.25.0\",\"sass-loader\":\"8.0.0\",\"style-loader\":\"0.19.0\",\"ts-loader\":\"6.2.1\",\"tslint\":\"5.20.1\",\"tslint-loader\":\"3.5.3\",\"typedoc\":\"0.11.1\",\"typescript\":\"3.7.5\",\"url-loader\":\"0.6.2\",\"webpack\":\"4.41.0\",\"webpack-cli\":\"3.3.9\",\"webpack-dev-server\":\"3.7.0\"},\"publishConfig\":{\"directory\":\"dist\",\"access\":\"public\"},\"maintainers\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}],\"contributors\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}]}");
+module.exports = JSON.parse("{\"name\":\"@carbon/charts\",\"version\":\"0.29.3\",\"description\":\"Carbon charting components\",\"main\":\"./bundle.js\",\"module\":\"./index.js\",\"scripts\":{\"demo:server\":\"yarn build && concurrently npm:demo:watch-src npm:demo:watch\",\"demo:watch\":\"webpack-dev-server --config webpack.config.js --watch\",\"demo:watch-src\":\"tsc -b src -w\",\"demo:build\":\"yarn build && webpack --config webpack.config.js && yarn run docs:build\",\"docs:build\":\"typedoc --tsconfig ./src/tsconfig.json --ignoreCompilerErrors --out ./demo/bundle/documentation ./src/index.ts\",\"build\":\"bash build.sh\",\"postinstall\":\"bash build-vendor.sh\",\"lint\":\"tslint -p tsconfig.json -c tslint.json\",\"test\":\"karma start --single-run\",\"test:watch\":\"karma start --no-single-run\",\"clean\":\"rm -rf dist demo/bundle\"},\"repository\":{\"type\":\"git\",\"url\":\"git@github.com:IBM/carbon-charts.git\"},\"keywords\":[\"carbon\",\"charts\",\"dataviz\",\"data-visualization\",\"visualizations\",\"d3\",\"svg\",\"component\",\"components\",\"css\",\"html\",\"ibm\",\"typescript\",\"javascript\",\"js\",\"library\",\"pattern\",\"patterns\",\"sass\",\"scss\"],\"author\":\"IBM\",\"license\":\"Apache-2.0\",\"dependencies\":{\"@carbon/utils-position\":\"1.1.1\",\"babel-polyfill\":\"6.26.0\",\"carbon-components\":\"10.5.0\",\"date-fns\":\"2.8.1\",\"lodash-es\":\"4.17.15\",\"resize-observer-polyfill\":\"1.5.0\"},\"peerDependencies\":{\"d3\":\">=5.0.0 <=5.14.2\"},\"devDependencies\":{\"@carbon/colors\":\"10.4.0\",\"@carbon/import-once\":\"10.3.0\",\"@carbon/layout\":\"10.5.0\",\"@carbon/motion\":\"10.4.0\",\"@carbon/themes\":\"10.4.0\",\"@carbon/type\":\"10.5.1\",\"@rollup/plugin-json\":\"4.0.2\",\"@types/d3\":\"4.11.0\",\"@types/jasmine\":\"2.8.7\",\"@types/karma\":\"3.0.2\",\"@types/node\":\"12.11.7\",\"babel-polyfill\":\"6.26.0\",\"codesandbox\":\"2.1.11\",\"concurrently\":\"5.1.0\",\"copy-webpack-plugin\":\"4.5.2\",\"css-loader\":\"0.28.7\",\"d3\":\"5.14.2\",\"extract-text-webpack-plugin\":\"3.0.2\",\"file-loader\":\"1.1.5\",\"html-loader\":\"0.5.1\",\"html-webpack-exclude-assets-plugin\":\"0.0.7\",\"html-webpack-plugin\":\"3.2.0\",\"jasmine-core\":\"3.4.0\",\"karma\":\"4.0.1\",\"karma-chrome-launcher\":\"2.2.0\",\"karma-firefox-launcher\":\"1.1.0\",\"karma-jasmine\":\"2.0.1\",\"karma-safari-launcher\":\"1.0.0\",\"karma-webpack\":\"4.0.2\",\"lerna\":\"3.13.4\",\"mini-css-extract-plugin\":\"0.9.0\",\"raw-loader\":\"0.5.1\",\"rollup\":\"1.27.10\",\"rollup-plugin-commonjs\":\"10.1.0\",\"rollup-plugin-node-resolve\":\"5.2.0\",\"rollup-plugin-terser\":\"5.1.2\",\"rollup-plugin-typescript2\":\"0.26.0\",\"sass\":\"1.25.0\",\"sass-loader\":\"8.0.0\",\"style-loader\":\"0.19.0\",\"ts-loader\":\"6.2.1\",\"tslint\":\"5.20.1\",\"tslint-loader\":\"3.5.3\",\"typedoc\":\"0.11.1\",\"typescript\":\"3.7.5\",\"url-loader\":\"0.6.2\",\"webpack\":\"4.41.0\",\"webpack-cli\":\"3.3.9\",\"webpack-dev-server\":\"3.7.0\"},\"publishConfig\":{\"directory\":\"dist\",\"access\":\"public\"},\"maintainers\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}],\"contributors\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}]}");
 
 /***/ }),
 
@@ -7857,7 +7858,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/src/index.js");
 /* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-array */ "../../node_modules/d3-array/src/index.js");
 /* harmony import */ var d3_time_format__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-time-format */ "../../node_modules/d3-time-format/src/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns */ "../../node_modules/date-fns/esm/index.js");
+/* harmony import */ var d3_time_format_locale_en_US_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! d3-time-format/locale/en-US.json */ "../../node_modules/d3-time-format/locale/en-US.json");
+var d3_time_format_locale_en_US_json__WEBPACK_IMPORTED_MODULE_6___namespace = /*#__PURE__*/__webpack_require__.t(/*! d3-time-format/locale/en-US.json */ "../../node_modules/d3-time-format/locale/en-US.json", 1);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! date-fns */ "../../node_modules/date-fns/esm/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -7879,7 +7882,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
-var englishLocale = __webpack_require__(/*! d3-time-format/locale/en-US.json */ "../../node_modules/d3-time-format/locale/en-US.json");
+
 // Misc
 
 var CartesianScales = /** @class */ (function (_super) {
@@ -8087,20 +8090,20 @@ var CartesianScales = /** @class */ (function (_super) {
             if (spaceToAddToEdges) {
                 var startDate = new Date(domain[0]);
                 var endDate = new Date(domain[1]);
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["differenceInYears"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subYears"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addYears"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["differenceInYears"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["subYears"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["addYears"])(endDate, spaceToAddToEdges)];
                 }
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["differenceInMonths"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subMonths"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addMonths"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["differenceInMonths"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["subMonths"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["addMonths"])(endDate, spaceToAddToEdges)];
                 }
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["differenceInDays"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subDays"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addDays"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["differenceInDays"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["subDays"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["addDays"])(endDate, spaceToAddToEdges)];
                 }
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["differenceInHours"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subHours"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addHours"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["differenceInHours"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["subHours"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["addHours"])(endDate, spaceToAddToEdges)];
                 }
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["differenceInMinutes"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subMinutes"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addMinutes"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["differenceInMinutes"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["subMinutes"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["addMinutes"])(endDate, spaceToAddToEdges)];
                 }
                 return [startDate, endDate];
             }
@@ -8127,7 +8130,7 @@ var CartesianScales = /** @class */ (function (_super) {
         this.scaleTypes[axisPosition] = scaleType;
         // Set the date/time locale
         if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
-            var timeLocale = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "locale", "time") || englishLocale;
+            var timeLocale = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "locale", "time") || d3_time_format_locale_en_US_json__WEBPACK_IMPORTED_MODULE_6___namespace;
             Object(d3_time_format__WEBPACK_IMPORTED_MODULE_5__["timeFormatDefaultLocale"])(timeLocale);
         }
         var scale;
