@@ -7,6 +7,7 @@
 			"es2015",
 			"dom"
 		],
+		"esModuleInterop": true,
 		"sourceMap": true,
 		"mapRoot": "./",
 		"module": "esnext",
