@@ -28,10 +28,18 @@ export class ZoomBar extends Component {
 		console.log("startX", startX)
 		const height = 32;
 		const container = DOMUtils.appendOrSelect(svg, "svg.zoom-container")
-			.attr("transform", "translateX(10)")
+			// .attr("transform", "translateX(10)")
 			.attr("width", "100%")
 			.attr("height", height)
 			.attr("opacity", 1);
+
+		const spacer = DOMUtils.appendOrSelect(svg, "rect.zoom-spacer")
+			.attr("x", 0)
+			.attr("y", 32)
+			.attr("width", "100%")
+			.attr("height", 30)
+			.attr("opacity", 1)
+			.attr("fill", "none");
 
 		const zoomBG = DOMUtils.appendOrSelect(container, "rect.zoom-bg")
 			.attr("x", 0)
