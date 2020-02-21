@@ -183,14 +183,16 @@ export class ZoomBar extends Component {
 				handle2.on("click", this.zoomIn.bind(this));
 				handle2.call(
 					drag()
-						.on("start", () => {
-							console.log("started dragging");
+						.on("start", function() {
+							select(this).classed("dragging", true);
 						})
 						.on("drag", function(d) {
 							self.dragged(this, d);
 						})
+						.on("end", function() {
+							select(this).classed("dragging", false);
+						})
 				);
-					// .on("end", dragended));
 			}
 		}
 	}

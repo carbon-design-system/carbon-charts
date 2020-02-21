@@ -1,5 +1,7 @@
 g.#{$prefix}--#{$charts-prefix}--zoom-bar {
+	rect.zoom-handle.dragging,
 	rect.zoom-handle:hover {
+		fill: black;
 		cursor: col-resize;
 	}
 

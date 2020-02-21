@@ -1,3 +1,7 @@
 @import "./bubble";
 @import "./line";
 @import "./scatter";
+
+.graph-frame {
+	overflow-x: hidden;
+}
