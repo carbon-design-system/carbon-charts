@@ -13,21 +13,21 @@ export class Grid extends Component {
 
 	backdrop: any;
 
-	render() {
+	render(animate = true) {
 		// Draw the backdrop
 		this.drawBackdrop();
 		DOMUtils.appendOrSelect(this.backdrop, "g.x.grid");
 		DOMUtils.appendOrSelect(this.backdrop, "g.y.grid");
 
-		this.drawXGrid();
-		this.drawYGrid();
+		this.drawXGrid(animate);
+		this.drawYGrid(animate);
 
 		if (Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) {
 			this.addGridEventListeners();
 		}
 	}
 
-	drawXGrid() {
+	drawXGrid(animate: boolean) {
 		const svg = this.parent;
 
 		const height = this.backdrop.attr("height");
@@ -43,12 +43,13 @@ export class Grid extends Component {
 
 		const g = svg.select(".x.grid")
 			.attr("transform", `translate(${-this.backdrop.attr("x")}, ${height})`)
+			.transition(this.services.transitions.getTransition("grid-x-update", animate))
 			.call(xGrid);
 
 		this.cleanGrid(g);
 	}
 
-	drawYGrid() {
+	drawYGrid(animate: boolean) {
 		const svg = this.parent;
 		const width = this.backdrop.attr("width");
 
@@ -63,6 +64,7 @@ export class Grid extends Component {
 
 		const g = svg.select(".y.grid")
 			.attr("transform", `translate(0, ${-this.backdrop.attr("y")})`)
+			.transition(this.services.transitions.getTransition("grid-y-update", animate))
 			.call(yGrid);
 
 		this.cleanGrid(g);

@@ -68,138 +68,138 @@ let allDemoGroups = [
 	{
 		title: "Bar (vertical)",
 		demos: [
-			{
-				options: barDemos.simpleBarOptions,
-				data: barDemos.simpleBarData,
-				chartType: chartTypes.SimpleBarChart
-			},
+			// {
+			// 	options: barDemos.simpleBarOptions,
+			// 	data: barDemos.simpleBarData,
+			// 	chartType: chartTypes.SimpleBarChart
+			// },
 			{
 				options: barDemos.simpleBarTimeSeriesOptions,
 				data: barDemos.simpleBarTimeSeriesData,
 				chartType: chartTypes.SimpleBarChart
 			},
-			{
-				options: barDemos.groupedBarOptions,
-				data: barDemos.groupedBarData,
-				chartType: chartTypes.GroupedBarChart
-			},
-			{
-				options: barDemos.stackedBarOptions,
-				data: barDemos.stackedBarData,
-				chartType: chartTypes.StackedBarChart
-			},
-			{
-				options: barDemos.stackedBarTimeSeriesOptions,
-				data: barDemos.stackedBarTimeSeriesData,
-				chartType: chartTypes.StackedBarChart
-			}
+			// {
+			// 	options: barDemos.groupedBarOptions,
+			// 	data: barDemos.groupedBarData,
+			// 	chartType: chartTypes.GroupedBarChart
+			// },
+			// {
+			// 	options: barDemos.stackedBarOptions,
+			// 	data: barDemos.stackedBarData,
+			// 	chartType: chartTypes.StackedBarChart
+			// },
+			// {
+			// 	options: barDemos.stackedBarTimeSeriesOptions,
+			// 	data: barDemos.stackedBarTimeSeriesData,
+			// 	chartType: chartTypes.StackedBarChart
+			// }
 		]
 	},
-	{
-		title: "Bar (horizontal)",
-		demos: [
-			{
-				options: barDemos.simpleHorizontalBarOptions,
-				data: barDemos.simpleHorizontalBarData,
-				chartType: chartTypes.SimpleBarChart
-			},
-			{
-				options: barDemos.simpleHorizontalBarTimeSeriesOptions,
-				data: barDemos.simpleHorizontalBarTimeSeriesData,
-				chartType: chartTypes.SimpleBarChart
-			},
-			{
-				options: barDemos.groupedHorizontalBarOptions,
-				data: barDemos.groupedHorizontalBarData,
-				chartType: chartTypes.GroupedBarChart
-			},
-			{
-				options: barDemos.stackedHorizontalBarOptions,
-				data: barDemos.stackedHorizontalBarData,
-				chartType: chartTypes.StackedBarChart
-			},
-			{
-				options: barDemos.stackedHorizontalBarTimeSeriesOptions,
-				data: barDemos.stackedHorizontalBarTimeSeriesData,
-				chartType: chartTypes.StackedBarChart
-			}
-		]
-	},
-	{
-		title: "Bubble",
-		demos: [
-			{
-				options: bubbleDemos.bubbleOptions,
-				data: bubbleDemos.bubbleData,
-				chartType: chartTypes.BubbleChart
-			}
-		]
-	},
-	{
-		title: "Donut",
-		demos: [
-			{
-				options: donutDemos.donutOptions,
-				data: donutDemos.donutData,
-				chartType: chartTypes.DonutChart
-			}
-		]
-	},
-	{
-		title: "Line",
-		demos: [
-			{
-				options: lineDemos.lineTimeSeriesOptions,
-				data: lineDemos.lineTimeSeriesData,
-				chartType: chartTypes.LineChart
-			},
-			{
-				options: lineDemos.lineOptions,
-				data: lineDemos.lineData,
-				chartType: chartTypes.LineChart
-			}
-		]
-	},
-	{
-		title: "Pie",
-		demos: [
-			{
-				options: pieDemos.pieOptions,
-				data: pieDemos.pieData,
-				chartType: chartTypes.PieChart
-			}
-		]
-	},
-	{
-		title: "Scatter",
-		demos: [
-			{
-				options: scatterDemos.scatterTimeSeriesOptions,
-				data: scatterDemos.scatterTimeSeriesData,
-				chartType: chartTypes.ScatterChart
-			},
-			{
-				options: scatterDemos.scatterOptions,
-				data: scatterDemos.scatterData,
-				chartType: chartTypes.ScatterChart
-			}
-		]
-	},
-	{
-		title: "Step",
-		demos: [
-			{
-				options: stepDemos.stepOptions,
-				data: stepDemos.stepData,
-				chartType: chartTypes.LineChart
-			},
-			{
-				options: stepDemos.stepTimeSeriesOptions,
-				data: stepDemos.stepTimeSeriesData,
-				chartType: chartTypes.LineChart
-			}
-		]
-	}
+	// {
+	// 	title: "Bar (horizontal)",
+	// 	demos: [
+	// 		{
+	// 			options: barDemos.simpleHorizontalBarOptions,
+	// 			data: barDemos.simpleHorizontalBarData,
+	// 			chartType: chartTypes.SimpleBarChart
+	// 		},
+	// 		{
+	// 			options: barDemos.simpleHorizontalBarTimeSeriesOptions,
+	// 			data: barDemos.simpleHorizontalBarTimeSeriesData,
+	// 			chartType: chartTypes.SimpleBarChart
+	// 		},
+	// 		{
+	// 			options: barDemos.groupedHorizontalBarOptions,
+	// 			data: barDemos.groupedHorizontalBarData,
+	// 			chartType: chartTypes.GroupedBarChart
+	// 		},
+	// 		{
+	// 			options: barDemos.stackedHorizontalBarOptions,
+	// 			data: barDemos.stackedHorizontalBarData,
+	// 			chartType: chartTypes.StackedBarChart
+	// 		},
+	// 		{
+	// 			options: barDemos.stackedHorizontalBarTimeSeriesOptions,
+	// 			data: barDemos.stackedHorizontalBarTimeSeriesData,
+	// 			chartType: chartTypes.StackedBarChart
+	// 		}
+	// 	]
+	// },
+	// {
+	// 	title: "Bubble",
+	// 	demos: [
+	// 		{
+	// 			options: bubbleDemos.bubbleOptions,
+	// 			data: bubbleDemos.bubbleData,
+	// 			chartType: chartTypes.BubbleChart
+	// 		}
+	// 	]
+	// },
+	// {
+	// 	title: "Donut",
+	// 	demos: [
+	// 		{
+	// 			options: donutDemos.donutOptions,
+	// 			data: donutDemos.donutData,
+	// 			chartType: chartTypes.DonutChart
+	// 		}
+	// 	]
+	// },
+	// {
+	// 	title: "Line",
+	// 	demos: [
+	// 		{
+	// 			options: lineDemos.lineTimeSeriesOptions,
+	// 			data: lineDemos.lineTimeSeriesData,
+	// 			chartType: chartTypes.LineChart
+	// 		},
+	// 		{
+	// 			options: lineDemos.lineOptions,
+	// 			data: lineDemos.lineData,
+	// 			chartType: chartTypes.LineChart
+	// 		}
+	// 	]
+	// },
+	// {
+	// 	title: "Pie",
+	// 	demos: [
+	// 		{
+	// 			options: pieDemos.pieOptions,
+	// 			data: pieDemos.pieData,
+	// 			chartType: chartTypes.PieChart
+	// 		}
+	// 	]
+	// },
+	// {
+	// 	title: "Scatter",
+	// 	demos: [
+	// 		{
+	// 			options: scatterDemos.scatterTimeSeriesOptions,
+	// 			data: scatterDemos.scatterTimeSeriesData,
+	// 			chartType: chartTypes.ScatterChart
+	// 		},
+	// 		{
+	// 			options: scatterDemos.scatterOptions,
+	// 			data: scatterDemos.scatterData,
+	// 			chartType: chartTypes.ScatterChart
+	// 		}
+	// 	]
+	// },
+	// {
+	// 	title: "Step",
+	// 	demos: [
+	// 		{
+	// 			options: stepDemos.stepOptions,
+	// 			data: stepDemos.stepData,
+	// 			chartType: chartTypes.LineChart
+	// 		},
+	// 		{
+	// 			options: stepDemos.stepTimeSeriesOptions,
+	// 			data: stepDemos.stepTimeSeriesData,
+	// 			chartType: chartTypes.LineChart
+	// 		}
+	// 	]
+	// }
 ] as any;
 
 const formatTitleString = str => (

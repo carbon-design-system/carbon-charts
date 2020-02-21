@@ -130,7 +130,7 @@ export const simpleBarTimeSeriesData = {
 			data: [
 				{
 					date: new Date(2019, 0, 1),
-					value: 10000
+					value: 0
 				},
 				{
 					date: new Date(2019, 0, 2),

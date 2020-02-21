@@ -106,11 +106,11 @@ export class ChartModel {
 		return this.state.options;
 	}
 
-	set(newState: any, skipUpdate = false) {
+	set(newState: any, configs?: any) {
 		this.state = Object.assign({}, this.state, newState);
 
-		if (!skipUpdate) {
-			this.update();
+		if (!configs || !configs.skipUpdate) {
+			this.update(configs ? configs.animate : true);
 		}
 	}
 
@@ -137,7 +137,7 @@ export class ChartModel {
 	 * Updates miscellanous information within the model
 	 * such as the color scales, or the legend data labels
 	 */
-	update() {
+	update(animate = true) {
 		if (!this.getDisplayData()) {
 			return;
 		}
@@ -145,7 +145,7 @@ export class ChartModel {
 		this.updateAllDataLabels();
 		this.setColorScale();
 
-		this.services.events.dispatchEvent("model-update");
+		this.services.events.dispatchEvent("model-update", { animate });
 	}
 
 	setUpdateCallback(cb: Function) {
