@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.4](https://github.com/IBM/carbon-charts/compare/v0.29.3...v0.29.4) (2020-02-20)
+
+
+### Bug Fixes
+
+* **core:** Tools.getProperty did return 'null' for falsy values, now returns the actual values ([3b78c3a](https://github.com/IBM/carbon-charts/commit/3b78c3a27d4551e7d7b51f911ea2f7e0f155ef42))
+
+
+
+
+
+## [0.29.3](https://github.com/IBM/carbon-charts/compare/v0.29.2...v0.29.3) (2020-02-20)
+
+
+### Bug Fixes
+
+* **build:** fix bundle output for core ([4d3d6b4](https://github.com/IBM/carbon-charts/commit/4d3d6b450fe54b55479aeaffc3706b28d926fffa))
+
+
+
+
+
+## [0.29.2](https://github.com/IBM/carbon-charts/compare/v0.29.1...v0.29.2) (2020-02-18)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 ## [0.29.1](https://github.com/IBM/carbon-charts/compare/v0.29.0...v0.29.1) (2020-02-10)
 
 **Note:** Version bump only for package @carbon/charts-monorepo

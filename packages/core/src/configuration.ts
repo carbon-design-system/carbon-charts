@@ -17,10 +17,9 @@ import {
 	AxisTooltipOptions,
 	BarTooltipOptions,
 	LegendOptions,
-	ChartTheme,
 	LegendPositions,
 	StackedBarOptions
-} from "./interfaces/index";
+} from "./interfaces";
 
 /*
  *****************************
