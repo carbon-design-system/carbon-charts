@@ -12,7 +12,7 @@ import {
 } from "d3-scale";
 import { min, extent } from "d3-array";
 import { timeFormatDefaultLocale } from "d3-time-format";
-import * as englishLocale from "d3-time-format/locale/en-US.json";
+import englishLocale from "d3-time-format/locale/en-US.json";
 
 // Misc
 import {
