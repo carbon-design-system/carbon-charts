@@ -100,17 +100,17 @@ const defaultLocaleCode = "en-US";
 export const timeScale: TimeScaleOptions = {
 	addSpaceOnEdges: 1,
 	showDayName: false,
-	// localeCode: '',
+	localeCode: defaultLocaleCode,
 	timeIntervalFormats: {
-		"15seconds": { primary: "MMM d, pp", secondary: "pp", localeCode: defaultLocaleCode },
-		"minute": { primary: "MMM d, p", secondary: "p", localeCode: defaultLocaleCode },
-		"30minutes": { primary: "MMM d, p", secondary: "p", localeCode: defaultLocaleCode },
-		"hourly": { primary: "MMM d, hh a", secondary: "hh a", localeCode: defaultLocaleCode },
-		"daily": { primary: "MMM d", secondary: "d", localeCode: defaultLocaleCode },
-		"weekly": { primary: "eee, MMM d", secondary: "eee", localeCode: defaultLocaleCode },
-		"monthly": { primary: "MMM yyyy", secondary: "MMM", localeCode: defaultLocaleCode },
-		"quarterly": { primary: "QQQ ''yy", secondary: "QQQ", localeCode: defaultLocaleCode },
-		"yearly": { primary: "yyyy", secondary: "yyyy", localeCode: defaultLocaleCode },
+		"15seconds": { primary: "MMM d, pp", secondary: "pp" },
+		"minute": { primary: "MMM d, p", secondary: "p" },
+		"30minutes": { primary: "MMM d, p", secondary: "p" },
+		"hourly": { primary: "MMM d, hh a", secondary: "hh a" },
+		"daily": { primary: "MMM d", secondary: "d" },
+		"weekly": { primary: "eee, MMM d", secondary: "eee" },
+		"monthly": { primary: "MMM yyyy", secondary: "MMM" },
+		"quarterly": { primary: "QQQ ''yy", secondary: "QQQ" },
+		"yearly": { primary: "yyyy", secondary: "yyyy" },
 	}
 };
 

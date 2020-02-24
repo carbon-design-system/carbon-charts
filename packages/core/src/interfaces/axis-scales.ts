@@ -70,6 +70,10 @@ export interface TimeScaleOptions {
 	 * formats for each time interval
 	 */
 	timeIntervalFormats?: TimeIntervalFormats;
+	/**
+	 * local code, ie. "en-US"
+	 */
+	localeCode?: string;
 }
 
 /**
@@ -78,7 +82,6 @@ export interface TimeScaleOptions {
 export interface TickFormats {
 	primary?: string;
 	secondary?: string;
-	localeCode?: string;
 }
 export interface TimeIntervalFormats {
 	"15seconds"?: TickFormats;

@@ -56,7 +56,7 @@ export function formatTick(tick: number, i: number, interval: string, timeScaleO
 	const defaultFormats = Configuration.timeScale.timeIntervalFormats[intervalConsideringAlsoShowDayNameOption];
 	const primary = Tools.getProperty(customFormats, "primary") || defaultFormats.primary;
 	const secondary = Tools.getProperty(customFormats, "secondary") || defaultFormats.secondary;
-	const localeCode = Tools.getProperty(customFormats, "localeCode") || defaultFormats.localeCode;
+	const localeCode = timeScaleOptions.localeCode || Configuration.timeScale.localeCode;
 	const formatString = isTickPrimary(tick, i, interval, showDayName) ? primary : secondary;
 	const locale = getLocale(localeCode);
 

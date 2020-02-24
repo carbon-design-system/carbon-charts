@@ -245,9 +245,7 @@ export const lineTimeSeriesMonthlyCustomLocaleOptions = {
 		},
 	},
 	timeScale: {
-		timeIntervalFormats: {
-			monthly: { localeCode: "fr" }
-		},
+		localeCode: "fr",
 	},
 };
 
