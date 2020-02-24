@@ -1,8 +1,9 @@
 import { Chart } from "../chart";
 import { Map } from "../components/index"
-import { ChartModel } from '../model';
-import { Tools } from '../tools';
-import { options } from '../configuration';
+import { ChartModel } from "../model";
+import { Tools } from "../tools";
+import { options } from "../configuration";
+import { TooltipBar } from "../components/index";
 
 export class MapChart extends Chart {
   model = new ChartModel(this.services);
@@ -22,12 +23,12 @@ export class MapChart extends Chart {
   }
 
   getComponents() {
-      const graphFrameComponents = [
-        new Map(this.model, this.services)
-      ];
+    const graphFrameComponents = [
+      new Map(this.model, this.services)
+    ];
 
-      const components: any[] = this.getChartComponents(graphFrameComponents);
-      // components.push(new Tooltip(this.model, this.services));
-      return components;
+    const components: any[] = this.getChartComponents(graphFrameComponents);
+    components.push(new TooltipBar(this.model, this.services));
+    return components;
   }
 }
