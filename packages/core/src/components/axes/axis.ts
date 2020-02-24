@@ -5,7 +5,7 @@ import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
-import { computeTimeIntervalName, formatTick, isTickPrimary } from "../../services/timeSeries";
+import { computeTimeIntervalName, formatTick, isTickPrimary } from "../../services/time-series";
 
 // D3 Imports
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
