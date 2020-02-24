@@ -187,7 +187,7 @@ export class Axis extends Component {
 				// When dealing with a continuous scale
 				// We need to calculate an estimated size of the ticks
 				const minTickSize = Tools.getProperty(axisOptions, "ticks", "rotateIfSmallerThan") || Configuration.axis.ticks.rotateIfSmallerThan;
-				const estimatedTickSize = width / scale.ticks().length / 2;
+				const estimatedTickSize = width / scale.ticks().length / 1.6;
 
 				rotateTicks = estimatedTickSize < minTickSize;
 			}
