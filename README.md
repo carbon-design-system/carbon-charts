@@ -24,6 +24,10 @@
 - [React](./packages/react)
 - [Vue](./packages/vue)
 
+<a href="https://www.netlify.com">
+  <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"/>
+</a>
+
 ## CHANGELOG
 Read the release change logs [here](./CHANGELOG.md)
 
