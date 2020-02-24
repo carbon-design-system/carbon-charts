@@ -2,15 +2,28 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import textWidth from "text-width";
+import { scaleLinear } from "d3-scale";
 
 // D3 Imports
 import { mouse } from "d3-selection";
-import { TooltipTypes } from "../../interfaces";
+import { TooltipTypes, ScaleTypes } from "../../interfaces";
 
 const THRESHOLD = 5;
 
 function pointIsMatch(dx: number, x: number) {
 	return dx > x - THRESHOLD && dx < x + THRESHOLD;
+}
+
+function invertedScale(scale) {
+	if (scale.invert) {
+		return scale.invert;
+	} else {
+		const scaleClone = scaleLinear()
+			.domain(scale.range())
+			.range(scale.domain());
+
+		return scaleClone;
+	}
 }
 
 export class Ruler extends Component {
@@ -36,23 +49,31 @@ export class Ruler extends Component {
 			...this.model
 				.getData()
 				.datasets.map(dataset =>
-					dataset.data.map((d, i) =>
-						Number(this.services.cartesianScales.getDomainValue(d, i))
-					)
+					dataset.data.map((d, i) => this.services.cartesianScales.getDomainValue(d, i))
 				)
 		);
 
-		const values = data.filter(d => pointIsMatch(d, x));
+		// const scaledValues = data.filter(d => pointIsMatch(d, x));
+		const scaledValues: any[] = data.reduce((acc, cur) => {
+			if (acc.length > 0 && cur > acc[0]) {
+				return acc;
+			} else if (pointIsMatch(cur, x)) {
+				acc.push(cur);
+			}
+			return acc;
+		}, []);
 
 		// some data point match
-		if (values.length > 0) {
-			const highlightItems = values.map(v =>
-				this.services.cartesianScales.getDataFromDomain(scale.invert(v))
+		if (scaledValues.length > 0) {
+			const highlightItems = scaledValues.map(v =>
+				this.services.cartesianScales.getDataFromDomain(invertedScale(scale)(v))
 			)[0];
 
-			const hoveredElements = dataPoints.filter((d, i) =>
-				pointIsMatch(this.services.cartesianScales.getDomainValue(d, i), x)
-			);
+			const hoveredElements = dataPoints.filter((d, i) => {
+				console.log(d);
+				// console.log(scaledValues, this.services.cartesianScales.getDomainValue(d, i));
+				return scaledValues.includes(this.services.cartesianScales.getDomainValue(d, i));
+			});
 
 			hoveredElements.dispatch("mouseover");
 
@@ -62,7 +83,7 @@ export class Ruler extends Component {
 				type: TooltipTypes.GRIDLINE
 			});
 
-			lineX = values[0];
+			lineX = scaledValues[0];
 		} else {
 			dataPoints.dispatch("mouseout");
 		}
@@ -72,7 +93,7 @@ export class Ruler extends Component {
 			.attr("x1", lineX)
 			.attr("x2", lineX);
 
-		// if scale can't be inverted don't show axis tooltip
+		// if scale is not continuous don't show axis tooltip
 		if (!scale.invert) {
 			return;
 		}
