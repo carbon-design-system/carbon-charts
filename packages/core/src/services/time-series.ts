@@ -59,7 +59,7 @@ function getLocale(localeCode: string): Locale {
 
 // Return the formatted current tick
 export function formatTick(tick: number, i: number, interval: string, timeScaleOptions: TimeScaleOptions): string {
-	const showDayName = timeScaleOptions.showDayName;
+	const showDayName = timeScaleOptions.showDayName || Configuration.timeScale.showDayName;
 	const intervalConsideringAlsoShowDayNameOption = interval === "daily" && showDayName ? "weekly" : interval;
 	const date = new Date(tick);
 	const customFormats = Tools.getProperty(timeScaleOptions, "timeIntervalFormats")[intervalConsideringAlsoShowDayNameOption];
@@ -106,8 +106,7 @@ function closestTimeIntervalName(ms: number): string {
 
 // Given an array of timestamps, return the interval name
 // between 15seconds, minute, 30minutes, hourly, daily, weekly, monthly, quarterly, yearly
-export function computeTimeIntervalName(scale: AxisScale<number>): string {
-	const ticks = scale.tickValues();
+export function computeTimeIntervalName(ticks: number[]): string {
 	const differences = consecutiveDifferences(ticks);
 	const minDifference = min(differences);
 	return closestTimeIntervalName(minDifference);
