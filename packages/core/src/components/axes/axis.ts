@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { AxisPositions, ScaleTypes, Roles, AxisOptions } from "../../interfaces";
+import { AxisPositions, ScaleTypes, Roles } from "../../interfaces";
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
@@ -8,7 +8,7 @@ import * as Configuration from "../../configuration";
 import { formatTick, computeTimeIntervalName, isTickPrimary } from "./utils";
 
 // D3 Imports
-import { axisBottom, axisLeft, axisRight, axisTop, Axis as AxisScale } from "d3-axis";
+import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 import { timeFormatDefaultLocale } from "d3-time-format";
 
 export class Axis extends Component {
@@ -33,6 +33,7 @@ export class Axis extends Component {
 		const { position: axisPosition } = this.configs;
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		const timeScaleOptions = Tools.getProperty(options, "timeScale");
 
 		const svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
@@ -83,8 +84,7 @@ export class Axis extends Component {
 		}
 
 		// Initialize axis object
-		const axis = axisFunction(scale)
-			.tickSizeOuter(0);
+		const axis = axisFunction(scale).tickSizeOuter(0);
 
 		if (scale.ticks) {
 			const numberOfTicks = Tools.getProperty(axisOptions, "ticks", "number") || Configuration.axis.ticks.number;
@@ -107,6 +107,7 @@ export class Axis extends Component {
 
 				axis.tickValues(tickValues);
 			}
+
 			//// WIP ////
 			// if (isTimeScaleType) {
 			// 	if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges") > 0) {
@@ -118,12 +119,11 @@ export class Axis extends Component {
 			// }
 			//// WIP ////
 
-
 			// create the right ticks formatter
 			let formatter;
 			if (isTimeScaleType) {
-				const { showDayName, timeInterval } = getTimeScaleInfo(axisOptions, axis);
-				formatter = (t: number, i: number) => formatTick(t, i, timeInterval, showDayName, axisOptions);
+				const timeInterval = computeTimeIntervalName(axis);
+				formatter = (t: number, i: number) => formatTick(t, i, timeInterval, timeScaleOptions);
 			} else {
 				formatter = Tools.getProperty(axisOptions, "ticks", "formatter");
 			}
@@ -197,7 +197,8 @@ export class Axis extends Component {
 
 		// Apply new axis to the axis element
 		if (isTimeScaleType) {
-			const { showDayName, timeInterval } = getTimeScaleInfo(axisOptions, axis);
+			const timeInterval = computeTimeIntervalName(axis);
+			const showDayName = timeScaleOptions.showDayName;
 
 			if (animate) {
 				axisRef = axisRef.transition(this.services.transitions.getTransition("axis-update"));
@@ -265,14 +266,4 @@ export class Axis extends Component {
 		return this.getContainerSVG()
 			.select(`g.axis.${axisPosition} text.axis-title`);
 	}
-}
-
-// Given the axis options and the timescale, returns
-// an object of showDayName and the time interval
-function getTimeScaleInfo(axisOptions: AxisOptions, scale: AxisScale<number>) {
-	const showDayName = Tools.getProperty(axisOptions, "ticks", "showDayName") !== null
-		? Tools.getProperty(axisOptions, "ticks", "showDayName")
-		: Configuration.axis.ticks.showDayName;
-	const timeInterval = computeTimeIntervalName(scale.tickValues());
-	return { showDayName, timeInterval };
 }

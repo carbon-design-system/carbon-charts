@@ -54,7 +54,6 @@ export const lineTimeSeriesMinuteOptions = {
 		bottom: {
 			scaleType: "time",
 			primary: true,
-			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
 };
@@ -72,7 +71,8 @@ export const lineTimeSeriesData30minutes = {
 				{ date: new Date(2020, 11, 11, 0, 0), value: 10 },
 				{ date: new Date(2020, 11, 11, 0, 30), value: 10 },
 				{ date: new Date(2020, 11, 11, 1, 0), value: 10 },
-				{ date: new Date(2020, 11, 11, 1, 30), value: 10 },
+				{ date: new Date(2020, 11, 11, 1, 20), value: 10 },
+				{ date: new Date(2020, 11, 11, 1, 25), value: 10 },
 			]
 		}
 	]
@@ -85,7 +85,6 @@ export const lineTimeSeries30minutesOptions = {
 		bottom: {
 			scaleType: "time",
 			primary: true,
-			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
 };
@@ -116,7 +115,6 @@ export const lineTimeSeriesHourlyDefaultLocaleOptions = {
 		bottom: {
 			scaleType: "time",
 			primary: true,
-			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
 };
@@ -131,12 +129,11 @@ export const lineTimeSeriesHourlyCustomTicksFormatsOptions = {
 		bottom: {
 			scaleType: "time",
 			primary: true,
-			ticks: {
-				timeIntervalFormats: {
-					hourly: { primary: "MMM d, HH:mm", secondary: "HH:mm" }
-				},
-			},
-			timeScale: { addSpaceOnEdges: 0 },
+		},
+	},
+	timeScale: {
+		timeIntervalFormats: {
+			hourly: { primary: "MMM d, HH:mm", secondary: "HH:mm" }
 		},
 	},
 };
@@ -167,7 +164,6 @@ export const lineTimeSeriesDailyOptions = {
 		bottom: {
 			scaleType: "time",
 			primary: true,
-			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
 };
@@ -199,9 +195,10 @@ export const lineTimeSeriesWeeklyOptions = {
 		bottom: {
 			scaleType: "time",
 			primary: true,
-			ticks: { showDayName: true },
-			timeScale: { addSpaceOnEdges: 0 },
 		},
+	},
+	timeScale: {
+		showDayName: true
 	},
 };
 
@@ -231,7 +228,6 @@ export const lineTimeSeriesMonthlyDefaultLocaleOptions = {
 		bottom: {
 			scaleType: "time",
 			primary: true,
-			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
 };
@@ -246,12 +242,11 @@ export const lineTimeSeriesMonthlyCustomLocaleOptions = {
 		bottom: {
 			scaleType: "time",
 			primary: true,
-			ticks: {
-				timeIntervalFormats: {
-					monthly: { localeCode: "fr" }
-				},
-			},
-			timeScale: { addSpaceOnEdges: 0 },
+		},
+	},
+	timeScale: {
+		timeIntervalFormats: {
+			monthly: { localeCode: "fr" }
 		},
 	},
 };
@@ -282,7 +277,6 @@ export const lineTimeSeriesQuarterlyOptions = {
 		bottom: {
 			scaleType: "time",
 			primary: true,
-			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
 };
@@ -313,7 +307,6 @@ export const lineTimeSeriesYearlyOptions = {
 		bottom: {
 			scaleType: "time",
 			primary: true,
-			timeScale: { addSpaceOnEdges: 0 },
 		},
 	},
 };

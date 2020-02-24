@@ -3,9 +3,6 @@ import { AxisOptions } from "../../interfaces";
 
 type TickTuple = [Date, string];
 type Dataset = TickTuple[];
-interface Options {
-	showDayName?: boolean;
-}
 
 const axisOptions = {};
 

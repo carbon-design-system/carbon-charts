@@ -96,8 +96,22 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartToolt
 // Will setup axes options based on what user provides
 const axes: AxesOptions = {};
 
-const timeScale: TimeScaleOptions = {
+const defaultLocaleCode = "en-US";
+export const timeScale: TimeScaleOptions = {
 	addSpaceOnEdges: 1,
+	showDayName: false,
+	// localeCode: '',
+	timeIntervalFormats: {
+		"15seconds": { primary: "MMM d, pp", secondary: "pp", localeCode: defaultLocaleCode },
+		"minute": { primary: "MMM d, p", secondary: "p", localeCode: defaultLocaleCode },
+		"30minutes": { primary: "MMM d, p", secondary: "p", localeCode: defaultLocaleCode },
+		"hourly": { primary: "MMM d, hh a", secondary: "hh a", localeCode: defaultLocaleCode },
+		"daily": { primary: "MMM d", secondary: "d", localeCode: defaultLocaleCode },
+		"weekly": { primary: "eee, MMM d", secondary: "eee", localeCode: defaultLocaleCode },
+		"monthly": { primary: "MMM yyyy", secondary: "MMM", localeCode: defaultLocaleCode },
+		"quarterly": { primary: "QQQ ''yy", secondary: "QQQ", localeCode: defaultLocaleCode },
+		"yearly": { primary: "yyyy", secondary: "yyyy", localeCode: defaultLocaleCode },
+	}
 };
 
 /**
@@ -121,7 +135,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	timeScale,
 	grid,
-	tooltip: axisChartTooltip
+	tooltip: axisChartTooltip,
 } as AxisChartOptions);
 
 /**
@@ -284,23 +298,10 @@ export const transitions = {
 	}
 };
 
-const defaultLocaleCode = "en-US";
 export const axis = {
 	ticks: {
 		number: 7,
 		rotateIfSmallerThan: 30,
-		showDayName: false,
-		timeIntervalFormats: {
-			"15seconds": { primary: "MMM d, pp", secondary: "pp", localeCode: defaultLocaleCode },
-			"minute": { primary: "MMM d, p", secondary: "p", localeCode: defaultLocaleCode },
-			"30minutes": { primary: "MMM d, p", secondary: "p", localeCode: defaultLocaleCode },
-			"hourly": { primary: "MMM d, hh a", secondary: "hh a", localeCode: defaultLocaleCode },
-			"daily": { primary: "MMM d", secondary: "d", localeCode: defaultLocaleCode },
-			"weekly": { primary: "eee, MMM d", secondary: "eee", localeCode: defaultLocaleCode },
-			"monthly": { primary: "MMM yyyy", secondary: "MMM", localeCode: defaultLocaleCode },
-			"quarterly": { primary: "QQQ ''yy", secondary: "QQQ", localeCode: defaultLocaleCode },
-			"yearly": { primary: "yyyy", secondary: "yyyy", localeCode: defaultLocaleCode },
-		}
 	}
 };
 

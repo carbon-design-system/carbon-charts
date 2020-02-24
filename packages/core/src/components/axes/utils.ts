@@ -4,12 +4,15 @@ import { Tools } from "../../tools";
 import * as Configuration from "../../configuration";
 import { format } from "date-fns";
 import * as locales from "date-fns/locale";
-import { AxisOptions } from "src/interfaces";
+import { TimeScaleOptions } from "src/interfaces";
+
+// D3 Imports
+import { Axis as AxisScale } from "d3-axis";
 
 const codes = Object.values(locales).map(locale => locale["code"]);
 
 // Return true if the tick is a primary tick, false otherwise
-export function isTickPrimary(tick: number, i: number, interval: string, showDayName): boolean {
+export function isTickPrimary(tick: number, i: number, interval: string, showDayName: boolean): boolean {
 	const isFirstTick = i === 0;
 	const hasANewWeekStarted = Number(format((new Date(tick)), "c")) === 2;
 	const isFirstQuarter = Number(format((new Date(tick)), "q")) === 1;
@@ -45,15 +48,15 @@ function getLocale(localeCode: string): Locale {
 }
 
 // Return the formatted current tick
-export function formatTick(tick: number, i: number, interval: string, showDayName, axisOptions: AxisOptions): string {
+export function formatTick(tick: number, i: number, interval: string, timeScaleOptions: TimeScaleOptions): string {
+	const showDayName = timeScaleOptions.showDayName;
 	const intervalConsideringAlsoShowDayNameOption = interval === "daily" && showDayName ? "weekly" : interval;
-
 	const date = new Date(tick);
-	const customFormats = Tools.getProperty(axisOptions, "ticks", "timeIntervalFormats");
-	const defaultFormats = Configuration.axis.ticks.timeIntervalFormats[intervalConsideringAlsoShowDayNameOption];
-	const primary = Tools.getProperty(customFormats, interval, "primary") || defaultFormats.primary;
-	const secondary = Tools.getProperty(customFormats, interval, "secondary") || defaultFormats.secondary;
-	const localeCode = Tools.getProperty(customFormats, interval, "localeCode") || defaultFormats.localeCode;
+	const customFormats = Tools.getProperty(timeScaleOptions, "timeIntervalFormats")[intervalConsideringAlsoShowDayNameOption];
+	const defaultFormats = Configuration.timeScale.timeIntervalFormats[intervalConsideringAlsoShowDayNameOption];
+	const primary = Tools.getProperty(customFormats, "primary") || defaultFormats.primary;
+	const secondary = Tools.getProperty(customFormats, "secondary") || defaultFormats.secondary;
+	const localeCode = Tools.getProperty(customFormats, "localeCode") || defaultFormats.localeCode;
 	const formatString = isTickPrimary(tick, i, interval, showDayName) ? primary : secondary;
 	const locale = getLocale(localeCode);
 
@@ -93,7 +96,8 @@ function closestTimeIntervalName(ms: number): string {
 
 // Given an array of timestamps, return the interval name
 // between 15seconds, minute, 30minutes, hourly, daily, weekly, monthly, quarterly, yearly
-export function computeTimeIntervalName(ticks: number[]): string {
+export function computeTimeIntervalName(scale: AxisScale<number>): string {
+	const ticks = scale.tickValues();
 	const differences = consecutiveDifferences(ticks);
 	const minDifference = min(differences);
 	return closestTimeIntervalName(minDifference);
