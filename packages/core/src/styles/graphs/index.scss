@@ -2,6 +2,6 @@
 @import "./line";
 @import "./scatter";
 
-.graph-frame {
+svg.#{$prefix}--#{$charts-prefix}--chart-svg svg.graph-frame {
 	overflow-x: hidden;
 }

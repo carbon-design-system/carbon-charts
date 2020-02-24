@@ -51,7 +51,6 @@ export class Chart {
 		// Call update() when model has been updated
 		this.services.events
 			.addEventListener("model-update", (e) => {
-				console.log("e", e)
 				const animate = !!Tools.getProperty(e, "detail", "animate");
 
 				this.update(animate);
@@ -77,10 +76,7 @@ export class Chart {
 		return null;
 	}
 
-
-
 	update(animate = true) {
-		console.log("UPDATE, ANIMET24T@$T@#$", animate)
 		if (!this.components) {
 			return;
 		}

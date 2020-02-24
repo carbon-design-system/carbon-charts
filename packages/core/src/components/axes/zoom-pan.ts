@@ -8,14 +8,7 @@ import { DOMUtils } from "../../services";
 import { area, line } from "d3-shape";
 import { extent } from "d3-array";
 import { drag } from "d3-drag";
-import { event, select } from "d3-selection";
-
-let model: any;
-let domain = {};
-let updateModel = Tools.debounce(() => {
-	console.log("UPDATE MODEL")
-	model.set({ zoomDomain: domain }, { animate: false })
-}, 2.5);
+import { event, select, selectAll } from "d3-selection";
 
 export class ZoomBar extends Component {
 	type = "zoom-bar";
@@ -23,8 +16,6 @@ export class ZoomBar extends Component {
 	ogXScale: any;
 
 	render(animate = true) {
-		model = this.model;
-
 		const svg = this.getContainerSVG();
 
 		const { cartesianScales } = this.services;
@@ -156,7 +147,7 @@ export class ZoomBar extends Component {
 					.attr("height", 12)
 					.attr("fill", "#fff");
 				const endHandlePosition = zoomDomain ? xScale(+zoomDomain[1]) : xScale.range()[1];
-				console.log("endHandlePosition", endHandlePosition)
+				// console.log("endHandlePosition", endHandlePosition)
 
 				// Handle #2
 				const handle2 = DOMUtils.appendOrSelect(container, "rect.zoom-handle.end")
@@ -180,14 +171,14 @@ export class ZoomBar extends Component {
 				.attr("fill-opacity", 0.85);
 
 				const self = this;
-				handle2.on("click", this.zoomIn.bind(this));
-				handle2.call(
+				// handle2.on("click", this.zoomIn.bind(this));
+				selectAll("rect.zoom-handle").call(
 					drag()
 						.on("start", function() {
 							select(this).classed("dragging", true);
 						})
 						.on("drag", function(d) {
-							self.dragged(this, d);
+							self.dragged(this, d, event);
 						})
 						.on("end", function() {
 							select(this).classed("dragging", false);
@@ -197,17 +188,26 @@ export class ZoomBar extends Component {
 		}
 	}
 
-	dragged(element, d) {
-		select(element).attr("x", d.x = event.x);
-		this.getContainerSVG()
-			.select("rect.zoom-handle-bar.end")
-			.attr("x", event.x + 2);
+	dragged = Tools.debounce((element, d, e) => {
+		element = select(element);
+		const startingHandle = element.attr("class").indexOf("start") !== -1;
 
-		console.log("event.x", this.ogXScale.invert(event.x));
-
-		domain = [this.ogXScale.domain()[0], this.ogXScale.invert(event.x)];
-		updateModel(domain);
-	}
+		let domain;
+		if (startingHandle) {
+			domain = [
+				this.ogXScale.invert(e.x),
+				this.ogXScale.domain()[1]
+				// Math.min(this.ogXScale.invert(e.x), this.ogXScale.domain()[1])
+			];
+		} else {
+			domain = [
+				this.ogXScale.domain()[0],
+				this.ogXScale.invert(e.x)
+				// Math.min(this.ogXScale.invert(e.x), this.ogXScale.domain()[1])
+			];
+		}
+		this.model.set({ zoomDomain: domain }, { animate: false })
+	}, 2.5);
 
 	zoomIn() {
 		const mainXScale = this.services.cartesianScales.getMainXScale();
