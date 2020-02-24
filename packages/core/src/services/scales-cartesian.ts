@@ -11,8 +11,6 @@ import {
 	scaleLog
 } from "d3-scale";
 import { min, extent } from "d3-array";
-import { timeFormatDefaultLocale } from "d3-time-format";
-const englishLocale = require("d3-time-format/locale/en-US.json");
 
 // Misc
 import {
@@ -328,13 +326,6 @@ export class CartesianScales extends Service {
 
 		const scaleType = Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
 		this.scaleTypes[axisPosition] = scaleType;
-
-		// Set the date/time locale
-		if (scaleType === ScaleTypes.TIME) {
-			const timeLocale = Tools.getProperty(options, "locale", "time") || englishLocale;
-
-			timeFormatDefaultLocale(timeLocale);
-		}
 
 		let scale;
 		if (scaleType === ScaleTypes.TIME) {
