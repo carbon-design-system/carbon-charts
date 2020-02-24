@@ -1,13 +1,23 @@
-import { min } from "d3-array";
-import { TIME_INTERVALS } from "./constants";
-import { Tools } from "../../tools";
-import * as Configuration from "../../configuration";
+import * as Configuration from "../configuration";
 import { format } from "date-fns";
 import * as locales from "date-fns/locale";
-import { TimeScaleOptions } from "src/interfaces";
+import { TimeScaleOptions } from "../interfaces/axis-scales";
+import { Tools } from "../tools";
 
 // D3 Imports
+import { min } from "d3-array";
 import { Axis as AxisScale } from "d3-axis";
+
+export const TIME_INTERVALS = [
+	["15seconds", 15 * 1000],
+	["minute", 60 * 1000],
+	["30minutes", 30 * 60 * 1000],
+	["hourly", 60 * 60 * 1000],
+	["daily", 24 * 60 * 60 * 1000],
+	["monthly", 30 * 24 * 60 * 60 * 1000],
+	["quarterly", 3 * 30 * 24 * 60 * 60 * 1000],
+	["yearly", 12 * 30 * 24 * 60 * 60 * 1000]
+];
 
 const codes = Object.values(locales).map(locale => locale["code"]);
 
