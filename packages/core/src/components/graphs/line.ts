@@ -45,7 +45,6 @@ export class Line extends Component {
 			.x((d, i) => this.services.cartesianScales.getDomainValue(d, i))
 			.y((d, i) => this.services.cartesianScales.getRangeValue(d, i))
 			.curve(this.services.curves.getD3Curve())
-			// Describe which parts of the line domain are defined
 			.defined((d: any, i) => {
 				if (!d || d.value === null) {
 					return false;
