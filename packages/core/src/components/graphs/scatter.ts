@@ -109,7 +109,8 @@ export class Scatter extends Component {
 		return d.data
 			// Remove datapoints with no value
 			.filter((datum: any) => {
-				if (!datum || datum.value === null) {
+				const value = isNaN(datum) ? datum.value : datum;
+				if (value === null || value === undefined) {
 					return false;
 				}
 
