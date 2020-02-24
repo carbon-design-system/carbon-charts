@@ -82,7 +82,7 @@ export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip,
 	}
 } as AxisTooltipOptions);
 
-export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip , {
+export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip, {
 	datapoint: {
 		verticalOffset: 4
 	},
@@ -287,7 +287,8 @@ export const axis = {
 	ticks: {
 		number: 7,
 		rotateIfSmallerThan: 30
-	}
+	},
+	paddingRatio: 0.1
 };
 
 export const spacers = {
