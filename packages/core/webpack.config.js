@@ -11,7 +11,7 @@ module.exports = {
 	devtool: "sourcemap",
 	entry: {
 		"index": "./demo/index.ts",
-		"styles": "./src/styles/styles.scss",
+		"styles": "./src/styles/styles-white.scss",
 		"styles-g10": "./src/styles/styles-g10.scss",
 		"styles-g90": "./src/styles/styles-g90.scss",
 		"styles-g100": "./src/styles/styles-g100.scss",
@@ -21,7 +21,7 @@ module.exports = {
 		filename: "[name].js",
 		chunkFilename: "[name].chunk.js",
 		libraryTarget: "umd",
-		library: "Charts"
+		library: "ChartsDemo"
 	},
 	optimization: {
 		splitChunks: {
@@ -35,7 +35,18 @@ module.exports = {
 	module: {
 		rules: [
 			// all files with a ".ts" or ".tsx" extension will be handled by "ts-loader"
-			{ test: /\.ts$/, loader: "ts-loader?configFile=tsconfig-demo.json" },
+			{
+				test: /\.ts$/,
+				use: [
+					{
+						loader: "ts-loader",
+						options: {
+							configFile: "demo/tsconfig.json",
+							projectReferences: true
+						}
+					}
+				]
+			},
 			{ test: /\.html?$/, loader: "html-loader" },
 			{
 				test: /\.s?css$/,
