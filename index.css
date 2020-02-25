@@ -54,8 +54,19 @@ header.m-demo-header {
     margin-bottom: 10px; }
   header.m-demo-header div h3 {
     font-size: 1.25rem;
-    font-weight: 300;
-    margin-bottom: 45px; }
+    font-weight: 300; }
+  header.m-demo-header div span.netlify {
+    display: table;
+    border-radius: 10px;
+    padding: 5px 12px;
+    font-size: 13px;
+    vertical-align: middle;
+    background-color: #171717;
+    color: #bcbcbc;
+    margin: 15px auto 45px auto; }
+    header.m-demo-header div span.netlify a {
+      color: #fff;
+      text-decoration: none; }
 
 .chart-type-selection {
   display: inline;
