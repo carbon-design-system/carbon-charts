@@ -59,14 +59,13 @@ function getLocale(localeCode: string): Locale {
 
 // Return the formatted current tick
 export function formatTick(tick: number, i: number, interval: string, timeScaleOptions: TimeScaleOptions): string {
-	const showDayName = timeScaleOptions.showDayName || Configuration.timeScale.showDayName;
+	const showDayName = timeScaleOptions.showDayName;
 	const intervalConsideringAlsoShowDayNameOption = interval === "daily" && showDayName ? "weekly" : interval;
 	const date = new Date(tick);
-	const customFormats = Tools.getProperty(timeScaleOptions, "timeIntervalFormats")[intervalConsideringAlsoShowDayNameOption];
-	const defaultFormats = Configuration.timeScale.timeIntervalFormats[intervalConsideringAlsoShowDayNameOption];
-	const primary = Tools.getProperty(customFormats, "primary") || defaultFormats.primary;
-	const secondary = Tools.getProperty(customFormats, "secondary") || defaultFormats.secondary;
-	const localeCode = timeScaleOptions.localeCode || Configuration.timeScale.localeCode;
+	const formats = Tools.getProperty(timeScaleOptions, "timeIntervalFormats")[intervalConsideringAlsoShowDayNameOption];
+	const primary = Tools.getProperty(formats, "primary");
+	const secondary = Tools.getProperty(formats, "secondary");
+	const localeCode = timeScaleOptions.localeCode;
 	const formatString = isTickPrimary(tick, i, interval, showDayName) ? primary : secondary;
 	const locale = getLocale(localeCode);
 

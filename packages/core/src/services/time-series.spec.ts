@@ -112,6 +112,7 @@ it("should format ticks with timeInterval hourly", () => {
 	const timeIntervalCustomFormats = computeTimeIntervalName(timestampsCustomFormats);
 	expect(timeIntervalCustomFormats).toEqual("hourly");
 	const timeScaleCustomOptions = {
+		...timeScaleOpt,
 		timeIntervalFormats: {
 			"hourly": { primary: "MMM d, HH:mm", secondary: "HH:mm" },
 		}
