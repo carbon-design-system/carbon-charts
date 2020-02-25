@@ -31,6 +31,9 @@ export class Axis extends Component {
 		const { position: axisPosition } = this.configs;
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		const numberOfTicksProvided = Tools.getProperty(axisOptions, "ticks", "number");
+		const isNumberOfTicksProvided = numberOfTicksProvided !== null;
+		const isVerticalAxis = axisPosition === AxisPositions.LEFT || axisPosition === AxisPositions.RIGHT;
 
 		const svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
@@ -70,13 +73,48 @@ export class Axis extends Component {
 				break;
 		}
 
+		// Add axis into the parent
+		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
+		const axisRefExists = !container.select(`g.ticks`).empty();
+		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
+		if (!axisRefExists) {
+			axisRef.attr("role", `${Roles.GRAPHICS_OBJECT} ${Roles.GROUP}`);
+		}
+
+		// We draw the invisible axis because of the async nature of d3 transitions
+		// To be able to tell the final width & height of the axis when initiaing the transition
+		// The invisible axis is updated instantly and without a transition
+		const invisibleAxisRef = DOMUtils.appendOrSelect(container, `g.ticks.invisible`)
+			.style("opacity", "0")
+			.attr("aria-hidden", true);
+
+		// Append to DOM a fake tick to get the right computed font height
+		const fakeTick = DOMUtils.appendOrSelect(invisibleAxisRef, `g.tick`);
+		const fakeTickText = DOMUtils.appendOrSelect(fakeTick, `text`).text("0");
+		const tickHeight = DOMUtils.getSVGElementSize(fakeTickText.node(), { useBBox: true }).height;
+		fakeTick.remove();
+
 		// Initialize axis object
 		const axis = axisFunction(scale)
 			.tickSizeOuter(0)
 			.tickFormat(Tools.getProperty(axisOptions, "ticks", "formatter"));
 
 		if (scale.ticks) {
-			const numberOfTicks = Tools.getProperty(axisOptions, "ticks", "number") || Configuration.axis.ticks.number;
+			let numberOfTicks;
+
+			if (isNumberOfTicksProvided) {
+				numberOfTicks = numberOfTicksProvided;
+			} else {
+				// If number of ticks is not provided:
+				if (isVerticalAxis) {
+					// Get how many ticks based on height
+					numberOfTicks = this.getNumberOfFittingTicks(height, tickHeight, Configuration.tickSpaceRatioVertical);
+				} else {
+					// Set default ticks number
+					numberOfTicks = Configuration.axis.ticks.number;
+				}
+			}
+
 			axis.ticks(numberOfTicks);
 
 			if (this.scaleType === ScaleTypes.TIME) {
@@ -94,21 +132,6 @@ export class Axis extends Component {
 				axis.tickValues(tickValues);
 			}
 		}
-
-		// Add axis into the parent
-		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
-		const axisRefExists = !container.select(`g.ticks`).empty();
-		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
-		if (!axisRefExists) {
-			axisRef.attr("role", `${Roles.GRAPHICS_OBJECT} ${Roles.GROUP}`);
-		}
-
-		// We draw the invisible axis because of the async nature of d3 transitions
-		// To be able to tell the final width & height of the axis when initiaing the transition
-		// The invisible axis is updated instantly and without a transition
-		const invisibleAxisRef = DOMUtils.appendOrSelect(container, `g.ticks.invisible`)
-			.style("opacity", "0")
-			.attr("aria-hidden", true);
 
 		// Position and transition the axis
 		switch (axisPosition) {
@@ -188,6 +211,13 @@ export class Axis extends Component {
 			}
 
 			if (rotateTicks) {
+				if (!isNumberOfTicksProvided) {
+					axis.ticks(this.getNumberOfFittingTicks(width, tickHeight, Configuration.tickSpaceRatioHorizontal));
+
+					invisibleAxisRef.call(axis);
+					axisRef.call(axis);
+				}
+
 				container.selectAll("g.ticks g.tick text")
 					.attr("transform", `rotate(45)`)
 					.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
@@ -211,5 +241,10 @@ export class Axis extends Component {
 
 		return this.getContainerSVG()
 			.select(`g.axis.${axisPosition} text.axis-title`);
+	}
+
+	getNumberOfFittingTicks(size, tickSize, spaceRatio) {
+		const numberOfTicksFit = Math.floor(size / (tickSize * spaceRatio));
+		return Tools.clamp(numberOfTicksFit, 2, Configuration.axis.ticks.number);
 	}
 }
