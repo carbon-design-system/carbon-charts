@@ -45,7 +45,7 @@ export class Ruler extends Component {
 		const scale = this.services.cartesianScales.getMainXScale();
 		let lineX = x;
 
-		const data = Array.prototype.concat(
+		const scaledData = Array.prototype.concat(
 			...this.model
 				.getData()
 				.datasets.map(dataset =>
@@ -53,8 +53,7 @@ export class Ruler extends Component {
 				)
 		);
 
-		// const scaledValues = data.filter(d => pointIsMatch(d, x));
-		const scaledValues: any[] = data.reduce((acc, cur) => {
+		const scaledValuesMatch: any[] = scaledData.reduce((acc, cur) => {
 			if (acc.length > 0 && cur > acc[0]) {
 				return acc;
 			} else if (pointIsMatch(cur, x)) {
@@ -64,26 +63,25 @@ export class Ruler extends Component {
 		}, []);
 
 		// some data point match
-		if (scaledValues.length > 0) {
-			const highlightItems = scaledValues.map(v =>
-				this.services.cartesianScales.getDataFromDomain(invertedScale(scale)(v))
-			)[0];
+		if (scaledValuesMatch.length > 0) {
+			const sampleMatch = scaledValuesMatch[0];
+
+			const highlightItems = this.services.cartesianScales.getDataFromDomain(
+				invertedScale(scale)(sampleMatch)
+			);
 
 			const hoveredElements = dataPoints.filter((d, i) => {
-				console.log(d);
-				// console.log(scaledValues, this.services.cartesianScales.getDomainValue(d, i));
-				return scaledValues.includes(this.services.cartesianScales.getDomainValue(d, i));
+				return scaledValuesMatch.includes(this.services.cartesianScales.getDomainValue(d));
 			});
 
 			hoveredElements.dispatch("mouseover");
-
 			this.services.events.dispatchEvent("show-tooltip", {
 				hoveredElement: line,
 				multidata: highlightItems,
 				type: TooltipTypes.GRIDLINE
 			});
 
-			lineX = scaledValues[0];
+			lineX = sampleMatch;
 		} else {
 			dataPoints.dispatch("mouseout");
 		}

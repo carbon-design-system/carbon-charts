@@ -182,7 +182,9 @@ export class CartesianScales extends Service {
 		const scaleType = this.scaleTypes[axisPosition];
 		const scale = this.scales[axisPosition];
 		if (scaleType === ScaleTypes.LABELS) {
-			const correspondingLabel = this.model.getDisplayData().labels[index];
+			const correspondingLabel = !isNaN(index)
+				? this.model.getDisplayData().labels[index]
+				: datum.label;
 			return scale(correspondingLabel) + scale.step() / 2;
 		} else if (scaleType === ScaleTypes.TIME) {
 			return scale(new Date(datum.date || datum.label));
