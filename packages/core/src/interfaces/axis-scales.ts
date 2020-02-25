@@ -23,6 +23,13 @@ export interface AxisOptions {
 	 * Range usually follows a linear scale
 	 */
 	useAsGraphRange?: boolean;
+	/**
+	 * Whether the Axis should use the specified domain
+	 * instead of it being dynamically generated based on data extents.
+	 * The type of values should depend on the scale type.
+	 * Example for continuous axis scale: [-100, 100]
+	 * Example for discrete axis scale: ['Qty', 'More', 'Sold']
+	 */
 	domain?: AxisDomain[];
 	primary?: boolean;
 	secondary?: boolean;
