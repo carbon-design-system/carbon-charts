@@ -11,7 +11,8 @@ import { zoom } from "d3-zoom";
 import { scaleSqrt } from "d3-scale";
 import { max } from "d3-array";
 import { feature } from "topojson";
-import { TooltipTypes } from '../../interfaces';
+import { TooltipTypes, Roles } from "../../interfaces";
+import { format } from "d3-format";
 
 export class Map extends Component {
   type = "map";
@@ -48,7 +49,7 @@ export class Map extends Component {
 
     // calculate circle radius
     const radiusScale = scaleSqrt();
-    const radiusValue = d => +d.properties[featuresWithData.labels[1]];
+    const radiusValue = d => +d.properties[featuresWithData.labels[0]];
 
     radiusScale.domain([10, max(features, radiusValue)])
       .range([0, 30])
@@ -59,6 +60,8 @@ export class Map extends Component {
       d.value = d.properties.name;
     })
 
+    const getRadius = d => radiusScale(radiusValue(d)) > 0 ? radiusScale(radiusValue(d)) : 0; 
+
     // create circles for data
     const circles = mapContainer.selectAll("circle")
       .data(featuresWithData)
@@ -68,17 +71,29 @@ export class Map extends Component {
     // set circle center with latitude and longitude
     circles.attr("cx", d => d.properties.projected[0])
       .attr("cy", d => d.properties.projected[1])
-      .attr("r", d => radiusScale(radiusValue(d)) > 0 ? radiusScale(radiusValue(d)) : 0);
+      .attr("r", d => getRadius(d))
     
     const scaleX = 0.77;
     const scaleY = 0.8;
     mapPath.attr("transform", `scale(${ scaleX }, ${ scaleY })`);
     circles.attr("transform", `scale(${ scaleX }, ${ scaleY })`);
 
+    const dataText = mapContainer.selectAll("text")
+      .data(featuresWithData)
+      .enter().append("text");
+
+    dataText.attr("x", d => d.properties.projected[0] - 8)
+      .attr("y", d => d.properties.projected[1] + 4)
+      .text(d => format("d")(d.properties[featuresWithData.labels[0]] / 1000))
+      .attr("font-size", 10)
+      .style("fill", "white")
+      .attr("transform", `scale(${ scaleX }, ${ scaleY })`)
+
     // TODO: responsive zoom
     mapContainer.call(zoom().on("zoom", () => {
       mapPath.attr("transform", event.transform);
       circles.attr("transform", event.transform);
+      dataText.attr("transform", event.transform);
     }));
 
     this.addEventListeners();
@@ -114,7 +129,7 @@ export class Map extends Component {
         "Dataset 4": 10232
       },
       "156": {
-        "Dataset 1": 32432,
+        "Dataset 1": 92432,
         "Dataset 2": 3049,
         "Dataset 4": 32910
       },
@@ -146,17 +161,26 @@ export class Map extends Component {
       "800": {
         "Dataset 1": 229300,
         "Dataset 4": 2938
+      },
+      "120": {
+        "Dataset 1": 49300,
+      },
+      "624": {
+        "Dataset 1": 20382,
+      },
+      "348": {
+        "Dataset 1": 149300,
       }
     }
 
     features.forEach(d => 
       Object.assign(d.properties, demoData[d.id])
     );
-    
+
     const labels = this.model.getDisplayData().datasets.map(d => d.label);
 
     const featuresWithData = features
-      .filter(d => d.properties[labels[0]] || d.properties[labels[1]] || d.properties[labels[2]] || d.properties[labels[3]]);
+      .filter(d => d.properties[labels[0]]);
     featuresWithData.labels = labels;
     
     return featuresWithData;
