@@ -1,4 +1,3 @@
-import * as Configuration from "../configuration";
 import { format } from "date-fns";
 import * as locales from "date-fns/locale";
 import { TimeScaleOptions } from "../interfaces/axis-scales";
@@ -6,7 +5,6 @@ import { Tools } from "../tools";
 
 // D3 Imports
 import { min } from "d3-array";
-import { Axis as AxisScale } from "d3-axis";
 
 export const TIME_INTERVALS = [
 	["15seconds", 15 * 1000],
