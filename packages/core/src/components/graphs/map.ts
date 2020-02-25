@@ -17,12 +17,12 @@ export class Map extends Component {
   type = "map";
 
   async render(animate = true) {
-    const countries = await this.loadData();
-
-    this.drawMapChart(countries);
+    const features = await this.getGraphData();
+    const featuresWithData = await this.getDisplayData(features);
+    this.drawMapChart(features, featuresWithData);
   }
 
-  drawMapChart(countries) {
+  drawMapChart(features, featuresWithData) {
     const svg = this.getContainerSVG();    
     const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
     const projection = geoRobinson();
@@ -40,7 +40,7 @@ export class Map extends Component {
       .attr("height", "100%")
 
     // draw map path
-    const mapPath = mapContainer.selectAll("path").data(countries.features)
+    const mapPath = mapContainer.selectAll("path").data(features)
       .enter().append("path")
       .attr("class", "country")
       .attr("d", path)
@@ -48,20 +48,20 @@ export class Map extends Component {
 
     // calculate circle radius
     const radiusScale = scaleSqrt();
-    const radiusValue = d => +d.properties["2020"];
+    const radiusValue = d => +d.properties[featuresWithData.labels[1]];
 
-    radiusScale.domain([10, max(countries.features, radiusValue)])
-      .range([0, 20])
+    radiusScale.domain([10, max(features, radiusValue)])
+      .range([0, 30])
     
     // calculate center in pixel
-    countries.featuresWithData.forEach(d => {
+    featuresWithData.forEach(d => {
       d.properties.projected = projection(geoCentroid(d));
       d.value = d.properties.name;
     })
 
     // create circles for data
     const circles = mapContainer.selectAll("circle")
-      .data(countries.featuresWithData)
+      .data(featuresWithData)
       .enter().append("circle")
       .attr("class", "country-circle");
     
@@ -84,48 +84,82 @@ export class Map extends Component {
     this.addEventListeners();
   }
 
-  // TODO: Refactor with demo data
-  loadData = async () => {
-    const [ tsvData, popData, topoJSONData ] = await Promise.all([
+  getGraphData = async () => {
+    const [ tsvData, topoJSONData ] = await Promise.all([
       tsv("https://unpkg.com/world-atlas@1.1.4/world/110m.tsv"),
-      csv("https://gist.githubusercontent.com/curran/e7ed69ac1528ff32cc53b70fdce16b76/raw/61f3c156efd532ae6ed84b38102cf9a0b3b1d094/data.csv"),
       json("https://unpkg.com/world-atlas@1.1.4/world/110m.json")
     ]);
 
-    const rowById = tsvData.reduce((acc, d) => {
-      acc[d.iso_n3] = d;
-      return acc;
-    }, {});
-
-    const rowByCode = popData.reduce((acc, d) => {
-      acc[d["Country code"]] = d;
+    const nameObject = tsvData.reduce((acc, d) => {
+      acc[d.iso_n3] = { name: d.name };
       return acc;
     }, {});
 
     const countries = feature(topoJSONData, topoJSONData.objects.countries);
 
-    // add population data
-    countries.features.forEach(d =>
-      Object.assign(d.properties, rowByCode[+d.id])
-    );
-
     // add name
-    countries.features.map(d => 
-      Object.assign(d.properties, rowById[d.id])
-    );
+    countries.features.map(d => {
+      return Object.assign(d.properties, nameObject[d.id])
+    });
 
-    const featuresWithData = countries.features
-      .filter(d => d.properties["2020"])
-      .map(d => {
-        // convert string to number. eg. "392 540" to 392540
-        d.properties["2020"] = +d.properties["2020"].replace(/ /g, ""); 
-        return d;
-      });
+    return countries.features;
+  }
+
+  // TODO: Refactor
+  getDisplayData = async(features) => {
+    const demoData = {
+      "036": {
+        "Dataset 1": 65000,
+        "Dataset 3": 2401,
+        "Dataset 4": 10232
+      },
+      "156": {
+        "Dataset 1": 32432,
+        "Dataset 2": 3049,
+        "Dataset 4": 32910
+      },
+      "356": {
+        "Dataset 1": 59943,
+        "Dataset 2": 100838,
+        "Dataset 3": 42939
+      },
+      "124": {
+        "Dataset 1": 62312,
+        "Dataset 2": 62239,
+        "Dataset 3": 34920
+      },
+      "504": {
+        "Dataset 2": 23891,
+        "Dataset 3": 9883, 
+        "Dataset 4": 49210
+      },
+      "076": {
+        "Dataset 1": 123003,
+        "Dataset 2": 29123,
+        "Dataset 3": 2401,
+        "Dataset 4": 10232
+      },
+      "222": {
+        "Dataset 1": 162930,
+        "Dataset 3": 19323
+      },
+      "800": {
+        "Dataset 1": 229300,
+        "Dataset 4": 2938
+      }
+    }
+
+    features.forEach(d => 
+      Object.assign(d.properties, demoData[d.id])
+    );
     
-    return {
-      features: countries.features, 
-      featuresWithData
-    };
+    const labels = this.model.getDisplayData().datasets.map(d => d.label);
+
+    const featuresWithData = features
+      .filter(d => d.properties[labels[0]] || d.properties[labels[1]] || d.properties[labels[2]] || d.properties[labels[3]]);
+    featuresWithData.labels = labels;
+    
+    return featuresWithData;
   }
 
   addEventListeners() {
