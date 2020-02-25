@@ -11,6 +11,7 @@ import { zoom } from "d3-zoom";
 import { scaleSqrt } from "d3-scale";
 import { max } from "d3-array";
 import { feature } from "topojson";
+import { TooltipTypes } from '../../interfaces';
 
 export class Map extends Component {
   type = "map";
@@ -53,9 +54,10 @@ export class Map extends Component {
       .range([0, 20])
     
     // calculate center in pixel
-    countries.featuresWithData.forEach(d => 
-      d.properties.projected = projection(geoCentroid(d))
-    )
+    countries.featuresWithData.forEach(d => {
+      d.properties.projected = projection(geoCentroid(d));
+      d.value = d.properties.name;
+    })
 
     // create circles for data
     const circles = mapContainer.selectAll("circle")
@@ -67,10 +69,6 @@ export class Map extends Component {
     circles.attr("cx", d => d.properties.projected[0])
       .attr("cy", d => d.properties.projected[1])
       .attr("r", d => radiusScale(radiusValue(d)) > 0 ? radiusScale(radiusValue(d)) : 0);
-    
-    // TODO: tooltip
-    circles.append("title")
-      .text(d => d.properties.name);
     
     const scaleX = 0.77;
     const scaleY = 0.8;
@@ -140,5 +138,25 @@ export class Map extends Component {
         clickedElement.transition(self.services.transitions.getTransition("graph-element-click-opacity-upgrade"))
           .attr("opacity", 1);
       })
+
+    this.parent.selectAll("circle.country-circle")
+      .on("mousemove", function(datum) {
+        const hoveredElement = select(this);
+        hoveredElement.classed("hovered", true);
+
+        // Show tooltip
+        self.services.events.dispatchEvent("show-tooltip", {
+          hoveredElement, 
+          type: TooltipTypes.DATAPOINT
+        });
+      })
+      .on("mouseout", function(datum) {
+        const hoveredElement = select(this);
+        hoveredElement.classed("hovered", false);
+
+        // Hide tooltip
+				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
+      })
+    
   }
 }
