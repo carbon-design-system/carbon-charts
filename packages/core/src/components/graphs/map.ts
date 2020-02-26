@@ -25,23 +25,26 @@ export class Map extends Component {
 
   drawMapChart(features, featuresWithData) {
     const svg = this.getContainerSVG();    
-    const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
-    const projection = geoRobinson();
+    const projection = geoRobinson().scale(120).center([70, -24]);
     const path = geoPath().projection(projection);
 
-    // create resizable map container
     const mapFrame = DOMUtils.appendOrSelect(svg, "svg.map-frame");
-    const mapContainer = DOMUtils.appendOrSelect(mapFrame, "svg.map-container");
 
-    mapFrame.merge(mapContainer)
-      .attr("width", width)
-      .attr("height", height);
-
-    mapContainer.attr("width", "100%")
+    mapFrame.append("rect")
+      .attr("width", "100%")
       .attr("height", "100%")
+      .attr("fill", "transparent")
+
+    // Zoom in
+    mapFrame.call(zoom().on("zoom", () => {
+      mapGroup.attr("transform", event.transform);
+    }));
+
+    const mapGroup = mapFrame.append("g")
+      .attr("class", ".map-group");
 
     // draw map path
-    const mapPath = mapContainer.selectAll("path").data(features)
+    mapGroup.selectAll("path").data(features)
       .enter().append("path")
       .attr("class", "country")
       .attr("d", path)
@@ -63,38 +66,28 @@ export class Map extends Component {
     const getRadius = d => radiusScale(radiusValue(d)) > 0 ? radiusScale(radiusValue(d)) : 0; 
 
     // create circles for data
-    const circles = mapContainer.selectAll("circle")
+    const circles = mapGroup.selectAll("circle")
       .data(featuresWithData)
       .enter().append("circle")
       .attr("class", "country-circle");
-    
+
     // set circle center with latitude and longitude
     circles.attr("cx", d => d.properties.projected[0])
       .attr("cy", d => d.properties.projected[1])
       .attr("r", d => getRadius(d))
-    
-    const scaleX = 0.77;
-    const scaleY = 0.8;
-    mapPath.attr("transform", `scale(${ scaleX }, ${ scaleY })`);
-    circles.attr("transform", `scale(${ scaleX }, ${ scaleY })`);
 
-    const dataText = mapContainer.selectAll("text")
+    const dataText = mapGroup.selectAll("text")
       .data(featuresWithData)
       .enter().append("text");
 
-    dataText.attr("x", d => d.properties.projected[0] - 8)
-      .attr("y", d => d.properties.projected[1] + 4)
-      .text(d => format("d")(d.properties[featuresWithData.labels[0]] / 1000))
+    dataText.text(d => format("d")(d.properties[featuresWithData.labels[0]] / 1000))
+      .attr("class", "data-text")
       .attr("font-size", 10)
-      .style("fill", "white")
-      .attr("transform", `scale(${ scaleX }, ${ scaleY })`)
+      .style("fill", "white");
 
-    // TODO: responsive zoom
-    mapContainer.call(zoom().on("zoom", () => {
-      mapPath.attr("transform", event.transform);
-      circles.attr("transform", event.transform);
-      dataText.attr("transform", event.transform);
-    }));
+    dataText.attr("x", d => d.properties.projected[0])
+      .attr("y", d => d.properties.projected[1] + 4)
+      .style("text-anchor", "middle")
 
     this.addEventListeners();
   }
@@ -215,6 +208,5 @@ export class Map extends Component {
         // Hide tooltip
 				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
       })
-    
   }
 }
