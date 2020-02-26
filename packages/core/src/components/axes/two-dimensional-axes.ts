@@ -40,11 +40,13 @@ export class TwoDimensionalAxes extends Component {
 		} else {
 			this.model.getOptions().axes = {
 				left: {
-					primary: true
+					primary: true,
+					includeZero: true
 				},
 				bottom: {
 					secondary: true,
-					type: this.model.getDisplayData().labels ? ScaleTypes.LABELS : undefined
+					type: this.model.getDisplayData().labels ? ScaleTypes.LABELS : undefined,
+					includeZero: true
 				}
 			};
 

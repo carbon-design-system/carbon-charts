@@ -232,7 +232,7 @@ export class CartesianScales extends Service {
 	protected getScaleDomain(axisPosition: AxisPositions) {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
-		const includeZero = axisOptions.includeZero === undefined || axisOptions.includeZero;
+		const { includeZero } = axisOptions;
 		const { datasets, labels } = this.model.getDisplayData();
 
 		// If scale is a LABELS scale, return some labels as the domain

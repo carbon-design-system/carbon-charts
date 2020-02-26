@@ -91,9 +91,23 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartToolt
 	}
 } as BarTooltipOptions);
 
-// We setup no axes by default, the TwoDimensionalAxes component
-// Will setup axes options based on what user provides
-const axes: AxesOptions = { };
+// These options will be managed by Tools.mergeDefaultChartOptions
+// by removing the ones the user is not providing,
+// and by TwoDimensionalAxes.
+const axes: AxesOptions = {
+	top: {
+		includeZero: true
+	},
+	bottom: {
+		includeZero: true
+	},
+	left: {
+		includeZero: true
+	},
+	right: {
+		includeZero: true
+	}
+};
 
 const timeScale: TimeScaleOptions = {
 	addSpaceOnEdges: 1,
