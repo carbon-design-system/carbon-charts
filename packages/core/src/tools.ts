@@ -1,5 +1,5 @@
 // Internal imports
-import { CartesianOrientations } from "./interfaces";
+import { CartesianOrientations, AxisChartOptions } from "./interfaces";
 
 import {
 	debounce as lodashDebounce,
@@ -18,6 +18,37 @@ export namespace Tools {
 	export const clone = lodashCloneDeep;
 	export const merge = lodashMerge;
 	export const removeArrayDuplicates = lodashUnique;
+
+
+	/**
+	 * Returns default chart options merged with provided options,
+	 * with special cases for axes.
+	 * Axes object will not merge the not provided axes.
+	 *
+	 * @export
+	 * @param {AxisChartOptions} defaultOptions Configuration.options[chartType]
+	 * @param {AxisChartOptions} providedOptions user provided options
+	 * @returns merged options
+	 */
+	export function mergeDefaultChartOptions(defaultOptions: AxisChartOptions, providedOptions: AxisChartOptions) {
+		defaultOptions = Tools.clone(defaultOptions);
+		const providedAxesNames = Object.keys(providedOptions.axes || {});
+
+		if (providedAxesNames.length === 0) {
+			delete defaultOptions.axes;
+		}
+
+		for (const axisName in defaultOptions.axes) {
+			if (!providedAxesNames.includes(axisName)) {
+				delete defaultOptions.axes[axisName];
+			}
+		}
+
+		return Tools.merge(
+			defaultOptions,
+			providedOptions
+		);
+	}
 
 	/**************************************
 	 *  DOM-related operations            *
@@ -52,9 +83,9 @@ export namespace Tools {
 			const transforms = transformStr[0].replace(/translate\(/, "").replace(/\)/, "").split(",");
 
 			return {
-					tx: transforms[0],
-					ty: transforms[1]
-				};
+				tx: transforms[0],
+				ty: transforms[1]
+			};
 		}
 		return null;
 	}

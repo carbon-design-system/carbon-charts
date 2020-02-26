@@ -27,8 +27,8 @@ export class ScatterChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.scatterChart),
+			Tools.mergeDefaultChartOptions(
+				Configuration.options.scatterChart,
 				chartConfigs.options
 			)
 		);
