@@ -3,12 +3,17 @@ import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import textWidth from "text-width";
 import { scaleLinear } from "d3-scale";
+import { Selection, BaseType } from "d3-selection";
+import { isEqual } from "lodash-es";
 
 // D3 Imports
 import { mouse } from "d3-selection";
-import { TooltipTypes, ScaleTypes } from "../../interfaces";
+import { TooltipTypes } from "../../interfaces";
+
+type GraphicsSymbolsSelection = Selection<SVGElement, any, SVGElement, any>;
 
 const THRESHOLD = 5;
+const AXIS_TOOLTIP_TEXT_SIZE = 12;
 
 function pointIsMatch(dx: number, x: number) {
 	return dx > x - THRESHOLD && dx < x + THRESHOLD;
@@ -29,63 +34,93 @@ function invertedScale(scale) {
 export class Ruler extends Component {
 	type = "ruler";
 	backdrop: any;
+	hoveredElements: GraphicsSymbolsSelection;
 
 	render() {
-		// Draw the backdrop
 		this.drawBackdrop();
 		this.addBackdropEventListeners();
 	}
 
 	showRuler([x, y]: [number, number]) {
 		const svg = this.parent;
-		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler").attr("opacity", 1);
+		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler");
 		const line = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
-		const dataPoints = svg.selectAll("[role=graphics-symbol]");
+		const dataPoints: GraphicsSymbolsSelection = svg.selectAll("[role=graphics-symbol]");
 		const height = DOMUtils.getSVGElementSize(this.backdrop).height;
 		const scale = this.services.cartesianScales.getMainXScale();
 		let lineX = x;
 
-		const scaledData = Array.prototype.concat(
+		const scaledData: number[] = Array.prototype.concat(
 			...this.model
 				.getData()
 				.datasets.map(dataset =>
-					dataset.data.map((d, i) => this.services.cartesianScales.getDomainValue(d, i))
+					dataset.data.map((d, i) =>
+						Number(this.services.cartesianScales.getDomainValue(d, i))
+					)
 				)
 		);
 
-		const scaledValuesMatch: any[] = scaledData.reduce((acc, cur) => {
-			if (acc.length > 0 && cur > acc[0]) {
+		/**
+		 * Find matches, reduce is used instrad of filter
+		 * to only store elements which belong to the same axis position
+		 */
+		const scaledValuesMatches: number[] = scaledData.reduce((acc, cur) => {
+			const sampleAccValue = acc[0];
+
+			// if current value is bigger than already existing values don't store it
+			if (sampleAccValue && cur > sampleAccValue) {
 				return acc;
 			} else if (pointIsMatch(cur, x)) {
 				acc.push(cur);
 			}
+
 			return acc;
 		}, []);
 
 		// some data point match
-		if (scaledValuesMatch.length > 0) {
-			const sampleMatch = scaledValuesMatch[0];
+		if (scaledValuesMatches.length > 0) {
+			const sampleMatch = scaledValuesMatches[0];
 
 			const highlightItems = this.services.cartesianScales.getDataFromDomain(
 				invertedScale(scale)(sampleMatch)
 			);
 
 			const hoveredElements = dataPoints.filter((d, i) => {
-				return scaledValuesMatch.includes(this.services.cartesianScales.getDomainValue(d));
+				return scaledValuesMatches.includes(
+					Number(this.services.cartesianScales.getDomainValue(d))
+				);
 			});
 
+			/** if we pass from a trigger area to another one
+			 * mouseout on previous elements won't get dispatched
+			 * so we need to do it manually
+			 */
+			if (
+				this.hoveredElements &&
+				this.hoveredElements.size() > 0 &&
+				!isEqual(this.hoveredElements, hoveredElements)
+			) {
+				this.hoveredElements.dispatch("mouseout");
+			}
+
 			hoveredElements.dispatch("mouseover");
+
+			// set current hovered elements
+			this.hoveredElements = hoveredElements;
+
 			this.services.events.dispatchEvent("show-tooltip", {
 				hoveredElement: line,
 				multidata: highlightItems,
 				type: TooltipTypes.GRIDLINE
 			});
 
+			// line snaps to matching point
 			lineX = sampleMatch;
 		} else {
 			dataPoints.dispatch("mouseout");
 		}
 
+		ruler.attr("opacity", 1);
 		line.attr("y1", 0)
 			.attr("y2", height)
 			.attr("x1", lineX)
@@ -100,7 +135,7 @@ export class Ruler extends Component {
 		const axisTooltip = DOMUtils.appendOrSelect(ruler, "g.ruler-axis-tooltip");
 		const axisTooltipValue = `${scale.invert(lineX)}`.substr(0, 10);
 		const axisTooltipWidth = textWidth(axisTooltipValue, {
-			size: 12
+			size: AXIS_TOOLTIP_TEXT_SIZE
 		});
 		const axisTooltipHeight = 20;
 		const axisTooltipOffset = 5;
