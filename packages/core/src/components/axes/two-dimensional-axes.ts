@@ -34,16 +34,15 @@ export class TwoDimensionalAxes extends Component {
 		// Check the configs to know which axes need to be rendered
 		axisPositions.forEach(axisPositionKey => {
 			const axisPosition = AxisPositions[axisPositionKey];
-			if (this.configs.axes[axisPosition] && !this.children[axisPosition]) {
-				const axisComponent = new Axis(
-					this.model,
-					this.services,
-					{
-						position: axisPosition,
-						axes: this.configs.axes,
-						margins: this.margins
-					}
-				);
+			if (
+				this.configs.axes[axisPosition] &&
+				!this.children[axisPosition]
+			) {
+				const axisComponent = new Axis(this.model, this.services, {
+					position: axisPosition,
+					axes: this.configs.axes,
+					margins: this.margins
+				});
 
 				// Set model, services & parent for the new axis component
 				axisComponent.setModel(this.model);
@@ -71,13 +70,18 @@ export class TwoDimensionalAxes extends Component {
 			// To be able to tell the final width & height of the axis when initiaing the transition
 			// The invisible axis is updated instantly and without a transition
 			const invisibleAxisRef = child.getInvisibleAxisRef();
-			const { width, height } = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true });
+			const {
+				width,
+				height
+			} = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true });
 
 			let offset;
 			if (child.getTitleRef().empty()) {
 				offset = 0;
 			} else {
-				offset = DOMUtils.getSVGElementSize(child.getTitleRef(), { useBBox: true }).height;
+				offset = DOMUtils.getSVGElementSize(child.getTitleRef(), {
+					useBBox: true
+				}).height;
 			}
 
 			switch (axisPosition) {
