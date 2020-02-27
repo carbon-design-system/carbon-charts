@@ -1,4 +1,4 @@
-import { Tools } from "@carbon/charts/tools";
+import { Tools } from "../../src/tools";
 
 import {
 	lineData,
