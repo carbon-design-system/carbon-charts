@@ -53,7 +53,7 @@ const changeDemoData = (id: any, chartObj: any) => {
 		result.datasets = result.datasets.map(dataset => {
 			dataset.label = `new dataset ${Math.random().toFixed(2)}`
 			const datasetNewData = dataset.data.map(dataPoint => {
-				return randomizeValue(dataPoint)
+				return randomizeValue(dataPoint);
 			});
 
 			const newDataset = Object.assign({}, dataset, { data: datasetNewData });
