@@ -13,37 +13,41 @@ demoGroups.forEach(demoGroup => {
 
 		// Loop through the demos for the group
 		groupStories.add(demo.title, () => {
+			// container creation
 			const container = document.createElement("div");
 			container.setAttribute("class", "container");
 
-			const h3 = document.createElement("h3");
-			const b1 = document.createElement("b");
-			b1.innerHTML = "Component:";
+			// title
+			const titleH3 = document.createElement("h3");
+			const titleB = document.createElement("b");
+			titleB.innerHTML = "Component:";
 			const span = document.createElement("span");
 			span.setAttribute("class", "bx--tag bx--tag--green component-name");
 			span.innerHTML = demo.chartType.vanilla;
-			h3.appendChild(b1);
-			h3.appendChild(span);
-			container.appendChild(h3);
+			titleH3.appendChild(titleB);
+			titleH3.appendChild(span);
+			container.appendChild(titleH3);
 
-			const p = document.createElement("p");
-			p.setAttribute("class", "props");
-			const b2 = document.createElement("b");
-			b2.innerHTML = "Props: ";
+			// props subtitle
+			const propsP = document.createElement("p");
+			propsP.setAttribute("class", "props");
+			const propsB = document.createElement("b");
+			propsB.innerHTML = "Props: ";
 			const dataSpan = document.createElement("span");
 			dataSpan.innerHTML = "data, ";
 			const spanProp = document.createElement("span");
-			spanProp.appendChild(b2);
+			spanProp.appendChild(propsB);
 			spanProp.appendChild(dataSpan);
-			const a = document.createElement("a");
-			a.setAttribute("href", "https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html");
-			a.setAttribute("target", "_blank");
-			a.innerHTML = "options";
-			p.appendChild(a);
-			spanProp.appendChild(a);
-			p.appendChild(spanProp);
-			container.appendChild(p);
+			const propsA = document.createElement("a");
+			propsA.setAttribute("href", "https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html");
+			propsA.setAttribute("target", "_blank");
+			propsA.innerHTML = "options";
+			propsP.appendChild(propsA);
+			spanProp.appendChild(propsA);
+			propsP.appendChild(spanProp);
+			container.appendChild(propsP);
 
+			// chart area
 			const marginTopDiv = document.createElement("div");
 			marginTopDiv.setAttribute("class", "marginTop-30");
 			const titleDiv = document.createElement("div");
@@ -55,6 +59,7 @@ demoGroups.forEach(demoGroup => {
 			marginTopDiv.appendChild(titleDiv);
 			container.appendChild(marginTopDiv);
 
+			// sandbox button area
 			const codeSampleH3 = document.createElement("h3");
 			codeSampleH3.setAttribute("class", "marginTop-30");
 			codeSampleH3.innerHTML = "Code Sample (React)";
@@ -62,10 +67,10 @@ demoGroups.forEach(demoGroup => {
 			const codesandboxA = document.createElement("a");
 			codesandboxA.setAttribute("href", demo.codesandbox.react);
 			codesandboxA.setAttribute("target", "_blank");
-			const img = document.createElement("img");
-			img.setAttribute("class", "marginTop");
-			img.setAttribute("src", "https://codesandbox.io/static/img/play-codesandbox.svg");
-			codesandboxA.appendChild(img);
+			const sandboxButtonImg = document.createElement("img");
+			sandboxButtonImg.setAttribute("class", "marginTop");
+			sandboxButtonImg.setAttribute("src", "https://codesandbox.io/static/img/play-codesandbox.svg");
+			codesandboxA.appendChild(sandboxButtonImg);
 			container.appendChild(codeSampleH3);
 			container.appendChild(codesandboxA);
 
