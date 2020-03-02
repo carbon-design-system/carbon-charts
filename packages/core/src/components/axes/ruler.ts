@@ -1,14 +1,14 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import textWidth from "text-width";
-import { scaleLinear } from "d3-scale";
-import { Selection, BaseType } from "d3-selection";
-import { isEqual } from "lodash-es";
+import { TooltipTypes } from "../../interfaces";
 
 // D3 Imports
-import { mouse } from "d3-selection";
-import { TooltipTypes } from "../../interfaces";
+import { mouse, Selection } from "d3-selection";
+import { scaleLinear } from "d3-scale";
+
+import textWidth from "text-width";
+import { isEqual } from "lodash-es";
 
 type GraphicsSymbolsSelection = Selection<SVGElement, any, SVGElement, any>;
 
