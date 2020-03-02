@@ -1,10 +1,10 @@
 import { storiesOf } from "@storybook/html";
 import { withKnobs, object } from "@storybook/addon-knobs";
-import { demoGroups } from "../demo/demo-data";
+import { storybookDemoGroups } from "../demo/demo-data";
 import * as ChartComponents from "../src/charts";
 
 // Loop through all demo groups
-demoGroups.forEach(demoGroup => {
+storybookDemoGroups.forEach(demoGroup => {
 	// Create story group for each demo group
 	const groupStories = storiesOf(demoGroup.title, module).addDecorator(withKnobs);
 

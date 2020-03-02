@@ -21,6 +21,8 @@ import {
 	createVueChartApp
 } from "./create-codesandbox";
 
+import { Tools } from "@carbon/charts/tools";
+
 export const chartTypes = {
 	SimpleBarChart: {
 		vanilla: "SimpleBarChart",
@@ -71,27 +73,32 @@ let allDemoGroups = [
 			{
 				options: barDemos.simpleBarOptions,
 				data: barDemos.simpleBarData,
-				chartType: chartTypes.SimpleBarChart
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true,
 			},
 			{
 				options: barDemos.simpleBarTimeSeriesOptions,
 				data: barDemos.simpleBarTimeSeriesData,
-				chartType: chartTypes.SimpleBarChart
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true,
 			},
 			{
 				options: barDemos.groupedBarOptions,
 				data: barDemos.groupedBarData,
-				chartType: chartTypes.GroupedBarChart
+				chartType: chartTypes.GroupedBarChart,
+				isDemoExample: true,
 			},
 			{
 				options: barDemos.stackedBarOptions,
 				data: barDemos.stackedBarData,
-				chartType: chartTypes.StackedBarChart
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: true,
 			},
 			{
 				options: barDemos.stackedBarTimeSeriesOptions,
 				data: barDemos.stackedBarTimeSeriesData,
-				chartType: chartTypes.StackedBarChart
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: true,
 			}
 		]
 	},
@@ -101,27 +108,32 @@ let allDemoGroups = [
 			{
 				options: barDemos.simpleHorizontalBarOptions,
 				data: barDemos.simpleHorizontalBarData,
-				chartType: chartTypes.SimpleBarChart
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true,
 			},
 			{
 				options: barDemos.simpleHorizontalBarTimeSeriesOptions,
 				data: barDemos.simpleHorizontalBarTimeSeriesData,
-				chartType: chartTypes.SimpleBarChart
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true,
 			},
 			{
 				options: barDemos.groupedHorizontalBarOptions,
 				data: barDemos.groupedHorizontalBarData,
-				chartType: chartTypes.GroupedBarChart
+				chartType: chartTypes.GroupedBarChart,
+				isDemoExample: true,
 			},
 			{
 				options: barDemos.stackedHorizontalBarOptions,
 				data: barDemos.stackedHorizontalBarData,
-				chartType: chartTypes.StackedBarChart
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: true,
 			},
 			{
 				options: barDemos.stackedHorizontalBarTimeSeriesOptions,
 				data: barDemos.stackedHorizontalBarTimeSeriesData,
-				chartType: chartTypes.StackedBarChart
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: true,
 			}
 		]
 	},
@@ -131,7 +143,8 @@ let allDemoGroups = [
 			{
 				options: bubbleDemos.bubbleOptions,
 				data: bubbleDemos.bubbleData,
-				chartType: chartTypes.BubbleChart
+				chartType: chartTypes.BubbleChart,
+				isDemoExample: true,
 			}
 		]
 	},
@@ -141,7 +154,8 @@ let allDemoGroups = [
 			{
 				options: donutDemos.donutOptions,
 				data: donutDemos.donutData,
-				chartType: chartTypes.DonutChart
+				chartType: chartTypes.DonutChart,
+				isDemoExample: true,
 			}
 		]
 	},
@@ -151,12 +165,14 @@ let allDemoGroups = [
 			{
 				options: lineDemos.lineTimeSeriesOptions,
 				data: lineDemos.lineTimeSeriesData,
-				chartType: chartTypes.LineChart
+				chartType: chartTypes.LineChart,
+				isDemoExample: true,
 			},
 			{
 				options: lineDemos.lineOptions,
 				data: lineDemos.lineData,
-				chartType: chartTypes.LineChart
+				chartType: chartTypes.LineChart,
+				isDemoExample: true,
 			}
 		]
 	},
@@ -166,7 +182,8 @@ let allDemoGroups = [
 			{
 				options: pieDemos.pieOptions,
 				data: pieDemos.pieData,
-				chartType: chartTypes.PieChart
+				chartType: chartTypes.PieChart,
+				isDemoExample: true,
 			}
 		]
 	},
@@ -176,12 +193,14 @@ let allDemoGroups = [
 			{
 				options: scatterDemos.scatterTimeSeriesOptions,
 				data: scatterDemos.scatterTimeSeriesData,
-				chartType: chartTypes.ScatterChart
+				chartType: chartTypes.ScatterChart,
+				isDemoExample: true,
 			},
 			{
 				options: scatterDemos.scatterOptions,
 				data: scatterDemos.scatterData,
-				chartType: chartTypes.ScatterChart
+				chartType: chartTypes.ScatterChart,
+				isDemoExample: true,
 			}
 		]
 	},
@@ -191,12 +210,14 @@ let allDemoGroups = [
 			{
 				options: stepDemos.stepOptions,
 				data: stepDemos.stepData,
-				chartType: chartTypes.LineChart
+				chartType: chartTypes.LineChart,
+				isDemoExample: true,
 			},
 			{
 				options: stepDemos.stepTimeSeriesOptions,
 				data: stepDemos.stepTimeSeriesData,
-				chartType: chartTypes.LineChart
+				chartType: chartTypes.LineChart,
+				isDemoExample: true,
 			}
 		]
 	}
@@ -209,6 +230,7 @@ const formatTitleString = str => (
 		.replace(/\s+/g, "-")
 );
 
+// add codesandbox and code to demos
 allDemoGroups = allDemoGroups.map(demoGroup => {
 	demoGroup.demos = demoGroup.demos.map(demo => {
 		demo.title = demo.options.title;
@@ -232,4 +254,11 @@ allDemoGroups = allDemoGroups.map(demoGroup => {
 	return demoGroup;
 });
 
-export const demoGroups = allDemoGroups;
+// in the storybook we want to show all the demos
+export const storybookDemoGroups = Tools.clone(allDemoGroups);
+
+// in the demo page we want to show only demos with isDemoExample = true
+export const demoGroups = Tools.clone(allDemoGroups).map(demoGroup => {
+	demoGroup.demos = demoGroup.demos.filter(demo => demo.isDemoExample);
+	return demoGroup;
+}).filter(demoGroup => demoGroup.demos.length); // remove demoGroup if it's children are all with isDemoExample = false
