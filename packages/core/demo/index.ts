@@ -144,6 +144,7 @@ const createChartContainer = demo => {
 // Initialize all charts
 demoGroups.forEach(demoGroup => {
 	demoGroup.demos.forEach(demo => {
+		if (demo.options.title !== "Scatter (time series)") { return; }
 		const holder = createChartContainer(demo);
 		if (holder) {
 			const ClassToInitialize = Charts[demo.chartType.vanilla];

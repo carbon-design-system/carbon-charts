@@ -85,23 +85,23 @@ export const lineTimeSeriesData = {
 			label: "Dataset 1",
 			data: [
 				{
-					date: new Date(2019, 0, 1),
+					date: Math.floor(Math.random() * 1000),
 					value: 10000
 				},
 				{
-					date: new Date(2019, 0, 5),
+					date: Math.floor(Math.random() * 1000),
 					value: 65000
 				},
 				{
-					date: new Date(2019, 0, 8),
+					date: Math.floor(Math.random() * 1000),
 					value: 10000
 				},
 				{
-					date: new Date(2019, 0, 13),
+					date: Math.floor(Math.random() * 1000),
 					value: 49213
 				},
 				{
-					date: new Date(2019, 0, 17),
+					date: Math.floor(Math.random() * 1000),
 					value: 51213
 				}
 			]
@@ -110,23 +110,23 @@ export const lineTimeSeriesData = {
 			label: "Dataset 2",
 			data: [
 				{
-					date: new Date(2019, 0, 2),
+					date: Math.floor(Math.random() * 1000),
 					value: 0
 				},
 				{
-					date: new Date(2019, 0, 6),
+					date: Math.floor(Math.random() * 1000),
 					value: 57312
 				},
 				{
-					date: new Date(2019, 0, 8),
+					date: Math.floor(Math.random() * 1000),
 					value: 21432
 				},
 				{
-					date: new Date(2019, 0, 15),
+					date: Math.floor(Math.random() * 1000),
 					value: 70323
 				},
 				{
-					date: new Date(2019, 0, 19),
+					date: Math.floor(Math.random() * 1000),
 					value: 21300
 				}
 			]
@@ -135,23 +135,23 @@ export const lineTimeSeriesData = {
 			label: "Dataset 3",
 			data: [
 				{
-					date: new Date(2019, 0, 1),
+					date: Math.floor(Math.random() * 1000),
 					value: 50000
 				},
 				{
-					date: new Date(2019, 0, 5),
+					date: Math.floor(Math.random() * 1000),
 					value: 15000
 				},
 				{
-					date: new Date(2019, 0, 8),
+					date: Math.floor(Math.random() * 1000),
 					value: 20000
 				},
 				{
-					date: new Date(2019, 0, 13),
+					date: Math.floor(Math.random() * 1000),
 					value: 39213
 				},
 				{
-					date: new Date(2019, 0, 17),
+					date: Math.floor(Math.random() * 1000),
 					value: 61213
 				}
 			]
@@ -160,23 +160,23 @@ export const lineTimeSeriesData = {
 			label: "Dataset 4",
 			data: [
 				{
-					date: new Date(2019, 0, 2),
+					date: Math.floor(Math.random() * 1000),
 					value: 10
 				},
 				{
-					date: new Date(2019, 0, 6),
+					date: Math.floor(Math.random() * 1000),
 					value: 37312
 				},
 				{
-					date: new Date(2019, 0, 8),
+					date: Math.floor(Math.random() * 1000),
 					value: 51432
 				},
 				{
-					date: new Date(2019, 0, 15),
+					date: Math.floor(Math.random() * 1000),
 					value: 40323
 				},
 				{
-					date: new Date(2019, 0, 19),
+					date: Math.floor(Math.random() * 1000),
 					value: 31300
 				}
 			]

@@ -40,15 +40,15 @@ export class ChartModel {
 
 	sanitize(data) {
 		// Sanitize all dates
-		data.datasets.forEach(dataset => {
-			dataset.data = dataset.data.map(d => {
-				if (d.date && !d.date.getTime) {
-					d.date = new Date(d.date);
-				}
+		// data.datasets.forEach(dataset => {
+		// 	dataset.data = dataset.data.map(d => {
+		// 		if (d.date && !d.date.getTime) {
+		// 			d.date = new Date(d.date);
+		// 		}
 
-				return d;
-			});
-		});
+		// 		return d;
+		// 	});
+		// });
 
 		return data;
 	}

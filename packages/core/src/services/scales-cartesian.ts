@@ -86,7 +86,7 @@ export class CartesianScales extends Service {
 				const scaleType = axisOptions.scaleType || ScaleTypes.LINEAR;
 				this.scaleTypes[axisPosition] = scaleType;
 
-				if (scaleType === ScaleTypes.LINEAR) {
+				if (axisOptions.primary) { // TODO
 					this.rangeAxisPosition = axisPosition;
 				} else {
 					this.domainAxisPosition = axisPosition;
@@ -189,7 +189,7 @@ export class CartesianScales extends Service {
 				break;
 			case ScaleTypes.TIME:
 				// time series we filter using the date
-				const domainKey = Object.keys(displayData.datasets[0].data[0]).filter(key =>  key !== "value" )[0];
+				const domainKey = Object.keys(displayData.datasets[0].data[0]).filter(key => key !== "value")[0];
 
 				displayData.datasets.forEach(dataset => {
 					const sharedLabel = dataset.label;
@@ -204,7 +204,8 @@ export class CartesianScales extends Service {
 					// assign the shared label on the data items and add them to the array
 					dataItems.forEach(item => {
 						activePoints.push(
-							Object.assign({datasetLabel: sharedLabel,
+							Object.assign({
+								datasetLabel: sharedLabel,
 								value: item.value,
 							}, item)
 						);
