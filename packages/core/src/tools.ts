@@ -6,6 +6,7 @@ import {
 	merge as lodashMerge,
 	cloneDeep as lodashCloneDeep,
 	uniq as lodashUnique,
+	clamp as lodashClamp,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Cancelable,
 	DebounceSettings
@@ -18,6 +19,7 @@ export namespace Tools {
 	export const clone = lodashCloneDeep;
 	export const merge = lodashMerge;
 	export const removeArrayDuplicates = lodashUnique;
+	export const clamp = lodashClamp;
 
 	/**************************************
 	 *  DOM-related operations            *
@@ -52,9 +54,9 @@ export namespace Tools {
 			const transforms = transformStr[0].replace(/translate\(/, "").replace(/\)/, "").split(",");
 
 			return {
-					tx: transforms[0],
-					ty: transforms[1]
-				};
+				tx: transforms[0],
+				ty: transforms[1]
+			};
 		}
 		return null;
 	}
