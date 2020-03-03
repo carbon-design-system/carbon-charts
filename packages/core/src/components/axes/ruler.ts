@@ -10,31 +10,35 @@ import { scaleLinear } from "d3-scale";
 import textWidth from "text-width";
 import { isEqual } from "lodash-es";
 
-type GraphicsSymbolsSelection = Selection<SVGElement, any, SVGElement, any>;
+type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
 
 const THRESHOLD = 5;
 const AXIS_TOOLTIP_TEXT_SIZE = 12;
 
+/** check if x is inside threshold area extents  */
 function pointIsMatch(dx: number, x: number) {
 	return dx > x - THRESHOLD && dx < x + THRESHOLD;
 }
 
+/**
+ * this is a compatibility function that accepts ordinal scales too
+ * as those do not support .invert() by default,
+ * so a scale clone is created to invert domain with range
+ */
 function invertedScale(scale) {
 	if (scale.invert) {
 		return scale.invert;
-	} else {
-		const scaleClone = scaleLinear()
-			.domain(scale.range())
-			.range(scale.domain());
-
-		return scaleClone;
 	}
+
+	return scaleLinear()
+		.domain(scale.range())
+		.range(scale.domain());
 }
 
 export class Ruler extends Component {
 	type = "ruler";
-	backdrop: any;
-	hoveredElements: GraphicsSymbolsSelection;
+	backdrop: GenericSvgSelection;
+	hoveredElements: GenericSvgSelection;
 
 	render() {
 		this.drawBackdrop();
@@ -45,7 +49,7 @@ export class Ruler extends Component {
 		const svg = this.parent;
 		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler");
 		const line = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
-		const dataPoints: GraphicsSymbolsSelection = svg.selectAll("[role=graphics-symbol]");
+		const dataPoints: GenericSvgSelection = svg.selectAll("[role=graphics-symbol]");
 		const height = DOMUtils.getSVGElementSize(this.backdrop).height;
 		const scale = this.services.cartesianScales.getMainXScale();
 		let lineX = x;
@@ -61,17 +65,26 @@ export class Ruler extends Component {
 		);
 
 		/**
-		 * Find matches, reduce is used instrad of filter
-		 * to only store elements which belong to the same axis position
+		 * Find matches, reduce is used instead of filter
+		 * to only get elements which belong to the same axis coordinate
 		 */
 		const scaledValuesMatches: number[] = scaledData.reduce((acc, cur) => {
 			const sampleAccValue = acc[0];
 
-			// if current value is bigger than already existing values don't store it
+			// if current value is bigger than already existing values forget it
 			if (sampleAccValue && cur > sampleAccValue) {
 				return acc;
-			} else if (pointIsMatch(cur, x)) {
-				acc.push(cur);
+			}
+
+			// there's a match and cur is either less then or equal to already stored values
+			if (pointIsMatch(cur, x)) {
+				if (sampleAccValue && cur < sampleAccValue) {
+					// there's a closer data point in the threshold area, so reinstantiate array
+					acc = [cur];
+				} else {
+					// cur is equal to already stored values, there's another match on the same coordinate
+					acc.push(cur);
+				}
 			}
 
 			return acc;
@@ -85,11 +98,11 @@ export class Ruler extends Component {
 				invertedScale(scale)(sampleMatch)
 			);
 
-			const hoveredElements = dataPoints.filter((d, i) => {
-				return scaledValuesMatches.includes(
+			const hoveredElements = dataPoints.filter((d, i) =>
+				scaledValuesMatches.includes(
 					Number(this.services.cartesianScales.getDomainValue(d))
-				);
-			});
+				)
+			);
 
 			/** if we pass from a trigger area to another one
 			 * mouseout on previous elements won't get dispatched
