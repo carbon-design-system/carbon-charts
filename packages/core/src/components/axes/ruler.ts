@@ -199,6 +199,7 @@ export class Ruler extends Component {
 			.attr("y", yScaleStart)
 			.attr("width", xScaleEnd - xScaleStart)
 			.attr("height", yScaleEnd - yScaleStart)
+			.style("cursor", "crosshair")
 			.lower();
 
 		backdropRect.attr("width", "100%").attr("height", "100%");
