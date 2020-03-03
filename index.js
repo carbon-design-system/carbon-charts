@@ -2823,6 +2823,9 @@ var Axis = /** @class */ (function (_super) {
         var axisPosition = this.configs.position;
         var options = this.model.getOptions();
         var axisOptions = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "axes", axisPosition);
+        var numberOfTicksProvided = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(axisOptions, "ticks", "number");
+        var isNumberOfTicksProvided = numberOfTicksProvided !== null;
+        var isVerticalAxis = axisPosition === _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].LEFT || axisPosition === _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].RIGHT;
         var svg = this.getContainerSVG();
         var _a = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].getSVGElementSize(this.parent, { useAttrs: true }), width = _a.width, height = _a.height;
         var startPosition, endPosition;
@@ -2858,12 +2861,40 @@ var Axis = /** @class */ (function (_super) {
                 axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_5__["axisTop"];
                 break;
         }
+        // Add axis into the parent
+        var container = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(svg, "g.axis." + axisPosition);
+        var axisRefExists = !container.select("g.ticks").empty();
+        var axisRef = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(container, "g.ticks");
+        if (!axisRefExists) {
+            axisRef.attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_1__["Roles"].GRAPHICS_OBJECT + " " + _interfaces__WEBPACK_IMPORTED_MODULE_1__["Roles"].GROUP);
+        }
+        // We draw the invisible axis because of the async nature of d3 transitions
+        // To be able to tell the final width & height of the axis when initiaing the transition
+        // The invisible axis is updated instantly and without a transition
+        var invisibleAxisRef = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(container, "g.ticks.invisible")
+            .style("opacity", "0")
+            .attr("aria-hidden", true);
+        // Append to DOM a fake tick to get the right computed font height
+        var fakeTick = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(invisibleAxisRef, "g.tick");
+        var fakeTickText = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(fakeTick, "text").text("0");
+        var tickHeight = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].getSVGElementSize(fakeTickText.node(), { useBBox: true }).height;
+        fakeTick.remove();
         // Initialize axis object
         var axis = axisFunction(scale)
             .tickSizeOuter(0)
             .tickFormat(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(axisOptions, "ticks", "formatter"));
         if (scale.ticks) {
-            var numberOfTicks = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(axisOptions, "ticks", "number") || _configuration__WEBPACK_IMPORTED_MODULE_4__["axis"].ticks.number;
+            var numberOfTicks = void 0;
+            if (isNumberOfTicksProvided) {
+                numberOfTicks = numberOfTicksProvided;
+            }
+            else {
+                numberOfTicks = _configuration__WEBPACK_IMPORTED_MODULE_4__["axis"].ticks.number;
+                if (isVerticalAxis) {
+                    // Set how many ticks based on height
+                    numberOfTicks = this.getNumberOfFittingTicks(height, tickHeight, _configuration__WEBPACK_IMPORTED_MODULE_4__["tickSpaceRatioVertical"]);
+                }
+            }
             axis.ticks(numberOfTicks);
             if (this.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
                 var tickValues = scale.ticks(numberOfTicks).concat(scale.domain())
@@ -2878,19 +2909,6 @@ var Axis = /** @class */ (function (_super) {
                 axis.tickValues(tickValues);
             }
         }
-        // Add axis into the parent
-        var container = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(svg, "g.axis." + axisPosition);
-        var axisRefExists = !container.select("g.ticks").empty();
-        var axisRef = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(container, "g.ticks");
-        if (!axisRefExists) {
-            axisRef.attr("role", _interfaces__WEBPACK_IMPORTED_MODULE_1__["Roles"].GRAPHICS_OBJECT + " " + _interfaces__WEBPACK_IMPORTED_MODULE_1__["Roles"].GROUP);
-        }
-        // We draw the invisible axis because of the async nature of d3 transitions
-        // To be able to tell the final width & height of the axis when initiaing the transition
-        // The invisible axis is updated instantly and without a transition
-        var invisibleAxisRef = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(container, "g.ticks.invisible")
-            .style("opacity", "0")
-            .attr("aria-hidden", true);
         // Position and transition the axis
         switch (axisPosition) {
             case _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].LEFT:
@@ -2962,6 +2980,11 @@ var Axis = /** @class */ (function (_super) {
                 rotateTicks = estimatedTickSize < minTickSize;
             }
             if (rotateTicks) {
+                if (!isNumberOfTicksProvided) {
+                    axis.ticks(this.getNumberOfFittingTicks(width, tickHeight, _configuration__WEBPACK_IMPORTED_MODULE_4__["tickSpaceRatioHorizontal"]));
+                    invisibleAxisRef.call(axis);
+                    axisRef.call(axis);
+                }
                 container.selectAll("g.ticks g.tick text")
                     .attr("transform", "rotate(45)")
                     .style("text-anchor", axisPosition === _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].TOP ? "end" : "start");
@@ -2982,6 +3005,10 @@ var Axis = /** @class */ (function (_super) {
         var axisPosition = this.configs.position;
         return this.getContainerSVG()
             .select("g.axis." + axisPosition + " text.axis-title");
+    };
+    Axis.prototype.getNumberOfFittingTicks = function (size, tickSize, spaceRatio) {
+        var numberOfTicksFit = Math.floor(size / (tickSize * spaceRatio));
+        return _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].clamp(numberOfTicksFit, 2, _configuration__WEBPACK_IMPORTED_MODULE_4__["axis"].ticks.number);
     };
     return Axis;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
@@ -6201,7 +6228,7 @@ var Spacer = /** @class */ (function (_super) {
 /*!*******************************!*\
   !*** ./dist/configuration.js ***!
   \*******************************/
-/*! exports provided: legend, grid, baseTooltip, axisChartTooltip, barChartTooltip, options, lines, transitions, axis, spacers */
+/*! exports provided: legend, grid, baseTooltip, axisChartTooltip, barChartTooltip, options, lines, transitions, axis, spacers, tickSpaceRatioVertical, tickSpaceRatioHorizontal */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6216,6 +6243,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transitions", function() { return transitions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "axis", function() { return axis; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "spacers", function() { return spacers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tickSpaceRatioVertical", function() { return tickSpaceRatioVertical; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tickSpaceRatioHorizontal", function() { return tickSpaceRatioHorizontal; });
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./dist/tools.js");
 /* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interfaces */ "./dist/interfaces/index.js");
 
@@ -6467,6 +6496,8 @@ var spacers = {
         size: 24
     }
 };
+var tickSpaceRatioVertical = 2.5;
+var tickSpaceRatioHorizontal = 3.5;
 //# sourceMappingURL=../src/configuration.js.map
 
 /***/ }),
@@ -7290,7 +7321,7 @@ var ChartModel = /** @class */ (function () {
 /*! exports provided: name, version, description, main, module, scripts, repository, keywords, author, license, dependencies, peerDependencies, devDependencies, publishConfig, maintainers, contributors, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"@carbon/charts\",\"version\":\"0.29.7\",\"description\":\"Carbon charting components\",\"main\":\"./bundle.js\",\"module\":\"./index.js\",\"scripts\":{\"demo:server\":\"yarn build && concurrently npm:demo:watch-src npm:demo:watch\",\"demo:watch\":\"webpack-dev-server --config webpack.config.js --watch\",\"demo:watch-src\":\"tsc -b src -w\",\"demo:build\":\"yarn build && webpack --config webpack.config.js && yarn run docs:build\",\"docs:build\":\"typedoc --tsconfig ./src/tsconfig.json --ignoreCompilerErrors --out ./demo/bundle/documentation ./src/index.ts\",\"build\":\"bash build.sh\",\"postinstall\":\"bash build-vendor.sh\",\"lint\":\"tslint -p tsconfig.json -c tslint.json\",\"test\":\"karma start --single-run\",\"test:watch\":\"karma start --no-single-run\",\"clean\":\"rm -rf dist demo/bundle\"},\"repository\":{\"type\":\"git\",\"url\":\"git@github.com:IBM/carbon-charts.git\"},\"keywords\":[\"carbon\",\"charts\",\"dataviz\",\"data-visualization\",\"visualizations\",\"d3\",\"svg\",\"component\",\"components\",\"css\",\"html\",\"ibm\",\"typescript\",\"javascript\",\"js\",\"library\",\"pattern\",\"patterns\",\"sass\",\"scss\"],\"author\":\"IBM\",\"license\":\"Apache-2.0\",\"dependencies\":{\"@carbon/colors\":\"10.4.0\",\"@carbon/utils-position\":\"1.1.1\",\"babel-polyfill\":\"6.26.0\",\"date-fns\":\"2.8.1\",\"lodash-es\":\"4.17.15\",\"resize-observer-polyfill\":\"1.5.0\"},\"peerDependencies\":{\"d3\":\">=5.0.0 <=5.14.2\"},\"devDependencies\":{\"@carbon/import-once\":\"10.3.0\",\"@carbon/layout\":\"10.5.0\",\"@carbon/motion\":\"10.4.0\",\"@carbon/themes\":\"10.4.0\",\"@carbon/type\":\"10.5.1\",\"@rollup/plugin-json\":\"4.0.2\",\"@types/d3\":\"4.11.0\",\"@types/jasmine\":\"2.8.7\",\"@types/karma\":\"3.0.2\",\"@types/node\":\"12.11.7\",\"babel-polyfill\":\"6.26.0\",\"carbon-components\":\"10.5.0\",\"codesandbox\":\"2.1.11\",\"concurrently\":\"5.1.0\",\"copy-webpack-plugin\":\"4.5.2\",\"css-loader\":\"0.28.7\",\"d3\":\"5.14.2\",\"extract-text-webpack-plugin\":\"3.0.2\",\"file-loader\":\"1.1.5\",\"html-loader\":\"0.5.1\",\"html-webpack-exclude-assets-plugin\":\"0.0.7\",\"html-webpack-plugin\":\"3.2.0\",\"jasmine-core\":\"3.4.0\",\"karma\":\"4.0.1\",\"karma-chrome-launcher\":\"2.2.0\",\"karma-firefox-launcher\":\"1.1.0\",\"karma-jasmine\":\"2.0.1\",\"karma-safari-launcher\":\"1.0.0\",\"karma-webpack\":\"4.0.2\",\"lerna\":\"3.13.4\",\"mini-css-extract-plugin\":\"0.9.0\",\"raw-loader\":\"0.5.1\",\"rollup\":\"1.27.10\",\"rollup-plugin-commonjs\":\"10.1.0\",\"rollup-plugin-node-resolve\":\"5.2.0\",\"rollup-plugin-terser\":\"5.1.2\",\"rollup-plugin-typescript2\":\"0.26.0\",\"sass\":\"1.25.0\",\"sass-loader\":\"8.0.0\",\"style-loader\":\"0.19.0\",\"ts-loader\":\"6.2.1\",\"tslint\":\"5.20.1\",\"tslint-loader\":\"3.5.3\",\"typedoc\":\"0.11.1\",\"typescript\":\"3.7.5\",\"url-loader\":\"0.6.2\",\"webpack\":\"4.41.0\",\"webpack-cli\":\"3.3.9\",\"webpack-dev-server\":\"3.7.0\"},\"publishConfig\":{\"directory\":\"dist\",\"access\":\"public\"},\"maintainers\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}],\"contributors\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}]}");
+module.exports = JSON.parse("{\"name\":\"@carbon/charts\",\"version\":\"0.29.8\",\"description\":\"Carbon charting components\",\"main\":\"./bundle.js\",\"module\":\"./index.js\",\"scripts\":{\"demo:server\":\"yarn build && concurrently npm:demo:watch-src npm:demo:watch\",\"demo:watch\":\"webpack-dev-server --config webpack.config.js --watch\",\"demo:watch-src\":\"tsc -b src -w\",\"demo:build\":\"yarn build && webpack --config webpack.config.js && yarn run docs:build\",\"docs:build\":\"typedoc --tsconfig ./src/tsconfig.json --ignoreCompilerErrors --out ./demo/bundle/documentation ./src/index.ts\",\"build\":\"bash build.sh\",\"postinstall\":\"bash build-vendor.sh\",\"lint\":\"tslint -p tsconfig.json -c tslint.json\",\"test\":\"karma start --single-run\",\"test:watch\":\"karma start --no-single-run\",\"clean\":\"rm -rf dist demo/bundle\"},\"repository\":{\"type\":\"git\",\"url\":\"git@github.com:IBM/carbon-charts.git\"},\"keywords\":[\"carbon\",\"charts\",\"dataviz\",\"data-visualization\",\"visualizations\",\"d3\",\"svg\",\"component\",\"components\",\"css\",\"html\",\"ibm\",\"typescript\",\"javascript\",\"js\",\"library\",\"pattern\",\"patterns\",\"sass\",\"scss\"],\"author\":\"IBM\",\"license\":\"Apache-2.0\",\"dependencies\":{\"@carbon/colors\":\"10.4.0\",\"@carbon/utils-position\":\"1.1.1\",\"babel-polyfill\":\"6.26.0\",\"date-fns\":\"2.8.1\",\"lodash-es\":\"4.17.15\",\"resize-observer-polyfill\":\"1.5.0\"},\"peerDependencies\":{\"d3\":\">=5.0.0 <=5.14.2\"},\"devDependencies\":{\"@carbon/import-once\":\"10.3.0\",\"@carbon/layout\":\"10.5.0\",\"@carbon/motion\":\"10.4.0\",\"@carbon/themes\":\"10.4.0\",\"@carbon/type\":\"10.5.1\",\"@rollup/plugin-json\":\"4.0.2\",\"@types/d3\":\"4.11.0\",\"@types/jasmine\":\"2.8.7\",\"@types/karma\":\"3.0.2\",\"@types/node\":\"12.11.7\",\"babel-polyfill\":\"6.26.0\",\"carbon-components\":\"10.5.0\",\"codesandbox\":\"2.1.11\",\"concurrently\":\"5.1.0\",\"copy-webpack-plugin\":\"4.5.2\",\"css-loader\":\"0.28.7\",\"d3\":\"5.14.2\",\"extract-text-webpack-plugin\":\"3.0.2\",\"file-loader\":\"1.1.5\",\"html-loader\":\"0.5.1\",\"html-webpack-exclude-assets-plugin\":\"0.0.7\",\"html-webpack-plugin\":\"3.2.0\",\"jasmine-core\":\"3.4.0\",\"karma\":\"4.0.1\",\"karma-chrome-launcher\":\"2.2.0\",\"karma-firefox-launcher\":\"1.1.0\",\"karma-jasmine\":\"2.0.1\",\"karma-safari-launcher\":\"1.0.0\",\"karma-webpack\":\"4.0.2\",\"lerna\":\"3.13.4\",\"mini-css-extract-plugin\":\"0.9.0\",\"raw-loader\":\"0.5.1\",\"rollup\":\"1.27.10\",\"rollup-plugin-commonjs\":\"10.1.0\",\"rollup-plugin-node-resolve\":\"5.2.0\",\"rollup-plugin-terser\":\"5.1.2\",\"rollup-plugin-typescript2\":\"0.26.0\",\"sass\":\"1.25.0\",\"sass-loader\":\"8.0.0\",\"style-loader\":\"0.19.0\",\"ts-loader\":\"6.2.1\",\"tslint\":\"5.20.1\",\"tslint-loader\":\"3.5.3\",\"typedoc\":\"0.11.1\",\"typescript\":\"3.7.5\",\"url-loader\":\"0.6.2\",\"webpack\":\"4.41.0\",\"webpack-cli\":\"3.3.9\",\"webpack-dev-server\":\"3.7.0\"},\"publishConfig\":{\"directory\":\"dist\",\"access\":\"public\"},\"maintainers\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}],\"contributors\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}]}");
 
 /***/ }),
 
@@ -8237,6 +8268,7 @@ var Tools;
     Tools.clone = lodash_es__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"];
     Tools.merge = lodash_es__WEBPACK_IMPORTED_MODULE_1__["merge"];
     Tools.removeArrayDuplicates = lodash_es__WEBPACK_IMPORTED_MODULE_1__["uniq"];
+    Tools.clamp = lodash_es__WEBPACK_IMPORTED_MODULE_1__["clamp"];
     /**************************************
      *  DOM-related operations            *
      *************************************/
