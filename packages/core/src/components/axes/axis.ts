@@ -105,13 +105,10 @@ export class Axis extends Component {
 			if (isNumberOfTicksProvided) {
 				numberOfTicks = numberOfTicksProvided;
 			} else {
-				// If number of ticks is not provided:
+				numberOfTicks = Configuration.axis.ticks.number;
 				if (isVerticalAxis) {
-					// Get how many ticks based on height
+					// Set how many ticks based on height
 					numberOfTicks = this.getNumberOfFittingTicks(height, tickHeight, Configuration.tickSpaceRatioVertical);
-				} else {
-					// Set default ticks number
-					numberOfTicks = Configuration.axis.ticks.number;
 				}
 			}
 
