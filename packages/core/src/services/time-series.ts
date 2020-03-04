@@ -104,6 +104,10 @@ function closestTimeIntervalName(ms: number): string {
 // Given an array of timestamps, return the interval name
 // between 15seconds, minute, 30minutes, hourly, daily, weekly, monthly, quarterly, yearly
 export function computeTimeIntervalName(ticks: number[]): string {
+	// special case: if the dataset has only one datum, we show the tick in the most detailed way possible
+	if (ticks.length === 1) {
+		return "15seconds";
+	}
 	const differences = consecutiveDifferences(ticks);
 	const minDifference = min(differences);
 	return closestTimeIntervalName(minDifference);
