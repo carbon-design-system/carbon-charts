@@ -259,6 +259,11 @@ let allDemoGroups = [
 				options: timeSeriesAxisDemos.lineTimeSeriesYearlyOptions,
 				chartType: chartTypes.LineChart
 			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataSingleDatum,
+				options: timeSeriesAxisDemos.lineTimeSeriesSingleDatumOptions,
+				chartType: chartTypes.LineChart
+			},
 		]
 	}
 ] as any;

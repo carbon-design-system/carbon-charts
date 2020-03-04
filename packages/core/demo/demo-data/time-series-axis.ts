@@ -308,3 +308,26 @@ export const lineTimeSeriesYearlyOptions = {
 		},
 	},
 };
+
+export const lineTimeSeriesDataSingleDatum = {
+	labels: ["Qty"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			data: [
+				{ date: new Date("2020-01-06T19:43:16Z"), value: 10 },
+			]
+		}
+	]
+};
+
+export const lineTimeSeriesSingleDatumOptions = {
+	title: "Line (time series) - Single datum",
+	axes: {
+		left: { secondary: true },
+		bottom: {
+			scaleType: "time",
+			primary: true,
+		},
+	},
+};
