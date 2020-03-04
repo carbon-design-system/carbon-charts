@@ -99,17 +99,6 @@ export class Axis extends Component {
 				axis.tickValues(tickValues);
 			}
 
-			//// WIP ////
-			// if (isTimeScaleType) {
-			// 	if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges") > 0) {
-			// 		scale.nice(numberOfTicks);
-			// 	}
-			// 	const tickValues = scale.ticks(numberOfTicks).map(date => +date);
-
-			// 	axis.tickValues(tickValues);
-			// }
-			//// WIP ////
-
 			// create the right ticks formatter
 			let formatter;
 			if (isTimeScaleType) {
