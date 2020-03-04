@@ -190,14 +190,15 @@ export class Axis extends Component {
 		if (isTimeScaleType) {
 			const timeInterval = computeTimeIntervalName(axis.tickValues());
 			const showDayName = timeScaleOptions.showDayName;
+			const axisRefSelection = axisRef;
 
 			if (animate) {
-				axisRef = axisRef.transition(this.services.transitions.getTransition("axis-update"));
+				axisRef = axisRef.transition(this.services.transitions.getTransition("axis-update", animate));
 			}
 			axisRef = axisRef.call(axis);
 
 			// Manipulate tick labels to make bold those that are in long format
-			const ticks = axisRef.selectAll("g.tick > text");
+			const ticks = axisRefSelection.selectAll(".tick").data(axis.tickValues(), scale).order().select("text");
 			ticks.style("font-weight", (tickValue: number, i: number) => {
 				return isTickPrimary(tickValue, i, timeInterval, showDayName) ? "bold" : "normal";
 			});
