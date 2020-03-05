@@ -62,10 +62,10 @@ storybookDemoGroups.forEach(demoGroup => {
 			// sandbox button area
 			const codeSampleH3 = document.createElement("h3");
 			codeSampleH3.setAttribute("class", "marginTop-30");
-			codeSampleH3.innerHTML = "Code Sample (React)";
+			codeSampleH3.innerHTML = "Code Sample";
 			container.appendChild(codeSampleH3);
 			const codesandboxA = document.createElement("a");
-			codesandboxA.setAttribute("href", demo.codesandbox.react);
+			codesandboxA.setAttribute("href", demo.codesandbox.vanilla);
 			codesandboxA.setAttribute("target", "_blank");
 			const sandboxButtonImg = document.createElement("img");
 			sandboxButtonImg.setAttribute("class", "marginTop");
@@ -75,7 +75,6 @@ storybookDemoGroups.forEach(demoGroup => {
 			container.appendChild(codesandboxA);
 
 			return container;
-		}
-		);
+		});
 	});
 });

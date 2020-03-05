@@ -11,6 +11,53 @@ export const createChartSandbox = (chartTemplate: any) => {
 	return `https://codesandbox.io/api/v1/sandboxes/define?parameters=${getParameters({ files })}`;
 };
 
+export const createVanillaChartApp = (demo: any) => {
+	const chartData = JSON.stringify(demo.data, null, "\t");
+	const chartOptions = JSON.stringify(demo.options, null, "\t");
+	const chartComponent = demo.chartType.vanilla;
+
+	const indexHtml = `<html>
+	<body>
+		<div id="app" style="width: 100%; height: 100%;"></div>
+		<script src="src/index.js"></script>
+	</body>
+</html>`;
+	const indexJs =
+		`import "@carbon/charts/styles.css";
+import { ${chartComponent} } from "@carbon/charts";
+
+const data = ${chartData};
+
+const options = ${chartOptions};
+
+// Grab chart holder HTML element and initialize the chart
+const chartHolder = document.getElementById("app");
+new ${chartComponent}(chartHolder, {
+	data,
+	options
+});
+`;
+	const packageJson = {
+		"scripts": {
+			"start": "parcel index.html --open",
+			"build": "parcel build index.html"
+		},
+		"dependencies": {
+			"@carbon/charts": libraryVersion,
+			"d3": "5.9.2"
+		},
+		"devDependencies": {
+			"parcel-bundler": "^1.6.1"
+		}
+	};
+
+	return {
+		"index.html": indexHtml,
+		"src/index.js": indexJs,
+		"package.json": packageJson
+	};
+};
+
 export const createReactChartApp = (demo: any) => {
 	const chartData = JSON.stringify(demo.data, null, "\t");
 	const chartOptions = JSON.stringify(demo.options, null, "\t");
@@ -180,7 +227,7 @@ export default {
 			options: ${chartOptions}
 		};
 	},
-	template: "<${chartComponent} :data="data" :options="options"></${chartComponent}>"
+	template: "<${chartComponent} :data='data' :options='options'></${chartComponent}>"
 };
 </script>
   `;
