@@ -35,6 +35,10 @@ sass --load-path ../../node_modules dist/styles/styles-g90.scss dist/styles-g90.
 sass --load-path ../../node_modules dist/styles/styles-g100.scss dist/styles-g100.css
 sass --load-path ../../node_modules dist/styles/styles-g100.scss dist/styles-g100.min.css --style=compressed
 
+cp -a demo/styles.scss dist/demo/styles.scss
+sass --load-path ../../node_modules dist/demo/styles.scss dist/demo/styles.css
+sass --load-path ../../node_modules dist/demo/styles.scss dist/demo/styles.min.css --style=compressed
+
 echo "linking local packages"
 yarn lerna link --force-local
 # also manually update the symlink ... lerna does a terrible job at this
