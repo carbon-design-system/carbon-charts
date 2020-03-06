@@ -85,7 +85,22 @@ header.m-demo-header {
 		h3 {
 			font-size: 1.25rem;
 			font-weight: 300;
-			margin-bottom: 45px;
+		}
+
+		span.netlify {
+			display: table;
+			border-radius: 10px;
+			padding: 5px 12px;
+			font-size: 13px;
+			vertical-align: middle;
+			background-color: #171717;
+			color: #bcbcbc;
+			margin: 15px auto 45px auto;
+
+			a {
+				color: #fff;
+				text-decoration: none;
+			}
 		}
 	}
 }

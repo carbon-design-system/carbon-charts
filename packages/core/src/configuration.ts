@@ -295,3 +295,6 @@ export const spacers = {
 		size: 24
 	}
 };
+
+export const tickSpaceRatioVertical = 2.5;
+export const tickSpaceRatioHorizontal = 3.5;

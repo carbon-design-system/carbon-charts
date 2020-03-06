@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.8](https://github.com/IBM/carbon-charts/compare/v0.29.7...v0.29.8) (2020-03-03)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
+## [0.29.7](https://github.com/IBM/carbon-charts/compare/v0.29.6...v0.29.7) (2020-02-28)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
+## [0.29.6](https://github.com/IBM/carbon-charts/compare/v0.29.5...v0.29.6) (2020-02-25)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+
+
+
+
 ## [0.29.5](https://github.com/IBM/carbon-charts/compare/v0.29.4...v0.29.5) (2020-02-21)
 
 **Note:** Version bump only for package @carbon/charts-angular

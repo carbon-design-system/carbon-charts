@@ -84,6 +84,11 @@ let allDemoGroups = [
 				isDemoExample: true,
 			},
 			{
+				options: barDemos.simpleBarFixedDomainOptions,
+				data: barDemos.simpleBarData,
+				chartType: chartTypes.SimpleBarChart
+			},
+			{
 				options: barDemos.groupedBarOptions,
 				data: barDemos.groupedBarData,
 				chartType: chartTypes.GroupedBarChart,
