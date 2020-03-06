@@ -5,10 +5,7 @@
 	"main": "./bundle.js",
 	"module": "./index.js",
 	"scripts": {
-		"demo:server": "yarn build && concurrently npm:demo:watch-src npm:demo:watch",
-		"demo:watch": "webpack-dev-server --config webpack.config.js --watch",
-		"demo:watch-src": "tsc -b src -w",
-		"demo:build": "yarn build && webpack --config webpack.config.js && yarn run docs:build",
+		"demo:build": "build-storybook -o demo/bundle --quiet && yarn run docs:build",
 		"docs:build": "typedoc --tsconfig ./src/tsconfig.json --ignoreCompilerErrors --out ./demo/bundle/documentation ./src/index.ts",
 		"build": "bash build.sh",
 		"postinstall": "bash build-vendor.sh",
@@ -16,6 +13,7 @@
 		"test": "karma start --single-run",
 		"test:watch": "karma start --no-single-run",
 		"clean": "rm -rf dist demo/bundle",
+		"start": "yarn run storybook",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets"
 	},
 	"repository": {

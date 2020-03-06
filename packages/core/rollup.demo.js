@@ -4,9 +4,9 @@ import commonjs from "rollup-plugin-commonjs";
 import json from "@rollup/plugin-json";
 
 export default {
-	input: "dist/demo/demo-data/index.js",
+	input: "dist/demo-data/index.js",
 	output: {
-		file: `./dist/demo/demo-data/bundle.js`,
+		file: `./dist/demo-data/bundle.js`,
 		format: "umd",
 		name: "ChartsDemoData",
 		globals: {

@@ -1,6 +1,6 @@
 import { storiesOf } from "@storybook/html";
 import { withKnobs, object } from "@storybook/addon-knobs";
-import { storybookDemoGroups } from "../demo/demo-data";
+import { storybookDemoGroups } from "../demo-data";
 import * as ChartComponents from "../src/charts";
 
 // Loop through all demo groups
