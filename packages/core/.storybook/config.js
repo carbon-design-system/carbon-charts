@@ -2,7 +2,7 @@ import { configure } from "@storybook/html";
 import { setOptions } from "@storybook/addon-options";
 
 setOptions({
-  name: "Carbon Charts - HTML Wrappers",
+  name: "Carbon Charts - Vanilla",
   showAddonPanel: true,
   sortStoriesByKind: true,
   panelPosition: 'bottom',
