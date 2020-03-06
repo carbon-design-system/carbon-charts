@@ -17,8 +17,13 @@ export const createVanillaChartApp = (demo: any) => {
 	const chartComponent = demo.chartType.vanilla;
 
 	const indexHtml = `<html>
+	<head>
+		<title>Parcel Sandbox</title>
+		<meta charset="UTF-8" />
+	</head>
 	<body>
 		<div id="app" style="width: 100%; height: 100%;"></div>
+
 		<script src="src/index.js"></script>
 	</body>
 </html>`;
