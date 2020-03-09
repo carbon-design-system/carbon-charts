@@ -4,6 +4,31 @@ body {
 
 div.container {
 	padding: 30px;
+
+	@import "~@carbon/charts/styles.css";
+
+	// &.theme--white {
+	// 	@import "~@carbon/charts/styles.css";
+	// }
+
+	// &.theme--g10 {
+	// 	@import "~@carbon/charts/styles-g10.css";
+	// }
+
+	// &.theme--g90 {
+	// 	@import "~@carbon/charts/styles-g90.css";
+	// }
+
+	// &.theme--g100 {
+	// 	background: #000;
+	// 	color: #fff;
+
+	// 	@import "~@carbon/charts/styles-g100.css";
+	// }
+
+	.bx--row.chart-demo {
+		margin-bottom: 60px;
+	}
 }
 
 .marginTop {

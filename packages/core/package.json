@@ -6,6 +6,7 @@
 	"module": "./index.js",
 	"scripts": {
 		"demo:build": "build-storybook -o demo/bundle --quiet && yarn run docs:build",
+		"demo:server": "yarn run storybook",
 		"docs:build": "typedoc --tsconfig ./src/tsconfig.json --ignoreCompilerErrors --out ./demo/bundle/documentation ./src/index.ts",
 		"build": "bash build.sh",
 		"postinstall": "bash build-vendor.sh",
