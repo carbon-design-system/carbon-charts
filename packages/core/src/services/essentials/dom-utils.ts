@@ -27,7 +27,9 @@ export class DOMUtils extends Service {
 				if (dimensions[dimensionKey]) {
 					const dimension = dimensions[dimensionKey];
 					const dimensionNumber = parseFloat(dimension);
-					if (dimension && dimensionNumber > finalDimensions[dimensionKey] &&  ("" + dimension).indexOf("%") === -1) {
+					if (dimension &&
+						dimensionNumber > finalDimensions[dimensionKey] &&
+						("" + dimension).indexOf("%") === -1) {
 						finalDimensions[dimensionKey] = dimensionNumber;
 					}
 				}
