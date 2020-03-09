@@ -1,4 +1,14 @@
 /**
+ * enum of all axis-related events
+ */
+export enum Axis {
+	LABEL_MOUSEOVER = "axis-label-mouseover",
+	LABEL_MOUSEMOVE = "axis-label-mousemove",
+	LABEL_CLICK = "axis-label-click",
+	LABEL_MOUSEOUT = "axis-label-mouseout"
+}
+
+/**
  * enum of all pie graph events
  */
 export enum Pie {
