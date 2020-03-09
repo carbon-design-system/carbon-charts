@@ -17,6 +17,23 @@ export class DOMUtils extends Service {
 			svgSelector = select(svgSelector as any);
 		}
 
+		const finalDimensions = {
+			width: 0,
+			height: 0
+		};
+
+		const validateAndSetDimensions = dimensions => {
+			Object.keys(dimensions).forEach(dimensionKey => {
+				if (dimensions[dimensionKey]) {
+					const dimension = dimensions[dimensionKey];
+					const dimensionNumber = parseFloat(dimension);
+					if (dimension && dimensionNumber > finalDimensions[dimensionKey] &&  ("" + dimension).indexOf("%") === -1) {
+						finalDimensions[dimensionKey] = dimensionNumber;
+					}
+				}
+			});
+		};
+
 		const attrDimensions = {
 			width: svgSelector.attr("width"),
 			height: svgSelector.attr("height")
@@ -46,34 +63,39 @@ export class DOMUtils extends Service {
 			height: svgSelector.node().clientHeight
 		};
 
-		const validateDimensions = dimensions => {
-			if (dimensions && dimensions.width && dimensions.height &&
-				!isNaN(dimensions.height) && !isNaN(dimensions.width) &&
-				("" + dimensions.width + dimensions.height).indexOf("%") === -1 &&
-				dimensions.width > 0 && dimensions.height > 0) {
-				return true;
-			}
-
-			return false;
-		};
-
 		// If both attribute values are numbers
 		// And not percentages or NaN
 		if (options) {
-			if (options.useAttrs && validateDimensions(attrDimensions)) {
-				return attrDimensions;
+			if (options.useAttrs) {
+				validateAndSetDimensions(attrDimensions);
+
+				if (finalDimensions.width > 0 && finalDimensions.height > 0) {
+					return finalDimensions;
+				}
 			}
 
-			if (options.useClientDimensions && validateDimensions(clientDimensions)) {
-				return clientDimensions;
+			if (options.useClientDimensions) {
+				validateAndSetDimensions(clientDimensions);
+
+				if (finalDimensions.width > 0 && finalDimensions.height > 0) {
+					return clientDimensions;
+				}
 			}
 
-			if (options.useBBox && validateDimensions(bboxDimensions)) {
-				return bboxDimensions;
+			if (options.useBBox) {
+				validateAndSetDimensions(bboxDimensions);
+
+				if (finalDimensions.width > 0 && finalDimensions.height > 0) {
+					return bboxDimensions;
+				}
 			}
 
-			if (options.useBoundingRect && validateDimensions(boundingRectDimensions)) {
-				return boundingRectDimensions;
+			if (options.useBoundingRect) {
+				validateAndSetDimensions(boundingRectDimensions);
+
+				if (finalDimensions.width > 0 && finalDimensions.height > 0) {
+					return boundingRectDimensions;
+				}
 			}
 		}
 
@@ -82,27 +104,15 @@ export class DOMUtils extends Service {
 				width: Tools.getProperty(svgSelector.node(), "width", "baseVal", "value"),
 				height: Tools.getProperty(svgSelector.node(), "height", "baseVal", "value")
 			};
-			if (validateDimensions(nativeDimensions)) {
-				return nativeDimensions;
-			}
+			
+			validateAndSetDimensions(nativeDimensions);
 		} catch (e) {
-			if (validateDimensions(clientDimensions)) {
-				return clientDimensions;
-			}
-
-			if (validateDimensions(bboxDimensions)) {
-				return bboxDimensions;
-			}
-
-			if (validateDimensions(attrDimensions)) {
-				return attrDimensions;
-			}
+			validateAndSetDimensions(clientDimensions);
+			validateAndSetDimensions(bboxDimensions);
+			validateAndSetDimensions(attrDimensions);
 		}
 
-		return {
-			width: 0,
-			height: 0
-		};
+		return finalDimensions;
 	}
 
 	static appendOrSelect(parent, query) {
