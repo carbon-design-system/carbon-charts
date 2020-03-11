@@ -197,3 +197,30 @@ export const lineTimeSeriesOptions = {
 	},
 	curve: "curveMonotoneX"
 };
+
+export const lineTimeSeriesDataRotatedTicks = {
+	labels: ["Qty"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			data: [
+				{ date: new Date(2019, 11, 30), value: 10 },
+				{ date: new Date(2019, 11, 31), value: 10 },
+				{ date: new Date(2020, 0, 1), value: 10 },
+				{ date: new Date(2020, 0, 2), value: 10 },
+				{ date: new Date(2020, 0, 3), value: 10 },
+			]
+		}
+	]
+};
+
+export const lineTimeSeriesRotatedTicksOptions = {
+	title: "Line (time series) - Rotated ticks labels",
+	axes: {
+		left: { secondary: true },
+		bottom: {
+			scaleType: "time",
+			primary: true,
+		},
+	},
+};
