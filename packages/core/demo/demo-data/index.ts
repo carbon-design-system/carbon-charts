@@ -1,3 +1,4 @@
+import * as areaDemos from "./area";
 import * as barDemos from "./bar";
 import * as bubbleDemos from "./bubble";
 import * as donutDemos from "./donut";
@@ -6,6 +7,7 @@ import * as pieDemos from "./pie";
 import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
 
+export * from "./area";
 export * from "./bar";
 export * from "./bubble";
 export * from "./donut";
@@ -46,6 +48,11 @@ export const chartTypes = {
 		vanilla: "LineChart",
 		angular: "ibm-line-chart",
 		vue: "ccv-line-chart"
+	},
+	AreaChart: {
+		vanilla: "AreaChart",
+		angular: "ibm-area-chart",
+		vue: "ccv-area-chart"
 	},
 	ScatterChart: {
 		vanilla: "ScatterChart",
@@ -162,6 +169,16 @@ let allDemoGroups = [
 				options: lineDemos.lineOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart
+			}
+		]
+	},
+	{
+		title: "Area",
+		demos: [
+			{
+				options: areaDemos.areaTimeSeriesOptions,
+				data: areaDemos.areaTimeSeriesData,
+				chartType: chartTypes.AreaChart
 			}
 		]
 	},
