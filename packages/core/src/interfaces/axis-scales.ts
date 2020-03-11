@@ -34,6 +34,12 @@ export interface AxisOptions {
 	primary?: boolean;
 	secondary?: boolean;
 	/**
+	* Whether the Axis should be forced to include 0 as a starting point
+	* (or ending point, in case of all negative axis).
+	* Default: true
+	*/
+	includeZero?: boolean;
+	/**
 	 * optional title for the scales
 	 */
 	title?: string;
