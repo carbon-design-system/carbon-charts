@@ -16,7 +16,7 @@ export class Legend extends Component {
 		const options = this.model.getOptions();
 
 		const legendItems = svg.selectAll("g.legend-item")
-			.data(["test", "yo"]);
+			.data(["test", "test 2"]);
 
 			// this.getLegendItemArray()
 
