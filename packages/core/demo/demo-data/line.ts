@@ -220,7 +220,7 @@ export const lineTimeSeriesRotatedTicksOptions = {
 		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
-			primary: true,
-		},
-	},
+			primary: true
+		}
+	}
 };
