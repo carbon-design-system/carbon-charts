@@ -37,3 +37,61 @@ describe("Tools.getProperty", () => {
 		expect(Tools.getProperty(obj, "a", "b", "c")).toEqual("");
 	});
 });
+
+
+describe("Tools.mergeDefaultChartOptions", () => {
+	it("it merges default chart configuration with provided ones, with special cases for axes", () => {
+		const providedOptions = {
+			title: "Title",
+			axes: {
+				bottom: {
+					title: "Title",
+					secondary: true
+				},
+				left: {
+					primary: true
+				}
+			}
+		};
+
+		const defaultOptions = {
+			axes: {
+				top: {
+					includeZero: true
+				},
+				bottom: {
+					includeZero: true
+				},
+				left: {
+					includeZero: true
+				},
+				right: {
+					includeZero: true
+				}
+			},
+			timeScale: {
+				addSpaceOnEdges: 1
+			}
+		};
+
+		const expectedMerge = {
+			title: "Title",
+			axes: {
+				bottom: {
+					includeZero: true,
+					title: "Title",
+					secondary: true
+				},
+				left: {
+					includeZero: true,
+					primary: true
+				}
+			},
+			timeScale: {
+				addSpaceOnEdges: 1
+			}
+		};
+
+		expect(Tools.mergeDefaultChartOptions(defaultOptions, providedOptions)).toEqual(expectedMerge);
+	});
+});
