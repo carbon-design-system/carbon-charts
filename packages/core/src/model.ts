@@ -33,29 +33,28 @@ export class ChartModel {
 	protected patternScale = {};
 	protected colorScale: any = {};
 
-
 	constructor(services: any) {
 		this.services = services;
 	}
 
 	sanitize(data) {
-		// Sanitize all dates
-		data.datasets.forEach(dataset => {
-			dataset.data = dataset.data.map(d => {
-				if (d.date && !d.date.getTime) {
-					d.date = new Date(d.date);
-				}
+		// // Sanitize all dates
+		// data.datasets.forEach(dataset => {
+		// 	dataset.data = dataset.data.map(d => {
+		// 		if (d.date && !d.date.getTime) {
+		// 			d.date = new Date(d.date);
+		// 		}
 
-				return d;
-			});
-		});
+		// 		return d;
+		// 	});
+		// });
 
 		return data;
 	}
 
 	getDisplayData() {
-		const { ACTIVE } = Configuration.legend.items.status;
-		const dataLabels = this.get("dataLabels");
+		// const { ACTIVE } = Configuration.legend.items.status;
+		// const dataLabels = this.get("dataLabels");
 
 		if (!this.get("data")) {
 			return null;
@@ -63,9 +62,9 @@ export class ChartModel {
 
 		// Remove datasets that have been disabled
 		const displayData = Tools.clone(this.get("data"));
-		displayData.datasets = displayData.datasets.filter(dataset => {
-			return dataLabels[dataset.label] === ACTIVE;
-		});
+		// displayData.datasets = displayData.datasets.filter(dataset => {
+		// 	return dataLabels[dataset.label] === ACTIVE;
+		// });
 
 		return displayData;
 	}
@@ -80,11 +79,11 @@ export class ChartModel {
 	 */
 	setData(newData) {
 		const sanitizedData = this.sanitize(Tools.clone(newData));
-		const dataLabels = this.generateDataLabels(sanitizedData);
+		// const dataLabels = this.generateDataLabels(sanitizedData);
 
 		this.set({
 			data: sanitizedData,
-			dataLabels
+			// dataLabels
 		});
 
 		return sanitizedData;
@@ -190,16 +189,16 @@ export class ChartModel {
 	 * Fill scales
 	*/
 	setColorScale() {
-		if (this.getDisplayData().datasets[0].fillColors) {
-			this.getDisplayData().datasets.forEach(dataset => {
-				this.colorScale[dataset.label] = scaleOrdinal().range(dataset.fillColors).domain(this.allDataLabels);
-			});
-		} else {
-			const colors = colorPalettes.DEFAULT;
-			this.getData().datasets.forEach((dataset, i) => {
-				this.colorScale[dataset.label] = scaleOrdinal().range([colors[i]]).domain(this.allDataLabels);
-			});
-		}
+		// if (this.getDisplayData().datasets[0].fillColors) {
+		// 	this.getDisplayData().datasets.forEach(dataset => {
+		// 		this.colorScale[dataset.label] = scaleOrdinal().range(dataset.fillColors).domain(this.allDataLabels);
+		// 	});
+		// } else {
+		// 	const colors = colorPalettes.DEFAULT;
+		// 	this.getData().datasets.forEach((dataset, i) => {
+		// 		this.colorScale[dataset.label] = scaleOrdinal().range([colors[i]]).domain(this.allDataLabels);
+		// 	});
+		// }
 	}
 
 	/**

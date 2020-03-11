@@ -10,8 +10,6 @@ import { line } from "d3-shape";
 export class Line extends Component {
 	type = "line";
 
-	lineGenerator: any;
-
 	// TODORF - Remove these listeners in destroy()
 	init() {
 		// Highlight correct scatter on legend item hovers
@@ -39,16 +37,26 @@ export class Line extends Component {
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
+		const displayData = this.model.getDisplayData();
 
 		// D3 line generator function
-		this.lineGenerator = line()
+		const lineGenerator = line()
 			.x((d, i) => this.services.cartesianScales.getDomainValue(d, i))
 			.y((d, i) => this.services.cartesianScales.getRangeValue(d, i))
 			.curve(this.services.curves.getD3Curve());
 
+		const datasets = {};
+		this.model.getDisplayData().map(datum => {
+			if (datasets[datum.group] !== null && datasets[datum.group] !== undefined) {
+				datasets[datum.group].push(datum.value);
+			} else {
+				datasets[datum.group] = [datum.value];
+			}
+		});
+
 		// Update the bound data on line groups
 		const lineGroups = svg.selectAll("g.lines")
-			.data(this.model.getDisplayData().datasets, dataset => dataset.label);
+			.data(Object.keys(datasets));
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -72,16 +80,11 @@ export class Line extends Component {
 		// Apply styles and datum
 		enteringPaths.merge(svg.selectAll("g.lines path"))
 			.attr("stroke", function (d) {
-				const parentDatum = select(this.parentNode).datum() as any;
+				// return self.model.getStrokeColor(d.key);
 
-				return self.model.getStrokeColor(parentDatum.label);
+				return "red";
 			})
-			.datum(function (d) {
-				const parentDatum = select(this.parentNode).datum() as any;
-				this._datasetLabel = parentDatum.label;
-
-				return parentDatum.data;
-			})
+			.datum(d => displayData.filter(datum => datum.group === d))
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "line")
@@ -90,6 +93,6 @@ export class Line extends Component {
 			.transition(this.services.transitions.getTransition("line-update-enter", animate))
 			.attr("opacity", 1)
 			.attr("class", "line")
-			.attr("d", this.lineGenerator);
+			.attr("d", lineGenerator);
 	}
 }

@@ -16,7 +16,9 @@ export class Legend extends Component {
 		const options = this.model.getOptions();
 
 		const legendItems = svg.selectAll("g.legend-item")
-			.data(this.getLegendItemArray());
+			.data(["test", "yo"]);
+
+			// this.getLegendItemArray()
 
 		const addedLegendItems = legendItems.enter()
 			.append("g")
@@ -43,7 +45,7 @@ export class Legend extends Component {
 			.text(d => d.key)
 			.attr("alignment-baseline", "middle");
 
-		this.breakItemsIntoLines(addedLegendItems);
+		// this.breakItemsIntoLines(addedLegendItems);
 
 		// Remove old elements as needed.
 		legendItems.exit()

@@ -150,7 +150,7 @@ export class CartesianScales extends Service {
 		const scaleType = this.scaleTypes[axisPosition];
 		const scale = this.scales[axisPosition];
 		if (scaleType === ScaleTypes.LABELS) {
-			const correspondingLabel = this.model.getDisplayData().labels[index];
+			const correspondingLabel = datum.key;
 			return scale(correspondingLabel) + scale.step() / 2;
 		} else if (scaleType === ScaleTypes.TIME) {
 			return scale(new Date(datum.date || datum.label));
@@ -220,104 +220,106 @@ export class CartesianScales extends Service {
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
 
 		const { datasets, labels } = this.model.getDisplayData();
+		const displayData = this.model.getDisplayData();
 
 		// If scale is a LABELS scale, return some labels as the domain
+		// if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
+		// 	if (labels) {
+		// 		return labels;
+		// 	} else {
+		// 		return this.model.getDisplayData().datasets[0].data.map((d, i) => i + 1);
+		// 	}
+		// }
+
 		if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
-			if (labels) {
-				return labels;
-			} else {
-				return this.model.getDisplayData().datasets[0].data.map((d, i) => i + 1);
-			}
+			const { identifier } = axisOptions;
+			return displayData.map(datum => datum[identifier]);
 		}
 
-		// Get the extent of the domain
-		let domain;
+		const { identifier } = axisOptions;
+		return extent(
+			displayData.map(datum => datum[identifier])
+		);
 
-		// If domain is specified return that domain
-		if (axisOptions.domain) {
-			return axisOptions.domain;
-		}
+		// // Get the extent of the domain
+		// let domain;
 
-		// If the scale is stacked
-		if (axisOptions.stacked) {
-			domain = extent(
-				labels.reduce((m, label: any, i) => {
-					const correspondingValues = datasets.map(dataset => {
-						return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
-					});
-					const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
+		// // If domain is specified return that domain
+		// if (axisOptions.domain) {
+		// 	return axisOptions.domain;
+		// }
 
-					// Save both the total value and the minimum
-					return m.concat(totalValue, min(correspondingValues));
-				}, [])
-					// Currently stack layouts in the library
-					// Only support positive values
-					.concat(0)
-			);
-		} else {
-			// Get all the chart's data values in a flat array
-			let allDataValues = datasets.reduce((dataValues, dataset: any) => {
-				dataset.data.forEach((datum: any) => {
-					if (axisOptions.scaleType === ScaleTypes.TIME) {
-						dataValues = dataValues.concat(datum.date);
-					} else {
-						dataValues = dataValues.concat(isNaN(datum) ? datum.value : datum);
-					}
-				});
+		// // If the scale is stacked
+		// if (axisOptions.stacked) {
+		// 	domain = extent(
+		// 		labels.reduce((m, label: any, i) => {
+		// 			const correspondingValues = datasets.map(dataset => {
+		// 				return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
+		// 			});
+		// 			const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
 
-				return dataValues;
-			}, []);
+		// 			// Save both the total value and the minimum
+		// 			return m.concat(totalValue, min(correspondingValues));
+		// 		}, [])
+		// 			// Currently stack layouts in the library
+		// 			// Only support positive values
+		// 			.concat(0)
+		// 	);
+		// } else {
+		// 	const valueIdentifier = axisOptions.identifier;
+		// 	// Get all the chart's data values in a flat array
+		// 	let allDataValues = displayData.map(datum => datum[valueIdentifier]);
 
-			if (axisOptions.scaleType !== ScaleTypes.TIME) {
-				allDataValues = allDataValues.concat(0);
-			}
+		// 	if (axisOptions.scaleType !== ScaleTypes.TIME) {
+		// 		allDataValues = allDataValues.concat(0);
+		// 	}
 
-			domain = extent(allDataValues);
-		}
+		// 	domain = extent(allDataValues);
+		// }
 
-		if (axisOptions.scaleType === ScaleTypes.TIME) {
-			const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
-			if (spaceToAddToEdges) {
-				const startDate = new Date(domain[0]);
-				const endDate = new Date(domain[1]);
+		// if (axisOptions.scaleType === ScaleTypes.TIME) {
+		// 	const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
+		// 	if (spaceToAddToEdges) {
+		// 		const startDate = new Date(domain[0]);
+		// 		const endDate = new Date(domain[1]);
 
-				if (differenceInYears(endDate, startDate) > 1) {
-					return [subYears(startDate, spaceToAddToEdges), addYears(endDate, spaceToAddToEdges)];
-				}
+		// 		if (differenceInYears(endDate, startDate) > 1) {
+		// 			return [subYears(startDate, spaceToAddToEdges), addYears(endDate, spaceToAddToEdges)];
+		// 		}
 
-				if (differenceInMonths(endDate, startDate) > 1) {
-					return [subMonths(startDate, spaceToAddToEdges), addMonths(endDate, spaceToAddToEdges)];
-				}
+		// 		if (differenceInMonths(endDate, startDate) > 1) {
+		// 			return [subMonths(startDate, spaceToAddToEdges), addMonths(endDate, spaceToAddToEdges)];
+		// 		}
 
-				if (differenceInDays(endDate, startDate) > 1) {
-					return [subDays(startDate, spaceToAddToEdges), addDays(endDate, spaceToAddToEdges)];
-				}
+		// 		if (differenceInDays(endDate, startDate) > 1) {
+		// 			return [subDays(startDate, spaceToAddToEdges), addDays(endDate, spaceToAddToEdges)];
+		// 		}
 
-				if (differenceInHours(endDate, startDate) > 1) {
-					return [subHours(startDate, spaceToAddToEdges), addHours(endDate, spaceToAddToEdges)];
-				}
+		// 		if (differenceInHours(endDate, startDate) > 1) {
+		// 			return [subHours(startDate, spaceToAddToEdges), addHours(endDate, spaceToAddToEdges)];
+		// 		}
 
-				if (differenceInMinutes(endDate, startDate) > 1) {
-					return [subMinutes(startDate, spaceToAddToEdges), addMinutes(endDate, spaceToAddToEdges)];
-				}
+		// 		if (differenceInMinutes(endDate, startDate) > 1) {
+		// 			return [subMinutes(startDate, spaceToAddToEdges), addMinutes(endDate, spaceToAddToEdges)];
+		// 		}
 
-				return [startDate, endDate];
-			}
+		// 		return [startDate, endDate];
+		// 	}
 
-			return [
-				new Date(domain[0]),
-				new Date(domain[1])
-			];
-		}
+		// 	return [
+		// 		new Date(domain[0]),
+		// 		new Date(domain[1])
+		// 	];
+		// }
 
-		// TODO - Work with design to improve logic
-		domain[1] = domain[1] * 1.1;
+		// // TODO - Work with design to improve logic
+		// domain[1] = domain[1] * 1.1;
 
-		// if the lower bound of the domain is less than 0, we want to add padding
-		if (domain[0] < 0) {
-			domain[0] = domain[0] * 1.1;
-		}
-		return domain;
+		// // if the lower bound of the domain is less than 0, we want to add padding
+		// if (domain[0] < 0) {
+		// 	domain[0] = domain[0] * 1.1;
+		// }
+		// return domain;
 	}
 
 	protected createScale(axisPosition: AxisPositions) {
