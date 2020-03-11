@@ -298,6 +298,16 @@ export const lines = {
 };
 
 /**
+ * Options for area behaviour
+ */
+export const areas = {
+	opacity: {
+		unselected: 0.3,
+		selected: 1
+	}
+};
+
+/**
  * Base transition configuration
  */
 export const transitions = {
