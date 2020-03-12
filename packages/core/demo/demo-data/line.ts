@@ -208,7 +208,7 @@ export const lineTimeSeriesDataRotatedTicks = {
 				{ date: new Date(2019, 11, 31), value: 10 },
 				{ date: new Date(2020, 0, 1), value: 10 },
 				{ date: new Date(2020, 0, 2), value: 10 },
-				{ date: new Date(2020, 0, 3), value: 10 },
+				{ date: new Date(2020, 0, 3), value: 10 }
 			]
 		}
 	]
