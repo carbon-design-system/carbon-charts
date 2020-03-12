@@ -5,6 +5,7 @@ import * as lineDemos from "./line";
 import * as pieDemos from "./pie";
 import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
+import * as meterDemos from "./meter";
 
 export * from "./bar";
 export * from "./bubble";
@@ -14,6 +15,7 @@ export * from "./meter";
 export * from "./pie";
 export * from "./scatter";
 export * from "./step";
+export * from "./meter";
 
 import {
 	createChartSandbox,
@@ -62,6 +64,11 @@ export const chartTypes = {
 		vanilla: "DonutChart",
 		angular: "ibm-donut-chart",
 		vue: "ccv-donut-chart"
+	},
+	MeterChart: {
+		vanilla: "MeterChart",
+		angular: "ibm-meter-chart",
+		vue: "ccv-meter-chart"
 	}
 };
 
@@ -203,6 +210,16 @@ let allDemoGroups = [
 				options: stepDemos.stepTimeSeriesOptions,
 				data: stepDemos.stepTimeSeriesData,
 				chartType: chartTypes.LineChart
+			}
+		]
+	},
+	{
+		title: "Meter",
+		demos: [
+			{
+				options: meterDemos.meterOptions,
+				data: meterDemos.meterData,
+				chartType: chartTypes.MeterChart
 			}
 		]
 	}

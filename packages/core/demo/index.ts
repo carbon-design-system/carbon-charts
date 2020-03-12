@@ -56,48 +56,40 @@ const changeDemoData = (id: any, chartObj: any) => {
 	// Function to be used to randomize all data points
 	const updateChartData = currentData => {
 		const result = Tools.clone(currentData);
-		// if (chartType === "meter") {
-		// 	const value = currentData.data;
-		// 	// only randomize a new value for data so its possible to view the different states of the chart (status ranges)
-		// 	const newValue = randomizeValue(value, [0, 100]);
-		// 	result.data = newValue;
-		// 	result.label = `new dataset ${Math.random().toFixed(2)}`;
-		// } else {
-		// 	result.datasets = result.datasets.map(dataset => {
-		// 		dataset.label = `new dataset ${Math.random().toFixed(2)}`;
-		// 		let datasetNewData;
-		// 			datasetNewData = dataset.data.map(dataPoint => {
-		// 				return randomizeValue(dataPoint);
-		// 			});
-		// 		const newDataset = Object.assign({}, dataset, { data: datasetNewData });
-		// 		return newDataset;
-		// 	});
-		// }
+		if (!result.datasets) {
+			const value = result.data;
+			const newValue = randomizeValue(value, [0, 100]);
+			result.data = newValue;
+			result.label = `new dataset ${Math.random().toFixed(2)}`;
+			return result;
+		} else {
+			result.datasets = result.datasets.map(dataset => {
+				dataset.label = `new dataset ${Math.random().toFixed(2)}`;
+				let datasetNewData;
+				datasetNewData = dataset.data.map(dataPoint => {
+					return randomizeValue(dataPoint);
+				});
+				const newDataset = Object.assign({}, dataset, { data: datasetNewData });
+				return newDataset;
+			});
+		}
 
 		return result;
 	};
 
 	const chartObject = charts[id];
-	let newData;
 
+	// get new data for the chart demo
+	let newData;
+	newData = updateChartData(oldData);
+
+	// randomly remove a dataset
 	const removeADataset = Math.random() > 0.5;
 
-	switch (id) {
-		case "pie":
-		case "donut":
-		case "meter":
-			// Randomize old data values
-			newData = updateChartData(oldData);
-			break;
-		default:
-			newData = updateChartData(oldData);
-
-			if (removeADataset) {
-				const randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));
-				newData.datasets.splice(randomIndex, randomIndex);
-			}
-
-			break;
+	// check if there are multiple datasets before removing one
+	if (newData.datasets && removeADataset) {
+		const randomIndex = Math.floor(Math.random() * (newData.datasets.length - 1));
+		newData.datasets.splice(randomIndex, randomIndex);
 	}
 
 	// Handle setting the new data
@@ -131,8 +123,14 @@ const setDemoActionsEventListener = (id: any, chartObj: any) => {
 const createChartContainer = demo => {
 	// Chart holder
 	const holder = document.createElement("div");
-	holder.className = "demo-chart-holder has-actions";
 	holder.id = demo.id;
+	holder.className = "demo-chart-holder has-actions";
+
+	// Add a compact class to override height of regular demo charts
+	const isCompactChart = demo.chartType.vanilla === "MeterChart";
+	if (isCompactChart) {
+		holder.className = holder.className.concat(" compact");
+	}
 
 	document.body.appendChild(holder);
 
@@ -163,7 +161,7 @@ demoGroups.forEach(demoGroup => {
 			const ClassToInitialize = Charts[demo.chartType.vanilla];
 
 			// Add `height` to the chart options
-			demo.options.height = "500px";
+			demo.options.height = demo.chartType.vanilla === "MeterChart" ? "175px" : "500px";
 
 			// Initialize chart
 			charts[demo.id] = new ClassToInitialize(
