@@ -1,4 +1,4 @@
-@import "../src/styles/vendor/carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins";
+@import "../src/styles/vendor/@carbon/elements/scss/themes/mixins";
 
 body {
 	overflow-y: scroll;
@@ -10,52 +10,41 @@ div.container {
 	padding: 30px;
 
 	&.theme--white {
-		@import "~@carbon/charts/styles/styles-white.scss";
+		@import "../src/styles/styles-white.scss";
 
 		@include carbon--theme($carbon--theme--white) {
 			color: $text-01;
 			background-color: $ui-background;
 			line-height: 1;
-
-			.#{$prefix}--radio-button__appearance {
-				background-color: transparent;
-				border: $radio-border-width solid $icon-01;
-			}
-
-			.#{$prefix}--radio-button:checked
-			+ .#{$prefix}--radio-button__label
-			.#{$prefix}--radio-button__appearance {
-				border-color: $icon-01;
-
-				&:before {
-					background-color: $icon-01;
-
-					// Allow the selected button to be seen in Windows HCM for IE/Edge
-					@media screen and (-ms-high-contrast: active) {
-						// Utilize a system color variable to accomodate any user HCM theme
-						background-color: windowText;
-					}
-				}
-			}
 		}
 	}
 
 	&.theme--g10 {
-		@import "~@carbon/charts/styles/styles-g10.scss";
+		@import "../src/styles/styles-g10.scss";
 
 		@include carbon--theme($carbon--theme--g10) {
 			color: $text-01;
 			background-color: $ui-background;
 			line-height: 1;
+		}
+	}
 
-			.#{$prefix}--radio-button__appearance {
+	&.theme--g90 {
+		@import "../src/styles/styles-g90.scss";
+
+		@include carbon--theme($carbon--theme--g90) {
+			color: $text-01;
+			background-color: $ui-background;
+			line-height: 1;
+
+			.bx--radio-button__appearance {
 				background-color: transparent;
-				border: $radio-border-width solid $icon-01;
+				border-color: $icon-01;
 			}
 
-			.#{$prefix}--radio-button:checked
-			+ .#{$prefix}--radio-button__label
-			.#{$prefix}--radio-button__appearance {
+			.bx--radio-button:checked
+			+ .bx--radio-button__label
+			.bx--radio-button__appearance {
 				border-color: $icon-01;
 
 				&:before {
@@ -71,23 +60,34 @@ div.container {
 		}
 	}
 
-	&.theme--g90 {
-		@import "~@carbon/charts/styles/styles-g90.scss";
-
-		@include carbon--theme($carbon--theme--g90) {
-			color: $text-01;
-			background-color: $ui-background;
-			line-height: 1;
-		}
-	}
-
 	&.theme--g100 {
-		@import "~@carbon/charts/styles/styles-g100.scss";
+		@import "../src/styles/styles-g100.scss";
 
 		@include carbon--theme($carbon--theme--g100) {
 			color: $text-01;
 			background-color: $ui-background;
 			line-height: 1;
+
+			.bx--radio-button__appearance {
+				background-color: transparent;
+				border-color: $icon-01;
+			}
+
+			.bx--radio-button:checked
+			+ .bx--radio-button__label
+			.bx--radio-button__appearance {
+				border-color: $icon-01;
+
+				&:before {
+					background-color: $icon-01;
+
+					// Allow the selected button to be seen in Windows HCM for IE/Edge
+					@media screen and (-ms-high-contrast: active) {
+						// Utilize a system color variable to accomodate any user HCM theme
+						background-color: windowText;
+					}
+				}
+			}
 		}
 	}
 

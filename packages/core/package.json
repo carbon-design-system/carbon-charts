@@ -56,6 +56,7 @@
 		"d3": ">=5.0.0 <=5.14.2"
 	},
 	"devDependencies": {
+		"@carbon/elements": "10.10.1",
 		"@carbon/import-once": "10.3.0",
 		"@carbon/layout": "10.5.0",
 		"@carbon/motion": "10.4.0",

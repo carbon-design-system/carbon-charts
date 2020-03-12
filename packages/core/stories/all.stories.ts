@@ -5,6 +5,8 @@ import { storybookDemoGroups } from "../demo/data";
 import * as ChartComponents from "../src/charts";
 import * as storyUtils from "./utils";
 
+import "../demo/styles.scss";
+
 // Loop through all demo groups
 storybookDemoGroups.forEach(demoGroup => {
 	// Create story group for each demo group
