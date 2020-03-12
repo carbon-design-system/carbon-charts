@@ -168,7 +168,7 @@ export class Grid extends Component {
 			activeGridline
 			.classed("active", true);
 
-			// get the items that should be highlighted
+			// get the items that should be highlighted as well as the shared label
 			let activeData, activeLabel;
 
 			// use the selected gridline to get the data with associated domain
