@@ -24,7 +24,7 @@ if [ $CONTEXT == "deploy-preview" ]; then
 	cd packages/$PKG_NAME
 
 	# run the demo:build script in all packages
-	yarn run demo:build
+	NODE_ENV=deploypreview yarn run demo:build
 
 	# copy all the demo files to the pages deploy directory
 	cp -a demo/bundle/. ../../pages
