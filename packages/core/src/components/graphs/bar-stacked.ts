@@ -230,10 +230,7 @@ export class StackedBar extends Bar {
 				hoveredElement.classed("hovered", true);
 
 				const stackedData = itemData["data"];
-				const sharedLabel = stackedData["label"];
-
-				// Remove the label field
-				delete stackedData["label"];
+				const sharedLabel = itemData["label"];
 
 				// filter out the label from the datasets' and associated values
 				const activePoints =  Object.keys(stackedData)
@@ -251,7 +248,7 @@ export class StackedBar extends Bar {
 
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
-					multidata: activePoints,
+					multidata: { activeData: activePoints, label: sharedLabel },
 					hoveredElement,
 					type: TooltipTypes.DATAPOINT
 				});

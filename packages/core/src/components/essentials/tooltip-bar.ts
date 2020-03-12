@@ -33,7 +33,7 @@ export class TooltipBar extends Tooltip {
 				if (e.detail.multidata) {
 					// multi tooltip
 					data = e.detail.multidata;
-					defaultHTML = this.getMultilineTooltipHTML(data);
+					defaultHTML = this.getMultilineTooltipHTML(data.activeData);
 				} else {
 					defaultHTML = this.getTooltipHTML(e.detail.hoveredElement.datum());
 				}

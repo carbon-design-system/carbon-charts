@@ -169,16 +169,17 @@ export class Grid extends Component {
 			.classed("active", true);
 
 			// get the items that should be highlighted
-			let highlightItems;
+			let activeData, activeLabel;
 
 			// use the selected gridline to get the data with associated domain
 			activeGridline.each(function(d) {
-				highlightItems = self.services.cartesianScales.getDataFromDomain(d);
+				activeData = self.services.cartesianScales.getDataFromDomain(d);
+				activeLabel = d;
 			});
 
 			self.services.events.dispatchEvent("show-tooltip", {
 				hoveredElement,
-				multidata: highlightItems,
+				multidata: { activeData, label: activeLabel },
 				type: TooltipTypes.GRIDLINE
 			});
 		})
