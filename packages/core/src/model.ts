@@ -79,7 +79,7 @@ export class ChartModel {
 	 * @param newData The new raw data to be set
 	 */
 	setData(newData) {
-		const sanitizedData = this.sanitize(newData);
+		const sanitizedData = this.sanitize(Tools.clone(newData));
 		const dataLabels = this.generateDataLabels(sanitizedData);
 
 		this.set({

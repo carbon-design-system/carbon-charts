@@ -3,6 +3,93 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.30.0](https://github.com/IBM/carbon-charts/compare/v0.29.8...v0.30.0) (2020-03-11)
+
+
+### Bug Fixes
+
+* **core:** fix default axes creation logic ([e4fb861](https://github.com/IBM/carbon-charts/commit/e4fb86185f04ff42cbe7dc003c05556586f6c518))
+
+
+### Features
+
+* **core:** Add configuration option to not include 0 on axes ([44d51de](https://github.com/IBM/carbon-charts/commit/44d51ded6af78d57a848d68e093fe69858405594))
+* **core:** Axes configuration options defaultable, Add option to not include 0 on axes ([03969c3](https://github.com/IBM/carbon-charts/commit/03969c319248064cf1c1ef6eb79ec534aa04c972))
+
+
+
+
+
+## [0.29.8](https://github.com/IBM/carbon-charts/compare/v0.29.7...v0.29.8) (2020-03-03)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.29.7](https://github.com/IBM/carbon-charts/compare/v0.29.6...v0.29.7) (2020-02-28)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.29.6](https://github.com/IBM/carbon-charts/compare/v0.29.5...v0.29.6) (2020-02-25)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.29.5](https://github.com/IBM/carbon-charts/compare/v0.29.4...v0.29.5) (2020-02-21)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.29.4](https://github.com/IBM/carbon-charts/compare/v0.29.3...v0.29.4) (2020-02-20)
+
+
+### Bug Fixes
+
+* **core:** Tools.getProperty did return 'null' for falsy values, now returns the actual values ([3b78c3a](https://github.com/IBM/carbon-charts/commit/3b78c3a27d4551e7d7b51f911ea2f7e0f155ef42))
+
+
+
+
+
+## [0.29.3](https://github.com/IBM/carbon-charts/compare/v0.29.2...v0.29.3) (2020-02-20)
+
+
+### Bug Fixes
+
+* **build:** fix bundle output for core ([4d3d6b4](https://github.com/IBM/carbon-charts/commit/4d3d6b450fe54b55479aeaffc3706b28d926fffa))
+
+
+
+
+
+## [0.29.2](https://github.com/IBM/carbon-charts/compare/v0.29.1...v0.29.2) (2020-02-18)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
+## [0.29.1](https://github.com/IBM/carbon-charts/compare/v0.29.0...v0.29.1) (2020-02-10)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 # [0.29.0](https://github.com/IBM/carbon-charts/compare/v0.28.1...v0.29.0) (2020-02-07)
 
 

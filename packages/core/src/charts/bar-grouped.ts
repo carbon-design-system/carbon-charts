@@ -27,8 +27,8 @@ export class GroupedBarChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.groupedBarChart),
+			Tools.mergeDefaultChartOptions(
+				Configuration.options.groupedBarChart,
 				chartConfigs.options
 			)
 		);

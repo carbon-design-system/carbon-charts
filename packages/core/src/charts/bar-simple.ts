@@ -30,8 +30,8 @@ export class SimpleBarChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.simpleBarChart),
+			Tools.mergeDefaultChartOptions(
+				Configuration.options.simpleBarChart,
 				chartConfigs.options
 			)
 		);

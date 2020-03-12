@@ -1,6 +1,7 @@
 // Internal Imports
+import * as Configuration from "../configuration";
 import { Service } from "./service";
-import { AxisPositions, CartesianOrientations, ScaleTypes } from "../interfaces";
+import { AxisPositions, CartesianOrientations, ScaleTypes, AxesOptions } from "../interfaces";
 import { Tools } from "../tools";
 
 // D3 Imports
@@ -11,6 +12,10 @@ import {
 	scaleLog
 } from "d3-scale";
 import { min, extent } from "d3-array";
+import { timeFormatDefaultLocale } from "d3-time-format";
+import englishLocale from "d3-time-format/locale/en-US.json";
+
+// Misc
 import {
 	differenceInYears,
 	addYears,
@@ -28,6 +33,18 @@ import {
 	addMinutes,
 	subMinutes
 } from "date-fns";
+
+function addPaddingInDomain([lower, upper]: number[], paddingRatio: number) {
+	const domainLength = upper - lower;
+	const padding = domainLength * paddingRatio;
+
+	// If padding crosses 0, keep 0 as new upper bound
+	const newUpper = upper <= 0 && upper + padding > 0 ? 0 : upper + padding;
+	// If padding crosses 0, keep 0 as new lower bound
+	const newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding;
+
+	return [newLower, newUpper];
+}
 
 export class CartesianScales extends Service {
 	protected scaleTypes = {
@@ -57,7 +74,25 @@ export class CartesianScales extends Service {
 		return this.rangeAxisPosition;
 	}
 
+	setDefaultAxes() {
+		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
+		if (!axesOptions) {
+			(this.model.getOptions().axes as AxesOptions) = {
+				left: {
+					primary: true,
+					includeZero: true,
+				},
+				bottom: {
+					secondary: true,
+					includeZero: true,
+					scaleType: this.model.getDisplayData().labels ? ScaleTypes.LABELS : undefined
+				}
+			};
+		}
+	}
+
 	update(animate = true) {
+		this.setDefaultAxes();
 		this.determineOrientation();
 		const axisPositions = Object.keys(AxisPositions).map(axisPositionKey => AxisPositions[axisPositionKey]);
 		axisPositions.forEach(axisPosition => {
@@ -163,16 +198,6 @@ export class CartesianScales extends Service {
 		return this.getValueFromScale(this.rangeAxisPosition, d, i);
 	}
 
-	getXValue(d, i) {
-		const datum = Object.assign(d, { pos: "bottom" });
-		return this.getValueFromScale(datum, i);
-	}
-
-	getYValue(d, i) {
-		const datum = Object.assign(d, { pos: "left" });
-		return this.getValueFromScale(datum, i);
-	}
-
 	/** Uses the primary Y Axis to get data items associated with that value.  */
 	getDataFromDomain(domainValue) {
 		const displayData = this.model.getDisplayData();
@@ -195,7 +220,7 @@ export class CartesianScales extends Service {
 				break;
 			case ScaleTypes.TIME:
 				// time series we filter using the date
-				const domainKey = Object.keys(displayData.datasets[0].data[0]).filter(key =>  key !== "value" )[0];
+				const domainKey = Object.keys(displayData.datasets[0].data[0]).filter(key => key !== "value")[0];
 
 				displayData.datasets.forEach(dataset => {
 					const sharedLabel = dataset.label;
@@ -210,7 +235,8 @@ export class CartesianScales extends Service {
 					// assign the shared label on the data items and add them to the array
 					dataItems.forEach(item => {
 						activePoints.push(
-							Object.assign({datasetLabel: sharedLabel,
+							Object.assign({
+								datasetLabel: sharedLabel,
 								value: item.value,
 							}, item)
 						);
@@ -224,7 +250,7 @@ export class CartesianScales extends Service {
 	protected getScaleDomain(axisPosition: AxisPositions) {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
-
+		const { includeZero } = axisOptions;
 		const { datasets, labels } = this.model.getDisplayData();
 
 		// If scale is a LABELS scale, return some labels as the domain
@@ -238,6 +264,12 @@ export class CartesianScales extends Service {
 
 		// Get the extent of the domain
 		let domain;
+
+		// If domain is specified return that domain
+		if (axisOptions.domain) {
+			return axisOptions.domain;
+		}
+
 		// If the scale is stacked
 		if (axisOptions.stacked) {
 			domain = extent(
@@ -268,7 +300,7 @@ export class CartesianScales extends Service {
 				return dataValues;
 			}, []);
 
-			if (axisOptions.scaleType !== ScaleTypes.TIME) {
+			if (axisOptions.scaleType !== ScaleTypes.TIME && includeZero) {
 				allDataValues = allDataValues.concat(0);
 			}
 
@@ -310,18 +342,12 @@ export class CartesianScales extends Service {
 			];
 		}
 
-		// TODO - Work with design to improve logic
-		domain[1] = domain[1] * 1.1;
-
-		// if the lower bound of the domain is less than 0, we want to add padding
-		if (domain[0] < 0) {
-			domain[0] = domain[0] * 1.1;
-		}
-		return domain;
+		return addPaddingInDomain(domain, Configuration.axis.paddingRatio);
 	}
 
 	protected createScale(axisPosition: AxisPositions) {
-		const axisOptions = Tools.getProperty(this.model.getOptions(), "axes", axisPosition);
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
 
 		if (!axisOptions) {
 			return null;
@@ -329,6 +355,13 @@ export class CartesianScales extends Service {
 
 		const scaleType = Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
 		this.scaleTypes[axisPosition] = scaleType;
+
+		// Set the date/time locale
+		if (scaleType === ScaleTypes.TIME) {
+			const timeLocale = Tools.getProperty(options, "locale", "time") || englishLocale;
+
+			timeFormatDefaultLocale(timeLocale);
+		}
 
 		let scale;
 		if (scaleType === ScaleTypes.TIME) {

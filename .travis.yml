@@ -16,8 +16,8 @@ before_install:
 install: yarn --offline
 script:
   - yarn run lint
-  - yarn run test
   - yarn run build-all
+  - yarn run test
 sudo: false
 deploy:
   -

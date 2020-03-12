@@ -8,6 +8,7 @@ import {
 	StackedBarChartOptions,
 	PieChartOptions,
 	DonutChartOptions,
+	BubbleChartOptions,
 	// Components
 	GridOptions,
 	AxesOptions,
@@ -16,11 +17,10 @@ import {
 	AxisTooltipOptions,
 	BarTooltipOptions,
 	LegendOptions,
-	ChartTheme,
 	LegendPositions,
 	StackedBarOptions,
 	MeterChartOptions
-} from "./interfaces/index";
+} from "./interfaces";
 
 /*
  *****************************
@@ -83,7 +83,7 @@ export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip,
 	}
 } as AxisTooltipOptions);
 
-export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip , {
+export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip, {
 	datapoint: {
 		verticalOffset: 4
 	},
@@ -92,9 +92,23 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartToolt
 	}
 } as BarTooltipOptions);
 
-// We setup no axes by default, the TwoDimensionalAxes component
-// Will setup axes options based on what user provides
-const axes: AxesOptions = { };
+// These options will be managed by Tools.mergeDefaultChartOptions
+// by removing the ones the user is not providing,
+// and by TwoDimensionalAxes.
+const axes: AxesOptions = {
+	top: {
+		includeZero: true
+	},
+	bottom: {
+		includeZero: true
+	},
+	left: {
+		includeZero: true
+	},
+	right: {
+		includeZero: true
+	}
+};
 
 const timeScale: TimeScaleOptions = {
 	addSpaceOnEdges: 1,
@@ -184,6 +198,22 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
 } as ScatterChartOptions);
 
 /**
+ * options specific to bubble charts
+ */
+const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
+	bubble: {
+		radiusRange: (chartSize, data) => {
+			const smallerChartDimension = Math.min(chartSize.width, chartSize.height);
+			return [
+				smallerChartDimension * 3 / 400,
+				smallerChartDimension * 25 / 400
+			];
+		},
+		fillOpacity: 0.2
+	}
+} as BubbleChartOptions);
+
+/**
  * options specific to pie charts
  */
 const pieChart: PieChartOptions = Tools.merge({}, chart, {
@@ -249,6 +279,7 @@ export const options = {
 	simpleBarChart,
 	groupedBarChart,
 	stackedBarChart,
+	bubbleChart,
 	lineChart,
 	scatterChart,
 	pieChart,
@@ -291,7 +322,8 @@ export const axis = {
 	ticks: {
 		number: 7,
 		rotateIfSmallerThan: 30
-	}
+	},
+	paddingRatio: 0.1
 };
 
 export const spacers = {
@@ -299,3 +331,6 @@ export const spacers = {
 		size: 24
 	}
 };
+
+export const tickSpaceRatioVertical = 2.5;
+export const tickSpaceRatioHorizontal = 3.5;

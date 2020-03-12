@@ -12,6 +12,7 @@ export * from "./essentials/tooltip-scatter";
 export * from "./graphs/bar-simple";
 export * from "./graphs/bar-grouped";
 export * from "./graphs/bar-stacked";
+export * from "./graphs/bubble";
 export * from "./graphs/line";
 export * from "./graphs/scatter";
 export * from "./graphs/pie";

@@ -1,14 +1,19 @@
 // Internal Imports
 import { Component } from "../component";
-import { AxisPositions, ScaleTypes, Roles } from "../../interfaces";
+import {
+	AxisPositions,
+	Events,
+	ScaleTypes,
+	Roles
+} from "../../interfaces";
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
 
 // D3 Imports
+import { select } from "d3-selection";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
-import { timeFormatDefaultLocale } from "d3-time-format";
 
 export class Axis extends Component {
 	type = "axes";
@@ -32,6 +37,9 @@ export class Axis extends Component {
 		const { position: axisPosition } = this.configs;
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		const numberOfTicksProvided = Tools.getProperty(axisOptions, "ticks", "number");
+		const isNumberOfTicksProvided = numberOfTicksProvided !== null;
+		const isVerticalAxis = axisPosition === AxisPositions.LEFT || axisPosition === AxisPositions.RIGHT;
 
 		const svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
@@ -71,13 +79,26 @@ export class Axis extends Component {
 				break;
 		}
 
-		// Set the date/time locale
-		if (this.scaleType === ScaleTypes.TIME) {
-			const timeLocale = Tools.getProperty(options, "locale", "time");
-			if (timeLocale) {
-				timeFormatDefaultLocale(timeLocale);
-			}
+		// Add axis into the parent
+		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
+		const axisRefExists = !container.select(`g.ticks`).empty();
+		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
+		if (!axisRefExists) {
+			axisRef.attr("role", `${Roles.GRAPHICS_OBJECT} ${Roles.GROUP}`);
 		}
+
+		// We draw the invisible axis because of the async nature of d3 transitions
+		// To be able to tell the final width & height of the axis when initiaing the transition
+		// The invisible axis is updated instantly and without a transition
+		const invisibleAxisRef = DOMUtils.appendOrSelect(container, `g.ticks.invisible`)
+			.style("opacity", "0")
+			.attr("aria-hidden", true);
+
+		// Append to DOM a fake tick to get the right computed font height
+		const fakeTick = DOMUtils.appendOrSelect(invisibleAxisRef, `g.tick`);
+		const fakeTickText = DOMUtils.appendOrSelect(fakeTick, `text`).text("0");
+		const tickHeight = DOMUtils.getSVGElementSize(fakeTickText.node(), { useBBox: true }).height;
+		fakeTick.remove();
 
 		// Initialize axis object
 		const axis = axisFunction(scale)
@@ -85,7 +106,18 @@ export class Axis extends Component {
 			.tickFormat(Tools.getProperty(axisOptions, "ticks", "formatter"));
 
 		if (scale.ticks) {
-			const numberOfTicks = Tools.getProperty(axisOptions, "ticks", "number") || Configuration.axis.ticks.number;
+			let numberOfTicks;
+
+			if (isNumberOfTicksProvided) {
+				numberOfTicks = numberOfTicksProvided;
+			} else {
+				numberOfTicks = Configuration.axis.ticks.number;
+				if (isVerticalAxis) {
+					// Set how many ticks based on height
+					numberOfTicks = this.getNumberOfFittingTicks(height, tickHeight, Configuration.tickSpaceRatioVertical);
+				}
+			}
+
 			axis.ticks(numberOfTicks);
 
 			if (this.scaleType === ScaleTypes.TIME) {
@@ -103,21 +135,6 @@ export class Axis extends Component {
 				axis.tickValues(tickValues);
 			}
 		}
-
-		// Add axis into the parent
-		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
-		const axisRefExists = !container.select(`g.ticks`).empty();
-		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
-		if (!axisRefExists) {
-			axisRef.attr("role", `${Roles.GRAPHICS_OBJECT} ${Roles.GROUP}`);
-		}
-
-		// We draw the invisible axis because of the async nature of d3 transitions
-		// To be able to tell the final width & height of the axis when initiaing the transition
-		// The invisible axis is updated instantly and without a transition
-		const invisibleAxisRef = DOMUtils.appendOrSelect(container, `g.ticks.invisible`)
-			.style("opacity", "0")
-			.attr("aria-hidden", true);
 
 		// Position and transition the axis
 		switch (axisPosition) {
@@ -197,6 +214,13 @@ export class Axis extends Component {
 			}
 
 			if (rotateTicks) {
+				if (!isNumberOfTicksProvided) {
+					axis.ticks(this.getNumberOfFittingTicks(width, tickHeight, Configuration.tickSpaceRatioHorizontal));
+
+					invisibleAxisRef.call(axis);
+					axisRef.call(axis);
+				}
+
 				container.selectAll("g.ticks g.tick text")
 					.attr("transform", `rotate(45)`)
 					.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
@@ -206,6 +230,46 @@ export class Axis extends Component {
 					.style("text-anchor", null);
 			}
 		}
+
+		// Add event listeners to elements drawn
+		this.addEventListeners();
+	}
+
+	addEventListeners() {
+		const svg = this.getContainerSVG();
+		const { position: axisPosition } = this.configs;
+		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
+
+		const self = this;
+		container.selectAll("g.tick text")
+			.on("mouseover", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOVER, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mousemove", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEMOVE, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("click", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Axis.LABEL_CLICK, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mouseout", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
+					element: select(this),
+					datum
+				});
+			});
 	}
 
 	getInvisibleAxisRef() {
@@ -220,5 +284,22 @@ export class Axis extends Component {
 
 		return this.getContainerSVG()
 			.select(`g.axis.${axisPosition} text.axis-title`);
+	}
+
+	getNumberOfFittingTicks(size, tickSize, spaceRatio) {
+		const numberOfTicksFit = Math.floor(size / (tickSize * spaceRatio));
+		return Tools.clamp(numberOfTicksFit, 2, Configuration.axis.ticks.number);
+	}
+
+	destroy() {
+		const svg = this.getContainerSVG();
+		const { position: axisPosition } = this.configs;
+		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
+
+		// Remove event listeners
+		container.selectAll("g.tick text")
+			.on("mouseover", null)
+			.on("mousemove", null)
+			.on("mouseout", null);
 	}
 }

@@ -24,6 +24,10 @@
 - [React](./packages/react)
 - [Vue](./packages/vue)
 
+<a href="https://www.netlify.com" target="_blank">
+  <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"/>
+</a>
+
 ## CHANGELOG
 Read the release change logs [here](./CHANGELOG.md)
 
@@ -104,3 +108,6 @@ See our [release change logs](https://github.com/carbon-design-system/carbon-cha
 </table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+## Code of Conduct
+Read our code of conduct [here](./CODE_OF_CONDUCT.md)
