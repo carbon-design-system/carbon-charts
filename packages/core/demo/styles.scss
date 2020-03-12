@@ -1,99 +1,176 @@
+@import "../src/styles/vendor/carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins";
+
 body {
 	overflow-y: scroll;
+	margin: 0;
 }
 
 div.container {
+	font-family: "IBM Plex Sans", Arial, sans-serif;
 	padding: 30px;
 
-	@import "~@carbon/charts/styles.css";
+	&.theme--white {
+		@import "~@carbon/charts/styles/styles-white.scss";
 
-	// &.theme--white {
-	// 	@import "~@carbon/charts/styles.css";
-	// }
+		@include carbon--theme($carbon--theme--white) {
+			color: $text-01;
+			background-color: $ui-background;
+			line-height: 1;
 
-	// &.theme--g10 {
-	// 	@import "~@carbon/charts/styles-g10.css";
-	// }
+			.#{$prefix}--radio-button__appearance {
+				background-color: transparent;
+				border: $radio-border-width solid $icon-01;
+			}
 
-	// &.theme--g90 {
-	// 	@import "~@carbon/charts/styles-g90.css";
-	// }
+			.#{$prefix}--radio-button:checked
+			+ .#{$prefix}--radio-button__label
+			.#{$prefix}--radio-button__appearance {
+				border-color: $icon-01;
 
-	// &.theme--g100 {
-	// 	background: #000;
-	// 	color: #fff;
+				&:before {
+					background-color: $icon-01;
 
-	// 	@import "~@carbon/charts/styles-g100.css";
-	// }
-
-	.bx--row.chart-demo {
-		margin-bottom: 60px;
+					// Allow the selected button to be seen in Windows HCM for IE/Edge
+					@media screen and (-ms-high-contrast: active) {
+					  	// Utilize a system color variable to accomodate any user HCM theme
+						background-color: windowText;
+					}
+				}
+			}
+		}
 	}
-}
 
-.marginTop {
-	margin-top: 10px;
+	&.theme--g10 {
+		@import "~@carbon/charts/styles/styles-g10.scss";
 
-	&-15 {
+		@include carbon--theme($carbon--theme--g10) {
+			color: $text-01;
+			background-color: $ui-background;
+			line-height: 1;
+
+			.#{$prefix}--radio-button__appearance {
+				background-color: transparent;
+				border: $radio-border-width solid $icon-01;
+			}
+
+			.#{$prefix}--radio-button:checked
+			+ .#{$prefix}--radio-button__label
+			.#{$prefix}--radio-button__appearance {
+				border-color: $icon-01;
+
+				&:before {
+					background-color: $icon-01;
+
+					// Allow the selected button to be seen in Windows HCM for IE/Edge
+					@media screen and (-ms-high-contrast: active) {
+					  	// Utilize a system color variable to accomodate any user HCM theme
+						background-color: windowText;
+					}
+				}
+			}
+		}
+	}
+
+	&.theme--g90 {
+		@import "~@carbon/charts/styles/styles-g90.scss";
+
+		@include carbon--theme($carbon--theme--g90) {
+			color: $text-01;
+			background-color: $ui-background;
+			line-height: 1;
+		}
+	}
+
+	&.theme--g100 {
+		@import "~@carbon/charts/styles/styles-g100.scss";
+
+		@include carbon--theme($carbon--theme--g100) {
+			color: $text-01;
+			background-color: $ui-background;
+			line-height: 1;
+		}
+	}
+
+	@import "../src/styles/vendor/carbon-components/scss/globals/grid/grid";
+	@import "../src/styles/vendor/carbon-components/scss/components/tag/tag";
+	@import "../src/styles/vendor/carbon-components/scss/components/radio-button/radio-button";
+
+	.bx--grid {
+		padding: 0;
+
+		.bx--row .chart-demo {
+			margin-bottom: 60px;
+		}
+	}
+
+	h3 {
+		font-weight: 700;
+
+		b.component {
+			margin-right: 10px;
+		}
+
+		span.bx--tag.component-name {
+			font-size: 19px;
+			padding: 16px 10px;
+			border-radius: .8rem;
+		}
+	}
+
+	div.theme-picker {
 		margin-top: 15px;
 	}
 
-	&-30 {
-		margin-top: 30px;
-	}
-}
-
-h3 {
-	font-weight: 700;
-
-	b {
-		margin-right: 10px;
+	p.props {
+		b {
+			font-weight: 700;
+		}
 	}
 
-	.component-name {
-		font-size: 19px;
-		padding: 16px 10px;
-		border-radius: .8rem;
-	}
-}
+	// Replace with Carbon .scss imports
+	.bx--snippet--multi {
+		background-color: black;
+		color: white;
 
-p.props {
-	b {
-		font-weight: 700;
-	}
-}
+		pre {
+			-moz-tab-size: 4;
+			tab-size: 4;
+		}
 
-// Replace with Carbon .scss imports
-.bx--snippet--multi {
-	background-color: black;
-	color: white;
+		.bx--snippet-container pre::after {
+			display: none;
+		}
 
-	pre {
-		-moz-tab-size: 4;
-		tab-size: 4;
-	}
+		.token.tag {
+			color: #6ea6ff;
+		}
 
-	.bx--snippet-container pre::after {
-		display: none;
-	}
+		.token.attr-name {
+			color: #92eeee;
+		}
 
-	.token.tag {
-		color: #6ea6ff;
+		.token.attr-value {
+			color: #bb8eff;
+		}
 	}
 
-	.token.attr-name {
-		color: #92eeee;
+	.bx--snippet--multi .bx--snippet-container pre code {
+		font-size: 14px;
 	}
 
-	.token.attr-value {
-		color: #bb8eff;
+	.bx--snippet--multi.bx--snippet--expand .bx--snippet-container, .bx--snippet--multi.bx--snippet--expand .bx--snippet-container pre {
+		padding-bottom: 0;
 	}
-}
 
-.bx--snippet--multi .bx--snippet-container pre code {
-	font-size: 14px;
-}
+	.marginTop {
+		margin-top: 10px;
 
-.bx--snippet--multi.bx--snippet--expand .bx--snippet-container, .bx--snippet--multi.bx--snippet--expand .bx--snippet-container pre {
-	padding-bottom: 0;
+		&-15 {
+			margin-top: 15px;
+		}
+
+		&-30 {
+			margin-top: 30px;
+		}
+	}
 }
