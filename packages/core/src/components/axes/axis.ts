@@ -105,6 +105,8 @@ export class Axis extends Component {
 			.tickSizeOuter(0)
 			.tickFormat(Tools.getProperty(axisOptions, "ticks", "formatter"));
 
+		const isTimeScaleType = this.scaleType === ScaleTypes.TIME || axisOptions.scaleType === ScaleTypes.TIME;
+
 		if (scale.ticks) {
 			let numberOfTicks;
 
@@ -120,7 +122,7 @@ export class Axis extends Component {
 
 			axis.ticks(numberOfTicks);
 
-			if (this.scaleType === ScaleTypes.TIME) {
+			if (isTimeScaleType) {
 				let tickValues = scale.ticks(numberOfTicks).concat(scale.domain())
 					.map(date => +date).sort();
 				tickValues = Tools.removeArrayDuplicates(tickValues);
@@ -208,7 +210,8 @@ export class Axis extends Component {
 				// When dealing with a continuous scale
 				// We need to calculate an estimated size of the ticks
 				const minTickSize = Tools.getProperty(axisOptions, "ticks", "rotateIfSmallerThan") || Configuration.axis.ticks.rotateIfSmallerThan;
-				const estimatedTickSize = width / scale.ticks().length / 2;
+				const ticksNumber = isTimeScaleType ? axis.tickValues().length : scale.ticks().length;
+				const estimatedTickSize = width / ticksNumber / 2;
 
 				rotateTicks = estimatedTickSize < minTickSize;
 			}
