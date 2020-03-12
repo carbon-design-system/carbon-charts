@@ -1,6 +1,12 @@
 .#{$prefix}--#{$charts-prefix}--ruler {
 	line.ruler-line {
-		stroke: #009bef;
+		@if $carbon--theme == $carbon--theme--g90 {
+			stroke: #fff;
+		} @else if $carbon--theme == $carbon--theme--g100 {
+			stroke: #fff;
+		} @else {
+			stroke: #000;
+		}
 		stroke-width: 1px;
 		stroke-dasharray: 2;
 		pointer-events: none;
