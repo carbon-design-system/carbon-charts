@@ -75,13 +75,13 @@ let allDemoGroups = [
 				options: barDemos.simpleBarOptions,
 				data: barDemos.simpleBarData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: barDemos.simpleBarTimeSeriesOptions,
 				data: barDemos.simpleBarTimeSeriesData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: barDemos.simpleBarFixedDomainOptions,
@@ -92,19 +92,19 @@ let allDemoGroups = [
 				options: barDemos.groupedBarOptions,
 				data: barDemos.groupedBarData,
 				chartType: chartTypes.GroupedBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: barDemos.stackedBarOptions,
 				data: barDemos.stackedBarData,
 				chartType: chartTypes.StackedBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: barDemos.stackedBarTimeSeriesOptions,
 				data: barDemos.stackedBarTimeSeriesData,
 				chartType: chartTypes.StackedBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			}
 		]
 	},
@@ -115,31 +115,31 @@ let allDemoGroups = [
 				options: barDemos.simpleHorizontalBarOptions,
 				data: barDemos.simpleHorizontalBarData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: barDemos.simpleHorizontalBarTimeSeriesOptions,
 				data: barDemos.simpleHorizontalBarTimeSeriesData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: barDemos.groupedHorizontalBarOptions,
 				data: barDemos.groupedHorizontalBarData,
 				chartType: chartTypes.GroupedBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: barDemos.stackedHorizontalBarOptions,
 				data: barDemos.stackedHorizontalBarData,
 				chartType: chartTypes.StackedBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: barDemos.stackedHorizontalBarTimeSeriesOptions,
 				data: barDemos.stackedHorizontalBarTimeSeriesData,
 				chartType: chartTypes.StackedBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			}
 		]
 	},
@@ -150,7 +150,7 @@ let allDemoGroups = [
 				options: bubbleDemos.bubbleOptions,
 				data: bubbleDemos.bubbleData,
 				chartType: chartTypes.BubbleChart,
-				isDemoExample: true,
+				isDemoExample: true
 			}
 		]
 	},
@@ -161,7 +161,7 @@ let allDemoGroups = [
 				options: donutDemos.donutOptions,
 				data: donutDemos.donutData,
 				chartType: chartTypes.DonutChart,
-				isDemoExample: true,
+				isDemoExample: true
 			}
 		]
 	},
@@ -172,13 +172,13 @@ let allDemoGroups = [
 				options: lineDemos.lineTimeSeriesOptions,
 				data: lineDemos.lineTimeSeriesData,
 				chartType: chartTypes.LineChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: lineDemos.lineOptions,
 				data: lineDemos.lineData,
-				isDemoExample: true,
-				chartType: chartTypes.LineChart
+				chartType: chartTypes.LineChart,
+				isDemoExample: true
 			},
 			{
 				options: lineDemos.lineTimeSeriesRotatedTicksOptions,
@@ -194,7 +194,7 @@ let allDemoGroups = [
 				options: pieDemos.pieOptions,
 				data: pieDemos.pieData,
 				chartType: chartTypes.PieChart,
-				isDemoExample: true,
+				isDemoExample: true
 			}
 		]
 	},
@@ -205,13 +205,13 @@ let allDemoGroups = [
 				options: scatterDemos.scatterTimeSeriesOptions,
 				data: scatterDemos.scatterTimeSeriesData,
 				chartType: chartTypes.ScatterChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: scatterDemos.scatterOptions,
 				data: scatterDemos.scatterData,
 				chartType: chartTypes.ScatterChart,
-				isDemoExample: true,
+				isDemoExample: true
 			}
 		]
 	},
@@ -222,13 +222,13 @@ let allDemoGroups = [
 				options: stepDemos.stepOptions,
 				data: stepDemos.stepData,
 				chartType: chartTypes.LineChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: stepDemos.stepTimeSeriesOptions,
 				data: stepDemos.stepTimeSeriesData,
 				chartType: chartTypes.LineChart,
-				isDemoExample: true,
+				isDemoExample: true
 			}
 		]
 	}
