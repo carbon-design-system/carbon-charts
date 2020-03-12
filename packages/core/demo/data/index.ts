@@ -177,8 +177,13 @@ let allDemoGroups = [
 			{
 				options: lineDemos.lineOptions,
 				data: lineDemos.lineData,
-				chartType: chartTypes.LineChart,
 				isDemoExample: true,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeriesRotatedTicksOptions,
+				data: lineDemos.lineTimeSeriesDataRotatedTicks,
+				chartType: chartTypes.LineChart
 			}
 		]
 	},

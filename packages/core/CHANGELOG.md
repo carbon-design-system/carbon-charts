@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.30.0](https://github.com/IBM/carbon-charts/compare/v0.29.8...v0.30.0) (2020-03-11)
+
+
+### Bug Fixes
+
+* **core:** fix default axes creation logic ([e4fb861](https://github.com/IBM/carbon-charts/commit/e4fb86185f04ff42cbe7dc003c05556586f6c518))
+
+
+### Features
+
+* **core:** Add configuration option to not include 0 on axes ([44d51de](https://github.com/IBM/carbon-charts/commit/44d51ded6af78d57a848d68e093fe69858405594))
+* **core:** Axes configuration options defaultable, Add option to not include 0 on axes ([03969c3](https://github.com/IBM/carbon-charts/commit/03969c319248064cf1c1ef6eb79ec534aa04c972))
+
+
+
+
+
 ## [0.29.8](https://github.com/IBM/carbon-charts/compare/v0.29.7...v0.29.8) (2020-03-03)
 
 **Note:** Version bump only for package @carbon/charts

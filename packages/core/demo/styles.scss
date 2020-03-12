@@ -32,7 +32,7 @@ div.container {
 
 					// Allow the selected button to be seen in Windows HCM for IE/Edge
 					@media screen and (-ms-high-contrast: active) {
-					  	// Utilize a system color variable to accomodate any user HCM theme
+						// Utilize a system color variable to accomodate any user HCM theme
 						background-color: windowText;
 					}
 				}
