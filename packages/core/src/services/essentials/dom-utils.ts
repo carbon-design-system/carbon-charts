@@ -23,7 +23,7 @@ export class DOMUtils extends Service {
 		};
 
 		const validateAndSetDimensions = dimensions => {
-			Object.keys(dimensions).forEach(dimensionKey => {
+			Object.keys(finalDimensions).forEach(dimensionKey => {
 				if (dimensions[dimensionKey]) {
 					const dimension = dimensions[dimensionKey];
 					const dimensionNumber = parseFloat(dimension);
