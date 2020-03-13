@@ -26,7 +26,7 @@ demoGroups.forEach(demoGroup => {
 				}
 			},
 			template: `
-				<div class="container">
+				<div class="container theme--white">
 					<h3>
 						<b>Component:</b>
 						<span class="bx--tag bx--tag--green component-name">${demo.chartType.vue}</span>
