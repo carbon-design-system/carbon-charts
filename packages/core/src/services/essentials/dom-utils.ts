@@ -23,17 +23,19 @@ export class DOMUtils extends Service {
 		};
 
 		const validateAndSetDimensions = dimensions => {
-			Object.keys(finalDimensions).forEach(dimensionKey => {
-				if (dimensions[dimensionKey]) {
-					const dimension = dimensions[dimensionKey];
-					const dimensionNumber = parseFloat(dimension);
-					if (dimension &&
-						dimensionNumber > finalDimensions[dimensionKey] &&
-						("" + dimension).indexOf("%") === -1) {
-						finalDimensions[dimensionKey] = dimensionNumber;
+			if (dimensions) {
+				Object.keys(finalDimensions).forEach(dimensionKey => {
+					if (dimensions[dimensionKey]) {
+						const dimension = dimensions[dimensionKey];
+						const dimensionNumber = parseFloat(dimension);
+						if (dimension &&
+							dimensionNumber > finalDimensions[dimensionKey] &&
+							("" + dimension).indexOf("%") === -1) {
+							finalDimensions[dimensionKey] = dimensionNumber;
+						}
 					}
-				}
-			});
+				});
+			}
 		};
 
 		const attrDimensions = {
