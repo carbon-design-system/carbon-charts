@@ -106,13 +106,23 @@ export class Scatter extends Component {
 	addLabelsToDataPoints(d, index) {
 		const { labels } = this.model.getDisplayData();
 
-		return d.data.map((datum, i) => ({
-			date: datum.date,
-			label: labels[i],
-			datasetLabel: d.label,
-			class: datum.class,
-			value: isNaN(datum) ? datum.value : datum
-		}));
+		return d.data
+			// Remove datapoints with no value
+			.filter((datum: any) => {
+				const value = isNaN(datum) ? datum.value : datum;
+				if (value === null || value === undefined) {
+					return false;
+				}
+
+				return true;
+			})
+			.map((datum, i) => ({
+				date: datum.date,
+				label: labels[i],
+				datasetLabel: d.label,
+				class: datum.class,
+				value: isNaN(datum) ? datum.value : datum
+			}));
 	}
 
 	addEventListeners() {
