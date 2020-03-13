@@ -339,7 +339,7 @@ var simpleBarTimeSeriesData = {
                 },
                 {
                     date: new Date(2019, 0, 3),
-                    value: 10000
+                    value: null
                 },
                 {
                     date: new Date(2019, 0, 6),
@@ -937,7 +937,7 @@ var donutOptions = {
 /*!*********************************!*\
   !*** ./demo/demo-data/index.ts ***!
   \*********************************/
-/*! exports provided: chartTypes, demoGroups, groupedBarData, groupedBarOptions, groupedHorizontalBarData, groupedHorizontalBarOptions, simpleBarData, simpleBarOptions, simpleBarFixedDomainOptions, simpleHorizontalBarData, simpleHorizontalBarOptions, simpleBarTimeSeriesData, simpleBarTimeSeriesOptions, simpleHorizontalBarTimeSeriesOptions, simpleHorizontalBarTimeSeriesData, stackedBarData, stackedBarOptions, stackedHorizontalBarData, stackedHorizontalBarOptions, stackedBarTimeSeriesData, stackedBarTimeSeriesOptions, stackedHorizontalBarTimeSeriesOptions, stackedHorizontalBarTimeSeriesData, bubbleData, bubbleOptions, donutData, donutOptions, lineData, lineOptions, lineTimeSeriesData, lineTimeSeriesOptions, pieData, pieOptions, scatterData, scatterOptions, scatterTimeSeriesData, scatterTimeSeriesOptions, stepOptions, stepData, stepTimeSeriesOptions, stepTimeSeriesData */
+/*! exports provided: chartTypes, demoGroups, groupedBarData, groupedBarOptions, groupedHorizontalBarData, groupedHorizontalBarOptions, simpleBarData, simpleBarOptions, simpleBarFixedDomainOptions, simpleHorizontalBarData, simpleHorizontalBarOptions, simpleBarTimeSeriesData, simpleBarTimeSeriesOptions, simpleHorizontalBarTimeSeriesOptions, simpleHorizontalBarTimeSeriesData, stackedBarData, stackedBarOptions, stackedHorizontalBarData, stackedHorizontalBarOptions, stackedBarTimeSeriesData, stackedBarTimeSeriesOptions, stackedHorizontalBarTimeSeriesOptions, stackedHorizontalBarTimeSeriesData, bubbleData, bubbleOptions, donutData, donutOptions, lineData, lineOptions, lineTimeSeriesData, lineTimeSeriesOptions, lineTimeSeriesDataRotatedTicks, lineTimeSeriesRotatedTicksOptions, pieData, pieOptions, scatterData, scatterOptions, scatterTimeSeriesData, scatterTimeSeriesOptions, stepOptions, stepData, stepTimeSeriesOptions, stepTimeSeriesData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1008,6 +1008,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesData", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineTimeSeriesData"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineTimeSeriesOptions"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesDataRotatedTicks", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineTimeSeriesDataRotatedTicks"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesRotatedTicksOptions", function() { return _line__WEBPACK_IMPORTED_MODULE_3__["lineTimeSeriesRotatedTicksOptions"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "pieData", function() { return _pie__WEBPACK_IMPORTED_MODULE_4__["pieData"]; });
 
@@ -1185,6 +1189,11 @@ var allDemoGroups = [
                 options: _line__WEBPACK_IMPORTED_MODULE_3__["lineOptions"],
                 data: _line__WEBPACK_IMPORTED_MODULE_3__["lineData"],
                 chartType: chartTypes.LineChart
+            },
+            {
+                options: _line__WEBPACK_IMPORTED_MODULE_3__["lineTimeSeriesRotatedTicksOptions"],
+                data: _line__WEBPACK_IMPORTED_MODULE_3__["lineTimeSeriesDataRotatedTicks"],
+                chartType: chartTypes.LineChart
             }
         ]
     },
@@ -1260,7 +1269,7 @@ var demoGroups = allDemoGroups;
 /*!********************************!*\
   !*** ./demo/demo-data/line.ts ***!
   \********************************/
-/*! exports provided: lineData, lineOptions, lineTimeSeriesData, lineTimeSeriesOptions */
+/*! exports provided: lineData, lineOptions, lineTimeSeriesData, lineTimeSeriesOptions, lineTimeSeriesDataRotatedTicks, lineTimeSeriesRotatedTicksOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1269,6 +1278,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineOptions", function() { return lineOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesData", function() { return lineTimeSeriesData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesOptions", function() { return lineTimeSeriesOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesDataRotatedTicks", function() { return lineTimeSeriesDataRotatedTicks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineTimeSeriesRotatedTicksOptions", function() { return lineTimeSeriesRotatedTicksOptions; });
 var lineData = {
     labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
     datasets: [
@@ -1293,7 +1304,7 @@ var lineData = {
             ]
         },
         {
-            label: "Dataset 3 long name",
+            label: "Dataset 3",
             data: [
                 41200,
                 23400,
@@ -1303,7 +1314,7 @@ var lineData = {
             ]
         },
         {
-            label: "Dataset 4 long name",
+            label: "Dataset 4",
             data: [
                 22000,
                 1200,
@@ -1313,7 +1324,7 @@ var lineData = {
             ]
         },
         {
-            label: "Dataset 5 long name",
+            label: "Dataset 5",
             data: [
                 2412,
                 30000,
@@ -1323,7 +1334,7 @@ var lineData = {
             ]
         },
         {
-            label: "Dataset 6 long name",
+            label: "Dataset 6",
             data: [
                 0,
                 20000,
@@ -1363,7 +1374,7 @@ var lineTimeSeriesData = {
                 },
                 {
                     date: new Date(2019, 0, 8),
-                    value: 10000
+                    value: null
                 },
                 {
                     date: new Date(2019, 0, 13),
@@ -1409,11 +1420,11 @@ var lineTimeSeriesData = {
                 },
                 {
                     date: new Date(2019, 0, 5),
-                    value: 15000
+                    value: null
                 },
                 {
                     date: new Date(2019, 0, 8),
-                    value: 20000
+                    value: 18000
                 },
                 {
                     date: new Date(2019, 0, 13),
@@ -1442,11 +1453,11 @@ var lineTimeSeriesData = {
                 },
                 {
                     date: new Date(2019, 0, 15),
-                    value: 40323
+                    value: 25332
                 },
                 {
                     date: new Date(2019, 0, 19),
-                    value: 31300
+                    value: null
                 }
             ]
         }
@@ -1464,6 +1475,31 @@ var lineTimeSeriesOptions = {
         }
     },
     curve: "curveMonotoneX"
+};
+var lineTimeSeriesDataRotatedTicks = {
+    labels: ["Qty"],
+    datasets: [
+        {
+            label: "Dataset 1",
+            data: [
+                { date: new Date(2019, 11, 30), value: 10 },
+                { date: new Date(2019, 11, 31), value: 10 },
+                { date: new Date(2020, 0, 1), value: 10 },
+                { date: new Date(2020, 0, 2), value: 10 },
+                { date: new Date(2020, 0, 3), value: 10 }
+            ]
+        }
+    ]
+};
+var lineTimeSeriesRotatedTicksOptions = {
+    title: "Line (time series) - Rotated ticks labels",
+    axes: {
+        left: { secondary: true },
+        bottom: {
+            scaleType: "time",
+            primary: true
+        }
+    }
 };
 
 
@@ -2256,7 +2292,7 @@ var GroupedBarChart = /** @class */ (function (_super) {
         var _this = _super.call(this, holder, chartConfigs) || this;
         // Merge the default options for this chart
         // With the user provided options
-        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].merge(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].clone(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].groupedBarChart), chartConfigs.options));
+        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].mergeDefaultChartOptions(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].groupedBarChart, chartConfigs.options));
         // Initialize data, services, components etc.
         _this.init(holder, chartConfigs);
         return _this;
@@ -2322,7 +2358,7 @@ var SimpleBarChart = /** @class */ (function (_super) {
         _this.model = new _model_simple_bar__WEBPACK_IMPORTED_MODULE_3__["SimpleBarChartModel"](_this.services);
         // Merge the default options for this chart
         // With the user provided options
-        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].merge(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].clone(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].simpleBarChart), chartConfigs.options));
+        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].mergeDefaultChartOptions(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].simpleBarChart, chartConfigs.options));
         // Initialize data, services, components etc.
         _this.init(holder, chartConfigs);
         return _this;
@@ -2385,7 +2421,7 @@ var StackedBarChart = /** @class */ (function (_super) {
         var _this = _super.call(this, holder, chartConfigs) || this;
         // Merge the default options for this chart
         // With the user provided options
-        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].merge(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].clone(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].stackedBarChart), chartConfigs.options));
+        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].mergeDefaultChartOptions(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].stackedBarChart, chartConfigs.options));
         // Initialize data, services, components etc.
         _this.init(holder, chartConfigs);
         return _this;
@@ -2447,7 +2483,7 @@ var BubbleChart = /** @class */ (function (_super) {
         var _this = _super.call(this, holder, chartConfigs) || this;
         // Merge the default options for this chart
         // With the user provided options
-        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].merge(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].clone(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].bubbleChart), chartConfigs.options));
+        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].mergeDefaultChartOptions(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].bubbleChart, chartConfigs.options));
         // Initialize data, services, components etc.
         _this.init(holder, chartConfigs);
         return _this;
@@ -2509,7 +2545,7 @@ var DonutChart = /** @class */ (function (_super) {
         var _this = _super.call(this, holder, chartConfigs, true) || this;
         // Merge the default options for this chart
         // With the user provided options
-        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].merge(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].clone(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].donutChart), chartConfigs.options));
+        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].mergeDefaultChartOptions(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].donutChart, chartConfigs.options));
         // Initialize data, services, components etc.
         _this.init(holder, chartConfigs);
         return _this;
@@ -2614,7 +2650,7 @@ var LineChart = /** @class */ (function (_super) {
         var _this = _super.call(this, holder, chartConfigs) || this;
         // Merge the default options for this chart
         // With the user provided options
-        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].merge(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].clone(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].lineChart), chartConfigs.options));
+        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].mergeDefaultChartOptions(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].lineChart, chartConfigs.options));
         // Initialize data, services, components etc.
         _this.init(holder, chartConfigs);
         return _this;
@@ -2686,7 +2722,7 @@ var PieChart = /** @class */ (function (_super) {
         }
         // Merge the default options for this chart
         // With the user provided options
-        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].merge(_tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].clone(_configuration__WEBPACK_IMPORTED_MODULE_2__["options"].pieChart), chartConfigs.options));
+        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].mergeDefaultChartOptions(_configuration__WEBPACK_IMPORTED_MODULE_2__["options"].pieChart, chartConfigs.options));
         // Initialize data, services, components etc.
         _this.init(holder, chartConfigs);
         return _this;
@@ -2747,7 +2783,7 @@ var ScatterChart = /** @class */ (function (_super) {
         var _this = _super.call(this, holder, chartConfigs) || this;
         // Merge the default options for this chart
         // With the user provided options
-        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].merge(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].clone(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].scatterChart), chartConfigs.options));
+        _this.model.setOptions(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].mergeDefaultChartOptions(_configuration__WEBPACK_IMPORTED_MODULE_1__["options"].scatterChart, chartConfigs.options));
         // Initialize data, services, components etc.
         _this.init(holder, chartConfigs);
         return _this;
@@ -2785,7 +2821,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools */ "./dist/tools.js");
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services */ "./dist/services/index.js");
 /* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../configuration */ "./dist/configuration.js");
-/* harmony import */ var d3_axis__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-axis */ "../../node_modules/d3-axis/src/index.js");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-selection */ "../../node_modules/d3-selection/src/index.js");
+/* harmony import */ var d3_axis__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! d3-axis */ "../../node_modules/d3-axis/src/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -2806,6 +2843,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 // D3 Imports
+
 
 var Axis = /** @class */ (function (_super) {
     __extends(Axis, _super);
@@ -2849,16 +2887,16 @@ var Axis = /** @class */ (function (_super) {
         var axisFunction;
         switch (axisPosition) {
             case _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].LEFT:
-                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_5__["axisLeft"];
+                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_6__["axisLeft"];
                 break;
             case _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].BOTTOM:
-                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_5__["axisBottom"];
+                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_6__["axisBottom"];
                 break;
             case _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].RIGHT:
-                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_5__["axisRight"];
+                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_6__["axisRight"];
                 break;
             case _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].TOP:
-                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_5__["axisTop"];
+                axisFunction = d3_axis__WEBPACK_IMPORTED_MODULE_6__["axisTop"];
                 break;
         }
         // Add axis into the parent
@@ -2883,6 +2921,7 @@ var Axis = /** @class */ (function (_super) {
         var axis = axisFunction(scale)
             .tickSizeOuter(0)
             .tickFormat(_tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(axisOptions, "ticks", "formatter"));
+        var isTimeScaleType = this.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME || axisOptions.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME;
         if (scale.ticks) {
             var numberOfTicks = void 0;
             if (isNumberOfTicksProvided) {
@@ -2896,7 +2935,7 @@ var Axis = /** @class */ (function (_super) {
                 }
             }
             axis.ticks(numberOfTicks);
-            if (this.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
+            if (isTimeScaleType) {
                 var tickValues = scale.ticks(numberOfTicks).concat(scale.domain())
                     .map(function (date) { return +date; }).sort();
                 tickValues = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].removeArrayDuplicates(tickValues);
@@ -2976,7 +3015,8 @@ var Axis = /** @class */ (function (_super) {
                 // When dealing with a continuous scale
                 // We need to calculate an estimated size of the ticks
                 var minTickSize = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(axisOptions, "ticks", "rotateIfSmallerThan") || _configuration__WEBPACK_IMPORTED_MODULE_4__["axis"].ticks.rotateIfSmallerThan;
-                var estimatedTickSize = width / scale.ticks().length / 2;
+                var ticksNumber = isTimeScaleType ? axis.tickValues().length : scale.ticks().length;
+                var estimatedTickSize = width / ticksNumber / 2;
                 rotateTicks = estimatedTickSize < minTickSize;
             }
             if (rotateTicks) {
@@ -2995,6 +3035,43 @@ var Axis = /** @class */ (function (_super) {
                     .style("text-anchor", null);
             }
         }
+        // Add event listeners to elements drawn
+        this.addEventListeners();
+    };
+    Axis.prototype.addEventListeners = function () {
+        var svg = this.getContainerSVG();
+        var axisPosition = this.configs.position;
+        var container = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(svg, "g.axis." + axisPosition);
+        var self = this;
+        container.selectAll("g.tick text")
+            .on("mouseover", function (datum) {
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Axis.LABEL_MOUSEOVER, {
+                element: Object(d3_selection__WEBPACK_IMPORTED_MODULE_5__["select"])(this),
+                datum: datum
+            });
+        })
+            .on("mousemove", function (datum) {
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Axis.LABEL_MOUSEMOVE, {
+                element: Object(d3_selection__WEBPACK_IMPORTED_MODULE_5__["select"])(this),
+                datum: datum
+            });
+        })
+            .on("click", function (datum) {
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Axis.LABEL_CLICK, {
+                element: Object(d3_selection__WEBPACK_IMPORTED_MODULE_5__["select"])(this),
+                datum: datum
+            });
+        })
+            .on("mouseout", function (datum) {
+            // Dispatch mouse event
+            self.services.events.dispatchEvent(_interfaces__WEBPACK_IMPORTED_MODULE_1__["Events"].Axis.LABEL_MOUSEOUT, {
+                element: Object(d3_selection__WEBPACK_IMPORTED_MODULE_5__["select"])(this),
+                datum: datum
+            });
+        });
     };
     Axis.prototype.getInvisibleAxisRef = function () {
         var axisPosition = this.configs.position;
@@ -3009,6 +3086,16 @@ var Axis = /** @class */ (function (_super) {
     Axis.prototype.getNumberOfFittingTicks = function (size, tickSize, spaceRatio) {
         var numberOfTicksFit = Math.floor(size / (tickSize * spaceRatio));
         return _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].clamp(numberOfTicksFit, 2, _configuration__WEBPACK_IMPORTED_MODULE_4__["axis"].ticks.number);
+    };
+    Axis.prototype.destroy = function () {
+        var svg = this.getContainerSVG();
+        var axisPosition = this.configs.position;
+        var container = _services__WEBPACK_IMPORTED_MODULE_3__["DOMUtils"].appendOrSelect(svg, "g.axis." + axisPosition);
+        // Remove event listeners
+        container.selectAll("g.tick text")
+            .on("mouseover", null)
+            .on("mousemove", null)
+            .on("mouseout", null);
     };
     return Axis;
 }(_component__WEBPACK_IMPORTED_MODULE_0__["Component"]));
@@ -3295,34 +3382,12 @@ var TwoDimensionalAxes = /** @class */ (function (_super) {
         var axes = {};
         var axisPositions = Object.keys(_interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"]);
         var axesOptions = _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].getProperty(this.model.getOptions(), "axes");
-        if (axesOptions) {
-            var primaryAxisOptions_1, secondaryAxisOptions_1;
-            axisPositions.forEach(function (axisPosition) {
-                var axisOptions = axesOptions[_interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"][axisPosition]];
-                if (axisOptions) {
-                    axes[_interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"][axisPosition]] = true;
-                    if (axisOptions.primary === true) {
-                        primaryAxisOptions_1 = axisOptions;
-                    }
-                    else if (axisOptions.secondary === true) {
-                        secondaryAxisOptions_1 = axisOptions;
-                    }
-                }
-            });
-        }
-        else {
-            this.model.getOptions().axes = {
-                left: {
-                    primary: true
-                },
-                bottom: {
-                    secondary: true,
-                    type: this.model.getDisplayData().labels ? _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LABELS : undefined
-                }
-            };
-            axes[_interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].LEFT] = true;
-            axes[_interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].BOTTOM] = true;
-        }
+        axisPositions.forEach(function (axisPosition) {
+            var axisOptions = axesOptions[_interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"][axisPosition]];
+            if (axisOptions) {
+                axes[_interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"][axisPosition]] = true;
+            }
+        });
         this.configs.axes = axes;
         // Check the configs to know which axes need to be rendered
         axisPositions.forEach(function (axisPositionKey) {
@@ -5291,7 +5356,14 @@ var Line = /** @class */ (function (_super) {
         this.lineGenerator = Object(d3_shape__WEBPACK_IMPORTED_MODULE_4__["line"])()
             .x(function (d, i) { return _this.services.cartesianScales.getDomainValue(d, i); })
             .y(function (d, i) { return _this.services.cartesianScales.getRangeValue(d, i); })
-            .curve(this.services.curves.getD3Curve());
+            .curve(this.services.curves.getD3Curve())
+            .defined(function (datum, i) {
+            var value = isNaN(datum) ? datum.value : datum;
+            if (value === null || value === undefined) {
+                return false;
+            }
+            return true;
+        });
         // Update the bound data on line groups
         var lineGroups = svg.selectAll("g.lines")
             .data(this.model.getDisplayData().datasets, function (dataset) { return dataset.label; });
@@ -5802,7 +5874,16 @@ var Scatter = /** @class */ (function (_super) {
     // TODO - This method could be re-used in more graphs
     Scatter.prototype.addLabelsToDataPoints = function (d, index) {
         var labels = this.model.getDisplayData().labels;
-        return d.data.map(function (datum, i) { return ({
+        return d.data
+            // Remove datapoints with no value
+            .filter(function (datum) {
+            var value = isNaN(datum) ? datum.value : datum;
+            if (value === null || value === undefined) {
+                return false;
+            }
+            return true;
+        })
+            .map(function (datum, i) { return ({
             date: datum.date,
             label: labels[i],
             datasetLabel: d.label,
@@ -6313,9 +6394,23 @@ var barChartTooltip = _tools__WEBPACK_IMPORTED_MODULE_0__["Tools"].merge({}, axi
         enabled: false
     }
 });
-// We setup no axes by default, the TwoDimensionalAxes component
-// Will setup axes options based on what user provides
-var axes = {};
+// These options will be managed by Tools.mergeDefaultChartOptions
+// by removing the ones the user is not providing,
+// and by TwoDimensionalAxes.
+var axes = {
+    top: {
+        includeZero: true
+    },
+    bottom: {
+        includeZero: true
+    },
+    left: {
+        includeZero: true
+    },
+    right: {
+        includeZero: true
+    }
+};
 var timeScale = {
     addSpaceOnEdges: 1,
 };
@@ -6489,7 +6584,8 @@ var axis = {
     ticks: {
         number: 7,
         rotateIfSmallerThan: 30
-    }
+    },
+    paddingRatio: 0.1
 };
 var spacers = {
     default: {
@@ -6711,15 +6807,26 @@ var CalloutDirections;
 /*!***********************************!*\
   !*** ./dist/interfaces/events.js ***!
   \***********************************/
-/*! exports provided: Pie, Bar, Scatter, Line */
+/*! exports provided: Axis, Pie, Bar, Scatter, Line */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Axis", function() { return Axis; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Pie", function() { return Pie; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Bar", function() { return Bar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Scatter", function() { return Scatter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Line", function() { return Line; });
+/**
+ * enum of all axis-related events
+ */
+var Axis;
+(function (Axis) {
+    Axis["LABEL_MOUSEOVER"] = "axis-label-mouseover";
+    Axis["LABEL_MOUSEMOVE"] = "axis-label-mousemove";
+    Axis["LABEL_CLICK"] = "axis-label-click";
+    Axis["LABEL_MOUSEOUT"] = "axis-label-mouseout";
+})(Axis || (Axis = {}));
 /**
  * enum of all pie graph events
  */
@@ -7321,7 +7428,7 @@ var ChartModel = /** @class */ (function () {
 /*! exports provided: name, version, description, main, module, scripts, repository, keywords, author, license, dependencies, peerDependencies, devDependencies, publishConfig, maintainers, contributors, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"name\":\"@carbon/charts\",\"version\":\"0.29.8\",\"description\":\"Carbon charting components\",\"main\":\"./bundle.js\",\"module\":\"./index.js\",\"scripts\":{\"demo:server\":\"yarn build && concurrently npm:demo:watch-src npm:demo:watch\",\"demo:watch\":\"webpack-dev-server --config webpack.config.js --watch\",\"demo:watch-src\":\"tsc -b src -w\",\"demo:build\":\"yarn build && webpack --config webpack.config.js && yarn run docs:build\",\"docs:build\":\"typedoc --tsconfig ./src/tsconfig.json --ignoreCompilerErrors --out ./demo/bundle/documentation ./src/index.ts\",\"build\":\"bash build.sh\",\"postinstall\":\"bash build-vendor.sh\",\"lint\":\"tslint -p tsconfig.json -c tslint.json\",\"test\":\"karma start --single-run\",\"test:watch\":\"karma start --no-single-run\",\"clean\":\"rm -rf dist demo/bundle\"},\"repository\":{\"type\":\"git\",\"url\":\"git@github.com:IBM/carbon-charts.git\"},\"keywords\":[\"carbon\",\"charts\",\"dataviz\",\"data-visualization\",\"visualizations\",\"d3\",\"svg\",\"component\",\"components\",\"css\",\"html\",\"ibm\",\"typescript\",\"javascript\",\"js\",\"library\",\"pattern\",\"patterns\",\"sass\",\"scss\"],\"author\":\"IBM\",\"license\":\"Apache-2.0\",\"dependencies\":{\"@carbon/colors\":\"10.4.0\",\"@carbon/utils-position\":\"1.1.1\",\"babel-polyfill\":\"6.26.0\",\"date-fns\":\"2.8.1\",\"lodash-es\":\"4.17.15\",\"resize-observer-polyfill\":\"1.5.0\"},\"peerDependencies\":{\"d3\":\">=5.0.0 <=5.14.2\"},\"devDependencies\":{\"@carbon/import-once\":\"10.3.0\",\"@carbon/layout\":\"10.5.0\",\"@carbon/motion\":\"10.4.0\",\"@carbon/themes\":\"10.4.0\",\"@carbon/type\":\"10.5.1\",\"@rollup/plugin-json\":\"4.0.2\",\"@types/d3\":\"4.11.0\",\"@types/jasmine\":\"2.8.7\",\"@types/karma\":\"3.0.2\",\"@types/node\":\"12.11.7\",\"babel-polyfill\":\"6.26.0\",\"carbon-components\":\"10.5.0\",\"codesandbox\":\"2.1.11\",\"concurrently\":\"5.1.0\",\"copy-webpack-plugin\":\"4.5.2\",\"css-loader\":\"0.28.7\",\"d3\":\"5.14.2\",\"extract-text-webpack-plugin\":\"3.0.2\",\"file-loader\":\"1.1.5\",\"html-loader\":\"0.5.1\",\"html-webpack-exclude-assets-plugin\":\"0.0.7\",\"html-webpack-plugin\":\"3.2.0\",\"jasmine-core\":\"3.4.0\",\"karma\":\"4.0.1\",\"karma-chrome-launcher\":\"2.2.0\",\"karma-firefox-launcher\":\"1.1.0\",\"karma-jasmine\":\"2.0.1\",\"karma-safari-launcher\":\"1.0.0\",\"karma-webpack\":\"4.0.2\",\"lerna\":\"3.13.4\",\"mini-css-extract-plugin\":\"0.9.0\",\"raw-loader\":\"0.5.1\",\"rollup\":\"1.27.10\",\"rollup-plugin-commonjs\":\"10.1.0\",\"rollup-plugin-node-resolve\":\"5.2.0\",\"rollup-plugin-terser\":\"5.1.2\",\"rollup-plugin-typescript2\":\"0.26.0\",\"sass\":\"1.25.0\",\"sass-loader\":\"8.0.0\",\"style-loader\":\"0.19.0\",\"ts-loader\":\"6.2.1\",\"tslint\":\"5.20.1\",\"tslint-loader\":\"3.5.3\",\"typedoc\":\"0.11.1\",\"typescript\":\"3.7.5\",\"url-loader\":\"0.6.2\",\"webpack\":\"4.41.0\",\"webpack-cli\":\"3.3.9\",\"webpack-dev-server\":\"3.7.0\"},\"publishConfig\":{\"directory\":\"dist\",\"access\":\"public\"},\"maintainers\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}],\"contributors\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}]}");
+module.exports = JSON.parse("{\"name\":\"@carbon/charts\",\"version\":\"0.30.1\",\"description\":\"Carbon charting components\",\"main\":\"./bundle.js\",\"module\":\"./index.js\",\"scripts\":{\"demo:server\":\"yarn build && concurrently npm:demo:watch-src npm:demo:watch\",\"demo:watch\":\"webpack-dev-server --config webpack.config.js --watch\",\"demo:watch-src\":\"tsc -b src -w\",\"demo:build\":\"yarn build && webpack --config webpack.config.js && yarn run docs:build\",\"docs:build\":\"typedoc --tsconfig ./src/tsconfig.json --ignoreCompilerErrors --out ./demo/bundle/documentation ./src/index.ts\",\"build\":\"bash build.sh\",\"postinstall\":\"bash build-vendor.sh\",\"lint\":\"tslint -p tsconfig.json -c tslint.json\",\"test\":\"karma start --single-run\",\"test:watch\":\"karma start --no-single-run\",\"clean\":\"rm -rf dist demo/bundle\"},\"repository\":{\"type\":\"git\",\"url\":\"git@github.com:IBM/carbon-charts.git\"},\"keywords\":[\"carbon\",\"charts\",\"dataviz\",\"data-visualization\",\"visualizations\",\"d3\",\"svg\",\"component\",\"components\",\"css\",\"html\",\"ibm\",\"typescript\",\"javascript\",\"js\",\"library\",\"pattern\",\"patterns\",\"sass\",\"scss\"],\"author\":\"IBM\",\"license\":\"Apache-2.0\",\"dependencies\":{\"@carbon/colors\":\"10.4.0\",\"@carbon/utils-position\":\"1.1.1\",\"babel-polyfill\":\"6.26.0\",\"date-fns\":\"2.8.1\",\"lodash-es\":\"4.17.15\",\"resize-observer-polyfill\":\"1.5.0\"},\"peerDependencies\":{\"d3\":\">=5.0.0 <=5.14.2\"},\"devDependencies\":{\"@carbon/import-once\":\"10.3.0\",\"@carbon/layout\":\"10.5.0\",\"@carbon/motion\":\"10.4.0\",\"@carbon/themes\":\"10.4.0\",\"@carbon/type\":\"10.5.1\",\"@rollup/plugin-json\":\"4.0.2\",\"@types/d3\":\"4.11.0\",\"@types/jasmine\":\"2.8.7\",\"@types/karma\":\"3.0.2\",\"@types/node\":\"12.11.7\",\"babel-polyfill\":\"6.26.0\",\"carbon-components\":\"10.5.0\",\"codesandbox\":\"2.1.11\",\"concurrently\":\"5.1.0\",\"copy-webpack-plugin\":\"4.5.2\",\"css-loader\":\"0.28.7\",\"d3\":\"5.14.2\",\"extract-text-webpack-plugin\":\"3.0.2\",\"file-loader\":\"1.1.5\",\"html-loader\":\"0.5.1\",\"html-webpack-exclude-assets-plugin\":\"0.0.7\",\"html-webpack-plugin\":\"3.2.0\",\"jasmine-core\":\"3.4.0\",\"karma\":\"4.0.1\",\"karma-chrome-launcher\":\"2.2.0\",\"karma-firefox-launcher\":\"1.1.0\",\"karma-jasmine\":\"2.0.1\",\"karma-safari-launcher\":\"1.0.0\",\"karma-webpack\":\"4.0.2\",\"lerna\":\"3.13.4\",\"mini-css-extract-plugin\":\"0.9.0\",\"raw-loader\":\"0.5.1\",\"rollup\":\"1.27.10\",\"rollup-plugin-commonjs\":\"10.1.0\",\"rollup-plugin-node-resolve\":\"5.2.0\",\"rollup-plugin-terser\":\"5.1.2\",\"rollup-plugin-typescript2\":\"0.26.0\",\"sass\":\"1.25.0\",\"sass-loader\":\"8.0.0\",\"style-loader\":\"0.19.0\",\"ts-loader\":\"6.2.1\",\"tslint\":\"5.20.1\",\"tslint-loader\":\"3.5.3\",\"typedoc\":\"0.11.1\",\"typescript\":\"3.7.5\",\"url-loader\":\"0.6.2\",\"webpack\":\"4.41.0\",\"webpack-cli\":\"3.3.9\",\"webpack-dev-server\":\"3.7.0\"},\"publishConfig\":{\"directory\":\"dist\",\"access\":\"public\"},\"maintainers\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}],\"contributors\":[{\"name\":\"Eliad Moosavi\",\"email\":\"iliadm@ca.ibm.com\",\"url\":\"https://github.com/theiliad\"}]}");
 
 /***/ }),
 
@@ -7547,6 +7654,23 @@ var DOMUtils = /** @class */ (function (_super) {
         if (!svgSelector.attr) {
             svgSelector = Object(d3_selection__WEBPACK_IMPORTED_MODULE_1__["select"])(svgSelector);
         }
+        var finalDimensions = {
+            width: 0,
+            height: 0
+        };
+        var validateAndSetDimensions = function (dimensions) {
+            Object.keys(dimensions).forEach(function (dimensionKey) {
+                if (dimensions[dimensionKey]) {
+                    var dimension = dimensions[dimensionKey];
+                    var dimensionNumber = parseFloat(dimension);
+                    if (dimension &&
+                        dimensionNumber > finalDimensions[dimensionKey] &&
+                        ("" + dimension).indexOf("%") === -1) {
+                        finalDimensions[dimensionKey] = dimensionNumber;
+                    }
+                }
+            });
+        };
         var attrDimensions = {
             width: svgSelector.attr("width"),
             height: svgSelector.attr("height")
@@ -7574,29 +7698,32 @@ var DOMUtils = /** @class */ (function (_super) {
             width: svgSelector.node().clientWidth,
             height: svgSelector.node().clientHeight
         };
-        var validateDimensions = function (dimensions) {
-            if (dimensions && dimensions.width && dimensions.height &&
-                !isNaN(dimensions.height) && !isNaN(dimensions.width) &&
-                ("" + dimensions.width + dimensions.height).indexOf("%") === -1 &&
-                dimensions.width > 0 && dimensions.height > 0) {
-                return true;
-            }
-            return false;
-        };
         // If both attribute values are numbers
         // And not percentages or NaN
         if (options) {
-            if (options.useAttrs && validateDimensions(attrDimensions)) {
-                return attrDimensions;
+            if (options.useAttrs) {
+                validateAndSetDimensions(attrDimensions);
+                if (finalDimensions.width > 0 && finalDimensions.height > 0) {
+                    return finalDimensions;
+                }
             }
-            if (options.useClientDimensions && validateDimensions(clientDimensions)) {
-                return clientDimensions;
+            if (options.useClientDimensions) {
+                validateAndSetDimensions(clientDimensions);
+                if (finalDimensions.width > 0 && finalDimensions.height > 0) {
+                    return clientDimensions;
+                }
             }
-            if (options.useBBox && validateDimensions(bboxDimensions)) {
-                return bboxDimensions;
+            if (options.useBBox) {
+                validateAndSetDimensions(bboxDimensions);
+                if (finalDimensions.width > 0 && finalDimensions.height > 0) {
+                    return bboxDimensions;
+                }
             }
-            if (options.useBoundingRect && validateDimensions(boundingRectDimensions)) {
-                return boundingRectDimensions;
+            if (options.useBoundingRect) {
+                validateAndSetDimensions(boundingRectDimensions);
+                if (finalDimensions.width > 0 && finalDimensions.height > 0) {
+                    return boundingRectDimensions;
+                }
             }
         }
         try {
@@ -7604,25 +7731,14 @@ var DOMUtils = /** @class */ (function (_super) {
                 width: _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(svgSelector.node(), "width", "baseVal", "value"),
                 height: _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(svgSelector.node(), "height", "baseVal", "value")
             };
-            if (validateDimensions(nativeDimensions)) {
-                return nativeDimensions;
-            }
+            validateAndSetDimensions(nativeDimensions);
         }
         catch (e) {
-            if (validateDimensions(clientDimensions)) {
-                return clientDimensions;
-            }
-            if (validateDimensions(bboxDimensions)) {
-                return bboxDimensions;
-            }
-            if (validateDimensions(attrDimensions)) {
-                return attrDimensions;
-            }
+            validateAndSetDimensions(clientDimensions);
+            validateAndSetDimensions(bboxDimensions);
+            validateAndSetDimensions(attrDimensions);
         }
-        return {
-            width: 0,
-            height: 0
-        };
+        return finalDimensions;
     };
     DOMUtils.appendOrSelect = function (parent, query) {
         var querySections = query.split(".");
@@ -7904,15 +8020,16 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CartesianScales", function() { return CartesianScales; });
-/* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./service */ "./dist/services/service.js");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../interfaces */ "./dist/interfaces/index.js");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools */ "./dist/tools.js");
-/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/src/index.js");
-/* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-array */ "../../node_modules/d3-array/src/index.js");
-/* harmony import */ var d3_time_format__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-time-format */ "../../node_modules/d3-time-format/src/index.js");
-/* harmony import */ var d3_time_format_locale_en_US_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! d3-time-format/locale/en-US.json */ "../../node_modules/d3-time-format/locale/en-US.json");
-var d3_time_format_locale_en_US_json__WEBPACK_IMPORTED_MODULE_6___namespace = /*#__PURE__*/__webpack_require__.t(/*! d3-time-format/locale/en-US.json */ "../../node_modules/d3-time-format/locale/en-US.json", 1);
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! date-fns */ "../../node_modules/date-fns/esm/index.js");
+/* harmony import */ var _configuration__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../configuration */ "./dist/configuration.js");
+/* harmony import */ var _service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./service */ "./dist/services/service.js");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../interfaces */ "./dist/interfaces/index.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools */ "./dist/tools.js");
+/* harmony import */ var d3_scale__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! d3-scale */ "../../node_modules/d3-scale/src/index.js");
+/* harmony import */ var d3_array__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! d3-array */ "../../node_modules/d3-array/src/index.js");
+/* harmony import */ var d3_time_format__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! d3-time-format */ "../../node_modules/d3-time-format/src/index.js");
+/* harmony import */ var d3_time_format_locale_en_US_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! d3-time-format/locale/en-US.json */ "../../node_modules/d3-time-format/locale/en-US.json");
+var d3_time_format_locale_en_US_json__WEBPACK_IMPORTED_MODULE_7___namespace = /*#__PURE__*/__webpack_require__.t(/*! d3-time-format/locale/en-US.json */ "../../node_modules/d3-time-format/locale/en-US.json", 1);
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! date-fns */ "../../node_modules/date-fns/esm/index.js");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -7930,6 +8047,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
+
 // D3 Imports
 
 
@@ -7937,6 +8055,16 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 // Misc
 
+function addPaddingInDomain(_a, paddingRatio) {
+    var lower = _a[0], upper = _a[1];
+    var domainLength = upper - lower;
+    var padding = domainLength * paddingRatio;
+    // If padding crosses 0, keep 0 as new upper bound
+    var newUpper = upper <= 0 && upper + padding > 0 ? 0 : upper + padding;
+    // If padding crosses 0, keep 0 as new lower bound
+    var newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding;
+    return [newLower, newUpper];
+}
 var CartesianScales = /** @class */ (function (_super) {
     __extends(CartesianScales, _super);
     function CartesianScales() {
@@ -7961,11 +8089,28 @@ var CartesianScales = /** @class */ (function (_super) {
     CartesianScales.prototype.getRangeAxisPosition = function () {
         return this.rangeAxisPosition;
     };
+    CartesianScales.prototype.setDefaultAxes = function () {
+        var axesOptions = _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].getProperty(this.model.getOptions(), "axes");
+        if (!axesOptions) {
+            this.model.getOptions().axes = {
+                left: {
+                    primary: true,
+                    includeZero: true,
+                },
+                bottom: {
+                    secondary: true,
+                    includeZero: true,
+                    scaleType: this.model.getDisplayData().labels ? _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].LABELS : undefined
+                }
+            };
+        }
+    };
     CartesianScales.prototype.update = function (animate) {
         var _this = this;
         if (animate === void 0) { animate = true; }
+        this.setDefaultAxes();
         this.determineOrientation();
-        var axisPositions = Object.keys(_interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"]).map(function (axisPositionKey) { return _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"][axisPositionKey]; });
+        var axisPositions = Object.keys(_interfaces__WEBPACK_IMPORTED_MODULE_2__["AxisPositions"]).map(function (axisPositionKey) { return _interfaces__WEBPACK_IMPORTED_MODULE_2__["AxisPositions"][axisPositionKey]; });
         axisPositions.forEach(function (axisPosition) {
             _this.scales[axisPosition] = _this.createScale(axisPosition);
         });
@@ -7976,16 +8121,16 @@ var CartesianScales = /** @class */ (function (_super) {
         // Manually specifying positions here
         // In order to enforce a priority
         [
-            _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].LEFT,
-            _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].BOTTOM,
-            _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].RIGHT,
-            _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].TOP
+            _interfaces__WEBPACK_IMPORTED_MODULE_2__["AxisPositions"].LEFT,
+            _interfaces__WEBPACK_IMPORTED_MODULE_2__["AxisPositions"].BOTTOM,
+            _interfaces__WEBPACK_IMPORTED_MODULE_2__["AxisPositions"].RIGHT,
+            _interfaces__WEBPACK_IMPORTED_MODULE_2__["AxisPositions"].TOP
         ].forEach(function (axisPosition) {
-            var axisOptions = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "axes", axisPosition);
+            var axisOptions = _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].getProperty(options, "axes", axisPosition);
             if (axisOptions) {
-                var scaleType = axisOptions.scaleType || _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LINEAR;
+                var scaleType = axisOptions.scaleType || _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].LINEAR;
                 _this.scaleTypes[axisPosition] = scaleType;
-                if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LINEAR) {
+                if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].LINEAR) {
                     _this.rangeAxisPosition = axisPosition;
                 }
                 else {
@@ -7993,11 +8138,11 @@ var CartesianScales = /** @class */ (function (_super) {
                 }
             }
         });
-        if (this.rangeAxisPosition === _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].LEFT && this.domainAxisPosition === _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].BOTTOM) {
-            this.orientation = _interfaces__WEBPACK_IMPORTED_MODULE_1__["CartesianOrientations"].VERTICAL;
+        if (this.rangeAxisPosition === _interfaces__WEBPACK_IMPORTED_MODULE_2__["AxisPositions"].LEFT && this.domainAxisPosition === _interfaces__WEBPACK_IMPORTED_MODULE_2__["AxisPositions"].BOTTOM) {
+            this.orientation = _interfaces__WEBPACK_IMPORTED_MODULE_2__["CartesianOrientations"].VERTICAL;
         }
         else {
-            this.orientation = _interfaces__WEBPACK_IMPORTED_MODULE_1__["CartesianOrientations"].HORIZONTAL;
+            this.orientation = _interfaces__WEBPACK_IMPORTED_MODULE_2__["CartesianOrientations"].HORIZONTAL;
         }
     };
     CartesianScales.prototype.getOrientation = function () {
@@ -8017,13 +8162,13 @@ var CartesianScales = /** @class */ (function (_super) {
     };
     // Find the main x-axis out of the 2 x-axis on the chart (when 2D axis is used)
     CartesianScales.prototype.getMainXAxisPosition = function () {
-        var possibleXAxisPositions = [_interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].BOTTOM, _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].TOP];
+        var possibleXAxisPositions = [_interfaces__WEBPACK_IMPORTED_MODULE_2__["AxisPositions"].BOTTOM, _interfaces__WEBPACK_IMPORTED_MODULE_2__["AxisPositions"].TOP];
         return [this.domainAxisPosition, this.rangeAxisPosition]
             .find(function (position) { return possibleXAxisPositions.indexOf(position) > -1; });
     };
     // Find the main y-axis out of the 2 y-axis on the chart (when 2D axis is used)
     CartesianScales.prototype.getMainYAxisPosition = function () {
-        var possibleYAxisPositions = [_interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].LEFT, _interfaces__WEBPACK_IMPORTED_MODULE_1__["AxisPositions"].RIGHT];
+        var possibleYAxisPositions = [_interfaces__WEBPACK_IMPORTED_MODULE_2__["AxisPositions"].LEFT, _interfaces__WEBPACK_IMPORTED_MODULE_2__["AxisPositions"].RIGHT];
         return [this.domainAxisPosition, this.rangeAxisPosition]
             .find(function (position) { return possibleYAxisPositions.indexOf(position) > -1; });
     };
@@ -8037,11 +8182,11 @@ var CartesianScales = /** @class */ (function (_super) {
         var value = isNaN(datum) ? datum.value : datum;
         var scaleType = this.scaleTypes[axisPosition];
         var scale = this.scales[axisPosition];
-        if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LABELS) {
+        if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].LABELS) {
             var correspondingLabel = this.model.getDisplayData().labels[index];
             return scale(correspondingLabel) + scale.step() / 2;
         }
-        else if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
+        else if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].TIME) {
             return scale(new Date(datum.date || datum.label));
         }
         return scale(value);
@@ -8058,7 +8203,7 @@ var CartesianScales = /** @class */ (function (_super) {
         var activePoints = [];
         var scaleType = this.scaleTypes[this.domainAxisPosition];
         switch (scaleType) {
-            case _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LABELS:
+            case _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].LABELS:
                 // based on labels we use the index to get the associated data
                 var index_1 = displayData.labels.indexOf(domainValue);
                 displayData.datasets.forEach(function (dataset) {
@@ -8068,7 +8213,7 @@ var CartesianScales = /** @class */ (function (_super) {
                     });
                 });
                 break;
-            case _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME:
+            case _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].TIME:
                 // time series we filter using the date
                 var domainKey_1 = Object.keys(displayData.datasets[0].data[0]).filter(function (key) { return key !== "value"; })[0];
                 displayData.datasets.forEach(function (dataset) {
@@ -8081,7 +8226,8 @@ var CartesianScales = /** @class */ (function (_super) {
                     });
                     // assign the shared label on the data items and add them to the array
                     dataItems.forEach(function (item) {
-                        activePoints.push(Object.assign({ datasetLabel: sharedLabel,
+                        activePoints.push(Object.assign({
+                            datasetLabel: sharedLabel,
                             value: item.value,
                         }, item));
                     });
@@ -8092,10 +8238,11 @@ var CartesianScales = /** @class */ (function (_super) {
     };
     CartesianScales.prototype.getScaleDomain = function (axisPosition) {
         var options = this.model.getOptions();
-        var axisOptions = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "axes", axisPosition);
+        var axisOptions = _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].getProperty(options, "axes", axisPosition);
+        var includeZero = axisOptions.includeZero;
         var _a = this.model.getDisplayData(), datasets = _a.datasets, labels = _a.labels;
         // If scale is a LABELS scale, return some labels as the domain
-        if (axisOptions && axisOptions.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LABELS) {
+        if (axisOptions && axisOptions.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].LABELS) {
             if (labels) {
                 return labels;
             }
@@ -8111,13 +8258,13 @@ var CartesianScales = /** @class */ (function (_super) {
         }
         // If the scale is stacked
         if (axisOptions.stacked) {
-            domain = Object(d3_array__WEBPACK_IMPORTED_MODULE_4__["extent"])(labels.reduce(function (m, label, i) {
+            domain = Object(d3_array__WEBPACK_IMPORTED_MODULE_5__["extent"])(labels.reduce(function (m, label, i) {
                 var correspondingValues = datasets.map(function (dataset) {
                     return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
                 });
                 var totalValue = correspondingValues.reduce(function (a, b) { return a + b; }, 0);
                 // Save both the total value and the minimum
-                return m.concat(totalValue, Object(d3_array__WEBPACK_IMPORTED_MODULE_4__["min"])(correspondingValues));
+                return m.concat(totalValue, Object(d3_array__WEBPACK_IMPORTED_MODULE_5__["min"])(correspondingValues));
             }, [])
                 // Currently stack layouts in the library
                 // Only support positive values
@@ -8127,7 +8274,7 @@ var CartesianScales = /** @class */ (function (_super) {
             // Get all the chart's data values in a flat array
             var allDataValues = datasets.reduce(function (dataValues, dataset) {
                 dataset.data.forEach(function (datum) {
-                    if (axisOptions.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
+                    if (axisOptions.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].TIME) {
                         dataValues = dataValues.concat(datum.date);
                     }
                     else {
@@ -8136,30 +8283,30 @@ var CartesianScales = /** @class */ (function (_super) {
                 });
                 return dataValues;
             }, []);
-            if (axisOptions.scaleType !== _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
+            if (axisOptions.scaleType !== _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].TIME && includeZero) {
                 allDataValues = allDataValues.concat(0);
             }
-            domain = Object(d3_array__WEBPACK_IMPORTED_MODULE_4__["extent"])(allDataValues);
+            domain = Object(d3_array__WEBPACK_IMPORTED_MODULE_5__["extent"])(allDataValues);
         }
-        if (axisOptions.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
-            var spaceToAddToEdges = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "timeScale", "addSpaceOnEdges");
+        if (axisOptions.scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].TIME) {
+            var spaceToAddToEdges = _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].getProperty(options, "timeScale", "addSpaceOnEdges");
             if (spaceToAddToEdges) {
                 var startDate = new Date(domain[0]);
                 var endDate = new Date(domain[1]);
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["differenceInYears"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["subYears"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["addYears"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["differenceInYears"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["subYears"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["addYears"])(endDate, spaceToAddToEdges)];
                 }
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["differenceInMonths"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["subMonths"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["addMonths"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["differenceInMonths"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["subMonths"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["addMonths"])(endDate, spaceToAddToEdges)];
                 }
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["differenceInDays"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["subDays"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["addDays"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["differenceInDays"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["subDays"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["addDays"])(endDate, spaceToAddToEdges)];
                 }
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["differenceInHours"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["subHours"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["addHours"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["differenceInHours"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["subHours"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["addHours"])(endDate, spaceToAddToEdges)];
                 }
-                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["differenceInMinutes"])(endDate, startDate) > 1) {
-                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["subMinutes"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_7__["addMinutes"])(endDate, spaceToAddToEdges)];
+                if (Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["differenceInMinutes"])(endDate, startDate) > 1) {
+                    return [Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["subMinutes"])(startDate, spaceToAddToEdges), Object(date_fns__WEBPACK_IMPORTED_MODULE_8__["addMinutes"])(endDate, spaceToAddToEdges)];
                 }
                 return [startDate, endDate];
             }
@@ -8168,45 +8315,39 @@ var CartesianScales = /** @class */ (function (_super) {
                 new Date(domain[1])
             ];
         }
-        // TODO - Work with design to improve logic
-        domain[1] = domain[1] * 1.1;
-        // if the lower bound of the domain is less than 0, we want to add padding
-        if (domain[0] < 0) {
-            domain[0] = domain[0] * 1.1;
-        }
-        return domain;
+        return addPaddingInDomain(domain, _configuration__WEBPACK_IMPORTED_MODULE_0__["axis"].paddingRatio);
     };
     CartesianScales.prototype.createScale = function (axisPosition) {
         var options = this.model.getOptions();
-        var axisOptions = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "axes", axisPosition);
+        var axisOptions = _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].getProperty(options, "axes", axisPosition);
         if (!axisOptions) {
             return null;
         }
-        var scaleType = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(axisOptions, "scaleType") || _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LINEAR;
+        var scaleType = _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].getProperty(axisOptions, "scaleType") || _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].LINEAR;
         this.scaleTypes[axisPosition] = scaleType;
         // Set the date/time locale
-        if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
-            var timeLocale = _tools__WEBPACK_IMPORTED_MODULE_2__["Tools"].getProperty(options, "locale", "time") || d3_time_format_locale_en_US_json__WEBPACK_IMPORTED_MODULE_6__;
-            Object(d3_time_format__WEBPACK_IMPORTED_MODULE_5__["timeFormatDefaultLocale"])(timeLocale);
+        if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].TIME) {
+            var timeLocale = _tools__WEBPACK_IMPORTED_MODULE_3__["Tools"].getProperty(options, "locale", "time") || d3_time_format_locale_en_US_json__WEBPACK_IMPORTED_MODULE_7__;
+            Object(d3_time_format__WEBPACK_IMPORTED_MODULE_6__["timeFormatDefaultLocale"])(timeLocale);
         }
         var scale;
-        if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].TIME) {
-            scale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_3__["scaleTime"])();
+        if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].TIME) {
+            scale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleTime"])();
         }
-        else if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LOG) {
-            scale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_3__["scaleLog"])().base(axisOptions.base || 10);
+        else if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].LOG) {
+            scale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleLog"])().base(axisOptions.base || 10);
         }
-        else if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_1__["ScaleTypes"].LABELS) {
-            scale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_3__["scaleBand"])();
+        else if (scaleType === _interfaces__WEBPACK_IMPORTED_MODULE_2__["ScaleTypes"].LABELS) {
+            scale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleBand"])();
         }
         else {
-            scale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_3__["scaleLinear"])();
+            scale = Object(d3_scale__WEBPACK_IMPORTED_MODULE_4__["scaleLinear"])();
         }
         scale.domain(this.getScaleDomain(axisPosition));
         return scale;
     };
     return CartesianScales;
-}(_service__WEBPACK_IMPORTED_MODULE_0__["Service"]));
+}(_service__WEBPACK_IMPORTED_MODULE_1__["Service"]));
 
 //# sourceMappingURL=../../src/services/scales-cartesian.js.map
 
@@ -8269,6 +8410,30 @@ var Tools;
     Tools.merge = lodash_es__WEBPACK_IMPORTED_MODULE_1__["merge"];
     Tools.removeArrayDuplicates = lodash_es__WEBPACK_IMPORTED_MODULE_1__["uniq"];
     Tools.clamp = lodash_es__WEBPACK_IMPORTED_MODULE_1__["clamp"];
+    /**
+     * Returns default chart options merged with provided options,
+     * with special cases for axes.
+     * Axes object will not merge the not provided axes.
+     *
+     * @export
+     * @param {AxisChartOptions} defaultOptions Configuration.options[chartType]
+     * @param {AxisChartOptions} providedOptions user provided options
+     * @returns merged options
+     */
+    function mergeDefaultChartOptions(defaultOptions, providedOptions) {
+        defaultOptions = Tools.clone(defaultOptions);
+        var providedAxesNames = Object.keys(providedOptions.axes || {});
+        if (providedAxesNames.length === 0) {
+            delete defaultOptions.axes;
+        }
+        for (var axisName in defaultOptions.axes) {
+            if (!providedAxesNames.includes(axisName)) {
+                delete defaultOptions.axes[axisName];
+            }
+        }
+        return Tools.merge(defaultOptions, providedOptions);
+    }
+    Tools.mergeDefaultChartOptions = mergeDefaultChartOptions;
     /**************************************
      *  DOM-related operations            *
      *************************************/
