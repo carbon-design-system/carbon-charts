@@ -22,7 +22,7 @@ export const lineData = {
 			]
 		},
 		{
-			label: "Dataset 3 long name",
+			label: "Dataset 3",
 			data: [
 				41200,
 				23400,
@@ -32,7 +32,7 @@ export const lineData = {
 			]
 		},
 		{
-			label: "Dataset 4 long name",
+			label: "Dataset 4",
 			data: [
 				22000,
 				1200,
@@ -42,7 +42,7 @@ export const lineData = {
 			]
 		},
 		{
-			label: "Dataset 5 long name",
+			label: "Dataset 5",
 			data: [
 				2412,
 				30000,
@@ -52,7 +52,7 @@ export const lineData = {
 			]
 		},
 		{
-			label: "Dataset 6 long name",
+			label: "Dataset 6",
 			data: [
 				0,
 				20000,
@@ -94,7 +94,7 @@ export const lineTimeSeriesData = {
 				},
 				{
 					date: new Date(2019, 0, 8),
-					value: 10000
+					value: null
 				},
 				{
 					date: new Date(2019, 0, 13),
@@ -140,11 +140,11 @@ export const lineTimeSeriesData = {
 				},
 				{
 					date: new Date(2019, 0, 5),
-					value: 15000
+					value: null
 				},
 				{
 					date: new Date(2019, 0, 8),
-					value: 20000
+					value: 18000
 				},
 				{
 					date: new Date(2019, 0, 13),
@@ -173,11 +173,11 @@ export const lineTimeSeriesData = {
 				},
 				{
 					date: new Date(2019, 0, 15),
-					value: 40323
+					value: 25332
 				},
 				{
 					date: new Date(2019, 0, 19),
-					value: 31300
+					value: null
 				}
 			]
 		}
