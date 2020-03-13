@@ -79,7 +79,7 @@ export const baseTooltip: TooltipOptions = {
 export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip, {
 	gridline: {
 		enabled: true,
-		threshold: 0
+		threshold: 0.02
 	}
 } as AxisTooltipOptions);
 

@@ -41,6 +41,11 @@ export class Ruler extends Component {
 	hoveredElements: GenericSvgSelection;
 
 	render() {
+		// if scale is not continuous do not show ruler
+		if (this.services.cartesianScales.getMainXScale().invert === undefined) {
+			return;
+		}
+
 		this.drawBackdrop();
 		this.addBackdropEventListeners();
 	}
@@ -138,11 +143,6 @@ export class Ruler extends Component {
 			.attr("y2", height)
 			.attr("x1", lineX)
 			.attr("x2", lineX);
-
-		// if scale is not continuous don't show axis tooltip
-		if (!scale.invert) {
-			return;
-		}
 
 		// append axis tooltip
 		const axisTooltip = DOMUtils.appendOrSelect(ruler, "g.ruler-axis-tooltip");
