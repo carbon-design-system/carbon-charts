@@ -4,7 +4,7 @@ export const generateThemePickerHTML = () => `
 		<div class="bx--form-item">
 			<div class="bx--radio-button-group ">
 				<div class="bx--radio-button-wrapper">
-					<input id="radio-button-abfeuherm2f-1" class="bx--radio-button" type="radio" value="white" name="radio-button" tabindex="0" checked>
+					<input id="radio-button-abfeuherm2f-1" class="bx--radio-button" type="radio" value="white" name="radio-button" tabindex="0">
 					<label for="radio-button-abfeuherm2f-1" class="bx--radio-button__label">
 					<span class="bx--radio-button__appearance"></span>
 					<span class="bx--radio-button__label-text">White</span>
@@ -25,7 +25,7 @@ export const generateThemePickerHTML = () => `
 					</label>
 				</div>
 				<div class="bx--radio-button-wrapper">
-					<input id="radio-button-abfeuherm2f-4" class="bx--radio-button" type="radio" value="g100" name="radio-button" tabindex="0">
+					<input id="radio-button-abfeuherm2f-4" class="bx--radio-button" type="radio" value="g100" name="radio-button" tabindex="0" checked>
 					<label for="radio-button-abfeuherm2f-4" class="bx--radio-button__label">
 					<span class="bx--radio-button__appearance"></span>
 					<span class="bx--radio-button__label-text">G100</span>
