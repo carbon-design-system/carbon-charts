@@ -11,7 +11,7 @@ export const lineTimeSeriesData15seconds = {
 				{ date: new Date(2020, 11, 11, 0, 0, 0), value: 10 },
 				{ date: new Date(2020, 11, 11, 0, 0, 15), value: 10 },
 				{ date: new Date(2020, 11, 11, 0, 0, 30), value: 10 },
-				{ date: new Date(2020, 11, 11, 0, 0, 45), value: 10 },
+				{ date: new Date(2020, 11, 11, 0, 0, 45), value: 10 }
 			]
 		}
 	]
@@ -23,9 +23,9 @@ export const lineTimeSeries15secondsOptions = {
 		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
-			primary: true,
-		},
-	},
+			primary: true
+		}
+	}
 };
 
 // minute
@@ -41,7 +41,7 @@ export const lineTimeSeriesDataMinute = {
 				{ date: new Date(2020, 4, 22, 0, 0, 0), value: 10 },
 				{ date: new Date(2020, 4, 22, 0, 1, 0), value: 10 },
 				{ date: new Date(2020, 4, 22, 0, 2, 0), value: 10 },
-				{ date: new Date(2020, 4, 22, 0, 3, 0), value: 10 },
+				{ date: new Date(2020, 4, 22, 0, 3, 0), value: 10 }
 			]
 		}
 	]
@@ -53,9 +53,9 @@ export const lineTimeSeriesMinuteOptions = {
 		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
-			primary: true,
-		},
-	},
+			primary: true
+		}
+	}
 };
 
 // 30minutes
@@ -72,7 +72,7 @@ export const lineTimeSeriesData30minutes = {
 				{ date: new Date(2020, 11, 11, 0, 30), value: 10 },
 				{ date: new Date(2020, 11, 11, 1, 0), value: 10 },
 				{ date: new Date(2020, 11, 11, 1, 20), value: 10 },
-				{ date: new Date(2020, 11, 11, 1, 25), value: 10 },
+				{ date: new Date(2020, 11, 11, 1, 25), value: 10 }
 			]
 		}
 	]
@@ -84,9 +84,9 @@ export const lineTimeSeries30minutesOptions = {
 		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
-			primary: true,
-		},
-	},
+			primary: true
+		}
+	}
 };
 
 // hourly with default ticks formats
@@ -102,7 +102,7 @@ export const lineTimeSeriesDataHourlyDefaultTicksFormats = {
 				{ date: new Date(2020, 11, 11, 1, 0), value: 10 },
 				{ date: new Date(2020, 11, 11, 2, 0), value: 10 },
 				{ date: new Date(2020, 11, 11, 3, 0), value: 10 },
-				{ date: new Date(2020, 11, 11, 4, 0), value: 10 },
+				{ date: new Date(2020, 11, 11, 4, 0), value: 10 }
 			]
 		}
 	]
@@ -114,9 +114,9 @@ export const lineTimeSeriesHourlyDefaultLocaleOptions = {
 		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
-			primary: true,
-		},
-	},
+			primary: true
+		}
+	}
 };
 
 // hourly with custom ticks formats
@@ -134,8 +134,8 @@ export const lineTimeSeriesHourlyCustomTicksFormatsOptions = {
 	timeScale: {
 		timeIntervalFormats: {
 			hourly: { primary: "MMM d, HH:mm", secondary: "HH:mm" }
-		},
-	},
+		}
+	}
 };
 
 // daily
@@ -151,7 +151,7 @@ export const lineTimeSeriesDataDaily = {
 				{ date: new Date(2020, 0, 2), value: 10 },
 				{ date: new Date(2020, 0, 3), value: 10 },
 				{ date: new Date(2020, 0, 4), value: 10 },
-				{ date: new Date(2020, 0, 5), value: 10 },
+				{ date: new Date(2020, 0, 5), value: 10 }
 			]
 		}
 	]
@@ -163,9 +163,9 @@ export const lineTimeSeriesDailyOptions = {
 		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
-			primary: true,
-		},
-	},
+			primary: true
+		}
+	}
 };
 
 // weekly
@@ -182,7 +182,7 @@ export const lineTimeSeriesDataWeekly = {
 				{ date: new Date(2020, 1, 1), value: 10 },
 				{ date: new Date(2020, 1, 2), value: 10 },
 				{ date: new Date(2020, 1, 3), value: 10 },
-				{ date: new Date(2020, 1, 4), value: 10 },
+				{ date: new Date(2020, 1, 4), value: 10 }
 			]
 		}
 	]
@@ -199,7 +199,7 @@ export const lineTimeSeriesWeeklyOptions = {
 	},
 	timeScale: {
 		showDayName: true
-	},
+	}
 };
 
 // monthly with default locale
@@ -215,7 +215,7 @@ export const lineTimeSeriesDataMonthlyDefaultLocale = {
 				{ date: new Date(2019, 0), value: 10 },
 				{ date: new Date(2019, 1), value: 10 },
 				{ date: new Date(2019, 2), value: 10 },
-				{ date: new Date(2019, 3), value: 10 },
+				{ date: new Date(2019, 3), value: 10 }
 			]
 		}
 	]
@@ -227,9 +227,9 @@ export const lineTimeSeriesMonthlyDefaultLocaleOptions = {
 		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
-			primary: true,
-		},
-	},
+			primary: true
+		}
+	}
 };
 
 // monthly with custom locale
@@ -241,12 +241,12 @@ export const lineTimeSeriesMonthlyCustomLocaleOptions = {
 		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
-			primary: true,
-		},
+			primary: true
+		}
 	},
 	timeScale: {
-		localeCode: "fr",
-	},
+		localeCode: "fr"
+	}
 };
 
 // quarterly
@@ -262,7 +262,7 @@ export const lineTimeSeriesDataQuarterly = {
 				{ date: new Date(2017, 9), value: 10 },
 				{ date: new Date(2018, 0), value: 10 },
 				{ date: new Date(2018, 3), value: 10 },
-				{ date: new Date(2018, 6), value: 10 },
+				{ date: new Date(2018, 6), value: 10 }
 			]
 		}
 	]
@@ -274,9 +274,9 @@ export const lineTimeSeriesQuarterlyOptions = {
 		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
-			primary: true,
-		},
-	},
+			primary: true
+		}
+	}
 };
 
 // yearly
@@ -292,7 +292,7 @@ export const lineTimeSeriesDataYearly = {
 				{ date: new Date(1980, 0), value: 10 },
 				{ date: new Date(1981, 0), value: 10 },
 				{ date: new Date(1982, 0), value: 10 },
-				{ date: new Date(1983, 0), value: 10 },
+				{ date: new Date(1983, 0), value: 10 }
 			]
 		}
 	]
@@ -304,9 +304,9 @@ export const lineTimeSeriesYearlyOptions = {
 		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
-			primary: true,
-		},
-	},
+			primary: true
+		}
+	}
 };
 
 export const lineTimeSeriesDataSingleDatum = {
@@ -315,7 +315,7 @@ export const lineTimeSeriesDataSingleDatum = {
 		{
 			label: "Dataset 1",
 			data: [
-				{ date: new Date("2020-01-06T19:43:16Z"), value: 10 },
+				{ date: new Date("2020-01-06T19:43:16Z"), value: 10 }
 			]
 		}
 	]
@@ -327,7 +327,7 @@ export const lineTimeSeriesSingleDatumOptions = {
 		left: { secondary: true },
 		bottom: {
 			scaleType: "time",
-			primary: true,
-		},
-	},
+			primary: true
+		}
+	}
 };

@@ -83,6 +83,7 @@ export interface TickFormats {
 	primary?: string;
 	secondary?: string;
 }
+
 export interface TimeIntervalFormats {
 	"15seconds"?: TickFormats;
 	"minute"?: TickFormats;

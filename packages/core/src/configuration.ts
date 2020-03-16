@@ -68,7 +68,7 @@ export const grid: GridOptions = {
 export const baseTooltip: TooltipOptions = {
 	datapoint: {
 		horizontalOffset: 10,
-		enabled: true,
+		enabled: true
 	},
 	title: {
 		verticalOffset: .75,
@@ -110,7 +110,7 @@ export const timeScale: TimeScaleOptions = {
 		"weekly": { primary: "eee, MMM d", secondary: "eee" },
 		"monthly": { primary: "MMM yyyy", secondary: "MMM" },
 		"quarterly": { primary: "QQQ ''yy", secondary: "QQQ" },
-		"yearly": { primary: "yyyy", secondary: "yyyy" },
+		"yearly": { primary: "yyyy", secondary: "yyyy" }
 	}
 };
 
@@ -135,7 +135,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	timeScale,
 	grid,
-	tooltip: axisChartTooltip,
+	tooltip: axisChartTooltip
 } as AxisChartOptions);
 
 /**
@@ -301,7 +301,7 @@ export const transitions = {
 export const axis = {
 	ticks: {
 		number: 7,
-		rotateIfSmallerThan: 30,
+		rotateIfSmallerThan: 30
 	}
 };
 
