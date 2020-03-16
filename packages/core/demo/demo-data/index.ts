@@ -80,6 +80,11 @@ let allDemoGroups = [
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
+				options: barDemos.simpleBarFixedDomainOptions,
+				data: barDemos.simpleBarData,
+				chartType: chartTypes.SimpleBarChart
+			},
+			{
 				options: barDemos.groupedBarOptions,
 				data: barDemos.groupedBarData,
 				chartType: chartTypes.GroupedBarChart

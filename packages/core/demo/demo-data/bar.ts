@@ -104,6 +104,20 @@ export const simpleBarOptions = {
 	}
 };
 
+export const simpleBarFixedDomainOptions = {
+	title: "Simple bar (fixed domain)",
+	axes: {
+		left: {
+			primary: true,
+			domain: [-100000, 100000]
+		},
+		bottom: {
+			scaleType: "labels",
+			secondary: true
+		}
+	}
+};
+
 // Horizontal Simple
 export const simpleHorizontalBarData = simpleBarData;
 
