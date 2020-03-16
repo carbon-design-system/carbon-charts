@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes } from "../../interfaces";
+import { TooltipTypes, AxisPositions } from "../../interfaces";
 
 // D3 Imports
 import { mouse, Selection } from "d3-selection";
@@ -55,8 +55,10 @@ export class Ruler extends Component {
 		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler");
 		const line = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
 		const dataPoints: GenericSvgSelection = svg.selectAll("[role=graphics-symbol]");
-		const height = DOMUtils.getSVGElementSize(this.backdrop).height;
-		const scale = this.services.cartesianScales.getMainXScale();
+		const mainXScale = this.services.cartesianScales.getMainXScale();
+		const mainYScale = this.services.cartesianScales.getMainYScale();
+		const [yScaleEnd, yScaleStart] = mainYScale.range();
+
 		let lineX = x;
 
 		const scaledData: number[] = Array.prototype.concat(
@@ -100,7 +102,7 @@ export class Ruler extends Component {
 			const sampleMatch = scaledValuesMatches[0];
 
 			const highlightItems = this.services.cartesianScales.getDataFromDomain(
-				invertedScale(scale)(sampleMatch)
+				invertedScale(mainXScale)(sampleMatch)
 			);
 
 			const hoveredElements = dataPoints.filter((d, i) =>
@@ -139,29 +141,37 @@ export class Ruler extends Component {
 		}
 
 		ruler.attr("opacity", 1);
-		line.attr("y1", 0)
-			.attr("y2", height)
+		line.attr("y1", yScaleStart)
+			.attr("y2", yScaleEnd)
 			.attr("x1", lineX)
 			.attr("x2", lineX);
 
 		// append axis tooltip
+
+		const axisPosition: AxisPositions = this.services.cartesianScales.domainAxisPosition;
 		const axisTooltip = DOMUtils.appendOrSelect(ruler, "g.ruler-axis-tooltip");
-		const axisTooltipValue = `${scale.invert(lineX)}`.substr(0, 10);
+
+		const axisTooltipValue = `${mainXScale.invert(lineX)}`.substr(0, 10);
 		const axisTooltipWidth = textWidth(axisTooltipValue, {
 			size: AXIS_TOOLTIP_TEXT_SIZE
 		});
 		const axisTooltipHeight = 20;
 		const axisTooltipOffset = 5;
 
+		const axisTooltipRectY =
+			axisPosition === AxisPositions.BOTTOM
+				? yScaleEnd + axisTooltipOffset
+				: yScaleStart - axisTooltipHeight - axisTooltipOffset;
+
 		DOMUtils.appendOrSelect(axisTooltip, "rect.axis-tooltip-box")
 			.attr("x", lineX - axisTooltipWidth / 2)
-			.attr("y", height + axisTooltipOffset)
+			.attr("y", axisTooltipRectY)
 			.attr("width", axisTooltipWidth)
 			.attr("height", axisTooltipHeight);
 
 		DOMUtils.appendOrSelect(axisTooltip, "text.axis-tooltip-text")
 			.attr("x", lineX)
-			.attr("y", height + axisTooltipOffset + axisTooltipHeight / 2)
+			.attr("y", axisTooltipRectY + axisTooltipHeight / 2)
 			.text(axisTooltipValue);
 	}
 

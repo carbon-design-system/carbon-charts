@@ -388,7 +388,7 @@ export const lineTimeSeriesDenseOptions = {
 		left: {
 			secondary: true
 		},
-		bottom: {
+		top: {
 			scaleType: "time",
 			primary: true
 		}
