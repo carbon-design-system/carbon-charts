@@ -23,8 +23,8 @@ export class DonutChart extends PieChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.donutChart),
+			Tools.mergeDefaultChartOptions(
+				Configuration.options.donutChart,
 				chartConfigs.options
 			)
 		);

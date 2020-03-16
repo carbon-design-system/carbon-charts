@@ -1,12 +1,18 @@
 // Internal Imports
 import { Component } from "../component";
-import { AxisPositions, ScaleTypes, Roles } from "../../interfaces";
+import {
+	AxisPositions,
+	Events,
+	ScaleTypes,
+	Roles
+} from "../../interfaces";
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
 
 // D3 Imports
+import { select } from "d3-selection";
 import { axisBottom, axisLeft, axisRight, axisTop } from "d3-axis";
 
 export class Axis extends Component {
@@ -99,6 +105,8 @@ export class Axis extends Component {
 			.tickSizeOuter(0)
 			.tickFormat(Tools.getProperty(axisOptions, "ticks", "formatter"));
 
+		const isTimeScaleType = this.scaleType === ScaleTypes.TIME || axisOptions.scaleType === ScaleTypes.TIME;
+
 		if (scale.ticks) {
 			let numberOfTicks;
 
@@ -114,7 +122,7 @@ export class Axis extends Component {
 
 			axis.ticks(numberOfTicks);
 
-			if (this.scaleType === ScaleTypes.TIME) {
+			if (isTimeScaleType) {
 				let tickValues = scale.ticks(numberOfTicks).concat(scale.domain())
 					.map(date => +date).sort();
 				tickValues = Tools.removeArrayDuplicates(tickValues);
@@ -202,7 +210,8 @@ export class Axis extends Component {
 				// When dealing with a continuous scale
 				// We need to calculate an estimated size of the ticks
 				const minTickSize = Tools.getProperty(axisOptions, "ticks", "rotateIfSmallerThan") || Configuration.axis.ticks.rotateIfSmallerThan;
-				const estimatedTickSize = width / scale.ticks().length / 2;
+				const ticksNumber = isTimeScaleType ? axis.tickValues().length : scale.ticks().length;
+				const estimatedTickSize = width / ticksNumber / 2;
 
 				rotateTicks = estimatedTickSize < minTickSize;
 			}
@@ -224,6 +233,46 @@ export class Axis extends Component {
 					.style("text-anchor", null);
 			}
 		}
+
+		// Add event listeners to elements drawn
+		this.addEventListeners();
+	}
+
+	addEventListeners() {
+		const svg = this.getContainerSVG();
+		const { position: axisPosition } = this.configs;
+		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
+
+		const self = this;
+		container.selectAll("g.tick text")
+			.on("mouseover", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOVER, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mousemove", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEMOVE, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("click", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Axis.LABEL_CLICK, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mouseout", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
+					element: select(this),
+					datum
+				});
+			});
 	}
 
 	getInvisibleAxisRef() {
@@ -243,5 +292,17 @@ export class Axis extends Component {
 	getNumberOfFittingTicks(size, tickSize, spaceRatio) {
 		const numberOfTicksFit = Math.floor(size / (tickSize * spaceRatio));
 		return Tools.clamp(numberOfTicksFit, 2, Configuration.axis.ticks.number);
+	}
+
+	destroy() {
+		const svg = this.getContainerSVG();
+		const { position: axisPosition } = this.configs;
+		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`);
+
+		// Remove event listeners
+		container.selectAll("g.tick text")
+			.on("mouseover", null)
+			.on("mousemove", null)
+			.on("mouseout", null);
 	}
 }

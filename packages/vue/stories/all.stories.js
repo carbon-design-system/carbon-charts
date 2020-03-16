@@ -3,7 +3,7 @@ import { withKnobs, object } from '@storybook/addon-knobs';
 
 import * as ChartComponents from "../src/index";
 
-import { demoGroups } from "@carbon/charts/demo/demo-data";
+import { demoGroups } from "@carbon/charts/demo/data";
 
 // Loop through all demo groups
 demoGroups.forEach(demoGroup => {
@@ -26,7 +26,7 @@ demoGroups.forEach(demoGroup => {
 				}
 			},
 			template: `
-				<div class="container">
+				<div class="container theme--white">
 					<h3>
 						<b>Component:</b>
 						<span class="bx--tag bx--tag--green component-name">${demo.chartType.vue}</span>
