@@ -20,21 +20,6 @@ function pointIsMatch(dx: number, x: number) {
 	return dx > x - THRESHOLD && dx < x + THRESHOLD;
 }
 
-/**
- * this is a compatibility function that accepts ordinal scales too
- * as those do not support .invert() by default,
- * so a scale clone is created to invert domain with range
- */
-function invertedScale(scale) {
-	if (scale.invert) {
-		return scale.invert;
-	}
-
-	return scaleLinear()
-		.domain(scale.range())
-		.range(scale.domain());
-}
-
 export class Ruler extends Component {
 	type = "ruler";
 	backdrop: GenericSvgSelection;
@@ -102,7 +87,7 @@ export class Ruler extends Component {
 			const sampleMatch = scaledValuesMatches[0];
 
 			const highlightItems = this.services.cartesianScales.getDataFromDomain(
-				invertedScale(mainXScale)(sampleMatch)
+				mainXScale.invert(sampleMatch)
 			);
 
 			const hoveredElements = dataPoints.filter((d, i) =>
