@@ -5,7 +5,7 @@
 	"main": "./bundle.js",
 	"module": "./index.js",
 	"scripts": {
-		"demo:build": "build-storybook -o demo/bundle --quiet && yarn run docs:build",
+		"demo:build": "build-storybook -o demo/bundle -s ./.storybook/assets --quiet && yarn run docs:build",
 		"demo:server": "yarn run storybook",
 		"docs:build": "typedoc --tsconfig ./src/tsconfig.json --ignoreCompilerErrors --out ./demo/bundle/documentation ./src/index.ts",
 		"build": "bash build.sh",
@@ -15,7 +15,7 @@
 		"test:watch": "karma start --no-single-run",
 		"clean": "rm -rf dist demo/bundle",
 		"start": "yarn run storybook",
-		"storybook": "start-storybook -p 9006 -c .storybook -s ./assets"
+		"storybook": "start-storybook -p 9006 -c .storybook -s ./.storybook/assets"
 	},
 	"repository": {
 		"type": "git",
