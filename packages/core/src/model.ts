@@ -30,7 +30,6 @@ export class ChartModel {
 	protected allDataLabels: string[];
 
 	// Fill scales & fill related objects
-	protected patternScale = {};
 	protected colorScale: any = {};
 
 	constructor(services: any) {
@@ -79,23 +78,39 @@ export class ChartModel {
 	 */
 	setData(newData) {
 		const sanitizedData = this.sanitize(Tools.clone(newData));
-		// const dataLabels = this.generateDataLabels(sanitizedData);
+		const dataLabels = this.generateDataLabels(sanitizedData);
 
 		this.set({
 			data: sanitizedData,
-			// dataLabels
+			dataLabels
 		});
 
 		return sanitizedData;
 	}
 
 	generateDataLabels(newData) {
+		const { groupIdentifier } = this.getOptions().data;
 		const dataLabels = {};
-		newData.datasets.forEach(dataset => {
-			dataLabels[dataset.label] = Configuration.legend.items.status.ACTIVE;
+		newData.forEach(datapoint => {
+			dataLabels[datapoint[groupIdentifier]] = Configuration.legend.items.status.ACTIVE;
 		});
 
 		return dataLabels;
+	}
+
+	getDataGroups() {
+		const displayData = this.getDisplayData();
+		const { groupIdentifier } = this.getOptions().data;
+
+		const groups = [];
+		displayData.forEach(datum => {
+			const group = datum[groupIdentifier];
+			if (group && groups.indexOf(group) === -1) {
+				groups.push(group);
+			}
+		});
+
+		return groups;
 	}
 
 	/**
@@ -189,16 +204,10 @@ export class ChartModel {
 	 * Fill scales
 	*/
 	setColorScale() {
-		// if (this.getDisplayData().datasets[0].fillColors) {
-		// 	this.getDisplayData().datasets.forEach(dataset => {
-		// 		this.colorScale[dataset.label] = scaleOrdinal().range(dataset.fillColors).domain(this.allDataLabels);
-		// 	});
-		// } else {
-		// 	const colors = colorPalettes.DEFAULT;
-		// 	this.getData().datasets.forEach((dataset, i) => {
-		// 		this.colorScale[dataset.label] = scaleOrdinal().range([colors[i]]).domain(this.allDataLabels);
-		// 	});
-		// }
+		const colors = colorPalettes.DEFAULT;
+		this.getDataGroups().forEach((dataGroup, i) => {
+			this.colorScale[dataGroup] = scaleOrdinal().range([colors[i]]).domain([]);
+		});
 	}
 
 	/**

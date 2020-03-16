@@ -12,6 +12,7 @@ import {
 	scaleLog
 } from "d3-scale";
 import { min, extent } from "d3-array";
+import { map } from "d3-collection";
 import { timeFormatDefaultLocale } from "d3-time-format";
 import englishLocale from "d3-time-format/locale/en-US.json";
 
@@ -180,6 +181,7 @@ export class CartesianScales extends Service {
 		const value = isNaN(datum) ? datum.value : datum;
 		const scaleType = this.scaleTypes[axisPosition];
 		const scale = this.scales[axisPosition];
+
 		if (scaleType === ScaleTypes.LABELS) {
 			const correspondingLabel = datum.key;
 			return scale(correspondingLabel) + scale.step() / 2;
@@ -196,6 +198,20 @@ export class CartesianScales extends Service {
 
 	getRangeValue(d, i) {
 		return this.getValueFromScale(this.rangeAxisPosition, d, i);
+	}
+
+	getDomainIdentifier(d, i) {
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes", this.domainAxisPosition);
+
+		return axisOptions.identifier;
+	}
+
+	getRangeIdentifier(d, i) {
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes", this.rangeAxisPosition);
+
+		return axisOptions.identifier;
 	}
 
 	/** Uses the primary Y Axis to get data items associated with that value.  */
@@ -253,14 +269,12 @@ export class CartesianScales extends Service {
 		const { includeZero } = axisOptions;
 		const { datasets, labels } = this.model.getDisplayData();
 		const displayData = this.model.getDisplayData();
+		const { identifier } = axisOptions;
 
 		// If scale is a LABELS scale, return some labels as the domain
 		if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
-			if (labels) {
-				return labels;
-			} else {
-				return this.model.getDisplayData().datasets[0].data.map((d, i) => i + 1);
-			}
+			// Get unique values
+			return map(displayData, d => d[identifier]).keys();
 		}
 
 		// Get the extent of the domain
@@ -271,47 +285,49 @@ export class CartesianScales extends Service {
 			return axisOptions.domain;
 		}
 
-		// If the scale is stacked
-		if (axisOptions.stacked) {
-			domain = extent(
-				labels.reduce((m, label: any, i) => {
-					const correspondingValues = datasets.map(dataset => {
-						return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
-					});
-					const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
+		// // If the scale is stacked
+		// if (axisOptions.stacked) {
+		// 	domain = extent(
+		// 		labels.reduce((m, label: any, i) => {
+		// 			const correspondingValues = datasets.map(dataset => {
+		// 				return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
+		// 			});
+		// 			const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
 
-					// Save both the total value and the minimum
-					return m.concat(totalValue, min(correspondingValues));
-				}, [])
-					// Currently stack layouts in the library
-					// Only support positive values
-					.concat(0)
-			);
-		} else {
-			// Get all the chart's data values in a flat array
-			let allDataValues = datasets.reduce((dataValues, dataset: any) => {
-				dataset.data.forEach((datum: any) => {
-					if (axisOptions.scaleType === ScaleTypes.TIME) {
-						dataValues = dataValues.concat(datum.date);
-					} else {
-						dataValues = dataValues.concat(isNaN(datum) ? datum.value : datum);
-					}
-				});
+		// 			// Save both the total value and the minimum
+		// 			return m.concat(totalValue, min(correspondingValues));
+		// 		}, [])
+		// 			// Currently stack layouts in the library
+		// 			// Only support positive values
+		// 			.concat(0)
+		// 	);
+		// } else {
+		// 	// Get all the chart's data values in a flat array
+		// 	let allDataValues = datasets.reduce((dataValues, dataset: any) => {
+		// 		dataset.data.forEach((datum: any) => {
+		// 			if (axisOptions.scaleType === ScaleTypes.TIME) {
+		// 				dataValues = dataValues.concat(datum.date);
+		// 			} else {
+		// 				dataValues = dataValues.concat(isNaN(datum) ? datum.value : datum);
+		// 			}
+		// 		});
 
-				return dataValues;
-			}, []);
+		// 		return dataValues;
+		// 	}, []);
 
-			if (axisOptions.scaleType !== ScaleTypes.TIME && includeZero) {
-				allDataValues = allDataValues.concat(0);
-			}
+		// 	if (axisOptions.scaleType !== ScaleTypes.TIME && includeZero) {
+		// 		allDataValues = allDataValues.concat(0);
+		// 	}
 
-			domain = extent(allDataValues);
-		}
+		// 	domain = extent(allDataValues);
+		// }
 
-		if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
-			const { identifier } = axisOptions;
-			return displayData.map(datum => datum[identifier]);
-		}
+		// if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
+		// 	const { identifier } = axisOptions;
+		// 	return displayData.map(datum => datum[identifier]);
+		// }
+
+		domain = extent(displayData, datum => datum[identifier]);
 
 		return addPaddingInDomain(domain, Configuration.axis.paddingRatio);
 	}

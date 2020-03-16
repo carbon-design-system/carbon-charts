@@ -19,7 +19,7 @@ export class Line extends Component {
 			this.parent.selectAll("g.lines")
 				.transition(this.services.transitions.getTransition("legend-hover-line"))
 				.attr("opacity", d => {
-					if (d.label !== hoveredElement.datum()["key"]) {
+					if (d !== hoveredElement.datum()["key"]) {
 						return Configuration.lines.opacity.unselected;
 					}
 
@@ -53,18 +53,21 @@ export class Line extends Component {
 				return true;
 			});
 
-		const datasets = {};
+		const dataGroups = {};
+		const { groupIdentifier } = this.model.getOptions().data;
+
 		this.model.getDisplayData().map(datum => {
-			if (datasets[datum.group] !== null && datasets[datum.group] !== undefined) {
-				datasets[datum.group].push(datum.value);
+			const group = datum[groupIdentifier];
+			if (dataGroups[group] !== null && dataGroups[group] !== undefined) {
+				dataGroups[group].push(datum);
 			} else {
-				datasets[datum.group] = [datum.value];
+				dataGroups[group] = [datum];
 			}
 		});
 
 		// Update the bound data on line groups
 		const lineGroups = svg.selectAll("g.lines")
-			.data(Object.keys(datasets));
+			.data(Object.keys(dataGroups));
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -79,28 +82,32 @@ export class Line extends Component {
 			.append("g")
 			.classed("lines", true);
 
-		const self = this;
-
 		// Enter paths that need to be introduced
 		const enteringPaths = enteringLineGroups.append("path")
 			.attr("opacity", 0);
 
 		// Apply styles and datum
 		enteringPaths.merge(svg.selectAll("g.lines path"))
-			.attr("stroke", function (d) {
-				// return self.model.getStrokeColor(d.key);
-
-				return "red";
+			.attr("stroke", (d, i) => {
+				const data = dataGroups[d];
+				const group = data[0][groupIdentifier];
+				return this.model.getStrokeColor(group)
 			})
-			.datum(d => displayData.filter(datum => datum.group === d))
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "line")
-			.attr("aria-label", d => d.map(datum => datum.value || datum).join(","))
+			.attr("aria-label", d => {
+				const data = dataGroups[d];
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+				return data.map(datum => datum[rangeIdentifier]).join(",");
+			})
 			// Transition
 			.transition(this.services.transitions.getTransition("line-update-enter", animate))
 			.attr("opacity", 1)
 			.attr("class", "line")
-			.attr("d", lineGenerator);
+			.attr("d", d => {
+				const datum = dataGroups[d];
+				return lineGenerator(datum);
+			});
 	}
 }
