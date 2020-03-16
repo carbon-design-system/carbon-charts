@@ -12,32 +12,15 @@ export class Line extends Component {
 
 	// TODORF - Remove these listeners in destroy()
 	init() {
-		// Highlight correct scatter on legend item hovers
-		this.services.events.addEventListener("legend-item-onhover", e => {
-			const { hoveredElement } = e.detail;
-
-			this.parent.selectAll("g.lines")
-				.transition(this.services.transitions.getTransition("legend-hover-line"))
-				.attr("opacity", d => {
-					if (d !== hoveredElement.datum()["key"]) {
-						return Configuration.lines.opacity.unselected;
-					}
-
-					return Configuration.lines.opacity.selected;
-				});
-		});
-
+		const { events } = this.services;
+		// Highlight correct line legend item hovers
+		events.addEventListener("legend-item-onhover", this.handleLegendOnHover);
 		// Un-highlight lines on legend item mouseouts
-		this.services.events.addEventListener("legend-item-onmouseout", e => {
-			this.parent.selectAll("g.lines")
-				.transition(this.services.transitions.getTransition("legend-mouseout-line"))
-				.attr("opacity", Configuration.lines.opacity.selected);
-		});
+		events.addEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
 	}
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
-		const displayData = this.model.getDisplayData();
 
 		// D3 line generator function
 		const lineGenerator = line()
@@ -54,11 +37,10 @@ export class Line extends Component {
 			});
 
 		const groupedData = this.model.getGroupedData();
-		const { groupIdentifier } = this.model.getOptions().data;
 
 		// Update the bound data on line groups
 		const lineGroups = svg.selectAll("g.lines")
-			.data(Object.keys(groupedData));
+			.data(groupedData, group => group.name);
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -79,16 +61,14 @@ export class Line extends Component {
 
 		// Apply styles and datum
 		enteringPaths.merge(svg.selectAll("g.lines path"))
-			.attr("stroke", (groupName, i) => {
-				const data = groupedData[groupName];
-				const group = data[0][groupIdentifier];
-				return this.model.getStrokeColor(group)
+			.attr("stroke", (group, i) => {
+				return this.model.getStrokeColor(group.name)
 			})
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "line")
-			.attr("aria-label", groupName => {
-				const data = groupedData[groupName];
+			.attr("aria-label", group => {
+				const { data } = group;
 				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 				return data.map(datum => datum[rangeIdentifier]).join(",");
 			})
@@ -96,9 +76,42 @@ export class Line extends Component {
 			.transition(this.services.transitions.getTransition("line-update-enter", animate))
 			.attr("opacity", 1)
 			.attr("class", "line")
-			.attr("d", groupName => {
-				const datum = groupedData[groupName];
-				return lineGenerator(datum);
+			.attr("d", group => {
+				const { data } = group;
+				return lineGenerator(data);
 			});
+	}
+
+
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
+
+		this.parent.selectAll("g.lines")
+			.transition(this.services.transitions.getTransition("legend-hover-line"))
+			.attr("opacity", group => {
+				if (group.name !== hoveredElement.datum()["key"]) {
+					return Configuration.lines.opacity.unselected;
+				}
+
+				return Configuration.lines.opacity.selected;
+			});
+	}
+
+	handleLegendMouseOut = (event: CustomEvent) => {
+		this.parent.selectAll("g.lines")
+			.transition(this.services.transitions.getTransition("legend-mouseout-line"))
+			.attr("opacity", Configuration.lines.opacity.selected);
+	}
+
+	destroy() {
+		// Remove event listeners
+		this.parent.selectAll("path")
+			.on("mousemove", null)
+			.on("mouseout", null);
+
+		// Remove legend listeners
+		const eventsFragment = this.services.events;
+		eventsFragment.removeEventListener("legend-item-onhover", this.handleLegendOnHover);
+		eventsFragment.removeEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
 	}
 }

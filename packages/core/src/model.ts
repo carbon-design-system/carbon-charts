@@ -127,7 +127,13 @@ export class ChartModel {
 			}
 		});
 
-		return groupedData;
+		return Object.keys(groupedData)
+			.map(groupName => {
+				return {
+					name: groupName,
+					data: groupedData[groupName]
+				};
+			});
 	}
 
 	/**
@@ -229,25 +235,25 @@ export class ChartModel {
 
 	/**
 	 * Should the data point be filled?
-	 * @param datasetLabel
-	 * @param label
+	 * @param group
+	 * @param key
 	 * @param value
 	 * @param defaultFilled the default for this chart
 	 */
-	getIsFilled(datasetLabel: any, label?: any, data?: any, defaultFilled?: boolean) {
+	getIsFilled(group: any, key?: any, data?: any, defaultFilled?: boolean) {
 		const options = this.getOptions();
 		if (options.getIsFilled) {
-			return options.getIsFilled(datasetLabel, label, data, defaultFilled);
+			return options.getIsFilled(group, key, data, defaultFilled);
 		} else {
 			return defaultFilled;
 		}
 	}
 
-	getFillColor(datasetLabel: any, label?: any, data?: any) {
+	getFillColor(group: any, key?: any, data?: any) {
 		const options = this.getOptions();
-		const defaultFillColor = this.getFillScale()[datasetLabel](label);
+		const defaultFillColor = this.getFillScale()[group](key);
 		if (options.getFillColor) {
-			return options.getFillColor(datasetLabel, label, data, defaultFillColor);
+			return options.getFillColor(group, key, data, defaultFillColor);
 		} else {
 			return defaultFillColor;
 		}
