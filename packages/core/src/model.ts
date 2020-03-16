@@ -113,6 +113,23 @@ export class ChartModel {
 		return groups;
 	}
 
+	getGroupedData() {
+		const displayData = this.getDisplayData();
+		const groupedData = {};
+		const { groupIdentifier } = this.getOptions().data;
+
+		displayData.map(datum => {
+			const group = datum[groupIdentifier];
+			if (groupedData[group] !== null && groupedData[group] !== undefined) {
+				groupedData[group].push(datum);
+			} else {
+				groupedData[group] = [datum];
+			}
+		});
+
+		return groupedData;
+	}
+
 	/**
 	 * @return {Object} The chart's options
 	 */

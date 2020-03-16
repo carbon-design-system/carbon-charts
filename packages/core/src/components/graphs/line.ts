@@ -53,21 +53,12 @@ export class Line extends Component {
 				return true;
 			});
 
-		const dataGroups = {};
+		const groupedData = this.model.getGroupedData();
 		const { groupIdentifier } = this.model.getOptions().data;
-
-		this.model.getDisplayData().map(datum => {
-			const group = datum[groupIdentifier];
-			if (dataGroups[group] !== null && dataGroups[group] !== undefined) {
-				dataGroups[group].push(datum);
-			} else {
-				dataGroups[group] = [datum];
-			}
-		});
 
 		// Update the bound data on line groups
 		const lineGroups = svg.selectAll("g.lines")
-			.data(Object.keys(dataGroups));
+			.data(Object.keys(groupedData));
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -88,16 +79,16 @@ export class Line extends Component {
 
 		// Apply styles and datum
 		enteringPaths.merge(svg.selectAll("g.lines path"))
-			.attr("stroke", (d, i) => {
-				const data = dataGroups[d];
+			.attr("stroke", (groupName, i) => {
+				const data = groupedData[groupName];
 				const group = data[0][groupIdentifier];
 				return this.model.getStrokeColor(group)
 			})
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "line")
-			.attr("aria-label", d => {
-				const data = dataGroups[d];
+			.attr("aria-label", groupName => {
+				const data = groupedData[groupName];
 				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 				return data.map(datum => datum[rangeIdentifier]).join(",");
 			})
@@ -105,8 +96,8 @@ export class Line extends Component {
 			.transition(this.services.transitions.getTransition("line-update-enter", animate))
 			.attr("opacity", 1)
 			.attr("class", "line")
-			.attr("d", d => {
-				const datum = dataGroups[d];
+			.attr("d", groupName => {
+				const datum = groupedData[groupName];
 				return lineGenerator(datum);
 			});
 	}
