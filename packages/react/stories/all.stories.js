@@ -4,7 +4,7 @@ import { withKnobs, object } from "@storybook/addon-knobs";
 
 import * as ChartComponents from "../src/index";
 
-import { demoGroups } from "@carbon/charts/demo/demo-data";
+import { demoGroups } from "@carbon/charts/demo/data";
 
 // Loop through all demo groups
 demoGroups.forEach(demoGroup => {
@@ -15,7 +15,7 @@ demoGroups.forEach(demoGroup => {
 	demoGroup.demos.forEach(demo => {
 		const DemoComponent = ChartComponents[demo.chartType.vanilla];
 		groupStories.add(demo.title, () => (
-			<div className="container">
+			<div className="container theme--white">
 				<h3>
 					<b>Component:</b>
 					<span className="bx--tag bx--tag--green component-name">{`<${demo.chartType.vanilla} />`}</span>
