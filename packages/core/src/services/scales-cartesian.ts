@@ -269,9 +269,7 @@ export class CartesianScales extends Service {
 		}
 
 		if (axisOptions.scaleType === ScaleTypes.TIME) {
-			const spaceToAddToEdges = Tools.getProperty(options, "axes", axisPosition, "timeScale", "addSpaceOnEdges") !== null
-				? Tools.getProperty(options, "axes", axisPosition, "timeScale", "addSpaceOnEdges")
-				: Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
+			const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
 
 			if (spaceToAddToEdges) {
 				const startDate = new Date(domain[0]);
