@@ -202,6 +202,12 @@ let allDemoGroups = [
 		title: "Scatter",
 		demos: [
 			{
+				options: scatterDemos.scatterLinearOptions,
+				data: scatterDemos.scatterLinearData,
+				chartType: chartTypes.ScatterChart,
+				isDemoExample: true
+			},
+			{
 				options: scatterDemos.scatterTimeSeriesOptions,
 				data: scatterDemos.scatterTimeSeriesData,
 				chartType: chartTypes.ScatterChart,

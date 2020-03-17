@@ -70,7 +70,6 @@ export const lineOptions = {
 		left: {
 			primary: true,
 			identifier: "value",
-			// tooltipTitle: "CR",
 			title: "Conversion rate",
 			scaleType: "linear"
 		}
@@ -86,9 +85,6 @@ export const lineOptions = {
 			"Dataset 4",
 			"Dataset 1"
 		]
-	},
-	data: {
-		groupIdentifier: "group"
 	}
 };
 
@@ -145,35 +141,29 @@ export const lineTimeSeriesOptions = {
 			scaleType: "linear"
 		}
 	},
-	curve: "curveMonotoneX",
-	data: {
-		groupIdentifier: "group"
-	}
+	curve: "curveMonotoneX"
 };
 
-export const lineTimeSeriesDataRotatedTicks = {
-	labels: ["Qty"],
-	datasets: [
-		{
-			label: "Dataset 1",
-			data: [
-				{ date: new Date(2019, 11, 30), value: 10 },
-				{ date: new Date(2019, 11, 31), value: 10 },
-				{ date: new Date(2020, 0, 1), value: 10 },
-				{ date: new Date(2020, 0, 2), value: 10 },
-				{ date: new Date(2020, 0, 3), value: 10 }
-			]
-		}
-	]
-};
+export const lineTimeSeriesDataRotatedTicks = [
+	{ group: "Dataset 1", date: new Date(2019, 11, 30), value: 32100 },
+	{ group: "Dataset 1", date: new Date(2019, 11, 31), value: 23500 },
+	{ group: "Dataset 1", date: new Date(2020, 0, 1), value: 53100 },
+	{ group: "Dataset 1", date: new Date(2020, 0, 2), value: 42300 },
+	{ group: "Dataset 1", date: new Date(2020, 0, 3), value: 12300 }
+];
 
 export const lineTimeSeriesRotatedTicksOptions = {
 	title: "Line (time series) - Rotated ticks labels",
+	width: "400px",
 	axes: {
-		left: { secondary: true },
 		bottom: {
+			secondary: true,
 			scaleType: "time",
-			primary: true
+			identifier: "date"
+		},
+		left: {
+			primary: true,
+			identifier: "value"
 		}
 	}
 };

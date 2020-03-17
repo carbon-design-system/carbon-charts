@@ -50,6 +50,15 @@ export interface BaseChartOptions {
 		 */
 		prefix?: String;
 	};
+	/**
+	 * options related to charting data
+	 */
+	data?: {
+		/**
+		 * identifier for data groups
+		 */
+		groupIdentifier?: String;
+	};
 }
 
 /**

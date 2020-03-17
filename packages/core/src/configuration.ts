@@ -124,6 +124,9 @@ const chart: BaseChartOptions = {
 	legend,
 	style: {
 		prefix: "cc"
+	},
+	data: {
+		groupIdentifier: "group"
 	}
 };
 

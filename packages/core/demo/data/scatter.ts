@@ -1,70 +1,65 @@
 import { lineTimeSeriesData } from "./line";
 
-export const scatterData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
-	datasets: [
-		{
-			label: "Dataset 1",
-			data: [
-				32100,
-				23500,
-				53100,
-				42300,
-				12300
-			]
+export const scatterLinearData = [
+	{ group: "Dataset 1", sales: 10000, profit: 32100 },
+	{ group: "Dataset 1", sales: 12000, profit: 23500 },
+	{ group: "Dataset 1", sales: 14000, profit: 53100 },
+	{ group: "Dataset 1", sales: 15000, profit: 42300 },
+	{ group: "Dataset 1", sales: 16000, profit: 12300 },
+	// { group: "Dataset 2", sales: "More", profit: 53200 },
+	// { group: "Dataset 2", sales: "Sold", profit: 42300 },
+	// { group: "Dataset 2", sales: "Restocking", profit: 21400 },
+	// { group: "Dataset 2", sales: "Misc", profit: 0 },
+	// { group: "Dataset 3", sales: "Qty", profit: 41200 },
+	// { group: "Dataset 3", sales: "More", profit: 18400 },
+	// { group: "Dataset 3", sales: "Sold", profit: 34210 },
+	// { group: "Dataset 3", sales: "Restocking", profit: 1400 },
+	// { group: "Dataset 3", sales: "Misc", profit: 42100 },
+	// { group: "Dataset 4", sales: "Qty", profit: 22000 },
+	// { group: "Dataset 4", sales: "More", profit: 1200 },
+	// { group: "Dataset 4", sales: "Sold", profit: 9000 },
+	// { group: "Dataset 4", sales: "Restocking", profit: 24000 },
+	// { group: "Dataset 4", sales: "Misc", profit: 3000 }
+];
+
+export const scatterLinearOptions = {
+	title: "Scatter (linear)",
+	axes: {
+		bottom: {
+			secondary: true,
+			title: "Sales",
+			identifier: "sales"
 		},
-		{
-			label: "Dataset 2",
-			data: [
-				34200,
-				53200,
-				42300,
-				21400,
-				0
-			]
-		},
-		{
-			label: "Dataset 3 long name",
-			data: [
-				41200,
-				23400,
-				34210,
-				1400,
-				42100
-			]
-		},
-		{
-			label: "Dataset 4 long name",
-			data: [
-				22000,
-				1200,
-				9000,
-				24000,
-				3000
-			]
-		},
-		{
-			label: "Dataset 5 long name",
-			data: [
-				2412,
-				30000,
-				10000,
-				5000,
-				31000
-			]
-		},
-		{
-			label: "Dataset 6 long name",
-			data: [
-				0,
-				20000,
-				40000,
-				60000,
-				80000
-			]
+		left: {
+			primary: true,
+			title: "Profit",
+			identifier: "profit"
 		}
-	]
+	}
 };
+
+export const scatterData = [
+	{ group: "Dataset 1", key: "Qty", value: 32100 },
+	{ group: "Dataset 1", key: "More", value: 23500 },
+	{ group: "Dataset 1", key: "Sold", value: 53100 },
+	{ group: "Dataset 1", key: "Restocking", value: 42300 },
+	{ group: "Dataset 1", key: "Misc", value: 12300 },
+	{ group: "Dataset 2", key: "Qty", value: 34200 },
+	{ group: "Dataset 2", key: "More", value: 53200 },
+	{ group: "Dataset 2", key: "Sold", value: 42300 },
+	{ group: "Dataset 2", key: "Restocking", value: 21400 },
+	{ group: "Dataset 2", key: "Misc", value: 0 },
+	{ group: "Dataset 3", key: "Qty", value: 41200 },
+	{ group: "Dataset 3", key: "More", value: 18400 },
+	{ group: "Dataset 3", key: "Sold", value: 34210 },
+	{ group: "Dataset 3", key: "Restocking", value: 1400 },
+	{ group: "Dataset 3", key: "Misc", value: 42100 },
+	{ group: "Dataset 4", key: "Qty", value: 22000 },
+	{ group: "Dataset 4", key: "More", value: 1200 },
+	{ group: "Dataset 4", key: "Sold", value: 9000 },
+	{ group: "Dataset 4", key: "Restocking", value: 24000 },
+	{ group: "Dataset 4", key: "Misc", value: 3000 }
+];
 
 export const scatterOptions = {
 	title: "Scatter (discrete)",
@@ -72,10 +67,12 @@ export const scatterOptions = {
 		bottom: {
 			title: "2018 Annual Sales Figures",
 			scaleType: "labels",
-			secondary: true
+			secondary: true,
+			identifier: "key"
 		},
 		left: {
-			primary: true
+			primary: true,
+			identifier: "value"
 		}
 	}
 };
@@ -87,11 +84,13 @@ export const scatterTimeSeriesOptions = {
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
+			secondary: true,
 			scaleType: "time",
-			secondary: true
+			identifier: "date"
 		},
 		left: {
-			primary: true
+			primary: true,
+			identifier: "value"
 		}
 	}
 };
