@@ -32,8 +32,8 @@ export class PieChart extends Chart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.pieChart),
+			Tools.mergeDefaultChartOptions(
+				Configuration.options.pieChart,
 				chartConfigs.options
 			)
 		);

@@ -27,8 +27,8 @@ export class BubbleChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.bubbleChart),
+			Tools.mergeDefaultChartOptions(
+				Configuration.options.bubbleChart,
 				chartConfigs.options
 			)
 		);

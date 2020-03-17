@@ -3,10 +3,10 @@ import { withKnobs, object } from "@storybook/addon-knobs";
 
 import { ChartsModule } from "../src/charts.module";
 
-import { demoGroups } from "@carbon/charts/demo/demo-data";
+import { demoGroups } from "@carbon/charts/demo/data";
 
 const getTemplate = demo => `
-	<div class="container">
+	<div class="container theme--white">
 		<h3>
 			<b>Component:</b>
 			<span class="bx--tag bx--tag--green component-name">${demo.chartType.angular}</span>

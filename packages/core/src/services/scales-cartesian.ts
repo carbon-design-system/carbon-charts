@@ -1,6 +1,7 @@
 // Internal Imports
+import * as Configuration from "../configuration";
 import { Service } from "./service";
-import { AxisPositions, CartesianOrientations, ScaleTypes } from "../interfaces";
+import { AxisPositions, CartesianOrientations, ScaleTypes, AxesOptions } from "../interfaces";
 import { Tools } from "../tools";
 
 // D3 Imports
@@ -31,6 +32,18 @@ import {
 	subMinutes
 } from "date-fns";
 
+function addPaddingInDomain([lower, upper]: number[], paddingRatio: number) {
+	const domainLength = upper - lower;
+	const padding = domainLength * paddingRatio;
+
+	// If padding crosses 0, keep 0 as new upper bound
+	const newUpper = upper <= 0 && upper + padding > 0 ? 0 : upper + padding;
+	// If padding crosses 0, keep 0 as new lower bound
+	const newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding;
+
+	return [newLower, newUpper];
+}
+
 export class CartesianScales extends Service {
 	protected scaleTypes = {
 		top: null,
@@ -59,7 +72,25 @@ export class CartesianScales extends Service {
 		return this.rangeAxisPosition;
 	}
 
+	setDefaultAxes() {
+		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
+		if (!axesOptions) {
+			(this.model.getOptions().axes as AxesOptions) = {
+				left: {
+					primary: true,
+					includeZero: true,
+				},
+				bottom: {
+					secondary: true,
+					includeZero: true,
+					scaleType: this.model.getDisplayData().labels ? ScaleTypes.LABELS : undefined
+				}
+			};
+		}
+	}
+
 	update(animate = true) {
+		this.setDefaultAxes();
 		this.determineOrientation();
 		const axisPositions = Object.keys(AxisPositions).map(axisPositionKey => AxisPositions[axisPositionKey]);
 		axisPositions.forEach(axisPosition => {
@@ -217,7 +248,7 @@ export class CartesianScales extends Service {
 	protected getScaleDomain(axisPosition: AxisPositions) {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
-
+		const { includeZero } = axisOptions;
 		const { datasets, labels } = this.model.getDisplayData();
 
 		// If scale is a LABELS scale, return some labels as the domain
@@ -267,7 +298,7 @@ export class CartesianScales extends Service {
 				return dataValues;
 			}, []);
 
-			if (axisOptions.scaleType !== ScaleTypes.TIME) {
+			if (axisOptions.scaleType !== ScaleTypes.TIME && includeZero) {
 				allDataValues = allDataValues.concat(0);
 			}
 
@@ -310,14 +341,7 @@ export class CartesianScales extends Service {
 			];
 		}
 
-		// TODO - Work with design to improve logic
-		domain[1] = domain[1] * 1.1;
-
-		// if the lower bound of the domain is less than 0, we want to add padding
-		if (domain[0] < 0) {
-			domain[0] = domain[0] * 1.1;
-		}
-		return domain;
+		return addPaddingInDomain(domain, Configuration.axis.paddingRatio);
 	}
 
 	protected createScale(axisPosition: AxisPositions) {

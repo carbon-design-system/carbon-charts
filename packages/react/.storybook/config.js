@@ -10,8 +10,7 @@ withOptions({
 });
 
 // load global styles
-require("!style-loader!css-loader!sass-loader!./previews.scss");
-require("!style-loader!css-loader!@carbon/charts/styles.css");
+require("!style-loader!css-loader!@carbon/charts/demo/styles.css");
 
 const req = require.context("../stories/", true, /.stories.js$/);
 function loadStories() {
