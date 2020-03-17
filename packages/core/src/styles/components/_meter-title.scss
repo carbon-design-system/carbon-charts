@@ -8,17 +8,21 @@
 		font-weight: carbon--font-weight("semibold");
 	}
 
-	circle.status-indicator {
-		&.status--danger {
+	g.status-indicator {
+		path.status--danger {
 			fill: $support-01;
 		}
 
-		&.status--warning {
+		path.status--warning {
 			fill: $support-03;
 		}
 
-		&.status--success {
+		path.status--success {
 			fill: $support-02;
+		}
+
+		path.innerFill {
+			fill: rgba($carbon--black-100, 1);
 		}
 	}
 }

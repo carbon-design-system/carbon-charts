@@ -109,3 +109,12 @@ export enum CalloutDirections {
 	LEFT = "left",
 	RIGHT = "right"
 }
+
+/**
+ * enum of possible states for the Meter Chart
+ */
+export enum MeterRanges {
+	SUCCESS = "success",
+	WARNING = "warning",
+	DANGER = "danger"
+}
