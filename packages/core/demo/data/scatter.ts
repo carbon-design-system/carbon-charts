@@ -17,12 +17,10 @@ export const scatterLinearOptions = {
 	title: "Scatter (linear)",
 	axes: {
 		bottom: {
-			secondary: true,
 			title: "Sales",
 			identifier: "sales"
 		},
 		left: {
-			primary: true,
 			title: "Profit",
 			identifier: "profit"
 		}
@@ -58,11 +56,9 @@ export const scatterOptions = {
 		bottom: {
 			title: "2018 Annual Sales Figures",
 			scaleType: "labels",
-			secondary: true,
 			identifier: "key"
 		},
 		left: {
-			primary: true,
 			identifier: "value"
 		}
 	}
@@ -75,12 +71,10 @@ export const scatterTimeSeriesOptions = {
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
-			secondary: true,
 			scaleType: "time",
 			identifier: "date"
 		},
 		left: {
-			primary: true,
 			identifier: "value"
 		}
 	}

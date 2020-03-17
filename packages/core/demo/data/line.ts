@@ -38,11 +38,9 @@ export const lineData = [
 // 		bottom: {
 // 			title: "2018 Annual Sales Figures",
 // 			identifier: "employees",
-// 			secondary: true,
 // 			scaleType: "linear"
 // 		},
 // 		left: {
-// 			primary: true,
 // 			identifier: "sales",
 // 			scaleType: "linear"
 // 		}
@@ -64,11 +62,9 @@ export const lineOptions = {
 		bottom: {
 			title: "2018 Annual Sales Figures",
 			identifier: "key",
-			secondary: true,
 			scaleType: "labels"
 		},
 		left: {
-			primary: true,
 			identifier: "value",
 			title: "Conversion rate",
 			scaleType: "linear"
@@ -94,10 +90,8 @@ export const lineOptions = {
 // 		bottom: {
 // 			title: "2018 Annual Sales Figures",
 // 			scaleType: "labels",
-// 			secondary: true
 // 		},
 // 		left: {
-// 			primary: true
 // 		}
 // 	}
 // };
@@ -131,11 +125,9 @@ export const lineTimeSeriesOptions = {
 		bottom: {
 			title: "2018 Annual Sales Figures",
 			identifier: "date",
-			secondary: true,
 			scaleType: "time"
 		},
 		left: {
-			primary: true,
 			identifier: "value",
 			title: "Conversion rate",
 			scaleType: "linear"
@@ -157,12 +149,10 @@ export const lineTimeSeriesRotatedTicksOptions = {
 	width: "400px",
 	axes: {
 		bottom: {
-			secondary: true,
 			scaleType: "time",
 			identifier: "date"
 		},
 		left: {
-			primary: true,
 			identifier: "value"
 		}
 	}
