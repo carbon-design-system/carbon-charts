@@ -101,13 +101,11 @@ export class Axis extends Component {
 		const fakeTickText = DOMUtils.appendOrSelect(fakeTick, `text`).text("0");
 		const tickHeight = DOMUtils.getSVGElementSize(fakeTickText.node(), { useBBox: true }).height;
 		fakeTick.remove();
-		
-        const isTimeScaleType = this.scaleType === ScaleTypes.TIME || axisOptions.scaleType === ScaleTypes.TIME;
+
+		const isTimeScaleType = this.scaleType === ScaleTypes.TIME || axisOptions.scaleType === ScaleTypes.TIME;
 
 		// Initialize axis object
 		const axis = axisFunction(scale).tickSizeOuter(0);
-
-		const isTimeScaleType = this.scaleType === ScaleTypes.TIME || axisOptions.scaleType === ScaleTypes.TIME;
 
 		if (scale.ticks) {
 			let numberOfTicks;
@@ -280,28 +278,28 @@ export class Axis extends Component {
 
 		const self = this;
 		container.selectAll("g.tick text")
-			.on("mouseover", function(datum) {
+			.on("mouseover", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOVER, {
 					element: select(this),
 					datum
 				});
 			})
-			.on("mousemove", function(datum) {
+			.on("mousemove", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEMOVE, {
 					element: select(this),
 					datum
 				});
 			})
-			.on("click", function(datum) {
+			.on("click", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_CLICK, {
 					element: select(this),
 					datum
 				});
 			})
-			.on("mouseout", function(datum) {
+			.on("mouseout", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
 					element: select(this),
