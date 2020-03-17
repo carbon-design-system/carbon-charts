@@ -106,124 +106,49 @@ export const lineOptions = {
 // 	}
 // };
 
-export const lineTimeSeriesData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
-	datasets: [
-		{
-			label: "Dataset 1",
-			data: [
-				{
-					date: new Date(2019, 0, 1),
-					value: 10000
-				},
-				{
-					date: new Date(2019, 0, 5),
-					value: 65000
-				},
-				{
-					date: new Date(2019, 0, 8),
-					value: null
-				},
-				{
-					date: new Date(2019, 0, 13),
-					value: 49213
-				},
-				{
-					date: new Date(2019, 0, 17),
-					value: 51213
-				}
-			]
-		},
-		{
-			label: "Dataset 2",
-			data: [
-				{
-					date: new Date(2019, 0, 2),
-					value: 0
-				},
-				{
-					date: new Date(2019, 0, 6),
-					value: 57312
-				},
-				{
-					date: new Date(2019, 0, 8),
-					value: 21432
-				},
-				{
-					date: new Date(2019, 0, 15),
-					value: 70323
-				},
-				{
-					date: new Date(2019, 0, 19),
-					value: 21300
-				}
-			]
-		},
-		{
-			label: "Dataset 3",
-			data: [
-				{
-					date: new Date(2019, 0, 1),
-					value: 50000
-				},
-				{
-					date: new Date(2019, 0, 5),
-					value: null
-				},
-				{
-					date: new Date(2019, 0, 8),
-					value: 18000
-				},
-				{
-					date: new Date(2019, 0, 13),
-					value: 39213
-				},
-				{
-					date: new Date(2019, 0, 17),
-					value: 61213
-				}
-			]
-		},
-		{
-			label: "Dataset 4",
-			data: [
-				{
-					date: new Date(2019, 0, 2),
-					value: 10
-				},
-				{
-					date: new Date(2019, 0, 6),
-					value: 37312
-				},
-				{
-					date: new Date(2019, 0, 8),
-					value: 51432
-				},
-				{
-					date: new Date(2019, 0, 15),
-					value: 25332
-				},
-				{
-					date: new Date(2019, 0, 19),
-					value: null
-				}
-			]
-		}
-	]
-};
+export const lineTimeSeriesData = [
+	{ group: "Dataset 1", date: new Date(2019, 0, 1), value: 10000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 5), value: 65000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 8), value: null },
+	{ group: "Dataset 1", date: new Date(2019, 0, 13), value: 49213 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 17), value: 51213 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 2), value: 0 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 6), value: 57312 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 8), value: 21432 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 15), value: 70323 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 19), value: 21300 },
+	{ group: "Dataset 3", date: new Date(2019, 0, 1), value: 50000 },
+	{ group: "Dataset 3", date: new Date(2019, 0, 5), value: null },
+	{ group: "Dataset 3", date: new Date(2019, 0, 8), value: 18000 },
+	{ group: "Dataset 3", date: new Date(2019, 0, 13), value: 39213 },
+	{ group: "Dataset 3", date: new Date(2019, 0, 17), value: 61213 },
+	{ group: "Dataset 4", date: new Date(2019, 0, 2), value: 10 },
+	{ group: "Dataset 4", date: new Date(2019, 0, 6), value: 37312 },
+	{ group: "Dataset 4", date: new Date(2019, 0, 8), value: 51432 },
+	{ group: "Dataset 4", date: new Date(2019, 0, 15), value: 25332 },
+	{ group: "Dataset 4", date: new Date(2019, 0, 19), value: null }
+];
 
 export const lineTimeSeriesOptions = {
 	title: "Line (time series)",
 	axes: {
-		left: {
-			secondary: true
-		},
 		bottom: {
-			scaleType: "time",
-			primary: true
+			title: "2018 Annual Sales Figures",
+			identifier: "date",
+			secondary: true,
+			scaleType: "time"
+		},
+		left: {
+			primary: true,
+			identifier: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
 		}
 	},
-	curve: "curveMonotoneX"
+	curve: "curveMonotoneX",
+	data: {
+		groupIdentifier: "group"
+	}
 };
 
 export const lineTimeSeriesDataRotatedTicks = {

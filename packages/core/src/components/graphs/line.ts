@@ -37,7 +37,6 @@ export class Line extends Component {
 			});
 
 		const groupedData = this.model.getGroupedData();
-
 		// Update the bound data on line groups
 		const lineGroups = svg.selectAll("g.lines")
 			.data(groupedData, group => group.name);

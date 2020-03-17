@@ -178,7 +178,12 @@ export class CartesianScales extends Service {
 	}
 
 	getValueFromScale(axisPosition: AxisPositions, datum: any, index?: number) {
-		const value = isNaN(datum) ? datum.value : datum;
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		const { identifier } = axisOptions;
+		const domainIdentifier = this.getDomainIdentifier();
+		const rangeIdentifier = this.getRangeIdentifier();
+		const value = datum[rangeIdentifier];
 		const scaleType = this.scaleTypes[axisPosition];
 		const scale = this.scales[axisPosition];
 
@@ -186,7 +191,7 @@ export class CartesianScales extends Service {
 			const correspondingLabel = datum.key;
 			return scale(correspondingLabel) + scale.step() / 2;
 		} else if (scaleType === ScaleTypes.TIME) {
-			return scale(new Date(datum.date || datum.label));
+			return scale(new Date(datum[identifier]));
 		}
 
 		return scale(value);
@@ -200,14 +205,14 @@ export class CartesianScales extends Service {
 		return this.getValueFromScale(this.rangeAxisPosition, d, i);
 	}
 
-	getDomainIdentifier(d, i) {
+	getDomainIdentifier() {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", this.domainAxisPosition);
 
 		return axisOptions.identifier;
 	}
 
-	getRangeIdentifier(d, i) {
+	getRangeIdentifier() {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", this.rangeAxisPosition);
 
@@ -267,6 +272,8 @@ export class CartesianScales extends Service {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
 		const { includeZero } = axisOptions;
+		const scaleType = Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
+
 		const { datasets, labels } = this.model.getDisplayData();
 		const displayData = this.model.getDisplayData();
 		const { identifier } = axisOptions;
@@ -326,10 +333,13 @@ export class CartesianScales extends Service {
 		// 	const { identifier } = axisOptions;
 		// 	return displayData.map(datum => datum[identifier]);
 		// }
-
 		domain = extent(displayData, datum => datum[identifier]);
+		domain = addPaddingInDomain(domain, Configuration.axis.paddingRatio);
+		if (scaleType === ScaleTypes.TIME) {
+			domain = domain.map(d => new Date(d));
+		}
 
-		return addPaddingInDomain(domain, Configuration.axis.paddingRatio);
+		return domain;
 	}
 
 	protected createScale(axisPosition: AxisPositions) {
