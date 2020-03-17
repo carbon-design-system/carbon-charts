@@ -94,6 +94,7 @@ export class CartesianScales extends Service {
 
 	update(animate = true) {
 		this.setDefaultAxes();
+		this.findDomainAndRangeAxes();
 		this.determineOrientation();
 		const axisPositions = Object.keys(AxisPositions).map(axisPositionKey => AxisPositions[axisPositionKey]);
 		axisPositions.forEach(axisPosition => {
@@ -101,31 +102,70 @@ export class CartesianScales extends Service {
 		});
 	}
 
-	determineOrientation() {
+	protected findMainVerticalAxisPosition() {
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes");
+
+		// If right axis has been specified as `main`
+		if (Tools.getProperty(axisOptions, "axes", AxisPositions.RIGHT, "main") === true) {
+			return AxisPositions.RIGHT;
+		}
+
+		return AxisPositions.LEFT;
+	}
+
+	protected findMainHorizontalAxisPosition() {
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes");
+
+		// If top axis has been specified as `main`
+		if (Tools.getProperty(axisOptions, "axes", AxisPositions.TOP, "main") === true) {
+			return AxisPositions.TOP;
+		}
+
+		return AxisPositions.BOTTOM;
+	}
+
+	protected findDomainAndRangeAxesPositions(mainVerticalAxisPosition: AxisPositions, mainHorizontalAxisPosition: AxisPositions) {
 		const options = this.model.getOptions();
 
-		// Manually specifying positions here
-		// In order to enforce a priority
-		[
-			AxisPositions.LEFT,
-			AxisPositions.BOTTOM,
-			AxisPositions.RIGHT,
-			AxisPositions.TOP
-		].forEach(axisPosition => {
-			const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		const mainVerticalAxisOptions = Tools.getProperty(options, "axes", mainVerticalAxisPosition);
+		const mainHorizontalAxisOptions = Tools.getProperty(options, "axes", mainHorizontalAxisPosition);
 
-			if (axisOptions) {
-				const scaleType = axisOptions.scaleType || ScaleTypes.LINEAR;
-				this.scaleTypes[axisPosition] = scaleType;
+		const mainVerticalScaleType = mainVerticalAxisOptions.scaleType || ScaleTypes.LINEAR;
+		const mainHorizontalScaleType = mainHorizontalAxisOptions.scaleType || ScaleTypes.LINEAR;
 
-				if (scaleType === ScaleTypes.LINEAR) {
-					this.rangeAxisPosition = axisPosition;
-				} else {
-					this.domainAxisPosition = axisPosition;
-				}
-			}
-		});
+		const result = {
+			domainAxisPosition: null,
+			rangeAxisPosition: null
+		};
+		if (mainHorizontalScaleType === ScaleTypes.LABELS || mainHorizontalScaleType === ScaleTypes.TIME) {
+			result.domainAxisPosition = mainHorizontalAxisPosition;
+			result.rangeAxisPosition = mainVerticalAxisPosition;
+		} else if (mainVerticalScaleType === ScaleTypes.LABELS || mainVerticalScaleType === ScaleTypes.TIME) {
+			result.domainAxisPosition = mainVerticalAxisPosition;
+			result.rangeAxisPosition = mainHorizontalAxisPosition;
+		} else {
+			result.domainAxisPosition = mainHorizontalAxisPosition;
+			result.rangeAxisPosition = mainVerticalAxisPosition;
+		}
 
+		return result;
+	}
+
+	findDomainAndRangeAxes() {
+		// find main axes between (left & right) && (bottom & top)
+		const mainVerticalAxisPosition = this.findMainVerticalAxisPosition();
+		const mainHorizontalAxisPosition = this.findMainHorizontalAxisPosition();
+
+		// Now we have horizontal & vertical main axes to choose domain & range axes from
+		const domainAndRangeAxesPositions = this.findDomainAndRangeAxesPositions(mainVerticalAxisPosition, mainHorizontalAxisPosition);
+
+		this.domainAxisPosition = domainAndRangeAxesPositions.domainAxisPosition;
+		this.rangeAxisPosition = domainAndRangeAxesPositions.rangeAxisPosition;
+	}
+
+	determineOrientation() {
 		if (this.rangeAxisPosition === AxisPositions.LEFT && this.domainAxisPosition === AxisPositions.BOTTOM) {
 			this.orientation = CartesianOrientations.VERTICAL;
 		} else {
@@ -180,18 +220,19 @@ export class CartesianScales extends Service {
 	getValueFromScale(axisPosition: AxisPositions, datum: any, index?: number) {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
-		const { identifier } = axisOptions;
-		const domainIdentifier = this.getDomainIdentifier();
-		const rangeIdentifier = this.getRangeIdentifier();
-		const value = datum[rangeIdentifier];
+
 		const scaleType = this.scaleTypes[axisPosition];
 		const scale = this.scales[axisPosition];
 
+		const { identifier } = axisOptions;
+		const value = datum[identifier];
+
 		if (scaleType === ScaleTypes.LABELS) {
-			const correspondingLabel = datum.key;
-			return scale(correspondingLabel) + scale.step() / 2;
-		} else if (scaleType === ScaleTypes.TIME) {
-			return scale(new Date(datum[identifier]));
+			return scale(value) + scale.step() / 2;
+		}
+
+		if (scaleType === ScaleTypes.TIME) {
+			return scale(new Date(value));
 		}
 
 		return scale(value);

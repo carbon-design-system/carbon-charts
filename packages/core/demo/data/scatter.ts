@@ -6,20 +6,11 @@ export const scatterLinearData = [
 	{ group: "Dataset 1", sales: 14000, profit: 53100 },
 	{ group: "Dataset 1", sales: 15000, profit: 42300 },
 	{ group: "Dataset 1", sales: 16000, profit: 12300 },
-	// { group: "Dataset 2", sales: "More", profit: 53200 },
-	// { group: "Dataset 2", sales: "Sold", profit: 42300 },
-	// { group: "Dataset 2", sales: "Restocking", profit: 21400 },
-	// { group: "Dataset 2", sales: "Misc", profit: 0 },
-	// { group: "Dataset 3", sales: "Qty", profit: 41200 },
-	// { group: "Dataset 3", sales: "More", profit: 18400 },
-	// { group: "Dataset 3", sales: "Sold", profit: 34210 },
-	// { group: "Dataset 3", sales: "Restocking", profit: 1400 },
-	// { group: "Dataset 3", sales: "Misc", profit: 42100 },
-	// { group: "Dataset 4", sales: "Qty", profit: 22000 },
-	// { group: "Dataset 4", sales: "More", profit: 1200 },
-	// { group: "Dataset 4", sales: "Sold", profit: 9000 },
-	// { group: "Dataset 4", sales: "Restocking", profit: 24000 },
-	// { group: "Dataset 4", sales: "Misc", profit: 3000 }
+	{ group: "Dataset 2", sales: 11000, profit: 12400 },
+	{ group: "Dataset 2", sales: 13000, profit: 34500 },
+	{ group: "Dataset 2", sales: 13500, profit: 23100 },
+	{ group: "Dataset 2", sales: 15500, profit: 63200 },
+	{ group: "Dataset 2", sales: 15750, profit: 24300 }
 ];
 
 export const scatterLinearOptions = {

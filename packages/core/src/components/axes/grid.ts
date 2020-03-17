@@ -195,7 +195,7 @@ export class Grid extends Component {
 
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYScale = this.services.cartesianScales.getMainYScale();
-console.log("mainXScale", mainXScale, mainYScale)
+
 		const [xScaleStart, xScaleEnd] = mainXScale.range();
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
 
