@@ -17,9 +17,46 @@ export const lineData = [
 	{ group: "Dataset 4", key: "Qty", value: 22000 },
 	{ group: "Dataset 4", key: "More", value: 1200 },
 	{ group: "Dataset 4", key: "Sold", value: 9000 },
-	{ group: "Dataset 4", key: "Restocking", value: 24000 },
-	{ group: "Dataset 4", key: "Misc", value: 3000 }
+	{ group: "Dataset 4", key: "Restocking", value: 24000, audienceSize: 10 },
+	{ group: "Dataset 4", key: "Misc", value: 3000, audienceSize: 10 }
 ];
+
+// export const doubleLinearScatterData = [
+// 	{ group: "Dataset 1", employees: 5000, sales: 32100 },
+// 	{ group: "Dataset 1", employees: 3000, sales: 32100 },
+// 	{ group: "Dataset 1", employees: 8000, sales: 32100 },
+// 	{ group: "Dataset 1", employees: 4000, sales: 32100 },
+// 	{ group: "Dataset 2", employees: 2000, sales: 32100 },
+// 	{ group: "Dataset 2", employees: 4000, sales: 32100 },
+// 	{ group: "Dataset 2", employees: 7000, sales: 32100 },
+// 	{ group: "Dataset 2", employees: 6000, sales: 32100 }
+// ];
+
+// export const doubleLinearScatterOptions = {
+// 	title: "Line (discrete)",
+// 	axes: {
+// 		bottom: {
+// 			title: "2018 Annual Sales Figures",
+// 			identifier: "employees",
+// 			secondary: true,
+// 			scaleType: "linear"
+// 		},
+// 		left: {
+// 			primary: true,
+// 			identifier: "sales",
+// 			scaleType: "linear"
+// 		}
+// 	},
+// 	chartTypes: { // TODO
+// 		"line": [
+// 			"Dataset 4",
+// 			"Dataset 1"
+// 		]
+// 	},
+// 	data: {
+// 		groupIdentifier: "group"
+// 	}
+// };
 
 export const lineOptions = {
 	title: "Line (discrete)",
@@ -33,8 +70,22 @@ export const lineOptions = {
 		left: {
 			primary: true,
 			identifier: "value",
+			// tooltipTitle: "CR",
+			title: "Conversion rate",
 			scaleType: "linear"
 		}
+	},
+	// scatter: {
+	// 	"xyz": {
+	// 		identifier: "audienceSize",
+	// 		tooltipTitle: "Audience size"
+	// 	}
+	// },
+	chartTypes: { // TODO
+		"line": [
+			"Dataset 4",
+			"Dataset 1"
+		]
 	},
 	data: {
 		groupIdentifier: "group"
