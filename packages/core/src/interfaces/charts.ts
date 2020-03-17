@@ -110,6 +110,10 @@ export interface BubbleChartOptions extends AxisChartOptions {
 	 */
 	bubble?: {
 		/**
+		 * the key to lookup in charting data for the bubble radius value
+		 */
+		radiusIdentifier?: string;
+		/**
 		 * A function that would determine the range of the bubble radius to use
 		 * Returns an array with the 1st value being the min and the 2nd value being the max radius
 		 */

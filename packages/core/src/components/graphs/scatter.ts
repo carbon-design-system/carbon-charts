@@ -60,7 +60,7 @@ export class Scatter extends Component {
 		const options = this.model.getOptions();
 		const { filled } = options.points;
 
-		const { groupIdentifier } = this.model.getOptions().data;
+		const { groupIdentifier } = options.data;
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 

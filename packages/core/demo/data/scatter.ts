@@ -27,7 +27,7 @@ export const scatterLinearOptions = {
 	}
 };
 
-export const scatterData = [
+export const scatterDiscreteData = [
 	{ group: "Dataset 1", key: "Qty", value: 32100 },
 	{ group: "Dataset 1", key: "More", value: 23500 },
 	{ group: "Dataset 1", key: "Sold", value: 53100 },
@@ -50,7 +50,7 @@ export const scatterData = [
 	{ group: "Dataset 4", key: "Misc", value: 3000 }
 ];
 
-export const scatterOptions = {
+export const scatterDiscreteOptions = {
 	title: "Scatter (discrete)",
 	axes: {
 		bottom: {
