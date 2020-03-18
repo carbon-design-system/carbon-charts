@@ -96,7 +96,7 @@ export class Scatter extends Component {
 
 		this.parent.selectAll("circle.dot")
 			.transition(this.services.transitions.getTransition("legend-hover-scatter"))
-			.attr("opacity", d => (d[groupIdentifier] !== hoveredElement.datum()["key"]) ? 0.3 : 1);
+			.attr("opacity", d => (d[groupIdentifier] !== hoveredElement.datum()["name"]) ? 0.3 : 1);
 	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {

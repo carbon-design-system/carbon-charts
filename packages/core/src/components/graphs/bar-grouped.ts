@@ -162,11 +162,10 @@ export class GroupedBar extends Bar {
 		const { hoveredElement } = event.detail;
 
 		const { groupIdentifier } = this.model.getOptions().data;
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		this.parent.selectAll("path.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => (d[groupIdentifier] !== hoveredElement.datum()[domainIdentifier]) ? 0.3 : 1);
+			.attr("opacity", d => (d[groupIdentifier] !== hoveredElement.datum()["name"]) ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements

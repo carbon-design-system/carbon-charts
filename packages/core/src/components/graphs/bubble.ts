@@ -44,7 +44,7 @@ export class Bubble extends Scatter {
 			.attr("cy", (d, i) => this.services.cartesianScales.getRangeValue(d, i))
 			// We need `|| 1` here in case the user doesn't provide radius values in data
 			.attr("r", d => radiusScale(d[radiusIdentifier] || 1))
-			.attr("fill", d => this.model.getFillScale()[d[groupIdentifier]](d[domainIdentifier]) as any)
+			.attr("fill", d => this.model.getFillColor(d[groupIdentifier], d[domainIdentifier], d))
 			.attr("fill-opacity", options.bubble.fillOpacity)
 			.attr("stroke", d => this.model.getStrokeColor(d[groupIdentifier], d[domainIdentifier], d))
 			.attr("opacity", 1);
