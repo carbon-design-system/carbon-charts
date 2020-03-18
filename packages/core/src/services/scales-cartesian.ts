@@ -225,7 +225,7 @@ export class CartesianScales extends Service {
 		const scale = this.scales[axisPosition];
 
 		const { identifier } = axisOptions;
-		const value = datum[identifier];
+		const value = datum[identifier] ? datum[identifier] : datum;
 
 		if (scaleType === ScaleTypes.LABELS) {
 			return scale(value) + scale.step() / 2;
