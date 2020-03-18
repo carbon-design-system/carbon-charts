@@ -48,38 +48,29 @@ export const groupedHorizontalBarOptions = {
 			identifier: "key"
 		},
 		bottom: {
-			secondary: true,
 			identifier: "value"
 		}
 	}
 };
 
 // Simple bar
-export const simpleBarData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
-	datasets: [
-		{
-			label: "Dataset 1",
-			data: [
-				65000,
-				29123,
-				35213,
-				51213,
-				16932
-			]
-		}
-	]
-};
+export const simpleBarData = [
+	{ group: "Qty", value: 65000 },
+	{ group: "More", value: 29123 },
+	{ group: "Sold", key: "Sold", value: 35213 },
+	{ group: "Restocking", key: "Restocking", value: 51213 },
+	{ group: "Misc", key: "Misc", value: 16932 }
+];
 
 export const simpleBarOptions = {
 	title: "Simple bar (discrete)",
 	axes: {
 		left: {
-			primary: true
+			identifier: "value"
 		},
 		bottom: {
+			identifier: "group",
 			scaleType: "labels",
-			secondary: true
 		}
 	}
 };

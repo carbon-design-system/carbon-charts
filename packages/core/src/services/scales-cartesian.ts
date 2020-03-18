@@ -333,48 +333,34 @@ export class CartesianScales extends Service {
 			return axisOptions.domain;
 		}
 
-		// // If the scale is stacked
-		// if (axisOptions.stacked) {
-		// 	domain = extent(
-		// 		labels.reduce((m, label: any, i) => {
-		// 			const correspondingValues = datasets.map(dataset => {
-		// 				return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
-		// 			});
-		// 			const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
+		// If the scale is stacked
+		if (axisOptions.stacked) {
+			// domain = extent(
+			// 	labels.reduce((m, label: any, i) => {
+			// 		const correspondingValues = datasets.map(dataset => {
+			// 			return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
+			// 		});
+			// 		const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
 
-		// 			// Save both the total value and the minimum
-		// 			return m.concat(totalValue, min(correspondingValues));
-		// 		}, [])
-		// 			// Currently stack layouts in the library
-		// 			// Only support positive values
-		// 			.concat(0)
-		// 	);
-		// } else {
-		// 	// Get all the chart's data values in a flat array
-		// 	let allDataValues = datasets.reduce((dataValues, dataset: any) => {
-		// 		dataset.data.forEach((datum: any) => {
-		// 			if (axisOptions.scaleType === ScaleTypes.TIME) {
-		// 				dataValues = dataValues.concat(datum.date);
-		// 			} else {
-		// 				dataValues = dataValues.concat(isNaN(datum) ? datum.value : datum);
-		// 			}
-		// 		});
-
-		// 		return dataValues;
-		// 	}, []);
-
-		// 	if (axisOptions.scaleType !== ScaleTypes.TIME && includeZero) {
-		// 		allDataValues = allDataValues.concat(0);
-		// 	}
-
-		// 	domain = extent(allDataValues);
-		// }
+			// 		// Save both the total value and the minimum
+			// 		return m.concat(totalValue, min(correspondingValues));
+			// 	}, [])
+			// 		// Currently stack layouts in the library
+			// 		// Only support positive values
+			// 		.concat(0)
+			// );
+		}
 
 		// if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
 		// 	const { identifier } = axisOptions;
 		// 	return displayData.map(datum => datum[identifier]);
 		// }
-		domain = extent(displayData, datum => datum[identifier]);
+		const allDataValues = displayData.map(datum => datum[identifier]);
+		if (axisOptions.scaleType !== ScaleTypes.TIME && includeZero) {
+			allDataValues.push(0);
+		}
+
+		domain = extent(allDataValues);
 		domain = addPaddingInDomain(domain, Configuration.axis.paddingRatio);
 		if (scaleType === ScaleTypes.TIME) {
 			domain = domain.map(d => new Date(d));
