@@ -42,6 +42,7 @@ export class Ruler extends Component {
 		const dataPoints: GenericSvgSelection = svg.selectAll("[role=graphics-symbol]");
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYScale = this.services.cartesianScales.getMainYScale();
+		const [xScaleStart, xScaleEnd] = mainXScale.range();
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
 
 		let lineX = x;
@@ -143,19 +144,27 @@ export class Ruler extends Component {
 		const axisTooltipHeight = 20;
 		const axisTooltipOffset = 5;
 
+		// make sure tooltip does not go out of axis bbox
+		const axisTooltipX =
+			lineX + axisTooltipWidth / 2 > xScaleEnd
+				? xScaleEnd - axisTooltipWidth / 2
+				: lineX - axisTooltipWidth / 2 < xScaleStart
+				? xScaleStart + axisTooltipWidth / 2
+				: lineX;
+
 		const axisTooltipRectY =
 			axisPosition === AxisPositions.BOTTOM
 				? yScaleEnd + axisTooltipOffset
 				: yScaleStart - axisTooltipHeight - axisTooltipOffset;
 
 		DOMUtils.appendOrSelect(axisTooltip, "rect.axis-tooltip-box")
-			.attr("x", lineX - axisTooltipWidth / 2)
+			.attr("x", axisTooltipX - axisTooltipWidth / 2)
 			.attr("y", axisTooltipRectY)
 			.attr("width", axisTooltipWidth)
 			.attr("height", axisTooltipHeight);
 
 		DOMUtils.appendOrSelect(axisTooltip, "text.axis-tooltip-text")
-			.attr("x", lineX)
+			.attr("x", axisTooltipX)
 			.attr("y", axisTooltipRectY + axisTooltipHeight / 2)
 			.text(axisTooltipValue);
 	}
