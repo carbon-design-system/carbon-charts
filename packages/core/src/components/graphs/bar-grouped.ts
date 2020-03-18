@@ -214,8 +214,9 @@ export class GroupedBar extends Bar {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
+				const { groupIdentifier } = self.model.getOptions().data;
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
-					.attr("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
+					.attr("fill", (d: any) => self.model.getFillColor(d[groupIdentifier]));
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
