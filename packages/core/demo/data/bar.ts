@@ -76,15 +76,15 @@ export const simpleBarOptions = {
 };
 
 export const simpleBarFixedDomainOptions = {
-	title: "Simple bar (fixed domain)",
+	title: "Simple bar (customized domain)",
 	axes: {
 		left: {
-			primary: true,
+			identifier: "value",
 			domain: [-100000, 100000]
 		},
 		bottom: {
 			scaleType: "labels",
-			secondary: true
+			identifier: "group"
 		}
 	}
 };
@@ -96,10 +96,11 @@ export const simpleHorizontalBarOptions = {
 	title: "Simple horizontal bar (discrete)",
 	axes: {
 		left: {
-			scaleType: "labels"
+			identifier: "group",
+			scaleType: "labels",
 		},
 		bottom: {
-			secondary: true
+			identifier: "value"
 		}
 	}
 };
@@ -133,11 +134,11 @@ export const simpleHorizontalBarTimeSeriesOptions = {
 	title: "Simple horizontal bar (time series)",
 	axes: {
 		left: {
+			identifier: "date",
 			scaleType: "time",
-			primary: true
 		},
 		bottom: {
-			secondary: true
+			identifier: "value"
 		}
 	}
 };
