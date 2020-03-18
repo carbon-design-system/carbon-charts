@@ -96,7 +96,6 @@ export const simpleHorizontalBarOptions = {
 	title: "Simple horizontal bar (discrete)",
 	axes: {
 		left: {
-			primary: true,
 			scaleType: "labels"
 		},
 		bottom: {
@@ -105,46 +104,23 @@ export const simpleHorizontalBarOptions = {
 	}
 };
 
-export const simpleBarTimeSeriesData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Miscellaneous"],
-	datasets: [
-		{
-			label: "Dataset 1",
-			data: [
-				{
-					date: new Date(2019, 0, 1),
-					value: 10000
-				},
-				{
-					date: new Date(2019, 0, 2),
-					value: 65000
-				},
-				{
-					date: new Date(2019, 0, 3),
-					value: null
-				},
-				{
-					date: new Date(2019, 0, 6),
-					value: 49213
-				},
-				{
-					date: new Date(2019, 0, 7),
-					value: 51213
-				}
-			]
-		}
-	]
-};
+export const simpleBarTimeSeriesData = [
+	{ group: "Qty", date: new Date(2019, 0, 1), value: 10000 },
+	{ group: "More", date: new Date(2019, 0, 2), value: 65000 },
+	{ group: "Sold", date: new Date(2019, 0, 3), value: 30000 },
+	{ group: "Restocking", date: new Date(2019, 0, 6), value: 49213 },
+	{ group: "Misc", date: new Date(2019, 0, 7), value: 51213 }
+];
 
 export const simpleBarTimeSeriesOptions = {
 	title: "Simple bar (time series - Turkish)",
 	axes: {
 		left: {
-			primary: true
+			identifier: "value"
 		},
 		bottom: {
+			identifier: "date",
 			scaleType: "time",
-			secondary: true
 		}
 	},
 	locale: {
