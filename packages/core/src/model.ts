@@ -5,6 +5,7 @@ import * as colorPalettes from "./services/colorPalettes";
 
 // D3
 import { scaleOrdinal } from "d3-scale";
+import { map } from "d3-collection";
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
@@ -24,10 +25,10 @@ export class ChartModel {
 
 	// Data labels
 	/**
-	 * A list of all the labels that have existed within the lifetime of the chart
+	 * A list of all the data groups that have existed within the lifetime of the chart
 	 * @type string[]
 	 */
-	protected allDataLabels: string[];
+	protected allDataGroups: string[];
 
 	// Fill scales & fill related objects
 	protected colorScale: any = {};
@@ -36,7 +37,7 @@ export class ChartModel {
 		this.services = services;
 	}
 
-	sanitize(data) {
+	protected sanitize(data) {
 		// // Sanitize all dates
 		// data.datasets.forEach(dataset => {
 		// 	dataset.data = dataset.data.map(d => {
@@ -52,20 +53,22 @@ export class ChartModel {
 	}
 
 	getDisplayData() {
-		// const { ACTIVE } = Configuration.legend.items.status;
-		// const dataLabels = this.get("dataLabels");
-
 		if (!this.get("data")) {
 			return null;
 		}
 
+		const { ACTIVE } = Configuration.legend.items.status;
+		const dataGroups = this.getDataGroups();
+
 		// Remove datasets that have been disabled
 		const displayData = Tools.clone(this.get("data"));
-		// displayData.datasets = displayData.datasets.filter(dataset => {
-		// 	return dataLabels[dataset.label] === ACTIVE;
-		// });
+		const { groupIdentifier } = this.getOptions().data;
 
-		return displayData;
+		return displayData.filter(datum => {
+			const group = dataGroups.find(group => group.name === datum[groupIdentifier]);
+
+			return group.status === ACTIVE;
+		});
 	}
 
 	getData() {
@@ -78,39 +81,48 @@ export class ChartModel {
 	 */
 	setData(newData) {
 		const sanitizedData = this.sanitize(Tools.clone(newData));
-		const dataLabels = this.generateDataLabels(sanitizedData);
+		const dataGroups = this.generateDataGroups(sanitizedData);
 
 		this.set({
 			data: sanitizedData,
-			dataLabels
+			dataGroups
 		});
 
 		return sanitizedData;
 	}
 
-	generateDataLabels(newData) {
-		const { groupIdentifier } = this.getOptions().data;
-		const dataLabels = {};
-		newData.forEach(datapoint => {
-			dataLabels[datapoint[groupIdentifier]] = Configuration.legend.items.status.ACTIVE;
-		});
+	/*
+	 * Data groups
+	*/
+	protected updateAllDataGroups() {
+		// If allDataGroups hasn't been initialized yet
+		// Set it to the current set of data groups
+		if (!this.allDataGroups) {
+			this.allDataGroups = this.getDataGroups().map(group => group.name);
+		} else {
+			// Loop through current data groups
+			this.getDataGroups().forEach(dataGroup => {
+				// If group name hasn't been stored yet, store it
+				if (this.allDataGroups.indexOf(dataGroup.name) === -1) {
+					this.allDataGroups.push(dataGroup.name);
+				}
+			});
+		}
+	}
 
-		return dataLabels;
+	protected generateDataGroups(data) {
+		const { groupIdentifier } = this.getOptions().data;
+		const { ACTIVE } = Configuration.legend.items.status;
+
+		const uniqueDataGroups = map(data, datum => datum[groupIdentifier]).keys();
+		return uniqueDataGroups.map(groupName => ({
+			name: groupName,
+			status: ACTIVE
+		}));
 	}
 
 	getDataGroups() {
-		const displayData = this.getDisplayData();
-		const { groupIdentifier } = this.getOptions().data;
-
-		const groups = [];
-		displayData.forEach(datum => {
-			const group = datum[groupIdentifier];
-			if (group && groups.indexOf(group) === -1) {
-				groups.push(group);
-			}
-		});
-
-		return groups;
+		return this.get("dataGroups");
 	}
 
 	getGroupedData() {
@@ -179,9 +191,9 @@ export class ChartModel {
 			return;
 		}
 
-		this.updateAllDataLabels();
-		this.setColorScale();
+		this.updateAllDataGroups();
 
+		this.setColorScale();
 		this.services.events.dispatchEvent("model-update");
 	}
 
@@ -194,43 +206,46 @@ export class ChartModel {
 	*/
 	toggleDataLabel(changedLabel: string) {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
-		const dataLabels = this.get("dataLabels");
+		const dataGroups = this.getDataGroups();
 
-		const hasDeactivatedItems = Object.keys(dataLabels).some(label => dataLabels[label] === DISABLED);
-		const activeItems = Object.keys(dataLabels).filter(label => dataLabels[label] === ACTIVE);
+		const hasDeactivatedItems = dataGroups.some(group => group.status === DISABLED);
+		const activeItems = dataGroups.filter(group => group.status === ACTIVE);
+
 		// If there are deactivated items, toggle "changedLabel"
 		if (hasDeactivatedItems) {
 			// If the only active item is being toggled
 			// Activate all items
-			if (activeItems.length === 1 && activeItems[0] === changedLabel) {
+			if (activeItems.length === 1 && activeItems[0].name === changedLabel) {
 				// If every item is active, then enable "changedLabel" and disable all other items
-				Object.keys(dataLabels).forEach(label => {
-					dataLabels[label] = ACTIVE;
+				dataGroups.forEach((group, i) => {
+					dataGroups[i].status = ACTIVE;
 				});
 			} else {
-				dataLabels[changedLabel] = dataLabels[changedLabel] === DISABLED ? ACTIVE : DISABLED;
+				const indexToChange = dataGroups.findIndex(group => group.name === changedLabel);
+				dataGroups[indexToChange].status = dataGroups[indexToChange].status === DISABLED ? ACTIVE : DISABLED;
 			}
 		} else {
 			// If every item is active, then enable "changedLabel" and disable all other items
-			Object.keys(dataLabels).forEach(label => {
-				dataLabels[label] = (label === changedLabel ? ACTIVE : DISABLED);
+			dataGroups.forEach((group, i) => {
+				dataGroups[i].status = (group.name === changedLabel ? ACTIVE : DISABLED);
 			});
 		}
 
+		console.log("dataGroups", dataGroups)
+
 		// Update model
 		this.set({
-			dataLabels
+			dataGroups
 		});
 	}
 
 	/*
 	 * Fill scales
 	*/
-	setColorScale() {
+	protected setColorScale() {
 		const colors = colorPalettes.DEFAULT;
-		this.getDataGroups().forEach((dataGroup, i) => {
-			this.colorScale[dataGroup] = scaleOrdinal().range([colors[i]]).domain([]);
-		});
+		this.colorScale = scaleOrdinal().range(colors)
+			.domain(this.allDataGroups);
 	}
 
 	/**
@@ -251,7 +266,7 @@ export class ChartModel {
 
 	getFillColor(group: any, key?: any, data?: any) {
 		const options = this.getOptions();
-		const defaultFillColor = this.getFillScale()[group](key);
+		const defaultFillColor = this.getFillScale()(group);
 		if (options.getFillColor) {
 			return options.getFillColor(group, key, data, defaultFillColor);
 		} else {
@@ -259,39 +274,17 @@ export class ChartModel {
 		}
 	}
 
-	getStrokeColor(datasetLabel: any, label?: any, data?: any) {
+	getStrokeColor(group: any, key?: any, data?: any) {
 		const options = this.getOptions();
-		const defaultStrokeColor = this.colorScale[datasetLabel](label);
+		const defaultStrokeColor = this.colorScale(group);
 		if (options.getStrokeColor) {
-			return options.getStrokeColor(datasetLabel, label, data, defaultStrokeColor);
+			return options.getStrokeColor(group, key, data, defaultStrokeColor);
 		} else {
 			return defaultStrokeColor;
 		}
 	}
 
 	getFillScale() {
-		// Choose patternScale or colorScale based on the "accessibility" flag
-		// return this.get("options").accessibility ? this.patternScale : this.colorScale;
 		return this.colorScale;
-	}
-
-
-	/*
-	 * Data labels
-	*/
-	protected updateAllDataLabels() {
-		// If allDataLabels hasn't been initialized yet
-		// Set it to the current set of chart labels
-		if (!this.allDataLabels) {
-			this.allDataLabels = this.getDisplayData().labels;
-		} else {
-			// Loop through current chart labels
-			this.getDisplayData().labels.forEach(label => {
-				// If label hasn't been stored yet, store it
-				if (this.allDataLabels.indexOf(label) === -1) {
-					this.allDataLabels.push(label);
-				}
-			});
-		}
 	}
 }

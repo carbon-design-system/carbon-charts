@@ -51,7 +51,7 @@ export class GroupedBar extends Bar {
 
 	setGroupScale(allDataLabels: string[]) {
 		this.groupScale = scaleBand()
-			.domain(this.model.getDataGroups())
+			.domain(this.model.getDataGroups().map(group => group.name))
 			.rangeRound([0, this.getGroupWidth(allDataLabels)]);
 	}
 
@@ -126,7 +126,7 @@ export class GroupedBar extends Bar {
 		barsEnter.merge(bars)
 			.classed("bar", true)
 			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-			.attr("fill", d => this.model.getFillScale()[d[groupIdentifier]](d[domainIdentifier]))
+			.attr("fill", d => this.model.getFillColor(d[groupIdentifier]))
 			.attr("d", d => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
@@ -161,9 +161,12 @@ export class GroupedBar extends Bar {
 	handleLegendOnHover = (event: CustomEvent)  => {
 		const { hoveredElement } = event.detail;
 
+		const { groupIdentifier } = this.model.getOptions().data;
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+
 		this.parent.selectAll("path.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => (d.datasetLabel !== hoveredElement.datum()["key"]) ? 0.3 : 1);
+			.attr("opacity", d => (d[groupIdentifier] !== hoveredElement.datum()[domainIdentifier]) ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements

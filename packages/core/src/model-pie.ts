@@ -113,10 +113,10 @@ export class PieChartModel extends ChartModel {
 	setColorScale() {
 		const dataset = this.getDisplayData().datasets[0];
 		if (dataset.fillColors) {
-			this.colorScale = scaleOrdinal().range(dataset.fillColors).domain(this.allDataLabels);
+			this.colorScale = scaleOrdinal().range(dataset.fillColors);
 		} else {
 			const colors = colorPalettes.DEFAULT;
-			this.colorScale = scaleOrdinal().range(colors).domain(this.allDataLabels);
+			this.colorScale = scaleOrdinal().range(colors);
 		}
 	}
 

@@ -14,9 +14,8 @@ export class Legend extends Component {
 	render() {
 		const svg = this.getContainerSVG().attr("role", Roles.GRAPHICS_DOCUMENT);
 		const options = this.model.getOptions();
-console.log("this.getLegendItemArray", this.getLegendItemArray())
 		const legendItems = svg.selectAll("g.legend-item")
-			.data(this.getLegendItemArray(), dataset => dataset.key);
+			.data(this.model.getDataGroups(), dataGroup => dataGroup.name);
 
 			// this.getLegendItemArray()
 
@@ -35,14 +34,14 @@ console.log("this.getLegendItemArray", this.getLegendItemArray())
 			.attr("rx", 1)
 			.attr("ry", 1)
 			.style("fill", d => {
-				return d.value === options.legend.items.status.ACTIVE ? this.model.getStrokeColor(d.key) : null;
+				return d.status === options.legend.items.status.ACTIVE ? this.model.getStrokeColor(d.name) : null;
 			}).classed("active", function (d, i) {
-				return d.value === options.legend.items.status.ACTIVE;
+				return d.status === options.legend.items.status.ACTIVE;
 			});
 
 		addedLegendItems.append("text")
 			.merge(legendItems.select("text"))
-			.text(d => d.key)
+			.text(d => d.name)
 			.attr("alignment-baseline", "middle");
 
 		this.breakItemsIntoLines(addedLegendItems);
@@ -76,8 +75,8 @@ console.log("this.getLegendItemArray", this.getLegendItemArray())
 
 		// Check if there are disabled legend items
 		const { DISABLED } = options.legend.items.status;
-		const dataLabels = this.model.get("dataLabels");
-		const hasDeactivatedItems = Object.keys(dataLabels).some(label => dataLabels[label] === DISABLED);
+		const dataGroups = this.model.getDataGroups();
+		const hasDeactivatedItems = dataGroups.some(dataGroup => dataGroup.status === DISABLED);
 
 		const legendOrientation = Tools.getProperty(options, "legend", "orientation");
 
@@ -153,16 +152,6 @@ console.log("this.getLegendItemArray", this.getLegendItemArray())
 			});
 	}
 
-	getLegendItemArray() {
-		const legendItems = this.model.get("dataLabels");
-		const legendItemKeys = Object.keys(legendItems);
-
-		return legendItemKeys.map(key => ({
-			key,
-			value: legendItems[key]
-		}));
-	}
-
 	addEventListeners() {
 		const self = this;
 		const svg = this.getContainerSVG();
@@ -196,7 +185,7 @@ console.log("this.getLegendItemArray", this.getLegendItemArray())
 				const clickedItem = select(this);
 				const clickedItemData = clickedItem.datum() as any;
 
-				self.model.toggleDataLabel(clickedItemData.key);
+				self.model.toggleDataLabel(clickedItemData.name);
 			})
 			.on("mouseout", function () {
 				const hoveredItem = select(this);
