@@ -45,10 +45,11 @@ export const groupedHorizontalBarOptions = {
 	axes: {
 		left: {
 			scaleType: "labels",
-			primary: true,
+			identifier: "key"
 		},
 		bottom: {
-			secondary: true
+			secondary: true,
+			identifier: "value"
 		}
 	}
 };
