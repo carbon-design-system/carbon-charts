@@ -35,7 +35,7 @@ export class MeterTitle extends Title {
 		const maxWidth = this.getMaxTitleWidth();
 		const titleElement = DOMUtils.appendOrSelect(svg, "text.meter-title");
 
-		if (titleElement.node().getComputedTextLength() > maxWidth) {
+		if (maxWidth > 0 && titleElement.node().getComputedTextLength() > maxWidth) {
 			this.truncateTitle(titleElement, maxWidth);
 		}
 	}
@@ -145,6 +145,7 @@ export class MeterTitle extends Title {
 	protected getMaxTitleWidth() {
 		// get a reference to the title elements to calculate the size the title can be
 		const containerBounds = DOMUtils.getSVGElementSize(this.parent, { useAttr: true });
+
 		// need to check if the width is 0, and try to use the parent attribute
 		const containerWidth = containerBounds.width ? containerBounds.width : this.parent.node().getAttribute("width");
 		const percentage = DOMUtils.appendOrSelect(this.parent, "text.percent-value");

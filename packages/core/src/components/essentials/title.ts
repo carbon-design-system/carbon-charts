@@ -27,7 +27,6 @@ export class Title extends Component {
 
 		// check if title needs truncation (and tooltip support)
 		if (title.node().getComputedTextLength() > maxWidth) {
-			const titleString = this.model.getOptions().title;
 			this.truncateTitle(title, maxWidth);
 		}
 		text.exit().remove();

@@ -1,6 +1,6 @@
 export const meterData = {
 	label: "Dataset 1",
-	data: 55
+	data: 56
 };
 
 export const meterOptions = {
