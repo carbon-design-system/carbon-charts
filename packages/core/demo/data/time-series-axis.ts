@@ -35,13 +35,13 @@ export const lineTimeSeriesDataMinute = {
 		{
 			label: "Dataset 1",
 			data: [
-				{ date: new Date(2020, 4, 21, 23, 47, 0), value: 10 },
-				{ date: new Date(2020, 4, 21, 23, 58, 0), value: 10 },
-				{ date: new Date(2020, 4, 21, 23, 59, 0), value: 10 },
-				{ date: new Date(2020, 4, 22, 0, 0, 0), value: 10 },
-				{ date: new Date(2020, 4, 22, 0, 1, 0), value: 10 },
-				{ date: new Date(2020, 4, 22, 0, 2, 0), value: 10 },
-				{ date: new Date(2020, 4, 22, 0, 3, 0), value: 10 }
+				{ date: new Date(2020, 4, 21, 23, 40), value: 10 },
+				{ date: new Date(2020, 4, 21, 23, 50), value: 10 },
+				{ date: new Date(2020, 4, 21, 23, 55), value: 10 },
+				{ date: new Date(2020, 4, 22, 0, 0), value: 10 },
+				{ date: new Date(2020, 4, 22, 0, 5), value: 10 },
+				{ date: new Date(2020, 4, 22, 0, 7), value: 10 },
+				{ date: new Date(2020, 4, 22, 0, 10), value: 10 }
 			]
 		}
 	]
@@ -65,14 +65,12 @@ export const lineTimeSeriesData30minutes = {
 		{
 			label: "Dataset 1",
 			data: [
-				{ date: new Date(2020, 11, 10, 22, 30), value: 10 },
 				{ date: new Date(2020, 11, 10, 23, 0), value: 10 },
 				{ date: new Date(2020, 11, 10, 23, 30), value: 10 },
 				{ date: new Date(2020, 11, 11, 0, 0), value: 10 },
 				{ date: new Date(2020, 11, 11, 0, 30), value: 10 },
 				{ date: new Date(2020, 11, 11, 1, 0), value: 10 },
-				{ date: new Date(2020, 11, 11, 1, 20), value: 10 },
-				{ date: new Date(2020, 11, 11, 1, 25), value: 10 }
+				{ date: new Date(2020, 11, 11, 1, 30), value: 10 },
 			]
 		}
 	]
@@ -175,14 +173,13 @@ export const lineTimeSeriesDataWeekly = {
 		{
 			label: "Dataset 1",
 			data: [
-				{ date: new Date(2020, 0, 27), value: 10 },
-				{ date: new Date(2020, 0, 28), value: 10 },
-				{ date: new Date(2020, 0, 29), value: 10 },
-				{ date: new Date(2020, 0, 30), value: 10 },
-				{ date: new Date(2020, 1, 1), value: 10 },
-				{ date: new Date(2020, 1, 2), value: 10 },
-				{ date: new Date(2020, 1, 3), value: 10 },
-				{ date: new Date(2020, 1, 4), value: 10 }
+				{ date: new Date(2019, 11, 30), value: 10 },
+				{ date: new Date(2019, 11, 31), value: 10 },
+				{ date: new Date(2020, 0, 1), value: 10 },
+				{ date: new Date(2020, 0, 2), value: 10 },
+				{ date: new Date(2020, 0, 3), value: 10 },
+				{ date: new Date(2020, 0, 4), value: 10 },
+				{ date: new Date(2020, 0, 5), value: 10 }
 			]
 		}
 	]
