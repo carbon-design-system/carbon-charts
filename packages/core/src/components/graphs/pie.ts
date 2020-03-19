@@ -289,10 +289,11 @@ export class Pie extends Component {
 	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
+		const { groupIdentifier } = this.model.getOptions().data;
 
 		this.parent.selectAll("path.slice")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => (d.data.label !== hoveredElement.datum()["key"]) ? 0.3 : 1);
+			.attr("opacity", d => d.data[groupIdentifier] !== hoveredElement.datum()["name"] ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements

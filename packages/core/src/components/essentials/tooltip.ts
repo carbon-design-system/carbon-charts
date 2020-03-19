@@ -98,13 +98,15 @@ export class Tooltip extends Component {
 		}
 		// this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
 		const dataVal = Tools.getProperty(data, "data") ? data.data : data;
+		const { groupIdentifier } = this.model.getOptions().data;
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		// format the value if needed
 		const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-		this.model.getOptions().tooltip.valueFormatter(dataVal.value) : dataVal.value.toLocaleString("en");
+		this.model.getOptions().tooltip.valueFormatter(dataVal[rangeIdentifier]) : dataVal[rangeIdentifier].toLocaleString("en");
 
 		// pie charts don't have a dataset label since they only support one dataset
-		const label = dataVal.datasetLabel ? dataVal.datasetLabel : dataVal.label;
+		const label = dataVal[groupIdentifier];
 
 		return `<div class="datapoint-tooltip">
 					<p class="label">${label}</p>
