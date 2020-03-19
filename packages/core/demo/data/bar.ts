@@ -57,9 +57,9 @@ export const groupedHorizontalBarOptions = {
 export const simpleBarData = [
 	{ group: "Qty", value: 65000 },
 	{ group: "More", value: 29123 },
-	{ group: "Sold", key: "Sold", value: 35213 },
-	{ group: "Restocking", key: "Restocking", value: 51213 },
-	{ group: "Misc", key: "Misc", value: 16932 }
+	{ group: "Sold", value: 35213 },
+	{ group: "Restocking", value: 51213 },
+	{ group: "Misc", value: 16932 }
 ];
 
 export const simpleBarOptions = {

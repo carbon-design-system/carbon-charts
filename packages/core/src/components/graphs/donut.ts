@@ -50,11 +50,11 @@ export class Donut extends Pie {
 		const options = this.model.getOptions();
 
 		let donutCenterFigure = Tools.getProperty(options, "donut", "center", "number");
-		if (!donutCenterFigure) {
-			donutCenterFigure = this.getDataList().reduce((accumulator, d) => {
-				return accumulator + d.value;
-			}, 0);
-		}
+		// if (!donutCenterFigure) {
+		// 	donutCenterFigure = this.getDataList().reduce((accumulator, d) => {
+		// 		return accumulator + d.value;
+		// 	}, 0);
+		// }
 
 		// Remove commas from the current value string, and convert to an int
 		const currentValue = parseInt(d3Ref.text().replace(/[, ]+/g, ""), 10) || 0;

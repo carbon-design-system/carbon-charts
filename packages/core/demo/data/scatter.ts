@@ -18,11 +18,13 @@ export const scatterLinearOptions = {
 	axes: {
 		bottom: {
 			title: "Sales",
-			identifier: "sales"
+			identifier: "sales",
+			includeZero: false
 		},
 		left: {
 			title: "Profit",
-			identifier: "profit"
+			identifier: "profit",
+			includeZero: false
 		}
 	}
 };
