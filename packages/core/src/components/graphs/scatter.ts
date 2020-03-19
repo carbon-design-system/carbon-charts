@@ -37,10 +37,11 @@ export class Scatter extends Component {
 				.classed("dots", true)
 				.attr("role", Roles.GROUP);
 
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 		// Update data on all circles
 		const dots = dotGroupsEnter.merge(dotGroups)
 			.selectAll("circle.dot")
-			.data(group => group.data);
+			.data(group => group.data.filter(datum => datum[rangeIdentifier] !== null && datum[rangeIdentifier] !== undefined));
 
 		// Add the circles that need to be introduced
 		const dotsEnter = dots.enter()

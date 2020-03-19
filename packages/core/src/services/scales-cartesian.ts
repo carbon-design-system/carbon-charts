@@ -225,13 +225,14 @@ export class CartesianScales extends Service {
 		const scale = this.scales[axisPosition];
 
 		const { identifier } = axisOptions;
-		const value = datum[identifier] ? datum[identifier] : datum;
+		const value = datum[identifier];
 
 		if (scaleType === ScaleTypes.LABELS) {
 			return scale(value) + scale.step() / 2;
 		}
 
 		if (scaleType === ScaleTypes.TIME) {
+			// console.log("value", scale(new Date(value)))
 			return scale(new Date(value));
 		}
 
@@ -315,7 +316,6 @@ export class CartesianScales extends Service {
 		const { includeZero } = axisOptions;
 		const scaleType = Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
 
-		const { datasets, labels } = this.model.getDisplayData();
 		const displayData = this.model.getDisplayData();
 		const { identifier } = axisOptions;
 

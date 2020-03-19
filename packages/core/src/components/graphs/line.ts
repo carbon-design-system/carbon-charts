@@ -28,7 +28,8 @@ export class Line extends Component {
 			.y((d, i) => this.services.cartesianScales.getRangeValue(d, i))
 			.curve(this.services.curves.getD3Curve())
 			.defined((datum: any, i) => {
-				const value = isNaN(datum) ? datum.value : datum;
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+				const value = datum[rangeIdentifier];
 				if (value === null || value === undefined) {
 					return false;
 				}
