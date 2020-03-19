@@ -70,7 +70,7 @@ export const lineTimeSeriesData30minutes = {
 				{ date: new Date(2020, 11, 11, 0, 0), value: 10 },
 				{ date: new Date(2020, 11, 11, 0, 30), value: 10 },
 				{ date: new Date(2020, 11, 11, 1, 0), value: 10 },
-				{ date: new Date(2020, 11, 11, 1, 30), value: 10 },
+				{ date: new Date(2020, 11, 11, 1, 30), value: 10 }
 			]
 		}
 	]
