@@ -6,6 +6,22 @@ import * as ChartComponents from "../src/charts";
 import * as storyUtils from "./utils";
 
 import "../demo/styles.scss";
+import { Tools } from "@carbon/charts/tools";
+import { dataExistsFn } from "../src/components/axes/axis";
+
+////////////
+const chartsAcc = [
+	// "Skeleton Pie with correct data",
+	// "Skeleton Pie with negative values",
+	// "Skeleton Pie with missing data",
+	"Scatter (x: cat, y: cont)",
+	"Stacked bar (x: time, y: cont)"
+];
+const testDemoGroups = Tools.clone(storybookDemoGroups).map(demoGroup => {
+	demoGroup.demos = demoGroup.demos.filter(demo => chartsAcc.includes(demo.title));
+	return demoGroup;
+}).filter(demoGroup => demoGroup.demos.length); // remove demoGroup if it's children are all with isDemoExample = false
+////////////
 
 const introStories = storiesOf("Intro", module).addDecorator(withKnobs);
 
@@ -157,8 +173,10 @@ if (process.env.NODE_ENV !== "production") {
 		let i = 0;
 		let row = getNewRow();
 
-		storybookDemoGroups.forEach(demoGroup => {
+		testDemoGroups.forEach(demoGroup => {
+			// storybookDemoGroups.forEach(demoGroup => {
 			demoGroup.demos.forEach(demo => {
+				console.log(`%c\n\n *** ${demo.title} ***`, "background: #fc0388; color: #FFFFFF; font-weight: bold;");
 				if (i % 2 === 0 && i !== 0) {
 					grid.appendChild(row);
 					row = getNewRow();
