@@ -5,6 +5,7 @@ import * as lineDemos from "./line";
 import * as pieDemos from "./pie";
 import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
+import * as skeletonDemos from "./skeleton";
 
 export * from "./bar";
 export * from "./bubble";
@@ -229,6 +230,41 @@ let allDemoGroups = [
 				data: stepDemos.stepTimeSeriesData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: true
+			}
+		]
+	},
+	{
+		title: "Skeleton",
+		demos: [
+			// {
+			// 	options: skeletonDemos.pieSkeletonCorrectOptions,
+			// 	data: skeletonDemos.pieSkeletonCorrectData,
+			// 	chartType: chartTypes.PieChart,
+			// 	isDemoExample: false
+			// },
+			// {
+			// 	options: skeletonDemos.pieSkeletonNegativeValuesOptions,
+			// 	data: skeletonDemos.pieSkeletonNegativeValuesData,
+			// 	chartType: chartTypes.PieChart,
+			// 	isDemoExample: false
+			// },
+			// {
+			// 	options: skeletonDemos.pieSkeletonMissingDataOptions,
+			// 	data: skeletonDemos.pieSkeletonMissingDataData,
+			// 	chartType: chartTypes.PieChart,
+			// 	isDemoExample: false
+			// },
+			{
+				options: skeletonDemos.scatterSkeletonOptions,
+				data: skeletonDemos.scatterSkeletonData,
+				chartType: chartTypes.ScatterChart,
+				isDemoExample: false
+			},
+			{
+				options: skeletonDemos.stackedBarSkeletonOptions,
+				data: skeletonDemos.stackedBarSkeletonData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: false
 			}
 		]
 	}
