@@ -196,11 +196,17 @@ export class Axis extends Component {
 		}
 
 		// Apply new axis to the axis element
+		// draw ticks
 		if (!animate || !axisRefExists) {
 			axisRef = axisRef.call(axis);
 		} else {
 			axisRef = axisRef.transition(this.services.transitions.getTransition("axis-update"))
 				.call(axis);
+		}
+
+		// if axis bottom and domain is not valid (this check works only with time scale), set ticks opacity to 0
+		if (isTimeScaleType && !isValidDomain(scale.domain())) {
+			container.selectAll("g.ticks g.tick text").attr("opacity", 0);
 		}
 
 		invisibleAxisRef.call(axis);
@@ -315,6 +321,11 @@ export class Axis extends Component {
 			.on("mouseout", null);
 	}
 }
+
+function isValidDomain(domain) {
+	return domain.every(d => d instanceof Date && !isNaN(d.getTime()));
+}
+
 // data is { labels: ["", "", ...], datasets: [ {label: "", data: []}, {}, ...] }
 export function dataExistsFn(data: { labels: string[], datasets: any[] }) {
 	return Object.entries(data).reduce((acc, [key, value]) => {
