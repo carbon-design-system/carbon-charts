@@ -190,6 +190,9 @@ export class ChartModel {
 	 * Fill scales
 	*/
 	setColorScale() {
+		if (this.getDisplayData().datasets.length === 0) {
+			return;
+		}
 		if (this.getDisplayData().datasets[0].fillColors) {
 			this.getDisplayData().datasets.forEach(dataset => {
 				this.colorScale[dataset.label] = scaleOrdinal().range(dataset.fillColors).domain(this.allDataLabels);

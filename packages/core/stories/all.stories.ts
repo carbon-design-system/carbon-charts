@@ -196,6 +196,34 @@ if (process.env.NODE_ENV !== "production") {
 
 				row.appendChild(column);
 
+				//////////////////////////////////////
+				// Add get data button to each column (= chart)
+				const getDataButton = document.createElement("button");
+				getDataButton.className = "bx--btn bx--btn--danger";
+				getDataButton.id = `get-data-${demo.id}`;
+				getDataButton.setAttribute("type", "button");
+				getDataButton.innerHTML = "Remove data";
+				column.appendChild(getDataButton);
+
+				// add events to the get data button:
+				//  - if there are data -> remove data
+				//  - if there aren't data -> fill data using the original data
+				const chartObj = chart; // instantiated class
+				getDataButton.onclick = e => {
+					e.preventDefault();
+					const dataExists = dataExistsFn(chartObj.model.getData());
+
+					if (dataExists) {
+						chartObj.model.setData({ labels: [], datasets: [] });
+						chartObj.model.setOptions({ legend: { enabled: true } });
+						getDataButton.innerHTML = "Get data";
+					} else {
+						chartObj.model.setData(demo.data);
+						getDataButton.innerHTML = "Remove data";
+					}
+				};
+				//////////////////////////////////////
+
 				i++;
 			});
 		});
