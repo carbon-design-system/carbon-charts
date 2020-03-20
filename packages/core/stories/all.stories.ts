@@ -177,9 +177,11 @@ if (process.env.NODE_ENV !== "production") {
 			// storybookDemoGroups.forEach(demoGroup => {
 			demoGroup.demos.forEach(demo => {
 				console.log(`%c\n\n *** ${demo.title} ***`, "background: #fc0388; color: #FFFFFF; font-weight: bold;");
+
+				grid.appendChild(row);
 				if (i % 2 === 0 && i !== 0) {
-					grid.appendChild(row);
 					row = getNewRow();
+					grid.appendChild(row);
 				}
 
 				const ClassToInitialize = ChartComponents[demo.chartType.vanilla];
