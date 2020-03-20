@@ -162,9 +162,11 @@ export class Axis extends Component {
 		}
 
 		// Position the axis title
+		// check that data exists, if they don't, doesn't show the title axis
+		const existsData = dataExistsFn(this.model.getData());
 		if (axisOptions.title) {
 			const axisTitleRef = DOMUtils.appendOrSelect(container, `text.axis-title`)
-				.text(axisOptions.title);
+				.text(existsData ? axisOptions.title : "");
 
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
@@ -312,4 +314,11 @@ export class Axis extends Component {
 			.on("mousemove", null)
 			.on("mouseout", null);
 	}
+}
+// data is { labels: ["", "", ...], datasets: [ {label: "", data: []}, {}, ...] }
+export function dataExistsFn(data: { labels: string[], datasets: any[] }) {
+	return Object.entries(data).reduce((acc, [key, value]) => {
+		const hasValues = value.length > 0;
+		return acc && hasValues;
+	}, true);
 }
