@@ -54,7 +54,7 @@ export class Area extends Component {
 		// D3 area generator function
 		this.areaGenerator = area()
 			.x((d, i) => this.services.cartesianScales.getDomainValue(d, i))
-			.y1((d, i) => yScaleEnd)
+			.y1(yScaleEnd)
 			.y0((d, i) => this.services.cartesianScales.getRangeValue(d, i))
 			.curve(this.services.curves.getD3Curve());
 

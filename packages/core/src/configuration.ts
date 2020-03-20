@@ -18,7 +18,8 @@ import {
 	BarTooltipOptions,
 	LegendOptions,
 	LegendPositions,
-	StackedBarOptions
+	StackedBarOptions,
+	AreaChartOptions
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
 
@@ -205,6 +206,17 @@ const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
 } as LineChartOptions);
 
 /**
+ * options specific to line charts
+ */
+const areaChart: AreaChartOptions = Tools.merge({}, axisChart, {
+	points: {
+		// default point radius to 3
+		radius: 3,
+		filled: false
+	}
+} as AreaChartOptions);
+
+/**
  * options specific to scatter charts
  */
 const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
@@ -282,6 +294,7 @@ export const options = {
 	stackedBarChart,
 	bubbleChart,
 	lineChart,
+	areaChart,
 	scatterChart,
 	pieChart,
 	donutChart

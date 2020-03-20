@@ -1,13 +1,12 @@
 // Internal Imports
 import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
-import { ChartConfig, LineChartOptions } from "../interfaces/index";
+import { ChartConfig, AreaChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
 import {
 	Grid,
-	Line,
 	Area,
 	Scatter,
 	TwoDimensionalAxes,
@@ -19,14 +18,14 @@ import {
 } from "../components/index";
 
 export class AreaChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<LineChartOptions>) {
+	constructor(holder: Element, chartConfigs: ChartConfig<AreaChartOptions>) {
 		super(holder, chartConfigs);
 
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
 			Tools.merge(
-				Tools.clone(Configuration.options.lineChart),
+				Tools.clone(Configuration.options.areaChart),
 				chartConfigs.options
 			)
 		);
@@ -40,7 +39,6 @@ export class AreaChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
-			// new Line(this.model, this.services),
 			new Area(this.model, this.services)
 			// new Scatter(this.model, this.services)
 		];

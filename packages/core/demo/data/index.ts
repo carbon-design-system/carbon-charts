@@ -356,18 +356,20 @@ let allDemoGroups = [
 	}
 ] as any;
 
-const formatTitleString = str => (
-	str.replace(/[^\w\s]/gi, "")
+const formatTitleString = str =>
+	str
+		.replace(/[^\w\s]/gi, "")
 		.replace(/\s\s+/g, " ")
 		.toLowerCase()
-		.replace(/\s+/g, "-")
-);
+		.replace(/\s+/g, "-");
 
 // add codesandbox and code to demos
 allDemoGroups = allDemoGroups.map(demoGroup => {
 	demoGroup.demos = demoGroup.demos.map(demo => {
 		demo.title = demo.options.title;
-		demo.id = `${formatTitleString(demoGroup.title)}--${formatTitleString(demo.options.title)}`;
+		demo.id = `${formatTitleString(demoGroup.title)}--${formatTitleString(
+			demo.options.title
+		)}`;
 		demo.options.height = "400px";
 
 		if (!demo.codesandbox) {
@@ -393,7 +395,9 @@ allDemoGroups = allDemoGroups.map(demoGroup => {
 export const storybookDemoGroups = Tools.clone(allDemoGroups);
 
 // in the demo page we want to show only demos with isDemoExample = true
-export const demoGroups = Tools.clone(allDemoGroups).map(demoGroup => {
-	demoGroup.demos = demoGroup.demos.filter(demo => demo.isDemoExample);
-	return demoGroup;
-}).filter(demoGroup => demoGroup.demos.length); // remove demoGroup if it's children are all with isDemoExample = false
+export const demoGroups = Tools.clone(allDemoGroups)
+	.map(demoGroup => {
+		demoGroup.demos = demoGroup.demos.filter(demo => demo.isDemoExample);
+		return demoGroup;
+	})
+	.filter(demoGroup => demoGroup.demos.length); // remove demoGroup if it's children are all with isDemoExample = false
