@@ -120,6 +120,13 @@ export class Axis extends Component {
 				}
 			}
 
+			// scale continuous (?)
+			// remove 0 ticks for skeleton
+			console.log("  scale.ticks(): ", scale.ticks());
+			if (scale.ticks().length === 1 && scale.ticks()[0] === 0) {
+				numberOfTicks = 0;
+			}
+
 			axis.ticks(numberOfTicks);
 
 			if (isTimeScaleType) {
