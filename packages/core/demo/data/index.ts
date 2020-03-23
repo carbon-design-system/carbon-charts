@@ -15,7 +15,6 @@ export * from "./meter";
 export * from "./pie";
 export * from "./scatter";
 export * from "./step";
-export * from "./meter";
 
 import {
 	createChartSandbox,
@@ -246,7 +245,8 @@ let allDemoGroups = [
 			{
 				options: meterDemos.meterOptions,
 				data: meterDemos.meterData,
-				chartType: chartTypes.MeterChart
+				chartType: chartTypes.MeterChart,
+				isDemoExample: true
 			}
 		]
 	}
