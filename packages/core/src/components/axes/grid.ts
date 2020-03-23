@@ -84,6 +84,10 @@ export class Grid extends Component {
 
 		// find the 2 gridlines on either side of the mouse
 		let floor = -1; let ceiling;
+		if (!gridlinesX.length) {
+			return;
+		}
+
 		gridlinesX.forEach((line: HTMLElement, i: any) => {
 			if (mousePos[0] >= +Tools.getTranslationValues(line).tx) {
 				floor ++;
