@@ -93,7 +93,7 @@ export const stackedBarSkeletonData = {
 			label: "Dataset 3",
 			data: [
 				{ date: new Date(2019, 0, 1), value: 50 },
-				{ ate: new Date(2019, 0, 5), value: 15 },
+				{ date: new Date(2019, 0, 5), value: 15 },
 				{ date: new Date(2019, 0, 8), value: 20 }
 			]
 		},
