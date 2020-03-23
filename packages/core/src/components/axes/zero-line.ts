@@ -12,7 +12,16 @@ export class ZeroLine extends Component {
 
 		// Get x & y position of the line
 		const [x0, x1] = this.services.cartesianScales.getDomainScale().range();
-		const yPosition = +this.services.cartesianScales.getRangeValue(0) + 0.5;
+		let yPosition = +this.services.cartesianScales.getRangeValue(0) + 0.5;
+
+		// if scale domain contains NaN, return the first value of the range
+		// this is necessary for the zero line y position that otherwise is NaN
+		// so on the top of the chart while we want it on the bottom
+		if (!yPosition) {
+			const axisPosition = this.services.cartesianScales.getRangeAxisPosition();
+			const scale = this.services.cartesianScales.getScaleByPosition(axisPosition);
+			yPosition = scale.range()[0];
+		}
 
 		const lineCoordinates = Tools.flipSVGCoordinatesBasedOnOrientation({
 			x0,
