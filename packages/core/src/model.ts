@@ -6,6 +6,7 @@ import * as colorPalettes from "./services/colorPalettes";
 // D3
 import { scaleOrdinal } from "d3-scale";
 import { map } from "d3-collection";
+import { stack } from "d3-shape";
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
@@ -125,6 +126,11 @@ export class ChartModel {
 		return this.get("dataGroups");
 	}
 
+
+	getDataGroupNames() {
+		return this.get("dataGroups").map(dataGroup => dataGroup.name);
+	}
+
 	getGroupedData() {
 		const displayData = this.getDisplayData();
 		const groupedData = {};
@@ -145,6 +151,48 @@ export class ChartModel {
 					name: groupName,
 					data: groupedData[groupName]
 				};
+			});
+	}
+
+	getDataValuesGroupedByKeys() {
+		const options = this.getOptions();
+		const { groupIdentifier } = options.data;
+
+		const displayData = this.getDisplayData();
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+
+		const stackKeys = map(displayData, datum => datum[domainIdentifier]).keys();
+		const dataGroupNames = this.getDataGroupNames();
+
+		return stackKeys.map(key => {
+			const correspondingValues = {};
+			dataGroupNames.forEach(dataGroupName => {
+				const correspondingDatum = displayData.find(datum => datum[groupIdentifier] === dataGroupName && datum[domainIdentifier] === key);
+
+				correspondingValues[dataGroupName] = correspondingDatum[rangeIdentifier] || null;
+			});
+			return correspondingValues;
+		}) as any;
+	}
+
+	getStackedData() {
+		const options = this.getOptions();
+		const { groupIdentifier } = options.data;
+
+		const dataGroupNames = this.getDataGroupNames();
+		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys();
+		return stack().keys(dataGroupNames)(dataValuesGroupedByKeys)
+			.map((series, i) => {
+				// Add data group names to each serie
+				return Object.keys(series)
+					.filter((key: any) => !isNaN(key))
+					.map(key => {
+						const element = series[key];
+						element[groupIdentifier] = dataGroupNames[i];
+
+						return element;
+					});
 			});
 	}
 
@@ -230,8 +278,6 @@ export class ChartModel {
 				dataGroups[i].status = (group.name === changedLabel ? ACTIVE : DISABLED);
 			});
 		}
-
-		console.log("dataGroups", dataGroups)
 
 		// Update model
 		this.set({

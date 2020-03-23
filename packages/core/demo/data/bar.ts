@@ -146,62 +146,39 @@ export const simpleHorizontalBarTimeSeriesOptions = {
 export const simpleHorizontalBarTimeSeriesData = simpleBarTimeSeriesData;
 
 // Stacked bar
-export const stackedBarData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
-	datasets: [
-		{
-			label: "Dataset 1",
-			data: [
-				65000,
-				29123,
-				35213,
-				51213,
-				16932
-			]
-		},
-		{
-			label: "Dataset 2",
-			data: [
-				32432,
-				21312,
-				56456,
-				21312,
-				34234
-			]
-		},
-		{
-			label: "Dataset 3",
-			data: [
-				12312,
-				23232,
-				34232,
-				12312,
-				34234
-			]
-		},
-		{
-			label: "Dataset 4",
-			data: [
-				32423,
-				21313,
-				64353,
-				24134,
-				32423
-			]
-		}
-	]
-};
+export const stackedBarData = [
+	{ group: "Dataset 1", key: "Qty", value: 65000 },
+	{ group: "Dataset 1", key: "More", value: 29123 },
+	{ group: "Dataset 1", key: "Sold", value: 35213 },
+	{ group: "Dataset 1", key: "Restocking", value: 51213 },
+	{ group: "Dataset 1", key: "Misc", value: 16932 },
+	{ group: "Dataset 2", key: "Qty", value: 32432 },
+	{ group: "Dataset 2", key: "More", value: 21312 },
+	{ group: "Dataset 2", key: "Sold", value: 56456 },
+	{ group: "Dataset 2", key: "Restocking", value: 21312 },
+	{ group: "Dataset 2", key: "Misc", value: 34234 },
+	{ group: "Dataset 3", key: "Qty", value: 12312 },
+	{ group: "Dataset 3", key: "More", value: 23232 },
+	{ group: "Dataset 3", key: "Sold", value: 34232 },
+	{ group: "Dataset 3", key: "Restocking", value: 12312 },
+	{ group: "Dataset 3", key: "Misc", value: 34234 },
+	{ group: "Dataset 4", key: "Qty", value: 32423 },
+	{ group: "Dataset 4", key: "More", value: 21313 },
+	{ group: "Dataset 4", key: "Sold", value: 64353 },
+	{ group: "Dataset 4", key: "Restocking", value: 24134 },
+	{ group: "Dataset 4", key: "Misc", value: 32423 }
+];
 
 export const stackedBarOptions = {
 	title: "Stacked bar (discrete)",
 	axes: {
 		left: {
-			primary: true,
+			identifier: "value",
 			stacked: true
 		},
 		bottom: {
-			scaleType: "labels",
-			secondary: true
+			identifier: "key",
+			scaleType: "labels"
 		}
 	}
 };

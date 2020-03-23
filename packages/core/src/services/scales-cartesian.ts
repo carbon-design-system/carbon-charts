@@ -11,8 +11,8 @@ import {
 	scaleTime,
 	scaleLog
 } from "d3-scale";
-import { min, extent } from "d3-array";
-import { map } from "d3-collection";
+import { min, extent, merge, sum } from "d3-array";
+import { map, values } from "d3-collection";
 import { timeFormatDefaultLocale } from "d3-time-format";
 import englishLocale from "d3-time-format/locale/en-US.json";
 
@@ -331,29 +331,19 @@ export class CartesianScales extends Service {
 			return axisOptions.domain;
 		}
 
+		let allDataValues;
 		// If the scale is stacked
 		if (axisOptions.stacked) {
-			// domain = extent(
-			// 	labels.reduce((m, label: any, i) => {
-			// 		const correspondingValues = datasets.map(dataset => {
-			// 			return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
-			// 		});
-			// 		const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
-
-			// 		// Save both the total value and the minimum
-			// 		return m.concat(totalValue, min(correspondingValues));
-			// 	}, [])
-			// 		// Currently stack layouts in the library
-			// 		// Only support positive values
-			// 		.concat(0)
-			// );
+			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys();
+			allDataValues = dataValuesGroupedByKeys.map(dataValues => {
+				return sum(
+					values(dataValues) as any
+				);
+			});
+		} else {
+			allDataValues = displayData.map(datum => datum[identifier]);
 		}
 
-		// if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
-		// 	const { identifier } = axisOptions;
-		// 	return displayData.map(datum => datum[identifier]);
-		// }
-		const allDataValues = displayData.map(datum => datum[identifier]);
 		if (axisOptions.scaleType !== ScaleTypes.TIME && includeZero) {
 			allDataValues.push(0);
 		}
