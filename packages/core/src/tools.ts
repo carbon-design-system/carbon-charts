@@ -76,6 +76,10 @@ export namespace Tools {
 	 * @returns an object containing the x and y translations or null
 	 */
 	export function getTranslationValues(elementRef: HTMLElement) {
+		if (!elementRef) {
+			return;
+		}
+
 		// regex to ONLY get values for translate (instead of all rotate, translate, skew, etc)
 		const translateRegex = /translate\([0-9]+\.?[0-9]*,[0-9]+\.?[0-9]*\)/;
 
@@ -203,7 +207,7 @@ export namespace Tools {
 	 * @returns The function to be used by D3 to push element to the top of the canvas
 	 */
 	export function moveToFront(element) {
-		return element.each(function() {
+		return element.each(function () {
 			this.parentNode.appendChild(this);
 		});
 	}
