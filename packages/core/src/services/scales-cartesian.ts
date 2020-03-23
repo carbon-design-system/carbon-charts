@@ -272,20 +272,24 @@ export class CartesianScales extends Service {
 
 		// If the scale is stacked
 		if (axisOptions.stacked) {
-			domain = extent(
-				labels.reduce((m, label: any, i) => {
-					const correspondingValues = datasets.map(dataset => {
-						return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
-					});
-					const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
+			if (!labels.length) {
+				domain = [];
+			} else {
+				domain = extent(
+					labels.reduce((m, label: any, i) => {
+						const correspondingValues = datasets.map(dataset => {
+							return !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
+						});
+						const totalValue = correspondingValues.reduce((a, b) => a + b, 0);
 
-					// Save both the total value and the minimum
-					return m.concat(totalValue, min(correspondingValues));
-				}, [])
-					// Currently stack layouts in the library
-					// Only support positive values
-					.concat(0)
-			);
+						// Save both the total value and the minimum
+						return m.concat(totalValue, min(correspondingValues));
+					}, [])
+						// Currently stack layouts in the library
+						// Only support positive values
+						.concat(0)
+				);
+			}
 		} else {
 			// Get all the chart's data values in a flat array
 			let allDataValues = datasets.reduce((dataValues, dataset: any) => {
@@ -299,12 +303,15 @@ export class CartesianScales extends Service {
 
 				return dataValues;
 			}, []);
+			if (!allDataValues.length) {
+				domain = [];
+			} else {
+				if (axisOptions.scaleType !== ScaleTypes.TIME && includeZero) {
+					allDataValues = allDataValues.concat(0);
+				}
 
-			if (axisOptions.scaleType !== ScaleTypes.TIME && includeZero) {
-				allDataValues = allDataValues.concat(0);
+				domain = extent(allDataValues);
 			}
-
-			domain = extent(allDataValues);
 		}
 
 		if (axisOptions.scaleType === ScaleTypes.TIME) {
@@ -375,6 +382,7 @@ export class CartesianScales extends Service {
 		}
 
 		scale.domain(this.getScaleDomain(axisPosition));
+
 		return scale;
 	}
 }
