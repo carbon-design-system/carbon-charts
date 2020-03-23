@@ -130,18 +130,21 @@ export class Axis extends Component {
 			axis.ticks(numberOfTicks);
 
 			if (isTimeScaleType) {
-				let tickValues = scale.ticks(numberOfTicks).concat(scale.domain())
-					.map(date => +date).sort();
-				tickValues = Tools.removeArrayDuplicates(tickValues);
+				if (!scale.ticks(numberOfTicks).length) {
+					axis.tickValues([]);
+				} else {
+					let tickValues = scale.ticks(numberOfTicks).concat(scale.domain()).map(date => +date).sort();
+					tickValues = Tools.removeArrayDuplicates(tickValues);
 
-				// Remove labels on the edges
-				// If there are more than 2 labels to show
-				if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges") && tickValues.length > 2) {
-					tickValues.splice(tickValues.length - 1, 1);
-					tickValues.splice(0, 1);
+					// Remove labels on the edges
+					// If there are more than 2 labels to show
+					if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges") && tickValues.length > 2) {
+						tickValues.splice(tickValues.length - 1, 1);
+						tickValues.splice(0, 1);
+					}
+
+					axis.tickValues(tickValues);
 				}
-
-				axis.tickValues(tickValues);
 			}
 		}
 
