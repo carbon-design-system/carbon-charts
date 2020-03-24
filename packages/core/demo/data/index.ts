@@ -236,36 +236,72 @@ let allDemoGroups = [
 	{
 		title: "Skeleton",
 		demos: [
-			// {
-			// 	options: skeletonDemos.pieSkeletonCorrectOptions,
-			// 	data: skeletonDemos.pieSkeletonCorrectData,
-			// 	chartType: chartTypes.PieChart,
-			// 	isDemoExample: false
-			// },
-			// {
-			// 	options: skeletonDemos.pieSkeletonNegativeValuesOptions,
-			// 	data: skeletonDemos.pieSkeletonNegativeValuesData,
-			// 	chartType: chartTypes.PieChart,
-			// 	isDemoExample: false
-			// },
-			// {
-			// 	options: skeletonDemos.pieSkeletonMissingDataOptions,
-			// 	data: skeletonDemos.pieSkeletonMissingDataData,
-			// 	chartType: chartTypes.PieChart,
-			// 	isDemoExample: false
-			// },
 			{
-				options: skeletonDemos.scatterSkeletonOptions,
-				data: skeletonDemos.scatterSkeletonData,
+				options: skeletonDemos.barchartLabLinOptions,
+				data: skeletonDemos.barchartLabLinData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: false
+			},
+			{
+				options: skeletonDemos.barchartLabLinFixDomOptions,
+				data: skeletonDemos.barchartLabLinFixDomData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: false
+			},
+			{
+				options: skeletonDemos.barchartGroupedWithZeroOptions,
+				data: skeletonDemos.barchartGroupedWithZeroData,
+				chartType: chartTypes.GroupedBarChart,
+				isDemoExample: false
+			},
+			{
+				options: skeletonDemos.stackedBarchartTimeLinOptions,
+				data: skeletonDemos.stackedBarchartTimeLinData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: false
+			},
+			{
+				options: skeletonDemos.barchartHorizLinTimeOptions,
+				data: skeletonDemos.barchartHorizLinTimeData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: false
+			},
+			{
+				options: skeletonDemos.bubbleTimeLinOptions,
+				data: skeletonDemos.bubbleTimeLinData,
+				chartType: chartTypes.BubbleChart,
+				isDemoExample: false
+			},
+			{
+				options: skeletonDemos.scatterLabLinOptions,
+				data: skeletonDemos.scatterLabLinData,
 				chartType: chartTypes.ScatterChart,
 				isDemoExample: false
 			},
 			{
-				options: skeletonDemos.stackedBarSkeletonOptions,
-				data: skeletonDemos.stackedBarSkeletonData,
-				chartType: chartTypes.StackedBarChart,
+				options: skeletonDemos.donutOptions,
+				data: skeletonDemos.donutData,
+				chartType: chartTypes.DonutChart,
 				isDemoExample: false
-			}
+			},
+			{
+				options: skeletonDemos.lineTimeLinOptions,
+				data: skeletonDemos.lineTimeLinData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: false
+			},
+			{
+				options: skeletonDemos.pieOptions,
+				data: skeletonDemos.pieData,
+				chartType: chartTypes.PieChart,
+				isDemoExample: false
+			},
+			{
+				options: skeletonDemos.stepOptions,
+				data: skeletonDemos.stepData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: false
+			},
 		]
 	}
 ] as any;
