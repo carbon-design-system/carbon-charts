@@ -265,8 +265,10 @@ export class CartesianScales extends Service {
 		// Get the extent of the domain
 		let domain;
 
+		const areDataEmpty = !dataExistsFn(this.model.getData());
+
 		// If domain is specified return that domain
-		if (axisOptions.domain) {
+		if (axisOptions.domain && !areDataEmpty) {
 			return axisOptions.domain;
 		}
 
@@ -385,4 +387,12 @@ export class CartesianScales extends Service {
 
 		return scale;
 	}
+}
+
+// data is { labels: ["", "", ...], datasets: [ {label: "", data: []}, {}, ...] }
+export function dataExistsFn(data: { labels: string[], datasets: any[] }) {
+	return Object.entries(data).reduce((acc, [key, value]) => {
+		const hasValues = value.length > 0;
+		return acc && hasValues;
+	}, true);
 }
