@@ -16,6 +16,7 @@ import {
 	Cancelable,
 	DebounceSettings
 } from "lodash-es";
+import { Numeric } from "d3";
 
 // Functions
 export namespace Tools {
@@ -311,4 +312,6 @@ export namespace Tools {
 	export function flipDomainAndRangeBasedOnOrientation<D, R>(domain: D, range: R, orientation?: CartesianOrientations): [D, R] | [R, D] {
 		return orientation === CartesianOrientations.VERTICAL ? [domain, range] : [range, domain];
 	}
+
+	export const compareNumeric = (a: Numeric, b: Numeric) => Number(a) === Number(b);
 }

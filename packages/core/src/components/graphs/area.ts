@@ -4,8 +4,9 @@ import * as Configuration from "../../configuration";
 import { Roles } from "../../interfaces";
 
 // D3 Imports
-import { select } from "d3-selection";
-import { area } from "d3-shape";
+import { area, stack } from "d3-shape";
+import { Tools } from "../../tools";
+import { Stack } from "d3";
 
 export class Area extends Component {
 	type = "area";
@@ -48,34 +49,53 @@ export class Area extends Component {
 	render(animate = true) {
 		const svg = this.getContainerSVG();
 
+		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYScale = this.services.cartesianScales.getMainYScale();
-		const [yScaleEnd, yScaleStart] = mainYScale.range();
+		const datasets = this.model.getDisplayData().datasets;
+
+		const flattenedData: [] = datasets.flatMap(d =>
+			d.data.map(datum => ({
+				[d.label]: datum.value,
+				xValue: datum.date
+			}))
+		);
+
+		const preStackData: { [key: string]: number }[] = flattenedData.reduce(
+			(acc, cur: any) => {
+				const index = acc.findIndex(o =>
+					Tools.compareNumeric(o.xValue, cur.xValue)
+				);
+
+				if (index > -1) {
+					acc[index] = { ...acc[index], ...cur };
+				} else {
+					acc.push({ ...cur });
+				}
+
+				return acc;
+			},
+			[]
+		);
+
+		const keys: string[] = datasets.map(d => d.label);
+		const stackedData = stack().keys(keys)(preStackData);
+		const areaGroups = svg.selectAll("g.areas").data(stackedData);
 
 		// D3 area generator function
 		this.areaGenerator = area()
-			.x((d, i) => this.services.cartesianScales.getDomainValue(d, i))
-			.y1(yScaleEnd)
-			.y0((d, i) => this.services.cartesianScales.getRangeValue(d, i))
+			.x(d => {
+				// @ts-ignore
+				return mainXScale(d.data.xValue);
+			})
+			.y0((d, i) => mainYScale(d[0]))
+			.y1((d, i) => mainYScale(d[1]))
 			.curve(this.services.curves.getD3Curve());
 
-		// Update the bound data on area groups
-		const areaGroups = svg
-			.selectAll("g.areas")
-			.data(
-				this.model.getDisplayData().datasets,
-				dataset => dataset.label
-			);
-
-		// Remove elements that need to be exited
-		// We need exit at the top here to make sure that
-		// Data filters are processed before entering new elements
-		// Or updating existing ones
 		areaGroups
 			.exit()
 			.attr("opacity", 0)
 			.remove();
 
-		// Add area groups that need to be introduced
 		const enteringAreaGroups = areaGroups
 			.enter()
 			.append("g")
@@ -83,37 +103,27 @@ export class Area extends Component {
 
 		const self = this;
 
-		// Enter paths that need to be introduced
 		const enteringPaths = enteringAreaGroups
 			.append("path")
 			.attr("opacity", 0);
 
-		// Apply styles and datum
 		enteringPaths
 			.merge(svg.selectAll("g.areas path"))
 			.attr("stroke", function(d) {
-				const parentDatum = select(this.parentNode).datum() as any;
-
-				return self.model.getStrokeColor(parentDatum.label);
+				return self.model.getStrokeColor(d.key);
 			})
 			.attr("fill", function(d) {
-				const parentDatum = select(this.parentNode).datum() as any;
-
-				return self.model.getFillColor(parentDatum.label);
+				return self.model.getFillColor(d.key);
 			})
-			.datum(function(d) {
-				const parentDatum = select(this.parentNode).datum() as any;
-				this._datasetLabel = parentDatum.label;
-
-				return parentDatum.data;
-			})
-			// a11y
+			// .datum(function(d) {
+			// 	this._datasetLabel = d.key;
+			// 	return d.data;
+			// })
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "area")
-			.attr("aria-label", d =>
-				d.map(datum => datum.value || datum).join(",")
-			)
-			// Transition
+			// .attr("aria-label", d => (
+			// d.map(datum => datum.value || datum).join(",")
+			// )
 			.transition(
 				this.services.transitions.getTransition(
 					"area-update-enter",
