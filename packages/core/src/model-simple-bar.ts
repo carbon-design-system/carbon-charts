@@ -6,6 +6,7 @@ import * as colorPalettes from "./services/colorPalettes";
 
 // D3 Imports
 import { scaleOrdinal } from "d3-scale";
+import { dataExistsFn } from "./components/axes/axis";
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
@@ -33,6 +34,9 @@ export class SimpleBarChartModel extends ChartModel {
 
 		// Remove datasets that have been disabled
 		const displayData = Tools.clone(this.get("data"));
+		if (!dataExistsFn(displayData)) {
+			return displayData;
+		}
 		const dataset = displayData.datasets[0];
 
 		// Remove data values that correspond to labels that are disabled
@@ -53,6 +57,9 @@ export class SimpleBarChartModel extends ChartModel {
 	 *
 	*/
 	setColorScale() {
+		if (!this.getDisplayData().datasets.length) {
+			return;
+		}
 		const dataset = this.getDisplayData().datasets[0];
 		if (dataset.fillColors) {
 			this.colorScale = scaleOrdinal().range(dataset.fillColors).domain(this.allDataLabels);

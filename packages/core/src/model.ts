@@ -190,7 +190,7 @@ export class ChartModel {
 	 * Fill scales
 	*/
 	setColorScale() {
-		if (this.getDisplayData().datasets.length === 0) {
+		if (!this.getDisplayData().datasets.length) {
 			return;
 		}
 		if (this.getDisplayData().datasets[0].fillColors) {
