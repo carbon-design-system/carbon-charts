@@ -11,11 +11,22 @@ import { dataExistsFn } from "../src/components/axes/axis";
 
 ////////////
 const chartsAcc = [
-	// "Skeleton Pie with correct data",
-	// "Skeleton Pie with negative values",
-	// "Skeleton Pie with missing data",
-	"Scatter (x: cat, y: cont)",
-	"Stacked bar (x: time, y: cont)"
+	"Barchart (x: labels, y: lin)", // <--
+	"Barchart with fixed domain (x: labels, y: lin)", // <--
+	"Barchart grouped with 0 (x: labels, y: lin)",
+	"Stacked bar (x: time, y: lin)", // <--
+	"Barchart horizontal (x: lin, y: time)",
+
+	"Bubbleplot (x: time, y: lin)",
+	"Scatter (x: labels, y: lin)", // <--
+
+	"Donutchart",
+
+	"Linechart (x: time, y: lin)",
+
+	"Piechart",
+
+	"Step (x: labels, y: lin)",
 ];
 const testDemoGroups = Tools.clone(storybookDemoGroups).map(demoGroup => {
 	demoGroup.demos = demoGroup.demos.filter(demo => chartsAcc.includes(demo.title));
@@ -176,7 +187,7 @@ if (process.env.NODE_ENV !== "production") {
 		testDemoGroups.forEach(demoGroup => {
 			// storybookDemoGroups.forEach(demoGroup => {
 			demoGroup.demos.forEach(demo => {
-				console.log(`%c\n\n *** ${demo.title} ***`, "background: #fc0388; color: #FFFFFF; font-weight: bold;");
+				console.log(`%c\n\n${demo.title}`, "background: #fc0388; color: #FFFFFF; font-weight: bold;");
 
 				grid.appendChild(row);
 				if (i % 2 === 0 && i !== 0) {
@@ -212,6 +223,18 @@ if (process.env.NODE_ENV !== "production") {
 				getDataButton.onclick = e => {
 					e.preventDefault();
 					const dataExists = dataExistsFn(chartObj.model.getData());
+
+					// const scaleLeftType = chartObj.model.services.cartesianScales.getScaleTypeByPosition("left");
+					// const scaleLeft = chartObj.model.services.cartesianScales.getScaleByPosition("left");
+					// const scaleBottomType = chartObj.model.services.cartesianScales.getScaleTypeByPosition("bottom");
+					// const scaleBottom = chartObj.model.services.cartesianScales.getScaleByPosition("bottom");
+
+					// console.log(`\n${demo.title}`);
+					// console.log(`scaleLeftType: ${scaleLeftType}`);
+					// console.log(`  scaleLeft: [${scaleLeft.domain()}] -> [${scaleLeft.range()}]`);
+					// console.log(`scaleBottomType: ${scaleBottomType}`);
+					// console.log(`  scaleBottom: [${scaleBottom.domain()}] -> [${scaleBottom.range()}]`);
+
 
 					if (dataExists) {
 						chartObj.model.setData({ labels: [], datasets: [] });
