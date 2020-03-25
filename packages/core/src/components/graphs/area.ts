@@ -1,12 +1,11 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
-import { Roles } from "../../interfaces";
+import { Roles, ScaleTypes } from "../../interfaces";
 
 // D3 Imports
 import { area, stack } from "d3-shape";
 import { Tools } from "../../tools";
-import { Stack } from "d3";
 
 export class Area extends Component {
 	type = "area";
@@ -46,12 +45,9 @@ export class Area extends Component {
 		});
 	}
 
-	render(animate = true) {
-		const svg = this.getContainerSVG();
-
-		const mainXScale = this.services.cartesianScales.getMainXScale();
-		const mainYScale = this.services.cartesianScales.getMainYScale();
+	getStackedData() {
 		const datasets = this.model.getDisplayData().datasets;
+		const keys: string[] = datasets.map(d => d.label);
 
 		const flattenedData: [] = datasets.flatMap(d =>
 			d.data.map(datum => ({
@@ -77,18 +73,39 @@ export class Area extends Component {
 			[]
 		);
 
-		const keys: string[] = datasets.map(d => d.label);
-		const stackedData = stack().keys(keys)(preStackData);
-		const areaGroups = svg.selectAll("g.areas").data(stackedData);
+		return stack().keys(keys)(preStackData);
+	}
+
+	render(animate = true) {
+		const svg = this.getContainerSVG();
+
+		const mainXScale = this.services.cartesianScales.getMainXScale();
+		const mainYScale = this.services.cartesianScales.getMainYScale();
+
+		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition();
+		const domainScaleType = this.services.cartesianScales.getScaleTypeByPosition(
+			domainAxisPosition
+		);
+		const isTimeSeries = domainScaleType === ScaleTypes.TIME;
+
+		if (!isTimeSeries) {
+			return;
+		}
+
+		const stackedData = this.getStackedData();
+
+		const areaGroups = svg
+			.selectAll("g.areas")
+			.data(stackedData, d => d.key);
 
 		// D3 area generator function
 		this.areaGenerator = area()
-			.x(d => {
-				// @ts-ignore
-				return mainXScale(d.data.xValue);
+			// @ts-ignore
+			.x(d => mainXScale(d.data.xValue))
+			.y0(d => {
+				return mainYScale(d[0]);
 			})
-			.y0((d, i) => mainYScale(d[0]))
-			.y1((d, i) => mainYScale(d[1]))
+			.y1(d => mainYScale(d[1]))
 			.curve(this.services.curves.getD3Curve());
 
 		areaGroups
@@ -109,12 +126,8 @@ export class Area extends Component {
 
 		enteringPaths
 			.merge(svg.selectAll("g.areas path"))
-			.attr("stroke", function(d) {
-				return self.model.getStrokeColor(d.key);
-			})
-			.attr("fill", function(d) {
-				return self.model.getFillColor(d.key);
-			})
+			.attr("stroke", d => self.model.getStrokeColor(d.key))
+			.attr("fill", d => self.model.getFillColor(d.key))
 			// .datum(function(d) {
 			// 	this._datasetLabel = d.key;
 			// 	return d.data;
