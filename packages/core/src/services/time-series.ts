@@ -1,5 +1,4 @@
 import { format } from "date-fns";
-import * as locales from "date-fns/locale";
 import { TimeScaleOptions } from "../interfaces/axis-scales";
 import { Tools } from "../tools";
 
@@ -16,8 +15,6 @@ export const TIME_INTERVALS = [
 	["quarterly", 3 * 30 * 24 * 60 * 60 * 1000],
 	["yearly", 12 * 30 * 24 * 60 * 60 * 1000]
 ];
-
-const codes = Object.values(locales).map(locale => locale["code"]);
 
 // Return true if the tick is a primary tick, false otherwise
 export function isTickPrimary(tick: number, i: number, interval: string, showDayName: boolean): boolean {
@@ -51,18 +48,6 @@ export function isTickPrimary(tick: number, i: number, interval: string, showDay
 	}
 }
 
-// The accepted formats of localeCode are ll and ll-CC
-function getLocale(localeCode: string): Locale {
-	// locales is an object whose keys format is ll or llCC
-	// each locale is an object whose code value format is ll or ll-CC
-	const localeCodeWithoutDash = localeCode.replace(/-/g, "");
-	const foundLocale = locales[localeCodeWithoutDash];
-	if (!foundLocale) {
-		throw new Error(`Locale with code ${localeCode} not found. Avaible codes are: ${codes}.`);
-	}
-	return foundLocale;
-}
-
 // Return the formatted current tick
 export function formatTick(tick: number, i: number, interval: string, timeScaleOptions: TimeScaleOptions): string {
 	const showDayName = timeScaleOptions.showDayName;
@@ -71,9 +56,8 @@ export function formatTick(tick: number, i: number, interval: string, timeScaleO
 	const formats = Tools.getProperty(timeScaleOptions, "timeIntervalFormats")[intervalConsideringAlsoShowDayNameOption];
 	const primary = Tools.getProperty(formats, "primary");
 	const secondary = Tools.getProperty(formats, "secondary");
-	const localeCode = timeScaleOptions.localeCode;
 	const formatString = isTickPrimary(tick, i, interval, showDayName) ? primary : secondary;
-	const locale = getLocale(localeCode);
+	const locale = timeScaleOptions.localeObject;
 
 	return format(date, formatString, { locale });
 }

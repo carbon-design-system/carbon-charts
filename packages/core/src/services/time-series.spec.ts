@@ -1,6 +1,7 @@
 import { formatTick, computeTimeIntervalName } from "./time-series";
 import { TimeScaleOptions } from "../interfaces";
 import * as Configuration from "../configuration";
+import frLocaleObject from "date-fns/locale/fr/index";
 
 type TickTuple = [Date, string];
 type Dataset = TickTuple[];
@@ -204,7 +205,7 @@ it("should format ticks with timeInterval monthly", () => {
 		getTimestampsAndFormattedTicks(datasetCustomFormats);
 	const timeIntervalCustomFormats = computeTimeIntervalName(timestampsCustomFormats);
 	expect(timeIntervalCustomFormats).toEqual("monthly");
-	const timeScaleCustomOptions = { ...timeScaleDefaultOptions, localeCode: "fr" };
+	const timeScaleCustomOptions = { ...timeScaleDefaultOptions, localeObject: frLocaleObject };
 	expect(format(timestampsCustomFormats, timeIntervalCustomFormats, timeScaleCustomOptions)).toEqual(formattedTicksCustomFormats);
 });
 

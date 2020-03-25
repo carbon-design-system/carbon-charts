@@ -1,3 +1,5 @@
+import frLocaleObject from "date-fns/locale/fr/index";
+
 // 15seconds
 export const lineTimeSeriesData15seconds = {
 	labels: ["Qty"],
@@ -242,7 +244,7 @@ export const lineTimeSeriesMonthlyCustomLocaleOptions = {
 		}
 	},
 	timeScale: {
-		localeCode: "fr"
+		localeObject: frLocaleObject
 	}
 };
 

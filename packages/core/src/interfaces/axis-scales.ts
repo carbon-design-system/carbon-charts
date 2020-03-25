@@ -86,10 +86,10 @@ export interface TimeScaleOptions {
 	 */
 	timeIntervalFormats?: TimeIntervalFormats;
 	/**
-	 * local code, ie. "en-US"
-	 * available locale codes are: https://github.com/date-fns/date-fns/tree/master/src/locale
+	 * locale object. For more information see https://date-fns.org/v2.11.0/docs/Locale
+	 * available locale objects are: https://github.com/date-fns/date-fns/tree/master/src/locale
 	 */
-	localeCode?: string;
+	localeObject?: Locale;
 }
 
 /**

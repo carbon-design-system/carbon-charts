@@ -1,3 +1,5 @@
+import trLocaleObject from "date-fns/locale/tr/index";
+
 // Demo turkish locale for simple bar time-series
 export const groupedBarData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
@@ -176,7 +178,7 @@ export const simpleBarTimeSeriesOptions = {
 			secondary: true
 		}
 	},
-	timeScale: { "localeCode": "tr" }
+	timeScale: { "localeObject": trLocaleObject }
 };
 
 // Horizontal simple time series

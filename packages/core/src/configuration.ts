@@ -20,6 +20,7 @@ import {
 	LegendPositions,
 	StackedBarOptions
 } from "./interfaces";
+import enUSLocaleObject from "date-fns/locale/en-US/index";
 
 /*
  *****************************
@@ -109,11 +110,10 @@ const axes: AxesOptions = {
 	}
 };
 
-const defaultLocaleCode = "en-US";
 export const timeScale: TimeScaleOptions = {
 	addSpaceOnEdges: 1,
 	showDayName: false,
-	localeCode: defaultLocaleCode,
+	localeObject: enUSLocaleObject,
 	timeIntervalFormats: {
 		"15seconds": { primary: "MMM d, pp", secondary: "pp" },
 		"minute": { primary: "MMM d, p", secondary: "p" },
