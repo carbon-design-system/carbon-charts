@@ -80,7 +80,7 @@ export function formatTick(tick: number, i: number, interval: string, timeScaleO
 
 // Given a timestamp, return an object of useful time formats
 // Use Unicode date field symbol (https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table)
-export function timestampToFormatTime(timestamp: number) {
+export function getTimeformats(timestamp: number) {
 	const date = new Date(timestamp);
 	return {
 		M: date.getMonth() + 1, // month: 1-12
@@ -92,7 +92,7 @@ export function timestampToFormatTime(timestamp: number) {
 }
 
 // Find the differences between consecutive numbers in an array
-function consecutiveDifferences(elements: number[]): number[] {
+function getConsecutiveDifferences(elements: number[]): number[] {
 	if (!elements) {
 		return;
 	}
@@ -116,25 +116,25 @@ export function computeTimeIntervalName(ticks: number[]): string {
 	if (ticks.length === 1) {
 		return "15seconds";
 	}
-	const differences = consecutiveDifferences(ticks);
+	const differences = getConsecutiveDifferences(ticks);
 	const minDifference = min(differences);
 	return closestTimeIntervalName(minDifference);
 }
 
 // Return true if the day of the month (D = 1-31) is changed, false otherwise
 function isDayOfMonthChanged(timestamp: number): boolean {
-	const { s, m, H } = timestampToFormatTime(timestamp);
+	const { s, m, H } = getTimeformats(timestamp);
 	return H === 0 && m === 0 && s === 0;
 }
 
 // Return true if the month (M = 1-12) is changed, false otherwise
 function isMonthChanged(timestamp: number): boolean {
-	const { d, s, m, H } = timestampToFormatTime(timestamp);
+	const { d, s, m, H } = getTimeformats(timestamp);
 	return d === 1 && H === 0 && m === 0 && s === 0;
 }
 
 // Return true if the year (YYYY) is changed, false otherwise
 function isYearChanged(timestamp: number): boolean {
-	const { M, d, s, m, H } = timestampToFormatTime(timestamp);
+	const { M, d, s, m, H } = getTimeformats(timestamp);
 	return M === 1 && d === 1 && H === 0 && m === 0 && s === 0;
 }
