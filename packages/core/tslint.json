@@ -112,6 +112,17 @@
       "check-separator",
 	  "check-module",
       "check-type"
+    ],
+    "space-before-function-paren": [
+      true,
+      "never"
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "never",
+        "singleline": "never"
+      }
     ]
   }
 }
