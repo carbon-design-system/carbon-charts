@@ -25,7 +25,7 @@ export class Area extends Component {
 					this.services.transitions.getTransition("legend-hover-area")
 				)
 				.attr("opacity", d => {
-					if (d.label !== hoveredElement.datum()["key"]) {
+					if (d.key !== hoveredElement.datum()["key"]) {
 						return Configuration.areas.opacity.unselected;
 					}
 
