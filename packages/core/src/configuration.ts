@@ -118,8 +118,8 @@ const timeScale: TimeScaleOptions = {
  * Base chart options common to any chart
  */
 const chart: BaseChartOptions = {
-	width: "100%",
-	height: "100%",
+	width: null,
+	height: null,
 	resizable: true,
 	tooltip: baseTooltip,
 	legend,
