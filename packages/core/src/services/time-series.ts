@@ -71,7 +71,7 @@ export function getTimeformats(timestamp: number) {
 		d: date.getDate(), // day of the month: 1-31
 		H: date.getHours(), // 24-hour clock: 0-23
 		m: date.getMinutes(), // minute: 0-59
-		s: date.getSeconds(), // seconds: 0-59
+		s: date.getSeconds() // seconds: 0-59
 	};
 }
 

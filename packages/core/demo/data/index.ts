@@ -185,7 +185,7 @@ let allDemoGroups = [
 				options: lineDemos.lineTimeSeriesRotatedTicksOptions,
 				data: lineDemos.lineTimeSeriesDataRotatedTicks,
 				chartType: chartTypes.LineChart
-			},
+			}
 		]
 	},
 	{
@@ -295,7 +295,7 @@ let allDemoGroups = [
 				data: timeSeriesAxisDemos.lineTimeSeriesDataSingleDatum,
 				options: timeSeriesAxisDemos.lineTimeSeriesSingleDatumOptions,
 				chartType: chartTypes.LineChart
-			},
+			}
 		]
 	}
 ] as any;
