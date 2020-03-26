@@ -38,17 +38,45 @@ export class ChartModel {
 		this.services = services;
 	}
 
-	protected sanitize(data) {
-		// // Sanitize all dates
-		// data.datasets.forEach(dataset => {
-		// 	dataset.data = dataset.data.map(d => {
-		// 		if (d.date && !d.date.getTime) {
-		// 			d.date = new Date(d.date);
-		// 		}
+	/**
+	 * Converts data provided in the older format to tabular
+	 * 
+	 */
+	protected transformToTabularData(data) {
+		console.warn("We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here")
+		const tabularData = [];
+		const { datasets, labels } = data;
 
-		// 		return d;
-		// 	});
-		// });
+		// Loop through all datasets
+		datasets.forEach(dataset => {
+			const group = dataset.label;
+
+			// Update each data point to the new format
+			dataset.data.forEach((datum, i) => {
+				const updatedDatum = {
+					group,
+					key: labels[i]
+				};
+
+				if (isNaN(datum)) {
+					updatedDatum["value"] = datum.value;
+					updatedDatum["date"] = datum.date;
+				} else {
+					updatedDatum["value"] = datum;
+				}
+
+				tabularData.push(updatedDatum);
+			});
+		});
+
+		return tabularData;
+	}
+
+	protected sanitize(data) {
+		// if data is not an array
+		if (!Array.isArray(data)) {
+			return this.transformToTabularData(data);
+		}
 
 		return data;
 	}
@@ -83,6 +111,7 @@ export class ChartModel {
 	setData(newData) {
 		const sanitizedData = this.sanitize(Tools.clone(newData));
 		const dataGroups = this.generateDataGroups(sanitizedData);
+		console.log("sanitized data", sanitizedData, dataGroups)
 
 		this.set({
 			data: sanitizedData,
@@ -168,9 +197,14 @@ export class ChartModel {
 		return stackKeys.map(key => {
 			const correspondingValues = {};
 			dataGroupNames.forEach(dataGroupName => {
-				const correspondingDatum = displayData.find(datum => datum[groupIdentifier] === dataGroupName && datum[domainIdentifier] === key);
+				const correspondingDatum = displayData.find(datum => {
+					return datum[groupIdentifier] === dataGroupName &&
+						`${datum[domainIdentifier]}` === key;
+				});
 
-				correspondingValues[dataGroupName] = correspondingDatum[rangeIdentifier] || null;
+				if (correspondingDatum) {
+					correspondingValues[dataGroupName] = correspondingDatum[rangeIdentifier] || null;
+				}
 			});
 			return correspondingValues;
 		}) as any;

@@ -259,53 +259,21 @@ export class CartesianScales extends Service {
 		return axisOptions.identifier;
 	}
 
-	/** Uses the primary Y Axis to get data items associated with that value.  */
+	/** Uses the primary Y Axis to get data items associated with that value. */
 	getDataFromDomain(domainValue) {
 		const displayData = this.model.getDisplayData();
-		const activePoints = [];
+		const domainIdentifier = this.getDomainIdentifier();
 		const scaleType = this.scaleTypes[this.domainAxisPosition];
 
-		switch (scaleType) {
-			case ScaleTypes.LABELS:
-				// based on labels we use the index to get the associated data
-				const index = displayData.labels.indexOf(domainValue);
-
-				displayData.datasets.forEach(dataset => {
-					activePoints.push(
-						{
-							datasetLabel: dataset.label,
-							value: dataset.data[index],
-						}
-					);
-				});
-				break;
-			case ScaleTypes.TIME:
-				// time series we filter using the date
-				const domainKey = Object.keys(displayData.datasets[0].data[0]).filter(key => key !== "value")[0];
-
-				displayData.datasets.forEach(dataset => {
-					const sharedLabel = dataset.label;
-
-					// filter the items in each dataset for the points associated with the Domain
-					const dataItems = dataset.data.filter(item => {
-						const date1 = new Date(item[domainKey]);
-						const date2 = new Date(domainValue);
-						return date1.getTime() === date2.getTime();
-					});
-
-					// assign the shared label on the data items and add them to the array
-					dataItems.forEach(item => {
-						activePoints.push(
-							Object.assign({
-								datasetLabel: sharedLabel,
-								value: item.value,
-							}, item)
-						);
-					});
-				});
-				break;
+		if (scaleType === ScaleTypes.TIME) {
+			return displayData.filter(datum => {
+				return datum[domainIdentifier].getTime() === domainValue.getTime();
+			});
 		}
-		return activePoints;
+
+		return displayData.filter(datum => {
+			return datum[domainIdentifier] === domainValue;
+		});
 	}
 
 	protected getScaleDomain(axisPosition: AxisPositions) {
@@ -317,20 +285,20 @@ export class CartesianScales extends Service {
 		const displayData = this.model.getDisplayData();
 		const { identifier } = axisOptions;
 
+		// If domain is specified return that domain
+		if (axisOptions.domain) {
+			return axisOptions.domain;
+		}
+
 		// If scale is a LABELS scale, return some labels as the domain
 		if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
 			// Get unique values
 			return map(displayData, d => d[identifier]).keys();
 		}
 
+
 		// Get the extent of the domain
 		let domain;
-
-		// If domain is specified return that domain
-		if (axisOptions.domain) {
-			return axisOptions.domain;
-		}
-
 		let allDataValues;
 		// If the scale is stacked
 		if (axisOptions.stacked) {
