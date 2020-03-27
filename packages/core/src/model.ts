@@ -111,7 +111,6 @@ export class ChartModel {
 	setData(newData) {
 		const sanitizedData = this.sanitize(Tools.clone(newData));
 		const dataGroups = this.generateDataGroups(sanitizedData);
-		console.log("sanitized data", sanitizedData, dataGroups)
 
 		this.set({
 			data: sanitizedData,
@@ -195,16 +194,14 @@ export class ChartModel {
 		const dataGroupNames = this.getDataGroupNames();
 
 		return stackKeys.map(key => {
-			const correspondingValues = {};
+			const correspondingValues = { sharedStackKey: key };
 			dataGroupNames.forEach(dataGroupName => {
 				const correspondingDatum = displayData.find(datum => {
 					return datum[groupIdentifier] === dataGroupName &&
 						`${datum[domainIdentifier]}` === key;
 				});
 
-				if (correspondingDatum) {
-					correspondingValues[dataGroupName] = correspondingDatum[rangeIdentifier] || null;
-				}
+				correspondingValues[dataGroupName] = correspondingDatum ? correspondingDatum[rangeIdentifier] : null;
 			});
 			return correspondingValues;
 		}) as any;
@@ -216,6 +213,7 @@ export class ChartModel {
 
 		const dataGroupNames = this.getDataGroupNames();
 		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys();
+
 		return stack().keys(dataGroupNames)(dataValuesGroupedByKeys)
 			.map((series, i) => {
 				// Add data group names to each serie

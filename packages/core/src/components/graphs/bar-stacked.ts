@@ -62,13 +62,13 @@ export class StackedBar extends Bar {
 
 		// Update data on all bars
 		const bars = svg.selectAll("g.bars").selectAll("path.bar")
-			.data(d => d);
+			// Remove bars with a start and end value of 0
+			.data(data => data.filter(d => !(d[0] === 0 && d[1] === 0)));
 
 		// Remove bars that need to be removed
 		bars.exit()
 			.remove();
 
-		const yScale = this.services.cartesianScales.getRangeScale();
 		bars.enter()
 			.append("path")
 			.merge(bars)
@@ -89,6 +89,7 @@ export class StackedBar extends Bar {
 				const x1 = x0 + barWidth;
 				const y0 = this.services.cartesianScales.getRangeValue(d[0], i);
 				let y1 = this.services.cartesianScales.getRangeValue(d[1], i);
+
 				// Add the divider gap
 				if (Math.abs(y1 - y0) > 0 && Math.abs(y1 - y0) > options.bars.dividerSize) {
 					if (this.services.cartesianScales.getOrientation() === CartesianOrientations.VERTICAL) {
@@ -147,35 +148,20 @@ export class StackedBar extends Bar {
 					datum
 				});
 			})
-			.on("mousemove", function (datum) {
+			.on("mousemove", function(datum) {
 				const hoveredElement = select(this);
-				const itemData = select(this).datum();
-				hoveredElement.classed("hovered", true);
+				const itemData = datum.data[datum.group];
 
-				const stackedData = itemData["data"];
-				const sharedLabel = stackedData["label"];
-
-				// Remove the label field
-				delete stackedData["label"];
-
-				// filter out the label from the datasets' and associated values
-				const activePoints = Object.keys(stackedData)
-					.map(key => ({
-						datasetLabel: key,
-						value: stackedData[key],
-						label: sharedLabel
-					}));
-
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
-					element: hoveredElement,
-					datum
-				});
-
+				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
+				const { groupIdentifier } = self.model.getOptions().data;
+		
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
-					multidata: activePoints,
 					hoveredElement,
+					data: {
+						[rangeIdentifier]: itemData,
+						[groupIdentifier]: datum.group
+					},
 					type: TooltipTypes.DATAPOINT
 				});
 			})
