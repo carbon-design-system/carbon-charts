@@ -17,7 +17,7 @@ Please take a moment to review this document in order to make the contribution p
 
 
 ## Run Charts in Local Environment
-We use Lerna to manage all packages in Charts.
+We use Lerna to manage all `@carbon/charts` related packages.
 
 **These are the Node & NPM versions we recommend:**
 - Node Version: `12.16.1`
