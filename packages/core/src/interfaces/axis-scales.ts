@@ -1,5 +1,6 @@
 import { ScaleTypes } from "./enums";
 import { AxisDomain } from "d3";
+import { Locale } from "date-fns";
 
 /**
  * options to configure a scale. not all options are used by all scales
