@@ -1,11 +1,12 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
-import { Roles, ScaleTypes } from "../../interfaces";
+import { Roles, ScaleTypes, Events, TooltipTypes } from "../../interfaces";
 
 // D3 Imports
 import { area, stack } from "d3-shape";
 import { Tools } from "../../tools";
+import { select, color } from "d3";
 
 export class Area extends Component {
 	type = "area";
@@ -14,7 +15,7 @@ export class Area extends Component {
 
 	// TODORF - Remove these listeners in destroy()
 	init() {
-		// Highlight correct scatter on legend item hovers
+		// Highlight correct area on legend item hovers
 		this.services.events.addEventListener("legend-item-onhover", e => {
 			const { hoveredElement } = e.detail;
 
@@ -76,6 +77,71 @@ export class Area extends Component {
 		return stack().keys(keys)(preStackData);
 	}
 
+	addEventListeners() {
+		const self = this;
+		this.parent
+			.selectAll("path.area")
+			.on("mouseover", function(datum) {
+				const hoveredElement = select(this);
+				hoveredElement.classed("hovered", true);
+				hoveredElement
+					.transition(
+						self.services.transitions.getTransition(
+							"graph_element_mouseover_fill_update"
+						)
+					)
+					.attr(
+						"fill",
+						color(hoveredElement.attr("fill"))
+							.darker(0.2)
+							.toString()
+					);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Area.AREA_MOUSEOVER, {
+					element: hoveredElement,
+					datum
+				});
+
+				// self.services.events.dispatchEvent("show-tooltip", {
+				// 	hoveredElement,
+				// 	type: TooltipTypes.DATAPOINT
+				// });
+			})
+			.on("mouseout", function(datum) {
+				const hoveredElement = select(this);
+				hoveredElement.classed("hovered", false);
+
+				hoveredElement
+					.transition(
+						self.services.transitions.getTransition(
+							"graph_element_mouseout_fill_update"
+						)
+					)
+					.attr("fill", (d: any) => self.model.getFillColor(d.key));
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Area.AREA_MOUSEOUT, {
+					element: hoveredElement,
+					datum
+				});
+
+				// Hide tooltip
+				// self.services.events.dispatchEvent("hide-tooltip", {
+				// 	hoveredElement
+				// });
+			});
+	}
+
+	destroy() {
+		// Remove event listeners
+		this.parent
+			.selectAll("path.area")
+			.on("mouseover", null)
+			.on("mousemove", null)
+			.on("mouseout", null);
+	}
+
 	render(animate = true) {
 		const svg = this.getContainerSVG();
 
@@ -126,6 +192,7 @@ export class Area extends Component {
 
 		enteringPaths
 			.merge(svg.selectAll("g.areas path"))
+			.data(stackedData, d => d.key)
 			.attr("stroke", d => self.model.getStrokeColor(d.key))
 			.attr("fill", d => self.model.getFillColor(d.key))
 			// .datum(function(d) {
@@ -134,8 +201,8 @@ export class Area extends Component {
 			// })
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "area")
-			// .attr("aria-label", d => (
-			// d.map(datum => datum.value || datum).join(",")
+			// .attr("aria-label", d =>
+			// 	d.map(datum => datum.value || datum).join(",")
 			// )
 			.transition(
 				this.services.transitions.getTransition(
@@ -146,5 +213,8 @@ export class Area extends Component {
 			.attr("opacity", 1)
 			.attr("class", "area")
 			.attr("d", this.areaGenerator);
+
+		// Add event listeners to elements drawn
+		this.addEventListeners();
 	}
 }

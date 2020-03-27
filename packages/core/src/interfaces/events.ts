@@ -64,6 +64,16 @@ export enum Line {
 }
 
 /**
+ * enum of all area graph events
+ */
+export enum Area {
+	AREA_MOUSEOVER = "area-mouseover",
+	AREA_MOUSEMOVE = "area-mousemove",
+	AREA_CLICK = "area-click",
+	AREA_MOUSEOUT = "area-mouseout"
+}
+
+/**
  * enum of all tooltip events
  */
 export enum Tooltip {
@@ -79,4 +89,3 @@ export enum Legend {
 	ITEM_CLICK = "legend-item-onclick",
 	ITEM_MOUSEOUT = "legend-item-onmouseout",
 	ITEMS_UPDATE = "legend-items-update"
-}
