@@ -22,10 +22,9 @@ export const lineTimeSeriesData15seconds = {
 export const lineTimeSeries15secondsOptions = {
 	title: "Line (time series) - Time interval 15seconds",
 	axes: {
-		left: { secondary: true },
+		left: {},
 		bottom: {
-			scaleType: "time",
-			primary: true
+			scaleType: "time"
 		}
 	}
 };
@@ -52,10 +51,9 @@ export const lineTimeSeriesDataMinute = {
 export const lineTimeSeriesMinuteOptions = {
 	title: "Line (time series) - Time interval minute",
 	axes: {
-		left: { secondary: true },
+		left: {},
 		bottom: {
-			scaleType: "time",
-			primary: true
+			scaleType: "time"
 		}
 	}
 };
@@ -81,10 +79,9 @@ export const lineTimeSeriesData30minutes = {
 export const lineTimeSeries30minutesOptions = {
 	title: "Line (time series) - Time interval 30minutes",
 	axes: {
-		left: { secondary: true },
+		left: {},
 		bottom: {
-			scaleType: "time",
-			primary: true
+			scaleType: "time"
 		}
 	}
 };
@@ -111,10 +108,9 @@ export const lineTimeSeriesDataHourlyDefaultTicksFormats = {
 export const lineTimeSeriesHourlyDefaultLocaleOptions = {
 	title: "Line (time series) - Time interval hourly with default ticks formats ('MMM d, hh a' and 'hh a')",
 	axes: {
-		left: { secondary: true },
+		left: {},
 		bottom: {
-			scaleType: "time",
-			primary: true
+			scaleType: "time"
 		}
 	}
 };
@@ -125,11 +121,10 @@ export const lineTimeSeriesDataHourlyCustomTicksFormats = lineTimeSeriesDataHour
 export const lineTimeSeriesHourlyCustomTicksFormatsOptions = {
 	title: "Line (time series) - Time interval hourly with custom ticks formats ('MMM d, HH:mm' and 'HH:mm')",
 	axes: {
-		left: { secondary: true },
+		left: {},
 		bottom: {
-			scaleType: "time",
-			primary: true,
-		},
+			scaleType: "time"
+		}
 	},
 	timeScale: {
 		timeIntervalFormats: {
@@ -160,10 +155,9 @@ export const lineTimeSeriesDataDaily = {
 export const lineTimeSeriesDailyOptions = {
 	title: "Line (time series) - Time interval daily",
 	axes: {
-		left: { secondary: true },
+		left: {},
 		bottom: {
-			scaleType: "time",
-			primary: true
+			scaleType: "time"
 		}
 	}
 };
@@ -190,11 +184,10 @@ export const lineTimeSeriesDataWeekly = {
 export const lineTimeSeriesWeeklyOptions = {
 	title: "Line (time series) - Time interval weekly",
 	axes: {
-		left: { secondary: true },
+		left: {},
 		bottom: {
-			scaleType: "time",
-			primary: true,
-		},
+			scaleType: "time"
+		}
 	},
 	timeScale: {
 		showDayName: true
@@ -223,10 +216,9 @@ export const lineTimeSeriesDataMonthlyDefaultLocale = {
 export const lineTimeSeriesMonthlyDefaultLocaleOptions = {
 	title: "Line (time series) - Time interval monthly with default locale",
 	axes: {
-		left: { secondary: true },
+		left: {},
 		bottom: {
-			scaleType: "time",
-			primary: true
+			scaleType: "time"
 		}
 	}
 };
@@ -237,10 +229,9 @@ export const lineTimeSeriesDataMonthlyCustomLocale = lineTimeSeriesDataMonthlyDe
 export const lineTimeSeriesMonthlyCustomLocaleOptions = {
 	title: "Line (time series) - Time interval monthly with custom locale (fr)",
 	axes: {
-		left: { secondary: true },
+		left: {},
 		bottom: {
-			scaleType: "time",
-			primary: true
+			scaleType: "time"
 		}
 	},
 	timeScale: {
@@ -270,10 +261,9 @@ export const lineTimeSeriesDataQuarterly = {
 export const lineTimeSeriesQuarterlyOptions = {
 	title: "Line (time series) - Time interval quarterly",
 	axes: {
-		left: { secondary: true },
+		left: {},
 		bottom: {
-			scaleType: "time",
-			primary: true
+			scaleType: "time"
 		}
 	}
 };
@@ -300,10 +290,9 @@ export const lineTimeSeriesDataYearly = {
 export const lineTimeSeriesYearlyOptions = {
 	title: "Line (time series) - Time interval yearly",
 	axes: {
-		left: { secondary: true },
+		left: {},
 		bottom: {
-			scaleType: "time",
-			primary: true
+			scaleType: "time"
 		}
 	}
 };
@@ -323,10 +312,9 @@ export const lineTimeSeriesDataSingleDatum = {
 export const lineTimeSeriesSingleDatumOptions = {
 	title: "Line (time series) - Single datum",
 	axes: {
-		left: { secondary: true },
+		left: {},
 		bottom: {
-			scaleType: "time",
-			primary: true
+			scaleType: "time"
 		}
 	}
 };

@@ -1,5 +1,9 @@
 // Internal imports
-import { CartesianOrientations, AxisChartOptions } from "./interfaces";
+import {
+	AxisChartOptions,
+	CartesianOrientations,
+	ScaleTypes
+} from "./interfaces";
 
 import {
 	debounce as lodashDebounce,
@@ -21,7 +25,6 @@ export namespace Tools {
 	export const removeArrayDuplicates = lodashUnique;
 	export const clamp = lodashClamp;
 
-
 	/**
 	 * Returns default chart options merged with provided options,
 	 * with special cases for axes.
@@ -40,8 +43,29 @@ export namespace Tools {
 			delete defaultOptions.axes;
 		}
 
+		// Update deprecated options to work with the tabular data format
+		// Similar to the functionality in model.transformToTabularData()
 		for (const axisName in defaultOptions.axes) {
-			if (!providedAxesNames.includes(axisName)) {
+			if (providedAxesNames.includes(axisName)) {
+				const providedAxisOptions = providedOptions.axes[axisName];
+
+				if (providedAxisOptions["primary"] || providedAxisOptions["secondary"]) {
+					console.warn("`primary` & `secondary` are no longer needed for axis configurations. Read more (TODO-TDF) here")
+				}
+
+				const identifier = providedAxisOptions["identifier"];
+				if (identifier === undefined || identifier === null) {
+					const scaleType = providedAxisOptions["scaleType"];
+
+					if (scaleType === undefined || scaleType === null) {
+						providedAxisOptions["identifier"] = "value";
+					} else if (scaleType === ScaleTypes.TIME) {
+						providedAxisOptions["identifier"] = "date";
+					} else if (scaleType === ScaleTypes.LABELS) {
+						providedAxisOptions["identifier"] = "key";
+					}
+				}
+			} else {
 				delete defaultOptions.axes[axisName];
 			}
 		}

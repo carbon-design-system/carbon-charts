@@ -45,12 +45,9 @@ describe("Tools.mergeDefaultChartOptions", () => {
 			title: "Title",
 			axes: {
 				bottom: {
-					title: "Title",
-					secondary: true
+					title: "Title"
 				},
-				left: {
-					primary: true
-				}
+				left: {}
 			}
 		};
 
@@ -79,12 +76,10 @@ describe("Tools.mergeDefaultChartOptions", () => {
 			axes: {
 				bottom: {
 					includeZero: true,
-					title: "Title",
-					secondary: true
+					title: "Title"
 				},
 				left: {
-					includeZero: true,
-					primary: true
+					includeZero: true
 				}
 			},
 			timeScale: {

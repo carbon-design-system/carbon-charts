@@ -187,12 +187,10 @@ export const stackedHorizontalBarOptions = {
 	title: "Stacked horizontal bar (discrete)",
 	axes: {
 		left: {
-			scaleType: "labels",
-			primary: true
+			scaleType: "labels"
 		},
 		bottom: {
-			stacked: true,
-			secondary: true
+			stacked: true
 		}
 	}
 };
@@ -360,12 +358,10 @@ export const stackedHorizontalBarTimeSeriesOptions = {
 	title: "Stacked horizontal bar (time series)",
 	axes: {
 		left: {
-			primary: true,
 			scaleType: "time"
 		},
 		bottom: {
-			stacked: true,
-			secondary: true
+			stacked: true
 		}
 	}
 };

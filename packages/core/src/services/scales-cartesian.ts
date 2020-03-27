@@ -76,25 +76,7 @@ export class CartesianScales extends Service {
 		return this.rangeAxisPosition;
 	}
 
-	setDefaultAxes() {
-		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
-		if (!axesOptions) {
-			(this.model.getOptions().axes as AxesOptions) = {
-				left: {
-					primary: true,
-					includeZero: true,
-				},
-				bottom: {
-					secondary: true,
-					includeZero: true,
-					scaleType: this.model.getDisplayData().labels ? ScaleTypes.LABELS : undefined
-				}
-			};
-		}
-	}
-
 	update(animate = true) {
-		this.setDefaultAxes();
 		this.findDomainAndRangeAxes();
 		this.determineOrientation();
 		const axisPositions = Object.keys(AxisPositions).map(axisPositionKey => AxisPositions[axisPositionKey]);
