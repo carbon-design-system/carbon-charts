@@ -125,10 +125,10 @@ ${storyUtils.generateThemePickerHTML()}
 
 // DEV ONLY STORIES
 if (process.env.NODE_ENV !== "production") {
-	const devStoreis = storiesOf("__DEV__", module).addDecorator(withKnobs);
+	const devStories = storiesOf("__DEV__", module).addDecorator(withKnobs);
 
 	// Loop through the demos for the group
-	devStoreis.add("All chart types", () => {
+	devStories.add("All chart types", () => {
 		// container creation
 		const container = document.createElement("div");
 		container.setAttribute("class", "container theme--g100");
@@ -159,9 +159,10 @@ if (process.env.NODE_ENV !== "production") {
 
 		storybookDemoGroups.forEach(demoGroup => {
 			demoGroup.demos.forEach(demo => {
+				grid.appendChild(row);
 				if (i % 2 === 0 && i !== 0) {
-					grid.appendChild(row);
 					row = getNewRow();
+					grid.appendChild(row);
 				}
 
 				const ClassToInitialize = ChartComponents[demo.chartType.vanilla];

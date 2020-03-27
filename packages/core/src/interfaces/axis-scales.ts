@@ -1,5 +1,6 @@
 import { ScaleTypes } from "./enums";
 import { AxisDomain } from "d3";
+import { Locale } from "date-fns";
 
 /**
  * options to configure a scale. not all options are used by all scales
@@ -72,6 +73,49 @@ export interface AxisOptions {
 }
 
 /**
+ * customize time series scales
+ */
+export interface TimeScaleOptions {
+	addSpaceOnEdges?: number;
+	/**
+	 * if it's true, days are shown as mon-sun,
+	 * otherwise days are shown as number 1-31
+	 */
+	showDayName?: boolean;
+	/**
+	 * formats for each time interval
+	 */
+	timeIntervalFormats?: TimeIntervalFormats;
+	/**
+	 * locale object, for more information see https://date-fns.org/v2.11.0/docs/Locale.
+	 * example: `import enUSLocaleObject from "date-fns/locale/en-US/index"`.
+	 * available locale objects are: https://github.com/date-fns/date-fns/tree/master/src/locale
+	 */
+	localeObject?: Locale;
+}
+
+/**
+ * time scales: customize ticks format for different time intervals
+ */
+export interface TickFormats {
+	primary?: string;
+	secondary?: string;
+}
+
+
+export interface TimeIntervalFormats {
+	"15seconds"?: TickFormats;
+	"minute"?: TickFormats;
+	"30minutes"?: TickFormats;
+	"hourly"?: TickFormats;
+	"daily"?: TickFormats;
+	"weekly"?: TickFormats;
+	"monthly"?: TickFormats;
+	"quarterly"?: TickFormats;
+	"yearly"?: TickFormats;
+}
+
+/**
  * customize the axes components
  */
 export interface AxesOptions {
@@ -79,11 +123,4 @@ export interface AxesOptions {
 	bottom?: AxisOptions;
 	right?: AxisOptions;
 	top?: AxisOptions;
-}
-
-/**
- * customize time series scales
- */
-export interface TimeScaleOptions {
-	addSpaceOnEdges?: number;
 }
