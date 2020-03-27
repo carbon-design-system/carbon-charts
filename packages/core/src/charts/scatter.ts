@@ -18,7 +18,6 @@ import {
 	Legend,
 	LayoutComponent,
 	TooltipScatter,
-	Skeleton,
 	SkeletonGrid
 } from "../components/index";
 

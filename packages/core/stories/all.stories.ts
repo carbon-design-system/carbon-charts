@@ -11,22 +11,22 @@ import { dataExistsFn } from "../src/components/axes/axis";
 
 ////////////
 const chartsAcc = [
-	"Barchart (x: labels, y: lin)", // <--
-	"Barchart with fixed domain (x: labels, y: lin)", // <--
-	"Barchart grouped with 0 (x: labels, y: lin)",
-	"Stacked bar (x: time, y: lin)", // <--
-	"Barchart horizontal (x: lin, y: time)",
+	// "Barchart (x: labels, y: lin)", // <--
+	// "Barchart with fixed domain (x: labels, y: lin)", // <--
+	// "Barchart grouped with 0 (x: labels, y: lin)",
+	// "Stacked bar (x: time, y: lin)", // <--
+	// "Barchart horizontal (x: lin, y: time)",
 
-	"Bubbleplot (x: time, y: lin)",
+	// "Bubbleplot (x: time, y: lin)",
 	"Scatter (x: labels, y: lin)", // <--
 
-	"Donutchart",
+	// "Donutchart",
 
-	"Linechart (x: time, y: lin)",
+	// "Linechart (x: time, y: lin)",
 
-	"Piechart",
+	// "Piechart",
 
-	"Step (x: labels, y: lin)",
+	// "Step (x: labels, y: lin)",
 ];
 const testDemoGroups = Tools.clone(storybookDemoGroups).map(demoGroup => {
 	demoGroup.demos = demoGroup.demos.filter(demo => chartsAcc.includes(demo.title));
