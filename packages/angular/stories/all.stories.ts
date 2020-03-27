@@ -3,10 +3,10 @@ import { withKnobs, object } from "@storybook/addon-knobs";
 
 import { ChartsModule } from "../src/charts.module";
 
-import { demoGroups } from "@carbon/charts/demo/demo-data";
+import { demoGroups } from "@carbon/charts/demo/data";
 
 const getTemplate = demo => `
-	<div class="container">
+	<div class="container theme--white">
 		<h3>
 			<b>Component:</b>
 			<span class="bx--tag bx--tag--green component-name">${demo.chartType.angular}</span>
@@ -40,7 +40,9 @@ const getTemplate = demo => `
 // Loop through all demo groups
 demoGroups.forEach(demoGroup => {
 	// Create story group for each demo group
-	const groupStories = storiesOf(demoGroup.title, module).addDecorator(withKnobs);
+	const groupStories = storiesOf(demoGroup.title, module).addDecorator(
+		withKnobs({ escapeHTML: false })
+	);
 
 	// Loop through the demos for the group
 	demoGroup.demos.forEach(demo => {

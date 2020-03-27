@@ -3,12 +3,14 @@ import { withKnobs, object } from '@storybook/addon-knobs';
 
 import * as ChartComponents from "../src/index";
 
-import { demoGroups } from "@carbon/charts/demo/demo-data";
+import { demoGroups } from "@carbon/charts/demo/data";
 
 // Loop through all demo groups
 demoGroups.forEach(demoGroup => {
 	// Create story group for each demo group
-	const groupStories = storiesOf(demoGroup.title, module).addDecorator(withKnobs);
+	const groupStories = storiesOf(demoGroup.title, module).addDecorator(
+		withKnobs({ escapeHTML: false })
+	);
 
 	// Loop through the demos for the group
 	demoGroup.demos.forEach(demo => {
@@ -26,7 +28,7 @@ demoGroups.forEach(demoGroup => {
 				}
 			},
 			template: `
-				<div class="container">
+				<div class="container theme--white">
 					<h3>
 						<b>Component:</b>
 						<span class="bx--tag bx--tag--green component-name">${demo.chartType.vue}</span>

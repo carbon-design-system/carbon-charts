@@ -5,7 +5,7 @@ import { createChartHolder } from "./tools";
 
 import { ChartData } from "../interfaces";
 
-import { groupedBarData, groupedBarOptions } from "../../demo/demo-data";
+import { groupedBarData, groupedBarOptions } from "../../demo/data";
 
 export const data = groupedBarData as ChartData;
 export const options = Object.assign(groupedBarOptions, {
