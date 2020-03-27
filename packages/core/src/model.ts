@@ -2,6 +2,7 @@
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
 import * as colorPalettes from "./services/colorPalettes";
+import { Events } from "./interfaces";
 
 // D3
 import { scaleOrdinal } from "d3-scale";
@@ -181,7 +182,7 @@ export class ChartModel {
 		}
 
 		// dispatch legend filtering event with the status of all the dataLabels
-		this.services.events.dispatchEvent("legend-items-update", {
+		this.services.events.dispatchEvent(Events.Legend.ITEMS_UPDATE, {
 			dataLabels
 		});
 
