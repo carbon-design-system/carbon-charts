@@ -11,10 +11,8 @@ import {
 	scaleTime,
 	scaleLog
 } from "d3-scale";
-import { min, extent, merge, sum } from "d3-array";
+import { extent, sum } from "d3-array";
 import { map, values } from "d3-collection";
-import { timeFormatDefaultLocale } from "d3-time-format";
-import englishLocale from "d3-time-format/locale/en-US.json";
 
 // Misc
 import {
@@ -32,7 +30,10 @@ import {
 	subHours,
 	differenceInMinutes,
 	addMinutes,
-	subMinutes
+	subMinutes,
+	differenceInSeconds,
+	subSeconds,
+	addSeconds
 } from "date-fns";
 
 function addPaddingInDomain([lower, upper]: number[], paddingRatio: number) {
@@ -318,6 +319,50 @@ export class CartesianScales extends Service {
 		}
 
 		domain = extent(allDataValues);
+
+		if (axisOptions.scaleType === ScaleTypes.TIME) {
+			const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
+
+			if (spaceToAddToEdges) {
+				const startDate = new Date(domain[0]);
+				const endDate = new Date(domain[1]);
+
+				if (differenceInYears(endDate, startDate) > 1) {
+					return [subYears(startDate, spaceToAddToEdges), addYears(endDate, spaceToAddToEdges)];
+				}
+
+				if (differenceInMonths(endDate, startDate) > 1) {
+					return [subMonths(startDate, spaceToAddToEdges), addMonths(endDate, spaceToAddToEdges)];
+				}
+
+				if (differenceInDays(endDate, startDate) > 1) {
+					return [subDays(startDate, spaceToAddToEdges), addDays(endDate, spaceToAddToEdges)];
+				}
+
+				if (differenceInHours(endDate, startDate) > 1) {
+					return [subHours(startDate, spaceToAddToEdges), addHours(endDate, spaceToAddToEdges)];
+				}
+
+				if (differenceInMinutes(endDate, startDate) > 30) {
+					return [subMinutes(startDate, spaceToAddToEdges * 30), addMinutes(endDate, spaceToAddToEdges * 30)];
+				}
+
+				if (differenceInMinutes(endDate, startDate) > 1) {
+					return [subMinutes(startDate, spaceToAddToEdges), addMinutes(endDate, spaceToAddToEdges)];
+				}
+
+				if (differenceInSeconds(endDate, startDate) > 15) {
+					return [subSeconds(startDate, spaceToAddToEdges * 15), addSeconds(endDate, spaceToAddToEdges * 15)];
+				}
+
+				if (differenceInSeconds(endDate, startDate) > 1) {
+					return [subSeconds(startDate, spaceToAddToEdges), addSeconds(endDate, spaceToAddToEdges)];
+				}
+
+				return [startDate, endDate];
+			}
+		}
+
 		domain = addPaddingInDomain(domain, Configuration.axis.paddingRatio);
 		if (scaleType === ScaleTypes.TIME) {
 			domain = domain.map(d => new Date(d));
@@ -336,13 +381,6 @@ export class CartesianScales extends Service {
 
 		const scaleType = Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
 		this.scaleTypes[axisPosition] = scaleType;
-
-		// Set the date/time locale
-		if (scaleType === ScaleTypes.TIME) {
-			const timeLocale = Tools.getProperty(options, "locale", "time") || englishLocale;
-
-			timeFormatDefaultLocale(timeLocale);
-		}
 
 		let scale;
 		if (scaleType === ScaleTypes.TIME) {

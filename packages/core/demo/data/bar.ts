@@ -1,5 +1,4 @@
-// Demo turkish locale for simple bar time-series
-const turkishLocale = require("d3-time-format/locale/tr-TR.json");
+import trLocaleObject from "date-fns/locale/tr/index";
 
 export const groupedBarData = [
 	{ group: "Dataset 1", key: "Qty", value: 65000 },
@@ -124,9 +123,7 @@ export const simpleBarTimeSeriesOptions = {
 			scaleType: "time",
 		}
 	},
-	locale: {
-		time: turkishLocale
-	}
+	timeScale: { "localeObject": trLocaleObject }
 };
 
 // Horizontal simple time series

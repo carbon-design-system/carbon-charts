@@ -5,6 +5,7 @@ import * as lineDemos from "./line";
 import * as pieDemos from "./pie";
 import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
+import * as timeSeriesAxisDemos from "./time-series-axis";
 
 export * from "./bar";
 export * from "./bubble";
@@ -247,6 +248,71 @@ let allDemoGroups = [
 				data: stepDemos.stepTimeSeriesData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: true
+			}
+		]
+	},
+	{
+		title: "Time series axis",
+		demos: [
+			{
+				options: timeSeriesAxisDemos.lineTimeSeries15secondsOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesData15seconds,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: timeSeriesAxisDemos.lineTimeSeriesMinuteOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataMinute,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: timeSeriesAxisDemos.lineTimeSeries30minutesOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesData30minutes,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: timeSeriesAxisDemos.lineTimeSeriesHourlyDefaultLocaleOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataHourlyDefaultTicksFormats,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: timeSeriesAxisDemos.lineTimeSeriesHourlyCustomTicksFormatsOptions,
+				data: timeSeriesAxisDemos.lineTimeSeriesDataHourlyCustomTicksFormats,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataDaily,
+				options: timeSeriesAxisDemos.lineTimeSeriesDailyOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataWeekly,
+				options: timeSeriesAxisDemos.lineTimeSeriesWeeklyOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataMonthlyDefaultLocale,
+				options: timeSeriesAxisDemos.lineTimeSeriesMonthlyDefaultLocaleOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataMonthlyCustomLocale,
+				options: timeSeriesAxisDemos.lineTimeSeriesMonthlyCustomLocaleOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataQuarterly,
+				options: timeSeriesAxisDemos.lineTimeSeriesQuarterlyOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataYearly,
+				options: timeSeriesAxisDemos.lineTimeSeriesYearlyOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataSingleDatum,
+				options: timeSeriesAxisDemos.lineTimeSeriesSingleDatumOptions,
+				chartType: chartTypes.LineChart
 			}
 		]
 	}

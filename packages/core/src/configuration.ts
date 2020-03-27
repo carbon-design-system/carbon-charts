@@ -20,6 +20,7 @@ import {
 	LegendPositions,
 	StackedBarOptions
 } from "./interfaces";
+import enUSLocaleObject from "date-fns/locale/en-US/index";
 
 /*
  *****************************
@@ -67,7 +68,7 @@ export const grid: GridOptions = {
 export const baseTooltip: TooltipOptions = {
 	datapoint: {
 		horizontalOffset: 10,
-		enabled: true,
+		enabled: true
 	},
 	title: {
 		verticalOffset: .75,
@@ -109,16 +110,29 @@ const axes: AxesOptions = {
 	}
 };
 
-const timeScale: TimeScaleOptions = {
+export const timeScale: TimeScaleOptions = {
 	addSpaceOnEdges: 1,
+	showDayName: false,
+	localeObject: enUSLocaleObject,
+	timeIntervalFormats: {
+		"15seconds": { primary: "MMM d, pp", secondary: "pp" },
+		"minute": { primary: "MMM d, p", secondary: "p" },
+		"30minutes": { primary: "MMM d, p", secondary: "p" },
+		"hourly": { primary: "MMM d, hh a", secondary: "hh a" },
+		"daily": { primary: "MMM d", secondary: "d" },
+		"weekly": { primary: "eee, MMM d", secondary: "eee" },
+		"monthly": { primary: "MMM yyyy", secondary: "MMM" },
+		"quarterly": { primary: "QQQ ''yy", secondary: "QQQ" },
+		"yearly": { primary: "yyyy", secondary: "yyyy" }
+	}
 };
 
 /**
  * Base chart options common to any chart
  */
 const chart: BaseChartOptions = {
-	width: "100%",
-	height: "100%",
+	width: null,
+	height: null,
 	resizable: true,
 	tooltip: baseTooltip,
 	legend,

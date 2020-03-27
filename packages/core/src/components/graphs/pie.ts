@@ -138,7 +138,6 @@ export class Pie extends Component {
 			})
 			// Calculate dimensions in order to transform
 			.datum(function(d) {
-				console.log("d", d)
 				const textLength = this.getComputedTextLength();
 				d.textOffsetX = textLength / 2;
 				d.textOffsetY = parseFloat(getComputedStyle(this).fontSize) / 2;
