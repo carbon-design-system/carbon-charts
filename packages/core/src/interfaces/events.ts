@@ -47,3 +47,11 @@ export enum Line {
 	POINT_CLICK = "scatter-click",
 	POINT_MOUSEOUT = "scatter-mouseout"
 }
+
+/**
+ * enum of all tooltip events
+ */
+export enum Tooltip {
+	SHOW = "show-tooltip",
+	HIDE = "hide-tooltip"
+}
