@@ -180,6 +180,11 @@ export class ChartModel {
 			});
 		}
 
+		// dispatch legend filtering event with the status of all the dataLabels
+		this.services.events.dispatchEvent("legend-items-update", {
+			dataLabels
+		});
+
 		// Update model
 		this.set({
 			dataLabels
