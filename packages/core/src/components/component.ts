@@ -7,7 +7,7 @@ import { Tools } from "../tools";
 import { select } from "d3-selection";
 
 // import the settings for the css prefix
-import settings from "carbon-components/src/globals/js/settings";
+import settings from "carbon-components/es/globals/js/settings";
 
 
 export class Component {
