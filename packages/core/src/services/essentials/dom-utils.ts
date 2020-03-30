@@ -1,5 +1,6 @@
 // Internal Imports
 import { Service } from "../service";
+import { Events } from "./../../interfaces";
 
 // D3 Imports
 import { select, Selection } from "d3-selection";
@@ -108,7 +109,7 @@ export class DOMUtils extends Service {
 				width: Tools.getProperty(svgSelector.node(), "width", "baseVal", "value"),
 				height: Tools.getProperty(svgSelector.node(), "height", "baseVal", "value")
 			};
-			
+
 			validateAndSetDimensions(nativeDimensions);
 		} catch (e) {
 			validateAndSetDimensions(clientDimensions);
@@ -218,7 +219,7 @@ export class DOMUtils extends Service {
 				containerWidth = holder.clientWidth;
 				containerHeight = holder.clientHeight;
 
-				this.services.events.dispatchEvent("chart-resize");
+				this.services.events.dispatchEvent(Events.Chart.RESIZE);
 			}
 		}, 12.5);
 

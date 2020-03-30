@@ -146,7 +146,7 @@ export class ChartModel {
 		this.updateAllDataLabels();
 		this.setColorScale();
 
-		this.services.events.dispatchEvent("model-update");
+		this.services.events.dispatchEvent(Events.Model.UPDATE);
 	}
 
 	setUpdateCallback(cb: Function) {

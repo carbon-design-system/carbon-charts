@@ -1,4 +1,19 @@
 /**
+ * enum of all events related to the chart on the DOM
+ */
+export enum Chart {
+	RENDER_FINISHED = "render-finished",
+	RESIZE = "chart-resize"
+}
+
+/**
+ * enum of all events related to the chart model
+ */
+export enum Model {
+	UPDATE = "model-update"
+}
+
+/**
  * enum of all axis-related events
  */
 export enum Axis {
@@ -48,6 +63,13 @@ export enum Line {
 	POINT_MOUSEOUT = "scatter-mouseout"
 }
 
+/**
+ * enum of all tooltip events
+ */
+export enum Tooltip {
+	SHOW = "show-tooltip",
+	HIDE = "hide-tooltip"
+}
 
 /**
  * enum of all legend related events
