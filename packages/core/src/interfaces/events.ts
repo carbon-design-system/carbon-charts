@@ -47,3 +47,14 @@ export enum Line {
 	POINT_CLICK = "scatter-click",
 	POINT_MOUSEOUT = "scatter-mouseout"
 }
+
+
+/**
+ * enum of all legend related events
+ */
+export enum Legend {
+	ITEM_HOVER = "legend-item-onhover",
+	ITEM_CLICK = "legend-item-onclick",
+	ITEM_MOUSEOUT = "legend-item-onmouseout",
+	ITEMS_UPDATE = "legend-items-update"
+}
