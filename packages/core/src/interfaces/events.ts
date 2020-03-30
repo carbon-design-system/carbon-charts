@@ -70,3 +70,13 @@ export enum Tooltip {
 	SHOW = "show-tooltip",
 	HIDE = "hide-tooltip"
 }
+
+/**
+ * enum of all legend related events
+ */
+export enum Legend {
+	ITEM_HOVER = "legend-item-onhover",
+	ITEM_CLICK = "legend-item-onclick",
+	ITEM_MOUSEOUT = "legend-item-onmouseout",
+	ITEMS_UPDATE = "legend-items-update"
+}
