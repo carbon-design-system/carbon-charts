@@ -8,7 +8,7 @@ import { ChartModel } from "../../model";
 import Position, { PLACEMENTS } from "@carbon/utils-position";
 
 // import the settings for the css prefix
-import settings from "carbon-components/src/globals/js/settings";
+import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { select, mouse, event } from "d3-selection";
