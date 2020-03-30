@@ -52,7 +52,7 @@ export const lineData = {
 			]
 		},
 		{
-			label: "Dataset 6",
+			label: "Dataset's 6",
 			data: [
 				0,
 				20000,
@@ -65,7 +65,7 @@ export const lineData = {
 };
 
 export const lineOptions = {
-	title: "Line (discrete)",
+	title: "Line (discrete) - long long long long long long long long long long long long long long  time format ('MMM d, hh a and 'hh a')",
 	axes: {
 		bottom: {
 			title: "2018 Annual Sales Figures",

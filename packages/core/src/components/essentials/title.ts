@@ -35,22 +35,22 @@ export class Title extends Component {
 			const substringIndex = this.getSubstringIndex(title.node(), 0, titleString.length - 1, truncatedSize);
 
 			// use the substring as the title
-			title.text(titleString.substring(0, substringIndex - 1))
+			title.html(titleString.substring(0, substringIndex - 1))
 				.append("tspan")
 				.text("...");
 
 			// add events for displaying the tooltip with the title
 			const self = this;
 			title
-				.on("mouseenter", function() {
+				.on("mouseenter", function () {
 					self.services.events.dispatchEvent("show-tooltip", {
 						hoveredElement: title,
 						type: TooltipTypes.TITLE
 					});
 				})
-				.on("mouseout", function() {
+				.on("mouseout", function () {
 					self.services.events.dispatchEvent("hide-tooltip", {
-						hoveredElement: title,
+						hoveredElement: title
 					});
 				});
 		}
@@ -62,7 +62,7 @@ export class Title extends Component {
 		const text = DOMUtils.appendOrSelect(svg, "text.title");
 		text.attr("x", 0)
 			.attr("y", 20)
-			.text(this.model.getOptions().title);
+			.html(this.model.getOptions().title);
 
 		// title needs to first render so that we can check for overflow
 		this.truncateTitle();
