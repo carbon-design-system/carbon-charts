@@ -2,7 +2,11 @@
 import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { LegendOrientations, Roles } from "../../interfaces";
+import {
+	LegendOrientations,
+	Roles,
+	Events
+} from "../../interfaces";
 import { DOMUtils } from "../../services";
 
 // D3 Imports
@@ -176,7 +180,7 @@ export class Legend extends Component {
 
 		svg.selectAll("g.legend-item")
 			.on("mouseover", function () {
-				self.services.events.dispatchEvent("legend-item-onhover", {
+				self.services.events.dispatchEvent(Events.Legend.ITEM_HOVER, {
 					hoveredElement: select(this)
 				});
 
@@ -195,7 +199,7 @@ export class Legend extends Component {
 					.lower();
 			})
 			.on("click", function () {
-				self.services.events.dispatchEvent("legend-item-onclick", {
+				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
 					clickedElement: select(this)
 				});
 
@@ -208,7 +212,7 @@ export class Legend extends Component {
 				const hoveredItem = select(this);
 				hoveredItem.select("rect.hover-stroke").remove();
 
-				self.services.events.dispatchEvent("legend-item-onmouseout", {
+				self.services.events.dispatchEvent(Events.Legend.ITEM_MOUSEOUT, {
 					hoveredElement: hoveredItem
 				});
 			});
