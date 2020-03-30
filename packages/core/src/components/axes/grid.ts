@@ -160,7 +160,7 @@ export class Grid extends Component {
 
 			const activeGridline = self.getActiveGridline(pos);
 			if (activeGridline.empty()) {
-				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {});
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 				return;
 			}
 
