@@ -17,10 +17,11 @@ Please take a moment to review this document in order to make the contribution p
 
 
 ## Run Charts in Local Environment
-We use Lerna to manage all packages in Charts.
+We use Lerna to manage all `@carbon/charts` related packages.
 
 **These are the Node & NPM versions we recommend:**
-- Node Version: `8.11.4`
+- Node Version: `12.16.1`
+- Yarn Version: `1.6.0`
 - NPM Version: `6.4.1`
 
 To get charts running locally on your machine:
@@ -29,13 +30,7 @@ To get charts running locally on your machine:
 3. Run `yarn` (this would install all packages and get **lerna** setup)
 4. Run `yarn build` to do an initial build of the monorepo and correctly link all the packages
 
-The **core** package (vanilla JS) demos can be launched using:
-
-```sh
-yarn run demo:server
-```
-
-All wrapper packages (currently **react** & **angular**) use Storybook for demos:
+All packages use Storybook for demos:
 
 ```sh
 yarn run storybook

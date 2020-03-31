@@ -2,6 +2,7 @@
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
 import * as colorPalettes from "./services/colorPalettes";
+import { Events } from "./interfaces";
 
 // D3
 import { scaleOrdinal } from "d3-scale";
@@ -274,7 +275,7 @@ export class ChartModel {
 		this.updateAllDataGroups();
 
 		this.setColorScale();
-		this.services.events.dispatchEvent("model-update");
+		this.services.events.dispatchEvent(Events.Model.UPDATE);
 	}
 
 	setUpdateCallback(cb: Function) {
@@ -310,6 +311,11 @@ export class ChartModel {
 				dataGroups[i].status = (group.name === changedLabel ? ACTIVE : DISABLED);
 			});
 		}
+
+		// dispatch legend filtering event with the status of all the dataLabels
+		this.services.events.dispatchEvent(Events.Legend.ITEMS_UPDATE, {
+			dataGroups
+		});
 
 		// Update model
 		this.set({

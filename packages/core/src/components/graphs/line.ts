@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
-import { Roles } from "../../interfaces";
+import { Roles, Events } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -10,13 +10,12 @@ import { line } from "d3-shape";
 export class Line extends Component {
 	type = "line";
 
-	// TODORF - Remove these listeners in destroy()
 	init() {
 		const { events } = this.services;
 		// Highlight correct line legend item hovers
-		events.addEventListener("legend-item-onhover", this.handleLegendOnHover);
+		events.addEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
 		// Un-highlight lines on legend item mouseouts
-		events.addEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
+		events.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
 
 	render(animate = true) {
@@ -111,7 +110,7 @@ export class Line extends Component {
 
 		// Remove legend listeners
 		const eventsFragment = this.services.events;
-		eventsFragment.removeEventListener("legend-item-onhover", this.handleLegendOnHover);
-		eventsFragment.removeEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
+		eventsFragment.removeEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
+		eventsFragment.removeEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
 }

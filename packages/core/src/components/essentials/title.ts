@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes } from "./../../interfaces";
+import { TooltipTypes, Events } from "./../../interfaces";
 
 export class Title extends Component {
 	type = "title";
@@ -43,14 +43,14 @@ export class Title extends Component {
 			const self = this;
 			title
 				.on("mouseenter", function() {
-					self.services.events.dispatchEvent("show-tooltip", {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						hoveredElement: title,
 						type: TooltipTypes.TITLE
 					});
 				})
 				.on("mouseout", function() {
-					self.services.events.dispatchEvent("hide-tooltip", {
-						hoveredElement: title,
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+						hoveredElement: title
 					});
 				});
 		}
