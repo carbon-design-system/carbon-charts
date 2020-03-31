@@ -217,7 +217,7 @@ export class ChartModel {
 
 		return stack().keys(dataGroupNames)(dataValuesGroupedByKeys)
 			.map((series, i) => {
-				// Add data group names to each serie
+				// Add data group names to each series
 				return Object.keys(series)
 					.filter((key: any) => !isNaN(key))
 					.map(key => {
