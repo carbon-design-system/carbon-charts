@@ -40,8 +40,8 @@ export class SkeletonGrid extends Skeleton {
 			.attr("width", xScaleEnd - xScaleStart)
 			.attr("height", yScaleEnd - yScaleStart);
 
-		DOMUtils.appendOrSelect(this.backdrop, "g.x.grid-skeleton");
-		DOMUtils.appendOrSelect(this.backdrop, "g.y.grid-skeleton");
+		DOMUtils.appendOrSelect(this.backdrop, "g.x.skeleton");
+		DOMUtils.appendOrSelect(this.backdrop, "g.y.skeleton");
 
 		this.drawXGrid(animate);
 		this.drawYGrid(animate);
@@ -62,7 +62,7 @@ export class SkeletonGrid extends Skeleton {
 			.ticks(ticksNumber);
 
 		const xGridG = svg
-			.select(".x.grid-skeleton")
+			.select(".x.skeleton")
 			.attr("transform", `translate(${-x}, ${height})`);
 
 		if (animate) {
@@ -89,7 +89,7 @@ export class SkeletonGrid extends Skeleton {
 			.ticks(ticksNumber);
 
 		const yGridG = svg
-			.select(".y.grid-skeleton")
+			.select(".y.skeleton")
 			.attr("transform", `translate(0, ${-y})`);
 
 		if (animate) {
