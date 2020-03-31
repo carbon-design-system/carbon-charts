@@ -15,17 +15,18 @@ export class Meter extends Component {
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
 		const dataset = this.model.getDisplayData();
+		const width = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true }).width;
 
 		// each meter has a scale for the value but no visual axis
 		const xScale = scaleLinear()
 			.domain([0, 100])
-			.range([0, options.width]);
+			.range([0, width]);
 
 		// draw the container to hold the value
 		DOMUtils.appendOrSelect(svg, "rect.container")
 			.attr("x", 0 )
 			.attr("y", 0 )
-			.attr("width", options.width)
+			.attr("width", width)
 			.attr("height", options.meter.height);
 
 		// rect with the value binded
@@ -65,8 +66,12 @@ export class Meter extends Component {
 
 		// draw the peak
 		const peakValue = Tools.getProperty(options, "meter", "peak");
-		// we only want to use peak value as a data source if it is under 100
-		const data = peakValue && peakValue <= 100 ? [peakValue] : [] ;
+
+		// update the peak if it is less than the value, it should be equal to the value
+		const updatedPeak = peakValue && peakValue < dataset.data ? dataset.data : peakValue;
+
+		// we only want to use peak value as a data source if it is under 100 (part to whole comparison)
+		const data = updatedPeak && updatedPeak <= 100 ? [updatedPeak] : [];
 
 		// if a peak is supplied within the domain, we want to render it
 		const peak = svg.selectAll("line.peak")
@@ -79,8 +84,8 @@ export class Meter extends Component {
 			.attr("y1", 0)
 			.attr("y2", options.meter.height)
 			.transition(this.services.transitions.getTransition("peak-line-update", animate))
-			.attr("x1", xScale(peakValue))
-			.attr("x2", xScale(peakValue));
+			.attr("x1", d => xScale(d))
+			.attr("x2", d => xScale(d));
 
 		peak.exit().remove();
 	}
