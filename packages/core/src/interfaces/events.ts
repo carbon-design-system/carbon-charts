@@ -89,3 +89,4 @@ export enum Legend {
 	ITEM_CLICK = "legend-item-onclick",
 	ITEM_MOUSEOUT = "legend-item-onmouseout",
 	ITEMS_UPDATE = "legend-items-update"
+}
