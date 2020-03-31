@@ -18,12 +18,12 @@ import {
 	AxisTooltipOptions,
 	BarTooltipOptions,
 	LegendOptions,
-	ChartTheme,
 	LegendPositions,
 	StackedBarOptions,
 	// Advanced Charts
 	NetworkChartOptions,
-} from "./interfaces/index";
+} from "./interfaces";
+import enUSLocaleObject from "date-fns/locale/en-US/index";
 
 /*
  *****************************
@@ -86,7 +86,7 @@ export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip,
 	}
 } as AxisTooltipOptions);
 
-export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip , {
+export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip, {
 	datapoint: {
 		verticalOffset: 4
 	},
@@ -95,20 +95,47 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartToolt
 	}
 } as BarTooltipOptions);
 
-// We setup no axes by default, the TwoDimensionalAxes component
-// Will setup axes options based on what user provides
-const axes: AxesOptions = { };
+// These options will be managed by Tools.mergeDefaultChartOptions
+// by removing the ones the user is not providing,
+// and by TwoDimensionalAxes.
+const axes: AxesOptions = {
+	top: {
+		includeZero: true
+	},
+	bottom: {
+		includeZero: true
+	},
+	left: {
+		includeZero: true
+	},
+	right: {
+		includeZero: true
+	}
+};
 
-const timeScale: TimeScaleOptions = {
+export const timeScale: TimeScaleOptions = {
 	addSpaceOnEdges: 1,
+	showDayName: false,
+	localeObject: enUSLocaleObject,
+	timeIntervalFormats: {
+		"15seconds": { primary: "MMM d, pp", secondary: "pp" },
+		"minute": { primary: "MMM d, p", secondary: "p" },
+		"30minutes": { primary: "MMM d, p", secondary: "p" },
+		"hourly": { primary: "MMM d, hh a", secondary: "hh a" },
+		"daily": { primary: "MMM d", secondary: "d" },
+		"weekly": { primary: "eee, MMM d", secondary: "eee" },
+		"monthly": { primary: "MMM yyyy", secondary: "MMM" },
+		"quarterly": { primary: "QQQ ''yy", secondary: "QQQ" },
+		"yearly": { primary: "yyyy", secondary: "yyyy" }
+	}
 };
 
 /**
  * Base chart options common to any chart
  */
 const chart: BaseChartOptions = {
-	width: "100%",
-	height: "100%",
+	width: null,
+	height: null,
 	resizable: true,
 	tooltip: baseTooltip,
 	legend,
@@ -308,7 +335,8 @@ export const axis = {
 	ticks: {
 		number: 7,
 		rotateIfSmallerThan: 30
-	}
+	},
+	paddingRatio: 0.1
 };
 
 export const spacers = {
@@ -316,3 +344,6 @@ export const spacers = {
 		size: 24
 	}
 };
+
+export const tickSpaceRatioVertical = 2.5;
+export const tickSpaceRatioHorizontal = 3.5;

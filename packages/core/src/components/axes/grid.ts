@@ -6,7 +6,7 @@ import { DOMUtils } from "../../services";
 // D3 Imports
 import { axisBottom, axisLeft } from "d3-axis";
 import { mouse, select } from "d3-selection";
-import { TooltipTypes } from "../../interfaces";
+import { TooltipTypes, Events } from "../../interfaces";
 
 export class Grid extends Component {
 	type = "grid";
@@ -160,7 +160,7 @@ export class Grid extends Component {
 
 			const activeGridline = self.getActiveGridline(pos);
 			if (activeGridline.empty()) {
-				self.services.events.dispatchEvent("hide-tooltip", {});
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 				return;
 			}
 
@@ -176,7 +176,7 @@ export class Grid extends Component {
 				highlightItems = self.services.cartesianScales.getDataFromDomain(d);
 			});
 
-			self.services.events.dispatchEvent("show-tooltip", {
+			self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 				hoveredElement,
 				multidata: highlightItems,
 				type: TooltipTypes.GRIDLINE
@@ -186,7 +186,7 @@ export class Grid extends Component {
 			svg.selectAll(".x.grid .tick")
 			.classed("active", false);
 
-			self.services.events.dispatchEvent("hide-tooltip", {});
+			self.services.events.dispatchEvent(Events.Tooltip.HIDE, {});
 		});
 	}
 

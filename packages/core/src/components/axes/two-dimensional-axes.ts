@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { AxisPositions, ScaleTypes } from "../../interfaces";
+import { AxisPositions, ScaleTypes, AxesOptions } from "../../interfaces";
 import { Axis } from "./axis";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
@@ -19,38 +19,15 @@ export class TwoDimensionalAxes extends Component {
 
 	render(animate = false) {
 		const axes = {};
-
 		const axisPositions = Object.keys(AxisPositions);
 		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
 
-		if (axesOptions) {
-			let primaryAxisOptions, secondaryAxisOptions;
-			axisPositions.forEach(axisPosition => {
-				const axisOptions = axesOptions[AxisPositions[axisPosition]];
-				if (axisOptions) {
-					axes[AxisPositions[axisPosition]] = true;
-
-					if (axisOptions.primary === true) {
-						primaryAxisOptions = axisOptions;
-					} else if (axisOptions.secondary === true) {
-						secondaryAxisOptions = axisOptions;
-					}
-				}
-			});
-		} else {
-			this.model.getOptions().axes = {
-				left: {
-					primary: true
-				},
-				bottom: {
-					secondary: true,
-					type: this.model.getDisplayData().labels ? ScaleTypes.LABELS : undefined
-				}
-			};
-
-			axes[AxisPositions.LEFT] = true;
-			axes[AxisPositions.BOTTOM] = true;
-		}
+		axisPositions.forEach(axisPosition => {
+			const axisOptions = axesOptions[AxisPositions[axisPosition]];
+			if (axisOptions) {
+				axes[AxisPositions[axisPosition]] = true;
+			}
+		});
 
 		this.configs.axes = axes;
 
