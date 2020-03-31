@@ -5,17 +5,7 @@ import { ChartConfig, AreaChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
-import {
-	Grid,
-	Area,
-	Scatter,
-	TwoDimensionalAxes,
-	// the imports below are needed because of typescript bug (error TS4029)
-	Tooltip,
-	Legend,
-	LayoutComponent,
-	TooltipScatter
-} from "../components/index";
+import { Grid, Area, TwoDimensionalAxes } from "../components/index";
 
 export class AreaChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<AreaChartOptions>) {
@@ -45,7 +35,8 @@ export class AreaChart extends AxisChart {
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents
 		);
-		components.push(new TooltipScatter(this.model, this.services));
+		// TODO add tooltip
+		// components.push(new TooltipArea(this.model, this.services));
 		return components;
 	}
 }
