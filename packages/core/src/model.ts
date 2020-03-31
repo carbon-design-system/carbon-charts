@@ -105,6 +105,10 @@ export class ChartModel {
 		return this.get("data");
 	}
 
+	isDataEmpty() {
+		return !this.getData().length;
+	}
+
 	/**
 	 *
 	 * @param newData The new raw data to be set
