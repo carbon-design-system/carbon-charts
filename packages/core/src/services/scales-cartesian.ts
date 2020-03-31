@@ -213,7 +213,7 @@ export class CartesianScales extends Service {
 					activePoints.push(
 						{
 							datasetLabel: dataset.label,
-							value: dataset.data[index],
+							value: dataset.data[index]
 						}
 					);
 				});
@@ -237,7 +237,7 @@ export class CartesianScales extends Service {
 						activePoints.push(
 							Object.assign({
 								datasetLabel: sharedLabel,
-								value: item.value,
+								value: item.value
 							}, item)
 						);
 					});

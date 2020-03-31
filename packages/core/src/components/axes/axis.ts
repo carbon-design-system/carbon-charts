@@ -198,7 +198,6 @@ export class Axis extends Component {
 		}
 
 		// Apply new axis to the axis element
-		// draw ticks
 		if (!animate || !axisRefExists) {
 			axisRef = axisRef.call(axis);
 		} else {
