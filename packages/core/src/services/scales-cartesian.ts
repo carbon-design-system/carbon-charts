@@ -284,7 +284,6 @@ export class CartesianScales extends Service {
 			return map(displayData, d => d[identifier]).keys();
 		}
 
-
 		// Get the extent of the domain
 		let domain;
 		let allDataValues;
@@ -383,12 +382,4 @@ export class CartesianScales extends Service {
 
 		return scale;
 	}
-}
-
-// data is { labels: ["", "", ...], datasets: [ {label: "", data: []}, {}, ...] }
-export function dataExistsFn(data: { labels: string[], datasets: any[] }) {
-	return Object.entries(data).reduce((acc, [key, value]) => {
-		const hasValues = value.length > 0;
-		return acc && hasValues;
-	}, true);
 }

@@ -177,10 +177,9 @@ export class Axis extends Component {
 
 		// Position the axis title
 		// check that data exists, if they don't, doesn't show the title axis
-		const existsData = dataExistsFn(this.model.getData());
 		if (axisOptions.title) {
 			const axisTitleRef = DOMUtils.appendOrSelect(container, `text.axis-title`)
-				.text(existsData ? axisOptions.title : "");
+				.text(this.model.isDataEmpty() ? "" : axisOptions.title);
 
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
@@ -233,11 +232,6 @@ export class Axis extends Component {
 					.transition(this.services.transitions.getTransition("axis-update"))
 					.call(axis);
 			}
-		}
-
-		// if axis bottom and domain is not valid (this check works only with time scale), set ticks opacity to 0
-		if (isTimeScaleType && !isValidDomain(scale.domain())) {
-			container.selectAll("g.ticks g.tick text").attr("opacity", 0);
 		}
 
 		invisibleAxisRef.call(axis);
@@ -351,16 +345,4 @@ export class Axis extends Component {
 			.on("mousemove", null)
 			.on("mouseout", null);
 	}
-}
-
-function isValidDomain(domain) {
-	return domain.every(d => d instanceof Date && !isNaN(d.getTime()));
-}
-
-// data is { labels: ["", "", ...], datasets: [ {label: "", data: []}, {}, ...] }
-export function dataExistsFn(data: { labels: string[], datasets: any[] }) {
-	return Object.entries(data).reduce((acc, [key, value]) => {
-		const hasValues = value.length > 0;
-		return acc && hasValues;
-	}, true);
 }

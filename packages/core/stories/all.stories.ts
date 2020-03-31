@@ -7,7 +7,6 @@ import * as storyUtils from "./utils";
 
 import "../demo/styles.scss";
 import { Tools } from "@carbon/charts/tools";
-import { dataExistsFn } from "../src/components/axes/axis";
 
 ////////////
 const chartsAcc = [
@@ -222,7 +221,6 @@ if (process.env.NODE_ENV !== "production") {
 				const chartObj = chart; // instantiated class
 				getDataButton.onclick = e => {
 					e.preventDefault();
-					const dataExists = dataExistsFn(chartObj.model.getData());
 
 					// const scaleLeftType = chartObj.model.services.cartesianScales.getScaleTypeByPosition("left");
 					// const scaleLeft = chartObj.model.services.cartesianScales.getScaleByPosition("left");
@@ -235,9 +233,10 @@ if (process.env.NODE_ENV !== "production") {
 					// console.log(`scaleBottomType: ${scaleBottomType}`);
 					// console.log(`  scaleBottom: [${scaleBottom.domain()}] -> [${scaleBottom.range()}]`);
 
+					const dataExists = !chartObj.model.isDataEmpty();
 
 					if (dataExists) {
-						chartObj.model.setData({ labels: [], datasets: [] });
+						chartObj.model.setData([]);
 						chartObj.model.setOptions({ legend: { enabled: true } });
 						getDataButton.innerHTML = "Get data";
 					} else {

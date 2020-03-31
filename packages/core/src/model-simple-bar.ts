@@ -6,7 +6,6 @@ import * as colorPalettes from "./services/colorPalettes";
 
 // D3 Imports
 import { scaleOrdinal } from "d3-scale";
-import { dataExistsFn } from "./components/axes/axis";
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */

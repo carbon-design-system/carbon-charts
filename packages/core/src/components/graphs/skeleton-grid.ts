@@ -1,5 +1,4 @@
 // MISC Imports
-import { dataExistsFn } from "../../services/scales-cartesian";
 import { Skeleton } from "./skeleton";
 import { DOMUtils } from "../../services";
 
@@ -13,8 +12,7 @@ export class SkeletonGrid extends Skeleton {
 	yScale: any;
 
 	render() {
-		const data = this.model.getData();
-		const areDataEmpty = !dataExistsFn(data);
+		const areDataEmpty = this.model.isDataEmpty();
 
 		// if data are empty, draw the skeleton,
 		// otherwise remove the skeleton
