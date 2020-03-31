@@ -7,7 +7,7 @@ import { select, Selection } from "d3-selection";
 import { Tools } from "../../tools";
 
 // import the settings for the css prefix
-import settings from "carbon-components/src/globals/js/settings";
+import settings from "carbon-components/es/globals/js/settings";
 
 // MISC
 import ResizeObserver from "resize-observer-polyfill";
