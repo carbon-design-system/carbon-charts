@@ -138,6 +138,9 @@ const chart: BaseChartOptions = {
 	legend,
 	style: {
 		prefix: "cc"
+	},
+	data: {
+		groupIdentifier: "group"
 	}
 };
 
@@ -215,6 +218,7 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
  */
 const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	bubble: {
+		radiusIdentifier: "radius",
 		radiusRange: (chartSize, data) => {
 			const smallerChartDimension = Math.min(chartSize.width, chartSize.height);
 			return [

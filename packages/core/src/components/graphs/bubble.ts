@@ -11,48 +11,42 @@ export class Bubble extends Scatter {
 	type = "bubble";
 
 	getRadiusScale(selection: Selection<any, any, any, any>) {
+		const options = this.model.getOptions();
+		const { radiusIdentifier } = options.bubble;
+
 		const data = selection.data();
 		// Filter out any null/undefined values
-		const allRadii = data.map(d => d.radius).filter(radius => radius);
-
-		const options = this.model.getOptions();
+		const allRadii = data.map(d => d[radiusIdentifier]).filter(radius => radius);
 		const chartSize = DOMUtils.getSVGElementSize(this.services.domUtils.getMainSVG(), { useAttr: true });
 
-		return scaleLinear().domain(extent(allRadii))
-			.range(options.bubble.radiusRange(chartSize, data));
+		// We need the ternary operator here in case the user
+		// doesn't provide radius values in data
+		const radiusDataIsValid = allRadii.length > 0;
+		const domain = radiusDataIsValid ? extent(allRadii) : [1, 1];
+		return scaleLinear().domain(domain)
+			.range(radiusDataIsValid ? options.bubble.radiusRange(chartSize, data) : [4, 4]);
 	}
 
 	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
 		// Chart options mixed with the internal configurations
 		const options = this.model.getOptions();
+		const { radiusIdentifier } = options.bubble;
 
 		const radiusScale = this.getRadiusScale(selection);
+
+		const { groupIdentifier } = options.data;
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		selection.raise()
 			.classed("dot", true)
 			.attr("cx", (d, i) => this.services.cartesianScales.getDomainValue(d, i))
 			.transition(this.services.transitions.getTransition("bubble-update-enter", animate))
 			.attr("cy", (d, i) => this.services.cartesianScales.getRangeValue(d, i))
-			.attr("r", d => radiusScale(d.radius))
-			.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label) as any)
+			// We need `|| 1` here in case the user doesn't provide radius values in data
+			.attr("r", d => radiusScale(d[radiusIdentifier] || 1))
+			.attr("fill", d => this.model.getFillColor(d[groupIdentifier], d[domainIdentifier], d))
 			.attr("fill-opacity", options.bubble.fillOpacity)
-			.attr("stroke", d => this.model.getStrokeColor(d.datasetLabel, d.label, d.value))
+			.attr("stroke", d => this.model.getStrokeColor(d[groupIdentifier], d[domainIdentifier], d))
 			.attr("opacity", 1);
-	}
-
-	// TODO - This method could be re-used in more graphs
-	addLabelsToDataPoints(d, index) {
-		// Chart options mixed with the internal configurations
-		const options = this.model.getOptions();
-
-		const { labels } = this.model.getDisplayData();
-
-		return d.data.map((datum, i) => ({
-			date: datum.date,
-			label: labels[i],
-			datasetLabel: d.label,
-			value: isNaN(datum) ? datum.value : datum,
-			radius: datum.radius || options.points.radius
-		}));
 	}
 }

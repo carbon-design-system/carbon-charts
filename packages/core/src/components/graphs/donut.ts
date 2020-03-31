@@ -51,7 +51,7 @@ export class Donut extends Pie {
 
 		let donutCenterFigure = Tools.getProperty(options, "donut", "center", "number");
 		if (!donutCenterFigure) {
-			donutCenterFigure = this.getDataList().reduce((accumulator, d) => {
+			donutCenterFigure = this.model.getDisplayData().reduce((accumulator, d) => {
 				return accumulator + d.value;
 			}, 0);
 		}

@@ -43,15 +43,6 @@ export class Pie extends Component {
 		eventsFragment.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
 
-	getDataList() {
-		const displayData = this.model.getDisplayData();
-		const dataset = displayData.datasets[0];
-		return dataset.data.map((datum, i) => ({
-			label: displayData.labels[i],
-			value: datum.value ? datum.value : datum
-		}));
-	}
-
 	getInnerRadius() {
 		const options = this.model.getOptions();
 		return options.pie.innerRadius;
@@ -60,8 +51,10 @@ export class Pie extends Component {
 	render(animate = true) {
 		const self = this;
 		const svg = this.getContainerSVG();
+
+		const displayData = this.model.getDisplayData();
 		const options = this.model.getOptions();
-		const dataList = this.getDataList();
+		const { groupIdentifier } = options.data;
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
@@ -82,14 +75,14 @@ export class Pie extends Component {
 			.padAngle(options.pie.padAngle);
 
 		// Sort pie layout data based off of the indecies the layout creates
-		const pieLayoutData = pieLayout(dataList)
+		const pieLayoutData = pieLayout(displayData)
 			.sort((a: any, b: any) => a.index - b.index);
 
 		// Update data on all slices
 		const slicesGroup = DOMUtils.appendOrSelect(svg, "g.slices")
 			.attr("role", Roles.GROUP);
 		const paths = slicesGroup.selectAll("path.slice")
-			.data(pieLayoutData, d => d.data.label);
+			.data(pieLayoutData, d => d.data[groupIdentifier]);
 
 		// Remove slices that need to be exited
 		paths.exit()
@@ -104,14 +97,14 @@ export class Pie extends Component {
 
 		// Update styles & position on existing and entering slices
 		enteringPaths.merge(paths)
-			.attr("fill", d => this.model.getFillScale()(d.data.label))
+			.attr("fill", d => self.model.getFillColor(d.data[groupIdentifier]))
 			.attr("d", this.arc)
 			.transition(this.services.transitions.getTransition("pie-slice-enter-update", animate))
 			.attr("opacity", 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "slice")
-			.attr("aria-label", d => `${d.value}, ${Tools.convertValueToPercentage(d.data.value, dataList) + "%"}`)
+			.attr("aria-label", d => `${d.value}, ${Tools.convertValueToPercentage(d.data.value, displayData) + "%"}`)
 			// Tween
 			.attrTween("d", function (a) {
 				return arcTween.bind(this)(a, self.arc);
@@ -120,7 +113,7 @@ export class Pie extends Component {
 		// Draw the slice labels
 		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels").attr("role", Roles.GROUP);
 		const labels = labelsGroup.selectAll("text.pie-label")
-			.data(pieLayoutData, (d: any) => d.data.label);
+			.data(pieLayoutData, (d: any) => d.data[groupIdentifier]);
 
 		// Remove labels that are existing
 		labels.exit()
@@ -141,7 +134,7 @@ export class Pie extends Component {
 					return options.pie.labels.formatter(d);
 				}
 
-				return Tools.convertValueToPercentage(d.data.value, dataList) + "%";
+				return Tools.convertValueToPercentage(d.data.value, displayData) + "%";
 			})
 			// Calculate dimensions in order to transform
 			.datum(function(d) {
@@ -159,7 +152,7 @@ export class Pie extends Component {
 				return d;
 			})
 			.attr("transform", function (d, i) {
-				const totalSlices = dataList.length;
+				const totalSlices = displayData.length;
 				const sliceAngleDeg = (d.endAngle - d.startAngle) * (180 / Math.PI);
 
 				// check if last 2 slices (or just last) are < the threshold
@@ -295,10 +288,11 @@ export class Pie extends Component {
 	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
+		const { groupIdentifier } = this.model.getOptions().data;
 
 		this.parent.selectAll("path.slice")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => (d.data.label !== hoveredElement.datum()["key"]) ? 0.3 : 1);
+			.attr("opacity", d => d.data[groupIdentifier] !== hoveredElement.datum()["name"] ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements

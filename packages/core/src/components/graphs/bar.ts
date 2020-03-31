@@ -3,7 +3,7 @@ import { Component } from "../component";
 
 export class Bar extends Component {
 	// Gets the correct width for bars based on options & configurations
-	protected getBarWidth() {
+	protected getBarWidth(allDataLabels?: string[]) {
 		const options = this.model.getOptions();
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 

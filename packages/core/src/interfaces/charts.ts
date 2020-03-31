@@ -50,6 +50,15 @@ export interface BaseChartOptions {
 		 */
 		prefix?: String;
 	};
+	/**
+	 * options related to charting data
+	 */
+	data?: {
+		/**
+		 * identifier for data groups
+		 */
+		groupIdentifier?: String;
+	};
 }
 
 /**
@@ -100,6 +109,10 @@ export interface BubbleChartOptions extends AxisChartOptions {
 	 * options for the individual bubbles
 	 */
 	bubble?: {
+		/**
+		 * the key to lookup in charting data for the bubble radius value
+		 */
+		radiusIdentifier?: string;
 		/**
 		 * A function that would determine the range of the bubble radius to use
 		 * Returns an array with the 1st value being the min and the 2nd value being the max radius

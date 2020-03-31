@@ -10,43 +10,26 @@ import { line } from "d3-shape";
 export class Line extends Component {
 	type = "line";
 
-	lineGenerator: any;
-
 	// TODORF - Remove these listeners in destroy()
 	init() {
-		// Highlight correct scatter on legend item hovers
-		this.services.events.addEventListener(Events.Legend.ITEM_HOVER, e => {
-			const { hoveredElement } = e.detail;
-
-			this.parent.selectAll("g.lines")
-				.transition(this.services.transitions.getTransition("legend-hover-line"))
-				.attr("opacity", d => {
-					if (d.label !== hoveredElement.datum()["key"]) {
-						return Configuration.lines.opacity.unselected;
-					}
-
-					return Configuration.lines.opacity.selected;
-				});
-		});
-
+		const { events } = this.services;
+		// Highlight correct line legend item hovers
+		events.addEventListener("legend-item-onhover", this.handleLegendOnHover);
 		// Un-highlight lines on legend item mouseouts
-		this.services.events.addEventListener(Events.Legend.ITEM_MOUSEOUT, e => {
-			this.parent.selectAll("g.lines")
-				.transition(this.services.transitions.getTransition("legend-mouseout-line"))
-				.attr("opacity", Configuration.lines.opacity.selected);
-		});
+		events.addEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
 	}
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
 
 		// D3 line generator function
-		this.lineGenerator = line()
+		const lineGenerator = line()
 			.x((d, i) => this.services.cartesianScales.getDomainValue(d, i))
 			.y((d, i) => this.services.cartesianScales.getRangeValue(d, i))
 			.curve(this.services.curves.getD3Curve())
 			.defined((datum: any, i) => {
-				const value = isNaN(datum) ? datum.value : datum;
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+				const value = datum[rangeIdentifier];
 				if (value === null || value === undefined) {
 					return false;
 				}
@@ -54,9 +37,10 @@ export class Line extends Component {
 				return true;
 			});
 
+		const groupedData = this.model.getGroupedData();
 		// Update the bound data on line groups
 		const lineGroups = svg.selectAll("g.lines")
-			.data(this.model.getDisplayData().datasets, dataset => dataset.label);
+			.data(groupedData, group => group.name);
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -71,33 +55,63 @@ export class Line extends Component {
 			.append("g")
 			.classed("lines", true);
 
-		const self = this;
-
 		// Enter paths that need to be introduced
 		const enteringPaths = enteringLineGroups.append("path")
 			.attr("opacity", 0);
 
 		// Apply styles and datum
 		enteringPaths.merge(svg.selectAll("g.lines path"))
-			.attr("stroke", function (d) {
-				const parentDatum = select(this.parentNode).datum() as any;
-
-				return self.model.getStrokeColor(parentDatum.label);
-			})
-			.datum(function (d) {
-				const parentDatum = select(this.parentNode).datum() as any;
-				this._datasetLabel = parentDatum.label;
-
-				return parentDatum.data;
+			.attr("stroke", (group, i) => {
+				return this.model.getStrokeColor(group.name)
 			})
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "line")
-			.attr("aria-label", d => d.map(datum => datum.value || datum).join(","))
+			.attr("aria-label", group => {
+				const { data } = group;
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+				return data.map(datum => datum[rangeIdentifier]).join(",");
+			})
 			// Transition
 			.transition(this.services.transitions.getTransition("line-update-enter", animate))
 			.attr("opacity", 1)
 			.attr("class", "line")
-			.attr("d", this.lineGenerator);
+			.attr("d", group => {
+				const { data } = group;
+				return lineGenerator(data);
+			});
+	}
+
+
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
+
+		this.parent.selectAll("g.lines")
+			.transition(this.services.transitions.getTransition("legend-hover-line"))
+			.attr("opacity", group => {
+				if (group.name !== hoveredElement.datum()["key"]) {
+					return Configuration.lines.opacity.unselected;
+				}
+
+				return Configuration.lines.opacity.selected;
+			});
+	}
+
+	handleLegendMouseOut = (event: CustomEvent) => {
+		this.parent.selectAll("g.lines")
+			.transition(this.services.transitions.getTransition("legend-mouseout-line"))
+			.attr("opacity", Configuration.lines.opacity.selected);
+	}
+
+	destroy() {
+		// Remove event listeners
+		this.parent.selectAll("path")
+			.on("mousemove", null)
+			.on("mouseout", null);
+
+		// Remove legend listeners
+		const eventsFragment = this.services.events;
+		eventsFragment.removeEventListener("legend-item-onhover", this.handleLegendOnHover);
+		eventsFragment.removeEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
 	}
 }

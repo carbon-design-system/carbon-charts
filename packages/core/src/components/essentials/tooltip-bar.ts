@@ -35,7 +35,13 @@ export class TooltipBar extends Tooltip {
 					data = e.detail.multidata;
 					defaultHTML = this.getMultilineTooltipHTML(data);
 				} else {
-					defaultHTML = this.getTooltipHTML(e.detail.hoveredElement.datum());
+					if (e.detail.data) {
+						data = e.detail.data;
+					} else {
+						data = e.detail.hoveredElement.datum();
+					}
+
+					defaultHTML = this.getTooltipHTML(data);
 				}
 
 				// if there is a provided tooltip HTML function call it and pass the defaultHTML
@@ -46,7 +52,7 @@ export class TooltipBar extends Tooltip {
 					tooltipTextContainer.html(defaultHTML);
 				}
 
-				const position = this.getTooltipPosition(hoveredElement);
+				const position = this.getTooltipPosition(hoveredElement, data);
 				// Position the tooltip relative to the bars
 				this.positionTooltip(e.detail.multidata ? undefined : position );
 
@@ -80,8 +86,10 @@ export class TooltipBar extends Tooltip {
 	 * positive valued data and below negative value data.
 	 * @param hoveredElement
 	 */
-	getTooltipPosition(hoveredElement) {
-		const data = select(hoveredElement).datum() as any;
+	getTooltipPosition(hoveredElement, data?: any) {
+		if (data === undefined) {
+			data = select(hoveredElement).datum() as any;
+		}
 
 		const holderPosition = select(this.services.domUtils.getHolder()).node().getBoundingClientRect();
 		const barPosition = hoveredElement.getBoundingClientRect();

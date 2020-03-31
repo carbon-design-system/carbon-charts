@@ -1,81 +1,67 @@
 import { lineTimeSeriesData } from "./line";
 
-export const scatterData = {
-	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
-	datasets: [
-		{
-			label: "Dataset 1",
-			data: [
-				32100,
-				23500,
-				53100,
-				42300,
-				12300
-			]
+export const scatterLinearData = [
+	{ group: "Dataset 1", sales: 10000, profit: 32100 },
+	{ group: "Dataset 1", sales: 12000, profit: 23500 },
+	{ group: "Dataset 1", sales: 14000, profit: 53100 },
+	{ group: "Dataset 1", sales: 15000, profit: 42300 },
+	{ group: "Dataset 1", sales: 16000, profit: 12300 },
+	{ group: "Dataset 2", sales: 11000, profit: 12400 },
+	{ group: "Dataset 2", sales: 13000, profit: 34500 },
+	{ group: "Dataset 2", sales: 13500, profit: 23100 },
+	{ group: "Dataset 2", sales: 15500, profit: 63200 },
+	{ group: "Dataset 2", sales: 15750, profit: 24300 }
+];
+
+export const scatterLinearOptions = {
+	title: "Scatter (linear)",
+	axes: {
+		bottom: {
+			title: "Sales",
+			identifier: "sales",
+			includeZero: false
 		},
-		{
-			label: "Dataset 2",
-			data: [
-				34200,
-				53200,
-				42300,
-				21400,
-				0
-			]
-		},
-		{
-			label: "Dataset 3 long name",
-			data: [
-				41200,
-				23400,
-				34210,
-				1400,
-				42100
-			]
-		},
-		{
-			label: "Dataset 4 long name",
-			data: [
-				22000,
-				1200,
-				9000,
-				24000,
-				3000
-			]
-		},
-		{
-			label: "Dataset 5 long name",
-			data: [
-				2412,
-				30000,
-				10000,
-				5000,
-				31000
-			]
-		},
-		{
-			label: "Dataset 6 long name",
-			data: [
-				0,
-				20000,
-				40000,
-				60000,
-				80000
-			]
+		left: {
+			title: "Profit",
+			identifier: "profit",
+			includeZero: false
 		}
-	]
+	}
 };
 
-export const scatterOptions = {
+export const scatterDiscreteData = [
+	{ group: "Dataset 1", key: "Qty", value: 32100 },
+	{ group: "Dataset 1", key: "More", value: 23500 },
+	{ group: "Dataset 1", key: "Sold", value: 53100 },
+	{ group: "Dataset 1", key: "Restocking", value: 42300 },
+	{ group: "Dataset 1", key: "Misc", value: 12300 },
+	{ group: "Dataset 2", key: "Qty", value: 34200 },
+	{ group: "Dataset 2", key: "More", value: 53200 },
+	{ group: "Dataset 2", key: "Sold", value: 42300 },
+	{ group: "Dataset 2", key: "Restocking", value: 21400 },
+	{ group: "Dataset 2", key: "Misc", value: 0 },
+	{ group: "Dataset 3", key: "Qty", value: 41200 },
+	{ group: "Dataset 3", key: "More", value: 18400 },
+	{ group: "Dataset 3", key: "Sold", value: 34210 },
+	{ group: "Dataset 3", key: "Restocking", value: 1400 },
+	{ group: "Dataset 3", key: "Misc", value: 42100 },
+	{ group: "Dataset 4", key: "Qty", value: 22000 },
+	{ group: "Dataset 4", key: "More", value: 1200 },
+	{ group: "Dataset 4", key: "Sold", value: 9000 },
+	{ group: "Dataset 4", key: "Restocking", value: 24000 },
+	{ group: "Dataset 4", key: "Misc", value: 3000 }
+];
+
+export const scatterDiscreteOptions = {
 	title: "Scatter (discrete)",
 	axes: {
 		bottom: {
 			title: "2018 Annual Sales Figures",
 			scaleType: "labels",
-			secondary: true
+			identifier: "key"
 		},
 		left: {
-			primary: true
+			identifier: "value"
 		}
 	}
 };
@@ -88,10 +74,10 @@ export const scatterTimeSeriesOptions = {
 		bottom: {
 			title: "2019 Annual Sales Figures",
 			scaleType: "time",
-			secondary: true
+			identifier: "date"
 		},
 		left: {
-			primary: true
+			identifier: "value"
 		}
 	}
 };

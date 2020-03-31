@@ -6,6 +6,8 @@ import { Events } from "./interfaces";
 
 // D3
 import { scaleOrdinal } from "d3-scale";
+import { map } from "d3-collection";
+import { stack } from "d3-shape";
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
@@ -25,50 +27,78 @@ export class ChartModel {
 
 	// Data labels
 	/**
-	 * A list of all the labels that have existed within the lifetime of the chart
+	 * A list of all the data groups that have existed within the lifetime of the chart
 	 * @type string[]
 	 */
-	protected allDataLabels: string[];
+	protected allDataGroups: string[];
 
 	// Fill scales & fill related objects
-	protected patternScale = {};
 	protected colorScale: any = {};
-
 
 	constructor(services: any) {
 		this.services = services;
 	}
 
-	sanitize(data) {
-		// Sanitize all dates
-		data.datasets.forEach(dataset => {
-			dataset.data = dataset.data.map(d => {
-				if (d.date && !d.date.getTime) {
-					d.date = new Date(d.date);
+	/**
+	 * Converts data provided in the older format to tabular
+	 * 
+	 */
+	protected transformToTabularData(data) {
+		console.warn("We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here")
+		const tabularData = [];
+		const { datasets, labels } = data;
+
+		// Loop through all datasets
+		datasets.forEach(dataset => {
+			const group = dataset.label;
+
+			// Update each data point to the new format
+			dataset.data.forEach((datum, i) => {
+				const updatedDatum = {
+					group,
+					key: labels[i]
+				};
+
+				if (isNaN(datum)) {
+					updatedDatum["value"] = datum.value;
+					updatedDatum["date"] = datum.date;
+				} else {
+					updatedDatum["value"] = datum;
 				}
 
-				return d;
+				tabularData.push(updatedDatum);
 			});
 		});
+
+		return tabularData;
+	}
+
+	protected sanitize(data) {
+		// if data is not an array
+		if (!Array.isArray(data)) {
+			return this.transformToTabularData(data);
+		}
 
 		return data;
 	}
 
 	getDisplayData() {
-		const { ACTIVE } = Configuration.legend.items.status;
-		const dataLabels = this.get("dataLabels");
-
 		if (!this.get("data")) {
 			return null;
 		}
 
+		const { ACTIVE } = Configuration.legend.items.status;
+		const dataGroups = this.getDataGroups();
+
 		// Remove datasets that have been disabled
 		const displayData = Tools.clone(this.get("data"));
-		displayData.datasets = displayData.datasets.filter(dataset => {
-			return dataLabels[dataset.label] === ACTIVE;
-		});
+		const { groupIdentifier } = this.getOptions().data;
 
-		return displayData;
+		return displayData.filter(datum => {
+			const group = dataGroups.find(group => group.name === datum[groupIdentifier]);
+
+			return group.status === ACTIVE;
+		});
 	}
 
 	getData() {
@@ -81,23 +111,122 @@ export class ChartModel {
 	 */
 	setData(newData) {
 		const sanitizedData = this.sanitize(Tools.clone(newData));
-		const dataLabels = this.generateDataLabels(sanitizedData);
+		const dataGroups = this.generateDataGroups(sanitizedData);
 
 		this.set({
 			data: sanitizedData,
-			dataLabels
+			dataGroups
 		});
 
 		return sanitizedData;
 	}
 
-	generateDataLabels(newData) {
-		const dataLabels = {};
-		newData.datasets.forEach(dataset => {
-			dataLabels[dataset.label] = Configuration.legend.items.status.ACTIVE;
+	/*
+	 * Data groups
+	*/
+	protected updateAllDataGroups() {
+		// If allDataGroups hasn't been initialized yet
+		// Set it to the current set of data groups
+		if (!this.allDataGroups) {
+			this.allDataGroups = this.getDataGroups().map(group => group.name);
+		} else {
+			// Loop through current data groups
+			this.getDataGroups().forEach(dataGroup => {
+				// If group name hasn't been stored yet, store it
+				if (this.allDataGroups.indexOf(dataGroup.name) === -1) {
+					this.allDataGroups.push(dataGroup.name);
+				}
+			});
+		}
+	}
+
+	protected generateDataGroups(data) {
+		const { groupIdentifier } = this.getOptions().data;
+		const { ACTIVE } = Configuration.legend.items.status;
+
+		const uniqueDataGroups = map(data, datum => datum[groupIdentifier]).keys();
+		return uniqueDataGroups.map(groupName => ({
+			name: groupName,
+			status: ACTIVE
+		}));
+	}
+
+	getDataGroups() {
+		return this.get("dataGroups");
+	}
+
+
+	getDataGroupNames() {
+		return this.get("dataGroups").map(dataGroup => dataGroup.name);
+	}
+
+	getGroupedData() {
+		const displayData = this.getDisplayData();
+		const groupedData = {};
+		const { groupIdentifier } = this.getOptions().data;
+
+		displayData.map(datum => {
+			const group = datum[groupIdentifier];
+			if (groupedData[group] !== null && groupedData[group] !== undefined) {
+				groupedData[group].push(datum);
+			} else {
+				groupedData[group] = [datum];
+			}
 		});
 
-		return dataLabels;
+		return Object.keys(groupedData)
+			.map(groupName => {
+				return {
+					name: groupName,
+					data: groupedData[groupName]
+				};
+			});
+	}
+
+	getDataValuesGroupedByKeys() {
+		const options = this.getOptions();
+		const { groupIdentifier } = options.data;
+
+		const displayData = this.getDisplayData();
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+
+		const stackKeys = map(displayData, datum => datum[domainIdentifier]).keys();
+		const dataGroupNames = this.getDataGroupNames();
+
+		return stackKeys.map(key => {
+			const correspondingValues = { sharedStackKey: key };
+			dataGroupNames.forEach(dataGroupName => {
+				const correspondingDatum = displayData.find(datum => {
+					return datum[groupIdentifier] === dataGroupName &&
+						`${datum[domainIdentifier]}` === key;
+				});
+
+				correspondingValues[dataGroupName] = correspondingDatum ? correspondingDatum[rangeIdentifier] : null;
+			});
+			return correspondingValues;
+		}) as any;
+	}
+
+	getStackedData() {
+		const options = this.getOptions();
+		const { groupIdentifier } = options.data;
+
+		const dataGroupNames = this.getDataGroupNames();
+		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys();
+
+		return stack().keys(dataGroupNames)(dataValuesGroupedByKeys)
+			.map((series, i) => {
+				// Add data group names to each serie
+				return Object.keys(series)
+					.filter((key: any) => !isNaN(key))
+					.map(key => {
+						const element = series[key];
+						element[groupIdentifier] = dataGroupNames[i];
+
+						return element;
+					});
+			});
 	}
 
 	/**
@@ -143,10 +272,10 @@ export class ChartModel {
 			return;
 		}
 
-		this.updateAllDataLabels();
-		this.setColorScale();
+		this.updateAllDataGroups();
 
-		this.services.events.dispatchEvent(Events.Model.UPDATE);
+		this.setColorScale();
+		this.services.events.dispatchEvent("model-update");
 	}
 
 	setUpdateCallback(cb: Function) {
@@ -158,26 +287,28 @@ export class ChartModel {
 	*/
 	toggleDataLabel(changedLabel: string) {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
-		const dataLabels = this.get("dataLabels");
+		const dataGroups = this.getDataGroups();
 
-		const hasDeactivatedItems = Object.keys(dataLabels).some(label => dataLabels[label] === DISABLED);
-		const activeItems = Object.keys(dataLabels).filter(label => dataLabels[label] === ACTIVE);
+		const hasDeactivatedItems = dataGroups.some(group => group.status === DISABLED);
+		const activeItems = dataGroups.filter(group => group.status === ACTIVE);
+
 		// If there are deactivated items, toggle "changedLabel"
 		if (hasDeactivatedItems) {
 			// If the only active item is being toggled
 			// Activate all items
-			if (activeItems.length === 1 && activeItems[0] === changedLabel) {
+			if (activeItems.length === 1 && activeItems[0].name === changedLabel) {
 				// If every item is active, then enable "changedLabel" and disable all other items
-				Object.keys(dataLabels).forEach(label => {
-					dataLabels[label] = ACTIVE;
+				dataGroups.forEach((group, i) => {
+					dataGroups[i].status = ACTIVE;
 				});
 			} else {
-				dataLabels[changedLabel] = dataLabels[changedLabel] === DISABLED ? ACTIVE : DISABLED;
+				const indexToChange = dataGroups.findIndex(group => group.name === changedLabel);
+				dataGroups[indexToChange].status = dataGroups[indexToChange].status === DISABLED ? ACTIVE : DISABLED;
 			}
 		} else {
 			// If every item is active, then enable "changedLabel" and disable all other items
-			Object.keys(dataLabels).forEach(label => {
-				dataLabels[label] = (label === changedLabel ? ACTIVE : DISABLED);
+			dataGroups.forEach((group, i) => {
+				dataGroups[i].status = (group.name === changedLabel ? ACTIVE : DISABLED);
 			});
 		}
 
@@ -188,88 +319,56 @@ export class ChartModel {
 
 		// Update model
 		this.set({
-			dataLabels
+			dataGroups
 		});
 	}
 
 	/*
 	 * Fill scales
 	*/
-	setColorScale() {
-		if (!this.getDisplayData().datasets.length) {
-			return;
-		}
-		if (this.getDisplayData().datasets[0].fillColors) {
-			this.getDisplayData().datasets.forEach(dataset => {
-				this.colorScale[dataset.label] = scaleOrdinal().range(dataset.fillColors).domain(this.allDataLabels);
-			});
-		} else {
-			const colors = colorPalettes.DEFAULT;
-			this.getData().datasets.forEach((dataset, i) => {
-				this.colorScale[dataset.label] = scaleOrdinal().range([colors[i]]).domain(this.allDataLabels);
-			});
-		}
+	protected setColorScale() {
+		const colors = colorPalettes.DEFAULT;
+		this.colorScale = scaleOrdinal().range(colors)
+			.domain(this.allDataGroups);
 	}
 
 	/**
 	 * Should the data point be filled?
-	 * @param datasetLabel
-	 * @param label
+	 * @param group
+	 * @param key
 	 * @param value
 	 * @param defaultFilled the default for this chart
 	 */
-	getIsFilled(datasetLabel: any, label?: any, data?: any, defaultFilled?: boolean) {
+	getIsFilled(group: any, key?: any, data?: any, defaultFilled?: boolean) {
 		const options = this.getOptions();
 		if (options.getIsFilled) {
-			return options.getIsFilled(datasetLabel, label, data, defaultFilled);
+			return options.getIsFilled(group, key, data, defaultFilled);
 		} else {
 			return defaultFilled;
 		}
 	}
 
-	getFillColor(datasetLabel: any, label?: any, data?: any) {
+	getFillColor(group: any, key?: any, data?: any) {
 		const options = this.getOptions();
-		const defaultFillColor = this.getFillScale()[datasetLabel](label);
+		const defaultFillColor = this.getFillScale()(group);
 		if (options.getFillColor) {
-			return options.getFillColor(datasetLabel, label, data, defaultFillColor);
+			return options.getFillColor(group, key, data, defaultFillColor);
 		} else {
 			return defaultFillColor;
 		}
 	}
 
-	getStrokeColor(datasetLabel: any, label?: any, data?: any) {
+	getStrokeColor(group: any, key?: any, data?: any) {
 		const options = this.getOptions();
-		const defaultStrokeColor = this.colorScale[datasetLabel](label);
+		const defaultStrokeColor = this.colorScale(group);
 		if (options.getStrokeColor) {
-			return options.getStrokeColor(datasetLabel, label, data, defaultStrokeColor);
+			return options.getStrokeColor(group, key, data, defaultStrokeColor);
 		} else {
 			return defaultStrokeColor;
 		}
 	}
 
 	getFillScale() {
-		// Choose patternScale or colorScale based on the "accessibility" flag
-		// return this.get("options").accessibility ? this.patternScale : this.colorScale;
 		return this.colorScale;
-	}
-
-
-	/*
-	 * Data labels
-	*/
-	protected updateAllDataLabels() {
-		// If allDataLabels hasn't been initialized yet
-		// Set it to the current set of chart labels
-		if (!this.allDataLabels) {
-			this.allDataLabels = this.getDisplayData().labels;
-		} else {
-			// Loop through current chart labels
-			this.getDisplayData().labels.forEach(label => {
-				// If label hasn't been stored yet, store it
-				if (this.allDataLabels.indexOf(label) === -1) {
-					this.allDataLabels.push(label);
-				}
-			});
-		}
 	}
 }
