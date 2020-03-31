@@ -5,7 +5,8 @@ import {
 	LayoutGrowth,
 	LayoutDirection,
 	LegendOrientations,
-	ChartTheme
+	ChartTheme,
+	Events as ChartEvents
 } from "./interfaces/index";
 
 // Misc
@@ -103,7 +104,7 @@ export class Chart {
 			});
 
 		Promise.all(promises)
-			.then(() => this.services.events.dispatchEvent("render-finished"));
+			.then(() => this.services.events.dispatchEvent(ChartEvents.Chart.RENDER_FINISHED));
 	}
 
 	destroy() {

@@ -12,8 +12,6 @@ import {
 	scaleLog
 } from "d3-scale";
 import { min, extent } from "d3-array";
-import { timeFormatDefaultLocale } from "d3-time-format";
-import englishLocale from "d3-time-format/locale/en-US.json";
 
 // Misc
 import {
@@ -31,7 +29,10 @@ import {
 	subHours,
 	differenceInMinutes,
 	addMinutes,
-	subMinutes
+	subMinutes,
+	differenceInSeconds,
+	subSeconds,
+	addSeconds
 } from "date-fns";
 
 function addPaddingInDomain([lower, upper]: number[], paddingRatio: number) {
@@ -309,6 +310,7 @@ export class CartesianScales extends Service {
 
 		if (axisOptions.scaleType === ScaleTypes.TIME) {
 			const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
+
 			if (spaceToAddToEdges) {
 				const startDate = new Date(domain[0]);
 				const endDate = new Date(domain[1]);
@@ -329,8 +331,20 @@ export class CartesianScales extends Service {
 					return [subHours(startDate, spaceToAddToEdges), addHours(endDate, spaceToAddToEdges)];
 				}
 
+				if (differenceInMinutes(endDate, startDate) > 30) {
+					return [subMinutes(startDate, spaceToAddToEdges * 30), addMinutes(endDate, spaceToAddToEdges * 30)];
+				}
+
 				if (differenceInMinutes(endDate, startDate) > 1) {
 					return [subMinutes(startDate, spaceToAddToEdges), addMinutes(endDate, spaceToAddToEdges)];
+				}
+
+				if (differenceInSeconds(endDate, startDate) > 15) {
+					return [subSeconds(startDate, spaceToAddToEdges * 15), addSeconds(endDate, spaceToAddToEdges * 15)];
+				}
+
+				if (differenceInSeconds(endDate, startDate) > 1) {
+					return [subSeconds(startDate, spaceToAddToEdges), addSeconds(endDate, spaceToAddToEdges)];
 				}
 
 				return [startDate, endDate];
@@ -355,13 +369,6 @@ export class CartesianScales extends Service {
 
 		const scaleType = Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
 		this.scaleTypes[axisPosition] = scaleType;
-
-		// Set the date/time locale
-		if (scaleType === ScaleTypes.TIME) {
-			const timeLocale = Tools.getProperty(options, "locale", "time") || englishLocale;
-
-			timeFormatDefaultLocale(timeLocale);
-		}
 
 		let scale;
 		if (scaleType === ScaleTypes.TIME) {

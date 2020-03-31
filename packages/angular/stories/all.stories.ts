@@ -40,7 +40,9 @@ const getTemplate = demo => `
 // Loop through all demo groups
 demoGroups.forEach(demoGroup => {
 	// Create story group for each demo group
-	const groupStories = storiesOf(demoGroup.title, module).addDecorator(withKnobs);
+	const groupStories = storiesOf(demoGroup.title, module).addDecorator(
+		withKnobs({ escapeHTML: false })
+	);
 
 	// Loop through the demos for the group
 	demoGroup.demos.forEach(demo => {

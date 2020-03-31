@@ -4,7 +4,7 @@ import { DOMUtils } from "../../services";
 import { TooltipPosition, TooltipTypes, CartesianOrientations } from "./../../interfaces/enums";
 
 // import the settings for the css prefix
-import settings from "carbon-components/src/globals/js/settings";
+import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { select } from "d3-selection";

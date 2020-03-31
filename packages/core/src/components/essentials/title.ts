@@ -1,8 +1,8 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes } from "./../../interfaces";
 import { select } from "d3-selection";
+import { TooltipTypes, Events } from "./../../interfaces";
 
 export class Title extends Component {
 	type = "title";
@@ -57,29 +57,35 @@ export class Title extends Component {
 			.text("...");
 
 		// add events for displaying the tooltip with the title
-		const self = this;
+		// const self = this;
 
-		title
-			.on("mouseenter", function() {
-				const hoveredElement = select(this);
-				self.services.events.dispatchEvent("show-tooltip", {
-					hoveredElement: hoveredElement,
-					type: TooltipTypes.TITLE,
-					data: titleString
-				});
-			})
+		// title
+		// 	.on("mouseenter", function() {
+		// 		const hoveredElement = select(this);
+		// 		self.services.events.dispatchEvent("show-tooltip", {
+		// 			hoveredElement: hoveredElement,
+		// 			type: TooltipTypes.TITLE,
+		// 			data: titleString
+		// add events for displaying the tooltip with the title
+		const self = this;
+		title.on("mouseenter", function() {
+			self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+				hoveredElement: title,
+				type: TooltipTypes.TITLE
+				//data: titleString
+			});
+		})
 			.on("mouseout", function() {
-				const hoveredElement = select(this);
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement: hoveredElement,
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+					hoveredElement: title
 				});
 			});
-	}
+}
 
 	// computes the maximum space a title can take
 	protected getMaxTitleWidth() {
-		return DOMUtils.getSVGElementSize(this.parent).width;
-	}
+	return DOMUtils.getSVGElementSize(this.parent).width;
+}
 
 	/**
 	 * Returns the index for a maximum length substring that is less than the width parameter.
@@ -89,16 +95,16 @@ export class Title extends Component {
 	 * @param width the width of the svg container that holds the title
 	 */
 	protected getSubstringIndex(title, start, end, width) {
-		const mid = Math.floor((end + start) / 2);
-		if (title.getSubStringLength(0, mid) > width) {
-			return this.getSubstringIndex(title, start, mid, width);
-		} else if (title.getSubStringLength(0, mid) < width) {
-			if (title.getSubStringLength(0, mid + 1) > width) {
-				return mid;
-			}
-			return this.getSubstringIndex(title, mid, end, width);
-		} else {
+	const mid = Math.floor((end + start) / 2);
+	if (title.getSubStringLength(0, mid) > width) {
+		return this.getSubstringIndex(title, start, mid, width);
+	} else if (title.getSubStringLength(0, mid) < width) {
+		if (title.getSubStringLength(0, mid + 1) > width) {
 			return mid;
 		}
+		return this.getSubstringIndex(title, mid, end, width);
+	} else {
+		return mid;
 	}
+}
 }
