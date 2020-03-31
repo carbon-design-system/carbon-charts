@@ -255,10 +255,10 @@ export class CartesianScales extends Service {
 
 		// If scale is a LABELS scale, return some labels as the domain
 		if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
-			if (labels) {
+			if (labels.length) {
 				return labels;
 			} else {
-				return this.model.getDisplayData().datasets[0].data.map((d, i) => i + 1);
+				return [];
 			}
 		}
 
