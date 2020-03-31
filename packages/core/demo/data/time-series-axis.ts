@@ -201,9 +201,9 @@ export const lineTimeSeriesDataMonthlyDefaultLocale = {
 		{
 			label: "Dataset 1",
 			data: [
-				{ date: new Date(2018, 9), value: 10 },
-				{ date: new Date(2018, 10), value: 10 },
-				{ date: new Date(2018, 11), value: 10 },
+				{ date: new Date(2019, 9), value: 10 },
+				{ date: new Date(2019, 10), value: 10 },
+				{ date: new Date(2019, 11), value: 10 },
 				{ date: new Date(2019, 0), value: 10 },
 				{ date: new Date(2019, 1), value: 10 },
 				{ date: new Date(2019, 2), value: 10 },
@@ -246,13 +246,13 @@ export const lineTimeSeriesDataQuarterly = {
 		{
 			label: "Dataset 1",
 			data: [
-				{ date: new Date(2017, 0), value: 10 },
-				{ date: new Date(2017, 3), value: 10 },
-				{ date: new Date(2017, 6), value: 10 },
-				{ date: new Date(2017, 9), value: 10 },
 				{ date: new Date(2018, 0), value: 10 },
 				{ date: new Date(2018, 3), value: 10 },
-				{ date: new Date(2018, 6), value: 10 }
+				{ date: new Date(2018, 6), value: 10 },
+				{ date: new Date(2018, 9), value: 10 },
+				{ date: new Date(2019, 0), value: 10 },
+				{ date: new Date(2019, 3), value: 10 },
+				{ date: new Date(2019, 6), value: 10 }
 			]
 		}
 	]

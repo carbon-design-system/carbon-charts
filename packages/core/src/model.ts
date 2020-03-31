@@ -73,13 +73,17 @@ export class ChartModel {
 		return tabularData;
 	}
 
-	protected sanitize(data) {
+	protected getTabularData(data) {
 		// if data is not an array
 		if (!Array.isArray(data)) {
 			return this.transformToTabularData(data);
 		}
 
 		return data;
+	}
+
+	protected sanitize(data) {
+		return this.getTabularData(data);
 	}
 
 	getDisplayData() {
@@ -157,7 +161,7 @@ export class ChartModel {
 
 
 	getDataGroupNames() {
-		return this.get("dataGroups").map(dataGroup => dataGroup.name);
+		return this.getDataGroups().map(dataGroup => dataGroup.name);
 	}
 
 	getGroupedData() {
@@ -175,12 +179,10 @@ export class ChartModel {
 		});
 
 		return Object.keys(groupedData)
-			.map(groupName => {
-				return {
-					name: groupName,
-					data: groupedData[groupName]
-				};
-			});
+			.map(groupName => ({
+				name: groupName,
+				data: groupedData[groupName]
+			}));
 	}
 
 	getDataValuesGroupedByKeys() {

@@ -20,9 +20,11 @@ export class TooltipPie extends Tooltip {
 		// pie charts don't have a dataset label since they only support one dataset
 		const label = dataVal[groupIdentifier];
 
-		return `<div class="datapoint-tooltip">
-					<p class="label">${label}</p>
-					<p class="value">${formattedValue}</p>
-				</div>`;
+		return (
+			`<div class="datapoint-tooltip">
+				<p class="label">${label}</p>
+				<p class="value">${formattedValue}</p>
+			</div>`
+		);
 	}
 }

@@ -1,30 +1,28 @@
 import { lineTimeSeriesData } from "./line";
 
-export const scatterLinearData = [
-	{ group: "Dataset 1", sales: 10000, profit: 32100 },
-	{ group: "Dataset 1", sales: 12000, profit: 23500 },
-	{ group: "Dataset 1", sales: 14000, profit: 53100 },
-	{ group: "Dataset 1", sales: 15000, profit: 42300 },
-	{ group: "Dataset 1", sales: 16000, profit: 12300 },
-	{ group: "Dataset 2", sales: 11000, profit: 12400 },
-	{ group: "Dataset 2", sales: 13000, profit: 34500 },
-	{ group: "Dataset 2", sales: 13500, profit: 23100 },
-	{ group: "Dataset 2", sales: 15500, profit: 63200 },
-	{ group: "Dataset 2", sales: 15750, profit: 24300 }
+export const doubleLinearScatterData = [
+	{ group: "Dataset 1", employees: 5000, sales: 32100 },
+	{ group: "Dataset 1", employees: 3000, sales: 25100 },
+	{ group: "Dataset 1", employees: 8000, sales: 12100 },
+	{ group: "Dataset 1", employees: 4000, sales: 53100 },
+	{ group: "Dataset 2", employees: 2000, sales: 34100 },
+	{ group: "Dataset 2", employees: 4000, sales: 23100 },
+	{ group: "Dataset 2", employees: 7000, sales: 14100 },
+	{ group: "Dataset 2", employees: 6000, sales: 53100 }
 ];
 
-export const scatterLinearOptions = {
-	title: "Scatter (linear)",
+export const doubleLinearScatterOptions = {
+	title: "Scatter (linear x & y)",
 	axes: {
 		bottom: {
-			title: "Sales",
-			identifier: "sales",
-			includeZero: false
+			title: "No. of employees",
+			identifier: "employees",
+			scaleType: "linear"
 		},
 		left: {
-			title: "Profit",
-			identifier: "profit",
-			includeZero: false
+			title: "Annual sales",
+			identifier: "sales",
+			scaleType: "linear"
 		}
 	}
 };
@@ -56,7 +54,7 @@ export const scatterDiscreteOptions = {
 	title: "Scatter (discrete)",
 	axes: {
 		bottom: {
-			title: "2018 Annual Sales Figures",
+			title: "2019 Annual Sales Figures",
 			scaleType: "labels",
 			identifier: "key"
 		},

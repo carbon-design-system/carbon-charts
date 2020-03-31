@@ -21,46 +21,11 @@ export const lineData = [
 	{ group: "Dataset 4", key: "Misc", value: 3000, audienceSize: 10 }
 ];
 
-// export const doubleLinearScatterData = [
-// 	{ group: "Dataset 1", employees: 5000, sales: 32100 },
-// 	{ group: "Dataset 1", employees: 3000, sales: 32100 },
-// 	{ group: "Dataset 1", employees: 8000, sales: 32100 },
-// 	{ group: "Dataset 1", employees: 4000, sales: 32100 },
-// 	{ group: "Dataset 2", employees: 2000, sales: 32100 },
-// 	{ group: "Dataset 2", employees: 4000, sales: 32100 },
-// 	{ group: "Dataset 2", employees: 7000, sales: 32100 },
-// 	{ group: "Dataset 2", employees: 6000, sales: 32100 }
-// ];
-
-// export const doubleLinearScatterOptions = {
-// 	title: "Line (discrete)",
-// 	axes: {
-// 		bottom: {
-// 			title: "2018 Annual Sales Figures",
-// 			identifier: "employees",
-// 			scaleType: "linear"
-// 		},
-// 		left: {
-// 			identifier: "sales",
-// 			scaleType: "linear"
-// 		}
-// 	},
-// 	chartTypes: { // TODO
-// 		"line": [
-// 			"Dataset 4",
-// 			"Dataset 1"
-// 		]
-// 	},
-// 	data: {
-// 		groupIdentifier: "group"
-// 	}
-// };
-
 export const lineOptions = {
 	title: "Line (discrete)",
 	axes: {
 		bottom: {
-			title: "2018 Annual Sales Figures",
+			title: "2019 Annual Sales Figures",
 			identifier: "key",
 			scaleType: "labels"
 		},
@@ -88,7 +53,7 @@ export const lineOptions = {
 // 	title: "Line (discrete)",
 // 	axes: {
 // 		bottom: {
-// 			title: "2018 Annual Sales Figures",
+// 			title: "2019 Annual Sales Figures",
 // 			scaleType: "labels",
 // 		},
 // 		left: {
@@ -123,7 +88,7 @@ export const lineTimeSeriesOptions = {
 	title: "Line (time series)",
 	axes: {
 		bottom: {
-			title: "2018 Annual Sales Figures",
+			title: "2019 Annual Sales Figures",
 			identifier: "date",
 			scaleType: "time"
 		},

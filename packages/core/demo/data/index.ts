@@ -148,8 +148,8 @@ let allDemoGroups = [
 		title: "Bubble",
 		demos: [
 			{
-				options: bubbleDemos.bubbleLinearOptions,
-				data: bubbleDemos.bubbleLinearData,
+				options: bubbleDemos.bubbleDoubleLinearOptions,
+				data: bubbleDemos.bubbleDoubleLinearData,
 				chartType: chartTypes.BubbleChart,
 				isDemoExample: true
 			},
@@ -215,8 +215,8 @@ let allDemoGroups = [
 		title: "Scatter",
 		demos: [
 			{
-				options: scatterDemos.scatterLinearOptions,
-				data: scatterDemos.scatterLinearData,
+				options: scatterDemos.doubleLinearScatterOptions,
+				data: scatterDemos.doubleLinearScatterData,
 				chartType: chartTypes.ScatterChart,
 				isDemoExample: true
 			},
