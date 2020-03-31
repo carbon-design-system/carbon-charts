@@ -152,10 +152,10 @@ ${storyUtils.generateThemePickerHTML()}
 
 // DEV ONLY STORIES
 if (process.env.NODE_ENV !== "production") {
-	const devStoreis = storiesOf("__DEV__", module).addDecorator(withKnobs);
+	const devStories = storiesOf("__DEV__", module).addDecorator(withKnobs);
 
 	// Loop through the demos for the group
-	devStoreis.add("All chart types", () => {
+	devStories.add("All chart types", () => {
 		// container creation
 		const container = document.createElement("div");
 		container.setAttribute("class", "container theme--g100");
