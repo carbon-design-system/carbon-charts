@@ -312,11 +312,6 @@ export class ChartModel {
 			});
 		}
 
-		// dispatch legend filtering event with the status of all the dataLabels
-		this.services.events.dispatchEvent(Events.Legend.ITEMS_UPDATE, {
-			dataLabels
-		});
-
 		// Update model
 		this.set({
 			dataGroups
