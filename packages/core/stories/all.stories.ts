@@ -221,18 +221,6 @@ if (process.env.NODE_ENV !== "production") {
 				const chartObj = chart; // instantiated class
 				getDataButton.onclick = e => {
 					e.preventDefault();
-
-					// const scaleLeftType = chartObj.model.services.cartesianScales.getScaleTypeByPosition("left");
-					// const scaleLeft = chartObj.model.services.cartesianScales.getScaleByPosition("left");
-					// const scaleBottomType = chartObj.model.services.cartesianScales.getScaleTypeByPosition("bottom");
-					// const scaleBottom = chartObj.model.services.cartesianScales.getScaleByPosition("bottom");
-
-					// console.log(`\n${demo.title}`);
-					// console.log(`scaleLeftType: ${scaleLeftType}`);
-					// console.log(`  scaleLeft: [${scaleLeft.domain()}] -> [${scaleLeft.range()}]`);
-					// console.log(`scaleBottomType: ${scaleBottomType}`);
-					// console.log(`  scaleBottom: [${scaleBottom.domain()}] -> [${scaleBottom.range()}]`);
-
 					const dataExists = !chartObj.model.isDataEmpty();
 
 					if (dataExists) {
