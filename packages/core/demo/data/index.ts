@@ -297,6 +297,9 @@ let allDemoGroups = [
 				options: timeSeriesAxisDemos.lineTimeSeriesSingleDatumOptions,
 				chartType: chartTypes.LineChart
 			}
+		]
+	},
+	{
 		title: "Skeleton",
 		demos: [
 			{
@@ -364,7 +367,7 @@ let allDemoGroups = [
 				data: skeletonDemos.stepData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false
-			},
+			}
 		]
 	}
 ] as any;
