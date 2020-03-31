@@ -13,26 +13,27 @@ export class Grid extends Component {
 
 	backdrop: any;
 
-	render() {
+	render(animate = true) {
 		// Draw the backdrop
 		this.drawBackdrop();
 		DOMUtils.appendOrSelect(this.backdrop, "g.x.grid");
 		DOMUtils.appendOrSelect(this.backdrop, "g.y.grid");
 
-		this.drawXGrid();
-		this.drawYGrid();
+		this.drawXGrid(animate);
+		this.drawYGrid(animate);
 
 		if (Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) {
 			this.addGridEventListeners();
 		}
 	}
 
-	drawXGrid() {
+	drawXGrid(animate: boolean) {
 		const svg = this.parent;
 
 		const height = this.backdrop.attr("height");
 
 		const mainXScale = this.services.cartesianScales.getMainXScale();
+		// console.log(`  mainXScale: [${mainXScale.domain()}] -> [${mainXScale.range()}]`);
 		const xGrid = axisBottom(mainXScale)
 			.tickSizeInner(-height)
 			.tickSizeOuter(0);
@@ -42,13 +43,20 @@ export class Grid extends Component {
 		xGrid.ticks(numberOfTicks);
 
 		const g = svg.select(".x.grid")
-			.attr("transform", `translate(${-this.backdrop.attr("x")}, ${height})`)
-			.call(xGrid);
+			.attr("transform", `translate(${-this.backdrop.attr("x")}, ${height})`);
+
+		if (animate) {
+			const transition = this.services.transitions.getTransition("grid-update");
+			g.transition(transition)
+				.call(xGrid);
+		} else {
+			g.call(xGrid);
+		}
 
 		this.cleanGrid(g);
 	}
 
-	drawYGrid() {
+	drawYGrid(animate: boolean) {
 		const svg = this.parent;
 		const width = this.backdrop.attr("width");
 
@@ -62,8 +70,15 @@ export class Grid extends Component {
 		yGrid.ticks(numberOfTicks);
 
 		const g = svg.select(".y.grid")
-			.attr("transform", `translate(0, ${-this.backdrop.attr("y")})`)
-			.call(yGrid);
+			.attr("transform", `translate(0, ${-this.backdrop.attr("y")})`);
+
+		if (animate) {
+			const transition = this.services.transitions.getTransition("grid-update");
+			g.transition(transition)
+				.call(yGrid);
+		} else {
+			g.call(yGrid);
+		}
 
 		this.cleanGrid(g);
 	}
