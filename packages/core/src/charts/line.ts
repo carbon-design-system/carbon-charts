@@ -17,7 +17,8 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TooltipScatter
+	TooltipScatter,
+	SkeletonGrid
 } from "../components/index";
 
 export class LineChart extends AxisChart {
@@ -43,7 +44,8 @@ export class LineChart extends AxisChart {
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Line(this.model, this.services),
-			new Scatter(this.model, this.services)
+			new Scatter(this.model, this.services),
+			new SkeletonGrid(this.model, this.services)
 		];
 
 		const components: any[] = this.getAxisChartComponents(graphFrameComponents);
