@@ -19,6 +19,8 @@ export class GroupedBar extends Bar {
 
 	groupScale: ScaleBand<any>;
 
+	padding = 5;
+
 	init() {
 		const eventsFragment = this.services.events;
 
@@ -29,13 +31,6 @@ export class GroupedBar extends Bar {
 		eventsFragment.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
 
-	protected getAllDataLabels() {
-		const displayData = this.model.getDisplayData();
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-
-		return map(displayData, datum => datum[domainIdentifier]).keys();
-	}
-
 	protected getDataCorrespondingToLabel(label: string) {
 		const displayData = this.model.getDisplayData();
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
@@ -43,26 +38,60 @@ export class GroupedBar extends Bar {
 		return displayData.filter(datum => datum[domainIdentifier] === label);
 	}
 
-	getGroupWidth(allDataLabels: string[]) {
-		const padding = 5;
+	protected getGroupWidth() {
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
+		const totalGroupPadding = this.getTotalGroupPadding();
 
-		return allDataLabels.length * this.getBarWidth(allDataLabels) + (padding * (allDataLabels.length - 1));
+		return this.getBarWidth() * numOfActiveDataGroups + totalGroupPadding;
 	}
 
-	setGroupScale(allDataLabels: string[]) {
-		this.groupScale = scaleBand()
-			.domain(this.model.getDataGroups().map(group => group.name))
-			.rangeRound([0, this.getGroupWidth(allDataLabels)]);
+
+	protected getTotalGroupPadding() {
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
+
+		if (numOfActiveDataGroups === 1) {
+			return 0;
+		}
+
+		const domainScale = this.services.cartesianScales.getDomainScale();
+		const padding = Math.min(
+			5,
+			5 * (domainScale.step() / 70)
+		);
+
+		return padding * (numOfActiveDataGroups - 1);
 	}
 
 	// Gets the correct width for bars based on options & configurations
-	getBarWidth(allDataLabels: string[]) {
-		const domainScale = this.services.cartesianScales.getDomainScale();
+	protected getBarWidth() {
+		const options = this.model.getOptions();
+		const providedWidth = Tools.getProperty(options, "bars", "width");
+		const providedMaxWidth = Tools.getProperty(options, "bars", "maxWidth");
 
+		// If there's a provided width, compare with maxWidth and
+		// Determine which to return
+		if (providedWidth !== null) {
+			if (providedMaxWidth === null) {
+				return providedWidth;
+			} else if (providedWidth <= providedMaxWidth) {
+				return providedWidth;
+			}
+		}
+
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
+		const totalGroupPadding = this.getTotalGroupPadding();
+
+		const domainScale = this.services.cartesianScales.getDomainScale();
 		return Math.min(
-			domainScale.step() / 2 / allDataLabels.length,
-			super.getBarWidth(allDataLabels)
+			providedMaxWidth,
+			(domainScale.step() - totalGroupPadding) / numOfActiveDataGroups
 		);
+	}
+
+	protected setGroupScale() {
+		this.groupScale = scaleBand()
+			.domain(this.model.getActiveDataGroupNames())
+			.rangeRound([0, this.getGroupWidth()]);
 	}
 
 	render(animate: boolean) {
@@ -74,11 +103,12 @@ export class GroupedBar extends Bar {
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		// Get unique labels
-		const allDataLabels = map(displayData, datum => datum[domainIdentifier]).keys();
-		this.setGroupScale(allDataLabels);
+		this.setGroupScale();
 
 		// Grab container SVG
 		const svg = this.getContainerSVG();
+
+		const allDataLabels = map(displayData, datum => datum[domainIdentifier]).keys();
 
 		// Update data on bar groups
 		const barGroups = svg.selectAll("g.bars")
@@ -100,7 +130,8 @@ export class GroupedBar extends Bar {
 		const bars = barGroupsEnter.merge(barGroups)
 			.attr("transform", (label, i) => {
 				const scaleValue = this.services.cartesianScales.getDomainValue(label, i);
-				const translateBy = scaleValue - this.getGroupWidth(allDataLabels) / 2 + this.getBarWidth(allDataLabels);
+				const translateBy = scaleValue - this.getGroupWidth() / 2;
+				// const translateBy = scaleValue - this.getGroupWidth(null) / 2 + this.getBarWidth(null);
 
 				if (this.services.cartesianScales.getOrientation() === CartesianOrientations.VERTICAL) {
 					return `translate(${translateBy}, 0)`;
@@ -134,11 +165,11 @@ export class GroupedBar extends Bar {
 				 * to draw the bars needed, and pass those coordinates down to
 				 * generateSVGPathString() to decide whether it needs to flip them
 				 */
-				const centerX = this.groupScale(d[groupIdentifier]);
-				const barWidth = this.getBarWidth(allDataLabels);
+				const startX = this.groupScale(d[groupIdentifier]);
+				const barWidth = this.getBarWidth();
 
-				const x0 = centerX - barWidth / 2;
-				const x1 = centerX + barWidth / 2;
+				const x0 = startX;
+				const x1 = startX + barWidth;
 				const y0 = this.services.cartesianScales.getRangeValue(0);
 				const y1 = this.services.cartesianScales.getRangeValue(d.value);
 

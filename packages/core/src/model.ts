@@ -159,9 +159,18 @@ export class ChartModel {
 		return this.get("dataGroups");
 	}
 
+	getActiveDataGroups() {
+		const { ACTIVE } = Configuration.legend.items.status;
+
+		return this.getDataGroups().filter(dataGroup => dataGroup.status === ACTIVE);
+	}
 
 	getDataGroupNames() {
 		return this.getDataGroups().map(dataGroup => dataGroup.name);
+	}
+
+	getActiveDataGroupNames() {
+		return this.getActiveDataGroups().map(dataGroup => dataGroup.name);
 	}
 
 	getGroupedData() {
