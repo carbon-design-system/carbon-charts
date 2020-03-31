@@ -266,13 +266,15 @@ export class CartesianScales extends Service {
 		const { includeZero } = axisOptions;
 		const scaleType = Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
 
+		if (this.model.isDataEmpty()) {
+			return [];
+		}
+
 		const displayData = this.model.getDisplayData();
 		const { identifier } = axisOptions;
 
-		const areDataEmpty = !dataExistsFn(this.model.getData());
-
 		// If domain is specified return that domain
-		if (axisOptions.domain && !areDataEmpty) {
+		if (axisOptions.domain) {
 			return axisOptions.domain;
 		}
 
