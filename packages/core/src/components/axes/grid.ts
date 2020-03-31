@@ -33,7 +33,6 @@ export class Grid extends Component {
 		const height = this.backdrop.attr("height");
 
 		const mainXScale = this.services.cartesianScales.getMainXScale();
-		// console.log(`  mainXScale: [${mainXScale.domain()}] -> [${mainXScale.range()}]`);
 		const xGrid = axisBottom(mainXScale)
 			.tickSizeInner(-height)
 			.tickSizeOuter(0);
