@@ -1,10 +1,13 @@
 @import "./../vendor/@carbon/type/scss/type";
 
 .#{$prefix}--#{$charts-prefix}--meter-title {
-	text.meter-title {
+	text.meter-title, text.percent-value {
 		fill: $text-01;
-		font-size: 16px;
+		font-size: $carbon--base-font-size;
 		font-family: carbon--font-family("sans");
+	}
+
+	text.meter-title {
 		font-weight: carbon--font-weight("semibold");
 	}
 
