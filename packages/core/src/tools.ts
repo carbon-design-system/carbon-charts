@@ -53,16 +53,16 @@ export namespace Tools {
 					console.warn("`primary` & `secondary` are no longer needed for axis configurations. Read more (TODO-TDF) here")
 				}
 
-				const identifier = providedAxisOptions["identifier"];
+				const identifier = providedAxisOptions["mapsTo"];
 				if (identifier === undefined || identifier === null) {
 					const scaleType = providedAxisOptions["scaleType"];
 
 					if (scaleType === undefined || scaleType === null) {
-						providedAxisOptions["identifier"] = "value";
+						providedAxisOptions["mapsTo"] = "value";
 					} else if (scaleType === ScaleTypes.TIME) {
-						providedAxisOptions["identifier"] = "date";
+						providedAxisOptions["mapsTo"] = "date";
 					} else if (scaleType === ScaleTypes.LABELS) {
-						providedAxisOptions["identifier"] = "key";
+						providedAxisOptions["mapsTo"] = "key";
 					}
 				}
 			} else {

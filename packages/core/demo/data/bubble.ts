@@ -18,12 +18,12 @@ export const bubbleDoubleLinearOptions = {
 	axes: {
 		bottom: {
 			title: "No. of employees",
-			identifier: "sales",
+			mapsTo: "sales",
 			includeZero: false
 		},
 		left: {
 			title: "Annual sales",
-			identifier: "profit",
+			mapsTo: "profit",
 			includeZero: false
 		}
 	},
@@ -61,10 +61,10 @@ export const bubbleDiscreteOptions = {
 		bottom: {
 			title: "2019 Annual Sales Figures",
 			scaleType: "labels",
-			identifier: "key"
+			mapsTo: "key"
 		},
 		left: {
-			identifier: "value"
+			mapsTo: "value"
 		}
 	},
 	bubble: {
@@ -82,10 +82,10 @@ export const bubbleTimeSeriesOptions = {
 		bottom: {
 			title: "2019 Annual Sales Figures",
 			scaleType: "time",
-			identifier: "date"
+			mapsTo: "date"
 		},
 		left: {
-			identifier: "value"
+			mapsTo: "value"
 		}
 	},
 	bubble: {

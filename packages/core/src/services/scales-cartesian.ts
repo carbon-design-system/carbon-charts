@@ -207,8 +207,8 @@ export class CartesianScales extends Service {
 		const scaleType = this.scaleTypes[axisPosition];
 		const scale = this.scales[axisPosition];
 
-		const { identifier } = axisOptions;
-		const value = datum[identifier] !== undefined ? datum[identifier] : datum;
+		const { mapsTo } = axisOptions;
+		const value = datum[mapsTo] !== undefined ? datum[mapsTo] : datum;
 
 		if (scaleType === ScaleTypes.LABELS) {
 			return scale(value) + scale.step() / 2;
@@ -233,14 +233,14 @@ export class CartesianScales extends Service {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", this.domainAxisPosition);
 
-		return axisOptions.identifier;
+		return axisOptions.mapsTo;
 	}
 
 	getRangeIdentifier() {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", this.rangeAxisPosition);
 
-		return axisOptions.identifier;
+		return axisOptions.mapsTo;
 	}
 
 	/** Uses the primary Y Axis to get data items associated with that value. */
@@ -267,7 +267,7 @@ export class CartesianScales extends Service {
 		const scaleType = Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
 
 		const displayData = this.model.getDisplayData();
-		const { identifier } = axisOptions;
+		const { mapsTo } = axisOptions;
 
 		// If domain is specified return that domain
 		if (axisOptions.domain) {
@@ -277,7 +277,7 @@ export class CartesianScales extends Service {
 		// If scale is a LABELS scale, return some labels as the domain
 		if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
 			// Get unique values
-			return map(displayData, d => d[identifier]).keys();
+			return map(displayData, d => d[mapsTo]).keys();
 		}
 
 
@@ -293,7 +293,7 @@ export class CartesianScales extends Service {
 				);
 			});
 		} else {
-			allDataValues = displayData.map(datum => datum[identifier]);
+			allDataValues = displayData.map(datum => datum[mapsTo]);
 		}
 
 		if (axisOptions.scaleType !== ScaleTypes.TIME && includeZero) {

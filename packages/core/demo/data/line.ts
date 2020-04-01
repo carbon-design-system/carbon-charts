@@ -26,40 +26,16 @@ export const lineOptions = {
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
-			identifier: "key",
+			mapsTo: "key",
 			scaleType: "labels"
 		},
 		left: {
-			identifier: "value",
+			mapsTo: "value",
 			title: "Conversion rate",
 			scaleType: "linear"
 		}
-	},
-	// scatter: {
-	// 	"xyz": {
-	// 		identifier: "audienceSize",
-	// 		tooltipTitle: "Audience size"
-	// 	}
-	// },
-	chartTypes: { // TODO
-		"line": [
-			"Dataset 4",
-			"Dataset 1"
-		]
 	}
 };
-
-// export const lineOptions = {
-// 	title: "Line (discrete)",
-// 	axes: {
-// 		bottom: {
-// 			title: "2019 Annual Sales Figures",
-// 			scaleType: "labels",
-// 		},
-// 		left: {
-// 		}
-// 	}
-// };
 
 export const lineTimeSeriesData = [
 	{ group: "Dataset 1", date: new Date(2019, 0, 1), value: 10000 },
@@ -89,11 +65,11 @@ export const lineTimeSeriesOptions = {
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
-			identifier: "date",
+			mapsTo: "date",
 			scaleType: "time"
 		},
 		left: {
-			identifier: "value",
+			mapsTo: "value",
 			title: "Conversion rate",
 			scaleType: "linear"
 		}
@@ -115,10 +91,10 @@ export const lineTimeSeriesRotatedTicksOptions = {
 	axes: {
 		bottom: {
 			scaleType: "time",
-			identifier: "date"
+			mapsTo: "date"
 		},
 		left: {
-			identifier: "value"
+			mapsTo: "value"
 		}
 	}
 };

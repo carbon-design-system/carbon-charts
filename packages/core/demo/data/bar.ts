@@ -27,11 +27,11 @@ export const groupedBarOptions = {
 	title: "Grouped bar (discrete)",
 	axes: {
 		left: {
-			identifier: "value"
+			mapsTo: "value"
 		},
 		bottom: {
 			scaleType: "labels",
-			identifier: "key"
+			mapsTo: "key"
 		}
 	}
 };
@@ -44,10 +44,10 @@ export const groupedHorizontalBarOptions = {
 	axes: {
 		left: {
 			scaleType: "labels",
-			identifier: "key"
+			mapsTo: "key"
 		},
 		bottom: {
-			identifier: "value"
+			mapsTo: "value"
 		}
 	}
 };
@@ -65,10 +65,10 @@ export const simpleBarOptions = {
 	title: "Simple bar (discrete)",
 	axes: {
 		left: {
-			identifier: "value"
+			mapsTo: "value"
 		},
 		bottom: {
-			identifier: "group",
+			mapsTo: "group",
 			scaleType: "labels"
 		}
 	}
@@ -78,12 +78,12 @@ export const simpleBarFixedDomainOptions = {
 	title: "Simple bar (customized domain)",
 	axes: {
 		left: {
-			identifier: "value",
+			mapsTo: "value",
 			domain: [-100000, 100000]
 		},
 		bottom: {
 			scaleType: "labels",
-			identifier: "group"
+			mapsTo: "group"
 		}
 	}
 };
@@ -95,11 +95,11 @@ export const simpleHorizontalBarOptions = {
 	title: "Simple horizontal bar (discrete)",
 	axes: {
 		left: {
-			identifier: "group",
+			mapsTo: "group",
 			scaleType: "labels"
 		},
 		bottom: {
-			identifier: "value"
+			mapsTo: "value"
 		}
 	}
 };
@@ -116,10 +116,10 @@ export const simpleBarTimeSeriesOptions = {
 	title: "Simple bar (time series - Turkish)",
 	axes: {
 		left: {
-			identifier: "value"
+			mapsTo: "value"
 		},
 		bottom: {
-			identifier: "date",
+			mapsTo: "date",
 			scaleType: "time",
 		}
 	},
@@ -131,11 +131,11 @@ export const simpleHorizontalBarTimeSeriesOptions = {
 	title: "Simple horizontal bar (time series)",
 	axes: {
 		left: {
-			identifier: "date",
+			mapsTo: "date",
 			scaleType: "time"
 		},
 		bottom: {
-			identifier: "value"
+			mapsTo: "value"
 		}
 	}
 };
@@ -170,11 +170,11 @@ export const stackedBarOptions = {
 	title: "Stacked bar (discrete)",
 	axes: {
 		left: {
-			identifier: "value",
+			mapsTo: "value",
 			stacked: true
 		},
 		bottom: {
-			identifier: "key",
+			mapsTo: "key",
 			scaleType: "labels"
 		}
 	}
@@ -222,11 +222,11 @@ export const stackedBarTimeSeriesOptions = {
 	title: "Stacked bar (time series)",
 	axes: {
 		left: {
-			identifier: "value",
+			mapsTo: "value",
 			stacked: true
 		},
 		bottom: {
-			identifier: "date",
+			mapsTo: "date",
 			scaleType: "time"
 		}
 	}

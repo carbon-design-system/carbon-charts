@@ -16,12 +16,12 @@ export const doubleLinearScatterOptions = {
 	axes: {
 		bottom: {
 			title: "No. of employees",
-			identifier: "employees",
+			mapsTo: "employees",
 			scaleType: "linear"
 		},
 		left: {
 			title: "Annual sales",
-			identifier: "sales",
+			mapsTo: "sales",
 			scaleType: "linear"
 		}
 	}
@@ -56,10 +56,10 @@ export const scatterDiscreteOptions = {
 		bottom: {
 			title: "2019 Annual Sales Figures",
 			scaleType: "labels",
-			identifier: "key"
+			mapsTo: "key"
 		},
 		left: {
-			identifier: "value"
+			mapsTo: "value"
 		}
 	}
 };
@@ -72,10 +72,10 @@ export const scatterTimeSeriesOptions = {
 		bottom: {
 			title: "2019 Annual Sales Figures",
 			scaleType: "time",
-			identifier: "date"
+			mapsTo: "date"
 		},
 		left: {
-			identifier: "value"
+			mapsTo: "value"
 		}
 	}
 };
