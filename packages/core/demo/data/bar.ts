@@ -96,7 +96,7 @@ export const simpleHorizontalBarOptions = {
 	axes: {
 		left: {
 			identifier: "group",
-			scaleType: "labels",
+			scaleType: "labels"
 		},
 		bottom: {
 			identifier: "value"
