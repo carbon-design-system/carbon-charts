@@ -1,3 +1,12 @@
-.#{$prefix}--#{$charts-prefix}--area path.area {
-	stroke-width: 1.5;
+.#{$prefix}--#{$charts-prefix}--area {
+	path.area {
+		@if $carbon--theme == $carbon--theme--g90 {
+			mix-blend-mode: screen;
+		} @else if $carbon--theme == $carbon--theme--g100 {
+			mix-blend-mode: screen;
+		} @else {
+			mix-blend-mode: multiply;
+		}
+		stroke-width: 1.5;
+	}
 }
