@@ -6,8 +6,8 @@ import { DOMUtils } from "../../services";
 import { scaleLinear } from "d3-scale";
 import { axisLeft, axisBottom } from "d3-axis";
 
-export class SkeletonGrid extends Skeleton {
-	type = "skeleton-grid";
+export class SkeletonVertOrHoriz extends Skeleton {
+	type = "skeleton-horiz";
 	backdrop: any;
 	xScale: any;
 	yScale: any;
@@ -25,6 +25,8 @@ export class SkeletonGrid extends Skeleton {
 	}
 
 	renderSkeleton(animate = true) {
+		const orientation = this.services.cartesianScales.getOrientation();
+
 		const svg = this.parent;
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton");
 
@@ -41,8 +43,12 @@ export class SkeletonGrid extends Skeleton {
 			.attr("width", xScaleEnd - xScaleStart)
 			.attr("height", yScaleEnd - yScaleStart);
 
-		this.drawXGrid(animate);
-		this.drawYGrid(animate);
+		if (orientation === "vertical") {
+			this.drawYGrid(animate);
+		}
+		if (orientation === "horizontal") {
+			this.drawXGrid(animate);
+		}
 	}
 
 	drawXGrid(animate: boolean) {
@@ -52,9 +58,6 @@ export class SkeletonGrid extends Skeleton {
 		const height = this.backdrop.attr("height");
 		const x = this.backdrop.attr("x");
 		const ticksNumber = 5;
-
-		// const xs = this.services.cartesianScales.getMainXScale().domain(["More", "b", "a", "c", "Sold", "Qty"]);
-		// const xGridGenerator = axisBottom(xs)
 
 		const xGridGenerator = axisBottom(this.xScale)
 			.tickSizeInner(-height)
@@ -67,7 +70,8 @@ export class SkeletonGrid extends Skeleton {
 
 		if (animate) {
 			const transition = this.services.transitions.getTransition("skeleton-update");
-			xGridG.transition(transition).call(xGridGenerator);
+			xGridG.transition(transition)
+				.call(xGridGenerator);
 		} else {
 			xGridG.call(xGridGenerator);
 		}
@@ -108,7 +112,7 @@ export class SkeletonGrid extends Skeleton {
 	setStyle(holder: any) {
 		const options = this.model.getOptions();
 		// TODO: get the right option that, for now, it doesn't exist
-		const strokeColor = options.grid.strokeColor ? options.grid.strokeColor : "red";
+		const strokeColor = options.grid.strokeColor ? options.grid.strokeColor : "cyan";
 		holder
 			.selectAll("line")
 			.attr("stroke", strokeColor);

@@ -10,22 +10,24 @@ import { Tools } from "@carbon/charts/tools";
 
 ////////////
 const chartsAcc = [
-	// "Barchart (x: labels, y: lin)", // <--
-	// "Barchart with fixed domain (x: labels, y: lin)", // <--
-	// "Barchart grouped with 0 (x: labels, y: lin)",
-	// "Stacked bar (x: time, y: lin)", // <--
-	// "Barchart horizontal (x: lin, y: time)",
+	// GRID
+	"Bubbleplot (x: time, y: lin)",
+	"Scatter (x: labels, y: lin)",
+	"Linechart (x: time, y: lin)",
+	"Step (x: labels, y: lin)",
 
-	// "Bubbleplot (x: time, y: lin)",
-	"Scatter (x: labels, y: lin)", // <--
+	// HORIZ
+	"Barchart (x: labels, y: lin)",
+	"Barchart with fixed domain (x: labels, y: lin)",
+	"Barchart grouped with 0 (x: labels, y: lin)",
+	"Stacked bar (x: time, y: lin)",
 
+	// VERT
+	"Barchart horizontal (x: lin, y: time)",
+
+	// OTHER
 	// "Donutchart",
-
-	// "Linechart (x: time, y: lin)",
-
 	// "Piechart",
-
-	// "Step (x: labels, y: lin)",
 ];
 const testDemoGroups = Tools.clone(storybookDemoGroups).map(demoGroup => {
 	demoGroup.demos = demoGroup.demos.filter(demo => chartsAcc.includes(demo.title));

@@ -18,7 +18,7 @@ import {
 	Legend,
 	LayoutComponent,
 	TooltipScatter,
-	SkeletonGrid
+	SkeletonGrid,
 } from "../components/index";
 
 export class BubbleChart extends AxisChart {

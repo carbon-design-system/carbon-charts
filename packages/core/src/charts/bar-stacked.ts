@@ -16,7 +16,8 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TooltipBar
+	TooltipBar,
+	SkeletonVertOrHoriz
 } from "../components/index";
 
 export class StackedBarChart extends AxisChart {
@@ -41,7 +42,8 @@ export class StackedBarChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
-			new StackedBar(this.model, this.services)
+			new StackedBar(this.model, this.services),
+			new SkeletonVertOrHoriz(this.model, this.services)
 		];
 
 		const components: any[] = this.getAxisChartComponents(graphFrameComponents);
