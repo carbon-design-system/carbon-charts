@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes } from "../../interfaces";
+import { TooltipTypes, ScaleTypes } from "../../interfaces";
 
 // D3 Imports
 import { mouse, Selection } from "d3-selection";
@@ -23,10 +23,14 @@ export class Ruler extends Component {
 	hoveredElements: GenericSvgSelection;
 
 	render() {
-		// if scale is not continuous do not show ruler
-		if (
-			this.services.cartesianScales.getMainXScale().invert === undefined
-		) {
+		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition();
+		const domainScaleType = this.services.cartesianScales.getScaleTypeByPosition(
+			domainAxisPosition
+		);
+		const isTimeSeries = domainScaleType === ScaleTypes.TIME;
+
+		// if scale type is not timeSeries do not show rule
+		if (!isTimeSeries) {
 			return;
 		}
 
@@ -186,7 +190,6 @@ export class Ruler extends Component {
 			.attr("y", yScaleStart)
 			.attr("width", xScaleEnd - xScaleStart)
 			.attr("height", yScaleEnd - yScaleStart)
-			.style("cursor", "crosshair")
 			.lower();
 
 		backdropRect.attr("width", "100%").attr("height", "100%");
