@@ -69,7 +69,7 @@ export const simpleBarOptions = {
 		},
 		bottom: {
 			identifier: "group",
-			scaleType: "labels",
+			scaleType: "labels"
 		}
 	}
 };
