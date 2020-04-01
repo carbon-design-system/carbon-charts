@@ -129,16 +129,23 @@ export class ChartModel {
 	 * Data groups
 	*/
 	protected updateAllDataGroups() {
-		// If allDataGroups hasn't been initialized yet
-		// Set it to the current set of data groups
+		// allDataGroups is used to generate a color scale that applies
+		// to all the groups. Now when the data updates, you might remove a group,
+		// and then bring it back in a newer data update, therefore
+		// the order of the groups in allDataGroups matters so that you'd never
+		// have an incorrect color assigned to a group.
+
+		// Also, a new group should only be added to allDataGroups if
+		// it doesn't currently exist
+
 		if (!this.allDataGroups) {
-			this.allDataGroups = this.getDataGroups().map(group => group.name);
+			this.allDataGroups = this.getDataGroupNames();
 		} else {
 			// Loop through current data groups
-			this.getDataGroups().forEach(dataGroup => {
+			this.getDataGroupNames().forEach(dataGroupName => {
 				// If group name hasn't been stored yet, store it
-				if (this.allDataGroups.indexOf(dataGroup.name) === -1) {
-					this.allDataGroups.push(dataGroup.name);
+				if (this.allDataGroups.indexOf(dataGroupName) === -1) {
+					this.allDataGroups.push(dataGroupName);
 				}
 			});
 		}
@@ -210,7 +217,7 @@ export class ChartModel {
 			dataGroupNames.forEach(dataGroupName => {
 				const correspondingDatum = displayData.find(datum => {
 					return datum[groupIdentifier] === dataGroupName &&
-						`${datum[domainIdentifier]}` === key;
+						datum[domainIdentifier].toString() === key;
 				});
 
 				correspondingValues[dataGroupName] = correspondingDatum ? correspondingDatum[rangeIdentifier] : null;
