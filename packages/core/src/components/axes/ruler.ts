@@ -24,7 +24,9 @@ export class Ruler extends Component {
 
 	render() {
 		// if scale is not continuous do not show ruler
-		if (this.services.cartesianScales.getMainXScale().invert === undefined) {
+		if (
+			this.services.cartesianScales.getMainXScale().invert === undefined
+		) {
 			return;
 		}
 
@@ -36,7 +38,9 @@ export class Ruler extends Component {
 		const svg = this.parent;
 		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler");
 		const line = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
-		const dataPoints: GenericSvgSelection = svg.selectAll("[role=graphics-symbol]");
+		const dataPoints: GenericSvgSelection = svg.selectAll(
+			"[role=graphics-symbol]"
+		);
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYScale = this.services.cartesianScales.getMainYScale();
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
@@ -48,7 +52,9 @@ export class Ruler extends Component {
 				.getData()
 				.datasets.map(dataset =>
 					dataset.data.map((d, i) =>
-						Number(this.services.cartesianScales.getDomainValue(d, i))
+						Number(
+							this.services.cartesianScales.getDomainValue(d, i)
+						)
 					)
 				)
 		);
@@ -118,15 +124,16 @@ export class Ruler extends Component {
 
 			// line snaps to matching point
 			lineX = sampleMatch;
+
+			ruler.attr("opacity", 1);
+			line.attr("y1", yScaleStart)
+				.attr("y2", yScaleEnd)
+				.attr("x1", lineX)
+				.attr("x2", lineX);
 		} else {
+			ruler.attr("opacity", 0);
 			dataPoints.dispatch("mouseout");
 		}
-
-		ruler.attr("opacity", 1);
-		line.attr("y1", yScaleStart)
-			.attr("y2", yScaleEnd)
-			.attr("x1", lineX)
-			.attr("x2", lineX);
 	}
 
 	hideRuler() {
@@ -168,7 +175,10 @@ export class Ruler extends Component {
 
 		// Get height from the grid
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
-		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, "rect.chart-grid-backdrop");
+		const backdropRect = DOMUtils.appendOrSelect(
+			this.backdrop,
+			"rect.chart-grid-backdrop"
+		);
 
 		this.backdrop
 			.merge(backdropRect)
