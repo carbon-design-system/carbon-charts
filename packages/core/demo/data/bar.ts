@@ -132,7 +132,7 @@ export const simpleHorizontalBarTimeSeriesOptions = {
 	axes: {
 		left: {
 			identifier: "date",
-			scaleType: "time",
+			scaleType: "time"
 		},
 		bottom: {
 			identifier: "value"
