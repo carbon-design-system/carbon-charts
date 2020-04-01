@@ -1,19 +1,16 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes, AxisPositions } from "../../interfaces";
+import { TooltipTypes } from "../../interfaces";
 
 // D3 Imports
 import { mouse, Selection } from "d3-selection";
-import { scaleLinear } from "d3-scale";
 
-import textWidth from "text-width";
 import { isEqual } from "lodash-es";
 
 type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
 
 const THRESHOLD = 5;
-const AXIS_TOOLTIP_TEXT_SIZE = 12;
 
 /** check if x is inside threshold area extents  */
 function pointIsMatch(dx: number, x: number) {
@@ -42,7 +39,6 @@ export class Ruler extends Component {
 		const dataPoints: GenericSvgSelection = svg.selectAll("[role=graphics-symbol]");
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYScale = this.services.cartesianScales.getMainYScale();
-		const [xScaleStart, xScaleEnd] = mainXScale.range();
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
 
 		let lineX = x;
@@ -131,42 +127,6 @@ export class Ruler extends Component {
 			.attr("y2", yScaleEnd)
 			.attr("x1", lineX)
 			.attr("x2", lineX);
-
-		// append axis tooltip
-
-		const axisPosition: AxisPositions = this.services.cartesianScales.domainAxisPosition;
-		const axisTooltip = DOMUtils.appendOrSelect(ruler, "g.ruler-axis-tooltip");
-
-		const axisTooltipValue = `${mainXScale.invert(lineX)}`.substr(0, 10);
-		const axisTooltipWidth = textWidth(axisTooltipValue, {
-			size: AXIS_TOOLTIP_TEXT_SIZE
-		});
-		const axisTooltipHeight = 20;
-		const axisTooltipOffset = 5;
-
-		// make sure tooltip does not go out of axis bbox
-		const axisTooltipX =
-			lineX + axisTooltipWidth / 2 > xScaleEnd
-				? xScaleEnd - axisTooltipWidth / 2
-				: lineX - axisTooltipWidth / 2 < xScaleStart
-				? xScaleStart + axisTooltipWidth / 2
-				: lineX;
-
-		const axisTooltipRectY =
-			axisPosition === AxisPositions.BOTTOM
-				? yScaleEnd + axisTooltipOffset
-				: yScaleStart - axisTooltipHeight - axisTooltipOffset;
-
-		DOMUtils.appendOrSelect(axisTooltip, "rect.axis-tooltip-box")
-			.attr("x", axisTooltipX - axisTooltipWidth / 2)
-			.attr("y", axisTooltipRectY)
-			.attr("width", axisTooltipWidth)
-			.attr("height", axisTooltipHeight);
-
-		DOMUtils.appendOrSelect(axisTooltip, "text.axis-tooltip-text")
-			.attr("x", axisTooltipX)
-			.attr("y", axisTooltipRectY + axisTooltipHeight / 2)
-			.text(axisTooltipValue);
 	}
 
 	hideRuler() {
