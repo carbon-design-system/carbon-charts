@@ -61,25 +61,25 @@ export class Scatter extends Component {
 		const options = this.model.getOptions();
 		const { filled } = options.points;
 
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		selection.raise()
 			.classed("dot", true)
-			.classed("filled", d => this.model.getIsFilled(d[groupIdentifier], d[domainIdentifier], d, filled))
-			.classed("unfilled", d => !this.model.getIsFilled(d[groupIdentifier], d[domainIdentifier], d, filled))
+			.classed("filled", d => this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
+			.classed("unfilled", d => !this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
 			.attr("cx", (d, i) => this.services.cartesianScales.getDomainValue(d, i))
 			.transition(this.services.transitions.getTransition("scatter-update-enter", animate))
 			.attr("cy", (d, i) => this.services.cartesianScales.getRangeValue(d, i))
 			.attr("r", options.points.radius)
 			.attr("fill", d => {
-				if (this.model.getIsFilled(d[groupIdentifier], d[domainIdentifier], d, filled)) {
-					return this.model.getFillColor(d[groupIdentifier], d[domainIdentifier], d);
+				if (this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled)) {
+					return this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d);
 				}
 			})
 			.attr("fill-opacity", filled ? 0.2 : 1)
-			.attr("stroke", d => this.model.getStrokeColor(d[groupIdentifier], d[domainIdentifier], d))
+			.attr("stroke", d => this.model.getStrokeColor(d[groupMapsTo], d[domainIdentifier], d))
 			.attr("opacity", 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
@@ -93,11 +93,11 @@ export class Scatter extends Component {
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
-		const { groupIdentifier } = this.model.getOptions().data;
+		const { groupMapsTo } = this.model.getOptions().data;
 
 		this.parent.selectAll("circle.dot")
 			.transition(this.services.transitions.getTransition("legend-hover-scatter"))
-			.attr("opacity", d => (d[groupIdentifier] !== hoveredElement.datum()["name"]) ? 0.3 : 1);
+			.attr("opacity", d => (d[groupMapsTo] !== hoveredElement.datum()["name"]) ? 0.3 : 1);
 	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
@@ -108,7 +108,7 @@ export class Scatter extends Component {
 
 	addEventListeners() {
 		const self = this;
-		const { groupIdentifier } = this.model.getOptions().data;
+		const { groupMapsTo } = this.model.getOptions().data;
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		this.parent.selectAll("circle")
@@ -116,7 +116,7 @@ export class Scatter extends Component {
 				const hoveredElement = select(this);
 
 				hoveredElement.classed("hovered", true)
-					.style("fill", (d: any) => self.model.getFillColor(d[groupIdentifier], d[domainIdentifier], d));
+					.style("fill", (d: any) => self.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d));
 
 				const eventNameToDispatch = d3Event.type === "mouseover" ? Events.Scatter.SCATTER_MOUSEOVER : Events.Scatter.SCATTER_MOUSEMOVE;
 				// Dispatch mouse event

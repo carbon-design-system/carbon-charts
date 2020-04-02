@@ -26,14 +26,14 @@ export class SimpleBar extends Bar {
 
 	render(animate: boolean) {
 		const options = this.model.getOptions();
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 
 		// Grab container SVG
 		const svg = this.getContainerSVG();
 
 		// Update data on all bars
 		const bars = svg.selectAll("path.bar")
-			.data(this.model.getDisplayData(), datum => datum[groupIdentifier]);
+			.data(this.model.getDisplayData(), datum => datum[groupMapsTo]);
 
 		// Remove bars that are no longer needed
 		bars.exit()
@@ -49,7 +49,7 @@ export class SimpleBar extends Bar {
 			.classed("bar", true)
 			.attr("width", this.getBarWidth.bind(this))
 			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-			.attr("fill", d => this.model.getFillColor(d[groupIdentifier]))
+			.attr("fill", d => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
 				/*
 				* Orientation support for horizontal/vertical bar charts
@@ -80,11 +80,11 @@ export class SimpleBar extends Bar {
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-		const { groupIdentifier } = this.model.getOptions().data;
+		const { groupMapsTo } = this.model.getOptions().data;
 
 		this.parent.selectAll("path.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-simple-bar"))
-			.attr("opacity", d => (d[groupIdentifier] !== hoveredElement.datum()["name"]) ? 0.3 : 1);
+			.attr("opacity", d => (d[groupMapsTo] !== hoveredElement.datum()["name"]) ? 0.3 : 1);
 	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
@@ -95,7 +95,7 @@ export class SimpleBar extends Bar {
 
 	addEventListeners() {
 		const options = this.model.getOptions();
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 
 		const self = this;
 		this.parent.selectAll("path.bar")
@@ -135,7 +135,7 @@ export class SimpleBar extends Bar {
 				hoveredElement.classed("hovered", false);
 
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
-					.attr("fill", (d: any) => self.model.getFillColor(d[groupIdentifier]));
+					.attr("fill", (d: any) => self.model.getFillColor(d[groupMapsTo]));
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {

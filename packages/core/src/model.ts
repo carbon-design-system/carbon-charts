@@ -96,10 +96,10 @@ export class ChartModel {
 
 		// Remove datasets that have been disabled
 		const displayData = Tools.clone(this.get("data"));
-		const { groupIdentifier } = this.getOptions().data;
+		const { groupMapsTo } = this.getOptions().data;
 
 		return displayData.filter(datum => {
-			const group = dataGroups.find(group => group.name === datum[groupIdentifier]);
+			const group = dataGroups.find(group => group.name === datum[groupMapsTo]);
 
 			return group.status === ACTIVE;
 		});
@@ -152,10 +152,10 @@ export class ChartModel {
 	}
 
 	protected generateDataGroups(data) {
-		const { groupIdentifier } = this.getOptions().data;
+		const { groupMapsTo } = this.getOptions().data;
 		const { ACTIVE } = Configuration.legend.items.status;
 
-		const uniqueDataGroups = map(data, datum => datum[groupIdentifier]).keys();
+		const uniqueDataGroups = map(data, datum => datum[groupMapsTo]).keys();
 		return uniqueDataGroups.map(groupName => ({
 			name: groupName,
 			status: ACTIVE
@@ -183,10 +183,10 @@ export class ChartModel {
 	getGroupedData() {
 		const displayData = this.getDisplayData();
 		const groupedData = {};
-		const { groupIdentifier } = this.getOptions().data;
+		const { groupMapsTo } = this.getOptions().data;
 
 		displayData.map(datum => {
-			const group = datum[groupIdentifier];
+			const group = datum[groupMapsTo];
 			if (groupedData[group] !== null && groupedData[group] !== undefined) {
 				groupedData[group].push(datum);
 			} else {
@@ -203,7 +203,7 @@ export class ChartModel {
 
 	getDataValuesGroupedByKeys() {
 		const options = this.getOptions();
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 
 		const displayData = this.getDisplayData();
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
@@ -216,7 +216,7 @@ export class ChartModel {
 			const correspondingValues = { sharedStackKey: key };
 			dataGroupNames.forEach(dataGroupName => {
 				const correspondingDatum = displayData.find(datum => {
-					return datum[groupIdentifier] === dataGroupName &&
+					return datum[groupMapsTo] === dataGroupName &&
 						datum[domainIdentifier].toString() === key;
 				});
 
@@ -228,7 +228,7 @@ export class ChartModel {
 
 	getStackedData() {
 		const options = this.getOptions();
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 
 		const dataGroupNames = this.getDataGroupNames();
 		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys();
@@ -240,7 +240,7 @@ export class ChartModel {
 					.filter((key: any) => !isNaN(key))
 					.map(key => {
 						const element = series[key];
-						element[groupIdentifier] = dataGroupNames[i];
+						element[groupMapsTo] = dataGroupNames[i];
 
 						return element;
 					});
@@ -345,17 +345,42 @@ export class ChartModel {
 	 * Fill scales
 	*/
 	protected setColorScale() {
-		let colorRange = colorPalettes.DEFAULT;
+		let defaultColors = colorPalettes.DEFAULT;
 
 		const options = this.getOptions();
-		const userProvidedColorRange = Tools.getProperty(options, "color", "range");
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
 
-		if (userProvidedColorRange !== null && userProvidedColorRange.length > 0) {
-			colorRange = userProvidedColorRange;
+		// If there is no valid user provided scale, use the default set of colors
+		if (userProvidedScale === null || Object.keys(userProvidedScale).length === 0) {
+			this.colorScale = scaleOrdinal().range(defaultColors)
+				.domain(this.allDataGroups);
+
+			return;
 		}
 
+		/**
+		 * Go through allDataGroups. If a data group has a color value provided
+		 * by the user, add that to the color range
+		 * If not, add a default color
+		 */
+		const colorRange = [];
+		let colorIndex = 0;
+		this.allDataGroups.forEach(dataGroup => {
+			if (userProvidedScale[dataGroup]) {
+				colorRange.push(userProvidedScale[dataGroup]);
+			} else {
+				colorRange.push(defaultColors[colorIndex]);
+			}
+
+			if (colorIndex === defaultColors.length - 1) {
+				colorIndex = 0;
+			} else {
+				colorIndex++;
+			}
+		});
+
 		this.colorScale = scaleOrdinal().range(colorRange)
-					.domain(this.allDataGroups);
+				.domain(this.allDataGroups);
 	}
 
 	/**

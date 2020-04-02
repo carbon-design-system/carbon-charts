@@ -33,7 +33,7 @@ export class StackedBar extends Bar {
 		// Chart options mixed with the internal configurations
 		const displayData = this.model.getDisplayData();
 		const options = this.model.getOptions();
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
@@ -73,7 +73,7 @@ export class StackedBar extends Bar {
 			.merge(bars)
 			.classed("bar", true)
 			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-			.attr("fill", d => this.model.getFillColor(d[groupIdentifier]))
+			.attr("fill", d => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
 				const key = stackKeys[i];
 
@@ -131,7 +131,7 @@ export class StackedBar extends Bar {
 
 	addEventListeners() {
 		const options = this.model.getOptions();
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 
 		const self = this;
 		this.parent.selectAll("path.bar")
@@ -152,14 +152,14 @@ export class StackedBar extends Bar {
 				const itemData = datum.data[datum.group];
 
 				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
-				const { groupIdentifier } = self.model.getOptions().data;
+				const { groupMapsTo } = self.model.getOptions().data;
 		
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
 					hoveredElement,
 					data: {
 						[rangeIdentifier]: itemData,
-						[groupIdentifier]: datum.group
+						[groupMapsTo]: datum.group
 					},
 					type: TooltipTypes.DATAPOINT
 				});
@@ -176,7 +176,7 @@ export class StackedBar extends Bar {
 				hoveredElement.classed("hovered", false);
 
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
-					.attr("fill", (d: any) => self.model.getFillColor(d[groupIdentifier]));
+					.attr("fill", (d: any) => self.model.getFillColor(d[groupMapsTo]));
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {

@@ -99,7 +99,7 @@ export class GroupedBar extends Bar {
 		const displayData = this.model.getDisplayData();
 
 		const options = this.model.getOptions();
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		// Get unique labels
@@ -157,7 +157,7 @@ export class GroupedBar extends Bar {
 		barsEnter.merge(bars)
 			.classed("bar", true)
 			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-			.attr("fill", d => this.model.getFillColor(d[groupIdentifier]))
+			.attr("fill", d => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", d => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
@@ -165,7 +165,7 @@ export class GroupedBar extends Bar {
 				 * to draw the bars needed, and pass those coordinates down to
 				 * generateSVGPathString() to decide whether it needs to flip them
 				 */
-				const startX = this.groupScale(d[groupIdentifier]);
+				const startX = this.groupScale(d[groupMapsTo]);
 				const barWidth = this.getBarWidth();
 
 				const x0 = startX;
@@ -192,11 +192,11 @@ export class GroupedBar extends Bar {
 	handleLegendOnHover = (event: CustomEvent)  => {
 		const { hoveredElement } = event.detail;
 
-		const { groupIdentifier } = this.model.getOptions().data;
+		const { groupMapsTo } = this.model.getOptions().data;
 
 		this.parent.selectAll("path.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => (d[groupIdentifier] !== hoveredElement.datum()["name"]) ? 0.3 : 1);
+			.attr("opacity", d => (d[groupMapsTo] !== hoveredElement.datum()["name"]) ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements
@@ -245,9 +245,9 @@ export class GroupedBar extends Bar {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
-				const { groupIdentifier } = self.model.getOptions().data;
+				const { groupMapsTo } = self.model.getOptions().data;
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
-					.attr("fill", (d: any) => self.model.getFillColor(d[groupIdentifier]));
+					.attr("fill", (d: any) => self.model.getFillColor(d[groupMapsTo]));
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {

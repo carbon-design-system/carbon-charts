@@ -28,7 +28,7 @@ export const bubbleDoubleLinearOptions = {
 		}
 	},
 	bubble: {
-		radiusIdentifier: "surplus"
+		radiusMapsTo: "surplus"
 	}
 };
 
@@ -68,7 +68,7 @@ export const bubbleDiscreteOptions = {
 		}
 	},
 	bubble: {
-		radiusIdentifier: "surplus"
+		radiusMapsTo: "surplus"
 	}
 };
 
@@ -89,6 +89,6 @@ export const bubbleTimeSeriesOptions = {
 		}
 	},
 	bubble: {
-		radiusIdentifier: "surplus"
+		radiusMapsTo: "surplus"
 	}
 };

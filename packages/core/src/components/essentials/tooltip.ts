@@ -98,7 +98,7 @@ export class Tooltip extends Component {
 		}
 		// this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
 		const dataVal = Tools.getProperty(data, "data") ? data.data : data;
-		const { groupIdentifier } = this.model.getOptions().data;
+		const { groupMapsTo } = this.model.getOptions().data;
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		// format the value if needed
@@ -106,7 +106,7 @@ export class Tooltip extends Component {
 		this.model.getOptions().tooltip.valueFormatter(dataVal[rangeIdentifier]) : dataVal[rangeIdentifier].toLocaleString("en");
 
 		// pie charts don't have a dataset label since they only support one dataset
-		const label = dataVal[groupIdentifier];
+		const label = dataVal[groupMapsTo];
 
 		return `<div class="datapoint-tooltip">
 					<p class="label">${label}</p>
@@ -124,20 +124,20 @@ export class Tooltip extends Component {
 
 		return  "<ul class='multi-tooltip'>" +
 			data.map(datum => {
-				const { groupIdentifier } = this.model.getOptions().data;
+				const { groupMapsTo } = this.model.getOptions().data;
 				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 				const userProvidedValueFormatter = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter");
 				const formattedValue = userProvidedValueFormatter ? userProvidedValueFormatter(datum[rangeIdentifier]) : datum[rangeIdentifier].toLocaleString("en");
 
 				// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
-				const indicatorColor = this.model.getStrokeColor(datum[groupIdentifier]);
+				const indicatorColor = this.model.getStrokeColor(datum[groupMapsTo]);
 
 				return `
 				<li>
 					<div class="datapoint-tooltip">
 						<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
-						<p class="label">${datum[groupIdentifier]}</p>
+						<p class="label">${datum[groupMapsTo]}</p>
 						<p class="value">${formattedValue}</p>
 					</div>
 				</li>`;

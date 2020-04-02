@@ -54,7 +54,7 @@ export class Pie extends Component {
 
 		const displayData = this.model.getDisplayData();
 		const options = this.model.getOptions();
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
@@ -82,7 +82,7 @@ export class Pie extends Component {
 		const slicesGroup = DOMUtils.appendOrSelect(svg, "g.slices")
 			.attr("role", Roles.GROUP);
 		const paths = slicesGroup.selectAll("path.slice")
-			.data(pieLayoutData, d => d.data[groupIdentifier]);
+			.data(pieLayoutData, d => d.data[groupMapsTo]);
 
 		// Remove slices that need to be exited
 		paths.exit()
@@ -97,7 +97,7 @@ export class Pie extends Component {
 
 		// Update styles & position on existing and entering slices
 		enteringPaths.merge(paths)
-			.attr("fill", d => self.model.getFillColor(d.data[groupIdentifier]))
+			.attr("fill", d => self.model.getFillColor(d.data[groupMapsTo]))
 			.attr("d", this.arc)
 			.transition(this.services.transitions.getTransition("pie-slice-enter-update", animate))
 			.attr("opacity", 1)
@@ -113,7 +113,7 @@ export class Pie extends Component {
 		// Draw the slice labels
 		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels").attr("role", Roles.GROUP);
 		const labels = labelsGroup.selectAll("text.pie-label")
-			.data(pieLayoutData, (d: any) => d.data[groupIdentifier]);
+			.data(pieLayoutData, (d: any) => d.data[groupMapsTo]);
 
 		// Remove labels that are existing
 		labels.exit()
@@ -288,11 +288,11 @@ export class Pie extends Component {
 	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-		const { groupIdentifier } = this.model.getOptions().data;
+		const { groupMapsTo } = this.model.getOptions().data;
 
 		this.parent.selectAll("path.slice")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => d.data[groupIdentifier] !== hoveredElement.datum()["name"] ? 0.3 : 1);
+			.attr("opacity", d => d.data[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements

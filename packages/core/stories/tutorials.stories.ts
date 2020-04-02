@@ -23,7 +23,7 @@ We've recently updated the default \`@carbon/charts\` data format to be of a tab
 
 This means more flexibility for our users in terms of the shape of the data they can provide to the library.
 
-The library is **still able to process the old data format,** however users are **recommended to update** their data over to the tabular format. Support for the old data format will be **stopped at 1.0**
+**If you're looking to use @carbon/charts@0.30.8 and above, we recommend updating your data type as it should be a quick and easy switch.**
 
 \`\`\`js
 // Before
@@ -96,12 +96,12 @@ export const pieData = [
 \`\`\`
 
 ##### Customizable options:
-You're able to customize the \`groupIdentifier\` which is used to determine the key within your data that identifies the grouping of the datapoints.
+You're able to customize the \`groupMapsTo\` which is used to determine the key within your data that identifies the grouping of the datapoints.
 
 \`\`\`js
 const simpleBarOptions = {
     data: {
-		groupIdentifier: "category"
+		groupMapsTo: "category"
 	}
 };
 
@@ -131,7 +131,7 @@ export const bubbleDoubleLinearOptions = {
 		}
 	},
 	bubble: {
-		radiusIdentifier: "surplus"
+		radiusMapsTo: "surplus"
 	}
 };
 
@@ -149,15 +149,18 @@ const bubbleDoubleLinearData = [
 ];
 \`\`\`
 
-**Default value for \`radiusIdentifier\` is \`radius\`**
+**Default value for \`radiusMapsTo\` is \`radius\`**
 
-**Color scale**
+##### Color scale
 
 You're also able to provide a custom \`color range\` to be used within the color scale.
 \`\`\`
 const simpleBarOptions = {
 	color: {
-		range: ["red", "blue", "green"]
+		scale: {
+			"Dataset 1": "blue",
+			"Dataset 2": "red"
+		} // Other data groups would use default colors
 	}
 };
 \`\`\`

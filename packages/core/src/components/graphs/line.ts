@@ -88,7 +88,7 @@ export class Line extends Component {
 		this.parent.selectAll("g.lines")
 			.transition(this.services.transitions.getTransition("legend-hover-line"))
 			.attr("opacity", group => {
-				if (group.name !== hoveredElement.datum()["key"]) {
+				if (group.name !== hoveredElement.datum()["name"]) {
 					return Configuration.lines.opacity.unselected;
 				}
 
