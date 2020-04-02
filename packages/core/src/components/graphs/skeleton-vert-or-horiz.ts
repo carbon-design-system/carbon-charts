@@ -26,9 +26,24 @@ export class SkeletonVertOrHoriz extends Skeleton {
 
 	renderSkeleton(animate = true) {
 		const orientation = this.services.cartesianScales.getOrientation();
+		this.drawBackdrop();
+		if (orientation === "vertical") {
+			this.drawYGrid(animate);
+		}
+		if (orientation === "horizontal") {
+			this.drawXGrid(animate);
+		}
+		this.setStyle("green");
+	}
 
+	drawBackdrop() {
 		const svg = this.parent;
+
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton");
+		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, "rect.backdrop.skeleton");
+		backdropRect
+			.attr("width", "100%")
+			.attr("height", "100%");
 
 		const xRange = this.services.cartesianScales.getMainXScale().range();
 		const yRange = this.services.cartesianScales.getMainYScale().range();
@@ -38,17 +53,11 @@ export class SkeletonVertOrHoriz extends Skeleton {
 		const [yScaleEnd, yScaleStart] = yRange;
 
 		this.backdrop
+			.merge(backdropRect)
 			.attr("x", xScaleStart)
 			.attr("y", yScaleStart)
 			.attr("width", xScaleEnd - xScaleStart)
 			.attr("height", yScaleEnd - yScaleStart);
-
-		if (orientation === "vertical") {
-			this.drawYGrid(animate);
-		}
-		if (orientation === "horizontal") {
-			this.drawXGrid(animate);
-		}
 	}
 
 	drawXGrid(animate: boolean) {
@@ -70,14 +79,14 @@ export class SkeletonVertOrHoriz extends Skeleton {
 
 		if (animate) {
 			const transition = this.services.transitions.getTransition("skeleton-update");
-			xGridG.transition(transition)
-				.call(xGridGenerator);
+			xGridG.transition(transition).call(xGridGenerator);
 		} else {
 			xGridG.call(xGridGenerator);
 		}
 
-		this.setStyle(xGridG);
-		this.clean(xGridG, 0);
+		// clean
+		xGridG.select("path").remove();
+		xGridG.selectAll("text").remove();
 	}
 
 	drawYGrid(animate: boolean) {
@@ -105,35 +114,8 @@ export class SkeletonVertOrHoriz extends Skeleton {
 			yGridG.call(yGridGenerator);
 		}
 
-		this.setStyle(yGridG);
-		this.clean(yGridG, 10);
-	}
-
-	setStyle(holder: any) {
-		const options = this.model.getOptions();
-		// TODO: get the right option that, for now, it doesn't exist
-		const strokeColor = options.grid.strokeColor ? options.grid.strokeColor : "cyan";
-		holder
-			.selectAll("line")
-			.attr("stroke", strokeColor);
-	}
-
-	// remove unnecessary elements like:
-	// 	- ticks labels
-	//  - axis path
-	// 	- line of index idxToRemove because it stays over the axis
-	clean(holder: any, idxToRemove: number) {
-		holder.select("path")
-			.remove();
-		holder.selectAll("text")
-			.remove();
-		// holder.selectAll(".tick")
-		// 	.filter((d, i) => i === idxToRemove)
-		// 	.remove();
-	}
-
-	removeSkeleton() {
-		const container = this.parent.select("svg.chart-skeleton");
-		container.remove();
+		// clean
+		yGridG.select("path").remove();
+		yGridG.selectAll("text").remove();
 	}
 }
