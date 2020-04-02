@@ -7,7 +7,7 @@ import { scaleLinear } from "d3-scale";
 import { axisLeft, axisBottom } from "d3-axis";
 
 export class SkeletonVertOrHoriz extends Skeleton {
-	type = "skeleton-horiz";
+	type = "skeleton";
 	backdrop: any;
 	xScale: any;
 	yScale: any;
@@ -33,14 +33,14 @@ export class SkeletonVertOrHoriz extends Skeleton {
 		if (orientation === "horizontal") {
 			this.drawXGrid(animate);
 		}
-		this.setStyle("green");
+		this.setStyle();
 	}
 
 	drawBackdrop() {
 		const svg = this.parent;
 
-		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton");
-		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, "rect.backdrop.skeleton");
+		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton-backdrop");
+		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, "rect.chart-skeleton-backdrop");
 		backdropRect
 			.attr("width", "100%")
 			.attr("height", "100%");
@@ -61,7 +61,7 @@ export class SkeletonVertOrHoriz extends Skeleton {
 	}
 
 	drawXGrid(animate: boolean) {
-		DOMUtils.appendOrSelect(this.backdrop, "g.x.skeleton");
+		DOMUtils.appendOrSelect(this.backdrop, "g.x.skeleton.grid");
 
 		const svg = this.parent;
 		const height = this.backdrop.attr("height");
@@ -90,7 +90,7 @@ export class SkeletonVertOrHoriz extends Skeleton {
 	}
 
 	drawYGrid(animate: boolean) {
-		DOMUtils.appendOrSelect(this.backdrop, "g.y.skeleton");
+		DOMUtils.appendOrSelect(this.backdrop, "g.y.skeleton.grid");
 
 		const svg = this.parent;
 		const width = this.backdrop.attr("width");

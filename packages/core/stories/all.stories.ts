@@ -188,7 +188,7 @@ if (process.env.NODE_ENV !== "production") {
 		testDemoGroups.forEach(demoGroup => {
 			// storybookDemoGroups.forEach(demoGroup => {
 			demoGroup.demos.forEach(demo => {
-				console.log(`%c\n\n${demo.title}`, "background: #fc0388; color: #FFFFFF; font-weight: bold;");
+				// console.log(`%c\n\n${demo.title}`, "background: #fc0388; color: #FFFFFF; font-weight: bold;");
 
 				grid.appendChild(row);
 				if (i % 2 === 0 && i !== 0) {
