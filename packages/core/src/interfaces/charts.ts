@@ -48,7 +48,7 @@ export interface BaseChartOptions {
 		/**
 		 * optional prefixing string for css classes (defaults to 'cc')
 		 */
-		prefix?: String;
+		prefix?: string;
 	};
 	/**
 	 * options related to charting data
@@ -57,7 +57,16 @@ export interface BaseChartOptions {
 		/**
 		 * identifier for data groups
 		 */
-		groupIdentifier?: String;
+		groupIdentifier?: string;
+	};
+	/**
+	 * options related to color scales
+	 */
+	color?: {
+		/**
+		 * e.g. ["red", "blue", "green"]
+		 */
+		range?: string[];
 	};
 }
 

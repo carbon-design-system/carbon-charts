@@ -141,6 +141,9 @@ const chart: BaseChartOptions = {
 	},
 	data: {
 		groupIdentifier: "group"
+	},
+	color: {
+		range: null
 	}
 };
 

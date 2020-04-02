@@ -345,9 +345,17 @@ export class ChartModel {
 	 * Fill scales
 	*/
 	protected setColorScale() {
-		const colors = colorPalettes.DEFAULT;
-		this.colorScale = scaleOrdinal().range(colors)
-			.domain(this.allDataGroups);
+		let colorRange = colorPalettes.DEFAULT;
+
+		const options = this.getOptions();
+		const userProvidedColorRange = Tools.getProperty(options, "color", "range");
+
+		if (userProvidedColorRange !== null && userProvidedColorRange.length > 0) {
+			colorRange = userProvidedColorRange;
+		}
+
+		this.colorScale = scaleOrdinal().range(colorRange)
+					.domain(this.allDataGroups);
 	}
 
 	/**

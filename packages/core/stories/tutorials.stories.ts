@@ -150,6 +150,17 @@ const bubbleDoubleLinearData = [
 \`\`\`
 
 **Default value for \`radiusIdentifier\` is \`radius\`**
+
+**Color scale**
+
+You're also able to provide a custom \`color range\` to be used within the color scale.
+\`\`\`
+const simpleBarOptions = {
+	color: {
+		range: ["red", "blue", "green"]
+	}
+};
+\`\`\`
     `);
 
     container.querySelectorAll("pre code").forEach((block) => {
