@@ -25,7 +25,6 @@ This means more flexibility for our users in terms of the shape of the data they
 
 The library is **still able to process the old data format,** however users are **recommended to update** their data over to the tabular format. Support for the old data format will be **stopped at 1.0**
 
-##### Before:
 \`\`\`js
 // Before
 const simpleBarData = {
