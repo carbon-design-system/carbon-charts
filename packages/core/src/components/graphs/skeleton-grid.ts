@@ -55,7 +55,7 @@ export class SkeletonGrid extends Skeleton {
 	}
 
 	drawXGrid(animate: boolean) {
-		DOMUtils.appendOrSelect(this.backdrop, "g.x.skeleton.grid");
+		DOMUtils.appendOrSelect(this.backdrop, "g.x.skeleton");
 
 		const svg = this.parent;
 		const height = this.backdrop.attr("height");
@@ -84,7 +84,7 @@ export class SkeletonGrid extends Skeleton {
 	}
 
 	drawYGrid(animate: boolean) {
-		DOMUtils.appendOrSelect(this.backdrop, "g.y.skeleton.grid");
+		DOMUtils.appendOrSelect(this.backdrop, "g.y.skeleton");
 
 		const svg = this.parent;
 		const width = this.backdrop.attr("width");
