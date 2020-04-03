@@ -22,7 +22,7 @@ export class Skeleton extends Component {
 	drawBackdrop() {
 		const svg = this.parent;
 
-		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton-backdrop");
+		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton");
 		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, "rect.chart-skeleton-backdrop");
 		backdropRect
 			.attr("width", "100%")
@@ -165,7 +165,7 @@ export class Skeleton extends Component {
 	}
 
 	removeSkeleton() {
-		const container = this.parent.select("svg.chart-skeleton-backdrop");
+		const container = this.parent.select("svg.chart-skeleton");
 		container.remove();
 	}
 
