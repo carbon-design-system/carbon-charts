@@ -6,8 +6,6 @@ import { DOMUtils } from "../../services";
 import { axisLeft, axisBottom } from "d3-axis";
 
 export class SkeletonGrid extends Skeleton {
-	backdrop: any;
-
 	render() {
 		const areDataEmpty = this.model.isDataEmpty();
 
@@ -26,26 +24,6 @@ export class SkeletonGrid extends Skeleton {
 		this.drawXGrid(animate);
 		this.drawYGrid(animate);
 		this.setStyle();
-	}
-
-	drawBackdrop() {
-		const svg = this.parent;
-
-		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton-backdrop");
-		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, "rect.chart-skeleton-backdrop");
-		backdropRect
-			.attr("width", "100%")
-			.attr("height", "100%");
-
-		const [xScaleStart, xScaleEnd] = this.xScale.range();
-		const [yScaleEnd, yScaleStart] = this.yScale.range();
-
-		this.backdrop
-			.merge(backdropRect)
-			.attr("x", xScaleStart)
-			.attr("y", yScaleStart)
-			.attr("width", xScaleEnd - xScaleStart)
-			.attr("height", yScaleEnd - yScaleStart);
 	}
 
 	drawXGrid(animate: boolean) {
