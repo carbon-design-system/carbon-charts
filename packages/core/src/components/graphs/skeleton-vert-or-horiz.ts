@@ -3,7 +3,6 @@ import { Skeleton } from "./skeleton";
 import { DOMUtils } from "../../services";
 
 // D3 Imports
-import { scaleLinear } from "d3-scale";
 import { axisLeft, axisBottom } from "d3-axis";
 
 export class SkeletonVertOrHoriz extends Skeleton {
@@ -26,6 +25,7 @@ export class SkeletonVertOrHoriz extends Skeleton {
 
 	renderSkeleton(animate = true) {
 		const orientation = this.services.cartesianScales.getOrientation();
+		this.setScales();
 		this.drawBackdrop();
 		if (orientation === "vertical") {
 			this.drawYGrid(animate);
@@ -45,12 +45,8 @@ export class SkeletonVertOrHoriz extends Skeleton {
 			.attr("width", "100%")
 			.attr("height", "100%");
 
-		const xRange = this.services.cartesianScales.getMainXScale().range();
-		const yRange = this.services.cartesianScales.getMainYScale().range();
-		this.xScale = scaleLinear().domain([0, 1]).range(xRange);
-		this.yScale = scaleLinear().domain([0, 1]).range(yRange);
-		const [xScaleStart, xScaleEnd] = xRange;
-		const [yScaleEnd, yScaleStart] = yRange;
+		const [xScaleStart, xScaleEnd] = this.xScale.range();
+		const [yScaleEnd, yScaleStart] = this.yScale.range();
 
 		this.backdrop
 			.merge(backdropRect)
