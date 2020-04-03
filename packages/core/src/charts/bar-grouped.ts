@@ -2,8 +2,8 @@
 import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
 import {
-	ChartConfig,
-	ScatterChartOptions
+	BarChartOptions,
+	ChartConfig
 } from "../interfaces/index";
 import { Tools } from "../tools";
 
@@ -21,7 +21,7 @@ import {
 } from "../components/index";
 
 export class GroupedBarChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<ScatterChartOptions>) {
+	constructor(holder: Element, chartConfigs: ChartConfig<BarChartOptions>) {
 		super(holder, chartConfigs);
 
 		// Merge the default options for this chart
