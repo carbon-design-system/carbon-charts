@@ -95,7 +95,7 @@ export class Ruler extends Component {
 
 			const highlightItems = this.services.cartesianScales.getDataFromDomain(
 				mainXScale.invert(sampleMatch)
-			);
+			).filter(d => d.value);
 
 			const hoveredElements = dataPoints.filter((d, i) =>
 				scaledValuesMatches.includes(
