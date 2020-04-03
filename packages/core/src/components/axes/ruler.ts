@@ -6,7 +6,7 @@ import { TooltipTypes, ScaleTypes } from "../../interfaces";
 // D3 Imports
 import { mouse, Selection } from "d3-selection";
 
-import { isEqual } from "lodash-es";
+import { isEqual, flatten } from "lodash-es";
 
 type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
 
@@ -45,23 +45,14 @@ export class Ruler extends Component {
 		const dataPoints: GenericSvgSelection = svg.selectAll(
 			"[role=graphics-symbol]"
 		);
+		const { datasets } = this.model.getDisplayData();
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYScale = this.services.cartesianScales.getMainYScale();
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
 
-		let lineX = x;
-
-		const scaledData: number[] = Array.prototype.concat(
-			...this.model
-				.getData()
-				.datasets.map(dataset =>
-					dataset.data.map((d, i) =>
-						Number(
-							this.services.cartesianScales.getDomainValue(d, i)
-						)
-					)
-				)
-		);
+		const scaledData: number[] = flatten(datasets.map(({ data }) =>
+			data.map((d, i) => Number(this.services.cartesianScales.getDomainValue(d, i)))
+		));
 
 		/**
 		 * Find matches, reduce is used instead of filter
@@ -126,14 +117,13 @@ export class Ruler extends Component {
 				type: TooltipTypes.GRIDLINE
 			});
 
-			// line snaps to matching point
-			lineX = sampleMatch;
-
 			ruler.attr("opacity", 1);
+
+			// line snaps to matching point
 			line.attr("y1", yScaleStart)
 				.attr("y2", yScaleEnd)
-				.attr("x1", lineX)
-				.attr("x2", lineX);
+				.attr("x1", sampleMatch)
+				.attr("x2", sampleMatch);
 		} else {
 			ruler.attr("opacity", 0);
 			dataPoints.dispatch("mouseout");
