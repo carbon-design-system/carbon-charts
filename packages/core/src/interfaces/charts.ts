@@ -150,7 +150,7 @@ export interface LineChartOptions extends ScatterChartOptions {
 /**
  * options specific to area charts
  */
-export interface AreaChartOptions extends ScatterChartOptions {
+export interface StackedAreaChartOptions extends ScatterChartOptions {
 	/**
 	 * options for the curve of the line
 	 */
@@ -176,14 +176,14 @@ export interface PieChartOptions extends BaseChartOptions {
 		yOffsetCallout?: number;
 		callout?: {
 			minSliceDegree?: number;
-			offsetX?: number,
+			offsetX?: number;
 			offsetY?: number;
 			horizontalLineLength?: number;
 			textMargin?: number;
-		},
+		};
 		labels?: {
 			formatter?: Function;
-		}
+		};
 	};
 }
 

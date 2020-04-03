@@ -8,8 +8,8 @@ import { area, stack } from "d3-shape";
 import { Tools } from "../../tools";
 import { select, color } from "d3";
 
-export class Area extends Component {
-	type = "area";
+export class StackedArea extends Component {
+	type = "area-stacked";
 
 	areaGenerator: any;
 

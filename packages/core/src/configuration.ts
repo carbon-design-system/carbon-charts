@@ -19,7 +19,7 @@ import {
 	LegendOptions,
 	LegendPositions,
 	StackedBarOptions,
-	AreaChartOptions
+	StackedAreaChartOptions
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
 
@@ -72,8 +72,8 @@ export const baseTooltip: TooltipOptions = {
 		enabled: true
 	},
 	title: {
-		verticalOffset: .75,
-		width: .4
+		verticalOffset: 0.75,
+		width: 0.4
 	}
 };
 
@@ -84,14 +84,18 @@ export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip,
 	}
 } as AxisTooltipOptions);
 
-export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip, {
-	datapoint: {
-		verticalOffset: 4
-	},
-	gridline: {
-		enabled: false
-	}
-} as BarTooltipOptions);
+export const barChartTooltip: BarTooltipOptions = Tools.merge(
+	{},
+	axisChartTooltip,
+	{
+		datapoint: {
+			verticalOffset: 4
+		},
+		gridline: {
+			enabled: false
+		}
+	} as BarTooltipOptions
+);
 
 // These options will be managed by Tools.mergeDefaultChartOptions
 // by removing the ones the user is not providing,
@@ -117,14 +121,14 @@ export const timeScale: TimeScaleOptions = {
 	localeObject: enUSLocaleObject,
 	timeIntervalFormats: {
 		"15seconds": { primary: "MMM d, pp", secondary: "pp" },
-		"minute": { primary: "MMM d, p", secondary: "p" },
+		minute: { primary: "MMM d, p", secondary: "p" },
 		"30minutes": { primary: "MMM d, p", secondary: "p" },
-		"hourly": { primary: "MMM d, hh a", secondary: "hh a" },
-		"daily": { primary: "MMM d", secondary: "d" },
-		"weekly": { primary: "eee, MMM d", secondary: "eee" },
-		"monthly": { primary: "MMM yyyy", secondary: "MMM" },
-		"quarterly": { primary: "QQQ ''yy", secondary: "QQQ" },
-		"yearly": { primary: "yyyy", secondary: "yyyy" }
+		hourly: { primary: "MMM d, hh a", secondary: "hh a" },
+		daily: { primary: "MMM d", secondary: "d" },
+		weekly: { primary: "eee, MMM d", secondary: "eee" },
+		monthly: { primary: "MMM yyyy", secondary: "MMM" },
+		quarterly: { primary: "QQQ ''yy", secondary: "QQQ" },
+		yearly: { primary: "yyyy", secondary: "yyyy" }
 	}
 };
 
@@ -208,7 +212,7 @@ const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
 /**
  * options specific to line charts
  */
-const areaChart: AreaChartOptions = Tools.merge({}, axisChart, {
+const stackedAreaChart: StackedAreaChartOptions = Tools.merge({}, axisChart, {
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: 0
 	} as TimeScaleOptions),
@@ -217,7 +221,7 @@ const areaChart: AreaChartOptions = Tools.merge({}, axisChart, {
 		radius: 3,
 		filled: false
 	}
-} as AreaChartOptions);
+} as StackedAreaChartOptions);
 
 /**
  * options specific to scatter charts
@@ -297,7 +301,7 @@ export const options = {
 	stackedBarChart,
 	bubbleChart,
 	lineChart,
-	areaChart,
+	stackedAreaChart,
 	scatterChart,
 	pieChart,
 	donutChart

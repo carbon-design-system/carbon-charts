@@ -54,10 +54,10 @@ export const chartTypes = {
 		angular: "ibm-line-chart",
 		vue: "ccv-line-chart"
 	},
-	AreaChart: {
-		vanilla: "AreaChart",
-		angular: "ibm-area-chart",
-		vue: "ccv-area-chart"
+	StackedAreaChart: {
+		vanilla: "StackedAreaChart",
+		angular: "ibm-stacked-area-chart",
+		vue: "ccv-stacked-area-chart"
 	},
 	ScatterChart: {
 		vanilla: "ScatterChart",
@@ -227,9 +227,9 @@ let allDemoGroups = [
 		title: "Area",
 		demos: [
 			{
-				options: areaDemos.areaTimeSeriesOptions,
-				data: areaDemos.areaTimeSeriesData,
-				chartType: chartTypes.AreaChart
+				options: areaDemos.stackedAreaTimeSeriesOptions,
+				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart
 			}
 		]
 	},
@@ -303,13 +303,17 @@ let allDemoGroups = [
 				chartType: chartTypes.LineChart
 			},
 			{
-				options: timeSeriesAxisDemos.lineTimeSeriesHourlyDefaultLocaleOptions,
-				data: timeSeriesAxisDemos.lineTimeSeriesDataHourlyDefaultTicksFormats,
+				options:
+					timeSeriesAxisDemos.lineTimeSeriesHourlyDefaultLocaleOptions,
+				data:
+					timeSeriesAxisDemos.lineTimeSeriesDataHourlyDefaultTicksFormats,
 				chartType: chartTypes.LineChart
 			},
 			{
-				options: timeSeriesAxisDemos.lineTimeSeriesHourlyCustomTicksFormatsOptions,
-				data: timeSeriesAxisDemos.lineTimeSeriesDataHourlyCustomTicksFormats,
+				options:
+					timeSeriesAxisDemos.lineTimeSeriesHourlyCustomTicksFormatsOptions,
+				data:
+					timeSeriesAxisDemos.lineTimeSeriesDataHourlyCustomTicksFormats,
 				chartType: chartTypes.LineChart
 			},
 			{
@@ -323,13 +327,16 @@ let allDemoGroups = [
 				chartType: chartTypes.LineChart
 			},
 			{
-				data: timeSeriesAxisDemos.lineTimeSeriesDataMonthlyDefaultLocale,
-				options: timeSeriesAxisDemos.lineTimeSeriesMonthlyDefaultLocaleOptions,
+				data:
+					timeSeriesAxisDemos.lineTimeSeriesDataMonthlyDefaultLocale,
+				options:
+					timeSeriesAxisDemos.lineTimeSeriesMonthlyDefaultLocaleOptions,
 				chartType: chartTypes.LineChart
 			},
 			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataMonthlyCustomLocale,
-				options: timeSeriesAxisDemos.lineTimeSeriesMonthlyCustomLocaleOptions,
+				options:
+					timeSeriesAxisDemos.lineTimeSeriesMonthlyCustomLocaleOptions,
 				chartType: chartTypes.LineChart
 			},
 			{

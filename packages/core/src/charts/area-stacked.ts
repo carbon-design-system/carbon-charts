@@ -1,21 +1,24 @@
 // Internal Imports
 import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
-import { ChartConfig, AreaChartOptions } from "../interfaces/index";
+import { ChartConfig, StackedAreaChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
-import { Grid, Area, TwoDimensionalAxes } from "../components/index";
+import { Grid, StackedArea, TwoDimensionalAxes } from "../components/index";
 
-export class AreaChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<AreaChartOptions>) {
+export class StackedAreaChart extends AxisChart {
+	constructor(
+		holder: Element,
+		chartConfigs: ChartConfig<StackedAreaChartOptions>
+	) {
 		super(holder, chartConfigs);
 
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
 			Tools.mergeDefaultChartOptions(
-				Configuration.options.areaChart,
+				Configuration.options.stackedAreaChart,
 				chartConfigs.options
 			)
 		);
@@ -29,7 +32,7 @@ export class AreaChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
-			new Area(this.model, this.services)
+			new StackedArea(this.model, this.services)
 		];
 
 		const components: any[] = this.getAxisChartComponents(

@@ -1,4 +1,4 @@
-.#{$prefix}--#{$charts-prefix}--area {
+.#{$prefix}--#{$charts-prefix}--area-stacked {
 	path.area {
 		@if $carbon--theme == $carbon--theme--g90 {
 			mix-blend-mode: screen;

@@ -1,4 +1,4 @@
-export const areaTimeSeriesData = {
+export const stackedAreaTimeSeriesData = {
 	labels: ["Qty", "More", "Sold", "Restocking", "Misc"],
 	datasets: [
 		{
@@ -79,8 +79,8 @@ export const areaTimeSeriesData = {
 	]
 };
 
-export const areaTimeSeriesOptions = {
-	title: "Area (time series)",
+export const stackedAreaTimeSeriesOptions = {
+	title: "Area Stacked (time series)",
 	axes: {
 		left: {
 			secondary: true,
