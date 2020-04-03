@@ -13,9 +13,10 @@
 	g.x.skeleton g.tick,
 	g.y.skeleton g.tick {
 		line {
-			pointer-events: none;
+			// pointer-events: none;
 			stroke-width: 1px;
-			stroke: red;
+			stroke: $ui-03;
+			// stroke: red;
 		}
 	}
 }

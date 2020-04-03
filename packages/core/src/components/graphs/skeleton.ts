@@ -63,6 +63,11 @@ export class Skeleton extends Component {
 			xGridG.call(xGridGenerator);
 		}
 
+		// trick: vertical lines with width=1 are not visible with mask
+		// probably because of anti-aliasing so we make it a bit diagonal
+		// (imperceptible to the human eye)
+		xGridG.selectAll("line").attr("x1", d => Number(d) + 0.001);
+
 		// clean
 		xGridG.select("path").remove();
 		xGridG.selectAll("text").remove();
@@ -93,19 +98,70 @@ export class Skeleton extends Component {
 			yGridG.call(yGridGenerator);
 		}
 
+		// trick: horizontal lines with width=1 are not visible with mask
+		// probably because of anti-aliasing so we make it a bit diagonal
+		// (imperceptible to the human eye)
+		yGridG.selectAll("line").attr("y1", d => Number(d) + 0.001);
+
 		// clean
 		yGridG.select("path").remove();
 		yGridG.selectAll("text").remove();
 	}
 
 	setStyle() {
-		const svg = this.parent;
-		const container = svg.select(".chart-skeleton-backdrop");
+		this.drawDefs();
+		const container = this.parent.select("svg.chart-skeleton-backdrop");
 		const options = this.model.getOptions();
 		// TODO: get the right option that, for now, it doesn't exist
 		const strokeColor = options.grid.strokeColor;
-		container.selectAll("line").attr("stroke", strokeColor);
-		container.selectAll("rect").attr("stroke", strokeColor);
+		container.selectAll("line")
+			.attr("stroke", strokeColor)
+			.attr("mask", "url(#shimmer-mask)");
+		container.selectAll("rect").attr("stroke", strokeColor).attr("mask", "url(#shimmer-mask)");
+	}
+
+	drawDefs() {
+		const container = this.parent.select("svg.chart-skeleton-backdrop");
+		const animationDuration = 2;
+		const shimmerWidth = 0.05;
+		const delay = 0.5;
+		const defsContent = `
+			<linearGradient id="shimmer" x1="0%" x2="100%" y1="0%" y2="0%">
+				<stop stop-color="white">
+					<animate
+						id="starting"
+						attributeName="offset"
+						values="${0 - shimmerWidth}; ${1 - shimmerWidth}"
+						dur="${animationDuration}s"
+						begin="0s; starting.end + ${delay}s"
+					/>
+				</stop>
+				<stop stop-color="black">
+					<animate
+						id="top"
+						attributeName="offset"
+						values="0; 1"
+						dur="${animationDuration}s"
+						begin="0s; top.end + ${delay}s"
+					/>
+				</stop>
+				<stop stop-color="white">
+					<animate
+						id="ending"
+						attributeName="offset"
+						values="${0 + shimmerWidth}; ${1 + shimmerWidth}"
+						dur="${animationDuration}s"
+						begin="0s; ending.end + ${delay}s"
+					/>
+				</stop>
+			</linearGradient>
+
+			<mask id="shimmer-mask">
+				<rect x="0" y="0" width="100%" height="100%" fill="url(#shimmer)" />
+			</mask>
+		`;
+		const defs = DOMUtils.appendOrSelect(container, "defs");
+		defs.html(defsContent);
 	}
 
 	removeSkeleton() {
