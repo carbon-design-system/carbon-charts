@@ -66,7 +66,8 @@ export class Skeleton extends Component {
 		// trick: vertical lines with width=1 are not visible with mask
 		// probably because of anti-aliasing so we make it a bit diagonal
 		// (imperceptible to the human eye)
-		xGridG.selectAll("line").attr("x1", d => Number(d) + 0.001);
+		xGridG.selectAll("line").attr("x1", d => Number(d) - 20.5);
+		xGridG.selectAll("line").attr("x2", d => Number(d) + 20.3);
 
 		// clean
 		xGridG.select("path").remove();
@@ -116,6 +117,8 @@ export class Skeleton extends Component {
 		const strokeColor = options.grid.strokeColor;
 		container.selectAll("line")
 			.attr("stroke", strokeColor)
+			// .attr("stroke-width", 5)
+			// .style("shape-rendering", "crispEdges")
 			.attr("mask", "url(#shimmer-mask)");
 		container.selectAll("rect").attr("stroke", strokeColor).attr("mask", "url(#shimmer-mask)");
 	}
@@ -165,7 +168,7 @@ export class Skeleton extends Component {
 	}
 
 	removeSkeleton() {
-		const container = this.parent.select("svg.chart-skeleton");
+		const container = this.parent.select(".chart-skeleton");
 		container.remove();
 	}
 

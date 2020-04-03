@@ -14,7 +14,8 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	TooltipPie,
 	Legend,
-	LayoutComponent
+	LayoutComponent,
+	SkeletonPie
 } from "../components/index";
 
 export class PieChart extends Chart {
@@ -45,7 +46,8 @@ export class PieChart extends Chart {
 	getComponents() {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [
-			new Pie(this.model, this.services)
+			new Pie(this.model, this.services),
+			new SkeletonPie(this.model, this.services)
 		];
 
 		// get the base chart components and export with tooltip

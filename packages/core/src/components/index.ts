@@ -20,6 +20,7 @@ export * from "./graphs/donut";
 export * from "./graphs/skeleton";
 export * from "./graphs/skeleton-grid";
 export * from "./graphs/skeleton-vert-or-horiz";
+export * from "./graphs/skeleton-pie";
 
 // Layout
 export * from "./layout/spacer";
