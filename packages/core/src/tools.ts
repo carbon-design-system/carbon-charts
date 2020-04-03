@@ -35,7 +35,7 @@ export namespace Tools {
 	 * @param {AxisChartOptions} providedOptions user provided options
 	 * @returns merged options
 	 */
-	export function mergeDefaultChartOptions(defaultOptions: AxisChartOptions, providedOptions: AxisChartOptions) {
+	export function mergeDefaultChartOptions(defaultOptions: any, providedOptions: any) {
 		defaultOptions = Tools.clone(defaultOptions);
 		const providedAxesNames = Object.keys(providedOptions.axes || {});
 

@@ -47,7 +47,9 @@ describe("Tools.mergeDefaultChartOptions", () => {
 				bottom: {
 					title: "Title"
 				},
-				left: {}
+				left: {
+					scaleType: "time"
+				}
 			}
 		};
 
@@ -76,10 +78,13 @@ describe("Tools.mergeDefaultChartOptions", () => {
 			axes: {
 				bottom: {
 					includeZero: true,
-					title: "Title"
+					title: "Title",
+					mapsTo: "value"
 				},
 				left: {
-					includeZero: true
+					includeZero: true,
+					scaleType: "time",
+					mapsTo: "date"
 				}
 			},
 			timeScale: {
