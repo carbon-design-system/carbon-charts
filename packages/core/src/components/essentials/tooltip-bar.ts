@@ -1,7 +1,12 @@
 import { Tooltip } from "./tooltip";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
-import { TooltipPosition, TooltipTypes, CartesianOrientations } from "./../../interfaces/enums";
+import {
+	TooltipPosition,
+	TooltipTypes,
+	CartesianOrientations,
+	Events
+} from "./../../interfaces";
 
 // import the settings for the css prefix
 import settings from "carbon-components/es/globals/js/settings";
@@ -21,7 +26,7 @@ export class TooltipBar extends Tooltip {
 		this.tooltip.style("max-width", null);
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this.services.events.addEventListener("show-tooltip", e => {
+		this.services.events.addEventListener(Events.Tooltip.SHOW, e => {
 			// check the type of tooltip and that it is enabled
 			if ((e.detail.type === TooltipTypes.DATAPOINT && Tools.getProperty(this.model.getOptions(), "tooltip", "datapoint", "enabled"))
 				|| (e.detail.type === TooltipTypes.GRIDLINE && Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) ) {
@@ -76,7 +81,7 @@ export class TooltipBar extends Tooltip {
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
-		this.services.events.addEventListener("hide-tooltip", () => {
+		this.services.events.addEventListener(Events.Tooltip.HIDE, () => {
 			this.tooltip.classed("hidden", true);
 		});
 	}

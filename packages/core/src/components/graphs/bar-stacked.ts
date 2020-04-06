@@ -153,9 +153,9 @@ export class StackedBar extends Bar {
 
 				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
 				const { groupMapsTo } = self.model.getOptions().data;
-		
+
 				// Show tooltip
-				self.services.events.dispatchEvent("show-tooltip", {
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					data: {
 						[rangeIdentifier]: itemData,
