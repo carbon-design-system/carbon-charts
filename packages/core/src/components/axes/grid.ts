@@ -6,7 +6,7 @@ import { DOMUtils } from "../../services";
 // D3 Imports
 import { axisBottom, axisLeft } from "d3-axis";
 import { mouse, select } from "d3-selection";
-import { TooltipTypes } from "../../interfaces";
+import { TooltipTypes, Events } from "../../interfaces";
 
 export class Grid extends Component {
 	type = "grid";
@@ -121,23 +121,24 @@ export class Grid extends Component {
 	 * @param position mouse positon
 	 */
 	getActiveGridline(position) {
-		const threshold = Tools.getProperty(this.model.getOptions, "tooltip", "gridline", "threshold") ?
-			Tools.getProperty(this.model.getOptions, "tooltip", "gridline", "threshold") : this.getGridlineThreshold(position);
+		const userSpecifiedThreshold = Tools.getProperty(this.model.getOptions, "tooltip", "gridline", "threshold");
+		const threshold = userSpecifiedThreshold ? userSpecifiedThreshold : this.getGridlineThreshold(position);
 		const svg = this.parent;
 
-		const gridlinesX = svg.selectAll(".x.grid .tick")
+		const xGridlines = svg.selectAll(".x.grid .tick")
 		.filter(function() {
 			const translations = Tools.getTranslationValues(this);
 
 			// threshold for when to display a gridline tooltip
 			const bounds = {
 				min: Number(translations.tx) - threshold,
-				max: Number(translations.tx) + threshold };
+				max: Number(translations.tx) + threshold
+			};
 
 			return bounds.min <= position[0] && position[0] <= bounds.max;
 		});
 
-		return gridlinesX;
+		return xGridlines;
 	}
 
 	/**
@@ -148,8 +149,7 @@ export class Grid extends Component {
 		const svg = this.parent;
 		const grid = DOMUtils.appendOrSelect(svg, "rect.chart-grid-backdrop");
 
-		grid
-		.on("mousemove mouseover", function() {
+		grid.on("mousemove mouseover", function() {
 			const chartContainer = self.services.domUtils.getMainSVG();
 			const pos = mouse(chartContainer);
 			const hoveredElement = select(this);
@@ -160,34 +160,26 @@ export class Grid extends Component {
 
 			const activeGridline = self.getActiveGridline(pos);
 			if (activeGridline.empty()) {
-				self.services.events.dispatchEvent("hide-tooltip", {});
-				return;
+				return self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 			}
 
 			// set active class to control dasharray and theme colors
-			activeGridline
-			.classed("active", true);
+			activeGridline.classed("active", true);
 
-			// get the items that should be highlighted as well as the shared label
-			let activeData, activeLabel;
+			// get the items that should be highlighted
+			const itemsToHighlight = self.services.cartesianScales.getDataFromDomain(activeGridline.datum());
 
-			// use the selected gridline to get the data with associated domain
-			activeGridline.each(function(d) {
-				activeData = self.services.cartesianScales.getDataFromDomain(d);
-				activeLabel = d;
-			});
-
-			self.services.events.dispatchEvent("show-tooltip", {
+			self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 				hoveredElement,
-				multidata: { activeData, label: activeLabel },
+				multidata: itemsToHighlight,
 				type: TooltipTypes.GRIDLINE
 			});
 		})
 		.on("mouseout", function() {
 			svg.selectAll(".x.grid .tick")
-			.classed("active", false);
+				.classed("active", false);
 
-			self.services.events.dispatchEvent("hide-tooltip", {});
+			self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 		});
 	}
 

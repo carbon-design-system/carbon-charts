@@ -9,6 +9,7 @@ import {
 } from "../../interfaces";
 
 // D3 Imports
+import { map } from "d3-collection";
 import { select } from "d3-selection";
 import { color } from "d3-color";
 import { ScaleBand, scaleBand } from "d3-scale";
@@ -18,54 +19,100 @@ export class GroupedBar extends Bar {
 
 	groupScale: ScaleBand<any>;
 
+	padding = 5;
+
 	init() {
 		const eventsFragment = this.services.events;
 
 		// Highlight correct circle on legend item hovers
-		eventsFragment.addEventListener("legend-item-onhover", this.handleLegendOnHover);
+		eventsFragment.addEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
 
 		// Un-highlight circles on legend item mouseouts
-		eventsFragment.addEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
+		eventsFragment.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
 
-	getGroupWidth() {
-		const { datasets } = this.model.getDisplayData();
-		const padding = 5;
+	protected getDataCorrespondingToLabel(label: string) {
+		const displayData = this.model.getDisplayData();
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
-		return datasets.length * this.getBarWidth() + (padding * (datasets.length - 1));
+		return displayData.filter(datum => datum[domainIdentifier] === label);
 	}
 
-	setGroupScale() {
-		const { datasets } = this.model.getDisplayData();
+	protected getGroupWidth() {
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
+		const totalGroupPadding = this.getTotalGroupPadding();
 
-		this.groupScale = scaleBand()
-			.domain(datasets.map(dataset => dataset.label))
-			.rangeRound([0, this.getGroupWidth()]);
+		return this.getBarWidth() * numOfActiveDataGroups + totalGroupPadding;
+	}
+
+
+	protected getTotalGroupPadding() {
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
+
+		if (numOfActiveDataGroups === 1) {
+			return 0;
+		}
+
+		const domainScale = this.services.cartesianScales.getDomainScale();
+		const padding = Math.min(
+			5,
+			5 * (domainScale.step() / 70)
+		);
+
+		return padding * (numOfActiveDataGroups - 1);
 	}
 
 	// Gets the correct width for bars based on options & configurations
-	getBarWidth() {
-		const { datasets } = this.model.getDisplayData();
-		const domainScale = this.services.cartesianScales.getDomainScale();
+	protected getBarWidth() {
+		const options = this.model.getOptions();
+		const providedWidth = Tools.getProperty(options, "bars", "width");
+		const providedMaxWidth = Tools.getProperty(options, "bars", "maxWidth");
 
+		// If there's a provided width, compare with maxWidth and
+		// Determine which to return
+		if (providedWidth !== null) {
+			if (providedMaxWidth === null) {
+				return providedWidth;
+			} else if (providedWidth <= providedMaxWidth) {
+				return providedWidth;
+			}
+		}
+
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
+		const totalGroupPadding = this.getTotalGroupPadding();
+
+		const domainScale = this.services.cartesianScales.getDomainScale();
 		return Math.min(
-			domainScale.step() / 2 / datasets.length,
-			super.getBarWidth()
+			providedMaxWidth,
+			(domainScale.step() - totalGroupPadding) / numOfActiveDataGroups
 		);
+	}
+
+	protected setGroupScale() {
+		this.groupScale = scaleBand()
+			.domain(this.model.getActiveDataGroupNames())
+			.rangeRound([0, this.getGroupWidth()]);
 	}
 
 	render(animate: boolean) {
 		// Chart options mixed with the internal configurations
 		const displayData = this.model.getDisplayData();
 
+		const options = this.model.getOptions();
+		const { groupMapsTo } = options.data;
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+
+		// Get unique labels
 		this.setGroupScale();
 
 		// Grab container SVG
 		const svg = this.getContainerSVG();
 
+		const allDataLabels = map(displayData, datum => datum[domainIdentifier]).keys();
+
 		// Update data on bar groups
 		const barGroups = svg.selectAll("g.bars")
-			.data(displayData.labels);
+			.data(allDataLabels, label => label);
 
 		// Remove dot groups that need to be removed
 		barGroups.exit()
@@ -81,9 +128,10 @@ export class GroupedBar extends Bar {
 
 		// Update data on all bars
 		const bars = barGroupsEnter.merge(barGroups)
-			.attr("transform", (d, i) => {
-				const scaleValue = this.services.cartesianScales.getDomainValue(d, i);
-				const translateBy = scaleValue - this.getGroupWidth() / 2 + this.getBarWidth();
+			.attr("transform", (label, i) => {
+				const scaleValue = this.services.cartesianScales.getDomainValue(label, i);
+				const translateBy = scaleValue - this.getGroupWidth() / 2;
+				// const translateBy = scaleValue - this.getGroupWidth(null) / 2 + this.getBarWidth(null);
 
 				if (this.services.cartesianScales.getOrientation() === CartesianOrientations.VERTICAL) {
 					return `translate(${translateBy}, 0)`;
@@ -93,7 +141,7 @@ export class GroupedBar extends Bar {
 				}
 			})
 			.selectAll("path.bar")
-			.data((d, i) => this.addLabelsToDataPoints(d, i));
+			.data(label => this.getDataCorrespondingToLabel(label));
 
 		// Remove bars that are no longer needed
 		bars.exit()
@@ -109,7 +157,7 @@ export class GroupedBar extends Bar {
 		barsEnter.merge(bars)
 			.classed("bar", true)
 			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-			.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
+			.attr("fill", d => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", d => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
@@ -117,10 +165,11 @@ export class GroupedBar extends Bar {
 				 * to draw the bars needed, and pass those coordinates down to
 				 * generateSVGPathString() to decide whether it needs to flip them
 				 */
-				const centerX = this.groupScale(d.datasetLabel);
+				const startX = this.groupScale(d[groupMapsTo]);
 				const barWidth = this.getBarWidth();
-				const x0 = centerX - barWidth / 2;
-				const x1 = centerX + barWidth / 2;
+
+				const x0 = startX;
+				const x1 = startX + barWidth;
 				const y0 = this.services.cartesianScales.getRangeValue(0);
 				const y1 = this.services.cartesianScales.getRangeValue(d.value);
 
@@ -139,24 +188,15 @@ export class GroupedBar extends Bar {
 		this.addEventListeners();
 	}
 
-	// TODO - This method could be re-used in more graphs
-	addLabelsToDataPoints(d, index) {
-		const { datasets } = this.model.getDisplayData();
-
-		return datasets.map(dataset => ({
-			label: d,
-			datasetLabel: dataset.label,
-			value: dataset.data[index].value ? dataset.data[index].value : dataset.data[index]
-		}));
-	}
-
 	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = (event: CustomEvent)  => {
 		const { hoveredElement } = event.detail;
 
+		const { groupMapsTo } = this.model.getOptions().data;
+
 		this.parent.selectAll("path.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => (d.datasetLabel !== hoveredElement.datum()["key"]) ? 0.3 : 1);
+			.attr("opacity", d => (d[groupMapsTo] !== hoveredElement.datum()["name"]) ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements
@@ -182,7 +222,7 @@ export class GroupedBar extends Bar {
 				});
 
 				// Show tooltip
-				self.services.events.dispatchEvent("show-tooltip", {
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					type: TooltipTypes.DATAPOINT
 				});
@@ -205,8 +245,9 @@ export class GroupedBar extends Bar {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
+				const { groupMapsTo } = self.model.getOptions().data;
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
-					.attr("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
+					.attr("fill", (d: any) => self.model.getFillColor(d[groupMapsTo]));
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
@@ -215,7 +256,7 @@ export class GroupedBar extends Bar {
 				});
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, { hoveredElement });
 			});
 	}
 
@@ -228,7 +269,7 @@ export class GroupedBar extends Bar {
 
 		// Remove legend listeners
 		const eventsFragment = this.services.events;
-		eventsFragment.removeEventListener("legend-item-onhover", this.handleLegendOnHover);
-		eventsFragment.removeEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
+		eventsFragment.removeEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
+		eventsFragment.removeEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
 }

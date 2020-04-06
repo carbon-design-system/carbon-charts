@@ -8,7 +8,7 @@ import { ChartModel } from "../../model";
 import Position, { PLACEMENTS } from "@carbon/utils-position";
 
 // import the settings for the css prefix
-import settings from "carbon-components/src/globals/js/settings";
+import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { select, mouse, event } from "d3-selection";
@@ -98,13 +98,15 @@ export class Tooltip extends Component {
 		}
 		// this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
 		const dataVal = Tools.getProperty(data, "data") ? data.data : data;
+		const { groupMapsTo } = this.model.getOptions().data;
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		// format the value if needed
 		const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-		this.model.getOptions().tooltip.valueFormatter(dataVal.value) : dataVal.value.toLocaleString("en");
+		this.model.getOptions().tooltip.valueFormatter(dataVal[rangeIdentifier]) : dataVal[rangeIdentifier].toLocaleString("en");
 
 		// pie charts don't have a dataset label since they only support one dataset
-		const label = dataVal.datasetLabel ? dataVal.datasetLabel : dataVal.label;
+		const label = dataVal[groupMapsTo];
 
 		return `<div class="datapoint-tooltip">
 					<p class="label">${label}</p>
@@ -113,37 +115,33 @@ export class Tooltip extends Component {
 	}
 
 	getMultilineTooltipHTML(data: any) {
-		const points = data;
 
 		// sort them so they are in the same order as the graph
-		points.sort((a, b) => b.value - a.value);
+		data.sort((a, b) => b.value - a.value);
 
 		// tells us which value to use
 		const scaleType = this.services.cartesianScales.getDomainScale().scaleType;
 
 		return  "<ul class='multi-tooltip'>" +
-			points.map(datapoint => {
-				// check if the datapoint has multiple values associates (multiple axes)
-				let datapointValue = datapoint.value;
-				if (datapointValue instanceof Object) {
-					// scale type determines which value we care about since it should align with the scale data
-					datapointValue = scaleType === ScaleTypes.TIME ? datapoint.value.date : datapoint.value.value;
-				}
-				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-				this.model.getOptions().tooltip.valueFormatter(datapointValue) : datapointValue.toLocaleString("en");
+			data.map(datum => {
+				const { groupMapsTo } = this.model.getOptions().data;
+				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+
+				const userProvidedValueFormatter = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter");
+				const formattedValue = userProvidedValueFormatter ? userProvidedValueFormatter(datum[rangeIdentifier]) : datum[rangeIdentifier].toLocaleString("en");
 
 				// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
-				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label);
+				const indicatorColor = this.model.getStrokeColor(datum[groupMapsTo]);
 
 				return `
 				<li>
 					<div class="datapoint-tooltip">
 						<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
-						<p class="label">${datapoint.datasetLabel}</p>
+						<p class="label">${datum[groupMapsTo]}</p>
 						<p class="value">${formattedValue}</p>
 					</div>
 				</li>`;
-				}).join("") + "</ul>";
+			}).join("") + "</ul>";
 	}
 
 	render() {

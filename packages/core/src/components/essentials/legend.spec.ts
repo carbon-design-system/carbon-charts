@@ -1,7 +1,7 @@
 import { TestEnvironment } from "../../tests/index";
 
 // import the settings for the css prefixes
-import settings from "carbon-components/src/globals/js/settings";
+import settings from "carbon-components/es/globals/js/settings";
 import { options } from "./../../configuration";
 
 import { select } from "d3-selection";
@@ -18,7 +18,12 @@ describe("legend component", () => {
 	describe("content", () => {
 		it("should have same amount of datasets", async function(done) {
 			const data = this.testEnvironment.chartData;
-			const numberOfDatasets = data.datasets.length;
+			const uniqueDatagroups = data.map(d => d.group)
+				.filter(function(value, index, self) { 
+					return self.indexOf(value) === index;
+				});
+			
+			const numberOfDatagroups = uniqueDatagroups.length;
 
 			const chartEventsService = this.chart.services.events;
 
@@ -27,7 +32,7 @@ describe("legend component", () => {
 				chartEventsService.removeEventListener("render-finished", renderCb);
 
 				const numberOfLegendItems = select(`g.${settings.prefix}--${options.chart.style.prefix}--legend`).selectAll("g.legend-item").size();
-				expect(numberOfLegendItems).toEqual(numberOfDatasets);
+				expect(numberOfLegendItems).toEqual(numberOfDatagroups);
 
 				done();
 			};
