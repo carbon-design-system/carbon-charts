@@ -112,45 +112,40 @@ export class Skeleton extends Component {
 
 	setStyleLines() {
 		const container = this.parent.select(".chart-skeleton");
-		const animationDuration = 1;
+		const animationDuration = 1000; // ms
+		const delay = 300; // ms
 		const startPoint = 0;
+		const endPoint = 1;
 		const shimmerWidth = 0.2;
-		const delay = 0.5;
 		const defsContent = `
-			<linearGradient id="shimmer-lines" x1="0%" x2="100%" y1="0%" y2="0%">
-				<stop class="background-shimmer-color">
-					<animate
-						id="starting"
-						attributeName="offset"
-						values="${0 - shimmerWidth}; ${1 - shimmerWidth}"
-						dur="${animationDuration}s"
-						begin="0s; starting.end + ${delay}s"
-					/>
-				</stop>
-				<stop class="shimmer-color">
-					<animate
-						id="top"
-						attributeName="offset"
-						values="0; 1"
-						dur="${animationDuration}s"
-						begin="0s; top.end + ${delay}s"
-					/>
-				</stop>
-				<stop class="background-shimmer-color">
-					<animate
-						id="ending"
-						attributeName="offset"
-						values="${0 + shimmerWidth}; ${1 + shimmerWidth}"
-						dur="${animationDuration}s"
-						begin="0s; ending.end + ${delay}s"
-					/>
-				</stop>
+			<linearGradient
+				id="shimmer-lines"
+				x1="${startPoint - 3 * shimmerWidth}"
+				x2="${endPoint}"
+				y1="${startPoint}"
+				y2="${startPoint}"
+				gradientTransform="translate(${startPoint}, ${startPoint})"
+			>
+				<stop class="background-shimmer-color" offset="${startPoint}"></stop>
+				<stop class="shimmer-color" offset="${startPoint + shimmerWidth}"></stop>
+				<stop class="background-shimmer-color" offset="${startPoint + shimmerWidth * 2}"></stop>
 			</linearGradient>
 		`;
 		const defs = DOMUtils.appendOrSelect(container, "defs").lower();
 		defs.html(defsContent);
 
-
+		const shimmerLinesGradient = select("#shimmer-lines");
+		repeat();
+		function repeat() {
+			shimmerLinesGradient
+				.attr("gradientTransform", `translate(${startPoint}, ${startPoint})`)
+				.transition()
+				.duration(animationDuration)
+				.delay(delay)
+				.ease(easeLinear)
+				.attr("gradientTransform", `translate(${endPoint + 3 * shimmerWidth}, ${startPoint})`)
+				.on("end", repeat);
+		}
 	}
 
 	setStyleAreas() {
