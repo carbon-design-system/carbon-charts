@@ -168,7 +168,7 @@ export namespace Tools {
 	}
 
 	/**
-	 * Get the percentage of a datapoint compared to the entire data-set.
+	 * Get the percentage of a datapoint compared to the entire dataset.
 	 *
 	 * @export
 	 * @param {any} item
