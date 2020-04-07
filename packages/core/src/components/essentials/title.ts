@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes } from "./../../interfaces";
+import { TooltipTypes, Events } from "./../../interfaces";
 
 export class Title extends Component {
 	type = "title";
@@ -10,8 +10,14 @@ export class Title extends Component {
 	 * Truncates title creating ellipses and attaching tooltip for exposing full title.
 	 */
 	truncateTitle() {
-		const containerWidth  = DOMUtils.getSVGElementSize(this.parent).width;
-		const title =  DOMUtils.appendOrSelect(this.parent, "text.title");
+		// get a reference to the title elements to calculate the size the title can be
+		const containerWidth = DOMUtils.getSVGElementSize(this.services.domUtils.getMainSVG(), { useAttr: true }).width;
+		const title = DOMUtils.appendOrSelect(this.parent, "text.title");
+
+		// sanity check to prevent stack overflow on binary search
+		if (containerWidth <= 0) {
+			return;
+		}
 
 		// check if the title is too big for the containing svg
 		if (title.node().getComputedTextLength() > containerWidth) {
@@ -35,17 +41,18 @@ export class Title extends Component {
 
 			// add events for displaying the tooltip with the title
 			const self = this;
-			title.on("mouseenter", function() {
-				self.services.events.dispatchEvent("show-tooltip", {
-					hoveredElement: title,
-					type: TooltipTypes.TITLE
+			title
+				.on("mouseenter", function() {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						hoveredElement: title,
+						type: TooltipTypes.TITLE
+					});
+				})
+				.on("mouseout", function() {
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+						hoveredElement: title
+					});
 				});
-			})
-			.on("mouseout", function() {
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement: title,
-				});
-			});
 		}
 	}
 
@@ -56,14 +63,6 @@ export class Title extends Component {
 		text.attr("x", 0)
 			.attr("y", 20)
 			.text(this.model.getOptions().title);
-
-		// TODO - Replace with layout component margins
-		DOMUtils.appendOrSelect(svg, "rect.spacer")
-			.attr("x", 0)
-			.attr("y", 20)
-			.attr("width", 20)
-			.attr("height", 20)
-			.attr("fill", "none");
 
 		// title needs to first render so that we can check for overflow
 		this.truncateTitle();
@@ -77,7 +76,7 @@ export class Title extends Component {
 	 * @param width the width of the svg container that holds the title
 	 */
 	protected getSubstringIndex(title, start, end, width) {
-		const mid  = Math.floor((end + start) / 2);
+		const mid = Math.floor((end + start) / 2);
 		if (title.getSubStringLength(0, mid) > width) {
 			return this.getSubstringIndex(title, start, mid, width);
 		} else if (title.getSubStringLength(0, mid) < width) {

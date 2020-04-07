@@ -26,7 +26,7 @@ export class Transitions extends Service {
 			.duration(Tools.getProperty(Configuration.transitions, name, "duration") || Configuration.transitions.default.duration);
 
 		this.pendingTransitions[t._id] = t;
-		t.on("end", () => {
+		t.on("end interrupt cancel", () => {
 			delete this.pendingTransitions[t._id];
 		});
 
@@ -37,7 +37,7 @@ export class Transitions extends Service {
 		const t: any =  transition(name).duration(0);
 
 		this.pendingTransitions[t._id] = t;
-		t.on("end", () => {
+		t.on("end interrupt cancel", () => {
 			delete this.pendingTransitions[t._id];
 		});
 

@@ -5,7 +5,8 @@ import {
 	LayoutGrowth,
 	LayoutDirection,
 	LegendOrientations,
-	ChartTheme
+	ChartTheme,
+	Events as ChartEvents
 } from "./interfaces/index";
 
 // Misc
@@ -14,7 +15,8 @@ import { Component,
 	Title,
 	Legend,
 	LayoutComponent,
-	Tooltip
+	Tooltip,
+	Spacer
 } from "./components";
 import { Tools } from "./tools";
 
@@ -22,7 +24,6 @@ import { Tools } from "./tools";
 import {
 	DOMUtils,
 	Events,
-	Themes,
 	Transitions
 } from "./services/index";
 
@@ -31,8 +32,7 @@ export class Chart {
 	services: any = {
 		domUtils: DOMUtils,
 		events: Events,
-		transitions: Transitions,
-		themes: Themes
+		transitions: Transitions
 	};
 	model: ChartModel = new ChartModel(this.services);
 
@@ -82,6 +82,12 @@ export class Chart {
 			return;
 		}
 
+		// Update all services
+		Object.keys(this.services).forEach(serviceName => {
+			const serviceObj = this.services[serviceName];
+			serviceObj.update();
+		});
+
 		// Render all components
 		this.components.forEach(component => component.render(animate));
 
@@ -98,7 +104,7 @@ export class Chart {
 			});
 
 		Promise.all(promises)
-			.then(() => this.services.events.dispatchEvent("render-finished"));
+			.then(() => this.services.events.dispatchEvent(ChartEvents.Chart.RENDER_FINISHED));
 	}
 
 	destroy() {
@@ -144,25 +150,39 @@ export class Chart {
 			}
 		};
 
+		const isLegendEnabled = this.model.getOptions().legend.enabled !== false;
 		// TODORF - REUSE BETWEEN AXISCHART & CHART
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
-		const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
-		if (legendPosition === "left") {
-			fullFrameComponentDirection = LayoutDirection.ROW;
+		if (isLegendEnabled) {
+				const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
+			if (legendPosition === "left") {
+				fullFrameComponentDirection = LayoutDirection.ROW;
 
-			if (!this.model.getOptions().legend.orientation) {
-				this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
-			}
-		} else if (legendPosition === "right") {
-			fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
+				if (!this.model.getOptions().legend.orientation) {
+					this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+				}
+			} else if (legendPosition === "right") {
+				fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
 
-			if (!this.model.getOptions().legend.orientation) {
-				this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+				if (!this.model.getOptions().legend.orientation) {
+					this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+				}
+			} else if (legendPosition === "bottom") {
+				fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
 			}
-		} else if (legendPosition === "bottom") {
-			fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
 		}
+
+		const legendSpacerComponent = {
+			id: "spacer",
+			components: [
+				new Spacer(this.model, this.services)
+			],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
 
 		const fullFrameComponent = {
 			id: "full-frame",
@@ -171,7 +191,8 @@ export class Chart {
 					this.model,
 					this.services,
 					[
-						legendComponent,
+						...(isLegendEnabled ? [ legendComponent ] : [ ]),
+						legendSpacerComponent,
 						graphFrameComponent
 					],
 					{
@@ -189,6 +210,19 @@ export class Chart {
 		const topLevelLayoutComponents = [];
 		if (this.model.getOptions().title) {
 			topLevelLayoutComponents.push(titleComponent);
+
+			const titleSpacerComponent = {
+				id: "spacer",
+				components: [
+					new Spacer(this.model, this.services)
+				],
+				growth: {
+					x: LayoutGrowth.PREFERRED,
+					y: LayoutGrowth.FIXED
+				}
+			};
+
+			topLevelLayoutComponents.push(titleSpacerComponent);
 		}
 		topLevelLayoutComponents.push(fullFrameComponent);
 

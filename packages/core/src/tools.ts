@@ -1,8 +1,16 @@
+// Internal imports
+import {
+	AxisChartOptions,
+	CartesianOrientations,
+	ScaleTypes
+} from "./interfaces";
+
 import {
 	debounce as lodashDebounce,
 	merge as lodashMerge,
 	cloneDeep as lodashCloneDeep,
 	uniq as lodashUnique,
+	clamp as lodashClamp,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Cancelable,
 	DebounceSettings
@@ -15,6 +23,58 @@ export namespace Tools {
 	export const clone = lodashCloneDeep;
 	export const merge = lodashMerge;
 	export const removeArrayDuplicates = lodashUnique;
+	export const clamp = lodashClamp;
+
+	/**
+	 * Returns default chart options merged with provided options,
+	 * with special cases for axes.
+	 * Axes object will not merge the not provided axes.
+	 *
+	 * @export
+	 * @param {AxisChartOptions} defaultOptions Configuration.options[chartType]
+	 * @param {AxisChartOptions} providedOptions user provided options
+	 * @returns merged options
+	 */
+	export function mergeDefaultChartOptions(defaultOptions: any, providedOptions: any) {
+		defaultOptions = Tools.clone(defaultOptions);
+		const providedAxesNames = Object.keys(providedOptions.axes || {});
+
+		if (providedAxesNames.length === 0) {
+			delete defaultOptions.axes;
+		}
+
+		// Update deprecated options to work with the tabular data format
+		// Similar to the functionality in model.transformToTabularData()
+		for (const axisName in defaultOptions.axes) {
+			if (providedAxesNames.includes(axisName)) {
+				const providedAxisOptions = providedOptions.axes[axisName];
+
+				if (providedAxisOptions["primary"] || providedAxisOptions["secondary"]) {
+					console.warn("`primary` & `secondary` are no longer needed for axis configurations. Read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format")
+				}
+
+				const identifier = providedAxisOptions["mapsTo"];
+				if (identifier === undefined || identifier === null) {
+					const scaleType = providedAxisOptions["scaleType"];
+
+					if (scaleType === undefined || scaleType === null) {
+						providedAxisOptions["mapsTo"] = "value";
+					} else if (scaleType === ScaleTypes.TIME) {
+						providedAxisOptions["mapsTo"] = "date";
+					} else if (scaleType === ScaleTypes.LABELS) {
+						providedAxisOptions["mapsTo"] = "key";
+					}
+				}
+			} else {
+				delete defaultOptions.axes[axisName];
+			}
+		}
+
+		return Tools.merge(
+			defaultOptions,
+			providedOptions
+		);
+	}
 
 	/**************************************
 	 *  DOM-related operations            *
@@ -50,9 +110,9 @@ export namespace Tools {
 			const transforms = transformStr[0].replace(/translate\(/, "").replace(/\)/, "").split(",");
 
 			return {
-					tx: transforms[0],
-					ty: transforms[1]
-				};
+				tx: transforms[0],
+				ty: transforms[1]
+			};
 		}
 		return null;
 	}
@@ -208,7 +268,7 @@ export namespace Tools {
 		let position = object;
 		if (position) {
 			for (const prop of propPath) {
-				if (position[prop]) {
+				if (position[prop] !== null && position[prop] !== undefined) {
 					position = position[prop];
 				} else {
 					return null;
@@ -218,5 +278,31 @@ export namespace Tools {
 		}
 
 		return null;
+	};
+
+	interface SVGPathCoordinates {
+		x0: number;
+		x1: number;
+		y0: number;
+		y1: number;
+	}
+
+	export const flipSVGCoordinatesBasedOnOrientation = (verticalCoordinates: SVGPathCoordinates, orientation?: CartesianOrientations) => {
+		if (orientation === CartesianOrientations.HORIZONTAL) {
+			return {
+				y0: verticalCoordinates.x0,
+				y1: verticalCoordinates.x1,
+				x0: verticalCoordinates.y0,
+				x1: verticalCoordinates.y1
+			};
+		}
+
+		return verticalCoordinates;
+	};
+
+	export const generateSVGPathString = (verticalCoordinates: SVGPathCoordinates, orientation?: CartesianOrientations) => {
+		const { x0, x1, y0, y1 } = flipSVGCoordinatesBasedOnOrientation(verticalCoordinates, orientation);
+
+		return `M${x0},${y0}L${x0},${y1}L${x1},${y1}L${x1},${y0}L${x0},${y0}`;
 	};
 }

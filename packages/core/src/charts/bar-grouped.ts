@@ -2,8 +2,8 @@
 import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
 import {
-	ChartConfig,
-	ScatterChartOptions
+	BarChartOptions,
+	ChartConfig
 } from "../interfaces/index";
 import { Tools } from "../tools";
 
@@ -12,7 +12,7 @@ import {
 	Grid,
 	GroupedBar,
 	TwoDimensionalAxes,
-	HorizontalZeroLine,
+	ZeroLine,
 	TooltipBar,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
@@ -21,14 +21,14 @@ import {
 } from "../components/index";
 
 export class GroupedBarChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<ScatterChartOptions>) {
+	constructor(holder: Element, chartConfigs: ChartConfig<BarChartOptions>) {
 		super(holder, chartConfigs);
 
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.groupedBarChart),
+			Tools.mergeDefaultChartOptions(
+				Configuration.options.groupedBarChart,
 				chartConfigs.options
 			)
 		);
@@ -43,7 +43,7 @@ export class GroupedBarChart extends AxisChart {
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new GroupedBar(this.model, this.services),
-			new HorizontalZeroLine(this.model, this.services)
+			new ZeroLine(this.model, this.services)
 		];
 
 		const components: any[] = this.getAxisChartComponents(graphFrameComponents);

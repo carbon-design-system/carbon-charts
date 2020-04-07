@@ -8,6 +8,7 @@ import {
 	StackedBarChartOptions,
 	PieChartOptions,
 	DonutChartOptions,
+	BubbleChartOptions,
 	// Components
 	GridOptions,
 	AxesOptions,
@@ -16,10 +17,10 @@ import {
 	AxisTooltipOptions,
 	BarTooltipOptions,
 	LegendOptions,
-	ChartTheme,
 	LegendPositions,
-	StackedBarOptions,
-} from "./interfaces/index";
+	StackedBarOptions
+} from "./interfaces";
+import enUSLocaleObject from "date-fns/locale/en-US/index";
 
 /*
  *****************************
@@ -33,6 +34,7 @@ import {
 export const legend: LegendOptions = {
 	position: LegendPositions.BOTTOM,
 	clickable: true,
+	enabled: true,
 	items: {
 		status: {
 			ACTIVE: 1,
@@ -66,7 +68,7 @@ export const grid: GridOptions = {
 export const baseTooltip: TooltipOptions = {
 	datapoint: {
 		horizontalOffset: 10,
-		enabled: true,
+		enabled: true
 	},
 	title: {
 		verticalOffset: .75,
@@ -81,7 +83,7 @@ export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip,
 	}
 } as AxisTooltipOptions);
 
-export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip , {
+export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip, {
 	datapoint: {
 		verticalOffset: 4
 	},
@@ -90,26 +92,58 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartToolt
 	}
 } as BarTooltipOptions);
 
-// We setup no axes by default, the TwoDimensionalAxes component
-// Will setup axes options based on what user provides
-export const axes: AxesOptions = { };
+// These options will be managed by Tools.mergeDefaultChartOptions
+// by removing the ones the user is not providing,
+// and by TwoDimensionalAxes.
+const axes: AxesOptions = {
+	top: {
+		includeZero: true
+	},
+	bottom: {
+		includeZero: true
+	},
+	left: {
+		includeZero: true
+	},
+	right: {
+		includeZero: true
+	}
+};
 
 export const timeScale: TimeScaleOptions = {
-	addSpaceOnEdges: true
+	addSpaceOnEdges: 1,
+	showDayName: false,
+	localeObject: enUSLocaleObject,
+	timeIntervalFormats: {
+		"15seconds": { primary: "MMM d, pp", secondary: "pp" },
+		"minute": { primary: "MMM d, p", secondary: "p" },
+		"30minutes": { primary: "MMM d, p", secondary: "p" },
+		"hourly": { primary: "MMM d, hh a", secondary: "hh a" },
+		"daily": { primary: "MMM d", secondary: "d" },
+		"weekly": { primary: "eee, MMM d", secondary: "eee" },
+		"monthly": { primary: "MMM yyyy", secondary: "MMM" },
+		"quarterly": { primary: "QQQ ''yy", secondary: "QQQ" },
+		"yearly": { primary: "yyyy", secondary: "yyyy" }
+	}
 };
 
 /**
  * Base chart options common to any chart
  */
 const chart: BaseChartOptions = {
-	width: "100%",
-	height: "100%",
+	width: null,
+	height: null,
 	resizable: true,
-	theme: ChartTheme.DEFAULT,
 	tooltip: baseTooltip,
 	legend,
 	style: {
 		prefix: "cc"
+	},
+	data: {
+		groupMapsTo: "group"
+	},
+	color: {
+		scale: null
 	}
 };
 
@@ -131,9 +165,9 @@ const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 		maxWidth: 16
 	},
 	timeScale: Tools.merge(timeScale, {
-		addSpaceOnEdges: true
+		addSpaceOnEdges: 1
 	} as TimeScaleOptions),
-	tooltip: barChartTooltip
+	tooltip: barChartTooltip,
 } as BarChartOptions);
 
 /**
@@ -183,6 +217,23 @@ const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
 } as ScatterChartOptions);
 
 /**
+ * options specific to bubble charts
+ */
+const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
+	bubble: {
+		radiusMapsTo: "radius",
+		radiusRange: (chartSize, data) => {
+			const smallerChartDimension = Math.min(chartSize.width, chartSize.height);
+			return [
+				smallerChartDimension * 3 / 400,
+				smallerChartDimension * 25 / 400
+			];
+		},
+		fillOpacity: 0.2
+	}
+} as BubbleChartOptions);
+
+/**
  * options specific to pie charts
  */
 const pieChart: PieChartOptions = Tools.merge({}, chart, {
@@ -202,6 +253,9 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 			offsetY: 12,
 			horizontalLineLength: 8,
 			textMargin: 2
+		},
+		labels: {
+			formatter: null
 		}
 	}
 } as PieChartOptions);
@@ -214,7 +268,8 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 		center: {
 			numberFontSize: radius => Math.min((radius / 100) * 24, 24) + "px",
 			titleFontSize: radius => Math.min((radius / 100) * 15, 15) + "px",
-			titleYPosition: radius => Math.min((radius / 80) * 20, 20)
+			titleYPosition: radius => Math.min((radius / 80) * 20, 20),
+			numberFormatter: number => Math.floor(number).toLocaleString()
 		}
 	}
 } as DonutChartOptions);
@@ -225,6 +280,7 @@ export const options = {
 	simpleBarChart,
 	groupedBarChart,
 	stackedBarChart,
+	bubbleChart,
 	lineChart,
 	scatterChart,
 	pieChart,
@@ -261,3 +317,20 @@ export const transitions = {
 		duration: 100
 	}
 };
+
+export const axis = {
+	ticks: {
+		number: 7,
+		rotateIfSmallerThan: 30
+	},
+	paddingRatio: 0.1
+};
+
+export const spacers = {
+	default: {
+		size: 24
+	}
+};
+
+export const tickSpaceRatioVertical = 2.5;
+export const tickSpaceRatioHorizontal = 3.5;

@@ -2,7 +2,12 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import { CalloutDirections, TooltipTypes } from "../../interfaces/enums";
+import {
+	CalloutDirections,
+	Roles,
+	TooltipTypes,
+	Events
+} from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -32,19 +37,10 @@ export class Pie extends Component {
 		const eventsFragment = this.services.events;
 
 		// Highlight correct circle on legend item hovers
-		eventsFragment.addEventListener("legend-item-onhover", this.handleLegendOnHover);
+		eventsFragment.addEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
 
 		// Un-highlight circles on legend item mouseouts
-		eventsFragment.addEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
-	}
-
-	getDataList() {
-		const displayData = this.model.getDisplayData();
-		const dataset = displayData.datasets[0];
-		return dataset.data.map((datum, i) => ({
-			label: displayData.labels[i],
-			value: datum
-		}));
+		eventsFragment.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
 
 	getInnerRadius() {
@@ -55,8 +51,10 @@ export class Pie extends Component {
 	render(animate = true) {
 		const self = this;
 		const svg = this.getContainerSVG();
+
+		const displayData = this.model.getDisplayData();
 		const options = this.model.getOptions();
-		const dataList = this.getDataList();
+		const { groupMapsTo } = options.data;
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
@@ -73,16 +71,18 @@ export class Pie extends Component {
 		// Setup the pie layout
 		const pieLayout = pie()
 			.value((d: any) => d.value)
-			.sort((a: any, b: any) => b.value - a.value)
+			.sort(null)
 			.padAngle(options.pie.padAngle);
 
 		// Sort pie layout data based off of the indecies the layout creates
-		const pieLayoutData = pieLayout(dataList)
+		const pieLayoutData = pieLayout(displayData)
 			.sort((a: any, b: any) => a.index - b.index);
 
 		// Update data on all slices
-		const paths = DOMUtils.appendOrSelect(svg, "g.slices").selectAll("path.slice")
-			.data(pieLayoutData, d => d.data.label);
+		const slicesGroup = DOMUtils.appendOrSelect(svg, "g.slices")
+			.attr("role", Roles.GROUP);
+		const paths = slicesGroup.selectAll("path.slice")
+			.data(pieLayoutData, d => d.data[groupMapsTo]);
 
 		// Remove slices that need to be exited
 		paths.exit()
@@ -97,18 +97,23 @@ export class Pie extends Component {
 
 		// Update styles & position on existing and entering slices
 		enteringPaths.merge(paths)
-			.attr("fill", d => this.model.getFillScale()(d.data.label))
+			.attr("fill", d => self.model.getFillColor(d.data[groupMapsTo]))
 			.attr("d", this.arc)
 			.transition(this.services.transitions.getTransition("pie-slice-enter-update", animate))
 			.attr("opacity", 1)
+			// a11y
+			.attr("role", Roles.GRAPHICS_SYMBOL)
+			.attr("aria-roledescription", "slice")
+			.attr("aria-label", d => `${d.value}, ${Tools.convertValueToPercentage(d.data.value, displayData) + "%"}`)
+			// Tween
 			.attrTween("d", function (a) {
 				return arcTween.bind(this)(a, self.arc);
 			});
 
 		// Draw the slice labels
-		const labels = DOMUtils.appendOrSelect(svg, "g.labels")
-			.selectAll("text.pie-label")
-			.data(pieLayoutData, (d: any) => d.data.label);
+		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels").attr("role", Roles.GROUP);
+		const labels = labelsGroup.selectAll("text.pie-label")
+			.data(pieLayoutData, (d: any) => d.data[groupMapsTo]);
 
 		// Remove labels that are existing
 		labels.exit()
@@ -124,7 +129,13 @@ export class Pie extends Component {
 		const calloutData = [];
 		enteringLabels.merge(labels)
 			.style("text-anchor", "middle")
-			.text(d => Tools.convertValueToPercentage(d.data.value, dataList) + "%")
+			.text(d => {
+				if (options.pie.labels.formatter) {
+					return options.pie.labels.formatter(d);
+				}
+
+				return Tools.convertValueToPercentage(d.data.value, displayData) + "%";
+			})
 			// Calculate dimensions in order to transform
 			.datum(function(d) {
 				const textLength = this.getComputedTextLength();
@@ -141,7 +152,7 @@ export class Pie extends Component {
 				return d;
 			})
 			.attr("transform", function (d, i) {
-				const totalSlices = dataList.length;
+				const totalSlices = displayData.length;
 				const sliceAngleDeg = (d.endAngle - d.startAngle) * (180 / Math.PI);
 
 				// check if last 2 slices (or just last) are < the threshold
@@ -187,7 +198,8 @@ export class Pie extends Component {
 	}
 
 	renderCallouts(calloutData: any[]) {
-		const svg = DOMUtils.appendOrSelect(this.getContainerSVG(), "g.callouts");
+		const svg = DOMUtils.appendOrSelect(this.getContainerSVG(), "g.callouts")
+			.attr("role", Roles.GROUP);
 		const options = this.model.getOptions();
 
 		// Update data on callouts
@@ -198,7 +210,10 @@ export class Pie extends Component {
 
 		const enteringCallouts = callouts.enter()
 			.append("g")
-			.classed("callout", true);
+			.classed("callout", true)
+			// a11y
+			.attr("role", `${Roles.GRAPHICS_SYMBOL} ${Roles.GROUP}`)
+			.attr("aria-roledescription", "label callout");
 
 		// Update data values for each callout
 		// For the horizontal and vertical lines to use
@@ -273,10 +288,11 @@ export class Pie extends Component {
 	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
+		const { groupMapsTo } = this.model.getOptions().data;
 
 		this.parent.selectAll("path.slice")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => (d.data.label !== hoveredElement.datum()["key"]) ? 0.3 : 1);
+			.attr("opacity", d => d.data[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements
@@ -289,7 +305,14 @@ export class Pie extends Component {
 	addEventListeners() {
 		const self = this;
 		this.parent.selectAll("path.slice")
-			.on("mousemove", function() {
+			.on("mouseover", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mousemove", function(datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement.classed("hovered", true)
@@ -297,27 +320,39 @@ export class Pie extends Component {
 					.attr("d", self.hoverArc);
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent("pie-slice-mouseover", hoveredElement);
+				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEMOVE, {
+					element: hoveredElement,
+					datum
+				});
 
 				// Show tooltip
-				self.services.events.dispatchEvent("show-tooltip", {
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					type: TooltipTypes.DATAPOINT
 				});
 			})
-			.on("mouseout", function() {
+			.on("click", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Pie.SLICE_CLICK, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false)
 					.transition(self.services.transitions.getTransition("pie_slice_mouseover"))
 					.attr("d", self.arc);
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent("pie-slice-mouseout", hoveredElement);
+				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOUT, {
+					element: hoveredElement,
+					datum
+				});
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
-			})
-			.on("click", d => self.services.events.dispatchEvent("pie-slice-click", d));
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, { hoveredElement });
+			});
 	}
 
 	// Helper functions

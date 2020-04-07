@@ -1,18 +1,20 @@
 {
 	"compilerOptions": {
-		"baseUrl": "",
+		"composite": true,
+		"baseUrl": ".",
 		"declaration": true,
 		"lib": [
 			"es2015",
 			"dom"
 		],
+		"esModuleInterop": true,
 		"sourceMap": true,
 		"mapRoot": "./",
-		"module": "es2015",
+		"module": "esnext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
-		"outDir": "./dist",
-		"rootDir": "./src",
+		"outDir": "./dist/build",
+		"rootDir": ".",
 		"target": "es5",
 		"inlineSources": true,
 		"types": [
@@ -24,12 +26,15 @@
 			"./custom.d.ts"
 		]
 	},
-	"include": [
-		"./src/**/*"
-	],
 	"exclude": [
 		"./src/**/*.spec.ts",
+		"./src/tests",
 		"./node_modules",
 		"../../node_modules"
-	]
+	],
+	"references": [
+		{ "path": "src" },
+		{ "path": "demo" }
+	],
+	"files": []
 }

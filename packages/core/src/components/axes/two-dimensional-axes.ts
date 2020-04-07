@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { AxisPositions, ScaleTypes } from "../../interfaces";
+import { AxisPositions, ScaleTypes, AxesOptions } from "../../interfaces";
 import { Axis } from "./axis";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
@@ -19,38 +19,15 @@ export class TwoDimensionalAxes extends Component {
 
 	render(animate = false) {
 		const axes = {};
-
 		const axisPositions = Object.keys(AxisPositions);
 		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
 
-		if (axesOptions) {
-			let primaryAxisOptions, secondaryAxisOptions;
-			axisPositions.forEach(axisPosition => {
-				const axisOptions = axesOptions[AxisPositions[axisPosition]];
-				if (axisOptions) {
-					axes[AxisPositions[axisPosition]] = true;
-
-					if (axisOptions.primary === true) {
-						primaryAxisOptions = axisOptions;
-					} else if (axisOptions.secondary === true) {
-						secondaryAxisOptions = axisOptions;
-					}
-				}
-			});
-		} else {
-			this.model.getOptions().axes = {
-				left: {
-					primary: true
-				},
-				bottom: {
-					secondary: true,
-					type: this.model.getDisplayData().labels ? ScaleTypes.LABELS : undefined
-				}
-			};
-
-			axes[AxisPositions.LEFT] = true;
-			axes[AxisPositions.BOTTOM] = true;
-		}
+		axisPositions.forEach(axisPosition => {
+			const axisOptions = axesOptions[AxisPositions[axisPosition]];
+			if (axisOptions) {
+				axes[AxisPositions[axisPosition]] = true;
+			}
+		});
 
 		this.configs.axes = axes;
 
@@ -87,7 +64,15 @@ export class TwoDimensionalAxes extends Component {
 		Object.keys(this.children).forEach(childKey => {
 			const child = this.children[childKey];
 			const axisPosition = child.configs.position;
-			const { width, height } = DOMUtils.getSVGElementSize(child.getAxisRef(), { useBBox: true });
+
+			// Grab the invisibly rendered axis' width & height, and set margins
+			// Based off of that
+			// We draw the invisible axis because of the async nature of d3 transitions
+			// To be able to tell the final width & height of the axis when initiaing the transition
+			// The invisible axis is updated instantly and without a transition
+			const invisibleAxisRef = child.getInvisibleAxisRef();
+			const { width, height } = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true });
+
 			let offset;
 			if (child.getTitleRef().empty()) {
 				offset = 0;

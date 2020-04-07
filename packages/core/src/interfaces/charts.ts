@@ -1,15 +1,10 @@
 import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
 import { AxisTooltipOptions, BarTooltipOptions, BarOptions, StackedBarOptions } from "./components";
-import { ChartTheme } from "./enums";
 
 /**
  * Base chart options common to any chart
  */
 export interface BaseChartOptions {
-	/**
-	 * boolean to enable accessibility mode
-	 */
-	accessibility?: boolean;
 	/**
 	 * boolean to disable animations (enabled by default)
 	 */
@@ -21,15 +16,11 @@ export interface BaseChartOptions {
 	/**
 	 * Optionally specify a width for the chart
 	 */
-	width?: number | string;
+	width?: string;
 	/**
 	 * Optionally specify a height for the chart
 	 */
-	height?: number | string;
-	/**
-	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
-	 */
-	theme?: ChartTheme;
+	height?: string;
 	/**
 	 * tooltip configuration
 	 */
@@ -39,13 +30,17 @@ export interface BaseChartOptions {
 	 */
 	legend?: LegendOptions;
 	/**
-	 * Optional function to generate the fill color based on datasetLabel, label, and/or value
+	 * Optional function to determine whether is filled based on datasetLabel, label, and/or data
 	 */
-	getFillColor?: (datasetLabel: any, label?: any, value?: any) => string;
+	getIsFilled?: (datasetLabel: any, label?: any, data?: any, defaultFilled?: boolean) => boolean;
 	/**
-	 * Optional function to generate the stroke color based on datasetLabel, label, and/or value
+	 * Optional function to generate the fill color based on datasetLabel, label, and/or data
 	 */
-	getStrokeColor?: (datasetLabel: any, label?: any, value?: any) => string;
+	getFillColor?: (datasetLabel: any, label?: any, data?: any, defaultFillColor?: string) => string;
+	/**
+	 * Optional function to generate the stroke color based on datasetLabel, label, and/or data
+	 */
+	getStrokeColor?: (datasetLabel: any, label?: any, data?: any, defaultStrokeColor?: string) => string;
 	/**
 	 * stylesheet options
 	 */
@@ -53,7 +48,25 @@ export interface BaseChartOptions {
 		/**
 		 * optional prefixing string for css classes (defaults to 'cc')
 		 */
-		prefix?: String;
+		prefix?: string;
+	};
+	/**
+	 * options related to charting data
+	 */
+	data?: {
+		/**
+		 * identifier for data groups
+		 */
+		groupMapsTo?: string;
+	};
+	/**
+	 * options related to color scales
+	 */
+	color?: {
+		/**
+		 * e.g. { "Dataset 1": "blue" }
+		 */
+		scale?: object;
 	};
 }
 
@@ -98,6 +111,30 @@ export interface ScatterChartOptions extends AxisChartOptions {
 }
 
 /**
+ * options specific to bubble charts
+ */
+export interface BubbleChartOptions extends AxisChartOptions {
+	/**
+	 * options for the individual bubbles
+	 */
+	bubble?: {
+		/**
+		 * the key to lookup in charting data for the bubble radius value
+		 */
+		radiusMapsTo?: string;
+		/**
+		 * A function that would determine the range of the bubble radius to use
+		 * Returns an array with the 1st value being the min and the 2nd value being the max radius
+		 */
+		radiusRange?: Function;
+		/**
+		 * Opacity of the fills used within each circle
+		 */
+		fillOpacity?: number;
+	};
+}
+
+/**
  * options specific to line charts
  */
 export interface LineChartOptions extends ScatterChartOptions {
@@ -129,6 +166,9 @@ export interface PieChartOptions extends BaseChartOptions {
 			offsetY?: number;
 			horizontalLineLength?: number;
 			textMargin?: number;
+		},
+		labels?: {
+			formatter?: Function;
 		}
 	};
 }
@@ -144,6 +184,7 @@ export interface DonutChartOptions extends PieChartOptions {
 			numberFontSize?: Function;
 			titleFontSize?: Function;
 			titleYPosition?: Function;
+			numberFormatter?: Function;
 		};
 	};
 }
