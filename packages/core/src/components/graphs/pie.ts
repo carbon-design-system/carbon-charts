@@ -141,7 +141,7 @@ export class Pie extends Component {
 			.datum(function(d) {
 				const textLength = this.getComputedTextLength();
 				d.textOffsetX = textLength / 2;
-				d.textOffsetY = parseFloat(getComputedStyle(this).fontSize) / 2;
+				d.textOffsetY = Math.ceil(select(this).node().getBBox().height / 2);
 
 				const marginedRadius = radius + 7;
 
@@ -275,7 +275,7 @@ export class Pie extends Component {
 		const enteringHorizontalLines = enteringCallouts.append("line")
 			.classed("horizontal-line", true);
 
-		enteringHorizontalLines.merge(callouts.selectAll("line.horizontal-line"))
+		enteringHorizontalLines.merge(svg.selectAll("line.horizontal-line"))
 			.datum(function(d: any) {
 				return select(this.parentNode).datum();
 			})
