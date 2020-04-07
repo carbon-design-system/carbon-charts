@@ -50,7 +50,7 @@ export namespace Tools {
 				const providedAxisOptions = providedOptions.axes[axisName];
 
 				if (providedAxisOptions["primary"] || providedAxisOptions["secondary"]) {
-					console.warn("`primary` & `secondary` are no longer needed for axis configurations. Read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format")
+					console.warn("`primary` & `secondary` are no longer needed for axis configurations. Read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format");
 				}
 
 				const identifier = providedAxisOptions["mapsTo"];
