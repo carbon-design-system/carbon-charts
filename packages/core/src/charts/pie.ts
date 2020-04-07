@@ -12,7 +12,7 @@ import { Tools } from "../tools";
 import {
 	Pie,
 	// the imports below are needed because of typescript bug (error TS4029)
-	Tooltip,
+	TooltipPie,
 	Legend,
 	LayoutComponent
 } from "../components/index";
@@ -50,7 +50,7 @@ export class PieChart extends Chart {
 
 		// get the base chart components and export with tooltip
 		const components: any[] = this.getChartComponents(graphFrameComponents);
-		components.push(new Tooltip(this.model, this.services));
+		components.push(new TooltipPie(this.model, this.services));
 		return components;
 	}
 }

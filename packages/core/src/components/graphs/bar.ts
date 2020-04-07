@@ -1,6 +1,5 @@
 // Internal Imports
 import { Component } from "../component";
-import { CartesianOrientations } from "../../interfaces";
 
 export class Bar extends Component {
 	// Gets the correct width for bars based on options & configurations

@@ -32,11 +32,6 @@ export enum CartesianOrientations {
 	HORIZONTAL = "horizontal"
 }
 
-export enum AxisTypes {
-	PRIMARY = "primary",
-	SECONDARY = "secondary"
-}
-
 /**
  * enum of all possible scale types
  */

@@ -25,28 +25,15 @@ export class SimpleBar extends Bar {
 	}
 
 	render(animate: boolean) {
+		const options = this.model.getOptions();
+		const { groupMapsTo } = options.data;
+
 		// Grab container SVG
 		const svg = this.getContainerSVG();
 
-		// Update data on bar groups
-		const barGroups = svg.selectAll("g.bars")
-			.data(this.model.getDisplayData().datasets, dataset => dataset.label);
-
-		// Remove dot groups that need to be removed
-		barGroups.exit()
-			.attr("opacity", 0)
-			.remove();
-
-		// Add the bar groups that need to be introduced
-		const barGroupsEnter = barGroups.enter()
-			.append("g")
-				.classed("bars", true)
-				.attr("role", Roles.GROUP);
-
 		// Update data on all bars
-		const bars = barGroupsEnter.merge(barGroups)
-			.selectAll("path.bar")
-			.data((d, i) => this.addLabelsToDataPoints(d, i), d => d.label);
+		const bars = svg.selectAll("path.bar")
+			.data(this.model.getDisplayData(), datum => datum[groupMapsTo]);
 
 		// Remove bars that are no longer needed
 		bars.exit()
@@ -62,7 +49,7 @@ export class SimpleBar extends Bar {
 			.classed("bar", true)
 			.attr("width", this.getBarWidth.bind(this))
 			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-			.attr("fill", d => this.model.getFillScale()(d.label))
+			.attr("fill", d => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
 				/*
 				* Orientation support for horizontal/vertical bar charts
@@ -93,10 +80,11 @@ export class SimpleBar extends Bar {
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
+		const { groupMapsTo } = this.model.getOptions().data;
 
 		this.parent.selectAll("path.bar")
 			.transition(this.services.transitions.getTransition("legend-hover-simple-bar"))
-			.attr("opacity", d => (d.label !== hoveredElement.datum()["key"]) ? 0.3 : 1);
+			.attr("opacity", d => (d[groupMapsTo] !== hoveredElement.datum()["name"]) ? 0.3 : 1);
 	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
@@ -105,19 +93,10 @@ export class SimpleBar extends Bar {
 			.attr("opacity", 1);
 	}
 
-	// TODO - This method could be re-used in more graphs
-	addLabelsToDataPoints(d, index) {
-		const { labels } = this.model.getDisplayData();
-
-		return d.data.map((datum, i) => ({
-			date: datum.date,
-			label: labels[i],
-			datasetLabel: d.label,
-			value: isNaN(datum) ? datum.value : datum
-		}));
-	}
-
 	addEventListeners() {
+		const options = this.model.getOptions();
+		const { groupMapsTo } = options.data;
+
 		const self = this;
 		this.parent.selectAll("path.bar")
 			.on("mouseover", function(datum) {
@@ -132,7 +111,7 @@ export class SimpleBar extends Bar {
 					datum
 				});
 
-				self.services.events.dispatchEvent("show-tooltip", {
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					type: TooltipTypes.DATAPOINT
 				});
@@ -156,7 +135,7 @@ export class SimpleBar extends Bar {
 				hoveredElement.classed("hovered", false);
 
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
-					.attr("fill", (d: any) => self.model.getFillScale()(d.label));
+					.attr("fill", (d: any) => self.model.getFillColor(d[groupMapsTo]));
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
@@ -165,7 +144,7 @@ export class SimpleBar extends Bar {
 				});
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, { hoveredElement });
 			});
 	}
 

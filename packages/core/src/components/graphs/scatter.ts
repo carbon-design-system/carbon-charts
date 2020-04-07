@@ -9,25 +9,22 @@ export class Scatter extends Component {
 	type = "scatter";
 
 	init() {
-		const eventsFragment = this.services.events;
-
+		const { events } = this.services;
 		// Highlight correct circle on legend item hovers
-		eventsFragment.addEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
-
+		events.addEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
 		// Un-highlight circles on legend item mouseouts
-		eventsFragment.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
+		events.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
 
 	render(animate: boolean) {
-		// Chart options mixed with the internal configurations
-		const options = this.model.getOptions();
-
 		// Grab container SVG
 		const svg = this.getContainerSVG();
 
+		const groupedData = this.model.getGroupedData();
+
 		// Update data on dot groups
 		const dotGroups = svg.selectAll("g.dots")
-			.data(this.model.getDisplayData().datasets, dataset => dataset.label);
+			.data(groupedData, group => group.name);
 
 		// Remove dot groups that need to be removed
 		dotGroups.exit()
@@ -40,10 +37,11 @@ export class Scatter extends Component {
 				.classed("dots", true)
 				.attr("role", Roles.GROUP);
 
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 		// Update data on all circles
 		const dots = dotGroupsEnter.merge(dotGroups)
 			.selectAll("circle.dot")
-			.data((d, i) => this.addLabelsToDataPoints(d, i));
+			.data(group => group.data.filter(datum => datum[rangeIdentifier] !== null && datum[rangeIdentifier] !== undefined));
 
 		// Add the circles that need to be introduced
 		const dotsEnter = dots.enter()
@@ -63,26 +61,30 @@ export class Scatter extends Component {
 		const options = this.model.getOptions();
 		const { filled } = options.points;
 
+		const { groupMapsTo } = options.data;
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+
 		selection.raise()
 			.classed("dot", true)
-			.classed("filled", d => this.model.getIsFilled(d.datasetLabel, d.label, d, filled))
-			.classed("unfilled", d => !this.model.getIsFilled(d.datasetLabel, d.label, d, filled))
+			.classed("filled", d => this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
+			.classed("unfilled", d => !this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
 			.attr("cx", (d, i) => this.services.cartesianScales.getDomainValue(d, i))
 			.transition(this.services.transitions.getTransition("scatter-update-enter", animate))
 			.attr("cy", (d, i) => this.services.cartesianScales.getRangeValue(d, i))
 			.attr("r", options.points.radius)
 			.attr("fill", d => {
-				if (this.model.getIsFilled(d.datasetLabel, d.label, d, filled)) {
-					return this.model.getFillColor(d.datasetLabel, d.label, d);
+				if (this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled)) {
+					return this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d);
 				}
 			})
 			.attr("fill-opacity", filled ? 0.2 : 1)
-			.attr("stroke", d => this.model.getStrokeColor(d.datasetLabel, d.label, d))
+			.attr("stroke", d => this.model.getStrokeColor(d[groupMapsTo], d[domainIdentifier], d))
 			.attr("opacity", 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "point")
-			.attr("aria-label", d => d.value);
+			.attr("aria-label", d => d[rangeIdentifier]);
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
@@ -91,9 +93,11 @@ export class Scatter extends Component {
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
+		const { groupMapsTo } = this.model.getOptions().data;
+
 		this.parent.selectAll("circle.dot")
 			.transition(this.services.transitions.getTransition("legend-hover-scatter"))
-			.attr("opacity", d => (d.datasetLabel !== hoveredElement.datum()["key"]) ? 0.3 : 1);
+			.attr("opacity", d => (d[groupMapsTo] !== hoveredElement.datum()["name"]) ? 0.3 : 1);
 	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
@@ -102,37 +106,17 @@ export class Scatter extends Component {
 			.attr("opacity", 1);
 	}
 
-	// TODO - This method could be re-used in more graphs
-	addLabelsToDataPoints(d, index) {
-		const { labels } = this.model.getDisplayData();
-
-		return d.data
-			// Remove datapoints with no value
-			.filter((datum: any) => {
-				const value = isNaN(datum) ? datum.value : datum;
-				if (value === null || value === undefined) {
-					return false;
-				}
-
-				return true;
-			})
-			.map((datum, i) => ({
-				date: datum.date,
-				label: labels[i],
-				datasetLabel: d.label,
-				class: datum.class,
-				value: isNaN(datum) ? datum.value : datum
-			}));
-	}
-
 	addEventListeners() {
 		const self = this;
+		const { groupMapsTo } = this.model.getOptions().data;
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+
 		this.parent.selectAll("circle")
 			.on("mouseover mousemove", function(datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement.classed("hovered", true)
-					.style("fill", (d: any) => self.model.getFillColor(d.datasetLabel, d.label, d));
+					.style("fill", (d: any) => self.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d));
 
 				const eventNameToDispatch = d3Event.type === "mouseover" ? Events.Scatter.SCATTER_MOUSEOVER : Events.Scatter.SCATTER_MOUSEMOVE;
 				// Dispatch mouse event
@@ -142,7 +126,7 @@ export class Scatter extends Component {
 				});
 
 				// Show tooltip
-				self.services.events.dispatchEvent("show-tooltip", {
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					type: TooltipTypes.DATAPOINT
 				});
@@ -169,7 +153,7 @@ export class Scatter extends Component {
 				});
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, { hoveredElement });
 			});
 	}
 
@@ -180,8 +164,8 @@ export class Scatter extends Component {
 			.on("mouseout", null);
 
 		// Remove legend listeners
-		const eventsFragment = this.services.events;
-		eventsFragment.removeEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
-		eventsFragment.removeEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
+		const { events } = this.services;
+		events.removeEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
+		events.removeEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
 }
