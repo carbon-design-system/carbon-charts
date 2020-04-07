@@ -65,11 +65,6 @@ export class Skeleton extends Component {
 			xGridG.call(xGridGenerator);
 		}
 
-		// trick: vertical lines with width=1 are not visible with mask
-		// probably because of anti-aliasing so we make it a bit diagonal
-		// (imperceptible to the human eye)
-		xGridG.selectAll("line").attr("x1", d => Number(d) + 0.001);
-
 		// clean
 		xGridG.select("path").remove();
 		xGridG.selectAll("text").remove();
@@ -100,57 +95,51 @@ export class Skeleton extends Component {
 			yGridG.call(yGridGenerator);
 		}
 
-		// trick: horizontal lines with width=1 are not visible with mask
-		// probably because of anti-aliasing so we make it a bit diagonal
-		// (imperceptible to the human eye)
-		yGridG.selectAll("line").attr("y1", d => Number(d) + 0.001);
-
 		// clean
 		yGridG.select("path").remove();
 		yGridG.selectAll("text").remove();
 	}
 
+
 	setStyleLines() {
 		const container = this.parent.select(".chart-skeleton");
-		const animationDuration = 1;
-		const startPoint = 0;
+		const animationDuration = 2000; // ms
+		const delay = 300; // ms
+		const [startPoint, endPoint] = this.xScale.range();
 		const shimmerWidth = 0.2;
-		const delay = 0.5;
-		const defsContent = `
-			<linearGradient id="shimmer-lines" x1="0%" x2="100%" y1="0%" y2="0%">
-				<stop class="background-shimmer-color">
-					<animate
-						id="starting"
-						attributeName="offset"
-						values="${0 - shimmerWidth}; ${1 - shimmerWidth}"
-						dur="${animationDuration}s"
-						begin="0s; starting.end + ${delay}s"
-					/>
-				</stop>
-				<stop class="shimmer-color">
-					<animate
-						id="top"
-						attributeName="offset"
-						values="0; 1"
-						dur="${animationDuration}s"
-						begin="0s; top.end + ${delay}s"
-					/>
-				</stop>
-				<stop class="background-shimmer-color">
-					<animate
-						id="ending"
-						attributeName="offset"
-						values="${0 + shimmerWidth}; ${1 + shimmerWidth}"
-						dur="${animationDuration}s"
-						begin="0s; ending.end + ${delay}s"
-					/>
-				</stop>
-			</linearGradient>
-		`;
 		const defs = DOMUtils.appendOrSelect(container, "defs").lower();
-		defs.html(defsContent);
+		const width = Math.abs(endPoint - startPoint);
+		const stopsClass = ["background-shimmer-color", "shimmer-color", "background-shimmer-color"];
 
+		const linearGradient = defs
+			.append("linearGradient")
+			.attr("id", "shimmer-lines")
+			.attr("x1", startPoint - 3 * shimmerWidth * width)
+			.attr("x2", endPoint)
+			.attr("y1", 0)
+			.attr("y2", 0)
+			.attr("gradientUnits", "userSpaceOnUse")
+			.attr("gradientTransform", `translate(0, 0)`);
 
+		linearGradient
+			.selectAll(".stop")
+			.data(stopsClass)
+			.enter()
+			.append("stop")
+			.attr("class", d => d)
+			.attr("offset", (d, i) => i * shimmerWidth);
+
+		repeat();
+		function repeat() {
+			linearGradient
+				.attr("gradientTransform", `translate(${startPoint - 3 * shimmerWidth * width}, 0)`)
+				.transition()
+				.duration(animationDuration)
+				.delay(delay)
+				.ease(easeLinear)
+				.attr("gradientTransform", `translate(${endPoint + 3 * shimmerWidth * width}, 0)`)
+				.on("end", repeat);
+		}
 	}
 
 	setStyleAreas() {
