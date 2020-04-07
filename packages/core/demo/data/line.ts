@@ -264,12 +264,15 @@ export const lineTimeSeriesDenseData = {
 export const lineTimeSeriesDenseOptions = {
 	title: "Line (dense time series)",
 	axes: {
-		left: {
-			secondary: true
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time"
 		},
-		top: {
-			scaleType: "time",
-			primary: true
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
 		}
 	},
 	curve: "curveMonotoneX"
