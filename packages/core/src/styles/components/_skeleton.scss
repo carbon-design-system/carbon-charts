@@ -37,11 +37,11 @@
 }
 
 #shimmer-lines {
-	.shimmer-color {
-		stop-color: white;
-	}
-	
 	.background-shimmer-color {
 		stop-color: $ui-03; // same color of grid lines
+	}
+	
+	.shimmer-color {
+		stop-color: white;
 	}
 }
