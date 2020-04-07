@@ -9,7 +9,7 @@
 			fill: $ui-background;
 		}
 		// apply shimmer on skeleton rect stroke
-		stroke: url(#shimmer);
+		stroke: url(#shimmer-lines);
 	}
 
 	g.x.skeleton g.tick,
@@ -17,12 +17,26 @@
 		line {
 			// pointer-events: none;
 			stroke-width: 1px;
-			stroke: url(#shimmer); // apply shimmer on skeleton lines
+			stroke: url(#shimmer-lines); // apply shimmer on skeleton lines
 		}
+	}
+
+	.chart-skeleton path {
+		fill: url(#shimmer-areas);
 	}
 }
 
-#shimmer {
+#shimmer-areas {
+	.shimmer-color {
+		stop-color: rgba(255, 255, 255, 0.1);;
+	}
+	
+	.background-shimmer-color {
+		stop-color: rgba(127, 127, 127, 0.1);
+	}
+}
+
+#shimmer-lines {
 	.shimmer-color {
 		stop-color: white;
 	}

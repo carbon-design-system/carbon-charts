@@ -24,6 +24,6 @@ export class SkeletonVertOrHoriz extends Skeleton {
 		if (orientation === "horizontal") {
 			this.drawXGrid(animate);
 		}
-		this.setStyle();
+		this.setStyleLines();
 	}
 }

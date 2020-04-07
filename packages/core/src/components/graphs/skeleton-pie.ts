@@ -4,6 +4,7 @@ import { DOMUtils } from "../../services";
 
 // D3 Imports
 import { arc } from "d3-shape";
+import { interpolate } from "d3-interpolate";
 
 export class SkeletonPie extends Skeleton {
 	render() {
@@ -21,7 +22,7 @@ export class SkeletonPie extends Skeleton {
 	renderSkeleton(animate = true) {
 		const outerRadius = this.computeRadius();
 		this.drawRing(outerRadius, 0);
-		// this.setStyle();
+		this.setStyleAreas();
 	}
 
 	drawRing(outerRadius: number, innerRadius: number) {
@@ -33,8 +34,7 @@ export class SkeletonPie extends Skeleton {
 		const rect = DOMUtils.appendOrSelect(container, "rect.chart-skeleton");
 		rect.attr("width", width)
 			.attr("height", height)
-			.attr("fill", "none")
-			.attr("stroke", "gold");
+			.attr("fill", "none");
 
 		const arcPathGenerator = arc()
 			.innerRadius(innerRadius)
@@ -43,14 +43,24 @@ export class SkeletonPie extends Skeleton {
 			.endAngle(Math.PI * 2);
 
 		// centering circle inside the container
-		const dx = outerRadius + Math.abs(options.radiusOffset);
-		const dy = outerRadius + (Math.min(width, height) - outerRadius * 2) / 2;
+		const tcx = outerRadius + Math.abs(options.radiusOffset);
+		const tcy = outerRadius + (Math.min(width, height) - outerRadius * 2) / 2;
 
 		container.append("path")
-				.attr("transform", `translate(${dx}, ${dy})`)
 			.attr("d", arcPathGenerator)
-			.attr("stroke", "red")
-			.attr("fill", "red");
+			// .transition()
+			// .duration(2000)
+			// .attrTween("d", tweenPie)
+			.attr("transform", `translate(${tcx}, ${tcy})`);
+
+		function tweenPie(b: any) {
+			b.outerRadius = outerRadius * .6;
+			const interpolator = interpolate({ outerRadius: 0 }, b);
+			return function(t: number) {
+				return arcPathGenerator(interpolator(t));
+			};
+		}
+
 	}
 
 	computeRadius() {

@@ -5,6 +5,8 @@ import { DOMUtils } from "../../services";
 // D3 Imports
 import { scaleLinear } from "d3-scale";
 import { axisLeft, axisBottom } from "d3-axis";
+import { select } from "d3-selection";
+import { easeLinear } from "d3-ease";
 
 export class Skeleton extends Component {
 	type = "skeleton";
@@ -108,13 +110,56 @@ export class Skeleton extends Component {
 		yGridG.selectAll("text").remove();
 	}
 
-	setStyle() {
+	setStyleLines() {
 		const container = this.parent.select(".chart-skeleton");
-		const animationDuration = 2;
-		const shimmerWidth = 0.05;
+		const animationDuration = 1;
+		const startPoint = 0;
+		const shimmerWidth = 0.2;
 		const delay = 0.5;
 		const defsContent = `
-			<linearGradient id="shimmer" x1="0%" x2="100%" y1="0%" y2="0%">
+			<linearGradient id="shimmer-lines" x1="0%" x2="100%" y1="0%" y2="0%">
+				<stop class="background-shimmer-color">
+					<animate
+						id="starting"
+						attributeName="offset"
+						values="${0 - shimmerWidth}; ${1 - shimmerWidth}"
+						dur="${animationDuration}s"
+						begin="0s; starting.end + ${delay}s"
+					/>
+				</stop>
+				<stop class="shimmer-color">
+					<animate
+						id="top"
+						attributeName="offset"
+						values="0; 1"
+						dur="${animationDuration}s"
+						begin="0s; top.end + ${delay}s"
+					/>
+				</stop>
+				<stop class="background-shimmer-color">
+					<animate
+						id="ending"
+						attributeName="offset"
+						values="${0 + shimmerWidth}; ${1 + shimmerWidth}"
+						dur="${animationDuration}s"
+						begin="0s; ending.end + ${delay}s"
+					/>
+				</stop>
+			</linearGradient>
+		`;
+		const defs = DOMUtils.appendOrSelect(container, "defs").lower();
+		defs.html(defsContent);
+
+
+	}
+
+	setStyleAreas() {
+		const container = this.parent.select(".chart-skeleton");
+		const animationDuration = 1;
+		const shimmerWidth = 0.2;
+		const delay = 0.5;
+		const defsContent = `
+			<linearGradient id="shimmer-areas" x1="0%" x2="100%" y1="0%" y2="0%">
 				<stop class="background-shimmer-color">
 					<animate
 						id="starting"
