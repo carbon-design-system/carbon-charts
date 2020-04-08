@@ -20,12 +20,20 @@
 			stroke: url(#shimmer-lines); // apply shimmer on skeleton lines
 		}
 	}
+}
 
-	.chart-skeleton path {
-		fill: url(#shimmer-areas);
+// style for shimmer lines
+#shimmer-lines {
+	.stop-bg-shimmer {
+		stop-color: $ui-03; // same color of grid lines
+	}
+	
+	.stop-shimmer {
+		stop-color: white;
 	}
 }
 
+// style for shimmer areas
 #shimmer-areas {
 	.shimmer-color {
 		stop-color: rgba(255, 255, 255, 0.1);;
@@ -33,15 +41,5 @@
 	
 	.background-shimmer-color {
 		stop-color: rgba(127, 127, 127, 0.1);
-	}
-}
-
-#shimmer-lines {
-	.background-shimmer-color {
-		stop-color: $ui-03; // same color of grid lines
-	}
-	
-	.shimmer-color {
-		stop-color: white;
 	}
 }

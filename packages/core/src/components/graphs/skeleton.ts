@@ -5,7 +5,6 @@ import { DOMUtils } from "../../services";
 // D3 Imports
 import { scaleLinear } from "d3-scale";
 import { axisLeft, axisBottom } from "d3-axis";
-import { select } from "d3-selection";
 import { easeLinear } from "d3-ease";
 
 export class Skeleton extends Component {
@@ -103,16 +102,16 @@ export class Skeleton extends Component {
 
 	setStyleLines() {
 		const container = this.parent.select(".chart-skeleton");
-		const animationDuration = 2000; // ms
-		const delay = 300; // ms
+		const animationDuration = 3000; // ms
+		const delay = 1000; // ms
 		const [startPoint, endPoint] = this.xScale.range();
 		const shimmerWidth = 0.2;
 		const defs = DOMUtils.appendOrSelect(container, "defs").lower();
 		const width = Math.abs(endPoint - startPoint);
-		const stopsClass = ["background-shimmer-color", "shimmer-color", "background-shimmer-color"];
+		const stopBgShimmerClass = "stop-bg-shimmer";
+		const stopShimmerClass = "stop-shimmer";
 
-		const linearGradient = defs
-			.append("linearGradient")
+		const linearGradient = DOMUtils.appendOrSelect(defs, "linearGradient")
 			.attr("id", "shimmer-lines")
 			.attr("x1", startPoint - 3 * shimmerWidth * width)
 			.attr("x2", endPoint)
@@ -121,13 +120,12 @@ export class Skeleton extends Component {
 			.attr("gradientUnits", "userSpaceOnUse")
 			.attr("gradientTransform", `translate(0, 0)`);
 
-		linearGradient
-			.selectAll(".stop")
-			.data(stopsClass)
-			.enter()
-			.append("stop")
-			.attr("class", d => d)
-			.attr("offset", (d, i) => i * shimmerWidth);
+		const stops = `
+			<stop class="${stopBgShimmerClass}" offset="${startPoint}"></stop>
+			<stop class="${stopShimmerClass}" offset="${startPoint + shimmerWidth}"></stop>
+			<stop class="${stopBgShimmerClass}" offset="${startPoint + 2 * shimmerWidth}"></stop>
+		`;
+		linearGradient.html(stops);
 
 		repeat();
 		function repeat() {
