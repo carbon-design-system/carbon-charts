@@ -19,6 +19,21 @@
 		}
 	}
 
+	line.border {
+		stroke-width: 2;
+		&.status--danger {
+			stroke: darken($support-01, 10);
+		}
+
+		&.status--warning {
+			display: none;
+		}
+
+		&.status--success {
+			stroke: darken($support-02, 10);
+		}
+	}
+
 	line.peak {
 		stroke: $ui-05;
 		stroke-width: 2px;

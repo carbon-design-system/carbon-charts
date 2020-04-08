@@ -56,13 +56,12 @@ export class Meter extends Component {
 			.append("line")
 			.classed("border", true)
 			.merge(border)
+			.classed(self.getStatusClass(), true)
 			.attr("y1", 0)
 			.attr("y2", options.meter.height)
 			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
 			.attr("x1", d => xScale(d.value))
-			.attr("x2", d => xScale(d.value))
-			.attr("stroke-width", 2)
-			.attr("stroke", d => self.model.getFillColor(d[groupMapsTo]));
+			.attr("x2", d => xScale(d.value));
 
 		// draw the peak
 		const peakValue = Tools.getProperty(options, "meter", "peak");
