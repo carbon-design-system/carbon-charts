@@ -19,8 +19,9 @@ export class Scatter extends Component {
 	render(animate: boolean) {
 		// Grab container SVG
 		const svg = this.getContainerSVG();
+		const { groups } = this.configs;
 
-		const groupedData = this.model.getGroupedData();
+		const groupedData = this.model.getGroupedData(groups);
 
 		// Update data on dot groups
 		const dotGroups = svg.selectAll("g.dots")

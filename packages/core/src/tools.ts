@@ -11,6 +11,8 @@ import {
 	cloneDeep as lodashCloneDeep,
 	uniq as lodashUnique,
 	clamp as lodashClamp,
+	flatten as lodashFlatten,
+	camelCase as lodashCamelCase,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Cancelable,
 	DebounceSettings
@@ -24,6 +26,8 @@ export namespace Tools {
 	export const merge = lodashMerge;
 	export const removeArrayDuplicates = lodashUnique;
 	export const clamp = lodashClamp;
+	export const flatten = lodashFlatten;
+	export const camelCase = lodashCamelCase;
 
 	/**
 	 * Returns default chart options merged with provided options,

@@ -6,6 +6,7 @@ import * as pieDemos from "./pie";
 import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
 import * as timeSeriesAxisDemos from "./time-series-axis";
+import * as comboDemos from "./combo";
 
 export * from "./bar";
 export * from "./bubble";
@@ -14,6 +15,7 @@ export * from "./line";
 export * from "./pie";
 export * from "./scatter";
 export * from "./step";
+export * from "./combo";
 
 import {
 	createChartSandbox,
@@ -65,6 +67,11 @@ export const chartTypes = {
 		vanilla: "DonutChart",
 		angular: "ibm-donut-chart",
 		vue: "ccv-donut-chart"
+	},
+	ComboChart: {
+		vanilla: "ComboChart",
+		angular: "ibm-combo-chart",
+		vue: "ccv-combo-chart"
 	}
 };
 
@@ -247,6 +254,29 @@ let allDemoGroups = [
 				options: stepDemos.stepTimeSeriesOptions,
 				data: stepDemos.stepTimeSeriesData,
 				chartType: chartTypes.LineChart,
+				isDemoExample: true
+			}
+		]
+	},
+	{
+		title: "Combo",
+		demos: [
+			{
+				options: comboDemos.comboSimpleOptions,
+				data: comboDemos.comboSimpleData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboStackedOptions,
+				data: comboDemos.comboStackedData,
+				chartType: chartTypes.ComboChart,
+				isDemoExample: true
+			},
+			{
+				options: comboDemos.comboGroupedOptions,
+				data: comboDemos.comboGroupedData,
+				chartType: chartTypes.ComboChart,
 				isDemoExample: true
 			}
 		]

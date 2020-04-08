@@ -27,13 +27,14 @@ export class SimpleBar extends Bar {
 	render(animate: boolean) {
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
+		const { groups } = this.configs;
 
 		// Grab container SVG
 		const svg = this.getContainerSVG();
 
 		// Update data on all bars
 		const bars = svg.selectAll("path.bar")
-			.data(this.model.getDisplayData(), datum => datum[groupMapsTo]);
+			.data(this.model.getDisplayData(groups), datum => datum[groupMapsTo]);
 
 		// Remove bars that are no longer needed
 		bars.exit()

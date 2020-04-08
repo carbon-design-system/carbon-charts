@@ -29,9 +29,10 @@ export class StackedBar extends Bar {
 	render(animate: boolean) {
 		// Grab container SVG
 		const svg = this.getContainerSVG();
+		const { groups } = this.configs;
 
 		// Chart options mixed with the internal configurations
-		const displayData = this.model.getDisplayData();
+		const displayData = this.model.getDisplayData(groups);
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
 
@@ -39,7 +40,7 @@ export class StackedBar extends Bar {
 
 		// Create the data and keys that'll be used by the stack layout
 		const stackKeys = map(displayData, datum => datum[domainIdentifier]).keys();
-		const stackData = this.model.getStackedData();
+		const stackData = this.model.getStackedData(groups);
 
 		// Update data on all bar groups
 		const barGroups = svg.selectAll("g.bars")

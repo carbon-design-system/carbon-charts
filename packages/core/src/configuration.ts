@@ -5,6 +5,7 @@ import {
 	ScatterChartOptions,
 	LineChartOptions,
 	BarChartOptions,
+	ComboChartOptions,
 	StackedBarChartOptions,
 	PieChartOptions,
 	DonutChartOptions,
@@ -274,6 +275,13 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	}
 } as DonutChartOptions);
 
+/**
+ * options specific to combo charts
+*/
+const comboChart: ComboChartOptions = Tools.merge({}, baseBarChart, {
+
+} as ComboChartOptions);
+
 export const options = {
 	chart,
 	axisChart,
@@ -284,7 +292,8 @@ export const options = {
 	lineChart,
 	scatterChart,
 	pieChart,
-	donutChart
+	donutChart,
+	comboChart
 };
 
 /**

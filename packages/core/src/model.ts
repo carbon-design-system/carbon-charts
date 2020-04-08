@@ -1,3 +1,4 @@
+// tslint:disable: member-ordering
 // Internal Imports
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
@@ -41,7 +42,7 @@ export class ChartModel {
 
 	/**
 	 * Converts data provided in the older format to tabular
-	 * 
+	 *
 	 */
 	protected transformToTabularData(data) {
 		console.warn("We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format")
@@ -98,8 +99,8 @@ export class ChartModel {
 		return this.getTabularData(data);
 	}
 
-	getDisplayData() {
-		if (!this.get("data")) {
+	getDisplayData(groups?: string[]) {
+		if (!this.getData()) {
 			return null;
 		}
 
@@ -107,7 +108,10 @@ export class ChartModel {
 		const dataGroups = this.getDataGroups();
 
 		// Remove datasets that have been disabled
-		const displayData = Tools.clone(this.get("data"));
+		const displayData = groups
+			? this.getData().filter(d => groups.includes(d.group))
+			: Tools.clone(this.getData());
+
 		const { groupMapsTo } = this.getOptions().data;
 
 		return displayData.filter(datum => {
@@ -192,8 +196,8 @@ export class ChartModel {
 		return this.getActiveDataGroups().map(dataGroup => dataGroup.name);
 	}
 
-	getGroupedData() {
-		const displayData = this.getDisplayData();
+	getGroupedData(groups?: string[]) {
+		const displayData = this.getDisplayData(groups);
 		const groupedData = {};
 		const { groupMapsTo } = this.getOptions().data;
 
@@ -238,11 +242,15 @@ export class ChartModel {
 		}) as any;
 	}
 
-	getStackedData() {
+
+	getStackedData(groups?: string[]) {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const dataGroupNames = this.getDataGroupNames();
+		const dataGroupNames = groups
+			? this.getDataGroupNames().filter(name => groups.includes(name))
+			: this.getDataGroupNames();
+
 		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys();
 
 		return stack().keys(dataGroupNames)(dataValuesGroupedByKeys)

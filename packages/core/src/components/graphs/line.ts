@@ -20,6 +20,7 @@ export class Line extends Component {
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
+		const { groups } = this.configs;
 
 		// D3 line generator function
 		const lineGenerator = line()
@@ -36,7 +37,7 @@ export class Line extends Component {
 				return true;
 			});
 
-		const groupedData = this.model.getGroupedData();
+		const groupedData = this.model.getGroupedData(groups);
 		// Update the bound data on line groups
 		const lineGroups = svg.selectAll("g.lines")
 			.data(groupedData, group => group.name);

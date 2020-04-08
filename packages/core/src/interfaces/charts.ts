@@ -95,6 +95,13 @@ export interface StackedBarChartOptions extends BarChartOptions {
 }
 
 /**
+ * options specific to combo bar charts
+ */
+export interface ComboChartOptions extends AxisChartOptions {
+	chartTypes?: any;
+}
+
+/**
  * options specific to scatter charts
  */
 export interface ScatterChartOptions extends AxisChartOptions {
