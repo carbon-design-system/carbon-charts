@@ -14,11 +14,11 @@ export class SkeletonGrid extends Skeleton {
 		}
 	}
 
-	renderSkeleton(animate = true) {
+	renderSkeleton() {
 		this.setScales();
 		this.drawBackdrop();
-		this.drawXGrid(animate);
-		this.drawYGrid(animate);
+		this.drawXGrid();
+		this.drawYGrid();
 		this.setStyle("shimmer-lines");
 	}
 }

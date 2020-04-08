@@ -4,7 +4,6 @@ import { DOMUtils } from "../../services";
 
 // D3 Imports
 import { scaleLinear } from "d3-scale";
-import { axisLeft, axisBottom } from "d3-axis";
 import { easeLinear } from "d3-ease";
 import { arc } from "d3-shape";
 
@@ -41,56 +40,38 @@ export class Skeleton extends Component {
 			.attr("height", yScaleEnd - yScaleStart);
 	}
 
-	drawXGrid(animate: boolean) {
+	drawXGrid() {
 		const height = this.backdrop.attr("height");
-		const x = this.backdrop.attr("x");
+		const width = this.backdrop.attr("width");
 		const ticksNumber = 5;
+		const ticksValues = this.xScale.ticks(ticksNumber);
 
-		const xGridG = DOMUtils
-			.appendOrSelect(this.backdrop, "g.x.skeleton")
-			.attr("transform", `translate(${-x}, ${height})`);
-
-		const xGridGenerator = axisBottom(this.xScale)
-			.tickSizeInner(-height)
-			.tickSizeOuter(0)
-			.ticks(ticksNumber);
-
-		if (animate) {
-			const transition = this.services.transitions.getTransition("skeleton-update");
-			xGridG.transition(transition).call(xGridGenerator);
-		} else {
-			xGridG.call(xGridGenerator);
-		}
-
-		// clean
-		xGridG.select("path").remove();
-		xGridG.selectAll("text").remove();
+		const xGridG = DOMUtils.appendOrSelect(this.backdrop, "g.x.skeleton");
+		xGridG.selectAll("line")
+			.data(ticksValues)
+			.enter()
+			.append("line")
+			.attr("x1", d => d * width)
+			.attr("x2", d => d * width)
+			.attr("y1", 0)
+			.attr("y2", height);
 	}
 
-	drawYGrid(animate: boolean) {
+	drawYGrid() {
+		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
-		const y = this.backdrop.attr("y");
-		const ticksNumber = 4;
+		const ticksNumber = 5;
+		const ticksValues = this.yScale.ticks(ticksNumber);
 
-		const yGridG = DOMUtils
-			.appendOrSelect(this.backdrop, "g.y.skeleton")
-			.attr("transform", `translate(0, ${-y})`);
-
-		const yGridGenerator = axisLeft(this.yScale)
-			.tickSizeInner(-width)
-			.tickSizeOuter(0)
-			.ticks(ticksNumber);
-
-		if (animate) {
-			const transition = this.services.transitions.getTransition("skeleton-update");
-			yGridG.transition(transition).call(yGridGenerator);
-		} else {
-			yGridG.call(yGridGenerator);
-		}
-
-		// clean
-		yGridG.select("path").remove();
-		yGridG.selectAll("text").remove();
+		const yGridG = DOMUtils.appendOrSelect(this.backdrop, "g.y.skeleton");
+		yGridG.selectAll("line")
+			.data(ticksValues)
+			.enter()
+			.append("line")
+			.attr("x1", 0)
+			.attr("x2", width)
+			.attr("y1", d => d * height)
+			.attr("y2", d => d * height);
 	}
 
 	drawRing(outerRadius: number, innerRadius: number) {

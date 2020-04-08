@@ -14,15 +14,15 @@ export class SkeletonVertOrHoriz extends Skeleton {
 		}
 	}
 
-	renderSkeleton(animate = true) {
+	renderSkeleton() {
 		const orientation = this.services.cartesianScales.getOrientation();
 		this.setScales();
 		this.drawBackdrop();
 		if (orientation === "vertical") {
-			this.drawYGrid(animate);
+			this.drawYGrid();
 		}
 		if (orientation === "horizontal") {
-			this.drawXGrid(animate);
+			this.drawXGrid();
 		}
 		this.setStyle("shimmer-lines");
 	}
