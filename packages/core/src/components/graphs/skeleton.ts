@@ -6,6 +6,7 @@ import { DOMUtils } from "../../services";
 import { scaleLinear } from "d3-scale";
 import { axisLeft, axisBottom } from "d3-axis";
 import { easeLinear } from "d3-ease";
+import { arc } from "d3-shape";
 
 export class Skeleton extends Component {
 	type = "skeleton";
@@ -90,6 +91,46 @@ export class Skeleton extends Component {
 		// clean
 		yGridG.select("path").remove();
 		yGridG.selectAll("text").remove();
+	}
+
+	drawRing(outerRadius: number, innerRadius: number) {
+		const svg = this.parent;
+		const { width, height } = DOMUtils.getSVGElementSize(svg, { useAttrs: true });
+		const container = DOMUtils.appendOrSelect(svg, "g.chart-skeleton");
+		const options = this.model.getOptions().pie;
+
+		const skeletonAreaContainer = DOMUtils.appendOrSelect(container, "rect.chart-skeleton-area-container")
+			.attr("width", width)
+			.attr("height", height)
+			.attr("fill", "none");
+
+		const arcPathGenerator = arc()
+			.innerRadius(innerRadius)
+			.outerRadius(outerRadius)
+			.startAngle(0)
+			.endAngle(Math.PI * 2);
+
+		// centering circle inside the container
+		const tcx = outerRadius + Math.abs(options.radiusOffset);
+		const tcy = outerRadius + (Math.min(width, height) - outerRadius * 2) / 2;
+
+		container.append("path")
+			.attr("class", "skeleton-area-shape")
+			.attr("transform", `translate(${tcx}, ${tcy})`)
+			.attr("d", arcPathGenerator);
+	}
+
+	// same logic in pie
+	computeOuterRadius() {
+		const options = this.model.getOptions();
+		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
+		const radius = Math.min(width, height) / 2;
+		return radius + options.pie.radiusOffset;
+	}
+
+	// same logic in donut
+	computeInnerRadius() {
+		return this.computeOuterRadius() * (3 / 4);
 	}
 
 	setStyle(gradientId: string) {
