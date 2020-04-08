@@ -2,6 +2,7 @@
 import * as Configuration from "./configuration";
 import { ChartModel } from "./model";
 import * as colorPalettes from "./services/colorPalettes";
+import { Tools } from "./tools";
 
 /** The meter chart model layer which extends some of the data setting options.
  * Meter only has 1 dataset and does not need a colorScale (only uses one color).
@@ -34,13 +35,38 @@ export class MeterChartModel extends ChartModel {
 		return;
 	}
 
-
-	getFillColor(label: string) {
-		if (!this.get("fillColor")) {
-			const colors = colorPalettes.DEFAULT;
-			return colors[0];
+	/**
+	 * If status is enabled, returns a fill color based on status, otherwise return configured color.
+	 * Defaults to carbon color otherwise.
+	 * @param group dataset group label
+	 */
+	getFillColor(group: string) {
+		const options = this.getOptions();
+		const { fillColor, status } = Tools.getProperty(options, "meter");
+		// if ranges are supplied for status, we dont need a fill color - use carbon colors with scss
+		if (status.ranges) {
+			return null;
+		} else {
+			if (!fillColor) {
+				// default to carbon color
+				const colors = colorPalettes.DEFAULT;
+				return colors[0];
+			}
+			return fillColor;
 		}
-		return this.get("fillColor");
+	}
+
+	/**
+	 * Get the associated status for the data by checking the ranges
+	 * @param d
+	 * @param dataset
+	 */
+	getStatus(d: any, statuses: any) {
+		if (statuses) {
+			const result = statuses.filter(step => (step.range[0] <= d && d <= step.range[1]));
+			return result[0].status;
+		}
+		return null;
 	}
 }
 

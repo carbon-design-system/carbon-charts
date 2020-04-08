@@ -15,6 +15,7 @@ export const meterOptions = {
 				{ range: [50, 60], status: "warning" },
 				{ range: [60, 100], status: "danger" }
 			]
-		}
+		},
+		fillColor: "green"
 	}
 };

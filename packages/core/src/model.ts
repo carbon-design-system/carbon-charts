@@ -422,4 +422,8 @@ export class ChartModel {
 	getFillScale() {
 		return this.colorScale;
 	}
+
+	getStatus(d,v){
+		return null;
+	}
 }

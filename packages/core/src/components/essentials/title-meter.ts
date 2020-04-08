@@ -182,7 +182,10 @@ export class MeterTitle extends Title {
 	 * @param dataset
 	 */
 	protected getStatus(d: any, statuses: any) {
-		const result = statuses.filter(step => (step.range[0] <= d && d <= step.range[1]));
-		return result[0].status;
+		if (statuses) {
+			const result = statuses.filter(step => (step.range[0] <= d && d <= step.range[1]));
+			return result[0].status;
+		}
+		return null;
 	}
 }

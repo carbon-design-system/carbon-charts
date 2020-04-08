@@ -42,11 +42,10 @@ export class Meter extends Component {
 			.attr("x", 0 )
 			.attr("y", 0 )
 			.attr("height", options.meter.height)
+			.classed(self.getStatusClass(), true)
 			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
 			.attr("width", d => xScale(d.value))
-			.attr("fill", d => self.model.getFillColor(d[groupMapsTo]))
-			.attr("fill-opacity", 0.5)
-			.style("border-color", d => self.model.getFillColor(d[groupMapsTo]));
+			.attr("fill", d => self.model.getFillColor(d[groupMapsTo]));
 
 
 		// add the border indicating the value
@@ -89,5 +88,17 @@ export class Meter extends Component {
 			.attr("x2", d => xScale(d));
 
 		peak.exit().remove();
+	}
+
+	protected getStatusClass() {
+		const options = this.model.getOptions();
+		const statuses = Tools.getProperty(options, "meter", "status", "ranges");
+		const data = this.model.getDisplayData().value;
+		const status = this.model.getStatus(data, statuses);
+		if (!status) {
+			return null;
+		} else {
+			return `status--${status}`;
+		}
 	}
 }

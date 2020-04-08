@@ -4,7 +4,19 @@
 	}
 
 	rect.value {
-		border-right: 2px;
+		&.status--danger {
+			fill: $support-01;
+		}
+
+		&.status--warning {
+			fill: $support-03;
+			stroke-width: 2px;
+			stroke: #B28600;
+		}
+
+		&.status--success {
+			fill: $support-02;
+		}
 	}
 
 	line.peak {
