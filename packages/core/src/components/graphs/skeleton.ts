@@ -41,21 +41,18 @@ export class Skeleton extends Component {
 	}
 
 	drawXGrid(animate: boolean) {
-		DOMUtils.appendOrSelect(this.backdrop, "g.x.skeleton");
-
-		const svg = this.parent;
 		const height = this.backdrop.attr("height");
 		const x = this.backdrop.attr("x");
 		const ticksNumber = 5;
+
+		const xGridG = DOMUtils
+			.appendOrSelect(this.backdrop, "g.x.skeleton")
+			.attr("transform", `translate(${-x}, ${height})`);
 
 		const xGridGenerator = axisBottom(this.xScale)
 			.tickSizeInner(-height)
 			.tickSizeOuter(0)
 			.ticks(ticksNumber);
-
-		const xGridG = svg
-			.select(".x.skeleton")
-			.attr("transform", `translate(${-x}, ${height})`);
 
 		if (animate) {
 			const transition = this.services.transitions.getTransition("skeleton-update");
@@ -70,26 +67,22 @@ export class Skeleton extends Component {
 	}
 
 	drawYGrid(animate: boolean) {
-		DOMUtils.appendOrSelect(this.backdrop, "g.y.skeleton");
-
-		const svg = this.parent;
 		const width = this.backdrop.attr("width");
 		const y = this.backdrop.attr("y");
 		const ticksNumber = 4;
+
+		const yGridG = DOMUtils
+			.appendOrSelect(this.backdrop, "g.y.skeleton")
+			.attr("transform", `translate(0, ${-y})`);
 
 		const yGridGenerator = axisLeft(this.yScale)
 			.tickSizeInner(-width)
 			.tickSizeOuter(0)
 			.ticks(ticksNumber);
 
-		const yGridG = svg
-			.select(".y.skeleton")
-			.attr("transform", `translate(0, ${-y})`);
-
 		if (animate) {
 			const transition = this.services.transitions.getTransition("skeleton-update");
-			yGridG.transition(transition)
-				.call(yGridGenerator);
+			yGridG.transition(transition).call(yGridGenerator);
 		} else {
 			yGridG.call(yGridGenerator);
 		}
@@ -99,17 +92,18 @@ export class Skeleton extends Component {
 		yGridG.selectAll("text").remove();
 	}
 
-
 	setStyleLines() {
-		const container = this.parent.select(".chart-skeleton");
 		const animationDuration = 3000; // ms
 		const delay = 1000; // ms
-		const [startPoint, endPoint] = this.xScale.range();
 		const shimmerWidth = 0.2;
-		const defs = DOMUtils.appendOrSelect(container, "defs").lower();
-		const width = Math.abs(endPoint - startPoint);
 		const stopBgShimmerClass = "stop-bg-shimmer";
 		const stopShimmerClass = "stop-shimmer";
+		const container = this.parent.select(".chart-skeleton");
+		const [startPoint, endPoint] = this.xScale.range();
+		const width = Math.abs(endPoint - startPoint);
+
+		// append the defs as first child of container
+		const defs = DOMUtils.appendOrSelect(container, "defs").lower();
 
 		const linearGradient = DOMUtils.appendOrSelect(defs, "linearGradient")
 			.attr("id", "shimmer-lines")
