@@ -61,7 +61,6 @@ export class StackedBar extends Bar {
 
 		// Update data on all bars
 		const bars = svg.selectAll("g.bars").selectAll("path.bar")
-			// Remove bars with a start and end value of 0
 			.data(data => data);
 
 		// Remove bars that need to be removed
