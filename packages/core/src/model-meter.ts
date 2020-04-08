@@ -1,7 +1,6 @@
 // Internal Imports
 import * as Configuration from "./configuration";
 import { ChartModel } from "./model";
-import { Tools } from "./tools";
 import * as colorPalettes from "./services/colorPalettes";
 
 /** The meter chart model layer which extends some of the data setting options.
@@ -13,24 +12,6 @@ export class MeterChartModel extends ChartModel {
 		super(services);
 	}
 
-	/**
-	 *
-	 * @param newData The new raw data to be set
-	 */
-	setData(newData) {
-		const dataLabels = this.generateDataLabels(newData);
-		const fillColor = newData.fillColor;
-
-		delete newData.fillColor;
-
-		this.set({
-			data: newData,
-			dataLabels,
-			fillColor: fillColor
-		});
-
-		return this.state.data;
-	}
 
 	generateDataLabels(newData) {
 		const dataLabels = {};
@@ -44,8 +25,8 @@ export class MeterChartModel extends ChartModel {
 		if (!this.get("data")) {
 			return null;
 		}
-
-		return this.get("data");
+		// meter only uses displays one data group and value
+		return this.get("data")[0];
 	}
 
 	setColorScale() {

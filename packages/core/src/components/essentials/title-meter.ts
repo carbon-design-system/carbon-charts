@@ -2,18 +2,20 @@
 import { Title } from "./title";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import { MeterRanges } from "./../../interfaces/enums"
+import { MeterRanges } from "./../../interfaces/enums";
 
 export class MeterTitle extends Title {
 	type = "meter-title";
 
 	render() {
 		const dataset = this.model.getDisplayData();
+		const options = this.model.getOptions();
 		const svg = this.getContainerSVG();
+		const { groupMapsTo } = options.data;
 
 		// the title for a meter, is the label for that dataset
 		const title = svg.selectAll("text.meter-title")
-			.data([dataset.label]);
+			.data([dataset[groupMapsTo]]);
 
 		title.enter()
 			.append("text")
@@ -44,7 +46,7 @@ export class MeterTitle extends Title {
 	 * Appends the corresponding status based on the value and the peak.
 	 */
 	displayStatus() {
-		const value = Tools.getProperty(this.model.getDisplayData(), "data");
+		const value = this.model.getDisplayData().value;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
 
@@ -95,7 +97,7 @@ export class MeterTitle extends Title {
 	 * Appends the associated percentage to the end of the title
 	 */
 	appendPercentage() {
-		const dataValue = Tools.getProperty(this.model.getDisplayData(), "data");
+		const dataValue = this.model.getDisplayData().value;
 
 		// use the title's position to append the percentage to the end
 		const svg = this.getContainerSVG();

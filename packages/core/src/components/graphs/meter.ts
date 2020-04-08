@@ -16,6 +16,7 @@ export class Meter extends Component {
 		const options = this.model.getOptions();
 		const dataset = this.model.getDisplayData();
 		const width = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true }).width;
+		const { groupMapsTo } = options.data;
 
 		// each meter has a scale for the value but no visual axis
 		const xScale = scaleLinear()
@@ -42,10 +43,10 @@ export class Meter extends Component {
 			.attr("y", 0 )
 			.attr("height", options.meter.height)
 			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
-			.attr("width", d => xScale(d.data))
-			.attr("fill", d => self.model.getFillColor(d.label))
+			.attr("width", d => xScale(d.value))
+			.attr("fill", d => self.model.getFillColor(d[groupMapsTo]))
 			.attr("fill-opacity", 0.5)
-			.style("border-color", d => self.model.getFillColor(d.label));
+			.style("border-color", d => self.model.getFillColor(d[groupMapsTo]));
 
 
 		// add the border indicating the value
@@ -59,16 +60,16 @@ export class Meter extends Component {
 			.attr("y1", 0)
 			.attr("y2", options.meter.height)
 			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
-			.attr("x1", d => xScale(d.data))
-			.attr("x2", d => xScale(d.data))
+			.attr("x1", d => xScale(d.value))
+			.attr("x2", d => xScale(d.value))
 			.attr("stroke-width", 2)
-			.attr("stroke", d => self.model.getFillColor(d.label));
+			.attr("stroke", d => self.model.getFillColor(d[groupMapsTo]));
 
 		// draw the peak
 		const peakValue = Tools.getProperty(options, "meter", "peak");
 
 		// update the peak if it is less than the value, it should be equal to the value
-		const updatedPeak = peakValue && peakValue < dataset.data ? dataset.data : peakValue;
+		const updatedPeak = peakValue && peakValue < dataset.value ? dataset.value : peakValue;
 
 		// we only want to use peak value as a data source if it is under 100 (part to whole comparison)
 		const data = updatedPeak && updatedPeak <= 100 ? [updatedPeak] : [];
