@@ -9,3 +9,4 @@ export * from "./donut-chart.component";
 export * from "./line-chart.component";
 export * from "./pie-chart.component";
 export * from "./scatter-chart.component";
+export * from "./combo-chart.component";
