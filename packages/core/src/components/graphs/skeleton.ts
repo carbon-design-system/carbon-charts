@@ -114,7 +114,7 @@ export class Skeleton extends Component {
 		const tcx = outerRadius + Math.abs(options.radiusOffset);
 		const tcy = outerRadius + (Math.min(width, height) - outerRadius * 2) / 2;
 
-		container.append("path")
+		DOMUtils.appendOrSelect(container, "path")
 			.attr("class", "skeleton-area-shape")
 			.attr("transform", `translate(${tcx}, ${tcy})`)
 			.attr("d", arcPathGenerator);
