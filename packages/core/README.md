@@ -20,7 +20,7 @@ yarn add @carbon/charts d3
 ## Step-by-step instructions
 [Read on carbondesignsystem.com](https://www.carbondesignsystem.com/data-visualization/getting-started/vanilla)
 
-## Sample projects
+## Codesandbox examples
 [Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts).
 
 **When opening the link above**, click on the **Edit on Codesandbox** button for each demo to see an isolated project showing you how to reproduce the demo.
