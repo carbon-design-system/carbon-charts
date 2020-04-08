@@ -26,8 +26,8 @@ const chartsAcc = [
 	"Barchart horizontal (x: lin, y: time)",
 
 	// OTHER
-	// "Donutchart",
-	// "Piechart",
+	"Donutchart",
+	"Piechart"
 ];
 const testDemoGroups = Tools.clone(storybookDemoGroups).map(demoGroup => {
 	demoGroup.demos = demoGroup.demos.filter(demo => chartsAcc.includes(demo.title));
