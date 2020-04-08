@@ -92,28 +92,27 @@ export class Skeleton extends Component {
 		yGridG.selectAll("text").remove();
 	}
 
-	setStyleLines() {
+	setStyle(gradientId: string) {
 		const animationDuration = 3000; // ms
 		const delay = 1000; // ms
 		const shimmerWidth = 0.2;
 		const stopBgShimmerClass = "stop-bg-shimmer";
 		const stopShimmerClass = "stop-shimmer";
 		const container = this.parent.select(".chart-skeleton");
-		const [startPoint, endPoint] = this.xScale.range();
-		const width = Math.abs(endPoint - startPoint);
+		const { width } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
+		const startPoint = 0;
+		const endPoint = width;
 
 		// append the defs as first child of container
 		const defs = DOMUtils.appendOrSelect(container, "defs").lower();
-
 		const linearGradient = DOMUtils.appendOrSelect(defs, "linearGradient")
-			.attr("id", "shimmer-lines")
+			.attr("id", gradientId)
 			.attr("x1", startPoint - 3 * shimmerWidth * width)
 			.attr("x2", endPoint)
 			.attr("y1", 0)
 			.attr("y2", 0)
 			.attr("gradientUnits", "userSpaceOnUse")
 			.attr("gradientTransform", `translate(0, 0)`);
-
 		const stops = `
 			<stop class="${stopBgShimmerClass}" offset="${startPoint}"></stop>
 			<stop class="${stopShimmerClass}" offset="${startPoint + shimmerWidth}"></stop>
@@ -132,46 +131,6 @@ export class Skeleton extends Component {
 				.attr("gradientTransform", `translate(${endPoint + 3 * shimmerWidth * width}, 0)`)
 				.on("end", repeat);
 		}
-	}
-
-	setStyleAreas() {
-		const container = this.parent.select(".chart-skeleton");
-		const animationDuration = 1;
-		const shimmerWidth = 0.2;
-		const delay = 0.5;
-		const defsContent = `
-			<linearGradient id="shimmer-areas" x1="0%" x2="100%" y1="0%" y2="0%">
-				<stop class="background-shimmer-color">
-					<animate
-						id="starting"
-						attributeName="offset"
-						values="${0 - shimmerWidth}; ${1 - shimmerWidth}"
-						dur="${animationDuration}s"
-						begin="0s; starting.end + ${delay}s"
-					/>
-				</stop>
-				<stop class="shimmer-color">
-					<animate
-						id="top"
-						attributeName="offset"
-						values="0; 1"
-						dur="${animationDuration}s"
-						begin="0s; top.end + ${delay}s"
-					/>
-				</stop>
-				<stop class="background-shimmer-color">
-					<animate
-						id="ending"
-						attributeName="offset"
-						values="${0 + shimmerWidth}; ${1 + shimmerWidth}"
-						dur="${animationDuration}s"
-						begin="0s; ending.end + ${delay}s"
-					/>
-				</stop>
-			</linearGradient>
-		`;
-		const defs = DOMUtils.appendOrSelect(container, "defs").lower();
-		defs.html(defsContent);
 	}
 
 	removeSkeleton() {

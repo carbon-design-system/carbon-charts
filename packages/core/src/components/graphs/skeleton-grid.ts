@@ -19,6 +19,6 @@ export class SkeletonGrid extends Skeleton {
 		this.drawBackdrop();
 		this.drawXGrid(animate);
 		this.drawYGrid(animate);
-		this.setStyleLines();
+		this.setStyle("shimmer-lines");
 	}
 }

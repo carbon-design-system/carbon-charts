@@ -1,4 +1,7 @@
 .#{$prefix}--#{$charts-prefix}--skeleton {
+	////////////////////////////////
+	// skeleton lines
+	////////////////////////////////
 	// same color of grid rect
 	rect.chart-skeleton-backdrop {
 		@if $carbon--theme == $carbon--theme--g10 {
@@ -11,7 +14,7 @@
 		// apply shimmer on skeleton rect stroke
 		stroke: url(#shimmer-lines);
 	}
-
+	
 	g.x.skeleton g.tick,
 	g.y.skeleton g.tick {
 		line {
@@ -20,26 +23,40 @@
 			stroke: url(#shimmer-lines); // apply shimmer on skeleton lines
 		}
 	}
+
+	////////////////////////////////
+	// skeleton areas
+	////////////////////////////////
+	.skeleton-area-shape {
+		fill: url(#shimmer-areas);
+	}
 }
 
+////////////////////////////////
+// shimmer effects
+////////////////////////////////
 // style for shimmer lines
 #shimmer-lines {
 	.stop-bg-shimmer {
 		stop-color: $ui-03; // same color of grid lines
+		// stop-color: aquamarine;
 	}
 	
 	.stop-shimmer {
 		stop-color: white;
+		// stop-color: pink;
 	}
 }
 
 // style for shimmer areas
 #shimmer-areas {
-	.shimmer-color {
-		stop-color: rgba(255, 255, 255, 0.1);;
-	}
-	
-	.background-shimmer-color {
+	.stop-bg-shimmer {
 		stop-color: rgba(127, 127, 127, 0.1);
+		// stop-color: aquamarine;
+	}
+
+	.stop-shimmer {
+		stop-color: rgba(255, 255, 255, 0.1);
+		// stop-color: pink;
 	}
 }

@@ -24,6 +24,6 @@ export class SkeletonVertOrHoriz extends Skeleton {
 		if (orientation === "horizontal") {
 			this.drawXGrid(animate);
 		}
-		this.setStyleLines();
+		this.setStyle("shimmer-lines");
 	}
 }
