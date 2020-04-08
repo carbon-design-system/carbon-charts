@@ -155,8 +155,20 @@ let allDemoGroups = [
 		title: "Bubble",
 		demos: [
 			{
-				options: bubbleDemos.bubbleOptions,
-				data: bubbleDemos.bubbleData,
+				options: bubbleDemos.bubbleDoubleLinearOptions,
+				data: bubbleDemos.bubbleDoubleLinearData,
+				chartType: chartTypes.BubbleChart,
+				isDemoExample: true
+			},
+			{
+				options: bubbleDemos.bubbleTimeSeriesOptions,
+				data: bubbleDemos.bubbleTimeSeriesData,
+				chartType: chartTypes.BubbleChart,
+				isDemoExample: true
+			},
+			{
+				options: bubbleDemos.bubbleDiscreteOptions,
+				data: bubbleDemos.bubbleDiscreteData,
 				chartType: chartTypes.BubbleChart,
 				isDemoExample: true
 			}
@@ -210,14 +222,20 @@ let allDemoGroups = [
 		title: "Scatter",
 		demos: [
 			{
+				options: scatterDemos.doubleLinearScatterOptions,
+				data: scatterDemos.doubleLinearScatterData,
+				chartType: chartTypes.ScatterChart,
+				isDemoExample: true
+			},
+			{
 				options: scatterDemos.scatterTimeSeriesOptions,
 				data: scatterDemos.scatterTimeSeriesData,
 				chartType: chartTypes.ScatterChart,
 				isDemoExample: true
 			},
 			{
-				options: scatterDemos.scatterOptions,
-				data: scatterDemos.scatterData,
+				options: scatterDemos.scatterDiscreteOptions,
+				data: scatterDemos.scatterDiscreteData,
 				chartType: chartTypes.ScatterChart,
 				isDemoExample: true
 			}
