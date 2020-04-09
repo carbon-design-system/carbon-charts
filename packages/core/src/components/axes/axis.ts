@@ -172,7 +172,7 @@ export class Axis extends Component {
 		// Position the axis title
 		if (axisOptions.title) {
 			const axisTitleRef = DOMUtils.appendOrSelect(container, `text.axis-title`)
-				.text(axisOptions.title);
+				.html(axisOptions.title);
 
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
