@@ -114,7 +114,7 @@ export class Pie extends Component {
 		const labelData = pieLayoutData.filter(x => x.value > 0);
 		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels").attr("role", Roles.GROUP);
 		const labels = labelsGroup.selectAll("text.pie-label")
-			.data(labelData, (d: any) =>  d.data[groupMapsTo]);
+			.data(labelData, (d: any) => d.data[groupMapsTo]);
 
 		// Remove labels that are existing
 		labels.exit()
