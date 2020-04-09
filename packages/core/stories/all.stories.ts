@@ -212,21 +212,39 @@ if (process.env.NODE_ENV !== "production") {
 				// Add get data button to each column (= chart)
 				//////////////////////////////////////
 
-				// add events to the get data button:
-				//  - if there are data -> remove data
-				//  - if there aren't data -> fill data using the original data
 				const chartObj = chart; // instantiated class
+
+				const buttonsContainer = document.createElement("div");
+				buttonsContainer.style.display = "flex";
+				buttonsContainer.style.flexDirection = "row";
+				buttonsContainer.style.marginTop = "20px";
+
+				// create button to empty and fill data
 				const getDataButton = createButton(demo.id, "Remove data", e => {
 					const dataExists = !chartObj.model.isDataEmpty();
 					if (dataExists) {
+						// if there are data -> remove data
 						chartObj.model.setData([]);
 						getDataButton.innerHTML = "Get data";
 					} else {
+						// if there aren't data -> fill data using the original data
 						chartObj.model.setData(demo.data);
 						getDataButton.innerHTML = "Remove data";
 					}
 				});
-				column.appendChild(getDataButton);
+				buttonsContainer.appendChild(getDataButton);
+
+				// create checkbox for set/unset data loading option
+				const isDataLoading = chartObj.model.getOptions().data.loading;
+				const checkbox = createCheckbox("bx--checkbox-new", "Loading", isDataLoading, () => {
+					const loading = chartObj.model.getOptions().data.loading;
+					chartObj.model.setOptions({ data: { loading: !loading } });
+				});
+				const input = checkbox.getElementsByTagName("input")[0];
+				input.checked = chartObj.model.getOptions().data.loading;
+				buttonsContainer.appendChild(checkbox);
+
+				column.appendChild(buttonsContainer);
 
 				i++;
 			});
@@ -237,11 +255,38 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 function createButton(id: string, text: string, onclickFn: any) {
-	const button = document.createElement("button");
-	button.className = "bx--btn bx--btn--danger";
-	button.id = `get-data-${id}`;
-	button.setAttribute("type", "button");
-	button.innerHTML = text;
-	button.onclick = onclickFn;
-	return button;
+	const btn = document.createElement("button");
+	btn.className = "bx--btn bx--btn--danger";
+	btn.id = `get-data-${id}`;
+	btn.setAttribute("type", "button");
+	btn.innerHTML = text;
+	btn.onclick = onclickFn;
+	return btn;
+}
+
+function createCheckbox(id: string, text: string, checked: boolean, onchangeFn: any) {
+	const container = document.createElement("div");
+	container.className = "bx--form-item bx--checkbox-wrapper";
+	container.style.display = "flex";
+	container.style.flexDirection = "row";
+	container.style.alignItems = "center";
+	container.style.marginLeft = "15px";
+
+	const input = document.createElement("input");
+	input.id = id;
+	input.className = "bx--checkbox";
+	input.setAttribute("type", "checkbox");
+	input.setAttribute("value", "new");
+	input.setAttribute("name", "checkbox");
+	input.checked = checked;
+	input.onchange = onchangeFn;
+
+	const label = document.createElement("label");
+	label.setAttribute("for", id);
+	label.className = "bx--checkbox-label";
+	label.innerHTML = text;
+
+	container.appendChild(input);
+	container.appendChild(label);
+	return container;
 }

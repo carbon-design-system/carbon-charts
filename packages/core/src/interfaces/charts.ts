@@ -58,6 +58,10 @@ export interface BaseChartOptions {
 		 * identifier for data groups
 		 */
 		groupIdentifier?: String;
+		/**
+		 * used to simulate data loading
+		 */
+		loading?: Boolean;
 	};
 }
 

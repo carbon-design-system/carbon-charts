@@ -140,7 +140,8 @@ const chart: BaseChartOptions = {
 		prefix: "cc"
 	},
 	data: {
-		groupIdentifier: "group"
+		groupIdentifier: "group",
+		loading: false
 	}
 };
 
