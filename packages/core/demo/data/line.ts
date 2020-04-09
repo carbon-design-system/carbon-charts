@@ -98,7 +98,7 @@ export const lineTimeSeriesWithThresholdsOptions = {
 			title: "Conversion rate",
 			scaleType: "linear",
 			thresholds: [
-				{value: "55000", label: "Custom label", fillColor: "green"},
+				{value: "55000", label: "Custom label", fillColor: "orange"},
 				{value: "10000", fillColor: "#03a9f4"}
 			]
 		}

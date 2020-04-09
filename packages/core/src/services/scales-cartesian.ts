@@ -1,7 +1,7 @@
 // Internal Imports
 import * as Configuration from "../configuration";
 import { Service } from "./service";
-import { AxisPositions, CartesianOrientations, ScaleTypes, AxesOptions } from "../interfaces";
+import { AxisPositions, CartesianOrientations, ScaleTypes, AxesOptions, ThresholdOptions } from "../interfaces";
 import { Tools } from "../tools";
 
 // D3 Imports
@@ -381,5 +381,40 @@ export class CartesianScales extends Service {
 
 		scale.domain(this.getScaleDomain(axisPosition));
 		return scale;
+	}
+
+	getDomainDominantThreshold(): null | {threshold: ThresholdOptions, scaleValue: string} {
+		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
+		const scaleDomainPosition = this.getDomainAxisPosition();
+
+		const {thresholds} = axesOptions[scaleDomainPosition];
+
+		if (!thresholds) { return null; }
+
+		const scaleDomain = this.getDomainScale();
+		// Find the highest threshold
+		const	higherDomainThreshold = thresholds.sort((a, b) => b.value - a.value)[0];
+
+		return {
+			threshold: higherDomainThreshold,
+			scaleValue: scaleDomain(higherDomainThreshold.value)
+		};
+	}
+
+	getRangeDominantThreshold(): null | {threshold: ThresholdOptions, scaleValue: string} {
+		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
+		const scaleRangePosition = this.getRangeAxisPosition();
+
+		const {thresholds} = axesOptions[scaleRangePosition];
+
+		if (!thresholds) { return null; }
+
+		const scaleRange = this.getRangeScale();
+		const	higherRangeThreshold = thresholds.sort((a, b) => b.value - a.value)[0];
+
+		return {
+			threshold: higherRangeThreshold,
+			scaleValue: scaleRange(higherRangeThreshold.value)
+		};
 	}
 }

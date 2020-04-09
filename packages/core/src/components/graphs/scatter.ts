@@ -56,6 +56,28 @@ export class Scatter extends Component {
 		this.addEventListeners();
 	}
 
+	isThresholdsAnomaly(d, i) {
+		const { handleThresholds } = this.configs;
+		if (!handleThresholds) { return false; }
+
+		const domainThreshold = this.services.cartesianScales.getDomainDominantThreshold();
+		const rangeThreshold = this.services.cartesianScales.getRangeDominantThreshold();
+		const xValue = this.services.cartesianScales.getDomainValue(d, i);
+		const yValue = this.services.cartesianScales.getRangeValue(d, i);
+
+		if (rangeThreshold && domainThreshold) {
+			return yValue <= rangeThreshold.scaleValue && xValue >= domainThreshold.scaleValue;
+		}
+
+		if (rangeThreshold) {
+			return yValue <= rangeThreshold.scaleValue;
+		}
+
+		if (domainThreshold) {
+			return xValue >= domainThreshold.scaleValue;
+		}
+	}
+
 	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
 		// Chart options mixed with the internal configurations
 		const options = this.model.getOptions();
@@ -67,6 +89,7 @@ export class Scatter extends Component {
 
 		selection.raise()
 			.classed("dot", true)
+			.classed("threshold-anomaly", (d, i) => this.isThresholdsAnomaly(d, i))
 			.classed("filled", d => this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
 			.classed("unfilled", d => !this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
 			.attr("cx", (d, i) => this.services.cartesianScales.getDomainValue(d, i))
