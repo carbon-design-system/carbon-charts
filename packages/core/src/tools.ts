@@ -150,8 +150,8 @@ export namespace Tools {
 	}
 
 	/**
-	 * Get the percentage of a datapoint compared to the entire data-set.
-	 * Returns 1 significant digit if percentage is less than 1%.
+	 * Get the percentage of a datapoint compared to the entire dataset.
+	 * Returns 1 significant digit.
 	 * @export
 	 * @param {any} item
 	 * @param {any} fullData
@@ -159,7 +159,8 @@ export namespace Tools {
 	 */
 	export function convertValueToPercentage(item, fullData) {
 		const percentage = item / fullData.reduce((accum, val) => accum + val.value, 0) * 100;
-		return percentage < 1 ? percentage.toPrecision(1) : Math.floor(percentage);
+		// if the value has any significant figures, keep 1
+		return percentage % 1 !== 0 ? parseFloat(percentage.toFixed(1)) : percentage;
 	}
 
 	/**************************************

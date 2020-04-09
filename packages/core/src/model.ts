@@ -50,10 +50,22 @@ export class ChartModel {
 
 		// Loop through all datasets
 		datasets.forEach(dataset => {
-			const group = dataset.label;
-
 			// Update each data point to the new format
 			dataset.data.forEach((datum, i) => {
+				let group;
+
+				const datasetLabel = Tools.getProperty(dataset, "label");
+				if (datasetLabel === null) {
+					const correspondingLabel = Tools.getProperty(labels, i);
+					if (correspondingLabel) {
+						group = correspondingLabel;
+					} else {
+						group = "Ungrouped";
+					}
+				} else {
+					group = datasetLabel;
+				}
+
 				const updatedDatum = {
 					group,
 					key: labels[i]

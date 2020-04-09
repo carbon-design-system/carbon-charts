@@ -5,9 +5,8 @@ import {
 	LayoutGrowth,
 	LayoutDirection,
 	LegendOrientations,
-	ChartTheme,
 	Events as ChartEvents
-} from "./interfaces/index";
+} from "./interfaces";
 
 // Misc
 import { ChartModel } from "./model";
@@ -51,7 +50,7 @@ export class Chart {
 
 		// Call update() when model has been updated
 		this.services.events
-			.addEventListener("model-update", () => {
+			.addEventListener(ChartEvents.Model.UPDATE, () => {
 				this.update(true);
 			});
 
@@ -60,7 +59,7 @@ export class Chart {
 
 		// Set chart resize event listener
 		this.services.events
-			.addEventListener("chart-resize", () => {
+			.addEventListener(ChartEvents.Chart.RESIZE, () => {
 				this.update(false);
 			});
 

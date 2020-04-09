@@ -12,7 +12,7 @@ import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { select, mouse, event } from "d3-selection";
-import { TooltipTypes, ScaleTypes, TooltipPosition } from "../../interfaces";
+import { TooltipTypes, TooltipPosition, Events } from "../../interfaces";
 
 export class Tooltip extends Component {
 	type = "tooltip";
@@ -37,7 +37,7 @@ export class Tooltip extends Component {
 		this.tooltip.style("max-width", null);
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this.services.events.addEventListener("show-tooltip", e => {
+		this.services.events.addEventListener(Events.Tooltip.SHOW, e => {
 			// check the type of tooltip and that it is enabled
 			if ((e.detail.type === TooltipTypes.DATAPOINT && Tools.getProperty(this.model.getOptions(), "tooltip", "datapoint", "enabled"))
 				|| (e.detail.type === TooltipTypes.GRIDLINE && Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) ) {
@@ -84,7 +84,7 @@ export class Tooltip extends Component {
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
-		this.services.events.addEventListener("hide-tooltip", () => {
+		this.services.events.addEventListener(Events.Tooltip.HIDE, () => {
 			this.tooltip.classed("hidden", true);
 		});
 	}

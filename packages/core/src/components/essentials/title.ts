@@ -19,7 +19,7 @@ export class Title extends Component {
 			.merge(text)
 			.attr("x", 0)
 			.attr("y", 20)
-			.text(d => d);
+			.html(d => d);
 
 		// check the max space the title has to render
 		const maxWidth = this.getMaxTitleWidth();
@@ -52,27 +52,16 @@ export class Title extends Component {
 		const substringIndex = this.getSubstringIndex(title.node(), 0, titleString.length - 1, truncatedSize);
 
 		// use the substring as the title
-		title.text(titleString.substring(0, substringIndex - 1))
+		title.html(titleString.substring(0, substringIndex - 1))
 			.append("tspan")
 			.text("...");
 
-		// add events for displaying the tooltip with the title
-		// const self = this;
-
-		// title
-		// 	.on("mouseenter", function() {
-		// 		const hoveredElement = select(this);
-		// 		self.services.events.dispatchEvent("show-tooltip", {
-		// 			hoveredElement: hoveredElement,
-		// 			type: TooltipTypes.TITLE,
-		// 			data: titleString
 		// add events for displaying the tooltip with the title
 		const self = this;
 		title.on("mouseenter", function() {
 			self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 				hoveredElement: title,
 				type: TooltipTypes.TITLE
-				//data: titleString
 			});
 		})
 			.on("mouseout", function() {

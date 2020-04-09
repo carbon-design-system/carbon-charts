@@ -148,16 +148,17 @@ export class StackedBar extends Bar {
 			})
 			.on("mousemove", function(datum) {
 				const hoveredElement = select(this);
-				const itemData = datum.data[datum.group];
 
+				const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
 				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
 				const { groupMapsTo } = self.model.getOptions().data;
 
 				// Show tooltip
-				self.services.events.dispatchEvent("show-tooltip", {
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					data: {
-						[rangeIdentifier]: itemData,
+						[domainIdentifier]: datum.data.sharedStackKey,
+						[rangeIdentifier]: datum.data[datum.group],
 						[groupMapsTo]: datum.group
 					},
 					type: TooltipTypes.DATAPOINT
