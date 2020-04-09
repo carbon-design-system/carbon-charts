@@ -58,12 +58,13 @@ export class MeterChartModel extends ChartModel {
 
 	/**
 	 * Get the associated status for the data by checking the ranges
-	 * @param d
-	 * @param dataset
 	 */
-	getStatus(d: any, statuses: any) {
+	getStatus() {
+		const options = this.getOptions();
+		const statuses = Tools.getProperty(options, "meter", "status", "ranges");
+		const data = this.getDisplayData().value;
 		if (statuses) {
-			const result = statuses.filter(step => (step.range[0] <= d && d <= step.range[1]));
+			const result = statuses.filter(step => (step.range[0] <= data && data <= step.range[1]));
 			return result[0].status;
 		}
 		return null;

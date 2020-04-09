@@ -67,7 +67,7 @@ export class MeterTitle extends Title {
 			.attr("transform", `translate(${containerWidth - circleSize}, ${20 - circleSize})`);
 
 		const self = this;
-		const status = this.getStatus(value, statuses);
+		const status = this.model.getStatus();
 		const icon = statusGroup.selectAll("path.circle")
 			.data(data);
 
@@ -176,18 +176,5 @@ export class MeterTitle extends Title {
 			case MeterRanges.WARNING:
 				return "M10,1 C5,1 1,5 1,10 C1,15 5,19 10,19 C15,19 19,15 19,10 C19,5 15,1 10,1 Z M9.2,5 L10.7,5 L10.7,12 L9.2,12 L9.2,5 Z M10,16 C9.4,16 9,15.6 9,15 C9,14.4 9.4,14 10,14 C10.6,14 11,14.4 11,15 C11,15.6 10.6,16 10,16 Z";
 		}
-	}
-
-	/**
-	 * Get the associated status for the data by checking the ranges
-	 * @param d
-	 * @param dataset
-	 */
-	protected getStatus(d: any, statuses: any) {
-		if (statuses) {
-			const result = statuses.filter(step => (step.range[0] <= d && d <= step.range[1]));
-			return result[0].status;
-		}
-		return null;
 	}
 }

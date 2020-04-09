@@ -435,7 +435,7 @@ export class ChartModel {
 		return this.colorScale;
 	}
 
-	getStatus(d,v){
+	getStatus(){
 		return null;
 	}
 }

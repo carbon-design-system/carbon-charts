@@ -89,11 +89,11 @@ export class Meter extends Component {
 		peak.exit().remove();
 	}
 
+	/**
+	 * returns the class string for the status or null if there is not an associated status
+	 */
 	protected getStatusClass() {
-		const options = this.model.getOptions();
-		const statuses = Tools.getProperty(options, "meter", "status", "ranges");
-		const data = this.model.getDisplayData().value;
-		const status = this.model.getStatus(data, statuses);
+		const status = this.model.getStatus();
 		if (!status) {
 			return null;
 		} else {
