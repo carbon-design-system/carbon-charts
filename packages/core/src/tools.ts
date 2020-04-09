@@ -159,7 +159,8 @@ export namespace Tools {
 	 */
 	export function convertValueToPercentage(item, fullData) {
 		const percentage = item / fullData.reduce((accum, val) => accum + val.value, 0) * 100;
-		return percentage.toFixed(1);
+		// if the value has any significant figures, keep 1
+		return percentage % 1 !== 0 ? parseFloat(percentage.toFixed(1)) : percentage;
 	}
 
 	/**************************************
