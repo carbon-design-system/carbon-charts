@@ -54,7 +54,8 @@ export class ChartModel {
 			dataset.data.forEach((datum, i) => {
 				let group;
 
-				if (Tools.getProperty(dataset, "label") === null) {
+				const datasetLabel = Tools.getProperty(dataset, "label");
+				if (datasetLabel === null) {
 					const correspondingLabel = Tools.getProperty(labels, i);
 					if (correspondingLabel) {
 						group = correspondingLabel;
@@ -62,7 +63,7 @@ export class ChartModel {
 						group = "Ungrouped";
 					}
 				} else {
-					group = Tools.getProperty(dataset, "label");
+					group = datasetLabel;
 				}
 
 				const updatedDatum = {
