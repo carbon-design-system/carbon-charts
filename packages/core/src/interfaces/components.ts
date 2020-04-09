@@ -92,6 +92,28 @@ export interface TooltipOptions {
 }
 
 /**
+ * Threshold options
+ */
+export interface ThresholdOptions {
+	/**
+	 * threshold value
+	 */
+	value: number | Date;
+	/**
+	 * a function to format the threshold values
+	 */
+	valueFormatter?: Function;
+	/**
+	 * hex threshold line color
+	 */
+	fillColor: string;
+	/**
+	 * threshold label
+	 */
+	label: string;
+}
+
+/**
  * extends tooltip options to provide support for multiple gridline tooltips
  */
 export interface AxisTooltipOptions extends TooltipOptions {

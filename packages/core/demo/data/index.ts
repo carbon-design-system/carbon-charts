@@ -197,6 +197,11 @@ let allDemoGroups = [
 				options: lineDemos.lineTimeSeriesRotatedTicksOptions,
 				data: lineDemos.lineTimeSeriesDataRotatedTicks,
 				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeriesWithThresholdsOptions,
+				data: lineDemos.lineTimeSeriesData,
+				chartType: chartTypes.LineChart
 			}
 		]
 	},
