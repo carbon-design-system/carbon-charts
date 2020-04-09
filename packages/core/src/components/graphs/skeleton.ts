@@ -44,15 +44,15 @@ export class Skeleton extends Component {
 		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
 		const ticksNumber = 5;
-		const ticksValues = this.xScale.ticks(ticksNumber);
+		const ticksValues = this.xScale.ticks(ticksNumber).map(d => d * width);
 
 		const xGridG = DOMUtils.appendOrSelect(this.backdrop, "g.x.skeleton");
-		xGridG.selectAll("line")
-			.data(ticksValues)
-			.enter()
+		const update = xGridG.selectAll("line").data(ticksValues);
+		update.enter()
 			.append("line")
-			.attr("x1", d => d * width)
-			.attr("x2", d => d * width)
+			.merge(update)
+			.attr("x1", d => d)
+			.attr("x2", d => d)
 			.attr("y1", 0)
 			.attr("y2", height);
 	}
@@ -61,17 +61,17 @@ export class Skeleton extends Component {
 		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
 		const ticksNumber = 5;
-		const ticksValues = this.yScale.ticks(ticksNumber);
+		const ticksValues = this.xScale.ticks(ticksNumber).map(d => d * height);
 
 		const yGridG = DOMUtils.appendOrSelect(this.backdrop, "g.y.skeleton");
-		yGridG.selectAll("line")
-			.data(ticksValues)
-			.enter()
+		const update = yGridG.selectAll("line").data(ticksValues);
+		update.enter()
 			.append("line")
+			.merge(update)
 			.attr("x1", 0)
 			.attr("x2", width)
-			.attr("y1", d => d * height)
-			.attr("y2", d => d * height);
+			.attr("y1", d => d)
+			.attr("y2", d => d);
 	}
 
 	drawRing(outerRadius: number, innerRadius: number) {
