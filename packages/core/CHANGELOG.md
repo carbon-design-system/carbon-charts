@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.10](https://github.com/IBM/carbon-charts/compare/v0.30.9...v0.30.10) (2020-04-09)
+
+
+### Bug Fixes
+
+* **core:** title string contains html ascii characters  ([#547](https://github.com/IBM/carbon-charts/issues/547)) ([1a6b646](https://github.com/IBM/carbon-charts/commit/1a6b6463f576c1ba297883e734a4a953e4a22829))
+
+
+
+
+
 ## [0.30.9](https://github.com/IBM/carbon-charts/compare/v0.30.8...v0.30.9) (2020-04-09)
 
 
