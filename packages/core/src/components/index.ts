@@ -16,6 +16,7 @@ export * from "./graphs/bubble";
 export * from "./graphs/line";
 export * from "./graphs/scatter";
 export * from "./graphs/pie";
+export * from "./graphs/gauge";
 export * from "./graphs/donut";
 
 // Layout

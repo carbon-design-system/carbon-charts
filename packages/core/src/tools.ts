@@ -162,6 +162,27 @@ export namespace Tools {
 		return percentage < 1 ? percentage.toPrecision(1) : Math.floor(percentage);
 	}
 
+	/**
+	* Linearly interpolates a value between minValue and maxValue, then
+	* clamps the result to the two limits.
+	* The first parameter is always the value to interpolate. When called
+	* with one additional parameter, minValue is set to 0, while the only
+	* parameter is used as maxValue. When called with 2 additional
+	* parameters, they are read as minValue and maxValue, respectively.
+	* @export
+	* @param {number} value
+	* @param {number} firstLimit
+	* @param {number} [secondLimit]
+	* @returns The interpolated value
+	*/
+	export function interpolateAndClamp(value: number, firstLimit: number, secondLimit?: number): number {
+		const minValue = secondLimit === undefined ? 0 : firstLimit;
+		const maxValue = secondLimit === undefined ? firstLimit : secondLimit;
+		const interpolated = maxValue * value;
+		return lodashClamp(interpolated, minValue, maxValue);
+	}
+
+
 	/**************************************
 	 *  Object/array related checks       *
 	 *************************************/

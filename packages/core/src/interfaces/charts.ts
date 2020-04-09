@@ -173,6 +173,22 @@ export interface PieChartOptions extends BaseChartOptions {
 	};
 }
 
+/**
+ * options specific to gauge charts
+ */
+export interface GaugeChartOptions extends PieChartOptions {
+	gauge?: {
+		center?: {
+			valueFontSize?: Function;
+			deltaFontSize?: Function;
+			titleFontSize?: Function;
+			deltaYPosition?: Function;
+			valueYPosition?: Function;
+			numberFormatter?: Function;
+		};
+		arcRatio?: number
+	};
+}
 
 
 /**
