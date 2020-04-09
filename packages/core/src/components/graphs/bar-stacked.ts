@@ -61,8 +61,7 @@ export class StackedBar extends Bar {
 
 		// Update data on all bars
 		const bars = svg.selectAll("g.bars").selectAll("path.bar")
-			// Remove bars with a start and end value of 0
-			.data(data => data.filter(d => !(d[0] === 0 && d[1] === 0)));
+			.data(data => data);
 
 		// Remove bars that need to be removed
 		bars.exit()
@@ -153,7 +152,7 @@ export class StackedBar extends Bar {
 
 				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
 				const { groupMapsTo } = self.model.getOptions().data;
-		
+
 				// Show tooltip
 				self.services.events.dispatchEvent("show-tooltip", {
 					hoveredElement,
