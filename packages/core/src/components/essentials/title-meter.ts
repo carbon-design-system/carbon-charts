@@ -148,15 +148,17 @@ export class MeterTitle extends Title {
 		// get a reference to the title elements to calculate the size the title can be
 		const containerBounds = DOMUtils.getSVGElementSize(this.parent, { useAttr: true });
 
+
 		// need to check if the width is 0, and try to use the parent attribute
 		const containerWidth = containerBounds.width ? containerBounds.width : this.parent.node().getAttribute("width");
-		const percentage = DOMUtils.appendOrSelect(this.parent, "text.percent-value");
 
+		const percentage = DOMUtils.appendOrSelect(this.parent, "text.percent-value");
 		// the title needs to fit the width of the container without crowding the status, and percentage value
 		const offset = Tools.getProperty(this.model.getOptions(), "meter", "title", "paddingRight"); // horizontal offset of percent from title
 		const percentageWidth = percentage.node().getComputedTextLength();
-		const statusWidth = DOMUtils.appendOrSelect(this.parent, "g.status-indicator").node().getBBox().width +
-			Tools.getProperty(this.model.getOptions(), "meter", "status", "paddingLeft");
+
+		const statusGroup = DOMUtils.appendOrSelect(this.parent, "g.status-indicator").node();
+		const statusWidth = DOMUtils.getSVGElementSize(statusGroup, { useBBox: true }).width + Tools.getProperty(this.model.getOptions(), "meter", "status", "paddingLeft");
 
 		return containerWidth - percentageWidth - offset - statusWidth;
 	}
