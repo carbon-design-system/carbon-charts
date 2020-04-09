@@ -22,7 +22,7 @@ export const lineData = [
 ];
 
 export const lineOptions = {
-	title: "Line (discrete) - long long long long long long long long long long long long long long  time format ('MMM d, hh a and 'hh a')",
+	title: "Line (discrete)",
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
