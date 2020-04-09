@@ -15,7 +15,7 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "^0.30.9",
-		"vue": "2.5.21"
+		"vue": "2.6.11"
 	},
 	"devDependencies": {
 		"@babel/core": "7.3.4",
