@@ -210,31 +210,23 @@ if (process.env.NODE_ENV !== "production") {
 
 				//////////////////////////////////////
 				// Add get data button to each column (= chart)
-				const getDataButton = document.createElement("button");
-				getDataButton.className = "bx--btn bx--btn--danger";
-				getDataButton.id = `get-data-${demo.id}`;
-				getDataButton.setAttribute("type", "button");
-				getDataButton.innerHTML = "Remove data";
-				column.appendChild(getDataButton);
+				//////////////////////////////////////
 
 				// add events to the get data button:
 				//  - if there are data -> remove data
 				//  - if there aren't data -> fill data using the original data
 				const chartObj = chart; // instantiated class
-				getDataButton.onclick = e => {
-					e.preventDefault();
+				const getDataButton = createButton(demo.id, "Remove data", e => {
 					const dataExists = !chartObj.model.isDataEmpty();
-
 					if (dataExists) {
 						chartObj.model.setData([]);
-						chartObj.model.setOptions({ legend: { enabled: true } });
 						getDataButton.innerHTML = "Get data";
 					} else {
 						chartObj.model.setData(demo.data);
 						getDataButton.innerHTML = "Remove data";
 					}
-				};
-				//////////////////////////////////////
+				});
+				column.appendChild(getDataButton);
 
 				i++;
 			});
@@ -242,4 +234,14 @@ if (process.env.NODE_ENV !== "production") {
 
 		return container;
 	});
+}
+
+function createButton(id: string, text: string, onclickFn: any) {
+	const button = document.createElement("button");
+	button.className = "bx--btn bx--btn--danger";
+	button.id = `get-data-${id}`;
+	button.setAttribute("type", "button");
+	button.innerHTML = text;
+	button.onclick = onclickFn;
+	return button;
 }
