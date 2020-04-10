@@ -217,33 +217,33 @@ if (process.env.NODE_ENV !== "production") {
 				const buttonsContainer = document.createElement("div");
 				buttonsContainer.style.display = "flex";
 				buttonsContainer.style.flexDirection = "row";
-				buttonsContainer.style.marginTop = "20px";
-
-				// create button to empty and fill data
-				const getDataButton = createButton(demo.id, "Remove data", e => {
-					const dataExists = !chartObj.model.isDataEmpty();
-					if (dataExists) {
-						// if there are data -> remove data
-						chartObj.model.setData([]);
-						getDataButton.innerHTML = "Get data";
-					} else {
-						// if there aren't data -> fill data using the original data
-						chartObj.model.setData(demo.data);
-						getDataButton.innerHTML = "Remove data";
-					}
-				});
-				buttonsContainer.appendChild(getDataButton);
 
 				// create checkbox for set/unset data loading option
-				const isDataLoading = chartObj.model.getOptions().data.loading;
-				const checkbox = createCheckbox("bx--checkbox-new", "Loading", isDataLoading, () => {
+				const areDataLoading = chartObj.model.getOptions().data.loading;
+				const checkbox = createCheckbox("bx--checkbox-new", "Loading", areDataLoading, () => {
 					const loading = chartObj.model.getOptions().data.loading;
 					chartObj.model.setOptions({ data: { loading: !loading } });
 				});
-				const input = checkbox.getElementsByTagName("input")[0];
-				input.checked = chartObj.model.getOptions().data.loading;
-				buttonsContainer.appendChild(checkbox);
 
+				// create button to empty and fill data
+				const getDataButton = createButton(demo.id, "Remove data", () => {
+					const input = checkbox.getElementsByTagName("input")[0];
+					const areDataEmpty = chartObj.model.isDataEmpty();
+					if (areDataEmpty) {
+						chartObj.model.setOptions({ data: { loading: false } });
+						chartObj.model.setData(demo.data);
+						getDataButton.innerHTML = "Remove data";
+						input.disabled = true;
+						input.checked = false;
+					} else {
+						chartObj.model.setData([]);
+						getDataButton.innerHTML = "Get data";
+						input.disabled = false;
+					}
+				});
+
+				buttonsContainer.appendChild(getDataButton);
+				buttonsContainer.appendChild(checkbox);
 				column.appendChild(buttonsContainer);
 
 				i++;
@@ -264,7 +264,7 @@ function createButton(id: string, text: string, onclickFn: any) {
 	return btn;
 }
 
-function createCheckbox(id: string, text: string, checked: boolean, onchangeFn: any) {
+function createCheckbox(id: string, text: string, areDataLoading: boolean, onchangeFn: any) {
 	const container = document.createElement("div");
 	container.className = "bx--form-item bx--checkbox-wrapper";
 	container.style.display = "flex";
@@ -278,7 +278,8 @@ function createCheckbox(id: string, text: string, checked: boolean, onchangeFn: 
 	input.setAttribute("type", "checkbox");
 	input.setAttribute("value", "new");
 	input.setAttribute("name", "checkbox");
-	input.checked = checked;
+	input.checked = areDataLoading; // check it only if data are loading
+	input.disabled = !areDataLoading; // disable it if there are data
 	input.onchange = onchangeFn;
 
 	const label = document.createElement("label");
