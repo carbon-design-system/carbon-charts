@@ -104,3 +104,13 @@ export enum CalloutDirections {
 	LEFT = "left",
 	RIGHT = "right"
 }
+
+/**
+ * enum of all possible skeleton/empty state types
+ */
+export enum Skeletons {
+	GRID = "grid",
+	VERT_OR_HORIZ = "vertoOrHoriz",
+	PIE = "pie",
+	DONUT = "donut"
+}

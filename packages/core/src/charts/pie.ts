@@ -7,6 +7,7 @@ import {
 	PieChartOptions
 } from "../interfaces/index";
 import { Tools } from "../tools";
+import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
@@ -15,7 +16,7 @@ import {
 	TooltipPie,
 	Legend,
 	LayoutComponent,
-	SkeletonPie
+	Skeleton
 } from "../components/index";
 
 export class PieChart extends Chart {
@@ -47,7 +48,7 @@ export class PieChart extends Chart {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [
 			new Pie(this.model, this.services),
-			new SkeletonPie(this.model, this.services)
+			new Skeleton(this.model, this.services, { skeleton: Skeletons.PIE })
 		];
 
 		// get the base chart components and export with tooltip

@@ -6,12 +6,81 @@ import { DOMUtils } from "../../services";
 import { scaleLinear } from "d3-scale";
 import { easeLinear } from "d3-ease";
 import { arc } from "d3-shape";
+import { Skeletons } from "../../interfaces/enums";
 
 export class Skeleton extends Component {
 	type = "skeleton";
 	xScale: any;
 	yScale: any;
 	backdrop: any;
+
+	render() {
+		const areDataEmpty = this.model.isDataEmpty();
+		const isDataLoading = this.model.getOptions().data.loading;
+
+		if (areDataEmpty) {
+			this.something(isDataLoading);
+		} else if (!areDataEmpty && isDataLoading) {
+			throw new Error(`There's something wrong. You can't have not empty data and data loading togheter.`);
+		} else {
+			this.removeSkeleton();
+		}
+	}
+
+	something(showShimmerEffect: boolean) {
+		if (this.configs.skeleton === Skeletons.GRID) {
+			this.renderSkeletonGrid(showShimmerEffect);
+		} else if (this.configs.skeleton === Skeletons.VERT_OR_HORIZ) {
+			this.renderSkeletonVertOrHoriz(showShimmerEffect);
+		} else if (this.configs.skeleton === Skeletons.PIE) {
+			this.renderSkeletonPie(showShimmerEffect);
+		} else if (this.configs.skeleton === Skeletons.DONUT) {
+			this.renderSkeletonDonut(showShimmerEffect);
+		} else {
+			throw new Error(`"${this.configs.skeleton}" is not a valid Skeleton type.`);
+		}
+	}
+
+	renderSkeletonGrid(showShimmerEffect: boolean) {
+		this.setScales();
+		this.drawBackdrop(showShimmerEffect);
+		this.drawXGrid(showShimmerEffect);
+		this.drawYGrid(showShimmerEffect);
+		if (showShimmerEffect) {
+			this.setShimmerEffect("shimmer-lines");
+		}
+	}
+
+	renderSkeletonVertOrHoriz(showShimmerEffect: boolean) {
+		const orientation = this.services.cartesianScales.getOrientation();
+		this.setScales();
+		this.drawBackdrop(showShimmerEffect);
+		if (orientation === "vertical") {
+			this.drawYGrid(showShimmerEffect);
+		}
+		if (orientation === "horizontal") {
+			this.drawXGrid(showShimmerEffect);
+		}
+		this.setShimmerEffect("shimmer-lines");
+	}
+
+	renderSkeletonPie(showShimmerEffect: boolean) {
+		const outerRadius = this.computeOuterRadius();
+		const innerRadius = 0;
+		this.drawRing(outerRadius, innerRadius, showShimmerEffect);
+		if (showShimmerEffect) {
+			this.setShimmerEffect("shimmer-areas");
+		}
+	}
+
+	renderSkeletonDonut(showShimmerEffect: boolean) {
+		const outerRadius = this.computeOuterRadius();
+		const innerRadius = this.computeInnerRadius();
+		this.drawRing(outerRadius, innerRadius, showShimmerEffect);
+		if (showShimmerEffect) {
+			this.setShimmerEffect("shimmer-areas");
+		}
+	}
 
 	setScales() {
 		const xRange = this.services.cartesianScales.getMainXScale().range();

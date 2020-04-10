@@ -18,10 +18,6 @@ export * from "./graphs/scatter";
 export * from "./graphs/pie";
 export * from "./graphs/donut";
 export * from "./graphs/skeleton";
-export * from "./graphs/skeleton-grid";
-export * from "./graphs/skeleton-vert-or-horiz";
-export * from "./graphs/skeleton-pie";
-export * from "./graphs/skeleton-donut";
 
 // Layout
 export * from "./layout/spacer";

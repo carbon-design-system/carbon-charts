@@ -6,6 +6,7 @@ import {
 	LineChartOptions
 } from "../interfaces/index";
 import { Tools } from "../tools";
+import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
@@ -18,7 +19,7 @@ import {
 	Legend,
 	LayoutComponent,
 	TooltipScatter,
-	SkeletonGrid
+	Skeleton
 } from "../components/index";
 
 export class LineChart extends AxisChart {
@@ -45,7 +46,7 @@ export class LineChart extends AxisChart {
 			new Grid(this.model, this.services),
 			new Line(this.model, this.services),
 			new Scatter(this.model, this.services),
-			new SkeletonGrid(this.model, this.services)
+			new Skeleton(this.model, this.services, { skeleton: Skeletons.GRID })
 		];
 
 		const components: any[] = this.getAxisChartComponents(graphFrameComponents);

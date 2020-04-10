@@ -6,6 +6,7 @@ import {
 	PieChartOptions
 } from "../interfaces/index";
 import { Tools } from "../tools";
+import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
@@ -14,7 +15,7 @@ import {
 	Legend,
 	LayoutComponent,
 	TooltipPie,
-	SkeletonDonut
+	Skeleton
 } from "../components/index";
 
 export class DonutChart extends PieChart {
@@ -38,7 +39,7 @@ export class DonutChart extends PieChart {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [
 			new Donut(this.model, this.services),
-			new SkeletonDonut(this.model, this.services)
+			new Skeleton(this.model, this.services, { skeleton: Skeletons.DONUT })
 		];
 
 		const components: any[] = this.getChartComponents(graphFrameComponents);
