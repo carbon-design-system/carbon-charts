@@ -1,14 +1,10 @@
-// colors
 $lines-bg-color: $ui-03;
 $lines-shimmer-color: white;
 $areas-bg-color: rgba(127, 127, 127, 0.1);
 $areas-shimmer-color: rgba(255, 255, 255, 0.15);
 
 .#{$prefix}--#{$charts-prefix}--skeleton {
-	////////////////////////////////
 	// lines
-	////////////////////////////////
-
 	rect.chart-skeleton-backdrop {
 		@if $carbon--theme == $carbon--theme--g10 {
 			fill: $ui-01;
@@ -39,10 +35,7 @@ $areas-shimmer-color: rgba(255, 255, 255, 0.15);
 		}
 	}
 
-	////////////////////////////////
 	// areas
-	////////////////////////////////
-
 	.shimmer-effect-areas {
 		fill: url(#shimmer-areas); 
 	}

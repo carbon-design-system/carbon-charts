@@ -6,34 +6,6 @@ import * as ChartComponents from "../src/charts";
 import * as storyUtils from "./utils";
 
 import "../demo/styles.scss";
-import { Tools } from "@carbon/charts/tools";
-
-////////////
-const chartsAcc = [
-	// GRID
-	"Bubbleplot (x: time, y: lin)",
-	"Scatter (x: labels, y: lin)",
-	"Linechart (x: time, y: lin)",
-	"Step (x: labels, y: lin)",
-
-	// HORIZ
-	"Barchart (x: labels, y: lin)",
-	"Barchart with fixed domain (x: labels, y: lin)",
-	"Barchart grouped with 0 (x: labels, y: lin)",
-	"Stacked bar (x: time, y: lin)",
-
-	// VERT
-	"Barchart horizontal (x: lin, y: time)",
-
-	// OTHER
-	"Donutchart",
-	"Piechart"
-];
-const testDemoGroups = Tools.clone(storybookDemoGroups).map(demoGroup => {
-	demoGroup.demos = demoGroup.demos.filter(demo => chartsAcc.includes(demo.title));
-	return demoGroup;
-}).filter(demoGroup => demoGroup.demos.length); // remove demoGroup if it's children are all with isDemoExample = false
-////////////
 
 const introStories = storiesOf("Intro", module).addDecorator(withKnobs);
 
@@ -185,11 +157,8 @@ if (process.env.NODE_ENV !== "production") {
 		let i = 0;
 		let row = getNewRow();
 
-		testDemoGroups.forEach(demoGroup => {
-			// storybookDemoGroups.forEach(demoGroup => {
+		storybookDemoGroups.forEach(demoGroup => {
 			demoGroup.demos.forEach(demo => {
-				// console.log(`%c\n\n${demo.title}`, "background: #fc0388; color: #FFFFFF; font-weight: bold;");
-
 				grid.appendChild(row);
 				if (i % 2 === 0 && i !== 0) {
 					row = getNewRow();
@@ -208,10 +177,7 @@ if (process.env.NODE_ENV !== "production") {
 
 				row.appendChild(column);
 
-				//////////////////////////////////////
-				// Add get data button to each column (= chart)
-				//////////////////////////////////////
-
+				// Add get data/remove data button and loading data checkbox
 				const chartObj = chart; // instantiated class
 
 				const buttonsContainer = document.createElement("div");
