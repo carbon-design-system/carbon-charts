@@ -1,8 +1,8 @@
 .#{$prefix}--#{$charts-prefix}--area-stacked {
 	path.area {
-		@if $carbon--theme == $carbon--theme--g90 {
+		@if $ui-background == map-get($carbon--theme--g90, 'ui-background') {
 			mix-blend-mode: screen;
-		} @else if $carbon--theme == $carbon--theme--g100 {
+		} @else if $ui-background == map-get($carbon--theme--g100, 'ui-background') {
 			mix-blend-mode: screen;
 		} @else {
 			mix-blend-mode: multiply;
