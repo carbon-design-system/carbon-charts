@@ -1,8 +1,14 @@
+// colors
+$lines-bg-color: $ui-03;
+$lines-shimmer-color: white;
+$areas-bg-color: rgba(127, 127, 127, 0.1);
+$areas-shimmer-color: rgba(255, 255, 255, 0.15);
+
 .#{$prefix}--#{$charts-prefix}--skeleton {
 	////////////////////////////////
-	// skeleton lines
+	// lines
 	////////////////////////////////
-	// same fill color of backdrop grid
+
 	rect.chart-skeleton-backdrop {
 		@if $carbon--theme == $carbon--theme--g10 {
 			fill: $ui-01;
@@ -11,44 +17,48 @@
 		} @else {
 			fill: $ui-background;
 		}
-		// apply shimmer on skeleton rect stroke
+	}
+
+	.shimmer-effect-lines {
+		stroke-width: 1px;
 		stroke: url(#shimmer-lines);
 	}
 
-	g.x.skeleton, g.y.skeleton {
-		line {
-			stroke-width: 1px;
-			stroke: url(#shimmer-lines); // apply shimmer on skeleton lines
+	.empty-state-lines {
+		stroke-width: 1px;
+		stroke: $lines-bg-color;
+	}
+
+	#shimmer-lines {
+		.stop-bg-shimmer {
+			stop-color: $lines-bg-color; 
+		}
+
+		.stop-shimmer {
+			stop-color: $lines-shimmer-color;
 		}
 	}
 
 	////////////////////////////////
-	// skeleton areas
+	// areas
 	////////////////////////////////
-	.skeleton-area-shape {
-		fill: url(#shimmer-areas);
+
+	.shimmer-effect-areas {
+		fill: url(#shimmer-areas); 
+	}
+
+	.empty-state-areas {
+		fill: $areas-bg-color;
+	}
+
+	#shimmer-areas {
+		.stop-bg-shimmer {
+			stop-color: $areas-bg-color;
+		}
+
+		.stop-shimmer {
+			stop-color: $areas-shimmer-color;
+		}
 	}
 }
 
-////////////////////////////////
-// shimmer effects
-////////////////////////////////
-#shimmer-lines {
-	.stop-bg-shimmer {
-		stop-color: $ui-03; 
-	}
-	
-	.stop-shimmer {
-		stop-color: white;
-	}
-}
-
-#shimmer-areas {
-	.stop-bg-shimmer {
-		stop-color: rgba(127, 127, 127, 0.1);
-	}
-
-	.stop-shimmer {
-		stop-color: rgba(255, 255, 255, 0.15);
-	}
-}

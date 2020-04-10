@@ -20,7 +20,7 @@ export class Skeleton extends Component {
 		this.yScale = scaleLinear().domain([0, 1]).range(yRange);
 	}
 
-	drawBackdrop() {
+	drawBackdrop(shimmer = true) {
 		const svg = this.parent;
 
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton");
@@ -38,9 +38,13 @@ export class Skeleton extends Component {
 			.attr("y", yScaleStart)
 			.attr("width", xScaleEnd - xScaleStart)
 			.attr("height", yScaleEnd - yScaleStart);
+
+		backdropRect
+			.classed("shimmer-effect-lines", shimmer)
+			.classed("empty-state-lines", !shimmer);
 	}
 
-	drawXGrid() {
+	drawXGrid(shimmer = true) {
 		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
 		const ticksNumber = 5;
@@ -55,9 +59,13 @@ export class Skeleton extends Component {
 			.attr("x2", d => d)
 			.attr("y1", 0)
 			.attr("y2", height);
+
+		xGridG.selectAll("line")
+			.classed("shimmer-effect-lines", shimmer)
+			.classed("empty-state-lines", !shimmer);
 	}
 
-	drawYGrid() {
+	drawYGrid(shimmer = true) {
 		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
 		const ticksNumber = 5;
@@ -72,9 +80,13 @@ export class Skeleton extends Component {
 			.attr("x2", width)
 			.attr("y1", d => d)
 			.attr("y2", d => d);
+
+		yGridG.selectAll("line")
+			.classed("shimmer-effect-lines", shimmer)
+			.classed("empty-state-lines", !shimmer);
 	}
 
-	drawRing(outerRadius: number, innerRadius: number) {
+	drawRing(outerRadius: number, innerRadius: number, shimmer = true) {
 		const svg = this.parent;
 		const { width, height } = DOMUtils.getSVGElementSize(svg, { useAttrs: true });
 		const container = DOMUtils.appendOrSelect(svg, "g.chart-skeleton");
@@ -98,7 +110,9 @@ export class Skeleton extends Component {
 		DOMUtils.appendOrSelect(container, "path")
 			.attr("class", "skeleton-area-shape")
 			.attr("transform", `translate(${tcx}, ${tcy})`)
-			.attr("d", arcPathGenerator);
+			.attr("d", arcPathGenerator)
+			.classed("shimmer-effect-areas", shimmer)
+			.classed("empty-state-areas", !shimmer);
 	}
 
 	// same logic in pie
@@ -114,7 +128,7 @@ export class Skeleton extends Component {
 		return this.computeOuterRadius() * (3 / 4);
 	}
 
-	setStyle(gradientId: string) {
+	setShimmerEffect(gradientId: string) {
 		const animationDuration = 3000; // ms
 		const delay = 1000; // ms
 		const shimmerWidth = 0.2;
