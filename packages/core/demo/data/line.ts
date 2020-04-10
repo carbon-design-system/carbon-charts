@@ -90,7 +90,8 @@ export const lineTimeSeriesWithThresholdsOptions = {
 				{
 					value: new Date(2019, 0, 11),
 					label: "Custom formatter",
-					valueFormatter: timeFormat("%b %d")}
+					valueFormatter: timeFormat("%b %d")
+				}
 			]
 		},
 		left: {
@@ -98,8 +99,8 @@ export const lineTimeSeriesWithThresholdsOptions = {
 			title: "Conversion rate",
 			scaleType: "linear",
 			thresholds: [
-				{value: "55000", label: "Custom label", fillColor: "orange"},
-				{value: "10000", fillColor: "#03a9f4"}
+				{value: 55000, label: "Custom label", fillColor: "orange"},
+				{value: 10000, fillColor: "#03a9f4"}
 			]
 		}
 	},

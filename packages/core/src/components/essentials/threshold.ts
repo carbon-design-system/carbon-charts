@@ -2,7 +2,7 @@ import { Component } from "../component";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 import { ChartModel } from "../../model";
-import { AxisPositions, Events } from "../../interfaces";
+import { AxisPositions, Events, ScaleTypes } from "../../interfaces";
 import { select, mouse } from "d3-selection";
 
 // Carbon position service
@@ -10,6 +10,7 @@ import Position, { PLACEMENTS } from "@carbon/utils-position";
 
 // import the settings for the css prefix
 import settings from "carbon-components/src/globals/js/settings";
+import { formatTick, computeTimeIntervalName } from "../../services/time-series";
 
 export class Threshold extends Component {
 	type = "threshold";
@@ -40,18 +41,20 @@ export class Threshold extends Component {
 
 		const scale = this.services.cartesianScales.getScaleByPosition(axisPosition);
 		const isVertical = [AxisPositions.LEFT, AxisPositions.RIGHT].includes(axisPosition);
+		const scaleType = this.services.cartesianScales.getScaleTypeByPosition(axisPosition);
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYScale = this.services.cartesianScales.getMainYScale();
+		const isScaleTypeLabels = scaleType === ScaleTypes.LABELS;
 		const [xScaleStart, xScaleEnd] = mainXScale.range();
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
 
 		if (isVertical) {
-			const y = scale(value) - yScaleStart;
+			const y = scale(value) + (isScaleTypeLabels ? (scale.step() / 2) : 0) - yScaleStart;
 			this.threshold.attr("transform", `translate(${xScaleStart}, ${y})`);
 			thresholdLine.attr("x2", xScaleEnd - xScaleStart);
 			thresholdRect.attr("width", xScaleEnd - xScaleStart);
 		} else {
-			const x = scale(value);
+			const x = scale(value) + (isScaleTypeLabels ? (scale.step() / 2) : 0);
 			this.threshold.attr("transform", `translate(${x}, 0)`);
 			thresholdLine.attr("y2", yScaleEnd);
 			thresholdRect.attr("width", yScaleEnd - yScaleStart);
@@ -76,10 +79,29 @@ export class Threshold extends Component {
 		this.addEventListeners();
 	}
 
+	getFormattedValue() {
+		const { value, axisPosition } = this.configs;
+		const options = Tools.getProperty(this.model.getOptions());
+		const scaleType = this.services.cartesianScales.getScaleTypeByPosition(axisPosition);
+
+		if (scaleType === ScaleTypes.TIME) {
+			const isVertical = [AxisPositions.LEFT, AxisPositions.RIGHT].includes(axisPosition);
+			const mainXScale = this.services.cartesianScales.getMainXScale();
+			const mainYScale = this.services.cartesianScales.getMainYScale();
+			const scale = isVertical ? mainYScale : mainXScale;
+
+			const timeScaleOptions = Tools.getProperty(options, "timeScale");
+			const timeInterval = computeTimeIntervalName(scale.ticks());
+			return formatTick(value, 0, timeInterval, timeScaleOptions);
+		}
+
+		return value.toLocaleString("en");
+	}
+
 	appendThresholdLabel() {
-		const holder = select(this.services.domUtils.getHolder());
 		const { value, valueFormatter, fillColor, label = "Threshold" } = this.configs;
-		const formattedValue = valueFormatter ? valueFormatter(value) : value.toLocaleString("en");
+		const holder = select(this.services.domUtils.getHolder());
+		const formattedValue = valueFormatter ? valueFormatter(value) : this.getFormattedValue();
 
 		this.label = DOMUtils.appendOrSelect(holder, `div.${this.thresholdClass}--label.${this.thresholdIdentifierClass}`);
 		this.label.html(`${label}: ${formattedValue}`);
