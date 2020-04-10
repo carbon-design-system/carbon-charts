@@ -41,7 +41,7 @@ export class ChartModel {
 
 	/**
 	 * Converts data provided in the older format to tabular
-	 * 
+	 *
 	 */
 	protected transformToTabularData(data) {
 		console.warn("We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here")

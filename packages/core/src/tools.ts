@@ -108,6 +108,10 @@ export namespace Tools {
 		const translateRegex = /translate\([0-9]+\.?[0-9]*,[0-9]+\.?[0-9]*\)/;
 
 		const transformStr = elementRef.getAttribute("transform").match(translateRegex);
+		if (!transformStr) {
+			return null;
+		}
+
 		// check for the match
 		if (transformStr[0]) {
 			const transforms = transformStr[0].replace(/translate\(/, "").replace(/\)/, "").split(",");
