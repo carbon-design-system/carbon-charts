@@ -19,7 +19,7 @@ export class Skeleton extends Component {
 		const isDataLoading = this.model.getOptions().data.loading;
 
 		if (areDataEmpty) {
-			this.something(isDataLoading);
+			this.renderSkeleton(isDataLoading);
 		} else if (!areDataEmpty && isDataLoading) {
 			throw new Error(`There's something wrong. You can't have not empty data and data loading togheter.`);
 		} else {
@@ -27,7 +27,7 @@ export class Skeleton extends Component {
 		}
 	}
 
-	something(showShimmerEffect: boolean) {
+	renderSkeleton(showShimmerEffect: boolean) {
 		if (this.configs.skeleton === Skeletons.GRID) {
 			this.renderSkeletonGrid(showShimmerEffect);
 		} else if (this.configs.skeleton === Skeletons.VERT_OR_HORIZ) {
@@ -89,7 +89,7 @@ export class Skeleton extends Component {
 		this.yScale = scaleLinear().domain([0, 1]).range(yRange);
 	}
 
-	drawBackdrop(shimmer = true) {
+	drawBackdrop(showShimmerEffect: boolean) {
 		const svg = this.parent;
 
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton");
@@ -109,11 +109,11 @@ export class Skeleton extends Component {
 			.attr("height", yScaleEnd - yScaleStart);
 
 		backdropRect
-			.classed("shimmer-effect-lines", shimmer)
-			.classed("empty-state-lines", !shimmer);
+			.classed("shimmer-effect-lines", showShimmerEffect)
+			.classed("empty-state-lines", !showShimmerEffect);
 	}
 
-	drawXGrid(shimmer = true) {
+	drawXGrid(showShimmerEffect: boolean) {
 		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
 		const ticksNumber = 5;
@@ -130,11 +130,11 @@ export class Skeleton extends Component {
 			.attr("y2", height);
 
 		xGridG.selectAll("line")
-			.classed("shimmer-effect-lines", shimmer)
-			.classed("empty-state-lines", !shimmer);
+			.classed("shimmer-effect-lines", showShimmerEffect)
+			.classed("empty-state-lines", !showShimmerEffect);
 	}
 
-	drawYGrid(shimmer = true) {
+	drawYGrid(showShimmerEffect: boolean) {
 		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
 		const ticksNumber = 5;
@@ -151,8 +151,8 @@ export class Skeleton extends Component {
 			.attr("y2", d => d);
 
 		yGridG.selectAll("line")
-			.classed("shimmer-effect-lines", shimmer)
-			.classed("empty-state-lines", !shimmer);
+			.classed("shimmer-effect-lines", showShimmerEffect)
+			.classed("empty-state-lines", !showShimmerEffect);
 	}
 
 	drawRing(outerRadius: number, innerRadius: number, shimmer = true) {
