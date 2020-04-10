@@ -105,7 +105,7 @@ export class ChartModel {
 		return this.get("data");
 	}
 
-	isDataEmpty() {
+	areDataEmpty() {
 		return !this.getData().length;
 	}
 

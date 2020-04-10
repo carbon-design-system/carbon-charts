@@ -228,7 +228,7 @@ if (process.env.NODE_ENV !== "production") {
 				// create button to empty and fill data
 				const getDataButton = createButton(demo.id, "Remove data", () => {
 					const input = checkbox.getElementsByTagName("input")[0];
-					const areDataEmpty = chartObj.model.isDataEmpty();
+					const areDataEmpty = chartObj.model.areDataEmpty();
 					if (areDataEmpty) {
 						chartObj.model.setOptions({ data: { loading: false } });
 						chartObj.model.setData(demo.data);

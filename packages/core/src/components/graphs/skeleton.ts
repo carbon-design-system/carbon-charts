@@ -15,7 +15,7 @@ export class Skeleton extends Component {
 	backdrop: any;
 
 	render() {
-		const areDataEmpty = this.model.isDataEmpty();
+		const areDataEmpty = this.model.areDataEmpty();
 		const isDataLoading = this.model.getOptions().data.loading;
 
 		if (areDataEmpty) {

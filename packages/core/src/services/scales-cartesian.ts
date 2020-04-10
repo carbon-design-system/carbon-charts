@@ -266,7 +266,7 @@ export class CartesianScales extends Service {
 		const { includeZero } = axisOptions;
 		const scaleType = Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
 
-		if (this.model.isDataEmpty()) {
+		if (this.model.areDataEmpty()) {
 			return [];
 		}
 
