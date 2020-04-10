@@ -198,7 +198,7 @@ export class Skeleton extends Component {
 	}
 
 	setShimmerEffect(gradientId: string) {
-		const animationDuration = 3000; // ms
+		const animationDuration = 2000; // ms
 		const delay = 1000; // ms
 		const shimmerWidth = 0.2;
 		const stopBgShimmerClass = "stop-bg-shimmer";
