@@ -193,7 +193,6 @@ export class StackedArea extends Component {
 		enteringPaths
 			.merge(svg.selectAll("g.areas path"))
 			.data(stackedData, d => d.key)
-			.attr("stroke", d => self.model.getStrokeColor(d.key))
 			.attr("fill", d => self.model.getFillColor(d.key))
 			// .datum(function(d) {
 			// 	this._datasetLabel = d.key;
