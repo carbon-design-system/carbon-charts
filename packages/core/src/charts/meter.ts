@@ -71,7 +71,7 @@ export class MeterChart extends Chart {
 		const titleSpacerComponent = {
 			id: "spacer",
 			components: [
-				new Spacer(this.model, this.services)
+				new Spacer(this.model, this.services, {size: 8})
 			],
 			growth: {
 				x: LayoutGrowth.PREFERRED,

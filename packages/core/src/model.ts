@@ -435,6 +435,9 @@ export class ChartModel {
 		return this.colorScale;
 	}
 
+	/**
+	 * For charts that might hold an associated status for their dataset
+	 */
 	getStatus(){
 		return null;
 	}
