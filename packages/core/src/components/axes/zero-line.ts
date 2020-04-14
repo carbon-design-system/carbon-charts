@@ -7,6 +7,14 @@ export class ZeroLine extends Component {
 	type = "zero-line";
 
 	render(animate: boolean) {
+		const [minDomainValue, maxDomainValue] = this.services.cartesianScales.getRangeScale().domain();
+		const containsZero = (minDomainValue * maxDomainValue) < 0;
+
+		// show zero line only if is necessary
+		if (!containsZero) {
+			return;
+		}
+
 		// Grab container SVG
 		const svg = this.getContainerSVG();
 
