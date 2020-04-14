@@ -4,7 +4,7 @@ import { TooltipTypes } from "../../interfaces";
 
 export class TooltipPie extends Tooltip {
 	getTooltipHTML(d: any, type: TooltipTypes) {
-		// check if it is getting styles for a tooltip type
+		// check if it is getting styles for a title tooltip
 		if (type === TooltipTypes.TITLE) {
 			const title = this.model.getOptions().title;
 			return `<div class="title-tooltip"><text>${title}</text></div>`;

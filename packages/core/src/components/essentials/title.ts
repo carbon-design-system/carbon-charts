@@ -58,9 +58,10 @@ export class Title extends Component {
 
 		// add events for displaying the tooltip with the title
 		const self = this;
-		title.on("mouseenter", function() {
+		title.on("mouseenter mousemove", function() {
 			self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 				hoveredElement: title,
+				fullTitle: titleString,
 				type: TooltipTypes.TITLE
 			});
 		})
@@ -69,12 +70,12 @@ export class Title extends Component {
 					hoveredElement: title
 				});
 			});
-}
+	}
 
 	// computes the maximum space a title can take
 	protected getMaxTitleWidth() {
-	return DOMUtils.getSVGElementSize(this.parent).width;
-}
+		return DOMUtils.getSVGElementSize(this.parent).width;
+	}
 
 	/**
 	 * Returns the index for a maximum length substring that is less than the width parameter.
@@ -84,16 +85,16 @@ export class Title extends Component {
 	 * @param width the width of the svg container that holds the title
 	 */
 	protected getSubstringIndex(title, start, end, width) {
-	const mid = Math.floor((end + start) / 2);
-	if (title.getSubStringLength(0, mid) > width) {
-		return this.getSubstringIndex(title, start, mid, width);
-	} else if (title.getSubStringLength(0, mid) < width) {
-		if (title.getSubStringLength(0, mid + 1) > width) {
+		const mid = Math.floor((end + start) / 2);
+		if (title.getSubStringLength(0, mid) > width) {
+			return this.getSubstringIndex(title, start, mid, width);
+		} else if (title.getSubStringLength(0, mid) < width) {
+			if (title.getSubStringLength(0, mid + 1) > width) {
+				return mid;
+			}
+			return this.getSubstringIndex(title, mid, end, width);
+		} else {
 			return mid;
 		}
-		return this.getSubstringIndex(title, mid, end, width);
-	} else {
-		return mid;
 	}
-}
 }

@@ -67,11 +67,11 @@ export class Tooltip extends Component {
 
 			} else if (e.detail.type === TooltipTypes.TITLE) {
 				const chart = DOMUtils.appendOrSelect(holder, `svg.${settings.prefix}--${chartprefix}--chart-svg`);
-				const chartWidth =  DOMUtils.getSVGElementSize(chart).width * Tools.getProperty(this.model.getOptions(), "tooltip", "title", "width");
+				const chartWidth = DOMUtils.getSVGElementSize(chart).width * Tools.getProperty(this.model.getOptions(), "tooltip", "title", "width");
 
 				this.tooltip.style("max-width", chartWidth);
 
-				tooltipTextContainer.html(this.getTruncatedHTML(e.detail.data));
+				tooltipTextContainer.html(this.getTruncatedHTML(e.detail.fullTitle));
 
 				// get the position based on the title positioning (static)
 				const position = this.getTooltipPosition(e.detail.hoveredElement.node());
