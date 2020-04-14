@@ -54,7 +54,7 @@
 	"devDependencies": {
 		"@storybook/addon-knobs": "5.3.12",
 		"@storybook/addon-options": "5.3.12",
-		"@storybook/svelte": "^5.3.18",
+		"@storybook/svelte": "5.3.18",
 		"babel-cli": "6.26.0",
 		"babel-core": "6.26.0",
 		"babel-loader": "7.1.2",
