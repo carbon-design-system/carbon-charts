@@ -25,7 +25,7 @@ export class StackedArea extends Component {
 					this.services.transitions.getTransition("legend-hover-area")
 				)
 				.attr("opacity", d => {
-					if (d.key !== hoveredElement.datum()["key"]) {
+					if (d.group !== hoveredElement.datum().group) {
 						return Configuration.areas.opacity.unselected;
 					}
 
@@ -46,36 +46,36 @@ export class StackedArea extends Component {
 		});
 	}
 
-	getStackedData() {
-		const datasets = this.model.getDisplayData().datasets;
-		const keys: string[] = datasets.map(d => d.label);
+	// getStackedData() {
+	// 	const datasets = this.model.getGroupedData();
+	// 	const keys: string[] = this.model.getDataGroupNames();
 
-		const flattenedData: [] = datasets.flatMap(d =>
-			d.data.map(datum => ({
-				[d.label]: datum.value,
-				xValue: datum.date
-			}))
-		);
+	// 	const flattenedData: [] = datasets.flatMap(d =>
+	// 		d.data.map(datum => ({
+	// 			[d.label]: datum.value,
+	// 			xValue: datum.date
+	// 		}))
+	// 	);
 
-		const preStackData: { [key: string]: number }[] = flattenedData.reduce(
-			(acc, cur: any) => {
-				const index = acc.findIndex(o =>
-					Tools.compareNumeric(o.xValue, cur.xValue)
-				);
+	// 	const preStackData: { [key: string]: number }[] = flattenedData.reduce(
+	// 		(acc, cur: any) => {
+	// 			const index = acc.findIndex(o =>
+	// 				Tools.compareNumeric(o.xValue, cur.xValue)
+	// 			);
 
-				if (index > -1) {
-					acc[index] = { ...acc[index], ...cur };
-				} else {
-					acc.push({ ...cur });
-				}
+	// 			if (index > -1) {
+	// 				acc[index] = { ...acc[index], ...cur };
+	// 			} else {
+	// 				acc.push({ ...cur });
+	// 			}
 
-				return acc;
-			},
-			[]
-		);
+	// 			return acc;
+	// 		},
+	// 		[]
+	// 	);
 
-		return stack().keys(keys)(preStackData);
-	}
+	// 	return stack().groups(keys)(preStackData);
+	// }
 
 	addEventListeners() {
 		const self = this;
@@ -118,7 +118,7 @@ export class StackedArea extends Component {
 							"graph_element_mouseout_fill_update"
 						)
 					)
-					.attr("fill", (d: any) => self.model.getFillColor(d.key));
+					.attr("fill", (d: any) => self.model.getFillColor(d[0].group));
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Area.AREA_MOUSEOUT, {
@@ -144,6 +144,7 @@ export class StackedArea extends Component {
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
+		const self = this;
 
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYScale = this.services.cartesianScales.getMainYScale();
@@ -158,19 +159,18 @@ export class StackedArea extends Component {
 			return;
 		}
 
-		const stackedData = this.getStackedData();
+		const stackedData = this.model.getStackedData();
+		console.log(stackedData);
 
 		const areaGroups = svg
 			.selectAll("g.areas")
-			.data(stackedData, d => d.key);
+			.data(stackedData, d => d[0].group);
 
 		// D3 area generator function
 		this.areaGenerator = area()
 			// @ts-ignore
-			.x(d => mainXScale(d.data.xValue))
-			.y0(d => {
-				return mainYScale(d[0]);
-			})
+			.x(d => mainXScale(new Date(d.data.sharedStackKey)))
+			.y0(d => mainYScale(d[0]))
 			.y1(d => mainYScale(d[1]))
 			.curve(this.services.curves.getD3Curve());
 
@@ -184,19 +184,18 @@ export class StackedArea extends Component {
 			.append("g")
 			.classed("areas", true);
 
-		const self = this;
-
 		const enteringPaths = enteringAreaGroups
 			.append("path")
 			.attr("opacity", 0);
 
 		enteringPaths
 			.merge(svg.selectAll("g.areas path"))
-			.data(stackedData, d => d.key)
-			.attr("fill", d => self.model.getFillColor(d.key))
+			.data(stackedData, d => d[0].group)
+			.attr("fill", d => self.model.getFillColor(d[0].group))
 			// .datum(function(d) {
-			// 	this._datasetLabel = d.key;
-			// 	return d.data;
+			// 	console.log(d);
+			// 	this._datasetLabel = d[0].group;
+			// 	return d[0].data;
 			// })
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "area")
