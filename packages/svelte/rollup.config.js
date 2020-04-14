@@ -13,7 +13,11 @@ export default [
 				"@carbon/charts": "Charts"
 			}
 		},
-		plugins: [svelte(), resolve(), terser()],
+		plugins: [
+			svelte(),
+			resolve(),
+			terser()
+		],
 		external: ["@carbon/charts"]
 	},
 	{
@@ -22,7 +26,11 @@ export default [
 			file: "./dist/index.js",
 			format: "es"
 		},
-		plugins: [svelte(), resolve(), terser()],
+		plugins: [
+			svelte(),
+			resolve(),
+			terser()
+		],
 		external: ["@carbon/charts"]
 	}
 ];
