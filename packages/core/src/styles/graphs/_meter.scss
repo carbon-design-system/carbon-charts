@@ -10,8 +10,8 @@
 
 		&.status--warning {
 			fill: $support-03;
-			stroke-width: 2px;
-			stroke: #B28600;
+			stroke-width: 1px;
+			stroke: $carbon-dataviz-alert;
 		}
 
 		&.status--success {
