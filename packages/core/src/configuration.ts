@@ -273,6 +273,7 @@ function getGaugeFontSize(radius: number, arcSize: number, maxSize: number) {
 
 const gaugeChart: GaugeChartOptions = Tools.merge({}, pieChart, {
 	gauge: {
+		arcWidth: 16,
 		center: {
 			valueFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 48) + "px",
 			deltaFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 24) + "px",

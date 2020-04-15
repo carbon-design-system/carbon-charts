@@ -66,7 +66,6 @@ export class Gauge extends Component {
 
 	getTotal(): number {
 		const datalist = this.getDataList();
-		console.log('datalist', datalist)
 		const value = datalist[0].total || 0;
 		return value;
 	}
@@ -113,22 +112,23 @@ export class Gauge extends Component {
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
+		const innerRadius = this.getInnerRadius();
 
 		this.backgroundArc = arc()
-			.innerRadius(this.getInnerRadius())
+			.innerRadius(innerRadius)
 			.outerRadius(radius)
 			.startAngle(currentAngle)
 			.endAngle(endAngle);
 
 		this.arc = arc()
-			.innerRadius(this.getInnerRadius())
+			.innerRadius(innerRadius)
 			.outerRadius(radius)
 			.startAngle(startAngle)
 			.endAngle(currentAngle);
 
 		// Set the hover arc radius
 		this.hoverArc = arc()
-			.innerRadius(this.getInnerRadius())
+			.innerRadius(innerRadius)
 			.outerRadius(radius + options.pie.hoverArc.outerRadiusOffset)
 			.startAngle(startAngle)
 			.endAngle(currentAngle);
@@ -138,7 +138,7 @@ export class Gauge extends Component {
 		DOMUtils.appendOrSelect(svg, "g.background")
 			.append("path")
 			.attr("d", this.backgroundArc)
-			.attr("fill", "#bbb")
+			.attr("fill", "rgb(224,224,224)")
 			.attr("role", Roles.GROUP);
 
 		// Add data arc
@@ -148,7 +148,7 @@ export class Gauge extends Component {
 			.data(datalist)
 			.attr("d", this.arc)
 			.classed("arc", true)
-			.attr("fill", "#00f");
+			.attr("fill", "rgb(88,134,247)");
 
 		// Position Pie
 		const gaugeTranslateX = radius + options.pie.xOffset;
@@ -162,7 +162,7 @@ export class Gauge extends Component {
 			.attr("text-anchor", "middle")
 			.attr("alignment-baseline", "middle")
 			.style("font-size", () => options.gauge.center.valueFontSize(radius, arcSize))
-			.transition(this.services.transitions.getTransition("donut-figure-enter-update", animate))
+			.transition(this.services.transitions.getTransition("gauge-figure-enter-update", animate))
 			.attr("y", options.gauge.center.valueYPosition(radius, arcSize))
 			.tween("text", function() {
 				return self.centerNumberTween(select(this), ratio * 100);
@@ -188,7 +188,8 @@ export class Gauge extends Component {
 	getInnerRadius() {
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
-		return radius * (3 / 4);
+		const options = this.model.getOptions();
+		return radius - options.gauge.arcWidth;
 	}
 
 	centerNumberTween(d3Ref, value: number) {
@@ -245,7 +246,7 @@ export class Gauge extends Component {
 				});
 
 				// Show tooltip
-				self.services.events.dispatchEvent("show-tooltip", {
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					type: TooltipTypes.DATAPOINT
 				});
@@ -270,7 +271,7 @@ export class Gauge extends Component {
 				});
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, { hoveredElement });
 			});
 	}
 
