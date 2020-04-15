@@ -13,7 +13,7 @@ type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
 const THRESHOLD = 5;
 
 /** check if x is inside threshold area extents  */
-function pointIsMatch(dx: number, x: number) {
+function pointIsWithinThreshold(dx: number, x: number) {
 	return dx > x - THRESHOLD && dx < x + THRESHOLD;
 }
 
@@ -58,26 +58,26 @@ export class Ruler extends Component {
 		 * Find matches, reduce is used instead of filter
 		 * to only get elements which belong to the same axis coordinate
 		 */
-		const scaledValuesMatches: number[] = scaledData.reduce((acc, cur) => {
-			const sampleAccValue = acc[0];
+		const scaledValuesMatches: number[] = scaledData.reduce((accum, currentValue) => {
+			const sampleAccValue = accum[0];
 
-			// if current value is bigger than already existing values forget it
-			if (sampleAccValue && cur > sampleAccValue) {
-				return acc;
+			// if current value is bigger than already existing values, don't render the ruler
+			if (sampleAccValue && currentValue > sampleAccValue) {
+				return accum;
 			}
 
-			// there's a match and cur is either less then or equal to already stored values
-			if (pointIsMatch(cur, x)) {
-				if (sampleAccValue && cur < sampleAccValue) {
+			// there's a match and currentValue is either less then or equal to already stored values
+			if (pointIsWithinThreshold(currentValue, x)) {
+				if (sampleAccValue && currentValue < sampleAccValue) {
 					// there's a closer data point in the threshold area, so reinstantiate array
-					acc = [cur];
+					accum = [currentValue];
 				} else {
-					// cur is equal to already stored values, there's another match on the same coordinate
-					acc.push(cur);
+					// currentValue is equal to already stored values, there's another match on the same coordinate
+					accum.push(currentValue);
 				}
 			}
 
-			return acc;
+			return accum;
 		}, []);
 
 		// some data point match
