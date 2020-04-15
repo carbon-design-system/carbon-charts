@@ -1,12 +1,12 @@
 // Internal Imports
 import { Scatter } from "./scatter";
 import { DOMUtils } from "../../services";
+import { Roles } from "../../interfaces";
 
 // D3 Imports
 import { Selection } from "d3-selection";
 import { extent } from "d3-array";
 import { scaleLinear } from "d3-scale";
-import { Roles } from "../../interfaces";
 
 export class Bubble extends Scatter {
 	type = "bubble";

@@ -2,11 +2,10 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { TooltipTypes, ScaleTypes } from "../../interfaces";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { mouse, Selection } from "d3-selection";
-
-import { isEqual, flatten } from "lodash-es";
 
 type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
 
@@ -45,30 +44,31 @@ export class Ruler extends Component {
 		const dataPoints: GenericSvgSelection = svg.selectAll(
 			"[role=graphics-symbol]"
 		);
-		const { datasets } = this.model.getDisplayData();
-		const mainXScale = this.services.cartesianScales.getMainXScale();
-		const mainYScale = this.services.cartesianScales.getMainYScale();
-		const [yScaleEnd, yScaleStart] = mainYScale.range();
+		const displayData = this.model.getDisplayData();
+		const domainScale = this.services.cartesianScales.getDomainScale();
+		const rangeScale = this.services.cartesianScales.getRangeScale();
+		const [yScaleEnd, yScaleStart] = rangeScale.range();
 
-		const scaledData: number[] = flatten(datasets.map(({ data }) =>
-			data.map((d, i) => Number(this.services.cartesianScales.getDomainValue(d, i)))
-		));
+		const scaledData: number[] = displayData.map((d, i) =>
+			this.services.cartesianScales.getDomainValue(d, i)
+		);
 
 		/**
 		 * Find matches, reduce is used instead of filter
 		 * to only get elements which belong to the same axis coordinate
 		 */
 		const scaledValuesMatches: number[] = scaledData.reduce((accum, currentValue) => {
-			const sampleAccValue = accum[0];
+			// store the first element of the accumulator array to compare it with current element being processed
+			const sampleAccumValue = accum[0];
 
-			// if current value is bigger than already existing values, don't render the ruler
-			if (sampleAccValue && currentValue > sampleAccValue) {
+			// if accumulator is not empty and current value is bigger than already existing value in the accumulator, skip current iteration
+			if (sampleAccumValue && currentValue > sampleAccumValue) {
 				return accum;
 			}
 
 			// there's a match and currentValue is either less then or equal to already stored values
 			if (pointIsWithinThreshold(currentValue, x)) {
-				if (sampleAccValue && currentValue < sampleAccValue) {
+				if (sampleAccumValue && currentValue < sampleAccumValue) {
 					// there's a closer data point in the threshold area, so reinstantiate array
 					accum = [currentValue];
 				} else {
@@ -85,7 +85,7 @@ export class Ruler extends Component {
 			const sampleMatch = scaledValuesMatches[0];
 
 			const highlightItems = this.services.cartesianScales.getDataFromDomain(
-				mainXScale.invert(sampleMatch)
+				domainScale.invert(sampleMatch)
 			).filter(d => d.value);
 
 			const hoveredElements = dataPoints.filter((d, i) =>
@@ -101,9 +101,9 @@ export class Ruler extends Component {
 			if (
 				this.hoveredElements &&
 				this.hoveredElements.size() > 0 &&
-				!isEqual(this.hoveredElements, hoveredElements)
+				!Tools.isEqual(this.hoveredElements, hoveredElements)
 			) {
-				this.hoveredElements.dispatch("mouseout");
+				this.hideRuler();
 			}
 
 			hoveredElements.dispatch("mouseover");
@@ -161,11 +161,11 @@ export class Ruler extends Component {
 	drawBackdrop() {
 		const svg = this.parent;
 
-		const mainXScale = this.services.cartesianScales.getMainXScale();
-		const mainYScale = this.services.cartesianScales.getMainYScale();
+		const domainScale = this.services.cartesianScales.getDomainScale();
+		const rangeScale = this.services.cartesianScales.getRangeScale();
 
-		const [xScaleStart, xScaleEnd] = mainXScale.range();
-		const [yScaleEnd, yScaleStart] = mainYScale.range();
+		const [xScaleStart, xScaleEnd] = domainScale.range();
+		const [yScaleEnd, yScaleStart] = rangeScale.range();
 
 		// Get height from the grid
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
