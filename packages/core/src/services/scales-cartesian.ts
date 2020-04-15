@@ -248,10 +248,14 @@ export class CartesianScales extends Service {
 		const displayData = this.model.getDisplayData();
 		const domainIdentifier = this.getDomainIdentifier();
 		const scaleType = this.scaleTypes[this.domainAxisPosition];
-
 		if (scaleType === ScaleTypes.TIME) {
 			return displayData.filter(datum => {
-				return datum[domainIdentifier].getTime() === domainValue.getTime();
+				let date = datum[domainIdentifier];
+				if (typeof date === "string" || date.getTime === undefined) {
+					date = new Date(date);
+				}
+
+				return date.getTime() === domainValue.getTime();
 			});
 		}
 
