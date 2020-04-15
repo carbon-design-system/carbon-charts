@@ -61,8 +61,7 @@ export class StackedBar extends Bar {
 
 		// Update data on all bars
 		const bars = svg.selectAll("g.bars").selectAll("path.bar")
-			// Remove bars with a start and end value of 0
-			.data(data => data.filter(d => !(d[0] === 0 && d[1] === 0)));
+			.data(data => data);
 
 		// Remove bars that need to be removed
 		bars.exit()
@@ -149,16 +148,17 @@ export class StackedBar extends Bar {
 			})
 			.on("mousemove", function(datum) {
 				const hoveredElement = select(this);
-				const itemData = datum.data[datum.group];
 
+				const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
 				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
 				const { groupMapsTo } = self.model.getOptions().data;
-		
+
 				// Show tooltip
-				self.services.events.dispatchEvent("show-tooltip", {
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					data: {
-						[rangeIdentifier]: itemData,
+						[domainIdentifier]: datum.data.sharedStackKey,
+						[rangeIdentifier]: datum.data[datum.group],
 						[groupMapsTo]: datum.group
 					},
 					type: TooltipTypes.DATAPOINT

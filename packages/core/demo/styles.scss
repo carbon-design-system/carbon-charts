@@ -115,6 +115,10 @@ div.container {
 	@import "../src/styles/vendor/carbon-components/scss/components/tag/tag";
 	@import "../src/styles/vendor/carbon-components/scss/components/radio-button/radio-button";
 
+	#chart-demo {
+		max-width: 700px;
+	}
+
 	.bx--grid {
 		padding: 0;
 

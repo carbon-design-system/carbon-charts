@@ -1,6 +1,7 @@
 // Internal Imports
 import { Service } from "../service";
 import * as Configuration from "../../configuration";
+import { Events } from "./../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -12,7 +13,7 @@ export class Transitions extends Service {
 
 	init() {
 		this.services.events
-			.addEventListener("model-update", () => {
+			.addEventListener(Events.Model.UPDATE, () => {
 				this.pendingTransitions = {};
 			});
 	}

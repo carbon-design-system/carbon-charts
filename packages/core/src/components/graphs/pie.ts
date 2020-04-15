@@ -106,14 +106,15 @@ export class Pie extends Component {
 			.attr("aria-roledescription", "slice")
 			.attr("aria-label", d => `${d.value}, ${Tools.convertValueToPercentage(d.data.value, displayData) + "%"}`)
 			// Tween
-			.attrTween("d", function (a) {
+			.attrTween("d", function(a) {
 				return arcTween.bind(this)(a, self.arc);
 			});
 
 		// Draw the slice labels
+		const labelData = pieLayoutData.filter(x => x.value > 0);
 		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels").attr("role", Roles.GROUP);
 		const labels = labelsGroup.selectAll("text.pie-label")
-			.data(pieLayoutData, (d: any) => d.data[groupMapsTo]);
+			.data(labelData, (d: any) => d.data[groupMapsTo]);
 
 		// Remove labels that are existing
 		labels.exit()
@@ -140,7 +141,7 @@ export class Pie extends Component {
 			.datum(function(d) {
 				const textLength = this.getComputedTextLength();
 				d.textOffsetX = textLength / 2;
-				d.textOffsetY = parseFloat(getComputedStyle(this).fontSize) / 2;
+				d.textOffsetY = Math.ceil(select(this).node().getBBox().height / 2);
 
 				const marginedRadius = radius + 7;
 
@@ -151,8 +152,8 @@ export class Pie extends Component {
 
 				return d;
 			})
-			.attr("transform", function (d, i) {
-				const totalSlices = displayData.length;
+			.attr("transform", function(d, i) {
+				const totalSlices = labelData.length;
 				const sliceAngleDeg = (d.endAngle - d.startAngle) * (180 / Math.PI);
 
 				// check if last 2 slices (or just last) are < the threshold
@@ -274,7 +275,7 @@ export class Pie extends Component {
 		const enteringHorizontalLines = enteringCallouts.append("line")
 			.classed("horizontal-line", true);
 
-		enteringHorizontalLines.merge(callouts.selectAll("line.horizontal-line"))
+		enteringHorizontalLines.merge(svg.selectAll("line.horizontal-line"))
 			.datum(function(d: any) {
 				return select(this.parentNode).datum();
 			})
