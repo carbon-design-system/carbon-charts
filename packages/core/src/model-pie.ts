@@ -8,8 +8,8 @@ export class PieChartModel extends ChartModel {
 		super(services);
 	}
 
-	sanitize(data) {
-		const tabularData = this.getTabularData(data);
+	getTabularData(data) {
+		const tabularData = super.getTabularData(data);
 
 		// if the data was changed to tabular format
 		// update the group to the key so the slices render with the correct tooltips and colors
@@ -21,6 +21,12 @@ export class PieChartModel extends ChartModel {
 				}
 			});
 		}
+
+		return tabularData;
+	}
+
+	sanitize(data) {
+		const tabularData = this.getTabularData(data);
 
 		// Sort data based on value
 		return tabularData.sort((a, b) => b.value - a.value);
