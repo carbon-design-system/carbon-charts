@@ -188,3 +188,13 @@ export interface DonutChartOptions extends PieChartOptions {
 		};
 	};
 }
+
+/**
+ * options specific to radar charts
+ */
+export interface RadarChartOptions extends BaseChartOptions {
+	radar?: {
+		opt1?: boolean;
+		opt2?: number;
+	};
+}
