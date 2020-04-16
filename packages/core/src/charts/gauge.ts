@@ -3,7 +3,7 @@ import { PieChart } from "./pie";
 import * as Configuration from "../configuration";
 import {
 	ChartConfig,
-	GaugeChartOptions
+	GaugeChartOptions,
 } from "../interfaces/index";
 import { Tools } from "../tools";
 
@@ -13,7 +13,7 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
 	LayoutComponent,
-	Tooltip
+	TooltipPie
 } from "../components/index";
 
 export class GaugeChart extends PieChart {
@@ -40,7 +40,7 @@ export class GaugeChart extends PieChart {
 		];
 
 		const components: any[] = this.getChartComponents(graphFrameComponents);
-		components.push(new Tooltip(this.model, this.services));
+		components.push(new TooltipPie(this.model, this.services));
 		return components;
 	}
 }

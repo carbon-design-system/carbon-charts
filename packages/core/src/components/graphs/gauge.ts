@@ -40,11 +40,13 @@ export class Gauge extends Component {
 		const total = displayData.find(d => d.key === "total");
 		return [
 			{
-				label: "Dataset",
-				current: current ? current.value : 0,
-				total: total ? total.value : 0,
-				old: old ? old.value : 0,
-				value: current ? current.value : 0
+				data: {
+					group: "Dataset",
+					current: current ? current.value : 0,
+					total: total ? total.value : 0,
+					old: old ? old.value : 0,
+					value: current ? current.value : 0
+				}
 			}
 		];
 	}
@@ -66,19 +68,19 @@ export class Gauge extends Component {
 
 	getTotal(): number {
 		const datalist = this.getDataList();
-		const value = datalist[0].total || 0;
+		const value = datalist[0].data.total || 0;
 		return value;
 	}
 
 	getCurrent(): number {
 		const datalist = this.getDataList();
-		const value = datalist[0].current || 0;
+		const value = datalist[0].data.current || 0;
 		return value;
 	}
 
 	getOld(): number {
 		const datalist = this.getDataList();
-		const value = datalist[0].old || 0;
+		const value = datalist[0].data.old || 0;
 		return value;
 	}
 
@@ -261,7 +263,7 @@ export class Gauge extends Component {
 			.on("mouseout", function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false)
-					.transition(self.services.transitions.getTransition("pie_slice_mouseover"))
+					.transition(self.services.transitions.getTransition("gauge_slice_mouseover"))
 					.attr("d", self.arc);
 
 				// Dispatch mouse event
