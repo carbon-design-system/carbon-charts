@@ -25,12 +25,9 @@ export class Radar extends Component {
 	type = "radar";
 
 	init() {
-		// console.log(`\nInit`);
 	}
 
 	render(animate = true) {
-		console.log(`\nRender`);
-
 		/////////////////////////////
 		// Containers
 		/////////////////////////////
@@ -57,6 +54,14 @@ export class Radar extends Component {
 		// Computations
 		/////////////////////////////
 
+		// center
+		const cx = width / 2;
+		const cy = height / 2;
+
+		// angle between spokes
+		const spokesValues = uniqBy(data, "key");
+		const angleStep = (2 * Math.PI) / spokesValues.length;
+
 		const ticksNumber = 5;
 		const fontSize = 10;
 		const size = Math.min(width, height);
@@ -66,16 +71,20 @@ export class Radar extends Component {
 		const valueScale = scaleLinear().domain([minValue, maxValue]).range([0, radius]).nice();
 		const valueTicks = valueScale.ticks(ticksNumber);
 
-		// center
-		const cx = width / 2;
-		const cy = height / 2;
-		const cr = 5;
+		const angleScale = (key: string) => {
+			const i = spokesValues.indexOf(key);
+			const angle = angleStep * i;
+			// rotate by -90° because of the first list should be vertical and not horizontal
+			return angle - Math.PI / 2;
+		};
 
-		// angle between spokes
-		const spokesValues = uniqBy(data, "key");
-		const spokesNumber = spokesValues.length;
-		const angle = (2 * Math.PI) / spokesNumber;
-		// console.log({ spokes, spokesNumber, angle });
+		const getCoordinates = (key: string, radius: number) => {
+			const angle = angleScale(key);
+			// translate by the center
+			const x = radius * Math.cos(angle) + cx;
+			const y = radius * Math.sin(angle) + cy;
+			return { x, y };
+		};
 
 		/////////////////////////////
 		// Draw
@@ -87,8 +96,8 @@ export class Radar extends Component {
 		const center = DOMUtils.appendOrSelect(debugContainer, "circle.center")
 			.attr("cx", cx)
 			.attr("cy", cy)
-			.attr("r", cr)
-			.attr("fill", "red");
+			.attr("r", 2)
+			.attr("fill", "gold");
 
 		// circumferences
 		const circumferences = DOMUtils.appendOrSelect(debugContainer, "g.circumferences");
@@ -99,7 +108,7 @@ export class Radar extends Component {
 			.merge(circumferencesUpdate)
 			.attr("cx", cx)
 			.attr("cy", cy)
-			.attr("r", d => d)
+			.attr("r", d => valueScale(d))
 			.attr("fill", "none")
 			.attr("stroke", "red");
 
@@ -112,8 +121,8 @@ export class Radar extends Component {
 			.merge(spokesUpdate)
 			.attr("x1", cx)
 			.attr("y1", cy)
-			.attr("x2", (d, i) => radius * Math.cos(i * angle) + cx)
-			.attr("y2", (d, i) => radius * Math.sin(i * angle) + cy)
+			.attr("x2", d => getCoordinates(d, radius).x)
+			.attr("y2", d => getCoordinates(d, radius).y)
 			.attr("stroke", "cyan");
 	}
 }
@@ -130,10 +139,4 @@ function radToDeg(rad: number) {
 
 function degToRad(deg: number) {
 	return deg * (Math.PI / 180);
-}
-
-function computeCoordinate(angle: number, radius: number) {
-	const x = radius * Math.cos(angle);
-	const y = radius * Math.sin(angle);
-	return { x, y };
 }
