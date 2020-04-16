@@ -48,7 +48,8 @@ export class GroupedBar extends Bar {
 	}
 
 	protected getGroupWidth() {
-		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
+		const { groups } = this.configs;
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames(groups).length;
 		const totalGroupPadding = this.getTotalGroupPadding();
 
 		return this.getBarWidth() * numOfActiveDataGroups + totalGroupPadding;
@@ -56,7 +57,8 @@ export class GroupedBar extends Bar {
 
 
 	protected getTotalGroupPadding() {
-		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
+		const { groups } = this.configs;
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames(groups).length;
 
 		if (numOfActiveDataGroups === 1) {
 			return 0;
@@ -87,7 +89,8 @@ export class GroupedBar extends Bar {
 			}
 		}
 
-		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
+		const { groups } = this.configs;
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames(groups).length;
 		const totalGroupPadding = this.getTotalGroupPadding();
 
 		const domainScale = this.services.cartesianScales.getDomainScale();
@@ -98,8 +101,9 @@ export class GroupedBar extends Bar {
 	}
 
 	protected setGroupScale() {
+		const { groups } = this.configs;
 		this.groupScale = scaleBand()
-			.domain(this.model.getActiveDataGroupNames())
+			.domain(this.model.getActiveDataGroupNames(groups))
 			.rangeRound([0, this.getGroupWidth()]);
 	}
 

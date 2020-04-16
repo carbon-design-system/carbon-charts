@@ -120,12 +120,12 @@ export const comboGroupedOptions = {
 	},
 	chartTypes: {
 		"grouped-bar": [
+			"Dataset 1",
 			"Dataset 2",
-			"Dataset 3",
 			"Dataset 4"
 		],
 		"line": [
-			"Dataset 1"
+			"Dataset 3"
 		]
 	}
 };

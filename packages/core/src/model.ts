@@ -192,8 +192,11 @@ export class ChartModel {
 		return this.getDataGroups().map(dataGroup => dataGroup.name);
 	}
 
-	getActiveDataGroupNames() {
-		return this.getActiveDataGroups().map(dataGroup => dataGroup.name);
+	getActiveDataGroupNames(groups?: string[]) {
+		const activeDataGroups = groups
+			? this.getActiveDataGroups().filter(dataGroup => groups.includes(dataGroup.name))
+			: this.getActiveDataGroups();
+		return activeDataGroups.map(dataGroup => dataGroup.name);
 	}
 
 	getGroupedData(groups?: string[]) {
