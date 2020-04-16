@@ -25,7 +25,7 @@ export class StackedArea extends Component {
 					this.services.transitions.getTransition("legend-hover-area")
 				)
 				.attr("opacity", d => {
-					if (d.group !== hoveredElement.datum().group) {
+					if (d[0].group !== hoveredElement.datum().name) {
 						return Configuration.areas.opacity.unselected;
 					}
 
@@ -160,7 +160,6 @@ export class StackedArea extends Component {
 		}
 
 		const stackedData = this.model.getStackedData();
-		console.log(stackedData);
 
 		const areaGroups = svg
 			.selectAll("g.areas")
