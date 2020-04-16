@@ -33,7 +33,9 @@ export class Radar extends Component {
 		/////////////////////////////
 		const svg = this.parent;
 		const { width, height } = DOMUtils.getSVGElementSize(svg, { useAttrs: true });
-		const margin = { top: 10, right: 120, bottom: 10, left: 40 };
+		if (!width || !height) {
+			return;
+		}
 
 		// draw backdrop
 		const backdropRect = DOMUtils.appendOrSelect(svg, "rect.radar-backdrop")
