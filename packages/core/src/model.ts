@@ -125,6 +125,17 @@ export class ChartModel {
 		return this.get("data");
 	}
 
+	setStackedGroups(groups) {
+		this.set({
+			stackedGroups: groups
+		});
+	}
+
+
+	getStackedGroups() {
+		return this.get("stackedGroups");
+	}
+
 	/**
 	 *
 	 * @param newData The new raw data to be set
@@ -188,8 +199,11 @@ export class ChartModel {
 		return this.getDataGroups().filter(dataGroup => dataGroup.status === ACTIVE);
 	}
 
-	getDataGroupNames() {
-		return this.getDataGroups().map(dataGroup => dataGroup.name);
+	getDataGroupNames(groups?: string[]) {
+		const dataGroups = groups
+			? this.getDataGroups().filter(dataGroup => groups.includes(dataGroup.name))
+			: this.getDataGroups();
+		return dataGroups.map(dataGroup => dataGroup.name);
 	}
 
 	getActiveDataGroupNames(groups?: string[]) {
@@ -220,7 +234,7 @@ export class ChartModel {
 			}));
 	}
 
-	getDataValuesGroupedByKeys() {
+	getDataValuesGroupedByKeys(groups?: string[]) {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
@@ -229,7 +243,7 @@ export class ChartModel {
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		const stackKeys = map(displayData, datum => datum[domainIdentifier]).keys();
-		const dataGroupNames = this.getDataGroupNames();
+		const dataGroupNames = this.getDataGroupNames(groups);
 
 		return stackKeys.map(key => {
 			const correspondingValues = { sharedStackKey: key };

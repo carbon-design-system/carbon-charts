@@ -170,8 +170,7 @@ export const stackedBarOptions = {
 	title: "Stacked bar (discrete)",
 	axes: {
 		left: {
-			mapsTo: "value",
-			stacked: true
+			mapsTo: "value"
 		},
 		bottom: {
 			mapsTo: "key",

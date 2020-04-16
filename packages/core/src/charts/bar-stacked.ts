@@ -34,6 +34,8 @@ export class StackedBarChart extends AxisChart {
 
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs);
+
+		this.model.setStackedGroups(this.model.getDataGroupNames());
 	}
 
 	getComponents() {

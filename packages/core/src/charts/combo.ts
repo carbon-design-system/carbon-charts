@@ -60,6 +60,10 @@ export class ComboChart extends AxisChart {
 			)
 		);
 
+		if (graphs.includes("stacked-bar")) {
+			this.model.setStackedGroups(chartTypes["stacked-bar"]);
+		}
+
 		// Initialize data, services, components etc.
 		this.init(holder, chartConfigs);
 	}

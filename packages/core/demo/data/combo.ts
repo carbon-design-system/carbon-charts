@@ -63,8 +63,7 @@ export const comboStackedOptions = {
 	axes: {
 		left: {
 			title: "Conversion rate",
-			mapsTo: "value",
-			stacked: true
+			mapsTo: "value"
 		},
 		bottom: {
 			title: "2018 Annual Sales Figures",

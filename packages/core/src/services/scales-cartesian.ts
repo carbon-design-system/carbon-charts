@@ -288,14 +288,23 @@ export class CartesianScales extends Service {
 		// Get the extent of the domain
 		let domain;
 		let allDataValues;
+
 		// If the scale is stacked
-		if (axisOptions.stacked) {
-			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys();
-			allDataValues = dataValuesGroupedByKeys.map(dataValues => {
-				return sum(
-					values(dataValues) as any
-				);
+		const stackedGroups = this.model.getStackedGroups();
+		if (stackedGroups) {
+			const { groupMapsTo } = options.data;
+			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys(stackedGroups);
+			const notStackedGroupsData = displayData.filter(datum => !stackedGroups.includes(datum[groupMapsTo]));
+			const stackedValues = dataValuesGroupedByKeys.map(dataValues => {
+				const {sharedStackKey, ...numericalValues} = dataValues;
+				return sum(values(numericalValues) as number[]);
 			});
+
+			allDataValues = [
+				...stackedValues,
+				...notStackedGroupsData.map(datum => datum[mapsTo])
+			];
+
 		} else {
 			allDataValues = displayData.map(datum => datum[mapsTo]);
 		}
