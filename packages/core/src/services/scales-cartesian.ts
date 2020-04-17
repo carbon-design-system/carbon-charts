@@ -291,7 +291,7 @@ export class CartesianScales extends Service {
 
 		// If the scale is stacked
 		const stackedGroups = this.model.getStackedGroups();
-		if (stackedGroups) {
+		if (stackedGroups && axisPosition === this.getRangeAxisPosition()) {
 			const { groupMapsTo } = options.data;
 			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys(stackedGroups);
 			const notStackedGroupsData = displayData.filter(datum => !stackedGroups.includes(datum[groupMapsTo]));

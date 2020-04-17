@@ -188,9 +188,7 @@ export const stackedHorizontalBarOptions = {
 		left: {
 			scaleType: "labels"
 		},
-		bottom: {
-			stacked: true
-		}
+		bottom: {}
 	}
 };
 
@@ -221,8 +219,7 @@ export const stackedBarTimeSeriesOptions = {
 	title: "Stacked bar (time series)",
 	axes: {
 		left: {
-			mapsTo: "value",
-			stacked: true
+			mapsTo: "value"
 		},
 		bottom: {
 			mapsTo: "date",
@@ -238,9 +235,7 @@ export const stackedHorizontalBarTimeSeriesOptions = {
 		left: {
 			scaleType: "time"
 		},
-		bottom: {
-			stacked: true
-		}
+		bottom: {}
 	}
 };
 
