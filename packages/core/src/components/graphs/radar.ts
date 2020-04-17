@@ -11,11 +11,10 @@ import {
 
 // D3 Imports
 import { scaleBand, scaleLinear } from "d3-scale";
-import { extent, max } from "d3-array";
-import { lineRadial, areaRadial, curveLinearClosed, curveCardinalClosed } from "d3-shape";
-import { nest } from "d3-collection";
+import { max } from "d3-array";
+import { lineRadial, curveLinearClosed } from "d3-shape";
 
-const DEBUG = true;
+const DEBUG = false;
 
 interface Datum {
 	group: string;
@@ -43,13 +42,6 @@ export class Radar extends Component {
 		if (!width || !height) {
 			return;
 		}
-
-		// draw backdrop
-		const backdropRect = DOMUtils.appendOrSelect(svg, "rect.radar-backdrop")
-			.attr("width", "100%")
-			.attr("height", "100%")
-			.attr("stroke", "red")
-			.attr("fill", "none");
 
 		const data: Array<Datum> = this.model.getData();
 		const displayData: Array<Datum> = this.model.getDisplayData();
@@ -104,14 +96,22 @@ export class Radar extends Component {
 		// Draw
 		/////////////////////////////
 
+		///////////////
 		const debugContainer = DOMUtils.appendOrSelect(svg, "g.debug");
+
+		// backdrop
+		const backdropRect = DOMUtils.appendOrSelect(debugContainer, "rect.radar-backdrop")
+			.attr("width", "100%")
+			.attr("height", "100%")
+			.attr("stroke", "red")
+			.attr("fill", "none");
 
 		// center
 		const center = DOMUtils.appendOrSelect(debugContainer, "circle.center")
 			.attr("cx", cx)
 			.attr("cy", cy)
-			.attr("r", 2)
-			.attr("fill", "gold");
+			.attr("r", 3)
+			.attr("fill", "red");
 
 		// circumferences
 		const circumferences = DOMUtils.appendOrSelect(debugContainer, "g.circumferences");
@@ -127,9 +127,12 @@ export class Radar extends Component {
 			.attr("stroke", "red");
 		circumferencesUpdate.exit().remove();
 
+		svg.select("g.debug").attr("opacity", DEBUG ? 0.5 : 0);
+		///////////////
+
 		// x axes
 		const keysValues = uniqBy(data, "key");
-		const spokes = DOMUtils.appendOrSelect(debugContainer, "g.axis");
+		const spokes = DOMUtils.appendOrSelect(svg, "g.axis");
 		const spokesUpdate = spokes.selectAll("line").data(keysValues);
 		spokesUpdate
 			.enter()
@@ -140,7 +143,7 @@ export class Radar extends Component {
 			.attr("y1", cy)
 			.attr("x2", key => getCoordinates(key, radius).x)
 			.attr("y2", key => getCoordinates(key, radius).y)
-			.attr("stroke", "cyan");
+			.attr("stroke", "#dcdcdc");
 
 		// blobs
 		const blobsContainer = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
@@ -161,9 +164,10 @@ export class Radar extends Component {
 			.attr("class", d => `blob-area-${d.name}`)
 			.attr("d", d => radialLineGenerator(d.data))
 			.attr("stroke", d => colorScale(d.name))
+			.attr("stroke-width", 1.5)
 			.attr("fill", d => colorScale(d.name))
 			.attr("opacity", 1)
-			.style("fill-opacity", 0.2);
+			.style("fill-opacity", 0.5);
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
@@ -172,7 +176,7 @@ export class Radar extends Component {
 			.transition(this.services.transitions.getTransition("legend-hover-path"))
 			.attr("opacity", group => {
 				if (group.name !== hoveredElement.datum().name) {
-					return 0.1;
+					return 0.2;
 				}
 				return 0.5;
 			});
