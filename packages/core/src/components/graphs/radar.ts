@@ -27,6 +27,11 @@ export class Radar extends Component {
 	type = "radar";
 
 	init() {
+		const { events } = this.services;
+		// Highlight correct line legend item hovers
+		events.addEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
+		// Un-highlight lines on legend item mouseouts
+		events.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
 
 	render(animate = true) {
@@ -48,16 +53,12 @@ export class Radar extends Component {
 
 		const data: Array<Datum> = this.model.getData();
 		const displayData: Array<Datum> = this.model.getDisplayData();
-		// nest data by group
-		const nestedDataByGroup = nest<Datum>()
-			.key(d => d.group)
-			.entries(displayData);
-
+		const groupedData = this.model.getGroupedData();
 		const options = this.model.getOptions();
 
 		// console.log("  data:", data);
 		// console.log("  displayData:", displayData);
-		// console.log("  nestedDataByGroup:", nestedDataByGroup);
+		// console.log("  groupedData:", groupedData);
 		// console.log("  options:", options);
 
 		/////////////////////////////
@@ -73,8 +74,6 @@ export class Radar extends Component {
 		const diameter = size - 2 * fontSize;
 		const radius = diameter / 2;
 
-		// scales
-
 		// given a key, return the corrisponding angle in radiants
 		const xScale = scaleBand()
 			.domain(displayData.map(d => d.key))
@@ -87,10 +86,6 @@ export class Radar extends Component {
 		const yTicks = yScale.ticks(ticksNumber);
 
 		const colorScale = (key: string): string => this.model.getFillColor(key);
-
-		// angle slice
-		const keysValues = uniqBy(displayData, "key");
-		const angleSlice = (2 * Math.PI) / keysValues.length;
 
 		const radialLineGenerator = lineRadial<Datum>()
 			.angle(d => xScale(d.key))
@@ -130,20 +125,30 @@ export class Radar extends Component {
 			.attr("r", d => yScale(d))
 			.attr("fill", "none")
 			.attr("stroke", "red");
+		circumferencesUpdate.exit().remove();
 
 		// blobs
 		const blobContainer = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
-		const blob = blobContainer.selectAll(".g")
-			.data(nestedDataByGroup)
+		// bind data
+		const blob = blobContainer.selectAll("g").data(groupedData, group => group.name);
+		// remove node if necessary
+		blob.exit().attr("opacity", 0).remove();
+		// add node if necessary
+		const enteringBlob = blob
 			.enter()
 			.append("g")
-			.attr("class", d => d.key);
-		blob
+			.classed("paths", true)
+			.attr("class", d => d.name);
+		const enteringPahts = enteringBlob
 			.append("path")
-			.attr("class", d => `blob-area-${d.key}`)
-			.attr("d", d => radialLineGenerator(d.values))
-			.attr("stroke", d => colorScale(d.key))
-			.attr("fill", d => colorScale(d.key))
+			.attr("opacity", 0);
+		// update node (?)
+		enteringPahts.merge(svg.selectAll("g.paths path"))
+			.attr("class", d => `blob-area-${d.name}`)
+			.attr("d", d => radialLineGenerator(d.data))
+			.attr("stroke", d => colorScale(d.name))
+			.attr("fill", d => colorScale(d.name))
+			.attr("opacity", 1)
 			.style("fill-opacity", 0.2);
 
 		// x axes
@@ -159,6 +164,35 @@ export class Radar extends Component {
 			.attr("x2", d => getCoordinates(d, radius).x)
 			.attr("y2", d => getCoordinates(d, radius).y)
 			.attr("stroke", "cyan");
+	}
+
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
+		this.parent.selectAll("g.blobs path")
+			.transition(this.services.transitions.getTransition("legend-hover-path"))
+			.attr("opacity", group => {
+				if (group.name !== hoveredElement.datum().name) {
+					return 0.1;
+				}
+				return 0.5;
+			});
+	}
+
+	handleLegendMouseOut = (event: CustomEvent) => {
+		this.parent.selectAll("g.blobs path")
+			.transition(this.services.transitions.getTransition("legend-mouseout-path"))
+			.attr("opacity", 0.5);
+	}
+
+	destroy() {
+		// Remove event listeners
+		this.parent.selectAll("path")
+			.on("mousemove", null)
+			.on("mouseout", null);
+		// Remove legend listeners
+		const eventsFragment = this.services.events;
+		eventsFragment.removeEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
+		eventsFragment.removeEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
 }
 
