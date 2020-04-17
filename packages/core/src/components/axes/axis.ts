@@ -147,7 +147,7 @@ export class Axis extends Component {
 		const userProvidedFormatter = Tools.getProperty(axisOptions, "ticks", "formatter");
 		if (isTimeScaleType) {
 			const timeInterval = computeTimeIntervalName(axis.tickValues());
-			if(userProvidedFormatter === null) {
+			if (userProvidedFormatter === null) {
 				formatter = (t: number, i: number) => formatTick(t, i, timeInterval, timeScaleOptions);
 			} else {
 				formatter = (t: number, i: number) => {
