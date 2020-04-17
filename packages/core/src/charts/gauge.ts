@@ -11,8 +11,6 @@ import { Tools } from "../tools";
 import {
 	Gauge,
 	// the imports below are needed because of typescript bug (error TS4029)
-	Legend,
-	LayoutComponent,
 	TooltipPie
 } from "../components/index";
 
