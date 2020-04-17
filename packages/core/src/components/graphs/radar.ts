@@ -93,7 +93,7 @@ export class Radar extends Component {
 			.curve(curveLinearClosed);
 
 		const getCoordinates = (key: string, r: number) => {
-			const angle = xScale(key);
+			const angle = xScale(key) - Math.PI / 2;
 			// translate by the center
 			const x = r * Math.cos(angle) + cx;
 			const y = r * Math.sin(angle) + cy;
@@ -127,10 +127,24 @@ export class Radar extends Component {
 			.attr("stroke", "red");
 		circumferencesUpdate.exit().remove();
 
+		// x axes
+		const keysValues = uniqBy(data, "key");
+		const spokes = DOMUtils.appendOrSelect(debugContainer, "g.axis");
+		const spokesUpdate = spokes.selectAll("line").data(keysValues);
+		spokesUpdate
+			.enter()
+			.append("line")
+			.merge(spokesUpdate)
+			.attr("class", key => `axis-${key}`)
+			.attr("x1", cx)
+			.attr("y1", cy)
+			.attr("x2", key => getCoordinates(key, radius).x)
+			.attr("y2", key => getCoordinates(key, radius).y)
+			.attr("stroke", "cyan");
+
 		// blobs
-		const blobContainer = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
-		// bind data
-		const blob = blobContainer.selectAll("g").data(groupedData, group => group.name);
+		const blobsContainer = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
+		const blob = blobsContainer.selectAll("g").data(groupedData, group => group.name);
 		// remove node if necessary
 		blob.exit().attr("opacity", 0).remove();
 		// add node if necessary
@@ -150,20 +164,6 @@ export class Radar extends Component {
 			.attr("fill", d => colorScale(d.name))
 			.attr("opacity", 1)
 			.style("fill-opacity", 0.2);
-
-		// x axes
-		const spokesValues = uniqBy(data, "key");
-		const spokes = DOMUtils.appendOrSelect(debugContainer, "g.spokes");
-		const spokesUpdate = spokes.selectAll("line").data(spokesValues);
-		spokesUpdate
-			.enter()
-			.append("line")
-			.merge(spokesUpdate)
-			.attr("x1", cx)
-			.attr("y1", cy)
-			.attr("x2", d => getCoordinates(d, radius).x)
-			.attr("y2", d => getCoordinates(d, radius).y)
-			.attr("stroke", "cyan");
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
