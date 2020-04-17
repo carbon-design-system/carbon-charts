@@ -10,8 +10,10 @@ import {
 } from "../../interfaces";
 
 // D3 Imports
-import { scaleLinear } from "d3-scale";
-import { extent } from "d3-array";
+import { scaleBand, scaleLinear } from "d3-scale";
+import { extent, max } from "d3-array";
+import { lineRadial, areaRadial, curveLinearClosed, curveCardinalClosed } from "d3-shape";
+import { nest } from "d3-collection";
 
 const DEBUG = true;
 
@@ -46,10 +48,16 @@ export class Radar extends Component {
 
 		const data: Array<Datum> = this.model.getData();
 		const displayData: Array<Datum> = this.model.getDisplayData();
+		// nest data by group
+		const nestedDataByGroup = nest<Datum>()
+			.key(d => d.group)
+			.entries(displayData);
+
 		const options = this.model.getOptions();
 
 		// console.log("  data:", data);
 		// console.log("  displayData:", displayData);
+		// console.log("  nestedDataByGroup:", nestedDataByGroup);
 		// console.log("  options:", options);
 
 		/////////////////////////////
@@ -60,31 +68,38 @@ export class Radar extends Component {
 		const cx = width / 2;
 		const cy = height / 2;
 
-		// angle between spokes
-		const spokesValues = uniqBy(data, "key");
-		const angleStep = (2 * Math.PI) / spokesValues.length;
-
-		const ticksNumber = 5;
 		const fontSize = 10;
 		const size = Math.min(width, height);
 		const diameter = size - 2 * fontSize;
 		const radius = diameter / 2;
-		const [minValue, maxValue] = extent(displayData.map(d => d.value));
-		const valueScale = scaleLinear().domain([minValue, maxValue]).range([0, radius]).nice();
-		const valueTicks = valueScale.ticks(ticksNumber);
 
-		const angleScale = (key: string) => {
-			const i = spokesValues.indexOf(key);
-			const angle = angleStep * i;
-			// rotate by -90° because of the first list should be vertical and not horizontal
-			return angle - Math.PI / 2;
-		};
+		// scales
 
-		const getCoordinates = (key: string, radius: number) => {
-			const angle = angleScale(key);
+		// given a key, return the corrisponding angle in radiants
+		const xScale = scaleBand()
+			.domain(displayData.map(d => d.key))
+			.range([0, 2 * Math.PI]);
+
+		const ticksNumber = 5;
+		const yScale = scaleLinear()
+			.domain([0, max(displayData.map(d => d.value))])
+			.range([0, radius]);
+		const yTicks = yScale.ticks(ticksNumber);
+
+		// angle slice
+		const keysValues = uniqBy(displayData, "key");
+		const angleSlice = (2 * Math.PI) / keysValues.length;
+
+		const radialLineGenerator = lineRadial<Datum>()
+			.angle(d => xScale(d.key))
+			.radius(d => yScale(d.value))
+			.curve(curveLinearClosed);
+
+		const getCoordinates = (key: string, r: number) => {
+			const angle = xScale(key);
 			// translate by the center
-			const x = radius * Math.cos(angle) + cx;
-			const y = radius * Math.sin(angle) + cy;
+			const x = r * Math.cos(angle) + cx;
+			const y = r * Math.sin(angle) + cy;
 			return { x, y };
 		};
 
@@ -103,18 +118,35 @@ export class Radar extends Component {
 
 		// circumferences
 		const circumferences = DOMUtils.appendOrSelect(debugContainer, "g.circumferences");
-		const circumferencesUpdate = circumferences.selectAll("circle").data(valueTicks);
+		const circumferencesUpdate = circumferences.selectAll("circle").data(yTicks);
 		circumferencesUpdate
 			.enter()
 			.append("circle")
 			.merge(circumferencesUpdate)
 			.attr("cx", cx)
 			.attr("cy", cy)
-			.attr("r", d => valueScale(d))
+			.attr("r", d => yScale(d))
 			.attr("fill", "none")
 			.attr("stroke", "red");
 
+		// Create blobs
+		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
+		const blobWrapper = blobs.selectAll(".g")
+			.data(nestedDataByGroup)
+			.enter()
+			.append("g")
+			.attr("class", d => d.key);
+		// Append the backgrounds
+		blobWrapper
+			.append("path")
+			.attr("class", d => `blob-area-${d.key}`)
+			.attr("d", d => radialLineGenerator(d.values))
+			.attr("stroke", "green")
+			.style("fill", "green")
+			.style("fill-opacity", 0.3);
+
 		// spokes
+		const spokesValues = uniqBy(data, "key");
 		const spokes = DOMUtils.appendOrSelect(debugContainer, "g.spokes");
 		const spokesUpdate = spokes.selectAll("line").data(spokesValues);
 		spokesUpdate
