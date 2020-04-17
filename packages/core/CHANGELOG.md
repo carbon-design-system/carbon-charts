@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.11](https://github.com/IBM/carbon-charts/compare/v0.30.10...v0.30.11) (2020-04-15)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.30.10](https://github.com/IBM/carbon-charts/compare/v0.30.9...v0.30.10) (2020-04-09)
+
+
+### Bug Fixes
+
+* **core:** title string contains html ascii characters  ([#547](https://github.com/IBM/carbon-charts/issues/547)) ([1a6b646](https://github.com/IBM/carbon-charts/commit/1a6b6463f576c1ba297883e734a4a953e4a22829))
+
+
+
+
+
+## [0.30.9](https://github.com/IBM/carbon-charts/compare/v0.30.8...v0.30.9) (2020-04-09)
+
+
+### Bug Fixes
+
+* **bar-stacked:** render 0 value bars ([425e11d](https://github.com/IBM/carbon-charts/commit/425e11d9dacb8bbaf9740759754eab1f0aa45843))
+
+
+
+
+
 ## [0.30.8](https://github.com/IBM/carbon-charts/compare/v0.30.7...v0.30.8) (2020-04-03)
 
 **Note:** Version bump only for package @carbon/charts
