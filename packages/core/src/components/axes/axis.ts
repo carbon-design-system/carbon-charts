@@ -152,7 +152,7 @@ export class Axis extends Component {
 			} else {
 				formatter = (t: number, i: number) => {
 					const defaultFormattedValue = formatTick(t, i, timeInterval, timeScaleOptions);
-					return userProvidedFormatter(defaultFormattedValue, i);
+					return userProvidedFormatter(t, i, defaultFormattedValue);
 				};
 			}
 		} else {
