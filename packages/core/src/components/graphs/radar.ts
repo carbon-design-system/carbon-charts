@@ -86,6 +86,8 @@ export class Radar extends Component {
 			.range([0, radius]);
 		const yTicks = yScale.ticks(ticksNumber);
 
+		const colorScale = (key: string): string => this.model.getFillColor(key);
+
 		// angle slice
 		const keysValues = uniqBy(displayData, "key");
 		const angleSlice = (2 * Math.PI) / keysValues.length;
@@ -129,23 +131,22 @@ export class Radar extends Component {
 			.attr("fill", "none")
 			.attr("stroke", "red");
 
-		// Create blobs
-		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
-		const blobWrapper = blobs.selectAll(".g")
+		// blobs
+		const blobContainer = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
+		const blob = blobContainer.selectAll(".g")
 			.data(nestedDataByGroup)
 			.enter()
 			.append("g")
 			.attr("class", d => d.key);
-		// Append the backgrounds
-		blobWrapper
+		blob
 			.append("path")
 			.attr("class", d => `blob-area-${d.key}`)
 			.attr("d", d => radialLineGenerator(d.values))
-			.attr("stroke", "green")
-			.style("fill", "green")
-			.style("fill-opacity", 0.3);
+			.attr("stroke", d => colorScale(d.key))
+			.attr("fill", d => colorScale(d.key))
+			.style("fill-opacity", 0.2);
 
-		// spokes
+		// x axes
 		const spokesValues = uniqBy(data, "key");
 		const spokes = DOMUtils.appendOrSelect(debugContainer, "g.spokes");
 		const spokesUpdate = spokes.selectAll("line").data(spokesValues);
