@@ -230,6 +230,11 @@ let allDemoGroups = [
 				options: areaDemos.stackedAreaTimeSeriesOptions,
 				data: areaDemos.stackedAreaTimeSeriesData,
 				chartType: chartTypes.StackedAreaChart
+			},
+			{
+				options: areaDemos.stackedAreaPercentageTimeSeriesOptions,
+				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart
 			}
 		]
 	},

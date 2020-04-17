@@ -142,12 +142,29 @@ export class ChartModel {
 		}) as any;
 	}
 
-	getStackedData() {
+	getStackedData({ percentage } = { percentage: false }) {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const dataGroupNames = this.getDataGroupNames();
 		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys();
+
+		if (percentage) {
+			const maxByKey = Tools.fromPairs(dataValuesGroupedByKeys.map((d: any) => [d.sharedStackKey, 0]));
+
+			dataValuesGroupedByKeys.forEach((d: any) => {
+				dataGroupNames.forEach(name => {
+					maxByKey[d.sharedStackKey] += d[name];
+				})
+			});
+
+			// cycle through data values to get percentage
+			dataValuesGroupedByKeys.forEach((d: any) => {
+				dataGroupNames.forEach(name => {
+					d[name] = d[name] / maxByKey[d.sharedStackKey] * 100;
+				})
+			});
+		}
 
 		return stack().keys(dataGroupNames)(dataValuesGroupedByKeys)
 			.map((series, i) => {

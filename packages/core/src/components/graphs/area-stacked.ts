@@ -4,8 +4,7 @@ import * as Configuration from "../../configuration";
 import { Roles, ScaleTypes, Events, TooltipTypes } from "../../interfaces";
 
 // D3 Imports
-import { area, stack } from "d3-shape";
-import { Tools } from "../../tools";
+import { area } from "d3-shape";
 import { select, color } from "d3";
 
 export class StackedArea extends Component {
@@ -45,37 +44,6 @@ export class StackedArea extends Component {
 				.attr("opacity", Configuration.areas.opacity.selected);
 		});
 	}
-
-	// getStackedData() {
-	// 	const datasets = this.model.getGroupedData();
-	// 	const keys: string[] = this.model.getDataGroupNames();
-
-	// 	const flattenedData: [] = datasets.flatMap(d =>
-	// 		d.data.map(datum => ({
-	// 			[d.label]: datum.value,
-	// 			xValue: datum.date
-	// 		}))
-	// 	);
-
-	// 	const preStackData: { [key: string]: number }[] = flattenedData.reduce(
-	// 		(acc, cur: any) => {
-	// 			const index = acc.findIndex(o =>
-	// 				Tools.compareNumeric(o.xValue, cur.xValue)
-	// 			);
-
-	// 			if (index > -1) {
-	// 				acc[index] = { ...acc[index], ...cur };
-	// 			} else {
-	// 				acc.push({ ...cur });
-	// 			}
-
-	// 			return acc;
-	// 		},
-	// 		[]
-	// 	);
-
-	// 	return stack().groups(keys)(preStackData);
-	// }
 
 	addEventListeners() {
 		const self = this;
@@ -145,6 +113,7 @@ export class StackedArea extends Component {
 	render(animate = true) {
 		const svg = this.getContainerSVG();
 		const self = this;
+		const options = this.model.getOptions();
 
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYScale = this.services.cartesianScales.getMainYScale();
@@ -159,7 +128,7 @@ export class StackedArea extends Component {
 			return;
 		}
 
-		const stackedData = this.model.getStackedData();
+		const stackedData = this.model.getStackedData({ percentage: options.percentage });
 
 		const areaGroups = svg
 			.selectAll("g.areas")

@@ -30,3 +30,20 @@ export const stackedAreaTimeSeriesOptions = {
 	},
 	curve: "curveMonotoneX"
 };
+
+export const stackedAreaPercentageTimeSeriesOptions = {
+	title: "Area Stacked Percentage (time series)",
+	axes: {
+		left: {
+			domain: [0, 100],
+			secondary: true,
+			stacked: true
+		},
+		bottom: {
+			scaleType: "time",
+			primary: true
+		}
+	},
+	percentage: true,
+	curve: "curveMonotoneX"
+};
