@@ -222,7 +222,13 @@ let allDemoGroups = [
 		title: "Gauge",
 		demos: [
 			{
-				options: gaugeDemos.gaugeOptions,
+				options: gaugeDemos.gaugeOptionsSemi,
+				data: gaugeDemos.gaugeData,
+				chartType: chartTypes.GaugeChart,
+				isDemoExample: true
+			},
+			{
+				options: gaugeDemos.gaugeOptionsCircular,
 				data: gaugeDemos.gaugeData,
 				chartType: chartTypes.GaugeChart,
 				isDemoExample: true
