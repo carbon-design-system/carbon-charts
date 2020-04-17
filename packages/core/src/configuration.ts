@@ -277,21 +277,16 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, pieChart, {
 	},
 	gauge: {
 		arcWidth: 16,
+		distanceBetweenNumbers: 20,
 		center: {
-			valueFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 58) + "px",
-			percFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 23) + "px",
-			deltaFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 23) + "px",
-			titleFontSize: radius => Tools.interpolateAndClamp((radius / 100), 15) + "px",
+			valueFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 58),
+			percFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 23),
+			deltaFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 23),
+			titleFontSize: radius => Tools.interpolateAndClamp((radius / 100), 15),
 			valueYPosition: (radius, arcSize) => {
-				const deltaYPosition = ((arcSize - 2 * Math.PI) / Math.PI) * getGaugeFontSize(radius, arcSize, 24);
-				const valueYPosition = ((arcSize - 2 * Math.PI) / Math.PI) * getGaugeFontSize(radius, arcSize, 48);
-				return (deltaYPosition + valueYPosition) + "px";
-			},
-			deltaYPosition: (radius, arcSize) => {
-				const deltaYPosition = ((arcSize - 2 * Math.PI) / Math.PI) * getGaugeFontSize(radius, arcSize, 24);
-				const valueYPosition = ((arcSize - 2 * Math.PI) / Math.PI) * getGaugeFontSize(radius, arcSize, 48);
-				const deltaFontSize = getGaugeFontSize(radius, arcSize, 24)
-				return (deltaYPosition + valueYPosition + deltaFontSize * 1.5) + "px";
+				const deltaYPosition = ((arcSize - 2 * Math.PI) / Math.PI) * getGaugeFontSize(radius, arcSize, 23);
+				const valueYPosition = ((arcSize - 2 * Math.PI) / Math.PI) * getGaugeFontSize(radius, arcSize, 58);
+				return (deltaYPosition + valueYPosition);
 			},
 			numberFormatter: number => number.toFixed(2).toLocaleString()
 		}

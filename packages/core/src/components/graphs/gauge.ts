@@ -163,36 +163,35 @@ export class Gauge extends Component {
 		const gaugeText = DOMUtils
 			.appendOrSelect(svg, "text.gauge-value")
 			.attr("text-anchor", "middle")
-			.attr("alignment-baseline", "middle");
+			.attr("alignment-baseline", "baseline");
 
-			DOMUtils.appendOrSelect(gaugeText, "tspan.gauge-value-number")
-				.style("font-size", () => options.gauge.center.valueFontSize(radius, arcSize))
-				.transition(this.services.transitions.getTransition("gauge-figure-enter-update", animate))
-				.attr("y", options.gauge.center.valueYPosition(radius, arcSize))
-				.tween("text", function() {
-					return self.centerNumberTween(select(this), ratio * 100);
-				});
+		DOMUtils.appendOrSelect(gaugeText, "tspan.gauge-value-number")
+			.style("font-size", () => options.gauge.center.valueFontSize(radius, arcSize))
+			.transition(this.services.transitions.getTransition("gauge-figure-enter-update", animate))
+			.attr("y", options.gauge.center.valueYPosition(radius, arcSize))
+			.tween("text", function() {
+				return self.centerNumberTween(select(this), ratio * 100);
+			});
 
-			DOMUtils.appendOrSelect(gaugeText, "tspan.gauge-value-symbol")
-				.attr("text-anchor", "middle")
-				.attr("alignment-baseline", "baseline")
-				.style("font-size", () => options.gauge.center.percFontSize(radius, arcSize))
-				.attr("dx", () => `-${options.gauge.center.valueFontSize(radius, arcSize)}`)
-				.attr("dy", () => `-${options.gauge.center.percFontSize(radius, arcSize)}`)
-				.attr("y", options.gauge.center.valueYPosition(radius, arcSize))
-				.text("%");
+		DOMUtils.appendOrSelect(gaugeText, "tspan.gauge-value-symbol")
+			.style("font-size", () => options.gauge.center.percFontSize(radius, arcSize))
+			.attr("dx", () => `-${options.gauge.center.valueFontSize(radius, arcSize)}`)
+			.attr("dy", () => `-${options.gauge.center.percFontSize(radius, arcSize)}`)
+			.attr("y", options.gauge.center.valueYPosition(radius, arcSize))
+			.text("%");
 
-		DOMUtils.appendOrSelect(svg, "text.gauge-delta")
+		const subText = DOMUtils.appendOrSelect(svg, "text.gauge-delta")
 			.attr("text-anchor", "middle")
-			.attr("alignment-baseline", "middle")
+			.attr("alignment-baseline", "hanging")
 			.style("font-size", () => options.gauge.center.deltaFontSize(radius, arcSize))
-			.attr("y", options.gauge.center.deltaYPosition(radius, arcSize))
+			.attr("y", options.gauge.center.valueYPosition(radius, arcSize) + options.gauge.distanceBetweenNumbers)
 			.text(() => {
 				const sign = Math.sign(delta)
 				const deltaPerc = (delta * 100).toFixed(2);
 				const arrow = sign === 0 ? "=" : sign === -1 ? "▼" : "▲";
 				return `${arrow}  ${deltaPerc}%`;
 			});
+
 
 		// Add event listeners
 		this.addEventListeners();
