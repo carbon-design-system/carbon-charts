@@ -160,15 +160,27 @@ export class Gauge extends Component {
 		// Add the number shown in the center of the gauge and the delta
 		// under it.
 
-		DOMUtils.appendOrSelect(svg, "text.gauge-value")
+		const gaugeText = DOMUtils
+			.appendOrSelect(svg, "text.gauge-value")
 			.attr("text-anchor", "middle")
-			.attr("alignment-baseline", "middle")
-			.style("font-size", () => options.gauge.center.valueFontSize(radius, arcSize))
-			.transition(this.services.transitions.getTransition("gauge-figure-enter-update", animate))
-			.attr("y", options.gauge.center.valueYPosition(radius, arcSize))
-			.tween("text", function() {
-				return self.centerNumberTween(select(this), ratio * 100);
-			});
+			.attr("alignment-baseline", "middle");
+
+			DOMUtils.appendOrSelect(gaugeText, "tspan.gauge-value-number")
+				.style("font-size", () => options.gauge.center.valueFontSize(radius, arcSize))
+				.transition(this.services.transitions.getTransition("gauge-figure-enter-update", animate))
+				.attr("y", options.gauge.center.valueYPosition(radius, arcSize))
+				.tween("text", function() {
+					return self.centerNumberTween(select(this), ratio * 100);
+				});
+
+			DOMUtils.appendOrSelect(gaugeText, "tspan.gauge-value-symbol")
+				.attr("text-anchor", "middle")
+				.attr("alignment-baseline", "baseline")
+				.style("font-size", () => options.gauge.center.percFontSize(radius, arcSize))
+				.attr("dx", () => `-${options.gauge.center.valueFontSize(radius, arcSize)}`)
+				.attr("dy", () => `-${options.gauge.center.percFontSize(radius, arcSize)}`)
+				.attr("y", options.gauge.center.valueYPosition(radius, arcSize))
+				.text("%");
 
 		DOMUtils.appendOrSelect(svg, "text.gauge-delta")
 			.attr("text-anchor", "middle")

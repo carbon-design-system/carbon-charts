@@ -278,8 +278,9 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, pieChart, {
 	gauge: {
 		arcWidth: 16,
 		center: {
-			valueFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 48) + "px",
-			deltaFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 24) + "px",
+			valueFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 58) + "px",
+			percFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 23) + "px",
+			deltaFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 23) + "px",
 			titleFontSize: radius => Tools.interpolateAndClamp((radius / 100), 15) + "px",
 			valueYPosition: (radius, arcSize) => {
 				const deltaYPosition = ((arcSize - 2 * Math.PI) / Math.PI) * getGaugeFontSize(radius, arcSize, 24);
@@ -292,7 +293,7 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, pieChart, {
 				const deltaFontSize = getGaugeFontSize(radius, arcSize, 24)
 				return (deltaYPosition + valueYPosition + deltaFontSize * 1.5) + "px";
 			},
-			numberFormatter: number => number.toFixed(2).toLocaleString() + "%"
+			numberFormatter: number => number.toFixed(2).toLocaleString()
 		}
 	}
 } as GaugeChartOptions);
