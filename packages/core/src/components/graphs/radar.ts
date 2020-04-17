@@ -1,6 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
+import * as Configuration from "../../configuration";
 import { Tools } from "../../tools";
 import {
 	CalloutDirections,
@@ -47,11 +48,13 @@ export class Radar extends Component {
 		const displayData: Array<Datum> = this.model.getDisplayData();
 		const groupedData = this.model.getGroupedData();
 		const options = this.model.getOptions();
+		const configuration = Configuration.options.radarChart.radar;
 
 		// console.log("  data:", data);
 		// console.log("  displayData:", displayData);
 		// console.log("  groupedData:", groupedData);
 		// console.log("  options:", options);
+		// console.log("  configuration:", configuration);
 
 		/////////////////////////////
 		// Computations
@@ -149,7 +152,8 @@ export class Radar extends Component {
 		const blobsContainer = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
 		const blob = blobsContainer.selectAll("g").data(groupedData, group => group.name);
 		// remove node if necessary
-		blob.exit().attr("opacity", 0).remove();
+		blob.exit()
+			.remove();
 		// add node if necessary
 		const enteringBlob = blob
 			.enter()
@@ -157,8 +161,7 @@ export class Radar extends Component {
 			.classed("paths", true)
 			.attr("class", d => d.name);
 		const enteringPahts = enteringBlob
-			.append("path")
-			.attr("opacity", 0);
+			.append("path");
 		// update node (?)
 		enteringPahts.merge(svg.selectAll("g.paths path"))
 			.attr("class", d => `blob-area-${d.name}`)
@@ -166,26 +169,26 @@ export class Radar extends Component {
 			.attr("stroke", d => colorScale(d.name))
 			.attr("stroke-width", 1.5)
 			.attr("fill", d => colorScale(d.name))
-			.attr("opacity", 1)
-			.style("fill-opacity", 0.5);
+			.style("fill-opacity", configuration.opacity.selected);
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
+		const { opacity } = Configuration.options.radarChart.radar;
 		this.parent.selectAll("g.blobs path")
 			.transition(this.services.transitions.getTransition("legend-hover-path"))
-			.attr("opacity", group => {
+			.style("fill-opacity", group => {
 				if (group.name !== hoveredElement.datum().name) {
-					return 0.2;
+					return opacity.unselected;
 				}
-				return 0.5;
+				return opacity.selected;
 			});
 	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent.selectAll("g.blobs path")
 			.transition(this.services.transitions.getTransition("legend-mouseout-path"))
-			.attr("opacity", 0.5);
+			.style("fill-opacity", 0.5);
 	}
 
 	destroy() {

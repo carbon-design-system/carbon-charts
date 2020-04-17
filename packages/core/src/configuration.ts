@@ -280,8 +280,10 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
  */
 const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 	radar: {
-		opt1: true,
-		opt2: 2
+		opacity: {
+			unselected: 0.2,
+			selected: 0.5
+		}
 	}
 } as RadarChartOptions);
 

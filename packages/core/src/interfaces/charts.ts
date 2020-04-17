@@ -194,7 +194,9 @@ export interface DonutChartOptions extends PieChartOptions {
  */
 export interface RadarChartOptions extends BaseChartOptions {
 	radar?: {
-		opt1?: boolean;
-		opt2?: number;
+		opacity: {
+			unselected: number,
+			selected: number
+		}
 	};
 }
