@@ -37,29 +37,26 @@ export class Line extends Component {
 			});
 
 		const groupedData = this.model.getGroupedData();
-		// Update the bound data on line groups
-		const lineGroups = svg.selectAll("g.lines")
+		// Update the bound data on lines
+		const lines = svg.selectAll("path.line")
 			.data(groupedData, group => group.name);
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
 		// Data filters are processed before entering new elements
 		// Or updating existing ones
-		lineGroups.exit()
+		lines.exit()
 			.attr("opacity", 0)
 			.remove();
 
-		// Add line groups that need to be introduced
-		const enteringLineGroups = lineGroups.enter()
-			.append("g")
-			.classed("lines", true);
-
-		// Enter paths that need to be introduced
-		const enteringPaths = enteringLineGroups.append("path")
+		// Add lines that need to be introduced
+		const enteringLines = lines.enter()
+			.append("path")
+			.classed("line", true)
 			.attr("opacity", 0);
 
 		// Apply styles and datum
-		enteringPaths.merge(svg.selectAll("g.lines path"))
+		enteringLines.merge(lines)
 			.attr("stroke", (group, i) => {
 				return this.model.getStrokeColor(group.name)
 			})
@@ -74,7 +71,6 @@ export class Line extends Component {
 			// Transition
 			.transition(this.services.transitions.getTransition("line-update-enter", animate))
 			.attr("opacity", 1)
-			.attr("class", "line")
 			.attr("d", group => {
 				const { data } = group;
 				return lineGenerator(data);
