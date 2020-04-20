@@ -12,13 +12,13 @@ import {
 
 // D3 Imports
 import { scaleBand, scaleLinear } from "d3-scale";
-import { min, max } from "d3-array";
+import { max } from "d3-array";
 import { lineRadial, curveLinearClosed } from "d3-shape";
 
 const DEBUG = false;
 
 interface Datum {
-	group: string;
+	group?: string;
 	key: string;
 	value: number;
 }
@@ -89,6 +89,8 @@ export class Radar extends Component {
 			.radius(d => yScale(d.value))
 			.curve(curveLinearClosed);
 
+		// given the key (= value corrisponding to a an x axis), a radius r and translation values
+		// return the coordinates of the corrisponding point stayng on the x axis with radius r
 		const getCoordinates = (key: string, r: number, tx = 0, ty = 0) => {
 			const angle = xScale(key) - Math.PI / 2;
 			// translate by tx and ty
@@ -135,15 +137,32 @@ export class Radar extends Component {
 		svg.select("g.debug").attr("opacity", DEBUG ? 0.5 : 0);
 		///////////////
 
+		// y axes
+		const yAxes = DOMUtils.appendOrSelect(svg, "g.y-axis");
+		const yAxesUpdate = yAxes.selectAll("path").data(yTicks);
+		yAxesUpdate
+			.enter()
+			.append("path")
+			.merge(yAxesUpdate)
+			.attr("transform", `translate(${cx}, ${cy})`)
+			.attr("d", tickValue => {
+				const xAxesKeys = xScale.domain();
+				const points = xAxesKeys.map(key => ({ key, value: tickValue }));
+				return radialLineGenerator(points);
+			})
+			.attr("fill", "none")
+			.attr("stroke", "#dcdcdc");
+		yAxesUpdate.exit().remove();
+
 		// x axes
 		const keysValues = uniqBy(data, "key");
-		const spokes = DOMUtils.appendOrSelect(svg, "g.axis");
-		const spokesUpdate = spokes.selectAll("line").data(keysValues);
-		spokesUpdate
+		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axis");
+		const xAxesUpdate = xAxes.selectAll("line").data(keysValues);
+		xAxesUpdate
 			.enter()
 			.append("line")
-			.merge(spokesUpdate)
-			.attr("class", key => `axis-${key}`)
+			.merge(xAxesUpdate)
+			.attr("class", key => `x-axis-${key}`)
 			.attr("x1", cx)
 			.attr("y1", cy)
 			.attr("x2", key => getCoordinates(key, radius, cx, cy).x)
