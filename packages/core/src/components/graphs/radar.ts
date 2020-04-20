@@ -174,27 +174,23 @@ export class Radar extends Component {
 		xAxesUpdate.exit().remove();
 
 		// blobs
-		const blobsContainer = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
-		const blob = blobsContainer.selectAll("g").data(groupedData, group => group.name);
-		// remove node if necessary
-		blob.exit()
-			.remove();
-		// add node if necessary
-		const enteringBlob = blob
+		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
+		const blobUpdate = blobs.selectAll("g").data(groupedData, group => group.name);
+
+		blobUpdate
 			.enter()
 			.append("g")
-			.classed("paths", true)
-			.attr("class", d => d.name);
-		const enteringPahts = enteringBlob
-			.append("path");
-		// update node (?)
-		enteringPahts.merge(svg.selectAll("g.paths path"))
+			.attr("class", d => d.name)
+			.append("path")
+			.merge(svg.selectAll("g.paths path"))
 			.attr("class", d => `blob-area-${d.name}`)
 			.attr("d", d => radialLineGenerator(d.data))
 			.attr("stroke", d => colorScale(d.name))
 			.attr("stroke-width", 1.5)
 			.attr("fill", d => colorScale(d.name))
 			.style("fill-opacity", configuration.opacity.selected);
+
+		blobUpdate.exit().remove();
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
