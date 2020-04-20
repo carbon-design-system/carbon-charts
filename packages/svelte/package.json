@@ -79,5 +79,19 @@
 	"publishConfig": {
 		"directory": "dist",
 		"access": "public"
-	}
+	},
+	"maintainers": [
+		{
+			"name": "Eric Liu",
+			"email": "eric.young.liu@ibm.com",
+			"url": "https://github.com/metonym"
+		}
+	],
+	"contributors": [
+		{
+			"name": "Eric Liu",
+			"email": "eric.young.liu@ibm.com",
+			"url": "https://github.com/metonym"
+		}
+	]
 }
