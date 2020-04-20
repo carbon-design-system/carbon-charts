@@ -1,31 +1,34 @@
-@import "./../vendor/@carbon/type/scss/type";
-
 .#{$prefix}--#{$charts-prefix}--meter-title {
-	text.meter-title, text.percent-value {
+	text.meter-title,
+	text.percent-value {
 		fill: $text-01;
-		font-size: $carbon--base-font-size;
-		font-family: carbon--font-family("sans");
-	}
-
-	text.meter-title {
-		font-weight: carbon--font-weight("semibold");
 	}
 
 	g.status-indicator {
-		path.status--danger {
+		&.status--danger circle.status {
 			fill: $support-01;
 		}
 
-		path.status--warning {
-			fill: $support-03;
+		&.status--warning {
+			circle.status {
+				fill: $support-03;
+			}
+
+			path.innerFill {
+				fill: rgba($carbon--black-100, 1);
+			}
 		}
 
-		path.status--success {
+		&.status--success circle.status {
 			fill: $support-02;
 		}
 
 		path.innerFill {
-			fill: rgba($carbon--black-100, 1);
+			@if $carbon--theme == $carbon--theme--g90 or $carbon--theme == $carbon--theme--g100 {
+				fill: rgba($carbon--black-100, 1);
+			} @else {
+				fill: rgba($carbon--white-0, 1);
+			}
 		}
 	}
 }

@@ -18,7 +18,7 @@ export class Title extends Component {
 			.classed("title", true)
 			.merge(text)
 			.attr("x", 0)
-			.attr("y", 20)
+			.attr("y", "1em")
 			.html(d => d);
 
 		// check the max space the title has to render

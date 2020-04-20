@@ -22,7 +22,7 @@ export class MeterTitle extends Title {
 			.classed("meter-title", true)
 			.merge(title)
 			.attr("x", 0)
-			.attr("y", 20)
+			.attr("y", "1em")
 			.text(d => d);
 
 		title.exit().remove();
@@ -55,38 +55,38 @@ export class MeterTitle extends Title {
 		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
 		const containerWidth = containerBounds.width ? containerBounds.width : this.parent.node().getAttribute("width");
 
-		const statuses = Tools.getProperty(options, "meter", "status", "ranges");
-		// check if ranges are provided, then bind the status and value
-		const data = statuses ? [{ statuses, value }] : [];
-
 		// size of the status indicator
 		const circleSize = Tools.getProperty(options, "meter", "status", "indicatorSize");
+		const status = this.model.getStatus();
 
 		// create a group for the icon
-		const statusGroup = DOMUtils.appendOrSelect(svg, "g.status-indicator")
-			.attr("transform", `translate(${containerWidth - circleSize}, ${20 - circleSize})`);
+		const statusGroup = DOMUtils.appendOrSelect(svg, `g.status-indicator`)
+			.classed(`status--${status}`, true)
+			.attr("width", circleSize)
+			.attr("transform", `translate(${containerWidth - circleSize},  1)`);
 
 		const self = this;
-		const status = this.model.getStatus();
-		const icon = statusGroup.selectAll("path.circle")
-			.data(data);
+		const icon = statusGroup.selectAll("circle.status")
+			.data(status);
 
 		icon
 			.enter()
-			.append("path")
+			.append("circle")
 			.merge(icon)
-			.attr("class", `circle status--${status}`)
-			.attr("d", self.getStatusIcon(status));
+			.attr("class", "status")
+			.attr("r", circleSize / 2)
+			.attr("cx", circleSize / 2)
+			.attr("cy", circleSize / 2);
 
-		// only warning status has an inner fill
-		const innerFillData = (status === MeterRanges.WARNING) ? [status] : [];
+		const innerFillData = status ? [status] : [];
 		const innerIcon = statusGroup.selectAll("path.innerFill")
 			.data(innerFillData);
 
 		innerIcon.enter()
 			.append("path")
 			.merge(innerIcon)
-			.attr("d", "M9.2,5 L10.7,5 L10.7,12 L9.2,12 L9.2,5 Z M10,16 C9.4,16 9,15.6 9,15 C9,14.4 9.4,14 10,14 C10.6,14 11,14.4 11,15 C11,15.6 10.6,16 10,16 Z")
+			.attr("d", self.getStatusIcon(status))
+			.attr("transform", () => status === MeterRanges.DANGER ? "translate(7.703125, 8.484375) rotate(-45.000000) translate(-7.703125, -8.484375)" : null)
 			.attr("class", `innerFill`);
 
 		innerIcon.exit().remove();
@@ -170,11 +170,11 @@ export class MeterTitle extends Title {
 	protected getStatusIcon(status) {
 		switch (status) {
 			case MeterRanges.SUCCESS:
-				return "M10,1 C5.1,1 1,5.1 1,10 C1,14.9 5.1,19 10,19 C14.9,19 19,15 19,10 C19,5 15,1 10,1 Z M8.7,13.5 L5.5,10.3 L6.5,9.3 L8.7,11.5 L13.5,6.7 L14.5,7.7 L8.7,13.5 Z";
+				return "M6.875 11.3125 3.75 8.1875 4.74375 7.25 6.875 9.34375 11.50625 4.75 12.5 5.7375 Z";
 			case MeterRanges.DANGER:
-				return "M10,1 C5,1 1,5 1,10 C1,15 5,19 10,19 C15,19 19,15 19,10 C19,5 15,1 10,1 Z M13.5,14.5 L5.5,6.5 L6.5,5.5 L14.5,13.5 L13.5,14.5 Z";
+				return "M7 3 8.40625 3 8.40625 13.96875 7 13.96875 Z";
 			case MeterRanges.WARNING:
-				return "M10,1 C5,1 1,5 1,10 C1,15 5,19 10,19 C15,19 19,15 19,10 C19,5 15,1 10,1 Z M9.2,5 L10.7,5 L10.7,12 L9.2,12 L9.2,5 Z M10,16 C9.4,16 9,15.6 9,15 C9,14.4 9.4,14 10,14 C10.6,14 11,14.4 11,15 C11,15.6 10.6,16 10,16 Z";
+				return "M7.9375,11.125 C7.41973305,11.125 7,11.544733 7,12.0625 C7,12.580267 7.41973305,13 7.9375,13 C8.45526695,13 8.875,12.580267 8.875,12.0625 C8.875,11.544733 8.45526695,11.125 7.9375,11.125 M7.3125, 3 8.5625, 3 8.5625, 9.875 7.3125, 9.875, 7.3125, 3 Z";
 		}
 	}
 }
