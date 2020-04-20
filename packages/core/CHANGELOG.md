@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.12](https://github.com/IBM/carbon-charts/compare/v0.30.11...v0.30.12) (2020-04-17)
+
+
+### Bug Fixes
+
+* **core:** fix backwards compatibility for pie/donut ([#576](https://github.com/IBM/carbon-charts/issues/576)) ([aed1a4d](https://github.com/IBM/carbon-charts/commit/aed1a4dbb2d5ff8f85ac29b69b32c1035a326071))
+
+
+
+
+
+## [0.30.11](https://github.com/IBM/carbon-charts/compare/v0.30.10...v0.30.11) (2020-04-15)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
 ## [0.30.10](https://github.com/IBM/carbon-charts/compare/v0.30.9...v0.30.10) (2020-04-09)
 
 
