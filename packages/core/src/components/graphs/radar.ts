@@ -141,7 +141,7 @@ export class Radar extends Component {
 		///////////////
 
 		// y axes
-		const yAxes = DOMUtils.appendOrSelect(svg, "g.y-axis");
+		const yAxes = DOMUtils.appendOrSelect(svg, "g.y-axes");
 		const yAxesUpdate = yAxes.selectAll("path").data(yTicks);
 		yAxesUpdate
 			.enter()
@@ -159,7 +159,7 @@ export class Radar extends Component {
 
 		// x axes
 		const keysValues = uniqBy(data, "key");
-		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axis");
+		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axes");
 		const xAxesUpdate = xAxes.selectAll("line").data(keysValues);
 		xAxesUpdate
 			.enter()
