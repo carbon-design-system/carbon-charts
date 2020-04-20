@@ -182,7 +182,7 @@ export class Radar extends Component {
 			.append("g")
 			.attr("class", d => d.name)
 			.append("path")
-			.merge(svg.selectAll("g.paths path"))
+			.merge(svg.selectAll("g.blobs path"))
 			.attr("class", d => `blob-area-${d.name}`)
 			.attr("d", d => radialLineGenerator(d.data))
 			.attr("stroke", d => colorScale(d.name))
