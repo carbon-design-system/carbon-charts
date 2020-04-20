@@ -31,6 +31,10 @@
 
   <h3 class="marginTop-30">Code sample</h3>
 
+  <a href={demo.codesandbox.svelte} target="_blank">
+    <img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit on CodeSandbox" class="marginTop" />
+  </a>
+
   <div
     class="bx--snippet bx--snippet--multi bx--snippet--expand marginTop-30"
     data-code-snippet>
