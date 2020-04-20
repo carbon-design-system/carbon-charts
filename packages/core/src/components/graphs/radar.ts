@@ -171,6 +171,7 @@ export class Radar extends Component {
 			.attr("x2", key => getCoordinates(key, radius, cx, cy).x)
 			.attr("y2", key => getCoordinates(key, radius, cx, cy).y)
 			.attr("stroke", "#dcdcdc");
+		xAxesUpdate.exit().remove();
 
 		// blobs
 		const blobsContainer = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
