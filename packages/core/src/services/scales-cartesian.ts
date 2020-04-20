@@ -387,7 +387,7 @@ export class CartesianScales extends Service {
 		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
 		const scaleDomainPosition = this.getDomainAxisPosition();
 
-		const {thresholds} = axesOptions[scaleDomainPosition];
+		const { thresholds } = axesOptions[scaleDomainPosition];
 
 		if (!thresholds) { return null; }
 
@@ -405,12 +405,12 @@ export class CartesianScales extends Service {
 		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
 		const scaleRangePosition = this.getRangeAxisPosition();
 
-		const {thresholds} = axesOptions[scaleRangePosition];
+		const { thresholds } = axesOptions[scaleRangePosition];
 
 		if (!thresholds) { return null; }
 
 		const scaleRange = this.getRangeScale();
-		const	higherRangeThreshold = thresholds.sort((a, b) => b.value - a.value)[0];
+		const higherRangeThreshold = thresholds.sort((a, b) => b.value - a.value)[0];
 
 		return {
 			threshold: higherRangeThreshold,

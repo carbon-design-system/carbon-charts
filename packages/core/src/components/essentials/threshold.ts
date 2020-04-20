@@ -104,9 +104,9 @@ export class Threshold extends Component {
 		const formattedValue = valueFormatter ? valueFormatter(value) : this.getFormattedValue();
 
 		this.label = DOMUtils.appendOrSelect(holder, `div.${this.thresholdClass}--label.${this.thresholdIdentifierClass}`);
-		this.label.html(`${label}: ${formattedValue}`);
-		this.label.classed("hidden", true);
-		this.label.style("background-color", fillColor);
+		this.label.html(`${label}: ${formattedValue}`)
+			.classed("hidden", true)
+			.style("background-color", fillColor);
 	}
 
 	setThresholdLabelPosition() {
@@ -150,7 +150,7 @@ export class Threshold extends Component {
 		const self = this;
 
 		DOMUtils.appendOrSelect(this.threshold, "rect")
-			.on("mouseover", function() {
+			.on("mouseover mousemove", function() {
 					self.threshold.classed("active", true);
 					self.services.events.dispatchEvent(Events.Threshold.SHOW, {
 						hoveredElement: select(self.threshold)
