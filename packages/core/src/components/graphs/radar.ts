@@ -2,13 +2,7 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
-import { Tools } from "../../tools";
-import {
-	CalloutDirections,
-	Roles,
-	TooltipTypes,
-	Events
-} from "../../interfaces";
+import { Events } from "../../interfaces";
 
 // D3 Imports
 import { scaleBand, scaleLinear } from "d3-scale";
@@ -16,7 +10,6 @@ import { max } from "d3-array";
 import { lineRadial, curveLinearClosed } from "d3-shape";
 
 const DEBUG = false;
-const MIN_DEFAULT_TICK = 8;
 
 interface Datum {
 	group?: string;
@@ -51,12 +44,6 @@ export class Radar extends Component {
 		const options = this.model.getOptions();
 		const configuration = Configuration.options.radarChart.radar;
 
-		// console.log("  data:", data);
-		// console.log("  displayData:", displayData);
-		// console.log("  groupedData:", groupedData);
-		// console.log("  options:", options);
-		// console.log("  configuration:", configuration);
-
 		/////////////////////////////
 		// Computations
 		/////////////////////////////
@@ -66,8 +53,9 @@ export class Radar extends Component {
 		const cy = height / 2;
 
 		const fontSize = 10;
+		const margin = 2 * fontSize;
 		const size = Math.min(width, height);
-		const diameter = size - 2 * fontSize;
+		const diameter = size - margin;
 		const radius = diameter / 2;
 
 		// given a key, return the corrisponding angle in radiants
@@ -76,14 +64,12 @@ export class Radar extends Component {
 			.range([0, 2 * Math.PI]);
 
 		const ticksNumber = 5;
+		const minRange = 10;
 		const yScale = scaleLinear()
 			.domain([0, max(displayData.map(d => d.value))])
-			.range([0, radius])
-			.nice();
-		const completeYTicks = yScale.ticks(ticksNumber); // original d3 ticks
-		const stepTicks = completeYTicks[1] - completeYTicks[0];
-		const minRoundedTick = roundXToN(MIN_DEFAULT_TICK, stepTicks);
-		const yTicks = range(minRoundedTick, max(completeYTicks), stepTicks); // ticks starting from rounded MIN_DEFAULT_TICK and not from 0
+			.range([minRange, radius])
+			.nice(ticksNumber);
+		const yTicks = yScale.ticks(ticksNumber);
 
 		const colorScale = (key: string): string => this.model.getFillColor(key);
 
@@ -125,7 +111,7 @@ export class Radar extends Component {
 
 		// circumferences
 		const circumferences = DOMUtils.appendOrSelect(debugContainer, "g.circumferences");
-		const circumferencesUpdate = circumferences.selectAll("circle").data(completeYTicks);
+		const circumferencesUpdate = circumferences.selectAll("circle").data(yTicks);
 		circumferencesUpdate
 			.enter()
 			.append("circle")
@@ -166,10 +152,10 @@ export class Radar extends Component {
 			.append("line")
 			.merge(xAxesUpdate)
 			.attr("class", key => `x-axis-${key}`)
-			.attr("x1", key => getCoordinates(key, yScale(minRoundedTick), cx, cy).x)
-			.attr("y1", key => getCoordinates(key, yScale(minRoundedTick), cx, cy).y)
-			.attr("x2", key => getCoordinates(key, radius, cx, cy).x)
-			.attr("y2", key => getCoordinates(key, radius, cx, cy).y)
+			.attr("x1", key => getCoordinates(key, yScale.range()[0], cx, cy).x)
+			.attr("y1", key => getCoordinates(key, yScale.range()[0], cx, cy).y)
+			.attr("x2", key => getCoordinates(key, yScale.range()[1], cx, cy).x)
+			.attr("y2", key => getCoordinates(key, yScale.range()[1], cx, cy).y)
 			.attr("stroke", "#dcdcdc");
 		xAxesUpdate.exit().remove();
 
@@ -226,27 +212,4 @@ function uniqBy(dataset: any, attribute: string): any[] {
 	const allTheValuesByAttribute = dataset.map(d => d[attribute]);
 	const uniqValues = [...Array.from(new Set(allTheValuesByAttribute))];
 	return uniqValues;
-}
-
-function radToDeg(rad: number) {
-	return rad * (180 / Math.PI);
-}
-
-function degToRad(deg: number) {
-	return deg * (Math.PI / 180);
-}
-
-// Round x to the nearest multiple of n
-// Example:
-// 	x = 7, n = 5 -> 5
-// 	x = 8, n = 5 -> 10
-function roundXToN(x: number, n: number) {
-	const xRoundedToN = n * Math.round(x / n);
-	return xRoundedToN === 0 ? n : xRoundedToN;
-}
-
-// Returns an array of numbers between start and end (inclusive), equally spaced by step interval
-function range(start: number, end: number, step: number) {
-	const arrayLenght = (end - start) / step + 1;
-	return Array.from({ length: arrayLenght }, (_, i) => (i * step) + start);
 }
