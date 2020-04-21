@@ -69,7 +69,11 @@ export class Scatter extends Component {
 
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
-		const [getXValue, getYValue] = Tools.flipBasedOnOrientation(getDomainValue, getRangeValue, cartesianScales.getOrientation());
+		const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
+			getDomainValue,
+			getRangeValue,
+			cartesianScales.getOrientation()
+		);
 
 		selection.raise()
 			.classed("dot", true)
