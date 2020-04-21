@@ -12,7 +12,6 @@ import {
 	uniq as lodashUnique,
 	clamp as lodashClamp,
 	isEqual as lodashIsEqual,
-	flatten as lodashFlaten,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Cancelable,
 	DebounceSettings

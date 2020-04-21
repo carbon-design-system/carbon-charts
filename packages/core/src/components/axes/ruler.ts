@@ -57,18 +57,18 @@ export class Ruler extends Component {
 		 * Find matches, reduce is used instead of filter
 		 * to only get elements which belong to the same axis coordinate
 		 */
-		const scaledValuesMatches: number[] = scaledData.reduce((accum, currentValue) => {
+		const dataPointsMatchingRulerLine: number[] = scaledData.reduce((accum, currentValue) => {
 			// store the first element of the accumulator array to compare it with current element being processed
 			const sampleAccumValue = accum[0];
 
 			// if accumulator is not empty and current value is bigger than already existing value in the accumulator, skip current iteration
-			if (sampleAccumValue && currentValue > sampleAccumValue) {
+			if (sampleAccumValue !== undefined && currentValue > sampleAccumValue) {
 				return accum;
 			}
 
 			// there's a match and currentValue is either less then or equal to already stored values
 			if (pointIsWithinThreshold(currentValue, x)) {
-				if (sampleAccumValue && currentValue < sampleAccumValue) {
+				if (sampleAccumValue !== undefined && currentValue < sampleAccumValue) {
 					// there's a closer data point in the threshold area, so reinstantiate array
 					accum = [currentValue];
 				} else {
@@ -81,15 +81,16 @@ export class Ruler extends Component {
 		}, []);
 
 		// some data point match
-		if (scaledValuesMatches.length > 0) {
-			const sampleMatch = scaledValuesMatches[0];
+		if (dataPointsMatchingRulerLine.length > 0) {
+			const sampleMatch = dataPointsMatchingRulerLine[0];
 
 			const highlightItems = this.services.cartesianScales.getDataFromDomain(
 				domainScale.invert(sampleMatch)
 			).filter(d => d.value);
 
-			const hoveredElements = dataPoints.filter((d, i) =>
-				scaledValuesMatches.includes(
+			// get elements on which we should trigger mouse events  
+			const hoveredElements = dataPointElements.filter((d, i) =>
+				dataPointsMatchingRulerLine.includes(
 					Number(this.services.cartesianScales.getDomainValue(d))
 				)
 			);
@@ -126,16 +127,16 @@ export class Ruler extends Component {
 				.attr("x2", sampleMatch);
 		} else {
 			ruler.attr("opacity", 0);
-			dataPoints.dispatch("mouseout");
+			dataPointElements.dispatch("mouseout");
 		}
 	}
 
 	hideRuler() {
 		const svg = this.parent;
 		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler");
-		const dataPoints = svg.selectAll("[role=graphics-symbol]");
+		const dataPointElements = svg.selectAll("[role=graphics-symbol]");
 
-		dataPoints.dispatch("mouseout");
+		dataPointElements.dispatch("mouseout");
 		ruler.attr("opacity", 0);
 	}
 
