@@ -176,20 +176,18 @@ export class Radar extends Component {
 		// blobs
 		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
 		const blobUpdate = blobs.selectAll("g").data(groupedData, group => group.name);
-
 		blobUpdate
 			.enter()
 			.append("g")
-			.attr("class", d => d.name)
+			.attr("class", group => group.name)
 			.append("path")
 			.merge(svg.selectAll("g.blobs path"))
-			.attr("class", d => `blob-area-${d.name}`)
-			.attr("d", d => radialLineGenerator(d.data))
-			.attr("stroke", d => colorScale(d.name))
+			.attr("class", group => `blob-area-${group.name}`)
+			.attr("d", group => radialLineGenerator(group.data))
+			.attr("stroke", group => colorScale(group.name))
 			.attr("stroke-width", 1.5)
-			.attr("fill", d => colorScale(d.name))
+			.attr("fill", group => colorScale(group.name))
 			.style("fill-opacity", configuration.opacity.selected);
-
 		blobUpdate.exit().remove();
 	}
 
