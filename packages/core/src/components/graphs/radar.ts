@@ -52,7 +52,7 @@ export class Radar extends Component {
 		const cx = width / 2;
 		const cy = height / 2;
 
-		const fontSize = 10;
+		const fontSize = 30;
 		const margin = 2 * fontSize;
 		const size = Math.min(width, height);
 		const diameter = size - margin;
