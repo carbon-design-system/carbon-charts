@@ -128,11 +128,11 @@ export class Radar extends Component {
 
 		// y axes
 		const yAxes = DOMUtils.appendOrSelect(svg, "g.y-axes");
-		const yAxesUpdate = yAxes.selectAll("path").data(yTicks);
-		yAxesUpdate
+		const yAxisUpdate = yAxes.selectAll("path").data(yTicks, d => d);
+		yAxisUpdate
 			.enter()
 			.append("path")
-			.merge(yAxesUpdate)
+			.merge(yAxisUpdate)
 			.attr("transform", `translate(${cx}, ${cy})`)
 			.attr("d", tickValue => {
 				const xAxesKeys = xScale.domain();
@@ -142,24 +142,36 @@ export class Radar extends Component {
 			.transition(this.services.transitions.getTransition("y-axis-update-enter", animate))
 			.attr("fill", "none")
 			.attr("stroke", "#dcdcdc");
-		yAxesUpdate.exit().remove();
+		yAxisUpdate.exit().remove();
 
 		// x axes
 		const keysValues = uniqBy(displayData, "key");
 		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axes");
-		const xAxesUpdate = xAxes.selectAll("line").data(keysValues);
-		xAxesUpdate
+		const xAxisUpdate = xAxes.selectAll("g.x-axis").data(keysValues);
+		const xAxisEnter = xAxisUpdate
 			.enter()
+			.append("g")
+			.attr("class", "x-axis");
+		// add axes
+		xAxisEnter
 			.append("line")
-			.merge(xAxesUpdate)
-			.attr("class", key => `x-axis-${key}`)
+			.merge(xAxisUpdate.selectAll("line"))
 			.attr("x1", key => getCoordinates(key, yScale.range()[0], cx, cy).x)
 			.attr("y1", key => getCoordinates(key, yScale.range()[0], cx, cy).y)
 			.attr("x2", key => getCoordinates(key, yScale.range()[1], cx, cy).x)
 			.attr("y2", key => getCoordinates(key, yScale.range()[1], cx, cy).y)
 			.transition(this.services.transitions.getTransition("x-axis-update-enter", animate))
 			.attr("stroke", "#dcdcdc");
-		xAxesUpdate.exit().remove();
+		// add labels
+		xAxisEnter
+			.append("text")
+			.merge(xAxisUpdate.selectAll("text"))
+			.text(d => d)
+			.attr("stroke", "#dcdcdc")
+			.attr("x", key => getCoordinates(key, yScale.range()[1], cx, cy).x)
+			.attr("y", key => getCoordinates(key, yScale.range()[1], cx, cy).y)
+			.style("text-anchor", "middle");
+		xAxisUpdate.exit().remove();
 
 		// blobs
 		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
