@@ -60,11 +60,14 @@ export class Scatter extends Component {
 		const { handleThresholds } = this.configs;
 		if (!handleThresholds) { return false; }
 
+		// Get higher domain and range thresholds
 		const domainThreshold = this.services.cartesianScales.getDomainDominantThreshold();
 		const rangeThreshold = this.services.cartesianScales.getRangeDominantThreshold();
 		const xValue = this.services.cartesianScales.getDomainValue(d, i);
 		const yValue = this.services.cartesianScales.getRangeValue(d, i);
 
+		// To be an anomaly, the value has to be higher or equal than the threshold value
+		// (if are present, both range and domain threshold values)
 		if (rangeThreshold && domainThreshold) {
 			return yValue <= rangeThreshold.scaleValue && xValue >= domainThreshold.scaleValue;
 		}

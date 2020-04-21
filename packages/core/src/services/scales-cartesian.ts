@@ -383,7 +383,7 @@ export class CartesianScales extends Service {
 		return scale;
 	}
 
-	getDomainDominantThreshold(): null | {threshold: ThresholdOptions, scaleValue: string} {
+	getDomainDominantThreshold(): null | {threshold: ThresholdOptions, scaleValue: number} {
 		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
 		const scaleDomainPosition = this.getDomainAxisPosition();
 
@@ -392,8 +392,8 @@ export class CartesianScales extends Service {
 		if (!thresholds) { return null; }
 
 		const scaleDomain = this.getDomainScale();
-		// Find the highest threshold
-		const	higherDomainThreshold = thresholds.sort((a, b) => b.value - a.value)[0];
+		// Find the highest threshold for the domain
+		const higherDomainThreshold = thresholds.sort((a, b) => b.value - a.value)[0];
 
 		return {
 			threshold: higherDomainThreshold,
@@ -401,7 +401,7 @@ export class CartesianScales extends Service {
 		};
 	}
 
-	getRangeDominantThreshold(): null | {threshold: ThresholdOptions, scaleValue: string} {
+	getRangeDominantThreshold(): null | {threshold: ThresholdOptions, scaleValue: number} {
 		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
 		const scaleRangePosition = this.getRangeAxisPosition();
 
@@ -410,6 +410,7 @@ export class CartesianScales extends Service {
 		if (!thresholds) { return null; }
 
 		const scaleRange = this.getRangeScale();
+		// Find the highest threshold for the range
 		const higherRangeThreshold = thresholds.sort((a, b) => b.value - a.value)[0];
 
 		return {
