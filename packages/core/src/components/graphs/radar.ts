@@ -120,8 +120,8 @@ export class Radar extends Component {
 		const center = DOMUtils.appendOrSelect(debugContainer, "circle.center")
 			.attr("cx", cx)
 			.attr("cy", cy)
-			.attr("r", 3)
-			.attr("fill", "red");
+			.attr("r", 2)
+			.attr("fill", "gold");
 
 		// circumferences
 		const circumferences = DOMUtils.appendOrSelect(debugContainer, "g.circumferences");
