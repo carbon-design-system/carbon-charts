@@ -41,7 +41,7 @@ export class Ruler extends Component {
 		const svg = this.parent;
 		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler");
 		const line = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
-		const dataPoints: GenericSvgSelection = svg.selectAll(
+		const dataPointElements: GenericSvgSelection = svg.selectAll(
 			"[role=graphics-symbol]"
 		);
 		const displayData = this.model.getDisplayData();
