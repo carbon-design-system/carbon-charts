@@ -154,7 +154,7 @@ export class Ruler extends Component {
 			})
 			.on("mouseout", function() {
 				self.hideRuler();
-				self.services.events.dispatchEvent("hide-tooltip", {});
+				self.services.events.dispatchEvent("hide-tooltip");
 			});
 	}
 
