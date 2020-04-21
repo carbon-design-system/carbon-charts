@@ -144,7 +144,7 @@ export class Radar extends Component {
 		yAxesUpdate.exit().remove();
 
 		// x axes
-		const keysValues = uniqBy(data, "key");
+		const keysValues = uniqBy(displayData, "key");
 		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axes");
 		const xAxesUpdate = xAxes.selectAll("line").data(keysValues);
 		xAxesUpdate
