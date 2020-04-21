@@ -139,6 +139,7 @@ export class Radar extends Component {
 				const points = xAxesKeys.map(key => ({ key, value: tickValue }));
 				return radialLineGenerator(points);
 			})
+			.transition(this.services.transitions.getTransition("y-axis-update-enter", animate))
 			.attr("fill", "none")
 			.attr("stroke", "#dcdcdc");
 		yAxesUpdate.exit().remove();
@@ -156,6 +157,7 @@ export class Radar extends Component {
 			.attr("y1", key => getCoordinates(key, yScale.range()[0], cx, cy).y)
 			.attr("x2", key => getCoordinates(key, yScale.range()[1], cx, cy).x)
 			.attr("y2", key => getCoordinates(key, yScale.range()[1], cx, cy).y)
+			.transition(this.services.transitions.getTransition("x-axis-update-enter", animate))
 			.attr("stroke", "#dcdcdc");
 		xAxesUpdate.exit().remove();
 
@@ -170,6 +172,7 @@ export class Radar extends Component {
 			.merge(blobUpdate.selectAll("path"))
 			.attr("class", group => `blob-area-${group.name}`)
 			.attr("d", group => radialLineGenerator(group.data))
+			.transition(this.services.transitions.getTransition("blob-update-enter", animate))
 			.attr("stroke", group => colorScale(group.name))
 			.attr("stroke-width", 1.5)
 			.attr("fill", group => colorScale(group.name))
