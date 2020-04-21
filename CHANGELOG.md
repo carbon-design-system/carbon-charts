@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.14](https://github.com/IBM/carbon-charts/compare/v0.30.13...v0.30.14) (2020-04-21)
+
+
+### Bug Fixes
+
+* **core:** Support for Horizontal Line and Scatter Chart ([28b571f](https://github.com/IBM/carbon-charts/commit/28b571fa4565de5b81a5a178776eb701a88bfe91))
+
+
+
+
+
 ## [0.30.13](https://github.com/IBM/carbon-charts/compare/v0.30.12...v0.30.13) (2020-04-20)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
