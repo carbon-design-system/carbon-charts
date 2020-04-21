@@ -278,4 +278,8 @@ export namespace Tools {
 
 		return `M${x0},${y0}L${x0},${y1}L${x1},${y1}L${x1},${y0}L${x0},${y0}`;
 	};
+
+	export function flipDomainAndRangeBasedOnOrientation<D, R>(domain: D, range: R, orientation?: CartesianOrientations): [D, R] | [R, D] {
+		return orientation === CartesianOrientations.VERTICAL ? [domain, range] : [range, domain];
+	}
 }
