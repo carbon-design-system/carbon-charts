@@ -2,6 +2,7 @@
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
 import { Roles, Events } from "../../interfaces";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -20,14 +21,23 @@ export class Line extends Component {
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
+		const { cartesianScales, curves } = this.services;
+
+		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
+		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
+		const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
+			getDomainValue,
+			getRangeValue,
+			cartesianScales.getOrientation()
+		);
 
 		// D3 line generator function
 		const lineGenerator = line()
-			.x((d, i) => this.services.cartesianScales.getDomainValue(d, i))
-			.y((d, i) => this.services.cartesianScales.getRangeValue(d, i))
-			.curve(this.services.curves.getD3Curve())
+			.x(getXValue)
+			.y(getYValue)
+			.curve(curves.getD3Curve())
 			.defined((datum: any, i) => {
-				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+				const rangeIdentifier = cartesianScales.getRangeIdentifier();
 				const value = datum[rangeIdentifier];
 				if (value === null || value === undefined) {
 					return false;
