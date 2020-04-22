@@ -1,6 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { TooltipTypes, Roles, Events } from "../../interfaces";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { select, Selection, event as d3Event } from "d3-selection";
@@ -85,19 +86,28 @@ export class Scatter extends Component {
 		// Chart options mixed with the internal configurations
 		const options = this.model.getOptions();
 		const { filled } = options.points;
+		const { cartesianScales, transitions } = this.services;
 
 		const { groupMapsTo } = options.data;
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+		const domainIdentifier = cartesianScales.getDomainIdentifier();
+		const rangeIdentifier = cartesianScales.getRangeIdentifier();
+
+		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
+		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
+		const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
+			getDomainValue,
+			getRangeValue,
+			cartesianScales.getOrientation()
+		);
 
 		selection.raise()
 			.classed("dot", true)
 			.classed("threshold-anomaly", (d, i) => this.isThresholdsAnomaly(d, i))
 			.classed("filled", d => this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
 			.classed("unfilled", d => !this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
-			.attr("cx", (d, i) => this.services.cartesianScales.getDomainValue(d, i))
-			.transition(this.services.transitions.getTransition("scatter-update-enter", animate))
-			.attr("cy", (d, i) => this.services.cartesianScales.getRangeValue(d, i))
+			.attr("cx", getXValue)
+			.transition(transitions.getTransition("scatter-update-enter", animate))
+			.attr("cy", getYValue)
 			.attr("r", options.points.radius)
 			.attr("fill", d => {
 				if (this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled)) {
