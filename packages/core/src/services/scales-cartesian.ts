@@ -90,7 +90,7 @@ export class CartesianScales extends Service {
 		const axisOptions = Tools.getProperty(options, "axes");
 
 		// If right axis has been specified as `main`
-		if (Tools.getProperty(axisOptions, "axes", AxisPositions.RIGHT, "main") === true) {
+		if (Tools.getProperty(axisOptions, AxisPositions.RIGHT, "main") === true) {
 			return AxisPositions.RIGHT;
 		}
 
@@ -102,7 +102,7 @@ export class CartesianScales extends Service {
 		const axisOptions = Tools.getProperty(options, "axes");
 
 		// If top axis has been specified as `main`
-		if (Tools.getProperty(axisOptions, "axes", AxisPositions.TOP, "main") === true) {
+		if (Tools.getProperty(axisOptions, AxisPositions.TOP, "main") === true) {
 			return AxisPositions.TOP;
 		}
 

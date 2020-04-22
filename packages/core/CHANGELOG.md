@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.14](https://github.com/IBM/carbon-charts/compare/v0.30.13...v0.30.14) (2020-04-21)
+
+
+### Bug Fixes
+
+* **core:** Support for Horizontal Line and Scatter Chart ([28b571f](https://github.com/IBM/carbon-charts/commit/28b571fa4565de5b81a5a178776eb701a88bfe91))
+
+
+
+
+
+## [0.30.13](https://github.com/IBM/carbon-charts/compare/v0.30.12...v0.30.13) (2020-04-20)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.30.12](https://github.com/IBM/carbon-charts/compare/v0.30.11...v0.30.12) (2020-04-17)
+
+
+### Bug Fixes
+
+* **core:** fix backwards compatibility for pie/donut ([#576](https://github.com/IBM/carbon-charts/issues/576)) ([aed1a4d](https://github.com/IBM/carbon-charts/commit/aed1a4dbb2d5ff8f85ac29b69b32c1035a326071))
+
+
+
+
+
 ## [0.30.11](https://github.com/IBM/carbon-charts/compare/v0.30.10...v0.30.11) (2020-04-15)
 
 **Note:** Version bump only for package @carbon/charts
