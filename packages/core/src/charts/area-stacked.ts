@@ -5,7 +5,7 @@ import { ChartConfig, StackedAreaChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
-import { Grid, StackedArea, TwoDimensionalAxes } from "../components/index";
+import { Grid, StackedArea, TwoDimensionalAxes, Line } from "../components/index";
 
 export class StackedAreaChart extends AxisChart {
 	constructor(
@@ -32,7 +32,8 @@ export class StackedAreaChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
-			new StackedArea(this.model, this.services)
+			new StackedArea(this.model, this.services),
+			new Line(this.model, this.services, { stacked: true })
 		];
 
 		const components: any[] = this.getAxisChartComponents(

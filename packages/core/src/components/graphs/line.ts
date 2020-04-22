@@ -5,7 +5,6 @@ import { Roles, Events } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
-import { select } from "d3-selection";
 import { line } from "d3-shape";
 
 export class Line extends Component {
@@ -30,6 +29,7 @@ export class Line extends Component {
 			getRangeValue,
 			cartesianScales.getOrientation()
 		);
+		const options = this.model.getOptions();
 
 		// D3 line generator function
 		const lineGenerator = line()
@@ -46,10 +46,25 @@ export class Line extends Component {
 				return true;
 			});
 
-		const groupedData = this.model.getGroupedData();
+		let data = [];
+		if (this.configs.stacked) {
+			const stackedData = this.model.getStackedData({ percentage: options.percentage });
+
+			data = stackedData.map(d => ({
+				name: d[0].group,
+				data: d.map(datum => ({
+					date: datum.data.sharedStackKey,
+					group: datum.group,
+					value: datum[1]
+				}))
+			}));
+		} else {
+			data = this.model.getGroupedData();
+		}
+
 		// Update the bound data on lines
 		const lines = svg.selectAll("path.line")
-			.data(groupedData, group => group.name);
+			.data(data, group => group.name);
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -67,6 +82,7 @@ export class Line extends Component {
 
 		// Apply styles and datum
 		enteringLines.merge(lines)
+			.data(data, group => group.name)
 			.attr("stroke", (group, i) => {
 				return this.model.getStrokeColor(group.name)
 			})
@@ -74,16 +90,16 @@ export class Line extends Component {
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "line")
 			.attr("aria-label", group => {
-				const { data } = group;
+				const { data: groupData } = group;
 				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-				return data.map(datum => datum[rangeIdentifier]).join(",");
+				return groupData.map(datum => datum[rangeIdentifier]).join(",");
 			})
 			// Transition
 			.transition(this.services.transitions.getTransition("line-update-enter", animate))
 			.attr("opacity", 1)
 			.attr("d", group => {
-				const { data } = group;
-				return lineGenerator(data);
+				const { data: groupData } = group;
+				return lineGenerator(groupData);
 			});
 	}
 
