@@ -64,9 +64,9 @@ export class Threshold extends Component {
 		} else {
 			// Position the threshold on the x scale value
 			const x = scale(value) + (isScaleTypeLabels ? (scale.step() / 2) : 0);
-			this.threshold.attr("transform", `translate(${x}, 0)`);
+			this.threshold.attr("transform", `translate(${x}, ${yScaleStart})`);
 			// Set line end point on the y-axis
-			thresholdLine.attr("y2", yScaleEnd);
+			thresholdLine.attr("y2", yScaleEnd - yScaleStart);
 			// Set hoverable area width and rotate it
 			thresholdRect.attr("width", yScaleEnd - yScaleStart);
 			thresholdRect.classed("rotate", true);

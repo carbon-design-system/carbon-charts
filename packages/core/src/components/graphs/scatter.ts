@@ -57,28 +57,41 @@ export class Scatter extends Component {
 		this.addEventListeners();
 	}
 
-	isThresholdsAnomaly(d, i) {
+	isThresholdsAnomaly(datum: any, index: number) {
 		const { handleThresholds } = this.configs;
 		if (!handleThresholds) { return false; }
 
+		const { cartesianScales } = this.services;
+
 		// Get higher domain and range thresholds
-		const domainThreshold = this.services.cartesianScales.getDomainDominantThreshold();
-		const rangeThreshold = this.services.cartesianScales.getRangeDominantThreshold();
-		const xValue = this.services.cartesianScales.getDomainValue(d, i);
-		const yValue = this.services.cartesianScales.getRangeValue(d, i);
+		const [xThreshold, yThreshold] = Tools.flipDomainAndRangeBasedOnOrientation(
+			this.services.cartesianScales.getDomainDominantThreshold(),
+			this.services.cartesianScales.getRangeDominantThreshold(),
+			cartesianScales.getOrientation()
+		);
+
+		const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
+			(d, i) => cartesianScales.getDomainValue(d, i),
+			(d, i) => cartesianScales.getRangeValue(d, i),
+			cartesianScales.getOrientation()
+		);
+
+		// Get datum x and y values
+		const xValue = getXValue(datum, index);
+		const yValue = getYValue(datum, index);
 
 		// To be an anomaly, the value has to be higher or equal than the threshold value
 		// (if are present, both range and domain threshold values)
-		if (rangeThreshold && domainThreshold) {
-			return yValue <= rangeThreshold.scaleValue && xValue >= domainThreshold.scaleValue;
+		if (yThreshold && xThreshold) {
+			return yValue <= yThreshold.scaleValue && xValue >= xThreshold.scaleValue;
 		}
 
-		if (rangeThreshold) {
-			return yValue <= rangeThreshold.scaleValue;
+		if (yThreshold) {
+			return yValue <= yThreshold.scaleValue;
 		}
 
-		if (domainThreshold) {
-			return xValue >= domainThreshold.scaleValue;
+		if (xThreshold) {
+			return xValue >= xThreshold.scaleValue;
 		}
 	}
 
