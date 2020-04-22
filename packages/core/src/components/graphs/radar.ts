@@ -37,12 +37,20 @@ export class Radar extends Component {
 		if (!width || !height) {
 			return;
 		}
+		console.log("\n");
 
 		const data: Array<Datum> = this.model.getData();
 		const displayData: Array<Datum> = this.model.getDisplayData();
 		const groupedData = this.model.getGroupedData();
 		const options = this.model.getOptions();
 		const configuration = Configuration.options.radarChart.radar;
+
+		// console.log("animate:", animate);
+		// console.log("data:", data);
+		// console.log("displayData:", displayData);
+		// console.log("groupedData:", groupedData);
+		// console.log("options:", options);
+		// console.log("configuration:", configuration);
 
 		/////////////////////////////
 		// Computations
@@ -57,11 +65,13 @@ export class Radar extends Component {
 		const size = Math.min(width, height);
 		const diameter = size - margin;
 		const radius = diameter / 2;
+		// console.log("radius:", radius);
 
 		// given a key, return the corrisponding angle in radiants
 		const xScale = scaleBand()
 			.domain(displayData.map(d => d.key))
 			.range([0, 2 * Math.PI]);
+		// console.log(`xScale [${xScale.domain()}] -> [${xScale.range()}]`);
 
 		const ticksNumber = 5;
 		const minRange = 10;
@@ -70,6 +80,7 @@ export class Radar extends Component {
 			.range([minRange, radius])
 			.nice(ticksNumber);
 		const yTicks = yScale.ticks(ticksNumber);
+		// console.log(`yScale [${yScale.domain()}] -> [${yScale.range()}]`);
 
 		const colorScale = (key: string): string => this.model.getFillColor(key);
 
@@ -145,6 +156,7 @@ export class Radar extends Component {
 		yAxisUpdate.exit().remove();
 
 		// x axes
+		const labelPadding = 10;
 		const keysValues = uniqBy(displayData, "key");
 		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axes");
 		const xAxisUpdate = xAxes.selectAll("g.x-axis").data(keysValues);
@@ -167,10 +179,10 @@ export class Radar extends Component {
 			.append("text")
 			.merge(xAxisUpdate.selectAll("text"))
 			.text(d => d)
-			.attr("stroke", "#dcdcdc")
-			.attr("x", key => getCoordinates(key, yScale.range()[1], cx, cy).x)
-			.attr("y", key => getCoordinates(key, yScale.range()[1], cx, cy).y)
-			.style("text-anchor", "middle");
+			.attr("x", key => getCoordinates(key, yScale.range()[1] + labelPadding, cx, cy).x)
+			.attr("y", key => getCoordinates(key, yScale.range()[1] + labelPadding, cx, cy).y)
+			.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
+			.style("dominant-baseline", key => radialLabelPlacement(xScale(key)).dominantBaseline);
 		xAxisUpdate.exit().remove();
 
 		// blobs
@@ -227,4 +239,73 @@ function uniqBy(dataset: any, attribute: string): any[] {
 	const allTheValuesByAttribute = dataset.map(d => d[attribute]);
 	const uniqValues = [...Array.from(new Set(allTheValuesByAttribute))];
 	return uniqValues;
+}
+
+function radToDeg(rad: number) {
+	return rad * (180 / Math.PI);
+}
+
+function isInRange(x: number, minMax: number[]): boolean {
+	return x >= minMax[0] && x <= minMax[1];
+}
+
+function radialLabelPlacement(angleRadians: number) {
+	const angle = radToDeg(angleRadians) % 360; // rounded angle
+
+	let textAnchor: "start" | "middle" | "end" = "middle"; // *___   __*__   ___*
+	let dominantBaseline: "baseline" | "middle" | "hanging" = "middle"; // __*   --*--   --.
+
+	let quadrant = 0;
+
+	if (isInRange(angle, [0, 90])) {
+		quadrant = 0;
+	} else if (isInRange(angle, [90, 180])) {
+		quadrant = 1;
+	} else if (isInRange(angle, [180, 270])) {
+		quadrant = 2;
+	} else if (isInRange(angle, [270, 360])) {
+		quadrant = 3;
+	}
+
+	if (quadrant === 0) {
+		textAnchor = "start";
+		dominantBaseline = "baseline";
+	} else if (quadrant === 1) {
+		textAnchor = "start";
+		dominantBaseline = "hanging";
+	} else if (quadrant === 2) {
+		textAnchor = "end";
+		dominantBaseline = "hanging";
+	} else if (quadrant === 3) {
+		textAnchor = "end";
+		dominantBaseline = "baseline";
+	}
+
+	let edge = null;
+
+	if (isInRange(angle, [0, 10]) || isInRange(angle, [350, 0])) {
+		edge = 0;
+	} else if (isInRange(angle, [80, 100])) {
+		edge = 1;
+	} else if (isInRange(angle, [170, 190])) {
+		edge = 2;
+	} else if (isInRange(angle, [260, 280])) {
+		edge = 3;
+	}
+
+	if (edge === 0) {
+		textAnchor = "middle";
+		dominantBaseline = "baseline";
+	} else if (edge === 1) {
+		textAnchor = "start";
+		dominantBaseline = "middle";
+	} else if (edge === 2) {
+		textAnchor = "middle";
+		dominantBaseline = "hanging";
+	} else if (edge === 3) {
+		textAnchor = "end";
+		dominantBaseline = "middle";
+	}
+
+	return { textAnchor, dominantBaseline };
 }
