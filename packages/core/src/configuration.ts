@@ -279,6 +279,7 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, pieChart, {
 		arcWidth: 16,
 		distanceBetweenNumbers: 20,
 		center: {
+			caretSize: 16,
 			valueFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 58),
 			percFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 23),
 			deltaFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 23),

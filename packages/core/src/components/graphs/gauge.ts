@@ -180,17 +180,28 @@ export class Gauge extends Component {
 			.attr("y", options.gauge.center.valueYPosition(radius, arcSize))
 			.text("%");
 
-		const subText = DOMUtils.appendOrSelect(svg, "text.gauge-delta")
+		const gaugeDelta = DOMUtils.appendOrSelect(svg, "g.gauge-delta");
+
+		const deltaArrow = DOMUtils.appendOrSelect(gaugeDelta, "svg.gauge-delta-arrow")
+			.attr("x", () => `-${options.gauge.center.valueFontSize(radius, arcSize)}`)
+			.attr(
+				"y",
+				options.gauge.center.valueYPosition(radius, arcSize) + options.gauge.distanceBetweenNumbers + options.gauge.center.caretSize / 4
+			)
+			.attr("width", `${options.gauge.center.caretSize}px`)
+			.attr("height", `${options.gauge.center.caretSize}px`)
+			.attr("viewBox", `0 0 ${options.gauge.center.caretSize} ${options.gauge.center.caretSize}`);
+
+		DOMUtils.appendOrSelect(deltaArrow, "polygon.gauge-delta-arrow-polygon")
+			.attr("points", () => delta > 0 ? "4 10 8 6 12 10" : "12 6 8 10 4 6")
+			.attr("fill", "rgb(224,224,224)");
+
+		DOMUtils.appendOrSelect(gaugeDelta, "text.gauge-delta-number")
 			.attr("text-anchor", "middle")
 			.attr("alignment-baseline", "hanging")
 			.style("font-size", () => options.gauge.center.deltaFontSize(radius, arcSize))
 			.attr("y", options.gauge.center.valueYPosition(radius, arcSize) + options.gauge.distanceBetweenNumbers)
-			.text(() => {
-				const sign = Math.sign(delta)
-				const deltaPerc = (delta * 100).toFixed(2);
-				const arrow = sign === 0 ? "=" : sign === -1 ? "▼" : "▲";
-				return `${arrow}  ${deltaPerc}%`;
-			});
+			.text(() => `${(delta * 100).toFixed(2)}%`);
 
 
 		// Add event listeners
