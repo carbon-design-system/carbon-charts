@@ -98,3 +98,36 @@ export const lineTimeSeriesRotatedTicksOptions = {
 		}
 	}
 };
+
+export const lineHorizontalOptions = {
+	title: "Line Horizontal (discrete)",
+	axes: {
+		left: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "key",
+			scaleType: "labels"
+		},
+		bottom: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	}
+};
+
+export const lineTimeSeriesHorizontalOptions = {
+	title: "Line Horizontal (time series)",
+	axes: {
+		left: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time"
+		},
+		bottom: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	},
+	curve: "curveMonotoneY"
+};
