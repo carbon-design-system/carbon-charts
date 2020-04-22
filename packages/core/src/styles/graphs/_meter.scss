@@ -26,9 +26,9 @@
 		stroke-width: 2;
 		&.status--danger {
 			@if $carbon--theme == $carbon--theme--g90 {
-				stroke: rgba($carbon--red-30, 1);
+				stroke: $carbon--red-30;
 			} @else if $carbon--theme == $carbon--theme--g100 {
-				stroke: rgba($carbon--red-40, 1);
+				stroke: $carbon--red-40;
 			} @else {
 				display: none;
 			}
@@ -36,9 +36,9 @@
 
 		&.status--warning {
 			@if $carbon--theme == $carbon--theme--g90 {
-				stroke: rgba($carbon-dataviz-yellow-10, 1);
+				stroke: $carbon-dataviz-yellow-10;
 			} @else if $carbon--theme == $carbon--theme--g100 {
-				stroke: rgba($carbon-dataviz-yellow-10, 1);
+				stroke: $carbon-dataviz-yellow-10;
 			} @else {
 				display: none;
 			}
@@ -46,9 +46,9 @@
 
 		&.status--success {
 			@if $carbon--theme == $carbon--theme--g90 {
-				stroke: rgba($carbon--green-30, 1);
+				stroke: $carbon--green-30;
 			} @else if $carbon--theme == $carbon--theme--g100 {
-				stroke: rgba($carbon--green-40, 1);
+				stroke: $carbon--green-40;
 			} @else {
 				display: none;
 			}

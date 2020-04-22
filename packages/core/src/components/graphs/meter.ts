@@ -4,8 +4,8 @@ import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
 
 // D3 Imports
-import { select } from "d3-selection";
 import { scaleLinear } from "d3-scale";
+import { Roles } from "../../interfaces";
 
 export class Meter extends Component {
 	type = "meter";
@@ -45,7 +45,11 @@ export class Meter extends Component {
 			.classed(self.getStatusClass(), true)
 			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
 			.attr("width", d => xScale(d.value))
-			.attr("fill", d => self.model.getFillColor(d[groupMapsTo]));
+			.attr("fill", d => self.model.getFillColor(d[groupMapsTo]))
+			// a11y
+			.attr("role", Roles.GRAPHICS_SYMBOL)
+			.attr("aria-roledescription", "value")
+			.attr("aria-label", d => d.value);
 
 
 		// add the border indicating the value
@@ -84,7 +88,11 @@ export class Meter extends Component {
 			.attr("y2", options.meter.height)
 			.transition(this.services.transitions.getTransition("peak-line-update", animate))
 			.attr("x1", d => xScale(d))
-			.attr("x2", d => xScale(d));
+			.attr("x2", d => xScale(d))
+			// a11y
+			.attr("role", Roles.GRAPHICS_SYMBOL)
+			.attr("aria-roledescription", "peak")
+			.attr("aria-label", d => d);
 
 		peak.exit().remove();
 	}

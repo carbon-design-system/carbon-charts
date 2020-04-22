@@ -15,7 +15,7 @@
 			}
 
 			path.innerFill {
-				fill: rgba($carbon--black-100, 1);
+				fill: $carbon--black-100;
 			}
 		}
 
@@ -25,9 +25,9 @@
 
 		path.innerFill {
 			@if $carbon--theme == $carbon--theme--g90 or $carbon--theme == $carbon--theme--g100 {
-				fill: rgba($carbon--black-100, 1);
+				fill: $carbon--black-100;
 			} @else {
-				fill: rgba($carbon--white-0, 1);
+				fill: $carbon--white-0;
 			}
 		}
 	}
