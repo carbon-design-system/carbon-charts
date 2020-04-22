@@ -39,65 +39,6 @@ export class ChartModel {
 		this.services = services;
 	}
 
-	/**
-	 * Converts data provided in the older format to tabular
-	 * 
-	 */
-	protected transformToTabularData(data) {
-		console.warn("We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format")
-		const tabularData = [];
-		const { datasets, labels } = data;
-
-		// Loop through all datasets
-		datasets.forEach(dataset => {
-			// Update each data point to the new format
-			dataset.data.forEach((datum, i) => {
-				let group;
-
-				const datasetLabel = Tools.getProperty(dataset, "label");
-				if (datasetLabel === null) {
-					const correspondingLabel = Tools.getProperty(labels, i);
-					if (correspondingLabel) {
-						group = correspondingLabel;
-					} else {
-						group = "Ungrouped";
-					}
-				} else {
-					group = datasetLabel;
-				}
-
-				const updatedDatum = {
-					group,
-					key: labels[i]
-				};
-
-				if (isNaN(datum)) {
-					updatedDatum["value"] = datum.value;
-					updatedDatum["date"] = datum.date;
-				} else {
-					updatedDatum["value"] = datum;
-				}
-
-				tabularData.push(updatedDatum);
-			});
-		});
-
-		return tabularData;
-	}
-
-	protected getTabularData(data) {
-		// if data is not an array
-		if (!Array.isArray(data)) {
-			return this.transformToTabularData(data);
-		}
-
-		return data;
-	}
-
-	protected sanitize(data) {
-		return this.getTabularData(data);
-	}
-
 	getDisplayData() {
 		if (!this.get("data")) {
 			return null;
@@ -135,43 +76,6 @@ export class ChartModel {
 		});
 
 		return sanitizedData;
-	}
-
-	/*
-	 * Data groups
-	*/
-	protected updateAllDataGroups() {
-		// allDataGroups is used to generate a color scale that applies
-		// to all the groups. Now when the data updates, you might remove a group,
-		// and then bring it back in a newer data update, therefore
-		// the order of the groups in allDataGroups matters so that you'd never
-		// have an incorrect color assigned to a group.
-
-		// Also, a new group should only be added to allDataGroups if
-		// it doesn't currently exist
-
-		if (!this.allDataGroups) {
-			this.allDataGroups = this.getDataGroupNames();
-		} else {
-			// Loop through current data groups
-			this.getDataGroupNames().forEach(dataGroupName => {
-				// If group name hasn't been stored yet, store it
-				if (this.allDataGroups.indexOf(dataGroupName) === -1) {
-					this.allDataGroups.push(dataGroupName);
-				}
-			});
-		}
-	}
-
-	protected generateDataGroups(data) {
-		const { groupMapsTo } = this.getOptions().data;
-		const { ACTIVE } = Configuration.legend.items.status;
-
-		const uniqueDataGroups = map(data, datum => datum[groupMapsTo]).keys();
-		return uniqueDataGroups.map(groupName => ({
-			name: groupName,
-			status: ACTIVE
-		}));
 	}
 
 	getDataGroups() {
@@ -353,6 +257,142 @@ export class ChartModel {
 		});
 	}
 
+	/**
+	 * Should the data point be filled?
+	 * @param group
+	 * @param key
+	 * @param value
+	 * @param defaultFilled the default for this chart
+	 */
+	getIsFilled(group: any, key?: any, data?: any, defaultFilled?: boolean) {
+		const options = this.getOptions();
+		if (options.getIsFilled) {
+			return options.getIsFilled(group, key, data, defaultFilled);
+		} else {
+			return defaultFilled;
+		}
+	}
+
+	getFillColor(group: any, key?: any, data?: any) {
+		const options = this.getOptions();
+		const defaultFillColor = this.getFillScale()(group);
+		if (options.getFillColor) {
+			return options.getFillColor(group, key, data, defaultFillColor);
+		} else {
+			return defaultFillColor;
+		}
+	}
+
+	getStrokeColor(group: any, key?: any, data?: any) {
+		const options = this.getOptions();
+		const defaultStrokeColor = this.colorScale(group);
+		if (options.getStrokeColor) {
+			return options.getStrokeColor(group, key, data, defaultStrokeColor);
+		} else {
+			return defaultStrokeColor;
+		}
+	}
+
+	getFillScale() {
+		return this.colorScale;
+	}
+
+	/**
+	 * Converts data provided in the older format to tabular
+	 *
+	 */
+	protected transformToTabularData(data) {
+		console.warn("We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format")
+		const tabularData = [];
+		const { datasets, labels } = data;
+
+		// Loop through all datasets
+		datasets.forEach(dataset => {
+			// Update each data point to the new format
+			dataset.data.forEach((datum, i) => {
+				let group;
+
+				const datasetLabel = Tools.getProperty(dataset, "label");
+				if (datasetLabel === null) {
+					const correspondingLabel = Tools.getProperty(labels, i);
+					if (correspondingLabel) {
+						group = correspondingLabel;
+					} else {
+						group = "Ungrouped";
+					}
+				} else {
+					group = datasetLabel;
+				}
+
+				const updatedDatum = {
+					group,
+					key: labels[i]
+				};
+
+				if (isNaN(datum)) {
+					updatedDatum["value"] = datum.value;
+					updatedDatum["date"] = datum.date;
+				} else {
+					updatedDatum["value"] = datum;
+				}
+
+				tabularData.push(updatedDatum);
+			});
+		});
+
+		return tabularData;
+	}
+
+	protected getTabularData(data) {
+		// if data is not an array
+		if (!Array.isArray(data)) {
+			return this.transformToTabularData(data);
+		}
+
+		return data;
+	}
+
+	protected sanitize(data) {
+		return this.getTabularData(data);
+	}
+
+	/*
+	 * Data groups
+	*/
+	protected updateAllDataGroups() {
+		// allDataGroups is used to generate a color scale that applies
+		// to all the groups. Now when the data updates, you might remove a group,
+		// and then bring it back in a newer data update, therefore
+		// the order of the groups in allDataGroups matters so that you'd never
+		// have an incorrect color assigned to a group.
+
+		// Also, a new group should only be added to allDataGroups if
+		// it doesn't currently exist
+
+		if (!this.allDataGroups) {
+			this.allDataGroups = this.getDataGroupNames();
+		} else {
+			// Loop through current data groups
+			this.getDataGroupNames().forEach(dataGroupName => {
+				// If group name hasn't been stored yet, store it
+				if (this.allDataGroups.indexOf(dataGroupName) === -1) {
+					this.allDataGroups.push(dataGroupName);
+				}
+			});
+		}
+	}
+
+	protected generateDataGroups(data) {
+		const { groupMapsTo } = this.getOptions().data;
+		const { ACTIVE } = Configuration.legend.items.status;
+
+		const uniqueDataGroups = map(data, datum => datum[groupMapsTo]).keys();
+		return uniqueDataGroups.map(groupName => ({
+			name: groupName,
+			status: ACTIVE
+		}));
+	}
+
 	/*
 	 * Fill scales
 	*/
@@ -392,46 +432,6 @@ export class ChartModel {
 		});
 
 		this.colorScale = scaleOrdinal().range(colorRange)
-				.domain(this.allDataGroups);
-	}
-
-	/**
-	 * Should the data point be filled?
-	 * @param group
-	 * @param key
-	 * @param value
-	 * @param defaultFilled the default for this chart
-	 */
-	getIsFilled(group: any, key?: any, data?: any, defaultFilled?: boolean) {
-		const options = this.getOptions();
-		if (options.getIsFilled) {
-			return options.getIsFilled(group, key, data, defaultFilled);
-		} else {
-			return defaultFilled;
-		}
-	}
-
-	getFillColor(group: any, key?: any, data?: any) {
-		const options = this.getOptions();
-		const defaultFillColor = this.getFillScale()(group);
-		if (options.getFillColor) {
-			return options.getFillColor(group, key, data, defaultFillColor);
-		} else {
-			return defaultFillColor;
-		}
-	}
-
-	getStrokeColor(group: any, key?: any, data?: any) {
-		const options = this.getOptions();
-		const defaultStrokeColor = this.colorScale(group);
-		if (options.getStrokeColor) {
-			return options.getStrokeColor(group, key, data, defaultStrokeColor);
-		} else {
-			return defaultStrokeColor;
-		}
-	}
-
-	getFillScale() {
-		return this.colorScale;
+			.domain(this.allDataGroups);
 	}
 }
