@@ -31,69 +31,6 @@ export class GroupedBar extends Bar {
 		eventsFragment.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
 
-	protected getDataCorrespondingToLabel(label: string) {
-		const displayData = this.model.getDisplayData();
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-
-		return displayData.filter(datum => datum[domainIdentifier] === label);
-	}
-
-	protected getGroupWidth() {
-		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
-		const totalGroupPadding = this.getTotalGroupPadding();
-
-		return this.getBarWidth() * numOfActiveDataGroups + totalGroupPadding;
-	}
-
-
-	protected getTotalGroupPadding() {
-		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
-
-		if (numOfActiveDataGroups === 1) {
-			return 0;
-		}
-
-		const domainScale = this.services.cartesianScales.getDomainScale();
-		const padding = Math.min(
-			5,
-			5 * (domainScale.step() / 70)
-		);
-
-		return padding * (numOfActiveDataGroups - 1);
-	}
-
-	// Gets the correct width for bars based on options & configurations
-	protected getBarWidth() {
-		const options = this.model.getOptions();
-		const providedWidth = Tools.getProperty(options, "bars", "width");
-		const providedMaxWidth = Tools.getProperty(options, "bars", "maxWidth");
-
-		// If there's a provided width, compare with maxWidth and
-		// Determine which to return
-		if (providedWidth !== null) {
-			if (providedMaxWidth === null) {
-				return providedWidth;
-			} else if (providedWidth <= providedMaxWidth) {
-				return providedWidth;
-			}
-		}
-
-		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
-		const totalGroupPadding = this.getTotalGroupPadding();
-
-		const domainScale = this.services.cartesianScales.getDomainScale();
-		return Math.min(
-			providedMaxWidth,
-			(domainScale.step() - totalGroupPadding) / numOfActiveDataGroups
-		);
-	}
-
-	protected setGroupScale() {
-		this.groupScale = scaleBand()
-			.domain(this.model.getActiveDataGroupNames())
-			.rangeRound([0, this.getGroupWidth()]);
-	}
-
 	render(animate: boolean) {
 		// Chart options mixed with the internal configurations
 		const displayData = this.model.getDisplayData();
@@ -271,5 +208,68 @@ export class GroupedBar extends Bar {
 		const eventsFragment = this.services.events;
 		eventsFragment.removeEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
 		eventsFragment.removeEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
+	}
+
+	protected getDataCorrespondingToLabel(label: string) {
+		const displayData = this.model.getDisplayData();
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+
+		return displayData.filter(datum => datum[domainIdentifier] === label);
+	}
+
+	protected getGroupWidth() {
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
+		const totalGroupPadding = this.getTotalGroupPadding();
+
+		return this.getBarWidth() * numOfActiveDataGroups + totalGroupPadding;
+	}
+
+
+	protected getTotalGroupPadding() {
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
+
+		if (numOfActiveDataGroups === 1) {
+			return 0;
+		}
+
+		const domainScale = this.services.cartesianScales.getDomainScale();
+		const padding = Math.min(
+			5,
+			5 * (domainScale.step() / 70)
+		);
+
+		return padding * (numOfActiveDataGroups - 1);
+	}
+
+	// Gets the correct width for bars based on options & configurations
+	protected getBarWidth() {
+		const options = this.model.getOptions();
+		const providedWidth = Tools.getProperty(options, "bars", "width");
+		const providedMaxWidth = Tools.getProperty(options, "bars", "maxWidth");
+
+		// If there's a provided width, compare with maxWidth and
+		// Determine which to return
+		if (providedWidth !== null) {
+			if (providedMaxWidth === null) {
+				return providedWidth;
+			} else if (providedWidth <= providedMaxWidth) {
+				return providedWidth;
+			}
+		}
+
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames().length;
+		const totalGroupPadding = this.getTotalGroupPadding();
+
+		const domainScale = this.services.cartesianScales.getDomainScale();
+		return Math.min(
+			providedMaxWidth,
+			(domainScale.step() - totalGroupPadding) / numOfActiveDataGroups
+		);
+	}
+
+	protected setGroupScale() {
+		this.groupScale = scaleBand()
+			.domain(this.model.getActiveDataGroupNames())
+			.rangeRound([0, this.getGroupWidth()]);
 	}
 }

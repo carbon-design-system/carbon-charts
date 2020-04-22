@@ -85,57 +85,6 @@ export class CartesianScales extends Service {
 		});
 	}
 
-	protected findMainVerticalAxisPosition() {
-		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, "axes");
-
-		// If right axis has been specified as `main`
-		if (Tools.getProperty(axisOptions, AxisPositions.RIGHT, "main") === true) {
-			return AxisPositions.RIGHT;
-		}
-
-		return AxisPositions.LEFT;
-	}
-
-	protected findMainHorizontalAxisPosition() {
-		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, "axes");
-
-		// If top axis has been specified as `main`
-		if (Tools.getProperty(axisOptions, AxisPositions.TOP, "main") === true) {
-			return AxisPositions.TOP;
-		}
-
-		return AxisPositions.BOTTOM;
-	}
-
-	protected findDomainAndRangeAxesPositions(mainVerticalAxisPosition: AxisPositions, mainHorizontalAxisPosition: AxisPositions) {
-		const options = this.model.getOptions();
-
-		const mainVerticalAxisOptions = Tools.getProperty(options, "axes", mainVerticalAxisPosition);
-		const mainHorizontalAxisOptions = Tools.getProperty(options, "axes", mainHorizontalAxisPosition);
-
-		const mainVerticalScaleType = mainVerticalAxisOptions.scaleType || ScaleTypes.LINEAR;
-		const mainHorizontalScaleType = mainHorizontalAxisOptions.scaleType || ScaleTypes.LINEAR;
-
-		const result = {
-			domainAxisPosition: null,
-			rangeAxisPosition: null
-		};
-		if (mainHorizontalScaleType === ScaleTypes.LABELS || mainHorizontalScaleType === ScaleTypes.TIME) {
-			result.domainAxisPosition = mainHorizontalAxisPosition;
-			result.rangeAxisPosition = mainVerticalAxisPosition;
-		} else if (mainVerticalScaleType === ScaleTypes.LABELS || mainVerticalScaleType === ScaleTypes.TIME) {
-			result.domainAxisPosition = mainVerticalAxisPosition;
-			result.rangeAxisPosition = mainHorizontalAxisPosition;
-		} else {
-			result.domainAxisPosition = mainHorizontalAxisPosition;
-			result.rangeAxisPosition = mainVerticalAxisPosition;
-		}
-
-		return result;
-	}
-
 	findDomainAndRangeAxes() {
 		// find main axes between (left & right) && (bottom & top)
 		const mainVerticalAxisPosition = this.findMainVerticalAxisPosition();
@@ -262,6 +211,57 @@ export class CartesianScales extends Service {
 		return displayData.filter(datum => {
 			return datum[domainIdentifier] === domainValue;
 		});
+	}
+
+	protected findMainVerticalAxisPosition() {
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes");
+
+		// If right axis has been specified as `main`
+		if (Tools.getProperty(axisOptions, AxisPositions.RIGHT, "main") === true) {
+			return AxisPositions.RIGHT;
+		}
+
+		return AxisPositions.LEFT;
+	}
+
+	protected findMainHorizontalAxisPosition() {
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes");
+
+		// If top axis has been specified as `main`
+		if (Tools.getProperty(axisOptions, AxisPositions.TOP, "main") === true) {
+			return AxisPositions.TOP;
+		}
+
+		return AxisPositions.BOTTOM;
+	}
+
+	protected findDomainAndRangeAxesPositions(mainVerticalAxisPosition: AxisPositions, mainHorizontalAxisPosition: AxisPositions) {
+		const options = this.model.getOptions();
+
+		const mainVerticalAxisOptions = Tools.getProperty(options, "axes", mainVerticalAxisPosition);
+		const mainHorizontalAxisOptions = Tools.getProperty(options, "axes", mainHorizontalAxisPosition);
+
+		const mainVerticalScaleType = mainVerticalAxisOptions.scaleType || ScaleTypes.LINEAR;
+		const mainHorizontalScaleType = mainHorizontalAxisOptions.scaleType || ScaleTypes.LINEAR;
+
+		const result = {
+			domainAxisPosition: null,
+			rangeAxisPosition: null
+		};
+		if (mainHorizontalScaleType === ScaleTypes.LABELS || mainHorizontalScaleType === ScaleTypes.TIME) {
+			result.domainAxisPosition = mainHorizontalAxisPosition;
+			result.rangeAxisPosition = mainVerticalAxisPosition;
+		} else if (mainVerticalScaleType === ScaleTypes.LABELS || mainVerticalScaleType === ScaleTypes.TIME) {
+			result.domainAxisPosition = mainVerticalAxisPosition;
+			result.rangeAxisPosition = mainHorizontalAxisPosition;
+		} else {
+			result.domainAxisPosition = mainHorizontalAxisPosition;
+			result.rangeAxisPosition = mainVerticalAxisPosition;
+		}
+
+		return result;
 	}
 
 	protected getScaleDomain(axisPosition: AxisPositions) {
