@@ -15,6 +15,7 @@ export class Meter extends Component {
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
 		const dataset = this.model.getDisplayData();
+		const status = this.model.getStatus();
 		const width = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true }).width;
 		const { groupMapsTo } = options.data;
 
@@ -42,7 +43,7 @@ export class Meter extends Component {
 			.attr("x", 0 )
 			.attr("y", 0 )
 			.attr("height", options.meter.height)
-			.classed(self.getStatusClass(), true)
+			.classed(`status--${status}`, status != null)
 			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
 			.attr("width", d => xScale(d.value))
 			.attr("fill", d => self.model.getFillColor(d[groupMapsTo]))
@@ -50,22 +51,6 @@ export class Meter extends Component {
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "value")
 			.attr("aria-label", d => d.value);
-
-
-		// add the border indicating the value
-		const border = svg.selectAll("line.border")
-			.data([dataset]);
-
-		border.enter()
-			.append("line")
-			.classed("border", true)
-			.merge(border)
-			.classed(self.getStatusClass(), true)
-			.attr("y1", 0)
-			.attr("y2", options.meter.height)
-			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
-			.attr("x1", d => xScale(d.value))
-			.attr("x2", d => xScale(d.value));
 
 		// draw the peak
 		const peakValue = Tools.getProperty(options, "meter", "peak");
@@ -95,17 +80,5 @@ export class Meter extends Component {
 			.attr("aria-label", d => d);
 
 		peak.exit().remove();
-	}
-
-	/**
-	 * returns the class string for the status or null if there is not an associated status
-	 */
-	protected getStatusClass() {
-		const status = this.model.getStatus();
-		if (!status) {
-			return null;
-		} else {
-			return `status--${status}`;
-		}
 	}
 }

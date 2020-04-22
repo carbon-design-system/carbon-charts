@@ -42,15 +42,15 @@ export class MeterChartModel extends ChartModel {
 	 */
 	getFillColor(group: string) {
 		const options = this.getOptions();
-		const { fillColor, status } = Tools.getProperty(options, "meter");
+		const { fillColor } = Tools.getProperty(options, "meter");
+		const status = this.getStatus();
 		// if ranges are supplied for status, we dont need a fill color - use carbon colors with scss
-		if (status.ranges) {
+		if (status) {
 			return null;
 		} else {
 			if (!fillColor) {
 				// default to carbon color
-				const colors = colorPalettes.DEFAULT;
-				return colors[0];
+				return colorPalettes.DEFAULT[0];
 			}
 			return fillColor;
 		}
@@ -61,12 +61,17 @@ export class MeterChartModel extends ChartModel {
 	 */
 	getStatus() {
 		const options = this.getOptions();
-		const statuses = Tools.getProperty(options, "meter", "status", "ranges");
-		const data = this.getDisplayData().value;
-		if (statuses) {
-			const result = statuses.filter(step => (step.range[0] <= data && data <= step.range[1]));
-			return result[0].status;
+		const dataValue = this.getDisplayData().value;
+
+		// user needs to supply ranges
+		const allRanges = Tools.getProperty(options, "meter", "status", "ranges");
+		if (allRanges) {
+			const result = allRanges.filter(step => (step.range[0] <= dataValue && dataValue <= step.range[1]));
+			if (result.length > 0) {
+				return result[0].status;
+			}
 		}
+
 		return null;
 	}
 }

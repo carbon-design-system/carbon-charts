@@ -46,7 +46,7 @@ export class MeterTitle extends Title {
 	 * Appends the corresponding status based on the value and the peak.
 	 */
 	displayStatus() {
-		const value = this.model.getDisplayData().value;
+		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
 
@@ -55,39 +55,37 @@ export class MeterTitle extends Title {
 		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
 		const containerWidth = containerBounds.width ? containerBounds.width : this.parent.node().getAttribute("width");
 
-		// size of the status indicator
-		const circleSize = Tools.getProperty(options, "meter", "status", "indicatorSize");
+		// get the status from the model
 		const status = this.model.getStatus();
+		const radius = Tools.getProperty(options, "meter", "status", "indicatorSize") / 2;
 
-		// create a group for the icon
+		// create a group for the icon/inner path
 		const statusGroup = DOMUtils.appendOrSelect(svg, `g.status-indicator`)
-			.classed(`status--${status}`, true)
-			.attr("width", circleSize)
-			.attr("transform", `translate(${containerWidth - circleSize},  1)`);
+			.classed(`status--${status}`, status != null)
+			.attr("transform", `translate(${containerWidth - radius}, 0)`);
 
-		const self = this;
+		const data = status ? [status] : [];
 		const icon = statusGroup.selectAll("circle.status")
-			.data(status);
+			.data(data);
 
 		icon
 			.enter()
 			.append("circle")
 			.merge(icon)
 			.attr("class", "status")
-			.attr("r", circleSize / 2)
-			.attr("cx", circleSize / 2)
-			.attr("cy", circleSize / 2);
+			.attr("r", radius)
+			.attr("cx", 0)
+			.attr("cy", `calc(1em / 2)`);
 
-		const innerFillData = status ? [status] : [];
 		const innerIcon = statusGroup.selectAll("path.innerFill")
-			.data(innerFillData);
+			.data(data);
 
 		innerIcon.enter()
 			.append("path")
 			.merge(innerIcon)
 			.attr("d", self.getStatusIcon(status))
 			.attr("transform", () => status === MeterRanges.DANGER ? "translate(7.703125, 8.484375) rotate(-45.000000) translate(-7.703125, -8.484375)" : null)
-			.attr("class", `innerFill`);
+			.attr("class", "innerFill");
 
 		innerIcon.exit().remove();
 		icon.exit().remove();
