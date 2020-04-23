@@ -298,9 +298,9 @@ export class CartesianScales extends Service {
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
 		if (axisOptions.scaleType === ScaleTypes.TIME) {
 			const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
-			return extendsTimeDomain(domain, spaceToAddToEdges);
+			return addSpacingToTimeDomain(domain, spaceToAddToEdges);
 		} else {
-			return extendsContinuousDomain(domain, Configuration.axis.paddingRatio);
+			return addSpacingToContinuousDomain(domain, Configuration.axis.paddingRatio);
 		}
 	}
 
@@ -331,7 +331,7 @@ export class CartesianScales extends Service {
 	}
 }
 
-function extendsTimeDomain(domain: any, spaceToAddToEdges: number) {
+function addSpacingToTimeDomain(domain: any, spaceToAddToEdges: number) {
 	const startDate = new Date(domain[0]);
 	const endDate = new Date(domain[1]);
 
@@ -370,7 +370,7 @@ function extendsTimeDomain(domain: any, spaceToAddToEdges: number) {
 	return [startDate, endDate];
 }
 
-function extendsContinuousDomain([lower, upper]: number[], paddingRatio: number) {
+function addSpacingToContinuousDomain([lower, upper]: number[], paddingRatio: number) {
 	const domainLength = upper - lower;
 	const padding = domainLength * paddingRatio;
 
