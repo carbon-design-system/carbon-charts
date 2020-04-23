@@ -323,6 +323,11 @@ let allDemoGroups = [
 				data: timeSeriesAxisDemos.lineTimeSeriesDataSingleDatum,
 				options: timeSeriesAxisDemos.lineTimeSeriesSingleDatumOptions,
 				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainData,
+				options: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainOptions,
+				chartType: chartTypes.LineChart
 			}
 		]
 	}
