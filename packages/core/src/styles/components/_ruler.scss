@@ -1,11 +1,11 @@
 .#{$prefix}--#{$charts-prefix}--ruler {
 	line.ruler-line {
 		@if $ui-background == map-get($carbon--theme--g90, 'ui-background') {
-			stroke: #fff;
+			stroke: $carbon--white-0;
 		} @else if $ui-background == map-get($carbon--theme--g100, 'ui-background') {
-			stroke: #fff;
+			stroke: $carbon--white-0;
 		} @else {
-			stroke: #000;
+			stroke: $carbon--black-100;
 		}
 
 		stroke-width: 1px;
@@ -14,7 +14,7 @@
 	}
 
 	text.axis-tooltip-text {
-		fill: white;
+		fill: $carbon--white-0;
 		dominant-baseline: middle;
 		text-anchor: middle;
 	}
