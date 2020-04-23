@@ -110,8 +110,6 @@ export const lineTimeSeriesDenseData = [
 	{ group: "Dataset 2", date: new Date(2019, 0, 6), value: 52000 },
 	{ group: "Dataset 2", date: new Date(2019, 0, 7), value: 52000 },
 	{ group: "Dataset 2", date: new Date(2019, 0, 7, 15), value: 52000 },
-	{ group: "Dataset 2", date: new Date(2019, 0, 7), value: 52000 },
-	{ group: "Dataset 2", date: new Date(2019, 0, 7, 15), value: 52000 },
 	{ group: "Dataset 2", date: new Date(2019, 0, 9), value: 60000 },
 	{ group: "Dataset 2", date: new Date(2019, 0, 9, 5), value: 62000 },
 	{ group: "Dataset 2", date: new Date(2019, 0, 9, 10), value: 62000 },
