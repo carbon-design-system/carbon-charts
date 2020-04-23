@@ -107,6 +107,7 @@ export interface ScatterChartOptions extends AxisChartOptions {
 		 */
 		radius: number;
 		fillOpacity?: number;
+		filled?: boolean;
 	};
 }
 
