@@ -201,6 +201,17 @@ export class CartesianScales extends Service {
 		});
 	}
 
+	extendsDomain(axisPosition: AxisPositions, domain: any) {
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		if (axisOptions.scaleType === ScaleTypes.TIME) {
+			const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
+			return addSpacingToTimeDomain(domain, spaceToAddToEdges);
+		} else {
+			return addSpacingToContinuousDomain(domain, Configuration.axis.paddingRatio);
+		}
+	}
+
 	protected findMainVerticalAxisPosition() {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes");
@@ -291,17 +302,6 @@ export class CartesianScales extends Service {
 		domain = this.extendsDomain(axisPosition, domain);
 
 		return domain;
-	}
-
-	extendsDomain(axisPosition: AxisPositions, domain: any) {
-		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
-		if (axisOptions.scaleType === ScaleTypes.TIME) {
-			const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
-			return addSpacingToTimeDomain(domain, spaceToAddToEdges);
-		} else {
-			return addSpacingToContinuousDomain(domain, Configuration.axis.paddingRatio);
-		}
 	}
 
 	protected createScale(axisPosition: AxisPositions) {
