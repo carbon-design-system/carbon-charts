@@ -139,21 +139,23 @@ export class Radar extends Component {
 
 		// y axes
 		const yAxes = DOMUtils.appendOrSelect(svg, "g.y-axes");
-		const yAxisUpdate = yAxes.selectAll("path").data(yTicks, d => d);
+		const yAxisUpdate = yAxes.selectAll("path").data(yTicks, (yTickValue, i) => i);
 		yAxisUpdate
 			.enter()
 			.append("path")
 			.merge(yAxisUpdate)
 			.attr("transform", `translate(${cx}, ${cy})`)
+			.attr("opacity", 0)
+			.transition(this.services.transitions.getTransition("y-axis-update-enter", animate))
 			.attr("d", tickValue => {
 				const xAxesKeys = xScale.domain();
 				const points = xAxesKeys.map(key => ({ key, value: tickValue }));
 				return radialLineGenerator(points);
 			})
-			.transition(this.services.transitions.getTransition("y-axis-update-enter", animate))
 			.attr("fill", "none")
+			.attr("opacity", 1)
 			.attr("stroke", "#dcdcdc");
-		yAxisUpdate.exit().remove();
+		yAxisUpdate.exit().attr("opacity", 0).remove();
 
 		// x axes
 		const labelPadding = 10;
