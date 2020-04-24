@@ -18,7 +18,9 @@ import {
 	BarTooltipOptions,
 	LegendOptions,
 	LegendPositions,
-	StackedBarOptions
+	StackedBarOptions,
+	HistogramChartOptions,
+	AggregationTypes
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
 
@@ -194,6 +196,16 @@ const stackedBarChart: StackedBarChartOptions = Tools.merge({}, baseBarChart, {
 } as BarChartOptions);
 
 /**
+ * options specific to stacked bar charts
+ */
+const histogramChart: HistogramChartOptions = Tools.merge({}, baseBarChart, {
+	timeScale: Tools.merge(timeScale, {
+		addSpaceOnEdges: 1
+	} as TimeScaleOptions),
+	tooltip: barChartTooltip
+} as BarChartOptions);
+
+/**
  * options specific to line charts
  */
 const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
@@ -284,7 +296,8 @@ export const options = {
 	lineChart,
 	scatterChart,
 	pieChart,
-	donutChart
+	donutChart,
+	histogramChart
 };
 
 /**
@@ -334,3 +347,5 @@ export const spacers = {
 
 export const tickSpaceRatioVertical = 2.5;
 export const tickSpaceRatioHorizontal = 3.5;
+
+export const defaultBins = 10;

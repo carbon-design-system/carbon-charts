@@ -78,6 +78,14 @@ export class ChartModel {
 		return sanitizedData;
 	}
 
+	setHistogramBins(bins) {
+		this.set({ bins });
+	}
+
+	getHistogramBins() {
+		return this.get("bins");
+	}
+
 	getDataGroups() {
 		return this.get("dataGroups");
 	}

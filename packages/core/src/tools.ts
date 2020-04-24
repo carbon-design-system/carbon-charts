@@ -12,6 +12,7 @@ import {
 	uniq as lodashUnique,
 	clamp as lodashClamp,
 	isEqual as lodashIsEqual,
+	groupBy as lodashGroupBy,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Cancelable,
 	DebounceSettings
@@ -26,6 +27,7 @@ export namespace Tools {
 	export const removeArrayDuplicates = lodashUnique;
 	export const clamp = lodashClamp;
 	export const isEqual = lodashIsEqual;
+	export const groupBy = lodashGroupBy;
 
 	/**
 	 * Returns default chart options merged with provided options,

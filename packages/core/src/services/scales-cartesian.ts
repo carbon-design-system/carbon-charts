@@ -289,7 +289,10 @@ export class CartesianScales extends Service {
 		// If the scale is stacked
 		if (axisOptions.stacked) {
 			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys();
-			allDataValues = dataValuesGroupedByKeys.map(dataValues => sum(values(dataValues) as any));
+			allDataValues = dataValuesGroupedByKeys.map(dataValues => {
+				const {sharedStackKey, ...numericalValues} = dataValues;
+				return sum(values(numericalValues) as number[]);
+			});
 		} else {
 			allDataValues = displayData.map(datum => datum[mapsTo]);
 		}

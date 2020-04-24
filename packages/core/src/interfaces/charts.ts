@@ -1,4 +1,4 @@
-import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
+import { LegendOptions, TooltipOptions, GridOptions, AxesOptions, AggregationTypes } from "./index";
 import { AxisTooltipOptions, BarTooltipOptions, BarOptions, StackedBarOptions } from "./components";
 
 /**
@@ -92,6 +92,13 @@ export interface BarChartOptions extends AxisChartOptions {
  */
 export interface StackedBarChartOptions extends BarChartOptions {
 	bars?: StackedBarOptions;
+}
+
+/**
+ * options specific to histogram charts
+ */
+export interface HistogramChartOptions extends AxisChartOptions {
+	tooltip?: BarTooltipOptions;
 }
 
 /**

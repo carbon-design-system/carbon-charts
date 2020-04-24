@@ -43,6 +43,15 @@ export enum ScaleTypes {
 }
 
 /**
+ * enum of all possible data aggregation types
+ */
+export enum AggregationTypes {
+	COUNT = "count",
+	AVG = "avg",
+	SUM = "sum"
+}
+
+/**
  * enum of supported tooltip position relative to
  */
 export enum TooltipPosition {

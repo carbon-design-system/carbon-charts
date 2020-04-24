@@ -5,6 +5,7 @@ import * as lineDemos from "./line";
 import * as pieDemos from "./pie";
 import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
+import * as histogramDemos from "./histogram";
 import * as timeSeriesAxisDemos from "./time-series-axis";
 
 export * from "./bar";
@@ -14,6 +15,7 @@ export * from "./line";
 export * from "./pie";
 export * from "./scatter";
 export * from "./step";
+export * from "./histogram";
 
 import {
 	createChartSandbox,
@@ -55,6 +57,11 @@ export const chartTypes = {
 		vanilla: "ScatterChart",
 		angular: "ibm-scatter-chart",
 		vue: "ccv-scatter-chart"
+	},
+	HistogramChart: {
+		vanilla: "HistogramChart",
+		angular: "ibm-histogram-chart",
+		vue: "ccv-histogram-chart"
 	},
 	PieChart: {
 		vanilla: "PieChart",
@@ -176,6 +183,53 @@ let allDemoGroups = [
 				chartType: chartTypes.DonutChart,
 				isDemoExample: true
 			}
+		]
+	},
+	{
+		title: "Histogram",
+		demos: [
+			{
+				options: histogramDemos.histogramContinueOptions,
+				data: histogramDemos.histogramContinueData,
+				chartType: chartTypes.HistogramChart,
+				isDemoExample: true
+			},
+			{
+				options: histogramDemos.histogramTimeSeriesOptions,
+				data: histogramDemos.histogramTimeSeriesData,
+				chartType: chartTypes.HistogramChart,
+				isDemoExample: true
+			},
+			{
+				options: histogramDemos.histogramTimeSeriesSumOptions,
+				data: histogramDemos.histogramTimeSeriesData,
+				chartType: chartTypes.HistogramChart,
+				isDemoExample: true
+			},
+			{
+				options: histogramDemos.histogramTimeSeriesAvgOptions,
+				data: histogramDemos.histogramTimeSeriesData,
+				chartType: chartTypes.HistogramChart,
+				isDemoExample: true
+			},
+			{
+				options: histogramDemos.histogramContinueWithBinsNumberOptions,
+				data: histogramDemos.histogramContinueWithBinsNumberData,
+				chartType: chartTypes.HistogramChart,
+				isDemoExample: true
+			},
+			{
+				options: histogramDemos.histogramContinueWithBinsOptions,
+				data: histogramDemos.histogramContinueData,
+				chartType: chartTypes.HistogramChart,
+				isDemoExample: true
+			},
+			{
+				options: histogramDemos.histogramTimeSeriesWithBinsOptions,
+				data: histogramDemos.histogramTimeSeriesData,
+				chartType: chartTypes.HistogramChart,
+				isDemoExample: true
+			},
 		]
 	},
 	{
