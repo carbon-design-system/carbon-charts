@@ -6,6 +6,7 @@ import { Tools } from "../../tools";
 
 // D3 Imports
 import { mouse, Selection } from "d3-selection";
+import { scaleLinear } from "d3-scale";
 
 type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
 
@@ -16,23 +17,27 @@ function pointIsWithinThreshold(dx: number, x: number) {
 	return dx > x - THRESHOLD && dx < x + THRESHOLD;
 }
 
+/**
+ * a compatibility function that accepts ordinal scales too
+ * as those do not support .invert() by default,
+ * so a scale clone is created to invert domain with range
+ */
+function invertedScale(scale) {
+	if (scale.invert) {
+		return scale.invert;
+	}
+
+	return scaleLinear()
+		.domain(scale.range())
+		.range(scale.domain());
+}
+
 export class Ruler extends Component {
 	type = "ruler";
 	backdrop: GenericSvgSelection;
 	hoveredElements: GenericSvgSelection;
 
 	render() {
-		const domainAxisPosition = this.services.cartesianScales.getDomainAxisPosition();
-		const domainScaleType = this.services.cartesianScales.getScaleTypeByPosition(
-			domainAxisPosition
-		);
-		const isTimeSeries = domainScaleType === ScaleTypes.TIME;
-
-		// if scale type is not timeSeries do not show rule
-		if (!isTimeSeries) {
-			return;
-		}
-
 		this.drawBackdrop();
 		this.addBackdropEventListeners();
 	}
@@ -85,10 +90,10 @@ export class Ruler extends Component {
 			const sampleMatch = dataPointsMatchingRulerLine[0];
 
 			const highlightItems = this.services.cartesianScales.getDataFromDomain(
-				domainScale.invert(sampleMatch)
+				invertedScale(domainScale)(sampleMatch)
 			).filter(d => d.value);
 
-			// get elements on which we should trigger mouse events  
+			// get elements on which we should trigger mouse events
 			const hoveredElements = dataPointElements.filter((d, i) =>
 				dataPointsMatchingRulerLine.includes(
 					Number(this.services.cartesianScales.getDomainValue(d))
