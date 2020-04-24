@@ -91,7 +91,7 @@ export class Radar extends Component {
 
 		// given the key (= value corrisponding to a an x axis), a radius r and translation values
 		// return the coordinates of the corrisponding point stayng on the x axis with radius r
-		const getCoordinates = (key: string, r: number, tx = 0, ty = 0) => {
+		const polarCoords = (key: string, r: number, tx = 0, ty = 0) => {
 			const angle = xScale(key) - Math.PI / 2;
 			// translate by tx and ty
 			const x = r * Math.cos(angle) + tx;
@@ -139,7 +139,7 @@ export class Radar extends Component {
 
 		// y axes
 		const yAxes = DOMUtils.appendOrSelect(svg, "g.y-axes");
-		const yAxisUpdate = yAxes.selectAll("path").data(yTicks, (yTickValue, i) => i);
+		const yAxisUpdate = yAxes.selectAll("path").data(yTicks);
 		yAxisUpdate
 			.enter()
 			.append("path")
@@ -155,37 +155,44 @@ export class Radar extends Component {
 			.attr("fill", "none")
 			.attr("opacity", 1)
 			.attr("stroke", "#dcdcdc");
-		yAxisUpdate.exit().attr("opacity", 0).remove();
+		yAxisUpdate
+			.exit()
+			.attr("opacity", 0)
+			.remove();
 
 		// x axes
 		const labelPadding = 10;
-		const keysValues = uniqBy(displayData, "key");
+		const keys = uniqBy(displayData, "key");
 		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axes");
-		const xAxisUpdate = xAxes.selectAll("g.x-axis").data(keysValues);
-		const xAxisEnter = xAxisUpdate
-			.enter()
-			.append("g")
-			.attr("class", "x-axis");
-		// add axes
-		xAxisEnter
-			.append("line")
-			.merge(xAxisUpdate.selectAll("line"))
-			.attr("x1", key => getCoordinates(key, yScale.range()[0], cx, cy).x)
-			.attr("y1", key => getCoordinates(key, yScale.range()[0], cx, cy).y)
-			.attr("x2", key => getCoordinates(key, yScale.range()[1], cx, cy).x)
-			.attr("y2", key => getCoordinates(key, yScale.range()[1], cx, cy).y)
-			.transition(this.services.transitions.getTransition("x-axis-update-enter", animate))
-			.attr("stroke", "#dcdcdc");
-		// add labels
-		xAxisEnter
-			.append("text")
-			.merge(xAxisUpdate.selectAll("text"))
+		const xAxisUpdate = xAxes.selectAll("g.x-axis").data(keys);
+		xAxisUpdate.join(
+			enter => enter.append("g")
+				.attr("class", "x-axis")
+				.call(selection => selection
+					.append("line")
+				)
+				.call(selection => selection
+					.append("text")
+				),
+			update => update,
+			exit => exit.remove()
+		)
+		.call(selection => selection
+			.select("line")
+			.attr("stroke", "#dcdcdc")
+			.attr("x1", key => polarCoords(key, yScale.range()[0], cx, cy).x)
+			.attr("y1", key => polarCoords(key, yScale.range()[0], cx, cy).y)
+			.attr("x2", key => polarCoords(key, yScale.range()[1], cx, cy).x)
+			.attr("y2", key => polarCoords(key, yScale.range()[1], cx, cy).y)
+		)
+		.call(selection => selection
+			.select("text")
 			.text(d => d)
-			.attr("x", key => getCoordinates(key, yScale.range()[1] + labelPadding, cx, cy).x)
-			.attr("y", key => getCoordinates(key, yScale.range()[1] + labelPadding, cx, cy).y)
+			.attr("x", key => polarCoords(key, yScale.range()[1] + labelPadding, cx, cy).x)
+			.attr("y", key => polarCoords(key, yScale.range()[1] + labelPadding, cx, cy).y)
 			.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
-			.style("dominant-baseline", key => radialLabelPlacement(xScale(key)).dominantBaseline);
-		xAxisUpdate.exit().remove();
+			.style("dominant-baseline", key => radialLabelPlacement(xScale(key)).dominantBaseline)
+		);
 
 		// blobs
 		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
