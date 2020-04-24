@@ -328,7 +328,22 @@ let allDemoGroups = [
 				data: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainData,
 				options: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainOptions,
 				chartType: chartTypes.LineChart
-			}
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataTwoIdenticalLabels,
+				options: timeSeriesAxisDemos.lineTimeSeriesTwoIdenticalLabelsOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataTwoIdenticalLabels2,
+				options: timeSeriesAxisDemos.lineTimeSeriesTwoIdenticalLabels2Options,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataAllLabelsInPrimaryFormat,
+				options: timeSeriesAxisDemos.lineTimeSeriesAllLabelsInPrimaryFormatOptions,
+				chartType: chartTypes.LineChart
+			},
 		]
 	}
 ] as any;
