@@ -139,13 +139,14 @@ export class Pie extends Component {
 			})
 			// Calculate dimensions in order to transform
 			.datum(function(d) {
-				const textLength = this.getComputedTextLength();
-				d.textOffsetX = textLength / 2;
-				d.textOffsetY = Math.ceil(select(this).node().getBBox().height / 2);
-
 				const marginedRadius = radius + 7;
 
 				const theta = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+				const deg = theta / Math.PI * 180;
+
+				const textLength = this.getComputedTextLength();
+				d.textOffsetX = textLength / 2;
+				d.textOffsetY = (deg > 90 && deg < 270) ? 10 : 0;
 
 				d.xPosition = (d.textOffsetX + marginedRadius) * Math.sin(theta);
 				d.yPosition = (d.textOffsetY + marginedRadius) * -Math.cos(theta);

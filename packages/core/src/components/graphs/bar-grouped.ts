@@ -31,82 +31,6 @@ export class GroupedBar extends Bar {
 		eventsFragment.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
 
-	protected getAllDataLabels() {
-		const { groups } = this.configs;
-		const displayData = this.model.getDisplayData(groups);
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-
-		return map(displayData, datum => datum[domainIdentifier]).keys();
-	}
-
-	protected getDataCorrespondingToLabel(label: string) {
-		const { groups } = this.configs;
-		const displayData = this.model.getDisplayData(groups);
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-
-		return displayData.filter(datum => datum[domainIdentifier] === label);
-	}
-
-	protected getGroupWidth() {
-		const { groups } = this.configs;
-		const numOfActiveDataGroups = this.model.getActiveDataGroupNames(groups).length;
-		const totalGroupPadding = this.getTotalGroupPadding();
-
-		return this.getBarWidth() * numOfActiveDataGroups + totalGroupPadding;
-	}
-
-
-	protected getTotalGroupPadding() {
-		const { groups } = this.configs;
-		const numOfActiveDataGroups = this.model.getActiveDataGroupNames(groups).length;
-
-		if (numOfActiveDataGroups === 1) {
-			return 0;
-		}
-
-		const domainScale = this.services.cartesianScales.getDomainScale();
-		const padding = Math.min(
-			5,
-			5 * (domainScale.step() / 70)
-		);
-
-		return padding * (numOfActiveDataGroups - 1);
-	}
-
-	// Gets the correct width for bars based on options & configurations
-	protected getBarWidth() {
-		const options = this.model.getOptions();
-		const providedWidth = Tools.getProperty(options, "bars", "width");
-		const providedMaxWidth = Tools.getProperty(options, "bars", "maxWidth");
-
-		// If there's a provided width, compare with maxWidth and
-		// Determine which to return
-		if (providedWidth !== null) {
-			if (providedMaxWidth === null) {
-				return providedWidth;
-			} else if (providedWidth <= providedMaxWidth) {
-				return providedWidth;
-			}
-		}
-
-		const { groups } = this.configs;
-		const numOfActiveDataGroups = this.model.getActiveDataGroupNames(groups).length;
-		const totalGroupPadding = this.getTotalGroupPadding();
-
-		const domainScale = this.services.cartesianScales.getDomainScale();
-		return Math.min(
-			providedMaxWidth,
-			(domainScale.step() - totalGroupPadding) / numOfActiveDataGroups
-		);
-	}
-
-	protected setGroupScale() {
-		const { groups } = this.configs;
-		this.groupScale = scaleBand()
-			.domain(this.model.getActiveDataGroupNames(groups))
-			.rangeRound([0, this.getGroupWidth()]);
-	}
-
 	render(animate: boolean) {
 		const { groups } = this.configs;
 		// Chart options mixed with the internal configurations
@@ -286,4 +210,73 @@ export class GroupedBar extends Bar {
 		eventsFragment.removeEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
 		eventsFragment.removeEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
+
+	protected getDataCorrespondingToLabel(label: string) {
+		const { groups } = this.configs;
+		const displayData = this.model.getDisplayData(groups);
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+
+		return displayData.filter(datum => datum[domainIdentifier] === label);
+	}
+
+	protected getGroupWidth() {
+		const { groups } = this.configs;
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames(groups).length;
+		const totalGroupPadding = this.getTotalGroupPadding();
+
+		return this.getBarWidth() * numOfActiveDataGroups + totalGroupPadding;
+	}
+
+
+	protected getTotalGroupPadding() {
+		const { groups } = this.configs;
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames(groups).length;
+
+		if (numOfActiveDataGroups === 1) {
+			return 0;
+		}
+
+		const domainScale = this.services.cartesianScales.getDomainScale();
+		const padding = Math.min(
+			5,
+			5 * (domainScale.step() / 70)
+		);
+
+		return padding * (numOfActiveDataGroups - 1);
+	}
+
+	// Gets the correct width for bars based on options & configurations
+	protected getBarWidth() {
+		const options = this.model.getOptions();
+		const providedWidth = Tools.getProperty(options, "bars", "width");
+		const providedMaxWidth = Tools.getProperty(options, "bars", "maxWidth");
+
+		// If there's a provided width, compare with maxWidth and
+		// Determine which to return
+		if (providedWidth !== null) {
+			if (providedMaxWidth === null) {
+				return providedWidth;
+			} else if (providedWidth <= providedMaxWidth) {
+				return providedWidth;
+			}
+		}
+
+		const { groups } = this.configs;
+		const numOfActiveDataGroups = this.model.getActiveDataGroupNames(groups).length;
+		const totalGroupPadding = this.getTotalGroupPadding();
+
+		const domainScale = this.services.cartesianScales.getDomainScale();
+		return Math.min(
+			providedMaxWidth,
+			(domainScale.step() - totalGroupPadding) / numOfActiveDataGroups
+		);
+	}
+
+	protected setGroupScale() {
+		const { groups } = this.configs;
+		this.groupScale = scaleBand()
+			.domain(this.model.getActiveDataGroupNames(groups))
+			.rangeRound([0, this.getGroupWidth()]);
+	}
+
 }

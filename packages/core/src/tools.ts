@@ -54,7 +54,7 @@ export namespace Tools {
 				const providedAxisOptions = providedOptions.axes[axisName];
 
 				if (providedAxisOptions["primary"] || providedAxisOptions["secondary"]) {
-					console.warn("`primary` & `secondary` are no longer needed for axis configurations. Read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format")
+					console.warn("`primary` & `secondary` are no longer needed for axis configurations. Read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format");
 				}
 
 				const identifier = providedAxisOptions["mapsTo"];
@@ -99,9 +99,10 @@ export namespace Tools {
 	}
 
 	/**
-	 * Returns an elements's x and y translations from attribute transform
+	 * Gets elements's x and y translations from transform attribute or returns null
+	 *
 	 * @param {HTMLElement} element
-	 * @returns an object containing the x and y translations or null
+	 * @returns an object containing the translated x and y values or null
 	 */
 	export function getTranslationValues(elementRef: HTMLElement) {
 		// regex to ONLY get values for translate (instead of all rotate, translate, skew, etc)
@@ -125,7 +126,7 @@ export namespace Tools {
 	 *************************************/
 
 	/**
-	 * Gets x and y coordinates from a HTML transform attribute
+	 * Gets x and y coordinates from HTML transform attribute
 	 *
 	 * @export
 	 * @param {any} string the transform attribute string ie. transform(x,y)
@@ -143,11 +144,28 @@ export namespace Tools {
 	}
 
 	/**
+	 * Returns string value for height/width using pixels if there isn't a specified unit of measure
+	 *
+	 * @param value string or number value to be checked for unit of measure
+	 */
+	export function formatWidthHeightValues(value) {
+		const stringValue = value.toString();
+
+		// If the value provided contains any letters
+		// Return it the same way
+		if (stringValue.match(/[a-z]/i)) {
+			return stringValue;
+		}
+
+		return stringValue + "px";
+	}
+
+	/**
 	 * Capitalizes first letter of a string
 	 *
 	 * @export
-	 * @param {any} string the string whose first letter you'd like to capitalize
-	 * @returns The input string with its first letter capitalized
+	 * @param {any} string the input string to perform first letter capitalization with
+	 * @returns The transformed string after first letter is capitalized
 	 */
 	export function capitalizeFirstLetter(string) {
 		return string[0].toUpperCase() + string.slice(1);
@@ -155,11 +173,10 @@ export namespace Tools {
 
 	/**
 	 * Get the percentage of a datapoint compared to the entire dataset.
-	 * Returns 1 significant digit.
 	 * @export
 	 * @param {any} item
 	 * @param {any} fullData
-	 * @returns The percentage in the form of a number
+	 * @returns The percentage in the form of a number (1 significant digit if necessary)
 	 */
 	export function convertValueToPercentage(item, fullData) {
 		const percentage = item / fullData.reduce((accum, val) => accum + val.value, 0) * 100;
@@ -170,13 +187,15 @@ export namespace Tools {
 	/**************************************
 	 *  Object/array related checks       *
 	 *************************************/
+
 	/**
-	 * Get the difference between two arrays' items
+	 * Compares two arrays to return the difference between two arrays' items.
 	 *
 	 * @export
-	 * @param {any[]} oldArray
-	 * @param {any[]} newArray
-	 * @returns The items missing in newArray from oldArray, and items added to newArray compared to oldArray
+	 * @param {any[]} oldArray the array to check for missing items
+	 * @param {any[]} newArray the array to check for newly added items
+	 * @returns An object containing items missing (existing in oldArray but not newArray)
+	 * and items added (existing in newArray but not in oldArray). Object is of the form { missing: [], added: [] }
 	 */
 	export function arrayDifferences(oldArray: any[], newArray: any[]) {
 		const difference = {
@@ -200,7 +219,7 @@ export namespace Tools {
 	}
 
 	/**
-	 * Lists out the duplicated keys in an array of data
+	 * Gets the duplicated keys from an array of data
 	 *
 	 * @export
 	 * @param {*} data - array of data
@@ -224,11 +243,12 @@ export namespace Tools {
 	// ================================================================================
 	// D3 Extensions
 	// ================================================================================
+
 	/**
 	 * In D3, moves an element to the front of the canvas
 	 *
 	 * @export
-	 * @param {any} element
+	 * @param {any} element input element to moved in front
 	 * @returns The function to be used by D3 to push element to the top of the canvas
 	 */
 	export function moveToFront(element) {
@@ -241,6 +261,13 @@ export namespace Tools {
 	// Style Helpers
 	// ================================================================================
 
+	/**
+	 * Gets a speicified property from within an object.
+	 *
+	 * @param object the object containing the property to retrieve
+	 * @param propPath nested properties used to extract the final property from within the object
+	 * (i.e "style", "color" would retrieve the color property from within an object that has "color" nested within "style")
+	 */
 	export const getProperty = (object, ...propPath) => {
 		let position = object;
 		if (position) {
