@@ -7,6 +7,7 @@ import { Tools } from "../../tools";
 import { flatMapDeep } from "lodash-es";
 
 // D3 Imports
+import { select } from "d3-selection";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { max } from "d3-array";
 import { lineRadial, curveLinearClosed } from "d3-shape";
@@ -250,6 +251,9 @@ export class Radar extends Component {
 			.attr("fill", group => colorScale(group.name))
 			.style("fill-opacity", configuration.opacity.selected)
 		);
+
+		// Add event listeners
+		this.addEventListeners();
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
@@ -280,6 +284,53 @@ export class Radar extends Component {
 		const eventsFragment = this.services.events;
 		eventsFragment.removeEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
 		eventsFragment.removeEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
+	}
+
+	addEventListeners() {
+		const self = this;
+		this.parent.selectAll(".blobs .blob > path")
+			.on("mouseover", function (datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Radar.BLOB_MOUSEOVER, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mousemove", function (datum) {
+				const hoveredElement = select(this);
+
+				// Changhe style
+				hoveredElement.classed("hovered", true)
+					.transition(self.services.transitions.getTransition("blob_path_mouseover"))
+					.style("fill-opacity", 0.8);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Radar.BLOB_MOUSEMOVE, {
+					element: hoveredElement,
+					datum
+				});
+			})
+			.on("click", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Radar.BLOB_CLICK, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mouseout", function(datum) {
+				const hoveredElement = select(this);
+
+				// Change style
+				hoveredElement.classed("hovered", false)
+					.transition(self.services.transitions.getTransition("blob_path_mouseout"))
+					.style("fill-opacity", 0.5);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Radar.BLOB_MOUSEMOVE, {
+					element: hoveredElement,
+					datum
+				});
+			});
 	}
 }
 
