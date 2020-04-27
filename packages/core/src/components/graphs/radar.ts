@@ -39,7 +39,7 @@ export class Radar extends Component {
 		if (!width || !height) {
 			return;
 		}
-		console.log("\n");
+		// console.log("\n");
 
 		const displayData: Array<Datum> = this.model.getDisplayData();
 		const groupedData = this.model.getGroupedData();
@@ -174,32 +174,58 @@ export class Radar extends Component {
 				.call(selection => selection
 					.append("line")
 					.attr("stroke", "#dcdcdc")
-					.attr("opacity", 0)
-					.call(e => e
-						.transition(this.services.transitions.getTransition("x-axis-update-enter", animate))
-						.attr("opacity", 1)
-					)
+					.attr("x1", key => polarCoords(key, 0, cx, cy).x)
+					.attr("y1", key => polarCoords(key, 0, cx, cy).y)
+					.attr("x2", key => polarCoords(key, 1, cx, cy).x)
+					.attr("y2", key => polarCoords(key, 1, cx, cy).y)
+					.transition().duration(500)
+					// .transition(this.services.transitions.getTransition("x-axis-line-enter", animate))
+					.attr("x1", key => polarCoords(key, yScale.range()[0], cx, cy).x)
+					.attr("y1", key => polarCoords(key, yScale.range()[0], cx, cy).y)
+					.attr("x2", key => polarCoords(key, yScale.range()[1], cx, cy).x)
+					.attr("y2", key => polarCoords(key, yScale.range()[1], cx, cy).y)
 				)
 				.call(selection => selection
 					.append("text")
+					.text(d => d)
+					.attr("x", key => polarCoords(key, yScale.range()[1] + labelPadding, cx, cy).x)
+					.attr("y", key => polarCoords(key, yScale.range()[1] + labelPadding, cx, cy).y)
+					.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
+					.style("dominant-baseline", key => radialLabelPlacement(xScale(key)).dominantBaseline)
+					.attr("opacity", 0)
+					.transition().duration(500)
+					// .transition(this.services.transitions.getTransition("x-axis-text-enter", animate))
+					.attr("opacity", 1)
 				),
-			update => update,
+
+			update => update
+				.call(selection => selection
+					.select("line")
+					.attr("x1", key => polarCoords(key, 0, cx, cy).x)
+					.attr("y1", key => polarCoords(key, 0, cx, cy).y)
+					.attr("x2", key => polarCoords(key, 1, cx, cy).x)
+					.attr("y2", key => polarCoords(key, 1, cx, cy).y)
+					.transition().duration(500)
+					// .transition(this.services.transitions.getTransition("x-axis-line-update", animate))
+					.attr("x1", key => polarCoords(key, yScale.range()[0], cx, cy).x)
+					.attr("y1", key => polarCoords(key, yScale.range()[0], cx, cy).y)
+					.attr("x2", key => polarCoords(key, yScale.range()[1], cx, cy).x)
+					.attr("y2", key => polarCoords(key, yScale.range()[1], cx, cy).y)
+				)
+				.call(selection => selection
+					.select("text")
+					.text(d => d)
+					.attr("x", key => polarCoords(key, yScale.range()[1] + labelPadding, cx, cy).x)
+					.attr("y", key => polarCoords(key, yScale.range()[1] + labelPadding, cx, cy).y)
+					.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
+					.style("dominant-baseline", key => radialLabelPlacement(xScale(key)).dominantBaseline)
+					.attr("opacity", 0)
+					.transition().duration(500)
+					// .transition(this.services.transitions.getTransition("x-axis-text-update", animate))
+					.attr("opacity", 1)
+				),
+
 			exit => exit.remove()
-		)
-		.call(selection => selection
-			.select("line")
-			.attr("x1", key => polarCoords(key, yScale.range()[0], cx, cy).x)
-			.attr("y1", key => polarCoords(key, yScale.range()[0], cx, cy).y)
-			.attr("x2", key => polarCoords(key, yScale.range()[1], cx, cy).x)
-			.attr("y2", key => polarCoords(key, yScale.range()[1], cx, cy).y)
-		)
-		.call(selection => selection
-			.select("text")
-			.text(d => d)
-			.attr("x", key => polarCoords(key, yScale.range()[1] + labelPadding, cx, cy).x)
-			.attr("y", key => polarCoords(key, yScale.range()[1] + labelPadding, cx, cy).y)
-			.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
-			.style("dominant-baseline", key => radialLabelPlacement(xScale(key)).dominantBaseline)
 		);
 
 		// blobs
