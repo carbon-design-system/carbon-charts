@@ -10,7 +10,7 @@ import { Tools } from "../tools";
 // Components
 import {
 	Grid,
-	Line,
+	Ruler,
 	Bubble,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
@@ -42,6 +42,7 @@ export class BubbleChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
+			new Ruler(this.model, this.services),
 			new Bubble(this.model, this.services)
 		];
 
