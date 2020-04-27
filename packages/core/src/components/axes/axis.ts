@@ -133,7 +133,7 @@ export class Axis extends Component {
 
 				// Remove labels on the edges
 				// If there are more than 2 labels to show
-				if (tickValues.length > 2) {
+				if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges") && tickValues.length > 2) {
 					tickValues.splice(tickValues.length - 1, 1);
 					tickValues.splice(0, 1);
 				}
