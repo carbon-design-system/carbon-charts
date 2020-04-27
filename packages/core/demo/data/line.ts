@@ -77,6 +77,67 @@ export const lineTimeSeriesOptions = {
 	curve: "curveMonotoneX"
 };
 
+export const lineTimeSeriesDenseData = [
+	{ group: "Dataset 1", date: new Date(2019, 0, 1), value: 10000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 1, 5), value: 12000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 1, 10), value: 14000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 2), value: 25000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 2, 2), value: 26000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 3), value: 10000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 3, 5), value: 10000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 3, 10), value: 12000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 5), value: 45000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 7), value: 49000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 7, 15), value: 45000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 9), value: 50000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 9, 5), value: 52000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 9, 15), value: 55000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 10), value: 50000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 12), value: 65000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 13), value: 80000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 14, 10), value: 85000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 15, 7), value: 90000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 15, 18), value: 70000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 1), value: 20000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 1, 3), value: 22000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 1, 16), value: 24000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 2), value: 35000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 2, 7), value: 36000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 3), value: 20000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 3, 6), value: 20000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 3, 18), value: 22000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 5), value: 62000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 6), value: 52000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 7), value: 52000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 7, 15), value: 52000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 9), value: 60000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 9, 5), value: 62000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 9, 10), value: 62000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 12), value: 65000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 14), value: 40000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 15, 5), value: 45000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 15, 10), value: 35000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 15, 18), value: 30000 }
+];
+
+
+export const lineTimeSeriesDenseOptions = {
+	title: "Line (dense time series)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time"
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	},
+	curve: "curveMonotoneX"
+};
+
 export const lineTimeSeriesDataRotatedTicks = [
 	{ group: "Dataset 1", date: new Date(2019, 11, 30), value: 32100 },
 	{ group: "Dataset 1", date: new Date(2019, 11, 31), value: 23500 },
