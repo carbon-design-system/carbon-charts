@@ -26,4 +26,5 @@ export * from "./layout/layout";
 export * from "./axes/two-dimensional-axes";
 export * from "./axes/axis";
 export * from "./axes/grid";
+export * from "./axes/ruler";
 export * from "./axes/zero-line";

@@ -1,6 +1,7 @@
 // Internal Imports
 import { Scatter } from "./scatter";
 import { DOMUtils } from "../../services";
+import { Roles } from "../../interfaces";
 
 // D3 Imports
 import { Selection } from "d3-selection";
@@ -39,6 +40,7 @@ export class Bubble extends Scatter {
 
 		selection.raise()
 			.classed("dot", true)
+			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("cx", (d, i) => this.services.cartesianScales.getDomainValue(d, i))
 			.transition(this.services.transitions.getTransition("bubble-update-enter", animate))
 			.attr("cy", (d, i) => this.services.cartesianScales.getRangeValue(d, i))
