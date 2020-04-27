@@ -3,6 +3,8 @@ import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
 import { Events } from "../../interfaces";
+import { Tools } from "../../tools";
+import { flatMapDeep } from "lodash-es";
 
 // D3 Imports
 import { scaleBand, scaleLinear } from "d3-scale";
@@ -39,9 +41,14 @@ export class Radar extends Component {
 		}
 		console.log("\n");
 
-		const data: Array<Datum> = this.model.getData();
 		const displayData: Array<Datum> = this.model.getDisplayData();
 		const groupedData = this.model.getGroupedData();
+
+		const uniqKeys: string[] = Array.from(new Set(displayData.map(d => d.key)));
+		const uniqGroups: string[] = Array.from(new Set(displayData.map(d => d.group)));
+		const displayDataNormalized: Array<Datum> = normalizeFlatData(displayData, uniqKeys, uniqGroups);
+		const groupedDataNormalized = normalizeGroupedData(groupedData, uniqKeys);
+
 		const options = this.model.getOptions();
 		const configuration = Configuration.options.radarChart.radar;
 
@@ -69,14 +76,14 @@ export class Radar extends Component {
 
 		// given a key, return the corrisponding angle in radiants
 		const xScale = scaleBand()
-			.domain(displayData.map(d => d.key))
+			.domain(displayDataNormalized.map(d => d.key))
 			.range([0, 2 * Math.PI]);
 		// console.log(`xScale [${xScale.domain()}] -> [${xScale.range()}]`);
 
 		const ticksNumber = 5;
 		const minRange = 10;
 		const yScale = scaleLinear()
-			.domain([0, max(displayData.map(d => d.value))])
+			.domain([0, max(displayDataNormalized.map(d => d.value))])
 			.range([minRange, radius])
 			.nice(ticksNumber);
 		const yTicks = yScale.ticks(ticksNumber);
@@ -159,9 +166,8 @@ export class Radar extends Component {
 
 		// x axes
 		const labelPadding = 10;
-		const keys = Array.from(new Set(displayData.map(d => d.key)));
 		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axes");
-		const xAxisUpdate = xAxes.selectAll("g.x-axis").data(keys);
+		const xAxisUpdate = xAxes.selectAll("g.x-axis").data(uniqKeys);
 		xAxisUpdate.join(
 			enter => enter.append("g")
 				.attr("class", "x-axis")
@@ -198,7 +204,7 @@ export class Radar extends Component {
 
 		// blobs
 		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
-		const blobUpdate = blobs.selectAll("g.blob").data(groupedData, group => group.name);
+		const blobUpdate = blobs.selectAll("g.blob").data(groupedDataNormalized, group => group.name);
 		blobUpdate.join(
 			enter => enter.append("g")
 				.attr("class", "blob")
@@ -318,4 +324,21 @@ function radialLabelPlacement(angleRadians: number) {
 	}
 
 	return { textAnchor, dominantBaseline };
+}
+
+/**
+ * If there are missing data on key, create corrisponding data with value = 0.
+ */
+function normalizeFlatData(dataset: Array<Datum>, keys: string[], groups: string[]) {
+	const completeBlankData = flatMapDeep(keys.map(key => {
+		return groups.map(group => ({key, group, value: 0}));
+	}));
+	return Tools.merge(completeBlankData, dataset);
+}
+
+function normalizeGroupedData(dataset: any, keys: string[]) {
+	return dataset.map(({name, data}) => {
+		const completeBlankData = keys.map(k => ({ group: name, key: k, value: 0 }));
+		return { name, data: Tools.merge(completeBlankData, data) };
+	});
 }

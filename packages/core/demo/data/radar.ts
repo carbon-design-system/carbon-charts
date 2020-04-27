@@ -12,8 +12,7 @@ export const radarData = [
 	{ group: "Oil", key: "New York", value: 18 },
 	{ group: "Water", key: "New York", value: 8 },
 	{ group: "Sugar", key: "Sydney", value: 12 },
-	{ group: "Oil", key: "Sydney", value: 16 },
-	{ group: "Water", key: "Sydney", value: 23 }
+	{ group: "Oil", key: "Sydney", value: 16 }
 ];
 
 export const radarOptions = {
