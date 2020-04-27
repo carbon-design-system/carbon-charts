@@ -140,29 +140,26 @@ export class Radar extends Component {
 		// y axes
 		const yAxes = DOMUtils.appendOrSelect(svg, "g.y-axes");
 		const yAxisUpdate = yAxes.selectAll("path").data(yTicks);
-		yAxisUpdate
-			.enter()
-			.append("path")
-			.merge(yAxisUpdate)
-			.attr("transform", `translate(${cx}, ${cy})`)
-			.attr("opacity", 0)
-			.transition(this.services.transitions.getTransition("y-axis-update-enter", animate))
-			.attr("d", tickValue => {
-				const xAxesKeys = xScale.domain();
-				const points = xAxesKeys.map(key => ({ key, value: tickValue }));
-				return radialLineGenerator(points);
-			})
-			.attr("fill", "none")
-			.attr("opacity", 1)
-			.attr("stroke", "#dcdcdc");
-		yAxisUpdate
-			.exit()
-			.attr("opacity", 0)
-			.remove();
+		yAxisUpdate.join(
+			enter => enter.append("path"),
+			update => update,
+			exit => exit.remove()
+		)
+		.attr("transform", `translate(${cx}, ${cy})`)
+		.attr("opacity", 0)
+		.transition(this.services.transitions.getTransition("y-axis-update-enter", animate))
+		.attr("d", tickValue => {
+			const xAxesKeys = xScale.domain();
+			const points = xAxesKeys.map(key => ({ key, value: tickValue }));
+			return radialLineGenerator(points);
+		})
+		.attr("fill", "none")
+		.attr("opacity", 1)
+		.attr("stroke", "#dcdcdc");
 
 		// x axes
 		const labelPadding = 10;
-		const keys = uniqBy(displayData, "key");
+		const keys = Array.from(new Set(displayData.map(d => d.key)));
 		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axes");
 		const xAxisUpdate = xAxes.selectAll("g.x-axis").data(keys);
 		xAxisUpdate.join(
@@ -170,6 +167,12 @@ export class Radar extends Component {
 				.attr("class", "x-axis")
 				.call(selection => selection
 					.append("line")
+					.attr("stroke", "#dcdcdc")
+					.attr("opacity", 0)
+					.call(e => e
+						.transition(this.services.transitions.getTransition("x-axis-update-enter", animate))
+						.attr("opacity", 1)
+					)
 				)
 				.call(selection => selection
 					.append("text")
@@ -179,7 +182,6 @@ export class Radar extends Component {
 		)
 		.call(selection => selection
 			.select("line")
-			.attr("stroke", "#dcdcdc")
 			.attr("x1", key => polarCoords(key, yScale.range()[0], cx, cy).x)
 			.attr("y1", key => polarCoords(key, yScale.range()[0], cx, cy).y)
 			.attr("x2", key => polarCoords(key, yScale.range()[1], cx, cy).x)
@@ -197,20 +199,25 @@ export class Radar extends Component {
 		// blobs
 		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
 		const blobUpdate = blobs.selectAll("g.blob").data(groupedData, group => group.name);
-		blobUpdate
-			.enter()
-			.append("g")
-			.attr("class", "blob")
-			.append("path")
-			.merge(blobUpdate.selectAll("path"))
-			.attr("class", group => `blob-area-${group.name}`)
+		blobUpdate.join(
+			enter => enter.append("g")
+				.attr("class", "blob")
+				.call(selection => selection
+					.append("path")
+					.attr("class", group => `blob-area-${group.name}`)
+				),
+			update => update,
+			exit => exit.remove()
+		)
+		.call(selection => selection
+			.select("path")
 			.attr("d", group => radialLineGenerator(group.data))
 			.transition(this.services.transitions.getTransition("blob-update-enter", animate))
 			.attr("stroke", group => colorScale(group.name))
 			.attr("stroke-width", 1.5)
 			.attr("fill", group => colorScale(group.name))
-			.style("fill-opacity", configuration.opacity.selected);
-		blobUpdate.exit().remove();
+			.style("fill-opacity", configuration.opacity.selected)
+		);
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
@@ -242,12 +249,6 @@ export class Radar extends Component {
 		eventsFragment.removeEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
 		eventsFragment.removeEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
-}
-
-function uniqBy(dataset: any, attribute: string): any[] {
-	const allTheValuesByAttribute = dataset.map(d => d[attribute]);
-	const uniqValues = [...Array.from(new Set(allTheValuesByAttribute))];
-	return uniqValues;
 }
 
 function radToDeg(rad: number) {
