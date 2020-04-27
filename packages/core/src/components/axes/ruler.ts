@@ -54,50 +54,51 @@ export class Ruler extends Component {
 		const rangeScale = this.services.cartesianScales.getRangeScale();
 		const [yScaleEnd, yScaleStart] = rangeScale.range();
 
-		const scaledData: number[] = displayData.map((d, i) =>
-			this.services.cartesianScales.getDomainValue(d, i)
-		);
+		const scaledData: {domainValue: number, originalData: any}[] = displayData.map((d, i) => ({
+			domainValue: this.services.cartesianScales.getDomainValue(d, i),
+			originalData: d
+		}));
 
 		/**
 		 * Find matches, reduce is used instead of filter
 		 * to only get elements which belong to the same axis coordinate
 		 */
-		const dataPointsMatchingRulerLine: number[] = scaledData.reduce((accum, currentValue) => {
-			// store the first element of the accumulator array to compare it with current element being processed
-			const sampleAccumValue = accum[0];
+		const dataPointsMatchingRulerLine: {domainValue: number, originalData: any}[] =
+			scaledData.reduce((accum, currentValue) => {
+				// store the first element of the accumulator array to compare it with current element being processed
+				const sampleAccumValue = accum[0] ? accum[0].domainValue : undefined;
 
-			// if accumulator is not empty and current value is bigger than already existing value in the accumulator, skip current iteration
-			if (sampleAccumValue !== undefined && currentValue > sampleAccumValue) {
-				return accum;
-			}
-
-			// there's a match and currentValue is either less then or equal to already stored values
-			if (pointIsWithinThreshold(currentValue, x)) {
-				if (sampleAccumValue !== undefined && currentValue < sampleAccumValue) {
-					// there's a closer data point in the threshold area, so reinstantiate array
-					accum = [currentValue];
-				} else {
-					// currentValue is equal to already stored values, there's another match on the same coordinate
-					accum.push(currentValue);
+				// if accumulator is not empty and current value is bigger than already existing value in the accumulator, skip current iteration
+				if (sampleAccumValue !== undefined && currentValue.domainValue > sampleAccumValue) {
+					return accum;
 				}
-			}
 
-			return accum;
-		}, []);
+				// there's a match and currentValue is either less then or equal to already stored values
+				if (pointIsWithinThreshold(currentValue.domainValue, x)) {
+					if (sampleAccumValue !== undefined && currentValue < sampleAccumValue) {
+						// there's a closer data point in the threshold area, so reinstantiate array
+						accum = [currentValue];
+					} else {
+						// currentValue is equal to already stored values, there's another match on the same coordinate
+						accum.push(currentValue);
+					}
+				}
+
+				return accum;
+			}, []);
 
 		// some data point match
 		if (dataPointsMatchingRulerLine.length > 0) {
-			const sampleMatch = dataPointsMatchingRulerLine[0];
-
-			const highlightItems = this.services.cartesianScales.getDataFromDomain(
-				invertedScale(domainScale)(sampleMatch)
-			).filter(d => d.value);
+			const highlightItems = dataPointsMatchingRulerLine.map(d => d.originalData)
+				.filter(d => {
+					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+					const value = d[rangeIdentifier];
+					return value !== null && value !== undefined;
+				});
 
 			// get elements on which we should trigger mouse events
 			const hoveredElements = dataPointElements.filter((d, i) =>
-				dataPointsMatchingRulerLine.includes(
-					Number(this.services.cartesianScales.getDomainValue(d))
-				)
+				dataPointsMatchingRulerLine.includes(d)
 			);
 
 			/** if we pass from a trigger area to another one
@@ -126,10 +127,11 @@ export class Ruler extends Component {
 			ruler.attr("opacity", 1);
 
 			// line snaps to matching point
+			const sampleMatch = dataPointsMatchingRulerLine[0];
 			line.attr("y1", yScaleStart)
 				.attr("y2", yScaleEnd)
-				.attr("x1", sampleMatch)
-				.attr("x2", sampleMatch);
+				.attr("x1", sampleMatch.domainValue)
+				.attr("x2", sampleMatch.domainValue);
 		} else {
 			ruler.attr("opacity", 0);
 			dataPointElements.dispatch("mouseout");
