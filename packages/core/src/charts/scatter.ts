@@ -11,7 +11,7 @@ import { Skeletons } from "../interfaces/enums";
 // Components
 import {
 	Grid,
-	Line,
+	Ruler,
 	Scatter,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
@@ -44,6 +44,7 @@ export class ScatterChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
+			new Ruler(this.model, this.services),
 			new Scatter(this.model, this.services),
 			new Skeleton(this.model, this.services, { skeleton: Skeletons.GRID })
 		];

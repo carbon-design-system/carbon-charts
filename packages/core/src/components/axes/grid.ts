@@ -159,48 +159,6 @@ export class Grid extends Component {
 		return xGridlines;
 	}
 
-	/**
-	 * Adds the listener on the X grid to trigger multiple point tooltips along the x axis.
-	 */
-	addGridEventListeners() {
-		const self = this;
-		const svg = this.parent;
-		const grid = DOMUtils.appendOrSelect(svg, "rect.chart-grid-backdrop");
-
-		grid.on("mousemove mouseover", function() {
-			const chartContainer = self.services.domUtils.getMainSVG();
-			const pos = mouse(chartContainer);
-			const hoveredElement = select(this);
-
-			// remove the styling on the lines
-			const allgridlines = svg.selectAll(".x.grid .tick");
-			allgridlines.classed("active", false);
-
-			const activeGridline = self.getActiveGridline(pos);
-			if (activeGridline.empty()) {
-				return self.services.events.dispatchEvent(Events.Tooltip.HIDE);
-			}
-
-			// set active class to control dasharray and theme colors
-			activeGridline.classed("active", true);
-
-			// get the items that should be highlighted
-			const itemsToHighlight = self.services.cartesianScales.getDataFromDomain(activeGridline.datum());
-
-			self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-				hoveredElement,
-				multidata: itemsToHighlight,
-				type: TooltipTypes.GRIDLINE
-			});
-		})
-		.on("mouseout", function() {
-			svg.selectAll(".x.grid .tick")
-				.classed("active", false);
-
-			self.services.events.dispatchEvent(Events.Tooltip.HIDE);
-		});
-	}
-
 	drawBackdrop() {
 		const svg = this.parent;
 
