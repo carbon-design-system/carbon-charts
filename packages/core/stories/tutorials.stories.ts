@@ -15,21 +15,22 @@ import {
 // Syntax highlighting
 const hljs = require("highlight.js/lib/highlight.js");
 hljs.registerLanguage('js', require('highlight.js/lib/languages/javascript'));
+hljs.registerLanguage('bash', require('highlight.js/lib/languages/bash'));
 
 const tutorialStories = storiesOf("Tutorials", module);
 const gettingStartedStories = storiesOf("Tutorials/GettingStarted", module);
 
 // add vanilla getting started tutorials
-gettingStartedStories.add("Vanilla", () => {
+gettingStartedStories.add("VanillaJS", () => {
 	// container creation
 	const container = document.createElement("div");
 	container.setAttribute("class", "container tutorial");
 
 	container.innerHTML = vanillaTutorial;
 
-	// container.querySelectorAll("pre code").forEach((block) => {
-	// 	hljs.highlightBlock(block);
-	// });
+	container.querySelectorAll("pre code").forEach((block) => {
+		hljs.highlightBlock(block);
+	});
 
 	return container;
 });
@@ -42,9 +43,9 @@ gettingStartedStories.add("Angular", () => {
 
 	container.innerHTML = angularTutorial;
 
-	// container.querySelectorAll("pre code").forEach((block) => {
-	// 	hljs.highlightBlock(block);
-	// });
+	container.querySelectorAll("pre code").forEach((block) => {
+		hljs.highlightBlock(block);
+	});
 
 	return container;
 });
