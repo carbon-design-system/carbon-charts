@@ -177,83 +177,10 @@ if (process.env.NODE_ENV !== "production") {
 
 				row.appendChild(column);
 
-				// Add get data/remove data button and loading data checkbox
-				const chartObj = chart; // instantiated class
-
-				const buttonsContainer = document.createElement("div");
-				buttonsContainer.style.display = "flex";
-				buttonsContainer.style.flexDirection = "row";
-
-				// create checkbox for set/unset data loading option
-				const areDataLoading = chartObj.model.getOptions().data.loading;
-				const checkbox = createCheckbox("bx--checkbox-new", "Loading", areDataLoading, () => {
-					const loading = chartObj.model.getOptions().data.loading;
-					chartObj.model.setOptions({ data: { loading: !loading } });
-				});
-
-				// create button to empty and fill data
-				const getDataButton = createButton(demo.id, "Remove data", () => {
-					const input = checkbox.getElementsByTagName("input")[0];
-					const areDataEmpty = chartObj.model.areDataEmpty();
-					if (areDataEmpty) {
-						chartObj.model.setOptions({ data: { loading: false } });
-						chartObj.model.setData(demo.data);
-						getDataButton.innerHTML = "Remove data";
-						input.disabled = true;
-						input.checked = false;
-					} else {
-						chartObj.model.setData([]);
-						getDataButton.innerHTML = "Get data";
-						input.disabled = false;
-					}
-				});
-
-				buttonsContainer.appendChild(getDataButton);
-				buttonsContainer.appendChild(checkbox);
-				column.appendChild(buttonsContainer);
-
 				i++;
 			});
 		});
 
 		return container;
 	});
-}
-
-function createButton(id: string, text: string, onclickFn: any) {
-	const btn = document.createElement("button");
-	btn.className = "bx--btn bx--btn--danger";
-	btn.id = `get-data-${id}`;
-	btn.setAttribute("type", "button");
-	btn.innerHTML = text;
-	btn.onclick = onclickFn;
-	return btn;
-}
-
-function createCheckbox(id: string, text: string, areDataLoading: boolean, onchangeFn: any) {
-	const container = document.createElement("div");
-	container.className = "bx--form-item bx--checkbox-wrapper";
-	container.style.display = "flex";
-	container.style.flexDirection = "row";
-	container.style.alignItems = "center";
-	container.style.marginLeft = "15px";
-
-	const input = document.createElement("input");
-	input.id = id;
-	input.className = "bx--checkbox";
-	input.setAttribute("type", "checkbox");
-	input.setAttribute("value", "new");
-	input.setAttribute("name", "checkbox");
-	input.checked = areDataLoading; // check it only if data are loading
-	input.disabled = !areDataLoading; // disable it if there are data
-	input.onchange = onchangeFn;
-
-	const label = document.createElement("label");
-	label.setAttribute("for", id);
-	label.className = "bx--checkbox-label";
-	label.innerHTML = text;
-
-	container.appendChild(input);
-	container.appendChild(label);
-	return container;
 }

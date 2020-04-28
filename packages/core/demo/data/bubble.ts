@@ -92,3 +92,48 @@ export const bubbleTimeSeriesOptions = {
 		radiusMapsTo: "surplus"
 	}
 };
+
+// bubble - no data
+export const bubbleNoData = [];
+export const bubbleNoDataOptions = {
+	title: "Bubble (no data)",
+	axes: {
+		bottom: {
+			title: "No. of employees",
+			mapsTo: "sales",
+			includeZero: false
+		},
+		left: {
+			title: "Annual sales",
+			mapsTo: "profit",
+			includeZero: false
+		}
+	},
+	bubble: {
+		radiusMapsTo: "surplus"
+	}
+};
+
+// bubble - loading data
+export const bubbleLoadingData = [];
+export const bubbleLoadingDataOptions = {
+	title: "Bubble (loading data)",
+	axes: {
+		bottom: {
+			title: "No. of employees",
+			mapsTo: "sales",
+			includeZero: false
+		},
+		left: {
+			title: "Annual sales",
+			mapsTo: "profit",
+			includeZero: false
+		}
+	},
+	bubble: {
+		radiusMapsTo: "surplus"
+	},
+	data: {
+		loading: true
+	}
+};

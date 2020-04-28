@@ -120,7 +120,7 @@ export const simpleBarTimeSeriesOptions = {
 		},
 		bottom: {
 			mapsTo: "date",
-			scaleType: "time",
+			scaleType: "time"
 		}
 	},
 	timeScale: { "localeObject": trLocaleObject }
@@ -215,7 +215,7 @@ export const stackedBarTimeSeriesData = [
 	{ group: "Dataset 4", date: new Date(2019, 0, 6), value: 37312 },
 	{ group: "Dataset 4", date: new Date(2019, 0, 8), value: 51432 },
 	{ group: "Dataset 4", date: new Date(2019, 0, 15), value: 40323 },
-	{ group: "Dataset 4", date: new Date(2019, 0, 19), value: 31300 },
+	{ group: "Dataset 4", date: new Date(2019, 0, 19), value: 31300 }
 ];
 
 // export const stackedBarTimeSeriesOptions = {
@@ -283,3 +283,201 @@ export const stackedHorizontalBarTimeSeriesOptions = {
 };
 
 export const stackedHorizontalBarTimeSeriesData = stackedBarTimeSeriesData;
+
+// simple bar - no data
+export const simpleBarNoData = [];
+export const simpleBarNoDataOptions = {
+	title: "Simple bar (no data)",
+	axes: {
+		left: {
+			primary: true
+		},
+		bottom: {
+			scaleType: "labels",
+			secondary: true
+		}
+	}
+};
+
+// simple bar - loading data
+export const simpleBarLoadingData = [];
+export const simpleBarLoadingDataOptions = {
+	title: "Simple bar (loading data)",
+	axes: {
+		left: {
+			primary: true
+		},
+		bottom: {
+			scaleType: "labels",
+			secondary: true
+		}
+	},
+	data: {
+		loading: true
+	}
+};
+
+// grouped bar - no data
+export const groupedBarNoData = [];
+export const groupedBarNoDataOptions = {
+	title: "Grouped bar (no data)",
+	axes: {
+		left: {
+			primary: true
+		},
+		bottom: {
+			scaleType: "labels",
+			secondary: true
+		}
+	}
+};
+
+// grouped bar - loading data
+export const groupedBarLoadingData = [];
+export const groupedBarLoadingDataOptions = {
+	title: "Grouped bar (loading data)",
+	axes: {
+		left: {
+			primary: true
+		},
+		bottom: {
+			scaleType: "labels",
+			secondary: true
+		}
+	},
+	data: {
+		loading: true
+	}
+};
+
+// stacked bar - no data
+export const stackedBarNoData = [];
+export const stackedBarNoDataOptions = {
+	title: "Stacked bar (no data)",
+	axes: {
+		left: {
+			primary: true
+		},
+		bottom: {
+			scaleType: "labels",
+			secondary: true
+		}
+	}
+};
+
+// stacked bar - loading data
+export const stackedBarLoadingData = [];
+export const stackedBarLoadingDataOptions = {
+	title: "Stacked bar (loading data)",
+	axes: {
+		left: {
+			primary: true
+		},
+		bottom: {
+			scaleType: "labels",
+			secondary: true
+		}
+	},
+	data: {
+		loading: true
+	}
+};
+
+// simple horizontal bar - no data
+export const simpleHorizontalBarNoData = [];
+export const simpleHorizontalBarNoDataOptions = {
+	title: "Simple horizontal bar (no data)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true
+		}
+	}
+};
+
+// simple horizontal bar - loading data
+export const simpleHorizontalBarLoadingData = [];
+export const simpleHorizontalBarLoadingDataOptions = {
+	title: "Simple horizontal bar (loading data)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true
+		}
+	},
+	data: {
+		loading: true
+	}
+};
+
+// grouped horizontal bar - no data
+export const groupedHorizontalBarNoData = [];
+export const groupedHorizontalBarNoDataOptions = {
+	title: "Grouped horizontal bar (no data)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true
+		}
+	}
+};
+
+// grouped horizontal bar - loading data
+export const groupedHorizontalBarLoadingData = [];
+export const groupedHorizontalBarLoadingDataOptions = {
+	title: "Grouped horizontal bar (loading data)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true
+		}
+	},
+	data: {
+		loading: true
+	}
+};
+
+// stacked horizontal bar - no data
+export const stackedHorizontalBarNoData = [];
+export const stackedHorizontalBarNoDataOptions = {
+	title: "Stacked horizontal bar (no data)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true
+		}
+	}
+};
+
+// stacked horizontal bar - loading data
+export const stackedHorizontalBarLoadingData = [];
+export const stackedHorizontalBarLoadingDataOptions = {
+	title: "Stacked horizontal bar (loading data)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true
+		}
+	},
+	data: {
+		loading: true
+	}
+};

@@ -11,3 +11,20 @@ export const pieOptions = {
 	title: "Pie",
 	resizable: true
 };
+
+// pie - no data
+export const pieNoData = [];
+export const pieNoDataOptions = {
+	title: "Pie (no data)",
+	resizable: true
+};
+
+// pie - loading data
+export const pieLoadingData = [];
+export const pieLoadingDataOptions = {
+	title: "Pie (loading data)",
+	resizable: true,
+	data: {
+		loading: true
+	}
+};

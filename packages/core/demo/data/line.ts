@@ -204,3 +204,44 @@ export const lineTimeSeriesHorizontalOptions = {
 	},
 	curve: "curveMonotoneY"
 };
+
+// line - no data
+export const lineNoData = [];
+export const lineNoDataOptions = {
+	title: "Line (no data)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time"
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	},
+	curve: "curveMonotoneX"
+};
+
+// line - loading data
+export const lineLoadingData = [];
+export const lineLoadingDataOptions = {
+	title: "Line (loading data)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time"
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	},
+	curve: "curveMonotoneX",
+	data: {
+		loading: true
+	}
+};

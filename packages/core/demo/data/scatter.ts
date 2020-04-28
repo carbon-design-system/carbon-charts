@@ -79,3 +79,38 @@ export const scatterTimeSeriesOptions = {
 		}
 	}
 };
+
+// scatter - no data
+export const scatterNoData = [];
+export const scatterNoDataOptions = {
+	title: "Scatter (no data)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			scaleType: "time",
+			mapsTo: "date"
+		},
+		left: {
+			mapsTo: "value"
+		}
+	}
+};
+
+// scatter - loading data
+export const scatterLoadingData = [];
+export const scatterLoadingDataOptions = {
+	title: "Scatter (loading data)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			scaleType: "time",
+			mapsTo: "date"
+		},
+		left: {
+			mapsTo: "value"
+		}
+	},
+	data: {
+		loading: true
+	}
+};

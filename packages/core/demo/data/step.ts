@@ -20,3 +20,20 @@ export const stepTimeSeriesOptions = Tools.merge({}, lineTimeSeriesOptions, {
 });
 
 export const stepTimeSeriesData = lineTimeSeriesData;
+
+// step - no data
+export const stepNoData = [];
+export const stepNoDataOptions = Tools.merge({}, lineTimeSeriesOptions, {
+	title: "Step (no data)",
+	curve: "curveStepAfter"
+});
+
+// step - loading data
+export const stepLoadingData = [];
+export const stepLoadingDataOptions = Tools.merge({}, lineTimeSeriesOptions, {
+	title: "Step (loading data)",
+	curve: "curveStepAfter",
+	data: {
+		loading: true
+	}
+});

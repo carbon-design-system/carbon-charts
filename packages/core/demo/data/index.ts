@@ -6,7 +6,6 @@ import * as pieDemos from "./pie";
 import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
 import * as timeSeriesAxisDemos from "./time-series-axis";
-import * as skeletonDemos from "./skeleton";
 
 export * from "./bar";
 export * from "./bubble";
@@ -91,8 +90,32 @@ let allDemoGroups = [
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
+				options: barDemos.simpleBarNoDataOptions,
+				data: barDemos.simpleBarNoData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.simpleBarLoadingDataOptions,
+				data: barDemos.simpleBarLoadingData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true
+			},
+			{
 				options: barDemos.groupedBarOptions,
 				data: barDemos.groupedBarData,
+				chartType: chartTypes.GroupedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.groupedBarNoDataOptions,
+				data: barDemos.groupedBarNoData,
+				chartType: chartTypes.GroupedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.groupedBarLoadingDataOptions,
+				data: barDemos.groupedBarLoadingData,
 				chartType: chartTypes.GroupedBarChart,
 				isDemoExample: true
 			},
@@ -105,6 +128,18 @@ let allDemoGroups = [
 			{
 				options: barDemos.stackedBarTimeSeriesOptions,
 				data: barDemos.stackedBarTimeSeriesData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.stackedBarNoDataOptions,
+				data: barDemos.stackedBarNoData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.stackedBarLoadingDataOptions,
+				data: barDemos.stackedBarLoadingData,
 				chartType: chartTypes.StackedBarChart,
 				isDemoExample: true
 			}
@@ -126,8 +161,32 @@ let allDemoGroups = [
 				isDemoExample: true
 			},
 			{
+				options: barDemos.simpleHorizontalBarNoDataOptions,
+				data: barDemos.simpleHorizontalBarNoData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.simpleHorizontalBarLoadingDataOptions,
+				data: barDemos.simpleHorizontalBarLoadingData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true
+			},
+			{
 				options: barDemos.groupedHorizontalBarOptions,
 				data: barDemos.groupedHorizontalBarData,
+				chartType: chartTypes.GroupedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.groupedHorizontalBarNoDataOptions,
+				data: barDemos.groupedHorizontalBarNoData,
+				chartType: chartTypes.GroupedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.groupedHorizontalBarLoadingDataOptions,
+				data: barDemos.groupedHorizontalBarLoadingData,
 				chartType: chartTypes.GroupedBarChart,
 				isDemoExample: true
 			},
@@ -140,6 +199,18 @@ let allDemoGroups = [
 			{
 				options: barDemos.stackedHorizontalBarTimeSeriesOptions,
 				data: barDemos.stackedHorizontalBarTimeSeriesData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.stackedHorizontalBarNoDataOptions,
+				data: barDemos.stackedHorizontalBarNoData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.stackedHorizontalBarLoadingDataOptions,
+				data: barDemos.stackedHorizontalBarLoadingData,
 				chartType: chartTypes.StackedBarChart,
 				isDemoExample: true
 			}
@@ -165,6 +236,18 @@ let allDemoGroups = [
 				data: bubbleDemos.bubbleDiscreteData,
 				chartType: chartTypes.BubbleChart,
 				isDemoExample: true
+			},
+			{
+				options: bubbleDemos.bubbleNoDataOptions,
+				data: bubbleDemos.bubbleNoData,
+				chartType: chartTypes.BubbleChart,
+				isDemoExample: true
+			},
+			{
+				options: bubbleDemos.bubbleLoadingDataOptions,
+				data: bubbleDemos.bubbleLoadingData,
+				chartType: chartTypes.BubbleChart,
+				isDemoExample: true
 			}
 		]
 	},
@@ -174,6 +257,18 @@ let allDemoGroups = [
 			{
 				options: donutDemos.donutOptions,
 				data: donutDemos.donutData,
+				chartType: chartTypes.DonutChart,
+				isDemoExample: true
+			},
+			{
+				options: donutDemos.donutNoDataOptions,
+				data: donutDemos.donutNoData,
+				chartType: chartTypes.DonutChart,
+				isDemoExample: true
+			},
+			{
+				options: donutDemos.donutLoadingDataOptions,
+				data: donutDemos.donutLoadingData,
 				chartType: chartTypes.DonutChart,
 				isDemoExample: true
 			}
@@ -213,6 +308,16 @@ let allDemoGroups = [
 				options: lineDemos.lineHorizontalOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineNoDataOptions,
+				data: lineDemos.lineNoData,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineLoadingDataOptions,
+				data: lineDemos.lineLoadingData,
+				chartType: chartTypes.LineChart
 			}
 		]
 	},
@@ -222,6 +327,18 @@ let allDemoGroups = [
 			{
 				options: pieDemos.pieOptions,
 				data: pieDemos.pieData,
+				chartType: chartTypes.PieChart,
+				isDemoExample: true
+			},
+			{
+				options: pieDemos.pieNoDataOptions,
+				data: pieDemos.pieNoData,
+				chartType: chartTypes.PieChart,
+				isDemoExample: true
+			},
+			{
+				options: pieDemos.pieLoadingDataOptions,
+				data: pieDemos.pieLoadingData,
 				chartType: chartTypes.PieChart,
 				isDemoExample: true
 			}
@@ -247,6 +364,18 @@ let allDemoGroups = [
 				data: scatterDemos.scatterDiscreteData,
 				chartType: chartTypes.ScatterChart,
 				isDemoExample: true
+			},
+			{
+				options: scatterDemos.scatterNoDataOptions,
+				data: scatterDemos.scatterNoData,
+				chartType: chartTypes.ScatterChart,
+				isDemoExample: true
+			},
+			{
+				options: scatterDemos.scatterLoadingDataOptions,
+				data: scatterDemos.scatterLoadingData,
+				chartType: chartTypes.ScatterChart,
+				isDemoExample: true
 			}
 		]
 	},
@@ -262,6 +391,18 @@ let allDemoGroups = [
 			{
 				options: stepDemos.stepTimeSeriesOptions,
 				data: stepDemos.stepTimeSeriesData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: true
+			},
+			{
+				options: stepDemos.stepNoDataOptions,
+				data: stepDemos.stepNoData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: true
+			},
+			{
+				options: stepDemos.stepLoadingDataOptions,
+				data: stepDemos.stepLoadingData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: true
 			}
@@ -334,77 +475,6 @@ let allDemoGroups = [
 				data: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainData,
 				options: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainOptions,
 				chartType: chartTypes.LineChart
-			}
-		]
-	},
-	{
-		title: "Skeleton",
-		demos: [
-			{
-				options: skeletonDemos.barchartLabLinOptions,
-				data: skeletonDemos.barchartLabLinData,
-				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: false
-			},
-			{
-				options: skeletonDemos.barchartLabLinFixDomOptions,
-				data: skeletonDemos.barchartLabLinFixDomData,
-				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: false
-			},
-			{
-				options: skeletonDemos.barchartGroupedWithZeroOptions,
-				data: skeletonDemos.barchartGroupedWithZeroData,
-				chartType: chartTypes.GroupedBarChart,
-				isDemoExample: false
-			},
-			{
-				options: skeletonDemos.stackedBarchartTimeLinOptions,
-				data: skeletonDemos.stackedBarchartTimeLinData,
-				chartType: chartTypes.StackedBarChart,
-				isDemoExample: false
-			},
-			{
-				options: skeletonDemos.barchartHorizLinTimeOptions,
-				data: skeletonDemos.barchartHorizLinTimeData,
-				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: false
-			},
-			{
-				options: skeletonDemos.bubbleTimeLinOptions,
-				data: skeletonDemos.bubbleTimeLinData,
-				chartType: chartTypes.BubbleChart,
-				isDemoExample: false
-			},
-			{
-				options: skeletonDemos.scatterLabLinOptions,
-				data: skeletonDemos.scatterLabLinData,
-				chartType: chartTypes.ScatterChart,
-				isDemoExample: false
-			},
-			{
-				options: skeletonDemos.donutOptions,
-				data: skeletonDemos.donutData,
-				chartType: chartTypes.DonutChart,
-				isDemoExample: false
-			},
-			{
-				options: skeletonDemos.lineTimeLinOptions,
-				data: skeletonDemos.lineTimeLinData,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false
-			},
-			{
-				options: skeletonDemos.pieOptions,
-				data: skeletonDemos.pieData,
-				chartType: chartTypes.PieChart,
-				isDemoExample: false
-			},
-			{
-				options: skeletonDemos.stepOptions,
-				data: skeletonDemos.stepData,
-				chartType: chartTypes.LineChart,
-				isDemoExample: false
 			}
 		]
 	}
