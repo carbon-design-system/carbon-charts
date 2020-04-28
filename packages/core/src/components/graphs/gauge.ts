@@ -186,7 +186,7 @@ export class Gauge extends Component {
 			.attr("x", () => `-${options.gauge.center.valueFontSize(radius, arcSize)}px`)
 			.attr(
 				"y",
-				`${options.gauge.center.valueYPosition(radius, arcSize) + options.gauge.distanceBetweenNumbers + options.gauge.center.caretSize / 4}px`
+				`${options.gauge.center.valueYPosition(radius, arcSize) + options.gauge.distanceBetweenNumbers + options.gauge.center.caretSize / 2}px`
 			)
 			.attr("width", `${options.gauge.center.caretSize}px`)
 			.attr("height", `${options.gauge.center.caretSize}px`)
