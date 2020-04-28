@@ -115,6 +115,10 @@ div.container {
 	@import "../src/styles/vendor/carbon-components/scss/components/tag/tag";
 	@import "../src/styles/vendor/carbon-components/scss/components/radio-button/radio-button";
 
+	#chart-demo {
+		max-width: 700px;
+	}
+
 	.bx--grid {
 		padding: 0;
 
@@ -288,6 +292,40 @@ div.container {
 					color: #fff;
 					text-decoration: none;
 				}
+			}
+		}
+	}
+
+	&.tutorial {
+		@import "~highlight.js/styles/sunburst.css";
+
+		h1, h5, p, pre {
+			margin-bottom: 15px;
+		}
+
+		h5 {
+			margin-top: 30px;
+		}
+
+		code {
+			border-radius: 4px;
+			background-color: #e0e0e0;
+			color: #161616;
+			padding: 0 .5em;
+		}
+
+		pre {
+			background-color: black;
+			color: white;
+			padding: 15px;
+			-moz-tab-size: 4;
+			tab-size: 4;
+			font-size: 14px;
+
+			code {
+				background-color: unset;
+				color: white;
+				padding: 0;
 			}
 		}
 	}

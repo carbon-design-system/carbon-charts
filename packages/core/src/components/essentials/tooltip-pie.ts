@@ -11,18 +11,20 @@ export class TooltipPie extends Tooltip {
 		}
 
 		const dataVal = d.data;
-		const { groupIdentifier } = this.model.getOptions().data;
+		const { groupMapsTo } = this.model.getOptions().data;
 
 		// format the value if needed
 		const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
 		this.model.getOptions().tooltip.valueFormatter(dataVal.value) : dataVal.value.toLocaleString("en");
 
 		// pie charts don't have a dataset label since they only support one dataset
-		const label = dataVal[groupIdentifier];
+		const label = dataVal[groupMapsTo];
 
-		return `<div class="datapoint-tooltip">
-					<p class="label">${label}</p>
-					<p class="value">${formattedValue}</p>
-				</div>`;
+		return (
+			`<div class="datapoint-tooltip">
+				<p class="label">${label}</p>
+				<p class="value">${formattedValue}</p>
+			</div>`
+		);
 	}
 }

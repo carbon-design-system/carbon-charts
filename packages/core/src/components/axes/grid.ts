@@ -178,7 +178,7 @@ export class Grid extends Component {
 
 			const activeGridline = self.getActiveGridline(pos);
 			if (activeGridline.empty()) {
-				return self.services.events.dispatchEvent("hide-tooltip");
+				return self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 			}
 
 			// set active class to control dasharray and theme colors
@@ -197,7 +197,7 @@ export class Grid extends Component {
 			svg.selectAll(".x.grid .tick")
 				.classed("active", false);
 
-			self.services.events.dispatchEvent("hide-tooltip");
+			self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 		});
 	}
 

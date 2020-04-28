@@ -9,19 +9,19 @@ export class TooltipScatter extends Tooltip {
 			return super.getTooltipHTML(datum, type);
 		}
 
-		const { groupIdentifier } = this.model.getOptions().data;
+		const { groupMapsTo } = this.model.getOptions().data;
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		const userProvidedValueFormatter = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter");
 		const formattedValue = userProvidedValueFormatter ? userProvidedValueFormatter(datum[rangeIdentifier]) : datum[rangeIdentifier].toLocaleString("en");
 
 		// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
-		const indicatorColor = this.model.getStrokeColor(datum[groupIdentifier]);
+		const indicatorColor = this.model.getStrokeColor(datum[groupMapsTo]);
 
 		return `
 			<div class="datapoint-tooltip">
 				<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
-				<p class="label">${datum[groupIdentifier]}</p>
+				<p class="label">${datum[groupMapsTo]}</p>
 				<p class="value">${formattedValue}</p>
 			</div>`;
 	}

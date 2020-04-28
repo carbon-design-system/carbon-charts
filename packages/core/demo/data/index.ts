@@ -149,8 +149,8 @@ let allDemoGroups = [
 		title: "Bubble",
 		demos: [
 			{
-				options: bubbleDemos.bubbleLinearOptions,
-				data: bubbleDemos.bubbleLinearData,
+				options: bubbleDemos.bubbleDoubleLinearOptions,
+				data: bubbleDemos.bubbleDoubleLinearData,
 				chartType: chartTypes.BubbleChart,
 				isDemoExample: true
 			},
@@ -198,6 +198,16 @@ let allDemoGroups = [
 				options: lineDemos.lineTimeSeriesRotatedTicksOptions,
 				data: lineDemos.lineTimeSeriesDataRotatedTicks,
 				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeriesHorizontalOptions,
+				data: lineDemos.lineTimeSeriesData,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineHorizontalOptions,
+				data: lineDemos.lineData,
+				chartType: chartTypes.LineChart
 			}
 		]
 	},
@@ -216,8 +226,8 @@ let allDemoGroups = [
 		title: "Scatter",
 		demos: [
 			{
-				options: scatterDemos.scatterLinearOptions,
-				data: scatterDemos.scatterLinearData,
+				options: scatterDemos.doubleLinearScatterOptions,
+				data: scatterDemos.doubleLinearScatterData,
 				chartType: chartTypes.ScatterChart,
 				isDemoExample: true
 			},
@@ -313,6 +323,11 @@ let allDemoGroups = [
 			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataSingleDatum,
 				options: timeSeriesAxisDemos.lineTimeSeriesSingleDatumOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainData,
+				options: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainOptions,
 				chartType: chartTypes.LineChart
 			}
 		]

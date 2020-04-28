@@ -14,8 +14,7 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
 	LayoutComponent,
-	TooltipPie,
-	Skeleton
+	TooltipPie
 } from "../components/index";
 
 export class DonutChart extends PieChart {

@@ -103,6 +103,7 @@ export class Axis extends Component {
 		fakeTick.remove();
 
 		const isTimeScaleType = this.scaleType === ScaleTypes.TIME || axisOptions.scaleType === ScaleTypes.TIME;
+		const scaleType = this.scaleType || axisOptions.scaleType || ScaleTypes.LINEAR;
 
 		// Initialize axis object
 		const axis = axisFunction(scale).tickSizeOuter(0);
@@ -145,19 +146,33 @@ export class Axis extends Component {
 					axis.tickValues(tickValues);
 				}
 			}
+		}
 
-			// create the right ticks formatter
-			let formatter;
-			if (isTimeScaleType) {
-				const timeInterval = computeTimeIntervalName(axis.tickValues());
+		// create the right ticks formatter
+		let formatter;
+		const userProvidedFormatter = Tools.getProperty(axisOptions, "ticks", "formatter");
+		if (isTimeScaleType) {
+			const timeInterval = computeTimeIntervalName(axis.tickValues());
+			if (userProvidedFormatter === null) {
 				formatter = (t: number, i: number) => formatTick(t, i, timeInterval, timeScaleOptions);
 			} else {
-				formatter = Tools.getProperty(axisOptions, "ticks", "formatter");
+				formatter = (t: number, i: number) => {
+					const defaultFormattedValue = formatTick(t, i, timeInterval, timeScaleOptions);
+					return userProvidedFormatter(t, i, defaultFormattedValue);
+				};
 			}
-
-			// Set ticks formatter
-			axis.tickFormat(formatter);
+		} else {
+			if (userProvidedFormatter === null) {
+				if (scaleType === ScaleTypes.LINEAR) {
+					formatter = t => t.toLocaleString();
+				}
+			} else {
+				formatter = userProvidedFormatter;
+			}
 		}
+
+		// Set ticks formatter
+		axis.tickFormat(formatter);
 
 		// Position and transition the axis
 		switch (axisPosition) {
@@ -179,7 +194,7 @@ export class Axis extends Component {
 		// check that data exists, if they don't, doesn't show the title axis
 		if (axisOptions.title) {
 			const axisTitleRef = DOMUtils.appendOrSelect(container, `text.axis-title`)
-				.text(this.model.areDataEmpty() ? "" : axisOptions.title);
+				.html(axisOptions.title);
 
 			switch (axisPosition) {
 				case AxisPositions.LEFT:

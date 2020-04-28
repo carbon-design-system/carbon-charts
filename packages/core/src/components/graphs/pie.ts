@@ -54,7 +54,7 @@ export class Pie extends Component {
 
 		const displayData = this.model.getDisplayData();
 		const options = this.model.getOptions();
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
@@ -82,7 +82,7 @@ export class Pie extends Component {
 		const slicesGroup = DOMUtils.appendOrSelect(svg, "g.slices")
 			.attr("role", Roles.GROUP);
 		const paths = slicesGroup.selectAll("path.slice")
-			.data(pieLayoutData, d => d.data[groupIdentifier]);
+			.data(pieLayoutData, d => d.data[groupMapsTo]);
 
 		// Remove slices that need to be exited
 		paths.exit()
@@ -97,7 +97,7 @@ export class Pie extends Component {
 
 		// Update styles & position on existing and entering slices
 		enteringPaths.merge(paths)
-			.attr("fill", d => self.model.getFillColor(d.data[groupIdentifier]))
+			.attr("fill", d => self.model.getFillColor(d.data[groupMapsTo]))
 			.attr("d", this.arc)
 			.transition(this.services.transitions.getTransition("pie-slice-enter-update", animate))
 			.attr("opacity", 1)
@@ -106,14 +106,15 @@ export class Pie extends Component {
 			.attr("aria-roledescription", "slice")
 			.attr("aria-label", d => `${d.value}, ${Tools.convertValueToPercentage(d.data.value, displayData) + "%"}`)
 			// Tween
-			.attrTween("d", function (a) {
+			.attrTween("d", function(a) {
 				return arcTween.bind(this)(a, self.arc);
 			});
 
 		// Draw the slice labels
+		const labelData = pieLayoutData.filter(x => x.value > 0);
 		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels").attr("role", Roles.GROUP);
 		const labels = labelsGroup.selectAll("text.pie-label")
-			.data(pieLayoutData, (d: any) => d.data[groupIdentifier]);
+			.data(labelData, (d: any) => d.data[groupMapsTo]);
 
 		// Remove labels that are existing
 		labels.exit()
@@ -138,21 +139,22 @@ export class Pie extends Component {
 			})
 			// Calculate dimensions in order to transform
 			.datum(function(d) {
-				const textLength = this.getComputedTextLength();
-				d.textOffsetX = textLength / 2;
-				d.textOffsetY = parseFloat(getComputedStyle(this).fontSize) / 2;
-
 				const marginedRadius = radius + 7;
 
 				const theta = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+				const deg = theta / Math.PI * 180;
+
+				const textLength = this.getComputedTextLength();
+				d.textOffsetX = textLength / 2;
+				d.textOffsetY = (deg > 90 && deg < 270) ? 10 : 0;
 
 				d.xPosition = (d.textOffsetX + marginedRadius) * Math.sin(theta);
 				d.yPosition = (d.textOffsetY + marginedRadius) * -Math.cos(theta);
 
 				return d;
 			})
-			.attr("transform", function (d, i) {
-				const totalSlices = displayData.length;
+			.attr("transform", function(d, i) {
+				const totalSlices = labelData.length;
 				const sliceAngleDeg = (d.endAngle - d.startAngle) * (180 / Math.PI);
 
 				// check if last 2 slices (or just last) are < the threshold
@@ -274,7 +276,7 @@ export class Pie extends Component {
 		const enteringHorizontalLines = enteringCallouts.append("line")
 			.classed("horizontal-line", true);
 
-		enteringHorizontalLines.merge(callouts.selectAll("line.horizontal-line"))
+		enteringHorizontalLines.merge(svg.selectAll("line.horizontal-line"))
 			.datum(function(d: any) {
 				return select(this.parentNode).datum();
 			})
@@ -288,11 +290,11 @@ export class Pie extends Component {
 	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-		const { groupIdentifier } = this.model.getOptions().data;
+		const { groupMapsTo } = this.model.getOptions().data;
 
 		this.parent.selectAll("path.slice")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => d.data[groupIdentifier] !== hoveredElement.datum()["name"] ? 0.3 : 1);
+			.attr("opacity", d => d.data[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements

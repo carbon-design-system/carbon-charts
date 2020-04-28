@@ -2,12 +2,10 @@
 import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
 import {
-	ChartConfig,
-	ScatterChartOptions
+	BarChartOptions,
+	ChartConfig
 } from "../interfaces/index";
 import { Tools } from "../tools";
-import { SimpleBarChartModel } from "../model-simple-bar";
-import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
@@ -24,9 +22,7 @@ import {
 } from "../components/index";
 
 export class SimpleBarChart extends AxisChart {
-	model = new SimpleBarChartModel(this.services);
-
-	constructor(holder: Element, chartConfigs: ChartConfig<ScatterChartOptions>) {
+	constructor(holder: Element, chartConfigs: ChartConfig<BarChartOptions>) {
 		super(holder, chartConfigs);
 
 		// Merge the default options for this chart

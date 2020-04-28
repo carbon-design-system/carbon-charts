@@ -12,11 +12,11 @@ export class Bubble extends Scatter {
 
 	getRadiusScale(selection: Selection<any, any, any, any>) {
 		const options = this.model.getOptions();
-		const { radiusIdentifier } = options.bubble;
+		const { radiusMapsTo } = options.bubble;
 
 		const data = selection.data();
 		// Filter out any null/undefined values
-		const allRadii = data.map(d => d[radiusIdentifier]).filter(radius => radius);
+		const allRadii = data.map(d => d[radiusMapsTo]).filter(radius => radius);
 		const chartSize = DOMUtils.getSVGElementSize(this.services.domUtils.getMainSVG(), { useAttr: true });
 
 		// We need the ternary operator here in case the user
@@ -30,11 +30,11 @@ export class Bubble extends Scatter {
 	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
 		// Chart options mixed with the internal configurations
 		const options = this.model.getOptions();
-		const { radiusIdentifier } = options.bubble;
+		const { radiusMapsTo } = options.bubble;
 
 		const radiusScale = this.getRadiusScale(selection);
 
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		selection.raise()
@@ -43,10 +43,10 @@ export class Bubble extends Scatter {
 			.transition(this.services.transitions.getTransition("bubble-update-enter", animate))
 			.attr("cy", (d, i) => this.services.cartesianScales.getRangeValue(d, i))
 			// We need `|| 1` here in case the user doesn't provide radius values in data
-			.attr("r", d => radiusScale(d[radiusIdentifier] || 1))
-			.attr("fill", d => this.model.getFillColor(d[groupIdentifier], d[domainIdentifier], d))
+			.attr("r", d => radiusScale(d[radiusMapsTo] || 1))
+			.attr("fill", d => this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d))
 			.attr("fill-opacity", options.bubble.fillOpacity)
-			.attr("stroke", d => this.model.getStrokeColor(d[groupIdentifier], d[domainIdentifier], d))
+			.attr("stroke", d => this.model.getStrokeColor(d[groupMapsTo], d[domainIdentifier], d))
 			.attr("opacity", 1);
 	}
 }

@@ -39,49 +39,6 @@ export class ChartModel {
 		this.services = services;
 	}
 
-	/**
-	 * Converts data provided in the older format to tabular
-	 *
-	 */
-	protected transformToTabularData(data) {
-		console.warn("We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here")
-		const tabularData = [];
-		const { datasets, labels } = data;
-
-		// Loop through all datasets
-		datasets.forEach(dataset => {
-			const group = dataset.label;
-
-			// Update each data point to the new format
-			dataset.data.forEach((datum, i) => {
-				const updatedDatum = {
-					group,
-					key: labels[i]
-				};
-
-				if (isNaN(datum)) {
-					updatedDatum["value"] = datum.value;
-					updatedDatum["date"] = datum.date;
-				} else {
-					updatedDatum["value"] = datum;
-				}
-
-				tabularData.push(updatedDatum);
-			});
-		});
-
-		return tabularData;
-	}
-
-	protected sanitize(data) {
-		// if data is not an array
-		if (!Array.isArray(data)) {
-			return this.transformToTabularData(data);
-		}
-
-		return data;
-	}
-
 	getDisplayData() {
 		if (!this.get("data")) {
 			return null;
@@ -92,10 +49,10 @@ export class ChartModel {
 
 		// Remove datasets that have been disabled
 		const displayData = Tools.clone(this.get("data"));
-		const { groupIdentifier } = this.getOptions().data;
+		const { groupMapsTo } = this.getOptions().data;
 
 		return displayData.filter(datum => {
-			const group = dataGroups.find(group => group.name === datum[groupIdentifier]);
+			const group = dataGroups.find(group => group.name === datum[groupMapsTo]);
 
 			return group.status === ACTIVE;
 		});
@@ -125,52 +82,31 @@ export class ChartModel {
 		return sanitizedData;
 	}
 
-	/*
-	 * Data groups
-	*/
-	protected updateAllDataGroups() {
-		// If allDataGroups hasn't been initialized yet
-		// Set it to the current set of data groups
-		if (!this.allDataGroups) {
-			this.allDataGroups = this.getDataGroups().map(group => group.name);
-		} else {
-			// Loop through current data groups
-			this.getDataGroups().forEach(dataGroup => {
-				// If group name hasn't been stored yet, store it
-				if (this.allDataGroups.indexOf(dataGroup.name) === -1) {
-					this.allDataGroups.push(dataGroup.name);
-				}
-			});
-		}
-	}
-
-	protected generateDataGroups(data) {
-		const { groupIdentifier } = this.getOptions().data;
-		const { ACTIVE } = Configuration.legend.items.status;
-
-		const uniqueDataGroups = map(data, datum => datum[groupIdentifier]).keys();
-		return uniqueDataGroups.map(groupName => ({
-			name: groupName,
-			status: ACTIVE
-		}));
-	}
-
 	getDataGroups() {
 		return this.get("dataGroups");
 	}
 
+	getActiveDataGroups() {
+		const { ACTIVE } = Configuration.legend.items.status;
+
+		return this.getDataGroups().filter(dataGroup => dataGroup.status === ACTIVE);
+	}
 
 	getDataGroupNames() {
-		return this.get("dataGroups").map(dataGroup => dataGroup.name);
+		return this.getDataGroups().map(dataGroup => dataGroup.name);
+	}
+
+	getActiveDataGroupNames() {
+		return this.getActiveDataGroups().map(dataGroup => dataGroup.name);
 	}
 
 	getGroupedData() {
 		const displayData = this.getDisplayData();
 		const groupedData = {};
-		const { groupIdentifier } = this.getOptions().data;
+		const { groupMapsTo } = this.getOptions().data;
 
 		displayData.map(datum => {
-			const group = datum[groupIdentifier];
+			const group = datum[groupMapsTo];
 			if (groupedData[group] !== null && groupedData[group] !== undefined) {
 				groupedData[group].push(datum);
 			} else {
@@ -179,17 +115,15 @@ export class ChartModel {
 		});
 
 		return Object.keys(groupedData)
-			.map(groupName => {
-				return {
-					name: groupName,
-					data: groupedData[groupName]
-				};
-			});
+			.map(groupName => ({
+				name: groupName,
+				data: groupedData[groupName]
+			}));
 	}
 
 	getDataValuesGroupedByKeys() {
 		const options = this.getOptions();
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 
 		const displayData = this.getDisplayData();
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
@@ -202,8 +136,8 @@ export class ChartModel {
 			const correspondingValues = { sharedStackKey: key };
 			dataGroupNames.forEach(dataGroupName => {
 				const correspondingDatum = displayData.find(datum => {
-					return datum[groupIdentifier] === dataGroupName &&
-						`${datum[domainIdentifier]}` === key;
+					return datum[groupMapsTo] === dataGroupName &&
+						datum[domainIdentifier].toString() === key;
 				});
 
 				correspondingValues[dataGroupName] = correspondingDatum ? correspondingDatum[rangeIdentifier] : null;
@@ -214,19 +148,19 @@ export class ChartModel {
 
 	getStackedData() {
 		const options = this.getOptions();
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 
 		const dataGroupNames = this.getDataGroupNames();
 		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys();
 
 		return stack().keys(dataGroupNames)(dataValuesGroupedByKeys)
 			.map((series, i) => {
-				// Add data group names to each serie
+				// Add data group names to each series
 				return Object.keys(series)
 					.filter((key: any) => !isNaN(key))
 					.map(key => {
 						const element = series[key];
-						element[groupIdentifier] = dataGroupNames[i];
+						element[groupMapsTo] = dataGroupNames[i];
 
 						return element;
 					});
@@ -279,7 +213,7 @@ export class ChartModel {
 		this.updateAllDataGroups();
 
 		this.setColorScale();
-		this.services.events.dispatchEvent("model-update");
+		this.services.events.dispatchEvent(Events.Model.UPDATE);
 	}
 
 	setUpdateCallback(cb: Function) {
@@ -316,19 +250,15 @@ export class ChartModel {
 			});
 		}
 
+		// dispatch legend filtering event with the status of all the dataLabels
+		this.services.events.dispatchEvent(Events.Legend.ITEMS_UPDATE, {
+			dataGroups
+		});
+
 		// Update model
 		this.set({
 			dataGroups
 		});
-	}
-
-	/*
-	 * Fill scales
-	*/
-	protected setColorScale() {
-		const colors = colorPalettes.DEFAULT;
-		this.colorScale = scaleOrdinal().range(colors)
-			.domain(this.allDataGroups);
 	}
 
 	/**
@@ -369,5 +299,143 @@ export class ChartModel {
 
 	getFillScale() {
 		return this.colorScale;
+	}
+
+	/**
+	 * Converts data provided in the older format to tabular
+	 *
+	 */
+	protected transformToTabularData(data) {
+		console.warn("We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format")
+		const tabularData = [];
+		const { datasets, labels } = data;
+
+		// Loop through all datasets
+		datasets.forEach(dataset => {
+			// Update each data point to the new format
+			dataset.data.forEach((datum, i) => {
+				let group;
+
+				const datasetLabel = Tools.getProperty(dataset, "label");
+				if (datasetLabel === null) {
+					const correspondingLabel = Tools.getProperty(labels, i);
+					if (correspondingLabel) {
+						group = correspondingLabel;
+					} else {
+						group = "Ungrouped";
+					}
+				} else {
+					group = datasetLabel;
+				}
+
+				const updatedDatum = {
+					group,
+					key: labels[i]
+				};
+
+				if (isNaN(datum)) {
+					updatedDatum["value"] = datum.value;
+					updatedDatum["date"] = datum.date;
+				} else {
+					updatedDatum["value"] = datum;
+				}
+
+				tabularData.push(updatedDatum);
+			});
+		});
+
+		return tabularData;
+	}
+
+	protected getTabularData(data) {
+		// if data is not an array
+		if (!Array.isArray(data)) {
+			return this.transformToTabularData(data);
+		}
+
+		return data;
+	}
+
+	protected sanitize(data) {
+		return this.getTabularData(data);
+	}
+
+	/*
+	 * Data groups
+	*/
+	protected updateAllDataGroups() {
+		// allDataGroups is used to generate a color scale that applies
+		// to all the groups. Now when the data updates, you might remove a group,
+		// and then bring it back in a newer data update, therefore
+		// the order of the groups in allDataGroups matters so that you'd never
+		// have an incorrect color assigned to a group.
+
+		// Also, a new group should only be added to allDataGroups if
+		// it doesn't currently exist
+
+		if (!this.allDataGroups) {
+			this.allDataGroups = this.getDataGroupNames();
+		} else {
+			// Loop through current data groups
+			this.getDataGroupNames().forEach(dataGroupName => {
+				// If group name hasn't been stored yet, store it
+				if (this.allDataGroups.indexOf(dataGroupName) === -1) {
+					this.allDataGroups.push(dataGroupName);
+				}
+			});
+		}
+	}
+
+	protected generateDataGroups(data) {
+		const { groupMapsTo } = this.getOptions().data;
+		const { ACTIVE } = Configuration.legend.items.status;
+
+		const uniqueDataGroups = map(data, datum => datum[groupMapsTo]).keys();
+		return uniqueDataGroups.map(groupName => ({
+			name: groupName,
+			status: ACTIVE
+		}));
+	}
+
+	/*
+	 * Fill scales
+	*/
+	protected setColorScale() {
+		let defaultColors = colorPalettes.DEFAULT;
+
+		const options = this.getOptions();
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+
+		// If there is no valid user provided scale, use the default set of colors
+		if (userProvidedScale === null || Object.keys(userProvidedScale).length === 0) {
+			this.colorScale = scaleOrdinal().range(defaultColors)
+				.domain(this.allDataGroups);
+
+			return;
+		}
+
+		/**
+		 * Go through allDataGroups. If a data group has a color value provided
+		 * by the user, add that to the color range
+		 * If not, add a default color
+		 */
+		const colorRange = [];
+		let colorIndex = 0;
+		this.allDataGroups.forEach(dataGroup => {
+			if (userProvidedScale[dataGroup]) {
+				colorRange.push(userProvidedScale[dataGroup]);
+			} else {
+				colorRange.push(defaultColors[colorIndex]);
+			}
+
+			if (colorIndex === defaultColors.length - 1) {
+				colorIndex = 0;
+			} else {
+				colorIndex++;
+			}
+		});
+
+		this.colorScale = scaleOrdinal().range(colorRange)
+			.domain(this.allDataGroups);
 	}
 }

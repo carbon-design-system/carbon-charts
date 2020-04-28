@@ -3,7 +3,6 @@ import { Tools } from "../../tools";
 import { Bar } from "./bar";
 import {
 	Roles,
-	ScaleTypes,
 	TooltipTypes,
 	Events,
 	CartesianOrientations
@@ -34,7 +33,7 @@ export class StackedBar extends Bar {
 		// Chart options mixed with the internal configurations
 		const displayData = this.model.getDisplayData();
 		const options = this.model.getOptions();
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
@@ -62,8 +61,7 @@ export class StackedBar extends Bar {
 
 		// Update data on all bars
 		const bars = svg.selectAll("g.bars").selectAll("path.bar")
-			// Remove bars with a start and end value of 0
-			.data(data => data.filter(d => !(d[0] === 0 && d[1] === 0)));
+			.data(data => data);
 
 		// Remove bars that need to be removed
 		bars.exit()
@@ -74,7 +72,7 @@ export class StackedBar extends Bar {
 			.merge(bars)
 			.classed("bar", true)
 			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-			.attr("fill", d => this.model.getFillColor(d[groupIdentifier]))
+			.attr("fill", d => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
 				const key = stackKeys[i];
 
@@ -132,7 +130,7 @@ export class StackedBar extends Bar {
 
 	addEventListeners() {
 		const options = this.model.getOptions();
-		const { groupIdentifier } = options.data;
+		const { groupMapsTo } = options.data;
 
 		const self = this;
 		this.parent.selectAll("path.bar")
@@ -149,19 +147,31 @@ export class StackedBar extends Bar {
 				});
 			})
 			.on("mousemove", function(datum) {
+				const displayData = self.model.getDisplayData();
 				const hoveredElement = select(this);
-				const itemData = datum.data[datum.group];
 
+				const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
 				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
-				const { groupIdentifier } = self.model.getOptions().data;
-		
+				const { groupMapsTo } = self.model.getOptions().data;
+
+				let matchingDataPoint = displayData.find(d => {
+					return d[rangeIdentifier] === datum.data[datum.group] &&
+						d[domainIdentifier].toString() === datum.data.sharedStackKey &&
+						d[groupMapsTo] === datum.group;
+				});
+
+				if (matchingDataPoint === undefined) {
+					matchingDataPoint = {
+						[domainIdentifier]: datum.data.sharedStackKey,
+						[rangeIdentifier]: datum.data[datum.group],
+						[groupMapsTo]: datum.group
+					};
+				}
+
 				// Show tooltip
-				self.services.events.dispatchEvent("show-tooltip", {
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					data: {
-						[rangeIdentifier]: itemData,
-						[groupIdentifier]: datum.group
-					},
+					data: matchingDataPoint,
 					type: TooltipTypes.DATAPOINT
 				});
 			})
@@ -177,7 +187,7 @@ export class StackedBar extends Bar {
 				hoveredElement.classed("hovered", false);
 
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
-					.attr("fill", (d: any) => self.model.getFillColor(d[groupIdentifier]));
+					.attr("fill", (d: any) => self.model.getFillColor(d[groupMapsTo]));
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {

@@ -8,11 +8,11 @@ import { ChartModel } from "../../model";
 import Position, { PLACEMENTS } from "@carbon/utils-position";
 
 // import the settings for the css prefix
-import settings from "carbon-components/src/globals/js/settings";
+import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { select, mouse, event } from "d3-selection";
-import { TooltipTypes, ScaleTypes, TooltipPosition } from "../../interfaces";
+import { TooltipTypes, TooltipPosition, Events } from "../../interfaces";
 
 export class Tooltip extends Component {
 	type = "tooltip";
@@ -37,7 +37,7 @@ export class Tooltip extends Component {
 		this.tooltip.style("max-width", null);
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this.services.events.addEventListener("show-tooltip", e => {
+		this.services.events.addEventListener(Events.Tooltip.SHOW, e => {
 			// check the type of tooltip and that it is enabled
 			if ((e.detail.type === TooltipTypes.DATAPOINT && Tools.getProperty(this.model.getOptions(), "tooltip", "datapoint", "enabled"))
 				|| (e.detail.type === TooltipTypes.GRIDLINE && Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) ) {
@@ -85,7 +85,7 @@ export class Tooltip extends Component {
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
-		this.services.events.addEventListener("hide-tooltip", () => {
+		this.services.events.addEventListener(Events.Tooltip.HIDE, () => {
 			this.tooltip.classed("hidden", true);
 		});
 	}
@@ -98,7 +98,7 @@ export class Tooltip extends Component {
 		}
 		// this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
 		const dataVal = Tools.getProperty(data, "data") ? data.data : data;
-		const { groupIdentifier } = this.model.getOptions().data;
+		const { groupMapsTo } = this.model.getOptions().data;
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 		// format the value if needed
@@ -106,7 +106,7 @@ export class Tooltip extends Component {
 		this.model.getOptions().tooltip.valueFormatter(dataVal[rangeIdentifier]) : dataVal[rangeIdentifier].toLocaleString("en");
 
 		// pie charts don't have a dataset label since they only support one dataset
-		const label = dataVal[groupIdentifier];
+		const label = dataVal[groupMapsTo];
 
 		return `<div class="datapoint-tooltip">
 					<p class="label">${label}</p>
@@ -124,20 +124,20 @@ export class Tooltip extends Component {
 
 		return  "<ul class='multi-tooltip'>" +
 			data.map(datum => {
-				const { groupIdentifier } = this.model.getOptions().data;
+				const { groupMapsTo } = this.model.getOptions().data;
 				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 				const userProvidedValueFormatter = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter");
 				const formattedValue = userProvidedValueFormatter ? userProvidedValueFormatter(datum[rangeIdentifier]) : datum[rangeIdentifier].toLocaleString("en");
 
 				// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
-				const indicatorColor = this.model.getStrokeColor(datum[groupIdentifier]);
+				const indicatorColor = this.model.getStrokeColor(datum[groupMapsTo]);
 
 				return `
 				<li>
 					<div class="datapoint-tooltip">
 						<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
-						<p class="label">${datum[groupIdentifier]}</p>
+						<p class="label">${datum[groupMapsTo]}</p>
 						<p class="value">${formattedValue}</p>
 					</div>
 				</li>`;

@@ -1,4 +1,3 @@
-
 export const pieData = [
 	{ group: "2V2N 9KYPM version 1", value: 20000 },
 	{ group: "L22I P66EP L22I P66EP L22I P66EP", value: 65000 },

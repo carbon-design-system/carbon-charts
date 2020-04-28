@@ -1,6 +1,6 @@
 import { lineTimeSeriesData } from "./line";
 
-export const bubbleLinearData = [
+export const bubbleDoubleLinearData = [
 	{ group: "Dataset 1", sales: 10000, profit: 32100, surplus: 50000 },
 	{ group: "Dataset 1", sales: 12000, profit: 23500, surplus: 34000 },
 	{ group: "Dataset 1", sales: 14000, profit: 53100, surplus: 63000 },
@@ -13,22 +13,22 @@ export const bubbleLinearData = [
 	{ group: "Dataset 2", sales: 15750, profit: 24300, surplus: 64000 }
 ];
 
-export const bubbleLinearOptions = {
+export const bubbleDoubleLinearOptions = {
 	title: "Bubble (linear)",
 	axes: {
 		bottom: {
-			title: "Sales",
-			identifier: "sales",
+			title: "No. of employees",
+			mapsTo: "sales",
 			includeZero: false
 		},
 		left: {
-			title: "Profit",
-			identifier: "profit",
+			title: "Annual sales",
+			mapsTo: "profit",
 			includeZero: false
 		}
 	},
 	bubble: {
-		radiusIdentifier: "surplus"
+		radiusMapsTo: "surplus"
 	}
 };
 
@@ -59,16 +59,16 @@ export const bubbleDiscreteOptions = {
 	title: "Bubble (discrete)",
 	axes: {
 		bottom: {
-			title: "2018 Annual Sales Figures",
+			title: "2019 Annual Sales Figures",
 			scaleType: "labels",
-			identifier: "key"
+			mapsTo: "key"
 		},
 		left: {
-			identifier: "value"
+			mapsTo: "value"
 		}
 	},
 	bubble: {
-		radiusIdentifier: "surplus"
+		radiusMapsTo: "surplus"
 	}
 };
 
@@ -82,13 +82,13 @@ export const bubbleTimeSeriesOptions = {
 		bottom: {
 			title: "2019 Annual Sales Figures",
 			scaleType: "time",
-			identifier: "date"
+			mapsTo: "date"
 		},
 		left: {
-			identifier: "value"
+			mapsTo: "value"
 		}
 	},
 	bubble: {
-		radiusIdentifier: "surplus"
+		radiusMapsTo: "surplus"
 	}
 };

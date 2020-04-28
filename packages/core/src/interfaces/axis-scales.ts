@@ -25,6 +25,10 @@ export interface AxisOptions {
 	*/
 	includeZero?: boolean;
 	/**
+	 * identifies what key within the data the axis values would map to
+	 */
+	mapsTo?: string;
+	/**
 	 * optional title for the scales
 	 */
 	title?: string;
