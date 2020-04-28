@@ -74,7 +74,7 @@ export class Ruler extends Component {
 
 				// there's a match and currentValue is either less then or equal to already stored values
 				if (pointIsWithinThreshold(currentValue.domainValue, x)) {
-					if (sampleAccumValue !== undefined && currentValue < sampleAccumValue) {
+					if (sampleAccumValue !== undefined && currentValue.domainValue < sampleAccumValue) {
 						// there's a closer data point in the threshold area, so reinstantiate array
 						accum = [currentValue];
 					} else {
