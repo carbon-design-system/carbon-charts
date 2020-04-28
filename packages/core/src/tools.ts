@@ -13,6 +13,7 @@ import {
 	clamp as lodashClamp,
 	flatten as lodashFlatten,
 	camelCase as lodashCamelCase,
+	isEqual as lodashIsEqual,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Cancelable,
 	DebounceSettings
@@ -28,6 +29,7 @@ export namespace Tools {
 	export const clamp = lodashClamp;
 	export const flatten = lodashFlatten;
 	export const camelCase = lodashCamelCase;
+	export const isEqual = lodashIsEqual;
 
 	/**
 	 * Returns default chart options merged with provided options,

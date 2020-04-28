@@ -195,6 +195,11 @@ let allDemoGroups = [
 				isDemoExample: true
 			},
 			{
+				options: lineDemos.lineTimeSeriesDenseOptions,
+				data: lineDemos.lineTimeSeriesDenseData,
+				chartType: chartTypes.LineChart
+			},
+			{
 				options: lineDemos.lineOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart,
