@@ -57,23 +57,25 @@ export class Scatter extends Component {
 		this.addEventListeners();
 	}
 
-	isThresholdsAnomaly(datum: any, index: number) {
+	// A value is an anomaly if is above all defined domain and range thresholds
+	isValueThresholdsAnomaly(datum: any, index: number) {
 		const { handleThresholds } = this.configs;
 		if (!handleThresholds) { return false; }
 
 		const { cartesianScales } = this.services;
+		const orientation = cartesianScales.getOrientation();
 
-		// Get higher domain and range thresholds
+		// Get highest domain and range thresholds
 		const [xThreshold, yThreshold] = Tools.flipDomainAndRangeBasedOnOrientation(
-			this.services.cartesianScales.getDomainDominantThreshold(),
-			this.services.cartesianScales.getRangeDominantThreshold(),
-			cartesianScales.getOrientation()
+			this.services.cartesianScales.getHighestDomainThreshold(),
+			this.services.cartesianScales.getHighestRangeThreshold(),
+			orientation
 		);
 
 		const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
 			(d, i) => cartesianScales.getDomainValue(d, i),
 			(d, i) => cartesianScales.getRangeValue(d, i),
-			cartesianScales.getOrientation()
+			orientation
 		);
 
 		// Get datum x and y values
@@ -115,7 +117,8 @@ export class Scatter extends Component {
 
 		selection.raise()
 			.classed("dot", true)
-			.classed("threshold-anomaly", (d, i) => this.isThresholdsAnomaly(d, i))
+			// Set class to highlight the dots that are above all the thresholds, in both directions (vertical and horizontal)
+			.classed("threshold-anomaly", (d, i) => this.isValueThresholdsAnomaly(d, i))
 			.classed("filled", d => this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
 			.classed("unfilled", d => !this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
 			.attr("cx", getXValue)

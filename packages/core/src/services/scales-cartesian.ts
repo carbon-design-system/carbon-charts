@@ -330,39 +330,39 @@ export class CartesianScales extends Service {
 		return scale;
 	}
 
-	getDomainDominantThreshold(): null | {threshold: ThresholdOptions, scaleValue: number} {
+	getHighestDomainThreshold(): null | {threshold: ThresholdOptions, scaleValue: number} {
 		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
-		const scaleDomainPosition = this.getDomainAxisPosition();
+		const domainAxisPosition = this.getDomainAxisPosition();
 
-		const { thresholds } = axesOptions[scaleDomainPosition];
+		const { thresholds } = axesOptions[domainAxisPosition];
 
 		if (!thresholds) { return null; }
 
-		const scaleDomain = this.getDomainScale();
+		const domainScale = this.getDomainScale();
 		// Find the highest threshold for the domain
-		const higherDomainThreshold = thresholds.sort((a, b) => b.value - a.value)[0];
+		const highestThreshold = thresholds.sort((a, b) => b.value - a.value)[0];
 
 		return {
-			threshold: higherDomainThreshold,
-			scaleValue: scaleDomain(higherDomainThreshold.value)
+			threshold: highestThreshold,
+			scaleValue: domainScale(highestThreshold.value)
 		};
 	}
 
-	getRangeDominantThreshold(): null | {threshold: ThresholdOptions, scaleValue: number} {
+	getHighestRangeThreshold(): null | {threshold: ThresholdOptions, scaleValue: number} {
 		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
-		const scaleRangePosition = this.getRangeAxisPosition();
+		const rangeAxisPosition = this.getRangeAxisPosition();
 
-		const { thresholds } = axesOptions[scaleRangePosition];
+		const { thresholds } = axesOptions[rangeAxisPosition];
 
 		if (!thresholds) { return null; }
 
-		const scaleRange = this.getRangeScale();
+		const rangeScale = this.getRangeScale();
 		// Find the highest threshold for the range
-		const higherRangeThreshold = thresholds.sort((a, b) => b.value - a.value)[0];
+		const highestThreshold = thresholds.sort((a, b) => b.value - a.value)[0];
 
 		return {
-			threshold: higherRangeThreshold,
-			scaleValue: scaleRange(higherRangeThreshold.value)
+			threshold: highestThreshold,
+			scaleValue: rangeScale(highestThreshold.value)
 		};
 	}
 }
