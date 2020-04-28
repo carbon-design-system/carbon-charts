@@ -224,9 +224,6 @@ export class CartesianScales extends Service {
 		return AxisPositions.LEFT;
 	}
 
-			if (spaceToAddToEdges) {
-				const startDate = new Date(domain[0]);
-				const endDate = new Date(domain[1]);
 	protected findMainHorizontalAxisPosition() {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes");
@@ -271,6 +268,10 @@ export class CartesianScales extends Service {
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
 		const { includeZero } = axisOptions;
 		const scaleType = Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
+
+		if (this.model.areDataEmpty()) {
+			return [];
+		}
 
 		const displayData = this.model.getDisplayData();
 		const { mapsTo } = axisOptions;

@@ -75,10 +75,6 @@ export class Scatter extends Component {
 			cartesianScales.getOrientation()
 		);
 
-		const { groupIdentifier } = options.data;
-		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-
 		selection.raise()
 			.classed("dot", true)
 			.classed("filled", d => this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))

@@ -6,6 +6,7 @@ import {
 	ChartConfig
 } from "../interfaces/index";
 import { Tools } from "../tools";
+import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {

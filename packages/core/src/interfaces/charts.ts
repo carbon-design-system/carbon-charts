@@ -58,6 +58,10 @@ export interface BaseChartOptions {
 		 * identifier for data groups
 		 */
 		groupMapsTo?: string;
+		/**
+		 * used to simulate data loading
+		 */
+		loading?: Boolean;
 	};
 	/**
 	 * options related to color scales
@@ -67,19 +71,6 @@ export interface BaseChartOptions {
 		 * e.g. { "Dataset 1": "blue" }
 		 */
 		scale?: object;
-	};
-	/**
-	 * options related to charting data
-	 */
-	data?: {
-		/**
-		 * identifier for data groups
-		 */
-		groupIdentifier?: String;
-		/**
-		 * used to simulate data loading
-		 */
-		loading?: Boolean;
 	};
 }
 

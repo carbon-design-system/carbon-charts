@@ -194,7 +194,7 @@ export class Axis extends Component {
 		// check that data exists, if they don't, doesn't show the title axis
 		if (axisOptions.title) {
 			const axisTitleRef = DOMUtils.appendOrSelect(container, `text.axis-title`)
-				.html(axisOptions.title);
+				.html(this.model.areDataEmpty() ? "" : axisOptions.title);
 
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
