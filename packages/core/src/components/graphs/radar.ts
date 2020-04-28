@@ -2,7 +2,7 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
-import { Events } from "../../interfaces";
+import { Events, TooltipTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 import { flatMapDeep } from "lodash-es";
 
