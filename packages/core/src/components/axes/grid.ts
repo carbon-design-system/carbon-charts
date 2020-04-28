@@ -21,10 +21,6 @@ export class Grid extends Component {
 
 		this.drawXGrid(animate);
 		this.drawYGrid(animate);
-
-		if (Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) {
-			this.addGridEventListeners();
-		}
 	}
 
 	drawXGrid(animate: boolean) {
