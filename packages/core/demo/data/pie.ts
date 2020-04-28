@@ -12,17 +12,17 @@ export const pieOptions = {
 	resizable: true
 };
 
-// pie - no data
-export const pieNoData = [];
-export const pieNoDataOptions = {
-	title: "Pie (no data)",
+// pie - empty state
+export const pieEmptyStateData = [];
+export const pieEmptyStateOptions = {
+	title: "Pie (empty state)",
 	resizable: true
 };
 
-// pie - loading data
-export const pieLoadingData = [];
-export const pieLoadingDataOptions = {
-	title: "Pie (loading data)",
+// pie - skeleton
+export const pieSkeletonData = [];
+export const pieSkeletonOptions = {
+	title: "Pie (skeleton)",
 	resizable: true,
 	data: {
 		loading: true

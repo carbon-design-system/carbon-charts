@@ -205,10 +205,10 @@ export const lineTimeSeriesHorizontalOptions = {
 	curve: "curveMonotoneY"
 };
 
-// line - no data
-export const lineNoData = [];
-export const lineNoDataOptions = {
-	title: "Line (no data)",
+// line - empty state
+export const lineEmptyStateData = [];
+export const lineEmptyStateOptions = {
+	title: "Line (empty state)",
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
@@ -224,10 +224,10 @@ export const lineNoDataOptions = {
 	curve: "curveMonotoneX"
 };
 
-// line - loading data
-export const lineLoadingData = [];
-export const lineLoadingDataOptions = {
-	title: "Line (loading data)",
+// line - skeleton
+export const lineSkeletonData = [];
+export const lineSkeletonOptions = {
+	title: "Line (skeleton)",
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",

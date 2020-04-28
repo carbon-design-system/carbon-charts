@@ -93,10 +93,10 @@ export const bubbleTimeSeriesOptions = {
 	}
 };
 
-// bubble - no data
-export const bubbleNoData = [];
-export const bubbleNoDataOptions = {
-	title: "Bubble (no data)",
+// bubble - empty state
+export const bubbleEmptyStateData = [];
+export const bubbleEmptyStateOptions = {
+	title: "Bubble (empty state)",
 	axes: {
 		bottom: {
 			title: "No. of employees",
@@ -114,10 +114,10 @@ export const bubbleNoDataOptions = {
 	}
 };
 
-// bubble - loading data
-export const bubbleLoadingData = [];
-export const bubbleLoadingDataOptions = {
-	title: "Bubble (loading data)",
+// bubble - skeleton
+export const bubbleSkeletonData = [];
+export const bubbleSkeletonOptions = {
+	title: "Bubble (skeleton)",
 	axes: {
 		bottom: {
 			title: "No. of employees",

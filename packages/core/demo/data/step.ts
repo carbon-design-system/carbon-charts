@@ -21,17 +21,17 @@ export const stepTimeSeriesOptions = Tools.merge({}, lineTimeSeriesOptions, {
 
 export const stepTimeSeriesData = lineTimeSeriesData;
 
-// step - no data
-export const stepNoData = [];
-export const stepNoDataOptions = Tools.merge({}, lineTimeSeriesOptions, {
-	title: "Step (no data)",
+// step - empty state
+export const stepEmptyStateData = [];
+export const stepEmptyStateOptions = Tools.merge({}, lineTimeSeriesOptions, {
+	title: "Step (empty state)",
 	curve: "curveStepAfter"
 });
 
-// step - loading data
-export const stepLoadingData = [];
-export const stepLoadingDataOptions = Tools.merge({}, lineTimeSeriesOptions, {
-	title: "Step (loading data)",
+// step - skeleton
+export const stepSkeletonData = [];
+export const stepSkeletonOptions = Tools.merge({}, lineTimeSeriesOptions, {
+	title: "Step (skeleton)",
 	curve: "curveStepAfter",
 	data: {
 		loading: true

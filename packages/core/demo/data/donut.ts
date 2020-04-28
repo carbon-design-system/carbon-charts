@@ -12,10 +12,10 @@ export const donutOptions = {
 	}
 };
 
-// donut - no data
-export const donutNoData = [];
-export const donutNoDataOptions = {
-	title: "Donut (no data)",
+// donut - empty state
+export const donutEmptyStateData = [];
+export const donutEmptyStateOptions = {
+	title: "Donut (empty state)",
 	resizable: true,
 	donut: {
 		center: {
@@ -24,10 +24,10 @@ export const donutNoDataOptions = {
 	}
 };
 
-// donut - loading data
-export const donutLoadingData = [];
-export const donutLoadingDataOptions = {
-	title: "Donut (loading data)",
+// donut - skeleton
+export const donutSkeletonData = [];
+export const donutSkeletonOptions = {
+	title: "Donut (skeleton)",
 	resizable: true,
 	donut: {
 		center: {

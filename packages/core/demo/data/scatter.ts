@@ -80,10 +80,10 @@ export const scatterTimeSeriesOptions = {
 	}
 };
 
-// scatter - no data
-export const scatterNoData = [];
-export const scatterNoDataOptions = {
-	title: "Scatter (no data)",
+// scatter - empty state
+export const scatterEmptyStateData = [];
+export const scatterEmptyStateOptions = {
+	title: "Scatter (empty state)",
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
@@ -96,10 +96,10 @@ export const scatterNoDataOptions = {
 	}
 };
 
-// scatter - loading data
-export const scatterLoadingData = [];
-export const scatterLoadingDataOptions = {
-	title: "Scatter (loading data)",
+// scatter - skeleton
+export const scatterSkeletonData = [];
+export const scatterSkeletonOptions = {
+	title: "Scatter (skeleton)",
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
