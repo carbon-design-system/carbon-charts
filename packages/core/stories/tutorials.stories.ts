@@ -1,5 +1,7 @@
 import { storiesOf } from "@storybook/html";
 import { withKnobs, object } from "@storybook/addon-knobs";
+import marked from "marked";
+
 
 import "../demo/styles.scss";
 
@@ -11,6 +13,8 @@ import {
 	vanillaTutorial,
 	vueTutorial
 } from "./tutorials/index";
+
+// import * as reactTut from "./tutorials/getting-started/react.md";
 
 // Syntax highlighting
 const hljs = require("highlight.js/lib/highlight.js");
