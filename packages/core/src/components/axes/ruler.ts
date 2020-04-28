@@ -53,7 +53,7 @@ export class Ruler extends Component {
 		const rangeScale = this.services.cartesianScales.getRangeScale();
 		const [yScaleEnd, yScaleStart] = rangeScale.range();
 
-		const scaledData: {domainValue: number, originalData: any}[] = displayData.map((d) => ({
+		const scaledData: {domainValue: number, originalData: any}[] = displayData.map(d => ({
 			domainValue: this.services.cartesianScales.getDomainValue(d),
 			originalData: d
 		}));
@@ -134,8 +134,7 @@ export class Ruler extends Component {
 				.attr("x1", sampleMatch.domainValue)
 				.attr("x2", sampleMatch.domainValue);
 		} else {
-			ruler.attr("opacity", 0);
-			dataPointElements.dispatch("mouseout");
+			this.hideRuler();
 		}
 	}
 
@@ -145,6 +144,7 @@ export class Ruler extends Component {
 		const dataPointElements = svg.selectAll("[role=graphics-symbol]");
 
 		dataPointElements.dispatch("mouseout");
+		this.services.events.dispatchEvent("hide-tooltip");
 		ruler.attr("opacity", 0);
 	}
 
@@ -163,7 +163,6 @@ export class Ruler extends Component {
 			})
 			.on("mouseout", function() {
 				self.hideRuler();
-				self.services.events.dispatchEvent("hide-tooltip");
 			});
 	}
 
