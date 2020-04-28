@@ -297,6 +297,7 @@ export const lineTimeSeriesYearlyOptions = {
 	}
 };
 
+// single datum
 export const lineTimeSeriesDataSingleDatum = {
 	labels: ["Qty"],
 	datasets: [
@@ -317,4 +318,40 @@ export const lineTimeSeriesSingleDatumOptions = {
 			scaleType: "time"
 		}
 	}
+};
+
+// addSpaceOnEdges = 0
+export const lineTimeSeriesNoExtendedDomainData = {
+	labels: ["Qty"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			data: [
+				{ date: new Date(2019, 11, 30), value: 10 },
+				{ date: new Date(2019, 11, 31), value: 10 },
+				{ date: new Date(2020, 0, 1), value: 10 },
+				{ date: new Date(2020, 0, 2), value: 10 },
+				{ date: new Date(2020, 0, 3), value: 10 },
+				{ date: new Date(2020, 0, 4), value: 10 },
+				{ date: new Date(2020, 0, 5), value: 10 }
+			]
+		}
+	]
+};
+
+export const lineTimeSeriesNoExtendedDomainOptions = {
+	title: "Line (time series) - addSpaceOnEdges = 0",
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: "time"
+		}
+	},
+	timeScale: {
+		addSpaceOnEdges: 0
+	},
+	points: {
+		radius: 1
+	},
+	filled: false
 };

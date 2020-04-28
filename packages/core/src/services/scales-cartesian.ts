@@ -36,18 +36,6 @@ import {
 	addSeconds
 } from "date-fns";
 
-function addPaddingInDomain([lower, upper]: number[], paddingRatio: number) {
-	const domainLength = upper - lower;
-	const padding = domainLength * paddingRatio;
-
-	// If padding crosses 0, keep 0 as new upper bound
-	const newUpper = upper <= 0 && upper + padding > 0 ? 0 : upper + padding;
-	// If padding crosses 0, keep 0 as new lower bound
-	const newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding;
-
-	return [newLower, newUpper];
-}
-
 export class CartesianScales extends Service {
 	protected scaleTypes = {
 		top: null,
@@ -83,57 +71,6 @@ export class CartesianScales extends Service {
 		axisPositions.forEach(axisPosition => {
 			this.scales[axisPosition] = this.createScale(axisPosition);
 		});
-	}
-
-	protected findMainVerticalAxisPosition() {
-		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, "axes");
-
-		// If right axis has been specified as `main`
-		if (Tools.getProperty(axisOptions, AxisPositions.RIGHT, "main") === true) {
-			return AxisPositions.RIGHT;
-		}
-
-		return AxisPositions.LEFT;
-	}
-
-	protected findMainHorizontalAxisPosition() {
-		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, "axes");
-
-		// If top axis has been specified as `main`
-		if (Tools.getProperty(axisOptions, AxisPositions.TOP, "main") === true) {
-			return AxisPositions.TOP;
-		}
-
-		return AxisPositions.BOTTOM;
-	}
-
-	protected findDomainAndRangeAxesPositions(mainVerticalAxisPosition: AxisPositions, mainHorizontalAxisPosition: AxisPositions) {
-		const options = this.model.getOptions();
-
-		const mainVerticalAxisOptions = Tools.getProperty(options, "axes", mainVerticalAxisPosition);
-		const mainHorizontalAxisOptions = Tools.getProperty(options, "axes", mainHorizontalAxisPosition);
-
-		const mainVerticalScaleType = mainVerticalAxisOptions.scaleType || ScaleTypes.LINEAR;
-		const mainHorizontalScaleType = mainHorizontalAxisOptions.scaleType || ScaleTypes.LINEAR;
-
-		const result = {
-			domainAxisPosition: null,
-			rangeAxisPosition: null
-		};
-		if (mainHorizontalScaleType === ScaleTypes.LABELS || mainHorizontalScaleType === ScaleTypes.TIME) {
-			result.domainAxisPosition = mainHorizontalAxisPosition;
-			result.rangeAxisPosition = mainVerticalAxisPosition;
-		} else if (mainVerticalScaleType === ScaleTypes.LABELS || mainVerticalScaleType === ScaleTypes.TIME) {
-			result.domainAxisPosition = mainVerticalAxisPosition;
-			result.rangeAxisPosition = mainHorizontalAxisPosition;
-		} else {
-			result.domainAxisPosition = mainHorizontalAxisPosition;
-			result.rangeAxisPosition = mainVerticalAxisPosition;
-		}
-
-		return result;
 	}
 
 	findDomainAndRangeAxes() {
@@ -264,6 +201,68 @@ export class CartesianScales extends Service {
 		});
 	}
 
+	extendsDomain(axisPosition: AxisPositions, domain: any) {
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		if (axisOptions.scaleType === ScaleTypes.TIME) {
+			const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
+			return addSpacingToTimeDomain(domain, spaceToAddToEdges);
+		} else {
+			return addSpacingToContinuousDomain(domain, Configuration.axis.paddingRatio);
+		}
+	}
+
+	protected findMainVerticalAxisPosition() {
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes");
+
+		// If right axis has been specified as `main`
+		if (Tools.getProperty(axisOptions, AxisPositions.RIGHT, "main") === true) {
+			return AxisPositions.RIGHT;
+		}
+
+		return AxisPositions.LEFT;
+	}
+
+	protected findMainHorizontalAxisPosition() {
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes");
+
+		// If top axis has been specified as `main`
+		if (Tools.getProperty(axisOptions, AxisPositions.TOP, "main") === true) {
+			return AxisPositions.TOP;
+		}
+
+		return AxisPositions.BOTTOM;
+	}
+
+	protected findDomainAndRangeAxesPositions(mainVerticalAxisPosition: AxisPositions, mainHorizontalAxisPosition: AxisPositions) {
+		const options = this.model.getOptions();
+
+		const mainVerticalAxisOptions = Tools.getProperty(options, "axes", mainVerticalAxisPosition);
+		const mainHorizontalAxisOptions = Tools.getProperty(options, "axes", mainHorizontalAxisPosition);
+
+		const mainVerticalScaleType = mainVerticalAxisOptions.scaleType || ScaleTypes.LINEAR;
+		const mainHorizontalScaleType = mainHorizontalAxisOptions.scaleType || ScaleTypes.LINEAR;
+
+		const result = {
+			domainAxisPosition: null,
+			rangeAxisPosition: null
+		};
+		if (mainHorizontalScaleType === ScaleTypes.LABELS || mainHorizontalScaleType === ScaleTypes.TIME) {
+			result.domainAxisPosition = mainHorizontalAxisPosition;
+			result.rangeAxisPosition = mainVerticalAxisPosition;
+		} else if (mainVerticalScaleType === ScaleTypes.LABELS || mainVerticalScaleType === ScaleTypes.TIME) {
+			result.domainAxisPosition = mainVerticalAxisPosition;
+			result.rangeAxisPosition = mainHorizontalAxisPosition;
+		} else {
+			result.domainAxisPosition = mainHorizontalAxisPosition;
+			result.rangeAxisPosition = mainVerticalAxisPosition;
+		}
+
+		return result;
+	}
+
 	protected getScaleDomain(axisPosition: AxisPositions) {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
@@ -279,11 +278,10 @@ export class CartesianScales extends Service {
 		}
 
 		// If scale is a LABELS scale, return some labels as the domain
-		if (axisOptions && axisOptions.scaleType === ScaleTypes.LABELS) {
+		if (axisOptions && scaleType === ScaleTypes.LABELS) {
 			// Get unique values
 			return map(displayData, d => d[mapsTo]).keys();
 		}
-
 
 		// Get the extent of the domain
 		let domain;
@@ -291,68 +289,17 @@ export class CartesianScales extends Service {
 		// If the scale is stacked
 		if (axisOptions.stacked) {
 			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys();
-			allDataValues = dataValuesGroupedByKeys.map(dataValues => {
-				return sum(
-					values(dataValues) as any
-				);
-			});
+			allDataValues = dataValuesGroupedByKeys.map(dataValues => sum(values(dataValues) as any));
 		} else {
 			allDataValues = displayData.map(datum => datum[mapsTo]);
 		}
 
-		if (axisOptions.scaleType !== ScaleTypes.TIME && includeZero) {
+		if (scaleType !== ScaleTypes.TIME && includeZero) {
 			allDataValues.push(0);
 		}
 
 		domain = extent(allDataValues);
-
-		if (axisOptions.scaleType === ScaleTypes.TIME) {
-			const spaceToAddToEdges = Tools.getProperty(options, "timeScale", "addSpaceOnEdges");
-
-			if (spaceToAddToEdges) {
-				const startDate = new Date(domain[0]);
-				const endDate = new Date(domain[1]);
-
-				if (differenceInYears(endDate, startDate) > 1) {
-					return [subYears(startDate, spaceToAddToEdges), addYears(endDate, spaceToAddToEdges)];
-				}
-
-				if (differenceInMonths(endDate, startDate) > 1) {
-					return [subMonths(startDate, spaceToAddToEdges), addMonths(endDate, spaceToAddToEdges)];
-				}
-
-				if (differenceInDays(endDate, startDate) > 1) {
-					return [subDays(startDate, spaceToAddToEdges), addDays(endDate, spaceToAddToEdges)];
-				}
-
-				if (differenceInHours(endDate, startDate) > 1) {
-					return [subHours(startDate, spaceToAddToEdges), addHours(endDate, spaceToAddToEdges)];
-				}
-
-				if (differenceInMinutes(endDate, startDate) > 30) {
-					return [subMinutes(startDate, spaceToAddToEdges * 30), addMinutes(endDate, spaceToAddToEdges * 30)];
-				}
-
-				if (differenceInMinutes(endDate, startDate) > 1) {
-					return [subMinutes(startDate, spaceToAddToEdges), addMinutes(endDate, spaceToAddToEdges)];
-				}
-
-				if (differenceInSeconds(endDate, startDate) > 15) {
-					return [subSeconds(startDate, spaceToAddToEdges * 15), addSeconds(endDate, spaceToAddToEdges * 15)];
-				}
-
-				if (differenceInSeconds(endDate, startDate) > 1) {
-					return [subSeconds(startDate, spaceToAddToEdges), addSeconds(endDate, spaceToAddToEdges)];
-				}
-
-				return [startDate, endDate];
-			}
-		}
-
-		domain = addPaddingInDomain(domain, Configuration.axis.paddingRatio);
-		if (scaleType === ScaleTypes.TIME) {
-			domain = domain.map(d => new Date(d));
-		}
+		domain = this.extendsDomain(axisPosition, domain);
 
 		return domain;
 	}
@@ -418,4 +365,55 @@ export class CartesianScales extends Service {
 			scaleValue: scaleRange(higherRangeThreshold.value)
 		};
 	}
+}
+
+function addSpacingToTimeDomain(domain: any, spaceToAddToEdges: number) {
+	const startDate = new Date(domain[0]);
+	const endDate = new Date(domain[1]);
+
+	if (differenceInYears(endDate, startDate) > 1) {
+		return [subYears(startDate, spaceToAddToEdges), addYears(endDate, spaceToAddToEdges)];
+	}
+
+	if (differenceInMonths(endDate, startDate) > 1) {
+		return [subMonths(startDate, spaceToAddToEdges), addMonths(endDate, spaceToAddToEdges)];
+	}
+
+	if (differenceInDays(endDate, startDate) > 1) {
+		return [subDays(startDate, spaceToAddToEdges), addDays(endDate, spaceToAddToEdges)];
+	}
+
+	if (differenceInHours(endDate, startDate) > 1) {
+		return [subHours(startDate, spaceToAddToEdges), addHours(endDate, spaceToAddToEdges)];
+	}
+
+	if (differenceInMinutes(endDate, startDate) > 30) {
+		return [subMinutes(startDate, spaceToAddToEdges * 30), addMinutes(endDate, spaceToAddToEdges * 30)];
+	}
+
+	if (differenceInMinutes(endDate, startDate) > 1) {
+		return [subMinutes(startDate, spaceToAddToEdges), addMinutes(endDate, spaceToAddToEdges)];
+	}
+
+	if (differenceInSeconds(endDate, startDate) > 15) {
+		return [subSeconds(startDate, spaceToAddToEdges * 15), addSeconds(endDate, spaceToAddToEdges * 15)];
+	}
+
+	if (differenceInSeconds(endDate, startDate) > 1) {
+		return [subSeconds(startDate, spaceToAddToEdges), addSeconds(endDate, spaceToAddToEdges)];
+	}
+
+	return [startDate, endDate];
+}
+
+function addSpacingToContinuousDomain([lower, upper]: number[], paddingRatio: number) {
+	const domainLength = upper - lower;
+	const padding = domainLength * paddingRatio;
+
+	// If padding crosses 0, keep 0 as new upper bound
+	const newUpper = upper <= 0 && upper + padding > 0 ? 0 : upper + padding;
+	// If padding crosses 0, keep 0 as new lower bound
+	const newLower = lower >= 0 && lower - padding < 0 ? 0 : lower - padding;
+
+	return [newLower, newUpper];
 }
