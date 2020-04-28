@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes, ScaleTypes } from "../../interfaces";
+import { TooltipTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -50,12 +50,11 @@ export class Ruler extends Component {
 			"[role=graphics-symbol]"
 		);
 		const displayData = this.model.getDisplayData();
-		const domainScale = this.services.cartesianScales.getDomainScale();
 		const rangeScale = this.services.cartesianScales.getRangeScale();
 		const [yScaleEnd, yScaleStart] = rangeScale.range();
 
-		const scaledData: {domainValue: number, originalData: any}[] = displayData.map((d, i) => ({
-			domainValue: this.services.cartesianScales.getDomainValue(d, i),
+		const scaledData: {domainValue: number, originalData: any}[] = displayData.map((d) => ({
+			domainValue: this.services.cartesianScales.getDomainValue(d),
 			originalData: d
 		}));
 
@@ -97,9 +96,11 @@ export class Ruler extends Component {
 				});
 
 			// get elements on which we should trigger mouse events
-			const hoveredElements = dataPointElements.filter((d, i) =>
-				dataPointsMatchingRulerLine.includes(d)
-			);
+			const domnainValuesMatchingRulerLine = dataPointsMatchingRulerLine.map(d => d.domainValue);
+			const hoveredElements = dataPointElements.filter(d => {
+				const domainValue = this.services.cartesianScales.getDomainValue(d);
+				return domnainValuesMatchingRulerLine.includes(domainValue);
+			});
 
 			/** if we pass from a trigger area to another one
 			 * mouseout on previous elements won't get dispatched
