@@ -55,7 +55,7 @@ export class Threshold extends Component {
 
 		if (isVertical) {
 			// Position the threshold on the y scale value
-			const y = scale(value) + (isScaleTypeLabels ? (scale.step() / 2) : 0) - yScaleStart;
+			const y = scale(value) + (isScaleTypeLabels ? (scale.step() / 2) : 0);
 			this.threshold.attr("transform", `translate(${xScaleStart}, ${y})`);
 			// Set line end point on the x-axis
 			thresholdLine.attr("x2", xScaleEnd - xScaleStart);
