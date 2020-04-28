@@ -108,4 +108,8 @@ Open browser to \`http://localhost:9006\`
 
 ##### List of available components
 View available components [here](https://github.com/carbon-design-system/carbon-charts#component-status)
+
+
+#### Troubleshoot
+If you experience any issues while getting set up with Carbon Charts, please head over to the [GitHub repo](https://github.com/carbon-design-system/carbon-charts) for more guidelines and support. Please [create an issue](https://github.com/carbon-design-system/carbon-charts/issues) if your issue does not already exist.
 `);
