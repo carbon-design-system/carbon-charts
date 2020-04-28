@@ -284,6 +284,11 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 			unselected: 0.2,
 			selected: 0.5
 		}
+	},
+	tooltip: {
+		gridline: {
+			enabled: true
+		}
 	}
 } as RadarChartOptions);
 

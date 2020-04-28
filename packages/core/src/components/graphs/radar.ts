@@ -22,6 +22,10 @@ interface Datum {
 
 export class Radar extends Component {
 	type = "radar";
+	uniqKeys: string[];
+	uniqGroups: string[];
+	displayDataNormalized: Array<Datum>;
+	groupedDataNormalized: any;
 
 	init() {
 		const { events } = this.services;
@@ -32,6 +36,8 @@ export class Radar extends Component {
 	}
 
 	render(animate = true) {
+		const self = this;
+
 		/////////////////////////////
 		// Containers
 		/////////////////////////////
@@ -45,10 +51,10 @@ export class Radar extends Component {
 		const displayData: Array<Datum> = this.model.getDisplayData();
 		const groupedData = this.model.getGroupedData();
 
-		const uniqKeys: string[] = Array.from(new Set(displayData.map(d => d.key)));
-		const uniqGroups: string[] = Array.from(new Set(displayData.map(d => d.group)));
-		const displayDataNormalized: Array<Datum> = normalizeFlatData(displayData, uniqKeys, uniqGroups);
-		const groupedDataNormalized = normalizeGroupedData(groupedData, uniqKeys);
+		this.uniqKeys = Array.from(new Set(displayData.map(d => d.key)));
+		this.uniqGroups = Array.from(new Set(displayData.map(d => d.group)));
+		this.displayDataNormalized = normalizeFlatData(displayData, this.uniqKeys, this.uniqGroups);
+		this.groupedDataNormalized = normalizeGroupedData(groupedData, this.uniqKeys);
 
 		const options = this.model.getOptions();
 		const configuration = Configuration.options.radarChart.radar;
@@ -77,14 +83,14 @@ export class Radar extends Component {
 
 		// given a key, return the corrisponding angle in radiants
 		const xScale = scaleBand()
-			.domain(displayDataNormalized.map(d => d.key))
+			.domain(this.displayDataNormalized.map(d => d.key))
 			.range([0, 2 * Math.PI]);
 		// console.log(`xScale [${xScale.domain()}] -> [${xScale.range()}]`);
 
 		const ticksNumber = 5;
 		const minRange = 10;
 		const yScale = scaleLinear()
-			.domain([0, max(displayDataNormalized.map(d => d.value))])
+			.domain([0, max(this.displayDataNormalized.map(d => d.value))])
 			.range([minRange, radius])
 			.nice(ticksNumber);
 		const yTicks = yScale.ticks(ticksNumber);
@@ -168,7 +174,7 @@ export class Radar extends Component {
 		// x axes
 		const labelPadding = 10;
 		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axes");
-		const xAxisUpdate = xAxes.selectAll("g.x-axis").data(uniqKeys);
+		const xAxisUpdate = xAxes.selectAll("g.x-axis").data(this.uniqKeys);
 		xAxisUpdate.join(
 			enter => enter.append("g")
 				.attr("class", "x-axis")
@@ -231,7 +237,7 @@ export class Radar extends Component {
 
 		// blobs
 		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
-		const blobUpdate = blobs.selectAll("g.blob").data(groupedDataNormalized, group => group.name);
+		const blobUpdate = blobs.selectAll("g.blob").data(this.groupedDataNormalized, group => group.name);
 		blobUpdate.join(
 			enter => enter.append("g")
 				.attr("class", "blob")
@@ -288,6 +294,8 @@ export class Radar extends Component {
 
 	addEventListeners() {
 		const self = this;
+
+		// events on blobs
 		this.parent.selectAll(".blobs .blob > path")
 			.on("mouseover", function (datum) {
 				// Dispatch mouse event
@@ -326,10 +334,68 @@ export class Radar extends Component {
 					.style("fill-opacity", 0.5);
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Radar.BLOB_MOUSEMOVE, {
+				self.services.events.dispatchEvent(Events.Radar.BLOB_MOUSEOUT, {
 					element: hoveredElement,
 					datum
 				});
+			});
+
+		// events on x axes
+		this.parent.selectAll(".x-axes .x-axis > line")
+			.on("mouseover", function (datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Radar.X_AXIS_MOUSEOVER, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mousemove", function (datum) {
+				const hoveredElement = select(this);
+
+				// Changhe style
+				hoveredElement.classed("hovered", true)
+					.transition(self.services.transitions.getTransition("x_axis_line_mouseover"))
+					.attr("stroke", "purple");
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Radar.X_AXIS_MOUSEMOVE, {
+					element: hoveredElement,
+					datum
+				});
+
+				// get the items that should be highlighted
+				const itemsToHighlight = self.displayDataNormalized.filter(d => d.key === datum);
+
+				// Show tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					hoveredElement,
+					multidata: itemsToHighlight,
+					type: TooltipTypes.GRIDLINE
+				});
+			})
+			.on("click", function(datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Radar.X_AXIS_CLICK, {
+					element: select(this),
+					datum
+				});
+			})
+			.on("mouseout", function(datum) {
+				const hoveredElement = select(this);
+
+				// Change style
+				hoveredElement.classed("hovered", false)
+					.transition(self.services.transitions.getTransition("x_axis_line_mouseout"))
+					.attr("stroke", "white");
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Radar.X_AXIS_MOUSEOUT, {
+					element: hoveredElement,
+					datum
+				});
+
+				// Hide tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, { hoveredElement });
 			});
 	}
 }
