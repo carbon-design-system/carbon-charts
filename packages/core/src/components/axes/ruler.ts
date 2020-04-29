@@ -19,7 +19,7 @@ function pointIsWithinThreshold(dx: number, x: number) {
 export class Ruler extends Component {
 	type = "ruler";
 	backdrop: GenericSvgSelection;
-	hoveredElements: GenericSvgSelection;
+	elementsToHighlight: GenericSvgSelection;
 
 	render() {
 		this.drawBackdrop();
@@ -97,17 +97,17 @@ export class Ruler extends Component {
 			 * so we need to do it manually
 			 */
 			if (
-				this.hoveredElements &&
-				this.hoveredElements.size() > 0 &&
-				!Tools.isEqual(this.hoveredElements, hoveredElements)
+				this.elementsToHighlight &&
+				this.elementsToHighlight.size() > 0 &&
+				!Tools.isEqual(this.elementsToHighlight, elementsToHighlight)
 			) {
 				this.hideRuler();
 			}
 
-			hoveredElements.dispatch("mouseover");
+			elementsToHighlight.dispatch("mouseover");
 
 			// set current hovered elements
-			this.hoveredElements = hoveredElements;
+			this.elementsToHighlight = elementsToHighlight;
 
 			this.services.events.dispatchEvent("show-tooltip", {
 				hoveredElement: line,
