@@ -1,3 +1,4 @@
+import * as areaDemos from "./area";
 import * as barDemos from "./bar";
 import * as bubbleDemos from "./bubble";
 import * as donutDemos from "./donut";
@@ -7,6 +8,7 @@ import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
 import * as timeSeriesAxisDemos from "./time-series-axis";
 
+export * from "./area";
 export * from "./bar";
 export * from "./bubble";
 export * from "./donut";
@@ -26,6 +28,11 @@ import {
 import { Tools } from "@carbon/charts/tools";
 
 export const chartTypes = {
+	AreaChart: {
+		vanilla: "AreaChart",
+		angular: "ibm-simple-bar-chart",
+		vue: "ccv-simple-bar-chart"
+	},
 	SimpleBarChart: {
 		vanilla: "SimpleBarChart",
 		angular: "ibm-simple-bar-chart",
@@ -69,6 +76,23 @@ export const chartTypes = {
 };
 
 let allDemoGroups = [
+	{
+		title: "Area",
+		demos: [
+			{
+				options: areaDemos.areaTimeSeriesCurvedOptions,
+				data: areaDemos.areaTimeSeriesCurvedData,
+				chartType: chartTypes.AreaChart,
+				isDemoExample: true
+			},
+			{
+				options: areaDemos.areaTimeSeriesOptions,
+				data: areaDemos.areaTimeSeriesData,
+				chartType: chartTypes.AreaChart,
+				isDemoExample: true
+			}
+		]
+	},
 	{
 		title: "Bar (vertical)",
 		demos: [

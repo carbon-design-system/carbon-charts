@@ -42,9 +42,13 @@ export class Area extends Component {
 			.curve(this.services.curves.getD3Curve());
 
 		if (orientation === CartesianOrientations.VERTICAL) {
-			areaGenerator.x((d, i) => this.services.cartesianScales.getXValue(d, i))
-				.y0(this.services.cartesianScales.getYValue(0))
-				.y1((d, i) => this.services.cartesianScales.getYValue(d, i));
+			console.log("IS VERT")
+			areaGenerator.x((d, i) => {
+				console.log("X", d, i)
+				return this.services.cartesianScales.getDomainValue(d, i)
+			})
+				.y0(this.services.cartesianScales.getRangeValue(0))
+				.y1((d, i) => this.services.cartesianScales.getRangeValue(d, i));
 		} else {
 			areaGenerator.x0(this.services.cartesianScales.getXValue(0))
 				.x1((d, i) => this.services.cartesianScales.getXValue(d, i))
@@ -52,44 +56,36 @@ export class Area extends Component {
 		}
 
 		// Update the bound data on area groups
-		const areaGroups = svg.selectAll("g.areas")
-			.data(this.model.getDisplayData().datasets, dataset => dataset.label);
+		const groupedData = this.model.getGroupedData();
+		const areas = svg.selectAll("path.area")
+			.data(groupedData, group => group.name);
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
 		// Data filters are processed before entering new elements
 		// Or updating existing ones
-		areaGroups.exit()
+		areas.exit()
 			.attr("opacity", 0)
 			.remove();
-
-		// Add area groups that need to be introduced
-		const enteringAreaGroups = areaGroups.enter()
-			.append("g")
-			.classed("areas", true);
 
 		const self = this;
 
 		// Enter paths that need to be introduced
-		const enteringPaths = enteringAreaGroups.append("path")
+		const enteringAreas = areas.enter()
+			.append("path")
 			.attr("opacity", 0);
 
 		// Apply styles and datum
-		enteringPaths.merge(svg.selectAll("g.areas path"))
-			.datum(function (d) {
-				const parentDatum = select(this.parentNode).datum() as any;
-				this._datasetLabel = parentDatum.label;
-
-				return parentDatum.data;
-			})
-			.attr("fill", function (d) {
-				const parentDatum = select(this.parentNode).datum() as any;
-
-				return self.model.getFillScale()[parentDatum.label](d.label) as any;
+		enteringAreas.merge(svg.selectAll("path.area"))
+			.attr("fill", group => {
+				return this.model.getFillColor(group.name)
 			})
 			.transition(this.services.transitions.getTransition("area-update-enter", animate))
 			.attr("opacity", 0.3)
 			.attr("class", "area")
-			.attr("d", areaGenerator);
+			.attr("d", group => {
+				const { data } = group;
+				return areaGenerator(data);
+			});
 	}
 }
