@@ -7,7 +7,7 @@ export default {
 		};
 	},
 	props: {
-		data: { type: Object, required: true },
+		data: { type: [Object, Array], required: true },
 		options: { type: Object, required: true }
 	},
 	watch: {
