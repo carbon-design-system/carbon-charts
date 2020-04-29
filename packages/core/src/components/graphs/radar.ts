@@ -332,51 +332,6 @@ export class Radar extends Component {
 	addEventListeners() {
 		const self = this;
 
-		// events on blobs
-		this.parent.selectAll(".blobs .blob > path")
-			.on("mouseover", function (datum) {
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Radar.BLOB_MOUSEOVER, {
-					element: select(this),
-					datum
-				});
-			})
-			.on("mousemove", function (datum) {
-				const hoveredElement = select(this);
-
-				// Changhe style
-				hoveredElement.classed("hovered", true)
-					.transition(self.services.transitions.getTransition("blob_path_mouseover"))
-					.style("fill-opacity", 0.8);
-
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Radar.BLOB_MOUSEMOVE, {
-					element: hoveredElement,
-					datum
-				});
-			})
-			.on("click", function(datum) {
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Radar.BLOB_CLICK, {
-					element: select(this),
-					datum
-				});
-			})
-			.on("mouseout", function(datum) {
-				const hoveredElement = select(this);
-
-				// Change style
-				hoveredElement.classed("hovered", false)
-					.transition(self.services.transitions.getTransition("blob_path_mouseout"))
-					.style("fill-opacity", 0.5);
-
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Radar.BLOB_MOUSEOUT, {
-					element: hoveredElement,
-					datum
-				});
-			});
-
 		// events on x axes
 		this.parent.selectAll(".x-axes .x-axis > line")
 			.on("mouseover", function (datum) {

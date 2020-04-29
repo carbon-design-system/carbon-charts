@@ -67,10 +67,6 @@ export enum Line {
  * enum of all radar graph events
  */
 export enum Radar {
-	BLOB_MOUSEOVER = "radar-blob-mouseover",
-	BLOB_MOUSEMOVE = "radar-blob-mousemove",
-	BLOB_CLICK = "radar-blolb-click",
-	BLOB_MOUSEOUT = "radar-blob-mouseout",
 	X_AXIS_MOUSEOVER = "radar-x-axis-mouseover",
 	X_AXIS_MOUSEMOVE = "radar-x-axis-mousemove",
 	X_AXIS_CLICK = "radar-x-axisb-click",
