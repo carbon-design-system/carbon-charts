@@ -9,7 +9,7 @@ import { flatMapDeep } from "lodash-es";
 // D3 Imports
 import { select } from "d3-selection";
 import { scaleBand, scaleLinear } from "d3-scale";
-import { max } from "d3-array";
+import { max, extent } from "d3-array";
 import { lineRadial, curveLinearClosed } from "d3-shape";
 
 const DEBUG = false;
@@ -175,8 +175,23 @@ export class Radar extends Component {
 		.attr("opacity", 1)
 		.attr("stroke", "#dcdcdc");
 
+		// y labels
+		const yLabelPadding = 5;
+		const yLabels = DOMUtils.appendOrSelect(svg, "g.y-labels");
+		const yLabelUpdate = yLabels.selectAll("text").data(extent(yTicks));
+		yLabelUpdate.join(
+			enter => enter.append("text"),
+			update => update,
+			exit => exit.remove()
+		)
+		.text(tick => tick)
+		.attr("x", tick => polarCoords("London", yScale(tick), cx + yLabelPadding, cy).x)
+		.attr("y", tick => polarCoords("London", yScale(tick), cy, cy).y)
+		.style("text-anchor", "start")
+		.style("dominant-baseline", "middle");
+
 		// x axes
-		const labelPadding = 10;
+		const xLabelPadding = 10;
 		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axes");
 		const xAxisUpdate = xAxes.selectAll("g.x-axis").data(this.uniqKeys);
 		xAxisUpdate.join(
@@ -199,8 +214,8 @@ export class Radar extends Component {
 				.call(selection => selection
 					.append("text")
 					.text(d => d)
-					.attr("x", key => polarCoords(key, yScale.range()[1] + labelPadding, cx, cy).x)
-					.attr("y", key => polarCoords(key, yScale.range()[1] + labelPadding, cx, cy).y)
+					.attr("x", key => polarCoords(key, yScale.range()[1] + xLabelPadding, cx, cy).x)
+					.attr("y", key => polarCoords(key, yScale.range()[1] + xLabelPadding, cx, cy).y)
 					.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
 					.style("dominant-baseline", key => radialLabelPlacement(xScale(key)).dominantBaseline)
 					.attr("opacity", 0)
@@ -226,8 +241,8 @@ export class Radar extends Component {
 				.call(selection => selection
 					.select("text")
 					.text(d => d)
-					.attr("x", key => polarCoords(key, yScale.range()[1] + labelPadding, cx, cy).x)
-					.attr("y", key => polarCoords(key, yScale.range()[1] + labelPadding, cx, cy).y)
+					.attr("x", key => polarCoords(key, yScale.range()[1] + xLabelPadding, cx, cy).x)
+					.attr("y", key => polarCoords(key, yScale.range()[1] + xLabelPadding, cx, cy).y)
 					.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
 					.style("dominant-baseline", key => radialLabelPlacement(xScale(key)).dominantBaseline)
 					.attr("opacity", 0)
