@@ -36,23 +36,20 @@ export class Area extends Component {
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
+		const { cartesianScales } = this.services;
 
-		const orientation = this.services.cartesianScales.getOrientation();
+		const orientation = cartesianScales.getOrientation();
 		const areaGenerator = area()
 			.curve(this.services.curves.getD3Curve());
 
 		if (orientation === CartesianOrientations.VERTICAL) {
-			console.log("IS VERT")
-			areaGenerator.x((d, i) => {
-				console.log("X", d, i)
-				return this.services.cartesianScales.getDomainValue(d, i)
-			})
-				.y0(this.services.cartesianScales.getRangeValue(0))
-				.y1((d, i) => this.services.cartesianScales.getRangeValue(d, i));
+			areaGenerator.x((d, i) => cartesianScales.getDomainValue(d, i))
+				.y0(cartesianScales.getRangeValue(0))
+				.y1((d, i) => cartesianScales.getRangeValue(d, i));
 		} else {
-			areaGenerator.x0(this.services.cartesianScales.getXValue(0))
-				.x1((d, i) => this.services.cartesianScales.getXValue(d, i))
-				.y((d, i) => this.services.cartesianScales.getYValue(d, i));
+			areaGenerator.x0(cartesianScales.getRangeValue(0))
+				.x1((d, i) => cartesianScales.getRangeValue(d, i))
+				.y((d, i) => cartesianScales.getDomainValue(d, i));
 		}
 
 		// Update the bound data on area groups
