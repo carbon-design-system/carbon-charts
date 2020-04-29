@@ -78,7 +78,7 @@ export class Ruler extends Component {
 		// some data point match
 		if (dataPointsMatchingRulerLine.length > 0) {
 			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-			const highlightItems = dataPointsMatchingRulerLine
+			const tooltipData = dataPointsMatchingRulerLine
 				.map(d => d.originalData)
 				.filter(d => {
 					const value = d[rangeIdentifier];
@@ -111,7 +111,7 @@ export class Ruler extends Component {
 
 			this.services.events.dispatchEvent("show-tooltip", {
 				hoveredElement: line,
-				multidata: highlightItems,
+				multidata: tooltipData,
 				type: TooltipTypes.GRIDLINE
 			});
 
