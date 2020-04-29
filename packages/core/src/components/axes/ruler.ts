@@ -17,21 +17,6 @@ function pointIsWithinThreshold(dx: number, x: number) {
 	return dx > x - THRESHOLD && dx < x + THRESHOLD;
 }
 
-/**
- * a compatibility function that accepts ordinal scales too
- * as those do not support .invert() by default,
- * so a scale clone is created to invert domain with range
- */
-function invertedScale(scale) {
-	if (scale.invert) {
-		return scale.invert;
-	}
-
-	return scaleLinear()
-		.domain(scale.range())
-		.range(scale.domain());
-}
-
 export class Ruler extends Component {
 	type = "ruler";
 	backdrop: GenericSvgSelection;
