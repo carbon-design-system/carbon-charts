@@ -288,7 +288,8 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 	tooltip: {
 		gridline: {
 			enabled: true
-		}
+		},
+		valueFormatter: value => value ? value : "NA"
 	}
 } as RadarChartOptions);
 

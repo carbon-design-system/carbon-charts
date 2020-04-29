@@ -15,7 +15,7 @@ export class TooltipRadar extends Tooltip {
 				const userProvidedValueFormatter = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter");
 				const formattedValue = userProvidedValueFormatter
 					? userProvidedValueFormatter(datum[rangeIdentifier])
-					: datum[rangeIdentifier].toLocaleString("en");
+					: datum[rangeIdentifier];
 
 				// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
 				const indicatorColor = this.model.getStrokeColor(datum[groupMapsTo]);
