@@ -49,13 +49,14 @@ export class Radar extends Component {
 		}
 		// console.log("\n");
 
+		const data: Array<Datum> = this.model.getData();
 		const displayData: Array<Datum> = this.model.getDisplayData();
 		const groupedData = this.model.getGroupedData();
 		const options = this.model.getOptions();
 		const configuration = Configuration.options.radarChart.radar;
 
 		this.groupMapsTo = options.data.groupMapsTo;
-		this.uniqKeys = Array.from(new Set(displayData.map(d => d.key)));
+		this.uniqKeys = Array.from(new Set(data.map(d => d.key)));
 		this.uniqGroups = Array.from(new Set(displayData.map(d => d[this.groupMapsTo])));
 		this.displayDataNormalized = this.normalizeFlatData(displayData);
 		this.groupedDataNormalized = this.normalizeGroupedData(groupedData);
@@ -65,9 +66,9 @@ export class Radar extends Component {
 		// console.log("data:", data);
 		// console.log("displayData:", displayData);
 		// console.log("groupedData:", groupedData);
-		console.log("options:", options);
-		console.log("configuration:", configuration);
-		console.log("groupMapsTo:", this.groupMapsTo);
+		// console.log("options:", options);
+		// console.log("configuration:", configuration);
+		// console.log("groupMapsTo:", this.groupMapsTo);
 
 		/////////////////////////////
 		// Computations
