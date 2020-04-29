@@ -61,7 +61,6 @@ export class Radar extends Component {
 		this.displayDataNormalized = this.normalizeFlatData(displayData);
 		this.groupedDataNormalized = this.normalizeGroupedData(groupedData);
 
-
 		// console.log("animate:", animate);
 		// console.log("data:", data);
 		// console.log("displayData:", displayData);
@@ -74,15 +73,13 @@ export class Radar extends Component {
 		// Computations
 		/////////////////////////////
 
-		// center
-		const cx = width / 2;
-		const cy = height / 2;
-
 		const fontSize = 30;
 		const margin = 2 * fontSize;
 		const size = Math.min(width, height);
 		const diameter = size - margin;
 		const radius = diameter / 2;
+		const xLabelPadding = 10;
+		const yLabelPadding = 5;
 		// console.log("radius:", radius);
 
 		// given a key, return the corrisponding angle in radiants
@@ -116,6 +113,26 @@ export class Radar extends Component {
 			const y = r * Math.sin(angle) + ty;
 			return { x, y };
 		};
+
+		const distanceBetweenPointOnCircAndVerticalDiameter = (a: number, r: number) => {
+			const angle = a - Math.PI / 2;
+			return r * Math.sin(angle - Math.PI / 2);
+		};
+
+		const leftPadding = max(this.uniqKeys.map(key => {
+			const fakeTick = DOMUtils.appendOrSelect(svg, `g.fake-tick`);
+			const fakeTickText = DOMUtils.appendOrSelect(fakeTick, `text`).text(key);
+			const tickWidth = DOMUtils.getSVGElementSize(fakeTickText.node(), { useBBox: true }).width;
+			fakeTick.remove();
+			const angle = xScale(key);
+			const distPointDiam = distanceBetweenPointOnCircAndVerticalDiameter(angle, radius);
+			const span = tickWidth + distPointDiam;
+			return span;
+		}));
+
+		// center
+		const cx = leftPadding + xLabelPadding;
+		const cy = height / 2;
 
 		/////////////////////////////
 		// Draw
@@ -176,7 +193,6 @@ export class Radar extends Component {
 		.attr("stroke", "#dcdcdc");
 
 		// y labels
-		const yLabelPadding = 5;
 		const yLabels = DOMUtils.appendOrSelect(svg, "g.y-labels");
 		const yLabelUpdate = yLabels.selectAll("text").data(extent(yTicks));
 		yLabelUpdate.join(
@@ -191,7 +207,6 @@ export class Radar extends Component {
 		.style("dominant-baseline", "middle");
 
 		// x axes
-		const xLabelPadding = 10;
 		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axes");
 		const xAxisUpdate = xAxes.selectAll("g.x-axis").data(this.uniqKeys);
 		xAxisUpdate.join(
@@ -213,6 +228,7 @@ export class Radar extends Component {
 				)
 				.call(selection => selection
 					.append("text")
+					// .text(d => `${d} (${radToDeg(xScale(d))}°, ${Math.round(distanceBetweenPointOnCircAndVerticalDiameter(xScale(d), radius))})`)
 					.text(d => d)
 					.attr("x", key => polarCoords(key, yScale.range()[1] + xLabelPadding, cx, cy).x)
 					.attr("y", key => polarCoords(key, yScale.range()[1] + xLabelPadding, cx, cy).y)
