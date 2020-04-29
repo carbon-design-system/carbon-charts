@@ -20,7 +20,7 @@ import {
 	LayoutComponent,
 	TooltipBar
 } from "../components/index";
-import { histogram, extent, range } from "d3";
+import { histogram, extent, range, scaleBand } from "d3";
 import { defaultBins } from "../configuration";
 
 export class HistogramChart extends AxisChart {
@@ -48,7 +48,6 @@ export class HistogramChart extends AxisChart {
 		// Manipulate data for Histogram
 		const data = this.model.getData();
 		const options = this.model.getOptions();
-		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYPos = this.services.cartesianScales.getMainYAxisPosition();
 		const mainXPos = this.services.cartesianScales.getMainXAxisPosition();
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
@@ -57,6 +56,7 @@ export class HistogramChart extends AxisChart {
 		const axisOptions = options.axes[mainXPos];
 		const { aggregation = AggregationTypes.COUNT} = axisOptions;
 		const { bins: axisBins = defaultBins } = axisOptions;
+		const areBinsDefined = Array.isArray(axisBins);
 
 		const aggregateByGroup = (bin) => {
 			const groups = Tools.groupBy(bin, "group");
@@ -79,29 +79,35 @@ export class HistogramChart extends AxisChart {
 		};
 
 		// Get Histogram bins
-		const binsDomain = extent(data.map(d => d[domainIdentifier])) as [number, number];
 		const bins = histogram()
 			.value((d) => d[domainIdentifier])
-			.domain(binsDomain)
-			.thresholds(
-				Array.isArray(axisBins)
-				? axisBins
-				: mainXScale.domain(binsDomain).ticks(axisBins)
-			)
-			(data);
+			.thresholds(axisBins)(data);
+
+		if (!areBinsDefined) {
+			// If bins are not defined by user
+			const binsWidth = bins[0].x1 - bins[0].x0;
+			// Set last bin width as the others
+			bins[bins.length - 1].x1 = +bins[bins.length - 1].x0 + binsWidth;
+		} else {
+			// Set last bin end as the last user defined one
+			bins[bins.length - 1].x1 = axisBins[axisBins.length - 1];
+		}
+
+		const binsDomain = areBinsDefined
+			? [axisBins[0], axisBins[axisBins.length - 1]]
+			: [bins[0].x0, bins[bins.length - 1].x1];
 
 		// Get all groups
 		const groupsKeys = Array.from(new Set(data.map(d => d[groupMapsTo])));
-
 		const histogramData = [];
 		// Group data by bin
 		bins.forEach(bin => {
 			const key = `${bin.x0}-${bin.x1}`;
 			const aggregateDataByGroups = aggregateByGroup(bin);
 
-			// const groupsKeys = Object.keys(groups) // For Scale X to change when change displayed datasets
 			groupsKeys.forEach((group: string) => {
-				// For each dataset put a bin with value 0 if not exist (Scale X won't change)
+				// For each dataset put a bin with value 0 if not exist
+				// (Scale X won't change when changing showed datasets)
 				histogramData.push({
 					group,
 					key,
@@ -125,12 +131,10 @@ export class HistogramChart extends AxisChart {
 					...options.axes[mainXPos],
 					mapsTo: "bin",
 					// Change the domain as [first bin value, last bin value]
-					domain: [bins.find(bin => bin.length > 0).x0, bins.slice().reverse().find(bin => bin.length > 0).x1]
+					domain: binsDomain
 				}
 			}
 		});
-
-		console.log(histogramData)
 
 		// Set Histogram data
 		this.model.setHistogramBins(bins);

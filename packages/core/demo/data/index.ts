@@ -195,12 +195,6 @@ let allDemoGroups = [
 				isDemoExample: true
 			},
 			{
-				options: histogramDemos.histogramTimeSeriesOptions,
-				data: histogramDemos.histogramTimeSeriesData,
-				chartType: chartTypes.HistogramChart,
-				isDemoExample: true
-			},
-			{
 				options: histogramDemos.histogramTimeSeriesSumOptions,
 				data: histogramDemos.histogramTimeSeriesData,
 				chartType: chartTypes.HistogramChart,
@@ -223,13 +217,7 @@ let allDemoGroups = [
 				data: histogramDemos.histogramContinueData,
 				chartType: chartTypes.HistogramChart,
 				isDemoExample: true
-			},
-			{
-				options: histogramDemos.histogramTimeSeriesWithBinsOptions,
-				data: histogramDemos.histogramTimeSeriesData,
-				chartType: chartTypes.HistogramChart,
-				isDemoExample: true
-			},
+			}
 		]
 	},
 	{

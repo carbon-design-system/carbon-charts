@@ -177,8 +177,7 @@ export const histogramContinueWithBinsOptions = {
 		bottom: {
 			title: "Age",
 			mapsTo: "age",
-			domain: [20, 90],
-			bins: [0, 20, 40, 50, 60, 90]
+			bins: [20, 40, 50, 60, 90]
 		},
 		left: {
 			title: "No. of partecipants",
@@ -189,202 +188,157 @@ export const histogramContinueWithBinsOptions = {
 };
 
 export const histogramTimeSeriesData = [
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 10, 22, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 10, 22, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 10, 22, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 10, 22, 0), value: 100 },
-
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 22, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 10, 22, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 10, 22, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 10, 22, 30), value: 100 },
-
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 23, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 23, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 23, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 23, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 10, 23, 0), value: 100 },
-
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 23, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 23, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 23, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 23, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 23, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 10, 23, 30), value: 100 },
-
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 0, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 0, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 0, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 0, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 0, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 0, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 0, 0), value: 100 },
-
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 0, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 0, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 0, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 0, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 0, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 0, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 0, 30), value: 100 },
-
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 1, 0), value: 100 },
-
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 1, 30), value: 100 },
-
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 2, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 2, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 2, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 2, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 2, 0), value: 100 },
-
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 2, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 2, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 2, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 2, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 2, 30), value: 100 },
-
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 3, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 3, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 3, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 3, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 3, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 3, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 3, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 3, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 3, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 3, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 3, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 3, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 3, 0), value: 100 },
-
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 3, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 3, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 3, 30), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 3, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 3, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 3, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 3, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 3, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 3, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 3, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 3, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 3, 30), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 3, 30), value: 100 },
-
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 4, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 4, 0), value: 100 },
-	{ group: "Dataset 1", date: new Date(2020, 11, 11, 4, 0), value: 100 },
-	{ group: "Dataset 2", date: new Date(2020, 11, 11, 4, 0), value: 100 }
+	{ group: "Dataset 1", transactions: 100, value: 26 },
+	{ group: "Dataset 1", transactions: 100, value: 92 },
+	{ group: "Dataset 1", transactions: 100, value: 90 },
+	{ group: "Dataset 1", transactions: 100, value: 32 },
+	{ group: "Dataset 1", transactions: 100, value: 53 },
+	{ group: "Dataset 1", transactions: 100, value: 69 },
+	{ group: "Dataset 1", transactions: 100, value: 47 },
+	{ group: "Dataset 1", transactions: 100, value: 3},
+	{ group: "Dataset 2", transactions: 100, value: 44 },
+	{ group: "Dataset 2", transactions: 100, value: 34 },
+	{ group: "Dataset 2", transactions: 100, value: 77 },
+	{ group: "Dataset 2", transactions: 100, value: 60 },
+	{ group: "Dataset 1", transactions: 100, value: 26 },
+	{ group: "Dataset 1", transactions: 100, value: 54 },
+	{ group: "Dataset 1", transactions: 100, value: 28 },
+	{ group: "Dataset 1", transactions: 100, value: 17 },
+	{ group: "Dataset 1", transactions: 100, value: 53 },
+	{ group: "Dataset 1", transactions: 100, value: 23 },
+	{ group: "Dataset 1", transactions: 100, value: 31 },
+	{ group: "Dataset 1", transactions: 100, value: 34 },
+	{ group: "Dataset 1", transactions: 100, value: 84 },
+	{ group: "Dataset 2", transactions: 100, value: 5},
+	{ group: "Dataset 2", transactions: 100, value: 96 },
+	{ group: "Dataset 2", transactions: 100, value: 77 },
+	{ group: "Dataset 1", transactions: 100, value: 16 },
+	{ group: "Dataset 1", transactions: 100, value: 83 },
+	{ group: "Dataset 1", transactions: 100, value: 94 },
+	{ group: "Dataset 1", transactions: 100, value: 4},
+	{ group: "Dataset 2", transactions: 100, value: 58 },
+	{ group: "Dataset 1", transactions: 100, value: 69 },
+	{ group: "Dataset 1", transactions: 100, value: 64 },
+	{ group: "Dataset 1", transactions: 100, value: 51 },
+	{ group: "Dataset 1", transactions: 100, value: 75 },
+	{ group: "Dataset 1", transactions: 100, value: 72 },
+	{ group: "Dataset 1", transactions: 100, value: 94 },
+	{ group: "Dataset 1", transactions: 100, value: 53 },
+	{ group: "Dataset 1", transactions: 100, value: 64 },
+	{ group: "Dataset 1", transactions: 100, value: 46 },
+	{ group: "Dataset 1", transactions: 100, value: 41 },
+	{ group: "Dataset 2", transactions: 100, value: 10 },
+	{ group: "Dataset 2", transactions: 100, value: 4},
+	{ group: "Dataset 2", transactions: 100, value: 87 },
+	{ group: "Dataset 1", transactions: 100, value: 47 },
+	{ group: "Dataset 1", transactions: 100, value: 15 },
+	{ group: "Dataset 1", transactions: 100, value: 93 },
+	{ group: "Dataset 1", transactions: 100, value: 87 },
+	{ group: "Dataset 1", transactions: 100, value: 81 },
+	{ group: "Dataset 1", transactions: 100, value: 38 },
+	{ group: "Dataset 1", transactions: 100, value: 59 },
+	{ group: "Dataset 1", transactions: 100, value: 1},
+	{ group: "Dataset 1", transactions: 100, value: 40 },
+	{ group: "Dataset 1", transactions: 100, value: 13 },
+	{ group: "Dataset 1", transactions: 100, value: 80 },
+	{ group: "Dataset 1", transactions: 100, value: 2},
+	{ group: "Dataset 1", transactions: 100, value: 66 },
+	{ group: "Dataset 1", transactions: 100, value: 45 },
+	{ group: "Dataset 1", transactions: 100, value: 29 },
+	{ group: "Dataset 1", transactions: 100, value: 0},
+	{ group: "Dataset 1", transactions: 100, value: 48 },
+	{ group: "Dataset 1", transactions: 100, value: 60 },
+	{ group: "Dataset 2", transactions: 100, value: 26 },
+	{ group: "Dataset 2", transactions: 100, value: 53 },
+	{ group: "Dataset 2", transactions: 100, value: 87 },
+	{ group: "Dataset 2", transactions: 100, value: 0},
+	{ group: "Dataset 1", transactions: 100, value: 10 },
+	{ group: "Dataset 1", transactions: 100, value: 88 },
+	{ group: "Dataset 1", transactions: 100, value: 74 },
+	{ group: "Dataset 1", transactions: 100, value: 53 },
+	{ group: "Dataset 1", transactions: 100, value: 75 },
+	{ group: "Dataset 1", transactions: 100, value: 67 },
+	{ group: "Dataset 1", transactions: 100, value: 47 },
+	{ group: "Dataset 1", transactions: 100, value: 39 },
+	{ group: "Dataset 1", transactions: 100, value: 78 },
+	{ group: "Dataset 1", transactions: 100, value: 82 },
+	{ group: "Dataset 2", transactions: 100, value: 73 },
+	{ group: "Dataset 2", transactions: 100, value: 68 },
+	{ group: "Dataset 2", transactions: 100, value: 56 },
+	{ group: "Dataset 2", transactions: 100, value: 77 },
+	{ group: "Dataset 2", transactions: 100, value: 73 },
+	{ group: "Dataset 1", transactions: 100, value: 19 },
+	{ group: "Dataset 1", transactions: 100, value: 82 },
+	{ group: "Dataset 1", transactions: 100, value: 85 },
+	{ group: "Dataset 1", transactions: 100, value: 33 },
+	{ group: "Dataset 1", transactions: 100, value: 31 },
+	{ group: "Dataset 1", transactions: 100, value: 42 },
+	{ group: "Dataset 1", transactions: 100, value: 2},
+	{ group: "Dataset 1", transactions: 100, value: 72 },
+	{ group: "Dataset 1", transactions: 100, value: 33 },
+	{ group: "Dataset 2", transactions: 100, value: 19 },
+	{ group: "Dataset 1", transactions: 100, value: 47 },
+	{ group: "Dataset 1", transactions: 100, value: 10 },
+	{ group: "Dataset 1", transactions: 100, value: 81 },
+	{ group: "Dataset 1", transactions: 100, value: 75 },
+	{ group: "Dataset 1", transactions: 100, value: 31 },
+	{ group: "Dataset 1", transactions: 100, value: 5},
+	{ group: "Dataset 1", transactions: 100, value: 69 },
+	{ group: "Dataset 1", transactions: 100, value: 53 },
+	{ group: "Dataset 1", transactions: 100, value: 50 },
+	{ group: "Dataset 2", transactions: 100, value: 13 },
+	{ group: "Dataset 2", transactions: 100, value: 48 },
+	{ group: "Dataset 2", transactions: 100, value: 57 },
+	{ group: "Dataset 2", transactions: 100, value: 33 },
+	{ group: "Dataset 1", transactions: 100, value: 1},
+	{ group: "Dataset 1", transactions: 100, value: 95 },
+	{ group: "Dataset 1", transactions: 100, value: 34 },
+	{ group: "Dataset 1", transactions: 100, value: 67 },
+	{ group: "Dataset 2", transactions: 100, value: 1},
+	{ group: "Dataset 2", transactions: 100, value: 59 },
+	{ group: "Dataset 2", transactions: 100, value: 59 },
+	{ group: "Dataset 2", transactions: 100, value: 8},
+	{ group: "Dataset 2", transactions: 100, value: 59 },
+	{ group: "Dataset 2", transactions: 100, value: 4},
+	{ group: "Dataset 2", transactions: 100, value: 25 },
+	{ group: "Dataset 2", transactions: 100, value: 9},
+	{ group: "Dataset 2", transactions: 100, value: 75 },
+	{ group: "Dataset 1", transactions: 100, value: 26 },
+	{ group: "Dataset 1", transactions: 100, value: 99 },
+	{ group: "Dataset 1", transactions: 100, value: 19 },
+	{ group: "Dataset 2", transactions: 100, value: 16 }
 ];
 
-export const histogramTimeSeriesOptions = {
-	title: "Histogram (time series)",
-	axes: {
-		left: {
-			title: "No. Transactions",
-			mapsTo: "value",
-			stacked: true
-		},
-		bottom: {
-			scaleType: "time",
-			mapsTo: "date"
-		}
-	}
-};
-
 export const histogramTimeSeriesSumOptions = {
-	title: "Histogram (sum) (time series)",
+	title: "Histogram (sum) (linear)",
 	axes: {
+		bottom: {
+			title: "US $ (million)",
+			mapsTo: "value",
+			aggregation: "sum"
+		},
 		left: {
 			title: "Transactions values (sums)",
-			mapsTo: "value",
+			mapsTo: "transactions",
+			scaleType: "linear",
 			stacked: true
-		},
-		bottom: {
-			scaleType: "time",
-			mapsTo: "date",
-			aggregation: "sum"
 		}
 	}
 };
 
 export const histogramTimeSeriesAvgOptions = {
-	title: "Histogram (avg) (time series)",
+	title: "Histogram (avg) (linear)",
 	axes: {
 		left: {
 			title: "Transactions values (avg)",
+			mapsTo: "transactions",
+			scaleType: "linear",
+			stacked: true
+		},
+		bottom: {
+			title: "US $ (million)",
 			mapsTo: "value",
-			stacked: true
-		},
-		bottom: {
-			scaleType: "time",
-			mapsTo: "date",
 			aggregation: "avg"
-		}
-	}
-};
-
-export const histogramTimeSeriesWithBinsOptions = {
-	title: "Histogram (defined bins) (time series)",
-	axes: {
-		left: {
-			title: "No. Transactions",
-			stacked: true
-		},
-		bottom: {
-			scaleType: "time",
-			mapsTo: "date",
-			bins: [
-				new Date(2020, 11, 10, 22, 0),
-				new Date(2020, 11, 11, 0, 0),
-				new Date(2020, 11, 11, 2, 30),
-				new Date(2020, 11, 11, 4, 0)
-			]
 		}
 	}
 };

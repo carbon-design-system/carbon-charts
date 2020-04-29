@@ -140,8 +140,9 @@ export class ChartModel {
 			const correspondingValues = { sharedStackKey: key };
 			dataGroupNames.forEach(dataGroupName => {
 				const correspondingDatum = displayData.find(datum => {
-					return datum[groupMapsTo] === dataGroupName &&
-						datum[domainIdentifier].toString() === key;
+					return datum[groupMapsTo] === dataGroupName
+						&& datum.hasOwnProperty(domainIdentifier)
+						&& datum[domainIdentifier].toString() === key;
 				});
 
 				correspondingValues[dataGroupName] = correspondingDatum ? correspondingDatum[rangeIdentifier] : null;
