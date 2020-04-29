@@ -6,7 +6,6 @@ import { Tools } from "../../tools";
 
 // D3 Imports
 import { mouse, Selection } from "d3-selection";
-import { scaleLinear } from "d3-scale";
 
 type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
 
