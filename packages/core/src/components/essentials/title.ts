@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes } from "./../../interfaces";
+import { TooltipTypes, Events } from "./../../interfaces";
 
 export class Title extends Component {
 	type = "title";
@@ -35,7 +35,7 @@ export class Title extends Component {
 			const substringIndex = this.getSubstringIndex(title.node(), 0, titleString.length - 1, truncatedSize);
 
 			// use the substring as the title
-			title.text(titleString.substring(0, substringIndex - 1))
+			title.html(titleString.substring(0, substringIndex - 1))
 				.append("tspan")
 				.text("...");
 
@@ -43,14 +43,14 @@ export class Title extends Component {
 			const self = this;
 			title
 				.on("mouseenter", function() {
-					self.services.events.dispatchEvent("show-tooltip", {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						hoveredElement: title,
 						type: TooltipTypes.TITLE
 					});
 				})
 				.on("mouseout", function() {
-					self.services.events.dispatchEvent("hide-tooltip", {
-						hoveredElement: title,
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+						hoveredElement: title
 					});
 				});
 		}
@@ -62,7 +62,7 @@ export class Title extends Component {
 		const text = DOMUtils.appendOrSelect(svg, "text.title");
 		text.attr("x", 0)
 			.attr("y", 20)
-			.text(this.model.getOptions().title);
+			.html(this.model.getOptions().title);
 
 		// title needs to first render so that we can check for overflow
 		this.truncateTitle();

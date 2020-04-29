@@ -17,24 +17,20 @@ Please take a moment to review this document in order to make the contribution p
 
 
 ## Run Charts in Local Environment
-We use Lerna to manage all packages in Charts.
+We use Lerna to manage all `@carbon/charts` related packages.
 
 **These are the Node & NPM versions we recommend:**
-- Node Version: `8.11.4`
+- Node Version: `12.16.1`
+- Yarn Version: `1.6.0`
 - NPM Version: `6.4.1`
 
 To get charts running locally on your machine:
 1. Fork this repo
 2. Clone your fork
 3. Run `yarn` (this would install all packages and get **lerna** setup)
+4. Run `yarn build` to do an initial build of the monorepo and correctly link all the packages
 
-The **core** package (vanilla JS) demos can be launched using:
-
-```sh
-yarn run demo:server
-```
-
-All wrapper packages (currently **react** & **angular**) use Storybook for demos:
+All packages use Storybook for demos:
 
 ```sh
 yarn run storybook
@@ -105,7 +101,7 @@ yarn run storybook
 3. **Commit your changes in small logical chunks.** Refer to these [git commit
    message guidelines](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
    to maintain consistency.
-   
+
 	**To commit changes, please use `yarn run commit` rather than `git commit`**
 
 4. If time passes between development, **locally merge (or rebase) the upstream master branch** into your topic branch to avoid conflicts in your pull request. We recommend using Git's [interactive rebase](https://help.github.com/articles/interactive-rebase) feature to tidy up a messy commit history.

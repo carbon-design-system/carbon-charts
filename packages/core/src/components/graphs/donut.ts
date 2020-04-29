@@ -5,7 +5,7 @@ import { Tools } from "../../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
-import { interpolateNumber } from "d3-interpolate";
+import { interpolateNumber, interpolateRound } from "d3-interpolate";
 
 export class Donut extends Pie {
 	type = "donut";
@@ -50,15 +50,23 @@ export class Donut extends Pie {
 		const options = this.model.getOptions();
 
 		let donutCenterFigure = Tools.getProperty(options, "donut", "center", "number");
-		if (!donutCenterFigure) {
-			donutCenterFigure = this.getDataList().reduce((accumulator, d) => {
+		if (donutCenterFigure === null) {
+			donutCenterFigure = this.model.getDisplayData().reduce((accumulator, d) => {
 				return accumulator + d.value;
 			}, 0);
 		}
 
 		// Remove commas from the current value string, and convert to an int
 		const currentValue = parseInt(d3Ref.text().replace(/[, ]+/g, ""), 10) || 0;
-		const i = interpolateNumber(currentValue, donutCenterFigure);
+
+		let interpolateFunction;
+		if (currentValue % 1 === 0 && donutCenterFigure % 1 === 0) {
+			interpolateFunction = interpolateRound;
+		} else {
+			interpolateFunction = interpolateNumber;
+		}
+
+		const i = interpolateFunction(currentValue, donutCenterFigure);
 
 		return t => {
 			const { numberFormatter } = options.donut.center;

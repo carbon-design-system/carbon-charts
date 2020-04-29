@@ -5,8 +5,8 @@ import {
 	LayoutGrowth,
 	LayoutDirection,
 	LegendOrientations,
-	ChartTheme
-} from "./interfaces/index";
+	Events as ChartEvents
+} from "./interfaces";
 
 // Misc
 import { ChartModel } from "./model";
@@ -50,7 +50,7 @@ export class Chart {
 
 		// Call update() when model has been updated
 		this.services.events
-			.addEventListener("model-update", () => {
+			.addEventListener(ChartEvents.Model.UPDATE, () => {
 				this.update(true);
 			});
 
@@ -59,7 +59,7 @@ export class Chart {
 
 		// Set chart resize event listener
 		this.services.events
-			.addEventListener("chart-resize", () => {
+			.addEventListener(ChartEvents.Chart.RESIZE, () => {
 				this.update(false);
 			});
 
@@ -103,7 +103,7 @@ export class Chart {
 			});
 
 		Promise.all(promises)
-			.then(() => this.services.events.dispatchEvent("render-finished"));
+			.then(() => this.services.events.dispatchEvent(ChartEvents.Chart.RENDER_FINISHED));
 	}
 
 	destroy() {

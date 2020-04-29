@@ -14,7 +14,7 @@
 		</a>
 		<img src="https://img.shields.io/badge/comp-IE11%2B-blue.svg" />
 		<img alt="semantic-versioning" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--ver-e10079.svg" />
-		<img alt="semantic-versioning" src="https://img.shields.io/badge/downloads-+5k%2Fweek-green" />
+		<img alt="semantic-versioning" src="https://img.shields.io/badge/downloads-+13k%2Fweek-green" />
 	</p>
 </p>
 
@@ -23,6 +23,10 @@
 - [Angular](./packages/angular)
 - [React](./packages/react)
 - [Vue](./packages/vue)
+
+<a href="https://www.netlify.com" target="_blank">
+  <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"/>
+</a>
 
 ## CHANGELOG
 Read the release change logs [here](./CHANGELOG.md)
@@ -104,3 +108,6 @@ See our [release change logs](https://github.com/carbon-design-system/carbon-cha
 </table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+## Code of Conduct
+Read our code of conduct [here](./CODE_OF_CONDUCT.md)

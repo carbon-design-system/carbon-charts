@@ -1,10 +1,15 @@
 import { Tooltip } from "./tooltip";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
-import { TooltipPosition, TooltipTypes, CartesianOrientations } from "./../../interfaces/enums";
+import {
+	TooltipPosition,
+	TooltipTypes,
+	CartesianOrientations,
+	Events
+} from "./../../interfaces";
 
 // import the settings for the css prefix
-import settings from "carbon-components/src/globals/js/settings";
+import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -21,30 +26,38 @@ export class TooltipBar extends Tooltip {
 		this.tooltip.style("max-width", null);
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this.services.events.addEventListener("show-tooltip", e => {
+		this.services.events.addEventListener(Events.Tooltip.SHOW, e => {
 			// check the type of tooltip and that it is enabled
 			if ((e.detail.type === TooltipTypes.DATAPOINT && Tools.getProperty(this.model.getOptions(), "tooltip", "datapoint", "enabled"))
 				|| (e.detail.type === TooltipTypes.GRIDLINE && Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) ) {
 
+				let data = e.detail.hoveredElement.datum() as any;
 				const hoveredElement = e.detail.hoveredElement.node();
 
 				let defaultHTML;
 				if (e.detail.multidata) {
 					// multi tooltip
-					defaultHTML = this.getMultilineTooltipHTML(e.detail.multidata);
+					data = e.detail.multidata;
+					defaultHTML = this.getMultilineTooltipHTML(data);
 				} else {
-					defaultHTML = this.getTooltipHTML(e.detail.hoveredElement.datum());
+					if (e.detail.data) {
+						data = e.detail.data;
+					} else {
+						data = e.detail.hoveredElement.datum();
+					}
+
+					defaultHTML = this.getTooltipHTML(data);
 				}
 
 				// if there is a provided tooltip HTML function call it and pass the defaultHTML
 				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
-					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(hoveredElement, defaultHTML));
+					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data, defaultHTML));
 				} else {
 					// default tooltip
 					tooltipTextContainer.html(defaultHTML);
 				}
 
-				const position = this.getTooltipPosition(hoveredElement);
+				const position = this.getTooltipPosition(hoveredElement, data);
 				// Position the tooltip relative to the bars
 				this.positionTooltip(e.detail.multidata ? undefined : position );
 
@@ -68,7 +81,7 @@ export class TooltipBar extends Tooltip {
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
-		this.services.events.addEventListener("hide-tooltip", () => {
+		this.services.events.addEventListener(Events.Tooltip.HIDE, () => {
 			this.tooltip.classed("hidden", true);
 		});
 	}
@@ -78,8 +91,10 @@ export class TooltipBar extends Tooltip {
 	 * positive valued data and below negative value data.
 	 * @param hoveredElement
 	 */
-	getTooltipPosition(hoveredElement) {
-		const data = select(hoveredElement).datum() as any;
+	getTooltipPosition(hoveredElement, data?: any) {
+		if (data === undefined) {
+			data = select(hoveredElement).datum() as any;
+		}
 
 		const holderPosition = select(this.services.domUtils.getHolder()).node().getBoundingClientRect();
 		const barPosition = hoveredElement.getBoundingClientRect();
@@ -142,7 +157,8 @@ export class TooltipBar extends Tooltip {
 				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
 				this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
 
-				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label, datapoint.value);
+				// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
+				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label);
 
 				return `
 				<li>

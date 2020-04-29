@@ -37,19 +37,10 @@ export class Pie extends Component {
 		const eventsFragment = this.services.events;
 
 		// Highlight correct circle on legend item hovers
-		eventsFragment.addEventListener("legend-item-onhover", this.handleLegendOnHover);
+		eventsFragment.addEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
 
 		// Un-highlight circles on legend item mouseouts
-		eventsFragment.addEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
-	}
-
-	getDataList() {
-		const displayData = this.model.getDisplayData();
-		const dataset = displayData.datasets[0];
-		return dataset.data.map((datum, i) => ({
-			label: displayData.labels[i],
-			value: datum.value ? datum.value : datum
-		}));
+		eventsFragment.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
 	}
 
 	getInnerRadius() {
@@ -60,8 +51,10 @@ export class Pie extends Component {
 	render(animate = true) {
 		const self = this;
 		const svg = this.getContainerSVG();
+
+		const displayData = this.model.getDisplayData();
 		const options = this.model.getOptions();
-		const dataList = this.getDataList();
+		const { groupMapsTo } = options.data;
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
@@ -78,18 +71,18 @@ export class Pie extends Component {
 		// Setup the pie layout
 		const pieLayout = pie()
 			.value((d: any) => d.value)
-			.sort((a: any, b: any) => b.value - a.value)
+			.sort(null)
 			.padAngle(options.pie.padAngle);
 
 		// Sort pie layout data based off of the indecies the layout creates
-		const pieLayoutData = pieLayout(dataList)
+		const pieLayoutData = pieLayout(displayData)
 			.sort((a: any, b: any) => a.index - b.index);
 
 		// Update data on all slices
 		const slicesGroup = DOMUtils.appendOrSelect(svg, "g.slices")
 			.attr("role", Roles.GROUP);
 		const paths = slicesGroup.selectAll("path.slice")
-			.data(pieLayoutData, d => d.data.label);
+			.data(pieLayoutData, d => d.data[groupMapsTo]);
 
 		// Remove slices that need to be exited
 		paths.exit()
@@ -104,23 +97,24 @@ export class Pie extends Component {
 
 		// Update styles & position on existing and entering slices
 		enteringPaths.merge(paths)
-			.attr("fill", d => this.model.getFillScale()(d.data.label))
+			.attr("fill", d => self.model.getFillColor(d.data[groupMapsTo]))
 			.attr("d", this.arc)
 			.transition(this.services.transitions.getTransition("pie-slice-enter-update", animate))
 			.attr("opacity", 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "slice")
-			.attr("aria-label", d => `${d.value}, ${Tools.convertValueToPercentage(d.data.value, dataList) + "%"}`)
+			.attr("aria-label", d => `${d.value}, ${Tools.convertValueToPercentage(d.data.value, displayData) + "%"}`)
 			// Tween
-			.attrTween("d", function (a) {
+			.attrTween("d", function(a) {
 				return arcTween.bind(this)(a, self.arc);
 			});
 
 		// Draw the slice labels
+		const labelData = pieLayoutData.filter(x => x.value > 0);
 		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels").attr("role", Roles.GROUP);
 		const labels = labelsGroup.selectAll("text.pie-label")
-			.data(pieLayoutData, (d: any) => d.data.label);
+			.data(labelData, (d: any) => d.data[groupMapsTo]);
 
 		// Remove labels that are existing
 		labels.exit()
@@ -141,25 +135,26 @@ export class Pie extends Component {
 					return options.pie.labels.formatter(d);
 				}
 
-				return Tools.convertValueToPercentage(d.data.value, dataList) + "%";
+				return Tools.convertValueToPercentage(d.data.value, displayData) + "%";
 			})
 			// Calculate dimensions in order to transform
 			.datum(function(d) {
-				const textLength = this.getComputedTextLength();
-				d.textOffsetX = textLength / 2;
-				d.textOffsetY = parseFloat(getComputedStyle(this).fontSize) / 2;
-
 				const marginedRadius = radius + 7;
 
 				const theta = ((d.endAngle - d.startAngle) / 2) + d.startAngle;
+				const deg = theta / Math.PI * 180;
+
+				const textLength = this.getComputedTextLength();
+				d.textOffsetX = textLength / 2;
+				d.textOffsetY = (deg > 90 && deg < 270) ? 10 : 0;
 
 				d.xPosition = (d.textOffsetX + marginedRadius) * Math.sin(theta);
 				d.yPosition = (d.textOffsetY + marginedRadius) * -Math.cos(theta);
 
 				return d;
 			})
-			.attr("transform", function (d, i) {
-				const totalSlices = dataList.length;
+			.attr("transform", function(d, i) {
+				const totalSlices = labelData.length;
 				const sliceAngleDeg = (d.endAngle - d.startAngle) * (180 / Math.PI);
 
 				// check if last 2 slices (or just last) are < the threshold
@@ -281,7 +276,7 @@ export class Pie extends Component {
 		const enteringHorizontalLines = enteringCallouts.append("line")
 			.classed("horizontal-line", true);
 
-		enteringHorizontalLines.merge(callouts.selectAll("line.horizontal-line"))
+		enteringHorizontalLines.merge(svg.selectAll("line.horizontal-line"))
 			.datum(function(d: any) {
 				return select(this.parentNode).datum();
 			})
@@ -295,10 +290,11 @@ export class Pie extends Component {
 	// Highlight elements that match the hovered legend item
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
+		const { groupMapsTo } = this.model.getOptions().data;
 
 		this.parent.selectAll("path.slice")
 			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => (d.data.label !== hoveredElement.datum()["key"]) ? 0.3 : 1);
+			.attr("opacity", d => d.data[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1);
 	}
 
 	// Un-highlight all elements
@@ -332,7 +328,7 @@ export class Pie extends Component {
 				});
 
 				// Show tooltip
-				self.services.events.dispatchEvent("show-tooltip", {
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					type: TooltipTypes.DATAPOINT
 				});
@@ -357,7 +353,7 @@ export class Pie extends Component {
 				});
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, { hoveredElement });
 			});
 	}
 

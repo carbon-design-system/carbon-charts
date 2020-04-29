@@ -26,8 +26,8 @@ export class StackedBarChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.stackedBarChart),
+			Tools.mergeDefaultChartOptions(
+				Configuration.options.stackedBarChart,
 				chartConfigs.options
 			)
 		);

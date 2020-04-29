@@ -10,7 +10,7 @@ import { Tools } from "../tools";
 // Components
 import {
 	Grid,
-	Line,
+	Ruler,
 	Scatter,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
@@ -27,8 +27,8 @@ export class ScatterChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.scatterChart),
+			Tools.mergeDefaultChartOptions(
+				Configuration.options.scatterChart,
 				chartConfigs.options
 			)
 		);
@@ -42,6 +42,7 @@ export class ScatterChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
+			new Ruler(this.model, this.services),
 			new Scatter(this.model, this.services)
 		];
 

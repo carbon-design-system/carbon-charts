@@ -11,6 +11,7 @@ import { Tools } from "../tools";
 import {
 	Grid,
 	Line,
+	Ruler,
 	Scatter,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
@@ -27,8 +28,8 @@ export class LineChart extends AxisChart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.lineChart),
+			Tools.mergeDefaultChartOptions(
+				Configuration.options.lineChart,
 				chartConfigs.options
 			)
 		);
@@ -42,6 +43,7 @@ export class LineChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
+			new Ruler(this.model, this.services),
 			new Line(this.model, this.services),
 			new Scatter(this.model, this.services)
 		];

@@ -2,7 +2,11 @@
 import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { LegendOrientations, Roles } from "../../interfaces";
+import {
+	LegendOrientations,
+	Roles,
+	Events
+} from "../../interfaces";
 import { DOMUtils } from "../../services";
 
 // D3 Imports
@@ -14,9 +18,10 @@ export class Legend extends Component {
 	render() {
 		const svg = this.getContainerSVG().attr("role", Roles.GRAPHICS_DOCUMENT);
 		const options = this.model.getOptions();
-
 		const legendItems = svg.selectAll("g.legend-item")
-			.data(this.getLegendItemArray());
+			.data(this.model.getDataGroups(), dataGroup => dataGroup.name);
+
+			// this.getLegendItemArray()
 
 		const addedLegendItems = legendItems.enter()
 			.append("g")
@@ -33,14 +38,14 @@ export class Legend extends Component {
 			.attr("rx", 1)
 			.attr("ry", 1)
 			.style("fill", d => {
-				return d.value === options.legend.items.status.ACTIVE ? this.model.getStrokeColor(d.key) : null;
+				return d.status === options.legend.items.status.ACTIVE ? this.model.getStrokeColor(d.name) : null;
 			}).classed("active", function (d, i) {
-				return d.value === options.legend.items.status.ACTIVE;
+				return d.status === options.legend.items.status.ACTIVE;
 			});
 
 		addedLegendItems.append("text")
 			.merge(legendItems.select("text"))
-			.text(d => d.key)
+			.html(d => d.name)
 			.attr("alignment-baseline", "middle");
 
 		this.breakItemsIntoLines(addedLegendItems);
@@ -74,8 +79,8 @@ export class Legend extends Component {
 
 		// Check if there are disabled legend items
 		const { DISABLED } = options.legend.items.status;
-		const dataLabels = this.model.get("dataLabels");
-		const hasDeactivatedItems = Object.keys(dataLabels).some(label => dataLabels[label] === DISABLED);
+		const dataGroups = this.model.getDataGroups();
+		const hasDeactivatedItems = dataGroups.some(dataGroup => dataGroup.status === DISABLED);
 
 		const legendOrientation = Tools.getProperty(options, "legend", "orientation");
 
@@ -149,24 +154,6 @@ export class Legend extends Component {
 
 				itemIndexInLine++;
 			});
-
-		// TODO - Replace with layout component margins
-		DOMUtils.appendOrSelect(svg, "rect.spacer")
-			.attr("x", 0)
-			.attr("y", lastYPosition)
-			.attr("width", 16)
-			.attr("height", 16)
-			.attr("fill", "none");
-	}
-
-	getLegendItemArray() {
-		const legendItems = this.model.get("dataLabels");
-		const legendItemKeys = Object.keys(legendItems);
-
-		return legendItemKeys.map(key => ({
-			key,
-			value: legendItems[key]
-		}));
 	}
 
 	addEventListeners() {
@@ -176,7 +163,7 @@ export class Legend extends Component {
 
 		svg.selectAll("g.legend-item")
 			.on("mouseover", function () {
-				self.services.events.dispatchEvent("legend-item-onhover", {
+				self.services.events.dispatchEvent(Events.Legend.ITEM_HOVER, {
 					hoveredElement: select(this)
 				});
 
@@ -195,20 +182,20 @@ export class Legend extends Component {
 					.lower();
 			})
 			.on("click", function () {
-				self.services.events.dispatchEvent("legend-item-onclick", {
+				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
 					clickedElement: select(this)
 				});
 
 				const clickedItem = select(this);
 				const clickedItemData = clickedItem.datum() as any;
 
-				self.model.toggleDataLabel(clickedItemData.key);
+				self.model.toggleDataLabel(clickedItemData.name);
 			})
 			.on("mouseout", function () {
 				const hoveredItem = select(this);
 				hoveredItem.select("rect.hover-stroke").remove();
 
-				self.services.events.dispatchEvent("legend-item-onmouseout", {
+				self.services.events.dispatchEvent(Events.Legend.ITEM_MOUSEOUT, {
 					hoveredElement: hoveredItem
 				});
 			});

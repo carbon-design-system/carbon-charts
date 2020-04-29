@@ -3,6 +3,287 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.18](https://github.com/IBM/carbon-charts/compare/v0.30.17...v0.30.18) (2020-04-24)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.30.17](https://github.com/IBM/carbon-charts/compare/v0.30.16...v0.30.17) (2020-04-23)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.30.16](https://github.com/IBM/carbon-charts/compare/v0.30.15...v0.30.16) (2020-04-23)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.30.15](https://github.com/IBM/carbon-charts/compare/v0.30.14...v0.30.15) (2020-04-22)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.30.14](https://github.com/IBM/carbon-charts/compare/v0.30.13...v0.30.14) (2020-04-21)
+
+
+### Bug Fixes
+
+* **core:** Support for Horizontal Line and Scatter Chart ([28b571f](https://github.com/IBM/carbon-charts/commit/28b571fa4565de5b81a5a178776eb701a88bfe91))
+
+
+
+
+
+## [0.30.13](https://github.com/IBM/carbon-charts/compare/v0.30.12...v0.30.13) (2020-04-20)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.30.12](https://github.com/IBM/carbon-charts/compare/v0.30.11...v0.30.12) (2020-04-17)
+
+
+### Bug Fixes
+
+* **core:** fix backwards compatibility for pie/donut ([#576](https://github.com/IBM/carbon-charts/issues/576)) ([aed1a4d](https://github.com/IBM/carbon-charts/commit/aed1a4dbb2d5ff8f85ac29b69b32c1035a326071))
+
+
+
+
+
+## [0.30.11](https://github.com/IBM/carbon-charts/compare/v0.30.10...v0.30.11) (2020-04-15)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.30.10](https://github.com/IBM/carbon-charts/compare/v0.30.9...v0.30.10) (2020-04-09)
+
+
+### Bug Fixes
+
+* **core:** title string contains html ascii characters  ([#547](https://github.com/IBM/carbon-charts/issues/547)) ([1a6b646](https://github.com/IBM/carbon-charts/commit/1a6b6463f576c1ba297883e734a4a953e4a22829))
+
+
+
+
+
+## [0.30.9](https://github.com/IBM/carbon-charts/compare/v0.30.8...v0.30.9) (2020-04-09)
+
+
+### Bug Fixes
+
+* **bar-stacked:** render 0 value bars ([425e11d](https://github.com/IBM/carbon-charts/commit/425e11d9dacb8bbaf9740759754eab1f0aa45843))
+
+
+
+
+
+## [0.30.8](https://github.com/IBM/carbon-charts/compare/v0.30.7...v0.30.8) (2020-04-03)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.30.7](https://github.com/IBM/carbon-charts/compare/v0.30.6...v0.30.7) (2020-03-31)
+
+
+### Bug Fixes
+
+* **core:** update import path carbon-components ([e9fca73](https://github.com/IBM/carbon-charts/commit/e9fca73cd3768b1b85247a2798908c26da99216b)), closes [#546](https://github.com/IBM/carbon-charts/issues/546)
+
+
+
+
+
+## [0.30.6](https://github.com/IBM/carbon-charts/compare/v0.30.5...v0.30.6) (2020-03-30)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.30.5](https://github.com/IBM/carbon-charts/compare/v0.30.4...v0.30.5) (2020-03-30)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.30.4](https://github.com/IBM/carbon-charts/compare/v0.30.3...v0.30.4) (2020-03-27)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.30.3](https://github.com/IBM/carbon-charts/compare/v0.30.2...v0.30.3) (2020-03-24)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.30.2](https://github.com/IBM/carbon-charts/compare/v0.30.1...v0.30.2) (2020-03-16)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.30.1](https://github.com/IBM/carbon-charts/compare/v0.30.0...v0.30.1) (2020-03-13)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+# [0.30.0](https://github.com/IBM/carbon-charts/compare/v0.29.8...v0.30.0) (2020-03-11)
+
+
+### Bug Fixes
+
+* **core:** fix default axes creation logic ([e4fb861](https://github.com/IBM/carbon-charts/commit/e4fb86185f04ff42cbe7dc003c05556586f6c518))
+
+
+### Features
+
+* **core:** Add configuration option to not include 0 on axes ([44d51de](https://github.com/IBM/carbon-charts/commit/44d51ded6af78d57a848d68e093fe69858405594))
+* **core:** Axes configuration options defaultable, Add option to not include 0 on axes ([03969c3](https://github.com/IBM/carbon-charts/commit/03969c319248064cf1c1ef6eb79ec534aa04c972))
+
+
+
+
+
+## [0.29.8](https://github.com/IBM/carbon-charts/compare/v0.29.7...v0.29.8) (2020-03-03)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.29.7](https://github.com/IBM/carbon-charts/compare/v0.29.6...v0.29.7) (2020-02-28)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.29.6](https://github.com/IBM/carbon-charts/compare/v0.29.5...v0.29.6) (2020-02-25)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.29.5](https://github.com/IBM/carbon-charts/compare/v0.29.4...v0.29.5) (2020-02-21)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.29.4](https://github.com/IBM/carbon-charts/compare/v0.29.3...v0.29.4) (2020-02-20)
+
+
+### Bug Fixes
+
+* **core:** Tools.getProperty did return 'null' for falsy values, now returns the actual values ([3b78c3a](https://github.com/IBM/carbon-charts/commit/3b78c3a27d4551e7d7b51f911ea2f7e0f155ef42))
+
+
+
+
+
+## [0.29.3](https://github.com/IBM/carbon-charts/compare/v0.29.2...v0.29.3) (2020-02-20)
+
+
+### Bug Fixes
+
+* **build:** fix bundle output for core ([4d3d6b4](https://github.com/IBM/carbon-charts/commit/4d3d6b450fe54b55479aeaffc3706b28d926fffa))
+
+
+
+
+
+## [0.29.2](https://github.com/IBM/carbon-charts/compare/v0.29.1...v0.29.2) (2020-02-18)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.29.1](https://github.com/IBM/carbon-charts/compare/v0.29.0...v0.29.1) (2020-02-10)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+# [0.29.0](https://github.com/IBM/carbon-charts/compare/v0.28.1...v0.29.0) (2020-02-07)
+
+
+### Bug Fixes
+
+* **bar:** tooltip to render bar should provide original datapoint ([ed04f98](https://github.com/IBM/carbon-charts/commit/ed04f98891a783d8d5bbc77f9dfdb8d1ed8a46b1))
+* **charts:** simplify the interface to match ([96da97b](https://github.com/IBM/carbon-charts/commit/96da97b59c2e22cb661b9297f1cb4ace9bb8ec9e))
+* **line:** remove console.logs ([5e0413f](https://github.com/IBM/carbon-charts/commit/5e0413f6c77ae17f74818c04ed2bdf82f386fa58))
+* **lint:** fix linting errors with format ([04cdefd](https://github.com/IBM/carbon-charts/commit/04cdefda021ef1dee948231e8713481b9439f287))
+* **scatter:** custom point colors demo ([f367f83](https://github.com/IBM/carbon-charts/commit/f367f8337df8b45811afbc3eee0a3a6d3b6f8bcc))
+* **scatter:** simplify the callback parameters ([c541e8a](https://github.com/IBM/carbon-charts/commit/c541e8a4a83d026bb5b9c28afe39f749064b3b24))
+* **styles:** don't import and use carbon themes in styles.scss ([1da8b3e](https://github.com/IBM/carbon-charts/commit/1da8b3e2ba770c06dc74fe2bf08393e3d6b6778c))
+* **tooltip:** need to pass the datum along with the tooltip calls ([3bd7bfc](https://github.com/IBM/carbon-charts/commit/3bd7bfc1d435cb4ba3636361cdbbfe16de10d9d5))
+* **tooltip:** stroke color should always be default ([b3b6812](https://github.com/IBM/carbon-charts/commit/b3b6812d9fac5964ae50053332840be8d1b7246f))
+* **tooltip:** use original line color in the tooltip ([f42d245](https://github.com/IBM/carbon-charts/commit/f42d2458bdd104898f79d1b7103bcd055bdb1cdf))
+
+
+### Features
+
+* **core:** parse non JS date objects within the model ([a410fa4](https://github.com/IBM/carbon-charts/commit/a410fa415fb967ef0529495b300a0327cc4d474b))
+* **scatter:** add getIsFilled to model ([a160159](https://github.com/IBM/carbon-charts/commit/a160159ee0fa188ce174ef36f022ad44caf77aeb))
+* **scatter:** enhance custom stroke and fill colors ([64cfbb6](https://github.com/IBM/carbon-charts/commit/64cfbb657c6089ab75cf132f09a49d5da75d4c4f))
+
+
+
+
+
+## [0.28.1](https://github.com/IBM/carbon-charts/compare/v0.28.0...v0.28.1) (2020-01-30)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
 # [0.28.0](https://github.com/IBM/carbon-charts/compare/v0.27.0...v0.28.0) (2020-01-21)
 
 

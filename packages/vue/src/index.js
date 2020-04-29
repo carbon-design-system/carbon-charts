@@ -2,20 +2,22 @@ import CcvAreaChart from './ccv-area-chart.vue';
 import CcvSimpleBarChart from './ccv-simple-bar-chart.vue';
 import CcvGroupedBarChart from './ccv-grouped-bar-chart.vue';
 import CcvStackedBarChart from './ccv-stacked-bar-chart.vue';
-import CcvLineChart from './ccv-line-chart.vue';
-import CcvScatterChart from './ccv-scatter-chart.vue';
+import CcvBubbleChart from './ccv-bubble-chart.vue';
 import CcvDonutChart from './ccv-donut-chart.vue';
+import CcvLineChart from './ccv-line-chart.vue';
 import CcvPieChart from './ccv-pie-chart.vue';
+import CcvScatterChart from './ccv-scatter-chart.vue';
 
 const components = [
 	CcvAreaChart,
 	CcvSimpleBarChart,
 	CcvGroupedBarChart,
 	CcvStackedBarChart,
-	CcvLineChart,
-	CcvScatterChart,
+	CcvBubbleChart,
 	CcvDonutChart,
-	CcvPieChart
+	CcvLineChart,
+	CcvPieChart,
+	CcvScatterChart
 ];
 
 /*
@@ -55,8 +57,9 @@ export {
 	CcvSimpleBarChart,
 	CcvGroupedBarChart,
 	CcvStackedBarChart,
-	CcvLineChart,
-	CcvScatterChart,
+	CcvBubbleChart,
 	CcvDonutChart,
-	CcvPieChart
+	CcvLineChart,
+	CcvPieChart,
+	CcvScatterChart
 };
