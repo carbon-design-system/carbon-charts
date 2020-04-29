@@ -48,24 +48,29 @@ export class Ruler extends Component {
 		 * to only get elements which belong to the same axis coordinate
 		 */
 		const dataPointsMatchingRulerLine: {domainValue: number, originalData: any}[] =
-			scaledData.reduce((accum, currentValue) => {
-				// store the first element of the accumulator array to compare it with current element being processed
-				const sampleAccumValue = accum[0] ? accum[0].domainValue : undefined;
-
-				// if accumulator is not empty and current value is bigger than already existing value in the accumulator, skip current iteration
-				if (sampleAccumValue !== undefined && currentValue.domainValue > sampleAccumValue) {
+			scaledData
+			.filter(d => pointIsWithinThreshold(d.domainValue, x))
+			.reduce((accum, currentValue) => {
+				if (accum.length === 0) {
+					accum.push(currentValue);
 					return accum;
 				}
 
-				// there's a match and currentValue is either less then or equal to already stored values
-				if (pointIsWithinThreshold(currentValue.domainValue, x)) {
-					if (sampleAccumValue !== undefined && currentValue.domainValue < sampleAccumValue) {
-						// there's a closer data point in the threshold area, so reinstantiate array
-						accum = [currentValue];
-					} else {
-						// currentValue is equal to already stored values, there's another match on the same coordinate
-						accum.push(currentValue);
-					}
+				// store the first element of the accumulator array to compare it with current element being processed
+				const sampleAccumValue = accum[0].domainValue;
+
+				const distanceToCurrentValue =  Math.abs(x - currentValue.domainValue);
+				const distanceToAccumValue = Math.abs(x - sampleAccumValue);
+
+				if (distanceToCurrentValue > distanceToAccumValue) {
+					// if distance with current value is bigger than already existing value in the accumulator, skip current iteration
+					return accum;
+				} else if (distanceToCurrentValue < distanceToAccumValue) {
+					// currentValue data point is closer to mouse inside the threshold area, so reinstantiate array
+					accum = [currentValue];
+				} else {
+					// currentValue is equal to already stored values, which means there's another match on the same coordinate
+					accum.push(currentValue);
 				}
 
 				return accum;
@@ -73,9 +78,10 @@ export class Ruler extends Component {
 
 		// some data point match
 		if (dataPointsMatchingRulerLine.length > 0) {
-			const highlightItems = dataPointsMatchingRulerLine.map(d => d.originalData)
+			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+			const highlightItems = dataPointsMatchingRulerLine
+				.map(d => d.originalData)
 				.filter(d => {
-					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 					const value = d[rangeIdentifier];
 					return value !== null && value !== undefined;
 				});
