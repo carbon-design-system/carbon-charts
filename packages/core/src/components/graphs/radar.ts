@@ -270,7 +270,7 @@ export class Radar extends Component {
 	// creates corrisponding data with value = 0
 	normalizeFlatData = (dataset: Array<Datum>) => {
 		const completeBlankData = flatMapDeep(this.uniqKeys.map(key => {
-			return this.uniqGroups.map(group => ({ key, [this.groupMapsTo]: group, value: 0 }));
+			return this.uniqGroups.map(group => ({ key, [this.groupMapsTo]: group, value: null }));
 		}));
 		return Tools.merge(completeBlankData, dataset);
 	}
@@ -279,7 +279,7 @@ export class Radar extends Component {
 	// creates corrisponding data with value = 0
 	normalizeGroupedData = (dataset: any) => {
 		return dataset.map(({ name, data }) => {
-			const completeBlankData = this.uniqKeys.map(k => ({ [this.groupMapsTo]: name, key: k, value: 0 }));
+			const completeBlankData = this.uniqKeys.map(k => ({ [this.groupMapsTo]: name, key: k, value: null }));
 			return { name, data: Tools.merge(completeBlankData, data) };
 		});
 	}
