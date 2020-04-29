@@ -214,7 +214,7 @@ const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
  */
 const stackedAreaChart: StackedAreaChartOptions = Tools.merge({}, axisChart, {
 	timeScale: Tools.merge(timeScale, {
-		addSpaceOnEdges: 0.1
+		addSpaceOnEdges: 0
 	} as TimeScaleOptions),
 	points: {
 		// default point radius to 3

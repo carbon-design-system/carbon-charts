@@ -5,7 +5,14 @@ import { ChartConfig, StackedAreaChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
-import { Grid, StackedArea, TwoDimensionalAxes, Line } from "../components/index";
+import {
+	Grid,
+	StackedArea,
+	TwoDimensionalAxes,
+	Line,
+	Ruler,
+	Tooltip
+} from "../components/index";
 
 export class StackedAreaChart extends AxisChart {
 	constructor(
@@ -32,6 +39,7 @@ export class StackedAreaChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
+			new Ruler(this.model, this.services),
 			new StackedArea(this.model, this.services),
 			new Line(this.model, this.services, { stacked: true })
 		];
@@ -40,7 +48,7 @@ export class StackedAreaChart extends AxisChart {
 			graphFrameComponents
 		);
 		// TODO add tooltip
-		// components.push(new TooltipArea(this.model, this.services));
+		components.push(new Tooltip(this.model, this.services));
 		return components;
 	}
 }

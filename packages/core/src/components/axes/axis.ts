@@ -94,6 +94,7 @@ export class Axis extends Component {
 		// The invisible axis is updated instantly and without a transition
 		const invisibleAxisRef = DOMUtils.appendOrSelect(container, `g.ticks.invisible`)
 			.style("opacity", "0")
+			.style("pointer-events", "none")
 			.attr("aria-hidden", true);
 
 		// Append to DOM a fake tick to get the right computed font height
