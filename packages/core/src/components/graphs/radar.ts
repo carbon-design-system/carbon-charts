@@ -22,6 +22,7 @@ interface Datum {
 
 export class Radar extends Component {
 	type = "radar";
+	groupMapsTo: string;
 	uniqKeys: string[];
 	uniqGroups: string[];
 	displayDataNormalized: Array<Datum>;
@@ -50,21 +51,23 @@ export class Radar extends Component {
 
 		const displayData: Array<Datum> = this.model.getDisplayData();
 		const groupedData = this.model.getGroupedData();
-
-		this.uniqKeys = Array.from(new Set(displayData.map(d => d.key)));
-		this.uniqGroups = Array.from(new Set(displayData.map(d => d.group)));
-		this.displayDataNormalized = normalizeFlatData(displayData, this.uniqKeys, this.uniqGroups);
-		this.groupedDataNormalized = normalizeGroupedData(groupedData, this.uniqKeys);
-
 		const options = this.model.getOptions();
 		const configuration = Configuration.options.radarChart.radar;
+
+		this.groupMapsTo = options.data.groupMapsTo;
+		this.uniqKeys = Array.from(new Set(displayData.map(d => d.key)));
+		this.uniqGroups = Array.from(new Set(displayData.map(d => d[this.groupMapsTo])));
+		this.displayDataNormalized = this.normalizeFlatData(displayData);
+		this.groupedDataNormalized = this.normalizeGroupedData(groupedData);
+
 
 		// console.log("animate:", animate);
 		// console.log("data:", data);
 		// console.log("displayData:", displayData);
 		// console.log("groupedData:", groupedData);
-		// console.log("options:", options);
-		// console.log("configuration:", configuration);
+		console.log("options:", options);
+		console.log("configuration:", configuration);
+		console.log("groupMapsTo:", this.groupMapsTo);
 
 		/////////////////////////////
 		// Computations
@@ -260,6 +263,24 @@ export class Radar extends Component {
 
 		// Add event listeners
 		this.addEventListeners();
+	}
+
+	// Given a flat array of objects, if there are missing data on key,
+	// creates corrisponding data with value = 0
+	normalizeFlatData = (dataset: Array<Datum>) => {
+		const completeBlankData = flatMapDeep(this.uniqKeys.map(key => {
+			return this.uniqGroups.map(group => ({ key, [this.groupMapsTo]: group, value: 0 }));
+		}));
+		return Tools.merge(completeBlankData, dataset);
+	}
+
+	// Given a a grouped array of objects, if there are missing data on key,
+	// creates corrisponding data with value = 0
+	normalizeGroupedData = (dataset: any) => {
+		return dataset.map(({ name, data }) => {
+			const completeBlankData = this.uniqKeys.map(k => ({ [this.groupMapsTo]: name, key: k, value: 0 }));
+			return { name, data: Tools.merge(completeBlankData, data) };
+		});
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
@@ -467,21 +488,4 @@ function radialLabelPlacement(angleRadians: number) {
 	}
 
 	return { textAnchor, dominantBaseline };
-}
-
-/**
- * If there are missing data on key, create corrisponding data with value = 0.
- */
-function normalizeFlatData(dataset: Array<Datum>, keys: string[], groups: string[]) {
-	const completeBlankData = flatMapDeep(keys.map(key => {
-		return groups.map(group => ({key, group, value: 0}));
-	}));
-	return Tools.merge(completeBlankData, dataset);
-}
-
-function normalizeGroupedData(dataset: any, keys: string[]) {
-	return dataset.map(({name, data}) => {
-		const completeBlankData = keys.map(k => ({ group: name, key: k, value: 0 }));
-		return { name, data: Tools.merge(completeBlankData, data) };
-	});
 }
