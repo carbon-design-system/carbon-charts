@@ -81,10 +81,10 @@ export class Ruler extends Component {
 				});
 
 			// get elements on which we should trigger mouse events
-			const domnainValuesMatchingRulerLine = dataPointsMatchingRulerLine.map(d => d.domainValue);
+			const domainValuesMatchingRulerLine = dataPointsMatchingRulerLine.map(d => d.domainValue);
 			const hoveredElements = dataPointElements.filter(d => {
 				const domainValue = this.services.cartesianScales.getDomainValue(d);
-				return domnainValuesMatchingRulerLine.includes(domainValue);
+				return domainValuesMatchingRulerLine.includes(domainValue);
 			});
 
 			/** if we pass from a trigger area to another one
