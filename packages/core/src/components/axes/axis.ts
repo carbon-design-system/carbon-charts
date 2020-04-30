@@ -289,6 +289,12 @@ export class Axis extends Component {
 			}
 		}
 
+		// we don't need to show axes on empty state and on skeleton state
+		// because the Skeleton component draws them
+		if (this.model.areDataEmpty()) {
+			container.attr("opacity", 0);
+		}
+
 		// Add event listeners to elements drawn
 		this.addEventListeners();
 	}
