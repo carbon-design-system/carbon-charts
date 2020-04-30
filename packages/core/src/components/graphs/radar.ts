@@ -218,7 +218,9 @@ export class Radar extends Component {
 				.attr("class", "x-axis")
 				.call(selection => selection
 					.append("line")
+					.attr("class", key => `line-${removeSpaces(key)}`)
 					.attr("stroke", "#dcdcdc")
+					.attr("stroke-dasharray", "0")
 					.attr("x1", key => polarCoords(key, 0, cx, cy).x)
 					.attr("y1", key => polarCoords(key, 0, cx, cy).y)
 					.attr("x2", key => polarCoords(key, 0, cx, cy).x)
@@ -273,7 +275,7 @@ export class Radar extends Component {
 
 			exit => exit.remove()
 		);
-		
+
 		// blobs
 		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
 		const blobUpdate = blobs.selectAll("g.blob").data(this.groupedDataNormalized, group => group.name);
@@ -309,7 +311,7 @@ export class Radar extends Component {
 				.attr("width", radius)
 				.attr("height", 50)
 				.attr("fill", "red")
-				.style("fill-opacity", 0)
+				.style("fill-opacity", DEBUG ? 0.1 : 0)
 				.attr("transform", key => `rotate(${radToDeg(xScale(key)) - 90} ${cx} ${cy})`),
 			update => update,
 			exit => exit.remove()
@@ -382,11 +384,12 @@ export class Radar extends Component {
 			})
 			.on("mousemove", function (datum) {
 				const hoveredElement = select(this);
+				const axisLine = self.parent.select(`.x-axes .x-axis .line-${removeSpaces(datum)}`);
 
-				// // Changhe style
-				// hoveredElement.classed("hovered", true)
-				// 	.transition(self.services.transitions.getTransition("x_axis_line_mouseover"))
-				// 	.attr("stroke", "purple");
+				// Change style
+				axisLine.classed("hovered", true)
+					.transition(self.services.transitions.getTransition("x_axis_line_mouseover"))
+					.attr("stroke-dasharray", "4 4");
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_MOUSEMOVE, {
@@ -413,11 +416,12 @@ export class Radar extends Component {
 			})
 			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
+				const axisLine = self.parent.select(`.x-axes .x-axis .line-${removeSpaces(datum)}`);
 
-				// // Change style
-				// hoveredElement.classed("hovered", false)
-				// 	.transition(self.services.transitions.getTransition("x_axis_line_mouseout"))
-				// 	.attr("stroke", "white");
+				// Change style
+				axisLine.classed("hovered", false)
+					.transition(self.services.transitions.getTransition("x_axis_line_mouseout"))
+					.attr("stroke-dasharray", "0");
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_MOUSEOUT, {
@@ -502,4 +506,8 @@ function radialLabelPlacement(angleRadians: number) {
 	}
 
 	return { textAnchor, dominantBaseline };
+}
+
+function removeSpaces(str: string): string {
+	return str.replace(/\s/g, "");
 }
