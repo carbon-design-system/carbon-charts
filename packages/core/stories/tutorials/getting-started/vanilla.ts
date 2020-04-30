@@ -22,6 +22,7 @@ npm install --save @carbon/charts d3
 
 #### Getting started
 
+To start using the \`BarChart\` component, try the example below:
 
 **consuming with a bundler (e.g. webpack):**
 

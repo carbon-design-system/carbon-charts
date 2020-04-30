@@ -20,6 +20,7 @@ import {
 const hljs = require("highlight.js/lib/highlight.js");
 hljs.registerLanguage('js', require('highlight.js/lib/languages/javascript'));
 hljs.registerLanguage('bash', require('highlight.js/lib/languages/bash'));
+hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
 
 const tutorialStories = storiesOf("Tutorials", module);
 const gettingStartedStories = storiesOf("Tutorials/GettingStarted", module);
@@ -62,9 +63,9 @@ gettingStartedStories.add("React", () => {
 
 	container.innerHTML = reactTutorial;
 
-	// container.querySelectorAll("pre code").forEach((block) => {
-	// 	hljs.highlightBlock(block);
-	// });
+	container.querySelectorAll("pre code").forEach((block) => {
+		hljs.highlightBlock(block);
+	});
 
 	return container;
 });
@@ -77,9 +78,9 @@ gettingStartedStories.add("Vue", () => {
 
 	container.innerHTML = vueTutorial;
 
-	// container.querySelectorAll("pre code").forEach((block) => {
-	// 	hljs.highlightBlock(block);
-	// });
+	container.querySelectorAll("pre code").forEach((block) => {
+		hljs.highlightBlock(block);
+	});
 
 	return container;
 });
