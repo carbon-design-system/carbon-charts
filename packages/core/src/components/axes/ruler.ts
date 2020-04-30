@@ -154,8 +154,7 @@ export class Ruler extends Component {
 
 		this.backdrop
 			.on("mousemove mouseover", function() {
-				const chartContainer = self.services.domUtils.getMainSVG();
-				const pos = mouse(chartContainer);
+				const pos = mouse(self.parent.node());
 
 				self.showRuler(pos);
 			})
