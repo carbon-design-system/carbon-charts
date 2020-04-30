@@ -60,7 +60,7 @@ class App extends React.Component {
 
 ##### Data and Options
 Data and options follow the same model in all charts, with minor exceptions and differences in specific components.
-See tutorial (TODO on Data and Options)
+See tutorial on tabular data format for more information on chart data.
 
 #### Guidance
 Please refer to the [Carbon Design Systems guidance](https://www.carbondesignsystem.com/data-visualization/chart-types) on using the different charts available in this library.
