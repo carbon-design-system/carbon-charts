@@ -99,7 +99,7 @@ Please refer to the [Contribution Guidelines](https://github.com/carbon-design-s
 We recommend the use of [Webpack Dev Server](https://github.com/webpack/webpack-dev-server) for developing components.
 
 
-###### Start the server
+**Start the server:**
 \`\`\`bash
 cd packages/core
 yarn demo:server

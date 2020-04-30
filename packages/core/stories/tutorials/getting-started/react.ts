@@ -74,7 +74,7 @@ Please refer to the [Contribution Guidelines](https://github.com/carbon-design-s
 We recommend the use of [React Storybook](https://github.com/storybookjs/storybook/tree/next/app/react) for developing components.
 
 
-**start the server:**
+**Start the server:**
 \`\`\`bash
 cd packages/react
 yarn run storybook

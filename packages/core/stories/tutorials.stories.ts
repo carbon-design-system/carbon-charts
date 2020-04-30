@@ -18,12 +18,12 @@ import {
 
 // Syntax highlighting
 const hljs = require("highlight.js/lib/highlight.js");
-hljs.registerLanguage('js', require('highlight.js/lib/languages/javascript'));
-hljs.registerLanguage('bash', require('highlight.js/lib/languages/bash'));
-hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
+hljs.registerLanguage("js", require("highlight.js/lib/languages/javascript"));
+hljs.registerLanguage("bash", require("highlight.js/lib/languages/bash"));
+hljs.registerLanguage("typescript", require("highlight.js/lib/languages/typescript"));
 
+const gettingStartedStories = storiesOf("Tutorials/Getting Started", module);
 const tutorialStories = storiesOf("Tutorials", module);
-const gettingStartedStories = storiesOf("Tutorials/GettingStarted", module);
 
 // add vanilla getting started tutorials
 gettingStartedStories.add("VanillaJS", () => {

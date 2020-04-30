@@ -5,7 +5,6 @@ export const angularTutorial = marked(`
 The Carbon Charts Angular library provides a collection of reusable charting components to build websites and user interfaces. Adopting the library enables developers to use consistent markup, styles, and behavior in prototype and production work.
 
 
-
 #### Install
 
 **with yarn:**
@@ -83,14 +82,13 @@ Please refer to the [Carbon Design Systems guidance](https://www.carbondesignsys
 
 
 #### Development
-
 Please refer to the [Contribution Guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/CONTRIBUTING.md) before starting any work.
 
 
 ##### Using the server
 We recommend the use of [Angular Storybook](https://github.com/storybookjs/storybook/tree/next/app/angular) for developing components.
 
-**start the server:**
+**Start the server:**
 \`\`\`bash
 cd packages/angular
 yarn storybook
