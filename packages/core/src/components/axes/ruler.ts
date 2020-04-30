@@ -29,7 +29,7 @@ export class Ruler extends Component {
 	showRuler([x, y]: [number, number]) {
 		const svg = this.parent;
 		const orientation: CartesianOrientations = this.services.cartesianScales.getOrientation();
-		const mouseCoordinate = orientation === "horizontal" ? y : x;
+		const mouseCoordinate = orientation === CartesianOrientations.HORIZONTAL ? y : x;
 		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler");
 		const rulerLine = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
 		const dataPointElements: GenericSvgSelection = svg.selectAll(
