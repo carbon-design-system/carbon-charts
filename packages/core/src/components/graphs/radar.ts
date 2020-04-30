@@ -19,6 +19,10 @@ interface Datum {
 	key: string;
 	value: number;
 }
+interface Point {
+	x: number;
+	y: number;
+}
 
 export class Radar extends Component {
 	type = "radar";
@@ -217,8 +221,8 @@ export class Radar extends Component {
 					.attr("stroke", "#dcdcdc")
 					.attr("x1", key => polarCoords(key, 0, cx, cy).x)
 					.attr("y1", key => polarCoords(key, 0, cx, cy).y)
-					.attr("x2", key => polarCoords(key, 1, cx, cy).x)
-					.attr("y2", key => polarCoords(key, 1, cx, cy).y)
+					.attr("x2", key => polarCoords(key, 0, cx, cy).x)
+					.attr("y2", key => polarCoords(key, 0, cx, cy).y)
 					.transition().duration(500)
 					// .transition(this.services.transitions.getTransition("x-axis-line-enter", animate))
 					.attr("x1", key => polarCoords(key, yScale.range()[0], cx, cy).x)
@@ -229,7 +233,7 @@ export class Radar extends Component {
 				.call(selection => selection
 					.append("text")
 					// .text(d => `${d} (${radToDeg(xScale(d))}°, ${Math.round(distanceBetweenPointOnCircAndVerticalDiameter(xScale(d), radius))})`)
-					.text(d => d)
+					.text(key => key)
 					.attr("x", key => polarCoords(key, yScale.range()[1] + xLabelPadding, cx, cy).x)
 					.attr("y", key => polarCoords(key, yScale.range()[1] + xLabelPadding, cx, cy).y)
 					.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
@@ -256,7 +260,7 @@ export class Radar extends Component {
 				)
 				.call(selection => selection
 					.select("text")
-					.text(d => d)
+					.text(key => key)
 					.attr("x", key => polarCoords(key, yScale.range()[1] + xLabelPadding, cx, cy).x)
 					.attr("y", key => polarCoords(key, yScale.range()[1] + xLabelPadding, cx, cy).y)
 					.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
@@ -269,7 +273,7 @@ export class Radar extends Component {
 
 			exit => exit.remove()
 		);
-
+		
 		// blobs
 		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
 		const blobUpdate = blobs.selectAll("g.blob").data(this.groupedDataNormalized, group => group.name);
@@ -291,6 +295,24 @@ export class Radar extends Component {
 			.attr("stroke-width", 1.5)
 			.attr("fill", group => colorScale(group.name))
 			.style("fill-opacity", configuration.opacity.selected)
+		);
+
+		// rectangles
+		const xAxesRect = DOMUtils.appendOrSelect(svg, "g.x-axes-rect");
+		const xAxisRectUpdate = xAxesRect.selectAll("g.x-axis-rect").data(this.uniqKeys);
+		xAxisRectUpdate.join(
+			enter => enter
+				.append("rect")
+				.attr("class", "axis-rect")
+				.attr("x", cx)
+				.attr("y", cy - 50/2)
+				.attr("width", radius)
+				.attr("height", 50)
+				.attr("fill", "red")
+				.style("fill-opacity", 0)
+				.attr("transform", key => `rotate(${radToDeg(xScale(key)) - 90} ${cx} ${cy})`),
+			update => update,
+			exit => exit.remove()
 		);
 
 		// Add event listeners
@@ -348,8 +370,9 @@ export class Radar extends Component {
 	addEventListeners() {
 		const self = this;
 
-		// events on x axes
-		this.parent.selectAll(".x-axes .x-axis > line")
+		// events on x axes rects
+		// this.parent.selectAll(".x-axes .x-axis > line")
+		this.parent.selectAll(".x-axes-rect > rect")
 			.on("mouseover", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_MOUSEOVER, {
@@ -360,10 +383,10 @@ export class Radar extends Component {
 			.on("mousemove", function (datum) {
 				const hoveredElement = select(this);
 
-				// Changhe style
-				hoveredElement.classed("hovered", true)
-					.transition(self.services.transitions.getTransition("x_axis_line_mouseover"))
-					.attr("stroke", "purple");
+				// // Changhe style
+				// hoveredElement.classed("hovered", true)
+				// 	.transition(self.services.transitions.getTransition("x_axis_line_mouseover"))
+				// 	.attr("stroke", "purple");
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_MOUSEMOVE, {
@@ -391,10 +414,10 @@ export class Radar extends Component {
 			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
 
-				// Change style
-				hoveredElement.classed("hovered", false)
-					.transition(self.services.transitions.getTransition("x_axis_line_mouseout"))
-					.attr("stroke", "white");
+				// // Change style
+				// hoveredElement.classed("hovered", false)
+				// 	.transition(self.services.transitions.getTransition("x_axis_line_mouseout"))
+				// 	.attr("stroke", "white");
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_MOUSEOUT, {
@@ -410,6 +433,10 @@ export class Radar extends Component {
 
 function radToDeg(rad: number) {
 	return rad * (180 / Math.PI);
+}
+
+function degToRad(deg) {
+	return deg * (Math.PI / 180);
 }
 
 function isInRange(x: number, minMax: number[]): boolean {
