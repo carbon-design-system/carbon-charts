@@ -1,3 +1,4 @@
+import StackedAreaChart from "./area-chart-stacked";
 import GroupedBarChart from "./bar-chart-grouped";
 import SimpleBarChart from "./bar-chart-simple";
 import StackedBarChart from "./bar-chart-stacked";
@@ -8,6 +9,7 @@ import PieChart from "./pie-chart";
 import ScatterChart from "./scatter-chart";
 
 export {
+	StackedAreaChart,
 	GroupedBarChart,
 	SimpleBarChart,
 	StackedBarChart,

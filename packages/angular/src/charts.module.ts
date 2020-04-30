@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { BaseChart } from "./base-chart.component";
+import { StackedAreaChartComponent } from "./area-chart-stacked.component";
 import { SimpleBarChartComponent } from "./bar-chart-simple.component";
 import { GroupedBarChartComponent } from "./bar-chart-grouped.component";
 import { StackedBarChartComponent } from "./bar-chart-stacked.component";
@@ -17,6 +18,7 @@ import { ScatterChartComponent } from "./scatter-chart.component";
 	],
 	declarations: [
 		BaseChart,
+		StackedAreaChartComponent,
 		SimpleBarChartComponent,
 		GroupedBarChartComponent,
 		StackedBarChartComponent,
@@ -28,6 +30,7 @@ import { ScatterChartComponent } from "./scatter-chart.component";
 	],
 	exports: [
 		BaseChart,
+		StackedAreaChartComponent,
 		SimpleBarChartComponent,
 		GroupedBarChartComponent,
 		StackedBarChartComponent,
