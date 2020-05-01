@@ -189,6 +189,11 @@ let allDemoGroups = [
 				isDemoExample: true
 			},
 			{
+				options: lineDemos.lineTimeSeriesDenseOptions,
+				data: lineDemos.lineTimeSeriesDenseData,
+				chartType: chartTypes.LineChart
+			},
+			{
 				options: lineDemos.lineOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart,
@@ -197,6 +202,16 @@ let allDemoGroups = [
 			{
 				options: lineDemos.lineTimeSeriesRotatedTicksOptions,
 				data: lineDemos.lineTimeSeriesDataRotatedTicks,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeriesHorizontalOptions,
+				data: lineDemos.lineTimeSeriesData,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineHorizontalOptions,
+				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart
 			}
 		]
@@ -313,6 +328,11 @@ let allDemoGroups = [
 			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataSingleDatum,
 				options: timeSeriesAxisDemos.lineTimeSeriesSingleDatumOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainData,
+				options: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainOptions,
 				chartType: chartTypes.LineChart
 			}
 		]
