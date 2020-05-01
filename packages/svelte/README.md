@@ -6,6 +6,11 @@
 
 **[Storybook demo sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
 
+## Maintenance & support
+These Svelte wrappers have been developed by Eric Liu.
+
+Please direct all questions regarding support, bug fixes, and feature requests to [@metonym](https://github.com/metonym).
+
 ## Getting started
 Run the following command using [npm](https://www.npmjs.com/):
 
