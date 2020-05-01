@@ -211,7 +211,12 @@ const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
 const areaChart: AreaChartOptions = Tools.merge({}, axisChart, {
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: 0
-	} as TimeScaleOptions)
+	} as TimeScaleOptions),
+	points: {
+		// default point radius to 3
+		radius: 3,
+		filled: false
+	}
 } as LineChartOptions);
 
 /**
