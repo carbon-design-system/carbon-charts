@@ -6,7 +6,7 @@ import { DOMUtils } from "../../services";
 // D3 Imports
 import { axisBottom, axisLeft } from "d3-axis";
 import { mouse, select } from "d3-selection";
-import { TooltipTypes, Events } from "../../interfaces";
+import { TooltipTypes, Events, AxisPositions } from "../../interfaces";
 
 export class Grid extends Component {
 	type = "grid";
@@ -19,8 +19,17 @@ export class Grid extends Component {
 		DOMUtils.appendOrSelect(this.backdrop, "g.x.grid");
 		DOMUtils.appendOrSelect(this.backdrop, "g.y.grid");
 
-		this.drawXGrid();
-		this.drawYGrid();
+		const { cartesianScales, curves } = this.services;
+
+		const rangeAxisPosition = cartesianScales.getRangeAxisPosition();
+		const drawYGrid = rangeAxisPosition === AxisPositions.LEFT || rangeAxisPosition === AxisPositions.RIGHT;
+		const drawXGrid = rangeAxisPosition === AxisPositions.BOTTOM || rangeAxisPosition === AxisPositions.TOP;
+		if (drawXGrid) {
+			this.drawXGrid();
+		}
+		if (drawYGrid) {
+			this.drawYGrid();
+		}
 	}
 
 	drawXGrid() {
