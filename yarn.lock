@@ -3161,7 +3161,7 @@
     qs "^6.6.0"
     util-deprecate "^1.0.2"
 
-"@storybook/svelte@^5.3.18":
+"@storybook/svelte@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/svelte/-/svelte-5.3.18.tgz#737febab8c4b5a72d6bb31e9ad9cad03dc360ad9"
   integrity sha512-IbkpU5kPiA2fdq2HmuV2vP+LxTc15aKaP8yeF5ylq3jyxttwIcm8mvECSY8LoIdJE27U6C3nwHwQd6kyX/7E/g==
@@ -17889,7 +17889,7 @@ svelte-dev-helper@^1.1.9:
   resolved "https://registry.npmjs.org/svelte-dev-helper/-/svelte-dev-helper-1.1.9.tgz#7d187db5c6cdbbd64d75a32f91b8998bde3273c3"
   integrity sha1-fRh9tcbNu9ZNdaMvkbiZi94yc8M=
 
-svelte-loader@^2.13.6:
+svelte-loader@2.13.6:
   version "2.13.6"
   resolved "https://registry.npmjs.org/svelte-loader/-/svelte-loader-2.13.6.tgz#3d5efd5886c2bab034606d5af0cce659da3ee555"
   integrity sha512-7uf7ZQdPAl+lwb1ldUYJFY/raZRUCuaNx7lMJ+F16jrVwN1+c35C2pBMGIY0mCqdKm5sm45jqELJJLGM3UG9Pw==
@@ -17897,7 +17897,7 @@ svelte-loader@^2.13.6:
     loader-utils "^1.1.0"
     svelte-dev-helper "^1.1.9"
 
-svelte@^3.20.x:
+svelte@3.20.x:
   version "3.20.1"
   resolved "https://registry.npmjs.org/svelte/-/svelte-3.20.1.tgz#8417fcd883a2f534b642a0737368272e651cf3ac"
   integrity sha512-m/dw52BZf+p6KYnyKLErIcGalu4pwJrQbUM7VZriRw6ZlJj1qMAZsLcIWzEB3I0hhdJwkKb7LrrvUIeqmbO92Q==
