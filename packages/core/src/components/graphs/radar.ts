@@ -317,6 +317,21 @@ export class Radar extends Component {
 			exit => exit.remove()
 		);
 
+		// circles
+		const dots = DOMUtils.appendOrSelect(svg, "g.dots");
+		const dotsUpdate = dots.selectAll("g.dot").data(this.displayDataNormalized);
+		dotsUpdate.join(
+			enter => enter
+				.append("circle")
+				.attr("class", "dot")
+				.attr("cx", d => polarCoords(d.key, yScale(d.value), cx, cy).x)
+				.attr("cy", d => polarCoords(d.key, yScale(d.value), cx, cy).y)
+				.attr("r", 5)
+				.attr("fill", d => colorScale(d[this.groupMapsTo])),
+			update => update,
+			exit => exit.remove()
+		);
+
 		// Add event listeners
 		this.addEventListeners();
 	}
