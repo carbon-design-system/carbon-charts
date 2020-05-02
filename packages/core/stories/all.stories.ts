@@ -59,7 +59,7 @@ introStories.add("Welcome", () => {
 				React
 			</a>
 
-			<a class="bx--btn bx--btn--primary last" href="https://carbon-design-system.github.io/carbon-charts/vue" target="_blank">
+			<a class="bx--btn bx--btn--primary" href="https://carbon-design-system.github.io/carbon-charts/vue" target="_blank">
 				<svg class="vue" viewBox="0 0 197 170" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 					<polygon fill="#ffffff" points="157.06 0 98.16 102.01 39.23 0 0 0 98.16 170.02 196.32 0 120.83 0"></polygon>
 					<polygon fill="#ffffff" points="98.16 28.93 81.35 0 75.5 0 98.16 39.26 120.82 0 114.973219 0">
@@ -67,6 +67,10 @@ introStories.add("Welcome", () => {
 				</svg>
 
 				Vue
+			</a>
+
+			<a class="bx--btn bx--btn--primary last" href="https://carbon-design-system.github.io/carbon-charts/svelte" target="_blank">
+				Svelte
 			</a>
 		</div>
 	</div>
