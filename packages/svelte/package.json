@@ -49,6 +49,7 @@
 		"@carbon/charts": "^0.30.19"
 	},
 	"peerDependencies": {
+		"carbon-components": "^10.5.x",
 		"svelte": "^3.20.x"
 	},
 	"devDependencies": {
