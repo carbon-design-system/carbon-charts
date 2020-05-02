@@ -1,5 +1,10 @@
+// compute modulo values correctly also with a negative number
+function mod(n: number, m: number): number {
+	return ((n % m) + m) % m;
+}
+
 export function radialLabelPlacement(angleRadians: number) {
-	const angle = radToDeg(angleRadians) % 360; // rounded angle
+	const angle = mod(radToDeg(angleRadians), 360);
 
 	let textAnchor: "start" | "middle" | "end" = "middle"; // *___   __*__   ___*
 	let dominantBaseline: "baseline" | "middle" | "hanging" = "middle"; // __*   --*--   --.
@@ -18,15 +23,15 @@ export function radialLabelPlacement(angleRadians: number) {
 
 	if (quadrant === 0) {
 		textAnchor = "start";
-		dominantBaseline = "baseline";
+		dominantBaseline = "hanging";
 	} else if (quadrant === 1) {
-		textAnchor = "start";
+		textAnchor = "end";
 		dominantBaseline = "hanging";
 	} else if (quadrant === 2) {
 		textAnchor = "end";
-		dominantBaseline = "hanging";
+		dominantBaseline = "baseline";
 	} else if (quadrant === 3) {
-		textAnchor = "end";
+		textAnchor = "start";
 		dominantBaseline = "baseline";
 	}
 
@@ -43,17 +48,17 @@ export function radialLabelPlacement(angleRadians: number) {
 	}
 
 	if (edge === 0) {
-		textAnchor = "middle";
-		dominantBaseline = "baseline";
-	} else if (edge === 1) {
 		textAnchor = "start";
 		dominantBaseline = "middle";
-	} else if (edge === 2) {
+	} else if (edge === 1) {
 		textAnchor = "middle";
 		dominantBaseline = "hanging";
-	} else if (edge === 3) {
+	} else if (edge === 2) {
 		textAnchor = "end";
 		dominantBaseline = "middle";
+	} else if (edge === 3) {
+		textAnchor = "middle";
+		dominantBaseline = "baseline";
 	}
 
 	return { textAnchor, dominantBaseline };
