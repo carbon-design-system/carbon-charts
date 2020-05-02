@@ -2,15 +2,23 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
-import { Events, TooltipTypes } from "../../interfaces";
+import { Events, TooltipTypes, Roles } from "../../interfaces";
 import { Tools } from "../../tools";
-import { flatMapDeep } from "lodash-es";
-import { radialLabelPlacement, radToDeg, degToRad } from "../../services/angle-utils";
+import { flatMapDeep, kebabCase } from "lodash-es";
+import {
+	Point,
+	Angle,
+	radialLabelPlacement,
+	radToDeg,
+	degToRad,
+	polarToCartesianCoords,
+	distanceBetweenPointOnCircAndVerticalDiameter
+} from "../../services/angle-utils";
 
 // D3 Imports
 import { select } from "d3-selection";
 import { scaleBand, scaleLinear } from "d3-scale";
-import { max, extent } from "d3-array";
+import { min, max, extent } from "d3-array";
 import { lineRadial, curveLinearClosed } from "d3-shape";
 
 const DEBUG = false;
@@ -19,10 +27,6 @@ interface Datum {
 	group?: string;
 	key: string;
 	value: number;
-}
-interface Point {
-	x: number;
-	y: number;
 }
 
 export class Radar extends Component {
@@ -47,12 +51,24 @@ export class Radar extends Component {
 		/////////////////////////////
 		// Containers
 		/////////////////////////////
-		const svg = this.parent;
-		const { width, height } = DOMUtils.getSVGElementSize(svg, { useAttrs: true });
+		const svg = this.getContainerSVG();
+		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
 		if (!width || !height) {
 			return;
 		}
 		// console.log("\n");
+		// console.log({ width, height });
+
+		const fontSize = 30; // TODO: mmm, probably there is a better way to do that
+		const margin = 2 * fontSize;
+		const size = Math.min(width, height);
+		const diameter = size - margin;
+		const radius = diameter / 2;
+		const xLabelPadding = 10;
+		const yLabelPadding = 5;
+		const yTicksNumber = 4; // TODO: probably there are a default constant for that value
+		const minRange = 10;
+		const xAxisRectHeight = 50;
 
 		const data: Array<Datum> = this.model.getData();
 		const displayData: Array<Datum> = this.model.getDisplayData();
@@ -78,127 +94,102 @@ export class Radar extends Component {
 		// Computations
 		/////////////////////////////
 
-		const fontSize = 30;
-		const margin = 2 * fontSize;
-		const size = Math.min(width, height);
-		const diameter = size - margin;
-		const radius = diameter / 2;
-		const xLabelPadding = 10;
-		const yLabelPadding = 5;
-		// console.log("radius:", radius);
-
 		// given a key, return the corrisponding angle in radiants
-		const xScale = scaleBand()
+		// rotated by -PI/2 because we want angle 0° at -y (12 o’clock)
+		const xScale = scaleBand<string>()
 			.domain(this.displayDataNormalized.map(d => d.key))
-			.range([0, 2 * Math.PI]);
+			.range([0, 2 * Math.PI].map(a => a - Math.PI / 2) as [Angle, Angle]);
 		// console.log(`xScale [${xScale.domain()}] -> [${xScale.range()}]`);
 
-		const ticksNumber = 5;
-		const minRange = 10;
 		const yScale = scaleLinear()
 			.domain([0, max(this.displayDataNormalized.map(d => d.value))])
 			.range([minRange, radius])
-			.nice(ticksNumber);
-		const yTicks = yScale.ticks(ticksNumber);
+			.nice(yTicksNumber);
+		const yTicks = yScale.ticks(yTicksNumber);
 		// console.log(`yScale [${yScale.domain()}] -> [${yScale.range()}]`);
 
-		const colorScale = (key: string): string => this.model.getFillColor(key);
+		const colorScale = (group: string): string => this.model.getFillColor(group);
 
+		// constructs a new radial line generator
+		// the angle accessor returns the angle in radians with 0° at -y (12 o’clock)
+		// so map back the angle
 		const radialLineGenerator = lineRadial<Datum>()
-			.angle(d => xScale(d.key))
-			.radius(d => yScale(d.value))
-			.curve(curveLinearClosed);
+		.angle(d => xScale(d.key) + Math.PI / 2)
+		.radius(d => yScale(d.value))
+		.curve(curveLinearClosed);
 
-		// given the key (= value corrisponding to a an x axis), a radius r and translation values
-		// return the coordinates of the corrisponding point stayng on the x axis with radius r
-		const polarCoords = (key: string, r: number, tx = 0, ty = 0) => {
-			const angle = xScale(key) - Math.PI / 2;
-			// translate by tx and ty
-			const x = r * Math.cos(angle) + tx;
-			const y = r * Math.sin(angle) + ty;
-			return { x, y };
+		// compute the space that each x label needs
+		const horizSpaceNeededByEachXLabel = this.uniqKeys.map(key => {
+			// append temporarily the label to get the exact space that it occupies
+			const tmpTick = DOMUtils.appendOrSelect(svg, `g.tmp-tick`);
+			const tmpTickText = DOMUtils.appendOrSelect(tmpTick, `text`).text(key);
+			const tickWidth = DOMUtils.getSVGElementSize(tmpTickText.node(), { useBBox: true }).width;
+			tmpTick.remove();
+			// compute the distance between the point that the label rapresents and the vertical diameter
+			const distPointDiam = distanceBetweenPointOnCircAndVerticalDiameter(xScale(key), radius);
+			// the space each label occupies is the sum of these two values
+			return tickWidth + distPointDiam;
+		});
+		const leftPadding = max(horizSpaceNeededByEachXLabel);
+
+		// center coordinates
+		const c: Point = {
+			x: leftPadding + xLabelPadding,
+			y: height / 2
 		};
-
-		const distanceBetweenPointOnCircAndVerticalDiameter = (a: number, r: number) => {
-			const angle = a - Math.PI / 2;
-			return r * Math.sin(angle - Math.PI / 2);
-		};
-
-		const leftPadding = max(this.uniqKeys.map(key => {
-			const fakeTick = DOMUtils.appendOrSelect(svg, `g.fake-tick`);
-			const fakeTickText = DOMUtils.appendOrSelect(fakeTick, `text`).text(key);
-			const tickWidth = DOMUtils.getSVGElementSize(fakeTickText.node(), { useBBox: true }).width;
-			fakeTick.remove();
-			const angle = xScale(key);
-			const distPointDiam = distanceBetweenPointOnCircAndVerticalDiameter(angle, radius);
-			const span = tickWidth + distPointDiam;
-			return span;
-		}));
-
-		// center
-		const cx = leftPadding + xLabelPadding;
-		const cy = height / 2;
 
 		/////////////////////////////
 		// Draw
 		/////////////////////////////
 
-		///////////////
-		const debugContainer = DOMUtils.appendOrSelect(svg, "g.debug");
-
-		// backdrop
-		const backdropRect = DOMUtils.appendOrSelect(debugContainer, "rect.radar-backdrop")
-			.attr("width", "100%")
-			.attr("height", "100%")
-			.attr("stroke", "red")
-			.attr("fill", "none");
-
-		// center
-		const center = DOMUtils.appendOrSelect(debugContainer, "circle.center")
-			.attr("cx", cx)
-			.attr("cy", cy)
-			.attr("r", 2)
-			.attr("fill", "gold");
-
-		// circumferences
-		const circumferences = DOMUtils.appendOrSelect(debugContainer, "g.circumferences");
-		const circumferencesUpdate = circumferences.selectAll("circle").data(yTicks);
-		circumferencesUpdate
-			.enter()
-			.append("circle")
-			.merge(circumferencesUpdate)
-			.attr("cx", cx)
-			.attr("cy", cy)
-			.attr("r", d => yScale(d))
-			.attr("fill", "none")
-			.attr("stroke", "red");
-		circumferencesUpdate.exit().remove();
-
-		svg.select("g.debug").attr("opacity", DEBUG ? 0.5 : 0);
+		if (DEBUG) {
+			const debugContainer = DOMUtils.appendOrSelect(svg, "g.debug");
+			const backdropRect = DOMUtils.appendOrSelect(debugContainer, "rect.backdrop")
+				.attr("width", "100%")
+				.attr("height", "100%")
+				.attr("stroke", "gold")
+				.attr("opacity", 0.2)
+				.attr("fill", "none");
+			const center = DOMUtils.appendOrSelect(debugContainer, "circle.center")
+				.attr("cx", c.x)
+				.attr("cy", c.y)
+				.attr("r", 2)
+				.attr("opacity", 0.2)
+				.attr("fill", "gold");
+			const circumferences = DOMUtils.appendOrSelect(debugContainer, "g.circumferences");
+			const circumferencesUpdate = circumferences.selectAll("circle").data(yTicks);
+			circumferencesUpdate
+				.enter()
+				.append("circle")
+				.merge(circumferencesUpdate)
+				.attr("cx", c.x)
+				.attr("cy", c.y)
+				.attr("r", tick => yScale(tick))
+				.attr("fill", "none")
+				.attr("opacity", 0.2)
+				.attr("stroke", "gold");
+			circumferencesUpdate.exit().remove();
+		}
 		///////////////
 
 		// y axes
-		const yAxes = DOMUtils.appendOrSelect(svg, "g.y-axes");
-		const yAxisUpdate = yAxes.selectAll("path").data(yTicks);
+		const yAxes = DOMUtils.appendOrSelect(svg, "g.y-axes").attr("role", Roles.GROUP);
+		const yAxisUpdate = yAxes.selectAll("path").data(yTicks, tick => tick);
 		yAxisUpdate.join(
-			enter => enter.append("path"),
+			enter => enter.append("path").attr("role", Roles.GRAPHICS_SYMBOL),
 			update => update,
 			exit => exit.remove()
 		)
-		.attr("transform", `translate(${cx}, ${cy})`)
-		.attr("opacity", 0)
-		.transition(this.services.transitions.getTransition("y-axis-update-enter", animate))
-		.attr("d", tickValue => {
-			const xAxesKeys = xScale.domain();
-			const points = xAxesKeys.map(key => ({ key, value: tickValue }));
-			return radialLineGenerator(points);
+		.attr("transform", `translate(${c.x}, ${c.y})`)
+		.attr("d", tick => {
+			// for each tick, create array of data corrisponding to the points composing the shape
+			const yShapeData = this.uniqKeys.map(key => ({ key, value: tick }));
+			return radialLineGenerator(yShapeData);
 		})
-		.attr("fill", "none")
-		.attr("opacity", 1)
-		.attr("stroke", "#dcdcdc");
+		.attr("fill", "none");
 
-		// y labels
-		const yLabels = DOMUtils.appendOrSelect(svg, "g.y-labels");
+		// y labels (show only the min and the max labels)
+		const yLabels = DOMUtils.appendOrSelect(svg, "g.y-labels").attr("role", Roles.GROUP);
 		const yLabelUpdate = yLabels.selectAll("text").data(extent(yTicks));
 		yLabelUpdate.join(
 			enter => enter.append("text"),
@@ -206,132 +197,85 @@ export class Radar extends Component {
 			exit => exit.remove()
 		)
 		.text(tick => tick)
-		.attr("x", tick => polarCoords("London", yScale(tick), cx + yLabelPadding, cy).x)
-		.attr("y", tick => polarCoords("London", yScale(tick), cy, cy).y)
+		.attr("x", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).x + yLabelPadding)
+		.attr("y", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).y)
 		.style("text-anchor", "start")
 		.style("dominant-baseline", "middle");
 
 		// x axes
-		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axes");
-		const xAxisUpdate = xAxes.selectAll("g.x-axis").data(this.uniqKeys);
+		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axes").attr("role", Roles.GROUP);
+		const xAxisUpdate = xAxes.selectAll("line").data(this.uniqKeys, key => key);
 		xAxisUpdate.join(
-			enter => enter.append("g")
-				.attr("class", "x-axis")
-				.call(selection => selection
-					.append("line")
-					.attr("class", key => `line-${removeSpaces(key)}`)
-					.attr("stroke", "#dcdcdc")
-					.attr("stroke-dasharray", "0")
-					.attr("x1", key => polarCoords(key, 0, cx, cy).x)
-					.attr("y1", key => polarCoords(key, 0, cx, cy).y)
-					.attr("x2", key => polarCoords(key, 0, cx, cy).x)
-					.attr("y2", key => polarCoords(key, 0, cx, cy).y)
-					.transition().duration(500)
-					// .transition(this.services.transitions.getTransition("x-axis-line-enter", animate))
-					.attr("x1", key => polarCoords(key, yScale.range()[0], cx, cy).x)
-					.attr("y1", key => polarCoords(key, yScale.range()[0], cx, cy).y)
-					.attr("x2", key => polarCoords(key, yScale.range()[1], cx, cy).x)
-					.attr("y2", key => polarCoords(key, yScale.range()[1], cx, cy).y)
-				)
-				.call(selection => selection
-					.append("text")
-					// .text(d => `${d} (${radToDeg(xScale(d))}°, ${Math.round(distanceBetweenPointOnCircAndVerticalDiameter(xScale(d), radius))})`)
-					.text(key => key)
-					.attr("x", key => polarCoords(key, yScale.range()[1] + xLabelPadding, cx, cy).x)
-					.attr("y", key => polarCoords(key, yScale.range()[1] + xLabelPadding, cx, cy).y)
-					.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
-					.style("dominant-baseline", key => radialLabelPlacement(xScale(key)).dominantBaseline)
-					.attr("opacity", 0)
-					.transition().duration(500)
-					// .transition(this.services.transitions.getTransition("x-axis-text-enter", animate))
-					.attr("opacity", 1)
-				),
-
-			update => update
-				.call(selection => selection
-					.select("line")
-					.attr("x1", key => polarCoords(key, 0, cx, cy).x)
-					.attr("y1", key => polarCoords(key, 0, cx, cy).y)
-					.attr("x2", key => polarCoords(key, 1, cx, cy).x)
-					.attr("y2", key => polarCoords(key, 1, cx, cy).y)
-					.transition().duration(500)
-					// .transition(this.services.transitions.getTransition("x-axis-line-update", animate))
-					.attr("x1", key => polarCoords(key, yScale.range()[0], cx, cy).x)
-					.attr("y1", key => polarCoords(key, yScale.range()[0], cx, cy).y)
-					.attr("x2", key => polarCoords(key, yScale.range()[1], cx, cy).x)
-					.attr("y2", key => polarCoords(key, yScale.range()[1], cx, cy).y)
-				)
-				.call(selection => selection
-					.select("text")
-					.text(key => key)
-					.attr("x", key => polarCoords(key, yScale.range()[1] + xLabelPadding, cx, cy).x)
-					.attr("y", key => polarCoords(key, yScale.range()[1] + xLabelPadding, cx, cy).y)
-					.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
-					.style("dominant-baseline", key => radialLabelPlacement(xScale(key)).dominantBaseline)
-					.attr("opacity", 0)
-					.transition().duration(500)
-					// .transition(this.services.transitions.getTransition("x-axis-text-update", animate))
-					.attr("opacity", 1)
-				),
-
-			exit => exit.remove()
-		);
-
-		// blobs
-		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr("transform", `translate(${cx}, ${cy})`);
-		const blobUpdate = blobs.selectAll("g.blob").data(this.groupedDataNormalized, group => group.name);
-		blobUpdate.join(
-			enter => enter.append("g")
-				.attr("class", "blob")
-				.call(selection => selection
-					.append("path")
-					.attr("class", group => `blob-area-${group.name}`)
-				),
+			enter => enter.append("line").attr("role", Roles.GRAPHICS_SYMBOL),
 			update => update,
 			exit => exit.remove()
 		)
-		.call(selection => selection
-			.select("path")
-			.attr("d", group => radialLineGenerator(group.data))
-			.transition(this.services.transitions.getTransition("blob-update-enter", animate))
-			.attr("stroke", group => colorScale(group.name))
-			.attr("stroke-width", 1.5)
-			.attr("fill", group => colorScale(group.name))
-			.style("fill-opacity", configuration.opacity.selected)
-		);
+		.attr("class", key => `x-axis-${kebabCase(key)}`) // replace spaces with -
+		.attr("stroke-dasharray", "0")
+		.attr("x1", key => polarToCartesianCoords(xScale(key), yScale.range()[0], c).x)
+		.attr("y1", key => polarToCartesianCoords(xScale(key), yScale.range()[0], c).y)
+		.attr("x2", key => polarToCartesianCoords(xScale(key), yScale.range()[1], c).x)
+		.attr("y2", key => polarToCartesianCoords(xScale(key), yScale.range()[1], c).y);
+
+		// x labels
+		const xLabels = DOMUtils.appendOrSelect(svg, "g.x-labels").attr("role", Roles.GROUP);
+		const xLabelUpdate = xLabels.selectAll("text").data(this.uniqKeys);
+		xLabelUpdate.join(
+			enter => enter.append("text"),
+			update => update,
+			exit => exit.remove()
+		)
+		.text(key => DEBUG ? `${key} ${radToDeg(xScale(key))}° <-- ${radToDeg(xScale(key) + Math.PI / 2)}°` : key)
+		.attr("x", key => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).x)
+		.attr("y", key => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).y)
+		.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
+		.style("dominant-baseline", key => radialLabelPlacement(xScale(key)).dominantBaseline);
+
+		// blobs
+		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr("role", Roles.GROUP);
+		const blobUpdate = blobs.selectAll("path").data(this.groupedDataNormalized, group => group.name);
+		blobUpdate.join(
+			enter => enter.append("path").attr("role", Roles.GRAPHICS_SYMBOL),
+			update => update,
+			exit => exit.remove()
+		)
+		.attr("class", "blob")
+		.attr("transform", `translate(${c.x}, ${c.y})`)
+		.attr("d", group => radialLineGenerator(group.data))
+		.attr("fill", group => colorScale(group.name))
+		.style("fill-opacity", configuration.opacity.selected)
+		.attr("stroke", group => colorScale(group.name));
+
+		// data dots
+		const dots = DOMUtils.appendOrSelect(svg, "g.dots").attr("role", Roles.GROUP);
+		const dotsUpdate = dots.selectAll("circle").data(this.displayDataNormalized);
+		dotsUpdate.join(
+			enter => enter.append("circle").attr("role", Roles.GRAPHICS_SYMBOL),
+			update => update,
+			exit => exit.remove()
+		)
+		.attr("class", d => kebabCase(d.key))
+		.attr("cx", d => polarToCartesianCoords(xScale(d.key), yScale(d.value), c).x)
+		.attr("cy", d => polarToCartesianCoords(xScale(d.key), yScale(d.value), c).y)
+		.attr("r", 0)
+		.attr("opacity", 0)
+		.attr("fill", d => colorScale(d[this.groupMapsTo]));
 
 		// rectangles
-		const xAxesRect = DOMUtils.appendOrSelect(svg, "g.x-axes-rect");
-		const xAxisRectUpdate = xAxesRect.selectAll("g.x-axis-rect").data(this.uniqKeys);
+		const xAxesRect = DOMUtils.appendOrSelect(svg, "g.x-axes-rect").attr("role", Roles.GROUP);
+		const xAxisRectUpdate = xAxesRect.selectAll("rect").data(this.uniqKeys);
 		xAxisRectUpdate.join(
-			enter => enter
-				.append("rect")
-				.attr("class", "axis-rect")
-				.attr("x", cx)
-				.attr("y", cy - 50/2)
-				.attr("width", radius)
-				.attr("height", 50)
-				.attr("fill", "red")
-				.style("fill-opacity", DEBUG ? 0.1 : 0)
-				.attr("transform", key => `rotate(${radToDeg(xScale(key)) - 90} ${cx} ${cy})`),
+			enter => enter.append("rect").attr("role", Roles.GRAPHICS_SYMBOL),
 			update => update,
 			exit => exit.remove()
-		);
-
-		// circles
-		const dots = DOMUtils.appendOrSelect(svg, "g.dots");
-		const dotsUpdate = dots.selectAll("g.dot").data(this.displayDataNormalized);
-		dotsUpdate.join(
-			enter => enter
-				.append("circle")
-				.attr("class", "dot")
-				.attr("cx", d => polarCoords(d.key, yScale(d.value), cx, cy).x)
-				.attr("cy", d => polarCoords(d.key, yScale(d.value), cx, cy).y)
-				.attr("r", 5)
-				.attr("fill", d => colorScale(d[this.groupMapsTo])),
-			update => update,
-			exit => exit.remove()
-		);
+		)
+		.attr("x", c.x)
+		.attr("y", c.y - xAxisRectHeight / 2)
+		.attr("width", yScale.range()[1])
+		.attr("height", xAxisRectHeight)
+		.attr("fill", "red")
+		.style("fill-opacity", DEBUG ? 0.1 : 0)
+		.attr("transform", key => `rotate(${radToDeg(xScale(key))}, ${c.x}, ${c.y})`);
 
 		// Add event listeners
 		this.addEventListeners();
@@ -359,7 +303,7 @@ export class Radar extends Component {
 		const { hoveredElement } = event.detail;
 		const { opacity } = Configuration.options.radarChart.radar;
 		this.parent.selectAll("g.blobs path")
-			.transition(this.services.transitions.getTransition("legend-hover-path"))
+			.transition(this.services.transitions.getTransition("legend-hover-blob"))
 			.style("fill-opacity", group => {
 				if (group.name !== hoveredElement.datum().name) {
 					return opacity.unselected;
@@ -369,14 +313,16 @@ export class Radar extends Component {
 	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
+		const { opacity } = Configuration.options.radarChart.radar;
 		this.parent.selectAll("g.blobs path")
-			.transition(this.services.transitions.getTransition("legend-mouseout-path"))
-			.style("fill-opacity", 0.5);
+			.transition(this.services.transitions.getTransition("legend-mouseout-blob"))
+			.style("fill-opacity", opacity.selected);
 	}
 
 	destroy() {
 		// Remove event listeners
-		this.parent.selectAll("path")
+		this.parent.selectAll(".x-axes-rect > rect")
+			.on("mouseover", null)
 			.on("mousemove", null)
 			.on("mouseout", null);
 		// Remove legend listeners
@@ -389,23 +335,26 @@ export class Radar extends Component {
 		const self = this;
 
 		// events on x axes rects
-		// this.parent.selectAll(".x-axes .x-axis > line")
 		this.parent.selectAll(".x-axes-rect > rect")
-			.on("mouseover", function (datum) {
+			.on("mouseover", function(datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_MOUSEOVER, {
 					element: select(this),
 					datum
 				});
 			})
-			.on("mousemove", function (datum) {
+			.on("mousemove", function(datum) {
 				const hoveredElement = select(this);
-				const axisLine = self.parent.select(`.x-axes .x-axis .line-${removeSpaces(datum)}`);
+				const axisLine = self.parent.select(`.x-axes .x-axis-${kebabCase(datum)}`);
+				const dots = self.parent.selectAll(`.dots circle.${kebabCase(datum)}`);
 
 				// Change style
 				axisLine.classed("hovered", true)
-					.transition(self.services.transitions.getTransition("x_axis_line_mouseover"))
 					.attr("stroke-dasharray", "4 4");
+				dots.classed("hovered", true)
+					.transition(self.services.transitions.getTransition("radar_dots_mouseover"))
+					.attr("opacity", 1)
+					.attr("r", 5);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_MOUSEMOVE, {
@@ -432,12 +381,16 @@ export class Radar extends Component {
 			})
 			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
-				const axisLine = self.parent.select(`.x-axes .x-axis .line-${removeSpaces(datum)}`);
+				const axisLine = self.parent.select(`.x-axes .x-axis-${kebabCase(datum)}`);
+				const dots = self.parent.selectAll(`.dots circle.${kebabCase(datum)}`);
 
 				// Change style
 				axisLine.classed("hovered", false)
-					.transition(self.services.transitions.getTransition("x_axis_line_mouseout"))
 					.attr("stroke-dasharray", "0");
+				dots.classed("hovered", false)
+					.transition(self.services.transitions.getTransition("radar_dots_mouseout"))
+					.attr("opacity", 0)
+					.attr("r", 0);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_MOUSEOUT, {
@@ -446,11 +399,8 @@ export class Radar extends Component {
 				});
 
 				// Hide tooltip
+				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, { hoveredElement });
 			});
 	}
-}
-
-function removeSpaces(str: string): string {
-	return str.replace(/\s/g, "");
 }

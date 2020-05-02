@@ -1,9 +1,16 @@
+export interface Point {
+	x: number;
+	y: number;
+}
+
+export type Angle = number;
+
 // compute modulo values correctly also with a negative number
 function mod(n: number, m: number): number {
 	return ((n % m) + m) % m;
 }
 
-export function radialLabelPlacement(angleRadians: number) {
+export function radialLabelPlacement(angleRadians: Angle) {
 	const angle = mod(radToDeg(angleRadians), 360);
 
 	let textAnchor: "start" | "middle" | "end" = "middle"; // *___   __*__   ___*
@@ -68,10 +75,24 @@ function isInRange(x: number, minMax: number[]): boolean {
 	return x >= minMax[0] && x <= minMax[1];
 }
 
-export function radToDeg(rad: number): number {
+export function radToDeg(rad: Angle): Angle {
 	return rad * (180 / Math.PI);
 }
 
-export function degToRad(deg: number): number {
+export function degToRad(deg: Angle): Angle {
 	return deg * (Math.PI / 180);
+}
+
+export function polarToCartesianCoords(a: Angle, r: number, t: Point = { x: 0, y: 0 }) {
+	const x = r * Math.cos(a) + t.x;
+	const y = r * Math.sin(a) + t.y;
+	return { x, y };
+}
+
+// Return the distance between a point (described with polar coordinates)
+// on a circumference and the vertical diameter.
+// If the point is on the left if the diameter, its distance is positive,
+// if it is on the right of the diameter, its distance is negative.
+export function distanceBetweenPointOnCircAndVerticalDiameter(a: Angle, r: number) {
+	return r * Math.sin(a - Math.PI / 2);
 }

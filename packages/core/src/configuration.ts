@@ -335,6 +335,12 @@ export const transitions = {
 	},
 	graph_element_mouseout_fill_update: {
 		duration: 100
+	},
+	radar_dots_mouseover: {
+		duration: 80
+	},
+	radar_dots_mouseout: {
+		duration: 80
 	}
 };
 

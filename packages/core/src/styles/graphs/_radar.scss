@@ -1,0 +1,37 @@
+
+.#{$prefix}--#{$charts-prefix}--radar {
+  .blobs path {
+		@if $ui-background == map-get($carbon--theme--g90, 'ui-background') {
+			mix-blend-mode: normal;
+			// mix-blend-mode: screen;
+		} @else if $ui-background == map-get($carbon--theme--g100, 'ui-background') {
+			mix-blend-mode: normal;
+			// mix-blend-mode: screen;
+		} @else {
+			mix-blend-mode: normal;
+			// mix-blend-mode: multiply;
+		}
+    stroke-width: 1.5px;
+	}
+  
+  .y-axes path,
+  .x-axes line {
+    stroke-width: 1px;
+    stroke: $ui-03;
+  }
+
+  .x-axes line.hovered {
+    @if $ui-background == map-get($carbon--theme--g90, 'ui-background') {
+			stroke: lime; // $focus
+		} @else if $ui-background == map-get($carbon--theme--g100, 'ui-background') {
+			stroke: cyan;
+		} @else {
+			stroke: deeppink;
+		}
+  }
+  
+  .y-labels text {
+    mix-blend-mode: normal;
+  }
+}
+
