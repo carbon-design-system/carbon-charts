@@ -1,9 +1,10 @@
 {
-	"name": "@carbon/charts-react",
+	"name": "@carbon/charts-svelte",
 	"version": "0.30.19",
-	"description": "Carbon charting components for React",
+	"description": "Carbon charting components for Svelte",
 	"main": "./bundle.js",
 	"module": "./index.js",
+	"svelte": "./src/index.js",
 	"scripts": {
 		"start": "yarn run storybook",
 		"build": "bash build.sh",
@@ -20,7 +21,7 @@
 	"keywords": [
 		"carbon",
 		"charts",
-		"react",
+		"svelte",
 		"dataviz",
 		"data-visualization",
 		"visualizations",
@@ -48,33 +49,31 @@
 		"@carbon/charts": "^0.30.19"
 	},
 	"peerDependencies": {
-		"react": "^16.6.3",
-		"react-dom": "^16.6.3"
+		"svelte": "^3.20.x"
 	},
 	"devDependencies": {
 		"@storybook/addon-knobs": "5.3.12",
 		"@storybook/addon-options": "5.3.12",
-		"@storybook/react": "5.3.12",
+		"@storybook/svelte": "5.3.18",
 		"babel-cli": "6.26.0",
 		"babel-core": "6.26.0",
 		"babel-loader": "7.1.2",
 		"babel-plugin-external-helpers": "6.22.0",
 		"babel-plugin-transform-object-rest-spread": "6.26.0",
-		"babel-plugin-transform-react-jsx": "6.24.1",
 		"babel-preset-env": "1.6.1",
-		"babel-preset-react": "6.24.1",
 		"base64-inline-loader": "1.1.0",
 		"css-loader": "0.28.7",
 		"img-loader": "2.0.0",
-		"react": "16.6.3",
-		"react-dom": "16.6.3",
 		"rollup": "1.27.10",
 		"rollup-plugin-commonjs": "10.1.0",
 		"rollup-plugin-node-resolve": "5.2.0",
+		"rollup-plugin-svelte": "^5.2.1",
 		"rollup-plugin-terser": "5.1.2",
 		"sass": "1.25.0",
 		"sass-loader": "8.0.0",
 		"style-loader": "0.19.0",
+		"svelte": "3.20.x",
+		"svelte-loader": "2.13.6",
 		"url-loader": "0.6.2"
 	},
 	"publishConfig": {
@@ -83,16 +82,16 @@
 	},
 	"maintainers": [
 		{
-			"name": "Eliad Moosavi",
-			"email": "iliadm@ca.ibm.com",
-			"url": "https://github.com/theiliad"
+			"name": "Eric Liu",
+			"email": "eric.young.liu@ibm.com",
+			"url": "https://github.com/metonym"
 		}
 	],
 	"contributors": [
 		{
-			"name": "Eliad Moosavi",
-			"email": "iliadm@ca.ibm.com",
-			"url": "https://github.com/theiliad"
+			"name": "Eric Liu",
+			"email": "eric.young.liu@ibm.com",
+			"url": "https://github.com/metonym"
 		}
 	]
 }
