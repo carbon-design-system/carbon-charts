@@ -17,11 +17,14 @@ import {
 
 // D3 Imports
 import { select } from "d3-selection";
-import { scaleBand, scaleLinear } from "d3-scale";
+import { scaleBand, scaleLinear, ScaleLinear } from "d3-scale";
 import { min, max, extent } from "d3-array";
 import { lineRadial, curveLinearClosed } from "d3-shape";
 
 const DEBUG = false;
+
+// used to make transitions
+let oldYScale: ScaleLinear<number, number>;
 
 interface Datum {
 	group?: string;
@@ -107,6 +110,13 @@ export class Radar extends Component {
 			.radius(d => yScale(d.value))
 			.curve(curveLinearClosed);
 
+		// this line generator is necessary in order to make a transition of a value from the
+		// position it occupies using the old scale to the position it occupies using the new scale
+		const oldRadialLineGenerator = lineRadial<Datum>()
+			.angle(radialLineGenerator.angle())
+			.radius(d => oldYScale ? oldYScale(d.value) : minRange)
+			.curve(radialLineGenerator.curve());
+
 		// compute the space that each x label needs
 		const horizSpaceNeededByEachXLabel = this.uniqKeys.map(key => {
 			const tickWidth = this.labelDimensions(key).width;
@@ -154,23 +164,55 @@ export class Radar extends Component {
 				.attr("opacity", 0.2)
 				.attr("stroke", "gold");
 			circumferencesUpdate.exit().remove();
+			const vertDiam = DOMUtils.appendOrSelect(debugContainer, "line.vertDiam")
+				.attr("x1", c.x)
+				.attr("y1", c.y - radius - 10)
+				.attr("x2", c.x)
+				.attr("y2", c.y + radius + 10)
+				.attr("opacity", 0.2)
+				.attr("stroke", "gold");
+			const horizDiam = DOMUtils.appendOrSelect(debugContainer, "line.horizDiam")
+				.attr("x1", c.x - radius - 10)
+				.attr("y1", c.y)
+				.attr("x2", c.x + radius + 10)
+				.attr("y2", c.y)
+				.attr("opacity", 0.2)
+				.attr("stroke", "gold");
 		}
 
 		// y axes
 		const yAxes = DOMUtils.appendOrSelect(this.svg, "g.y-axes").attr("role", Roles.GROUP);
 		const yAxisUpdate = yAxes.selectAll("path").data(yTicks, tick => tick);
+		// for each tick, create array of data corrisponding to the points composing the shape
+		const shapeData = (tick: number) => this.uniqKeys.map(key => ({ key, value: tick })) as Datum[];
 		yAxisUpdate.join(
-			enter => enter.append("path").attr("role", Roles.GRAPHICS_SYMBOL),
-			update => update,
-			exit => exit.remove()
-		)
-		.attr("transform", `translate(${c.x}, ${c.y})`)
-		.attr("d", tick => {
-			// for each tick, create array of data corrisponding to the points composing the shape
-			const yShapeData = this.uniqKeys.map(key => ({ key, value: tick }));
-			return radialLineGenerator(yShapeData);
-		})
-		.attr("fill", "none");
+			enter => enter
+				.append("path")
+				.attr("role", Roles.GRAPHICS_SYMBOL)
+				.attr("opacity", 0)
+				.attr("transform", `translate(${c.x}, ${c.y})`)
+				.attr("fill", "none")
+				.attr("d", tick => oldRadialLineGenerator(shapeData(tick)))
+				.call(selection => selection
+					.transition().duration(2000)
+					.attr("opacity", 1)
+					.attr("d", tick => radialLineGenerator(shapeData(tick)))
+				),
+			update => update
+				.call(selection => selection
+					.transition().duration(2000)
+					.attr("transform", `translate(${c.x}, ${c.y})`)
+					.attr("d", tick => radialLineGenerator(shapeData(tick)))
+				),
+			exit => exit
+				.call(selection => selection
+					.transition().duration(2000)
+					.attr("d", tick => radialLineGenerator(shapeData(tick)))
+					.attr("opacity", 0)
+					.remove()
+				)
+		);
+		oldYScale = yScale; // save the current scale as the old one
 
 		// y labels (show only the min and the max labels)
 		const yLabels = DOMUtils.appendOrSelect(this.svg, "g.y-labels").attr("role", Roles.GROUP);
