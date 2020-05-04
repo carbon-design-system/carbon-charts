@@ -18,7 +18,7 @@ export class Donut extends Pie {
 
 		// if there are no data, remove the center content
 		// that is the old one and do nothing
-		if (this.model.areDataEmpty()) {
+		if (this.model.isDataEmpty()) {
 			this.getContainerSVG().select("g.center").remove();
 			return;
 		}

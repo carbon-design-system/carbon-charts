@@ -8,10 +8,10 @@ export class ZeroLine extends Component {
 
 	render(animate: boolean) {
 		const [minDomainValue, maxDomainValue] = this.services.cartesianScales.getRangeScale().domain();
-		const containsZero = (minDomainValue * maxDomainValue) < 0;
+		const drawZeroLine = minDomainValue > 0 && maxDomainValue < 0 || minDomainValue < 0 && maxDomainValue > 0;
 
 		// show zero line only if is necessary
-		if (!containsZero) {
+		if (!drawZeroLine) {
 			return;
 		}
 

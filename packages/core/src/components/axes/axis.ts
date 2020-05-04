@@ -194,7 +194,7 @@ export class Axis extends Component {
 		// check that data exists, if they don't, doesn't show the title axis
 		if (axisOptions.title) {
 			const axisTitleRef = DOMUtils.appendOrSelect(container, `text.axis-title`)
-				.html(this.model.areDataEmpty() ? "" : axisOptions.title);
+				.html(this.model.isDataEmpty() ? "" : axisOptions.title);
 
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
@@ -291,7 +291,7 @@ export class Axis extends Component {
 
 		// we don't need to show axes on empty state and on skeleton state
 		// because the Skeleton component draws them
-		if (this.model.areDataEmpty()) {
+		if (this.model.isDataEmpty()) {
 			container.attr("opacity", 0);
 		}
 

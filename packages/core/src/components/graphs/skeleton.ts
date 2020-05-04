@@ -15,13 +15,13 @@ export class Skeleton extends Component {
 	backdrop: any;
 
 	render() {
-		const areDataEmpty = this.model.areDataEmpty();
+		const isDataEmpty = this.model.isDataEmpty();
 		const isDataLoading = this.model.getOptions().data.loading;
 
-		if (areDataEmpty) {
+		if (isDataEmpty) {
 			this.renderSkeleton(isDataLoading);
-		} else if (!areDataEmpty && isDataLoading) {
-			throw new Error(`There's something wrong. You can't have not empty data and data loading togheter.`);
+		} else if (!isDataEmpty && isDataLoading) {
+			throw new Error(`Something went wrong. You can't provided non-empty data and data loading together.`);
 		} else {
 			this.removeSkeleton();
 		}
@@ -29,19 +29,19 @@ export class Skeleton extends Component {
 
 	renderSkeleton(showShimmerEffect: boolean) {
 		if (this.configs.skeleton === Skeletons.GRID) {
-			this.renderSkeletonGrid(showShimmerEffect);
+			this.renderGridSkeleton(showShimmerEffect);
 		} else if (this.configs.skeleton === Skeletons.VERT_OR_HORIZ) {
-			this.renderSkeletonVertOrHoriz(showShimmerEffect);
+			this.renderVertOrHorizSkeleton(showShimmerEffect);
 		} else if (this.configs.skeleton === Skeletons.PIE) {
-			this.renderSkeletonPie(showShimmerEffect);
+			this.renderPieSkeleton(showShimmerEffect);
 		} else if (this.configs.skeleton === Skeletons.DONUT) {
-			this.renderSkeletonDonut(showShimmerEffect);
+			this.renderDonutSkeleton(showShimmerEffect);
 		} else {
 			throw new Error(`"${this.configs.skeleton}" is not a valid Skeleton type.`);
 		}
 	}
 
-	renderSkeletonGrid(showShimmerEffect: boolean) {
+	renderGridSkeleton(showShimmerEffect: boolean) {
 		this.setScales();
 		this.drawBackdrop(showShimmerEffect);
 		this.drawXGrid(showShimmerEffect);
@@ -51,20 +51,20 @@ export class Skeleton extends Component {
 		}
 	}
 
-	renderSkeletonVertOrHoriz(showShimmerEffect: boolean) {
+	renderVertOrHorizSkeleton(showShimmerEffect: boolean) {
 		const orientation = this.services.cartesianScales.getOrientation();
 		this.setScales();
 		this.drawBackdrop(showShimmerEffect);
-		if (orientation === "vertical") {
+		if (orientation === CartesianOrientations.VERTICAL) {
 			this.drawYGrid(showShimmerEffect);
 		}
-		if (orientation === "horizontal") {
+		if (orientation === CartesianOrientations.HORIZONTAL) {
 			this.drawXGrid(showShimmerEffect);
 		}
 		this.setShimmerEffect("shimmer-lines");
 	}
 
-	renderSkeletonPie(showShimmerEffect: boolean) {
+	renderPieSkeleton(showShimmerEffect: boolean) {
 		const outerRadius = this.computeOuterRadius();
 		const innerRadius = 0;
 		this.drawRing(outerRadius, innerRadius, showShimmerEffect);
@@ -73,7 +73,7 @@ export class Skeleton extends Component {
 		}
 	}
 
-	renderSkeletonDonut(showShimmerEffect: boolean) {
+	renderDonutSkeleton(showShimmerEffect: boolean) {
 		const outerRadius = this.computeOuterRadius();
 		const innerRadius = this.computeInnerRadius();
 		this.drawRing(outerRadius, innerRadius, showShimmerEffect);
