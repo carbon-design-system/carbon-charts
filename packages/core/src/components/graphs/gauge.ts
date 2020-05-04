@@ -183,14 +183,14 @@ export class Gauge extends Component {
 		const gaugeDelta = DOMUtils.appendOrSelect(svg, "g.gauge-delta");
 
 		const deltaArrow = DOMUtils.appendOrSelect(gaugeDelta, "svg.gauge-delta-arrow")
-			.attr("x", () => `-${options.gauge.center.valueFontSize(radius, arcSize)}px`)
+			.attr("x", () => `-${options.gauge.center.valueFontSize(radius, arcSize) + options.gauge.center.caretSize(radius, arcSize) / 2}px`)
 			.attr(
 				"y",
-				`${options.gauge.center.valueYPosition(radius, arcSize) + options.gauge.distanceBetweenNumbers + options.gauge.center.caretSize / 2}px`
+				`${options.gauge.center.valueYPosition(radius, arcSize) + options.gauge.distanceBetweenNumbers + options.gauge.center.caretSize(radius, arcSize) / 4}px`
 			)
-			.attr("width", `${options.gauge.center.caretSize}px`)
-			.attr("height", `${options.gauge.center.caretSize}px`)
-			.attr("viewBox", `0 0 ${options.gauge.center.caretSize} ${options.gauge.center.caretSize}`);
+			.attr("width", `${options.gauge.center.caretSize(radius, arcSize)}px`)
+			.attr("height", `${options.gauge.center.caretSize(radius, arcSize)}px`)
+			.attr("viewBox", `0 0 16 16`);
 
 		DOMUtils.appendOrSelect(deltaArrow, "polygon.gauge-delta-arrow-polygon")
 			.attr("points", () => delta > 0 ? "4 10 8 6 12 10" : "12 6 8 10 4 6")

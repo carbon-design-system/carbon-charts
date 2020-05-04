@@ -267,7 +267,7 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
  */
 
 function getGaugeFontSize(radius: number, arcSize: number, maxSize: number) {
-	const adjustedRadius = (radius * Math.PI / arcSize) / 200;
+	const adjustedRadius = (radius * Math.PI / arcSize) / 100;
 	return Tools.interpolateAndClamp(adjustedRadius, maxSize);
 }
 
@@ -279,7 +279,7 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, pieChart, {
 		arcWidth: 16,
 		distanceBetweenNumbers: 20,
 		center: {
-			caretSize: 16,
+			caretSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 16),
 			valueFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 58),
 			percFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 23),
 			deltaFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 23),
