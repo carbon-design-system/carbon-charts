@@ -9,10 +9,11 @@ import {
 } from "../../interfaces";
 
 // D3 Imports
-import { select } from "d3-selection";
+import { select, selectAll } from "d3-selection";
 import { color } from "d3-color";
 import { map } from "d3-collection";
 import { Component } from "../component";
+import { DOMUtils } from "../../services/essentials/dom-utils";
 
 export class Histogram extends Component {
 	type = "histogram";
@@ -34,6 +35,7 @@ export class Histogram extends Component {
 		// Chart options mixed with the internal configurations
 		const displayData = this.model.getDisplayData();
 		const options = this.model.getOptions();
+		const { groupIdentifier } = options;
 		const { groupMapsTo } = options.data;
 
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
@@ -75,11 +77,13 @@ export class Histogram extends Component {
 			.append("path")
 			.merge(bars)
 			.classed("bar", true)
+			.attr(groupIdentifier, (d, i) => i)
 			.transition(this.services.transitions.getTransition("bar-update-enter", animate))
 			.attr("fill", d => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
 				const key = stackKeys[i];
 				const bin = binsMap[key];
+				if (!bin) { return; }
 
 				/*
 				* Orientation support for horizontal/vertical bar charts
@@ -115,7 +119,7 @@ export class Histogram extends Component {
 			.attr("aria-label", d => d.value);
 
 		// Add event listeners for the above elements
-		this.addEventListeners();
+		this.addEventListeners(binsMap);
 	}
 
 	// Highlight elements that match the hovered legend item
@@ -134,38 +138,48 @@ export class Histogram extends Component {
 			.attr("opacity", 1);
 	}
 
-	addEventListeners() {
+	addEventListeners(binsMap) {
 		const options = this.model.getOptions();
+		const { groupIdentifier } = options;
 		const { groupMapsTo } = options.data;
 
 		const self = this;
 		this.parent.selectAll("path.bar")
 			.on("mouseover", function(datum) {
 				const hoveredElement = select(this);
+				const groupId = hoveredElement.attr(groupIdentifier);
 
-				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
-					.attr("fill", color(hoveredElement.attr("fill")).darker(0.7).toString());
+				// Select all same group elements
+				selectAll(`[${groupIdentifier}="${groupId}"]`)
+					.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
+					.attr("fill", (d) => color(self.model.getFillColor(d[groupMapsTo])).darker(0.7).toString());
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
 					element: hoveredElement,
-					datum
+					datum,
+					[groupIdentifier]: groupId
 				});
 			})
 			.on("mousemove", function(datum) {
 				const hoveredElement = select(this);
-
-				const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
+				const groupId = hoveredElement.attr(groupIdentifier);
 				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
-				const { groupMapsTo } = self.model.getOptions().data;
+
+				const multidata = [];
+				const groupElements = selectAll(`[${groupIdentifier}="${hoveredElement.attr(groupIdentifier)}"]`);
+				groupElements.each(d => multidata.push({
+					[groupMapsTo]: d[groupMapsTo],
+					[rangeIdentifier]: d["data"][d[groupMapsTo]]
+				}));
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					data: {
-						[domainIdentifier]: datum.data.sharedStackKey,
-						[rangeIdentifier]: datum.data[datum.group],
-						[groupMapsTo]: datum.group
+						bin: binsMap[datum.data["sharedStackKey"]],
+						multidata,
+						[groupIdentifier]: groupId
 					},
 					type: TooltipTypes.DATAPOINT
 				});
@@ -181,8 +195,10 @@ export class Histogram extends Component {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
-				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
-					.attr("fill", (d: any) => self.model.getFillColor(d[groupMapsTo]));
+				// Select all same group elements
+				selectAll(`[${groupIdentifier}="${hoveredElement.attr(groupIdentifier)}"]`)
+					.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
+					.attr("fill", (d) => self.model.getFillColor(d[groupMapsTo]));
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {

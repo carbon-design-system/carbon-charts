@@ -169,7 +169,7 @@ const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: 1
 	} as TimeScaleOptions),
-	tooltip: barChartTooltip,
+	groupIdentifier: "group-id"
 } as BarChartOptions);
 
 /**

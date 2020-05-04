@@ -7,6 +7,7 @@ export * from "./essentials/tooltip";
 export * from "./essentials/tooltip-bar";
 export * from "./essentials/tooltip-pie";
 export * from "./essentials/tooltip-scatter";
+export * from "./essentials/tooltip-histogram";
 
 // GRAPHS
 export * from "./graphs/bar-simple";

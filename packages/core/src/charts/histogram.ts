@@ -4,7 +4,6 @@ import * as Configuration from "../configuration";
 import {
 	ChartConfig,
 	ScatterChartOptions,
-	Events as ChartEvents,
 	AggregationTypes
 } from "../interfaces/index";
 import { Tools } from "../tools";
@@ -18,9 +17,9 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TooltipBar
+	TooltipHistogram
 } from "../components/index";
-import { histogram, extent, range, scaleBand } from "d3";
+import { histogram } from "d3";
 import { defaultBins } from "../configuration";
 
 export class HistogramChart extends AxisChart {
@@ -44,39 +43,39 @@ export class HistogramChart extends AxisChart {
 		this.update();
 	}
 
+	aggregateDataByGroup(bin, dataIdentifier, aggregation) {
+		const groups = Tools.groupBy(bin, "group");
+
+		if (aggregation === AggregationTypes.COUNT) {
+			Object.keys(groups).map(group => { groups[group] = groups[group].length; });
+		}
+		if (aggregation === AggregationTypes.SUM) {
+			Object.keys(groups).map(group => {
+				groups[group] = groups[group].reduce((sum, datum) => sum + datum[dataIdentifier], 0);
+			});
+		}
+		if (aggregation === AggregationTypes.AVG) {
+			Object.keys(groups).map(group => {
+				groups[group] = groups[group].reduce((sum, datum) => sum + datum[dataIdentifier], 0) / groups[group].length;
+			});
+		}
+
+		return groups;
+	}
+
 	setHistogramData() {
-		// Manipulate data for Histogram
+		// Manipulate data and options for Histogram
 		const data = this.model.getData();
 		const options = this.model.getOptions();
 		const mainYPos = this.services.cartesianScales.getMainYAxisPosition();
 		const mainXPos = this.services.cartesianScales.getMainXAxisPosition();
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-		const { groupMapsTo } = options.data;
 		const axisOptions = options.axes[mainXPos];
+		const { groupMapsTo } = options.data;
 		const { aggregation = AggregationTypes.COUNT} = axisOptions;
 		const { bins: axisBins = defaultBins } = axisOptions;
 		const areBinsDefined = Array.isArray(axisBins);
-
-		const aggregateByGroup = (bin) => {
-			const groups = Tools.groupBy(bin, "group");
-
-			if (aggregation === AggregationTypes.COUNT) {
-				Object.keys(groups).map(group => { groups[group] = groups[group].length; });
-			}
-			if (aggregation === AggregationTypes.SUM) {
-				Object.keys(groups).map(group => {
-					groups[group] = groups[group].reduce((sum, datum) => sum + datum[rangeIdentifier], 0);
-				});
-			}
-			if (aggregation === AggregationTypes.AVG) {
-				Object.keys(groups).map(group => {
-					groups[group] = groups[group].reduce((sum, datum) => sum + datum[rangeIdentifier], 0) / groups[group].length;
-				});
-			}
-
-			return groups;
-		};
 
 		// Get Histogram bins
 		const bins = histogram()
@@ -103,7 +102,7 @@ export class HistogramChart extends AxisChart {
 		// Group data by bin
 		bins.forEach(bin => {
 			const key = `${bin.x0}-${bin.x1}`;
-			const aggregateDataByGroups = aggregateByGroup(bin);
+			const aggregateDataByGroup = this.aggregateDataByGroup(bin, rangeIdentifier, aggregation);
 
 			groupsKeys.forEach((group: string) => {
 				// For each dataset put a bin with value 0 if not exist
@@ -111,7 +110,7 @@ export class HistogramChart extends AxisChart {
 				histogramData.push({
 					group,
 					key,
-					value: aggregateDataByGroups[group] || 0,
+					value: aggregateDataByGroup[group] || 0,
 					bin: bin.x0
 				});
 			});
@@ -124,7 +123,7 @@ export class HistogramChart extends AxisChart {
 				...options.axes,
 				[mainYPos]: {
 					...options.axes[mainYPos],
-					// Change the range identifier as the aggregator property (aggregate)
+					// Change the range identifier as the aggregator property
 					mapsTo: "value"
 				},
 				[mainXPos]: {
@@ -150,7 +149,7 @@ export class HistogramChart extends AxisChart {
 		];
 
 		const components: any[] = this.getAxisChartComponents(graphFrameComponents);
-		components.push(new TooltipBar(this.model, this.services));
+		components.push(new TooltipHistogram(this.model, this.services));
 		return components;
 	}
 }
