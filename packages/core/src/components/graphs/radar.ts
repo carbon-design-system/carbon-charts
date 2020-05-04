@@ -179,12 +179,12 @@ export class Radar extends Component {
 				.style("dominant-baseline", "middle")
 				.call(selection => selection
 					.transition(this.services.transitions.getTransition("radar_y_labels_enter", animate))
-					// .transition().duration(2000)
 					.attr("opacity", 1)
 				),
 			update => update
 				.call(selection => selection
 					.transition(this.services.transitions.getTransition("radar_y_labels_update", animate))
+					.text(tick => tick)
 					.attr("opacity", 1)
 					.attr("x", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).x + yLabelPadding)
 					.attr("y", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).y)
