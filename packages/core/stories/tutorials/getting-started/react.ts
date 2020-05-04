@@ -66,7 +66,7 @@ See tutorial on tabular data format for more information on chart data.
 ## Demos and Examples
 + **[Storybook - Demos](https://carbon-design-system.github.io/carbon-charts/react)**
 + **[Storybook - Story Sources](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/react/stories)**
-+ **[Storybook - Data & options used](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/demo-data)**
++ **[Storybook - Data & options used](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
 
 &nbsp;
 ## Guidance

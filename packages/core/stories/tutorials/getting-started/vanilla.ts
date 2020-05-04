@@ -21,7 +21,7 @@ npm install --save @carbon/charts d3
 &nbsp;
 ## Getting started
 
-To start using the \`BarChart\` component, try the example below:
+To start using the \`StackedBarChart\` component, try the example below:
 &nbsp;
 #### Consuming with a bundler (e.g. webpack)
 
@@ -90,7 +90,7 @@ See tutorial on tabular data format for more information on chart data.
 
 &nbsp;
 ## Demos and Examples
-+ **[Demos - Data & options used](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/demo-data)**
++ **[Demos - Data & options used](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/demo/data)**
 
 &nbsp;
 ## Guidance
