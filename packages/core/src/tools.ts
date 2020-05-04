@@ -258,7 +258,7 @@ export namespace Tools {
 	 * @returns The function to be used by D3 to push element to the top of the canvas
 	 */
 	export function moveToFront(element) {
-		return element.each(function () {
+		return element.each(function() {
 			this.parentNode.appendChild(this);
 		});
 	}

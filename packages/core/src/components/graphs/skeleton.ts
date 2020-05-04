@@ -1,12 +1,12 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
+import { Skeletons, CartesianOrientations } from "../../interfaces/enums";
 
 // D3 Imports
 import { scaleLinear } from "d3-scale";
 import { easeLinear } from "d3-ease";
 import { arc } from "d3-shape";
-import { Skeletons } from "../../interfaces/enums";
 
 export class Skeleton extends Component {
 	type = "skeleton";

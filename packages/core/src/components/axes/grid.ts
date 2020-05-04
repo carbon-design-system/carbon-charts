@@ -93,7 +93,8 @@ export class Grid extends Component {
 		});
 
 		// find the 2 gridlines on either side of the mouse
-		let floor = -1; let ceiling;
+		let floor = -1;
+		let ceiling;
 		if (!gridlinesX.length) {
 			return;
 		}

@@ -134,7 +134,7 @@ export class StackedBar extends Bar {
 
 		const self = this;
 		this.parent.selectAll("path.bar")
-			.on("mouseover", function (datum) {
+			.on("mouseover", function(datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
@@ -175,14 +175,14 @@ export class StackedBar extends Bar {
 					type: TooltipTypes.DATAPOINT
 				});
 			})
-			.on("click", function (datum) {
+			.on("click", function(datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					element: select(this),
 					datum
 				});
 			})
-			.on("mouseout", function (datum) {
+			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
