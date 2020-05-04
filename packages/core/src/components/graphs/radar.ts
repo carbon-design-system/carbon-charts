@@ -217,15 +217,31 @@ export class Radar extends Component {
 		const yLabels = DOMUtils.appendOrSelect(this.svg, "g.y-labels").attr("role", Roles.GROUP);
 		const yLabelUpdate = yLabels.selectAll("text").data(extent(yTicks));
 		yLabelUpdate.join(
-			enter => enter.append("text"),
-			update => update,
-			exit => exit.remove()
-		)
-		.text(tick => tick)
-		.attr("x", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).x + yLabelPadding)
-		.attr("y", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).y)
-		.style("text-anchor", "start")
-		.style("dominant-baseline", "middle");
+			enter => enter
+				.append("text")
+				.attr("opacity", 0)
+				.text(tick => tick)
+					.attr("x", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).x + yLabelPadding)
+					.attr("y", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).y)
+				.style("text-anchor", "start")
+				.style("dominant-baseline", "middle")
+				.call(selection => selection
+					.transition().duration(2000)
+					.attr("opacity", 1)
+				),
+			update => update
+				.call(selection => selection
+					.transition().duration(2000)
+					.attr("x", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).x + yLabelPadding)
+					.attr("y", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).y)
+				),
+			exit => exit
+				.call(selection => selection
+					.transition().duration(2000)
+					.attr("opacity", 0)
+					.remove()
+				)
+		);
 
 		// x axes
 		const xAxes = DOMUtils.appendOrSelect(this.svg, "g.x-axes").attr("role", Roles.GROUP);
@@ -262,15 +278,26 @@ export class Radar extends Component {
 		const xLabels = DOMUtils.appendOrSelect(this.svg, "g.x-labels").attr("role", Roles.GROUP);
 		const xLabelUpdate = xLabels.selectAll("text").data(this.uniqKeys);
 		xLabelUpdate.join(
-			enter => enter.append("text"),
+			enter => enter
+				.append("text")
+				.text(key => DEBUG ? `${key} ${radToDeg(xScale(key))}° <-- ${radToDeg(xScale(key) + Math.PI / 2)}°` : key)
+				.attr("opacity", 0)
+				.attr("x", key => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).x)
+				.attr("y", key => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).y)
+				.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
+				.style("dominant-baseline", key => radialLabelPlacement(xScale(key)).dominantBaseline)
+				.call(selection => selection
+					.transition().duration(2000)
+					.attr("opacity", 1)
+				),
 			update => update,
-			exit => exit.remove()
-		)
-		.text(key => DEBUG ? `${key} ${radToDeg(xScale(key))}° <-- ${radToDeg(xScale(key) + Math.PI / 2)}°` : key)
-		.attr("x", key => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).x)
-		.attr("y", key => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).y)
-		.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
-		.style("dominant-baseline", key => radialLabelPlacement(xScale(key)).dominantBaseline);
+			exit => exit
+				.call(selection => selection
+					.transition().duration(2000)
+					.attr("opacity", 0)
+					.remove()
+				)
+		);
 
 		// blobs
 		const blobs = DOMUtils.appendOrSelect(this.svg, "g.blobs").attr("role", Roles.GROUP);
