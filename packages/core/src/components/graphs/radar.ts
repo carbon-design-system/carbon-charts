@@ -10,7 +10,6 @@ import {
 	Angle,
 	radialLabelPlacement,
 	radToDeg,
-	degToRad,
 	polarToCartesianCoords,
 	distanceBetweenPointOnCircAndVerticalDiameter
 } from "../../services/angle-utils";
@@ -18,7 +17,7 @@ import {
 // D3 Imports
 import { select } from "d3-selection";
 import { scaleBand, scaleLinear, ScaleLinear } from "d3-scale";
-import { min, max, extent } from "d3-array";
+import { max, extent } from "d3-array";
 import { lineRadial, curveLinearClosed } from "d3-shape";
 
 const DEBUG = false;
