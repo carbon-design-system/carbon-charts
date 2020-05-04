@@ -5,74 +5,39 @@ export interface Point {
 
 export type Angle = number;
 
-// compute modulo values correctly also with a negative number
-function mod(n: number, m: number): number {
+interface LabelAlignment {
+	textAnchor: "start" | "middle" | "end"; // *___   __*__   ___*
+	dominantBaseline: "baseline" | "middle" | "hanging"; // __*   --*--   --.
+}
+
+export function radialLabelPlacement(angleRadians: Angle): LabelAlignment {
+	const angle = mod(radToDeg(angleRadians), 360);
+
+	if (isInRange(angle, [0, 10]) || isInRange(angle, [350, 0])) {
+		return { textAnchor: "start", dominantBaseline: "middle" };
+	} else if (isInRange(angle, [10, 80])) {
+		return { textAnchor: "start", dominantBaseline: "hanging" };
+	} else if (isInRange(angle, [80, 100])) {
+		return { textAnchor: "middle", dominantBaseline: "hanging" };
+	} else if (isInRange(angle, [100, 170])) {
+		return { textAnchor: "end", dominantBaseline: "hanging" };
+	} else if (isInRange(angle, [170, 190])) {
+		return { textAnchor: "end", dominantBaseline: "middle" };
+	} else if (isInRange(angle, [190, 260])) {
+		return { textAnchor: "end", dominantBaseline: "baseline" };
+	} else if (isInRange(angle, [260, 280])) {
+		return { textAnchor: "middle", dominantBaseline: "baseline" };
+	} else { // 280 - 350
+		return { textAnchor: "start", dominantBaseline: "baseline" };
+	}
+}
+
+function mod(n: number, m: number) {
 	return ((n % m) + m) % m;
 }
 
-export function radialLabelPlacement(angleRadians: Angle) {
-	const angle = mod(radToDeg(angleRadians), 360);
-
-	let textAnchor: "start" | "middle" | "end" = "middle"; // *___   __*__   ___*
-	let dominantBaseline: "baseline" | "middle" | "hanging" = "middle"; // __*   --*--   --.
-
-	let quadrant = 0;
-
-	if (isInRange(angle, [0, 90])) {
-		quadrant = 0;
-	} else if (isInRange(angle, [90, 180])) {
-		quadrant = 1;
-	} else if (isInRange(angle, [180, 270])) {
-		quadrant = 2;
-	} else if (isInRange(angle, [270, 360])) {
-		quadrant = 3;
-	}
-
-	if (quadrant === 0) {
-		textAnchor = "start";
-		dominantBaseline = "hanging";
-	} else if (quadrant === 1) {
-		textAnchor = "end";
-		dominantBaseline = "hanging";
-	} else if (quadrant === 2) {
-		textAnchor = "end";
-		dominantBaseline = "baseline";
-	} else if (quadrant === 3) {
-		textAnchor = "start";
-		dominantBaseline = "baseline";
-	}
-
-	let edge = null;
-
-	if (isInRange(angle, [0, 10]) || isInRange(angle, [350, 0])) {
-		edge = 0;
-	} else if (isInRange(angle, [80, 100])) {
-		edge = 1;
-	} else if (isInRange(angle, [170, 190])) {
-		edge = 2;
-	} else if (isInRange(angle, [260, 280])) {
-		edge = 3;
-	}
-
-	if (edge === 0) {
-		textAnchor = "start";
-		dominantBaseline = "middle";
-	} else if (edge === 1) {
-		textAnchor = "middle";
-		dominantBaseline = "hanging";
-	} else if (edge === 2) {
-		textAnchor = "end";
-		dominantBaseline = "middle";
-	} else if (edge === 3) {
-		textAnchor = "middle";
-		dominantBaseline = "baseline";
-	}
-
-	return { textAnchor, dominantBaseline };
-}
-
-function isInRange(x: number, minMax: number[]): boolean {
-	return x >= minMax[0] && x <= minMax[1];
+function isInRange(x: number, [min, max]: [number, number]) {
+	return x >= min && x <= max;
 }
 
 export function radToDeg(rad: Angle): Angle {
@@ -83,7 +48,7 @@ export function degToRad(deg: Angle): Angle {
 	return deg * (Math.PI / 180);
 }
 
-export function polarToCartesianCoords(a: Angle, r: number, t: Point = { x: 0, y: 0 }) {
+export function polarToCartesianCoords(a: Angle, r: number, t: Point = { x: 0, y: 0 }): Point {
 	const x = r * Math.cos(a) + t.x;
 	const y = r * Math.sin(a) + t.y;
 	return { x, y };
