@@ -58,7 +58,7 @@ export class Scatter extends Component {
 	}
 
 	// A value is an anomaly if is above all defined domain and range thresholds
-	isValueThresholdsAnomaly(datum: any, index: number) {
+	isDatapointThresholdAnomaly(datum: any, index: number) {
 		const { handleThresholds } = this.configs;
 		if (!handleThresholds) { return false; }
 
@@ -118,7 +118,7 @@ export class Scatter extends Component {
 		selection.raise()
 			.classed("dot", true)
 			// Set class to highlight the dots that are above all the thresholds, in both directions (vertical and horizontal)
-			.classed("threshold-anomaly", (d, i) => this.isValueThresholdsAnomaly(d, i))
+			.classed("threshold-anomaly", (d, i) => this.isDatapointThresholdAnomaly(d, i))
 			.classed("filled", d => this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
 			.classed("unfilled", d => !this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
 			.attr("cx", getXValue)

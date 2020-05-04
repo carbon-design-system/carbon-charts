@@ -1,5 +1,5 @@
 .#{$prefix}--#{$charts-prefix}--threshold {
-	line {
+	line.threshold-line {
 		stroke: $red-50;
 		stroke-width: 1;
 		stroke-dasharray: 4;
@@ -7,7 +7,7 @@
 		pointer-events: none;
 	}
 
-	&.active line {
+	&.active line.threshold-line {
 		stroke-width: 2;
 	}
 

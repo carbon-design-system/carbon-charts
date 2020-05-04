@@ -38,7 +38,7 @@ export class Threshold extends Component {
 		// Append threshold hoverable area
 		const thresholdRect = DOMUtils.appendOrSelect(this.threshold, `rect.threshold-hoverable-area`);
 		// Append threshold line
-		const thresholdLine = DOMUtils.appendOrSelect(this.threshold, `line`);
+		const thresholdLine = DOMUtils.appendOrSelect(this.threshold, `line.threshold-line`);
 
 		// Set threshold line color from configs options
 		// If not defined, the line takes the defined CSS color
