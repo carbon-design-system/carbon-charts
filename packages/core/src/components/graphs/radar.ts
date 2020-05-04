@@ -212,7 +212,6 @@ export class Radar extends Component {
 					.remove()
 				)
 		);
-		oldYScale = yScale; // save the current scale as the old one
 
 		// y labels (show only the min and the max labels)
 		const yLabels = DOMUtils.appendOrSelect(this.svg, "g.y-labels").attr("role", Roles.GROUP);
@@ -277,16 +276,36 @@ export class Radar extends Component {
 		const blobs = DOMUtils.appendOrSelect(this.svg, "g.blobs").attr("role", Roles.GROUP);
 		const blobUpdate = blobs.selectAll("path").data(this.groupedDataNormalized, group => group.name);
 		blobUpdate.join(
-			enter => enter.append("path").attr("role", Roles.GRAPHICS_SYMBOL),
-			update => update,
-			exit => exit.remove()
-		)
-		.attr("class", "blob")
-		.attr("transform", `translate(${c.x}, ${c.y})`)
-		.attr("d", group => radialLineGenerator(group.data))
-		.attr("fill", group => colorScale(group.name))
-		.style("fill-opacity", configuration.opacity.selected)
-		.attr("stroke", group => colorScale(group.name));
+			enter => enter
+				.append("path")
+				.attr("class", "blob")
+				.attr("role", Roles.GRAPHICS_SYMBOL)
+				.attr("opacity", 0)
+				.attr("transform", `translate(${c.x}, ${c.y})`)
+				.attr("fill", group => colorScale(group.name))
+				.style("fill-opacity", configuration.opacity.selected)
+				.attr("stroke", group => colorScale(group.name))
+				.attr("d", group => oldRadialLineGenerator(group.data))
+				.call(selection => selection
+					.transition().duration(2000)
+					.attr("opacity", 1)
+					.attr("d", group => radialLineGenerator(group.data))
+				),
+			update => update
+				.call(selection => selection
+					.transition().duration(2000)
+					.attr("transform", `translate(${c.x}, ${c.y})`)
+					.attr("d", group => radialLineGenerator(group.data))
+				),
+			exit => exit
+				.call(selection => selection
+					.transition().duration(2000)
+					.attr("d", group => radialLineGenerator(group.data))
+					.attr("opacity", 0)
+					.remove()
+				)
+		);
+		oldYScale = yScale; // save the current scale as the old one
 
 		// data dots
 		const dots = DOMUtils.appendOrSelect(this.svg, "g.dots").attr("role", Roles.GROUP);
