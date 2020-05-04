@@ -20,8 +20,6 @@ import { scaleBand, scaleLinear, ScaleLinear } from "d3-scale";
 import { max, extent } from "d3-array";
 import { lineRadial, curveLinearClosed } from "d3-shape";
 
-const DEBUG = false;
-
 // used to make transitions
 let oldYScale: ScaleLinear<number, number>;
 
@@ -132,49 +130,6 @@ export class Radar extends Component {
 		/////////////////////////////
 		// Drawing section
 		/////////////////////////////
-
-		if (DEBUG) {
-			const debugContainer = DOMUtils.appendOrSelect(this.svg, "g.debug");
-			const backdropRect = DOMUtils.appendOrSelect(debugContainer, "rect.backdrop")
-				.attr("width", "100%")
-				.attr("height", "100%")
-				.attr("stroke", "gold")
-				.attr("opacity", 0.2)
-				.attr("fill", "none");
-			const center = DOMUtils.appendOrSelect(debugContainer, "circle.center")
-				.attr("cx", c.x)
-				.attr("cy", c.y)
-				.attr("r", 2)
-				.attr("opacity", 0.2)
-				.attr("fill", "gold");
-			const circumferences = DOMUtils.appendOrSelect(debugContainer, "g.circumferences");
-			const circumferencesUpdate = circumferences.selectAll("circle").data(yTicks);
-			circumferencesUpdate
-				.enter()
-				.append("circle")
-				.merge(circumferencesUpdate)
-				.attr("cx", c.x)
-				.attr("cy", c.y)
-				.attr("r", tick => yScale(tick))
-				.attr("fill", "none")
-				.attr("opacity", 0.2)
-				.attr("stroke", "gold");
-			circumferencesUpdate.exit().remove();
-			const vertDiam = DOMUtils.appendOrSelect(debugContainer, "line.vertDiam")
-				.attr("x1", c.x)
-				.attr("y1", c.y - radius - 10)
-				.attr("x2", c.x)
-				.attr("y2", c.y + radius + 10)
-				.attr("opacity", 0.2)
-				.attr("stroke", "gold");
-			const horizDiam = DOMUtils.appendOrSelect(debugContainer, "line.horizDiam")
-				.attr("x1", c.x - radius - 10)
-				.attr("y1", c.y)
-				.attr("x2", c.x + radius + 10)
-				.attr("y2", c.y)
-				.attr("opacity", 0.2)
-				.attr("stroke", "gold");
-		}
 
 		// y axes
 		const yAxes = DOMUtils.appendOrSelect(this.svg, "g.y-axes").attr("role", Roles.GROUP);
@@ -287,7 +242,7 @@ export class Radar extends Component {
 		xLabelUpdate.join(
 			enter => enter
 				.append("text")
-				.text(key => DEBUG ? `${key} ${radToDeg(xScale(key))}° <-- ${radToDeg(xScale(key) + Math.PI / 2)}°` : key)
+				.text(key => key)
 				.attr("opacity", 0)
 				.attr("x", key => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).x)
 				.attr("y", key => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).y)
@@ -375,7 +330,7 @@ export class Radar extends Component {
 		.attr("width", yScale.range()[1])
 		.attr("height", xAxisRectHeight)
 		.attr("fill", "red")
-		.style("fill-opacity", DEBUG ? 0.1 : 0)
+		.style("fill-opacity", 0)
 		.attr("transform", key => `rotate(${radToDeg(xScale(key))}, ${c.x}, ${c.y})`);
 
 		// Add event listeners
