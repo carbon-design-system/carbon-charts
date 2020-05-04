@@ -199,8 +199,9 @@ export class Radar extends Component {
 					.attr("d", tick => radialLineGenerator(shapeData(tick)))
 				),
 			update => update
-				.call(selection => selection
-					.transition().duration(2000)
+			.call(selection => selection
+				.transition().duration(2000)
+					.attr("opacity", 1)
 					.attr("transform", `translate(${c.x}, ${c.y})`)
 					.attr("d", tick => radialLineGenerator(shapeData(tick)))
 				),
@@ -221,8 +222,8 @@ export class Radar extends Component {
 				.append("text")
 				.attr("opacity", 0)
 				.text(tick => tick)
-					.attr("x", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).x + yLabelPadding)
-					.attr("y", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).y)
+				.attr("x", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).x + yLabelPadding)
+				.attr("y", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).y)
 				.style("text-anchor", "start")
 				.style("dominant-baseline", "middle")
 				.call(selection => selection
@@ -232,6 +233,7 @@ export class Radar extends Component {
 			update => update
 				.call(selection => selection
 					.transition().duration(2000)
+					.attr("opacity", 1)
 					.attr("x", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).x + yLabelPadding)
 					.attr("y", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).y)
 				),
@@ -265,7 +267,15 @@ export class Radar extends Component {
 					.attr("x2", key => polarToCartesianCoords(xScale(key), yScale.range()[1], c).x)
 					.attr("y2", key => polarToCartesianCoords(xScale(key), yScale.range()[1], c).y)
 				),
-			update => update,
+			update => update
+			.call(selection => selection
+				.transition().duration(2000)
+					.attr("opacity", 1)
+					.attr("x1", key => polarToCartesianCoords(xScale(key), yScale.range()[0], c).x)
+					.attr("y1", key => polarToCartesianCoords(xScale(key), yScale.range()[0], c).y)
+					.attr("x2", key => polarToCartesianCoords(xScale(key), yScale.range()[1], c).x)
+					.attr("y2", key => polarToCartesianCoords(xScale(key), yScale.range()[1], c).y)
+				),
 			exit => exit
 				.call(selection => selection
 					.transition().duration(2000)
@@ -290,7 +300,13 @@ export class Radar extends Component {
 					.transition().duration(2000)
 					.attr("opacity", 1)
 				),
-			update => update,
+			update => update
+				.call(selection => selection
+					.transition().duration(2000)
+					.attr("opacity", 1)
+					.attr("x", key => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).x)
+					.attr("y", key => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).y)
+				),
 			exit => exit
 				.call(selection => selection
 					.transition().duration(2000)
@@ -321,6 +337,7 @@ export class Radar extends Component {
 			update => update
 				.call(selection => selection
 					.transition().duration(2000)
+					.attr("opacity", 1)
 					.attr("transform", `translate(${c.x}, ${c.y})`)
 					.attr("d", group => radialLineGenerator(group.data))
 				),
@@ -332,7 +349,6 @@ export class Radar extends Component {
 					.remove()
 				)
 		);
-		oldYScale = yScale; // save the current scale as the old one
 
 		// data dots
 		const dots = DOMUtils.appendOrSelect(this.svg, "g.dots").attr("role", Roles.GROUP);
@@ -367,6 +383,8 @@ export class Radar extends Component {
 
 		// Add event listeners
 		this.addEventListeners();
+
+		oldYScale = yScale; // save the current scale as the old one
 	}
 
 	// append temporarily the label to get the exact space that it occupies
