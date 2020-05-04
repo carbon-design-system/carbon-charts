@@ -20,7 +20,8 @@ import {
 	createReactChartApp,
 	createAngularChartApp,
 	createVueChartApp,
-	createVanillaChartApp
+	createVanillaChartApp,
+	createSvelteChartApp
 } from "./create-codesandbox";
 
 import { Tools } from "@carbon/charts/tools";
@@ -358,6 +359,7 @@ allDemoGroups = allDemoGroups.map(demoGroup => {
 		demo.codesandbox.react = createChartSandbox(createReactChartApp(demo));
 		demo.codesandbox.vue = createChartSandbox(createVueChartApp(demo));
 		demo.codesandbox.vanilla = createChartSandbox(createVanillaChartApp(demo));
+		demo.codesandbox.svelte = createChartSandbox(createSvelteChartApp(demo));
 
 		if (!demo.code) {
 			demo.code = {};
