@@ -76,7 +76,7 @@ export class Radar extends Component {
 		this.groupedDataNormalized = this.normalizeGroupedData(groupedData);
 
 		const xLabelPadding = 10;
-		const yLabelPadding = 5;
+		const yLabelPadding = 8;
 		const labelHeight = this.labelDimensions(this.uniqKeys[0]).height;
 		const margin = 2 * (labelHeight + yLabelPadding);
 		const size = Math.min(width, height);
