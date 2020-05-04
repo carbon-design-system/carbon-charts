@@ -232,16 +232,32 @@ export class Radar extends Component {
 		const xAxes = DOMUtils.appendOrSelect(this.svg, "g.x-axes").attr("role", Roles.GROUP);
 		const xAxisUpdate = xAxes.selectAll("line").data(this.uniqKeys, key => key);
 		xAxisUpdate.join(
-			enter => enter.append("line").attr("role", Roles.GRAPHICS_SYMBOL),
+			enter => enter
+				.append("line")
+				.attr("role", Roles.GRAPHICS_SYMBOL)
+				.attr("opacity", 0)
+				.attr("class", key => `x-axis-${kebabCase(key)}`) // replace spaces with -
+				.attr("stroke-dasharray", "0")
+				.attr("x1", key => polarToCartesianCoords(xScale(key), 0, c).x)
+				.attr("y1", key => polarToCartesianCoords(xScale(key), 0, c).y)
+				.attr("x2", key => polarToCartesianCoords(xScale(key), 0, c).x)
+				.attr("y2", key => polarToCartesianCoords(xScale(key), 0, c).y)
+				.call(selection => selection
+					.transition().duration(2000)
+					.attr("opacity", 1)
+					.attr("x1", key => polarToCartesianCoords(xScale(key), yScale.range()[0], c).x)
+					.attr("y1", key => polarToCartesianCoords(xScale(key), yScale.range()[0], c).y)
+					.attr("x2", key => polarToCartesianCoords(xScale(key), yScale.range()[1], c).x)
+					.attr("y2", key => polarToCartesianCoords(xScale(key), yScale.range()[1], c).y)
+				),
 			update => update,
-			exit => exit.remove()
-		)
-		.attr("class", key => `x-axis-${kebabCase(key)}`) // replace spaces with -
-		.attr("stroke-dasharray", "0")
-		.attr("x1", key => polarToCartesianCoords(xScale(key), yScale.range()[0], c).x)
-		.attr("y1", key => polarToCartesianCoords(xScale(key), yScale.range()[0], c).y)
-		.attr("x2", key => polarToCartesianCoords(xScale(key), yScale.range()[1], c).x)
-		.attr("y2", key => polarToCartesianCoords(xScale(key), yScale.range()[1], c).y);
+			exit => exit
+				.call(selection => selection
+					.transition().duration(2000)
+					.attr("opacity", 0)
+					.remove()
+				)
+		);
 
 		// x labels
 		const xLabels = DOMUtils.appendOrSelect(this.svg, "g.x-labels").attr("role", Roles.GROUP);
