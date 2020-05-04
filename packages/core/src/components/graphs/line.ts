@@ -56,7 +56,8 @@ export class Line extends Component {
 					date: datum.data.sharedStackKey,
 					group: datum.group,
 					value: datum[1]
-				}))
+				})),
+				hidden: !Tools.some(d, datum => datum[0] !== datum[1])
 			}));
 		} else {
 			data = this.model.getGroupedData();
@@ -96,7 +97,7 @@ export class Line extends Component {
 			})
 			// Transition
 			.transition(this.services.transitions.getTransition("line-update-enter", animate))
-			.attr("opacity", 1)
+			.attr("opacity", d =>	d.hidden ? 0 : 1)
 			.attr("d", group => {
 				const { data: groupData } = group;
 				return lineGenerator(groupData);

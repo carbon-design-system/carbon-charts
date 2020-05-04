@@ -13,6 +13,7 @@ import {
 	clamp as lodashClamp,
 	isEqual as lodashIsEqual,
 	fromPairs as lodashFromPairs,
+	some as lodashSome,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Cancelable,
 	DebounceSettings
@@ -29,6 +30,7 @@ export namespace Tools {
 	export const clamp = lodashClamp;
 	export const isEqual = lodashIsEqual;
 	export const fromPairs = lodashFromPairs;
+	export const some = lodashSome;
 
 	/**
 	 * Returns default chart options merged with provided options,

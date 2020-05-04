@@ -155,14 +155,14 @@ export class ChartModel {
 			dataValuesGroupedByKeys.forEach((d: any) => {
 				dataGroupNames.forEach(name => {
 					maxByKey[d.sharedStackKey] += d[name];
-				})
+				});
 			});
 
 			// cycle through data values to get percentage
 			dataValuesGroupedByKeys.forEach((d: any) => {
 				dataGroupNames.forEach(name => {
 					d[name] = d[name] / maxByKey[d.sharedStackKey] * 100;
-				})
+				});
 			});
 		}
 
