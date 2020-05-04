@@ -60,7 +60,6 @@ export class Radar extends Component {
 		if (!width || !height) {
 			return;
 		}
-		// console.log({ width, height });
 
 		const data: Array<Datum> = this.model.getData();
 		const displayData: Array<Datum> = this.model.getDisplayData();
@@ -90,14 +89,12 @@ export class Radar extends Component {
 		const xScale = scaleBand<string>()
 			.domain(this.displayDataNormalized.map(d => d.key))
 			.range([0, 2 * Math.PI].map(a => a - Math.PI / 2) as [Angle, Angle]);
-		// console.log(`xScale [${xScale.domain()}] -> [${xScale.range()}]`);
 
 		const yScale = scaleLinear()
 			.domain([0, max(this.displayDataNormalized.map(d => d.value))])
 			.range([minRange, radius])
 			.nice(yTicksNumber);
 		const yTicks = yScale.ticks(yTicksNumber);
-		// console.log(`yScale [${yScale.domain()}] -> [${yScale.range()}]`);
 
 		const colorScale = (group: string): string => this.model.getFillColor(group);
 
