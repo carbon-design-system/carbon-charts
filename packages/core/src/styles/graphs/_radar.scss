@@ -1,16 +1,6 @@
 
 .#{$prefix}--#{$charts-prefix}--radar {
   .blobs path {
-		@if $ui-background == map-get($carbon--theme--g90, 'ui-background') {
-			mix-blend-mode: normal;
-			// mix-blend-mode: screen;
-		} @else if $ui-background == map-get($carbon--theme--g100, 'ui-background') {
-			mix-blend-mode: normal;
-			// mix-blend-mode: screen;
-		} @else {
-			mix-blend-mode: normal;
-			// mix-blend-mode: multiply;
-		}
     stroke-width: 1.5px;
 	}
   
@@ -22,16 +12,12 @@
 
   .x-axes line.hovered {
     @if $ui-background == map-get($carbon--theme--g90, 'ui-background') {
-			stroke: lime; // $focus
+			stroke: $carbon--white-0;
 		} @else if $ui-background == map-get($carbon--theme--g100, 'ui-background') {
-			stroke: cyan;
+			stroke: $carbon--white-0;
 		} @else {
-			stroke: deeppink;
+			stroke: $carbon--black-100;
 		}
-  }
-  
-  .y-labels text {
-    mix-blend-mode: normal;
   }
 }
 
