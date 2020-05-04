@@ -56,7 +56,7 @@ Next, add an external stylesheet using the svelte:head API.
 ```html
 <!-- src/App.svelte -->
 <svelte:head>
-  <link rel="stylesheet" href="https://unpkg.com/@carbon/charts@0.30.10/styles.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@carbon/charts/styles.min.css" />
 </svelte:head>
 ```
 
