@@ -19,6 +19,7 @@ import {
 	ZeroLine,
 	TooltipBar,
 	Scatter,
+	Ruler,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
 	Legend,
@@ -27,7 +28,7 @@ import {
 } from "../components/index";
 
 const graphComponentsMap = {
-	"line": [Line, Scatter],
+	"line": [Ruler, Line, Scatter],
 	"simple-bar": [SimpleBar, ZeroLine],
 	"grouped-bar": [GroupedBar, ZeroLine],
 	"stacked-bar": [StackedBar]
