@@ -193,20 +193,20 @@ export class Radar extends Component {
 				.attr("fill", "none")
 				.attr("d", tick => oldRadialLineGenerator(shapeData(tick)))
 				.call(selection => selection
-					.transition().duration(2000)
+					.transition(this.services.transitions.getTransition("radar_y_axes_enter", animate))
 					.attr("opacity", 1)
 					.attr("d", tick => radialLineGenerator(shapeData(tick)))
 				),
 			update => update
-			.call(selection => selection
-				.transition().duration(2000)
+				.call(selection => selection
+					.transition(this.services.transitions.getTransition("radar_y_axes_update", animate))
 					.attr("opacity", 1)
 					.attr("transform", `translate(${c.x}, ${c.y})`)
 					.attr("d", tick => radialLineGenerator(shapeData(tick)))
 				),
 			exit => exit
 				.call(selection => selection
-					.transition().duration(2000)
+					.transition(this.services.transitions.getTransition("radar_y_axes_exit", animate))
 					.attr("d", tick => radialLineGenerator(shapeData(tick)))
 					.attr("opacity", 0)
 					.remove()
@@ -226,19 +226,20 @@ export class Radar extends Component {
 				.style("text-anchor", "start")
 				.style("dominant-baseline", "middle")
 				.call(selection => selection
-					.transition().duration(2000)
+					.transition(this.services.transitions.getTransition("radar_y_labels_enter", animate))
+					// .transition().duration(2000)
 					.attr("opacity", 1)
 				),
 			update => update
 				.call(selection => selection
-					.transition().duration(2000)
+					.transition(this.services.transitions.getTransition("radar_y_labels_update", animate))
 					.attr("opacity", 1)
 					.attr("x", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).x + yLabelPadding)
 					.attr("y", tick => polarToCartesianCoords(- Math.PI / 2, yScale(tick), c).y)
 				),
 			exit => exit
 				.call(selection => selection
-					.transition().duration(2000)
+					.transition(this.services.transitions.getTransition("radar_y_labels_exit", animate))
 					.attr("opacity", 0)
 					.remove()
 				)
@@ -259,7 +260,7 @@ export class Radar extends Component {
 				.attr("x2", key => polarToCartesianCoords(xScale(key), 0, c).x)
 				.attr("y2", key => polarToCartesianCoords(xScale(key), 0, c).y)
 				.call(selection => selection
-					.transition().duration(2000)
+					.transition(this.services.transitions.getTransition("radar_x_axes_enter", animate))
 					.attr("opacity", 1)
 					.attr("x1", key => polarToCartesianCoords(xScale(key), yScale.range()[0], c).x)
 					.attr("y1", key => polarToCartesianCoords(xScale(key), yScale.range()[0], c).y)
@@ -268,16 +269,16 @@ export class Radar extends Component {
 				),
 			update => update
 			.call(selection => selection
-				.transition().duration(2000)
-					.attr("opacity", 1)
-					.attr("x1", key => polarToCartesianCoords(xScale(key), yScale.range()[0], c).x)
-					.attr("y1", key => polarToCartesianCoords(xScale(key), yScale.range()[0], c).y)
-					.attr("x2", key => polarToCartesianCoords(xScale(key), yScale.range()[1], c).x)
-					.attr("y2", key => polarToCartesianCoords(xScale(key), yScale.range()[1], c).y)
+				.transition(this.services.transitions.getTransition("radar_x_axes_update", animate))
+				.attr("opacity", 1)
+				.attr("x1", key => polarToCartesianCoords(xScale(key), yScale.range()[0], c).x)
+				.attr("y1", key => polarToCartesianCoords(xScale(key), yScale.range()[0], c).y)
+				.attr("x2", key => polarToCartesianCoords(xScale(key), yScale.range()[1], c).x)
+				.attr("y2", key => polarToCartesianCoords(xScale(key), yScale.range()[1], c).y)
 				),
 			exit => exit
 				.call(selection => selection
-					.transition().duration(2000)
+					.transition(this.services.transitions.getTransition("radar_x_axes_exit", animate))
 					.attr("opacity", 0)
 					.remove()
 				)
@@ -296,19 +297,19 @@ export class Radar extends Component {
 				.style("text-anchor", key => radialLabelPlacement(xScale(key)).textAnchor)
 				.style("dominant-baseline", key => radialLabelPlacement(xScale(key)).dominantBaseline)
 				.call(selection => selection
-					.transition().duration(2000)
+					.transition(this.services.transitions.getTransition("radar_x_labels_enter", animate))
 					.attr("opacity", 1)
 				),
 			update => update
 				.call(selection => selection
-					.transition().duration(2000)
+					.transition(this.services.transitions.getTransition("radar_x_labels_update", animate))
 					.attr("opacity", 1)
 					.attr("x", key => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).x)
 					.attr("y", key => polarToCartesianCoords(xScale(key), yScale.range()[1] + xLabelPadding, c).y)
 				),
 			exit => exit
 				.call(selection => selection
-					.transition().duration(2000)
+					.transition(this.services.transitions.getTransition("radar_x_labels_exit", animate))
 					.attr("opacity", 0)
 					.remove()
 				)
@@ -329,20 +330,20 @@ export class Radar extends Component {
 				.attr("stroke", group => colorScale(group.name))
 				.attr("d", group => oldRadialLineGenerator(group.data))
 				.call(selection => selection
-					.transition().duration(2000)
+					.transition(this.services.transitions.getTransition("radar_blobs_enter", animate))
 					.attr("opacity", 1)
 					.attr("d", group => radialLineGenerator(group.data))
 				),
 			update => update
 				.call(selection => selection
-					.transition().duration(2000)
+					.transition(this.services.transitions.getTransition("radar_blobs_update", animate))
 					.attr("opacity", 1)
 					.attr("transform", `translate(${c.x}, ${c.y})`)
 					.attr("d", group => radialLineGenerator(group.data))
 				),
 			exit => exit
 				.call(selection => selection
-					.transition().duration(2000)
+					.transition(this.services.transitions.getTransition("radar_blobs_exit", animate))
 					.attr("d", group => radialLineGenerator(group.data))
 					.attr("opacity", 0)
 					.remove()
