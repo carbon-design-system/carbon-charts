@@ -65,12 +65,12 @@ new StackedBarChart(chartHolder, {
       // grab chart holder DOM element
       const chartHolder = document.getElementById("my-bar-chart");
 
-      const stackedBarData = {
-        // ...see next section
-      };
+      const stackedBarData = [
+		// refer to tabular data format tutorial
+	  ];
 
       const stackedBarOptions = {
-        // ...see next section
+		// refer to chart specific options in the tutorials
       };
 
       // initialize the chart

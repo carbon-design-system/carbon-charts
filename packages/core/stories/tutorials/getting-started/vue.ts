@@ -37,11 +37,11 @@ To start using the \`StackedBarChart\` component, try the example below:
     components: {},
     data() {
       return {
-        stackedBarData: {
-          // ...see next section
-        },
+        stackedBarData: [
+			// refer to tabular data format tutorial
+		  ],
         stackedBarOptions: {
-          // ...see next section
+          // refer to chart specific options in the tutorials
         },
       };
     },

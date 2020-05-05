@@ -32,14 +32,14 @@ import "@carbon/charts/styles.css";
 // import '@carbon/charts/styles/styles.scss';
 
 const stackedBarOptions = {
-  // ...see next section
+	// refer to chart specific options in the tutorials
 };
 
 class App extends React.Component {
   state = {
-    stackedBarData: {
-      // ...see next section
-    },
+    stackedBarData: [
+		// refer to tabular data format tutorial
+	  ]
   };
 
   render() {

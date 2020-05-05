@@ -61,12 +61,12 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
-  stackedBarData = {
-    // ...see next section
-  };
+  stackedBarData = [
+	// refer to tabular data format tutorial
+  ];
 
   stackedBarOptions = {
-    // ...see next section
+	// refer to chart specific options in the tutorials
   };
 }
 \`\`\`
