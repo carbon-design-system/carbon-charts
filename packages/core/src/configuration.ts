@@ -266,7 +266,7 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
  * options specific to gauge charts
  */
 
-function getGaugeFontSize(radius: number, arcSize: number, maxSize: number) {
+function getGaugePartSize(radius: number, arcSize: number, maxSize: number) {
 	const adjustedRadius = (radius * Math.PI / arcSize) / 100;
 	return Tools.interpolateAndClamp(adjustedRadius, maxSize);
 }
@@ -277,16 +277,16 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, pieChart, {
 	},
 	gauge: {
 		arcWidth: 16,
-		distanceBetweenNumbers: 20,
+		distanceBetweenNumbers: (radius, arcSize) => getGaugePartSize(radius, arcSize, radius / 12),
 		center: {
-			caretSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 16),
-			valueFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 58),
-			percFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 23),
-			deltaFontSize: (radius, arcSize) => getGaugeFontSize(radius, arcSize, 23),
-			titleFontSize: radius => Tools.interpolateAndClamp((radius / 100), 15),
+			caretSize: (radius, arcSize) => getGaugePartSize(radius, arcSize, radius / 12),
+			valueFontSize: (radius, arcSize) => getGaugePartSize(radius, arcSize, radius / 4),
+			percFontSize: (radius, arcSize) => getGaugePartSize(radius, arcSize, radius / 8),
+			deltaFontSize: (radius, arcSize) => getGaugePartSize(radius, arcSize, radius / 8),
+			titleFontSize: radius => Tools.interpolateAndClamp((radius / 100), radius / 12),
 			valueYPosition: (radius, arcSize) => {
-				const deltaYPosition = ((arcSize - 2 * Math.PI) / Math.PI) * getGaugeFontSize(radius, arcSize, 23);
-				const valueYPosition = ((arcSize - 2 * Math.PI) / Math.PI) * getGaugeFontSize(radius, arcSize, 58);
+				const deltaYPosition = ((arcSize - 2 * Math.PI) / Math.PI) * getGaugePartSize(radius, arcSize, radius / 8);
+				const valueYPosition = ((arcSize - 2 * Math.PI) / Math.PI) * getGaugePartSize(radius, arcSize, radius / 4);
 				return (deltaYPosition + valueYPosition);
 			},
 			numberFormatter: number => number.toFixed(2).toLocaleString()

@@ -178,6 +178,7 @@ export class Gauge extends Component {
 			.attr("dx", () => `-${options.gauge.center.valueFontSize(radius, arcSize)}`)
 			.attr("dy", () => `-${options.gauge.center.percFontSize(radius, arcSize)}`)
 			.attr("y", options.gauge.center.valueYPosition(radius, arcSize))
+			.attr("alignment-baseline", "middle")
 			.text("%");
 
 		const gaugeDelta = DOMUtils.appendOrSelect(svg, "g.gauge-delta");
@@ -186,7 +187,7 @@ export class Gauge extends Component {
 			.attr("x", () => `-${options.gauge.center.valueFontSize(radius, arcSize) + options.gauge.center.caretSize(radius, arcSize) / 2}px`)
 			.attr(
 				"y",
-				`${options.gauge.center.valueYPosition(radius, arcSize) + options.gauge.distanceBetweenNumbers + options.gauge.center.caretSize(radius, arcSize) / 4}px`
+				`${options.gauge.center.valueYPosition(radius, arcSize) + options.gauge.distanceBetweenNumbers(radius, arcSize) + options.gauge.center.caretSize(radius, arcSize) / 4}px`
 			)
 			.attr("width", `${options.gauge.center.caretSize(radius, arcSize)}px`)
 			.attr("height", `${options.gauge.center.caretSize(radius, arcSize)}px`)
@@ -200,7 +201,7 @@ export class Gauge extends Component {
 			.attr("text-anchor", "middle")
 			.attr("dominant-baseline", "hanging")
 			.style("font-size", () => `${options.gauge.center.deltaFontSize(radius, arcSize)}px`)
-			.attr("y", `${options.gauge.center.valueYPosition(radius, arcSize) + options.gauge.distanceBetweenNumbers}px`)
+			.attr("y", `${options.gauge.center.valueYPosition(radius, arcSize) + options.gauge.distanceBetweenNumbers(radius, arcSize)}px`)
 			.text(() => `${(delta * 100).toFixed(2)}%`);
 
 
