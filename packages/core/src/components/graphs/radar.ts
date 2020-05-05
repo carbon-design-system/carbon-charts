@@ -37,8 +37,8 @@ export class Radar extends Component {
 	type = "radar";
 	svg: SVGElement;
 	groupMapsTo: string;
-	uniqKeys: string[];
-	uniqGroups: string[];
+	uniqueKeys: string[];
+	uniqueGroups: string[];
 	displayDataNormalized: Array<Datum>;
 	groupedDataNormalized: Array<GroupedDatum>;
 
@@ -62,11 +62,12 @@ export class Radar extends Component {
 		const { xLabelPadding, yLabelPadding, yTicksNumber, minRange, xAxisRectHeight, opacity } = configuration;
 
 		this.groupMapsTo = options.data.groupMapsTo;
-		this.uniqKeys = Array.from(new Set(data.map(d => d.key)));
-		this.uniqGroups = Array.from(new Set(displayData.map(d => d[this.groupMapsTo])));
+		this.uniqueKeys = Array.from(new Set(data.map(d => d.key)));
+		this.uniqueGroups = Array.from(new Set(displayData.map(d => d[this.groupMapsTo])));
 		this.displayDataNormalized = this.normalizeFlatData(displayData);
 		this.groupedDataNormalized = this.normalizeGroupedData(groupedData);
 
+		const labelHeight = this.getLabelDimensions(this.uniqueKeys[0]).height;
 		const margin = 2 * (labelHeight + yLabelPadding);
 		const size = Math.min(width, height);
 		const diameter = size - margin;
@@ -106,12 +107,12 @@ export class Radar extends Component {
 			.curve(radialLineGenerator.curve());
 
 		// compute the space that each x label needs
-		const horizSpaceNeededByEachXLabel = this.uniqKeys.map(key => {
-			const tickWidth = this.labelDimensions(key).width;
+		const horizSpaceNeededByEachXLabel = this.uniqueKeys.map(key => {
+			const tickWidth = this.getLabelDimensions(key).width;
 			// compute the distance between the point that the label rapresents and the vertical diameter
-			const distPointDiam = distanceBetweenPointOnCircAndVerticalDiameter(xScale(key), radius);
+			const distanceFromDiameter = distanceBetweenPointOnCircAndVerticalDiameter(xScale(key), radius);
 			// the space each label occupies is the sum of these two values
-			return tickWidth + distPointDiam;
+			return tickWidth + distanceFromDiameter;
 		});
 		const leftPadding = max(horizSpaceNeededByEachXLabel);
 
@@ -129,7 +130,7 @@ export class Radar extends Component {
 		const yAxes = DOMUtils.appendOrSelect(this.svg, "g.y-axes").attr("role", Roles.GROUP);
 		const yAxisUpdate = yAxes.selectAll("path").data(yTicks, tick => tick);
 		// for each tick, create array of data corrisponding to the points composing the shape
-		const shapeData = (tick: number) => this.uniqKeys.map(key => ({ key, value: tick })) as Datum[];
+		const shapeData = (tick: number) => this.uniqueKeys.map(key => ({ key, value: tick })) as Datum[];
 		yAxisUpdate.join(
 			enter => enter
 				.append("path")
@@ -193,7 +194,7 @@ export class Radar extends Component {
 
 		// x axes
 		const xAxes = DOMUtils.appendOrSelect(this.svg, "g.x-axes").attr("role", Roles.GROUP);
-		const xAxisUpdate = xAxes.selectAll("line").data(this.uniqKeys, key => key);
+		const xAxisUpdate = xAxes.selectAll("line").data(this.uniqueKeys, key => key);
 		xAxisUpdate.join(
 			enter => enter
 				.append("line")
@@ -232,7 +233,7 @@ export class Radar extends Component {
 
 		// x labels
 		const xLabels = DOMUtils.appendOrSelect(this.svg, "g.x-labels").attr("role", Roles.GROUP);
-		const xLabelUpdate = xLabels.selectAll("text").data(this.uniqKeys);
+		const xLabelUpdate = xLabels.selectAll("text").data(this.uniqueKeys);
 		xLabelUpdate.join(
 			enter => enter
 				.append("text")
@@ -313,7 +314,7 @@ export class Radar extends Component {
 
 		// rectangles
 		const xAxesRect = DOMUtils.appendOrSelect(this.svg, "g.x-axes-rect").attr("role", Roles.GROUP);
-		const xAxisRectUpdate = xAxesRect.selectAll("rect").data(this.uniqKeys);
+		const xAxisRectUpdate = xAxesRect.selectAll("rect").data(this.uniqueKeys);
 		xAxisRectUpdate.join(
 			enter => enter.append("rect").attr("role", Roles.GRAPHICS_SYMBOL),
 			update => update,
@@ -334,7 +335,7 @@ export class Radar extends Component {
 	}
 
 	// append temporarily the label to get the exact space that it occupies
-	labelDimensions = (label: string) => {
+	getLabelDimensions = (label: string) => {
 		const tmpTick = DOMUtils.appendOrSelect(this.svg, `g.tmp-tick`);
 		const tmpTickText = DOMUtils.appendOrSelect(tmpTick, `text`).text(label);
 		const { width, height } = DOMUtils.getSVGElementSize(tmpTickText.node(), { useBBox: true });
@@ -345,8 +346,8 @@ export class Radar extends Component {
 	// Given a flat array of objects, if there are missing data on key,
 	// creates corrisponding data with value = 0
 	normalizeFlatData = (dataset: Array<Datum>) => {
-		const completeBlankData = flatMapDeep(this.uniqKeys.map(key => {
-			return this.uniqGroups.map(group => ({ key, [this.groupMapsTo]: group, value: null }));
+		const completeBlankData = flatMapDeep(this.uniqueKeys.map(key => {
+			return this.uniqueGroups.map(group => ({ key, [this.groupMapsTo]: group, value: null }));
 		}));
 		return Tools.merge(completeBlankData, dataset);
 	}
@@ -355,7 +356,7 @@ export class Radar extends Component {
 	// creates corrisponding data with value = 0
 	normalizeGroupedData = (dataset: Array<GroupedDatum>) => {
 		return dataset.map(({ name, data }) => {
-			const completeBlankData = this.uniqKeys.map(k => ({ [this.groupMapsTo]: name, key: k, value: null }));
+			const completeBlankData = this.uniqueKeys.map(k => ({ [this.groupMapsTo]: name, key: k, value: null }));
 			return { name, data: Tools.merge(completeBlankData, data) };
 		});
 	}
