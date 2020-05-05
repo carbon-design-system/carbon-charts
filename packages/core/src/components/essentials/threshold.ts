@@ -27,7 +27,7 @@ export class Threshold extends Component {
 		super(model, services, configs);
 	}
 
-	render() {
+	render(animate = false) {
 		const { value, fillColor, axisPosition, index } = this.configs;
 		const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
 		this.thresholdClass = `${settings.prefix}--${chartprefix}--threshold`;
@@ -56,7 +56,9 @@ export class Threshold extends Component {
 		if (isVertical) {
 			// Position the threshold on the y scale value
 			const y = scale(value) + (isScaleTypeLabels ? (scale.step() / 2) : 0);
-			this.threshold.attr("transform", `translate(${xScaleStart}, ${y})`);
+			this.threshold
+				.transition(this.services.transitions.getTransition("threshold-update", animate))
+				.attr("transform", `translate(${xScaleStart}, ${y})`);
 			// Set line end point on the x-axis
 			thresholdLine.attr("x2", xScaleEnd - xScaleStart);
 			// Set hoverable area width
@@ -64,7 +66,9 @@ export class Threshold extends Component {
 		} else {
 			// Position the threshold on the x scale value
 			const x = scale(value) + (isScaleTypeLabels ? (scale.step() / 2) : 0);
-			this.threshold.attr("transform", `translate(${x}, ${yScaleStart})`);
+			this.threshold
+				.transition(this.services.transitions.getTransition("threshold-update", animate))
+				.attr("transform", `translate(${x}, ${yScaleStart})`);
 			// Set line end point on the y-axis
 			thresholdLine.attr("y2", yScaleEnd - yScaleStart);
 			// Set hoverable area width and rotate it
