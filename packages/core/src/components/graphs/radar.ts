@@ -4,7 +4,6 @@ import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
 import { Events, TooltipTypes, Roles } from "../../interfaces";
 import { Tools } from "../../tools";
-import { flatMapDeep, kebabCase } from "lodash-es";
 import {
 	Point,
 	Angle,
@@ -200,7 +199,7 @@ export class Radar extends Component {
 				.append("line")
 				.attr("role", Roles.GRAPHICS_SYMBOL)
 				.attr("opacity", 0)
-				.attr("class", key => `x-axis-${kebabCase(key)}`) // replace spaces with -
+				.attr("class", key => `x-axis-${Tools.kebabCase(key)}`) // replace spaces with -
 				.attr("stroke-dasharray", "0")
 				.attr("x1", key => polarToCartesianCoords(xScale(key), 0, c).x)
 				.attr("y1", key => polarToCartesianCoords(xScale(key), 0, c).y)
@@ -305,7 +304,7 @@ export class Radar extends Component {
 			update => update,
 			exit => exit.remove()
 		)
-		.attr("class", d => kebabCase(d.key))
+		.attr("class", d => Tools.kebabCase(d.key))
 		.attr("cx", d => polarToCartesianCoords(xScale(d.key), yScale(d.value), c).x)
 		.attr("cy", d => polarToCartesianCoords(xScale(d.key), yScale(d.value), c).y)
 		.attr("r", 0)
@@ -346,7 +345,7 @@ export class Radar extends Component {
 	// Given a flat array of objects, if there are missing data on key,
 	// creates corresponding data with value = null
 	normalizeFlatData = (dataset: Array<Datum>) => {
-		const completeBlankData = flatMapDeep(this.uniqueKeys.map(key => {
+		const completeBlankData = Tools.flatMapDeep(this.uniqueKeys.map(key => {
 			return this.uniqueGroups.map(group => ({ key, [this.groupMapsTo]: group, value: null }));
 		}));
 		return Tools.merge(completeBlankData, dataset);
@@ -407,8 +406,8 @@ export class Radar extends Component {
 			})
 			.on("mousemove", function(datum) {
 				const hoveredElement = select(this);
-				const axisLine = self.parent.select(`.x-axes .x-axis-${kebabCase(datum)}`);
-				const dots = self.parent.selectAll(`.dots circle.${kebabCase(datum)}`);
+				const axisLine = self.parent.select(`.x-axes .x-axis-${Tools.kebabCase(datum)}`);
+				const dots = self.parent.selectAll(`.dots circle.${Tools.kebabCase(datum)}`);
 
 				// Change style
 				axisLine.classed("hovered", true)
@@ -443,8 +442,8 @@ export class Radar extends Component {
 			})
 			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
-				const axisLine = self.parent.select(`.x-axes .x-axis-${kebabCase(datum)}`);
-				const dots = self.parent.selectAll(`.dots circle.${kebabCase(datum)}`);
+				const axisLine = self.parent.select(`.x-axes .x-axis-${Tools.kebabCase(datum)}`);
+				const dots = self.parent.selectAll(`.dots circle.${Tools.kebabCase(datum)}`);
 
 				// Change style
 				axisLine.classed("hovered", false)
