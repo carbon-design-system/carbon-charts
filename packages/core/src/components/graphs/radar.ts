@@ -77,7 +77,7 @@ export class Radar extends Component {
 			return;
 		}
 
-		// given a key, return the corrisponding angle in radiants
+		// given a key, return the corresponding angle in radiants
 		// rotated by -PI/2 because we want angle 0° at -y (12 o’clock)
 		const xScale = scaleBand<string>()
 			.domain(this.displayDataNormalized.map(d => d.key))
@@ -123,13 +123,13 @@ export class Radar extends Component {
 		};
 
 		/////////////////////////////
-		// Drawing section
+		// Drawing the radar
 		/////////////////////////////
 
 		// y axes
 		const yAxes = DOMUtils.appendOrSelect(this.svg, "g.y-axes").attr("role", Roles.GROUP);
 		const yAxisUpdate = yAxes.selectAll("path").data(yTicks, tick => tick);
-		// for each tick, create array of data corrisponding to the points composing the shape
+		// for each tick, create array of data corresponding to the points composing the shape
 		const shapeData = (tick: number) => this.uniqueKeys.map(key => ({ key, value: tick })) as Datum[];
 		yAxisUpdate.join(
 			enter => enter
@@ -344,7 +344,7 @@ export class Radar extends Component {
 	}
 
 	// Given a flat array of objects, if there are missing data on key,
-	// creates corrisponding data with value = 0
+	// creates corresponding data with value = 0
 	normalizeFlatData = (dataset: Array<Datum>) => {
 		const completeBlankData = flatMapDeep(this.uniqueKeys.map(key => {
 			return this.uniqueGroups.map(group => ({ key, [this.groupMapsTo]: group, value: null }));
@@ -353,7 +353,7 @@ export class Radar extends Component {
 	}
 
 	// Given a a grouped array of objects, if there are missing data on key,
-	// creates corrisponding data with value = 0
+	// creates corresponding data with value = 0
 	normalizeGroupedData = (dataset: Array<GroupedDatum>) => {
 		return dataset.map(({ name, data }) => {
 			const completeBlankData = this.uniqueKeys.map(k => ({ [this.groupMapsTo]: name, key: k, value: null }));

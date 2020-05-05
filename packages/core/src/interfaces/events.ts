@@ -69,7 +69,7 @@ export enum Line {
 export enum Radar {
 	X_AXIS_MOUSEOVER = "radar-x-axis-mouseover",
 	X_AXIS_MOUSEMOVE = "radar-x-axis-mousemove",
-	X_AXIS_CLICK = "radar-x-axisb-click",
+	X_AXIS_CLICK = "radar-x-axis-click",
 	X_AXIS_MOUSEOUT = "radar-x-axis-mouseout"
 }
 
