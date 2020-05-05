@@ -5,3 +5,7 @@ export * from "./getting-started/angular";
 export * from "./getting-started/react";
 export * from "./getting-started/vue";
 export * from "./getting-started/vanilla";
+
+// options tutorial exports
+export * from "./options/baseChartOptions";
+export * from "./options/axisChartOptions";

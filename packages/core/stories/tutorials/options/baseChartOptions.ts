@@ -1,9 +1,9 @@
 import marked from "marked";
 
-export const axisOptions = marked(`
+export const baseChartOptions = marked(`
 # Options - All charts
 
-\`\`\`
+\`\`\`javascript
 const chart: BaseChartOptions = {
 	width: null,
 	height: null,

@@ -8,7 +8,9 @@ import {
 	reactTutorial,
 	angularTutorial,
 	vanillaTutorial,
-	vueTutorial
+	vueTutorial,
+	baseChartOptions,
+	axisChartOptions
 } from "./tutorials/index";
 
 // Syntax highlighting
@@ -18,6 +20,7 @@ hljs.registerLanguage("bash", require("highlight.js/lib/languages/bash"));
 hljs.registerLanguage("typescript", require("highlight.js/lib/languages/typescript"));
 
 const gettingStartedStories = storiesOf("Tutorials/Getting Started", module);
+const optionsStories = storiesOf("Tutorials/Options", module);
 const tutorialStories = storiesOf("Tutorials", module);
 
 // add vanilla getting started tutorials
@@ -81,7 +84,6 @@ gettingStartedStories.add("Vue", () => {
 });
 
 
-
 // Add the tutorial(s) after getting started
 tutorialStories.add("Tabular data format", () => {
 	// container creation
@@ -95,4 +97,37 @@ tutorialStories.add("Tabular data format", () => {
 	});
 
 	return container;
+});
+
+//  Stories for options for diff charts
+optionsStories.add("Base Chart Options", () => {
+	// container creation
+	const container = document.createElement("div");
+	container.setAttribute("class", "container tutorial");
+
+	container.innerHTML = baseChartOptions;
+
+	container.querySelectorAll("pre code").forEach((block) => {
+		hljs.highlightBlock(block);
+	});
+
+	return container;
+
+});
+
+
+//  Stories for options for diff charts
+optionsStories.add("Axis Chart Options", () => {
+	// container creation
+	const container = document.createElement("div");
+	container.setAttribute("class", "container tutorial");
+
+	container.innerHTML = axisChartOptions;
+
+	container.querySelectorAll("pre code").forEach((block) => {
+		hljs.highlightBlock(block);
+	});
+
+	return container;
+
 });
