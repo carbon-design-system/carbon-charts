@@ -280,3 +280,109 @@ new Vue({
 		"package.json": packageJson
 	};
 };
+
+export const createSvelteChartApp = (demo: any) => {
+	const chartData = JSON.stringify(demo.data, null, "\t");
+	const chartOptions = JSON.stringify(demo.options, null, "\t");
+
+	let chartComponent = demo.chartType.vanilla;
+
+	switch (chartComponent) {
+		case "SimpleBarChart":
+			chartComponent = "BarChartSimple";
+			break;
+		case "GroupedBarChart":
+			chartComponent = "BarChartGrouped";
+			break;
+		case "StackedBarChart":
+			chartComponent = "BarChartStacked";
+			break;
+	}
+
+	const indexJs =
+`import App from "./App.svelte";
+
+const app = new App({ target: document.body });
+
+export default app;
+`;
+
+		const App =
+`<script>
+  import { ${chartComponent} } from "@carbon/charts-svelte";
+</script>
+
+<svelte:head>
+  <link rel="stylesheet" href="https://unpkg.com/@carbon/charts@0.30.10/styles.min.css" />
+</svelte:head>
+
+<${chartComponent}
+	data={${chartData}}
+	options={${chartOptions}}
+	/>
+`;
+
+	const packageJson = {
+		"scripts": {
+			"build": "rollup -c",
+			"autobuild": "rollup -c -w",
+			"dev": "run-p start:dev autobuild",
+			"start": "sirv public",
+			"start:dev": "sirv public --dev"
+		},
+		"devDependencies": {
+			"npm-run-all": "^4.1.5",
+			"rollup": "^1.10.1",
+			"rollup-plugin-commonjs": "^9.3.4",
+			"rollup-plugin-node-resolve": "^4.2.3",
+			"rollup-plugin-svelte": "^5.0.3",
+			"rollup-plugin-terser": "^4.0.4",
+			"sirv-cli": "^0.3.1"
+		},
+		dependencies: {
+			"@carbon/charts": libraryVersion,
+			"@carbon/charts-svelte": libraryVersion,
+			d3: "5.12.0",
+			svelte: "3.20.x"
+		}
+	};
+
+	const rollup =
+`import svelte from "rollup-plugin-svelte";
+import resolve from "rollup-plugin-node-resolve";
+import commonjs from "rollup-plugin-commonjs";
+import { terser } from "rollup-plugin-terser";
+import postcss from "rollup-plugin-postcss";
+
+const production = !process.env.ROLLUP_WATCH;
+
+export default {
+  input: "index.js",
+  output: {
+    sourcemap: true,
+    format: "iife",
+    name: "app",
+    file: "public/bundle.js"
+  },
+  plugins: [
+    postcss(),
+    svelte({
+      dev: !production,
+      css: css => {
+        css.write("public/bundle.css");
+      }
+    }),
+    resolve(),
+    commonjs(),
+    production && terser()
+  ]
+};
+`;
+
+	return {
+		"App.svelte": App,
+		"index.js": indexJs,
+		"package.json": packageJson,
+		"rollup.config.js": rollup
+	};
+};
