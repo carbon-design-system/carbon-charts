@@ -267,7 +267,7 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
  */
 
 function getGaugePartSize(radius: number, arcSize: number, maxSize: number) {
-	const adjustedRadius = (radius * Math.PI / arcSize) / 100;
+	const adjustedRadius = (radius * Math.PI / arcSize) / 10;
 	return Tools.interpolateAndClamp(adjustedRadius, maxSize);
 }
 
