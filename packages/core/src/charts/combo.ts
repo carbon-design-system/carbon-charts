@@ -28,7 +28,7 @@ import {
 } from "../components/index";
 
 const graphComponentsMap = {
-	"line": [Ruler, Line, Scatter],
+	"line": [Line, Scatter],
 	"simple-bar": [SimpleBar, ZeroLine],
 	"grouped-bar": [GroupedBar, ZeroLine],
 	"stacked-bar": [StackedBar]
