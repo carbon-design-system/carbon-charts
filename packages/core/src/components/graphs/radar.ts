@@ -51,13 +51,8 @@ export class Radar extends Component {
 	}
 
 	render(animate = true) {
-		const self = this;
-
 		this.svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
-		if (!width || !height) {
-			return;
-		}
 
 		const data: Array<Datum> = this.model.getData();
 		const displayData: Array<Datum> = this.model.getDisplayData();
@@ -81,6 +76,10 @@ export class Radar extends Component {
 		const yTicksNumber = 4;
 		const minRange = 10;
 		const xAxisRectHeight = 50;
+
+		if (radius <= 0) {
+			return;
+		}
 
 		// given a key, return the corrisponding angle in radiants
 		// rotated by -PI/2 because we want angle 0° at -y (12 o’clock)
