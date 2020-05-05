@@ -142,7 +142,7 @@ export class ChartModel {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
-		const displayData = this.getDisplayData();
+		const displayData = this.getDisplayData(groups);
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
@@ -172,7 +172,7 @@ export class ChartModel {
 			? this.getDataGroupNames().filter(name => groups.includes(name))
 			: this.getDataGroupNames();
 
-		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys();
+		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys(groups);
 
 		return stack().keys(dataGroupNames)(dataValuesGroupedByKeys)
 			.map((series, i) => {

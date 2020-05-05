@@ -153,7 +153,6 @@ export class StackedBar extends Bar {
 
 				const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
 				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
-				const { groupMapsTo } = self.model.getOptions().data;
 
 				let matchingDataPoint = displayData.find(d => {
 					return d[rangeIdentifier] === datum.data[datum.group] &&
