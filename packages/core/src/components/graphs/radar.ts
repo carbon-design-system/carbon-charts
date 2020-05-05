@@ -63,7 +63,7 @@ export class Radar extends Component {
 
 		this.groupMapsTo = options.data.groupMapsTo;
 		this.uniqueKeys = Array.from(new Set(data.map(d => d.key)));
-		this.uniqueGroups = Array.from(new Set(displayData.map(d => d[this.groupMapsTo])));
+		this.uniqueGroups = Array.from(new Set(data.map(d => d[this.groupMapsTo])));
 		this.displayDataNormalized = this.normalizeFlatData(displayData);
 		this.groupedDataNormalized = this.normalizeGroupedData(groupedData);
 
@@ -344,7 +344,7 @@ export class Radar extends Component {
 	}
 
 	// Given a flat array of objects, if there are missing data on key,
-	// creates corresponding data with value = 0
+	// creates corresponding data with value = null
 	normalizeFlatData = (dataset: Array<Datum>) => {
 		const completeBlankData = flatMapDeep(this.uniqueKeys.map(key => {
 			return this.uniqueGroups.map(group => ({ key, [this.groupMapsTo]: group, value: null }));
@@ -353,7 +353,7 @@ export class Radar extends Component {
 	}
 
 	// Given a a grouped array of objects, if there are missing data on key,
-	// creates corresponding data with value = 0
+	// creates corresponding data with value = null
 	normalizeGroupedData = (dataset: Array<GroupedDatum>) => {
 		return dataset.map(({ name, data }) => {
 			const completeBlankData = this.uniqueKeys.map(k => ({ [this.groupMapsTo]: name, key: k, value: null }));
