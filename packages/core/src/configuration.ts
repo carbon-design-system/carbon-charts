@@ -279,7 +279,10 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
  * options specific to combo charts
 */
 const comboChart: ComboChartOptions = Tools.merge({}, baseBarChart, {
-
+	chartTypes: {
+		"simple-bar": [],
+		"line": []
+	}
 } as ComboChartOptions);
 
 export const options = {

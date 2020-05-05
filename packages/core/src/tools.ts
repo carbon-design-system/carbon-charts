@@ -43,7 +43,12 @@ export namespace Tools {
 	 */
 	export function mergeDefaultChartOptions(defaultOptions: any, providedOptions: any) {
 		defaultOptions = Tools.clone(defaultOptions);
+		const providedChartTypes = providedOptions.chartTypes;
 		const providedAxesNames = Object.keys(providedOptions.axes || {});
+
+		if (providedChartTypes) {
+			defaultOptions.chartTypes = providedChartTypes;
+		}
 
 		if (providedAxesNames.length === 0) {
 			delete defaultOptions.axes;

@@ -47,20 +47,32 @@ export class ComboChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<ComboChartOptions>) {
 		super(holder, chartConfigs);
 
-		// Merge multiple graphs default options
-		const { chartTypes } = chartConfigs.options;
-		const graphs = Object.keys(chartTypes);
-		const graphsOptions = graphs.reduce((options, g) => Tools.merge(options, Configuration.options[`${Tools.camelCase(g)}Chart`]), {});
+		// Warn user if no chartTypes defined
+		if (!chartConfigs.options.chartTypes) {
+			console.warn("No chartTypes defined for the Combo Chart!");
+		}
 
 		// Merge the default options for this chart
 		// With the user provided options
+		const chartOptions = Tools.mergeDefaultChartOptions(
+			Configuration.options.comboChart,
+			chartConfigs.options
+		);
+
+		// Merge multiple graphs default options
+		const { chartTypes } = chartOptions;
+		const graphs = Object.keys(chartTypes);
+		const graphsDefaultOptions = graphs.reduce((options, g) => Tools.merge(options, Configuration.options[`${Tools.camelCase(g)}Chart`]), {});
+
+		// Merge default, user provided and graphs default options
 		this.model.setOptions(
 			Tools.mergeDefaultChartOptions(
-				graphsOptions,
-				chartConfigs.options
+				graphsDefaultOptions,
+				chartOptions
 			)
 		);
 
+		// If the stacked-bar chart is included, stack its data groups
 		if (graphs.includes("stacked-bar")) {
 			this.model.setStackedGroups(chartTypes["stacked-bar"]);
 		}
