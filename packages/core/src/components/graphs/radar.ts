@@ -59,6 +59,7 @@ export class Radar extends Component {
 		const groupedData = this.model.getGroupedData();
 		const options = this.model.getOptions();
 		const configuration = Configuration.options.radarChart.radar;
+		const { xLabelPadding, yLabelPadding, yTicksNumber, minRange, xAxisRectHeight, opacity } = configuration;
 
 		this.groupMapsTo = options.data.groupMapsTo;
 		this.uniqKeys = Array.from(new Set(data.map(d => d.key)));
@@ -66,16 +67,10 @@ export class Radar extends Component {
 		this.displayDataNormalized = this.normalizeFlatData(displayData);
 		this.groupedDataNormalized = this.normalizeGroupedData(groupedData);
 
-		const xLabelPadding = 10;
-		const yLabelPadding = 8;
-		const labelHeight = this.labelDimensions(this.uniqKeys[0]).height;
 		const margin = 2 * (labelHeight + yLabelPadding);
 		const size = Math.min(width, height);
 		const diameter = size - margin;
 		const radius = diameter / 2;
-		const yTicksNumber = 4;
-		const minRange = 10;
-		const xAxisRectHeight = 50;
 
 		if (radius <= 0) {
 			return;
@@ -277,7 +272,7 @@ export class Radar extends Component {
 				.attr("opacity", 0)
 				.attr("transform", `translate(${c.x}, ${c.y})`)
 				.attr("fill", group => colorScale(group.name))
-				.style("fill-opacity", configuration.opacity.selected)
+				.style("fill-opacity", opacity.selected)
 				.attr("stroke", group => colorScale(group.name))
 				.attr("d", group => oldRadialLineGenerator(group.data))
 				.call(selection => selection

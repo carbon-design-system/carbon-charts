@@ -283,7 +283,12 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 		opacity: {
 			unselected: 0.1,
 			selected: 0.3
-		}
+		},
+		xLabelPadding: 10,
+		yLabelPadding: 8,
+		yTicksNumber: 4,
+		minRange: 10,
+		xAxisRectHeight: 50
 	},
 	tooltip: {
 		gridline: {

@@ -199,5 +199,10 @@ export interface RadarChartOptions extends BaseChartOptions {
 			unselected: number,
 			selected: number
 		}
+		xLabelPadding: number,
+		yLabelPadding: number,
+		yTicksNumber: number,
+		minRange: number,
+		xAxisRectHeight: number
 	};
 }
