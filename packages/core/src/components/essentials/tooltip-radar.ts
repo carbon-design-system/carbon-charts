@@ -12,7 +12,7 @@ export class TooltipRadar extends Tooltip {
 
 		return  "<ul class='multi-tooltip'>" +
 			data.map(datum => {
-				const userProvidedValueFormatter = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter");
+				const userProvidedValueFormatter = Tools.getProperty(options, "tooltip", "valueFormatter");
 				const formattedValue = userProvidedValueFormatter
 					? userProvidedValueFormatter(datum[value])
 					: datum[value];
