@@ -198,6 +198,10 @@ export interface RadarChartOptions extends BaseChartOptions {
 		opacity: {
 			unselected: number,
 			selected: number
+		},
+		axes: {
+			angle: string,
+			value: string
 		}
 		xLabelPadding: number,
 		yLabelPadding: number,

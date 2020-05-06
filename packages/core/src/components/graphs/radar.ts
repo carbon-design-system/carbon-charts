@@ -22,24 +22,14 @@ import { lineRadial, curveLinearClosed } from "d3-shape";
 // used to make transitions
 let oldYScale: ScaleLinear<number, number>;
 
-interface Datum {
-	group?: string;
-	key: string;
-	value: number;
-}
-interface GroupedDatum {
-	name: string;
-	data: Array<Datum>;
-}
-
 export class Radar extends Component {
 	type = "radar";
 	svg: SVGElement;
 	groupMapsTo: string;
 	uniqueKeys: string[];
 	uniqueGroups: string[];
-	displayDataNormalized: Array<Datum>;
-	groupedDataNormalized: Array<GroupedDatum>;
+	displayDataNormalized: any;
+	groupedDataNormalized: any;
 
 	init() {
 		const { events } = this.services;
@@ -53,16 +43,17 @@ export class Radar extends Component {
 		this.svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
 
-		const data: Array<Datum> = this.model.getData();
-		const displayData: Array<Datum> = this.model.getDisplayData();
+		const data = this.model.getData();
+		const displayData = this.model.getDisplayData();
 		const groupedData = this.model.getGroupedData();
 		const options = this.model.getOptions();
 		const configuration = Configuration.options.radarChart.radar;
+		const groupMapsTo = options.data.groupMapsTo;
+		const { angle, value } = options.radar.axes;
 		const { xLabelPadding, yLabelPadding, yTicksNumber, minRange, xAxisRectHeight, opacity } = configuration;
 
-		this.groupMapsTo = options.data.groupMapsTo;
-		this.uniqueKeys = Array.from(new Set(data.map(d => d.key)));
-		this.uniqueGroups = Array.from(new Set(data.map(d => d[this.groupMapsTo])));
+		this.uniqueKeys = Array.from(new Set(data.map(d => d[angle])));
+		this.uniqueGroups = Array.from(new Set(data.map(d => d[groupMapsTo])));
 		this.displayDataNormalized = this.normalizeFlatData(displayData);
 		this.groupedDataNormalized = this.normalizeGroupedData(groupedData);
 
@@ -79,11 +70,11 @@ export class Radar extends Component {
 		// given a key, return the corresponding angle in radiants
 		// rotated by -PI/2 because we want angle 0° at -y (12 o’clock)
 		const xScale = scaleBand<string>()
-			.domain(this.displayDataNormalized.map(d => d.key))
+			.domain(this.displayDataNormalized.map(d => d[angle]))
 			.range([0, 2 * Math.PI].map(a => a - Math.PI / 2) as [Angle, Angle]);
 
 		const yScale = scaleLinear()
-			.domain([0, max(this.displayDataNormalized.map(d => d.value))])
+			.domain([0, max(this.displayDataNormalized.map(d => d[value]) as number[])])
 			.range([minRange, radius])
 			.nice(yTicksNumber);
 		const yTicks = yScale.ticks(yTicksNumber);
@@ -93,16 +84,16 @@ export class Radar extends Component {
 		// constructs a new radial line generator
 		// the angle accessor returns the angle in radians with 0° at -y (12 o’clock)
 		// so map back the angle
-		const radialLineGenerator = lineRadial<Datum>()
-			.angle(d => xScale(d.key) + Math.PI / 2)
-			.radius(d => yScale(d.value))
+		const radialLineGenerator = lineRadial<any>()
+			.angle(d => xScale(d[angle]) + Math.PI / 2)
+			.radius(d => yScale(d[value]))
 			.curve(curveLinearClosed);
 
 		// this line generator is necessary in order to make a transition of a value from the
 		// position it occupies using the old scale to the position it occupies using the new scale
-		const oldRadialLineGenerator = lineRadial<Datum>()
+		const oldRadialLineGenerator = lineRadial<any>()
 			.angle(radialLineGenerator.angle())
-			.radius(d => oldYScale ? oldYScale(d.value) : minRange)
+			.radius(d => oldYScale ? oldYScale(d[value]) : minRange)
 			.curve(radialLineGenerator.curve());
 
 		// compute the space that each x label needs
@@ -129,7 +120,7 @@ export class Radar extends Component {
 		const yAxes = DOMUtils.appendOrSelect(this.svg, "g.y-axes").attr("role", Roles.GROUP);
 		const yAxisUpdate = yAxes.selectAll("path").data(yTicks, tick => tick);
 		// for each tick, create array of data corresponding to the points composing the shape
-		const shapeData = (tick: number) => this.uniqueKeys.map(key => ({ key, value: tick })) as Datum[];
+		const shapeData = (tick: number) => this.uniqueKeys.map(key => ({ [angle]: key, [value]: tick }));
 		yAxisUpdate.join(
 			enter => enter
 				.append("path")
@@ -304,12 +295,12 @@ export class Radar extends Component {
 			update => update,
 			exit => exit.remove()
 		)
-		.attr("class", d => Tools.kebabCase(d.key))
-		.attr("cx", d => polarToCartesianCoords(xScale(d.key), yScale(d.value), c).x)
-		.attr("cy", d => polarToCartesianCoords(xScale(d.key), yScale(d.value), c).y)
+		.attr("class", d => Tools.kebabCase(d[angle]))
+		.attr("cx", d => polarToCartesianCoords(xScale(d[angle]), yScale(d[value]), c).x)
+		.attr("cy", d => polarToCartesianCoords(xScale(d[angle]), yScale(d[value]), c).y)
 		.attr("r", 0)
 		.attr("opacity", 0)
-		.attr("fill", d => colorScale(d[this.groupMapsTo]));
+		.attr("fill", d => colorScale(d[groupMapsTo]));
 
 		// rectangles
 		const xAxesRect = DOMUtils.appendOrSelect(this.svg, "g.x-axes-rect").attr("role", Roles.GROUP);
@@ -344,18 +335,24 @@ export class Radar extends Component {
 
 	// Given a flat array of objects, if there are missing data on key,
 	// creates corresponding data with value = null
-	normalizeFlatData = (dataset: Array<Datum>) => {
+	normalizeFlatData = (dataset: any) => {
+		const options = this.model.getOptions();
+		const { angle, value } = options.radar.axes;
+		const groupMapsTo = options.data.groupMapsTo;
 		const completeBlankData = Tools.flatMapDeep(this.uniqueKeys.map(key => {
-			return this.uniqueGroups.map(group => ({ key, [this.groupMapsTo]: group, value: null }));
+			return this.uniqueGroups.map(group => ({ [angle]: key, [groupMapsTo]: group, [value]: null }));
 		}));
 		return Tools.merge(completeBlankData, dataset);
 	}
 
 	// Given a a grouped array of objects, if there are missing data on key,
 	// creates corresponding data with value = null
-	normalizeGroupedData = (dataset: Array<GroupedDatum>) => {
+	normalizeGroupedData = (dataset: any) => {
+		const options = this.model.getOptions();
+		const { angle, value } = options.radar.axes;
+		const groupMapsTo = options.data.groupMapsTo;
 		return dataset.map(({ name, data }) => {
-			const completeBlankData = this.uniqueKeys.map(k => ({ [this.groupMapsTo]: name, key: k, value: null }));
+			const completeBlankData = this.uniqueKeys.map(k => ({ [groupMapsTo]: name, [angle]: k, [value]: null }));
 			return { name, data: Tools.merge(completeBlankData, data) };
 		});
 	}
@@ -394,6 +391,8 @@ export class Radar extends Component {
 
 	addEventListeners() {
 		const self = this;
+		const configuration = Configuration.options.radarChart.radar.axes;
+		const { angle, value } = configuration;
 
 		// events on x axes rects
 		this.parent.selectAll(".x-axes-rect > rect")
@@ -424,7 +423,7 @@ export class Radar extends Component {
 				});
 
 				// get the items that should be highlighted
-				const itemsToHighlight = self.displayDataNormalized.filter(d => d.key === datum);
+				const itemsToHighlight = self.displayDataNormalized.filter(d => d[angle] === datum);
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
