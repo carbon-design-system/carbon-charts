@@ -179,15 +179,21 @@ export interface PieChartOptions extends BaseChartOptions {
  */
 export interface GaugeChartOptions extends PieChartOptions {
 	gauge?: {
-		center?: {
+		arcWidth?: number;
+		distanceBetweenNumbers?: Function;
+		center: {
+			caretSize?: Function;
 			valueFontSize?: Function;
+			percFontSize?: Function;
 			deltaFontSize?: Function;
 			titleFontSize?: Function;
-			deltaYPosition?: Function;
 			valueYPosition?: Function;
 			numberFormatter?: Function;
 		};
-		type?: "semi" | "full"
+		hoverArc?: {
+			outerRadiusOffset?: number;
+		};
+		type?: "semi" | "full";
 	};
 }
 
