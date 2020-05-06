@@ -180,16 +180,7 @@ export interface PieChartOptions extends BaseChartOptions {
 export interface GaugeChartOptions extends PieChartOptions {
 	gauge?: {
 		arcWidth?: number;
-		distanceBetweenNumbers?: Function;
-		center: {
-			caretSize?: Function;
-			valueFontSize?: Function;
-			percFontSize?: Function;
-			deltaFontSize?: Function;
-			titleFontSize?: Function;
-			valueYPosition?: Function;
-			numberFormatter?: Function;
-		};
+		numberFormatter?: Function;
 		hoverArc?: {
 			outerRadiusOffset?: number;
 		};

@@ -38,65 +38,37 @@ export class Gauge extends Component {
 		eventsFragment.addEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
 	}
 
-	getDataList() {
+	getValue(): number {
 		const displayData = this.model.getDisplayData();
-		const current = displayData.find(d => d.key === "current");
-		const old = displayData.find(d => d.key === "old");
-		const total = displayData.find(d => d.key === "total");
-		return [
-			{
-				data: {
-					group: "Dataset",
-					current: current ? current.value : 0,
-					total: total ? total.value : 0,
-					old: old ? old.value : 0,
-					value: current ? current.value : 0
-				}
-			}
-		];
+		return displayData.find(d => d.key === "value").value;
 	}
 
-	getCurrentRatio(): number {
-		const total = this.getTotal();
-		const current = this.getCurrent();
-		const ratio = total === 0 ? 0 : current / total;
-		return clamp(ratio, 0, 1);
+	getValueRatio(): number {
+		return this.getValue() / 100;
 	}
 
 	getDelta(): number {
-		const current = this.getCurrent();
-		const old = this.getOld();
-		const delta = current - old;
-		const ratio = old === 0 ? Infinity : delta / old;
-		return clamp(ratio, -1, Infinity);
+		const displayData = this.model.getDisplayData();
+		return displayData.find(d => d.key === "delta").value;
 	}
 
-	getTotal(): number {
-		const datalist = this.getDataList();
-		const value = datalist[0].data.total || 0;
-		return value;
-	}
-
-	getCurrent(): number {
-		const datalist = this.getDataList();
-		const value = datalist[0].data.current || 0;
-		return value;
-	}
-
-	getOld(): number {
-		const datalist = this.getDataList();
-		const value = datalist[0].data.old || 0;
-		return value;
-	}
-
-	getArcSize(): number {
+	getArcType() {
 		const options = this.model.getOptions();
 		const { type = "semi" } = options.gauge;
+		return type;
+	}
+
+	getArcRatio(): number {
+		const type = this.getArcType();
 		const arcRatio = ARC_TYPES_RATIOS[type];
 		if (arcRatio === undefined) {
 			throw new Error("Gauge chart arc type not compatible");
 		}
-		return arcRatio * Math.PI * 2;
+		return arcRatio;
+	}
+
+	getArcSize(): number {
+		return this.getArcRatio() * Math.PI * 2;
 	}
 
 	getStartAngle(): number {
@@ -111,18 +83,26 @@ export class Gauge extends Component {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
-		const ratio = this.getCurrentRatio();
-		const datalist = this.getDataList();
+		const value = this.getValue();
+		const valueRatio = this.getValueRatio();
 		const delta = this.getDelta();
 		const arcSize = this.getArcSize();
+		const arcType = this.getArcType();
 		const startAngle = this.getStartAngle();
-		const rotationAngle = ratio * arcSize;
+		const rotationAngle = valueRatio * arcSize;
 		const currentAngle = startAngle + rotationAngle;
 		const endAngle = startAngle + arcSize;
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
 		const innerRadius = this.getInnerRadius();
+
+		// Sizing and positions relative to the radius
+		const arrowSize = radius / 8;
+		const valueFontSize = radius / 2.5;
+		const deltaFontSize = radius / 8;
+		const distanceBetweenNumbers = 10;
+		const numbersYPosition = arcType === "semi" ? -(deltaFontSize + distanceBetweenNumbers) : 0;
 
 		this.backgroundArc = arc()
 			.innerRadius(innerRadius)
@@ -153,63 +133,62 @@ export class Gauge extends Component {
 		// Add data arc
 
 		DOMUtils.appendOrSelect(svg, "path.arc-foreground")
-			.data(datalist)
 			.attr("d", this.arc)
 			.classed("arc", true)
 			.attr("fill", "rgb(88,134,247)");
 
 		// Position Arc
-		const gaugeTranslateX = radius + options.gauge.hoverArc.outerRadiusOffset;
+		const gaugeTranslateX = radius + options.gauge.hoverArc.outerRadiusOffset; // Leaves space for the hover animation
 		const gaugeTranslateY = radius + options.gauge.hoverArc.outerRadiusOffset;
 		svg.attr("transform", `translate(${gaugeTranslateX}, ${gaugeTranslateY})`);
 
-		// Add the number shown in the center of the gauge and the delta
-		// under it.
+		// Add the numbers at the center
+		const numbersG = DOMUtils.appendOrSelect(svg, "g.gauge-numbers")
+			.attr("transform", `translate(0, ${numbersYPosition})`);
 
-		const gaugeText = DOMUtils
-			.appendOrSelect(svg, "text.gauge-value")
+		// Add the big number
+		const valueNumberG = DOMUtils.appendOrSelect(numbersG, "g.gauge-value-number");
+
+		const valueNumber = DOMUtils.appendOrSelect(valueNumberG, "text.gauge-value-number")
+			.style("font-size", `${valueFontSize}px`)
 			.attr("text-anchor", "middle")
-			.attr("alignment-baseline", "baseline");
+			.text(`${options.gauge.numberFormatter(value)}`);
 
-		DOMUtils.appendOrSelect(gaugeText, "tspan.gauge-value-number")
-			.style("font-size", () => `${options.gauge.center.valueFontSize(radius, arcSize)}px`)
-			.transition(this.services.transitions.getTransition("gauge-figure-enter-update", animate))
-			.attr("y", options.gauge.center.valueYPosition(radius, arcSize))
-			.tween("text", function() {
-				return self.centerNumberTween(select(this), ratio * 100);
-			});
-
-		DOMUtils.appendOrSelect(gaugeText, "tspan.gauge-value-symbol")
-			.style("font-size", () => `${options.gauge.center.percFontSize(radius, arcSize)}px`)
-			.attr("dx", () => `-${options.gauge.center.valueFontSize(radius, arcSize)}`)
-			.attr("dy", () => `-${options.gauge.center.percFontSize(radius, arcSize)}`)
-			.attr("y", options.gauge.center.valueYPosition(radius, arcSize))
-			.attr("alignment-baseline", "middle")
+		const { width: valueNumberWidth } = DOMUtils.getSVGElementSize(valueNumber, { useBBox: true });
+		DOMUtils.appendOrSelect(valueNumberG, "text.gauge-value-symbol")
+			.style("font-size", `${valueFontSize / 2}px`)
+			.attr("x", valueNumberWidth / 2)
 			.text("%");
 
-		const gaugeDelta = DOMUtils.appendOrSelect(svg, "g.gauge-delta");
+			console.log(DOMUtils.getSVGElementSize(valueNumber, { useBBox: true }))
+			setTimeout(() => console.log(DOMUtils.getSVGElementSize(valueNumber, { useBBox: true })), 1000)
 
-		const deltaArrow = DOMUtils.appendOrSelect(gaugeDelta, "svg.gauge-delta-arrow")
-			.attr("x", () => `-${options.gauge.center.valueFontSize(radius, arcSize) + options.gauge.center.caretSize(radius, arcSize) / 2}px`)
-			.attr(
-				"y",
-				`${options.gauge.center.valueYPosition(radius, arcSize) + options.gauge.distanceBetweenNumbers(radius, arcSize) + options.gauge.center.caretSize(radius, arcSize) / 4}px`
-			)
-			.attr("width", `${options.gauge.center.caretSize(radius, arcSize)}px`)
-			.attr("height", `${options.gauge.center.caretSize(radius, arcSize)}px`)
+		// Add the smaller number of the delta
+		const deltaNumberG = DOMUtils.appendOrSelect(numbersG, "g.gauge-delta")
+			.attr("transform", `translate(0, ${deltaFontSize + distanceBetweenNumbers})`);
+
+		const deltaNumber = DOMUtils.appendOrSelect(deltaNumberG, "text.gauge-delta-number")
+			.attr("text-anchor", "middle")
+			.style("font-size", `${deltaFontSize}px`)
+			.text(`${options.gauge.numberFormatter(delta)}%`);
+
+		const { width: deltaNumberWidth } = DOMUtils.getSVGElementSize(deltaNumber, { useBBox: true });
+		const deltaArrow = DOMUtils.appendOrSelect(deltaNumberG, "svg.gauge-delta-arrow")
+			.attr("x", -arrowSize - deltaNumberWidth / 2)
+			.attr("y", -arrowSize / 2 - deltaFontSize * 0.35)
+			.attr("width", arrowSize)
+			.attr("height", arrowSize)
 			.attr("viewBox", `0 0 16 16`);
 
+		const ARROW_UP = "4,10 8,6 12,10";
+		const ARROW_DOWN = "12,6 8,10 4,6";
+		DOMUtils.appendOrSelect(deltaArrow, "rect.gauge-delta-arrow-backdrop") // Needed to correctly size SVG in Firefox
+			.attr("width", `16`)
+			.attr("height", `16`)
+			.attr("fill", "none");
 		DOMUtils.appendOrSelect(deltaArrow, "polygon.gauge-delta-arrow-polygon")
-			.attr("points", () => delta > 0 ? "4 10 8 6 12 10" : "12 6 8 10 4 6")
-			.attr("fill", "rgb(224,224,224)");
-
-		DOMUtils.appendOrSelect(gaugeDelta, "text.gauge-delta-number")
-			.attr("text-anchor", "middle")
-			.attr("dominant-baseline", "hanging")
-			.style("font-size", () => `${options.gauge.center.deltaFontSize(radius, arcSize)}px`)
-			.attr("y", `${options.gauge.center.valueYPosition(radius, arcSize) + options.gauge.distanceBetweenNumbers(radius, arcSize)}px`)
-			.text(() => `${(delta * 100).toFixed(2)}%`);
-
+			.attr("points", delta > 0 ? ARROW_UP : ARROW_DOWN)
+			.attr("fill", "currentColor");
 
 		// Add event listeners
 		this.addEventListeners();
@@ -221,20 +200,6 @@ export class Gauge extends Component {
 		const radius = this.computeRadius();
 		const options = this.model.getOptions();
 		return radius - options.gauge.arcWidth;
-	}
-
-	centerNumberTween(d3Ref, value: number) {
-		const options = this.model.getOptions();
-		// Remove commas from the current value string, and convert to an int
-		const currentValue = parseInt(d3Ref.text().replace(/[, ]+/g, ""), 10) || 0;
-		const i = interpolateNumber(currentValue, value);
-
-		return t => {
-			const { numberFormatter } = options.gauge.center;
-			const number = i(t);
-			const formattedNumber = numberFormatter(number);
-			return d3Ref.text(formattedNumber);
-		};
 	}
 
 	// Highlight elements that match the hovered legend item
@@ -308,11 +273,11 @@ export class Gauge extends Component {
 
 	// Helper functions
 	protected computeRadius() {
-		const arcSize = this.getArcSize();
+		const arcType = this.getArcType();
 		const options = this.model.getOptions();
 
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
-		const radius = arcSize < 2 * Math.PI * (3 / 4)
+		const radius = arcType === "semi"
 			? Math.min(width / 2, height)
 			: Math.min(width / 2, height / 2);
 
