@@ -290,6 +290,9 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, pieChart, {
 				return (deltaYPosition + valueYPosition);
 			},
 			numberFormatter: number => number.toFixed(2).toLocaleString()
+		},
+		hoverArc: {
+			outerRadiusOffset: 3
 		}
 	}
 } as GaugeChartOptions);

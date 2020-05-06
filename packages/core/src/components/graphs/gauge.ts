@@ -139,30 +139,28 @@ export class Gauge extends Component {
 		// Set the hover arc radius
 		this.hoverArc = arc()
 			.innerRadius(innerRadius)
-			.outerRadius(radius + options.pie.hoverArc.outerRadiusOffset)
+			.outerRadius(radius + options.gauge.hoverArc.outerRadiusOffset)
 			.startAngle(startAngle)
 			.endAngle(currentAngle);
 
 		// Add background arc
 
-		DOMUtils.appendOrSelect(svg, "g.background")
-			.append("path")
+		DOMUtils.appendOrSelect(svg, "path.arc-background")
 			.attr("d", this.backgroundArc)
 			.attr("fill", "rgb(224,224,224)")
 			.attr("role", Roles.GROUP);
 
 		// Add data arc
 
-		DOMUtils.appendOrSelect(svg, "g.arc")
-			.append("path")
+		DOMUtils.appendOrSelect(svg, "path.arc-foreground")
 			.data(datalist)
 			.attr("d", this.arc)
 			.classed("arc", true)
 			.attr("fill", "rgb(88,134,247)");
 
-		// Position Pie
-		const gaugeTranslateX = radius + options.pie.xOffset;
-		const gaugeTranslateY = radius + options.pie.yOffset;
+		// Position Arc
+		const gaugeTranslateX = radius + options.gauge.hoverArc.outerRadiusOffset;
+		const gaugeTranslateY = radius + options.gauge.hoverArc.outerRadiusOffset;
 		svg.attr("transform", `translate(${gaugeTranslateX}, ${gaugeTranslateY})`);
 
 		// Add the number shown in the center of the gauge and the delta
@@ -312,11 +310,12 @@ export class Gauge extends Component {
 	protected computeRadius() {
 		const arcSize = this.getArcSize();
 		const options = this.model.getOptions();
-		const multiplier = Math.min(Math.PI / arcSize, 1);
 
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
-		const radius: number = Math.min(width, height) * multiplier;
+		const radius = arcSize < 2 * Math.PI * (3 / 4)
+			? Math.min(width / 2, height)
+			: Math.min(width / 2, height / 2);
 
-		return radius + options.pie.radiusOffset;
+		return radius - options.gauge.hoverArc.outerRadiusOffset;
 	}
 }
