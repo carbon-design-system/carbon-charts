@@ -141,7 +141,8 @@ export class Gauge extends Component {
 			.attr("transform", `translate(0, ${numbersYPosition})`);
 
 		// Add the big number
-		const valueNumberG = DOMUtils.appendOrSelect(numbersG, "g.gauge-value-number");
+		const valueNumberG = DOMUtils.appendOrSelect(numbersG, "g.gauge-value-number")
+			.attr("transform", `translate(-10, 0)`); // Optical centering for the presence of the smaller % symbol
 
 		const valueNumber = DOMUtils.appendOrSelect(valueNumberG, "text.gauge-value-number")
 			.style("font-size", `${valueFontSize}px`)
