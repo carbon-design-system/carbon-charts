@@ -19,7 +19,8 @@ import {
 	BarTooltipOptions,
 	LegendOptions,
 	LegendPositions,
-	StackedBarOptions
+	StackedBarOptions,
+	GaugeTypes
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
 
@@ -271,6 +272,7 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, pieChart, {
 		enabled: false
 	},
 	gauge: {
+		type: GaugeTypes.SEMI,
 		arcWidth: 16,
 		arcBackgroundColor: `rgb(224,224,224)`,
 		arcForegroundColor: `rgb(88,134,247)`,

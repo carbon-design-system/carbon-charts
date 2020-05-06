@@ -48,7 +48,7 @@ export class Gauge extends Component {
 
 	getArcType(): GaugeTypes {
 		const options = this.model.getOptions();
-		const { type = "semi" } = options.gauge;
+		const { type } = options.gauge;
 		return type;
 	}
 
@@ -96,7 +96,7 @@ export class Gauge extends Component {
 		const valueFontSize = radius / 2.5;
 		const deltaFontSize = radius / 8;
 		const distanceBetweenNumbers = 10;
-		const numbersYPosition = arcType === "semi" ? -(deltaFontSize + distanceBetweenNumbers) : 0;
+		const numbersYPosition = arcType === GaugeTypes.SEMI ? -(deltaFontSize + distanceBetweenNumbers) : 0;
 
 		this.backgroundArc = arc()
 			.innerRadius(innerRadius)
@@ -155,8 +155,8 @@ export class Gauge extends Component {
 			.attr("x", valueNumberWidth / 2)
 			.text("%");
 
-			console.log(DOMUtils.getSVGElementSize(valueNumber, { useBBox: true }))
-			setTimeout(() => console.log(DOMUtils.getSVGElementSize(valueNumber, { useBBox: true })), 1000)
+			console.log(DOMUtils.getSVGElementSize(valueNumber, { useBBox: true }));
+			setTimeout(() => console.log(DOMUtils.getSVGElementSize(valueNumber, { useBBox: true })), 1000);
 
 		// Add the smaller number of the delta
 		const deltaNumberG = DOMUtils.appendOrSelect(numbersG, "g.gauge-delta")
@@ -216,14 +216,14 @@ export class Gauge extends Component {
 	addEventListeners() {
 		const self = this;
 		this.parent.selectAll("path.arc")
-			.on("mouseover", function (datum) {
+			.on("mouseover", function(datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_MOUSEOVER, {
 					element: select(this),
 					datum
 				});
 			})
-			.on("mousemove", function (datum) {
+			.on("mousemove", function(datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement.classed("hovered", true)
@@ -242,14 +242,14 @@ export class Gauge extends Component {
 					type: TooltipTypes.DATAPOINT
 				});
 			})
-			.on("click", function (datum) {
+			.on("click", function(datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_CLICK, {
 					element: select(this),
 					datum
 				});
 			})
-			.on("mouseout", function (datum) {
+			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false)
 					.transition(self.services.transitions.getTransition("gauge_slice_mouseover"))
@@ -272,7 +272,7 @@ export class Gauge extends Component {
 		const options = this.model.getOptions();
 
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
-		const radius = arcType === "semi"
+		const radius = arcType === GaugeTypes.SEMI
 			? Math.min(width / 2, height)
 			: Math.min(width / 2, height / 2);
 
