@@ -1,6 +1,6 @@
 export const gaugeData = [
-	{ group: "Dataset", key: "value", value: 42 },
-	{ group: "Dataset", key: "delta", value: -13.37 }
+	{ group: "value", value: 42 },
+	{ group: "delta", value: -13.37 }
 ];
 
 export const gaugeOptionsSemi = {

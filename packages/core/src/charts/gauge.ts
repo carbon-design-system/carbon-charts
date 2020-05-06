@@ -38,7 +38,6 @@ export class GaugeChart extends PieChart {
 		];
 
 		const components: any[] = this.getChartComponents(graphFrameComponents);
-		components.push(new TooltipPie(this.model, this.services));
 		return components;
 	}
 }

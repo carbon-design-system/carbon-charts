@@ -33,8 +33,8 @@ export class Gauge extends Component {
 	}
 
 	getValue(): number {
-		const displayData = this.model.getDisplayData();
-		return displayData.find(d => d.key === "value").value;
+		const data = this.model.getData();
+		return data.find(d => d.group === "value").value;
 	}
 
 	getValueRatio(): number {
@@ -42,8 +42,8 @@ export class Gauge extends Component {
 	}
 
 	getDelta(): number {
-		const displayData = this.model.getDisplayData();
-		return displayData.find(d => d.key === "delta").value;
+		const data = this.model.getData();
+		return data.find(d => d.group === "delta").value;
 	}
 
 	getArcType(): GaugeTypes {
