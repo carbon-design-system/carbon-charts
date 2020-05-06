@@ -391,8 +391,7 @@ export class Radar extends Component {
 
 	addEventListeners() {
 		const self = this;
-		const configuration = Configuration.options.radarChart.radar.axes;
-		const { angle, value } = configuration;
+		const { angle, value } = this.model.getOptions().radar.axes;
 
 		// events on x axes rects
 		this.parent.selectAll(".x-axes-rect > rect")
@@ -412,7 +411,6 @@ export class Radar extends Component {
 				axisLine.classed("hovered", true)
 					.attr("stroke-dasharray", "4 4");
 				dots.classed("hovered", true)
-					.transition(self.services.transitions.getTransition("radar_dots_mouseover"))
 					.attr("opacity", 1)
 					.attr("r", 5);
 
@@ -448,7 +446,6 @@ export class Radar extends Component {
 				axisLine.classed("hovered", false)
 					.attr("stroke-dasharray", "0");
 				dots.classed("hovered", false)
-					.transition(self.services.transitions.getTransition("radar_dots_mouseout"))
 					.attr("opacity", 0)
 					.attr("r", 0);
 
