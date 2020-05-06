@@ -32,7 +32,7 @@ import "@carbon/charts/styles.css";
 // import '@carbon/charts/styles/styles.scss';
 
 const stackedBarOptions = {
-	// refer to chart specific options in the tutorials
+	// refer to chart specific options
 };
 
 class App extends React.Component {
@@ -58,9 +58,14 @@ class App extends React.Component {
 \`\`\`
 
 &nbsp;
-## Data and Options
-Data and options follow the same model in all charts, with minor exceptions and differences in specific components.
+## Data
+Data follows the same model in all charts.
 See tutorial on tabular data format for more information on chart data.
+
+&nbsp;
+## Options
+You can see the options for all charts [here](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/src/configuration.ts).
+
 
 &nbsp;
 ## Demos and Examples
