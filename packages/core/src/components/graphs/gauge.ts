@@ -13,6 +13,11 @@ import { select } from "d3-selection";
 import { arc } from "d3-shape";
 import { interpolateNumber } from "d3-interpolate";
 
+const ARC_TYPES_RATIOS = {
+	semi: 0.5,
+	full: 1
+};
+
 export class Gauge extends Component {
 	type = "gauge";
 
@@ -86,9 +91,12 @@ export class Gauge extends Component {
 
 	getArcSize(): number {
 		const options = this.model.getOptions();
-		const { arcRatio = 1 } = options.gauge;
-		const clampedArcRatio = clamp(arcRatio, 0, 1);
-		return clampedArcRatio * Math.PI * 2;
+		const { type = "semi" } = options.gauge;
+		const arcRatio = ARC_TYPES_RATIOS[type];
+		if (arcRatio === undefined) {
+			throw new Error("Gauge chart arc type not compatible");
+		}
+		return arcRatio * Math.PI * 2;
 	}
 
 	getStartAngle(): number {

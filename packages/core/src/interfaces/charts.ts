@@ -187,7 +187,7 @@ export interface GaugeChartOptions extends PieChartOptions {
 			valueYPosition?: Function;
 			numberFormatter?: Function;
 		};
-		arcRatio?: number
+		type?: "semi" | "full"
 	};
 }
 

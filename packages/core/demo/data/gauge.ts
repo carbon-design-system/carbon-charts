@@ -9,7 +9,7 @@ export const gaugeOptionsSemi = {
 	resizable: true,
 	height: "250px",
 	gauge: {
-		arcRatio: 0.5
+		type: "semi"
 	}
 };
 
@@ -18,6 +18,6 @@ export const gaugeOptionsCircular = {
 	resizable: true,
 	height: "250px",
 	gauge: {
-		arcRatio: 1
+		type: "full"
 	}
 };
