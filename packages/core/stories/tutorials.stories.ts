@@ -5,6 +5,7 @@ import "../demo/styles.scss";
 // import tutorial MD strings
 import {
 	tabularTutorial,
+	eventListenersTutorial,
 	reactTutorial,
 	angularTutorial,
 	vanillaTutorial,
@@ -89,6 +90,21 @@ tutorialStories.add("Tabular data format", () => {
 	container.setAttribute("class", "container tutorial");
 
 	container.innerHTML = tabularTutorial;
+
+	container.querySelectorAll("pre code").forEach((block) => {
+		hljs.highlightBlock(block);
+	});
+
+	return container;
+});
+
+// Add the tutorial(s) after getting started
+tutorialStories.add("Event listeners", () => {
+	// container creation
+	const container = document.createElement("div");
+	container.setAttribute("class", "container tutorial");
+
+	container.innerHTML = eventListenersTutorial;
 
 	container.querySelectorAll("pre code").forEach((block) => {
 		hljs.highlightBlock(block);
