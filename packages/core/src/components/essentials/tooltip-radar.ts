@@ -8,14 +8,14 @@ export class TooltipRadar extends Tooltip {
 
 		return  "<ul class='multi-tooltip'>" +
 			data.map(datum => {
-				const { groupMapsTo } = this.model.getOptions().data;
-
-				const rangeIdentifier = "value";
+				const options = this.model.getOptions();
+				const { groupMapsTo } = options.data;
+				const { angle, value } = options.radar.axes;
 
 				const userProvidedValueFormatter = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter");
 				const formattedValue = userProvidedValueFormatter
-					? userProvidedValueFormatter(datum[rangeIdentifier])
-					: datum[rangeIdentifier];
+					? userProvidedValueFormatter(datum[value])
+					: datum[value];
 
 				// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
 				const indicatorColor = this.model.getStrokeColor(datum[groupMapsTo]);
