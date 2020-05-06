@@ -2,6 +2,7 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Roles, TooltipTypes, Events, GaugeTypes } from "../../interfaces";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -38,7 +39,8 @@ export class Gauge extends Component {
 	}
 
 	getValueRatio(): number {
-		return this.getValue() / 100;
+		const value = Tools.clamp(this.getValue(), 0, 100);
+		return value / 100;
 	}
 
 	getDelta(): number {
