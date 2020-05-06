@@ -7,6 +7,7 @@ export const gaugeOptionsSemi = {
 	title: "Gauge semicircular",
 	resizable: true,
 	height: "250px",
+	width: "400px",
 	gauge: {
 		type: "semi"
 	}

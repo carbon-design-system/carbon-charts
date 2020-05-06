@@ -1,17 +1,11 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { clamp, groupBy } from "lodash-es";
-import {
-	Roles,
-	TooltipTypes,
-	Events
-} from "../../interfaces";
+import { Roles, TooltipTypes, Events, GaugeTypes } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
 import { arc } from "d3-shape";
-import { interpolateNumber } from "d3-interpolate";
 
 const ARC_TYPES_RATIOS = {
 	semi: 0.5,
@@ -52,7 +46,7 @@ export class Gauge extends Component {
 		return displayData.find(d => d.key === "delta").value;
 	}
 
-	getArcType() {
+	getArcType(): GaugeTypes {
 		const options = this.model.getOptions();
 		const { type = "semi" } = options.gauge;
 		return type;
@@ -127,7 +121,7 @@ export class Gauge extends Component {
 
 		DOMUtils.appendOrSelect(svg, "path.arc-background")
 			.attr("d", this.backgroundArc)
-			.attr("fill", "rgb(224,224,224)")
+			.attr("fill", options.gauge.arcBackgroundColor)
 			.attr("role", Roles.GROUP);
 
 		// Add data arc
@@ -135,7 +129,7 @@ export class Gauge extends Component {
 		DOMUtils.appendOrSelect(svg, "path.arc-foreground")
 			.attr("d", this.arc)
 			.classed("arc", true)
-			.attr("fill", "rgb(88,134,247)");
+			.attr("fill", options.gauge.arcForegroundColor);
 
 		// Position Arc
 		const gaugeTranslateX = radius + options.gauge.hoverArc.outerRadiusOffset; // Leaves space for the hover animation

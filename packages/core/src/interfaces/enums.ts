@@ -104,3 +104,8 @@ export enum CalloutDirections {
 	LEFT = "left",
 	RIGHT = "right"
 }
+
+export enum GaugeTypes {
+	SEMI = "semi",
+	FULL =  "full"
+}
