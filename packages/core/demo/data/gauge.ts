@@ -9,7 +9,8 @@ export const gaugeOptionsSemi = {
 	height: "250px",
 	width: "400px",
 	gauge: {
-		type: "semi"
+		type: "semi",
+		arrowColor: "tomato"
 	}
 };
 
@@ -18,6 +19,7 @@ export const gaugeOptionsCircular = {
 	resizable: true,
 	height: "250px",
 	gauge: {
-		type: "full"
+		type: "full",
+		arrowColor: "tomato"
 	}
 };

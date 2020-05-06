@@ -181,8 +181,9 @@ export interface PieChartOptions extends BaseChartOptions {
 export interface GaugeChartOptions extends PieChartOptions {
 	gauge?: {
 		arcWidth?: number;
-		arcBackgroundColor?: string,
-		arcForegroundColor?: string,
+		arcBackgroundColor?: string;
+		arcForegroundColor?: string;
+		arrowColor?: string;
 		numberFormatter?: Function;
 		hoverArc?: {
 			outerRadiusOffset?: number;

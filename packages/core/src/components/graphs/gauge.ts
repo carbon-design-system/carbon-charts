@@ -183,7 +183,7 @@ export class Gauge extends Component {
 			.attr("fill", "none");
 		DOMUtils.appendOrSelect(deltaArrow, "polygon.gauge-delta-arrow-polygon")
 			.attr("points", delta > 0 ? ARROW_UP : ARROW_DOWN)
-			.attr("fill", "currentColor");
+			.attr("fill", options.gauge.arrowColor);
 
 		// Add event listeners
 		this.addEventListeners();

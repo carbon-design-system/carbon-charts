@@ -274,6 +274,7 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, pieChart, {
 		arcWidth: 16,
 		arcBackgroundColor: `rgb(224,224,224)`,
 		arcForegroundColor: `rgb(88,134,247)`,
+		arrowColor: `currentColor`,
 		numberFormatter: number => number.toFixed(2).toLocaleString(),
 		hoverArc: {
 			outerRadiusOffset: 3
