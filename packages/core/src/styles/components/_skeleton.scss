@@ -1,7 +1,7 @@
 $lines-bg-color: $ui-03;
-$lines-shimmer-color: white;
+$lines-shimmer-color: $carbon--white-0;
 $areas-bg-color: rgba(127, 127, 127, 0.1);
-$areas-shimmer-color: rgba(255, 255, 255, 0.15);
+$areas-shimmer-color: rgba($carbon--white-0, 0.15);
 
 .#{$prefix}--#{$charts-prefix}--skeleton {
 	// lines
