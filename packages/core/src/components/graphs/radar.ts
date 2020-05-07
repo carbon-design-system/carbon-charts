@@ -47,9 +47,9 @@ export class Radar extends Component {
 		const displayData = this.model.getDisplayData();
 		const groupedData = this.model.getGroupedData();
 		const options = this.model.getOptions();
-		const configuration = Configuration.options.radarChart.radar;
-		const groupMapsTo = options.data.groupMapsTo;
-		const { angle, value } = options.radar.axes;
+		const configuration = Tools.getProperty(Configuration, "options", "radarChart", "radar");
+		const { angle, value } = Tools.getProperty(options, "radar", "axes");
+		const groupMapsTo = Tools.getProperty(options, "data", "groupMapsTo");
 		const { xLabelPadding, yLabelPadding, yTicksNumber, minRange, xAxisRectHeight, opacity } = configuration;
 
 		this.uniqueKeys = Array.from(new Set(data.map(d => d[angle])));
@@ -337,8 +337,8 @@ export class Radar extends Component {
 	// creates corresponding data with value = null
 	normalizeFlatData = (dataset: any) => {
 		const options = this.model.getOptions();
-		const { angle, value } = options.radar.axes;
-		const groupMapsTo = options.data.groupMapsTo;
+		const { angle, value } = Tools.getProperty(options, "radar", "axes");
+		const groupMapsTo = Tools.getProperty(options, "data", "groupMapsTo");
 		const completeBlankData = Tools.flatMapDeep(this.uniqueKeys.map(key => {
 			return this.uniqueGroups.map(group => ({ [angle]: key, [groupMapsTo]: group, [value]: null }));
 		}));
@@ -349,8 +349,8 @@ export class Radar extends Component {
 	// creates corresponding data with value = null
 	normalizeGroupedData = (dataset: any) => {
 		const options = this.model.getOptions();
-		const { angle, value } = options.radar.axes;
-		const groupMapsTo = options.data.groupMapsTo;
+		const { angle, value } = Tools.getProperty(options, "radar", "axes");
+		const groupMapsTo = Tools.getProperty(options, "data", "groupMapsTo");
 		return dataset.map(({ name, data }) => {
 			const completeBlankData = this.uniqueKeys.map(k => ({ [groupMapsTo]: name, [angle]: k, [value]: null }));
 			return { name, data: Tools.merge(completeBlankData, data) };
@@ -359,7 +359,7 @@ export class Radar extends Component {
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-		const { opacity } = Configuration.options.radarChart.radar;
+		const { opacity } = Tools.getProperty(Configuration, "options", "radarChart", "radar");
 		this.parent.selectAll("g.blobs path")
 			.transition(this.services.transitions.getTransition("legend-hover-blob"))
 			.style("fill-opacity", group => {
@@ -371,7 +371,7 @@ export class Radar extends Component {
 	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		const { opacity } = Configuration.options.radarChart.radar;
+		const { opacity } = Tools.getProperty(Configuration, "options", "radarChart", "radar");
 		this.parent.selectAll("g.blobs path")
 			.transition(this.services.transitions.getTransition("legend-mouseout-blob"))
 			.style("fill-opacity", opacity.selected);
