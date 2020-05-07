@@ -110,7 +110,7 @@ export enum CalloutDirections {
  */
 export enum Skeletons {
 	GRID = "grid",
-	VERT_OR_HORIZ = "vertoOrHoriz",
+	VERT_OR_HORIZ = "vertOrHoriz",
 	PIE = "pie",
 	DONUT = "donut"
 }
