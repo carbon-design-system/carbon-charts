@@ -15,13 +15,14 @@ export class Skeleton extends Component {
 	backdrop: any;
 
 	render() {
-		const isDataEmpty = this.model.isDataEmpty();
-		const isDataLoading = this.model.getOptions().data.loading;
-
 		const svg = this.parent;
 		const parent = svg.node().parentNode;
 		const { width, height } = DOMUtils.getSVGElementSize(parent, { useAttrs: true });
 		svg.attr("width", width).attr("height", height);
+
+		const isDataEmpty = this.model.isDataEmpty();
+		const isDataLoading = this.model.getOptions().data.loading;
+
 		if (isDataEmpty) {
 			this.renderSkeleton(isDataLoading);
 		} else if (!isDataEmpty && isDataLoading) {
@@ -95,8 +96,11 @@ export class Skeleton extends Component {
 
 	drawBackdrop(showShimmerEffect: boolean) {
 		const svg = this.parent;
+		const parent = svg.node().parentNode;
+		const { width, height } = DOMUtils.getSVGElementSize(parent, { useAttrs: true });
 
-		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton");
+		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton.DAII").attr("width", width).attr("height", height);
+
 		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, "rect.chart-skeleton-backdrop");
 		backdropRect
 			.attr("width", "100%")
@@ -108,9 +112,7 @@ export class Skeleton extends Component {
 		this.backdrop
 			.merge(backdropRect)
 			.attr("x", xScaleStart)
-			.attr("y", yScaleStart)
-			.attr("width", xScaleEnd - xScaleStart)
-			.attr("height", yScaleEnd - yScaleStart);
+			.attr("y", yScaleStart);
 
 		backdropRect
 			.classed("shimmer-effect-lines", showShimmerEffect)
