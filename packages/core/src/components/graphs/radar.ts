@@ -1,7 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import * as Configuration from "../../configuration";
 import { Events, TooltipTypes, Roles } from "../../interfaces";
 import { Tools } from "../../tools";
 import {
@@ -47,10 +46,9 @@ export class Radar extends Component {
 		const displayData = this.model.getDisplayData();
 		const groupedData = this.model.getGroupedData();
 		const options = this.model.getOptions();
-		const configuration = Tools.getProperty(Configuration, "options", "radarChart", "radar");
 		const { angle, value } = Tools.getProperty(options, "radar", "axes");
 		const groupMapsTo = Tools.getProperty(options, "data", "groupMapsTo");
-		const { xLabelPadding, yLabelPadding, yTicksNumber, minRange, xAxisRectHeight, opacity } = configuration;
+		const { xLabelPadding, yLabelPadding, yTicksNumber, minRange, xAxisRectHeight, opacity } = Tools.getProperty(options, "radar");
 
 		this.uniqueKeys = Array.from(new Set(data.map(d => d[angle])));
 		this.uniqueGroups = Array.from(new Set(data.map(d => d[groupMapsTo])));
@@ -359,22 +357,22 @@ export class Radar extends Component {
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-		const { opacity } = Tools.getProperty(Configuration, "options", "radarChart", "radar");
+		const opacity = Tools.getProperty(this.model.getOptions(), "radar", "opacity");
 		this.parent.selectAll("g.blobs path")
 			.transition(this.services.transitions.getTransition("legend-hover-blob"))
 			.style("fill-opacity", group => {
 				if (group.name !== hoveredElement.datum().name) {
-					return opacity.unselected;
+					return Tools.getProperty(opacity, "unselected");
 				}
-				return opacity.selected;
+				return Tools.getProperty(opacity, "selected");
 			});
 	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		const { opacity } = Tools.getProperty(Configuration, "options", "radarChart", "radar");
+		const opacity = Tools.getProperty(this.model.getOptions(), "radar", "opacity");
 		this.parent.selectAll("g.blobs path")
 			.transition(this.services.transitions.getTransition("legend-mouseout-blob"))
-			.style("fill-opacity", opacity.selected);
+			.style("fill-opacity", Tools.getProperty(opacity, "selected"));
 	}
 
 	destroy() {
