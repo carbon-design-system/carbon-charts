@@ -1,3 +1,5 @@
+import { TextAnchor, DominantBaseline } from "../interfaces/enums";
+
 export interface Point {
 	x: number;
 	y: number;
@@ -6,29 +8,29 @@ export interface Point {
 export type Angle = number;
 
 interface LabelAlignment {
-	textAnchor: "start" | "middle" | "end"; // *___   __*__   ___*
-	dominantBaseline: "baseline" | "middle" | "hanging"; // __*   --*--   --.
+	textAnchor: TextAnchor;
+	dominantBaseline: DominantBaseline;
 }
 
 export function radialLabelPlacement(angleRadians: Angle): LabelAlignment {
 	const angle = mod(radToDeg(angleRadians), 360);
 
 	if (isInRange(angle, [0, 10]) || isInRange(angle, [350, 0])) {
-		return { textAnchor: "start", dominantBaseline: "middle" };
+		return { textAnchor: TextAnchor.START, dominantBaseline: DominantBaseline.MIDDLE };
 	} else if (isInRange(angle, [10, 80])) {
-		return { textAnchor: "start", dominantBaseline: "hanging" };
+		return { textAnchor: TextAnchor.START, dominantBaseline: DominantBaseline.HANGING };
 	} else if (isInRange(angle, [80, 100])) {
-		return { textAnchor: "middle", dominantBaseline: "hanging" };
+		return { textAnchor: TextAnchor.MIDDLE, dominantBaseline: DominantBaseline.HANGING };
 	} else if (isInRange(angle, [100, 170])) {
-		return { textAnchor: "end", dominantBaseline: "hanging" };
+		return { textAnchor: TextAnchor.END, dominantBaseline: DominantBaseline.HANGING };
 	} else if (isInRange(angle, [170, 190])) {
-		return { textAnchor: "end", dominantBaseline: "middle" };
+		return { textAnchor: TextAnchor.END, dominantBaseline: DominantBaseline.MIDDLE };
 	} else if (isInRange(angle, [190, 260])) {
-		return { textAnchor: "end", dominantBaseline: "baseline" };
+		return { textAnchor: TextAnchor.END, dominantBaseline: DominantBaseline.BASELINE };
 	} else if (isInRange(angle, [260, 280])) {
-		return { textAnchor: "middle", dominantBaseline: "baseline" };
+		return { textAnchor: TextAnchor.MIDDLE, dominantBaseline: DominantBaseline.BASELINE };
 	} else { // 280 - 350
-		return { textAnchor: "start", dominantBaseline: "baseline" };
+		return { textAnchor: TextAnchor.START, dominantBaseline: DominantBaseline.BASELINE };
 	}
 }
 
