@@ -35,12 +35,6 @@ export const lineOptions = {
 			scaleType: "linear"
 		}
 	},
-	// scatter: {
-	// 	"xyz": {
-	// 		identifier: "audienceSize",
-	// 		tooltipTitle: "Audience size"
-	// 	}
-	// },
 	chartTypes: { // TODO
 		"line": [
 			"Dataset 4",
