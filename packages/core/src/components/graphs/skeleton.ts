@@ -1,6 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
+import { Tools } from "../../tools";
 import { Skeletons, CartesianOrientations } from "../../interfaces/enums";
 
 // D3 Imports
@@ -21,7 +22,7 @@ export class Skeleton extends Component {
 		svg.attr("width", width).attr("height", height);
 
 		const isDataEmpty = this.model.isDataEmpty();
-		const isDataLoading = this.model.getOptions().data.loading;
+		const isDataLoading = Tools.getProperty(this.model.getOptions(), "data", "loading");
 
 		if (isDataEmpty) {
 			this.renderSkeleton(isDataLoading);
@@ -122,7 +123,7 @@ export class Skeleton extends Component {
 	drawXGrid(showShimmerEffect: boolean) {
 		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
-		const ticksNumber = 5;
+		const ticksNumber = Tools.getProperty(this.model.getOptions(), "grid", "x", "numberOfTicks");
 		const ticksValues = this.xScale.ticks(ticksNumber).map(d => d * width);
 
 		const xGridG = DOMUtils.appendOrSelect(this.backdrop, "g.x.skeleton");
@@ -143,7 +144,7 @@ export class Skeleton extends Component {
 	drawYGrid(showShimmerEffect: boolean) {
 		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
-		const ticksNumber = 5;
+		const ticksNumber = Tools.getProperty(this.model.getOptions(), "grid", "y", "numberOfTicks");
 		const ticksValues = this.xScale.ticks(ticksNumber).map(d => d * height);
 
 		const yGridG = DOMUtils.appendOrSelect(this.backdrop, "g.y.skeleton");
@@ -251,5 +252,4 @@ export class Skeleton extends Component {
 		const container = this.parent.select(".chart-skeleton");
 		container.remove();
 	}
-
 }
