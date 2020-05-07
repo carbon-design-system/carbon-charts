@@ -18,6 +18,10 @@ export class Skeleton extends Component {
 		const isDataEmpty = this.model.isDataEmpty();
 		const isDataLoading = this.model.getOptions().data.loading;
 
+		const svg = this.parent;
+		const parent = svg.node().parentNode;
+		const { width, height } = DOMUtils.getSVGElementSize(parent, { useAttrs: true });
+		svg.attr("width", width).attr("height", height);
 		if (isDataEmpty) {
 			this.renderSkeleton(isDataLoading);
 		} else if (!isDataEmpty && isDataLoading) {
@@ -157,8 +161,11 @@ export class Skeleton extends Component {
 
 	drawRing(outerRadius: number, innerRadius: number, shimmer = true) {
 		const svg = this.parent;
-		const { width, height } = DOMUtils.getSVGElementSize(svg, { useAttrs: true });
-		const container = DOMUtils.appendOrSelect(svg, "g.chart-skeleton");
+		const { width, height } = DOMUtils.getSVGElementSize(svg.node().parentNode, { useAttrs: true });
+
+		const container = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton")
+			.attr("width", width)
+			.attr("height", height);
 		const options = this.model.getOptions().pie;
 
 		const skeletonAreaContainer = DOMUtils.appendOrSelect(container, "rect.chart-skeleton-area-container")
@@ -187,7 +194,7 @@ export class Skeleton extends Component {
 	// same logic in pie
 	computeOuterRadius() {
 		const options = this.model.getOptions();
-		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
+		const { width, height } = DOMUtils.getSVGElementSize(this.parent.node().parentNode, { useAttrs: true });
 		const radius = Math.min(width, height) / 2;
 		return radius + options.pie.radiusOffset;
 	}
