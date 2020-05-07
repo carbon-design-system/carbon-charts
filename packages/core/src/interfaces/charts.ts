@@ -207,6 +207,7 @@ export interface RadarChartOptions extends BaseChartOptions {
 		yLabelPadding: number,
 		yTicksNumber: number,
 		minRange: number,
-		xAxisRectHeight: number
+		xAxisRectHeight: number,
+		dotsRadius: number
 	};
 }

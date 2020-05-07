@@ -391,7 +391,7 @@ export class Radar extends Component {
 
 	addEventListeners() {
 		const self = this;
-		const { angle, value } = this.model.getOptions().radar.axes;
+		const { axes: { angle }, dotsRadius } = Tools.getProperty(this.model.getOptions(), "radar");
 
 		// events on x axes rects
 		this.parent.selectAll(".x-axes-rect > rect")
@@ -412,7 +412,7 @@ export class Radar extends Component {
 					.attr("stroke-dasharray", "4 4");
 				dots.classed("hovered", true)
 					.attr("opacity", 1)
-					.attr("r", 5);
+					.attr("r", dotsRadius);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_MOUSEMOVE, {
