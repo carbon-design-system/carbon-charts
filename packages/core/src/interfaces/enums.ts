@@ -122,3 +122,9 @@ export enum DominantBaseline {
 	MIDDLE = "middle",
 	HANGING = "hanging"
 }
+
+
+export enum GaugeTypes {
+	SEMI = "semi",
+	FULL =  "full"
+}

@@ -7,6 +7,7 @@ import {
 	BarChartOptions,
 	StackedBarChartOptions,
 	PieChartOptions,
+	GaugeChartOptions,
 	DonutChartOptions,
 	BubbleChartOptions,
 	RadarChartOptions,
@@ -19,9 +20,11 @@ import {
 	BarTooltipOptions,
 	LegendOptions,
 	LegendPositions,
-	StackedBarOptions
+	StackedBarOptions,
+	GaugeTypes
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
+
 
 /*
  *****************************
@@ -262,14 +265,35 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 } as PieChartOptions);
 
 /**
+ * options specific to gauge charts
+ */
+
+const gaugeChart: GaugeChartOptions = Tools.merge({}, pieChart, {
+	legend: {
+		enabled: false
+	},
+	gauge: {
+		type: GaugeTypes.SEMI,
+		arcWidth: 16,
+		arcBackgroundColor: `rgb(224,224,224)`,
+		arcForegroundColor: `rgb(88,134,247)`,
+		arrowColor: `currentColor`,
+		numberFormatter: number => number.toFixed(2).toLocaleString(),
+		hoverArc: {
+			outerRadiusOffset: 3
+		}
+	}
+} as GaugeChartOptions);
+
+/**
  * options specific to donut charts
  */
 const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	donut: {
 		center: {
-			numberFontSize: radius => Math.min((radius / 100) * 24, 24) + "px",
-			titleFontSize: radius => Math.min((radius / 100) * 15, 15) + "px",
-			titleYPosition: radius => Math.min((radius / 80) * 20, 20),
+			numberFontSize: radius => Tools.interpolateAndClamp((radius / 100), 24) + "px",
+			titleFontSize: radius => Tools.interpolateAndClamp((radius / 100), 15) + "px",
+			titleYPosition: radius => Tools.interpolateAndClamp((radius / 80), 20),
 			numberFormatter: number => Math.floor(number).toLocaleString()
 		}
 	}
@@ -314,7 +338,8 @@ export const options = {
 	scatterChart,
 	pieChart,
 	donutChart,
-	radarChart
+	radarChart,
+	gaugeChart
 };
 
 /**

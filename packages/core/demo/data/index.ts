@@ -3,6 +3,7 @@ import * as bubbleDemos from "./bubble";
 import * as donutDemos from "./donut";
 import * as lineDemos from "./line";
 import * as pieDemos from "./pie";
+import * as gaugeDemos from "./gauge";
 import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
 import * as timeSeriesAxisDemos from "./time-series-axis";
@@ -13,6 +14,7 @@ export * from "./bubble";
 export * from "./donut";
 export * from "./line";
 export * from "./pie";
+export * from "./gauge";
 export * from "./scatter";
 export * from "./step";
 export * from "./radar";
@@ -63,6 +65,11 @@ export const chartTypes = {
 		vanilla: "PieChart",
 		angular: "ibm-pie-chart",
 		vue: "ccv-pie-chart"
+	},
+	GaugeChart: {
+		vanilla: "GaugeChart",
+		angular: "ibm-gauge-chart",
+		vue: "ccv-gauge-chart"
 	},
 	DonutChart: {
 		vanilla: "DonutChart",
@@ -230,6 +237,23 @@ let allDemoGroups = [
 				options: pieDemos.pieOptions,
 				data: pieDemos.pieData,
 				chartType: chartTypes.PieChart,
+				isDemoExample: true
+			}
+		]
+	},
+	{
+		title: "Gauge",
+		demos: [
+			{
+				options: gaugeDemos.gaugeOptionsSemi,
+				data: gaugeDemos.gaugeData,
+				chartType: chartTypes.GaugeChart,
+				isDemoExample: true
+			},
+			{
+				options: gaugeDemos.gaugeOptionsCircular,
+				data: gaugeDemos.gaugeData,
+				chartType: chartTypes.GaugeChart,
 				isDemoExample: true
 			}
 		]

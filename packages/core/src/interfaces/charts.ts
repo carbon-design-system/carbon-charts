@@ -1,5 +1,6 @@
 import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
 import { AxisTooltipOptions, BarTooltipOptions, BarOptions, StackedBarOptions } from "./components";
+import { GaugeTypes } from "./enums";
 
 /**
  * Base chart options common to any chart
@@ -174,6 +175,22 @@ export interface PieChartOptions extends BaseChartOptions {
 	};
 }
 
+/**
+ * options specific to gauge charts
+ */
+export interface GaugeChartOptions extends PieChartOptions {
+	gauge?: {
+		arcWidth?: number;
+		arcBackgroundColor?: string;
+		arcForegroundColor?: string;
+		arrowColor?: string;
+		numberFormatter?: Function;
+		hoverArc?: {
+			outerRadiusOffset?: number;
+		};
+		type?: GaugeTypes;
+	};
+}
 
 
 /**

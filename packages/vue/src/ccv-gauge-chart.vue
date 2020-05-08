@@ -1,16 +1,16 @@
 <template>
-	<div class="ccv-donut-chart"></div>
+	<div class="ccv-gauge-chart"></div>
 </template>
 
 <script>
-import { DonutChart } from '@carbon/charts';
+import { GaugeChart } from '@carbon/charts';
 import CcvBaseChart from './ccv-base-chart.vue';
 
 export default {
-	name: 'CcvDonutChart',
+	name: 'CcvGaugeChart',
 	extends: CcvBaseChart,
 	mounted() {
-		this.coreChart = new DonutChart(this.$el, {
+		this.coreChart = new GaugeChart(this.$el, {
 			data: this.data,
 			options: this.options,
 		});
