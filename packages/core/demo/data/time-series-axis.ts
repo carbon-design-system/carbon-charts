@@ -383,20 +383,6 @@ export const lineTimeSeriesTwoIdenticalLabelsOptions = {
 	}
 };
 
-// bug two identical labels 2
-export const lineTimeSeriesDataTwoIdenticalLabels2 = {
-	labels: ["Qty"],
-	datasets: [
-		{
-			label: "Dataset 1",
-			data: [
-				{ date: new Date(2020, 0, 23, 15, 0), value: 10 },
-				{ date: new Date(2020, 0, 29, 15, 0), value: 10 }
-			]
-		}
-	]
-};
-
 export const lineTimeSeriesTwoIdenticalLabels2Options = {
 	title: "Line (time series) - Two identical labels 2",
 	axes: {
