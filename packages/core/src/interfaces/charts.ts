@@ -189,3 +189,25 @@ export interface DonutChartOptions extends PieChartOptions {
 		};
 	};
 }
+
+/**
+ * options specific to radar charts
+ */
+export interface RadarChartOptions extends BaseChartOptions {
+	radar?: {
+		opacity: {
+			unselected: number,
+			selected: number
+		},
+		axes: {
+			angle: string,
+			value: string
+		}
+		xLabelPadding: number,
+		yLabelPadding: number,
+		yTicksNumber: number,
+		minRange: number,
+		xAxisRectHeight: number,
+		dotsRadius: number
+	};
+}
