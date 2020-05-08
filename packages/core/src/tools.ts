@@ -12,6 +12,8 @@ import {
 	uniq as lodashUnique,
 	clamp as lodashClamp,
 	isEqual as lodashIsEqual,
+	flatMapDeep as lodashFlatMapDeep,
+	kebabCase as lodashKebabCase,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Cancelable,
 	DebounceSettings
@@ -26,6 +28,8 @@ export namespace Tools {
 	export const removeArrayDuplicates = lodashUnique;
 	export const clamp = lodashClamp;
 	export const isEqual = lodashIsEqual;
+	export const flatMapDeep = lodashFlatMapDeep;
+	export const kebabCase = lodashKebabCase;
 
 	/**
 	 * Returns default chart options merged with provided options,
