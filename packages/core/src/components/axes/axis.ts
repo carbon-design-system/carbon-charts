@@ -124,12 +124,7 @@ export class Axis extends Component {
 			axis.ticks(numberOfTicks);
 
 			if (isTimeScaleType) {
-				let tickValues = scale
-					.ticks(numberOfTicks)
-					.concat(scale.domain())
-					.map(date => +date)
-					.sort();
-				tickValues = Tools.removeArrayDuplicates(tickValues);
+				const tickValues = scale.nice(numberOfTicks).ticks(numberOfTicks);
 
 				// Remove labels on the edges
 				// If there are more than 2 labels to show
