@@ -6,6 +6,7 @@ import CcvDonutChart from './ccv-donut-chart.vue';
 import CcvLineChart from './ccv-line-chart.vue';
 import CcvPieChart from './ccv-pie-chart.vue';
 import CcvScatterChart from './ccv-scatter-chart.vue';
+import CcvRadarChart from './ccv-radar-chart.vue';
 
 const components = [
 	CcvSimpleBarChart,
@@ -15,7 +16,8 @@ const components = [
 	CcvDonutChart,
 	CcvLineChart,
 	CcvPieChart,
-	CcvScatterChart
+	CcvScatterChart,
+	CcvRadarChart,
 ];
 
 /*
@@ -58,5 +60,6 @@ export {
 	CcvDonutChart,
 	CcvLineChart,
 	CcvPieChart,
-	CcvScatterChart
+	CcvScatterChart,
+	CcvRadarChart,
 };
