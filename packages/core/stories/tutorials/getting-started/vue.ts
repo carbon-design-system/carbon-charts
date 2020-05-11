@@ -72,16 +72,19 @@ You can see the options for all charts
 
 &nbsp;
 ## Guidance
-Please refer to the [Carbon Design Systems guidance](https://www.carbondesignsystem.com/data-visualization/chart-types)
+Please refer to the
+[Carbon Design Systems guidance](https://www.carbondesignsystem.com/data-visualization/chart-types)
 on using the different charts available in this library.
 
 &nbsp;
 ## Development
-Please refer to the [Contribution Guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/CONTRIBUTING.md)
+Please refer to the
+[Contribution Guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/CONTRIBUTING.md)
 before starting any work.
 
 #### Using the server
-We recommend the use of [Vue Storybook](https://github.com/storybookjs/storybook/tree/next/app/vue) for developing components.
+We recommend the use of
+[Vue Storybook](https://github.com/storybookjs/storybook/tree/next/app/vue) for developing components.
 
 **Start the server:**
 \`\`\`bash

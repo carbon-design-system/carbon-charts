@@ -78,14 +78,19 @@ You can see the options for all charts
 
 &nbsp;
 ## Guidance
-Please refer to the [Carbon Design Systems guidance](https://www.carbondesignsystem.com/data-visualization/chart-types) on using the different charts available in this library.
+Please refer to the
+[Carbon Design Systems guidance](https://www.carbondesignsystem.com/data-visualization/chart-types)
+on using the different charts available in this library.
 
 &nbsp;
 ## Development
-Please refer to the [Contribution Guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/CONTRIBUTING.md) before starting any work.
+Please refer to the
+[Contribution Guidelines](https://github.com/carbon-design-system/carbon-charts/blob/master/CONTRIBUTING.md)
+before starting any work.
 
 #### Using the server
-We recommend the use of [React Storybook](https://github.com/storybookjs/storybook/tree/next/app/react) for developing components.
+We recommend the use of [React Storybook](https://github.com/storybookjs/storybook/tree/next/app/react)
+for developing components.
 
 **Start the server:**
 \`\`\`bash
@@ -103,6 +108,7 @@ View available components [here](https://github.com/carbon-design-system/carbon-
 ## Troubleshoot
 If you experience any issues while getting set up with Carbon Charts, please head over to
 the [GitHub repo](https://github.com/carbon-design-system/carbon-charts)
-for more guidelines and support. Please [create an issue](https://github.com/carbon-design-system/carbon-charts/issues)
+for more guidelines and support.
+Please[create an issue](https://github.com/carbon-design-system/carbon-charts/issues)
 if your issue does not already exist.
 `);
