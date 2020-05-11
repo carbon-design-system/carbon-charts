@@ -2,7 +2,8 @@ import marked from "marked";
 
 export const reactTutorial = marked(`
 # Carbon Charts - React
-The Carbon Charts library provides a collection of reusable charting components to build websites and user interfaces. Adopting the library enables developers to use consistent markup, styles, and behavior in prototype and production work.
+The Carbon Charts library provides a collection of reusable charting components to build websites and user interfaces.
+Adopting the library enables developers to use consistent markup, styles, and behavior in prototype and production work.
 
 &nbsp;
 ## Install
@@ -98,5 +99,6 @@ View available components [here](https://github.com/carbon-design-system/carbon-
 
 &nbsp;
 ## Troubleshoot
-If you experience any issues while getting set up with Carbon Charts, please head over to the [GitHub repo](https://github.com/carbon-design-system/carbon-charts) for more guidelines and support. Please [create an issue](https://github.com/carbon-design-system/carbon-charts/issues) if your issue does not already exist.
+If you experience any issues while getting set up with Carbon Charts, please head over to the [GitHub repo](https://github.com/carbon-design-system/carbon-charts) for more guidelines and support.
+Please [create an issue](https://github.com/carbon-design-system/carbon-charts/issues) if your issue does not already exist.
 `);
