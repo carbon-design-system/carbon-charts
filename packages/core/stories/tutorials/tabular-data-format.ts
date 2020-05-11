@@ -3,11 +3,15 @@ import marked from "marked";
 export const tabularTutorial = marked(`
 # Tabular data format
 
-We've recently updated the default \`@carbon/charts\` data format to be of a tabular nature.
+We've recently updated the default \`@carbon/charts\` data
+format to be of a tabular nature.
 
-This means more flexibility for our users in terms of the shape of the data they can provide to the library.
+This means more flexibility for our users in terms of the shape
+of the data they can provide to the library.
 
-**If you're looking to use @carbon/charts@0.30.8 and above, we recommend updating your data type as it should be a quick and easy switch.**
+**If you're looking to use @carbon/charts@0.30.8 and above,
+we recommend updating your data type as it should be a quick
+and easy switch.**
 
 \`\`\`js
 // Before
@@ -36,20 +40,31 @@ const simpleBarData = [
 ];
 \`\`\`
 
-As you might have noticed in the examples above, the charting data provided in the existing format was an \`object\` that described labels, datasets and datapoints.
+As you might have noticed in the examples above,
+the charting data provided in the existing format
+was an \`object\` that described labels, datasets and datapoints.
 
-Now in the new format you would provide an **array where each element is a datapoint.**
+Now in the new format you would provide
+an **array where each element is a datapoint.**
 
-Now we need to introduce some new fields into our \`axes\` options in order to map keys within our datapoints to axis values.
+Now we need to introduce some new fields into our \`axes\`
+options in order to map keys within our datapoints to axis values.
 
 ##### Additions to charting options:
-*Note:* **This section does not apply to any non-axis charting components (e.g. pie & donut)**
+*Note:* **This section does not apply to any
+non-axis charting components (e.g. pie & donut)**
 
-We'd still need a way to know which keys map to your values (\`rangeIdentifier\`) and which map to the labels you'd be showing on an axis (\`domainIdentifier\`).
+We'd still need a way to know which keys map to
+your values (\`rangeIdentifier\`) and which map to
+the labels you'd be showing on an axis (\`domainIdentifier\`).
 
-These identifiers can be set through the \`mapsTo\` option within each axis, and are defeaulted to \`value\` & (\`key\` or \`date\` - depending on whether your datapoints include dates).
+These identifiers can be set through the \`mapsTo\`
+option within each axis, and are defeaulted to \`value\`
+& (\`key\` or \`date\` - depending on whether your datapoints
+include dates).
 
-**Although the library will set fallback \`mapsTo\` defaults, you should always set your own.**
+**Although the library will set fallback
+\`mapsTo\` defaults, you should always set your own.**
 
 \`\`\`js
 const simpleBarOptions = {
@@ -67,7 +82,8 @@ const simpleBarOptions = {
 \`\`\`
 
 ##### Non-axis chart types:
-In the case of pie & donut the library will always look for the \`value\` key within your datapoints:
+In the case of pie & donut the library will
+always look for the \`value\` key within your datapoints:
 \`\`\`js
 export const pieData = [
 	{ group: "2V2N 9KYPM version 1", value: 20000 },
@@ -80,7 +96,9 @@ export const pieData = [
 \`\`\`
 
 ##### Customizable options:
-You're able to customize the \`groupMapsTo\` which is used to determine the key within your data that identifies the grouping of the datapoints.
+You're able to customize the \`groupMapsTo\`
+which is used to determine the key within your data that
+identifies the grouping of the datapoints.
 
 \`\`\`js
 const simpleBarOptions = {
@@ -137,7 +155,8 @@ const bubbleDoubleLinearData = [
 
 ##### Color scale
 
-You're also able to provide a custom \`color range\` to be used within the color scale.
+You're also able to provide a custom
+\`color range\` to be used within the color scale.
 \`\`\`
 const simpleBarOptions = {
 	color: {
