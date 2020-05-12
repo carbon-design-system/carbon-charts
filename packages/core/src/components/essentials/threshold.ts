@@ -98,7 +98,7 @@ export class Threshold extends Component {
 
 	getFormattedValue() {
 		const { value, axisPosition } = this.configs;
-		const options = Tools.getProperty(this.model.getOptions());
+		const options = this.model.getOptions();
 		const scaleType = this.services.cartesianScales.getScaleTypeByPosition(axisPosition);
 
 		// If scale is time, format the threshold date as the ticks format
