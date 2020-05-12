@@ -64,6 +64,16 @@ export enum Line {
 }
 
 /**
+ * enum of all radar graph events
+ */
+export enum Radar {
+	X_AXIS_MOUSEOVER = "radar-x-axis-mouseover",
+	X_AXIS_MOUSEMOVE = "radar-x-axis-mousemove",
+	X_AXIS_CLICK = "radar-x-axis-click",
+	X_AXIS_MOUSEOUT = "radar-x-axis-mouseout"
+}
+
+/**
  * enum of all tooltip events
  */
 export enum Tooltip {

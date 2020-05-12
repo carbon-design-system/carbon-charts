@@ -10,6 +10,7 @@ import { DonutChartComponent } from "./donut-chart.component";
 import { LineChartComponent } from "./line-chart.component";
 import { PieChartComponent } from "./pie-chart.component";
 import { ScatterChartComponent } from "./scatter-chart.component";
+import { RadarChartComponent } from "./radar-chart.component";
 
 @NgModule({
 	imports: [
@@ -24,7 +25,8 @@ import { ScatterChartComponent } from "./scatter-chart.component";
 		DonutChartComponent,
 		LineChartComponent,
 		PieChartComponent,
-		ScatterChartComponent
+		ScatterChartComponent,
+		RadarChartComponent
 	],
 	exports: [
 		BaseChart,
@@ -35,7 +37,8 @@ import { ScatterChartComponent } from "./scatter-chart.component";
 		DonutChartComponent,
 		LineChartComponent,
 		PieChartComponent,
-		ScatterChartComponent
+		ScatterChartComponent,
+		RadarChartComponent
 	]
 })
 

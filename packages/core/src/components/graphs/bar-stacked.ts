@@ -138,7 +138,7 @@ export class StackedBar extends Bar {
 				const hoveredElement = select(this);
 
 				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
-					.attr("fill", color(hoveredElement.attr("fill")).darker(0.7).toString());
+					.attr("fill", (d: any) => color(self.model.getFillColor(d[groupMapsTo])).darker(0.7).toString());
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {

@@ -9,6 +9,7 @@ import {
 	PieChartOptions,
 	DonutChartOptions,
 	BubbleChartOptions,
+	RadarChartOptions,
 	// Components
 	GridOptions,
 	AxesOptions,
@@ -275,6 +276,34 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	}
 } as DonutChartOptions);
 
+/**
+ * options specific to radar charts
+ */
+const radarChart: RadarChartOptions = Tools.merge({}, chart, {
+	radar: {
+		axes: {
+			angle: "key",
+			value: "value"
+		},
+		opacity: {
+			unselected: 0.1,
+			selected: 0.3
+		},
+		xLabelPadding: 10,
+		yLabelPadding: 8,
+		yTicksNumber: 4,
+		minRange: 10,
+		xAxisRectHeight: 50,
+		dotsRadius: 5
+	},
+	tooltip: {
+		gridline: {
+			enabled: true
+		},
+		valueFormatter: value => value !== null && value !== undefined ? value : "N/A"
+	}
+} as RadarChartOptions);
+
 export const options = {
 	chart,
 	axisChart,
@@ -285,7 +314,8 @@ export const options = {
 	lineChart,
 	scatterChart,
 	pieChart,
-	donutChart
+	donutChart,
+	radarChart
 };
 
 /**
