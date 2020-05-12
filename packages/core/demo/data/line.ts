@@ -1,3 +1,5 @@
+import { timeFormat } from "d3";
+
 export const lineData = [
 	{ group: "Dataset 1", key: "Qty", value: 32100 },
 	{ group: "Dataset 1", key: "More", value: 23500 },
@@ -78,6 +80,34 @@ export const lineTimeSeriesOptions = {
 			mapsTo: "value",
 			title: "Conversion rate",
 			scaleType: "linear"
+		}
+	},
+	curve: "curveMonotoneX"
+};
+
+export const lineTimeSeriesWithThresholdsOptions = {
+	title: "Line with thresholds (time series)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time",
+			thresholds: [
+				{
+					value: new Date(2019, 0, 11),
+					label: "Custom formatter",
+					valueFormatter: timeFormat("%b %d")
+				}
+			]
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear",
+			thresholds: [
+				{value: 55000, label: "Custom label", fillColor: "orange"},
+				{value: 10000, fillColor: "#03a9f4"}
+			]
 		}
 	},
 	curve: "curveMonotoneX"

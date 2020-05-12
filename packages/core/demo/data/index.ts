@@ -318,6 +318,11 @@ let allDemoGroups = [
 				chartType: chartTypes.LineChart
 			},
 			{
+				options: lineDemos.lineTimeSeriesWithThresholdsOptions,
+				data: lineDemos.lineTimeSeriesData,
+        chartType: chartTypes.LineChart
+      },
+      {
 				options: lineDemos.lineEmptyStateOptions,
 				data: lineDemos.lineEmptyStateData,
 				chartType: chartTypes.LineChart

@@ -57,6 +57,46 @@ export class Scatter extends Component {
 		this.addEventListeners();
 	}
 
+	// A value is an anomaly if is above all defined domain and range thresholds
+	isDatapointThresholdAnomaly(datum: any, index: number) {
+		const { handleThresholds } = this.configs;
+		if (!handleThresholds) { return false; }
+
+		const { cartesianScales } = this.services;
+		const orientation = cartesianScales.getOrientation();
+
+		// Get highest domain and range thresholds
+		const [xThreshold, yThreshold] = Tools.flipDomainAndRangeBasedOnOrientation(
+			this.services.cartesianScales.getHighestDomainThreshold(),
+			this.services.cartesianScales.getHighestRangeThreshold(),
+			orientation
+		);
+
+		const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
+			(d, i) => cartesianScales.getDomainValue(d, i),
+			(d, i) => cartesianScales.getRangeValue(d, i),
+			orientation
+		);
+
+		// Get datum x and y values
+		const xValue = getXValue(datum, index);
+		const yValue = getYValue(datum, index);
+
+		// To be an anomaly, the value has to be higher or equal than the threshold value
+		// (if are present, both range and domain threshold values)
+		if (yThreshold && xThreshold) {
+			return yValue <= yThreshold.scaleValue && xValue >= xThreshold.scaleValue;
+		}
+
+		if (yThreshold) {
+			return yValue <= yThreshold.scaleValue;
+		}
+
+		if (xThreshold) {
+			return xValue >= xThreshold.scaleValue;
+		}
+	}
+
 	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
 		// Chart options mixed with the internal configurations
 		const options = this.model.getOptions();
@@ -77,6 +117,8 @@ export class Scatter extends Component {
 
 		selection.raise()
 			.classed("dot", true)
+			// Set class to highlight the dots that are above all the thresholds, in both directions (vertical and horizontal)
+			.classed("threshold-anomaly", (d, i) => this.isDatapointThresholdAnomaly(d, i))
 			.classed("filled", d => this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
 			.classed("unfilled", d => !this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
 			.attr("cx", getXValue)
