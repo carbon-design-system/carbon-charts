@@ -92,3 +92,48 @@ export const bubbleTimeSeriesOptions = {
 		radiusMapsTo: "surplus"
 	}
 };
+
+// bubble - empty state
+export const bubbleEmptyStateData = [];
+export const bubbleEmptyStateOptions = {
+	title: "Bubble (empty state)",
+	axes: {
+		bottom: {
+			title: "No. of employees",
+			mapsTo: "sales",
+			includeZero: false
+		},
+		left: {
+			title: "Annual sales",
+			mapsTo: "profit",
+			includeZero: false
+		}
+	},
+	bubble: {
+		radiusMapsTo: "surplus"
+	}
+};
+
+// bubble - skeleton
+export const bubbleSkeletonData = [];
+export const bubbleSkeletonOptions = {
+	title: "Bubble (skeleton)",
+	axes: {
+		bottom: {
+			title: "No. of employees",
+			mapsTo: "sales",
+			includeZero: false
+		},
+		left: {
+			title: "Annual sales",
+			mapsTo: "profit",
+			includeZero: false
+		}
+	},
+	bubble: {
+		radiusMapsTo: "surplus"
+	},
+	data: {
+		loading: true
+	}
+};

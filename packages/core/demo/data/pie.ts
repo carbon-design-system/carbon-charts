@@ -11,3 +11,20 @@ export const pieOptions = {
 	title: "Pie",
 	resizable: true
 };
+
+// pie - empty state
+export const pieEmptyStateData = [];
+export const pieEmptyStateOptions = {
+	title: "Pie (empty state)",
+	resizable: true
+};
+
+// pie - skeleton
+export const pieSkeletonData = [];
+export const pieSkeletonOptions = {
+	title: "Pie (skeleton)",
+	resizable: true,
+	data: {
+		loading: true
+	}
+};

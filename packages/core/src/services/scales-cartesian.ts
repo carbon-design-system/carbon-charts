@@ -269,6 +269,10 @@ export class CartesianScales extends Service {
 		const { includeZero } = axisOptions;
 		const scaleType = Tools.getProperty(axisOptions, "scaleType") || ScaleTypes.LINEAR;
 
+		if (this.model.isDataEmpty()) {
+			return [];
+		}
+
 		const displayData = this.model.getDisplayData();
 		const { mapsTo } = axisOptions;
 
@@ -327,6 +331,7 @@ export class CartesianScales extends Service {
 		}
 
 		scale.domain(this.getScaleDomain(axisPosition));
+
 		return scale;
 	}
 }
