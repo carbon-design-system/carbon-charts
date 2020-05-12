@@ -349,6 +349,5 @@ export const lineTimeSeriesNoExtendedDomainOptions = {
 	},
 	timeScale: {
 		addSpaceOnEdges: 0
-	},
-	filled: false
+	}
 };
