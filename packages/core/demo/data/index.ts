@@ -373,6 +373,26 @@ let allDemoGroups = [
 				chartType: chartTypes.RadarChart
 			}
 		]
+	},
+	{
+		title: "Radar",
+		demos: [
+			{
+				data: radarDemos.radarData,
+				options: radarDemos.radarOptions,
+				chartType: chartTypes.RadarChart
+			},
+			{
+				data: radarDemos.radarWithMissingDataData,
+				options: radarDemos.radarWithMissingDataOptions,
+				chartType: chartTypes.RadarChart
+			},
+			{
+				data: radarDemos.radarDenseData,
+				options: radarDemos.radarDenseOptions,
+				chartType: chartTypes.RadarChart
+			}
+		]
 	}
 ] as any;
 
