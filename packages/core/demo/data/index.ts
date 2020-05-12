@@ -6,6 +6,7 @@ import * as pieDemos from "./pie";
 import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
 import * as timeSeriesAxisDemos from "./time-series-axis";
+import * as radarDemos from "./radar";
 
 export * from "./bar";
 export * from "./bubble";
@@ -14,6 +15,7 @@ export * from "./line";
 export * from "./pie";
 export * from "./scatter";
 export * from "./step";
+export * from "./radar";
 
 import {
 	createChartSandbox,
@@ -66,6 +68,11 @@ export const chartTypes = {
 		vanilla: "DonutChart",
 		angular: "ibm-donut-chart",
 		vue: "ccv-donut-chart"
+	},
+	RadarChart: {
+		vanilla: "RadarChart",
+		angular: "ibm-radar-chart",
+		vue: "ccv-radar-chart"
 	}
 };
 
@@ -91,8 +98,32 @@ let allDemoGroups = [
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
+				options: barDemos.simpleBarEmptyStateOptions,
+				data: barDemos.simpleBarEmptyStateData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.simpleBarSkeletonOptions,
+				data: barDemos.simpleBarSkeletonData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true
+			},
+			{
 				options: barDemos.groupedBarOptions,
 				data: barDemos.groupedBarData,
+				chartType: chartTypes.GroupedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.groupedBarEmptyStateOptions,
+				data: barDemos.groupedBarEmptyStateData,
+				chartType: chartTypes.GroupedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.groupedBarSkeletonOptions,
+				data: barDemos.groupedBarSkeletonData,
 				chartType: chartTypes.GroupedBarChart,
 				isDemoExample: true
 			},
@@ -105,6 +136,18 @@ let allDemoGroups = [
 			{
 				options: barDemos.stackedBarTimeSeriesOptions,
 				data: barDemos.stackedBarTimeSeriesData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.stackedBarEmptyStateOptions,
+				data: barDemos.stackedBarEmptyStateData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.stackedBarSkeletonOptions,
+				data: barDemos.stackedBarSkeletonData,
 				chartType: chartTypes.StackedBarChart,
 				isDemoExample: true
 			}
@@ -126,8 +169,32 @@ let allDemoGroups = [
 				isDemoExample: true
 			},
 			{
+				options: barDemos.simpleHorizontalBarEmptyStateOptions,
+				data: barDemos.simpleHorizontalBarEmptyStateData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.simpleHorizontalBarSkeletonOptions,
+				data: barDemos.simpleHorizontalBarSkeletonData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true
+			},
+			{
 				options: barDemos.groupedHorizontalBarOptions,
 				data: barDemos.groupedHorizontalBarData,
+				chartType: chartTypes.GroupedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.groupedHorizontalBarEmptyStateOptions,
+				data: barDemos.groupedHorizontalBarEmptyStateData,
+				chartType: chartTypes.GroupedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.groupedHorizontalBarSkeletonOptions,
+				data: barDemos.groupedHorizontalBarSkeletonData,
 				chartType: chartTypes.GroupedBarChart,
 				isDemoExample: true
 			},
@@ -140,6 +207,18 @@ let allDemoGroups = [
 			{
 				options: barDemos.stackedHorizontalBarTimeSeriesOptions,
 				data: barDemos.stackedHorizontalBarTimeSeriesData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.stackedHorizontalBarEmptyStateOptions,
+				data: barDemos.stackedHorizontalBarEmptyStateData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: true
+			},
+			{
+				options: barDemos.stackedHorizontalBarSkeletonOptions,
+				data: barDemos.stackedHorizontalBarSkeletonData,
 				chartType: chartTypes.StackedBarChart,
 				isDemoExample: true
 			}
@@ -165,6 +244,18 @@ let allDemoGroups = [
 				data: bubbleDemos.bubbleDiscreteData,
 				chartType: chartTypes.BubbleChart,
 				isDemoExample: true
+			},
+			{
+				options: bubbleDemos.bubbleEmptyStateOptions,
+				data: bubbleDemos.bubbleEmptyStateData,
+				chartType: chartTypes.BubbleChart,
+				isDemoExample: true
+			},
+			{
+				options: bubbleDemos.bubbleSkeletonOptions,
+				data: bubbleDemos.bubbleSkeletonData,
+				chartType: chartTypes.BubbleChart,
+				isDemoExample: true
 			}
 		]
 	},
@@ -174,6 +265,18 @@ let allDemoGroups = [
 			{
 				options: donutDemos.donutOptions,
 				data: donutDemos.donutData,
+				chartType: chartTypes.DonutChart,
+				isDemoExample: true
+			},
+			{
+				options: donutDemos.donutEmptyStateOptions,
+				data: donutDemos.donutEmptyStateData,
+				chartType: chartTypes.DonutChart,
+				isDemoExample: true
+			},
+			{
+				options: donutDemos.donutSkeletonOptions,
+				data: donutDemos.donutSkeletonData,
 				chartType: chartTypes.DonutChart,
 				isDemoExample: true
 			}
@@ -217,6 +320,16 @@ let allDemoGroups = [
 			{
 				options: lineDemos.lineTimeSeriesWithThresholdsOptions,
 				data: lineDemos.lineTimeSeriesData,
+        chartType: chartTypes.LineChart
+      },
+      {
+				options: lineDemos.lineEmptyStateOptions,
+				data: lineDemos.lineEmptyStateData,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineSkeletonOptions,
+				data: lineDemos.lineSkeletonData,
 				chartType: chartTypes.LineChart
 			}
 		]
@@ -227,6 +340,18 @@ let allDemoGroups = [
 			{
 				options: pieDemos.pieOptions,
 				data: pieDemos.pieData,
+				chartType: chartTypes.PieChart,
+				isDemoExample: true
+			},
+			{
+				options: pieDemos.pieEmptyStateOptions,
+				data: pieDemos.pieEmptyStateData,
+				chartType: chartTypes.PieChart,
+				isDemoExample: true
+			},
+			{
+				options: pieDemos.pieSkeletonOptions,
+				data: pieDemos.pieSkeletonData,
 				chartType: chartTypes.PieChart,
 				isDemoExample: true
 			}
@@ -252,6 +377,18 @@ let allDemoGroups = [
 				data: scatterDemos.scatterDiscreteData,
 				chartType: chartTypes.ScatterChart,
 				isDemoExample: true
+			},
+			{
+				options: scatterDemos.scatterEmptyStateOptions,
+				data: scatterDemos.scatterEmptyStateData,
+				chartType: chartTypes.ScatterChart,
+				isDemoExample: true
+			},
+			{
+				options: scatterDemos.scatterSkeletonOptions,
+				data: scatterDemos.scatterSkeletonData,
+				chartType: chartTypes.ScatterChart,
+				isDemoExample: true
 			}
 		]
 	},
@@ -267,6 +404,18 @@ let allDemoGroups = [
 			{
 				options: stepDemos.stepTimeSeriesOptions,
 				data: stepDemos.stepTimeSeriesData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: true
+			},
+			{
+				options: stepDemos.stepEmptyStateOptions,
+				data: stepDemos.stepEmptyStateData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: true
+			},
+			{
+				options: stepDemos.stepSkeletonOptions,
+				data: stepDemos.stepSkeletonData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: true
 			}
@@ -339,6 +488,26 @@ let allDemoGroups = [
 				data: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainData,
 				options: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainOptions,
 				chartType: chartTypes.LineChart
+			}
+		]
+	},
+	{
+		title: "Radar",
+		demos: [
+			{
+				data: radarDemos.radarData,
+				options: radarDemos.radarOptions,
+				chartType: chartTypes.RadarChart
+			},
+			{
+				data: radarDemos.radarWithMissingDataData,
+				options: radarDemos.radarWithMissingDataOptions,
+				chartType: chartTypes.RadarChart
+			},
+			{
+				data: radarDemos.radarDenseData,
+				options: radarDemos.radarDenseOptions,
+				chartType: chartTypes.RadarChart
 			}
 		]
 	}

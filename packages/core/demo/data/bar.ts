@@ -120,7 +120,7 @@ export const simpleBarTimeSeriesOptions = {
 		},
 		bottom: {
 			mapsTo: "date",
-			scaleType: "time",
+			scaleType: "time"
 		}
 	},
 	timeScale: { "localeObject": trLocaleObject }
@@ -215,7 +215,7 @@ export const stackedBarTimeSeriesData = [
 	{ group: "Dataset 4", date: new Date(2019, 0, 6), value: 37312 },
 	{ group: "Dataset 4", date: new Date(2019, 0, 8), value: 51432 },
 	{ group: "Dataset 4", date: new Date(2019, 0, 15), value: 40323 },
-	{ group: "Dataset 4", date: new Date(2019, 0, 19), value: 31300 },
+	{ group: "Dataset 4", date: new Date(2019, 0, 19), value: 31300 }
 ];
 
 export const stackedBarTimeSeriesOptions = {
@@ -246,3 +246,201 @@ export const stackedHorizontalBarTimeSeriesOptions = {
 };
 
 export const stackedHorizontalBarTimeSeriesData = stackedBarTimeSeriesData;
+
+// simple bar - empty state
+export const simpleBarEmptyStateData = [];
+export const simpleBarEmptyStateOptions = {
+	title: "Simple bar (empty state)",
+	axes: {
+		left: {
+			primary: true
+		},
+		bottom: {
+			scaleType: "labels",
+			secondary: true
+		}
+	}
+};
+
+// simple bar - skeleton
+export const simpleBarSkeletonData = [];
+export const simpleBarSkeletonOptions = {
+	title: "Simple bar (skeleton)",
+	axes: {
+		left: {
+			primary: true
+		},
+		bottom: {
+			scaleType: "labels",
+			secondary: true
+		}
+	},
+	data: {
+		loading: true
+	}
+};
+
+// grouped bar - empty state
+export const groupedBarEmptyStateData = [];
+export const groupedBarEmptyStateOptions = {
+	title: "Grouped bar (empty state)",
+	axes: {
+		left: {
+			primary: true
+		},
+		bottom: {
+			scaleType: "labels",
+			secondary: true
+		}
+	}
+};
+
+// grouped bar - skeleton
+export const groupedBarSkeletonData = [];
+export const groupedBarSkeletonOptions = {
+	title: "Grouped bar (skeleton)",
+	axes: {
+		left: {
+			primary: true
+		},
+		bottom: {
+			scaleType: "labels",
+			secondary: true
+		}
+	},
+	data: {
+		loading: true
+	}
+};
+
+// stacked bar - empty state
+export const stackedBarEmptyStateData = [];
+export const stackedBarEmptyStateOptions = {
+	title: "Stacked bar (empty state)",
+	axes: {
+		left: {
+			primary: true
+		},
+		bottom: {
+			scaleType: "labels",
+			secondary: true
+		}
+	}
+};
+
+// stacked bar - skeleton
+export const stackedBarSkeletonData = [];
+export const stackedBarSkeletonOptions = {
+	title: "Stacked bar (skeleton)",
+	axes: {
+		left: {
+			primary: true
+		},
+		bottom: {
+			scaleType: "labels",
+			secondary: true
+		}
+	},
+	data: {
+		loading: true
+	}
+};
+
+// simple horizontal bar - empty state
+export const simpleHorizontalBarEmptyStateData = [];
+export const simpleHorizontalBarEmptyStateOptions = {
+	title: "Simple horizontal bar (empty state)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true
+		}
+	}
+};
+
+// simple horizontal bar - skeleton
+export const simpleHorizontalBarSkeletonData = [];
+export const simpleHorizontalBarSkeletonOptions = {
+	title: "Simple horizontal bar (skeleton)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true
+		}
+	},
+	data: {
+		loading: true
+	}
+};
+
+// grouped horizontal bar - empty state
+export const groupedHorizontalBarEmptyStateData = [];
+export const groupedHorizontalBarEmptyStateOptions = {
+	title: "Grouped horizontal bar (empty state)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true
+		}
+	}
+};
+
+// grouped horizontal bar - skeleton
+export const groupedHorizontalBarSkeletonData = [];
+export const groupedHorizontalBarSkeletonOptions = {
+	title: "Grouped horizontal bar (skeleton)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true
+		}
+	},
+	data: {
+		loading: true
+	}
+};
+
+// stacked horizontal bar - empty state
+export const stackedHorizontalBarEmptyStateData = [];
+export const stackedHorizontalBarEmptyStateOptions = {
+	title: "Stacked horizontal bar (empty state)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true
+		}
+	}
+};
+
+// stacked horizontal bar - skeleton
+export const stackedHorizontalBarSkeletonData = [];
+export const stackedHorizontalBarSkeletonOptions = {
+	title: "Stacked horizontal bar (skeleton)",
+	axes: {
+		left: {
+			primary: true,
+			scaleType: "labels"
+		},
+		bottom: {
+			secondary: true
+		}
+	},
+	data: {
+		loading: true
+	}
+};
