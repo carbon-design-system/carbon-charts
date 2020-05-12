@@ -2,6 +2,7 @@ export * from "./component";
 
 // ESSENTIALS
 export * from "./essentials/legend";
+export * from "./essentials/threshold";
 export * from "./essentials/title";
 export * from "./essentials/tooltip";
 export * from "./essentials/tooltip-bar";

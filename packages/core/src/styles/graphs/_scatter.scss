@@ -12,6 +12,10 @@ g.#{$prefix}--#{$charts-prefix}--scatter {
 		stroke-width: 1.5;
 	}
 
+	circle.dot.threshold-anomaly {
+		stroke-width: 3;
+	}
+
 	g.lines path.line {
 		mix-blend-mode: multiply;
 	}
