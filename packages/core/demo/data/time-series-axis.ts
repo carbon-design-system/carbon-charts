@@ -350,8 +350,5 @@ export const lineTimeSeriesNoExtendedDomainOptions = {
 	timeScale: {
 		addSpaceOnEdges: 0
 	},
-	points: {
-		radius: 1
-	},
 	filled: false
 };
