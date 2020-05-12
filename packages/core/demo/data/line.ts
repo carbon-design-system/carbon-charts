@@ -34,6 +34,12 @@ export const lineOptions = {
 			title: "Conversion rate",
 			scaleType: "linear"
 		}
+	},
+	chartTypes: { // TODO
+		"line": [
+			"Dataset 4",
+			"Dataset 1"
+		]
 	}
 };
 
@@ -191,4 +197,45 @@ export const lineTimeSeriesHorizontalOptions = {
 		}
 	},
 	curve: "curveMonotoneY"
+};
+
+// line - empty state
+export const lineEmptyStateData = [];
+export const lineEmptyStateOptions = {
+	title: "Line (empty state)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time"
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	},
+	curve: "curveMonotoneX"
+};
+
+// line - skeleton
+export const lineSkeletonData = [];
+export const lineSkeletonOptions = {
+	title: "Line (skeleton)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time"
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	},
+	curve: "curveMonotoneX",
+	data: {
+		loading: true
+	}
 };

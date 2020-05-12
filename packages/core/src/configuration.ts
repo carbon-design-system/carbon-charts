@@ -141,7 +141,8 @@ const chart: BaseChartOptions = {
 		prefix: "cc"
 	},
 	data: {
-		groupMapsTo: "group"
+		groupMapsTo: "group",
+		loading: false
 	},
 	color: {
 		scale: null
