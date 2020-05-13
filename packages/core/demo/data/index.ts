@@ -488,6 +488,36 @@ let allDemoGroups = [
 				data: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainData,
 				options: timeSeriesAxisDemos.lineTimeSeriesNoExtendedDomainOptions,
 				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataTwoIdenticalLabels,
+				options: timeSeriesAxisDemos.lineTimeSeriesTwoIdenticalLabelsOptions,
+				chartType: chartTypes.LineChart
+			},
+			{
+				data: timeSeriesAxisDemos.lineTimeSeriesDataAllLabelsInPrimaryFormat,
+				options: timeSeriesAxisDemos.lineTimeSeriesAllLabelsInPrimaryFormatOptions,
+				chartType: chartTypes.LineChart
+			}
+		]
+	},
+	{
+		title: "Radar",
+		demos: [
+			{
+				data: radarDemos.radarData,
+				options: radarDemos.radarOptions,
+				chartType: chartTypes.RadarChart
+			},
+			{
+				data: radarDemos.radarWithMissingDataData,
+				options: radarDemos.radarWithMissingDataOptions,
+				chartType: chartTypes.RadarChart
+			},
+			{
+				data: radarDemos.radarDenseData,
+				options: radarDemos.radarDenseOptions,
+				chartType: chartTypes.RadarChart
 			}
 		]
 	},
