@@ -6,6 +6,7 @@ import DonutChart from "./DonutChart.svelte";
 import LineChart from "./LineChart.svelte";
 import PieChart from "./PieChart.svelte";
 import ScatterChart from "./ScatterChart.svelte";
+import RadarChart from "./RadarChart.svelte";
 
 export {
 	BarChartGrouped,
@@ -15,5 +16,6 @@ export {
 	DonutChart,
 	LineChart,
 	PieChart,
-	ScatterChart
+	ScatterChart,
+	RadarChart
 };

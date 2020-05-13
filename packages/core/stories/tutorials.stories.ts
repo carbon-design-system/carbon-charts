@@ -81,8 +81,6 @@ gettingStartedStories.add("Vue", () => {
 	return container;
 });
 
-
-
 // Add the tutorial(s) after getting started
 tutorialStories.add("Tabular data format", () => {
 	// container creation

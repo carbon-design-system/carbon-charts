@@ -58,6 +58,10 @@ export interface BaseChartOptions {
 		 * identifier for data groups
 		 */
 		groupMapsTo?: string;
+		/**
+		 * used to simulate data loading
+		 */
+		loading?: Boolean;
 	};
 	/**
 	 * options related to color scales
@@ -187,5 +191,27 @@ export interface DonutChartOptions extends PieChartOptions {
 			titleYPosition?: Function;
 			numberFormatter?: Function;
 		};
+	};
+}
+
+/**
+ * options specific to radar charts
+ */
+export interface RadarChartOptions extends BaseChartOptions {
+	radar?: {
+		opacity: {
+			unselected: number,
+			selected: number
+		},
+		axes: {
+			angle: string,
+			value: string
+		}
+		xLabelPadding: number,
+		yLabelPadding: number,
+		yTicksNumber: number,
+		minRange: number,
+		xAxisRectHeight: number,
+		dotsRadius: number
 	};
 }

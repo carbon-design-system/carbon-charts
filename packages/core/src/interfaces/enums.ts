@@ -104,3 +104,31 @@ export enum CalloutDirections {
 	LEFT = "left",
 	RIGHT = "right"
 }
+
+/**
+ * enum of all possible skeleton/empty state types
+ */
+export enum Skeletons {
+	GRID = "grid",
+	VERT_OR_HORIZ = "vertOrHoriz",
+	PIE = "pie",
+	DONUT = "donut"
+}
+
+/**
+ * enum of all possible attributes used to aling text horizontally
+ */
+export enum TextAnchor {
+	START = "start",
+	MIDDLE = "middle",
+	END = "end"
+}
+
+/**
+ * enum of all possible attributes used to aling text vertically
+ */
+export enum DominantBaseline {
+	BASELINE = "baseline",
+	MIDDLE = "middle",
+	HANGING = "hanging"
+}

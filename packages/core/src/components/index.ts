@@ -2,11 +2,13 @@ export * from "./component";
 
 // ESSENTIALS
 export * from "./essentials/legend";
+export * from "./essentials/threshold";
 export * from "./essentials/title";
 export * from "./essentials/tooltip";
 export * from "./essentials/tooltip-bar";
 export * from "./essentials/tooltip-pie";
 export * from "./essentials/tooltip-scatter";
+export * from "./essentials/tooltip-radar";
 
 // GRAPHS
 export * from "./graphs/bar-simple";
@@ -17,6 +19,7 @@ export * from "./graphs/line";
 export * from "./graphs/scatter";
 export * from "./graphs/pie";
 export * from "./graphs/donut";
+export * from "./graphs/skeleton";
 
 // Layout
 export * from "./layout/spacer";

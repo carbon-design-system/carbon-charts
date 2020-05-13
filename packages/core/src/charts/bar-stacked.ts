@@ -6,6 +6,7 @@ import {
 	ScatterChartOptions
 } from "../interfaces/index";
 import { Tools } from "../tools";
+import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
@@ -16,7 +17,8 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TooltipBar
+	TooltipBar,
+	Skeleton
 } from "../components/index";
 
 export class StackedBarChart extends AxisChart {
@@ -41,7 +43,8 @@ export class StackedBarChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
-			new StackedBar(this.model, this.services)
+			new StackedBar(this.model, this.services),
+			new Skeleton(this.model, this.services, { skeleton: Skeletons.VERT_OR_HORIZ })
 		];
 
 		const components: any[] = this.getAxisChartComponents(graphFrameComponents);
