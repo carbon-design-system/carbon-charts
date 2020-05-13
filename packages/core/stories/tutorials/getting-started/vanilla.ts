@@ -2,6 +2,7 @@ import marked from "marked";
 
 export const vanillaTutorial = marked(`
 # Carbon Charts - VanillaJS
+
 The Carbon Charts Vanilla library provides a collection of reusable charting components
 to build websites and user interfaces. Adopting the library enables developers to use
 consistent markup, styles, and behavior in prototype and production work.
@@ -92,9 +93,9 @@ See tutorial on tabular data format for more information on chart data.
 
 &nbsp;
 ## Options
+
 You can see the options for all charts
 [here](https://github.com/carbon-design-system/carbon-charts/tree/master/packages/core/src/configuration.ts).
-
 
 &nbsp;
 ## Demos and Examples
@@ -102,6 +103,7 @@ You can see the options for all charts
 
 &nbsp;
 ## Guidance
+
 Please refer to the
 [Carbon Design Systems guidance](https://www.carbondesignsystem.com/data-visualization/chart-types)
 on using the different charts available in this library.
@@ -115,7 +117,6 @@ before starting any work.
 #### Using the server
 We recommend the use of
 [Webpack Dev Server](https://github.com/webpack/webpack-dev-server) for developing components.
-
 
 **Start the server:**
 \`\`\`bash
@@ -131,6 +132,7 @@ View available components [here](https://github.com/carbon-design-system/carbon-
 
 &nbsp;
 ## Troubleshoot
+
 If you experience any issues while getting set up with Carbon Charts, please head
 over to the [GitHub repo](https://github.com/carbon-design-system/carbon-charts)
 for more guidelines and support.

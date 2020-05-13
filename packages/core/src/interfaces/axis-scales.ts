@@ -1,6 +1,7 @@
 import { ScaleTypes } from "./enums";
 import { AxisDomain } from "d3";
 import { Locale } from "date-fns";
+import { ThresholdOptions } from "./components";
 
 /**
  * options to configure a scale. not all options are used by all scales
@@ -32,6 +33,16 @@ export interface AxisOptions {
 	 * optional title for the scales
 	 */
 	title?: string;
+	/**
+	 * thresholds
+	 * Example:
+	 * [
+	 *		{value: 10000},
+	 *		{value: 40020, valueFormatter: (x) => x},
+	 *		{value: 55000, label: "Custom label", fillColor: "#03a9f4"},
+	 * ]
+	 */
+	thresholds?: ThresholdOptions[];
 	/**
 	 * tick configuration
 	 */

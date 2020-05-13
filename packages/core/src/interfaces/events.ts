@@ -82,6 +82,14 @@ export enum Tooltip {
 }
 
 /**
+ * enum of all threshold events
+ */
+export enum Threshold {
+	SHOW = "show-threshold",
+	HIDE = "hide-threshold"
+}
+
+/**
  * enum of all legend related events
  */
 export enum Legend {
