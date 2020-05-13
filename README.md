@@ -45,7 +45,10 @@ Read the release change logs [here](./CHANGELOG.md)
 | Pie         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Step        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Scatter     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Area        | :hourglass_flowing_sand: | - | - | - |
+| Radar     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Area        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
+| Gauge        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
+| Combo        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
 
 ## Bugs and feature requests
 
