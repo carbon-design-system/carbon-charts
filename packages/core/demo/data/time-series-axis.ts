@@ -351,3 +351,70 @@ export const lineTimeSeriesNoExtendedDomainOptions = {
 		addSpaceOnEdges: 0
 	}
 };
+
+// bug two identical labels
+export const lineTimeSeriesDataTwoIdenticalLabels = {
+	labels: ["Qty"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			data: [
+				{ date: new Date(2020, 0, 23, 23, 0), value: 10 },
+				{ date: new Date(2020, 1, 9, 23, 0), value: 10 }
+			]
+		}
+	]
+};
+
+export const lineTimeSeriesTwoIdenticalLabelsOptions = {
+	title: "Line (time series) - Two identical labels",
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: "time"
+		}
+	},
+	timeScale: {
+		addSpaceOnEdges: 0
+	}
+};
+
+export const lineTimeSeriesTwoIdenticalLabels2Options = {
+	title: "Line (time series) - Two identical labels 2",
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: "time"
+		}
+	},
+	timeScale: {
+		addSpaceOnEdges: 0
+	}
+};
+
+// bug all labels in primary format
+export const lineTimeSeriesDataAllLabelsInPrimaryFormat = {
+	labels: ["Qty"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			data: [
+				{ date: new Date(2020, 0, 23, 1, 0), value: 10 },
+				{ date: new Date(2020, 0, 29, 1, 0), value: 10 }
+			]
+		}
+	]
+};
+
+export const lineTimeSeriesAllLabelsInPrimaryFormatOptions = {
+	title: "Line (time series) - All labels in primary format",
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: "time"
+		}
+	},
+	timeScale: {
+		addSpaceOnEdges: 0
+	}
+};

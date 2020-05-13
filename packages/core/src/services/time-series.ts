@@ -83,12 +83,13 @@ function getConsecutiveDifferences(elements: number[]): number[] {
 	return elements.slice(1).map((elem, i) => elem - elements[i]);
 }
 
-// Given a number, return the closest TIME_INTERVAL name
-function closestTimeIntervalName(ms: number): string {
-	const index = TIME_INTERVALS.reduce((acc, [key, value]: [string, number], i) => {
-		const previousSpan = Math.abs(acc - ms);
-		const currentSpan = Math.abs(value - ms);
-		return previousSpan < currentSpan ? acc : i;
+// Given a duration in ms, return the closest TIME_INTERVAL name
+function closestTimeIntervalName(duration: number): string {
+	const index = TIME_INTERVALS.reduce((nearestIndex, [intervalName, delta]: [string, number], i) => {
+		const deltaNearest = TIME_INTERVALS[nearestIndex][1] as number;
+		const oldNearestSpan = Math.abs(deltaNearest - duration);
+		const currentSpan = Math.abs(delta - duration);
+		return oldNearestSpan < currentSpan ? nearestIndex : i;
 	}, 0);
 	return TIME_INTERVALS[index][0] as string;
 }
