@@ -214,10 +214,14 @@ export class CartesianScales extends Service {
 
 	protected findMainVerticalAxisPosition() {
 		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, "axes");
+		const axesOptions = Tools.getProperty(options, "axes");
 
 		// If right axis has been specified as `main`
-		if (Tools.getProperty(axisOptions, AxisPositions.RIGHT, "main") === true) {
+		if (
+			(Tools.getProperty(axesOptions, AxisPositions.LEFT) === null &&
+				Tools.getProperty(axesOptions, AxisPositions.RIGHT) !== null) ||
+				Tools.getProperty(axesOptions, AxisPositions.RIGHT, "main") === true
+		) {
 			return AxisPositions.RIGHT;
 		}
 
@@ -226,10 +230,14 @@ export class CartesianScales extends Service {
 
 	protected findMainHorizontalAxisPosition() {
 		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, "axes");
+		const axesOptions = Tools.getProperty(options, "axes");
 
 		// If top axis has been specified as `main`
-		if (Tools.getProperty(axisOptions, AxisPositions.TOP, "main") === true) {
+		if (
+			(Tools.getProperty(axesOptions, AxisPositions.BOTTOM) === null &&
+				Tools.getProperty(axesOptions, AxisPositions.TOP) !== null) ||
+				Tools.getProperty(axesOptions, AxisPositions.TOP, "main") === true
+		) {
 			return AxisPositions.TOP;
 		}
 
