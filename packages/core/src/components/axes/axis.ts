@@ -279,8 +279,8 @@ export class Axis extends Component {
 				}
 
 				container.selectAll("g.ticks g.tick text")
-					.attr("transform", `rotate(45)`)
-					.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
+					.attr("transform", `rotate(-45)`)
+					.style("text-anchor", axisPosition === AxisPositions.TOP ? "start" : "end");
 			} else {
 				container.selectAll("g.ticks g.tick text")
 					.attr("transform", null)
