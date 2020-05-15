@@ -1,4 +1,3 @@
-
 .#{$prefix}--#{$charts-prefix}--radar {
 	.blobs path {
 		stroke-width: 1.5px;
@@ -13,7 +12,10 @@
 	.x-axes line.hovered {
 		@if $ui-background == map-get($carbon--theme--g90, "ui-background") {
 			stroke: $carbon--white-0;
-		} @else if $ui-background == map-get($carbon--theme--g100, "ui-background") {
+		} @else if
+			$ui-background ==
+			map-get($carbon--theme--g100, "ui-background")
+		{
 			stroke: $carbon--white-0;
 		} @else {
 			stroke: $carbon--black-100;

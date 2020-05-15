@@ -20,10 +20,10 @@ export interface AxisOptions {
 	 */
 	domain?: AxisDomain[];
 	/**
-	* Whether the Axis should be forced to include 0 as a starting point
-	* (or ending point, in case of all negative axis).
-	* Default: true
-	*/
+	 * Whether the Axis should be forced to include 0 as a starting point
+	 * (or ending point, in case of all negative axis).
+	 * Default: true
+	 */
 	includeZero?: boolean;
 	/**
 	 * identifies what key within the data the axis values would map to
@@ -101,17 +101,16 @@ export interface TickFormats {
 	secondary?: string;
 }
 
-
 export interface TimeIntervalFormats {
 	"15seconds"?: TickFormats;
-	"minute"?: TickFormats;
+	minute?: TickFormats;
 	"30minutes"?: TickFormats;
-	"hourly"?: TickFormats;
-	"daily"?: TickFormats;
-	"weekly"?: TickFormats;
-	"monthly"?: TickFormats;
-	"quarterly"?: TickFormats;
-	"yearly"?: TickFormats;
+	hourly?: TickFormats;
+	daily?: TickFormats;
+	weekly?: TickFormats;
+	monthly?: TickFormats;
+	quarterly?: TickFormats;
+	yearly?: TickFormats;
 }
 
 /**

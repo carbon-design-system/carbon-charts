@@ -14,6 +14,7 @@
 		"test": "karma start --single-run",
 		"test:watch": "karma start --no-single-run",
 		"clean": "rm -rf dist demo/bundle",
+		"prettier": "prettier . --write",
 		"start": "yarn run storybook",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./.storybook/assets"
 	},
@@ -97,6 +98,7 @@
 		"lerna": "3.13.4",
 		"marked": "0.8.2",
 		"mini-css-extract-plugin": "0.9.0",
+		"prettier": "2.0.5",
 		"raw-loader": "0.5.1",
 		"react-docgen-typescript-loader": "^3.6.0",
 		"rollup": "1.27.10",
@@ -114,7 +116,7 @@
 		"typescript": "3.7.5",
 		"url-loader": "0.6.2",
 		"webpack": "4.41.0",
-		"webpack-cli": "3.3.9",
+		"webpack-cli": "3.3.11",
 		"webpack-dev-server": "3.7.0"
 	},
 	"publishConfig": {

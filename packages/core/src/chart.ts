@@ -5,33 +5,30 @@ import {
 	LayoutGrowth,
 	LayoutDirection,
 	LegendOrientations,
-	Events as ChartEvents
+	Events as ChartEvents,
 } from "./interfaces";
 
 // Misc
 import { ChartModel } from "./model";
-import { Component,
+import {
+	Component,
 	Title,
 	Legend,
 	LayoutComponent,
 	Tooltip,
-	Spacer
+	Spacer,
 } from "./components";
 import { Tools } from "./tools";
 
 // Services
-import {
-	DOMUtils,
-	Events,
-	Transitions
-} from "./services/index";
+import { DOMUtils, Events, Transitions } from "./services/index";
 
 export class Chart {
 	components: Component[];
 	services: any = {
 		domUtils: DOMUtils,
 		events: Events,
-		transitions: Transitions
+		transitions: Transitions,
 	};
 	model: ChartModel = new ChartModel(this.services);
 
@@ -43,25 +40,26 @@ export class Chart {
 		this.model.set({ holder }, true);
 
 		// Initialize all services
-		Object.keys(this.services).forEach(serviceName => {
+		Object.keys(this.services).forEach((serviceName) => {
 			const serviceObj = this.services[serviceName];
-			this.services[serviceName] = new serviceObj(this.model, this.services);
+			this.services[serviceName] = new serviceObj(
+				this.model,
+				this.services
+			);
 		});
 
 		// Call update() when model has been updated
-		this.services.events
-			.addEventListener(ChartEvents.Model.UPDATE, () => {
-				this.update(true);
-			});
+		this.services.events.addEventListener(ChartEvents.Model.UPDATE, () => {
+			this.update(true);
+		});
 
 		// Set model data & options
 		this.model.setData(chartConfigs.data);
 
 		// Set chart resize event listener
-		this.services.events
-			.addEventListener(ChartEvents.Chart.RESIZE, () => {
-				this.update(false);
-			});
+		this.services.events.addEventListener(ChartEvents.Chart.RESIZE, () => {
+			this.update(false);
+		});
 
 		this.components = this.getComponents();
 
@@ -74,41 +72,40 @@ export class Chart {
 		return null;
 	}
 
-
-
 	update(animate = true) {
 		if (!this.components) {
 			return;
 		}
 
 		// Update all services
-		Object.keys(this.services).forEach(serviceName => {
+		Object.keys(this.services).forEach((serviceName) => {
 			const serviceObj = this.services[serviceName];
 			serviceObj.update();
 		});
 
 		// Render all components
-		this.components.forEach(component => component.render(animate));
+		this.components.forEach((component) => component.render(animate));
 
 		// Asynchronously dispatch a "render-finished" event
 		// This is needed because of d3-transitions
 		// Since at the start of the transition
 		// Elements do not hold their final size or position
 		const pendingTransitions = this.services.transitions.getPendingTransitions();
-		const promises = Object.keys(pendingTransitions)
-			.map(transitionID => {
-				const transition = pendingTransitions[transitionID];
-				return transition.end()
-					.catch(e => e); // Skip rejects since we don't care about those;
-			});
+		const promises = Object.keys(pendingTransitions).map((transitionID) => {
+			const transition = pendingTransitions[transitionID];
+			return transition.end().catch((e) => e); // Skip rejects since we don't care about those;
+		});
 
-		Promise.all(promises)
-			.then(() => this.services.events.dispatchEvent(ChartEvents.Chart.RENDER_FINISHED));
+		Promise.all(promises).then(() =>
+			this.services.events.dispatchEvent(
+				ChartEvents.Chart.RENDER_FINISHED
+			)
+		);
 	}
 
 	destroy() {
 		// Call the destroy() method on all components
-		this.components.forEach(component => component.destroy());
+		this.components.forEach((component) => component.destroy());
 
 		// Remove the chart holder
 		this.services.domUtils.getHolder().remove();
@@ -116,28 +113,23 @@ export class Chart {
 		this.model.set({ destroyed: true }, true);
 	}
 
-
 	protected getChartComponents(graphFrameComponents: any[]) {
 		const titleComponent = {
 			id: "title",
-			components: [
-				new Title(this.model, this.services)
-			],
+			components: [new Title(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		const legendComponent = {
 			id: "legend",
-			components: [
-				new Legend(this.model, this.services)
-			],
+			components: [new Legend(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		const graphFrameComponent = {
@@ -145,27 +137,34 @@ export class Chart {
 			components: graphFrameComponents,
 			growth: {
 				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
-		const isLegendEnabled = this.model.getOptions().legend.enabled !== false;
+		const isLegendEnabled =
+			this.model.getOptions().legend.enabled !== false;
 		// TODORF - REUSE BETWEEN AXISCHART & CHART
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
 		if (isLegendEnabled) {
-				const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
+			const legendPosition = Tools.getProperty(
+				this.model.getOptions(),
+				"legend",
+				"position"
+			);
 			if (legendPosition === "left") {
 				fullFrameComponentDirection = LayoutDirection.ROW;
 
 				if (!this.model.getOptions().legend.orientation) {
-					this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+					this.model.getOptions().legend.orientation =
+						LegendOrientations.VERTICAL;
 				}
 			} else if (legendPosition === "right") {
 				fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
 
 				if (!this.model.getOptions().legend.orientation) {
-					this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+					this.model.getOptions().legend.orientation =
+						LegendOrientations.VERTICAL;
 				}
 			} else if (legendPosition === "bottom") {
 				fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
@@ -174,13 +173,11 @@ export class Chart {
 
 		const legendSpacerComponent = {
 			id: "spacer",
-			components: [
-				new Spacer(this.model, this.services)
-			],
+			components: [new Spacer(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		const fullFrameComponent = {
@@ -190,19 +187,19 @@ export class Chart {
 					this.model,
 					this.services,
 					[
-						...(isLegendEnabled ? [ legendComponent ] : [ ]),
+						...(isLegendEnabled ? [legendComponent] : []),
 						legendSpacerComponent,
-						graphFrameComponent
+						graphFrameComponent,
 					],
 					{
-						direction: fullFrameComponentDirection
+						direction: fullFrameComponentDirection,
 					}
-				)
+				),
 			],
 			growth: {
 				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		// Add chart title if it exists
@@ -212,13 +209,11 @@ export class Chart {
 
 			const titleSpacerComponent = {
 				id: "spacer",
-				components: [
-					new Spacer(this.model, this.services)
-				],
+				components: [new Spacer(this.model, this.services)],
 				growth: {
 					x: LayoutGrowth.PREFERRED,
-					y: LayoutGrowth.FIXED
-				}
+					y: LayoutGrowth.FIXED,
+				},
 			};
 
 			topLevelLayoutComponents.push(titleSpacerComponent);
@@ -231,9 +226,9 @@ export class Chart {
 				this.services,
 				topLevelLayoutComponents,
 				{
-					direction: LayoutDirection.COLUMN
+					direction: LayoutDirection.COLUMN,
 				}
-			)
+			),
 		];
 	}
 }

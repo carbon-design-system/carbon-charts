@@ -9,7 +9,7 @@ import { Events } from "./../../interfaces";
 import { select } from "d3-selection";
 
 describe("title component", () => {
-	beforeEach(function() {
+	beforeEach(function () {
 		const testEnvironment = new TestEnvironment();
 		testEnvironment.render();
 
@@ -18,15 +18,20 @@ describe("title component", () => {
 	});
 
 	describe("content", () => {
-		it("should match text provided in options", function(done) {
+		it("should match text provided in options", function (done) {
 			const sampleTitle = "My chart";
 
 			const chartEventsService = this.chart.services.events;
 			const renderCb = () => {
-				const title = select(`g.${settings.prefix}--${options.chart.style.prefix}--title`);
+				const title = select(
+					`g.${settings.prefix}--${options.chart.style.prefix}--title`
+				);
 
 				// Remove event listener for when chart render is finished
-				chartEventsService.removeEventListener(Events.Chart.RENDER_FINISHED, renderCb);
+				chartEventsService.removeEventListener(
+					Events.Chart.RENDER_FINISHED,
+					renderCb
+				);
 
 				expect(title.select("text").html()).toEqual(sampleTitle);
 
@@ -34,7 +39,10 @@ describe("title component", () => {
 			};
 
 			// Add event listener for when chart render is finished
-			chartEventsService.addEventListener(Events.Chart.RENDER_FINISHED, renderCb);
+			chartEventsService.addEventListener(
+				Events.Chart.RENDER_FINISHED,
+				renderCb
+			);
 		});
 	});
 });
