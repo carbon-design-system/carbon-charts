@@ -1,9 +1,9 @@
 import marked from "marked";
 
 export const vanillaTutorial = marked(`
-# Carbon Charts - VanillaJS
+# Carbon Charts - vanilla
 
-The Carbon Charts Vanilla library provides a collection of reusable charting components
+The Carbon Charts vanilla library provides a collection of reusable charting components
 to build websites and user interfaces. Adopting the library enables developers to use
 consistent markup, styles, and behavior in prototype and production work.
 
