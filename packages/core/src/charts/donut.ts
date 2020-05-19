@@ -6,6 +6,7 @@ import {
 	PieChartOptions
 } from "../interfaces/index";
 import { Tools } from "../tools";
+import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
@@ -13,6 +14,7 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
 	LayoutComponent,
+	Skeleton,
 	TooltipPie
 } from "../components/index";
 
@@ -36,7 +38,8 @@ export class DonutChart extends PieChart {
 	getComponents() {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [
-			new Donut(this.model, this.services)
+			new Donut(this.model, this.services),
+			new Skeleton(this.model, this.services, { skeleton: Skeletons.DONUT })
 		];
 
 		const components: any[] = this.getChartComponents(graphFrameComponents);

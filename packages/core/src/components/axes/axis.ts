@@ -121,24 +121,29 @@ export class Axis extends Component {
 				}
 			}
 
+			// scale continuous
+			// remove 0 ticks for skeleton
+			if (scale.ticks().length === 1 && scale.ticks()[0] === 0) {
+				numberOfTicks = 0;
+			}
+
 			axis.ticks(numberOfTicks);
 
 			if (isTimeScaleType) {
-				let tickValues = scale
-					.ticks(numberOfTicks)
-					.concat(scale.domain())
-					.map(date => +date)
-					.sort();
-				tickValues = Tools.removeArrayDuplicates(tickValues);
+				if (!scale.ticks(numberOfTicks).length) {
+					axis.tickValues([]);
+				} else {
+					const tickValues = scale.nice(numberOfTicks).ticks(numberOfTicks);
 
-				// Remove labels on the edges
-				// If there are more than 2 labels to show
-				if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges") && tickValues.length > 2) {
-					tickValues.splice(tickValues.length - 1, 1);
-					tickValues.splice(0, 1);
+          // Remove labels on the edges
+          // If there are more than 2 labels to show
+          if (Tools.getProperty(options, "timeScale", "addSpaceOnEdges") && tickValues.length > 2) {
+            tickValues.splice(tickValues.length - 1, 1);
+            tickValues.splice(0, 1);
+          }
+
+          axis.tickValues(tickValues);
 				}
-
-				axis.tickValues(tickValues);
 			}
 		}
 
@@ -185,9 +190,10 @@ export class Axis extends Component {
 		}
 
 		// Position the axis title
+		// check that data exists, if they don't, doesn't show the title axis
 		if (axisOptions.title) {
 			const axisTitleRef = DOMUtils.appendOrSelect(container, `text.axis-title`)
-				.html(axisOptions.title);
+				.html(this.model.isDataEmpty() ? "" : axisOptions.title);
 
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
@@ -273,13 +279,19 @@ export class Axis extends Component {
 				}
 
 				container.selectAll("g.ticks g.tick text")
-					.attr("transform", `rotate(45)`)
-					.style("text-anchor", axisPosition === AxisPositions.TOP ? "end" : "start");
+					.attr("transform", `rotate(-45)`)
+					.style("text-anchor", axisPosition === AxisPositions.TOP ? "start" : "end");
 			} else {
 				container.selectAll("g.ticks g.tick text")
 					.attr("transform", null)
 					.style("text-anchor", null);
 			}
+		}
+
+		// we don't need to show axes on empty state and on skeleton state
+		// because the Skeleton component draws them
+		if (this.model.isDataEmpty()) {
+			container.attr("opacity", 0);
 		}
 
 		// Add event listeners to elements drawn

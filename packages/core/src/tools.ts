@@ -107,10 +107,18 @@ export namespace Tools {
 	 * @returns an object containing the translated x and y values or null
 	 */
 	export function getTranslationValues(elementRef: HTMLElement) {
+		if (!elementRef) {
+			return;
+		}
+
 		// regex to ONLY get values for translate (instead of all rotate, translate, skew, etc)
 		const translateRegex = /translate\([0-9]+\.?[0-9]*,[0-9]+\.?[0-9]*\)/;
 
 		const transformStr = elementRef.getAttribute("transform").match(translateRegex);
+		if (!transformStr) {
+			return null;
+		}
+
 		// check for the match
 		if (transformStr[0]) {
 			const transforms = transformStr[0].replace(/translate\(/, "").replace(/\)/, "").split(",");

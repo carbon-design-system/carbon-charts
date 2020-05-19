@@ -7,6 +7,7 @@ import CcvGaugeChart from './ccv-gauge-chart.vue';
 import CcvLineChart from './ccv-line-chart.vue';
 import CcvPieChart from './ccv-pie-chart.vue';
 import CcvScatterChart from './ccv-scatter-chart.vue';
+import CcvRadarChart from './ccv-radar-chart.vue';
 
 const components = [
 	CcvSimpleBarChart,
@@ -18,6 +19,7 @@ const components = [
 	CcvLineChart,
 	CcvPieChart,
 	CcvScatterChart,
+	CcvRadarChart,
 ];
 
 /*
@@ -62,4 +64,5 @@ export {
 	CcvLineChart,
 	CcvPieChart,
 	CcvScatterChart,
+	CcvRadarChart,
 };

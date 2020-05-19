@@ -10,3 +10,4 @@ export * from "./gauge-chart.component";
 export * from "./line-chart.component";
 export * from "./pie-chart.component";
 export * from "./scatter-chart.component";
+export * from "./radar-chart.component";

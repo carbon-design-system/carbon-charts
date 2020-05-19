@@ -1,3 +1,5 @@
+import { timeFormat } from "d3";
+
 export const lineData = [
 	{ group: "Dataset 1", key: "Qty", value: 32100 },
 	{ group: "Dataset 1", key: "More", value: 23500 },
@@ -34,6 +36,12 @@ export const lineOptions = {
 			title: "Conversion rate",
 			scaleType: "linear"
 		}
+	},
+	chartTypes: { // TODO
+		"line": [
+			"Dataset 4",
+			"Dataset 1"
+		]
 	}
 };
 
@@ -72,6 +80,34 @@ export const lineTimeSeriesOptions = {
 			mapsTo: "value",
 			title: "Conversion rate",
 			scaleType: "linear"
+		}
+	},
+	curve: "curveMonotoneX"
+};
+
+export const lineTimeSeriesWithThresholdsOptions = {
+	title: "Line with thresholds (time series)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time",
+			thresholds: [
+				{
+					value: new Date(2019, 0, 11),
+					label: "Custom formatter",
+					valueFormatter: timeFormat("%b %d")
+				}
+			]
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear",
+			thresholds: [
+				{value: 55000, label: "Custom label", fillColor: "orange"},
+				{value: 10000, fillColor: "#03a9f4"}
+			]
 		}
 	},
 	curve: "curveMonotoneX"
@@ -191,4 +227,45 @@ export const lineTimeSeriesHorizontalOptions = {
 		}
 	},
 	curve: "curveMonotoneY"
+};
+
+// line - empty state
+export const lineEmptyStateData = [];
+export const lineEmptyStateOptions = {
+	title: "Line (empty state)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time"
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	},
+	curve: "curveMonotoneX"
+};
+
+// line - skeleton
+export const lineSkeletonData = [];
+export const lineSkeletonOptions = {
+	title: "Line (skeleton)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time"
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	},
+	curve: "curveMonotoneX",
+	data: {
+		loading: true
+	}
 };

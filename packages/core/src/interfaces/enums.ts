@@ -106,6 +106,16 @@ export enum CalloutDirections {
 }
 
 /**
+ * enum of all possible skeleton/empty state types
+ */
+export enum Skeletons {
+	GRID = "grid",
+	VERT_OR_HORIZ = "vertOrHoriz",
+	PIE = "pie",
+	DONUT = "donut"
+}
+
+/**
  * enum of all possible attributes used to aling text horizontally
  */
 export enum TextAnchor {

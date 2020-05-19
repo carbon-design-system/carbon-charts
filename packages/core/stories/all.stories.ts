@@ -171,7 +171,7 @@ if (process.env.NODE_ENV !== "production") {
 				column.setAttribute("id", demo.title);
 				const chart = new ClassToInitialize(column, {
 					data: demo.data,
-					options: demo.options,
+					options: demo.options
 				});
 
 				row.appendChild(column);

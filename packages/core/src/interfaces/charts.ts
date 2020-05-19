@@ -59,6 +59,10 @@ export interface BaseChartOptions {
 		 * identifier for data groups
 		 */
 		groupMapsTo?: string;
+		/**
+		 * used to simulate data loading
+		 */
+		loading?: Boolean;
 	};
 	/**
 	 * options related to color scales

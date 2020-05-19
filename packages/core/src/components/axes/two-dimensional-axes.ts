@@ -4,11 +4,14 @@ import { AxisPositions, ScaleTypes, AxesOptions } from "../../interfaces";
 import { Axis } from "./axis";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
+import { Threshold } from "../essentials/threshold";
 
 export class TwoDimensionalAxes extends Component {
 	type = "2D-axes";
 
 	children: any = {};
+
+	thresholds: Threshold[] = [];
 
 	margins = {
 		top: 0,
@@ -94,6 +97,9 @@ export class TwoDimensionalAxes extends Component {
 					margins.right = width + offset;
 					break;
 			}
+
+			// Add thresholds
+			this.addAxisThresholds(animate, axisPosition);
 		});
 
 		// If the new margins are different than the existing ones
@@ -110,6 +116,28 @@ export class TwoDimensionalAxes extends Component {
 			});
 
 			this.render(true);
+		}
+
+	}
+
+	addAxisThresholds(animate, axisPosition) {
+		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes", axisPosition);
+		const { thresholds } = axesOptions;
+
+		if (thresholds) {
+			thresholds.forEach((thresholdConfig, i) => {
+				const thresholdComponent = new Threshold(
+					this.model,
+					this.services,
+					{...thresholdConfig, axisPosition, index: i}
+				);
+				this.thresholds.push(thresholdComponent);
+			});
+
+			this.thresholds.forEach(threshold => {
+				threshold.setParent(this.parent);
+				threshold.render(animate);
+			});
 		}
 	}
 }

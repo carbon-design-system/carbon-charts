@@ -7,6 +7,7 @@ import GaugeChart from "./gauge-chart";
 import LineChart from "./line-chart";
 import PieChart from "./pie-chart";
 import ScatterChart from "./scatter-chart";
+import RadarChart from "./radar-chart";
 
 export {
 	GroupedBarChart,
@@ -17,5 +18,6 @@ export {
 	GaugeChart,
 	LineChart,
 	PieChart,
-	ScatterChart
+	ScatterChart,
+	RadarChart
 };

@@ -82,8 +82,10 @@ const simpleBarOptions = {
 \`\`\`
 
 ##### Non-axis chart types:
+
 In the case of pie & donut the library will
 always look for the \`value\` key within your datapoints:
+
 \`\`\`js
 export const pieData = [
 	{ group: "2V2N 9KYPM version 1", value: 20000 },
@@ -96,6 +98,7 @@ export const pieData = [
 \`\`\`
 
 ##### Customizable options:
+
 You're able to customize the \`groupMapsTo\`
 which is used to determine the key within your data that
 identifies the grouping of the datapoints.
@@ -157,6 +160,7 @@ const bubbleDoubleLinearData = [
 
 You're also able to provide a custom
 \`color range\` to be used within the color scale.
+
 \`\`\`
 const simpleBarOptions = {
 	color: {

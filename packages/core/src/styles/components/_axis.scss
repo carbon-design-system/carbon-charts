@@ -3,6 +3,10 @@
 @import "./../vendor/@carbon/themes/scss/tokens";
 
 .#{$prefix}--#{$charts-prefix}--axes g.axis {
+	g.ticks.invisible {
+		visibility: hidden;
+	}
+
 	g.tick text {
 		fill: $text-02;
 		font-family: carbon--font-family("sans-condensed");
