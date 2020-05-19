@@ -11,25 +11,28 @@
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/charts @carbon/charts-vue d3
+npm install -S @carbon/charts-vue d3
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/charts @carbon/charts-vue d3
+yarn add @carbon/charts-vue d3
 ```
 
 ## Step-by-step instructions
+
 [Read on carbondesignsystem.com](https://www.carbondesignsystem.com/data-visualization/getting-started/vue)
 
 ## Codesandbox examples
+
 [Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts/vue).
 
 **When opening the link above**, click on the **Edit on Codesandbox** button for each demo to see an isolated project showing you how to reproduce the demo.
 
 ## Charting data & options
+
 Although we will definitely introduce new models in the future as we start shipping new components such as maps, Data and options follow the same model in all charts, with minor exceptions and differences in specific components.
 
 For instance in the case of a donut chart you're able to pass in an additional field called `center` in your options configuring the donut center.
