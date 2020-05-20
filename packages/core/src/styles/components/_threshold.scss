@@ -26,7 +26,7 @@
 .#{$prefix}--#{$charts-prefix}--threshold--label {
 	background-color: $red-50;
 	pointer-events: none;
-	transition: opacity .1s;
+	transition: opacity 0.1s;
 	@include carbon--motion(standard, expressive);
 	display: inline;
 	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
@@ -43,7 +43,7 @@
 
 	&.hidden {
 		opacity: 0;
-		transition: opacity .1s;
+		transition: opacity 0.1s;
 		@include carbon--motion(standard, expressive);
 	}
 }

@@ -18,16 +18,24 @@ export class Skeleton extends Component {
 	render() {
 		const svg = this.parent;
 		const parent = svg.node().parentNode;
-		const { width, height } = DOMUtils.getSVGElementSize(parent, { useAttrs: true });
+		const { width, height } = DOMUtils.getSVGElementSize(parent, {
+			useAttrs: true,
+		});
 		svg.attr("width", width).attr("height", height);
 
 		const isDataEmpty = this.model.isDataEmpty();
-		const isDataLoading = Tools.getProperty(this.model.getOptions(), "data", "loading");
+		const isDataLoading = Tools.getProperty(
+			this.model.getOptions(),
+			"data",
+			"loading"
+		);
 
 		if (isDataEmpty) {
 			this.renderSkeleton(isDataLoading);
 		} else if (!isDataEmpty && isDataLoading) {
-			throw new Error(`Something went wrong. You can't provided non-empty data and data loading together.`);
+			throw new Error(
+				`Something went wrong. You can't provided non-empty data and data loading together.`
+			);
 		} else {
 			this.removeSkeleton();
 		}
@@ -43,7 +51,9 @@ export class Skeleton extends Component {
 		} else if (this.configs.skeleton === Skeletons.DONUT) {
 			this.renderDonutSkeleton(showShimmerEffect);
 		} else {
-			throw new Error(`"${this.configs.skeleton}" is not a valid Skeleton type.`);
+			throw new Error(
+				`"${this.configs.skeleton}" is not a valid Skeleton type.`
+			);
 		}
 	}
 
@@ -98,14 +108,19 @@ export class Skeleton extends Component {
 	drawBackdrop(showShimmerEffect: boolean) {
 		const svg = this.parent;
 		const parent = svg.node().parentNode;
-		const { width, height } = DOMUtils.getSVGElementSize(parent, { useAttrs: true });
+		const { width, height } = DOMUtils.getSVGElementSize(parent, {
+			useAttrs: true,
+		});
 
-		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton.DAII").attr("width", width).attr("height", height);
+		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton.DAII")
+			.attr("width", width)
+			.attr("height", height);
 
-		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, "rect.chart-skeleton-backdrop");
-		backdropRect
-			.attr("width", "100%")
-			.attr("height", "100%");
+		const backdropRect = DOMUtils.appendOrSelect(
+			this.backdrop,
+			"rect.chart-skeleton-backdrop"
+		);
+		backdropRect.attr("width", "100%").attr("height", "100%");
 
 		const [xScaleStart, xScaleEnd] = this.xScale.range();
 		const [yScaleEnd, yScaleStart] = this.yScale.range();
@@ -123,20 +138,29 @@ export class Skeleton extends Component {
 	drawXGrid(showShimmerEffect: boolean) {
 		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
-		const ticksNumber = Tools.getProperty(this.model.getOptions(), "grid", "x", "numberOfTicks");
-		const ticksValues = this.xScale.ticks(ticksNumber).map(d => d * width);
+		const ticksNumber = Tools.getProperty(
+			this.model.getOptions(),
+			"grid",
+			"x",
+			"numberOfTicks"
+		);
+		const ticksValues = this.xScale
+			.ticks(ticksNumber)
+			.map((d) => d * width);
 
 		const xGridG = DOMUtils.appendOrSelect(this.backdrop, "g.x.skeleton");
 		const update = xGridG.selectAll("line").data(ticksValues);
-		update.enter()
+		update
+			.enter()
 			.append("line")
 			.merge(update)
-			.attr("x1", d => d)
-			.attr("x2", d => d)
+			.attr("x1", (d) => d)
+			.attr("x2", (d) => d)
 			.attr("y1", 0)
 			.attr("y2", height);
 
-		xGridG.selectAll("line")
+		xGridG
+			.selectAll("line")
 			.classed("shimmer-effect-lines", showShimmerEffect)
 			.classed("empty-state-lines", !showShimmerEffect);
 	}
@@ -144,34 +168,49 @@ export class Skeleton extends Component {
 	drawYGrid(showShimmerEffect: boolean) {
 		const height = this.backdrop.attr("height");
 		const width = this.backdrop.attr("width");
-		const ticksNumber = Tools.getProperty(this.model.getOptions(), "grid", "y", "numberOfTicks");
-		const ticksValues = this.xScale.ticks(ticksNumber).map(d => d * height);
+		const ticksNumber = Tools.getProperty(
+			this.model.getOptions(),
+			"grid",
+			"y",
+			"numberOfTicks"
+		);
+		const ticksValues = this.xScale
+			.ticks(ticksNumber)
+			.map((d) => d * height);
 
 		const yGridG = DOMUtils.appendOrSelect(this.backdrop, "g.y.skeleton");
 		const update = yGridG.selectAll("line").data(ticksValues);
-		update.enter()
+		update
+			.enter()
 			.append("line")
 			.merge(update)
 			.attr("x1", 0)
 			.attr("x2", width)
-			.attr("y1", d => d)
-			.attr("y2", d => d);
+			.attr("y1", (d) => d)
+			.attr("y2", (d) => d);
 
-		yGridG.selectAll("line")
+		yGridG
+			.selectAll("line")
 			.classed("shimmer-effect-lines", showShimmerEffect)
 			.classed("empty-state-lines", !showShimmerEffect);
 	}
 
 	drawRing(outerRadius: number, innerRadius: number, shimmer = true) {
 		const svg = this.parent;
-		const { width, height } = DOMUtils.getSVGElementSize(svg.node().parentNode, { useAttrs: true });
+		const { width, height } = DOMUtils.getSVGElementSize(
+			svg.node().parentNode,
+			{ useAttrs: true }
+		);
 
 		const container = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton")
 			.attr("width", width)
 			.attr("height", height);
 		const options = this.model.getOptions().pie;
 
-		const skeletonAreaContainer = DOMUtils.appendOrSelect(container, "rect.chart-skeleton-area-container")
+		const skeletonAreaContainer = DOMUtils.appendOrSelect(
+			container,
+			"rect.chart-skeleton-area-container"
+		)
 			.attr("width", width)
 			.attr("height", height)
 			.attr("fill", "none");
@@ -184,7 +223,8 @@ export class Skeleton extends Component {
 
 		// centering circle inside the container
 		const tcx = outerRadius + Math.abs(options.radiusOffset);
-		const tcy = outerRadius + (Math.min(width, height) - outerRadius * 2) / 2;
+		const tcy =
+			outerRadius + (Math.min(width, height) - outerRadius * 2) / 2;
 
 		DOMUtils.appendOrSelect(container, "path")
 			.attr("class", "skeleton-area-shape")
@@ -197,7 +237,10 @@ export class Skeleton extends Component {
 	// same logic in pie
 	computeOuterRadius() {
 		const options = this.model.getOptions();
-		const { width, height } = DOMUtils.getSVGElementSize(this.parent.node().parentNode, { useAttrs: true });
+		const { width, height } = DOMUtils.getSVGElementSize(
+			this.parent.node().parentNode,
+			{ useAttrs: true }
+		);
 		const radius = Math.min(width, height) / 2;
 		return radius + options.pie.radiusOffset;
 	}
@@ -214,7 +257,9 @@ export class Skeleton extends Component {
 		const stopBgShimmerClass = "stop-bg-shimmer";
 		const stopShimmerClass = "stop-shimmer";
 		const container = this.parent.select(".chart-skeleton");
-		const { width } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
+		const { width } = DOMUtils.getSVGElementSize(this.parent, {
+			useAttrs: true,
+		});
 		const startPoint = 0;
 		const endPoint = width;
 
@@ -231,19 +276,27 @@ export class Skeleton extends Component {
 		const stops = `
 			<stop class="${stopBgShimmerClass}" offset="${startPoint}"></stop>
 			<stop class="${stopShimmerClass}" offset="${startPoint + shimmerWidth}"></stop>
-			<stop class="${stopBgShimmerClass}" offset="${startPoint + 2 * shimmerWidth}"></stop>
+			<stop class="${stopBgShimmerClass}" offset="${
+			startPoint + 2 * shimmerWidth
+		}"></stop>
 		`;
 		linearGradient.html(stops);
 
 		repeat();
 		function repeat() {
 			linearGradient
-				.attr("gradientTransform", `translate(${startPoint - 3 * shimmerWidth * width}, 0)`)
+				.attr(
+					"gradientTransform",
+					`translate(${startPoint - 3 * shimmerWidth * width}, 0)`
+				)
 				.transition()
 				.duration(animationDuration)
 				.delay(delay)
 				.ease(easeLinear)
-				.attr("gradientTransform", `translate(${endPoint + 3 * shimmerWidth * width}, 0)`)
+				.attr(
+					"gradientTransform",
+					`translate(${endPoint + 3 * shimmerWidth * width}, 0)`
+				)
 				.on("end", repeat);
 		}
 	}
