@@ -27,7 +27,7 @@ $areas-shimmer-color: rgba($carbon--white-0, 0.15);
 
 	#shimmer-lines {
 		.stop-bg-shimmer {
-			stop-color: $lines-bg-color; 
+			stop-color: $lines-bg-color;
 		}
 
 		.stop-shimmer {
@@ -37,7 +37,7 @@ $areas-shimmer-color: rgba($carbon--white-0, 0.15);
 
 	// areas
 	.shimmer-effect-areas {
-		fill: url(#shimmer-areas); 
+		fill: url(#shimmer-areas);
 	}
 
 	.empty-state-areas {
@@ -54,4 +54,3 @@ $areas-shimmer-color: rgba($carbon--white-0, 0.15);
 		}
 	}
 }
-
