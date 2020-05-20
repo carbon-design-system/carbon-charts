@@ -86,7 +86,10 @@ export class CartesianScales extends Service {
 	}
 
 	determineOrientation() {
-		if (this.rangeAxisPosition === AxisPositions.LEFT && this.domainAxisPosition === AxisPositions.BOTTOM) {
+		if (
+			(this.rangeAxisPosition === AxisPositions.LEFT || this.rangeAxisPosition === AxisPositions.RIGHT) &&
+			(this.domainAxisPosition === AxisPositions.BOTTOM || this.domainAxisPosition === AxisPositions.TOP)
+		) {
 			this.orientation = CartesianOrientations.VERTICAL;
 		} else {
 			this.orientation = CartesianOrientations.HORIZONTAL;
