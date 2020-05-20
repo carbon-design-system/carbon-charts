@@ -57,6 +57,7 @@ export class AppModule {}
 ###### app.component.ts
 \`\`\`ts
 import { Component } from "@angular/core";
+import "@carbon/charts/styles.css";
 
 @Component({
   selector: "my-app",
