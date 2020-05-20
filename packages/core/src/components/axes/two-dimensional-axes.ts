@@ -17,7 +17,7 @@ export class TwoDimensionalAxes extends Component {
 		top: 0,
 		right: 0,
 		bottom: 0,
-		left: 0
+		left: 0,
 	};
 
 	render(animate = false) {
@@ -25,7 +25,7 @@ export class TwoDimensionalAxes extends Component {
 		const axisPositions = Object.keys(AxisPositions);
 		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
 
-		axisPositions.forEach(axisPosition => {
+		axisPositions.forEach((axisPosition) => {
 			const axisOptions = axesOptions[AxisPositions[axisPosition]];
 			if (axisOptions) {
 				axes[AxisPositions[axisPosition]] = true;
@@ -35,18 +35,17 @@ export class TwoDimensionalAxes extends Component {
 		this.configs.axes = axes;
 
 		// Check the configs to know which axes need to be rendered
-		axisPositions.forEach(axisPositionKey => {
+		axisPositions.forEach((axisPositionKey) => {
 			const axisPosition = AxisPositions[axisPositionKey];
-			if (this.configs.axes[axisPosition] && !this.children[axisPosition]) {
-				const axisComponent = new Axis(
-					this.model,
-					this.services,
-					{
-						position: axisPosition,
-						axes: this.configs.axes,
-						margins: this.margins
-					}
-				);
+			if (
+				this.configs.axes[axisPosition] &&
+				!this.children[axisPosition]
+			) {
+				const axisComponent = new Axis(this.model, this.services, {
+					position: axisPosition,
+					axes: this.configs.axes,
+					margins: this.margins,
+				});
 
 				// Set model, services & parent for the new axis component
 				axisComponent.setModel(this.model);
@@ -57,14 +56,14 @@ export class TwoDimensionalAxes extends Component {
 			}
 		});
 
-		Object.keys(this.children).forEach(childKey => {
+		Object.keys(this.children).forEach((childKey) => {
 			const child = this.children[childKey];
 			child.render(animate);
 		});
 
 		const margins = {} as any;
 
-		Object.keys(this.children).forEach(childKey => {
+		Object.keys(this.children).forEach((childKey) => {
 			const child = this.children[childKey];
 			const axisPosition = child.configs.position;
 
@@ -74,13 +73,18 @@ export class TwoDimensionalAxes extends Component {
 			// To be able to tell the final width & height of the axis when initiaing the transition
 			// The invisible axis is updated instantly and without a transition
 			const invisibleAxisRef = child.getInvisibleAxisRef();
-			const { width, height } = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true });
+			const {
+				width,
+				height,
+			} = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true });
 
 			let offset;
 			if (child.getTitleRef().empty()) {
 				offset = 0;
 			} else {
-				offset = DOMUtils.getSVGElementSize(child.getTitleRef(), { useBBox: true }).height;
+				offset = DOMUtils.getSVGElementSize(child.getTitleRef(), {
+					useBBox: true,
+				}).height;
 			}
 
 			switch (axisPosition) {
@@ -103,25 +107,28 @@ export class TwoDimensionalAxes extends Component {
 		});
 
 		// If the new margins are different than the existing ones
-		const isNotEqual = Object.keys(margins).some(marginKey => {
+		const isNotEqual = Object.keys(margins).some((marginKey) => {
 			return this.margins[marginKey] !== margins[marginKey];
 		});
 
 		if (isNotEqual) {
 			this.margins = Object.assign(this.margins, margins);
 
-			Object.keys(this.children).forEach(childKey => {
+			Object.keys(this.children).forEach((childKey) => {
 				const child = this.children[childKey];
 				child.margins = this.margins;
 			});
 
 			this.render(true);
 		}
-
 	}
 
 	addAxisThresholds(animate, axisPosition) {
-		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes", axisPosition);
+		const axesOptions = Tools.getProperty(
+			this.model.getOptions(),
+			"axes",
+			axisPosition
+		);
 		const { thresholds } = axesOptions;
 
 		if (thresholds) {
@@ -129,12 +136,12 @@ export class TwoDimensionalAxes extends Component {
 				const thresholdComponent = new Threshold(
 					this.model,
 					this.services,
-					{...thresholdConfig, axisPosition, index: i}
+					{ ...thresholdConfig, axisPosition, index: i }
 				);
 				this.thresholds.push(thresholdComponent);
 			});
 
-			this.thresholds.forEach(threshold => {
+			this.thresholds.forEach((threshold) => {
 				threshold.setParent(this.parent);
 				threshold.render(animate);
 			});

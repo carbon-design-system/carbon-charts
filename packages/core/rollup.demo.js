@@ -20,19 +20,16 @@ export default {
 			"d3-interpolate": "d3Interpolate",
 			"d3-axis": "d3Axis",
 			"d3-array": "d3Array",
-			"d3-hierarchy": "d3Hierarchy"
-		}
+			"d3-hierarchy": "d3Hierarchy",
+		},
 	},
-	plugins: [
-		resolve(),
-		commonjs(),
-		json(),
-		terser()
-	],
+	plugins: [resolve(), commonjs(), json(), terser()],
 	onwarn(warning, next) {
 		// logs the circular dependencies inside the d3 codebase
-		if (warning.code === "CIRCULAR_DEPENDENCY" &&
-			warning.importer.indexOf("d3") !== -1) {
+		if (
+			warning.code === "CIRCULAR_DEPENDENCY" &&
+			warning.importer.indexOf("d3") !== -1
+		) {
 			console.warn(
 				"Circular dependency found in D3:",
 				warning.toString().replace("Circular dependency:", "")
@@ -42,5 +39,5 @@ export default {
 
 		next(warning);
 	},
-	external: ["@carbon/charts"]
+	external: ["@carbon/charts"],
 };

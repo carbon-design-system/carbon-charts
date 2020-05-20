@@ -1,10 +1,7 @@
 // Internal Imports
 import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
-import {
-	BarChartOptions,
-	ChartConfig
-} from "../interfaces/index";
+import { BarChartOptions, ChartConfig } from "../interfaces/index";
 import { Tools } from "../tools";
 import { Skeletons } from "../interfaces/enums";
 
@@ -19,7 +16,7 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	Skeleton
+	Skeleton,
 } from "../components/index";
 
 export class GroupedBarChart extends AxisChart {
@@ -46,10 +43,14 @@ export class GroupedBarChart extends AxisChart {
 			new Grid(this.model, this.services),
 			new GroupedBar(this.model, this.services),
 			new ZeroLine(this.model, this.services),
-			new Skeleton(this.model, this.services, { skeleton: Skeletons.VERT_OR_HORIZ })
+			new Skeleton(this.model, this.services, {
+				skeleton: Skeletons.VERT_OR_HORIZ,
+			}),
 		];
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents);
+		const components: any[] = this.getAxisChartComponents(
+			graphFrameComponents
+		);
 		components.push(new TooltipBar(this.model, this.services));
 		return components;
 	}

@@ -10,7 +10,10 @@ import Position, { PLACEMENTS } from "@carbon/utils-position";
 
 // import the settings for the css prefix
 import settings from "carbon-components/es/globals/js/settings";
-import { formatTick, computeTimeIntervalName } from "../../services/time-series";
+import {
+	formatTick,
+	computeTimeIntervalName,
+} from "../../services/time-series";
 
 export class Threshold extends Component {
 	type = "threshold";
@@ -29,24 +32,43 @@ export class Threshold extends Component {
 
 	render(animate = false) {
 		const { value, fillColor, axisPosition, index } = this.configs;
-		const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
+		const chartprefix = Tools.getProperty(
+			this.model.getOptions(),
+			"style",
+			"prefix"
+		);
 		this.thresholdClass = `${settings.prefix}--${chartprefix}--threshold`;
 		// We can have multiple thresholds, set an unique identifier
 		this.thresholdIdentifierClass = `${axisPosition}-${index}`;
 
-		this.threshold = DOMUtils.appendOrSelect(this.parent, `g.${this.thresholdClass}.${this.thresholdIdentifierClass}`).raise();
+		this.threshold = DOMUtils.appendOrSelect(
+			this.parent,
+			`g.${this.thresholdClass}.${this.thresholdIdentifierClass}`
+		).raise();
 		// Append threshold hoverable area
-		const thresholdRect = DOMUtils.appendOrSelect(this.threshold, `rect.threshold-hoverable-area`);
+		const thresholdRect = DOMUtils.appendOrSelect(
+			this.threshold,
+			`rect.threshold-hoverable-area`
+		);
 		// Append threshold line
-		const thresholdLine = DOMUtils.appendOrSelect(this.threshold, `line.threshold-line`);
+		const thresholdLine = DOMUtils.appendOrSelect(
+			this.threshold,
+			`line.threshold-line`
+		);
 
 		// Set threshold line color from configs options
 		// If not defined, the line takes the defined CSS color
 		thresholdLine.style("stroke", fillColor);
 
-		const scale = this.services.cartesianScales.getScaleByPosition(axisPosition);
-		const isVertical = [AxisPositions.LEFT, AxisPositions.RIGHT].includes(axisPosition);
-		const scaleType = this.services.cartesianScales.getScaleTypeByPosition(axisPosition);
+		const scale = this.services.cartesianScales.getScaleByPosition(
+			axisPosition
+		);
+		const isVertical = [AxisPositions.LEFT, AxisPositions.RIGHT].includes(
+			axisPosition
+		);
+		const scaleType = this.services.cartesianScales.getScaleTypeByPosition(
+			axisPosition
+		);
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYScale = this.services.cartesianScales.getMainYScale();
 		const isScaleTypeLabels = scaleType === ScaleTypes.LABELS;
@@ -55,9 +77,14 @@ export class Threshold extends Component {
 
 		if (isVertical) {
 			// Position the threshold on the y scale value
-			const y = scale(value) + (isScaleTypeLabels ? (scale.step() / 2) : 0);
+			const y = scale(value) + (isScaleTypeLabels ? scale.step() / 2 : 0);
 			this.threshold
-				.transition(this.services.transitions.getTransition("threshold-update", animate))
+				.transition(
+					this.services.transitions.getTransition(
+						"threshold-update",
+						animate
+					)
+				)
 				.attr("transform", `translate(${xScaleStart}, ${y})`);
 			// Set line end point on the x-axis
 			thresholdLine.attr("x2", xScaleEnd - xScaleStart);
@@ -65,9 +92,14 @@ export class Threshold extends Component {
 			thresholdRect.attr("width", xScaleEnd - xScaleStart);
 		} else {
 			// Position the threshold on the x scale value
-			const x = scale(value) + (isScaleTypeLabels ? (scale.step() / 2) : 0);
+			const x = scale(value) + (isScaleTypeLabels ? scale.step() / 2 : 0);
 			this.threshold
-				.transition(this.services.transitions.getTransition("threshold-update", animate))
+				.transition(
+					this.services.transitions.getTransition(
+						"threshold-update",
+						animate
+					)
+				)
 				.attr("transform", `translate(${x}, ${yScaleStart})`);
 			// Set line end point on the y-axis
 			thresholdLine.attr("y2", yScaleEnd - yScaleStart);
@@ -77,7 +109,7 @@ export class Threshold extends Component {
 		}
 
 		const self = this;
-		this.services.events.addEventListener(Events.Threshold.SHOW, e => {
+		this.services.events.addEventListener(Events.Threshold.SHOW, (e) => {
 			const hovered = e.detail.hoveredElement.node();
 			// If is this threshold
 			if (hovered === self.threshold) {
@@ -87,7 +119,7 @@ export class Threshold extends Component {
 			}
 		});
 
-		this.services.events.addEventListener(Events.Threshold.HIDE, e => {
+		this.services.events.addEventListener(Events.Threshold.HIDE, (e) => {
 			this.label.classed("hidden", true);
 		});
 
@@ -99,11 +131,16 @@ export class Threshold extends Component {
 	getFormattedValue() {
 		const { value, axisPosition } = this.configs;
 		const options = this.model.getOptions();
-		const scaleType = this.services.cartesianScales.getScaleTypeByPosition(axisPosition);
+		const scaleType = this.services.cartesianScales.getScaleTypeByPosition(
+			axisPosition
+		);
 
 		// If scale is time, format the threshold date as the ticks format
 		if (scaleType === ScaleTypes.TIME) {
-			const isVertical = [AxisPositions.LEFT, AxisPositions.RIGHT].includes(axisPosition);
+			const isVertical = [
+				AxisPositions.LEFT,
+				AxisPositions.RIGHT,
+			].includes(axisPosition);
 			const mainXScale = this.services.cartesianScales.getMainXScale();
 			const mainYScale = this.services.cartesianScales.getMainYScale();
 			const scale = isVertical ? mainYScale : mainXScale;
@@ -117,13 +154,24 @@ export class Threshold extends Component {
 	}
 
 	appendThresholdLabel() {
-		const { value, valueFormatter, fillColor, label = "Threshold" } = this.configs;
+		const {
+			value,
+			valueFormatter,
+			fillColor,
+			label = "Threshold",
+		} = this.configs;
 		const holder = select(this.services.domUtils.getHolder());
 		// Format the threshold value using valueFormatter if defined in user-provided options
-		const formattedValue = valueFormatter ? valueFormatter(value) : this.getFormattedValue();
+		const formattedValue = valueFormatter
+			? valueFormatter(value)
+			: this.getFormattedValue();
 
-		this.label = DOMUtils.appendOrSelect(holder, `div.${this.thresholdClass}--label.${this.thresholdIdentifierClass}`);
-		this.label.html(`${label}: ${formattedValue}`)
+		this.label = DOMUtils.appendOrSelect(
+			holder,
+			`div.${this.thresholdClass}--label.${this.thresholdIdentifierClass}`
+		);
+		this.label
+			.html(`${label}: ${formattedValue}`)
 			.classed("hidden", true)
 			.style("background-color", fillColor);
 	}
@@ -137,18 +185,18 @@ export class Threshold extends Component {
 		const bestPlacementOption = this.positionService.findBestPlacementAt(
 			{
 				left: mouseRelativePos[0],
-				top: mouseRelativePos[1]
+				top: mouseRelativePos[1],
 			},
 			target,
 			[
 				PLACEMENTS.RIGHT,
 				PLACEMENTS.LEFT,
 				PLACEMENTS.TOP,
-				PLACEMENTS.BOTTOM
+				PLACEMENTS.BOTTOM,
 			],
 			() => ({
 				width: holder.offsetWidth,
-				height: holder.offsetHeight
+				height: holder.offsetHeight,
 			})
 		);
 
@@ -156,7 +204,7 @@ export class Threshold extends Component {
 		const pos = this.positionService.findPositionAt(
 			{
 				left: mouseRelativePos[0],
-				top: mouseRelativePos[1]
+				top: mouseRelativePos[1],
 			},
 			target,
 			bestPlacementOption
@@ -170,17 +218,17 @@ export class Threshold extends Component {
 
 		// Add events to the threshold hoverable area
 		DOMUtils.appendOrSelect(this.threshold, "rect")
-			.on("mouseover mousemove", function() {
-					self.threshold.classed("active", true);
-					self.services.events.dispatchEvent(Events.Threshold.SHOW, {
-						hoveredElement: select(self.threshold)
-					});
+			.on("mouseover mousemove", function () {
+				self.threshold.classed("active", true);
+				self.services.events.dispatchEvent(Events.Threshold.SHOW, {
+					hoveredElement: select(self.threshold),
+				});
 			})
-			.on("mouseout", function() {
-					self.threshold.classed("active", false);
-					self.services.events.dispatchEvent(Events.Threshold.HIDE, {
-						hoveredElement: select(self.threshold)
-					});
+			.on("mouseout", function () {
+				self.threshold.classed("active", false);
+				self.services.events.dispatchEvent(Events.Threshold.HIDE, {
+					hoveredElement: select(self.threshold),
+				});
 			});
 	}
 }

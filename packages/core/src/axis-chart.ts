@@ -5,7 +5,7 @@ import {
 	LegendOrientations,
 	LegendPositions,
 	ChartConfig,
-	AxisChartOptions
+	AxisChartOptions,
 } from "./interfaces/index";
 import {
 	LayoutComponent,
@@ -13,7 +13,7 @@ import {
 	Title,
 	Tooltip,
 	TooltipBar,
-	Spacer
+	Spacer,
 } from "./components/index";
 import { Tools } from "./tools";
 
@@ -22,7 +22,7 @@ import { CartesianScales, Curves } from "./services/index";
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {
 		cartesianScales: CartesianScales,
-		curves: Curves
+		curves: Curves,
 	});
 
 	constructor(holder: Element, chartConfigs: ChartConfig<AxisChartOptions>) {
@@ -32,24 +32,20 @@ export class AxisChart extends Chart {
 	protected getAxisChartComponents(graphFrameComponents: any[]) {
 		const titleComponent = {
 			id: "title",
-			components: [
-				new Title(this.model, this.services)
-			],
+			components: [new Title(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		const legendComponent = {
 			id: "legend",
-			components: [
-				new Legend(this.model, this.services)
-			],
+			components: [new Legend(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		const graphFrameComponent = {
@@ -57,27 +53,34 @@ export class AxisChart extends Chart {
 			components: graphFrameComponents,
 			growth: {
 				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
-		const isLegendEnabled = this.model.getOptions().legend.enabled !== false;
+		const isLegendEnabled =
+			this.model.getOptions().legend.enabled !== false;
 
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
 		if (isLegendEnabled) {
-			const legendPosition = Tools.getProperty(this.model.getOptions(), "legend", "position");
+			const legendPosition = Tools.getProperty(
+				this.model.getOptions(),
+				"legend",
+				"position"
+			);
 			if (legendPosition === LegendPositions.LEFT) {
 				fullFrameComponentDirection = LayoutDirection.ROW;
 
 				if (!this.model.getOptions().legend.orientation) {
-					this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+					this.model.getOptions().legend.orientation =
+						LegendOrientations.VERTICAL;
 				}
 			} else if (legendPosition === LegendPositions.RIGHT) {
 				fullFrameComponentDirection = LayoutDirection.ROW_REVERSE;
 
 				if (!this.model.getOptions().legend.orientation) {
-					this.model.getOptions().legend.orientation = LegendOrientations.VERTICAL;
+					this.model.getOptions().legend.orientation =
+						LegendOrientations.VERTICAL;
 				}
 			} else if (legendPosition === LegendPositions.BOTTOM) {
 				fullFrameComponentDirection = LayoutDirection.COLUMN_REVERSE;
@@ -86,13 +89,11 @@ export class AxisChart extends Chart {
 
 		const legendSpacerComponent = {
 			id: "spacer",
-			components: [
-				new Spacer(this.model, this.services)
-			],
+			components: [new Spacer(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		const fullFrameComponent = {
@@ -102,19 +103,19 @@ export class AxisChart extends Chart {
 					this.model,
 					this.services,
 					[
-						...(isLegendEnabled ? [ legendComponent ] : [ ]),
+						...(isLegendEnabled ? [legendComponent] : []),
 						legendSpacerComponent,
-						graphFrameComponent
+						graphFrameComponent,
 					],
 					{
-						direction: fullFrameComponentDirection
+						direction: fullFrameComponentDirection,
 					}
-				)
+				),
 			],
 			growth: {
 				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		// Add chart title if it exists
@@ -124,13 +125,11 @@ export class AxisChart extends Chart {
 
 			const titleSpacerComponent = {
 				id: "spacer",
-				components: [
-					new Spacer(this.model, this.services)
-				],
+				components: [new Spacer(this.model, this.services)],
 				growth: {
 					x: LayoutGrowth.PREFERRED,
-					y: LayoutGrowth.FIXED
-				}
+					y: LayoutGrowth.FIXED,
+				},
 			};
 
 			topLevelLayoutComponents.push(titleSpacerComponent);
@@ -143,9 +142,9 @@ export class AxisChart extends Chart {
 				this.services,
 				topLevelLayoutComponents,
 				{
-					direction: LayoutDirection.COLUMN
+					direction: LayoutDirection.COLUMN,
 				}
-			)
+			),
 		];
 	}
 }
