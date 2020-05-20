@@ -1,3 +1,4 @@
+import AreaChart from "./AreaChart.svelte";
 import BarChartGrouped from "./BarChartGrouped.svelte";
 import BarChartSimple from "./BarChartSimple.svelte";
 import BarChartStacked from "./BarChartStacked.svelte";
@@ -9,6 +10,7 @@ import ScatterChart from "./ScatterChart.svelte";
 import RadarChart from "./RadarChart.svelte";
 
 export {
+	AreaChart,
 	BarChartGrouped,
 	BarChartSimple,
 	BarChartStacked,

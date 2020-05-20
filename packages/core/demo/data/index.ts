@@ -34,7 +34,7 @@ export const chartTypes = {
 	AreaChart: {
 		vanilla: "AreaChart",
 		angular: "ibm-simple-bar-chart",
-		vue: "ccv-simple-bar-chart"
+		vue: "ccv-simple-bar-chart",
 	},
 	SimpleBarChart: {
 		vanilla: "SimpleBarChart",
@@ -91,15 +91,15 @@ let allDemoGroups = [
 				options: areaDemos.areaTimeSeriesCurvedOptions,
 				data: areaDemos.areaTimeSeriesCurvedData,
 				chartType: chartTypes.AreaChart,
-				isDemoExample: true
+				isDemoExample: true,
 			},
 			{
 				options: areaDemos.areaTimeSeriesOptions,
 				data: areaDemos.areaTimeSeriesData,
 				chartType: chartTypes.AreaChart,
-				isDemoExample: true
-			}
-		]
+				isDemoExample: true,
+			},
+		],
 	},
 	{
 		title: "Bar (vertical)",
@@ -543,36 +543,19 @@ let allDemoGroups = [
 				data: radarDemos.radarData,
 				options: radarDemos.radarOptions,
 				chartType: chartTypes.RadarChart,
+				isDemoExample: true,
 			},
 			{
 				data: radarDemos.radarWithMissingDataData,
 				options: radarDemos.radarWithMissingDataOptions,
 				chartType: chartTypes.RadarChart,
+				isDemoExample: true,
 			},
 			{
 				data: radarDemos.radarDenseData,
 				options: radarDemos.radarDenseOptions,
 				chartType: chartTypes.RadarChart,
-			},
-		],
-	},
-	{
-		title: "Radar",
-		demos: [
-			{
-				data: radarDemos.radarData,
-				options: radarDemos.radarOptions,
-				chartType: chartTypes.RadarChart,
-			},
-			{
-				data: radarDemos.radarWithMissingDataData,
-				options: radarDemos.radarWithMissingDataOptions,
-				chartType: chartTypes.RadarChart,
-			},
-			{
-				data: radarDemos.radarDenseData,
-				options: radarDemos.radarDenseOptions,
-				chartType: chartTypes.RadarChart,
+				isDemoExample: true,
 			},
 		],
 	},
@@ -623,7 +606,7 @@ export const storybookDemoGroups = Tools.clone(allDemoGroups);
 // in the demo page we want to show only demos with isDemoExample = true
 export const demoGroups = Tools.clone(allDemoGroups)
 	.map((demoGroup) => {
-		demoGroup.demos = demoGroup.demos.filter((demo) => demo.isDemoExample);
+		demoGroup.demos = demoGroup.demos.filter(demo => demo.isDemoExample);
 		return demoGroup;
 	})
 	.filter((demoGroup) => demoGroup.demos.length); // remove demoGroup if it's children are all with isDemoExample = false
