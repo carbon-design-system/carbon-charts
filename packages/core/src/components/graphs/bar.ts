@@ -14,9 +14,6 @@ export class Bar extends Component {
 			);
 		}
 
-		return Math.min(
-			options.bars.maxWidth,
-			mainXScale.step() / 2
-		);
+		return Math.min(options.bars.maxWidth, mainXScale.step() / 2);
 	}
 }

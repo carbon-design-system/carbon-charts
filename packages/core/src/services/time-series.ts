@@ -13,34 +13,63 @@ export const TIME_INTERVALS = [
 	["daily", 24 * 60 * 60 * 1000],
 	["monthly", 30 * 24 * 60 * 60 * 1000],
 	["quarterly", 3 * 30 * 24 * 60 * 60 * 1000],
-	["yearly", 12 * 30 * 24 * 60 * 60 * 1000]
+	["yearly", 12 * 30 * 24 * 60 * 60 * 1000],
 ];
 
 // Return true if the tick is a primary tick, false otherwise
-export function isTickPrimary(tick: number, i: number, interval: string, showDayName: boolean): boolean {
+export function isTickPrimary(
+	tick: number,
+	i: number,
+	interval: string,
+	showDayName: boolean
+): boolean {
 	const isFirstTick = i === 0;
-	const hasANewWeekStarted = Number(format((new Date(tick)), "c")) === 2;
-	const isFirstQuarter = Number(format((new Date(tick)), "q")) === 1;
+	const hasANewWeekStarted = Number(format(new Date(tick), "c")) === 2;
+	const isFirstQuarter = Number(format(new Date(tick), "q")) === 1;
 
 	switch (interval) {
 		case "15seconds":
-			return (isFirstTick || isDayOfMonthChanged(tick) || isMonthChanged(tick) || isYearChanged(tick));
+			return (
+				isFirstTick ||
+				isDayOfMonthChanged(tick) ||
+				isMonthChanged(tick) ||
+				isYearChanged(tick)
+			);
 		case "minute":
-			return (isFirstTick || isDayOfMonthChanged(tick) || isMonthChanged(tick) || isYearChanged(tick));
+			return (
+				isFirstTick ||
+				isDayOfMonthChanged(tick) ||
+				isMonthChanged(tick) ||
+				isYearChanged(tick)
+			);
 		case "30minutes":
-			return (isFirstTick || isDayOfMonthChanged(tick) || isMonthChanged(tick) || isYearChanged(tick));
+			return (
+				isFirstTick ||
+				isDayOfMonthChanged(tick) ||
+				isMonthChanged(tick) ||
+				isYearChanged(tick)
+			);
 		case "hourly":
-			return (isFirstTick || isDayOfMonthChanged(tick) || isMonthChanged(tick) || isYearChanged(tick));
+			return (
+				isFirstTick ||
+				isDayOfMonthChanged(tick) ||
+				isMonthChanged(tick) ||
+				isYearChanged(tick)
+			);
 		case "daily":
-			if (!showDayName) { // daily
-				return (isFirstTick || isMonthChanged(tick) || isYearChanged(tick));
-			} else { // weekly
-				return (isFirstTick || hasANewWeekStarted || isYearChanged(tick));
+			if (!showDayName) {
+				// daily
+				return (
+					isFirstTick || isMonthChanged(tick) || isYearChanged(tick)
+				);
+			} else {
+				// weekly
+				return isFirstTick || hasANewWeekStarted || isYearChanged(tick);
 			}
 		case "monthly":
-			return (isFirstTick || isYearChanged(tick));
+			return isFirstTick || isYearChanged(tick);
 		case "quarterly":
-			return (isFirstTick || isFirstQuarter);
+			return isFirstTick || isFirstQuarter;
 		case "yearly":
 			return false;
 		default:
@@ -49,14 +78,24 @@ export function isTickPrimary(tick: number, i: number, interval: string, showDay
 }
 
 // Return the formatted current tick
-export function formatTick(tick: number, i: number, interval: string, timeScaleOptions: TimeScaleOptions): string {
+export function formatTick(
+	tick: number,
+	i: number,
+	interval: string,
+	timeScaleOptions: TimeScaleOptions
+): string {
 	const showDayName = timeScaleOptions.showDayName;
-	const intervalConsideringAlsoShowDayNameOption = interval === "daily" && showDayName ? "weekly" : interval;
+	const intervalConsideringAlsoShowDayNameOption =
+		interval === "daily" && showDayName ? "weekly" : interval;
 	const date = new Date(tick);
-	const formats = Tools.getProperty(timeScaleOptions, "timeIntervalFormats")[intervalConsideringAlsoShowDayNameOption];
+	const formats = Tools.getProperty(timeScaleOptions, "timeIntervalFormats")[
+		intervalConsideringAlsoShowDayNameOption
+	];
 	const primary = Tools.getProperty(formats, "primary");
 	const secondary = Tools.getProperty(formats, "secondary");
-	const formatString = isTickPrimary(tick, i, interval, showDayName) ? primary : secondary;
+	const formatString = isTickPrimary(tick, i, interval, showDayName)
+		? primary
+		: secondary;
 	const locale = timeScaleOptions.localeObject;
 
 	return format(date, formatString, { locale });
@@ -71,7 +110,7 @@ export function getTimeformats(timestamp: number) {
 		d: date.getDate(), // day of the month: 1-31
 		H: date.getHours(), // 24-hour clock: 0-23
 		m: date.getMinutes(), // minute: 0-59
-		s: date.getSeconds() // seconds: 0-59
+		s: date.getSeconds(), // seconds: 0-59
 	};
 }
 
@@ -85,12 +124,15 @@ function getConsecutiveDifferences(elements: number[]): number[] {
 
 // Given a duration in ms, return the closest TIME_INTERVAL name
 function closestTimeIntervalName(duration: number): string {
-	const index = TIME_INTERVALS.reduce((nearestIndex, [intervalName, delta]: [string, number], i) => {
-		const deltaNearest = TIME_INTERVALS[nearestIndex][1] as number;
-		const oldNearestSpan = Math.abs(deltaNearest - duration);
-		const currentSpan = Math.abs(delta - duration);
-		return oldNearestSpan < currentSpan ? nearestIndex : i;
-	}, 0);
+	const index = TIME_INTERVALS.reduce(
+		(nearestIndex, [intervalName, delta]: [string, number], i) => {
+			const deltaNearest = TIME_INTERVALS[nearestIndex][1] as number;
+			const oldNearestSpan = Math.abs(deltaNearest - duration);
+			const currentSpan = Math.abs(delta - duration);
+			return oldNearestSpan < currentSpan ? nearestIndex : i;
+		},
+		0
+	);
 	return TIME_INTERVALS[index][0] as string;
 }
 

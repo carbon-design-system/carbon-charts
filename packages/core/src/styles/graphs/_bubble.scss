@@ -3,7 +3,7 @@
 g.#{$prefix}--#{$charts-prefix}--bubble {
 	circle.dot.hovered {
 		fill-opacity: 1;
-		transition: all .1s;
+		transition: all 0.1s;
 		@include carbon--motion(standard, expressive);
 	}
 
