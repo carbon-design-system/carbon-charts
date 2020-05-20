@@ -5,7 +5,6 @@ import { CartesianOrientations } from "../../interfaces";
 
 // D3 Imports
 import { area } from "d3-shape";
-import { select } from "d3-selection";
 
 export class Area extends Component {
 	type = "area";

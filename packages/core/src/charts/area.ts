@@ -1,10 +1,7 @@
 // Internal Imports
 import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
-import {
-	ChartConfig,
-	AreaChartOptions
-} from "../interfaces/index";
+import { ChartConfig, AreaChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
@@ -19,7 +16,7 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TooltipScatter
+	TooltipScatter,
 } from "../components/index";
 
 export class AreaChart extends AxisChart {
@@ -47,10 +44,11 @@ export class AreaChart extends AxisChart {
 			new Ruler(this.model, this.services),
 			new Line(this.model, this.services),
 			new Area(this.model, this.services),
-			new Scatter(this.model, this.services)
 		];
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents);
+		const components: any[] = this.getAxisChartComponents(
+			graphFrameComponents
+		);
 		components.push(new TooltipScatter(this.model, this.services));
 		return components;
 	}
