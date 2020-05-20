@@ -1,9 +1,7 @@
 const path = require("path");
 
 module.exports = {
-	addons: [
-		"@storybook/preset-typescript"
-	],
+	addons: ["@storybook/preset-typescript"],
 	webpackFinal: async (config, { configType }) => {
 		config.module.rules.push({
 			test: /\.scss$/,
@@ -14,13 +12,13 @@ module.exports = {
 					loader: "sass-loader",
 					options: {
 						sassOptions: {
-							includePaths: [path.resolve(__dirname + "../src")]
-						}
-					}
-				}
-			]
+							includePaths: [path.resolve(__dirname + "../src")],
+						},
+					},
+				},
+			],
 		});
 
 		return config;
-	}
+	},
 };

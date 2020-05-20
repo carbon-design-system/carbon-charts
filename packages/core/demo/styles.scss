@@ -62,8 +62,8 @@ div.container {
 			}
 
 			.bx--radio-button:checked
-			+ .bx--radio-button__label
-			.bx--radio-button__appearance {
+				+ .bx--radio-button__label
+				.bx--radio-button__appearance {
 				border-color: $icon-01;
 
 				&:before {
@@ -71,7 +71,7 @@ div.container {
 
 					// Allow the selected button to be seen in Windows HCM for IE/Edge
 					@media screen and (-ms-high-contrast: active) {
-					  	// Utilize a system color variable to accomodate any user HCM theme
+						// Utilize a system color variable to accomodate any user HCM theme
 						background-color: windowText;
 					}
 				}
@@ -93,8 +93,8 @@ div.container {
 			}
 
 			.bx--radio-button:checked
-			+ .bx--radio-button__label
-			.bx--radio-button__appearance {
+				+ .bx--radio-button__label
+				.bx--radio-button__appearance {
 				border-color: $icon-01;
 
 				&:before {
@@ -137,7 +137,7 @@ div.container {
 		span.bx--tag.component-name {
 			font-size: 19px;
 			padding: 16px 10px;
-			border-radius: .8rem;
+			border-radius: 0.8rem;
 		}
 	}
 
@@ -182,7 +182,8 @@ div.container {
 		font-size: 14px;
 	}
 
-	.bx--snippet--multi.bx--snippet--expand .bx--snippet-container, .bx--snippet--multi.bx--snippet--expand .bx--snippet-container pre {
+	.bx--snippet--multi.bx--snippet--expand .bx--snippet-container,
+	.bx--snippet--multi.bx--snippet--expand .bx--snippet-container pre {
 		padding-bottom: 0;
 	}
 
@@ -299,7 +300,10 @@ div.container {
 	&.tutorial {
 		@import "~highlight.js/styles/sunburst.css";
 
-		h1, h5, p, pre {
+		h1,
+		h5,
+		p,
+		pre {
 			margin-bottom: 15px;
 		}
 
@@ -311,7 +315,7 @@ div.container {
 			border-radius: 4px;
 			background-color: #e0e0e0;
 			color: #161616;
-			padding: 0 .5em;
+			padding: 0 0.5em;
 		}
 
 		pre {
