@@ -2,7 +2,7 @@
 import {
 	AxisChartOptions,
 	CartesianOrientations,
-	ScaleTypes
+	ScaleTypes,
 } from "./interfaces";
 
 import {
@@ -12,9 +12,11 @@ import {
 	uniq as lodashUnique,
 	clamp as lodashClamp,
 	isEqual as lodashIsEqual,
+	flatMapDeep as lodashFlatMapDeep,
+	kebabCase as lodashKebabCase,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Cancelable,
-	DebounceSettings
+	DebounceSettings,
 } from "lodash-es";
 
 // Functions
@@ -26,6 +28,8 @@ export namespace Tools {
 	export const removeArrayDuplicates = lodashUnique;
 	export const clamp = lodashClamp;
 	export const isEqual = lodashIsEqual;
+	export const flatMapDeep = lodashFlatMapDeep;
+	export const kebabCase = lodashKebabCase;
 
 	/**
 	 * Returns default chart options merged with provided options,
@@ -37,7 +41,10 @@ export namespace Tools {
 	 * @param {AxisChartOptions} providedOptions user provided options
 	 * @returns merged options
 	 */
-	export function mergeDefaultChartOptions(defaultOptions: any, providedOptions: any) {
+	export function mergeDefaultChartOptions(
+		defaultOptions: any,
+		providedOptions: any
+	) {
 		defaultOptions = Tools.clone(defaultOptions);
 		const providedAxesNames = Object.keys(providedOptions.axes || {});
 
@@ -51,8 +58,13 @@ export namespace Tools {
 			if (providedAxesNames.includes(axisName)) {
 				const providedAxisOptions = providedOptions.axes[axisName];
 
-				if (providedAxisOptions["primary"] || providedAxisOptions["secondary"]) {
-					console.warn("`primary` & `secondary` are no longer needed for axis configurations. Read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format");
+				if (
+					providedAxisOptions["primary"] ||
+					providedAxisOptions["secondary"]
+				) {
+					console.warn(
+						"`primary` & `secondary` are no longer needed for axis configurations. Read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format"
+					);
 				}
 
 				const identifier = providedAxisOptions["mapsTo"];
@@ -72,10 +84,7 @@ export namespace Tools {
 			}
 		}
 
-		return Tools.merge(
-			defaultOptions,
-			providedOptions
-		);
+		return Tools.merge(defaultOptions, providedOptions);
 	}
 
 	/**************************************
@@ -91,8 +100,12 @@ export namespace Tools {
 	 */
 	export function getDimensions(el) {
 		return {
-			width: parseFloat(el.style.width.replace("px", "") || el.offsetWidth),
-			height: parseFloat(el.style.height.replace("px", "") || el.offsetHeight)
+			width: parseFloat(
+				el.style.width.replace("px", "") || el.offsetWidth
+			),
+			height: parseFloat(
+				el.style.height.replace("px", "") || el.offsetHeight
+			),
 		};
 	}
 
@@ -103,17 +116,30 @@ export namespace Tools {
 	 * @returns an object containing the translated x and y values or null
 	 */
 	export function getTranslationValues(elementRef: HTMLElement) {
+		if (!elementRef) {
+			return;
+		}
+
 		// regex to ONLY get values for translate (instead of all rotate, translate, skew, etc)
 		const translateRegex = /translate\([0-9]+\.?[0-9]*,[0-9]+\.?[0-9]*\)/;
 
-		const transformStr = elementRef.getAttribute("transform").match(translateRegex);
+		const transformStr = elementRef
+			.getAttribute("transform")
+			.match(translateRegex);
+		if (!transformStr) {
+			return null;
+		}
+
 		// check for the match
 		if (transformStr[0]) {
-			const transforms = transformStr[0].replace(/translate\(/, "").replace(/\)/, "").split(",");
+			const transforms = transformStr[0]
+				.replace(/translate\(/, "")
+				.replace(/\)/, "")
+				.split(",");
 
 			return {
 				tx: transforms[0],
-				ty: transforms[1]
+				ty: transforms[1],
 			};
 		}
 		return null;
@@ -137,7 +163,7 @@ export namespace Tools {
 
 		return {
 			x: parseFloat(xyString[0]),
-			y: parseFloat(xyString[1])
+			y: parseFloat(xyString[1]),
 		};
 	}
 
@@ -177,9 +203,13 @@ export namespace Tools {
 	 * @returns The percentage in the form of a number (1 significant digit if necessary)
 	 */
 	export function convertValueToPercentage(item, fullData) {
-		const percentage = item / fullData.reduce((accum, val) => accum + val.value, 0) * 100;
+		const percentage =
+			(item / fullData.reduce((accum, val) => accum + val.value, 0)) *
+			100;
 		// if the value has any significant figures, keep 1
-		return percentage % 1 !== 0 ? parseFloat(percentage.toFixed(1)) : percentage;
+		return percentage % 1 !== 0
+			? parseFloat(percentage.toFixed(1))
+			: percentage;
 	}
 
 	/**************************************
@@ -198,16 +228,16 @@ export namespace Tools {
 	export function arrayDifferences(oldArray: any[], newArray: any[]) {
 		const difference = {
 			missing: [],
-			added: []
+			added: [],
 		};
 
-		oldArray.forEach(element => {
+		oldArray.forEach((element) => {
 			if (newArray.indexOf(element) === -1) {
 				difference.missing.push(element);
 			}
 		});
 
-		newArray.forEach(element => {
+		newArray.forEach((element) => {
 			if (oldArray.indexOf(element) === -1) {
 				difference.added.push(element);
 			}
@@ -227,8 +257,11 @@ export namespace Tools {
 		const values = [];
 		const duplicateValues = [];
 
-		arr.forEach(value => {
-			if (values.indexOf(value) !== -1 && duplicateValues.indexOf(value) === -1) {
+		arr.forEach((value) => {
+			if (
+				values.indexOf(value) !== -1 &&
+				duplicateValues.indexOf(value) === -1
+			) {
 				duplicateValues.push(value);
 			}
 
@@ -250,7 +283,7 @@ export namespace Tools {
 	 * @returns The function to be used by D3 to push element to the top of the canvas
 	 */
 	export function moveToFront(element) {
-		return element.each(function() {
+		return element.each(function () {
 			this.parentNode.appendChild(this);
 		});
 	}
@@ -289,26 +322,41 @@ export namespace Tools {
 		y1: number;
 	}
 
-	export const flipSVGCoordinatesBasedOnOrientation = (verticalCoordinates: SVGPathCoordinates, orientation?: CartesianOrientations) => {
+	export const flipSVGCoordinatesBasedOnOrientation = (
+		verticalCoordinates: SVGPathCoordinates,
+		orientation?: CartesianOrientations
+	) => {
 		if (orientation === CartesianOrientations.HORIZONTAL) {
 			return {
 				y0: verticalCoordinates.x0,
 				y1: verticalCoordinates.x1,
 				x0: verticalCoordinates.y0,
-				x1: verticalCoordinates.y1
+				x1: verticalCoordinates.y1,
 			};
 		}
 
 		return verticalCoordinates;
 	};
 
-	export const generateSVGPathString = (verticalCoordinates: SVGPathCoordinates, orientation?: CartesianOrientations) => {
-		const { x0, x1, y0, y1 } = flipSVGCoordinatesBasedOnOrientation(verticalCoordinates, orientation);
+	export const generateSVGPathString = (
+		verticalCoordinates: SVGPathCoordinates,
+		orientation?: CartesianOrientations
+	) => {
+		const { x0, x1, y0, y1 } = flipSVGCoordinatesBasedOnOrientation(
+			verticalCoordinates,
+			orientation
+		);
 
 		return `M${x0},${y0}L${x0},${y1}L${x1},${y1}L${x1},${y0}L${x0},${y0}`;
 	};
 
-	export function flipDomainAndRangeBasedOnOrientation<D, R>(domain: D, range: R, orientation?: CartesianOrientations): [D, R] | [R, D] {
-		return orientation === CartesianOrientations.VERTICAL ? [domain, range] : [range, domain];
+	export function flipDomainAndRangeBasedOnOrientation<D, R>(
+		domain: D,
+		range: R,
+		orientation?: CartesianOrientations
+	): [D, R] | [R, D] {
+		return orientation === CartesianOrientations.VERTICAL
+			? [domain, range]
+			: [range, domain];
 	}
 }

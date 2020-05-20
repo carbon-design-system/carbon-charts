@@ -10,7 +10,7 @@ export const bubbleDoubleLinearData = [
 	{ group: "Dataset 2", sales: 13000, profit: 34500, surplus: 35000 },
 	{ group: "Dataset 2", sales: 13500, profit: 23100, surplus: 55000 },
 	{ group: "Dataset 2", sales: 15500, profit: 63200, surplus: 35000 },
-	{ group: "Dataset 2", sales: 15750, profit: 24300, surplus: 64000 }
+	{ group: "Dataset 2", sales: 15750, profit: 24300, surplus: 64000 },
 ];
 
 export const bubbleDoubleLinearOptions = {
@@ -19,17 +19,17 @@ export const bubbleDoubleLinearOptions = {
 		bottom: {
 			title: "No. of employees",
 			mapsTo: "sales",
-			includeZero: false
+			includeZero: false,
 		},
 		left: {
 			title: "Annual sales",
 			mapsTo: "profit",
-			includeZero: false
-		}
+			includeZero: false,
+		},
 	},
 	bubble: {
-		radiusMapsTo: "surplus"
-	}
+		radiusMapsTo: "surplus",
+	},
 };
 
 export const bubbleDiscreteData = [
@@ -52,7 +52,7 @@ export const bubbleDiscreteData = [
 	{ group: "Dataset 4", key: "More", value: 4000, surplus: 32000 },
 	{ group: "Dataset 4", key: "Sold", value: 9000, surplus: 43000 },
 	{ group: "Dataset 4", key: "Restocking", value: 24000, surplus: 43000 },
-	{ group: "Dataset 4", key: "Misc", value: 7000, surplus: 21000 }
+	{ group: "Dataset 4", key: "Misc", value: 7000, surplus: 21000 },
 ];
 
 export const bubbleDiscreteOptions = {
@@ -61,20 +61,22 @@ export const bubbleDiscreteOptions = {
 		bottom: {
 			title: "2019 Annual Sales Figures",
 			scaleType: "labels",
-			mapsTo: "key"
+			mapsTo: "key",
 		},
 		left: {
-			mapsTo: "value"
-		}
+			mapsTo: "value",
+		},
 	},
 	bubble: {
-		radiusMapsTo: "surplus"
-	}
+		radiusMapsTo: "surplus",
+	},
 };
 
-export const bubbleTimeSeriesData = lineTimeSeriesData.map(datum => Object.assign(datum, {
-	surplus: 50000 * Math.random() * ((datum.value || 1) / 2)
-}));
+export const bubbleTimeSeriesData = lineTimeSeriesData.map((datum) =>
+	Object.assign(datum, {
+		surplus: 50000 * Math.random() * ((datum.value || 1) / 2),
+	})
+);
 
 export const bubbleTimeSeriesOptions = {
 	title: "Bubble (time series)",
@@ -82,13 +84,58 @@ export const bubbleTimeSeriesOptions = {
 		bottom: {
 			title: "2019 Annual Sales Figures",
 			scaleType: "time",
-			mapsTo: "date"
+			mapsTo: "date",
 		},
 		left: {
-			mapsTo: "value"
-		}
+			mapsTo: "value",
+		},
 	},
 	bubble: {
-		radiusMapsTo: "surplus"
-	}
+		radiusMapsTo: "surplus",
+	},
+};
+
+// bubble - empty state
+export const bubbleEmptyStateData = [];
+export const bubbleEmptyStateOptions = {
+	title: "Bubble (empty state)",
+	axes: {
+		bottom: {
+			title: "No. of employees",
+			mapsTo: "sales",
+			includeZero: false,
+		},
+		left: {
+			title: "Annual sales",
+			mapsTo: "profit",
+			includeZero: false,
+		},
+	},
+	bubble: {
+		radiusMapsTo: "surplus",
+	},
+};
+
+// bubble - skeleton
+export const bubbleSkeletonData = [];
+export const bubbleSkeletonOptions = {
+	title: "Bubble (skeleton)",
+	axes: {
+		bottom: {
+			title: "No. of employees",
+			mapsTo: "sales",
+			includeZero: false,
+		},
+		left: {
+			title: "Annual sales",
+			mapsTo: "profit",
+			includeZero: false,
+		},
+	},
+	bubble: {
+		radiusMapsTo: "surplus",
+	},
+	data: {
+		loading: true,
+	},
 };

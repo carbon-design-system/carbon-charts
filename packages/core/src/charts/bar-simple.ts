@@ -1,11 +1,9 @@
 // Internal Imports
 import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
-import {
-	BarChartOptions,
-	ChartConfig
-} from "../interfaces/index";
+import { BarChartOptions, ChartConfig } from "../interfaces/index";
 import { Tools } from "../tools";
+import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
@@ -17,7 +15,8 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
 	Legend,
-	LayoutComponent
+	LayoutComponent,
+	Skeleton,
 } from "../components/index";
 
 export class SimpleBarChart extends AxisChart {
@@ -43,10 +42,15 @@ export class SimpleBarChart extends AxisChart {
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new SimpleBar(this.model, this.services),
-			new ZeroLine(this.model, this.services)
+			new ZeroLine(this.model, this.services),
+			new Skeleton(this.model, this.services, {
+				skeleton: Skeletons.VERT_OR_HORIZ,
+			}),
 		];
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents);
+		const components: any[] = this.getAxisChartComponents(
+			graphFrameComponents
+		);
 		components.push(new TooltipBar(this.model, this.services));
 		return components;
 	}
