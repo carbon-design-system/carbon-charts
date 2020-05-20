@@ -2,13 +2,13 @@ import {
 	LegendOptions,
 	TooltipOptions,
 	GridOptions,
-	AxesOptions,
+	AxesOptions
 } from "./index";
 import {
 	AxisTooltipOptions,
 	BarTooltipOptions,
 	BarOptions,
-	StackedBarOptions,
+	StackedBarOptions
 } from "./components";
 
 /**

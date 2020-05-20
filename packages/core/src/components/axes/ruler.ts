@@ -42,9 +42,9 @@ export class Ruler extends Component {
 		const scaledData: {
 			domainValue: number;
 			originalData: any;
-		}[] = displayData.map((d) => ({
+		}[] = displayData.map(d => ({
 			domainValue: this.services.cartesianScales.getDomainValue(d),
-			originalData: d,
+			originalData: d
 		}));
 
 		/**
@@ -55,9 +55,7 @@ export class Ruler extends Component {
 			domainValue: number;
 			originalData: any;
 		}[] = scaledData
-			.filter((d) =>
-				pointIsWithinThreshold(d.domainValue, mouseCoordinate)
-			)
+			.filter(d => pointIsWithinThreshold(d.domainValue, mouseCoordinate))
 			.reduce((accum, currentValue) => {
 				if (accum.length === 0) {
 					accum.push(currentValue);
@@ -92,17 +90,17 @@ export class Ruler extends Component {
 		if (dataPointsMatchingRulerLine.length > 0) {
 			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 			const tooltipData = dataPointsMatchingRulerLine
-				.map((d) => d.originalData)
-				.filter((d) => {
+				.map(d => d.originalData)
+				.filter(d => {
 					const value = d[rangeIdentifier];
 					return value !== null && value !== undefined;
 				});
 
 			// get elements on which we should trigger mouse events
 			const domainValuesMatchingRulerLine = dataPointsMatchingRulerLine.map(
-				(d) => d.domainValue
+				d => d.domainValue
 			);
-			const elementsToHighlight = dataPointElements.filter((d) => {
+			const elementsToHighlight = dataPointElements.filter(d => {
 				const domainValue = this.services.cartesianScales.getDomainValue(
 					d
 				);
@@ -129,7 +127,7 @@ export class Ruler extends Component {
 			this.services.events.dispatchEvent("show-tooltip", {
 				hoveredElement: rulerLine,
 				multidata: tooltipData,
-				type: TooltipTypes.GRIDLINE,
+				type: TooltipTypes.GRIDLINE
 			});
 
 			ruler.attr("opacity", 1);
@@ -171,12 +169,12 @@ export class Ruler extends Component {
 		const self = this;
 
 		this.backdrop
-			.on("mousemove mouseover", function () {
+			.on("mousemove mouseover", function() {
 				const pos = mouse(self.parent.node());
 
 				self.showRuler(pos);
 			})
-			.on("mouseout", function () {
+			.on("mouseout", function() {
 				self.hideRuler();
 			});
 	}

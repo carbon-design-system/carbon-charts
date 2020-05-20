@@ -6,7 +6,7 @@ import {
 	CalloutDirections,
 	Roles,
 	TooltipTypes,
-	Events,
+	Events
 } from "../../interfaces";
 
 // D3 Imports
@@ -18,7 +18,7 @@ import { interpolate } from "d3-interpolate";
 function arcTween(a, arcFunc) {
 	const i = interpolate(this._current, a);
 
-	return (t) => {
+	return t => {
 		this._current = i(t);
 		return arcFunc(this._current);
 	};
@@ -65,7 +65,9 @@ export class Pie extends Component {
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
 
-		this.arc = arc().innerRadius(this.getInnerRadius()).outerRadius(radius);
+		this.arc = arc()
+			.innerRadius(this.getInnerRadius())
+			.outerRadius(radius);
 
 		// Set the hover arc radius
 		this.hoverArc = arc()
@@ -90,10 +92,13 @@ export class Pie extends Component {
 		);
 		const paths = slicesGroup
 			.selectAll("path.slice")
-			.data(pieLayoutData, (d) => d.data[groupMapsTo]);
+			.data(pieLayoutData, d => d.data[groupMapsTo]);
 
 		// Remove slices that need to be exited
-		paths.exit().attr("opacity", 0).remove();
+		paths
+			.exit()
+			.attr("opacity", 0)
+			.remove();
 
 		// Add new slices that are being introduced
 		const enteringPaths = paths
@@ -105,7 +110,7 @@ export class Pie extends Component {
 		// Update styles & position on existing and entering slices
 		enteringPaths
 			.merge(paths)
-			.attr("fill", (d) => self.model.getFillColor(d.data[groupMapsTo]))
+			.attr("fill", d => self.model.getFillColor(d.data[groupMapsTo]))
 			.attr("d", this.arc)
 			.transition(
 				this.services.transitions.getTransition(
@@ -119,21 +124,19 @@ export class Pie extends Component {
 			.attr("aria-roledescription", "slice")
 			.attr(
 				"aria-label",
-				(d) =>
-					`${d.value}, ${
-						Tools.convertValueToPercentage(
-							d.data.value,
-							displayData
-						) + "%"
-					}`
+				d =>
+					`${d.value}, ${Tools.convertValueToPercentage(
+						d.data.value,
+						displayData
+					) + "%"}`
 			)
 			// Tween
-			.attrTween("d", function (a) {
+			.attrTween("d", function(a) {
 				return arcTween.bind(this)(a, self.arc);
 			});
 
 		// Draw the slice labels
-		const labelData = pieLayoutData.filter((x) => x.value > 0);
+		const labelData = pieLayoutData.filter(x => x.value > 0);
 		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels").attr(
 			"role",
 			Roles.GROUP
@@ -143,7 +146,10 @@ export class Pie extends Component {
 			.data(labelData, (d: any) => d.data[groupMapsTo]);
 
 		// Remove labels that are existing
-		labels.exit().attr("opacity", 0).remove();
+		labels
+			.exit()
+			.attr("opacity", 0)
+			.remove();
 
 		// Add labels that are being introduced
 		const enteringLabels = labels
@@ -156,7 +162,7 @@ export class Pie extends Component {
 		enteringLabels
 			.merge(labels)
 			.style("text-anchor", "middle")
-			.text((d) => {
+			.text(d => {
 				if (options.pie.labels.formatter) {
 					return options.pie.labels.formatter(d);
 				}
@@ -167,7 +173,7 @@ export class Pie extends Component {
 				);
 			})
 			// Calculate dimensions in order to transform
-			.datum(function (d) {
+			.datum(function(d) {
 				const marginedRadius = radius + 7;
 
 				const theta = (d.endAngle - d.startAngle) / 2 + d.startAngle;
@@ -184,7 +190,7 @@ export class Pie extends Component {
 
 				return d;
 			})
-			.attr("transform", function (d, i) {
+			.attr("transform", function(d, i) {
 				const totalSlices = labelData.length;
 				const sliceAngleDeg =
 					(d.endAngle - d.startAngle) * (180 / Math.PI);
@@ -263,19 +269,19 @@ export class Pie extends Component {
 
 		// Update data values for each callout
 		// For the horizontal and vertical lines to use
-		enteringCallouts.merge(callouts).datum(function (d) {
+		enteringCallouts.merge(callouts).datum(function(d) {
 			const { xPosition, yPosition, direction } = d;
 
 			if (direction === CalloutDirections.RIGHT) {
 				d.startPos = {
 					x: xPosition,
-					y: yPosition + d.textOffsetY,
+					y: yPosition + d.textOffsetY
 				};
 
 				// end position for the callout line
 				d.endPos = {
 					x: xPosition + options.pie.callout.offsetX,
-					y: yPosition - options.pie.callout.offsetY + d.textOffsetY,
+					y: yPosition - options.pie.callout.offsetY + d.textOffsetY
 				};
 
 				// the intersection point of the vertical and horizontal line
@@ -285,13 +291,13 @@ export class Pie extends Component {
 				// start position for the callout line
 				d.startPos = {
 					x: xPosition,
-					y: yPosition + d.textOffsetY,
+					y: yPosition + d.textOffsetY
 				};
 
 				// end position for the callout line should be bottom aligned to the title
 				d.endPos = {
 					x: xPosition - options.pie.callout.offsetX,
-					y: yPosition - options.pie.callout.offsetY + d.textOffsetY,
+					y: yPosition - options.pie.callout.offsetY + d.textOffsetY
 				};
 
 				// the intersection point of the vertical and horizontal line
@@ -310,14 +316,14 @@ export class Pie extends Component {
 
 		enteringVerticalLines
 			.merge(svg.selectAll("line.vertical-line"))
-			.datum(function (d: any) {
+			.datum(function(d: any) {
 				return select(this.parentNode).datum();
 			})
 			.style("stroke-width", "1px")
-			.attr("x1", (d) => d.startPos.x)
-			.attr("y1", (d) => d.startPos.y)
-			.attr("x2", (d) => d.intersectPointX)
-			.attr("y2", (d) => d.endPos.y);
+			.attr("x1", d => d.startPos.x)
+			.attr("y1", d => d.startPos.y)
+			.attr("x2", d => d.intersectPointX)
+			.attr("y2", d => d.endPos.y);
 
 		// draw horizontal line
 		const enteringHorizontalLines = enteringCallouts
@@ -326,14 +332,14 @@ export class Pie extends Component {
 
 		enteringHorizontalLines
 			.merge(svg.selectAll("line.horizontal-line"))
-			.datum(function (d: any) {
+			.datum(function(d: any) {
 				return select(this.parentNode).datum();
 			})
 			.style("stroke-width", "1px")
-			.attr("x1", (d) => d.intersectPointX)
-			.attr("y1", (d) => d.endPos.y)
-			.attr("x2", (d) => d.endPos.x)
-			.attr("y2", (d) => d.endPos.y);
+			.attr("x1", d => d.intersectPointX)
+			.attr("y1", d => d.endPos.y)
+			.attr("x2", d => d.endPos.x)
+			.attr("y2", d => d.endPos.y);
 	}
 
 	// Highlight elements that match the hovered legend item
@@ -346,7 +352,7 @@ export class Pie extends Component {
 			.transition(
 				this.services.transitions.getTransition("legend-hover-bar")
 			)
-			.attr("opacity", (d) =>
+			.attr("opacity", d =>
 				d.data[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
 	};
@@ -365,14 +371,14 @@ export class Pie extends Component {
 		const self = this;
 		this.parent
 			.selectAll("path.slice")
-			.on("mouseover", function (datum) {
+			.on("mouseover", function(datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
 					element: select(this),
-					datum,
+					datum
 				});
 			})
-			.on("mousemove", function (datum) {
+			.on("mousemove", function(datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -387,23 +393,23 @@ export class Pie extends Component {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEMOVE, {
 					element: hoveredElement,
-					datum,
+					datum
 				});
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					type: TooltipTypes.DATAPOINT,
+					type: TooltipTypes.DATAPOINT
 				});
 			})
-			.on("click", function (datum) {
+			.on("click", function(datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_CLICK, {
 					element: select(this),
-					datum,
+					datum
 				});
 			})
-			.on("mouseout", function (datum) {
+			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
 				hoveredElement
 					.classed("hovered", false)
@@ -417,12 +423,12 @@ export class Pie extends Component {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOUT, {
 					element: hoveredElement,
-					datum,
+					datum
 				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement,
+					hoveredElement
 				});
 			});
 	}
@@ -432,7 +438,7 @@ export class Pie extends Component {
 		const options = this.model.getOptions();
 
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
-			useAttrs: true,
+			useAttrs: true
 		});
 		const radius: number = Math.min(width, height) / 2;
 
