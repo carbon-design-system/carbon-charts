@@ -2667,7 +2667,6 @@
 "@storybook/addons@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/addons/-/addons-5.3.18.tgz#5cbba6407ef7a802041c5ee831473bc3bed61f64"
-  integrity sha512-ZQjDgTUDFRLvAiBg2d8FgPgghfQ+9uFyXQbtiGlTBLinrPCeQd7J86qiUES0fcGoohCCw0wWKtvB0WF2z1XNDg==
   dependencies:
     "@storybook/api" "5.3.18"
     "@storybook/channels" "5.3.18"
@@ -2722,7 +2721,6 @@
 "@storybook/api@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/api/-/api-5.3.18.tgz#95582ab90d947065e0e34ed603650a3630dcbd16"
-  integrity sha512-QXaccNCARHzPWOuxYndiebGWBZmwiUvRgB9ji0XTJBS3y8K0ZPb5QyuqiKPaEWUj8dBA8rzdDtkW3Yt95Namaw==
   dependencies:
     "@reach/router" "^1.2.1"
     "@storybook/channels" "5.3.18"
@@ -2758,7 +2756,6 @@
 "@storybook/channel-postmessage@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/channel-postmessage/-/channel-postmessage-5.3.18.tgz#93d46740b5cc9b36ddd073f0715b54c4959953bf"
-  integrity sha512-awxBW/aVfNtY9QvYZgsPaMXgUpC2+W3vEyQcl/w4ce0YVH+7yWx3wt3Ku49lQwxZwDrxP3QoC0U+mkPc9hBJwA==
   dependencies:
     "@storybook/channels" "5.3.18"
     "@storybook/client-logger" "5.3.18"
@@ -2775,7 +2772,6 @@
 "@storybook/channels@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/channels/-/channels-5.3.18.tgz#490c9eaa8292b0571c0f665052b12addf7c35f21"
-  integrity sha512-scP/6td/BJSEOgfN+qaYGDf3E793xye7tIw6W+sYqwg+xdMFO39wVXgVZNpQL6sLEwpJZTaPywCjC6p6ksErqQ==
   dependencies:
     core-js "^3.0.1"
 
@@ -2804,7 +2800,6 @@
 "@storybook/client-api@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/client-api/-/client-api-5.3.18.tgz#e71041796f95888de0e4524734418e6b120b060a"
-  integrity sha512-QiXTDUpjdyW19BlocLw07DrkOnEzVaWGJcRze2nSs29IKKuq1Ncv2LOAZt6ySSq0PmIKsjBou3bmS1/aXmDMdw==
   dependencies:
     "@storybook/addons" "5.3.18"
     "@storybook/channel-postmessage" "5.3.18"
@@ -2833,7 +2828,6 @@
 "@storybook/client-logger@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/client-logger/-/client-logger-5.3.18.tgz#27c9d09d788965db0164be6e168bc3f03adbf88f"
-  integrity sha512-RZjxw4uqZX3Yk27IirbB/pQG+wRsQSSRlKqYa8KQ5bSanm4IrcV9VA1OQbuySW9njE+CexAnakQJ/fENdmurNg==
   dependencies:
     core-js "^3.0.1"
 
@@ -2866,7 +2860,6 @@
 "@storybook/components@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/components/-/components-5.3.18.tgz#528f6ab1660981e948993a04b407a6fad7751589"
-  integrity sha512-LIN4aVCCDY7klOwtuqQhfYz4tHaMADhXEzZpij+3r8N68Inck6IJ1oo9A9umXQPsTioQi8e6FLobH1im90j/2A==
   dependencies:
     "@storybook/client-logger" "5.3.18"
     "@storybook/theming" "5.3.18"
@@ -2899,7 +2892,6 @@
 "@storybook/core-events@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/core-events/-/core-events-5.3.18.tgz#e5d335f8a2c7dd46502b8f505006f1e111b46d49"
-  integrity sha512-uQ6NYJ5WODXK8DJ7m8y3yUAtWB3n+6XtYztjY+tdkCsLYvTYDXNS+epV+f5Hu9+gB+/Dm+b5Su4jDD+LZB2QWA==
   dependencies:
     core-js "^3.0.1"
 
@@ -2984,7 +2976,6 @@
 "@storybook/core@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/core/-/core-5.3.18.tgz#3f3c0498275826c1cc4368aba203ac17a6ae5c9c"
-  integrity sha512-XQb/UQb+Ohuaw0GhKKYzvmuuh5Tit93f2cLZD9QCSWUPvDGmLG5g91Y9NbUr4Ap3mANT3NksMNhkAV0GxExEkg==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.7.0"
     "@babel/plugin-proposal-object-rest-spread" "^7.6.2"
@@ -3093,7 +3084,6 @@
 "@storybook/node-logger@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/node-logger/-/node-logger-5.3.18.tgz#ee278acb8b6f10d456a24c0ff6d59818a0c3ad94"
-  integrity sha512-Go/hdtaPTtjgJP+GYk8VXcOmecrdG7cXm0yyTlatd6s8xXI0txHme1/0MOZmEPows1Ec7KAQ20+NnaCGUPZUUg==
   dependencies:
     "@types/npmlog" "^4.1.2"
     chalk "^3.0.0"
@@ -3149,7 +3139,6 @@
 "@storybook/router@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/router/-/router-5.3.18.tgz#8ab22f1f2f7f957e78baf992030707a62289076e"
-  integrity sha512-6B2U2C75KTSVaCuYYgcubeJGcCSnwsXuEf50hEd5mGqWgHZfojCtGvB7Ko4X+0h8rEC+eNA4p7YBOhlUv9WNrQ==
   dependencies:
     "@reach/router" "^1.2.1"
     "@storybook/csf" "0.0.1"
@@ -3164,7 +3153,6 @@
 "@storybook/svelte@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/svelte/-/svelte-5.3.18.tgz#737febab8c4b5a72d6bb31e9ad9cad03dc360ad9"
-  integrity sha512-IbkpU5kPiA2fdq2HmuV2vP+LxTc15aKaP8yeF5ylq3jyxttwIcm8mvECSY8LoIdJE27U6C3nwHwQd6kyX/7E/g==
   dependencies:
     "@storybook/addons" "5.3.18"
     "@storybook/core" "5.3.18"
@@ -3193,7 +3181,6 @@
 "@storybook/theming@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/theming/-/theming-5.3.18.tgz#35e78de79d9cf8f1248af0dd1c7fa60555761312"
-  integrity sha512-lfFTeLoYwLMKg96N3gn0umghMdAHgJBGuk2OM8Ll84yWtdl9RGnzfiI1Fl7Cr5k95dCF7drLJlJCao1VxUkFSA==
   dependencies:
     "@emotion/core" "^10.0.20"
     "@emotion/styled" "^10.0.17"
@@ -3250,7 +3237,6 @@
 "@storybook/ui@5.3.18":
   version "5.3.18"
   resolved "https://registry.npmjs.org/@storybook/ui/-/ui-5.3.18.tgz#c66f6d94a3c50bb706f4d5b1d5592439110f16f0"
-  integrity sha512-xyXK53fNe9lkGPmXf3Nk+n0gz9gOgXI+fDxetyDLpX79k3DIN/jCKEnv45vXof7OQ45mTmyBvUNTKrNLqKTt5Q==
   dependencies:
     "@emotion/core" "^10.0.20"
     "@storybook/addons" "5.3.18"
@@ -3703,7 +3689,6 @@
 "@types/react-syntax-highlighter@11.0.4":
   version "11.0.4"
   resolved "https://registry.npmjs.org/@types/react-syntax-highlighter/-/react-syntax-highlighter-11.0.4.tgz#d86d17697db62f98046874f62fdb3e53a0bbc4cd"
-  integrity sha512-9GfTo3a0PHwQeTVoqs0g5bS28KkSY48pp5659wA+Dp4MqceDEa8EHBqrllJvvtyusszyJhViUEap0FDvlk/9Zg==
   dependencies:
     "@types/react" "*"
 
@@ -15374,6 +15359,10 @@ prettier@1.16.4:
   version "1.16.4"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.16.4.tgz#73e37e73e018ad2db9c76742e2647e21790c9717"
 
+prettier@2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.0.5.tgz#d6d56282455243f2f92cc1716692c08aa31522d4"
+
 prettier@^1.18.2:
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
@@ -16403,7 +16392,6 @@ require-main-filename@^2.0.0:
 require-relative@^0.8.7:
   version "0.8.7"
   resolved "https://registry.npmjs.org/require-relative/-/require-relative-0.8.7.tgz#7999539fc9e047a37928fa196f8e1563dabd36de"
-  integrity sha1-eZlTn8ngR6N5KPoZb44VY9q9Nt4=
 
 require-uncached@^1.0.3:
   version "1.0.3"
@@ -16589,7 +16577,6 @@ rollup-plugin-sourcemaps@^0.4.2:
 rollup-plugin-svelte@^5.2.1:
   version "5.2.1"
   resolved "https://registry.npmjs.org/rollup-plugin-svelte/-/rollup-plugin-svelte-5.2.1.tgz#f9d362d1b1d8cef0fa3782f2270f9261b715644c"
-  integrity sha512-wc93cN66sRpX6uFljVFqvWT6NU3V5ab/uLXKt2UiARuexFU/ctolzkmdXM7WM5iKdTX9scToS9sabJTJV4DUMA==
   dependencies:
     require-relative "^0.8.7"
     rollup-pluginutils "^2.8.2"
@@ -17887,12 +17874,10 @@ supports-color@^7.0.0, supports-color@^7.1.0:
 svelte-dev-helper@^1.1.9:
   version "1.1.9"
   resolved "https://registry.npmjs.org/svelte-dev-helper/-/svelte-dev-helper-1.1.9.tgz#7d187db5c6cdbbd64d75a32f91b8998bde3273c3"
-  integrity sha1-fRh9tcbNu9ZNdaMvkbiZi94yc8M=
 
 svelte-loader@2.13.6:
   version "2.13.6"
   resolved "https://registry.npmjs.org/svelte-loader/-/svelte-loader-2.13.6.tgz#3d5efd5886c2bab034606d5af0cce659da3ee555"
-  integrity sha512-7uf7ZQdPAl+lwb1ldUYJFY/raZRUCuaNx7lMJ+F16jrVwN1+c35C2pBMGIY0mCqdKm5sm45jqELJJLGM3UG9Pw==
   dependencies:
     loader-utils "^1.1.0"
     svelte-dev-helper "^1.1.9"
@@ -17900,7 +17885,6 @@ svelte-loader@2.13.6:
 svelte@3.20.x:
   version "3.20.1"
   resolved "https://registry.npmjs.org/svelte/-/svelte-3.20.1.tgz#8417fcd883a2f534b642a0737368272e651cf3ac"
-  integrity sha512-m/dw52BZf+p6KYnyKLErIcGalu4pwJrQbUM7VZriRw6ZlJj1qMAZsLcIWzEB3I0hhdJwkKb7LrrvUIeqmbO92Q==
 
 svg-parser@^2.0.0:
   version "2.0.3"
@@ -19067,9 +19051,9 @@ webpack-chain@^6.0.0:
     deepmerge "^1.5.2"
     javascript-stringify "^2.0.1"
 
-webpack-cli@3.3.9:
-  version "3.3.9"
-  resolved "https://registry.yarnpkg.com/webpack-cli/-/webpack-cli-3.3.9.tgz#79c27e71f94b7fe324d594ab64a8e396b9daa91a"
+webpack-cli@3.3.11:
+  version "3.3.11"
+  resolved "https://registry.yarnpkg.com/webpack-cli/-/webpack-cli-3.3.11.tgz#3bf21889bf597b5d82c38f215135a411edfdc631"
   dependencies:
     chalk "2.4.2"
     cross-spawn "6.0.5"

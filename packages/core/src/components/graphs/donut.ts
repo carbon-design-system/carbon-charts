@@ -32,16 +32,25 @@ export class Donut extends Pie {
 		// Add the number shown in the center of the donut
 		DOMUtils.appendOrSelect(svg, "text.donut-figure")
 			.attr("text-anchor", "middle")
-			.style("font-size", () => options.donut.center.numberFontSize(radius))
-			.transition(this.services.transitions.getTransition("donut-figure-enter-update", animate))
-			.tween("text", function() {
+			.style("font-size", () =>
+				options.donut.center.numberFontSize(radius)
+			)
+			.transition(
+				this.services.transitions.getTransition(
+					"donut-figure-enter-update",
+					animate
+				)
+			)
+			.tween("text", function () {
 				return self.centerNumberTween(select(this));
 			});
 
 		// Add the label below the number in the center of the donut
 		DOMUtils.appendOrSelect(svg, "text.donut-title")
 			.attr("text-anchor", "middle")
-			.style("font-size", () => options.donut.center.titleFontSize(radius))
+			.style("font-size", () =>
+				options.donut.center.titleFontSize(radius)
+			)
 			.attr("y", options.donut.center.titleYPosition(radius))
 			.text(Tools.getProperty(options, "donut", "center", "label"));
 	}
@@ -56,15 +65,23 @@ export class Donut extends Pie {
 	centerNumberTween(d3Ref) {
 		const options = this.model.getOptions();
 
-		let donutCenterFigure = Tools.getProperty(options, "donut", "center", "number");
+		let donutCenterFigure = Tools.getProperty(
+			options,
+			"donut",
+			"center",
+			"number"
+		);
 		if (donutCenterFigure === null) {
-			donutCenterFigure = this.model.getDisplayData().reduce((accumulator, d) => {
-				return accumulator + d.value;
-			}, 0);
+			donutCenterFigure = this.model
+				.getDisplayData()
+				.reduce((accumulator, d) => {
+					return accumulator + d.value;
+				}, 0);
 		}
 
 		// Remove commas from the current value string, and convert to an int
-		const currentValue = parseInt(d3Ref.text().replace(/[, ]+/g, ""), 10) || 0;
+		const currentValue =
+			parseInt(d3Ref.text().replace(/[, ]+/g, ""), 10) || 0;
 
 		let interpolateFunction;
 		if (currentValue % 1 === 0 && donutCenterFigure % 1 === 0) {
@@ -75,7 +92,7 @@ export class Donut extends Pie {
 
 		const i = interpolateFunction(currentValue, donutCenterFigure);
 
-		return t => {
+		return (t) => {
 			const { numberFormatter } = options.donut.center;
 			d3Ref.text(numberFormatter(i(t)));
 		};

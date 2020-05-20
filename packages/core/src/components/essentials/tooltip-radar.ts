@@ -10,17 +10,25 @@ export class TooltipRadar extends Tooltip {
 		// sort them so they are in the same order as the graph
 		data.sort((a, b) => b[value] - a[value]);
 
-		return  "<ul class='multi-tooltip'>" +
-			data.map(datum => {
-				const userProvidedValueFormatter = Tools.getProperty(options, "tooltip", "valueFormatter");
-				const formattedValue = userProvidedValueFormatter
-					? userProvidedValueFormatter(datum[value])
-					: datum[value];
+		return (
+			"<ul class='multi-tooltip'>" +
+			data
+				.map((datum) => {
+					const userProvidedValueFormatter = Tools.getProperty(
+						options,
+						"tooltip",
+						"valueFormatter"
+					);
+					const formattedValue = userProvidedValueFormatter
+						? userProvidedValueFormatter(datum[value])
+						: datum[value];
 
-				// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
-				const indicatorColor = this.model.getStrokeColor(datum[groupMapsTo]);
+					// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
+					const indicatorColor = this.model.getStrokeColor(
+						datum[groupMapsTo]
+					);
 
-				return `
+					return `
 				<li>
 					<div class="datapoint-tooltip">
 						<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
@@ -28,6 +36,9 @@ export class TooltipRadar extends Tooltip {
 						<p class="value">${formattedValue}</p>
 					</div>
 				</li>`;
-			}).join("") + "</ul>";
+				})
+				.join("") +
+			"</ul>"
+		);
 	}
 }
