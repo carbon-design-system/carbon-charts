@@ -233,10 +233,11 @@ export class CartesianScales extends Service {
 		const axesOptions = Tools.getProperty(options, "axes");
 
 		// If top axis has been specified as `main`
-		if (
-			(Tools.getProperty(axesOptions, AxisPositions.BOTTOM) === null &&
-				Tools.getProperty(axesOptions, AxisPositions.TOP) !== null) ||
-				Tools.getProperty(axesOptions, AxisPositions.TOP, "main") === true
+		if ((
+				Tools.getProperty(axesOptions, AxisPositions.BOTTOM) === null
+				&& Tools.getProperty(axesOptions, AxisPositions.TOP) !== null
+			)
+			|| Tools.getProperty(axesOptions, AxisPositions.TOP, "main") === true
 		) {
 			return AxisPositions.TOP;
 		}
