@@ -23,12 +23,12 @@ export class DOMUtils extends Service {
 
 		const finalDimensions = {
 			width: 0,
-			height: 0,
+			height: 0
 		};
 
-		const validateAndSetDimensions = (dimensions) => {
+		const validateAndSetDimensions = dimensions => {
 			if (dimensions) {
-				Object.keys(finalDimensions).forEach((dimensionKey) => {
+				Object.keys(finalDimensions).forEach(dimensionKey => {
 					if (dimensions[dimensionKey]) {
 						const dimension = dimensions[dimensionKey];
 						const dimensionNumber = parseFloat(dimension);
@@ -46,7 +46,7 @@ export class DOMUtils extends Service {
 
 		const attrDimensions = {
 			width: svgSelector.attr("width"),
-			height: svgSelector.attr("height"),
+			height: svgSelector.attr("height")
 		};
 
 		let bbox, bboxDimensions, boundingRect, boundingRectDimensions;
@@ -56,7 +56,7 @@ export class DOMUtils extends Service {
 			bbox = svgSelector.node().getBBox();
 			bboxDimensions = {
 				width: bbox.width,
-				height: bbox.height,
+				height: bbox.height
 			};
 		} catch (e) {}
 
@@ -64,13 +64,13 @@ export class DOMUtils extends Service {
 			boundingRect = svgSelector.node().getBoundingClientRect();
 			boundingRectDimensions = {
 				width: boundingRect.width,
-				height: boundingRect.height,
+				height: boundingRect.height
 			};
 		} catch (e) {}
 
 		const clientDimensions = {
 			width: svgSelector.node().clientWidth,
-			height: svgSelector.node().clientHeight,
+			height: svgSelector.node().clientHeight
 		};
 
 		// If both attribute values are numbers
@@ -122,7 +122,7 @@ export class DOMUtils extends Service {
 					"height",
 					"baseVal",
 					"value"
-				),
+				)
 			};
 
 			validateAndSetDimensions(nativeDimensions);
