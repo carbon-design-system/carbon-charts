@@ -119,6 +119,7 @@ export const createAngularChartApp = (demo: any) => {
 
 	const appComponentHtml = `<${chartComponent} [data]="data" [options]="options"></${chartComponent}>`;
 	const appComponentTs = `import { Component } from "@angular/core";
+import "@carbon/charts/styles.css";
 @Component({
 	selector: "app-root",
 	templateUrl: "./app.component.html"
