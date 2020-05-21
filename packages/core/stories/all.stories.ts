@@ -77,13 +77,13 @@ introStories.add("Welcome", () => {
 });
 
 // Loop through all demo groups
-storybookDemoGroups.forEach((demoGroup) => {
+storybookDemoGroups.forEach(demoGroup => {
 	// Create story group for each demo group
 	const groupStories = storiesOf(demoGroup.title, module).addDecorator(
 		withKnobs
 	);
 
-	demoGroup.demos.forEach((demo) => {
+	demoGroup.demos.forEach(demo => {
 		const ClassToInitialize = ChartComponents[demo.chartType.vanilla];
 
 		// Loop through the demos for the group
@@ -121,7 +121,7 @@ ${storyUtils.generateThemePickerHTML()}
 				container.querySelector("div#chart-demo"),
 				{
 					data: object("Data", demo.data),
-					options: object("Options", demo.options),
+					options: object("Options", demo.options)
 				}
 			);
 
@@ -164,8 +164,8 @@ if (process.env.NODE_ENV !== "production") {
 		let i = 0;
 		let row = getNewRow();
 
-		storybookDemoGroups.forEach((demoGroup) => {
-			demoGroup.demos.forEach((demo) => {
+		storybookDemoGroups.forEach(demoGroup => {
+			demoGroup.demos.forEach(demo => {
 				grid.appendChild(row);
 				if (i % 2 === 0 && i !== 0) {
 					row = getNewRow();
@@ -180,7 +180,7 @@ if (process.env.NODE_ENV !== "production") {
 				column.setAttribute("id", demo.title);
 				const chart = new ClassToInitialize(column, {
 					data: demo.data,
-					options: demo.options,
+					options: demo.options
 				});
 
 				row.appendChild(column);

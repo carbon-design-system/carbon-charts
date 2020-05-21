@@ -2,13 +2,13 @@ import {
 	LegendOptions,
 	TooltipOptions,
 	GridOptions,
-	AxesOptions,
+	AxesOptions
 } from "./index";
 import {
 	AxisTooltipOptions,
 	BarTooltipOptions,
 	BarOptions,
-	StackedBarOptions,
+	StackedBarOptions
 } from "./components";
 
 /**
@@ -211,6 +211,7 @@ export interface PieChartOptions extends BaseChartOptions {
 export interface DonutChartOptions extends PieChartOptions {
 	donut?: {
 		center?: {
+			label?: string;
 			numberFontSize?: Function;
 			titleFontSize?: Function;
 			titleYPosition?: Function;

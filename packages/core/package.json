@@ -14,7 +14,7 @@
 		"test": "karma start --single-run",
 		"test:watch": "karma start --no-single-run",
 		"clean": "rm -rf dist demo/bundle",
-		"prettier": "prettier . --write",
+		"format": "prettier . --write \"**/*.{scss,css,js,ts,md}\"",
 		"start": "yarn run storybook",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./.storybook/assets"
 	},

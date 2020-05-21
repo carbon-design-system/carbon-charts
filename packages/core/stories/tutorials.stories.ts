@@ -9,7 +9,7 @@ import {
 	reactTutorial,
 	angularTutorial,
 	vanillaTutorial,
-	vueTutorial,
+	vueTutorial
 } from "./tutorials/index";
 
 // Syntax highlighting
@@ -32,7 +32,7 @@ gettingStartedStories.add("VanillaJS", () => {
 
 	container.innerHTML = vanillaTutorial;
 
-	container.querySelectorAll("pre code").forEach((block) => {
+	container.querySelectorAll("pre code").forEach(block => {
 		hljs.highlightBlock(block);
 	});
 
@@ -47,7 +47,7 @@ gettingStartedStories.add("Angular", () => {
 
 	container.innerHTML = angularTutorial;
 
-	container.querySelectorAll("pre code").forEach((block) => {
+	container.querySelectorAll("pre code").forEach(block => {
 		hljs.highlightBlock(block);
 	});
 
@@ -62,7 +62,7 @@ gettingStartedStories.add("React", () => {
 
 	container.innerHTML = reactTutorial;
 
-	container.querySelectorAll("pre code").forEach((block) => {
+	container.querySelectorAll("pre code").forEach(block => {
 		hljs.highlightBlock(block);
 	});
 
@@ -77,7 +77,7 @@ gettingStartedStories.add("Vue", () => {
 
 	container.innerHTML = vueTutorial;
 
-	container.querySelectorAll("pre code").forEach((block) => {
+	container.querySelectorAll("pre code").forEach(block => {
 		hljs.highlightBlock(block);
 	});
 
@@ -92,7 +92,7 @@ tutorialStories.add("Tabular data format", () => {
 
 	container.innerHTML = tabularTutorial;
 
-	container.querySelectorAll("pre code").forEach((block) => {
+	container.querySelectorAll("pre code").forEach(block => {
 		hljs.highlightBlock(block);
 	});
 
@@ -107,7 +107,7 @@ tutorialStories.add("Event listeners", () => {
 
 	container.innerHTML = eventListenersTutorial;
 
-	container.querySelectorAll("pre code").forEach((block) => {
+	container.querySelectorAll("pre code").forEach(block => {
 		hljs.highlightBlock(block);
 	});
 
