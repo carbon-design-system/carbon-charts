@@ -7,6 +7,9 @@ The Carbon Charts Vue library provides a collection of reusable charting compone
 to build websites and user interfaces. Adopting the library enables developers to use consistent markup,
 styles, and behavior in prototype and production work.
 
+Please refer to the vue component storybook
+[here](https://carbon-design-system.github.io/carbon-charts/vue).
+
 &nbsp;
 ## Install
 
