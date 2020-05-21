@@ -5,7 +5,7 @@ import {
 	TooltipPosition,
 	TooltipTypes,
 	CartesianOrientations,
-	Events,
+	Events
 } from "./../../interfaces";
 
 // import the settings for the css prefix
@@ -36,7 +36,7 @@ export class TooltipBar extends Tooltip {
 		this.tooltip.style("max-width", null);
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this.services.events.addEventListener(Events.Tooltip.SHOW, (e) => {
+		this.services.events.addEventListener(Events.Tooltip.SHOW, e => {
 			// check the type of tooltip and that it is enabled
 			if (
 				(e.detail.type === TooltipTypes.DATAPOINT &&
@@ -159,7 +159,7 @@ export class TooltipBar extends Tooltip {
 					barPosition.left -
 					holderPosition.left +
 					barPosition.width / 2,
-				top: barPosition.bottom - holderPosition.top + verticalOffset,
+				top: barPosition.bottom - holderPosition.top + verticalOffset
 			};
 
 			return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
@@ -170,7 +170,7 @@ export class TooltipBar extends Tooltip {
 					barPosition.left -
 					holderPosition.left +
 					barPosition.width / 2,
-				top: barPosition.top - holderPosition.top - verticalOffset,
+				top: barPosition.top - holderPosition.top - verticalOffset
 			};
 
 			return { placement: TooltipPosition.TOP, position: tooltipPos };
@@ -225,7 +225,7 @@ export class TooltipBar extends Tooltip {
 		return (
 			"<ul class='multi-tooltip'>" +
 			points
-				.map((datapoint) => {
+				.map(datapoint => {
 					const formattedValue = Tools.getProperty(
 						this.model.getOptions(),
 						"tooltip",
