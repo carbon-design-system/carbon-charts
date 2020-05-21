@@ -23,8 +23,8 @@ import {
 	createAngularChartApp,
 	createVueChartApp,
 	createVanillaChartApp,
-	createSvelteChartApp
-} from "./create-codesandbox";
+	createSvelteChartApp,
+} from "../create-codesandbox";
 
 import { Tools } from "@carbon/charts/tools";
 
