@@ -7,8 +7,7 @@ The Carbon Charts Angular library provides a collection of reusable charting com
 and user interfaces. Adopting the library enables developers to use consistent markup, styles, and behavior
 in prototype and production work.
 
-Please refer to the Angular component storybook
-[here](https://carbon-design-system.github.io/carbon-charts/angular).
+[Angular wrappers - storybook](https://carbon-design-system.github.io/carbon-charts/angular)
 
 
 &nbsp;
