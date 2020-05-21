@@ -1,6 +1,8 @@
 import { getParameters } from "codesandbox/lib/api/define";
 
 const { version: libraryVersion } = require("@carbon/charts/package.json");
+const ibmPlexFontCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
+`;
 
 export const createChartSandbox = (chartTemplate: any) => {
 	const files = {};
@@ -23,6 +25,7 @@ export const createVanillaChartApp = (demo: any) => {
 	<head>
 		<title>Parcel Sandbox</title>
 		<meta charset="UTF-8" />
+		<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap" rel="stylesheet">
 	</head>
 	<body>
 		<div id="app" style="width: 100%; height: 100%;"></div>
@@ -72,12 +75,17 @@ export const createReactChartApp = (demo: any) => {
 
 	const indexHtml = `<div id="root"></div>
   `;
+
 	const indexJs = `import React from "react";
 import ReactDOM from "react-dom";
 import { ${chartComponent} } from "@carbon/charts-react";
 import "@carbon/charts/styles.css";
 // Or
 // import "@carbon/charts/styles/styles.scss";
+
+// IBM Plex should either be imported in your project by using Carbon
+// or consumed manually through an import
+import "./ibm-plex-font.css";
 
 class App extends React.Component {
 	state = {
@@ -108,7 +116,8 @@ ReactDOM.render(<App />, document.getElementById("root"));
 	return {
 		"src/index.html": indexHtml,
 		"src/index.js": indexJs,
-		"package.json": packageJson
+		"src/ibm-plex-font.css": ibmPlexFontCSS,
+		"package.json": packageJson,
 	};
 };
 
@@ -119,7 +128,13 @@ export const createAngularChartApp = (demo: any) => {
 
 	const appComponentHtml = `<${chartComponent} [data]="data" [options]="options"></${chartComponent}>`;
 	const appComponentTs = `import { Component } from "@angular/core";
+
 import "@carbon/charts/styles.css";
+
+// IBM Plex should either be imported in your project by using Carbon
+// or consumed manually through an import
+import "./ibm-plex-font.css";
+
 @Component({
 	selector: "app-root",
 	templateUrl: "./app.component.html"
@@ -207,6 +222,7 @@ platformBrowserDynamic()
 		"src/main.ts": mainTs,
 		"src/app/app.component.html": appComponentHtml,
 		"src/app/app.component.ts": appComponentTs,
+		"src/app/ibm-plex-font.css": ibmPlexFontCSS,
 		"src/app/app.module.ts": appModule,
 		".angular-cli.json": angularCliJson,
 		"package.json": packageJson
@@ -222,7 +238,13 @@ export const createVueChartApp = (demo: any) => {
 import Vue from "vue";
 import "@carbon/charts/styles.css";
 import chartsVue from "@carbon/charts-vue";
+
+// IBM Plex should either be imported in your project by using Carbon
+// or consumed manually through an import
+import "../ibm-plex-font.css";
+
 Vue.use(chartsVue);
+
 export default {
 	name: "Chart",
 	components: {},
@@ -277,6 +299,7 @@ new Vue({
 
 	return {
 		"src/components/chart.vue": chartVue,
+		"src/ibm-plex-font.css": ibmPlexFontCSS,
 		"src/App.vue": appVue,
 		"src/main.js": mainJs,
 		"package.json": packageJson
