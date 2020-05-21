@@ -25,7 +25,7 @@ const gettingStartedStories = storiesOf("Tutorials/Getting Started", module);
 const tutorialStories = storiesOf("Tutorials", module);
 
 // add vanilla getting started tutorials
-gettingStartedStories.add("VanillaJS", () => {
+gettingStartedStories.add("vanilla", () => {
 	// container creation
 	const container = document.createElement("div");
 	container.setAttribute("class", "container tutorial");
