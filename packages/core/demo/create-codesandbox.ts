@@ -129,6 +129,8 @@ export const createAngularChartApp = (demo: any) => {
 	const appComponentHtml = `<${chartComponent} [data]="data" [options]="options"></${chartComponent}>`;
 	const appComponentTs = `import { Component } from "@angular/core";
 
+import "@carbon/charts/styles.css";
+
 // IBM Plex should either be imported in your project by using Carbon
 // or consumed manually through an import
 import "./ibm-plex-font.css";
