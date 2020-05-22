@@ -9,7 +9,7 @@ import { Events } from "./../../interfaces";
 import { select } from "d3-selection";
 
 describe("title component", () => {
-	beforeEach(function() {
+	beforeEach(function () {
 		const testEnvironment = new TestEnvironment();
 		testEnvironment.render();
 
@@ -18,7 +18,7 @@ describe("title component", () => {
 	});
 
 	describe("content", () => {
-		it("should match text provided in options", function(done) {
+		it("should match text provided in options", function (done) {
 			const sampleTitle = "My chart";
 
 			const chartEventsService = this.chart.services.events;

@@ -13,7 +13,7 @@ export class TooltipRadar extends Tooltip {
 		return (
 			"<ul class='multi-tooltip'>" +
 			data
-				.map(datum => {
+				.map((datum) => {
 					const userProvidedValueFormatter = Tools.getProperty(
 						options,
 						"tooltip",

@@ -12,8 +12,8 @@ export default {
 	mounted() {
 		this.coreChart = new PieChart(this.$el, {
 			data: this.data,
-			options: this.options
+			options: this.options,
 		});
-	}
+	},
 };
 </script>

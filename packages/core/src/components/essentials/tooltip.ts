@@ -47,7 +47,7 @@ export class Tooltip extends Component {
 		this.tooltip.style("max-width", null);
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this.services.events.addEventListener(Events.Tooltip.SHOW, e => {
+		this.services.events.addEventListener(Events.Tooltip.SHOW, (e) => {
 			// check the type of tooltip and that it is enabled
 			if (
 				(e.detail.type === TooltipTypes.DATAPOINT &&
@@ -182,7 +182,7 @@ export class Tooltip extends Component {
 		return (
 			"<ul class='multi-tooltip'>" +
 			data
-				.map(datum => {
+				.map((datum) => {
 					const { groupMapsTo } = this.model.getOptions().data;
 					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
@@ -233,7 +233,7 @@ export class Tooltip extends Component {
 				elementPosition.left -
 				holderPosition.left +
 				elementPosition.width / 2,
-			top: elementPosition.top - holderPosition.top - verticalOffset
+			top: elementPosition.top - holderPosition.top - verticalOffset,
 		};
 
 		return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
@@ -263,23 +263,23 @@ export class Tooltip extends Component {
 			const bestPlacementOption = this.positionService.findBestPlacementAt(
 				{
 					left: mouseRelativePos[0],
-					top: mouseRelativePos[1]
+					top: mouseRelativePos[1],
 				},
 				target,
 				[
 					PLACEMENTS.RIGHT,
 					PLACEMENTS.LEFT,
 					PLACEMENTS.TOP,
-					PLACEMENTS.BOTTOM
+					PLACEMENTS.BOTTOM,
 				],
 				() => ({
 					width: holder.offsetWidth,
-					height: holder.offsetHeight
+					height: holder.offsetHeight,
 				})
 			);
 
 			let {
-				horizontalOffset
+				horizontalOffset,
 			} = this.model.getOptions().tooltip.datapoint;
 			if (bestPlacementOption === PLACEMENTS.LEFT) {
 				horizontalOffset *= -1;
@@ -289,7 +289,7 @@ export class Tooltip extends Component {
 			pos = this.positionService.findPositionAt(
 				{
 					left: mouseRelativePos[0] + horizontalOffset,
-					top: mouseRelativePos[1]
+					top: mouseRelativePos[1],
 				},
 				target,
 				bestPlacementOption

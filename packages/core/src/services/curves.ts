@@ -21,7 +21,7 @@ import {
 	CurveBundleFactory,
 	CurveCardinalFactory,
 	CurveCatmullRomFactory,
-	CurveGenerator
+	CurveGenerator,
 } from "d3-shape";
 
 // this import is needed because of typescript bug (error TS4029)
@@ -49,7 +49,7 @@ export class Curves extends Service {
 		curveNatural,
 		curveStep,
 		curveStepAfter,
-		curveStepBefore
+		curveStepBefore,
 	};
 
 	getD3Curve() {
@@ -74,7 +74,7 @@ export class Curves extends Service {
 
 			// Apply user-provided options to the d3 curve
 			if (curveOptions) {
-				Object.keys(curveOptions).forEach(optionName => {
+				Object.keys(curveOptions).forEach((optionName) => {
 					if (curve[optionName]) {
 						curve = curve[optionName](curveOptions[optionName]);
 					}
