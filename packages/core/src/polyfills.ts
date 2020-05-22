@@ -1,5 +1,5 @@
 if (typeof window !== "undefined") {
-	(function() {
+	(function () {
 		if (typeof window["CustomEvent"] === "function") {
 			return false;
 		}
@@ -8,7 +8,7 @@ if (typeof window !== "undefined") {
 			params = params || {
 				bubbles: false,
 				cancelable: false,
-				detail: undefined
+				detail: undefined,
 			};
 			const evt = document.createEvent("CustomEvent");
 			evt.initCustomEvent(

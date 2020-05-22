@@ -8,7 +8,7 @@ import * as Configuration from "../../configuration";
 import {
 	computeTimeIntervalName,
 	formatTick,
-	isTickPrimary
+	isTickPrimary,
 } from "../../services/time-series";
 
 // D3 Imports
@@ -50,7 +50,7 @@ export class Axis extends Component {
 
 		const svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
-			useAttrs: true
+			useAttrs: true,
 		});
 
 		let startPosition, endPosition;
@@ -124,7 +124,7 @@ export class Axis extends Component {
 			"0"
 		);
 		const tickHeight = DOMUtils.getSVGElementSize(fakeTickText.node(), {
-			useBBox: true
+			useBBox: true,
 		}).height;
 		fakeTick.remove();
 
@@ -215,7 +215,7 @@ export class Axis extends Component {
 		} else {
 			if (userProvidedFormatter === null) {
 				if (scaleType === ScaleTypes.LINEAR) {
-					formatter = t => t.toLocaleString();
+					formatter = (t) => t.toLocaleString();
 				}
 			} else {
 				formatter = userProvidedFormatter;
@@ -268,8 +268,9 @@ export class Axis extends Component {
 					axisTitleRef
 						.attr(
 							"transform",
-							`translate(${this.margins.left / 2 +
-								scale.range()[1] / 2}, ${height})`
+							`translate(${
+								this.margins.left / 2 + scale.range()[1] / 2
+							}, ${height})`
 						)
 						.style("text-anchor", "middle");
 					break;
@@ -285,14 +286,15 @@ export class Axis extends Component {
 					const { height: titleHeight } = DOMUtils.getSVGElementSize(
 						axisTitleRef,
 						{
-							useBBox: true
+							useBBox: true,
 						}
 					);
 					axisTitleRef
 						.attr(
 							"transform",
-							`translate(${this.margins.left / 2 +
-								scale.range()[1] / 2}, ${titleHeight / 2})`
+							`translate(${
+								this.margins.left / 2 + scale.range()[1] / 2
+							}, ${titleHeight / 2})`
 						)
 						.style("text-anchor", "middle");
 					break;
@@ -355,7 +357,7 @@ export class Axis extends Component {
 
 				// If any ticks are any larger than the scale step size
 				rotateTicks = textNodes.some(
-					textNode =>
+					(textNode) =>
 						DOMUtils.getSVGElementSize(textNode, { useBBox: true })
 							.width >= scale.step()
 				);
@@ -426,38 +428,38 @@ export class Axis extends Component {
 		const self = this;
 		container
 			.selectAll("g.tick text")
-			.on("mouseover", function(datum) {
+			.on("mouseover", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Axis.LABEL_MOUSEOVER,
 					{
 						element: select(this),
-						datum
+						datum,
 					}
 				);
 			})
-			.on("mousemove", function(datum) {
+			.on("mousemove", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Axis.LABEL_MOUSEMOVE,
 					{
 						element: select(this),
-						datum
+						datum,
 					}
 				);
 			})
-			.on("click", function(datum) {
+			.on("click", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_CLICK, {
 					element: select(this),
-					datum
+					datum,
 				});
 			})
-			.on("mouseout", function(datum) {
+			.on("mouseout", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
 					element: select(this),
-					datum
+					datum,
 				});
 			});
 	}
