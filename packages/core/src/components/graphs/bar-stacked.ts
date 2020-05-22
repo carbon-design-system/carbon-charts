@@ -5,7 +5,7 @@ import {
 	Roles,
 	TooltipTypes,
 	Events,
-	CartesianOrientations
+	CartesianOrientations,
 } from "../../interfaces";
 
 // D3 Imports
@@ -46,21 +46,18 @@ export class StackedBar extends Bar {
 		// Create the data and keys that'll be used by the stack layout
 		const stackKeys = map(
 			displayData,
-			datum => datum[domainIdentifier]
+			(datum) => datum[domainIdentifier]
 		).keys();
 		const stackData = this.model.getStackedData();
 
 		// Update data on all bar groups
-		const barGroups = svg.selectAll("g.bars").data(stackData, d => d.key);
+		const barGroups = svg.selectAll("g.bars").data(stackData, (d) => d.key);
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
 		// Data filters are processed before entering new elements
 		// Or updating existing ones
-		barGroups
-			.exit()
-			.attr("opacity", 0)
-			.remove();
+		barGroups.exit().attr("opacity", 0).remove();
 
 		// Add bar groups that need to be introduced
 		barGroups
@@ -73,7 +70,7 @@ export class StackedBar extends Bar {
 		const bars = svg
 			.selectAll("g.bars")
 			.selectAll("path.bar")
-			.data(data => data);
+			.data((data) => data);
 
 		// Remove bars that need to be removed
 		bars.exit().remove();
@@ -88,7 +85,7 @@ export class StackedBar extends Bar {
 					animate
 				)
 			)
-			.attr("fill", d => this.model.getFillColor(d[groupMapsTo]))
+			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
 				const key = stackKeys[i];
 
@@ -130,7 +127,7 @@ export class StackedBar extends Bar {
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "bar")
-			.attr("aria-label", d => d.value);
+			.attr("aria-label", (d) => d.value);
 
 		// Add event listeners for the above elements
 		this.addEventListeners();
@@ -145,7 +142,7 @@ export class StackedBar extends Bar {
 			.transition(
 				this.services.transitions.getTransition("legend-hover-bar")
 			)
-			.attr("opacity", d =>
+			.attr("opacity", (d) =>
 				d.datasetLabel !== hoveredElement.datum()["key"] ? 0.3 : 1
 			);
 	};
@@ -167,7 +164,7 @@ export class StackedBar extends Bar {
 		const self = this;
 		this.parent
 			.selectAll("path.bar")
-			.on("mouseover", function(datum) {
+			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -185,10 +182,10 @@ export class StackedBar extends Bar {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
 					element: hoveredElement,
-					datum
+					datum,
 				});
 			})
-			.on("mousemove", function(datum) {
+			.on("mousemove", function (datum) {
 				const displayData = self.model.getDisplayData();
 				const hoveredElement = select(this);
 
@@ -196,7 +193,7 @@ export class StackedBar extends Bar {
 				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
 				const { groupMapsTo } = self.model.getOptions().data;
 
-				let matchingDataPoint = displayData.find(d => {
+				let matchingDataPoint = displayData.find((d) => {
 					return (
 						d[rangeIdentifier] === datum.data[datum.group] &&
 						d[domainIdentifier].toString() ===
@@ -209,7 +206,7 @@ export class StackedBar extends Bar {
 					matchingDataPoint = {
 						[domainIdentifier]: datum.data.sharedStackKey,
 						[rangeIdentifier]: datum.data[datum.group],
-						[groupMapsTo]: datum.group
+						[groupMapsTo]: datum.group,
 					};
 				}
 
@@ -217,17 +214,17 @@ export class StackedBar extends Bar {
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					data: matchingDataPoint,
-					type: TooltipTypes.DATAPOINT
+					type: TooltipTypes.DATAPOINT,
 				});
 			})
-			.on("click", function(datum) {
+			.on("click", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					element: select(this),
-					datum
+					datum,
 				});
 			})
-			.on("mouseout", function(datum) {
+			.on("mouseout", function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
@@ -244,12 +241,12 @@ export class StackedBar extends Bar {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
 					element: hoveredElement,
-					datum
+					datum,
 				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement
+					hoveredElement,
 				});
 			});
 	}
