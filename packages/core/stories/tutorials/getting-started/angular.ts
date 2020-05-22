@@ -15,12 +15,12 @@ in prototype and production work.
 
 **with yarn:**
 \`\`\`bash
-yarn add @carbon/charts @carbon/charts-angular d3
+yarn add @carbon/charts-angular d3
 \`\`\`
 
 **with npm:**
 \`\`\`bash
-npm install --save @carbon/charts @carbon/charts-angular d3
+npm install --save @carbon/charts-angular d3
 \`\`\`
 
 &nbsp;
