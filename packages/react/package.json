@@ -13,7 +13,8 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/carbon-charts.git"
+		"url": "git@github.com:carbon-design-system/carbon-charts.git",
+		"homepage": "https://carbon-design-system.github.io/carbon-charts/react/"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",
@@ -41,9 +42,9 @@
 		"scss"
 	],
 	"bugs": {
-		"url": "https://github.com/IBM/carbon-charts/issues"
+		"url": "https://github.com/carbon-design-system/carbon-charts/issues"
 	},
-	"homepage": "https://github.com/IBM/carbon-charts#readme",
+	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"dependencies": {
 		"@carbon/charts": "^0.30.24"
 	},

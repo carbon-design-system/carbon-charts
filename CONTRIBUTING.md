@@ -89,7 +89,7 @@ yarn run storybook
 
    ```bash
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream git@github.com:carbon-design-system/carbon-charts.git
+   git remote add upstream git@github.com:carbon-design-system/carbon-charts.gitcarbon-charts.git
    ```
 
 2. **Create a new topic branch** (off the original remote branch) to contain your code changes:
