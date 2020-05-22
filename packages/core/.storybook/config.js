@@ -8,12 +8,12 @@ setOptions({
 	sortStoriesByKind: true,
 	panelPosition: "bottom",
 	showDownPanel: true,
-	theme
+	theme,
 });
 
 const req = require.context("../stories", true, /.stories.ts$/);
 function loadStories() {
-	req.keys().forEach(filename => {
+	req.keys().forEach((filename) => {
 		req(filename);
 	});
 }

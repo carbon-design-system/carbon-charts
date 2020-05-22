@@ -5,7 +5,7 @@ import {
 	CartesianOrientations,
 	Events,
 	Roles,
-	TooltipTypes
+	TooltipTypes,
 } from "../../interfaces";
 
 // D3 Imports
@@ -53,19 +53,16 @@ export class GroupedBar extends Bar {
 
 		const allDataLabels = map(
 			displayData,
-			datum => datum[domainIdentifier]
+			(datum) => datum[domainIdentifier]
 		).keys();
 
 		// Update data on bar groups
 		const barGroups = svg
 			.selectAll("g.bars")
-			.data(allDataLabels, label => label);
+			.data(allDataLabels, (label) => label);
 
 		// Remove dot groups that need to be removed
-		barGroups
-			.exit()
-			.attr("opacity", 0)
-			.remove();
+		barGroups.exit().attr("opacity", 0).remove();
 
 		// Add the bar groups that need to be introduced
 		const barGroupsEnter = barGroups
@@ -73,7 +70,7 @@ export class GroupedBar extends Bar {
 			.append("g")
 			.classed("bars", true)
 			.attr("role", Roles.GROUP)
-			.attr("aria-labelledby", d => d);
+			.attr("aria-labelledby", (d) => d);
 
 		// Update data on all bars
 		const bars = barGroupsEnter
@@ -97,18 +94,13 @@ export class GroupedBar extends Bar {
 				}
 			})
 			.selectAll("path.bar")
-			.data(label => this.getDataCorrespondingToLabel(label));
+			.data((label) => this.getDataCorrespondingToLabel(label));
 
 		// Remove bars that are no longer needed
-		bars.exit()
-			.attr("opacity", 0)
-			.remove();
+		bars.exit().attr("opacity", 0).remove();
 
 		// Add the circles that need to be introduced
-		const barsEnter = bars
-			.enter()
-			.append("path")
-			.attr("opacity", 0);
+		const barsEnter = bars.enter().append("path").attr("opacity", 0);
 
 		// code for vertical grouped bar charts
 		barsEnter
@@ -120,8 +112,8 @@ export class GroupedBar extends Bar {
 					animate
 				)
 			)
-			.attr("fill", d => this.model.getFillColor(d[groupMapsTo]))
-			.attr("d", d => {
+			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
+			.attr("d", (d) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
 				 * Determine coordinates needed for a vertical set of paths
@@ -145,7 +137,7 @@ export class GroupedBar extends Bar {
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "bar")
-			.attr("aria-label", d => d.value);
+			.attr("aria-label", (d) => d.value);
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
@@ -162,7 +154,7 @@ export class GroupedBar extends Bar {
 			.transition(
 				this.services.transitions.getTransition("legend-hover-bar")
 			)
-			.attr("opacity", d =>
+			.attr("opacity", (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
 	};
@@ -184,7 +176,7 @@ export class GroupedBar extends Bar {
 
 		this.parent
 			.selectAll("path.bar")
-			.on("mouseover", function(datum) {
+			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -202,30 +194,30 @@ export class GroupedBar extends Bar {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
 					element: hoveredElement,
-					datum
+					datum,
 				});
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					type: TooltipTypes.DATAPOINT
+					type: TooltipTypes.DATAPOINT,
 				});
 			})
-			.on("mousemove", function(datum) {
+			.on("mousemove", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
 					element: select(this),
-					datum
+					datum,
 				});
 			})
-			.on("click", function(datum) {
+			.on("click", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					element: select(this),
-					datum
+					datum,
 				});
 			})
-			.on("mouseout", function(datum) {
+			.on("mouseout", function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
@@ -243,12 +235,12 @@ export class GroupedBar extends Bar {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
 					element: hoveredElement,
-					datum
+					datum,
 				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement
+					hoveredElement,
 				});
 			});
 	}
@@ -277,7 +269,7 @@ export class GroupedBar extends Bar {
 		const displayData = this.model.getDisplayData();
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
-		return displayData.filter(datum => datum[domainIdentifier] === label);
+		return displayData.filter((datum) => datum[domainIdentifier] === label);
 	}
 
 	protected getGroupWidth() {

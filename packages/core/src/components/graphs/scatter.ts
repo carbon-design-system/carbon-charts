@@ -32,13 +32,10 @@ export class Scatter extends Component {
 		// Update data on dot groups
 		const dotGroups = svg
 			.selectAll("g.dots")
-			.data(groupedData, group => group.name);
+			.data(groupedData, (group) => group.name);
 
 		// Remove dot groups that need to be removed
-		dotGroups
-			.exit()
-			.attr("opacity", 0)
-			.remove();
+		dotGroups.exit().attr("opacity", 0).remove();
 
 		// Add the dot groups that need to be introduced
 		const dotGroupsEnter = dotGroups
@@ -52,19 +49,16 @@ export class Scatter extends Component {
 		const dots = dotGroupsEnter
 			.merge(dotGroups)
 			.selectAll("circle.dot")
-			.data(group =>
+			.data((group) =>
 				group.data.filter(
-					datum =>
+					(datum) =>
 						datum[rangeIdentifier] !== null &&
 						datum[rangeIdentifier] !== undefined
 				)
 			);
 
 		// Add the circles that need to be introduced
-		const dotsEnter = dots
-			.enter()
-			.append("circle")
-			.attr("opacity", 0);
+		const dotsEnter = dots.enter().append("circle").attr("opacity", 0);
 
 		// Apply styling & position
 		const circlesToStyle = dotsEnter.merge(dots);
@@ -87,7 +81,7 @@ export class Scatter extends Component {
 		// Get highest domain and range thresholds
 		const [
 			xThreshold,
-			yThreshold
+			yThreshold,
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
 			this.services.cartesianScales.getHighestDomainThreshold(),
 			this.services.cartesianScales.getHighestRangeThreshold(),
@@ -96,7 +90,7 @@ export class Scatter extends Component {
 
 		const [
 			getXValue,
-			getYValue
+			getYValue,
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
 			(d, i) => cartesianScales.getDomainValue(d, i),
 			(d, i) => cartesianScales.getRangeValue(d, i),
@@ -139,7 +133,7 @@ export class Scatter extends Component {
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
 		const [
 			getXValue,
-			getYValue
+			getYValue,
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
@@ -153,7 +147,7 @@ export class Scatter extends Component {
 			.classed("threshold-anomaly", (d, i) =>
 				this.isDatapointThresholdAnomaly(d, i)
 			)
-			.classed("filled", d =>
+			.classed("filled", (d) =>
 				this.model.getIsFilled(
 					d[groupMapsTo],
 					d[domainIdentifier],
@@ -163,7 +157,7 @@ export class Scatter extends Component {
 			)
 			.classed(
 				"unfilled",
-				d =>
+				(d) =>
 					!this.model.getIsFilled(
 						d[groupMapsTo],
 						d[domainIdentifier],
@@ -177,7 +171,7 @@ export class Scatter extends Component {
 			)
 			.attr("cy", getYValue)
 			.attr("r", options.points.radius)
-			.attr("fill", d => {
+			.attr("fill", (d) => {
 				if (
 					this.model.getIsFilled(
 						d[groupMapsTo],
@@ -194,7 +188,7 @@ export class Scatter extends Component {
 				}
 			})
 			.attr("fill-opacity", filled ? 0.2 : 1)
-			.attr("stroke", d =>
+			.attr("stroke", (d) =>
 				this.model.getStrokeColor(
 					d[groupMapsTo],
 					d[domainIdentifier],
@@ -205,7 +199,7 @@ export class Scatter extends Component {
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "point")
-			.attr("aria-label", d => d[rangeIdentifier]);
+			.attr("aria-label", (d) => d[rangeIdentifier]);
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
@@ -221,7 +215,7 @@ export class Scatter extends Component {
 			.transition(
 				this.services.transitions.getTransition("legend-hover-scatter")
 			)
-			.attr("opacity", d =>
+			.attr("opacity", (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
 	};
@@ -244,7 +238,7 @@ export class Scatter extends Component {
 
 		this.parent
 			.selectAll("circle")
-			.on("mouseover mousemove", function(datum) {
+			.on("mouseover mousemove", function (datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -264,26 +258,26 @@ export class Scatter extends Component {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(eventNameToDispatch, {
 					element: hoveredElement,
-					datum
+					datum,
 				});
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					type: TooltipTypes.DATAPOINT
+					type: TooltipTypes.DATAPOINT,
 				});
 			})
-			.on("click", function(datum) {
+			.on("click", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Scatter.SCATTER_CLICK,
 					{
 						element: select(this),
-						datum
+						datum,
 					}
 				);
 			})
-			.on("mouseout", function(datum) {
+			.on("mouseout", function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
@@ -296,13 +290,13 @@ export class Scatter extends Component {
 					Events.Scatter.SCATTER_MOUSEOUT,
 					{
 						element: hoveredElement,
-						datum
+						datum,
 					}
 				);
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement
+					hoveredElement,
 				});
 			});
 	}

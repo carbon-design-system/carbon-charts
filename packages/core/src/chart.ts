@@ -5,7 +5,7 @@ import {
 	LayoutGrowth,
 	LayoutDirection,
 	LegendOrientations,
-	Events as ChartEvents
+	Events as ChartEvents,
 } from "./interfaces";
 
 // Misc
@@ -16,7 +16,7 @@ import {
 	Legend,
 	LayoutComponent,
 	Tooltip,
-	Spacer
+	Spacer,
 } from "./components";
 import { Tools } from "./tools";
 
@@ -28,7 +28,7 @@ export class Chart {
 	services: any = {
 		domUtils: DOMUtils,
 		events: Events,
-		transitions: Transitions
+		transitions: Transitions,
 	};
 	model: ChartModel = new ChartModel(this.services);
 
@@ -40,7 +40,7 @@ export class Chart {
 		this.model.set({ holder }, true);
 
 		// Initialize all services
-		Object.keys(this.services).forEach(serviceName => {
+		Object.keys(this.services).forEach((serviceName) => {
 			const serviceObj = this.services[serviceName];
 			this.services[serviceName] = new serviceObj(
 				this.model,
@@ -78,22 +78,22 @@ export class Chart {
 		}
 
 		// Update all services
-		Object.keys(this.services).forEach(serviceName => {
+		Object.keys(this.services).forEach((serviceName) => {
 			const serviceObj = this.services[serviceName];
 			serviceObj.update();
 		});
 
 		// Render all components
-		this.components.forEach(component => component.render(animate));
+		this.components.forEach((component) => component.render(animate));
 
 		// Asynchronously dispatch a "render-finished" event
 		// This is needed because of d3-transitions
 		// Since at the start of the transition
 		// Elements do not hold their final size or position
 		const pendingTransitions = this.services.transitions.getPendingTransitions();
-		const promises = Object.keys(pendingTransitions).map(transitionID => {
+		const promises = Object.keys(pendingTransitions).map((transitionID) => {
 			const transition = pendingTransitions[transitionID];
-			return transition.end().catch(e => e); // Skip rejects since we don't care about those;
+			return transition.end().catch((e) => e); // Skip rejects since we don't care about those;
 		});
 
 		Promise.all(promises).then(() =>
@@ -105,7 +105,7 @@ export class Chart {
 
 	destroy() {
 		// Call the destroy() method on all components
-		this.components.forEach(component => component.destroy());
+		this.components.forEach((component) => component.destroy());
 
 		// Remove the chart holder
 		this.services.domUtils.getHolder().remove();
@@ -119,8 +119,8 @@ export class Chart {
 			components: [new Title(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		const legendComponent = {
@@ -128,8 +128,8 @@ export class Chart {
 			components: [new Legend(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		const graphFrameComponent = {
@@ -137,8 +137,8 @@ export class Chart {
 			components: graphFrameComponents,
 			growth: {
 				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		const isLegendEnabled =
@@ -176,8 +176,8 @@ export class Chart {
 			components: [new Spacer(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		const fullFrameComponent = {
@@ -189,17 +189,17 @@ export class Chart {
 					[
 						...(isLegendEnabled ? [legendComponent] : []),
 						legendSpacerComponent,
-						graphFrameComponent
+						graphFrameComponent,
 					],
 					{
-						direction: fullFrameComponentDirection
+						direction: fullFrameComponentDirection,
 					}
-				)
+				),
 			],
 			growth: {
 				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED
-			}
+				y: LayoutGrowth.FIXED,
+			},
 		};
 
 		// Add chart title if it exists
@@ -212,8 +212,8 @@ export class Chart {
 				components: [new Spacer(this.model, this.services)],
 				growth: {
 					x: LayoutGrowth.PREFERRED,
-					y: LayoutGrowth.FIXED
-				}
+					y: LayoutGrowth.FIXED,
+				},
 			};
 
 			topLevelLayoutComponents.push(titleSpacerComponent);
@@ -226,9 +226,9 @@ export class Chart {
 				this.services,
 				topLevelLayoutComponents,
 				{
-					direction: LayoutDirection.COLUMN
+					direction: LayoutDirection.COLUMN,
 				}
-			)
+			),
 		];
 	}
 }

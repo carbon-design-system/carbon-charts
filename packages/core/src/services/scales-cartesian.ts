@@ -6,7 +6,7 @@ import {
 	CartesianOrientations,
 	ScaleTypes,
 	AxesOptions,
-	ThresholdOptions
+	ThresholdOptions,
 } from "../interfaces";
 import { Tools } from "../tools";
 
@@ -34,7 +34,7 @@ import {
 	subMinutes,
 	differenceInSeconds,
 	subSeconds,
-	addSeconds
+	addSeconds,
 } from "date-fns";
 
 export class CartesianScales extends Service {
@@ -42,14 +42,14 @@ export class CartesianScales extends Service {
 		top: null,
 		right: null,
 		bottom: null,
-		left: null
+		left: null,
 	};
 
 	protected scales = {
 		top: null,
 		right: null,
 		bottom: null,
-		left: null
+		left: null,
 	};
 
 	protected domainAxisPosition: AxisPositions;
@@ -69,9 +69,9 @@ export class CartesianScales extends Service {
 		this.findDomainAndRangeAxes();
 		this.determineOrientation();
 		const axisPositions = Object.keys(AxisPositions).map(
-			axisPositionKey => AxisPositions[axisPositionKey]
+			(axisPositionKey) => AxisPositions[axisPositionKey]
 		);
-		axisPositions.forEach(axisPosition => {
+		axisPositions.forEach((axisPosition) => {
 			this.scales[axisPosition] = this.createScale(axisPosition);
 		});
 	}
@@ -129,11 +129,11 @@ export class CartesianScales extends Service {
 	getMainXAxisPosition() {
 		const possibleXAxisPositions = [
 			AxisPositions.BOTTOM,
-			AxisPositions.TOP
+			AxisPositions.TOP,
 		];
 
 		return [this.domainAxisPosition, this.rangeAxisPosition].find(
-			position => possibleXAxisPositions.indexOf(position) > -1
+			(position) => possibleXAxisPositions.indexOf(position) > -1
 		);
 	}
 
@@ -141,11 +141,11 @@ export class CartesianScales extends Service {
 	getMainYAxisPosition() {
 		const possibleYAxisPositions = [
 			AxisPositions.LEFT,
-			AxisPositions.RIGHT
+			AxisPositions.RIGHT,
 		];
 
 		return [this.domainAxisPosition, this.rangeAxisPosition].find(
-			position => possibleYAxisPositions.indexOf(position) > -1
+			(position) => possibleYAxisPositions.indexOf(position) > -1
 		);
 	}
 
@@ -214,7 +214,7 @@ export class CartesianScales extends Service {
 		const domainIdentifier = this.getDomainIdentifier();
 		const scaleType = this.scaleTypes[this.domainAxisPosition];
 		if (scaleType === ScaleTypes.TIME) {
-			return displayData.filter(datum => {
+			return displayData.filter((datum) => {
 				let date = datum[domainIdentifier];
 				if (typeof date === "string" || date.getTime === undefined) {
 					date = new Date(date);
@@ -224,7 +224,7 @@ export class CartesianScales extends Service {
 			});
 		}
 
-		return displayData.filter(datum => {
+		return displayData.filter((datum) => {
 			return datum[domainIdentifier] === domainValue;
 		});
 	}
@@ -303,7 +303,7 @@ export class CartesianScales extends Service {
 
 		const result = {
 			domainAxisPosition: null,
-			rangeAxisPosition: null
+			rangeAxisPosition: null,
 		};
 		if (
 			mainHorizontalScaleType === ScaleTypes.LABELS ||
@@ -347,7 +347,7 @@ export class CartesianScales extends Service {
 		// If scale is a LABELS scale, return some labels as the domain
 		if (axisOptions && scaleType === ScaleTypes.LABELS) {
 			// Get unique values
-			return map(displayData, d => d[mapsTo]).keys();
+			return map(displayData, (d) => d[mapsTo]).keys();
 		}
 
 		// Get the extent of the domain
@@ -356,11 +356,11 @@ export class CartesianScales extends Service {
 		// If the scale is stacked
 		if (axisOptions.stacked) {
 			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys();
-			allDataValues = dataValuesGroupedByKeys.map(dataValues =>
+			allDataValues = dataValuesGroupedByKeys.map((dataValues) =>
 				sum(values(dataValues) as any)
 			);
 		} else {
-			allDataValues = displayData.map(datum => datum[mapsTo]);
+			allDataValues = displayData.map((datum) => datum[mapsTo]);
 		}
 
 		if (scaleType !== ScaleTypes.TIME && includeZero) {
@@ -421,13 +421,17 @@ export class CartesianScales extends Service {
 		)[0];
 
 		const scaleType = this.getScaleTypeByPosition(domainAxisPosition);
-		if (scaleType === ScaleTypes.TIME && (typeof highestThreshold.value === "string" || highestThreshold.value.getTime === undefined)) {
+		if (
+			scaleType === ScaleTypes.TIME &&
+			(typeof highestThreshold.value === "string" ||
+				highestThreshold.value.getTime === undefined)
+		) {
 			highestThreshold.value = new Date(highestThreshold.value);
 		}
 
 		return {
 			threshold: highestThreshold,
-			scaleValue: domainScale(highestThreshold.value)
+			scaleValue: domainScale(highestThreshold.value),
 		};
 	}
 
@@ -452,7 +456,7 @@ export class CartesianScales extends Service {
 
 		return {
 			threshold: highestThreshold,
-			scaleValue: rangeScale(highestThreshold.value)
+			scaleValue: rangeScale(highestThreshold.value),
 		};
 	}
 }
@@ -464,56 +468,56 @@ function addSpacingToTimeDomain(domain: any, spaceToAddToEdges: number) {
 	if (differenceInYears(endDate, startDate) > 1) {
 		return [
 			subYears(startDate, spaceToAddToEdges),
-			addYears(endDate, spaceToAddToEdges)
+			addYears(endDate, spaceToAddToEdges),
 		];
 	}
 
 	if (differenceInMonths(endDate, startDate) > 1) {
 		return [
 			subMonths(startDate, spaceToAddToEdges),
-			addMonths(endDate, spaceToAddToEdges)
+			addMonths(endDate, spaceToAddToEdges),
 		];
 	}
 
 	if (differenceInDays(endDate, startDate) > 1) {
 		return [
 			subDays(startDate, spaceToAddToEdges),
-			addDays(endDate, spaceToAddToEdges)
+			addDays(endDate, spaceToAddToEdges),
 		];
 	}
 
 	if (differenceInHours(endDate, startDate) > 1) {
 		return [
 			subHours(startDate, spaceToAddToEdges),
-			addHours(endDate, spaceToAddToEdges)
+			addHours(endDate, spaceToAddToEdges),
 		];
 	}
 
 	if (differenceInMinutes(endDate, startDate) > 30) {
 		return [
 			subMinutes(startDate, spaceToAddToEdges * 30),
-			addMinutes(endDate, spaceToAddToEdges * 30)
+			addMinutes(endDate, spaceToAddToEdges * 30),
 		];
 	}
 
 	if (differenceInMinutes(endDate, startDate) > 1) {
 		return [
 			subMinutes(startDate, spaceToAddToEdges),
-			addMinutes(endDate, spaceToAddToEdges)
+			addMinutes(endDate, spaceToAddToEdges),
 		];
 	}
 
 	if (differenceInSeconds(endDate, startDate) > 15) {
 		return [
 			subSeconds(startDate, spaceToAddToEdges * 15),
-			addSeconds(endDate, spaceToAddToEdges * 15)
+			addSeconds(endDate, spaceToAddToEdges * 15),
 		];
 	}
 
 	if (differenceInSeconds(endDate, startDate) > 1) {
 		return [
 			subSeconds(startDate, spaceToAddToEdges),
-			addSeconds(endDate, spaceToAddToEdges)
+			addSeconds(endDate, spaceToAddToEdges),
 		];
 	}
 
