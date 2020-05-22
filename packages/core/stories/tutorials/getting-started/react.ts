@@ -14,12 +14,12 @@ consistent markup, styles, and behavior in prototype and production work.
 
 **with yarn:**
 \`\`\`bash
-yarn add @carbon/charts d3
+yarn add @carbon/charts-react d3
 \`\`\`
 
 **with npm:**
 \`\`\`bash
-npm install --save @carbon/charts d3
+npm install --save @carbon/charts-react d3
 \`\`\`
 
 &nbsp;
