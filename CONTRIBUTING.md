@@ -38,10 +38,10 @@ yarn run storybook
 
 ## Issue guidelines
 
-- **Before submitting**, confirm the issue doesn't already exist by browsing through [existing issues](https://github.com/IBM/carbon-charts/issues). _Duplicates are just a waste of space._
+- **Before submitting**, confirm the issue doesn't already exist by browsing through [existing issues](https://github.com/carbon-design-system/carbon-charts/issues). _Duplicates are just a waste of space._
 - Keep issues **specific to one topic**. _Do not open an issue that describes multiple defects._
 - Provide a **short descriptive title** that mentions the component being addressed.
-- Provide enough of the **relevant information** below to initiate a clear issue description. Most of this content comes out-of-the-box as a template when [creating a new issue](https://github.com/IBM/carbon-charts/issues/new).
+- Provide enough of the **relevant information** below to initiate a clear issue description. Most of this content comes out-of-the-box as a template when [creating a new issue](https://github.com/carbon-design-system/carbon-charts/issues/new).
   - Type of issue
   - Version of charts
   - Description of the issue
@@ -52,7 +52,7 @@ yarn run storybook
   - Code snippets
   - Links to your application source code or running demo
     - Include any connection/authentication information we may need to view the links
-- Add **relevant labels** (accessibility, bug, design, discussion, feature, etc.) to help organize and identify issues. For a complete list of our labels, see the [labels page](https://github.com/IBM/carbon-charts/labels).
+- Add **relevant labels** (accessibility, bug, design, discussion, feature, etc.) to help organize and identify issues. For a complete list of our labels, see the [labels page](https://github.com/carbon-design-system/carbon-charts/labels).
 - If you are interested in contributing, feel free to **assign the issue** to yourself, otherwise leave it unassigned.
 
 ## Pull request guidelines
@@ -77,15 +77,15 @@ yarn run storybook
 
 - While creating the pull request:
   - Prepend "WIP: " to the title of your pull request if it is **not ready** to be merged.
-  - Provide enough of the **relevant information** below to initiate a clear contribution description. Most of this content comes out-of-the-box as a template when [creating a pull request](https://github.com/IBM/carbon-charts/compare).
+  - Provide enough of the **relevant information** below to initiate a clear contribution description. Most of this content comes out-of-the-box as a template when [creating a pull request](https://github.com/carbon-design-system/carbon-charts/compare).
     1. A list of updates with references to the related issue (see: [Closing issues using keywords](https://help.github.com/articles/closing-issues-using-keywords/))
     2. Screenshots or recording
     3. @mention any key stakeholders that need to be aware of the changes
-  - Add **relevant labels** (needs review, accessibility, bug, design, feature, etc.) to help organize and identify issues. For a complete list of our labels, see the [labels page](https://github.com/IBM/carbon-charts/labels)
+  - Add **relevant labels** (needs review, accessibility, bug, design, feature, etc.) to help organize and identify issues. For a complete list of our labels, see the [labels page](https://github.com/carbon-design-system/carbon-charts/labels)
 
 ### Contribution process
 
-1. [Run Charts locally](https://github.com/IBM/carbon-charts/blob/master/README.md#run-charts-locally), then **configure the remotes** from your `charts/` directory:
+1. [Run Charts locally](https://github.com/carbon-design-system/carbon-charts/blob/master/README.md#run-charts-locally), then **configure the remotes** from your `charts/` directory:
 
    ```bash
    # Assign the original repo to a remote called "upstream"
@@ -119,7 +119,7 @@ yarn run storybook
    git push origin <topic-branch-name>
    ```
 
-6. [Open a Pull Request](https://github.com/IBM/carbon-charts/compare) with a clear title and description from the template provided.
+6. [Open a Pull Request](https://github.com/carbon-design-system/carbon-charts/compare) with a clear title and description from the template provided.
 
     - See [Creating a pull request from a fork](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) for step-by-step instructions.
     - Ensure the base branch is assigned to `master`.
