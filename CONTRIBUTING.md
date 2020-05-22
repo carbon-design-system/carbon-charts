@@ -85,11 +85,11 @@ yarn run storybook
 
 ### Contribution process
 
-1. [Run Charts locally](https://github.com/carbon-design-system/carbon-charts/blob/master/README.md#run-charts-locally), then **configure the remotes** from your `charts/` directory:
+1. [Run the library locally](#run-charts-in-local-environment), then **configure the remotes** from your `charts/` directory:
 
    ```bash
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream git@github.com:IBM/carbon-charts.git
+   git remote add upstream git@github.com:carbon-design-system/carbon-charts.git
    ```
 
 2. **Create a new topic branch** (off the original remote branch) to contain your code changes:
