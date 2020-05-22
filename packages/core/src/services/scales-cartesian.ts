@@ -420,6 +420,11 @@ export class CartesianScales extends Service {
 			(a, b) => b.value - a.value
 		)[0];
 
+		const scaleType = this.getScaleTypeByPosition(domainAxisPosition);
+		if (scaleType === ScaleTypes.TIME && (typeof highestThreshold.value === "string" || highestThreshold.value.getTime === undefined)) {
+			highestThreshold.value = new Date(highestThreshold.value);
+		}
+
 		return {
 			threshold: highestThreshold,
 			scaleValue: domainScale(highestThreshold.value)
