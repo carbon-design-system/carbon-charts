@@ -287,6 +287,39 @@ export class ChartModel {
 	}
 
 	/**
+	 * Updates selected datasets
+	 */
+	updateSelectedGroups() {
+		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
+		const dataGroups = this.getDataGroups();
+		const activeItems = dataGroups.filter(group => group.status === ACTIVE);
+
+		const hasDeactivatedItems = dataGroups.some(
+			group => group.status === DISABLED
+		);
+
+		// If there are deactivated items, map the label names into selected datasets
+		if (hasDeactivatedItems) {
+			this.state.options.selectedGroups = activeItems.map(activeItem => activeItem.name);
+		} else {
+			// If every item is active, clear array
+			this.state.options.selectedGroups = [];
+		};
+	}
+
+	checkSelectedGroups(uniqueDataGroups: string[]) {
+		if (this.state.options.selectedGroups.length) {
+			// check if current groups includes every item in selected groups
+			const hasSelectedGroups = this.state.options.selectedGroups
+				.every(groupName => uniqueDataGroups.includes(groupName));
+
+			if (!hasSelectedGroups) {
+				this.state.options.selectedGroups = [];
+			};
+		};
+	}
+
+	/**
 	 * Should the data point be filled?
 	 * @param group
 	 * @param key
@@ -415,12 +448,18 @@ export class ChartModel {
 
 	protected generateDataGroups(data) {
 		const { groupMapsTo } = this.getOptions().data;
-		const { ACTIVE } = Configuration.legend.items.status;
+		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 
 		const uniqueDataGroups = map(data, datum => datum[groupMapsTo]).keys();
+		
+		this.checkSelectedGroups(uniqueDataGroups);
+
 		return uniqueDataGroups.map(groupName => ({
 			name: groupName,
-			status: ACTIVE
+			status: !this.state.options.selectedGroups.length ||
+				this.state.options.selectedGroups.includes(groupName)
+					? ACTIVE
+					: DISABLED,
 		}));
 	}
 
