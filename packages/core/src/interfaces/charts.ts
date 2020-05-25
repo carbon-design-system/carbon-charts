@@ -97,6 +97,10 @@ export interface BaseChartOptions {
 		 */
 		scale?: object;
 	};
+	/**
+	 * options related to pre-selected datasets
+	 */
+	selectedGroups?: string[];
 }
 
 /**
