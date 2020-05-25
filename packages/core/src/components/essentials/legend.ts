@@ -19,7 +19,7 @@ export class Legend extends Component {
 		const options = this.model.getOptions();
 		const legendItems = svg
 			.selectAll("g.legend-item")
-			.data(this.model.getDataGroups(), dataGroup => dataGroup.name);
+			.data(this.model.getDataGroups(), (dataGroup) => dataGroup.name);
 
 		// this.getLegendItemArray()
 
@@ -39,19 +39,19 @@ export class Legend extends Component {
 			.attr("height", checkboxRadius * 2)
 			.attr("rx", 1)
 			.attr("ry", 1)
-			.style("fill", d => {
+			.style("fill", (d) => {
 				return d.status === options.legend.items.status.ACTIVE
 					? this.model.getStrokeColor(d.name)
 					: null;
 			})
-			.classed("active", function(d, i) {
+			.classed("active", function (d, i) {
 				return d.status === options.legend.items.status.ACTIVE;
 			});
 
 		addedLegendItems
 			.append("text")
 			.merge(legendItems.select("text"))
-			.html(d => d.name)
+			.html((d) => d.name)
 			.attr("alignment-baseline", "middle");
 
 		this.breakItemsIntoLines(addedLegendItems);
@@ -94,7 +94,7 @@ export class Legend extends Component {
 		const { DISABLED } = options.legend.items.status;
 		const dataGroups = this.model.getDataGroups();
 		const hasDeactivatedItems = dataGroups.some(
-			dataGroup => dataGroup.status === DISABLED
+			(dataGroup) => dataGroup.status === DISABLED
 		);
 
 		const legendOrientation = Tools.getProperty(
@@ -110,7 +110,7 @@ export class Legend extends Component {
 		let lastYPosition;
 		addedLegendItems
 			.merge(svg.selectAll("g.legend-item"))
-			.each(function(d, i) {
+			.each(function (d, i) {
 				const legendItem = select(this);
 				const previousLegendItem = select(
 					svg.selectAll("g.legend-item").nodes()[i - 1]
@@ -229,9 +229,9 @@ export class Legend extends Component {
 		const options = this.model.getOptions();
 
 		svg.selectAll("g.legend-item")
-			.on("mouseover", function() {
+			.on("mouseover", function () {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_HOVER, {
-					hoveredElement: select(this)
+					hoveredElement: select(this),
 				});
 
 				// Configs
@@ -259,9 +259,9 @@ export class Legend extends Component {
 					.attr("ry", 3)
 					.lower();
 			})
-			.on("click", function() {
+			.on("click", function () {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
-					clickedElement: select(this)
+					clickedElement: select(this),
 				});
 
 				const clickedItem = select(this);
@@ -270,14 +270,14 @@ export class Legend extends Component {
 				self.model.toggleDataLabel(clickedItemData.name);
 				self.model.updateSelectedGroups();
 			})
-			.on("mouseout", function() {
+			.on("mouseout", function () {
 				const hoveredItem = select(this);
 				hoveredItem.select("rect.hover-stroke").remove();
 
 				self.services.events.dispatchEvent(
 					Events.Legend.ITEM_MOUSEOUT,
 					{
-						hoveredElement: hoveredItem
+						hoveredElement: hoveredItem,
 					}
 				);
 			});

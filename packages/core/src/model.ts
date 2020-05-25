@@ -22,7 +22,7 @@ export class ChartModel {
 
 	// Internal Model state
 	protected state: any = {
-		options: {}
+		options: {},
 	};
 
 	// Data labels
@@ -51,9 +51,9 @@ export class ChartModel {
 		const displayData = Tools.clone(this.get("data"));
 		const { groupMapsTo } = this.getOptions().data;
 
-		return displayData.filter(datum => {
+		return displayData.filter((datum) => {
 			const group = dataGroups.find(
-				group => group.name === datum[groupMapsTo]
+				(group) => group.name === datum[groupMapsTo]
 			);
 
 			return group.status === ACTIVE;
@@ -78,7 +78,7 @@ export class ChartModel {
 
 		this.set({
 			data: sanitizedData,
-			dataGroups
+			dataGroups,
 		});
 
 		return sanitizedData;
@@ -92,16 +92,16 @@ export class ChartModel {
 		const { ACTIVE } = Configuration.legend.items.status;
 
 		return this.getDataGroups().filter(
-			dataGroup => dataGroup.status === ACTIVE
+			(dataGroup) => dataGroup.status === ACTIVE
 		);
 	}
 
 	getDataGroupNames() {
-		return this.getDataGroups().map(dataGroup => dataGroup.name);
+		return this.getDataGroups().map((dataGroup) => dataGroup.name);
 	}
 
 	getActiveDataGroupNames() {
-		return this.getActiveDataGroups().map(dataGroup => dataGroup.name);
+		return this.getActiveDataGroups().map((dataGroup) => dataGroup.name);
 	}
 
 	getGroupedData() {
@@ -109,7 +109,7 @@ export class ChartModel {
 		const groupedData = {};
 		const { groupMapsTo } = this.getOptions().data;
 
-		displayData.map(datum => {
+		displayData.map((datum) => {
 			const group = datum[groupMapsTo];
 			if (
 				groupedData[group] !== null &&
@@ -121,9 +121,9 @@ export class ChartModel {
 			}
 		});
 
-		return Object.keys(groupedData).map(groupName => ({
+		return Object.keys(groupedData).map((groupName) => ({
 			name: groupName,
-			data: groupedData[groupName]
+			data: groupedData[groupName],
 		}));
 	}
 
@@ -137,14 +137,14 @@ export class ChartModel {
 
 		const stackKeys = map(
 			displayData,
-			datum => datum[domainIdentifier]
+			(datum) => datum[domainIdentifier]
 		).keys();
 		const dataGroupNames = this.getDataGroupNames();
 
-		return stackKeys.map(key => {
+		return stackKeys.map((key) => {
 			const correspondingValues = { sharedStackKey: key };
-			dataGroupNames.forEach(dataGroupName => {
-				const correspondingDatum = displayData.find(datum => {
+			dataGroupNames.forEach((dataGroupName) => {
+				const correspondingDatum = displayData.find((datum) => {
 					return (
 						datum[groupMapsTo] === dataGroupName &&
 						datum[domainIdentifier].toString() === key
@@ -172,7 +172,7 @@ export class ChartModel {
 				// Add data group names to each series
 				return Object.keys(series)
 					.filter((key: any) => !isNaN(key))
-					.map(key => {
+					.map((key) => {
 						const element = series[key];
 						element[groupMapsTo] = dataGroupNames[i];
 
@@ -210,7 +210,7 @@ export class ChartModel {
 	 */
 	setOptions(newOptions) {
 		this.set({
-			options: Tools.merge(this.getOptions(), newOptions)
+			options: Tools.merge(this.getOptions(), newOptions),
 		});
 	}
 
@@ -242,9 +242,11 @@ export class ChartModel {
 		const dataGroups = this.getDataGroups();
 
 		const hasDeactivatedItems = dataGroups.some(
-			group => group.status === DISABLED
+			(group) => group.status === DISABLED
 		);
-		const activeItems = dataGroups.filter(group => group.status === ACTIVE);
+		const activeItems = dataGroups.filter(
+			(group) => group.status === ACTIVE
+		);
 
 		// If there are deactivated items, toggle "changedLabel"
 		if (hasDeactivatedItems) {
@@ -260,7 +262,7 @@ export class ChartModel {
 				});
 			} else {
 				const indexToChange = dataGroups.findIndex(
-					group => group.name === changedLabel
+					(group) => group.name === changedLabel
 				);
 				dataGroups[indexToChange].status =
 					dataGroups[indexToChange].status === DISABLED
@@ -277,12 +279,12 @@ export class ChartModel {
 
 		// dispatch legend filtering event with the status of all the dataLabels
 		this.services.events.dispatchEvent(Events.Legend.ITEMS_UPDATE, {
-			dataGroups
+			dataGroups,
 		});
 
 		// Update model
 		this.set({
-			dataGroups
+			dataGroups,
 		});
 	}
 
@@ -371,7 +373,7 @@ export class ChartModel {
 		const { datasets, labels } = data;
 
 		// Loop through all datasets
-		datasets.forEach(dataset => {
+		datasets.forEach((dataset) => {
 			// Update each data point to the new format
 			dataset.data.forEach((datum, i) => {
 				let group;
@@ -390,7 +392,7 @@ export class ChartModel {
 
 				const updatedDatum = {
 					group,
-					key: labels[i]
+					key: labels[i],
 				};
 
 				if (isNaN(datum)) {
@@ -437,7 +439,7 @@ export class ChartModel {
 			this.allDataGroups = this.getDataGroupNames();
 		} else {
 			// Loop through current data groups
-			this.getDataGroupNames().forEach(dataGroupName => {
+			this.getDataGroupNames().forEach((dataGroupName) => {
 				// If group name hasn't been stored yet, store it
 				if (this.allDataGroups.indexOf(dataGroupName) === -1) {
 					this.allDataGroups.push(dataGroupName);
@@ -450,7 +452,10 @@ export class ChartModel {
 		const { groupMapsTo } = this.getOptions().data;
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 
-		const uniqueDataGroups = map(data, datum => datum[groupMapsTo]).keys();
+		const uniqueDataGroups = map(
+			data, 
+			(datum) => datum[groupMapsTo]
+		).keys();
 		
 		this.checkSelectedGroups(uniqueDataGroups);
 
@@ -491,7 +496,7 @@ export class ChartModel {
 		 */
 		const colorRange = [];
 		let colorIndex = 0;
-		this.allDataGroups.forEach(dataGroup => {
+		this.allDataGroups.forEach((dataGroup) => {
 			if (userProvidedScale[dataGroup]) {
 				colorRange.push(userProvidedScale[dataGroup]);
 			} else {

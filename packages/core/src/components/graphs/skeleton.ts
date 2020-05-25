@@ -19,7 +19,7 @@ export class Skeleton extends Component {
 		const svg = this.parent;
 		const parent = svg.node().parentNode;
 		const { width, height } = DOMUtils.getSVGElementSize(parent, {
-			useAttrs: true
+			useAttrs: true,
 		});
 		svg.attr("width", width).attr("height", height);
 
@@ -101,19 +101,15 @@ export class Skeleton extends Component {
 	setScales() {
 		const xRange = this.services.cartesianScales.getMainXScale().range();
 		const yRange = this.services.cartesianScales.getMainYScale().range();
-		this.xScale = scaleLinear()
-			.domain([0, 1])
-			.range(xRange);
-		this.yScale = scaleLinear()
-			.domain([0, 1])
-			.range(yRange);
+		this.xScale = scaleLinear().domain([0, 1]).range(xRange);
+		this.yScale = scaleLinear().domain([0, 1]).range(yRange);
 	}
 
 	drawBackdrop(showShimmerEffect: boolean) {
 		const svg = this.parent;
 		const parent = svg.node().parentNode;
 		const { width, height } = DOMUtils.getSVGElementSize(parent, {
-			useAttrs: true
+			useAttrs: true,
 		});
 
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton.DAII")
@@ -148,7 +144,9 @@ export class Skeleton extends Component {
 			"x",
 			"numberOfTicks"
 		);
-		const ticksValues = this.xScale.ticks(ticksNumber).map(d => d * width);
+		const ticksValues = this.xScale
+			.ticks(ticksNumber)
+			.map((d) => d * width);
 
 		const xGridG = DOMUtils.appendOrSelect(this.backdrop, "g.x.skeleton");
 		const update = xGridG.selectAll("line").data(ticksValues);
@@ -156,8 +154,8 @@ export class Skeleton extends Component {
 			.enter()
 			.append("line")
 			.merge(update)
-			.attr("x1", d => d)
-			.attr("x2", d => d)
+			.attr("x1", (d) => d)
+			.attr("x2", (d) => d)
 			.attr("y1", 0)
 			.attr("y2", height);
 
@@ -176,7 +174,9 @@ export class Skeleton extends Component {
 			"y",
 			"numberOfTicks"
 		);
-		const ticksValues = this.xScale.ticks(ticksNumber).map(d => d * height);
+		const ticksValues = this.xScale
+			.ticks(ticksNumber)
+			.map((d) => d * height);
 
 		const yGridG = DOMUtils.appendOrSelect(this.backdrop, "g.y.skeleton");
 		const update = yGridG.selectAll("line").data(ticksValues);
@@ -186,8 +186,8 @@ export class Skeleton extends Component {
 			.merge(update)
 			.attr("x1", 0)
 			.attr("x2", width)
-			.attr("y1", d => d)
-			.attr("y2", d => d);
+			.attr("y1", (d) => d)
+			.attr("y2", (d) => d);
 
 		yGridG
 			.selectAll("line")
@@ -258,7 +258,7 @@ export class Skeleton extends Component {
 		const stopShimmerClass = "stop-shimmer";
 		const container = this.parent.select(".chart-skeleton");
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
-			useAttrs: true
+			useAttrs: true,
 		});
 		const startPoint = 0;
 		const endPoint = width;
@@ -276,8 +276,9 @@ export class Skeleton extends Component {
 		const stops = `
 			<stop class="${stopBgShimmerClass}" offset="${startPoint}"></stop>
 			<stop class="${stopShimmerClass}" offset="${startPoint + shimmerWidth}"></stop>
-			<stop class="${stopBgShimmerClass}" offset="${startPoint +
-			2 * shimmerWidth}"></stop>
+			<stop class="${stopBgShimmerClass}" offset="${
+			startPoint + 2 * shimmerWidth
+		}"></stop>
 		`;
 		linearGradient.html(stops);
 
