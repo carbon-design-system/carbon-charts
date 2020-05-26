@@ -87,6 +87,10 @@ export interface BaseChartOptions {
 		 * used to simulate data loading
 		 */
 		loading?: Boolean;
+		/**
+		 * options related to pre-selected datasets
+		 */
+		selectedGroups?: string[];
 	};
 	/**
 	 * options related to color scales
@@ -97,10 +101,6 @@ export interface BaseChartOptions {
 		 */
 		scale?: object;
 	};
-	/**
-	 * options related to pre-selected datasets
-	 */
-	selectedGroups?: string[];
 }
 
 /**

@@ -151,11 +151,11 @@ const chart: BaseChartOptions = {
 	data: {
 		groupMapsTo: "group",
 		loading: false,
+		selectedGroups: []
 	},
 	color: {
 		scale: null
-	},
-	selectedGroups: []
+	}
 };
 
 /**
