@@ -382,6 +382,12 @@ export class CartesianScales extends Service {
 			return map(displayData, (d) => d[mapsTo]).keys();
 		}
 
+		// If scale is a TIME scale and zoomDomain is available, return Date array as the domain
+		const zoomDomain = this.model.get("zoomDomain");
+		if (zoomDomain && axisOptions && scaleType === ScaleTypes.TIME) {
+			return zoomDomain.map(d => new Date(d));
+		}
+
 		// Get the extent of the domain
 		let domain;
 		let allDataValues;
