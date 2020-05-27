@@ -12,7 +12,8 @@ import {
 	Legend,
 	Title,
 	AxisChartsTooltip,
-	Spacer
+	Spacer,
+	ZoomBar
 } from "./components/index";
 import { Tools } from "./tools";
 
@@ -123,6 +124,17 @@ export class AxisChart extends Chart {
 			}
 		};
 
+		const zoomBarComponent = {
+			id: "zoom-bar",
+			components: [
+				new ZoomBar(this.model, this.services)
+			],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
 		// Add chart title if it exists
 		const topLevelLayoutComponents = [];
 		if (this.model.getOptions().title) {
@@ -139,6 +151,8 @@ export class AxisChart extends Chart {
 
 			topLevelLayoutComponents.push(titleSpacerComponent);
 		}
+
+		topLevelLayoutComponents.push(zoomBarComponent);
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [
