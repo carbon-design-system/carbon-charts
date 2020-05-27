@@ -6,3 +6,7 @@
 @import "./scatter-stacked";
 @import "./radar";
 @import "./gauge";
+
+svg.#{$prefix}--#{$charts-prefix}--chart-svg svg.graph-frame {
+	overflow-x: hidden;
+}
