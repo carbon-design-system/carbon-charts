@@ -289,7 +289,7 @@ export class ChartModel {
 	}
 
 	/**
-	 * Updates selected datasets
+	 * Updates selected groups
 	 */
 	updateSelectedGroups() {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
@@ -301,7 +301,7 @@ export class ChartModel {
 			group => group.status === DISABLED
 		);
 
-		// If there are deactivated items, map the label names into selected datasets
+		// If there are deactivated items, map the item name into selected groups
 		if (hasDeactivatedItems) {
 			options.data.selectedGroups = activeItems.map(activeItem => activeItem.name);
 		} else {
@@ -310,14 +310,18 @@ export class ChartModel {
 		};
 	}
 
+	/**
+	 * Check selected groups with current data groups, clear selected groups if current data groups don't contain every item in selected groups
+	 * @param uniqueDataGroups 
+	 */
 	checkSelectedGroups(uniqueDataGroups: string[]) {
 		const options = this.getOptions();
 		if (options.data.selectedGroups.length) {
 			// check if current groups includes every item in selected groups
-			const hasSelectedGroups = options.data.selectedGroups
+			const hasAllSelectedGroups = options.data.selectedGroups
 				.every(groupName => uniqueDataGroups.includes(groupName));
 
-			if (!hasSelectedGroups) {
+			if (!hasAllSelectedGroups) {
 				options.data.selectedGroups = [];
 			};
 		};
@@ -461,6 +465,7 @@ export class ChartModel {
 		).keys();
 		
 		this.checkSelectedGroups(uniqueDataGroups);
+		// Get group status based on items in selected groups
 		const getStatus = (groupName) => {
 			return (!options.data.selectedGroups.length || 
 				options.data.selectedGroups.includes(groupName))
