@@ -295,6 +295,7 @@ export class ChartModel {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 		const dataGroups = this.getDataGroups();
 		const activeItems = dataGroups.filter(group => group.status === ACTIVE);
+		const options = this.getOptions();
 
 		const hasDeactivatedItems = dataGroups.some(
 			group => group.status === DISABLED
@@ -302,21 +303,22 @@ export class ChartModel {
 
 		// If there are deactivated items, map the label names into selected datasets
 		if (hasDeactivatedItems) {
-			this.state.options.data.selectedGroups = activeItems.map(activeItem => activeItem.name);
+			options.data.selectedGroups = activeItems.map(activeItem => activeItem.name);
 		} else {
 			// If every item is active, clear array
-			this.state.options.data.selectedGroups = [];
+			options.data.selectedGroups = [];
 		};
 	}
 
 	checkSelectedGroups(uniqueDataGroups: string[]) {
-		if (this.state.options.data.selectedGroups.length) {
+		const options = this.getOptions();
+		if (options.data.selectedGroups.length) {
 			// check if current groups includes every item in selected groups
-			const hasSelectedGroups = this.state.options.data.selectedGroups
+			const hasSelectedGroups = options.data.selectedGroups
 				.every(groupName => uniqueDataGroups.includes(groupName));
 
 			if (!hasSelectedGroups) {
-				this.state.options.data.selectedGroups = [];
+				options.data.selectedGroups = [];
 			};
 		};
 	}
@@ -451,6 +453,7 @@ export class ChartModel {
 	protected generateDataGroups(data) {
 		const { groupMapsTo } = this.getOptions().data;
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
+		const options = this.getOptions();
 
 		const uniqueDataGroups = map(
 			data,
@@ -459,8 +462,8 @@ export class ChartModel {
 		
 		this.checkSelectedGroups(uniqueDataGroups);
 		const getStatus = (groupName) => {
-			return (!this.state.options.data.selectedGroups.length || 
-				this.state.options.data.selectedGroups.includes(groupName))
+			return (!options.data.selectedGroups.length || 
+				options.data.selectedGroups.includes(groupName))
 					? ACTIVE
 					: DISABLED;
 		}
