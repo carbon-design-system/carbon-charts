@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
-import { CartesianOrientations } from "../../interfaces";
+import { CartesianOrientations, Events } from "../../interfaces";
 
 // D3 Imports
 import { area } from "d3-shape";
@@ -10,27 +10,20 @@ export class Area extends Component {
 	type = "area";
 
 	init() {
-		// Highlight associated area on legend item hovers
-		this.services.events.addEventListener("legend-item-onhover", e => {
-			const { hoveredElement } = e.detail;
 
-			this.parent.selectAll("g.areas")
-				.transition(this.services.transitions.getTransition("legend-hover-area"))
-				.attr("opacity", d => {
-					if (d.label !== hoveredElement.datum()["key"]) {
-						return 0.2;
-					}
+		const eventsFragment = this.services.events;
 
-					return Configuration.lines.opacity.selected;
-				});
-		});
+		// Highlight correct circle on legend item hovers
+		eventsFragment.addEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover
+		);
 
-		// Un-highlight lines on legend item mouseouts
-		this.services.events.addEventListener("legend-item-onmouseout", e => {
-			this.parent.selectAll("g.areas")
-				.transition(this.services.transitions.getTransition("legend-mouseout-area"))
-				.attr("opacity", Configuration.lines.opacity.selected);
-		});
+		// Un-highlight circles on legend item mouseouts
+		eventsFragment.addEventListener(
+			Events.Legend.ITEM_MOUSEOUT,
+			this.handleLegendMouseOut
+		);
 	}
 
 	render(animate = true) {
@@ -72,16 +65,61 @@ export class Area extends Component {
 			.attr("opacity", 0);
 
 		// Apply styles and datum
-		enteringAreas.merge(svg.selectAll("path.area"))
+		enteringAreas.merge(areas)
 			.attr("fill", group => {
 				return this.model.getFillColor(group.name)
 			})
 			.transition(this.services.transitions.getTransition("area-update-enter", animate))
-			.attr("opacity", 0.3)
+			.attr("opacity", Configuration.area.opacity.selected)
 			.attr("class", "area")
 			.attr("d", group => {
 				const { data } = group;
 				return areaGenerator(data);
 			});
+	}
+
+	handleLegendOnHover = (event: CustomEvent) => {
+		const { hoveredElement } = event.detail;
+
+		this.parent
+			.selectAll("path.area")
+			.transition(
+				this.services.transitions.getTransition("legend-hover-area")
+			)
+			.attr("opacity", (group) => {
+				if (group.name !== hoveredElement.datum()["name"]) {
+					return Configuration.area.opacity.unselected;
+				}
+
+				return Configuration.area.opacity.selected;
+			});
+	};
+
+	handleLegendMouseOut = (event: CustomEvent) => {
+		this.parent
+			.selectAll("path.area")
+			.transition(
+				this.services.transitions.getTransition("legend-mouseout-area")
+			)
+			.attr("opacity", Configuration.area.opacity.selected);
+	};
+
+	destroy() {
+		// Remove event listeners
+		this.parent
+			.selectAll("path.area")
+			.on("mousemove", null)
+			.on("mouseout", null);
+
+		// Remove legend listeners
+		const eventsFragment = this.services.events;
+		eventsFragment.removeEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover
+		);
+		eventsFragment.removeEventListener(
+			Events.Legend.ITEM_MOUSEOUT,
+			this.handleLegendMouseOut
+		);
 	}
 }
