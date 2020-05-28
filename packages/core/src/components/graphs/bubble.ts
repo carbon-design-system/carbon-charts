@@ -18,8 +18,8 @@ export class Bubble extends Scatter {
 		const data = selection.data();
 		// Filter out any null/undefined values
 		const allRadii = data
-			.map(d => d[radiusMapsTo])
-			.filter(radius => radius);
+			.map((d) => d[radiusMapsTo])
+			.filter((radius) => radius);
 		const chartSize = DOMUtils.getSVGElementSize(
 			this.services.domUtils.getMainSVG(),
 			{ useAttr: true }
@@ -65,12 +65,12 @@ export class Bubble extends Scatter {
 				this.services.cartesianScales.getRangeValue(d, i)
 			)
 			// We need `|| 1` here in case the user doesn't provide radius values in data
-			.attr("r", d => radiusScale(d[radiusMapsTo] || 1))
-			.attr("fill", d =>
+			.attr("r", (d) => radiusScale(d[radiusMapsTo] || 1))
+			.attr("fill", (d) =>
 				this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d)
 			)
 			.attr("fill-opacity", options.bubble.fillOpacity)
-			.attr("stroke", d =>
+			.attr("stroke", (d) =>
 				this.model.getStrokeColor(
 					d[groupMapsTo],
 					d[domainIdentifier],

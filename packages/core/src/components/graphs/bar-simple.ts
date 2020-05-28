@@ -36,18 +36,13 @@ export class SimpleBar extends Bar {
 		// Update data on all bars
 		const bars = svg
 			.selectAll("path.bar")
-			.data(this.model.getDisplayData(), datum => datum[groupMapsTo]);
+			.data(this.model.getDisplayData(), (datum) => datum[groupMapsTo]);
 
 		// Remove bars that are no longer needed
-		bars.exit()
-			.attr("opacity", 0)
-			.remove();
+		bars.exit().attr("opacity", 0).remove();
 
 		// Add the paths that need to be introduced
-		const barsEnter = bars
-			.enter()
-			.append("path")
-			.attr("opacity", 0);
+		const barsEnter = bars.enter().append("path").attr("opacity", 0);
 
 		barsEnter
 			.merge(bars)
@@ -59,7 +54,7 @@ export class SimpleBar extends Bar {
 					animate
 				)
 			)
-			.attr("fill", d => this.model.getFillColor(d[groupMapsTo]))
+			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
@@ -84,7 +79,7 @@ export class SimpleBar extends Bar {
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "bar")
-			.attr("aria-label", d => d.value);
+			.attr("aria-label", (d) => d.value);
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
@@ -101,7 +96,7 @@ export class SimpleBar extends Bar {
 					"legend-hover-simple-bar"
 				)
 			)
-			.attr("opacity", d =>
+			.attr("opacity", (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
 	};
@@ -124,7 +119,7 @@ export class SimpleBar extends Bar {
 		const self = this;
 		this.parent
 			.selectAll("path.bar")
-			.on("mouseover", function(datum) {
+			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", true);
 				hoveredElement
@@ -142,29 +137,29 @@ export class SimpleBar extends Bar {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
 					element: hoveredElement,
-					datum
+					datum,
 				});
 
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					type: TooltipTypes.DATAPOINT
+					type: TooltipTypes.DATAPOINT,
 				});
 			})
-			.on("mousemove", function(datum) {
+			.on("mousemove", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
 					element: select(this),
-					datum
+					datum,
 				});
 			})
-			.on("click", function(datum) {
+			.on("click", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					element: select(this),
-					datum
+					datum,
 				});
 			})
-			.on("mouseout", function(datum) {
+			.on("mouseout", function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
@@ -181,12 +176,12 @@ export class SimpleBar extends Bar {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
 					element: hoveredElement,
-					datum
+					datum,
 				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement
+					hoveredElement,
 				});
 			});
 	}

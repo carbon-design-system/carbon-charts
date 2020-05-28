@@ -171,13 +171,13 @@ export class Grid extends Component {
 			: this.getGridlineThreshold(position);
 		const svg = this.parent;
 
-		const xGridlines = svg.selectAll(".x.grid .tick").filter(function() {
+		const xGridlines = svg.selectAll(".x.grid .tick").filter(function () {
 			const translations = Tools.getTranslationValues(this);
 
 			// threshold for when to display a gridline tooltip
 			const bounds = {
 				min: Number(translations.tx) - threshold,
-				max: Number(translations.tx) + threshold
+				max: Number(translations.tx) + threshold,
 			};
 
 			return bounds.min <= position[0] && position[0] <= bounds.max;
