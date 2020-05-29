@@ -1,3 +1,4 @@
+import * as areaDemos from "./area";
 import * as barDemos from "./bar";
 import * as bubbleDemos from "./bubble";
 import * as donutDemos from "./donut";
@@ -8,6 +9,7 @@ import * as stepDemos from "./step";
 import * as timeSeriesAxisDemos from "./time-series-axis";
 import * as radarDemos from "./radar";
 
+export * from "./area";
 export * from "./bar";
 export * from "./bubble";
 export * from "./donut";
@@ -29,6 +31,11 @@ import {
 import { Tools } from "@carbon/charts/tools";
 
 export const chartTypes = {
+	AreaChart: {
+		vanilla: "AreaChart",
+		angular: "ibm-simple-bar-chart",
+		vue: "ccv-simple-bar-chart",
+	},
 	SimpleBarChart: {
 		vanilla: "SimpleBarChart",
 		angular: "ibm-simple-bar-chart",
@@ -77,6 +84,23 @@ export const chartTypes = {
 };
 
 let allDemoGroups = [
+	{
+		title: "Area",
+		demos: [
+			{
+				options: areaDemos.areaTimeSeriesCurvedOptions,
+				data: areaDemos.areaTimeSeriesCurvedData,
+				chartType: chartTypes.AreaChart,
+				isDemoExample: true,
+			},
+			{
+				options: areaDemos.areaTimeSeriesOptions,
+				data: areaDemos.areaTimeSeriesData,
+				chartType: chartTypes.AreaChart,
+				isDemoExample: true,
+			},
+		],
+	},
 	{
 		title: "Bar (vertical)",
 		demos: [
@@ -519,36 +543,19 @@ let allDemoGroups = [
 				data: radarDemos.radarData,
 				options: radarDemos.radarOptions,
 				chartType: chartTypes.RadarChart,
+				isDemoExample: true,
 			},
 			{
 				data: radarDemos.radarWithMissingDataData,
 				options: radarDemos.radarWithMissingDataOptions,
 				chartType: chartTypes.RadarChart,
+				isDemoExample: true,
 			},
 			{
 				data: radarDemos.radarDenseData,
 				options: radarDemos.radarDenseOptions,
 				chartType: chartTypes.RadarChart,
-			},
-		],
-	},
-	{
-		title: "Radar",
-		demos: [
-			{
-				data: radarDemos.radarData,
-				options: radarDemos.radarOptions,
-				chartType: chartTypes.RadarChart,
-			},
-			{
-				data: radarDemos.radarWithMissingDataData,
-				options: radarDemos.radarWithMissingDataOptions,
-				chartType: chartTypes.RadarChart,
-			},
-			{
-				data: radarDemos.radarDenseData,
-				options: radarDemos.radarDenseOptions,
-				chartType: chartTypes.RadarChart,
+				isDemoExample: true,
 			},
 		],
 	},
@@ -599,7 +606,7 @@ export const storybookDemoGroups = Tools.clone(allDemoGroups);
 // in the demo page we want to show only demos with isDemoExample = true
 export const demoGroups = Tools.clone(allDemoGroups)
 	.map((demoGroup) => {
-		demoGroup.demos = demoGroup.demos.filter((demo) => demo.isDemoExample);
+		demoGroup.demos = demoGroup.demos.filter(demo => demo.isDemoExample);
 		return demoGroup;
 	})
 	.filter((demoGroup) => demoGroup.demos.length); // remove demoGroup if it's children are all with isDemoExample = false
