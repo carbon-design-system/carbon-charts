@@ -1,32 +1,34 @@
 import { storiesOf } from '@storybook/vue';
 import { withKnobs, object } from '@storybook/addon-knobs';
 
-import * as ChartComponents from "../src/index";
+import * as ChartComponents from '../src/index';
 
-import { demoGroups } from "@carbon/charts/demo/demo-data";
+import { demoGroups } from '@carbon/charts/demo/data';
 
 // Loop through all demo groups
 demoGroups.forEach(demoGroup => {
 	// Create story group for each demo group
-	const groupStories = storiesOf(demoGroup.title, module).addDecorator(withKnobs);
+	const groupStories = storiesOf(demoGroup.title, module).addDecorator(
+		withKnobs({ escapeHTML: false })
+	);
 
 	// Loop through the demos for the group
 	demoGroup.demos.forEach(demo => {
 		const component = ChartComponents[`Ccv${demo.chartType.vanilla}`];
 		groupStories.add(demo.title, () => ({
 			components: {
-				[component.name]: component
+				[component.name]: component,
 			},
 			props: {
 				data: {
-					default: object("Data", demo.data)
+					default: object('Data', demo.data),
 				},
 				options: {
-					default: object("Options", demo.options)
-				}
+					default: object('Options', demo.options),
+				},
 			},
 			template: `
-				<div class="container">
+				<div class="container theme--white">
 					<h3>
 						<b>Component:</b>
 						<span class="bx--tag bx--tag--green component-name">${demo.chartType.vue}</span>
@@ -42,7 +44,7 @@ demoGroups.forEach(demoGroup => {
 						<img src="https://codesandbox.io/static/img/play-codesandbox.svg" class="marginTop" />
 					</a>
 				</div>
-			`
+			`,
 		}));
 	});
 });

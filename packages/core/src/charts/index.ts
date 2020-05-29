@@ -7,3 +7,4 @@ export * from "./line";
 export * from "./scatter";
 export * from "./pie";
 export * from "./donut";
+export * from "./radar";

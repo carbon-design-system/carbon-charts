@@ -1,10 +1,15 @@
 import { Tooltip } from "./tooltip";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
-import { TooltipPosition, TooltipTypes, CartesianOrientations } from "./../../interfaces/enums";
+import {
+	TooltipPosition,
+	TooltipTypes,
+	CartesianOrientations,
+	Events,
+} from "./../../interfaces";
 
 // import the settings for the css prefix
-import settings from "carbon-components/src/globals/js/settings";
+import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -13,19 +18,42 @@ export class TooltipBar extends Tooltip {
 	init() {
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
-		const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
-		this.tooltip = DOMUtils.appendOrSelect(holder, `div.${settings.prefix}--${chartprefix}--tooltip`);
+		const chartprefix = Tools.getProperty(
+			this.model.getOptions(),
+			"style",
+			"prefix"
+		);
+		this.tooltip = DOMUtils.appendOrSelect(
+			holder,
+			`div.${settings.prefix}--${chartprefix}--tooltip`
+		);
 
 		// Apply html content to the tooltip
-		const tooltipTextContainer = DOMUtils.appendOrSelect(this.tooltip, "div.content-box");
+		const tooltipTextContainer = DOMUtils.appendOrSelect(
+			this.tooltip,
+			"div.content-box"
+		);
 		this.tooltip.style("max-width", null);
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this.services.events.addEventListener("show-tooltip", e => {
+		this.services.events.addEventListener(Events.Tooltip.SHOW, (e) => {
 			// check the type of tooltip and that it is enabled
-			if ((e.detail.type === TooltipTypes.DATAPOINT && Tools.getProperty(this.model.getOptions(), "tooltip", "datapoint", "enabled"))
-				|| (e.detail.type === TooltipTypes.GRIDLINE && Tools.getProperty(this.model.getOptions(), "tooltip", "gridline", "enabled")) ) {
-
+			if (
+				(e.detail.type === TooltipTypes.DATAPOINT &&
+					Tools.getProperty(
+						this.model.getOptions(),
+						"tooltip",
+						"datapoint",
+						"enabled"
+					)) ||
+				(e.detail.type === TooltipTypes.GRIDLINE &&
+					Tools.getProperty(
+						this.model.getOptions(),
+						"tooltip",
+						"gridline",
+						"enabled"
+					))
+			) {
 				let data = e.detail.hoveredElement.datum() as any;
 				const hoveredElement = e.detail.hoveredElement.node();
 
@@ -35,33 +63,65 @@ export class TooltipBar extends Tooltip {
 					data = e.detail.multidata;
 					defaultHTML = this.getMultilineTooltipHTML(data);
 				} else {
-					defaultHTML = this.getTooltipHTML(e.detail.hoveredElement.datum());
+					if (e.detail.data) {
+						data = e.detail.data;
+					} else {
+						data = e.detail.hoveredElement.datum();
+					}
+
+					defaultHTML = this.getTooltipHTML(data);
 				}
 
 				// if there is a provided tooltip HTML function call it and pass the defaultHTML
-				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
-					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data, defaultHTML));
+				if (
+					Tools.getProperty(
+						this.model.getOptions(),
+						"tooltip",
+						"customHTML"
+					)
+				) {
+					tooltipTextContainer.html(
+						this.model
+							.getOptions()
+							.tooltip.customHTML(data, defaultHTML)
+					);
 				} else {
 					// default tooltip
 					tooltipTextContainer.html(defaultHTML);
 				}
 
-				const position = this.getTooltipPosition(hoveredElement);
+				const position = this.getTooltipPosition(hoveredElement, data);
 				// Position the tooltip relative to the bars
-				this.positionTooltip(e.detail.multidata ? undefined : position );
-
+				this.positionTooltip(e.detail.multidata ? undefined : position);
 			} else if (e.detail.type === TooltipTypes.TITLE) {
 				// use the chart size to enforce a max width on the tooltip
-				const chart = DOMUtils.appendOrSelect(holder, `svg.${settings.prefix}--${chartprefix}--chart-svg`);
+				const chart = DOMUtils.appendOrSelect(
+					holder,
+					`svg.${settings.prefix}--${chartprefix}--chart-svg`
+				);
 				// use the configs to determine how large the tooltip should be
-				const tooltipMax =  DOMUtils.getSVGElementSize(chart).width * Tools.getProperty(this.model.getOptions(), "tooltip", "title", "width");
+				const tooltipMax =
+					DOMUtils.getSVGElementSize(chart).width *
+					Tools.getProperty(
+						this.model.getOptions(),
+						"tooltip",
+						"title",
+						"width"
+					);
 				this.tooltip.style("max-width", tooltipMax);
 
 				// use tooltip.ts to get the tooltip html for titles
-				tooltipTextContainer.html(super.getTooltipHTML(e.detail.hoveredElement, TooltipTypes.TITLE));
+				tooltipTextContainer.html(
+					super.getTooltipHTML(
+						e.detail.hoveredElement,
+						TooltipTypes.TITLE
+					)
+				);
 
 				// get the position based on the title positioning (static)
-				const position = super.getTooltipPosition(e.detail.hoveredElement.node());
+				const position = super.getTooltipPosition(
+					e.detail.hoveredElement.node()
+				);
 				this.positionTooltip(position);
 			}
 
@@ -70,7 +130,7 @@ export class TooltipBar extends Tooltip {
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
-		this.services.events.addEventListener("hide-tooltip", () => {
+		this.services.events.addEventListener(Events.Tooltip.HIDE, () => {
 			this.tooltip.classed("hidden", true);
 		});
 	}
@@ -80,10 +140,14 @@ export class TooltipBar extends Tooltip {
 	 * positive valued data and below negative value data.
 	 * @param hoveredElement
 	 */
-	getTooltipPosition(hoveredElement) {
-		const data = select(hoveredElement).datum() as any;
+	getTooltipPosition(hoveredElement, data?: any) {
+		if (data === undefined) {
+			data = select(hoveredElement).datum() as any;
+		}
 
-		const holderPosition = select(this.services.domUtils.getHolder()).node().getBoundingClientRect();
+		const holderPosition = select(this.services.domUtils.getHolder())
+			.node()
+			.getBoundingClientRect();
 		const barPosition = hoveredElement.getBoundingClientRect();
 
 		const { verticalOffset } = this.model.getOptions().tooltip.datapoint;
@@ -91,19 +155,25 @@ export class TooltipBar extends Tooltip {
 		if (data.value <= 0) {
 			// negative bars
 			const tooltipPos = {
-				left: (barPosition.left - holderPosition.left) + barPosition.width / 2,
-				top: (barPosition.bottom - holderPosition.top) + verticalOffset
+				left:
+					barPosition.left -
+					holderPosition.left +
+					barPosition.width / 2,
+				top: barPosition.bottom - holderPosition.top + verticalOffset,
 			};
 
-			return {placement: TooltipPosition.BOTTOM, position: tooltipPos};
+			return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
 		} else {
 			// positive bars
 			const tooltipPos = {
-				left: (barPosition.left - holderPosition.left) + barPosition.width / 2,
-				top: (barPosition.top - holderPosition.top) - verticalOffset
+				left:
+					barPosition.left -
+					holderPosition.left +
+					barPosition.width / 2,
+				top: barPosition.top - holderPosition.top - verticalOffset,
 			};
 
-			return {placement: TooltipPosition.TOP, position: tooltipPos};
+			return { placement: TooltipPosition.TOP, position: tooltipPos };
 		}
 	}
 
@@ -112,8 +182,13 @@ export class TooltipBar extends Tooltip {
 	 * @param data associated values for the hovered bar
 	 */
 	getTooltipHTML(data: any) {
-		const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-		this.model.getOptions().tooltip.valueFormatter(data.value) : data.value.toLocaleString("en");
+		const formattedValue = Tools.getProperty(
+			this.model.getOptions(),
+			"tooltip",
+			"valueFormatter"
+		)
+			? this.model.getOptions().tooltip.valueFormatter(data.value)
+			: data.value.toLocaleString("en");
 
 		return `<div class="datapoint-tooltip"><p class="value">${formattedValue}</p></div>`;
 	}
@@ -128,7 +203,10 @@ export class TooltipBar extends Tooltip {
 		points.reverse();
 		// in a vertical bar chart the tooltip should display in order of the drawn bars
 		// in horizontal stacked bar, the order of the segments from Left to Right are displayed top down in tooltip
-		if (this.services.cartesianScales.getOrientation() === CartesianOrientations.VERTICAL) {
+		if (
+			this.services.cartesianScales.getOrientation() ===
+			CartesianOrientations.VERTICAL
+		) {
 			points.reverse();
 		}
 
@@ -136,18 +214,35 @@ export class TooltipBar extends Tooltip {
 		let total = points.reduce((sum, item) => sum + item.value, 0);
 
 		// format the total value
-		total = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-		this.model.getOptions().tooltip.valueFormatter(total) : total.toLocaleString("en");
+		total = Tools.getProperty(
+			this.model.getOptions(),
+			"tooltip",
+			"valueFormatter"
+		)
+			? this.model.getOptions().tooltip.valueFormatter(total)
+			: total.toLocaleString("en");
 
-		return  "<ul class='multi-tooltip'>" +
-			points.map(datapoint => {
-				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter") ?
-				this.model.getOptions().tooltip.valueFormatter(datapoint.value) : datapoint.value.toLocaleString("en");
+		return (
+			"<ul class='multi-tooltip'>" +
+			points
+				.map((datapoint) => {
+					const formattedValue = Tools.getProperty(
+						this.model.getOptions(),
+						"tooltip",
+						"valueFormatter"
+					)
+						? this.model
+								.getOptions()
+								.tooltip.valueFormatter(datapoint.value)
+						: datapoint.value.toLocaleString("en");
 
-				// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
-				const indicatorColor = this.model.getStrokeColor(datapoint.datasetLabel, datapoint.label);
+					// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
+					const indicatorColor = this.model.getStrokeColor(
+						datapoint.datasetLabel,
+						datapoint.label
+					);
 
-				return `
+					return `
 				<li>
 					<div class="datapoint-tooltip">
 						<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
@@ -155,13 +250,15 @@ export class TooltipBar extends Tooltip {
 						<p class="value">${formattedValue}</p>
 					</div>
 				</li>`;
-			}).join("") +
-				`<li>
+				})
+				.join("") +
+			`<li>
 					<div class='total-val'>
 						<p class='label'>Total</p>
 						<p class='value'>${total}</p>
 					</div>
 				</li>
-			</ul>`;
+			</ul>`
+		);
 	}
 }

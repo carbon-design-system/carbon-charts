@@ -1,7 +1,4 @@
-// Carbon variables
-@import './vendor/carbon-components/scss/globals/scss/vars';
-// Carbon theme initializations
-@import "./vendor/@carbon/themes/scss/themes";
-@include carbon--theme();
-
-@import "./styles.scss";
+@import "./vendor/carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins";
+@include carbon--theme($carbon--theme--white) {
+	@import "./styles";
+}

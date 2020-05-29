@@ -2,26 +2,29 @@
 import { PieChartModel } from "../model-pie";
 import { Chart } from "../chart";
 import * as Configuration from "../configuration";
-import {
-	ChartConfig,
-	PieChartOptions
-} from "../interfaces/index";
+import { ChartConfig, PieChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
+import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
 	Pie,
 	// the imports below are needed because of typescript bug (error TS4029)
-	Tooltip,
+	TooltipPie,
 	Legend,
-	LayoutComponent
+	LayoutComponent,
+	Skeleton,
 } from "../components/index";
 
 export class PieChart extends Chart {
 	model = new PieChartModel(this.services);
 
 	// TODO - Optimize the use of "extending"
-	constructor(holder: Element, chartConfigs: ChartConfig<PieChartOptions>, extending = false) {
+	constructor(
+		holder: Element,
+		chartConfigs: ChartConfig<PieChartOptions>,
+		extending = false
+	) {
 		super(holder, chartConfigs);
 
 		// TODO - Optimize the use of "extending"
@@ -32,8 +35,8 @@ export class PieChart extends Chart {
 		// Merge the default options for this chart
 		// With the user provided options
 		this.model.setOptions(
-			Tools.merge(
-				Tools.clone(Configuration.options.pieChart),
+			Tools.mergeDefaultChartOptions(
+				Configuration.options.pieChart,
 				chartConfigs.options
 			)
 		);
@@ -45,12 +48,15 @@ export class PieChart extends Chart {
 	getComponents() {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [
-			new Pie(this.model, this.services)
+			new Pie(this.model, this.services),
+			new Skeleton(this.model, this.services, {
+				skeleton: Skeletons.PIE,
+			}),
 		];
 
 		// get the base chart components and export with tooltip
 		const components: any[] = this.getChartComponents(graphFrameComponents);
-		components.push(new Tooltip(this.model, this.services));
+		components.push(new TooltipPie(this.model, this.services));
 		return components;
 	}
 }

@@ -1,6 +1,7 @@
 // Internal Imports
 import { Service } from "../service";
 import * as Configuration from "../../configuration";
+import { Events } from "./../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -11,19 +12,23 @@ export class Transitions extends Service {
 	// transitions: Transition<any, any, any, any>[];
 
 	init() {
-		this.services.events
-			.addEventListener("model-update", () => {
-				this.pendingTransitions = {};
-			});
+		this.services.events.addEventListener(Events.Model.UPDATE, () => {
+			this.pendingTransitions = {};
+		});
 	}
 
-	getTransition(name?: string, animate?: boolean): Transition<any, any, any, any> {
+	getTransition(
+		name?: string,
+		animate?: boolean
+	): Transition<any, any, any, any> {
 		if (this.model.getOptions().animations === false || animate === false) {
 			return this.getInstantTransition(name);
 		}
 
-		const t: any = transition(name)
-			.duration(Tools.getProperty(Configuration.transitions, name, "duration") || Configuration.transitions.default.duration);
+		const t: any = transition(name).duration(
+			Tools.getProperty(Configuration.transitions, name, "duration") ||
+				Configuration.transitions.default.duration
+		);
 
 		this.pendingTransitions[t._id] = t;
 		t.on("end interrupt cancel", () => {
@@ -33,8 +38,8 @@ export class Transitions extends Service {
 		return t;
 	}
 
-	getInstantTransition(name?: string): Transition<any, any, any, any>  {
-		const t: any =  transition(name).duration(0);
+	getInstantTransition(name?: string): Transition<any, any, any, any> {
+		const t: any = transition(name).duration(0);
 
 		this.pendingTransitions[t._id] = t;
 		t.on("end interrupt cancel", () => {

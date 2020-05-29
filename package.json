@@ -14,6 +14,7 @@
 	"scripts": {
 		"clean": "lerna clean && lerna run clean && rm -rf node_modules",
 		"commit": "git-cz",
+		"format": "lerna run format",
 		"test": "lerna run test",
 		"lint": "lerna run lint",
 		"build": "yarn build-all",
@@ -28,6 +29,7 @@
 	},
 	"husky": {
 		"hooks": {
+			"pre-commit": "lerna run format",
 			"pre-push": "bash scripts/prepush.sh"
 		}
 	},
