@@ -223,6 +223,7 @@ export interface PieChartOptions extends BaseChartOptions {
 export interface DonutChartOptions extends PieChartOptions {
 	donut?: {
 		center?: {
+			label?: string;
 			numberFontSize?: Function;
 			titleFontSize?: Function;
 			titleYPosition?: Function;

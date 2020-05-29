@@ -94,8 +94,10 @@ export class CartesianScales extends Service {
 
 	determineOrientation() {
 		if (
-			this.rangeAxisPosition === AxisPositions.LEFT &&
-			this.domainAxisPosition === AxisPositions.BOTTOM
+			(this.rangeAxisPosition === AxisPositions.LEFT ||
+				this.rangeAxisPosition === AxisPositions.RIGHT) &&
+			(this.domainAxisPosition === AxisPositions.BOTTOM ||
+				this.domainAxisPosition === AxisPositions.TOP)
 		) {
 			this.orientation = CartesianOrientations.VERTICAL;
 		} else {
@@ -247,11 +249,13 @@ export class CartesianScales extends Service {
 
 	protected findMainVerticalAxisPosition() {
 		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, "axes");
+		const axesOptions = Tools.getProperty(options, "axes");
 
 		// If right axis has been specified as `main`
 		if (
-			Tools.getProperty(axisOptions, AxisPositions.RIGHT, "main") === true
+			(Tools.getProperty(axesOptions, AxisPositions.LEFT) === null &&
+				Tools.getProperty(axesOptions, AxisPositions.RIGHT) !== null) ||
+			Tools.getProperty(axesOptions, AxisPositions.RIGHT, "main") === true
 		) {
 			return AxisPositions.RIGHT;
 		}
@@ -261,11 +265,13 @@ export class CartesianScales extends Service {
 
 	protected findMainHorizontalAxisPosition() {
 		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, "axes");
+		const axesOptions = Tools.getProperty(options, "axes");
 
 		// If top axis has been specified as `main`
 		if (
-			Tools.getProperty(axisOptions, AxisPositions.TOP, "main") === true
+			(Tools.getProperty(axesOptions, AxisPositions.BOTTOM) === null &&
+				Tools.getProperty(axesOptions, AxisPositions.TOP) !== null) ||
+			Tools.getProperty(axesOptions, AxisPositions.TOP, "main") === true
 		) {
 			return AxisPositions.TOP;
 		}
@@ -413,6 +419,15 @@ export class CartesianScales extends Service {
 		const highestThreshold = thresholds.sort(
 			(a, b) => b.value - a.value
 		)[0];
+
+		const scaleType = this.getScaleTypeByPosition(domainAxisPosition);
+		if (
+			scaleType === ScaleTypes.TIME &&
+			(typeof highestThreshold.value === "string" ||
+				highestThreshold.value.getTime === undefined)
+		) {
+			highestThreshold.value = new Date(highestThreshold.value);
+		}
 
 		return {
 			threshold: highestThreshold,

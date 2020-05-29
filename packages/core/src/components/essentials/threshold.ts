@@ -2,7 +2,12 @@ import { Component } from "../component";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 import { ChartModel } from "../../model";
-import { AxisPositions, Events, ScaleTypes } from "../../interfaces";
+import {
+	AxisPositions,
+	Events,
+	ScaleTypes,
+	CartesianOrientations,
+} from "../../interfaces";
 import { select, mouse } from "d3-selection";
 
 // Carbon position service
@@ -63,9 +68,6 @@ export class Threshold extends Component {
 		const scale = this.services.cartesianScales.getScaleByPosition(
 			axisPosition
 		);
-		const isVertical = [AxisPositions.LEFT, AxisPositions.RIGHT].includes(
-			axisPosition
-		);
 		const scaleType = this.services.cartesianScales.getScaleTypeByPosition(
 			axisPosition
 		);
@@ -75,9 +77,23 @@ export class Threshold extends Component {
 		const [xScaleStart, xScaleEnd] = mainXScale.range();
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
 
-		if (isVertical) {
-			// Position the threshold on the y scale value
-			const y = scale(value) + (isScaleTypeLabels ? scale.step() / 2 : 0);
+		const { cartesianScales } = this.services;
+		const orientation = cartesianScales.getOrientation();
+		const getDomainValue = (d) => cartesianScales.getDomainValue(d);
+		const getRangeValue = (d) => cartesianScales.getRangeValue(d);
+		const [
+			getXValue,
+			getYValue,
+		] = Tools.flipDomainAndRangeBasedOnOrientation(
+			getDomainValue,
+			getRangeValue,
+			orientation
+		);
+
+		if (orientation === CartesianOrientations.VERTICAL) {
+			const position =
+				getXValue(value) + (isScaleTypeLabels ? scale.step() / 2 : 0);
+			// Position the threshold on the x scale value
 			this.threshold
 				.transition(
 					this.services.transitions.getTransition(
@@ -85,27 +101,29 @@ export class Threshold extends Component {
 						animate
 					)
 				)
-				.attr("transform", `translate(${xScaleStart}, ${y})`);
+				.attr("transform", `translate(${position}, ${yScaleStart})`);
+			// Set line end point on the y-axis
+			thresholdLine.attr("y2", yScaleEnd - yScaleStart);
+			// Set hoverable area width and rotate it
+			thresholdRect
+				.attr("width", yScaleEnd - yScaleStart)
+				.classed("rotate", true);
+		} else {
+			const position =
+				getYValue(value) + (isScaleTypeLabels ? scale.step() / 2 : 0);
+			// Position the threshold on the y scale value
+			this.threshold
+				.transition(
+					this.services.transitions.getTransition(
+						"threshold-update",
+						animate
+					)
+				)
+				.attr("transform", `translate(${xScaleStart}, ${position})`);
 			// Set line end point on the x-axis
 			thresholdLine.attr("x2", xScaleEnd - xScaleStart);
 			// Set hoverable area width
 			thresholdRect.attr("width", xScaleEnd - xScaleStart);
-		} else {
-			// Position the threshold on the x scale value
-			const x = scale(value) + (isScaleTypeLabels ? scale.step() / 2 : 0);
-			this.threshold
-				.transition(
-					this.services.transitions.getTransition(
-						"threshold-update",
-						animate
-					)
-				)
-				.attr("transform", `translate(${x}, ${yScaleStart})`);
-			// Set line end point on the y-axis
-			thresholdLine.attr("y2", yScaleEnd - yScaleStart);
-			// Set hoverable area width and rotate it
-			thresholdRect.attr("width", yScaleEnd - yScaleStart);
-			thresholdRect.classed("rotate", true);
 		}
 
 		const self = this;

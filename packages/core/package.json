@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "0.30.24",
+	"version": "0.31.0",
 	"description": "Carbon charting components",
 	"main": "./bundle.js",
 	"module": "./index.js",
@@ -14,13 +14,14 @@
 		"test": "karma start --single-run",
 		"test:watch": "karma start --no-single-run",
 		"clean": "rm -rf dist demo/bundle",
-		"prettier": "prettier . --write",
+		"format": "prettier . --write \"**/*.{scss,css,js,ts,md}\"",
 		"start": "yarn run storybook",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./.storybook/assets"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/carbon-charts.git"
+		"url": "git@github.com:carbon-design-system/carbon-charts.git",
+		"homepage": "https://carbon-design-system.github.io/carbon-charts/"
 	},
 	"keywords": [
 		"carbon",

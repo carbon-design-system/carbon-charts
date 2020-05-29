@@ -26,7 +26,7 @@ import {
 	createVueChartApp,
 	createVanillaChartApp,
 	createSvelteChartApp,
-} from "./create-codesandbox";
+} from "../create-codesandbox";
 
 import { Tools } from "@carbon/charts/tools";
 
