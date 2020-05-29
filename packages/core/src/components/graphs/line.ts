@@ -77,7 +77,7 @@ export class Line extends Component {
 		// Apply styles and datum
 		enteringLines
 			.merge(lines)
-			.attr("stroke", (group, i) => {
+			.attr("stroke", group => {
 				return this.model.getStrokeColor(group.name);
 			})
 			// a11y

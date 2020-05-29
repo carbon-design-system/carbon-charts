@@ -11,6 +11,7 @@ export * from "./essentials/tooltip-scatter";
 export * from "./essentials/tooltip-radar";
 
 // GRAPHS
+export * from "./graphs/area";
 export * from "./graphs/bar-simple";
 export * from "./graphs/bar-grouped";
 export * from "./graphs/bar-stacked";
