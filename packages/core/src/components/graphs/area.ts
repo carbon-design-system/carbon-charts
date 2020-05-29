@@ -13,7 +13,7 @@ export class Area extends Component {
 
 		const eventsFragment = this.services.events;
 
-		// Highlight correct circle on legend item hovers
+		// Highlight correct area on legend item hovers
 		eventsFragment.addEventListener(
 			Events.Legend.ITEM_HOVER,
 			this.handleLegendOnHover
