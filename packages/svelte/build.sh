@@ -13,7 +13,7 @@ echo "bundling..."
 rollup -c
 
 # copy src directory for Svelte entry
-cp -r src/ dist/
+cp -r src/ dist/src
 
 echo "copying metadata"
 cp *.md dist/
