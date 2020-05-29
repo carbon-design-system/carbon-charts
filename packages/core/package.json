@@ -20,7 +20,8 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/carbon-charts.git"
+		"url": "git@github.com:carbon-design-system/carbon-charts.git",
+		"homepage": "https://carbon-design-system.github.io/carbon-charts/"
 	},
 	"keywords": [
 		"carbon",
