@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-angular",
-	"version": "0.30.19",
+	"version": "0.31.0",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"scripts": {
@@ -11,7 +11,8 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/carbon-charts.git"
+		"url": "git@github.com:carbon-design-system/carbon-charts.git",
+		"homepage": "https://carbon-design-system.github.io/carbon-charts/angular/"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",
@@ -39,7 +40,7 @@
 		"scss"
 	],
 	"dependencies": {
-		"@carbon/charts": "^0.30.19"
+		"@carbon/charts": "^0.31.0"
 	},
 	"peerDependencies": {
 		"@angular/common": "^6.0.0 || ^7.0.0 || ^8.0.0",
