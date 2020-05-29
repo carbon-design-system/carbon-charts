@@ -73,6 +73,7 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported"><a href="_configuration_.html#areachart" class="tsd-kind-icon">area<wbr>Chart</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported"><a href="_configuration_.html#axischart" class="tsd-kind-icon">axis<wbr>Chart</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-external"><a href="_configuration_.html#axischarttooltip" class="tsd-kind-icon">axis<wbr>Chart<wbr>Tooltip</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-external"><a href="_configuration_.html#barcharttooltip" class="tsd-kind-icon">bar<wbr>Chart<wbr>Tooltip</a></li>
@@ -93,6 +94,7 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Object literals</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-external"><a href="_configuration_.html#area" class="tsd-kind-icon">area</a></li>
 								<li class="tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported"><a href="_configuration_.html#axes" class="tsd-kind-icon">axes</a></li>
 								<li class="tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-external"><a href="_configuration_.html#axis" class="tsd-kind-icon">axis</a></li>
 								<li class="tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-external"><a href="_configuration_.html#basetooltip" class="tsd-kind-icon">base<wbr>Tooltip</a></li>
@@ -112,12 +114,22 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported">
+					<a name="areachart" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> area<wbr>Chart</h3>
+					<div class="tsd-signature tsd-kind-icon">area<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.areachartoptions.html" class="tsd-signature-type">AreaChartOptions</a><span class="tsd-signature-symbol"> =&nbsp;Tools.merge({}, axisChart, {timeScale: Tools.merge(timeScale, {addSpaceOnEdges: 0} as TimeScaleOptions)} as LineChartOptions)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L225">configuration.ts:225</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported">
 					<a name="axischart" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> axis<wbr>Chart</h3>
 					<div class="tsd-signature tsd-kind-icon">axis<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.axischartoptions.html" class="tsd-signature-type">AxisChartOptions</a><span class="tsd-signature-symbol"> =&nbsp;Tools.merge({}, chart, {axes,timeScale,grid,tooltip: axisChartTooltip,} as AxisChartOptions)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L163">configuration.ts:163</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L164">configuration.ts:164</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -127,7 +139,7 @@
 					<div class="tsd-signature tsd-kind-icon">axis<wbr>Chart<wbr>Tooltip<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_components_.axistooltipoptions.html" class="tsd-signature-type">AxisTooltipOptions</a><span class="tsd-signature-symbol"> =&nbsp;Tools.merge({},baseTooltip,{gridline: {enabled: true,threshold: 0.02,},} as AxisTooltipOptions)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L80">configuration.ts:80</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L81">configuration.ts:81</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -137,7 +149,7 @@
 					<div class="tsd-signature tsd-kind-icon">bar<wbr>Chart<wbr>Tooltip<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_components_.bartooltipoptions.html" class="tsd-signature-type">BarTooltipOptions</a><span class="tsd-signature-symbol"> =&nbsp;Tools.merge({},axisChartTooltip,{datapoint: {verticalOffset: 4,},gridline: {enabled: false,},} as BarTooltipOptions)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L91">configuration.ts:91</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L92">configuration.ts:92</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -147,7 +159,7 @@
 					<div class="tsd-signature tsd-kind-icon">base<wbr>Bar<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.barchartoptions.html" class="tsd-signature-type">BarChartOptions</a><span class="tsd-signature-symbol"> =&nbsp;Tools.merge({}, axisChart, {bars: {maxWidth: 16,},timeScale: Tools.merge(timeScale, {addSpaceOnEdges: 1,} as TimeScaleOptions),tooltip: barChartTooltip,} as BarChartOptions)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L173">configuration.ts:173</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L174">configuration.ts:174</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -157,7 +169,7 @@
 					<div class="tsd-signature tsd-kind-icon">bubble<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.bubblechartoptions.html" class="tsd-signature-type">BubbleChartOptions</a><span class="tsd-signature-symbol"> =&nbsp;Tools.merge({}, axisChart, {bubble: {radiusMapsTo: &quot;radius&quot;,radiusRange: (chartSize, data) &#x3D;&gt; {const smallerChartDimension &#x3D; Math.min(chartSize.width,chartSize.height);return [(smallerChartDimension * 3) / 400,(smallerChartDimension * 25) / 400,];},fillOpacity: 0.2,},} as BubbleChartOptions)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L236">configuration.ts:236</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L246">configuration.ts:246</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -167,7 +179,7 @@
 					<div class="tsd-signature tsd-kind-icon">donut<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.donutchartoptions.html" class="tsd-signature-type">DonutChartOptions</a><span class="tsd-signature-symbol"> =&nbsp;Tools.merge({}, pieChart, {donut: {center: {numberFontSize: (radius) &#x3D;&gt;Math.min((radius / 100) * 24, 24) + &quot;px&quot;,titleFontSize: (radius) &#x3D;&gt; Math.min((radius / 100) * 15, 15) + &quot;px&quot;,titleYPosition: (radius) &#x3D;&gt; Math.min((radius / 80) * 20, 20),numberFormatter: (number) &#x3D;&gt; Math.floor(number).toLocaleString(),},},} as DonutChartOptions)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L283">configuration.ts:283</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L293">configuration.ts:293</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -177,7 +189,7 @@
 					<div class="tsd-signature tsd-kind-icon">grouped<wbr>Bar<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.barchartoptions.html" class="tsd-signature-type">BarChartOptions</a><span class="tsd-signature-symbol"> =&nbsp;Tools.merge({},baseBarChart,{} as BarChartOptions)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L195">configuration.ts:195</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L196">configuration.ts:196</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -187,7 +199,7 @@
 					<div class="tsd-signature tsd-kind-icon">line<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.linechartoptions.html" class="tsd-signature-type">LineChartOptions</a><span class="tsd-signature-symbol"> =&nbsp;Tools.merge({}, axisChart, {points: {// default point radius to 3radius: 3,filled: false,},} as LineChartOptions)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L213">configuration.ts:213</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L214">configuration.ts:214</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -197,7 +209,7 @@
 					<div class="tsd-signature tsd-kind-icon">pie<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.piechartoptions.html" class="tsd-signature-type">PieChartOptions</a><span class="tsd-signature-symbol"> =&nbsp;Tools.merge({}, chart, {pie: {radiusOffset: -15,innerRadius: 2,padAngle: 0.007,hoverArc: {outerRadiusOffset: 3,},xOffset: 30,yOffset: 20,yOffsetCallout: 10,callout: {minSliceDegree: 5,offsetX: 15,offsetY: 12,horizontalLineLength: 8,textMargin: 2,},labels: {formatter: null,},},} as PieChartOptions)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L256">configuration.ts:256</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L266">configuration.ts:266</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -207,7 +219,7 @@
 					<div class="tsd-signature tsd-kind-icon">radar<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.radarchartoptions.html" class="tsd-signature-type">RadarChartOptions</a><span class="tsd-signature-symbol"> =&nbsp;Tools.merge({}, chart, {radar: {axes: {angle: &quot;key&quot;,value: &quot;value&quot;,},opacity: {unselected: 0.1,selected: 0.3,},xLabelPadding: 10,yLabelPadding: 8,yTicksNumber: 4,minRange: 10,xAxisRectHeight: 50,dotsRadius: 5,},tooltip: {gridline: {enabled: true,},valueFormatter: (value) &#x3D;&gt;value !&#x3D;&#x3D; null &amp;&amp; value !&#x3D;&#x3D; undefined ? value : &quot;N/A&quot;,},} as RadarChartOptions)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L298">configuration.ts:298</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L308">configuration.ts:308</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -217,7 +229,7 @@
 					<div class="tsd-signature tsd-kind-icon">scatter<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.scatterchartoptions.html" class="tsd-signature-type">ScatterChartOptions</a><span class="tsd-signature-symbol"> =&nbsp;Tools.merge({}, axisChart, {points: {// default point radius to 4radius: 4,fillOpacity: 0.3,filled: true,},} as ScatterChartOptions)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L224">configuration.ts:224</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L234">configuration.ts:234</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -227,7 +239,7 @@
 					<div class="tsd-signature tsd-kind-icon">simple<wbr>Bar<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.barchartoptions.html" class="tsd-signature-type">BarChartOptions</a><span class="tsd-signature-symbol"> =&nbsp;Tools.merge({},baseBarChart,{} as BarChartOptions)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L186">configuration.ts:186</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L187">configuration.ts:187</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -237,7 +249,7 @@
 					<div class="tsd-signature tsd-kind-icon">stacked<wbr>Bar<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.stackedbarchartoptions.html" class="tsd-signature-type">StackedBarChartOptions</a><span class="tsd-signature-symbol"> =&nbsp;Tools.merge({}, baseBarChart, {bars: Tools.merge({}, baseBarChart.bars, {dividerSize: 1.5,} as StackedBarOptions),} as BarChartOptions)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L204">configuration.ts:204</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L205">configuration.ts:205</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -247,7 +259,7 @@
 					<div class="tsd-signature tsd-kind-icon">tick<wbr>Space<wbr>Ratio<wbr>Horizontal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">3.5</span><span class="tsd-signature-symbol"> =&nbsp;3.5</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L384">configuration.ts:384</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L405">configuration.ts:405</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -257,20 +269,60 @@
 					<div class="tsd-signature tsd-kind-icon">tick<wbr>Space<wbr>Ratio<wbr>Vertical<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">2.5</span><span class="tsd-signature-symbol"> =&nbsp;2.5</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L383">configuration.ts:383</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L404">configuration.ts:404</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Object literals</h2>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-external">
+					<a name="area" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> area</h3>
+					<div class="tsd-signature tsd-kind-icon">area<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L362">configuration.ts:362</a></li>
+						</ul>
+					</aside>
+					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal tsd-is-external">
+						<a name="area.opacity" class="tsd-anchor"></a>
+						<h3>opacity</h3>
+						<div class="tsd-signature tsd-kind-icon">opacity<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L363">configuration.ts:363</a></li>
+							</ul>
+						</aside>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
+							<a name="area.opacity.selected" class="tsd-anchor"></a>
+							<h3>selected</h3>
+							<div class="tsd-signature tsd-kind-icon">selected<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0.3</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L365">configuration.ts:365</a></li>
+								</ul>
+							</aside>
+						</section>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
+							<a name="area.opacity.unselected" class="tsd-anchor"></a>
+							<h3>unselected</h3>
+							<div class="tsd-signature tsd-kind-icon">unselected<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L364">configuration.ts:364</a></li>
+								</ul>
+							</aside>
+						</section>
+					</section>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported">
 					<a name="axes" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> axes</h3>
 					<div class="tsd-signature tsd-kind-icon">axes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L107">configuration.ts:107</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L108">configuration.ts:108</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal tsd-is-external tsd-is-not-exported">
@@ -279,7 +331,7 @@
 						<div class="tsd-signature tsd-kind-icon">bottom<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L111">configuration.ts:111</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L112">configuration.ts:112</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external tsd-is-not-exported">
@@ -288,7 +340,7 @@
 							<div class="tsd-signature tsd-kind-icon">include<wbr>Zero<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L112">configuration.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L113">configuration.ts:113</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -299,7 +351,7 @@
 						<div class="tsd-signature tsd-kind-icon">left<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L114">configuration.ts:114</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L115">configuration.ts:115</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external tsd-is-not-exported">
@@ -308,7 +360,7 @@
 							<div class="tsd-signature tsd-kind-icon">include<wbr>Zero<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L115">configuration.ts:115</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L116">configuration.ts:116</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -319,7 +371,7 @@
 						<div class="tsd-signature tsd-kind-icon">right<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L117">configuration.ts:117</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L118">configuration.ts:118</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external tsd-is-not-exported">
@@ -328,7 +380,7 @@
 							<div class="tsd-signature tsd-kind-icon">include<wbr>Zero<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L118">configuration.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L119">configuration.ts:119</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -339,7 +391,7 @@
 						<div class="tsd-signature tsd-kind-icon">top<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L108">configuration.ts:108</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L109">configuration.ts:109</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external tsd-is-not-exported">
@@ -348,7 +400,7 @@
 							<div class="tsd-signature tsd-kind-icon">include<wbr>Zero<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L109">configuration.ts:109</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L110">configuration.ts:110</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -360,7 +412,7 @@
 					<div class="tsd-signature tsd-kind-icon">axis<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L369">configuration.ts:369</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L390">configuration.ts:390</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -369,7 +421,7 @@
 						<div class="tsd-signature tsd-kind-icon">padding<wbr>Ratio<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0.1</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L374">configuration.ts:374</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L395">configuration.ts:395</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -379,7 +431,7 @@
 						<div class="tsd-signature tsd-kind-icon">ticks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L370">configuration.ts:370</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L391">configuration.ts:391</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -388,7 +440,7 @@
 							<div class="tsd-signature tsd-kind-icon">number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;7</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L371">configuration.ts:371</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L392">configuration.ts:392</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -398,7 +450,7 @@
 							<div class="tsd-signature tsd-kind-icon">rotate<wbr>IfSmaller<wbr>Than<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;30</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L372">configuration.ts:372</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L393">configuration.ts:393</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -410,7 +462,7 @@
 					<div class="tsd-signature tsd-kind-icon">base<wbr>Tooltip<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L69">configuration.ts:69</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L70">configuration.ts:70</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal tsd-is-external">
@@ -419,7 +471,7 @@
 						<div class="tsd-signature tsd-kind-icon">datapoint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L70">configuration.ts:70</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L71">configuration.ts:71</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -428,7 +480,7 @@
 							<div class="tsd-signature tsd-kind-icon">enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L72">configuration.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L73">configuration.ts:73</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -438,7 +490,7 @@
 							<div class="tsd-signature tsd-kind-icon">horizontal<wbr>Offset<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;10</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L71">configuration.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L72">configuration.ts:72</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -449,7 +501,7 @@
 						<div class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L74">configuration.ts:74</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L75">configuration.ts:75</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -458,7 +510,7 @@
 							<div class="tsd-signature tsd-kind-icon">vertical<wbr>Offset<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0.75</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L75">configuration.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L76">configuration.ts:76</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -468,7 +520,7 @@
 							<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0.4</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L76">configuration.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L77">configuration.ts:77</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -480,7 +532,7 @@
 					<div class="tsd-signature tsd-kind-icon">chart<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L142">configuration.ts:142</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L143">configuration.ts:143</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external tsd-is-not-exported">
@@ -489,7 +541,7 @@
 						<div class="tsd-signature tsd-kind-icon">height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L144">configuration.ts:144</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L145">configuration.ts:145</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -499,7 +551,7 @@
 						<div class="tsd-signature tsd-kind-icon">legend<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_components_.legendoptions.html" class="tsd-signature-type">LegendOptions</a></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L147">configuration.ts:147</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L148">configuration.ts:148</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -509,7 +561,7 @@
 						<div class="tsd-signature tsd-kind-icon">resizable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L145">configuration.ts:145</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L146">configuration.ts:146</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -519,7 +571,7 @@
 						<div class="tsd-signature tsd-kind-icon">tooltip<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_components_.tooltipoptions.html" class="tsd-signature-type">TooltipOptions</a><span class="tsd-signature-symbol"> =&nbsp;baseTooltip</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L146">configuration.ts:146</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L147">configuration.ts:147</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -529,7 +581,7 @@
 						<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L143">configuration.ts:143</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L144">configuration.ts:144</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -539,7 +591,7 @@
 						<div class="tsd-signature tsd-kind-icon">color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L155">configuration.ts:155</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L156">configuration.ts:156</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external tsd-is-not-exported">
@@ -548,7 +600,7 @@
 							<div class="tsd-signature tsd-kind-icon">scale<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L156">configuration.ts:156</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L157">configuration.ts:157</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -559,7 +611,7 @@
 						<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L151">configuration.ts:151</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L152">configuration.ts:152</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external tsd-is-not-exported">
@@ -568,7 +620,7 @@
 							<div class="tsd-signature tsd-kind-icon">group<wbr>Maps<wbr>To<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;group&quot;</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L152">configuration.ts:152</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L153">configuration.ts:153</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -578,7 +630,7 @@
 							<div class="tsd-signature tsd-kind-icon">loading<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L153">configuration.ts:153</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L154">configuration.ts:154</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -589,7 +641,7 @@
 						<div class="tsd-signature tsd-kind-icon">style<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L148">configuration.ts:148</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L149">configuration.ts:149</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external tsd-is-not-exported">
@@ -598,7 +650,7 @@
 							<div class="tsd-signature tsd-kind-icon">prefix<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;cc&quot;</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L149">configuration.ts:149</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L150">configuration.ts:150</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -610,7 +662,7 @@
 					<div class="tsd-signature tsd-kind-icon">grid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L57">configuration.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L58">configuration.ts:58</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal tsd-is-external">
@@ -619,7 +671,7 @@
 						<div class="tsd-signature tsd-kind-icon">x<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L58">configuration.ts:58</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L59">configuration.ts:59</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -628,7 +680,7 @@
 							<div class="tsd-signature tsd-kind-icon">number<wbr>OfTicks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;5</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L59">configuration.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L60">configuration.ts:60</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -639,7 +691,7 @@
 						<div class="tsd-signature tsd-kind-icon">y<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L61">configuration.ts:61</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L62">configuration.ts:62</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -648,7 +700,7 @@
 							<div class="tsd-signature tsd-kind-icon">number<wbr>OfTicks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;5</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L62">configuration.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L63">configuration.ts:63</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -660,7 +712,7 @@
 					<div class="tsd-signature tsd-kind-icon">legend<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L35">configuration.ts:35</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L36">configuration.ts:36</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -669,7 +721,7 @@
 						<div class="tsd-signature tsd-kind-icon">clickable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L37">configuration.ts:37</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L38">configuration.ts:38</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -679,7 +731,7 @@
 						<div class="tsd-signature tsd-kind-icon">enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L38">configuration.ts:38</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L39">configuration.ts:39</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -689,7 +741,7 @@
 						<div class="tsd-signature tsd-kind-icon">position<span class="tsd-signature-symbol">:</span> <a href="../enums/_interfaces_enums_.legendpositions.html#bottom" class="tsd-signature-type">BOTTOM</a><span class="tsd-signature-symbol"> =&nbsp;LegendPositions.BOTTOM</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L36">configuration.ts:36</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L37">configuration.ts:37</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -699,7 +751,7 @@
 						<div class="tsd-signature tsd-kind-icon">checkbox<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L48">configuration.ts:48</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L49">configuration.ts:49</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -708,7 +760,7 @@
 							<div class="tsd-signature tsd-kind-icon">radius<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;6.5</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L49">configuration.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L50">configuration.ts:50</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -718,7 +770,7 @@
 							<div class="tsd-signature tsd-kind-icon">space<wbr>After<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;4</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L50">configuration.ts:50</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L51">configuration.ts:51</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -729,7 +781,7 @@
 						<div class="tsd-signature tsd-kind-icon">items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L39">configuration.ts:39</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L40">configuration.ts:40</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -738,7 +790,7 @@
 							<div class="tsd-signature tsd-kind-icon">horizontal<wbr>Space<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;12</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L44">configuration.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L45">configuration.ts:45</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -748,7 +800,7 @@
 							<div class="tsd-signature tsd-kind-icon">textYOffset<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;8</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L46">configuration.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L47">configuration.ts:47</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -758,7 +810,7 @@
 							<div class="tsd-signature tsd-kind-icon">vertical<wbr>Space<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;24</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L45">configuration.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L46">configuration.ts:46</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -768,7 +820,7 @@
 							<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L40">configuration.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L41">configuration.ts:41</a></li>
 								</ul>
 							</aside>
 							<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -777,7 +829,7 @@
 								<div class="tsd-signature tsd-kind-icon">ACTIVE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L41">configuration.ts:41</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L42">configuration.ts:42</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -787,7 +839,7 @@
 								<div class="tsd-signature tsd-kind-icon">DISABLED<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L42">configuration.ts:42</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L43">configuration.ts:43</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -800,35 +852,35 @@
 					<div class="tsd-signature tsd-kind-icon">lines<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L341">configuration.ts:341</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L352">configuration.ts:352</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal tsd-is-external">
-						<a name="lines.opacity" class="tsd-anchor"></a>
+						<a name="lines.opacity-1" class="tsd-anchor"></a>
 						<h3>opacity</h3>
 						<div class="tsd-signature tsd-kind-icon">opacity<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L342">configuration.ts:342</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L353">configuration.ts:353</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
-							<a name="lines.opacity.selected" class="tsd-anchor"></a>
+							<a name="lines.opacity-1.selected-1" class="tsd-anchor"></a>
 							<h3>selected</h3>
 							<div class="tsd-signature tsd-kind-icon">selected<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L344">configuration.ts:344</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L355">configuration.ts:355</a></li>
 								</ul>
 							</aside>
 						</section>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
-							<a name="lines.opacity.unselected" class="tsd-anchor"></a>
+							<a name="lines.opacity-1.unselected-1" class="tsd-anchor"></a>
 							<h3>unselected</h3>
 							<div class="tsd-signature tsd-kind-icon">unselected<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0.3</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L343">configuration.ts:343</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L354">configuration.ts:354</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -840,16 +892,26 @@
 					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L324">configuration.ts:324</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L334">configuration.ts:334</a></li>
 						</ul>
 					</aside>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
+						<a name="options.areachart-1" class="tsd-anchor"></a>
+						<h3>area<wbr>Chart</h3>
+						<div class="tsd-signature tsd-kind-icon">area<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.areachartoptions.html" class="tsd-signature-type">AreaChartOptions</a></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L342">configuration.ts:342</a></li>
+							</ul>
+						</aside>
+					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
 						<a name="options.axischart-1" class="tsd-anchor"></a>
 						<h3>axis<wbr>Chart</h3>
 						<div class="tsd-signature tsd-kind-icon">axis<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.axischartoptions.html" class="tsd-signature-type">AxisChartOptions</a></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L326">configuration.ts:326</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L336">configuration.ts:336</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -859,7 +921,7 @@
 						<div class="tsd-signature tsd-kind-icon">bubble<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.bubblechartoptions.html" class="tsd-signature-type">BubbleChartOptions</a></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L330">configuration.ts:330</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L340">configuration.ts:340</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -869,7 +931,7 @@
 						<div class="tsd-signature tsd-kind-icon">chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.basechartoptions.html" class="tsd-signature-type">BaseChartOptions</a></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L325">configuration.ts:325</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L335">configuration.ts:335</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -879,7 +941,7 @@
 						<div class="tsd-signature tsd-kind-icon">donut<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.donutchartoptions.html" class="tsd-signature-type">DonutChartOptions</a></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L334">configuration.ts:334</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L345">configuration.ts:345</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -889,7 +951,7 @@
 						<div class="tsd-signature tsd-kind-icon">grouped<wbr>Bar<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.barchartoptions.html" class="tsd-signature-type">BarChartOptions</a></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L328">configuration.ts:328</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L338">configuration.ts:338</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -899,7 +961,7 @@
 						<div class="tsd-signature tsd-kind-icon">line<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.linechartoptions.html" class="tsd-signature-type">LineChartOptions</a></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L331">configuration.ts:331</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L341">configuration.ts:341</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -909,7 +971,7 @@
 						<div class="tsd-signature tsd-kind-icon">pie<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.piechartoptions.html" class="tsd-signature-type">PieChartOptions</a></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L333">configuration.ts:333</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L344">configuration.ts:344</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -919,7 +981,7 @@
 						<div class="tsd-signature tsd-kind-icon">radar<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.radarchartoptions.html" class="tsd-signature-type">RadarChartOptions</a></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L335">configuration.ts:335</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L346">configuration.ts:346</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -929,7 +991,7 @@
 						<div class="tsd-signature tsd-kind-icon">scatter<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.scatterchartoptions.html" class="tsd-signature-type">ScatterChartOptions</a></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L332">configuration.ts:332</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L343">configuration.ts:343</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -939,7 +1001,7 @@
 						<div class="tsd-signature tsd-kind-icon">simple<wbr>Bar<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.barchartoptions.html" class="tsd-signature-type">BarChartOptions</a></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L327">configuration.ts:327</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L337">configuration.ts:337</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -949,7 +1011,7 @@
 						<div class="tsd-signature tsd-kind-icon">stacked<wbr>Bar<wbr>Chart<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_charts_.stackedbarchartoptions.html" class="tsd-signature-type">StackedBarChartOptions</a></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L329">configuration.ts:329</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L339">configuration.ts:339</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -960,7 +1022,7 @@
 					<div class="tsd-signature tsd-kind-icon">spacers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L377">configuration.ts:377</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L398">configuration.ts:398</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal tsd-is-external">
@@ -969,7 +1031,7 @@
 						<div class="tsd-signature tsd-kind-icon">default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L378">configuration.ts:378</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L399">configuration.ts:399</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -978,7 +1040,7 @@
 							<div class="tsd-signature tsd-kind-icon">size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;24</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L379">configuration.ts:379</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L400">configuration.ts:400</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -990,7 +1052,7 @@
 					<div class="tsd-signature tsd-kind-icon">time<wbr>Scale<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L122">configuration.ts:122</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L123">configuration.ts:123</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -999,7 +1061,7 @@
 						<div class="tsd-signature tsd-kind-icon">add<wbr>Space<wbr>OnEdges<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L123">configuration.ts:123</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L124">configuration.ts:124</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -1009,7 +1071,7 @@
 						<div class="tsd-signature tsd-kind-icon">locale<wbr>Object<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> =&nbsp;enUSLocaleObject</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L125">configuration.ts:125</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L126">configuration.ts:126</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-type-declaration">
@@ -1405,7 +1467,7 @@
 						<div class="tsd-signature tsd-kind-icon">show<wbr>Day<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L124">configuration.ts:124</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L125">configuration.ts:125</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -1415,7 +1477,7 @@
 						<div class="tsd-signature tsd-kind-icon">time<wbr>Interval<wbr>Formats<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L126">configuration.ts:126</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L127">configuration.ts:127</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal tsd-is-external">
@@ -1424,7 +1486,7 @@
 							<div class="tsd-signature tsd-kind-icon">15seconds<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L127">configuration.ts:127</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L128">configuration.ts:128</a></li>
 								</ul>
 							</aside>
 							<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -1433,7 +1495,7 @@
 								<div class="tsd-signature tsd-kind-icon">primary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;MMM d, pp&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L127">configuration.ts:127</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L128">configuration.ts:128</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1443,7 +1505,7 @@
 								<div class="tsd-signature tsd-kind-icon">secondary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;pp&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L127">configuration.ts:127</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L128">configuration.ts:128</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1454,7 +1516,7 @@
 							<div class="tsd-signature tsd-kind-icon">30minutes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L129">configuration.ts:129</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L130">configuration.ts:130</a></li>
 								</ul>
 							</aside>
 							<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -1463,7 +1525,7 @@
 								<div class="tsd-signature tsd-kind-icon">primary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;MMM d, p&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L129">configuration.ts:129</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L130">configuration.ts:130</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1473,7 +1535,7 @@
 								<div class="tsd-signature tsd-kind-icon">secondary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;p&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L129">configuration.ts:129</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L130">configuration.ts:130</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1484,7 +1546,7 @@
 							<div class="tsd-signature tsd-kind-icon">daily<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L131">configuration.ts:131</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L132">configuration.ts:132</a></li>
 								</ul>
 							</aside>
 							<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -1493,7 +1555,7 @@
 								<div class="tsd-signature tsd-kind-icon">primary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;MMM d&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L131">configuration.ts:131</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L132">configuration.ts:132</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1503,7 +1565,7 @@
 								<div class="tsd-signature tsd-kind-icon">secondary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;d&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L131">configuration.ts:131</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L132">configuration.ts:132</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1514,7 +1576,7 @@
 							<div class="tsd-signature tsd-kind-icon">hourly<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L130">configuration.ts:130</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L131">configuration.ts:131</a></li>
 								</ul>
 							</aside>
 							<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -1523,7 +1585,7 @@
 								<div class="tsd-signature tsd-kind-icon">primary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;MMM d, hh a&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L130">configuration.ts:130</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L131">configuration.ts:131</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1533,7 +1595,7 @@
 								<div class="tsd-signature tsd-kind-icon">secondary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;hh a&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L130">configuration.ts:130</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L131">configuration.ts:131</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1544,7 +1606,7 @@
 							<div class="tsd-signature tsd-kind-icon">minute<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L128">configuration.ts:128</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L129">configuration.ts:129</a></li>
 								</ul>
 							</aside>
 							<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -1553,7 +1615,7 @@
 								<div class="tsd-signature tsd-kind-icon">primary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;MMM d, p&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L128">configuration.ts:128</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L129">configuration.ts:129</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1563,7 +1625,7 @@
 								<div class="tsd-signature tsd-kind-icon">secondary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;p&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L128">configuration.ts:128</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L129">configuration.ts:129</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1574,7 +1636,7 @@
 							<div class="tsd-signature tsd-kind-icon">monthly<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L133">configuration.ts:133</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L134">configuration.ts:134</a></li>
 								</ul>
 							</aside>
 							<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -1583,7 +1645,7 @@
 								<div class="tsd-signature tsd-kind-icon">primary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;MMM yyyy&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L133">configuration.ts:133</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L134">configuration.ts:134</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1593,7 +1655,7 @@
 								<div class="tsd-signature tsd-kind-icon">secondary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;MMM&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L133">configuration.ts:133</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L134">configuration.ts:134</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1604,7 +1666,7 @@
 							<div class="tsd-signature tsd-kind-icon">quarterly<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L134">configuration.ts:134</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L135">configuration.ts:135</a></li>
 								</ul>
 							</aside>
 							<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -1613,7 +1675,7 @@
 								<div class="tsd-signature tsd-kind-icon">primary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;QQQ &#x27;&#x27;yy&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L134">configuration.ts:134</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L135">configuration.ts:135</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1623,7 +1685,7 @@
 								<div class="tsd-signature tsd-kind-icon">secondary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;QQQ&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L134">configuration.ts:134</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L135">configuration.ts:135</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1634,7 +1696,7 @@
 							<div class="tsd-signature tsd-kind-icon">weekly<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L132">configuration.ts:132</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L133">configuration.ts:133</a></li>
 								</ul>
 							</aside>
 							<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -1643,7 +1705,7 @@
 								<div class="tsd-signature tsd-kind-icon">primary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;eee, MMM d&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L132">configuration.ts:132</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L133">configuration.ts:133</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1653,7 +1715,7 @@
 								<div class="tsd-signature tsd-kind-icon">secondary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;eee&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L132">configuration.ts:132</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L133">configuration.ts:133</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1664,7 +1726,7 @@
 							<div class="tsd-signature tsd-kind-icon">yearly<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L135">configuration.ts:135</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L136">configuration.ts:136</a></li>
 								</ul>
 							</aside>
 							<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -1673,7 +1735,7 @@
 								<div class="tsd-signature tsd-kind-icon">primary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;yyyy&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L135">configuration.ts:135</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L136">configuration.ts:136</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1683,7 +1745,7 @@
 								<div class="tsd-signature tsd-kind-icon">secondary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;yyyy&quot;</span></div>
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L135">configuration.ts:135</a></li>
+										<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L136">configuration.ts:136</a></li>
 									</ul>
 								</aside>
 							</section>
@@ -1696,7 +1758,7 @@
 					<div class="tsd-signature tsd-kind-icon">transitions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L351">configuration.ts:351</a></li>
+							<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L372">configuration.ts:372</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal tsd-is-external">
@@ -1705,7 +1767,7 @@
 						<div class="tsd-signature tsd-kind-icon">default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L352">configuration.ts:352</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L373">configuration.ts:373</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -1714,7 +1776,7 @@
 							<div class="tsd-signature tsd-kind-icon">duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;300</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L353">configuration.ts:353</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L374">configuration.ts:374</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -1725,7 +1787,7 @@
 						<div class="tsd-signature tsd-kind-icon">graph_<wbr>element_<wbr>mouseout_<wbr>fill_<wbr>update<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L364">configuration.ts:364</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L385">configuration.ts:385</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -1734,7 +1796,7 @@
 							<div class="tsd-signature tsd-kind-icon">duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;100</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L365">configuration.ts:365</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L386">configuration.ts:386</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -1745,7 +1807,7 @@
 						<div class="tsd-signature tsd-kind-icon">graph_<wbr>element_<wbr>mouseover_<wbr>fill_<wbr>update<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L361">configuration.ts:361</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L382">configuration.ts:382</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -1754,7 +1816,7 @@
 							<div class="tsd-signature tsd-kind-icon">duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;100</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L362">configuration.ts:362</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L383">configuration.ts:383</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -1765,7 +1827,7 @@
 						<div class="tsd-signature tsd-kind-icon">pie_<wbr>chart_<wbr>titles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L358">configuration.ts:358</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L379">configuration.ts:379</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -1774,7 +1836,7 @@
 							<div class="tsd-signature tsd-kind-icon">duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;375</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L359">configuration.ts:359</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L380">configuration.ts:380</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -1785,7 +1847,7 @@
 						<div class="tsd-signature tsd-kind-icon">pie_<wbr>slice_<wbr>mouseover<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L355">configuration.ts:355</a></li>
+								<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L376">configuration.ts:376</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
@@ -1794,7 +1856,7 @@
 							<div class="tsd-signature tsd-kind-icon">duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;100</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/55386a1/packages/core/src/configuration.ts#L356">configuration.ts:356</a></li>
+									<li>Defined in <a href="https://github.com/carbon-design-system/carbon-charts/blob/d5315b1/packages/core/src/configuration.ts#L377">configuration.ts:377</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -1815,6 +1877,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported">
+						<a href="_configuration_.html#areachart" class="tsd-kind-icon">area<wbr>Chart</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported">
 						<a href="_configuration_.html#axischart" class="tsd-kind-icon">axis<wbr>Chart</a>
 					</li>
@@ -1859,6 +1924,9 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-external">
 						<a href="_configuration_.html#tickspaceratiovertical" class="tsd-kind-icon">tick<wbr>Space<wbr>Ratio<wbr>Vertical</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-external">
+						<a href="_configuration_.html#area" class="tsd-kind-icon">area</a>
 					</li>
 					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported">
 						<a href="_configuration_.html#axes" class="tsd-kind-icon">axes</a>
