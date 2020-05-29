@@ -1,10 +1,7 @@
 // Internal Imports
 import { Chart } from "../chart";
 import * as Configuration from "../configuration";
-import {
-	ChartConfig,
-	RadarChartOptions
-} from "../interfaces/index";
+import { ChartConfig, RadarChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
@@ -12,13 +9,17 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
 	LayoutComponent,
-	TooltipRadar
+	TooltipRadar,
 } from "../components/index";
 import { Radar } from "../components/graphs/radar";
 
 export class RadarChart extends Chart {
 	// TODO - Optimize the use of "extending"
-	constructor(holder: Element, chartConfigs: ChartConfig<RadarChartOptions>, extending = false) {
+	constructor(
+		holder: Element,
+		chartConfigs: ChartConfig<RadarChartOptions>,
+		extending = false
+	) {
 		super(holder, chartConfigs);
 
 		// TODO - Optimize the use of "extending"
@@ -41,9 +42,7 @@ export class RadarChart extends Chart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [
-			new Radar(this.model, this.services)
-		];
+		const graphFrameComponents = [new Radar(this.model, this.services)];
 
 		// get the base chart components and export with tooltip
 		const components: any[] = this.getChartComponents(graphFrameComponents);

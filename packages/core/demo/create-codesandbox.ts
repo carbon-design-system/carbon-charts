@@ -1,14 +1,19 @@
 import { getParameters } from "codesandbox/lib/api/define";
 
 const { version: libraryVersion } = require("@carbon/charts/package.json");
+const ibmPlexFontCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
+`;
 
 export const createChartSandbox = (chartTemplate: any) => {
 	const files = {};
 
-	Object.keys(chartTemplate)
-		.forEach(filePath => files[filePath] = { content: chartTemplate[filePath] });
+	Object.keys(chartTemplate).forEach(
+		(filePath) => (files[filePath] = { content: chartTemplate[filePath] })
+	);
 
-	return `https://codesandbox.io/api/v1/sandboxes/define?parameters=${getParameters({ files })}`;
+	return `https://codesandbox.io/api/v1/sandboxes/define?parameters=${getParameters(
+		{ files }
+	)}`;
 };
 
 export const createVanillaChartApp = (demo: any) => {
@@ -20,6 +25,7 @@ export const createVanillaChartApp = (demo: any) => {
 	<head>
 		<title>Parcel Sandbox</title>
 		<meta charset="UTF-8" />
+		<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap" rel="stylesheet">
 	</head>
 	<body>
 		<div id="app" style="width: 100%; height: 100%;"></div>
@@ -27,8 +33,7 @@ export const createVanillaChartApp = (demo: any) => {
 		<script src="src/index.js"></script>
 	</body>
 </html>`;
-	const indexJs =
-		`import "@carbon/charts/styles.css";
+	const indexJs = `import "@carbon/charts/styles.css";
 import { ${chartComponent} } from "@carbon/charts";
 
 const data = ${chartData};
@@ -43,23 +48,23 @@ new ${chartComponent}(chartHolder, {
 });
 `;
 	const packageJson = {
-		"scripts": {
-			"start": "parcel index.html --open",
-			"build": "parcel build index.html"
+		scripts: {
+			start: "parcel index.html --open",
+			build: "parcel build index.html",
 		},
-		"dependencies": {
+		dependencies: {
 			"@carbon/charts": libraryVersion,
-			"d3": "5.9.2"
+			d3: "5.9.2",
 		},
-		"devDependencies": {
-			"parcel-bundler": "^1.6.1"
-		}
+		devDependencies: {
+			"parcel-bundler": "^1.6.1",
+		},
 	};
 
 	return {
 		"index.html": indexHtml,
 		"src/index.js": indexJs,
-		"package.json": packageJson
+		"package.json": packageJson,
 	};
 };
 
@@ -70,13 +75,17 @@ export const createReactChartApp = (demo: any) => {
 
 	const indexHtml = `<div id="root"></div>
   `;
-	const indexJs =
-		`import React from "react";
+
+	const indexJs = `import React from "react";
 import ReactDOM from "react-dom";
 import { ${chartComponent} } from "@carbon/charts-react";
 import "@carbon/charts/styles.css";
 // Or
 // import "@carbon/charts/styles/styles.scss";
+
+// IBM Plex should either be imported in your project by using Carbon
+// or consumed manually through an import
+import "./ibm-plex-font.css";
 
 class App extends React.Component {
 	state = {
@@ -100,14 +109,15 @@ ReactDOM.render(<App />, document.getElementById("root"));
 			d3: "5.12.0",
 			react: "16.12.0",
 			"react-dom": "16.12.0",
-			"react-scripts": "3.0.1"
-		}
+			"react-scripts": "3.0.1",
+		},
 	};
 
 	return {
 		"src/index.html": indexHtml,
 		"src/index.js": indexJs,
-		"package.json": packageJson
+		"src/ibm-plex-font.css": ibmPlexFontCSS,
+		"package.json": packageJson,
 	};
 };
 
@@ -117,8 +127,14 @@ export const createAngularChartApp = (demo: any) => {
 	const chartComponent = demo.chartType.angular;
 
 	const appComponentHtml = `<${chartComponent} [data]="data" [options]="options"></${chartComponent}>`;
-	const appComponentTs =
-		`import { Component } from "@angular/core";
+	const appComponentTs = `import { Component } from "@angular/core";
+
+import "@carbon/charts/styles.css";
+
+// IBM Plex should either be imported in your project by using Carbon
+// or consumed manually through an import
+import "./ibm-plex-font.css";
+
 @Component({
 	selector: "app-root",
 	templateUrl: "./app.component.html"
@@ -128,8 +144,7 @@ export class AppComponent {
 	options = ${chartOptions};
 }`;
 
-	const appModule =
-		`import { NgModule } from "@angular/core";
+	const appModule = `import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { ChartsModule } from "@carbon/charts-angular";
 import { AppComponent } from "./app.component";
@@ -140,8 +155,7 @@ import { AppComponent } from "./app.component";
 })
 export class AppModule {}`;
 
-	const indexHtml =
-		`<!DOCTYPE html>
+	const indexHtml = `<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -152,16 +166,14 @@ export class AppModule {}`;
 	</body>
 </html>`;
 
-	const mainTs =
-		`import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+	const mainTs = `import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { AppModule } from "./app/app.module";
 platformBrowserDynamic()
 	.bootstrapModule(AppModule)
 	.catch(err => console.log(err));
 `;
 
-	const angularCliJson =
-		`{
+	const angularCliJson = `{
 	"apps": [
 		{
 			"root": "src",
@@ -182,33 +194,38 @@ platformBrowserDynamic()
 	]
 }`;
 
-	const packageJson = JSON.stringify({
-		dependencies: {
-			"@angular/animations": "8.2.14",
-			"@angular/common": "8.2.14",
-			"@angular/compiler": "8.2.14",
-			"@angular/core": "8.2.14",
-			"@angular/forms": "8.2.14",
-			"@angular/platform-browser": "8.2.14",
-			"@angular/platform-browser-dynamic": "8.2.14",
-			"@angular/router": "8.2.14",
-			"@carbon/charts": libraryVersion,
-			"@carbon/charts-angular": libraryVersion,
-			"core-js": "3.6.0",
-			d3: "5.15.0",
-			rxjs: "6.5.3",
-			"zone.js": "0.10.2"
-		}
-	}, null, "\t");
+	const packageJson = JSON.stringify(
+		{
+			dependencies: {
+				"@angular/animations": "8.2.14",
+				"@angular/common": "8.2.14",
+				"@angular/compiler": "8.2.14",
+				"@angular/core": "8.2.14",
+				"@angular/forms": "8.2.14",
+				"@angular/platform-browser": "8.2.14",
+				"@angular/platform-browser-dynamic": "8.2.14",
+				"@angular/router": "8.2.14",
+				"@carbon/charts": libraryVersion,
+				"@carbon/charts-angular": libraryVersion,
+				"core-js": "3.6.0",
+				d3: "5.15.0",
+				rxjs: "6.5.3",
+				"zone.js": "0.10.2",
+			},
+		},
+		null,
+		"\t"
+	);
 
 	return {
 		"src/index.html": indexHtml,
 		"src/main.ts": mainTs,
 		"src/app/app.component.html": appComponentHtml,
 		"src/app/app.component.ts": appComponentTs,
+		"src/app/ibm-plex-font.css": ibmPlexFontCSS,
 		"src/app/app.module.ts": appModule,
 		".angular-cli.json": angularCliJson,
-		"package.json": packageJson
+		"package.json": packageJson,
 	};
 };
 
@@ -217,12 +234,17 @@ export const createVueChartApp = (demo: any) => {
 	const chartOptions = JSON.stringify(demo.options, null, "\t\t");
 	const chartComponent = demo.chartType.vue;
 
-	const chartVue =
-`<script>
+	const chartVue = `<script>
 import Vue from "vue";
 import "@carbon/charts/styles.css";
 import chartsVue from "@carbon/charts-vue";
+
+// IBM Plex should either be imported in your project by using Carbon
+// or consumed manually through an import
+import "../ibm-plex-font.css";
+
 Vue.use(chartsVue);
+
 export default {
 	name: "Chart",
 	components: {},
@@ -237,8 +259,7 @@ export default {
 </script>
   `;
 
-	const appVue =
-`<template>
+	const appVue = `<template>
 	<div id="app">
 		<Chart/>
 	</div>
@@ -254,8 +275,7 @@ export default {
 </script>
   `;
 
-	const mainJs =
-`import Vue from "vue";
+	const mainJs = `import Vue from "vue";
 import App from "./App.vue";
 Vue.config.productionTip = false;
 new Vue({
@@ -263,21 +283,26 @@ new Vue({
 }).$mount("#app");
 `;
 
-	const packageJson = JSON.stringify({
-		dependencies: {
-			"@carbon/charts": libraryVersion,
-			"@carbon/charts-vue": libraryVersion,
-			"@vue/cli-plugin-babel": "4.1.1",
-			d3: "5.15.0",
-			vue: "^2.6.11"
-		}
-	}, null, "\t\t");
+	const packageJson = JSON.stringify(
+		{
+			dependencies: {
+				"@carbon/charts": libraryVersion,
+				"@carbon/charts-vue": libraryVersion,
+				"@vue/cli-plugin-babel": "4.1.1",
+				d3: "5.15.0",
+				vue: "^2.6.11",
+			},
+		},
+		null,
+		"\t\t"
+	);
 
 	return {
 		"src/components/chart.vue": chartVue,
+		"src/ibm-plex-font.css": ibmPlexFontCSS,
 		"src/App.vue": appVue,
 		"src/main.js": mainJs,
-		"package.json": packageJson
+		"package.json": packageJson,
 	};
 };
 
@@ -299,16 +324,14 @@ export const createSvelteChartApp = (demo: any) => {
 			break;
 	}
 
-	const indexJs =
-`import App from "./App.svelte";
+	const indexJs = `import App from "./App.svelte";
 
 const app = new App({ target: document.body });
 
 export default app;
 `;
 
-		const App =
-`<script>
+	const App = `<script>
   import { ${chartComponent} } from "@carbon/charts-svelte";
 </script>
 
@@ -323,32 +346,31 @@ export default app;
 `;
 
 	const packageJson = {
-		"scripts": {
-			"build": "rollup -c",
-			"autobuild": "rollup -c -w",
-			"dev": "run-p start:dev autobuild",
-			"start": "sirv public",
-			"start:dev": "sirv public --dev"
+		scripts: {
+			build: "rollup -c",
+			autobuild: "rollup -c -w",
+			dev: "run-p start:dev autobuild",
+			start: "sirv public",
+			"start:dev": "sirv public --dev",
 		},
-		"devDependencies": {
+		devDependencies: {
 			"npm-run-all": "^4.1.5",
-			"rollup": "^1.10.1",
+			rollup: "^1.10.1",
 			"rollup-plugin-commonjs": "^9.3.4",
 			"rollup-plugin-node-resolve": "^4.2.3",
 			"rollup-plugin-svelte": "^5.0.3",
 			"rollup-plugin-terser": "^4.0.4",
-			"sirv-cli": "^0.3.1"
+			"sirv-cli": "^0.3.1",
 		},
 		dependencies: {
 			"@carbon/charts": libraryVersion,
 			"@carbon/charts-svelte": libraryVersion,
 			d3: "5.12.0",
-			svelte: "3.20.x"
-		}
+			svelte: "3.20.x",
+		},
 	};
 
-	const rollup =
-`import svelte from "rollup-plugin-svelte";
+	const rollup = `import svelte from "rollup-plugin-svelte";
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import { terser } from "rollup-plugin-terser";
@@ -383,6 +405,6 @@ export default {
 		"App.svelte": App,
 		"index.js": indexJs,
 		"package.json": packageJson,
-		"rollup.config.js": rollup
+		"rollup.config.js": rollup,
 	};
 };

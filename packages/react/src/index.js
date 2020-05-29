@@ -1,3 +1,4 @@
+import AreaChart from "./area-chart";
 import GroupedBarChart from "./bar-chart-grouped";
 import SimpleBarChart from "./bar-chart-simple";
 import StackedBarChart from "./bar-chart-stacked";
@@ -10,6 +11,7 @@ import ScatterChart from "./scatter-chart";
 import RadarChart from "./radar-chart";
 
 export {
+	AreaChart,
 	GroupedBarChart,
 	SimpleBarChart,
 	StackedBarChart,

@@ -9,7 +9,7 @@ import { Events } from "./../../interfaces";
 import { select } from "d3-selection";
 
 describe("legend component", () => {
-	beforeEach(function() {
+	beforeEach(function () {
 		const testEnvironment = new TestEnvironment();
 		testEnvironment.render();
 
@@ -18,10 +18,11 @@ describe("legend component", () => {
 	});
 
 	describe("content", () => {
-		it("should have same amount of datasets", async function(done) {
+		it("should have same amount of datasets", async function (done) {
 			const data = this.testEnvironment.chartData;
-			const uniqueDatagroups = data.map(d => d.group)
-				.filter(function(value, index, self) {
+			const uniqueDatagroups = data
+				.map((d) => d.group)
+				.filter(function (value, index, self) {
 					return self.indexOf(value) === index;
 				});
 
@@ -31,20 +32,30 @@ describe("legend component", () => {
 
 			const renderCb = () => {
 				// Remove render event listener
-				chartEventsService.removeEventListener(Events.Chart.RENDER_FINISHED, renderCb);
+				chartEventsService.removeEventListener(
+					Events.Chart.RENDER_FINISHED,
+					renderCb
+				);
 
-				const numberOfLegendItems = select(`g.${settings.prefix}--${options.chart.style.prefix}--legend`).selectAll("g.legend-item").size();
+				const numberOfLegendItems = select(
+					`g.${settings.prefix}--${options.chart.style.prefix}--legend`
+				)
+					.selectAll("g.legend-item")
+					.size();
 				expect(numberOfLegendItems).toEqual(numberOfDatagroups);
 
 				done();
 			};
 
 			// Add event listener for when chart render is finished
-			chartEventsService.addEventListener(Events.Chart.RENDER_FINISHED, renderCb);
+			chartEventsService.addEventListener(
+				Events.Chart.RENDER_FINISHED,
+				renderCb
+			);
 		});
 	});
 
-	afterEach(function() {
+	afterEach(function () {
 		this.testEnvironment.destroy();
 	});
 });

@@ -1,6 +1,16 @@
-import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
-import { AxisTooltipOptions, BarTooltipOptions, BarOptions, StackedBarOptions } from "./components";
 import { GaugeTypes } from "./enums";
+import {
+	LegendOptions,
+	TooltipOptions,
+	GridOptions,
+	AxesOptions,
+} from "./index";
+import {
+	AxisTooltipOptions,
+	BarTooltipOptions,
+	BarOptions,
+	StackedBarOptions,
+} from "./components";
 
 /**
  * Base chart options common to any chart
@@ -33,15 +43,30 @@ export interface BaseChartOptions {
 	/**
 	 * Optional function to determine whether is filled based on datasetLabel, label, and/or data
 	 */
-	getIsFilled?: (datasetLabel: any, label?: any, data?: any, defaultFilled?: boolean) => boolean;
+	getIsFilled?: (
+		datasetLabel: any,
+		label?: any,
+		data?: any,
+		defaultFilled?: boolean
+	) => boolean;
 	/**
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or data
 	 */
-	getFillColor?: (datasetLabel: any, label?: any, data?: any, defaultFillColor?: string) => string;
+	getFillColor?: (
+		datasetLabel: any,
+		label?: any,
+		data?: any,
+		defaultFillColor?: string
+	) => string;
 	/**
 	 * Optional function to generate the stroke color based on datasetLabel, label, and/or data
 	 */
-	getStrokeColor?: (datasetLabel: any, label?: any, data?: any, defaultStrokeColor?: string) => string;
+	getStrokeColor?: (
+		datasetLabel: any,
+		label?: any,
+		data?: any,
+		defaultStrokeColor?: string
+	) => string;
 	/**
 	 * stylesheet options
 	 */
@@ -147,6 +172,20 @@ export interface LineChartOptions extends ScatterChartOptions {
 	/**
 	 * options for the curve of the line
 	 */
+	curve?:
+		| string
+		| {
+				name: string;
+		  };
+}
+
+/**
+ * options specific to area charts
+ */
+export interface AreaChartOptions extends AxisChartOptions {
+	/**
+	 * options for the curve of the line
+	 */
 	curve?: string | {
 		name: string;
 	};
@@ -168,14 +207,14 @@ export interface PieChartOptions extends BaseChartOptions {
 		yOffsetCallout?: number;
 		callout?: {
 			minSliceDegree?: number;
-			offsetX?: number,
+			offsetX?: number;
 			offsetY?: number;
 			horizontalLineLength?: number;
 			textMargin?: number;
-		},
+		};
 		labels?: {
 			formatter?: Function;
-		}
+		};
 	};
 }
 
@@ -203,6 +242,7 @@ export interface GaugeChartOptions extends PieChartOptions {
 export interface DonutChartOptions extends PieChartOptions {
 	donut?: {
 		center?: {
+			label?: string;
 			numberFontSize?: Function;
 			titleFontSize?: Function;
 			titleYPosition?: Function;
@@ -217,18 +257,18 @@ export interface DonutChartOptions extends PieChartOptions {
 export interface RadarChartOptions extends BaseChartOptions {
 	radar?: {
 		opacity: {
-			unselected: number,
-			selected: number
-		},
+			unselected: number;
+			selected: number;
+		};
 		axes: {
-			angle: string,
-			value: string
-		}
-		xLabelPadding: number,
-		yLabelPadding: number,
-		yTicksNumber: number,
-		minRange: number,
-		xAxisRectHeight: number,
-		dotsRadius: number
+			angle: string;
+			value: string;
+		};
+		xLabelPadding: number;
+		yLabelPadding: number;
+		yTicksNumber: number;
+		minRange: number;
+		xAxisRectHeight: number;
+		dotsRadius: number;
 	};
 }

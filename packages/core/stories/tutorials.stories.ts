@@ -9,20 +9,23 @@ import {
 	reactTutorial,
 	angularTutorial,
 	vanillaTutorial,
-	vueTutorial
+	vueTutorial,
 } from "./tutorials/index";
 
 // Syntax highlighting
 const hljs = require("highlight.js/lib/highlight.js");
 hljs.registerLanguage("js", require("highlight.js/lib/languages/javascript"));
 hljs.registerLanguage("bash", require("highlight.js/lib/languages/bash"));
-hljs.registerLanguage("typescript", require("highlight.js/lib/languages/typescript"));
+hljs.registerLanguage(
+	"typescript",
+	require("highlight.js/lib/languages/typescript")
+);
 
 const gettingStartedStories = storiesOf("Tutorials/Getting Started", module);
 const tutorialStories = storiesOf("Tutorials", module);
 
 // add vanilla getting started tutorials
-gettingStartedStories.add("VanillaJS", () => {
+gettingStartedStories.add("vanilla", () => {
 	// container creation
 	const container = document.createElement("div");
 	container.setAttribute("class", "container tutorial");

@@ -22,7 +22,7 @@ export class ChartModel {
 
 	// Internal Model state
 	protected state: any = {
-		options: {}
+		options: {},
 	};
 
 	// Data labels
@@ -51,8 +51,10 @@ export class ChartModel {
 		const displayData = Tools.clone(this.get("data"));
 		const { groupMapsTo } = this.getOptions().data;
 
-		return displayData.filter(datum => {
-			const group = dataGroups.find(group => group.name === datum[groupMapsTo]);
+		return displayData.filter((datum) => {
+			const group = dataGroups.find(
+				(group) => group.name === datum[groupMapsTo]
+			);
 
 			return group.status === ACTIVE;
 		});
@@ -76,7 +78,7 @@ export class ChartModel {
 
 		this.set({
 			data: sanitizedData,
-			dataGroups
+			dataGroups,
 		});
 
 		return sanitizedData;
@@ -89,15 +91,17 @@ export class ChartModel {
 	getActiveDataGroups() {
 		const { ACTIVE } = Configuration.legend.items.status;
 
-		return this.getDataGroups().filter(dataGroup => dataGroup.status === ACTIVE);
+		return this.getDataGroups().filter(
+			(dataGroup) => dataGroup.status === ACTIVE
+		);
 	}
 
 	getDataGroupNames() {
-		return this.getDataGroups().map(dataGroup => dataGroup.name);
+		return this.getDataGroups().map((dataGroup) => dataGroup.name);
 	}
 
 	getActiveDataGroupNames() {
-		return this.getActiveDataGroups().map(dataGroup => dataGroup.name);
+		return this.getActiveDataGroups().map((dataGroup) => dataGroup.name);
 	}
 
 	getGroupedData() {
@@ -105,20 +109,22 @@ export class ChartModel {
 		const groupedData = {};
 		const { groupMapsTo } = this.getOptions().data;
 
-		displayData.map(datum => {
+		displayData.map((datum) => {
 			const group = datum[groupMapsTo];
-			if (groupedData[group] !== null && groupedData[group] !== undefined) {
+			if (
+				groupedData[group] !== null &&
+				groupedData[group] !== undefined
+			) {
 				groupedData[group].push(datum);
 			} else {
 				groupedData[group] = [datum];
 			}
 		});
 
-		return Object.keys(groupedData)
-			.map(groupName => ({
-				name: groupName,
-				data: groupedData[groupName]
-			}));
+		return Object.keys(groupedData).map((groupName) => ({
+			name: groupName,
+			data: groupedData[groupName],
+		}));
 	}
 
 	getDataValuesGroupedByKeys() {
@@ -129,18 +135,25 @@ export class ChartModel {
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
-		const stackKeys = map(displayData, datum => datum[domainIdentifier]).keys();
+		const stackKeys = map(
+			displayData,
+			(datum) => datum[domainIdentifier]
+		).keys();
 		const dataGroupNames = this.getDataGroupNames();
 
-		return stackKeys.map(key => {
+		return stackKeys.map((key) => {
 			const correspondingValues = { sharedStackKey: key };
-			dataGroupNames.forEach(dataGroupName => {
-				const correspondingDatum = displayData.find(datum => {
-					return datum[groupMapsTo] === dataGroupName &&
-						datum[domainIdentifier].toString() === key;
+			dataGroupNames.forEach((dataGroupName) => {
+				const correspondingDatum = displayData.find((datum) => {
+					return (
+						datum[groupMapsTo] === dataGroupName &&
+						datum[domainIdentifier].toString() === key
+					);
 				});
 
-				correspondingValues[dataGroupName] = correspondingDatum ? correspondingDatum[rangeIdentifier] : null;
+				correspondingValues[dataGroupName] = correspondingDatum
+					? correspondingDatum[rangeIdentifier]
+					: null;
 			});
 			return correspondingValues;
 		}) as any;
@@ -153,12 +166,13 @@ export class ChartModel {
 		const dataGroupNames = this.getDataGroupNames();
 		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys();
 
-		return stack().keys(dataGroupNames)(dataValuesGroupedByKeys)
+		return stack()
+			.keys(dataGroupNames)(dataValuesGroupedByKeys)
 			.map((series, i) => {
 				// Add data group names to each series
 				return Object.keys(series)
 					.filter((key: any) => !isNaN(key))
-					.map(key => {
+					.map((key) => {
 						const element = series[key];
 						element[groupMapsTo] = dataGroupNames[i];
 
@@ -196,7 +210,7 @@ export class ChartModel {
 	 */
 	setOptions(newOptions) {
 		this.set({
-			options: Tools.merge(this.getOptions(), newOptions)
+			options: Tools.merge(this.getOptions(), newOptions),
 		});
 	}
 
@@ -222,42 +236,55 @@ export class ChartModel {
 
 	/*
 	 * Data labels
-	*/
+	 */
 	toggleDataLabel(changedLabel: string) {
 		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
 		const dataGroups = this.getDataGroups();
 
-		const hasDeactivatedItems = dataGroups.some(group => group.status === DISABLED);
-		const activeItems = dataGroups.filter(group => group.status === ACTIVE);
+		const hasDeactivatedItems = dataGroups.some(
+			(group) => group.status === DISABLED
+		);
+		const activeItems = dataGroups.filter(
+			(group) => group.status === ACTIVE
+		);
 
 		// If there are deactivated items, toggle "changedLabel"
 		if (hasDeactivatedItems) {
 			// If the only active item is being toggled
 			// Activate all items
-			if (activeItems.length === 1 && activeItems[0].name === changedLabel) {
+			if (
+				activeItems.length === 1 &&
+				activeItems[0].name === changedLabel
+			) {
 				// If every item is active, then enable "changedLabel" and disable all other items
 				dataGroups.forEach((group, i) => {
 					dataGroups[i].status = ACTIVE;
 				});
 			} else {
-				const indexToChange = dataGroups.findIndex(group => group.name === changedLabel);
-				dataGroups[indexToChange].status = dataGroups[indexToChange].status === DISABLED ? ACTIVE : DISABLED;
+				const indexToChange = dataGroups.findIndex(
+					(group) => group.name === changedLabel
+				);
+				dataGroups[indexToChange].status =
+					dataGroups[indexToChange].status === DISABLED
+						? ACTIVE
+						: DISABLED;
 			}
 		} else {
 			// If every item is active, then enable "changedLabel" and disable all other items
 			dataGroups.forEach((group, i) => {
-				dataGroups[i].status = (group.name === changedLabel ? ACTIVE : DISABLED);
+				dataGroups[i].status =
+					group.name === changedLabel ? ACTIVE : DISABLED;
 			});
 		}
 
 		// dispatch legend filtering event with the status of all the dataLabels
 		this.services.events.dispatchEvent(Events.Legend.ITEMS_UPDATE, {
-			dataGroups
+			dataGroups,
 		});
 
 		// Update model
 		this.set({
-			dataGroups
+			dataGroups,
 		});
 	}
 
@@ -306,12 +333,14 @@ export class ChartModel {
 	 *
 	 */
 	protected transformToTabularData(data) {
-		console.warn("We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format")
+		console.warn(
+			"We've updated the charting data format to be tabular by default. The current format you're using is deprecated and will be removed in v1.0, read more here https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials--tabular-data-format"
+		);
 		const tabularData = [];
 		const { datasets, labels } = data;
 
 		// Loop through all datasets
-		datasets.forEach(dataset => {
+		datasets.forEach((dataset) => {
 			// Update each data point to the new format
 			dataset.data.forEach((datum, i) => {
 				let group;
@@ -330,7 +359,7 @@ export class ChartModel {
 
 				const updatedDatum = {
 					group,
-					key: labels[i]
+					key: labels[i],
 				};
 
 				if (isNaN(datum)) {
@@ -362,7 +391,7 @@ export class ChartModel {
 
 	/*
 	 * Data groups
-	*/
+	 */
 	protected updateAllDataGroups() {
 		// allDataGroups is used to generate a color scale that applies
 		// to all the groups. Now when the data updates, you might remove a group,
@@ -377,7 +406,7 @@ export class ChartModel {
 			this.allDataGroups = this.getDataGroupNames();
 		} else {
 			// Loop through current data groups
-			this.getDataGroupNames().forEach(dataGroupName => {
+			this.getDataGroupNames().forEach((dataGroupName) => {
 				// If group name hasn't been stored yet, store it
 				if (this.allDataGroups.indexOf(dataGroupName) === -1) {
 					this.allDataGroups.push(dataGroupName);
@@ -390,16 +419,19 @@ export class ChartModel {
 		const { groupMapsTo } = this.getOptions().data;
 		const { ACTIVE } = Configuration.legend.items.status;
 
-		const uniqueDataGroups = map(data, datum => datum[groupMapsTo]).keys();
-		return uniqueDataGroups.map(groupName => ({
+		const uniqueDataGroups = map(
+			data,
+			(datum) => datum[groupMapsTo]
+		).keys();
+		return uniqueDataGroups.map((groupName) => ({
 			name: groupName,
-			status: ACTIVE
+			status: ACTIVE,
 		}));
 	}
 
 	/*
 	 * Fill scales
-	*/
+	 */
 	protected setColorScale() {
 		let defaultColors = colorPalettes.DEFAULT;
 
@@ -407,8 +439,12 @@ export class ChartModel {
 		const userProvidedScale = Tools.getProperty(options, "color", "scale");
 
 		// If there is no valid user provided scale, use the default set of colors
-		if (userProvidedScale === null || Object.keys(userProvidedScale).length === 0) {
-			this.colorScale = scaleOrdinal().range(defaultColors)
+		if (
+			userProvidedScale === null ||
+			Object.keys(userProvidedScale).length === 0
+		) {
+			this.colorScale = scaleOrdinal()
+				.range(defaultColors)
 				.domain(this.allDataGroups);
 
 			return;
@@ -421,7 +457,7 @@ export class ChartModel {
 		 */
 		const colorRange = [];
 		let colorIndex = 0;
-		this.allDataGroups.forEach(dataGroup => {
+		this.allDataGroups.forEach((dataGroup) => {
 			if (userProvidedScale[dataGroup]) {
 				colorRange.push(userProvidedScale[dataGroup]);
 			} else {
@@ -435,7 +471,8 @@ export class ChartModel {
 			}
 		});
 
-		this.colorScale = scaleOrdinal().range(colorRange)
+		this.colorScale = scaleOrdinal()
+			.range(colorRange)
 			.domain(this.allDataGroups);
 	}
 }

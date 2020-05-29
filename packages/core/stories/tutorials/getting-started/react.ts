@@ -7,17 +7,19 @@ The Carbon Charts library provides a collection of reusable charting components 
 build websites and user interfaces. Adopting the library enables developers to use
 consistent markup, styles, and behavior in prototype and production work.
 
+[React wrappers - storybook](https://carbon-design-system.github.io/carbon-charts/react)
+
 &nbsp;
 ## Install
 
 **with yarn:**
 \`\`\`bash
-yarn add @carbon/charts d3
+yarn add @carbon/charts-react d3
 \`\`\`
 
 **with npm:**
 \`\`\`bash
-npm install --save @carbon/charts d3
+npm install --save @carbon/charts-react d3
 \`\`\`
 
 &nbsp;

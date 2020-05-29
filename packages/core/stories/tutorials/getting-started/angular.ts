@@ -7,17 +7,20 @@ The Carbon Charts Angular library provides a collection of reusable charting com
 and user interfaces. Adopting the library enables developers to use consistent markup, styles, and behavior
 in prototype and production work.
 
+[Angular wrappers - storybook](https://carbon-design-system.github.io/carbon-charts/angular)
+
+
 &nbsp;
 ## Install
 
 **with yarn:**
 \`\`\`bash
-yarn add @carbon/charts @carbon/charts-angular d3
+yarn add @carbon/charts-angular d3
 \`\`\`
 
 **with npm:**
 \`\`\`bash
-npm install --save @carbon/charts @carbon/charts-angular d3
+npm install --save @carbon/charts-angular d3
 \`\`\`
 
 &nbsp;
@@ -57,6 +60,7 @@ export class AppModule {}
 ###### app.component.ts
 \`\`\`ts
 import { Component } from "@angular/core";
+import "@carbon/charts/styles.css";
 
 @Component({
   selector: "my-app",
