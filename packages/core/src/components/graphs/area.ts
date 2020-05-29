@@ -19,7 +19,7 @@ export class Area extends Component {
 			this.handleLegendOnHover
 		);
 
-		// Un-highlight circles on legend item mouseouts
+		// Un-highlight area on legend item mouseouts
 		eventsFragment.addEventListener(
 			Events.Legend.ITEM_MOUSEOUT,
 			this.handleLegendMouseOut
