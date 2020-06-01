@@ -186,9 +186,11 @@ export interface AreaChartOptions extends AxisChartOptions {
 	/**
 	 * options for the curve of the line
 	 */
-	curve?: string | {
-		name: string;
-	};
+	curve?:
+		| string
+		| {
+				name: string;
+		  };
 }
 
 /**
@@ -234,7 +236,6 @@ export interface GaugeChartOptions extends PieChartOptions {
 		type?: GaugeTypes;
 	};
 }
-
 
 /**
  * options specific to donut charts

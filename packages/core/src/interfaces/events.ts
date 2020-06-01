@@ -40,7 +40,7 @@ export enum Gauge {
 	ARC_MOUSEOVER = "gauge-arc-mouseover",
 	ARC_MOUSEMOVE = "gauge-arc-mousemove",
 	ARC_CLICK = "gauge-arc-click",
-	ARC_MOUSEOUT = "gauge-arc-mouseout"
+	ARC_MOUSEOUT = "gauge-arc-mouseout",
 }
 
 /**

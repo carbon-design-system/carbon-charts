@@ -133,8 +133,7 @@ export enum DominantBaseline {
 	HANGING = "hanging",
 }
 
-
 export enum GaugeTypes {
 	SEMI = "semi",
-	FULL =  "full"
+	FULL = "full",
 }

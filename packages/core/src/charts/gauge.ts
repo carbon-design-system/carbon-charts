@@ -1,10 +1,7 @@
 // Internal Imports
 import { PieChart } from "./pie";
 import * as Configuration from "../configuration";
-import {
-	ChartConfig,
-	GaugeChartOptions,
-} from "../interfaces/index";
+import { ChartConfig, GaugeChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
@@ -33,9 +30,7 @@ export class GaugeChart extends PieChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [
-			new Gauge(this.model, this.services)
-		];
+		const graphFrameComponents = [new Gauge(this.model, this.services)];
 
 		const components: any[] = this.getChartComponents(graphFrameComponents);
 		return components;

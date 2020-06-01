@@ -27,15 +27,21 @@ export class Gauge extends Component {
 		const eventsFragment = this.services.events;
 
 		// Highlight correct circle on legend item hovers
-		eventsFragment.addEventListener("legend-item-onhover", this.handleLegendOnHover);
+		eventsFragment.addEventListener(
+			"legend-item-onhover",
+			this.handleLegendOnHover
+		);
 
 		// Un-highlight circles on legend item mouseouts
-		eventsFragment.addEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
+		eventsFragment.addEventListener(
+			"legend-item-onmouseout",
+			this.handleLegendMouseOut
+		);
 	}
 
 	getValue(): number {
 		const data = this.model.getData();
-		return data.find(d => d.group === "value").value;
+		return data.find((d) => d.group === "value").value;
 	}
 
 	getValueRatio(): number {
@@ -45,7 +51,7 @@ export class Gauge extends Component {
 
 	getDelta(): number {
 		const data = this.model.getData();
-		return data.find(d => d.group === "delta").value;
+		return data.find((d) => d.group === "delta").value;
 	}
 
 	getArcType(): GaugeTypes {
@@ -98,7 +104,10 @@ export class Gauge extends Component {
 		const valueFontSize = radius / 2.5;
 		const deltaFontSize = radius / 8;
 		const distanceBetweenNumbers = 10;
-		const numbersYPosition = arcType === GaugeTypes.SEMI ? -(deltaFontSize + distanceBetweenNumbers) : 0;
+		const numbersYPosition =
+			arcType === GaugeTypes.SEMI
+				? -(deltaFontSize + distanceBetweenNumbers)
+				: 0;
 
 		this.backgroundArc = arc()
 			.innerRadius(innerRadius)
@@ -127,50 +136,74 @@ export class Gauge extends Component {
 			.attr("role", Roles.GROUP);
 
 		// Add data arc
-
 		DOMUtils.appendOrSelect(svg, "path.arc-foreground")
 			.attr("d", this.arc)
 			.classed("arc", true)
 			.attr("fill", options.gauge.arcForegroundColor);
 
 		// Position Arc
-		const gaugeTranslateX = radius + options.gauge.hoverArc.outerRadiusOffset; // Leaves space for the hover animation
-		const gaugeTranslateY = radius + options.gauge.hoverArc.outerRadiusOffset;
-		svg.attr("transform", `translate(${gaugeTranslateX}, ${gaugeTranslateY})`);
+		const gaugeTranslateX =
+			radius + options.gauge.hoverArc.outerRadiusOffset; // Leaves space for the hover animation
+		const gaugeTranslateY =
+			radius + options.gauge.hoverArc.outerRadiusOffset;
+		svg.attr(
+			"transform",
+			`translate(${gaugeTranslateX}, ${gaugeTranslateY})`
+		);
 
 		// Add the numbers at the center
-		const numbersG = DOMUtils.appendOrSelect(svg, "g.gauge-numbers")
-			.attr("transform", `translate(0, ${numbersYPosition})`);
+		const numbersG = DOMUtils.appendOrSelect(svg, "g.gauge-numbers").attr(
+			"transform",
+			`translate(0, ${numbersYPosition})`
+		);
 
 		// Add the big number
-		const valueNumberG = DOMUtils.appendOrSelect(numbersG, "g.gauge-value-number")
-			.attr("transform", `translate(-10, 0)`); // Optical centering for the presence of the smaller % symbol
+		const valueNumberG = DOMUtils.appendOrSelect(
+			numbersG,
+			"g.gauge-value-number"
+		).attr("transform", `translate(-10, 0)`); // Optical centering for the presence of the smaller % symbol
 
-		const valueNumber = DOMUtils.appendOrSelect(valueNumberG, "text.gauge-value-number")
+		const valueNumber = DOMUtils.appendOrSelect(
+			valueNumberG,
+			"text.gauge-value-number"
+		)
 			.style("font-size", `${valueFontSize}px`)
 			.attr("text-anchor", "middle")
 			.text(`${options.gauge.numberFormatter(value)}`);
 
-		const { width: valueNumberWidth } = DOMUtils.getSVGElementSize(valueNumber, { useBBox: true });
+		const {
+			width: valueNumberWidth
+		} = DOMUtils.getSVGElementSize(valueNumber, { useBBox: true });
 		DOMUtils.appendOrSelect(valueNumberG, "text.gauge-value-symbol")
 			.style("font-size", `${valueFontSize / 2}px`)
 			.attr("x", valueNumberWidth / 2)
 			.text("%");
 
-			console.log(DOMUtils.getSVGElementSize(valueNumber, { useBBox: true }));
-			setTimeout(() => console.log(DOMUtils.getSVGElementSize(valueNumber, { useBBox: true })), 1000);
 
 		// Add the smaller number of the delta
-		const deltaNumberG = DOMUtils.appendOrSelect(numbersG, "g.gauge-delta")
-			.attr("transform", `translate(0, ${deltaFontSize + distanceBetweenNumbers})`);
+		const deltaNumberG = DOMUtils.appendOrSelect(
+			numbersG,
+			"g.gauge-delta"
+		).attr(
+			"transform",
+			`translate(0, ${deltaFontSize + distanceBetweenNumbers})`
+		);
 
-		const deltaNumber = DOMUtils.appendOrSelect(deltaNumberG, "text.gauge-delta-number")
+		const deltaNumber = DOMUtils.appendOrSelect(
+			deltaNumberG,
+			"text.gauge-delta-number"
+		)
 			.attr("text-anchor", "middle")
 			.style("font-size", `${deltaFontSize}px`)
 			.text(`${options.gauge.numberFormatter(delta)}%`);
 
-		const { width: deltaNumberWidth } = DOMUtils.getSVGElementSize(deltaNumber, { useBBox: true });
-		const deltaArrow = DOMUtils.appendOrSelect(deltaNumberG, "svg.gauge-delta-arrow")
+		const {
+			width: deltaNumberWidth
+		} = DOMUtils.getSVGElementSize(deltaNumber, { useBBox: true });
+		const deltaArrow = DOMUtils.appendOrSelect(
+			deltaNumberG,
+			"svg.gauge-delta-arrow"
+		)
 			.attr("x", -arrowSize - deltaNumberWidth / 2)
 			.attr("y", -arrowSize / 2 - deltaFontSize * 0.35)
 			.attr("width", arrowSize)
@@ -191,7 +224,6 @@ export class Gauge extends Component {
 		this.addEventListeners();
 	}
 
-
 	getInnerRadius() {
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
@@ -203,21 +235,30 @@ export class Gauge extends Component {
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
-		this.parent.selectAll("path.arc")
-			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => (d.data.label !== hoveredElement.datum()["key"]) ? 0.3 : 1);
+		this.parent
+			.selectAll("path.arc")
+			.transition(
+				this.services.transitions.getTransition("legend-hover-bar")
+			)
+			.attr("opacity", (d) =>
+				d.data.label !== hoveredElement.datum()["key"] ? 0.3 : 1
+			);
 	}
 
 	// Un-highlight all elements
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent.selectAll("path.arc")
-			.transition(this.services.transitions.getTransition("legend-mouseout-bar"))
+		this.parent
+			.selectAll("path.arc")
+			.transition(
+				this.services.transitions.getTransition("legend-mouseout-bar")
+			)
 			.attr("opacity", 1);
 	}
 
 	addEventListeners() {
 		const self = this;
-		this.parent.selectAll("path.arc")
+		this.parent
+			.selectAll("path.arc")
 			.on("mouseover", function(datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_MOUSEOVER, {
@@ -228,8 +269,13 @@ export class Gauge extends Component {
 			.on("mousemove", function(datum) {
 				const hoveredElement = select(this);
 
-				hoveredElement.classed("hovered", true)
-					.transition(self.services.transitions.getTransition("pie_slice_mouseover"))
+				hoveredElement
+					.classed("hovered", true)
+					.transition(
+						self.services.transitions.getTransition(
+							"pie_slice_mouseover"
+						)
+					)
 					.attr("d", self.hoverArc);
 
 				// Dispatch mouse event
@@ -253,8 +299,13 @@ export class Gauge extends Component {
 			})
 			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
-				hoveredElement.classed("hovered", false)
-					.transition(self.services.transitions.getTransition("gauge_slice_mouseover"))
+				hoveredElement
+					.classed("hovered", false)
+					.transition(
+						self.services.transitions.getTransition(
+							"gauge_slice_mouseover"
+						)
+					)
 					.attr("d", self.arc);
 
 				// Dispatch mouse event
@@ -264,7 +315,9 @@ export class Gauge extends Component {
 				});
 
 				// Hide tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.HIDE, { hoveredElement });
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+					hoveredElement
+				});
 			});
 	}
 
@@ -273,10 +326,13 @@ export class Gauge extends Component {
 		const arcType = this.getArcType();
 		const options = this.model.getOptions();
 
-		const { width, height } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
-		const radius = arcType === GaugeTypes.SEMI
-			? Math.min(width / 2, height)
-			: Math.min(width / 2, height / 2);
+		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
+			useAttrs: true
+		});
+		const radius =
+			arcType === GaugeTypes.SEMI
+				? Math.min(width / 2, height)
+				: Math.min(width / 2, height / 2);
 
 		return radius - options.gauge.hoverArc.outerRadiusOffset;
 	}

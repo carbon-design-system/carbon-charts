@@ -5,27 +5,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [0.32.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.30.24...v0.32.0) (2020-05-29)
 
-
 ### Bug Fixes
 
-* **core:** threshold - support non JS-date values ([a132497](https://github.com/carbon-design-system/carbon-charts/commit/a1324972fa5266151b490cb7eeed92a92da5b2c4))
-* **svelte:** copy svelte source to dist/src ([492a504](https://github.com/carbon-design-system/carbon-charts/commit/492a50470d2b64793bd2c67c4115bb2732bc44f7))
-
-
-
-
+-   **core:** threshold - support non JS-date values ([a132497](https://github.com/carbon-design-system/carbon-charts/commit/a1324972fa5266151b490cb7eeed92a92da5b2c4))
+-   **svelte:** copy svelte source to dist/src ([492a504](https://github.com/carbon-design-system/carbon-charts/commit/492a50470d2b64793bd2c67c4115bb2732bc44f7))
 
 # [0.31.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.30.24...v0.31.0) (2020-05-29)
 
-
 ### Bug Fixes
 
-* **core:** threshold - support non JS-date values ([a132497](https://github.com/carbon-design-system/carbon-charts/commit/a1324972fa5266151b490cb7eeed92a92da5b2c4))
-* **svelte:** copy svelte source to dist/src ([492a504](https://github.com/carbon-design-system/carbon-charts/commit/492a50470d2b64793bd2c67c4115bb2732bc44f7))
-
-
-
-
+-   **core:** threshold - support non JS-date values ([a132497](https://github.com/carbon-design-system/carbon-charts/commit/a1324972fa5266151b490cb7eeed92a92da5b2c4))
+-   **svelte:** copy svelte source to dist/src ([492a504](https://github.com/carbon-design-system/carbon-charts/commit/492a50470d2b64793bd2c67c4115bb2732bc44f7))
 
 ## [0.30.24](https://github.com/carbon-design-system/carbon-charts/compare/v0.30.23...v0.30.24) (2020-05-15)
 

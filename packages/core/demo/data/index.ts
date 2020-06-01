@@ -76,7 +76,7 @@ export const chartTypes = {
 	GaugeChart: {
 		vanilla: "GaugeChart",
 		angular: "ibm-gauge-chart",
-		vue: "ccv-gauge-chart"
+		vue: "ccv-gauge-chart",
 	},
 	DonutChart: {
 		vanilla: "DonutChart",
@@ -395,15 +395,15 @@ let allDemoGroups = [
 				options: gaugeDemos.gaugeOptionsSemi,
 				data: gaugeDemos.gaugeData,
 				chartType: chartTypes.GaugeChart,
-				isDemoExample: true
+				isDemoExample: true,
 			},
 			{
 				options: gaugeDemos.gaugeOptionsCircular,
 				data: gaugeDemos.gaugeData,
 				chartType: chartTypes.GaugeChart,
-				isDemoExample: true
-			}
-		]
+				isDemoExample: true,
+			},
+		],
 	},
 	{
 		title: "Scatter",
@@ -630,7 +630,7 @@ export const storybookDemoGroups = Tools.clone(allDemoGroups);
 // in the demo page we want to show only demos with isDemoExample = true
 export const demoGroups = Tools.clone(allDemoGroups)
 	.map((demoGroup) => {
-		demoGroup.demos = demoGroup.demos.filter(demo => demo.isDemoExample);
+		demoGroup.demos = demoGroup.demos.filter((demo) => demo.isDemoExample);
 		return demoGroup;
 	})
 	.filter((demoGroup) => demoGroup.demos.length); // remove demoGroup if it's children are all with isDemoExample = false
