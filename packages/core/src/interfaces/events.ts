@@ -84,6 +84,16 @@ export enum Radar {
 }
 
 /**
+ * enum of all area graph events
+ */
+export enum Area {
+	AREA_MOUSEOVER = "area-mouseover",
+	AREA_MOUSEMOVE = "area-mousemove",
+	AREA_CLICK = "area-click",
+	AREA_MOUSEOUT = "area-mouseout"
+}
+
+/**
  * enum of all tooltip events
  */
 export enum Tooltip {

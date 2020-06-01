@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export const areaTimeSeriesData = [
 	{ group: "Dataset 1", date: new Date(2019, 0, 1), value: 0 },
 	{ group: "Dataset 1", date: new Date(2019, 0, 6), value: 57312 },
@@ -61,6 +62,8 @@ export const areaTimeSeriesCurvedOptions = {
 	curve: "curveNatural",
 };
 
+=======
+>>>>>>> 4bfcfa49913b58c5ab593534a395e201747b2199
 export const stackedAreaTimeSeriesData = [
 	{ group: "Dataset 1", date: new Date(2019, 0, 1), value: 10000 },
 	{ group: "Dataset 1", date: new Date(2019, 0, 5), value: 65000 },
@@ -76,6 +79,7 @@ export const stackedAreaTimeSeriesData = [
 	{ group: "Dataset 3", date: new Date(2019, 0, 5), value: 20000 },
 	{ group: "Dataset 3", date: new Date(2019, 0, 8), value: 40000 },
 	{ group: "Dataset 3", date: new Date(2019, 0, 13), value: 60213 },
+<<<<<<< HEAD
 	{ group: "Dataset 3", date: new Date(2019, 0, 17), value: 25213 },
 ];
 
@@ -108,4 +112,39 @@ export const stackedAreaPercentageTimeSeriesOptions = {
 	},
 	percentage: true,
 	curve: "curveMonotoneX",
+=======
+	{ group: "Dataset 3", date: new Date(2019, 0, 17), value: 25213 }
+];
+
+export const stackedAreaTimeSeriesOptions = {
+	title: "Area Stacked (time series)",
+	axes: {
+		left: {
+			secondary: true,
+			stacked: true
+		},
+		bottom: {
+			scaleType: "time",
+			primary: true
+		}
+	},
+	curve: "curveMonotoneX"
+};
+
+export const stackedAreaPercentageTimeSeriesOptions = {
+	title: "Area Stacked Percentage (time series)",
+	axes: {
+		left: {
+			domain: [0, 100],
+			secondary: true,
+			stacked: true
+		},
+		bottom: {
+			scaleType: "time",
+			primary: true
+		}
+	},
+	percentage: true,
+	curve: "curveMonotoneX"
+>>>>>>> 4bfcfa49913b58c5ab593534a395e201747b2199
 };

@@ -66,6 +66,11 @@ export const chartTypes = {
 		angular: "ibm-line-chart",
 		vue: "ccv-line-chart",
 	},
+	StackedAreaChart: {
+		vanilla: "StackedAreaChart",
+		angular: "ibm-stacked-area-chart",
+		vue: "ccv-stacked-area-chart"
+	},
 	ScatterChart: {
 		vanilla: "ScatterChart",
 		angular: "ibm-scatter-chart",
@@ -376,6 +381,21 @@ let allDemoGroups = [
 		],
 	},
 	{
+		title: "Area",
+		demos: [
+			{
+				options: areaDemos.stackedAreaTimeSeriesOptions,
+				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart
+			},
+			{
+				options: areaDemos.stackedAreaPercentageTimeSeriesOptions,
+				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart
+			}
+		]
+	},
+	{
 		title: "Pie",
 		demos: [
 			{
@@ -485,14 +505,22 @@ let allDemoGroups = [
 					timeSeriesAxisDemos.lineTimeSeriesHourlyDefaultLocaleOptions,
 				data:
 					timeSeriesAxisDemos.lineTimeSeriesDataHourlyDefaultTicksFormats,
+<<<<<<< HEAD
 				chartType: chartTypes.LineChart,
+=======
+				chartType: chartTypes.LineChart
+>>>>>>> 4bfcfa49913b58c5ab593534a395e201747b2199
 			},
 			{
 				options:
 					timeSeriesAxisDemos.lineTimeSeriesHourlyCustomTicksFormatsOptions,
 				data:
 					timeSeriesAxisDemos.lineTimeSeriesDataHourlyCustomTicksFormats,
+<<<<<<< HEAD
 				chartType: chartTypes.LineChart,
+=======
+				chartType: chartTypes.LineChart
+>>>>>>> 4bfcfa49913b58c5ab593534a395e201747b2199
 			},
 			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataDaily,
@@ -509,13 +537,21 @@ let allDemoGroups = [
 					timeSeriesAxisDemos.lineTimeSeriesDataMonthlyDefaultLocale,
 				options:
 					timeSeriesAxisDemos.lineTimeSeriesMonthlyDefaultLocaleOptions,
+<<<<<<< HEAD
 				chartType: chartTypes.LineChart,
+=======
+				chartType: chartTypes.LineChart
+>>>>>>> 4bfcfa49913b58c5ab593534a395e201747b2199
 			},
 			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataMonthlyCustomLocale,
 				options:
 					timeSeriesAxisDemos.lineTimeSeriesMonthlyCustomLocaleOptions,
+<<<<<<< HEAD
 				chartType: chartTypes.LineChart,
+=======
+				chartType: chartTypes.LineChart
+>>>>>>> 4bfcfa49913b58c5ab593534a395e201747b2199
 			},
 			{
 				data: timeSeriesAxisDemos.lineTimeSeriesDataQuarterly,
@@ -578,7 +614,11 @@ let allDemoGroups = [
 	},
 ] as any;
 
+<<<<<<< HEAD
 const formatTitleString = (str) =>
+=======
+const formatTitleString = str =>
+>>>>>>> 4bfcfa49913b58c5ab593534a395e201747b2199
 	str
 		.replace(/[^\w\s]/gi, "")
 		.replace(/\s\s+/g, " ")
@@ -622,8 +662,16 @@ export const storybookDemoGroups = Tools.clone(allDemoGroups);
 
 // in the demo page we want to show only demos with isDemoExample = true
 export const demoGroups = Tools.clone(allDemoGroups)
+<<<<<<< HEAD
 	.map((demoGroup) => {
 		demoGroup.demos = demoGroup.demos.filter((demo) => demo.isDemoExample);
 		return demoGroup;
 	})
 	.filter((demoGroup) => demoGroup.demos.length); // remove demoGroup if it's children are all with isDemoExample = false
+=======
+	.map(demoGroup => {
+		demoGroup.demos = demoGroup.demos.filter(demo => demo.isDemoExample);
+		return demoGroup;
+	})
+	.filter(demoGroup => demoGroup.demos.length); // remove demoGroup if it's children are all with isDemoExample = false
+>>>>>>> 4bfcfa49913b58c5ab593534a395e201747b2199

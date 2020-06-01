@@ -193,6 +193,19 @@ export interface AreaChartOptions extends AxisChartOptions {
 }
 
 /**
+ * options specific to area charts
+ */
+export interface StackedAreaChartOptions extends ScatterChartOptions {
+	/**
+	 * options for the curve of the line
+	 */
+	curve?: string | {
+		name: string;
+	};
+}
+
+
+/**
  * options specific to pie charts
  */
 export interface PieChartOptions extends BaseChartOptions {
