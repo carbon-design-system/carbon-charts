@@ -64,7 +64,7 @@ export const chartTypes = {
 	StackedAreaChart: {
 		vanilla: "StackedAreaChart",
 		angular: "ibm-stacked-area-chart",
-		vue: "ccv-stacked-area-chart"
+		vue: "ccv-stacked-area-chart",
 	},
 	ScatterChart: {
 		vanilla: "ScatterChart",
@@ -381,14 +381,14 @@ let allDemoGroups = [
 			{
 				options: areaDemos.stackedAreaTimeSeriesOptions,
 				data: areaDemos.stackedAreaTimeSeriesData,
-				chartType: chartTypes.StackedAreaChart
+				chartType: chartTypes.StackedAreaChart,
 			},
 			{
 				options: areaDemos.stackedAreaPercentageTimeSeriesOptions,
 				data: areaDemos.stackedAreaTimeSeriesData,
-				chartType: chartTypes.StackedAreaChart
-			}
-		]
+				chartType: chartTypes.StackedAreaChart,
+			},
+		],
 	},
 	{
 		title: "Pie",

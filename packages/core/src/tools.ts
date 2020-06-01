@@ -365,5 +365,6 @@ export namespace Tools {
 			: [range, domain];
 	}
 
-	export const compareNumeric = (a: Numeric, b: Numeric) => Number(a) === Number(b);
+	export const compareNumeric = (a: Numeric, b: Numeric) =>
+		Number(a) === Number(b);
 }

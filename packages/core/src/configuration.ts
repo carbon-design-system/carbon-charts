@@ -378,8 +378,8 @@ export const area = {
 export const areas = {
 	opacity: {
 		unselected: 0.3,
-		selected: 1
-	}
+		selected: 1,
+	},
 };
 
 /**
