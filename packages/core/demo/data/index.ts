@@ -34,7 +34,12 @@ export const chartTypes = {
 	AreaChart: {
 		vanilla: "AreaChart",
 		angular: "ibm-area-chart",
-		vue: "ccv-area-chart"
+		vue: "ccv-area-chart",
+	},
+	StackedAreaChart: {
+		vanilla: "StackedAreaChart",
+		angular: "ibm-stacked-area-chart",
+		vue: "ccv-stacked-area-chart",
 	},
 	SimpleBarChart: {
 		vanilla: "SimpleBarChart",
@@ -88,11 +93,30 @@ let allDemoGroups = [
 		title: "Area",
 		demos: [
 			{
+				options: areaDemos.areaTimeSeriesCurvedOptions,
+				data: areaDemos.areaTimeSeriesCurvedData,
+				chartType: chartTypes.AreaChart,
+				isDemoExample: true,
+			},
+			{
 				options: areaDemos.areaTimeSeriesOptions,
 				data: areaDemos.areaTimeSeriesData,
-				chartType: chartTypes.AreaChart
-			}
-		]
+				chartType: chartTypes.AreaChart,
+				isDemoExample: true,
+			},
+			{
+				options: areaDemos.stackedAreaTimeSeriesOptions,
+				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart,
+				isDemoExample: true,
+			},
+			{
+				options: areaDemos.stackedAreaPercentageTimeSeriesOptions,
+				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart,
+				isDemoExample: true,
+			},
+		],
 	},
 	{
 		title: "Bar (vertical)",
@@ -536,36 +560,19 @@ let allDemoGroups = [
 				data: radarDemos.radarData,
 				options: radarDemos.radarOptions,
 				chartType: chartTypes.RadarChart,
+				isDemoExample: true,
 			},
 			{
 				data: radarDemos.radarWithMissingDataData,
 				options: radarDemos.radarWithMissingDataOptions,
 				chartType: chartTypes.RadarChart,
+				isDemoExample: true,
 			},
 			{
 				data: radarDemos.radarDenseData,
 				options: radarDemos.radarDenseOptions,
 				chartType: chartTypes.RadarChart,
-			},
-		],
-	},
-	{
-		title: "Radar",
-		demos: [
-			{
-				data: radarDemos.radarData,
-				options: radarDemos.radarOptions,
-				chartType: chartTypes.RadarChart,
-			},
-			{
-				data: radarDemos.radarWithMissingDataData,
-				options: radarDemos.radarWithMissingDataOptions,
-				chartType: chartTypes.RadarChart,
-			},
-			{
-				data: radarDemos.radarDenseData,
-				options: radarDemos.radarDenseOptions,
-				chartType: chartTypes.RadarChart,
+				isDemoExample: true,
 			},
 		],
 	},

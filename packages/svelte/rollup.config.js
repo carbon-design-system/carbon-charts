@@ -18,7 +18,7 @@ export default [
 			resolve(),
 			terser()
 		],
-		external: ["@carbon/charts"]
+		external: ["svelte", "@carbon/charts"]
 	},
 	{
 		input: "./src/index.js",
@@ -28,9 +28,8 @@ export default [
 		},
 		plugins: [
 			svelte(),
-			resolve(),
-			terser()
+			resolve()
 		],
-		external: ["@carbon/charts"]
+		external: ["svelte", "@carbon/charts"]
 	}
 ];

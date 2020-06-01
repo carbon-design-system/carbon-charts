@@ -79,8 +79,8 @@ export class Threshold extends Component {
 
 		const { cartesianScales } = this.services;
 		const orientation = cartesianScales.getOrientation();
-		const getDomainValue = d => cartesianScales.getDomainValue(d);
-		const getRangeValue = d => cartesianScales.getRangeValue(d);
+		const getDomainValue = (d) => cartesianScales.getDomainValue(d);
+		const getRangeValue = (d) => cartesianScales.getRangeValue(d);
 		const [
 			getXValue,
 			getYValue,
