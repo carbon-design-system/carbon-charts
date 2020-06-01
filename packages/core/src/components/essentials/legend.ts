@@ -51,8 +51,10 @@ export class Legend extends Component {
 		addedLegendItems
 			.append("text")
 			.merge(legendItems.select("text"))
-			.html((d) => d.name)
-			.attr("alignment-baseline", "middle");
+			.html((d) => d.name.length > 25 ? d.name.substr(0, 10) + "..." + d.name.substr(-10) : d.name)
+			.attr("alignment-baseline", "middle")
+			.append("title")
+			.html((d) => d.name);
 
 		this.breakItemsIntoLines(addedLegendItems);
 

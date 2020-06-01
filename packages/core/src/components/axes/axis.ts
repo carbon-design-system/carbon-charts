@@ -413,6 +413,18 @@ export class Axis extends Component {
 			container.attr("opacity", 0);
 		}
 
+		// truncate the long labels (only discrete type) so that the graph display won't be off
+		if (!isTimeScaleType) {
+			container
+				.selectAll("g.ticks g.tick text")
+				.text(function(d) {
+					return d.length > 25 ? d.substr(0, 10) + "..." + d.substr(-10) : d;
+				})
+				.append("title")
+				.text(function(d) {
+					return d;
+				});
+		}
 		// Add event listeners to elements drawn
 		this.addEventListeners();
 	}
