@@ -5,7 +5,7 @@ import BaseChart from "./base-chart";
 
 export default class StackedAreaChart extends BaseChart {
 	componentDidMount() {
-		this.chart = new SBC(
+		this.chart = new SAC(
 			this.chartRef,
 			{
 				data: this.props.data,
