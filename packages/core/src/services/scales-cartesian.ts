@@ -181,33 +181,50 @@ export class CartesianScales extends Service {
 		return this.scales[this.getMainYAxisPosition()];
 	}
 
-	getValueFromScale(axisPosition: AxisPositions, datum: any, index?: number) {
+	getValueFromScale(scale: any, scaleType: ScaleTypes, axisPosition: AxisPositions, datum: any, index?: number) {
 		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		const axesOptions = Tools.getProperty(options, "axes");
+		const axisOptions = axesOptions[axisPosition];
+		const { mapsTo } = axisOptions;
+		const value = datum[mapsTo] !== undefined ? datum[mapsTo] : datum;
+		let scaledValue;
+		switch (scaleType) {
+			case ScaleTypes.LABELS:
+				scaledValue = scale(value) + scale.step() / 2;
+				break;
+			case ScaleTypes.TIME:
+				scaledValue = scale(new Date(value));
+				break;
+			default:
+				scaledValue = scale(value);
+		}
+		return scaledValue;
+	}
 
+	getValueThroughAxisPosition(axisPosition: AxisPositions, datum: any, index?: number) {
 		const scaleType = this.scaleTypes[axisPosition];
 		const scale = this.scales[axisPosition];
 
-		const { mapsTo } = axisOptions;
-		const value = datum[mapsTo] !== undefined ? datum[mapsTo] : datum;
-
-		if (scaleType === ScaleTypes.LABELS) {
-			return scale(value) + scale.step() / 2;
-		}
-
-		if (scaleType === ScaleTypes.TIME) {
-			return scale(new Date(value));
-		}
-
-		return scale(value);
+		return this.getValueFromScale(scale, scaleType, axisPosition, datum, index);
 	}
 
+
 	getDomainValue(d, i) {
-		return this.getValueFromScale(this.domainAxisPosition, d, i);
+		return this.getValueThroughAxisPosition(this.domainAxisPosition, d, i);
 	}
 
 	getRangeValue(d, i) {
-		return this.getValueFromScale(this.rangeAxisPosition, d, i);
+		return this.getValueThroughAxisPosition(this.rangeAxisPosition, d, i);
+	}
+
+	getXValue(d, i) {
+		const mainXAxisPosition = this.getMainXAxisPosition();
+		return this.getValueThroughAxisPosition(mainXAxisPosition, d, i);
+	}
+
+	getYValue(d, i) {
+		const mainYAxisPosition = this.getMainYAxisPosition();
+		return this.getValueThroughAxisPosition(mainYAxisPosition, d, i);
 	}
 
 	getDomainIdentifier() {
@@ -269,6 +286,65 @@ export class CartesianScales extends Service {
 				Configuration.axis.paddingRatio
 			);
 		}
+	}
+
+	getHighestDomainThreshold(): null | {
+		threshold: ThresholdOptions;
+		scaleValue: number;
+	} {
+		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
+		const domainAxisPosition = this.getDomainAxisPosition();
+
+		const { thresholds } = axesOptions[domainAxisPosition];
+
+		if (!thresholds) {
+			return null;
+		}
+
+		const domainScale = this.getDomainScale();
+		// Find the highest threshold for the domain
+		const highestThreshold = thresholds.sort(
+			(a, b) => b.value - a.value,
+		)[0];
+
+		const scaleType = this.getScaleTypeByPosition(domainAxisPosition);
+		if (
+			scaleType === ScaleTypes.TIME &&
+			(typeof highestThreshold.value === "string" ||
+				highestThreshold.value.getTime === undefined)
+		) {
+			highestThreshold.value = new Date(highestThreshold.value);
+		}
+
+		return {
+			threshold: highestThreshold,
+			scaleValue: domainScale(highestThreshold.value),
+		};
+	}
+
+	getHighestRangeThreshold(): null | {
+		threshold: ThresholdOptions;
+		scaleValue: number;
+	} {
+		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
+		const rangeAxisPosition = this.getRangeAxisPosition();
+
+		const { thresholds } = axesOptions[rangeAxisPosition];
+
+		if (!thresholds) {
+			return null;
+		}
+
+		const rangeScale = this.getRangeScale();
+		// Find the highest threshold for the range
+		const highestThreshold = thresholds.sort(
+			(a, b) => b.value - a.value,
+		)[0];
+
+		return {
+			threshold: highestThreshold,
+			scaleValue: rangeScale(highestThreshold.value),
+		};
 	}
 
 	protected findMainVerticalAxisPosition() {
@@ -437,65 +513,6 @@ export class CartesianScales extends Service {
 		scale.domain(this.getScaleDomain(axisPosition));
 
 		return scale;
-	}
-
-	getHighestDomainThreshold(): null | {
-		threshold: ThresholdOptions;
-		scaleValue: number;
-	} {
-		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
-		const domainAxisPosition = this.getDomainAxisPosition();
-
-		const { thresholds } = axesOptions[domainAxisPosition];
-
-		if (!thresholds) {
-			return null;
-		}
-
-		const domainScale = this.getDomainScale();
-		// Find the highest threshold for the domain
-		const highestThreshold = thresholds.sort(
-			(a, b) => b.value - a.value
-		)[0];
-
-		const scaleType = this.getScaleTypeByPosition(domainAxisPosition);
-		if (
-			scaleType === ScaleTypes.TIME &&
-			(typeof highestThreshold.value === "string" ||
-				highestThreshold.value.getTime === undefined)
-		) {
-			highestThreshold.value = new Date(highestThreshold.value);
-		}
-
-		return {
-			threshold: highestThreshold,
-			scaleValue: domainScale(highestThreshold.value)
-		};
-	}
-
-	getHighestRangeThreshold(): null | {
-		threshold: ThresholdOptions;
-		scaleValue: number;
-	} {
-		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
-		const rangeAxisPosition = this.getRangeAxisPosition();
-
-		const { thresholds } = axesOptions[rangeAxisPosition];
-
-		if (!thresholds) {
-			return null;
-		}
-
-		const rangeScale = this.getRangeScale();
-		// Find the highest threshold for the range
-		const highestThreshold = thresholds.sort(
-			(a, b) => b.value - a.value
-		)[0];
-
-		return {
-			threshold: highestThreshold,
-			scaleValue: rangeScale(highestThreshold.value)
-		};
 	}
 }
 
