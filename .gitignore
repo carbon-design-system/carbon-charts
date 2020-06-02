@@ -10,3 +10,4 @@ storybook-dist
 package-lock.json
 .cache/
 pages/
+storybook-static/

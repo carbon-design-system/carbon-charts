@@ -1,26 +1,17 @@
 // Internal Imports
-import { ScaleTypes, TooltipTypes } from "../../interfaces/enums";
 import { Tools } from "../../tools";
 import { Bar } from "./bar";
+import {
+	Roles,
+	TooltipTypes,
+	Events,
+	CartesianOrientations,
+} from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
-import { stack } from "d3-shape";
 import { color } from "d3-color";
-
-// Add datasetLabel to each piece of data
-// To be used to get the fill color
-const addLabelsAndValueToData = d => {
-	Object.keys(d).map(key => {
-		if (typeof d[key] === "object") {
-			d[key]["datasetLabel"] = d.key;
-			d[key]["label"] = d[key].data["label"];
-			d[key]["value"] = d[key].data[d.key];
-		}
-	});
-
-	return d;
-};
+import { map } from "d3-collection";
 
 export class StackedBar extends Bar {
 	type = "stacked-bar";
@@ -29,124 +20,114 @@ export class StackedBar extends Bar {
 		const eventsFragment = this.services.events;
 
 		// Highlight correct circle on legend item hovers
-		eventsFragment.addEventListener("legend-item-onhover", this.handleLegendOnHover);
+		eventsFragment.addEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover
+		);
 
 		// Un-highlight circles on legend item mouseouts
-		eventsFragment.addEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
-	}
-
-	getStackData() {
-		let stackDataArray;
-		const displayData = this.model.getDisplayData();
-
-		const timeSeries = this.services.axes.getMainXAxis().scaleType === ScaleTypes.TIME;
-
-		if (timeSeries) {
-			// Get all date values provided in data
-			// TODO - Could be re-used through the model
-			let allDates = [];
-			displayData.datasets.forEach(dataset => {
-				allDates = allDates.concat(dataset.data.map(datum => Number(datum.date)));
-			});
-			allDates = Tools.removeArrayDuplicates(allDates).sort();
-
-			// Go through all date values
-			// And get corresponding data from each dataset
-			stackDataArray = allDates.map((date, i) => {
-				const correspondingData = {};
-
-				displayData.datasets.forEach(dataset => {
-					const correspondingDatum = dataset.data.find(datum => Number(datum.date) === Number(date));
-					if (correspondingDatum) {
-						correspondingData[dataset.label] = correspondingDatum.value;
-					} else {
-						correspondingData[dataset.label] = 0;
-					}
-				});
-				correspondingData["label"] = date;
-
-				return correspondingData;
-			});
-		} else {
-			// Create the stack datalist
-			stackDataArray = displayData.labels.map((label, i) => {
-				const correspondingData = {};
-
-				displayData.datasets.forEach(dataset => {
-					correspondingData[dataset.label] = !isNaN(dataset.data[i]) ? dataset.data[i] : dataset.data[i].value;
-				});
-				correspondingData["label"] = label;
-
-				return correspondingData;
-			});
-		}
-
-		return stackDataArray;
+		eventsFragment.addEventListener(
+			Events.Legend.ITEM_MOUSEOUT,
+			this.handleLegendMouseOut
+		);
 	}
 
 	render(animate: boolean) {
-		// Chart options mixed with the internal configurations
-		const options = this.model.getOptions();
-
 		// Grab container SVG
 		const svg = this.getContainerSVG();
 
-		// Create the data and keys that'll be used by the stack layout
+		// Chart options mixed with the internal configurations
 		const displayData = this.model.getDisplayData();
-		const stackDataArray = this.getStackData();
-		const stackKeys = displayData.datasets.map(dataset => dataset.label);
+		const options = this.model.getOptions();
+		const { groupMapsTo } = options.data;
+
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+
+		// Create the data and keys that'll be used by the stack layout
+		const stackKeys = map(
+			displayData,
+			(datum) => datum[domainIdentifier]
+		).keys();
+		const stackData = this.model.getStackedData();
 
 		// Update data on all bar groups
-		const barGroups = svg.selectAll("g.bars")
-			.data(stack().keys(stackKeys)(stackDataArray), d => d.key);
+		const barGroups = svg.selectAll("g.bars").data(stackData, (d) => d.key);
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
 		// Data filters are processed before entering new elements
 		// Or updating existing ones
-		barGroups.exit()
-			.attr("opacity", 0)
-			.remove();
+		barGroups.exit().attr("opacity", 0).remove();
 
 		// Add bar groups that need to be introduced
-		barGroups.enter()
+		barGroups
+			.enter()
 			.append("g")
-			.classed("bars", true);
+			.classed("bars", true)
+			.attr("role", Roles.GROUP);
 
 		// Update data on all bars
-		const bars = svg.selectAll("g.bars").selectAll("rect.bar")
-			.data(d => addLabelsAndValueToData(d), d => d.label);
+		const bars = svg
+			.selectAll("g.bars")
+			.selectAll("path.bar")
+			.data((data) => data);
 
 		// Remove bars that need to be removed
-		bars.exit()
-			.remove();
+		bars.exit().remove();
 
-		// Update styling and position on existing bars
-		// As well as bars that were just added
 		bars.enter()
-			.append("rect")
+			.append("path")
 			.merge(bars)
-				.classed("bar", true)
-				.attr("x", (d, i) => {
-					const barWidth = this.getBarWidth();
-					return this.services.axes.getXValue(d, i) - (barWidth / 2);
-				})
-				.attr("width", this.getBarWidth.bind(this))
-				.transition(this.services.transitions.getTransition("bar-update-enter", animate))
-				.attr("y", (d, i) => this.services.axes.getYValue(d[1], i))
-				.attr("fill", d => this.model.getFillScale()[d.datasetLabel](d.label))
-				.attr("height", (d, i) => {
-					const { datasetLabel } = d;
-					const datasetLabelIndex = stackKeys.indexOf(datasetLabel);
-					const height = this.services.axes.getYValue(d[0]) - this.services.axes.getYValue(d[1]);
+			.classed("bar", true)
+			.transition(
+				this.services.transitions.getTransition(
+					"bar-update-enter",
+					animate
+				)
+			)
+			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
+			.attr("d", (d, i) => {
+				const key = stackKeys[i];
 
-					if (datasetLabelIndex > 0 && height >= options.bars.dividerSize) {
-						return height - options.bars.dividerSize;
+				/*
+				 * Orientation support for horizontal/vertical bar charts
+				 * Determine coordinates needed for a vertical set of paths
+				 * to draw the bars needed, and pass those coordinates down to
+				 * generateSVGPathString() to decide whether it needs to flip them
+				 */
+				const barWidth = this.getBarWidth();
+				const x0 =
+					this.services.cartesianScales.getDomainValue(key, i) -
+					barWidth / 2;
+				const x1 = x0 + barWidth;
+				const y0 = this.services.cartesianScales.getRangeValue(d[0], i);
+				let y1 = this.services.cartesianScales.getRangeValue(d[1], i);
+
+				// Add the divider gap
+				if (
+					Math.abs(y1 - y0) > 0 &&
+					Math.abs(y1 - y0) > options.bars.dividerSize
+				) {
+					if (
+						this.services.cartesianScales.getOrientation() ===
+						CartesianOrientations.VERTICAL
+					) {
+						y1 += 1;
+					} else {
+						y1 -= 1;
 					}
+				}
 
-					return height;
-				})
-				.attr("opacity", 1);
+				return Tools.generateSVGPathString(
+					{ x0, x1, y0, y1 },
+					this.services.cartesianScales.getOrientation()
+				);
+			})
+			.attr("opacity", 1)
+			// a11y
+			.attr("role", Roles.GRAPHICS_SYMBOL)
+			.attr("aria-roledescription", "bar")
+			.attr("aria-label", (d) => d.value);
 
 		// Add event listeners for the above elements
 		this.addEventListeners();
@@ -156,75 +137,137 @@ export class StackedBar extends Bar {
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
-		this.parent.selectAll("rect.bar")
-			.transition(this.services.transitions.getTransition("legend-hover-bar"))
-			.attr("opacity", d => (d.datasetLabel !== hoveredElement.datum()["key"]) ? 0.3 : 1);
-	}
+		this.parent
+			.selectAll("path.bar")
+			.transition(
+				this.services.transitions.getTransition("legend-hover-bar")
+			)
+			.attr("opacity", (d) =>
+				d.datasetLabel !== hoveredElement.datum()["key"] ? 0.3 : 1
+			);
+	};
 
 	// Un-highlight all elements
-	handleLegendMouseOut = (event: CustomEvent)  => {
-		this.parent.selectAll("rect.bar")
-			.transition(this.services.transitions.getTransition("legend-mouseout-bar"))
+	handleLegendMouseOut = (event: CustomEvent) => {
+		this.parent
+			.selectAll("path.bar")
+			.transition(
+				this.services.transitions.getTransition("legend-mouseout-bar")
+			)
 			.attr("opacity", 1);
-	}
+	};
 
 	addEventListeners() {
+		const options = this.model.getOptions();
+		const { groupMapsTo } = options.data;
+
 		const self = this;
-		this.parent.selectAll("rect.bar")
-			.on("mouseover", function() {
+		this.parent
+			.selectAll("path.bar")
+			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
 
-				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseover_fill_update"))
-					.attr("fill", color(hoveredElement.attr("fill")).darker(0.7).toString());
-			})
-			.on("mousemove", function() {
-				const hoveredElement = select(this);
-				const itemData = select(this).datum();
-				hoveredElement.classed("hovered", true);
+				hoveredElement
+					.transition(
+						self.services.transitions.getTransition(
+							"graph_element_mouseover_fill_update"
+						)
+					)
+					.attr("fill", (d: any) =>
+						color(self.model.getFillColor(d[groupMapsTo]))
+							.darker(0.7)
+							.toString()
+					);
 
-				const stackedData = itemData["data"];
-				const sharedLabel = stackedData["label"];
-
-				// Remove the label field
-				delete stackedData["label"];
-
-				// filter out the label from the datasets' and associated values
-				const activePoints =  Object.keys(stackedData)
-					.map(key => ({
-						datasetLabel: key,
-						value: stackedData[key],
-						label: sharedLabel
-					}));
-
-				// Show tooltip
-				self.services.events.dispatchEvent("show-tooltip", {
-					multidata: activePoints,
-					hoveredElement,
-					type: TooltipTypes.DATAPOINT
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
+					element: hoveredElement,
+					datum,
 				});
 			})
-			.on("mouseout", function() {
+			.on("mousemove", function (datum) {
+				const displayData = self.model.getDisplayData();
+				const hoveredElement = select(this);
+
+				const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
+				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
+				const { groupMapsTo } = self.model.getOptions().data;
+
+				let matchingDataPoint = displayData.find((d) => {
+					return (
+						d[rangeIdentifier] === datum.data[datum.group] &&
+						d[domainIdentifier].toString() ===
+							datum.data.sharedStackKey &&
+						d[groupMapsTo] === datum.group
+					);
+				});
+
+				if (matchingDataPoint === undefined) {
+					matchingDataPoint = {
+						[domainIdentifier]: datum.data.sharedStackKey,
+						[rangeIdentifier]: datum.data[datum.group],
+						[groupMapsTo]: datum.group,
+					};
+				}
+
+				// Show tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					hoveredElement,
+					data: matchingDataPoint,
+					type: TooltipTypes.DATAPOINT,
+				});
+			})
+			.on("click", function (datum) {
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
+					element: select(this),
+					datum,
+				});
+			})
+			.on("mouseout", function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
-				hoveredElement.transition(self.services.transitions.getTransition("graph_element_mouseout_fill_update"))
-					.attr("fill", (d: any) => self.model.getFillScale()[d.datasetLabel](d.label));
+				hoveredElement
+					.transition(
+						self.services.transitions.getTransition(
+							"graph_element_mouseout_fill_update"
+						)
+					)
+					.attr("fill", (d: any) =>
+						self.model.getFillColor(d[groupMapsTo])
+					);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
+					element: hoveredElement,
+					datum,
+				});
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", { hoveredElement });
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+					hoveredElement,
+				});
 			});
 	}
 
 	destroy() {
 		// Remove event listeners
-		this.parent.selectAll("rect.bar")
+		this.parent
+			.selectAll("path.bar")
 			.on("mouseover", null)
 			.on("mousemove", null)
 			.on("mouseout", null);
 
 		// Remove legend listeners
 		const eventsFragment = this.services.events;
-		eventsFragment.removeEventListener("legend-item-onhover", this.handleLegendOnHover);
-		eventsFragment.removeEventListener("legend-item-onmouseout", this.handleLegendMouseOut);
+		eventsFragment.removeEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover
+		);
+		eventsFragment.removeEventListener(
+			Events.Legend.ITEM_MOUSEOUT,
+			this.handleLegendMouseOut
+		);
 	}
 }

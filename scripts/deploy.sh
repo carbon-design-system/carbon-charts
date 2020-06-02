@@ -14,6 +14,8 @@ if [ -z "$TRAVIS_TAG" ]
 then
 	echo "The commit is not a tag, get lerna to version packages, and publish to Github."
 
+	git stash
+
 	# checkout master to get out of detached HEAD state
 	git checkout master
 
@@ -23,8 +25,6 @@ else
 
 	# authenticate with the npm registry
 	npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
-
-	yarn run build-all
 
 	node scripts/clean-package-jsons.js
 

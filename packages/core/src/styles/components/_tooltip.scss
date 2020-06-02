@@ -6,7 +6,7 @@
 .#{$prefix}--#{$charts-prefix}--tooltip {
 	background-color: $ui-02;
 	pointer-events: none;
-	transition: opacity .1s;
+	transition: opacity 0.1s;
 	@include carbon--motion(standard, expressive);
 	display: inline;
 	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
@@ -17,14 +17,22 @@
 
 	&.hidden {
 		opacity: 0;
-		transition: opacity .1s;
+		transition: opacity 0.1s;
 		@include carbon--motion(standard, expressive);
 	}
 
 	.content-box {
 		color: $text-01;
 
-		.datapoint-tooltip, .total-val {
+		.title-tooltip {
+			line-height: 16px;
+			font-size: 12px;
+			padding: 4px;
+			min-width: 20px;
+		}
+
+		.datapoint-tooltip,
+		.total-val {
 			display: flex;
 			padding: 4px;
 			flex-flow: row nowrap;
@@ -70,8 +78,14 @@
 				list-style: none;
 				position: relative;
 
-				&:not(:last-child){
-					margin-bottom: 2px;
+				&:not(:last-child) {
+					@if $carbon--theme == $carbon--theme--g90 {
+						border-bottom: 1px solid $ui-01;
+					} @else if $carbon--theme == $carbon--theme--g100 {
+						border-bottom: 1px solid $ui-04;
+					} @else {
+						border-bottom: 1px solid $ui-03;
+					}
 				}
 			}
 		}
@@ -79,7 +93,7 @@
 
 	.tooltip-color {
 		position: absolute;
-		left:0;
+		left: 0;
 		top: 0;
 		width: 4px;
 		height: 100%;

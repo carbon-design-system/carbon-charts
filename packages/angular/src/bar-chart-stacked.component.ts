@@ -14,18 +14,15 @@ import { StackedBarChart } from "@carbon/charts";
  */
 @Component({
 	selector: "ibm-stacked-bar-chart",
-	template: `
-		<div #nChart class="ibm-chart-container">
-		</div>
-	`
+	template: ``
 })
 export class StackedBarChartComponent extends BaseChart implements AfterViewInit {
 	/**
-	 * Runs after view init to create a chart, attach it to `chartRef` and draw it.
+	 * Runs after view init to create a chart, attach it to `elementRef` and draw it.
 	 */
 	ngAfterViewInit() {
 		this.chart = new StackedBarChart(
-			this.chartRef.nativeElement,
+			this.elementRef.nativeElement,
 			{
 				data: this.data,
 				options: this.options

@@ -18,11 +18,10 @@ export interface LayoutComponentChild {
 	 * how the layout child will grow or shrink in x & y directions
 	 */
 	growth?: {
-		x: LayoutGrowth,
-		y: LayoutGrowth
+		x: LayoutGrowth;
+		y: LayoutGrowth;
 	};
 }
-
 
 /**
  * customize the legend component
@@ -33,6 +32,10 @@ export interface LegendOptions {
 	 * the clickability of legend items
 	 */
 	clickable?: boolean;
+	/**
+	 * is the legend visible or not
+	 */
+	enabled?: boolean;
 	items?: {
 		status?: {
 			ACTIVE?: Number;
@@ -52,9 +55,10 @@ export interface TooltipOptions {
 	/**
 	 * a function to format the tooltip values
 	 */
-	formatter?: Function;
+	valueFormatter?: Function;
 	/**
 	 * custom function for returning tooltip HTML
+	 * passed an array or object with the data, and then the default tooltip markup
 	 */
 	customHTML?: Function;
 	/**
@@ -72,8 +76,40 @@ export interface TooltipOptions {
 		/**
 		 * vertical offset for tooltip placement
 		 */
-		verticalOffset?: number
+		verticalOffset?: number;
 	};
+	title?: {
+		/**
+		 * vertical offset for title tooltip placement. < 0 shifts the tooltip above title, > 0 shifts vertically down
+		 */
+		verticalOffset?: number;
+		/**
+		 * max width of title tooltip relative to the width of the chart-svg (percentage should be < 1)
+		 */
+		width?: number;
+	};
+}
+
+/**
+ * Threshold options
+ */
+export interface ThresholdOptions {
+	/**
+	 * threshold value
+	 */
+	value: number | Date;
+	/**
+	 * a function to format the threshold values
+	 */
+	valueFormatter?: Function;
+	/**
+	 * hex threshold line color
+	 */
+	fillColor: string;
+	/**
+	 * threshold label
+	 */
+	label: string;
 }
 
 /**
@@ -85,11 +121,11 @@ export interface AxisTooltipOptions extends TooltipOptions {
 		/**
 		 * controls whether the gridlines are active for tooltip support
 		 */
-		enabled?: boolean,
+		enabled?: boolean;
 		/**
 		 * optional set threshold (value between 0 and 1) for active gridlines
 		 */
-		threshold?: number
+		threshold?: number;
 	};
 }
 

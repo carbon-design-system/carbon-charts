@@ -13,75 +13,23 @@
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
 		</a>
 		<img src="https://img.shields.io/badge/comp-IE11%2B-blue.svg" />
-		<img alt="semantic-versioning" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versioning-e10079.svg">
+		<img alt="semantic-versioning" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--ver-e10079.svg" />
+		<img alt="semantic-versioning" src="https://img.shields.io/badge/downloads-+20k%2Fweek-green" />
 	</p>
 </p>
 
-## Table of contents
+## Packages
+- [Vanilla](./packages/core)
+- [Angular](./packages/angular)
+- [React](./packages/react)
+- [Vue](./packages/vue)
 
-- [Installation](#installation)
-- [Demo & Docs](#demo-and-documentation)
-- [Run Charts locally](#run-charts-locally)
-- [Component status](#component-status)
-- [Bugs and feature requests](#bugs-and-feature-requests)
-- [Contributing](#contributing)
+<a href="https://www.netlify.com" target="_blank">
+  <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"/>
+</a>
 
-## Getting started
-
-### Installation
-
-Run:
-```bash
-yarn global add @storybook/cli
-
-yarn add @carbon/charts
-```
-
-Or if you use NPM:
-```bash
-npm i -g @storybook/cli
-
-npm install @carbon/charts --save
-```
-
-## Demo and documentation
-**Charts demos:**
-- [Vanilla JS](https://carbon-design-system.github.io/carbon-charts/)
-- [Angular](https://carbon-design-system.github.io/carbon-charts/angular)
-- [React](https://carbon-design-system.github.io/carbon-charts/react)
-- [Vue](https://carbon-design-system.github.io/carbon-charts/vue)
-
-**Docs:** <https://carbon-design-system.github.io/carbon-charts/documentation/>
-
-### Code Samples
-<p align="center">
-	<img src="assets/demo-stacked-bar.png" alt="Stacked Bar Chart" width="600" />
-</p>
-
-<p align="center">
-	<a href="https://codesandbox.io/s/149vrzo62l">
-		<img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit Carbon Charts - Vanilla" />
-	</a>
-</p>
-
-- [Vanilla JS](https://codesandbox.io/s/149vrzo62l)
-- [Angular](https://codesandbox.io/s/k32kjy5qnr)
-- [React](https://codesandbox.io/s/pppmo3ollx)
-- [Vue](https://codesandbox.io/s/040w2rqrxp)
-
-### Run Charts locally
-1. Fork the project and clone your fork:
-
-   ```bash
-   # Clone your fork of the repo into the current directory
-   git clone git@github.com:<your-username>/carbon-charts.git
-   # Navigate to the newly cloned directory
-   cd carbon-charts
-   ```
-
-2. Run `yarn` to install Node.js dependencies.
-3. Run `yarn run demo:server` to serve up the demo locally.
-4. Finally, open <http://localhost:9001/> in your browser. SPOILER ALERT: There's no "Hello, World!"
+## CHANGELOG
+Read the release change logs [here](./CHANGELOG.md)
 
 ## Component status
 :white_check_mark: Stable :hourglass_flowing_sand: In progress
@@ -97,7 +45,11 @@ npm install @carbon/charts --save
 | Pie         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Step        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Scatter     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Area        | :hourglass_flowing_sand: | - | - | - |
+| Radar     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Area        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
+| Gauge        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
+| Meter        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
+| Combo        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
 
 ## Bugs and feature requests
 
@@ -115,7 +67,7 @@ Get updates on Charts' development and chat with the core team and community. --
 
 We use the **semantic-release** library to automatically version our releases within the guidelines of Semantic Versioning [Semantic Versioning guidelines](http://semver.org/).
 
-See our [releases notes](https://github.com/carbon-design-system/carbon-charts/releases) for the changelog of each version of Charts.
+See our [release change logs](https://github.com/carbon-design-system/carbon-charts/blob/master/CHANGELOG.md) for the changelog of each version of Charts.
 
 
 ## Core Team
@@ -143,17 +95,23 @@ See our [releases notes](https://github.com/carbon-design-system/carbon-charts/r
 	<td align="center"><a href="https://github.com/nicoleroppel"><img src="https://avatars0.githubusercontent.com/u/43546639?v=4" width="100px;" alt="nicoleroppel"/><br /><sub><b>nicoleroppel</b></sub></a><br /><a href="#design-nicoleroppel" title="Design">🎨</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=nicoleroppel" title="Documentation">📖</a></td>
   </tr>
   <tr>
+	<td align="center"><a href="https://github.com/scottdickerson"><img src="https://avatars0.githubusercontent.com/u/6663002?s=460&v=4" width="100px;" alt="Scott Dickerson"/><br /><sub><b>scottdickerson</b></sub></a><br /> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=scottdickerson" title="Code">💻</a></td>
 	<td align="center"><a href="https://github.com/ZrianinaMariia"><img src="https://avatars0.githubusercontent.com/u/5481483?&v=4" width="100px;" alt="ZrianinaMariia"/><br /><sub><b>ZrianinaMariia</b></sub></a><br /> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=ZrianinaMariia" title="Code">💻</a></td>
 	<td align="center"><a href="https://github.com/moores2"><img src="https://avatars0.githubusercontent.com/u/6977424?v=4" width="100px;" alt="moores2"/><br /><sub><b>moores2</b></sub></a><br /> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=moores2" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/stanislavgeorgiev"><img src="https://avatars2.githubusercontent.com/u/1253469?&v=4" width="100px;" alt="stanislavgeorgiev"/><br /><sub><b>stanislavgeorgiev</b></sub></a><br /> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=stanislavgeorgiev" title="Code">💻</a></td>
-	<td align="center"><a href="https://github.com/jendowns"><img src="https://avatars2.githubusercontent.com/u/9057921?&v=4" width="100px;" alt="jendowns"/><br /><sub><b>jendowns</b></sub></a><br /> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=jendowns" title="Code">💻</a></td>
   </tr>
   <tr>
+	<td align="center"><a href="https://github.com/jendowns"><img src="https://avatars2.githubusercontent.com/u/9057921?&v=4" width="100px;" alt="jendowns"/><br /><sub><b>jendowns</b></sub></a><br /> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=jendowns" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/t-mullen"><img src="https://avatars0.githubusercontent.com/u/14932492?v=4" width="100px;" alt="Thomas Mullen"/><br /><sub><b>Thomas Mullen</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon-charts/commits?author=t-mullen" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/JaimeMae"><img src="https://avatars0.githubusercontent.com/u/43579539?v=4" width="100px;" alt="Jaime Stockton"/><br /><sub><b>Jaime Stockton</b></sub></a><br /><a href="#design-JaimeMae" title="Design">🎨</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=JaimeMae" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/PLopezD"><img src="https://avatars1.githubusercontent.com/u/5810053?v=4" width="100px;" alt="Pablo Lopez Domowicz"/><br /><sub><b>Pablo Lopez Domowicz</b></sub></a><br /><a href="#design-PLopezD" title="Design">🎨</a> <a href="https://github.com/carbon-design-system/carbon-charts/commits?author=PLopezD" title="Documentation">📖</a></td>
+  </tr>
+  <tr>
     <td align="center"><a href="http://www.johnpeng47.com"><img src="https://avatars3.githubusercontent.com/u/9957837?v=4" width="100px;" alt="John Peng"/><br /><sub><b>John Peng</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon-charts/commits?author=JohnPeng47" title="Code">💻</a></td>
   </tr>
 </table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+## Code of Conduct
+Read our code of conduct [here](./CODE_OF_CONDUCT.md)

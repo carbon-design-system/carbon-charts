@@ -1,15 +1,16 @@
 import { configure } from '@storybook/vue';
-import { setOptions } from '@storybook/addon-options';
+import { withOptions } from '@storybook/addon-options';
 
-setOptions({
-  name: 'Carbon Charts - Vue Wrappers',
-  showDownPanel: false,
-  showAddonPanel: false
+withOptions({
+	name: 'Carbon Charts - Vue Wrappers',
+	sortStoriesByKind: true,
+	showDownPanel: true,
+	showAddonPanel: true,
+	panelPosition: 'bottom',
 });
 
 // load global styles
-require("!style-loader!css-loader!sass-loader!./previews.scss");
-require("!style-loader!css-loader!@carbon/charts/dist/styles.css");
+require('!style-loader!css-loader!@carbon/charts/demo/styles.css');
 
 const req = require.context('../stories', true, /.stories.js$/);
 function loadStories() {

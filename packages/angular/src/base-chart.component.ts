@@ -3,7 +3,8 @@ import {
 	Input,
 	ViewChild,
 	OnInit,
-	AfterViewInit
+	AfterViewInit,
+	ElementRef
 } from "@angular/core";
 
 /**
@@ -13,12 +14,11 @@ import {
  */
 @Component({
 	selector: "ibm-base-chart",
-	template: `
-		<div #nChart class="ibm-chart-container">
-		</div>
-	`
+	template: ``
 })
 export class BaseChart implements AfterViewInit, OnInit {
+	constructor(protected elementRef: ElementRef) {}
+
 	/**
 	 * Data passed to charts library for displaying
 	 */

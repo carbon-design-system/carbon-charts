@@ -5,17 +5,7 @@ import { Tools } from "../../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
-import { interpolateNumber } from "d3-interpolate";
-
-const donutCenterNumberTween = (d3Ref, newNumber: number) => {
-	// Remove commas from the current value string, and convert to an int
-	const currentValue = parseInt(d3Ref.text().replace(/[, ]+/g, ""), 10) || 0;
-	const i = interpolateNumber(currentValue, newNumber);
-
-	const formatInterpolatedValue = number => Math.floor(number).toLocaleString();
-
-	return t => d3Ref.text(formatInterpolatedValue(i(t)));
-};
+import { interpolateNumber, interpolateRound } from "d3-interpolate";
 
 export class Donut extends Pie {
 	type = "donut";
@@ -24,34 +14,45 @@ export class Donut extends Pie {
 		// Call render() from Pie
 		super.render(animate);
 
+		const self = this;
+
+		// if there are no data, remove the center content
+		// that is the old one and do nothing
+		if (this.model.isDataEmpty()) {
+			this.getContainerSVG().select("g.center").remove();
+			return;
+		}
+
 		const svg = DOMUtils.appendOrSelect(this.getContainerSVG(), "g.center");
 		const options = this.model.getOptions();
 
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
 
-		let donutCenterFigure = Tools.getProperty(options, "center", "number");
-		if (!donutCenterFigure) {
-			donutCenterFigure = this.getDataList().reduce((accumulator, d) => {
-				return accumulator + d.value;
-			}, 0);
-		}
-
 		// Add the number shown in the center of the donut
 		DOMUtils.appendOrSelect(svg, "text.donut-figure")
 			.attr("text-anchor", "middle")
-			.style("font-size", () => options.donut.center.numberFontSize(radius))
-			.transition(this.services.transitions.getTransition("donut-figure-enter-update", animate))
-			.tween("text", function() {
-				return donutCenterNumberTween(select(this), donutCenterFigure);
+			.style("font-size", () =>
+				options.donut.center.numberFontSize(radius)
+			)
+			.transition(
+				this.services.transitions.getTransition(
+					"donut-figure-enter-update",
+					animate
+				)
+			)
+			.tween("text", function () {
+				return self.centerNumberTween(select(this));
 			});
 
 		// Add the label below the number in the center of the donut
 		DOMUtils.appendOrSelect(svg, "text.donut-title")
 			.attr("text-anchor", "middle")
-			.style("font-size", () => options.donut.center.titleFontSize(radius))
+			.style("font-size", () =>
+				options.donut.center.titleFontSize(radius)
+			)
 			.attr("y", options.donut.center.titleYPosition(radius))
-			.text(options.donut.center.label);
+			.text(Tools.getProperty(options, "donut", "center", "label"));
 	}
 
 	getInnerRadius() {
@@ -59,5 +60,41 @@ export class Donut extends Pie {
 		const radius = this.computeRadius();
 
 		return radius * (3 / 4);
+	}
+
+	centerNumberTween(d3Ref) {
+		const options = this.model.getOptions();
+
+		let donutCenterFigure = Tools.getProperty(
+			options,
+			"donut",
+			"center",
+			"number"
+		);
+		if (donutCenterFigure === null) {
+			donutCenterFigure = this.model
+				.getDisplayData()
+				.reduce((accumulator, d) => {
+					return accumulator + d.value;
+				}, 0);
+		}
+
+		// Remove commas from the current value string, and convert to an int
+		const currentValue =
+			parseInt(d3Ref.text().replace(/[, ]+/g, ""), 10) || 0;
+
+		let interpolateFunction;
+		if (currentValue % 1 === 0 && donutCenterFigure % 1 === 0) {
+			interpolateFunction = interpolateRound;
+		} else {
+			interpolateFunction = interpolateNumber;
+		}
+
+		const i = interpolateFunction(currentValue, donutCenterFigure);
+
+		return (t) => {
+			const { numberFormatter } = options.donut.center;
+			d3Ref.text(numberFormatter(i(t)));
+		};
 	}
 }

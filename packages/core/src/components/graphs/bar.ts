@@ -3,20 +3,17 @@ import { Component } from "../component";
 
 export class Bar extends Component {
 	// Gets the correct width for bars based on options & configurations
-	protected getBarWidth() {
-		const mainXAxis = this.services.axes.getMainXAxis();
+	protected getBarWidth(allDataLabels?: string[]) {
 		const options = this.model.getOptions();
+		const mainXScale = this.services.cartesianScales.getMainXScale();
 
-		if (!mainXAxis.scale.step) {
+		if (!mainXScale.step) {
 			return Math.min(
 				options.bars.maxWidth,
-				(5 / mainXAxis.scale.ticks().length) * options.bars.maxWidth
+				(5 / mainXScale.ticks().length) * options.bars.maxWidth
 			);
 		}
 
-		return Math.min(
-			options.bars.maxWidth,
-			mainXAxis.scale.step() / 2
-		);
+		return Math.min(options.bars.maxWidth, mainXScale.step() / 2);
 	}
 }

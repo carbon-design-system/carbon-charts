@@ -1,0 +1,54 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div class="bx--form-item">
+  <strong class="bx--file--label">Account
+    photo</strong>
+  <p class="bx--label-description">Only .jpg and .png files. 500kb max file size.</p>
+  <div class="bx--file" data-file>
+    <label for="your-file-importer-id-here"
+      class="bx--file-btn bx--btn bx--btn--primary"
+      role="button" tabindex="0">Add file</label>
+    <input type="file" class="bx--file-input" id="your-file-importer-id-here" data-file-uploader
+      data-target="[data-file-container]" multiple />
+    <div data-file-container class="bx--file-container">
+      <div class="bx--file__selected-file">
+        <p class="bx--file-filename">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero vero
+          sapiente illum reprehenderit molestiae perferendis voluptatem temporibus laudantium ducimus magni voluptatum
+          veniam, odit nesciunt corporis numquam maxime sunt excepturi sint!</p>
+        <span data-for="your-file-importer-id-here" class="bx--file__state-container">
+          <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--file-complete" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zM7 11L4.3 8.3l.9-.8L7 9.3l4-3.9.9.8L7 11z"></path><path d="M7 11L4.3 8.3l.9-.8L7 9.3l4-3.9.9.8L7 11z" data-icon-path="inner-path" opacity="0"></path></svg>
+        </span>
+      </div>
+      <div class="bx--file__selected-file--invalid__wrapper">
+        <div class="bx--file__selected-file bx--file__selected-file--invalid" data-invalid>
+          <p class="bx--file-filename">color.jpeg</p>
+          <span data-for="your-file-importer-id-here" class="bx--file__state-container">
+            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--file--invalid" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1C4.2 1 1 4.2 1 8s3.2 7 7 7 7-3.1 7-7-3.1-7-7-7zm-.5 3h1v5h-1V4zm.5 8.2c-.4 0-.8-.4-.8-.8s.3-.8.8-.8c.4 0 .8.4.8.8s-.4.8-.8.8z"></path><path d="M7.5 4h1v5h-1V4zm.5 8.2c-.4 0-.8-.4-.8-.8s.3-.8.8-.8c.4 0 .8.4.8.8s-.4.8-.8.8z" data-icon-path="inner-path" opacity="0"></path></svg>
+            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--file--close" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"></path></svg>
+          </span>
+        </div>
+        <div class="bx--form-requirement">
+          File size exceeds limit
+        </div>
+      </div>
+      <div class="bx--file__selected-file">
+        <p class="bx--file-filename">color.jpeg</p>
+        <span data-for="your-file-importer-id-here" class="bx--file__state-container">
+          <div class="bx--inline-loading__animation">
+            <div data-inline-loading-spinner="" class="bx--loading bx--loading--small">
+              <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
+                <circle class="bx--loading__background" cx="0" cy="0" r="37.5"></circle>
+                <circle class="bx--loading__stroke" cx="0" cy="0" r="37.5"></circle>
+              </svg>
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

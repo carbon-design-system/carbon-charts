@@ -1,18 +1,18 @@
 {
-	"$schema": "../../node_modules/ng-packagr/package.schema.json",
 	"name": "@carbon/charts-angular",
-	"version": "0.16.25",
+	"version": "0.32.0",
 	"description": "Carbon charting components for Angular",
 	"main": "index.js",
 	"scripts": {
-		"build": "ng-packagr -p package.json",
+		"build": "bash build.sh",
 		"storybook": "start-storybook -p 9005 -c .storybook -s ./.storybook/assets",
-		"demo:build": "build-storybook -o demo/bundle",
+		"demo:build": "build-storybook -o demo/bundle --quiet",
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/carbon-charts.git"
+		"url": "git@github.com:carbon-design-system/carbon-charts.git",
+		"homepage": "https://carbon-design-system.github.io/carbon-charts/angular/"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",
@@ -40,48 +40,46 @@
 		"scss"
 	],
 	"dependencies": {
-		"@carbon/charts": "^0.16.25"
+		"@carbon/charts": "^0.32.0"
 	},
 	"peerDependencies": {
-		"@angular/common": "^6.0.0 || ^7.0.0",
-		"@angular/compiler": "^6.0.0 || ^7.0.0",
-		"@angular/core": "^6.0.0 || ^7.0.0",
+		"@angular/common": "^6.0.0 || ^7.0.0 || ^8.0.0",
+		"@angular/compiler": "^6.0.0 || ^7.0.0 || ^8.0.0",
+		"@angular/core": "^6.0.0 || ^7.0.0 || ^8.0.0",
 		"rxjs": "^6.0.0",
-		"zone.js": "^0.8.29"
+		"zone.js": "^0.8.29 || ^0.9.0"
 	},
 	"devDependencies": {
-		"@angular-devkit/build-angular": "0.8.9",
-		"@angular-devkit/core": "0.8.9",
-		"@angular/animations": "6.1.0",
-		"@angular/common": "6.1.0",
-		"@angular/compiler": "6.1.0",
-		"@angular/compiler-cli": "6.1.0",
-		"@angular/core": "6.1.0",
-		"@angular/forms": "6.1.0",
-		"@angular/platform-browser": "6.1.0",
-		"@angular/platform-browser-dynamic": "6.1.0",
+		"@angular-devkit/build-angular": "0.13.9",
+		"@angular-devkit/build-ng-packagr": "0.13.9",
+		"@angular-devkit/core": "8.2.2",
+		"@angular/animations": "7.2.15",
+		"@angular/cli": "~7.3.9",
+		"@angular/common": "7.2.15",
+		"@angular/compiler": "7.2.15",
+		"@angular/compiler-cli": "7.2.15",
+		"@angular/core": "7.2.15",
+		"@angular/forms": "7.2.15",
+		"@angular/platform-browser": "7.2.15",
+		"@angular/platform-browser-dynamic": "7.2.15",
 		"@babel/core": "7.3.4",
-		"@storybook/addon-options": "5.0.11",
-		"@storybook/angular": "5.0.11",
-		"@types/node": "8.5.2",
+		"@storybook/addon-knobs": "5.3.12",
+		"@storybook/addon-options": "5.3.12",
+		"@storybook/angular": "5.3.12",
+		"@types/node": "12.11.7",
 		"babel-loader": "8.0.5",
 		"core-js": "3.0.0",
-		"d3": "4.11.0",
-		"ng-packagr": "4.7.1",
+		"karma-webpack": "4.0.2",
+		"ng-packagr": "5.7.1",
 		"rxjs": "6.3.3",
-		"tslint": "5.14.0",
-		"typescript": "2.8.1",
+		"tsickle": "0.37.1",
+		"tslib": "1.10.0",
+		"tslint": "5.20.1",
+		"typescript": "3.2.2",
 		"zone.js": "0.8.29"
 	},
-	"ngPackage": {
-		"lib": {
-			"entryFile": "src/charts.module.ts"
-		},
-		"whitelistedNonPeerDependencies": [
-			"@carbon/charts"
-		]
-	},
 	"publishConfig": {
+		"directory": "dist",
 		"access": "public"
 	},
 	"maintainers": [

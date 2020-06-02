@@ -7,7 +7,7 @@ export default {
 		};
 	},
 	props: {
-		data: { type: Object, required: true },
+		data: { type: [Object, Array], required: true },
 		options: { type: Object, required: true },
 	},
 	watch: {
@@ -22,7 +22,7 @@ export default {
 				this.coreChart.model.setOptions(newOptions);
 			},
 			deep: true,
-		}
+		},
 	},
 };
 </script>

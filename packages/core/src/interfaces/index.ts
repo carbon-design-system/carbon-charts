@@ -1,3 +1,4 @@
+export * from "./a11y";
 export * from "./axis-scales";
 export * from "./charts";
 export * from "./components";

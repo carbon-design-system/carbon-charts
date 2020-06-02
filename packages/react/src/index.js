@@ -1,17 +1,23 @@
-import PieChart from "./pie-chart";
-import DonutChart from "./donut-chart";
-import LineChart from "./line-chart";
-import ScatterChart from "./scatter-chart";
+import AreaChart from "./area-chart";
 import GroupedBarChart from "./bar-chart-grouped";
 import SimpleBarChart from "./bar-chart-simple";
 import StackedBarChart from "./bar-chart-stacked";
+import BubbleChart from "./bubble-chart";
+import DonutChart from "./donut-chart";
+import LineChart from "./line-chart";
+import PieChart from "./pie-chart";
+import ScatterChart from "./scatter-chart";
+import RadarChart from "./radar-chart";
 
 export {
-	PieChart,
-	DonutChart,
-	LineChart,
-	ScatterChart,
+	AreaChart,
 	GroupedBarChart,
 	SimpleBarChart,
-	StackedBarChart
+	StackedBarChart,
+	BubbleChart,
+	DonutChart,
+	LineChart,
+	PieChart,
+	ScatterChart,
+	RadarChart
 };

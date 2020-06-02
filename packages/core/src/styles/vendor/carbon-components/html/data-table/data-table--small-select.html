@@ -1,0 +1,563 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+<!-- v10 Data Table -->
+  <div class="bx--data-table-container " data-table>
+    <div class="bx--data-table-header">
+      <h4 class="bx--data-table-header__title">Table title</h4>
+      <p class="bx--data-table-header__description">Optional Helper Text</p>
+    </div>
+    <!-- Toolbar Content -->
+    <section class="bx--table-toolbar  bx--table-toolbar--small ">
+      <!-- Batch actions -->
+      <div class="bx--batch-actions" aria-label="Table Action Bar">
+          <div class="bx--action-list">
+            <button class="bx--btn bx--btn--primary bx--btn--sm" type="button">
+              Delete
+              <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--btn__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 6h1v6H6zm3 0h1v6H9z"></path><path d="M2 3v1h1v10c0 .6.4 1 1 1h8c.6 0 1-.4 1-1V4h1V3H2zm2 11V4h8v10H4zM6 1h4v1H6z"></path></svg>
+            </button>
+            <button class="bx--btn bx--btn--primary bx--btn--sm" type="button">
+              Save
+              <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--btn__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.9 4.6l-2.5-2.5c-.1 0-.3-.1-.4-.1H3c-.6 0-1 .4-1 1v10c0 .6.4 1 1 1h10c.6 0 1-.4 1-1V5c0-.1-.1-.3-.1-.4zM6 3h4v2H6V3zm4 10H6V9h4v4zm1 0V9c0-.6-.4-1-1-1H6c-.6 0-1 .4-1 1v4H3V3h2v2c0 .6.4 1 1 1h4c.6 0 1-.4 1-1V3.2l2 2V13h-2z"></path></svg>
+            </button>
+            <button class="bx--btn bx--btn--primary bx--btn--sm" type="button">
+              Download
+              <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--btn__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 7l-.7-.7-3.8 3.8V1h-1v9.1L3.7 6.3 3 7l5 5zm0 5v2H3v-2H2v2c0 .6.4 1 1 1h10c.6 0 1-.4 1-1v-2h-1z"></path></svg>
+            </button>
+            <button data-event="action-bar-cancel" class="bx--btn bx--btn--primary bx--batch-summary__cancel bx--btn--sm">Cancel</button>
+          </div>
+        <div class="bx--batch-summary">
+          <p class="bx--batch-summary__para">
+          <span data-items-selected>3</span> items selected
+        </p>
+        </div>
+      </div>
+
+     <div class="bx--toolbar-content">
+          <!--  Default hidden search -->
+           <div class="bx--toolbar-search-container-expandable">
+             <div data-search class="bx--search bx--search--sm" role="search">
+               <div class="bx--search-magnifier" tabindex="0">
+                 <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--toolbar-action__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M15 14.3L10.7 10c1.9-2.3 1.6-5.8-.7-7.7S4.2.7 2.3 3 .7 8.8 3 10.7c2 1.7 5 1.7 7 0l4.3 4.3.7-.7zM2 6.5C2 4 4 2 6.5 2S11 4 11 6.5 9 11 6.5 11 2 9 2 6.5z"></path></svg>
+               </div>
+               <label id="search-input-label-1" class="bx--label" for="search__input-2">Search</label>
+                <input class="bx--search-input" type="text" id="search__input-2" role="search" placeholder="Search" aria-labelledby="search-input-label-1">
+                <button class="bx--search-close bx--search-close--hidden" title="Clear search input" aria-label="Clear search input">
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M12 4.7l-.7-.7L8 7.3 4.7 4l-.7.7L7.3 8 4 11.3l.7.7L8 8.7l3.3 3.3.7-.7L8.7 8z"></path></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Persistent Search -->
+
+            <!-- Toolbar Overflow Menu -->
+            <div class="bx--overflow-menu bx--toolbar-action" data-overflow-menu role="button" tabindex="0" aria-label="Overflow" aria-haspopup="true"
+              aria-expanded="false" >
+              <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--toolbar-action__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 8.4v-.8l1-.8c.4-.3.4-.9.2-1.3l-1.2-2c-.2-.3-.5-.5-.9-.5-.1 0-.2 0-.3.1l-1.2.4c-.2-.1-.4-.3-.7-.4l-.3-1.3c0-.5-.4-.8-.9-.8H6.8c-.5 0-.9.3-1 .8l-.2 1.3c-.3.1-.5.2-.7.3L3.7 3h-.3c-.4 0-.7.2-.9.5l-1.2 2c-.2.4-.1.9.3 1.3l.9.9v.8l-.9.7c-.4.3-.5.9-.2 1.3l1.2 2c.1.3.4.5.8.5.1 0 .2 0 .3-.1l1.2-.4c.2.1.4.3.7.4l.3 1.3c.1.5.5.8 1 .8h2.4c.5 0 .9-.3 1-.8l.3-1.3c.2-.1.4-.2.7-.4l1.2.4c.1 0 .2.1.3.1.4 0 .7-.2.9-.5l1.1-2c.2-.4.2-.9-.2-1.3l-1.1-.8zm-.9 3.6l-1.7-.6c-.4.3-.9.6-1.4.8L9.2 14H6.8l-.4-1.8c-.5-.2-.9-.5-1.4-.8l-1.6.6-1.2-2 1.4-1.2c-.1-.5-.1-1.1 0-1.6L2.2 6l1.2-2 1.7.6c.4-.4.9-.6 1.4-.8L6.8 2h2.4l.4 1.8c.5.2.9.5 1.4.8l1.6-.6 1.2 2-1.4 1.2c.1.5.1 1.1 0 1.6l1.4 1.2-1.2 2z"></path><path d="M8 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3c0 1.6-1.3 3-3 3zm0-5c-1.1 0-2 .8-2 1.9V8c0 1.1.8 2 1.9 2H8c1.1 0 2-.8 2-1.9V8c0-1.1-.8-2-2-2 .1 0 0 0 0 0z"></path></svg>
+              <ul class="bx--overflow-menu-options bx--overflow-menu--flip" tabindex="-1" role="menu" aria-label="Overflow" data-floating-menu-direction="bottom">
+                <li class="bx--overflow-menu-options__option " role="presentation">
+                  <button class="bx--overflow-menu-options__btn" role="menuitem"  data-floating-menu-primary-focus >
+                    <div class="bx--overflow-menu-options__option-content">
+                    Option 1
+                    </div>
+                  </button>
+                </li>
+                <li class="bx--overflow-menu-options__option " role="presentation">
+                  <button class="bx--overflow-menu-options__btn" role="menuitem" >
+                    <div class="bx--overflow-menu-options__option-content">
+                    Option 2
+                    </div>
+                  </button>
+                </li>
+                <li class="bx--overflow-menu-options__option " role="presentation">
+                  <button class="bx--overflow-menu-options__btn" role="menuitem" >
+                    <div class="bx--overflow-menu-options__option-content">
+                    Option 3
+                    </div>
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+          <!--  Toolbar primary button -->
+          <button class="bx--btn bx--btn--sm bx--btn--primary">
+             Primary 
+            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--btn__icon" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><path d="M17 15V7h-2v8H7v2h8v8h2v-8h8v-2h-8z"></path></svg>
+          </button>
+      </div>
+    </section>
+  <!-- End Toolbar Content -->
+
+  <!-- Table -->
+  <table class="bx--data-table  bx--data-table--compact bx--data-table--sort  " >
+    <thead>
+      <tr>
+          <th  class="bx--table-column-checkbox">
+            <!-- checkbox th -->
+              <input data-event="select-all" id="bx--checkbox-20" class="bx--checkbox" type="checkbox" value="green" name="checkbox-20">
+              <label for="bx--checkbox-20" class="bx--checkbox-label" aria-label="Label name"></label>
+          </th>
+          <th >
+            <!-- checkbox th -->
+            <!-- sortable th  -->
+                <button class="bx--table-sort" data-event="sort" title="Name">
+                  <span class="bx--table-header-label">Name</span>
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M12.3 9.3l-3.8 3.8V1h-1v12.1L3.7 9.3 3 10l5 5 5-5z"></path></svg>
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon-unsorted" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.8 10.3L12 12.1V2h-1v10.1l-1.8-1.8-.7.7 3 3 3-3zM4.5 2l-3 3 .7.7L4 3.9V14h1V3.9l1.8 1.8.7-.7z"></path></svg>
+                </button>
+              <!-- no sort th -->
+                        </th>
+          <th >
+            <!-- checkbox th -->
+            <!-- sortable th  -->
+                <button class="bx--table-sort" data-event="sort" title="Protocol">
+                  <span class="bx--table-header-label">Protocol</span>
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M12.3 9.3l-3.8 3.8V1h-1v12.1L3.7 9.3 3 10l5 5 5-5z"></path></svg>
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon-unsorted" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.8 10.3L12 12.1V2h-1v10.1l-1.8-1.8-.7.7 3 3 3-3zM4.5 2l-3 3 .7.7L4 3.9V14h1V3.9l1.8 1.8.7-.7z"></path></svg>
+                </button>
+              <!-- no sort th -->
+                        </th>
+          <th >
+            <!-- checkbox th -->
+            <!-- sortable th  -->
+                <button class="bx--table-sort" data-event="sort" title="Port">
+                  <span class="bx--table-header-label">Port</span>
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M12.3 9.3l-3.8 3.8V1h-1v12.1L3.7 9.3 3 10l5 5 5-5z"></path></svg>
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon-unsorted" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.8 10.3L12 12.1V2h-1v10.1l-1.8-1.8-.7.7 3 3 3-3zM4.5 2l-3 3 .7.7L4 3.9V14h1V3.9l1.8 1.8.7-.7z"></path></svg>
+                </button>
+              <!-- no sort th -->
+                        </th>
+          <th >
+            <!-- checkbox th -->
+            <!-- sortable th  -->
+                <button class="bx--table-sort" data-event="sort" title="Rule">
+                  <span class="bx--table-header-label">Rule</span>
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M12.3 9.3l-3.8 3.8V1h-1v12.1L3.7 9.3 3 10l5 5 5-5z"></path></svg>
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon-unsorted" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.8 10.3L12 12.1V2h-1v10.1l-1.8-1.8-.7.7 3 3 3-3zM4.5 2l-3 3 .7.7L4 3.9V14h1V3.9l1.8 1.8.7-.7z"></path></svg>
+                </button>
+              <!-- no sort th -->
+                        </th>
+          <th >
+            <!-- checkbox th -->
+            <!-- sortable th  -->
+                <button class="bx--table-sort" data-event="sort" title="Attached Groups">
+                  <span class="bx--table-header-label">Attached Groups</span>
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M12.3 9.3l-3.8 3.8V1h-1v12.1L3.7 9.3 3 10l5 5 5-5z"></path></svg>
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon-unsorted" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.8 10.3L12 12.1V2h-1v10.1l-1.8-1.8-.7.7 3 3 3-3zM4.5 2l-3 3 .7.7L4 3.9V14h1V3.9l1.8 1.8.7-.7z"></path></svg>
+                </button>
+              <!-- no sort th -->
+                        </th>
+          <th >
+            <!-- checkbox th -->
+            <!-- sortable th  -->
+                <button class="bx--table-sort" data-event="sort" title="Status">
+                  <span class="bx--table-header-label">Status</span>
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M12.3 9.3l-3.8 3.8V1h-1v12.1L3.7 9.3 3 10l5 5 5-5z"></path></svg>
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon-unsorted" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.8 10.3L12 12.1V2h-1v10.1l-1.8-1.8-.7.7 3 3 3-3zM4.5 2l-3 3 .7.7L4 3.9V14h1V3.9l1.8 1.8.7-.7z"></path></svg>
+                </button>
+              <!-- no sort th -->
+                        </th>
+          <th  class="bx--table-column-menu">
+            <!-- checkbox th -->
+          </th>
+      </tr>
+    </thead>
+  <tbody>
+      <tr >
+          <!-- expand icon td -->
+              <td class="bx--table-column-checkbox">
+                <input data-event="select" id="bx--checkbox-13" class="bx--checkbox" type="checkbox" value="green" name="checkbox-13" >
+                <label for="bx--checkbox-13" class="bx--checkbox-label" aria-label="Label name"></label>
+              </td>
+            <!-- inline action td's -->
+          <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Load Balancer 1
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  HTTP
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  80
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Round Robin
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Maureen&#x27;s VM Groups Testing a really long text here
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Active
+              </td>
+                      <!-- expand icon td -->
+              <td class="bx--table-column-menu">
+                <div data-overflow-menu role="menu" tabindex="0" aria-label="Overflow menu description" class="bx--overflow-menu">
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3" r="1"></circle><circle cx="8" cy="8" r="1"></circle><circle cx="8" cy="13" r="1"></circle></svg>
+                  <ul class="bx--overflow-menu-options bx--overflow-menu--flip">
+
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                           <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 13h14v1H1zm11.7-8.5c.4-.4.4-1 0-1.4l-1.8-1.8c-.4-.4-1-.4-1.4 0L2 8.8V12h3.2l7.5-7.5zM10.2 2L12 3.8l-1.5 1.5-1.8-1.8L10.2 2zM3 11V9.2l5-5L9.8 6l-5 5H3z"></path></svg> Edit
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 7l-.7-.7-3.8 3.8V1h-1v9.1L3.7 6.3 3 7l5 5zm0 5v2H3v-2H2v2c0 .6.4 1 1 1h10c.6 0 1-.4 1-1v-2h-1z"></path></svg> Download
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.9 4.6l-2.5-2.5c-.1 0-.3-.1-.4-.1H3c-.6 0-1 .4-1 1v10c0 .6.4 1 1 1h10c.6 0 1-.4 1-1V5c0-.1-.1-.3-.1-.4zM6 3h4v2H6V3zm4 10H6V9h4v4zm1 0V9c0-.6-.4-1-1-1H6c-.6 0-1 .4-1 1v4H3V3h2v2c0 .6.4 1 1 1h4c.6 0 1-.4 1-1V3.2l2 2V13h-2z"></path></svg> Save
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 6h1v6H6zm3 0h1v6H9z"></path><path d="M2 3v1h1v10c0 .6.4 1 1 1h8c.6 0 1-.4 1-1V4h1V3H2zm2 11V4h8v10H4zM6 1h4v1H6z"></path></svg> Delete
+                          </div>
+                        </button>
+                      </li>
+
+                  </ul>
+                </div>
+              </td>
+            <!-- inline edit tds -->
+      </tr>
+      <!-- Expandable child row -->
+      <tr >
+          <!-- expand icon td -->
+              <td class="bx--table-column-checkbox">
+                <input data-event="select" id="bx--checkbox-14" class="bx--checkbox" type="checkbox" value="green" name="checkbox-14" >
+                <label for="bx--checkbox-14" class="bx--checkbox-label" aria-label="Label name"></label>
+              </td>
+            <!-- inline action td's -->
+          <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Load Balancer 5
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  HTTP
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  80
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Round Robin
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Maureen&#x27;s VM Groups
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Active
+              </td>
+                      <!-- expand icon td -->
+              <td class="bx--table-column-menu">
+                <div data-overflow-menu role="menu" tabindex="0" aria-label="Overflow menu description" class="bx--overflow-menu">
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3" r="1"></circle><circle cx="8" cy="8" r="1"></circle><circle cx="8" cy="13" r="1"></circle></svg>
+                  <ul class="bx--overflow-menu-options bx--overflow-menu--flip">
+
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                           <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 13h14v1H1zm11.7-8.5c.4-.4.4-1 0-1.4l-1.8-1.8c-.4-.4-1-.4-1.4 0L2 8.8V12h3.2l7.5-7.5zM10.2 2L12 3.8l-1.5 1.5-1.8-1.8L10.2 2zM3 11V9.2l5-5L9.8 6l-5 5H3z"></path></svg> Edit
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 7l-.7-.7-3.8 3.8V1h-1v9.1L3.7 6.3 3 7l5 5zm0 5v2H3v-2H2v2c0 .6.4 1 1 1h10c.6 0 1-.4 1-1v-2h-1z"></path></svg> Download
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.9 4.6l-2.5-2.5c-.1 0-.3-.1-.4-.1H3c-.6 0-1 .4-1 1v10c0 .6.4 1 1 1h10c.6 0 1-.4 1-1V5c0-.1-.1-.3-.1-.4zM6 3h4v2H6V3zm4 10H6V9h4v4zm1 0V9c0-.6-.4-1-1-1H6c-.6 0-1 .4-1 1v4H3V3h2v2c0 .6.4 1 1 1h4c.6 0 1-.4 1-1V3.2l2 2V13h-2z"></path></svg> Save
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 6h1v6H6zm3 0h1v6H9z"></path><path d="M2 3v1h1v10c0 .6.4 1 1 1h8c.6 0 1-.4 1-1V4h1V3H2zm2 11V4h8v10H4zM6 1h4v1H6z"></path></svg> Delete
+                          </div>
+                        </button>
+                      </li>
+
+                  </ul>
+                </div>
+              </td>
+            <!-- inline edit tds -->
+      </tr>
+      <!-- Expandable child row -->
+      <tr >
+          <!-- expand icon td -->
+              <td class="bx--table-column-checkbox">
+                <input data-event="select" id="bx--checkbox-15" class="bx--checkbox" type="checkbox" value="green" name="checkbox-15" >
+                <label for="bx--checkbox-15" class="bx--checkbox-label" aria-label="Label name"></label>
+              </td>
+            <!-- inline action td's -->
+          <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Load Balancer 5
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  HTTP
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  80
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Round Robin
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Maureen&#x27;s VM Groups
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Active
+              </td>
+                      <!-- expand icon td -->
+              <td class="bx--table-column-menu">
+                <div data-overflow-menu role="menu" tabindex="0" aria-label="Overflow menu description" class="bx--overflow-menu">
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3" r="1"></circle><circle cx="8" cy="8" r="1"></circle><circle cx="8" cy="13" r="1"></circle></svg>
+                  <ul class="bx--overflow-menu-options bx--overflow-menu--flip">
+
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                           <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 13h14v1H1zm11.7-8.5c.4-.4.4-1 0-1.4l-1.8-1.8c-.4-.4-1-.4-1.4 0L2 8.8V12h3.2l7.5-7.5zM10.2 2L12 3.8l-1.5 1.5-1.8-1.8L10.2 2zM3 11V9.2l5-5L9.8 6l-5 5H3z"></path></svg> Edit
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 7l-.7-.7-3.8 3.8V1h-1v9.1L3.7 6.3 3 7l5 5zm0 5v2H3v-2H2v2c0 .6.4 1 1 1h10c.6 0 1-.4 1-1v-2h-1z"></path></svg> Download
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.9 4.6l-2.5-2.5c-.1 0-.3-.1-.4-.1H3c-.6 0-1 .4-1 1v10c0 .6.4 1 1 1h10c.6 0 1-.4 1-1V5c0-.1-.1-.3-.1-.4zM6 3h4v2H6V3zm4 10H6V9h4v4zm1 0V9c0-.6-.4-1-1-1H6c-.6 0-1 .4-1 1v4H3V3h2v2c0 .6.4 1 1 1h4c.6 0 1-.4 1-1V3.2l2 2V13h-2z"></path></svg> Save
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 6h1v6H6zm3 0h1v6H9z"></path><path d="M2 3v1h1v10c0 .6.4 1 1 1h8c.6 0 1-.4 1-1V4h1V3H2zm2 11V4h8v10H4zM6 1h4v1H6z"></path></svg> Delete
+                          </div>
+                        </button>
+                      </li>
+
+                  </ul>
+                </div>
+              </td>
+            <!-- inline edit tds -->
+      </tr>
+      <!-- Expandable child row -->
+      <tr >
+          <!-- expand icon td -->
+              <td class="bx--table-column-checkbox">
+                <input data-event="select" id="bx--checkbox-11" class="bx--checkbox" type="checkbox" value="green" name="checkbox-11" >
+                <label for="bx--checkbox-11" class="bx--checkbox-label" aria-label="Label name"></label>
+              </td>
+            <!-- inline action td's -->
+          <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Load Balancer 5
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  HTTP
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  80
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Round Robin
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Maureen&#x27;s VM Groups
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Active
+              </td>
+                      <!-- expand icon td -->
+              <td class="bx--table-column-menu">
+                <div data-overflow-menu role="menu" tabindex="0" aria-label="Overflow menu description" class="bx--overflow-menu">
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3" r="1"></circle><circle cx="8" cy="8" r="1"></circle><circle cx="8" cy="13" r="1"></circle></svg>
+                  <ul class="bx--overflow-menu-options bx--overflow-menu--flip">
+
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                           <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 13h14v1H1zm11.7-8.5c.4-.4.4-1 0-1.4l-1.8-1.8c-.4-.4-1-.4-1.4 0L2 8.8V12h3.2l7.5-7.5zM10.2 2L12 3.8l-1.5 1.5-1.8-1.8L10.2 2zM3 11V9.2l5-5L9.8 6l-5 5H3z"></path></svg> Edit
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 7l-.7-.7-3.8 3.8V1h-1v9.1L3.7 6.3 3 7l5 5zm0 5v2H3v-2H2v2c0 .6.4 1 1 1h10c.6 0 1-.4 1-1v-2h-1z"></path></svg> Download
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.9 4.6l-2.5-2.5c-.1 0-.3-.1-.4-.1H3c-.6 0-1 .4-1 1v10c0 .6.4 1 1 1h10c.6 0 1-.4 1-1V5c0-.1-.1-.3-.1-.4zM6 3h4v2H6V3zm4 10H6V9h4v4zm1 0V9c0-.6-.4-1-1-1H6c-.6 0-1 .4-1 1v4H3V3h2v2c0 .6.4 1 1 1h4c.6 0 1-.4 1-1V3.2l2 2V13h-2z"></path></svg> Save
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 6h1v6H6zm3 0h1v6H9z"></path><path d="M2 3v1h1v10c0 .6.4 1 1 1h8c.6 0 1-.4 1-1V4h1V3H2zm2 11V4h8v10H4zM6 1h4v1H6z"></path></svg> Delete
+                          </div>
+                        </button>
+                      </li>
+
+                  </ul>
+                </div>
+              </td>
+            <!-- inline edit tds -->
+      </tr>
+      <!-- Expandable child row -->
+      <tr >
+          <!-- expand icon td -->
+              <td class="bx--table-column-checkbox">
+                <input data-event="select" id="bx--checkbox-12" class="bx--checkbox" type="checkbox" value="green" name="checkbox-12" >
+                <label for="bx--checkbox-12" class="bx--checkbox-label" aria-label="Label name"></label>
+              </td>
+            <!-- inline action td's -->
+          <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Load Balancer 5
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  HTTP
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  80
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Round Robin
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Maureen&#x27;s VM Groups
+              </td>
+                      <!-- expand icon td -->
+              <td >
+                <!-- truncated new markup -->
+                  Active
+              </td>
+                      <!-- expand icon td -->
+              <td class="bx--table-column-menu">
+                <div data-overflow-menu role="menu" tabindex="0" aria-label="Overflow menu description" class="bx--overflow-menu">
+                  <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--overflow-menu__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3" r="1"></circle><circle cx="8" cy="8" r="1"></circle><circle cx="8" cy="13" r="1"></circle></svg>
+                  <ul class="bx--overflow-menu-options bx--overflow-menu--flip">
+
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                           <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 13h14v1H1zm11.7-8.5c.4-.4.4-1 0-1.4l-1.8-1.8c-.4-.4-1-.4-1.4 0L2 8.8V12h3.2l7.5-7.5zM10.2 2L12 3.8l-1.5 1.5-1.8-1.8L10.2 2zM3 11V9.2l5-5L9.8 6l-5 5H3z"></path></svg> Edit
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 7l-.7-.7-3.8 3.8V1h-1v9.1L3.7 6.3 3 7l5 5zm0 5v2H3v-2H2v2c0 .6.4 1 1 1h10c.6 0 1-.4 1-1v-2h-1z"></path></svg> Download
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.9 4.6l-2.5-2.5c-.1 0-.3-.1-.4-.1H3c-.6 0-1 .4-1 1v10c0 .6.4 1 1 1h10c.6 0 1-.4 1-1V5c0-.1-.1-.3-.1-.4zM6 3h4v2H6V3zm4 10H6V9h4v4zm1 0V9c0-.6-.4-1-1-1H6c-.6 0-1 .4-1 1v4H3V3h2v2c0 .6.4 1 1 1h4c.6 0 1-.4 1-1V3.2l2 2V13h-2z"></path></svg> Save
+                          </div>
+                        </button>
+                      </li>
+                      <li class="bx--overflow-menu-options__option bx--table-row--menu-option">
+                        <button class="bx--overflow-menu-options__btn" onclick="console.log('keyboard action')">
+                          <div class="bx--overflow-menu-options__option-content">
+                            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 6h1v6H6zm3 0h1v6H9z"></path><path d="M2 3v1h1v10c0 .6.4 1 1 1h8c.6 0 1-.4 1-1V4h1V3H2zm2 11V4h8v10H4zM6 1h4v1H6z"></path></svg> Delete
+                          </div>
+                        </button>
+                      </li>
+
+                  </ul>
+                </div>
+              </td>
+            <!-- inline edit tds -->
+      </tr>
+      <!-- Expandable child row -->
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+

@@ -1,25 +1,52 @@
 // Internal Imports
 import { Service } from "../service";
+import { Events } from "./../../interfaces";
 
 // D3 Imports
 import { select, Selection } from "d3-selection";
 import { Tools } from "../../tools";
 
 // import the settings for the css prefix
-import settings from "carbon-components/src/globals/js/settings";
+import settings from "carbon-components/es/globals/js/settings";
 
 // MISC
 import ResizeObserver from "resize-observer-polyfill";
 
 export class DOMUtils extends Service {
-	static getSVGElementSize(svgSelector: Selection<any, any, any, any>, options?: any) {
+	static getSVGElementSize(
+		svgSelector: Selection<any, any, any, any>,
+		options?: any
+	) {
 		if (!svgSelector.attr) {
 			svgSelector = select(svgSelector as any);
 		}
 
+		const finalDimensions = {
+			width: 0,
+			height: 0,
+		};
+
+		const validateAndSetDimensions = (dimensions) => {
+			if (dimensions) {
+				Object.keys(finalDimensions).forEach((dimensionKey) => {
+					if (dimensions[dimensionKey]) {
+						const dimension = dimensions[dimensionKey];
+						const dimensionNumber = parseFloat(dimension);
+						if (
+							dimension &&
+							dimensionNumber > finalDimensions[dimensionKey] &&
+							("" + dimension).indexOf("%") === -1
+						) {
+							finalDimensions[dimensionKey] = dimensionNumber;
+						}
+					}
+				});
+			}
+		};
+
 		const attrDimensions = {
 			width: svgSelector.attr("width"),
-			height: svgSelector.attr("height")
+			height: svgSelector.attr("height"),
 		};
 
 		let bbox, bboxDimensions, boundingRect, boundingRectDimensions;
@@ -29,7 +56,7 @@ export class DOMUtils extends Service {
 			bbox = svgSelector.node().getBBox();
 			bboxDimensions = {
 				width: bbox.width,
-				height: bbox.height
+				height: bbox.height,
 			};
 		} catch (e) {}
 
@@ -37,72 +64,75 @@ export class DOMUtils extends Service {
 			boundingRect = svgSelector.node().getBoundingClientRect();
 			boundingRectDimensions = {
 				width: boundingRect.width,
-				height: boundingRect.height
+				height: boundingRect.height,
 			};
 		} catch (e) {}
 
 		const clientDimensions = {
 			width: svgSelector.node().clientWidth,
-			height: svgSelector.node().clientHeight
-		};
-
-		const validateDimensions = dimensions => {
-			if (dimensions && dimensions.width && dimensions.height &&
-				!isNaN(dimensions.height) && !isNaN(dimensions.width) &&
-				("" + dimensions.width + dimensions.height).indexOf("%") === -1 &&
-				dimensions.width > 0 && dimensions.height > 0) {
-				return true;
-			}
-
-			return false;
+			height: svgSelector.node().clientHeight,
 		};
 
 		// If both attribute values are numbers
 		// And not percentages or NaN
 		if (options) {
-			if (options.useAttrs && validateDimensions(attrDimensions)) {
-				return attrDimensions;
+			if (options.useAttrs) {
+				validateAndSetDimensions(attrDimensions);
+
+				if (finalDimensions.width > 0 && finalDimensions.height > 0) {
+					return finalDimensions;
+				}
 			}
 
-			if (options.useClientDimensions && validateDimensions(clientDimensions)) {
-				return clientDimensions;
+			if (options.useClientDimensions) {
+				validateAndSetDimensions(clientDimensions);
+
+				if (finalDimensions.width > 0 && finalDimensions.height > 0) {
+					return clientDimensions;
+				}
 			}
 
-			if (options.useBBox && validateDimensions(bboxDimensions)) {
-				return bboxDimensions;
+			if (options.useBBox) {
+				validateAndSetDimensions(bboxDimensions);
+
+				if (finalDimensions.width > 0 && finalDimensions.height > 0) {
+					return bboxDimensions;
+				}
 			}
 
-			if (options.useBoundingRect && validateDimensions(boundingRectDimensions)) {
-				return boundingRectDimensions;
+			if (options.useBoundingRect) {
+				validateAndSetDimensions(boundingRectDimensions);
+
+				if (finalDimensions.width > 0 && finalDimensions.height > 0) {
+					return boundingRectDimensions;
+				}
 			}
 		}
 
 		try {
 			const nativeDimensions = {
-				width: Tools.getProperty(svgSelector.node(), "width", "baseVal", "value"),
-				height: Tools.getProperty(svgSelector.node(), "height", "baseVal", "value")
+				width: Tools.getProperty(
+					svgSelector.node(),
+					"width",
+					"baseVal",
+					"value"
+				),
+				height: Tools.getProperty(
+					svgSelector.node(),
+					"height",
+					"baseVal",
+					"value"
+				),
 			};
-			if (validateDimensions(nativeDimensions)) {
-				return nativeDimensions;
-			}
+
+			validateAndSetDimensions(nativeDimensions);
 		} catch (e) {
-			if (validateDimensions(clientDimensions)) {
-				return clientDimensions;
-			}
-
-			if (validateDimensions(bboxDimensions)) {
-				return bboxDimensions;
-			}
-
-			if (validateDimensions(attrDimensions)) {
-				return attrDimensions;
-			}
+			validateAndSetDimensions(clientDimensions);
+			validateAndSetDimensions(bboxDimensions);
+			validateAndSetDimensions(attrDimensions);
 		}
 
-		return {
-			width: 0,
-			height: 0
-		};
+		return finalDimensions;
 	}
 
 	static appendOrSelect(parent, query) {
@@ -111,7 +141,8 @@ export class DOMUtils extends Service {
 
 		const selection = parent.select(query);
 		if (selection.empty()) {
-			return parent.append(elementToAppend)
+			return parent
+				.append(elementToAppend)
 				.attr("class", querySections.slice(1).join(" "));
 		}
 
@@ -119,6 +150,8 @@ export class DOMUtils extends Service {
 	}
 
 	protected svg: Element;
+	protected width: string;
+	protected height: string;
 
 	init() {
 		// Add width & height to the chart holder if necessary, and add a classname
@@ -132,23 +165,35 @@ export class DOMUtils extends Service {
 		}
 	}
 
+	update() {
+		this.styleHolderElement();
+	}
+
 	styleHolderElement() {
 		const holderElement = this.getHolder() as HTMLElement;
-		const { width, height } = this.model.getOptions();
 
 		// Add class to chart holder
-		select(this.getHolder()).classed(`${settings.prefix}--chart-holder`, true);
+		select(this.getHolder()).classed(
+			`${settings.prefix}--chart-holder`,
+			true
+		);
 
-		// If width exists in options
-		if (width) {
+		// In order for resize events to not clash with these updates
+		// We'll check if the width & height values passed in options
+		// Have changed, before setting them to the holder
+		const { width, height } = this.model.getOptions();
+		if (width !== this.width) {
 			// Apply formatted width attribute to chart
-			holderElement.style.width = Tools.formatWidthHeightValues(width);
+			holderElement.style.width = width;
+
+			this.width = width;
 		}
 
-		// If height exists in options
-		if (height) {
-			// Apply formatted height attribute to chart
-			holderElement.style.height = Tools.formatWidthHeightValues(height);
+		if (height !== this.height) {
+			// Apply formatted width attribute to chart
+			holderElement.style.height = height;
+
+			this.height = height;
 		}
 	}
 
@@ -157,7 +202,11 @@ export class DOMUtils extends Service {
 	}
 
 	addSVGElement() {
-		const chartsprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
+		const chartsprefix = Tools.getProperty(
+			this.model.getOptions(),
+			"style",
+			"prefix"
+		);
 		const svg = select(this.getHolder())
 			.append("svg")
 			.classed(`${settings.prefix}--${chartsprefix}--chart-svg`, true)
@@ -188,12 +237,14 @@ export class DOMUtils extends Service {
 				return;
 			}
 
-			if (Math.abs(containerWidth - holder.clientWidth) > 1
-				|| Math.abs(containerHeight - holder.clientHeight) > 1) {
+			if (
+				Math.abs(containerWidth - holder.clientWidth) > 1 ||
+				Math.abs(containerHeight - holder.clientHeight) > 1
+			) {
 				containerWidth = holder.clientWidth;
 				containerHeight = holder.clientHeight;
 
-				this.services.events.dispatchEvent("chart-resize");
+				this.services.events.dispatchEvent(Events.Chart.RESIZE);
 			}
 		}, 12.5);
 
