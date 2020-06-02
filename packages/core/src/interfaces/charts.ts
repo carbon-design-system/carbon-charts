@@ -185,9 +185,11 @@ export interface AreaChartOptions extends AxisChartOptions {
 	/**
 	 * options for the curve of the line
 	 */
-	curve?: string | {
-		name: string;
-	};
+	curve?:
+		| string
+		| {
+				name: string;
+		  };
 }
 
 /**

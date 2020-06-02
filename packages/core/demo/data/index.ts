@@ -606,7 +606,7 @@ export const storybookDemoGroups = Tools.clone(allDemoGroups);
 // in the demo page we want to show only demos with isDemoExample = true
 export const demoGroups = Tools.clone(allDemoGroups)
 	.map((demoGroup) => {
-		demoGroup.demos = demoGroup.demos.filter(demo => demo.isDemoExample);
+		demoGroup.demos = demoGroup.demos.filter((demo) => demo.isDemoExample);
 		return demoGroup;
 	})
 	.filter((demoGroup) => demoGroup.demos.length); // remove demoGroup if it's children are all with isDemoExample = false
