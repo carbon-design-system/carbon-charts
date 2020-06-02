@@ -4,7 +4,14 @@ import { TooltipTypes, Roles, Events } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
-import { select, Selection, event as d3Event } from "d3-selection";
+import { mouse, select, Selection, event as d3Event } from "d3-selection";
+
+const THRESHOLD = 5;
+
+// Check if x and y are inside threshold area extents
+function pointIsWithinThreshold(dx: number, dy: number, x: number, y: number) {
+	return (dx > x - THRESHOLD && dx < x + THRESHOLD) && (dy > y - THRESHOLD && dy < y + THRESHOLD);
+}
 
 export class Scatter extends Component {
 	type = "scatter";
@@ -251,6 +258,96 @@ export class Scatter extends Component {
 						)
 					);
 
+				// Find all the data points that are placed within the threshold along x and y axis.
+				const [x, y] = mouse(self.parent.node());
+				const displayData = self.model.getDisplayData();
+				const scaledData: {
+						domainValue: number,
+						rangeValue: number,
+						originalData: any
+					}[] = displayData
+						.map(d =>
+							({
+								domainValue: self.services.cartesianScales.getDomainValue(d),
+								rangeValue: self.services.cartesianScales.getRangeValue(d),
+								originalData: d
+							})
+						);
+
+				const dataPointsWithinThreshold: {
+						domainValue: number,
+						rangeValue: number,
+						originalData: any
+					}[] = scaledData
+						.filter(d =>
+							pointIsWithinThreshold(
+								d.domainValue,
+								d.rangeValue,
+								x,
+								y
+							)
+						)
+						.reduce((accum, currentValue) =>
+							{
+								if (accum.length === 0) {
+									accum.push(currentValue);
+									return accum;
+								}
+
+								// Store the first element of the accumulator array to compare it with current element being processed.
+								const xAccumValue = accum[0].domainValue;
+								const yAccumValue = accum[0].rangeValue;
+								const xDistanceToCurrentValue = Math.abs(x - currentValue.domainValue);
+								const yDistanceToCurrentValue = Math.abs(y - currentValue.rangeValue);
+								const xDistanceToAccumValue = Math.abs(x - xAccumValue);
+								const yDistanceToAccumValue = Math.abs(y - yAccumValue);
+
+								if (
+									xDistanceToCurrentValue > xDistanceToAccumValue ||
+									yDistanceToCurrentValue > yDistanceToAccumValue
+								) {
+									// If distance with current value is bigger than already existing value in the accumulator,
+									// skip current iteration.
+									return accum;
+								} else if (
+									xDistanceToCurrentValue < xDistanceToAccumValue ||
+									yDistanceToCurrentValue < yDistanceToAccumValue
+								) {
+									// CurrentValue data point is closer to mouse inside the threshold area, so reinstantiate array.
+									accum = [currentValue];
+								} else {
+									// CurrentValue is equal to already stored values,
+									// which means there's another match on the same coordinate.
+									accum.push(currentValue);
+								}
+
+								return accum;
+							},
+							[]
+						);
+
+				if (dataPointsWithinThreshold.length > 0) {
+					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
+					const tooltipData = dataPointsWithinThreshold
+						.map(d => d.originalData)
+						.filter(d => {
+							const value = d[rangeIdentifier];
+							return value !== null && value !== undefined;
+						});
+					// Show tooltip
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						hoveredElement,
+						multidata: tooltipData,
+						type: TooltipTypes.DATAPOINT
+					});
+				} else {
+					// Show tooltip
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						hoveredElement,
+						type: TooltipTypes.DATAPOINT
+					});
+				}
+
 				const eventNameToDispatch =
 					d3Event.type === "mouseover"
 						? Events.Scatter.SCATTER_MOUSEOVER
@@ -258,13 +355,7 @@ export class Scatter extends Component {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(eventNameToDispatch, {
 					element: hoveredElement,
-					datum,
-				});
-
-				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					hoveredElement,
-					type: TooltipTypes.DATAPOINT,
+					datum
 				});
 			})
 			.on("click", function (datum) {
