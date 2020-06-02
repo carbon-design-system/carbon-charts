@@ -4,7 +4,7 @@
 	"description": "Carbon charting components, lerna monorepo",
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/carbon-charts.git"
+		"url": "git@github.com:carbon-design-system/carbon-charts.git"
 	},
 	"keywords": [
 		"charts"

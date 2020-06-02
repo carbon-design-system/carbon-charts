@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "0.30.24",
+	"version": "0.32.0",
 	"description": "Carbon charting components",
 	"main": "./bundle.js",
 	"module": "./index.js",
@@ -20,7 +20,8 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/carbon-charts.git"
+		"url": "git@github.com:carbon-design-system/carbon-charts.git",
+		"homepage": "https://carbon-design-system.github.io/carbon-charts/"
 	},
 	"keywords": [
 		"carbon",

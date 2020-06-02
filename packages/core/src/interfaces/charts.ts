@@ -183,6 +183,18 @@ export interface LineChartOptions extends ScatterChartOptions {
 }
 
 /**
+ * options specific to area charts
+ */
+export interface AreaChartOptions extends AxisChartOptions {
+	/**
+	 * options for the curve of the line
+	 */
+	curve?: string | {
+		name: string;
+	};
+}
+
+/**
  * options specific to pie charts
  */
 export interface PieChartOptions extends BaseChartOptions {
