@@ -23,13 +23,13 @@ export class ZoomBar extends Component {
 		if (startingHandle) {
 			domain = [
 				this.ogXScale.invert(e.x),
-				this.ogXScale.domain()[1]
+				this.ogXScale.domain()[1],
 				// Math.min(this.ogXScale.invert(e.x), this.ogXScale.domain()[1])
 			];
 		} else {
 			domain = [
 				this.ogXScale.domain()[0],
-				this.ogXScale.invert(e.x)
+				this.ogXScale.invert(e.x),
 				// Math.min(this.ogXScale.invert(e.x), this.ogXScale.domain()[1])
 			];
 		}
@@ -44,8 +44,12 @@ export class ZoomBar extends Component {
 		const mainYAxisPosition = cartesianScales.getMainYAxisPosition();
 		const mainXScale = cartesianScales.getMainXScale();
 		const mainYScale = cartesianScales.getMainYScale();
-		const mainXScaleType = cartesianScales.getScaleTypeByPosition(mainXAxisPosition);
-		const mainYScaleType = cartesianScales.getScaleTypeByPosition(mainYAxisPosition);
+		const mainXScaleType = cartesianScales.getScaleTypeByPosition(
+			mainXAxisPosition
+		);
+		const mainYScaleType = cartesianScales.getScaleTypeByPosition(
+			mainYAxisPosition
+		);
 
 		const height = 32;
 		const container = DOMUtils.appendOrSelect(svg, "svg.zoom-container")
@@ -77,8 +81,8 @@ export class ZoomBar extends Component {
 				// Get all date values provided in data
 				// TODO - Could be re-used through the model
 				let allDates = [];
-				displayData.datasets.forEach(dataset => {
-					allDates = allDates.concat(dataset.data.map(datum => Number(datum.date)));
+				displayData.forEach((data) => {
+					allDates = allDates.concat(Number(data.date));
 				});
 				allDates = Tools.removeArrayDuplicates(allDates).sort();
 
@@ -89,14 +93,13 @@ export class ZoomBar extends Component {
 					let correspondingSum = 0;
 					const correspondingData = {};
 
-					displayData.datasets.forEach(dataset => {
-						const correspondingDatum = dataset.data.find(datum => Number(datum.date) === Number(date));
-						if (correspondingDatum) {
+					displayData.forEach((data) => {
+						if (Number(data.date) === Number(date)) {
 							++count;
-							correspondingSum += correspondingDatum.value;
+							correspondingSum += data.value;
 						}
 					});
-					correspondingData["label"] = date;
+					correspondingData["date"] = date;
 					correspondingData["value"] = correspondingSum;
 
 					return correspondingData;
@@ -109,53 +112,113 @@ export class ZoomBar extends Component {
 
 				const yScale = mainYScale.copy();
 
-				const { width } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
+				const { width } = DOMUtils.getSVGElementSize(this.parent, {
+					useAttrs: true,
+				});
 
-				xScale.range([0, +width])
-					.domain(extent(stackDataArray, (d: any) => d.label));
+				xScale
+					.range([0, width])
+					.domain(extent(stackDataArray, (d: any) => d.date));
 
-				yScale.range([0, height - 6])
+				yScale
+					.range([0, height - 6])
 					.domain(extent(stackDataArray, (d: any) => d.value));
 
 				const zoomDomain = this.model.get("zoomDomain");
 
 				// D3 line generator function
 				const lineGenerator = line()
-					.x((d, i) => cartesianScales.getValueFromScale(xScale, mainXScaleType, d, i))
-					.y((d, i) => height - cartesianScales.getValueFromScale(yScale, mainYScaleType, d, i))
+					.x((d, i) =>
+						cartesianScales.getValueFromScale(
+							xScale,
+							mainXScaleType,
+							mainXAxisPosition,
+							d,
+							i
+						)
+					)
+					.y(
+						(d, i) =>
+							height -
+							cartesianScales.getValueFromScale(
+								yScale,
+								mainYScaleType,
+								mainYAxisPosition,
+								d,
+								i
+							)
+					)
 					.curve(this.services.curves.getD3Curve());
-					// .defined((d: any, i) => {
-					// 	if (zoomDomain) {
-					// 		const dTimestamp = +d.label;
+				// .defined((d: any, i) => {
+				// 	if (zoomDomain) {
+				// 		const dTimestamp = +d.label;
 
-					// 		return dTimestamp >= +zoomDomain[0] && dTimestamp <= +zoomDomain[1];
-					// 	}
+				// 		return dTimestamp >= +zoomDomain[0] && dTimestamp <= +zoomDomain[1];
+				// 	}
 
-					// 	return true;
-					// });
-
-				const lineGraph = DOMUtils.appendOrSelect(container, "path.zoom-graph-line")
+				// 	return true;
+				// });
+				const lineGraph = DOMUtils.appendOrSelect(
+					container,
+					"path.zoom-graph-line"
+				)
 					.attr("stroke", "#8e8e8e")
 					.attr("stroke-width", 3)
 					.attr("fill", "none")
 					.datum(stackDataArray)
-					.transition(this.services.transitions.getTransition("zoom-pan-line-update", animate))
+					.transition(
+						this.services.transitions.getTransition(
+							"zoom-pan-line-update",
+							animate
+						)
+					)
 					.attr("d", lineGenerator);
 
 				const areaGenerator = area()
-					.x((d, i) => cartesianScales.getValueFromScale(xScale, mainXScaleType, d, i))
+					.x((d, i) =>
+						cartesianScales.getValueFromScale(
+							xScale,
+							mainXScaleType,
+							mainXAxisPosition,
+							d,
+							i
+						)
+					)
 					.y0(height)
-					.y1((d, i) => height - cartesianScales.getValueFromScale(yScale, mainYScaleType, d, i));
+					.y1(
+						(d, i) =>
+							height -
+							cartesianScales.getValueFromScale(
+								yScale,
+								mainYScaleType,
+								mainYAxisPosition,
+								d,
+								i
+							)
+					);
 
-				const areaGraph = DOMUtils.appendOrSelect(container, "path.zoom-graph-area")
+				const areaGraph = DOMUtils.appendOrSelect(
+					container,
+					"path.zoom-graph-area"
+				)
 					.attr("fill", "#e0e0e0")
 					.datum(stackDataArray)
-					.transition(this.services.transitions.getTransition("zoom-pan-area-update", animate))
+					.transition(
+						this.services.transitions.getTransition(
+							"zoom-pan-area-update",
+							animate
+						)
+					)
 					.attr("d", areaGenerator);
 
-				const startHandlePosition = zoomDomain ? xScale(+zoomDomain[0]) : 0;
+				const startHandlePosition = zoomDomain
+					? xScale(+zoomDomain[0])
+					: 0;
 				// Handle #1
-				const startHandle = DOMUtils.appendOrSelect(container, "rect.zoom-handle.start")
+				const startHandle = DOMUtils.appendOrSelect(
+					container,
+					"rect.zoom-handle.start"
+				)
 					.attr("x", startHandlePosition)
 					.attr("width", 5)
 					.attr("height", "100%")
@@ -167,11 +230,16 @@ export class ZoomBar extends Component {
 					.attr("width", 1)
 					.attr("height", 12)
 					.attr("fill", "#fff");
-				const endHandlePosition = zoomDomain ? xScale(+zoomDomain[1]) : xScale.range()[1];
+				const endHandlePosition = zoomDomain
+					? xScale(+zoomDomain[1])
+					: xScale.range()[1];
 				// console.log("endHandlePosition", endHandlePosition)
 
 				// Handle #2
-				const handle2 = DOMUtils.appendOrSelect(container, "rect.zoom-handle.end")
+				const endHandle = DOMUtils.appendOrSelect(
+					container,
+					"rect.zoom-handle.end"
+				)
 					.attr("x", endHandlePosition - 5)
 					.attr("width", 5)
 					.attr("height", "100%")
@@ -184,24 +252,27 @@ export class ZoomBar extends Component {
 					.attr("height", 12)
 					.attr("fill", "#fff");
 
-				const outboundRangeRight = DOMUtils.appendOrSelect(container, "rect.outbound-range.right")
-				.attr("x", endHandlePosition)
-				.attr("width", "100%")
-				.attr("height", "100%")
-				.attr("fill", "#fff")
-				.attr("fill-opacity", 0.85);
+				const outboundRangeRight = DOMUtils.appendOrSelect(
+					container,
+					"rect.outbound-range.right"
+				)
+					.attr("x", endHandlePosition)
+					.attr("width", "100%")
+					.attr("height", "100%")
+					.attr("fill", "#fff")
+					.attr("fill-opacity", 0.85);
 
 				const self = this;
 				// handle2.on("click", this.zoomIn.bind(this));
 				selectAll("rect.zoom-handle").call(
 					drag()
-						.on("start", function() {
+						.on("start", function () {
 							select(this).classed("dragging", true);
 						})
-						.on("drag", function(d) {
+						.on("drag", function (d) {
 							self.dragged(this, d, event);
 						})
-						.on("end", function() {
+						.on("end", function () {
 							select(this).classed("dragging", false);
 						})
 				);
