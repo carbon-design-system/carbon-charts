@@ -433,11 +433,17 @@ export class Axis extends Component {
 					.selectAll("g.tick text")
 					.data(label_data_array)
 					.text(function(d) {
-						return d.length > 20 ? d.substr(0, 5) + "..." + d.substr(-5) : d;
+						return d.length > 18 ? d.substr(0, 8) + "..." + d.substr(-8) : d;
 					})
 					.append("title")
 					.text(function(d) {
 						return d;
+					});
+				this.getInvisibleAxisRef()
+					.selectAll("g.tick text")
+					.data(label_data_array)
+					.text(function(d) {
+						return d.length > 18 ? d.substr(0, 8) + "..." + d.substr(-8) : d;
 					});
 			}
 		}
