@@ -111,6 +111,12 @@ let allDemoGroups = [
 				isDemoExample: true,
 			},
 			{
+				options: barDemos.simpleBarLongLabelOptions,
+				data: barDemos.simpleBarLongLabelData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true,
+			},
+			{
 				options: barDemos.simpleBarTimeSeriesOptions,
 				data: barDemos.simpleBarTimeSeriesData,
 				chartType: chartTypes.SimpleBarChart,
@@ -183,6 +189,12 @@ let allDemoGroups = [
 			{
 				options: barDemos.simpleHorizontalBarOptions,
 				data: barDemos.simpleHorizontalBarData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true,
+			},
+			{
+				options: barDemos.simpleHorizontalBarOptions,
+				data: barDemos.simpleHorizontalBarLongLabelData,
 				chartType: chartTypes.SimpleBarChart,
 				isDemoExample: true,
 			},

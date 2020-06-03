@@ -74,6 +74,28 @@ export const simpleBarOptions = {
 	},
 };
 
+// Simple bar with long labels
+export const simpleBarLongLabelData = [
+	{ group: "6591DA8668C339B1B39297C61091E320C35391AB7AFC15B469F96B8A2DD0C231", value: 65000 },
+	{ group: "347FEDE2F7403759069E5F84B65B49D2467D8914B5184738699259AA310EB0F9", value: 29123 },
+	{ group: "232D788298773BB389DBB8FCE44D3FB4E878879BE7AFB0B303BCE0D56EBB92E2", value: 35213 },
+	{ group: "58B01AADFA87E5547A218B3C6CE3AF07B8DF7BAB9E12BF60FD2BBB739C46B86E", value: 51213 },
+	{ group: "B33C4074C982DAEF1FC8225632D640544673F6B091868FCE71C4F8B5913045F6", value: 16932 },
+];
+
+export const simpleBarLongLabelOptions = {
+	title: "Simple bar with long label (discrete)",
+	axes: {
+		left: {
+			mapsTo: "value",
+		},
+		bottom: {
+			mapsTo: "group",
+			scaleType: "labels",
+		},
+	},
+};
+
 export const simpleBarFixedDomainOptions = {
 	title: "Simple bar (customized domain)",
 	axes: {
@@ -90,6 +112,7 @@ export const simpleBarFixedDomainOptions = {
 
 // Horizontal Simple
 export const simpleHorizontalBarData = simpleBarData;
+export const simpleHorizontalBarLongLabelData = simpleBarLongLabelData;
 
 export const simpleHorizontalBarOptions = {
 	title: "Simple horizontal bar (discrete)",
