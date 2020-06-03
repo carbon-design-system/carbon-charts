@@ -413,17 +413,33 @@ export class Axis extends Component {
 			container.attr("opacity", 0);
 		}
 
-		// truncate the long labels (only discrete type) so that the graph display won't be off
-		if (!isTimeScaleType) {
-			container
-				.selectAll("g.ticks g.tick text")
-				.text(function(d) {
-					return d.length > 25 ? d.substr(0, 10) + "..." + d.substr(-10) : d;
-				})
-				.append("title")
-				.text(function(d) {
-					return d;
-				});
+		// truncate the label if it's too long
+		// only applies to discrete type
+		if (!isTimeScaleType && axisOptions.scaleType) {
+			const lable_data = this.model.getDataGroups();
+			if (lable_data.length > 0) {
+				let label_data_array = [];
+				const first_data = lable_data[0].name;
+				label_data_array.push(first_data);
+				const data_array = lable_data.map(d => d.name);
+				label_data_array = data_array.concat(data_array);
+				const tick_html = this.getContainerSVG().select(
+					`g.axis.${axisPosition} g.ticks g.tick`
+				).html();
+				container
+					.selectAll("g.ticks g.tick")
+					.html(tick_html);
+				container
+					.selectAll("g.tick text")
+					.data(label_data_array)
+					.text(function(d) {
+						return d.length > 20 ? d.substr(0, 5) + "..." + d.substr(-5) : d;
+					})
+					.append("title")
+					.text(function(d) {
+						return d;
+					});
+			}
 		}
 		// Add event listeners to elements drawn
 		this.addEventListeners();
