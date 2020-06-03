@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "0.32.0",
+	"version": "0.32.1",
 	"description": "Carbon charting components",
 	"main": "./bundle.js",
 	"module": "./index.js",
