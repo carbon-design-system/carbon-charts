@@ -5,14 +5,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [0.32.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.0...v0.32.1) (2020-06-03)
 
-
 ### Bug Fixes
 
-* fix missing title option in charts interface ([b74d658](https://github.com/carbon-design-system/carbon-charts/commit/b74d6582277632c8a2a1f460f3ce73aadd40e500))
-
-
-
-
+-   fix missing title option in charts interface ([b74d658](https://github.com/carbon-design-system/carbon-charts/commit/b74d6582277632c8a2a1f460f3ce73aadd40e500))
 
 # [0.32.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.30.24...v0.32.0) (2020-05-29)
 
