@@ -5,20 +5,30 @@ import { ScaleTypes } from "../../interfaces";
 import { DOMUtils } from "../../services";
 
 // D3 Imports
-import { area, line } from "d3-shape";
 import { extent } from "d3-array";
+import { brushX } from "d3-brush";
 import { drag } from "d3-drag";
-import { event, select, selectAll } from "d3-selection";
+import { area, line } from "d3-shape";
+import { event, select, selectAll, BaseType } from "d3-selection";
 
 export class ZoomBar extends Component {
 	type = "zoom-bar";
 
+	height = 32;
+
 	ogXScale: any;
 
 	dragged = Tools.debounce((element, d, e) => {
+		console.log("dragged");
+		console.log(this.ogXScale.invert(100));
+		console.log(d);
+		console.log(e);
 		element = select(element);
 		const startingHandle = element.attr("class").indexOf("start") !== -1;
-
+		console.log("startingHandle?:" + startingHandle);
+		const oldDomain = this.model.get("zoomDomain");
+		console.log("old domain");
+		console.log(oldDomain);
 		let domain;
 		if (startingHandle) {
 			domain = [
@@ -33,8 +43,12 @@ export class ZoomBar extends Component {
 				// Math.min(this.ogXScale.invert(e.x), this.ogXScale.domain()[1])
 			];
 		}
+		console.log("new domain");
+		console.log(domain);
 		this.model.set({ zoomDomain: domain }, { animate: false });
 	}, 2.5);
+
+
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
@@ -45,18 +59,68 @@ export class ZoomBar extends Component {
 		const mainXScale = cartesianScales.getMainXScale();
 		const mainYScale = cartesianScales.getMainYScale();
 		const mainXScaleType = cartesianScales.getScaleTypeByPosition(
-			mainXAxisPosition
+			mainXAxisPosition,
 		);
 		const mainYScaleType = cartesianScales.getScaleTypeByPosition(
-			mainYAxisPosition
+			mainYAxisPosition,
 		);
 
-		const height = 32;
+
 		const container = DOMUtils.appendOrSelect(svg, "svg.zoom-container")
 			// .attr("transform", "translateX(10)")
 			.attr("width", "100%")
-			.attr("height", height)
+			.attr("height", this.height)
 			.attr("opacity", 1);
+
+		const brushHandle = (g, selection) => {
+			const handleSize = 5;
+			// handle
+			svg.select("g.brush")
+				.selectAll("rect.handle")
+				.data([{type: "w"}, {type: "e"}])
+				.attr("y", 0)
+				.attr("width", handleSize)
+				.attr("height", 32)
+				.attr("fill", "#525252");
+			// handle-bar
+			svg.select("g.brush")
+				.selectAll("rect.handle-bar")
+				.data([{type: "w"}, {type: "e"}])
+				.join("rect")
+				.attr("class", function(d) { return "handle-bar handle-bar--" + d.type; })
+				.attr("x", function(d) {
+					if (d.type === "w") {
+						return selection[0] - 1;
+					} else if (d.type === "e") {
+						return selection[1] - 1;
+					}
+				})
+				.attr("y", 10)
+				.attr("width", 1)
+				.attr("height", 12)
+				.attr("fill", "#fff");
+
+		};
+
+		const brushed = () => {
+			const selection = event.selection;
+			if (selection === null) {
+				// do nothing
+				console.log("selection === null");
+			} else {
+				// TODO - pass selection to callback function or update scaleDomain
+			}
+			// update brush handle position
+			select(svg).call(brushHandle, selection);
+		};
+
+		const brush = brushX()
+			.extent([[0, 0], [700, this.height]])
+			.on("start brush end", brushed);
+
+		const brushArea = DOMUtils.appendOrSelect(svg, "g.brush")
+			.call(brush)
+			.call(brush.move, mainXScale.range()); // TODO -- mainXScale.range() incorrect
 
 		const spacer = DOMUtils.appendOrSelect(svg, "rect.zoom-spacer")
 			.attr("x", 0)
@@ -105,11 +169,13 @@ export class ZoomBar extends Component {
 					return correspondingData;
 				});
 
+				// if (!this.ogXScale) {
+				// 	this.ogXScale = cartesianScales.getDomainScale();
+				// }
 				const xScale = mainXScale.copy();
 				if (!this.ogXScale) {
 					this.ogXScale = xScale;
 				}
-
 				const yScale = mainYScale.copy();
 
 				const { width } = DOMUtils.getSVGElementSize(this.parent, {
@@ -121,7 +187,7 @@ export class ZoomBar extends Component {
 					.domain(extent(stackDataArray, (d: any) => d.date));
 
 				yScale
-					.range([0, height - 6])
+					.range([0, this.height - 6])
 					.domain(extent(stackDataArray, (d: any) => d.value));
 
 				const zoomDomain = this.model.get("zoomDomain");
@@ -134,19 +200,19 @@ export class ZoomBar extends Component {
 							mainXScaleType,
 							mainXAxisPosition,
 							d,
-							i
-						)
+							i,
+						),
 					)
 					.y(
 						(d, i) =>
-							height -
+							this.height -
 							cartesianScales.getValueFromScale(
 								yScale,
 								mainYScaleType,
 								mainYAxisPosition,
 								d,
-								i
-							)
+								i,
+							),
 					)
 					.curve(this.services.curves.getD3Curve());
 				// .defined((d: any, i) => {
@@ -160,7 +226,7 @@ export class ZoomBar extends Component {
 				// });
 				const lineGraph = DOMUtils.appendOrSelect(
 					container,
-					"path.zoom-graph-line"
+					"path.zoom-graph-line",
 				)
 					.attr("stroke", "#8e8e8e")
 					.attr("stroke-width", 3)
@@ -169,8 +235,8 @@ export class ZoomBar extends Component {
 					.transition(
 						this.services.transitions.getTransition(
 							"zoom-pan-line-update",
-							animate
-						)
+							animate,
+						),
 					)
 					.attr("d", lineGenerator);
 
@@ -181,101 +247,36 @@ export class ZoomBar extends Component {
 							mainXScaleType,
 							mainXAxisPosition,
 							d,
-							i
-						)
+							i,
+						),
 					)
-					.y0(height)
+					.y0(this.height)
 					.y1(
 						(d, i) =>
-							height -
+							this.height -
 							cartesianScales.getValueFromScale(
 								yScale,
 								mainYScaleType,
 								mainYAxisPosition,
 								d,
-								i
-							)
+								i,
+							),
 					);
 
 				const areaGraph = DOMUtils.appendOrSelect(
 					container,
-					"path.zoom-graph-area"
+					"path.zoom-graph-area",
 				)
 					.attr("fill", "#e0e0e0")
 					.datum(stackDataArray)
 					.transition(
 						this.services.transitions.getTransition(
 							"zoom-pan-area-update",
-							animate
-						)
+							animate,
+						),
 					)
 					.attr("d", areaGenerator);
 
-				const startHandlePosition = zoomDomain
-					? xScale(+zoomDomain[0])
-					: 0;
-				// Handle #1
-				const startHandle = DOMUtils.appendOrSelect(
-					container,
-					"rect.zoom-handle.start"
-				)
-					.attr("x", startHandlePosition)
-					.attr("width", 5)
-					.attr("height", "100%")
-					.attr("fill", "#525252");
-
-				DOMUtils.appendOrSelect(container, "rect.zoom-handle-bar.start")
-					.attr("x", startHandlePosition + 2)
-					.attr("y", 10)
-					.attr("width", 1)
-					.attr("height", 12)
-					.attr("fill", "#fff");
-				const endHandlePosition = zoomDomain
-					? xScale(+zoomDomain[1])
-					: xScale.range()[1];
-				// console.log("endHandlePosition", endHandlePosition)
-
-				// Handle #2
-				const endHandle = DOMUtils.appendOrSelect(
-					container,
-					"rect.zoom-handle.end"
-				)
-					.attr("x", endHandlePosition - 5)
-					.attr("width", 5)
-					.attr("height", "100%")
-					.attr("fill", "#525252");
-
-				DOMUtils.appendOrSelect(container, "rect.zoom-handle-bar.end")
-					.attr("x", endHandlePosition - 5 + 2)
-					.attr("y", 10)
-					.attr("width", 1)
-					.attr("height", 12)
-					.attr("fill", "#fff");
-
-				const outboundRangeRight = DOMUtils.appendOrSelect(
-					container,
-					"rect.outbound-range.right"
-				)
-					.attr("x", endHandlePosition)
-					.attr("width", "100%")
-					.attr("height", "100%")
-					.attr("fill", "#fff")
-					.attr("fill-opacity", 0.85);
-
-				const self = this;
-				// handle2.on("click", this.zoomIn.bind(this));
-				selectAll("rect.zoom-handle").call(
-					drag()
-						.on("start", function () {
-							select(this).classed("dragging", true);
-						})
-						.on("drag", function (d) {
-							self.dragged(this, d, event);
-						})
-						.on("end", function () {
-							select(this).classed("dragging", false);
-						})
-				);
 			}
 		}
 	}
@@ -284,4 +285,5 @@ export class ZoomBar extends Component {
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		console.log("zoom in", mainXScale.domain());
 	}
+
 }
