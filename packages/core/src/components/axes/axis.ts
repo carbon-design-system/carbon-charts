@@ -422,7 +422,7 @@ export class Axis extends Component {
 				const first_data = lable_data[0].name;
 				label_data_array.push(first_data);
 				const data_array = lable_data.map(d => d.name);
-				label_data_array = data_array.concat(data_array);
+				label_data_array = label_data_array.concat(data_array);
 				const tick_html = this.getContainerSVG().select(
 					`g.axis.${axisPosition} g.ticks g.tick`
 				).html();
