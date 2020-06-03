@@ -127,6 +127,19 @@ export const simpleHorizontalBarOptions = {
 	},
 };
 
+export const simpleHorizontalBarLongLabelOptions = {
+	title: "Simple horizontal bar with long label (discrete)",
+	axes: {
+		left: {
+			mapsTo: "group",
+			scaleType: "labels",
+		},
+		bottom: {
+			mapsTo: "value",
+		},
+	},
+};
+
 export const simpleBarTimeSeriesData = [
 	{ group: "Qty", date: new Date(2019, 0, 1), value: 10000 },
 	{ group: "More", date: new Date(2019, 0, 2), value: 65000 },

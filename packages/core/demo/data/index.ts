@@ -193,7 +193,7 @@ let allDemoGroups = [
 				isDemoExample: true,
 			},
 			{
-				options: barDemos.simpleHorizontalBarOptions,
+				options: barDemos.simpleHorizontalBarLongLabelOptions,
 				data: barDemos.simpleHorizontalBarLongLabelData,
 				chartType: chartTypes.SimpleBarChart,
 				isDemoExample: true,
