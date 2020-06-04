@@ -416,13 +416,15 @@ export class Axis extends Component {
 		// truncate the label if it's too long
 		// only applies to discrete type
 		if (!isTimeScaleType && axisOptions.scaleType) {
-			const lable_data = this.model.getDataGroups();
-			if (lable_data.length > 0) {
+			const labels = this.model.getDataGroups();
+			if (labels.length > 0) {
 				let label_data_array = [];
-				const first_data = lable_data[0].name;
-				label_data_array.push(first_data);
-				const data_array = lable_data.map(d => d.name);
-				label_data_array = label_data_array.concat(data_array);
+				const first_label = labels[0].name;
+				const label_array = labels.filter(d => d.status === 1).map(d => d.name);
+				if (label_array.length === labels.length) {
+					label_data_array.push(first_label);
+				}
+				label_data_array = label_data_array.concat(label_array);
 				const tick_html = this.getContainerSVG().select(
 					`g.axis.${axisPosition} g.ticks g.tick`
 				).html();
@@ -441,7 +443,7 @@ export class Axis extends Component {
 					});
 				this.getInvisibleAxisRef()
 					.selectAll("g.tick text")
-					.data(label_data_array)
+					.data(label_array)
 					.text(function(d) {
 						return d.length > 18 ? d.substr(0, 8) + "..." + d.substr(-8) : d;
 					});
