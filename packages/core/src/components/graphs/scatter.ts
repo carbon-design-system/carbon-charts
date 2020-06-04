@@ -6,15 +6,13 @@ import { Tools } from "../../tools";
 // D3 Imports
 import { mouse, select, Selection, event as d3Event } from "d3-selection";
 
-const THRESHOLD = 5;
-
 // Check if x and y are inside threshold area extents
-function pointIsWithinThreshold(dx: number, dy: number, x: number, y: number) {
+function pointIsWithinThreshold(dx: number, dy: number, x: number, y: number, threshold: number) {
 	return (
-		dx > x - THRESHOLD &&
-		dx < x + THRESHOLD &&
-		dy > y - THRESHOLD &&
-		dy < y + THRESHOLD
+		dx > x - threshold &&
+		dx < x + threshold &&
+		dy > y - threshold &&
+		dy < y + threshold
 	);
 }
 
@@ -245,7 +243,8 @@ export class Scatter extends Component {
 
 	addEventListeners() {
 		const self = this;
-		const { groupMapsTo } = this.model.getOptions().data;
+		const options = this.model.getOptions();
+		const { groupMapsTo } = options.data;
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		this.parent
@@ -288,48 +287,10 @@ export class Scatter extends Component {
 							d.domainValue,
 							d.rangeValue,
 							x,
-							y
+							y,
+							options.points.radius
 						)
-					)
-					.reduce((accum, currentValue) => {
-						if (accum.length === 0) {
-							accum.push(currentValue);
-							return accum;
-						}
-
-						// Store the first element of the accumulator array to compare it with current element being processed.
-						const xAccumValue = accum[0].domainValue;
-						const yAccumValue = accum[0].rangeValue;
-						const xDistanceToCurrentValue = Math.abs(
-							x - currentValue.domainValue
-						);
-						const yDistanceToCurrentValue = Math.abs(
-							y - currentValue.rangeValue
-						);
-						const xDistanceToAccumValue = Math.abs(x - xAccumValue);
-						const yDistanceToAccumValue = Math.abs(y - yAccumValue);
-
-						if (
-							xDistanceToCurrentValue > xDistanceToAccumValue ||
-							yDistanceToCurrentValue > yDistanceToAccumValue
-						) {
-							// If distance with current value is bigger than already existing value in the accumulator,
-							// skip current iteration.
-							return accum;
-						} else if (
-							xDistanceToCurrentValue < xDistanceToAccumValue ||
-							yDistanceToCurrentValue < yDistanceToAccumValue
-						) {
-							// CurrentValue data point is closer to mouse inside the threshold area, so reinstantiate array.
-							accum = [currentValue];
-						} else {
-							// CurrentValue is equal to already stored values,
-							// which means there's another match on the same coordinate.
-							accum.push(currentValue);
-						}
-
-						return accum;
-					}, []);
+					);
 
 				if (dataPointsWithinThreshold.length > 0) {
 					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
