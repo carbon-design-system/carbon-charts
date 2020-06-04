@@ -7,7 +7,13 @@ import { Tools } from "../../tools";
 import { mouse, select, Selection, event as d3Event } from "d3-selection";
 
 // Check if x and y are inside threshold area extents
-function pointIsWithinThreshold(dx: number, dy: number, x: number, y: number, threshold: number) {
+function pointIsWithinThreshold(
+	dx: number,
+	dy: number,
+	x: number,
+	y: number,
+	threshold: number
+) {
 	return (
 		dx > x - threshold &&
 		dx < x + threshold &&
@@ -281,16 +287,15 @@ export class Scatter extends Component {
 					domainValue: number;
 					rangeValue: number;
 					originalData: any;
-				}[] = scaledData
-					.filter((d) =>
-						pointIsWithinThreshold(
-							d.domainValue,
-							d.rangeValue,
-							x,
-							y,
-							options.points.radius
-						)
-					);
+				}[] = scaledData.filter((d) =>
+					pointIsWithinThreshold(
+						d.domainValue,
+						d.rangeValue,
+						x,
+						y,
+						options.points.radius
+					)
+				);
 
 				if (dataPointsWithinThreshold.length > 0) {
 					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
