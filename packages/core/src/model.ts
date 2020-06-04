@@ -311,23 +311,6 @@ export class ChartModel {
 	}
 
 	/**
-	 * Check selected groups with current data groups, clear selected groups if current data groups don't contain every item in selected groups
-	 * @param uniqueDataGroups 
-	 */
-	checkSelectedGroups(uniqueDataGroups: string[]) {
-		const options = this.getOptions();
-		if (options.data.selectedGroups.length) {
-			// check if current groups includes every item in selected groups
-			const hasAllSelectedGroups = options.data.selectedGroups
-				.every(groupName => uniqueDataGroups.includes(groupName));
-
-			if (!hasAllSelectedGroups) {
-				options.data.selectedGroups = [];
-			};
-		};
-	}
-
-	/**
 	 * Should the data point be filled?
 	 * @param group
 	 * @param key
@@ -463,15 +446,21 @@ export class ChartModel {
 			data,
 			(datum) => datum[groupMapsTo]
 		).keys();
-		
-		this.checkSelectedGroups(uniqueDataGroups);
-		// Get group status based on items in selected groups
-		const getStatus = (groupName) => {
-			return (!options.data.selectedGroups.length || 
-				options.data.selectedGroups.includes(groupName))
-					? ACTIVE
-					: DISABLED;
+
+		// check if selectedGroups can be applied to chart with current data groups
+		if (options.data.selectedGroups.length) {
+			const hasAllSelectedGroups = options.data.selectedGroups
+				.every(groupName => uniqueDataGroups.includes(groupName));
+			if (!hasAllSelectedGroups) {
+				options.data.selectedGroups = [];
+			};
 		}
+
+		// Get group status based on items in selected groups
+		const getStatus = (groupName) => 
+			!options.data.selectedGroups.length || options.data.selectedGroups.includes(groupName)
+				? ACTIVE
+				: DISABLED;
 
 		return uniqueDataGroups.map(groupName => ({
 			name: groupName,
