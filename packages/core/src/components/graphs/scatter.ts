@@ -27,41 +27,30 @@ export class Scatter extends Component {
 		// Grab container SVG
 		const svg = this.getContainerSVG();
 
-		const groupedData = this.model.getGroupedData();
+		const options = this.model.getOptions();
+		const { groupMapsTo } = options.data;
+
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+		const scatterData = this.model.getDisplayData().filter(d => d[rangeIdentifier] !== undefined && d[rangeIdentifier] !== null);
 
 		// Update data on dot groups
-		const dotGroups = svg
-			.selectAll("g.dots")
-			.data(groupedData, (group) => group.name);
+		const circles = svg
+			.selectAll("circle.dot")
+			.data(scatterData, (datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`);
 
-		// Remove dot groups that need to be removed
-		dotGroups.exit().attr("opacity", 0).remove();
+		// Remove circles that need to be removed
+		circles.exit().attr("opacity", 0).remove();
 
 		// Add the dot groups that need to be introduced
-		const dotGroupsEnter = dotGroups
+		const enteringCircles = circles
 			.enter()
-			.append("g")
-			.classed("dots", true)
-			.attr("role", Roles.GROUP);
-
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-		// Update data on all circles
-		const dots = dotGroupsEnter
-			.merge(dotGroups)
-			.selectAll("circle.dot")
-			.data((group) =>
-				group.data.filter(
-					(datum) =>
-						datum[rangeIdentifier] !== null &&
-						datum[rangeIdentifier] !== undefined
-				)
-			);
-
-		// Add the circles that need to be introduced
-		const dotsEnter = dots.enter().append("circle").attr("opacity", 0);
+			.append("circle")
+			.classed("dot", true)
+			.attr("opacity", 0);
 
 		// Apply styling & position
-		const circlesToStyle = dotsEnter.merge(dots);
+		const circlesToStyle = enteringCircles.merge(circles);
 		this.styleCircles(circlesToStyle, animate);
 
 		// Add event listeners to elements drawn
@@ -165,10 +154,10 @@ export class Scatter extends Component {
 						filled
 					)
 			)
-			.attr("cx", getXValue)
 			.transition(
 				transitions.getTransition("scatter-update-enter", animate)
 			)
+			.attr("cx", getXValue)
 			.attr("cy", getYValue)
 			.attr("r", options.points.radius)
 			.attr("fill", (d) => {
