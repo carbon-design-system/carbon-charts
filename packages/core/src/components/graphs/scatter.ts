@@ -297,7 +297,7 @@ export class Scatter extends Component {
 					)
 				);
 
-				if (dataPointsWithinThreshold.length > 0) {
+				if (dataPointsWithinThreshold.length > 1) {
 					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
 					const tooltipData = dataPointsWithinThreshold
 						.map((d) => d.originalData)
