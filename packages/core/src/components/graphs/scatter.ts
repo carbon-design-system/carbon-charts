@@ -4,23 +4,7 @@ import { TooltipTypes, Roles, Events } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
-import { mouse, select, Selection, event as d3Event } from "d3-selection";
-
-// Check if x and y are inside threshold area extents
-function pointIsWithinThreshold(
-	dx: number,
-	dy: number,
-	x: number,
-	y: number,
-	threshold: number
-) {
-	return (
-		dx > x - threshold &&
-		dx < x + threshold &&
-		dy > y - threshold &&
-		dy < y + threshold
-	);
-}
+import { select, Selection, event as d3Event } from "d3-selection";
 
 export class Scatter extends Component {
 	type = "scatter";
@@ -249,8 +233,7 @@ export class Scatter extends Component {
 
 	addEventListeners() {
 		const self = this;
-		const options = this.model.getOptions();
-		const { groupMapsTo } = options.data;
+		const { groupMapsTo } = this.model.getOptions().data;
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		this.parent
@@ -268,47 +251,18 @@ export class Scatter extends Component {
 						)
 					);
 
-				// Find all the data points that are placed within the threshold along x and y axis.
-				const [x, y] = mouse(self.parent.node());
-				const displayData = self.model.getDisplayData();
-				const scaledData: {
-					domainValue: number;
-					rangeValue: number;
-					originalData: any;
-				}[] = displayData.map((d) => ({
-					domainValue: self.services.cartesianScales.getDomainValue(
-						d
-					),
-					rangeValue: self.services.cartesianScales.getRangeValue(d),
-					originalData: d,
-				}));
+				const hoveredX = self.services.cartesianScales.getDomainValue(datum);
+				const hoveredY = self.services.cartesianScales.getRangeValue(datum);
+				const overlappingData = self.model.getDisplayData().filter((d) => {
+					return hoveredX === self.services.cartesianScales.getDomainValue(d) &&
+						hoveredY === self.services.cartesianScales.getRangeValue(d);
+				});
 
-				const dataPointsWithinThreshold: {
-					domainValue: number;
-					rangeValue: number;
-					originalData: any;
-				}[] = scaledData.filter((d) =>
-					pointIsWithinThreshold(
-						d.domainValue,
-						d.rangeValue,
-						x,
-						y,
-						options.points.radius
-					)
-				);
-
-				if (dataPointsWithinThreshold.length > 1) {
-					const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
-					const tooltipData = dataPointsWithinThreshold
-						.map((d) => d.originalData)
-						.filter((d) => {
-							const value = d[rangeIdentifier];
-							return value !== null && value !== undefined;
-						});
+				if (overlappingData.length > 1) {
 					// Show tooltip
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						hoveredElement,
-						multidata: tooltipData,
+						multidata: overlappingData,
 						type: TooltipTypes.DATAPOINT,
 					});
 				} else {
