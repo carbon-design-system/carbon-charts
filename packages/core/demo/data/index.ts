@@ -275,7 +275,6 @@ let allDemoGroups = [
 	},
 	{
 		title: "Donut",
-		description: "Bubble charts use data points and bubbles to plot measures anywhere along a scale. One measure is plotted along each axis. The size of the bubble represents the third measure. You can use bubble charts to represent financial data or any data where measured values are related.",
 		demos: [
 			{
 				options: donutDemos.donutOptions,
