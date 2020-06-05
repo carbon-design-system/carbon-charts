@@ -16,6 +16,10 @@ import {
  */
 export interface BaseChartOptions {
 	/**
+	 * Optionally specify a title for the chart
+	 */
+	title?: string;
+	/**
 	 * boolean to disable animations (enabled by default)
 	 */
 	animations?: boolean;
@@ -176,6 +180,18 @@ export interface LineChartOptions extends ScatterChartOptions {
 		| {
 				name: string;
 		  };
+}
+
+/**
+ * options specific to area charts
+ */
+export interface AreaChartOptions extends AxisChartOptions {
+	/**
+	 * options for the curve of the line
+	 */
+	curve?: string | {
+		name: string;
+	};
 }
 
 /**
