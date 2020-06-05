@@ -42,7 +42,7 @@ export const radarWithMissingDataData = [
 	{ group: "Oil", key: "Sydney", value: 16 },
 ];
 export const radarWithMissingDataOptions = {
-	title: "Radar - Missing data",
+	title: "Radar - Missing datapoints",
 };
 
 // radar dense

@@ -1,10 +1,10 @@
 import { storiesOf } from "@storybook/svelte";
 import { withKnobs, object } from "@storybook/addon-knobs";
-import { demoGroups } from "@carbon/charts/demo/data";
+import { storybookDemoGroups } from "@carbon/charts/demo/data";
 import * as ChartComponents from "../src";
 import ChartWrapper from "./ChartWrapper.svelte";
 
-demoGroups.forEach(demoGroup => {
+storybookDemoGroups.forEach(demoGroup => {
 	const groupStories = storiesOf(demoGroup.title, module).addDecorator(
 		withKnobs({ escapeHTML: false })
 	);
