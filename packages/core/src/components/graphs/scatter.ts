@@ -270,20 +270,12 @@ export class Scatter extends Component {
 						);
 					});
 
-				if (overlappingData.length > 1) {
-					// Show tooltip
-					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-						hoveredElement,
-						multidata: overlappingData,
-						type: TooltipTypes.DATAPOINT,
-					});
-				} else {
-					// Show tooltip
-					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-						hoveredElement,
-						type: TooltipTypes.DATAPOINT,
-					});
-				}
+				// Show tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					hoveredElement,
+					multidata: overlappingData.length > 1 ? overlappingData : null,
+					type: TooltipTypes.DATAPOINT,
+				});
 
 				const eventNameToDispatch =
 					d3Event.type === "mouseover"
