@@ -3,10 +3,10 @@ import { withKnobs, object } from '@storybook/addon-knobs';
 
 import * as ChartComponents from '../src/index';
 
-import { demoGroups } from '@carbon/charts/demo/data';
+import { storybookDemoGroups } from '@carbon/charts/demo/data';
 
 // Loop through all demo groups
-demoGroups.forEach(demoGroup => {
+storybookDemoGroups.forEach(demoGroup => {
 	// Create story group for each demo group
 	const groupStories = storiesOf(demoGroup.title, module).addDecorator(
 		withKnobs({ escapeHTML: false })
