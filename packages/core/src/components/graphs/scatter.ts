@@ -273,7 +273,8 @@ export class Scatter extends Component {
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					multidata: overlappingData.length > 1 ? overlappingData : null,
+					multidata:
+						overlappingData.length > 1 ? overlappingData : null,
 					type: TooltipTypes.DATAPOINT,
 				});
 
