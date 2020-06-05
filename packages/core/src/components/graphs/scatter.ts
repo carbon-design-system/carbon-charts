@@ -251,12 +251,24 @@ export class Scatter extends Component {
 						)
 					);
 
-				const hoveredX = self.services.cartesianScales.getDomainValue(datum);
-				const hoveredY = self.services.cartesianScales.getRangeValue(datum);
-				const overlappingData = self.model.getDisplayData().filter((d) => {
-					return hoveredX === self.services.cartesianScales.getDomainValue(d) &&
-						hoveredY === self.services.cartesianScales.getRangeValue(d);
-				});
+				const hoveredX = self.services.cartesianScales.getDomainValue(
+					datum
+				);
+				const hoveredY = self.services.cartesianScales.getRangeValue(
+					datum
+				);
+				const overlappingData = self.model
+					.getDisplayData()
+					.filter((d) => {
+						return (
+							hoveredX ===
+								self.services.cartesianScales.getDomainValue(
+									d
+								) &&
+							hoveredY ===
+								self.services.cartesianScales.getRangeValue(d)
+						);
+					});
 
 				if (overlappingData.length > 1) {
 					// Show tooltip
