@@ -125,7 +125,8 @@ export class Tooltip extends Component {
 
 				// get the position based on the title positioning (static)
 				const position = this.getTooltipPosition(
-					e.detail.hoveredElement.node()
+					e.detail.hoveredElement.node(),
+					e.detail.type
 				);
 				this.positionTooltip(position);
 			}
@@ -219,7 +220,7 @@ export class Tooltip extends Component {
 	}
 
 	// returns static position based on the element
-	getTooltipPosition(hoveredElement) {
+	getTooltipPosition(hoveredElement, type: TooltipTypes) {
 		const holderPosition = select(this.services.domUtils.getHolder())
 			.node()
 			.getBoundingClientRect();

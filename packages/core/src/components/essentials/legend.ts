@@ -2,7 +2,7 @@
 import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { LegendOrientations, Roles, Events } from "../../interfaces";
+import { LegendOrientations, Roles, Events, TooltipTypes } from "../../interfaces";
 import { DOMUtils } from "../../services";
 
 // D3 Imports
@@ -52,9 +52,6 @@ export class Legend extends Component {
 			.append("text")
 			.merge(legendItems.select("text"))
 			.html((d) => d.name.length > 18 ? d.name.substr(0, 8) + "..." + d.name.substr(-8) : d.name)
-			.attr("alignment-baseline", "middle")
-			.append("title")
-			.html((d) => d.name);
 
 		this.breakItemsIntoLines(addedLegendItems);
 
@@ -271,9 +268,20 @@ export class Legend extends Component {
 
 				self.model.toggleDataLabel(clickedItemData.name);
 			})
+			.on("mousemove", function () {
+				const hoveredItem = select(this);
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					hoveredElement: hoveredItem,
+					type: TooltipTypes.LEGEND,
+				});
+			})
 			.on("mouseout", function () {
 				const hoveredItem = select(this);
 				hoveredItem.select("rect.hover-stroke").remove();
+
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+					hoveredElement: select(this),
+				});
 
 				self.services.events.dispatchEvent(
 					Events.Legend.ITEM_MOUSEOUT,

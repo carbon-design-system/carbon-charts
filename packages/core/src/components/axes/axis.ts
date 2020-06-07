@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { AxisPositions, Events, ScaleTypes, Roles } from "../../interfaces";
+import { AxisPositions, Events, ScaleTypes, Roles, TooltipTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
@@ -416,15 +416,15 @@ export class Axis extends Component {
 		// truncate the label if it's too long
 		// only applies to discrete type
 		if (!isTimeScaleType && axisOptions.scaleType) {
-			const labels = this.model.getDataGroups();
-			if (labels.length > 0) {
+			const dataGroups = this.model.getDataGroups();
+			if (dataGroups.length > 0) {
 				let label_data_array = [];
-				const first_label = labels[0].name;
-				const label_array = labels.filter(d => d.status === 1).map(d => d.name);
-				if (label_array.length === labels.length) {
-					label_data_array.push(first_label);
+				const firstDataGroupName = dataGroups[0].name;
+				const activeDataGroups = this.model.getActiveDataGroups().map(d => d.name);
+				if (activeDataGroups.length === dataGroups.length) {
+					label_data_array.push(firstDataGroupName);
 				}
-				label_data_array = label_data_array.concat(label_array);
+				label_data_array = label_data_array.concat(activeDataGroups);
 				const tick_html = this.getContainerSVG().select(
 					`g.axis.${axisPosition} g.ticks g.tick`
 				).html();
@@ -436,14 +436,10 @@ export class Axis extends Component {
 					.data(label_data_array)
 					.text(function(d) {
 						return d.length > 18 ? d.substr(0, 8) + "..." + d.substr(-8) : d;
-					})
-					.append("title")
-					.text(function(d) {
-						return d;
 					});
 				this.getInvisibleAxisRef()
 					.selectAll("g.tick text")
-					.data(label_array)
+					.data(activeDataGroups)
 					.text(function(d) {
 						return d.length > 18 ? d.substr(0, 8) + "..." + d.substr(-8) : d;
 					});
@@ -460,6 +456,11 @@ export class Axis extends Component {
 			svg,
 			`g.axis.${axisPosition}`
 		);
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		const isTimeScaleType =
+			this.scaleType === ScaleTypes.TIME ||
+			axisOptions.scaleType === ScaleTypes.TIME;
 
 		const self = this;
 		container
@@ -483,6 +484,12 @@ export class Axis extends Component {
 						datum,
 					}
 				);
+				if (!isTimeScaleType && axisOptions.scaleType) {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						hoveredElement: select(this),
+						type: TooltipTypes.AXISLABEL,
+					});
+				}
 			})
 			.on("click", function (datum) {
 				// Dispatch mouse event
@@ -497,6 +504,11 @@ export class Axis extends Component {
 					element: select(this),
 					datum,
 				});
+				if (!isTimeScaleType && axisOptions.scaleType) {
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+						hoveredElement: select(this),
+					});
+				}
 			});
 	}
 

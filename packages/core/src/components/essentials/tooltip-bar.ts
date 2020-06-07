@@ -52,7 +52,9 @@ export class TooltipBar extends Tooltip {
 						"tooltip",
 						"gridline",
 						"enabled"
-					))
+					)) ||
+				(e.detail.type === TooltipTypes.LEGEND) ||
+				(e.detail.type === TooltipTypes.AXISLABEL)
 			) {
 				let data = e.detail.hoveredElement.datum() as any;
 				const hoveredElement = e.detail.hoveredElement.node();
@@ -69,7 +71,7 @@ export class TooltipBar extends Tooltip {
 						data = e.detail.hoveredElement.datum();
 					}
 
-					defaultHTML = this.getTooltipHTML(data);
+					defaultHTML = this.getTooltipHTML(data, e.detail.type);
 				}
 
 				// if there is a provided tooltip HTML function call it and pass the defaultHTML
@@ -90,7 +92,7 @@ export class TooltipBar extends Tooltip {
 					tooltipTextContainer.html(defaultHTML);
 				}
 
-				const position = this.getTooltipPosition(hoveredElement, data);
+				const position = this.getTooltipPosition(hoveredElement, e.detail.type, data);
 				// Position the tooltip relative to the bars
 				this.positionTooltip(e.detail.multidata ? undefined : position);
 			} else if (e.detail.type === TooltipTypes.TITLE) {
@@ -120,7 +122,8 @@ export class TooltipBar extends Tooltip {
 
 				// get the position based on the title positioning (static)
 				const position = super.getTooltipPosition(
-					e.detail.hoveredElement.node()
+					e.detail.hoveredElement.node(),
+					e.detail.type
 				);
 				this.positionTooltip(position);
 			}
@@ -140,7 +143,7 @@ export class TooltipBar extends Tooltip {
 	 * positive valued data and below negative value data.
 	 * @param hoveredElement
 	 */
-	getTooltipPosition(hoveredElement, data?: any) {
+	getTooltipPosition(hoveredElement, type: TooltipTypes, data?: any) {
 		if (data === undefined) {
 			data = select(hoveredElement).datum() as any;
 		}
@@ -165,15 +168,25 @@ export class TooltipBar extends Tooltip {
 			return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
 		} else {
 			// positive bars
-			const tooltipPos = {
-				left:
-					barPosition.left -
-					holderPosition.left +
-					barPosition.width / 2,
-				top: barPosition.top - holderPosition.top - verticalOffset,
-			};
-
-			return { placement: TooltipPosition.TOP, position: tooltipPos };
+			if ((type === TooltipTypes.AXISLABEL && data.length > 18) || (type === TooltipTypes.LEGEND && data.name.length > 18)) {
+				const tooltipPos = {
+					left:
+						barPosition.left -
+						holderPosition.left +
+						barPosition.width * 2,
+					top: barPosition.top - holderPosition.top - verticalOffset,
+				};
+				return { placement: TooltipPosition.TOP, position: tooltipPos };
+			} else {
+				const tooltipPos = {
+					left:
+						barPosition.left -
+						holderPosition.left +
+						barPosition.width / 2,
+					top: barPosition.top - holderPosition.top - verticalOffset,
+				};
+				return { placement: TooltipPosition.TOP, position: tooltipPos };
+			}
 		}
 	}
 
@@ -181,7 +194,14 @@ export class TooltipBar extends Tooltip {
 	 * Returns the html for the bar single point tooltip
 	 * @param data associated values for the hovered bar
 	 */
-	getTooltipHTML(data: any) {
+	getTooltipHTML(data: any, type: TooltipTypes) {
+		if (type === TooltipTypes.LEGEND) {
+			const dataVal = data.name;
+			return `<div class="datapoint-tooltip"><p class="label">${dataVal}</p></div>`;
+		} else if (type === TooltipTypes.AXISLABEL) {
+			return `<div class="datapoint-tooltip"><p class="label">${data}</p></div>`;
+		}
+
 		const formattedValue = Tools.getProperty(
 			this.model.getOptions(),
 			"tooltip",

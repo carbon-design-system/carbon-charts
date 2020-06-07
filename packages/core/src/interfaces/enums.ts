@@ -58,6 +58,8 @@ export enum TooltipTypes {
 	DATAPOINT = "datapoint",
 	GRIDLINE = "gridline",
 	TITLE = "title",
+	LEGEND = "legend",
+	AXISLABEL = "axislabel",
 }
 
 /**
