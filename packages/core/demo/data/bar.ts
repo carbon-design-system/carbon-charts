@@ -92,8 +92,20 @@ export const simpleBarLongLabelOptions = {
 		bottom: {
 			mapsTo: "group",
 			scaleType: "labels",
+			"truncation": {
+				"type": "TruncationTypes.END_LINE",
+				"threshold": 10,
+				"numCharacter": 6
+			},
 		},
 	},
+	legend: {
+		truncation: {
+			type: "TruncationTypes.END_LINE",
+			"threshold": 10,
+			"numCharacter": 6
+		}
+	}
 };
 
 export const simpleBarFixedDomainOptions = {
@@ -133,11 +145,23 @@ export const simpleHorizontalBarLongLabelOptions = {
 		left: {
 			mapsTo: "group",
 			scaleType: "labels",
+			"truncation": {
+				"type": "TruncationTypes.MID_LINE",
+				"threshold": 10,
+				"numCharacter": 8
+			},
 		},
 		bottom: {
 			mapsTo: "value",
 		},
 	},
+	legend: {
+		truncation: {
+			type: "TruncationTypes.MID_LINE",
+			"threshold": 15,
+			"numCharacter": 12
+		}
+	}
 };
 
 export const simpleBarTimeSeriesData = [

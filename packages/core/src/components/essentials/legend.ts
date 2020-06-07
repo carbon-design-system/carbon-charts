@@ -17,6 +17,7 @@ export class Legend extends Component {
 			Roles.GRAPHICS_DOCUMENT
 		);
 		const options = this.model.getOptions();
+		const legendOptions = Tools.getProperty(options, "legend");
 		const legendItems = svg
 			.selectAll("g.legend-item")
 			.data(this.model.getDataGroups(), (dataGroup) => dataGroup.name);
@@ -30,6 +31,23 @@ export class Legend extends Component {
 
 		// Configs
 		const checkboxRadius = options.legend.checkbox.radius;
+
+		// Truncation
+		const truncationTypeProvided = Tools.getProperty(
+			legendOptions,
+			"truncation",
+			"type"
+		);
+		const truncationThresholdProvided = Tools.getProperty(
+			legendOptions,
+			"truncation",
+			"threshold"
+		);
+		const truncationNumCharacterProvided = Tools.getProperty(
+			legendOptions,
+			"truncation",
+			"numCharacter"
+		);
 
 		addedLegendItems
 			.append("rect")
@@ -48,10 +66,29 @@ export class Legend extends Component {
 				return d.status === options.legend.items.status.ACTIVE;
 			});
 
-		addedLegendItems
-			.append("text")
-			.merge(legendItems.select("text"))
-			.html((d) => d.name.length > 18 ? d.name.substr(0, 8) + "..." + d.name.substr(-8) : d.name)
+		console.log(truncationTypeProvided);
+		// truncate the legend label if it's too long
+		if (truncationTypeProvided && truncationTypeProvided !== "TruncationTypes.NONE") {
+			addedLegendItems
+				.append("text")
+				.merge(legendItems.select("text"))
+				.html(function(d) {
+					if (truncationTypeProvided === "TruncationTypes.MID_LINE") {
+						return d.name.length > truncationThresholdProvided ? d.name.substr(0, truncationNumCharacterProvided / 2)
+							+ "..." + d.name.substr(-truncationNumCharacterProvided / 2) : d.name;
+					} else if (truncationTypeProvided === "TruncationTypes.FRONT_LINE") {
+						return d.name.length > truncationThresholdProvided ? "..." + d.name.substr(-truncationNumCharacterProvided) : d.name;
+					} else if (truncationTypeProvided === "TruncationTypes.END_LINE") {
+						console.log(d.name.substr(0, truncationNumCharacterProvided));
+						return d.name.length > truncationThresholdProvided ? d.name.substr(0, truncationNumCharacterProvided) + "..." : d.name;
+					}
+				});
+		} else {
+			addedLegendItems
+				.append("text")
+				.merge(legendItems.select("text"))
+				.html((d) => d.name);
+		}
 
 		this.breakItemsIntoLines(addedLegendItems);
 

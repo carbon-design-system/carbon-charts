@@ -42,6 +42,21 @@ export class Axis extends Component {
 			"ticks",
 			"number"
 		);
+		const truncationTypeProvided = Tools.getProperty(
+			axisOptions,
+			"truncation",
+			"type"
+		);
+		const truncationThresholdProvided = Tools.getProperty(
+			axisOptions,
+			"truncation",
+			"threshold"
+		);
+		const truncationNumCharacterProvided = Tools.getProperty(
+			axisOptions,
+			"truncation",
+			"numCharacter"
+		);
 		const isNumberOfTicksProvided = numberOfTicksProvided !== null;
 		const isVerticalAxis =
 			axisPosition === AxisPositions.LEFT ||
@@ -415,7 +430,7 @@ export class Axis extends Component {
 
 		// truncate the label if it's too long
 		// only applies to discrete type
-		if (!isTimeScaleType && axisOptions.scaleType) {
+		if (truncationTypeProvided && truncationTypeProvided !== "TruncationTypes.NONE" && !isTimeScaleType && axisOptions.scaleType) {
 			const dataGroups = this.model.getDataGroups();
 			if (dataGroups.length > 0) {
 				let label_data_array = [];
@@ -435,13 +450,27 @@ export class Axis extends Component {
 					.selectAll("g.tick text")
 					.data(label_data_array)
 					.text(function(d) {
-						return d.length > 18 ? d.substr(0, 8) + "..." + d.substr(-8) : d;
+						if (truncationTypeProvided === "TruncationTypes.MID_LINE") {
+							return d.length > truncationThresholdProvided ? d.substr(0, truncationNumCharacterProvided / 2)
+								+ "..." + d.substr(-truncationNumCharacterProvided / 2) : d;
+						} else if (truncationTypeProvided === "TruncationTypes.FRONT_LINE") {
+							return d.length > truncationThresholdProvided ? "..." + d.substr(-truncationNumCharacterProvided) : d;
+						} else if (truncationTypeProvided === "TruncationTypes.END_LINE") {
+							return d.length > truncationThresholdProvided ? d.substr(0, truncationNumCharacterProvided) + "..." : d;
+						}
 					});
 				this.getInvisibleAxisRef()
 					.selectAll("g.tick text")
 					.data(activeDataGroups)
 					.text(function(d) {
-						return d.length > 18 ? d.substr(0, 8) + "..." + d.substr(-8) : d;
+						if (truncationTypeProvided === "TruncationTypes.MID_LINE") {
+							return d.length > truncationThresholdProvided ? d.substr(0, truncationNumCharacterProvided / 2)
+								+ "..." + d.substr(-truncationNumCharacterProvided / 2) : d;
+						} else if (truncationTypeProvided === "TruncationTypes.FRONT_LINE") {
+							return d.length > truncationThresholdProvided ? "..." + d.substr(-truncationNumCharacterProvided) : d;
+						} else if (truncationTypeProvided === "TruncationTypes.END_LINE") {
+							return d.length > truncationThresholdProvided ? d.substr(0, truncationNumCharacterProvided) + "..." : d;
+						}
 					});
 			}
 		}

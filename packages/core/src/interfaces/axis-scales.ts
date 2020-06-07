@@ -69,6 +69,19 @@ export interface AxisOptions {
 		 */
 		formatter?: Function;
 	};
+	/**
+	 * truncation configuration
+	 */
+	truncation?: {
+		/**
+		 * enable truncation for long labels
+		 */
+		enabled?: boolean;
+		/**
+		 * truncation type
+		 */
+		type?: string;
+	};
 }
 
 /**
