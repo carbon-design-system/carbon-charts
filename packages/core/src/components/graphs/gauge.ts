@@ -56,7 +56,7 @@ export class Gauge extends Component {
 
 	getArcType(): GaugeTypes {
 		const options = this.model.getOptions();
-		const { type } = options.gauge;
+		const type = Tools.getProperty(options, "gauge", "type");
 		return type;
 	}
 
@@ -82,7 +82,6 @@ export class Gauge extends Component {
 	}
 
 	render(animate = true) {
-		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
 		const value = this.getValue();
@@ -121,10 +120,11 @@ export class Gauge extends Component {
 			.startAngle(startAngle)
 			.endAngle(currentAngle);
 
+		const outerRadiusOffset = Tools.getProperty(options, "gauge", "hoverArc", "outerRadiusOffset");
 		// Set the hover arc radius
 		this.hoverArc = arc()
 			.innerRadius(innerRadius)
-			.outerRadius(radius + options.gauge.hoverArc.outerRadiusOffset)
+			.outerRadius(radius + outerRadiusOffset )
 			.startAngle(startAngle)
 			.endAngle(currentAngle);
 
@@ -132,20 +132,20 @@ export class Gauge extends Component {
 
 		DOMUtils.appendOrSelect(svg, "path.arc-background")
 			.attr("d", this.backgroundArc)
-			.attr("fill", options.gauge.arcBackgroundColor)
+			.attr("fill", Tools.getProperty(options, "gauge", "arcBackgroundColor"))
 			.attr("role", Roles.GROUP);
 
 		// Add data arc
 		DOMUtils.appendOrSelect(svg, "path.arc-foreground")
 			.attr("d", this.arc)
 			.classed("arc", true)
-			.attr("fill", options.gauge.arcForegroundColor);
+			.attr("fill", Tools.getProperty(options, "gauge", "arcForegroundColor"));
 
 		// Position Arc
 		const gaugeTranslateX =
-			radius + options.gauge.hoverArc.outerRadiusOffset; // Leaves space for the hover animation
+			radius + outerRadiusOffset; // Leaves space for the hover animation
 		const gaugeTranslateY =
-			radius + options.gauge.hoverArc.outerRadiusOffset;
+			radius + outerRadiusOffset;
 		svg.attr(
 			"transform",
 			`translate(${gaugeTranslateX}, ${gaugeTranslateY})`
@@ -163,13 +163,14 @@ export class Gauge extends Component {
 			"g.gauge-value-number"
 		).attr("transform", `translate(-10, 0)`); // Optical centering for the presence of the smaller % symbol
 
+		const numberFormatter = Tools.getProperty(options, "gauge", "numberFormatter");
 		const valueNumber = DOMUtils.appendOrSelect(
 			valueNumberG,
 			"text.gauge-value-number"
 		)
 			.style("font-size", `${valueFontSize}px`)
 			.attr("text-anchor", "middle")
-			.text(`${options.gauge.numberFormatter(value)}`);
+			.text(`${numberFormatter(value)}`);
 
 		const {
 			width: valueNumberWidth
@@ -195,8 +196,9 @@ export class Gauge extends Component {
 		)
 			.attr("text-anchor", "middle")
 			.style("font-size", `${deltaFontSize}px`)
-			.text(`${options.gauge.numberFormatter(delta)}%`);
+			.text(`${numberFormatter(delta)}%`);
 
+		// Add the caret for the delta number
 		const {
 			width: deltaNumberWidth
 		} = DOMUtils.getSVGElementSize(deltaNumber, { useBBox: true });
@@ -218,7 +220,7 @@ export class Gauge extends Component {
 			.attr("fill", "none");
 		DOMUtils.appendOrSelect(deltaArrow, "polygon.gauge-delta-arrow-polygon")
 			.attr("points", delta > 0 ? ARROW_UP : ARROW_DOWN)
-			.attr("fill", options.gauge.arrowColor);
+			.attr("fill", Tools.getProperty(options, "gauge", "arrowColor"));
 
 		// Add event listeners
 		this.addEventListeners();
@@ -227,8 +229,8 @@ export class Gauge extends Component {
 	getInnerRadius() {
 		// Compute the outer radius needed
 		const radius = this.computeRadius();
-		const options = this.model.getOptions();
-		return radius - options.gauge.arcWidth;
+		const arcWidth = Tools.getProperty(this.model.getOptions(), "gauge", "arcWidth");
+		return radius - arcWidth;
 	}
 
 	// Highlight elements that match the hovered legend item
@@ -325,6 +327,7 @@ export class Gauge extends Component {
 	protected computeRadius() {
 		const arcType = this.getArcType();
 		const options = this.model.getOptions();
+		const outerRadiusOffset = Tools.getProperty(options, "gauge", "hoverArc", "outerRadiusOffset");
 
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
@@ -334,6 +337,6 @@ export class Gauge extends Component {
 				? Math.min(width / 2, height)
 				: Math.min(width / 2, height / 2);
 
-		return radius - options.gauge.hoverArc.outerRadiusOffset;
+		return radius - outerRadiusOffset;
 	}
 }
