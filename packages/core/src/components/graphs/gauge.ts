@@ -8,11 +8,6 @@ import { Tools } from "../../tools";
 import { select } from "d3-selection";
 import { arc } from "d3-shape";
 
-const ARC_TYPES_RATIOS = {
-	semi: 0.5,
-	full: 1
-};
-
 export class Gauge extends Component {
 	type = "gauge";
 
@@ -54,15 +49,10 @@ export class Gauge extends Component {
 		return data.find((d) => d.group === "delta").value;
 	}
 
-	getArcType(): GaugeTypes {
+	getArcRatio(): number {
 		const options = this.model.getOptions();
 		const type = Tools.getProperty(options, "gauge", "type");
-		return type;
-	}
-
-	getArcRatio(): number {
-		const type = this.getArcType();
-		const arcRatio = ARC_TYPES_RATIOS[type];
+		const arcRatio = type === GaugeTypes.FULL ? 1 : 0.5;
 		if (arcRatio === undefined) {
 			throw new Error("Gauge chart arc type not compatible");
 		}
@@ -88,7 +78,7 @@ export class Gauge extends Component {
 		const valueRatio = this.getValueRatio();
 		const delta = this.getDelta();
 		const arcSize = this.getArcSize();
-		const arcType = this.getArcType();
+		const arcType = Tools.getProperty(options, "gauge", "arcType");
 		const startAngle = this.getStartAngle();
 		const rotationAngle = valueRatio * arcSize;
 		const currentAngle = startAngle + rotationAngle;
@@ -212,8 +202,10 @@ export class Gauge extends Component {
 			.attr("height", arrowSize)
 			.attr("viewBox", `0 0 16 16`);
 
+		// arrow paths for delta
 		const ARROW_UP = "4,10 8,6 12,10";
 		const ARROW_DOWN = "12,6 8,10 4,6";
+
 		DOMUtils.appendOrSelect(deltaArrow, "rect.gauge-delta-arrow-backdrop") // Needed to correctly size SVG in Firefox
 			.attr("width", `16`)
 			.attr("height", `16`)
@@ -325,8 +317,8 @@ export class Gauge extends Component {
 
 	// Helper functions
 	protected computeRadius() {
-		const arcType = this.getArcType();
 		const options = this.model.getOptions();
+		const arcType = Tools.getProperty(options, "gauge", "arcType");
 		const outerRadiusOffset = Tools.getProperty(options, "gauge", "hoverArc", "outerRadiusOffset");
 
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
