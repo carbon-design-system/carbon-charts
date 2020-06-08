@@ -1,6 +1,9 @@
 import { getParameters } from "codesandbox/lib/api/define";
 
-const { version: libraryVersion } = require("@carbon/charts/package.json");
+const packageJSON = require("@carbon/charts/package.json");
+const libraryVersion = packageJSON.version;
+const carbonComponentsVersion = packageJSON.devDependencies["carbon-components"];
+
 const ibmPlexFontCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
 `;
 
@@ -54,6 +57,7 @@ new ${chartComponent}(chartHolder, {
 		},
 		dependencies: {
 			"@carbon/charts": libraryVersion,
+			"carbon-components": carbonComponentsVersion,
 			d3: "5.9.2",
 		},
 		devDependencies: {
@@ -110,6 +114,7 @@ ReactDOM.render(<App />, document.getElementById("root"));
 			react: "16.12.0",
 			"react-dom": "16.12.0",
 			"react-scripts": "3.0.1",
+			"carbon-components": carbonComponentsVersion,
 		},
 	};
 
@@ -289,6 +294,7 @@ new Vue({
 				"@carbon/charts": libraryVersion,
 				"@carbon/charts-vue": libraryVersion,
 				"@vue/cli-plugin-babel": "4.1.1",
+				"carbon-components": carbonComponentsVersion,
 				d3: "5.15.0",
 				vue: "^2.6.11",
 			},
@@ -365,6 +371,7 @@ export default app;
 		dependencies: {
 			"@carbon/charts": libraryVersion,
 			"@carbon/charts-svelte": libraryVersion,
+			"carbon-components": carbonComponentsVersion,
 			d3: "5.12.0",
 			svelte: "3.20.x",
 		},
