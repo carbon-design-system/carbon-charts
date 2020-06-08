@@ -17,6 +17,10 @@ import {
  */
 export interface BaseChartOptions {
 	/**
+	 * Optionally specify a title for the chart
+	 */
+	title?: string;
+	/**
 	 * boolean to disable animations (enabled by default)
 	 */
 	animations?: boolean;
