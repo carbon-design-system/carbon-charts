@@ -277,6 +277,22 @@ export class ChartModel {
 			});
 		}
 
+		// Updates selected groups
+		const updatedActiveItems = dataGroups.filter(group => group.status === ACTIVE);
+		const options = this.getOptions();
+
+		const hasUpdatedDeactivatedItems = dataGroups.some(
+			group => group.status === DISABLED
+		);
+
+		// If there are deactivated items, map the item name into selected groups
+		if (hasUpdatedDeactivatedItems) {
+			options.data.selectedGroups = updatedActiveItems.map(activeItem => activeItem.name);
+		} else {
+			// If every item is active, clear array
+			options.data.selectedGroups = [];
+		};
+
 		// dispatch legend filtering event with the status of all the dataLabels
 		this.services.events.dispatchEvent(Events.Legend.ITEMS_UPDATE, {
 			dataGroups,
@@ -286,28 +302,6 @@ export class ChartModel {
 		this.set({
 			dataGroups,
 		});
-	}
-
-	/**
-	 * Updates selected groups
-	 */
-	updateSelectedGroups() {
-		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
-		const dataGroups = this.getDataGroups();
-		const activeItems = dataGroups.filter(group => group.status === ACTIVE);
-		const options = this.getOptions();
-
-		const hasDeactivatedItems = dataGroups.some(
-			group => group.status === DISABLED
-		);
-
-		// If there are deactivated items, map the item name into selected groups
-		if (hasDeactivatedItems) {
-			options.data.selectedGroups = activeItems.map(activeItem => activeItem.name);
-		} else {
-			// If every item is active, clear array
-			options.data.selectedGroups = [];
-		};
 	}
 
 	/**
