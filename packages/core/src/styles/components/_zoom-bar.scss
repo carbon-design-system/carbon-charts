@@ -1,11 +1,25 @@
 g.#{$prefix}--#{$charts-prefix}--zoom-bar {
-	rect.zoom-handle.dragging,
-	rect.zoom-handle:hover {
-		fill: black;
-		cursor: col-resize;
+	rect.zoom-bg {
+		fill: $ui-background;
+		stroke: $ui-01;
 	}
 
-	rect.zoom-handle-bar {
-		pointer-events: none;
+	path.zoom-graph-line {
+		stroke: $ui-04;
+		stroke-width: 3;
+		fill: none;
+	}
+
+	path.zoom-graph-area {
+		fill: $ui-03;
+		stroke: $ui-04;
+	}
+
+	g.brush rect.handle {
+		fill: $icon-02;
+	}
+
+	g.brush rect.handle-bar {
+		fill: $ui-02;
 	}
 }
