@@ -268,7 +268,6 @@ export class Legend extends Component {
 				const clickedItemData = clickedItem.datum() as any;
 
 				self.model.toggleDataLabel(clickedItemData.name);
-				self.model.updateSelectedGroups();
 			})
 			.on("mouseout", function () {
 				const hoveredItem = select(this);
