@@ -1,4 +1,5 @@
 import trLocaleObject from "date-fns/locale/tr/index";
+import { TruncationTypes } from "../../src/interfaces/enums";
 
 export const groupedBarData = [
 	{ group: "Dataset 1", key: "Qty", value: 65000 },
@@ -92,18 +93,18 @@ export const simpleBarLongLabelOptions = {
 		bottom: {
 			mapsTo: "group",
 			scaleType: "labels",
-			"truncation": {
-				"type": "TruncationTypes.END_LINE",
-				"threshold": 10,
-				"numCharacter": 6
+			truncation: {
+				type: TruncationTypes.END_LINE,
+				threshold: 10,
+				numCharacter: 12
 			},
 		},
 	},
 	legend: {
 		truncation: {
-			type: "TruncationTypes.END_LINE",
-			"threshold": 10,
-			"numCharacter": 6
+			type: TruncationTypes.END_LINE,
+			threshold: 10,
+			numCharacter: 12
 		}
 	}
 };
@@ -145,10 +146,10 @@ export const simpleHorizontalBarLongLabelOptions = {
 		left: {
 			mapsTo: "group",
 			scaleType: "labels",
-			"truncation": {
-				"type": "TruncationTypes.MID_LINE",
-				"threshold": 10,
-				"numCharacter": 8
+			truncation: {
+				type: TruncationTypes.MID_LINE,
+				threshold: 10,
+				numCharacter: 14
 			},
 		},
 		bottom: {
@@ -157,9 +158,9 @@ export const simpleHorizontalBarLongLabelOptions = {
 	},
 	legend: {
 		truncation: {
-			type: "TruncationTypes.MID_LINE",
-			"threshold": 15,
-			"numCharacter": 12
+			type: TruncationTypes.MID_LINE,
+			threshold: 15,
+			numCharacter: 12
 		}
 	}
 };

@@ -2,7 +2,7 @@
 import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { LegendOrientations, Roles, Events, TooltipTypes } from "../../interfaces";
+import { LegendOrientations, Roles, Events, TooltipTypes, TruncationTypes } from "../../interfaces";
 import { DOMUtils } from "../../services";
 
 // D3 Imports
@@ -33,21 +33,30 @@ export class Legend extends Component {
 		const checkboxRadius = options.legend.checkbox.radius;
 
 		// Truncation
-		const truncationTypeProvided = Tools.getProperty(
+		let truncationTypeProvided = Tools.getProperty(
 			legendOptions,
 			"truncation",
 			"type"
 		);
-		const truncationThresholdProvided = Tools.getProperty(
+		let truncationThresholdProvided = Tools.getProperty(
 			legendOptions,
 			"truncation",
 			"threshold"
 		);
-		const truncationNumCharacterProvided = Tools.getProperty(
+		let truncationNumCharacterProvided = Tools.getProperty(
 			legendOptions,
 			"truncation",
 			"numCharacter"
 		);
+		// default config for truncation
+		// set type to END_LINE
+		// set threshold to 12
+		// set number of characters to show to 14
+		if (!truncationTypeProvided) {
+			truncationTypeProvided = TruncationTypes.END_LINE;
+			truncationThresholdProvided = 16;
+			truncationNumCharacterProvided = 14;
+		}
 
 		addedLegendItems
 			.append("rect")
@@ -66,21 +75,16 @@ export class Legend extends Component {
 				return d.status === options.legend.items.status.ACTIVE;
 			});
 
-		console.log(truncationTypeProvided);
 		// truncate the legend label if it's too long
-		if (truncationTypeProvided && truncationTypeProvided !== "TruncationTypes.NONE") {
+		if (truncationTypeProvided !== TruncationTypes.NONE) {
 			addedLegendItems
 				.append("text")
 				.merge(legendItems.select("text"))
 				.html(function(d) {
-					if (truncationTypeProvided === "TruncationTypes.MID_LINE") {
-						return d.name.length > truncationThresholdProvided ? d.name.substr(0, truncationNumCharacterProvided / 2)
-							+ "..." + d.name.substr(-truncationNumCharacterProvided / 2) : d.name;
-					} else if (truncationTypeProvided === "TruncationTypes.FRONT_LINE") {
-						return d.name.length > truncationThresholdProvided ? "..." + d.name.substr(-truncationNumCharacterProvided) : d.name;
-					} else if (truncationTypeProvided === "TruncationTypes.END_LINE") {
-						console.log(d.name.substr(0, truncationNumCharacterProvided));
-						return d.name.length > truncationThresholdProvided ? d.name.substr(0, truncationNumCharacterProvided) + "..." : d.name;
+					if (d.name.length > truncationThresholdProvided) {
+						return Tools.truncateLabel(d.name, truncationTypeProvided, truncationNumCharacterProvided);
+					} else {
+						return d.name;
 					}
 				});
 		} else {

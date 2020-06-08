@@ -22,6 +22,16 @@ export enum AxisPositions {
 }
 
 /**
+ * enum of all possible truncation types
+ */
+export enum TruncationTypes {
+	END_LINE = "END_LINE",
+	MID_LINE = "MID_LINE",
+	FRONT_LINE = "FRONT_LINE",
+	NONE = "NONE",
+}
+
+/**
  * enum of all possible cartesian orientations
  * to be used for determining the orientation
  * of graphs being draw over

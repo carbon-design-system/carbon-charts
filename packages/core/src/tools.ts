@@ -3,6 +3,7 @@ import {
 	AxisChartOptions,
 	CartesianOrientations,
 	ScaleTypes,
+	TruncationTypes
 } from "./interfaces";
 
 import {
@@ -210,6 +211,24 @@ export namespace Tools {
 		return percentage % 1 !== 0
 			? parseFloat(percentage.toFixed(1))
 			: percentage;
+	}
+
+		/**
+	 * Truncate the labels
+	 * @export
+	 * @param {any} fullText
+	 * @param {any} truncationType
+	 * @param {any} numCharacter
+	 * @returns Truncated text
+	 */
+	export function truncateLabel(fullText, truncationType, numCharacter) {
+		if (truncationType === TruncationTypes.MID_LINE) {
+			return fullText.substr(0, numCharacter / 2) + "..." + fullText.substr(-numCharacter / 2);
+		} else if (truncationType === TruncationTypes.FRONT_LINE) {
+			return "..." + fullText.substr(-numCharacter);
+		} else if (truncationType === TruncationTypes.END_LINE) {
+			return fullText.substr(0, numCharacter) + "...";
+		}
 	}
 
 	/**************************************

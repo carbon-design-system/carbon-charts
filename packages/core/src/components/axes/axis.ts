@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { AxisPositions, Events, ScaleTypes, Roles, TooltipTypes } from "../../interfaces";
+import { AxisPositions, Events, ScaleTypes, Roles, TooltipTypes, TruncationTypes } from "../../interfaces";
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
@@ -42,21 +42,30 @@ export class Axis extends Component {
 			"ticks",
 			"number"
 		);
-		const truncationTypeProvided = Tools.getProperty(
+		let truncationTypeProvided = Tools.getProperty(
 			axisOptions,
 			"truncation",
 			"type"
 		);
-		const truncationThresholdProvided = Tools.getProperty(
+		let truncationThresholdProvided = Tools.getProperty(
 			axisOptions,
 			"truncation",
 			"threshold"
 		);
-		const truncationNumCharacterProvided = Tools.getProperty(
+		let truncationNumCharacterProvided = Tools.getProperty(
 			axisOptions,
 			"truncation",
 			"numCharacter"
 		);
+		// default config for truncation
+		// set type to END_LINE
+		// set threshold to 12
+		// set number of characters to show to 14
+		if (!truncationTypeProvided) {
+			truncationTypeProvided = TruncationTypes.END_LINE;
+			truncationThresholdProvided = 16;
+			truncationNumCharacterProvided = 14;
+		}
 		const isNumberOfTicksProvided = numberOfTicksProvided !== null;
 		const isVerticalAxis =
 			axisPosition === AxisPositions.LEFT ||
@@ -430,7 +439,7 @@ export class Axis extends Component {
 
 		// truncate the label if it's too long
 		// only applies to discrete type
-		if (truncationTypeProvided && truncationTypeProvided !== "TruncationTypes.NONE" && !isTimeScaleType && axisOptions.scaleType) {
+		if (truncationTypeProvided !== TruncationTypes.NONE && !isTimeScaleType && axisOptions.scaleType) {
 			const dataGroups = this.model.getDataGroups();
 			if (dataGroups.length > 0) {
 				let label_data_array = [];
@@ -450,26 +459,20 @@ export class Axis extends Component {
 					.selectAll("g.tick text")
 					.data(label_data_array)
 					.text(function(d) {
-						if (truncationTypeProvided === "TruncationTypes.MID_LINE") {
-							return d.length > truncationThresholdProvided ? d.substr(0, truncationNumCharacterProvided / 2)
-								+ "..." + d.substr(-truncationNumCharacterProvided / 2) : d;
-						} else if (truncationTypeProvided === "TruncationTypes.FRONT_LINE") {
-							return d.length > truncationThresholdProvided ? "..." + d.substr(-truncationNumCharacterProvided) : d;
-						} else if (truncationTypeProvided === "TruncationTypes.END_LINE") {
-							return d.length > truncationThresholdProvided ? d.substr(0, truncationNumCharacterProvided) + "..." : d;
+						if (d.length > truncationThresholdProvided) {
+							return Tools.truncateLabel(d, truncationTypeProvided, truncationNumCharacterProvided);
+						} else {
+							return d;
 						}
 					});
 				this.getInvisibleAxisRef()
 					.selectAll("g.tick text")
 					.data(activeDataGroups)
 					.text(function(d) {
-						if (truncationTypeProvided === "TruncationTypes.MID_LINE") {
-							return d.length > truncationThresholdProvided ? d.substr(0, truncationNumCharacterProvided / 2)
-								+ "..." + d.substr(-truncationNumCharacterProvided / 2) : d;
-						} else if (truncationTypeProvided === "TruncationTypes.FRONT_LINE") {
-							return d.length > truncationThresholdProvided ? "..." + d.substr(-truncationNumCharacterProvided) : d;
-						} else if (truncationTypeProvided === "TruncationTypes.END_LINE") {
-							return d.length > truncationThresholdProvided ? d.substr(0, truncationNumCharacterProvided) + "..." : d;
+						if (d.length > truncationThresholdProvided) {
+							return Tools.truncateLabel(d, truncationTypeProvided, truncationNumCharacterProvided);
+						} else {
+							return d;
 						}
 					});
 			}
