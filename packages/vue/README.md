@@ -21,6 +21,8 @@ instead:
 yarn add @carbon/charts @carbon/charts-vue d3
 ```
 
+**Note:** you'd also need to install `carbon-components` if you're not using a bundled version of the library.
+
 ## Step-by-step instructions
 
 [Read on carbondesignsystem.com](https://www.carbondesignsystem.com/data-visualization/getting-started/vue)
