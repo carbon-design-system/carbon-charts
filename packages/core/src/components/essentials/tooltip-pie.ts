@@ -8,6 +8,8 @@ export class TooltipPie extends Tooltip {
 		if (type === TooltipTypes.TITLE) {
 			const title = this.model.getOptions().title;
 			return `<div class="title-tooltip"><text>${title}</text></div>`;
+		} else if (type === TooltipTypes.LEGEND) {
+			return `<div class="title-tooltip"><text>${d.name}</text></div>`;
 		}
 
 		const dataVal = d.data;

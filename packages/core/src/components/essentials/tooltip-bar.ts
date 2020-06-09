@@ -152,6 +152,15 @@ export class TooltipBar extends Tooltip {
 			.node()
 			.getBoundingClientRect();
 		const barPosition = hoveredElement.getBoundingClientRect();
+		const { position: axisPosition } = this.configs;
+		const options = this.model.getOptions();
+		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		let truncationThresholdProvided = Tools.getProperty(
+			axisOptions,
+			"truncation",
+			"threshold"
+		);
+		if (!truncationThresholdProvided) { truncationThresholdProvided = 18; }
 
 		const { verticalOffset } = this.model.getOptions().tooltip.datapoint;
 		// if there is a negative value bar chart, need to place the tooltip below the bar
@@ -168,7 +177,8 @@ export class TooltipBar extends Tooltip {
 			return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
 		} else {
 			// positive bars
-			if ((type === TooltipTypes.AXISLABEL && data.length > 18) || (type === TooltipTypes.LEGEND && data.name.length > 18)) {
+			if ((type === TooltipTypes.AXISLABEL && data.length > truncationThresholdProvided) ||
+				(type === TooltipTypes.LEGEND && data.name.length > truncationThresholdProvided)) {
 				const tooltipPos = {
 					left:
 						barPosition.left -

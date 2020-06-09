@@ -63,7 +63,9 @@ export class Tooltip extends Component {
 						"tooltip",
 						"gridline",
 						"enabled"
-					))
+					)) ||
+				(e.detail.type === TooltipTypes.LEGEND) ||
+				(e.detail.type === TooltipTypes.AXISLABEL)
 			) {
 				let data = select(event.target).datum() as any;
 
@@ -72,11 +74,11 @@ export class Tooltip extends Component {
 				if (e.detail.multidata) {
 					// multi tooltip
 					data = e.detail.multidata;
-					defaultHTML = this.getMultilineTooltipHTML(data);
+					defaultHTML = this.getMultilineTooltipHTML(data, e.detail.type);
 				} else {
 					defaultHTML = this.getTooltipHTML(
 						data,
-						TooltipTypes.DATAPOINT
+						e.detail.type
 					);
 				}
 
@@ -146,6 +148,8 @@ export class Tooltip extends Component {
 		if (type === TooltipTypes.TITLE) {
 			const title = this.model.getOptions().title;
 			return `<div class="title-tooltip"><text>${title}</text></div>`;
+		} else if (type === TooltipTypes.LEGEND) {
+			return `<div class="title-tooltip"><text>${data.name}</text></div>`;
 		}
 		// this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
 		const dataVal = Tools.getProperty(data, "data") ? data.data : data;
@@ -172,7 +176,7 @@ export class Tooltip extends Component {
 				</div>`;
 	}
 
-	getMultilineTooltipHTML(data: any) {
+	getMultilineTooltipHTML(data: any, type: TooltipTypes) {
 		// sort them so they are in the same order as the graph
 		data.sort((a, b) => b.value - a.value);
 

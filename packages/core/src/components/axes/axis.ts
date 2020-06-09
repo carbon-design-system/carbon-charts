@@ -439,12 +439,12 @@ export class Axis extends Component {
 
 		// truncate the label if it's too long
 		// only applies to discrete type
-		if (truncationTypeProvided !== TruncationTypes.NONE && !isTimeScaleType && axisOptions.scaleType) {
-			const dataGroups = this.model.getDataGroups();
+		if (truncationTypeProvided !== TruncationTypes.NONE && !isTimeScaleType && axisOptions.scaleType === "labels") {
+			const dataGroups = this.model.getDataValuesGroupedByKeys();
 			if (dataGroups.length > 0) {
 				let label_data_array = [];
-				const firstDataGroupName = dataGroups[0].name;
-				const activeDataGroups = this.model.getActiveDataGroups().map(d => d.name);
+				const firstDataGroupName = dataGroups[0].sharedStackKey;
+				const activeDataGroups = dataGroups.map(d => d.sharedStackKey);
 				if (activeDataGroups.length === dataGroups.length) {
 					label_data_array.push(firstDataGroupName);
 				}
@@ -516,7 +516,7 @@ export class Axis extends Component {
 						datum,
 					}
 				);
-				if (!isTimeScaleType && axisOptions.scaleType) {
+				if (!isTimeScaleType && axisOptions.scaleType && axisOptions.scaleType === "labels") {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						hoveredElement: select(this),
 						type: TooltipTypes.AXISLABEL,
@@ -536,7 +536,7 @@ export class Axis extends Component {
 					element: select(this),
 					datum,
 				});
-				if (!isTimeScaleType && axisOptions.scaleType) {
+				if (!isTimeScaleType && axisOptions.scaleType && axisOptions.scaleType === "labels") {
 					self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
 						hoveredElement: select(this),
 					});

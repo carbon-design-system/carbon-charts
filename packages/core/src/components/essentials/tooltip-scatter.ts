@@ -7,6 +7,10 @@ export class TooltipScatter extends Tooltip {
 		if (type === TooltipTypes.TITLE) {
 			// the main tooltip component handles title styles
 			return super.getTooltipHTML(datum, type);
+		} else if (type === TooltipTypes.LEGEND) {
+			return `<div class="title-tooltip"><text>${datum.name}</text></div>`;
+		} else if (type === TooltipTypes.AXISLABEL) {
+			return `<div class="title-tooltip"><text>${datum}</text></div>`;
 		}
 
 		const { groupMapsTo } = this.model.getOptions().data;
