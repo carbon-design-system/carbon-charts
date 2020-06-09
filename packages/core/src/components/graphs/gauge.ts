@@ -37,7 +37,8 @@ export class Gauge extends Component {
 
 	getDelta(): number {
 		const data = this.model.getData();
-		return data.find((d) => d.group === "delta").value;
+		const delta = data.find((d) => d.group === "delta");
+		return delta ? delta.value : null;
 	}
 
 	getArcRatio(): number {
@@ -61,6 +62,22 @@ export class Gauge extends Component {
 		}
 		return -arcSize / 2;
 	}
+
+	// use provided arrow direction or default to using the delta
+	getArrow(delta): string {
+		const options = this.model.getOptions();
+		const arrowDirection = Tools.getProperty(options, "gauge", "arrowDirection");
+
+		switch (arrowDirection) {
+			case ArrowDirections.UP:
+				return ARROW_UP;
+			case ArrowDirections.DOWN:
+				return ARROW_DOWN;
+			default:
+				return delta > 0 ? ARROW_UP : ARROW_DOWN;
+		}
+	}
+
 
 	render(animate = true) {
 		const self = this;
@@ -143,14 +160,14 @@ export class Gauge extends Component {
 		const {
 			width: valueNumberWidth
 		} = DOMUtils.getSVGElementSize(valueNumber, { useBBox: true });
+
 		DOMUtils.appendOrSelect(valueNumberG, "text.gauge-value-symbol")
 			.style("font-size", `${valueFontSize / 2}px`)
 			.attr("x", valueNumberWidth / 2)
 			.text("%");
 
-
 		// Add the smaller number of the delta
-		const deltaNumberG = DOMUtils.appendOrSelect(
+		const deltaGroup = DOMUtils.appendOrSelect(
 			numbersG,
 			"g.gauge-delta"
 		).attr(
@@ -158,58 +175,56 @@ export class Gauge extends Component {
 			`translate(0, ${deltaFontSize + distanceBetweenNumbers})`
 		);
 
-		const deltaNumber = DOMUtils.appendOrSelect(
-			deltaNumberG,
-			"text.gauge-delta-number"
-		)
+		console.log(delta);
+		const deltaNumber = deltaGroup.selectAll("text.gauge-delta-number")
+			.data(delta != null ? [delta] : []);
+
+		deltaNumber
+			.enter()
+			.append("text")
+			.merge(deltaNumber)
+			.attr("class", "gauge-delta-number")
 			.attr("text-anchor", "middle")
 			.style("font-size", `${deltaFontSize}px`)
-			.text(`${numberFormatter(delta)}%`);
+			.text(d => `${numberFormatter(d)}%`);
 
 		// Add the caret for the delta number
 		const {
 			width: deltaNumberWidth
-		} = DOMUtils.getSVGElementSize(deltaNumber, { useBBox: true });
-		const deltaArrow = DOMUtils.appendOrSelect(
-			deltaNumberG,
-			"svg.gauge-delta-arrow"
-		)
+		} = DOMUtils.getSVGElementSize(DOMUtils.appendOrSelect(svg, "g.gauge-delta"), { useBBox: true });
+
+		const deltaArrow = deltaGroup.selectAll("svg.gauge-delta-arrow")
+			.data(delta != null ? [delta] : []);
+
+		deltaArrow
+			.enter()
+			.append("svg")
+			.merge(deltaArrow)
+			.attr("class", "gauge-delta-arrow")
 			.attr("x", -arrowSize - deltaNumberWidth / 2)
 			.attr("y", -arrowSize / 2 - deltaFontSize * 0.35)
 			.attr("width", arrowSize)
 			.attr("height", arrowSize)
 			.attr("viewBox", `0 0 16 16`);
 
-
-		const status = Tools.getProperty(options, "gauge", "status");
-
-		DOMUtils.appendOrSelect(deltaArrow, "rect.gauge-delta-arrow-backdrop") // Needed to correctly size SVG in Firefox
+		// Needed to correctly size SVG in Firefox
+		DOMUtils.appendOrSelect(deltaArrow, "rect.gauge-delta-arrow-backdrop")
 			.attr("width", `16`)
 			.attr("height", `16`)
 			.attr("fill", "none");
 
-		// draw the arrow with status
+		// Draw the arrow with status
+		const status = Tools.getProperty(options, "gauge", "status");
 		DOMUtils.appendOrSelect(deltaArrow, "polygon.gauge-delta-arrow-polygon")
-			.classed(`status--${status}`, status != null )
-			.attr("fill", () => status == null ? "currentColor" : null )
+			.classed(`status--${status}`, status != null)
+			.attr("fill", () => status == null ? "currentColor" : null)
 			.attr("points", self.getArrow(delta));
+
+		deltaArrow.exit().remove();
+		deltaNumber.exit().remove();
+
 		// Add event listeners
 		this.addEventListeners();
-	}
-
-	// use provided arrow direction or default to using the delta
-	getArrow(delta): string {
-		const options = this.model.getOptions();
-		const arrowDirection = Tools.getProperty(options, "gauge", "arrowDirection");
-
-		switch (arrowDirection) {
-			case ArrowDirections.UP:
-				return ARROW_UP;
-			case ArrowDirections.DOWN:
-				return ARROW_DOWN;
-			default:
-				return delta > 0 ? ARROW_UP : ARROW_DOWN;
-		}
 	}
 
 	getInnerRadius() {
