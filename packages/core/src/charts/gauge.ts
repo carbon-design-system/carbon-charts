@@ -1,5 +1,5 @@
 // Internal Imports
-import { PieChart } from "./pie";
+import { Chart } from "../chart";
 import * as Configuration from "../configuration";
 import { ChartConfig, GaugeChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
@@ -11,9 +11,9 @@ import {
 	TooltipPie
 } from "../components/index";
 
-export class GaugeChart extends PieChart {
+export class GaugeChart extends Chart {
 	constructor(holder: Element, chartConfigs: ChartConfig<GaugeChartOptions>) {
-		super(holder, chartConfigs, true);
+		super(holder, chartConfigs);
 
 		// Merge the default options for this chart
 		// With the user provided options

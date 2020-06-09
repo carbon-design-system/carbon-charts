@@ -1,12 +1,16 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { Roles, TooltipTypes, Events, GaugeTypes } from "../../interfaces";
+import { Roles, TooltipTypes, Events, GaugeTypes, Statuses, ArrowDirections } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
 import { select } from "d3-selection";
 import { arc } from "d3-shape";
+
+// arrow paths for delta
+const ARROW_UP = "4,10 8,6 12,10";
+const ARROW_DOWN = "12,6 8,10 4,6";
 
 export class Gauge extends Component {
 	type = "gauge";
@@ -15,23 +19,10 @@ export class Gauge extends Component {
 	// So that addEventListeners()
 	// Can access them
 	arc: any;
-	hoverArc: any;
 	backgroundArc: any;
 
 	init() {
 		const eventsFragment = this.services.events;
-
-		// Highlight correct circle on legend item hovers
-		eventsFragment.addEventListener(
-			"legend-item-onhover",
-			this.handleLegendOnHover
-		);
-
-		// Un-highlight circles on legend item mouseouts
-		eventsFragment.addEventListener(
-			"legend-item-onmouseout",
-			this.handleLegendMouseOut
-		);
 	}
 
 	getValue(): number {
@@ -72,6 +63,7 @@ export class Gauge extends Component {
 	}
 
 	render(animate = true) {
+		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
 		const value = this.getValue();
@@ -110,35 +102,21 @@ export class Gauge extends Component {
 			.startAngle(startAngle)
 			.endAngle(currentAngle);
 
-		const outerRadiusOffset = Tools.getProperty(options, "gauge", "hoverArc", "outerRadiusOffset");
-		// Set the hover arc radius
-		this.hoverArc = arc()
-			.innerRadius(innerRadius)
-			.outerRadius(radius + outerRadiusOffset )
-			.startAngle(startAngle)
-			.endAngle(currentAngle);
-
-		// Add background arc
-
+		// draw the container
 		DOMUtils.appendOrSelect(svg, "path.arc-background")
 			.attr("d", this.backgroundArc)
-			.attr("fill", Tools.getProperty(options, "gauge", "arcBackgroundColor"))
 			.attr("role", Roles.GROUP);
 
 		// Add data arc
 		DOMUtils.appendOrSelect(svg, "path.arc-foreground")
 			.attr("d", this.arc)
 			.classed("arc", true)
-			.attr("fill", Tools.getProperty(options, "gauge", "arcForegroundColor"));
+			.attr("fill", Tools.getProperty(options, "gauge", "fillColor"));
 
 		// Position Arc
-		const gaugeTranslateX =
-			radius + outerRadiusOffset; // Leaves space for the hover animation
-		const gaugeTranslateY =
-			radius + outerRadiusOffset;
 		svg.attr(
 			"transform",
-			`translate(${gaugeTranslateX}, ${gaugeTranslateY})`
+			`translate(${radius}, ${radius})`
 		);
 
 		// Add the numbers at the center
@@ -202,20 +180,36 @@ export class Gauge extends Component {
 			.attr("height", arrowSize)
 			.attr("viewBox", `0 0 16 16`);
 
-		// arrow paths for delta
-		const ARROW_UP = "4,10 8,6 12,10";
-		const ARROW_DOWN = "12,6 8,10 4,6";
+
+		const status = Tools.getProperty(options, "gauge", "status");
 
 		DOMUtils.appendOrSelect(deltaArrow, "rect.gauge-delta-arrow-backdrop") // Needed to correctly size SVG in Firefox
 			.attr("width", `16`)
 			.attr("height", `16`)
 			.attr("fill", "none");
-		DOMUtils.appendOrSelect(deltaArrow, "polygon.gauge-delta-arrow-polygon")
-			.attr("points", delta > 0 ? ARROW_UP : ARROW_DOWN)
-			.attr("fill", Tools.getProperty(options, "gauge", "arrowColor"));
 
+		// draw the arrow with status
+		DOMUtils.appendOrSelect(deltaArrow, "polygon.gauge-delta-arrow-polygon")
+			.classed(`status--${status}`, status != null )
+			.attr("fill", () => status == null ? "currentColor" : null )
+			.attr("points", self.getArrow(delta));
 		// Add event listeners
 		this.addEventListeners();
+	}
+
+	// use provided arrow direction or default to using the delta
+	getArrow(delta): string {
+		const options = this.model.getOptions();
+		const arrowDirection = Tools.getProperty(options, "gauge", "arrowDirection");
+
+		switch (arrowDirection) {
+			case ArrowDirections.UP:
+				return ARROW_UP;
+			case ArrowDirections.DOWN:
+				return ARROW_DOWN;
+			default:
+				return delta > 0 ? ARROW_UP : ARROW_DOWN;
+		}
 	}
 
 	getInnerRadius() {
@@ -223,30 +217,6 @@ export class Gauge extends Component {
 		const radius = this.computeRadius();
 		const arcWidth = Tools.getProperty(this.model.getOptions(), "gauge", "arcWidth");
 		return radius - arcWidth;
-	}
-
-	// Highlight elements that match the hovered legend item
-	handleLegendOnHover = (event: CustomEvent) => {
-		const { hoveredElement } = event.detail;
-
-		this.parent
-			.selectAll("path.arc")
-			.transition(
-				this.services.transitions.getTransition("legend-hover-bar")
-			)
-			.attr("opacity", (d) =>
-				d.data.label !== hoveredElement.datum()["key"] ? 0.3 : 1
-			);
-	}
-
-	// Un-highlight all elements
-	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent
-			.selectAll("path.arc")
-			.transition(
-				this.services.transitions.getTransition("legend-mouseout-bar")
-			)
-			.attr("opacity", 1);
 	}
 
 	addEventListeners() {
@@ -262,15 +232,6 @@ export class Gauge extends Component {
 			})
 			.on("mousemove", function(datum) {
 				const hoveredElement = select(this);
-
-				hoveredElement
-					.classed("hovered", true)
-					.transition(
-						self.services.transitions.getTransition(
-							"pie_slice_mouseover"
-						)
-					)
-					.attr("d", self.hoverArc);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_MOUSEMOVE, {
@@ -293,14 +254,6 @@ export class Gauge extends Component {
 			})
 			.on("mouseout", function(datum) {
 				const hoveredElement = select(this);
-				hoveredElement
-					.classed("hovered", false)
-					.transition(
-						self.services.transitions.getTransition(
-							"gauge_slice_mouseover"
-						)
-					)
-					.attr("d", self.arc);
 
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_MOUSEOUT, {
@@ -319,7 +272,6 @@ export class Gauge extends Component {
 	protected computeRadius() {
 		const options = this.model.getOptions();
 		const arcType = Tools.getProperty(options, "gauge", "arcType");
-		const outerRadiusOffset = Tools.getProperty(options, "gauge", "hoverArc", "outerRadiusOffset");
 
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
@@ -329,6 +281,6 @@ export class Gauge extends Component {
 				? Math.min(width / 2, height)
 				: Math.min(width / 2, height / 2);
 
-		return radius - outerRadiusOffset;
+		return radius;
 	}
 }

@@ -293,20 +293,16 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
  * options specific to gauge charts
  */
 
-const gaugeChart: GaugeChartOptions = Tools.merge({}, pieChart, {
+const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 	legend: {
 		enabled: false
 	},
 	gauge: {
 		type: GaugeTypes.SEMI,
 		arcWidth: 16,
-		arcBackgroundColor: "rgb(224,224,224)",
-		arcForegroundColor: "rgb(88,134,247)",
-		arrowColor: "currentColor",
-		numberFormatter: (number) => number.toFixed(2).toLocaleString(),
-		hoverArc: {
-			outerRadiusOffset: 3
-		}
+		fillColor: "rgb(88,134,247)",
+		status: null,
+		numberFormatter: (number) => (number.toFixed(2) % 1 !== 0) ? number.toFixed(2).toLocaleString() : number.toFixed().toLocaleString()
 	}
 } as GaugeChartOptions);
 

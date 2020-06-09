@@ -1,15 +1,19 @@
-import { GaugeTypes } from "./enums";
+import {
+	GaugeTypes,
+	Statuses,
+	ArrowDirections
+} from "./enums";
 import {
 	LegendOptions,
 	TooltipOptions,
 	GridOptions,
-	AxesOptions,
+	AxesOptions
 } from "./index";
 import {
 	AxisTooltipOptions,
 	BarTooltipOptions,
 	BarOptions,
-	StackedBarOptions,
+	StackedBarOptions
 } from "./components";
 
 /**
@@ -177,10 +181,10 @@ export interface LineChartOptions extends ScatterChartOptions {
 	 * options for the curve of the line
 	 */
 	curve?:
-		| string
-		| {
-				name: string;
-		  };
+	| string
+	| {
+		name: string;
+	};
 }
 
 /**
@@ -191,10 +195,10 @@ export interface AreaChartOptions extends AxisChartOptions {
 	 * options for the curve of the line
 	 */
 	curve?:
-		| string
-		| {
-				name: string;
-		  };
+	| string
+	| {
+		name: string;
+	};
 }
 
 /**
@@ -230,13 +234,10 @@ export interface PieChartOptions extends BaseChartOptions {
 export interface GaugeChartOptions extends PieChartOptions {
 	gauge?: {
 		arcWidth?: number;
-		arcBackgroundColor?: string;
-		arcForegroundColor?: string;
-		arrowColor?: string;
+		fillColor?: string;
+		status?: Statuses;
+		arrowDirection?: ArrowDirections;
 		numberFormatter?: Function;
-		hoverArc?: {
-			outerRadiusOffset?: number;
-		};
 		type?: GaugeTypes;
 	};
 }
