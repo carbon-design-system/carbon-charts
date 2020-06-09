@@ -25,6 +25,7 @@ import {
 	GaugeTypes
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
+import * as colorPalettes from "./services/colorPalettes";
 
 /*
  *****************************
@@ -300,7 +301,7 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 	gauge: {
 		type: GaugeTypes.SEMI,
 		arcWidth: 16,
-		fillColor: "rgb(88,134,247)",
+		fillColor: colorPalettes.DEFAULT[1],
 		status: null,
 		numberFormatter: (number) => (number.toFixed(2) % 1 !== 0) ? number.toFixed(2).toLocaleString() : number.toFixed().toLocaleString()
 	}

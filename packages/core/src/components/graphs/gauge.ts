@@ -124,11 +124,22 @@ export class Gauge extends Component {
 			.attr("d", this.backgroundArc)
 			.attr("role", Roles.GROUP);
 
+
 		// Add data arc
-		DOMUtils.appendOrSelect(svg, "path.arc-foreground")
+		const arcValue = svg.selectAll("path.arc-foreground")
+			.data([value]);
+
+		arcValue
+			.enter()
+			.append("path")
+			.attr("class", "arc-foreground")
+			.merge(arcValue)
 			.attr("d", this.arc)
-			.classed("arc", true)
-			.attr("fill", Tools.getProperty(options, "gauge", "fillColor"));
+			.attr("fill", Tools.getProperty(options, "gauge", "fillColor"))
+			// a11y
+			.attr("role", Roles.GRAPHICS_SYMBOL)
+			.attr("aria-roledescription", "value")
+			.attr("aria-label", d => d.value);
 
 		// Position Arc
 		svg.attr(
@@ -149,17 +160,21 @@ export class Gauge extends Component {
 		).attr("transform", `translate(-10, 0)`); // Optical centering for the presence of the smaller % symbol
 
 		const numberFormatter = Tools.getProperty(options, "gauge", "numberFormatter");
-		const valueNumber = DOMUtils.appendOrSelect(
-			valueNumberG,
-			"text.gauge-value-number"
-		)
+		const valueNumber = valueNumberG.selectAll("text.gauge-value-number")
+			.data([value]);
+
+		valueNumber
+			.enter()
+			.append("text")
+			.attr("class", "gauge-value-number")
+			.merge(valueNumber)
 			.style("font-size", `${valueFontSize}px`)
 			.attr("text-anchor", "middle")
-			.text(`${numberFormatter(value)}`);
+			.text(d => `${numberFormatter(d)}`);
 
 		const {
 			width: valueNumberWidth
-		} = DOMUtils.getSVGElementSize(valueNumber, { useBBox: true });
+		} = DOMUtils.getSVGElementSize(DOMUtils.appendOrSelect(svg, "text.gauge-value-number"), { useBBox: true });
 
 		DOMUtils.appendOrSelect(valueNumberG, "text.gauge-value-symbol")
 			.style("font-size", `${valueFontSize / 2}px`)
@@ -175,7 +190,6 @@ export class Gauge extends Component {
 			`translate(0, ${deltaFontSize + distanceBetweenNumbers})`
 		);
 
-		console.log(delta);
 		const deltaNumber = deltaGroup.selectAll("text.gauge-delta-number")
 			.data(delta != null ? [delta] : []);
 
@@ -222,6 +236,7 @@ export class Gauge extends Component {
 
 		deltaArrow.exit().remove();
 		deltaNumber.exit().remove();
+		arcValue.exit().remove();
 
 		// Add event listeners
 		this.addEventListeners();
