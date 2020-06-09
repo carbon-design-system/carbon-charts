@@ -33,8 +33,8 @@ import { Tools } from "@carbon/charts/tools";
 export const chartTypes = {
 	AreaChart: {
 		vanilla: "AreaChart",
-		angular: "ibm-simple-bar-chart",
-		vue: "ccv-simple-bar-chart",
+		angular: "ibm-area-chart",
+		vue: "ccv-area-chart",
 	},
 	SimpleBarChart: {
 		vanilla: "SimpleBarChart",
