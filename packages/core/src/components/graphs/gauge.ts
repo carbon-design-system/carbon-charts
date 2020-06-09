@@ -170,7 +170,7 @@ export class Gauge extends Component {
 			.merge(valueNumber)
 			.style("font-size", `${valueFontSize}px`)
 			.attr("text-anchor", "middle")
-			.text(d => `${numberFormatter(d)}`);
+			.text(d => numberFormatter(d));
 
 		const {
 			width: valueNumberWidth
