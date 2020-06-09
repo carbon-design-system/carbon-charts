@@ -6,9 +6,6 @@
 	<p align="center">
 		A reusable framework-agnostic D3 charting library.
 		<br /><br />
-		<a href="https://travis-ci.org/carbon-design-system/carbon-charts">
-			<img src="https://api.travis-ci.org/carbon-design-system/carbon-charts.svg?branch=master" />
-		</a>
 		<a href="https://www.npmjs.com/package/@carbon/charts">
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
 		</a>
