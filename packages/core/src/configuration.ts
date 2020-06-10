@@ -222,7 +222,7 @@ const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
 /**
  * options specific to area charts
  */
-const areaChart: AreaChartOptions = Tools.merge({}, axisChart, {
+const areaChart: AreaChartOptions = Tools.merge({}, lineChart, {
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: 0,
 	} as TimeScaleOptions),

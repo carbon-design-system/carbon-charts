@@ -44,6 +44,10 @@ export class AreaChart extends AxisChart {
 			new Ruler(this.model, this.services),
 			new Line(this.model, this.services),
 			new Area(this.model, this.services),
+			new Scatter(this.model, this.services, {
+				fadeInOnChartHolderMouseover: true,
+				handleThresholds: true
+			}),
 		];
 
 		const components: any[] = this.getAxisChartComponents(

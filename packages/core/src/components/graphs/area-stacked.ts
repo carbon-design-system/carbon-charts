@@ -50,8 +50,8 @@ export class StackedArea extends Component {
 			percentage: options.percentage,
 		});
 
-		const areaGroups = svg
-			.selectAll("g.areas")
+		const areas = svg
+			.selectAll("path.area")
 			.data(stackedData, (d) => d[0].group);
 
 		// D3 area generator function
@@ -62,19 +62,15 @@ export class StackedArea extends Component {
 			.y1((d) => mainYScale(d[1]))
 			.curve(this.services.curves.getD3Curve());
 
-		areaGroups.exit().attr("opacity", 0).remove();
+		areas.exit().attr("opacity", 0).remove();
 
-		const enteringAreaGroups = areaGroups
+		const enteringAreas = areas
 			.enter()
-			.append("g")
-			.classed("areas", true);
-
-		const enteringPaths = enteringAreaGroups
 			.append("path")
 			.attr("opacity", 0);
 
-		enteringPaths
-			.merge(svg.selectAll("g.areas path"))
+			enteringAreas
+			.merge(areas)
 			.data(stackedData, (d) => d[0].group)
 			.attr("fill", (d) => self.model.getFillColor(d[0].group))
 			.attr("role", Roles.GRAPHICS_SYMBOL)

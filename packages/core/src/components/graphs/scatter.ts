@@ -21,6 +21,20 @@ export class Scatter extends Component {
 			Events.Legend.ITEM_MOUSEOUT,
 			this.handleLegendMouseOut
 		);
+
+		const { fadeInOnChartHolderMouseover } = this.configs;
+		if (fadeInOnChartHolderMouseover) {
+			// Fade-in scatter circles
+			events.addEventListener(
+				Events.Chart.MOUSEOVER,
+				this.handleChartHolderOnHover
+			);
+			// Fade-out scatter circles
+			events.addEventListener(
+				Events.Chart.MOUSEOUT,
+				this.handleChartHolderOnMouseOut
+			);
+		}
 	}
 
 	render(animate: boolean) {
@@ -140,6 +154,7 @@ export class Scatter extends Component {
 			cartesianScales.getOrientation()
 		);
 
+		const { fadeInOnChartHolderMouseover } = this.configs;
 		selection
 			.raise()
 			.classed("dot", true)
@@ -195,7 +210,7 @@ export class Scatter extends Component {
 					d
 				)
 			)
-			.attr("opacity", 1)
+			.attr("opacity", fadeInOnChartHolderMouseover ? 0 : 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "point")
@@ -204,6 +219,26 @@ export class Scatter extends Component {
 		// Add event listeners to elements drawn
 		this.addEventListeners();
 	}
+
+	handleChartHolderOnHover = (event: CustomEvent) => {
+		this.parent
+			.selectAll("circle.dot")
+			.transition(
+				this.services.transitions.getTransition("chart-holder-hover-scatter")
+			)
+			.attr("opacity", 1);
+	};
+
+	handleChartHolderOnMouseOut = (event: CustomEvent) => {
+		this.parent
+			.selectAll("circle.dot")
+			.transition(
+				this.services.transitions.getTransition(
+					"chart-holder-mouseout-scatter"
+				)
+			)
+			.attr("opacity", 0);
+	};
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;

@@ -4,6 +4,10 @@
 export enum Chart {
 	RENDER_FINISHED = "render-finished",
 	RESIZE = "chart-resize",
+	MOUSEOVER = "chart-mouseover",
+	// MOUSEMOVE = "chart-mousemove",
+	// CLICK = "chart-click",
+	MOUSEOUT = "chart-mouseout",
 }
 
 /**

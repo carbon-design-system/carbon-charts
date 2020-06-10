@@ -10,6 +10,7 @@ import {
 	StackedArea,
 	TwoDimensionalAxes,
 	Line,
+	Scatter,
 	Ruler,
 	Tooltip,
 } from "../components/index";
@@ -39,6 +40,10 @@ export class StackedAreaChart extends AxisChart {
 			new Ruler(this.model, this.services),
 			new StackedArea(this.model, this.services),
 			new Line(this.model, this.services, { stacked: true }),
+			new Scatter(this.model, this.services, {
+				fadeInOnChartHolderMouseover: true,
+				handleThresholds: true
+			}),
 		];
 
 		const components: any[] = this.getAxisChartComponents(
