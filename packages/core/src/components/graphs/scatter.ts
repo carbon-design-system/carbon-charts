@@ -54,14 +54,22 @@ export class Scatter extends Component {
 				percentage: options.percentage,
 			});
 		} else {
-			scatterData = this.model.getDisplayData()
-				.filter(d => d[rangeIdentifier] !== undefined && d[rangeIdentifier] !== null);
+			scatterData = this.model
+				.getDisplayData()
+				.filter(
+					(d) =>
+						d[rangeIdentifier] !== undefined &&
+						d[rangeIdentifier] !== null
+				);
 		}
 
 		// Update data on dot groups
 		const circles = svg
 			.selectAll("circle.dot")
-			.data(scatterData, (datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`);
+			.data(
+				scatterData,
+				(datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
+			);
 
 		// Remove circles that need to be removed
 		circles.exit().attr("opacity", 0).remove();

@@ -29,10 +29,7 @@ export class StackedScatter extends Scatter {
 			.data(stackedData, (d) => d[0].group);
 
 		// Remove dot groups that need to be removed
-		circleGroups
-			.exit()
-			.attr("opacity", 0)
-			.remove();
+		circleGroups.exit().attr("opacity", 0).remove();
 
 		// Add the dot groups that need to be introduced
 		const circleGroupsEnter = circleGroups
@@ -45,7 +42,7 @@ export class StackedScatter extends Scatter {
 		const circles = circleGroupsEnter
 			.merge(circleGroups)
 			.selectAll("circle.dot")
-			.data(d => d);
+			.data((d) => d);
 
 		// Remove circles that need to be removed
 		circles.exit().attr("opacity", 0).remove();
@@ -58,16 +55,15 @@ export class StackedScatter extends Scatter {
 			.attr("opacity", 0);
 
 		// Apply styling & position
-		const circlesToStyle = enteringCircles.merge(circles)
-			.datum(d => {
-				const group = d[groupMapsTo];
+		const circlesToStyle = enteringCircles.merge(circles).datum((d) => {
+			const group = d[groupMapsTo];
 
-				return {
-					[groupMapsTo]: group,
-					[domainIdentifier]: d["data"]["sharedStackKey"],
-					[rangeIdentifier]: d[1],
-				};
-			});
+			return {
+				[groupMapsTo]: group,
+				[domainIdentifier]: d["data"]["sharedStackKey"],
+				[rangeIdentifier]: d[1],
+			};
+		});
 		this.styleCircles(circlesToStyle, animate);
 
 		// Add event listeners to elements drawn
