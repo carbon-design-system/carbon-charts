@@ -10,9 +10,9 @@ import {
 	StackedArea,
 	TwoDimensionalAxes,
 	Line,
-	Scatter,
+	StackedScatter,
 	Ruler,
-	Tooltip,
+	TooltipScatter,
 } from "../components/index";
 
 export class StackedAreaChart extends AxisChart {
@@ -40,9 +40,10 @@ export class StackedAreaChart extends AxisChart {
 			new Ruler(this.model, this.services),
 			new StackedArea(this.model, this.services),
 			new Line(this.model, this.services, { stacked: true }),
-			new Scatter(this.model, this.services, {
+			new StackedScatter(this.model, this.services, {
 				fadeInOnChartHolderMouseover: true,
 				handleThresholds: true,
+				stacked: true
 			}),
 		];
 
@@ -50,7 +51,7 @@ export class StackedAreaChart extends AxisChart {
 			graphFrameComponents
 		);
 		// TODO add tooltip
-		components.push(new Tooltip(this.model, this.services));
+		components.push(new TooltipScatter(this.model, this.services));
 		return components;
 	}
 }

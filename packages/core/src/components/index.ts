@@ -19,6 +19,7 @@ export * from "./graphs/bar-stacked";
 export * from "./graphs/bubble";
 export * from "./graphs/line";
 export * from "./graphs/scatter";
+export * from "./graphs/scatter-stacked";
 export * from "./graphs/pie";
 export * from "./graphs/donut";
 export * from "./graphs/skeleton";
