@@ -126,9 +126,7 @@ export class AxisChart extends Chart {
 
 		const zoomBarComponent = {
 			id: "zoom-bar",
-			components: [
-				new ZoomBar(this.model, this.services)
-			],
+			components: [new ZoomBar(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
 				y: LayoutGrowth.FIXED
@@ -151,8 +149,9 @@ export class AxisChart extends Chart {
 
 			topLevelLayoutComponents.push(titleSpacerComponent);
 		}
-
-		topLevelLayoutComponents.push(zoomBarComponent);
+		if (this.model.getOptions().zoomBar.enabled === true) {
+			topLevelLayoutComponents.push(zoomBarComponent);
+		}
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [

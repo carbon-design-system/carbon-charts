@@ -116,3 +116,13 @@ export interface BarOptions {
 export interface StackedBarOptions extends BarOptions {
 	dividerSize?: number;
 }
+
+/**
+ * customize the ZoomBar component
+ */
+export interface ZoomBarOptions {
+	/**
+	 * is the zoom-bar visible or not
+	 */
+	enabled?: boolean;
+}
