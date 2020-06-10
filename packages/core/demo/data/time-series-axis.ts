@@ -13,7 +13,7 @@ export const lineTimeSeriesData15seconds = {
 				{ date: new Date(2020, 11, 11, 0, 0, 0), value: 2 },
 				{ date: new Date(2020, 11, 11, 0, 0, 15), value: 9 },
 				{ date: new Date(2020, 11, 11, 0, 0, 30), value: 13 },
-				{ date: new Date(2020, 11, 11, 0, 0, 45), value: 8 },
+				{ date: new Date(2020, 11, 11, 0, 0, 45), value: 8 }
 			]
 		}
 	]
@@ -416,5 +416,37 @@ export const lineTimeSeriesAllLabelsInPrimaryFormatOptions = {
 	},
 	timeScale: {
 		addSpaceOnEdges: 0
+	}
+};
+
+// ZoomBar
+export const lineTimeSeriesDataZoomBar = {
+	labels: ["Qty"],
+	datasets: [
+		{
+			label: "Dataset 1",
+			data: [
+				{ date: new Date(2020, 11, 10, 23, 59, 15), value: 10 },
+				{ date: new Date(2020, 11, 10, 23, 59, 30), value: 15 },
+				{ date: new Date(2020, 11, 10, 23, 59, 45), value: 7 },
+				{ date: new Date(2020, 11, 11, 0, 0, 0), value: 2 },
+				{ date: new Date(2020, 11, 11, 0, 0, 15), value: 9 },
+				{ date: new Date(2020, 11, 11, 0, 0, 30), value: 13 },
+				{ date: new Date(2020, 11, 11, 0, 0, 45), value: 8 }
+			]
+		}
+	]
+};
+
+export const lineTimeSeriesZoomBarOptions = {
+	title: "Line (time series) - zoom-bar enabled",
+	axes: {
+		left: {},
+		bottom: {
+			scaleType: "time"
+		}
+	},
+	zoomBar: {
+		enabled: true
 	}
 };
