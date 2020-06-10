@@ -47,6 +47,10 @@ export interface BaseChartOptions {
 	 */
 	legend?: LegendOptions;
 	/**
+	 * zoombar configuration
+	 */
+	zoomBar?: ZoomBarOptions;
+	/**
 	 * Optional function to determine whether is filled based on datasetLabel, label, and/or data
 	 */
 	getIsFilled?: (
