@@ -3,7 +3,8 @@ import {
 	LegendOptions,
 	TooltipOptions,
 	GridOptions,
-	AxesOptions
+	AxesOptions,
+	ZoomBarOptions
 } from "./index";
 import { BarOptions, StackedBarOptions } from "./components";
 import { TimeScaleOptions } from "./axis-scales";
@@ -40,6 +41,10 @@ export interface BaseChartOptions {
 	 * legend configuration
 	 */
 	legend?: LegendOptions;
+	/**
+	 * zoombar configuration
+	 */
+	zoomBar?: ZoomBarOptions;
 	/**
 	 * Optional function to determine whether is filled based on datasetLabel, label, and/or data
 	 */
