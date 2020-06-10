@@ -42,7 +42,7 @@ export class StackedAreaChart extends AxisChart {
 			new Line(this.model, this.services, { stacked: true }),
 			new Scatter(this.model, this.services, {
 				fadeInOnChartHolderMouseover: true,
-				handleThresholds: true
+				handleThresholds: true,
 			}),
 		];
 

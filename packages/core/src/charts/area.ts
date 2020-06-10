@@ -46,7 +46,7 @@ export class AreaChart extends AxisChart {
 			new Area(this.model, this.services),
 			new Scatter(this.model, this.services, {
 				fadeInOnChartHolderMouseover: true,
-				handleThresholds: true
+				handleThresholds: true,
 			}),
 		];
 

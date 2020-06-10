@@ -224,7 +224,9 @@ export class Scatter extends Component {
 		this.parent
 			.selectAll("circle.dot")
 			.transition(
-				this.services.transitions.getTransition("chart-holder-hover-scatter")
+				this.services.transitions.getTransition(
+					"chart-holder-hover-scatter"
+				)
 			)
 			.attr("opacity", 1);
 	};

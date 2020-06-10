@@ -64,12 +64,9 @@ export class StackedArea extends Component {
 
 		areas.exit().attr("opacity", 0).remove();
 
-		const enteringAreas = areas
-			.enter()
-			.append("path")
-			.attr("opacity", 0);
+		const enteringAreas = areas.enter().append("path").attr("opacity", 0);
 
-			enteringAreas
+		enteringAreas
 			.merge(areas)
 			.data(stackedData, (d) => d[0].group)
 			.attr("fill", (d) => self.model.getFillColor(d[0].group))
