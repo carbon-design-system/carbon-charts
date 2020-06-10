@@ -189,8 +189,15 @@ export class TooltipBar extends Tooltip {
 		)
 			? this.model.getOptions().tooltip.valueFormatter(data.value)
 			: data.value.toLocaleString("en");
-
-		return `<div class="datapoint-tooltip"><p class="value">${formattedValue}</p></div>`;
+		// display timestamp in detail in tooltip if it's time series chart
+		if (data.date) {
+			const date = data.date.toLocaleString();
+			return `<div class="datapoint-tooltip">
+						<p class="value">Result Count: ${formattedValue}\nLast Observed: ${date}</p>
+					</div>`;
+		} else {
+			return `<div class="datapoint-tooltip"><p class="value">${formattedValue}</p></div>`;
+		}
 	}
 
 	/**
