@@ -293,7 +293,6 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 /**
  * options specific to gauge charts
  */
-
 const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 	legend: {
 		enabled: false
