@@ -2,7 +2,8 @@ import { getParameters } from "codesandbox/lib/api/define";
 
 const packageJSON = require("@carbon/charts/package.json");
 const libraryVersion = packageJSON.version;
-const carbonComponentsVersion = packageJSON.devDependencies["carbon-components"];
+const carbonComponentsVersion =
+	packageJSON.devDependencies["carbon-components"];
 
 const ibmPlexFontCSS = `@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
 `;

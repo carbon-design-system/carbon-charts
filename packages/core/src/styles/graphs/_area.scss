@@ -1,3 +1,4 @@
-.#{$prefix}--#{$charts-prefix}--area path.area {
+.#{$prefix}--#{$charts-prefix}--area path.area,
+.#{$prefix}--#{$charts-prefix}--area-stacked path.area {
 	pointer-events: none;
 }
