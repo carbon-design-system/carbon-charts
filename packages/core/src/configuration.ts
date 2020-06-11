@@ -225,11 +225,16 @@ const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
 /**
  * options specific to area charts
  */
-const areaChart: AreaChartOptions = Tools.merge({}, axisChart, {
+const areaChart: AreaChartOptions = Tools.merge({}, lineChart, {
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: 0
 	} as TimeScaleOptions)
 } as LineChartOptions);
+
+/**
+ * options specific to stacked area charts
+ */
+const stackedAreaChart = areaChart;
 
 /**
  * options specific to scatter charts
@@ -359,6 +364,7 @@ export const options = {
 	bubbleChart,
 	lineChart,
 	areaChart,
+	stackedAreaChart,
 	scatterChart,
 	pieChart,
 	donutChart,
@@ -382,7 +388,17 @@ export const lines = {
 export const area = {
 	opacity: {
 		unselected: 0,
-		selected: 0.3
+		selected: 0.4
+	}
+};
+
+/**
+ * Options for area behaviour
+ */
+export const areas = {
+	opacity: {
+		unselected: 0.3,
+		selected: 1
 	}
 };
 

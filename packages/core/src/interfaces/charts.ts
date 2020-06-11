@@ -195,10 +195,24 @@ export interface AreaChartOptions extends AxisChartOptions {
 	 * options for the curve of the line
 	 */
 	curve?:
-	| string
-	| {
-		name: string;
-	};
+		| string
+		| {
+				name: string;
+		  };
+}
+
+/**
+ * options specific to area charts
+ */
+export interface StackedAreaChartOptions extends ScatterChartOptions {
+	/**
+	 * options for the curve of the line
+	 */
+	curve?:
+		| string
+		| {
+				name: string;
+		  };
 }
 
 /**

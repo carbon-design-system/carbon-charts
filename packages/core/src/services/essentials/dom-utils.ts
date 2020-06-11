@@ -163,6 +163,8 @@ export class DOMUtils extends Service {
 		if (this.model.getOptions().resizable) {
 			this.addResizeListener();
 		}
+
+		this.addHolderListeners();
 	}
 
 	update() {
@@ -218,6 +220,24 @@ export class DOMUtils extends Service {
 
 	getMainSVG() {
 		return this.svg;
+	}
+
+	addHolderListeners() {
+		const holder = this.getHolder();
+
+		if (!holder) {
+			return;
+		}
+
+		select(holder)
+			.on("mouseover", () => {
+				// Dispatch event
+				this.services.events.dispatchEvent(Events.Chart.MOUSEOVER);
+			})
+			.on("mouseout", () => {
+				// Dispatch event
+				this.services.events.dispatchEvent(Events.Chart.MOUSEOUT);
+			});
 	}
 
 	addResizeListener() {

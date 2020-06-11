@@ -25,7 +25,7 @@ yarn add @carbon/charts @carbon/charts-vue d3
 
 ## Step-by-step instructions
 
-[Read on carbondesignsystem.com](https://www.carbondesignsystem.com/data-visualization/getting-started/vue)
+Read [here](https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials-getting-started--vue)
 
 ## Codesandbox examples
 
