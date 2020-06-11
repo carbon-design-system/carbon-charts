@@ -437,6 +437,21 @@ export const lineTimeSeriesDataZoomBar = {
 		}
 	]
 };
+const selectionStartFun = (selection, domain) => {
+	console.log("ZoomBar SelectionStart callback!");
+	console.log(selection);
+	console.log(domain);
+};
+const selectionInProgressFun = (selection, domain) => {
+	console.log("ZoomBar SelectionInProgress callback!");
+	console.log(selection);
+	console.log(domain);
+};
+const selectionEndFun = (selection, domain) => {
+	console.log("ZoomBar SelectionEnd callback!");
+	console.log(selection);
+	console.log(domain);
+};
 
 export const lineTimeSeriesZoomBarOptions = {
 	title: "Line (time series) - zoom-bar enabled",
@@ -447,6 +462,9 @@ export const lineTimeSeriesZoomBarOptions = {
 		}
 	},
 	zoomBar: {
-		enabled: true
+		enabled: true,
+		selectionStart: selectionStartFun,
+		selectionInProgress: selectionInProgressFun,
+		selectionEnd: selectionEndFun
 	}
 };
