@@ -120,4 +120,16 @@ export interface ZoomBarOptions {
 	 * is the zoom-bar visible or not
 	 */
 	enabled?: boolean;
+	/**
+	 * a function to handle selection start event
+	 */
+	selectionStart?: Function;
+	/**
+	 * a function to handle selection in progress event
+	 */
+	selectionInProgress?: Function;
+	/**
+	 * a function to handle selection end event
+	 */
+	selectionEnd?: Function;
 }
