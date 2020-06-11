@@ -61,6 +61,11 @@ export const chartTypes = {
 		angular: "ibm-line-chart",
 		vue: "ccv-line-chart",
 	},
+	StackedAreaChart: {
+		vanilla: "StackedAreaChart",
+		angular: "ibm-stacked-area-chart",
+		vue: "ccv-stacked-area-chart",
+	},
 	ScatterChart: {
 		vanilla: "ScatterChart",
 		angular: "ibm-scatter-chart",
@@ -86,7 +91,8 @@ export const chartTypes = {
 let allDemoGroups = [
 	{
 		title: "Area",
-		description: "Area charts are similar to line charts, but the areas below the lines are filled with colors or patterns. Stacked charts are useful for comparing proportional contributions within a category. They plot the relative value that each data series contributes to the total.",
+		description:
+			"Area charts are similar to line charts, but the areas below the lines are filled with colors or patterns. Stacked charts are useful for comparing proportional contributions within a category. They plot the relative value that each data series contributes to the total.",
 		demos: [
 			{
 				options: areaDemos.areaTimeSeriesCurvedOptions,
@@ -98,11 +104,24 @@ let allDemoGroups = [
 				data: areaDemos.areaTimeSeriesData,
 				chartType: chartTypes.AreaChart,
 			},
+			{
+				options: areaDemos.stackedAreaTimeSeriesOptions,
+				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart,
+				isDemoExample: true,
+			},
+			{
+				options: areaDemos.stackedAreaPercentageTimeSeriesOptions,
+				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart,
+				isDemoExample: true,
+			},
 		],
 	},
 	{
 		title: "Bar (vertical)",
-		description: "Bar charts use vertical or horizontal data markers to compare individual values. You can use them to compare discrete data or show trends over time.",
+		description:
+			"Bar charts use vertical or horizontal data markers to compare individual values. You can use them to compare discrete data or show trends over time.",
 		demos: [
 			{
 				options: barDemos.simpleBarOptions,
@@ -132,7 +151,8 @@ let allDemoGroups = [
 				isDemoExample: false,
 			},
 			{
-				description: "A grouped bar chart, also known as a clustered bar graph, multi-set bar chart, or grouped column chart, is a type of bar graph that is used to compare values across multiple categories.",
+				description:
+					"A grouped bar chart, also known as a clustered bar graph, multi-set bar chart, or grouped column chart, is a type of bar graph that is used to compare values across multiple categories.",
 				options: barDemos.groupedBarOptions,
 				data: barDemos.groupedBarData,
 				chartType: chartTypes.GroupedBarChart,
@@ -150,7 +170,8 @@ let allDemoGroups = [
 				isDemoExample: false,
 			},
 			{
-				description: "Stacked bar charts are useful for comparing proportional contributions within a category. They plot the relative value that each data series contributes to the total.",
+				description:
+					"Stacked bar charts are useful for comparing proportional contributions within a category. They plot the relative value that each data series contributes to the total.",
 				options: barDemos.stackedBarOptions,
 				data: barDemos.stackedBarData,
 				chartType: chartTypes.StackedBarChart,
@@ -242,7 +263,8 @@ let allDemoGroups = [
 	},
 	{
 		title: "Bubble",
-		description: "Bubble charts use data points and bubbles to plot measures anywhere along a scale. One measure is plotted along each axis. The size of the bubble represents the third measure. You can use bubble charts to represent financial data or any data where measured values are related.",
+		description:
+			"Bubble charts use data points and bubbles to plot measures anywhere along a scale. One measure is plotted along each axis. The size of the bubble represents the third measure. You can use bubble charts to represent financial data or any data where measured values are related.",
 		demos: [
 			{
 				options: bubbleDemos.bubbleDoubleLinearOptions,
@@ -297,7 +319,8 @@ let allDemoGroups = [
 	},
 	{
 		title: "Line",
-		description: "Line charts plot data at regular intervals connected by lines. You can use line visualizations to show trends over time and compare several data sets.",
+		description:
+			"Line charts plot data at regular intervals connected by lines. You can use line visualizations to show trends over time and compare several data sets.",
 		demos: [
 			{
 				options: lineDemos.lineTimeSeriesOptions,
@@ -352,6 +375,21 @@ let allDemoGroups = [
 		],
 	},
 	{
+		title: "Area",
+		demos: [
+			{
+				options: areaDemos.stackedAreaTimeSeriesOptions,
+				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart,
+			},
+			{
+				options: areaDemos.stackedAreaPercentageTimeSeriesOptions,
+				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart,
+			},
+		],
+	},
+	{
 		title: "Pie",
 		demos: [
 			{
@@ -375,7 +413,8 @@ let allDemoGroups = [
 	},
 	{
 		title: "Scatter",
-		description: "Scatter plot visualizations use data points to plot two measures anywhere along a scale, not only at regular tick marks. You can use scatter plots to explore correlations between different measures.",
+		description:
+			"Scatter plot visualizations use data points to plot two measures anywhere along a scale, not only at regular tick marks. You can use scatter plots to explore correlations between different measures.",
 		demos: [
 			{
 				options: scatterDemos.doubleLinearScatterOptions,
@@ -408,17 +447,18 @@ let allDemoGroups = [
 	},
 	{
 		title: "Step",
-		description: "Stepped line charts plot data at regular intervals, forming a series of steps between data points. You can use line visualizations to show trends over time and compare several data sets.",
+		description:
+			"Stepped line charts plot data at regular intervals, forming a series of steps between data points. You can use line visualizations to show trends over time and compare several data sets.",
 		demos: [
 			{
 				options: stepDemos.stepOptions,
 				data: stepDemos.stepData,
-				chartType: chartTypes.LineChart
+				chartType: chartTypes.LineChart,
 			},
 			{
 				options: stepDemos.stepTimeSeriesOptions,
 				data: stepDemos.stepTimeSeriesData,
-				chartType: chartTypes.LineChart
+				chartType: chartTypes.LineChart,
 			},
 			{
 				options: stepDemos.stepEmptyStateOptions,
@@ -546,7 +586,7 @@ let allDemoGroups = [
 			{
 				data: radarDemos.radarData,
 				options: radarDemos.radarOptions,
-				chartType: chartTypes.RadarChart
+				chartType: chartTypes.RadarChart,
 			},
 			{
 				data: radarDemos.radarWithMissingDataData,
@@ -607,8 +647,14 @@ export const storybookDemoGroups = Tools.clone(allDemoGroups);
 // in the demo page we want to show only demos with isDemoExample = true
 export const demoGroups = Tools.clone(allDemoGroups)
 	// remove demoGroup if its children don't have any demo examples
-	.filter((demoGroup) => demoGroup.demos.filter(demo => demo.isDemoExample !== false).length > 0)
+	.filter(
+		(demoGroup) =>
+			demoGroup.demos.filter((demo) => demo.isDemoExample !== false)
+				.length > 0
+	)
 	.map((demoGroup) => {
-		demoGroup.demos = demoGroup.demos.filter(demo => demo.isDemoExample !== false);
+		demoGroup.demos = demoGroup.demos.filter(
+			(demo) => demo.isDemoExample !== false
+		);
 		return demoGroup;
 	});
