@@ -21,7 +21,7 @@ yarn add @carbon/charts d3
 
 ## Step-by-step instructions
 
-[Read on carbondesignsystem.com](https://www.carbondesignsystem.com/data-visualization/getting-started/vanilla)
+Read [here](https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials-getting-started--vanilla)
 
 ## Codesandbox examples
 

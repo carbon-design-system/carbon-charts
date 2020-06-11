@@ -4,6 +4,10 @@
 export enum Chart {
 	RENDER_FINISHED = "render-finished",
 	RESIZE = "chart-resize",
+	MOUSEOVER = "chart-mouseover",
+	// MOUSEMOVE = "chart-mousemove",
+	// CLICK = "chart-click",
+	MOUSEOUT = "chart-mouseout",
 }
 
 /**
@@ -21,6 +25,16 @@ export enum Axis {
 	LABEL_MOUSEMOVE = "axis-label-mousemove",
 	LABEL_CLICK = "axis-label-click",
 	LABEL_MOUSEOUT = "axis-label-mouseout",
+}
+
+/**
+ * enum of all area graph events
+ */
+export enum Area {
+	AREA_MOUSEOVER = "area-mouseover",
+	AREA_MOUSEMOVE = "area-mousemove",
+	AREA_CLICK = "area-click",
+	AREA_MOUSEOUT = "area-mouseout",
 }
 
 /**
