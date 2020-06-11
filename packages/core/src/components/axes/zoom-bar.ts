@@ -17,14 +17,7 @@ export class ZoomBar extends Component {
 
 	ogXScale: any;
 
-	// use this flag to avoid recursive update events
-	skipNextUpdate = false;
-
 	render(animate = true) {
-		if (this.skipNextUpdate === true) {
-			this.skipNextUpdate = false;
-			return;
-		}
 		// TODO - get correct axis left width
 		const axisLeftWidth = 23;
 		const svg = this.getContainerSVG();
@@ -245,17 +238,24 @@ export class ZoomBar extends Component {
 					// update brush handle position
 					select(svg).call(updateBrushHandle, selection);
 
-					const domain = [
+					const newDomain = [
 						xScale.invert(selection[0]),
 						xScale.invert(selection[1])
 					];
+
 					// only if the brush event comes from mouseup event
-					if (event.sourceEvent != null && event.type === "end") {
-						this.skipNextUpdate = true; // avoid recursive update
-						this.model.set(
-							{ zoomDomain: domain },
-							{ animate: false }
-						);
+					if (event.sourceEvent != null) {
+						// only if zoomDomain is never set or needs update
+						if (
+							zoomDomain === undefined ||
+							zoomDomain[0] !== newDomain[0] ||
+							zoomDomain[1] !== newDomain[1]
+						) {
+							this.model.set(
+								{ zoomDomain: newDomain },
+								{ animate: false }
+							);
+						}
 					}
 				};
 
@@ -266,9 +266,12 @@ export class ZoomBar extends Component {
 					])
 					.on("start brush end", brushed);
 
-				const brushArea = DOMUtils.appendOrSelect(svg, "g.brush")
-					.call(brush)
-					.call(brush.move, xScale.range()); // default to full range
+				const brushArea = DOMUtils.appendOrSelect(svg, "g.brush").call(
+					brush
+				);
+				if (zoomDomain === undefined) {
+					brushArea.call(brush.move, xScale.range()); // default to full range
+				}
 			}
 		}
 	}
