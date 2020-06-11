@@ -7,19 +7,15 @@ import { Tools } from "../tools";
 // Components
 import {
 	Grid,
-	Area,
-	Line,
-	Ruler,
-	Scatter,
+	StackedArea,
 	TwoDimensionalAxes,
-	// the imports below are needed because of typescript bug (error TS4029)
-	Tooltip,
-	Legend,
-	LayoutComponent,
+	Line,
+	StackedScatter,
+	Ruler,
 	TooltipScatter,
 } from "../components/index";
 
-export class AreaChart extends AxisChart {
+export class StackedAreaChart extends AxisChart {
 	constructor(holder: Element, chartConfigs: ChartConfig<AreaChartOptions>) {
 		super(holder, chartConfigs);
 
@@ -27,7 +23,7 @@ export class AreaChart extends AxisChart {
 		// With the user provided options
 		this.model.setOptions(
 			Tools.mergeDefaultChartOptions(
-				Tools.clone(Configuration.options.areaChart),
+				Configuration.options.stackedAreaChart,
 				chartConfigs.options
 			)
 		);
@@ -42,17 +38,19 @@ export class AreaChart extends AxisChart {
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Ruler(this.model, this.services),
-			new Line(this.model, this.services),
-			new Area(this.model, this.services),
-			new Scatter(this.model, this.services, {
+			new StackedArea(this.model, this.services),
+			new Line(this.model, this.services, { stacked: true }),
+			new StackedScatter(this.model, this.services, {
 				fadeInOnChartHolderMouseover: true,
 				handleThresholds: true,
+				stacked: true,
 			}),
 		];
 
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents
 		);
+		// TODO add tooltip
 		components.push(new TooltipScatter(this.model, this.services));
 		return components;
 	}
