@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.32.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.2...v0.32.3) (2020-06-08)
+## [0.32.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.4...v0.32.5) (2020-06-11)
 
 **Note:** Version bump only for package @carbon/charts
 
@@ -11,16 +11,26 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.32.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.1...v0.32.2) (2020-06-05)
+## [0.32.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.3...v0.32.4) (2020-06-10)
 
 
 ### Bug Fixes
 
-* **core, angular, react, vue, svelte:** fix scatter graph data updates ([#654](https://github.com/carbon-design-system/carbon-charts/issues/654)) ([673d627](https://github.com/carbon-design-system/carbon-charts/commit/673d627f47274b9815ef94e4a48bb25485e1b9a3))
+* update tslint and prettier options ([#661](https://github.com/carbon-design-system/carbon-charts/issues/661)) ([ebc53d9](https://github.com/carbon-design-system/carbon-charts/commit/ebc53d9f4caea047f656ae98075b9c8ca307b280))
 
 
 
 
+
+## [0.32.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.2...v0.32.3) (2020-06-08)
+
+**Note:** Version bump only for package @carbon/charts
+
+## [0.32.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.1...v0.32.2) (2020-06-05)
+
+### Bug Fixes
+
+-   **core, angular, react, vue, svelte:** fix scatter graph data updates ([#654](https://github.com/carbon-design-system/carbon-charts/issues/654)) ([673d627](https://github.com/carbon-design-system/carbon-charts/commit/673d627f47274b9815ef94e4a48bb25485e1b9a3))
 
 ## [0.32.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.0...v0.32.1) (2020-06-03)
 
