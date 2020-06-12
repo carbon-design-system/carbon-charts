@@ -23,7 +23,10 @@ import { histogram } from "d3";
 import { defaultBins } from "../configuration";
 
 export class HistogramChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<ScatterChartOptions>) {
+	constructor(
+		holder: Element,
+		chartConfigs: ChartConfig<ScatterChartOptions>
+	) {
 		super(holder, chartConfigs);
 
 		// Merge the default options for this chart
@@ -47,16 +50,25 @@ export class HistogramChart extends AxisChart {
 		const groups = Tools.groupBy(bin, "group");
 
 		if (aggregation === AggregationTypes.COUNT) {
-			Object.keys(groups).map(group => { groups[group] = groups[group].length; });
+			Object.keys(groups).map((group) => {
+				groups[group] = groups[group].length;
+			});
 		}
 		if (aggregation === AggregationTypes.SUM) {
-			Object.keys(groups).map(group => {
-				groups[group] = groups[group].reduce((sum, datum) => sum + datum[dataIdentifier], 0);
+			Object.keys(groups).map((group) => {
+				groups[group] = groups[group].reduce(
+					(sum, datum) => sum + datum[dataIdentifier],
+					0
+				);
 			});
 		}
 		if (aggregation === AggregationTypes.AVG) {
-			Object.keys(groups).map(group => {
-				groups[group] = groups[group].reduce((sum, datum) => sum + datum[dataIdentifier], 0) / groups[group].length;
+			Object.keys(groups).map((group) => {
+				groups[group] =
+					groups[group].reduce(
+						(sum, datum) => sum + datum[dataIdentifier],
+						0
+					) / groups[group].length;
 			});
 		}
 
@@ -73,7 +85,7 @@ export class HistogramChart extends AxisChart {
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 		const axisOptions = options.axes[mainXPos];
 		const { groupMapsTo } = options.data;
-		const { aggregation = AggregationTypes.COUNT} = axisOptions;
+		const { aggregation = AggregationTypes.COUNT } = axisOptions;
 		const { bins: axisBins = defaultBins } = axisOptions;
 		const areBinsDefined = Array.isArray(axisBins);
 
@@ -97,12 +109,16 @@ export class HistogramChart extends AxisChart {
 			: [bins[0].x0, bins[bins.length - 1].x1];
 
 		// Get all groups
-		const groupsKeys = Array.from(new Set(data.map(d => d[groupMapsTo])));
+		const groupsKeys = Array.from(new Set(data.map((d) => d[groupMapsTo])));
 		const histogramData = [];
 		// Group data by bin
-		bins.forEach(bin => {
+		bins.forEach((bin) => {
 			const key = `${bin.x0}-${bin.x1}`;
-			const aggregateDataByGroup = this.aggregateDataByGroup(bin, rangeIdentifier, aggregation);
+			const aggregateDataByGroup = this.aggregateDataByGroup(
+				bin,
+				rangeIdentifier,
+				aggregation
+			);
 
 			groupsKeys.forEach((group: string) => {
 				// For each dataset put a bin with value 0 if not exist
@@ -148,7 +164,9 @@ export class HistogramChart extends AxisChart {
 			new Histogram(this.model, this.services)
 		];
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents);
+		const components: any[] = this.getAxisChartComponents(
+			graphFrameComponents
+		);
 		components.push(new TooltipHistogram(this.model, this.services));
 		return components;
 	}

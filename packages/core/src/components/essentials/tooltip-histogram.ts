@@ -19,29 +19,57 @@ export class TooltipHistogram extends Tooltip {
 	init() {
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
-		const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
-		this.tooltip = DOMUtils.appendOrSelect(holder, `div.${settings.prefix}--${chartprefix}--tooltip`);
+		const chartprefix = Tools.getProperty(
+			this.model.getOptions(),
+			"style",
+			"prefix"
+		);
+		this.tooltip = DOMUtils.appendOrSelect(
+			holder,
+			`div.${settings.prefix}--${chartprefix}--tooltip`
+		);
 
 		// Apply html content to the tooltip
-		const tooltipTextContainer = DOMUtils.appendOrSelect(this.tooltip, "div.content-box");
+		const tooltipTextContainer = DOMUtils.appendOrSelect(
+			this.tooltip,
+			"div.content-box"
+		);
 		this.tooltip.style("max-width", null);
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this.services.events.addEventListener(Events.Tooltip.SHOW, e => {
+		this.services.events.addEventListener(Events.Tooltip.SHOW, (e) => {
 			// check the type of tooltip and that it is enabled
-			if ((e.detail.type === TooltipTypes.DATAPOINT && Tools.getProperty(this.model.getOptions(), "tooltip", "datapoint", "enabled")) ) {
-
+			if (
+				e.detail.type === TooltipTypes.DATAPOINT &&
+				Tools.getProperty(
+					this.model.getOptions(),
+					"tooltip",
+					"datapoint",
+					"enabled"
+				)
+			) {
 				const data = e.detail.data;
 				const multidata = data.multidata;
 				const hoveredElement = e.detail.hoveredElement.node();
 
-				const defaultHTML = multidata.length > 1
+				const defaultHTML =
+					multidata.length > 1
 						? this.getMultilineTooltipHTML(data)
 						: this.getTooltipHTML(data);
 
 				// if there is a provided tooltip HTML function call it and pass the defaultHTML
-				if (Tools.getProperty(this.model.getOptions(), "tooltip", "customHTML")) {
-					tooltipTextContainer.html(this.model.getOptions().tooltip.customHTML(data, defaultHTML));
+				if (
+					Tools.getProperty(
+						this.model.getOptions(),
+						"tooltip",
+						"customHTML"
+					)
+				) {
+					tooltipTextContainer.html(
+						this.model
+							.getOptions()
+							.tooltip.customHTML(data, defaultHTML)
+					);
 				} else {
 					// default tooltip
 					tooltipTextContainer.html(defaultHTML);
@@ -49,7 +77,7 @@ export class TooltipHistogram extends Tooltip {
 
 				const position = this.getTooltipPosition(hoveredElement, data);
 				// Position the tooltip relative to the bars
-				this.positionTooltip(e.detail.multidata ? undefined : position );
+				this.positionTooltip(e.detail.multidata ? undefined : position);
 			}
 
 			// Fade in
@@ -69,18 +97,27 @@ export class TooltipHistogram extends Tooltip {
 	 */
 	getTooltipPosition(hoveredElement, data?: any) {
 		const groupId = data["group-id"];
-		const groupElements = document.querySelectorAll(`[group-id="${groupId}"]`);
-		const groupTop = min(Array.from(groupElements).map((d: any) => d.getBoundingClientRect().top));
-		const holderPosition = select(this.services.domUtils.getHolder()).node().getBoundingClientRect();
+		const groupElements = document.querySelectorAll(
+			`[group-id="${groupId}"]`
+		);
+		const groupTop = min(
+			Array.from(groupElements).map(
+				(d: any) => d.getBoundingClientRect().top
+			)
+		);
+		const holderPosition = select(this.services.domUtils.getHolder())
+			.node()
+			.getBoundingClientRect();
 		const { verticalOffset } = this.model.getOptions().tooltip.datapoint;
 
 		const barPosition = hoveredElement.getBoundingClientRect();
 		const tooltipPos = {
-			left: (barPosition.left - holderPosition.left) + barPosition.width / 2,
-			top: (groupTop - holderPosition.top) - verticalOffset
+			left:
+				barPosition.left - holderPosition.left + barPosition.width / 2,
+			top: groupTop - holderPosition.top - verticalOffset
 		};
 
-		return {placement: TooltipPosition.TOP, position: tooltipPos};
+		return { placement: TooltipPosition.TOP, position: tooltipPos };
 	}
 
 	/**
@@ -92,9 +129,21 @@ export class TooltipHistogram extends Tooltip {
 		const { bin } = data;
 		const { value } = data.multidata[0];
 		const { cartesianScales } = this.services;
-		const { title: domainTitle } = Tools.getProperty(options, "axes", cartesianScales.getDomainAxisPosition());
-		const { title: rangeTitle } = Tools.getProperty(options, "axes", cartesianScales.getRangeAxisPosition());
-		const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter")
+		const { title: domainTitle } = Tools.getProperty(
+			options,
+			"axes",
+			cartesianScales.getDomainAxisPosition()
+		);
+		const { title: rangeTitle } = Tools.getProperty(
+			options,
+			"axes",
+			cartesianScales.getRangeAxisPosition()
+		);
+		const formattedValue = Tools.getProperty(
+			this.model.getOptions(),
+			"tooltip",
+			"valueFormatter"
+		)
 			? this.model.getOptions().tooltip.valueFormatter(value)
 			: value.toLocaleString("en");
 
@@ -127,21 +176,32 @@ export class TooltipHistogram extends Tooltip {
 		segments.reverse();
 		// in a vertical bar chart the tooltip should display in order of the drawn bars
 		// in horizontal stacked bar, the order of the bars from Left to Right are displayed top down in tooltip
-		if (this.services.cartesianScales.getOrientation() === CartesianOrientations.VERTICAL) {
+		if (
+			this.services.cartesianScales.getOrientation() ===
+			CartesianOrientations.VERTICAL
+		) {
 			segments.reverse();
 		}
 
 		// get the total for the stacked tooltip
 		let total = segments.reduce((sum, item) => sum + item.value, 0);
 		// format the total value
-		total = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter")
+		total = Tools.getProperty(
+			this.model.getOptions(),
+			"tooltip",
+			"valueFormatter"
+		)
 			? this.model.getOptions().tooltip.valueFormatter(total)
 			: total.toLocaleString("en");
 
 		const { groupMapsTo } = this.model.getOptions().data;
 		const { bin } = data;
 		const { cartesianScales } = this.services;
-		const { title } = Tools.getProperty(options, "axes", cartesianScales.getDomainAxisPosition());
+		const { title } = Tools.getProperty(
+			options,
+			"axes",
+			cartesianScales.getDomainAxisPosition()
+		);
 		const titleHTML = `<li>
 			<div class='title-val'>
 				<p class='label'>${title}</p>
@@ -155,15 +215,25 @@ export class TooltipHistogram extends Tooltip {
 			</div>
 		</li>`;
 
-		return `<ul class='multi-tooltip'>` +
+		return (
+			`<ul class='multi-tooltip'>` +
 			titleHTML +
-			segments.map(datum => {
-				const formattedValue = Tools.getProperty(this.model.getOptions(), "tooltip", "valueFormatter")
-					? this.model.getOptions().tooltip.valueFormatter(datum.value)
-					: datum.value.toLocaleString("en");
-				const indicatorColor = this.model.getStrokeColor(datum[groupMapsTo]);
+			segments
+				.map((datum) => {
+					const formattedValue = Tools.getProperty(
+						this.model.getOptions(),
+						"tooltip",
+						"valueFormatter"
+					)
+						? this.model
+								.getOptions()
+								.tooltip.valueFormatter(datum.value)
+						: datum.value.toLocaleString("en");
+					const indicatorColor = this.model.getStrokeColor(
+						datum[groupMapsTo]
+					);
 
-				return `
+					return `
 					<li>
 						<div class="datapoint-tooltip">
 							<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
@@ -171,8 +241,10 @@ export class TooltipHistogram extends Tooltip {
 							<p class="value">${formattedValue}</p>
 						</div>
 					</li>`;
-			}).join("") +
+				})
+				.join("") +
 			totalHTML +
-			`</ul>`;
+			`</ul>`
+		);
 	}
 }

@@ -9,7 +9,7 @@ import {
 	AxisTooltipOptions,
 	BarTooltipOptions,
 	BarOptions,
-	StackedBarOptions,
+	StackedBarOptions
 } from "./components";
 
 /**

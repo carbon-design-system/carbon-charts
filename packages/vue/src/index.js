@@ -23,7 +23,7 @@ const components = [
 	CcvPieChart,
 	CcvScatterChart,
 	CcvHistogramChart,
-	CcvRadarChart
+	CcvRadarChart,
 ];
 
 /*
@@ -70,5 +70,5 @@ export {
 	CcvPieChart,
 	CcvScatterChart,
 	CcvHistogramChart,
-	CcvRadarChart
+	CcvRadarChart,
 };

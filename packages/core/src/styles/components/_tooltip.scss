@@ -31,7 +31,9 @@
 			min-width: 20px;
 		}
 
-		.datapoint-tooltip, .total-val, .title-val {
+		.datapoint-tooltip,
+		.total-val,
+		.title-val {
 			display: flex;
 			padding: 4px;
 			flex-flow: row nowrap;
@@ -62,7 +64,8 @@
 			}
 		}
 
-		.total-val, .title-val {
+		.total-val,
+		.title-val {
 			font-weight: carbon--font-weight("semibold");
 			.label {
 				margin-left: 4px;

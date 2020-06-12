@@ -22,7 +22,7 @@ export class ChartModel {
 
 	// Internal Model state
 	protected state: any = {
-		options: {},
+		options: {}
 	};
 
 	// Data labels
@@ -78,7 +78,7 @@ export class ChartModel {
 
 		this.set({
 			data: sanitizedData,
-			dataGroups,
+			dataGroups
 		});
 
 		return sanitizedData;
@@ -131,7 +131,7 @@ export class ChartModel {
 
 		return Object.keys(groupedData).map((groupName) => ({
 			name: groupName,
-			data: groupedData[groupName],
+			data: groupedData[groupName]
 		}));
 	}
 
@@ -151,11 +151,13 @@ export class ChartModel {
 
 		return stackKeys.map((key) => {
 			const correspondingValues = { sharedStackKey: key };
-			dataGroupNames.forEach(dataGroupName => {
-				const correspondingDatum = displayData.find(datum => {
-					return datum[groupMapsTo] === dataGroupName
-						&& datum.hasOwnProperty(domainIdentifier)
-						&& datum[domainIdentifier].toString() === key;
+			dataGroupNames.forEach((dataGroupName) => {
+				const correspondingDatum = displayData.find((datum) => {
+					return (
+						datum[groupMapsTo] === dataGroupName &&
+						datum.hasOwnProperty(domainIdentifier) &&
+						datum[domainIdentifier].toString() === key
+					);
 				});
 
 				correspondingValues[dataGroupName] = correspondingDatum
@@ -236,7 +238,7 @@ export class ChartModel {
 	 */
 	setOptions(newOptions) {
 		this.set({
-			options: Tools.merge(this.getOptions(), newOptions),
+			options: Tools.merge(this.getOptions(), newOptions)
 		});
 	}
 
@@ -305,12 +307,12 @@ export class ChartModel {
 
 		// dispatch legend filtering event with the status of all the dataLabels
 		this.services.events.dispatchEvent(Events.Legend.ITEMS_UPDATE, {
-			dataGroups,
+			dataGroups
 		});
 
 		// Update model
 		this.set({
-			dataGroups,
+			dataGroups
 		});
 	}
 
@@ -385,7 +387,7 @@ export class ChartModel {
 
 				const updatedDatum = {
 					group,
-					key: labels[i],
+					key: labels[i]
 				};
 
 				if (isNaN(datum)) {
@@ -451,7 +453,7 @@ export class ChartModel {
 		).keys();
 		return uniqueDataGroups.map((groupName) => ({
 			name: groupName,
-			status: ACTIVE,
+			status: ACTIVE
 		}));
 	}
 
