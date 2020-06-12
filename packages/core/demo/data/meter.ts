@@ -1,6 +1,6 @@
 export const meterData = [
 	{
-		group: "Dataset asfndksjghfgfdghfdhg  dsfgdfs gsdflg sdg dfsg d d sgfds sdfg sd dasd asdasdasdsadasdsdasdasdasadadads d1",
+		group: "Dataset 1",
 		value: 56
 	}
 ];

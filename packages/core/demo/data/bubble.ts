@@ -14,7 +14,7 @@ export const bubbleDoubleLinearData = [
 ];
 
 export const bubbleDoubleLinearOptions = {
-	title: "Bubble (linear) long lonfdsfbsdkjfdshfkdshfkdshfkdshfdshfdkshfdsh   fsdkfhsdkhfsdkfhskdhfksdj sdfhsdkjfhdskjh dshks dhjks",
+	title: "Bubble (linear)",
 	axes: {
 		bottom: {
 			title: "No. of employees",
