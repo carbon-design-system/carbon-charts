@@ -6,15 +6,12 @@
 	<p align="center">
 		A reusable framework-agnostic D3 charting library.
 		<br /><br />
-		<a href="https://travis-ci.org/carbon-design-system/carbon-charts">
-			<img src="https://api.travis-ci.org/carbon-design-system/carbon-charts.svg?branch=master" />
-		</a>
 		<a href="https://www.npmjs.com/package/@carbon/charts">
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
 		</a>
 		<img src="https://img.shields.io/badge/comp-IE11%2B-blue.svg" />
 		<img alt="semantic-versioning" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--ver-e10079.svg" />
-		<img alt="semantic-versioning" src="https://img.shields.io/badge/downloads-+13k%2Fweek-green" />
+		<img alt="semantic-versioning" src="https://img.shields.io/badge/downloads-+20k%2Fweek-green" />
 	</p>
 </p>
 
@@ -45,7 +42,11 @@ Read the release change logs [here](./CHANGELOG.md)
 | Pie         | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Step        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Scatter     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Area        | :hourglass_flowing_sand: | - | - | - |
+| Radar     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Area        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
+| Gauge        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
+| Meter        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
+| Combo        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
 
 ## Bugs and feature requests
 

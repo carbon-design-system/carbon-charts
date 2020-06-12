@@ -6,9 +6,11 @@ import {
 	LineChartOptions,
 	BarChartOptions,
 	StackedBarChartOptions,
+	AreaChartOptions,
 	PieChartOptions,
 	DonutChartOptions,
 	BubbleChartOptions,
+	RadarChartOptions,
 	// Components
 	GridOptions,
 	AxesOptions,
@@ -72,26 +74,34 @@ export const baseTooltip: TooltipOptions = {
 		enabled: true
 	},
 	title: {
-		verticalOffset: .75,
-		width: .4
+		verticalOffset: 0.75,
+		width: 0.4
 	}
 };
 
-export const axisChartTooltip: AxisTooltipOptions = Tools.merge({}, baseTooltip, {
-	gridline: {
-		enabled: true,
-		threshold: 0.25
-	}
-} as AxisTooltipOptions);
+export const axisChartTooltip: AxisTooltipOptions = Tools.merge(
+	{},
+	baseTooltip,
+	{
+		gridline: {
+			enabled: true,
+			threshold: 0.02
+		}
+	} as AxisTooltipOptions
+);
 
-export const barChartTooltip: BarTooltipOptions = Tools.merge({}, axisChartTooltip, {
-	datapoint: {
-		verticalOffset: 4
-	},
-	gridline: {
-		enabled: false
-	}
-} as BarTooltipOptions);
+export const barChartTooltip: BarTooltipOptions = Tools.merge(
+	{},
+	axisChartTooltip,
+	{
+		datapoint: {
+			verticalOffset: 4
+		},
+		gridline: {
+			enabled: false
+		}
+	} as BarTooltipOptions
+);
 
 // These options will be managed by Tools.mergeDefaultChartOptions
 // by removing the ones the user is not providing,
@@ -117,14 +127,14 @@ export const timeScale: TimeScaleOptions = {
 	localeObject: enUSLocaleObject,
 	timeIntervalFormats: {
 		"15seconds": { primary: "MMM d, pp", secondary: "pp" },
-		"minute": { primary: "MMM d, p", secondary: "p" },
+		minute: { primary: "MMM d, p", secondary: "p" },
 		"30minutes": { primary: "MMM d, p", secondary: "p" },
-		"hourly": { primary: "MMM d, hh a", secondary: "hh a" },
-		"daily": { primary: "MMM d", secondary: "d" },
-		"weekly": { primary: "eee, MMM d", secondary: "eee" },
-		"monthly": { primary: "MMM yyyy", secondary: "MMM" },
-		"quarterly": { primary: "QQQ ''yy", secondary: "QQQ" },
-		"yearly": { primary: "yyyy", secondary: "yyyy" }
+		hourly: { primary: "MMM d, hh a", secondary: "hh a" },
+		daily: { primary: "MMM d", secondary: "d" },
+		weekly: { primary: "eee, MMM d", secondary: "eee" },
+		monthly: { primary: "MMM yyyy", secondary: "MMM" },
+		quarterly: { primary: "QQQ ''yy", secondary: "QQQ" },
+		yearly: { primary: "yyyy", secondary: "yyyy" }
 	}
 };
 
@@ -141,7 +151,8 @@ const chart: BaseChartOptions = {
 		prefix: "cc"
 	},
 	data: {
-		groupMapsTo: "group"
+		groupMapsTo: "group",
+		loading: false
 	},
 	color: {
 		scale: null
@@ -168,22 +179,26 @@ const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: 1
 	} as TimeScaleOptions),
-	tooltip: barChartTooltip,
+	tooltip: barChartTooltip
 } as BarChartOptions);
 
 /**
  * options specific to simple bar charts
  */
-const simpleBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
-
-} as BarChartOptions);
+const simpleBarChart: BarChartOptions = Tools.merge(
+	{},
+	baseBarChart,
+	{} as BarChartOptions
+);
 
 /**
  * options specific to simple bar charts
  */
-const groupedBarChart: BarChartOptions = Tools.merge({}, baseBarChart, {
-
-} as BarChartOptions);
+const groupedBarChart: BarChartOptions = Tools.merge(
+	{},
+	baseBarChart,
+	{} as BarChartOptions
+);
 
 /**
  * options specific to stacked bar charts
@@ -206,6 +221,20 @@ const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
 } as LineChartOptions);
 
 /**
+ * options specific to area charts
+ */
+const areaChart: AreaChartOptions = Tools.merge({}, lineChart, {
+	timeScale: Tools.merge(timeScale, {
+		addSpaceOnEdges: 0
+	} as TimeScaleOptions)
+} as LineChartOptions);
+
+/**
+ * options specific to stacked area charts
+ */
+const stackedAreaChart = areaChart;
+
+/**
  * options specific to scatter charts
  */
 const scatterChart: ScatterChartOptions = Tools.merge({}, axisChart, {
@@ -224,10 +253,13 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
 	bubble: {
 		radiusMapsTo: "radius",
 		radiusRange: (chartSize, data) => {
-			const smallerChartDimension = Math.min(chartSize.width, chartSize.height);
+			const smallerChartDimension = Math.min(
+				chartSize.width,
+				chartSize.height
+			);
 			return [
-				smallerChartDimension * 3 / 400,
-				smallerChartDimension * 25 / 400
+				(smallerChartDimension * 3) / 400,
+				(smallerChartDimension * 25) / 400
 			];
 		},
 		fillOpacity: 0.2
@@ -267,10 +299,11 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	donut: {
 		center: {
-			numberFontSize: radius => Math.min((radius / 100) * 24, 24) + "px",
-			titleFontSize: radius => Math.min((radius / 100) * 15, 15) + "px",
-			titleYPosition: radius => Math.min((radius / 80) * 20, 20),
-			numberFormatter: number => Math.floor(number).toLocaleString()
+			numberFontSize: (radius) =>
+				Math.min((radius / 100) * 24, 24) + "px",
+			titleFontSize: (radius) => Math.min((radius / 100) * 15, 15) + "px",
+			titleYPosition: (radius) => Math.min((radius / 80) * 20, 20),
+			numberFormatter: (number) => Math.floor(number).toLocaleString()
 		}
 	}
 } as DonutChartOptions);
@@ -294,6 +327,35 @@ const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 	}
 });
 
+/**
+ * options specific to radar charts
+ */
+const radarChart: RadarChartOptions = Tools.merge({}, chart, {
+	radar: {
+		axes: {
+			angle: "key",
+			value: "value"
+		},
+		opacity: {
+			unselected: 0.1,
+			selected: 0.3
+		},
+		xLabelPadding: 10,
+		yLabelPadding: 8,
+		yTicksNumber: 4,
+		minRange: 10,
+		xAxisRectHeight: 50,
+		dotsRadius: 5
+	},
+	tooltip: {
+		gridline: {
+			enabled: true
+		},
+		valueFormatter: (value) =>
+			value !== null && value !== undefined ? value : "N/A"
+	}
+} as RadarChartOptions);
+
 export const options = {
 	chart,
 	axisChart,
@@ -302,16 +364,39 @@ export const options = {
 	stackedBarChart,
 	bubbleChart,
 	lineChart,
+	areaChart,
+	stackedAreaChart,
 	scatterChart,
 	pieChart,
 	donutChart,
-	meterChart
+	meterChart,
+	radarChart
 };
 
 /**
  * Options for line behaviour
  */
 export const lines = {
+	opacity: {
+		unselected: 0.3,
+		selected: 1
+	}
+};
+
+/**
+ * Options for area behaviour
+ */
+export const area = {
+	opacity: {
+		unselected: 0,
+		selected: 0.4
+	}
+};
+
+/**
+ * Options for area behaviour
+ */
+export const areas = {
 	opacity: {
 		unselected: 0.3,
 		selected: 1

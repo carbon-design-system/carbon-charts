@@ -1,23 +1,23 @@
 // Internal Imports
 import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
-import {
-	ChartConfig,
-	LineChartOptions
-} from "../interfaces/index";
+import { ChartConfig, LineChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
+import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
 	Grid,
 	Line,
+	Ruler,
 	Scatter,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TooltipScatter
+	TooltipScatter,
+	Skeleton,
 } from "../components/index";
 
 export class LineChart extends AxisChart {
@@ -42,11 +42,17 @@ export class LineChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
+			new Ruler(this.model, this.services),
 			new Line(this.model, this.services),
-			new Scatter(this.model, this.services)
+			new Scatter(this.model, this.services, { handleThresholds: true }),
+			new Skeleton(this.model, this.services, {
+				skeleton: Skeletons.GRID,
+			}),
 		];
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents);
+		const components: any[] = this.getAxisChartComponents(
+			graphFrameComponents
+		);
 		components.push(new TooltipScatter(this.model, this.services));
 		return components;
 	}

@@ -13,6 +13,7 @@ export class MeterTitle extends Title {
 		const svg = this.getContainerSVG();
 		const { groupMapsTo } = options.data;
 
+		console.log("data to attach", dataset[groupMapsTo]);
 		// the title for a meter, is the label for that dataset
 		const title = svg.selectAll("text.meter-title")
 			.data([dataset[groupMapsTo]]);
@@ -50,7 +51,11 @@ export class MeterTitle extends Title {
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
 
-		const containerBounds = DOMUtils.getSVGElementSize(this.parent, { useAttr: true });
+		const containerBounds = DOMUtils.getSVGElementSize(
+			this.services.domUtils.getMainSVG(),
+			{ useAttr: true }
+		);
+
 		// need to check if the width is 0, and try to use the parent attribute
 		// this can happen if the chart is toggled on/off and the height is 0 for the parent, it wont validateDimensions
 		const containerWidth = containerBounds.width ? containerBounds.width : this.parent.node().getAttribute("width");
@@ -144,8 +149,10 @@ export class MeterTitle extends Title {
 	// computes the maximum space a title can take
 	protected getMaxTitleWidth() {
 		// get a reference to the title elements to calculate the size the title can be
-		const containerBounds = DOMUtils.getSVGElementSize(this.parent, { useAttr: true });
-
+		const containerBounds = DOMUtils.getSVGElementSize(
+			this.services.domUtils.getMainSVG(),
+			{ useAttr: true }
+		);
 
 		// need to check if the width is 0, and try to use the parent attribute
 		const containerWidth = containerBounds.width ? containerBounds.width : this.parent.node().getAttribute("width");

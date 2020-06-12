@@ -12,49 +12,132 @@ export class Scatter extends Component {
 	init() {
 		const { events } = this.services;
 		// Highlight correct circle on legend item hovers
-		events.addEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
+		events.addEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover
+		);
 		// Un-highlight circles on legend item mouseouts
-		events.addEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
+		events.addEventListener(
+			Events.Legend.ITEM_MOUSEOUT,
+			this.handleLegendMouseOut
+		);
+
+		const { fadeInOnChartHolderMouseover } = this.configs;
+		if (fadeInOnChartHolderMouseover) {
+			// Fade-in scatter circles
+			events.addEventListener(
+				Events.Chart.MOUSEOVER,
+				this.handleChartHolderOnHover
+			);
+			// Fade-out scatter circles
+			events.addEventListener(
+				Events.Chart.MOUSEOUT,
+				this.handleChartHolderOnMouseOut
+			);
+		}
 	}
 
 	render(animate: boolean) {
 		// Grab container SVG
 		const svg = this.getContainerSVG();
 
-		const groupedData = this.model.getGroupedData();
+		const options = this.model.getOptions();
+		const { groupMapsTo } = options.data;
+
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+
+		const { stacked } = this.configs;
+		let scatterData;
+		if (stacked) {
+			scatterData = this.model.getStackedData({
+				percentage: options.percentage,
+			});
+		} else {
+			scatterData = this.model
+				.getDisplayData()
+				.filter(
+					(d) =>
+						d[rangeIdentifier] !== undefined &&
+						d[rangeIdentifier] !== null
+				);
+		}
 
 		// Update data on dot groups
-		const dotGroups = svg.selectAll("g.dots")
-			.data(groupedData, group => group.name);
+		const circles = svg
+			.selectAll("circle.dot")
+			.data(
+				scatterData,
+				(datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
+			);
 
-		// Remove dot groups that need to be removed
-		dotGroups.exit()
-			.attr("opacity", 0)
-			.remove();
+		// Remove circles that need to be removed
+		circles.exit().attr("opacity", 0).remove();
 
 		// Add the dot groups that need to be introduced
-		const dotGroupsEnter = dotGroups.enter()
-			.append("g")
-				.classed("dots", true)
-				.attr("role", Roles.GROUP);
-
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-		// Update data on all circles
-		const dots = dotGroupsEnter.merge(dotGroups)
-			.selectAll("circle.dot")
-			.data(group => group.data.filter(datum => datum[rangeIdentifier] !== null && datum[rangeIdentifier] !== undefined));
-
-		// Add the circles that need to be introduced
-		const dotsEnter = dots.enter()
+		const enteringCircles = circles
+			.enter()
 			.append("circle")
+			.classed("dot", true)
 			.attr("opacity", 0);
 
 		// Apply styling & position
-		const circlesToStyle = dotsEnter.merge(dots);
+		const circlesToStyle = enteringCircles.merge(circles);
 		this.styleCircles(circlesToStyle, animate);
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
+	}
+
+	// A value is an anomaly if is above all defined domain and range thresholds
+	isDatapointThresholdAnomaly(datum: any, index: number) {
+		const { handleThresholds } = this.configs;
+		if (!handleThresholds) {
+			return false;
+		}
+
+		const { cartesianScales } = this.services;
+		const orientation = cartesianScales.getOrientation();
+
+		// Get highest domain and range thresholds
+		const [
+			xThreshold,
+			yThreshold,
+		] = Tools.flipDomainAndRangeBasedOnOrientation(
+			this.services.cartesianScales.getHighestDomainThreshold(),
+			this.services.cartesianScales.getHighestRangeThreshold(),
+			orientation
+		);
+
+		const [
+			getXValue,
+			getYValue,
+		] = Tools.flipDomainAndRangeBasedOnOrientation(
+			(d, i) => cartesianScales.getDomainValue(d, i),
+			(d, i) => cartesianScales.getRangeValue(d, i),
+			orientation
+		);
+
+		// Get datum x and y values
+		const xValue = getXValue(datum, index);
+		const yValue = getYValue(datum, index);
+
+		// To be an anomaly, the value has to be higher or equal than the threshold value
+		// (if are present, both range and domain threshold values)
+		if (yThreshold && xThreshold) {
+			return (
+				yValue <= yThreshold.scaleValue &&
+				xValue >= xThreshold.scaleValue
+			);
+		}
+
+		if (yThreshold) {
+			return yValue <= yThreshold.scaleValue;
+		}
+
+		if (xThreshold) {
+			return xValue >= xThreshold.scaleValue;
+		}
 	}
 
 	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
@@ -69,86 +152,176 @@ export class Scatter extends Component {
 
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
-		const [getXValue, getYValue] = Tools.flipDomainAndRangeBasedOnOrientation(
+		const [
+			getXValue,
+			getYValue,
+		] = Tools.flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
 			cartesianScales.getOrientation()
 		);
 
-		selection.raise()
+		const { fadeInOnChartHolderMouseover } = this.configs;
+		selection
+			.raise()
 			.classed("dot", true)
-			.classed("filled", d => this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
-			.classed("unfilled", d => !this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled))
+			// Set class to highlight the dots that are above all the thresholds, in both directions (vertical and horizontal)
+			.classed("threshold-anomaly", (d, i) =>
+				this.isDatapointThresholdAnomaly(d, i)
+			)
+			.classed("filled", (d) =>
+				this.model.getIsFilled(
+					d[groupMapsTo],
+					d[domainIdentifier],
+					d,
+					filled
+				)
+			)
+			.classed(
+				"unfilled",
+				(d) =>
+					!this.model.getIsFilled(
+						d[groupMapsTo],
+						d[domainIdentifier],
+						d,
+						filled
+					)
+			)
+			.transition(
+				transitions.getTransition("scatter-update-enter", animate)
+			)
 			.attr("cx", getXValue)
-			.transition(transitions.getTransition("scatter-update-enter", animate))
 			.attr("cy", getYValue)
 			.attr("r", options.points.radius)
-			.attr("fill", d => {
-				if (this.model.getIsFilled(d[groupMapsTo], d[domainIdentifier], d, filled)) {
-					return this.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d);
+			.attr("fill", (d) => {
+				if (
+					this.model.getIsFilled(
+						d[groupMapsTo],
+						d[domainIdentifier],
+						d,
+						filled
+					)
+				) {
+					return this.model.getFillColor(
+						d[groupMapsTo],
+						d[domainIdentifier],
+						d
+					);
 				}
 			})
 			.attr("fill-opacity", filled ? 0.2 : 1)
-			.attr("stroke", d => this.model.getStrokeColor(d[groupMapsTo], d[domainIdentifier], d))
-			.attr("opacity", 1)
+			.attr("stroke", (d) =>
+				this.model.getStrokeColor(
+					d[groupMapsTo],
+					d[domainIdentifier],
+					d
+				)
+			)
+			.attr("opacity", fadeInOnChartHolderMouseover ? 0 : 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "point")
-			.attr("aria-label", d => d[rangeIdentifier]);
+			.attr("aria-label", (d) => d[rangeIdentifier]);
 
 		// Add event listeners to elements drawn
 		this.addEventListeners();
 	}
+
+	handleChartHolderOnHover = (event: CustomEvent) => {
+		this.parent
+			.selectAll("circle.dot")
+			.transition(
+				this.services.transitions.getTransition(
+					"chart-holder-hover-scatter"
+				)
+			)
+			.attr("opacity", 1);
+	};
+
+	handleChartHolderOnMouseOut = (event: CustomEvent) => {
+		this.parent
+			.selectAll("circle.dot")
+			.transition(
+				this.services.transitions.getTransition(
+					"chart-holder-mouseout-scatter"
+				)
+			)
+			.attr("opacity", 0);
+	};
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
 
 		const { groupMapsTo } = this.model.getOptions().data;
 
-		this.parent.selectAll("circle.dot")
-			.transition(this.services.transitions.getTransition("legend-hover-scatter"))
-			.attr("opacity", d => (d[groupMapsTo] !== hoveredElement.datum()["name"]) ? 0.3 : 1);
-	}
+		this.parent
+			.selectAll("circle.dot")
+			.transition(
+				this.services.transitions.getTransition("legend-hover-scatter")
+			)
+			.attr("opacity", (d) =>
+				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
+			);
+	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
-		this.parent.selectAll("circle.dot")
-			.transition(this.services.transitions.getTransition("legend-mouseout-scatter"))
+		this.parent
+			.selectAll("circle.dot")
+			.transition(
+				this.services.transitions.getTransition(
+					"legend-mouseout-scatter"
+				)
+			)
 			.attr("opacity", 1);
-	}
+	};
 
 	addEventListeners() {
 		const self = this;
 		const { groupMapsTo } = this.model.getOptions().data;
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
-		this.parent.selectAll("circle")
-			.on("mouseover mousemove", function(datum) {
+		this.parent
+			.selectAll("circle")
+			.on("mouseover mousemove", function (datum) {
 				const hoveredElement = select(this);
 
-				hoveredElement.classed("hovered", true)
-					.style("fill", (d: any) => self.model.getFillColor(d[groupMapsTo], d[domainIdentifier], d));
+				hoveredElement
+					.classed("hovered", true)
+					.style("fill", (d: any) =>
+						self.model.getFillColor(
+							d[groupMapsTo],
+							d[domainIdentifier],
+							d
+						)
+					);
 
-				const eventNameToDispatch = d3Event.type === "mouseover" ? Events.Scatter.SCATTER_MOUSEOVER : Events.Scatter.SCATTER_MOUSEMOVE;
+				const eventNameToDispatch =
+					d3Event.type === "mouseover"
+						? Events.Scatter.SCATTER_MOUSEOVER
+						: Events.Scatter.SCATTER_MOUSEMOVE;
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(eventNameToDispatch, {
 					element: hoveredElement,
-					datum
+					datum,
 				});
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					type: TooltipTypes.DATAPOINT
+					type: TooltipTypes.DATAPOINT,
 				});
 			})
-			.on("click", function(datum) {
+			.on("click", function (datum) {
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Scatter.SCATTER_CLICK, {
-					element: select(this),
-					datum
-				});
+				self.services.events.dispatchEvent(
+					Events.Scatter.SCATTER_CLICK,
+					{
+						element: select(this),
+						datum,
+					}
+				);
 			})
-			.on("mouseout", function(datum) {
+			.on("mouseout", function (datum) {
 				const hoveredElement = select(this);
 				hoveredElement.classed("hovered", false);
 
@@ -157,25 +330,45 @@ export class Scatter extends Component {
 				}
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Scatter.SCATTER_MOUSEOUT, {
-					element: hoveredElement,
-					datum
-				});
+				self.services.events.dispatchEvent(
+					Events.Scatter.SCATTER_MOUSEOUT,
+					{
+						element: hoveredElement,
+						datum,
+					}
+				);
 
 				// Hide tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.HIDE, { hoveredElement });
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
+					hoveredElement,
+				});
 			});
 	}
 
 	destroy() {
 		// Remove event listeners
-		this.parent.selectAll("circle")
+		this.parent
+			.selectAll("circle")
 			.on("mousemove", null)
 			.on("mouseout", null);
 
 		// Remove legend listeners
 		const { events } = this.services;
-		events.removeEventListener(Events.Legend.ITEM_HOVER, this.handleLegendOnHover);
-		events.removeEventListener(Events.Legend.ITEM_MOUSEOUT, this.handleLegendMouseOut);
+		events.removeEventListener(
+			Events.Legend.ITEM_HOVER,
+			this.handleLegendOnHover
+		);
+		events.removeEventListener(
+			Events.Legend.ITEM_MOUSEOUT,
+			this.handleLegendMouseOut
+		);
+		events.removeEventListener(
+			Events.Chart.MOUSEOVER,
+			this.handleChartHolderOnHover
+		);
+		events.removeEventListener(
+			Events.Chart.MOUSEOUT,
+			this.handleChartHolderOnMouseOut
+		);
 	}
 }

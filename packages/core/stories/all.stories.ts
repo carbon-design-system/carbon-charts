@@ -77,11 +77,13 @@ introStories.add("Welcome", () => {
 });
 
 // Loop through all demo groups
-storybookDemoGroups.forEach(demoGroup => {
+storybookDemoGroups.forEach((demoGroup) => {
 	// Create story group for each demo group
-	const groupStories = storiesOf(demoGroup.title, module).addDecorator(withKnobs);
+	const groupStories = storiesOf(demoGroup.title, module).addDecorator(
+		withKnobs
+	);
 
-	demoGroup.demos.forEach(demo => {
+	demoGroup.demos.forEach((demo) => {
 		const ClassToInitialize = ChartComponents[demo.chartType.vanilla];
 
 		// Loop through the demos for the group
@@ -93,7 +95,9 @@ storybookDemoGroups.forEach(demoGroup => {
 			container.innerHTML = `
 <h3>
 	<b class="component">Component:</b>
-	<span class="bx--tag bx--tag--green component-name">${demo.chartType.vanilla}</span>
+	<span class="bx--tag bx--tag--green component-name">${
+		demo.chartType.vanilla
+	}</span>
 </h3>
 <p class="props">
 	<span><b>Props: </b><span>data, </span><a href="https://carbon-design-system.github.io/carbon-charts/documentation/modules/_interfaces_charts_.html" target="_blank">options</a></span>
@@ -113,10 +117,13 @@ ${storyUtils.generateThemePickerHTML()}
 			storyUtils.addRadioButtonEventListeners(container);
 
 			// Initialize chart
-			const chart = new ClassToInitialize(container.querySelector("div#chart-demo"), {
-				data: object("Data", demo.data),
-				options: object("Options", demo.options),
-			});
+			const chart = new ClassToInitialize(
+				container.querySelector("div#chart-demo"),
+				{
+					data: object("Data", demo.data),
+					options: object("Options", demo.options),
+				}
+			);
 
 			return container;
 		});
@@ -157,15 +164,16 @@ if (process.env.NODE_ENV !== "production") {
 		let i = 0;
 		let row = getNewRow();
 
-		storybookDemoGroups.forEach(demoGroup => {
-			demoGroup.demos.forEach(demo => {
+		storybookDemoGroups.forEach((demoGroup) => {
+			demoGroup.demos.forEach((demo) => {
 				grid.appendChild(row);
 				if (i % 2 === 0 && i !== 0) {
 					row = getNewRow();
 					grid.appendChild(row);
 				}
 
-				const ClassToInitialize = ChartComponents[demo.chartType.vanilla];
+				const ClassToInitialize =
+					ChartComponents[demo.chartType.vanilla];
 
 				const column = document.createElement("div");
 				column.className = "bx--col-md-12 bx--col-lg-6 chart-demo";
