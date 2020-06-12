@@ -6,7 +6,7 @@ export class TooltipPie extends Tooltip {
 	getTooltipHTML(d: any, type: TooltipTypes) {
 		// check if it is getting styles for a title tooltip
 		if (type === TooltipTypes.TITLE) {
-			super.getTooltipHTML(d, type);
+			return super.getTooltipHTML(d, type);
 		}
 
 		const dataVal = d.data;

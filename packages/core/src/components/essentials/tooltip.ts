@@ -152,12 +152,6 @@ export class Tooltip extends Component {
 		// title tooltips
 		if (type === TooltipTypes.TITLE) {
 			return this.getTruncatedHTML(data);
-			// const svg = this.getContainerSVG();
-			// const title = DOMUtils.appendOrSelect(
-			// 	svg,
-			// 	"text.title"
-			// );
-			// return `<div class="title-tooltip"><text>${"title"}</text></div>`;
 		}
 
 		// other tooltips

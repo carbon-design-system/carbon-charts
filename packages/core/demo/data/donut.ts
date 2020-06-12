@@ -3,13 +3,13 @@ import { pieData } from "./pie";
 export const donutData = pieData;
 
 export const donutOptions = {
-	title: "Donut",
+	title: "Donut Radar adaskfhadksfhfgkhgkfdhgfdhg  gdsfghdfghfd gsdfg gsdf gdfs gdfg dfsg  dsfg dfg  gfds gdfgdfg",
 	resizable: true,
 	donut: {
 		center: {
-			label: "Browsers",
-		},
-	},
+			label: "Browsers"
+		}
+	}
 };
 
 // donut - empty state
@@ -19,9 +19,9 @@ export const donutEmptyStateOptions = {
 	resizable: true,
 	donut: {
 		center: {
-			label: "Browsers",
-		},
-	},
+			label: "Browsers"
+		}
+	}
 };
 
 // donut - skeleton
@@ -31,10 +31,10 @@ export const donutSkeletonOptions = {
 	resizable: true,
 	donut: {
 		center: {
-			label: "Browsers",
-		},
+			label: "Browsers"
+		}
 	},
 	data: {
-		loading: true,
-	},
+		loading: true
+	}
 };

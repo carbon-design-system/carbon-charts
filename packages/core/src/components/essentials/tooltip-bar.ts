@@ -5,7 +5,7 @@ import {
 	TooltipPosition,
 	TooltipTypes,
 	CartesianOrientations,
-	Events,
+	Events
 } from "./../../interfaces";
 
 // import the settings for the css prefix
@@ -114,7 +114,7 @@ export class TooltipBar extends Tooltip {
 				// use tooltip.ts to get the tooltip html for titles
 				tooltipTextContainer.html(
 					super.getTooltipHTML(
-						e.detail.hoveredElement,
+						e.detail.titleString,
 						TooltipTypes.TITLE
 					)
 				);
@@ -160,7 +160,7 @@ export class TooltipBar extends Tooltip {
 					barPosition.left -
 					holderPosition.left +
 					barPosition.width / 2,
-				top: barPosition.bottom - holderPosition.top + verticalOffset,
+				top: barPosition.bottom - holderPosition.top + verticalOffset
 			};
 
 			return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
