@@ -25,10 +25,10 @@ export enum AxisPositions {
  * enum of all possible truncation types
  */
 export enum TruncationTypes {
-	END_LINE = "END_LINE",
-	MID_LINE = "MID_LINE",
-	FRONT_LINE = "FRONT_LINE",
-	NONE = "NONE",
+	END_LINE = "end_line",
+	MID_LINE = "mid_line",
+	FRONT_LINE = "front_line",
+	NONE = "none",
 }
 
 /**
