@@ -432,6 +432,12 @@ let allDemoGroups = [
 				data: gaugeDemos.gaugeData,
 				chartType: chartTypes.GaugeChart,
 				isDemoExample: true
+			},
+			{
+				options: gaugeDemos.gaugeOptionsCircularNoDelta,
+				data: gaugeDemos.gaugeDataNoDelta,
+				chartType: chartTypes.GaugeChart,
+				isDemoExample: true
 			}
 		]
 	},

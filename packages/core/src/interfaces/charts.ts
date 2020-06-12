@@ -248,10 +248,13 @@ export interface PieChartOptions extends BaseChartOptions {
 export interface GaugeChartOptions extends PieChartOptions {
 	gauge?: {
 		arcWidth?: number;
-		fillColor?: string;
 		status?: Statuses;
 		arrowDirection?: ArrowDirections;
 		numberFormatter?: Function;
+		valueFontSize?: Function;
+		deltaFontSize?: Function;
+		arrowSize?: Function;
+		numberKerning?: number;
 		type?: GaugeTypes;
 	};
 }

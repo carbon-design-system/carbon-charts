@@ -9,8 +9,8 @@ import { select } from "d3-selection";
 import { arc } from "d3-shape";
 
 // arrow paths for delta
-const ARROW_UP = "4,10 8,6 12,10";
-const ARROW_DOWN = "12,6 8,10 4,6";
+const ARROW_UP_PATH_STRING = "4,10 8,6 12,10";
+const ARROW_DOWN_PATH_STRING = "12,6 8,10 4,6";
 
 export class Gauge extends Component {
 	type = "gauge";
@@ -27,7 +27,8 @@ export class Gauge extends Component {
 
 	getValue(): number {
 		const data = this.model.getData();
-		return data.find((d) => d.group === "value").value;
+		const value = data.find((d) => d.group === "value")?.value ?? null;
+		return value;
 	}
 
 	getValueRatio(): number {
@@ -37,17 +38,14 @@ export class Gauge extends Component {
 
 	getDelta(): number {
 		const data = this.model.getData();
-		const delta = data.find((d) => d.group === "delta");
-		return delta ? delta.value : null;
+		const delta = data.find((d) => d.group === "delta")?.value ?? null;
+		return delta;
 	}
 
 	getArcRatio(): number {
 		const options = this.model.getOptions();
 		const type = Tools.getProperty(options, "gauge", "type");
 		const arcRatio = type === GaugeTypes.FULL ? 1 : 0.5;
-		if (arcRatio === undefined) {
-			throw new Error("Gauge chart arc type not compatible");
-		}
 		return arcRatio;
 	}
 
@@ -70,11 +68,11 @@ export class Gauge extends Component {
 
 		switch (arrowDirection) {
 			case ArrowDirections.UP:
-				return ARROW_UP;
+				return ARROW_UP_PATH_STRING;
 			case ArrowDirections.DOWN:
-				return ARROW_DOWN;
+				return ARROW_DOWN_PATH_STRING;
 			default:
-				return delta > 0 ? ARROW_UP : ARROW_DOWN;
+				return delta > 0 ? ARROW_UP_PATH_STRING : ARROW_DOWN_PATH_STRING;
 		}
 	}
 
@@ -83,11 +81,13 @@ export class Gauge extends Component {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
+		const { groupMapsTo } = options.data;
+
 		const value = this.getValue();
 		const valueRatio = this.getValueRatio();
-		const delta = this.getDelta();
 		const arcSize = this.getArcSize();
-		const arcType = Tools.getProperty(options, "gauge", "arcType");
+
+		// angles for drawing the gauge
 		const startAngle = this.getStartAngle();
 		const rotationAngle = valueRatio * arcSize;
 		const currentAngle = startAngle + rotationAngle;
@@ -97,16 +97,7 @@ export class Gauge extends Component {
 		const radius = this.computeRadius();
 		const innerRadius = this.getInnerRadius();
 
-		// Sizing and positions relative to the radius
-		const arrowSize = radius / 8;
-		const valueFontSize = radius / 2.5;
-		const deltaFontSize = radius / 8;
-		const distanceBetweenNumbers = 10;
-		const numbersYPosition =
-			arcType === GaugeTypes.SEMI
-				? -(deltaFontSize + distanceBetweenNumbers)
-				: 0;
-
+		// draw the container and arc
 		this.backgroundArc = arc()
 			.innerRadius(innerRadius)
 			.outerRadius(radius)
@@ -124,7 +115,6 @@ export class Gauge extends Component {
 			.attr("d", this.backgroundArc)
 			.attr("role", Roles.GROUP);
 
-
 		// Add data arc
 		const arcValue = svg.selectAll("path.arc-foreground")
 			.data([value]);
@@ -135,7 +125,7 @@ export class Gauge extends Component {
 			.attr("class", "arc-foreground")
 			.merge(arcValue)
 			.attr("d", this.arc)
-			.attr("fill", Tools.getProperty(options, "gauge", "fillColor"))
+			.attr("fill", d => self.model.getFillColor(d[groupMapsTo]))
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "value")
@@ -147,20 +137,54 @@ export class Gauge extends Component {
 			`translate(${radius}, ${radius})`
 		);
 
+		// draw the value and delta to the center
+		this.drawValueNumber();
+		this.drawDelta();
+
+		arcValue.exit().remove();
+
+		// Add event listeners
+		this.addEventListeners();
+	}
+
+	/**
+	 * draws the value number associated with the Gauge component in the center
+	 */
+	drawValueNumber() {
+		const svg = this.getContainerSVG();
+		const options = this.model.getOptions();
+
+		const arcType = Tools.getProperty(options, "gauge", "type");
+		const value = this.getValue();
+		const delta = this.getDelta();
+
+		// Sizing and positions relative to the radius
+		const radius = this.computeRadius();
+
+		const valueFontSize = Tools.getProperty(options, "gauge", "valueFontSize");
+		// if there is a delta, use the size to center the numbers, otherwise center the valueNumber
+		const deltaFontSize = Tools.getProperty(options, "gauge", "deltaFontSize");
+
+		// circular gauge without delta should have valueNumber centered
+		let numbersYPosition = 0;
+		if (arcType === GaugeTypes.FULL && !delta) {
+			numbersYPosition =  deltaFontSize(radius);
+		}
+
 		// Add the numbers at the center
-		const numbersG = DOMUtils.appendOrSelect(svg, "g.gauge-numbers").attr(
+		const numbersGroup = DOMUtils.appendOrSelect(svg, "g.gauge-numbers").attr(
 			"transform",
 			`translate(0, ${numbersYPosition})`
 		);
 
 		// Add the big number
-		const valueNumberG = DOMUtils.appendOrSelect(
-			numbersG,
+		const valueNumberGroup = DOMUtils.appendOrSelect(
+			numbersGroup,
 			"g.gauge-value-number"
-		).attr("transform", `translate(-10, 0)`); // Optical centering for the presence of the smaller % symbol
+		).attr("transform", "translate(-10, 0)"); // Optical centering for the presence of the smaller % symbol
 
 		const numberFormatter = Tools.getProperty(options, "gauge", "numberFormatter");
-		const valueNumber = valueNumberG.selectAll("text.gauge-value-number")
+		const valueNumber = valueNumberGroup.selectAll("text.gauge-value-number")
 			.data([value]);
 
 		valueNumber
@@ -168,26 +192,46 @@ export class Gauge extends Component {
 			.append("text")
 			.attr("class", "gauge-value-number")
 			.merge(valueNumber)
-			.style("font-size", `${valueFontSize}px`)
+			.style("font-size", `${valueFontSize(radius)}px`)
 			.attr("text-anchor", "middle")
 			.text(d => numberFormatter(d));
 
+		// add the percentage symbol beside the valueNumber
 		const {
 			width: valueNumberWidth
 		} = DOMUtils.getSVGElementSize(DOMUtils.appendOrSelect(svg, "text.gauge-value-number"), { useBBox: true });
 
-		DOMUtils.appendOrSelect(valueNumberG, "text.gauge-value-symbol")
-			.style("font-size", `${valueFontSize / 2}px`)
+		DOMUtils.appendOrSelect(valueNumberGroup, "text.gauge-value-symbol")
+			.style("font-size", `${valueFontSize(radius) / 2}px`)
 			.attr("x", valueNumberWidth / 2)
 			.text("%");
+	}
+
+	/**
+	 * adds the delta number for the gauge
+	 */
+	drawDelta() {
+		const self = this;
+		const svg = this.getContainerSVG();
+		const options = this.model.getOptions();
+		const delta = this.getDelta();
+
+		// Sizing and positions relative to the radius
+		const radius = this.computeRadius();
+		const deltaFontSize = delta ? Tools.getProperty(options, "gauge", "deltaFontSize") : () => 0;
+		const numberFormatter = Tools.getProperty(options, "gauge", "numberFormatter");
+		const arrowSize = Tools.getProperty(options, "gauge", "arrowSize");
+		const numberKerning = Tools.getProperty(options, "gauge", "numberKerning");
+
+		const numbersGroup = DOMUtils.appendOrSelect(svg, "g.gauge-numbers");
 
 		// Add the smaller number of the delta
 		const deltaGroup = DOMUtils.appendOrSelect(
-			numbersG,
+			numbersGroup,
 			"g.gauge-delta"
 		).attr(
 			"transform",
-			`translate(0, ${deltaFontSize + distanceBetweenNumbers})`
+			`translate(0, ${deltaFontSize(radius) + numberKerning})`
 		);
 
 		const deltaNumber = deltaGroup.selectAll("text.gauge-delta-number")
@@ -199,7 +243,7 @@ export class Gauge extends Component {
 			.merge(deltaNumber)
 			.attr("class", "gauge-delta-number")
 			.attr("text-anchor", "middle")
-			.style("font-size", `${deltaFontSize}px`)
+			.style("font-size", `${deltaFontSize(radius)}px`)
 			.text(d => `${numberFormatter(d)}%`);
 
 		// Add the caret for the delta number
@@ -215,16 +259,16 @@ export class Gauge extends Component {
 			.append("svg")
 			.merge(deltaArrow)
 			.attr("class", "gauge-delta-arrow")
-			.attr("x", -arrowSize - deltaNumberWidth / 2)
-			.attr("y", -arrowSize / 2 - deltaFontSize * 0.35)
-			.attr("width", arrowSize)
-			.attr("height", arrowSize)
-			.attr("viewBox", `0 0 16 16`);
+			.attr("x", -arrowSize(radius) - deltaNumberWidth / 2)
+			.attr("y", -arrowSize(radius) / 2 - deltaFontSize(radius) * 0.35)
+			.attr("width", arrowSize(radius))
+			.attr("height", arrowSize(radius))
+			.attr("viewBox", "0 0 16 16");
 
 		// Needed to correctly size SVG in Firefox
 		DOMUtils.appendOrSelect(deltaArrow, "rect.gauge-delta-arrow-backdrop")
-			.attr("width", `16`)
-			.attr("height", `16`)
+			.attr("width", "16")
+			.attr("height", "16")
 			.attr("fill", "none");
 
 		// Draw the arrow with status
@@ -236,10 +280,6 @@ export class Gauge extends Component {
 
 		deltaArrow.exit().remove();
 		deltaNumber.exit().remove();
-		arcValue.exit().remove();
-
-		// Add event listeners
-		this.addEventListeners();
 	}
 
 	getInnerRadius() {
@@ -253,14 +293,14 @@ export class Gauge extends Component {
 		const self = this;
 		this.parent
 			.selectAll("path.arc")
-			.on("mouseover", function(datum) {
+			.on("mouseover", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_MOUSEOVER, {
 					element: select(this),
 					datum
 				});
 			})
-			.on("mousemove", function(datum) {
+			.on("mousemove", function (datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
@@ -275,14 +315,14 @@ export class Gauge extends Component {
 					type: TooltipTypes.DATAPOINT
 				});
 			})
-			.on("click", function(datum) {
+			.on("click", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Gauge.ARC_CLICK, {
 					element: select(this),
 					datum
 				});
 			})
-			.on("mouseout", function(datum) {
+			.on("mouseout", function (datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
@@ -301,7 +341,7 @@ export class Gauge extends Component {
 	// Helper functions
 	protected computeRadius() {
 		const options = this.model.getOptions();
-		const arcType = Tools.getProperty(options, "gauge", "arcType");
+		const arcType = Tools.getProperty(options, "gauge", "type");
 
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
