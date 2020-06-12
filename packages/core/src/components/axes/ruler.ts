@@ -1,12 +1,11 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes, ScaleTypes } from "../../interfaces";
+import { TooltipTypes, CartesianOrientations } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
 import { mouse, Selection } from "d3-selection";
-import { scaleLinear } from "d3-scale";
 
 type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
 
@@ -17,25 +16,10 @@ function pointIsWithinThreshold(dx: number, x: number) {
 	return dx > x - THRESHOLD && dx < x + THRESHOLD;
 }
 
-/**
- * a compatibility function that accepts ordinal scales too
- * as those do not support .invert() by default,
- * so a scale clone is created to invert domain with range
- */
-function invertedScale(scale) {
-	if (scale.invert) {
-		return scale.invert;
-	}
-
-	return scaleLinear()
-		.domain(scale.range())
-		.range(scale.domain());
-}
-
 export class Ruler extends Component {
 	type = "ruler";
 	backdrop: GenericSvgSelection;
-	hoveredElements: GenericSvgSelection;
+	elementsToHighlight: GenericSvgSelection;
 
 	render() {
 		this.drawBackdrop();
@@ -44,44 +28,61 @@ export class Ruler extends Component {
 
 	showRuler([x, y]: [number, number]) {
 		const svg = this.parent;
+		const orientation: CartesianOrientations = this.services.cartesianScales.getOrientation();
+		const mouseCoordinate =
+			orientation === CartesianOrientations.HORIZONTAL ? y : x;
 		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler");
-		const line = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
+		const rulerLine = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
 		const dataPointElements: GenericSvgSelection = svg.selectAll(
 			"[role=graphics-symbol]"
 		);
 		const displayData = this.model.getDisplayData();
-		const domainScale = this.services.cartesianScales.getDomainScale();
 		const rangeScale = this.services.cartesianScales.getRangeScale();
 		const [yScaleEnd, yScaleStart] = rangeScale.range();
-
-		const scaledData: {domainValue: number, originalData: any}[] = displayData.map((d, i) => ({
-			domainValue: this.services.cartesianScales.getDomainValue(d, i),
-			originalData: d
+		const scaledData: {
+			domainValue: number;
+			originalData: any;
+		}[] = displayData.map((d) => ({
+			domainValue: this.services.cartesianScales.getDomainValue(d),
+			originalData: d,
 		}));
 
 		/**
 		 * Find matches, reduce is used instead of filter
 		 * to only get elements which belong to the same axis coordinate
 		 */
-		const dataPointsMatchingRulerLine: {domainValue: number, originalData: any}[] =
-			scaledData.reduce((accum, currentValue) => {
-				// store the first element of the accumulator array to compare it with current element being processed
-				const sampleAccumValue = accum[0] ? accum[0].domainValue : undefined;
-
-				// if accumulator is not empty and current value is bigger than already existing value in the accumulator, skip current iteration
-				if (sampleAccumValue !== undefined && currentValue.domainValue > sampleAccumValue) {
+		const dataPointsMatchingRulerLine: {
+			domainValue: number;
+			originalData: any;
+		}[] = scaledData
+			.filter((d) =>
+				pointIsWithinThreshold(d.domainValue, mouseCoordinate)
+			)
+			.reduce((accum, currentValue) => {
+				if (accum.length === 0) {
+					accum.push(currentValue);
 					return accum;
 				}
 
-				// there's a match and currentValue is either less then or equal to already stored values
-				if (pointIsWithinThreshold(currentValue.domainValue, x)) {
-					if (sampleAccumValue !== undefined && currentValue < sampleAccumValue) {
-						// there's a closer data point in the threshold area, so reinstantiate array
-						accum = [currentValue];
-					} else {
-						// currentValue is equal to already stored values, there's another match on the same coordinate
-						accum.push(currentValue);
-					}
+				// store the first element of the accumulator array to compare it with current element being processed
+				const sampleAccumValue = accum[0].domainValue;
+
+				const distanceToCurrentValue = Math.abs(
+					mouseCoordinate - currentValue.domainValue
+				);
+				const distanceToAccumValue = Math.abs(
+					mouseCoordinate - sampleAccumValue
+				);
+
+				if (distanceToCurrentValue > distanceToAccumValue) {
+					// if distance with current value is bigger than already existing value in the accumulator, skip current iteration
+					return accum;
+				} else if (distanceToCurrentValue < distanceToAccumValue) {
+					// currentValue data point is closer to mouse inside the threshold area, so reinstantiate array
+					accum = [currentValue];
+				} else {
+					// currentValue is equal to already stored values, which means there's another match on the same coordinate
+					accum.push(currentValue);
 				}
 
 				return accum;
@@ -89,52 +90,67 @@ export class Ruler extends Component {
 
 		// some data point match
 		if (dataPointsMatchingRulerLine.length > 0) {
-			const highlightItems = dataPointsMatchingRulerLine.map(d => d.originalData)
-				.filter(d => {
-					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+			const tooltipData = dataPointsMatchingRulerLine
+				.map((d) => d.originalData)
+				.filter((d) => {
 					const value = d[rangeIdentifier];
 					return value !== null && value !== undefined;
 				});
 
 			// get elements on which we should trigger mouse events
-			const hoveredElements = dataPointElements.filter((d, i) =>
-				dataPointsMatchingRulerLine.includes(d)
+			const domainValuesMatchingRulerLine = dataPointsMatchingRulerLine.map(
+				(d) => d.domainValue
 			);
+			const elementsToHighlight = dataPointElements.filter((d) => {
+				const domainValue = this.services.cartesianScales.getDomainValue(
+					d
+				);
+				return domainValuesMatchingRulerLine.includes(domainValue);
+			});
 
 			/** if we pass from a trigger area to another one
 			 * mouseout on previous elements won't get dispatched
 			 * so we need to do it manually
 			 */
 			if (
-				this.hoveredElements &&
-				this.hoveredElements.size() > 0 &&
-				!Tools.isEqual(this.hoveredElements, hoveredElements)
+				this.elementsToHighlight &&
+				this.elementsToHighlight.size() > 0 &&
+				!Tools.isEqual(this.elementsToHighlight, elementsToHighlight)
 			) {
 				this.hideRuler();
 			}
 
-			hoveredElements.dispatch("mouseover");
+			elementsToHighlight.dispatch("mouseover");
 
 			// set current hovered elements
-			this.hoveredElements = hoveredElements;
+			this.elementsToHighlight = elementsToHighlight;
 
 			this.services.events.dispatchEvent("show-tooltip", {
-				hoveredElement: line,
-				multidata: highlightItems,
-				type: TooltipTypes.GRIDLINE
+				hoveredElement: rulerLine,
+				multidata: tooltipData,
+				type: TooltipTypes.GRIDLINE,
 			});
 
 			ruler.attr("opacity", 1);
 
 			// line snaps to matching point
 			const sampleMatch = dataPointsMatchingRulerLine[0];
-			line.attr("y1", yScaleStart)
-				.attr("y2", yScaleEnd)
-				.attr("x1", sampleMatch.domainValue)
-				.attr("x2", sampleMatch.domainValue);
+			if (orientation === "horizontal") {
+				rulerLine
+					.attr("x1", yScaleStart)
+					.attr("x2", yScaleEnd)
+					.attr("y1", sampleMatch.domainValue)
+					.attr("y2", sampleMatch.domainValue);
+			} else {
+				rulerLine
+					.attr("y1", yScaleStart)
+					.attr("y2", yScaleEnd)
+					.attr("x1", sampleMatch.domainValue)
+					.attr("x2", sampleMatch.domainValue);
+			}
 		} else {
-			ruler.attr("opacity", 0);
-			dataPointElements.dispatch("mouseout");
+			this.hideRuler();
 		}
 	}
 
@@ -144,6 +160,7 @@ export class Ruler extends Component {
 		const dataPointElements = svg.selectAll("[role=graphics-symbol]");
 
 		dataPointElements.dispatch("mouseout");
+		this.services.events.dispatchEvent("hide-tooltip");
 		ruler.attr("opacity", 0);
 	}
 
@@ -154,26 +171,24 @@ export class Ruler extends Component {
 		const self = this;
 
 		this.backdrop
-			.on("mousemove mouseover", function() {
-				const chartContainer = self.services.domUtils.getMainSVG();
-				const pos = mouse(chartContainer);
+			.on("mousemove mouseover", function () {
+				const pos = mouse(self.parent.node());
 
 				self.showRuler(pos);
 			})
-			.on("mouseout", function() {
+			.on("mouseout", function () {
 				self.hideRuler();
-				self.services.events.dispatchEvent("hide-tooltip");
 			});
 	}
 
 	drawBackdrop() {
 		const svg = this.parent;
 
-		const domainScale = this.services.cartesianScales.getDomainScale();
-		const rangeScale = this.services.cartesianScales.getRangeScale();
+		const mainXScale = this.services.cartesianScales.getMainXScale();
+		const mainYScale = this.services.cartesianScales.getMainYScale();
 
-		const [xScaleStart, xScaleEnd] = domainScale.range();
-		const [yScaleEnd, yScaleStart] = rangeScale.range();
+		const [xScaleStart, xScaleEnd] = mainXScale.range();
+		const [yScaleEnd, yScaleStart] = mainYScale.range();
 
 		// Get height from the grid
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");

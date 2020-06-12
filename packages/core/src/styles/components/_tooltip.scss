@@ -6,7 +6,7 @@
 .#{$prefix}--#{$charts-prefix}--tooltip {
 	background-color: $ui-02;
 	pointer-events: none;
-	transition: opacity .1s;
+	transition: opacity 0.1s;
 	@include carbon--motion(standard, expressive);
 	display: inline;
 	box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
@@ -17,7 +17,7 @@
 
 	&.hidden {
 		opacity: 0;
-		transition: opacity .1s;
+		transition: opacity 0.1s;
 		@include carbon--motion(standard, expressive);
 	}
 
@@ -77,7 +77,7 @@
 				list-style: none;
 				position: relative;
 
-				&:not(:last-child){
+				&:not(:last-child) {
 					@if $carbon--theme == $carbon--theme--g90 {
 						border-bottom: 1px solid $ui-01;
 					} @else if $carbon--theme == $carbon--theme--g100 {
@@ -92,7 +92,7 @@
 
 	.tooltip-color {
 		position: absolute;
-		left:0;
+		left: 0;
 		top: 0;
 		width: 4px;
 		height: 100%;

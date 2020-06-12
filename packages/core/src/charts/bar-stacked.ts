@@ -1,11 +1,9 @@
 // Internal Imports
 import { AxisChart } from "../axis-chart";
 import * as Configuration from "../configuration";
-import {
-	ChartConfig,
-	ScatterChartOptions
-} from "../interfaces/index";
+import { ChartConfig, ScatterChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
+import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
@@ -16,11 +14,15 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TooltipBar
+	TooltipBar,
+	Skeleton,
 } from "../components/index";
 
 export class StackedBarChart extends AxisChart {
-	constructor(holder: Element, chartConfigs: ChartConfig<ScatterChartOptions>) {
+	constructor(
+		holder: Element,
+		chartConfigs: ChartConfig<ScatterChartOptions>
+	) {
 		super(holder, chartConfigs);
 
 		// Merge the default options for this chart
@@ -41,10 +43,15 @@ export class StackedBarChart extends AxisChart {
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
-			new StackedBar(this.model, this.services)
+			new StackedBar(this.model, this.services),
+			new Skeleton(this.model, this.services, {
+				skeleton: Skeletons.VERT_OR_HORIZ,
+			}),
 		];
 
-		const components: any[] = this.getAxisChartComponents(graphFrameComponents);
+		const components: any[] = this.getAxisChartComponents(
+			graphFrameComponents
+		);
 		components.push(new TooltipBar(this.model, this.services));
 		return components;
 	}

@@ -1,3 +1,5 @@
+import CcvAreaChart from './ccv-area-chart.vue';
+import CcvStackedAreaChart from './ccv-stacked-area-chart.vue';
 import CcvSimpleBarChart from './ccv-simple-bar-chart.vue';
 import CcvGroupedBarChart from './ccv-grouped-bar-chart.vue';
 import CcvStackedBarChart from './ccv-stacked-bar-chart.vue';
@@ -7,8 +9,11 @@ import CcvLineChart from './ccv-line-chart.vue';
 import CcvPieChart from './ccv-pie-chart.vue';
 import CcvScatterChart from './ccv-scatter-chart.vue';
 import CcvHistogramChart from './ccv-histogram-chart.vue';
+import CcvRadarChart from './ccv-radar-chart.vue';
 
 const components = [
+	CcvAreaChart,
+	CcvStackedAreaChart,
 	CcvSimpleBarChart,
 	CcvGroupedBarChart,
 	CcvStackedBarChart,
@@ -17,7 +22,8 @@ const components = [
 	CcvLineChart,
 	CcvPieChart,
 	CcvScatterChart,
-	CcvHistogramChart
+	CcvHistogramChart,
+	CcvRadarChart
 ];
 
 /*
@@ -53,6 +59,8 @@ export default {
   alternative to loading them all via a Vue plug-in.
 */
 export {
+	CcvAreaChart,
+	CcvStackedAreaChart,
 	CcvSimpleBarChart,
 	CcvGroupedBarChart,
 	CcvStackedBarChart,
@@ -61,5 +69,6 @@ export {
 	CcvLineChart,
 	CcvPieChart,
 	CcvScatterChart,
-	CcvHistogramChart
+	CcvHistogramChart,
+	CcvRadarChart
 };

@@ -6,7 +6,7 @@ import json from "@rollup/plugin-json";
 
 export default {
 	input: "./src/index.ts",
-	output:	{
+	output: {
 		file: `./dist/bundle.js`,
 		format: "umd",
 		name: "Charts",
@@ -20,8 +20,8 @@ export default {
 			"d3-axis": "d3Axis",
 			"d3-array": "d3Array",
 			"d3-hierarchy": "d3Hierarchy",
-			"d3-time-format": "d3TimeFormat"
-		}
+			"d3-time-format": "d3TimeFormat",
+		},
 	},
 	plugins: [
 		resolve(),
@@ -29,14 +29,16 @@ export default {
 		json(),
 		typescript({
 			typescript: require("typescript"),
-			tsconfig: "./src/tsconfig.json"
+			tsconfig: "./src/tsconfig.json",
 		}),
-		terser()
+		terser(),
 	],
 	onwarn(warning, next) {
 		// logs the circular dependencies inside the d3 codebase
-		if (warning.code === "CIRCULAR_DEPENDENCY" &&
-			warning.importer.indexOf("d3") !== -1) {
+		if (
+			warning.code === "CIRCULAR_DEPENDENCY" &&
+			warning.importer.indexOf("d3") !== -1
+		) {
 			console.warn(
 				"Circular dependency found in D3:",
 				warning.toString().replace("Circular dependency:", "")
@@ -45,5 +47,5 @@ export default {
 		}
 
 		next(warning);
-	}
+	},
 };

@@ -17,15 +17,20 @@ instead:
 yarn add @carbon/charts d3
 ```
 
+**Note:** you'd also need to install `carbon-components` if you're not using a bundled version of the library.
+
 ## Step-by-step instructions
-[Read on carbondesignsystem.com](https://www.carbondesignsystem.com/data-visualization/getting-started/vanilla)
+
+Read [here](https://carbon-design-system.github.io/carbon-charts/?path=/story/tutorials-getting-started--vanilla)
 
 ## Codesandbox examples
+
 [Sample use cases can be seen here](https://carbon-design-system.github.io/carbon-charts).
 
 **When opening the link above**, click on the **Edit on Codesandbox** button for each demo to see an isolated project showing you how to reproduce the demo.
 
 ## Charting data & options
+
 Although we will definitely introduce new models in the future as we start shipping new components such as maps, Data and options follow the same model in all charts, with minor exceptions and differences in specific components.
 
 For instance in the case of a donut chart you're able to pass in an additional field called `center` in your options configuring the donut center.

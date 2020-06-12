@@ -13,25 +13,30 @@ import settings from "carbon-components/es/globals/js/settings";
 import ResizeObserver from "resize-observer-polyfill";
 
 export class DOMUtils extends Service {
-	static getSVGElementSize(svgSelector: Selection<any, any, any, any>, options?: any) {
+	static getSVGElementSize(
+		svgSelector: Selection<any, any, any, any>,
+		options?: any
+	) {
 		if (!svgSelector.attr) {
 			svgSelector = select(svgSelector as any);
 		}
 
 		const finalDimensions = {
 			width: 0,
-			height: 0
+			height: 0,
 		};
 
-		const validateAndSetDimensions = dimensions => {
+		const validateAndSetDimensions = (dimensions) => {
 			if (dimensions) {
-				Object.keys(finalDimensions).forEach(dimensionKey => {
+				Object.keys(finalDimensions).forEach((dimensionKey) => {
 					if (dimensions[dimensionKey]) {
 						const dimension = dimensions[dimensionKey];
 						const dimensionNumber = parseFloat(dimension);
-						if (dimension &&
+						if (
+							dimension &&
 							dimensionNumber > finalDimensions[dimensionKey] &&
-							("" + dimension).indexOf("%") === -1) {
+							("" + dimension).indexOf("%") === -1
+						) {
 							finalDimensions[dimensionKey] = dimensionNumber;
 						}
 					}
@@ -41,7 +46,7 @@ export class DOMUtils extends Service {
 
 		const attrDimensions = {
 			width: svgSelector.attr("width"),
-			height: svgSelector.attr("height")
+			height: svgSelector.attr("height"),
 		};
 
 		let bbox, bboxDimensions, boundingRect, boundingRectDimensions;
@@ -51,7 +56,7 @@ export class DOMUtils extends Service {
 			bbox = svgSelector.node().getBBox();
 			bboxDimensions = {
 				width: bbox.width,
-				height: bbox.height
+				height: bbox.height,
 			};
 		} catch (e) {}
 
@@ -59,13 +64,13 @@ export class DOMUtils extends Service {
 			boundingRect = svgSelector.node().getBoundingClientRect();
 			boundingRectDimensions = {
 				width: boundingRect.width,
-				height: boundingRect.height
+				height: boundingRect.height,
 			};
 		} catch (e) {}
 
 		const clientDimensions = {
 			width: svgSelector.node().clientWidth,
-			height: svgSelector.node().clientHeight
+			height: svgSelector.node().clientHeight,
 		};
 
 		// If both attribute values are numbers
@@ -106,8 +111,18 @@ export class DOMUtils extends Service {
 
 		try {
 			const nativeDimensions = {
-				width: Tools.getProperty(svgSelector.node(), "width", "baseVal", "value"),
-				height: Tools.getProperty(svgSelector.node(), "height", "baseVal", "value")
+				width: Tools.getProperty(
+					svgSelector.node(),
+					"width",
+					"baseVal",
+					"value"
+				),
+				height: Tools.getProperty(
+					svgSelector.node(),
+					"height",
+					"baseVal",
+					"value"
+				),
 			};
 
 			validateAndSetDimensions(nativeDimensions);
@@ -126,7 +141,8 @@ export class DOMUtils extends Service {
 
 		const selection = parent.select(query);
 		if (selection.empty()) {
-			return parent.append(elementToAppend)
+			return parent
+				.append(elementToAppend)
 				.attr("class", querySections.slice(1).join(" "));
 		}
 
@@ -147,6 +163,8 @@ export class DOMUtils extends Service {
 		if (this.model.getOptions().resizable) {
 			this.addResizeListener();
 		}
+
+		this.addHolderListeners();
 	}
 
 	update() {
@@ -157,7 +175,10 @@ export class DOMUtils extends Service {
 		const holderElement = this.getHolder() as HTMLElement;
 
 		// Add class to chart holder
-		select(this.getHolder()).classed(`${settings.prefix}--chart-holder`, true);
+		select(this.getHolder()).classed(
+			`${settings.prefix}--chart-holder`,
+			true
+		);
 
 		// In order for resize events to not clash with these updates
 		// We'll check if the width & height values passed in options
@@ -183,7 +204,11 @@ export class DOMUtils extends Service {
 	}
 
 	addSVGElement() {
-		const chartsprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
+		const chartsprefix = Tools.getProperty(
+			this.model.getOptions(),
+			"style",
+			"prefix"
+		);
 		const svg = select(this.getHolder())
 			.append("svg")
 			.classed(`${settings.prefix}--${chartsprefix}--chart-svg`, true)
@@ -195,6 +220,24 @@ export class DOMUtils extends Service {
 
 	getMainSVG() {
 		return this.svg;
+	}
+
+	addHolderListeners() {
+		const holder = this.getHolder();
+
+		if (!holder) {
+			return;
+		}
+
+		select(holder)
+			.on("mouseover", () => {
+				// Dispatch event
+				this.services.events.dispatchEvent(Events.Chart.MOUSEOVER);
+			})
+			.on("mouseout", () => {
+				// Dispatch event
+				this.services.events.dispatchEvent(Events.Chart.MOUSEOUT);
+			});
 	}
 
 	addResizeListener() {
@@ -214,8 +257,10 @@ export class DOMUtils extends Service {
 				return;
 			}
 
-			if (Math.abs(containerWidth - holder.clientWidth) > 1
-				|| Math.abs(containerHeight - holder.clientHeight) > 1) {
+			if (
+				Math.abs(containerWidth - holder.clientWidth) > 1 ||
+				Math.abs(containerHeight - holder.clientHeight) > 1
+			) {
 				containerWidth = holder.clientWidth;
 				containerHeight = holder.clientHeight;
 
