@@ -136,7 +136,7 @@ export enum DominantBaseline {
 /**
  * enum of possible states for the Meter Chart
  */
-export enum MeterRanges {
+export enum Statuses {
 	SUCCESS = "success",
 	WARNING = "warning",
 	DANGER = "danger"

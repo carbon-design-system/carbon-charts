@@ -2,7 +2,7 @@
 import { Title } from "./title";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import { MeterRanges } from "./../../interfaces/enums";
+import { Statuses } from "./../../interfaces/enums";
 
 export class MeterTitle extends Title {
 	type = "meter-title";
@@ -13,7 +13,6 @@ export class MeterTitle extends Title {
 		const svg = this.getContainerSVG();
 		const { groupMapsTo } = options.data;
 
-		console.log("data to attach", dataset[groupMapsTo]);
 		// the title for a meter, is the label for that dataset
 		const title = svg.selectAll("text.meter-title")
 			.data([dataset[groupMapsTo]]);
@@ -89,7 +88,7 @@ export class MeterTitle extends Title {
 			.append("path")
 			.merge(innerIcon)
 			.attr("d", self.getStatusIcon(status))
-			.attr("transform", () => status === MeterRanges.DANGER ? "translate(7.703125, 8.484375) rotate(-45.000000) translate(-7.703125, -8.484375)" : null)
+			.attr("transform", `translate(-${radius}, 0)`)
 			.attr("class", "innerFill");
 
 		innerIcon.exit().remove();
@@ -174,11 +173,11 @@ export class MeterTitle extends Title {
 	 */
 	protected getStatusIcon(status) {
 		switch (status) {
-			case MeterRanges.SUCCESS:
+			case Statuses.SUCCESS:
 				return "M6.875 11.3125 3.75 8.1875 4.74375 7.25 6.875 9.34375 11.50625 4.75 12.5 5.7375 Z";
-			case MeterRanges.DANGER:
-				return "M7 3 8.40625 3 8.40625 13.96875 7 13.96875 Z";
-			case MeterRanges.WARNING:
+			case Statuses.DANGER:
+				return "M10.7 11.5 4.5 5.3 5.3 4.5 11.5 10.7 Z";
+			case Statuses.WARNING:
 				return "M7.9375,11.125 C7.41973305,11.125 7,11.544733 7,12.0625 C7,12.580267 7.41973305,13 7.9375,13 C8.45526695,13 8.875,12.580267 8.875,12.0625 C8.875,11.544733 8.45526695,11.125 7.9375,11.125 M7.3125, 3 8.5625, 3 8.5625, 9.875 7.3125, 9.875, 7.3125, 3 Z";
 		}
 	}
