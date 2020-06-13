@@ -295,6 +295,33 @@ export class Scatter extends Component {
 						)
 					);
 
+				const hoveredX = self.services.cartesianScales.getDomainValue(
+					datum
+				);
+				const hoveredY = self.services.cartesianScales.getRangeValue(
+					datum
+				);
+				const overlappingData = self.model
+					.getDisplayData()
+					.filter((d) => {
+						return (
+							hoveredX ===
+								self.services.cartesianScales.getDomainValue(
+									d
+								) &&
+							hoveredY ===
+								self.services.cartesianScales.getRangeValue(d)
+						);
+					});
+
+				// Show tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					hoveredElement,
+					multidata:
+						overlappingData.length > 1 ? overlappingData : null,
+					type: TooltipTypes.DATAPOINT,
+				});
+
 				const eventNameToDispatch =
 					d3Event.type === "mouseover"
 						? Events.Scatter.SCATTER_MOUSEOVER
@@ -303,12 +330,6 @@ export class Scatter extends Component {
 				self.services.events.dispatchEvent(eventNameToDispatch, {
 					element: hoveredElement,
 					datum,
-				});
-
-				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					hoveredElement,
-					type: TooltipTypes.DATAPOINT,
 				});
 			})
 			.on("click", function (datum) {
