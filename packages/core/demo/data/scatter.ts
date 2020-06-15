@@ -5,6 +5,7 @@ export const doubleLinearScatterData = [
 	{ group: "Dataset 1", employees: 3000, sales: 25100 },
 	{ group: "Dataset 1", employees: 8000, sales: 12100 },
 	{ group: "Dataset 1", employees: 4000, sales: 53100 },
+	{ group: "Dataset 2", employees: 5000, sales: 32100 },
 	{ group: "Dataset 2", employees: 2000, sales: 34100 },
 	{ group: "Dataset 2", employees: 4000, sales: 23100 },
 	{ group: "Dataset 2", employees: 7000, sales: 14100 },
@@ -28,7 +29,7 @@ export const doubleLinearScatterOptions = {
 };
 
 export const scatterDiscreteData = [
-	{ group: "Dataset 1", key: "Qty", value: 32100 },
+	{ group: "Dataset 1", key: "Qty", value: 34200 },
 	{ group: "Dataset 1", key: "More", value: 23500 },
 	{ group: "Dataset 1", key: "Sold", value: 53100 },
 	{ group: "Dataset 1", key: "Restocking", value: 42300 },
