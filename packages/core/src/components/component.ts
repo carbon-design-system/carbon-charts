@@ -90,10 +90,27 @@ export class Component {
 				"style",
 				"prefix"
 			);
-			return DOMUtils.appendOrSelect(
-				this.parent,
-				`g.${settings.prefix}--${chartprefix}--${this.type}`
-			);
+			if (this.type === "line" || this.type === "scatter") {
+				const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
+					useAttrs: true
+				});
+				return DOMUtils.appendOrSelectForAxisChart(
+					this.parent,
+					`clipPath.cover`,
+					this.type,
+					23,
+					0,
+					(width - 23),
+					height,
+				);
+
+			} else {
+				return DOMUtils.appendOrSelect(
+					this.parent,
+					`g.${settings.prefix}--${chartprefix}--${this.type}`
+				);
+			}
+
 		}
 
 		return this.parent;
