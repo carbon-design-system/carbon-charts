@@ -3,7 +3,7 @@ import { pieData } from "./pie";
 export const donutData = pieData;
 
 export const donutOptions = {
-	title: "Donut Radar adaskfhadksfhfgkhgkfdhgfdhg  gdsfghdfghfd gsdfg gsdf gdfs gdfg dfsg  dsfg dfg  gfds gdfgdfg",
+	title: "Donut",
 	resizable: true,
 	donut: {
 		center: {

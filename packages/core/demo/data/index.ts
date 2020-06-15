@@ -485,7 +485,19 @@ let allDemoGroups = [
 		title: "Meter",
 		demos: [
 			{
-				options: meterDemos.meterOptions,
+				options: meterDemos.meterOptionsWithStatus,
+				data: meterDemos.meterData,
+				chartType: chartTypes.MeterChart,
+				isDemoExample: true
+			},
+			{
+				options: meterDemos.meterOptionsCustomColor,
+				data: meterDemos.meterData,
+				chartType: chartTypes.MeterChart,
+				isDemoExample: true
+			},
+			{
+				options: meterDemos.meterOptionsNoStatus,
 				data: meterDemos.meterData,
 				chartType: chartTypes.MeterChart,
 				isDemoExample: true

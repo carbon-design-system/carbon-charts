@@ -14,8 +14,9 @@ export class Meter extends Component {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
-		const dataset = this.model.getDisplayData();
+		const data = this.model.getDisplayData();
 		const status = this.model.getStatus();
+
 		const width = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true }).width;
 		const { groupMapsTo } = options.data;
 
@@ -29,11 +30,17 @@ export class Meter extends Component {
 			.attr("x", 0 )
 			.attr("y", 0 )
 			.attr("width", width)
-			.attr("height", options.meter.height);
+			.attr("height", Tools.getProperty(options, "meter", "height"));
+
+		// value larger than 100 will display as 100% on meter chart
+		const dataset = data.value <= 100 ? data : data["value"] = 100;
 
 		// rect with the value binded
 		const value = svg.selectAll("rect.value")
 			.data([dataset]);
+
+		// if user provided a color for the bar, we dont want to attach a status class
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
 
 		// draw the value bar
 		value.enter()
@@ -42,8 +49,8 @@ export class Meter extends Component {
 			.merge(value)
 			.attr("x", 0 )
 			.attr("y", 0 )
-			.attr("height", options.meter.height)
-			.classed(`status--${status}`, status != null)
+			.attr("height", Tools.getProperty(options, "meter", "height"))
+			.classed(`status--${status}`, status != null && !userProvidedScale)
 			.transition(this.services.transitions.getTransition("meter-bar-update", animate))
 			.attr("width", d => xScale(d.value))
 			.attr("fill", d => self.model.getFillColor(d[groupMapsTo]))
@@ -58,19 +65,16 @@ export class Meter extends Component {
 		// update the peak if it is less than the value, it should be equal to the value
 		const updatedPeak = peakValue && peakValue < dataset.value ? dataset.value : peakValue;
 
-		// we only want to use peak value as a data source if it is under 100 (part to whole comparison)
-		const data = updatedPeak && updatedPeak <= 100 ? [updatedPeak] : [];
-
 		// if a peak is supplied within the domain, we want to render it
 		const peak = svg.selectAll("line.peak")
-			.data(data);
+			.data([updatedPeak]);
 
 		peak.enter()
 			.append("line")
 			.classed("peak", true)
 			.merge(peak)
 			.attr("y1", 0)
-			.attr("y2", options.meter.height)
+			.attr("y2", Tools.getProperty(options, "meter", "height"))
 			.transition(this.services.transitions.getTransition("peak-line-update", animate))
 			.attr("x1", d => xScale(d))
 			.attr("x2", d => xScale(d))

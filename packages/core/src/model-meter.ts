@@ -30,29 +30,20 @@ export class MeterChartModel extends ChartModel {
 		return this.get("data")[0];
 	}
 
-	setColorScale() {
-		this.colorScale = null;
-		return;
-	}
-
 	/**
-	 * If status is enabled, returns a fill color based on status, otherwise return configured color.
+	 * Use a provided color for the bar or default to carbon color if no status provided.
 	 * Defaults to carbon color otherwise.
 	 * @param group dataset group label
 	 */
 	getFillColor(group: string) {
 		const options = this.getOptions();
-		const { fillColor } = Tools.getProperty(options, "meter");
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
 		const status = this.getStatus();
-		// if ranges are supplied for status, we dont need a fill color - use carbon colors with scss
-		if (status) {
-			return null;
+		// user provided a fill color or there isn't a status we can use the colorScale
+		if (userProvidedScale || !status) {
+			return super.getFillColor(group);
 		} else {
-			if (!fillColor) {
-				// default to carbon color
-				return colorPalettes.DEFAULT[0];
-			}
-			return fillColor;
+			return null;
 		}
 	}
 
