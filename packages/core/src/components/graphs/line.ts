@@ -131,6 +131,7 @@ export class Line extends Component {
 
 		this.parent
 			.selectAll("path.line")
+			.selectAll(`g#coverClip`)
 			.transition(
 				this.services.transitions.getTransition("legend-hover-line")
 			)
@@ -145,7 +146,7 @@ export class Line extends Component {
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
-			.selectAll("path.line")
+			.selectAll(`g#coverClip`)
 			.transition(
 				this.services.transitions.getTransition("legend-mouseout-line")
 			)
