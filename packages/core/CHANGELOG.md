@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.32.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.2...v0.32.3) (2020-06-08)
+## [0.32.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.5...v0.32.6) (2020-06-12)
 
 **Note:** Version bump only for package @carbon/charts
 
@@ -11,51 +11,54 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.32.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.1...v0.32.2) (2020-06-05)
+## [0.32.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.4...v0.32.5) (2020-06-11)
+
+**Note:** Version bump only for package @carbon/charts
+
+
+
+
+
+## [0.32.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.3...v0.32.4) (2020-06-10)
 
 
 ### Bug Fixes
 
-* **core, angular, react, vue, svelte:** fix scatter graph data updates ([#654](https://github.com/carbon-design-system/carbon-charts/issues/654)) ([673d627](https://github.com/carbon-design-system/carbon-charts/commit/673d627f47274b9815ef94e4a48bb25485e1b9a3))
+* update tslint and prettier options ([#661](https://github.com/carbon-design-system/carbon-charts/issues/661)) ([ebc53d9](https://github.com/carbon-design-system/carbon-charts/commit/ebc53d9f4caea047f656ae98075b9c8ca307b280))
 
 
 
 
+
+## [0.32.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.2...v0.32.3) (2020-06-08)
+
+**Note:** Version bump only for package @carbon/charts
+
+## [0.32.2](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.1...v0.32.2) (2020-06-05)
+
+### Bug Fixes
+
+-   **core, angular, react, vue, svelte:** fix scatter graph data updates ([#654](https://github.com/carbon-design-system/carbon-charts/issues/654)) ([673d627](https://github.com/carbon-design-system/carbon-charts/commit/673d627f47274b9815ef94e4a48bb25485e1b9a3))
 
 ## [0.32.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.0...v0.32.1) (2020-06-03)
 
-
 ### Bug Fixes
 
-* fix missing title option in charts interface ([b74d658](https://github.com/carbon-design-system/carbon-charts/commit/b74d6582277632c8a2a1f460f3ce73aadd40e500))
-
-
-
-
+-   fix missing title option in charts interface ([b74d658](https://github.com/carbon-design-system/carbon-charts/commit/b74d6582277632c8a2a1f460f3ce73aadd40e500))
 
 # [0.32.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.30.24...v0.32.0) (2020-05-29)
 
-
 ### Bug Fixes
 
-* **core:** threshold - support non JS-date values ([a132497](https://github.com/carbon-design-system/carbon-charts/commit/a1324972fa5266151b490cb7eeed92a92da5b2c4))
-* **svelte:** copy svelte source to dist/src ([492a504](https://github.com/carbon-design-system/carbon-charts/commit/492a50470d2b64793bd2c67c4115bb2732bc44f7))
-
-
-
-
+-   **core:** threshold - support non JS-date values ([a132497](https://github.com/carbon-design-system/carbon-charts/commit/a1324972fa5266151b490cb7eeed92a92da5b2c4))
+-   **svelte:** copy svelte source to dist/src ([492a504](https://github.com/carbon-design-system/carbon-charts/commit/492a50470d2b64793bd2c67c4115bb2732bc44f7))
 
 # [0.31.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.30.24...v0.31.0) (2020-05-29)
 
-
 ### Bug Fixes
 
-* **core:** threshold - support non JS-date values ([a132497](https://github.com/carbon-design-system/carbon-charts/commit/a1324972fa5266151b490cb7eeed92a92da5b2c4))
-* **svelte:** copy svelte source to dist/src ([492a504](https://github.com/carbon-design-system/carbon-charts/commit/492a50470d2b64793bd2c67c4115bb2732bc44f7))
-
-
-
-
+-   **core:** threshold - support non JS-date values ([a132497](https://github.com/carbon-design-system/carbon-charts/commit/a1324972fa5266151b490cb7eeed92a92da5b2c4))
+-   **svelte:** copy svelte source to dist/src ([492a504](https://github.com/carbon-design-system/carbon-charts/commit/492a50470d2b64793bd2c67c4115bb2732bc44f7))
 
 ## [0.30.24](https://github.com/carbon-design-system/carbon-charts/compare/v0.30.23...v0.30.24) (2020-05-15)
 

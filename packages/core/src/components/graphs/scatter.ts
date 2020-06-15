@@ -21,6 +21,20 @@ export class Scatter extends Component {
 			Events.Legend.ITEM_MOUSEOUT,
 			this.handleLegendMouseOut
 		);
+
+		const { fadeInOnChartHolderMouseover } = this.configs;
+		if (fadeInOnChartHolderMouseover) {
+			// Fade-in scatter circles
+			events.addEventListener(
+				Events.Chart.MOUSEOVER,
+				this.handleChartHolderOnHover
+			);
+			// Fade-out scatter circles
+			events.addEventListener(
+				Events.Chart.MOUSEOUT,
+				this.handleChartHolderOnMouseOut
+			);
+		}
 	}
 
 	render(animate: boolean) {
@@ -32,12 +46,30 @@ export class Scatter extends Component {
 
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-		const scatterData = this.model.getDisplayData().filter(d => d[rangeIdentifier] !== undefined && d[rangeIdentifier] !== null);
+
+		const { stacked } = this.configs;
+		let scatterData;
+		if (stacked) {
+			scatterData = this.model.getStackedData({
+				percentage: options.percentage,
+			});
+		} else {
+			scatterData = this.model
+				.getDisplayData()
+				.filter(
+					(d) =>
+						d[rangeIdentifier] !== undefined &&
+						d[rangeIdentifier] !== null
+				);
+		}
 
 		// Update data on dot groups
 		const circles = svg
 			.selectAll("circle.dot")
-			.data(scatterData, (datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`);
+			.data(
+				scatterData,
+				(datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
+			);
 
 		// Remove circles that need to be removed
 		circles.exit().attr("opacity", 0).remove();
@@ -129,6 +161,7 @@ export class Scatter extends Component {
 			cartesianScales.getOrientation()
 		);
 
+		const { fadeInOnChartHolderMouseover } = this.configs;
 		selection
 			.raise()
 			.classed("dot", true)
@@ -184,7 +217,7 @@ export class Scatter extends Component {
 					d
 				)
 			)
-			.attr("opacity", 1)
+			.attr("opacity", fadeInOnChartHolderMouseover ? 0 : 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "point")
@@ -193,6 +226,28 @@ export class Scatter extends Component {
 		// Add event listeners to elements drawn
 		this.addEventListeners();
 	}
+
+	handleChartHolderOnHover = (event: CustomEvent) => {
+		this.parent
+			.selectAll("circle.dot")
+			.transition(
+				this.services.transitions.getTransition(
+					"chart-holder-hover-scatter"
+				)
+			)
+			.attr("opacity", 1);
+	};
+
+	handleChartHolderOnMouseOut = (event: CustomEvent) => {
+		this.parent
+			.selectAll("circle.dot")
+			.transition(
+				this.services.transitions.getTransition(
+					"chart-holder-mouseout-scatter"
+				)
+			)
+			.attr("opacity", 0);
+	};
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
@@ -240,6 +295,33 @@ export class Scatter extends Component {
 						)
 					);
 
+				const hoveredX = self.services.cartesianScales.getDomainValue(
+					datum
+				);
+				const hoveredY = self.services.cartesianScales.getRangeValue(
+					datum
+				);
+				const overlappingData = self.model
+					.getDisplayData()
+					.filter((d) => {
+						return (
+							hoveredX ===
+								self.services.cartesianScales.getDomainValue(
+									d
+								) &&
+							hoveredY ===
+								self.services.cartesianScales.getRangeValue(d)
+						);
+					});
+
+				// Show tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					hoveredElement,
+					multidata:
+						overlappingData.length > 1 ? overlappingData : null,
+					type: TooltipTypes.DATAPOINT,
+				});
+
 				const eventNameToDispatch =
 					d3Event.type === "mouseover"
 						? Events.Scatter.SCATTER_MOUSEOVER
@@ -248,12 +330,6 @@ export class Scatter extends Component {
 				self.services.events.dispatchEvent(eventNameToDispatch, {
 					element: hoveredElement,
 					datum,
-				});
-
-				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					hoveredElement,
-					type: TooltipTypes.DATAPOINT,
 				});
 			})
 			.on("click", function (datum) {
@@ -306,6 +382,14 @@ export class Scatter extends Component {
 		events.removeEventListener(
 			Events.Legend.ITEM_MOUSEOUT,
 			this.handleLegendMouseOut
+		);
+		events.removeEventListener(
+			Events.Chart.MOUSEOVER,
+			this.handleChartHolderOnHover
+		);
+		events.removeEventListener(
+			Events.Chart.MOUSEOUT,
+			this.handleChartHolderOnMouseOut
 		);
 	}
 }

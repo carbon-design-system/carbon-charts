@@ -140,6 +140,7 @@ export class Axis extends Component {
 			`g.ticks.invisible`
 		)
 			.style("opacity", "0")
+			.style("pointer-events", "none")
 			.attr("aria-hidden", true);
 
 		// Append to DOM a fake tick to get the right computed font height
