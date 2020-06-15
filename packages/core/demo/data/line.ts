@@ -32,6 +32,7 @@ export const lineOptions = {
 			scaleType: "labels",
 		},
 		left: {
+			domain: [30000, 50000],
 			mapsTo: "value",
 			title: "Conversion rate",
 			scaleType: "linear",
@@ -71,6 +72,7 @@ export const lineTimeSeriesOptions = {
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
+			domain: [new Date(2019, 0, 5), new Date(2019, 0, 15)],
 			mapsTo: "date",
 			scaleType: "time",
 		},
@@ -159,6 +161,7 @@ export const lineTimeSeriesDenseOptions = {
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
+			domain: [new Date(2019, 0, 5), new Date(2019, 0, 15)],
 			mapsTo: "date",
 			scaleType: "time",
 		},
