@@ -35,3 +35,4 @@ export * from "./axes/ruler";
 export * from "./axes/ruler-stacked-bar";
 export * from "./axes/zero-line";
 export * from "./axes/zoom-bar";
+export * from "./axes/cover";

@@ -11,6 +11,7 @@ import {
 	Line,
 	Ruler,
 	Scatter,
+	Cover,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
@@ -40,6 +41,7 @@ export class LineChart extends AxisChart {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
+			new Cover(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Ruler(this.model, this.services),
 			new Line(this.model, this.services),
