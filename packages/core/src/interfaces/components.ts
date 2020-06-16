@@ -49,9 +49,21 @@ export interface LegendOptions {
 		radius?: Number;
 		spaceAfter?: Number;
 	};
+	/**
+	 * truncation configuration
+	 */
 	truncation?: {
+		/**
+		 * truncation type
+		 */
 		type?: string;
+		/**
+		 * truncation threshold
+		 */
 		threshold?: Number;
+		/**
+		 * how many characters to be shown
+		 */
 		numCharacter?: Number;
 	};
 }

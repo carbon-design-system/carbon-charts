@@ -77,6 +77,14 @@ export interface AxisOptions {
 		 * truncation type
 		 */
 		type?: string;
+		/**
+		 * truncation threshold
+		 */
+		threshold?: Number;
+		/**
+		 * how many characters to be shown
+		 */
+		numCharacter?: Number;
 	};
 }
 
