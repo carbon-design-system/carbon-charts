@@ -21,7 +21,6 @@ export class Cover extends Component {
 
 	createCover() {
 		const svg = this.parent;
-		console.log("!!! cover svg: ", svg);
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYScale = this.services.cartesianScales.getMainYScale();
 
@@ -51,14 +50,5 @@ export class Cover extends Component {
 			.attr("clip-path", `url(#${this.type}Clip)`)
 			.attr("id", `g-${this.type}Clip`);
 
-	}
-
-	cleanCover(g) {
-		const options = this.model.getOptions();
-		g.selectAll("line").attr("stroke", options.grid.strokeColor);
-
-		// Remove extra elements
-		g.selectAll("text").remove();
-		g.select(".domain").remove();
 	}
 }

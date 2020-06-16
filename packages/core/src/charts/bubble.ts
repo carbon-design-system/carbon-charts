@@ -7,6 +7,7 @@ import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
+	Cover,
 	Grid,
 	Ruler,
 	Bubble,
@@ -15,8 +16,7 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	Skeleton,
-	Cover
+	Skeleton
 } from "../components/index";
 
 export class BubbleChart extends AxisChart {
