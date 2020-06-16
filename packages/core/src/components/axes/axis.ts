@@ -109,9 +109,8 @@ export class Axis extends Component {
 		// if zoomDomain is available, update scale domain to Date array.
 		const zoomDomain = this.model.get("zoomDomain");
 		if (zoomDomain && axisPosition === AxisPositions.BOTTOM) {
-			scale.domain(zoomDomain.map(d => new Date(d)));
+			scale.domain(zoomDomain.map((d) => new Date(d)));
 		}
-
 
 		// Identify the corresponding d3 axis function
 		let axisFunction;
@@ -412,11 +411,11 @@ export class Axis extends Component {
 				const ticksNumber = isTimeScaleType
 					? axis.tickValues().length
 					: scale.ticks().length;
-				const estimatedTickSize = width / ticksNumber / 1.6;
-
-				rotateTicks = estimatedTickSize < minTickSize;
+				const estimatedTickSize = width / ticksNumber / 2;
+				rotateTicks = isTimeScaleType
+					? estimatedTickSize < minTickSize * 2 // datetime tick could be very long
+					: estimatedTickSize < minTickSize;
 			}
-
 			if (rotateTicks) {
 				if (!isNumberOfTicksProvided) {
 					axis.ticks(
