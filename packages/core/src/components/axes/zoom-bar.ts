@@ -18,10 +18,7 @@ export class ZoomBar extends Component {
 	ogXScale: any;
 
 	render(animate = true) {
-		// TODO - get correct axis left width
-		const axisLeftWidth = 23;
 		const svg = this.getContainerSVG();
-
 		const { cartesianScales } = this.services;
 		const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
 		const mainYAxisPosition = cartesianScales.getMainYAxisPosition();
@@ -33,6 +30,13 @@ export class ZoomBar extends Component {
 		const mainYScaleType = cartesianScales.getScaleTypeByPosition(
 			mainYAxisPosition
 		);
+
+		// get axes margins
+		let axesLeftMargin = 0;
+		const axesMargins = this.model.get("axesMargins");
+		if (axesMargins && axesMargins.left) {
+			axesLeftMargin = axesMargins.left;
+		}
 
 		const container = DOMUtils.appendOrSelect(svg, "svg.zoom-container")
 			.attr("width", "100%")
@@ -48,7 +52,7 @@ export class ZoomBar extends Component {
 			.attr("fill", "none");
 
 		const zoomBG = DOMUtils.appendOrSelect(container, "rect.zoom-bg")
-			.attr("x", axisLeftWidth)
+			.attr("x", axesLeftMargin)
 			.attr("y", 0)
 			.attr("width", "100%")
 			.attr("height", "100%")
@@ -100,7 +104,7 @@ export class ZoomBar extends Component {
 				});
 
 				xScale
-					.range([axisLeftWidth, width])
+					.range([axesLeftMargin, width])
 					.domain(extent(stackDataArray, (d: any) => d.date));
 
 				yScale
@@ -232,8 +236,6 @@ export class ZoomBar extends Component {
 					if (selection === null) {
 						// set to default full range
 						selection = xScale.range();
-					} else {
-						// TODO - pass selection to callback function or update scaleDomain
 					}
 					// update brush handle position
 					select(svg).call(updateBrushHandle, selection);
@@ -284,8 +286,8 @@ export class ZoomBar extends Component {
 
 				const brush = brushX()
 					.extent([
-						[0 + axisLeftWidth, 0],
-						[700, this.height]
+						[axesLeftMargin, 0],
+						[width, this.height]
 					])
 					.on("start brush end", brushed);
 
