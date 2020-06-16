@@ -29,9 +29,10 @@ export * from "./layout/layout";
 // MISC
 export * from "./axes/two-dimensional-axes";
 export * from "./axes/axis";
+export * from "./axes/cover";
 export * from "./axes/grid";
 export * from "./axes/ruler";
 export * from "./axes/ruler-stacked-bar";
 export * from "./axes/zero-line";
 export * from "./axes/zoom-bar";
-export * from "./axes/cover";
+

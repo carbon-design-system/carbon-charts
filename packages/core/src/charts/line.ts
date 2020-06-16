@@ -7,11 +7,11 @@ import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
+	Cover,
 	Grid,
 	Line,
 	Ruler,
 	Scatter,
-	Cover,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
