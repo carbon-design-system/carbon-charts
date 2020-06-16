@@ -48,8 +48,25 @@ export class ChartModel {
 		const dataGroups = this.getDataGroups();
 
 		// Remove datasets that have been disabled
-		const displayData = Tools.clone(this.get("data"));
+		let displayData = Tools.clone(this.get("data"));
 		const { groupMapsTo } = this.getOptions().data;
+
+		const axesOptions = this.getOptions().axes;
+		
+		// Check for custom domain
+		if (axesOptions) {
+			Object.keys(axesOptions).forEach(axis => {
+				if (axesOptions[axis].domain && axesOptions[axis].mapsTo) {
+					const mapsTo = axesOptions[axis].mapsTo;
+					const [start, end] = axesOptions[axis].domain;
+
+					// Filter out data outside domain
+					displayData = displayData.filter((datum) => 
+						datum[mapsTo] >= start && datum[mapsTo] <= end
+					)
+				}
+			})
+		}
 
 		return displayData.filter((datum) => {
 			const group = dataGroups.find(
