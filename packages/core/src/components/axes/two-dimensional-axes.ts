@@ -114,6 +114,9 @@ export class TwoDimensionalAxes extends Component {
 		if (isNotEqual) {
 			this.margins = Object.assign(this.margins, margins);
 
+			// also set new margins to model to allow external components to access
+			this.model.set({ axesMargins: this.margins }, { animate: false });
+
 			Object.keys(this.children).forEach((childKey) => {
 				const child = this.children[childKey];
 				child.margins = this.margins;
