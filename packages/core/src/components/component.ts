@@ -90,19 +90,19 @@ export class Component {
 				"style",
 				"prefix"
 			);
-			if (this.type === "line" || this.type === "scatter") {
-				const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
-					useAttrs: true
-				});
-				return DOMUtils.appendOrSelectForAxisChart(
-					this.parent,
-					`clipPath.cover`,
-					this.type,
-					23,
-					0,
-					(width - 23),
-					height,
-				);
+
+			
+			if (
+				this.type === "line" || 
+				this.type === "scatter" || 
+				this.type === "area" || 
+				this.type === "bubble" ||
+				this.type === "area-stacked" ||
+				this.type === "grouped-bar" ||
+				this.type === "simple-bar" ||
+				this.type === "scatter-stacked"
+			) {
+				return DOMUtils.appendOrSelectForAxisChart(this.parent,`clipPath.cover`);
 
 			} else {
 				return DOMUtils.appendOrSelect(
