@@ -7,9 +7,9 @@ import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
+	Cover,
 	Grid,
 	Ruler,
-	Cover,
 	Scatter,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
