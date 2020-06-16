@@ -49,6 +49,11 @@ export interface LegendOptions {
 		radius?: Number;
 		spaceAfter?: Number;
 	};
+	truncation?: {
+		type?: string;
+		threshold?: Number;
+		numCharacter?: Number;
+	};
 }
 
 export interface TooltipOptions {

@@ -207,9 +207,9 @@ export class TooltipBar extends Tooltip {
 	getTooltipHTML(data: any, type: TooltipTypes) {
 		if (type === TooltipTypes.LEGEND) {
 			const dataVal = data.name;
-			return `<div class="datapoint-tooltip"><p class="label">${dataVal}</p></div>`;
+			return `<div class="legend-tooltip"><p class="label">${dataVal}</p></div>`;
 		} else if (type === TooltipTypes.AXISLABEL) {
-			return `<div class="datapoint-tooltip"><p class="label">${data}</p></div>`;
+			return `<div class="axis-tooltip"><p class="label">${data}</p></div>`;
 		}
 
 		const formattedValue = Tools.getProperty(

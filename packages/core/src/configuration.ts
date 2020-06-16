@@ -20,7 +20,7 @@ import {
 	BarTooltipOptions,
 	LegendOptions,
 	LegendPositions,
-	StackedBarOptions,
+	StackedBarOptions, TruncationTypes,
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
 
@@ -49,6 +49,11 @@ export const legend: LegendOptions = {
 	checkbox: {
 		radius: 6.5,
 		spaceAfter: 4,
+	},
+	truncation: {
+		type: TruncationTypes.END_LINE,
+		threshold: 16,
+		numCharacter: 14,
 	},
 };
 
@@ -409,6 +414,11 @@ export const axis = {
 		rotateIfSmallerThan: 30,
 	},
 	paddingRatio: 0.1,
+	truncation: {
+		type: TruncationTypes.END_LINE,
+		threshold: 16,
+		numCharacter: 14,
+	},
 };
 
 export const spacers = {

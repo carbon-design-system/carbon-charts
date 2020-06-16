@@ -74,10 +74,6 @@ export interface AxisOptions {
 	 */
 	truncation?: {
 		/**
-		 * enable truncation for long labels
-		 */
-		enabled?: boolean;
-		/**
 		 * truncation type
 		 */
 		type?: string;

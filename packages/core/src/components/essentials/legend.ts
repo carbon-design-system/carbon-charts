@@ -49,13 +49,10 @@ export class Legend extends Component {
 			"numCharacter"
 		);
 		// default config for truncation
-		// set type to END_LINE
-		// set threshold to 12
-		// set number of characters to show to 14
 		if (!truncationTypeProvided) {
-			truncationTypeProvided = TruncationTypes.END_LINE;
-			truncationThresholdProvided = 16;
-			truncationNumCharacterProvided = 14;
+			truncationTypeProvided = Configuration.legend.truncation.type;
+			truncationThresholdProvided = Configuration.legend.truncation.threshold;
+			truncationNumCharacterProvided = Configuration.legend.truncation.numCharacter;
 		}
 
 		addedLegendItems

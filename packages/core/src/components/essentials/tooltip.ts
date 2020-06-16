@@ -149,7 +149,7 @@ export class Tooltip extends Component {
 			const title = this.model.getOptions().title;
 			return `<div class="title-tooltip"><text>${title}</text></div>`;
 		} else if (type === TooltipTypes.LEGEND) {
-			return `<div class="title-tooltip"><text>${data.name}</text></div>`;
+			return `<div class="legend-tooltip"><p class="label">${data.name}</p></div>`;
 		}
 		// this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
 		const dataVal = Tools.getProperty(data, "data") ? data.data : data;

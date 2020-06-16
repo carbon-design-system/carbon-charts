@@ -57,14 +57,11 @@ export class Axis extends Component {
 			"truncation",
 			"numCharacter"
 		);
-		// default config for truncation
-		// set type to END_LINE
-		// set threshold to 12
-		// set number of characters to show to 14
+		// get default config for truncation
 		if (!truncationTypeProvided) {
-			truncationTypeProvided = TruncationTypes.END_LINE;
-			truncationThresholdProvided = 16;
-			truncationNumCharacterProvided = 14;
+			truncationTypeProvided = Configuration.axis.truncation.type;
+			truncationThresholdProvided = Configuration.axis.truncation.threshold;
+			truncationNumCharacterProvided = Configuration.axis.truncation.numCharacter;
 		}
 		const isNumberOfTicksProvided = numberOfTicksProvided !== null;
 		const isVerticalAxis =
@@ -446,16 +443,19 @@ export class Axis extends Component {
 				let label_data_array = [];
 				const firstDataGroupName = dataGroups[0].sharedStackKey;
 				const activeDataGroups = dataGroups.map(d => d.sharedStackKey);
+
 				if (activeDataGroups.length === dataGroups.length) {
 					label_data_array.push(firstDataGroupName);
 				}
 				label_data_array = label_data_array.concat(activeDataGroups);
-				const tick_html = this.getContainerSVG().select(
+				const tick_html = svg.select(
 					`g.axis.${axisPosition} g.ticks g.tick`
 				).html();
+
 				container
 					.selectAll("g.ticks g.tick")
 					.html(tick_html);
+
 				container
 					.selectAll("g.tick text")
 					.data(label_data_array)
@@ -466,6 +466,7 @@ export class Axis extends Component {
 							return d;
 						}
 					});
+
 				this.getInvisibleAxisRef()
 					.selectAll("g.tick text")
 					.data(activeDataGroups)
