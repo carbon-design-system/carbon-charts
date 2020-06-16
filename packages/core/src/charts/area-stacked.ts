@@ -6,8 +6,8 @@ import { Tools } from "../tools";
 
 // Components
 import {
-	Grid,
 	Cover,
+	Grid,
 	StackedArea,
 	TwoDimensionalAxes,
 	Line,
