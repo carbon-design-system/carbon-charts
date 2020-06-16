@@ -8,6 +8,7 @@ import { Skeletons } from "../interfaces/enums";
 // Components
 import {
 	Grid,
+	Cover,
 	StackedBar,
 	StackedBarRuler,
 	TwoDimensionalAxes,
@@ -42,6 +43,7 @@ export class StackedBarChart extends AxisChart {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
+			new Cover(this.model, this.services),
 			new Grid(this.model, this.services),
 			new StackedBarRuler(this.model, this.services),
 			new StackedBar(this.model, this.services),
