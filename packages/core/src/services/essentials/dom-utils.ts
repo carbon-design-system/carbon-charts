@@ -156,7 +156,6 @@ export class DOMUtils extends Service {
 
 		const parentOfSelection = parent.select(`${elementToAppend}.${querySections.slice(1).join(" ")}`);
 		const selection = parent.select(`g#g-coverClip`);
-		/*
 		if (parentOfSelection.empty() && parent) {
 			parent
 				.append(elementToAppend)
@@ -169,11 +168,8 @@ export class DOMUtils extends Service {
 				.append("g")
 				.attr("clip-path", `url(#coverClip)`)
 				.attr("id", `g-coverClip`);
-
 			return parent;
 		}
-		*/
-
 		return selection;
 	}
 

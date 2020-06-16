@@ -7,8 +7,8 @@ import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
-	Grid,
 	Cover,
+	Grid,
 	SimpleBar,
 	TwoDimensionalAxes,
 	ZeroLine,
