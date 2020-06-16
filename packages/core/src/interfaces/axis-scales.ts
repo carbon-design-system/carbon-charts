@@ -2,11 +2,12 @@ import { ScaleTypes } from "./enums";
 import { AxisDomain } from "d3";
 import { Locale } from "date-fns";
 import { ThresholdOptions } from "./components";
+import { TruncationOptions } from "./truncation";
 
 /**
  * options to configure a scale. not all options are used by all scales
  */
-export interface AxisOptions {
+export interface AxisOptions extends TruncationOptions {
 	/**
 	 * type of the scale used on axis
 	 */
@@ -68,23 +69,6 @@ export interface AxisOptions {
 		 * function to format the ticks
 		 */
 		formatter?: Function;
-	};
-	/**
-	 * truncation configuration
-	 */
-	truncation?: {
-		/**
-		 * truncation type
-		 */
-		type?: string;
-		/**
-		 * truncation threshold
-		 */
-		threshold?: Number;
-		/**
-		 * how many characters to be shown
-		 */
-		numCharacter?: Number;
 	};
 }
 

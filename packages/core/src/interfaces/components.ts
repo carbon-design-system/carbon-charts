@@ -1,5 +1,6 @@
 import { LayoutGrowth, LegendPositions } from "./enums";
 import { Component } from "../components/component";
+import { TruncationOptions } from "./truncation";
 
 /**
  * customize the overlay contents
@@ -26,7 +27,7 @@ export interface LayoutComponentChild {
 /**
  * customize the legend component
  */
-export interface LegendOptions {
+export interface LegendOptions extends TruncationOptions {
 	position?: LegendPositions;
 	/**
 	 * the clickability of legend items
@@ -48,23 +49,6 @@ export interface LegendOptions {
 	checkbox?: {
 		radius?: Number;
 		spaceAfter?: Number;
-	};
-	/**
-	 * truncation configuration
-	 */
-	truncation?: {
-		/**
-		 * truncation type
-		 */
-		type?: string;
-		/**
-		 * truncation threshold
-		 */
-		threshold?: Number;
-		/**
-		 * how many characters to be shown
-		 */
-		numCharacter?: Number;
 	};
 }
 
