@@ -9,6 +9,7 @@ import { Skeletons } from "../interfaces/enums";
 import {
 	Grid,
 	Ruler,
+	Cover,
 	Scatter,
 	TwoDimensionalAxes,
 	// the imports below are needed because of typescript bug (error TS4029)
@@ -42,6 +43,7 @@ export class ScatterChart extends AxisChart {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
+			new Cover(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Ruler(this.model, this.services),
 			new Scatter(this.model, this.services),
