@@ -334,12 +334,22 @@ let allDemoGroups = [
 				chartType: chartTypes.LineChart,
 			},
 			{
+				options: lineDemos.lineTimeSeriesCustomDomainOptions,
+				data: lineDemos.lineTimeSeriesData,
+				chartType: chartTypes.LineChart,
+			},
+			{
 				options: lineDemos.lineTimeSeriesDenseOptions,
 				data: lineDemos.lineTimeSeriesDenseData,
 				chartType: chartTypes.LineChart,
 			},
 			{
 				options: lineDemos.lineOptions,
+				data: lineDemos.lineData,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				options: lineDemos.lineCustomDomainOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart,
 			},

@@ -43,6 +43,27 @@ export const lineOptions = {
 	},
 };
 
+export const lineCustomDomainOptions = {
+	title: "Line (discrete with custom domain)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "key",
+			scaleType: "labels",
+		},
+		left: {
+			domain: [30000, 50000],
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear",
+		},
+	},
+	chartTypes: {
+		// TODO
+		line: ["Dataset 4", "Dataset 1"],
+	},
+};
+
 export const lineTimeSeriesData = [
 	{ group: "Dataset 1", date: new Date(2019, 0, 1), value: 50000 },
 	{ group: "Dataset 1", date: new Date(2019, 0, 5), value: 65000 },
@@ -71,6 +92,24 @@ export const lineTimeSeriesOptions = {
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
+			mapsTo: "date",
+			scaleType: "time",
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear",
+		},
+	},
+	curve: "curveMonotoneX",
+};
+
+export const lineTimeSeriesCustomDomainOptions = {
+	title: "Line (time series with custom domain)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			domain: [new Date(2019, 0, 5), new Date(2019, 0, 15)],
 			mapsTo: "date",
 			scaleType: "time",
 		},
