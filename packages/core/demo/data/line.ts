@@ -37,10 +37,6 @@ export const lineOptions = {
 			scaleType: "linear",
 		},
 	},
-	chartTypes: {
-		// TODO
-		line: ["Dataset 4", "Dataset 1"],
-	},
 };
 
 export const lineCustomDomainOptions = {
@@ -57,10 +53,6 @@ export const lineCustomDomainOptions = {
 			title: "Conversion rate",
 			scaleType: "linear",
 		},
-	},
-	chartTypes: {
-		// TODO
-		line: ["Dataset 4", "Dataset 1"],
 	},
 };
 
