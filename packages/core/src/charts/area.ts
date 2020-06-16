@@ -7,6 +7,7 @@ import { Tools } from "../tools";
 // Components
 import {
 	Grid,
+	Cover,
 	Area,
 	Line,
 	Ruler,
@@ -39,6 +40,7 @@ export class AreaChart extends AxisChart {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents = [
 			new TwoDimensionalAxes(this.model, this.services),
+			new Cover(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Ruler(this.model, this.services),
 			new Line(this.model, this.services),
