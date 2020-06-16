@@ -91,18 +91,18 @@ export class Component {
 				"prefix"
 			);
 
-			
+			// @todo Chart type equals to axis-chart
 			if (
-				this.type === "line" || 
-				this.type === "scatter" || 
-				this.type === "area" || 
+				this.type === "line" ||
+				this.type === "scatter" ||
+				this.type === "area" ||
 				this.type === "bubble" ||
 				this.type === "area-stacked" ||
 				this.type === "grouped-bar" ||
 				this.type === "simple-bar" ||
 				this.type === "scatter-stacked"
 			) {
-				return DOMUtils.appendOrSelectForAxisChart(this.parent,`clipPath.cover`);
+				return DOMUtils.appendOrSelectForAxisChart(this.parent, `clipPath.cover`);
 
 			} else {
 				return DOMUtils.appendOrSelect(
