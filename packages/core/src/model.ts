@@ -5,10 +5,9 @@ import * as colorPalettes from "./services/colorPalettes";
 import { Events } from "./interfaces";
 
 // D3
-import { scaleOrdinal, scaleLinear } from "d3-scale";
+import { scaleOrdinal } from "d3-scale";
 import { map } from "d3-collection";
 import { stack } from "d3-shape";
-import { extent } from 'd3-array';
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
