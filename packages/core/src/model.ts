@@ -2,7 +2,7 @@
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
 import * as colorPalettes from "./services/colorPalettes";
-import { Events } from "./interfaces";
+import { Events, ScaleTypes } from "./interfaces";
 
 // D3
 import { scaleOrdinal } from "d3-scale";
@@ -59,7 +59,7 @@ export class ChartModel {
 				const mapsTo = axesOptions[axis].mapsTo;
 
 				if (axesOptions[axis].domain && !this.getOptions().percentage) {
-					if (mapsTo === 'key') {
+					if (axesOptions[axis].scaleType === ScaleTypes.LABELS) {
 						displayData = displayData.filter(datum =>
 							axesOptions[axis].domain.includes(datum[mapsTo])
 						);
