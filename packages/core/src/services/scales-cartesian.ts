@@ -341,6 +341,9 @@ export class CartesianScales extends Service {
 
 		// If domain is specified return that domain
 		if (axisOptions.domain) {
+			if (scaleType === ScaleTypes.LABELS) {
+				return axisOptions.domain;
+			}
 			return this.extendsDomain(axisPosition, axisOptions.domain);
 		}
 

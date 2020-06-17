@@ -5,9 +5,10 @@ import * as colorPalettes from "./services/colorPalettes";
 import { Events } from "./interfaces";
 
 // D3
-import { scaleOrdinal } from "d3-scale";
+import { scaleOrdinal, scaleLinear } from "d3-scale";
 import { map } from "d3-collection";
 import { stack } from "d3-shape";
+import { extent } from 'd3-array';
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
@@ -52,18 +53,25 @@ export class ChartModel {
 		const { groupMapsTo } = this.getOptions().data;
 
 		const axesOptions = this.getOptions().axes;
-		
+
 		// Check for custom domain
 		if (axesOptions) {
 			Object.keys(axesOptions).forEach(axis => {
-				if (axesOptions[axis].domain && axesOptions[axis].mapsTo) {
-					const mapsTo = axesOptions[axis].mapsTo;
-					const [start, end] = axesOptions[axis].domain;
+				const mapsTo = axesOptions[axis].mapsTo;
 
-					// Filter out data outside domain
-					displayData = displayData.filter((datum) => 
-						datum[mapsTo] >= start && datum[mapsTo] <= end
-					)
+				if (axesOptions[axis].domain && !this.getOptions().percentage) {
+					if (mapsTo === 'key') {
+						displayData = displayData.filter(datum =>
+							axesOptions[axis].domain.includes(datum[mapsTo])
+						);
+					} else {
+						const [start, end] = axesOptions[axis].domain;
+
+						// Filter out data outside domain
+						displayData = displayData.filter((datum) =>
+							datum[mapsTo] >= start && datum[mapsTo] <= end
+						);
+					};
 				}
 			})
 		}
