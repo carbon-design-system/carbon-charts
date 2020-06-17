@@ -87,7 +87,7 @@ export class MeterTitle extends Title {
 		innerIcon.enter()
 			.append("path")
 			.merge(innerIcon)
-			.attr("d", self.getStatusIcon(status))
+			.attr("d", self.getStatusIconPathString(status))
 			.attr("transform", `translate(-${radius}, 0)`)
 			.attr("class", "innerFill");
 
@@ -171,7 +171,7 @@ export class MeterTitle extends Title {
 	 * Get the associated status icon for the data
 	 * @param status the active status for the meter chart
 	 */
-	protected getStatusIcon(status) {
+	protected getStatusIconPathString(status) {
 		switch (status) {
 			case Statuses.SUCCESS:
 				return "M6.875 11.3125 3.75 8.1875 4.74375 7.25 6.875 9.34375 11.50625 4.75 12.5 5.7375 Z";

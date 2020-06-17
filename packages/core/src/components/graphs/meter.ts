@@ -17,7 +17,7 @@ export class Meter extends Component {
 		const data = this.model.getDisplayData();
 		const status = this.model.getStatus();
 
-		const width = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true }).width;
+		const { width } = DOMUtils.getSVGElementSize(this.parent, { useAttrs: true });
 		const { groupMapsTo } = options.data;
 
 		// each meter has a scale for the value but no visual axis
