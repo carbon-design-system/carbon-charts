@@ -3,9 +3,7 @@ export const gaugeData = [
 	{ group: "delta", value: -13.37 }
 ];
 
-export const gaugeDataNoDelta = [
-	{ group: "value", value: 67 }
-];
+export const gaugeDataNoDelta = [{ group: "value", value: 67 }];
 
 // guage no custom color
 export const gaugeOptionsSemi = {
@@ -30,7 +28,6 @@ export const gaugeOptionsCircular = {
 	}
 };
 
-
 // guage with custom color
 export const gaugeOptionsCircularNoDelta = {
 	title: "Gauge circular without delta",
@@ -41,7 +38,7 @@ export const gaugeOptionsCircularNoDelta = {
 	},
 	color: {
 		scale: {
-			"value": "#891EE8"
+			value: "#891EE8"
 		}
 	}
 };
