@@ -15,9 +15,7 @@ const ARROW_DOWN_PATH_STRING = "12,6 8,10 4,6";
 export class Gauge extends Component {
 	type = "gauge";
 
-	// We need to store our arcs
-	// So that addEventListeners()
-	// Can access them
+	// We need to store our arcs so that addEventListeners() can access them
 	arc: any;
 	backgroundArc: any;
 
