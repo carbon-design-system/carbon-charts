@@ -58,7 +58,11 @@ export class ChartModel {
 			Object.keys(axesOptions).forEach(axis => {
 				const mapsTo = axesOptions[axis].mapsTo;
 
-				if (axesOptions[axis].domain && !this.getOptions().percentage) {
+				if (
+					mapsTo &&
+					axesOptions[axis].domain &&
+					!this.getOptions().percentage
+				) {
 					if (axesOptions[axis].scaleType === ScaleTypes.LABELS) {
 						displayData = displayData.filter(datum =>
 							axesOptions[axis].domain.includes(datum[mapsTo])
