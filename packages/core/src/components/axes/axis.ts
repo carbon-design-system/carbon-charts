@@ -42,27 +42,35 @@ export class Axis extends Component {
 			"ticks",
 			"number"
 		);
-		let truncationTypeProvided = Tools.getProperty(
+
+		// get user provided custom values for truncation
+		let truncationType = Tools.getProperty(
 			axisOptions,
 			"truncation",
 			"type"
 		);
-		let truncationThresholdProvided = Tools.getProperty(
+		let truncationThreshold = Tools.getProperty(
 			axisOptions,
 			"truncation",
 			"threshold"
 		);
-		let truncationNumCharacterProvided = Tools.getProperty(
+		let truncationNumCharacter = Tools.getProperty(
 			axisOptions,
 			"truncation",
 			"numCharacter"
 		);
-		// get default config for truncation
-		if (!truncationTypeProvided) {
-			truncationTypeProvided = Configuration.axis.truncation.type;
-			truncationThresholdProvided = Configuration.axis.truncation.threshold;
-			truncationNumCharacterProvided = Configuration.axis.truncation.numCharacter;
+
+		// load default config for truncation if not provided
+		if (!truncationType) {
+			truncationType = Configuration.axis.truncation.type;
 		}
+		if (!truncationThreshold) {
+			truncationThreshold = Configuration.axis.truncation.threshold;
+		}
+		if (!truncationNumCharacter) {
+			truncationNumCharacter = Configuration.axis.truncation.numCharacter;
+		}
+
 		const isNumberOfTicksProvided = numberOfTicksProvided !== null;
 		const isVerticalAxis =
 			axisPosition === AxisPositions.LEFT ||
@@ -434,10 +442,9 @@ export class Axis extends Component {
 		if (this.model.isDataEmpty()) {
 			container.attr("opacity", 0);
 		}
-
 		// truncate the label if it's too long
 		// only applies to discrete type
-		if (truncationTypeProvided !== TruncationTypes.NONE && !isTimeScaleType && axisOptions.scaleType === "labels") {
+		if (truncationType !== TruncationTypes.NONE && !isTimeScaleType && axisOptions.scaleType === "labels") {
 			const dataGroups = this.model.getDataValuesGroupedByKeys();
 			if (dataGroups.length > 0) {
 				let label_data_array = [];
@@ -460,8 +467,8 @@ export class Axis extends Component {
 					.selectAll("g.tick text")
 					.data(label_data_array)
 					.text(function(d) {
-						if (d.length > truncationThresholdProvided) {
-							return Tools.truncateLabel(d, truncationTypeProvided, truncationNumCharacterProvided);
+						if (d.length > truncationThreshold) {
+							return Tools.truncateLabel(d, truncationType, truncationNumCharacter);
 						} else {
 							return d;
 						}
@@ -471,8 +478,8 @@ export class Axis extends Component {
 					.selectAll("g.tick text")
 					.data(activeDataGroups)
 					.text(function(d) {
-						if (d.length > truncationThresholdProvided) {
-							return Tools.truncateLabel(d, truncationTypeProvided, truncationNumCharacterProvided);
+						if (d.length > truncationThreshold) {
+							return Tools.truncateLabel(d, truncationType, truncationNumCharacter);
 						} else {
 							return d;
 						}
@@ -492,6 +499,14 @@ export class Axis extends Component {
 		);
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		let truncationThreshold = Tools.getProperty(
+			axisOptions,
+			"truncation",
+			"threshold"
+		);
+		if (!truncationThreshold) {
+			truncationThreshold = Configuration.axis.truncation.threshold;
+		}
 		const isTimeScaleType =
 			this.scaleType === ScaleTypes.TIME ||
 			axisOptions.scaleType === ScaleTypes.TIME;
@@ -518,7 +533,7 @@ export class Axis extends Component {
 						datum,
 					}
 				);
-				if (!isTimeScaleType && axisOptions.scaleType && axisOptions.scaleType === "labels") {
+				if (!isTimeScaleType && axisOptions.scaleType && axisOptions.scaleType === "labels" && datum.length > truncationThreshold) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						hoveredElement: select(this),
 						type: TooltipTypes.AXISLABEL,
@@ -539,9 +554,7 @@ export class Axis extends Component {
 					datum,
 				});
 				if (!isTimeScaleType && axisOptions.scaleType && axisOptions.scaleType === "labels") {
-					self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-						hoveredElement: select(this),
-					});
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE, {});
 				}
 			});
 	}

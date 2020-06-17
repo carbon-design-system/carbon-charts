@@ -1,6 +1,7 @@
 import { Tooltip } from "./tooltip";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
+import * as Configurations from "../../configuration";
 import {
 	TooltipPosition,
 	TooltipTypes,
@@ -13,6 +14,7 @@ import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { select } from "d3-selection";
+import {Configuration} from "tslint";
 
 export class TooltipBar extends Tooltip {
 	init() {
@@ -91,10 +93,13 @@ export class TooltipBar extends Tooltip {
 					// default tooltip
 					tooltipTextContainer.html(defaultHTML);
 				}
-
-				const position = this.getTooltipPosition(hoveredElement, e.detail.type, data);
-				// Position the tooltip relative to the bars
-				this.positionTooltip(e.detail.multidata ? undefined : position);
+				if ((e.detail.type === TooltipTypes.LEGEND) || (e.detail.type === TooltipTypes.AXISLABEL)) {
+					this.positionTooltip();
+				} else {
+					const position = this.getTooltipPosition(hoveredElement, data);
+					// Position the tooltip relative to the bars
+					this.positionTooltip(e.detail.multidata ? undefined : position);
+				}
 			} else if (e.detail.type === TooltipTypes.TITLE) {
 				// use the chart size to enforce a max width on the tooltip
 				const chart = DOMUtils.appendOrSelect(
@@ -143,7 +148,7 @@ export class TooltipBar extends Tooltip {
 	 * positive valued data and below negative value data.
 	 * @param hoveredElement
 	 */
-	getTooltipPosition(hoveredElement, type: TooltipTypes, data?: any) {
+	getTooltipPosition(hoveredElement, data?: any) {
 		if (data === undefined) {
 			data = select(hoveredElement).datum() as any;
 		}
@@ -152,15 +157,6 @@ export class TooltipBar extends Tooltip {
 			.node()
 			.getBoundingClientRect();
 		const barPosition = hoveredElement.getBoundingClientRect();
-		const { position: axisPosition } = this.configs;
-		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
-		let truncationThresholdProvided = Tools.getProperty(
-			axisOptions,
-			"truncation",
-			"threshold"
-		);
-		if (!truncationThresholdProvided) { truncationThresholdProvided = 18; }
 
 		const { verticalOffset } = this.model.getOptions().tooltip.datapoint;
 		// if there is a negative value bar chart, need to place the tooltip below the bar
@@ -177,26 +173,15 @@ export class TooltipBar extends Tooltip {
 			return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
 		} else {
 			// positive bars
-			if ((type === TooltipTypes.AXISLABEL && data.length > truncationThresholdProvided) ||
-				(type === TooltipTypes.LEGEND && data.name.length > truncationThresholdProvided)) {
-				const tooltipPos = {
-					left:
-						barPosition.left -
-						holderPosition.left +
-						barPosition.width * 2,
-					top: barPosition.top - holderPosition.top - verticalOffset,
-				};
-				return { placement: TooltipPosition.TOP, position: tooltipPos };
-			} else {
-				const tooltipPos = {
-					left:
-						barPosition.left -
-						holderPosition.left +
-						barPosition.width / 2,
-					top: barPosition.top - holderPosition.top - verticalOffset,
-				};
-				return { placement: TooltipPosition.TOP, position: tooltipPos };
-			}
+			const tooltipPos = {
+				left:
+					barPosition.left -
+					holderPosition.left +
+					barPosition.width / 2,
+				top: barPosition.top - holderPosition.top - verticalOffset,
+			};
+
+			return { placement: TooltipPosition.TOP, position: tooltipPos };
 		}
 	}
 

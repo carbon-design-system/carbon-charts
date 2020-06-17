@@ -227,6 +227,9 @@ export namespace Tools {
 	 * @returns Truncated text
 	 */
 	export function truncateLabel(fullText, truncationType, numCharacter) {
+		if (numCharacter > fullText.length) {
+			return fullText;
+		}
 		if (truncationType === TruncationTypes.MID_LINE) {
 			return fullText.substr(0, numCharacter / 2) + "..." + fullText.substr(-numCharacter / 2);
 		} else if (truncationType === TruncationTypes.FRONT_LINE) {

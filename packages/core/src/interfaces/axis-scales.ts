@@ -7,7 +7,7 @@ import { TruncationOptions } from "./truncation";
 /**
  * options to configure a scale. not all options are used by all scales
  */
-export interface AxisOptions extends TruncationOptions {
+export interface AxisOptions {
 	/**
 	 * type of the scale used on axis
 	 */
@@ -70,6 +70,7 @@ export interface AxisOptions extends TruncationOptions {
 		 */
 		formatter?: Function;
 	};
+	truncation?: TruncationOptions;
 }
 
 /**

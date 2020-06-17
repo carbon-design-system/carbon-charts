@@ -33,26 +33,31 @@ export class Legend extends Component {
 		const checkboxRadius = options.legend.checkbox.radius;
 
 		// Truncation
-		let truncationTypeProvided = Tools.getProperty(
+		// get user provided custom values for truncation
+		let truncationType = Tools.getProperty(
 			legendOptions,
 			"truncation",
 			"type"
 		);
-		let truncationThresholdProvided = Tools.getProperty(
+		let truncationThreshold = Tools.getProperty(
 			legendOptions,
 			"truncation",
 			"threshold"
 		);
-		let truncationNumCharacterProvided = Tools.getProperty(
+		let truncationNumCharacter = Tools.getProperty(
 			legendOptions,
 			"truncation",
 			"numCharacter"
 		);
-		// default config for truncation
-		if (!truncationTypeProvided) {
-			truncationTypeProvided = Configuration.legend.truncation.type;
-			truncationThresholdProvided = Configuration.legend.truncation.threshold;
-			truncationNumCharacterProvided = Configuration.legend.truncation.numCharacter;
+		// load default config for truncation if not provided
+		if (!truncationType) {
+			truncationType = Configuration.legend.truncation.type;
+		}
+		if (!truncationThreshold) {
+			truncationThreshold = Configuration.legend.truncation.threshold;
+		}
+		if (!truncationNumCharacter) {
+			truncationNumCharacter = Configuration.legend.truncation.numCharacter;
 		}
 
 		addedLegendItems
@@ -71,23 +76,22 @@ export class Legend extends Component {
 			.classed("active", function (d, i) {
 				return d.status === options.legend.items.status.ACTIVE;
 			});
+		const addedLegendItemsText = addedLegendItems
+			.append("text")
+			.merge(legendItems.select("text"));
 
 		// truncate the legend label if it's too long
-		if (truncationTypeProvided !== TruncationTypes.NONE) {
-			addedLegendItems
-				.append("text")
-				.merge(legendItems.select("text"))
+		if (truncationType !== TruncationTypes.NONE) {
+			addedLegendItemsText
 				.html(function(d) {
-					if (d.name.length > truncationThresholdProvided) {
-						return Tools.truncateLabel(d.name, truncationTypeProvided, truncationNumCharacterProvided);
+					if (d.name.length > truncationThreshold) {
+						return Tools.truncateLabel(d.name, truncationType, truncationNumCharacter);
 					} else {
 						return d.name;
 					}
 				});
 		} else {
-			addedLegendItems
-				.append("text")
-				.merge(legendItems.select("text"))
+			addedLegendItemsText
 				.html((d) => d.name);
 		}
 
@@ -264,6 +268,15 @@ export class Legend extends Component {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
+		const legendOptions = Tools.getProperty(options, "legend");
+		let truncationThreshold = Tools.getProperty(
+			legendOptions,
+			"truncation",
+			"threshold"
+		);
+		if (!truncationThreshold) {
+			truncationThreshold = Configuration.legend.truncation.threshold;
+		}
 
 		svg.selectAll("g.legend-item")
 			.on("mouseover", function () {
@@ -308,10 +321,13 @@ export class Legend extends Component {
 			})
 			.on("mousemove", function () {
 				const hoveredItem = select(this);
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+				const hoveredItemData = hoveredItem.datum() as any;
+				if (hoveredItemData.name.length > truncationThreshold) {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement: hoveredItem,
 					type: TooltipTypes.LEGEND,
 				});
+				}
 			})
 			.on("mouseout", function () {
 				const hoveredItem = select(this);

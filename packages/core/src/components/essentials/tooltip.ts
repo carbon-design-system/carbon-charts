@@ -240,7 +240,6 @@ export class Tooltip extends Component {
 				elementPosition.width / 2,
 			top: elementPosition.top - holderPosition.top - verticalOffset,
 		};
-
 		return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
 	}
 
