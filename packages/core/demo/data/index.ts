@@ -355,6 +355,11 @@ let allDemoGroups = [
 				chartType: chartTypes.LineChart,
 			},
 			{
+				options: lineDemos.lineLongLabelOptions,
+				data: lineDemos.lineLongLabelData,
+				chartType: chartTypes.LineChart,
+			},
+			{
 				options: lineDemos.lineCustomDomainOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart,
