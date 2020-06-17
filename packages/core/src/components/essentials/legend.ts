@@ -333,9 +333,7 @@ export class Legend extends Component {
 				const hoveredItem = select(this);
 				hoveredItem.select("rect.hover-stroke").remove();
 
-				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement: select(this),
-				});
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {});
 
 				self.services.events.dispatchEvent(
 					Events.Legend.ITEM_MOUSEOUT,
