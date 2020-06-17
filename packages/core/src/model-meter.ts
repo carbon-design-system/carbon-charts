@@ -5,7 +5,7 @@ import * as colorPalettes from "./services/colorPalettes";
 import { Tools } from "./tools";
 
 /** The meter chart model layer which extends some of the data setting options.
- * Meter only has 1 dataset and does not need a colorScale (only uses one color).
+ * Meter only uses 1 dataset
  *  */
 
 export class MeterChartModel extends ChartModel {

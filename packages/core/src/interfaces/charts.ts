@@ -261,7 +261,7 @@ export interface MeterChartOptions extends BaseChartOptions {
 			/**
 			 * offsets the percentage value from the title
 			 */
-			valueOffset: number;
+			paddingRight?: number;
 			percentageIndicator?: {
 				/**
 				 * rendering of the percentage value relative to the dataset within title
