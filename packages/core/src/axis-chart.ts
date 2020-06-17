@@ -5,7 +5,7 @@ import {
 	LegendOrientations,
 	LegendPositions,
 	ChartConfig,
-	AxisChartOptions,
+	AxisChartOptions
 } from "./interfaces/index";
 import {
 	LayoutComponent,
@@ -13,7 +13,7 @@ import {
 	Title,
 	Tooltip,
 	TooltipBar,
-	Spacer,
+	Spacer
 } from "./components/index";
 import { Tools } from "./tools";
 
@@ -22,7 +22,7 @@ import { CartesianScales, Curves } from "./services/index";
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {
 		cartesianScales: CartesianScales,
-		curves: Curves,
+		curves: Curves
 	});
 
 	constructor(holder: Element, chartConfigs: ChartConfig<AxisChartOptions>) {
@@ -30,18 +30,14 @@ export class AxisChart extends Chart {
 	}
 
 	protected getAxisChartComponents(graphFrameComponents: any[]) {
-		const topLevelLayoutComponents = [];
-
-		const graphFrameComponent = {
-			id: "graph-frame",
-			components: graphFrameComponents,
+		const titleComponent = {
+			id: "title",
+			components: [new Title(this.model, this.services)],
 			growth: {
-				x: LayoutGrowth.STRETCH,
+				x: LayoutGrowth.PREFERRED,
 				y: LayoutGrowth.FIXED
 			}
 		};
-
-		const isLegendEnabled = this.model.getOptions().legend.enabled !== false;
 
 		const legendComponent = {
 			id: "legend",
@@ -52,16 +48,17 @@ export class AxisChart extends Chart {
 			}
 		};
 
-		const legendSpacerComponent = {
-			id: "spacer",
-			components: [
-				new Spacer(this.model, this.services)
-			],
+		const graphFrameComponent = {
+			id: "graph-frame",
+			components: graphFrameComponents,
 			growth: {
 				x: LayoutGrowth.STRETCH,
 				y: LayoutGrowth.FIXED
 			}
 		};
+
+		const isLegendEnabled =
+			this.model.getOptions().legend.enabled !== false;
 
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
@@ -90,6 +87,15 @@ export class AxisChart extends Chart {
 			}
 		}
 
+		const legendSpacerComponent = {
+			id: "spacer",
+			components: [new Spacer(this.model, this.services)],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
 		const fullFrameComponent = {
 			id: "full-frame",
 			components: [
@@ -98,7 +104,7 @@ export class AxisChart extends Chart {
 					this.services,
 					[
 						...(isLegendEnabled ? [legendComponent] : []),
-						legendSpacerComponent,
+						...(isLegendEnabled ? [legendSpacerComponent] : []),
 						graphFrameComponent
 					],
 					{
@@ -113,20 +119,10 @@ export class AxisChart extends Chart {
 		};
 
 		// Add chart title if it exists
+		const topLevelLayoutComponents = [];
 		if (this.model.getOptions().title) {
-			// create the title component
-			const titleComponent = {
-				id: "title",
-				components: [
-					new Title(this.model, this.services)
-				],
-				growth: {
-					x: LayoutGrowth.PREFERRED,
-					y: LayoutGrowth.FIXED
-				}
-			};
+			topLevelLayoutComponents.push(titleComponent);
 
-			// create the title spacer
 			const titleSpacerComponent = {
 				id: "spacer",
 				components: [new Spacer(this.model, this.services)],
@@ -136,10 +132,8 @@ export class AxisChart extends Chart {
 				}
 			};
 
-			topLevelLayoutComponents.push(titleComponent);
 			topLevelLayoutComponents.push(titleSpacerComponent);
 		}
-
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [

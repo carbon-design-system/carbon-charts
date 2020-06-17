@@ -114,7 +114,14 @@ export class Chart {
 	}
 
 	protected getChartComponents(graphFrameComponents: any[]) {
-		const topLevelLayoutComponents = [];
+		const titleComponent = {
+			id: "title",
+			components: [new Title(this.model, this.services)],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
 
 		const legendComponent = {
 			id: "legend",
@@ -164,7 +171,6 @@ export class Chart {
 			}
 		}
 
-
 		const legendSpacerComponent = {
 			id: "spacer",
 			components: [new Spacer(this.model, this.services)],
@@ -182,7 +188,7 @@ export class Chart {
 					this.services,
 					[
 						...(isLegendEnabled ? [legendComponent] : []),
-						legendSpacerComponent,
+						...(isLegendEnabled ? [legendSpacerComponent] : []),
 						graphFrameComponent
 					],
 					{
@@ -197,20 +203,10 @@ export class Chart {
 		};
 
 		// Add chart title if it exists
+		const topLevelLayoutComponents = [];
 		if (this.model.getOptions().title) {
-			// create the title component
-			const titleComponent = {
-				id: "title",
-				components: [
-					new Title(this.model, this.services)
-				],
-				growth: {
-					x: LayoutGrowth.PREFERRED,
-					y: LayoutGrowth.FIXED
-				}
-			};
+			topLevelLayoutComponents.push(titleComponent);
 
-			// create the title spacer
 			const titleSpacerComponent = {
 				id: "spacer",
 				components: [new Spacer(this.model, this.services)],
@@ -220,10 +216,8 @@ export class Chart {
 				}
 			};
 
-			topLevelLayoutComponents.push(titleComponent);
 			topLevelLayoutComponents.push(titleSpacerComponent);
 		}
-
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [
