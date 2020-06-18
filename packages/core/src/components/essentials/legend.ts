@@ -218,7 +218,7 @@ export class Legend extends Component {
 				legendItem
 					.select("text")
 					.attr("x", startingPoint + spaceNeededForCheckbox)
-					.attr("y", yOffset + yPosition);
+					.attr("y", yOffset + yPosition + 2);
 
 				lastYPosition = yPosition;
 

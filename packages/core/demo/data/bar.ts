@@ -92,11 +92,6 @@ export const simpleBarLongLabelOptions = {
 		bottom: {
 			mapsTo: "group",
 			scaleType: "labels",
-			truncation: {
-				type: "end_line",
-				threshold: 10,
-				numCharacter: 12
-			},
 		},
 	},
 	legend: {
@@ -155,13 +150,6 @@ export const simpleHorizontalBarLongLabelOptions = {
 			mapsTo: "value",
 		},
 	},
-	legend: {
-		truncation: {
-			type: "mid_line",
-			threshold: 15,
-			numCharacter: 12
-		}
-	}
 };
 
 export const simpleBarTimeSeriesData = [

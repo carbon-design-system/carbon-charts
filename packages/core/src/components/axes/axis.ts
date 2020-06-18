@@ -44,32 +44,21 @@ export class Axis extends Component {
 		);
 
 		// get user provided custom values for truncation
-		let truncationType = Tools.getProperty(
+		const truncationType = Tools.getProperty(
 			axisOptions,
 			"truncation",
 			"type"
 		);
-		let truncationThreshold = Tools.getProperty(
+		const truncationThreshold = Tools.getProperty(
 			axisOptions,
 			"truncation",
 			"threshold"
 		);
-		let truncationNumCharacter = Tools.getProperty(
+		const truncationNumCharacter = Tools.getProperty(
 			axisOptions,
 			"truncation",
 			"numCharacter"
 		);
-
-		// load default config for truncation if not provided
-		if (!truncationType) {
-			truncationType = Configuration.axis.truncation.type;
-		}
-		if (!truncationThreshold) {
-			truncationThreshold = Configuration.axis.truncation.threshold;
-		}
-		if (!truncationNumCharacter) {
-			truncationNumCharacter = Configuration.axis.truncation.numCharacter;
-		}
 
 		const isNumberOfTicksProvided = numberOfTicksProvided !== null;
 		const isVerticalAxis =
@@ -499,14 +488,12 @@ export class Axis extends Component {
 		);
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
-		let truncationThreshold = Tools.getProperty(
+		const truncationThreshold = Tools.getProperty(
 			axisOptions,
 			"truncation",
 			"threshold"
 		);
-		if (!truncationThreshold) {
-			truncationThreshold = Configuration.axis.truncation.threshold;
-		}
+
 		const isTimeScaleType =
 			this.scaleType === ScaleTypes.TIME ||
 			axisOptions.scaleType === ScaleTypes.TIME;

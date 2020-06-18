@@ -113,15 +113,35 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge(
 const axes: AxesOptions = {
 	top: {
 		includeZero: true,
+		truncation: {
+			type: TruncationTypes.END_LINE,
+			threshold: 16,
+			numCharacter: 14,
+		},
 	},
 	bottom: {
 		includeZero: true,
+		truncation: {
+			type: TruncationTypes.END_LINE,
+			threshold: 16,
+			numCharacter: 14,
+		},
 	},
 	left: {
 		includeZero: true,
+		truncation: {
+			type: TruncationTypes.END_LINE,
+			threshold: 16,
+			numCharacter: 14,
+		},
 	},
 	right: {
 		includeZero: true,
+		truncation: {
+			type: TruncationTypes.END_LINE,
+			threshold: 16,
+			numCharacter: 14,
+		},
 	},
 };
 
@@ -414,11 +434,6 @@ export const axis = {
 		rotateIfSmallerThan: 30,
 	},
 	paddingRatio: 0.1,
-	truncation: {
-		type: TruncationTypes.END_LINE,
-		threshold: 16,
-		numCharacter: 14,
-	},
 };
 
 export const spacers = {
