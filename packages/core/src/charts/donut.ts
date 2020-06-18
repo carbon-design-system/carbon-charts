@@ -7,7 +7,6 @@ import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
-	Brush,
 	Donut,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
@@ -40,8 +39,6 @@ export class DonutChart extends PieChart {
 				skeleton: Skeletons.DONUT
 			})
 		];
-
-		this.model.getOptions().zoomBar.enabled ? graphFrameComponents.push(new Brush(this.model, this.services)) : graphFrameComponents;
 
 		const components: any[] = this.getChartComponents(graphFrameComponents);
 		return components;

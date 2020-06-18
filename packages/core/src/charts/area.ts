@@ -6,7 +6,6 @@ import { Tools } from "../tools";
 
 // Components
 import {
-	Brush,
 	Cover,
 	Grid,
 	Area,
@@ -51,8 +50,6 @@ export class AreaChart extends AxisChart {
 				handleThresholds: true
 			})
 		];
-
-		this.model.getOptions().zoomBar.enabled ? graphFrameComponents.push(new Brush(this.model, this.services)) : graphFrameComponents;
 
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents
