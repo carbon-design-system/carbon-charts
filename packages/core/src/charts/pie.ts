@@ -8,7 +8,6 @@ import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
-	Brush,
 	Pie,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
@@ -53,9 +52,7 @@ export class PieChart extends Chart {
 				skeleton: Skeletons.PIE
 			})
 		];
-
-		this.model.getOptions().zoomBar.enabled ? graphFrameComponents.push(new Brush(this.model, this.services)) : graphFrameComponents;
-
+		
 		// get the base chart components and export with tooltip
 		const components: any[] = this.getChartComponents(graphFrameComponents);
 		return components;

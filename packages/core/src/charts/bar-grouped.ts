@@ -7,7 +7,6 @@ import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
-	Brush,
 	Cover,
 	Grid,
 	GroupedBar,
@@ -49,8 +48,6 @@ export class GroupedBarChart extends AxisChart {
 				skeleton: Skeletons.VERT_OR_HORIZ
 			})
 		];
-
-		this.model.getOptions().zoomBar.enabled ? graphFrameComponents.push(new Brush(this.model, this.services)) : graphFrameComponents;
 
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents

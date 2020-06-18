@@ -6,7 +6,6 @@ import { Tools } from "../tools";
 
 // Components
 import {
-	Brush,
 	Cover,
 	Grid,
 	StackedArea,
@@ -48,8 +47,6 @@ export class StackedAreaChart extends AxisChart {
 				stacked: true
 			})
 		];
-
-		this.model.getOptions().zoomBar.enabled ? graphFrameComponents.push(new Brush(this.model, this.services)) : graphFrameComponents;
 
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents
