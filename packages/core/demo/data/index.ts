@@ -459,6 +459,11 @@ let allDemoGroups = [
 				chartType: chartTypes.ScatterChart,
 			},
 			{
+				options: scatterDemos.scatterLongLabelDiscreteOptions,
+				data: scatterDemos.scatterLongLabelDiscreteData,
+				chartType: chartTypes.ScatterChart,
+			},
+			{
 				options: scatterDemos.scatterEmptyStateOptions,
 				data: scatterDemos.scatterEmptyStateData,
 				chartType: chartTypes.ScatterChart,
