@@ -1,0 +1,142 @@
+// Internal Imports
+import { Component } from "../component";
+import { Tools } from "../../tools";
+import { ScaleTypes } from "../../interfaces";
+import { DOMUtils } from "../../services";
+
+// D3 Imports
+import { extent } from "d3-array";
+import { brushX } from "d3-brush";
+import { event } from "d3-selection";
+import { scaleTime } from "d3-scale";
+
+export class Brush extends Component {
+	type = "brush";
+
+	render(animate = true) {
+		const svg = this.parent;
+		const { cartesianScales } = this.services;
+		const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
+		const mainXScaleType = cartesianScales.getScaleTypeByPosition(
+			mainXAxisPosition
+		);
+
+		// get axes margins
+		let axesLeftMargin = 0;
+		const axesMargins = this.model.get("axesMargins");
+		if (axesMargins && axesMargins.left) {
+			axesLeftMargin = axesMargins.left;
+		}
+
+		const mainXScale = this.services.cartesianScales.getMainXScale();
+		const mainYScale = this.services.cartesianScales.getMainYScale();
+	
+
+		const [xScaleStart, xScaleEnd] = mainXScale.range();
+		const [yScaleEnd, yScaleStart] = mainYScale.range();
+
+		const container = DOMUtils.appendOrSelect(svg, "svg.brush-container")
+			.attr("width", "100%")
+			.attr("height", "100%")
+			.attr("opacity", 1);
+
+		if (mainXScale) {
+			const displayData = this.model.getDisplayData();
+
+			if (mainXScaleType === ScaleTypes.TIME) {
+				// Get all date values provided in data
+				// TODO - Could be re-used through the model
+				let allDates = [];
+				displayData.forEach((data) => {
+					allDates = allDates.concat(Number(data.date));
+				});
+				allDates = Tools.removeArrayDuplicates(allDates).sort();
+
+				// Go through all date values
+				// And get corresponding data from each dataset
+				const stackDataArray = allDates.map((date) => {
+					let count = 0;
+					let correspondingSum = 0;
+					const correspondingData = {};
+
+					displayData.forEach((data) => {
+						if (Number(data.date) === Number(date)) {
+							++count;
+							correspondingSum += data.value;
+						}
+					});
+					correspondingData["date"] = date;
+					correspondingData["value"] = correspondingSum;
+
+					return correspondingData;
+				});
+
+				const { width } = DOMUtils.getSVGElementSize(this.parent, {
+					useAttrs: true
+				});
+
+				let zoomDomain = this.model.get("zoomDomain");
+				if (zoomDomain === undefined) {
+					zoomDomain = extent(stackDataArray, (d: any) => d.date); // default to full range
+					this.model.set(
+						{ zoomDomain: zoomDomain },
+						{ animate: false }
+					);
+				}
+
+				const brushed = () => {
+					let selection = event.selection;
+					if (selection !== null) {
+						// update zoombar handle position
+						// select(svg).call(updateBrushHandle, selection);
+
+						// get current zoomDomain
+						zoomDomain = this.model.get("zoomDomain");
+						// create xScale based on current zoomDomain
+						const xScale = scaleTime()
+							.range([axesLeftMargin, width])
+							.domain(zoomDomain);
+
+						const newDomain = [
+							xScale.invert(selection[0]),
+							xScale.invert(selection[1])
+						];
+
+						// only if the brush event comes from mouseup event
+						if (event.sourceEvent != null) {
+							// only if zoomDomain needs update
+							if (zoomDomain[0] !== newDomain[0] || zoomDomain[1] !== newDomain[1]) {
+								this.model.set(
+									{ zoomDomain: newDomain, zoomDomainForZoomBar: newDomain },
+									{ animate: false }
+								);
+							}
+							// call external callback
+							const zoomBarOptions = this.model.getOptions().zoomBar;
+							if (
+								zoomBarOptions.selectionEnd !== undefined &&
+								event.type === "end"
+							) {
+								zoomBarOptions.selectionEnd(selection, newDomain);
+							}
+						}
+					}
+				};
+
+				const brush = brushX()
+					.extent([
+						[xScaleStart, 0],
+						[width, yScaleEnd]
+					])
+					.on("end", brushed);
+
+				const brushArea = DOMUtils.appendOrSelect(svg, "g.chart-brush").call(
+					brush
+				);
+				// no need for having default brush selection
+				// @todo try to hide brush after selection
+				setTimeout(()=> {brushArea.call(brush.move);}, 0);
+			}
+		}
+	}
+}
