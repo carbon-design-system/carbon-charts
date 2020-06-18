@@ -72,8 +72,7 @@ export class ChartModel {
 
 						// Filter out data outside domain
 						displayData = displayData.filter(
-							(datum) =>
-								datum[mapsTo] >= start && datum[mapsTo] <= end
+							(datum) => datum[mapsTo] >= start && datum[mapsTo] <= end
 						);
 					}
 				}
