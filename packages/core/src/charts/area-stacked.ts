@@ -6,6 +6,7 @@ import { Tools } from "../tools";
 
 // Components
 import {
+	Brush,
 	Cover,
 	Grid,
 	StackedArea,
@@ -34,7 +35,7 @@ export class StackedAreaChart extends AxisChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [
+		const graphFrameComponents: any[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Cover(this.model, this.services),
 			new Grid(this.model, this.services),
@@ -47,6 +48,8 @@ export class StackedAreaChart extends AxisChart {
 				stacked: true
 			})
 		];
+
+		this.model.getOptions().zoomBar.enabled ? graphFrameComponents.push(new Brush(this.model, this.services)) : graphFrameComponents;
 
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents

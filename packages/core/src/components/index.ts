@@ -30,6 +30,7 @@ export * from "./layout/layout";
 // MISC
 export * from "./axes/two-dimensional-axes";
 export * from "./axes/axis";
+export * from "./axes/brush";
 export * from "./axes/cover";
 export * from "./axes/grid";
 export * from "./axes/ruler";
