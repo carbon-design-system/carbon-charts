@@ -7,7 +7,6 @@ import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
-	Brush,
 	Cover,
 	Grid,
 	Line,
@@ -51,8 +50,6 @@ export class LineChart extends AxisChart {
 				skeleton: Skeletons.GRID
 			})
 		];
-
-		this.model.getOptions().zoomBar.enabled ? graphFrameComponents.push(new Brush(this.model, this.services)) : graphFrameComponents;
 
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents
