@@ -150,6 +150,13 @@ export const simpleHorizontalBarLongLabelOptions = {
 			mapsTo: "value",
 		},
 	},
+	legend: {
+		truncation: {
+			type: "mid_line",
+			threshold: 15,
+			numCharacter: 12
+		}
+	}
 };
 
 export const simpleBarTimeSeriesData = [
