@@ -194,94 +194,8 @@ export class ZoomBar extends Component {
 					)
 					.attr("d", areaGenerator);
 
-				const updateBrushHandle = (g, selection) => {
-					const handleSize = 5;
-					// handle
-					svg.select("g.brush")
-						.selectAll("rect.handle")
-						.data([{ type: "w" }, { type: "e" }])
-						.attr("x", function (d) {
-							if (d.type === "w") {
-								return selection[0] - 3;
-							} else if (d.type === "e") {
-								return selection[1] - 3;
-							}
-						})
-						.attr("y", 0)
-						.attr("width", handleSize)
-						.attr("height", 32)
-						.style("display", null); // always display
-					// handle-bar
-					svg.select("g.brush")
-						.selectAll("rect.handle-bar")
-						.data([{ type: "w" }, { type: "e" }])
-						.join("rect")
-						.attr("class", function (d) {
-							return "handle-bar handle-bar--" + d.type;
-						})
-						.attr("x", function (d) {
-							if (d.type === "w") {
-								return selection[0] - 1;
-							} else if (d.type === "e") {
-								return selection[1] - 1;
-							}
-						})
-						.attr("y", 10)
-						.attr("width", 1)
-						.attr("height", 12);
-				};
-
-				const brushed = () => {
-					let selection = event.selection;
-					if (selection === null) {
-						// set to default full range
-						selection = xScale.range();
-					}
-					// update brush handle position
-					select(svg).call(updateBrushHandle, selection);
-
-					const newDomain = [
-						xScale.invert(selection[0]),
-						xScale.invert(selection[1])
-					];
-
-					// only if the brush event comes from mouseup event
-					if (event.sourceEvent != null) {
-						// only if zoomDomain is never set or needs update
-						if (
-							zoomDomain === undefined ||
-							zoomDomain[0] !== newDomain[0] ||
-							zoomDomain[1] !== newDomain[1]
-						) {
-							this.model.set(
-								{ zoomDomain: newDomain },
-								{ animate: false }
-							);
-						}
-						// call external callback
-						const zoomBarOptions = this.model.getOptions().zoomBar;
-						if (
-							zoomBarOptions.selectionStart !== undefined &&
-							event.type === "start"
-						) {
-							zoomBarOptions.selectionStart(selection, newDomain);
-						}
-						if (
-							zoomBarOptions.selectionInProgress !== undefined &&
-							event.type === "brush"
-						) {
-							zoomBarOptions.selectionInProgress(
-								selection,
-								newDomain
-							);
-						}
-						if (
-							zoomBarOptions.selectionEnd !== undefined &&
-							event.type === "end"
-						) {
-							zoomBarOptions.selectionEnd(selection, newDomain);
-						}
-					}
+				const brushEventListener = () => {
+					this.brushed(zoomDomain, xScale, event.selection);
 				};
 
 				const brush = brushX()
@@ -289,13 +203,18 @@ export class ZoomBar extends Component {
 						[axesLeftMargin, 0],
 						[width, this.height]
 					])
-					.on("start brush end", brushed);
+					.on("start brush end", brushEventListener);
 
 				const brushArea = DOMUtils.appendOrSelect(svg, "g.brush").call(
 					brush
 				);
 				if (zoomDomain === undefined) {
 					brushArea.call(brush.move, xScale.range()); // default to full range
+				} else {
+					// brushArea.call(
+					// 	brush.move,
+					// 	zoomDomain.map((domain) => xScale(domain)) //set brush to correct position
+					// );
 				}
 			}
 		}
@@ -304,5 +223,88 @@ export class ZoomBar extends Component {
 	zoomIn() {
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		console.log("zoom in", mainXScale.domain());
+	}
+
+	// brush event listener
+	brushed(zoomDomain, scale, selection) {
+		if (selection === null) {
+			// set to default full range
+			selection = scale.range();
+		}
+		// update brush handle position
+		this.updateBrushHandle(this.getContainerSVG(), selection);
+
+		const newDomain = [
+			scale.invert(selection[0]),
+			scale.invert(selection[1])
+		];
+		// only if the brush event comes from mouseup event
+		if (event.sourceEvent != null) {
+			// only if zoomDomain is never set or needs update
+			if (
+				zoomDomain === undefined ||
+				zoomDomain[0] !== newDomain[0] ||
+				zoomDomain[1] !== newDomain[1]
+			) {
+				this.model.set({ zoomDomain: newDomain }, { animate: false });
+			}
+			// call external callback
+			const zoomBarOptions = this.model.getOptions().zoomBar;
+			if (
+				zoomBarOptions.selectionStart !== undefined &&
+				event.type === "start"
+			) {
+				zoomBarOptions.selectionStart(selection, newDomain);
+			}
+			if (
+				zoomBarOptions.selectionInProgress !== undefined &&
+				event.type === "brush"
+			) {
+				zoomBarOptions.selectionInProgress(selection, newDomain);
+			}
+			if (
+				zoomBarOptions.selectionEnd !== undefined &&
+				event.type === "end"
+			) {
+				zoomBarOptions.selectionEnd(selection, newDomain);
+			}
+		}
+	}
+
+	updateBrushHandle(svg, selection) {
+		const handleSize = 5;
+		// handle
+		svg.select("g.brush")
+			.selectAll("rect.handle")
+			.data([{ type: "w" }, { type: "e" }])
+			.attr("x", function (d) {
+				if (d.type === "w") {
+					return selection[0] - 3;
+				} else if (d.type === "e") {
+					return selection[1] - 3;
+				}
+			})
+			.attr("y", 0)
+			.attr("width", handleSize)
+			.attr("height", 32)
+			.style("display", null); // always display
+		// handle-bar
+		svg.select("g.brush")
+			.selectAll("rect.handle-bar")
+			.data([{ type: "w" }, { type: "e" }])
+			.join("rect")
+			.attr("class", function (d) {
+				return "handle-bar handle-bar--" + d.type;
+			})
+			.attr("x", function (d) {
+				if (d.type === "w") {
+					return selection[0] - 1;
+				} else if (d.type === "e") {
+					return selection[1] - 1;
+				}
+			})
+			.attr("y", 10)
+			.attr("width", 1)
+			.attr("height", 12);
 	}
 }
