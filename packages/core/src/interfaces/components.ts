@@ -27,7 +27,7 @@ export interface LayoutComponentChild {
 /**
  * customize the legend component
  */
-export interface LegendOptions extends TruncationOptions {
+export interface LegendOptions {
 	position?: LegendPositions;
 	/**
 	 * the clickability of legend items
@@ -50,6 +50,7 @@ export interface LegendOptions extends TruncationOptions {
 		radius?: Number;
 		spaceAfter?: Number;
 	};
+	truncation?: TruncationOptions;
 }
 
 export interface TooltipOptions {
