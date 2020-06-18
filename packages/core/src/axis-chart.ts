@@ -8,6 +8,7 @@ import {
 	AxisChartOptions
 } from "./interfaces/index";
 import {
+	Brush,
 	LayoutComponent,
 	Legend,
 	Title,
@@ -48,6 +49,8 @@ export class AxisChart extends Chart {
 			}
 		};
 
+		!!this.model.getOptions().zoomBar && this.model.getOptions().zoomBar.enabled ?
+			graphFrameComponents.push(new Brush(this.model, this.services)) : graphFrameComponents;
 		const graphFrameComponent = {
 			id: "graph-frame",
 			components: graphFrameComponents,
