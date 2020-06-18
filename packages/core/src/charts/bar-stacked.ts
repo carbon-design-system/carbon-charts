@@ -7,7 +7,6 @@ import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
-	Brush,
 	Cover,
 	Grid,
 	StackedBar,
@@ -52,8 +51,6 @@ export class StackedBarChart extends AxisChart {
 				skeleton: Skeletons.VERT_OR_HORIZ
 			})
 		];
-
-		this.model.getOptions().zoomBar.enabled ? graphFrameComponents.push(new Brush(this.model, this.services)) : graphFrameComponents;
 
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents
