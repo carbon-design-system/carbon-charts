@@ -227,7 +227,9 @@ export class ZoomBar extends Component {
 
 	// brush event listener
 	brushed(zoomDomain, scale, selection) {
-		if (selection === null) {
+		// follow d3 behavior: when selection[0] === selection[1], reset default full range
+		// @todo find a better way to handel the situation when selection[0] === selection[1]
+		if (selection === null || selection[0] === selection[1]) {
 			// set to default full range
 			selection = scale.range();
 		}
