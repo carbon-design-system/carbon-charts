@@ -202,11 +202,7 @@ export class ZoomBar extends Component {
 					// @todo find a better way to handel the situation when selection is null
 					// select behavior is completed, but nothing selected
 					if (selection === null) {
-						brushArea.call(this.brush.move, xScale.range()); // default to full range
-						this.updateBrushHandle(
-							this.getContainerSVG(),
-							xScale.range()
-						);
+						this.brushed(zoomDomain, xScale, xScale.range());
 					} else if (selection[0] === selection[1]) {
 						// select behavior is not completed yet, do nothing
 					} else {
@@ -259,10 +255,12 @@ export class ZoomBar extends Component {
 		];
 
 		// be aware that the value of d3.event changes during an event!
-		// update zoomDomain only if the event comes from mousemove event
+		// update zoomDomain only if the event comes from mouse event
 		if (
 			event.sourceEvent != null &&
-			event.sourceEvent.type === "mousemove"
+			(event.sourceEvent.type === "mousemove" ||
+				event.sourceEvent.type === "mouseup" ||
+				event.sourceEvent.type === "mousedown")
 		) {
 			// only if zoomDomain is never set or needs update
 			if (
