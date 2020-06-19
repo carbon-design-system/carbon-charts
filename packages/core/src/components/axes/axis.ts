@@ -473,6 +473,13 @@ export class Axis extends Component {
 							return d;
 						}
 					});
+
+				container
+					.selectAll("g.ticks")
+					.html(this.getInvisibleAxisRef().html());
+				container
+					.selectAll("g.tick text")
+					.data(activeDataGroups);
 			}
 		}
 		// Add event listeners to elements drawn
