@@ -337,11 +337,19 @@ export class CartesianScales extends Service {
 		}
 
 		const displayData = this.model.getDisplayData();
-		const { mapsTo } = axisOptions;
+		const { mapsTo, percentage } = axisOptions;
 
 		// If domain is specified return that domain
 		if (axisOptions.domain) {
+			if (scaleType === ScaleTypes.LABELS) {
+				return axisOptions.domain;
+			}
 			return this.extendsDomain(axisPosition, axisOptions.domain);
+		}
+
+		// Return [0, 100] for percentage axis scale
+		if (percentage) {
+			return [0, 100];
 		}
 
 		// If scale is a LABELS scale, return some labels as the domain
