@@ -12,7 +12,7 @@ export interface AxisOptions {
 	 */
 	scaleType?: ScaleTypes;
 	/**
-	 * option for stacked chart
+	 * option for stacked axis
 	 */
 	stacked?: boolean;
 	/**
