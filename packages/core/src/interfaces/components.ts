@@ -125,6 +125,12 @@ export interface ZoomBarOptions {
 	 * is the zoom-bar visible or not
 	 */
 	enabled?: boolean;
+
+	/**
+	 * an two element array which represents the initial zoom domain
+	 */
+	initZoomDomain?: Object[];
+
 	/**
 	 * a function to handle selection start event
 	 */
