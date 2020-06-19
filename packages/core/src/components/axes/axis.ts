@@ -477,6 +477,7 @@ export class Axis extends Component {
 				container
 					.selectAll("g.ticks")
 					.html(this.getInvisibleAxisRef().html());
+
 				container
 					.selectAll("g.tick text")
 					.data(activeDataGroups);
