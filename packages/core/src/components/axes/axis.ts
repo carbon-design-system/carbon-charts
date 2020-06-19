@@ -431,19 +431,13 @@ export class Axis extends Component {
 		if (this.model.isDataEmpty()) {
 			container.attr("opacity", 0);
 		}
+
 		// truncate the label if it's too long
 		// only applies to discrete type
 		if (truncationType !== TruncationTypes.NONE && !isTimeScaleType && axisOptions.scaleType === "labels") {
 			const dataGroups = this.model.getDataValuesGroupedByKeys();
 			if (dataGroups.length > 0) {
-				let label_data_array = [];
-				const firstDataGroupName = dataGroups[0].sharedStackKey;
 				const activeDataGroups = dataGroups.map(d => d.sharedStackKey);
-
-				if (activeDataGroups.length === dataGroups.length) {
-					label_data_array.push(firstDataGroupName);
-				}
-				label_data_array = label_data_array.concat(activeDataGroups);
 				const tick_html = svg.select(
 					`g.axis.${axisPosition} g.ticks g.tick`
 				).html();
@@ -454,7 +448,7 @@ export class Axis extends Component {
 
 				container
 					.selectAll("g.tick text")
-					.data(label_data_array)
+					.data(activeDataGroups)
 					.text(function(d) {
 						if (d.length > truncationThreshold) {
 							return Tools.truncateLabel(d, truncationType, truncationNumCharacter);
