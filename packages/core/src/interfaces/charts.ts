@@ -250,13 +250,16 @@ export interface PieChartOptions extends BaseChartOptions {
 export interface GaugeChartOptions extends PieChartOptions {
 	gauge?: {
 		arcWidth?: number;
+		deltaArrow?: {
+			arrowDirection?: ArrowDirections;
+			arrowSize?: Function;
+			enabled: Boolean;
+		}
 		status?: Statuses;
-		arrowDirection?: ArrowDirections;
+		deltaFontSize?: Function;
+		numberSpacing?: number;
 		numberFormatter?: Function;
 		valueFontSize?: Function;
-		deltaFontSize?: Function;
-		arrowSize?: Function;
-		numberKerning?: number;
 		type?: GaugeTypes;
 	};
 }

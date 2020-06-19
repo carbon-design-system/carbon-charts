@@ -304,11 +304,14 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 	gauge: {
 		type: GaugeTypes.SEMI,
 		arcWidth: 16,
+		deltaArrow: {
+			arrowSize: (radius) => radius / 8,
+			enabled: true
+		},
 		status: null,
-		numberKerning: 10,
-		valueFontSize: (radius) => radius / 2.5,
+		numberSpacing: 10,
 		deltaFontSize: (radius) => radius / 8,
-		arrowSize: (radius) => radius / 8,
+		valueFontSize: (radius) => radius / 2.5,
 		numberFormatter: (number) => (number.toFixed(2) % 1 !== 0) ? number.toFixed(2).toLocaleString() : number.toFixed().toLocaleString()
 	}
 } as GaugeChartOptions);

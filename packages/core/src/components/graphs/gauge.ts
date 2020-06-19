@@ -3,10 +3,8 @@ import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import {
 	Roles,
-	TooltipTypes,
 	Events,
 	GaugeTypes,
-	Statuses,
 	ArrowDirections
 } from "../../interfaces";
 import { Tools } from "../../tools";
@@ -72,6 +70,7 @@ export class Gauge extends Component {
 		const arrowDirection = Tools.getProperty(
 			options,
 			"gauge",
+			"deltaArrow",
 			"arrowDirection"
 		);
 
@@ -179,10 +178,19 @@ export class Gauge extends Component {
 			"deltaFontSize"
 		);
 
+		const numberSpacing = Tools.getProperty(
+			options,
+			"gauge",
+			"numberSpacing"
+		);
+
 		// circular gauge without delta should have valueNumber centered
 		let numbersYPosition = 0;
 		if (arcType === GaugeTypes.FULL && !delta) {
 			numbersYPosition = deltaFontSize(radius);
+		} else if (arcType === GaugeTypes.SEMI && delta) {
+			// semi circular gauge we want the numbers aligned to the chart container
+			numbersYPosition = -(deltaFontSize(radius) + numberSpacing);
 		}
 
 		// Add the numbers at the center
@@ -248,11 +256,12 @@ export class Gauge extends Component {
 			"gauge",
 			"numberFormatter"
 		);
-		const arrowSize = Tools.getProperty(options, "gauge", "arrowSize");
-		const numberKerning = Tools.getProperty(
+
+		const arrowSize = Tools.getProperty(options, "gauge", "deltaArrow", "arrowSize");
+		const numberSpacing = Tools.getProperty(
 			options,
 			"gauge",
-			"numberKerning"
+			"numberSpacing"
 		);
 
 		const numbersGroup = DOMUtils.appendOrSelect(svg, "g.gauge-numbers");
@@ -263,7 +272,7 @@ export class Gauge extends Component {
 			"g.gauge-delta"
 		).attr(
 			"transform",
-			`translate(0, ${deltaFontSize(radius) + numberKerning})`
+			`translate(0, ${deltaFontSize(radius) + numberSpacing})`
 		);
 
 		const deltaNumber = deltaGroup
@@ -287,9 +296,11 @@ export class Gauge extends Component {
 			{ useBBox: true }
 		);
 
+		// check if delta arrow is disabled
+		const arrowEnabled = Tools.getProperty(options, "gauge", "deltaArrow", "enabled");
 		const deltaArrow = deltaGroup
 			.selectAll("svg.gauge-delta-arrow")
-			.data(delta !== null ? [delta] : []);
+			.data(delta !== null && arrowEnabled ? [delta] : []);
 
 		deltaArrow
 			.enter()
@@ -310,7 +321,7 @@ export class Gauge extends Component {
 
 		// Draw the arrow with status
 		const status = Tools.getProperty(options, "gauge", "status");
-		DOMUtils.appendOrSelect(deltaArrow, "polygon.gauge-delta-arrow-polygon")
+		DOMUtils.appendOrSelect(deltaArrow, "polygon.gauge-delta-arrow")
 			.classed(`status--${status}`, status !== null)
 			.attr("fill", () => (status == null ? "currentColor" : null))
 			.attr("points", self.getArrow(delta));
@@ -349,12 +360,6 @@ export class Gauge extends Component {
 					element: hoveredElement,
 					datum
 				});
-
-				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					hoveredElement,
-					type: TooltipTypes.DATAPOINT
-				});
 			})
 			.on("click", function (datum) {
 				// Dispatch mouse event
@@ -370,11 +375,6 @@ export class Gauge extends Component {
 				self.services.events.dispatchEvent(Events.Gauge.ARC_MOUSEOUT, {
 					element: hoveredElement,
 					datum
-				});
-
-				// Hide tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement
 				});
 			});
 	}
