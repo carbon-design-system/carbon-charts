@@ -305,7 +305,7 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 		type: GaugeTypes.SEMI,
 		arcWidth: 16,
 		deltaArrow: {
-			arrowSize: (radius) => radius / 8,
+			size: (radius) => radius / 8,
 			enabled: true
 		},
 		status: null,

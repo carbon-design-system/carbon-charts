@@ -251,8 +251,8 @@ export interface GaugeChartOptions extends PieChartOptions {
 	gauge?: {
 		arcWidth?: number;
 		deltaArrow?: {
-			arrowDirection?: ArrowDirections;
-			arrowSize?: Function;
+			direction?: ArrowDirections;
+			size?: Function;
 			enabled: Boolean;
 		}
 		status?: Statuses;

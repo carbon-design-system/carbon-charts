@@ -71,7 +71,7 @@ export class Gauge extends Component {
 			options,
 			"gauge",
 			"deltaArrow",
-			"arrowDirection"
+			"direction"
 		);
 
 		switch (arrowDirection) {
@@ -257,7 +257,7 @@ export class Gauge extends Component {
 			"numberFormatter"
 		);
 
-		const arrowSize = Tools.getProperty(options, "gauge", "deltaArrow", "arrowSize");
+		const arrowSize = Tools.getProperty(options, "gauge", "deltaArrow", "size");
 		const numberSpacing = Tools.getProperty(
 			options,
 			"gauge",
