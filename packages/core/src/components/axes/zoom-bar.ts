@@ -197,7 +197,21 @@ export class ZoomBar extends Component {
 					.attr("d", areaGenerator);
 
 				const brushEventListener = () => {
-					this.brushed(zoomDomain, xScale, event.selection);
+					const selection = event.selection;
+					// follow d3 behavior: when selection is null, reset default full range
+					// @todo find a better way to handel the situation when selection is null
+					// select behavior is completed, but nothing selected
+					if (selection === null) {
+						brushArea.call(this.brush.move, xScale.range()); // default to full range
+						this.updateBrushHandle(
+							this.getContainerSVG(),
+							xScale.range()
+						);
+					} else if (selection[0] === selection[1]) {
+						// select behavior is not completed yet, do nothing
+					} else {
+						this.brushed(zoomDomain, xScale, selection);
+					}
 				};
 
 				this.brush
@@ -236,12 +250,6 @@ export class ZoomBar extends Component {
 
 	// brush event listener
 	brushed(zoomDomain, scale, selection) {
-		// follow d3 behavior: when selection[0] === selection[1], reset default full range
-		// @todo find a better way to handel the situation when selection[0] === selection[1]
-		if (selection === null || selection[0] === selection[1]) {
-			// set to default full range
-			selection = scale.range();
-		}
 		// update brush handle position
 		this.updateBrushHandle(this.getContainerSVG(), selection);
 
