@@ -453,6 +453,10 @@ const selectionEndFun = (selection, domain) => {
 	console.log(domain);
 };
 
+const initZoomDomain = [
+	new Date(2020, 11, 10, 23, 59, 25),
+	new Date(2020, 11, 11, 0, 0, 25)
+];
 export const lineTimeSeriesZoomBarOptions = {
 	title: "Line (time series) - zoom-bar enabled",
 	axes: {
@@ -463,6 +467,7 @@ export const lineTimeSeriesZoomBarOptions = {
 	},
 	zoomBar: {
 		enabled: true,
+		initZoomDomain: initZoomDomain,
 		selectionStart: selectionStartFun,
 		selectionInProgress: selectionInProgressFun,
 		selectionEnd: selectionEndFun
