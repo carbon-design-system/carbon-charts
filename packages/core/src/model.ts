@@ -56,11 +56,7 @@ export class ChartModel {
 		// Check for custom domain
 		if (axesOptions) {
 			Object.keys(axesOptions).forEach((axis) => {
-				if (
-					axesOptions[axis].mapsTo &&
-					axesOptions[axis].domain &&
-					!this.getOptions().percentage
-				) {
+				if (axesOptions[axis].mapsTo && axesOptions[axis].domain) {
 					const mapsTo = axesOptions[axis].mapsTo;
 
 					if (axesOptions[axis].scaleType === ScaleTypes.LABELS) {

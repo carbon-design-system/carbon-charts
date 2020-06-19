@@ -12,11 +12,20 @@ export interface AxisOptions {
 	 */
 	scaleType?: ScaleTypes;
 	/**
+	 * option for stacked chart
+	 */
+	stacked?: boolean;
+	/**
+	 * option for percentage chart
+	 */
+	percentage?: boolean;
+	/**
 	 * Whether the Axis should use the specified domain
 	 * instead of it being dynamically generated based on data extents.
 	 * The type of values should depend on the scale type.
 	 * Example for continuous axis scale: [-100, 100]
 	 * Example for discrete axis scale: ['Qty', 'More', 'Sold']
+	 * No need to define domain for percentage charts
 	 */
 	domain?: AxisDomain[];
 	/**
