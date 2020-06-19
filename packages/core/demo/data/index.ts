@@ -656,7 +656,9 @@ allDemoGroups = allDemoGroups.map((demoGroup) => {
 		demo.id = `${formatTitleString(demoGroup.title)}--${formatTitleString(
 			demo.options.title
 		)}`;
-		demo.options.height = "400px";
+
+		// if there isnt a height set in the chart options, use 400
+		demo.options.height = demo.options.height ?? "400px";
 
 		if (!demo.codesandbox) {
 			demo.codesandbox = {};

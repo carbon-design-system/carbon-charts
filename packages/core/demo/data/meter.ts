@@ -16,7 +16,8 @@ export const meterOptionsWithStatus = {
 				{ range: [60, 100], status: "danger" }
 			]
 		}
-	}
+	},
+	height: "100px"
 };
 
 export const meterOptionsCustomColor = {
@@ -35,7 +36,8 @@ export const meterOptionsCustomColor = {
 		scale: {
 			"Dataset 1": "#925699"
 		}
-	}
+	},
+	height: "100px"
 };
 
 
@@ -43,5 +45,6 @@ export const meterOptionsNoStatus = {
 	title: "Meter Chart - no status",
 	meter: {
 		peak: 70
-	}
+	},
+	height: "100px"
 };

@@ -65,15 +65,14 @@ export class MeterTitle extends Title {
 
 		// create a group for the icon/inner path
 		const statusGroup = DOMUtils.appendOrSelect(svg, `g.status-indicator`)
-			.classed(`status--${status}`, status != null)
+			.classed(`status--${status}`, status !== null)
 			.attr("transform", `translate(${containerWidth - radius}, 0)`);
 
 		const data = status ? [status] : [];
 		const icon = statusGroup.selectAll("circle.status")
 			.data(data);
 
-		icon
-			.enter()
+		icon.enter()
 			.append("circle")
 			.merge(icon)
 			.attr("class", "status")
