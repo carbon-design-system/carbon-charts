@@ -45,7 +45,7 @@ export class Brush extends Component {
 
 			if (mainXScaleType === ScaleTypes.TIME) {
 				// Get all date values provided in data
-				// TODO - Could be re-used through the model
+				// @todo - Could be re-used through the model
 				let allDates = [];
 				displayData.forEach((data) => {
 					allDates = allDates.concat(Number(data.date));
@@ -86,10 +86,8 @@ export class Brush extends Component {
 
 				const brushed = () => {
 					let selection = event.selection;
-					if (selection !== null) {
-						// update zoombar handle position
-						// select(svg).call(updateBrushHandle, selection);
 
+					if (selection !== null) {
 						// get current zoomDomain
 						zoomDomain = this.model.get("zoomDomain");
 						// create xScale based on current zoomDomain
@@ -97,17 +95,26 @@ export class Brush extends Component {
 							.range([axesLeftMargin, width])
 							.domain(zoomDomain);
 
-						const newDomain = [
+						let newDomain = [
 							xScale.invert(selection[0]),
 							xScale.invert(selection[1])
 						];
+						
+						// check if slected start time and end time are the same
+						if(newDomain[0].valueOf() === newDomain[1].valueOf()) {
+							// same as d3 behavior and zoombar behavior: set to default full range
+							newDomain = extent(stackDataArray, (d: any) => d.date);
+						}
 
 						// only if the brush event comes from mouseup event
 						if (event.sourceEvent != null) {
 							// only if zoomDomain needs update
-							if (zoomDomain[0] !== newDomain[0] || zoomDomain[1] !== newDomain[1]) {
+							if (
+								zoomDomain[0].valueOf() !== newDomain[0].valueOf() || 
+								zoomDomain[1].valueOf() !== newDomain[1].valueOf()
+							) {
 								this.model.set(
-									{ zoomDomain: newDomain, zoomDomainForZoomBar: newDomain },
+									{ zoomDomain: newDomain },
 									{ animate: false }
 								);
 							}
