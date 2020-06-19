@@ -16,7 +16,7 @@ export interface AxisOptions {
 	 */
 	stacked?: boolean;
 	/**
-	 * option for percentage chart
+	 * option for percentage axis scale
 	 */
 	percentage?: boolean;
 	/**
@@ -25,7 +25,7 @@ export interface AxisOptions {
 	 * The type of values should depend on the scale type.
 	 * Example for continuous axis scale: [-100, 100]
 	 * Example for discrete axis scale: ['Qty', 'More', 'Sold']
-	 * No need to define domain for percentage charts
+	 * No need to define domain for percentage axis scale
 	 */
 	domain?: AxisDomain[];
 	/**
