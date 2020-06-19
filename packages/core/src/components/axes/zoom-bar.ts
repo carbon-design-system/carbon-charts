@@ -19,6 +19,17 @@ export class ZoomBar extends Component {
 
 	brush = brushX();
 
+	init() {
+		// get initZoomDomain
+		const zoomBarOptions = this.model.getOptions().zoomBar;
+		if (zoomBarOptions.initZoomDomain !== undefined) {
+			this.model.set(
+				{ zoomDomain: zoomBarOptions.initZoomDomain },
+				{ skipUpdate: true }
+			);
+		}
+	}
+
 	render(animate = true) {
 		const svg = this.getContainerSVG();
 		const { cartesianScales } = this.services;
@@ -221,6 +232,7 @@ export class ZoomBar extends Component {
 				const brushArea = DOMUtils.appendOrSelect(svg, "g.brush").call(
 					this.brush
 				);
+
 				if (
 					zoomDomain === undefined ||
 					zoomDomain[0].valueOf() === zoomDomain[1].valueOf()
@@ -239,10 +251,11 @@ export class ZoomBar extends Component {
 		}
 	}
 
-	zoomIn() {
-		const mainXScale = this.services.cartesianScales.getMainXScale();
-		console.log("zoom in", mainXScale.domain());
-	}
+	// could be used by Toolbar
+	// zoomIn() {
+	// 	const mainXScale = this.services.cartesianScales.getMainXScale();
+	// 	console.log("zoom in", mainXScale.domain());
+	// }
 
 	// brush event listener
 	brushed(zoomDomain, scale, selection) {
@@ -336,5 +349,9 @@ export class ZoomBar extends Component {
 			.attr("y", handleYBarDiff)
 			.attr("width", handleBarWidth)
 			.attr("height", handleBarHeight);
+	}
+
+	destroy() {
+		this.brush.on("start brush end", null); // remove event listener
 	}
 }
