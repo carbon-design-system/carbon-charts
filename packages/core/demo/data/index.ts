@@ -652,7 +652,7 @@ allDemoGroups = allDemoGroups.map((demoGroup) => {
 });
 
 // in the storybook we want to show all the demos
-export const storybookDemoGroups = Tools.clone(allDemoGroups);
+export const storybookDemoGroups = allDemoGroups;
 
 // in the demo page we want to show only demos with isDemoExample = true
 export const demoGroups = Tools.clone(allDemoGroups)
