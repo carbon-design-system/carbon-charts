@@ -10,6 +10,7 @@ import * as stepDemos from "./step";
 import * as meterDemos from "./meter";
 import * as timeSeriesAxisDemos from "./time-series-axis";
 import * as radarDemos from "./radar";
+import * as zoomBarDemos from "./zoom-bar";
 
 export * from "./area";
 export * from "./bar";
@@ -705,6 +706,59 @@ let allDemoGroups = [
 				data: radarDemos.radarDenseData,
 				options: radarDemos.radarDenseOptions,
 				chartType: chartTypes.RadarChart
+			}
+		]
+	},
+	{
+		title: "Zoom bar",
+		demos: [
+			{
+				options: zoomBarDemos.zoomBarSimpleBarTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarSimpleBarTimeSeriesData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: false
+			},
+			{
+				options: zoomBarDemos.zoomBarStackedBarTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarStackedBarTimeSeriesData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: false
+			},
+			{
+				options: zoomBarDemos.zoomBarBubbleTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarBubbleTimeSeriesData,
+				chartType: chartTypes.BubbleChart,
+				isDemoExample: false
+			},
+			{
+				options: zoomBarDemos.zoomBarLineTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarLineTimeSeriesData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: false
+			},
+			{
+				options: zoomBarDemos.zoomBarScatterTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarScatterTimeSeriesData,
+				chartType: chartTypes.ScatterChart,
+				isDemoExample: false
+			},
+			{
+				options: zoomBarDemos.zoomBarStepTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarStepTimeSeriesData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: false
+			},
+			{
+				options: zoomBarDemos.zoomBarLineTimeSeries15secondsOptions,
+				data: zoomBarDemos.zoomBarLineTimeSeries15secondsData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: false
+			},
+			{
+				options: zoomBarDemos.zoomBarLineTimeSeriesInitDomainOptions,
+				data: zoomBarDemos.zoomBarLineTimeSeriesInitDomainData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: false
 			}
 		]
 	}
