@@ -328,12 +328,22 @@ let allDemoGroups = [
 				chartType: chartTypes.LineChart,
 			},
 			{
+				options: lineDemos.lineTimeSeriesCustomDomainOptions,
+				data: lineDemos.lineTimeSeriesData,
+				chartType: chartTypes.LineChart,
+			},
+			{
 				options: lineDemos.lineTimeSeriesDenseOptions,
 				data: lineDemos.lineTimeSeriesDenseData,
 				chartType: chartTypes.LineChart,
 			},
 			{
 				options: lineDemos.lineOptions,
+				data: lineDemos.lineData,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				options: lineDemos.lineCustomDomainOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart,
 			},
@@ -371,21 +381,6 @@ let allDemoGroups = [
 				data: lineDemos.lineSkeletonData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false,
-			},
-		],
-	},
-	{
-		title: "Area",
-		demos: [
-			{
-				options: areaDemos.stackedAreaTimeSeriesOptions,
-				data: areaDemos.stackedAreaTimeSeriesData,
-				chartType: chartTypes.StackedAreaChart,
-			},
-			{
-				options: areaDemos.stackedAreaPercentageTimeSeriesOptions,
-				data: areaDemos.stackedAreaTimeSeriesData,
-				chartType: chartTypes.StackedAreaChart,
 			},
 		],
 	},
@@ -642,7 +637,7 @@ allDemoGroups = allDemoGroups.map((demoGroup) => {
 });
 
 // in the storybook we want to show all the demos
-export const storybookDemoGroups = Tools.clone(allDemoGroups);
+export const storybookDemoGroups = allDemoGroups;
 
 // in the demo page we want to show only demos with isDemoExample = true
 export const demoGroups = Tools.clone(allDemoGroups)

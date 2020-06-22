@@ -10,6 +10,7 @@ import {
 	BarOptions,
 	StackedBarOptions,
 } from "./components";
+import { TimeScaleOptions } from "./axis-scales";
 
 /**
  * Base chart options common to any chart
@@ -113,6 +114,7 @@ export interface BaseChartOptions {
 export interface AxisChartOptions extends BaseChartOptions {
 	axes?: AxesOptions;
 	grid?: GridOptions;
+	timeScale?: TimeScaleOptions;
 	tooltip?: AxisTooltipOptions;
 }
 
