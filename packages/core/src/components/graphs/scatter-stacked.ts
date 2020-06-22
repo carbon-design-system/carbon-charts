@@ -19,15 +19,15 @@ export class StackedScatter extends Scatter {
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
-		const percentage = Object.keys(options.axes).some(axis => 
-			options.axes[axis].percentage	
+		const percentage = Object.keys(options.axes).some(axis =>
+			options.axes[axis].percentage
 		)
 		const stackedData = this.model.getStackedData({ percentage });
 
 		// Update data on dot groups
 		const circleGroups = svg
 			.selectAll("g.dots")
-			.data(stackedData, (d) => d[0].group);
+			.data(stackedData, (d) => d[0][groupMapsTo]);
 
 		// Remove dot groups that need to be removed
 		circleGroups.exit().attr("opacity", 0).remove();

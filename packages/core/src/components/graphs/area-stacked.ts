@@ -32,6 +32,7 @@ export class StackedArea extends Component {
 		const svg = this.getContainerSVG();
 		const self = this;
 		const options = this.model.getOptions();
+		const { groupMapsTo } = options.data;
 
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYScale = this.services.cartesianScales.getMainYScale();
@@ -46,14 +47,15 @@ export class StackedArea extends Component {
 			return;
 		}
 
-		const percentage = Object.keys(options.axes).some(axis => 
-			options.axes[axis].percentage	
-		)
+		const percentage = Object.keys(options.axes).some(axis =>
+			options.axes[axis].percentage
+		);
+
 		const stackedData = this.model.getStackedData({ percentage });
 
 		const areas = svg
 			.selectAll("path.area")
-			.data(stackedData, (d) => d[0].group);
+			.data(stackedData, (d) => d[0][groupMapsTo]);
 
 		// D3 area generator function
 		this.areaGenerator = area()
@@ -69,8 +71,8 @@ export class StackedArea extends Component {
 
 		enteringAreas
 			.merge(areas)
-			.data(stackedData, (d) => d[0].group)
-			.attr("fill", (d) => self.model.getFillColor(d[0].group))
+			.data(stackedData, (d) => d[0][groupMapsTo])
+			.attr("fill", (d) => self.model.getFillColor(d[0][groupMapsTo]))
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "area")
 			.transition(
@@ -86,6 +88,8 @@ export class StackedArea extends Component {
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
+		const options = this.model.getOptions();
+		const { groupMapsTo } = options.data;
 
 		this.parent
 			.selectAll("path.area")
@@ -93,7 +97,7 @@ export class StackedArea extends Component {
 				this.services.transitions.getTransition("legend-hover-area")
 			)
 			.attr("opacity", (d) => {
-				if (d[0].group !== hoveredElement.datum().name) {
+				if (d[0][groupMapsTo] !== hoveredElement.datum().name) {
 					return Configuration.area.opacity.unselected;
 				}
 

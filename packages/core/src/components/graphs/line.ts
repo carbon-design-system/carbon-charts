@@ -57,16 +57,17 @@ export class Line extends Component {
 
 		let data = [];
 		if (this.configs.stacked) {
-			const percentage = Object.keys(options.axes).some(axis => 
-				options.axes[axis].percentage	
-			)
+			const percentage = Object.keys(options.axes).some(axis =>
+				options.axes[axis].percentage
+			);
+			const { groupMapsTo } = options.data;
 			const stackedData = this.model.getStackedData({ percentage });
 
 			data = stackedData.map((d) => ({
-				name: d[0].group,
+				name: d[0][groupMapsTo],
 				data: d.map((datum) => ({
 					date: datum.data.sharedStackKey,
-					group: datum.group,
+					group: datum[groupMapsTo],
 					value: datum[1],
 				})),
 				hidden: !Tools.some(d, (datum) => datum[0] !== datum[1]),
