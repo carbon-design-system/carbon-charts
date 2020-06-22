@@ -26,7 +26,10 @@ export class Legend extends Component {
 		const addedLegendItems = legendItems
 			.enter()
 			.append("g")
-			.classed("legend-item", true);
+			.classed("legend-item", true)
+			.classed("active", function (d, i) {
+				return d.status === options.legend.items.status.ACTIVE;
+			});
 
 		// Configs
 		const checkboxRadius = options.legend.checkbox.radius;
@@ -263,9 +266,11 @@ export class Legend extends Component {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
 					clickedElement: select(this),
 				});
+				console.log(select(this));
 
 				const clickedItem = select(this);
 				const clickedItemData = clickedItem.datum() as any;
+				console.log(clickedItemData);
 
 				self.model.toggleDataLabel(clickedItemData.name);
 			})

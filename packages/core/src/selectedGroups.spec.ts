@@ -19,16 +19,34 @@ describe("selectedGroups option", () => {
 
 	describe("set default selectedGroups", () => {
 		it("should match the array length in options", function (done) {
-			const numberOfSelectedGroup = this.chart.model.getOptions().data.selectedGroups.length;
+			const selectedGroups = this.chart.model.getOptions().data.selectedGroups;
 			const chartEventsService = this.chart.services.events;
 
 			const renderCb = () => {
-				const numberOfActiveLengendItems = select(
+				const legendGroup = select(
 					`g.${settings.prefix}--${options.chart.style.prefix}--legend`
-				).selectAll('g.legend-item > rect.active')
-				.size();
+				);
 
-				expect(numberOfActiveLengendItems).toEqual(numberOfSelectedGroup);
+				const numberOfTotalItems = legendGroup
+					.selectAll('g.legend-item')
+					.size();
+
+				const numberOfActiveItems = legendGroup
+					.selectAll('g.legend-item.active')
+					.size();
+				
+				const activeLegendNodes = legendGroup
+					.selectAll('g.legend-item.active > text')
+					.nodes();
+
+				const selectedLegend = activeLegendNodes.map(item => item['innerHTML']);
+
+				const preselectedLegendItems =
+					numberOfTotalItems === numberOfActiveItems
+					? []
+					: selectedLegend;
+
+				expect(preselectedLegendItems).toEqual(selectedGroups);
 
 				done();
 			};
