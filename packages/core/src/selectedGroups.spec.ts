@@ -39,14 +39,14 @@ describe("selectedGroups option", () => {
 					.selectAll('g.legend-item.active > text')
 					.nodes();
 
-				const selectedLegend = activeLegendNodes.map(item => item['innerHTML']);
+				const selectedLegendLabels = activeLegendNodes.map(item => item['innerHTML']);
 
-				const preselectedLegendItems =
+				const preselectedLegendLabels =
 					numberOfTotalItems === numberOfActiveItems
 					? []
-					: selectedLegend;
+					: selectedLegendLabels;
 
-				expect(preselectedLegendItems).toEqual(selectedGroups);
+				expect(preselectedLegendLabels).toEqual(selectedGroups);
 
 				done();
 			};
