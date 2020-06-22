@@ -46,9 +46,10 @@ export class StackedArea extends Component {
 			return;
 		}
 
-		const stackedData = this.model.getStackedData({
-			percentage: options.percentage,
-		});
+		const percentage = Object.keys(options.axes).some(axis => 
+			options.axes[axis].percentage	
+		)
+		const stackedData = this.model.getStackedData({ percentage });
 
 		const areas = svg
 			.selectAll("path.area")

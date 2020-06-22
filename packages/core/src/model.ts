@@ -2,7 +2,7 @@
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
 import * as colorPalettes from "./services/colorPalettes";
-import { Events } from "./interfaces";
+import { Events, ScaleTypes } from "./interfaces";
 
 // D3
 import { scaleOrdinal } from "d3-scale";
@@ -52,20 +52,27 @@ export class ChartModel {
 		const { groupMapsTo } = this.getOptions().data;
 
 		const axesOptions = this.getOptions().axes;
-		
+
 		// Check for custom domain
 		if (axesOptions) {
-			Object.keys(axesOptions).forEach(axis => {
-				if (axesOptions[axis].domain && axesOptions[axis].mapsTo) {
+			Object.keys(axesOptions).forEach((axis) => {
+				if (axesOptions[axis].mapsTo && axesOptions[axis].domain) {
 					const mapsTo = axesOptions[axis].mapsTo;
-					const [start, end] = axesOptions[axis].domain;
 
-					// Filter out data outside domain
-					displayData = displayData.filter((datum) => 
-						datum[mapsTo] >= start && datum[mapsTo] <= end
-					)
+					if (axesOptions[axis].scaleType === ScaleTypes.LABELS) {
+						displayData = displayData.filter((datum) =>
+							axesOptions[axis].domain.includes(datum[mapsTo])
+						);
+					} else {
+						const [start, end] = axesOptions[axis].domain;
+
+						// Filter out data outside domain
+						displayData = displayData.filter(
+							(datum) => datum[mapsTo] >= start && datum[mapsTo] <= end
+						);
+					}
 				}
-			})
+			});
 		}
 
 		return displayData.filter((datum) => {
