@@ -266,11 +266,9 @@ export class Legend extends Component {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
 					clickedElement: select(this),
 				});
-				console.log(select(this));
 
 				const clickedItem = select(this);
 				const clickedItemData = clickedItem.datum() as any;
-				console.log(clickedItemData);
 
 				self.model.toggleDataLabel(clickedItemData.name);
 			})
