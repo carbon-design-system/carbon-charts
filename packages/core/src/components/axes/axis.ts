@@ -37,6 +37,7 @@ export class Axis extends Component {
 		const { position: axisPosition } = this.configs;
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		const axisScaleType = Tools.getProperty(axisOptions, "scaleType");
 		const numberOfTicksProvided = Tools.getProperty(
 			axisOptions,
 			"ticks",
@@ -434,7 +435,7 @@ export class Axis extends Component {
 
 		// truncate the label if it's too long
 		// only applies to discrete type
-		if (truncationType !== TruncationTypes.NONE && !isTimeScaleType && axisOptions.scaleType === "labels") {
+		if (truncationType !== TruncationTypes.NONE && axisScaleType === ScaleTypes.LABELS) {
 			const dataGroups = this.model.getDataValuesGroupedByKeys();
 			if (dataGroups.length > 0) {
 				const activeDataGroups = dataGroups.map(d => d.sharedStackKey);
@@ -490,6 +491,7 @@ export class Axis extends Component {
 		);
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		const axisScaleType = Tools.getProperty(axisOptions, "scaleType");
 		const truncationThreshold = Tools.getProperty(
 			axisOptions,
 			"truncation",
@@ -522,7 +524,7 @@ export class Axis extends Component {
 						datum,
 					}
 				);
-				if (!isTimeScaleType && axisOptions.scaleType && axisOptions.scaleType === "labels" && datum.length > truncationThreshold) {
+				if (axisScaleType === ScaleTypes.LABELS && datum.length > truncationThreshold) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						hoveredElement: select(this),
 						type: TooltipTypes.AXISLABEL,
@@ -542,8 +544,8 @@ export class Axis extends Component {
 					element: select(this),
 					datum,
 				});
-				if (!isTimeScaleType && axisOptions.scaleType && axisOptions.scaleType === "labels") {
-					self.services.events.dispatchEvent(Events.Tooltip.HIDE, {});
+				if (axisScaleType === ScaleTypes.LABELS) {
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 				}
 			});
 	}

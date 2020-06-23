@@ -30,6 +30,16 @@ import enUSLocaleObject from "date-fns/locale/en-US/index";
  *****************************
  */
 
+
+/**
+ * Default truncation configuration
+ */
+const standardTruncationOptions = {
+	type: TruncationTypes.END_LINE,
+	threshold: 16,
+	numCharacter: 14,
+};
+
 /**
  * Legend options
  */
@@ -50,11 +60,7 @@ export const legend: LegendOptions = {
 		radius: 6.5,
 		spaceAfter: 4,
 	},
-	truncation: {
-		type: TruncationTypes.END_LINE,
-		threshold: 16,
-		numCharacter: 14,
-	},
+	truncation: standardTruncationOptions,
 };
 
 /**
@@ -113,35 +119,19 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge(
 const axes: AxesOptions = {
 	top: {
 		includeZero: true,
-		truncation: {
-			type: TruncationTypes.END_LINE,
-			threshold: 16,
-			numCharacter: 14,
-		},
+		truncation: standardTruncationOptions,
 	},
 	bottom: {
 		includeZero: true,
-		truncation: {
-			type: TruncationTypes.END_LINE,
-			threshold: 16,
-			numCharacter: 14,
-		},
+		truncation: standardTruncationOptions,
 	},
 	left: {
 		includeZero: true,
-		truncation: {
-			type: TruncationTypes.END_LINE,
-			threshold: 16,
-			numCharacter: 14,
-		},
+		truncation: standardTruncationOptions,
 	},
 	right: {
 		includeZero: true,
-		truncation: {
-			type: TruncationTypes.END_LINE,
-			threshold: 16,
-			numCharacter: 14,
-		},
+		truncation: standardTruncationOptions,
 	},
 };
 

@@ -14,7 +14,6 @@ import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { select } from "d3-selection";
-import {Configuration} from "tslint";
 
 export class TooltipBar extends Tooltip {
 	init() {
@@ -191,8 +190,7 @@ export class TooltipBar extends Tooltip {
 	 */
 	getTooltipHTML(data: any, type: TooltipTypes) {
 		if (type === TooltipTypes.LEGEND) {
-			const dataVal = data.name;
-			return `<div class="legend-tooltip"><p class="label">${dataVal}</p></div>`;
+			return `<div class="legend-tooltip"><p class="label">${data.name}</p></div>`;
 		} else if (type === TooltipTypes.AXISLABEL) {
 			return `<div class="axis-tooltip"><p class="label">${data}</p></div>`;
 		}

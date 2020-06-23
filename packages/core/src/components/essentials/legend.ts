@@ -34,31 +34,21 @@ export class Legend extends Component {
 
 		// Truncation
 		// get user provided custom values for truncation
-		let truncationType = Tools.getProperty(
+		const truncationType = Tools.getProperty(
 			legendOptions,
 			"truncation",
 			"type"
 		);
-		let truncationThreshold = Tools.getProperty(
+		const truncationThreshold = Tools.getProperty(
 			legendOptions,
 			"truncation",
 			"threshold"
 		);
-		let truncationNumCharacter = Tools.getProperty(
+		const truncationNumCharacter = Tools.getProperty(
 			legendOptions,
 			"truncation",
 			"numCharacter"
 		);
-		// load default config for truncation if not provided
-		if (!truncationType) {
-			truncationType = Configuration.legend.truncation.type;
-		}
-		if (!truncationThreshold) {
-			truncationThreshold = Configuration.legend.truncation.threshold;
-		}
-		if (!truncationNumCharacter) {
-			truncationNumCharacter = Configuration.legend.truncation.numCharacter;
-		}
 
 		addedLegendItems
 			.append("rect")
@@ -269,14 +259,11 @@ export class Legend extends Component {
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
 		const legendOptions = Tools.getProperty(options, "legend");
-		let truncationThreshold = Tools.getProperty(
+		const truncationThreshold = Tools.getProperty(
 			legendOptions,
 			"truncation",
 			"threshold"
 		);
-		if (!truncationThreshold) {
-			truncationThreshold = Configuration.legend.truncation.threshold;
-		}
 
 		svg.selectAll("g.legend-item")
 			.on("mouseover", function () {
@@ -333,7 +320,7 @@ export class Legend extends Component {
 				const hoveredItem = select(this);
 				hoveredItem.select("rect.hover-stroke").remove();
 
-				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {});
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 
 				self.services.events.dispatchEvent(
 					Events.Legend.ITEM_MOUSEOUT,
