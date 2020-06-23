@@ -9,3 +9,4 @@ export * from "./scatter";
 export * from "./pie";
 export * from "./donut";
 export * from "./radar";
+export * from "./gauge";

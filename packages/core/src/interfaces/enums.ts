@@ -8,7 +8,7 @@ export enum ChartTheme {
 	DEFAULT = "default",
 	G100 = "g100",
 	G90 = "g90",
-	G10 = "g10",
+	G10 = "g10"
 }
 
 /**
@@ -18,7 +18,7 @@ export enum AxisPositions {
 	LEFT = "left",
 	RIGHT = "right",
 	TOP = "top",
-	BOTTOM = "bottom",
+	BOTTOM = "bottom"
 }
 
 /**
@@ -39,7 +39,7 @@ export enum TruncationTypes {
  */
 export enum CartesianOrientations {
 	VERTICAL = "vertical",
-	HORIZONTAL = "horizontal",
+	HORIZONTAL = "horizontal"
 }
 
 /**
@@ -49,7 +49,7 @@ export enum ScaleTypes {
 	TIME = "time",
 	LINEAR = "linear",
 	LOG = "log",
-	LABELS = "labels",
+	LABELS = "labels"
 }
 
 /**
@@ -58,7 +58,7 @@ export enum ScaleTypes {
 export enum TooltipPosition {
 	MOUSE = "mouse",
 	TOP = "top",
-	BOTTOM = "bottom",
+	BOTTOM = "bottom"
 }
 
 /**
@@ -79,7 +79,7 @@ export enum LegendPositions {
 	RIGHT = "right",
 	LEFT = "left",
 	TOP = "top",
-	BOTTOM = "bottom",
+	BOTTOM = "bottom"
 }
 
 /**
@@ -87,7 +87,7 @@ export enum LegendPositions {
  */
 export enum LegendOrientations {
 	HORIZONTAL = "horizontal",
-	VERTICAL = "vertical",
+	VERTICAL = "vertical"
 }
 
 /**
@@ -97,7 +97,7 @@ export enum LayoutDirection {
 	ROW = "row",
 	COLUMN = "column",
 	ROW_REVERSE = "row-reverse",
-	COLUMN_REVERSE = "column-reverse",
+	COLUMN_REVERSE = "column-reverse"
 }
 
 /**
@@ -106,7 +106,7 @@ export enum LayoutDirection {
 export enum LayoutGrowth {
 	FIXED = "fixed",
 	PREFERRED = "preferred",
-	STRETCH = "stretch",
+	STRETCH = "stretch"
 }
 
 /**
@@ -114,7 +114,7 @@ export enum LayoutGrowth {
  */
 export enum CalloutDirections {
 	LEFT = "left",
-	RIGHT = "right",
+	RIGHT = "right"
 }
 
 /**
@@ -124,7 +124,7 @@ export enum Skeletons {
 	GRID = "grid",
 	VERT_OR_HORIZ = "vertOrHoriz",
 	PIE = "pie",
-	DONUT = "donut",
+	DONUT = "donut"
 }
 
 /**
@@ -133,7 +133,7 @@ export enum Skeletons {
 export enum TextAnchor {
 	START = "start",
 	MIDDLE = "middle",
-	END = "end",
+	END = "end"
 }
 
 /**
@@ -142,5 +142,27 @@ export enum TextAnchor {
 export enum DominantBaseline {
 	BASELINE = "baseline",
 	MIDDLE = "middle",
-	HANGING = "hanging",
+	HANGING = "hanging"
+}
+
+export enum GaugeTypes {
+	SEMI = "semi",
+	FULL = "full"
+}
+
+/**
+ * enum of all possible callout directions
+ */
+export enum ArrowDirections {
+	UP = "up",
+	DOWN = "down"
+}
+
+/**
+ * enum of carbon statuses
+ */
+export enum Statuses {
+	SUCCESS = "success",
+	WARNING = "warning",
+	DANGER = "danger"
 }
