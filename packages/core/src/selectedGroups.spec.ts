@@ -17,8 +17,8 @@ describe("selectedGroups option", () => {
 		this.testEnvironment = testEnvironment;
 	});
 
-	describe("set default selectedGroups", () => {
-		it("should match the array length in options", function (done) {
+	describe("selected groups", () => {
+		it("should match the selected legend labels", function (done) {
 			const selectedGroups = this.chart.model.getOptions().data.selectedGroups;
 			const chartEventsService = this.chart.services.events;
 
@@ -52,7 +52,7 @@ describe("selectedGroups option", () => {
 					? []
 					: selectedLegendLabels;
 
-				expect(preselectedLegendLabels).toEqual(selectedGroups);
+				expect(selectedGroups).toEqual(preselectedLegendLabels);
 
 				done();
 			};
@@ -65,8 +65,8 @@ describe("selectedGroups option", () => {
 		})
 	})
 
-	describe("legend click", () => {
-		it("should match the selected groups in data options", function (done) {
+	describe("selected groups", () => {
+		it("should match the legend labels after click event", function (done) {
 			const chartEventsService = this.chart.services.events;
 			const dataGroups = this.chart.model.getDataGroups();
 			const firstDatasetName = dataGroups[0].name;
@@ -96,7 +96,7 @@ describe("selectedGroups option", () => {
 						}
 					});
 				}
-				expect(selectedLegendLabels).toEqual(selectedGroups);
+				expect(selectedGroups).toEqual(selectedLegendLabels);
 
 				done();
 			};
