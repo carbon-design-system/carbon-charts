@@ -48,6 +48,16 @@ export enum Pie {
 }
 
 /**
+ * enum of all gauge graph events
+ */
+export enum Gauge {
+	ARC_MOUSEOVER = "gauge-arc-mouseover",
+	ARC_MOUSEMOVE = "gauge-arc-mousemove",
+	ARC_CLICK = "gauge-arc-click",
+	ARC_MOUSEOUT = "gauge-arc-mouseout",
+}
+
+/**
  * enum of all bar graph events
  */
 export enum Bar {
