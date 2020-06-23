@@ -93,7 +93,8 @@ export interface BaseChartOptions {
 		 */
 		loading?: Boolean;
 		/**
-		 * options related to pre-selected datasets
+		 * options related to pre-selected data groups
+		 * Remains empty if every legend item is active or dataset doesn't have the data groups.
 		 */
 		selectedGroups?: string[];
 	};
