@@ -323,7 +323,7 @@ export class Gauge extends Component {
 		const status = Tools.getProperty(options, "gauge", "status");
 		DOMUtils.appendOrSelect(deltaArrow, "polygon.gauge-delta-arrow")
 			.classed(`status--${status}`, status !== null)
-			.attr("fill", () => (status == null ? "currentColor" : null))
+			.attr("fill", () => (status === null ? "currentColor" : null))
 			.attr("points", self.getArrow(delta));
 
 		deltaArrow.exit().remove();
