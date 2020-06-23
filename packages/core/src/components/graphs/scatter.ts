@@ -50,9 +50,10 @@ export class Scatter extends Component {
 		const { stacked } = this.configs;
 		let scatterData;
 		if (stacked) {
-			scatterData = this.model.getStackedData({
-				percentage: options.percentage,
-			});
+			const percentage = Object.keys(options.axes).some(axis => 
+				options.axes[axis].percentage	
+			)
+			scatterData = this.model.getStackedData({ percentage });
 		} else {
 			scatterData = this.model
 				.getDisplayData()

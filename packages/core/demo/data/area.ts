@@ -96,8 +96,8 @@ export const stackedAreaPercentageTimeSeriesOptions = {
 	title: "Stacked area (percentage)",
 	axes: {
 		left: {
-			domain: [0, 100],
 			stacked: true,
+			percentage: true,
 			ticks: {
 				formatter: (d) => `${d}%`,
 			},
@@ -106,6 +106,5 @@ export const stackedAreaPercentageTimeSeriesOptions = {
 			scaleType: "time",
 		},
 	},
-	percentage: true,
 	curve: "curveMonotoneX",
 };
