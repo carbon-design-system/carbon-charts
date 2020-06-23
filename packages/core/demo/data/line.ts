@@ -85,9 +85,10 @@ export const lineCustomDomainOptions = {
 			title: "2019 Annual Sales Figures",
 			mapsTo: "key",
 			scaleType: "labels",
+			domain: ['Qty', 'More', 'Misc']
 		},
 		left: {
-			domain: [30000, 50000],
+			domain: [10000, 50000],
 			mapsTo: "value",
 			title: "Conversion rate",
 			scaleType: "linear",
