@@ -100,6 +100,7 @@ export class Component {
 				this.type === "area-stacked" ||
 				this.type === "grouped-bar" ||
 				this.type === "simple-bar" ||
+				this.type === "stacked-bar" ||
 				this.type === "scatter-stacked"
 			) {
 				return DOMUtils.appendOrSelectForAxisChart(this.parent, `clipPath.cover`);
