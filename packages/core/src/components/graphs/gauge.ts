@@ -292,7 +292,7 @@ export class Gauge extends Component {
 		const {
 			width: deltaNumberWidth
 		} = DOMUtils.getSVGElementSize(
-			DOMUtils.appendOrSelect(svg, "g.gauge-delta"),
+			DOMUtils.appendOrSelect(svg, ".gauge-delta-number"),
 			{ useBBox: true }
 		);
 
