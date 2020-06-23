@@ -1,7 +1,6 @@
 import { Tooltip } from "./tooltip";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
-import * as Configurations from "../../configuration";
 import {
 	TooltipPosition,
 	TooltipTypes,
