@@ -21,6 +21,7 @@ import {
 	BarTooltipOptions,
 	LegendOptions,
 	LegendPositions,
+  TruncationTypes,
 	StackedBarOptions,
 	GaugeTypes
 } from "./interfaces";
@@ -31,6 +32,16 @@ import enUSLocaleObject from "date-fns/locale/en-US/index";
  * User configurable options *
  *****************************
  */
+
+
+/**
+ * Default truncation configuration
+ */
+const standardTruncationOptions = {
+	type: TruncationTypes.END_LINE,
+	threshold: 16,
+	numCharacter: 14,
+};
 
 /**
  * Legend options
@@ -50,8 +61,9 @@ export const legend: LegendOptions = {
 	},
 	checkbox: {
 		radius: 6.5,
-		spaceAfter: 4
-	}
+		spaceAfter: 4,
+	},
+	truncation: standardTruncationOptions,
 };
 
 /**
@@ -109,16 +121,20 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge(
 // and by TwoDimensionalAxes.
 const axes: AxesOptions = {
 	top: {
-		includeZero: true
+		includeZero: true,
+    truncation: standardTruncationOptions,
 	},
 	bottom: {
-		includeZero: true
+		includeZero: true,
+    truncation: standardTruncationOptions,
 	},
 	left: {
-		includeZero: true
+		includeZero: true,
+    truncation: standardTruncationOptions,
 	},
 	right: {
-		includeZero: true
+		includeZero: true,
+    truncation: standardTruncationOptions,
 	}
 };
 
