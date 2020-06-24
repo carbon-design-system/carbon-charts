@@ -18,6 +18,13 @@ export enum Model {
 }
 
 /**
+ * enum of all events related to the zoom-bar
+ */
+export enum ZoomBar {
+	UPDATE = "zoom-bar-update"
+}
+
+/**
  * enum of all axis-related events
  */
 export enum Axis {

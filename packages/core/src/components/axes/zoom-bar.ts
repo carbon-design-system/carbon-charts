@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { ScaleTypes } from "../../interfaces";
+import { Events, ScaleTypes } from "../../interfaces";
 import { DOMUtils } from "../../services";
 
 // D3 Imports
@@ -20,6 +20,10 @@ export class ZoomBar extends Component {
 	brush = brushX();
 
 	init() {
+		this.services.events.addEventListener(Events.ZoomBar.UPDATE, () => {
+			this.render();
+		});
+
 		// get initZoomDomain
 		const zoomBarOptions = this.model.getOptions().zoomBar;
 		if (zoomBarOptions.initZoomDomain !== undefined) {
@@ -353,5 +357,8 @@ export class ZoomBar extends Component {
 
 	destroy() {
 		this.brush.on("start brush end", null); // remove event listener
+		this.services.events.removeEventListener(Events.ZoomBar.UPDATE, () => {
+			this.render();
+		});
 	}
 }
