@@ -216,9 +216,8 @@ export class ChartModel {
 				});
 			});
 		}
-		// console.log('group by key: ', dataValuesGroupedByKeys);
 
-		const stackedData = stack()
+		return stack()
 			.keys(dataGroupNames)(dataValuesGroupedByKeys)
 			.map((series, i) => {
 				// Add data group names to each series
@@ -231,9 +230,6 @@ export class ChartModel {
 						return element;
 					});
 			});
-		// console.log('stacked data: ', stackedData); 
-
-		return stackedData;
 	}
 
 	/**
