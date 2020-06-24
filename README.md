@@ -43,8 +43,8 @@ Read the release change logs [here](./CHANGELOG.md)
 | Step        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Scatter     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Radar     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
-| Area        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
-| Gauge        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
+| Area        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
+| Gauge        | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark:
 | Meter        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
 | Combo        | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: | :hourglass_flowing_sand: |
 

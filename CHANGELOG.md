@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.32.10](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.9...v0.32.10) (2020-06-24)
+
+
+### Bug Fixes
+
+* **core:** fix gauge charts without a delta number ([#680](https://github.com/carbon-design-system/carbon-charts/issues/680)) ([f65a084](https://github.com/carbon-design-system/carbon-charts/commit/f65a084bb66f1e8241fdbd6b101daf98d059d548))
+
+
+
+
+
+## [0.32.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.8...v0.32.9) (2020-06-23)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+
+
+
+
 ## [0.32.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.7...v0.32.8) (2020-06-19)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
