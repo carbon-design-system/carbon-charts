@@ -163,6 +163,14 @@ export class ChartModel {
 			displayData,
 			(datum) => datum[domainIdentifier]
 		).keys();
+
+		// Sort keys
+		stackKeys.sort((a, b) => {
+			const dateA: any = new Date(a);
+			const dateB: any = new Date(b);
+			return dateA - dateB;
+		})
+
 		const dataGroupNames = this.getDataGroupNames();
 
 		return stackKeys.map((key) => {
@@ -208,8 +216,9 @@ export class ChartModel {
 				});
 			});
 		}
+		// console.log('group by key: ', dataValuesGroupedByKeys);
 
-		return stack()
+		const stackedData = stack()
 			.keys(dataGroupNames)(dataValuesGroupedByKeys)
 			.map((series, i) => {
 				// Add data group names to each series
@@ -222,6 +231,9 @@ export class ChartModel {
 						return element;
 					});
 			});
+		// console.log('stacked data: ', stackedData); 
+
+		return stackedData;
 	}
 
 	/**
