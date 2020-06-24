@@ -5,6 +5,7 @@ import { Axis } from "./axis";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 import { Threshold } from "../essentials/threshold";
+import { Events } from "./../../interfaces";
 
 export class TwoDimensionalAxes extends Component {
 	type = "2D-axes";
@@ -115,7 +116,8 @@ export class TwoDimensionalAxes extends Component {
 			this.margins = Object.assign(this.margins, margins);
 
 			// also set new margins to model to allow external components to access
-			this.model.set({ axesMargins: this.margins }, { animate: false });
+			this.model.set({ axesMargins: this.margins }, { skipUpdate: true });
+			this.services.events.dispatchEvent(Events.ZoomBar.UPDATE);
 
 			Object.keys(this.children).forEach((childKey) => {
 				const child = this.children[childKey];
