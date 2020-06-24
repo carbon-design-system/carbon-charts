@@ -29,12 +29,10 @@ describe("selectedGroups option", () => {
 					Events.Chart.RENDER_FINISHED,
 					renderCb
 				);
-
-				const legendGroup = select(
-					`g.${settings.prefix}--${options.chart.style.prefix}--legend`
-				);
 				
-				const selectedLegendLabels = legendGroup
+				const selectedLegendLabels = select(
+					`g.${settings.prefix}--${options.chart.style.prefix}--legend`
+				)
 					.selectAll('g.legend-item.active > text')
 					.nodes()
 					.map(item => item['innerHTML']);
