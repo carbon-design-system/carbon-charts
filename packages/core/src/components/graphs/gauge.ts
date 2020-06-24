@@ -251,11 +251,13 @@ export class Gauge extends Component {
 		const deltaFontSize = delta
 			? Tools.getProperty(options, "gauge", "deltaFontSize")
 			: () => 0;
-		const numberFormatter = Tools.getProperty(
+
+		// use numberFormatter here only if there is a delta supplied
+		const numberFormatter = delta ? Tools.getProperty(
 			options,
 			"gauge",
 			"numberFormatter"
-		);
+		) : () => null;
 
 		const arrowSize = Tools.getProperty(options, "gauge", "deltaArrow", "size");
 		const numberSpacing = Tools.getProperty(
@@ -275,15 +277,16 @@ export class Gauge extends Component {
 			`translate(0, ${deltaFontSize(radius) + numberSpacing})`
 		);
 
-		const deltaNumber = deltaGroup
-			.selectAll("text.gauge-delta-number")
-			.data(delta !== null ? [delta] : []);
+		const deltaNumber = DOMUtils.appendOrSelect(deltaGroup, "text.gauge-delta-number");
+
+		deltaNumber
+			.data(delta === null ? [] : [delta]);
 
 		deltaNumber
 			.enter()
 			.append("text")
+			.classed("gauge-delta-number", true)
 			.merge(deltaNumber)
-			.attr("class", "gauge-delta-number")
 			.attr("text-anchor", "middle")
 			.style("font-size", `${deltaFontSize(radius)}px`)
 			.text((d) => `${numberFormatter(d)}%`);
