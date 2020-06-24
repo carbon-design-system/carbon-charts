@@ -47,10 +47,6 @@ export interface BaseChartOptions {
 	 */
 	legend?: LegendOptions;
 	/**
-	 * zoombar configuration
-	 */
-	zoomBar?: ZoomBarOptions;
-	/**
 	 * Optional function to determine whether is filled based on datasetLabel, label, and/or data
 	 */
 	getIsFilled?: (
@@ -122,6 +118,10 @@ export interface AxisChartOptions extends BaseChartOptions {
 	axes?: AxesOptions;
 	grid?: GridOptions;
 	timeScale?: TimeScaleOptions;
+	/**
+	 * zoombar configuration
+	 */
+	zoomBar?: ZoomBarOptions;
 }
 
 /**
@@ -218,7 +218,7 @@ export interface StackedAreaChartOptions extends ScatterChartOptions {
 		| string
 		| {
 				name: string;
-		  };
+	};
 }
 
 /**
