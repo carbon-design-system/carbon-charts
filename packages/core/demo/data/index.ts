@@ -4,6 +4,7 @@ import * as bubbleDemos from "./bubble";
 import * as donutDemos from "./donut";
 import * as lineDemos from "./line";
 import * as pieDemos from "./pie";
+import * as gaugeDemos from "./gauge";
 import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
 import * as meterDemos from "./meter";
@@ -17,6 +18,7 @@ export * from "./donut";
 export * from "./line";
 export * from "./meter";
 export * from "./pie";
+export * from "./gauge";
 export * from "./scatter";
 export * from "./step";
 export * from "./radar";
@@ -78,6 +80,11 @@ export const chartTypes = {
 		angular: "ibm-pie-chart",
 		vue: "ccv-pie-chart"
 	},
+	GaugeChart: {
+		vanilla: "GaugeChart",
+		angular: "ibm-gauge-chart",
+		vue: "ccv-gauge-chart"
+	},
 	DonutChart: {
 		vanilla: "DonutChart",
 		angular: "ibm-donut-chart",
@@ -134,6 +141,12 @@ let allDemoGroups = [
 				options: barDemos.simpleBarOptions,
 				data: barDemos.simpleBarData,
 				chartType: chartTypes.SimpleBarChart
+			},
+			{
+				options: barDemos.simpleBarLongLabelOptions,
+				data: barDemos.simpleBarLongLabelData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true,
 			},
 			{
 				options: barDemos.simpleBarTimeSeriesOptions,
@@ -209,6 +222,12 @@ let allDemoGroups = [
 				options: barDemos.simpleHorizontalBarOptions,
 				data: barDemos.simpleHorizontalBarData,
 				chartType: chartTypes.SimpleBarChart
+			},
+			{
+				options: barDemos.simpleHorizontalBarLongLabelOptions,
+				data: barDemos.simpleHorizontalBarLongLabelData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: true,
 			},
 			{
 				options: barDemos.simpleHorizontalBarTimeSeriesOptions,
@@ -350,6 +369,11 @@ let allDemoGroups = [
 				chartType: chartTypes.LineChart
 			},
 			{
+				options: lineDemos.lineLongLabelOptions,
+				data: lineDemos.lineLongLabelData,
+				chartType: chartTypes.LineChart,
+			},
+			{
 				options: lineDemos.lineCustomDomainOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart,
@@ -429,6 +453,29 @@ let allDemoGroups = [
 		]
 	},
 	{
+		title: "Gauge",
+		demos: [
+			{
+				options: gaugeDemos.gaugeOptionsSemi,
+				data: gaugeDemos.gaugeData,
+				chartType: chartTypes.GaugeChart,
+				isDemoExample: true
+			},
+			{
+				options: gaugeDemos.gaugeOptionsCircular,
+				data: gaugeDemos.gaugeData,
+				chartType: chartTypes.GaugeChart,
+				isDemoExample: true
+			},
+			{
+				options: gaugeDemos.gaugeOptionsCircularNoDelta,
+				data: gaugeDemos.gaugeDataNoDelta,
+				chartType: chartTypes.GaugeChart,
+				isDemoExample: true
+			}
+		]
+	},
+	{
 		title: "Scatter",
 		description:
 			"Scatter plot visualizations use data points to plot two measures anywhere along a scale, not only at regular tick marks. You can use scatter plots to explore correlations between different measures.",
@@ -446,6 +493,11 @@ let allDemoGroups = [
 			{
 				options: scatterDemos.scatterDiscreteOptions,
 				data: scatterDemos.scatterDiscreteData,
+				chartType: chartTypes.ScatterChart
+			},
+			{
+				options: scatterDemos.scatterLongLabelDiscreteOptions,
+				data: scatterDemos.scatterLongLabelDiscreteData,
 				chartType: chartTypes.ScatterChart
 			},
 			{

@@ -5,9 +5,14 @@ import { TooltipTypes } from "../../interfaces";
 export class TooltipPie extends Tooltip {
 	getTooltipHTML(d: any, type: TooltipTypes) {
 		// check if it is getting styles for a title tooltip
-		if (type === TooltipTypes.TITLE) {
+		if (type === ( TooltipTypes.TITLE || TooltipTypes.LEGEND )) {
 			return super.getTooltipHTML(d, type);
 		}
+		// 	const title = this.model.getOptions().title;
+		// 	return `<div class="title-tooltip"><text>${title}</text></div>`;
+		// } else if (type === TooltipTypes.LEGEND) {
+		// 	return `<div class="legend-tooltip"><p class="label">${d.name}</p></div>`;
+		// }
 
 		const dataVal = d.data;
 		const { groupMapsTo } = this.model.getOptions().data;

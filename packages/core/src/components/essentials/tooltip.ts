@@ -63,7 +63,9 @@ export class Tooltip extends Component {
 						"tooltip",
 						"gridline",
 						"enabled"
-					))
+					)) ||
+				(e.detail.type === TooltipTypes.LEGEND) ||
+				(e.detail.type === TooltipTypes.AXISLABEL)
 			) {
 				let data = select(event.target).datum() as any;
 
@@ -72,11 +74,11 @@ export class Tooltip extends Component {
 				if (e.detail.multidata) {
 					// multi tooltip
 					data = e.detail.multidata;
-					defaultHTML = this.getMultilineTooltipHTML(data);
+					defaultHTML = this.getMultilineTooltipHTML(data, e.detail.type);
 				} else {
 					defaultHTML = this.getTooltipHTML(
 						data,
-						TooltipTypes.DATAPOINT
+						e.detail.type
 					);
 				}
 
@@ -125,7 +127,8 @@ export class Tooltip extends Component {
 
 				// get the position based on the title positioning (static)
 				const position = this.getTooltipPosition(
-					e.detail.hoveredElement.node()
+					e.detail.hoveredElement.node(),
+					e.detail.type
 				);
 				this.positionTooltip(position);
 			}
@@ -151,7 +154,10 @@ export class Tooltip extends Component {
 	getTooltipHTML(data: any, type: TooltipTypes) {
 		// title tooltips
 		if (type === TooltipTypes.TITLE) {
-			return this.getTruncatedHTML(data);
+			const title = this.model.getOptions().title;
+			return `<div class="title-tooltip"><text>${title}</text></div>`;
+		} else if (type === TooltipTypes.LEGEND) {
+			return `<div class="legend-tooltip"><p class="label">${data.name}</p></div>`;
 		}
 
 		// other tooltips
@@ -179,7 +185,7 @@ export class Tooltip extends Component {
 				</div>`;
 	}
 
-	getMultilineTooltipHTML(data: any) {
+	getMultilineTooltipHTML(data: any, type: TooltipTypes) {
 		// sort them so they are in the same order as the graph
 		data.sort((a, b) => b.value - a.value);
 
@@ -227,7 +233,7 @@ export class Tooltip extends Component {
 	}
 
 	// returns static position based on the element
-	getTooltipPosition(hoveredElement) {
+	getTooltipPosition(hoveredElement, type: TooltipTypes) {
 		const holderPosition = select(this.services.domUtils.getHolder())
 			.node()
 			.getBoundingClientRect();

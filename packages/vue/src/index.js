@@ -5,6 +5,7 @@ import CcvGroupedBarChart from './ccv-grouped-bar-chart.vue';
 import CcvStackedBarChart from './ccv-stacked-bar-chart.vue';
 import CcvBubbleChart from './ccv-bubble-chart.vue';
 import CcvDonutChart from './ccv-donut-chart.vue';
+import CcvGaugeChart from './ccv-gauge-chart.vue';
 import CcvLineChart from './ccv-line-chart.vue';
 import CcvPieChart from './ccv-pie-chart.vue';
 import CcvScatterChart from './ccv-scatter-chart.vue';
@@ -19,6 +20,7 @@ const components = [
 	CcvStackedBarChart,
 	CcvBubbleChart,
 	CcvDonutChart,
+	CcvGaugeChart,
 	CcvLineChart,
 	CcvPieChart,
 	CcvScatterChart,
@@ -66,6 +68,7 @@ export {
 	CcvStackedBarChart,
 	CcvBubbleChart,
 	CcvDonutChart,
+	CcvGaugeChart,
 	CcvLineChart,
 	CcvPieChart,
 	CcvScatterChart,
