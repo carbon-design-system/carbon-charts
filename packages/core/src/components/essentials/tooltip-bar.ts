@@ -52,7 +52,9 @@ export class TooltipBar extends Tooltip {
 						"tooltip",
 						"gridline",
 						"enabled"
-					))
+					)) ||
+				(e.detail.type === TooltipTypes.LEGEND) ||
+				(e.detail.type === TooltipTypes.AXISLABEL)
 			) {
 				let data = e.detail.hoveredElement.datum() as any;
 				const hoveredElement = e.detail.hoveredElement.node();
@@ -69,7 +71,7 @@ export class TooltipBar extends Tooltip {
 						data = e.detail.hoveredElement.datum();
 					}
 
-					defaultHTML = this.getTooltipHTML(data);
+					defaultHTML = this.getTooltipHTML(data, e.detail.type);
 				}
 
 				// if there is a provided tooltip HTML function call it and pass the defaultHTML
@@ -89,10 +91,13 @@ export class TooltipBar extends Tooltip {
 					// default tooltip
 					tooltipTextContainer.html(defaultHTML);
 				}
-
-				const position = this.getTooltipPosition(hoveredElement, data);
-				// Position the tooltip relative to the bars
-				this.positionTooltip(e.detail.multidata ? undefined : position);
+				if ((e.detail.type === TooltipTypes.LEGEND) || (e.detail.type === TooltipTypes.AXISLABEL)) {
+					this.positionTooltip();
+				} else {
+					const position = this.getTooltipPosition(hoveredElement, data);
+					// Position the tooltip relative to the bars
+					this.positionTooltip(e.detail.multidata ? undefined : position);
+				}
 			} else if (e.detail.type === TooltipTypes.TITLE) {
 				// use the chart size to enforce a max width on the tooltip
 				const chart = DOMUtils.appendOrSelect(
@@ -120,7 +125,8 @@ export class TooltipBar extends Tooltip {
 
 				// get the position based on the title positioning (static)
 				const position = super.getTooltipPosition(
-					e.detail.hoveredElement.node()
+					e.detail.hoveredElement.node(),
+					e.detail.type
 				);
 				this.positionTooltip(position);
 			}
@@ -181,7 +187,13 @@ export class TooltipBar extends Tooltip {
 	 * Returns the html for the bar single point tooltip
 	 * @param data associated values for the hovered bar
 	 */
-	getTooltipHTML(data: any) {
+	getTooltipHTML(data: any, type: TooltipTypes) {
+		if (type === TooltipTypes.LEGEND) {
+			return `<div class="legend-tooltip"><p class="label">${data.name}</p></div>`;
+		} else if (type === TooltipTypes.AXISLABEL) {
+			return `<div class="axis-tooltip"><p class="label">${data}</p></div>`;
+		}
+
 		const formattedValue = Tools.getProperty(
 			this.model.getOptions(),
 			"tooltip",

@@ -2,6 +2,7 @@ import { ScaleTypes } from "./enums";
 import { AxisDomain } from "d3";
 import { Locale } from "date-fns";
 import { ThresholdOptions } from "./components";
+import { TruncationOptions } from "./truncation";
 
 /**
  * options to configure a scale. not all options are used by all scales
@@ -78,6 +79,7 @@ export interface AxisOptions {
 		 */
 		formatter?: Function;
 	};
+	truncation?: TruncationOptions;
 }
 
 /**
