@@ -17,11 +17,11 @@ describe("selectedGroups option", () => {
 		this.testEnvironment = testEnvironment;
 	});
 
-	describe("selected groups", () => {
-		it("should match the selected legend labels", function (done) {
+	describe("selected legend labels", () => {
+		it("should match the selected groups provided in options", function (done) {
 			const chartEventsService = this.chart.services.events;
 
-			const sampleSelectedGroups = ['Dataset 1', 'Dataset 3'];
+			const sampleSelectedGroups = ["Dataset 1", "Dataset 3"];
 
 			const renderCb = () => {
 				// Remove render event listener
@@ -29,13 +29,13 @@ describe("selectedGroups option", () => {
 					Events.Chart.RENDER_FINISHED,
 					renderCb
 				);
-				
+
 				const selectedLegendLabels = select(
 					`g.${settings.prefix}--${options.chart.style.prefix}--legend`
 				)
-					.selectAll('g.legend-item.active > text')
+					.selectAll("g.legend-item.active > text")
 					.nodes()
-					.map(item => item['innerHTML']);
+					.map((item) => item["innerHTML"]);
 
 				expect(selectedLegendLabels).toEqual(sampleSelectedGroups);
 
@@ -47,10 +47,10 @@ describe("selectedGroups option", () => {
 				Events.Chart.RENDER_FINISHED,
 				renderCb
 			);
-		})
-	})
+		});
+	});
 
 	afterEach(function () {
 		this.testEnvironment.destroy();
 	});
-})
+});
