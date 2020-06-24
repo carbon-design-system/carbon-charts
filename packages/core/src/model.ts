@@ -169,11 +169,7 @@ export class ChartModel {
 
 		// Sort keys
 		if (scaleType === ScaleTypes.TIME) {
-			stackKeys.sort((a, b) => {
-				const dateA: any = new Date(a);
-				const dateB: any = new Date(b);
-				return dateA - dateB;
-			})
+			stackKeys.sort((a, b) => new Date(a) - new Date(b));
 		} else if (
 			scaleType === ScaleTypes.LOG ||
 			scaleType === ScaleTypes.LINEAR
