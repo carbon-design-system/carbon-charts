@@ -22,6 +22,16 @@ export enum AxisPositions {
 }
 
 /**
+ * enum of all possible truncation types
+ */
+export enum TruncationTypes {
+	END_LINE = "end_line",
+	MID_LINE = "mid_line",
+	FRONT_LINE = "front_line",
+	NONE = "none",
+}
+
+/**
  * enum of all possible cartesian orientations
  * to be used for determining the orientation
  * of graphs being draw over
@@ -57,7 +67,9 @@ export enum TooltipPosition {
 export enum TooltipTypes {
 	DATAPOINT = "datapoint",
 	GRIDLINE = "gridline",
-	TITLE = "title"
+	TITLE = "title",
+	LEGEND = "legend",
+	AXISLABEL = "axislabel",
 }
 
 /**

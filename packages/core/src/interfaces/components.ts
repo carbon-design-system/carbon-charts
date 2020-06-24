@@ -1,5 +1,6 @@
 import { LayoutGrowth, LegendPositions } from "./enums";
 import { Component } from "../components/component";
+import { TruncationOptions } from "./truncation";
 
 /**
  * customize the overlay contents
@@ -49,6 +50,7 @@ export interface LegendOptions {
 		radius?: Number;
 		spaceAfter?: Number;
 	};
+	truncation?: TruncationOptions;
 }
 
 export interface TooltipOptions {
