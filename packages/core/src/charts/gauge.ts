@@ -7,8 +7,7 @@ import { Tools } from "../tools";
 // Components
 import {
 	Gauge,
-	// the imports below are needed because of typescript bug (error TS4029)
-	TooltipPie
+	Tooltip
 } from "../components/index";
 
 export class GaugeChart extends Chart {
@@ -33,6 +32,8 @@ export class GaugeChart extends Chart {
 		const graphFrameComponents = [new Gauge(this.model, this.services)];
 
 		const components: any[] = this.getChartComponents(graphFrameComponents);
+		components.push(new Tooltip(this.model, this.services));
+
 		return components;
 	}
 }
