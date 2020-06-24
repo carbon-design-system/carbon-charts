@@ -69,7 +69,7 @@ export enum TooltipTypes {
 	GRIDLINE = "gridline",
 	TITLE = "title",
 	LEGEND = "legend",
-	AXISLABEL = "axislabel",
+	AXISLABEL = "axislabel"
 }
 
 /**
@@ -160,15 +160,6 @@ export enum ArrowDirections {
 
 /**
  * enum of carbon statuses
- */
-export enum Statuses {
-	SUCCESS = "success",
-	WARNING = "warning",
-	DANGER = "danger"
-}
-
-/**
- * enum of possible states for the Meter Chart
  */
 export enum Statuses {
 	SUCCESS = "success",

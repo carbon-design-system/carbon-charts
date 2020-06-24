@@ -143,19 +143,12 @@ export class Tooltip extends Component {
 		});
 	}
 
-	// to be used for truncation within the chart (titles, legend, etc)
-	getTruncatedHTML(data) {
-		if (!data) {
-			return;
-		}
-		return `<div class="truncation-tooltip"><text>${data}</text></div>`;
-	}
 
 	getTooltipHTML(data: any, type: TooltipTypes) {
 		// title tooltips
 		if (type === TooltipTypes.TITLE) {
 			const title = this.model.getOptions().title;
-			return `<div class="title-tooltip"><text>${title}</text></div>`;
+			return `<div class="title-tooltip"><p>${title}</p></div>`;
 		} else if (type === TooltipTypes.LEGEND) {
 			return `<div class="legend-tooltip"><p class="label">${data.name}</p></div>`;
 		}

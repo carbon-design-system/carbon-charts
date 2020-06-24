@@ -189,8 +189,8 @@ export class TooltipBar extends Tooltip {
 	 * @param data associated values for the hovered bar
 	 */
 	getTooltipHTML(data: any, type: TooltipTypes) {
-		if (type === TooltipTypes.LEGEND) {
-			return `<div class="legend-tooltip"><p class="label">${data.name}</p></div>`;
+		if (type === ( TooltipTypes.LEGEND || TooltipTypes.TITLE)) {
+			return super.getTooltipHTML(data, type);
 		} else if (type === TooltipTypes.AXISLABEL) {
 			return `<div class="axis-tooltip"><p class="label">${data}</p></div>`;
 		}

@@ -24,9 +24,12 @@
 	.content-box {
 		color: $text-01;
 
-		.truncation-tooltip {
-			line-height: 16px;
-			font-size: 12px;
+		.title-tooltip {
+			p {
+				line-height: 16px;
+				font-size: 12px;
+			}
+			width: auto;
 			padding: 4px;
 			min-width: 20px;
 		}
