@@ -11,7 +11,7 @@ export const data = groupedBarData as ChartData;
 export const options = Object.assign(groupedBarOptions, {
 	title: "My chart",
 	data: {
-		selectedGroups: ['Dataset 1', 'Dataset 3']
+		selectedGroups: ['Dataset 1']
 	}
 }) as any;
 
