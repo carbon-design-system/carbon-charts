@@ -85,10 +85,29 @@ export const lineCustomDomainOptions = {
 			title: "2019 Annual Sales Figures",
 			mapsTo: "key",
 			scaleType: "labels",
-			domain: ['Qty', 'More', 'Misc']
+			domain: ["Qty", "More", "Misc"]
 		},
 		left: {
 			domain: [10000, 50000],
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear",
+		},
+	},
+};
+
+export const lineSelectedGroupsOptions = {
+	title: "Line (selected groups)",
+	data: {
+		selectedGroups: ["Dataset 1", "Dataset 3"]
+	},
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "key",
+			scaleType: "labels",
+		},
+		left: {
 			mapsTo: "value",
 			title: "Conversion rate",
 			scaleType: "linear",

@@ -217,8 +217,7 @@ export class Legend extends Component {
 
 				// Render checkbox check icon
 				if (
-					hasDeactivatedItems &&
-					legendItem.select("g.check").empty()
+					hasDeactivatedItems
 				) {
 					legendItem.append("g").classed("check", true).html(`
 							<svg focusable="false" preserveAspectRatio="xMidYMid meet"

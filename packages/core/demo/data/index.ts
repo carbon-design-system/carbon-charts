@@ -142,6 +142,11 @@ let allDemoGroups = [
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
+				options: barDemos.simpleBarSelectedGroupsOptions,
+				data: barDemos.simpleBarSelectedGroupsData,
+				chartType: chartTypes.SimpleBarChart
+			},
+			{
 				options: barDemos.simpleBarLongLabelOptions,
 				data: barDemos.simpleBarLongLabelData,
 				chartType: chartTypes.SimpleBarChart,
@@ -220,6 +225,11 @@ let allDemoGroups = [
 			{
 				options: barDemos.simpleHorizontalBarOptions,
 				data: barDemos.simpleHorizontalBarData,
+				chartType: chartTypes.SimpleBarChart
+			},
+			{
+				options: barDemos.simpleHorizontalBarSelectedGroupsOptions,
+				data: barDemos.simpleHorizontalBarSelectedGroupsData,
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
@@ -374,6 +384,11 @@ let allDemoGroups = [
 			},
 			{
 				options: lineDemos.lineCustomDomainOptions,
+				data: lineDemos.lineData,
+				chartType: chartTypes.LineChart,
+			},
+			{
+				options: lineDemos.lineSelectedGroupsOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart,
 			},

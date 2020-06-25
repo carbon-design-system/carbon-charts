@@ -74,6 +74,25 @@ export const simpleBarOptions = {
 	},
 };
 
+// Simple bar with selected groups option
+export const simpleBarSelectedGroupsData = simpleBarData;
+
+export const simpleBarSelectedGroupsOptions = {
+	title: "Simple bar (selected groups)",
+	data: {
+		selectedGroups: ["Qty", "Sold", "Misc"]
+	},
+	axes: {
+		left: {
+			mapsTo: "value",
+		},
+		bottom: {
+			mapsTo: "group",
+			scaleType: "labels",
+		},
+	},
+};
+
 // Simple bar with long labels
 export const simpleBarLongLabelData = [
 	{ group: "6591DA8668C339B1B39297C61091E320C35391AB7AFC15B469F96B8A2DD0C231", value: 65000 },
@@ -123,6 +142,25 @@ export const simpleHorizontalBarLongLabelData = simpleBarLongLabelData;
 
 export const simpleHorizontalBarOptions = {
 	title: "Simple horizontal bar (discrete)",
+	axes: {
+		left: {
+			mapsTo: "group",
+			scaleType: "labels",
+		},
+		bottom: {
+			mapsTo: "value",
+		},
+	},
+};
+
+export const simpleHorizontalBarSelectedGroupsData = simpleBarData;
+
+// Horizontal simple with selected groups option
+export const simpleHorizontalBarSelectedGroupsOptions = {
+	title: "Simple horizontal bar (selected groups)",
+	data: {
+		selectedGroups: ["Qty", "Sold", "Misc"]
+	},
 	axes: {
 		left: {
 			mapsTo: "group",
