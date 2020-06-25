@@ -32,7 +32,7 @@ export class Line extends Component {
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
 		const [
 			getXValue,
-			getYValue,
+			getYValue
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
@@ -51,7 +51,6 @@ export class Line extends Component {
 				if (value === null || value === undefined) {
 					return false;
 				}
-
 				return true;
 			});
 
@@ -62,15 +61,17 @@ export class Line extends Component {
 			);
 			const { groupMapsTo } = options.data;
 			const stackedData = this.model.getStackedData({ percentage });
+			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
 			data = stackedData.map((d) => ({
 				name: d[0][groupMapsTo],
 				data: d.map((datum) => ({
-					date: datum.data.sharedStackKey,
+					[domainIdentifier]: datum.data.sharedStackKey,
 					group: datum[groupMapsTo],
-					value: datum[1],
+					[rangeIdentifier]: datum[1]
 				})),
-				hidden: !Tools.some(d, (datum) => datum[0] !== datum[1]),
+				hidden: !Tools.some(d, (datum) => datum[0] !== datum[1])
 			}));
 		} else {
 			data = this.model.getGroupedData();
