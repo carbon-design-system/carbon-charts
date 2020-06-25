@@ -163,6 +163,24 @@ export class ChartModel {
 			displayData,
 			(datum) => datum[domainIdentifier]
 		).keys();
+
+		const axisPosition = this.services.cartesianScales.domainAxisPosition; 
+		const scaleType = options.axes[axisPosition].scaleType;
+
+		// Sort keys
+		if (scaleType === ScaleTypes.TIME) {
+			stackKeys.sort((a: any, b: any) => {
+				const dateA: any = new Date(a);
+				const dateB: any = new Date(b);
+				return dateA - dateB;
+			});
+		} else if (
+			scaleType === ScaleTypes.LOG ||
+			scaleType === ScaleTypes.LINEAR
+		) {
+			stackKeys.sort((a: any, b: any) => a - b);
+		};
+
 		const dataGroupNames = this.getDataGroupNames();
 
 		return stackKeys.map((key) => {
