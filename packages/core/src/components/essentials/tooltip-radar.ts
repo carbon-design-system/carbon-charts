@@ -1,8 +1,9 @@
 import { Tooltip } from "./tooltip";
 import { Tools } from "../../tools";
+import { TooltipTypes } from "../../interfaces";
 
 export class TooltipRadar extends Tooltip {
-	getMultilineTooltipHTML(data: any) {
+	getMultilineTooltipHTML(data: any, type: TooltipTypes) {
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
 		const { angle, value } = options.radar.axes;

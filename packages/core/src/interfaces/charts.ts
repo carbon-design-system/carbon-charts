@@ -1,14 +1,19 @@
 import {
+	GaugeTypes,
+	Statuses,
+	ArrowDirections
+} from "./enums";
+import {
 	LegendOptions,
 	TooltipOptions,
 	GridOptions,
-	AxesOptions,
+	AxesOptions
 } from "./index";
 import {
 	AxisTooltipOptions,
 	BarTooltipOptions,
 	BarOptions,
-	StackedBarOptions,
+	StackedBarOptions
 } from "./components";
 import { TimeScaleOptions } from "./axis-scales";
 
@@ -178,10 +183,10 @@ export interface LineChartOptions extends ScatterChartOptions {
 	 * options for the curve of the line
 	 */
 	curve?:
-		| string
-		| {
-				name: string;
-		  };
+	| string
+	| {
+		name: string;
+	};
 }
 
 /**
@@ -236,6 +241,26 @@ export interface PieChartOptions extends BaseChartOptions {
 		labels?: {
 			formatter?: Function;
 		};
+	};
+}
+
+/**
+ * options specific to gauge charts
+ */
+export interface GaugeChartOptions extends PieChartOptions {
+	gauge?: {
+		arcWidth?: number;
+		deltaArrow?: {
+			direction?: ArrowDirections;
+			size?: Function;
+			enabled: Boolean;
+		}
+		status?: Statuses;
+		deltaFontSize?: Function;
+		numberSpacing?: number;
+		numberFormatter?: Function;
+		valueFontSize?: Function;
+		type?: GaugeTypes;
 	};
 }
 

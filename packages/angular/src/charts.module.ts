@@ -9,6 +9,7 @@ import { GroupedBarChartComponent } from "./bar-chart-grouped.component";
 import { StackedBarChartComponent } from "./bar-chart-stacked.component";
 import { BubbleChartComponent } from "./bubble-chart.component";
 import { DonutChartComponent } from "./donut-chart.component";
+import { GaugeChartComponent } from "./gauge-chart.component";
 import { LineChartComponent } from "./line-chart.component";
 import { PieChartComponent } from "./pie-chart.component";
 import { ScatterChartComponent } from "./scatter-chart.component";
@@ -27,6 +28,7 @@ import { RadarChartComponent } from "./radar-chart.component";
 		StackedBarChartComponent,
 		BubbleChartComponent,
 		DonutChartComponent,
+		GaugeChartComponent,
 		LineChartComponent,
 		PieChartComponent,
 		ScatterChartComponent,
@@ -41,6 +43,7 @@ import { RadarChartComponent } from "./radar-chart.component";
 		StackedBarChartComponent,
 		BubbleChartComponent,
 		DonutChartComponent,
+		GaugeChartComponent,
 		LineChartComponent,
 		PieChartComponent,
 		ScatterChartComponent,
