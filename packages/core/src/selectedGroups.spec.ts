@@ -19,8 +19,9 @@ describe("selectedGroups option", () => {
 
 	describe("selected legend labels", () => {
 		it("should match the selected groups provided in options", function (done) {
-			const chartEventsService = this.chart.services.events;
 			const sampleSelectedGroups = ["Dataset 1", "Dataset 3"];
+
+			const chartEventsService = this.chart.services.events;
 
 			const renderCb = () => {
 				// Remove render event listener
