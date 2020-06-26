@@ -68,7 +68,7 @@ export class Line extends Component {
 				name: d[0][groupMapsTo],
 				data: d.map((datum) => ({
 					[domainIdentifier]: datum.data.sharedStackKey,
-					group: datum[groupMapsTo],
+					[groupMapsTo]: datum[groupMapsTo],
 					[rangeIdentifier]: datum[1]
 				})),
 				hidden: !Tools.some(d, (datum) => datum[0] !== datum[1])
