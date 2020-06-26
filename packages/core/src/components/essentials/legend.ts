@@ -215,9 +215,20 @@ export class Legend extends Component {
 
 				lastYPosition = yPosition;
 
+				// Test if legendItems are placed in the correct direction
+				const testHorizontal = (!legendOrientation ||
+					legendOrientation === LegendOrientations.HORIZONTAL) &&
+					legendItem.select("rect.checkbox").attr("y") === '0';
+
+				const testVertical = legendOrientation === LegendOrientations.VERTICAL &&
+					legendItem.select("rect.checkbox").attr("x") === '0';
+
+				const hasCorrectLegendDirection = testHorizontal || testVertical;
+
 				// Render checkbox check icon
-				if (
-					hasDeactivatedItems
+				if (hasDeactivatedItems &&
+					legendItem.select("g.check").empty() &&
+					hasCorrectLegendDirection
 				) {
 					legendItem.append("g").classed("check", true).html(`
 							<svg focusable="false" preserveAspectRatio="xMidYMid meet"
