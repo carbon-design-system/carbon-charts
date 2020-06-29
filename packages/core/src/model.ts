@@ -39,12 +39,11 @@ export class ChartModel {
 		this.services = services;
 	}
 
-	getDisplayData() {
+	getAllDataFromDomain() {
 		if (!this.get("data")) {
 			return null;
 		}
 
-		const { ACTIVE } = Configuration.legend.items.status;
 		const dataGroups = this.getDataGroups();
 
 		// Remove datasets that have been disabled
@@ -76,6 +75,24 @@ export class ChartModel {
 		}
 
 		return displayData.filter((datum) => {
+			return dataGroups.find(
+				(group) => group.name === datum[groupMapsTo]
+			);
+		});
+	}
+
+	getDisplayData() {
+		if (!this.get("data")) {
+			return null;
+		}
+
+		const { ACTIVE } = Configuration.legend.items.status;
+		const dataGroups = this.getDataGroups();
+		const { groupMapsTo } = this.getOptions().data;
+
+		const allData = this.getAllDataFromDomain();
+
+		return allData.filter((datum) => {
 			const group = dataGroups.find(
 				(group) => group.name === datum[groupMapsTo]
 			);

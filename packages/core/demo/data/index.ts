@@ -142,11 +142,6 @@ let allDemoGroups = [
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
-				options: barDemos.simpleBarSelectedGroupsOptions,
-				data: barDemos.simpleBarSelectedGroupsData,
-				chartType: chartTypes.SimpleBarChart
-			},
-			{
 				options: barDemos.simpleBarLongLabelOptions,
 				data: barDemos.simpleBarLongLabelData,
 				chartType: chartTypes.SimpleBarChart,
@@ -179,6 +174,11 @@ let allDemoGroups = [
 					"A grouped bar chart, also known as a clustered bar graph, multi-set bar chart, or grouped column chart, is a type of bar graph that is used to compare values across multiple categories.",
 				options: barDemos.groupedBarOptions,
 				data: barDemos.groupedBarData,
+				chartType: chartTypes.GroupedBarChart
+			},
+			{
+				options: barDemos.groupedBarSelectedGroupsOptions,
+				data: barDemos.groupedBarSelectedGroupsData,
 				chartType: chartTypes.GroupedBarChart
 			},
 			{
@@ -225,11 +225,6 @@ let allDemoGroups = [
 			{
 				options: barDemos.simpleHorizontalBarOptions,
 				data: barDemos.simpleHorizontalBarData,
-				chartType: chartTypes.SimpleBarChart
-			},
-			{
-				options: barDemos.simpleHorizontalBarSelectedGroupsOptions,
-				data: barDemos.simpleHorizontalBarSelectedGroupsData,
 				chartType: chartTypes.SimpleBarChart
 			},
 			{

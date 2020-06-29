@@ -336,7 +336,7 @@ export class CartesianScales extends Service {
 			return [];
 		}
 
-		const displayData = this.model.getDisplayData();
+		const allDataFromDomain = this.model.getAllDataFromDomain();
 		const { mapsTo, percentage } = axisOptions;
 
 		// If domain is specified return that domain
@@ -355,7 +355,7 @@ export class CartesianScales extends Service {
 		// If scale is a LABELS scale, return some labels as the domain
 		if (axisOptions && scaleType === ScaleTypes.LABELS) {
 			// Get unique values
-			return map(displayData, (d) => d[mapsTo]).keys();
+			return map(allDataFromDomain, (d) => d[mapsTo]).keys();
 		}
 
 		// Get the extent of the domain
@@ -368,7 +368,7 @@ export class CartesianScales extends Service {
 				sum(values(dataValues) as any)
 			);
 		} else {
-			allDataValues = displayData.map((datum) => datum[mapsTo]);
+			allDataValues = allDataFromDomain.map((datum) => datum[mapsTo]);
 		}
 
 		if (scaleType !== ScaleTypes.TIME && includeZero) {

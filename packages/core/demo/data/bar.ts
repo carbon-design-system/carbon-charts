@@ -36,6 +36,25 @@ export const groupedBarOptions = {
 	},
 };
 
+export const groupedBarSelectedGroupsData = groupedBarData;
+
+// Grouped bar with selected groups option
+export const groupedBarSelectedGroupsOptions = {
+	title: "Grouped bar (selected groups)",
+	data: {
+		selectedGroups: ["Dataset 1", "Dataset 3"]
+	},
+	axes: {
+		left: {
+			mapsTo: "value",
+		},
+		bottom: {
+			scaleType: "labels",
+			mapsTo: "key",
+		},
+	},
+};
+
 // Horizontal Grouped
 export const groupedHorizontalBarData = groupedBarData;
 
@@ -63,25 +82,6 @@ export const simpleBarData = [
 
 export const simpleBarOptions = {
 	title: "Simple bar (discrete)",
-	axes: {
-		left: {
-			mapsTo: "value",
-		},
-		bottom: {
-			mapsTo: "group",
-			scaleType: "labels",
-		},
-	},
-};
-
-// Simple bar with selected groups option
-export const simpleBarSelectedGroupsData = simpleBarData;
-
-export const simpleBarSelectedGroupsOptions = {
-	title: "Simple bar (selected groups)",
-	data: {
-		selectedGroups: ["Qty", "Sold", "Misc"]
-	},
 	axes: {
 		left: {
 			mapsTo: "value",
@@ -142,25 +142,6 @@ export const simpleHorizontalBarLongLabelData = simpleBarLongLabelData;
 
 export const simpleHorizontalBarOptions = {
 	title: "Simple horizontal bar (discrete)",
-	axes: {
-		left: {
-			mapsTo: "group",
-			scaleType: "labels",
-		},
-		bottom: {
-			mapsTo: "value",
-		},
-	},
-};
-
-export const simpleHorizontalBarSelectedGroupsData = simpleBarData;
-
-// Horizontal simple with selected groups option
-export const simpleHorizontalBarSelectedGroupsOptions = {
-	title: "Simple horizontal bar (selected groups)",
-	data: {
-		selectedGroups: ["Qty", "Sold", "Misc"]
-	},
 	axes: {
 		left: {
 			mapsTo: "group",
