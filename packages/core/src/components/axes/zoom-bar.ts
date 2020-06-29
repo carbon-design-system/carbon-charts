@@ -218,8 +218,10 @@ export class ZoomBar extends Component {
 					this.brush
 				);
 
-				if (
-					zoomDomain === undefined ||
+				if (zoomDomain === undefined) {
+					// do nothing, initialization not completed yet
+					// don't update brushHandle to avoid flash
+				} else if (
 					zoomDomain[0].valueOf() === zoomDomain[1].valueOf()
 				) {
 					brushArea.call(this.brush.move, xScale.range()); // default to full range
@@ -229,8 +231,16 @@ export class ZoomBar extends Component {
 					);
 				} else {
 					const selected = zoomDomain.map((domain) => xScale(domain));
-					brushArea.call(this.brush.move, selected); // set brush to correct position
-					this.updateBrushHandle(this.getContainerSVG(), selected);
+					if (selected[1] - selected[0] < 1) {
+						// initialization not completed yet
+						// don't update brushHandle to avoid flash
+					} else {
+						brushArea.call(this.brush.move, selected); // set brush to correct position
+						this.updateBrushHandle(
+							this.getContainerSVG(),
+							selected
+						);
+					}
 				}
 			}
 		}
