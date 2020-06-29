@@ -299,18 +299,14 @@ export class ZoomBar extends Component {
 	}
 
 	updateBrushHandle(svg, selection) {
-		// @todo the handle size, height are calculated by d3 library
-		// need to figure out how to override the value
-		const handleWidth = 6;
-		const handleHeight = 38;
+		const handleWidth = 5;
+		const handleHeight = this.height;
 		const handleXDiff = -handleWidth / 2;
-		const handleYDiff = -(handleHeight - this.height) / 2;
 
-		const handleBarWidth = 2;
+		const handleBarWidth = 1;
 		const handleBarHeight = 12;
 		const handleBarXDiff = -handleBarWidth / 2;
-		const handleYBarDiff =
-			(handleHeight - handleBarHeight) / 2 + handleYDiff;
+		const handleYBarDiff = (handleHeight - handleBarHeight) / 2;
 		// handle
 		svg.select("g.brush")
 			.selectAll("rect.handle")
@@ -322,7 +318,7 @@ export class ZoomBar extends Component {
 					return selection[1] + handleXDiff;
 				}
 			})
-			.attr("y", handleYDiff)
+			.attr("y", 0)
 			.attr("width", handleWidth)
 			.attr("height", handleHeight)
 			.style("display", null); // always display
