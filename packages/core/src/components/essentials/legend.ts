@@ -211,7 +211,7 @@ export class Legend extends Component {
 				legendItem
 					.select("text")
 					.attr("x", startingPoint + spaceNeededForCheckbox)
-					.attr("y", yOffset + yPosition + 2);
+					.attr("y", yOffset + yPosition + 3);
 
 				lastYPosition = yPosition;
 
@@ -286,7 +286,6 @@ export class Legend extends Component {
 
 				// Configs
 				const checkboxRadius = options.legend.checkbox.radius;
-
 				const hoveredItem = select(this);
 				hoveredItem
 					.append("rect")
