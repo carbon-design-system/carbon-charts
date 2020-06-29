@@ -13,6 +13,8 @@ import { event, select, selectAll } from "d3-selection";
 export class ZoomBar extends Component {
 	type = "zoom-bar";
 
+	clipId = "zoomBarClip";
+
 	height = 32;
 
 	ogXScale: any;
@@ -72,9 +74,7 @@ export class ZoomBar extends Component {
 			.attr("x", axesLeftMargin)
 			.attr("y", 0)
 			.attr("width", "100%")
-			.attr("height", "100%")
-			.attr("fill", "white")
-			.attr("stroke", "#e8e8e8");
+			.attr("height", "100%");
 
 		if (mainXScale) {
 			const displayData = this.model.getDisplayData();
@@ -153,63 +153,44 @@ export class ZoomBar extends Component {
 							)
 					)
 					.curve(this.services.curves.getD3Curve());
-				// .defined((d: any, i) => {
-				// 	if (zoomDomain) {
-				// 		const dTimestamp = +d.label;
-
-				// 		return dTimestamp >= +zoomDomain[0] && dTimestamp <= +zoomDomain[1];
-				// 	}
-
-				// 	return true;
-				// });
-				const lineGraph = DOMUtils.appendOrSelect(
-					container,
-					"path.zoom-graph-line"
-				)
-					.datum(stackDataArray)
-					.transition(
-						this.services.transitions.getTransition(
-							"zoom-pan-line-update",
-							animate
-						)
-					)
-					.attr("d", lineGenerator);
-
-				const areaGenerator = area()
-					.x((d, i) =>
-						cartesianScales.getValueFromScale(
-							xScale,
-							mainXScaleType,
-							mainXAxisPosition,
+				const accessorFunc = (scale, scaleType, axisPosition) => {
+					return (d, i) => {
+						return cartesianScales.getValueFromScale(
+							scale,
+							scaleType,
+							axisPosition,
 							d,
 							i
-						)
-					)
-					.y0(this.height)
-					.y1(
-						(d, i) =>
-							this.height -
-							cartesianScales.getValueFromScale(
-								yScale,
-								mainYScaleType,
-								mainYAxisPosition,
-								d,
-								i
-							)
-					);
-
-				const areaGraph = DOMUtils.appendOrSelect(
+						);
+					};
+				};
+				this.renderZoomBarArea(
 					container,
-					"path.zoom-graph-area"
-				)
-					.datum(stackDataArray)
-					.transition(
-						this.services.transitions.getTransition(
-							"zoom-pan-area-update",
-							animate
-						)
-					)
-					.attr("d", areaGenerator);
+					"path.zoom-graph-area-unselected",
+					accessorFunc(xScale, mainXScaleType, mainXAxisPosition),
+					accessorFunc(yScale, mainYScaleType, mainYAxisPosition),
+					stackDataArray,
+					animate,
+					undefined
+				);
+				this.updateClipPath(svg, this.clipId, 0, 0, 0, 0);
+				this.renderZoomBarArea(
+					container,
+					"path.zoom-graph-area",
+					accessorFunc(xScale, mainXScaleType, mainXAxisPosition),
+					accessorFunc(yScale, mainYScaleType, mainYAxisPosition),
+					stackDataArray,
+					animate,
+					"zoomBarClip"
+				);
+				const baselineGenerator = line()([
+					[axesLeftMargin, this.height],
+					[width, this.height]
+				]);
+				const zoomBaseline = DOMUtils.appendOrSelect(
+					container,
+					"path.zoom-bg-baseline"
+				).attr("d", baselineGenerator);
 
 				const brushEventListener = () => {
 					const selection = event.selection;
@@ -352,7 +333,52 @@ export class ZoomBar extends Component {
 			})
 			.attr("y", handleYBarDiff)
 			.attr("width", handleBarWidth)
-			.attr("height", handleBarHeight);
+			.attr("height", handleBarHeight)
+			.attr("cursor", "ew-resize");
+
+		this.updateClipPath(
+			svg,
+			this.clipId,
+			selection[0],
+			0,
+			selection[1] - selection[0],
+			this.height
+		);
+	}
+
+	renderZoomBarArea(
+		container,
+		querySelector,
+		xFunc,
+		y1Func,
+		datum,
+		animate,
+		clipId
+	) {
+		const areaGenerator = area()
+			.x((d, i) => xFunc(d, i))
+			.y0(this.height)
+			.y1((d, i) => this.height - y1Func(d, i));
+
+		const areaGraph = DOMUtils.appendOrSelect(container, querySelector)
+			.datum(datum)
+			.attr("d", areaGenerator);
+
+		if (clipId) {
+			areaGraph.attr("clip-path", `url(#${clipId})`);
+		}
+	}
+
+	updateClipPath(svg, clipId, x, y, width, height) {
+		const zoomBarClipPath = DOMUtils.appendOrSelect(svg, `clipPath`).attr(
+			"id",
+			clipId
+		);
+		DOMUtils.appendOrSelect(zoomBarClipPath, "rect")
+			.attr("x", x)
+			.attr("y", y)
+			.attr("width", width)
+			.attr("height", height);
 	}
 
 	destroy() {
