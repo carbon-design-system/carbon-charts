@@ -4,15 +4,19 @@ g.#{$prefix}--#{$charts-prefix}--zoom-bar {
 		stroke: $ui-01;
 	}
 
-	path.zoom-graph-line {
+	path.zoom-bg-baseline {
 		stroke: $ui-04;
-		stroke-width: 3;
-		fill: none;
+		stroke-width: 2;
 	}
 
 	path.zoom-graph-area {
 		fill: $ui-03;
 		stroke: $ui-04;
+		stroke-width: 1;
+	}
+	path.zoom-graph-area-unselected {
+		fill: $ui-01;
+		stroke: none;
 	}
 
 	g.brush rect.handle {
@@ -21,5 +25,11 @@ g.#{$prefix}--#{$charts-prefix}--zoom-bar {
 
 	g.brush rect.handle-bar {
 		fill: $ui-02;
+	}
+
+	// clear d3.brush selection style
+	g.brush rect.selection {
+		fill: none;
+		stroke: none;
 	}
 }
