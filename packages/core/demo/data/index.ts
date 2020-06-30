@@ -125,6 +125,12 @@ let allDemoGroups = [
 				isDemoExample: true
 			},
 			{
+				options: areaDemos.stackedAreaTimeSeriesUnevenDataOptions,
+				data: areaDemos.stackedAreaTimeSeriesUnevenData,
+				chartType: chartTypes.StackedAreaChart,
+				isDemoExample: true
+			},
+			{
 				options: areaDemos.stackedAreaPercentageTimeSeriesOptions,
 				data: areaDemos.stackedAreaTimeSeriesData,
 				chartType: chartTypes.StackedAreaChart,
