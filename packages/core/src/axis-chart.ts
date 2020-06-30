@@ -6,7 +6,7 @@ import {
 	LegendPositions,
 	ChartConfig,
 	AxisChartOptions
-} from "./interfaces/index";
+} from "./interfaces";
 import {
 	Brush,
 	LayoutComponent,
@@ -15,10 +15,10 @@ import {
 	AxisChartsTooltip,
 	Spacer,
 	ZoomBar
-} from "./components/index";
+} from "./components";
 import { Tools } from "./tools";
 
-import { CartesianScales, Curves } from "./services/index";
+import { CartesianScales, Curves } from "./services";
 
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {
@@ -49,8 +49,16 @@ export class AxisChart extends Chart {
 			}
 		};
 
-		!!this.model.getOptions().zoomBar && this.model.getOptions().zoomBar.enabled ?
-			graphFrameComponents.push(new Brush(this.model, this.services)) : graphFrameComponents;
+		if (
+			this.model.getOptions().zoomBar &&
+			this.model.getOptions().zoomBar.enabled
+		) {
+			graphFrameComponents.splice(
+				1,
+				0,
+				new Brush(this.model, this.services)
+			);
+		}
 		const graphFrameComponent = {
 			id: "graph-frame",
 			components: graphFrameComponents,
