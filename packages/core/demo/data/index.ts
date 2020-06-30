@@ -761,6 +761,12 @@ let allDemoGroups = [
 		title: "Zoom bar",
 		demos: [
 			{
+				options: zoomBarDemos.zoomBarStackedAreaTimeSeriesOptions,
+				data: zoomBarDemos.zoomBarStackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart,
+				isDemoExample: false
+			},
+			{
 				options: zoomBarDemos.zoomBarSimpleBarTimeSeriesOptions,
 				data: zoomBarDemos.zoomBarSimpleBarTimeSeriesData,
 				chartType: chartTypes.SimpleBarChart,

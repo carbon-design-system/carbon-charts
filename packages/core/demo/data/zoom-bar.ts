@@ -1,9 +1,10 @@
-import * as timeSeriesAxisChart from "./time-series-axis";
+import * as areaChart from "./area";
 import * as barChart from "./bar";
 import * as bubbleChart from "./bubble";
 import * as lineChart from "./line";
 import * as scatterChart from "./scatter";
 import * as stepChart from "./step";
+import * as timeSeriesAxisChart from "./time-series-axis";
 
 // default function for selection callback
 const selectionStartFun = (selection, domain) => {
@@ -41,6 +42,12 @@ const updateOptions = (options) => {
 	options["zoomBar"] = Object.assign({}, defaultZoomBarOptions);
 	return options;
 };
+
+export const zoomBarStackedAreaTimeSeriesData =
+	areaChart.stackedAreaTimeSeriesData;
+export const zoomBarStackedAreaTimeSeriesOptions = updateOptions(
+	Object.assign({}, areaChart.stackedAreaTimeSeriesOptions)
+);
 
 export const zoomBarSimpleBarTimeSeriesData = barChart.simpleBarTimeSeriesData;
 export const zoomBarSimpleBarTimeSeriesOptions = updateOptions(
