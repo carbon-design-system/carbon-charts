@@ -30,15 +30,9 @@ export class Brush extends Component {
 
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const mainYScale = this.services.cartesianScales.getMainYScale();
-	
 
 		const [xScaleStart, xScaleEnd] = mainXScale.range();
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
-
-		const container = DOMUtils.appendOrSelect(svg, "svg.brush-container")
-			.attr("width", "100%")
-			.attr("height", "100%")
-			.attr("opacity", 1);
 
 		if (mainXScale) {
 			const displayData = this.model.getDisplayData();
@@ -85,7 +79,7 @@ export class Brush extends Component {
 				}
 
 				const brushed = () => {
-					let selection = event.selection;
+					const selection = event.selection;
 
 					if (selection !== null) {
 						// get current zoomDomain
@@ -99,19 +93,24 @@ export class Brush extends Component {
 							xScale.invert(selection[0]),
 							xScale.invert(selection[1])
 						];
-						
+
 						// check if slected start time and end time are the same
-						if(newDomain[0].valueOf() === newDomain[1].valueOf()) {
+						if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
 							// same as d3 behavior and zoombar behavior: set to default full range
-							newDomain = extent(stackDataArray, (d: any) => d.date);
+							newDomain = extent(
+								stackDataArray,
+								(d: any) => d.date
+							);
 						}
 
 						// only if the brush event comes from mouseup event
 						if (event.sourceEvent != null) {
 							// only if zoomDomain needs update
 							if (
-								zoomDomain[0].valueOf() !== newDomain[0].valueOf() || 
-								zoomDomain[1].valueOf() !== newDomain[1].valueOf()
+								zoomDomain[0].valueOf() !==
+									newDomain[0].valueOf() ||
+								zoomDomain[1].valueOf() !==
+									newDomain[1].valueOf()
 							) {
 								this.model.set(
 									{ zoomDomain: newDomain },
@@ -119,12 +118,16 @@ export class Brush extends Component {
 								);
 							}
 							// call external callback
-							const zoomBarOptions = this.model.getOptions().zoomBar;
+							const zoomBarOptions = this.model.getOptions()
+								.zoomBar;
 							if (
 								zoomBarOptions.selectionEnd !== undefined &&
 								event.type === "end"
 							) {
-								zoomBarOptions.selectionEnd(selection, newDomain);
+								zoomBarOptions.selectionEnd(
+									selection,
+									newDomain
+								);
 							}
 						}
 					}
@@ -137,12 +140,15 @@ export class Brush extends Component {
 					])
 					.on("end", brushed);
 
-				const brushArea = DOMUtils.appendOrSelect(svg, "g.chart-brush").call(
-					brush
-				);
+				const brushArea = DOMUtils.appendOrSelect(
+					svg,
+					"g.chart-brush"
+				).call(brush);
 				// no need for having default brush selection
 				// @todo try to hide brush after selection
-				setTimeout(()=> {brushArea.call(brush.move);}, 0);
+				setTimeout(() => {
+					brushArea.call(brush.move);
+				}, 0);
 			}
 		}
 	}
