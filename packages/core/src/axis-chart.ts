@@ -53,11 +53,7 @@ export class AxisChart extends Chart {
 			this.model.getOptions().zoomBar &&
 			this.model.getOptions().zoomBar.enabled
 		) {
-			graphFrameComponents.splice(
-				1,
-				0,
-				new Brush(this.model, this.services)
-			);
+			graphFrameComponents.push(new Brush(this.model, this.services));
 		}
 		const graphFrameComponent = {
 			id: "graph-frame",
