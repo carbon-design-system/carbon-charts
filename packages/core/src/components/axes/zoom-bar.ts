@@ -120,9 +120,16 @@ export class ZoomBar extends Component {
 					useAttrs: true
 				});
 
-				xScale
-					.range([axesLeftMargin, width])
-					.domain(extent(stackDataArray, (d: any) => d.date));
+				// @todo could be a better function to extend domain with default value
+				const xDomain = cartesianScales.extendsDomain(
+					mainXAxisPosition,
+					extent(stackDataArray, (d: any) => d.date)
+				);
+				// add value 0 to the extended domain for zoom bar area graph
+				stackDataArray.unshift({ date: xDomain[0], value: 0 });
+				stackDataArray.push({ date: xDomain[1], value: 0 });
+
+				xScale.range([axesLeftMargin, width]).domain(xDomain);
 
 				yScale
 					.range([0, this.height - 6])
