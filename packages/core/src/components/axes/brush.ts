@@ -146,7 +146,7 @@ export class Brush extends Component {
 
 				const brushArea = DOMUtils.appendOrSelect(
 					svg,
-					"g.chart-brush"
+					"svg.chart-grid-backdrop"
 				).call(brush);
 				// no need for having default brush selection
 				// @todo try to hide brush after selection
