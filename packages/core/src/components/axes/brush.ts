@@ -71,7 +71,11 @@ export class Brush extends Component {
 
 				let zoomDomain = this.model.get("zoomDomain");
 				if (zoomDomain === undefined) {
-					zoomDomain = extent(stackDataArray, (d: any) => d.date); // default to full range
+					// default to full range with extended domain
+					zoomDomain = cartesianScales.extendsDomain(
+						mainXAxisPosition,
+						extent(stackDataArray, (d: any) => d.date)
+					);
 					this.model.set(
 						{ zoomDomain: zoomDomain },
 						{ animate: false }
