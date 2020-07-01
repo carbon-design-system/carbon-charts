@@ -5,7 +5,6 @@ import {
 	AxisPositions,
 	CartesianOrientations,
 	ScaleTypes,
-	AxesOptions,
 	ThresholdOptions
 } from "../interfaces";
 import { Tools } from "../tools";
@@ -181,7 +180,13 @@ export class CartesianScales extends Service {
 		return this.scales[this.getMainYAxisPosition()];
 	}
 
-	getValueFromScale(scale: any, scaleType: ScaleTypes, axisPosition: AxisPositions, datum: any, index?: number) {
+	getValueFromScale(
+		scale: any,
+		scaleType: ScaleTypes,
+		axisPosition: AxisPositions,
+		datum: any,
+		index?: number
+	) {
 		const options = this.model.getOptions();
 		const axesOptions = Tools.getProperty(options, "axes");
 		const axisOptions = axesOptions[axisPosition];
@@ -201,13 +206,22 @@ export class CartesianScales extends Service {
 		return scaledValue;
 	}
 
-	getValueThroughAxisPosition(axisPosition: AxisPositions, datum: any, index?: number) {
+	getValueThroughAxisPosition(
+		axisPosition: AxisPositions,
+		datum: any,
+		index?: number
+	) {
 		const scaleType = this.scaleTypes[axisPosition];
 		const scale = this.scales[axisPosition];
 
-		return this.getValueFromScale(scale, scaleType, axisPosition, datum, index);
+		return this.getValueFromScale(
+			scale,
+			scaleType,
+			axisPosition,
+			datum,
+			index
+		);
 	}
-
 
 	getDomainValue(d, i) {
 		return this.getValueThroughAxisPosition(this.domainAxisPosition, d, i);
@@ -304,7 +318,7 @@ export class CartesianScales extends Service {
 		const domainScale = this.getDomainScale();
 		// Find the highest threshold for the domain
 		const highestThreshold = thresholds.sort(
-			(a, b) => b.value - a.value,
+			(a, b) => b.value - a.value
 		)[0];
 
 		const scaleType = this.getScaleTypeByPosition(domainAxisPosition);
@@ -318,7 +332,7 @@ export class CartesianScales extends Service {
 
 		return {
 			threshold: highestThreshold,
-			scaleValue: domainScale(highestThreshold.value),
+			scaleValue: domainScale(highestThreshold.value)
 		};
 	}
 
@@ -338,12 +352,12 @@ export class CartesianScales extends Service {
 		const rangeScale = this.getRangeScale();
 		// Find the highest threshold for the range
 		const highestThreshold = thresholds.sort(
-			(a, b) => b.value - a.value,
+			(a, b) => b.value - a.value
 		)[0];
 
 		return {
 			threshold: highestThreshold,
-			scaleValue: rangeScale(highestThreshold.value),
+			scaleValue: rangeScale(highestThreshold.value)
 		};
 	}
 
@@ -458,12 +472,6 @@ export class CartesianScales extends Service {
 			return map(displayData, (d) => d[mapsTo]).keys();
 		}
 
-		// If scale is a TIME scale and zoomDomain is available, return Date array as the domain
-		const zoomDomain = this.model.get("zoomDomain");
-		if (zoomDomain && axisOptions && scaleType === ScaleTypes.TIME) {
-			return zoomDomain.map(d => new Date(d));
-		}
-
 		// Get the extent of the domain
 		let domain;
 		let allDataValues;
@@ -483,7 +491,6 @@ export class CartesianScales extends Service {
 
 		domain = extent(allDataValues);
 		domain = this.extendsDomain(axisPosition, domain);
-
 		return domain;
 	}
 
