@@ -37,6 +37,19 @@ export class Scatter extends Component {
 		}
 	}
 
+	filterOutOfDomain(data) {
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const zoomDomain = this.model.get("zoomDomain");
+		if (zoomDomain !== undefined) {
+			return data.filter(
+				(d) =>
+					d[domainIdentifier] > zoomDomain[0] &&
+					d[domainIdentifier] < zoomDomain[1]
+			);
+		}
+		return data;
+	}
+
 	render(animate: boolean) {
 		// Grab container SVG
 		const svg = this.getContainerSVG();
@@ -63,6 +76,9 @@ export class Scatter extends Component {
 						d[rangeIdentifier] !== null
 				);
 		}
+
+		// filter out of domain data
+		scatterData = this.filterOutOfDomain(scatterData);
 
 		// Update data on dot groups
 		const circles = svg

@@ -70,6 +70,11 @@ export class SimpleBar extends Bar {
 				const y0 = this.services.cartesianScales.getRangeValue(0);
 				const y1 = this.services.cartesianScales.getRangeValue(d, i);
 
+				// don't show if part of bar is out of zoom domain
+				if (this.isOutOfZoomDomain(x0, x1)) {
+					return;
+				}
+
 				return Tools.generateSVGPathString(
 					{ x0, x1, y0, y1 },
 					this.services.cartesianScales.getOrientation()

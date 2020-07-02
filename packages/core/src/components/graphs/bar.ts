@@ -21,4 +21,16 @@ export class Bar extends Component {
 
 		return Math.min(options.bars.maxWidth, mainXScale.step() / 2);
 	}
+
+	protected isOutOfZoomDomain(x0: number, x1: number) {
+		const zoomDomain = this.model.get("zoomDomain");
+		if (zoomDomain !== undefined) {
+			const domainScale = this.services.cartesianScales.getDomainScale();
+			return (
+				x0 < domainScale(zoomDomain[0]) ||
+				x1 > domainScale(zoomDomain[1])
+			);
+		}
+		return false;
+	}
 }
