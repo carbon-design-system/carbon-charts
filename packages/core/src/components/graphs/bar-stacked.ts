@@ -97,6 +97,10 @@ export class StackedBar extends Bar {
 				const y0 = this.services.cartesianScales.getRangeValue(d[0], i);
 				let y1 = this.services.cartesianScales.getRangeValue(d[1], i);
 
+				// don't show if part of bar is out of zoom domain
+				if (this.isOutOfZoomDomain(x0, x1)) {
+					return;
+				}
 				// Add the divider gap
 				if (
 					Math.abs(y1 - y0) > 0 &&
