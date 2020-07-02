@@ -90,7 +90,7 @@ export class Brush extends Component {
 						zoomDomain = this.model.get("zoomDomain");
 						// create xScale based on current zoomDomain
 						const xScale = scaleTime()
-							.range([axesLeftMargin, width])
+							.range([0, width])
 							.domain(zoomDomain);
 
 						let newDomain = [
@@ -101,9 +101,9 @@ export class Brush extends Component {
 						// check if slected start time and end time are the same
 						if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
 							// same as d3 behavior and zoombar behavior: set to default full range
-							newDomain = extent(
-								stackDataArray,
-								(d: any) => d.date
+							newDomain = cartesianScales.extendsDomain(
+								mainXAxisPosition,
+								extent(stackDataArray, (d: any) => d.date)
 							);
 						}
 
@@ -139,15 +139,19 @@ export class Brush extends Component {
 
 				const brush = brushX()
 					.extent([
-						[xScaleStart, 0],
+						[0, 0],
 						[width, yScaleEnd]
 					])
 					.on("end", brushed);
-
-				const brushArea = DOMUtils.appendOrSelect(
+				const backdrop = DOMUtils.appendOrSelect(
 					svg,
 					"svg.chart-grid-backdrop"
+				);
+				const brushArea = DOMUtils.appendOrSelect(
+					backdrop,
+					"g.chart-brush"
 				).call(brush);
+
 				// no need for having default brush selection
 				// @todo try to hide brush after selection
 				setTimeout(() => {
