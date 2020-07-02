@@ -90,9 +90,9 @@ export class ChartModel {
 		const dataGroups = this.getDataGroups();
 		const { groupMapsTo } = this.getOptions().data;
 
-		const allData = this.getAllDataFromDomain();
+		const allDataFromDomain = this.getAllDataFromDomain();
 
-		return allData.filter((datum) => {
+		return allDataFromDomain.filter((datum) => {
 			const group = dataGroups.find(
 				(group) => group.name === datum[groupMapsTo]
 			);
