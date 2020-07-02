@@ -169,7 +169,7 @@ export class LayoutComponent extends Component {
 					{ useAttrs: true }
 				);
 				matchingSVGDimensions.height = svgSize.height;
-			};
+			}
 
 			if (growth === LayoutGrowth.PREFERRED) {
 				const matchingSVGWidth = horizontal
