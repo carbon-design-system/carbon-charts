@@ -15,149 +15,80 @@ export class Brush extends Component {
 
 	render(animate = true) {
 		const svg = this.parent;
+		const backdrop = DOMUtils.appendOrSelect(
+			svg,
+			"svg.chart-grid-backdrop"
+		);
+		const { width, height } = DOMUtils.getSVGElementSize(backdrop, {
+			useAttrs: true
+		});
+
 		const { cartesianScales } = this.services;
 		const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
 		const mainXScaleType = cartesianScales.getScaleTypeByPosition(
 			mainXAxisPosition
 		);
 
-		// get axes margins
-		let axesLeftMargin = 0;
-		const axesMargins = this.model.get("axesMargins");
-		if (axesMargins && axesMargins.left) {
-			axesLeftMargin = axesMargins.left;
-		}
-
 		const mainXScale = this.services.cartesianScales.getMainXScale();
-		const mainYScale = this.services.cartesianScales.getMainYScale();
 
-		const [xScaleStart, xScaleEnd] = mainXScale.range();
-		const [yScaleEnd, yScaleStart] = mainYScale.range();
-
-		if (mainXScale) {
-			const displayData = this.model.getDisplayData();
-
-			if (mainXScaleType === ScaleTypes.TIME) {
-				// Get all date values provided in data
-				// @todo - Could be re-used through the model
-				let allDates = [];
-				displayData.forEach((data) => {
-					allDates = allDates.concat(Number(data.date));
-				});
-				allDates = Tools.removeArrayDuplicates(allDates).sort();
-
-				// Go through all date values
-				// And get corresponding data from each dataset
-				const stackDataArray = allDates.map((date) => {
-					let count = 0;
-					let correspondingSum = 0;
-					const correspondingData = {};
-
-					displayData.forEach((data) => {
-						if (Number(data.date) === Number(date)) {
-							++count;
-							correspondingSum += data.value;
-						}
-					});
-					correspondingData["date"] = date;
-					correspondingData["value"] = correspondingSum;
-
-					return correspondingData;
-				});
-
-				const { width } = DOMUtils.getSVGElementSize(this.parent, {
-					useAttrs: true
-				});
-
-				let zoomDomain = this.model.get("zoomDomain");
-				if (zoomDomain === undefined) {
-					// default to full range with extended domain
-					zoomDomain = cartesianScales.extendsDomain(
-						mainXAxisPosition,
-						extent(stackDataArray, (d: any) => d.date)
-					);
-					this.model.set(
-						{ zoomDomain: zoomDomain },
-						{ animate: false }
-					);
-				}
-
-				const brushed = () => {
-					const selection = event.selection;
-
-					if (selection !== null) {
-						// get current zoomDomain
-						zoomDomain = this.model.get("zoomDomain");
-						// create xScale based on current zoomDomain
-						const xScale = scaleTime()
-							.range([0, width])
-							.domain(zoomDomain);
-
-						let newDomain = [
-							xScale.invert(selection[0]),
-							xScale.invert(selection[1])
-						];
-
-						// check if slected start time and end time are the same
-						if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
-							// same as d3 behavior and zoombar behavior: set to default full range
-							newDomain = cartesianScales.extendsDomain(
-								mainXAxisPosition,
-								extent(stackDataArray, (d: any) => d.date)
-							);
-						}
-
-						// only if the brush event comes from mouseup event
-						if (event.sourceEvent != null) {
-							// only if zoomDomain needs update
-							if (
-								zoomDomain[0].valueOf() !==
-									newDomain[0].valueOf() ||
-								zoomDomain[1].valueOf() !==
-									newDomain[1].valueOf()
-							) {
-								this.model.set(
-									{ zoomDomain: newDomain },
-									{ animate: false }
-								);
-							}
-							// call external callback
-							const zoomBarOptions = this.model.getOptions()
-								.zoomBar;
-							if (
-								zoomBarOptions.selectionEnd !== undefined &&
-								event.type === "end"
-							) {
-								zoomBarOptions.selectionEnd(
-									selection,
-									newDomain
-								);
-							}
-						}
-					}
-				};
-
-				const brush = brushX()
-					.extent([
-						[0, 0],
-						[width, yScaleEnd]
-					])
-					.on("end", brushed);
-				const backdrop = DOMUtils.appendOrSelect(
-					svg,
-					"svg.chart-grid-backdrop"
-				);
-				const brushArea = DOMUtils.appendOrSelect(
-					backdrop,
-					"g.chart-brush"
-				).call(brush);
-
-				// no need for having default brush selection
-				// @todo try to hide brush after selection
-				setTimeout(() => {
-					brushArea.call(brush.move);
-				}, 0);
+		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
+			// get current zoomDomain
+			let zoomDomain = this.model.get("zoomDomain");
+			if (zoomDomain === undefined) {
+				// default to full range with extended domain
+				zoomDomain = this.model.getDefaultZoomBarDomain();
+				this.model.set({ zoomDomain: zoomDomain }, { animate: false });
 			}
+
+			const brushed = () => {
+				const selection = event.selection;
+
+				if (selection !== null) {
+					// create xScale based on current zoomDomain
+					const xScale = scaleTime()
+						.range([0, width])
+						.domain(zoomDomain);
+
+					let newDomain = [
+						xScale.invert(selection[0]),
+						xScale.invert(selection[1])
+					];
+
+					// if selected start time and end time are the same
+					// reset to default full range
+					if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
+						// same as d3 behavior and zoom bar behavior: set to default full range
+						newDomain = this.model.getDefaultZoomBarDomain();
+					}
+
+					// only if zoomDomain needs update
+					if (
+						zoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
+						zoomDomain[1].valueOf() !== newDomain[1].valueOf()
+					) {
+						this.model.set(
+							{ zoomDomain: newDomain },
+							{ animate: false }
+						);
+					}
+
+					// clear brush selection
+					brushArea.call(brush.move, null);
+				}
+			};
+
+			// leave some space to display selection strokes besides axis
+			const brush = brushX()
+				.extent([
+					[2, 0],
+					[width - 1, height - 1]
+				])
+				.on("end", brushed);
+
+			const brushArea = DOMUtils.appendOrSelect(
+				backdrop,
+				"g.chart-brush"
+			).call(brush);
 		}
 	}
 }
