@@ -18,7 +18,7 @@ export class ZoomBar extends Component {
 	// Bigger number may not trigger handler update while selection area on chart is very small
 	MIN_SELECTION_DIFF = 9e-10;
 
-	brushSelector = "g.brush"; // needs to be this value for d3.brush API
+	brushSelector = "g.zoom-bar-brush"; // needs to match the style in _zoom-bar.scss
 
 	clipId = "zoomBarClip";
 
