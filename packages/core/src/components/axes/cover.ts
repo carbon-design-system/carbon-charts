@@ -1,12 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
-
-// D3 Imports
-import { axisBottom, axisLeft } from "d3-axis";
-import { mouse, select } from "d3-selection";
-import { TooltipTypes, Events } from "../../interfaces";
 
 export class Cover extends Component {
 	type = "cover";
@@ -18,19 +12,21 @@ export class Cover extends Component {
 		this.createCover();
 	}
 
-
 	createCover() {
 		const svg = this.parent;
-		const mainXScale = this.services.cartesianScales.getMainXScale();
-		const mainYScale = this.services.cartesianScales.getMainYScale();
+		const { cartesianScales } = this.services;
+		const mainXScale = cartesianScales.getMainXScale();
+		const mainYScale = cartesianScales.getMainYScale();
 
 		const [xScaleStart, xScaleEnd] = mainXScale.range();
 		const [yScaleEnd, yScaleStart] = mainYScale.range();
 
 		// Get height
-		this.coverClipPath = DOMUtils.appendOrSelect(svg, `clipPath.${this.type}`);
-		this.coverClipPath
-			.attr("id", `${this.type}Clip`);
+		this.coverClipPath = DOMUtils.appendOrSelect(
+			svg,
+			`clipPath.${this.type}`
+		);
+		this.coverClipPath.attr("id", `${this.type}Clip`);
 		const coverRect = DOMUtils.appendOrSelect(
 			this.coverClipPath,
 			"rect.cover"
@@ -41,14 +37,11 @@ export class Cover extends Component {
 			.attr("width", xScaleEnd - xScaleStart)
 			.attr("height", yScaleEnd - yScaleStart);
 
-		this.coverClipPath
-			.merge(coverRect)
-			.lower();
+		this.coverClipPath.merge(coverRect).lower();
 
 		const coverG = DOMUtils.appendOrSelect(svg, `g.${this.type}`);
 		coverG
 			.attr("clip-path", `url(#${this.type}Clip)`)
 			.attr("id", `g-${this.type}Clip`);
-
 	}
 }
