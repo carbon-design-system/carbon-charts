@@ -13,6 +13,11 @@ import { event, select, selectAll } from "d3-selection";
 export class ZoomBar extends Component {
 	type = "zoom-bar";
 
+	// The minimum selection x range to trigger handler update
+	// Smaller number may introduce a handler flash during initialization
+	// Bigger number may not trigger handler update while selection area on chart is very small
+	MIN_SELECTION_DIFF = 9e-10;
+
 	brushSelector = "g.brush"; // needs to be this value for d3.brush API
 
 	clipId = "zoomBarClip";
@@ -195,7 +200,7 @@ export class ZoomBar extends Component {
 				this.updateBrushHandle(this.getContainerSVG(), xScale.range());
 			} else {
 				const selected = zoomDomain.map((domain) => xScale(domain));
-				if (selected[1] - selected[0] < 1) {
+				if (selected[1] - selected[0] < this.MIN_SELECTION_DIFF) {
 					// initialization not completed yet
 					// don't update brushHandle to avoid flash
 				} else {
