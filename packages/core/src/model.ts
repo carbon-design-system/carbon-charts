@@ -5,8 +5,9 @@ import * as colorPalettes from "./services/colorPalettes";
 import { Events, ScaleTypes } from "./interfaces";
 
 // D3
-import { scaleOrdinal } from "d3-scale";
+import { extent } from "d3-array";
 import { map } from "d3-collection";
+import { scaleOrdinal } from "d3-scale";
 import { stack } from "d3-shape";
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -38,7 +39,48 @@ export class ChartModel {
 	constructor(services: any) {
 		this.services = services;
 	}
+	// get display data for zoom bar
+	// basically it's sum of value grouped by time
+	getZoomBarData() {
+		const { cartesianScales } = this.services;
+		const domainIdentifier = cartesianScales.getDomainIdentifier();
+		const rangeIdentifier = cartesianScales.getRangeIdentifier();
 
+		const displayData = this.getDisplayData();
+		// get all dates (Number) in displayData
+		let allDates = [];
+		displayData.forEach((data) => {
+			allDates = allDates.concat(Number(data[domainIdentifier]));
+		});
+		allDates = Tools.removeArrayDuplicates(allDates).sort();
+		// Go through all date values
+		// And get corresponding data from each dataset
+		return allDates.map((date) => {
+			let sum = 0;
+			const datum = {};
+
+			displayData.forEach((data) => {
+				if (Number(data[domainIdentifier]) === date) {
+					sum += data[rangeIdentifier];
+				}
+			});
+			datum[domainIdentifier] = new Date(date);
+			datum[rangeIdentifier] = sum;
+
+			return datum;
+		});
+	}
+	getDefaultZoomBarDomain() {
+		const zoomBarData = this.getZoomBarData();
+		const { cartesianScales } = this.services;
+		const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
+		const domainIdentifier = cartesianScales.getDomainIdentifier();
+		// default to full range with extended domain
+		return cartesianScales.extendsDomain(
+			mainXAxisPosition,
+			extent(zoomBarData, (d: any) => d[domainIdentifier])
+		);
+	}
 	getAllDataFromDomain() {
 		if (!this.get("data")) {
 			return null;
@@ -95,7 +137,7 @@ export class ChartModel {
 
 		return allDataFromDomain.filter((datum) => {
 			const group = dataGroups.find(
-				(group) => group.name === datum[groupMapsTo]
+				(g) => g.name === datum[groupMapsTo]
 			);
 
 			return group.status === ACTIVE;
