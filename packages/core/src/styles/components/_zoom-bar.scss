@@ -19,17 +19,17 @@ g.#{$prefix}--#{$charts-prefix}--zoom-bar {
 		stroke: none;
 	}
 
-	g.brush rect.handle {
-		fill: $icon-02;
-	}
-
-	g.brush rect.handle-bar {
-		fill: $ui-02;
-	}
-
-	// clear d3.brush selection style
-	g.brush rect.selection {
-		fill: none;
-		stroke: none;
+	g.zoom-bar-brush {
+		rect.handle {
+			fill: $icon-02;
+		}
+		rect.handle-bar {
+			fill: $ui-02;
+		}
+		// clear d3.brush selection style
+		rect.selection {
+			fill: none;
+			stroke: none;
+		}
 	}
 }
