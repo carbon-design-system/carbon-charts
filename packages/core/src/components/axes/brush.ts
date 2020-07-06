@@ -40,6 +40,47 @@ export class Brush extends Component {
 				this.model.set({ zoomDomain: zoomDomain }, { animate: false });
 			}
 
+			const eventHandler = () => {
+				const selection = event.selection;
+				const xScale = scaleTime().range([0, width]).domain(zoomDomain);
+
+				const newDomain = [
+					xScale.invert(selection[0]),
+					xScale.invert(selection[1])
+				];
+
+				if (
+					selection != null &&
+					event.sourceEvent != null &&
+					(event.sourceEvent.type === "mousemove" ||
+						event.sourceEvent.type === "mouseup" ||
+						event.sourceEvent.type === "mousedown")
+				) {
+					// call external callback
+					const zoomBarOptions = this.model.getOptions().zoomBar;
+					if (
+						zoomBarOptions.selectionStart !== undefined &&
+						event.type === "start"
+					) {
+						zoomBarOptions.selectionStart(selection, newDomain);
+					}
+					if (
+						zoomBarOptions.selectionInProgress !== undefined &&
+						event.type === "brush"
+					) {
+						zoomBarOptions.selectionInProgress(
+							selection,
+							newDomain
+						);
+					}
+					if (
+						zoomBarOptions.selectionEnd !== undefined &&
+						event.type === "end"
+					) {
+						zoomBarOptions.selectionEnd(selection, newDomain);
+					}
+				}
+			};
 			const brushed = () => {
 				const selection = event.selection;
 
@@ -83,7 +124,8 @@ export class Brush extends Component {
 					[2, 0],
 					[width - 1, height - 1]
 				])
-				.on("end", brushed);
+				.on("start brush end", eventHandler)
+				.on("end.brushed", brushed);
 
 			const brushArea = DOMUtils.appendOrSelect(
 				backdrop,
