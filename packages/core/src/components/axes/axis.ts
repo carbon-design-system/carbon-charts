@@ -1,6 +1,13 @@
 // Internal Imports
 import { Component } from "../component";
-import { AxisPositions, Events, ScaleTypes, Roles, TooltipTypes, TruncationTypes } from "../../interfaces";
+import {
+	AxisPositions,
+	Events,
+	ScaleTypes,
+	Roles,
+	TooltipTypes,
+	TruncationTypes
+} from "../../interfaces";
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
@@ -8,7 +15,7 @@ import * as Configuration from "../../configuration";
 import {
 	computeTimeIntervalName,
 	formatTick,
-	isTickPrimary,
+	isTickPrimary
 } from "../../services/time-series";
 
 // D3 Imports
@@ -69,7 +76,7 @@ export class Axis extends Component {
 
 		const svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
-			useAttrs: true,
+			useAttrs: true
 		});
 
 		let startPosition, endPosition;
@@ -144,7 +151,7 @@ export class Axis extends Component {
 			"0"
 		);
 		const tickHeight = DOMUtils.getSVGElementSize(fakeTickText.node(), {
-			useBBox: true,
+			useBBox: true
 		}).height;
 		fakeTick.remove();
 
@@ -186,20 +193,24 @@ export class Axis extends Component {
 				if (!scale.ticks(numberOfTicks).length) {
 					axis.tickValues([]);
 				} else {
-					const tickValues = scale
-						.nice(numberOfTicks)
-						.ticks(numberOfTicks);
+					const addSpaceOnEdges = Tools.getProperty(
+						options,
+						"timeScale",
+						"addSpaceOnEdges"
+					);
+
+					let tickValues;
+					if (addSpaceOnEdges) {
+						tickValues = scale
+							.nice(numberOfTicks)
+							.ticks(numberOfTicks);
+					} else {
+						tickValues = scale.ticks(numberOfTicks);
+					}
 
 					// Remove labels on the edges
 					// If there are more than 2 labels to show
-					if (
-						Tools.getProperty(
-							options,
-							"timeScale",
-							"addSpaceOnEdges"
-						) &&
-						tickValues.length > 2
-					) {
+					if (addSpaceOnEdges && tickValues.length > 2) {
 						tickValues.splice(tickValues.length - 1, 1);
 						tickValues.splice(0, 1);
 					}
@@ -306,7 +317,7 @@ export class Axis extends Component {
 					const { height: titleHeight } = DOMUtils.getSVGElementSize(
 						axisTitleRef,
 						{
-							useBBox: true,
+							useBBox: true
 						}
 					);
 					axisTitleRef
@@ -435,24 +446,31 @@ export class Axis extends Component {
 
 		// truncate the label if it's too long
 		// only applies to discrete type
-		if (truncationType !== TruncationTypes.NONE && axisScaleType === ScaleTypes.LABELS) {
+		if (
+			truncationType !== TruncationTypes.NONE &&
+			axisScaleType === ScaleTypes.LABELS
+		) {
 			const dataGroups = this.model.getDataValuesGroupedByKeys();
 			if (dataGroups.length > 0) {
-				const activeDataGroups = dataGroups.map(d => d.sharedStackKey);
-				const tick_html = svg.select(
-					`g.axis.${axisPosition} g.ticks g.tick`
-				).html();
+				const activeDataGroups = dataGroups.map(
+					(d) => d.sharedStackKey
+				);
+				const tick_html = svg
+					.select(`g.axis.${axisPosition} g.ticks g.tick`)
+					.html();
 
-				container
-					.selectAll("g.ticks g.tick")
-					.html(tick_html);
+				container.selectAll("g.ticks g.tick").html(tick_html);
 
 				container
 					.selectAll("g.tick text")
 					.data(activeDataGroups)
-					.text(function(d) {
+					.text(function (d) {
 						if (d.length > truncationThreshold) {
-							return Tools.truncateLabel(d, truncationType, truncationNumCharacter);
+							return Tools.truncateLabel(
+								d,
+								truncationType,
+								truncationNumCharacter
+							);
 						} else {
 							return d;
 						}
@@ -461,9 +479,13 @@ export class Axis extends Component {
 				this.getInvisibleAxisRef()
 					.selectAll("g.tick text")
 					.data(activeDataGroups)
-					.text(function(d) {
+					.text(function (d) {
 						if (d.length > truncationThreshold) {
-							return Tools.truncateLabel(d, truncationType, truncationNumCharacter);
+							return Tools.truncateLabel(
+								d,
+								truncationType,
+								truncationNumCharacter
+							);
 						} else {
 							return d;
 						}
@@ -473,9 +495,7 @@ export class Axis extends Component {
 					.selectAll("g.ticks")
 					.html(this.getInvisibleAxisRef().html());
 
-				container
-					.selectAll("g.tick text")
-					.data(activeDataGroups);
+				container.selectAll("g.tick text").data(activeDataGroups);
 			}
 		}
 		// Add event listeners to elements drawn
@@ -511,7 +531,7 @@ export class Axis extends Component {
 					Events.Axis.LABEL_MOUSEOVER,
 					{
 						element: select(this),
-						datum,
+						datum
 					}
 				);
 			})
@@ -521,13 +541,16 @@ export class Axis extends Component {
 					Events.Axis.LABEL_MOUSEMOVE,
 					{
 						element: select(this),
-						datum,
+						datum
 					}
 				);
-				if (axisScaleType === ScaleTypes.LABELS && datum.length > truncationThreshold) {
+				if (
+					axisScaleType === ScaleTypes.LABELS &&
+					datum.length > truncationThreshold
+				) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						hoveredElement: select(this),
-						type: TooltipTypes.AXISLABEL,
+						type: TooltipTypes.AXISLABEL
 					});
 				}
 			})
@@ -535,14 +558,14 @@ export class Axis extends Component {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_CLICK, {
 					element: select(this),
-					datum,
+					datum
 				});
 			})
 			.on("mouseout", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Axis.LABEL_MOUSEOUT, {
 					element: select(this),
-					datum,
+					datum
 				});
 				if (axisScaleType === ScaleTypes.LABELS) {
 					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
