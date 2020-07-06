@@ -384,7 +384,7 @@ let allDemoGroups = [
 			},
 			{
 				options: lineDemos.lineSelectedGroupsOptions,
-				data: lineDemos.lineData,
+				data: lineDemos.lineSelectedGroupsData,
 				chartType: chartTypes.LineChart,
 			},
 			{

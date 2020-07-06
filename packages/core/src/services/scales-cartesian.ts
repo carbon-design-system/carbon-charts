@@ -336,7 +336,6 @@ export class CartesianScales extends Service {
 			return [];
 		}
 
-		const allDataFromDomain = this.model.getAllDataFromDomain();
 		const displayData = this.model.getDisplayData();
 		const { mapsTo, percentage } = axisOptions;
 
@@ -369,7 +368,7 @@ export class CartesianScales extends Service {
 				sum(values(dataValues) as any)
 			);
 		} else {
-			allDataValues = allDataFromDomain.map((datum) => datum[mapsTo]);
+			allDataValues = displayData.map((datum) => datum[mapsTo]);
 		}
 
 		if (scaleType !== ScaleTypes.TIME && includeZero) {
