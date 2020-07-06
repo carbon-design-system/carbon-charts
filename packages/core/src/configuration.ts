@@ -21,7 +21,7 @@ import {
 	BarTooltipOptions,
 	LegendOptions,
 	LegendPositions,
-  TruncationTypes,
+	TruncationTypes,
 	StackedBarOptions,
 	GaugeTypes
 } from "./interfaces";
@@ -33,14 +33,13 @@ import enUSLocaleObject from "date-fns/locale/en-US/index";
  *****************************
  */
 
-
 /**
  * Default truncation configuration
  */
 const standardTruncationOptions = {
 	type: TruncationTypes.END_LINE,
 	threshold: 16,
-	numCharacter: 14,
+	numCharacter: 14
 };
 
 /**
@@ -61,9 +60,9 @@ export const legend: LegendOptions = {
 	},
 	checkbox: {
 		radius: 6.5,
-		spaceAfter: 4,
+		spaceAfter: 4
 	},
-	truncation: standardTruncationOptions,
+	truncation: standardTruncationOptions
 };
 
 /**
@@ -122,19 +121,19 @@ export const barChartTooltip: BarTooltipOptions = Tools.merge(
 const axes: AxesOptions = {
 	top: {
 		includeZero: true,
-    truncation: standardTruncationOptions,
+		truncation: standardTruncationOptions
 	},
 	bottom: {
 		includeZero: true,
-    truncation: standardTruncationOptions,
+		truncation: standardTruncationOptions
 	},
 	left: {
 		includeZero: true,
-    truncation: standardTruncationOptions,
+		truncation: standardTruncationOptions
 	},
 	right: {
 		includeZero: true,
-    truncation: standardTruncationOptions,
+		truncation: standardTruncationOptions
 	}
 };
 
@@ -328,7 +327,10 @@ const gaugeChart: GaugeChartOptions = Tools.merge({}, chart, {
 		numberSpacing: 10,
 		deltaFontSize: (radius) => radius / 8,
 		valueFontSize: (radius) => radius / 2.5,
-		numberFormatter: (number) => (number.toFixed(2) % 1 !== 0) ? number.toFixed(2).toLocaleString() : number.toFixed().toLocaleString()
+		numberFormatter: (number) =>
+			number.toFixed(2) % 1 !== 0
+				? number.toFixed(2).toLocaleString()
+				: number.toFixed().toLocaleString()
 	}
 } as GaugeChartOptions);
 
