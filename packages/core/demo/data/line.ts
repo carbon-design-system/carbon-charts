@@ -79,7 +79,7 @@ export const lineLongLabelOptions = {
 };
 
 export const lineCustomDomainOptions = {
-	title: "Line (discrete with custom domain)",
+	title: "Line (discrete with customized domain)",
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
@@ -179,7 +179,7 @@ export const lineTimeSeriesOptions = {
 };
 
 export const lineTimeSeriesCustomDomainOptions = {
-	title: "Line (time series with custom domain)",
+	title: "Line (time series with customized domain)",
 	axes: {
 		bottom: {
 			title: "2019 Annual Sales Figures",
