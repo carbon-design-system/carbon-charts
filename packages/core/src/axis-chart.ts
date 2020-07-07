@@ -5,7 +5,7 @@ import {
 	LegendOrientations,
 	LegendPositions,
 	ChartConfig,
-	AxisChartOptions,
+	AxisChartOptions
 } from "./interfaces/index";
 import {
 	LayoutComponent,
@@ -13,7 +13,7 @@ import {
 	Title,
 	Tooltip,
 	TooltipBar,
-	Spacer,
+	Spacer
 } from "./components/index";
 import { Tools } from "./tools";
 
@@ -22,7 +22,7 @@ import { CartesianScales, Curves } from "./services/index";
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {
 		cartesianScales: CartesianScales,
-		curves: Curves,
+		curves: Curves
 	});
 
 	constructor(holder: Element, chartConfigs: ChartConfig<AxisChartOptions>) {
@@ -35,8 +35,8 @@ export class AxisChart extends Chart {
 			components: [new Title(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+				y: LayoutGrowth.FIXED
+			}
 		};
 
 		const legendComponent = {
@@ -44,8 +44,8 @@ export class AxisChart extends Chart {
 			components: [new Legend(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+				y: LayoutGrowth.FIXED
+			}
 		};
 
 		const graphFrameComponent = {
@@ -53,12 +53,18 @@ export class AxisChart extends Chart {
 			components: graphFrameComponents,
 			growth: {
 				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+				y: LayoutGrowth.FIXED
+			}
 		};
 
+		// if the chart is loading but has data, don't enable legend until loading is false
+		const isDataLoading = Tools.getProperty(
+			this.model.getOptions(),
+			"data",
+			"loading"
+		);
 		const isLegendEnabled =
-			this.model.getOptions().legend.enabled !== false;
+			this.model.getOptions().legend.enabled !== false && !isDataLoading;
 
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
@@ -92,8 +98,8 @@ export class AxisChart extends Chart {
 			components: [new Spacer(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED,
-			},
+				y: LayoutGrowth.FIXED
+			}
 		};
 
 		const fullFrameComponent = {
@@ -104,18 +110,18 @@ export class AxisChart extends Chart {
 					this.services,
 					[
 						...(isLegendEnabled ? [legendComponent] : []),
-						legendSpacerComponent,
-						graphFrameComponent,
+						...(isLegendEnabled ? [legendSpacerComponent] : []),
+						graphFrameComponent
 					],
 					{
-						direction: fullFrameComponentDirection,
+						direction: fullFrameComponentDirection
 					}
-				),
+				)
 			],
 			growth: {
 				x: LayoutGrowth.STRETCH,
-				y: LayoutGrowth.FIXED,
-			},
+				y: LayoutGrowth.FIXED
+			}
 		};
 
 		// Add chart title if it exists
@@ -128,8 +134,8 @@ export class AxisChart extends Chart {
 				components: [new Spacer(this.model, this.services)],
 				growth: {
 					x: LayoutGrowth.PREFERRED,
-					y: LayoutGrowth.FIXED,
-				},
+					y: LayoutGrowth.FIXED
+				}
 			};
 
 			topLevelLayoutComponents.push(titleSpacerComponent);
@@ -142,9 +148,9 @@ export class AxisChart extends Chart {
 				this.services,
 				topLevelLayoutComponents,
 				{
-					direction: LayoutDirection.COLUMN,
+					direction: LayoutDirection.COLUMN
 				}
-			),
+			)
 		];
 	}
 }
