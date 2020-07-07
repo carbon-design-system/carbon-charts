@@ -201,8 +201,7 @@ export class Axis extends Component {
 
 					let tickValues;
 					if (addSpaceOnEdges) {
-						tickValues = scale
-							.nice(numberOfTicks);
+						tickValues = scale.nice(numberOfTicks);
 					}
 					tickValues = scale.ticks(numberOfTicks);
 
