@@ -68,7 +68,8 @@ export class ChartModel {
 
 						// Filter out data outside domain
 						displayData = displayData.filter(
-							(datum) => datum[mapsTo] >= start && datum[mapsTo] <= end
+							(datum) =>
+								datum[mapsTo] >= start && datum[mapsTo] <= end
 						);
 					}
 				}
@@ -164,7 +165,7 @@ export class ChartModel {
 			(datum) => datum[domainIdentifier]
 		).keys();
 
-		const axisPosition = this.services.cartesianScales.domainAxisPosition; 
+		const axisPosition = this.services.cartesianScales.domainAxisPosition;
 		const scaleType = options.axes[axisPosition].scaleType;
 
 		// Sort keys
@@ -179,7 +180,7 @@ export class ChartModel {
 			scaleType === ScaleTypes.LINEAR
 		) {
 			stackKeys.sort((a: any, b: any) => a - b);
-		};
+		}
 
 		const dataGroupNames = this.getDataGroupNames();
 

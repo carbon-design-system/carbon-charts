@@ -50,9 +50,9 @@ export class Scatter extends Component {
 		const { stacked } = this.configs;
 		let scatterData;
 		if (stacked) {
-			const percentage = Object.keys(options.axes).some(axis => 
-				options.axes[axis].percentage	
-			)
+			const percentage = Object.keys(options.axes).some(
+				(axis) => options.axes[axis].percentage
+			);
 			scatterData = this.model.getStackedData({ percentage });
 		} else {
 			scatterData = this.model
@@ -103,7 +103,7 @@ export class Scatter extends Component {
 		// Get highest domain and range thresholds
 		const [
 			xThreshold,
-			yThreshold,
+			yThreshold
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
 			this.services.cartesianScales.getHighestDomainThreshold(),
 			this.services.cartesianScales.getHighestRangeThreshold(),
@@ -112,7 +112,7 @@ export class Scatter extends Component {
 
 		const [
 			getXValue,
-			getYValue,
+			getYValue
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
 			(d, i) => cartesianScales.getDomainValue(d, i),
 			(d, i) => cartesianScales.getRangeValue(d, i),
@@ -155,7 +155,7 @@ export class Scatter extends Component {
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
 		const [
 			getXValue,
-			getYValue,
+			getYValue
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
@@ -320,7 +320,7 @@ export class Scatter extends Component {
 					hoveredElement,
 					multidata:
 						overlappingData.length > 1 ? overlappingData : null,
-					type: TooltipTypes.DATAPOINT,
+					type: TooltipTypes.DATAPOINT
 				});
 
 				const eventNameToDispatch =
@@ -330,7 +330,7 @@ export class Scatter extends Component {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(eventNameToDispatch, {
 					element: hoveredElement,
-					datum,
+					datum
 				});
 			})
 			.on("click", function (datum) {
@@ -339,7 +339,7 @@ export class Scatter extends Component {
 					Events.Scatter.SCATTER_CLICK,
 					{
 						element: select(this),
-						datum,
+						datum
 					}
 				);
 			})
@@ -356,13 +356,13 @@ export class Scatter extends Component {
 					Events.Scatter.SCATTER_MOUSEOUT,
 					{
 						element: hoveredElement,
-						datum,
+						datum
 					}
 				);
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement,
+					hoveredElement
 				});
 			});
 	}

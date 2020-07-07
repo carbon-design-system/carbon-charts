@@ -7,76 +7,39 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @carbon/charts-vue
 
-
-
-
-
 ## [0.32.11](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.10...v0.32.11) (2020-06-24)
 
 **Note:** Version bump only for package @carbon/charts-vue
-
-
-
-
 
 ## [0.32.10](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.9...v0.32.10) (2020-06-24)
 
 **Note:** Version bump only for package @carbon/charts-vue
 
-
-
-
-
 ## [0.32.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.8...v0.32.9) (2020-06-23)
 
 **Note:** Version bump only for package @carbon/charts-vue
-
-
-
-
 
 ## [0.32.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.7...v0.32.8) (2020-06-19)
 
 **Note:** Version bump only for package @carbon/charts-vue
 
-
-
-
-
 ## [0.32.7](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.6...v0.32.7) (2020-06-16)
 
 **Note:** Version bump only for package @carbon/charts-vue
-
-
-
-
 
 ## [0.32.6](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.5...v0.32.6) (2020-06-12)
 
 **Note:** Version bump only for package @carbon/charts-vue
 
-
-
-
-
 ## [0.32.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.4...v0.32.5) (2020-06-11)
 
 **Note:** Version bump only for package @carbon/charts-vue
 
-
-
-
-
 ## [0.32.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.3...v0.32.4) (2020-06-10)
-
 
 ### Bug Fixes
 
-* update tslint and prettier options ([#661](https://github.com/carbon-design-system/carbon-charts/issues/661)) ([ebc53d9](https://github.com/carbon-design-system/carbon-charts/commit/ebc53d9f4caea047f656ae98075b9c8ca307b280))
-
-
-
-
+-   update tslint and prettier options ([#661](https://github.com/carbon-design-system/carbon-charts/issues/661)) ([ebc53d9](https://github.com/carbon-design-system/carbon-charts/commit/ebc53d9f4caea047f656ae98075b9c8ca307b280))
 
 ## [0.32.3](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.2...v0.32.3) (2020-06-08)
 
