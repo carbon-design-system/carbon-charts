@@ -5,10 +5,7 @@ import { ChartConfig, GaugeChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
-import {
-	Gauge,
-	Tooltip
-} from "../components/index";
+import { Gauge, Tooltip } from "../components/index";
 
 export class GaugeChart extends Chart {
 	constructor(holder: Element, chartConfigs: ChartConfig<GaugeChartOptions>) {

@@ -2,7 +2,13 @@
 import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { LegendOrientations, Roles, Events, TooltipTypes, TruncationTypes } from "../../interfaces";
+import {
+	LegendOrientations,
+	Roles,
+	Events,
+	TooltipTypes,
+	TruncationTypes
+} from "../../interfaces";
 import { DOMUtils } from "../../services";
 
 // D3 Imports
@@ -72,17 +78,19 @@ export class Legend extends Component {
 
 		// truncate the legend label if it's too long
 		if (truncationType !== TruncationTypes.NONE) {
-			addedLegendItemsText
-				.html(function(d) {
-					if (d.name.length > truncationThreshold) {
-						return Tools.truncateLabel(d.name, truncationType, truncationNumCharacter);
-					} else {
-						return d.name;
-					}
-				});
+			addedLegendItemsText.html(function (d) {
+				if (d.name.length > truncationThreshold) {
+					return Tools.truncateLabel(
+						d.name,
+						truncationType,
+						truncationNumCharacter
+					);
+				} else {
+					return d.name;
+				}
+			});
 		} else {
-			addedLegendItemsText
-				.html((d) => d.name);
+			addedLegendItemsText.html((d) => d.name);
 		}
 
 		this.breakItemsIntoLines(addedLegendItems);
@@ -268,7 +276,7 @@ export class Legend extends Component {
 		svg.selectAll("g.legend-item")
 			.on("mouseover", function () {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_HOVER, {
-					hoveredElement: select(this),
+					hoveredElement: select(this)
 				});
 
 				// Configs
@@ -298,7 +306,7 @@ export class Legend extends Component {
 			})
 			.on("click", function () {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
-					clickedElement: select(this),
+					clickedElement: select(this)
 				});
 
 				const clickedItem = select(this);
@@ -311,9 +319,9 @@ export class Legend extends Component {
 				const hoveredItemData = hoveredItem.datum() as any;
 				if (hoveredItemData.name.length > truncationThreshold) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					hoveredElement: hoveredItem,
-					type: TooltipTypes.LEGEND,
-				});
+						hoveredElement: hoveredItem,
+						type: TooltipTypes.LEGEND
+					});
 				}
 			})
 			.on("mouseout", function () {
@@ -325,7 +333,7 @@ export class Legend extends Component {
 				self.services.events.dispatchEvent(
 					Events.Legend.ITEM_MOUSEOUT,
 					{
-						hoveredElement: hoveredItem,
+						hoveredElement: hoveredItem
 					}
 				);
 			});
