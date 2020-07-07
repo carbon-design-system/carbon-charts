@@ -33,7 +33,10 @@ export class Legend extends Component {
 		const addedLegendItems = legendItems
 			.enter()
 			.append("g")
-			.classed("legend-item", true);
+			.classed("legend-item", true)
+			.classed("active", function (d, i) {
+				return d.status === options.legend.items.status.ACTIVE;
+			});
 
 		// Configs
 		const checkboxRadius = options.legend.checkbox.radius;
@@ -216,14 +219,24 @@ export class Legend extends Component {
 				legendItem
 					.select("text")
 					.attr("x", startingPoint + spaceNeededForCheckbox)
-					.attr("y", yOffset + yPosition + 2);
+					.attr("y", yOffset + yPosition + 3);
 
 				lastYPosition = yPosition;
 
+				// Test if legendItems are placed in the correct direction
+				const testHorizontal = (!legendOrientation ||
+					legendOrientation === LegendOrientations.HORIZONTAL) &&
+					legendItem.select("rect.checkbox").attr("y") === '0';
+
+				const testVertical = legendOrientation === LegendOrientations.VERTICAL &&
+					legendItem.select("rect.checkbox").attr("x") === '0';
+
+				const hasCorrectLegendDirection = testHorizontal || testVertical;
+
 				// Render checkbox check icon
-				if (
-					hasDeactivatedItems &&
-					legendItem.select("g.check").empty()
+				if (hasDeactivatedItems &&
+					legendItem.select("g.check").empty() &&
+					hasCorrectLegendDirection
 				) {
 					legendItem.append("g").classed("check", true).html(`
 							<svg focusable="false" preserveAspectRatio="xMidYMid meet"
@@ -281,7 +294,6 @@ export class Legend extends Component {
 
 				// Configs
 				const checkboxRadius = options.legend.checkbox.radius;
-
 				const hoveredItem = select(this);
 				hoveredItem
 					.append("rect")

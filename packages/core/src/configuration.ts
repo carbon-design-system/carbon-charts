@@ -168,7 +168,8 @@ const chart: BaseChartOptions = {
 	},
 	data: {
 		groupMapsTo: "group",
-		loading: false
+		loading: false,
+		selectedGroups: []
 	},
 	color: {
 		scale: null
