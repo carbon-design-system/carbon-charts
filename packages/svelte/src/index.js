@@ -9,6 +9,7 @@ import LineChart from "./LineChart.svelte";
 import PieChart from "./PieChart.svelte";
 import ScatterChart from "./ScatterChart.svelte";
 import RadarChart from "./RadarChart.svelte";
+import GaugeChart from "./GaugeChart.svelte";
 
 export {
 	AreaChart,
@@ -21,5 +22,6 @@ export {
 	LineChart,
 	PieChart,
 	ScatterChart,
-	RadarChart
+	RadarChart,
+	GaugeChart,
 };
