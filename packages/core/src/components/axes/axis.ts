@@ -202,11 +202,9 @@ export class Axis extends Component {
 					let tickValues;
 					if (addSpaceOnEdges) {
 						tickValues = scale
-							.nice(numberOfTicks)
-							.ticks(numberOfTicks);
-					} else {
-						tickValues = scale.ticks(numberOfTicks);
+							.nice(numberOfTicks);
 					}
+					tickValues = scale.ticks(numberOfTicks);
 
 					// Remove labels on the edges
 					// If there are more than 2 labels to show
