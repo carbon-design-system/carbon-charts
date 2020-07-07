@@ -5,7 +5,7 @@ import {
 	Roles,
 	TooltipTypes,
 	Events,
-	CartesianOrientations,
+	CartesianOrientations
 } from "../../interfaces";
 
 // D3 Imports
@@ -182,7 +182,7 @@ export class StackedBar extends Bar {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
 					element: hoveredElement,
-					datum,
+					datum
 				});
 			})
 			.on("mousemove", function (datum) {
@@ -206,7 +206,7 @@ export class StackedBar extends Bar {
 					matchingDataPoint = {
 						[domainIdentifier]: datum.data.sharedStackKey,
 						[rangeIdentifier]: datum.data[datum.group],
-						[groupMapsTo]: datum.group,
+						[groupMapsTo]: datum.group
 					};
 				}
 
@@ -214,14 +214,14 @@ export class StackedBar extends Bar {
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					data: matchingDataPoint,
-					type: TooltipTypes.DATAPOINT,
+					type: TooltipTypes.DATAPOINT
 				});
 			})
 			.on("click", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_CLICK, {
 					element: select(this),
-					datum,
+					datum
 				});
 			})
 			.on("mouseout", function (datum) {
@@ -241,12 +241,12 @@ export class StackedBar extends Bar {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOUT, {
 					element: hoveredElement,
-					datum,
+					datum
 				});
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement,
+					hoveredElement
 				});
 			});
 	}
