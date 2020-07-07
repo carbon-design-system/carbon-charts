@@ -1,8 +1,4 @@
-import {
-	GaugeTypes,
-	Statuses,
-	ArrowDirections
-} from "./enums";
+import { GaugeTypes, Statuses, ArrowDirections } from "./enums";
 import {
 	LegendOptions,
 	TooltipOptions,
@@ -188,10 +184,10 @@ export interface LineChartOptions extends ScatterChartOptions {
 	 * options for the curve of the line
 	 */
 	curve?:
-	| string
-	| {
-		name: string;
-	};
+		| string
+		| {
+				name: string;
+		  };
 }
 
 /**
@@ -259,7 +255,7 @@ export interface GaugeChartOptions extends PieChartOptions {
 			direction?: ArrowDirections;
 			size?: Function;
 			enabled: Boolean;
-		}
+		};
 		status?: Statuses;
 		deltaFontSize?: Function;
 		numberSpacing?: number;

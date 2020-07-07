@@ -145,7 +145,7 @@ let allDemoGroups = [
 				options: barDemos.simpleBarLongLabelOptions,
 				data: barDemos.simpleBarLongLabelData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: barDemos.simpleBarTimeSeriesOptions,
@@ -231,7 +231,7 @@ let allDemoGroups = [
 				options: barDemos.simpleHorizontalBarLongLabelOptions,
 				data: barDemos.simpleHorizontalBarLongLabelData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: barDemos.simpleHorizontalBarTimeSeriesOptions,
@@ -360,7 +360,7 @@ let allDemoGroups = [
 			{
 				options: lineDemos.lineTimeSeriesCustomDomainOptions,
 				data: lineDemos.lineTimeSeriesData,
-				chartType: chartTypes.LineChart,
+				chartType: chartTypes.LineChart
 			},
 			{
 				options: lineDemos.lineTimeSeriesDenseOptions,
@@ -375,12 +375,12 @@ let allDemoGroups = [
 			{
 				options: lineDemos.lineLongLabelOptions,
 				data: lineDemos.lineLongLabelData,
-				chartType: chartTypes.LineChart,
+				chartType: chartTypes.LineChart
 			},
 			{
 				options: lineDemos.lineCustomDomainOptions,
 				data: lineDemos.lineData,
-				chartType: chartTypes.LineChart,
+				chartType: chartTypes.LineChart
 			},
 			{
 				options: lineDemos.lineSelectedGroupsOptions,
@@ -492,7 +492,7 @@ let allDemoGroups = [
 			{
 				options: scatterDemos.scatterLongLabelDiscreteOptions,
 				data: scatterDemos.scatterLongLabelDiscreteData,
-				chartType: chartTypes.ScatterChart,
+				chartType: chartTypes.ScatterChart
 			},
 			{
 				options: scatterDemos.scatterEmptyStateOptions,

@@ -25,7 +25,7 @@ export class TestEnvironment {
 
 		this.chart = new Charts.ScatterChart(holder, {
 			data: this.chartData,
-			options: this.chartOptions,
+			options: this.chartOptions
 		});
 	}
 
