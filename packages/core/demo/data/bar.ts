@@ -36,6 +36,25 @@ export const groupedBarOptions = {
 	}
 };
 
+export const groupedBarSelectedGroupsData = groupedBarData;
+
+// Grouped bar with selected groups option
+export const groupedBarSelectedGroupsOptions = {
+	title: "Grouped bar (selected groups)",
+	data: {
+		selectedGroups: ["Dataset 1", "Dataset 3"]
+	},
+	axes: {
+		left: {
+			mapsTo: "value",
+		},
+		bottom: {
+			scaleType: "labels",
+			mapsTo: "key",
+		},
+	},
+};
+
 // Horizontal Grouped
 export const groupedHorizontalBarData = groupedBarData;
 

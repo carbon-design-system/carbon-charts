@@ -183,6 +183,11 @@ let allDemoGroups = [
 				chartType: chartTypes.GroupedBarChart
 			},
 			{
+				options: barDemos.groupedBarSelectedGroupsOptions,
+				data: barDemos.groupedBarSelectedGroupsData,
+				chartType: chartTypes.GroupedBarChart
+			},
+			{
 				options: barDemos.groupedBarEmptyStateOptions,
 				data: barDemos.groupedBarEmptyStateData,
 				chartType: chartTypes.GroupedBarChart,
@@ -382,6 +387,11 @@ let allDemoGroups = [
 				options: lineDemos.lineCustomDomainOptions,
 				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineSelectedGroupsOptions,
+				data: lineDemos.lineSelectedGroupsData,
+				chartType: chartTypes.LineChart,
 			},
 			{
 				options: lineDemos.lineTimeSeriesRotatedTicksOptions,
