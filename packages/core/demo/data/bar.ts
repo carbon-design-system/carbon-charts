@@ -50,7 +50,7 @@ export const groupedBarSelectedGroupsOptions = {
 		},
 		bottom: {
 			scaleType: "labels",
-			mapsTo: "key",
+			mapsTo: "key"
 		},
 	},
 };
@@ -356,7 +356,7 @@ export const simpleBarSkeletonOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "labels",
+			scaleType: "labels"
 		}
 	},
 	data: {
@@ -383,7 +383,7 @@ export const groupedBarSkeletonOptions = {
 	axes: {
 		left: {},
 		bottom: {
-			scaleType: "labels",
+			scaleType: "labels"
 		}
 	},
 	data: {
