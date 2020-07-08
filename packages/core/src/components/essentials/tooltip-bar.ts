@@ -202,13 +202,15 @@ export class TooltipBar extends Tooltip {
 			return `<div class="axis-tooltip"><p class="label">${data}</p></div>`;
 		}
 
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+
 		const formattedValue = Tools.getProperty(
 			this.model.getOptions(),
 			"tooltip",
 			"valueFormatter"
 		)
 			? this.model.getOptions().tooltip.valueFormatter(data.value)
-			: data.value.toLocaleString("en");
+			: data[rangeIdentifier].toLocaleString("en");
 
 		return `<div class="datapoint-tooltip"><p class="value">${formattedValue}</p></div>`;
 	}
