@@ -12,7 +12,14 @@ import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { select, mouse, event } from "d3-selection";
-import { TooltipTypes, TooltipPosition, Events } from "../../interfaces";
+import {
+	TooltipTypes,
+	TooltipPosition,
+	Events,
+	AxisPositions
+} from "../../interfaces";
+
+import { format } from "date-fns";
 
 export class Tooltip extends Component {
 	type = "tooltip";
@@ -48,90 +55,170 @@ export class Tooltip extends Component {
 
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener(Events.Tooltip.SHOW, (e) => {
-			// check the type of tooltip and that it is enabled
-			if (
-				(e.detail.type === TooltipTypes.DATAPOINT &&
-					Tools.getProperty(
-						this.model.getOptions(),
-						"tooltip",
-						"datapoint",
-						"enabled"
-					)) ||
-				(e.detail.type === TooltipTypes.GRIDLINE &&
-					Tools.getProperty(
-						this.model.getOptions(),
-						"tooltip",
-						"gridline",
-						"enabled"
-					)) ||
-				(e.detail.type === TooltipTypes.LEGEND) ||
-				(e.detail.type === TooltipTypes.AXISLABEL)
-			) {
-				let data = select(event.target).datum() as any;
+			// const data = {
+			// 	items: [
+			// 		{
+			// 			title: "Month",
+			// 			value: "Jan"
+			// 		},
+			// 		{
+			// 			title: "Conversion rate",
+			// 			value: "Jan"
+			// 		},
+			// 		{
+			// 			title: "Audience size",
+			// 			value: "Jan"
+			// 		},
+			// 		{
+			// 			title: "Group",
+			// 			value: "Audience C"
+			// 		}
+			// 	]
+			// };
+			const { cartesianScales } = this.services;
+			const domainAxisOptions = cartesianScales.getDomainAxisOptions();
+			const domainIdentifier = cartesianScales.getDomainIdentifier();
+			const rangeAxisOptions = cartesianScales.getRangeAxisOptions();
+			const rangeIdentifier = cartesianScales.getRangeIdentifier();
 
-				// Generate default tooltip
-				let defaultHTML;
-				if (e.detail.multidata) {
-					// multi tooltip
-					data = e.detail.multidata;
-					defaultHTML = this.getMultilineTooltipHTML(data, e.detail.type);
-				} else {
-					defaultHTML = this.getTooltipHTML(
-						data,
-						e.detail.type
-					);
+			let data = select(event.target).datum() as any;
+			data = e.detail.data;
+
+			// Generate default tooltip
+			let defaultHTML;
+			// if (e.detail.multidata) {
+			// 	// multi tooltip
+			// 	data = e.detail.multidata;
+			// 	defaultHTML = this.getMultilineTooltipHTML(data, e.detail.type);
+			// } else {
+			// 	defaultHTML = this.getTooltipHTML(
+			// 		data,
+			// 		e.detail.type
+			// 	);
+			// }
+
+			let items: any[];
+			if (data.length === 1) {
+				const datum = data[0];
+				const { groupMapsTo } = this.model.getOptions().data;
+
+				let domainLabel = domainAxisOptions.title;
+				if (!domainLabel) {
+					const domainAxisPosition = cartesianScales.getDomainAxisPosition();
+					if (
+						domainAxisPosition === AxisPositions.BOTTOM ||
+						domainAxisPosition === AxisPositions.TOP
+					) {
+						domainLabel = "x-value";
+					}
+				}
+				let rangeLabel = rangeAxisOptions.title;
+				if (!rangeLabel) {
+					const rangeAxisPosition = cartesianScales.getRangeAxisPosition();
+					if (
+						rangeAxisPosition === AxisPositions.LEFT ||
+						rangeAxisPosition === AxisPositions.RIGHT
+					) {
+						rangeLabel = "y-value";
+					}
 				}
 
-				// if there is a provided tooltip HTML function call it
-				if (
-					Tools.getProperty(
-						this.model.getOptions(),
-						"tooltip",
-						"customHTML"
-					)
-				) {
-					tooltipTextContainer.html(
-						this.model
-							.getOptions()
-							.tooltip.customHTML(data, defaultHTML)
-					);
-				} else {
-					// Use default tooltip
-					tooltipTextContainer.html(defaultHTML);
-				}
-
-				// Position the tooltip
-				this.positionTooltip();
-			} else if (e.detail.type === TooltipTypes.TITLE) {
-				const chart = DOMUtils.appendOrSelect(
-					holder,
-					`svg.${settings.prefix}--${chartprefix}--chart-svg`
+				let domainValue = format(
+					new Date(datum[domainIdentifier]),
+					"MMM d, p"
 				);
-				const chartWidth =
-					DOMUtils.getSVGElementSize(chart).width *
-					Tools.getProperty(
-						this.model.getOptions(),
-						"tooltip",
-						"title",
-						"width"
-					);
-
-				this.tooltip.style("max-width", chartWidth);
-
-				tooltipTextContainer.html(
-					this.getTooltipHTML(
-						e.detail.hoveredElement,
-						TooltipTypes.TITLE
-					)
-				);
-
-				// get the position based on the title positioning (static)
-				const position = this.getTooltipPosition(
-					e.detail.hoveredElement.node(),
-					e.detail.type
-				);
-				this.positionTooltip(position);
+				let rangeValue = datum[rangeIdentifier];
+				items = [
+					{
+						label: domainLabel,
+						value: domainValue
+					},
+					{
+						label: rangeLabel,
+						value: rangeValue
+					},
+					{
+						label: "Group",
+						value: datum[groupMapsTo],
+						color: this.model.getStrokeColor(datum[groupMapsTo])
+					}
+				];
 			}
+
+			defaultHTML =
+				`<ul class='multi-tooltip'>` +
+				items
+					.map(
+						(item) =>
+							`<ul class='multi-tooltip'>
+						<li>
+							<div class="datapoint-tooltip">
+								${
+									item.color
+										? '<a style="background-color: ' +
+										  item.color +
+										  '" class="tooltip-color"></a>'
+										: ""
+								}
+								<p class="label">${item.label}</p>
+								<p class="value">${item.value}</p>
+							</div>
+						</li>
+					</ul>`
+					)
+					.join("") +
+				`</ul>`;
+
+			// if there is a provided tooltip HTML function call it
+			if (
+				Tools.getProperty(
+					this.model.getOptions(),
+					"tooltip",
+					"customHTML"
+				)
+			) {
+				tooltipTextContainer.html(
+					this.model
+						.getOptions()
+						.tooltip.customHTML(data, defaultHTML)
+				);
+			} else {
+				// Use default tooltip
+				tooltipTextContainer.html(defaultHTML);
+			}
+
+			// Position the tooltip
+			this.positionTooltip();
+			// } else if (e.detail.type === TooltipTypes.TITLE) {
+			// 	const chart = DOMUtils.appendOrSelect(
+			// 		holder,
+			// 		`svg.${settings.prefix}--${chartprefix}--chart-svg`
+			// 	);
+			// 	const chartWidth =
+			// 		DOMUtils.getSVGElementSize(chart).width *
+			// 		Tools.getProperty(
+			// 			this.model.getOptions(),
+			// 			"tooltip",
+			// 			"title",
+			// 			"width"
+			// 		);
+
+			// 	this.tooltip.style("max-width", chartWidth);
+
+			// 	tooltipTextContainer.html(
+			// 		this.getTooltipHTML(
+			// 			e.detail.hoveredElement,
+			// 			TooltipTypes.TITLE
+			// 		)
+			// 	);
+
+			// 	// get the position based on the title positioning (static)
+			// 	const position = this.getTooltipPosition(
+			// 		e.detail.hoveredElement.node(),
+			// 		e.detail.type
+			// 	);
+			// 	this.positionTooltip(position);
+			// }
 
 			// Fade in
 			this.tooltip.classed("hidden", false);
@@ -238,7 +325,7 @@ export class Tooltip extends Component {
 				elementPosition.left -
 				holderPosition.left +
 				elementPosition.width / 2,
-			top: elementPosition.top - holderPosition.top - verticalOffset,
+			top: elementPosition.top - holderPosition.top - verticalOffset
 		};
 
 		return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
@@ -268,23 +355,23 @@ export class Tooltip extends Component {
 			const bestPlacementOption = this.positionService.findBestPlacementAt(
 				{
 					left: mouseRelativePos[0],
-					top: mouseRelativePos[1],
+					top: mouseRelativePos[1]
 				},
 				target,
 				[
 					PLACEMENTS.RIGHT,
 					PLACEMENTS.LEFT,
 					PLACEMENTS.TOP,
-					PLACEMENTS.BOTTOM,
+					PLACEMENTS.BOTTOM
 				],
 				() => ({
 					width: holder.offsetWidth,
-					height: holder.offsetHeight,
+					height: holder.offsetHeight
 				})
 			);
 
 			let {
-				horizontalOffset,
+				horizontalOffset
 			} = this.model.getOptions().tooltip.datapoint;
 			if (bestPlacementOption === PLACEMENTS.LEFT) {
 				horizontalOffset *= -1;
@@ -294,7 +381,7 @@ export class Tooltip extends Component {
 			pos = this.positionService.findPositionAt(
 				{
 					left: mouseRelativePos[0] + horizontalOffset,
-					top: mouseRelativePos[1],
+					top: mouseRelativePos[1]
 				},
 				target,
 				bestPlacementOption

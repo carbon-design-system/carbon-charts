@@ -1,12 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import {
-	Roles,
-	Events,
-	GaugeTypes,
-	ArrowDirections
-} from "../../interfaces";
+import { Roles, Events, GaugeTypes, ArrowDirections } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -253,13 +248,16 @@ export class Gauge extends Component {
 			: () => 0;
 
 		// use numberFormatter here only if there is a delta supplied
-		const numberFormatter = delta ? Tools.getProperty(
+		const numberFormatter = delta
+			? Tools.getProperty(options, "gauge", "numberFormatter")
+			: () => null;
+
+		const arrowSize = Tools.getProperty(
 			options,
 			"gauge",
-			"numberFormatter"
-		) : () => null;
-
-		const arrowSize = Tools.getProperty(options, "gauge", "deltaArrow", "size");
+			"deltaArrow",
+			"size"
+		);
 		const numberSpacing = Tools.getProperty(
 			options,
 			"gauge",
@@ -277,10 +275,12 @@ export class Gauge extends Component {
 			`translate(0, ${deltaFontSize(radius) + numberSpacing})`
 		);
 
-		const deltaNumber = DOMUtils.appendOrSelect(deltaGroup, "text.gauge-delta-number");
+		const deltaNumber = DOMUtils.appendOrSelect(
+			deltaGroup,
+			"text.gauge-delta-number"
+		);
 
-		deltaNumber
-			.data(delta === null ? [] : [delta]);
+		deltaNumber.data(delta === null ? [] : [delta]);
 
 		deltaNumber
 			.enter()
@@ -300,7 +300,12 @@ export class Gauge extends Component {
 		);
 
 		// check if delta arrow is disabled
-		const arrowEnabled = Tools.getProperty(options, "gauge", "deltaArrow", "enabled");
+		const arrowEnabled = Tools.getProperty(
+			options,
+			"gauge",
+			"deltaArrow",
+			"enabled"
+		);
 		const deltaArrow = deltaGroup
 			.selectAll("svg.gauge-delta-arrow")
 			.data(delta !== null && arrowEnabled ? [delta] : []);

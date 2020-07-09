@@ -6,7 +6,7 @@ import {
 	CartesianOrientations,
 	ScaleTypes,
 	AxesOptions,
-	ThresholdOptions,
+	ThresholdOptions
 } from "../interfaces";
 import { Tools } from "../tools";
 
@@ -34,7 +34,7 @@ import {
 	subMinutes,
 	differenceInSeconds,
 	subSeconds,
-	addSeconds,
+	addSeconds
 } from "date-fns";
 
 export class CartesianScales extends Service {
@@ -42,14 +42,14 @@ export class CartesianScales extends Service {
 		top: null,
 		right: null,
 		bottom: null,
-		left: null,
+		left: null
 	};
 
 	protected scales = {
 		top: null,
 		right: null,
 		bottom: null,
-		left: null,
+		left: null
 	};
 
 	protected domainAxisPosition: AxisPositions;
@@ -63,6 +63,20 @@ export class CartesianScales extends Service {
 
 	getRangeAxisPosition() {
 		return this.rangeAxisPosition;
+	}
+
+	getAxisOptions(position: AxisPositions) {
+		return Tools.getProperty(this.model.getOptions(), "axes", position);
+	}
+
+	getDomainAxisOptions() {
+		const domainAxisPosition = this.getDomainAxisPosition();
+		return this.getAxisOptions(domainAxisPosition);
+	}
+
+	getRangeAxisOptions() {
+		const rangeAxisPosition = this.getRangeAxisPosition();
+		return this.getAxisOptions(rangeAxisPosition);
 	}
 
 	update(animate = true) {
@@ -129,7 +143,7 @@ export class CartesianScales extends Service {
 	getMainXAxisPosition() {
 		const possibleXAxisPositions = [
 			AxisPositions.BOTTOM,
-			AxisPositions.TOP,
+			AxisPositions.TOP
 		];
 
 		return [this.domainAxisPosition, this.rangeAxisPosition].find(
@@ -141,7 +155,7 @@ export class CartesianScales extends Service {
 	getMainYAxisPosition() {
 		const possibleYAxisPositions = [
 			AxisPositions.LEFT,
-			AxisPositions.RIGHT,
+			AxisPositions.RIGHT
 		];
 
 		return [this.domainAxisPosition, this.rangeAxisPosition].find(
@@ -303,7 +317,7 @@ export class CartesianScales extends Service {
 
 		const result = {
 			domainAxisPosition: null,
-			rangeAxisPosition: null,
+			rangeAxisPosition: null
 		};
 		if (
 			mainHorizontalScaleType === ScaleTypes.LABELS ||
@@ -439,7 +453,7 @@ export class CartesianScales extends Service {
 
 		return {
 			threshold: highestThreshold,
-			scaleValue: domainScale(highestThreshold.value),
+			scaleValue: domainScale(highestThreshold.value)
 		};
 	}
 
@@ -464,7 +478,7 @@ export class CartesianScales extends Service {
 
 		return {
 			threshold: highestThreshold,
-			scaleValue: rangeScale(highestThreshold.value),
+			scaleValue: rangeScale(highestThreshold.value)
 		};
 	}
 }
@@ -476,56 +490,56 @@ function addSpacingToTimeDomain(domain: any, spaceToAddToEdges: number) {
 	if (differenceInYears(endDate, startDate) > 1) {
 		return [
 			subYears(startDate, spaceToAddToEdges),
-			addYears(endDate, spaceToAddToEdges),
+			addYears(endDate, spaceToAddToEdges)
 		];
 	}
 
 	if (differenceInMonths(endDate, startDate) > 1) {
 		return [
 			subMonths(startDate, spaceToAddToEdges),
-			addMonths(endDate, spaceToAddToEdges),
+			addMonths(endDate, spaceToAddToEdges)
 		];
 	}
 
 	if (differenceInDays(endDate, startDate) > 1) {
 		return [
 			subDays(startDate, spaceToAddToEdges),
-			addDays(endDate, spaceToAddToEdges),
+			addDays(endDate, spaceToAddToEdges)
 		];
 	}
 
 	if (differenceInHours(endDate, startDate) > 1) {
 		return [
 			subHours(startDate, spaceToAddToEdges),
-			addHours(endDate, spaceToAddToEdges),
+			addHours(endDate, spaceToAddToEdges)
 		];
 	}
 
 	if (differenceInMinutes(endDate, startDate) > 30) {
 		return [
 			subMinutes(startDate, spaceToAddToEdges * 30),
-			addMinutes(endDate, spaceToAddToEdges * 30),
+			addMinutes(endDate, spaceToAddToEdges * 30)
 		];
 	}
 
 	if (differenceInMinutes(endDate, startDate) > 1) {
 		return [
 			subMinutes(startDate, spaceToAddToEdges),
-			addMinutes(endDate, spaceToAddToEdges),
+			addMinutes(endDate, spaceToAddToEdges)
 		];
 	}
 
 	if (differenceInSeconds(endDate, startDate) > 15) {
 		return [
 			subSeconds(startDate, spaceToAddToEdges * 15),
-			addSeconds(endDate, spaceToAddToEdges * 15),
+			addSeconds(endDate, spaceToAddToEdges * 15)
 		];
 	}
 
 	if (differenceInSeconds(endDate, startDate) > 1) {
 		return [
 			subSeconds(startDate, spaceToAddToEdges),
-			addSeconds(endDate, spaceToAddToEdges),
+			addSeconds(endDate, spaceToAddToEdges)
 		];
 	}
 
