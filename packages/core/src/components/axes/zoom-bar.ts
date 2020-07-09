@@ -34,10 +34,14 @@ export class ZoomBar extends Component {
 		});
 
 		// get initZoomDomain
-		const zoomBarOptions = this.model.getOptions().zoomBar;
-		if (zoomBarOptions.initialZoomDomain !== undefined) {
+		const initialZoomDomain = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"initialZoomDomain"
+		);
+		if (initialZoomDomain !== null) {
 			this.model.set(
-				{ zoomDomain: zoomBarOptions.initialZoomDomain },
+				{ zoomDomain: initialZoomDomain },
 				{ skipUpdate: true }
 			);
 		}
