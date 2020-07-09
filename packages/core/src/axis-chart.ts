@@ -31,6 +31,11 @@ export class AxisChart extends Chart {
 	}
 
 	protected getAxisChartComponents(graphFrameComponents: any[]) {
+		const zoomBarEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"enabled"
+		);
 		const titleComponent = {
 			id: "title",
 			components: [new Title(this.model, this.services)],
@@ -49,12 +54,10 @@ export class AxisChart extends Chart {
 			}
 		};
 
-		if (
-			this.model.getOptions().zoomBar &&
-			this.model.getOptions().zoomBar.enabled
-		) {
+		if (zoomBarEnabled) {
 			graphFrameComponents.push(new Brush(this.model, this.services));
 		}
+
 		const graphFrameComponent = {
 			id: "graph-frame",
 			components: graphFrameComponents,
@@ -156,7 +159,7 @@ export class AxisChart extends Chart {
 
 			topLevelLayoutComponents.push(titleSpacerComponent);
 		}
-		if (this.model.getOptions().zoomBar.enabled === true) {
+		if (zoomBarEnabled) {
 			topLevelLayoutComponents.push(zoomBarComponent);
 		}
 		topLevelLayoutComponents.push(fullFrameComponent);
