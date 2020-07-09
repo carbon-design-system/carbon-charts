@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.33.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.33.0...v0.33.1) (2020-07-08)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+<<<<<<< HEAD
+## [0.32.11](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.10...v0.32.11) (2020-06-24)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+## [0.32.10](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.9...v0.32.10) (2020-06-24)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+=======
+
+
+
+
+# [0.33.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.12...v0.33.0) (2020-07-07)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
 ## [0.32.12](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.11...v0.32.12) (2020-06-26)
 
 **Note:** Version bump only for package @carbon/charts-vue
@@ -15,6 +41,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @carbon/charts-vue
 
+>>>>>>> 5bcfed41f3ba0cfd8ec811d932ff4e36c9c4ba5f
 ## [0.32.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.8...v0.32.9) (2020-06-23)
 
 **Note:** Version bump only for package @carbon/charts-vue

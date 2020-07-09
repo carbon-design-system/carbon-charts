@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.33.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.33.0...v0.33.1) (2020-07-08)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+# [0.33.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.12...v0.33.0) (2020-07-07)
+
+
+### Features
+
+* **svelte:** add Gauge chart wrapper ([#686](https://github.com/carbon-design-system/carbon-charts/issues/686)) ([1b5d5b4](https://github.com/carbon-design-system/carbon-charts/commit/1b5d5b48a24a551ffaaf8e05bad317b0e3d41a51))
+
+
+
+
+
 ## [0.32.12](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.11...v0.32.12) (2020-06-26)
 
 **Note:** Version bump only for package @carbon/charts-svelte

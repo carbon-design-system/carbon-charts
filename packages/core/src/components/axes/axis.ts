@@ -193,20 +193,21 @@ export class Axis extends Component {
 				if (!scale.ticks(numberOfTicks).length) {
 					axis.tickValues([]);
 				} else {
-					const tickValues = scale
-						.nice(numberOfTicks)
-						.ticks(numberOfTicks);
+					const addSpaceOnEdges = Tools.getProperty(
+						options,
+						"timeScale",
+						"addSpaceOnEdges"
+					);
+
+					let tickValues;
+					if (addSpaceOnEdges) {
+						tickValues = scale.nice(numberOfTicks);
+					}
+					tickValues = scale.ticks(numberOfTicks);
 
 					// Remove labels on the edges
 					// If there are more than 2 labels to show
-					if (
-						Tools.getProperty(
-							options,
-							"timeScale",
-							"addSpaceOnEdges"
-						) &&
-						tickValues.length > 2
-					) {
+					if (addSpaceOnEdges && tickValues.length > 2) {
 						tickValues.splice(tickValues.length - 1, 1);
 						tickValues.splice(0, 1);
 					}

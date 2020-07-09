@@ -222,7 +222,7 @@ export class CartesianScales extends Service {
 		return axisOptions.mapsTo;
 	}
 
-	/** Uses the primary Y Axis to get data items associated with that value. */
+	/** Uses the Y Axis to get data items associated with that value. */
 	getDataFromDomain(domainValue) {
 		const displayData = this.model.getDisplayData();
 		const domainIdentifier = this.getDomainIdentifier();
