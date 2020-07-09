@@ -41,8 +41,10 @@ export class RadarChart extends Chart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents: any[] = [new Radar(this.model, this.services)];
-		
+		const graphFrameComponents: any[] = [
+			new Radar(this.model, this.services)
+		];
+
 		// get the base chart components and export with tooltip
 		const components: any[] = this.getChartComponents(graphFrameComponents);
 		return components;

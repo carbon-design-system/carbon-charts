@@ -103,15 +103,16 @@ export class Component {
 				this.type === "stacked-bar" ||
 				this.type === "scatter-stacked"
 			) {
-				return DOMUtils.appendOrSelectForAxisChart(this.parent, `clipPath.cover`);
-
+				return DOMUtils.appendOrSelectForAxisChart(
+					this.parent,
+					`clipPath.cover`
+				);
 			} else {
 				return DOMUtils.appendOrSelect(
 					this.parent,
 					`g.${settings.prefix}--${chartprefix}--${this.type}`
 				);
 			}
-
 		}
 
 		return this.parent;
