@@ -70,17 +70,20 @@ export class ChartModel {
 			return datum;
 		});
 	}
+
 	getDefaultZoomBarDomain() {
 		const zoomBarData = this.getZoomBarData();
 		const { cartesianScales } = this.services;
 		const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
 		const domainIdentifier = cartesianScales.getDomainIdentifier();
+
 		// default to full range with extended domain
 		return cartesianScales.extendsDomain(
 			mainXAxisPosition,
 			extent(zoomBarData, (d: any) => d[domainIdentifier])
 		);
 	}
+
 	getAllDataFromDomain() {
 		if (!this.get("data")) {
 			return null;
@@ -137,7 +140,7 @@ export class ChartModel {
 
 		return allDataFromDomain.filter((datum) => {
 			const group = dataGroups.find(
-				(g) => g.name === datum[groupMapsTo]
+				(dataGroup) => dataGroup.name === datum[groupMapsTo]
 			);
 
 			return group.status === ACTIVE;

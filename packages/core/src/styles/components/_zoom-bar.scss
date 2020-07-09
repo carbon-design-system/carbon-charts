@@ -14,6 +14,7 @@ g.#{$prefix}--#{$charts-prefix}--zoom-bar {
 		stroke: $ui-04;
 		stroke-width: 1;
 	}
+
 	path.zoom-graph-area-unselected {
 		fill: $ui-01;
 		stroke: none;
@@ -23,9 +24,11 @@ g.#{$prefix}--#{$charts-prefix}--zoom-bar {
 		rect.handle {
 			fill: $icon-02;
 		}
+
 		rect.handle-bar {
 			fill: $ui-02;
 		}
+
 		// clear d3.brush selection style
 		rect.selection {
 			fill: none;

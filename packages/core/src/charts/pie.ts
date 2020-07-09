@@ -52,7 +52,7 @@ export class PieChart extends Chart {
 				skeleton: Skeletons.PIE
 			})
 		];
-		
+
 		// get the base chart components and export with tooltip
 		const components: any[] = this.getChartComponents(graphFrameComponents);
 		return components;
