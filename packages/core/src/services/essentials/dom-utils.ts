@@ -150,11 +150,12 @@ export class DOMUtils extends Service {
 	}
 
 	static appendOrSelectForAxisChart(parent, query) {
-
 		const querySections = query.split(".");
 		const elementToAppend = querySections[0];
 
-		const parentOfSelection = parent.select(`${elementToAppend}.${querySections.slice(1).join(" ")}`);
+		const parentOfSelection = parent.select(
+			`${elementToAppend}.${querySections.slice(1).join(" ")}`
+		);
 		const selection = parent.select(`g#g-coverClip`);
 		if (parentOfSelection.empty() && parent) {
 			parent
