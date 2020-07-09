@@ -23,21 +23,20 @@ const selectionEndFun = (selection, domain) => {
 	console.log(domain);
 };
 
-const initZoomDomain = [
+const initialZoomDomain = [
 	new Date(2020, 11, 10, 23, 59, 25),
 	new Date(2020, 11, 11, 0, 0, 25)
 ];
 
 const defaultZoomBarOptions = {
 	enabled: true,
-	initZoomDomain: undefined,
 	selectionStart: selectionStartFun,
 	selectionInProgress: selectionInProgressFun,
 	selectionEnd: selectionEndFun
 };
 
 // utility function to update title and enable zoomBar option
-const updateOptions = (options) => {
+const addZoomBarToOptions = (options) => {
 	options["title"] = options["title"] + " - Zoom bar enabled";
 	options["zoomBar"] = Object.assign({}, defaultZoomBarOptions);
 	return options;
@@ -45,51 +44,51 @@ const updateOptions = (options) => {
 
 export const zoomBarStackedAreaTimeSeriesData =
 	areaChart.stackedAreaTimeSeriesData;
-export const zoomBarStackedAreaTimeSeriesOptions = updateOptions(
+export const zoomBarStackedAreaTimeSeriesOptions = addZoomBarToOptions(
 	Object.assign({}, areaChart.stackedAreaTimeSeriesOptions)
 );
 
 export const zoomBarSimpleBarTimeSeriesData = barChart.simpleBarTimeSeriesData;
-export const zoomBarSimpleBarTimeSeriesOptions = updateOptions(
+export const zoomBarSimpleBarTimeSeriesOptions = addZoomBarToOptions(
 	Object.assign({}, barChart.simpleBarTimeSeriesOptions)
 );
 
 export const zoomBarStackedBarTimeSeriesData =
 	barChart.stackedBarTimeSeriesData;
-export const zoomBarStackedBarTimeSeriesOptions = updateOptions(
+export const zoomBarStackedBarTimeSeriesOptions = addZoomBarToOptions(
 	Object.assign({}, barChart.stackedBarTimeSeriesOptions)
 );
 
 export const zoomBarBubbleTimeSeriesData = bubbleChart.bubbleTimeSeriesData;
-export const zoomBarBubbleTimeSeriesOptions = updateOptions(
+export const zoomBarBubbleTimeSeriesOptions = addZoomBarToOptions(
 	Object.assign({}, bubbleChart.bubbleTimeSeriesOptions)
 );
 
 export const zoomBarLineTimeSeriesData = lineChart.lineTimeSeriesData;
-export const zoomBarLineTimeSeriesOptions = updateOptions(
+export const zoomBarLineTimeSeriesOptions = addZoomBarToOptions(
 	Object.assign({}, lineChart.lineTimeSeriesOptions)
 );
 
 export const zoomBarScatterTimeSeriesData = scatterChart.scatterTimeSeriesData;
-export const zoomBarScatterTimeSeriesOptions = updateOptions(
+export const zoomBarScatterTimeSeriesOptions = addZoomBarToOptions(
 	Object.assign({}, scatterChart.scatterTimeSeriesOptions)
 );
 
 export const zoomBarStepTimeSeriesData = stepChart.stepTimeSeriesData;
-export const zoomBarStepTimeSeriesOptions = updateOptions(
+export const zoomBarStepTimeSeriesOptions = addZoomBarToOptions(
 	Object.assign({}, stepChart.stepTimeSeriesOptions)
 );
 
 export const zoomBarLineTimeSeries15secondsData =
 	timeSeriesAxisChart.lineTimeSeriesData15seconds;
-export const zoomBarLineTimeSeries15secondsOptions = updateOptions(
+export const zoomBarLineTimeSeries15secondsOptions = addZoomBarToOptions(
 	Object.assign({}, timeSeriesAxisChart.lineTimeSeries15secondsOptions)
 );
 
 export const zoomBarLineTimeSeriesInitDomainData =
 	timeSeriesAxisChart.lineTimeSeriesData15seconds;
-export const zoomBarLineTimeSeriesInitDomainOptions = updateOptions(
+export const zoomBarLineTimeSeriesInitDomainOptions = addZoomBarToOptions(
 	Object.assign({}, timeSeriesAxisChart.lineTimeSeries15secondsOptions)
 );
-zoomBarLineTimeSeriesInitDomainOptions["title"] += " with initial zoom domain";
-zoomBarLineTimeSeriesInitDomainOptions.zoomBar.initZoomDomain = initZoomDomain;
+zoomBarLineTimeSeriesInitDomainOptions["title"] += " zoomed domain";
+zoomBarLineTimeSeriesInitDomainOptions.zoomBar.initialZoomDomain = initialZoomDomain;

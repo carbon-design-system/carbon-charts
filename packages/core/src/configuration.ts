@@ -130,7 +130,6 @@ export const timeScale: TimeScaleOptions = {
  */
 export const zoomBar: ZoomBarOptions = {
 	enabled: false,
-	initZoomDomain: undefined,
 	selectionStart: undefined,
 	selectionInProgress: undefined,
 	selectionEnd: undefined
