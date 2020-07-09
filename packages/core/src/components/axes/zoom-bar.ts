@@ -35,9 +35,9 @@ export class ZoomBar extends Component {
 
 		// get initZoomDomain
 		const zoomBarOptions = this.model.getOptions().zoomBar;
-		if (zoomBarOptions.initZoomDomain !== undefined) {
+		if (zoomBarOptions.initialZoomDomain !== undefined) {
 			this.model.set(
-				{ zoomDomain: zoomBarOptions.initZoomDomain },
+				{ zoomDomain: zoomBarOptions.initialZoomDomain },
 				{ skipUpdate: true }
 			);
 		}
