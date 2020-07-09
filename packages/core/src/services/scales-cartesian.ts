@@ -131,6 +131,16 @@ export class CartesianScales extends Service {
 		return this.scaleTypes[axisPosition];
 	}
 
+	getDomainAxisScaleType() {
+		const domainAxisPosition = this.getDomainAxisPosition();
+		return this.getScaleTypeByPosition(domainAxisPosition);
+	}
+
+	getRangeAxisScaleType() {
+		const rangeAxisPosition = this.getRangeAxisPosition();
+		return this.getScaleTypeByPosition(rangeAxisPosition);
+	}
+
 	getDomainScale() {
 		return this.scales[this.domainAxisPosition];
 	}

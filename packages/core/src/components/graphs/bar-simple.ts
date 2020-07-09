@@ -142,15 +142,19 @@ export class SimpleBar extends Bar {
 
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					type: TooltipTypes.DATAPOINT
+					data: [datum]
 				});
 			})
 			.on("mousemove", function (datum) {
+				const hoveredElement = select(this);
+
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
 					element: select(this),
 					datum
 				});
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on("click", function (datum) {
 				// Dispatch mouse event

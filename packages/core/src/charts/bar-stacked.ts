@@ -14,7 +14,6 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TooltipBar,
 	Skeleton
 } from "../components/index";
 
@@ -52,7 +51,6 @@ export class StackedBarChart extends AxisChart {
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents
 		);
-		components.push(new TooltipBar(this.model, this.services));
 		return components;
 	}
 }

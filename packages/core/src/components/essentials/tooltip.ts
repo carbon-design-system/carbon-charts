@@ -16,7 +16,8 @@ import {
 	TooltipTypes,
 	TooltipPosition,
 	Events,
-	AxisPositions
+	AxisPositions,
+	ScaleTypes
 } from "../../interfaces";
 
 import { format } from "date-fns";
@@ -53,31 +54,18 @@ export class Tooltip extends Component {
 		);
 		this.tooltip.style("max-width", null);
 
+		// listen to move-tooltip Custom Events to move the tooltip
+		this.services.events.addEventListener(Events.Tooltip.MOVE, () => {
+			this.positionTooltip();
+		});
+
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener(Events.Tooltip.SHOW, (e) => {
-			// const data = {
-			// 	items: [
-			// 		{
-			// 			title: "Month",
-			// 			value: "Jan"
-			// 		},
-			// 		{
-			// 			title: "Conversion rate",
-			// 			value: "Jan"
-			// 		},
-			// 		{
-			// 			title: "Audience size",
-			// 			value: "Jan"
-			// 		},
-			// 		{
-			// 			title: "Group",
-			// 			value: "Audience C"
-			// 		}
-			// 	]
-			// };
+			console.log("render tooltip")
 			const { cartesianScales } = this.services;
 			const domainAxisOptions = cartesianScales.getDomainAxisOptions();
 			const domainIdentifier = cartesianScales.getDomainIdentifier();
+			const domainAxisScaleType = cartesianScales.getDomainAxisScaleType();
 			const rangeAxisOptions = cartesianScales.getRangeAxisOptions();
 			const rangeIdentifier = cartesianScales.getRangeIdentifier();
 
@@ -86,32 +74,32 @@ export class Tooltip extends Component {
 
 			// Generate default tooltip
 			let defaultHTML;
-			// if (e.detail.multidata) {
-			// 	// multi tooltip
-			// 	data = e.detail.multidata;
-			// 	defaultHTML = this.getMultilineTooltipHTML(data, e.detail.type);
-			// } else {
-			// 	defaultHTML = this.getTooltipHTML(
-			// 		data,
-			// 		e.detail.type
-			// 	);
-			// }
+
+			const { groupMapsTo } = this.model.getOptions().data;
+			let domainLabel = domainAxisOptions.title;
+			if (!domainLabel) {
+				const domainAxisPosition = cartesianScales.getDomainAxisPosition();
+				if (
+					domainAxisPosition === AxisPositions.BOTTOM ||
+					domainAxisPosition === AxisPositions.TOP
+				) {
+					domainLabel = "x-value";
+				} else {
+					domainLabel = "y-value";
+				}
+			}
+			let domainValue = data[0][domainIdentifier];
+			if (domainAxisScaleType === ScaleTypes.TIME) {
+				domainValue = format(
+					new Date(data[0][domainIdentifier]),
+					"MMM d, p"
+				);
+			}
 
 			let items: any[];
 			if (data.length === 1) {
 				const datum = data[0];
-				const { groupMapsTo } = this.model.getOptions().data;
 
-				let domainLabel = domainAxisOptions.title;
-				if (!domainLabel) {
-					const domainAxisPosition = cartesianScales.getDomainAxisPosition();
-					if (
-						domainAxisPosition === AxisPositions.BOTTOM ||
-						domainAxisPosition === AxisPositions.TOP
-					) {
-						domainLabel = "x-value";
-					}
-				}
 				let rangeLabel = rangeAxisOptions.title;
 				if (!rangeLabel) {
 					const rangeAxisPosition = cartesianScales.getRangeAxisPosition();
@@ -120,13 +108,10 @@ export class Tooltip extends Component {
 						rangeAxisPosition === AxisPositions.RIGHT
 					) {
 						rangeLabel = "y-value";
+					} else {
+						rangeLabel = "x-value";
 					}
 				}
-
-				let domainValue = format(
-					new Date(datum[domainIdentifier]),
-					"MMM d, p"
-				);
 				let rangeValue = datum[rangeIdentifier];
 				items = [
 					{
@@ -143,6 +128,21 @@ export class Tooltip extends Component {
 						color: this.model.getStrokeColor(datum[groupMapsTo])
 					}
 				];
+			} else if (data.length > 1) {
+				items = [
+					{
+						label: domainLabel,
+						value: domainValue
+					}
+				].concat(
+					data.map(datum => ({
+						label: datum[groupMapsTo],
+						value: datum[rangeIdentifier],
+						color: this.model.getStrokeColor(datum[groupMapsTo])
+					})).sort((a, b) => b.value - a.value)
+				);
+			} else {
+				return;
 			}
 
 			defaultHTML =
@@ -189,36 +189,6 @@ export class Tooltip extends Component {
 
 			// Position the tooltip
 			this.positionTooltip();
-			// } else if (e.detail.type === TooltipTypes.TITLE) {
-			// 	const chart = DOMUtils.appendOrSelect(
-			// 		holder,
-			// 		`svg.${settings.prefix}--${chartprefix}--chart-svg`
-			// 	);
-			// 	const chartWidth =
-			// 		DOMUtils.getSVGElementSize(chart).width *
-			// 		Tools.getProperty(
-			// 			this.model.getOptions(),
-			// 			"tooltip",
-			// 			"title",
-			// 			"width"
-			// 		);
-
-			// 	this.tooltip.style("max-width", chartWidth);
-
-			// 	tooltipTextContainer.html(
-			// 		this.getTooltipHTML(
-			// 			e.detail.hoveredElement,
-			// 			TooltipTypes.TITLE
-			// 		)
-			// 	);
-
-			// 	// get the position based on the title positioning (static)
-			// 	const position = this.getTooltipPosition(
-			// 		e.detail.hoveredElement.node(),
-			// 		e.detail.type
-			// 	);
-			// 	this.positionTooltip(position);
-			// }
 
 			// Fade in
 			this.tooltip.classed("hidden", false);

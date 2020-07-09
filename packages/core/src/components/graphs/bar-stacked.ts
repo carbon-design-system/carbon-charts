@@ -173,7 +173,7 @@ export class StackedBar extends Bar {
 							"graph_element_mouseover_fill_update"
 						)
 					)
-					.attr("fill", (d: any) =>
+					.attr("fill", (d) =>
 						color(self.model.getFillColor(d[groupMapsTo]))
 							.darker(0.7)
 							.toString()
@@ -184,14 +184,11 @@ export class StackedBar extends Bar {
 					element: hoveredElement,
 					datum
 				});
-			})
-			.on("mousemove", function (datum) {
+
 				const displayData = self.model.getDisplayData();
-				const hoveredElement = select(this);
 
 				const domainIdentifier = self.services.cartesianScales.getDomainIdentifier();
 				const rangeIdentifier = self.services.cartesianScales.getRangeIdentifier();
-				const { groupMapsTo } = self.model.getOptions().data;
 
 				let matchingDataPoint = displayData.find((d) => {
 					return (
@@ -213,9 +210,20 @@ export class StackedBar extends Bar {
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					data: matchingDataPoint,
+					data: [matchingDataPoint],
 					type: TooltipTypes.DATAPOINT
 				});
+			})
+			.on("mousemove", function (datum) {
+				const hoveredElement = select(this);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
+					element: hoveredElement,
+					datum
+				});
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on("click", function (datum) {
 				// Dispatch mouse event

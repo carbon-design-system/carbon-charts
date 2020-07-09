@@ -283,7 +283,7 @@ export class Scatter extends Component {
 
 		this.parent
 			.selectAll("circle")
-			.on("mouseover mousemove", function (datum) {
+			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -315,23 +315,28 @@ export class Scatter extends Component {
 						);
 					});
 
-				console.log("overlappingData", overlappingData);
-
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					data: overlappingData
 				});
 
-				const eventNameToDispatch =
-					d3Event.type === "mouseover"
-						? Events.Scatter.SCATTER_MOUSEOVER
-						: Events.Scatter.SCATTER_MOUSEMOVE;
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(eventNameToDispatch, {
+				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
 					element: hoveredElement,
 					datum
 				});
+			})
+			.on("mousemove", function(datum) {
+				const hoveredElement = select(this);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
+					element: hoveredElement,
+					datum
+				});
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on("click", function (datum) {
 				// Dispatch mouse event

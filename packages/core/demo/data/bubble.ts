@@ -28,7 +28,8 @@ export const bubbleDoubleLinearOptions = {
 		}
 	},
 	bubble: {
-		radiusMapsTo: "surplus"
+		radiusMapsTo: "surplus",
+		radiusLabel: "Surplus"
 	}
 };
 

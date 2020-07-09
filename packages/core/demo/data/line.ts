@@ -138,7 +138,7 @@ export const lineSelectedGroupsData = [
 	{ group: "Dataset 4", key: "More", value: 1200 },
 	{ group: "Dataset 4", key: "Sold", value: 9000 },
 	{ group: "Dataset 4", key: "Restocking", value: 24000, audienceSize: 10 },
-	{ group: "Dataset 4", key: "Misc", value: 3000, audienceSize: 10 },
+	{ group: "Dataset 4", key: "Misc", value: 3000, audienceSize: 10 }
 ];
 
 export const lineSelectedGroupsOptions = {
@@ -150,14 +150,14 @@ export const lineSelectedGroupsOptions = {
 		bottom: {
 			title: "2019 Annual Sales Figures",
 			mapsTo: "key",
-			scaleType: "labels",
+			scaleType: "labels"
 		},
 		left: {
 			mapsTo: "value",
 			title: "Conversion rate",
-			scaleType: "linear",
-		},
-	},
+			scaleType: "linear"
+		}
+	}
 };
 
 export const lineTimeSeriesData = [

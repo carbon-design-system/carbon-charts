@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes, CartesianOrientations } from "../../interfaces";
+import { TooltipTypes, CartesianOrientations, Events } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -20,6 +20,10 @@ export class Ruler extends Component {
 	type = "ruler";
 	backdrop: GenericSvgSelection;
 	elementsToHighlight: GenericSvgSelection;
+	pointsWithinLine: {
+		domainValue: number;
+		originalData: any;
+	}[];
 
 	render() {
 		this.drawBackdrop();
@@ -39,13 +43,21 @@ export class Ruler extends Component {
 		const displayData = this.model.getDisplayData();
 		const rangeScale = this.services.cartesianScales.getRangeScale();
 		const [yScaleEnd, yScaleStart] = rangeScale.range();
-		const scaledData: {
-			domainValue: number;
-			originalData: any;
-		}[] = displayData.map((d) => ({
-			domainValue: this.services.cartesianScales.getDomainValue(d),
-			originalData: d
-		}));
+
+		const pointsWithinLine = displayData.map((d) => ({
+				domainValue: this.services.cartesianScales.getDomainValue(d),
+				originalData: d
+			}))
+			.filter((d) =>
+				pointIsWithinThreshold(d.domainValue, mouseCoordinate)
+			);
+
+		if (this.pointsWithinLine && pointsWithinLine.length === this.pointsWithinLine.length && pointsWithinLine.map(point => point.domainValue).join() === this.pointsWithinLine.map(point => point.domainValue).join()) {
+			this.pointsWithinLine = pointsWithinLine;
+			return this.services.events.dispatchEvent(Events.Tooltip.MOVE);
+		}
+
+		this.pointsWithinLine = pointsWithinLine;
 
 		/**
 		 * Find matches, reduce is used instead of filter
@@ -54,10 +66,7 @@ export class Ruler extends Component {
 		const dataPointsMatchingRulerLine: {
 			domainValue: number;
 			originalData: any;
-		}[] = scaledData
-			.filter((d) =>
-				pointIsWithinThreshold(d.domainValue, mouseCoordinate)
-			)
+		}[] = this.pointsWithinLine
 			.reduce((accum, currentValue) => {
 				if (accum.length === 0) {
 					accum.push(currentValue);
@@ -128,7 +137,7 @@ export class Ruler extends Component {
 
 			this.services.events.dispatchEvent("show-tooltip", {
 				hoveredElement: rulerLine,
-				multidata: tooltipData,
+				data: tooltipData,
 				type: TooltipTypes.GRIDLINE
 			});
 

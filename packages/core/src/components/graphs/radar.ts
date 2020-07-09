@@ -810,10 +810,20 @@ export class Radar extends Component {
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					multidata: itemsToHighlight,
-					type: TooltipTypes.GRIDLINE
+					data: itemsToHighlight
 				});
 			})
+			// .on("mousemove", function (datum) {
+			// 	const hoveredElement = select(this);
+
+			// 	// Dispatch mouse event
+			// 	self.services.events.dispatchEvent(Events.Radar.X_AXIS_MOUSEMOVE, {
+			// 		element: hoveredElement,
+			// 		datum
+			// 	});
+
+			// 	self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+			// })
 			.on("click", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_CLICK, {
