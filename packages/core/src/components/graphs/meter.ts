@@ -33,7 +33,7 @@ export class Meter extends Component {
 			.attr("height", Tools.getProperty(options, "meter", "height"));
 
 		// value larger than 100 will display as 100% on meter chart
-		const dataset = data.value <= 100 ? data : data["value"] = 100;
+		const dataset = (data.value <= 100) ? data : data["value"] = 100;
 
 		// rect with the value binded
 		const value = svg.selectAll("rect.value")
@@ -63,9 +63,9 @@ export class Meter extends Component {
 		const peakValue = Tools.getProperty(options, "meter", "peak");
 
 		// update the peak if it is less than the value, it should be equal to the value
-		const updatedPeak = peakValue !== null && peakValue < dataset.value ? dataset.value : peakValue;
+		const updatedPeak = (peakValue !== null && peakValue < dataset.value) ? dataset.value : peakValue;
 		// dont display peak if there isnt one
-		const peakData = updatedPeak === null ? [] : [updatedPeak];
+		const peakData = (updatedPeak === null) ? [] : [updatedPeak];
 
 		// if a peak is supplied within the domain, we want to render it
 		const peak = svg.selectAll("line.peak")
