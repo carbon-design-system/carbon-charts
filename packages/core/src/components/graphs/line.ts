@@ -131,7 +131,6 @@ export class Line extends Component {
 
 		this.parent
 			.selectAll("path.line")
-			.selectAll(`g#coverClip`)
 			.transition(
 				this.services.transitions.getTransition("legend-hover-line")
 			)
@@ -142,16 +141,16 @@ export class Line extends Component {
 
 				return Configuration.lines.opacity.selected;
 			});
-	};
+	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
-			.selectAll(`g#coverClip`)
+			.selectAll("path.line")
 			.transition(
 				this.services.transitions.getTransition("legend-mouseout-line")
 			)
 			.attr("opacity", Configuration.lines.opacity.selected);
-	};
+	}
 
 	destroy() {
 		// Remove event listeners
