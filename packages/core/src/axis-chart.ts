@@ -5,7 +5,9 @@ import {
 	LegendOrientations,
 	LegendPositions,
 	ChartConfig,
-	AxisChartOptions
+	AxisChartOptions,
+	AxisPositions,
+	ScaleTypes
 } from "./interfaces";
 import {
 	ChartBrush,
@@ -31,11 +33,26 @@ export class AxisChart extends Chart {
 	}
 
 	protected getAxisChartComponents(graphFrameComponents: any[]) {
-		const zoomBarEnabled = Tools.getProperty(
+		const isZoomBarEnabled = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
 			"enabled"
 		);
+
+		this.services.cartesianScales.findDomainAndRangeAxes(); // need to do this before getMainXAxisPosition()
+		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition();
+		const mainXScaleType = Tools.getProperty(
+			this.model.getOptions(),
+			"axes",
+			mainXAxisPosition,
+			"scaleType"
+		);
+		// @todo - Zoom Bar only supports main axis at BOTTOM axis and time scale for now
+		const zoomBarEnabled =
+			isZoomBarEnabled &&
+			mainXAxisPosition === AxisPositions.BOTTOM &&
+			mainXScaleType === ScaleTypes.TIME;
+
 		const titleComponent = {
 			id: "title",
 			components: [new Title(this.model, this.services)],
