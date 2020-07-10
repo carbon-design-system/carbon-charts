@@ -7,7 +7,7 @@ import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
-	Cover,
+	ChartClip,
 	Grid,
 	GroupedBar,
 	TwoDimensionalAxes,
@@ -40,7 +40,7 @@ export class GroupedBarChart extends AxisChart {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents: any[] = [
 			new TwoDimensionalAxes(this.model, this.services),
-			new Cover(this.model, this.services),
+			new ChartClip(this.model, this.services),
 			new Grid(this.model, this.services),
 			new GroupedBar(this.model, this.services),
 			new ZeroLine(this.model, this.services),

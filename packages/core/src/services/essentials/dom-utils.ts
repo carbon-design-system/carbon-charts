@@ -156,19 +156,19 @@ export class DOMUtils extends Service {
 		const parentOfSelection = parent.select(
 			`${elementToAppend}.${querySections.slice(1).join(" ")}`
 		);
-		const selection = parent.select(`g#g-coverClip`);
+		const selection = parent.select(`g#g-chart-clip`);
 		if (parentOfSelection.empty() && parent) {
 			parent
 				.append(elementToAppend)
-				.attr("id", `coverClip`)
+				.attr("id", `chart-clip`)
 				.append("svg:rect")
 				.attr("class", querySections.slice(1).join(" "));
 		}
 		if (selection.empty() && parent) {
 			parent
 				.append("g")
-				.attr("clip-path", `url(#coverClip)`)
-				.attr("id", `g-coverClip`);
+				.attr("clip-path", `url(#id-chart-clip)`)
+				.attr("id", `g-chart-clip`);
 			return parent;
 		}
 		return selection;
