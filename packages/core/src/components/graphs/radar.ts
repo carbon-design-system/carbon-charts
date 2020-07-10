@@ -800,14 +800,21 @@ export class Radar extends Component {
 
 				const options = self.model.getOptions();
 				const { groupMapsTo } = options.data;
-				const valueMapsTo = Tools.getProperty(options, "radar", "axes", "value");
+				const valueMapsTo = Tools.getProperty(
+					options,
+					"radar",
+					"axes",
+					"value"
+				);
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					items: itemsToHighlight
-						.filter(datum => typeof datum[valueMapsTo] === "number")
-						.map(datum => ({
+						.filter(
+							(datum) => typeof datum[valueMapsTo] === "number"
+						)
+						.map((datum) => ({
 							label: datum[groupMapsTo],
 							value: datum[valueMapsTo],
 							color: self.model.getStrokeColor(datum[groupMapsTo])

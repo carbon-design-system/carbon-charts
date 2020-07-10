@@ -8,7 +8,8 @@ export const pieData = [
 ];
 
 export const pieOptions = {
-	title: "Pie ergreg er ger g345 g 35g 5r3 hg3t h5r 3ghr 4e5gh35r gh34e h4eth  4ethgetr htergh etrhg33",
+	title:
+		"Pie ergreg er ger g345 g 35g 5r3 hg3t h5r 3ghr 4e5gh35r gh34e h4eth  4ethgetr htergh etrhg33",
 	resizable: true
 };
 

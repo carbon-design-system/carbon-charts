@@ -12,7 +12,7 @@ import {
 	Legend,
 	Title,
 	AxisChartsTooltip,
-	Spacer,
+	Spacer
 } from "./components/index";
 import { Tools } from "./tools";
 

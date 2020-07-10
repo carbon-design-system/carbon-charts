@@ -1,11 +1,8 @@
 import { Tooltip } from "./tooltip";
-import {
-	AxisPositions,
-	ScaleTypes
-} from "../../interfaces";
+import { AxisPositions, ScaleTypes } from "../../interfaces";
+import { Tools } from "../../tools";
 
 import { format } from "date-fns";
-
 
 export class AxisChartsTooltip extends Tooltip {
 	getItems(e: CustomEvent) {
@@ -13,6 +10,7 @@ export class AxisChartsTooltip extends Tooltip {
 			return e.detail.items;
 		}
 
+		const options = this.model.getOptions();
 		const data = e.detail.data;
 
 		const { cartesianScales } = this.services;
@@ -88,7 +86,9 @@ export class AxisChartsTooltip extends Tooltip {
 					label: domainLabel,
 					value: domainValue
 				}
-			].concat(
+			];
+			
+			items = items.concat(
 				data
 					.map((datum) => ({
 						label: datum[groupMapsTo],
@@ -97,6 +97,14 @@ export class AxisChartsTooltip extends Tooltip {
 					}))
 					.sort((a, b) => b.value - a.value)
 			);
+
+			if (Tools.getProperty(options, "tooltip", "total") === true) {
+				items.push({
+					label: "Total",
+					value: 10000,
+					bold: true
+				});
+			}
 		}
 
 		return items;

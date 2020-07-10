@@ -58,37 +58,8 @@ export class Tooltip extends Component {
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener(Events.Tooltip.SHOW, (e) => {
 			console.log("render")
-			let defaultHTML;
-			let data = e.detail.data;
-			let items;
-			if (e.detail.content) {
-				defaultHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
-			} else {
-				items = this.getItems(e);
-				defaultHTML =
-					`<ul class='multi-tooltip'>` +
-					items
-						.map(
-							(item) =>
-								`<ul class='multi-tooltip'>
-							<li>
-								<div class="datapoint-tooltip">
-									${
-										item.color
-											? '<a style="background-color: ' +
-											item.color +
-											'" class="tooltip-color"></a>'
-											: ""
-									}
-									<p class="label">${item.label}</p>
-									<p class="value">${item.value}</p>
-								</div>
-							</li>
-						</ul>`
-						)
-						.join("") +
-					`</ul>`;
-			}
+			const data = e.detail.data;
+			const defaultHTML = this.getTooltipHTML(e);
 
 			// if there is a provided tooltip HTML function call it
 			if (
@@ -129,80 +100,36 @@ export class Tooltip extends Component {
 		return [];
 	}
 
-	getTooltipHTML(data: any, type: TooltipTypes) {
-		// check if it is getting styles for a tooltip type
-		if (type === TooltipTypes.TITLE) {
-			const title = this.model.getOptions().title;
-			return `<div class="title-tooltip"><text>${title}</text></div>`;
-		} else if (type === TooltipTypes.LEGEND) {
-			return `<div class="legend-tooltip"><p class="label">${data.name}</p></div>`;
+	getTooltipHTML(e: CustomEvent) {
+		let defaultHTML;
+		if (e.detail.content) {
+			defaultHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
+		} else {
+			const items = this.getItems(e);
+			defaultHTML =
+				`<ul class='multi-tooltip'>` +
+				items
+					.map(
+						(item) =>
+							`<li>
+							<div class="datapoint-tooltip ${item.bold ? "bold" : ""}">
+								${
+									item.color
+										? '<a style="background-color: ' +
+										  item.color +
+										  '" class="tooltip-color"></a>'
+										: ""
+								}
+								<p class="label">${item.label}</p>
+								<p class="value">${item.value}</p>
+							</div>
+						</li>`
+					)
+					.join("") +
+				`</ul>`;
 		}
-		// this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
-		const dataVal = Tools.getProperty(data, "data") ? data.data : data;
-		const { groupMapsTo } = this.model.getOptions().data;
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
-		// format the value if needed
-		const formattedValue = Tools.getProperty(
-			this.model.getOptions(),
-			"tooltip",
-			"valueFormatter"
-		)
-			? this.model
-					.getOptions()
-					.tooltip.valueFormatter(dataVal[rangeIdentifier])
-			: dataVal[rangeIdentifier].toLocaleString("en");
-
-		// pie charts don't have a dataset label since they only support one dataset
-		const label = dataVal[groupMapsTo];
-
-		return `<div class="datapoint-tooltip">
-					<p class="label">${label}</p>
-					<p class="value">${formattedValue}</p>
-				</div>`;
-	}
-
-	getMultilineTooltipHTML(data: any, type: TooltipTypes) {
-		// sort them so they are in the same order as the graph
-		data.sort((a, b) => b.value - a.value);
-
-		// tells us which value to use
-		const scaleType = this.services.cartesianScales.getDomainScale()
-			.scaleType;
-
-		return (
-			"<ul class='multi-tooltip'>" +
-			data
-				.map((datum) => {
-					const { groupMapsTo } = this.model.getOptions().data;
-					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-
-					const userProvidedValueFormatter = Tools.getProperty(
-						this.model.getOptions(),
-						"tooltip",
-						"valueFormatter"
-					);
-					const formattedValue = userProvidedValueFormatter
-						? userProvidedValueFormatter(datum[rangeIdentifier])
-						: datum[rangeIdentifier].toLocaleString("en");
-
-					// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
-					const indicatorColor = this.model.getStrokeColor(
-						datum[groupMapsTo]
-					);
-
-					return `
-				<li>
-					<div class="datapoint-tooltip">
-						<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
-						<p class="label">${datum[groupMapsTo]}</p>
-						<p class="value">${formattedValue}</p>
-					</div>
-				</li>`;
-				})
-				.join("") +
-			"</ul>"
-		);
+		return defaultHTML;
 	}
 
 	render() {

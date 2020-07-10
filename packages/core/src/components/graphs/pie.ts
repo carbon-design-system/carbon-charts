@@ -392,7 +392,9 @@ export class Pie extends Component {
 						{
 							label: datum.data[groupMapsTo],
 							value: datum.data.value,
-							color: self.model.getStrokeColor(datum.data[groupMapsTo])
+							color: self.model.getStrokeColor(
+								datum.data[groupMapsTo]
+							)
 						}
 					]
 				});
