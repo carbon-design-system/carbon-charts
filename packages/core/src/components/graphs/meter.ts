@@ -33,7 +33,7 @@ export class Meter extends Component {
 			.attr("height", Tools.getProperty(options, "meter", "height"));
 
 		// value larger than 100 will display as 100% on meter chart
-		const dataset = data.value <= 100 ? data : data["value"] = 100;
+		const dataset = (data.value <= 100) ? data : data["value"] = 100;
 
 		// rect with the value binded
 		const value = svg.selectAll("rect.value")
