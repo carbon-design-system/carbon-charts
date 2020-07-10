@@ -15,8 +15,7 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
 	Legend,
-	LayoutComponent,
-	TooltipScatter
+	LayoutComponent
 } from "../components/index";
 
 export class AreaChart extends AxisChart {
@@ -53,7 +52,6 @@ export class AreaChart extends AxisChart {
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents
 		);
-		components.push(new TooltipScatter(this.model, this.services));
 		return components;
 	}
 }

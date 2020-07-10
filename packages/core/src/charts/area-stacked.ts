@@ -11,8 +11,7 @@ import {
 	TwoDimensionalAxes,
 	Line,
 	StackedScatter,
-	Ruler,
-	TooltipScatter
+	Ruler
 } from "../components/index";
 
 export class StackedAreaChart extends AxisChart {
@@ -50,8 +49,6 @@ export class StackedAreaChart extends AxisChart {
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents
 		);
-		// TODO add tooltip
-		components.push(new TooltipScatter(this.model, this.services));
 		return components;
 	}
 }

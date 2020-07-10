@@ -11,9 +11,8 @@ import {
 	LayoutComponent,
 	Legend,
 	Title,
-	Tooltip,
-	TooltipBar,
-	Spacer
+	AxisChartsTooltip,
+	Spacer,
 } from "./components/index";
 import { Tools } from "./tools";
 
@@ -137,7 +136,7 @@ export class AxisChart extends Chart {
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [
-			new Tooltip(this.model, this.services),
+			new AxisChartsTooltip(this.model, this.services),
 			new LayoutComponent(
 				this.model,
 				this.services,

@@ -327,7 +327,7 @@ export class Scatter extends Component {
 					datum
 				});
 			})
-			.on("mousemove", function(datum) {
+			.on("mousemove", function (datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event

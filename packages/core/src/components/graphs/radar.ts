@@ -767,17 +767,17 @@ export class Radar extends Component {
 		this.parent
 			.selectAll(".x-axes-rect > rect")
 			.on("mouseover", function (datum) {
+				const hoveredElement = select(this);
+
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Radar.X_AXIS_MOUSEOVER,
 					{
-						element: select(this),
+						element: hoveredElement,
 						datum
 					}
 				);
-			})
-			.on("mousemove", function (datum) {
-				const hoveredElement = select(this);
+
 				const axisLine = self.parent.select(
 					`.x-axes .x-axis-${Tools.kebabCase(datum)}`
 				);
@@ -793,6 +793,30 @@ export class Radar extends Component {
 					.attr("opacity", 1)
 					.attr("r", dotsRadius);
 
+				// get the items that should be highlighted
+				const itemsToHighlight = self.displayDataNormalized.filter(
+					(d) => d[angle] === datum
+				);
+
+				const options = self.model.getOptions();
+				const { groupMapsTo } = options.data;
+				const valueMapsTo = Tools.getProperty(options, "radar", "axes", "value");
+
+				// Show tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					hoveredElement,
+					items: itemsToHighlight
+						.filter(datum => typeof datum[valueMapsTo] === "number")
+						.map(datum => ({
+							label: datum[groupMapsTo],
+							value: datum[valueMapsTo],
+							color: self.model.getStrokeColor(datum[groupMapsTo])
+						}))
+				});
+			})
+			.on("mousemove", function (datum) {
+				const hoveredElement = select(this);
+
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(
 					Events.Radar.X_AXIS_MOUSEMOVE,
@@ -802,28 +826,8 @@ export class Radar extends Component {
 					}
 				);
 
-				// get the items that should be highlighted
-				const itemsToHighlight = self.displayDataNormalized.filter(
-					(d) => d[angle] === datum
-				);
-
-				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					hoveredElement,
-					data: itemsToHighlight
-				});
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
-			// .on("mousemove", function (datum) {
-			// 	const hoveredElement = select(this);
-
-			// 	// Dispatch mouse event
-			// 	self.services.events.dispatchEvent(Events.Radar.X_AXIS_MOUSEMOVE, {
-			// 		element: hoveredElement,
-			// 		datum
-			// 	});
-
-			// 	self.services.events.dispatchEvent(Events.Tooltip.MOVE);
-			// })
 			.on("click", function (datum) {
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Radar.X_AXIS_CLICK, {

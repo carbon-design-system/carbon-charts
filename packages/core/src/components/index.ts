@@ -5,10 +5,7 @@ export * from "./essentials/legend";
 export * from "./essentials/threshold";
 export * from "./essentials/title";
 export * from "./essentials/tooltip";
-export * from "./essentials/tooltip-bar";
-export * from "./essentials/tooltip-pie";
-export * from "./essentials/tooltip-scatter";
-export * from "./essentials/tooltip-radar";
+export * from "./essentials/tooltip-axis";
 
 // GRAPHS
 export * from "./graphs/area";

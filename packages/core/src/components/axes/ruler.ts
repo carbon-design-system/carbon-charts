@@ -44,7 +44,8 @@ export class Ruler extends Component {
 		const rangeScale = this.services.cartesianScales.getRangeScale();
 		const [yScaleEnd, yScaleStart] = rangeScale.range();
 
-		const pointsWithinLine = displayData.map((d) => ({
+		const pointsWithinLine = displayData
+			.map((d) => ({
 				domainValue: this.services.cartesianScales.getDomainValue(d),
 				originalData: d
 			}))
@@ -52,7 +53,12 @@ export class Ruler extends Component {
 				pointIsWithinThreshold(d.domainValue, mouseCoordinate)
 			);
 
-		if (this.pointsWithinLine && pointsWithinLine.length === this.pointsWithinLine.length && pointsWithinLine.map(point => point.domainValue).join() === this.pointsWithinLine.map(point => point.domainValue).join()) {
+		if (
+			this.pointsWithinLine &&
+			pointsWithinLine.length === this.pointsWithinLine.length &&
+			pointsWithinLine.map((point) => point.domainValue).join() ===
+				this.pointsWithinLine.map((point) => point.domainValue).join()
+		) {
 			this.pointsWithinLine = pointsWithinLine;
 			return this.services.events.dispatchEvent(Events.Tooltip.MOVE);
 		}
@@ -66,36 +72,35 @@ export class Ruler extends Component {
 		const dataPointsMatchingRulerLine: {
 			domainValue: number;
 			originalData: any;
-		}[] = this.pointsWithinLine
-			.reduce((accum, currentValue) => {
-				if (accum.length === 0) {
-					accum.push(currentValue);
-					return accum;
-				}
-
-				// store the first element of the accumulator array to compare it with current element being processed
-				const sampleAccumValue = accum[0].domainValue;
-
-				const distanceToCurrentValue = Math.abs(
-					mouseCoordinate - currentValue.domainValue
-				);
-				const distanceToAccumValue = Math.abs(
-					mouseCoordinate - sampleAccumValue
-				);
-
-				if (distanceToCurrentValue > distanceToAccumValue) {
-					// if distance with current value is bigger than already existing value in the accumulator, skip current iteration
-					return accum;
-				} else if (distanceToCurrentValue < distanceToAccumValue) {
-					// currentValue data point is closer to mouse inside the threshold area, so reinstantiate array
-					accum = [currentValue];
-				} else {
-					// currentValue is equal to already stored values, which means there's another match on the same coordinate
-					accum.push(currentValue);
-				}
-
+		}[] = this.pointsWithinLine.reduce((accum, currentValue) => {
+			if (accum.length === 0) {
+				accum.push(currentValue);
 				return accum;
-			}, []);
+			}
+
+			// store the first element of the accumulator array to compare it with current element being processed
+			const sampleAccumValue = accum[0].domainValue;
+
+			const distanceToCurrentValue = Math.abs(
+				mouseCoordinate - currentValue.domainValue
+			);
+			const distanceToAccumValue = Math.abs(
+				mouseCoordinate - sampleAccumValue
+			);
+
+			if (distanceToCurrentValue > distanceToAccumValue) {
+				// if distance with current value is bigger than already existing value in the accumulator, skip current iteration
+				return accum;
+			} else if (distanceToCurrentValue < distanceToAccumValue) {
+				// currentValue data point is closer to mouse inside the threshold area, so reinstantiate array
+				accum = [currentValue];
+			} else {
+				// currentValue is equal to already stored values, which means there's another match on the same coordinate
+				accum.push(currentValue);
+			}
+
+			return accum;
+		}, []);
 
 		// some data point match
 		if (dataPointsMatchingRulerLine.length > 0) {

@@ -20,8 +20,6 @@ import {
 	ScaleTypes
 } from "../../interfaces";
 
-import { format } from "date-fns";
-
 export class Tooltip extends Component {
 	type = "tooltip";
 
@@ -55,119 +53,42 @@ export class Tooltip extends Component {
 		this.tooltip.style("max-width", null);
 
 		// listen to move-tooltip Custom Events to move the tooltip
-		this.services.events.addEventListener(Events.Tooltip.MOVE, () => {
-			this.positionTooltip();
-		});
+		this.services.events.addEventListener(Events.Tooltip.MOVE, this.positionTooltip);
 
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener(Events.Tooltip.SHOW, (e) => {
-			console.log("render tooltip")
-			const { cartesianScales } = this.services;
-			const domainAxisOptions = cartesianScales.getDomainAxisOptions();
-			const domainIdentifier = cartesianScales.getDomainIdentifier();
-			const domainAxisScaleType = cartesianScales.getDomainAxisScaleType();
-			const rangeAxisOptions = cartesianScales.getRangeAxisOptions();
-			const rangeIdentifier = cartesianScales.getRangeIdentifier();
-
-			let data = select(event.target).datum() as any;
-			data = e.detail.data;
-
-			// Generate default tooltip
+			console.log("render")
 			let defaultHTML;
-
-			const { groupMapsTo } = this.model.getOptions().data;
-			let domainLabel = domainAxisOptions.title;
-			if (!domainLabel) {
-				const domainAxisPosition = cartesianScales.getDomainAxisPosition();
-				if (
-					domainAxisPosition === AxisPositions.BOTTOM ||
-					domainAxisPosition === AxisPositions.TOP
-				) {
-					domainLabel = "x-value";
-				} else {
-					domainLabel = "y-value";
-				}
-			}
-			let domainValue = data[0][domainIdentifier];
-			if (domainAxisScaleType === ScaleTypes.TIME) {
-				domainValue = format(
-					new Date(data[0][domainIdentifier]),
-					"MMM d, p"
-				);
-			}
-
-			let items: any[];
-			if (data.length === 1) {
-				const datum = data[0];
-
-				let rangeLabel = rangeAxisOptions.title;
-				if (!rangeLabel) {
-					const rangeAxisPosition = cartesianScales.getRangeAxisPosition();
-					if (
-						rangeAxisPosition === AxisPositions.LEFT ||
-						rangeAxisPosition === AxisPositions.RIGHT
-					) {
-						rangeLabel = "y-value";
-					} else {
-						rangeLabel = "x-value";
-					}
-				}
-				let rangeValue = datum[rangeIdentifier];
-				items = [
-					{
-						label: domainLabel,
-						value: domainValue
-					},
-					{
-						label: rangeLabel,
-						value: rangeValue
-					},
-					{
-						label: "Group",
-						value: datum[groupMapsTo],
-						color: this.model.getStrokeColor(datum[groupMapsTo])
-					}
-				];
-			} else if (data.length > 1) {
-				items = [
-					{
-						label: domainLabel,
-						value: domainValue
-					}
-				].concat(
-					data.map(datum => ({
-						label: datum[groupMapsTo],
-						value: datum[rangeIdentifier],
-						color: this.model.getStrokeColor(datum[groupMapsTo])
-					})).sort((a, b) => b.value - a.value)
-				);
+			let data = e.detail.data;
+			let items;
+			if (e.detail.content) {
+				defaultHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
 			} else {
-				return;
+				items = this.getItems(e);
+				defaultHTML =
+					`<ul class='multi-tooltip'>` +
+					items
+						.map(
+							(item) =>
+								`<ul class='multi-tooltip'>
+							<li>
+								<div class="datapoint-tooltip">
+									${
+										item.color
+											? '<a style="background-color: ' +
+											item.color +
+											'" class="tooltip-color"></a>'
+											: ""
+									}
+									<p class="label">${item.label}</p>
+									<p class="value">${item.value}</p>
+								</div>
+							</li>
+						</ul>`
+						)
+						.join("") +
+					`</ul>`;
 			}
-
-			defaultHTML =
-				`<ul class='multi-tooltip'>` +
-				items
-					.map(
-						(item) =>
-							`<ul class='multi-tooltip'>
-						<li>
-							<div class="datapoint-tooltip">
-								${
-									item.color
-										? '<a style="background-color: ' +
-										  item.color +
-										  '" class="tooltip-color"></a>'
-										: ""
-								}
-								<p class="label">${item.label}</p>
-								<p class="value">${item.value}</p>
-							</div>
-						</li>
-					</ul>`
-					)
-					.join("") +
-				`</ul>`;
 
 			// if there is a provided tooltip HTML function call it
 			if (
@@ -198,6 +119,14 @@ export class Tooltip extends Component {
 		this.services.events.addEventListener(Events.Tooltip.HIDE, () => {
 			this.tooltip.classed("hidden", true);
 		});
+	}
+
+	getItems(e: CustomEvent) {
+		if (e.detail.items) {
+			return e.detail.items;
+		}
+
+		return [];
 	}
 
 	getTooltipHTML(data: any, type: TooltipTypes) {
