@@ -106,12 +106,6 @@ export class Axis extends Component {
 			scale.range([startPosition, endPosition]);
 		}
 
-		// if zoomDomain is available, update scale domain to Date array.
-		const zoomDomain = this.model.get("zoomDomain");
-		if (zoomDomain && axisPosition === AxisPositions.BOTTOM) {
-			scale.domain(zoomDomain);
-		}
-
 		// Identify the corresponding d3 axis function
 		let axisFunction;
 		switch (axisPosition) {
@@ -169,6 +163,13 @@ export class Axis extends Component {
 			axisOptions.scaleType === ScaleTypes.TIME;
 		const scaleType =
 			this.scaleType || axisOptions.scaleType || ScaleTypes.LINEAR;
+
+		// if zoomDomain is available, scale type is time, and axis position isBOTTOM or TOP
+		// update scale domain to zoomDomain.
+		const zoomDomain = this.model.get("zoomDomain");
+		if (zoomDomain && isTimeScaleType && !isVerticalAxis) {
+			scale.domain(zoomDomain);
+		}
 
 		// Initialize axis object
 		const axis = axisFunction(scale).tickSizeOuter(0);
