@@ -1,17 +1,16 @@
 // Internal Imports
 import { Component } from "../component";
-import { Tools } from "../../tools";
 import { ScaleTypes } from "../../interfaces";
 import { DOMUtils } from "../../services";
 
 // D3 Imports
-import { extent } from "d3-array";
 import { brushX } from "d3-brush";
 import { event } from "d3-selection";
 import { scaleTime } from "d3-scale";
 
-export class Brush extends Component {
-	type = "brush";
+// This class is used for handle brush events in chart
+export class ChartBrush extends Component {
+	type = "chart-brush";
 
 	render(animate = true) {
 		const svg = this.parent;
@@ -129,7 +128,7 @@ export class Brush extends Component {
 
 			const brushArea = DOMUtils.appendOrSelect(
 				backdrop,
-				"g.chart-brush"
+				`g.${this.type}`
 			).call(brush);
 		}
 	}
