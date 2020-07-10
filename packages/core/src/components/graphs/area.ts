@@ -26,7 +26,7 @@ export class Area extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG(true);
 		const { cartesianScales } = this.services;
 
 		const orientation = cartesianScales.getOrientation();

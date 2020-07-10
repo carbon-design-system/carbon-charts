@@ -25,7 +25,7 @@ export class Line extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG(true);
 		const { cartesianScales, curves } = this.services;
 
 		const getDomainValue = (d, i) => cartesianScales.getDomainValue(d, i);
@@ -141,7 +141,7 @@ export class Line extends Component {
 
 				return Configuration.lines.opacity.selected;
 			});
-	}
+	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -150,7 +150,7 @@ export class Line extends Component {
 				this.services.transitions.getTransition("legend-mouseout-line")
 			)
 			.attr("opacity", Configuration.lines.opacity.selected);
-	}
+	};
 
 	destroy() {
 		// Remove event listeners

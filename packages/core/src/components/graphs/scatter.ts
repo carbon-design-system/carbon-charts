@@ -52,7 +52,7 @@ export class Scatter extends Component {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG(true);
 
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
