@@ -2,14 +2,12 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 
-// This class is used to create the clipPath to clip the chart graphs
+// This class is used to create the clipPath to clip the chart components
 // It's necessary for zoom in/out behavior
 export class ChartClip extends Component {
 	type = "chart-clip";
 
 	chartClipPath: any;
-
-	clipPathId = "id-" + this.type;
 
 	render(animate = true) {
 		// Create the clipPath
@@ -29,7 +27,7 @@ export class ChartClip extends Component {
 		this.chartClipPath = DOMUtils.appendOrSelect(
 			svg,
 			`clipPath.${this.type}`
-		).attr("id", this.clipPathId);
+		).attr("id", this.chartClipId);
 		const clipRect = DOMUtils.appendOrSelect(
 			this.chartClipPath,
 			`rect.${this.type}`
@@ -41,10 +39,5 @@ export class ChartClip extends Component {
 			.attr("height", yScaleEnd - yScaleStart);
 
 		this.chartClipPath.merge(clipRect).lower();
-
-		const clipG = DOMUtils.appendOrSelect(svg, `g.${this.type}`);
-		clipG
-			.attr("clip-path", `url(#${this.clipPathId})`)
-			.attr("id", `g-${this.type}`);
 	}
 }
