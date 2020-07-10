@@ -36,6 +36,25 @@ export const groupedBarOptions = {
 	}
 };
 
+export const groupedBarSelectedGroupsData = groupedBarData;
+
+// Grouped bar with selected groups option
+export const groupedBarSelectedGroupsOptions = {
+	title: "Grouped bar (selected groups)",
+	data: {
+		selectedGroups: ["Dataset 1", "Dataset 3"]
+	},
+	axes: {
+		left: {
+			mapsTo: "value"
+		},
+		bottom: {
+			scaleType: "labels",
+			mapsTo: "key"
+		}
+	}
+};
+
 // Horizontal Grouped
 export const groupedHorizontalBarData = groupedBarData;
 
@@ -76,23 +95,39 @@ export const simpleBarOptions = {
 
 // Simple bar with long labels
 export const simpleBarLongLabelData = [
-	{ group: "6591DA8668C339B1B39297C61091E320C35391AB7AFC15B469F96B8A2DD0C231", value: 65000 },
-	{ group: "347FEDE2F7403759069E5F84B65B49D2467D8914B5184738699259AA310EB0F9", value: 29123 },
-	{ group: "232D788298773BB389DBB8FCE44D3FB4E878879BE7AFB0B303BCE0D56EBB92E2", value: 35213 },
-	{ group: "58B01AADFA87E5547A218B3C6CE3AF07B8DF7BAB9E12BF60FD2BBB739C46B86E", value: 51213 },
-	{ group: "Qty", value: 16932 },
+	{
+		group:
+			"6591DA8668C339B1B39297C61091E320C35391AB7AFC15B469F96B8A2DD0C231",
+		value: 65000
+	},
+	{
+		group:
+			"347FEDE2F7403759069E5F84B65B49D2467D8914B5184738699259AA310EB0F9",
+		value: 29123
+	},
+	{
+		group:
+			"232D788298773BB389DBB8FCE44D3FB4E878879BE7AFB0B303BCE0D56EBB92E2",
+		value: 35213
+	},
+	{
+		group:
+			"58B01AADFA87E5547A218B3C6CE3AF07B8DF7BAB9E12BF60FD2BBB739C46B86E",
+		value: 51213
+	},
+	{ group: "Qty", value: 16932 }
 ];
 
 export const simpleBarLongLabelOptions = {
 	title: "Simple bar (truncated labels)",
 	axes: {
 		left: {
-			mapsTo: "value",
+			mapsTo: "value"
 		},
 		bottom: {
 			mapsTo: "group",
-			scaleType: "labels",
-		},
+			scaleType: "labels"
+		}
 	},
 	legend: {
 		truncation: {
@@ -144,11 +179,11 @@ export const simpleHorizontalBarLongLabelOptions = {
 				type: "mid_line",
 				threshold: 10,
 				numCharacter: 14
-			},
+			}
 		},
 		bottom: {
-			mapsTo: "value",
-		},
+			mapsTo: "value"
+		}
 	},
 	legend: {
 		truncation: {
@@ -307,12 +342,9 @@ export const simpleBarEmptyStateData = [];
 export const simpleBarEmptyStateOptions = {
 	title: "Simple bar (empty state)",
 	axes: {
-		left: {
-			primary: true
-		},
+		left: {},
 		bottom: {
-			scaleType: "labels",
-			secondary: true
+			scaleType: "labels"
 		}
 	}
 };
@@ -322,12 +354,9 @@ export const simpleBarSkeletonData = [];
 export const simpleBarSkeletonOptions = {
 	title: "Simple bar (skeleton)",
 	axes: {
-		left: {
-			primary: true
-		},
+		left: {},
 		bottom: {
-			scaleType: "labels",
-			secondary: true
+			scaleType: "labels"
 		}
 	},
 	data: {
@@ -340,12 +369,9 @@ export const groupedBarEmptyStateData = [];
 export const groupedBarEmptyStateOptions = {
 	title: "Grouped bar (empty state)",
 	axes: {
-		left: {
-			primary: true
-		},
+		left: {},
 		bottom: {
-			scaleType: "labels",
-			secondary: true
+			scaleType: "labels"
 		}
 	}
 };
@@ -355,12 +381,9 @@ export const groupedBarSkeletonData = [];
 export const groupedBarSkeletonOptions = {
 	title: "Grouped bar (skeleton)",
 	axes: {
-		left: {
-			primary: true
-		},
+		left: {},
 		bottom: {
-			scaleType: "labels",
-			secondary: true
+			scaleType: "labels"
 		}
 	},
 	data: {
@@ -373,12 +396,9 @@ export const stackedBarEmptyStateData = [];
 export const stackedBarEmptyStateOptions = {
 	title: "Stacked bar (empty state)",
 	axes: {
-		left: {
-			primary: true
-		},
+		left: {},
 		bottom: {
-			scaleType: "labels",
-			secondary: true
+			scaleType: "labels"
 		}
 	}
 };
@@ -388,12 +408,9 @@ export const stackedBarSkeletonData = [];
 export const stackedBarSkeletonOptions = {
 	title: "Stacked bar (skeleton)",
 	axes: {
-		left: {
-			primary: true
-		},
+		left: {},
 		bottom: {
-			scaleType: "labels",
-			secondary: true
+			scaleType: "labels"
 		}
 	},
 	data: {
@@ -407,12 +424,9 @@ export const simpleHorizontalBarEmptyStateOptions = {
 	title: "Simple horizontal bar (empty state)",
 	axes: {
 		left: {
-			primary: true,
 			scaleType: "labels"
 		},
-		bottom: {
-			secondary: true
-		}
+		bottom: {}
 	}
 };
 
@@ -422,12 +436,9 @@ export const simpleHorizontalBarSkeletonOptions = {
 	title: "Simple horizontal bar (skeleton)",
 	axes: {
 		left: {
-			primary: true,
 			scaleType: "labels"
 		},
-		bottom: {
-			secondary: true
-		}
+		bottom: {}
 	},
 	data: {
 		loading: true
@@ -440,12 +451,9 @@ export const groupedHorizontalBarEmptyStateOptions = {
 	title: "Grouped horizontal bar (empty state)",
 	axes: {
 		left: {
-			primary: true,
 			scaleType: "labels"
 		},
-		bottom: {
-			secondary: true
-		}
+		bottom: {}
 	}
 };
 
@@ -455,12 +463,9 @@ export const groupedHorizontalBarSkeletonOptions = {
 	title: "Grouped horizontal bar (skeleton)",
 	axes: {
 		left: {
-			primary: true,
 			scaleType: "labels"
 		},
-		bottom: {
-			secondary: true
-		}
+		bottom: {}
 	},
 	data: {
 		loading: true
@@ -473,12 +478,9 @@ export const stackedHorizontalBarEmptyStateOptions = {
 	title: "Stacked horizontal bar (empty state)",
 	axes: {
 		left: {
-			primary: true,
 			scaleType: "labels"
 		},
-		bottom: {
-			secondary: true
-		}
+		bottom: {}
 	}
 };
 
@@ -488,12 +490,9 @@ export const stackedHorizontalBarSkeletonOptions = {
 	title: "Stacked horizontal bar (skeleton)",
 	axes: {
 		left: {
-			primary: true,
 			scaleType: "labels"
 		},
-		bottom: {
-			secondary: true
-		}
+		bottom: {}
 	},
 	data: {
 		loading: true

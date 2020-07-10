@@ -64,8 +64,8 @@ export class Tooltip extends Component {
 						"gridline",
 						"enabled"
 					)) ||
-				(e.detail.type === TooltipTypes.LEGEND) ||
-				(e.detail.type === TooltipTypes.AXISLABEL)
+				e.detail.type === TooltipTypes.LEGEND ||
+				e.detail.type === TooltipTypes.AXISLABEL
 			) {
 				let data = select(event.target).datum() as any;
 
@@ -74,12 +74,12 @@ export class Tooltip extends Component {
 				if (e.detail.multidata) {
 					// multi tooltip
 					data = e.detail.multidata;
-					defaultHTML = this.getMultilineTooltipHTML(data, e.detail.type);
-				} else {
-					defaultHTML = this.getTooltipHTML(
+					defaultHTML = this.getMultilineTooltipHTML(
 						data,
 						e.detail.type
 					);
+				} else {
+					defaultHTML = this.getTooltipHTML(data, e.detail.type);
 				}
 
 				// if there is a provided tooltip HTML function call it

@@ -28,7 +28,7 @@ export enum TruncationTypes {
 	END_LINE = "end_line",
 	MID_LINE = "mid_line",
 	FRONT_LINE = "front_line",
-	NONE = "none",
+	NONE = "none"
 }
 
 /**
