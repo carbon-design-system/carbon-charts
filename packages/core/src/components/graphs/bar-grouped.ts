@@ -44,7 +44,7 @@ export class GroupedBar extends Bar {
 		this.setGroupScale();
 
 		// Grab container SVG
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG(true);
 
 		const allDataLabels = map(
 			displayData,
