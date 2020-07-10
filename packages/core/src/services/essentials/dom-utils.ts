@@ -149,31 +149,6 @@ export class DOMUtils extends Service {
 		return selection;
 	}
 
-	static appendOrSelectForAxisChart(parent, query) {
-		const querySections = query.split(".");
-		const elementToAppend = querySections[0];
-
-		const parentOfSelection = parent.select(
-			`${elementToAppend}.${querySections.slice(1).join(" ")}`
-		);
-		const selection = parent.select(`g#g-chart-clip`);
-		if (parentOfSelection.empty() && parent) {
-			parent
-				.append(elementToAppend)
-				.attr("id", `chart-clip`)
-				.append("svg:rect")
-				.attr("class", querySections.slice(1).join(" "));
-		}
-		if (selection.empty() && parent) {
-			parent
-				.append("g")
-				.attr("clip-path", `url(#id-chart-clip)`)
-				.attr("id", `g-chart-clip`);
-			return parent;
-		}
-		return selection;
-	}
-
 	protected svg: Element;
 	protected width: string;
 	protected height: string;

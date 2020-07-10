@@ -19,6 +19,8 @@ export class Component {
 	protected model: ChartModel;
 	protected services: any;
 
+	protected chartClipId = "chart-clip-id";
+
 	constructor(model: ChartModel, services: any, configs?: any) {
 		this.model = model;
 		this.services = services;
@@ -83,7 +85,7 @@ export class Component {
 		return this.parent;
 	}
 
-	getContainerSVG() {
+	getContainerSVG(withinChartClip = false) {
 		if (this.type) {
 			const chartprefix = Tools.getProperty(
 				this.model.getOptions(),
@@ -91,28 +93,16 @@ export class Component {
 				"prefix"
 			);
 
-			// @todo Chart type equals to axis-chart
-			if (
-				this.type === "line" ||
-				this.type === "scatter" ||
-				this.type === "area" ||
-				this.type === "bubble" ||
-				this.type === "area-stacked" ||
-				this.type === "grouped-bar" ||
-				this.type === "simple-bar" ||
-				this.type === "stacked-bar" ||
-				this.type === "scatter-stacked"
-			) {
-				return DOMUtils.appendOrSelectForAxisChart(
-					this.parent,
-					`clipPath.chart-clip`
-				);
-			} else {
-				return DOMUtils.appendOrSelect(
-					this.parent,
-					`g.${settings.prefix}--${chartprefix}--${this.type}`
-				);
+			const svg = DOMUtils.appendOrSelect(
+				this.parent,
+				`g.${settings.prefix}--${chartprefix}--${this.type}`
+			);
+
+			if (withinChartClip) {
+				svg.attr("clip-path", `url(#${this.chartClipId})`);
 			}
+
+			return svg;
 		}
 
 		return this.parent;
