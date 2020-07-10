@@ -314,9 +314,12 @@ export class ChartModel {
 
 	set(newState: any, configs?: any) {
 		this.state = Object.assign({}, this.state, newState);
-
-		if (!configs || !configs.skipUpdate) {
-			this.update(configs ? configs.animate : true);
+		const newConfig = Object.assign(
+			{ skipUpdate: false, animate: true }, // default configs
+			configs
+		);
+		if (!newConfig.skipUpdate) {
+			this.update(newConfig.animate);
 		}
 	}
 
