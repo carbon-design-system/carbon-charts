@@ -537,7 +537,7 @@ export class ChartModel {
 		}
 
 		// Get group status based on items in selected groups
-		const getStatus = (groupName) => 
+		const getStatus = (groupName) =>
 			!options.data.selectedGroups.length || options.data.selectedGroups.includes(groupName)
 				? ACTIVE
 				: DISABLED;

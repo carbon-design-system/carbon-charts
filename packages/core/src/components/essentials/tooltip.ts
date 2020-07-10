@@ -149,8 +149,7 @@ export class Tooltip extends Component {
 		if (type === TooltipTypes.TITLE) {
 			// title is passed in the event details
 			// meter title uses the dataset title
-			const title = data;
-			return `<div class="title-tooltip"><p>${title}</p></div>`;
+			return `<div class="title-tooltip"><p>${data}</p></div>`;
 		} else if (type === TooltipTypes.LEGEND) {
 			return `<div class="legend-tooltip"><p class="label">${data.name}</p></div>`;
 		}

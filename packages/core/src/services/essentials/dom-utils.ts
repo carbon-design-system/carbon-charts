@@ -169,7 +169,6 @@ export class DOMUtils extends Service {
 
 	update() {
 		this.styleHolderElement();
-		this.setSVGMaxHeight();
 	}
 
 	styleHolderElement() {
@@ -204,6 +203,21 @@ export class DOMUtils extends Service {
 		return this.model.get("holder");
 	}
 
+	addSVGElement() {
+		const chartsprefix = Tools.getProperty(
+			this.model.getOptions(),
+			"style",
+			"prefix"
+		);
+		const svg = select(this.getHolder())
+			.append("svg")
+			.classed(`${settings.prefix}--${chartsprefix}--chart-svg`, true)
+			.attr("height", "100%")
+			.attr("width", "100%");
+
+		this.svg = svg.node();
+	}
+
 	setSVGMaxHeight() {
 		// if there is a set height on the holder, leave the chart svg height at 100%
 		if (!this.model.getOptions().height) {
@@ -221,21 +235,6 @@ export class DOMUtils extends Service {
 			// forcing the chart not to take up any more space than it requires
 			childrenHeight <= chartHeight ?  select(this.svg).attr("height", childrenHeight) : select(this.svg).attr("height", "100%") ;
 		}
-	}
-
-	addSVGElement() {
-		const chartsprefix = Tools.getProperty(
-			this.model.getOptions(),
-			"style",
-			"prefix"
-		);
-		const svg = select(this.getHolder())
-			.append("svg")
-			.classed(`${settings.prefix}--${chartsprefix}--chart-svg`, true)
-			.attr("height", "100%")
-			.attr("width", "100%");
-
-		this.svg = svg.node();
 	}
 
 	getMainSVG() {

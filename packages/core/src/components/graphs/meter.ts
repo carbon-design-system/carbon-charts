@@ -60,7 +60,7 @@ export class Meter extends Component {
 			.attr("aria-label", d => d.value);
 
 		// draw the peak
-		const peakValue = Tools.getProperty(options, "meter", "peak") ?? null;
+		const peakValue = Tools.getProperty(options, "meter", "peak");
 
 		// update the peak if it is less than the value, it should be equal to the value
 		const updatedPeak = peakValue !== null && peakValue < dataset.value ? dataset.value : peakValue;
@@ -86,5 +86,8 @@ export class Meter extends Component {
 			.attr("aria-label", d => d);
 
 		peak.exit().remove();
+
+		// this forces the meter chart to only take up as much height as needed (if no height is provided)
+		this.services.domUtils.setSVGMaxHeight();
 	}
 }
