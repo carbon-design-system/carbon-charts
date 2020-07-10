@@ -63,7 +63,7 @@ export class Meter extends Component {
 		const peakValue = Tools.getProperty(options, "meter", "peak") ?? null;
 
 		// update the peak if it is less than the value, it should be equal to the value
-		const updatedPeak = peakValue !== null && peakValue < dataset.value ? dataset.value : peakValue;
+		const updatedPeak = (peakValue !== null && peakValue < dataset.value) ? dataset.value : peakValue;
 		// dont display peak if there isnt one
 		const peakData = updatedPeak === null ? [] : [updatedPeak];
 
