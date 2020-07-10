@@ -29,7 +29,7 @@ export * from "./layout/layout";
 // MISC
 export * from "./axes/two-dimensional-axes";
 export * from "./axes/axis";
-export * from "./axes/brush";
+export * from "./axes/chart-brush";
 export * from "./axes/chart-clip";
 export * from "./axes/grid";
 export * from "./axes/ruler";
