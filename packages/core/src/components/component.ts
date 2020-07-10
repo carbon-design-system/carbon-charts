@@ -105,7 +105,7 @@ export class Component {
 			) {
 				return DOMUtils.appendOrSelectForAxisChart(
 					this.parent,
-					`clipPath.cover`
+					`clipPath.chart-clip`
 				);
 			} else {
 				return DOMUtils.appendOrSelect(
