@@ -19,7 +19,7 @@ export class Skeleton extends Component {
 		const svg = this.parent;
 		const parent = svg.node().parentNode;
 		const { width, height } = DOMUtils.getSVGElementSize(parent, {
-			useAttrs: true,
+			useAttrs: true
 		});
 		svg.attr("width", width).attr("height", height);
 
@@ -106,7 +106,7 @@ export class Skeleton extends Component {
 		const svg = this.parent;
 		const parent = svg.node().parentNode;
 		const { width, height } = DOMUtils.getSVGElementSize(parent, {
-			useAttrs: true,
+			useAttrs: true
 		});
 
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton.DAII")
@@ -255,7 +255,7 @@ export class Skeleton extends Component {
 		const stopShimmerClass = "stop-shimmer";
 		const container = this.parent.select(".chart-skeleton");
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
-			useAttrs: true,
+			useAttrs: true
 		});
 		const startPoint = 0;
 		const endPoint = width;

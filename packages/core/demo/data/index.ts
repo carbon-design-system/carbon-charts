@@ -145,7 +145,7 @@ let allDemoGroups = [
 				options: barDemos.simpleBarLongLabelOptions,
 				data: barDemos.simpleBarLongLabelData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: barDemos.simpleBarTimeSeriesOptions,
@@ -174,6 +174,11 @@ let allDemoGroups = [
 					"A grouped bar chart, also known as a clustered bar graph, multi-set bar chart, or grouped column chart, is a type of bar graph that is used to compare values across multiple categories.",
 				options: barDemos.groupedBarOptions,
 				data: barDemos.groupedBarData,
+				chartType: chartTypes.GroupedBarChart
+			},
+			{
+				options: barDemos.groupedBarSelectedGroupsOptions,
+				data: barDemos.groupedBarSelectedGroupsData,
 				chartType: chartTypes.GroupedBarChart
 			},
 			{
@@ -226,7 +231,7 @@ let allDemoGroups = [
 				options: barDemos.simpleHorizontalBarLongLabelOptions,
 				data: barDemos.simpleHorizontalBarLongLabelData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
 				options: barDemos.simpleHorizontalBarTimeSeriesOptions,
@@ -355,7 +360,7 @@ let allDemoGroups = [
 			{
 				options: lineDemos.lineTimeSeriesCustomDomainOptions,
 				data: lineDemos.lineTimeSeriesData,
-				chartType: chartTypes.LineChart,
+				chartType: chartTypes.LineChart
 			},
 			{
 				options: lineDemos.lineTimeSeriesDenseOptions,
@@ -370,11 +375,16 @@ let allDemoGroups = [
 			{
 				options: lineDemos.lineLongLabelOptions,
 				data: lineDemos.lineLongLabelData,
-				chartType: chartTypes.LineChart,
+				chartType: chartTypes.LineChart
 			},
 			{
 				options: lineDemos.lineCustomDomainOptions,
 				data: lineDemos.lineData,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineSelectedGroupsOptions,
+				data: lineDemos.lineSelectedGroupsData,
 				chartType: chartTypes.LineChart,
 			},
 			{
@@ -482,7 +492,7 @@ let allDemoGroups = [
 			{
 				options: scatterDemos.scatterLongLabelDiscreteOptions,
 				data: scatterDemos.scatterLongLabelDiscreteData,
-				chartType: chartTypes.ScatterChart,
+				chartType: chartTypes.ScatterChart
 			},
 			{
 				options: scatterDemos.scatterEmptyStateOptions,

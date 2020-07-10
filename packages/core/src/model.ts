@@ -39,12 +39,11 @@ export class ChartModel {
 		this.services = services;
 	}
 
-	getDisplayData() {
+	getAllDataFromDomain() {
 		if (!this.get("data")) {
 			return null;
 		}
 
-		const { ACTIVE } = Configuration.legend.items.status;
 		const dataGroups = this.getDataGroups();
 
 		// Remove datasets that have been disabled
@@ -68,7 +67,8 @@ export class ChartModel {
 
 						// Filter out data outside domain
 						displayData = displayData.filter(
-							(datum) => datum[mapsTo] >= start && datum[mapsTo] <= end
+							(datum) =>
+								datum[mapsTo] >= start && datum[mapsTo] <= end
 						);
 					}
 				}
@@ -76,6 +76,24 @@ export class ChartModel {
 		}
 
 		return displayData.filter((datum) => {
+			return dataGroups.find(
+				(group) => group.name === datum[groupMapsTo]
+			);
+		});
+	}
+
+	getDisplayData() {
+		if (!this.get("data")) {
+			return null;
+		}
+
+		const { ACTIVE } = Configuration.legend.items.status;
+		const dataGroups = this.getDataGroups();
+		const { groupMapsTo } = this.getOptions().data;
+
+		const allDataFromDomain = this.getAllDataFromDomain();
+
+		return allDataFromDomain.filter((datum) => {
 			const group = dataGroups.find(
 				(group) => group.name === datum[groupMapsTo]
 			);
@@ -164,7 +182,7 @@ export class ChartModel {
 			(datum) => datum[domainIdentifier]
 		).keys();
 
-		const axisPosition = this.services.cartesianScales.domainAxisPosition; 
+		const axisPosition = this.services.cartesianScales.domainAxisPosition;
 		const scaleType = options.axes[axisPosition].scaleType;
 
 		// Sort keys
@@ -179,7 +197,7 @@ export class ChartModel {
 			scaleType === ScaleTypes.LINEAR
 		) {
 			stackKeys.sort((a: any, b: any) => a - b);
-		};
+		}
 
 		const dataGroupNames = this.getDataGroupNames();
 
@@ -338,6 +356,22 @@ export class ChartModel {
 			});
 		}
 
+		// Updates selected groups
+		const updatedActiveItems = dataGroups.filter(group => group.status === ACTIVE);
+		const options = this.getOptions();
+
+		const hasUpdatedDeactivatedItems = dataGroups.some(
+			group => group.status === DISABLED
+		);
+
+		// If there are deactivated items, map the item name into selected groups
+		if (hasUpdatedDeactivatedItems) {
+			options.data.selectedGroups = updatedActiveItems.map(activeItem => activeItem.name);
+		} else {
+			// If every item is active, clear array
+			options.data.selectedGroups = [];
+		};
+
 		// dispatch legend filtering event with the status of all the dataLabels
 		this.services.events.dispatchEvent(Events.Legend.ITEMS_UPDATE, {
 			dataGroups
@@ -478,15 +512,32 @@ export class ChartModel {
 
 	protected generateDataGroups(data) {
 		const { groupMapsTo } = this.getOptions().data;
-		const { ACTIVE } = Configuration.legend.items.status;
+		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
+		const options = this.getOptions();
 
 		const uniqueDataGroups = map(
 			data,
 			(datum) => datum[groupMapsTo]
 		).keys();
-		return uniqueDataGroups.map((groupName) => ({
+
+		// check if selectedGroups can be applied to chart with current data groups
+		if (options.data.selectedGroups.length) {
+			const hasAllSelectedGroups = options.data.selectedGroups
+				.every(groupName => uniqueDataGroups.includes(groupName));
+			if (!hasAllSelectedGroups) {
+				options.data.selectedGroups = [];
+			};
+		}
+
+		// Get group status based on items in selected groups
+		const getStatus = (groupName) => 
+			!options.data.selectedGroups.length || options.data.selectedGroups.includes(groupName)
+				? ACTIVE
+				: DISABLED;
+
+		return uniqueDataGroups.map(groupName => ({
 			name: groupName,
-			status: ACTIVE
+			status: getStatus(groupName)
 		}));
 	}
 
