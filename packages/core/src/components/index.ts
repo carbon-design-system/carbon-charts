@@ -30,7 +30,7 @@ export * from "./layout/layout";
 export * from "./axes/two-dimensional-axes";
 export * from "./axes/axis";
 export * from "./axes/brush";
-export * from "./axes/cover";
+export * from "./axes/chart-clip";
 export * from "./axes/grid";
 export * from "./axes/ruler";
 export * from "./axes/ruler-stacked-bar";
