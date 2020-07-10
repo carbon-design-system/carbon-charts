@@ -31,7 +31,7 @@ export class SimpleBar extends Bar {
 		const { groupMapsTo } = options.data;
 
 		// Grab container SVG
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG(true);
 
 		// Update data on all bars
 		const bars = svg
