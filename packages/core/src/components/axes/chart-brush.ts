@@ -23,12 +23,8 @@ export class ChartBrush extends Component {
 		});
 
 		const { cartesianScales } = this.services;
-		const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
-		const mainXScaleType = cartesianScales.getScaleTypeByPosition(
-			mainXAxisPosition
-		);
-
-		const mainXScale = this.services.cartesianScales.getMainXScale();
+		const mainXScaleType = cartesianScales.getMainXScaleType();
+		const mainXScale = cartesianScales.getMainXScale();
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
 			// get current zoomDomain

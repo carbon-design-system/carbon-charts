@@ -54,12 +54,8 @@ export class ZoomBar extends Component {
 		const mainYAxisPosition = cartesianScales.getMainYAxisPosition();
 		const mainXScale = cartesianScales.getMainXScale();
 		const mainYScale = cartesianScales.getMainYScale();
-		const mainXScaleType = cartesianScales.getScaleTypeByPosition(
-			mainXAxisPosition
-		);
-		const mainYScaleType = cartesianScales.getScaleTypeByPosition(
-			mainYAxisPosition
-		);
+		const mainXScaleType = cartesianScales.getMainXScaleType();
+		const mainYScaleType = cartesianScales.getMainYScaleType();
 
 		// get axes margins
 		let axesLeftMargin = 0;
