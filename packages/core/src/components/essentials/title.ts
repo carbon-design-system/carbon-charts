@@ -25,7 +25,7 @@ export class Title extends Component {
 		const title = DOMUtils.appendOrSelect(svg, "text.title");
 
 		// check if title needs truncation (and tooltip support)
-		if (title.node().getComputedTextLength() > maxWidth) {
+		if (title.node().getComputedTextLength() > maxWidth  &&  maxWidth > 0) {
 			this.truncateTitle(title, maxWidth);
 		}
 		text.exit().remove();
