@@ -231,14 +231,12 @@ export class CartesianScales extends Service {
 		return this.getValueThroughAxisPosition(this.rangeAxisPosition, d, i);
 	}
 
-	getXValue(d, i) {
-		const mainXAxisPosition = this.getMainXAxisPosition();
-		return this.getValueThroughAxisPosition(mainXAxisPosition, d, i);
+	getMainXScaleType() {
+		return this.getScaleTypeByPosition(this.getMainXAxisPosition());
 	}
 
-	getYValue(d, i) {
-		const mainYAxisPosition = this.getMainYAxisPosition();
-		return this.getValueThroughAxisPosition(mainYAxisPosition, d, i);
+	getMainYScaleType() {
+		return this.getScaleTypeByPosition(this.getMainYAxisPosition());
 	}
 
 	getDomainIdentifier() {
