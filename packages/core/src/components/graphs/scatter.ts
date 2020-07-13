@@ -144,7 +144,8 @@ export class Scatter extends Component {
 	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
 		// Chart options mixed with the internal configurations
 		const options = this.model.getOptions();
-		const { filled } = options.points;
+		const { filled, fillOpacity } = options.points;
+		console.log(options.points);
 		const { cartesianScales, transitions } = this.services;
 
 		const { groupMapsTo } = options.data;
@@ -210,7 +211,7 @@ export class Scatter extends Component {
 					);
 				}
 			})
-			.attr("fill-opacity", filled ? 0.2 : 1)
+			.attr("fill-opacity", filled ? fillOpacity : 1)
 			.attr("stroke", (d) =>
 				this.model.getStrokeColor(
 					d[groupMapsTo],
