@@ -1,6 +1,6 @@
 // Internal Imports
 import { Component } from "../component";
-import { ScaleTypes } from "../../interfaces";
+import { Events, ScaleTypes } from "../../interfaces";
 import { DOMUtils } from "../../services";
 
 // D3 Imports
@@ -51,29 +51,19 @@ export class ChartBrush extends Component {
 						event.sourceEvent.type === "mouseup" ||
 						event.sourceEvent.type === "mousedown")
 				) {
-					// call external callback
-					const zoomBarOptions = this.model.getOptions().zoomBar;
-					if (
-						zoomBarOptions.selectionStart !== undefined &&
-						event.type === "start"
-					) {
-						zoomBarOptions.selectionStart(selection, newDomain);
+					// dispatch selection events
+					let zoomBarEventType;
+					if (event.type === "start") {
+						zoomBarEventType = Events.ZoomBar.SELECTION_START;
+					} else if (event.type === "brush") {
+						zoomBarEventType = Events.ZoomBar.SELECTION_IN_PROGRESS;
+					} else if (event.type === "end") {
+						zoomBarEventType = Events.ZoomBar.SELECTION_END;
 					}
-					if (
-						zoomBarOptions.selectionInProgress !== undefined &&
-						event.type === "brush"
-					) {
-						zoomBarOptions.selectionInProgress(
-							selection,
-							newDomain
-						);
-					}
-					if (
-						zoomBarOptions.selectionEnd !== undefined &&
-						event.type === "end"
-					) {
-						zoomBarOptions.selectionEnd(selection, newDomain);
-					}
+					this.services.events.dispatchEvent(zoomBarEventType, {
+						selection,
+						newDomain
+					});
 				}
 			};
 			const brushed = () => {
