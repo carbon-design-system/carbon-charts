@@ -197,7 +197,11 @@ export class ZoomBar extends Component {
 				// don't update brushHandle to avoid flash
 			} else if (zoomDomain[0].valueOf() === zoomDomain[1].valueOf()) {
 				brushArea.call(this.brush.move, xScale.range()); // default to full range
-				this.updateBrushHandle(this.getContainerSVG(), xScale.range());
+				this.updateBrushHandle(
+					this.getContainerSVG(),
+					xScale.range(),
+					xScale.domain()
+				);
 			} else {
 				const selected = zoomDomain.map((domain) => xScale(domain));
 				if (selected[1] - selected[0] < this.MIN_SELECTION_DIFF) {
@@ -205,7 +209,11 @@ export class ZoomBar extends Component {
 					// don't update brushHandle to avoid flash
 				} else {
 					brushArea.call(this.brush.move, selected); // set brush to correct position
-					this.updateBrushHandle(this.getContainerSVG(), selected);
+					this.updateBrushHandle(
+						this.getContainerSVG(),
+						selected,
+						zoomDomain
+					);
 				}
 			}
 		}
@@ -213,13 +221,13 @@ export class ZoomBar extends Component {
 
 	// brush event listener
 	brushed(zoomDomain, scale, selection) {
-		// update brush handle position
-		this.updateBrushHandle(this.getContainerSVG(), selection);
-
 		const newDomain = [
 			scale.invert(selection[0]),
 			scale.invert(selection[1])
 		];
+
+		// update brush handle position
+		this.updateBrushHandle(this.getContainerSVG(), selection, newDomain);
 
 		// be aware that the value of d3.event changes during an event!
 		// update zoomDomain only if the event comes from mouse event
@@ -254,7 +262,20 @@ export class ZoomBar extends Component {
 		}
 	}
 
-	updateBrushHandle(svg, selection) {
+	updateBrushHandleTooltip(svg, domain) {
+		// remove old handle tooltip
+		svg.select("title").remove();
+		// add new handle tooltip
+		svg.append("title").text((d) => {
+			if (d.type === "w") {
+				return domain[0];
+			} else if (d.type === "e") {
+				return domain[1];
+			}
+		});
+	}
+
+	updateBrushHandle(svg, selection, domain) {
 		const handleWidth = 5;
 		const handleHeight = this.height;
 		const handleXDiff = -handleWidth / 2;
@@ -263,6 +284,7 @@ export class ZoomBar extends Component {
 		const handleBarHeight = 12;
 		const handleBarXDiff = -handleBarWidth / 2;
 		const handleYBarDiff = (handleHeight - handleBarHeight) / 2;
+
 		// handle
 		svg.select(this.brushSelector)
 			.selectAll("rect.handle")
@@ -277,7 +299,10 @@ export class ZoomBar extends Component {
 			.attr("y", 0)
 			.attr("width", handleWidth)
 			.attr("height", handleHeight)
-			.style("display", null); // always display
+			.attr("cursor", "pointer")
+			.style("display", null) // always display
+			.call(this.updateBrushHandleTooltip, domain);
+
 		// handle-bar
 		svg.select(this.brushSelector)
 			.selectAll("rect.handle-bar")
@@ -296,7 +321,8 @@ export class ZoomBar extends Component {
 			.attr("y", handleYBarDiff)
 			.attr("width", handleBarWidth)
 			.attr("height", handleBarHeight)
-			.attr("cursor", "ew-resize");
+			.attr("cursor", "pointer")
+			.call(this.updateBrushHandleTooltip, domain);
 
 		this.updateClipPath(
 			svg,
