@@ -1,0 +1,9 @@
+.#{$prefix}--#{$charts-prefix}--chart-brush {
+	g.chart-brush {
+		rect.selection {
+			fill: $ui-03;
+			fill-opacity: 0.3;
+			stroke: $interactive-03;
+		}
+	}
+}

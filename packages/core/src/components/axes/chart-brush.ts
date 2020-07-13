@@ -10,7 +10,11 @@ import { scaleTime } from "d3-scale";
 
 // This class is used for handle brush events in chart
 export class ChartBrush extends Component {
+	static DASH_LENGTH = 4;
+
 	type = "chart-brush";
+
+	selectionSelector = "rect.selection"; // needs to match the class name in d3.brush
 
 	render(animate = true) {
 		const svg = this.parent;
@@ -35,8 +39,36 @@ export class ChartBrush extends Component {
 				this.model.set({ zoomDomain: zoomDomain }, { animate: false });
 			}
 
+			const updateSelectionDash = (selection) => {
+				// set end drag point to dash
+				const selectionWidth = selection[1] - selection[0];
+				let dashArray = "0," + selectionWidth.toString(); // top (invisible)
+
+				// right
+				const dashCount = Math.floor(height / ChartBrush.DASH_LENGTH);
+				const totalRightDash = dashCount * ChartBrush.DASH_LENGTH;
+				for (let i = 0; i < dashCount; i++) {
+					dashArray += "," + ChartBrush.DASH_LENGTH; // for each full length dash
+				}
+				dashArray += "," + (height - totalRightDash); // for rest of the right height
+				// if dash count is even, one more ",0" is needed to make total right dash pattern even
+				if (dashCount % 2 === 1) {
+					dashArray += ",0";
+				}
+
+				dashArray += "," + selectionWidth.toString(); // bottom (invisible)
+				dashArray += "," + height.toString(); // left
+
+				brushArea
+					.select(this.selectionSelector)
+					.attr("stroke-dasharray", dashArray);
+			};
+
 			const eventHandler = () => {
 				const selection = event.selection;
+
+				updateSelectionDash(selection);
+
 				const xScale = scaleTime().range([0, width]).domain(zoomDomain);
 
 				const newDomain = [
@@ -106,8 +138,8 @@ export class ChartBrush extends Component {
 			// leave some space to display selection strokes besides axis
 			const brush = brushX()
 				.extent([
-					[2, 0],
-					[width - 1, height - 1]
+					[0, 0],
+					[width - 1, height]
 				])
 				.on("start brush end", eventHandler)
 				.on("end.brushed", brushed);
