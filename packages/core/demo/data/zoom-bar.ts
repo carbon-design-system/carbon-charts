@@ -6,39 +6,15 @@ import * as scatterChart from "./scatter";
 import * as stepChart from "./step";
 import * as timeSeriesAxisChart from "./time-series-axis";
 
-// default function for selection callback
-const selectionStartFun = (selection, domain) => {
-	console.log("ZoomBar SelectionStart callback!");
-	console.log(selection);
-	console.log(domain);
-};
-const selectionInProgressFun = (selection, domain) => {
-	console.log("ZoomBar SelectionInProgress callback!");
-	console.log(selection);
-	console.log(domain);
-};
-const selectionEndFun = (selection, domain) => {
-	console.log("ZoomBar SelectionEnd callback!");
-	console.log(selection);
-	console.log(domain);
-};
-
 const initialZoomDomain = [
 	new Date(2020, 11, 10, 23, 59, 25),
 	new Date(2020, 11, 11, 0, 0, 25)
 ];
 
-const defaultZoomBarOptions = {
-	enabled: true,
-	selectionStart: selectionStartFun,
-	selectionInProgress: selectionInProgressFun,
-	selectionEnd: selectionEndFun
-};
-
 // utility function to update title and enable zoomBar option
 const addZoomBarToOptions = (options) => {
 	options["title"] = options["title"] + " - Zoom bar enabled";
-	options["zoomBar"] = Object.assign({}, defaultZoomBarOptions);
+	options["zoomBar"] = { enabled: true };
 	return options;
 };
 
