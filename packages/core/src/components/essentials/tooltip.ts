@@ -59,7 +59,6 @@ export class Tooltip extends Component {
 
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener(Events.Tooltip.SHOW, (e) => {
-			console.log("render");
 			const data = e.detail.data;
 			const defaultHTML = this.getTooltipHTML(e);
 
@@ -134,6 +133,17 @@ export class Tooltip extends Component {
 		return defaultHTML;
 	}
 
+	valueFormatter(value: any) {
+		const options = this.model.getOptions();
+		const valueFormatter = Tools.getProperty(options, "tooltip", "valueFormatter");
+
+		if (valueFormatter) {
+			return valueFormatter(value);
+		}
+
+		return value.toLocaleString();
+	}
+
 	render() {
 		this.tooltip.classed("hidden", true);
 	}
@@ -177,9 +187,7 @@ export class Tooltip extends Component {
 				})
 			);
 
-			let {
-				horizontalOffset
-			} = this.model.getOptions().tooltip;
+			let { horizontalOffset } = this.model.getOptions().tooltip;
 			if (bestPlacementOption === PLACEMENTS.LEFT) {
 				horizontalOffset *= -1;
 			}

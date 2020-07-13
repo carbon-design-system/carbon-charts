@@ -6,8 +6,6 @@ import {
 	AxesOptions
 } from "./index";
 import {
-	AxisTooltipOptions,
-	BarTooltipOptions,
 	BarOptions,
 	StackedBarOptions
 } from "./components";
@@ -117,7 +115,6 @@ export interface AxisChartOptions extends BaseChartOptions {
 	axes?: AxesOptions;
 	grid?: GridOptions;
 	timeScale?: TimeScaleOptions;
-	tooltip?: AxisTooltipOptions;
 }
 
 /**
@@ -125,7 +122,6 @@ export interface AxisChartOptions extends BaseChartOptions {
  */
 export interface BarChartOptions extends AxisChartOptions {
 	bars?: BarOptions;
-	tooltip?: BarTooltipOptions;
 }
 
 /**

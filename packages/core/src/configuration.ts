@@ -17,8 +17,6 @@ import {
 	AxesOptions,
 	TimeScaleOptions,
 	TooltipOptions,
-	AxisTooltipOptions,
-	BarTooltipOptions,
 	LegendOptions,
 	LegendPositions,
 	TruncationTypes,
@@ -82,39 +80,9 @@ export const grid: GridOptions = {
  */
 export const baseTooltip: TooltipOptions = {
 	horizontalOffset: 10,
-	datapoint: {
-		enabled: true
-	},
-	title: {
-		verticalOffset: 0.75,
-		width: 0.4
-	},
-	
+	showTotal: true,
+	valueFormatter: d => d.toLocaleString()
 };
-
-export const axisChartTooltip: AxisTooltipOptions = Tools.merge(
-	{},
-	baseTooltip,
-	{
-		gridline: {
-			enabled: true,
-			threshold: 0.02
-		}
-	} as AxisTooltipOptions
-);
-
-export const barChartTooltip: BarTooltipOptions = Tools.merge(
-	{},
-	axisChartTooltip,
-	{
-		datapoint: {
-			verticalOffset: 4
-		},
-		gridline: {
-			enabled: false
-		}
-	} as BarTooltipOptions
-);
 
 // These options will be managed by Tools.mergeDefaultChartOptions
 // by removing the ones the user is not providing,
@@ -184,7 +152,6 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	timeScale,
 	grid,
-	tooltip: axisChartTooltip
 } as AxisChartOptions);
 
 /**
@@ -197,7 +164,6 @@ const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: 1
 	} as TimeScaleOptions),
-	tooltip: barChartTooltip
 } as BarChartOptions);
 
 /**

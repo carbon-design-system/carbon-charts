@@ -84,7 +84,7 @@ export class AxisChartsTooltip extends Tooltip {
 			items = [
 				{
 					label: domainLabel,
-					value: domainValue
+					value: this.valueFormatter(domainValue)
 				}
 			];
 
@@ -92,16 +92,22 @@ export class AxisChartsTooltip extends Tooltip {
 				data
 					.map((datum) => ({
 						label: datum[groupMapsTo],
-						value: datum[rangeIdentifier],
+						value: this.valueFormatter(datum[rangeIdentifier]),
 						color: this.model.getStrokeColor(datum[groupMapsTo])
 					}))
 					.sort((a, b) => b.value - a.value)
 			);
 
-			if (Tools.getProperty(options, "tooltip", "total") === true) {
+			if (Tools.getProperty(options, "tooltip", "showTotal") === true) {
 				items.push({
 					label: "Total",
-					value: data.reduce((accumulator, datum) => accumulator + datum[rangeIdentifier], 0),
+					value: this.valueFormatter(
+						data.reduce(
+							(accumulator, datum) =>
+								accumulator + datum[rangeIdentifier],
+							0
+						)
+					),
 					bold: true
 				});
 			}

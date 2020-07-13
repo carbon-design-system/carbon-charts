@@ -68,28 +68,9 @@ export interface TooltipOptions {
 	 */
 	horizontalOffset?: number;
 	/**
-	 *  options to configure the datapoint tooltip
+	 * show total of items
 	 */
-	datapoint?: {
-		/**
-		 * toggles on/off datapoint tooltips.
-		 */
-		enabled?: boolean;
-		/**
-		 * vertical offset for tooltip placement
-		 */
-		verticalOffset?: number;
-	};
-	title?: {
-		/**
-		 * vertical offset for title tooltip placement. < 0 shifts the tooltip above title, > 0 shifts vertically down
-		 */
-		verticalOffset?: number;
-		/**
-		 * max width of title tooltip relative to the width of the chart-svg (percentage should be < 1)
-		 */
-		width?: number;
-	};
+	showTotal?: boolean;
 }
 
 /**
@@ -112,35 +93,6 @@ export interface ThresholdOptions {
 	 * threshold label
 	 */
 	label: string;
-}
-
-/**
- * extends tooltip options to provide support for multiple gridline tooltips
- */
-export interface AxisTooltipOptions extends TooltipOptions {
-	/** options for gridline event listeners */
-	gridline?: {
-		/**
-		 * controls whether the gridlines are active for tooltip support
-		 */
-		enabled?: boolean;
-		/**
-		 * optional set threshold (value between 0 and 1) for active gridlines
-		 */
-		threshold?: number;
-	};
-}
-
-/**
- * extends tooltip for bar tooltip
- */
-export interface BarTooltipOptions extends TooltipOptions {
-	datapoint: {
-		/**
-		 * padding between the bar items and the tooltip
-		 */
-		verticalOffset: number;
-	};
 }
 
 export interface GridOptions {

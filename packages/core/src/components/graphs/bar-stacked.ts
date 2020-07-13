@@ -66,7 +66,10 @@ export class StackedBar extends Bar {
 		const bars = svg
 			.selectAll("g.bars")
 			.selectAll("path.bar")
-			.data(d => d, (d) => d.data.sharedStackKey);
+			.data(
+				(d) => d,
+				(d) => d.data.sharedStackKey
+			);
 
 		// Remove bars that need to be removed
 		bars.exit().remove();
