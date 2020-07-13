@@ -64,8 +64,8 @@ export class Tooltip extends Component {
 						"gridline",
 						"enabled"
 					)) ||
-				(e.detail.type === TooltipTypes.LEGEND) ||
-				(e.detail.type === TooltipTypes.AXISLABEL)
+				e.detail.type === TooltipTypes.LEGEND ||
+				e.detail.type === TooltipTypes.AXISLABEL
 			) {
 				let data = select(event.target).datum() as any;
 
@@ -74,12 +74,12 @@ export class Tooltip extends Component {
 				if (e.detail.multidata) {
 					// multi tooltip
 					data = e.detail.multidata;
-					defaultHTML = this.getMultilineTooltipHTML(data, e.detail.type);
-				} else {
-					defaultHTML = this.getTooltipHTML(
+					defaultHTML = this.getMultilineTooltipHTML(
 						data,
 						e.detail.type
 					);
+				} else {
+					defaultHTML = this.getTooltipHTML(data, e.detail.type);
 				}
 
 				// if there is a provided tooltip HTML function call it
@@ -238,7 +238,7 @@ export class Tooltip extends Component {
 				elementPosition.left -
 				holderPosition.left +
 				elementPosition.width / 2,
-			top: elementPosition.top - holderPosition.top - verticalOffset,
+			top: elementPosition.top - holderPosition.top - verticalOffset
 		};
 
 		return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
@@ -268,23 +268,23 @@ export class Tooltip extends Component {
 			const bestPlacementOption = this.positionService.findBestPlacementAt(
 				{
 					left: mouseRelativePos[0],
-					top: mouseRelativePos[1],
+					top: mouseRelativePos[1]
 				},
 				target,
 				[
 					PLACEMENTS.RIGHT,
 					PLACEMENTS.LEFT,
 					PLACEMENTS.TOP,
-					PLACEMENTS.BOTTOM,
+					PLACEMENTS.BOTTOM
 				],
 				() => ({
 					width: holder.offsetWidth,
-					height: holder.offsetHeight,
+					height: holder.offsetHeight
 				})
 			);
 
 			let {
-				horizontalOffset,
+				horizontalOffset
 			} = this.model.getOptions().tooltip.datapoint;
 			if (bestPlacementOption === PLACEMENTS.LEFT) {
 				horizontalOffset *= -1;
@@ -294,7 +294,7 @@ export class Tooltip extends Component {
 			pos = this.positionService.findPositionAt(
 				{
 					left: mouseRelativePos[0] + horizontalOffset,
-					top: mouseRelativePos[1],
+					top: mouseRelativePos[1]
 				},
 				target,
 				bestPlacementOption

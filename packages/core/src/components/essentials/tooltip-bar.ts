@@ -5,7 +5,7 @@ import {
 	TooltipPosition,
 	TooltipTypes,
 	CartesianOrientations,
-	Events,
+	Events
 } from "./../../interfaces";
 
 // import the settings for the css prefix
@@ -53,8 +53,8 @@ export class TooltipBar extends Tooltip {
 						"gridline",
 						"enabled"
 					)) ||
-				(e.detail.type === TooltipTypes.LEGEND) ||
-				(e.detail.type === TooltipTypes.AXISLABEL)
+				e.detail.type === TooltipTypes.LEGEND ||
+				e.detail.type === TooltipTypes.AXISLABEL
 			) {
 				let data = e.detail.hoveredElement.datum() as any;
 				const hoveredElement = e.detail.hoveredElement.node();
@@ -91,12 +91,20 @@ export class TooltipBar extends Tooltip {
 					// default tooltip
 					tooltipTextContainer.html(defaultHTML);
 				}
-				if ((e.detail.type === TooltipTypes.LEGEND) || (e.detail.type === TooltipTypes.AXISLABEL)) {
+				if (
+					e.detail.type === TooltipTypes.LEGEND ||
+					e.detail.type === TooltipTypes.AXISLABEL
+				) {
 					this.positionTooltip();
 				} else {
-					const position = this.getTooltipPosition(hoveredElement, data);
+					const position = this.getTooltipPosition(
+						hoveredElement,
+						data
+					);
 					// Position the tooltip relative to the bars
-					this.positionTooltip(e.detail.multidata ? undefined : position);
+					this.positionTooltip(
+						e.detail.multidata ? undefined : position
+					);
 				}
 			} else if (e.detail.type === TooltipTypes.TITLE) {
 				// use the chart size to enforce a max width on the tooltip
@@ -165,7 +173,7 @@ export class TooltipBar extends Tooltip {
 					barPosition.left -
 					holderPosition.left +
 					barPosition.width / 2,
-				top: barPosition.bottom - holderPosition.top + verticalOffset,
+				top: barPosition.bottom - holderPosition.top + verticalOffset
 			};
 
 			return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
@@ -176,7 +184,7 @@ export class TooltipBar extends Tooltip {
 					barPosition.left -
 					holderPosition.left +
 					barPosition.width / 2,
-				top: barPosition.top - holderPosition.top - verticalOffset,
+				top: barPosition.top - holderPosition.top - verticalOffset
 			};
 
 			return { placement: TooltipPosition.TOP, position: tooltipPos };
@@ -194,13 +202,15 @@ export class TooltipBar extends Tooltip {
 			return `<div class="axis-tooltip"><p class="label">${data}</p></div>`;
 		}
 
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+
 		const formattedValue = Tools.getProperty(
 			this.model.getOptions(),
 			"tooltip",
 			"valueFormatter"
 		)
 			? this.model.getOptions().tooltip.valueFormatter(data.value)
-			: data.value.toLocaleString("en");
+			: data[rangeIdentifier].toLocaleString("en");
 
 		return `<div class="datapoint-tooltip"><p class="value">${formattedValue}</p></div>`;
 	}

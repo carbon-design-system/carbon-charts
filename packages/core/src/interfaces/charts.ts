@@ -1,8 +1,4 @@
-import {
-	GaugeTypes,
-	Statuses,
-	ArrowDirections
-} from "./enums";
+import { GaugeTypes, Statuses, ArrowDirections } from "./enums";
 import {
 	LegendOptions,
 	TooltipOptions,
@@ -97,6 +93,11 @@ export interface BaseChartOptions {
 		 * used to simulate data loading
 		 */
 		loading?: Boolean;
+		/**
+		 * options related to pre-selected data groups
+		 * Remains empty if every legend item is active or dataset doesn't have the data groups.
+		 */
+		selectedGroups?: string[];
 	};
 	/**
 	 * options related to color scales
@@ -183,10 +184,10 @@ export interface LineChartOptions extends ScatterChartOptions {
 	 * options for the curve of the line
 	 */
 	curve?:
-	| string
-	| {
-		name: string;
-	};
+		| string
+		| {
+				name: string;
+		  };
 }
 
 /**
@@ -254,7 +255,7 @@ export interface GaugeChartOptions extends PieChartOptions {
 			direction?: ArrowDirections;
 			size?: Function;
 			enabled: Boolean;
-		}
+		};
 		status?: Statuses;
 		deltaFontSize?: Function;
 		numberSpacing?: number;

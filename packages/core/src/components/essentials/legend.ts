@@ -2,7 +2,13 @@
 import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { LegendOrientations, Roles, Events, TooltipTypes, TruncationTypes } from "../../interfaces";
+import {
+	LegendOrientations,
+	Roles,
+	Events,
+	TooltipTypes,
+	TruncationTypes
+} from "../../interfaces";
 import { DOMUtils } from "../../services";
 
 // D3 Imports
@@ -27,7 +33,10 @@ export class Legend extends Component {
 		const addedLegendItems = legendItems
 			.enter()
 			.append("g")
-			.classed("legend-item", true);
+			.classed("legend-item", true)
+			.classed("active", function (d, i) {
+				return d.status === options.legend.items.status.ACTIVE;
+			});
 
 		// Configs
 		const checkboxRadius = options.legend.checkbox.radius;
@@ -72,17 +81,19 @@ export class Legend extends Component {
 
 		// truncate the legend label if it's too long
 		if (truncationType !== TruncationTypes.NONE) {
-			addedLegendItemsText
-				.html(function(d) {
-					if (d.name.length > truncationThreshold) {
-						return Tools.truncateLabel(d.name, truncationType, truncationNumCharacter);
-					} else {
-						return d.name;
-					}
-				});
+			addedLegendItemsText.html(function (d) {
+				if (d.name.length > truncationThreshold) {
+					return Tools.truncateLabel(
+						d.name,
+						truncationType,
+						truncationNumCharacter
+					);
+				} else {
+					return d.name;
+				}
+			});
 		} else {
-			addedLegendItemsText
-				.html((d) => d.name);
+			addedLegendItemsText.html((d) => d.name);
 		}
 
 		this.breakItemsIntoLines(addedLegendItems);
@@ -208,14 +219,24 @@ export class Legend extends Component {
 				legendItem
 					.select("text")
 					.attr("x", startingPoint + spaceNeededForCheckbox)
-					.attr("y", yOffset + yPosition + 2);
+					.attr("y", yOffset + yPosition + 3);
 
 				lastYPosition = yPosition;
 
+				// Test if legendItems are placed in the correct direction
+				const testHorizontal = (!legendOrientation ||
+					legendOrientation === LegendOrientations.HORIZONTAL) &&
+					legendItem.select("rect.checkbox").attr("y") === '0';
+
+				const testVertical = legendOrientation === LegendOrientations.VERTICAL &&
+					legendItem.select("rect.checkbox").attr("x") === '0';
+
+				const hasCorrectLegendDirection = testHorizontal || testVertical;
+
 				// Render checkbox check icon
-				if (
-					hasDeactivatedItems &&
-					legendItem.select("g.check").empty()
+				if (hasDeactivatedItems &&
+					legendItem.select("g.check").empty() &&
+					hasCorrectLegendDirection
 				) {
 					legendItem.append("g").classed("check", true).html(`
 							<svg focusable="false" preserveAspectRatio="xMidYMid meet"
@@ -268,12 +289,11 @@ export class Legend extends Component {
 		svg.selectAll("g.legend-item")
 			.on("mouseover", function () {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_HOVER, {
-					hoveredElement: select(this),
+					hoveredElement: select(this)
 				});
 
 				// Configs
 				const checkboxRadius = options.legend.checkbox.radius;
-
 				const hoveredItem = select(this);
 				hoveredItem
 					.append("rect")
@@ -298,7 +318,7 @@ export class Legend extends Component {
 			})
 			.on("click", function () {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
-					clickedElement: select(this),
+					clickedElement: select(this)
 				});
 
 				const clickedItem = select(this);
@@ -311,9 +331,9 @@ export class Legend extends Component {
 				const hoveredItemData = hoveredItem.datum() as any;
 				if (hoveredItemData.name.length > truncationThreshold) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					hoveredElement: hoveredItem,
-					type: TooltipTypes.LEGEND,
-				});
+						hoveredElement: hoveredItem,
+						type: TooltipTypes.LEGEND
+					});
 				}
 			})
 			.on("mouseout", function () {
@@ -325,7 +345,7 @@ export class Legend extends Component {
 				self.services.events.dispatchEvent(
 					Events.Legend.ITEM_MOUSEOUT,
 					{
-						hoveredElement: hoveredItem,
+						hoveredElement: hoveredItem
 					}
 				);
 			});

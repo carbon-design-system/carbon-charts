@@ -4,7 +4,7 @@ import {
 	LayoutDirection,
 	LayoutGrowth,
 	LayoutComponentChild,
-	LayoutConfigs,
+	LayoutConfigs
 } from "../../interfaces/index";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
@@ -93,11 +93,11 @@ export class LayoutComponent extends Component {
 		// Get parent SVG to render inside of
 		const svg = this.parent;
 		const { width, height } = DOMUtils.getSVGElementSize(svg, {
-			useAttrs: true,
+			useAttrs: true
 		});
 
 		let root = hierarchy({
-			children: this.children,
+			children: this.children
 		}).sum((d: any) => d.size);
 
 		// Grab the correct treemap tile function based on direction
@@ -162,6 +162,18 @@ export class LayoutComponent extends Component {
 				select(this),
 				{ useBBox: true }
 			);
+
+			if (d.data.id === "legend") {
+				const svgSize = DOMUtils.getSVGElementSize(
+					select(this),
+					{ useAttrs: true }
+				);
+
+				if (svgSize.height < 40) {
+					matchingSVGDimensions.height = svgSize.height;
+				}
+			}
+
 			if (growth === LayoutGrowth.PREFERRED) {
 				const matchingSVGWidth = horizontal
 					? matchingSVGDimensions.width
@@ -189,7 +201,7 @@ export class LayoutComponent extends Component {
 		// Pass children data to the hierarchy layout
 		// And calculate sum of sizes
 		root = hierarchy({
-			children: this.children,
+			children: this.children
 		}).sum((d: any) => d.size);
 
 		// Compute the position of all elements within the layout
