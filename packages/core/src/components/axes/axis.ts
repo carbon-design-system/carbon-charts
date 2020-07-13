@@ -437,7 +437,12 @@ export class Axis extends Component {
 
 		// we don't need to show axes on empty state and on skeleton state
 		// because the Skeleton component draws them
-		if (this.model.isDataEmpty()) {
+		const isDataLoading = Tools.getProperty(
+			options,
+			"data",
+			"loading"
+		);
+		if (this.model.isDataEmpty() && isDataLoading) {
 			container.attr("opacity", 0);
 		}
 
