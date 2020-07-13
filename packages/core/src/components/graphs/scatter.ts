@@ -145,7 +145,6 @@ export class Scatter extends Component {
 		// Chart options mixed with the internal configurations
 		const options = this.model.getOptions();
 		const { filled, fillOpacity } = options.points;
-		console.log(options.points);
 		const { cartesianScales, transitions } = this.services;
 
 		const { groupMapsTo } = options.data;
