@@ -53,11 +53,13 @@ export class Tooltip extends Component {
 		this.tooltip.style("max-width", null);
 
 		// listen to move-tooltip Custom Events to move the tooltip
-		this.services.events.addEventListener(Events.Tooltip.MOVE, this.positionTooltip);
+		this.services.events.addEventListener(Events.Tooltip.MOVE, () => {
+			this.positionTooltip();
+		});
 
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener(Events.Tooltip.SHOW, (e) => {
-			console.log("render")
+			console.log("render");
 			const data = e.detail.data;
 			const defaultHTML = this.getTooltipHTML(e);
 
@@ -136,27 +138,6 @@ export class Tooltip extends Component {
 		this.tooltip.classed("hidden", true);
 	}
 
-	// returns static position based on the element
-	getTooltipPosition(hoveredElement, type: TooltipTypes) {
-		const holderPosition = select(this.services.domUtils.getHolder())
-			.node()
-			.getBoundingClientRect();
-		const elementPosition = hoveredElement.getBoundingClientRect();
-
-		// get the vertical offset
-		const { verticalOffset } = this.model.getOptions().tooltip.title;
-
-		const tooltipPos = {
-			left:
-				elementPosition.left -
-				holderPosition.left +
-				elementPosition.width / 2,
-			top: elementPosition.top - holderPosition.top - verticalOffset
-		};
-
-		return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
-	}
-
 	positionTooltip(positionOverride?: any) {
 		const holder = this.services.domUtils.getHolder();
 		const target = this.tooltip.node();
@@ -198,7 +179,7 @@ export class Tooltip extends Component {
 
 			let {
 				horizontalOffset
-			} = this.model.getOptions().tooltip.datapoint;
+			} = this.model.getOptions().tooltip;
 			if (bestPlacementOption === PLACEMENTS.LEFT) {
 				horizontalOffset *= -1;
 			}

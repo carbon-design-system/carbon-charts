@@ -87,7 +87,7 @@ export class AxisChartsTooltip extends Tooltip {
 					value: domainValue
 				}
 			];
-			
+
 			items = items.concat(
 				data
 					.map((datum) => ({
@@ -101,7 +101,7 @@ export class AxisChartsTooltip extends Tooltip {
 			if (Tools.getProperty(options, "tooltip", "total") === true) {
 				items.push({
 					label: "Total",
-					value: 10000,
+					value: data.reduce((accumulator, datum) => accumulator + datum[rangeIdentifier], 0),
 					bold: true
 				});
 			}

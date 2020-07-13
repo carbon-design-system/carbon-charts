@@ -44,10 +44,6 @@ export class StackedBar extends Bar {
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 
 		// Create the data and keys that'll be used by the stack layout
-		const stackKeys = map(
-			displayData,
-			(datum) => datum[domainIdentifier]
-		).keys();
 		const stackData = this.model.getStackedData();
 
 		// Update data on all bar groups
@@ -70,7 +66,7 @@ export class StackedBar extends Bar {
 		const bars = svg
 			.selectAll("g.bars")
 			.selectAll("path.bar")
-			.data((data) => data);
+			.data(d => d, (d) => d.data.sharedStackKey);
 
 		// Remove bars that need to be removed
 		bars.exit().remove();
@@ -87,7 +83,7 @@ export class StackedBar extends Bar {
 			)
 			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
 			.attr("d", (d, i) => {
-				const key = stackKeys[i];
+				const key = d.data.sharedStackKey;
 
 				/*
 				 * Orientation support for horizontal/vertical bar charts

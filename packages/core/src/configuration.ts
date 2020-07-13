@@ -81,14 +81,15 @@ export const grid: GridOptions = {
  * Tooltip options
  */
 export const baseTooltip: TooltipOptions = {
+	horizontalOffset: 10,
 	datapoint: {
-		horizontalOffset: 10,
 		enabled: true
 	},
 	title: {
 		verticalOffset: 0.75,
 		width: 0.4
-	}
+	},
+	
 };
 
 export const axisChartTooltip: AxisTooltipOptions = Tools.merge(

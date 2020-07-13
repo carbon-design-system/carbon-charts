@@ -64,13 +64,13 @@ export interface TooltipOptions {
 	 */
 	customHTML?: Function;
 	/**
+	 * offset of the tooltip from the mouse position
+	 */
+	horizontalOffset?: number;
+	/**
 	 *  options to configure the datapoint tooltip
 	 */
 	datapoint?: {
-		/**
-		 * offset of the tooltip from the mouse position
-		 */
-		horizontalOffset?: number;
 		/**
 		 * toggles on/off datapoint tooltips.
 		 */
