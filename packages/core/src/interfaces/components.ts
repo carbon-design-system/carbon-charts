@@ -128,17 +128,4 @@ export interface ZoomBarOptions {
 	 * an two element array which represents the initial zoom domain
 	 */
 	initialZoomDomain?: Object[];
-
-	/**
-	 * a function to handle selection start event
-	 */
-	selectionStart?: Function;
-	/**
-	 * a function to handle selection in progress event
-	 */
-	selectionInProgress?: Function;
-	/**
-	 * a function to handle selection end event
-	 */
-	selectionEnd?: Function;
 }
