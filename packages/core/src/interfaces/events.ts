@@ -102,6 +102,7 @@ export enum Radar {
  */
 export enum Tooltip {
 	SHOW = "show-tooltip",
+	MOVE = "move-tooltip",
 	HIDE = "hide-tooltip"
 }
 

@@ -221,6 +221,7 @@ export class Chart {
 		topLevelLayoutComponents.push(fullFrameComponent);
 
 		return [
+			new Tooltip(this.model, this.services),
 			new LayoutComponent(
 				this.model,
 				this.services,

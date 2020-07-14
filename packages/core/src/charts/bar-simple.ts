@@ -11,7 +11,6 @@ import {
 	SimpleBar,
 	TwoDimensionalAxes,
 	ZeroLine,
-	TooltipBar,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Tooltip,
 	Legend,
@@ -51,7 +50,6 @@ export class SimpleBarChart extends AxisChart {
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents
 		);
-		components.push(new TooltipBar(this.model, this.services));
 		return components;
 	}
 }

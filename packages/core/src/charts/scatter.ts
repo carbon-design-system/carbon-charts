@@ -15,7 +15,6 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TooltipScatter,
 	Skeleton
 } from "../components/index";
 
@@ -54,7 +53,6 @@ export class ScatterChart extends AxisChart {
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents
 		);
-		components.push(new TooltipScatter(this.model, this.services));
 		return components;
 	}
 }

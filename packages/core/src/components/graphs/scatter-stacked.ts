@@ -1,10 +1,6 @@
 // Internal Imports
 import { Scatter } from "./scatter";
-import { TooltipTypes, Roles, Events } from "../../interfaces";
-import { Tools } from "../../tools";
-
-// D3 Imports
-import { select, Selection, event as d3Event } from "d3-selection";
+import { Roles } from "../../interfaces";
 
 export class StackedScatter extends Scatter {
 	type = "scatter-stacked";

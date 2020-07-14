@@ -65,6 +65,20 @@ export class CartesianScales extends Service {
 		return this.rangeAxisPosition;
 	}
 
+	getAxisOptions(position: AxisPositions) {
+		return Tools.getProperty(this.model.getOptions(), "axes", position);
+	}
+
+	getDomainAxisOptions() {
+		const domainAxisPosition = this.getDomainAxisPosition();
+		return this.getAxisOptions(domainAxisPosition);
+	}
+
+	getRangeAxisOptions() {
+		const rangeAxisPosition = this.getRangeAxisPosition();
+		return this.getAxisOptions(rangeAxisPosition);
+	}
+
 	update(animate = true) {
 		this.findDomainAndRangeAxes();
 		this.determineOrientation();
@@ -115,6 +129,16 @@ export class CartesianScales extends Service {
 
 	getScaleTypeByPosition(axisPosition: AxisPositions) {
 		return this.scaleTypes[axisPosition];
+	}
+
+	getDomainAxisScaleType() {
+		const domainAxisPosition = this.getDomainAxisPosition();
+		return this.getScaleTypeByPosition(domainAxisPosition);
+	}
+
+	getRangeAxisScaleType() {
+		const rangeAxisPosition = this.getRangeAxisPosition();
+		return this.getScaleTypeByPosition(rangeAxisPosition);
 	}
 
 	getDomainScale() {
