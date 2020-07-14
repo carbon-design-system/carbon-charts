@@ -45,6 +45,7 @@ export class Axis extends Component {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
 		const axisScaleType = Tools.getProperty(axisOptions, "scaleType");
+		const isDataLoading = Tools.getProperty(options, "data", "loading");
 		const numberOfTicksProvided = Tools.getProperty(
 			axisOptions,
 			"ticks",
@@ -277,11 +278,12 @@ export class Axis extends Component {
 
 		// Position the axis title
 		// check that data exists, if they don't, doesn't show the title axis
+		const isDataEmpty = this.model.isDataEmpty();
 		if (axisOptions.title) {
 			const axisTitleRef = DOMUtils.appendOrSelect(
 				container,
 				`text.axis-title`
-			).html(this.model.isDataEmpty() ? "" : axisOptions.title);
+			).html((isDataEmpty || isDataLoading) ? "" : axisOptions.title);
 
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
@@ -437,7 +439,7 @@ export class Axis extends Component {
 
 		// we don't need to show axes on empty state and on skeleton state
 		// because the Skeleton component draws them
-		if (this.model.isDataEmpty()) {
+		if (isDataEmpty || isDataLoading) {
 			container.attr("opacity", 0);
 		}
 

@@ -56,8 +56,14 @@ export class AxisChart extends Chart {
 			}
 		};
 
+		// if the chart is loading but has data, don't enable legend until loading is false
+		const isDataLoading = Tools.getProperty(
+			this.model.getOptions(),
+			"data",
+			"loading"
+		);
 		const isLegendEnabled =
-			this.model.getOptions().legend.enabled !== false;
+			this.model.getOptions().legend.enabled !== false && !isDataLoading;
 
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
@@ -103,7 +109,7 @@ export class AxisChart extends Chart {
 					this.services,
 					[
 						...(isLegendEnabled ? [legendComponent] : []),
-						legendSpacerComponent,
+						...(isLegendEnabled ? [legendSpacerComponent] : []),
 						graphFrameComponent
 					],
 					{
