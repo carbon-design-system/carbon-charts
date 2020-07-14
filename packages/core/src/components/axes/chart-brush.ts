@@ -16,14 +16,22 @@ export class ChartBrush extends Component {
 
 	selectionSelector = "rect.selection"; // needs to match the class name in d3.brush
 
-	selectionElementId = "ChartBrushSelectionId";
+	frontSelectionSelector = "rect.frontSelection"; // needs to match the class name in _chart-brush.scss
 
 	render(animate = true) {
 		const svg = this.parent;
+		// use this area to display selection above all graphs
+		const frontSelectionArea = this.getContainerSVG();
 		const backdrop = DOMUtils.appendOrSelect(
 			svg,
 			"svg.chart-grid-backdrop"
 		);
+		// use this area to handle d3 brush events
+		const brushArea = DOMUtils.appendOrSelect(backdrop, `g.${this.type}`);
+
+		// set an id for rect.selection to be referred
+		const d3Selection = brushArea.select(this.selectionSelector);
+
 		const { width, height } = DOMUtils.getSVGElementSize(backdrop, {
 			useAttrs: true
 		});
@@ -31,6 +39,12 @@ export class ChartBrush extends Component {
 		const { cartesianScales } = this.services;
 		const mainXScaleType = cartesianScales.getMainXScaleType();
 		const mainXScale = cartesianScales.getMainXScale();
+		const [xScaleStart, xScaleEnd] = mainXScale.range();
+		frontSelectionArea.attr("transform", `translate(${xScaleStart},0)`);
+		const frontSelection = DOMUtils.appendOrSelect(
+			frontSelectionArea,
+			this.frontSelectionSelector
+		);
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
 			// get current zoomDomain
@@ -61,9 +75,7 @@ export class ChartBrush extends Component {
 				dashArray += "," + selectionWidth.toString(); // bottom (invisible)
 				dashArray += "," + height.toString(); // left
 
-				brushArea
-					.select(this.selectionSelector)
-					.attr("stroke-dasharray", dashArray);
+				frontSelection.attr("stroke-dasharray", dashArray);
 			};
 
 			const eventHandler = () => {
@@ -71,6 +83,14 @@ export class ChartBrush extends Component {
 				if (selection === null) {
 					return;
 				}
+
+				// copy the d3 selection attrs to front selection element
+				frontSelection
+					.attr("x", d3Selection.attr("x"))
+					.attr("y", d3Selection.attr("y"))
+					.attr("width", d3Selection.attr("width"))
+					.attr("height", d3Selection.attr("height"))
+					.style("display", null);
 
 				updateSelectionDash(selection);
 
@@ -137,6 +157,8 @@ export class ChartBrush extends Component {
 
 					// clear brush selection
 					brushArea.call(brush.move, null);
+					// hide frontSelection
+					frontSelection.style("display", "none");
 				}
 			};
 
@@ -149,30 +171,7 @@ export class ChartBrush extends Component {
 				.on("start brush end", eventHandler)
 				.on("end.brushed", brushed);
 
-			const brushArea = DOMUtils.appendOrSelect(
-				backdrop,
-				`g.${this.type}`
-			).call(brush);
-
-			// set an id for rect.selection to be referred
-			brushArea
-				.select(this.selectionSelector)
-				.attr("id", this.selectionElementId);
-
-			// create the chart brush group
-			const [xScaleStart, xScaleEnd] = mainXScale.range();
-			const selectionArea = this.getContainerSVG().attr(
-				"transform",
-				`translate(${xScaleStart},0)`
-			);
-			// clear old svg
-			selectionArea.selectAll("svg").remove();
-			// create a svg referring to d3 brush rect.selection
-			// this is to draw the selection above all graphs
-			selectionArea
-				.append("svg")
-				.append("use")
-				.attr("xlink:href", `#${this.selectionElementId}`);
+			brushArea.call(brush);
 		}
 	}
 }
