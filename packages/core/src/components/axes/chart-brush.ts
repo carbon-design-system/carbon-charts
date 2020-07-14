@@ -16,6 +16,8 @@ export class ChartBrush extends Component {
 
 	selectionSelector = "rect.selection"; // needs to match the class name in d3.brush
 
+	selectionElementId = "ChartBrushSelectionId";
+
 	render(animate = true) {
 		const svg = this.parent;
 		const backdrop = DOMUtils.appendOrSelect(
@@ -66,6 +68,9 @@ export class ChartBrush extends Component {
 
 			const eventHandler = () => {
 				const selection = event.selection;
+				if (selection === null) {
+					return;
+				}
 
 				updateSelectionDash(selection);
 
@@ -148,6 +153,26 @@ export class ChartBrush extends Component {
 				backdrop,
 				`g.${this.type}`
 			).call(brush);
+
+			// set an id for rect.selection to be referred
+			brushArea
+				.select(this.selectionSelector)
+				.attr("id", this.selectionElementId);
+
+			// create the chart brush group
+			const [xScaleStart, xScaleEnd] = mainXScale.range();
+			const selectionArea = this.getContainerSVG().attr(
+				"transform",
+				`translate(${xScaleStart},0)`
+			);
+			// clear old svg
+			selectionArea.selectAll("svg").remove();
+			// create a svg referring to d3 brush rect.selection
+			// this is to draw the selection above all graphs
+			selectionArea
+				.append("svg")
+				.append("use")
+				.attr("xlink:href", `#${this.selectionElementId}`);
 		}
 	}
 }
