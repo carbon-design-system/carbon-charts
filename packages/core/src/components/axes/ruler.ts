@@ -39,7 +39,9 @@ export class Ruler extends Component {
 		const orientation: CartesianOrientations = this.services.cartesianScales.getOrientation();
 		const mouseCoordinate =
 			orientation === CartesianOrientations.HORIZONTAL ? y : x;
-		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler");
+		const ruler = DOMUtils
+			.appendOrSelect(svg, "g.ruler")
+			.attr("aria-label", "ruler");
 		const rulerLine = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
 		const dataPointElements: GenericSvgSelection = svg.selectAll(
 			"[role=graphics-symbol]"

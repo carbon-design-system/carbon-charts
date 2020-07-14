@@ -54,7 +54,8 @@ export class StackedBar extends Bar {
 			.enter()
 			.append("g")
 			.classed("bars", true)
-			.attr("role", Roles.GROUP);
+			.attr("role", Roles.GROUP)
+			.attr("aria-label", "bars");
 
 		// Update data on all bars
 		const bars = svg
@@ -120,7 +121,7 @@ export class StackedBar extends Bar {
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "bar")
-			.attr("aria-label", (d) => d.value);
+			.attr("aria-label", (d) => d[1]-d[0]);
 
 		// Add event listeners for the above elements
 		this.addEventListeners();
