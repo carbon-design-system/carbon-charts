@@ -283,7 +283,7 @@ export class Axis extends Component {
 			const axisTitleRef = DOMUtils.appendOrSelect(
 				container,
 				`text.axis-title`
-			).html((isDataEmpty || isDataLoading) ? "" : axisOptions.title);
+			).html(isDataEmpty || isDataLoading ? "" : axisOptions.title);
 
 			switch (axisPosition) {
 				case AxisPositions.LEFT:

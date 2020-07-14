@@ -205,11 +205,7 @@ export class DOMUtils extends Service {
 
 	addSVGElement() {
 		const options = this.model.getOptions();
-		const chartsprefix = Tools.getProperty(
-			options,
-			"style",
-			"prefix"
-		);
+		const chartsprefix = Tools.getProperty(options, "style", "prefix");
 
 		const svg = select(this.getHolder())
 			.append("svg")
@@ -217,8 +213,9 @@ export class DOMUtils extends Service {
 			.attr("height", "100%")
 			.attr("width", "100%");
 
-		svg.append("title")
-			.text(Tools.getProperty(options, "title") || "Chart");
+		svg.append("title").text(
+			Tools.getProperty(options, "title") || "Chart"
+		);
 
 		this.svg = svg.node();
 	}
