@@ -29,6 +29,8 @@ export class Axis extends Component {
 	scale: any;
 	scaleType: ScaleTypes;
 
+	zoomDomainChanging = false;
+
 	constructor(model: ChartModel, services: any, configs?: any) {
 		super(model, services, configs);
 
@@ -37,6 +39,25 @@ export class Axis extends Component {
 		}
 
 		this.margins = this.configs.margins;
+		this.init();
+	}
+
+	init() {
+		this.services.events.addEventListener(
+			Events.ZoomBar.SELECTION_START,
+			() => {
+				this.zoomDomainChanging = true;
+			}
+		);
+		this.services.events.addEventListener(
+			Events.ZoomBar.SELECTION_END,
+			() => {
+				this.zoomDomainChanging = false;
+				// need another update after zoom bar selection is completed
+				// to make sure the tick rotation is calculated correctly
+				this.services.events.dispatchEvent(Events.Model.UPDATE, {});
+			}
+		);
 	}
 
 	render(animate = true) {
@@ -438,7 +459,9 @@ export class Axis extends Component {
 					? estimatedTickSize < minTickSize * 2 // datetime tick could be very long
 					: estimatedTickSize < minTickSize;
 			}
-			if (rotateTicks) {
+
+			// always rotate ticks if zoomDomain is changing to avoid rotation flips during zoomDomain changing
+			if (rotateTicks || this.zoomDomainChanging) {
 				if (!isNumberOfTicksProvided) {
 					axis.ticks(
 						this.getNumberOfFittingTicks(
@@ -653,5 +676,13 @@ export class Axis extends Component {
 			.on("mouseover", null)
 			.on("mousemove", null)
 			.on("mouseout", null);
+		this.services.events.removeEventListener(
+			Events.ZoomBar.SELECTION_START,
+			{}
+		);
+		this.services.events.removeEventListener(
+			Events.ZoomBar.SELECTION_END,
+			{}
+		);
 	}
 }
