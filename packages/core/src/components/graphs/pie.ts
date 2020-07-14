@@ -2,12 +2,7 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import {
-	CalloutDirections,
-	Roles,
-	TooltipTypes,
-	Events
-} from "../../interfaces";
+import { CalloutDirections, Roles, Events } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -366,13 +361,6 @@ export class Pie extends Component {
 		this.parent
 			.selectAll("path.slice")
 			.on("mouseover", function (datum) {
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
-					element: select(this),
-					datum
-				});
-			})
-			.on("mousemove", function (datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -385,16 +373,37 @@ export class Pie extends Component {
 					.attr("d", self.hoverArc);
 
 				// Dispatch mouse event
+				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEOVER, {
+					element: select(this),
+					datum
+				});
+
+				const { groupMapsTo } = self.model.getOptions().data;
+				// Show tooltip
+				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+					hoveredElement,
+					items: [
+						{
+							label: datum.data[groupMapsTo],
+							value: datum.data.value,
+							color: self.model.getStrokeColor(
+								datum.data[groupMapsTo]
+							)
+						}
+					]
+				});
+			})
+			.on("mousemove", function (datum) {
+				const hoveredElement = select(this);
+
+				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Pie.SLICE_MOUSEMOVE, {
 					element: hoveredElement,
 					datum
 				});
 
 				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					hoveredElement,
-					type: TooltipTypes.DATAPOINT
-				});
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on("click", function (datum) {
 				// Dispatch mouse event

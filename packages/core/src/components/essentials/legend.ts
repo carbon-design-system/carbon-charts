@@ -1,12 +1,10 @@
 // Internal Imports
-import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
 import {
 	LegendOrientations,
 	Roles,
 	Events,
-	TooltipTypes,
 	TruncationTypes
 } from "../../interfaces";
 import { DOMUtils } from "../../services";
@@ -319,6 +317,17 @@ export class Legend extends Component {
 					.attr("rx", 3)
 					.attr("ry", 3)
 					.lower();
+
+				const hoveredItemData = hoveredItem.datum() as any;
+				if (hoveredItemData.name.length > truncationThreshold) {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						hoveredElement: hoveredItem,
+						content: hoveredItemData.name
+					});
+				}
+			})
+			.on("mousemove", function () {
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on("click", function () {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
@@ -329,16 +338,6 @@ export class Legend extends Component {
 				const clickedItemData = clickedItem.datum() as any;
 
 				self.model.toggleDataLabel(clickedItemData.name);
-			})
-			.on("mousemove", function () {
-				const hoveredItem = select(this);
-				const hoveredItemData = hoveredItem.datum() as any;
-				if (hoveredItemData.name.length > truncationThreshold) {
-					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-						hoveredElement: hoveredItem,
-						type: TooltipTypes.LEGEND
-					});
-				}
 			})
 			.on("mouseout", function () {
 				const hoveredItem = select(this);

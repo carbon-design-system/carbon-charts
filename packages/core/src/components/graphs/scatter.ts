@@ -1,10 +1,10 @@
 // Internal Imports
 import { Component } from "../component";
-import { TooltipTypes, Roles, Events } from "../../interfaces";
+import { Roles, Events } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
-import { select, Selection, event as d3Event } from "d3-selection";
+import { select, Selection } from "d3-selection";
 
 export class Scatter extends Component {
 	type = "scatter";
@@ -283,7 +283,7 @@ export class Scatter extends Component {
 
 		this.parent
 			.selectAll("circle")
-			.on("mouseover mousemove", function (datum) {
+			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -318,20 +318,31 @@ export class Scatter extends Component {
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					multidata:
-						overlappingData.length > 1 ? overlappingData : null,
-					type: TooltipTypes.DATAPOINT
+					data: overlappingData
 				});
 
-				const eventNameToDispatch =
-					d3Event.type === "mouseover"
-						? Events.Scatter.SCATTER_MOUSEOVER
-						: Events.Scatter.SCATTER_MOUSEMOVE;
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(eventNameToDispatch, {
-					element: hoveredElement,
-					datum
-				});
+				self.services.events.dispatchEvent(
+					Events.Scatter.SCATTER_MOUSEOVER,
+					{
+						element: hoveredElement,
+						datum
+					}
+				);
+			})
+			.on("mousemove", function (datum) {
+				const hoveredElement = select(this);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.Scatter.SCATTER_MOUSEMOVE,
+					{
+						element: hoveredElement,
+						datum
+					}
+				);
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on("click", function (datum) {
 				// Dispatch mouse event

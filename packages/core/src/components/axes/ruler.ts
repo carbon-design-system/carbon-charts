@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes, CartesianOrientations } from "../../interfaces";
+import { CartesianOrientations, Events } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -20,10 +20,18 @@ export class Ruler extends Component {
 	type = "ruler";
 	backdrop: GenericSvgSelection;
 	elementsToHighlight: GenericSvgSelection;
+	pointsWithinLine: {
+		domainValue: number;
+		originalData: any;
+	}[];
 
 	render() {
 		this.drawBackdrop();
 		this.addBackdropEventListeners();
+	}
+
+	formatTooltipData(tooltipData) {
+		return tooltipData;
 	}
 
 	showRuler([x, y]: [number, number]) {
@@ -39,13 +47,27 @@ export class Ruler extends Component {
 		const displayData = this.model.getDisplayData();
 		const rangeScale = this.services.cartesianScales.getRangeScale();
 		const [yScaleEnd, yScaleStart] = rangeScale.range();
-		const scaledData: {
-			domainValue: number;
-			originalData: any;
-		}[] = displayData.map((d) => ({
-			domainValue: this.services.cartesianScales.getDomainValue(d),
-			originalData: d
-		}));
+
+		const pointsWithinLine = displayData
+			.map((d) => ({
+				domainValue: this.services.cartesianScales.getDomainValue(d),
+				originalData: d
+			}))
+			.filter((d) =>
+				pointIsWithinThreshold(d.domainValue, mouseCoordinate)
+			);
+
+		if (
+			this.pointsWithinLine &&
+			pointsWithinLine.length === this.pointsWithinLine.length &&
+			pointsWithinLine.map((point) => point.domainValue).join() ===
+				this.pointsWithinLine.map((point) => point.domainValue).join()
+		) {
+			this.pointsWithinLine = pointsWithinLine;
+			return this.services.events.dispatchEvent(Events.Tooltip.MOVE);
+		}
+
+		this.pointsWithinLine = pointsWithinLine;
 
 		/**
 		 * Find matches, reduce is used instead of filter
@@ -54,39 +76,35 @@ export class Ruler extends Component {
 		const dataPointsMatchingRulerLine: {
 			domainValue: number;
 			originalData: any;
-		}[] = scaledData
-			.filter((d) =>
-				pointIsWithinThreshold(d.domainValue, mouseCoordinate)
-			)
-			.reduce((accum, currentValue) => {
-				if (accum.length === 0) {
-					accum.push(currentValue);
-					return accum;
-				}
-
-				// store the first element of the accumulator array to compare it with current element being processed
-				const sampleAccumValue = accum[0].domainValue;
-
-				const distanceToCurrentValue = Math.abs(
-					mouseCoordinate - currentValue.domainValue
-				);
-				const distanceToAccumValue = Math.abs(
-					mouseCoordinate - sampleAccumValue
-				);
-
-				if (distanceToCurrentValue > distanceToAccumValue) {
-					// if distance with current value is bigger than already existing value in the accumulator, skip current iteration
-					return accum;
-				} else if (distanceToCurrentValue < distanceToAccumValue) {
-					// currentValue data point is closer to mouse inside the threshold area, so reinstantiate array
-					accum = [currentValue];
-				} else {
-					// currentValue is equal to already stored values, which means there's another match on the same coordinate
-					accum.push(currentValue);
-				}
-
+		}[] = this.pointsWithinLine.reduce((accum, currentValue) => {
+			if (accum.length === 0) {
+				accum.push(currentValue);
 				return accum;
-			}, []);
+			}
+
+			// store the first element of the accumulator array to compare it with current element being processed
+			const sampleAccumValue = accum[0].domainValue;
+
+			const distanceToCurrentValue = Math.abs(
+				mouseCoordinate - currentValue.domainValue
+			);
+			const distanceToAccumValue = Math.abs(
+				mouseCoordinate - sampleAccumValue
+			);
+
+			if (distanceToCurrentValue > distanceToAccumValue) {
+				// if distance with current value is bigger than already existing value in the accumulator, skip current iteration
+				return accum;
+			} else if (distanceToCurrentValue < distanceToAccumValue) {
+				// currentValue data point is closer to mouse inside the threshold area, so reinstantiate array
+				accum = [currentValue];
+			} else {
+				// currentValue is equal to already stored values, which means there's another match on the same coordinate
+				accum.push(currentValue);
+			}
+
+			return accum;
+		}, []);
 
 		// some data point match
 		if (dataPointsMatchingRulerLine.length > 0) {
@@ -126,10 +144,9 @@ export class Ruler extends Component {
 			// set current hovered elements
 			this.elementsToHighlight = elementsToHighlight;
 
-			this.services.events.dispatchEvent("show-tooltip", {
+			this.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 				hoveredElement: rulerLine,
-				multidata: tooltipData,
-				type: TooltipTypes.GRIDLINE
+				data: this.formatTooltipData(tooltipData)
 			});
 
 			ruler.attr("opacity", 1);
@@ -160,7 +177,7 @@ export class Ruler extends Component {
 		const dataPointElements = svg.selectAll("[role=graphics-symbol]");
 
 		dataPointElements.dispatch("mouseout");
-		this.services.events.dispatchEvent("hide-tooltip");
+		this.services.events.dispatchEvent(Events.Tooltip.HIDE);
 		ruler.attr("opacity", 0);
 	}
 
