@@ -90,6 +90,7 @@ export class ChartBrush extends Component {
 					.attr("y", d3Selection.attr("y"))
 					.attr("width", d3Selection.attr("width"))
 					.attr("height", d3Selection.attr("height"))
+					.style("cursor", "pointer")
 					.style("display", null);
 
 				updateSelectionDash(selection);
