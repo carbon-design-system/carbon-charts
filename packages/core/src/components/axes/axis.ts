@@ -452,7 +452,6 @@ export class Axis extends Component {
 		invisibleAxisRef
 			.selectAll("g.tick")
 			.attr("aria-label", d => d);
-		
 
 		// truncate the label if it's too long
 		// only applies to discrete type
