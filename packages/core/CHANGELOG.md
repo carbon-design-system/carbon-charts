@@ -1,26 +1,19 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.33.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.33.0...v0.33.1) (2020-07-08)
 
-
 ### Bug Fixes
 
-* fix bar chart tooltip data ([#692](https://github.com/carbon-design-system/carbon-charts/issues/692)) ([05e4bb3](https://github.com/carbon-design-system/carbon-charts/commit/05e4bb364ac96697aefa4c2096b391fc248e2369))
-
-
-
-
+-   fix bar chart tooltip data
+    ([#692](https://github.com/carbon-design-system/carbon-charts/issues/692))
+    ([05e4bb3](https://github.com/carbon-design-system/carbon-charts/commit/05e4bb364ac96697aefa4c2096b391fc248e2369))
 
 # [0.33.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.12...v0.33.0) (2020-07-07)
 
 **Note:** Version bump only for package @carbon/charts
-
-
-
-
 
 # Change Log
 
