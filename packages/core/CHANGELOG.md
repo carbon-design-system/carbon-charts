@@ -1,5 +1,26 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.34.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.33.1...v0.34.0) (2020-07-14)
+
+
+### Bug Fixes
+
+* add role fallback value for legend ([#702](https://github.com/carbon-design-system/carbon-charts/issues/702)) ([e272d3e](https://github.com/carbon-design-system/carbon-charts/commit/e272d3ef0edbf70318b3bb58bd1facc0d40fa568))
+
+
+### Features
+
+* **core:** add title element to main SVG ([#704](https://github.com/carbon-design-system/carbon-charts/issues/704)) ([c75e1bb](https://github.com/carbon-design-system/carbon-charts/commit/c75e1bbb6fcf15120ea1513ef3ec50d30a46a11d))
+
+
+
+
+
+# Change Log
+
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
