@@ -135,7 +135,11 @@ export class Tooltip extends Component {
 
 	valueFormatter(value: any) {
 		const options = this.model.getOptions();
-		const valueFormatter = Tools.getProperty(options, "tooltip", "valueFormatter");
+		const valueFormatter = Tools.getProperty(
+			options,
+			"tooltip",
+			"valueFormatter"
+		);
 
 		if (valueFormatter) {
 			return valueFormatter(value);

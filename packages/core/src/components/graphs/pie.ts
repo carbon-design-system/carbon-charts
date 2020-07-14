@@ -13,7 +13,6 @@ import {
 import { select } from "d3-selection";
 import { arc, pie } from "d3-shape";
 import { interpolate } from "d3-interpolate";
-import { dragDisable } from "d3";
 
 // Pie slice tween function
 function arcTween(a, arcFunc) {

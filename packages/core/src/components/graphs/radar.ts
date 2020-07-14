@@ -867,12 +867,7 @@ export class Radar extends Component {
 				);
 
 				// Hide tooltip
-				self.services.events.dispatchEvent("hide-tooltip", {
-					hoveredElement
-				});
-				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement
-				});
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 			});
 	}
 }

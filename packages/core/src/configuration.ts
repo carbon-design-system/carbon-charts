@@ -81,7 +81,7 @@ export const grid: GridOptions = {
 export const baseTooltip: TooltipOptions = {
 	horizontalOffset: 10,
 	showTotal: true,
-	valueFormatter: d => d.toLocaleString()
+	valueFormatter: (d) => d.toLocaleString()
 };
 
 // These options will be managed by Tools.mergeDefaultChartOptions
@@ -151,7 +151,7 @@ const chart: BaseChartOptions = {
 const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	timeScale,
-	grid,
+	grid
 } as AxisChartOptions);
 
 /**
@@ -163,7 +163,7 @@ const baseBarChart: BarChartOptions = Tools.merge({}, axisChart, {
 	},
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: 1
-	} as TimeScaleOptions),
+	} as TimeScaleOptions)
 } as BarChartOptions);
 
 /**

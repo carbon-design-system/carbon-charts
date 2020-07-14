@@ -140,10 +140,9 @@ export class Ruler extends Component {
 			// set current hovered elements
 			this.elementsToHighlight = elementsToHighlight;
 
-			this.services.events.dispatchEvent("show-tooltip", {
+			this.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 				hoveredElement: rulerLine,
-				data: tooltipData,
-				type: TooltipTypes.GRIDLINE
+				data: tooltipData
 			});
 
 			ruler.attr("opacity", 1);
@@ -174,7 +173,7 @@ export class Ruler extends Component {
 		const dataPointElements = svg.selectAll("[role=graphics-symbol]");
 
 		dataPointElements.dispatch("mouseout");
-		this.services.events.dispatchEvent("hide-tooltip");
+		this.services.events.dispatchEvent(Events.Tooltip.HIDE);
 		ruler.attr("opacity", 0);
 	}
 

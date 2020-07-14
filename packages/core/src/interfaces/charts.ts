@@ -5,10 +5,7 @@ import {
 	GridOptions,
 	AxesOptions
 } from "./index";
-import {
-	BarOptions,
-	StackedBarOptions
-} from "./components";
+import { BarOptions, StackedBarOptions } from "./components";
 import { TimeScaleOptions } from "./axis-scales";
 
 /**

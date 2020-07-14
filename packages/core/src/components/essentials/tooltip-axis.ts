@@ -22,7 +22,7 @@ export class AxisChartsTooltip extends Tooltip {
 		const rangeAxisScaleType = cartesianScales.getRangeAxisScaleType();
 
 		// Generate default tooltip
-		const { groupMapsTo } = this.model.getOptions().data;
+		const { groupMapsTo } = options.data;
 		let domainLabel = domainAxisOptions.title;
 		if (!domainLabel) {
 			const domainAxisPosition = cartesianScales.getDomainAxisPosition();

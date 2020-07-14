@@ -531,6 +531,16 @@ export class Axis extends Component {
 						datum
 					}
 				);
+
+				if (
+					axisScaleType === ScaleTypes.LABELS &&
+					datum.length > truncationThreshold
+				) {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						hoveredElement: select(this),
+						content: datum
+					});
+				}
 			})
 			.on("mousemove", function (datum) {
 				// Dispatch mouse event
@@ -545,10 +555,7 @@ export class Axis extends Component {
 					axisScaleType === ScaleTypes.LABELS &&
 					datum.length > truncationThreshold
 				) {
-					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-						hoveredElement: select(this),
-						type: TooltipTypes.AXISLABEL
-					});
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 				}
 			})
 			.on("click", function (datum) {

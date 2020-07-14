@@ -209,8 +209,7 @@ export class StackedBar extends Bar {
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					data: [matchingDataPoint],
-					type: TooltipTypes.DATAPOINT
+					data: [matchingDataPoint]
 				});
 			})
 			.on("mousemove", function (datum) {
