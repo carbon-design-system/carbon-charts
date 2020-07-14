@@ -322,19 +322,25 @@ export class Scatter extends Component {
 				});
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Scatter.SCATTER_MOUSEOVER, {
-					element: hoveredElement,
-					datum
-				});
+				self.services.events.dispatchEvent(
+					Events.Scatter.SCATTER_MOUSEOVER,
+					{
+						element: hoveredElement,
+						datum
+					}
+				);
 			})
 			.on("mousemove", function (datum) {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Scatter.SCATTER_MOUSEMOVE, {
-					element: hoveredElement,
-					datum
-				});
+				self.services.events.dispatchEvent(
+					Events.Scatter.SCATTER_MOUSEMOVE,
+					{
+						element: hoveredElement,
+						datum
+					}
+				);
 
 				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})

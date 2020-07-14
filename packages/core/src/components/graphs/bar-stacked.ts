@@ -1,11 +1,7 @@
 // Internal Imports
 import { Tools } from "../../tools";
 import { Bar } from "./bar";
-import {
-	Roles,
-	Events,
-	CartesianOrientations
-} from "../../interfaces";
+import { Roles, Events, CartesianOrientations } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";

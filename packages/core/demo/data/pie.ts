@@ -8,8 +8,7 @@ export const pieData = [
 ];
 
 export const pieOptions = {
-	title:
-		"Pie",
+	title: "Pie",
 	resizable: true
 };
 

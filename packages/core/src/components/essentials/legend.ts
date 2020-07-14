@@ -18,7 +18,7 @@ export class Legend extends Component {
 	render() {
 		const svg = this.getContainerSVG().attr(
 			"role",
-			`${Roles.GRAPHICS_DOCUMENT} ${Roles.DOCUMENT}`,
+			`${Roles.GRAPHICS_DOCUMENT} ${Roles.DOCUMENT}`
 		);
 		const options = this.model.getOptions();
 		const legendOptions = Tools.getProperty(options, "legend");

@@ -2,11 +2,7 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import {
-	CalloutDirections,
-	Roles,
-	Events
-} from "../../interfaces";
+import { CalloutDirections, Roles, Events } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";

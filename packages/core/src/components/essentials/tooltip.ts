@@ -11,11 +11,7 @@ import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { select, mouse } from "d3-selection";
-import {
-	TooltipPosition,
-	Events,
-	TruncationTypes
-} from "../../interfaces";
+import { TooltipPosition, Events, TruncationTypes } from "../../interfaces";
 
 export class Tooltip extends Component {
 	type = "tooltip";
@@ -125,10 +121,8 @@ export class Tooltip extends Component {
 
 		// truncate the label if it's too long
 		// only applies to discrete type
-		if (
-			truncationType !== TruncationTypes.NONE
-		) {
-			return items.map(item => {
+		if (truncationType !== TruncationTypes.NONE) {
+			return items.map((item) => {
 				if (item.label && item.label.length > truncationThreshold) {
 					item.label = Tools.truncateLabel(
 						item.label,
