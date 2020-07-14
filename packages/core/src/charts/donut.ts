@@ -11,8 +11,7 @@ import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
 	LayoutComponent,
-	Skeleton,
-	TooltipPie
+	Skeleton
 } from "../components/index";
 
 export class DonutChart extends PieChart {
@@ -42,7 +41,6 @@ export class DonutChart extends PieChart {
 		];
 
 		const components: any[] = this.getChartComponents(graphFrameComponents);
-		components.push(new TooltipPie(this.model, this.services));
 		return components;
 	}
 }

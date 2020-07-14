@@ -164,10 +164,9 @@ export class LayoutComponent extends Component {
 			);
 
 			if (d.data.id === "legend") {
-				const svgSize = DOMUtils.getSVGElementSize(
-					select(this),
-					{ useAttrs: true }
-				);
+				const svgSize = DOMUtils.getSVGElementSize(select(this), {
+					useAttrs: true
+				});
 
 				if (svgSize.height < 40) {
 					matchingSVGDimensions.height = svgSize.height;

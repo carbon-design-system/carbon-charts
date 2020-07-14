@@ -5,7 +5,7 @@ import { ChartConfig, GaugeChartOptions } from "../interfaces/index";
 import { Tools } from "../tools";
 
 // Components
-import { Gauge, Tooltip } from "../components/index";
+import { Gauge } from "../components/index";
 
 export class GaugeChart extends Chart {
 	constructor(holder: Element, chartConfigs: ChartConfig<GaugeChartOptions>) {
@@ -29,7 +29,6 @@ export class GaugeChart extends Chart {
 		const graphFrameComponents = [new Gauge(this.model, this.services)];
 
 		const components: any[] = this.getChartComponents(graphFrameComponents);
-		components.push(new Tooltip(this.model, this.services));
 
 		return components;
 	}

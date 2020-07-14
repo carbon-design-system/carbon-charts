@@ -8,8 +8,7 @@ import { Tools } from "../tools";
 import {
 	// the imports below are needed because of typescript bug (error TS4029)
 	Legend,
-	LayoutComponent,
-	TooltipRadar
+	LayoutComponent
 } from "../components/index";
 import { Radar } from "../components/graphs/radar";
 
@@ -46,7 +45,6 @@ export class RadarChart extends Chart {
 
 		// get the base chart components and export with tooltip
 		const components: any[] = this.getChartComponents(graphFrameComponents);
-		components.push(new TooltipRadar(this.model, this.services));
 		return components;
 	}
 }

@@ -1,12 +1,10 @@
 // Internal Imports
-import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
 import {
 	LegendOrientations,
 	Roles,
 	Events,
-	TooltipTypes,
 	TruncationTypes
 } from "../../interfaces";
 import { DOMUtils } from "../../services";
@@ -20,7 +18,7 @@ export class Legend extends Component {
 	render() {
 		const svg = this.getContainerSVG().attr(
 			"role",
-			`${Roles.GRAPHICS_DOCUMENT} ${Roles.DOCUMENT}`,
+			`${Roles.GRAPHICS_DOCUMENT} ${Roles.DOCUMENT}`
 		);
 		const options = this.model.getOptions();
 		const legendOptions = Tools.getProperty(options, "legend");
@@ -224,17 +222,21 @@ export class Legend extends Component {
 				lastYPosition = yPosition;
 
 				// Test if legendItems are placed in the correct direction
-				const testHorizontal = (!legendOrientation ||
-					legendOrientation === LegendOrientations.HORIZONTAL) &&
-					legendItem.select("rect.checkbox").attr("y") === '0';
+				const testHorizontal =
+					(!legendOrientation ||
+						legendOrientation === LegendOrientations.HORIZONTAL) &&
+					legendItem.select("rect.checkbox").attr("y") === "0";
 
-				const testVertical = legendOrientation === LegendOrientations.VERTICAL &&
-					legendItem.select("rect.checkbox").attr("x") === '0';
+				const testVertical =
+					legendOrientation === LegendOrientations.VERTICAL &&
+					legendItem.select("rect.checkbox").attr("x") === "0";
 
-				const hasCorrectLegendDirection = testHorizontal || testVertical;
+				const hasCorrectLegendDirection =
+					testHorizontal || testVertical;
 
 				// Render checkbox check icon
-				if (hasDeactivatedItems &&
+				if (
+					hasDeactivatedItems &&
 					legendItem.select("g.check").empty() &&
 					hasCorrectLegendDirection
 				) {
@@ -315,6 +317,17 @@ export class Legend extends Component {
 					.attr("rx", 3)
 					.attr("ry", 3)
 					.lower();
+
+				const hoveredItemData = hoveredItem.datum() as any;
+				if (hoveredItemData.name.length > truncationThreshold) {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						hoveredElement: hoveredItem,
+						content: hoveredItemData.name
+					});
+				}
+			})
+			.on("mousemove", function () {
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on("click", function () {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
@@ -325,16 +338,6 @@ export class Legend extends Component {
 				const clickedItemData = clickedItem.datum() as any;
 
 				self.model.toggleDataLabel(clickedItemData.name);
-			})
-			.on("mousemove", function () {
-				const hoveredItem = select(this);
-				const hoveredItemData = hoveredItem.datum() as any;
-				if (hoveredItemData.name.length > truncationThreshold) {
-					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-						hoveredElement: hoveredItem,
-						type: TooltipTypes.LEGEND
-					});
-				}
 			})
 			.on("mouseout", function () {
 				const hoveredItem = select(this);
