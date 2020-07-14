@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { Events, TooltipTypes, Roles } from "../../interfaces";
+import { Events, Roles } from "../../interfaces";
 import { Tools } from "../../tools";
 import {
 	Point,

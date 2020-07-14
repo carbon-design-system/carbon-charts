@@ -4,8 +4,7 @@ import { Tools } from "../../tools";
 import {
 	CartesianOrientations,
 	Events,
-	Roles,
-	TooltipTypes
+	Roles
 } from "../../interfaces";
 
 // D3 Imports

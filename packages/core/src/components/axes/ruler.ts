@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes, CartesianOrientations, Events } from "../../interfaces";
+import { CartesianOrientations, Events } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
@@ -28,6 +28,10 @@ export class Ruler extends Component {
 	render() {
 		this.drawBackdrop();
 		this.addBackdropEventListeners();
+	}
+
+	formatTooltipData(tooltipData) {
+		return tooltipData;
 	}
 
 	showRuler([x, y]: [number, number]) {
@@ -142,7 +146,7 @@ export class Ruler extends Component {
 
 			this.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 				hoveredElement: rulerLine,
-				data: tooltipData
+				data: this.formatTooltipData(tooltipData)
 			});
 
 			ruler.attr("opacity", 1);

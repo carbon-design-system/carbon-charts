@@ -1,10 +1,10 @@
 // Internal Imports
 import { Component } from "../component";
-import { TooltipTypes, Roles, Events } from "../../interfaces";
+import { Roles, Events } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
-import { select, Selection, event as d3Event } from "d3-selection";
+import { select, Selection } from "d3-selection";
 
 export class Scatter extends Component {
 	type = "scatter";
@@ -322,7 +322,7 @@ export class Scatter extends Component {
 				});
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEOVER, {
+				self.services.events.dispatchEvent(Events.Scatter.SCATTER_MOUSEOVER, {
 					element: hoveredElement,
 					datum
 				});
@@ -331,7 +331,7 @@ export class Scatter extends Component {
 				const hoveredElement = select(this);
 
 				// Dispatch mouse event
-				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
+				self.services.events.dispatchEvent(Events.Scatter.SCATTER_MOUSEMOVE, {
 					element: hoveredElement,
 					datum
 				});

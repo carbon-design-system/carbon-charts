@@ -81,7 +81,8 @@ export const grid: GridOptions = {
 export const baseTooltip: TooltipOptions = {
 	horizontalOffset: 10,
 	showTotal: true,
-	valueFormatter: (d) => d.toLocaleString()
+	valueFormatter: (d) => d.toLocaleString(),
+	truncation: standardTruncationOptions
 };
 
 // These options will be managed by Tools.mergeDefaultChartOptions

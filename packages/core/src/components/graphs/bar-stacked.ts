@@ -3,7 +3,6 @@ import { Tools } from "../../tools";
 import { Bar } from "./bar";
 import {
 	Roles,
-	TooltipTypes,
 	Events,
 	CartesianOrientations
 } from "../../interfaces";
@@ -11,7 +10,6 @@ import {
 // D3 Imports
 import { select } from "d3-selection";
 import { color } from "d3-color";
-import { map } from "d3-collection";
 
 export class StackedBar extends Bar {
 	type = "stacked-bar";

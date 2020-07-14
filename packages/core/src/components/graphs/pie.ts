@@ -5,7 +5,6 @@ import { Tools } from "../../tools";
 import {
 	CalloutDirections,
 	Roles,
-	TooltipTypes,
 	Events
 } from "../../interfaces";
 

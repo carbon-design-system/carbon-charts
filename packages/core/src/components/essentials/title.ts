@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes, Events } from "./../../interfaces";
+import { Events } from "./../../interfaces";
 
 export class Title extends Component {
 	type = "title";

@@ -1,12 +1,10 @@
 // Internal Imports
-import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
 import {
 	LegendOrientations,
 	Roles,
 	Events,
-	TooltipTypes,
 	TruncationTypes
 } from "../../interfaces";
 import { DOMUtils } from "../../services";

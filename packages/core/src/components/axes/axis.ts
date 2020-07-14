@@ -5,7 +5,6 @@ import {
 	Events,
 	ScaleTypes,
 	Roles,
-	TooltipTypes,
 	TruncationTypes
 } from "../../interfaces";
 import { Tools } from "../../tools";

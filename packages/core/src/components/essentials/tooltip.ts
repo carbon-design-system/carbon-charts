@@ -1,4 +1,3 @@
-import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
@@ -11,13 +10,11 @@ import Position, { PLACEMENTS } from "@carbon/utils-position";
 import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
-import { select, mouse, event } from "d3-selection";
+import { select, mouse } from "d3-selection";
 import {
-	TooltipTypes,
 	TooltipPosition,
 	Events,
-	AxisPositions,
-	ScaleTypes
+	TruncationTypes
 } from "../../interfaces";
 
 export class Tooltip extends Component {
@@ -101,15 +98,70 @@ export class Tooltip extends Component {
 		return [];
 	}
 
+	formatItems(items) {
+		const options = this.model.getOptions();
+
+		// get user provided custom values for truncation
+		const truncationType = Tools.getProperty(
+			options,
+			"tooltip",
+			"truncation",
+			"type"
+		);
+
+		const truncationThreshold = Tools.getProperty(
+			options,
+			"tooltip",
+			"truncation",
+			"threshold"
+		);
+
+		const truncationNumCharacter = Tools.getProperty(
+			options,
+			"tooltip",
+			"truncation",
+			"numCharacter"
+		);
+
+		// truncate the label if it's too long
+		// only applies to discrete type
+		if (
+			truncationType !== TruncationTypes.NONE
+		) {
+			return items.map(item => {
+				if (item.label && item.label.length > truncationThreshold) {
+					item.label = Tools.truncateLabel(
+						item.label,
+						truncationType,
+						truncationNumCharacter
+					);
+				}
+
+				if (item.value && item.value.length > truncationThreshold) {
+					item.value = Tools.truncateLabel(
+						item.value,
+						truncationType,
+						truncationNumCharacter
+					);
+				}
+
+				return item;
+			});
+		}
+
+		return items;
+	}
+
 	getTooltipHTML(e: CustomEvent) {
 		let defaultHTML;
 		if (e.detail.content) {
 			defaultHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
 		} else {
 			const items = this.getItems(e);
+			const formattedItems = this.formatItems(items);
 			defaultHTML =
 				`<ul class='multi-tooltip'>` +
-				items
+				formattedItems
 					.map(
 						(item) =>
 							`<li>

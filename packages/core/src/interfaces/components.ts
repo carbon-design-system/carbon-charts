@@ -71,6 +71,7 @@ export interface TooltipOptions {
 	 * show total of items
 	 */
 	showTotal?: boolean;
+	truncation?: TruncationOptions;
 }
 
 /**
