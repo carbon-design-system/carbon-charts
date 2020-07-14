@@ -1,12 +1,7 @@
 // Internal Imports
 import { Bar } from "./bar";
 import { Tools } from "../../tools";
-import {
-	CartesianOrientations,
-	Events,
-	Roles,
-	TooltipTypes
-} from "../../interfaces";
+import { CartesianOrientations, Events, Roles } from "../../interfaces";
 
 // D3 Imports
 import { map } from "d3-collection";
@@ -200,15 +195,19 @@ export class GroupedBar extends Bar {
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					type: TooltipTypes.DATAPOINT
+					data: [datum]
 				});
 			})
 			.on("mousemove", function (datum) {
+				const hoveredElement = select(this);
+
 				// Dispatch mouse event
 				self.services.events.dispatchEvent(Events.Bar.BAR_MOUSEMOVE, {
-					element: select(this),
+					element: hoveredElement,
 					datum
 				});
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on("click", function (datum) {
 				// Dispatch mouse event

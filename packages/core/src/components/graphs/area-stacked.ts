@@ -1,11 +1,10 @@
 // Internal Imports
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
-import { Roles, ScaleTypes, Events, TooltipTypes } from "../../interfaces";
+import { Roles, ScaleTypes, Events } from "../../interfaces";
 
 // D3 Imports
 import { area } from "d3-shape";
-import { select, color } from "d3";
 
 export class StackedArea extends Component {
 	type = "area-stacked";
