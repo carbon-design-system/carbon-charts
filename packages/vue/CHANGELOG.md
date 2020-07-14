@@ -7,17 +7,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @carbon/charts-vue
 
-
-
-
-
 # [0.33.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.12...v0.33.0) (2020-07-07)
 
 **Note:** Version bump only for package @carbon/charts-vue
-
-
-
-
 
 ## [0.32.12](https://github.com/carbon-design-system/carbon-charts/compare/v0.32.11...v0.32.12) (2020-06-26)
 
