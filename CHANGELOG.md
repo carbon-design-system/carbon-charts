@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.0...v0.34.1) (2020-07-14)
+
+
+### Bug Fixes
+
+* **core, react, angular, vue, svelte:** render both vertical and horizontal thresholds ([#706](https://github.com/carbon-design-system/carbon-charts/issues/706)) ([90f55d2](https://github.com/carbon-design-system/carbon-charts/commit/90f55d247f7535467eacca3477d75980e4c0e25f))
+
+
+
+
+
 # [0.34.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.33.1...v0.34.0) (2020-07-14)
 
 
