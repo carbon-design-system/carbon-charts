@@ -23,7 +23,6 @@ export class Skeleton extends Component {
 		});
 		svg.attr("width", width).attr("height", height);
 
-		const isDataEmpty = this.model.isDataEmpty();
 		const isDataLoading = Tools.getProperty(
 			this.model.getOptions(),
 			"data",
@@ -31,7 +30,7 @@ export class Skeleton extends Component {
 		);
 
 		// display a skeleton if there is no chart data or the loading flag is set to true
-		if (isDataEmpty || isDataLoading) {
+		if (isDataLoading) {
 			this.renderSkeleton(isDataLoading);
 		} else {
 			this.removeSkeleton();
