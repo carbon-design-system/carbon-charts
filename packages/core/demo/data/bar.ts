@@ -46,13 +46,13 @@ export const groupedBarSelectedGroupsOptions = {
 	},
 	axes: {
 		left: {
-			mapsTo: "value",
+			mapsTo: "value"
 		},
 		bottom: {
 			scaleType: "labels",
 			mapsTo: "key"
-		},
-	},
+		}
+	}
 };
 
 // Horizontal Grouped
