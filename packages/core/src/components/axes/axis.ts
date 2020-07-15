@@ -5,7 +5,6 @@ import {
 	Events,
 	ScaleTypes,
 	Roles,
-	TooltipTypes,
 	TruncationTypes
 } from "../../interfaces";
 import { Tools } from "../../tools";
@@ -45,6 +44,7 @@ export class Axis extends Component {
 		const options = this.model.getOptions();
 		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
 		const axisScaleType = Tools.getProperty(axisOptions, "scaleType");
+		const isDataLoading = Tools.getProperty(options, "data", "loading");
 		const numberOfTicksProvided = Tools.getProperty(
 			axisOptions,
 			"ticks",
@@ -128,10 +128,12 @@ export class Axis extends Component {
 			svg,
 			`g.axis.${axisPosition}`
 		);
+		container.attr("aria-label", `${axisPosition} axis`);
 		const axisRefExists = !container.select(`g.ticks`).empty();
 		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
 		if (!axisRefExists) {
 			axisRef.attr("role", `${Roles.GRAPHICS_OBJECT} ${Roles.GROUP}`);
+			axisRef.attr("aria-label", `${axisPosition} ticks`);
 		}
 
 		// We draw the invisible axis because of the async nature of d3 transitions
@@ -143,7 +145,8 @@ export class Axis extends Component {
 		)
 			.style("opacity", "0")
 			.style("pointer-events", "none")
-			.attr("aria-hidden", true);
+			.attr("aria-hidden", true)
+			.attr("aria-label", `invisible ${axisPosition} ticks`);
 
 		// Append to DOM a fake tick to get the right computed font height
 		const fakeTick = DOMUtils.appendOrSelect(invisibleAxisRef, `g.tick`);
@@ -277,11 +280,12 @@ export class Axis extends Component {
 
 		// Position the axis title
 		// check that data exists, if they don't, doesn't show the title axis
+		const isDataEmpty = this.model.isDataEmpty();
 		if (axisOptions.title) {
 			const axisTitleRef = DOMUtils.appendOrSelect(
 				container,
 				`text.axis-title`
-			).html(this.model.isDataEmpty() ? "" : axisOptions.title);
+			).html(isDataEmpty || isDataLoading ? "" : axisOptions.title);
 
 			switch (axisPosition) {
 				case AxisPositions.LEFT:
@@ -437,9 +441,17 @@ export class Axis extends Component {
 
 		// we don't need to show axes on empty state and on skeleton state
 		// because the Skeleton component draws them
-		if (this.model.isDataEmpty()) {
+		if (isDataLoading) {
 			container.attr("opacity", 0);
 		}
+
+		axisRef
+			.selectAll("g.tick")
+			.attr("aria-label", d => d);
+
+		invisibleAxisRef
+			.selectAll("g.tick")
+			.attr("aria-label", d => d);
 
 		// truncate the label if it's too long
 		// only applies to discrete type
@@ -531,6 +543,16 @@ export class Axis extends Component {
 						datum
 					}
 				);
+
+				if (
+					axisScaleType === ScaleTypes.LABELS &&
+					datum.length > truncationThreshold
+				) {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						hoveredElement: select(this),
+						content: datum
+					});
+				}
 			})
 			.on("mousemove", function (datum) {
 				// Dispatch mouse event
@@ -545,10 +567,7 @@ export class Axis extends Component {
 					axisScaleType === ScaleTypes.LABELS &&
 					datum.length > truncationThreshold
 				) {
-					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-						hoveredElement: select(this),
-						type: TooltipTypes.AXISLABEL
-					});
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 				}
 			})
 			.on("click", function (datum) {

@@ -392,7 +392,7 @@ let allDemoGroups = [
 			{
 				options: lineDemos.lineSelectedGroupsOptions,
 				data: lineDemos.lineSelectedGroupsData,
-				chartType: chartTypes.LineChart,
+				chartType: chartTypes.LineChart
 			},
 			{
 				options: lineDemos.lineTimeSeriesRotatedTicksOptions,

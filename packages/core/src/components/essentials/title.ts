@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes, Events } from "./../../interfaces";
+import { Events } from "./../../interfaces";
 
 export class Title extends Component {
 	type = "title";
@@ -72,17 +72,17 @@ export class Title extends Component {
 			// add events for displaying the tooltip with the title
 			const self = this;
 			title
-				.on("mouseenter", function () {
+				.on("mouseover", function () {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						hoveredElement: title,
-						titleString: untruncatedTitle,
-						type: TooltipTypes.TITLE
+						content: titleString
 					});
 				})
+				.on("mousemove", function () {
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				})
 				.on("mouseout", function () {
-					self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-						hoveredElement: title
-					});
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 				});
 			}
 	}

@@ -357,20 +357,24 @@ export class ChartModel {
 		}
 
 		// Updates selected groups
-		const updatedActiveItems = dataGroups.filter(group => group.status === ACTIVE);
+		const updatedActiveItems = dataGroups.filter(
+			(group) => group.status === ACTIVE
+		);
 		const options = this.getOptions();
 
 		const hasUpdatedDeactivatedItems = dataGroups.some(
-			group => group.status === DISABLED
+			(group) => group.status === DISABLED
 		);
 
 		// If there are deactivated items, map the item name into selected groups
 		if (hasUpdatedDeactivatedItems) {
-			options.data.selectedGroups = updatedActiveItems.map(activeItem => activeItem.name);
+			options.data.selectedGroups = updatedActiveItems.map(
+				(activeItem) => activeItem.name
+			);
 		} else {
 			// If every item is active, clear array
 			options.data.selectedGroups = [];
-		};
+		}
 
 		// dispatch legend filtering event with the status of all the dataLabels
 		this.services.events.dispatchEvent(Events.Legend.ITEMS_UPDATE, {
@@ -529,20 +533,22 @@ export class ChartModel {
 
 		// check if selectedGroups can be applied to chart with current data groups
 		if (options.data.selectedGroups.length) {
-			const hasAllSelectedGroups = options.data.selectedGroups
-				.every(groupName => uniqueDataGroups.includes(groupName));
+			const hasAllSelectedGroups = options.data.selectedGroups.every(
+				(groupName) => uniqueDataGroups.includes(groupName)
+			);
 			if (!hasAllSelectedGroups) {
 				options.data.selectedGroups = [];
-			};
+			}
 		}
 
 		// Get group status based on items in selected groups
 		const getStatus = (groupName) =>
-			!options.data.selectedGroups.length || options.data.selectedGroups.includes(groupName)
+			!options.data.selectedGroups.length ||
+			options.data.selectedGroups.includes(groupName)
 				? ACTIVE
 				: DISABLED;
 
-		return uniqueDataGroups.map(groupName => ({
+		return uniqueDataGroups.map((groupName) => ({
 			name: groupName,
 			status: getStatus(groupName)
 		}));
