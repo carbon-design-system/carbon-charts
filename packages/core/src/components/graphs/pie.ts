@@ -79,10 +79,11 @@ export class Pie extends Component {
 		);
 
 		// Update data on all slices
-		const slicesGroup = DOMUtils.appendOrSelect(svg, "g.slices").attr(
-			"role",
-			Roles.GROUP
-		);
+		const slicesGroup = DOMUtils
+			.appendOrSelect(svg, "g.slices")
+			.attr("role", Roles.GROUP)
+			.attr("aria-label", "slices");
+
 		const paths = slicesGroup
 			.selectAll("path.slice")
 			.data(pieLayoutData, (d) => d.data[groupMapsTo]);
@@ -129,10 +130,11 @@ export class Pie extends Component {
 
 		// Draw the slice labels
 		const labelData = pieLayoutData.filter((x) => x.value > 0);
-		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels").attr(
-			"role",
-			Roles.GROUP
-		);
+		const labelsGroup = DOMUtils
+			.appendOrSelect(svg, "g.labels")
+			.attr("role", Roles.GROUP)
+			.attr("aria-label", "labels");
+
 		const labels = labelsGroup
 			.selectAll("text.pie-label")
 			.data(labelData, (d: any) => d.data[groupMapsTo]);
@@ -247,10 +249,14 @@ export class Pie extends Component {
 	}
 
 	renderCallouts(calloutData: any[]) {
-		const svg = DOMUtils.appendOrSelect(
-			this.getContainerSVG(),
-			"g.callouts"
-		).attr("role", Roles.GROUP);
+		const svg = DOMUtils
+			.appendOrSelect(
+				this.getContainerSVG(),
+				"g.callouts"
+			)
+			.attr("role", Roles.GROUP)
+			.attr("aria-label", "callouts");
+
 		const options = this.model.getOptions();
 
 		// Update data on callouts

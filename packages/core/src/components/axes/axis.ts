@@ -128,10 +128,12 @@ export class Axis extends Component {
 			svg,
 			`g.axis.${axisPosition}`
 		);
+		container.attr("aria-label", `${axisPosition} axis`);
 		const axisRefExists = !container.select(`g.ticks`).empty();
 		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
 		if (!axisRefExists) {
 			axisRef.attr("role", `${Roles.GRAPHICS_OBJECT} ${Roles.GROUP}`);
+			axisRef.attr("aria-label", `${axisPosition} ticks`);
 		}
 
 		// We draw the invisible axis because of the async nature of d3 transitions
@@ -143,7 +145,8 @@ export class Axis extends Component {
 		)
 			.style("opacity", "0")
 			.style("pointer-events", "none")
-			.attr("aria-hidden", true);
+			.attr("aria-hidden", true)
+			.attr("aria-label", `invisible ${axisPosition} ticks`);
 
 		// Append to DOM a fake tick to get the right computed font height
 		const fakeTick = DOMUtils.appendOrSelect(invisibleAxisRef, `g.tick`);
@@ -438,9 +441,17 @@ export class Axis extends Component {
 
 		// we don't need to show axes on empty state and on skeleton state
 		// because the Skeleton component draws them
-		if (isDataEmpty || isDataLoading) {
+		if (isDataLoading) {
 			container.attr("opacity", 0);
 		}
+
+		axisRef
+			.selectAll("g.tick")
+			.attr("aria-label", d => d);
+
+		invisibleAxisRef
+			.selectAll("g.tick")
+			.attr("aria-label", d => d);
 
 		// truncate the label if it's too long
 		// only applies to discrete type
