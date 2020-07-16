@@ -19,8 +19,6 @@ export class Component {
 	protected model: ChartModel;
 	protected services: any;
 
-	protected chartClipId = "chart-clip-id";
-
 	constructor(model: ChartModel, services: any, configs?: any) {
 		this.model = model;
 		this.services = services;
@@ -99,7 +97,11 @@ export class Component {
 			);
 
 			if (withinChartClip) {
-				svg.attr("clip-path", `url(#${this.chartClipId})`);
+				// get unique chartClipId int this chart from model
+				const chartClipId = this.model.get("chartClipId");
+				if (chartClipId) {
+					svg.attr("clip-path", `url(#${chartClipId})`);
+				}
 			}
 
 			return svg;
