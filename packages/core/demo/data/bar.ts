@@ -112,6 +112,29 @@ export const simpleBarTimeSeriesData = [
 	{ group: "Misc", date: new Date(2019, 0, 7), value: 51213 },
 ];
 
+export const simpleBarTimeSeriesDenseData = [
+	{ group: "data1", date: new Date(2019, 1, 1, 10, 20, 0), value: 10000 },
+	{ group: "data2", date: new Date(2019, 1, 1, 10, 21, 1), value: 20001 },
+	{ group: "data3", date: new Date(2019, 1, 1, 10, 22, 2), value: 10002 },
+	{ group: "data4", date: new Date(2019, 1, 1, 10, 23, 3), value: 30003 },
+	{ group: "data5", date: new Date(2019, 1, 1, 10, 24, 4), value: 20004 },
+	{ group: "data6", date: new Date(2019, 1, 1, 10, 25, 5), value: 10005 },
+	{ group: "data7", date: new Date(2019, 1, 1, 10, 26, 6), value: 50006 },
+	{ group: "data8", date: new Date(2019, 1, 1, 10, 27, 7), value: 40007 },
+	{ group: "data9", date: new Date(2019, 1, 1, 10, 28, 8), value: 30008 },
+	{ group: "data10", date: new Date(2019, 1, 1, 10, 29, 9), value: 10000 },
+	{ group: "data11", date: new Date(2019, 1, 1, 10, 30, 10), value: 20000 },
+	{ group: "data12", date: new Date(2019, 1, 1, 10, 31, 11), value: 10000 },
+	{ group: "data13", date: new Date(2019, 1, 1, 10, 32, 12), value: 30000 },
+	{ group: "data14", date: new Date(2019, 1, 1, 10, 33, 13), value: 10000 },
+	{ group: "data15", date: new Date(2019, 1, 1, 10, 34, 14), value: 40000 },
+	{ group: "data16", date: new Date(2019, 1, 1, 10, 35, 15), value: 20000 },
+	{ group: "data17", date: new Date(2019, 1, 1, 10, 36, 16), value: 10000 },
+	{ group: "data18", date: new Date(2019, 1, 1, 10, 37, 17), value: 65000 },
+	{ group: "data19", date: new Date(2019, 1, 1, 10, 38, 18), value: 30000 },
+	{ group: "data20", date: new Date(2019, 1, 1, 10, 39, 19), value: 49213 },
+];
+
 export const simpleBarTimeSeriesOptions = {
 	title: "Simple bar (time series - Turkish)",
 	axes: {
@@ -138,6 +161,22 @@ export const simpleHorizontalBarTimeSeriesOptions = {
 			mapsTo: "value",
 		},
 	},
+};
+
+// Vertical simple time series with dense data
+export const simpleHorizontalBarTimeSeriesOptionsDense = {
+	title: "Simple bar (time series) with dense data",
+	axes: {
+		left: {
+			mapsTo: "value",
+		},
+		bottom: {
+			mapsTo: "date",
+			scaleType: "time",
+		},
+	},
+	timeScale: { localeObject: trLocaleObject },
+	bars: { maxWidth: 200 }
 };
 
 export const simpleHorizontalBarTimeSeriesData = simpleBarTimeSeriesData;
