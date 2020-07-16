@@ -7,14 +7,14 @@ export class Bar extends Component {
 	protected getBarWidth(allDataLabels?: string[]) {
 		const options = this.model.getOptions();
 		const mainXScale = this.services.cartesianScales.getMainXScale();
-		const width = DOMUtils.getSVGElementSize(this.parent, {
+		const chartWidth = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
 		}).width;
 
 		if (!mainXScale.step) {
 			return Math.min(
 				options.bars.maxWidth,
-				width * 0.9 / mainXScale.ticks().length
+				chartWidth * 0.9 / mainXScale.ticks().length
 			);
 		}
 
