@@ -3,6 +3,7 @@ import {
 	AxisChartOptions,
 	CartesianOrientations,
 	ScaleTypes,
+	TruncationTypes
 } from "./interfaces";
 
 import {
@@ -14,10 +15,13 @@ import {
 	isEqual as lodashIsEqual,
 	flatMapDeep as lodashFlatMapDeep,
 	kebabCase as lodashKebabCase,
+	fromPairs as lodashFromPairs,
+	some as lodashSome,
 	// the imports below are needed because of typescript bug (error TS4029)
 	Cancelable,
-	DebounceSettings,
+	DebounceSettings
 } from "lodash-es";
+import { Numeric } from "d3";
 
 // Functions
 export namespace Tools {
@@ -30,6 +34,8 @@ export namespace Tools {
 	export const isEqual = lodashIsEqual;
 	export const flatMapDeep = lodashFlatMapDeep;
 	export const kebabCase = lodashKebabCase;
+	export const fromPairs = lodashFromPairs;
+	export const some = lodashSome;
 
 	/**
 	 * Returns default chart options merged with provided options,
@@ -105,7 +111,7 @@ export namespace Tools {
 			),
 			height: parseFloat(
 				el.style.height.replace("px", "") || el.offsetHeight
-			),
+			)
 		};
 	}
 
@@ -139,7 +145,7 @@ export namespace Tools {
 
 			return {
 				tx: transforms[0],
-				ty: transforms[1],
+				ty: transforms[1]
 			};
 		}
 		return null;
@@ -163,7 +169,7 @@ export namespace Tools {
 
 		return {
 			x: parseFloat(xyString[0]),
-			y: parseFloat(xyString[1]),
+			y: parseFloat(xyString[1])
 		};
 	}
 
@@ -212,6 +218,31 @@ export namespace Tools {
 			: percentage;
 	}
 
+	/**
+	 * Truncate the labels
+	 * @export
+	 * @param {any} fullText
+	 * @param {any} truncationType
+	 * @param {any} numCharacter
+	 * @returns Truncated text
+	 */
+	export function truncateLabel(fullText, truncationType, numCharacter) {
+		if (numCharacter > fullText.length) {
+			return fullText;
+		}
+		if (truncationType === TruncationTypes.MID_LINE) {
+			return (
+				fullText.substr(0, numCharacter / 2) +
+				"..." +
+				fullText.substr(-numCharacter / 2)
+			);
+		} else if (truncationType === TruncationTypes.FRONT_LINE) {
+			return "..." + fullText.substr(-numCharacter);
+		} else if (truncationType === TruncationTypes.END_LINE) {
+			return fullText.substr(0, numCharacter) + "...";
+		}
+	}
+
 	/**************************************
 	 *  Object/array related checks       *
 	 *************************************/
@@ -228,7 +259,7 @@ export namespace Tools {
 	export function arrayDifferences(oldArray: any[], newArray: any[]) {
 		const difference = {
 			missing: [],
-			added: [],
+			added: []
 		};
 
 		oldArray.forEach((element) => {
@@ -331,7 +362,7 @@ export namespace Tools {
 				y0: verticalCoordinates.x0,
 				y1: verticalCoordinates.x1,
 				x0: verticalCoordinates.y0,
-				x1: verticalCoordinates.y1,
+				x1: verticalCoordinates.y1
 			};
 		}
 
@@ -359,4 +390,7 @@ export namespace Tools {
 			? [domain, range]
 			: [range, domain];
 	}
+
+	export const compareNumeric = (a: Numeric, b: Numeric) =>
+		Number(a) === Number(b);
 }

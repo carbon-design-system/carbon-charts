@@ -23,7 +23,7 @@ export class DOMUtils extends Service {
 
 		const finalDimensions = {
 			width: 0,
-			height: 0,
+			height: 0
 		};
 
 		const validateAndSetDimensions = (dimensions) => {
@@ -46,7 +46,7 @@ export class DOMUtils extends Service {
 
 		const attrDimensions = {
 			width: svgSelector.attr("width"),
-			height: svgSelector.attr("height"),
+			height: svgSelector.attr("height")
 		};
 
 		let bbox, bboxDimensions, boundingRect, boundingRectDimensions;
@@ -56,7 +56,7 @@ export class DOMUtils extends Service {
 			bbox = svgSelector.node().getBBox();
 			bboxDimensions = {
 				width: bbox.width,
-				height: bbox.height,
+				height: bbox.height
 			};
 		} catch (e) {}
 
@@ -64,13 +64,13 @@ export class DOMUtils extends Service {
 			boundingRect = svgSelector.node().getBoundingClientRect();
 			boundingRectDimensions = {
 				width: boundingRect.width,
-				height: boundingRect.height,
+				height: boundingRect.height
 			};
 		} catch (e) {}
 
 		const clientDimensions = {
 			width: svgSelector.node().clientWidth,
-			height: svgSelector.node().clientHeight,
+			height: svgSelector.node().clientHeight
 		};
 
 		// If both attribute values are numbers
@@ -122,7 +122,7 @@ export class DOMUtils extends Service {
 					"height",
 					"baseVal",
 					"value"
-				),
+				)
 			};
 
 			validateAndSetDimensions(nativeDimensions);
@@ -163,6 +163,8 @@ export class DOMUtils extends Service {
 		if (this.model.getOptions().resizable) {
 			this.addResizeListener();
 		}
+
+		this.addHolderListeners();
 	}
 
 	update() {
@@ -202,22 +204,42 @@ export class DOMUtils extends Service {
 	}
 
 	addSVGElement() {
-		const chartsprefix = Tools.getProperty(
-			this.model.getOptions(),
-			"style",
-			"prefix"
-		);
+		const options = this.model.getOptions();
+		const chartsprefix = Tools.getProperty(options, "style", "prefix");
+
 		const svg = select(this.getHolder())
 			.append("svg")
 			.classed(`${settings.prefix}--${chartsprefix}--chart-svg`, true)
 			.attr("height", "100%")
 			.attr("width", "100%");
 
+		svg.append("title").text(
+			Tools.getProperty(options, "title") || "Chart"
+		);
+
 		this.svg = svg.node();
 	}
 
 	getMainSVG() {
 		return this.svg;
+	}
+
+	addHolderListeners() {
+		const holder = this.getHolder();
+
+		if (!holder) {
+			return;
+		}
+
+		select(holder)
+			.on("mouseover", () => {
+				// Dispatch event
+				this.services.events.dispatchEvent(Events.Chart.MOUSEOVER);
+			})
+			.on("mouseout", () => {
+				// Dispatch event
+				this.services.events.dispatchEvent(Events.Chart.MOUSEOUT);
+			});
 	}
 
 	addResizeListener() {

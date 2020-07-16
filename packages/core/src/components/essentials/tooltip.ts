@@ -1,4 +1,3 @@
-import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
@@ -11,8 +10,8 @@ import Position, { PLACEMENTS } from "@carbon/utils-position";
 import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
-import { select, mouse, event } from "d3-selection";
-import { TooltipTypes, TooltipPosition, Events } from "../../interfaces";
+import { select, mouse } from "d3-selection";
+import { TooltipPosition, Events, TruncationTypes } from "../../interfaces";
 
 export class Tooltip extends Component {
 	type = "tooltip";
@@ -46,89 +45,36 @@ export class Tooltip extends Component {
 		);
 		this.tooltip.style("max-width", null);
 
+		// listen to move-tooltip Custom Events to move the tooltip
+		this.services.events.addEventListener(Events.Tooltip.MOVE, () => {
+			this.positionTooltip();
+		});
+
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener(Events.Tooltip.SHOW, (e) => {
-			// check the type of tooltip and that it is enabled
+			const data = e.detail.data;
+			const defaultHTML = this.getTooltipHTML(e);
+
+			// if there is a provided tooltip HTML function call it
 			if (
-				(e.detail.type === TooltipTypes.DATAPOINT &&
-					Tools.getProperty(
-						this.model.getOptions(),
-						"tooltip",
-						"datapoint",
-						"enabled"
-					)) ||
-				(e.detail.type === TooltipTypes.GRIDLINE &&
-					Tools.getProperty(
-						this.model.getOptions(),
-						"tooltip",
-						"gridline",
-						"enabled"
-					))
+				Tools.getProperty(
+					this.model.getOptions(),
+					"tooltip",
+					"customHTML"
+				)
 			) {
-				let data = select(event.target).datum() as any;
-
-				// Generate default tooltip
-				let defaultHTML;
-				if (e.detail.multidata) {
-					// multi tooltip
-					data = e.detail.multidata;
-					defaultHTML = this.getMultilineTooltipHTML(data);
-				} else {
-					defaultHTML = this.getTooltipHTML(
-						data,
-						TooltipTypes.DATAPOINT
-					);
-				}
-
-				// if there is a provided tooltip HTML function call it
-				if (
-					Tools.getProperty(
-						this.model.getOptions(),
-						"tooltip",
-						"customHTML"
-					)
-				) {
-					tooltipTextContainer.html(
-						this.model
-							.getOptions()
-							.tooltip.customHTML(data, defaultHTML)
-					);
-				} else {
-					// Use default tooltip
-					tooltipTextContainer.html(defaultHTML);
-				}
-
-				// Position the tooltip
-				this.positionTooltip();
-			} else if (e.detail.type === TooltipTypes.TITLE) {
-				const chart = DOMUtils.appendOrSelect(
-					holder,
-					`svg.${settings.prefix}--${chartprefix}--chart-svg`
-				);
-				const chartWidth =
-					DOMUtils.getSVGElementSize(chart).width *
-					Tools.getProperty(
-						this.model.getOptions(),
-						"tooltip",
-						"title",
-						"width"
-					);
-
-				this.tooltip.style("max-width", chartWidth);
-
 				tooltipTextContainer.html(
-					this.getTooltipHTML(
-						e.detail.hoveredElement,
-						TooltipTypes.TITLE
-					)
+					this.model
+						.getOptions()
+						.tooltip.customHTML(data, defaultHTML)
 				);
-
-				// get the position based on the title positioning (static)
-				const position = this.getTooltipPosition(
-					e.detail.hoveredElement.node()
-				);
-				this.positionTooltip(position);
+			} else {
+				// Use default tooltip
+				tooltipTextContainer.html(defaultHTML);
 			}
+
+			// Position the tooltip
+			this.positionTooltip();
 
 			// Fade in
 			this.tooltip.classed("hidden", false);
@@ -140,103 +86,116 @@ export class Tooltip extends Component {
 		});
 	}
 
-	getTooltipHTML(data: any, type: TooltipTypes) {
-		// check if it is getting styles for a tooltip type
-		if (type === TooltipTypes.TITLE) {
-			const title = this.model.getOptions().title;
-			return `<div class="title-tooltip"><text>${title}</text></div>`;
+	getItems(e: CustomEvent) {
+		if (e.detail.items) {
+			return e.detail.items;
 		}
-		// this cleans up the data item, pie slices have the data within the data.data but other datapoints are self contained within data
-		const dataVal = Tools.getProperty(data, "data") ? data.data : data;
-		const { groupMapsTo } = this.model.getOptions().data;
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 
-		// format the value if needed
-		const formattedValue = Tools.getProperty(
-			this.model.getOptions(),
-			"tooltip",
-			"valueFormatter"
-		)
-			? this.model
-					.getOptions()
-					.tooltip.valueFormatter(dataVal[rangeIdentifier])
-			: dataVal[rangeIdentifier].toLocaleString("en");
-
-		// pie charts don't have a dataset label since they only support one dataset
-		const label = dataVal[groupMapsTo];
-
-		return `<div class="datapoint-tooltip">
-					<p class="label">${label}</p>
-					<p class="value">${formattedValue}</p>
-				</div>`;
+		return [];
 	}
 
-	getMultilineTooltipHTML(data: any) {
-		// sort them so they are in the same order as the graph
-		data.sort((a, b) => b.value - a.value);
+	formatItems(items) {
+		const options = this.model.getOptions();
 
-		// tells us which value to use
-		const scaleType = this.services.cartesianScales.getDomainScale()
-			.scaleType;
-
-		return (
-			"<ul class='multi-tooltip'>" +
-			data
-				.map((datum) => {
-					const { groupMapsTo } = this.model.getOptions().data;
-					const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-
-					const userProvidedValueFormatter = Tools.getProperty(
-						this.model.getOptions(),
-						"tooltip",
-						"valueFormatter"
-					);
-					const formattedValue = userProvidedValueFormatter
-						? userProvidedValueFormatter(datum[rangeIdentifier])
-						: datum[rangeIdentifier].toLocaleString("en");
-
-					// For the tooltip color, we always want the normal stroke color, not dynamically determined by data value.
-					const indicatorColor = this.model.getStrokeColor(
-						datum[groupMapsTo]
-					);
-
-					return `
-				<li>
-					<div class="datapoint-tooltip">
-						<a style="background-color:${indicatorColor}" class="tooltip-color"></a>
-						<p class="label">${datum[groupMapsTo]}</p>
-						<p class="value">${formattedValue}</p>
-					</div>
-				</li>`;
-				})
-				.join("") +
-			"</ul>"
+		// get user provided custom values for truncation
+		const truncationType = Tools.getProperty(
+			options,
+			"tooltip",
+			"truncation",
+			"type"
 		);
+
+		const truncationThreshold = Tools.getProperty(
+			options,
+			"tooltip",
+			"truncation",
+			"threshold"
+		);
+
+		const truncationNumCharacter = Tools.getProperty(
+			options,
+			"tooltip",
+			"truncation",
+			"numCharacter"
+		);
+
+		// truncate the label if it's too long
+		// only applies to discrete type
+		if (truncationType !== TruncationTypes.NONE) {
+			return items.map((item) => {
+				if (item.label && item.label.length > truncationThreshold) {
+					item.label = Tools.truncateLabel(
+						item.label,
+						truncationType,
+						truncationNumCharacter
+					);
+				}
+
+				if (item.value && item.value.length > truncationThreshold) {
+					item.value = Tools.truncateLabel(
+						item.value,
+						truncationType,
+						truncationNumCharacter
+					);
+				}
+
+				return item;
+			});
+		}
+
+		return items;
+	}
+
+	getTooltipHTML(e: CustomEvent) {
+		let defaultHTML;
+		if (e.detail.content) {
+			defaultHTML = `<div class="title-tooltip">${e.detail.content}</div>`;
+		} else {
+			const items = this.getItems(e);
+			const formattedItems = this.formatItems(items);
+			defaultHTML =
+				`<ul class='multi-tooltip'>` +
+				formattedItems
+					.map(
+						(item) =>
+							`<li>
+							<div class="datapoint-tooltip ${item.bold ? "bold" : ""}">
+								${
+									item.color
+										? '<a style="background-color: ' +
+										  item.color +
+										  '" class="tooltip-color"></a>'
+										: ""
+								}
+								<p class="label">${item.label}</p>
+								<p class="value">${item.value}</p>
+							</div>
+						</li>`
+					)
+					.join("") +
+				`</ul>`;
+		}
+
+		return defaultHTML;
+	}
+
+	valueFormatter(value: any) {
+		const options = this.model.getOptions();
+		const valueFormatter = Tools.getProperty(
+			options,
+			"tooltip",
+			"valueFormatter"
+		);
+
+		if (valueFormatter) {
+			return valueFormatter(value);
+		}
+
+		return value.toLocaleString();
 	}
 
 	render() {
 		this.tooltip.classed("hidden", true);
-	}
-
-	// returns static position based on the element
-	getTooltipPosition(hoveredElement) {
-		const holderPosition = select(this.services.domUtils.getHolder())
-			.node()
-			.getBoundingClientRect();
-		const elementPosition = hoveredElement.getBoundingClientRect();
-
-		// get the vertical offset
-		const { verticalOffset } = this.model.getOptions().tooltip.title;
-
-		const tooltipPos = {
-			left:
-				elementPosition.left -
-				holderPosition.left +
-				elementPosition.width / 2,
-			top: elementPosition.top - holderPosition.top - verticalOffset,
-		};
-
-		return { placement: TooltipPosition.BOTTOM, position: tooltipPos };
 	}
 
 	positionTooltip(positionOverride?: any) {
@@ -263,24 +222,22 @@ export class Tooltip extends Component {
 			const bestPlacementOption = this.positionService.findBestPlacementAt(
 				{
 					left: mouseRelativePos[0],
-					top: mouseRelativePos[1],
+					top: mouseRelativePos[1]
 				},
 				target,
 				[
 					PLACEMENTS.RIGHT,
 					PLACEMENTS.LEFT,
 					PLACEMENTS.TOP,
-					PLACEMENTS.BOTTOM,
+					PLACEMENTS.BOTTOM
 				],
 				() => ({
 					width: holder.offsetWidth,
-					height: holder.offsetHeight,
+					height: holder.offsetHeight
 				})
 			);
 
-			let {
-				horizontalOffset,
-			} = this.model.getOptions().tooltip.datapoint;
+			let { horizontalOffset } = this.model.getOptions().tooltip;
 			if (bestPlacementOption === PLACEMENTS.LEFT) {
 				horizontalOffset *= -1;
 			}
@@ -289,7 +246,7 @@ export class Tooltip extends Component {
 			pos = this.positionService.findPositionAt(
 				{
 					left: mouseRelativePos[0] + horizontalOffset,
-					top: mouseRelativePos[1],
+					top: mouseRelativePos[1]
 				},
 				target,
 				bestPlacementOption

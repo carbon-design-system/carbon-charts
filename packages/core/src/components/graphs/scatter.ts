@@ -1,10 +1,10 @@
 // Internal Imports
 import { Component } from "../component";
-import { TooltipTypes, Roles, Events } from "../../interfaces";
+import { Roles, Events } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
-import { select, Selection, event as d3Event } from "d3-selection";
+import { select, Selection } from "d3-selection";
 
 export class Scatter extends Component {
 	type = "scatter";
@@ -21,47 +21,69 @@ export class Scatter extends Component {
 			Events.Legend.ITEM_MOUSEOUT,
 			this.handleLegendMouseOut
 		);
+
+		const { fadeInOnChartHolderMouseover } = this.configs;
+		if (fadeInOnChartHolderMouseover) {
+			// Fade-in scatter circles
+			events.addEventListener(
+				Events.Chart.MOUSEOVER,
+				this.handleChartHolderOnHover
+			);
+			// Fade-out scatter circles
+			events.addEventListener(
+				Events.Chart.MOUSEOUT,
+				this.handleChartHolderOnMouseOut
+			);
+		}
 	}
 
 	render(animate: boolean) {
 		// Grab container SVG
 		const svg = this.getContainerSVG();
 
-		const groupedData = this.model.getGroupedData();
+		const options = this.model.getOptions();
+		const { groupMapsTo } = options.data;
+
+		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+
+		const { stacked } = this.configs;
+		let scatterData;
+		if (stacked) {
+			const percentage = Object.keys(options.axes).some(
+				(axis) => options.axes[axis].percentage
+			);
+			scatterData = this.model.getStackedData({ percentage });
+		} else {
+			scatterData = this.model
+				.getDisplayData()
+				.filter(
+					(d) =>
+						d[rangeIdentifier] !== undefined &&
+						d[rangeIdentifier] !== null
+				);
+		}
 
 		// Update data on dot groups
-		const dotGroups = svg
-			.selectAll("g.dots")
-			.data(groupedData, (group) => group.name);
-
-		// Remove dot groups that need to be removed
-		dotGroups.exit().attr("opacity", 0).remove();
-
-		// Add the dot groups that need to be introduced
-		const dotGroupsEnter = dotGroups
-			.enter()
-			.append("g")
-			.classed("dots", true)
-			.attr("role", Roles.GROUP);
-
-		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-		// Update data on all circles
-		const dots = dotGroupsEnter
-			.merge(dotGroups)
+		const circles = svg
 			.selectAll("circle.dot")
-			.data((group) =>
-				group.data.filter(
-					(datum) =>
-						datum[rangeIdentifier] !== null &&
-						datum[rangeIdentifier] !== undefined
-				)
+			.data(
+				scatterData,
+				(datum) => `${datum[groupMapsTo]}-${datum[domainIdentifier]}`
 			);
 
-		// Add the circles that need to be introduced
-		const dotsEnter = dots.enter().append("circle").attr("opacity", 0);
+		// Remove circles that need to be removed
+		circles.exit().attr("opacity", 0).remove();
+
+		// Add the dot groups that need to be introduced
+		const enteringCircles = circles
+			.enter()
+			.append("circle")
+			.classed("dot", true)
+			.attr("opacity", 0);
 
 		// Apply styling & position
-		const circlesToStyle = dotsEnter.merge(dots);
+		const circlesToStyle = enteringCircles.merge(circles);
 		this.styleCircles(circlesToStyle, animate);
 
 		// Add event listeners to elements drawn
@@ -81,7 +103,7 @@ export class Scatter extends Component {
 		// Get highest domain and range thresholds
 		const [
 			xThreshold,
-			yThreshold,
+			yThreshold
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
 			this.services.cartesianScales.getHighestDomainThreshold(),
 			this.services.cartesianScales.getHighestRangeThreshold(),
@@ -90,7 +112,7 @@ export class Scatter extends Component {
 
 		const [
 			getXValue,
-			getYValue,
+			getYValue
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
 			(d, i) => cartesianScales.getDomainValue(d, i),
 			(d, i) => cartesianScales.getRangeValue(d, i),
@@ -122,7 +144,7 @@ export class Scatter extends Component {
 	styleCircles(selection: Selection<any, any, any, any>, animate: boolean) {
 		// Chart options mixed with the internal configurations
 		const options = this.model.getOptions();
-		const { filled } = options.points;
+		const { filled, fillOpacity } = options.points;
 		const { cartesianScales, transitions } = this.services;
 
 		const { groupMapsTo } = options.data;
@@ -133,13 +155,14 @@ export class Scatter extends Component {
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
 		const [
 			getXValue,
-			getYValue,
+			getYValue
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
 			cartesianScales.getOrientation()
 		);
 
+		const { fadeInOnChartHolderMouseover } = this.configs;
 		selection
 			.raise()
 			.classed("dot", true)
@@ -165,10 +188,10 @@ export class Scatter extends Component {
 						filled
 					)
 			)
-			.attr("cx", getXValue)
 			.transition(
 				transitions.getTransition("scatter-update-enter", animate)
 			)
+			.attr("cx", getXValue)
 			.attr("cy", getYValue)
 			.attr("r", options.points.radius)
 			.attr("fill", (d) => {
@@ -187,7 +210,7 @@ export class Scatter extends Component {
 					);
 				}
 			})
-			.attr("fill-opacity", filled ? 0.2 : 1)
+			.attr("fill-opacity", filled ? fillOpacity : 1)
 			.attr("stroke", (d) =>
 				this.model.getStrokeColor(
 					d[groupMapsTo],
@@ -195,7 +218,7 @@ export class Scatter extends Component {
 					d
 				)
 			)
-			.attr("opacity", 1)
+			.attr("opacity", fadeInOnChartHolderMouseover ? 0 : 1)
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "point")
@@ -204,6 +227,28 @@ export class Scatter extends Component {
 		// Add event listeners to elements drawn
 		this.addEventListeners();
 	}
+
+	handleChartHolderOnHover = (event: CustomEvent) => {
+		this.parent
+			.selectAll("circle.dot")
+			.transition(
+				this.services.transitions.getTransition(
+					"chart-holder-hover-scatter"
+				)
+			)
+			.attr("opacity", 1);
+	};
+
+	handleChartHolderOnMouseOut = (event: CustomEvent) => {
+		this.parent
+			.selectAll("circle.dot")
+			.transition(
+				this.services.transitions.getTransition(
+					"chart-holder-mouseout-scatter"
+				)
+			)
+			.attr("opacity", 0);
+	};
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
@@ -238,7 +283,7 @@ export class Scatter extends Component {
 
 		this.parent
 			.selectAll("circle")
-			.on("mouseover mousemove", function (datum) {
+			.on("mouseover", function (datum) {
 				const hoveredElement = select(this);
 
 				hoveredElement
@@ -251,21 +296,53 @@ export class Scatter extends Component {
 						)
 					);
 
-				const eventNameToDispatch =
-					d3Event.type === "mouseover"
-						? Events.Scatter.SCATTER_MOUSEOVER
-						: Events.Scatter.SCATTER_MOUSEMOVE;
-				// Dispatch mouse event
-				self.services.events.dispatchEvent(eventNameToDispatch, {
-					element: hoveredElement,
-					datum,
-				});
+				const hoveredX = self.services.cartesianScales.getDomainValue(
+					datum
+				);
+				const hoveredY = self.services.cartesianScales.getRangeValue(
+					datum
+				);
+				const overlappingData = self.model
+					.getDisplayData()
+					.filter((d) => {
+						return (
+							hoveredX ===
+								self.services.cartesianScales.getDomainValue(
+									d
+								) &&
+							hoveredY ===
+								self.services.cartesianScales.getRangeValue(d)
+						);
+					});
 
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					type: TooltipTypes.DATAPOINT,
+					data: overlappingData
 				});
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.Scatter.SCATTER_MOUSEOVER,
+					{
+						element: hoveredElement,
+						datum
+					}
+				);
+			})
+			.on("mousemove", function (datum) {
+				const hoveredElement = select(this);
+
+				// Dispatch mouse event
+				self.services.events.dispatchEvent(
+					Events.Scatter.SCATTER_MOUSEMOVE,
+					{
+						element: hoveredElement,
+						datum
+					}
+				);
+
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on("click", function (datum) {
 				// Dispatch mouse event
@@ -273,7 +350,7 @@ export class Scatter extends Component {
 					Events.Scatter.SCATTER_CLICK,
 					{
 						element: select(this),
-						datum,
+						datum
 					}
 				);
 			})
@@ -290,13 +367,13 @@ export class Scatter extends Component {
 					Events.Scatter.SCATTER_MOUSEOUT,
 					{
 						element: hoveredElement,
-						datum,
+						datum
 					}
 				);
 
 				// Hide tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-					hoveredElement,
+					hoveredElement
 				});
 			});
 	}
@@ -317,6 +394,14 @@ export class Scatter extends Component {
 		events.removeEventListener(
 			Events.Legend.ITEM_MOUSEOUT,
 			this.handleLegendMouseOut
+		);
+		events.removeEventListener(
+			Events.Chart.MOUSEOVER,
+			this.handleChartHolderOnHover
+		);
+		events.removeEventListener(
+			Events.Chart.MOUSEOUT,
+			this.handleChartHolderOnMouseOut
 		);
 	}
 }

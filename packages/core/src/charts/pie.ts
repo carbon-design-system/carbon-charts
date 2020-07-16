@@ -10,10 +10,9 @@ import { Skeletons } from "../interfaces/enums";
 import {
 	Pie,
 	// the imports below are needed because of typescript bug (error TS4029)
-	TooltipPie,
 	Legend,
 	LayoutComponent,
-	Skeleton,
+	Skeleton
 } from "../components/index";
 
 export class PieChart extends Chart {
@@ -50,13 +49,12 @@ export class PieChart extends Chart {
 		const graphFrameComponents = [
 			new Pie(this.model, this.services),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.PIE,
-			}),
+				skeleton: Skeletons.PIE
+			})
 		];
 
 		// get the base chart components and export with tooltip
 		const components: any[] = this.getChartComponents(graphFrameComponents);
-		components.push(new TooltipPie(this.model, this.services));
 		return components;
 	}
 }

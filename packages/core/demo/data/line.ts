@@ -1,7 +1,7 @@
 import { timeFormat } from "d3";
 
 export const lineData = [
-	{ group: "Dataset 1", key: "Qty", value: 32100 },
+	{ group: "Dataset 1", key: "Qty", value: 34200 },
 	{ group: "Dataset 1", key: "More", value: 23500 },
 	{ group: "Dataset 1", key: "Sold", value: 53100 },
 	{ group: "Dataset 1", key: "Restocking", value: 42300 },
@@ -20,7 +20,7 @@ export const lineData = [
 	{ group: "Dataset 4", key: "More", value: 1200 },
 	{ group: "Dataset 4", key: "Sold", value: 9000 },
 	{ group: "Dataset 4", key: "Restocking", value: 24000, audienceSize: 10 },
-	{ group: "Dataset 4", key: "Misc", value: 3000, audienceSize: 10 },
+	{ group: "Dataset 4", key: "Misc", value: 3000, audienceSize: 10 }
 ];
 
 export const lineOptions = {
@@ -29,22 +29,139 @@ export const lineOptions = {
 		bottom: {
 			title: "2019 Annual Sales Figures",
 			mapsTo: "key",
-			scaleType: "labels",
+			scaleType: "labels"
 		},
 		left: {
 			mapsTo: "value",
 			title: "Conversion rate",
-			scaleType: "linear",
+			scaleType: "linear"
+		}
+	}
+};
+
+export const lineLongLabelData = [
+	{ group: "Dataset 1", key: "Qty", value: 34200 },
+	{ group: "Dataset 1", key: "More", value: 23500 },
+	{ group: "Dataset 1", key: "Sold", value: 53100 },
+	{
+		group: "Dataset 1",
+		key: "347FEDE2F7403759069E5F84B65B49D2467D8914B5184738699259AA310EB0F9",
+		value: 42300
+	},
+	{ group: "Dataset 1", key: "Misc", value: 12300 },
+	{ group: "Dataset 2", key: "Qty", value: 34200 },
+	{ group: "Dataset 2", key: "More", value: 53200 },
+	{ group: "Dataset 2", key: "Sold", value: 42300 },
+	{
+		group: "Dataset 2",
+		key: "347FEDE2F7403759069E5F84B65B49D2467D8914B5184738699259AA310EB0F9",
+		value: 21400
+	},
+	{ group: "Dataset 2", key: "Misc", value: 0 },
+	{ group: "Dataset 3", key: "Qty", value: 41200 },
+	{ group: "Dataset 3", key: "More", value: 18400 },
+	{ group: "Dataset 3", key: "Sold", value: 34210 },
+	{
+		group: "Dataset 3",
+		key: "347FEDE2F7403759069E5F84B65B49D2467D8914B5184738699259AA310EB0F9",
+		value: 1400
+	},
+	{ group: "Dataset 3", key: "Misc", value: 42100 },
+	{ group: "LongLabelShouldBeTruncated", key: "Qty", value: 22000 },
+	{ group: "LongLabelShouldBeTruncated", key: "More", value: 1200 },
+	{ group: "LongLabelShouldBeTruncated", key: "Sold", value: 9000 },
+	{
+		group: "LongLabelShouldBeTruncated",
+		key: "347FEDE2F7403759069E5F84B65B49D2467D8914B5184738699259AA310EB0F9",
+		value: 24000,
+		audienceSize: 10
+	},
+	{
+		group: "LongLabelShouldBeTruncated",
+		key: "Misc",
+		value: 3000,
+		audienceSize: 10
+	}
+];
+
+export const lineLongLabelOptions = {
+	title: "Line (discrete with truncated labels)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "key",
+			scaleType: "labels"
 		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	}
+};
+
+export const lineCustomDomainOptions = {
+	title: "Line (discrete with customized domain)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "key",
+			scaleType: "labels",
+			domain: ["Qty", "More", "Misc"]
+		},
+		left: {
+			domain: [10000, 50000],
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	}
+};
+
+export const lineSelectedGroupsData = [
+	{ group: "Dataset 1", key: "Qty", value: 34200 },
+	{ group: "Dataset 1", key: "More", value: 23500 },
+	{ group: "Dataset 1", key: "Sold", value: 53100 },
+	{ group: "Dataset 1", key: "Restocking", value: 42300 },
+	{ group: "Dataset 1", key: "Misc", value: 12300 },
+	{ group: "Dataset 2", key: "Qty", value: 34200 },
+	{ group: "Dataset 2", key: "More", value: 56000 },
+	{ group: "Dataset 2", key: "Sold", value: 42300 },
+	{ group: "Dataset 2", key: "Restocking", value: 21400 },
+	{ group: "Dataset 2", key: "Misc", value: 0 },
+	{ group: "Dataset 3", key: "Qty", value: 41200 },
+	{ group: "Dataset 3", key: "More", value: 18400 },
+	{ group: "Dataset 3", key: "Sold", value: 34210 },
+	{ group: "Dataset 3", key: "Restocking", value: 1400 },
+	{ group: "Dataset 3", key: "Misc", value: 42100 },
+	{ group: "Dataset 4", key: "Qty", value: 22000 },
+	{ group: "Dataset 4", key: "More", value: 1200 },
+	{ group: "Dataset 4", key: "Sold", value: 9000 },
+	{ group: "Dataset 4", key: "Restocking", value: 24000, audienceSize: 10 },
+	{ group: "Dataset 4", key: "Misc", value: 3000, audienceSize: 10 }
+];
+
+export const lineSelectedGroupsOptions = {
+	title: "Line (selected groups)",
+	data: {
+		selectedGroups: ["Dataset 1", "Dataset 3"]
 	},
-	chartTypes: {
-		// TODO
-		line: ["Dataset 4", "Dataset 1"],
-	},
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "key",
+			scaleType: "labels"
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	}
 };
 
 export const lineTimeSeriesData = [
-	{ group: "Dataset 1", date: new Date(2019, 0, 1), value: 10000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 1), value: 50000 },
 	{ group: "Dataset 1", date: new Date(2019, 0, 5), value: 65000 },
 	{ group: "Dataset 1", date: new Date(2019, 0, 8), value: null },
 	{ group: "Dataset 1", date: new Date(2019, 0, 13), value: 49213 },
@@ -63,7 +180,7 @@ export const lineTimeSeriesData = [
 	{ group: "Dataset 4", date: new Date(2019, 0, 6), value: 37312 },
 	{ group: "Dataset 4", date: new Date(2019, 0, 8), value: 51432 },
 	{ group: "Dataset 4", date: new Date(2019, 0, 15), value: 25332 },
-	{ group: "Dataset 4", date: new Date(2019, 0, 19), value: null },
+	{ group: "Dataset 4", date: new Date(2019, 0, 19), value: null }
 ];
 
 export const lineTimeSeriesOptions = {
@@ -72,15 +189,33 @@ export const lineTimeSeriesOptions = {
 		bottom: {
 			title: "2019 Annual Sales Figures",
 			mapsTo: "date",
-			scaleType: "time",
+			scaleType: "time"
 		},
 		left: {
 			mapsTo: "value",
 			title: "Conversion rate",
-			scaleType: "linear",
-		},
+			scaleType: "linear"
+		}
 	},
-	curve: "curveMonotoneX",
+	curve: "curveMonotoneX"
+};
+
+export const lineTimeSeriesCustomDomainOptions = {
+	title: "Line (time series with customized domain)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			domain: [new Date(2019, 0, 5), new Date(2019, 0, 15)],
+			mapsTo: "date",
+			scaleType: "time"
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	},
+	curve: "curveMonotoneX"
 };
 
 export const lineTimeSeriesWithThresholdsOptions = {
@@ -94,9 +229,9 @@ export const lineTimeSeriesWithThresholdsOptions = {
 				{
 					value: new Date(2019, 0, 11),
 					label: "Custom formatter",
-					valueFormatter: timeFormat("%b %d"),
-				},
-			],
+					valueFormatter: timeFormat("%b %d")
+				}
+			]
 		},
 		left: {
 			mapsTo: "value",
@@ -104,11 +239,11 @@ export const lineTimeSeriesWithThresholdsOptions = {
 			scaleType: "linear",
 			thresholds: [
 				{ value: 55000, label: "Custom label", fillColor: "orange" },
-				{ value: 10000, fillColor: "#03a9f4" },
-			],
-		},
+				{ value: 10000, fillColor: "#03a9f4" }
+			]
+		}
 	},
-	curve: "curveMonotoneX",
+	curve: "curveMonotoneX"
 };
 
 export const lineTimeSeriesDenseData = [
@@ -151,7 +286,7 @@ export const lineTimeSeriesDenseData = [
 	{ group: "Dataset 2", date: new Date(2019, 0, 14), value: 40000 },
 	{ group: "Dataset 2", date: new Date(2019, 0, 15, 5), value: 45000 },
 	{ group: "Dataset 2", date: new Date(2019, 0, 15, 10), value: 35000 },
-	{ group: "Dataset 2", date: new Date(2019, 0, 15, 18), value: 30000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 15, 18), value: 30000 }
 ];
 
 export const lineTimeSeriesDenseOptions = {
@@ -160,15 +295,15 @@ export const lineTimeSeriesDenseOptions = {
 		bottom: {
 			title: "2019 Annual Sales Figures",
 			mapsTo: "date",
-			scaleType: "time",
+			scaleType: "time"
 		},
 		left: {
 			mapsTo: "value",
 			title: "Conversion rate",
-			scaleType: "linear",
-		},
+			scaleType: "linear"
+		}
 	},
-	curve: "curveMonotoneX",
+	curve: "curveMonotoneX"
 };
 
 export const lineTimeSeriesDataRotatedTicks = [
@@ -176,7 +311,7 @@ export const lineTimeSeriesDataRotatedTicks = [
 	{ group: "Dataset 1", date: new Date(2019, 11, 31), value: 23500 },
 	{ group: "Dataset 1", date: new Date(2020, 0, 1), value: 53100 },
 	{ group: "Dataset 1", date: new Date(2020, 0, 2), value: 42300 },
-	{ group: "Dataset 1", date: new Date(2020, 0, 3), value: 12300 },
+	{ group: "Dataset 1", date: new Date(2020, 0, 3), value: 12300 }
 ];
 
 export const lineTimeSeriesRotatedTicksOptions = {
@@ -185,12 +320,12 @@ export const lineTimeSeriesRotatedTicksOptions = {
 	axes: {
 		bottom: {
 			scaleType: "time",
-			mapsTo: "date",
+			mapsTo: "date"
 		},
 		left: {
-			mapsTo: "value",
-		},
-	},
+			mapsTo: "value"
+		}
+	}
 };
 
 export const lineHorizontalOptions = {
@@ -199,14 +334,14 @@ export const lineHorizontalOptions = {
 		left: {
 			title: "2019 Annual Sales Figures",
 			mapsTo: "key",
-			scaleType: "labels",
+			scaleType: "labels"
 		},
 		bottom: {
 			mapsTo: "value",
 			title: "Conversion rate",
-			scaleType: "linear",
-		},
-	},
+			scaleType: "linear"
+		}
+	}
 };
 
 export const lineTimeSeriesHorizontalOptions = {
@@ -215,15 +350,15 @@ export const lineTimeSeriesHorizontalOptions = {
 		left: {
 			title: "2019 Annual Sales Figures",
 			mapsTo: "date",
-			scaleType: "time",
+			scaleType: "time"
 		},
 		bottom: {
 			mapsTo: "value",
 			title: "Conversion rate",
-			scaleType: "linear",
-		},
+			scaleType: "linear"
+		}
 	},
-	curve: "curveMonotoneY",
+	curve: "curveMonotoneY"
 };
 
 // line - empty state
@@ -234,15 +369,15 @@ export const lineEmptyStateOptions = {
 		bottom: {
 			title: "2019 Annual Sales Figures",
 			mapsTo: "date",
-			scaleType: "time",
+			scaleType: "time"
 		},
 		left: {
 			mapsTo: "value",
 			title: "Conversion rate",
-			scaleType: "linear",
-		},
+			scaleType: "linear"
+		}
 	},
-	curve: "curveMonotoneX",
+	curve: "curveMonotoneX"
 };
 
 // line - skeleton
@@ -253,16 +388,16 @@ export const lineSkeletonOptions = {
 		bottom: {
 			title: "2019 Annual Sales Figures",
 			mapsTo: "date",
-			scaleType: "time",
+			scaleType: "time"
 		},
 		left: {
 			mapsTo: "value",
 			title: "Conversion rate",
-			scaleType: "linear",
-		},
+			scaleType: "linear"
+		}
 	},
 	curve: "curveMonotoneX",
 	data: {
-		loading: true,
-	},
+		loading: true
+	}
 };

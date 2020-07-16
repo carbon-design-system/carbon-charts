@@ -121,7 +121,7 @@ ${storyUtils.generateThemePickerHTML()}
 				container.querySelector("div#chart-demo"),
 				{
 					data: object("Data", demo.data),
-					options: object("Options", demo.options),
+					options: object("Options", demo.options)
 				}
 			);
 
@@ -151,10 +151,9 @@ if (process.env.NODE_ENV !== "production") {
 		storyUtils.addRadioButtonEventListeners(container);
 
 		const getNewRow = () => {
-			const row = document.createElement("div");
-			row.className = "bx--row";
-
-			return row;
+			const newRow = document.createElement("div");
+			newRow.setAttribute("class", "bx--row");
+			return newRow;
 		};
 
 		const grid = document.createElement("div");
@@ -180,7 +179,7 @@ if (process.env.NODE_ENV !== "production") {
 				column.setAttribute("id", demo.title);
 				const chart = new ClassToInitialize(column, {
 					data: demo.data,
-					options: demo.options,
+					options: demo.options
 				});
 
 				row.appendChild(column);

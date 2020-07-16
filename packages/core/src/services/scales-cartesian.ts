@@ -6,7 +6,7 @@ import {
 	CartesianOrientations,
 	ScaleTypes,
 	AxesOptions,
-	ThresholdOptions,
+	ThresholdOptions
 } from "../interfaces";
 import { Tools } from "../tools";
 
@@ -34,7 +34,7 @@ import {
 	subMinutes,
 	differenceInSeconds,
 	subSeconds,
-	addSeconds,
+	addSeconds
 } from "date-fns";
 
 export class CartesianScales extends Service {
@@ -42,14 +42,14 @@ export class CartesianScales extends Service {
 		top: null,
 		right: null,
 		bottom: null,
-		left: null,
+		left: null
 	};
 
 	protected scales = {
 		top: null,
 		right: null,
 		bottom: null,
-		left: null,
+		left: null
 	};
 
 	protected domainAxisPosition: AxisPositions;
@@ -63,6 +63,20 @@ export class CartesianScales extends Service {
 
 	getRangeAxisPosition() {
 		return this.rangeAxisPosition;
+	}
+
+	getAxisOptions(position: AxisPositions) {
+		return Tools.getProperty(this.model.getOptions(), "axes", position);
+	}
+
+	getDomainAxisOptions() {
+		const domainAxisPosition = this.getDomainAxisPosition();
+		return this.getAxisOptions(domainAxisPosition);
+	}
+
+	getRangeAxisOptions() {
+		const rangeAxisPosition = this.getRangeAxisPosition();
+		return this.getAxisOptions(rangeAxisPosition);
 	}
 
 	update(animate = true) {
@@ -117,6 +131,16 @@ export class CartesianScales extends Service {
 		return this.scaleTypes[axisPosition];
 	}
 
+	getDomainAxisScaleType() {
+		const domainAxisPosition = this.getDomainAxisPosition();
+		return this.getScaleTypeByPosition(domainAxisPosition);
+	}
+
+	getRangeAxisScaleType() {
+		const rangeAxisPosition = this.getRangeAxisPosition();
+		return this.getScaleTypeByPosition(rangeAxisPosition);
+	}
+
 	getDomainScale() {
 		return this.scales[this.domainAxisPosition];
 	}
@@ -129,7 +153,7 @@ export class CartesianScales extends Service {
 	getMainXAxisPosition() {
 		const possibleXAxisPositions = [
 			AxisPositions.BOTTOM,
-			AxisPositions.TOP,
+			AxisPositions.TOP
 		];
 
 		return [this.domainAxisPosition, this.rangeAxisPosition].find(
@@ -141,7 +165,7 @@ export class CartesianScales extends Service {
 	getMainYAxisPosition() {
 		const possibleYAxisPositions = [
 			AxisPositions.LEFT,
-			AxisPositions.RIGHT,
+			AxisPositions.RIGHT
 		];
 
 		return [this.domainAxisPosition, this.rangeAxisPosition].find(
@@ -208,7 +232,7 @@ export class CartesianScales extends Service {
 		return axisOptions.mapsTo;
 	}
 
-	/** Uses the primary Y Axis to get data items associated with that value. */
+	/** Uses the Y Axis to get data items associated with that value. */
 	getDataFromDomain(domainValue) {
 		const displayData = this.model.getDisplayData();
 		const domainIdentifier = this.getDomainIdentifier();
@@ -303,7 +327,7 @@ export class CartesianScales extends Service {
 
 		const result = {
 			domainAxisPosition: null,
-			rangeAxisPosition: null,
+			rangeAxisPosition: null
 		};
 		if (
 			mainHorizontalScaleType === ScaleTypes.LABELS ||
@@ -337,11 +361,19 @@ export class CartesianScales extends Service {
 		}
 
 		const displayData = this.model.getDisplayData();
-		const { mapsTo } = axisOptions;
+		const { mapsTo, percentage } = axisOptions;
 
 		// If domain is specified return that domain
 		if (axisOptions.domain) {
-			return axisOptions.domain;
+			if (scaleType === ScaleTypes.LABELS) {
+				return axisOptions.domain;
+			}
+			return this.extendsDomain(axisPosition, axisOptions.domain);
+		}
+
+		// Return [0, 100] for percentage axis scale
+		if (percentage) {
+			return [0, 100];
 		}
 
 		// If scale is a LABELS scale, return some labels as the domain
@@ -431,7 +463,7 @@ export class CartesianScales extends Service {
 
 		return {
 			threshold: highestThreshold,
-			scaleValue: domainScale(highestThreshold.value),
+			scaleValue: domainScale(highestThreshold.value)
 		};
 	}
 
@@ -456,7 +488,7 @@ export class CartesianScales extends Service {
 
 		return {
 			threshold: highestThreshold,
-			scaleValue: rangeScale(highestThreshold.value),
+			scaleValue: rangeScale(highestThreshold.value)
 		};
 	}
 }
@@ -468,56 +500,56 @@ function addSpacingToTimeDomain(domain: any, spaceToAddToEdges: number) {
 	if (differenceInYears(endDate, startDate) > 1) {
 		return [
 			subYears(startDate, spaceToAddToEdges),
-			addYears(endDate, spaceToAddToEdges),
+			addYears(endDate, spaceToAddToEdges)
 		];
 	}
 
 	if (differenceInMonths(endDate, startDate) > 1) {
 		return [
 			subMonths(startDate, spaceToAddToEdges),
-			addMonths(endDate, spaceToAddToEdges),
+			addMonths(endDate, spaceToAddToEdges)
 		];
 	}
 
 	if (differenceInDays(endDate, startDate) > 1) {
 		return [
 			subDays(startDate, spaceToAddToEdges),
-			addDays(endDate, spaceToAddToEdges),
+			addDays(endDate, spaceToAddToEdges)
 		];
 	}
 
 	if (differenceInHours(endDate, startDate) > 1) {
 		return [
 			subHours(startDate, spaceToAddToEdges),
-			addHours(endDate, spaceToAddToEdges),
+			addHours(endDate, spaceToAddToEdges)
 		];
 	}
 
 	if (differenceInMinutes(endDate, startDate) > 30) {
 		return [
 			subMinutes(startDate, spaceToAddToEdges * 30),
-			addMinutes(endDate, spaceToAddToEdges * 30),
+			addMinutes(endDate, spaceToAddToEdges * 30)
 		];
 	}
 
 	if (differenceInMinutes(endDate, startDate) > 1) {
 		return [
 			subMinutes(startDate, spaceToAddToEdges),
-			addMinutes(endDate, spaceToAddToEdges),
+			addMinutes(endDate, spaceToAddToEdges)
 		];
 	}
 
 	if (differenceInSeconds(endDate, startDate) > 15) {
 		return [
 			subSeconds(startDate, spaceToAddToEdges * 15),
-			addSeconds(endDate, spaceToAddToEdges * 15),
+			addSeconds(endDate, spaceToAddToEdges * 15)
 		];
 	}
 
 	if (differenceInSeconds(endDate, startDate) > 1) {
 		return [
 			subSeconds(startDate, spaceToAddToEdges),
-			addSeconds(endDate, spaceToAddToEdges),
+			addSeconds(endDate, spaceToAddToEdges)
 		];
 	}
 

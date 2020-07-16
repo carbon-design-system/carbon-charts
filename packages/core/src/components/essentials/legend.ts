@@ -1,8 +1,12 @@
 // Internal Imports
-import * as Configuration from "../../configuration";
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { LegendOrientations, Roles, Events } from "../../interfaces";
+import {
+	LegendOrientations,
+	Roles,
+	Events,
+	TruncationTypes
+} from "../../interfaces";
 import { DOMUtils } from "../../services";
 
 // D3 Imports
@@ -14,9 +18,10 @@ export class Legend extends Component {
 	render() {
 		const svg = this.getContainerSVG().attr(
 			"role",
-			Roles.GRAPHICS_DOCUMENT
+			`${Roles.GRAPHICS_DOCUMENT} ${Roles.DOCUMENT}`
 		);
 		const options = this.model.getOptions();
+		const legendOptions = Tools.getProperty(options, "legend");
 		const legendItems = svg
 			.selectAll("g.legend-item")
 			.data(this.model.getDataGroups(), (dataGroup) => dataGroup.name);
@@ -26,10 +31,31 @@ export class Legend extends Component {
 		const addedLegendItems = legendItems
 			.enter()
 			.append("g")
-			.classed("legend-item", true);
+			.classed("legend-item", true)
+			.classed("active", function (d, i) {
+				return d.status === options.legend.items.status.ACTIVE;
+			});
 
 		// Configs
 		const checkboxRadius = options.legend.checkbox.radius;
+
+		// Truncation
+		// get user provided custom values for truncation
+		const truncationType = Tools.getProperty(
+			legendOptions,
+			"truncation",
+			"type"
+		);
+		const truncationThreshold = Tools.getProperty(
+			legendOptions,
+			"truncation",
+			"threshold"
+		);
+		const truncationNumCharacter = Tools.getProperty(
+			legendOptions,
+			"truncation",
+			"numCharacter"
+		);
 
 		addedLegendItems
 			.append("rect")
@@ -47,12 +73,26 @@ export class Legend extends Component {
 			.classed("active", function (d, i) {
 				return d.status === options.legend.items.status.ACTIVE;
 			});
-
-		addedLegendItems
+		const addedLegendItemsText = addedLegendItems
 			.append("text")
-			.merge(legendItems.select("text"))
-			.html((d) => d.name)
-			.attr("alignment-baseline", "middle");
+			.merge(legendItems.select("text"));
+
+		// truncate the legend label if it's too long
+		if (truncationType !== TruncationTypes.NONE) {
+			addedLegendItemsText.html(function (d) {
+				if (d.name.length > truncationThreshold) {
+					return Tools.truncateLabel(
+						d.name,
+						truncationType,
+						truncationNumCharacter
+					);
+				} else {
+					return d.name;
+				}
+			});
+		} else {
+			addedLegendItemsText.html((d) => d.name);
+		}
 
 		this.breakItemsIntoLines(addedLegendItems);
 
@@ -177,14 +217,28 @@ export class Legend extends Component {
 				legendItem
 					.select("text")
 					.attr("x", startingPoint + spaceNeededForCheckbox)
-					.attr("y", yOffset + yPosition);
+					.attr("y", yOffset + yPosition + 3);
 
 				lastYPosition = yPosition;
+
+				// Test if legendItems are placed in the correct direction
+				const testHorizontal =
+					(!legendOrientation ||
+						legendOrientation === LegendOrientations.HORIZONTAL) &&
+					legendItem.select("rect.checkbox").attr("y") === "0";
+
+				const testVertical =
+					legendOrientation === LegendOrientations.VERTICAL &&
+					legendItem.select("rect.checkbox").attr("x") === "0";
+
+				const hasCorrectLegendDirection =
+					testHorizontal || testVertical;
 
 				// Render checkbox check icon
 				if (
 					hasDeactivatedItems &&
-					legendItem.select("g.check").empty()
+					legendItem.select("g.check").empty() &&
+					hasCorrectLegendDirection
 				) {
 					legendItem.append("g").classed("check", true).html(`
 							<svg focusable="false" preserveAspectRatio="xMidYMid meet"
@@ -227,16 +281,21 @@ export class Legend extends Component {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
+		const legendOptions = Tools.getProperty(options, "legend");
+		const truncationThreshold = Tools.getProperty(
+			legendOptions,
+			"truncation",
+			"threshold"
+		);
 
 		svg.selectAll("g.legend-item")
 			.on("mouseover", function () {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_HOVER, {
-					hoveredElement: select(this),
+					hoveredElement: select(this)
 				});
 
 				// Configs
 				const checkboxRadius = options.legend.checkbox.radius;
-
 				const hoveredItem = select(this);
 				hoveredItem
 					.append("rect")
@@ -258,10 +317,21 @@ export class Legend extends Component {
 					.attr("rx", 3)
 					.attr("ry", 3)
 					.lower();
+
+				const hoveredItemData = hoveredItem.datum() as any;
+				if (hoveredItemData.name.length > truncationThreshold) {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						hoveredElement: hoveredItem,
+						content: hoveredItemData.name
+					});
+				}
+			})
+			.on("mousemove", function () {
+				self.services.events.dispatchEvent(Events.Tooltip.MOVE);
 			})
 			.on("click", function () {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
-					clickedElement: select(this),
+					clickedElement: select(this)
 				});
 
 				const clickedItem = select(this);
@@ -273,10 +343,12 @@ export class Legend extends Component {
 				const hoveredItem = select(this);
 				hoveredItem.select("rect.hover-stroke").remove();
 
+				self.services.events.dispatchEvent(Events.Tooltip.HIDE);
+
 				self.services.events.dispatchEvent(
 					Events.Legend.ITEM_MOUSEOUT,
 					{
-						hoveredElement: hoveredItem,
+						hoveredElement: hoveredItem
 					}
 				);
 			});
