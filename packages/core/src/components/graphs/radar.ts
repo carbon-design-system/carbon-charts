@@ -45,7 +45,7 @@ export class Radar extends Component {
 	}
 
 	render(animate = true) {
-		this.svg = this.getContainerSVG();
+		const svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
 		});
@@ -141,7 +141,7 @@ export class Radar extends Component {
 		/////////////////////////////
 
 		// y axes
-		const yAxes = DOMUtils.appendOrSelect(this.svg, "g.y-axes").attr(
+		const yAxes = DOMUtils.appendOrSelect(svg, "g.y-axes").attr(
 			"role",
 			Roles.GROUP
 		);
@@ -208,7 +208,7 @@ export class Radar extends Component {
 		);
 
 		// y labels (show only the min and the max labels)
-		const yLabels = DOMUtils.appendOrSelect(this.svg, "g.y-labels").attr(
+		const yLabels = DOMUtils.appendOrSelect(svg, "g.y-labels").attr(
 			"role",
 			Roles.GROUP
 		);
@@ -294,7 +294,7 @@ export class Radar extends Component {
 		);
 
 		// x axes
-		const xAxes = DOMUtils.appendOrSelect(this.svg, "g.x-axes").attr(
+		const xAxes = DOMUtils.appendOrSelect(svg, "g.x-axes").attr(
 			"role",
 			Roles.GROUP
 		);
@@ -433,7 +433,7 @@ export class Radar extends Component {
 		);
 
 		// x labels
-		const xLabels = DOMUtils.appendOrSelect(this.svg, "g.x-labels").attr(
+		const xLabels = DOMUtils.appendOrSelect(svg, "g.x-labels").attr(
 			"role",
 			Roles.GROUP
 		);
@@ -525,7 +525,7 @@ export class Radar extends Component {
 		);
 
 		// blobs
-		const blobs = DOMUtils.appendOrSelect(this.svg, "g.blobs").attr(
+		const blobs = DOMUtils.appendOrSelect(svg, "g.blobs").attr(
 			"role",
 			Roles.GROUP
 		);
@@ -586,7 +586,7 @@ export class Radar extends Component {
 		);
 
 		// data dots
-		const dots = DOMUtils.appendOrSelect(this.svg, "g.dots").attr(
+		const dots = DOMUtils.appendOrSelect(svg, "g.dots").attr(
 			"role",
 			Roles.GROUP
 		);
@@ -625,7 +625,7 @@ export class Radar extends Component {
 
 		// rectangles
 		const xAxesRect = DOMUtils.appendOrSelect(
-			this.svg,
+			svg,
 			"g.x-axes-rect"
 		).attr("role", Roles.GROUP);
 		const xAxisRectUpdate = xAxesRect
@@ -649,6 +649,16 @@ export class Radar extends Component {
 				(key) => `rotate(${radToDeg(xScale(key))}, ${c.x}, ${c.y})`
 			);
 
+		const alignCenter = Tools.getProperty(
+			options,
+			"alignCenter"
+		);
+
+		if (alignCenter) {
+			const xOffset = DOMUtils.getCenteringOffset(svg, this.getParent());
+			svg.attr("transform", `translate(${xOffset}, 0)`);
+		}
+	
 		// Add event listeners
 		this.addEventListeners();
 
@@ -657,7 +667,7 @@ export class Radar extends Component {
 
 	// append temporarily the label to get the exact space that it occupies
 	getLabelDimensions = (label: string) => {
-		const tmpTick = DOMUtils.appendOrSelect(this.svg, `g.tmp-tick`);
+		const tmpTick = DOMUtils.appendOrSelect(this.getContainerSVG(), `g.tmp-tick`);
 		const tmpTickText = DOMUtils.appendOrSelect(tmpTick, `text`).text(
 			label
 		);

@@ -224,6 +224,16 @@ export class Pie extends Component {
 		// Render pie label callouts
 		this.renderCallouts(calloutData);
 
+		const alignCenter = Tools.getProperty(
+			options,
+			"alignCenter"
+		);
+
+		if (alignCenter) {
+			const xOffset = DOMUtils.getCenteringOffset(svg, this.getParent());
+			options.pie.xOffset += xOffset;
+		}
+
 		// Position Pie
 		const pieTranslateX = radius + options.pie.xOffset;
 		let pieTranslateY = radius + options.pie.yOffset;

@@ -149,6 +149,19 @@ export class DOMUtils extends Service {
 		return selection;
 	}
 
+	static getCenteringOffset(svg, parent) {
+		const svgDimensions = DOMUtils.getSVGElementSize(
+			svg,
+			{ useBBox: true }
+		);
+		const {width} = DOMUtils.getSVGElementSize(
+			parent,
+			{ useAttr: true }
+		);
+
+		return Math.floor((width - svgDimensions.width) / 2);
+	}
+
 	protected svg: Element;
 	protected width: string;
 	protected height: string;

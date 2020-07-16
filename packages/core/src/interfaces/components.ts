@@ -51,6 +51,7 @@ export interface LegendOptions {
 		spaceAfter?: Number;
 	};
 	truncation?: TruncationOptions;
+	alignCenter?: boolean;
 }
 
 export interface TooltipOptions {

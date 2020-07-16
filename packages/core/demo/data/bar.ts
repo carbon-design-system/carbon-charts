@@ -93,6 +93,24 @@ export const simpleBarOptions = {
 	}
 };
 
+export const simpleBarCenteredLegendData = simpleBarData;
+
+export const simpleBarCenteredLegendOptions = {
+	title: "Simple bar (centered legend)",
+	axes: {
+		left: {
+			mapsTo: "value"
+		},
+		bottom: {
+			mapsTo: "group",
+			scaleType: "labels"
+		}
+	},
+	legend: {
+		alignCenter: true
+	}
+}
+
 // Simple bar with long labels
 export const simpleBarLongLabelData = [
 	{

@@ -12,6 +12,22 @@ export const donutOptions = {
 	}
 };
 
+export const donutCenteredData = pieData;
+
+export const donutCenteredOptions = {
+	title: "Donut (centered)",
+	resizable: true,
+	legend: {
+		alignCenter: true
+	},
+	alignCenter: true,
+	donut: {
+		center: {
+			label: "Browsers"
+		}
+	}
+}
+
 // donut - empty state
 export const donutEmptyStateData = [];
 export const donutEmptyStateOptions = {

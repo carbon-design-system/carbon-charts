@@ -103,6 +103,10 @@ export interface BaseChartOptions {
 		 */
 		scale?: object;
 	};
+	/**
+	 * options related to non-axis chart alignment
+	 */
+	alignCenter?: boolean;
 }
 
 /**

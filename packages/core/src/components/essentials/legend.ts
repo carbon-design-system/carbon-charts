@@ -114,6 +114,16 @@ export class Legend extends Component {
 		if (legendClickable && addedLegendItems.size() > 0) {
 			this.addEventListeners();
 		}
+		
+		const legendAlignCenter = Tools.getProperty(
+			legendOptions,
+			"alignCenter"
+		);
+
+		if (legendAlignCenter) {
+			const xOffset = DOMUtils.getCenteringOffset(svg, this.getParent());
+			svg.attr("transform", `translate(${xOffset}, 0)`);
+		}
 	}
 
 	breakItemsIntoLines(addedLegendItems) {

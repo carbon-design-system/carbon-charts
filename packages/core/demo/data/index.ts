@@ -142,6 +142,11 @@ let allDemoGroups = [
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
+				options: barDemos.simpleBarCenteredLegendOptions,
+				data: barDemos.simpleBarCenteredLegendData,
+				chartType: chartTypes.SimpleBarChart
+			},
+			{
 				options: barDemos.simpleBarLongLabelOptions,
 				data: barDemos.simpleBarLongLabelData,
 				chartType: chartTypes.SimpleBarChart,
@@ -334,6 +339,11 @@ let allDemoGroups = [
 				chartType: chartTypes.DonutChart
 			},
 			{
+				options: donutDemos.donutCenteredOptions,
+				data: donutDemos.donutCenteredData,
+				chartType: chartTypes.DonutChart
+			},
+			{
 				options: donutDemos.donutEmptyStateOptions,
 				data: donutDemos.donutEmptyStateData,
 				chartType: chartTypes.DonutChart,
@@ -430,6 +440,11 @@ let allDemoGroups = [
 			{
 				options: pieDemos.pieOptions,
 				data: pieDemos.pieData,
+				chartType: chartTypes.PieChart
+			},
+			{
+				options: pieDemos.pieCenteredOptions,
+				data: pieDemos.pieCenteredData,
 				chartType: chartTypes.PieChart
 			},
 			{
@@ -649,6 +664,11 @@ let allDemoGroups = [
 			{
 				data: radarDemos.radarData,
 				options: radarDemos.radarOptions,
+				chartType: chartTypes.RadarChart
+			},
+			{
+				data: radarDemos.radarCenteredData,
+				options: radarDemos.radarCenteredOptions,
 				chartType: chartTypes.RadarChart
 			},
 			{
