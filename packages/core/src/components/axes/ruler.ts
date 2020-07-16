@@ -39,9 +39,10 @@ export class Ruler extends Component {
 		const orientation: CartesianOrientations = this.services.cartesianScales.getOrientation();
 		const mouseCoordinate =
 			orientation === CartesianOrientations.HORIZONTAL ? y : x;
-		const ruler = DOMUtils
-			.appendOrSelect(svg, "g.ruler")
-			.attr("aria-label", "ruler");
+		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler").attr(
+			"aria-label",
+			"ruler"
+		);
 		const rulerLine = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
 		const dataPointElements: GenericSvgSelection = svg.selectAll(
 			"[role=graphics-symbol]"
@@ -193,19 +194,23 @@ export class Ruler extends Component {
 		const self = this;
 		const displayData = this.model.getDisplayData();
 
-		let mouseMoveCallback = function() {
+		let mouseMoveCallback = function () {
 			const pos = mouse(self.parent.node());
 			self.showRuler(pos);
 		};
 
 		// Debounce mouseMoveCallback if there are more than 100 datapoints
 		if (displayData.length > 100) {
-			const debounceThreshold = (displayData.length % 50 * 12.5);
+			const debounceThreshold = (displayData.length % 50) * 12.5;
 
-			mouseMoveCallback = Tools.debounceWithD3MousePosition(function() {
-				const { mousePosition } = this;
-				self.showRuler(mousePosition);
-			}, debounceThreshold, this.parent.node());
+			mouseMoveCallback = Tools.debounceWithD3MousePosition(
+				function () {
+					const { mousePosition } = this;
+					self.showRuler(mousePosition);
+				},
+				debounceThreshold,
+				this.parent.node()
+			);
 		}
 
 		this.backdrop

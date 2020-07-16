@@ -46,39 +46,45 @@ export class Tooltip extends Component {
 		this.tooltip.style("max-width", null);
 
 		// listen to move-tooltip Custom Events to move the tooltip
-		this.services.events.addEventListener(Events.Tooltip.MOVE, (e: CustomEvent) => {
-			this.positionTooltip(e);
-		});
+		this.services.events.addEventListener(
+			Events.Tooltip.MOVE,
+			(e: CustomEvent) => {
+				this.positionTooltip(e);
+			}
+		);
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this.services.events.addEventListener(Events.Tooltip.SHOW, (e: CustomEvent) => {
-			const data = e.detail.data;
-			const defaultHTML = this.getTooltipHTML(e);
+		this.services.events.addEventListener(
+			Events.Tooltip.SHOW,
+			(e: CustomEvent) => {
+				const data = e.detail.data;
+				const defaultHTML = this.getTooltipHTML(e);
 
-			// if there is a provided tooltip HTML function call it
-			if (
-				Tools.getProperty(
-					this.model.getOptions(),
-					"tooltip",
-					"customHTML"
-				)
-			) {
-				tooltipTextContainer.html(
-					this.model
-						.getOptions()
-						.tooltip.customHTML(data, defaultHTML)
-				);
-			} else {
-				// Use default tooltip
-				tooltipTextContainer.html(defaultHTML);
+				// if there is a provided tooltip HTML function call it
+				if (
+					Tools.getProperty(
+						this.model.getOptions(),
+						"tooltip",
+						"customHTML"
+					)
+				) {
+					tooltipTextContainer.html(
+						this.model
+							.getOptions()
+							.tooltip.customHTML(data, defaultHTML)
+					);
+				} else {
+					// Use default tooltip
+					tooltipTextContainer.html(defaultHTML);
+				}
+
+				// Position the tooltip
+				this.positionTooltip(e);
+
+				// Fade in
+				this.tooltip.classed("hidden", false);
 			}
-
-			// Position the tooltip
-			this.positionTooltip(e);
-
-			// Fade in
-			this.tooltip.classed("hidden", false);
-		});
+		);
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
 		this.services.events.addEventListener(Events.Tooltip.HIDE, () => {

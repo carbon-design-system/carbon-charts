@@ -41,7 +41,7 @@ export namespace Tools {
 
 	export function debounceWithD3MousePosition(fn, delay, element) {
 		var timer = null;
-		return function() {
+		return function () {
 			const context = this;
 			const args = arguments;
 
@@ -50,7 +50,7 @@ export namespace Tools {
 
 			clearTimeout(timer);
 
-			timer = setTimeout(function() {
+			timer = setTimeout(function () {
 				//and use the reference here
 				fn.apply(context, args);
 			}, delay);
