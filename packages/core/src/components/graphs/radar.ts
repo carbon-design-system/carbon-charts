@@ -649,15 +649,14 @@ export class Radar extends Component {
 				(key) => `rotate(${radToDeg(xScale(key))}, ${c.x}, ${c.y})`
 			);
 
-		const alignCenter = Tools.getProperty(
+		const alignment = Tools.getProperty(
 			options,
-			"alignCenter"
+			"radar",
+			"alignment"
 		);
 
-		if (alignCenter) {
-			const xOffset = DOMUtils.getCenteringOffset(svg, this.getParent());
-			svg.attr("transform", `translate(${xOffset}, 0)`);
-		}
+		const alignmentOffset = DOMUtils.getAlignmentOffset(alignment, svg, this.getParent());
+		svg.attr("transform", `translate(${alignmentOffset}, 0)`);
 	
 		// Add event listeners
 		this.addEventListeners();

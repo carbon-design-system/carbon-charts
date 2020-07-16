@@ -153,13 +153,13 @@ let allDemoGroups = [
 				isDemoExample: true
 			},
 			{
-				options: barDemos.simpleBarTimeSeriesOptions,
-				data: barDemos.simpleBarTimeSeriesData,
+				options: barDemos.simpleBarFixedDomainOptions,
+				data: barDemos.simpleBarData,
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
-				options: barDemos.simpleBarFixedDomainOptions,
-				data: barDemos.simpleBarData,
+				options: barDemos.simpleBarTimeSeriesOptions,
+				data: barDemos.simpleBarTimeSeriesData,
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
@@ -230,6 +230,11 @@ let allDemoGroups = [
 			{
 				options: barDemos.simpleHorizontalBarOptions,
 				data: barDemos.simpleHorizontalBarData,
+				chartType: chartTypes.SimpleBarChart
+			},
+			{
+				options: barDemos.simpleHorizontalBarCenteredLegendOptions,
+				data: barDemos.simpleHorizontalBarCenteredLegendData,
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
@@ -363,23 +368,13 @@ let allDemoGroups = [
 			"Line charts plot data at regular intervals connected by lines. You can use line visualizations to show trends over time and compare several data sets.",
 		demos: [
 			{
-				options: lineDemos.lineTimeSeriesOptions,
-				data: lineDemos.lineTimeSeriesData,
-				chartType: chartTypes.LineChart
-			},
-			{
-				options: lineDemos.lineTimeSeriesCustomDomainOptions,
-				data: lineDemos.lineTimeSeriesData,
-				chartType: chartTypes.LineChart
-			},
-			{
-				options: lineDemos.lineTimeSeriesDenseOptions,
-				data: lineDemos.lineTimeSeriesDenseData,
-				chartType: chartTypes.LineChart
-			},
-			{
 				options: lineDemos.lineOptions,
 				data: lineDemos.lineData,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineCenteredLegendOptions,
+				data: lineDemos.lineCenteredLegendData,
 				chartType: chartTypes.LineChart
 			},
 			{
@@ -398,20 +393,35 @@ let allDemoGroups = [
 				chartType: chartTypes.LineChart
 			},
 			{
+				options: lineDemos.lineTimeSeriesOptions,
+				data: lineDemos.lineTimeSeriesData,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeriesCustomDomainOptions,
+				data: lineDemos.lineTimeSeriesData,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeriesDenseOptions,
+				data: lineDemos.lineTimeSeriesDenseData,
+				chartType: chartTypes.LineChart
+			},
+			{
 				options: lineDemos.lineTimeSeriesRotatedTicksOptions,
 				data: lineDemos.lineTimeSeriesDataRotatedTicks,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false
 			},
 			{
-				options: lineDemos.lineTimeSeriesHorizontalOptions,
-				data: lineDemos.lineTimeSeriesData,
+				options: lineDemos.lineHorizontalOptions,
+				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false
 			},
 			{
-				options: lineDemos.lineHorizontalOptions,
-				data: lineDemos.lineData,
+				options: lineDemos.lineTimeSeriesHorizontalOptions,
+				data: lineDemos.lineTimeSeriesData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false
 			},

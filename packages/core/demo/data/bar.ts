@@ -107,7 +107,7 @@ export const simpleBarCenteredLegendOptions = {
 		}
 	},
 	legend: {
-		alignCenter: true
+		alignment: "center"
 	}
 }
 
@@ -186,6 +186,24 @@ export const simpleHorizontalBarOptions = {
 		}
 	}
 };
+
+export const simpleHorizontalBarCenteredLegendData = simpleBarData;
+
+export const simpleHorizontalBarCenteredLegendOptions = {
+	title: "Simple horizontal bar (centered legend)",
+	axes: {
+		left: {
+			mapsTo: "group",
+			scaleType: "labels"
+		},
+		bottom: {
+			mapsTo: "value"
+		}
+	},
+	legend: {
+		alignment: "center"
+	}
+}
 
 export const simpleHorizontalBarLongLabelOptions = {
 	title: "Simple horizontal bar (truncated labels)",

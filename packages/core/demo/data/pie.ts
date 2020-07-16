@@ -18,9 +18,11 @@ export const pieCenteredOptions = {
 	title: "Pie (centered)",
 	resizable: true,
 	legend: {
-		alignCenter: true
+		alignment: "center"
 	},
-	alignCenter: true,
+	pie: {
+		alignment: "center"
+	}
 }
 
 // pie - empty state

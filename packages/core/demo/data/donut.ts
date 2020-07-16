@@ -18,13 +18,13 @@ export const donutCenteredOptions = {
 	title: "Donut (centered)",
 	resizable: true,
 	legend: {
-		alignCenter: true
+		alignment: "center"
 	},
-	alignCenter: true,
 	donut: {
 		center: {
 			label: "Browsers"
-		}
+		},
+		alignment: "center"
 	}
 }
 

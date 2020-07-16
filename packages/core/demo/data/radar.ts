@@ -32,15 +32,15 @@ export const radarCenteredOptions = {
 		axes: {
 			angle: "feature",
 			value: "score"
-		}
+		},
+		alignment: "center"
 	},
 	data: {
 		groupMapsTo: "product"
 	},
 	legend: {
-		alignCenter: true
-	},
-	alignCenter: true
+		alignment: "center"
+	}
 }
 
 // radar with missing data

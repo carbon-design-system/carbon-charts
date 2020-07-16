@@ -1,6 +1,6 @@
 // Internal Imports
 import { Service } from "../service";
-import { Events } from "./../../interfaces";
+import { Events, Alignments } from "./../../interfaces";
 
 // D3 Imports
 import { select, Selection } from "d3-selection";
@@ -149,7 +149,7 @@ export class DOMUtils extends Service {
 		return selection;
 	}
 
-	static getCenteringOffset(svg, parent) {
+	static getAlignmentOffset(alignment, svg, parent) {
 		const svgDimensions = DOMUtils.getSVGElementSize(
 			svg,
 			{ useBBox: true }
@@ -159,7 +159,14 @@ export class DOMUtils extends Service {
 			{ useAttr: true }
 		);
 
-		return Math.floor((width - svgDimensions.width) / 2);
+		let alignmentOffset = 0;
+		if (alignment === Alignments.CENTER) {
+			alignmentOffset = Math.floor((width - svgDimensions.width) / 2);
+		} else if (alignment === Alignments.RIGHT) {
+			alignmentOffset = width - svgDimensions.width;
+		}
+
+		return alignmentOffset;
 	}
 
 	protected svg: Element;

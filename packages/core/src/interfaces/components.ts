@@ -1,4 +1,8 @@
-import { LayoutGrowth, LegendPositions } from "./enums";
+import {
+	LayoutGrowth,
+	LegendPositions,
+	Alignments
+} from "./enums";
 import { Component } from "../components/component";
 import { TruncationOptions } from "./truncation";
 
@@ -51,7 +55,7 @@ export interface LegendOptions {
 		spaceAfter?: Number;
 	};
 	truncation?: TruncationOptions;
-	alignCenter?: boolean;
+	alignment?: Alignments;
 }
 
 export interface TooltipOptions {
