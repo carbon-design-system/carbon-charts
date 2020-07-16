@@ -154,7 +154,7 @@ export class DOMUtils extends Service {
 			svg,
 			{ useBBox: true }
 		);
-		const {width} = DOMUtils.getSVGElementSize(
+		const { width } = DOMUtils.getSVGElementSize(
 			parent,
 			{ useAttr: true }
 		);
