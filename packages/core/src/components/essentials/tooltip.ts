@@ -46,12 +46,12 @@ export class Tooltip extends Component {
 		this.tooltip.style("max-width", null);
 
 		// listen to move-tooltip Custom Events to move the tooltip
-		this.services.events.addEventListener(Events.Tooltip.MOVE, () => {
-			this.positionTooltip();
+		this.services.events.addEventListener(Events.Tooltip.MOVE, (e: CustomEvent) => {
+			this.positionTooltip(e);
 		});
 
 		// listen to show-tooltip Custom Events to render the tooltip
-		this.services.events.addEventListener(Events.Tooltip.SHOW, (e) => {
+		this.services.events.addEventListener(Events.Tooltip.SHOW, (e: CustomEvent) => {
 			const data = e.detail.data;
 			const defaultHTML = this.getTooltipHTML(e);
 
@@ -74,7 +74,7 @@ export class Tooltip extends Component {
 			}
 
 			// Position the tooltip
-			this.positionTooltip();
+			this.positionTooltip(e);
 
 			// Fade in
 			this.tooltip.classed("hidden", false);
@@ -198,60 +198,50 @@ export class Tooltip extends Component {
 		this.tooltip.classed("hidden", true);
 	}
 
-	positionTooltip(positionOverride?: any) {
+	positionTooltip(e: CustomEvent) {
 		const holder = this.services.domUtils.getHolder();
 		const target = this.tooltip.node();
-		const mouseRelativePos = mouse(holder);
+
+		let mouseRelativePos = Tools.getProperty(e, "detail", "mousePosition");
+		if (!mouseRelativePos) {
+			mouseRelativePos = mouse(holder);
+		}
+
 		let pos;
 
-		// override position to place tooltip at {placement:.., position:{top:.. , left:..}}
-		if (positionOverride) {
-			// placement determines whether the tooltip is centered above or below the position provided
-			const placement =
-				positionOverride.placement === TooltipPosition.TOP
-					? PLACEMENTS.TOP
-					: PLACEMENTS.BOTTOM;
+		// Find out whether tooltip should be shown on the left or right side
+		const bestPlacementOption = this.positionService.findBestPlacementAt(
+			{
+				left: mouseRelativePos[0],
+				top: mouseRelativePos[1]
+			},
+			target,
+			[
+				PLACEMENTS.RIGHT,
+				PLACEMENTS.LEFT,
+				PLACEMENTS.TOP,
+				PLACEMENTS.BOTTOM
+			],
+			() => ({
+				width: holder.offsetWidth,
+				height: holder.offsetHeight
+			})
+		);
 
-			pos = this.positionService.findPositionAt(
-				positionOverride.position,
-				target,
-				placement
-			);
-		} else {
-			// Find out whether tooltip should be shown on the left or right side
-			const bestPlacementOption = this.positionService.findBestPlacementAt(
-				{
-					left: mouseRelativePos[0],
-					top: mouseRelativePos[1]
-				},
-				target,
-				[
-					PLACEMENTS.RIGHT,
-					PLACEMENTS.LEFT,
-					PLACEMENTS.TOP,
-					PLACEMENTS.BOTTOM
-				],
-				() => ({
-					width: holder.offsetWidth,
-					height: holder.offsetHeight
-				})
-			);
-
-			let { horizontalOffset } = this.model.getOptions().tooltip;
-			if (bestPlacementOption === PLACEMENTS.LEFT) {
-				horizontalOffset *= -1;
-			}
-
-			// Get coordinates to where tooltip should be positioned
-			pos = this.positionService.findPositionAt(
-				{
-					left: mouseRelativePos[0] + horizontalOffset,
-					top: mouseRelativePos[1]
-				},
-				target,
-				bestPlacementOption
-			);
+		let { horizontalOffset } = this.model.getOptions().tooltip;
+		if (bestPlacementOption === PLACEMENTS.LEFT) {
+			horizontalOffset *= -1;
 		}
+
+		// Get coordinates to where tooltip should be positioned
+		pos = this.positionService.findPositionAt(
+			{
+				left: mouseRelativePos[0] + horizontalOffset,
+				top: mouseRelativePos[1]
+			},
+			target,
+			bestPlacementOption
+		);
 
 		this.positionService.setElement(target, pos);
 	}
