@@ -1,13 +1,28 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
+import { ChartModel } from "../../model";
 
 // This class is used to create the clipPath to clip the chart components
 // It's necessary for zoom in/out behavior
 export class ChartClip extends Component {
 	type = "chart-clip";
 
+	// Give every chart-clip a distinct ID
+	// so they don't interfere each other in a page with multiple charts
+	chartClipId = "chart-clip-id-" + Math.floor(Math.random() * 99999999999);
+
 	chartClipPath: any;
+
+	constructor(model: ChartModel, services: any, configs?: any) {
+		super(model, services, configs);
+		this.init();
+	}
+
+	init() {
+		// set unique chartClipId in this chart to model
+		this.model.set({ chartClipId: this.chartClipId }, { skipUpdate: true });
+	}
 
 	render(animate = true) {
 		// Create the clipPath
