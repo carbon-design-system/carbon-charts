@@ -20,13 +20,18 @@ export class ZoomBar extends Component {
 
 	brushSelector = "g.zoom-bar-brush"; // needs to match the style in _zoom-bar.scss
 
-	clipId = "zoomBarClip";
+	// Give every zoomBarClip a distinct ID
+	// so they don't interfere the other zoom bars in a page
+	clipId = "zoomBarClip-" + Math.floor(Math.random() * 99999999999);
 
 	height = 32;
 
 	spacerHeight = 20;
 
 	brush = brushX();
+
+	// The max allowed selection ragne, will be updated soon in render()
+	maxSelectionRange: [0, 0];
 
 	init() {
 		this.services.events.addEventListener(Events.ZoomBar.UPDATE, () => {
@@ -97,6 +102,8 @@ export class ZoomBar extends Component {
 			this.compensateDataForDefaultDomain(zoomBarData, defaultDomain, 0);
 
 			xScale.range([axesLeftMargin, width]).domain(defaultDomain);
+			// keep max selection range
+			this.maxSelectionRange = xScale.range();
 
 			yScale
 				.range([0, this.height - 6])
@@ -276,6 +283,7 @@ export class ZoomBar extends Component {
 	}
 
 	updateBrushHandle(svg, selection, domain) {
+		const self = this;
 		const handleWidth = 5;
 		const handleHeight = this.height;
 		const handleXDiff = -handleWidth / 2;
@@ -291,9 +299,17 @@ export class ZoomBar extends Component {
 			.data([{ type: "w" }, { type: "e" }])
 			.attr("x", function (d) {
 				if (d.type === "w") {
-					return selection[0] + handleXDiff;
+					// handle should not exceed zoom bar range
+					return Math.max(
+						selection[0] + handleXDiff,
+						self.maxSelectionRange[0]
+					);
 				} else if (d.type === "e") {
-					return selection[1] + handleXDiff;
+					// handle should not exceed zoom bar range
+					return Math.min(
+						selection[1] + handleXDiff,
+						self.maxSelectionRange[1] - handleWidth
+					);
 				}
 			})
 			.attr("y", 0)
@@ -313,9 +329,15 @@ export class ZoomBar extends Component {
 			})
 			.attr("x", function (d) {
 				if (d.type === "w") {
-					return selection[0] + handleBarXDiff;
+					return Math.max(
+						selection[0] + handleBarXDiff,
+						self.maxSelectionRange[0] - handleXDiff + handleBarXDiff
+					);
 				} else if (d.type === "e") {
-					return selection[1] + handleBarXDiff;
+					return Math.min(
+						selection[1] + handleBarXDiff,
+						self.maxSelectionRange[1] + handleXDiff + handleBarXDiff
+					);
 				}
 			})
 			.attr("y", handleYBarDiff)
