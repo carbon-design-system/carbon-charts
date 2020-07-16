@@ -230,14 +230,14 @@ export class Pie extends Component {
 			options,
 			"alignCenter"
 		);
+		let centeringOffset = 0;
 
 		if (alignCenter) {
-			const xOffset = DOMUtils.getCenteringOffset(svg, this.getParent());
-			options.pie.xOffset += xOffset;
+			centeringOffset = DOMUtils.getCenteringOffset(svg, this.getParent());
 		}
 
 		// Position Pie
-		const pieTranslateX = radius + options.pie.xOffset;
+		const pieTranslateX = radius + options.pie.xOffset + centeringOffset;
 		let pieTranslateY = radius + options.pie.yOffset;
 		if (calloutData.length > 0) {
 			pieTranslateY += options.pie.yOffsetCallout;
