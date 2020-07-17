@@ -15,8 +15,7 @@ import {
 	Tooltip,
 	Legend,
 	LayoutComponent,
-	TooltipScatter,
-	Skeleton,
+	Skeleton
 } from "../components/index";
 
 export class ScatterChart extends AxisChart {
@@ -47,14 +46,13 @@ export class ScatterChart extends AxisChart {
 			new Ruler(this.model, this.services),
 			new Scatter(this.model, this.services),
 			new Skeleton(this.model, this.services, {
-				skeleton: Skeletons.GRID,
-			}),
+				skeleton: Skeletons.GRID
+			})
 		];
 
 		const components: any[] = this.getAxisChartComponents(
 			graphFrameComponents
 		);
-		components.push(new TooltipScatter(this.model, this.services));
 		return components;
 	}
 }

@@ -5,7 +5,6 @@ import { Roles, Events } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
-import { select } from "d3-selection";
 import { line } from "d3-shape";
 
 export class Line extends Component {
@@ -33,12 +32,13 @@ export class Line extends Component {
 		const getRangeValue = (d, i) => cartesianScales.getRangeValue(d, i);
 		const [
 			getXValue,
-			getYValue,
+			getYValue
 		] = Tools.flipDomainAndRangeBasedOnOrientation(
 			getDomainValue,
 			getRangeValue,
 			cartesianScales.getOrientation()
 		);
+		const options = this.model.getOptions();
 
 		// D3 line generator function
 		const lineGenerator = line()
@@ -51,15 +51,36 @@ export class Line extends Component {
 				if (value === null || value === undefined) {
 					return false;
 				}
-
 				return true;
 			});
 
-		const groupedData = this.model.getGroupedData();
+		let data = [];
+		if (this.configs.stacked) {
+			const percentage = Object.keys(options.axes).some(
+				(axis) => options.axes[axis].percentage
+			);
+			const { groupMapsTo } = options.data;
+			const stackedData = this.model.getStackedData({ percentage });
+			const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
+			const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
+
+			data = stackedData.map((d) => ({
+				name: d[0][groupMapsTo],
+				data: d.map((datum) => ({
+					[domainIdentifier]: datum.data.sharedStackKey,
+					[groupMapsTo]: datum[groupMapsTo],
+					[rangeIdentifier]: datum[1]
+				})),
+				hidden: !Tools.some(d, (datum) => datum[0] !== datum[1])
+			}));
+		} else {
+			data = this.model.getGroupedData();
+		}
+
 		// Update the bound data on lines
 		const lines = svg
 			.selectAll("path.line")
-			.data(groupedData, (group) => group.name);
+			.data(data, (group) => group.name);
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -77,16 +98,19 @@ export class Line extends Component {
 		// Apply styles and datum
 		enteringLines
 			.merge(lines)
-			.attr("stroke", group => {
+			.data(data, (group) => group.name)
+			.attr("stroke", (group, i) => {
 				return this.model.getStrokeColor(group.name);
 			})
 			// a11y
 			.attr("role", Roles.GRAPHICS_SYMBOL)
 			.attr("aria-roledescription", "line")
 			.attr("aria-label", (group) => {
-				const { data } = group;
+				const { data: groupData } = group;
 				const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
-				return data.map((datum) => datum[rangeIdentifier]).join(",");
+				return groupData
+					.map((datum) => datum[rangeIdentifier])
+					.join(",");
 			})
 			// Transition
 			.transition(
@@ -95,10 +119,10 @@ export class Line extends Component {
 					animate
 				)
 			)
-			.attr("opacity", 1)
+			.attr("opacity", (d) => (d.hidden ? 0 : 1))
 			.attr("d", (group) => {
-				const { data } = group;
-				return lineGenerator(data);
+				const { data: groupData } = group;
+				return lineGenerator(groupData);
 			});
 	}
 
@@ -106,7 +130,7 @@ export class Line extends Component {
 		const { hoveredElement } = event.detail;
 
 		this.parent
-			.selectAll("g.lines")
+			.selectAll("path.line")
 			.transition(
 				this.services.transitions.getTransition("legend-hover-line")
 			)
@@ -121,7 +145,7 @@ export class Line extends Component {
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
-			.selectAll("g.lines")
+			.selectAll("path.line")
 			.transition(
 				this.services.transitions.getTransition("legend-mouseout-line")
 			)
@@ -131,7 +155,7 @@ export class Line extends Component {
 	destroy() {
 		// Remove event listeners
 		this.parent
-			.selectAll("path")
+			.selectAll("path.line")
 			.on("mousemove", null)
 			.on("mouseout", null);
 

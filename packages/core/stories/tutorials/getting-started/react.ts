@@ -22,6 +22,8 @@ yarn add @carbon/charts-react d3
 npm install --save @carbon/charts-react d3
 \`\`\`
 
+**Note:** you'd also need to install \`carbon-components\` if you're not using a bundled version of the library.
+
 &nbsp;
 ## Getting started
 

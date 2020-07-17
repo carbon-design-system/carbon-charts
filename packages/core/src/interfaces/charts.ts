@@ -1,20 +1,21 @@
+import { GaugeTypes, Statuses, ArrowDirections } from "./enums";
 import {
 	LegendOptions,
 	TooltipOptions,
 	GridOptions,
-	AxesOptions,
+	AxesOptions
 } from "./index";
-import {
-	AxisTooltipOptions,
-	BarTooltipOptions,
-	BarOptions,
-	StackedBarOptions,
-} from "./components";
+import { BarOptions, StackedBarOptions } from "./components";
+import { TimeScaleOptions } from "./axis-scales";
 
 /**
  * Base chart options common to any chart
  */
 export interface BaseChartOptions {
+	/**
+	 * Optionally specify a title for the chart
+	 */
+	title?: string;
 	/**
 	 * boolean to disable animations (enabled by default)
 	 */
@@ -87,6 +88,11 @@ export interface BaseChartOptions {
 		 * used to simulate data loading
 		 */
 		loading?: Boolean;
+		/**
+		 * options related to pre-selected data groups
+		 * Remains empty if every legend item is active or dataset doesn't have the data groups.
+		 */
+		selectedGroups?: string[];
 	};
 	/**
 	 * options related to color scales
@@ -105,7 +111,7 @@ export interface BaseChartOptions {
 export interface AxisChartOptions extends BaseChartOptions {
 	axes?: AxesOptions;
 	grid?: GridOptions;
-	tooltip?: AxisTooltipOptions;
+	timeScale?: TimeScaleOptions;
 }
 
 /**
@@ -113,7 +119,6 @@ export interface AxisChartOptions extends BaseChartOptions {
  */
 export interface BarChartOptions extends AxisChartOptions {
 	bars?: BarOptions;
-	tooltip?: BarTooltipOptions;
 }
 
 /**
@@ -185,9 +190,25 @@ export interface AreaChartOptions extends AxisChartOptions {
 	/**
 	 * options for the curve of the line
 	 */
-	curve?: string | {
-		name: string;
-	};
+	curve?:
+		| string
+		| {
+				name: string;
+		  };
+}
+
+/**
+ * options specific to area charts
+ */
+export interface StackedAreaChartOptions extends ScatterChartOptions {
+	/**
+	 * options for the curve of the line
+	 */
+	curve?:
+		| string
+		| {
+				name: string;
+		  };
 }
 
 /**
@@ -214,6 +235,26 @@ export interface PieChartOptions extends BaseChartOptions {
 		labels?: {
 			formatter?: Function;
 		};
+	};
+}
+
+/**
+ * options specific to gauge charts
+ */
+export interface GaugeChartOptions extends PieChartOptions {
+	gauge?: {
+		arcWidth?: number;
+		deltaArrow?: {
+			direction?: ArrowDirections;
+			size?: Function;
+			enabled: Boolean;
+		};
+		status?: Statuses;
+		deltaFontSize?: Function;
+		numberSpacing?: number;
+		numberFormatter?: Function;
+		valueFontSize?: Function;
+		type?: GaugeTypes;
 	};
 }
 

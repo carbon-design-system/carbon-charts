@@ -2,7 +2,7 @@
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
 import * as colorPalettes from "./services/colorPalettes";
-import { Events } from "./interfaces";
+import { Events, ScaleTypes } from "./interfaces";
 
 // D3
 import { scaleOrdinal } from "d3-scale";
@@ -22,7 +22,7 @@ export class ChartModel {
 
 	// Internal Model state
 	protected state: any = {
-		options: {},
+		options: {}
 	};
 
 	// Data labels
@@ -39,6 +39,49 @@ export class ChartModel {
 		this.services = services;
 	}
 
+	getAllDataFromDomain() {
+		if (!this.get("data")) {
+			return null;
+		}
+
+		const dataGroups = this.getDataGroups();
+
+		// Remove datasets that have been disabled
+		let displayData = Tools.clone(this.get("data"));
+		const { groupMapsTo } = this.getOptions().data;
+
+		const axesOptions = this.getOptions().axes;
+
+		// Check for custom domain
+		if (axesOptions) {
+			Object.keys(axesOptions).forEach((axis) => {
+				if (axesOptions[axis].mapsTo && axesOptions[axis].domain) {
+					const mapsTo = axesOptions[axis].mapsTo;
+
+					if (axesOptions[axis].scaleType === ScaleTypes.LABELS) {
+						displayData = displayData.filter((datum) =>
+							axesOptions[axis].domain.includes(datum[mapsTo])
+						);
+					} else {
+						const [start, end] = axesOptions[axis].domain;
+
+						// Filter out data outside domain
+						displayData = displayData.filter(
+							(datum) =>
+								datum[mapsTo] >= start && datum[mapsTo] <= end
+						);
+					}
+				}
+			});
+		}
+
+		return displayData.filter((datum) => {
+			return dataGroups.find(
+				(group) => group.name === datum[groupMapsTo]
+			);
+		});
+	}
+
 	getDisplayData() {
 		if (!this.get("data")) {
 			return null;
@@ -46,12 +89,11 @@ export class ChartModel {
 
 		const { ACTIVE } = Configuration.legend.items.status;
 		const dataGroups = this.getDataGroups();
-
-		// Remove datasets that have been disabled
-		const displayData = Tools.clone(this.get("data"));
 		const { groupMapsTo } = this.getOptions().data;
 
-		return displayData.filter((datum) => {
+		const allDataFromDomain = this.getAllDataFromDomain();
+
+		return allDataFromDomain.filter((datum) => {
 			const group = dataGroups.find(
 				(group) => group.name === datum[groupMapsTo]
 			);
@@ -78,7 +120,7 @@ export class ChartModel {
 
 		this.set({
 			data: sanitizedData,
-			dataGroups,
+			dataGroups
 		});
 
 		return sanitizedData;
@@ -123,7 +165,7 @@ export class ChartModel {
 
 		return Object.keys(groupedData).map((groupName) => ({
 			name: groupName,
-			data: groupedData[groupName],
+			data: groupedData[groupName]
 		}));
 	}
 
@@ -139,6 +181,24 @@ export class ChartModel {
 			displayData,
 			(datum) => datum[domainIdentifier]
 		).keys();
+
+		const axisPosition = this.services.cartesianScales.domainAxisPosition;
+		const scaleType = options.axes[axisPosition].scaleType;
+
+		// Sort keys
+		if (scaleType === ScaleTypes.TIME) {
+			stackKeys.sort((a: any, b: any) => {
+				const dateA: any = new Date(a);
+				const dateB: any = new Date(b);
+				return dateA - dateB;
+			});
+		} else if (
+			scaleType === ScaleTypes.LOG ||
+			scaleType === ScaleTypes.LINEAR
+		) {
+			stackKeys.sort((a: any, b: any) => a - b);
+		}
+
 		const dataGroupNames = this.getDataGroupNames();
 
 		return stackKeys.map((key) => {
@@ -159,12 +219,31 @@ export class ChartModel {
 		}) as any;
 	}
 
-	getStackedData() {
+	getStackedData({ percentage } = { percentage: false }) {
 		const options = this.getOptions();
 		const { groupMapsTo } = options.data;
 
 		const dataGroupNames = this.getDataGroupNames();
 		const dataValuesGroupedByKeys = this.getDataValuesGroupedByKeys();
+
+		if (percentage) {
+			const maxByKey = Tools.fromPairs(
+				dataValuesGroupedByKeys.map((d: any) => [d.sharedStackKey, 0])
+			);
+
+			dataValuesGroupedByKeys.forEach((d: any) => {
+				dataGroupNames.forEach((name) => {
+					maxByKey[d.sharedStackKey] += d[name];
+				});
+			});
+
+			// cycle through data values to get percentage
+			dataValuesGroupedByKeys.forEach((d: any) => {
+				dataGroupNames.forEach((name) => {
+					d[name] = (d[name] / maxByKey[d.sharedStackKey]) * 100;
+				});
+			});
+		}
 
 		return stack()
 			.keys(dataGroupNames)(dataValuesGroupedByKeys)
@@ -210,7 +289,7 @@ export class ChartModel {
 	 */
 	setOptions(newOptions) {
 		this.set({
-			options: Tools.merge(this.getOptions(), newOptions),
+			options: Tools.merge(this.getOptions(), newOptions)
 		});
 	}
 
@@ -277,14 +356,34 @@ export class ChartModel {
 			});
 		}
 
+		// Updates selected groups
+		const updatedActiveItems = dataGroups.filter(
+			(group) => group.status === ACTIVE
+		);
+		const options = this.getOptions();
+
+		const hasUpdatedDeactivatedItems = dataGroups.some(
+			(group) => group.status === DISABLED
+		);
+
+		// If there are deactivated items, map the item name into selected groups
+		if (hasUpdatedDeactivatedItems) {
+			options.data.selectedGroups = updatedActiveItems.map(
+				(activeItem) => activeItem.name
+			);
+		} else {
+			// If every item is active, clear array
+			options.data.selectedGroups = [];
+		}
+
 		// dispatch legend filtering event with the status of all the dataLabels
 		this.services.events.dispatchEvent(Events.Legend.ITEMS_UPDATE, {
-			dataGroups,
+			dataGroups
 		});
 
 		// Update model
 		this.set({
-			dataGroups,
+			dataGroups
 		});
 	}
 
@@ -359,7 +458,7 @@ export class ChartModel {
 
 				const updatedDatum = {
 					group,
-					key: labels[i],
+					key: labels[i]
 				};
 
 				if (isNaN(datum)) {
@@ -417,15 +516,34 @@ export class ChartModel {
 
 	protected generateDataGroups(data) {
 		const { groupMapsTo } = this.getOptions().data;
-		const { ACTIVE } = Configuration.legend.items.status;
+		const { ACTIVE, DISABLED } = Configuration.legend.items.status;
+		const options = this.getOptions();
 
 		const uniqueDataGroups = map(
 			data,
 			(datum) => datum[groupMapsTo]
 		).keys();
+
+		// check if selectedGroups can be applied to chart with current data groups
+		if (options.data.selectedGroups.length) {
+			const hasAllSelectedGroups = options.data.selectedGroups.every(
+				(groupName) => uniqueDataGroups.includes(groupName)
+			);
+			if (!hasAllSelectedGroups) {
+				options.data.selectedGroups = [];
+			}
+		}
+
+		// Get group status based on items in selected groups
+		const getStatus = (groupName) =>
+			!options.data.selectedGroups.length ||
+			options.data.selectedGroups.includes(groupName)
+				? ACTIVE
+				: DISABLED;
+
 		return uniqueDataGroups.map((groupName) => ({
 			name: groupName,
-			status: ACTIVE,
+			status: getStatus(groupName)
 		}));
 	}
 

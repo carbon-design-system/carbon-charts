@@ -19,23 +19,19 @@ export class Skeleton extends Component {
 		const svg = this.parent;
 		const parent = svg.node().parentNode;
 		const { width, height } = DOMUtils.getSVGElementSize(parent, {
-			useAttrs: true,
+			useAttrs: true
 		});
 		svg.attr("width", width).attr("height", height);
 
-		const isDataEmpty = this.model.isDataEmpty();
 		const isDataLoading = Tools.getProperty(
 			this.model.getOptions(),
 			"data",
 			"loading"
 		);
 
-		if (isDataEmpty) {
+		// display a skeleton if there is no chart data or the loading flag is set to true
+		if (isDataLoading) {
 			this.renderSkeleton(isDataLoading);
-		} else if (!isDataEmpty && isDataLoading) {
-			throw new Error(
-				`Something went wrong. You can't provided non-empty data and data loading together.`
-			);
 		} else {
 			this.removeSkeleton();
 		}
@@ -109,7 +105,7 @@ export class Skeleton extends Component {
 		const svg = this.parent;
 		const parent = svg.node().parentNode;
 		const { width, height } = DOMUtils.getSVGElementSize(parent, {
-			useAttrs: true,
+			useAttrs: true
 		});
 
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton.DAII")
@@ -258,7 +254,7 @@ export class Skeleton extends Component {
 		const stopShimmerClass = "stop-shimmer";
 		const container = this.parent.select(".chart-skeleton");
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
-			useAttrs: true,
+			useAttrs: true
 		});
 		const startPoint = 0;
 		const endPoint = width;

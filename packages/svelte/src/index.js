@@ -1,4 +1,5 @@
 import AreaChart from "./AreaChart.svelte";
+import StackedAreaChart from "./StackedAreaChart.svelte";
 import BarChartGrouped from "./BarChartGrouped.svelte";
 import BarChartSimple from "./BarChartSimple.svelte";
 import BarChartStacked from "./BarChartStacked.svelte";
@@ -8,9 +9,11 @@ import LineChart from "./LineChart.svelte";
 import PieChart from "./PieChart.svelte";
 import ScatterChart from "./ScatterChart.svelte";
 import RadarChart from "./RadarChart.svelte";
+import GaugeChart from "./GaugeChart.svelte";
 
 export {
 	AreaChart,
+	StackedAreaChart,
 	BarChartGrouped,
 	BarChartSimple,
 	BarChartStacked,
@@ -19,5 +22,6 @@ export {
 	LineChart,
 	PieChart,
 	ScatterChart,
-	RadarChart
+	RadarChart,
+	GaugeChart,
 };
