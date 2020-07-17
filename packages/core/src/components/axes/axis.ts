@@ -471,7 +471,8 @@ export class Axis extends Component {
 		// only applies to discrete type
 		if (
 			truncationType !== TruncationTypes.NONE &&
-			axisScaleType === ScaleTypes.LABELS
+			axisScaleType === ScaleTypes.LABELS &&
+			!userProvidedTickValues
 		) {
 			const dataGroups = this.model.getDataValuesGroupedByKeys();
 			if (dataGroups.length > 0) {
