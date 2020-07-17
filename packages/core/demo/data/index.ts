@@ -142,6 +142,12 @@ let allDemoGroups = [
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
+				options: barDemos.simpleBarOptionsCustomTicks,
+				data: barDemos.simpleBarDataCustomTicks,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: false
+			},
+			{
 				options: barDemos.simpleBarLongLabelOptions,
 				data: barDemos.simpleBarLongLabelData,
 				chartType: chartTypes.SimpleBarChart,

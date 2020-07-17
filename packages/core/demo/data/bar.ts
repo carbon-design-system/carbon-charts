@@ -93,6 +93,28 @@ export const simpleBarOptions = {
 	}
 };
 
+// Simple bar with custom tick values
+export const simpleBarDataCustomTicks = [
+	{ group: "Group 1", value: 0.5 },
+	{ group: "Group 2", value: 2 }
+];
+
+export const simpleBarOptionsCustomTicks = {
+	title: "Simple bar (custom ticks)",
+	axes: {
+		left: {
+			mapsTo: "value",
+			ticks: {
+				customTicks: [0, 1.2, 1.3, 2]
+			}
+		},
+		bottom: {
+			mapsTo: "group",
+			scaleType: "labels"
+		}
+	}
+};
+
 // Simple bar with long labels
 export const simpleBarLongLabelData = [
 	{
