@@ -212,6 +212,12 @@ let allDemoGroups = [
 				chartType: chartTypes.StackedBarChart
 			},
 			{
+				options: barDemos.stackedBarTimeSeriesOptionsCustomTicks,
+				data: barDemos.stackedBarTimeSeriesDataCustomTicks,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: false
+			},
+			{
 				options: barDemos.stackedBarEmptyStateOptions,
 				data: barDemos.stackedBarEmptyStateData,
 				chartType: chartTypes.StackedBarChart,

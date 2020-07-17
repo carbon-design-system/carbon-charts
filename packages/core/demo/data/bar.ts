@@ -344,6 +344,47 @@ export const stackedBarTimeSeriesOptions = {
 	}
 };
 
+// demo with custom ticks
+export const stackedBarTimeSeriesDataCustomTicks = [
+	{ group: "Dataset 1", date: new Date(2019, 0, 1), value: 10000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 5), value: 65000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 8), value: 10000 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 13), value: 49213 },
+	{ group: "Dataset 1", date: new Date(2019, 0, 17), value: 51213 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 3), value: 75000 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 6), value: 57312 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 8), value: 21432 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 15), value: 70323 },
+	{ group: "Dataset 2", date: new Date(2019, 0, 19), value: 21300 },
+	{ group: "Dataset 3", date: new Date(2019, 0, 1), value: 50000 },
+	{ group: "Dataset 3", date: new Date(2019, 0, 5), value: 15000 },
+	{ group: "Dataset 3", date: new Date(2019, 0, 8), value: 20000 },
+	{ group: "Dataset 3", date: new Date(2019, 0, 13), value: 39213 },
+	{ group: "Dataset 3", date: new Date(2019, 0, 17), value: 61213 },
+	{ group: "Dataset 4", date: new Date(2019, 0, 2), value: 10 },
+	{ group: "Dataset 4", date: new Date(2019, 0, 6), value: 37312 },
+	{ group: "Dataset 4", date: new Date(2019, 0, 8), value: 51432 },
+	{ group: "Dataset 4", date: new Date(2019, 0, 15), value: 40323 },
+	{ group: "Dataset 4", date: new Date(2019, 0, 19), value: 31300 }
+];
+
+export const stackedBarTimeSeriesOptionsCustomTicks = {
+	title: "Stacked bar (time series - custom ticks)",
+	axes: {
+		left: {
+			mapsTo: "value",
+			stacked: true
+		},
+		bottom: {
+			mapsTo: "date",
+			scaleType: "time",
+			ticks: {
+				customTicks: [new Date(2019, 0, 17)]
+			}
+		}
+	}
+};
+
 // Stacked horizontal bar (time series)
 export const stackedHorizontalBarTimeSeriesOptions = {
 	title: "Stacked horizontal bar (time series)",
