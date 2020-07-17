@@ -127,5 +127,17 @@ export interface ZoomBarOptions {
 	/**
 	 * an two element array which represents the initial zoom domain
 	 */
-	initialZoomDomain?: Object[];
+	initZoomDomain?: Object[];
+
+	/**
+	 * a vaiable to handle zoom in ratio
+	 */
+	zoomRatio?: number;
+	/**
+	 * is the tool-bar visible or not
+	 */
+	showToolBar?: boolean;
+
+
+
 }

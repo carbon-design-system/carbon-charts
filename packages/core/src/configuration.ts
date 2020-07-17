@@ -129,7 +129,9 @@ export const timeScale: TimeScaleOptions = {
  * ZoomBar options
  */
 export const zoomBar: ZoomBarOptions = {
-	enabled: false
+	enabled: false,
+	zoomRatio: 0.4,
+	showToolBar: true,
 };
 
 /**

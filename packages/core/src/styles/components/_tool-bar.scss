@@ -1,0 +1,25 @@
+g.#{$prefix}--#{$charts-prefix}--tool-bar {
+	rect.icon-zoom {
+		fill: transparent;
+		cursor: pointer;
+	}
+
+	rect.icon-zoom:hover {
+		cursor: pointer;
+		pointer-events: visible;
+	}
+
+	polygon {
+		fill: $icon-02;
+	}
+
+	svg#icon-zoomOut rect.icon-zoomOut {
+		fill: $icon-02;
+	}
+
+	path {
+		fill: $icon-02;
+	}
+
+	
+}
