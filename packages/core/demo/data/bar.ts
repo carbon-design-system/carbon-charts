@@ -164,7 +164,7 @@ export const simpleHorizontalBarTimeSeriesOptions = {
 };
 
 // Vertical simple time series with dense data
-export const simpleHorizontalBarTimeSeriesOptionsDense = {
+export const simpleBarTimeSeriesDenseOptions = {
 	title: "Simple bar (time series) with dense data",
 	axes: {
 		left: {

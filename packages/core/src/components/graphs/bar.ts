@@ -6,7 +6,7 @@ export class Bar extends Component {
 	// Gets the correct width for bars based on options & configurations
 	protected getBarWidth(allDataLabels?: string[]) {
 		const options = this.model.getOptions();
-		const numData = this.model.getData().length;
+		const numberOfDatapoints = this.model.getDisplayData().length;
 		const mainXScale = this.services.cartesianScales.getMainXScale();
 		const chartWidth = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
@@ -15,7 +15,7 @@ export class Bar extends Component {
 		if (!mainXScale.step) {
 			return Math.min(
 				options.bars.maxWidth,
-				chartWidth * 0.5 / numData
+				chartWidth * 0.5 / numberOfDatapoints
 			);
 		}
 

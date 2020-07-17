@@ -117,7 +117,7 @@ let allDemoGroups = [
 				isDemoExample: true,
 			},
 			{
-				options: barDemos.simpleHorizontalBarTimeSeriesOptionsDense,
+				options: barDemos.simpleBarTimeSeriesDenseOptions,
 				data: barDemos.simpleBarTimeSeriesDenseData,
 				chartType: chartTypes.SimpleBarChart,
 				isDemoExample: true,
