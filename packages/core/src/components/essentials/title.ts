@@ -75,7 +75,7 @@ export class Title extends Component {
 				.on("mouseover", function () {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						hoveredElement: title,
-						content: titleString
+						content: untruncatedTitle
 					});
 				})
 				.on("mousemove", function () {

@@ -25,7 +25,6 @@ import {
 export class MeterChart extends Chart {
 	model = new MeterChartModel(this.services);
 
-	// TODO - Optimize the use of "extending"
 	constructor(holder: Element, chartConfigs: ChartConfig<MeterChartOptions>) {
 		super(holder, chartConfigs);
 
@@ -96,8 +95,6 @@ export class MeterChart extends Chart {
 		// add the meter title as a top level component
 		const components: any[] = this.getChartComponents(graphFrame);
 
-		// export with tooltip
-		components.push(new Tooltip(this.model, this.services));
 		return components;
 	}
 }

@@ -105,7 +105,7 @@ export class MeterTitle extends Title {
 		const title = DOMUtils.appendOrSelect(svg, "text.meter-title");
 
 		// check if it is enabled
-		const data = Tools.getProperty(this.model.getOptions(), "meter", "title", "percentageIndicator", "enabled") === true ?
+		const data = Tools.getProperty(this.model.getOptions(), "meter", "statusBar", "percentageIndicator", "enabled") === true ?
 			[dataValue] : [];
 
 		// append a percentage if it is enabled, update it
@@ -113,7 +113,7 @@ export class MeterTitle extends Title {
 			.data(data);
 
 		// the horizontal offset of the percentage value from the title
-		const offset = Tools.getProperty(this.model.getOptions(), "meter", "title", "paddingRight");
+		const offset = Tools.getProperty(this.model.getOptions(), "meter", "statusBar", "paddingRight");
 
 		percentage.enter()
 			.append("text")
@@ -137,7 +137,7 @@ export class MeterTitle extends Title {
 
 		// update the position on the percentage to be inline with the title
 		const tspan = DOMUtils.appendOrSelect(this.parent, "tspan");
-		const offset = this.model.getOptions().meter.title.paddingRight; // horizontal offset of percent from title
+		const offset = Tools.getProperty(this.model.getOptions(), "meter", "statusBar", "paddingRight");
 		const tspanLength = Math.ceil(tspan.node().getComputedTextLength());
 
 		const percentage = DOMUtils.appendOrSelect(this.parent, "text.percent-value");
@@ -157,7 +157,7 @@ export class MeterTitle extends Title {
 
 		const percentage = DOMUtils.appendOrSelect(this.parent, "text.percent-value");
 		// the title needs to fit the width of the container without crowding the status, and percentage value
-		const offset = Tools.getProperty(this.model.getOptions(), "meter", "title", "paddingRight"); // horizontal offset of percent from title
+		const offset = Tools.getProperty(this.model.getOptions(), "meter", "statusBar", "paddingRight");
 		const percentageWidth = percentage.node().getComputedTextLength();
 
 		const statusGroup = DOMUtils.appendOrSelect(this.parent, "g.status-indicator").node();
