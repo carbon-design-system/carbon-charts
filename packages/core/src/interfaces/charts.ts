@@ -280,6 +280,28 @@ export interface DonutChartOptions extends PieChartOptions {
 	};
 }
 
+export interface MeterChartOptions extends BaseChartOptions {
+	meter?: {
+		height?: number,
+		title?: {
+			/**
+			 * offsets the percentage value from the title
+			 */
+			paddingRight?: number;
+			percentageIndicator?: {
+				/**
+				 * rendering of the percentage value relative to the dataset within title
+				 */
+				enabled?: boolean
+			}
+		},
+		status?: {
+			indicatorSize?: number;
+			paddingLeft?: number;
+		}
+	};
+}
+
 /**
  * options specific to radar charts
  */

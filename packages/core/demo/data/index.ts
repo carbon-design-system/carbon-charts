@@ -7,6 +7,7 @@ import * as pieDemos from "./pie";
 import * as gaugeDemos from "./gauge";
 import * as scatterDemos from "./scatter";
 import * as stepDemos from "./step";
+import * as meterDemos from "./meter";
 import * as timeSeriesAxisDemos from "./time-series-axis";
 import * as radarDemos from "./radar";
 
@@ -15,6 +16,7 @@ export * from "./bar";
 export * from "./bubble";
 export * from "./donut";
 export * from "./line";
+export * from "./meter";
 export * from "./pie";
 export * from "./gauge";
 export * from "./scatter";
@@ -87,6 +89,11 @@ export const chartTypes = {
 		vanilla: "DonutChart",
 		angular: "ibm-donut-chart",
 		vue: "ccv-donut-chart"
+	},
+	MeterChart: {
+		vanilla: "MeterChart",
+		angular: "ibm-meter-chart",
+		vue: "ccv-meter-chart"
 	},
 	RadarChart: {
 		vanilla: "RadarChart",
@@ -445,6 +452,21 @@ let allDemoGroups = [
 		]
 	},
 	{
+		title: "Area",
+		demos: [
+			{
+				options: areaDemos.stackedAreaTimeSeriesOptions,
+				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart
+			},
+			{
+				options: areaDemos.stackedAreaPercentageTimeSeriesOptions,
+				data: areaDemos.stackedAreaTimeSeriesData,
+				chartType: chartTypes.StackedAreaChart
+			}
+		]
+	},
+	{
 		title: "Pie",
 		demos: [
 			{
@@ -559,6 +581,29 @@ let allDemoGroups = [
 				data: stepDemos.stepSkeletonData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false
+			}
+		]
+	},
+	{
+		title: "Meter",
+		demos: [
+			{
+				options: meterDemos.meterOptionsWithStatus,
+				data: meterDemos.meterData,
+				chartType: chartTypes.MeterChart,
+				isDemoExample: true
+			},
+			{
+				options: meterDemos.meterOptionsCustomColor,
+				data: meterDemos.meterData,
+				chartType: chartTypes.MeterChart,
+				isDemoExample: true
+			},
+			{
+				options: meterDemos.meterOptionsNoStatus,
+				data: meterDemos.meterData,
+				chartType: chartTypes.MeterChart,
+				isDemoExample: true
 			}
 		]
 	},
@@ -709,7 +754,9 @@ allDemoGroups = allDemoGroups.map((demoGroup) => {
 		demo.id = `${formatTitleString(demoGroup.title)}--${formatTitleString(
 			demo.options.title
 		)}`;
-		demo.options.height = "400px";
+
+		// if there isnt a height set in the chart options, use 400
+		demo.options.height = demo.options.height ?? "400px";
 
 		if (!demo.codesandbox) {
 			demo.codesandbox = {};
