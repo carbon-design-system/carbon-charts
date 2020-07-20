@@ -56,7 +56,7 @@ export class Axis extends Component {
 		const userProvidedTickValues = Tools.getProperty(
 			axisOptions,
 			"ticks",
-			"customTicks"
+			"values"
 		);
 
 		// get user provided custom values for truncation
@@ -266,7 +266,7 @@ export class Axis extends Component {
 
 		// prioritize using a custom array of values rather than number of ticks
 		// if both are provided. custom tick values need to be within the domain
-		if (userProvidedTickValues !== null) {
+		if (userProvidedTickValues) {
 			axis.tickValues(userProvidedTickValues);
 		}
 

@@ -105,7 +105,7 @@ export const simpleBarOptionsCustomTicks = {
 		left: {
 			mapsTo: "value",
 			ticks: {
-				customTicks: [0, 1.2, 1.3, 2]
+				values: [0, 1.2, 1.3, 2]
 			}
 		},
 		bottom: {
@@ -358,7 +358,7 @@ export const stackedBarTimeSeriesOptionsCustomTicks = {
 			mapsTo: "date",
 			scaleType: "time",
 			ticks: {
-				customTicks: [new Date(2019, 0, 17)]
+				values: [new Date(2019, 0, 17)]
 			}
 		}
 	}
