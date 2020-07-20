@@ -28,15 +28,12 @@ export interface LayoutComponentChild {
  * customize the legend component
  */
 export interface LegendOptions {
+	enabled?: boolean;
 	position?: LegendPositions;
 	/**
 	 * the clickability of legend items
 	 */
 	clickable?: boolean;
-	/**
-	 * is the legend visible or not
-	 */
-	enabled?: boolean;
 	items?: {
 		status?: {
 			ACTIVE?: Number;
