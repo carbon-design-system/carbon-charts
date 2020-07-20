@@ -30,7 +30,10 @@ export class ChartBrush extends Component {
 		const brushArea = DOMUtils.appendOrSelect(backdrop, `g.${this.type}`);
 
 		// set an id for rect.selection to be referred
-		const d3Selection = brushArea.select(this.selectionSelector);
+		const d3Selection = DOMUtils.appendOrSelect(
+			brushArea,
+			this.selectionSelector
+		);
 
 		const { width, height } = DOMUtils.getSVGElementSize(backdrop, {
 			useAttrs: true
