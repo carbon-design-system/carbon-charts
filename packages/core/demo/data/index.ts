@@ -779,6 +779,12 @@ let allDemoGroups = [
 				isDemoExample: false
 			},
 			{
+				options: zoomBarDemos.definedZoomBarStackedBarTimeSeriesOptions,
+				data: zoomBarDemos.definedZoomBarStackedBarTimeSeriesData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: false
+			},
+			{
 				options: zoomBarDemos.zoomBarBubbleTimeSeriesOptions,
 				data: zoomBarDemos.zoomBarBubbleTimeSeriesData,
 				chartType: chartTypes.BubbleChart,

@@ -11,10 +11,28 @@ const initialZoomDomain = [
 	new Date(2020, 11, 11, 0, 0, 25)
 ];
 
+const definedZoomBarData = [
+	{ date: new Date(2019, 0, 1), value: 10000 },
+	{ date: new Date(2019, 0, 2), value: 10 },
+	{ date: new Date(2019, 0, 3), value: 75000 },
+	{ date: new Date(2019, 0, 5), value: 65000 },
+	{ date: new Date(2019, 0, 6), value: 57312 },
+	{ date: new Date(2019, 0, 8), value: 10000 },
+	{ date: new Date(2019, 0, 13), value: 49213 },
+	{ date: new Date(2019, 0, 15), value: 70323 },
+	{ date: new Date(2019, 0, 17), value: 51213 },
+	{ date: new Date(2019, 0, 19), value: 21300 }
+];
+
 // utility function to update title and enable zoomBar option
-const addZoomBarToOptions = (options) => {
-	options["title"] = options["title"] + " - Zoom bar enabled";
-	options["zoomBar"] = { enabled: true };
+const addZoomBarToOptions = (options, includeDefinedZoomBarData = false) => {
+	if (includeDefinedZoomBarData) {
+		options["title"] = options["title"] + " - Defined zoom bar enabled";
+		options["zoomBar"] = { enabled: true, data: definedZoomBarData };
+	} else {
+		options["title"] = options["title"] + " - Zoom bar enabled";
+		options["zoomBar"] = { enabled: true };
+	}
 	return options;
 };
 
@@ -33,6 +51,13 @@ export const zoomBarStackedBarTimeSeriesData =
 	barChart.stackedBarTimeSeriesData;
 export const zoomBarStackedBarTimeSeriesOptions = addZoomBarToOptions(
 	Object.assign({}, barChart.stackedBarTimeSeriesOptions)
+);
+
+export const definedZoomBarStackedBarTimeSeriesData =
+	barChart.stackedBarTimeSeriesData;
+export const definedZoomBarStackedBarTimeSeriesOptions = addZoomBarToOptions(
+	Object.assign({}, barChart.stackedBarTimeSeriesOptions),
+	true
 );
 
 export const zoomBarBubbleTimeSeriesData = bubbleChart.bubbleTimeSeriesData;
