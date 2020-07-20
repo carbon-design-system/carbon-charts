@@ -6,24 +6,43 @@ import { Events } from "./../../interfaces";
 export class Title extends Component {
 	type = "title";
 
+	render() {
+		const svg = this.getContainerSVG();
+
+		const text = svg.selectAll("text.title")
+			.data([this.model.getOptions().title]);
+
+		text.enter()
+			.append("text")
+			.classed("title", true)
+			.merge(text)
+			.attr("x", 0)
+			.attr("y", "1em")
+			.html(d => d);
+
+		// check the max space the title has to render
+		const maxWidth = this.getMaxTitleWidth();
+		const title = DOMUtils.appendOrSelect(svg, "text.title");
+
+		// check if title needs truncation (and tooltip support)
+		if (title.node().getComputedTextLength() > maxWidth  &&  maxWidth > 0) {
+			this.truncateTitle(title, maxWidth);
+		}
+		text.exit().remove();
+	}
+
 	/**
 	 * Truncates title creating ellipses and attaching tooltip for exposing full title.
 	 */
-	truncateTitle() {
-		// get a reference to the title elements to calculate the size the title can be
-		const containerWidth = DOMUtils.getSVGElementSize(
-			this.services.domUtils.getMainSVG(),
-			{ useAttr: true }
-		).width;
-		const title = DOMUtils.appendOrSelect(this.parent, "text.title");
-
+	truncateTitle(title, maxWidth) {
 		// sanity check to prevent stack overflow on binary search
-		if (containerWidth <= 0) {
+		if (maxWidth <= 0) {
 			return;
 		}
 
+		const untruncatedTitle = title.text();
 		// check if the title is too big for the containing svg
-		if (title.node().getComputedTextLength() > containerWidth) {
+		if (title.node().getComputedTextLength() > maxWidth) {
 			// append the ellipses to their own tspan to calculate the text length
 			title.append("tspan").text("...");
 
@@ -31,8 +50,9 @@ export class Title extends Component {
 			const tspanLength = DOMUtils.appendOrSelect(title, "tspan")
 				.node()
 				.getComputedTextLength();
-			const truncatedSize = Math.floor(containerWidth - tspanLength);
-			const titleString = this.model.getOptions().title;
+
+			// with elipses
+			const titleString = title.text();
 
 			// get the index for creating the max length substring that fit within the svg
 			// use one less than the index to avoid crowding (the elipsis)
@@ -40,14 +60,14 @@ export class Title extends Component {
 				title.node(),
 				0,
 				titleString.length - 1,
-				truncatedSize
+				maxWidth - tspanLength
 			);
 
 			// use the substring as the title
 			title
-				.html(titleString.substring(0, substringIndex - 1))
-				.append("tspan")
-				.text("...");
+			.html(titleString.substring(0, substringIndex - 1))
+			.append("tspan")
+			.text("...");
 
 			// add events for displaying the tooltip with the title
 			const self = this;
@@ -55,7 +75,7 @@ export class Title extends Component {
 				.on("mouseover", function () {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						hoveredElement: title,
-						content: titleString
+						content: untruncatedTitle
 					});
 				})
 				.on("mousemove", function () {
@@ -64,17 +84,16 @@ export class Title extends Component {
 				.on("mouseout", function () {
 					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 				});
-		}
+			}
 	}
 
-	render() {
-		const svg = this.getContainerSVG();
-
-		const text = DOMUtils.appendOrSelect(svg, "text.title");
-		text.attr("x", 0).attr("y", 20).html(this.model.getOptions().title);
-
-		// title needs to first render so that we can check for overflow
-		this.truncateTitle();
+	// computes the maximum space a title can take
+	protected getMaxTitleWidth() {
+		const containerWidth = DOMUtils.getSVGElementSize(
+			this.services.domUtils.getMainSVG(),
+			{ useAttr: true }
+		).width;
+		return containerWidth;
 	}
 
 	/**
