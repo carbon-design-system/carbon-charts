@@ -125,4 +125,8 @@ export interface ZoomBarOptions {
 	 * an two element array which represents the initial zoom domain
 	 */
 	initialZoomDomain?: Object[];
+	/**
+	 * options related to zoom bar data
+	 */
+	data?: Object[];
 }
