@@ -10,4 +10,14 @@ svg.#{$prefix}--#{$charts-prefix}--chart-svg {
 		font-weight: carbon--font-weight("regular");
 		fill: $text-02;
 	}
+
+	text.meter-title,
+	text.percent-value {
+		font-size: $carbon--base-font-size;
+		font-family: carbon--font-family("sans");
+	}
+
+	text.meter-title {
+		font-weight: carbon--font-weight("semibold");
+	}
 }
