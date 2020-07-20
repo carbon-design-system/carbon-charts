@@ -428,6 +428,13 @@ export class ChartModel {
 	}
 
 	/**
+	 * For charts that might hold an associated status for their dataset
+	 */
+	getStatus() {
+		return null;
+	}
+
+	/**
 	 * Converts data provided in the older format to tabular
 	 *
 	 */
@@ -551,7 +558,7 @@ export class ChartModel {
 	 * Fill scales
 	 */
 	protected setColorScale() {
-		let defaultColors = colorPalettes.DEFAULT;
+		const defaultColors = colorPalettes.DEFAULT;
 
 		const options = this.getOptions();
 		const userProvidedScale = Tools.getProperty(options, "color", "scale");
