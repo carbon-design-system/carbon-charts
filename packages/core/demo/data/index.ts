@@ -155,25 +155,24 @@ let allDemoGroups = [
 				isDemoExample: false
 			},
 			{
+				options: barDemos.simpleBarCenteredLegendOptions,
+				data: barDemos.simpleBarCenteredLegendData,
+				chartType: chartTypes.SimpleBarChart
+			},
+			{
 				options: barDemos.simpleBarLongLabelOptions,
 				data: barDemos.simpleBarLongLabelData,
 				chartType: chartTypes.SimpleBarChart,
 				isDemoExample: true
 			},
 			{
-				options: barDemos.simpleBarTimeSeriesOptions,
-				data: barDemos.simpleBarTimeSeriesData,
+				options: barDemos.simpleBarFixedDomainOptions,
+				data: barDemos.simpleBarData,
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
-				options: barDemos.simpleBarTimeSeriesDenseOptions,
-				data: barDemos.simpleBarTimeSeriesDenseData,
-				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: true,
-			},
-			{
-				options: barDemos.simpleBarFixedDomainOptions,
-				data: barDemos.simpleBarData,
+				options: barDemos.simpleBarTimeSeriesOptions,
+				data: barDemos.simpleBarTimeSeriesData,
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
@@ -250,6 +249,11 @@ let allDemoGroups = [
 			{
 				options: barDemos.simpleHorizontalBarOptions,
 				data: barDemos.simpleHorizontalBarData,
+				chartType: chartTypes.SimpleBarChart
+			},
+			{
+				options: barDemos.simpleHorizontalBarCenteredLegendOptions,
+				data: barDemos.simpleHorizontalBarCenteredLegendData,
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
@@ -359,6 +363,11 @@ let allDemoGroups = [
 				chartType: chartTypes.DonutChart
 			},
 			{
+				options: donutDemos.donutCenteredOptions,
+				data: donutDemos.donutCenteredData,
+				chartType: chartTypes.DonutChart
+			},
+			{
 				options: donutDemos.donutEmptyStateOptions,
 				data: donutDemos.donutEmptyStateData,
 				chartType: chartTypes.DonutChart,
@@ -378,23 +387,13 @@ let allDemoGroups = [
 			"Line charts plot data at regular intervals connected by lines. You can use line visualizations to show trends over time and compare several data sets.",
 		demos: [
 			{
-				options: lineDemos.lineTimeSeriesOptions,
-				data: lineDemos.lineTimeSeriesData,
-				chartType: chartTypes.LineChart
-			},
-			{
-				options: lineDemos.lineTimeSeriesCustomDomainOptions,
-				data: lineDemos.lineTimeSeriesData,
-				chartType: chartTypes.LineChart
-			},
-			{
-				options: lineDemos.lineTimeSeriesDenseOptions,
-				data: lineDemos.lineTimeSeriesDenseData,
-				chartType: chartTypes.LineChart
-			},
-			{
 				options: lineDemos.lineOptions,
 				data: lineDemos.lineData,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineCenteredLegendOptions,
+				data: lineDemos.lineCenteredLegendData,
 				chartType: chartTypes.LineChart
 			},
 			{
@@ -413,20 +412,35 @@ let allDemoGroups = [
 				chartType: chartTypes.LineChart
 			},
 			{
+				options: lineDemos.lineTimeSeriesOptions,
+				data: lineDemos.lineTimeSeriesData,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeriesCustomDomainOptions,
+				data: lineDemos.lineTimeSeriesData,
+				chartType: chartTypes.LineChart
+			},
+			{
+				options: lineDemos.lineTimeSeriesDenseOptions,
+				data: lineDemos.lineTimeSeriesDenseData,
+				chartType: chartTypes.LineChart
+			},
+			{
 				options: lineDemos.lineTimeSeriesRotatedTicksOptions,
 				data: lineDemos.lineTimeSeriesDataRotatedTicks,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false
 			},
 			{
-				options: lineDemos.lineTimeSeriesHorizontalOptions,
-				data: lineDemos.lineTimeSeriesData,
+				options: lineDemos.lineHorizontalOptions,
+				data: lineDemos.lineData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false
 			},
 			{
-				options: lineDemos.lineHorizontalOptions,
-				data: lineDemos.lineData,
+				options: lineDemos.lineTimeSeriesHorizontalOptions,
+				data: lineDemos.lineTimeSeriesData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false
 			},
@@ -470,6 +484,11 @@ let allDemoGroups = [
 			{
 				options: pieDemos.pieOptions,
 				data: pieDemos.pieData,
+				chartType: chartTypes.PieChart
+			},
+			{
+				options: pieDemos.pieCenteredOptions,
+				data: pieDemos.pieCenteredData,
 				chartType: chartTypes.PieChart
 			},
 			{
@@ -712,6 +731,11 @@ let allDemoGroups = [
 			{
 				data: radarDemos.radarData,
 				options: radarDemos.radarOptions,
+				chartType: chartTypes.RadarChart
+			},
+			{
+				data: radarDemos.radarCenteredData,
+				options: radarDemos.radarCenteredOptions,
 				chartType: chartTypes.RadarChart
 			},
 			{
