@@ -201,9 +201,16 @@ export class Axis extends Component {
 						"timeScale",
 						"addSpaceOnEdges"
 					);
+					
+					const customDomain = Tools.getProperty(
+						options,
+						"axes",
+						axisPosition,
+						"domain"
+					);
 
 					let tickValues;
-					if (addSpaceOnEdges) {
+					if (addSpaceOnEdges && !customDomain) {
 						tickValues = scale.nice(numberOfTicks);
 					}
 					tickValues = scale.ticks(numberOfTicks);
