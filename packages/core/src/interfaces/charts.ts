@@ -1,4 +1,9 @@
-import { GaugeTypes, Statuses, ArrowDirections } from "./enums";
+import {
+	GaugeTypes,
+	Statuses,
+	ArrowDirections,
+	Alignments
+} from "./enums";
 import {
 	LegendOptions,
 	TooltipOptions,
@@ -235,6 +240,7 @@ export interface PieChartOptions extends BaseChartOptions {
 		labels?: {
 			formatter?: Function;
 		};
+		alignment?: Alignments;
 	};
 }
 
@@ -270,6 +276,7 @@ export interface DonutChartOptions extends PieChartOptions {
 			titleYPosition?: Function;
 			numberFormatter?: Function;
 		};
+		alignment?: Alignments;
 	};
 }
 
@@ -314,5 +321,6 @@ export interface RadarChartOptions extends BaseChartOptions {
 		minRange: number;
 		xAxisRectHeight: number;
 		dotsRadius: number;
+		alignment?: Alignments;
 	};
 }
