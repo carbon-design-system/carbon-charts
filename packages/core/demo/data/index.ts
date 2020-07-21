@@ -149,6 +149,12 @@ let allDemoGroups = [
 				chartType: chartTypes.SimpleBarChart
 			},
 			{
+				options: barDemos.simpleBarOptionsCustomTicks,
+				data: barDemos.simpleBarDataCustomTicks,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: false
+			},
+			{
 				options: barDemos.simpleBarCenteredLegendOptions,
 				data: barDemos.simpleBarCenteredLegendData,
 				chartType: chartTypes.SimpleBarChart
@@ -216,6 +222,12 @@ let allDemoGroups = [
 				options: barDemos.stackedBarTimeSeriesOptions,
 				data: barDemos.stackedBarTimeSeriesData,
 				chartType: chartTypes.StackedBarChart
+			},
+			{
+				options: barDemos.stackedBarTimeSeriesOptionsCustomTicks,
+				data: barDemos.stackedBarTimeSeriesDataCustomTicks,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: false
 			},
 			{
 				options: barDemos.stackedBarEmptyStateOptions,
