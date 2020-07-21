@@ -93,6 +93,28 @@ export const simpleBarOptions = {
 	}
 };
 
+// Simple bar with custom tick values
+export const simpleBarDataCustomTicks = [
+	{ group: "Group 1", value: 0.5 },
+	{ group: "Group 2", value: 2 }
+];
+
+export const simpleBarOptionsCustomTicks = {
+	title: "Simple bar (custom ticks)",
+	axes: {
+		left: {
+			mapsTo: "value",
+			ticks: {
+				values: [0, 1.2, 1.3, 2]
+			}
+		},
+		bottom: {
+			mapsTo: "group",
+			scaleType: "labels"
+		}
+	}
+};
+
 // Simple bar with long labels
 export const simpleBarLongLabelData = [
 	{
@@ -353,6 +375,26 @@ export const stackedBarTimeSeriesOptions = {
 		bottom: {
 			mapsTo: "date",
 			scaleType: "time"
+		}
+	}
+};
+
+// demo with custom ticks
+export const stackedBarTimeSeriesDataCustomTicks = stackedBarTimeSeriesData;
+
+export const stackedBarTimeSeriesOptionsCustomTicks = {
+	title: "Stacked bar (time series - custom ticks)",
+	axes: {
+		left: {
+			mapsTo: "value",
+			stacked: true
+		},
+		bottom: {
+			mapsTo: "date",
+			scaleType: "time",
+			ticks: {
+				values: [new Date(2019, 0, 17)]
+			}
 		}
 	}
 };
