@@ -51,6 +51,14 @@ export class Axis extends Component {
 			"number"
 		);
 
+		// user can provide custom ticks to be displayed
+		// ticks need to be in the domain of the axis data
+		const userProvidedTickValues = Tools.getProperty(
+			axisOptions,
+			"ticks",
+			"values"
+		);
+
 		// get user provided custom values for truncation
 		const truncationType = Tools.getProperty(
 			axisOptions,
@@ -263,6 +271,12 @@ export class Axis extends Component {
 		// Set ticks formatter
 		axis.tickFormat(formatter);
 
+		// prioritize using a custom array of values rather than number of ticks
+		// if both are provided. custom tick values need to be within the domain
+		if (userProvidedTickValues) {
+			axis.tickValues(userProvidedTickValues);
+		}
+
 		// Position and transition the axis
 		switch (axisPosition) {
 			case AxisPositions.LEFT:
@@ -464,7 +478,8 @@ export class Axis extends Component {
 		// only applies to discrete type
 		if (
 			truncationType !== TruncationTypes.NONE &&
-			axisScaleType === ScaleTypes.LABELS
+			axisScaleType === ScaleTypes.LABELS &&
+			!userProvidedTickValues
 		) {
 			const dataGroups = this.model.getDataValuesGroupedByKeys();
 			if (dataGroups.length > 0) {

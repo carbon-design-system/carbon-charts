@@ -78,6 +78,10 @@ export interface AxisOptions {
 		 * function to format the ticks
 		 */
 		formatter?: Function;
+		/**
+		 * optional custom array of tick values that is within the domain of data
+		 */
+		values?: any[]
 	};
 	truncation?: TruncationOptions;
 }
