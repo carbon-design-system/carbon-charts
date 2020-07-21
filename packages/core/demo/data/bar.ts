@@ -115,6 +115,24 @@ export const simpleBarOptionsCustomTicks = {
 	}
 };
 
+export const simpleBarCenteredLegendData = simpleBarData;
+
+export const simpleBarCenteredLegendOptions = {
+	title: "Simple bar (centered legend)",
+	axes: {
+		left: {
+			mapsTo: "value"
+		},
+		bottom: {
+			mapsTo: "group",
+			scaleType: "labels"
+		}
+	},
+	legend: {
+		alignment: "center"
+	}
+}
+
 // Simple bar with long labels
 export const simpleBarLongLabelData = [
 	{
@@ -190,6 +208,24 @@ export const simpleHorizontalBarOptions = {
 		}
 	}
 };
+
+export const simpleHorizontalBarCenteredLegendData = simpleBarData;
+
+export const simpleHorizontalBarCenteredLegendOptions = {
+	title: "Simple horizontal bar (centered legend)",
+	axes: {
+		left: {
+			mapsTo: "group",
+			scaleType: "labels"
+		},
+		bottom: {
+			mapsTo: "value"
+		}
+	},
+	legend: {
+		alignment: "center"
+	}
+}
 
 export const simpleHorizontalBarLongLabelOptions = {
 	title: "Simple horizontal bar (truncated labels)",
