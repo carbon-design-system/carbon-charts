@@ -54,7 +54,7 @@ export class ChartModel {
 			"data"
 		);
 		// if user already defines zoom bar data, use it
-		if (definedZoomBarData) {
+		if (definedZoomBarData && definedZoomBarData.length > 1) {
 			zoomBarData = definedZoomBarData;
 		} else {
 			// use displayData if not defined
