@@ -72,6 +72,15 @@ export enum LegendPositions {
 }
 
 /**
+ * enum of all possible alignments
+ */
+export enum Alignments {
+	LEFT = "left",
+	CENTER = "center",
+	RIGHT = "right"
+}
+
+/**
  * enum of all possible legend orientations
  */
 export enum LegendOrientations {

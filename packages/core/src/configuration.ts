@@ -22,7 +22,8 @@ import {
 	TruncationTypes,
 	StackedBarOptions,
 	MeterChartOptions,
-	GaugeTypes
+	GaugeTypes,
+	Alignments
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
 
@@ -61,7 +62,8 @@ export const legend: LegendOptions = {
 		radius: 6.5,
 		spaceAfter: 4
 	},
-	truncation: standardTruncationOptions
+	truncation: standardTruncationOptions,
+	alignment: Alignments.LEFT
 };
 
 /**
@@ -275,7 +277,8 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 		},
 		labels: {
 			formatter: null
-		}
+		},
+		alignment: Alignments.LEFT
 	}
 } as PieChartOptions);
 
@@ -315,7 +318,8 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 			titleFontSize: (radius) => Math.min((radius / 100) * 15, 15) + "px",
 			titleYPosition: (radius) => Math.min((radius / 80) * 20, 20),
 			numberFormatter: (number) => Math.floor(number).toLocaleString()
-		}
+		},
+		alignment: Alignments.LEFT
 	}
 } as DonutChartOptions);
 
@@ -356,7 +360,8 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 		yTicksNumber: 4,
 		minRange: 10,
 		xAxisRectHeight: 50,
-		dotsRadius: 5
+		dotsRadius: 5,
+		alignment: Alignments.LEFT
 	},
 	tooltip: {
 		gridline: {
