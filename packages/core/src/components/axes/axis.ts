@@ -494,6 +494,8 @@ export class Axis extends Component {
 		// because the Skeleton component draws them
 		if (isDataLoading) {
 			container.attr("opacity", 0);
+		} else {
+			container.attr("opacity", 1);
 		}
 
 		axisRef.selectAll("g.tick").attr("aria-label", (d) => d);
