@@ -393,6 +393,9 @@ export class ZoomBar extends Component {
 
 	// assume the domains in data are already sorted
 	compensateDataForDefaultDomain(data, defaultDomain, value) {
+		if (!data || data.length < 2) {
+			return;
+		}
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 		// if min domain is extended
