@@ -46,10 +46,23 @@ export class ChartModel {
 		const domainIdentifier = cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = cartesianScales.getRangeIdentifier();
 
-		const displayData = this.getDisplayData();
+		let zoomBarData;
+		// check if pre-defined zoom bar data exists
+		const definedZoomBarData = Tools.getProperty(
+			this.getOptions(),
+			"zoomBar",
+			"data"
+		);
+		// if user already defines zoom bar data, use it
+		if (definedZoomBarData && definedZoomBarData.length > 1) {
+			zoomBarData = definedZoomBarData;
+		} else {
+			// use displayData if not defined
+			zoomBarData = this.getDisplayData();
+		}
 		// get all dates (Number) in displayData
 		let allDates = [];
-		displayData.forEach((data) => {
+		zoomBarData.forEach((data) => {
 			allDates = allDates.concat(Number(data[domainIdentifier]));
 		});
 		allDates = Tools.removeArrayDuplicates(allDates).sort();
@@ -59,7 +72,7 @@ export class ChartModel {
 			let sum = 0;
 			const datum = {};
 
-			displayData.forEach((data) => {
+			zoomBarData.forEach((data) => {
 				if (Number(data[domainIdentifier]) === date) {
 					sum += data[rangeIdentifier];
 				}
@@ -473,6 +486,13 @@ export class ChartModel {
 
 	getFillScale() {
 		return this.colorScale;
+	}
+
+	/**
+	 * For charts that might hold an associated status for their dataset
+	 */
+	getStatus() {
+		return null;
 	}
 
 	/**

@@ -21,6 +21,7 @@ import {
 	LegendPositions,
 	TruncationTypes,
 	StackedBarOptions,
+	MeterChartOptions,
 	GaugeTypes,
 	ZoomBarOptions
 } from "./interfaces";
@@ -45,9 +46,9 @@ const standardTruncationOptions = {
  * Legend options
  */
 export const legend: LegendOptions = {
+	enabled: true,
 	position: LegendPositions.BOTTOM,
 	clickable: true,
-	enabled: true,
 	items: {
 		status: {
 			ACTIVE: 1,
@@ -131,7 +132,7 @@ export const timeScale: TimeScaleOptions = {
 export const zoomBar: ZoomBarOptions = {
 	enabled: false,
 	zoomRatio: 0.4,
-	showToolBar: true,
+	showToolBar: true
 };
 
 /**
@@ -329,6 +330,25 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	}
 } as DonutChartOptions);
 
+const meterChart: MeterChartOptions = Tools.merge({}, chart, {
+	legend: {
+		enabled: false
+	},
+	meter: {
+		height: 8,
+		statusBar: {
+			paddingRight: 5,
+			percentageIndicator: {
+				enabled: true
+			}
+		},
+		status: {
+			indicatorSize: 16,
+			paddingLeft: 15
+		}
+	}
+});
+
 /**
  * options specific to radar charts
  */
@@ -371,6 +391,7 @@ export const options = {
 	scatterChart,
 	pieChart,
 	donutChart,
+	meterChart,
 	radarChart,
 	gaugeChart
 };
