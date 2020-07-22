@@ -274,10 +274,15 @@ export class ZoomBar extends Component {
 	}
 
 	updateBrushHandleTooltip(svg, domain, timeScaleOptions) {
-		const timeInterval = computeTimeIntervalName(domain);
-
 		// remove old handle tooltip
 		svg.select("title").remove();
+
+		// if domain is undefined, do nothing
+		if (!domain) {
+			return;
+		}
+
+		const timeInterval = computeTimeIntervalName(domain);
 		// add new handle tooltip
 		svg.append("title").text((d) => {
 			if (d.type === "w") {
