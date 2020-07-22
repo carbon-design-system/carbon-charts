@@ -5,7 +5,7 @@ import { DOMUtils } from "../../services";
 
 // D3 Imports
 import { brushX } from "d3-brush";
-import { event } from "d3-selection";
+import { event, mouse } from "d3-selection";
 import { scaleTime } from "d3-scale";
 
 // This class is used for handle brush events in chart
@@ -17,6 +17,13 @@ export class ChartBrush extends Component {
 	selectionSelector = "rect.selection"; // needs to match the class name in d3.brush
 
 	frontSelectionSelector = "rect.frontSelection"; // needs to match the class name in _chart-brush.scss
+
+	zoomRatio;
+
+	init() {
+		// get zoom in ratio
+		this.zoomRatio = this.model.getOptions().zoomBar.zoomRatio;
+	}
 
 	render(animate = true) {
 		const svg = this.parent;
@@ -38,8 +45,14 @@ export class ChartBrush extends Component {
 		const { width, height } = DOMUtils.getSVGElementSize(backdrop, {
 			useAttrs: true
 		});
+		const zoomRatio = this.zoomRatio;
 
 		const { cartesianScales } = this.services;
+		let axesLeftMargin = 0;
+		const axesMargins = this.model.get("axesMargins");
+		if (axesMargins && axesMargins.left) {
+			axesLeftMargin = axesMargins.left;
+		}
 		const mainXScaleType = cartesianScales.getMainXScaleType();
 		const mainXScale = cartesianScales.getMainXScale();
 		const [xScaleStart, xScaleEnd] = mainXScale.range();
@@ -48,6 +61,17 @@ export class ChartBrush extends Component {
 			frontSelectionArea,
 			this.frontSelectionSelector
 		);
+
+		const setDomain = (newDomain) => {
+			this.model.set(
+				{ zoomDomain: newDomain },
+				{ animate: false }
+			);
+		};
+
+		const getDefaultZoomBarDomain = () => {
+			return this.model.getDefaultZoomBarDomain();
+		};
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
 			// get current zoomDomain
@@ -127,37 +151,39 @@ export class ChartBrush extends Component {
 					});
 				}
 			};
+
+			const handleZoomDomain = (startPoint, endPoint) => {
+				// create xScale based on current zoomDomain
+				const xScale = scaleTime()
+					.range([axesLeftMargin, width])
+					.domain(zoomDomain);
+
+				let newDomain = [
+					xScale.invert(startPoint),
+					xScale.invert(endPoint)
+				];
+
+				// if selected start time and end time are the same
+				// reset to default full range
+				if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
+					// same as d3 behavior and zoom bar behavior: set to default full range
+					newDomain = getDefaultZoomBarDomain();
+				}
+
+				// only if zoomDomain needs update
+				if (
+					zoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
+					zoomDomain[1].valueOf() !== newDomain[1].valueOf()
+				) {
+					setDomain(newDomain);
+				}
+			};
+
 			const brushed = () => {
 				const selection = event.selection;
 
 				if (selection !== null) {
-					// create xScale based on current zoomDomain
-					const xScale = scaleTime()
-						.range([0, width])
-						.domain(zoomDomain);
-
-					let newDomain = [
-						xScale.invert(selection[0]),
-						xScale.invert(selection[1])
-					];
-
-					// if selected start time and end time are the same
-					// reset to default full range
-					if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
-						// same as d3 behavior and zoom bar behavior: set to default full range
-						newDomain = this.model.getDefaultZoomBarDomain();
-					}
-
-					// only if zoomDomain needs update
-					if (
-						zoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
-						zoomDomain[1].valueOf() !== newDomain[1].valueOf()
-					) {
-						this.model.set(
-							{ zoomDomain: newDomain },
-							{ animate: false }
-						);
-					}
+					handleZoomDomain(selection[0], selection[1]);
 
 					// clear brush selection
 					brushArea.call(brush.move, null);
@@ -176,6 +202,24 @@ export class ChartBrush extends Component {
 				.on("end.brushed", brushed);
 
 			brushArea.call(brush);
+
+			backdrop.on("click", function() {
+				if (event.shiftKey) {
+					const coords = mouse(this);
+					const currentClickLocation = coords[0] - axesLeftMargin;
+
+					let leftPoint = currentClickLocation - width * zoomRatio / 2;
+					if (leftPoint < 0) {
+						leftPoint = 0;
+					}
+					let rightPoint = currentClickLocation + width * zoomRatio / 2;
+					if (rightPoint > width) {
+						rightPoint = width;
+					}
+
+					handleZoomDomain(leftPoint, rightPoint);
+				}
+			});
 		}
 	}
 }
