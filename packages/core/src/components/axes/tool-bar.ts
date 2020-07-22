@@ -6,10 +6,7 @@ import { DOMUtils } from "../../services";
 import { ChartModel } from "../../model";
 
 // D3 Imports
-import { extent } from "d3-array";
-import { line } from "d3-shape";
 import { event, select, selectAll } from "d3-selection";
-import { scaleTime } from "d3-scale";
 
 // Carbon position service
 import Position, { PLACEMENTS } from "@carbon/utils-position";
@@ -19,10 +16,6 @@ import settings from "carbon-components/es/globals/js/settings";
 
 export class ToolBar extends Component {
 	type = "tool-bar";
-	// The minimum selection x range to trigger handler update
-	// Smaller number may introduce a handler flash during initialization
-	// Bigger number may not trigger handler update while selection area on chart is very small
-	MIN_SELECTION_DIFF = 9e-10;
 
 	height = 20;
 
@@ -33,8 +26,6 @@ export class ToolBar extends Component {
 	zoomOutStart = 0;
 
 	overflowMenuStart = 0;
-
-	previousZoomDomain;
 
 	zoomRatio;
 
@@ -76,13 +67,14 @@ export class ToolBar extends Component {
 
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener(Events.Toolbar.SHOW, () => {
-			this.overflowMenuOptions.classed("hidden", false);
 			const defaultHTML = this.getOverflowMenuHTML();
+			this.overflowMenuOptions.classed("hidden", false);
 			this.overflowMenuOptions.html(defaultHTML);
 		});
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
 		this.services.events.addEventListener(Events.Toolbar.HIDE, () => {
+			console.log("!!! catch hide event")
 			this.overflowMenuOptions.classed("hidden", true);
 			this.overflowMenuOptions.html(null);
 		});
@@ -212,22 +204,30 @@ export class ToolBar extends Component {
 		const overflowMenu = overflowMenuGroup.select("svg#toolbar-overflow-menu-icon");
 
 		overflowMenu.on("click", function() {
-			if (self.overflowMenuOptions.classed("hidden")) {
+			if (self.overflowMenuOptions.selectAll("ul.bx--overflow-menu-options--open").size() > 0) {
+				// Hide toolbar
+				self.services.events.dispatchEvent(Events.Toolbar.HIDE);
+			} else {
 				self.services.events.dispatchEvent(Events.Toolbar.SHOW);
-				document.getElementById("reset-Btn").addEventListener('click', function () {
+				document.getElementById("reset-Btn").addEventListener("click", function () {
 					const newDomain = self.model.getDefaultZoomBarDomain();
 					self.model.set(
 						{ zoomDomain: newDomain, selectionRange: [axesLeftMargin, width] },
 						{ animate: false }
 					);
 					self.services.events.dispatchEvent(Events.Toolbar.HIDE);
-				});
-			} else {
-				// Hide toolbar
+				}, true);
+			}
+			event.stopImmediatePropagation();
+		});
+
+		document.body.addEventListener("click", function(e) {
+			if (self.overflowMenuOptions.selectAll("ul.bx--overflow-menu-options--open").size() > 0) {
+				console.log("!!! body click got triggered");
 				self.services.events.dispatchEvent(Events.Toolbar.HIDE);
 			}
-
 		});
+
 	}
 
 	getZoomInIcon() {
