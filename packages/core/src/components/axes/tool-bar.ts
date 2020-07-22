@@ -77,7 +77,6 @@ export class ToolBar extends Component {
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener(Events.Toolbar.SHOW, () => {
 			this.overflowMenuOptions.classed("hidden", false);
-			console.log("!!! , this.overflowMenuOptions: ", this.overflowMenuOptions.classed("hidden"));
 			const defaultHTML = this.getOverflowMenuHTML();
 			this.overflowMenuOptions.html(defaultHTML);
 		});
@@ -114,7 +113,7 @@ export class ToolBar extends Component {
 		if (axesMargins && axesMargins.left) {
 			axesLeftMargin = axesMargins.left;
 		}
-		
+
 		this.overflowMenuStart = width - 20;
 		this.zoomOutStart = this.overflowMenuStart - 30;
 		this.zoomInStart = this.zoomOutStart - 30;
@@ -213,15 +212,22 @@ export class ToolBar extends Component {
 		const overflowMenu = overflowMenuGroup.select("svg#toolbar-overflow-menu-icon");
 
 		overflowMenu.on("click", function() {
-			if(self.overflowMenuOptions.classed("hidden")) {
+			if (self.overflowMenuOptions.classed("hidden")) {
 				self.services.events.dispatchEvent(Events.Toolbar.SHOW);
+				document.getElementById("reset-Btn").addEventListener('click', function () {
+					const newDomain = self.model.getDefaultZoomBarDomain();
+					self.model.set(
+						{ zoomDomain: newDomain, selectionRange: [axesLeftMargin, width] },
+						{ animate: false }
+					);
+					self.services.events.dispatchEvent(Events.Toolbar.HIDE);
+				});
 			} else {
 				// Hide toolbar
 				self.services.events.dispatchEvent(Events.Toolbar.HIDE);
 			}
-			
-		});
 
+		});
 	}
 
 	getZoomInIcon() {
@@ -231,7 +237,7 @@ export class ToolBar extends Component {
 			<svg version="1.1" id="icon-zoomIn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomInStart}px" y="0px"
 				width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
 				<title>Zoom in</title>
-				<rect id="rect-zoomIn" class="icon-zoom" width="30" height="30"/>
+				<rect id="rect-zoomIn" class="icon-zoom" width="20" height="20"/>
 				<polygon points="9,6 7,6 7,4 6,4 6,6 4,6 4,7 6,7 6,9 7,9 7,7 9,7 "/>
 				<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
 					L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>
@@ -245,7 +251,7 @@ export class ToolBar extends Component {
 			<svg version="1.1" id="icon-zoomOut" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomOutStart}px" y="0px"
 				width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
 				<title>Zoom out</title>
-				<rect id="rect-zoomOut" class="icon-zoom" width="30" height="30"/>
+				<rect id="rect-zoomOut" class="icon-zoom" width="20" height="20"/>
 				<rect class="icon-zoomOut" x="4" y="6" width="5" height="1"/>
 				<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
 					L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>
@@ -272,47 +278,38 @@ export class ToolBar extends Component {
 		);
 
 		let defaultHTML;
-		
+
 		const options = this.getMenuOptions();
-		
+
 		defaultHTML =
-			`<ul class='toolbar-overflow-options'>` +
+			`<div data-floating-menu-container="true"
+			data-floating-menu-direction="bottom" role="main">
+			<ul class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
+				tabindex="-1" role="menu" aria-label="Menu" data-floating-menu-direction="bottom"
+				style="left:${this.overflowMenuStart - (160 - 20 - 15 / 2)}px; top:70px;">` +
 			options
 				.map(
 					(option, index) =>
-						`<li>
-						<div class="overflow-menu-options ${index}">
-							<p class="label">${option}</p>
-						</div>
+						`<li
+						class="bx--overflow-menu-options__option">
+						<button class="bx--overflow-menu-options__btn" role="menuitem"  title="Reset"
+							data-floating-menu-primary-focus
+							id="reset-Btn">
+							<div class="bx--overflow-menu-options__option-content">
+								${option}
+							</div>
+						</button>
 					</li>`
 				)
 				.join("") +
-			`</ul>`;
-
-		defaultHTML = `
-			<div class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open" tabindex="-1"
-				data-floating-menu-direction="bottom" role="menu"
-				style="left:${this.overflowMenuStart - (160 - 20 - 15/2)}px; top:75px;">
-				<ul class="bx--overflow-menu-options__content">
-					<li
-						class="bx--overflow-menu-options__option">
-						<button class="bx--overflow-menu-options__btn" role="menuitem"  title="Reset"
-							data-floating-menu-primary-focus  >
-						<span class="bx--overflow-menu-options__option-content">
-							Reset
-						</span>
-						</button>
-					</li>
-				</ul>
-			</div>`
+			`</ul></div>`;
 
 		return defaultHTML;
 	}
-	
-	getMenuOptions() {
-		return ["Reset"];
-	}
 
+	getMenuOptions() {
+		return ["Reset zoom"];
+	}
 
 	destroy() {
 		this.services.events.removeEventListener(Events.ZoomBar.UPDATE, () => {
