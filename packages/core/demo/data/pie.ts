@@ -12,6 +12,19 @@ export const pieOptions = {
 	resizable: true
 };
 
+export const pieCenteredData = pieData;
+
+export const pieCenteredOptions = {
+	title: "Pie (centered)",
+	resizable: true,
+	legend: {
+		alignment: "center"
+	},
+	pie: {
+		alignment: "center"
+	}
+}
+
 // pie - empty state
 export const pieEmptyStateData = [];
 export const pieEmptyStateOptions = {
