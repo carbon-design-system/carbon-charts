@@ -5,7 +5,7 @@ import { CartesianOrientations, Events } from "../../interfaces";
 import { Tools } from "../../tools";
 
 // D3 Imports
-import { mouse, Selection } from "d3-selection";
+import { Selection, mouse } from "d3-selection";
 
 type GenericSvgSelection = Selection<SVGElement, any, SVGElement, any>;
 
@@ -39,9 +39,10 @@ export class Ruler extends Component {
 		const orientation: CartesianOrientations = this.services.cartesianScales.getOrientation();
 		const mouseCoordinate =
 			orientation === CartesianOrientations.HORIZONTAL ? y : x;
-		const ruler = DOMUtils
-			.appendOrSelect(svg, "g.ruler")
-			.attr("aria-label", "ruler");
+		const ruler = DOMUtils.appendOrSelect(svg, "g.ruler").attr(
+			"aria-label",
+			"ruler"
+		);
 		const rulerLine = DOMUtils.appendOrSelect(ruler, "line.ruler-line");
 		const dataPointElements: GenericSvgSelection = svg.selectAll(
 			"[role=graphics-symbol]"
@@ -66,7 +67,9 @@ export class Ruler extends Component {
 				this.pointsWithinLine.map((point) => point.domainValue).join()
 		) {
 			this.pointsWithinLine = pointsWithinLine;
-			return this.services.events.dispatchEvent(Events.Tooltip.MOVE);
+			return this.services.events.dispatchEvent(Events.Tooltip.MOVE, {
+				mousePosition: [x, y]
+			});
 		}
 
 		this.pointsWithinLine = pointsWithinLine;
@@ -147,6 +150,7 @@ export class Ruler extends Component {
 			this.elementsToHighlight = elementsToHighlight;
 
 			this.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+				mousePosition: [x, y],
 				hoveredElement: rulerLine,
 				data: this.formatTooltipData(tooltipData)
 			});
@@ -188,16 +192,30 @@ export class Ruler extends Component {
 	 */
 	addBackdropEventListeners() {
 		const self = this;
+		const displayData = this.model.getDisplayData();
+
+		let mouseMoveCallback = function () {
+			const pos = mouse(self.parent.node());
+			self.showRuler(pos);
+		};
+
+		// Debounce mouseMoveCallback if there are more than 100 datapoints
+		if (displayData.length > 100) {
+			const debounceThreshold = (displayData.length % 50) * 12.5;
+
+			mouseMoveCallback = Tools.debounceWithD3MousePosition(
+				function () {
+					const { mousePosition } = this;
+					self.showRuler(mousePosition);
+				},
+				debounceThreshold,
+				this.parent.node()
+			);
+		}
 
 		this.backdrop
-			.on("mousemove mouseover", function () {
-				const pos = mouse(self.parent.node());
-
-				self.showRuler(pos);
-			})
-			.on("mouseout", function () {
-				self.hideRuler();
-			});
+			.on("mousemove mouseover", mouseMoveCallback)
+			.on("mouseout", this.hideRuler.bind(this));
 	}
 
 	drawBackdrop() {

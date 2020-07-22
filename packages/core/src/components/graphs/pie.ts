@@ -79,8 +79,7 @@ export class Pie extends Component {
 		);
 
 		// Update data on all slices
-		const slicesGroup = DOMUtils
-			.appendOrSelect(svg, "g.slices")
+		const slicesGroup = DOMUtils.appendOrSelect(svg, "g.slices")
 			.attr("role", Roles.GROUP)
 			.attr("aria-label", "slices");
 
@@ -130,8 +129,7 @@ export class Pie extends Component {
 
 		// Draw the slice labels
 		const labelData = pieLayoutData.filter((x) => x.value > 0);
-		const labelsGroup = DOMUtils
-			.appendOrSelect(svg, "g.labels")
+		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels")
 			.attr("role", Roles.GROUP)
 			.attr("aria-label", "labels");
 
@@ -258,11 +256,10 @@ export class Pie extends Component {
 	}
 
 	renderCallouts(calloutData: any[]) {
-		const svg = DOMUtils
-			.appendOrSelect(
-				this.getContainerSVG(),
-				"g.callouts"
-			)
+		const svg = DOMUtils.appendOrSelect(
+			this.getContainerSVG(),
+			"g.callouts"
+		)
 			.attr("role", Roles.GROUP)
 			.attr("aria-label", "callouts");
 
