@@ -1,6 +1,6 @@
 // Internal Imports
 import { Service } from "../service";
-import { Events } from "./../../interfaces";
+import { Events, Alignments } from "./../../interfaces";
 
 // D3 Imports
 import { select, Selection } from "d3-selection";
@@ -149,6 +149,26 @@ export class DOMUtils extends Service {
 		return selection;
 	}
 
+	static getAlignmentOffset(alignment, svg, parent) {
+		const svgDimensions = DOMUtils.getSVGElementSize(
+			svg,
+			{ useBBox: true }
+		);
+		const { width } = DOMUtils.getSVGElementSize(
+			parent,
+			{ useAttr: true }
+		);
+
+		let alignmentOffset = 0;
+		if (alignment === Alignments.CENTER) {
+			alignmentOffset = Math.floor((width - svgDimensions.width) / 2);
+		} else if (alignment === Alignments.RIGHT) {
+			alignmentOffset = width - svgDimensions.width;
+		}
+
+		return alignmentOffset;
+	}
+
 	protected svg: Element;
 	protected width: string;
 	protected height: string;
@@ -218,6 +238,25 @@ export class DOMUtils extends Service {
 		);
 
 		this.svg = svg.node();
+	}
+
+	setSVGMaxHeight() {
+		// if there is a set height on the holder, leave the chart svg height at 100%
+		if (!this.model.getOptions().height) {
+			const { height: chartHeight } = DOMUtils.getSVGElementSize(select(this.svg), {useBBox : true});
+			const chartSVGSelector = select(this.svg).attr("class");
+			const children = select(this.svg).selectAll(`.${chartSVGSelector} > svg`);
+
+			// get the height of the children SVGs (spacers, titles, etc)
+			let childrenHeight = 0;
+			children.nodes().forEach(function (childSVG) {
+				childrenHeight += Number(DOMUtils.getSVGElementSize(select(childSVG), {useBBox : true}).height);
+			});
+
+			// set the chart svg height to the children height
+			// forcing the chart not to take up any more space than it requires
+			childrenHeight <= chartHeight ?  select(this.svg).attr("height", childrenHeight) : select(this.svg).attr("height", "100%") ;
+		}
 	}
 
 	getMainSVG() {

@@ -93,6 +93,46 @@ export const simpleBarOptions = {
 	}
 };
 
+// Simple bar with custom tick values
+export const simpleBarDataCustomTicks = [
+	{ group: "Group 1", value: 0.5 },
+	{ group: "Group 2", value: 2 }
+];
+
+export const simpleBarOptionsCustomTicks = {
+	title: "Simple bar (custom ticks)",
+	axes: {
+		left: {
+			mapsTo: "value",
+			ticks: {
+				values: [0, 1.2, 1.3, 2]
+			}
+		},
+		bottom: {
+			mapsTo: "group",
+			scaleType: "labels"
+		}
+	}
+};
+
+export const simpleBarCenteredLegendData = simpleBarData;
+
+export const simpleBarCenteredLegendOptions = {
+	title: "Simple bar (centered legend)",
+	axes: {
+		left: {
+			mapsTo: "value"
+		},
+		bottom: {
+			mapsTo: "group",
+			scaleType: "labels"
+		}
+	},
+	legend: {
+		alignment: "center"
+	}
+}
+
 // Simple bar with long labels
 export const simpleBarLongLabelData = [
 	{
@@ -168,6 +208,24 @@ export const simpleHorizontalBarOptions = {
 		}
 	}
 };
+
+export const simpleHorizontalBarCenteredLegendData = simpleBarData;
+
+export const simpleHorizontalBarCenteredLegendOptions = {
+	title: "Simple horizontal bar (centered legend)",
+	axes: {
+		left: {
+			mapsTo: "group",
+			scaleType: "labels"
+		},
+		bottom: {
+			mapsTo: "value"
+		}
+	},
+	legend: {
+		alignment: "center"
+	}
+}
 
 export const simpleHorizontalBarLongLabelOptions = {
 	title: "Simple horizontal bar (truncated labels)",
@@ -353,6 +411,26 @@ export const stackedBarTimeSeriesOptions = {
 		bottom: {
 			mapsTo: "date",
 			scaleType: "time"
+		}
+	}
+};
+
+// demo with custom ticks
+export const stackedBarTimeSeriesDataCustomTicks = stackedBarTimeSeriesData;
+
+export const stackedBarTimeSeriesOptionsCustomTicks = {
+	title: "Stacked bar (time series - custom ticks)",
+	axes: {
+		left: {
+			mapsTo: "value",
+			stacked: true
+		},
+		bottom: {
+			mapsTo: "date",
+			scaleType: "time",
+			ticks: {
+				values: [new Date(2019, 0, 17)]
+			}
 		}
 	}
 };

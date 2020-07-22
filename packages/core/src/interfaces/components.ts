@@ -1,4 +1,8 @@
-import { LayoutGrowth, LegendPositions } from "./enums";
+import {
+	LayoutGrowth,
+	LegendPositions,
+	Alignments
+} from "./enums";
 import { Component } from "../components/component";
 import { TruncationOptions } from "./truncation";
 
@@ -28,15 +32,12 @@ export interface LayoutComponentChild {
  * customize the legend component
  */
 export interface LegendOptions {
+	enabled?: boolean;
 	position?: LegendPositions;
 	/**
 	 * the clickability of legend items
 	 */
 	clickable?: boolean;
-	/**
-	 * is the legend visible or not
-	 */
-	enabled?: boolean;
 	items?: {
 		status?: {
 			ACTIVE?: Number;
@@ -51,6 +52,7 @@ export interface LegendOptions {
 		spaceAfter?: Number;
 	};
 	truncation?: TruncationOptions;
+	alignment?: Alignments;
 }
 
 export interface TooltipOptions {

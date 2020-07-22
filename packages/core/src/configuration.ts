@@ -21,7 +21,9 @@ import {
 	LegendPositions,
 	TruncationTypes,
 	StackedBarOptions,
-	GaugeTypes
+	MeterChartOptions,
+	GaugeTypes,
+	Alignments
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
 
@@ -44,9 +46,9 @@ const standardTruncationOptions = {
  * Legend options
  */
 export const legend: LegendOptions = {
+	enabled: true,
 	position: LegendPositions.BOTTOM,
 	clickable: true,
-	enabled: true,
 	items: {
 		status: {
 			ACTIVE: 1,
@@ -60,7 +62,8 @@ export const legend: LegendOptions = {
 		radius: 6.5,
 		spaceAfter: 4
 	},
-	truncation: standardTruncationOptions
+	truncation: standardTruncationOptions,
+	alignment: Alignments.LEFT
 };
 
 /**
@@ -274,7 +277,8 @@ const pieChart: PieChartOptions = Tools.merge({}, chart, {
 		},
 		labels: {
 			formatter: null
-		}
+		},
+		alignment: Alignments.LEFT
 	}
 } as PieChartOptions);
 
@@ -314,9 +318,29 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 			titleFontSize: (radius) => Math.min((radius / 100) * 15, 15) + "px",
 			titleYPosition: (radius) => Math.min((radius / 80) * 20, 20),
 			numberFormatter: (number) => Math.floor(number).toLocaleString()
-		}
+		},
+		alignment: Alignments.LEFT
 	}
 } as DonutChartOptions);
+
+const meterChart: MeterChartOptions = Tools.merge({}, chart, {
+	legend: {
+		enabled: false
+	},
+	meter: {
+		height: 8,
+		statusBar: {
+			paddingRight: 5,
+			percentageIndicator: {
+				enabled: true
+			}
+		},
+		status: {
+			indicatorSize: 16,
+			paddingLeft: 15
+		}
+	}
+});
 
 /**
  * options specific to radar charts
@@ -336,7 +360,8 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 		yTicksNumber: 4,
 		minRange: 10,
 		xAxisRectHeight: 50,
-		dotsRadius: 5
+		dotsRadius: 5,
+		alignment: Alignments.LEFT
 	},
 	tooltip: {
 		gridline: {
@@ -360,6 +385,7 @@ export const options = {
 	scatterChart,
 	pieChart,
 	donutChart,
+	meterChart,
 	radarChart,
 	gaugeChart
 };

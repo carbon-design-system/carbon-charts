@@ -24,6 +24,25 @@ export const radarOptions = {
 	}
 };
 
+export const radarCenteredData = radarData;
+
+export const radarCenteredOptions = {
+	title: "Radar (centered)",
+	radar: {
+		axes: {
+			angle: "feature",
+			value: "score"
+		},
+		alignment: "center"
+	},
+	data: {
+		groupMapsTo: "product"
+	},
+	legend: {
+		alignment: "center"
+	}
+}
+
 // radar with missing data
 export const radarWithMissingDataData = [
 	{ group: "Sugar", key: "London", value: 25 },
