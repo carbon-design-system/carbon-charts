@@ -2,7 +2,7 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import { CalloutDirections, Roles, Events } from "../../interfaces";
+import { CalloutDirections, Roles, Events, Alignments } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -232,14 +232,25 @@ export class Pie extends Component {
 			optionName,
 			"alignment"
 		);
-		const alignmentOffset = DOMUtils.getAlignmentOffset(alignment, svg, this.getParent());
+
+		const { width } = DOMUtils.getSVGElementSize(
+			this.getParent(),
+			{ useAttr: true }
+		);
 
 		// Position Pie
-		const pieTranslateX = radius + options.pie.xOffset + alignmentOffset;
+		let pieTranslateX = radius + options.pie.xOffset;
+		if (alignment === Alignments.CENTER) {
+			pieTranslateX = width / 2;
+		} else if (alignment === Alignments.RIGHT) {
+			pieTranslateX = width - radius - options.pie.xOffset;
+		}
+
 		let pieTranslateY = radius + options.pie.yOffset;
 		if (calloutData.length > 0) {
 			pieTranslateY += options.pie.yOffsetCallout;
 		}
+
 		svg.attr("transform", `translate(${pieTranslateX}, ${pieTranslateY})`);
 
 		// Add event listeners
