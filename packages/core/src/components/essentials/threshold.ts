@@ -90,7 +90,10 @@ export class Threshold extends Component {
 			orientation
 		);
 
-		if (axisPosition === AxisPositions.TOP || axisPosition === AxisPositions.BOTTOM) {
+		if (
+			axisPosition === AxisPositions.TOP ||
+			axisPosition === AxisPositions.BOTTOM
+		) {
 			const position =
 				getXValue(value) + (isScaleTypeLabels ? scale.step() / 2 : 0);
 			// Position the threshold on the x scale value
