@@ -23,6 +23,7 @@ import {
 	StackedBarOptions,
 	MeterChartOptions,
 	GaugeTypes,
+	Alignments,
 	ZoomBarOptions
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
@@ -163,8 +164,7 @@ const chart: BaseChartOptions = {
 const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	timeScale,
-	grid,
-	zoomBar
+	grid
 } as AxisChartOptions);
 
 /**

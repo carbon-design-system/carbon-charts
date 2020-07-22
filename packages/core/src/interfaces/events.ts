@@ -117,6 +117,14 @@ export enum Tooltip {
 }
 
 /**
+ * enum of all toolbar events
+ */
+export enum Toolbar {
+	SHOW = "show-toolbar",
+	HIDE = "hide-toolbar"
+}
+
+/**
  * enum of all threshold events
  */
 export enum Threshold {

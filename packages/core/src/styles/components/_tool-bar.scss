@@ -1,4 +1,11 @@
+@import "./../vendor/@carbon/motion/scss/motion.scss";
+@import "./../vendor/@carbon/type/scss/type";
+@import "./../vendor/@carbon/type/scss/font-face/mono";
+@import "./../vendor/@carbon/type/scss/font-face/sans";
+@import "./../vendor/carbon-components/scss/components/overflow-menu/overflow-menu";
+
 g.#{$prefix}--#{$charts-prefix}--tool-bar {
+	@include carbon--motion(standard, expressive);
 	rect.icon-zoom {
 		fill: transparent;
 		cursor: pointer;
@@ -21,5 +28,260 @@ g.#{$prefix}--#{$charts-prefix}--tool-bar {
 		fill: $icon-02;
 	}
 
+	svg#toolbar-overflow-menu-icon {
+		fill: $icon-02;
+		cursor: pointer;
+	}
+
+	rect.icon-overflow-menu {
+		fill: transparent;
+		cursor: pointer;
+	}
+
 	
 }
+
+@include overflow-menu;
+
+/*
+.bx--overflow-menu__trigger {
+	display: inline-block;
+	background: none;
+	-webkit-appearance: none;
+	   -moz-appearance: none;
+			appearance: none;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	width: 100%;
+  }
+  
+  .bx--overflow-menu__trigger::-moz-focus-inner {
+	border: 0;
+  }
+  
+  .bx--overflow-menu,
+  .bx--overflow-menu__trigger {
+	outline: 2px solid transparent;
+	outline-offset: -2px;
+	position: relative;
+	width: 2rem;
+	height: 2rem;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+		-ms-flex-align: center;
+			align-items: center;
+	-webkit-box-pack: center;
+		-ms-flex-pack: center;
+			justify-content: center;
+	cursor: pointer;
+	-webkit-transition: outline 110ms cubic-bezier(0, 0, 0.38, 0.9), background-color 110ms cubic-bezier(0, 0, 0.38, 0.9);
+	transition: outline 110ms cubic-bezier(0, 0, 0.38, 0.9), background-color 110ms cubic-bezier(0, 0, 0.38, 0.9);
+  }
+  
+  .bx--overflow-menu:focus,
+  .bx--overflow-menu__trigger:focus {
+	outline: 2px solid #0062ff;
+	outline-offset: -2px;
+  }
+  
+  .bx--overflow-menu:hover,
+  .bx--overflow-menu__trigger:hover {
+	background-color: #e5e5e5;
+  }
+  
+  .bx--overflow-menu__trigger.bx--tooltip--a11y.bx--tooltip__trigger:focus {
+	outline: 2px solid #0062ff;
+	outline-offset: -2px;
+  }
+  
+  .bx--overflow-menu__trigger.bx--tooltip--a11y.bx--tooltip__trigger:focus svg {
+	outline: none;
+  }
+  
+  .bx--overflow-menu.bx--overflow-menu--open,
+  .bx--overflow-menu.bx--overflow-menu--open
+  .bx--overflow-menu__trigger {
+	background-color: $interactive-02;
+	-webkit-transition: none;
+	transition: none;
+	-webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+			box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+  }
+  
+  .bx--overflow-menu-options {
+	-webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+			box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+	display: none;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+			flex-direction: column;
+	-webkit-box-align: start;
+		-ms-flex-align: start;
+			align-items: flex-start;
+	position: absolute;
+	z-index: 10000;
+	background-color: $interactive-02;
+	width: 10rem;
+	list-style: none;
+	top: 32px;
+	left: 0;
+  }
+  
+  .bx--overflow-menu-options::after {
+	content: '';
+	position: absolute;
+	display: block;
+	background-color: $interactive-02;
+	-webkit-transition: background-color 110ms cubic-bezier(0, 0, 0.38, 0.9);
+	transition: background-color 110ms cubic-bezier(0, 0, 0.38, 0.9);
+  }
+  
+  .bx--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+	top: -0.1875rem;
+	left: 0;
+	width: 2rem;
+	height: 0.1875rem;
+  }
+  
+  .bx--overflow-menu-options[data-floating-menu-direction='left']::after {
+	right: -0.375rem;
+	top: 0;
+	height: 2rem;
+	width: 0.375rem;
+  }
+  
+
+  .bx--overflow-menu--flip.bx--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+	left: auto;
+	right: 0;
+  }
+  
+  .bx--overflow-menu-options--open {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+  }
+  
+  .bx--overflow-menu-options__option {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	background-color: transparent;
+	-webkit-box-align: center;
+		-ms-flex-align: center;
+			align-items: center;
+	width: 100%;
+	height: 2.5rem;
+	padding: 0;
+	-webkit-transition: background-color 110ms cubic-bezier(0, 0, 0.38, 0.9);
+	transition: background-color 110ms cubic-bezier(0, 0, 0.38, 0.9);
+  }
+  
+  a.bx--overflow-menu-options__btn::before {
+	content: '';
+	height: 100%;
+	vertical-align: middle;
+	display: inline-block;
+  }
+  
+  .bx--overflow-menu-options__btn {
+	font-size: 0.875rem;
+	font-weight: 400;
+	line-height: 1.125rem;
+	letter-spacing: 0.16px;
+	outline: 2px solid transparent;
+	outline-offset: -2px;
+	font-weight: 400;
+	width: 100%;
+	height: 100%;
+	border: none;
+	display: -webkit-inline-box;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	-webkit-box-align: center;
+		-ms-flex-align: center;
+			align-items: center;
+	background-color: transparent;
+	text-align: left;
+	padding: 0 1rem;
+	cursor: pointer;
+	color: $text-02;
+	max-width: 11.25rem;
+	-webkit-transition: outline 110ms cubic-bezier(0, 0, 0.38, 0.9), background-color 110ms cubic-bezier(0, 0, 0.38, 0.9), color 110ms cubic-bezier(0, 0, 0.38, 0.9);
+	transition: outline 110ms cubic-bezier(0, 0, 0.38, 0.9), background-color 110ms cubic-bezier(0, 0, 0.38, 0.9), color 110ms cubic-bezier(0, 0, 0.38, 0.9);
+  }
+  
+  .bx--overflow-menu-options__btn:hover {
+	color: $text-04;
+  }
+  
+  .bx--overflow-menu-options__btn:focus {
+	outline: 2px solid #0062ff;
+	outline-offset: -2px;
+  }
+  
+  .bx--overflow-menu-options__btn::-moz-focus-inner {
+	border: none;
+  }
+  
+  .bx--overflow-menu-options__btn svg {
+	fill: $text-02;
+  }
+  
+  .bx--overflow-menu-options__btn:hover svg {
+	fill: #171717;
+  }
+  
+  .bx--overflow-menu-options__option-content {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+  }
+  
+  .bx--overflow-menu-options__option:hover {
+	background-color: #e5e5e5;
+  }
+  
+  .bx--overflow-menu-options__option--danger {
+	border-top: 1px solid #dcdcdc;
+  }
+  
+  .bx--overflow-menu-options__option--danger
+  .bx--overflow-menu-options__btn:hover,
+  .bx--overflow-menu-options__option--danger
+  .bx--overflow-menu-options__btn:focus {
+	color: #ffffff;
+	background-color: #da1e28;
+  }
+  
+  .bx--overflow-menu-options__option--danger
+  .bx--overflow-menu-options__btn:hover svg,
+  .bx--overflow-menu-options__option--danger
+  .bx--overflow-menu-options__btn:focus svg {
+	fill: #ffffff;
+  }
+  
+  .bx--overflow-menu-options__option--disabled:hover {
+	background-color: #f3f3f3;
+	cursor: not-allowed;
+  }
+  
+  .bx--overflow-menu-options__option--disabled
+  .bx--overflow-menu-options__btn {
+	color: $interactive-02;
+	pointer-events: none;
+  }
+  
+  .bx--overflow-menu-options__option--disabled
+  .bx--overflow-menu-options__btn:hover, .bx--overflow-menu-options__option--disabled
+  .bx--overflow-menu-options__btn:active, .bx--overflow-menu-options__option--disabled
+  .bx--overflow-menu-options__btn:focus {
+	outline: 2px solid transparent;
+	outline-offset: -2px;
+	background-color: #f3f3f3;
+  }
+*/

@@ -3,6 +3,10 @@ import { Component } from "../component";
 import { Tools } from "../../tools";
 import { Events, ScaleTypes } from "../../interfaces";
 import { DOMUtils } from "../../services";
+import {
+	computeTimeIntervalName,
+	formatTick
+} from "../../services/time-series";
 
 // D3 Imports
 import { extent } from "d3-array";
@@ -269,21 +273,27 @@ export class ZoomBar extends Component {
 		}
 	}
 
-	updateBrushHandleTooltip(svg, domain) {
+	updateBrushHandleTooltip(svg, domain, timeScaleOptions) {
+		const timeInterval = computeTimeIntervalName(domain);
+
 		// remove old handle tooltip
 		svg.select("title").remove();
 		// add new handle tooltip
 		svg.append("title").text((d) => {
 			if (d.type === "w") {
-				return domain[0];
+				return formatTick(domain[0], 0, timeInterval, timeScaleOptions);
 			} else if (d.type === "e") {
-				return domain[1];
+				return formatTick(domain[1], 0, timeInterval, timeScaleOptions);
 			}
 		});
 	}
 
 	updateBrushHandle(svg, selection, domain) {
 		const self = this;
+		const timeScaleOptions = Tools.getProperty(
+			this.model.getOptions(),
+			"timeScale"
+		);
 		const handleWidth = 5;
 		const handleHeight = this.height;
 		const handleXDiff = -handleWidth / 2;
@@ -317,7 +327,7 @@ export class ZoomBar extends Component {
 			.attr("height", handleHeight)
 			.attr("cursor", "pointer")
 			.style("display", null) // always display
-			.call(this.updateBrushHandleTooltip, domain);
+			.call(this.updateBrushHandleTooltip, domain, timeScaleOptions);
 
 		// handle-bar
 		svg.select(this.brushSelector)
@@ -344,7 +354,7 @@ export class ZoomBar extends Component {
 			.attr("width", handleBarWidth)
 			.attr("height", handleBarHeight)
 			.attr("cursor", "pointer")
-			.call(this.updateBrushHandleTooltip, domain);
+			.call(this.updateBrushHandleTooltip, domain, timeScaleOptions);
 
 		this.updateClipPath(
 			svg,
@@ -393,6 +403,9 @@ export class ZoomBar extends Component {
 
 	// assume the domains in data are already sorted
 	compensateDataForDefaultDomain(data, defaultDomain, value) {
+		if (!data || data.length < 2) {
+			return;
+		}
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 		const rangeIdentifier = this.services.cartesianScales.getRangeIdentifier();
 		// if min domain is extended
