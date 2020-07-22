@@ -189,7 +189,7 @@ export class AxisChart extends Chart {
 			topLevelLayoutComponents.push(titleSpacerComponent);
 		}
 		if (zoomBarEnabled) {
-			if (this.model.getOptions().zoomBar.showToolBar === true) {
+			if (this.model.getOptions().zoomBar.showToolBar) {
 				topLevelLayoutComponents.push(toolBarComponent);
 			}
 			topLevelLayoutComponents.push(zoomBarComponent);

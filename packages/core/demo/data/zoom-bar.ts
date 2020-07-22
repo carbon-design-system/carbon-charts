@@ -28,10 +28,10 @@ const definedZoomBarData = [
 const addZoomBarToOptions = (options, includeDefinedZoomBarData = false) => {
 	if (includeDefinedZoomBarData) {
 		options["title"] = options["title"] + " - Defined zoom bar enabled";
-		options["zoomBar"] = { enabled: true, data: definedZoomBarData };
+		options["zoomBar"] = { enabled: true, data: definedZoomBarData, zoomRatio: 0.4, showToolBar: true };
 	} else {
 		options["title"] = options["title"] + " - Zoom bar enabled";
-		options["zoomBar"] = { enabled: true };
+		options["zoomBar"] = { enabled: true, zoomRatio: 0.4, showToolBar: true };
 	}
 	return options;
 };
