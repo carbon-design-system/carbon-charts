@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.5](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.4...v0.34.5) (2020-07-22)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+
+
+
+
 ## [0.34.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.3...v0.34.4) (2020-07-21)
 
 **Note:** Version bump only for package @carbon/charts-vue
@@ -23,28 +31,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @carbon/charts-vue
 
-
-
-
-
 ## [0.34.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.0...v0.34.1) (2020-07-14)
 
 **Note:** Version bump only for package @carbon/charts-vue
 
-
-
-
-
 # [0.34.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.33.1...v0.34.0) (2020-07-14)
-
 
 ### Features
 
-* **core:** add title element to main SVG ([#704](https://github.com/carbon-design-system/carbon-charts/issues/704)) ([c75e1bb](https://github.com/carbon-design-system/carbon-charts/commit/c75e1bbb6fcf15120ea1513ef3ec50d30a46a11d))
-
-
-
-
+-   **core:** add title element to main SVG ([#704](https://github.com/carbon-design-system/carbon-charts/issues/704)) ([c75e1bb](https://github.com/carbon-design-system/carbon-charts/commit/c75e1bbb6fcf15120ea1513ef3ec50d30a46a11d))
 
 ## [0.33.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.33.0...v0.33.1) (2020-07-08)
 

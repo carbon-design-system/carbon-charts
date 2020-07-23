@@ -237,16 +237,23 @@ export class Axis extends Component {
 						"timeScale",
 						"addSpaceOnEdges"
 					);
+					
+					const customDomain = Tools.getProperty(
+						options,
+						"axes",
+						axisPosition,
+						"domain"
+					);
 
 					let tickValues;
-					if (addSpaceOnEdges) {
+					if (addSpaceOnEdges && !customDomain) {
 						tickValues = scale.nice(numberOfTicks);
 					}
 					tickValues = scale.ticks(numberOfTicks);
 
 					// Remove labels on the edges
 					// If there are more than 2 labels to show
-					if (addSpaceOnEdges && tickValues.length > 2) {
+					if (addSpaceOnEdges && tickValues.length > 2 && !customDomain) {
 						tickValues.splice(tickValues.length - 1, 1);
 						tickValues.splice(0, 1);
 					}
