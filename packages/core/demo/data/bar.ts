@@ -264,6 +264,7 @@ export const simpleBarTimeSeriesDenseData = [
 	{ group: "data", date: new Date(2019, 1, 1, 10, 10, 0), value: 10000 },
 	{ group: "data", date: new Date(2019, 1, 1, 10, 12, 4), value: 20001 },
 	{ group: "data", date: new Date(2019, 1, 1, 10, 14, 8), value: 10002 },
+	{ group: "data", date: new Date(2019, 1, 1, 10, 15, 8), value: 10062 },
 	{ group: "data", date: new Date(2019, 1, 1, 10, 17, 12), value: 30003 },
 	{ group: "data", date: new Date(2019, 1, 1, 10, 18, 16), value: 20004 },
 	{ group: "data", date: new Date(2019, 1, 1, 10, 19, 20), value: 10005 },
