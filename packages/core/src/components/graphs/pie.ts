@@ -2,7 +2,7 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import { CalloutDirections, Roles, Events } from "../../interfaces";
+import { CalloutDirections, Roles, Events, Alignments } from "../../interfaces";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -79,8 +79,7 @@ export class Pie extends Component {
 		);
 
 		// Update data on all slices
-		const slicesGroup = DOMUtils
-			.appendOrSelect(svg, "g.slices")
+		const slicesGroup = DOMUtils.appendOrSelect(svg, "g.slices")
 			.attr("role", Roles.GROUP)
 			.attr("aria-label", "slices");
 
@@ -130,8 +129,7 @@ export class Pie extends Component {
 
 		// Draw the slice labels
 		const labelData = pieLayoutData.filter((x) => x.value > 0);
-		const labelsGroup = DOMUtils
-			.appendOrSelect(svg, "g.labels")
+		const labelsGroup = DOMUtils.appendOrSelect(svg, "g.labels")
 			.attr("role", Roles.GROUP)
 			.attr("aria-label", "labels");
 
@@ -232,14 +230,25 @@ export class Pie extends Component {
 			optionName,
 			"alignment"
 		);
-		const alignmentOffset = DOMUtils.getAlignmentOffset(alignment, svg, this.getParent());
+
+		const { width } = DOMUtils.getSVGElementSize(
+			this.getParent(),
+			{ useAttr: true }
+		);
 
 		// Position Pie
-		const pieTranslateX = radius + options.pie.xOffset + alignmentOffset;
+		let pieTranslateX = radius + options.pie.xOffset;
+		if (alignment === Alignments.CENTER) {
+			pieTranslateX = width / 2;
+		} else if (alignment === Alignments.RIGHT) {
+			pieTranslateX = width - radius - options.pie.xOffset;
+		}
+
 		let pieTranslateY = radius + options.pie.yOffset;
 		if (calloutData.length > 0) {
 			pieTranslateY += options.pie.yOffsetCallout;
 		}
+
 		svg.attr("transform", `translate(${pieTranslateX}, ${pieTranslateY})`);
 
 		// Add event listeners
@@ -247,11 +256,10 @@ export class Pie extends Component {
 	}
 
 	renderCallouts(calloutData: any[]) {
-		const svg = DOMUtils
-			.appendOrSelect(
-				this.getContainerSVG(),
-				"g.callouts"
-			)
+		const svg = DOMUtils.appendOrSelect(
+			this.getContainerSVG(),
+			"g.callouts"
+		)
 			.attr("role", Roles.GROUP)
 			.attr("aria-label", "callouts");
 

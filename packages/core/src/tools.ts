@@ -21,6 +21,8 @@ import {
 	Cancelable,
 	DebounceSettings
 } from "lodash-es";
+
+import { mouse } from "d3-selection";
 import { Numeric } from "d3";
 
 // Functions
@@ -36,6 +38,24 @@ export namespace Tools {
 	export const kebabCase = lodashKebabCase;
 	export const fromPairs = lodashFromPairs;
 	export const some = lodashSome;
+
+	export function debounceWithD3MousePosition(fn, delay, element) {
+		var timer = null;
+		return function () {
+			const context = this;
+			const args = arguments;
+
+			//we get the D3 event here
+			context.mousePosition = mouse(element);
+
+			clearTimeout(timer);
+
+			timer = setTimeout(function () {
+				//and use the reference here
+				fn.apply(context, args);
+			}, delay);
+		};
+	}
 
 	/**
 	 * Returns default chart options merged with provided options,
