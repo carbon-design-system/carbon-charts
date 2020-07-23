@@ -174,11 +174,9 @@ let allDemoGroups = [
 				options: barDemos.simpleBarTimeSeriesDenseOptions,
 				data: barDemos.simpleBarTimeSeriesDenseData,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: true,
+				isDemoExample: true
 			},
 			{
-				options: barDemos.simpleBarFixedDomainOptions,
-				data: barDemos.simpleBarData,
 				options: barDemos.simpleBarTimeSeriesOptions,
 				data: barDemos.simpleBarTimeSeriesData,
 				chartType: chartTypes.SimpleBarChart
