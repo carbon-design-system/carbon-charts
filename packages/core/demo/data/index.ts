@@ -103,7 +103,7 @@ export const chartTypes = {
 		vue: "ccv-radar-chart"
 	},
 	HeatMapChart: {
-		vanilla: "HeatmapChart",
+		vanilla: "HeatmapChart"
 		// angular: "ibm-radar-chart",
 		// vue: "ccv-radar-chart"
 	}

@@ -44,9 +44,7 @@ export class Heatmap extends Component {
 		const xBandWidth =
 			mainXScale(new Date(allDataValues[1])) -
 			mainXScale(new Date(allDataValues[0]));
-		const yBandWidth =
-			mainYScale(2) -
-			mainYScale(3);
+		const yBandWidth = mainYScale(2) - mainYScale(3);
 
 		allDataValues.pop();
 		for (let y = 0; y < 20; y++) {
@@ -59,7 +57,7 @@ export class Heatmap extends Component {
 
 				svg.append("rect")
 					.attr("x", mainXScale(new Date(datum)))
-					.attr("y", mainYScale(y) - (yBandWidth / 2) - 5)
+					.attr("y", mainYScale(y) - yBandWidth / 2 - 5)
 					.attr("width", xBandWidth)
 					.attr("height", yBandWidth)
 					.attr("fill", color);

@@ -41,7 +41,7 @@ export class HeatmapChart extends AxisChart {
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Ruler(this.model, this.services),
-			new Heatmap(this.model, this.services),
+			new Heatmap(this.model, this.services)
 		];
 
 		const components: any[] = this.getAxisChartComponents(
