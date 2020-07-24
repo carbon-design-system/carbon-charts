@@ -1,3 +1,4 @@
+import * as alluvialDemos from "./alluvial";
 import * as areaDemos from "./area";
 import * as barDemos from "./bar";
 import * as bubbleDemos from "./bubble";
@@ -11,6 +12,7 @@ import * as meterDemos from "./meter";
 import * as timeSeriesAxisDemos from "./time-series-axis";
 import * as radarDemos from "./radar";
 
+export * from "./alluvial";
 export * from "./area";
 export * from "./bar";
 export * from "./bubble";
@@ -35,6 +37,11 @@ import {
 import { Tools } from "@carbon/charts/tools";
 
 export const chartTypes = {
+	AlluvialChart: {
+		vanilla: "AlluvialChart",
+		// angular: "ibm-area-chart",
+		// vue: "ccv-area-chart"
+	},
 	AreaChart: {
 		vanilla: "AreaChart",
 		angular: "ibm-area-chart",
@@ -103,6 +110,18 @@ export const chartTypes = {
 };
 
 let allDemoGroups = [
+	{
+		title: "Alluvial",
+		// description:
+		// 	"Area charts are similar to line charts, but the areas below the lines are filled with colors or patterns. Stacked charts are useful for comparing proportional contributions within a category. They plot the relative value that each data series contributes to the total.",
+		demos: [
+			{
+				options: alluvialDemos.alluvialOptions,
+				data: alluvialDemos.alluvialData,
+				chartType: chartTypes.AlluvialChart
+			},
+		]
+	},
 	{
 		title: "Area",
 		description:
