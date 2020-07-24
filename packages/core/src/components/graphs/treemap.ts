@@ -199,9 +199,8 @@ export class Treemap extends Component {
 			.selectAll("tspan")
 			.data((d) => {
 				if (!d.data.name) return "";
-				return d.data.name
-						.split(/(?=[A-Z][a-z])|\s+/g)
-						// .concat(d.value)
+				return d.data.name.split(/(?=[A-Z][a-z])|\s+/g);
+				// .concat(d.value)
 			})
 			.join("tspan")
 			.attr("x", 7)
@@ -214,7 +213,7 @@ export class Treemap extends Component {
 			.text((d) => {
 				if (!d.noLabel) return d;
 			})
-			.attr("fill", d => {
+			.attr("fill", (d) => {
 				if (d === "Iran" || d === "Nigeria") {
 					return "black";
 				}
