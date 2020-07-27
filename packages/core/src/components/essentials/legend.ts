@@ -266,19 +266,17 @@ export class Legend extends Component {
 					.attr("y", yOffset + yPosition + 3);
 
 				// Calculate x position for radius label
-				if (addedLabelItem) {
+				if (addedLabelItem && legendOrientation !== LegendOrientations.VERTICAL) {
 					const legendItemTextDimensions = DOMUtils.getSVGElementSize(
 						select(this).select("text"),
 						{ useBBox: true }
 					);
 
-					if (legendOrientation !== LegendOrientations.VERTICAL) {
-						radiusLabelXPosition =
-							startingPoint +
-							legendItemTextDimensions.width +
-							spaceNeededForCheckbox +
-							legendItemsHorizontalSpacing;
-					}
+					radiusLabelXPosition =
+						startingPoint +
+						legendItemTextDimensions.width +
+						spaceNeededForCheckbox +
+						legendItemsHorizontalSpacing;
 				}
 
 				// Test if legendItems are placed in the correct direction
