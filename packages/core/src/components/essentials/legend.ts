@@ -22,11 +22,10 @@ export class Legend extends Component {
 		);
 		const options = this.model.getOptions();
 		const legendOptions = Tools.getProperty(options, "legend");
+		const dataGroups = this.model.getDataGroups();
 		const legendItems = svg
 			.selectAll("g.legend-item")
-			.data(this.model.getDataGroups(), (dataGroup) => dataGroup.name);
-
-		// this.getLegendItemArray()
+			.data(dataGroups, (dataGroup) => dataGroup.name);
 
 		const addedLegendItems = legendItems
 			.enter()
@@ -94,7 +93,47 @@ export class Legend extends Component {
 			addedLegendItemsText.html((d) => d.name);
 		}
 
-		this.breakItemsIntoLines(addedLegendItems);
+		const radiusLabel = Tools.getProperty(
+			options,
+			"bubble",
+			"radiusLabel"
+		);
+
+		// Add radius label for bubble chart when dataGroups is not empty
+		if (radiusLabel && dataGroups.length) {
+			const radiusLabelItem = svg.selectAll("g.radius-label")
+			.data([radiusLabel]);
+
+			const addedLabelItem = radiusLabelItem
+				.enter()
+				.append("g")
+				.classed("radius-label", true);
+
+			addedLabelItem
+				.append("g")
+				.classed("icon", true)
+				.html(`
+					<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+						<title>Artboard</title>
+						<g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+							<circle id="Oval-Copy-33" stroke="#8C8C8C" cx="7" cy="7" r="6.5"></circle>
+							<circle id="Oval-Copy-33" stroke="#8C8C8C" cx="7" cy="10" r="3.5"></circle>
+						</g>
+					</svg>
+				`);
+
+			addedLabelItem
+				.append("text")
+				.merge(radiusLabelItem.select("text"))
+				.html(radiusLabel);
+			
+			this.breakItemsIntoLines(
+				addedLegendItems,
+				addedLabelItem
+			);
+		} else {
+			this.breakItemsIntoLines(addedLegendItems);
+		}
 
 		// Remove old elements as needed.
 		legendItems
@@ -115,13 +154,14 @@ export class Legend extends Component {
 			this.addEventListeners();
 		}
 
+		// Set alignment for legend
 		const alignment = Tools.getProperty(legendOptions,"alignment");
 
 		const alignmentOffset = DOMUtils.getAlignmentOffset(alignment, svg, this.getParent());
 		svg.attr("transform", `translate(${alignmentOffset}, 0)`);
 	}
 
-	breakItemsIntoLines(addedLegendItems) {
+	breakItemsIntoLines(addedLegendItems, addedLabelItem = null) {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
@@ -152,7 +192,7 @@ export class Legend extends Component {
 		let startingPoint = 0;
 		let lineNumber = 0;
 		let itemIndexInLine = 0;
-		let lastYPosition;
+		let radiusLabelXPosition = 0;
 		addedLegendItems
 			.merge(svg.selectAll("g.legend-item"))
 			.each(function (d, i) {
@@ -191,6 +231,7 @@ export class Legend extends Component {
 						spaceNeededForCheckbox +
 						legendItemsHorizontalSpacing;
 
+					// Place legends in a new line if space is not enough
 					if (
 						startingPoint +
 							spaceNeededForCheckbox +
@@ -224,7 +265,21 @@ export class Legend extends Component {
 					.attr("x", startingPoint + spaceNeededForCheckbox)
 					.attr("y", yOffset + yPosition + 3);
 
-				lastYPosition = yPosition;
+				// Calculate x position for radius label
+				if (addedLabelItem) {
+					const legendItemTextDimensions = DOMUtils.getSVGElementSize(
+						select(this).select("text"),
+						{ useBBox: true }
+					);
+
+					if (legendOrientation !== LegendOrientations.VERTICAL) {
+						radiusLabelXPosition =
+							startingPoint +
+							legendItemTextDimensions.width +
+							spaceNeededForCheckbox +
+							legendItemsHorizontalSpacing;
+					}
+				}
 
 				// Test if legendItems are placed in the correct direction
 				const testHorizontal =
@@ -280,6 +335,50 @@ export class Legend extends Component {
 
 				itemIndexInLine++;
 			});
+
+		if (addedLabelItem) {
+			addedLabelItem
+				.merge(svg.selectAll("g.radius-label"))
+				.each(function(d) {
+					const labelItem = select(this);
+					if (legendOrientation === LegendOrientations.VERTICAL) {
+						lineNumber++;
+					} else {
+						const svgDimensions = DOMUtils.getSVGElementSize(
+							self.parent,
+							{ useAttr: true }
+						);
+						const labelItemTextDimensions = DOMUtils.getSVGElementSize(
+							select(this).select("text"),
+							{ useBBox: true }
+						);
+						if (
+							radiusLabelXPosition +
+							spaceNeededForCheckbox +
+							labelItemTextDimensions.width > 
+							svgDimensions.width
+						) {
+							lineNumber++;
+							radiusLabelXPosition = 0;
+						}
+					}
+
+					labelItem
+						.select("g.icon svg")
+						.attr("x", radiusLabelXPosition)
+						.attr("y", lineNumber * legendItemsVerticalSpacing);
+
+					labelItem
+						.select("text")
+						.attr("x", radiusLabelXPosition + spaceNeededForCheckbox)
+						.attr(
+							"y",
+							legendTextYOffset +
+							lineNumber *
+							legendItemsVerticalSpacing + 3
+						);
+				});
+		}
 	}
 
 	addEventListeners() {
