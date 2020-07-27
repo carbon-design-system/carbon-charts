@@ -104,12 +104,12 @@ export class Legend extends Component {
 			const radiusLabelItem = svg.selectAll("g.radius-label")
 			.data([radiusLabel]);
 
-			const addedLabelItem = radiusLabelItem
+			const addedRadiusLabelItem = radiusLabelItem
 				.enter()
 				.append("g")
 				.classed("radius-label", true);
 
-			addedLabelItem
+			addedRadiusLabelItem
 				.append("g")
 				.classed("icon", true)
 				.html(`
@@ -122,14 +122,14 @@ export class Legend extends Component {
 					</svg>
 				`);
 
-			addedLabelItem
+			addedRadiusLabelItem
 				.append("text")
 				.merge(radiusLabelItem.select("text"))
 				.html(radiusLabel);
 			
 			this.breakItemsIntoLines(
 				addedLegendItems,
-				addedLabelItem
+				addedRadiusLabelItem
 			);
 		} else {
 			this.breakItemsIntoLines(addedLegendItems);
@@ -161,7 +161,7 @@ export class Legend extends Component {
 		svg.attr("transform", `translate(${alignmentOffset}, 0)`);
 	}
 
-	breakItemsIntoLines(addedLegendItems, addedLabelItem = null) {
+	breakItemsIntoLines(addedLegendItems, addedRadiusLabelItem = null) {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
@@ -266,7 +266,7 @@ export class Legend extends Component {
 					.attr("y", yOffset + yPosition + 3);
 
 				// Calculate x position for radius label
-				if (addedLabelItem && legendOrientation !== LegendOrientations.VERTICAL) {
+				if (addedRadiusLabelItem && legendOrientation !== LegendOrientations.VERTICAL) {
 					const legendItemTextDimensions = DOMUtils.getSVGElementSize(
 						select(this).select("text"),
 						{ useBBox: true }
@@ -334,11 +334,11 @@ export class Legend extends Component {
 				itemIndexInLine++;
 			});
 
-		if (addedLabelItem) {
-			addedLabelItem
+		if (addedRadiusLabelItem) {
+			addedRadiusLabelItem
 				.merge(svg.selectAll("g.radius-label"))
 				.each(function(d) {
-					const labelItem = select(this);
+					const radiusLabelItem = select(this);
 					if (legendOrientation === LegendOrientations.VERTICAL) {
 						lineNumber++;
 					} else {
@@ -361,12 +361,12 @@ export class Legend extends Component {
 						}
 					}
 
-					labelItem
+					radiusLabelItem
 						.select("g.icon svg")
 						.attr("x", radiusLabelXPosition)
 						.attr("y", lineNumber * legendItemsVerticalSpacing);
 
-					labelItem
+					radiusLabelItem
 						.select("text")
 						.attr("x", radiusLabelXPosition + spaceNeededForCheckbox)
 						.attr(
