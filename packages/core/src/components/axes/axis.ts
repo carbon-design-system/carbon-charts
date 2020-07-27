@@ -209,16 +209,23 @@ export class Axis extends Component {
 						"timeScale",
 						"addSpaceOnEdges"
 					);
+					
+					const customDomain = Tools.getProperty(
+						options,
+						"axes",
+						axisPosition,
+						"domain"
+					);
 
 					let tickValues;
-					if (addSpaceOnEdges) {
+					if (addSpaceOnEdges && !customDomain) {
 						tickValues = scale.nice(numberOfTicks);
 					}
 					tickValues = scale.ticks(numberOfTicks);
 
 					// Remove labels on the edges
 					// If there are more than 2 labels to show
-					if (addSpaceOnEdges && tickValues.length > 2) {
+					if (addSpaceOnEdges && tickValues.length > 2 && !customDomain) {
 						tickValues.splice(tickValues.length - 1, 1);
 						tickValues.splice(0, 1);
 					}
@@ -459,13 +466,9 @@ export class Axis extends Component {
 			container.attr("opacity", 0);
 		}
 
-		axisRef
-			.selectAll("g.tick")
-			.attr("aria-label", d => d);
+		axisRef.selectAll("g.tick").attr("aria-label", (d) => d);
 
-		invisibleAxisRef
-			.selectAll("g.tick")
-			.attr("aria-label", d => d);
+		invisibleAxisRef.selectAll("g.tick").attr("aria-label", (d) => d);
 
 		// truncate the label if it's too long
 		// only applies to discrete type
