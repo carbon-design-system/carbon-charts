@@ -9,10 +9,10 @@ svg.#{$prefix}--#{$charts-prefix}--error-message {
 	}
 
 	text.#{$prefix}--#{$charts-prefix}--error-message__title {
-		@include carbon--type-style('productive-heading-01');
+		@include carbon--type-style("productive-heading-01");
 	}
 
 	text.#{$prefix}--#{$charts-prefix}--error-message__subtitle {
-		@include carbon--type-style('helper-text-01');
+		@include carbon--type-style("helper-text-01");
 	}
 }

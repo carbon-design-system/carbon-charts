@@ -50,8 +50,8 @@ export const pieErrorOptions = {
 	data: {
 		loading: false,
 		error: {
-			title: 'No data available',
-			subtitle: 'Lorem ipsum dolor sit.'
+			title: "No data available",
+			subtitle: "Lorem ipsum dolor sit."
 		}
 	}
 };
