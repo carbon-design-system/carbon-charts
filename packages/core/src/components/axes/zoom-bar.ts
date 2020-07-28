@@ -254,10 +254,6 @@ export class ZoomBar extends Component {
 				zoomDomain[0] !== newDomain[0] ||
 				zoomDomain[1] !== newDomain[1]
 			) {
-				this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
-					selection,
-					newDomain
-				});
 				this.model.set({ zoomDomain: newDomain, selectionRange: selection }, { animate: false });
 			}
 
@@ -269,6 +265,11 @@ export class ZoomBar extends Component {
 				zoomBarEventType = Events.ZoomBar.SELECTION_IN_PROGRESS;
 			} else if (event.type === "end") {
 				zoomBarEventType = Events.ZoomBar.SELECTION_END;
+				// only dispatch zoom domain change event for triggering api call when event type equales to end
+				this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
+					selection,
+					newDomain
+				});
 			}
 			this.services.events.dispatchEvent(zoomBarEventType, {
 				selection,

@@ -62,8 +62,7 @@ export class ChartBrush extends Component {
 			this.frontSelectionSelector
 		);
 
-		const setDomain = (newDomain) => {
-			this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
+		const setDomain = (newDomain) => {	
 			this.model.set(
 				{ zoomDomain: newDomain },
 				{ animate: false }
@@ -150,6 +149,7 @@ export class ChartBrush extends Component {
 						selection,
 						newDomain
 					});
+					
 				}
 			};
 
@@ -176,6 +176,8 @@ export class ChartBrush extends Component {
 					zoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
 					zoomDomain[1].valueOf() !== newDomain[1].valueOf()
 				) {
+					// only dispatch zoom domain change event for triggering api call when event type equales to end
+					this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
 					setDomain(newDomain);
 				}
 			};
