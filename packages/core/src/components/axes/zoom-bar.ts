@@ -274,11 +274,14 @@ export class ZoomBar extends Component {
 	}
 
 	updateBrushHandleTooltip(svg, domain, timeScaleOptions) {
+		const isValidDate = (d) => {
+			return d instanceof Date && !isNaN(d.getTime());
+		};
 		// remove old handle tooltip
 		svg.select("title").remove();
 
 		// if domain is undefined, do nothing
-		if (!domain) {
+		if (!domain || !isValidDate(domain[0]) || !isValidDate(domain[1])) {
 			return;
 		}
 
