@@ -63,6 +63,7 @@ export class ChartBrush extends Component {
 		);
 
 		const setDomain = (newDomain) => {
+			this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
 			this.model.set(
 				{ zoomDomain: newDomain },
 				{ animate: false }
@@ -143,7 +144,7 @@ export class ChartBrush extends Component {
 					} else if (event.type === "brush") {
 						zoomBarEventType = Events.ZoomBar.SELECTION_IN_PROGRESS;
 					} else if (event.type === "end") {
-						zoomBarEventType = Events.ZoomDomain.CHANGE;
+						zoomBarEventType = Events.ZoomBar.SELECTION_END;
 					}
 					this.services.events.dispatchEvent(zoomBarEventType, {
 						selection,

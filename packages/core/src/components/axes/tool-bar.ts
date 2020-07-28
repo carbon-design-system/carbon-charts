@@ -31,6 +31,8 @@ export class ToolBar extends Component {
 
 	overflowMenuOptions;
 
+	overflowMenuIconBottom = 0;
+
 	overflowMenuId = "overflowMenu-" + Math.floor(Math.random() * 99999999999);
 
 
@@ -156,9 +158,7 @@ export class ToolBar extends Component {
 					{ zoomDomain: newDomain, selectionRange: [startPoint, endPoint] },
 					{ animate: false }
 				);
-				self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
-					newDomain
-				});
+				self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
 			}
 		});
 		const zoomOutContainer = DOMUtils.appendOrSelect(container, "g.toolbar-zoomOut");
@@ -198,10 +198,7 @@ export class ToolBar extends Component {
 				{ zoomDomain: newDomain, selectionRange: [startPoint, endPoint] },
 				{ animate: false }
 			);
-			self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
-				newDomain
-			});
-
+			self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
 		});
 
 		const overflowMenuContainer = DOMUtils.appendOrSelect(container, "g.toolbar-overflow-menu");
@@ -213,6 +210,7 @@ export class ToolBar extends Component {
 				// Hide toolbar
 				self.services.events.dispatchEvent(Events.Toolbar.HIDE);
 			} else {
+				self.overflowMenuIconBottom = parseFloat(self.parent.node().getAttribute("y")) + this.parentNode.getBBox().height;
 				self.services.events.dispatchEvent(Events.Toolbar.SHOW);
 				document.getElementById("reset-Btn").addEventListener("click", function () {
 					const newDomain = self.model.getDefaultZoomBarDomain();
@@ -220,9 +218,7 @@ export class ToolBar extends Component {
 						{ zoomDomain: newDomain, selectionRange: [axesLeftMargin, width] },
 						{ animate: false }
 					);
-					self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
-						newDomain
-					});
+					self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
 					self.services.events.dispatchEvent(Events.Toolbar.HIDE);
 				}, true);
 			}
@@ -293,7 +289,7 @@ export class ToolBar extends Component {
 			data-floating-menu-direction="bottom" role="main">
 			<ul class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
 				tabindex="-1" role="menu" aria-label="Menu" data-floating-menu-direction="bottom"
-				style="left:${this.overflowMenuStart - (160 - 20 - 15 / 2)}px; top:70px;">` +
+				style="left:${this.overflowMenuStart - (160 - 20 - 15 / 2)}px; top:${this.overflowMenuIconBottom}px;">` +
 			options
 				.map(
 					(option, index) =>
