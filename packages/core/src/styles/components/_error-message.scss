@@ -1,0 +1,18 @@
+svg.#{$prefix}--#{$charts-prefix}--error-message {
+	circle.#{$prefix}--#{$charts-prefix}--error-message__icon {
+		fill: $support-03;
+	}
+
+	text.#{$prefix}--#{$charts-prefix}--error-message__exclamation-point {
+		fill: black;
+		font-size: 1.125rem;
+	}
+
+	text.#{$prefix}--#{$charts-prefix}--error-message__title {
+		@include carbon--type-style('productive-heading-01');
+	}
+
+	text.#{$prefix}--#{$charts-prefix}--error-message__subtitle {
+		@include carbon--type-style('helper-text-01');
+	}
+}

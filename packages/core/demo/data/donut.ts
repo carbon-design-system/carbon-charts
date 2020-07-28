@@ -54,3 +54,22 @@ export const donutSkeletonOptions = {
 		loading: true
 	}
 };
+
+// donut - error
+export const donutErrorData = [];
+export const donutErrorOptions = {
+	title: "Donut (error)",
+	resizable: true,
+	donut: {
+		center: {
+			label: "Browsers"
+		}
+	},
+	data: {
+		loading: false,
+		error: {
+			title: "No data available",
+			subtitle: "Lorem ipsum dolor sit."
+		}
+	}
+};

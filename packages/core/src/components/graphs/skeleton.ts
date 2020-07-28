@@ -28,12 +28,23 @@ export class Skeleton extends Component {
 			"data",
 			"loading"
 		);
+		const error = Tools.getProperty(this.model.getOptions(), 'data', 'error');
 
 		// display a skeleton if there is no chart data or the loading flag is set to true
 		if (isDataLoading) {
 			this.renderSkeleton(isDataLoading);
-		} else {
+		}
+
+		// if we're done loading, and there's an error, render the skeleton (no shimmer) with an error message
+		if (!isDataLoading && error) {
+			this.renderSkeleton(false);
+			this.renderErrorMesssage(error);
+		}
+
+		// if neither are true, clean up
+		if (!isDataLoading && !error) {
 			this.removeSkeleton();
+			this.removeErrorMessage();
 		}
 	}
 
@@ -299,6 +310,88 @@ export class Skeleton extends Component {
 
 	removeSkeleton() {
 		const container = this.parent.select(".chart-skeleton");
+		container.remove();
+	}
+
+	renderErrorMesssage(error) {
+		const skeleton = this.parent.select('.chart-skeleton')
+		const height = skeleton.attr("height");
+		const width = skeleton.attr("width");
+
+		const errorContainer = DOMUtils.appendOrSelect(skeleton, "svg.bx--cc--error-message")
+			.attr('width', width)
+			.attr('height', height)
+
+		// Error icon
+		const errorIcon = errorContainer.selectAll("circle.bx--cc--error-message__icon")
+			.data([{
+				cx: '1em',
+				cy: (height / 2) - 5,
+				r: '.625em'
+			}]);
+
+		errorIcon.enter()
+			.append('circle')
+			.classed('bx--cc--error-message__icon', true)
+			.merge(errorIcon)
+			.attr('cx', d => d.cx)
+			.attr('cy', d => d.cy)
+			.attr('r', d => d.r)
+
+		DOMUtils.appendOrSelect(errorContainer, 'circle.bx--cc--error-message__icon')
+
+		errorIcon.exit().remove();
+
+		// Exclamation point
+
+		const exclamationPoint = errorContainer.selectAll('text.bx--cc--error-message__exclamation-point').data(['!'])
+
+		exclamationPoint.enter()
+			.append('text')
+			.classed('bx--cc--error-message__exclamation-point', true)
+			.merge(exclamationPoint)
+			.attr("x", '.75em')
+			.attr('y', (height / 2) + 1)
+			.html(d => d)
+
+		DOMUtils.appendOrSelect(errorContainer, 'text.bx--cc--error-message__exclamation-point')
+
+		exclamationPoint.exit().remove();
+
+		// Title
+		const errorTitle = errorContainer.selectAll("text.bx--cc--error-message__title").data([error.title]);
+
+		errorTitle.enter()
+			.append("text")
+			.classed("bx--cc--error-message__title", true)
+			.merge(errorTitle)
+			.attr("x", "2.25em")
+			.attr("y", height / 2)
+			.html(d => d);
+
+		DOMUtils.appendOrSelect(errorContainer, "text.bx--cc--error-message__title");
+
+		errorTitle.exit().remove();
+
+		// Subtitle
+		const errorSubtitle = errorContainer.selectAll("text.bx--cc--error-message__subtitle").data([error.subtitle]);
+
+		errorSubtitle.enter()
+			.append("text")
+			.classed("bx--cc--error-message__subtitle", true)
+			.merge(errorSubtitle)
+			.attr("x", "2.65em")
+			.attr("y", (height / 2) + 18)
+			.html(d => d);
+
+		DOMUtils.appendOrSelect(errorContainer, "text.bx--cc--error-message__subtitle");
+
+		errorSubtitle.exit().remove();
+	}
+
+
+	removeErrorMessage() {
+		const container = this.parent.select(".bx--cc--error-message");
 		container.remove();
 	}
 }

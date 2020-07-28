@@ -41,3 +41,17 @@ export const pieSkeletonOptions = {
 		loading: true
 	}
 };
+
+// pie - error
+export const pieErrorData = [];
+export const pieErrorOptions = {
+	title: "Pie (error)",
+	resizable: true,
+	data: {
+		loading: false,
+		error: {
+			title: 'No data available',
+			subtitle: 'Lorem ipsum dolor sit.'
+		}
+	}
+};
