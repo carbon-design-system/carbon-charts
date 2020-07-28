@@ -139,8 +139,10 @@ export interface ZoomBarOptions {
 	 * is the tool-bar visible or not
 	 */
 	showToolBar?: boolean;
-
-
+	/**
+	 * options related to zoom bar data
+	 */
+	data?: Object[];
 
 }
 

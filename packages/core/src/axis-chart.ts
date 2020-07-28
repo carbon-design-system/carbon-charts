@@ -16,9 +16,9 @@ import {
 	Title,
 	AxisChartsTooltip,
 	Spacer,
-	ZoomBar,
 	ToolBar,
-} from "./components";
+	ZoomBar
+} from "./components/index";
 import { Tools } from "./tools";
 
 import { CartesianScales, Curves } from "./services";

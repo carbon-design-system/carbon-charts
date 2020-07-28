@@ -50,7 +50,7 @@ export class Axis extends Component {
 			}
 		);
 		this.services.events.addEventListener(
-			Events.ZoomBar.SELECTION_END,
+			Events.ZoomDomain.CHANGE,
 			() => {
 				this.zoomDomainChanging = false;
 				// need another update after zoom bar selection is completed
@@ -683,7 +683,7 @@ export class Axis extends Component {
 			{}
 		);
 		this.services.events.removeEventListener(
-			Events.ZoomBar.SELECTION_END,
+			Events.ZoomDomain.CHANGE,
 			{}
 		);
 	}

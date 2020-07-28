@@ -74,7 +74,6 @@ export class ToolBar extends Component {
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
 		this.services.events.addEventListener(Events.Toolbar.HIDE, () => {
-			console.log("!!! catch hide event")
 			this.overflowMenuOptions.classed("hidden", true);
 			this.overflowMenuOptions.html(null);
 		});
@@ -157,6 +156,9 @@ export class ToolBar extends Component {
 					{ zoomDomain: newDomain, selectionRange: [startPoint, endPoint] },
 					{ animate: false }
 				);
+				self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
+					newDomain
+				});
 			}
 		});
 		const zoomOutContainer = DOMUtils.appendOrSelect(container, "g.toolbar-zoomOut");
@@ -196,6 +198,9 @@ export class ToolBar extends Component {
 				{ zoomDomain: newDomain, selectionRange: [startPoint, endPoint] },
 				{ animate: false }
 			);
+			self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
+				newDomain
+			});
 
 		});
 
@@ -215,6 +220,9 @@ export class ToolBar extends Component {
 						{ zoomDomain: newDomain, selectionRange: [axesLeftMargin, width] },
 						{ animate: false }
 					);
+					self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
+						newDomain
+					});
 					self.services.events.dispatchEvent(Events.Toolbar.HIDE);
 				}, true);
 			}
@@ -223,7 +231,6 @@ export class ToolBar extends Component {
 
 		document.body.addEventListener("click", function(e) {
 			if (self.overflowMenuOptions.selectAll("ul.bx--overflow-menu-options--open").size() > 0) {
-				console.log("!!! body click got triggered");
 				self.services.events.dispatchEvent(Events.Toolbar.HIDE);
 			}
 		});
