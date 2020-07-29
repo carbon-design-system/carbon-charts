@@ -62,7 +62,7 @@ export class ChartBrush extends Component {
 			this.frontSelectionSelector
 		);
 
-		const setDomain = (newDomain) => {	
+		const setDomain = (newDomain) => {
 			this.model.set(
 				{ zoomDomain: newDomain },
 				{ animate: false }
@@ -149,7 +149,7 @@ export class ChartBrush extends Component {
 						selection,
 						newDomain
 					});
-					
+
 				}
 			};
 

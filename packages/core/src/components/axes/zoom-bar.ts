@@ -102,6 +102,12 @@ export class ZoomBar extends Component {
 			});
 
 			const defaultDomain = this.model.getDefaultZoomBarDomain();
+			// if defaultZoomBarDomain is still undefined,
+			// probably chart is still loading or data is not ready yet
+			if (!defaultDomain) {
+				return;
+			}
+
 			// add value 0 to the extended domain for zoom bar area graph
 			this.compensateDataForDefaultDomain(zoomBarData, defaultDomain, 0);
 

@@ -86,6 +86,9 @@ export class ChartModel {
 
 	getDefaultZoomBarDomain() {
 		const zoomBarData = this.getZoomBarData();
+		if (!zoomBarData || zoomBarData.length === 0) {
+			return undefined;
+		}
 		const { cartesianScales } = this.services;
 		const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
 		const domainIdentifier = cartesianScales.getDomainIdentifier();
