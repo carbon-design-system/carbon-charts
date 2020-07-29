@@ -62,6 +62,7 @@ export class ChartBrush extends Component {
 			this.frontSelectionSelector
 		);
 
+
 		const setDomain = (newDomain) => {
 			this.model.set(
 				{ zoomDomain: newDomain },
@@ -79,7 +80,12 @@ export class ChartBrush extends Component {
 			if (zoomDomain === undefined) {
 				// default to full range with extended domain
 				zoomDomain = this.model.getDefaultZoomBarDomain();
-				this.model.set({ zoomDomain: zoomDomain }, { animate: false });
+				if (zoomDomain) {
+					this.model.set(
+					   { zoomDomain: zoomDomain },
+					   { animate: false }
+					);
+				}
 			}
 
 			const updateSelectionDash = (selection) => {

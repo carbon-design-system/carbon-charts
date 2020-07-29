@@ -38,6 +38,52 @@ g.#{$prefix}--#{$charts-prefix}--tool-bar {
 		cursor: pointer;
 	}
 
+	rect.icon-zoomInRect {
+		width: 30px;
+		height: 30px;
+		fill: transparent;
+		cursor: pointer;
+	}
+
+	rect.icon-zoomOutRect {
+		width: 30px;
+		height: 30px;
+		fill: transparent;
+		cursor: pointer;
+	}
+
+	rect.icon-overflowRect {
+		width: 30px;
+		height: 30px;
+		fill: transparent;
+		cursor: pointer;
+	}
+
+	rect.icon-zoomInRect:hover {
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+		pointer-events: visible;
+		fill: $ui-02;
+		opacity: 0.3;
+	}
+
+	rect.icon-zoomOutRect:hover {
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+		pointer-events: visible;
+		fill: $ui-02;
+		opacity: 0.3;
+	}
+	rect.icon-overflowRect:hover {
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+		pointer-events: visible;
+		fill: $ui-02;
+		opacity: 0.3;
+	}
 	
 }
 

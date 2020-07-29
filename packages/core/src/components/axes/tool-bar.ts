@@ -107,26 +107,26 @@ export class ToolBar extends Component {
 			axesLeftMargin = axesMargins.left;
 		}
 
-		this.overflowMenuStart = width - 20;
+		this.overflowMenuStart = width - 25;
 		this.zoomOutStart = this.overflowMenuStart - 30;
 		this.zoomInStart = this.zoomOutStart - 30;
 
 		const container = DOMUtils.appendOrSelect(svg, "svg.toolbar-container")
 			.attr("width", "100%")
-			.attr("height", this.height)
+			.attr("height", 30)
 			.attr("opacity", 1);
 
 		const spacer = DOMUtils.appendOrSelect(svg, "rect.toolbar-spacer")
 			.attr("x", 0)
-			.attr("y", this.height)
+			.attr("y", this.height + 5)
 			.attr("width", "100%")
 			.attr("height", this.spacerHeight)
 			.attr("opacity", 1)
 			.attr("fill", "none");
 
-		const zoomInContainer = DOMUtils.appendOrSelect(container, "g.toolbar-zoomIn");
+		const zoomInContainer = DOMUtils.appendOrSelect(container, "svg.toolbar-zoomIn");
 		const zoomInGroup = zoomInContainer.html(this.getZoomInIcon());
-		const zoomIn = zoomInGroup.select("svg#icon-zoomIn");
+		const zoomIn = zoomInGroup.select("rect.icon-zoomInRect");
 		const self = this;
 		zoomIn.on("click", function () {
 			let selectionRange = self.model.get("selectionRange");
@@ -163,7 +163,7 @@ export class ToolBar extends Component {
 		});
 		const zoomOutContainer = DOMUtils.appendOrSelect(container, "g.toolbar-zoomOut");
 		const zoomOutGroup = zoomOutContainer.html(this.getZoomOutIcon());
-		const zoomOut = zoomOutGroup.select("svg#icon-zoomOut");
+		const zoomOut = zoomOutGroup.select("rect.icon-zoomOutRect");
 		zoomOut.on("click", function () {
 			let currentSelection = self.model.get("selectionRange");
 			if (!currentSelection) {
@@ -203,7 +203,7 @@ export class ToolBar extends Component {
 
 		const overflowMenuContainer = DOMUtils.appendOrSelect(container, "g.toolbar-overflow-menu");
 		const overflowMenuGroup =  overflowMenuContainer.html(this.getOverflowMenuIcon());
-		const overflowMenu = overflowMenuGroup.select("svg#toolbar-overflow-menu-icon");
+		const overflowMenu = overflowMenuGroup.select("rect.icon-overflowRect");
 
 		overflowMenu.on("click", function() {
 			if (self.overflowMenuOptions.selectAll("ul.bx--overflow-menu-options--open").size() > 0) {
@@ -237,39 +237,40 @@ export class ToolBar extends Component {
 		return `
 			<?xml version="1.0" encoding="utf-8"?>
 			<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-			<svg version="1.1" id="icon-zoomIn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomInStart}px" y="0px"
+			<svg version="1.1" id="icon-zoomIn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomInStart}px" y="5px"
 				width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
 				<title>Zoom in</title>
-				<rect id="rect-zoomIn" class="icon-zoom" width="20" height="20"/>
 				<polygon points="9,6 7,6 7,4 6,4 6,6 4,6 4,7 6,7 6,9 7,9 7,7 9,7 "/>
 				<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
 					L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>
-			</svg>`;
+			</svg>
+			<rect class="icon-zoomInRect" x="${this.zoomInStart-5}px" y="0px"/>`;
 	}
 
 	getZoomOutIcon() {
 		return `
 			<?xml version="1.0" encoding="utf-8"?>
 			<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-			<svg version="1.1" id="icon-zoomOut" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomOutStart}px" y="0px"
+			<svg version="1.1" id="icon-zoomOut" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomOutStart}px" y="5px"
 				width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
 				<title>Zoom out</title>
-				<rect id="rect-zoomOut" class="icon-zoom" width="20" height="20"/>
 				<rect class="icon-zoomOut" x="4" y="6" width="5" height="1"/>
 				<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
 					L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>
-			</svg>`;
+			</svg>
+			<rect class="icon-zoomOutRect" x="${this.zoomOutStart-5}px" y="0px"/>`;
 	}
 
 	getOverflowMenuIcon() {
 		return `
-			<svg id="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" x="${this.overflowMenuStart}px" y="0px"
+			<svg id="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" x="${this.overflowMenuStart}px" y="5px"
 				width="20" height="20" viewBox="0 0 15 15" aria-hidden="true">
 				<circle cx="8" cy="3" r="1"></circle>
 				<circle cx="8" cy="8" r="1"></circle>
 				<circle cx="8" cy="13" r="1"></circle>
 				<rect class="icon-overflow-menu" width="20" height="20"/>
-			</svg>`;
+			</svg>
+			<rect class="icon-overflowRect" x="${this.overflowMenuStart-5}px" y="0px"/>`;
 	}
 
 	getOverflowMenuHTML() {
