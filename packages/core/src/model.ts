@@ -94,11 +94,9 @@ export class ChartModel {
 		const allDataFromDomain = this.getAllDataFromDomain();
 
 		return allDataFromDomain.filter((datum) => {
-			const group = dataGroups.find(
-				(group) => group.name === datum[groupMapsTo]
+			return dataGroups.find(
+				(group) => group.name === datum[groupMapsTo] && group.status === ACTIVE
 			);
-
-			return group.status === ACTIVE;
 		});
 	}
 
@@ -116,6 +114,19 @@ export class ChartModel {
 	 */
 	setData(newData) {
 		const sanitizedData = this.sanitize(Tools.clone(newData));
+
+		// Sort data in user defined order
+		const legendOrder = Tools.getProperty(
+			this.getOptions(),
+			"legend",
+			"order"
+		);
+		if (legendOrder.length) {
+			sanitizedData.sort((dataA, dataB) => 
+				legendOrder.indexOf(dataA.group) - legendOrder.indexOf(dataB.group)
+			);
+		}
+
 		const dataGroups = this.generateDataGroups(sanitizedData);
 
 		this.set({

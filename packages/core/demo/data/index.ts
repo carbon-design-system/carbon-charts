@@ -155,6 +155,12 @@ let allDemoGroups = [
 				isDemoExample: false
 			},
 			{
+				options: barDemos.simpleBarCustomLegendOrderOptions,
+				data: barDemos.simpleBarData,
+				chartType: chartTypes.SimpleBarChart,
+				isDemoExample: false
+			},
+			{
 				options: barDemos.simpleBarCenteredLegendOptions,
 				data: barDemos.simpleBarCenteredLegendData,
 				chartType: chartTypes.SimpleBarChart

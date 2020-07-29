@@ -92,7 +92,7 @@ export interface BaseChartOptions {
 		/**
 		 * used to simulate data loading
 		 */
-		loading?: Boolean;
+		loading?: boolean;
 		/**
 		 * options related to pre-selected data groups
 		 * Remains empty if every legend item is active or dataset doesn't have the data groups.
