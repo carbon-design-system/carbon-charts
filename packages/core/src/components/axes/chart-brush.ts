@@ -55,7 +55,13 @@ export class ChartBrush extends Component {
 			if (zoomDomain === undefined) {
 				// default to full range with extended domain
 				zoomDomain = this.model.getDefaultZoomBarDomain();
-				this.model.set({ zoomDomain: zoomDomain }, { animate: false });
+				// default zoomDomain could be still undefined (ex: loading)
+				if (zoomDomain) {
+					this.model.set(
+						{ zoomDomain: zoomDomain },
+						{ animate: false }
+					);
+				}
 			}
 
 			const updateSelectionDash = (selection) => {
