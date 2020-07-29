@@ -26,12 +26,26 @@ const definedZoomBarData = [
 
 // utility function to update title and enable zoomBar option
 const addZoomBarToOptions = (options, includeDefinedZoomBarData = false) => {
+	const def = {
+		left: {
+			enabled: true,
+			type: "slider"
+		},
+	};
+
 	if (includeDefinedZoomBarData) {
 		options["title"] = options["title"] + " - Defined zoom bar enabled";
-		options["zoomBar"] = { enabled: true, data: definedZoomBarData };
+		options["zoomBar"] = {
+			...def,
+			enabled: true,
+			data: definedZoomBarData
+		};
 	} else {
 		options["title"] = options["title"] + " - Zoom bar enabled";
-		options["zoomBar"] = { enabled: true };
+		options["zoomBar"] = {
+			...def,
+			enabled: true
+		};
 	}
 	return options;
 };

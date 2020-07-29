@@ -12,11 +12,11 @@ import { scaleTime } from "d3-scale";
 export class ChartBrush extends Component {
 	static DASH_LENGTH = 4;
 
-	type = "chart-brush";
+	type = "grid-brush";
 
 	selectionSelector = "rect.selection"; // needs to match the class name in d3.brush
 
-	frontSelectionSelector = "rect.frontSelection"; // needs to match the class name in _chart-brush.scss
+	frontSelectionSelector = "rect.frontSelection"; // needs to match the class name in _grid-brush.scss
 
 	render(animate = true) {
 		const svg = this.parent;
@@ -54,7 +54,7 @@ export class ChartBrush extends Component {
 			let zoomDomain = this.model.get("zoomDomain");
 			if (zoomDomain === undefined) {
 				// default to full range with extended domain
-				zoomDomain = this.model.getDefaultZoomBarDomain();
+				zoomDomain = this.services.zoom.getDefaultZoomBarDomain();
 				this.model.set({ zoomDomain: zoomDomain }, { animate: false });
 			}
 
@@ -145,7 +145,7 @@ export class ChartBrush extends Component {
 					// reset to default full range
 					if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
 						// same as d3 behavior and zoom bar behavior: set to default full range
-						newDomain = this.model.getDefaultZoomBarDomain();
+						newDomain = this.services.zoom.getDefaultZoomBarDomain();
 					}
 
 					// only if zoomDomain needs update

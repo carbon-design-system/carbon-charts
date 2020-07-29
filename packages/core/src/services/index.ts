@@ -6,3 +6,4 @@ export * from "./essentials/transitions";
 // MISC
 export * from "./scales-cartesian";
 export * from "./curves";
+export * from "./zoom";
