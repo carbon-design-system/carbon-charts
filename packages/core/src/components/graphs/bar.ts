@@ -15,7 +15,7 @@ export class Bar extends Component {
 		if (!mainXScale.step) {
 			return Math.min(
 				options.bars.maxWidth,
-				chartWidth * 0.25 / numberOfDatapoints
+				(chartWidth * 0.25) / numberOfDatapoints
 			);
 		}
 

@@ -30,7 +30,7 @@ const addZoomBarToOptions = (options, includeDefinedZoomBarData = false) => {
 		left: {
 			enabled: true,
 			type: "slider"
-		},
+		}
 	};
 
 	if (includeDefinedZoomBarData) {
