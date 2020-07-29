@@ -246,10 +246,13 @@ export class Axis extends Component {
 					);
 
 					let tickValues;
+					// scale.nice() will change scale domain which causes extra space near chart edge
+					// so use another scale instance to avoid impacts to original scale
+					const tempScale = scale.copy();
 					if (addSpaceOnEdges && !customDomain) {
-						tickValues = scale.nice(numberOfTicks);
+						tempScale.nice(numberOfTicks);
 					}
-					tickValues = scale.ticks(numberOfTicks);
+					tickValues = tempScale.ticks(numberOfTicks);
 
 					// Remove labels on the edges
 					// If there are more than 2 labels to show
