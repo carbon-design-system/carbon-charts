@@ -1,5 +1,5 @@
 <template>
-	<div class="ccv-stacked-bar-chart"></div>
+	<div class="ccv-stacked-area-chart"></div>
 </template>
 
 <script>
