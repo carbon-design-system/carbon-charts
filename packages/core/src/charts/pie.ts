@@ -46,7 +46,7 @@ export class PieChart extends Chart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [
+		const graphFrameComponents: any[] = [
 			new Pie(this.model, this.services),
 			new Skeleton(this.model, this.services, {
 				skeleton: Skeletons.PIE
