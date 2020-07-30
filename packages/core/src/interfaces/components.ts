@@ -128,7 +128,7 @@ export interface ToolBarOptions {
 	/**
 	 * is the tool-bar visible or not
 	 */
-	overflowMenuOptions?: string[];
+	overflowMenuItems?: string[];
 
 }
 
@@ -152,5 +152,5 @@ export interface ZoomBarOptions {
 	/**
 	 * options related to tool bar above zoom bar
 	 */
-	toolBarOptions?: ToolBarOptions;
+	toolBar?: ToolBarOptions;
 }

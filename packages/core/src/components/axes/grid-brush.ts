@@ -22,7 +22,7 @@ export class ChartBrush extends Component {
 
 	init() {
 		// get zoom in ratio
-		this.zoomRatio = this.model.getOptions().zoomBar.toolBarOptions.zoomRatio;
+		this.zoomRatio = this.model.getOptions().zoomBar.toolBar.zoomRatio;
 	}
 
 	render(animate = true) {

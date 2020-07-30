@@ -27,7 +27,7 @@ const definedZoomBarData = [
 const defaultToolBarOptions = {
 	zoomRatio: 0.4,
 	showToolBar: true,
-	overflowMenuOptions: ["Reset zoom"]
+	overflowMenuItems: ["Reset zoom"]
 };
 
 // utility function to update title and enable zoomBar option
@@ -45,14 +45,14 @@ const addZoomBarToOptions = (options, includeDefinedZoomBarData = false) => {
 			...def,
 			enabled: true,
 			data: definedZoomBarData,
-			toolBarOptions: defaultToolBarOptions
+			toolBar: defaultToolBarOptions
 		};
 	} else {
 		options["title"] = options["title"] + " - Zoom bar enabled";
 		options["zoomBar"] = {
 			...def,
 			enabled: true,
-			toolBarOptions: defaultToolBarOptions
+			toolBar: defaultToolBarOptions
 		};
 	}
 	return options;

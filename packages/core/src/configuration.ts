@@ -159,10 +159,10 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	grid,
 	zoomBar: {
 		enabled: false,
-		toolBarOptions: {
+		toolBar: {
 			showToolBar: true,
 			zoomRatio: 0.4,
-			overflowMenuOptions: ["Reset zoom"]
+			overflowMenuItems: ["Reset zoom"]
 		}
 	} as ZoomBarOptions
 } as AxisChartOptions);

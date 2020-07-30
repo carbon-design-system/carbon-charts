@@ -41,8 +41,8 @@ export class ToolBar extends Component {
 		this.services.events.addEventListener(Events.ZoomBar.UPDATE, () => {
 			this.render();
 		});
-		this.zoomRatio = this.model.getOptions().zoomBar.toolBarOptions.zoomRatio;
-		this.menuOptionsList = this.model.getOptions().zoomBar.toolBarOptions.overflowMenuOptions;
+		this.zoomRatio = this.model.getOptions().zoomBar.toolBar.zoomRatio;
+		this.menuOptionsList = this.model.getOptions().zoomBar.toolBar.overflowMenuItems;
 
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
