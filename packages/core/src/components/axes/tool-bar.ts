@@ -236,10 +236,10 @@ export class ToolBar extends Component {
 	getZoomInIcon() {
 		// zoom in icon background left padding is 5px
 		return `
-			<rect class="icon-zoomInRect" x="${this.zoomInStart-5}px" y="0px"/>
+			<rect class="icon-zoomInRect" x="${this.zoomInStart-Configuration.toolBar.iconLeftPadding}px" y="0px"/>
 				<?xml version="1.0" encoding="utf-8"?>
 				<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-				<svg version="1.1" id="icon-zoomIn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomInStart}px" y="5px"
+				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomInStart}px" y="5px"
 					width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
 					<polygon points="9,6 7,6 7,4 6,4 6,6 4,6 4,7 6,7 6,9 7,9 7,7 9,7 "/>
 					<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
@@ -250,13 +250,13 @@ export class ToolBar extends Component {
 	getZoomOutIcon() {
 		// zoom out icon background left padding is 5px
 		return `
-			<rect class="icon-zoomOutRect" x="${this.zoomOutStart-5}px" y="0px"/>
+			<rect class="icon-zoomOutRect" x="${this.zoomOutStart-Configuration.toolBar.iconLeftPadding}px" y="0px"/>
 			<?xml version="1.0" encoding="utf-8"?>
 			<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-			<svg version="1.1" id="icon-zoomOut" class xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomOutStart}px" y="5px"
+			<svg version="1.1" class="icon-zoomOut" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomOutStart}px" y="5px"
 				width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
 				<title>Zoom out</title>
-				<rect class="icon-zoomOut" x="4" y="6" width="5" height="1"/>
+				<rect class="rect-zoomOut" x="4" y="6" width="5" height="1"/>
 				<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
 					L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>
 			</svg>`;
@@ -265,7 +265,7 @@ export class ToolBar extends Component {
 	getOverflowMenuIcon() {
 		// overflow menu icon background left padding is 5px
 		return `
-			<rect class="icon-overflowRect" x="${this.overflowMenuStart-5}px" y="0px"/>
+			<rect class="icon-overflowRect" x="${this.overflowMenuStart-Configuration.toolBar.iconLeftPadding}px" y="0px"/>
 			<svg class="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" x="${this.overflowMenuStart}px" y="5px"
 				width="20" height="20" viewBox="0 0 15 15" aria-hidden="true">
 				<circle cx="8" cy="3" r="1"></circle>
@@ -288,7 +288,7 @@ export class ToolBar extends Component {
 			data-floating-menu-direction="bottom" role="main">
 			<ul class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
 				tabindex="-1" role="menu" aria-label="Menu" data-floating-menu-direction="bottom"
-				style="left:${this.overflowMenuStart - 5 - (160 - 30)}px; top:${this.overflowMenuIconBottom}px;">` +
+				style="left:${this.overflowMenuStart - (160 - 30)}px; top:${this.overflowMenuIconBottom}px;">` +
 			options
 				.map(
 					(option) =>

@@ -25,8 +25,14 @@ g.#{$prefix}--#{$charts-prefix}--tool-bar {
 		pointer-events: visible;
 	}
 
-	svg#icon-zoomOut rect.icon-zoomOut {
+	svg.icon-zoomOut rect.rect-zoomOut {
 		fill: $icon-02;
+		pointer-events: visible;
+	}
+
+	svg.icon-zoomOut rect.rect-zoomOut:hover {
+		cursor: pointer;
+		pointer-events: visible;
 	}
 
 	path {
