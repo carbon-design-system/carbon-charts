@@ -37,6 +37,7 @@ export class AxisChart extends Chart {
 		const isZoomBarEnabled = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
+			"top",
 			"enabled"
 		);
 

@@ -43,6 +43,7 @@ export class ZoomBar extends Component {
 		const initialZoomDomain = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
+			"top",
 			"initialZoomDomain"
 		);
 		if (initialZoomDomain !== null) {
@@ -246,10 +247,6 @@ export class ZoomBar extends Component {
 
 	updateBrushHandle(svg, selection, domain) {
 		const self = this;
-		const timeScaleOptions = Tools.getProperty(
-			this.model.getOptions(),
-			"timeScale"
-		);
 		const handleWidth = 5;
 		const handleHeight = Configuration.zoomBar.height;
 		const handleXDiff = -handleWidth / 2;
