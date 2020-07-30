@@ -44,7 +44,7 @@ export class GroupedBar extends Bar {
 		this.setGroupScale();
 
 		// Grab container SVG
-		const svg = this.getContainerSVG(true);
+		const svg = this.getContainerSVG({ withinChartClip: true });
 
 		const allDataLabels = map(
 			displayData,
@@ -124,7 +124,7 @@ export class GroupedBar extends Bar {
 				const y1 = this.services.cartesianScales.getRangeValue(d.value);
 
 				// don't show if part of bar is out of zoom domain
-				if (this.isOutOfZoomDomain(x0, x1)) {
+				if (this.isOutsideZoomedDomain(x0, x1)) {
 					return;
 				}
 				return Tools.generateSVGPathString(

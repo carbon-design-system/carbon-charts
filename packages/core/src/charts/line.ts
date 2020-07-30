@@ -7,7 +7,6 @@ import { Skeletons } from "../interfaces/enums";
 
 // Components
 import {
-	ChartClip,
 	Grid,
 	Line,
 	Ruler,
@@ -41,7 +40,6 @@ export class LineChart extends AxisChart {
 		// Specify what to render inside the graph-frame
 		const graphFrameComponents: any[] = [
 			new TwoDimensionalAxes(this.model, this.services),
-			new ChartClip(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Ruler(this.model, this.services),
 			new Line(this.model, this.services),

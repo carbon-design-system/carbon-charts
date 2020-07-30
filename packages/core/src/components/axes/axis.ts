@@ -29,6 +29,7 @@ export class Axis extends Component {
 	scale: any;
 	scaleType: ScaleTypes;
 
+	// Track whether zoom domain needs to update in a render
 	zoomDomainChanging = false;
 
 	constructor(model: ChartModel, services: any, configs?: any) {
@@ -45,20 +46,24 @@ export class Axis extends Component {
 	init() {
 		this.services.events.addEventListener(
 			Events.ZoomBar.SELECTION_START,
-			() => {
-				this.zoomDomainChanging = true;
-			}
+			this.handleZoomBarSelectionStart
 		);
 		this.services.events.addEventListener(
 			Events.ZoomBar.SELECTION_END,
-			() => {
-				this.zoomDomainChanging = false;
-				// need another update after zoom bar selection is completed
-				// to make sure the tick rotation is calculated correctly
-				this.services.events.dispatchEvent(Events.Model.UPDATE, {});
-			}
+			this.handleZoomBarSelectionEnd
 		);
 	}
+
+	handleZoomBarSelectionStart = () => {
+		this.zoomDomainChanging = true;
+	};
+
+	handleZoomBarSelectionEnd = () => {
+		this.zoomDomainChanging = false;
+		// need another update after zoom bar selection is completed
+		// to make sure the tick rotation is calculated correctly
+		this.services.events.dispatchEvent(Events.Model.UPDATE);
+	};
 
 	render(animate = true) {
 		const { position: axisPosition } = this.configs;
@@ -685,13 +690,15 @@ export class Axis extends Component {
 			.on("mouseover", null)
 			.on("mousemove", null)
 			.on("mouseout", null);
+
+		// Remove zoom bar event listeners
 		this.services.events.removeEventListener(
 			Events.ZoomBar.SELECTION_START,
-			{}
+			this.handleZoomBarSelectionStart
 		);
 		this.services.events.removeEventListener(
 			Events.ZoomBar.SELECTION_END,
-			{}
+			this.handleZoomBarSelectionEnd
 		);
 	}
 }

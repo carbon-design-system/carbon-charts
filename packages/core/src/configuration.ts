@@ -158,7 +158,9 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	timeScale,
 	grid,
 	zoomBar: {
-		enabled: false
+		top: {
+			enabled: false
+		}
 	} as ZoomBarOptions
 } as AxisChartOptions);
 

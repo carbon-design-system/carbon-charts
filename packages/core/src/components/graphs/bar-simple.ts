@@ -31,7 +31,7 @@ export class SimpleBar extends Bar {
 		const { groupMapsTo } = options.data;
 
 		// Grab container SVG
-		const svg = this.getContainerSVG(true);
+		const svg = this.getContainerSVG({ withinChartClip: true });
 
 		// Update data on all bars
 		const bars = svg
@@ -71,7 +71,7 @@ export class SimpleBar extends Bar {
 				const y1 = this.services.cartesianScales.getRangeValue(d, i);
 
 				// don't show if part of bar is out of zoom domain
-				if (this.isOutOfZoomDomain(x0, x1)) {
+				if (this.isOutsideZoomedDomain(x0, x1)) {
 					return;
 				}
 

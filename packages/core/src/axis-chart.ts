@@ -11,6 +11,7 @@ import {
 } from "./interfaces";
 import {
 	ChartBrush,
+	ChartClip,
 	LayoutComponent,
 	Legend,
 	Title,
@@ -75,6 +76,7 @@ export class AxisChart extends Chart {
 
 		if (zoomBarEnabled) {
 			graphFrameComponents.push(
+				new ChartClip(this.model, this.services),
 				new ChartBrush(this.model, this.services)
 			);
 		}
