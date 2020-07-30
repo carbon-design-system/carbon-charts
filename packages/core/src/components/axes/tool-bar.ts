@@ -33,11 +33,6 @@ export class ToolBar extends Component {
 
 	overflowMenuIconBottom = 0;
 
-	toolbarId = "toolbar-" + Math.floor(Math.random() * 99999999999);
-
-	backgroundColor: "red";
-
-
 	constructor(model: ChartModel, services: any, configs?: any) {
 		super(model, services, configs);
 
@@ -126,11 +121,12 @@ export class ToolBar extends Component {
 			.attr("opacity", 1)
 			.attr("fill", "none");
 
+		const self = this;
+
 		const zoomInContainer = DOMUtils.appendOrSelect(container, "svg.toolbar-zoomIn");
 		const zoomInGroup = zoomInContainer.html(this.getZoomInIcon());
-		const zoomIn = zoomInGroup.select("rect.icon-zoomInRect");
-		const self = this;
-		zoomIn.on("click", function () {
+		
+		zoomInContainer.on("click", function () {
 			let selectionRange = self.model.get("selectionRange");
 			if (!selectionRange) {
 				selectionRange = [axesLeftMargin, width];
@@ -165,8 +161,8 @@ export class ToolBar extends Component {
 		});
 		const zoomOutContainer = DOMUtils.appendOrSelect(container, "svg.toolbar-zoomOut");
 		const zoomOutGroup = zoomOutContainer.html(this.getZoomOutIcon());
-		const zoomOut = zoomOutGroup.select("rect.icon-zoomOutRect");
-		zoomOut.on("click", function () {
+
+		zoomOutContainer.on("click", function () {
 			let currentSelection = self.model.get("selectionRange");
 			if (!currentSelection) {
 				currentSelection = [axesLeftMargin, width];
@@ -205,9 +201,8 @@ export class ToolBar extends Component {
 
 		const overflowMenuContainer = DOMUtils.appendOrSelect(container, "svg.toolbar-overflow-menu");
 		const overflowMenuGroup =  overflowMenuContainer.html(this.getOverflowMenuIcon());
-		const overflowMenu = overflowMenuGroup.select("rect.icon-overflowRect");
 
-		overflowMenu.on("click", function() {
+		overflowMenuContainer.on("click", function() {
 			if (self.overflowMenuOptions.selectAll("ul.bx--overflow-menu-options--open").size() > 0) {
 				// Hide toolbar
 				self.services.events.dispatchEvent(Events.Toolbar.HIDE);
@@ -236,8 +231,9 @@ export class ToolBar extends Component {
 	}
 
 	getZoomInIcon() {
+		// zoom in icon background left padding is 5px
 		return `
-			<rect id="${this.toolbarId}_zoomIn" class="icon-zoomInRect" x="${this.zoomInStart-5}px" y="0px"/>
+			<rect class="icon-zoomInRect" x="${this.zoomInStart-5}px" y="0px"/>
 				<?xml version="1.0" encoding="utf-8"?>
 				<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 				<svg version="1.1" id="icon-zoomIn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomInStart}px" y="5px"
@@ -249,6 +245,7 @@ export class ToolBar extends Component {
 	}
 
 	getZoomOutIcon() {
+		// zoom out icon background left padding is 5px
 		return `
 			<rect class="icon-zoomOutRect" x="${this.zoomOutStart-5}px" y="0px"/>
 			<?xml version="1.0" encoding="utf-8"?>
@@ -263,6 +260,7 @@ export class ToolBar extends Component {
 	}
 
 	getOverflowMenuIcon() {
+		// overflow menu icon background left padding is 5px
 		return `
 			<rect class="icon-overflowRect" x="${this.overflowMenuStart-5}px" y="0px"/>
 			<svg id="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" x="${this.overflowMenuStart}px" y="5px"
@@ -285,13 +283,15 @@ export class ToolBar extends Component {
 		let defaultHTML;
 
 		const options = this.getMenuOptions();
-
+		// overflow menu icon background left padding is 5px
+		// oferflow menu option width is 160px
+		// width of overflow menu icon with background is 30px
 		defaultHTML =
 			`<div data-floating-menu-container="true"
 			data-floating-menu-direction="bottom" role="main">
 			<ul class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
 				tabindex="-1" role="menu" aria-label="Menu" data-floating-menu-direction="bottom"
-				style="left:${this.overflowMenuStart - (160 - 20 - 15 / 2)}px; top:${this.overflowMenuIconBottom}px;">` +
+				style="left:${this.overflowMenuStart - 5 - (160 - 30)}px; top:${this.overflowMenuIconBottom}px;">` +
 			options
 				.map(
 					(option, index) =>
