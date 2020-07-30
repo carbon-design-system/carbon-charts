@@ -115,3 +115,17 @@ export const zoomBarLineTimeSeriesInitDomainOptions = addZoomBarToOptions(
 );
 zoomBarLineTimeSeriesInitDomainOptions["title"] += " zoomed domain";
 zoomBarLineTimeSeriesInitDomainOptions.zoomBar.initialZoomDomain = initialZoomDomain;
+
+// assume no data set while loading is true
+export const zoomBarSkeletonData = [];
+export const zoomBarSkeletonOptions = addZoomBarToOptions(
+	Object.assign(
+		{
+			data: {
+				loading: true
+			}
+		},
+		barChart.stackedBarTimeSeriesOptions
+	)
+);
+zoomBarSkeletonOptions["title"] = "Zoom bar (skeleton)";
