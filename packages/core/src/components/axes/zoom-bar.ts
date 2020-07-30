@@ -55,10 +55,11 @@ export class ZoomBar extends Component {
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
-		const { cartesianScales } = this.services;
-		const mainXScale = cartesianScales.getMainXScale();
-		const mainYScale = cartesianScales.getMainYScale();
-		const mainXScaleType = cartesianScales.getMainXScaleType();
+		const isDataLoading = Tools.getProperty(
+			this.model.getOptions(),
+			"data",
+			"loading"
+		);
 
 		// get axes margins
 		let axesLeftMargin = 0;
@@ -85,6 +86,16 @@ export class ZoomBar extends Component {
 			.attr("y", 0)
 			.attr("width", "100%")
 			.attr("height", "100%");
+
+		if (isDataLoading) {
+			// TODO - zoom bar skeleton could be improved in the future
+			return;
+		}
+
+		const { cartesianScales } = this.services;
+		const mainXScale = cartesianScales.getMainXScale();
+		const mainYScale = cartesianScales.getMainYScale();
+		const mainXScaleType = cartesianScales.getMainXScaleType();
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
 			const zoomBarData = this.services.zoom.getZoomBarData();
