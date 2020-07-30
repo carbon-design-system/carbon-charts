@@ -83,7 +83,7 @@ export class Component {
 		return this.parent;
 	}
 
-	getContainerSVG(configs = {withinChartClip: false}) {
+	getContainerSVG(configs = { withinChartClip: false }) {
 		if (this.type) {
 			const chartprefix = Tools.getProperty(
 				this.model.getOptions(),
