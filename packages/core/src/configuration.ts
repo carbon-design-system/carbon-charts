@@ -159,8 +159,11 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	grid,
 	zoomBar: {
 		enabled: false,
-		zoomRatio: 0.4,
-		showToolBar: true
+		toolBarOptions: {
+			showToolBar: true,
+			zoomRatio: 0.4,
+			overflowMenuOptions: ["Reset zoom"]
+		}
 	} as ZoomBarOptions
 } as AxisChartOptions);
 
@@ -468,7 +471,7 @@ export const zoomBar = {
 
 export const toolBar = {
 	height: 30,
-	spacerHeight: 20
+	spacerHeight: 10
 };
 
 export const tickSpaceRatioVertical = 2.5;

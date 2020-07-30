@@ -29,6 +29,8 @@ export class ToolBar extends Component {
 	// y coordinate of overflow menu icon
 	overflowMenuIconBottom = 0;
 
+	menuOptionsList;
+
 	constructor(model: ChartModel, services: any, configs?: any) {
 		super(model, services, configs);
 
@@ -39,7 +41,8 @@ export class ToolBar extends Component {
 		this.services.events.addEventListener(Events.ZoomBar.UPDATE, () => {
 			this.render();
 		});
-		this.zoomRatio = this.model.getOptions().zoomBar.zoomRatio;
+		this.zoomRatio = this.model.getOptions().zoomBar.toolBarOptions.zoomRatio;
+		this.menuOptionsList = this.model.getOptions().zoomBar.toolBarOptions.overflowMenuOptions;
 
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
@@ -307,7 +310,7 @@ export class ToolBar extends Component {
 	}
 
 	getMenuOptions() {
-		return ["Reset zoom"];
+		return this.menuOptionsList;
 	}
 
 	destroy() {
