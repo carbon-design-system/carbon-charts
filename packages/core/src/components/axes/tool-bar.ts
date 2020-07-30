@@ -1,25 +1,19 @@
 // Internal Imports
 import { Component } from "../component";
-import { Events, ScaleTypes } from "../../interfaces";
+import { Events } from "../../interfaces";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 import { ChartModel } from "../../model";
+import * as Configuration from "../../configuration";
 
 // D3 Imports
-import { event, select, selectAll } from "d3-selection";
-
-// Carbon position service
-import Position, { PLACEMENTS } from "@carbon/utils-position";
+import { event, select } from "d3-selection";
 
 // import the settings for the css prefix
 import settings from "carbon-components/es/globals/js/settings";
 
 export class ToolBar extends Component {
 	type = "tool-bar";
-
-	height = 20;
-
-	spacerHeight = 10;
 
 	zoomInStart = 700;
 
@@ -29,8 +23,10 @@ export class ToolBar extends Component {
 
 	zoomRatio;
 
+	// ul options list element
 	overflowMenuOptions;
 
+	// y coordinate of overflow menu icon
 	overflowMenuIconBottom = 0;
 
 	constructor(model: ChartModel, services: any, configs?: any) {
@@ -110,21 +106,22 @@ export class ToolBar extends Component {
 
 		const container = DOMUtils.appendOrSelect(svg, "svg.toolbar-container")
 			.attr("width", "100%")
-			.attr("height", 30)
+			.attr("height", Configuration.toolBar.height)
 			.attr("opacity", 1);
 
 		const spacer = DOMUtils.appendOrSelect(svg, "rect.toolbar-spacer")
 			.attr("x", 0)
-			.attr("y", this.height + 5)
+			.attr("y", Configuration.toolBar.height + 5)
 			.attr("width", "100%")
-			.attr("height", this.spacerHeight)
+			.attr("height", Configuration.toolBar.spacerHeight)
 			.attr("opacity", 1)
 			.attr("fill", "none");
 
 		const self = this;
 
+		// zoom in icon and event
 		const zoomInContainer = DOMUtils.appendOrSelect(container, "svg.toolbar-zoomIn");
-		const zoomInGroup = zoomInContainer.html(this.getZoomInIcon());
+		zoomInContainer.html(this.getZoomInIcon());
 		
 		zoomInContainer.on("click", function () {
 			let selectionRange = self.model.get("selectionRange");
@@ -159,8 +156,10 @@ export class ToolBar extends Component {
 				self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
 			}
 		});
+
+		// zoom out icon and event
 		const zoomOutContainer = DOMUtils.appendOrSelect(container, "svg.toolbar-zoomOut");
-		const zoomOutGroup = zoomOutContainer.html(this.getZoomOutIcon());
+		zoomOutContainer.html(this.getZoomOutIcon());
 
 		zoomOutContainer.on("click", function () {
 			let currentSelection = self.model.get("selectionRange");
@@ -199,8 +198,9 @@ export class ToolBar extends Component {
 			self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
 		});
 
+		// overflow menu icon and event
 		const overflowMenuContainer = DOMUtils.appendOrSelect(container, "svg.toolbar-overflow-menu");
-		const overflowMenuGroup =  overflowMenuContainer.html(this.getOverflowMenuIcon());
+		overflowMenuContainer.html(this.getOverflowMenuIcon());
 
 		overflowMenuContainer.on("click", function() {
 			if (self.overflowMenuOptions.selectAll("ul.bx--overflow-menu-options--open").size() > 0) {
@@ -222,7 +222,7 @@ export class ToolBar extends Component {
 			event.stopImmediatePropagation();
 		});
 
-		document.body.addEventListener("click", function(e) {
+		document.body.addEventListener("click", function() {
 			if (self.overflowMenuOptions.selectAll("ul.bx--overflow-menu-options--open").size() > 0) {
 				self.services.events.dispatchEvent(Events.Toolbar.HIDE);
 			}
@@ -274,12 +274,6 @@ export class ToolBar extends Component {
 
 	getOverflowMenuHTML() {
 
-		const chartprefix = Tools.getProperty(
-			this.model.getOptions(),
-			"style",
-			"prefix"
-		);
-
 		let defaultHTML;
 
 		const options = this.getMenuOptions();
@@ -294,7 +288,7 @@ export class ToolBar extends Component {
 				style="left:${this.overflowMenuStart - 5 - (160 - 30)}px; top:${this.overflowMenuIconBottom}px;">` +
 			options
 				.map(
-					(option, index) =>
+					(option) =>
 						`<li
 						class="bx--overflow-menu-options__option">
 						<button class="bx--overflow-menu-options__btn" role="menuitem"  title="Reset"

@@ -466,5 +466,10 @@ export const zoomBar = {
 	spacerHeight: 20
 };
 
+export const toolBar = {
+	height: 30,
+	spacerHeight: 20
+};
+
 export const tickSpaceRatioVertical = 2.5;
 export const tickSpaceRatioHorizontal = 3.5;
