@@ -20,6 +20,11 @@ g.#{$prefix}--#{$charts-prefix}--tool-bar {
 		fill: $icon-02;
 	}
 
+	polygon:hover {
+		cursor: pointer;
+		pointer-events: visible;
+	}
+
 	svg#icon-zoomOut rect.icon-zoomOut {
 		fill: $icon-02;
 	}
@@ -28,9 +33,16 @@ g.#{$prefix}--#{$charts-prefix}--tool-bar {
 		fill: $icon-02;
 	}
 
+	path:hover {
+		cursor: pointer;
+		pointer-events: visible;
+		fill-rule: nonzero;
+	}
+
 	svg#toolbar-overflow-menu-icon {
 		fill: $icon-02;
 		cursor: pointer;
+		pointer-events: visible;
 	}
 
 	rect.icon-overflow-menu {
@@ -59,30 +71,16 @@ g.#{$prefix}--#{$charts-prefix}--tool-bar {
 		cursor: pointer;
 	}
 
-	rect.icon-zoomInRect:hover {
-		width: 30px;
-		height: 30px;
-		cursor: pointer;
-		pointer-events: visible;
-		fill: $ui-02;
-		opacity: 0.3;
+	svg.toolbar-zoomIn:hover rect.icon-zoomInRect{
+		fill: $hover-ui;
 	}
 
-	rect.icon-zoomOutRect:hover {
-		width: 30px;
-		height: 30px;
-		cursor: pointer;
-		pointer-events: visible;
-		fill: $ui-02;
-		opacity: 0.3;
+	svg.toolbar-zoomOut:hover rect.icon-zoomOutRect{
+		fill: $hover-ui;
 	}
-	rect.icon-overflowRect:hover {
-		width: 30px;
-		height: 30px;
-		cursor: pointer;
-		pointer-events: visible;
-		fill: $ui-02;
-		opacity: 0.3;
+
+	svg.toolbar-overflow-menu:hover rect.icon-overflowRect{
+		fill: $hover-ui;
 	}
 	
 }

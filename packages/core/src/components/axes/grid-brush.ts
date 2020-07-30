@@ -12,11 +12,11 @@ import { scaleTime } from "d3-scale";
 export class ChartBrush extends Component {
 	static DASH_LENGTH = 4;
 
-	type = "chart-brush";
+	type = "grid-brush";
 
 	selectionSelector = "rect.selection"; // needs to match the class name in d3.brush
 
-	frontSelectionSelector = "rect.frontSelection"; // needs to match the class name in _chart-brush.scss
+	frontSelectionSelector = "rect.frontSelection"; // needs to match the class name in _grid-brush.scss
 
 	zoomRatio;
 
@@ -71,7 +71,7 @@ export class ChartBrush extends Component {
 		};
 
 		const getDefaultZoomBarDomain = () => {
-			return this.model.getDefaultZoomBarDomain();
+			return this.services.zoom.getDefaultZoomBarDomain();
 		};
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
@@ -155,7 +155,6 @@ export class ChartBrush extends Component {
 						selection,
 						newDomain
 					});
-
 				}
 			};
 

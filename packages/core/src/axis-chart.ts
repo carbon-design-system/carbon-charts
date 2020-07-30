@@ -21,12 +21,13 @@ import {
 } from "./components/index";
 import { Tools } from "./tools";
 
-import { CartesianScales, Curves } from "./services";
+import { CartesianScales, Curves, Zoom } from "./services";
 
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {
 		cartesianScales: CartesianScales,
-		curves: Curves
+		curves: Curves,
+		zoom: Zoom
 	});
 
 	constructor(holder: Element, chartConfigs: ChartConfig<AxisChartOptions>) {

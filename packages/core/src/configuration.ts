@@ -129,15 +129,6 @@ export const timeScale: TimeScaleOptions = {
 };
 
 /**
- * ZoomBar options
- */
-export const zoomBar: ZoomBarOptions = {
-	enabled: false,
-	zoomRatio: 0.4,
-	showToolBar: true
-};
-
-/**
  * Base chart options common to any chart
  */
 const chart: BaseChartOptions = {
@@ -166,7 +157,11 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	timeScale,
 	grid,
-	zoomBar
+	zoomBar: {
+		enabled: false,
+		zoomRatio: 0.4,
+		showToolBar: true
+	} as ZoomBarOptions
 } as AxisChartOptions);
 
 /**
@@ -464,6 +459,11 @@ export const spacers = {
 	default: {
 		size: 24
 	}
+};
+
+export const zoomBar = {
+	height: 32,
+	spacerHeight: 20
 };
 
 export const tickSpaceRatioVertical = 2.5;

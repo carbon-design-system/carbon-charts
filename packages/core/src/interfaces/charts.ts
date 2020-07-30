@@ -1,9 +1,4 @@
-import {
-	GaugeTypes,
-	Statuses,
-	ArrowDirections,
-	Alignments
-} from "./enums";
+import { GaugeTypes, Statuses, ArrowDirections, Alignments } from "./enums";
 import {
 	LegendOptions,
 	TooltipOptions,
@@ -287,7 +282,7 @@ export interface DonutChartOptions extends PieChartOptions {
 
 export interface MeterChartOptions extends BaseChartOptions {
 	meter?: {
-		height?: number,
+		height?: number;
 		title?: {
 			/**
 			 * offsets the percentage value from the title
@@ -297,13 +292,13 @@ export interface MeterChartOptions extends BaseChartOptions {
 				/**
 				 * rendering of the percentage value relative to the dataset within title
 				 */
-				enabled?: boolean
-			}
-		},
+				enabled?: boolean;
+			};
+		};
 		status?: {
 			indicatorSize?: number;
 			paddingLeft?: number;
-		}
+		};
 	};
 }
 

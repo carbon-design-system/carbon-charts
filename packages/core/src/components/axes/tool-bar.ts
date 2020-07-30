@@ -33,7 +33,9 @@ export class ToolBar extends Component {
 
 	overflowMenuIconBottom = 0;
 
-	overflowMenuId = "overflowMenu-" + Math.floor(Math.random() * 99999999999);
+	toolbarId = "toolbar-" + Math.floor(Math.random() * 99999999999);
+
+	backgroundColor: "red";
 
 
 	constructor(model: ChartModel, services: any, configs?: any) {
@@ -161,7 +163,7 @@ export class ToolBar extends Component {
 				self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
 			}
 		});
-		const zoomOutContainer = DOMUtils.appendOrSelect(container, "g.toolbar-zoomOut");
+		const zoomOutContainer = DOMUtils.appendOrSelect(container, "svg.toolbar-zoomOut");
 		const zoomOutGroup = zoomOutContainer.html(this.getZoomOutIcon());
 		const zoomOut = zoomOutGroup.select("rect.icon-zoomOutRect");
 		zoomOut.on("click", function () {
@@ -201,7 +203,7 @@ export class ToolBar extends Component {
 			self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
 		});
 
-		const overflowMenuContainer = DOMUtils.appendOrSelect(container, "g.toolbar-overflow-menu");
+		const overflowMenuContainer = DOMUtils.appendOrSelect(container, "svg.toolbar-overflow-menu");
 		const overflowMenuGroup =  overflowMenuContainer.html(this.getOverflowMenuIcon());
 		const overflowMenu = overflowMenuGroup.select("rect.icon-overflowRect");
 
@@ -235,42 +237,41 @@ export class ToolBar extends Component {
 
 	getZoomInIcon() {
 		return `
-			<?xml version="1.0" encoding="utf-8"?>
-			<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-			<svg version="1.1" id="icon-zoomIn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomInStart}px" y="5px"
-				width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
-				<title>Zoom in</title>
-				<polygon points="9,6 7,6 7,4 6,4 6,6 4,6 4,7 6,7 6,9 7,9 7,7 9,7 "/>
-				<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
-					L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>
-			</svg>
-			<rect class="icon-zoomInRect" x="${this.zoomInStart-5}px" y="0px"/>`;
+			<rect id="${this.toolbarId}_zoomIn" class="icon-zoomInRect" x="${this.zoomInStart-5}px" y="0px"/>
+				<?xml version="1.0" encoding="utf-8"?>
+				<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+				<svg version="1.1" id="icon-zoomIn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomInStart}px" y="5px"
+					width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
+					<polygon points="9,6 7,6 7,4 6,4 6,6 4,6 4,7 6,7 6,9 7,9 7,7 9,7 "/>
+					<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
+						L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>
+				</svg>`;
 	}
 
 	getZoomOutIcon() {
 		return `
+			<rect class="icon-zoomOutRect" x="${this.zoomOutStart-5}px" y="0px"/>
 			<?xml version="1.0" encoding="utf-8"?>
 			<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-			<svg version="1.1" id="icon-zoomOut" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomOutStart}px" y="5px"
+			<svg version="1.1" id="icon-zoomOut" class xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomOutStart}px" y="5px"
 				width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
 				<title>Zoom out</title>
 				<rect class="icon-zoomOut" x="4" y="6" width="5" height="1"/>
 				<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
 					L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>
-			</svg>
-			<rect class="icon-zoomOutRect" x="${this.zoomOutStart-5}px" y="0px"/>`;
+			</svg>`;
 	}
 
 	getOverflowMenuIcon() {
 		return `
+			<rect class="icon-overflowRect" x="${this.overflowMenuStart-5}px" y="0px"/>
 			<svg id="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" x="${this.overflowMenuStart}px" y="5px"
 				width="20" height="20" viewBox="0 0 15 15" aria-hidden="true">
 				<circle cx="8" cy="3" r="1"></circle>
 				<circle cx="8" cy="8" r="1"></circle>
 				<circle cx="8" cy="13" r="1"></circle>
 				<rect class="icon-overflow-menu" width="20" height="20"/>
-			</svg>
-			<rect class="icon-overflowRect" x="${this.overflowMenuStart-5}px" y="0px"/>`;
+			</svg>`;
 	}
 
 	getOverflowMenuHTML() {
