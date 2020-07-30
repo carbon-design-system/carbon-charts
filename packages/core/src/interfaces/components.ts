@@ -114,6 +114,16 @@ export interface StackedBarOptions extends BarOptions {
 }
 
 /**
+ * customize the ZoomBars in a chart
+ */
+export interface ZoomBarsOptions {
+	/**
+	 * currently only the top position is supported
+	 */
+	top?: ZoomBarOptions;
+}
+
+/**
  * customize the ZoomBar component
  */
 export interface ZoomBarOptions {

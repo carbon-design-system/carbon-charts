@@ -24,7 +24,7 @@ import {
 	MeterChartOptions,
 	GaugeTypes,
 	Alignments,
-	ZoomBarOptions
+	ZoomBarsOptions
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
 
@@ -161,7 +161,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 		top: {
 			enabled: false
 		}
-	} as ZoomBarOptions
+	} as ZoomBarsOptions
 } as AxisChartOptions);
 
 /**

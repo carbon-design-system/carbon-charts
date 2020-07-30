@@ -101,8 +101,8 @@ export const zoomBarLineTimeSeriesInitDomainData =
 export const zoomBarLineTimeSeriesInitDomainOptions = addZoomBarToOptions(
 	Object.assign({}, timeSeriesAxisChart.lineTimeSeries15secondsOptions)
 );
-zoomBarLineTimeSeriesInitDomainOptions["title"] += " zoomed domain";
-zoomBarLineTimeSeriesInitDomainOptions.zoomBar.initialZoomDomain = initialZoomDomain;
+zoomBarLineTimeSeriesInitDomainOptions["title"] += " (initial zoomed domain)";
+zoomBarLineTimeSeriesInitDomainOptions.zoomBar.top.initialZoomDomain = initialZoomDomain;
 
 // assume no data set while loading is true
 export const zoomBarSkeletonData = [];
