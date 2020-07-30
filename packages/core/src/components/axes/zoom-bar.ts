@@ -62,6 +62,10 @@ export class ZoomBar extends Component {
 			"loading"
 		);
 
+		const { width } = DOMUtils.getSVGElementSize(this.parent, {
+			useAttrs: true
+		});
+
 		// get axes margins
 		let axesLeftMargin = 0;
 		const axesMargins = this.model.get("axesMargins");
@@ -85,7 +89,7 @@ export class ZoomBar extends Component {
 		const zoomBG = DOMUtils.appendOrSelect(container, "rect.zoom-bg")
 			.attr("x", axesLeftMargin)
 			.attr("y", 0)
-			.attr("width", "100%")
+			.attr("width", width - axesLeftMargin)
 			.attr("height", "100%");
 
 		if (isDataLoading) {
@@ -102,10 +106,6 @@ export class ZoomBar extends Component {
 			const zoomBarData = this.services.zoom.getZoomBarData();
 			this.xScale = mainXScale.copy();
 			this.yScale = mainYScale.copy();
-
-			const { width } = DOMUtils.getSVGElementSize(this.parent, {
-				useAttrs: true
-			});
 
 			const defaultDomain = this.services.zoom.getDefaultZoomBarDomain();
 
