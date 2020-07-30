@@ -266,7 +266,7 @@ export class ToolBar extends Component {
 		// overflow menu icon background left padding is 5px
 		return `
 			<rect class="icon-overflowRect" x="${this.overflowMenuStart-5}px" y="0px"/>
-			<svg id="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" x="${this.overflowMenuStart}px" y="5px"
+			<svg class="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" x="${this.overflowMenuStart}px" y="5px"
 				width="20" height="20" viewBox="0 0 15 15" aria-hidden="true">
 				<circle cx="8" cy="3" r="1"></circle>
 				<circle cx="8" cy="8" r="1"></circle>

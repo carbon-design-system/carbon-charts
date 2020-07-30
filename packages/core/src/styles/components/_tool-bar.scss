@@ -39,7 +39,7 @@ g.#{$prefix}--#{$charts-prefix}--tool-bar {
 		fill-rule: nonzero;
 	}
 
-	svg#toolbar-overflow-menu-icon {
+	svg.toolbar-overflow-menu-icon {
 		fill: $icon-02;
 		cursor: pointer;
 		pointer-events: visible;
