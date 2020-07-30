@@ -7,7 +7,7 @@ export class StackedScatter extends Scatter {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG({ withinChartClip: true });
 
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;

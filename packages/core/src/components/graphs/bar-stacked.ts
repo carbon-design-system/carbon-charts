@@ -28,7 +28,7 @@ export class StackedBar extends Bar {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG({ withinChartClip: true });
 
 		// Chart options mixed with the internal configurations
 		const displayData = this.model.getDisplayData();
@@ -97,6 +97,10 @@ export class StackedBar extends Bar {
 				const y0 = this.services.cartesianScales.getRangeValue(d[0], i);
 				let y1 = this.services.cartesianScales.getRangeValue(d[1], i);
 
+				// don't show if part of bar is out of zoom domain
+				if (this.isOutsideZoomedDomain(x0, x1)) {
+					return;
+				}
 				// Add the divider gap
 				if (
 					Math.abs(y1 - y0) > 0 &&
