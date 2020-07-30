@@ -236,7 +236,9 @@ export class ToolBar extends Component {
 	getZoomInIcon() {
 		// zoom in icon background left padding is 5px
 		return `
-			<rect class="icon-zoomInRect" x="${this.zoomInStart-Configuration.toolBar.iconLeftPadding}px" y="0px"/>
+			<rect class="icon-zoomInRect" 
+			x="${this.zoomInStart-Configuration.toolBar.iconLeftPadding}px" y="0px"
+			width="30px" height="30px"/>
 				<?xml version="1.0" encoding="utf-8"?>
 				<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomInStart}px" y="5px"
@@ -250,7 +252,9 @@ export class ToolBar extends Component {
 	getZoomOutIcon() {
 		// zoom out icon background left padding is 5px
 		return `
-			<rect class="icon-zoomOutRect" x="${this.zoomOutStart-Configuration.toolBar.iconLeftPadding}px" y="0px"/>
+			<rect class="icon-zoomOutRect" 
+			x="${this.zoomOutStart-Configuration.toolBar.iconLeftPadding}px" y="0px"
+			width="30px" height="30px"/>
 			<?xml version="1.0" encoding="utf-8"?>
 			<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 			<svg version="1.1" class="icon-zoomOut" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomOutStart}px" y="5px"
@@ -265,7 +269,9 @@ export class ToolBar extends Component {
 	getOverflowMenuIcon() {
 		// overflow menu icon background left padding is 5px
 		return `
-			<rect class="icon-overflowRect" x="${this.overflowMenuStart-Configuration.toolBar.iconLeftPadding}px" y="0px"/>
+			<rect class="icon-overflowRect" 
+			x="${this.overflowMenuStart-Configuration.toolBar.iconLeftPadding}px" y="0px"
+			width="30px" height="30px"/>
 			<svg class="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" x="${this.overflowMenuStart}px" y="5px"
 				width="20" height="20" viewBox="0 0 15 15" aria-hidden="true">
 				<circle cx="8" cy="3" r="1"></circle>
