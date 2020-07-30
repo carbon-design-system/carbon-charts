@@ -5,8 +5,8 @@ import * as colorPalettes from "./services/colorPalettes";
 import { Events, ScaleTypes } from "./interfaces";
 
 // D3
-import { scaleOrdinal } from "d3-scale";
 import { map } from "d3-collection";
+import { scaleOrdinal } from "d3-scale";
 import { stack } from "d3-shape";
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -95,7 +95,7 @@ export class ChartModel {
 
 		return allDataFromDomain.filter((datum) => {
 			const group = dataGroups.find(
-				(group) => group.name === datum[groupMapsTo]
+				(dataGroup) => dataGroup.name === datum[groupMapsTo]
 			);
 
 			return group.status === ACTIVE;
@@ -267,11 +267,14 @@ export class ChartModel {
 		return this.state.options;
 	}
 
-	set(newState: any, skipUpdate = false) {
+	set(newState: any, configs?: any) {
 		this.state = Object.assign({}, this.state, newState);
-
-		if (!skipUpdate) {
-			this.update();
+		const newConfig = Object.assign(
+			{ skipUpdate: false, animate: true }, // default configs
+			configs
+		);
+		if (!newConfig.skipUpdate) {
+			this.update(newConfig.animate);
 		}
 	}
 
@@ -298,7 +301,7 @@ export class ChartModel {
 	 * Updates miscellanous information within the model
 	 * such as the color scales, or the legend data labels
 	 */
-	update() {
+	update(animate = true) {
 		if (!this.getDisplayData()) {
 			return;
 		}
@@ -306,7 +309,7 @@ export class ChartModel {
 		this.updateAllDataGroups();
 
 		this.setColorScale();
-		this.services.events.dispatchEvent(Events.Model.UPDATE);
+		this.services.events.dispatchEvent(Events.Model.UPDATE, { animate });
 	}
 
 	setUpdateCallback(cb: Function) {

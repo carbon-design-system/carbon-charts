@@ -83,17 +83,28 @@ export class Component {
 		return this.parent;
 	}
 
-	getContainerSVG() {
+	getContainerSVG(configs = { withinChartClip: false }) {
 		if (this.type) {
 			const chartprefix = Tools.getProperty(
 				this.model.getOptions(),
 				"style",
 				"prefix"
 			);
-			return DOMUtils.appendOrSelect(
+
+			const svg = DOMUtils.appendOrSelect(
 				this.parent,
 				`g.${settings.prefix}--${chartprefix}--${this.type}`
 			);
+
+			if (configs.withinChartClip) {
+				// get unique chartClipId int this chart from model
+				const chartClipId = this.model.get("chartClipId");
+				if (chartClipId) {
+					svg.attr("clip-path", `url(#${chartClipId})`);
+				}
+			}
+
+			return svg;
 		}
 
 		return this.parent;
