@@ -819,6 +819,12 @@ let allDemoGroups = [
 				data: zoomBarDemos.zoomBarLineTimeSeriesInitDomainData,
 				chartType: chartTypes.LineChart,
 				isDemoExample: false
+			},
+			{
+				options: zoomBarDemos.zoomBarSkeletonOptions,
+				data: zoomBarDemos.zoomBarSkeletonData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: false
 			}
 		]
 	}
