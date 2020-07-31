@@ -18,6 +18,7 @@ export class Zoom extends Service {
 		const definedZoomBarData = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
+			"top",
 			"data"
 		);
 		// if user already defines zoom bar data, use it

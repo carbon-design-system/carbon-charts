@@ -10,9 +10,12 @@ export class AxisChartsTooltip extends Tooltip {
 			return e.detail.items;
 		}
 
-		const options = this.model.getOptions();
 		const data = e.detail.data;
+		if (!data.length || !data[0]) {
+			return [];
+		}
 
+		const options = this.model.getOptions();
 		const { cartesianScales } = this.services;
 		const domainAxisOptions = cartesianScales.getDomainAxisOptions();
 		const domainIdentifier = cartesianScales.getDomainIdentifier();
@@ -35,6 +38,7 @@ export class AxisChartsTooltip extends Tooltip {
 				domainLabel = "y-value";
 			}
 		}
+
 		let domainValue = data[0][domainIdentifier];
 		if (domainAxisScaleType === ScaleTypes.TIME) {
 			domainValue = format(

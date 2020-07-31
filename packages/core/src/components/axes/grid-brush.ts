@@ -79,7 +79,7 @@ export class ChartBrush extends Component {
 			let zoomDomain = this.model.get("zoomDomain");
 			if (zoomDomain === undefined) {
 				// default to full range with extended domain
-				zoomDomain = this.model.getDefaultZoomBarDomain();
+				zoomDomain = getDefaultZoomBarDomain();
 				if (zoomDomain) {
 					this.model.set(
 					   { zoomDomain: zoomDomain },

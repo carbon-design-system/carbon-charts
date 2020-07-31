@@ -32,26 +32,22 @@ const defaultToolBarOptions = {
 
 // utility function to update title and enable zoomBar option
 const addZoomBarToOptions = (options, includeDefinedZoomBarData = false) => {
-	const def = {
-		left: {
-			enabled: true,
-			type: "slider"
-		}
-	};
-
+	options["experimental"] = true;
 	if (includeDefinedZoomBarData) {
 		options["title"] = options["title"] + " - Defined zoom bar enabled";
 		options["zoomBar"] = {
-			...def,
-			enabled: true,
-			data: definedZoomBarData,
+			top: {
+				enabled: true,
+				data: definedZoomBarData
+			},
 			toolBar: defaultToolBarOptions
 		};
 	} else {
 		options["title"] = options["title"] + " - Zoom bar enabled";
 		options["zoomBar"] = {
-			...def,
-			enabled: true,
+			top: {
+				enabled: true
+			},
 			toolBar: defaultToolBarOptions
 		};
 	}
@@ -113,8 +109,8 @@ export const zoomBarLineTimeSeriesInitDomainData =
 export const zoomBarLineTimeSeriesInitDomainOptions = addZoomBarToOptions(
 	Object.assign({}, timeSeriesAxisChart.lineTimeSeries15secondsOptions)
 );
-zoomBarLineTimeSeriesInitDomainOptions["title"] += " zoomed domain";
-zoomBarLineTimeSeriesInitDomainOptions.zoomBar.initialZoomDomain = initialZoomDomain;
+zoomBarLineTimeSeriesInitDomainOptions["title"] += " (initial zoomed domain)";
+zoomBarLineTimeSeriesInitDomainOptions.zoomBar.top.initialZoomDomain = initialZoomDomain;
 
 // assume no data set while loading is true
 export const zoomBarSkeletonData = [];

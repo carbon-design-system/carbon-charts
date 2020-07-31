@@ -146,7 +146,7 @@ export class ToolBar extends Component {
 				// reset to default full range
 				if ( newDomain[0].valueOf() > newDomain[1].valueOf() || newDomain[0].valueOf() === newDomain[1].valueOf()) {
 					// same as d3 behavior and zoom bar behavior: set to default full range
-					newDomain = self.model.getDefaultZoomBarDomain();
+					newDomain = self.services.zoom.getDefaultZoomBarDomain();
 					startPoint = axesLeftMargin;
 					endPoint = width;
 				}
@@ -175,7 +175,7 @@ export class ToolBar extends Component {
 				}
 				let startPoint = currentSelection[0] - ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
 				let endPoint =  currentSelection[1] + ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
-				zoomDomain = self.model.getDefaultZoomBarDomain();
+				zoomDomain = self.services.zoom.getDefaultZoomBarDomain();
 				xScale.range([axesLeftMargin, width]).domain(zoomDomain);
 
 				let newDomain = [
@@ -186,7 +186,7 @@ export class ToolBar extends Component {
 				// reset to default full range
 				if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
 					// same as d3 behavior and zoom bar behavior: set to default full range
-					newDomain = self.model.getDefaultZoomBarDomain();
+					newDomain = self.services.zoom.getDefaultZoomBarDomain();
 				}
 
 				if (newDomain[0] <= zoomDomain[0]) {
@@ -217,7 +217,7 @@ export class ToolBar extends Component {
 					self.overflowMenuIconBottom = parseFloat(self.parent.node().getAttribute("y")) + this.parentNode.getBBox().height;
 					self.services.events.dispatchEvent(Events.Toolbar.SHOW);
 					document.getElementById("reset-Btn").addEventListener("click", function () {
-						const newDomain = self.model.getDefaultZoomBarDomain();
+						const newDomain = self.services.zoom.getDefaultZoomBarDomain();
 						self.model.set(
 							{ zoomDomain: newDomain, selectionRange: [axesLeftMargin, width] },
 							{ animate: false }

@@ -22,7 +22,7 @@ export class Bar extends Component {
 		return Math.min(options.bars.maxWidth, mainXScale.step() / 2);
 	}
 
-	protected isOutOfZoomDomain(x0: number, x1: number) {
+	protected isOutsideZoomedDomain(x0: number, x1: number) {
 		const dataCount = this.model.getDisplayData().length;
 		// if only one data point, never out of zoom domain
 		// or it becomes a blank chart

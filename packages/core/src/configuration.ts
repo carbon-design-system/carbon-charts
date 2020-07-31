@@ -24,7 +24,7 @@ import {
 	MeterChartOptions,
 	GaugeTypes,
 	Alignments,
-	ZoomBarOptions
+	ZoomBarsOptions
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
 
@@ -158,13 +158,15 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	timeScale,
 	grid,
 	zoomBar: {
-		enabled: false,
+		top: {
+			enabled: false
+		},
 		toolBar: {
 			showToolBar: true,
 			zoomRatio: 0.4,
 			overflowMenuItems: ["Reset zoom"]
 		}
-	} as ZoomBarOptions
+	} as ZoomBarsOptions
 } as AxisChartOptions);
 
 /**

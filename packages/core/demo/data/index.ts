@@ -758,7 +758,7 @@ let allDemoGroups = [
 		]
 	},
 	{
-		title: "Zoom bar",
+		title: "Zoom bar (alpha)",
 		demos: [
 			{
 				options: zoomBarDemos.zoomBarStackedAreaTimeSeriesOptions,

@@ -114,22 +114,17 @@ export interface StackedBarOptions extends BarOptions {
 }
 
 /**
- * customize the ToolBar component
+ * customize the ZoomBars in a chart
  */
-export interface ToolBarOptions {
+export interface ZoomBarsOptions {
 	/**
-	 * a vaiable to handle zoom in ratio
+	 * currently only the top position is supported
 	 */
-	zoomRatio?: number;
+	top?: ZoomBarOptions;
 	/**
-	 * is the tool-bar visible or not
+	 * options related to tool bar above zoom bar
 	 */
-	showToolBar?: boolean;
-	/**
-	 * is the tool-bar visible or not
-	 */
-	overflowMenuItems?: string[];
-
+	toolBar?: ToolBarOptions;
 }
 
 /**
@@ -149,8 +144,23 @@ export interface ZoomBarOptions {
 	 * options related to zoom bar data
 	 */
 	data?: Object[];
+}
+
+/**
+ * customize the ToolBar component
+ */
+export interface ToolBarOptions {
 	/**
-	 * options related to tool bar above zoom bar
+	 * a vaiable to handle zoom in ratio
 	 */
-	toolBar?: ToolBarOptions;
+	zoomRatio?: number;
+	/**
+	 * is the tool-bar visible or not
+	 */
+	showToolBar?: boolean;
+	/**
+	 * is the tool-bar visible or not
+	 */
+	overflowMenuItems?: string[];
+
 }

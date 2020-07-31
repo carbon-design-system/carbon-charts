@@ -37,7 +37,7 @@ export class Scatter extends Component {
 		}
 	}
 
-	filterOutOfDomain(data) {
+	filterBasedOnZoomDomain(data) {
 		const domainIdentifier = this.services.cartesianScales.getDomainIdentifier();
 		const zoomDomain = this.model.get("zoomDomain");
 		if (zoomDomain !== undefined) {
@@ -52,7 +52,7 @@ export class Scatter extends Component {
 
 	render(animate: boolean) {
 		// Grab container SVG
-		const svg = this.getContainerSVG(true);
+		const svg = this.getContainerSVG({ withinChartClip: true });
 
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
@@ -77,8 +77,8 @@ export class Scatter extends Component {
 				);
 		}
 
-		// filter out of domain data
-		scatterData = this.filterOutOfDomain(scatterData);
+		// filter out datapoints that aren't part of the zoomed domain
+		scatterData = this.filterBasedOnZoomDomain(scatterData);
 
 		// Update data on dot groups
 		const circles = svg

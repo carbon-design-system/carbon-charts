@@ -43,6 +43,7 @@ export class ZoomBar extends Component {
 		const initialZoomDomain = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
+			"top",
 			"initialZoomDomain"
 		);
 		if (initialZoomDomain !== null) {
@@ -60,6 +61,10 @@ export class ZoomBar extends Component {
 			"data",
 			"loading"
 		);
+
+		const { width } = DOMUtils.getSVGElementSize(this.parent, {
+			useAttrs: true
+		});
 
 		// get axes margins
 		let axesLeftMargin = 0;
@@ -84,7 +89,7 @@ export class ZoomBar extends Component {
 		const zoomBG = DOMUtils.appendOrSelect(container, "rect.zoom-bg")
 			.attr("x", axesLeftMargin)
 			.attr("y", 0)
-			.attr("width", "100%")
+			.attr("width", width - axesLeftMargin)
 			.attr("height", "100%");
 
 		if (isDataLoading) {
@@ -101,10 +106,6 @@ export class ZoomBar extends Component {
 			const zoomBarData = this.services.zoom.getZoomBarData();
 			this.xScale = mainXScale.copy();
 			this.yScale = mainYScale.copy();
-
-			const { width } = DOMUtils.getSVGElementSize(this.parent, {
-				useAttrs: true
-			});
 
 			const defaultDomain = this.services.zoom.getDefaultZoomBarDomain();
 
@@ -262,10 +263,6 @@ export class ZoomBar extends Component {
 
 	updateBrushHandle(svg, selection, domain) {
 		const self = this;
-		const timeScaleOptions = Tools.getProperty(
-			this.model.getOptions(),
-			"timeScale"
-		);
 		const handleWidth = 5;
 		const handleHeight = Configuration.zoomBar.height;
 		const handleXDiff = -handleWidth / 2;
