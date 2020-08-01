@@ -93,7 +93,7 @@ export class ZoomBar extends Component {
 			.attr("height", "100%");
 
 		if (isDataLoading) {
-			// TODO - zoom bar skeleton could be improved in the future
+			this.renderSkeleton(container, axesLeftMargin, width);
 			return;
 		}
 
@@ -141,15 +141,8 @@ export class ZoomBar extends Component {
 				this.clipId
 			);
 
-			// Draw the zoom base line
-			const baselineGenerator = line()([
-				[axesLeftMargin, Configuration.zoomBar.height],
-				[width, Configuration.zoomBar.height]
-			]);
-			const zoomBaseline = DOMUtils.appendOrSelect(
-				container,
-				"path.zoom-bg-baseline"
-			).attr("d", baselineGenerator);
+			// Draw the zoom bar base line
+			this.renderZoomBarBaseline(container, axesLeftMargin, width);
 
 			// Attach brushing event listeners
 			this.addBrushEventListener(zoomDomain, axesLeftMargin, width);
@@ -167,8 +160,7 @@ export class ZoomBar extends Component {
 				brushArea.call(this.brush.move, this.xScale.range()); // default to full range
 				this.updateBrushHandle(
 					this.getContainerSVG(),
-					this.xScale.range(),
-					this.xScale.domain()
+					this.xScale.range()
 				);
 			} else {
 				const selected = zoomDomain.map((domain) =>
@@ -179,11 +171,7 @@ export class ZoomBar extends Component {
 					// don't update brushHandle to avoid flash
 				} else {
 					brushArea.call(this.brush.move, selected); // set brush to correct position
-					this.updateBrushHandle(
-						this.getContainerSVG(),
-						selected,
-						zoomDomain
-					);
+					this.updateBrushHandle(this.getContainerSVG(), selected);
 				}
 			}
 		}
@@ -225,7 +213,7 @@ export class ZoomBar extends Component {
 		];
 
 		// update brush handle position
-		this.updateBrushHandle(this.getContainerSVG(), selection, newDomain);
+		this.updateBrushHandle(this.getContainerSVG(), selection);
 
 		// be aware that the value of d3.event changes during an event!
 		// update zoomDomain only if the event comes from mouse event
@@ -268,7 +256,12 @@ export class ZoomBar extends Component {
 		}
 	}
 
-	updateBrushHandle(svg, selection, domain) {
+	updateBrushHandle(svg, selection) {
+		const isDataLoading = Tools.getProperty(
+			this.model.getOptions(),
+			"data",
+			"loading"
+		);
 		const self = this;
 		const handleWidth = 5;
 		const handleHeight = Configuration.zoomBar.height;
@@ -304,7 +297,9 @@ export class ZoomBar extends Component {
 			.attr("cursor", "pointer")
 			.style(
 				"display",
-				isNaN(selection[0]) || isNaN(selection[1]) ? "none" : null
+				isDataLoading || isNaN(selection[0]) || isNaN(selection[1])
+					? "none"
+					: null
 			);
 
 		// handle-bar
@@ -334,7 +329,9 @@ export class ZoomBar extends Component {
 			.attr("cursor", "pointer")
 			.style(
 				"display",
-				isNaN(selection[0]) || isNaN(selection[1]) ? "none" : null
+				isDataLoading || isNaN(selection[0]) || isNaN(selection[1])
+					? "none"
+					: null
 			);
 
 		this.updateClipPath(
@@ -402,6 +399,16 @@ export class ZoomBar extends Component {
 			.attr("height", height);
 	}
 
+	renderZoomBarBaseline(container, startX, endX) {
+		const baselineGenerator = line()([
+			[startX, Configuration.zoomBar.height],
+			[endX, Configuration.zoomBar.height]
+		]);
+		DOMUtils.appendOrSelect(container, "path.zoom-bg-baseline").attr(
+			"d",
+			baselineGenerator
+		);
+	}
 	// assume the domains in data are already sorted
 	compensateDataForDefaultDomain(data, defaultDomain) {
 		if (!data || data.length < 2) {
@@ -428,6 +435,27 @@ export class ZoomBar extends Component {
 			newDatum[rangeIdentifier] = 0;
 			data.push(newDatum);
 		}
+	}
+
+	// TODO - zoom bar skeleton could be improved in the future
+	renderSkeleton(container, startX, endX) {
+		// need to clear current zoom bar area
+		this.renderZoomBarArea(
+			container,
+			"path.zoom-graph-area-unselected",
+			[],
+			null
+		);
+		this.renderZoomBarArea(
+			container,
+			"path.zoom-graph-area",
+			[],
+			this.clipId
+		);
+		// hide brush handle
+		this.updateBrushHandle(this.getContainerSVG(), []);
+		// re-render baseline
+		this.renderZoomBarBaseline(container, startX, endX);
 	}
 
 	destroy() {
