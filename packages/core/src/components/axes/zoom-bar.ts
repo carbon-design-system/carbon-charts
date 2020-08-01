@@ -237,7 +237,10 @@ export class ZoomBar extends Component {
 				zoomDomain[0] !== newDomain[0] ||
 				zoomDomain[1] !== newDomain[1]
 			) {
-				this.model.set({ zoomDomain: newDomain, selectionRange: selection }, { animate: false });
+				this.model.set(
+					{ zoomDomain: newDomain, selectionRange: selection },
+					{ animate: false }
+				);
 			}
 
 			// dispatch selection events
@@ -295,7 +298,10 @@ export class ZoomBar extends Component {
 			.attr("width", handleWidth)
 			.attr("height", handleHeight)
 			.attr("cursor", "pointer")
-			.style("display", null); // always display
+			.style(
+				"display",
+				isNaN(selection[0]) || isNaN(selection[1]) ? "none" : null
+			);
 
 		// handle-bar
 		svg.select(this.brushSelector)
@@ -321,7 +327,11 @@ export class ZoomBar extends Component {
 			.attr("y", handleYBarDiff)
 			.attr("width", handleBarWidth)
 			.attr("height", handleBarHeight)
-			.attr("cursor", "pointer");
+			.attr("cursor", "pointer")
+			.style(
+				"display",
+				isNaN(selection[0]) || isNaN(selection[1]) ? "none" : null
+			);
 
 		this.updateClipPath(
 			svg,
