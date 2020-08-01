@@ -16,13 +16,9 @@ module.exports = function (config) {
 			"karma-safari-launcher"
 		],
 		// list of files / patterns to load in the browser
-		files: [
-			"**/*.spec.ts"
-		],
+		files: ["**/*.spec.ts"],
 		// list of files / patterns to exclude
-		exclude: [
-			"node_modules"
-		],
+		exclude: ["node_modules"],
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
@@ -100,4 +96,4 @@ module.exports = function (config) {
 		// how many browser should be started simultaneous
 		concurrency: Infinity
 	});
-}
+};

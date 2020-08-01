@@ -22,6 +22,16 @@ export enum AxisPositions {
 }
 
 /**
+ * enum of all possible truncation types
+ */
+export enum TruncationTypes {
+	END_LINE = "end_line",
+	MID_LINE = "mid_line",
+	FRONT_LINE = "front_line",
+	NONE = "none"
+}
+
+/**
  * enum of all possible cartesian orientations
  * to be used for determining the orientation
  * of graphs being draw over
@@ -30,11 +40,6 @@ export enum AxisPositions {
 export enum CartesianOrientations {
 	VERTICAL = "vertical",
 	HORIZONTAL = "horizontal"
-}
-
-export enum AxisTypes {
-	PRIMARY = "primary",
-	SECONDARY = "secondary"
 }
 
 /**
@@ -57,15 +62,6 @@ export enum TooltipPosition {
 }
 
 /**
- * enum of tooltip types for custom tooltip event
- */
-export enum TooltipTypes {
-	DATAPOINT = "datapoint",
-	GRIDLINE = "gridline",
-	TITLE = "title"
-}
-
-/**
  * enum of all possible legend positions
  */
 export enum LegendPositions {
@@ -73,6 +69,15 @@ export enum LegendPositions {
 	LEFT = "left",
 	TOP = "top",
 	BOTTOM = "bottom"
+}
+
+/**
+ * enum of all possible alignments
+ */
+export enum Alignments {
+	LEFT = "left",
+	CENTER = "center",
+	RIGHT = "right"
 }
 
 /**
@@ -99,7 +104,7 @@ export enum LayoutDirection {
 export enum LayoutGrowth {
 	FIXED = "fixed",
 	PREFERRED = "preferred",
-	STRETCH = "stretch",
+	STRETCH = "stretch"
 }
 
 /**
@@ -108,4 +113,54 @@ export enum LayoutGrowth {
 export enum CalloutDirections {
 	LEFT = "left",
 	RIGHT = "right"
+}
+
+/**
+ * enum of all possible skeleton/empty state types
+ */
+export enum Skeletons {
+	GRID = "grid",
+	VERT_OR_HORIZ = "vertOrHoriz",
+	PIE = "pie",
+	DONUT = "donut"
+}
+
+/**
+ * enum of all possible attributes used to aling text horizontally
+ */
+export enum TextAnchor {
+	START = "start",
+	MIDDLE = "middle",
+	END = "end"
+}
+
+/**
+ * enum of all possible attributes used to aling text vertically
+ */
+export enum DominantBaseline {
+	BASELINE = "baseline",
+	MIDDLE = "middle",
+	HANGING = "hanging"
+}
+
+export enum GaugeTypes {
+	SEMI = "semi",
+	FULL = "full"
+}
+
+/**
+ * enum of all possible callout directions
+ */
+export enum ArrowDirections {
+	UP = "up",
+	DOWN = "down"
+}
+
+/**
+ * enum of carbon statuses
+ */
+export enum Statuses {
+	SUCCESS = "success",
+	WARNING = "warning",
+	DANGER = "danger"
 }

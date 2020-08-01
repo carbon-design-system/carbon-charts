@@ -3,7 +3,11 @@
  */
 export enum Chart {
 	RENDER_FINISHED = "render-finished",
-	RESIZE = "chart-resize"
+	RESIZE = "chart-resize",
+	MOUSEOVER = "chart-mouseover",
+	// MOUSEMOVE = "chart-mousemove",
+	// CLICK = "chart-click",
+	MOUSEOUT = "chart-mouseout"
 }
 
 /**
@@ -11,6 +15,16 @@ export enum Chart {
  */
 export enum Model {
 	UPDATE = "model-update"
+}
+
+/**
+ * enum of all events related to the zoom-bar
+ */
+export enum ZoomBar {
+	UPDATE = "zoom-bar-update",
+	SELECTION_START = "zoom-bar-selection-start",
+	SELECTION_IN_PROGRESS = "zoom-bar-selection-in-progress",
+	SELECTION_END = "zoom-bar-selection-end"
 }
 
 /**
@@ -24,6 +38,16 @@ export enum Axis {
 }
 
 /**
+ * enum of all area graph events
+ */
+export enum Area {
+	AREA_MOUSEOVER = "area-mouseover",
+	AREA_MOUSEMOVE = "area-mousemove",
+	AREA_CLICK = "area-click",
+	AREA_MOUSEOUT = "area-mouseout"
+}
+
+/**
  * enum of all pie graph events
  */
 export enum Pie {
@@ -31,6 +55,16 @@ export enum Pie {
 	SLICE_MOUSEMOVE = "pie-slice-mousemove",
 	SLICE_CLICK = "pie-slice-click",
 	SLICE_MOUSEOUT = "pie-slice-mouseout"
+}
+
+/**
+ * enum of all gauge graph events
+ */
+export enum Gauge {
+	ARC_MOUSEOVER = "gauge-arc-mouseover",
+	ARC_MOUSEMOVE = "gauge-arc-mousemove",
+	ARC_CLICK = "gauge-arc-click",
+	ARC_MOUSEOUT = "gauge-arc-mouseout"
 }
 
 /**
@@ -64,11 +98,30 @@ export enum Line {
 }
 
 /**
+ * enum of all radar graph events
+ */
+export enum Radar {
+	X_AXIS_MOUSEOVER = "radar-x-axis-mouseover",
+	X_AXIS_MOUSEMOVE = "radar-x-axis-mousemove",
+	X_AXIS_CLICK = "radar-x-axis-click",
+	X_AXIS_MOUSEOUT = "radar-x-axis-mouseout"
+}
+
+/**
  * enum of all tooltip events
  */
 export enum Tooltip {
 	SHOW = "show-tooltip",
+	MOVE = "move-tooltip",
 	HIDE = "hide-tooltip"
+}
+
+/**
+ * enum of all threshold events
+ */
+export enum Threshold {
+	SHOW = "show-threshold",
+	HIDE = "hide-threshold"
 }
 
 /**

@@ -6,7 +6,7 @@ import json from "@rollup/plugin-json";
 
 export default {
 	input: "./src/index.ts",
-	output:	{
+	output: {
 		file: `./dist/bundle.js`,
 		format: "umd",
 		name: "Charts",
@@ -35,8 +35,10 @@ export default {
 	],
 	onwarn(warning, next) {
 		// logs the circular dependencies inside the d3 codebase
-		if (warning.code === "CIRCULAR_DEPENDENCY" &&
-			warning.importer.indexOf("d3") !== -1) {
+		if (
+			warning.code === "CIRCULAR_DEPENDENCY" &&
+			warning.importer.indexOf("d3") !== -1
+		) {
 			console.warn(
 				"Circular dependency found in D3:",
 				warning.toString().replace("Circular dependency:", "")

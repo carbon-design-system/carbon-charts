@@ -9,7 +9,10 @@ import { groupedBarData, groupedBarOptions } from "../../demo/data";
 
 export const data = groupedBarData as ChartData;
 export const options = Object.assign(groupedBarOptions, {
-	title: "My chart"
+	title: "My chart",
+	data: {
+		selectedGroups: ["Dataset 1", "Dataset 3"]
+	}
 }) as any;
 
 export class TestEnvironment {
@@ -20,13 +23,10 @@ export class TestEnvironment {
 	render() {
 		const holder = createChartHolder("scatter");
 
-		this.chart = new Charts.ScatterChart(
-			holder,
-			{
-				data: this.chartData,
-				options: this.chartOptions
-			}
-		);
+		this.chart = new Charts.ScatterChart(holder, {
+			data: this.chartData,
+			options: this.chartOptions
+		});
 	}
 
 	destroy() {

@@ -1,15 +1,43 @@
-export const pieData = {
-	labels: ["2V2N 9KYPM version 1", "L22I P66EP L22I P66EP L22I P66EP", "JQAI 2M4L1", "J9DZ F37AP",
-		"YEL48 Q6XK YEL48", "P66EP L22I L22I"],
-	datasets: [
-		{
-			label: "Dataset 1",
-			data: [20000, 65000, 75000, 1200, 10000, 25000]
-		}
-	]
-};
+export const pieData = [
+	{ group: "2V2N 9KYPM version 1", value: 20000 },
+	{ group: "L22I P66EP L22I P66EP L22I P66EP", value: 65000 },
+	{ group: "JQAI 2M4L1", value: 75000 },
+	{ group: "J9DZ F37AP", value: 1200 },
+	{ group: "YEL48 Q6XK YEL48", value: 10000 },
+	{ group: "Misc", value: 25000 }
+];
 
 export const pieOptions = {
 	title: "Pie",
 	resizable: true
+};
+
+export const pieCenteredData = pieData;
+
+export const pieCenteredOptions = {
+	title: "Pie (centered)",
+	resizable: true,
+	legend: {
+		alignment: "center"
+	},
+	pie: {
+		alignment: "center"
+	}
+};
+
+// pie - empty state
+export const pieEmptyStateData = [];
+export const pieEmptyStateOptions = {
+	title: "Pie (empty state)",
+	resizable: true
+};
+
+// pie - skeleton
+export const pieSkeletonData = [];
+export const pieSkeletonOptions = {
+	title: "Pie (skeleton)",
+	resizable: true,
+	data: {
+		loading: true
+	}
 };

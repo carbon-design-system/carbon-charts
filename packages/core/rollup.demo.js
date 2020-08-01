@@ -23,16 +23,13 @@ export default {
 			"d3-hierarchy": "d3Hierarchy"
 		}
 	},
-	plugins: [
-		resolve(),
-		commonjs(),
-		json(),
-		terser()
-	],
+	plugins: [resolve(), commonjs(), json(), terser()],
 	onwarn(warning, next) {
 		// logs the circular dependencies inside the d3 codebase
-		if (warning.code === "CIRCULAR_DEPENDENCY" &&
-			warning.importer.indexOf("d3") !== -1) {
+		if (
+			warning.code === "CIRCULAR_DEPENDENCY" &&
+			warning.importer.indexOf("d3") !== -1
+		) {
 			console.warn(
 				"Circular dependency found in D3:",
 				warning.toString().replace("Circular dependency:", "")

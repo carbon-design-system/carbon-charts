@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-vue",
-	"version": "0.30.7",
+	"version": "0.34.8",
 	"description": "Carbon charting components for Vue",
 	"main": "charts-vue.umd.min.js",
 	"scripts": {
@@ -14,7 +14,7 @@
 		"clean": "rm -rf dist demo/bundle"
 	},
 	"dependencies": {
-		"@carbon/charts": "^0.30.7",
+		"@carbon/charts": "^0.34.8",
 		"vue": "2.5.21"
 	},
 	"devDependencies": {
@@ -80,7 +80,8 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/carbon-charts.git"
+		"url": "git@github.com:carbon-design-system/carbon-charts.git",
+		"homepage": "https://carbon-design-system.github.io/carbon-charts/vue/"
 	},
 	"license": "Apache-2.0",
 	"author": "IBM",

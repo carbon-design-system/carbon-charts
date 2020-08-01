@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "0.30.7",
+	"version": "0.34.8",
 	"description": "Carbon charting components",
 	"main": "./bundle.js",
 	"module": "./index.js",
@@ -14,12 +14,14 @@
 		"test": "karma start --single-run",
 		"test:watch": "karma start --no-single-run",
 		"clean": "rm -rf dist demo/bundle",
+		"format": "prettier . --write \"**/*.{scss,css,js,ts,md}\"",
 		"start": "yarn run storybook",
 		"storybook": "start-storybook -p 9006 -c .storybook -s ./.storybook/assets"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:IBM/carbon-charts.git"
+		"url": "git@github.com:carbon-design-system/carbon-charts.git",
+		"homepage": "https://carbon-design-system.github.io/carbon-charts/"
 	},
 	"keywords": [
 		"carbon",
@@ -85,6 +87,7 @@
 		"extract-text-webpack-plugin": "3.0.2",
 		"file-loader": "1.1.5",
 		"fork-ts-checker-webpack-plugin": "^4.0.5",
+		"highlight.js": "9.18.1",
 		"html-loader": "0.5.1",
 		"html-webpack-exclude-assets-plugin": "0.0.7",
 		"html-webpack-plugin": "3.2.0",
@@ -96,7 +99,9 @@
 		"karma-safari-launcher": "1.0.0",
 		"karma-webpack": "4.0.2",
 		"lerna": "3.13.4",
+		"marked": "0.8.2",
 		"mini-css-extract-plugin": "0.9.0",
+		"prettier": "2.0.5",
 		"raw-loader": "0.5.1",
 		"react-docgen-typescript-loader": "^3.6.0",
 		"rollup": "1.27.10",
@@ -114,7 +119,7 @@
 		"typescript": "3.7.5",
 		"url-loader": "0.6.2",
 		"webpack": "4.41.0",
-		"webpack-cli": "3.3.9",
+		"webpack-cli": "3.3.11",
 		"webpack-dev-server": "3.7.0"
 	},
 	"publishConfig": {

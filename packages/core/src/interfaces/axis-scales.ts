@@ -1,6 +1,8 @@
 import { ScaleTypes } from "./enums";
 import { AxisDomain } from "d3";
 import { Locale } from "date-fns";
+import { ThresholdOptions } from "./components";
+import { TruncationOptions } from "./truncation";
 
 /**
  * options to configure a scale. not all options are used by all scales
@@ -11,39 +13,46 @@ export interface AxisOptions {
 	 */
 	scaleType?: ScaleTypes;
 	/**
-	 * Whether the Axis should be used as the domain
-	 * axis of the chart. In the case of Cartesian Scales
-	 * you would expect to only have 1 axis (dimension) being used as domain
-	 * Domain usually represents labels, ordinal values, time intervals etc.
+	 * option for stacked axis
 	 */
-	useAsGraphDomain?: boolean;
+	stacked?: boolean;
 	/**
-	 * Whether the Axis should be used as the range
-	 * axis of the chart. In the case of Cartesian Scales
-	 * you would expect to only have 1 axis (dimension) being used as range
-	 * Range usually follows a linear scale
+	 * option for percentage axis scale
 	 */
-	useAsGraphRange?: boolean;
+	percentage?: boolean;
 	/**
 	 * Whether the Axis should use the specified domain
 	 * instead of it being dynamically generated based on data extents.
 	 * The type of values should depend on the scale type.
 	 * Example for continuous axis scale: [-100, 100]
 	 * Example for discrete axis scale: ['Qty', 'More', 'Sold']
+	 * No need to define domain for percentage axis scale
 	 */
 	domain?: AxisDomain[];
-	primary?: boolean;
-	secondary?: boolean;
 	/**
-	* Whether the Axis should be forced to include 0 as a starting point
-	* (or ending point, in case of all negative axis).
-	* Default: true
-	*/
+	 * Whether the Axis should be forced to include 0 as a starting point
+	 * (or ending point, in case of all negative axis).
+	 * Default: true
+	 */
 	includeZero?: boolean;
+	/**
+	 * identifies what key within the data the axis values would map to
+	 */
+	mapsTo?: string;
 	/**
 	 * optional title for the scales
 	 */
 	title?: string;
+	/**
+	 * thresholds
+	 * Example:
+	 * [
+	 *		{value: 10000},
+	 *		{value: 40020, valueFormatter: (x) => x},
+	 *		{value: 55000, label: "Custom label", fillColor: "#03a9f4"},
+	 * ]
+	 */
+	thresholds?: ThresholdOptions[];
 	/**
 	 * tick configuration
 	 */
@@ -69,7 +78,12 @@ export interface AxisOptions {
 		 * function to format the ticks
 		 */
 		formatter?: Function;
+		/**
+		 * optional custom array of tick values that is within the domain of data
+		 */
+		values?: any[];
 	};
+	truncation?: TruncationOptions;
 }
 
 /**
@@ -102,17 +116,16 @@ export interface TickFormats {
 	secondary?: string;
 }
 
-
 export interface TimeIntervalFormats {
 	"15seconds"?: TickFormats;
-	"minute"?: TickFormats;
+	minute?: TickFormats;
 	"30minutes"?: TickFormats;
-	"hourly"?: TickFormats;
-	"daily"?: TickFormats;
-	"weekly"?: TickFormats;
-	"monthly"?: TickFormats;
-	"quarterly"?: TickFormats;
-	"yearly"?: TickFormats;
+	hourly?: TickFormats;
+	daily?: TickFormats;
+	weekly?: TickFormats;
+	monthly?: TickFormats;
+	quarterly?: TickFormats;
+	yearly?: TickFormats;
 }
 
 /**

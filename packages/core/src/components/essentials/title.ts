@@ -1,71 +1,100 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { TooltipTypes, Events } from "./../../interfaces";
+import { Events } from "./../../interfaces";
 
 export class Title extends Component {
 	type = "title";
 
+	render() {
+		const svg = this.getContainerSVG();
+
+		const text = svg
+			.selectAll("text.title")
+			.data([this.model.getOptions().title]);
+
+		text.enter()
+			.append("text")
+			.classed("title", true)
+			.merge(text)
+			.attr("x", 0)
+			.attr("y", "1em")
+			.html((d) => d);
+
+		// check the max space the title has to render
+		const maxWidth = this.getMaxTitleWidth();
+		const title = DOMUtils.appendOrSelect(svg, "text.title");
+
+		// check if title needs truncation (and tooltip support)
+		if (title.node().getComputedTextLength() > maxWidth && maxWidth > 0) {
+			this.truncateTitle(title, maxWidth);
+		}
+		text.exit().remove();
+	}
+
 	/**
 	 * Truncates title creating ellipses and attaching tooltip for exposing full title.
 	 */
-	truncateTitle() {
-		// get a reference to the title elements to calculate the size the title can be
-		const containerWidth = DOMUtils.getSVGElementSize(this.services.domUtils.getMainSVG(), { useAttr: true }).width;
-		const title = DOMUtils.appendOrSelect(this.parent, "text.title");
-
+	truncateTitle(title, maxWidth) {
 		// sanity check to prevent stack overflow on binary search
-		if (containerWidth <= 0) {
+		if (maxWidth <= 0) {
 			return;
 		}
 
+		const untruncatedTitle = title.text();
 		// check if the title is too big for the containing svg
-		if (title.node().getComputedTextLength() > containerWidth) {
+		if (title.node().getComputedTextLength() > maxWidth) {
 			// append the ellipses to their own tspan to calculate the text length
-			title.append("tspan")
-				.text("...");
+			title.append("tspan").text("...");
 
 			// get the bounding width including the elipses '...'
-			const tspanLength = DOMUtils.appendOrSelect(title, "tspan").node().getComputedTextLength();
-			const truncatedSize = Math.floor(containerWidth - tspanLength);
-			const titleString = this.model.getOptions().title;
+			const tspanLength = DOMUtils.appendOrSelect(title, "tspan")
+				.node()
+				.getComputedTextLength();
+
+			// with elipses
+			const titleString = title.text();
 
 			// get the index for creating the max length substring that fit within the svg
 			// use one less than the index to avoid crowding (the elipsis)
-			const substringIndex = this.getSubstringIndex(title.node(), 0, titleString.length - 1, truncatedSize);
+			const substringIndex = this.getSubstringIndex(
+				title.node(),
+				0,
+				titleString.length - 1,
+				maxWidth - tspanLength
+			);
 
 			// use the substring as the title
-			title.text(titleString.substring(0, substringIndex - 1))
+			title
+				.html(titleString.substring(0, substringIndex - 1))
 				.append("tspan")
 				.text("...");
 
 			// add events for displaying the tooltip with the title
 			const self = this;
 			title
-				.on("mouseenter", function() {
+				.on("mouseover", function () {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						hoveredElement: title,
-						type: TooltipTypes.TITLE
+						content: untruncatedTitle
 					});
 				})
-				.on("mouseout", function() {
-					self.services.events.dispatchEvent(Events.Tooltip.HIDE, {
-						hoveredElement: title
-					});
+				.on("mousemove", function () {
+					self.services.events.dispatchEvent(Events.Tooltip.MOVE);
+				})
+				.on("mouseout", function () {
+					self.services.events.dispatchEvent(Events.Tooltip.HIDE);
 				});
 		}
 	}
 
-	render() {
-		const svg = this.getContainerSVG();
-
-		const text = DOMUtils.appendOrSelect(svg, "text.title");
-		text.attr("x", 0)
-			.attr("y", 20)
-			.text(this.model.getOptions().title);
-
-		// title needs to first render so that we can check for overflow
-		this.truncateTitle();
+	// computes the maximum space a title can take
+	protected getMaxTitleWidth() {
+		const containerWidth = DOMUtils.getSVGElementSize(
+			this.services.domUtils.getMainSVG(),
+			{ useAttr: true }
+		).width;
+		return containerWidth;
 	}
 
 	/**

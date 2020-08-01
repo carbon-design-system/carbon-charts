@@ -1,10 +1,22 @@
-import { LegendOptions, TooltipOptions, GridOptions, AxesOptions } from "./index";
-import { AxisTooltipOptions, BarTooltipOptions, BarOptions, StackedBarOptions } from "./components";
+import { GaugeTypes, Statuses, ArrowDirections, Alignments } from "./enums";
+import {
+	LegendOptions,
+	TooltipOptions,
+	GridOptions,
+	AxesOptions,
+	ZoomBarsOptions
+} from "./index";
+import { BarOptions, StackedBarOptions } from "./components";
+import { TimeScaleOptions } from "./axis-scales";
 
 /**
  * Base chart options common to any chart
  */
 export interface BaseChartOptions {
+	/**
+	 * Optionally specify a title for the chart
+	 */
+	title?: string;
 	/**
 	 * boolean to disable animations (enabled by default)
 	 */
@@ -32,15 +44,30 @@ export interface BaseChartOptions {
 	/**
 	 * Optional function to determine whether is filled based on datasetLabel, label, and/or data
 	 */
-	getIsFilled?: (datasetLabel: any, label?: any, data?: any, defaultFilled?: boolean) => boolean;
+	getIsFilled?: (
+		datasetLabel: any,
+		label?: any,
+		data?: any,
+		defaultFilled?: boolean
+	) => boolean;
 	/**
 	 * Optional function to generate the fill color based on datasetLabel, label, and/or data
 	 */
-	getFillColor?: (datasetLabel: any, label?: any, data?: any, defaultFillColor?: string) => string;
+	getFillColor?: (
+		datasetLabel: any,
+		label?: any,
+		data?: any,
+		defaultFillColor?: string
+	) => string;
 	/**
 	 * Optional function to generate the stroke color based on datasetLabel, label, and/or data
 	 */
-	getStrokeColor?: (datasetLabel: any, label?: any, data?: any, defaultStrokeColor?: string) => string;
+	getStrokeColor?: (
+		datasetLabel: any,
+		label?: any,
+		data?: any,
+		defaultStrokeColor?: string
+	) => string;
 	/**
 	 * stylesheet options
 	 */
@@ -48,7 +75,34 @@ export interface BaseChartOptions {
 		/**
 		 * optional prefixing string for css classes (defaults to 'cc')
 		 */
-		prefix?: String;
+		prefix?: string;
+	};
+	/**
+	 * options related to charting data
+	 */
+	data?: {
+		/**
+		 * identifier for data groups
+		 */
+		groupMapsTo?: string;
+		/**
+		 * used to simulate data loading
+		 */
+		loading?: Boolean;
+		/**
+		 * options related to pre-selected data groups
+		 * Remains empty if every legend item is active or dataset doesn't have the data groups.
+		 */
+		selectedGroups?: string[];
+	};
+	/**
+	 * options related to color scales
+	 */
+	color?: {
+		/**
+		 * e.g. { "Dataset 1": "blue" }
+		 */
+		scale?: object;
 	};
 }
 
@@ -58,7 +112,11 @@ export interface BaseChartOptions {
 export interface AxisChartOptions extends BaseChartOptions {
 	axes?: AxesOptions;
 	grid?: GridOptions;
-	tooltip?: AxisTooltipOptions;
+	timeScale?: TimeScaleOptions;
+	/**
+	 * zoombar configuration
+	 */
+	zoomBar?: ZoomBarsOptions;
 }
 
 /**
@@ -73,7 +131,6 @@ export interface ZoomableChartOptions extends BaseChartOptions {
  */
 export interface BarChartOptions extends AxisChartOptions {
 	bars?: BarOptions;
-	tooltip?: BarTooltipOptions;
 }
 
 /**
@@ -96,6 +153,7 @@ export interface ScatterChartOptions extends AxisChartOptions {
 		 */
 		radius: number;
 		fillOpacity?: number;
+		filled?: boolean;
 	};
 }
 
@@ -107,6 +165,10 @@ export interface BubbleChartOptions extends AxisChartOptions {
 	 * options for the individual bubbles
 	 */
 	bubble?: {
+		/**
+		 * the key to lookup in charting data for the bubble radius value
+		 */
+		radiusMapsTo?: string;
 		/**
 		 * A function that would determine the range of the bubble radius to use
 		 * Returns an array with the 1st value being the min and the 2nd value being the max radius
@@ -126,9 +188,39 @@ export interface LineChartOptions extends ScatterChartOptions {
 	/**
 	 * options for the curve of the line
 	 */
-	curve?: string | {
-		name: string;
-	};
+	curve?:
+		| string
+		| {
+				name: string;
+		  };
+}
+
+/**
+ * options specific to area charts
+ */
+export interface AreaChartOptions extends AxisChartOptions {
+	/**
+	 * options for the curve of the line
+	 */
+	curve?:
+		| string
+		| {
+				name: string;
+		  };
+}
+
+/**
+ * options specific to area charts
+ */
+export interface StackedAreaChartOptions extends ScatterChartOptions {
+	/**
+	 * options for the curve of the line
+	 */
+	curve?:
+		| string
+		| {
+				name: string;
+		  };
 }
 
 /**
@@ -147,14 +239,15 @@ export interface PieChartOptions extends BaseChartOptions {
 		yOffsetCallout?: number;
 		callout?: {
 			minSliceDegree?: number;
-			offsetX?: number,
+			offsetX?: number;
 			offsetY?: number;
 			horizontalLineLength?: number;
 			textMargin?: number;
-		},
+		};
 		labels?: {
 			formatter?: Function;
-		}
+		};
+		alignment?: Alignments;
 	};
 }
 
@@ -164,11 +257,58 @@ export interface PieChartOptions extends BaseChartOptions {
 export interface DonutChartOptions extends PieChartOptions {
 	donut?: {
 		center?: {
+			label?: string;
 			numberFontSize?: Function;
 			titleFontSize?: Function;
 			titleYPosition?: Function;
 			numberFormatter?: Function;
 		};
+		alignment?: Alignments;
+	};
+}
+
+export interface MeterChartOptions extends BaseChartOptions {
+	meter?: {
+		height?: number;
+		title?: {
+			/**
+			 * offsets the percentage value from the title
+			 */
+			paddingRight?: number;
+			percentageIndicator?: {
+				/**
+				 * rendering of the percentage value relative to the dataset within title
+				 */
+				enabled?: boolean;
+			};
+		};
+		status?: {
+			indicatorSize?: number;
+			paddingLeft?: number;
+		};
+	};
+}
+
+/**
+ * options specific to radar charts
+ */
+export interface RadarChartOptions extends BaseChartOptions {
+	radar?: {
+		opacity: {
+			unselected: number;
+			selected: number;
+		};
+		axes: {
+			angle: string;
+			value: string;
+		};
+		xLabelPadding: number;
+		yLabelPadding: number;
+		yTicksNumber: number;
+		minRange: number;
+		xAxisRectHeight: number;
+		dotsRadius: number;
+		alignment?: Alignments;
 	};
 }
 

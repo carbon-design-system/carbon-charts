@@ -38,18 +38,16 @@ describe("Tools.getProperty", () => {
 	});
 });
 
-
 describe("Tools.mergeDefaultChartOptions", () => {
 	it("it merges default chart configuration with provided ones, with special cases for axes", () => {
 		const providedOptions = {
 			title: "Title",
 			axes: {
 				bottom: {
-					title: "Title",
-					secondary: true
+					title: "Title"
 				},
 				left: {
-					primary: true
+					scaleType: "time"
 				}
 			}
 		};
@@ -80,11 +78,12 @@ describe("Tools.mergeDefaultChartOptions", () => {
 				bottom: {
 					includeZero: true,
 					title: "Title",
-					secondary: true
+					mapsTo: "value"
 				},
 				left: {
 					includeZero: true,
-					primary: true
+					scaleType: "time",
+					mapsTo: "date"
 				}
 			},
 			timeScale: {
@@ -92,6 +91,8 @@ describe("Tools.mergeDefaultChartOptions", () => {
 			}
 		};
 
-		expect(Tools.mergeDefaultChartOptions(defaultOptions, providedOptions)).toEqual(expectedMerge);
+		expect(
+			Tools.mergeDefaultChartOptions(defaultOptions, providedOptions)
+		).toEqual(expectedMerge);
 	});
 });

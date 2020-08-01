@@ -9,7 +9,6 @@ import { select } from "d3-selection";
 // import the settings for the css prefix
 import settings from "carbon-components/es/globals/js/settings";
 
-
 export class Component {
 	public type: string;
 
@@ -30,21 +29,17 @@ export class Component {
 
 		// Set parent element to shell SVG if no parent exists for component
 		if (!this.parent) {
-			this.setParent(
-				select(this.services.domUtils.getMainSVG())
-			);
+			this.setParent(select(this.services.domUtils.getMainSVG()));
 		}
 	}
 
-	init() {
-	}
+	init() {}
 
 	render(animate = true) {
 		console.error("render() method is not implemented");
 	}
 
-	destroy() {
-	}
+	destroy() {}
 
 	// Used to pass down information to the components
 	setModel(newObj) {
@@ -65,11 +60,21 @@ export class Component {
 		}
 
 		if (this.type) {
-			const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
-			this.parent.classed(`${settings.prefix}--${chartprefix}--${this.type}`, true);
+			const chartprefix = Tools.getProperty(
+				this.model.getOptions(),
+				"style",
+				"prefix"
+			);
+			this.parent.classed(
+				`${settings.prefix}--${chartprefix}--${this.type}`,
+				true
+			);
 
 			if (oldParent) {
-				oldParent.classed(`${settings.prefix}--${chartprefix}--${this.type}`, false);
+				oldParent.classed(
+					`${settings.prefix}--${chartprefix}--${this.type}`,
+					false
+				);
 			}
 		}
 	}
@@ -78,10 +83,28 @@ export class Component {
 		return this.parent;
 	}
 
-	getContainerSVG() {
+	getContainerSVG(configs = { withinChartClip: false }) {
 		if (this.type) {
-			const chartprefix = Tools.getProperty(this.model.getOptions(), "style", "prefix");
-			return DOMUtils.appendOrSelect(this.parent, `g.${settings.prefix}--${chartprefix}--${this.type}`);
+			const chartprefix = Tools.getProperty(
+				this.model.getOptions(),
+				"style",
+				"prefix"
+			);
+
+			const svg = DOMUtils.appendOrSelect(
+				this.parent,
+				`g.${settings.prefix}--${chartprefix}--${this.type}`
+			);
+
+			if (configs.withinChartClip) {
+				// get unique chartClipId int this chart from model
+				const chartClipId = this.model.get("chartClipId");
+				if (chartClipId) {
+					svg.attr("clip-path", `url(#${chartClipId})`);
+				}
+			}
+
+			return svg;
 		}
 
 		return this.parent;
