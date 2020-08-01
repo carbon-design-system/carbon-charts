@@ -54,6 +54,9 @@ export class Zoom extends Service {
 
 	getDefaultZoomBarDomain() {
 		const zoomBarData = this.services.zoom.getZoomBarData();
+		if (!zoomBarData || zoomBarData.length === 0) {
+			return undefined;
+		}
 		const { cartesianScales } = this.services;
 		const mainXAxisPosition = cartesianScales.getMainXAxisPosition();
 		const domainIdentifier = cartesianScales.getDomainIdentifier();
