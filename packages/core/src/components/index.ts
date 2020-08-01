@@ -16,6 +16,8 @@ export * from "./graphs/line";
 export * from "./graphs/scatter";
 export * from "./graphs/pie";
 export * from "./graphs/donut";
+// Advanced charts graphs
+export * from "./graphs/network";
 
 // Layout
 export * from "./layout/spacer";

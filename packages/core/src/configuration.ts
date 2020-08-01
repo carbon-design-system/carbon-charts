@@ -9,6 +9,7 @@ import {
 	PieChartOptions,
 	DonutChartOptions,
 	BubbleChartOptions,
+	ZoomableChartOptions,
 	// Components
 	GridOptions,
 	AxesOptions,
@@ -18,7 +19,9 @@ import {
 	BarTooltipOptions,
 	LegendOptions,
 	LegendPositions,
-	StackedBarOptions
+	StackedBarOptions,
+	// Advanced Charts
+	NetworkChartOptions,
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
 
@@ -68,7 +71,7 @@ export const grid: GridOptions = {
 export const baseTooltip: TooltipOptions = {
 	datapoint: {
 		horizontalOffset: 10,
-		enabled: true
+		enabled: true,
 	},
 	title: {
 		verticalOffset: .75,
@@ -150,6 +153,13 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	grid,
 	tooltip: axisChartTooltip
 } as AxisChartOptions);
+
+/**
+ * Options common to any chart with an axis
+ */
+const zoomableChart: ZoomableChartOptions = Tools.merge({}, chart, {
+	initialZoom: 1
+} as ZoomableChartOptions);
 
 /**
  * options specific to simple bar charts
@@ -267,6 +277,13 @@ const donutChart: DonutChartOptions = Tools.merge({}, pieChart, {
 	}
 } as DonutChartOptions);
 
+/**
+ * options specific to donut charts
+ */
+const networkChart: NetworkChartOptions = Tools.merge({}, pieChart, {
+	collapsed: false
+} as NetworkChartOptions);
+
 export const options = {
 	chart,
 	axisChart,
@@ -277,7 +294,10 @@ export const options = {
 	lineChart,
 	scatterChart,
 	pieChart,
-	donutChart
+	donutChart,
+	// Advanced Charts
+	networkChart,
+	zoomableChart
 };
 
 /**

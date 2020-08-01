@@ -1,0 +1,33 @@
+@import '../../vendor/carbon-components/scss/globals/scss/vars';
+@import '../../vendor/@carbon/themes/scss/tokens';
+@import '../../vendor/carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+
+@include exports('network-link') {
+	.#{$prefix}--network-link__line {
+		stroke: $ui_04;
+		stroke-width: carbon--mini-units(0.1875);
+		fill: none;
+	}
+
+	.#{$prefix}--network-link__marker {
+		fill: $ui_04;
+	}
+
+	// Line kind modifier
+	.#{$prefix}--network-link__line--warning {
+		stroke: $support_03;
+	}
+
+	.#{$prefix}--network-link__line--error {
+		stroke: $support_01;
+	}
+
+	// Marker kind modifier
+	.#{$prefix}--network-link__marker--warning {
+		fill: $support_03;
+	}
+
+	.#{$prefix}--network-link__marker--error {
+		fill: $support_01;
+	}
+}

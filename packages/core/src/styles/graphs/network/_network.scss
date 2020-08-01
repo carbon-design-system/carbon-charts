@@ -1,0 +1,8 @@
+@import '../../vendor/carbon-components/scss/globals/scss/vars';
+@import '../../vendor/carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+
+@include exports('network') {
+	.#{$prefix}--network__background {
+		fill: transparent;
+	}
+}

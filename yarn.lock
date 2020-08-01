@@ -1125,6 +1125,16 @@
     "@carbon/import-once" "^10.3.0"
     "@carbon/layout" "^10.8.1"
 
+"@carbon/icon-helpers@^10.5.0":
+  version "10.6.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.6.0.tgz#72a5bbd1edbee3728e47fa6d17c2aca67dbb101c"
+  integrity sha512-4Nh6l+B8SRNyw1RpgNT4Z83Aa5UwRFmKJ2mx5m7mE5TqxPkfIZjyyLHyv5gl3gPtaVwq78ZGz80wG0NRQzRM7g==
+
+"@carbon/icons@^10.8.0":
+  version "10.9.3"
+  resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-10.9.3.tgz#1e6f9cf705251964fa948f047bfe70f38c1312f2"
+  integrity sha512-BMgK8OYq/yh2h5RpfrzzMNoNkX6Nul0nfYEQX8OfLqhiRCcA3Dx1SEqfm7dQj1Cz7ndQdfqp3DT+xDHTNIodoQ==
+
 "@carbon/icons@^10.9.1":
   version "10.9.1"
   resolved "https://registry.yarnpkg.com/@carbon/icons/-/icons-10.9.1.tgz#e032eb480bc7a432925000944c55960e80caeee6"

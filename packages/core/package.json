@@ -46,6 +46,8 @@
 	"author": "IBM",
 	"license": "Apache-2.0",
 	"dependencies": {
+		"@carbon/icon-helpers": "^10.5.0",
+		"@carbon/icons": "^10.8.0",
 		"@carbon/colors": "10.4.0",
 		"@carbon/utils-position": "1.1.1",
 		"date-fns": "2.8.1",
