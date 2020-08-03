@@ -48,6 +48,7 @@ export class ToolBar extends Component {
 			"style",
 			"prefix"
 		);
+
 		this.overflowMenuOptions = DOMUtils.appendOrSelect(
 			holder,
 			`div.${settings.prefix}--${chartprefix}--overflowMenu`
@@ -88,7 +89,7 @@ export class ToolBar extends Component {
 			useAttrs: true
 		});
 		// get current zoomDomain
-		let zoomDomain = this.model.get("zoomDomain");
+		const zoomDomain = this.model.get("zoomDomain");
 		if (!isDataLoading && zoomDomain === undefined) {
 			// do nothing, initialization not completed yet
 			// don't update brushHandle to avoid flash
@@ -121,47 +122,17 @@ export class ToolBar extends Component {
 			.attr("height", isDataLoading? 30 : Configuration.toolBar.spacerHeight)
 			.attr("opacity", 1)
 			.attr("fill", "none");
-			
-		if(!isDataLoading) {
+
+		if (!isDataLoading) {
 
 			const self = this;
 
 			// zoom in icon and event
 			const zoomInContainer = DOMUtils.appendOrSelect(container, "svg.toolbar-zoomIn");
 			zoomInContainer.html(this.getZoomInIcon());
-			
-			zoomInContainer.on("click", function () {
-				let selectionRange = self.model.get("selectionRange");
-				if (!selectionRange) {
-					selectionRange = [axesLeftMargin, width];
-				}
-				xScale.range([axesLeftMargin, width]).domain(zoomDomain);
-				let startPoint = selectionRange[0] + ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
-				let endPoint = selectionRange[1] - ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
-				let newDomain = [
-					xScale.invert(startPoint),
-					xScale.invert(endPoint)
-				];
-				// if selected start time and end time are the same
-				// reset to default full range
-				if ( newDomain[0].valueOf() > newDomain[1].valueOf() || newDomain[0].valueOf() === newDomain[1].valueOf()) {
-					// same as d3 behavior and zoom bar behavior: set to default full range
-					newDomain = self.services.zoom.getDefaultZoomBarDomain();
-					startPoint = axesLeftMargin;
-					endPoint = width;
-				}
 
-				// only if zoomDomain needs update
-				if (
-					zoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
-					zoomDomain[1].valueOf() !== newDomain[1].valueOf()
-				) {
-					self.model.set(
-						{ zoomDomain: newDomain, selectionRange: [startPoint, endPoint] },
-						{ animate: false }
-					);
-					self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
-				}
+			zoomInContainer.on("click", function () {
+				self.handleZoomInEvent(self, zoomDomain, axesLeftMargin, width, xScale);
 			});
 
 			// zoom out icon and event
@@ -169,40 +140,7 @@ export class ToolBar extends Component {
 			zoomOutContainer.html(this.getZoomOutIcon());
 
 			zoomOutContainer.on("click", function () {
-				let currentSelection = self.model.get("selectionRange");
-				if (!currentSelection) {
-					currentSelection = [axesLeftMargin, width];
-				}
-				let startPoint = currentSelection[0] - ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
-				let endPoint =  currentSelection[1] + ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
-				zoomDomain = self.services.zoom.getDefaultZoomBarDomain();
-				xScale.range([axesLeftMargin, width]).domain(zoomDomain);
-
-				let newDomain = [
-					xScale.invert(startPoint),
-					xScale.invert(endPoint)
-				];
-				// if selected start time and end time are the same
-				// reset to default full range
-				if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
-					// same as d3 behavior and zoom bar behavior: set to default full range
-					newDomain = self.services.zoom.getDefaultZoomBarDomain();
-				}
-
-				if (newDomain[0] <= zoomDomain[0]) {
-					newDomain[0] = zoomDomain[0];
-					startPoint = axesLeftMargin;
-				}
-				if (newDomain[1] >= zoomDomain[1]) {
-					newDomain[1] = zoomDomain[1];
-					endPoint = width;
-				}
-
-				self.model.set(
-					{ zoomDomain: newDomain, selectionRange: [startPoint, endPoint] },
-					{ animate: false }
-				);
-				self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
+				self.handleZoomOutEvent(self, zoomDomain, axesLeftMargin, width, xScale);
 			});
 
 			// overflow menu icon and event
@@ -210,23 +148,7 @@ export class ToolBar extends Component {
 			overflowMenuContainer.html(this.getOverflowMenuIcon());
 
 			overflowMenuContainer.on("click", function() {
-				if (self.overflowMenuOptions.selectAll("ul.bx--overflow-menu-options--open").size() > 0) {
-					// Hide toolbar
-					self.services.events.dispatchEvent(Events.Toolbar.HIDE);
-				} else {
-					self.overflowMenuIconBottom = parseFloat(self.parent.node().getAttribute("y")) + this.parentNode.getBBox().height;
-					self.services.events.dispatchEvent(Events.Toolbar.SHOW);
-					document.getElementById("reset-Btn").addEventListener("click", function () {
-						const newDomain = self.services.zoom.getDefaultZoomBarDomain();
-						self.model.set(
-							{ zoomDomain: newDomain, selectionRange: [axesLeftMargin, width] },
-							{ animate: false }
-						);
-						self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
-						self.services.events.dispatchEvent(Events.Toolbar.HIDE);
-					}, true);
-				}
-				event.stopImmediatePropagation();
+				self.handleOverflowMenuEvent(this.parentNode, self, axesLeftMargin, width);
 			});
 
 			document.body.addEventListener("click", function() {
@@ -234,6 +156,8 @@ export class ToolBar extends Component {
 					self.services.events.dispatchEvent(Events.Toolbar.HIDE);
 				}
 			});
+		} else {
+			container.html(null);
 		}
 
 	}
@@ -241,8 +165,8 @@ export class ToolBar extends Component {
 	getZoomInIcon() {
 		// zoom in icon background left padding is 5px
 		return `
-			<rect class="icon-zoomInRect" 
-			x="${this.zoomInStart-Configuration.toolBar.iconLeftPadding}px" y="0px"
+			<rect class="icon-zoomInRect"
+			x="${this.zoomInStart - Configuration.toolBar.iconLeftPadding}px" y="0px"
 			width="30px" height="30px"/>
 				<?xml version="1.0" encoding="utf-8"?>
 				<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
@@ -257,8 +181,8 @@ export class ToolBar extends Component {
 	getZoomOutIcon() {
 		// zoom out icon background left padding is 5px
 		return `
-			<rect class="icon-zoomOutRect" 
-			x="${this.zoomOutStart-Configuration.toolBar.iconLeftPadding}px" y="0px"
+			<rect class="icon-zoomOutRect"
+			x="${this.zoomOutStart - Configuration.toolBar.iconLeftPadding}px" y="0px"
 			width="30px" height="30px"/>
 			<?xml version="1.0" encoding="utf-8"?>
 			<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
@@ -274,8 +198,8 @@ export class ToolBar extends Component {
 	getOverflowMenuIcon() {
 		// overflow menu icon background left padding is 5px
 		return `
-			<rect class="icon-overflowRect" 
-			x="${this.overflowMenuStart-Configuration.toolBar.iconLeftPadding}px" y="0px"
+			<rect class="icon-overflowRect"
+			x="${this.overflowMenuStart - Configuration.toolBar.iconLeftPadding}px" y="0px"
 			width="30px" height="30px"/>
 			<svg class="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" x="${this.overflowMenuStart}px" y="5px"
 				width="20" height="20" viewBox="0 0 15 15" aria-hidden="true">
@@ -323,5 +247,96 @@ export class ToolBar extends Component {
 	getMenuOptions() {
 		return this.menuOptionsList;
 	}
+
+	handleZoomIconClickEvent(type, self, zoomDomain, xScale, axesLeftMargin, width) {
+		let selectionRange = self.model.get("selectionRange");
+		if (!selectionRange) {
+			selectionRange = [axesLeftMargin, width];
+		}
+		const startPoint = type === "out" ?
+			selectionRange[0] - ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2) :
+			selectionRange[0] + ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
+		const endPoint =  type === "out" ?
+			selectionRange[1] + ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2) :
+			selectionRange[1] - ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
+
+		zoomDomain = type === "out" ? self.services.zoom.getDefaultZoomBarDomain() : zoomDomain;
+		xScale.range([axesLeftMargin, width]).domain(zoomDomain);
+		const newDomain = [
+			xScale.invert(startPoint),
+			xScale.invert(endPoint)
+		];
+
+		return [newDomain, zoomDomain, startPoint, endPoint];
+	}
+
+	handleDomainChange(newDomain, startPoint, endPoint, self) {
+		self.model.set(
+			{ zoomDomain: newDomain, selectionRange: [startPoint, endPoint] },
+			{ animate: false }
+		);
+		self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
+	}
+
+	handleZoomInEvent(self, zoomDomain, axesLeftMargin, width, xScale) {
+		let [newDomain, originalZoomDomain, startPoint, endPoint] =
+			self.handleZoomIconClickEvent("in", self, zoomDomain, xScale, axesLeftMargin, width);
+		// if selected start time and end time are the same
+		// reset to default full range
+		if ( newDomain[0].valueOf() > newDomain[1].valueOf() || newDomain[0].valueOf() === newDomain[1].valueOf()) {
+			// same as d3 behavior and zoom bar behavior: set to default full range
+			newDomain = self.services.zoom.getDefaultZoomBarDomain();
+			startPoint = axesLeftMargin;
+			endPoint = width;
+		}
+
+		// only if zoomDomain needs update
+		if (
+			zoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
+			zoomDomain[1].valueOf() !== newDomain[1].valueOf()
+		) {
+			self.handleDomainChange(newDomain, startPoint, endPoint, self);
+		}
+	}
+
+	handleZoomOutEvent(self, zoomDomain, axesLeftMargin, width, xScale) {
+		let [newDomain, originalZoomDomain, startPoint, endPoint] =
+			self.handleZoomIconClickEvent("out", self, zoomDomain, xScale, axesLeftMargin, width);
+		zoomDomain = originalZoomDomain;
+		// if selected start time and end time are the same
+		// reset to default full range
+		if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
+			// same as d3 behavior and zoom bar behavior: set to default full range
+			newDomain = self.services.zoom.getDefaultZoomBarDomain();
+		}
+
+		if (newDomain[0] <= zoomDomain[0]) {
+			newDomain[0] = zoomDomain[0];
+			startPoint = axesLeftMargin;
+		}
+		if (newDomain[1] >= zoomDomain[1]) {
+			newDomain[1] = zoomDomain[1];
+			endPoint = width;
+		}
+
+		self.handleDomainChange(newDomain, startPoint, endPoint, self);
+	}
+
+	handleOverflowMenuEvent(parentNode, self, axesLeftMargin, width) {
+		if (self.overflowMenuOptions.selectAll("ul.bx--overflow-menu-options--open").size() > 0) {
+					// Hide toolbar
+					self.services.events.dispatchEvent(Events.Toolbar.HIDE);
+				} else {
+					self.overflowMenuIconBottom = parseFloat(self.parent.node().getAttribute("y")) + parentNode.getBBox().height;
+					self.services.events.dispatchEvent(Events.Toolbar.SHOW);
+					document.getElementById("reset-Btn").addEventListener("click", function () {
+						const newDomain = self.services.zoom.getDefaultZoomBarDomain();
+						self.handleDomainChange(newDomain, axesLeftMargin, width, self);
+						self.services.events.dispatchEvent(Events.Toolbar.HIDE);
+					}, true);
+				}
+				event.stopImmediatePropagation();
+	}
+
 
 }
