@@ -82,6 +82,12 @@ g.#{$prefix}--#{$charts-prefix}--tool-bar {
 	svg.toolbar-overflow-menu:hover rect.icon-overflowRect{
 		fill: $hover-ui;
 	}
+
+	rect.icon-overflowRect-hover {
+		fill: $hover-ui;
+		cursor: pointer;
+	}
+
 	
 }
 

@@ -474,7 +474,7 @@ export const zoomBar = {
 export const toolBar = {
 	height: 30,
 	spacerHeight: 10,
-	iconLeftPadding: 5
+	iconLeftPadding: 6
 };
 
 export const tickSpaceRatioVertical = 2.5;
