@@ -125,20 +125,6 @@ export class Tooltip extends Component {
 			"numCharacter"
 		);
 
-		// Add radius in tooltip for bubble chart
-		const radiusLabel = Tools.getProperty(
-			options,
-			"bubble",
-			"radiusLabel"
-		)
-
-		if (radiusLabel) {
-			items.push({
-				label: "Radius",
-				value: radiusLabel
-			})
-		}
-
 		// truncate the label if it's too long
 		// only applies to discrete type
 		if (truncationType !== TruncationTypes.NONE) {

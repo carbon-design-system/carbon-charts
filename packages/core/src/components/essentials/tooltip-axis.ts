@@ -84,6 +84,15 @@ export class AxisChartsTooltip extends Tooltip {
 					color: this.model.getStrokeColor(datum[groupMapsTo])
 				}
 			];
+
+			// Add radius label and value
+			const { radiusLabel, radiusMapsTo } = Tools.getProperty(options, "bubble");
+			if (radiusLabel) {
+				items.push({
+					label: radiusLabel,
+					value: datum[radiusMapsTo] 
+				})
+			}
 		} else if (data.length > 1) {
 			items = [
 				{
