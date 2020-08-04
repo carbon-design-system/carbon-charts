@@ -22,9 +22,24 @@ export class Legend extends Component {
 		);
 		const options = this.model.getOptions();
 		const legendOptions = Tools.getProperty(options, "legend");
+		const dataGroups = this.model.getDataGroups();
+
+		// Sort data in user defined order
+		const legendOrder = Tools.getProperty(
+			options,
+			"legend",
+			"order"
+		);
+
+		if (legendOrder.length) {
+			dataGroups.sort((dataA, dataB) => 
+				legendOrder.indexOf(dataA.name) - legendOrder.indexOf(dataB.name)
+			);
+		}
+
 		const legendItems = svg
 			.selectAll("g.legend-item")
-			.data(this.model.getDataGroups(), (dataGroup) => dataGroup.name);
+			.data(dataGroups, (dataGroup) => dataGroup.name);
 
 		// this.getLegendItemArray()
 
