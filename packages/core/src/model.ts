@@ -292,8 +292,17 @@ export class ChartModel {
 	 * @param newOptions New options to be set
 	 */
 	setOptions(newOptions) {
+		const mergedOptions = Tools.merge(this.getOptions(), newOptions);
+
+		// these options need assignment, not just merge
+		if (Tools.getProperty(newOptions, "data", "loading")) {
+			mergedOptions.data.loading = newOptions.data.loading;
+		}
+		if (Tools.getProperty(newOptions, "zoomBar", "top", "data")) {
+			mergedOptions.zoomBar.top.data = newOptions.zoomBar.top.data;
+		}
 		this.set({
-			options: Tools.merge(this.getOptions(), newOptions)
+			options: mergedOptions
 		});
 	}
 
