@@ -88,6 +88,9 @@ export enum LegendOrientations {
 	VERTICAL = "vertical"
 }
 
+export enum LegendItemTypes {
+	RADIUS_LABEL = "radius-label"
+}
 /**
  * enum of all possible layout directions
  */

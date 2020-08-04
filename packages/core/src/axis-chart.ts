@@ -22,6 +22,7 @@ import {
 import { Tools } from "./tools";
 
 import { CartesianScales, Curves, Zoom } from "./services";
+import { LegendItemTypes } from "./interfaces/enums";
 
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {
@@ -35,8 +36,9 @@ export class AxisChart extends Chart {
 	}
 
 	protected getAxisChartComponents(graphFrameComponents: any[]) {
+		const options = this.model.getOptions();
 		const isZoomBarEnabled = Tools.getProperty(
-			this.model.getOptions(),
+			options,
 			"zoomBar",
 			"top",
 			"enabled"
@@ -45,7 +47,7 @@ export class AxisChart extends Chart {
 		this.services.cartesianScales.findDomainAndRangeAxes(); // need to do this before getMainXAxisPosition()
 		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition();
 		const mainXScaleType = Tools.getProperty(
-			this.model.getOptions(),
+			options,
 			"axes",
 			mainXAxisPosition,
 			"scaleType"
@@ -65,9 +67,23 @@ export class AxisChart extends Chart {
 			}
 		};
 
+		// Add extra legend items
+		const extraLegendItems = [];
+		const radiusLabel = Tools.getProperty(
+			options,
+			"bubble",
+			"radiusLabel"
+		);
+		if (radiusLabel) {
+			extraLegendItems.push({
+				type: LegendItemTypes.RADIUS_LABEL,
+				value: radiusLabel
+			})
+		}
+
 		const legendComponent = {
 			id: "legend",
-			components: [new Legend(this.model, this.services)],
+			components: [new Legend(this.model, this.services, extraLegendItems)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
 				y: LayoutGrowth.FIXED

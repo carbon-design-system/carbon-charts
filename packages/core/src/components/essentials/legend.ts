@@ -8,6 +8,7 @@ import {
 	TruncationTypes
 } from "../../interfaces";
 import { DOMUtils } from "../../services";
+import { LegendItemTypes } from "../../interfaces/enums";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -93,16 +94,14 @@ export class Legend extends Component {
 			addedLegendItemsText.html((d) => d.name);
 		}
 
-		const radiusLabel = Tools.getProperty(
-			options,
-			"bubble",
-			"radiusLabel"
+		const radiusLabel = this.configs.find(item => 
+			item.type === LegendItemTypes.RADIUS_LABEL
 		);
 
-		// Add radius label for bubble chart when dataGroups is not empty
+		// Add radius label when it's in configs and dataGroups is not empty
 		if (radiusLabel && dataGroups.length) {
 			const radiusLabelItem = svg.selectAll("g.radius-label")
-			.data([radiusLabel]);
+			.data([radiusLabel.value]);
 
 			const addedRadiusLabelItem = radiusLabelItem
 				.enter()
@@ -125,7 +124,7 @@ export class Legend extends Component {
 			addedRadiusLabelItem
 				.append("text")
 				.merge(radiusLabelItem.select("text"))
-				.html(radiusLabel);
+				.html(radiusLabel.value);
 			
 			this.breakItemsIntoLines(
 				addedLegendItems,
@@ -196,7 +195,7 @@ export class Legend extends Component {
 		let startingPoint = 0;
 		let lineNumber = 0;
 		let itemIndexInLine = 0;
-		let radiusLabelXPosition = 0;
+		let extraItemsXPosition = 0;
 		addedLegendItems
 			.merge(svg.selectAll("g.legend-item"))
 			.each(function (d, i) {
@@ -276,7 +275,7 @@ export class Legend extends Component {
 						{ useBBox: true }
 					);
 
-					radiusLabelXPosition =
+					extraItemsXPosition =
 						startingPoint +
 						legendItemTextDimensions.width +
 						spaceNeededForCheckbox +
@@ -355,24 +354,24 @@ export class Legend extends Component {
 							{ useBBox: true }
 						);
 						if (
-							radiusLabelXPosition +
+							extraItemsXPosition +
 							spaceNeededForCheckbox +
 							labelItemTextDimensions.width > 
 							svgDimensions.width
 						) {
 							lineNumber++;
-							radiusLabelXPosition = 0;
+							extraItemsXPosition = 0;
 						}
 					}
 
 					radiusLabelItem
 						.select("g.icon svg")
-						.attr("x", radiusLabelXPosition)
+						.attr("x", extraItemsXPosition)
 						.attr("y", lineNumber * legendItemsVerticalSpacing);
 
 					radiusLabelItem
 						.select("text")
-						.attr("x", radiusLabelXPosition + spaceNeededForCheckbox)
+						.attr("x", extraItemsXPosition + spaceNeededForCheckbox)
 						.attr(
 							"y",
 							legendTextYOffset +
