@@ -2,6 +2,7 @@ import { Component } from "../component";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 import { ChartModel } from "../../model";
+import { Events, TruncationTypes } from "../../interfaces";
 
 // Carbon position service
 import Position, { PLACEMENTS } from "@carbon/utils-position";
@@ -11,7 +12,6 @@ import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { select, mouse } from "d3-selection";
-import { TooltipPosition, Events, TruncationTypes } from "../../interfaces";
 
 export class Tooltip extends Component {
 	type = "tooltip";
@@ -124,6 +124,20 @@ export class Tooltip extends Component {
 			"truncation",
 			"numCharacter"
 		);
+
+		// Add radius in tooltip for bubble chart
+		const radiusLabel = Tools.getProperty(
+			options,
+			"bubble",
+			"radiusLabel"
+		)
+
+		if (radiusLabel) {
+			items.push({
+				label: "Radius",
+				value: radiusLabel
+			})
+		}
 
 		// truncate the label if it's too long
 		// only applies to discrete type
