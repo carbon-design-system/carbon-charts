@@ -87,7 +87,7 @@ export class ToolBar extends Component {
 			"data",
 			"loading"
 		);
-		this.overflowMenuOptions.classed("hidden", true);
+		this.overflowMenuOptions.classed("display", "none");
 
 		const svg = this.getContainerSVG();
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
@@ -156,6 +156,11 @@ export class ToolBar extends Component {
 					self.services.events.dispatchEvent(Events.Toolbar.HIDE);
 				}
 			});
+
+			this.overflowIconClass = this.overflowMenuOptions.selectAll("ul.bx--overflow-menu-options--open").size() > 0 ?
+				"icon-overflowRect-hover" :
+				"icon-overflowRect";
+			this.overflowMenuOptions.html(this.overflowIconClass === "icon-overflowRect" ? null : this.getOverflowMenuHTML());
 		} else {
 			container.html(null);
 		}
@@ -198,7 +203,7 @@ export class ToolBar extends Component {
 	getOverflowMenuIcon() {
 		// overflow menu icon background left padding is 5px
 		return `
-			<rect class="icon-overflowRect" class="${this.overflowIconClass}"
+			<rect class="${this.overflowIconClass}"
 			x="${this.overflowMenuStart}px" y="0px"
 			width="32px" height="32px" />
 			<svg class="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" x="${this.overflowMenuStart + Configuration.toolBar.iconLeftPadding}px" y="5px"
