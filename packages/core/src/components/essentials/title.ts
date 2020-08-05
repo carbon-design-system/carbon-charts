@@ -120,7 +120,7 @@ export class Title extends Component {
 			this.services.domUtils.getMainSVG(),
 			{ useAttr: true }
 		).width;
-		const finalContainerWidth = toolbarEnabled ? containerWidth - Configuration.toolBar.iconWidth * 3 : containerWidth;
+		const finalContainerWidth = toolbarEnabled ? containerWidth - Configuration.toolBar.iconSize * 3 : containerWidth;
 		return finalContainerWidth;
 	}
 

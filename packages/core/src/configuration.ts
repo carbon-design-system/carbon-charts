@@ -472,7 +472,7 @@ export const zoomBar = {
 };
 
 export const toolBar = {
-	iconWidth: 32,
+	iconSize: 32,
 	height: 32,
 	spacerHeight: 10,
 	iconLeftPadding: 6
