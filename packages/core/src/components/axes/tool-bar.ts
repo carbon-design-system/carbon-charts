@@ -87,7 +87,7 @@ export class ToolBar extends Component {
 			"data",
 			"loading"
 		);
-		this.overflowMenuOptions.classed("display", "none");
+		this.overflowMenuOptions.classed("hidden", true);
 
 		const svg = this.getContainerSVG();
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
