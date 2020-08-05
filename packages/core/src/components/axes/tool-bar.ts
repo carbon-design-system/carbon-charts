@@ -78,7 +78,6 @@ export class ToolBar extends Component {
 			this.overflowMenuOptions.classed("hidden", true);
 			this.overflowMenuOptions.html(null);
 		});
-
 	}
 
 	render(animate = true) {
@@ -120,51 +119,95 @@ export class ToolBar extends Component {
 			.attr("height", Configuration.toolBar.height)
 			.attr("opacity", 1);
 
-		if (!isDataLoading) {
-
+		// clean children first
+		container.html(null);
+		if (isDataLoading) {
+			// put an empty rect to keep space unchanged
+			DOMUtils.appendOrSelect(container, "svg.toolbar-loading-space")
+				.append("rect")
+				.attr("height", Configuration.toolBar.height)
+				.attr("width", 1); // value doesn't matter but can't be empty
+		} else {
 			const self = this;
 
 			// zoom in icon and event
-			const zoomInContainer = DOMUtils.appendOrSelect(container, "svg.toolbar-zoomIn");
+			const zoomInContainer = DOMUtils.appendOrSelect(
+				container,
+				"svg.toolbar-zoomIn"
+			);
 			zoomInContainer.html(this.getZoomInIcon());
 
 			zoomInContainer.on("click", function () {
-				self.handleZoomInEvent(self, zoomDomain, axesLeftMargin, width, xScale);
+				self.handleZoomInEvent(
+					self,
+					zoomDomain,
+					axesLeftMargin,
+					width,
+					xScale
+				);
 			});
 
 			// zoom out icon and event
-			const zoomOutContainer = DOMUtils.appendOrSelect(container, "svg.toolbar-zoomOut");
+			const zoomOutContainer = DOMUtils.appendOrSelect(
+				container,
+				"svg.toolbar-zoomOut"
+			);
 			zoomOutContainer.html(this.getZoomOutIcon());
 
 			zoomOutContainer.on("click", function () {
-				self.handleZoomOutEvent(self, zoomDomain, axesLeftMargin, width, xScale);
+				self.handleZoomOutEvent(
+					self,
+					zoomDomain,
+					axesLeftMargin,
+					width,
+					xScale
+				);
 			});
 
 			// overflow menu icon and event
-			const overflowMenuContainer = DOMUtils.appendOrSelect(container, "svg.toolbar-overflow-menu");
+			const overflowMenuContainer = DOMUtils.appendOrSelect(
+				container,
+				"svg.toolbar-overflow-menu"
+			);
 			overflowMenuContainer.html(this.getOverflowMenuIcon());
-			this.overflowMenuIcon = DOMUtils.appendOrSelect(overflowMenuContainer, `rect.${this.overflowIconClass}`);
+			this.overflowMenuIcon = DOMUtils.appendOrSelect(
+				overflowMenuContainer,
+				`rect.${this.overflowIconClass}`
+			);
 
-			overflowMenuContainer.on("click", function() {
-				self.handleOverflowMenuEvent(this.parentNode, self, axesLeftMargin, width);
+			overflowMenuContainer.on("click", function () {
+				self.handleOverflowMenuEvent(
+					this.parentNode,
+					self,
+					axesLeftMargin,
+					width
+				);
 			});
 
-			document.body.addEventListener("click", function() {
-				if (self.overflowMenuOptions.selectAll("ul.bx--overflow-menu-options--open").size() > 0) {
+			document.body.addEventListener("click", function () {
+				if (
+					self.overflowMenuOptions
+						.selectAll("ul.bx--overflow-menu-options--open")
+						.size() > 0
+				) {
 					self.overflowIconClass = "icon-overflowRect";
 					self.overflowMenuIcon.attr("class", self.overflowIconClass);
 					self.services.events.dispatchEvent(Events.Toolbar.HIDE);
 				}
 			});
 
-			this.overflowIconClass = this.overflowMenuOptions.selectAll("ul.bx--overflow-menu-options--open").size() > 0 ?
-				"icon-overflowRect-hover" :
-				"icon-overflowRect";
-			this.overflowMenuOptions.html(this.overflowIconClass === "icon-overflowRect" ? null : this.getOverflowMenuHTML());
-		} else {
-			container.html(null);
+			this.overflowIconClass =
+				this.overflowMenuOptions
+					.selectAll("ul.bx--overflow-menu-options--open")
+					.size() > 0
+					? "icon-overflowRect-hover"
+					: "icon-overflowRect";
+			this.overflowMenuOptions.html(
+				this.overflowIconClass === "icon-overflowRect"
+					? null
+					: this.getOverflowMenuHTML()
+			);
 		}
-
 	}
 
 	getZoomInIcon() {
@@ -175,7 +218,9 @@ export class ToolBar extends Component {
 			width="32px" height="32px"/>
 				<?xml version="1.0" encoding="utf-8"?>
 				<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomInStart + Configuration.toolBar.iconLeftPadding}px" y="5px"
+				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${
+					this.zoomInStart + Configuration.toolBar.iconLeftPadding
+				}px" y="5px"
 					width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
 					<polygon points="9,6 7,6 7,4 6,4 6,6 4,6 4,7 6,7 6,9 7,9 7,7 9,7 "/>
 					<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
@@ -191,7 +236,9 @@ export class ToolBar extends Component {
 			width="32px" height="32px"/>
 			<?xml version="1.0" encoding="utf-8"?>
 			<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-			<svg version="1.1" class="icon-zoomOut" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${this.zoomOutStart + Configuration.toolBar.iconLeftPadding}px" y="5px"
+			<svg version="1.1" class="icon-zoomOut" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${
+				this.zoomOutStart + Configuration.toolBar.iconLeftPadding
+			}px" y="5px"
 				width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
 				<title>Zoom out</title>
 				<rect class="rect-zoomOut" x="4" y="6" width="5" height="1"/>
@@ -206,7 +253,9 @@ export class ToolBar extends Component {
 			<rect class="${this.overflowIconClass}"
 			x="${this.overflowMenuStart}px" y="0px"
 			width="32px" height="32px" />
-			<svg class="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" x="${this.overflowMenuStart + Configuration.toolBar.iconLeftPadding}px" y="5px"
+			<svg class="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" x="${
+				this.overflowMenuStart + Configuration.toolBar.iconLeftPadding
+			}px" y="5px"
 				width="20" height="20" viewBox="0 0 15 15" aria-hidden="true">
 				<circle cx="8" cy="3" r="1"></circle>
 				<circle cx="8" cy="8" r="1"></circle>
@@ -216,7 +265,6 @@ export class ToolBar extends Component {
 	}
 
 	getOverflowMenuHTML() {
-
 		let defaultHTML;
 
 		const options = this.getMenuOptions();
@@ -228,7 +276,9 @@ export class ToolBar extends Component {
 			data-floating-menu-direction="bottom" role="main">
 			<ul class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
 				tabindex="-1" role="menu" aria-label="Menu" data-floating-menu-direction="bottom"
-				style="left:${this.overflowMenuStart - (160 - 32)}px; top:${this.overflowMenuIconBottom}px;">` +
+				style="left:${this.overflowMenuStart - (160 - 32)}px; top:${
+				this.overflowMenuIconBottom
+			}px;">` +
 			options
 				.map(
 					(option) =>
@@ -253,24 +303,37 @@ export class ToolBar extends Component {
 		return this.menuOptionsList;
 	}
 
-	handleZoomIconClickEvent(type, self, zoomDomain, xScale, axesLeftMargin, width) {
+	handleZoomIconClickEvent(
+		type,
+		self,
+		zoomDomain,
+		xScale,
+		axesLeftMargin,
+		width
+	) {
 		let selectionRange = self.model.get("selectionRange");
 		if (!selectionRange) {
 			selectionRange = [axesLeftMargin, width];
 		}
-		const startPoint = type === "out" ?
-			selectionRange[0] - ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2) :
-			selectionRange[0] + ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
-		const endPoint =  type === "out" ?
-			selectionRange[1] + ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2) :
-			selectionRange[1] - ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
+		const startPoint =
+			type === "out"
+				? selectionRange[0] -
+				  ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2)
+				: selectionRange[0] +
+				  ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
+		const endPoint =
+			type === "out"
+				? selectionRange[1] +
+				  ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2)
+				: selectionRange[1] -
+				  ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
 
-		zoomDomain = type === "out" ? self.services.zoom.getDefaultZoomBarDomain() : zoomDomain;
+		zoomDomain =
+			type === "out"
+				? self.services.zoom.getDefaultZoomBarDomain()
+				: zoomDomain;
 		xScale.range([axesLeftMargin, width]).domain(zoomDomain);
-		const newDomain = [
-			xScale.invert(startPoint),
-			xScale.invert(endPoint)
-		];
+		const newDomain = [xScale.invert(startPoint), xScale.invert(endPoint)];
 
 		return [newDomain, zoomDomain, startPoint, endPoint];
 	}
@@ -280,15 +343,31 @@ export class ToolBar extends Component {
 			{ zoomDomain: newDomain, selectionRange: [startPoint, endPoint] },
 			{ animate: false }
 		);
-		self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
+		self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
+			newDomain
+		});
 	}
 
 	handleZoomInEvent(self, zoomDomain, axesLeftMargin, width, xScale) {
-		let [newDomain, originalZoomDomain, startPoint, endPoint] =
-			self.handleZoomIconClickEvent("in", self, zoomDomain, xScale, axesLeftMargin, width);
+		let [
+			newDomain,
+			originalZoomDomain,
+			startPoint,
+			endPoint
+		] = self.handleZoomIconClickEvent(
+			"in",
+			self,
+			zoomDomain,
+			xScale,
+			axesLeftMargin,
+			width
+		);
 		// if selected start time and end time are the same
 		// reset to default full range
-		if ( newDomain[0].valueOf() > newDomain[1].valueOf() || newDomain[0].valueOf() === newDomain[1].valueOf()) {
+		if (
+			newDomain[0].valueOf() > newDomain[1].valueOf() ||
+			newDomain[0].valueOf() === newDomain[1].valueOf()
+		) {
 			// same as d3 behavior and zoom bar behavior: set to default full range
 			newDomain = self.services.zoom.getDefaultZoomBarDomain();
 			startPoint = axesLeftMargin;
@@ -305,8 +384,19 @@ export class ToolBar extends Component {
 	}
 
 	handleZoomOutEvent(self, zoomDomain, axesLeftMargin, width, xScale) {
-		let [newDomain, originalZoomDomain, startPoint, endPoint] =
-			self.handleZoomIconClickEvent("out", self, zoomDomain, xScale, axesLeftMargin, width);
+		let [
+			newDomain,
+			originalZoomDomain,
+			startPoint,
+			endPoint
+		] = self.handleZoomIconClickEvent(
+			"out",
+			self,
+			zoomDomain,
+			xScale,
+			axesLeftMargin,
+			width
+		);
 		zoomDomain = originalZoomDomain;
 		// if selected start time and end time are the same
 		// reset to default full range
@@ -328,26 +418,39 @@ export class ToolBar extends Component {
 	}
 
 	handleOverflowMenuEvent(parentNode, self, axesLeftMargin, width) {
-		if (self.overflowMenuOptions.selectAll("ul.bx--overflow-menu-options--open").size() > 0) {
+		if (
+			self.overflowMenuOptions
+				.selectAll("ul.bx--overflow-menu-options--open")
+				.size() > 0
+		) {
 			// Hide toolbar
 			self.overflowIconClass = "icon-overflowRect";
 			self.overflowMenuIcon.attr("class", self.overflowIconClass);
 			self.services.events.dispatchEvent(Events.Toolbar.HIDE);
 		} else {
-			self.overflowMenuIconBottom = parseFloat(self.parent.node().getAttribute("y")) + parentNode.getBBox().height;
+			self.overflowMenuIconBottom =
+				parseFloat(self.parent.node().getAttribute("y")) +
+				parentNode.getBBox().height;
 			self.overflowIconClass = "icon-overflowRect-hover";
 			self.overflowMenuIcon.attr("class", self.overflowIconClass);
 			self.services.events.dispatchEvent(Events.Toolbar.SHOW);
-			document.getElementById("reset-Btn").addEventListener("click", function () {
-				const newDomain = self.services.zoom.getDefaultZoomBarDomain();
-				self.handleDomainChange(newDomain, axesLeftMargin, width, self);
-				self.overflowIconClass = "icon-overflowRect";
-				self.overflowMenuIcon.attr("class", self.overflowIconClass);
-				self.services.events.dispatchEvent(Events.Toolbar.HIDE);
-			}, true);
+			document.getElementById("reset-Btn").addEventListener(
+				"click",
+				function () {
+					const newDomain = self.services.zoom.getDefaultZoomBarDomain();
+					self.handleDomainChange(
+						newDomain,
+						axesLeftMargin,
+						width,
+						self
+					);
+					self.overflowIconClass = "icon-overflowRect";
+					self.overflowMenuIcon.attr("class", self.overflowIconClass);
+					self.services.events.dispatchEvent(Events.Toolbar.HIDE);
+				},
+				true
+			);
 		}
 		event.stopImmediatePropagation();
 	}
-
-
 }
