@@ -4,6 +4,7 @@ import { Tools } from "../tools";
 
 // D3 imports
 import { extent } from "d3-array";
+import { AxisPositions, ScaleTypes } from "../interfaces";
 
 export class Zoom extends Service {
 	// get display data for zoom bar
@@ -65,6 +66,52 @@ export class Zoom extends Service {
 		return cartesianScales.extendsDomain(
 			mainXAxisPosition,
 			extent(zoomBarData, (d: any) => d[domainIdentifier])
+		);
+	}
+
+	isZoomBarEnabled() {
+		// check configuration
+		if (
+			!Tools.getProperty(
+				this.model.getOptions(),
+				"zoomBar",
+				"top",
+				"enabled"
+			)
+		) {
+			return false;
+		}
+
+		// CartesianScales service is only available in axis charts
+		if (!this.services.cartesianScales) {
+			return false;
+		}
+
+		// @todo - Zoom Bar only supports main axis at BOTTOM axis and time scale for now
+		this.services.cartesianScales.findDomainAndRangeAxes(); // need to do this before getMainXAxisPosition()
+		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition();
+		const mainXScaleType = Tools.getProperty(
+			this.model.getOptions(),
+			"axes",
+			mainXAxisPosition,
+			"scaleType"
+		);
+
+		return (
+			mainXAxisPosition === AxisPositions.BOTTOM &&
+			mainXScaleType === ScaleTypes.TIME
+		);
+	}
+
+	isToolbarEnabled() {
+		return (
+			this.isZoomBarEnabled() &&
+			Tools.getProperty(
+				this.model.getOptions(),
+				"zoomBar",
+				"toolBar",
+				"showToolBar"
+			)
 		);
 	}
 }

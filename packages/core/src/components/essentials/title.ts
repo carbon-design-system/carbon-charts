@@ -9,29 +9,8 @@ export class Title extends Component {
 	type = "title";
 
 	render() {
-		// @todo - isZoomBarEnabled, zoomBarEnabled, toolbarEnabled should be included in zoom service
-		const isZoomBarEnabled = Tools.getProperty(
-			this.model.getOptions(),
-			"zoomBar",
-			"top",
-			"enabled"
-		);
-		this.services.cartesianScales.findDomainAndRangeAxes(); // need to do this before getMainXAxisPosition()
-		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition();
-		const mainXScaleType = Tools.getProperty(
-			this.model.getOptions(),
-			"axes",
-			mainXAxisPosition,
-			"scaleType"
-		);
-		const zoomBarEnabled =
-			isZoomBarEnabled &&
-			mainXAxisPosition === AxisPositions.BOTTOM &&
-			mainXScaleType === ScaleTypes.TIME;
-
-		const toolbarEnabled = zoomBarEnabled &&
-			this.model.getOptions().zoomBar.toolBar &&
-			this.model.getOptions().zoomBar.toolBar.showToolBar;
+		const toolbarEnabled =
+			this.services.zoom && this.services.zoom.isToolbarEnabled();
 
 		const svg = this.getContainerSVG();
 
@@ -120,7 +99,9 @@ export class Title extends Component {
 			this.services.domUtils.getMainSVG(),
 			{ useAttr: true }
 		).width;
-		const finalContainerWidth = toolbarEnabled ? containerWidth - Configuration.toolBar.iconSize * 3 : containerWidth;
+		const finalContainerWidth = toolbarEnabled
+			? containerWidth - Configuration.toolBar.iconSize * 3
+			: containerWidth;
 		return finalContainerWidth;
 	}
 
