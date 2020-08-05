@@ -18,7 +18,7 @@ export class Title extends Component {
 			.classed("title", true)
 			.merge(text)
 			.attr("x", 0)
-			.attr("y", "1em")
+			.attr("y", "20px")
 			.html((d) => d);
 
 		// check the max space the title has to render
@@ -94,7 +94,8 @@ export class Title extends Component {
 			this.services.domUtils.getMainSVG(),
 			{ useAttr: true }
 		).width;
-		return containerWidth;
+		const finalContainerWidth = this.configs.toolbarEnabled? containerWidth - 32*3 : containerWidth;
+		return finalContainerWidth;
 	}
 
 	/**

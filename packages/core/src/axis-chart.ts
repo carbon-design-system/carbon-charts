@@ -57,9 +57,24 @@ export class AxisChart extends Chart {
 			mainXAxisPosition === AxisPositions.BOTTOM &&
 			mainXScaleType === ScaleTypes.TIME;
 
+		const toolbarEnabled = zoomBarEnabled &&
+			this.model.getOptions().zoomBar.toolBar &&
+			this.model.getOptions().zoomBar.toolBar.showToolBar;
+
 		const titleComponent = {
 			id: "title",
-			components: [new Title(this.model, this.services)],
+			components: toolbarEnabled ?
+				[new Title(this.model, this.services, {toolbarEnabled: toolbarEnabled}), new ToolBar(this.model, this.services)] :
+				[new Title(this.model, this.services)],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		const toolBarComponent = {
+			id: "tool-bar",
+			components: [new ToolBar(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
 				y: LayoutGrowth.FIXED
@@ -167,15 +182,6 @@ export class AxisChart extends Chart {
 			}
 		};
 
-		const toolBarComponent = {
-			id: "tool-bar",
-			components: [new ToolBar(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
-		};
-
 		// Add chart title if it exists
 		const topLevelLayoutComponents = [];
 		if (this.model.getOptions().title) {
@@ -193,9 +199,6 @@ export class AxisChart extends Chart {
 			topLevelLayoutComponents.push(titleSpacerComponent);
 		}
 		if (zoomBarEnabled) {
-			if (this.model.getOptions().zoomBar.toolBar && this.model.getOptions().zoomBar.toolBar.showToolBar) {
-				topLevelLayoutComponents.push(toolBarComponent);
-			}
 			topLevelLayoutComponents.push(zoomBarComponent);
 		}
 		topLevelLayoutComponents.push(fullFrameComponent);
