@@ -61,20 +61,17 @@ export class AxisChart extends Chart {
 			this.model.getOptions().zoomBar.toolBar &&
 			this.model.getOptions().zoomBar.toolBar.showToolBar;
 
-		const titleComponent = {
-			id: "title",
-			components: toolbarEnabled ?
-				[new Title(this.model, this.services, {toolbarEnabled: toolbarEnabled}), new ToolBar(this.model, this.services)] :
-				[new Title(this.model, this.services)],
-			growth: {
-				x: LayoutGrowth.PREFERRED,
-				y: LayoutGrowth.FIXED
-			}
-		};
+		const showTitle = !!this.model.getOptions().title;
 
-		const toolBarComponent = {
-			id: "tool-bar",
-			components: [new ToolBar(this.model, this.services)],
+		const titleComponentArray = [];
+		// tslint:disable-next-line:no-unused-expression
+		showTitle ? titleComponentArray.push(new Title(this.model, this.services)) : titleComponentArray;
+		// tslint:disable-next-line:no-unused-expression
+		toolbarEnabled ? titleComponentArray.push(new ToolBar(this.model, this.services)) : titleComponentArray;
+
+		const titleAndToolBarComponent = {
+			id: "title",
+			components: titleComponentArray,
 			growth: {
 				x: LayoutGrowth.PREFERRED,
 				y: LayoutGrowth.FIXED
@@ -184,8 +181,8 @@ export class AxisChart extends Chart {
 
 		// Add chart title if it exists
 		const topLevelLayoutComponents = [];
-		if (this.model.getOptions().title) {
-			topLevelLayoutComponents.push(titleComponent);
+		if (this.model.getOptions().title || toolbarEnabled) {
+			topLevelLayoutComponents.push(titleAndToolBarComponent);
 
 			const titleSpacerComponent = {
 				id: "spacer",

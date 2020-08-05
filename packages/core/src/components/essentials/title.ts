@@ -1,12 +1,38 @@
 // Internal Imports
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
-import { Events } from "./../../interfaces";
+import { AxisPositions, Events, ScaleTypes } from "./../../interfaces";
+import { Tools } from "../../tools";
+import * as Configuration from "../../configuration";
 
 export class Title extends Component {
 	type = "title";
 
 	render() {
+		// @todo - isZoomBarEnabled, zoomBarEnabled, toolbarEnabled should be included in zoom service
+		const isZoomBarEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"top",
+			"enabled"
+		);
+		this.services.cartesianScales.findDomainAndRangeAxes(); // need to do this before getMainXAxisPosition()
+		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition();
+		const mainXScaleType = Tools.getProperty(
+			this.model.getOptions(),
+			"axes",
+			mainXAxisPosition,
+			"scaleType"
+		);
+		const zoomBarEnabled =
+			isZoomBarEnabled &&
+			mainXAxisPosition === AxisPositions.BOTTOM &&
+			mainXScaleType === ScaleTypes.TIME;
+
+		const toolbarEnabled = zoomBarEnabled &&
+			this.model.getOptions().zoomBar.toolBar &&
+			this.model.getOptions().zoomBar.toolBar.showToolBar;
+
 		const svg = this.getContainerSVG();
 
 		const text = svg
@@ -22,7 +48,7 @@ export class Title extends Component {
 			.html((d) => d);
 
 		// check the max space the title has to render
-		const maxWidth = this.getMaxTitleWidth();
+		const maxWidth = this.getMaxTitleWidth(toolbarEnabled);
 		const title = DOMUtils.appendOrSelect(svg, "text.title");
 
 		// check if title needs truncation (and tooltip support)
@@ -89,12 +115,12 @@ export class Title extends Component {
 	}
 
 	// computes the maximum space a title can take
-	protected getMaxTitleWidth() {
+	protected getMaxTitleWidth(toolbarEnabled) {
 		const containerWidth = DOMUtils.getSVGElementSize(
 			this.services.domUtils.getMainSVG(),
 			{ useAttr: true }
 		).width;
-		const finalContainerWidth = this.configs.toolbarEnabled? containerWidth - 32*3 : containerWidth;
+		const finalContainerWidth = toolbarEnabled ? containerWidth - Configuration.toolBar.iconWidth * 3 : containerWidth;
 		return finalContainerWidth;
 	}
 
