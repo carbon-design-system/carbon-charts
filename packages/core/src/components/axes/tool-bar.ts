@@ -120,14 +120,6 @@ export class ToolBar extends Component {
 			.attr("height", Configuration.toolBar.height)
 			.attr("opacity", 1);
 
-		const spacer = DOMUtils.appendOrSelect(svg, "rect.toolbar-spacer")
-			.attr("x", 0)
-			.attr("y", Configuration.toolBar.height + 5)
-			.attr("width", "100%")
-			.attr("height", isDataLoading? 30 : Configuration.toolBar.spacerHeight)
-			.attr("opacity", 1)
-			.attr("fill", "none");
-
 		if (!isDataLoading) {
 
 			const self = this;
