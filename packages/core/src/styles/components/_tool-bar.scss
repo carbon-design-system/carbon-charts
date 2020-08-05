@@ -1,8 +1,5 @@
-@import "./../vendor/@carbon/motion/scss/motion.scss";
-@import "./../vendor/@carbon/type/scss/type";
-@import "./../vendor/@carbon/type/scss/font-face/mono";
-@import "./../vendor/@carbon/type/scss/font-face/sans";
-@import "./../vendor/carbon-components/scss/components/overflow-menu/overflow-menu";
+$css--reset: false;
+@import "./../vendor/carbon-components/src/components/overflow-menu/overflow-menu";
 
 g.#{$prefix}--#{$charts-prefix}--tool-bar {
 	@include carbon--motion(standard, expressive);
