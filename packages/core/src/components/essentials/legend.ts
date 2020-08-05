@@ -31,7 +31,7 @@ export class Legend extends Component {
 			"order"
 		);
 
-		if (legendOrder.length) {
+		if (legendOrder) {
 			dataGroups.sort((dataA, dataB) => 
 				legendOrder.indexOf(dataA.name) - legendOrder.indexOf(dataB.name)
 			);

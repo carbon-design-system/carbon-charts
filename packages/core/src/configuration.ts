@@ -65,7 +65,7 @@ export const legend: LegendOptions = {
 	},
 	truncation: standardTruncationOptions,
 	alignment: Alignments.LEFT,
-	order: []
+	order: null
 };
 
 /**
