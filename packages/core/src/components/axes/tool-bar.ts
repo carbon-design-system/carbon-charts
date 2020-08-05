@@ -111,7 +111,8 @@ export class ToolBar extends Component {
 		}
 
 		this.overflowMenuStart = width - Configuration.toolBar.iconSize;
-		this.zoomOutStart = this.overflowMenuStart - Configuration.toolBar.iconSize;
+		this.zoomOutStart =
+			this.overflowMenuStart - Configuration.toolBar.iconSize;
 		this.zoomInStart = this.zoomOutStart - Configuration.toolBar.iconSize;
 
 		const container = DOMUtils.appendOrSelect(svg, "svg.toolbar-container")
@@ -126,7 +127,8 @@ export class ToolBar extends Component {
 			DOMUtils.appendOrSelect(container, "svg.toolbar-loading-space")
 				.append("rect")
 				.attr("height", Configuration.toolBar.height)
-				.attr("width", 1); // value doesn't matter but can't be empty
+				.attr("width", 1) // value doesn't matter but can't be empty
+				.attr("opacity", 0);
 		} else {
 			const self = this;
 
@@ -215,7 +217,9 @@ export class ToolBar extends Component {
 		return `
 			<rect class="icon-zoomInRect"
 			x="${this.zoomInStart}px" y="0px"
-			width="${Configuration.toolBar.iconSize}px" height="${Configuration.toolBar.iconSize}px"/>
+			width="${Configuration.toolBar.iconSize}px" height="${
+			Configuration.toolBar.iconSize
+		}px"/>
 				<?xml version="1.0" encoding="utf-8"?>
 				<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${
@@ -233,7 +237,9 @@ export class ToolBar extends Component {
 		return `
 			<rect class="icon-zoomOutRect"
 			x="${this.zoomOutStart}px" y="0px"
-			width="${Configuration.toolBar.iconSize}px" height="${Configuration.toolBar.iconSize}px"/>
+			width="${Configuration.toolBar.iconSize}px" height="${
+			Configuration.toolBar.iconSize
+		}px"/>
 			<?xml version="1.0" encoding="utf-8"?>
 			<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 			<svg version="1.1" class="icon-zoomOut" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${
@@ -252,7 +258,9 @@ export class ToolBar extends Component {
 		return `
 			<rect class="${this.overflowIconClass}"
 			x="${this.overflowMenuStart}px" y="0px"
-			width="${Configuration.toolBar.iconSize}px" height="${Configuration.toolBar.iconSize}px" />
+			width="${Configuration.toolBar.iconSize}px" height="${
+			Configuration.toolBar.iconSize
+		}px" />
 			<svg class="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" x="${
 				this.overflowMenuStart + Configuration.toolBar.iconLeftPadding
 			}px" y="5px"
@@ -276,9 +284,10 @@ export class ToolBar extends Component {
 			data-floating-menu-direction="bottom" role="main">
 			<ul class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
 				tabindex="-1" role="menu" aria-label="Menu" data-floating-menu-direction="bottom"
-				style="left:${this.overflowMenuStart - (160 - Configuration.toolBar.iconSize)}px; top:${
-				this.overflowMenuIconBottom
-			}px;">` +
+				style="left:${
+					this.overflowMenuStart -
+					(160 - Configuration.toolBar.iconSize)
+				}px; top:${this.overflowMenuIconBottom}px;">` +
 			options
 				.map(
 					(option) =>
@@ -318,15 +327,15 @@ export class ToolBar extends Component {
 		const startPoint =
 			type === "out"
 				? selectionRange[0] -
-				((width - axesLeftMargin) / 2) * (self.zoomRatio / 2)
+				  ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2)
 				: selectionRange[0] +
-				((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
+				  ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
 		const endPoint =
 			type === "out"
 				? selectionRange[1] +
-				((width - axesLeftMargin) / 2) * (self.zoomRatio / 2)
+				  ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2)
 				: selectionRange[1] -
-				((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
+				  ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
 
 		zoomDomain =
 			type === "out"
