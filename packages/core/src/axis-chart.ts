@@ -57,7 +57,8 @@ export class AxisChart extends Chart {
 			mainXAxisPosition === AxisPositions.BOTTOM &&
 			mainXScaleType === ScaleTypes.TIME;
 
-		const toolbarEnabled = zoomBarEnabled &&
+		const toolbarEnabled =
+			zoomBarEnabled &&
 			this.model.getOptions().zoomBar.toolBar &&
 			this.model.getOptions().zoomBar.toolBar.showToolBar;
 
@@ -65,9 +66,13 @@ export class AxisChart extends Chart {
 
 		const titleComponentArray = [];
 		// tslint:disable-next-line:no-unused-expression
-		showTitle ? titleComponentArray.push(new Title(this.model, this.services)) : titleComponentArray;
+		showTitle
+			? titleComponentArray.push(new Title(this.model, this.services))
+			: titleComponentArray;
 		// tslint:disable-next-line:no-unused-expression
-		toolbarEnabled ? titleComponentArray.push(new ToolBar(this.model, this.services)) : titleComponentArray;
+		toolbarEnabled
+			? titleComponentArray.push(new ToolBar(this.model, this.services))
+			: titleComponentArray;
 
 		const titleAndToolBarComponent = {
 			id: "title",
@@ -186,7 +191,13 @@ export class AxisChart extends Chart {
 
 			const titleSpacerComponent = {
 				id: "spacer",
-				components: [new Spacer(this.model, this.services)],
+				components: [
+					new Spacer(
+						this.model,
+						this.services,
+						toolbarEnabled ? { size: 10 } : undefined
+					)
+				],
 				growth: {
 					x: LayoutGrowth.PREFERRED,
 					y: LayoutGrowth.FIXED
