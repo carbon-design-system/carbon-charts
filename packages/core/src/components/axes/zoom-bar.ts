@@ -293,13 +293,19 @@ export class ZoomBar extends Component {
 			.style("display", null); // always display
 
 		// handle-bar
-		svg.select(this.brushSelector)
+		const handleBars = svg
+			.select(this.brushSelector)
 			.selectAll("rect.handle-bar")
-			.data([{ type: "w" }, { type: "e" }])
-			.join("rect")
+			.data([{ type: "w" }, { type: "e" }]);
+		// create rect if not exists
+		handleBars
+			.enter()
+			.append("rect")
 			.attr("class", function (d) {
 				return "handle-bar handle-bar--" + d.type;
-			})
+			});
+		// update positions
+		handleBars
 			.attr("x", function (d) {
 				if (d.type === "w") {
 					return Math.max(
