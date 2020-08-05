@@ -8,7 +8,6 @@ import {
 	TruncationTypes
 } from "../../interfaces";
 import { DOMUtils } from "../../services";
-import { LegendItemTypes } from "../../interfaces/enums";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -94,41 +93,31 @@ export class Legend extends Component {
 			addedLegendItemsText.html((d) => d.name);
 		}
 
-		const radiusLabel = this.configs.find(item => 
-			item.type === LegendItemTypes.RADIUS_LABEL
-		);
+		const extraLabels = Tools.getProperty(this.configs, "extraLabels");
 
-		// Add radius label when it's in configs and dataGroups is not empty
-		if (radiusLabel && dataGroups.length) {
-			const radiusLabelItem = svg.selectAll("g.radius-label")
-			.data([radiusLabel.value]);
-
-			const addedRadiusLabelItem = radiusLabelItem
+		// Add extra labels
+		if (extraLabels && dataGroups.length) {
+			const extraLabelItems = svg.selectAll("g.extra-label")
+				.data(extraLabels);
+			
+			const addedExtraLabelItems = extraLabelItems
 				.enter()
 				.append("g")
-				.classed("radius-label", true);
+				.classed("extra-label", true);
 
-			addedRadiusLabelItem
+			addedExtraLabelItems
 				.append("g")
 				.classed("icon", true)
-				.html(`
-					<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-						<title>Artboard</title>
-						<g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-							<circle id="Oval-Copy-33" stroke="#8C8C8C" cx="7" cy="7" r="6.5"></circle>
-							<circle id="Oval-Copy-33" stroke="#8C8C8C" cx="7" cy="10" r="3.5"></circle>
-						</g>
-					</svg>
-				`);
+				.html(d => d.icon);
 
-			addedRadiusLabelItem
+			addedExtraLabelItems
 				.append("text")
-				.merge(radiusLabelItem.select("text"))
-				.html(radiusLabel.value);
+				.merge(extraLabelItems.select("text"))
+				.html(d => d.text);
 			
 			this.breakItemsIntoLines(
 				addedLegendItems,
-				addedRadiusLabelItem
+				addedExtraLabelItems
 			);
 		} else {
 			this.breakItemsIntoLines(addedLegendItems);
@@ -164,7 +153,7 @@ export class Legend extends Component {
 		svg.attr("transform", `translate(${alignmentOffset}, 0)`);
 	}
 
-	breakItemsIntoLines(addedLegendItems, addedRadiusLabelItem = null) {
+	breakItemsIntoLines(addedLegendItems, addedExtraLabelItems = null) {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
@@ -195,7 +184,7 @@ export class Legend extends Component {
 		let startingPoint = 0;
 		let lineNumber = 0;
 		let itemIndexInLine = 0;
-		let extraItemsXPosition = 0;
+		let extraLabelItemsStartingPoint = 0;
 		addedLegendItems
 			.merge(svg.selectAll("g.legend-item"))
 			.each(function (d, i) {
@@ -268,14 +257,14 @@ export class Legend extends Component {
 					.attr("x", startingPoint + spaceNeededForCheckbox)
 					.attr("y", yOffset + yPosition + 3);
 
-				// Calculate x position for radius label
-				if (addedRadiusLabelItem && legendOrientation !== LegendOrientations.VERTICAL) {
+				// Calculate x position for extra label items
+				if (addedExtraLabelItems && legendOrientation !== LegendOrientations.VERTICAL) {
 					const legendItemTextDimensions = DOMUtils.getSVGElementSize(
 						select(this).select("text"),
 						{ useBBox: true }
 					);
 
-					extraItemsXPosition =
+					extraLabelItemsStartingPoint =
 						startingPoint +
 						legendItemTextDimensions.width +
 						spaceNeededForCheckbox +
@@ -337,9 +326,10 @@ export class Legend extends Component {
 				itemIndexInLine++;
 			});
 
-		if (addedRadiusLabelItem) {
-			addedRadiusLabelItem
-				.merge(svg.selectAll("g.radius-label"))
+		// add extra label items
+		if (addedExtraLabelItems) {
+			addedExtraLabelItems
+				.merge(svg.selectAll("g.extra-label"))
 				.each(function(d) {
 					const radiusLabelItem = select(this);
 					if (legendOrientation === LegendOrientations.VERTICAL) {
@@ -354,30 +344,41 @@ export class Legend extends Component {
 							{ useBBox: true }
 						);
 						if (
-							extraItemsXPosition +
+							extraLabelItemsStartingPoint +
 							spaceNeededForCheckbox +
 							labelItemTextDimensions.width > 
 							svgDimensions.width
 						) {
 							lineNumber++;
-							extraItemsXPosition = 0;
+							extraLabelItemsStartingPoint = 0;
 						}
 					}
 
 					radiusLabelItem
 						.select("g.icon svg")
-						.attr("x", extraItemsXPosition)
+						.attr("x", extraLabelItemsStartingPoint)
 						.attr("y", lineNumber * legendItemsVerticalSpacing);
 
 					radiusLabelItem
 						.select("text")
-						.attr("x", extraItemsXPosition + spaceNeededForCheckbox)
+						.attr("x", extraLabelItemsStartingPoint + spaceNeededForCheckbox)
 						.attr(
 							"y",
 							legendTextYOffset +
 							lineNumber *
 							legendItemsVerticalSpacing + 3
 						);
+
+					const labelTextDimensions = DOMUtils.getSVGElementSize(
+						radiusLabelItem.select("text"),
+						{ useBBox: true }
+					);
+
+					// calculate starting point for next label item
+					extraLabelItemsStartingPoint += 
+						labelTextDimensions.width +
+						spaceNeededForCheckbox +
+						legendItemsHorizontalSpacing;
 				});
 		}
 	}

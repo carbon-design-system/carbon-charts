@@ -126,7 +126,7 @@ export class Chart {
 
 		const legendComponent = {
 			id: "legend",
-			components: [new Legend(this.model, this.services, [])],
+			components: [new Legend(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
 				y: LayoutGrowth.FIXED

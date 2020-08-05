@@ -89,12 +89,6 @@ export enum LegendOrientations {
 }
 
 /**
- * enum of all extra legend item types
- */
-export enum LegendItemTypes {
-	RADIUS_LABEL = "radius-label"
-}
-/**
  * enum of all possible layout directions
  */
 export enum LayoutDirection {

@@ -22,7 +22,6 @@ import {
 import { Tools } from "./tools";
 
 import { CartesianScales, Curves, Zoom } from "./services";
-import { LegendItemTypes } from "./interfaces/enums";
 
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {
@@ -68,22 +67,29 @@ export class AxisChart extends Chart {
 		};
 
 		// Add extra legend items
-		const extraLegendItems = [];
+		const extraLabels = [];
 		const radiusLabel = Tools.getProperty(
 			options,
 			"bubble",
 			"radiusLabel"
 		);
 		if (radiusLabel) {
-			extraLegendItems.push({
-				type: LegendItemTypes.RADIUS_LABEL,
-				value: radiusLabel
-			})
+			extraLabels.push({
+				type: "radius-label",
+				icon: `<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+							<title>Artboard</title>
+							<g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+								<circle id="Oval-Copy-33" stroke="#8C8C8C" cx="7" cy="7" r="6.5"></circle>
+								<circle id="Oval-Copy-33" stroke="#8C8C8C" cx="7" cy="10" r="3.5"></circle>
+							</g>
+						</svg>`,
+				text: radiusLabel
+			});
 		}
 
 		const legendComponent = {
 			id: "legend",
-			components: [new Legend(this.model, this.services, extraLegendItems)],
+			components: [new Legend(this.model, this.services, { extraLabels })],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
 				y: LayoutGrowth.FIXED
