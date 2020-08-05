@@ -369,16 +369,18 @@ export class Legend extends Component {
 							legendItemsVerticalSpacing + 3
 						);
 
-					const labelTextDimensions = DOMUtils.getSVGElementSize(
-						radiusLabelItem.select("text"),
-						{ useBBox: true }
-					);
-
-					// calculate starting point for next label item
-					extraLabelItemsStartingPoint += 
-						labelTextDimensions.width +
-						spaceNeededForCheckbox +
-						legendItemsHorizontalSpacing;
+					if (legendOrientation !== LegendOrientations.VERTICAL) {
+						const labelTextDimensions = DOMUtils.getSVGElementSize(
+							radiusLabelItem.select("text"),
+							{ useBBox: true }
+						);
+	
+						// calculate starting point for next label item
+						extraLabelItemsStartingPoint += 
+							labelTextDimensions.width +
+							spaceNeededForCheckbox +
+							legendItemsHorizontalSpacing;
+					}
 				});
 		}
 	}
