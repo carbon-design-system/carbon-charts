@@ -121,5 +121,7 @@ export enum Legend {
 	ITEM_HOVER = "legend-item-onhover",
 	ITEM_CLICK = "legend-item-onclick",
 	ITEM_MOUSEOUT = "legend-item-onmouseout",
-	ITEMS_UPDATE = "legend-items-update"
+	ITEMS_UPDATE = "legend-items-update",
+	SHOW_MORE = "legend-items-show-more",
+	SHOW_LESS = "legend-items-show-less"
 }

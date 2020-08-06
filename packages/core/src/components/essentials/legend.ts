@@ -8,6 +8,7 @@ import {
 	TruncationTypes
 } from "../../interfaces";
 import { DOMUtils } from "../../services";
+import { legendVerticalSpace } from "./../../configuration";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -94,6 +95,24 @@ export class Legend extends Component {
 			addedLegendItemsText.html((d) => d.name);
 		}
 
+		const viewOptions = [
+			{type: "view-more", text: "View more"},
+			{type: "view-less", text: "View less"}
+		]
+		const viewButtons = svg.selectAll("g.view-button")
+			.data(viewOptions)
+			
+		const addedViewButtons = viewButtons
+			.enter()
+			.append("g")
+			.attr("class", d => `view-button ${d.type}`)
+			.classed("hidden", true);
+
+		addedViewButtons
+			.append("text")
+			.classed("button", true)
+			.html(d => d.text);
+
 		this.breakItemsIntoLines(addedLegendItems);
 
 		// Remove old elements as needed.
@@ -125,6 +144,10 @@ export class Legend extends Component {
 		const self = this;
 		const svg = this.getContainerSVG();
 		const options = this.model.getOptions();
+		const { height } = DOMUtils.getSVGElementSize(
+			this.getParent(),
+			{ useAttr: true }
+		);
 
 		// Configs
 		const checkboxRadius = options.legend.checkbox.radius;
@@ -153,6 +176,8 @@ export class Legend extends Component {
 		let lineNumber = 0;
 		let itemIndexInLine = 0;
 		let lastYPosition;
+		let isHidden = false;
+		let viewButtonYPosition = 0; 
 		addedLegendItems
 			.merge(svg.selectAll("g.legend-item"))
 			.each(function (d, i) {
@@ -204,27 +229,34 @@ export class Legend extends Component {
 				}
 
 				const yOffset = 0;
+				const yPosition = yOffset + lineNumber * legendItemsVerticalSpacing; 
+				if (legendOrientation === LegendOrientations.VERTICAL) {
+					isHidden = yPosition + yOffset + legendItemsVerticalSpacing >= height - legendVerticalSpace;
+				}
+
+				legendItem
+					.classed("hidden", isHidden);
 
 				// Position checkbox
 				// TODO - Replace with layout component margins
 				legendItem
 					.select("rect.checkbox")
 					.attr("x", startingPoint)
-					.attr(
-						"y",
-						yOffset + lineNumber * legendItemsVerticalSpacing
-					);
+					.attr("y", yPosition);
 
 				// Position text
 				// TODO - Replace with layout component margins
-				const yPosition =
+				const yTextPosition =
 					legendTextYOffset + lineNumber * legendItemsVerticalSpacing;
+
+				if (isHidden && !viewButtonYPosition) {
+					viewButtonYPosition = yTextPosition;
+				}
 				legendItem
 					.select("text")
 					.attr("x", startingPoint + spaceNeededForCheckbox)
-					.attr("y", yOffset + yPosition + 3);
+					.attr("y", yOffset + yTextPosition + 3);
 
-				lastYPosition = yPosition;
 
 				// Test if legendItems are placed in the correct direction
 				const testHorizontal =
@@ -280,6 +312,13 @@ export class Legend extends Component {
 
 				itemIndexInLine++;
 			});
+
+		const viewMore = DOMUtils.appendOrSelect(svg, "g.view-more")
+			.classed("hidden", false);
+
+		viewMore.select("text")
+			.attr("x", startingPoint)
+			.attr("y", viewButtonYPosition);
 	}
 
 	addEventListeners() {
@@ -357,5 +396,14 @@ export class Legend extends Component {
 					}
 				);
 			});
+
+		svg.select("g.view-more")
+			.on("click", function() {
+				self.services.events.dispatchEvent(Events.Legend.SHOW_MORE);
+				const clickedButton = select(this);
+				clickedButton.classed("hidden", true);
+				svg.selectAll("g.legend-item.hidden")
+					.classed("hidden", false);
+			})
 	}
 }

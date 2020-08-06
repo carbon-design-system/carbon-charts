@@ -39,6 +39,72 @@ export const lineOptions = {
 	}
 };
 
+export const lineLegendOverflowData = [
+	{ group: "Dataset 1", key: "Qty", value: 34200 },
+	{ group: "Dataset 1", key: "More", value: 23500 },
+	{ group: "Dataset 1", key: "Sold", value: 53100 },
+	{ group: "Dataset 1", key: "Restocking", value: 42300 },
+	{ group: "Dataset 2", key: "Sold", value: 42300 },
+	{ group: "Dataset 2", key: "Restocking", value: 21400 },
+	{ group: "Dataset 2", key: "Misc", value: 0 },
+	{ group: "Dataset 3", key: "Qty", value: 41200 },
+	{ group: "Dataset 3", key: "More", value: 18400 },
+	{ group: "Dataset 3", key: "Sold", value: 34210 },
+	{ group: "Dataset 3", key: "Restocking", value: 1400 },
+	{ group: "Dataset 3", key: "Misc", value: 42100 },
+	{ group: "Dataset 4", key: "Qty", value: 22000 },
+	{ group: "Dataset 4", key: "More", value: 1200 },
+	{ group: "Dataset 4", key: "Sold", value: 9000 },
+	{ group: "Dataset 5", key: "More", value: 39000 },
+	{ group: "Dataset 5", key: "Sold", value: 15000 },
+	{ group: "Dataset 6", key: "More", value: 9000 },
+	{ group: "Dataset 6", key: "Restocking", value: 59000 },
+	{ group: "Dataset 7", key: "Qty", value: 33000 },
+	{ group: "Dataset 7", key: "Sold", value: 3000 },
+	{ group: "Dataset 8", key: "Qty", value: 2000 },
+	{ group: "Dataset 8", key: "Misc", value: 29000 },
+	{ group: "Dataset 9", key: "Sold", value: 4000 },
+	{ group: "Dataset 10", key: "Misc", value: 10000 },
+	{ group: "Dataset 11", key: "More", value: 53400 },
+	{ group: "Dataset 11", key: "Sold", value: 20300 },
+	{ group: "Dataset 11", key: "Restocking", value: 12000 },
+	{ group: "Dataset 12", key: "Qty", value: 17030 },
+	{ group: "Dataset 12", key: "Misc", value: 31040 },
+	{ group: "Dataset 13", key: "More", value: 3000 },
+	{ group: "Dataset 13", key: "Restocking", value: 12930 },
+	{ group: "Dataset 14", key: "Sold", value: 5400 },
+	{ group: "Dataset 14", key: "Misc", value: 12040 },
+	{ group: "Dataset 15", key: "Restocking", value: 37900 },
+	{ group: "Dataset 16", key: "Misc", value: 52030 },
+	{ group: "Dataset 17", key: "Qty", value: 17030 },
+	{ group: "Dataset 18", key: "Misc", value: 31040 },
+	{ group: "Dataset 19", key: "More", value: 3700 },
+	{ group: "Dataset 19", key: "Restocking", value: 32930 },
+	{ group: "Dataset 20", key: "Sold", value: 5890 },
+	{ group: "Dataset 20", key: "Misc", value: 42040 },
+	{ group: "Dataset 21", key: "Restocking", value: 31900 },
+	{ group: "Dataset 22", key: "Misc", value: 22030 }
+];
+
+export const lineLegendOverflowOptions = {
+	title: "Line (legend overflow)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			mapsTo: "key",
+			scaleType: "labels"
+		},
+		left: {
+			mapsTo: "value",
+			title: "Conversion rate",
+			scaleType: "linear"
+		}
+	},
+	legend: {
+		position: "right"
+	}
+};
+
 export const lineCenteredLegendData = lineData;
 
 export const lineCenteredLegendOptions = {

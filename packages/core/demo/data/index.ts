@@ -398,6 +398,11 @@ let allDemoGroups = [
 				chartType: chartTypes.LineChart
 			},
 			{
+				options: lineDemos.lineLegendOverflowOptions,
+				data: lineDemos.lineLegendOverflowData,
+				chartType: chartTypes.LineChart
+			},
+			{
 				options: lineDemos.lineCenteredLegendOptions,
 				data: lineDemos.lineCenteredLegendData,
 				chartType: chartTypes.LineChart

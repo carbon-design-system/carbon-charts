@@ -32,8 +32,20 @@ g.#{$prefix}--#{$charts-prefix}--legend {
 			fill: $text-02;
 		}
 	}
+	g.legend-item.hidden {
+		opacity: 0;
+	}
 
 	&.clickable g.legend-item:hover {
 		cursor: pointer;
+	}
+
+	g.view-button > text {
+		font-size: 12px;
+		fill: $carbon--blue-50;
+	}
+
+	g.view-button.hidden {
+		opacity: 0;
 	}
 }

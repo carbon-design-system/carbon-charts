@@ -457,3 +457,5 @@ export const spacers = {
 
 export const tickSpaceRatioVertical = 2.5;
 export const tickSpaceRatioHorizontal = 3.5;
+
+export const legendVerticalSpace = 32;
