@@ -2,6 +2,7 @@
 import { Component } from "../component";
 import { Events, ScaleTypes } from "../../interfaces";
 import { DOMUtils } from "../../services";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { brushX } from "d3-brush";
@@ -22,7 +23,8 @@ export class ChartBrush extends Component {
 
 	init() {
 		// get zoom in ratio
-		this.zoomRatio = this.model.getOptions().zoomBar.toolBar.zoomRatio;
+		this.zoomRatio =
+			Tools.getProperty(this.model.getOptions(), "zoomBar", "toolBar", "zoomRatio");
 	}
 
 	render(animate = true) {
@@ -70,9 +72,8 @@ export class ChartBrush extends Component {
 			);
 		};
 
-		const getDefaultZoomBarDomain = () => {
-			return this.services.zoom.getDefaultZoomBarDomain();
-		};
+		const getDefaultZoomBarDomain = () =>
+			this.services.zoom.getDefaultZoomBarDomain();
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
 			// get current zoomDomain
@@ -82,8 +83,8 @@ export class ChartBrush extends Component {
 				zoomDomain = getDefaultZoomBarDomain();
 				if (zoomDomain) {
 					this.model.set(
-					   { zoomDomain: zoomDomain },
-					   { animate: false }
+						{ zoomDomain: zoomDomain },
+						{ animate: false }
 					);
 				}
 			}
@@ -181,7 +182,7 @@ export class ChartBrush extends Component {
 					zoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
 					zoomDomain[1].valueOf() !== newDomain[1].valueOf()
 				) {
-					// only dispatch zoom domain change event for triggering api call when event type equales to end
+					// only dispatch zoom domain change event for triggering api call when event type equals to end
 					this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
 					setDomain(newDomain);
 				}

@@ -43,13 +43,14 @@ export class ToolBar extends Component {
 	}
 
 	init() {
-		this.zoomRatio = this.model.getOptions().zoomBar.toolBar.zoomRatio;
-		this.menuOptionsList = this.model.getOptions().zoomBar.toolBar.overflowMenuItems;
+		const options = this.model.getOptions();
+		this.zoomRatio = Tools.getProperty(options, "zoomBar", "toolBar", "zoomRatio");
+		this.menuOptionsList = Tools.getProperty(options, "zoomBar", "toolBar", "overflowMenuItems");
 
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
 		const chartprefix = Tools.getProperty(
-			this.model.getOptions(),
+			options,
 			"style",
 			"prefix"
 		);
@@ -186,12 +187,12 @@ export class ToolBar extends Component {
 				);
 			});
 
+			const hasOpenedOverflowMenuOptions =  self.overflowMenuOptions
+				.selectAll("ul.bx--overflow-menu-options--open")
+				.size() > 0;
+
 			document.body.addEventListener("click", function () {
-				if (
-					self.overflowMenuOptions
-						.selectAll("ul.bx--overflow-menu-options--open")
-						.size() > 0
-				) {
+				if (hasOpenedOverflowMenuOptions) {
 					self.overflowIconClass = "icon-overflowRect";
 					self.overflowMenuIcon.attr("class", self.overflowIconClass);
 					self.services.events.dispatchEvent(Events.Toolbar.HIDE);
@@ -199,9 +200,7 @@ export class ToolBar extends Component {
 			});
 
 			this.overflowIconClass =
-				this.overflowMenuOptions
-					.selectAll("ul.bx--overflow-menu-options--open")
-					.size() > 0
+				hasOpenedOverflowMenuOptions
 					? "icon-overflowRect-hover"
 					: "icon-overflowRect";
 			this.overflowMenuOptions.html(
@@ -326,16 +325,12 @@ export class ToolBar extends Component {
 		}
 		const startPoint =
 			type === "out"
-				? selectionRange[0] -
-				  ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2)
-				: selectionRange[0] +
-				  ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
+				? selectionRange[0] - ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2)
+				: selectionRange[0] + ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
 		const endPoint =
 			type === "out"
-				? selectionRange[1] +
-				  ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2)
-				: selectionRange[1] -
-				  ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
+				? selectionRange[1] + ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2)
+				: selectionRange[1] - ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
 
 		zoomDomain =
 			type === "out"

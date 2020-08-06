@@ -151,7 +151,7 @@ export interface ZoomBarOptions {
  */
 export interface ToolBarOptions {
 	/**
-	 * a vaiable to handle zoom in ratio
+	 * a variable to handle zoom in ratio
 	 */
 	zoomRatio?: number;
 	/**
@@ -159,7 +159,7 @@ export interface ToolBarOptions {
 	 */
 	showToolBar?: boolean;
 	/**
-	 * is the tool-bar visible or not
+	 * toolbar overflow menu options
 	 */
 	overflowMenuItems?: string[];
 
