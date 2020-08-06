@@ -208,7 +208,7 @@ export class Tooltip extends Component {
 	positionTooltip(e: CustomEvent) {
 		const holder = this.services.domUtils.getHolder();
 		const target = this.tooltip.node();
-		const isZoomBarEnabled = Tools.getProperty(
+		const isTopZoomBarEnabled = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
 			"top",
@@ -221,7 +221,7 @@ export class Tooltip extends Component {
 		} else {
 			// if the mouse position is from event (ruler)
 			// we need add zoom bar height
-			if (isZoomBarEnabled) {
+			if (isTopZoomBarEnabled) {
 				mouseRelativePos[1] +=
 					Configuration.zoomBar.height +
 					Configuration.zoomBar.spacerHeight;
