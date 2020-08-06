@@ -1,7 +1,7 @@
 // Internal Imports
 import { Component } from "../component";
 import { Tools } from "../../tools";
-import { Events, ScaleTypes } from "../../interfaces";
+import { Events, ScaleTypes, ZoomBarTypes } from "../../interfaces";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
 
@@ -92,14 +92,14 @@ export class ZoomBar extends Component {
 			.attr("opacity", 1)
 			.attr("fill", "none");
 
-		if (zoombarType === "graph_view") {
+		if (zoombarType === ZoomBarTypes.GRAPH_VIEW) {
 			// Draw zoombar background rectangle
 			DOMUtils.appendOrSelect(container, "rect.zoom-bg")
 				.attr("x", axesLeftMargin)
 				.attr("y", 0)
 				.attr("width", width - axesLeftMargin)
 				.attr("height", "100%");
-		} else if (zoombarType === "slider_view") {
+		} else if (zoombarType === ZoomBarTypes.SLIDER_VIEW) {
 			// Draw zoombar background line
 			DOMUtils.appendOrSelect(container, "rect.zoom-slider-bg")
 				.attr("x", axesLeftMargin)
@@ -139,7 +139,7 @@ export class ZoomBar extends Component {
 
 			const zoomDomain = this.model.get("zoomDomain");
 
-			if (zoombarType === "graph_view") {
+			if (zoombarType === ZoomBarTypes.GRAPH_VIEW) {
 				this.renderZoomBarArea(
 					container,
 					"path.zoom-graph-area-unselected",
@@ -296,7 +296,7 @@ export class ZoomBar extends Component {
 		const handleXDiff = -handleWidth / 2;
 
 		const handleBarWidth = 1;
-		const handleBarHeight = zoombarType === "graph_view" ? 12 : 6;
+		const handleBarHeight = zoombarType === ZoomBarTypes.GRAPH_VIEW ? 12 : 6;
 		const handleBarXDiff = -handleBarWidth / 2;
 		const handleYBarDiff = (handleHeight - handleBarHeight) / 2;
 
@@ -358,7 +358,7 @@ export class ZoomBar extends Component {
 			.attr("cursor", "pointer");
 
 		// Update slider selected area
-		if (zoombarType === "slider_view") {
+		if (zoombarType === ZoomBarTypes.SLIDER_VIEW) {
 			this.updateSliderSelectedArea(selection);
 		}
 
