@@ -3,6 +3,7 @@ import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 import { ChartModel } from "../../model";
 import { Events, TruncationTypes } from "../../interfaces";
+import * as Configuration from "../../configuration";
 
 // Carbon position service
 import Position, { PLACEMENTS } from "@carbon/utils-position";
@@ -207,10 +208,26 @@ export class Tooltip extends Component {
 	positionTooltip(e: CustomEvent) {
 		const holder = this.services.domUtils.getHolder();
 		const target = this.tooltip.node();
+		const isTopZoomBarEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"top",
+			"enabled"
+		);
 
 		let mouseRelativePos = Tools.getProperty(e, "detail", "mousePosition");
 		if (!mouseRelativePos) {
 			mouseRelativePos = mouse(holder);
+		} else {
+			// if the mouse position is from event (ruler)
+			// we need add zoom bar height
+			if (isTopZoomBarEnabled) {
+				mouseRelativePos[1] +=
+					Configuration.zoomBar.height +
+					Configuration.zoomBar.spacerHeight;
+
+				// TODO - we need to add toolbar height when toolbar is available
+			}
 		}
 
 		let pos;
