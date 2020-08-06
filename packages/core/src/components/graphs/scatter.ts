@@ -334,7 +334,9 @@ export class Scatter extends Component {
 				// Show tooltip
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
-					data: overlappingData
+					data: overlappingData,
+					radiusLabel: self["radiusLabel"],
+					radiusMapsTo: self["radiusMapsTo"]
 				});
 
 				// Dispatch mouse event

@@ -86,11 +86,10 @@ export class AxisChartsTooltip extends Tooltip {
 			];
 
 			// Add radius label and value
-			const { radiusLabel, radiusMapsTo } = Tools.getProperty(options, "bubble");
-			if (radiusLabel) {
+			if (e.detail.radiusLabel) {
 				items.push({
-					label: radiusLabel,
-					value: datum[radiusMapsTo] 
+					label: e.detail.radiusLabel,
+					value: datum[e.detail.radiusMapsTo] 
 				})
 			}
 		} else if (data.length > 1) {
