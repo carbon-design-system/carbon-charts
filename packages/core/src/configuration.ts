@@ -23,7 +23,8 @@ import {
 	StackedBarOptions,
 	MeterChartOptions,
 	GaugeTypes,
-	Alignments
+	Alignments,
+	ZoomBarsOptions
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
 
@@ -155,7 +156,12 @@ const chart: BaseChartOptions = {
 const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	timeScale,
-	grid
+	grid,
+	zoomBar: {
+		top: {
+			enabled: false
+		}
+	} as ZoomBarsOptions
 } as AxisChartOptions);
 
 /**
@@ -453,6 +459,11 @@ export const spacers = {
 	default: {
 		size: 24
 	}
+};
+
+export const zoomBar = {
+	height: 32,
+	spacerHeight: 20
 };
 
 export const tickSpaceRatioVertical = 2.5;

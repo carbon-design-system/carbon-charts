@@ -18,6 +18,16 @@ export enum Model {
 }
 
 /**
+ * enum of all events related to the zoom-bar
+ */
+export enum ZoomBar {
+	UPDATE = "zoom-bar-update",
+	SELECTION_START = "zoom-bar-selection-start",
+	SELECTION_IN_PROGRESS = "zoom-bar-selection-in-progress",
+	SELECTION_END = "zoom-bar-selection-end"
+}
+
+/**
  * enum of all axis-related events
  */
 export enum Axis {

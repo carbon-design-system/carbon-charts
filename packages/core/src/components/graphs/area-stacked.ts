@@ -28,7 +28,7 @@ export class StackedArea extends Component {
 	}
 
 	render(animate = true) {
-		const svg = this.getContainerSVG();
+		const svg = this.getContainerSVG({ withinChartClip: true });
 		const self = this;
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;

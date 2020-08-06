@@ -131,7 +131,7 @@ export const simpleBarCenteredLegendOptions = {
 	legend: {
 		alignment: "center"
 	}
-}
+};
 
 // Simple bar with long labels
 export const simpleBarLongLabelData = [
@@ -225,7 +225,7 @@ export const simpleHorizontalBarCenteredLegendOptions = {
 	legend: {
 		alignment: "center"
 	}
-}
+};
 
 export const simpleHorizontalBarLongLabelOptions = {
 	title: "Simple horizontal bar (truncated labels)",
@@ -277,7 +277,7 @@ export const simpleBarTimeSeriesDenseData = [
 	{ group: "data", date: new Date(2019, 1, 1, 10, 35, 40), value: 20000 },
 	{ group: "data", date: new Date(2019, 1, 1, 10, 36, 44), value: 10000 },
 	{ group: "data", date: new Date(2019, 1, 1, 10, 37, 48), value: 30000 },
-	{ group: "data", date: new Date(2019, 1, 1, 10, 40, 52), value: 10000 },
+	{ group: "data", date: new Date(2019, 1, 1, 10, 40, 52), value: 10000 }
 ];
 
 export const simpleBarTimeSeriesOptions = {
@@ -313,12 +313,12 @@ export const simpleBarTimeSeriesDenseOptions = {
 	title: "Simple bar (time series) with dense data",
 	axes: {
 		left: {
-			mapsTo: "value",
+			mapsTo: "value"
 		},
 		bottom: {
 			mapsTo: "date",
-			scaleType: "time",
-		},
+			scaleType: "time"
+		}
 	},
 	timeScale: { localeObject: trLocaleObject },
 	bars: { maxWidth: 200 }
