@@ -467,7 +467,7 @@ export const zoomBar = {
 		graph_view: 32,
 		slider_view: 10
 	},
-	spacerHeight: 20
+	spacerHeight: 8
 };
 
 export const tickSpaceRatioVertical = 2.5;
