@@ -296,7 +296,8 @@ export class ZoomBar extends Component {
 		const handleXDiff = -handleWidth / 2;
 
 		const handleBarWidth = 1;
-		const handleBarHeight = zoombarType === ZoomBarTypes.GRAPH_VIEW ? 12 : 6;
+		const handleBarHeight =
+			zoombarType === ZoomBarTypes.GRAPH_VIEW ? 12 : 6;
 		const handleBarXDiff = -handleBarWidth / 2;
 		const handleYBarDiff = (handleHeight - handleBarHeight) / 2;
 

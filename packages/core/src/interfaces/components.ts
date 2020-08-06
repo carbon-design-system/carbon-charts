@@ -1,4 +1,9 @@
-import { LayoutGrowth, LegendPositions, Alignments, ZoomBarTypes } from "./enums";
+import {
+	LayoutGrowth,
+	LegendPositions,
+	Alignments,
+	ZoomBarTypes
+} from "./enums";
 import { Component } from "../components/component";
 import { TruncationOptions } from "./truncation";
 

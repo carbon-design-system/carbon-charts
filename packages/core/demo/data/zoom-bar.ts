@@ -104,7 +104,6 @@ export const zoomBarStepTimeSeriesData = stepChart.stepTimeSeriesData;
 export const zoomBarStepTimeSeriesOptions = addZoomBarToOptions(
 	Object.assign({}, stepChart.stepTimeSeriesOptions),
 	{ sliderView: true }
-
 );
 
 export const zoomBarLineTimeSeries15secondsData =
