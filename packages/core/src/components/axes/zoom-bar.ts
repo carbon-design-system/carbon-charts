@@ -56,11 +56,17 @@ export class ZoomBar extends Component {
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
-		const isDataLoading = Tools.getProperty(
+		const options = this.model.getOptions();
+
+		const isDataLoading = Tools.getProperty(options, "data", "loading");
+
+		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
-			"data",
-			"loading"
+			"zoomBar",
+			"top",
+			"type"
 		);
+		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
 
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
@@ -75,12 +81,12 @@ export class ZoomBar extends Component {
 
 		const container = DOMUtils.appendOrSelect(svg, "svg.zoom-container")
 			.attr("width", "100%")
-			.attr("height", Configuration.zoomBar.height)
+			.attr("height", zoombarHeight)
 			.attr("opacity", 1);
 
 		const spacer = DOMUtils.appendOrSelect(svg, "rect.zoom-spacer")
 			.attr("x", 0)
-			.attr("y", Configuration.zoomBar.height)
+			.attr("y", zoombarHeight)
 			.attr("width", "100%")
 			.attr("height", Configuration.zoomBar.spacerHeight)
 			.attr("opacity", 1)
@@ -118,34 +124,36 @@ export class ZoomBar extends Component {
 			this.maxSelectionRange = this.xScale.range();
 
 			this.yScale
-				.range([0, Configuration.zoomBar.height - 6])
+				.range([0, zoombarHeight - 6])
 				.domain(extent(zoomBarData, (d: any) => d.value));
 
 			const zoomDomain = this.model.get("zoomDomain");
 
-			this.renderZoomBarArea(
-				container,
-				"path.zoom-graph-area-unselected",
-				zoomBarData,
-				null
-			);
-			this.updateClipPath(svg, this.clipId, 0, 0, 0, 0);
-			this.renderZoomBarArea(
-				container,
-				"path.zoom-graph-area",
-				zoomBarData,
-				this.clipId
-			);
+			if (zoombarType === "graph_view") {
+				this.renderZoomBarArea(
+					container,
+					"path.zoom-graph-area-unselected",
+					zoomBarData,
+					null
+				);
+				this.updateClipPath(svg, this.clipId, 0, 0, 0, 0);
+				this.renderZoomBarArea(
+					container,
+					"path.zoom-graph-area",
+					zoomBarData,
+					this.clipId
+				);
 
-			// Draw the zoom base line
-			const baselineGenerator = line()([
-				[axesLeftMargin, Configuration.zoomBar.height],
-				[width, Configuration.zoomBar.height]
-			]);
-			const zoomBaseline = DOMUtils.appendOrSelect(
-				container,
-				"path.zoom-bg-baseline"
-			).attr("d", baselineGenerator);
+				// Draw the zoom base line
+				const baselineGenerator = line()([
+					[axesLeftMargin, zoombarHeight],
+					[width, zoombarHeight]
+				]);
+				const zoomBaseline = DOMUtils.appendOrSelect(
+					container,
+					"path.zoom-bg-baseline"
+				).attr("d", baselineGenerator);
+			}
 
 			// Attach brushing event listeners
 			this.addBrushEventListener(zoomDomain, axesLeftMargin, width);
@@ -203,11 +211,19 @@ export class ZoomBar extends Component {
 			}
 		};
 
+		const zoombarType = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"top",
+			"type"
+		);
+		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
+
 		// Initialize the d3 brush
 		this.brush
 			.extent([
 				[axesLeftMargin, 0],
-				[width, Configuration.zoomBar.height]
+				[width, zoombarHeight]
 			])
 			.on("start brush end", null) // remove old listener first
 			.on("start brush end", brushEventListener);
@@ -259,7 +275,14 @@ export class ZoomBar extends Component {
 	updateBrushHandle(svg, selection, domain) {
 		const self = this;
 		const handleWidth = 5;
-		const handleHeight = Configuration.zoomBar.height;
+
+		const zoombarType = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"top",
+			"type"
+		);
+		const handleHeight = Configuration.zoomBar.height[zoombarType];
 		const handleXDiff = -handleWidth / 2;
 
 		const handleBarWidth = 1;
@@ -330,7 +353,7 @@ export class ZoomBar extends Component {
 			selection[0],
 			0,
 			selection[1] - selection[0],
-			Configuration.zoomBar.height
+			handleHeight
 		);
 	}
 
@@ -363,10 +386,18 @@ export class ZoomBar extends Component {
 			mainYScaleType,
 			mainYAxisPosition
 		);
+
+		const zoombarType = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"top",
+			"type"
+		);
+		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
 		const areaGenerator = area()
 			.x((d, i) => xAccessor(d, i))
-			.y0(Configuration.zoomBar.height)
-			.y1((d, i) => Configuration.zoomBar.height - yAccessor(d, i));
+			.y0(zoombarHeight)
+			.y1((d, i) => zoombarHeight - yAccessor(d, i));
 
 		const areaGraph = DOMUtils.appendOrSelect(container, querySelector)
 			.datum(data)

@@ -159,7 +159,8 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	grid,
 	zoomBar: {
 		top: {
-			enabled: false
+			enabled: false,
+			type: "slider_view"
 		}
 	} as ZoomBarsOptions
 } as AxisChartOptions);
@@ -462,7 +463,10 @@ export const spacers = {
 };
 
 export const zoomBar = {
-	height: 32,
+	height: {
+		graph_view: 32,
+		slider_view: 10
+	},
 	spacerHeight: 20
 };
 
