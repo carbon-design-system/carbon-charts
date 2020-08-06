@@ -142,7 +142,6 @@ export class ToolBar extends Component {
 
 			zoomInContainer.on("click", function () {
 				self.handleZoomInEvent(
-					self,
 					zoomDomain,
 					axesLeftMargin,
 					width,
@@ -159,7 +158,6 @@ export class ToolBar extends Component {
 
 			zoomOutContainer.on("click", function () {
 				self.handleZoomOutEvent(
-					self,
 					zoomDomain,
 					axesLeftMargin,
 					width,
@@ -181,7 +179,6 @@ export class ToolBar extends Component {
 			overflowMenuContainer.on("click", function () {
 				self.handleOverflowMenuEvent(
 					this.parentNode,
-					self,
 					axesLeftMargin,
 					width
 				);
@@ -313,28 +310,27 @@ export class ToolBar extends Component {
 
 	handleZoomIconClickEvent(
 		type,
-		self,
 		zoomDomain,
 		xScale,
 		axesLeftMargin,
 		width
 	) {
-		let selectionRange = self.model.get("selectionRange");
+		let selectionRange = this.model.get("selectionRange");
 		if (!selectionRange) {
 			selectionRange = [axesLeftMargin, width];
 		}
 		const startPoint =
 			type === "out"
-				? selectionRange[0] - ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2)
-				: selectionRange[0] + ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
+				? selectionRange[0] - ((width - axesLeftMargin) / 2) * (this.zoomRatio / 2)
+				: selectionRange[0] + ((width - axesLeftMargin) / 2) * (this.zoomRatio / 2);
 		const endPoint =
 			type === "out"
-				? selectionRange[1] + ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2)
-				: selectionRange[1] - ((width - axesLeftMargin) / 2) * (self.zoomRatio / 2);
+				? selectionRange[1] + ((width - axesLeftMargin) / 2) * (this.zoomRatio / 2)
+				: selectionRange[1] - ((width - axesLeftMargin) / 2) * (this.zoomRatio / 2);
 
 		zoomDomain =
 			type === "out"
-				? self.services.zoom.getDefaultZoomBarDomain()
+				? this.services.zoom.getDefaultZoomBarDomain()
 				: zoomDomain;
 		xScale.range([axesLeftMargin, width]).domain(zoomDomain);
 		const newDomain = [xScale.invert(startPoint), xScale.invert(endPoint)];
@@ -342,25 +338,24 @@ export class ToolBar extends Component {
 		return [newDomain, zoomDomain, startPoint, endPoint];
 	}
 
-	handleDomainChange(newDomain, startPoint, endPoint, self) {
-		self.model.set(
+	handleDomainChange(newDomain, startPoint, endPoint) {
+		this.model.set(
 			{ zoomDomain: newDomain, selectionRange: [startPoint, endPoint] },
 			{ animate: false }
 		);
-		self.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
+		this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
 			newDomain
 		});
 	}
 
-	handleZoomInEvent(self, zoomDomain, axesLeftMargin, width, xScale) {
+	handleZoomInEvent(zoomDomain, axesLeftMargin, width, xScale) {
 		let [
 			newDomain,
 			originalZoomDomain,
 			startPoint,
 			endPoint
-		] = self.handleZoomIconClickEvent(
+		] = this.handleZoomIconClickEvent(
 			"in",
-			self,
 			zoomDomain,
 			xScale,
 			axesLeftMargin,
@@ -373,7 +368,7 @@ export class ToolBar extends Component {
 			newDomain[0].valueOf() === newDomain[1].valueOf()
 		) {
 			// same as d3 behavior and zoom bar behavior: set to default full range
-			newDomain = self.services.zoom.getDefaultZoomBarDomain();
+			newDomain = this.services.zoom.getDefaultZoomBarDomain();
 			startPoint = axesLeftMargin;
 			endPoint = width;
 		}
@@ -383,19 +378,18 @@ export class ToolBar extends Component {
 			zoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
 			zoomDomain[1].valueOf() !== newDomain[1].valueOf()
 		) {
-			self.handleDomainChange(newDomain, startPoint, endPoint, self);
+			this.handleDomainChange(newDomain, startPoint, endPoint);
 		}
 	}
 
-	handleZoomOutEvent(self, zoomDomain, axesLeftMargin, width, xScale) {
+	handleZoomOutEvent(zoomDomain, axesLeftMargin, width, xScale) {
 		let [
 			newDomain,
 			originalZoomDomain,
 			startPoint,
 			endPoint
-		] = self.handleZoomIconClickEvent(
+		] = this.handleZoomIconClickEvent(
 			"out",
-			self,
 			zoomDomain,
 			xScale,
 			axesLeftMargin,
@@ -406,7 +400,7 @@ export class ToolBar extends Component {
 		// reset to default full range
 		if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
 			// same as d3 behavior and zoom bar behavior: set to default full range
-			newDomain = self.services.zoom.getDefaultZoomBarDomain();
+			newDomain = this.services.zoom.getDefaultZoomBarDomain();
 		}
 
 		if (newDomain[0] <= zoomDomain[0]) {
@@ -418,26 +412,27 @@ export class ToolBar extends Component {
 			endPoint = width;
 		}
 
-		self.handleDomainChange(newDomain, startPoint, endPoint, self);
+		this.handleDomainChange(newDomain, startPoint, endPoint);
 	}
 
-	handleOverflowMenuEvent(parentNode, self, axesLeftMargin, width) {
+	handleOverflowMenuEvent(parentNode, axesLeftMargin, width) {
 		if (
-			self.overflowMenuOptions
+			this.overflowMenuOptions
 				.selectAll("ul.bx--overflow-menu-options--open")
 				.size() > 0
 		) {
 			// Hide toolbar
-			self.overflowIconClass = "icon-overflowRect";
-			self.overflowMenuIcon.attr("class", self.overflowIconClass);
-			self.services.events.dispatchEvent(Events.Toolbar.HIDE);
+			this.overflowIconClass = "icon-overflowRect";
+			this.overflowMenuIcon.attr("class", this.overflowIconClass);
+			this.services.events.dispatchEvent(Events.Toolbar.HIDE);
 		} else {
-			self.overflowMenuIconBottom =
-				parseFloat(self.parent.node().getAttribute("y")) +
+			this.overflowMenuIconBottom =
+				parseFloat(this.parent.node().getAttribute("y")) +
 				parentNode.getBBox().height;
-			self.overflowIconClass = "icon-overflowRect-hover";
-			self.overflowMenuIcon.attr("class", self.overflowIconClass);
-			self.services.events.dispatchEvent(Events.Toolbar.SHOW);
+			this.overflowIconClass = "icon-overflowRect-hover";
+			this.overflowMenuIcon.attr("class", this.overflowIconClass);
+			this.services.events.dispatchEvent(Events.Toolbar.SHOW);
+			const self = this;
 			document.getElementById("reset-Btn").addEventListener(
 				"click",
 				function () {
@@ -445,8 +440,7 @@ export class ToolBar extends Component {
 					self.handleDomainChange(
 						newDomain,
 						axesLeftMargin,
-						width,
-						self
+						width
 					);
 					self.overflowIconClass = "icon-overflowRect";
 					self.overflowMenuIcon.attr("class", self.overflowIconClass);
