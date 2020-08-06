@@ -70,6 +70,7 @@ export class Zoom extends Service {
 	}
 
 	isZoomBarEnabled() {
+		// @todo - need to update this if zoom bar in other position (bottom, left, right) is supported
 		// check configuration
 		if (
 			!Tools.getProperty(

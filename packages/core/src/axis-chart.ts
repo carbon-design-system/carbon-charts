@@ -5,9 +5,7 @@ import {
 	LegendOrientations,
 	LegendPositions,
 	ChartConfig,
-	AxisChartOptions,
-	AxisPositions,
-	ScaleTypes
+	AxisChartOptions
 } from "./interfaces";
 import {
 	ChartBrush,
@@ -36,43 +34,19 @@ export class AxisChart extends Chart {
 	}
 
 	protected getAxisChartComponents(graphFrameComponents: any[]) {
-		const isZoomBarEnabled = Tools.getProperty(
-			this.model.getOptions(),
-			"zoomBar",
-			"top",
-			"enabled"
-		);
+		const zoomBarEnabled = this.services.zoom.isZoomBarEnabled();
 
-		this.services.cartesianScales.findDomainAndRangeAxes(); // need to do this before getMainXAxisPosition()
-		const mainXAxisPosition = this.services.cartesianScales.getMainXAxisPosition();
-		const mainXScaleType = Tools.getProperty(
-			this.model.getOptions(),
-			"axes",
-			mainXAxisPosition,
-			"scaleType"
-		);
-		// @todo - Zoom Bar only supports main axis at BOTTOM axis and time scale for now
-		const zoomBarEnabled =
-			isZoomBarEnabled &&
-			mainXAxisPosition === AxisPositions.BOTTOM &&
-			mainXScaleType === ScaleTypes.TIME;
-
-		const toolbarEnabled =
-			zoomBarEnabled &&
-			this.model.getOptions().zoomBar.toolBar &&
-			this.model.getOptions().zoomBar.toolBar.showToolBar;
+		const toolbarEnabled = this.services.zoom.isToolbarEnabled();
 
 		const showTitle = !!this.model.getOptions().title;
 
 		const titleComponentArray = [];
-		// tslint:disable-next-line:no-unused-expression
-		showTitle
-			? titleComponentArray.push(new Title(this.model, this.services))
-			: titleComponentArray;
-		// tslint:disable-next-line:no-unused-expression
-		toolbarEnabled
-			? titleComponentArray.push(new ToolBar(this.model, this.services))
-			: titleComponentArray;
+		if (showTitle) {
+			titleComponentArray.push(new Title(this.model, this.services));
+		}
+		if (toolbarEnabled) {
+			titleComponentArray.push(new ToolBar(this.model, this.services));
+		}
 
 		const titleAndToolBarComponent = {
 			id: "title",
