@@ -821,6 +821,12 @@ let allDemoGroups = [
 				isDemoExample: false
 			},
 			{
+				options: zoomBarDemos.zoomBarEmptyStateOptions,
+				data: zoomBarDemos.zoomBarEmptyStateData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: false
+			},
+			{
 				options: zoomBarDemos.zoomBarSkeletonOptions,
 				data: zoomBarDemos.zoomBarSkeletonData,
 				chartType: chartTypes.StackedBarChart,

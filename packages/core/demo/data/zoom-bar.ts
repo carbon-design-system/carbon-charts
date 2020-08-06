@@ -112,6 +112,12 @@ export const zoomBarLineTimeSeriesInitDomainOptions = addZoomBarToOptions(
 zoomBarLineTimeSeriesInitDomainOptions["title"] += " (initial zoomed domain)";
 zoomBarLineTimeSeriesInitDomainOptions.zoomBar.top.initialZoomDomain = initialZoomDomain;
 
+export const zoomBarEmptyStateData = barChart.stackedBarEmptyStateData;
+export const zoomBarEmptyStateOptions = addZoomBarToOptions(
+	Object.assign({}, barChart.stackedBarTimeSeriesOptions)
+);
+zoomBarEmptyStateOptions["title"] = "Zoom bar (empty state)";
+
 // assume no data set while loading is true
 export const zoomBarSkeletonData = [];
 export const zoomBarSkeletonOptions = addZoomBarToOptions(

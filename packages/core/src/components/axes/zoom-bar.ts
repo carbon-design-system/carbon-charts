@@ -64,6 +64,12 @@ export class ZoomBar extends Component {
 			"data",
 			"loading"
 		);
+		const zoomBarData = this.services.zoom.getZoomBarData();
+
+		// don't display zoom bar in empty state
+		if (!isDataLoading && zoomBarData.length === 0) {
+			return;
+		}
 
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
@@ -106,7 +112,6 @@ export class ZoomBar extends Component {
 		const mainXScaleType = cartesianScales.getMainXScaleType();
 
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
-			const zoomBarData = this.services.zoom.getZoomBarData();
 			this.xScale = mainXScale.copy();
 			this.yScale = mainYScale.copy();
 
