@@ -36,6 +36,8 @@ export class ZoomBar extends Component {
 	// keep the initial zoomBar domain to avoid the incorrect domain due to data changes
 	defaultZoomBarDomain: any;
 
+	zoomService = this.services.zoom;
+
 	init() {
 		this.services.events.addEventListener(
 			Events.ZoomBar.UPDATE,
@@ -59,17 +61,8 @@ export class ZoomBar extends Component {
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
-		const isDataLoading = Tools.getProperty(
-			this.model.getOptions(),
-			"data",
-			"loading"
-		);
-		const zoomBarData = this.services.zoom.getZoomBarData();
 
-		// don't display zoom bar in empty state
-		if (!isDataLoading && zoomBarData.length === 0) {
-			return;
-		}
+		const zoomBarData = this.zoomService.getZoomBarData();
 
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
@@ -101,7 +94,11 @@ export class ZoomBar extends Component {
 			.attr("width", width - axesLeftMargin)
 			.attr("height", "100%");
 
-		if (isDataLoading) {
+		// loading or empty state
+		if (
+			this.zoomService.isDataLoading() ||
+			this.zoomService.isEmptyState()
+		) {
 			this.renderSkeleton(container, axesLeftMargin, width);
 			return;
 		}
@@ -115,7 +112,7 @@ export class ZoomBar extends Component {
 			this.xScale = mainXScale.copy();
 			this.yScale = mainYScale.copy();
 
-			const defaultDomain = this.services.zoom.getDefaultZoomBarDomain();
+			const defaultDomain = this.zoomService.getDefaultZoomBarDomain();
 			// if defaultZoomBarDomain is still undefined,
 			// probably chart is still loading or data is not ready yet
 			if (!defaultDomain) {
@@ -467,8 +464,13 @@ export class ZoomBar extends Component {
 			[],
 			this.clipId
 		);
-		// hide brush handle
-		this.updateBrushHandle(this.getContainerSVG(), []);
+		// remove brush listener
+		this.brush.on("start brush end", null);
+		// clear d3 brush
+		DOMUtils.appendOrSelect(
+			this.getContainerSVG(),
+			this.brushSelector
+		).html(null);
 		// re-render baseline
 		this.renderZoomBarBaseline(container, startX, endX);
 	}

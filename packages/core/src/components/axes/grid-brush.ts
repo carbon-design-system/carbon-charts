@@ -21,10 +21,16 @@ export class ChartBrush extends Component {
 
 	zoomRatio;
 
+	zoomService = this.services.zoom;
+
 	init() {
 		// get zoom in ratio
-		this.zoomRatio =
-			Tools.getProperty(this.model.getOptions(), "zoomBar", "toolBar", "zoomRatio");
+		this.zoomRatio = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"toolBar",
+			"zoomRatio"
+		);
 	}
 
 	render(animate = true) {
@@ -37,6 +43,14 @@ export class ChartBrush extends Component {
 		);
 		// use this area to handle d3 brush events
 		const brushArea = DOMUtils.appendOrSelect(backdrop, `g.${this.type}`);
+
+		if (
+			this.zoomService.isDataLoading() ||
+			this.zoomService.isEmptyState()
+		) {
+			brushArea.html(null);
+			return;
+		}
 
 		// set an id for rect.selection to be referred
 		const d3Selection = DOMUtils.appendOrSelect(
@@ -64,12 +78,8 @@ export class ChartBrush extends Component {
 			this.frontSelectionSelector
 		);
 
-
 		const setDomain = (newDomain) => {
-			this.model.set(
-				{ zoomDomain: newDomain },
-				{ animate: false }
-			);
+			this.model.set({ zoomDomain: newDomain }, { animate: false });
 		};
 
 		const getDefaultZoomBarDomain = () =>
@@ -183,7 +193,10 @@ export class ChartBrush extends Component {
 					zoomDomain[1].valueOf() !== newDomain[1].valueOf()
 				) {
 					// only dispatch zoom domain change event for triggering api call when event type equals to end
-					this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, { newDomain });
+					this.services.events.dispatchEvent(
+						Events.ZoomDomain.CHANGE,
+						{ newDomain }
+					);
 					setDomain(newDomain);
 				}
 			};
@@ -212,16 +225,18 @@ export class ChartBrush extends Component {
 
 			brushArea.call(brush);
 
-			backdrop.on("click", function() {
+			backdrop.on("click", function () {
 				if (event.shiftKey) {
 					const coords = mouse(this);
 					const currentClickLocation = coords[0] - axesLeftMargin;
 
-					let leftPoint = currentClickLocation - width * zoomRatio / 2;
+					let leftPoint =
+						currentClickLocation - (width * zoomRatio) / 2;
 					if (leftPoint < 0) {
 						leftPoint = 0;
 					}
-					let rightPoint = currentClickLocation + width * zoomRatio / 2;
+					let rightPoint =
+						currentClickLocation + (width * zoomRatio) / 2;
 					if (rightPoint > width) {
 						rightPoint = width;
 					}

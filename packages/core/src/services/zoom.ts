@@ -115,4 +115,12 @@ export class Zoom extends Service {
 			)
 		);
 	}
+
+	isDataLoading() {
+		return Tools.getProperty(this.model.getOptions(), "data", "loading");
+	}
+
+	isEmptyState() {
+		return this.getZoomBarData().length === 0;
+	}
 }

@@ -36,6 +36,8 @@ export class ToolBar extends Component {
 
 	overflowIconClass = "icon-overflowRect";
 
+	zoomService = this.services.zoom;
+
 	constructor(model: ChartModel, services: any, configs?: any) {
 		super(model, services, configs);
 
@@ -44,16 +46,22 @@ export class ToolBar extends Component {
 
 	init() {
 		const options = this.model.getOptions();
-		this.zoomRatio = Tools.getProperty(options, "zoomBar", "toolBar", "zoomRatio");
-		this.menuOptionsList = Tools.getProperty(options, "zoomBar", "toolBar", "overflowMenuItems");
+		this.zoomRatio = Tools.getProperty(
+			options,
+			"zoomBar",
+			"toolBar",
+			"zoomRatio"
+		);
+		this.menuOptionsList = Tools.getProperty(
+			options,
+			"zoomBar",
+			"toolBar",
+			"overflowMenuItems"
+		);
 
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
-		const chartprefix = Tools.getProperty(
-			options,
-			"style",
-			"prefix"
-		);
+		const chartprefix = Tools.getProperty(options, "style", "prefix");
 
 		this.overflowMenuOptions = DOMUtils.appendOrSelect(
 			holder,
@@ -82,11 +90,7 @@ export class ToolBar extends Component {
 	}
 
 	render(animate = true) {
-		const isDataLoading = Tools.getProperty(
-			this.model.getOptions(),
-			"data",
-			"loading"
-		);
+		const isDataLoading = this.zoomService.isDataLoading();
 		this.overflowMenuOptions.classed("hidden", true);
 
 		const svg = this.getContainerSVG();
@@ -123,7 +127,8 @@ export class ToolBar extends Component {
 
 		// clean children first
 		container.html(null);
-		if (isDataLoading) {
+		// loading or empty state
+		if (isDataLoading || this.zoomService.getZoomBarData().length === 0) {
 			// put an empty rect to keep space unchanged
 			DOMUtils.appendOrSelect(container, "svg.toolbar-loading-space")
 				.append("rect")
@@ -184,9 +189,10 @@ export class ToolBar extends Component {
 				);
 			});
 
-			const hasOpenedOverflowMenuOptions =  self.overflowMenuOptions
-				.selectAll("ul.bx--overflow-menu-options--open")
-				.size() > 0;
+			const hasOpenedOverflowMenuOptions =
+				self.overflowMenuOptions
+					.selectAll("ul.bx--overflow-menu-options--open")
+					.size() > 0;
 
 			document.body.addEventListener("click", function () {
 				if (hasOpenedOverflowMenuOptions) {
@@ -196,10 +202,9 @@ export class ToolBar extends Component {
 				}
 			});
 
-			this.overflowIconClass =
-				hasOpenedOverflowMenuOptions
-					? "icon-overflowRect-hover"
-					: "icon-overflowRect";
+			this.overflowIconClass = hasOpenedOverflowMenuOptions
+				? "icon-overflowRect-hover"
+				: "icon-overflowRect";
 			this.overflowMenuOptions.html(
 				this.overflowIconClass === "icon-overflowRect"
 					? null
@@ -308,29 +313,27 @@ export class ToolBar extends Component {
 		return this.menuOptionsList;
 	}
 
-	handleZoomIconClickEvent(
-		type,
-		zoomDomain,
-		xScale,
-		axesLeftMargin,
-		width
-	) {
+	handleZoomIconClickEvent(type, zoomDomain, xScale, axesLeftMargin, width) {
 		let selectionRange = this.model.get("selectionRange");
 		if (!selectionRange) {
 			selectionRange = [axesLeftMargin, width];
 		}
 		const startPoint =
 			type === "out"
-				? selectionRange[0] - ((width - axesLeftMargin) / 2) * (this.zoomRatio / 2)
-				: selectionRange[0] + ((width - axesLeftMargin) / 2) * (this.zoomRatio / 2);
+				? selectionRange[0] -
+				  ((width - axesLeftMargin) / 2) * (this.zoomRatio / 2)
+				: selectionRange[0] +
+				  ((width - axesLeftMargin) / 2) * (this.zoomRatio / 2);
 		const endPoint =
 			type === "out"
-				? selectionRange[1] + ((width - axesLeftMargin) / 2) * (this.zoomRatio / 2)
-				: selectionRange[1] - ((width - axesLeftMargin) / 2) * (this.zoomRatio / 2);
+				? selectionRange[1] +
+				  ((width - axesLeftMargin) / 2) * (this.zoomRatio / 2)
+				: selectionRange[1] -
+				  ((width - axesLeftMargin) / 2) * (this.zoomRatio / 2);
 
 		zoomDomain =
 			type === "out"
-				? this.services.zoom.getDefaultZoomBarDomain()
+				? this.zoomService.getDefaultZoomBarDomain()
 				: zoomDomain;
 		xScale.range([axesLeftMargin, width]).domain(zoomDomain);
 		const newDomain = [xScale.invert(startPoint), xScale.invert(endPoint)];
@@ -368,7 +371,7 @@ export class ToolBar extends Component {
 			newDomain[0].valueOf() === newDomain[1].valueOf()
 		) {
 			// same as d3 behavior and zoom bar behavior: set to default full range
-			newDomain = this.services.zoom.getDefaultZoomBarDomain();
+			newDomain = this.zoomService.getDefaultZoomBarDomain();
 			startPoint = axesLeftMargin;
 			endPoint = width;
 		}
@@ -400,7 +403,7 @@ export class ToolBar extends Component {
 		// reset to default full range
 		if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
 			// same as d3 behavior and zoom bar behavior: set to default full range
-			newDomain = this.services.zoom.getDefaultZoomBarDomain();
+			newDomain = this.zoomService.getDefaultZoomBarDomain();
 		}
 
 		if (newDomain[0] <= zoomDomain[0]) {
@@ -437,11 +440,7 @@ export class ToolBar extends Component {
 				"click",
 				function () {
 					const newDomain = self.services.zoom.getDefaultZoomBarDomain();
-					self.handleDomainChange(
-						newDomain,
-						axesLeftMargin,
-						width
-					);
+					self.handleDomainChange(newDomain, axesLeftMargin, width);
 					self.overflowIconClass = "icon-overflowRect";
 					self.overflowMenuIcon.attr("class", self.overflowIconClass);
 					self.services.events.dispatchEvent(Events.Toolbar.HIDE);
