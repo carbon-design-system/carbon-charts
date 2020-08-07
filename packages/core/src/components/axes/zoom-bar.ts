@@ -290,6 +290,8 @@ export class ZoomBar extends Component {
 		const handleBarXDiff = -handleBarWidth / 2;
 		const handleYBarDiff = (handleHeight - handleBarHeight) / 2;
 
+		const displayStyle = isDataLoading || isNaN(selection[0]) || isNaN(selection[1]) ? "none" : null;
+
 		// handle
 		svg.select(this.brushSelector)
 			.selectAll("rect.handle")
@@ -313,12 +315,7 @@ export class ZoomBar extends Component {
 			.attr("width", handleWidth)
 			.attr("height", handleHeight)
 			.attr("cursor", "pointer")
-			.style(
-				"display",
-				isDataLoading || isNaN(selection[0]) || isNaN(selection[1])
-					? "none"
-					: null
-			);
+			.style("display", displayStyle);
 
 		// handle-bar
 		svg.select(this.brushSelector)
