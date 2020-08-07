@@ -32,7 +32,9 @@ export class Zoom extends Service {
 		// get all dates (Number) in displayData
 		let allDates = [];
 		zoomBarData.forEach((data) => {
-			allDates = allDates.concat(Number(data[domainIdentifier]));
+			allDates = allDates.concat(
+				new Date(data[domainIdentifier]).getTime()
+			);
 		});
 		allDates = Tools.removeArrayDuplicates(allDates).sort();
 		// Go through all date values
@@ -42,7 +44,7 @@ export class Zoom extends Service {
 			const datum = {};
 
 			zoomBarData.forEach((data) => {
-				if (Number(data[domainIdentifier]) === date) {
+				if (new Date(data[domainIdentifier]).getTime() === date) {
 					sum += data[rangeIdentifier];
 				}
 			});
