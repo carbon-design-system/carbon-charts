@@ -96,6 +96,11 @@ export class LayoutComponent extends Component {
 			useAttrs: true
 		});
 
+		// initialization is not completed yet
+		if (width === 0 || height === 0) {
+			return;
+		}
+
 		let root = hierarchy({
 			children: this.children
 		}).sum((d: any) => d.size);
