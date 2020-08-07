@@ -68,15 +68,15 @@ g.#{$prefix}--#{$charts-prefix}--tool-bar {
 		cursor: pointer;
 	}
 
-	svg.toolbar-zoomIn:hover rect.icon-zoomInRect{
+	svg.toolbar-zoomIn:hover rect.icon-zoomInRect {
 		fill: $hover-ui;
 	}
 
-	svg.toolbar-zoomOut:hover rect.icon-zoomOutRect{
+	svg.toolbar-zoomOut:hover rect.icon-zoomOutRect {
 		fill: $hover-ui;
 	}
 
-	svg.toolbar-overflow-menu:hover rect.icon-overflowRect{
+	svg.toolbar-overflow-menu:hover rect.icon-overflowRect {
 		fill: $hover-ui;
 	}
 
@@ -84,8 +84,6 @@ g.#{$prefix}--#{$charts-prefix}--tool-bar {
 		fill: $hover-ui;
 		cursor: pointer;
 	}
-
-	
 }
 
 @include overflow-menu;

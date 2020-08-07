@@ -162,5 +162,4 @@ export interface ToolBarOptions {
 	 * toolbar overflow menu options
 	 */
 	overflowMenuItems?: string[];
-
 }
