@@ -111,10 +111,10 @@ export class ToolBar extends Component {
 			axesLeftMargin = axesMargins.left;
 		}
 
-		this.overflowMenuStart = width - Configuration.toolBar.iconSize;
-		this.zoomOutStart =
-			this.overflowMenuStart - Configuration.toolBar.iconSize;
-		this.zoomInStart = this.zoomOutStart - Configuration.toolBar.iconSize;
+		const iconSize = Configuration.toolBar.iconSize;
+		this.overflowMenuStart = width - iconSize;
+		this.zoomOutStart = this.overflowMenuStart - iconSize;
+		this.zoomInStart = this.zoomOutStart - iconSize;
 
 		const container = DOMUtils.appendOrSelect(svg, "svg.toolbar-container")
 			.attr("width", "100%")
