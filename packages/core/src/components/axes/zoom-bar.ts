@@ -426,7 +426,7 @@ export class ZoomBar extends Component {
 	}
 	// assume the domains in data are already sorted
 	compensateDataForDefaultDomain(data, defaultDomain) {
-		if (!data || data.length < 2) {
+		if (!data || data.length < 1) {
 			return;
 		}
 
