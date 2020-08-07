@@ -67,7 +67,10 @@ export class ZoomBar extends Component {
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
 		});
-
+		// initialization is not completed yet
+		if (width === 0) {
+			return;
+		}
 		// get axes margins
 		let axesLeftMargin = 0;
 		const axesMargins = this.model.get("axesMargins");

@@ -61,6 +61,10 @@ export class ChartBrush extends Component {
 		const { width, height } = DOMUtils.getSVGElementSize(backdrop, {
 			useAttrs: true
 		});
+		// initialization is not completed yet
+		if (width === 0 || height === 0) {
+			return;
+		}
 		const zoomRatio = this.zoomRatio;
 
 		const { cartesianScales } = this.services;
