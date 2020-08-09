@@ -81,9 +81,12 @@ export class ToolBar extends Component {
 		this.overflowMenuOptions.classed("hidden", true);
 
 		const svg = this.getContainerSVG();
-		const { width } = DOMUtils.getSVGElementSize(this.parent, {
-			useAttrs: true
-		});
+		const { width } = DOMUtils.getSVGElementSize(
+			this.services.domUtils.getMainSVG(),
+			{
+				useAttrs: true
+			}
+		);
 		// get current zoomDomain
 		const zoomDomain = this.model.get("zoomDomain");
 		if (!isDataLoading && zoomDomain === undefined) {
@@ -201,17 +204,18 @@ export class ToolBar extends Component {
 	}
 
 	getZoomInIcon() {
+		const startPosition = Configuration.toolBar.iconSize * 0;
 		// zoom in icon background left padding is 5px
 		return `
 			<rect class="icon-zoomInRect"
-			x="${this.zoomInStart}px" y="0px"
+			x="${startPosition}px" y="0px"
 			width="${Configuration.toolBar.iconSize}px" height="${
 			Configuration.toolBar.iconSize
 		}px"/>
 				<?xml version="1.0" encoding="utf-8"?>
 				<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${
-					this.zoomInStart + Configuration.toolBar.iconLeftPadding
+					startPosition + Configuration.toolBar.iconLeftPadding
 				}px" y="5px"
 					width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
 					<polygon points="9,6 7,6 7,4 6,4 6,6 4,6 4,7 6,7 6,9 7,9 7,7 9,7 "/>
@@ -221,17 +225,19 @@ export class ToolBar extends Component {
 	}
 
 	getZoomOutIcon() {
+		const startPosition = Configuration.toolBar.iconSize * 1;
+
 		// zoom out icon background left padding is 5px
 		return `
 			<rect class="icon-zoomOutRect"
-			x="${this.zoomOutStart}px" y="0px"
+			x="${startPosition}px" y="0px"
 			width="${Configuration.toolBar.iconSize}px" height="${
 			Configuration.toolBar.iconSize
 		}px"/>
 			<?xml version="1.0" encoding="utf-8"?>
 			<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 			<svg version="1.1" class="icon-zoomOut" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="${
-				this.zoomOutStart + Configuration.toolBar.iconLeftPadding
+				startPosition + Configuration.toolBar.iconLeftPadding
 			}px" y="5px"
 				width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
 				<title>Zoom out</title>
@@ -242,15 +248,17 @@ export class ToolBar extends Component {
 	}
 
 	getOverflowMenuIcon() {
+		const startPosition = Configuration.toolBar.iconSize * 2;
+
 		// overflow menu icon background left padding is 5px
 		return `
 			<rect class="${this.overflowIconClass}"
-			x="${this.overflowMenuStart}px" y="0px"
+			x="${startPosition}px" y="0px"
 			width="${Configuration.toolBar.iconSize}px" height="${
 			Configuration.toolBar.iconSize
 		}px" />
 			<svg class="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" x="${
-				this.overflowMenuStart + Configuration.toolBar.iconLeftPadding
+				startPosition + Configuration.toolBar.iconLeftPadding
 			}px" y="5px"
 				width="20" height="20" viewBox="0 0 15 15" aria-hidden="true">
 				<circle cx="8" cy="3" r="1"></circle>

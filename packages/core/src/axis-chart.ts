@@ -42,19 +42,41 @@ export class AxisChart extends Chart {
 			"enabled"
 		);
 
-		const showTitle = !!this.model.getOptions().title;
+		const titleAvailable = !!this.model.getOptions().title;
 
-		const titleComponentArray = [];
-		if (showTitle) {
-			titleComponentArray.push(new Title(this.model, this.services));
-		}
-		if (toolbarEnabled) {
-			titleComponentArray.push(new ToolBar(this.model, this.services));
-		}
-
-		const titleAndToolBarComponent = {
+		const titleComponent = {
 			id: "title",
-			components: titleComponentArray,
+			components: [new Title(this.model, this.services)],
+			growth: {
+				x: LayoutGrowth.STRETCH,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		const toolBarComponent = {
+			id: "toolbar",
+			components: [new ToolBar(this.model, this.services)],
+			growth: {
+				x: LayoutGrowth.PREFERRED,
+				y: LayoutGrowth.FIXED
+			}
+		};
+
+		const headerComponent = {
+			id: "header",
+			components: [
+				new LayoutComponent(
+					this.model,
+					this.services,
+					[
+						...(titleAvailable ? [titleComponent] : []),
+						...(toolbarEnabled ? [toolBarComponent] : [])
+					],
+					{
+						direction: LayoutDirection.ROW
+					}
+				)
+			],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
 				y: LayoutGrowth.FIXED
@@ -164,8 +186,8 @@ export class AxisChart extends Chart {
 
 		// Add chart title if it exists
 		const topLevelLayoutComponents = [];
-		if (this.model.getOptions().title || toolbarEnabled) {
-			topLevelLayoutComponents.push(titleAndToolBarComponent);
+		if (titleAvailable || toolbarEnabled) {
+			topLevelLayoutComponents.push(headerComponent);
 
 			const titleSpacerComponent = {
 				id: "spacer",
