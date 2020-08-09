@@ -86,15 +86,12 @@ export class ChartBrush extends Component {
 			this.model.set({ zoomDomain: newDomain }, { animate: false });
 		};
 
-		const getDefaultZoomBarDomain = () =>
-			this.services.zoom.getDefaultZoomBarDomain();
-
 		if (mainXScale && mainXScaleType === ScaleTypes.TIME) {
 			// get current zoomDomain
 			let zoomDomain = this.model.get("zoomDomain");
 			if (zoomDomain === undefined) {
 				// default to full range with extended domain
-				zoomDomain = getDefaultZoomBarDomain();
+				zoomDomain = this.services.zoom.getDefaultZoomBarDomain();
 				if (zoomDomain) {
 					setDomain(zoomDomain);
 				}
@@ -185,7 +182,7 @@ export class ChartBrush extends Component {
 				// reset to default full range
 				if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
 					// same as d3 behavior and zoom bar behavior: set to default full range
-					newDomain = getDefaultZoomBarDomain();
+					newDomain = this.services.zoom.getDefaultZoomBarDomain();
 				}
 
 				// only if zoomDomain needs update
