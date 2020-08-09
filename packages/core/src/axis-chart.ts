@@ -36,7 +36,11 @@ export class AxisChart extends Chart {
 	protected getAxisChartComponents(graphFrameComponents: any[]) {
 		const zoomBarEnabled = this.services.zoom.isZoomBarEnabled();
 
-		const toolbarEnabled = this.services.zoom.isToolbarEnabled();
+		const toolbarEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			"toolBar",
+			"enabled"
+		);
 
 		const showTitle = !!this.model.getOptions().title;
 

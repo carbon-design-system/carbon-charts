@@ -25,9 +25,13 @@ const definedZoomBarData = [
 ];
 
 const defaultToolBarOptions = {
-	zoomRatio: 0.4,
-	showToolBar: true,
-	overflowMenuItems: ["Reset zoom"]
+	enabled: true,
+	toolBarMenuItems: {
+		resetZoom: {
+			enabled: true,
+			text: "Reset zoom"
+		}
+	}
 };
 
 // utility function to update title and enable zoomBar option
@@ -36,21 +40,22 @@ const addZoomBarToOptions = (options, includeDefinedZoomBarData = false) => {
 	if (includeDefinedZoomBarData) {
 		options["title"] = options["title"] + " - Defined zoom bar enabled";
 		options["zoomBar"] = {
+			zoomRatio: 0.4,
 			top: {
 				enabled: true,
 				data: definedZoomBarData
-			},
-			toolBar: defaultToolBarOptions
+			}
 		};
 	} else {
 		options["title"] = options["title"] + " - Zoom bar enabled";
 		options["zoomBar"] = {
+			zoomRatio: 0.4,
 			top: {
 				enabled: true
-			},
-			toolBar: defaultToolBarOptions
+			}
 		};
 	}
+	options["toolBar"] = defaultToolBarOptions;
 	return options;
 };
 

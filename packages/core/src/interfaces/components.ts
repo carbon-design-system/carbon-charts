@@ -118,13 +118,14 @@ export interface StackedBarOptions extends BarOptions {
  */
 export interface ZoomBarsOptions {
 	/**
+	 * a variable to handle zoom in ratio (0 ~ 1.0)
+	 */
+	zoomRatio?: number;
+
+	/**
 	 * currently only the top position is supported
 	 */
 	top?: ZoomBarOptions;
-	/**
-	 * options related to tool bar above zoom bar
-	 */
-	toolBar?: ToolBarOptions;
 }
 
 /**
@@ -135,7 +136,6 @@ export interface ZoomBarOptions {
 	 * is the zoom-bar visible or not
 	 */
 	enabled?: boolean;
-
 	/**
 	 * an two element array which represents the initial zoom domain
 	 */
@@ -151,15 +151,32 @@ export interface ZoomBarOptions {
  */
 export interface ToolBarOptions {
 	/**
-	 * a variable to handle zoom in ratio
+	 * is the tool bar visible or not
 	 */
-	zoomRatio?: number;
+	enabled?: boolean;
 	/**
-	 * is the tool-bar visible or not
+	 * tool bar menu options
 	 */
-	showToolBar?: boolean;
+	toolBarMenuItems: ToolBarMenuItems;
+}
+
+/**
+ * customize the ToolBar menu items
+ */
+export interface ToolBarMenuItems {
+	resetZoom?: ToolBarMenuItemOptions;
+}
+
+/**
+ * ToolBarMenuItems options
+ */
+export interface ToolBarMenuItemOptions {
 	/**
-	 * toolbar overflow menu options
+	 * is the menu item visible or not
 	 */
-	overflowMenuItems?: string[];
+	enabled?: boolean;
+	/**
+	 * the text to display in the menu item
+	 */
+	text: string;
 }

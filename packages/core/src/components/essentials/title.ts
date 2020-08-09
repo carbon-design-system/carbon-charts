@@ -9,8 +9,11 @@ export class Title extends Component {
 	type = "title";
 
 	render() {
-		const toolbarEnabled =
-			this.services.zoom && this.services.zoom.isToolbarEnabled();
+		const toolbarEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			"toolBar",
+			"enabled"
+		);
 
 		const svg = this.getContainerSVG();
 

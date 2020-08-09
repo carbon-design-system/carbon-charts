@@ -106,18 +106,6 @@ export class Zoom extends Service {
 		);
 	}
 
-	isToolbarEnabled() {
-		return (
-			this.isZoomBarEnabled() &&
-			Tools.getProperty(
-				this.model.getOptions(),
-				"zoomBar",
-				"toolBar",
-				"showToolBar"
-			)
-		);
-	}
-
 	isDataLoading() {
 		return Tools.getProperty(this.model.getOptions(), "data", "loading");
 	}

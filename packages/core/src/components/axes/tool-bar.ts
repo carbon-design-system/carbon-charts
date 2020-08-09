@@ -32,8 +32,6 @@ export class ToolBar extends Component {
 	// y coordinate of overflow menu icon
 	overflowMenuIconBottom = 0;
 
-	menuOptionsList;
-
 	overflowIconClass = "icon-overflowRect";
 
 	zoomService = this.services.zoom;
@@ -46,18 +44,7 @@ export class ToolBar extends Component {
 
 	init() {
 		const options = this.model.getOptions();
-		this.zoomRatio = Tools.getProperty(
-			options,
-			"zoomBar",
-			"toolBar",
-			"zoomRatio"
-		);
-		this.menuOptionsList = Tools.getProperty(
-			options,
-			"zoomBar",
-			"toolBar",
-			"overflowMenuItems"
-		);
+		this.zoomRatio = Tools.getProperty(options, "zoomBar", "zoomRatio");
 
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
@@ -276,41 +263,45 @@ export class ToolBar extends Component {
 	getOverflowMenuHTML() {
 		let defaultHTML;
 
-		const options = this.getMenuOptions();
 		// overflow menu icon background left padding is 5px
-		// oferflow menu option width is 160px
+		// overflow menu option width is 160px
 		// width of overflow menu icon with background is 30px
-		defaultHTML =
-			`<div data-floating-menu-container="true"
+		defaultHTML = `<div data-floating-menu-container="true"
 			data-floating-menu-direction="bottom" role="main">
 			<ul class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
 				tabindex="-1" role="menu" aria-label="Menu" data-floating-menu-direction="bottom"
 				style="left:${
 					this.overflowMenuStart -
 					(160 - Configuration.toolBar.iconSize)
-				}px; top:${this.overflowMenuIconBottom}px;">` +
-			options
-				.map(
-					(option) =>
-						`<li
+				}px; top:${this.overflowMenuIconBottom}px;">`;
+		// supports only reset zoom for now
+		defaultHTML += this.getResetZoomMenuItem();
+		defaultHTML += `</ul></div>`;
+
+		return defaultHTML;
+	}
+
+	getResetZoomMenuItem() {
+		const resetZoomOption = Tools.getProperty(
+			this.model.getOptions(),
+			"toolBar",
+			"toolBarMenuItems",
+			"resetZoom"
+		);
+		if (!resetZoomOption.enabled) {
+			return "";
+		} else {
+			return `<li
 						class="bx--overflow-menu-options__option">
 						<button class="bx--overflow-menu-options__btn" role="menuitem"  title="Reset"
 							data-floating-menu-primary-focus
 							id="reset-Btn">
 							<div class="bx--overflow-menu-options__option-content">
-								${option}
+								${resetZoomOption.text}
 							</div>
 						</button>
-					</li>`
-				)
-				.join("") +
-			`</ul></div>`;
-
-		return defaultHTML;
-	}
-
-	getMenuOptions() {
-		return this.menuOptionsList;
+					</li>`;
+		}
 	}
 
 	handleZoomIconClickEvent(type, zoomDomain, xScale, axesLeftMargin, width) {
