@@ -23,7 +23,7 @@ export class ZoomBar extends Component {
 	brushSelector = "g.zoom-bar-brush";
 
 	// The max allowed selection range, will be updated soon in render()
-	maxSelectionRange: [0, 0];
+	maxSelectionRange: [number, number];
 
 	// Give every zoomBarClip a distinct ID
 	// so they don't interfere the other zoom bars in a page
@@ -132,10 +132,13 @@ export class ZoomBar extends Component {
 				this.defaultZoomBarDomain
 			);
 
+			const handleWidth = Configuration.zoomBar.handleWidth;
 			this.xScale
-				.range([axesLeftMargin, width])
+				.range([
+					axesLeftMargin + handleWidth / 2,
+					width - handleWidth / 2
+				])
 				.domain(this.defaultZoomBarDomain);
-
 			// keep max selection range
 			this.maxSelectionRange = this.xScale.range();
 
@@ -163,7 +166,7 @@ export class ZoomBar extends Component {
 			this.renderZoomBarBaseline(container, axesLeftMargin, width);
 
 			// Attach brushing event listeners
-			this.addBrushEventListener(zoomDomain, axesLeftMargin, width);
+			this.addBrushEventListener(zoomDomain);
 
 			// Draw the brushing area
 			const brushArea = DOMUtils.appendOrSelect(
@@ -195,7 +198,7 @@ export class ZoomBar extends Component {
 		}
 	}
 
-	addBrushEventListener(zoomDomain, axesLeftMargin, width) {
+	addBrushEventListener(zoomDomain) {
 		const brushEventListener = () => {
 			const selection = event.selection;
 			// follow d3 behavior: when selection is null, reset default full range
@@ -204,10 +207,8 @@ export class ZoomBar extends Component {
 				this.handleBrushedEvent(
 					zoomDomain,
 					this.xScale,
-					this.xScale.range()
+					this.maxSelectionRange
 				);
-			} else if (selection[0] === selection[1]) {
-				// select behavior is not completed yet, do nothing
 			} else {
 				this.handleBrushedEvent(zoomDomain, this.xScale, selection);
 			}
@@ -216,8 +217,8 @@ export class ZoomBar extends Component {
 		// Initialize the d3 brush
 		this.brush
 			.extent([
-				[axesLeftMargin, 0],
-				[width, Configuration.zoomBar.height]
+				[this.maxSelectionRange[0], 0],
+				[this.maxSelectionRange[1], Configuration.zoomBar.height]
 			])
 			.on("start brush end", null) // remove old listener first
 			.on("start brush end", brushEventListener);
@@ -232,6 +233,10 @@ export class ZoomBar extends Component {
 
 		// update brush handle position
 		this.updateBrushHandle(this.getContainerSVG(), selection);
+
+		if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
+			return;
+		}
 
 		// be aware that the value of d3.event changes during an event!
 		// update zoomDomain only if the event comes from mouse event
@@ -252,7 +257,6 @@ export class ZoomBar extends Component {
 					{ animate: false }
 				);
 			}
-
 			// dispatch selection events
 			let zoomBarEventType;
 			if (event.type === "start") {
@@ -261,7 +265,7 @@ export class ZoomBar extends Component {
 				zoomBarEventType = Events.ZoomBar.SELECTION_IN_PROGRESS;
 			} else if (event.type === "end") {
 				zoomBarEventType = Events.ZoomBar.SELECTION_END;
-				// only dispatch zoom domain change event for triggering api call when event type equales to end
+				// only dispatch zoom domain change event for triggering api call when event type equals to end
 				this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
 					newDomain
 				});
@@ -301,15 +305,15 @@ export class ZoomBar extends Component {
 			.attr("x", function (d) {
 				if (d.type === "w") {
 					// handle should not exceed zoom bar range
-					return Math.max(
-						selection[0] + handleXDiff,
-						self.maxSelectionRange[0]
+					return (
+						Math.max(selection[0], self.maxSelectionRange[0]) +
+						handleXDiff
 					);
 				} else if (d.type === "e") {
 					// handle should not exceed zoom bar range
-					return Math.min(
-						selection[1] + handleXDiff,
-						self.maxSelectionRange[1] - handleWidth
+					return (
+						Math.min(selection[1], self.maxSelectionRange[1]) +
+						handleXDiff
 					);
 				}
 			})
@@ -335,14 +339,14 @@ export class ZoomBar extends Component {
 		handleBars
 			.attr("x", function (d) {
 				if (d.type === "w") {
-					return Math.max(
-						selection[0] + handleBarXDiff,
-						self.maxSelectionRange[0] - handleXDiff + handleBarXDiff
+					return (
+						Math.max(selection[0], self.maxSelectionRange[0]) +
+						handleBarXDiff
 					);
 				} else if (d.type === "e") {
-					return Math.min(
-						selection[1] + handleBarXDiff,
-						self.maxSelectionRange[1] + handleXDiff + handleBarXDiff
+					return (
+						Math.min(selection[1], self.maxSelectionRange[1]) +
+						handleBarXDiff
 					);
 				}
 			})
