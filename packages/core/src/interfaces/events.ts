@@ -120,8 +120,8 @@ export enum Tooltip {
  * enum of all toolbar events
  */
 export enum Toolbar {
-	SHOW = "show-toolbar",
-	HIDE = "hide-toolbar"
+	SHOW_MENU_ITEMS = "show-toolbar-menu-items",
+	HIDE_MENU_ITEMS = "hide-toolbar-menu-items"
 }
 
 /**

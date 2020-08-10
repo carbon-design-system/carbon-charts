@@ -263,7 +263,6 @@ export class ZoomBar extends Component {
 				zoomBarEventType = Events.ZoomBar.SELECTION_END;
 				// only dispatch zoom domain change event for triggering api call when event type equales to end
 				this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
-					selection,
 					newDomain
 				});
 			}
@@ -281,12 +280,12 @@ export class ZoomBar extends Component {
 			"loading"
 		);
 		const self = this;
-		const handleWidth = 5;
+		const handleWidth = Configuration.zoomBar.handleWidth;
 		const handleHeight = Configuration.zoomBar.height;
 		const handleXDiff = -handleWidth / 2;
 
-		const handleBarWidth = 1;
-		const handleBarHeight = 12;
+		const handleBarWidth = Configuration.zoomBar.handleBarWidth;
+		const handleBarHeight = Configuration.zoomBar.handleBarHeight;
 		const handleBarXDiff = -handleBarWidth / 2;
 		const handleYBarDiff = (handleHeight - handleBarHeight) / 2;
 

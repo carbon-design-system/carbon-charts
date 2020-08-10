@@ -4,7 +4,8 @@ import { Tools } from "../tools";
 
 // D3 imports
 import { extent } from "d3-array";
-import { AxisPositions, ScaleTypes } from "../interfaces";
+import { AxisPositions, Events, ScaleTypes } from "../interfaces";
+import * as Configuration from "../configuration";
 
 export class Zoom extends Service {
 	// get display data for zoom bar
@@ -71,6 +72,95 @@ export class Zoom extends Service {
 		);
 	}
 
+	zoomIn(zoomRatio = this.getZoomRatio()) {
+		// get current zoomDomain
+		const currentZoomDomain = this.model.get("zoomDomain");
+		const handleWidth = Configuration.zoomBar.handleWidth;
+		const { cartesianScales } = this.services;
+		const xScale = cartesianScales.getMainXScale().copy();
+		xScale.domain(this.getDefaultZoomBarDomain()); // reset domain to default full domain
+
+		// use scale range (rather than domain) to calculate
+		const currentX0 = xScale(currentZoomDomain[0]);
+		const currentX1 = xScale(currentZoomDomain[1]);
+
+		// already too close
+		if (currentX1 - currentX0 < handleWidth + 1) {
+			return;
+		}
+		const fullRange = xScale.range();
+		const gap = currentX1 - currentX0;
+		const diff = Math.min(
+			((fullRange[1] - fullRange[0]) / 2) * (zoomRatio / 2),
+			gap / 2
+		);
+
+		let newX0 = currentX0 + diff;
+		let newX1 = currentX1 - diff;
+		if (newX0 >= newX1) {
+			newX0 = currentX0 + gap / 2 - handleWidth / 2;
+			newX1 = currentX1 - gap / 2 + handleWidth / 2;
+		}
+
+		const newDomain = [xScale.invert(newX0), xScale.invert(newX1)];
+
+		// only if zoomDomain needs update
+		if (
+			currentZoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
+			currentZoomDomain[1].valueOf() !== newDomain[1].valueOf()
+		) {
+			this.handleDomainChange(newDomain);
+		}
+	}
+
+	zoomOut(zoomRatio = this.getZoomRatio()) {
+		// get current zoomDomain
+		const currentZoomDomain = this.model.get("zoomDomain");
+		const { cartesianScales } = this.services;
+		const xScale = cartesianScales.getMainXScale().copy();
+		xScale.domain(this.getDefaultZoomBarDomain()); // reset domain to default full domain
+
+		// use scale range (rather than domain) to calculate
+		const currentX0 = xScale(currentZoomDomain[0]);
+		const currentX1 = xScale(currentZoomDomain[1]);
+
+		const fullRange = xScale.range();
+		const diff = ((fullRange[1] - fullRange[0]) / 2) * (zoomRatio / 2);
+
+		const newX0 = Math.max(currentX0 - diff, fullRange[0]);
+		const newX1 = Math.min(currentX1 + diff, fullRange[1]);
+
+		const newDomain = [xScale.invert(newX0), xScale.invert(newX1)];
+
+		// only if zoomDomain needs update
+		if (
+			currentZoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
+			currentZoomDomain[1].valueOf() !== newDomain[1].valueOf()
+		) {
+			this.handleDomainChange(newDomain);
+		}
+	}
+
+	resetZoomDomain() {
+		// get current zoomDomain
+		const currentZoomDomain = this.model.get("zoomDomain");
+		const newDomain = this.getDefaultZoomBarDomain();
+
+		// only if zoomDomain needs update
+		if (
+			currentZoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
+			currentZoomDomain[1].valueOf() !== newDomain[1].valueOf()
+		) {
+			this.handleDomainChange(newDomain);
+		}
+	}
+
+	handleDomainChange(newDomain) {
+		this.model.set({ zoomDomain: newDomain }, { animate: false });
+		this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
+			newDomain
+		});
+	}
 	isZoomBarEnabled() {
 		// @todo - need to update this if zoom bar in other position (bottom, left, right) is supported
 		// check configuration

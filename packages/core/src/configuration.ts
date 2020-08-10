@@ -477,14 +477,17 @@ export const spacers = {
 
 export const zoomBar = {
 	height: 32,
-	spacerHeight: 20
+	spacerHeight: 20,
+	handleWidth: 5,
+	handleBarWidth: 1,
+	handleBarHeight: 12
 };
 
 export const toolBar = {
 	iconSize: 32,
 	height: 32,
 	spacerHeight: 10,
-	iconLeftPadding: 6
+	iconPadding: 6
 };
 
 export const tickSpaceRatioVertical = 2.5;
