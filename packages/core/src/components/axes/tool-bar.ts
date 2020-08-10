@@ -77,7 +77,9 @@ export class ToolBar extends Component {
 
 	render(animate = true) {
 		const isDataLoading = this.zoomService.isDataLoading();
-		this.isZoomBarEnabled = this.zoomService.isZoomBarEnabled();
+		this.isZoomBarEnabled =
+			this.zoomService.isZoomBarEnabled() &&
+			!this.zoomService.isEmptyState();
 		// size of overflow menu icon with background
 		const iconSize = Configuration.toolBar.iconSize;
 
@@ -112,7 +114,7 @@ export class ToolBar extends Component {
 			DOMUtils.appendOrSelect(container, "svg.toolbar-loading-space")
 				.append("rect")
 				.attr("height", Configuration.toolBar.height)
-				.attr("width", 1) // value doesn't matter but can't be empty
+				.attr("width", iconSize * 3) // value doesn't matter but can't be empty
 				.attr("opacity", 0);
 		} else {
 			const self = this;
