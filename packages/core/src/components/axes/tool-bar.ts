@@ -88,8 +88,16 @@ export class ToolBar extends Component {
 				useAttrs: true
 			}
 		);
-		// assume overflow menu icon is at the end  of chart
-		this.overflowMenuX = width - iconSize;
+
+		// overflow menu option width is 160px
+		// it's set by Carbon component
+		const overflowMenuOptionWidth = 160;
+		// no good solution to get correct ToolBar position
+		// parent x doesn't work well
+		// assume the overflowMenu button has right alignment in layout
+		this.overflowMenuX = width - overflowMenuOptionWidth;
+		this.overflowMenuY =
+			parseFloat(this.parent.node().getAttribute("y")) + iconSize;
 
 		const container = DOMUtils.appendOrSelect(svg, "svg.toolbar-container")
 			.attr("width", "100%")
@@ -169,19 +177,13 @@ export class ToolBar extends Component {
 		if (!this.getResetZoomMenuItem()) {
 			return "";
 		}
-		// overflow menu option width is 160px
-		// it's set by Carbon component
-		const overflowMenuOptionWidth = 160;
 
 		let defaultHTML;
 		defaultHTML = `<div data-floating-menu-container="true"
 			data-floating-menu-direction="bottom" role="main">
 			<ul class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
 				tabindex="-1" role="menu" aria-label="Menu" data-floating-menu-direction="bottom"
-				style="left:${
-					this.overflowMenuX -
-					(overflowMenuOptionWidth - Configuration.toolBar.iconSize)
-				}px; top:${this.overflowMenuY}px;">`;
+				style="left:${this.overflowMenuX}px; top:${this.overflowMenuY}px;">`;
 		defaultHTML += this.getResetZoomMenuItem();
 		defaultHTML += `</ul></div>`;
 
@@ -217,14 +219,11 @@ export class ToolBar extends Component {
 				.selectAll("ul.bx--overflow-menu-options--open")
 				.size() > 0
 		) {
-			// Hide toolbar
+			// hide overflow menu
 			this.setOverflowMenuIconHover(false);
 			this.services.events.dispatchEvent(Events.Toolbar.HIDE_MENU_ITEMS);
 		} else {
-			this.overflowMenuY = parseFloat(
-				this.parent.node().getAttribute("y") +
-					Configuration.toolBar.iconSize
-			);
+			// show overflow menu
 			this.setOverflowMenuIconHover(true);
 			this.services.events.dispatchEvent(Events.Toolbar.SHOW_MENU_ITEMS);
 			const self = this;
