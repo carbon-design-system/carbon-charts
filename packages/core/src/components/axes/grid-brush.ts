@@ -19,21 +19,11 @@ export class ChartBrush extends Component {
 
 	frontSelectionSelector = "rect.frontSelection"; // needs to match the class name in _grid-brush.scss
 
-	zoomRatio;
-
 	zoomService = this.services.zoom;
 
-	init() {
-		// get zoom in ratio
-		this.zoomRatio = Tools.getProperty(
-			this.model.getOptions(),
-			"zoomBar",
-			"toolBar",
-			"zoomRatio"
-		);
-	}
-
 	render(animate = true) {
+		const zoomRatio = this.zoomService.getZoomRatio();
+
 		const svg = this.parent;
 		// use this area to display selection above all graphs
 		const frontSelectionArea = this.getContainerSVG();
@@ -65,7 +55,6 @@ export class ChartBrush extends Component {
 		if (width === 0 || height === 0) {
 			return;
 		}
-		const zoomRatio = this.zoomRatio;
 
 		const { cartesianScales } = this.services;
 		let axesLeftMargin = 0;

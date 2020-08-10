@@ -44,7 +44,6 @@ export class ToolBar extends Component {
 
 	init() {
 		const options = this.model.getOptions();
-		this.zoomRatio = Tools.getProperty(options, "zoomBar", "zoomRatio");
 
 		// Grab the tooltip element
 		const holder = select(this.services.domUtils.getHolder());
@@ -78,6 +77,8 @@ export class ToolBar extends Component {
 
 	render(animate = true) {
 		const isDataLoading = this.zoomService.isDataLoading();
+		this.zoomRatio = this.zoomService.getZoomRatio();
+
 		this.overflowMenuOptions.classed("hidden", true);
 
 		const svg = this.getContainerSVG();

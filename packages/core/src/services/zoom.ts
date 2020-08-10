@@ -113,4 +113,11 @@ export class Zoom extends Service {
 	isEmptyState() {
 		return this.getZoomBarData().length === 0;
 	}
+	getZoomRatio() {
+		return Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"zoomRatio"
+		);
+	}
 }
