@@ -481,7 +481,7 @@ export class ZoomBar extends Component {
 			this.getContainerSVG(),
 			this.brushSelector
 		).html(null);
-		// re-render baseline
+		// re-render baseline because no axis labels in skeleton so the baseline length needs to change
 		this.renderZoomBarBaseline(container, startX, endX);
 	}
 

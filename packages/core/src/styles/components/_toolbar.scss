@@ -1,7 +1,7 @@
 $css--reset: false;
 @import "./../vendor/carbon-components/src/components/overflow-menu/overflow-menu";
 
-g.#{$prefix}--#{$charts-prefix}--tool-bar {
+g.#{$prefix}--#{$charts-prefix}--toolbar {
 	@include carbon--motion(standard, expressive);
 	rect.icon-zoom {
 		fill: transparent;

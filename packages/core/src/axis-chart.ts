@@ -15,7 +15,7 @@ import {
 	Title,
 	AxisChartsTooltip,
 	Spacer,
-	ToolBar,
+	Toolbar,
 	ZoomBar
 } from "./components/index";
 import { Tools } from "./tools";
@@ -38,7 +38,7 @@ export class AxisChart extends Chart {
 
 		const toolbarEnabled = Tools.getProperty(
 			this.model.getOptions(),
-			"toolBar",
+			"toolbar",
 			"enabled"
 		);
 
@@ -53,9 +53,9 @@ export class AxisChart extends Chart {
 			}
 		};
 
-		const toolBarComponent = {
+		const toolbarComponent = {
 			id: "toolbar",
-			components: [new ToolBar(this.model, this.services)],
+			components: [new Toolbar(this.model, this.services)],
 			growth: {
 				x: LayoutGrowth.PREFERRED,
 				y: LayoutGrowth.FIXED
@@ -70,7 +70,7 @@ export class AxisChart extends Chart {
 					this.services,
 					[
 						...(titleAvailable ? [titleComponent] : []),
-						...(toolbarEnabled ? [toolBarComponent] : [])
+						...(toolbarEnabled ? [toolbarComponent] : [])
 					],
 					{
 						direction: LayoutDirection.ROW

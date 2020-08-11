@@ -26,9 +26,9 @@ import {
 	Alignments,
 	ZoomBarOptions,
 	ZoomBarsOptions,
-	ToolBarOptions,
-	ToolBarMenuItems,
-	ToolBarMenuItemOptions
+	ToolbarOptions,
+	ToolbarOverflowItems,
+	ToolbarMenuItemOptions
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
 
@@ -162,20 +162,20 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	timeScale,
 	grid,
 	zoomBar: {
-		zoomRatio: 0.4,
 		top: {
+			zoomRatio: 0.4,
 			enabled: false
 		} as ZoomBarOptions
 	} as ZoomBarsOptions,
-	toolBar: {
+	toolbar: {
 		enabled: false,
-		toolBarMenuItems: {
+		overflowItems: {
 			resetZoom: {
 				enabled: true,
 				text: "Reset zoom"
-			} as ToolBarMenuItemOptions
-		} as ToolBarMenuItems
-	} as ToolBarOptions
+			} as ToolbarMenuItemOptions
+		} as ToolbarOverflowItems
+	} as ToolbarOptions
 } as AxisChartOptions);
 
 /**
@@ -483,7 +483,7 @@ export const zoomBar = {
 	handleBarHeight: 12
 };
 
-export const toolBar = {
+export const toolbar = {
 	iconSize: 32,
 	height: 32,
 	spacerHeight: 10,

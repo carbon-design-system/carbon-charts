@@ -161,7 +161,13 @@ export class Zoom extends Service {
 			newDomain
 		});
 	}
+
 	isZoomBarEnabled() {
+		// CartesianScales service is only available in axis charts
+		if (!this.services.cartesianScales) {
+			return false;
+		}
+
 		// @todo - need to update this if zoom bar in other position (bottom, left, right) is supported
 		// check configuration
 		if (
@@ -172,11 +178,6 @@ export class Zoom extends Service {
 				"enabled"
 			)
 		) {
-			return false;
-		}
-
-		// CartesianScales service is only available in axis charts
-		if (!this.services.cartesianScales) {
 			return false;
 		}
 
@@ -203,10 +204,12 @@ export class Zoom extends Service {
 	isEmptyState() {
 		return this.getZoomBarData().length === 0;
 	}
+
 	getZoomRatio() {
 		return Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
+			"top",
 			"zoomRatio"
 		);
 	}

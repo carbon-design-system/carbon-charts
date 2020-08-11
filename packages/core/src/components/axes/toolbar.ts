@@ -12,8 +12,8 @@ import { event, select } from "d3-selection";
 // import the settings for the css prefix
 import settings from "carbon-components/es/globals/js/settings";
 
-export class ToolBar extends Component {
-	type = "tool-bar";
+export class Toolbar extends Component {
+	type = "toolbar";
 
 	isZoomBarEnabled: boolean;
 
@@ -31,7 +31,7 @@ export class ToolBar extends Component {
 
 	zoomService = this.services.zoom;
 	// overflow menu icon background padding
-	iconPadding = Configuration.toolBar.iconPadding;
+	iconPadding = Configuration.toolbar.iconPadding;
 
 	constructor(model: ChartModel, services: any, configs?: any) {
 		super(model, services, configs);
@@ -60,7 +60,7 @@ export class ToolBar extends Component {
 
 		// listen to show-tooltip Custom Events to render the tooltip
 		this.services.events.addEventListener(
-			Events.Toolbar.SHOW_MENU_ITEMS,
+			Events.Toolbar.SHOW_DROPDOWN,
 			() => {
 				this.overflowMenuOptions.html(this.getOverflowMenuHTML());
 			}
@@ -68,7 +68,7 @@ export class ToolBar extends Component {
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
 		this.services.events.addEventListener(
-			Events.Toolbar.HIDE_MENU_ITEMS,
+			Events.Toolbar.HIDE_DROPDOWN,
 			() => {
 				this.overflowMenuOptions.html(null);
 			}
@@ -81,7 +81,7 @@ export class ToolBar extends Component {
 			this.zoomService.isZoomBarEnabled() &&
 			!this.zoomService.isEmptyState();
 		// size of overflow menu icon with background
-		const iconSize = Configuration.toolBar.iconSize;
+		const iconSize = Configuration.toolbar.iconSize;
 
 		const svg = this.getContainerSVG();
 		const { width } = DOMUtils.getSVGElementSize(
@@ -94,7 +94,7 @@ export class ToolBar extends Component {
 		// overflow menu option width is 160px
 		// it's set by Carbon component
 		const overflowMenuOptionWidth = 160;
-		// no good solution to get correct ToolBar position
+		// no good solution to get correct Toolbar position
 		// parent x doesn't work well
 		// assume the overflowMenu button has right alignment in layout
 		this.overflowMenuX = width - overflowMenuOptionWidth;
@@ -103,7 +103,7 @@ export class ToolBar extends Component {
 
 		const container = DOMUtils.appendOrSelect(svg, "svg.toolbar-container")
 			.attr("width", "100%")
-			.attr("height", Configuration.toolBar.height)
+			.attr("height", Configuration.toolbar.height)
 			.attr("opacity", 1);
 
 		// clean children first
@@ -111,9 +111,9 @@ export class ToolBar extends Component {
 		// loading or empty state
 		if (isDataLoading) {
 			// put an empty rect to keep space unchanged
-			DOMUtils.appendOrSelect(container, "svg.toolbar-loading-space")
+			DOMUtils.appendOrSelect(container, "svg.toolbar-loading-spacer")
 				.append("rect")
-				.attr("height", Configuration.toolBar.height)
+				.attr("height", Configuration.toolbar.height)
 				.attr("width", iconSize * 3) // value doesn't matter but can't be empty
 				.attr("opacity", 0);
 		} else {
@@ -158,7 +158,7 @@ export class ToolBar extends Component {
 				// always clear menu icon hover state
 				self.setOverflowMenuIconHover(false);
 				self.services.events.dispatchEvent(
-					Events.Toolbar.HIDE_MENU_ITEMS
+					Events.Toolbar.HIDE_DROPDOWN
 				);
 			});
 
@@ -195,8 +195,8 @@ export class ToolBar extends Component {
 	getResetZoomMenuItem() {
 		const resetZoomOption = Tools.getProperty(
 			this.model.getOptions(),
-			"toolBar",
-			"toolBarMenuItems",
+			"toolbar",
+			"overflowItems",
 			"resetZoom"
 		);
 		if (!resetZoomOption.enabled || !this.isZoomBarEnabled) {
@@ -223,11 +223,11 @@ export class ToolBar extends Component {
 		) {
 			// hide overflow menu
 			this.setOverflowMenuIconHover(false);
-			this.services.events.dispatchEvent(Events.Toolbar.HIDE_MENU_ITEMS);
+			this.services.events.dispatchEvent(Events.Toolbar.HIDE_DROPDOWN);
 		} else {
 			// show overflow menu
 			this.setOverflowMenuIconHover(true);
-			this.services.events.dispatchEvent(Events.Toolbar.SHOW_MENU_ITEMS);
+			this.services.events.dispatchEvent(Events.Toolbar.SHOW_DROPDOWN);
 			const self = this;
 			const resetZoomButtonElement = document.getElementById(
 				this.resetZoomMenuItemId
@@ -241,7 +241,7 @@ export class ToolBar extends Component {
 						self.setOverflowMenuIconHover(false);
 
 						self.services.events.dispatchEvent(
-							Events.Toolbar.HIDE_MENU_ITEMS
+							Events.Toolbar.HIDE_DROPDOWN
 						);
 					},
 					true
