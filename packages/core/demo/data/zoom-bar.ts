@@ -26,7 +26,7 @@ const definedZoomBarData = [
 
 const defaultToolBarOptions = {
 	enabled: true,
-	overflowItems: {
+	overflowMenuItems: {
 		resetZoom: {
 			enabled: true
 		}

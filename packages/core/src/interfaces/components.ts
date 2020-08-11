@@ -154,28 +154,30 @@ export interface ToolbarOptions {
 	 */
 	enabled?: boolean;
 	/**
-	 * toolbar menu options
+	 * toolbar overflow menu options
 	 */
-	overflowItems?: ToolbarOverflowItems;
+	overflowMenuItems?: ToolbarOverflowMenuItems;
 }
 
 /**
- * customize the Toolbar menu items
+ * set Toolbar overflow menu items
  */
-export interface ToolbarOverflowItems {
-	resetZoom?: ToolbarMenuItemOptions;
+export interface ToolbarOverflowMenuItems {
+	resetZoom?: ToolbarOverflowMenuItems;
+
+	// add more overflow menu items here
 }
 
 /**
- * ToolbarMenuItems options
+ * options for each toolbar overflow menu item
  */
-export interface ToolbarMenuItemOptions {
+export interface ToolbarOverflowMenuItemOptions {
 	/**
-	 * is the menu item visible or not
+	 * is the overflow menu item visible or not
 	 */
 	enabled?: boolean;
 	/**
-	 * the text to display in the menu item
+	 * the text to display in the overflow menu item
 	 */
 	text: string;
 }

@@ -27,8 +27,8 @@ import {
 	ZoomBarOptions,
 	ZoomBarsOptions,
 	ToolbarOptions,
-	ToolbarOverflowItems,
-	ToolbarMenuItemOptions
+	ToolbarOverflowMenuItems,
+	ToolbarOverflowMenuItemOptions
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
 
@@ -169,12 +169,12 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	} as ZoomBarsOptions,
 	toolbar: {
 		enabled: false,
-		overflowItems: {
+		overflowMenuItems: {
 			resetZoom: {
 				enabled: true,
 				text: "Reset zoom"
-			} as ToolbarMenuItemOptions
-		} as ToolbarOverflowItems
+			} as ToolbarOverflowMenuItemOptions
+		} as ToolbarOverflowMenuItems
 	} as ToolbarOptions
 } as AxisChartOptions);
 
