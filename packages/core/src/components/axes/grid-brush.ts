@@ -19,10 +19,8 @@ export class ChartBrush extends Component {
 
 	frontSelectionSelector = "rect.frontSelection"; // needs to match the class name in _grid-brush.scss
 
-	zoomService = this.services.zoom;
-
 	render(animate = true) {
-		const zoomRatio = this.zoomService.getZoomRatio();
+		const zoomRatio = this.services.zoom.getZoomRatio();
 
 		const svg = this.parent;
 		// use this area to display selection above all graphs
@@ -35,8 +33,8 @@ export class ChartBrush extends Component {
 		const brushArea = DOMUtils.appendOrSelect(backdrop, `g.${this.type}`);
 
 		if (
-			this.zoomService.isDataLoading() ||
-			this.zoomService.isEmptyState()
+			this.services.zoom.isDataLoading() ||
+			this.services.zoom.isEmptyState()
 		) {
 			brushArea.html(null);
 			return;

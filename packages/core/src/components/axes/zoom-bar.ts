@@ -36,8 +36,6 @@ export class ZoomBar extends Component {
 	// keep the initial zoomBar domain to avoid the incorrect domain due to data changes
 	defaultZoomBarDomain: any;
 
-	zoomService = this.services.zoom;
-
 	init() {
 		this.services.events.addEventListener(
 			Events.ZoomBar.UPDATE,
@@ -62,7 +60,7 @@ export class ZoomBar extends Component {
 	render(animate = true) {
 		const svg = this.getContainerSVG();
 
-		const zoomBarData = this.zoomService.getZoomBarData();
+		const zoomBarData = this.services.zoom.getZoomBarData();
 
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
@@ -99,8 +97,8 @@ export class ZoomBar extends Component {
 
 		// loading or empty state
 		if (
-			this.zoomService.isDataLoading() ||
-			this.zoomService.isEmptyState()
+			this.services.zoom.isDataLoading() ||
+			this.services.zoom.isEmptyState()
 		) {
 			this.renderSkeleton(container, axesLeftMargin, width);
 			return;
@@ -115,7 +113,7 @@ export class ZoomBar extends Component {
 			this.xScale = mainXScale.copy();
 			this.yScale = mainYScale.copy();
 
-			const defaultDomain = this.zoomService.getDefaultZoomBarDomain();
+			const defaultDomain = this.services.zoom.getDefaultZoomBarDomain();
 			// if defaultZoomBarDomain is still undefined,
 			// probably chart is still loading or data is not ready yet
 			if (!defaultDomain) {

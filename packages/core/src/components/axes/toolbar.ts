@@ -29,7 +29,6 @@ export class Toolbar extends Component {
 	overflowMenuX = 0;
 	overflowMenuY = 0;
 
-	zoomService = this.services.zoom;
 	// overflow menu icon background padding
 	iconPadding = Configuration.toolbar.iconPadding;
 
@@ -76,10 +75,10 @@ export class Toolbar extends Component {
 	}
 
 	render(animate = true) {
-		const isDataLoading = this.zoomService.isDataLoading();
+		const isDataLoading = this.services.zoom.isDataLoading();
 		this.isZoomBarEnabled =
-			this.zoomService.isZoomBarEnabled() &&
-			!this.zoomService.isEmptyState();
+			this.services.zoom.isZoomBarEnabled() &&
+			!this.services.zoom.isEmptyState();
 		// size of overflow menu icon with background
 		const iconSize = Configuration.toolbar.iconSize;
 
@@ -236,7 +235,7 @@ export class Toolbar extends Component {
 				resetZoomButtonElement.addEventListener(
 					"click",
 					function () {
-						self.zoomService.resetZoomDomain();
+						self.services.zoom.resetZoomDomain();
 
 						self.setOverflowMenuIconHover(false);
 
@@ -264,7 +263,7 @@ export class Toolbar extends Component {
 			id: "toolbar-zoomIn",
 			iconId: "zoomInRect",
 			iconSVG: (startPosition) => this.getZoomInIcon(startPosition),
-			clickFunction: () => this.zoomService.zoomIn()
+			clickFunction: () => this.services.zoom.zoomIn()
 		};
 	}
 	getZoomOutButtonConfig() {
@@ -272,7 +271,7 @@ export class Toolbar extends Component {
 			id: "toolbar-zoomOut",
 			iconId: "zoomOutRect",
 			iconSVG: (startPosition) => this.getZoomOutIcon(startPosition),
-			clickFunction: () => this.zoomService.zoomOut()
+			clickFunction: () => this.services.zoom.zoomOut()
 		};
 	}
 
