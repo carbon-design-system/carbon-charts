@@ -147,17 +147,26 @@ export class Toolbar extends Component {
 
 			document.body.addEventListener("click", function () {
 				// always clear menu icon hover state
-				self.setOverflowMenuIconHover(false);
+				self.overflowMenuIcon.classed(
+					"icon-overflowRect-hovered",
+					false
+				);
 				self.services.events.dispatchEvent(
 					Events.Toolbar.HIDE_DROPDOWN
 				);
 			});
 
 			if (hasOpenedOverflowMenuOptions) {
-				this.setOverflowMenuIconHover(true);
+				this.overflowMenuIcon.classed(
+					"icon-overflowRect-hovered",
+					true
+				);
 				this.overflowMenuOptions.html(this.getOverflowMenuHTML());
 			} else {
-				this.setOverflowMenuIconHover(false);
+				this.overflowMenuIcon.classed(
+					"icon-overflowRect-hovered",
+					false
+				);
 				this.overflowMenuOptions.html(null);
 			}
 		}
@@ -216,11 +225,11 @@ export class Toolbar extends Component {
 				.size() > 0
 		) {
 			// hide overflow menu
-			this.setOverflowMenuIconHover(false);
+			this.overflowMenuIcon.classed("icon-overflowRect-hovered", false);
 			this.services.events.dispatchEvent(Events.Toolbar.HIDE_DROPDOWN);
 		} else {
 			// show overflow menu
-			this.setOverflowMenuIconHover(true);
+			this.overflowMenuIcon.classed("icon-overflowRect-hovered", true);
 			this.services.events.dispatchEvent(Events.Toolbar.SHOW_DROPDOWN);
 			const self = this;
 			const resetZoomButtonElement = document.getElementById(
@@ -232,7 +241,10 @@ export class Toolbar extends Component {
 					function () {
 						self.services.zoom.resetZoomDomain();
 
-						self.setOverflowMenuIconHover(false);
+						self.overflowMenuIcon.classed(
+							"icon-overflowRect-hovered",
+							false
+						);
 
 						self.services.events.dispatchEvent(
 							Events.Toolbar.HIDE_DROPDOWN
@@ -243,14 +255,6 @@ export class Toolbar extends Component {
 			}
 		}
 		event.stopImmediatePropagation();
-	}
-
-	setOverflowMenuIconHover(enable) {
-		const overflowIconClass = enable
-			? "icon-overflowRect-hover"
-			: "icon-overflowRect";
-
-		this.overflowMenuIcon.attr("class", overflowIconClass);
 	}
 
 	getZoomInButtonConfig() {
@@ -298,7 +302,6 @@ export class Toolbar extends Component {
 		return `<svg version="1.1" class="icon-zoomOut" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 				x="${startPosition + iconPadding}px" y="${iconPadding}px"
 				width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
-				<title>Zoom out</title>
 				<rect class="rect-zoomOut" x="4" y="6" width="5" height="1"/>
 				<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
 					L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>

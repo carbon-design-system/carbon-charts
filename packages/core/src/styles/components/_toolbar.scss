@@ -75,9 +75,8 @@ g.#{$prefix}--#{$charts-prefix}--toolbar {
 		fill: $hover-ui;
 	}
 
-	rect.icon-overflowRect-hover {
+	rect.icon-overflowRect-hovered {
 		fill: $hover-ui;
-		cursor: pointer;
 	}
 }
 
