@@ -34,7 +34,7 @@ export class ZoomBar extends Component {
 	yScale: any;
 
 	// keep the initial zoomBar domain to avoid the incorrect domain due to data changes
-	defaultZoomBarDomain: any;
+	initialZoomBarDomain: any;
 
 	init() {
 		this.services.events.addEventListener(
@@ -120,14 +120,14 @@ export class ZoomBar extends Component {
 				return;
 			}
 			// save defaultZoomBarDomain if not set yet
-			if (!this.defaultZoomBarDomain) {
-				this.defaultZoomBarDomain = defaultDomain;
+			if (!this.initialZoomBarDomain) {
+				this.initialZoomBarDomain = defaultDomain;
 			}
 
 			// add value 0 to the extended domain for zoom bar area graph
 			this.compensateDataForDefaultDomain(
 				zoomBarData,
-				this.defaultZoomBarDomain
+				this.initialZoomBarDomain
 			);
 
 			const handleWidth = Configuration.zoomBar.handleWidth;
@@ -136,7 +136,7 @@ export class ZoomBar extends Component {
 					axesLeftMargin + handleWidth / 2,
 					width - handleWidth / 2
 				])
-				.domain(this.defaultZoomBarDomain);
+				.domain(this.initialZoomBarDomain);
 			// keep max selection range
 			this.maxSelectionRange = this.xScale.range();
 
