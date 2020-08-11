@@ -3,7 +3,6 @@ import { Component } from "../component";
 import { Events } from "../../interfaces";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
-import { ChartModel } from "../../model";
 import * as Configuration from "../../configuration";
 
 // D3 Imports
@@ -25,8 +24,8 @@ export class Toolbar extends Component {
 	overflowMenuX = 0;
 	overflowMenuY = 0;
 
-	// Give every resetZoomMenuItem a distinct ID
-	// so they don't interfere the other resetZoomMenuItem in a page
+	// Give every Reset zoom menu item an unique ID
+	// so they don't interfere the other Reset zoom menu item in a page
 	resetZoomMenuItemId =
 		"resetZoomMenuItem-" + Math.floor(Math.random() * 99999999999);
 
@@ -44,7 +43,7 @@ export class Toolbar extends Component {
 
 		this.overflowMenu.style("max-width", null);
 
-		// listen to show-tooltip Custom Events to render the tooltip
+		// listen to show overflow menu event to render the overflow menu
 		this.services.events.addEventListener(
 			Events.Toolbar.SHOW_OVERFLOW_MENU,
 			() => {
@@ -52,7 +51,7 @@ export class Toolbar extends Component {
 			}
 		);
 
-		// listen to hide-tooltip Custom Events to hide the tooltip
+		// listen to hide overflow menu event to hide the overflow menu
 		this.services.events.addEventListener(
 			Events.Toolbar.HIDE_OVERFLOW_MENU,
 			() => {
@@ -136,115 +135,129 @@ export class Toolbar extends Component {
 			);
 
 			document.body.addEventListener("click", function () {
-				// always clear menu icon hover state
-				self.overflowIcon.classed("icon-overflowRect-hovered", false);
-				self.services.events.dispatchEvent(
-					Events.Toolbar.HIDE_OVERFLOW_MENU
-				);
+				// hide overflow menu if user clicks on somewhere in web page
+				self.showOverflowMenu(false);
 			});
 
-			const isOverflowMenuOpen =
-				this.overflowMenu
-					.selectAll("ul.bx--overflow-menu-options--open")
-					.size() > 0;
-
-			if (isOverflowMenuOpen) {
-				this.overflowIcon.classed("icon-overflowRect-hovered", true);
-				this.overflowMenu.html(this.getOverflowMenuHTML());
-			} else {
-				this.overflowIcon.classed("icon-overflowRect-hovered", false);
-				this.overflowMenu.html(null);
+			if (this.isOverflowMenuOpen()) {
+				// keep overflow menu displayed
+				this.showOverflowMenu(true);
 			}
 		}
 	}
 
-	getOverflowMenuHTML() {
-		// supports only reset zoom for now
-		// if getResetZoomMenuItem() return nothing
-		// don't render whole overflow menu
-		if (!this.getResetZoomMenuItem()) {
-			return "";
-		}
-
-		let defaultHTML;
-		defaultHTML = `<div data-floating-menu-container="true"
-			data-floating-menu-direction="bottom" role="main">
-			<ul class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
-				tabindex="-1" role="menu" aria-label="Menu" data-floating-menu-direction="bottom"
-				style="left:${this.overflowMenuX}px; top:${this.overflowMenuY}px;">`;
-		defaultHTML += this.getResetZoomMenuItem();
-		defaultHTML += `</ul></div>`;
-
-		return defaultHTML;
-	}
-
-	getResetZoomMenuItem() {
-		const isZoomBarEnabled =
-			this.services.zoom.isZoomBarEnabled() &&
-			!this.services.zoom.isEmptyState();
-		const resetZoomOption = Tools.getProperty(
-			this.model.getOptions(),
-			"toolbar",
-			"overflowMenuItems",
-			"resetZoom"
-		);
-		if (!resetZoomOption.enabled || !isZoomBarEnabled) {
-			return "";
-		} else {
-			return `<li
-						class="bx--overflow-menu-options__option">
-						<button class="bx--overflow-menu-options__btn" role="menuitem"  title="Reset"
-							data-floating-menu-primary-focus
-							id="${this.resetZoomMenuItemId}">
-							<div class="bx--overflow-menu-options__option-content">
-								${resetZoomOption.text}
-							</div>
-						</button>
-					</li>`;
-		}
-	}
-
-	handleOverflowMenuEvent() {
-		if (
+	isOverflowMenuOpen() {
+		return (
 			this.overflowMenu
 				.selectAll("ul.bx--overflow-menu-options--open")
 				.size() > 0
-		) {
-			// hide overflow menu
-			this.overflowIcon.classed("icon-overflowRect-hovered", false);
-			this.services.events.dispatchEvent(
-				Events.Toolbar.HIDE_OVERFLOW_MENU
-			);
-		} else {
-			// show overflow menu
-			this.overflowIcon.classed("icon-overflowRect-hovered", true);
+		);
+	}
+
+	// show/hide overflow menu
+	showOverflowMenu(show: boolean) {
+		// update overflow icon background
+		this.overflowIcon.classed("icon-overflowRect-hovered", show);
+		if (show) {
 			this.services.events.dispatchEvent(
 				Events.Toolbar.SHOW_OVERFLOW_MENU
 			);
-			const self = this;
-			const resetZoomButtonElement = document.getElementById(
-				this.resetZoomMenuItemId
+		} else {
+			this.services.events.dispatchEvent(
+				Events.Toolbar.HIDE_OVERFLOW_MENU
 			);
-			if (resetZoomButtonElement !== null) {
-				resetZoomButtonElement.addEventListener(
-					"click",
-					function () {
-						self.services.zoom.resetZoomDomain();
+		}
+	}
 
-						self.overflowIcon.classed(
-							"icon-overflowRect-hovered",
-							false
-						);
+	toggleOverflowMenu() {
+		if (this.isOverflowMenuOpen()) {
+			// hide overflow menu
+			this.showOverflowMenu(false);
+		} else {
+			// show overflow menu
+			this.showOverflowMenu(true);
 
-						self.services.events.dispatchEvent(
-							Events.Toolbar.HIDE_OVERFLOW_MENU
-						);
-					},
-					true
-				);
-			}
+			// setup overflow menu item event listener
+			const self = this;
+			const overflowMenuItems = this.getOverflowMenuItems();
+			overflowMenuItems.forEach((menuItem) => {
+				const element = document.getElementById(menuItem.elementId);
+				if (element !== null) {
+					element.addEventListener("click", () => {
+						// call the specified function
+						menuItem.clickFunction();
+
+						// hide overflow menu
+						self.showOverflowMenu(false);
+					});
+				}
+			});
 		}
 		event.stopImmediatePropagation();
+	}
+
+	getOverflowMenuHTML() {
+		const overflowMenuItems = this.getOverflowMenuItems();
+		// don't render whole overflow menu if no overflow menu item
+		if (!overflowMenuItems || overflowMenuItems.length === 0) {
+			return "";
+		}
+
+		let overflowMenuHtml;
+		overflowMenuHtml = `<div data-floating-menu-container="true" data-floating-menu-direction="bottom" role="main">
+			<ul class="bx--overflow-menu-options bx--overflow-menu--flip bx--overflow-menu-options--open"
+				tabindex="-1" role="menu" aria-label="Menu" data-floating-menu-direction="bottom"
+				style="left:${this.overflowMenuX}px; top:${this.overflowMenuY}px;">`;
+
+		// generate html for each overflow menu items
+		overflowMenuItems.forEach((menuItem) => {
+			overflowMenuHtml += `<li class="bx--overflow-menu-options__option">
+						<button class="bx--overflow-menu-options__btn" role="menuitem"
+							data-floating-menu-primary-focus
+							id="${menuItem.elementId}">
+							<div class="bx--overflow-menu-options__option-content">
+								${menuItem.text}
+							</div>
+						</button>
+					</li>`;
+		});
+
+		overflowMenuHtml += `</ul></div>`;
+		return overflowMenuHtml;
+	}
+
+	getOverflowMenuItems() {
+		const overflowMenuItems = [];
+		const isZoomBarEnabled =
+			this.services.zoom.isZoomBarEnabled() &&
+			!this.services.zoom.isEmptyState();
+		const isResetZoomEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			"toolbar",
+			"overflowMenuItems",
+			"resetZoom",
+			"enabled"
+		);
+		if (isZoomBarEnabled && isResetZoomEnabled) {
+			overflowMenuItems.push(this.getResetZoomMenuItemConfig());
+		}
+
+		return overflowMenuItems;
+	}
+
+	getResetZoomMenuItemConfig() {
+		const resetZoomText = Tools.getProperty(
+			this.model.getOptions(),
+			"toolbar",
+			"overflowMenuItems",
+			"resetZoom",
+			"text"
+		);
+		return {
+			elementId: this.resetZoomMenuItemId, // this id needs to be unique in the whole web page
+			text: resetZoomText,
+			clickFunction: () => this.services.zoom.resetZoomDomain()
+		};
 	}
 
 	getZoomInButtonConfig() {
@@ -269,7 +282,7 @@ export class Toolbar extends Component {
 			id: "toolbar-overflow-menu",
 			iconId: "overflowRect",
 			iconSVG: (startPosition) => this.getOverflowIcon(startPosition),
-			clickFunction: () => this.handleOverflowMenuEvent()
+			clickFunction: () => this.toggleOverflowMenu()
 		};
 	}
 
