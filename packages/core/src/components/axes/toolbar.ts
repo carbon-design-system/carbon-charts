@@ -58,6 +58,10 @@ export class Toolbar extends Component {
 				this.overflowMenu.html(null);
 			}
 		);
+		// hide overflow menu if user clicks on somewhere in web page
+		document.body.addEventListener("click", () =>
+			this.showOverflowMenu(false)
+		);
 	}
 
 	render(animate = true) {
@@ -127,11 +131,6 @@ export class Toolbar extends Component {
 				this.getContainerSVG(),
 				"rect.icon-overflowRect"
 			);
-
-			document.body.addEventListener("click", function () {
-				// hide overflow menu if user clicks on somewhere in web page
-				self.showOverflowMenu(false);
-			});
 
 			if (this.isOverflowMenuOpen()) {
 				// keep overflow menu displayed
