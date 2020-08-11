@@ -105,7 +105,7 @@ export const simpleBarCustomLegendOrderOptions = {
 		}
 	},
 	legend: {
-		order: ["Restocking", "Misc","Sold", "Qty", "More"]
+		order: ["Restocking", "Misc", "Sold", "Qty", "More"]
 	}
 };
 
