@@ -153,7 +153,7 @@ let allDemoGroups = [
 				options: barDemos.simpleBarOptionsCustomTicks,
 				data: barDemos.simpleBarDataCustomTicks,
 				chartType: chartTypes.SimpleBarChart,
-				isDemoExample: false
+				isDemoExample: true
 			},
 			{
 				options: barDemos.simpleBarCustomLegendOrderOptions,
