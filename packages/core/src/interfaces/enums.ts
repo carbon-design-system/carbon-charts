@@ -22,6 +22,14 @@ export enum AxisPositions {
 }
 
 /**
+ * enum of all possible axis positions
+ */
+export enum ZoomBarTypes {
+	GRAPH_VIEW = "graph_view",
+	SLIDER_VIEW = "slider_view"
+}
+
+/**
  * enum of all possible truncation types
  */
 export enum TruncationTypes {

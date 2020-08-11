@@ -25,21 +25,34 @@ const definedZoomBarData = [
 ];
 
 // utility function to update title and enable zoomBar option
-const addZoomBarToOptions = (options, includeDefinedZoomBarData = false) => {
+const addZoomBarToOptions = (
+	options,
+	configs: any = { includeDefinedZoomBarData: false }
+) => {
 	options["experimental"] = true;
-	if (includeDefinedZoomBarData) {
+	if (configs.includeDefinedZoomBarData) {
 		options["title"] = options["title"] + " - Defined zoom bar enabled";
 		options["zoomBar"] = {
 			top: {
 				enabled: true,
-				data: definedZoomBarData
+				data: definedZoomBarData,
+				...(configs.sliderView
+					? {
+							type: "slider_view"
+					  }
+					: null)
 			}
 		};
 	} else {
 		options["title"] = options["title"] + " - Zoom bar enabled";
 		options["zoomBar"] = {
 			top: {
-				enabled: true
+				enabled: true,
+				...(configs.sliderView
+					? {
+							type: "slider_view"
+					  }
+					: null)
 			}
 		};
 	}
@@ -54,7 +67,8 @@ export const zoomBarStackedAreaTimeSeriesOptions = addZoomBarToOptions(
 
 export const zoomBarSimpleBarTimeSeriesData = barChart.simpleBarTimeSeriesData;
 export const zoomBarSimpleBarTimeSeriesOptions = addZoomBarToOptions(
-	Object.assign({}, barChart.simpleBarTimeSeriesOptions)
+	Object.assign({}, barChart.simpleBarTimeSeriesOptions),
+	{ sliderView: true }
 );
 
 export const zoomBarStackedBarTimeSeriesData =
@@ -67,12 +81,13 @@ export const definedZoomBarStackedBarTimeSeriesData =
 	barChart.stackedBarTimeSeriesData;
 export const definedZoomBarStackedBarTimeSeriesOptions = addZoomBarToOptions(
 	Object.assign({}, barChart.stackedBarTimeSeriesOptions),
-	true
+	{ includeDefinedZoomBarData: true }
 );
 
 export const zoomBarBubbleTimeSeriesData = bubbleChart.bubbleTimeSeriesData;
 export const zoomBarBubbleTimeSeriesOptions = addZoomBarToOptions(
-	Object.assign({}, bubbleChart.bubbleTimeSeriesOptions)
+	Object.assign({}, bubbleChart.bubbleTimeSeriesOptions),
+	{ sliderView: true }
 );
 
 export const zoomBarLineTimeSeriesData = lineChart.lineTimeSeriesData;
@@ -87,7 +102,8 @@ export const zoomBarScatterTimeSeriesOptions = addZoomBarToOptions(
 
 export const zoomBarStepTimeSeriesData = stepChart.stepTimeSeriesData;
 export const zoomBarStepTimeSeriesOptions = addZoomBarToOptions(
-	Object.assign({}, stepChart.stepTimeSeriesOptions)
+	Object.assign({}, stepChart.stepTimeSeriesOptions),
+	{ sliderView: true }
 );
 
 export const zoomBarLineTimeSeries15secondsData =
@@ -99,7 +115,8 @@ export const zoomBarLineTimeSeries15secondsOptions = addZoomBarToOptions(
 export const zoomBarLineTimeSeriesInitDomainData =
 	timeSeriesAxisChart.lineTimeSeriesData15seconds;
 export const zoomBarLineTimeSeriesInitDomainOptions = addZoomBarToOptions(
-	Object.assign({}, timeSeriesAxisChart.lineTimeSeries15secondsOptions)
+	Object.assign({}, timeSeriesAxisChart.lineTimeSeries15secondsOptions),
+	{ sliderView: true }
 );
 zoomBarLineTimeSeriesInitDomainOptions["title"] += " (initial zoomed domain)";
 zoomBarLineTimeSeriesInitDomainOptions.zoomBar.top.initialZoomDomain = initialZoomDomain;
