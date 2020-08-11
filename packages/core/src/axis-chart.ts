@@ -74,13 +74,20 @@ export class AxisChart extends Chart {
 			"radiusLabel"
 		);
 		if (radiusLabel) {
+			const outerRadius = Tools.getProperty(
+				options,
+				"legend",
+				"checkbox",
+				"radius"
+			);
+			const innerRadius = outerRadius - 3;
+
 			extraLabels.push({
 				type: "radius-label",
-				icon: `<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-							<title>Artboard</title>
-							<g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-								<circle id="Oval-Copy-33" stroke="#8C8C8C" cx="7" cy="7" r="6.5"></circle>
-								<circle id="Oval-Copy-33" stroke="#8C8C8C" cx="7" cy="10" r="3.5"></circle>
+				icon: `<svg width="16px" height="16px" viewBox="0 0 16 16">
+							<g fill="none" fill-rule="evenodd">
+								<circle cx="7" cy="7" r=${outerRadius}></circle>
+								<circle cx="7" cy="10" r=${innerRadius}></circle>
 							</g>
 						</svg>`,
 				text: radiusLabel
