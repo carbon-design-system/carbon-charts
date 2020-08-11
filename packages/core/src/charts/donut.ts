@@ -33,7 +33,7 @@ export class DonutChart extends PieChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [
+		const graphFrameComponents: any[] = [
 			new Donut(this.model, this.services),
 			new Skeleton(this.model, this.services, {
 				skeleton: Skeletons.DONUT

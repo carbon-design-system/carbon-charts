@@ -29,6 +29,9 @@ export class Axis extends Component {
 	scale: any;
 	scaleType: ScaleTypes;
 
+	// Track whether zoom domain needs to update in a render
+	zoomDomainChanging = false;
+
 	constructor(model: ChartModel, services: any, configs?: any) {
 		super(model, services, configs);
 
@@ -37,7 +40,30 @@ export class Axis extends Component {
 		}
 
 		this.margins = this.configs.margins;
+		this.init();
 	}
+
+	init() {
+		this.services.events.addEventListener(
+			Events.ZoomBar.SELECTION_START,
+			this.handleZoomBarSelectionStart
+		);
+		this.services.events.addEventListener(
+			Events.ZoomBar.SELECTION_END,
+			this.handleZoomBarSelectionEnd
+		);
+	}
+
+	handleZoomBarSelectionStart = () => {
+		this.zoomDomainChanging = true;
+	};
+
+	handleZoomBarSelectionEnd = () => {
+		this.zoomDomainChanging = false;
+		// need another update after zoom bar selection is completed
+		// to make sure the tick rotation is calculated correctly
+		this.services.events.dispatchEvent(Events.Model.UPDATE);
+	};
 
 	render(animate = true) {
 		const { position: axisPosition } = this.configs;
@@ -172,6 +198,13 @@ export class Axis extends Component {
 		const scaleType =
 			this.scaleType || axisOptions.scaleType || ScaleTypes.LINEAR;
 
+		// if zoomDomain is available, scale type is time, and axis position isBOTTOM or TOP
+		// update scale domain to zoomDomain.
+		const zoomDomain = this.model.get("zoomDomain");
+		if (zoomDomain && isTimeScaleType && !isVerticalAxis) {
+			scale.domain(zoomDomain);
+		}
+
 		// Initialize axis object
 		const axis = axisFunction(scale).tickSizeOuter(0);
 
@@ -209,7 +242,7 @@ export class Axis extends Component {
 						"timeScale",
 						"addSpaceOnEdges"
 					);
-					
+
 					const customDomain = Tools.getProperty(
 						options,
 						"axes",
@@ -218,14 +251,21 @@ export class Axis extends Component {
 					);
 
 					let tickValues;
+					// scale.nice() will change scale domain which causes extra space near chart edge
+					// so use another scale instance to avoid impacts to original scale
+					const tempScale = scale.copy();
 					if (addSpaceOnEdges && !customDomain) {
-						tickValues = scale.nice(numberOfTicks);
+						tempScale.nice(numberOfTicks);
 					}
-					tickValues = scale.ticks(numberOfTicks);
+					tickValues = tempScale.ticks(numberOfTicks);
 
 					// Remove labels on the edges
 					// If there are more than 2 labels to show
-					if (addSpaceOnEdges && tickValues.length > 2 && !customDomain) {
+					if (
+						addSpaceOnEdges &&
+						tickValues.length > 2 &&
+						!customDomain
+					) {
 						tickValues.splice(tickValues.length - 1, 1);
 						tickValues.splice(0, 1);
 					}
@@ -427,11 +467,13 @@ export class Axis extends Component {
 					? axis.tickValues().length
 					: scale.ticks().length;
 				const estimatedTickSize = width / ticksNumber / 2;
-
-				rotateTicks = estimatedTickSize < minTickSize;
+				rotateTicks = isTimeScaleType
+					? estimatedTickSize < minTickSize * 2 // datetime tick could be very long
+					: estimatedTickSize < minTickSize;
 			}
 
-			if (rotateTicks) {
+			// always rotate ticks if zoomDomain is changing to avoid rotation flips during zoomDomain changing
+			if (rotateTicks || this.zoomDomainChanging) {
 				if (!isNumberOfTicksProvided) {
 					axis.ticks(
 						this.getNumberOfFittingTicks(
@@ -464,6 +506,8 @@ export class Axis extends Component {
 		// because the Skeleton component draws them
 		if (isDataLoading) {
 			container.attr("opacity", 0);
+		} else {
+			container.attr("opacity", 1);
 		}
 
 		axisRef.selectAll("g.tick").attr("aria-label", (d) => d);
@@ -646,5 +690,15 @@ export class Axis extends Component {
 			.on("mouseover", null)
 			.on("mousemove", null)
 			.on("mouseout", null);
+
+		// Remove zoom bar event listeners
+		this.services.events.removeEventListener(
+			Events.ZoomBar.SELECTION_START,
+			this.handleZoomBarSelectionStart
+		);
+		this.services.events.removeEventListener(
+			Events.ZoomBar.SELECTION_END,
+			this.handleZoomBarSelectionEnd
+		);
 	}
 }

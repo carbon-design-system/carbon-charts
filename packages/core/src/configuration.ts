@@ -18,12 +18,15 @@ import {
 	TimeScaleOptions,
 	TooltipOptions,
 	LegendOptions,
-	LegendPositions,
-	TruncationTypes,
 	StackedBarOptions,
 	MeterChartOptions,
+	ZoomBarsOptions,
+	// ENUMS
+	Alignments,
 	GaugeTypes,
-	Alignments
+	LegendPositions,
+	TruncationTypes,
+	ZoomBarTypes
 } from "./interfaces";
 import enUSLocaleObject from "date-fns/locale/en-US/index";
 
@@ -155,7 +158,13 @@ const chart: BaseChartOptions = {
 const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	timeScale,
-	grid
+	grid,
+	zoomBar: {
+		top: {
+			enabled: false,
+			type: ZoomBarTypes.GRAPH_VIEW
+		}
+	} as ZoomBarsOptions
 } as AxisChartOptions);
 
 /**
@@ -453,6 +462,14 @@ export const spacers = {
 	default: {
 		size: 24
 	}
+};
+
+export const zoomBar = {
+	height: {
+		[ZoomBarTypes.GRAPH_VIEW]: 32,
+		[ZoomBarTypes.SLIDER_VIEW]: 10
+	},
+	spacerHeight: 8
 };
 
 export const tickSpaceRatioVertical = 2.5;

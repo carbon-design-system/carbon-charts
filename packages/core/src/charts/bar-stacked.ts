@@ -40,7 +40,7 @@ export class StackedBarChart extends AxisChart {
 
 	getComponents() {
 		// Specify what to render inside the graph-frame
-		const graphFrameComponents = [
+		const graphFrameComponents: any[] = [
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new StackedBarRuler(this.model, this.services),
