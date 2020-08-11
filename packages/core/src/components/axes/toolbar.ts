@@ -15,28 +15,20 @@ import settings from "carbon-components/es/globals/js/settings";
 export class Toolbar extends Component {
 	type = "toolbar";
 
-	isZoomBarEnabled: boolean;
-
 	// ul options list element
 	overflowMenuOptions;
 
 	// overflow menu icon rect to control background
 	overflowMenuIcon: any;
 
-	resetZoomMenuItemId = "resetZoomMenuItem";
+	// Give every resetZoomMenuItem a distinct ID
+	// so they don't interfere the other resetZoomMenuItem in a page
+	resetZoomMenuItemId =
+		"resetZoomMenuItem-" + Math.floor(Math.random() * 99999999999);
 
 	// x, y coordinate of overflow menu
 	overflowMenuX = 0;
 	overflowMenuY = 0;
-
-	// overflow menu icon background padding
-	iconPadding = Configuration.toolbar.iconPadding;
-
-	constructor(model: ChartModel, services: any, configs?: any) {
-		super(model, services, configs);
-
-		this.init();
-	}
 
 	init() {
 		const options = this.model.getOptions();
@@ -76,7 +68,7 @@ export class Toolbar extends Component {
 
 	render(animate = true) {
 		const isDataLoading = this.services.zoom.isDataLoading();
-		this.isZoomBarEnabled =
+		const isZoomBarEnabled =
 			this.services.zoom.isZoomBarEnabled() &&
 			!this.services.zoom.isEmptyState();
 		// size of overflow menu icon with background
@@ -120,7 +112,7 @@ export class Toolbar extends Component {
 
 			const buttonList = [];
 			// add zoom in/out button only if zoom bar is enabled
-			if (this.isZoomBarEnabled) {
+			if (isZoomBarEnabled) {
 				buttonList.push(this.getZoomInButtonConfig());
 				buttonList.push(this.getZoomOutButtonConfig());
 			}
@@ -192,13 +184,16 @@ export class Toolbar extends Component {
 	}
 
 	getResetZoomMenuItem() {
+		const isZoomBarEnabled =
+			this.services.zoom.isZoomBarEnabled() &&
+			!this.services.zoom.isEmptyState();
 		const resetZoomOption = Tools.getProperty(
 			this.model.getOptions(),
 			"toolbar",
 			"overflowItems",
 			"resetZoom"
 		);
-		if (!resetZoomOption.enabled || !this.isZoomBarEnabled) {
+		if (!resetZoomOption.enabled || !isZoomBarEnabled) {
 			return "";
 		} else {
 			return `<li
@@ -285,10 +280,11 @@ export class Toolbar extends Component {
 	}
 
 	getZoomInIcon(startPosition) {
-		return `<?xml version="1.0" encoding="utf-8"?>
-				<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-					x="${startPosition + this.iconPadding}px" y="${this.iconPadding}px"
+		// overflow menu icon background padding
+		const iconPadding = Configuration.toolbar.iconPadding;
+
+		return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+					x="${startPosition + iconPadding}px" y="${iconPadding}px"
 					width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
 					<polygon points="9,6 7,6 7,4 6,4 6,6 4,6 4,7 6,7 6,9 7,9 7,7 9,7 "/>
 					<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
@@ -297,11 +293,10 @@ export class Toolbar extends Component {
 	}
 
 	getZoomOutIcon(startPosition) {
-		return `
-			<?xml version="1.0" encoding="utf-8"?>
-			<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-			<svg version="1.1" class="icon-zoomOut" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-				x="${startPosition + this.iconPadding}px" y="${this.iconPadding}px"
+		// overflow menu icon background padding
+		const iconPadding = Configuration.toolbar.iconPadding;
+		return `<svg version="1.1" class="icon-zoomOut" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+				x="${startPosition + iconPadding}px" y="${iconPadding}px"
 				width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
 				<title>Zoom out</title>
 				<rect class="rect-zoomOut" x="4" y="6" width="5" height="1"/>
@@ -311,10 +306,10 @@ export class Toolbar extends Component {
 	}
 
 	getOverflowMenuIcon(startPosition) {
-		return `
-			<?xml version="1.0" encoding="utf-8"?>
-			<svg class="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
-			x="${startPosition + this.iconPadding}px" y="${this.iconPadding}px"
+		// overflow menu icon background padding
+		const iconPadding = Configuration.toolbar.iconPadding;
+		return `<svg class="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
+			x="${startPosition + iconPadding}px" y="${iconPadding}px"
 			width="20" height="20" viewBox="0 0 15 15" aria-hidden="true">
 				<circle cx="8" cy="3" r="1"></circle>
 				<circle cx="8" cy="8" r="1"></circle>
