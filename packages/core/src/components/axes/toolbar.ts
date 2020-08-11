@@ -62,9 +62,7 @@ export class Toolbar extends Component {
 
 	render(animate = true) {
 		const isDataLoading = this.services.zoom.isDataLoading();
-		const isZoomBarEnabled =
-			this.services.zoom.isZoomBarEnabled() &&
-			!this.services.zoom.isEmptyState();
+
 		// size of overflow menu icon with background
 		const iconSize = Configuration.toolbar.iconSize;
 
@@ -93,8 +91,12 @@ export class Toolbar extends Component {
 
 		// clean children first
 		container.html(null);
+
+		// get the toolbar buttons
+		const toolbarButtonList = this.getToolbarButtons();
+
 		// loading or empty state
-		if (isDataLoading) {
+		if (isDataLoading || toolbarButtonList.length === 0) {
 			// put an empty rect to keep space unchanged
 			DOMUtils.appendOrSelect(container, "svg.toolbar-loading-spacer")
 				.append("rect")
@@ -104,15 +106,7 @@ export class Toolbar extends Component {
 		} else {
 			const self = this;
 
-			const toolbarButtonList = [];
-			// add zoom in/out button only if zoom bar is enabled
-			if (isZoomBarEnabled) {
-				toolbarButtonList.push(this.getZoomInButtonConfig());
-				toolbarButtonList.push(this.getZoomOutButtonConfig());
-			}
-			toolbarButtonList.push(this.getOverflowButtonConfig());
-
-			// render buttons sequentially
+			// render toolbar buttons sequentially
 			let buttonXPosition = 0;
 			toolbarButtonList.forEach((button) => {
 				// zoom in icon and event
@@ -242,6 +236,8 @@ export class Toolbar extends Component {
 			overflowMenuItems.push(this.getResetZoomMenuItemConfig());
 		}
 
+		// add more overflow menu item configurations here
+
 		return overflowMenuItems;
 	}
 
@@ -258,6 +254,26 @@ export class Toolbar extends Component {
 			text: resetZoomText,
 			clickFunction: () => this.services.zoom.resetZoomDomain()
 		};
+	}
+
+	getToolbarButtons() {
+		const toolbarButtonList = [];
+		const isZoomBarEnabled =
+			this.services.zoom.isZoomBarEnabled() &&
+			!this.services.zoom.isEmptyState();
+		// add zoom in/out button only if zoom bar is enabled
+		if (isZoomBarEnabled) {
+			toolbarButtonList.push(this.getZoomInButtonConfig());
+			toolbarButtonList.push(this.getZoomOutButtonConfig());
+		}
+		// add overflow icon button only if overflow menu item is available
+		if (this.getOverflowMenuItems().length > 0) {
+			toolbarButtonList.push(this.getOverflowButtonConfig());
+		}
+
+		// add more toolbar button configurations here
+
+		return toolbarButtonList;
 	}
 
 	getZoomInButtonConfig() {
