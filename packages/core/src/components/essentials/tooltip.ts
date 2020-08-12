@@ -219,12 +219,19 @@ export class Tooltip extends Component {
 		if (!mouseRelativePos) {
 			mouseRelativePos = mouse(holder);
 		} else {
+			const zoombarType = Tools.getProperty(
+				this.model.getOptions(),
+				"zoomBar",
+				"top",
+				"type"
+			);
+			const zoombarHeight = Configuration.zoomBar.height[zoombarType];
+
 			// if the mouse position is from event (ruler)
 			// we need add zoom bar height
 			if (isTopZoomBarEnabled) {
 				mouseRelativePos[1] +=
-					Configuration.zoomBar.height +
-					Configuration.zoomBar.spacerHeight;
+					zoombarHeight + Configuration.zoomBar.spacerHeight;
 
 				// TODO - we need to add toolbar height when toolbar is available
 			}

@@ -1,4 +1,9 @@
-import { LayoutGrowth, LegendPositions, Alignments } from "./enums";
+import {
+	LayoutGrowth,
+	LegendPositions,
+	Alignments,
+	ZoomBarTypes
+} from "./enums";
 import { Component } from "../components/component";
 import { TruncationOptions } from "./truncation";
 
@@ -131,6 +136,10 @@ export interface ZoomBarOptions {
 	 * is the zoom-bar visible or not
 	 */
 	enabled?: boolean;
+	/**
+	 * whether the zoom bar is showing a slider view or a graph view etc.
+	 */
+	type?: ZoomBarTypes;
 	/**
 	 * a variable to handle zoom in ratio (0 ~ 1.0)
 	 */
