@@ -108,8 +108,6 @@ export class Toolbar extends Component {
 				.attr("width", iconSize * 3) // value doesn't matter but can't be empty
 				.attr("opacity", 0);
 		} else {
-			const self = this;
-
 			// render toolbar buttons sequentially
 			let buttonXPosition = 0;
 			toolbarButtonList.forEach((button) => {
@@ -150,7 +148,9 @@ export class Toolbar extends Component {
 	// show/hide overflow menu
 	showOverflowMenu(show: boolean) {
 		// update overflow icon background
-		this.overflowIcon.classed("icon-overflowRect-hovered", show);
+		if (this.overflowIcon) {
+			this.overflowIcon.classed("icon-overflowRect-hovered", show);
+		}
 		if (show) {
 			this.services.events.dispatchEvent(
 				Events.Toolbar.SHOW_OVERFLOW_MENU

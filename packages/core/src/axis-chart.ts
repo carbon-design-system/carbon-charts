@@ -69,7 +69,8 @@ export class AxisChart extends Chart {
 					this.model,
 					this.services,
 					[
-						...(titleAvailable ? [titleComponent] : []),
+						// always add title to keep layout correct
+						titleComponent,
 						...(toolbarEnabled ? [toolbarComponent] : [])
 					],
 					{
