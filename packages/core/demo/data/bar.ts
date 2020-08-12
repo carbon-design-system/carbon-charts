@@ -93,6 +93,22 @@ export const simpleBarOptions = {
 	}
 };
 
+export const simpleBarCustomLegendOrderOptions = {
+	title: "Simple bar (custom legend order)",
+	axes: {
+		left: {
+			mapsTo: "value"
+		},
+		bottom: {
+			mapsTo: "group",
+			scaleType: "labels"
+		}
+	},
+	legend: {
+		order: ["Restocking", "Misc", "Sold", "Qty", "More"]
+	}
+};
+
 // Simple bar with custom tick values
 export const simpleBarDataCustomTicks = [
 	{ group: "Group 1", value: 0.5 },
