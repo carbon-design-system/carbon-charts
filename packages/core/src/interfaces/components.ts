@@ -41,19 +41,20 @@ export interface LegendOptions {
 	clickable?: boolean;
 	items?: {
 		status?: {
-			ACTIVE?: Number;
-			DISABLED?: Number;
+			ACTIVE?: number;
+			DISABLED?: number;
 		};
-		horizontalSpace?: Number;
-		verticalSpace?: Number;
-		textYOffset?: Number;
+		horizontalSpace?: number;
+		verticalSpace?: number;
+		textYOffset?: number;
 	};
 	checkbox?: {
-		radius?: Number;
-		spaceAfter?: Number;
+		radius?: number;
+		spaceAfter?: number;
 	};
 	truncation?: TruncationOptions;
 	alignment?: Alignments;
+	order?: string[];
 }
 
 export interface TooltipOptions {

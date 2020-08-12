@@ -22,9 +22,16 @@ export class Legend extends Component {
 		);
 		const options = this.model.getOptions();
 		const legendOptions = Tools.getProperty(options, "legend");
+		let dataGroups = this.model.getDataGroups();
+		const legendOrder = Tools.getProperty(legendOptions, "order");
+
+		if (legendOrder) {
+			dataGroups = this.sortDataGroups(dataGroups, legendOrder);
+		}
+
 		const legendItems = svg
 			.selectAll("g.legend-item")
-			.data(this.model.getDataGroups(), (dataGroup) => dataGroup.name);
+			.data(dataGroups, (dataGroup) => dataGroup.name);
 
 		// this.getLegendItemArray()
 
@@ -123,6 +130,22 @@ export class Legend extends Component {
 			this.getParent()
 		);
 		svg.attr("transform", `translate(${alignmentOffset}, 0)`);
+	}
+
+	sortDataGroups(dataGroups, legendOrder) {
+		// Sort data in user defined order
+		dataGroups.sort((dataA, dataB) => 
+			legendOrder.indexOf(dataA.name) - legendOrder.indexOf(dataB.name)
+		);
+
+		// If user only defined partial ordering, ordered items are placed before unordered ones
+		if (legendOrder.length < dataGroups.length) {
+			const definedOrderIndex = dataGroups.length - legendOrder.length;
+			const definedOrder = dataGroups.slice(definedOrderIndex);
+
+			return definedOrder.concat(dataGroups.slice(0, definedOrderIndex));
+		}
+		return dataGroups;
 	}
 
 	breakItemsIntoLines(addedLegendItems) {
