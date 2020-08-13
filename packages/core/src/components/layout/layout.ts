@@ -168,7 +168,7 @@ export class LayoutComponent extends Component {
 					useAttrs: true
 				});
 
-				if (svgSize.height < 40) {
+				if (svgSize.height) {
 					matchingSVGDimensions.height = svgSize.height;
 				}
 			}
