@@ -70,7 +70,8 @@ export const legend: LegendOptions = {
 		spaceAfter: 4
 	},
 	truncation: standardTruncationOptions,
-	alignment: Alignments.LEFT
+	alignment: Alignments.LEFT,
+	order: null
 };
 
 /**
