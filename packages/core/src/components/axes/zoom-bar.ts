@@ -250,12 +250,15 @@ export class ZoomBar extends Component {
 		this.updateBrushHandle(this.getContainerSVG(), selection, newDomain);
 
 		// be aware that the value of d3.event changes during an event!
-		// update zoomDomain only if the event comes from mouse event
+		// update zoomDomain only if the event comes from mouse/touch event
 		if (
 			event.sourceEvent != null &&
 			(event.sourceEvent.type === "mousemove" ||
 				event.sourceEvent.type === "mouseup" ||
-				event.sourceEvent.type === "mousedown")
+				event.sourceEvent.type === "mousedown" ||
+				event.sourceEvent.type === "touchstart" ||
+				event.sourceEvent.type === "touchmove" ||
+				event.sourceEvent.type === "touchend")
 		) {
 			// only if zoomDomain is never set or needs update
 			if (
