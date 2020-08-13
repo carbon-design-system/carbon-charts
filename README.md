@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="https://carbon-design-system.github.io/carbon-charts/">
-		<img src="assets/logo.png" alt="Carbon Charts" width=150 height=150 />
+		<img src="assets/logo.svg" alt="Carbon Charts" width=150 height=150 />
 	</a>
 	<h3 align="center">Carbon Charts</h3>
 	<p align="center">
