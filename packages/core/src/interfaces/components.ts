@@ -54,6 +54,7 @@ export interface LegendOptions {
 	};
 	truncation?: TruncationOptions;
 	alignment?: Alignments;
+	order?: string[];
 }
 
 export interface TooltipOptions {
