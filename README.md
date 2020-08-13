@@ -16,9 +16,10 @@
 
 ## Packages
 - [Vanilla](./packages/core)
-- [Angular](./packages/angular)
 - [React](./packages/react)
+- [Angular](./packages/angular)
 - [Vue](./packages/vue)
+- [Svelte](./packages/svelte)
 
 <a href="https://www.netlify.com" target="_blank">
   <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"/>
