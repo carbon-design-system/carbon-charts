@@ -1,15 +1,10 @@
 svg.#{$prefix}--#{$charts-prefix}--error-message {
 	circle.#{$prefix}--#{$charts-prefix}--error-message__icon {
 		fill: $support-03;
-
-		&.hovered {
-			fill: $support-03;
-		}
 	}
 
-	text.#{$prefix}--#{$charts-prefix}--error-message__exclamation-point {
-		fill: black;
-		font-size: 1.125rem;
+	path.#{$prefix}--#{$charts-prefix}--error-message__exclamation-point {
+		fill: $carbon--black-100;
 	}
 
 	text.#{$prefix}--#{$charts-prefix}--error-message__title {

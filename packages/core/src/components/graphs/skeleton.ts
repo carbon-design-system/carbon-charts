@@ -319,24 +319,25 @@ export class Skeleton extends Component {
 
 	renderErrorMesssage(error) {
 		const skeleton = this.parent.select(".chart-skeleton");
-		const height = skeleton.attr("height");
-		const width = skeleton.attr("width");
 
 		const errorContainer = DOMUtils.appendOrSelect(
 			skeleton,
 			"svg.bx--cc--error-message"
 		)
-			.attr("width", width)
-			.attr("height", height);
+			.attr("width", "90%")
+			.attr("height", "25%")
+			.attr("x", "16") // usually 1rem
+			.attr("y", "45%");
 
 		// Error icon
+		const radius = 8;
 		const errorIcon = errorContainer
 			.selectAll("circle.bx--cc--error-message__icon")
 			.data([
 				{
-					cx: "1em",
-					cy: height / 2 - 5,
-					r: ".625em"
+					cx: "0",
+					cy: "0",
+					r: radius
 				}
 			]);
 
@@ -347,7 +348,8 @@ export class Skeleton extends Component {
 			.merge(errorIcon)
 			.attr("cx", (d) => d.cx)
 			.attr("cy", (d) => d.cy)
-			.attr("r", (d) => d.r);
+			.attr("r", (d) => d.r)
+			.attr("transform", (d) => `translate(${d.r}, ${d.r})`);
 
 		DOMUtils.appendOrSelect(
 			errorContainer,
@@ -358,22 +360,23 @@ export class Skeleton extends Component {
 
 		// Exclamation point
 
-		const exclamationPoint = errorContainer
-			.selectAll("text.bx--cc--error-message__exclamation-point")
-			.data(["!"]);
+		const exclamationPoint = errorContainer.selectAll(
+			"path.bx--cc--error-message__exclamation-point"
+		);
 
 		exclamationPoint
 			.enter()
-			.append("text")
+			.append("path")
 			.classed("bx--cc--error-message__exclamation-point", true)
 			.merge(exclamationPoint)
-			.attr("x", ".75em")
-			.attr("y", height / 2 + 1)
-			.html((d) => d);
+			.attr(
+				"d",
+				"M7.9375,11.125 C7.41973305,11.125 7,11.544733 7,12.0625 C7,12.580267 7.41973305,13 7.9375,13 C8.45526695,13 8.875,12.580267 8.875,12.0625 C8.875,11.544733 8.45526695,11.125 7.9375,11.125 M7.3125, 3 8.5625, 3 8.5625, 9.875 7.3125, 9.875, 7.3125, 3 Z"
+			);
 
 		DOMUtils.appendOrSelect(
 			errorContainer,
-			"text.bx--cc--error-message__exclamation-point"
+			"path.bx--cc--error-message__exclamation-point"
 		);
 
 		exclamationPoint.exit().remove();
@@ -383,13 +386,16 @@ export class Skeleton extends Component {
 			.selectAll("text.bx--cc--error-message__title")
 			.data([error.title]);
 
+		const textHorizontalOffset = radius + 16;
+		const textVerticalOffset = 12.5; // this roughly centers our text with the icon
+
 		errorTitle
 			.enter()
 			.append("text")
 			.classed("bx--cc--error-message__title", true)
 			.merge(errorTitle)
-			.attr("x", "2.25em")
-			.attr("y", height / 2)
+			.attr("x", textHorizontalOffset)
+			.attr("y", textVerticalOffset)
 			.html((d) => d);
 
 		DOMUtils.appendOrSelect(
@@ -409,8 +415,8 @@ export class Skeleton extends Component {
 			.append("text")
 			.classed("bx--cc--error-message__subtitle", true)
 			.merge(errorSubtitle)
-			.attr("x", "2.65em")
-			.attr("y", height / 2 + 18)
+			.attr("x", textHorizontalOffset)
+			.attr("y", textVerticalOffset + 16)
 			.html((d) => d);
 
 		DOMUtils.appendOrSelect(

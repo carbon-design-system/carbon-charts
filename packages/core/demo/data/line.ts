@@ -443,8 +443,8 @@ export const lineErrorOptions = {
 	data: {
 		loading: false,
 		error: {
-			title: "No data available",
-			subtitle: "Lorem ipsum dolor sit."
+			title: "No usage available",
+			subtitle: "Spending summary is not available for trial accounts"
 		}
 	}
 };
