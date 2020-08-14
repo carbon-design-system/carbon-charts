@@ -331,6 +331,7 @@ export class ZoomBar extends Component {
 		const handleBarXDiff = -handleBarWidth / 2;
 		const handleYBarDiff = (handleHeight - handleBarHeight) / 2;
 
+		const ewHandleCursor = "ew-resize";
 		const displayStyle =
 			isDataLoading || isNaN(selection[0]) || isNaN(selection[1])
 				? "none"
@@ -358,7 +359,7 @@ export class ZoomBar extends Component {
 			.attr("y", 0)
 			.attr("width", handleWidth)
 			.attr("height", handleHeight)
-			.attr("cursor", "pointer")
+			.attr("cursor", ewHandleCursor)
 			.style("display", displayStyle);
 
 		// handle-bar
@@ -391,7 +392,7 @@ export class ZoomBar extends Component {
 			.attr("y", handleYBarDiff)
 			.attr("width", handleBarWidth)
 			.attr("height", handleBarHeight)
-			.attr("cursor", "pointer")
+			.attr("cursor", ewHandleCursor)
 			.style("display", displayStyle);
 
 		// Update slider selected area
