@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.35.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.11...v0.35.0) (2020-08-13)
+
+
+### Features
+
+* **svelte:** add Meter chart wrapper ([#744](https://github.com/carbon-design-system/carbon-charts/issues/744)) ([8ed23b1](https://github.com/carbon-design-system/carbon-charts/commit/8ed23b176d168714ed4c0b481fda71eb8bed4106))
+
+
+
+
+
+## [0.34.11](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.10...v0.34.11) (2020-08-12)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
+## [0.34.10](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.9...v0.34.10) (2020-08-11)
+
+**Note:** Version bump only for package @carbon/charts-svelte
+
+
+
+
+
 ## [0.34.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.8...v0.34.9) (2020-08-06)
 
 **Note:** Version bump only for package @carbon/charts-svelte

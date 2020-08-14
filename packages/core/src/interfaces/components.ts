@@ -1,4 +1,9 @@
-import { LayoutGrowth, LegendPositions, Alignments } from "./enums";
+import {
+	LayoutGrowth,
+	LegendPositions,
+	Alignments,
+	ZoomBarTypes
+} from "./enums";
 import { Component } from "../components/component";
 import { TruncationOptions } from "./truncation";
 
@@ -36,19 +41,20 @@ export interface LegendOptions {
 	clickable?: boolean;
 	items?: {
 		status?: {
-			ACTIVE?: Number;
-			DISABLED?: Number;
+			ACTIVE?: number;
+			DISABLED?: number;
 		};
-		horizontalSpace?: Number;
-		verticalSpace?: Number;
-		textYOffset?: Number;
+		horizontalSpace?: number;
+		verticalSpace?: number;
+		textYOffset?: number;
 	};
 	checkbox?: {
-		radius?: Number;
-		spaceAfter?: Number;
+		radius?: number;
+		spaceAfter?: number;
 	};
 	truncation?: TruncationOptions;
 	alignment?: Alignments;
+	order?: string[];
 }
 
 export interface TooltipOptions {
@@ -131,7 +137,10 @@ export interface ZoomBarOptions {
 	 * is the zoom-bar visible or not
 	 */
 	enabled?: boolean;
-
+	/**
+	 * whether the zoom bar is showing a slider view or a graph view etc.
+	 */
+	type?: ZoomBarTypes;
 	/**
 	 * an two element array which represents the initial zoom domain
 	 */

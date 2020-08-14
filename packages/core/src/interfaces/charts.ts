@@ -88,7 +88,7 @@ export interface BaseChartOptions {
 		/**
 		 * used to simulate data loading
 		 */
-		loading?: Boolean;
+		loading?: boolean;
 		/**
 		 * a message to be rendered when data is unavailable for whatever reason
 		 */
