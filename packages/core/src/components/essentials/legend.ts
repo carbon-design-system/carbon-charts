@@ -134,8 +134,10 @@ export class Legend extends Component {
 
 	sortDataGroups(dataGroups, legendOrder) {
 		// Sort data in user defined order
-		dataGroups.sort((dataA, dataB) => 
-			legendOrder.indexOf(dataA.name) - legendOrder.indexOf(dataB.name)
+		dataGroups.sort(
+			(dataA, dataB) =>
+				legendOrder.indexOf(dataA.name) -
+				legendOrder.indexOf(dataB.name)
 		);
 
 		// If user only defined partial ordering, ordered items are placed before unordered ones
