@@ -414,14 +414,21 @@ export class CartesianScales extends Service {
 		// Get the extent of the domain
 		let domain;
 		let allDataValues;
+		const zoomService = this.services.zoom;
 		// If the scale is stacked
 		if (axisOptions.stacked) {
-			const dataValuesGroupedByKeys = this.model.getDataValuesGroupedByKeys();
+			const dataValuesGroupedByKeys = zoomService.filterDataForRangeAxisLabel(
+				this.model.getDataValuesGroupedByKeys(),
+				true
+			);
+
 			allDataValues = dataValuesGroupedByKeys.map((dataValues) =>
 				sum(values(dataValues) as any)
 			);
 		} else {
-			allDataValues = displayData.map((datum) => datum[mapsTo]);
+			allDataValues = zoomService
+				.filterDataForRangeAxisLabel(displayData)
+				.map((datum) => datum[mapsTo]);
 		}
 
 		if (scaleType !== ScaleTypes.TIME && includeZero) {

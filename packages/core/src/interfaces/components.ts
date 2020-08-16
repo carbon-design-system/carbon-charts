@@ -153,6 +153,11 @@ export interface ZoomBarOptions {
 	 * options related to zoom bar data
 	 */
 	data?: Object[];
+
+	/**
+	 * whether keep refreshing range axis label while zoom domain is changing
+	 */
+	refreshRangeAxisLabel?: boolean;
 }
 
 /**

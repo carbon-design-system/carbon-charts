@@ -8,6 +8,35 @@ import { AxisPositions, Events, ScaleTypes } from "../interfaces";
 import * as Configuration from "../configuration";
 
 export class Zoom extends Service {
+	// filter out data not inside zoom domain
+	// to get better range value for axis label
+	filterDataForRangeAxisLabel(displayData: object[], stacked = false) {
+		const zoomDomain = this.model.get("zoomDomain");
+		const isRefreshRangeAxisLabel = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"top",
+			"refreshRangeAxisLabel"
+		);
+		if (this.isZoomBarEnabled() && isRefreshRangeAxisLabel && zoomDomain) {
+			const domainIdentifier = stacked
+				? "sharedStackKey"
+				: this.services.cartesianScales.getDomainIdentifier();
+			const filteredData = displayData.filter(
+				(datum) =>
+					new Date(datum[domainIdentifier]) >= zoomDomain[0] &&
+					new Date(datum[domainIdentifier]) <= zoomDomain[1]
+			);
+			// if no data in zoom domain, use all data to get full range value
+			// so only return filteredData if length > 0
+			if (filteredData.length > 0) {
+				return filteredData;
+			}
+		}
+		// return original data by default
+		return displayData;
+	}
+
 	// get display data for zoom bar
 	// basically it's sum of value grouped by time
 	getZoomBarData() {
