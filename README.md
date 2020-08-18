@@ -22,8 +22,15 @@
 - [Svelte](./packages/svelte)
 
 <a href="https://www.netlify.com" target="_blank">
-  <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"/>
+  <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" />
 </a>
+
+## Design specifications
+<a href="https://www.carbondesignsystem.com/resources#data-visualization" target="_blank">
+  <img src="./assets/dv_dark_theme.png" width=700 />
+</a>
+
+Carbon data visualization design specifications can be found [here](https://www.carbondesignsystem.com/resources#data-visualization).
 
 ## CHANGELOG
 Read the release change logs [here](./CHANGELOG.md)
