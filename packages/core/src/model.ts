@@ -95,7 +95,9 @@ export class ChartModel {
 
 		return allDataFromDomain.filter((datum) => {
 			return dataGroups.find(
-				(dataGroup) => dataGroup.name === datum[groupMapsTo] && dataGroup.status === ACTIVE
+				(dataGroup) =>
+					dataGroup.name === datum[groupMapsTo] &&
+					dataGroup.status === ACTIVE
 			);
 		});
 	}
