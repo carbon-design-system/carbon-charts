@@ -313,7 +313,7 @@ const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 			percentageIndicator: {
 				enabled: true
 			}
-		},
+		}
 	}
 } as MeterChartOptions);
 

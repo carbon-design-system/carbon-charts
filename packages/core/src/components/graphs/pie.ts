@@ -186,7 +186,9 @@ export class Pie extends Component {
 
 				// check if last 2 slices (or just last) are < the threshold
 				if (i >= totalSlices - 2) {
-					if (sliceAngleDeg < Configuration.pie.callout.minSliceDegree) {
+					if (
+						sliceAngleDeg < Configuration.pie.callout.minSliceDegree
+					) {
 						let labelTranslateX, labelTranslateY;
 						if (d.index === totalSlices - 1) {
 							labelTranslateX =
@@ -289,7 +291,10 @@ export class Pie extends Component {
 				// end position for the callout line
 				d.endPos = {
 					x: xPosition + Configuration.pie.callout.offsetX,
-					y: yPosition - Configuration.pie.callout.offsetY + d.textOffsetY
+					y:
+						yPosition -
+						Configuration.pie.callout.offsetY +
+						d.textOffsetY
 				};
 
 				// the intersection point of the vertical and horizontal line
@@ -305,7 +310,10 @@ export class Pie extends Component {
 				// end position for the callout line should be bottom aligned to the title
 				d.endPos = {
 					x: xPosition - Configuration.pie.callout.offsetX,
-					y: yPosition - Configuration.pie.callout.offsetY + d.textOffsetY
+					y:
+						yPosition -
+						Configuration.pie.callout.offsetY +
+						d.textOffsetY
 				};
 
 				// the intersection point of the vertical and horizontal line
