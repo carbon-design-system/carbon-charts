@@ -8,7 +8,7 @@ import {
 	TruncationTypes
 } from "../../interfaces";
 import { DOMUtils } from "../../services";
-import { legendVerticalSpace } from "./../../configuration";
+import { legendVerticalSpacer } from "./../../configuration";
 import * as Configuration from "../../configuration";
 
 // D3 Imports
@@ -304,7 +304,7 @@ export class Legend extends Component {
 					showViewButton = true;
 				} else {
 					if (legendOrientation === LegendOrientations.VERTICAL) {
-						isHidden = nextLinePosition >= height - legendVerticalSpace;
+						isHidden = nextLinePosition >= height - legendVerticalSpacer;
 						if (isHidden && !viewButtonYPosition) {
 							viewButtonYPosition = yTextPosition;
 						}
