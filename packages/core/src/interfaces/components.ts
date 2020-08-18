@@ -39,21 +39,9 @@ export interface LegendOptions {
 	 * the clickability of legend items
 	 */
 	clickable?: boolean;
-	items?: {
-		status?: {
-			ACTIVE?: Number;
-			DISABLED?: Number;
-		};
-		horizontalSpace?: Number;
-		verticalSpace?: Number;
-		textYOffset?: Number;
-	};
-	checkbox?: {
-		radius?: Number;
-		spaceAfter?: Number;
-	};
 	truncation?: TruncationOptions;
 	alignment?: Alignments;
+	order?: string[];
 }
 
 export interface TooltipOptions {
@@ -66,10 +54,6 @@ export interface TooltipOptions {
 	 * passed an array or object with the data, and then the default tooltip markup
 	 */
 	customHTML?: Function;
-	/**
-	 * offset of the tooltip from the mouse position
-	 */
-	horizontalOffset?: number;
 	/**
 	 * show total of items
 	 */
@@ -106,7 +90,6 @@ export interface GridOptions {
 	x?: {
 		numberOfTicks?: number;
 	};
-	strokeColor?: string;
 }
 
 export interface BarOptions {

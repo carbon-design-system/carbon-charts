@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240px" height="240px" viewBox="0 0 240 240" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Group 9area</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="147" height="123"></rect>
+    </defs>
+    <g id="Data-vis-pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Dataviz-overview-1-Copy-2" transform="translate(48,80)">
+            <g id="Group-9">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Mask"></g>
+                <g mask="url(#mask-2)" stroke="#0062FF" stroke-linecap="square" stroke-width="1.5">
+                    <g transform="translate(-22.000000, 25.000000)">
+                        <polygon id="Line" fill-opacity="0.4" fill="#97C1FF" points="0 78.2920354 38.292887 66.3451327 76.3179916 54 115.414226 55.9911504 153.439331 74.3097345 192 77.0516025 192 99 0 99"></polygon>
+                        <polygon id="Line-Copy-8" fill-opacity="0.3" fill="#0062FF" points="0 89.3959818 38.292887 72.7783784 76.3179916 76.5243243 115.414226 72.7783784 153.439331 0 192 55.6540541 192 99 0 99"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

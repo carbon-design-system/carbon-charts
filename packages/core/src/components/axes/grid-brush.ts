@@ -104,13 +104,15 @@ export class ChartBrush extends Component {
 					xScale.invert(selection[0]),
 					xScale.invert(selection[1])
 				];
-
 				if (
 					selection != null &&
 					event.sourceEvent != null &&
 					(event.sourceEvent.type === "mousemove" ||
 						event.sourceEvent.type === "mouseup" ||
-						event.sourceEvent.type === "mousedown")
+						event.sourceEvent.type === "mousedown" ||
+						event.sourceEvent.type === "touchstart" ||
+						event.sourceEvent.type === "touchmove" ||
+						event.sourceEvent.type === "touchend")
 				) {
 					// dispatch selection events
 					let zoomBarEventType;
