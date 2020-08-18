@@ -3,24 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.34.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.8...v0.34.9) (2020-08-06)
-
-
-### Bug Fixes
-
-* fix tooltip position with zoom bar enabled ([#732](https://github.com/carbon-design-system/carbon-charts/issues/732)) ([280ab5e](https://github.com/carbon-design-system/carbon-charts/commit/280ab5edb2770c2b30f988b37e72c2c6f40016ff))
-
-
-
-
-
-## [0.34.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.7...v0.34.8) (2020-07-30)
+## [0.35.1](https://github.com/carbon-design-system/carbon-charts/compare/v0.35.0...v0.35.1) (2020-08-18)
 
 **Note:** Version bump only for package @carbon/charts
 
 
 
 
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.35.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.11...v0.35.0) (2020-08-13)
+
+**Note:** Version bump only for package @carbon/charts
+
+## [0.34.11](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.10...v0.34.11) (2020-08-12)
+
+**Note:** Version bump only for package @carbon/charts
+
+## [0.34.10](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.9...v0.34.10) (2020-08-11)
+
+**Note:** Version bump only for package @carbon/charts
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.34.9](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.8...v0.34.9) (2020-08-06)
+
+### Bug Fixes
+
+-   fix tooltip position with zoom bar enabled
+    ([#732](https://github.com/carbon-design-system/carbon-charts/issues/732))
+    ([280ab5e](https://github.com/carbon-design-system/carbon-charts/commit/280ab5edb2770c2b30f988b37e72c2c6f40016ff))
+
+## [0.34.8](https://github.com/carbon-design-system/carbon-charts/compare/v0.34.7...v0.34.8) (2020-07-30)
+
+**Note:** Version bump only for package @carbon/charts
 
 # Change Log
 

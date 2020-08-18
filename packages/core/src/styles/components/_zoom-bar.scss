@@ -4,6 +4,14 @@ g.#{$prefix}--#{$charts-prefix}--zoom-bar {
 		stroke: $ui-01;
 	}
 
+	rect.zoom-slider-bg {
+		fill: $ui-01;
+	}
+
+	rect.zoom-slider-selected-area {
+		fill: $icon-02;
+	}
+
 	path.zoom-bg-baseline {
 		stroke: $ui-04;
 		stroke-width: 2;

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="321px" height="320px" viewBox="0 0 321 320" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>radar copy 3</title>
+    <defs>
+        <circle id="path-1" cx="8.01444" cy="8.01444" r="7.012635"></circle>
+        <polygon id="path-3" points="7.012635 10.7694038 4.5081225 8.26489125 5.30455748 7.5135375 7.012635 9.19156088 10.7243225 5.5099275 11.5207575 6.30135345"></polygon>
+        <circle id="path-5" cx="8.01444" cy="8.01444" r="7.012635"></circle>
+        <path d="M8.01444,11.019855 C8.42940122,11.019855 8.76579375,11.3562475 8.76579375,11.7712088 C8.76579375,12.18617 8.42940122,12.5225625 8.01444,12.5225625 C7.59947878,12.5225625 7.26308625,12.18617 7.26308625,11.7712088 C7.26308625,11.3562475 7.59947878,11.019855 8.01444,11.019855 Z M8.58045983,4.00722 L8.58045983,9.5171475 L7.4534292,9.5171475 L7.4534292,4.00722 L8.58045983,4.00722 Z" id="path-7"></path>
+        <circle id="path-9" cx="8.01444" cy="8.01444" r="7.012635"></circle>
+        <polygon id="path-11" points="7.44963086 3.61547865 8.57666148 3.61547865 8.57666148 12.4063175 7.44963086 12.4063175"></polygon>
+    </defs>
+    <g id="radar-copy-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-96-Copy" transform="translate(61.000000, 117.000000)">
+            <rect id="Rectangle" fill="#D0E2FF" x="60.55234" y="23.56678" width="136.24548" height="8.01444"></rect>
+            <g id="icon/status/checkmark-filled/16" transform="translate(180.768940, 0.859200)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="icon-color" fill="#0F62FE" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <use id="icon-color" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+            </g>
+            <g id="icon/status/warning-filled/16" transform="translate(180.768940, 54.288800)">
+                <mask id="mask-6" fill="white">
+                    <use xlink:href="#path-5"></use>
+                </mask>
+                <use id="icon-color" fill="#0F62FE" fill-rule="evenodd" xlink:href="#path-5"></use>
+                <mask id="mask-8" fill="white">
+                    <use xlink:href="#path-7"></use>
+                </mask>
+                <use id="icon-color" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-7"></use>
+            </g>
+            <g id="icon/status/error-filled/16" transform="translate(180.768940, 106.382660)">
+                <mask id="mask-10" fill="white">
+                    <use xlink:href="#path-9"></use>
+                </mask>
+                <use id="icon-color" fill="#0062FF" fill-rule="evenodd" xlink:href="#path-9"></use>
+                <mask id="mask-12" fill="white">
+                    <use xlink:href="#path-11"></use>
+                </mask>
+                <use id="icon-color" fill="#FFFFFF" fill-rule="evenodd" transform="translate(8.013146, 8.010898) rotate(-45.000000) translate(-8.013146, -8.010898) " xlink:href="#path-11"></use>
+            </g>
+            <rect id="Rectangle-Copy-99" fill="#0062FF" x="0.44404" y="23.56678" width="62.77978" height="8.01444"></rect>
+            <rect id="Rectangle-Copy-97" fill="#D0E2FF" x="93.94584" y="75.66064" width="102.85198" height="8.01444"></rect>
+            <rect id="Rectangle-Copy-100" fill="#0062FF" x="0.44404" y="75.66064" width="118.88086" height="8.01444"></rect>
+            <rect id="Rectangle-Copy-98" fill="#D0E2FF" x="93.94584" y="127.7545" width="102.85198" height="8.01444"></rect>
+            <rect id="Rectangle-Copy-101" fill="#0062FF" x="0.44404" y="127.7545" width="180.3249" height="8.01444"></rect>
+            <line x1="180.10107" y1="135.368218" x2="180.10107" y2="127.7545" id="Path-21-Copy" stroke="#001141" stroke-width="1.33574"></line>
+            <line x1="154.72201" y1="83.274358" x2="154.72201" y2="75.66064" id="Path-21-Copy-2" stroke="#001141" stroke-width="1.33574"></line>
+            <line x1="154.72201" y1="30.91335" x2="154.72201" y2="23.299632" id="Path-21-Copy-3" stroke="#001141" stroke-width="1.33574"></line>
+        </g>
+    </g>
+</svg>

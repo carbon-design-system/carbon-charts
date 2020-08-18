@@ -94,11 +94,11 @@ export class ChartModel {
 		const allDataFromDomain = this.getAllDataFromDomain();
 
 		return allDataFromDomain.filter((datum) => {
-			const group = dataGroups.find(
-				(dataGroup) => dataGroup.name === datum[groupMapsTo]
+			return dataGroups.find(
+				(dataGroup) =>
+					dataGroup.name === datum[groupMapsTo] &&
+					dataGroup.status === ACTIVE
 			);
-
-			return group.status === ACTIVE;
 		});
 	}
 

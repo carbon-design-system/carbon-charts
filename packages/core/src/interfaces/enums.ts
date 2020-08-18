@@ -22,6 +22,14 @@ export enum AxisPositions {
 }
 
 /**
+ * enum of all possible axis positions
+ */
+export enum ZoomBarTypes {
+	GRAPH_VIEW = "graph_view",
+	SLIDER_VIEW = "slider_view"
+}
+
+/**
  * enum of all possible truncation types
  */
 export enum TruncationTypes {
@@ -50,15 +58,6 @@ export enum ScaleTypes {
 	LINEAR = "linear",
 	LOG = "log",
 	LABELS = "labels"
-}
-
-/**
- * enum of supported tooltip position relative to
- */
-export enum TooltipPosition {
-	MOUSE = "mouse",
-	TOP = "top",
-	BOTTOM = "bottom"
 }
 
 /**

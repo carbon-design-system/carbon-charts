@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240px" height="240px" viewBox="0 0 240 240" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Group 17barstack</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Data-vis-pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Dataviz-overview-1-Copy-2" transform="translate(48,112)">
+            <g id="Group-17" >
+                <g id="Group-16">
+                    <rect id="Rectangle-9" fill="#97C1FF" x="141" y="21" width="7" height="68"></rect>
+                    <rect id="Rectangle-9" fill="#0062FF" x="141" y="48" width="7" height="41"></rect>
+                    <rect id="Rectangle" fill="#FFFFFF" x="141" y="47" width="7" height="1.5"></rect>
+                    <polygon id="Rectangle-9" fill="#97C1FF" points="112 8 119 8 119 89 112 89"></polygon>
+                    <rect id="Rectangle-9" fill="#0062FF" x="112" y="28" width="7" height="62"></rect>
+                    <rect id="Rectangle" fill="#FFFFFF" x="112" y="27" width="7" height="1.5"></rect>
+                    <polygon id="Rectangle-9" fill="#97C1FF" points="84 41 91 41 91 90 84 90"></polygon>
+                    <rect id="Rectangle-9" fill="#0062FF" x="84" y="60" width="7" height="30"></rect>
+                    <rect id="Rectangle" fill="#FFFFFF" x="84" y="59" width="7" height="1.5"></rect>
+                    <polygon id="Rectangle-9" fill="#97C1FF" points="57 34 64 34 64 90 57 90"></polygon>
+                    <rect id="Rectangle-9" fill="#0062FF" x="57" y="72" width="7" height="18"></rect>
+                    <rect id="Rectangle" fill="#FFFFFF" x="57" y="71" width="7" height="1.5"></rect>
+                    <polygon id="Rectangle-9" fill="#97C1FF" points="29 57 36 57 36 90 29 90"></polygon>
+                    <rect id="Rectangle-9" fill="#0062FF" x="29" y="65" width="7" height="25"></rect>
+                    <rect id="Rectangle" fill="#FFFFFF" x="29" y="64" width="7" height="1.5"></rect>
+                    <rect id="Rectangle-9" fill="#97C1FF" x="0" y="0" width="7" height="90"></rect>
+                    <rect id="Rectangle-9-Copy" fill="#0062FF" x="0" y="40" width="7" height="50"></rect>
+                    <rect id="Rectangle" fill="#FFFFFF" x="0" y="39" width="7" height="1.5"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
