@@ -61,15 +61,6 @@ export enum ScaleTypes {
 }
 
 /**
- * enum of supported tooltip position relative to
- */
-export enum TooltipPosition {
-	MOUSE = "mouse",
-	TOP = "top",
-	BOTTOM = "bottom"
-}
-
-/**
  * enum of all possible legend positions
  */
 export enum LegendPositions {

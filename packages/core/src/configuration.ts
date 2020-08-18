@@ -48,23 +48,10 @@ const standardTruncationOptions = {
 /**
  * Legend options
  */
-export const legend: LegendOptions = {
+const legend: LegendOptions = {
 	enabled: true,
 	position: LegendPositions.BOTTOM,
 	clickable: true,
-	items: {
-		status: {
-			ACTIVE: 1,
-			DISABLED: 0
-		},
-		horizontalSpace: 12,
-		verticalSpace: 24,
-		textYOffset: 8
-	},
-	checkbox: {
-		radius: 6.5,
-		spaceAfter: 4
-	},
 	truncation: standardTruncationOptions,
 	alignment: Alignments.LEFT,
 	order: null
@@ -75,7 +62,7 @@ export const legend: LegendOptions = {
  */
 export const grid: GridOptions = {
 	x: {
-		numberOfTicks: 5
+		numberOfTicks: 15
 	},
 	y: {
 		numberOfTicks: 5
@@ -86,7 +73,6 @@ export const grid: GridOptions = {
  * Tooltip options
  */
 export const baseTooltip: TooltipOptions = {
-	horizontalOffset: 10,
 	showTotal: true,
 	valueFormatter: (d) => d.toLocaleString(),
 	truncation: standardTruncationOptions
@@ -269,22 +255,6 @@ const bubbleChart: BubbleChartOptions = Tools.merge({}, axisChart, {
  */
 const pieChart: PieChartOptions = Tools.merge({}, chart, {
 	pie: {
-		radiusOffset: -15,
-		innerRadius: 2,
-		padAngle: 0.007,
-		hoverArc: {
-			outerRadiusOffset: 3
-		},
-		xOffset: 30,
-		yOffset: 20,
-		yOffsetCallout: 10,
-		callout: {
-			minSliceDegree: 5,
-			offsetX: 15,
-			offsetY: 12,
-			horizontalLineLength: 8,
-			textMargin: 2
-		},
 		labels: {
 			formatter: null
 		},
@@ -340,17 +310,12 @@ const meterChart: MeterChartOptions = Tools.merge({}, chart, {
 	meter: {
 		height: 8,
 		statusBar: {
-			paddingRight: 5,
 			percentageIndicator: {
 				enabled: true
 			}
 		},
-		status: {
-			indicatorSize: 16,
-			paddingLeft: 15
-		}
 	}
-});
+} as MeterChartOptions);
 
 /**
  * options specific to radar charts
@@ -361,16 +326,6 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 			angle: "key",
 			value: "value"
 		},
-		opacity: {
-			unselected: 0.1,
-			selected: 0.3
-		},
-		xLabelPadding: 10,
-		yLabelPadding: 8,
-		yTicksNumber: 4,
-		minRange: 10,
-		xAxisRectHeight: 50,
-		dotsRadius: 5,
 		alignment: Alignments.LEFT
 	},
 	tooltip: {
@@ -400,78 +355,4 @@ export const options = {
 	gaugeChart
 };
 
-/**
- * Options for line behaviour
- */
-export const lines = {
-	opacity: {
-		unselected: 0.3,
-		selected: 1
-	}
-};
-
-/**
- * Options for area behaviour
- */
-export const area = {
-	opacity: {
-		unselected: 0,
-		selected: 0.4
-	}
-};
-
-/**
- * Options for area behaviour
- */
-export const areas = {
-	opacity: {
-		unselected: 0.3,
-		selected: 1
-	}
-};
-
-/**
- * Base transition configuration
- */
-export const transitions = {
-	default: {
-		duration: 300
-	},
-	pie_slice_mouseover: {
-		duration: 100
-	},
-	pie_chart_titles: {
-		duration: 375
-	},
-	graph_element_mouseover_fill_update: {
-		duration: 100
-	},
-	graph_element_mouseout_fill_update: {
-		duration: 100
-	}
-};
-
-export const axis = {
-	ticks: {
-		number: 7,
-		rotateIfSmallerThan: 30
-	},
-	paddingRatio: 0.1
-};
-
-export const spacers = {
-	default: {
-		size: 24
-	}
-};
-
-export const zoomBar = {
-	height: {
-		[ZoomBarTypes.GRAPH_VIEW]: 32,
-		[ZoomBarTypes.SLIDER_VIEW]: 10
-	},
-	spacerHeight: 8
-};
-
-export const tickSpaceRatioVertical = 2.5;
-export const tickSpaceRatioHorizontal = 3.5;
+export * from "./configuration-non-customizable";

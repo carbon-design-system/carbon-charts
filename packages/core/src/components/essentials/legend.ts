@@ -8,6 +8,7 @@ import {
 	TruncationTypes
 } from "../../interfaces";
 import { DOMUtils } from "../../services";
+import * as Configuration from "../../configuration";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -40,11 +41,11 @@ export class Legend extends Component {
 			.append("g")
 			.classed("legend-item", true)
 			.classed("active", function (d, i) {
-				return d.status === options.legend.items.status.ACTIVE;
+				return d.status === Configuration.legend.items.status.ACTIVE;
 			});
 
 		// Configs
-		const checkboxRadius = options.legend.checkbox.radius;
+		const checkboxRadius = Configuration.legend.checkbox.radius;
 
 		// Truncation
 		// get user provided custom values for truncation
@@ -73,12 +74,12 @@ export class Legend extends Component {
 			.attr("rx", 1)
 			.attr("ry", 1)
 			.style("fill", (d) => {
-				return d.status === options.legend.items.status.ACTIVE
+				return d.status === Configuration.legend.items.status.ACTIVE
 					? this.model.getStrokeColor(d.name)
 					: null;
 			})
 			.classed("active", function (d, i) {
-				return d.status === options.legend.items.status.ACTIVE;
+				return d.status === Configuration.legend.items.status.ACTIVE;
 			});
 		const addedLegendItemsText = addedLegendItems
 			.append("text")
@@ -134,8 +135,10 @@ export class Legend extends Component {
 
 	sortDataGroups(dataGroups, legendOrder) {
 		// Sort data in user defined order
-		dataGroups.sort((dataA, dataB) => 
-			legendOrder.indexOf(dataA.name) - legendOrder.indexOf(dataB.name)
+		dataGroups.sort(
+			(dataA, dataB) =>
+				legendOrder.indexOf(dataA.name) -
+				legendOrder.indexOf(dataB.name)
 		);
 
 		// If user only defined partial ordering, ordered items are placed before unordered ones
@@ -154,16 +157,17 @@ export class Legend extends Component {
 		const options = this.model.getOptions();
 
 		// Configs
-		const checkboxRadius = options.legend.checkbox.radius;
+		const checkboxRadius = Configuration.legend.checkbox.radius;
 		const legendItemsHorizontalSpacing =
-			options.legend.items.horizontalSpace;
-		const legendItemsVerticalSpacing = options.legend.items.verticalSpace;
-		const legendTextYOffset = options.legend.items.textYOffset;
+			Configuration.legend.items.horizontalSpace;
+		const legendItemsVerticalSpacing =
+			Configuration.legend.items.verticalSpace;
+		const legendTextYOffset = Configuration.legend.items.textYOffset;
 		const spaceNeededForCheckbox =
-			checkboxRadius * 2 + options.legend.checkbox.spaceAfter;
+			checkboxRadius * 2 + Configuration.legend.checkbox.spaceAfter;
 
 		// Check if there are disabled legend items
-		const { DISABLED } = options.legend.items.status;
+		const { DISABLED } = Configuration.legend.items.status;
 		const dataGroups = this.model.getDataGroups();
 		const hasDeactivatedItems = dataGroups.some(
 			(dataGroup) => dataGroup.status === DISABLED
@@ -327,7 +331,7 @@ export class Legend extends Component {
 				});
 
 				// Configs
-				const checkboxRadius = options.legend.checkbox.radius;
+				const checkboxRadius = Configuration.legend.checkbox.radius;
 				const hoveredItem = select(this);
 				hoveredItem
 					.append("rect")

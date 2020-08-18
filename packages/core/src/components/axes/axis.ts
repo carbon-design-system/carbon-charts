@@ -220,7 +220,7 @@ export class Axis extends Component {
 					numberOfTicks = this.getNumberOfFittingTicks(
 						height,
 						tickHeight,
-						Configuration.tickSpaceRatioVertical
+						Configuration.axis.ticks.verticalSpaceRatio
 					);
 				}
 			}
@@ -479,7 +479,7 @@ export class Axis extends Component {
 						this.getNumberOfFittingTicks(
 							width,
 							tickHeight,
-							Configuration.tickSpaceRatioHorizontal
+							Configuration.axis.ticks.horizontalSpaceRatio
 						)
 					);
 
