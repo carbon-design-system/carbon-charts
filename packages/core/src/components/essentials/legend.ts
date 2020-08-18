@@ -176,10 +176,6 @@ export class Legend extends Component {
 			{ useAttr: true }
 		);
 
-		const graphHeight = Tools.getProperty(
-			options,
-			"height"
-		)
 		// Configs
 		const checkboxRadius = options.legend.checkbox.radius;
 		const legendItemsHorizontalSpacing =
@@ -201,6 +197,8 @@ export class Legend extends Component {
 			"legend",
 			"orientation"
 		);
+		let isViewExcessiveItems = self.model.getIsViewExcessiveLegendItems();
+		let showViewButton = false;
 
 		// Keep track of line numbers and positions
 		let startingPoint = 0;
@@ -218,6 +216,10 @@ export class Legend extends Component {
 				);
 
 				let isLastItemInLine = false;
+				const legendItemTextDimensions = DOMUtils.getSVGElementSize(
+					select(this).select("text"),
+					{ useBBox: true }
+				);
 				if (
 					itemIndexInLine === 0 ||
 					previousLegendItem.empty() ||
@@ -233,10 +235,6 @@ export class Legend extends Component {
 					const svgDimensions = DOMUtils.getSVGElementSize(
 						self.parent,
 						{ useAttr: true }
-					);
-					const legendItemTextDimensions = DOMUtils.getSVGElementSize(
-						select(this).select("text"),
-						{ useBBox: true }
 					);
 					const lastLegendItemTextDimensions = DOMUtils.getSVGElementSize(
 						previousLegendItem.select("text"),
@@ -261,24 +259,14 @@ export class Legend extends Component {
 
 					isLastItemInLine = startingPoint +
 						(spaceNeededForCheckbox +
-						legendItemTextDimensions.width) * 2 >
+						legendItemTextDimensions.width +
+						legendItemsHorizontalSpacing) * 2 >
 					svgDimensions.width;
 				}
 
 				const yOffset = 0;
 				const yPosition = yOffset + lineNumber * legendItemsVerticalSpacing; 
 				const nextLinePosition = yPosition + yOffset + legendItemsVerticalSpacing;
-
-				if (legendOrientation === LegendOrientations.VERTICAL) {
-					isHidden = nextLinePosition >= height - legendVerticalSpace;
-				} else {
-					const hideThreshold = Number(graphHeight.replace(/px$/, '')) * 0.3;
-					isHidden = yPosition >= hideThreshold;
-					if (!isHidden) {
-						isHidden = nextLinePosition >= hideThreshold && isLastItemInLine;
-						viewButtonXPosition = startingPoint;
-					}
-				}
 
 				// Position checkbox
 				// TODO - Replace with layout component margins
@@ -292,15 +280,41 @@ export class Legend extends Component {
 				const yTextPosition =
 					legendTextYOffset + lineNumber * legendItemsVerticalSpacing + yOffset + 3;
 
-				if (isHidden && !viewButtonYPosition) {
-					viewButtonYPosition = yTextPosition;
-				}
-
 				legendItem
 					.select("text")
 					.attr("x", startingPoint + spaceNeededForCheckbox)
 					.attr("y", yTextPosition);
 
+				// Calculate position for view button
+				if (isViewExcessiveItems) {
+					if (legendOrientation === LegendOrientations.VERTICAL) {
+						viewButtonYPosition = legendTextYOffset +
+							(lineNumber + 1) * legendItemsVerticalSpacing +
+							yOffset + 3;
+					} else {
+						viewButtonXPosition = startingPoint +
+							spaceNeededForCheckbox * 2 +
+							legendItemTextDimensions.width;
+						viewButtonYPosition = yTextPosition;
+					}
+					showViewButton = true;
+				} else {
+					if (legendOrientation === LegendOrientations.VERTICAL) {
+						isHidden = nextLinePosition >= height - legendVerticalSpace;
+						if (isHidden && !viewButtonYPosition) {
+							viewButtonYPosition = yTextPosition;
+						}
+						showViewButton = isHidden;
+					} else {
+						isHidden = lineNumber > 1;
+						if (!isHidden) {
+							isHidden = lineNumber === 1 && isLastItemInLine;
+							viewButtonXPosition = startingPoint;
+							viewButtonYPosition = yTextPosition;
+						}
+						showViewButton = isHidden;
+					}
+				}
 
 				// Test if legendItems are placed in the correct direction
 				const testHorizontal =
@@ -353,20 +367,24 @@ export class Legend extends Component {
 				) {
 					legendItem.select("g.check").remove();
 				}
-
-				if (isHidden) {
+				
+				if (!isViewExcessiveItems && isHidden) {
 					legendItem.remove();
 				} else {
 					itemIndexInLine++;
 				}
 			});
 
-		const viewMore = DOMUtils.appendOrSelect(svg, "g.view-more")
-			.classed("hidden", !isHidden);
+		// Add view button
+		const viewConfigs = isViewExcessiveItems
+			? {name: "view-less", hidden: !showViewButton}
+			: {name: "view-more", hidden: !showViewButton};
 
-		viewMore.select("text")
+		const viewButton = DOMUtils.appendOrSelect(svg, `g.${viewConfigs.name}`)
+			.classed("hidden", viewConfigs.hidden);
+		viewButton.select("text")
 			.attr("x", viewButtonXPosition)
-			.attr("y", viewButtonYPosition);
+			.attr("y", viewButtonYPosition)
 	}
 
 	addEventListeners() {
@@ -447,11 +465,24 @@ export class Legend extends Component {
 
 		svg.select("g.view-more")
 			.on("click", function() {
-				self.services.events.dispatchEvent(Events.Legend.SHOW_MORE);
+				self.services.events.dispatchEvent(Events.Legend.VIEW_MORE);
 				const clickedButton = select(this);
 				clickedButton.classed("hidden", true);
-				svg.selectAll("g.legend-item.hidden")
-					.classed("hidden", false);
+
+				self.model.setIsViewExcessiveLegendItems(true);
+				//TODO: finder a better way that adjust chart height while legend changes
+				self.render();
+			})
+
+		svg.select("g.view-less")
+			.on("click", function() {
+				self.services.events.dispatchEvent(Events.Legend.VIEW_LESS);
+				const clickedButton = select(this);
+				clickedButton.classed("hidden", true);
+
+				self.model.setIsViewExcessiveLegendItems(false);
+				//TODO: finder a better way that adjust chart height while legend changes
+				self.render();
 			})
 	}
 }

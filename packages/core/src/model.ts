@@ -35,6 +35,8 @@ export class ChartModel {
 	// Fill scales & fill related objects
 	protected colorScale: any = {};
 
+	protected isViewExcessiveLegendItems: boolean = false;
+
 	constructor(services: any) {
 		this.services = services;
 	}
@@ -386,6 +388,14 @@ export class ChartModel {
 		this.set({
 			dataGroups
 		});
+	}
+
+	getIsViewExcessiveLegendItems() {
+		return this.isViewExcessiveLegendItems;
+	}
+
+	setIsViewExcessiveLegendItems(isViewAll: boolean) {
+		this.isViewExcessiveLegendItems = isViewAll;
 	}
 
 	/**
