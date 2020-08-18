@@ -11,6 +11,7 @@ import {
 	polarToCartesianCoords,
 	distanceBetweenPointOnCircAndVerticalDiameter
 } from "../../services/angle-utils";
+import * as Configuration from "../../configuration";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -61,9 +62,8 @@ export class Radar extends Component {
 			yLabelPadding,
 			yTicksNumber,
 			minRange,
-			xAxisRectHeight,
-			opacity
-		} = Tools.getProperty(options, "radar");
+			xAxisRectHeight
+		} = Configuration.radar;
 
 		this.uniqueKeys = Array.from(new Set(data.map((d) => d[angle])));
 		this.uniqueGroups = Array.from(
@@ -201,92 +201,6 @@ export class Radar extends Component {
 						)
 						.attr("d", (tick) =>
 							radialLineGenerator(shapeData(tick))
-						)
-						.attr("opacity", 0)
-						.remove()
-				)
-		);
-
-		// y labels (show only the min and the max labels)
-		const yLabels = DOMUtils.appendOrSelect(svg, "g.y-labels").attr(
-			"role",
-			Roles.GROUP
-		);
-		const yLabelUpdate = yLabels.selectAll("text").data(extent(yTicks));
-		yLabelUpdate.join(
-			(enter) =>
-				enter
-					.append("text")
-					.attr("opacity", 0)
-					.text((tick) => tick)
-					.attr(
-						"x",
-						(tick) =>
-							polarToCartesianCoords(
-								-Math.PI / 2,
-								yScale(tick),
-								c
-							).x + yLabelPadding
-					)
-					.attr(
-						"y",
-						(tick) =>
-							polarToCartesianCoords(
-								-Math.PI / 2,
-								yScale(tick),
-								c
-							).y
-					)
-					.style("text-anchor", "start")
-					.style("dominant-baseline", "middle")
-					.call((selection) =>
-						selection
-							.transition(
-								this.services.transitions.getTransition(
-									"radar_y_labels_enter",
-									animate
-								)
-							)
-							.attr("opacity", 1)
-					),
-			(update) =>
-				update.call((selection) =>
-					selection
-						.transition(
-							this.services.transitions.getTransition(
-								"radar_y_labels_update",
-								animate
-							)
-						)
-						.text((tick) => tick)
-						.attr("opacity", 1)
-						.attr(
-							"x",
-							(tick) =>
-								polarToCartesianCoords(
-									-Math.PI / 2,
-									yScale(tick),
-									c
-								).x + yLabelPadding
-						)
-						.attr(
-							"y",
-							(tick) =>
-								polarToCartesianCoords(
-									-Math.PI / 2,
-									yScale(tick),
-									c
-								).y
-						)
-				),
-			(exit) =>
-				exit.call((selection) =>
-					selection
-						.transition(
-							this.services.transitions.getTransition(
-								"radar_y_labels_exit",
-								animate
-							)
 						)
 						.attr("opacity", 0)
 						.remove()
@@ -541,7 +455,7 @@ export class Radar extends Component {
 					.attr("opacity", 0)
 					.attr("transform", `translate(${c.x}, ${c.y})`)
 					.attr("fill", (group) => colorScale(group.name))
-					.style("fill-opacity", opacity.selected)
+					.style("fill-opacity", Configuration.radar.opacity.selected)
 					.attr("stroke", (group) => colorScale(group.name))
 					.attr("d", (group) => oldRadialLineGenerator(group.data))
 					.call((selection) =>
@@ -649,6 +563,92 @@ export class Radar extends Component {
 				(key) => `rotate(${radToDeg(xScale(key))}, ${c.x}, ${c.y})`
 			);
 
+		// y labels (show only the min and the max labels)
+		const yLabels = DOMUtils.appendOrSelect(svg, "g.y-labels").attr(
+			"role",
+			Roles.GROUP
+		);
+		const yLabelUpdate = yLabels.selectAll("text").data(extent(yTicks));
+		yLabelUpdate.join(
+			(enter) =>
+				enter
+					.append("text")
+					.attr("opacity", 0)
+					.text((tick) => tick)
+					.attr(
+						"x",
+						(tick) =>
+							polarToCartesianCoords(
+								-Math.PI / 2,
+								yScale(tick),
+								c
+							).x + yLabelPadding
+					)
+					.attr(
+						"y",
+						(tick) =>
+							polarToCartesianCoords(
+								-Math.PI / 2,
+								yScale(tick),
+								c
+							).y
+					)
+					.style("text-anchor", "start")
+					.style("dominant-baseline", "middle")
+					.call((selection) =>
+						selection
+							.transition(
+								this.services.transitions.getTransition(
+									"radar_y_labels_enter",
+									animate
+								)
+							)
+							.attr("opacity", 1)
+					),
+			(update) =>
+				update.call((selection) =>
+					selection
+						.transition(
+							this.services.transitions.getTransition(
+								"radar_y_labels_update",
+								animate
+							)
+						)
+						.text((tick) => tick)
+						.attr("opacity", 1)
+						.attr(
+							"x",
+							(tick) =>
+								polarToCartesianCoords(
+									-Math.PI / 2,
+									yScale(tick),
+									c
+								).x + yLabelPadding
+						)
+						.attr(
+							"y",
+							(tick) =>
+								polarToCartesianCoords(
+									-Math.PI / 2,
+									yScale(tick),
+									c
+								).y
+						)
+				),
+			(exit) =>
+				exit.call((selection) =>
+					selection
+						.transition(
+							this.services.transitions.getTransition(
+								"radar_y_labels_exit",
+								animate
+							)
+						)
+						.attr("opacity", 0)
+						.remove()
+				)
+		);
+
 		const alignment = Tools.getProperty(options, "radar", "alignment");
 
 		const alignmentOffset = DOMUtils.getAlignmentOffset(
@@ -717,11 +717,6 @@ export class Radar extends Component {
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
-		const opacity = Tools.getProperty(
-			this.model.getOptions(),
-			"radar",
-			"opacity"
-		);
 		this.parent
 			.selectAll("g.blobs path")
 			.transition(
@@ -729,9 +724,9 @@ export class Radar extends Component {
 			)
 			.style("fill-opacity", (group) => {
 				if (group.name !== hoveredElement.datum().name) {
-					return Tools.getProperty(opacity, "unselected");
+					return Configuration.radar.opacity.unselected;
 				}
-				return Tools.getProperty(opacity, "selected");
+				return Configuration.radar.opacity.selected;
 			});
 	};
 
@@ -771,8 +766,7 @@ export class Radar extends Component {
 	addEventListeners() {
 		const self = this;
 		const {
-			axes: { angle },
-			dotsRadius
+			axes: { angle }
 		} = Tools.getProperty(this.model.getOptions(), "radar");
 
 		// events on x axes rects
@@ -803,7 +797,7 @@ export class Radar extends Component {
 					.attr("stroke-dasharray", "4 4");
 				dots.classed("hovered", true)
 					.attr("opacity", 1)
-					.attr("r", dotsRadius);
+					.attr("r", Configuration.radar.dotsRadius);
 
 				// get the items that should be highlighted
 				const itemsToHighlight = self.displayDataNormalized.filter(

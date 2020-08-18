@@ -18,7 +18,7 @@ introStories.add("Welcome", () => {
 	container.innerHTML = `
 <div class="content">
 	<div class="logo">
-		<img src="logo.png" alt="Carbon Charts">
+		<img src="logo.svg" alt="Carbon Charts">
 	</div>
 
 	<div class="content">
