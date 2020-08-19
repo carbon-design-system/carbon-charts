@@ -120,5 +120,3 @@ export const zoomBar = {
 	},
 	spacerHeight: 8
 };
-
-export const legendVerticalSpacer = 32;
