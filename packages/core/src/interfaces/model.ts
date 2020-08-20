@@ -7,7 +7,7 @@ import { AxisChartOptions } from "./charts";
  */
 export interface ChartConfig<T extends AxisChartOptions> {
 	options: T;
-	data: ChartData | Promise<ChartData>;
+	data: ChartData | TabularChartData | Promise<ChartData>;
 }
 
 export interface DataSet {
@@ -34,4 +34,8 @@ export interface ChartData {
 	 * Array of datasets to display in the chart
 	 */
 	datasets: DataSet[];
+}
+
+export interface TabularChartData {
+	[key: string]: any;
 }

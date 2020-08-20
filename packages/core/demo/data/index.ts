@@ -100,6 +100,11 @@ export const chartTypes = {
 		vanilla: "RadarChart",
 		angular: "ibm-radar-chart",
 		vue: "ccv-radar-chart"
+	},
+	LegendChart: {
+		vanilla: "LegendChart",
+		angular: "ibm-legend-chart",
+		vue: "ccv-legend-chart"
 	}
 };
 

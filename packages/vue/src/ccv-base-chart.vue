@@ -21,7 +21,6 @@ export default {
 			handler: function(newOptions) {
 				this.coreChart.model.setOptions(newOptions);
 			},
-			deep: true,
 		},
 	},
 };

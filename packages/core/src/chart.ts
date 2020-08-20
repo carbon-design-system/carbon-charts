@@ -23,8 +23,12 @@ import { Tools } from "./tools";
 // Services
 import { DOMUtils, Events, Transitions } from "./services/index";
 
+// import the settings for the css prefix
+import { LegendChart } from "./charts";
+import { legend, options } from "./configuration";
+
 export class Chart {
-	components: Component[];
+	components: LayoutComponent[];
 	services: any = {
 		domUtils: DOMUtils,
 		events: Events,
@@ -38,6 +42,13 @@ export class Chart {
 	init(holder: Element, chartConfigs: ChartConfig<BaseChartOptions>) {
 		// Store the holder in the model
 		this.model.set({ holder }, { skipUpdate: true });
+
+		const externalLegend = this.model.getOptions().legend?.external
+			?.reference;
+
+		if (externalLegend) {
+			this.addLegendEventListeners(externalLegend);
+		}
 
 		// Initialize all services
 		Object.keys(this.services).forEach((serviceName) => {
@@ -114,7 +125,94 @@ export class Chart {
 		this.model.set({ destroyed: true }, { skipUpdate: true });
 	}
 
-	protected getChartComponents(graphFrameComponents: any[]) {
+	addLegendEventListeners(legendChart: LegendChart) {
+		if (legendChart) {
+			// add color defaults from external legend
+			const scale = legendChart.model.getColorScale();
+
+			const legendColorScale = {
+				color: {
+					scale: scale
+				}
+			};
+
+			const mergedOptions = Object.assign(
+				this.model.getOptions(),
+				legendColorScale
+			);
+
+			this.model.setOptions(mergedOptions);
+
+			const lComponent: Legend = legendChart.getComponentById(
+				"legend"
+			) as Legend;
+
+			if (lComponent) {
+				// register model with external legend
+				lComponent.registerExternalModel(this.model);
+
+				lComponent.addEventListeners();
+			}
+		}
+	}
+
+	/**
+	 * Get chart component by its id
+	 *
+	 * @param {string} id
+	 * @returns {Component}
+	 * @memberof Chart
+	 */
+	getComponentById(id: string): Component {
+		let foundComponent;
+
+		for (const parent of this.components) {
+			foundComponent = this.getComponentsByParent(id, parent);
+		}
+		return foundComponent;
+	}
+
+	getComponentsByParent(id: string, parent: Component): Component {
+		let foundComponent;
+
+		// parent is a LayoutComponent. Iterate through
+		// its children to find the requested Component
+		if ((parent as LayoutComponent).children) {
+			const loComponent = parent as LayoutComponent;
+			for (const child of loComponent.children) {
+				if (child.id === id) {
+					foundComponent = child.components[0];
+
+					return foundComponent;
+				}
+				if (child.components) {
+					for (const childComp of child.components) {
+						foundComponent = this.getComponentsByParent(
+							id,
+							childComp as LayoutComponent
+						);
+
+						if (foundComponent) {
+							return foundComponent;
+						}
+					}
+				}
+			}
+		}
+
+		return foundComponent;
+	}
+
+	componentIsLayout(component: Component, id: string): Component {
+		const loComponent = component as LayoutComponent;
+		if (loComponent.children) {
+			return loComponent;
+		}
+
+		return component;
+	}
+
+	protected getChartComponents(graphFrameComponents: any[]): any[] {
 		const titleComponent = {
 			id: "title",
 			components: [new Title(this.model, this.services)],
@@ -142,8 +240,14 @@ export class Chart {
 			}
 		};
 
-		const isLegendEnabled =
-			this.model.getOptions().legend.enabled !== false;
+		let isLegendEnabled = this.model.getOptions().legend.enabled !== false;
+
+		const hasExternalLegend = this.model.getOptions().legend?.external
+			?.reference;
+
+		// disable internal legend if external legend is provided
+		isLegendEnabled = !hasExternalLegend;
+
 		// TODORF - REUSE BETWEEN AXISCHART & CHART
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;

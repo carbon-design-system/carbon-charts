@@ -1,6 +1,8 @@
-import { pieData } from "./pie";
+import { pieData, pieData2 } from "./pie";
 
 export const donutData = pieData;
+
+export const donutData2 = pieData2;
 
 export const donutOptions = {
 	title: "Donut",

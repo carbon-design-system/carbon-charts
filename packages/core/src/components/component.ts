@@ -19,9 +19,10 @@ export class Component {
 	protected model: ChartModel;
 	protected services: any;
 
-	constructor(model: ChartModel, services: any, configs?: any) {
+	constructor(model: ChartModel, services: any, configs?: any, parent?: any) {
 		this.model = model;
 		this.services = services;
+		this.parent = parent;
 
 		if (configs) {
 			this.configs = configs;
@@ -91,8 +92,17 @@ export class Component {
 				"prefix"
 			);
 
+			let typeParent = this.parent;
+
+			if (this.type === "legend") {
+				const ref: string = this.model.getOptions().legend?.external
+					?.reference;
+
+				typeParent = ref ? select(select(ref).node()) : this.parent;
+			}
+
 			const svg = DOMUtils.appendOrSelect(
-				this.parent,
+				typeParent,
 				`g.${settings.prefix}--${chartprefix}--${this.type}`
 			);
 

@@ -12,9 +12,14 @@ import * as Configuration from "../../configuration";
 
 // D3 Imports
 import { select } from "d3-selection";
+import { ChartModel } from "../../model";
 
 export class Legend extends Component {
 	type = "legend";
+
+	externalModels: ChartModel[];
+
+	eventListener: any;
 
 	render() {
 		const svg = this.getContainerSVG().attr(
@@ -313,6 +318,12 @@ export class Legend extends Component {
 			});
 	}
 
+	registerExternalModel(externalModel: ChartModel) {
+		this.externalModels = this.externalModels || [];
+
+		this.externalModels.push(externalModel);
+	}
+
 	addEventListeners() {
 		const self = this;
 		const svg = this.getContainerSVG();
@@ -324,7 +335,8 @@ export class Legend extends Component {
 			"threshold"
 		);
 
-		svg.selectAll("g.legend-item")
+		this.eventListener = svg
+			.selectAll("g.legend-item")
 			.on("mouseover", function () {
 				self.services.events.dispatchEvent(Events.Legend.ITEM_HOVER, {
 					hoveredElement: select(this)
@@ -372,6 +384,12 @@ export class Legend extends Component {
 
 				const clickedItem = select(this);
 				const clickedItemData = clickedItem.datum() as any;
+
+				if (self.externalModels) {
+					for (const model of self.externalModels) {
+						model.toggleDataLabel(clickedItemData.name);
+					}
+				}
 
 				self.model.toggleDataLabel(clickedItemData.name);
 			})

@@ -27,7 +27,8 @@ export class TwoDimensionalAxes extends Component {
 		const axesOptions = Tools.getProperty(this.model.getOptions(), "axes");
 
 		axisPositions.forEach((axisPosition) => {
-			const axisOptions = axesOptions[AxisPositions[axisPosition]];
+			const axisOptions =
+				axesOptions && axesOptions[AxisPositions[axisPosition]];
 			if (axisOptions) {
 				axes[AxisPositions[axisPosition]] = true;
 			}

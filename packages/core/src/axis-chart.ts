@@ -96,8 +96,14 @@ export class AxisChart extends Chart {
 			"data",
 			"loading"
 		);
-		const isLegendEnabled =
+		let isLegendEnabled =
 			this.model.getOptions().legend.enabled !== false && !isDataLoading;
+
+		const hasExternalLegend = this.model.getOptions().legend?.external
+			?.reference;
+
+		// disable internal legend if external legend is provided
+		isLegendEnabled = !hasExternalLegend;
 
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;

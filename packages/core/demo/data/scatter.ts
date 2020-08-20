@@ -28,6 +28,25 @@ export const doubleLinearScatterOptions = {
 	}
 };
 
+export const externalLegendScatterOptions = {
+	title: "Scatter (external legend)",
+	axes: {
+		bottom: {
+			title: "2019 Annual Sales Figures",
+			scaleType: "labels",
+			mapsTo: "key"
+		},
+		left: {
+			mapsTo: "value"
+		}
+	},
+	legend: {
+		external: {
+			reference: "#legend"
+		}
+	}
+};
+
 export const scatterDiscreteData = [
 	{ group: "Dataset 1", key: "Qty", value: 34200 },
 	{ group: "Dataset 1", key: "More", value: 23500 },

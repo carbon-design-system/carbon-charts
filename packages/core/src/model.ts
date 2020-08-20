@@ -2,12 +2,16 @@
 import * as Configuration from "./configuration";
 import { Tools } from "./tools";
 import * as colorPalettes from "./services/colorPalettes";
-import { Events, ScaleTypes } from "./interfaces";
+import { Events, ScaleTypes, BaseChartOptions } from "./interfaces";
 
 // D3
 import { map } from "d3-collection";
 import { scaleOrdinal } from "d3-scale";
 import { stack } from "d3-shape";
+
+export interface ChartState {
+	options: BaseChartOptions;
+}
 
 /** The charting model layer which includes mainly the chart data and options,
  * as well as some misc. information to be shared among components */
@@ -332,11 +336,13 @@ export class ChartModel {
 
 		// If there are deactivated items, toggle "changedLabel"
 		if (hasDeactivatedItems) {
-			// If the only active item is being toggled
+			// If no active items available
+			// or the only active item is being toggled
 			// Activate all items
 			if (
-				activeItems.length === 1 &&
-				activeItems[0].name === changedLabel
+				activeItems.length === 0 ||
+				(activeItems.length === 1 &&
+					activeItems[0].name === changedLabel)
 			) {
 				// If every item is active, then enable "changedLabel" and disable all other items
 				dataGroups.forEach((group, i) => {
@@ -428,6 +434,15 @@ export class ChartModel {
 
 	getFillScale() {
 		return this.colorScale;
+	}
+
+	getColorScale() {
+		const scale = {};
+		for (const name of this.getDataGroupNames()) {
+			scale[name] = this.getStrokeColor(name);
+		}
+
+		return scale;
 	}
 
 	/**

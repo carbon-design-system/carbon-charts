@@ -46,6 +46,8 @@ export class Skeleton extends Component {
 			this.renderPieSkeleton(showShimmerEffect);
 		} else if (this.configs.skeleton === Skeletons.DONUT) {
 			this.renderDonutSkeleton(showShimmerEffect);
+		} else if (this.configs.skeleton === Skeletons.LEGEND) {
+			this.renderLegendSkeleton(showShimmerEffect);
 		} else {
 			throw new Error(
 				`"${this.configs.skeleton}" is not a valid Skeleton type.`
@@ -92,6 +94,28 @@ export class Skeleton extends Component {
 		if (showShimmerEffect) {
 			this.setShimmerEffect("shimmer-areas");
 		}
+	}
+
+	renderLegendSkeleton(showShimmerEffect: boolean) {
+		const svg = this.parent;
+		const parent = svg.node().parentNode;
+		const { width, height } = DOMUtils.getSVGElementSize(parent, {
+			useAttrs: true
+		});
+
+		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-skeleton.DAII")
+			.attr("width", width)
+			.attr("height", height);
+
+		const backdropRect = DOMUtils.appendOrSelect(
+			this.backdrop,
+			"rect.chart-skeleton-backdrop"
+		);
+		backdropRect.attr("width", "100%").attr("height", "100%");
+
+		backdropRect
+			.classed("shimmer-effect-lines", showShimmerEffect)
+			.classed("empty-state-lines", !showShimmerEffect);
 	}
 
 	setScales() {

@@ -337,6 +337,14 @@ const radarChart: RadarChartOptions = Tools.merge({}, chart, {
 	}
 } as RadarChartOptions);
 
+const externalLegendOptions = Tools.merge({}, chart, {
+	legend: {
+		external: {
+			enabled: true
+		}
+	}
+});
+
 export const options = {
 	chart,
 	axisChart,
@@ -352,7 +360,8 @@ export const options = {
 	donutChart,
 	meterChart,
 	radarChart,
-	gaugeChart
+	gaugeChart,
+	externalLegendOptions
 };
 
 export * from "./configuration-non-customizable";

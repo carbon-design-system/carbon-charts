@@ -7,6 +7,15 @@ export const pieData = [
 	{ group: "Misc", value: 25000 }
 ];
 
+export const pieData2 = [
+	{ group: "2V2N 9KYPM version 1", value: 15000 },
+	{ group: "L22I P66EP L22I P66EP L22I P66EP", value: 23000 },
+	{ group: "JQAI 2M4L1", value: 1200 },
+	{ group: "J9DZ F37AP", value: 7500 },
+	{ group: "YEL48 Q6XK YEL48", value: 3200 },
+	{ group: "Misc", value: 5000 }
+];
+
 export const pieOptions = {
 	title: "Pie",
 	resizable: true

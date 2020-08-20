@@ -42,6 +42,10 @@ export interface LegendOptions {
 	truncation?: TruncationOptions;
 	alignment?: Alignments;
 	order?: string[];
+	external?: {
+		enabled?: boolean;
+		reference?: any;
+	};
 }
 
 export interface TooltipOptions {

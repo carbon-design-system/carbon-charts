@@ -121,7 +121,8 @@ export enum Skeletons {
 	GRID = "grid",
 	VERT_OR_HORIZ = "vertOrHoriz",
 	PIE = "pie",
-	DONUT = "donut"
+	DONUT = "donut",
+	LEGEND = "legend"
 }
 
 /**
