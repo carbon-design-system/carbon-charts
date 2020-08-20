@@ -166,7 +166,7 @@ export class Axis extends Component {
 		const axisRefExists = !container.select(`g.ticks`).empty();
 		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
 		if (!axisRefExists) {
-			axisRef.attr("role", `${Roles.GROUP} ${Roles.IMG}`);
+			axisRef.attr("role", `${Roles.GRAPHICS_OBJECT} ${Roles.GROUP} ${Roles.IMG}`);
 			axisRef.attr("aria-label", `${axisPosition} ticks`);
 		}
 

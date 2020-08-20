@@ -134,7 +134,7 @@ export class GroupedBar extends Bar {
 			})
 			.attr("opacity", 1)
 			// a11y
-			.attr("role", `${Roles.GROUP} ${Roles.IMG}`)
+			.attr("role", `${Roles.GRAPHICS_OBJECT} ${Roles.GROUP} ${Roles.IMG}`)
 			.attr("aria-roledescription", "bar")
 			.attr("aria-label", (d) => d.value);
 
