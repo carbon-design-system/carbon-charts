@@ -72,7 +72,7 @@ export class StackedArea extends Component {
 			.merge(areas)
 			.data(stackedData, (d) => d[0][groupMapsTo])
 			.attr("fill", (d) => self.model.getFillColor(d[0][groupMapsTo]))
-			.attr("role", Roles.GRAPHICS_SYMBOL)
+			.attr("role", Roles.GROUP)
 			.attr("aria-roledescription", "area")
 			.transition(
 				this.services.transitions.getTransition(
