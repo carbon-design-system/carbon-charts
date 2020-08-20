@@ -75,8 +75,6 @@ class ExternalLegendStory extends Component {
 	}
 }
 
-var legendRef = React.createRef();
-
 storiesOf("External Legend", module)
     .addDecorator(
         withKnobs({ escapeHTML: false })
