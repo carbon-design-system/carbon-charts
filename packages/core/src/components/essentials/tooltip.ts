@@ -89,7 +89,9 @@ export class Tooltip extends Component {
 
 		// listen to hide-tooltip Custom Events to hide the tooltip
 		this.services.events.addEventListener(Events.Tooltip.HIDE, () => {
-			this.tooltip.classed("hidden", true);
+			this.tooltip
+				.attr("aria-hidden", "true")
+				.classed("hidden", true);
 		});
 	}
 

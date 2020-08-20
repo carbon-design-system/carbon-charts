@@ -236,7 +236,7 @@ export class Scatter extends Component {
 			)
 			.attr("opacity", fadeInOnChartHolderMouseover ? 0 : 1)
 			// a11y
-			.attr("role", Roles.GROUP)
+			.attr("role", `${Roles.GROUP} ${Roles.IMG}`)
 			.attr("aria-roledescription", "point")
 			.attr("aria-label", (d) => d[rangeIdentifier]);
 

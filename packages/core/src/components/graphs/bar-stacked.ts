@@ -54,7 +54,7 @@ export class StackedBar extends Bar {
 			.enter()
 			.append("g")
 			.classed("bars", true)
-			.attr("role", Roles.GROUP)
+			.attr("role", `${Roles.GROUP} ${Roles.IMG}`)
 			.attr("aria-label", "bars");
 
 		// Update data on all bars
@@ -123,7 +123,7 @@ export class StackedBar extends Bar {
 			})
 			.attr("opacity", 1)
 			// a11y
-			.attr("role", Roles.GROUP)
+			.attr("role", `${Roles.GROUP} ${Roles.IMG}`)
 			.attr("aria-roledescription", "bar")
 			.attr("aria-label", (d) => d[1] - d[0]);
 
