@@ -103,7 +103,7 @@ export class Line extends Component {
 				return this.model.getStrokeColor(group.name);
 			})
 			// a11y
-			.attr("role", `${Roles.GRAPHICS_OBJECT} ${Roles.GROUP} ${Roles.IMG}`)
+			.attr("role", `${Roles.GRAPHICS_SYMBOL} ${Roles.GROUP} ${Roles.IMG}`)
 			.attr("aria-roledescription", "line")
 			.attr("aria-label", (group) => {
 				const { data: groupData } = group;
