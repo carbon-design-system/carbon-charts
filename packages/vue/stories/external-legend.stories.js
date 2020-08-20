@@ -36,9 +36,6 @@ storiesOf('External Legend', module)
 			this.$nextTick(() => {
 				const legendChartRef = this.$refs.legendRef.coreChart;
 
-				// eslint-disable-next-line no-console
-				console.log('legendRef', this.$refs.legendRef);
-
 				const legendExternal = {
 					legend: {
 						external: {
