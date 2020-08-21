@@ -253,7 +253,7 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 1);
-	};
+	}
 
 	handleChartHolderOnMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -264,7 +264,7 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 0);
-	};
+	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
 		const { hoveredElement } = event.detail;
@@ -279,7 +279,7 @@ export class Scatter extends Component {
 			.attr("opacity", (d) =>
 				d[groupMapsTo] !== hoveredElement.datum()["name"] ? 0.3 : 1
 			);
-	};
+	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -290,7 +290,7 @@ export class Scatter extends Component {
 				)
 			)
 			.attr("opacity", 1);
-	};
+	}
 
 	addEventListeners() {
 		const self = this;
