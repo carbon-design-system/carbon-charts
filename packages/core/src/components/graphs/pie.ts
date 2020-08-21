@@ -262,8 +262,6 @@ export class Pie extends Component {
 			.attr("role", Roles.GROUP)
 			.attr("aria-label", "callouts");
 
-		const options = this.model.getOptions();
-
 		// Update data on callouts
 		const callouts = svg.selectAll("g.callout").data(calloutData);
 
@@ -465,8 +463,6 @@ export class Pie extends Component {
 
 	// Helper functions
 	protected computeRadius() {
-		const options = this.model.getOptions();
-
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
 		});
