@@ -14,6 +14,10 @@ export default class ScatterChart extends BaseChart {
 		);
 	}
 
+	shouldComponentUpdate(nextProps, nextState){
+		return this.props.data != nextProps.data || this.props.options != nextProps.options;
+	}
+
 	render() {
 		return (
 			<div
