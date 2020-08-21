@@ -262,8 +262,6 @@ export class Pie extends Component {
 			.attr("role", Roles.GROUP)
 			.attr("aria-label", "callouts");
 
-		const options = this.model.getOptions();
-
 		// Update data on callouts
 		const callouts = svg.selectAll("g.callout").data(calloutData);
 
