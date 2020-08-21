@@ -2,7 +2,11 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
-import { Skeletons, CartesianOrientations } from "../../interfaces/enums";
+import {
+	Skeletons,
+	CartesianOrientations,
+	Alignments
+} from "../../interfaces/enums";
 import * as Configuration from "../../configuration";
 
 // D3 Imports
@@ -203,6 +207,16 @@ export class Skeleton extends Component {
 			.attr("width", width)
 			.attr("height", height);
 
+		const optionName = innerRadius === 0
+			? "pie"
+			: "donut";
+
+		const alignment = Tools.getProperty(
+			this.model.getOptions(),
+			optionName,
+			"alignment"
+		);
+
 		DOMUtils.appendOrSelect(
 			container,
 			"rect.chart-skeleton-area-container"
@@ -222,12 +236,26 @@ export class Skeleton extends Component {
 		const tcy =
 			outerRadius + (Math.min(width, height) - outerRadius * 2) / 2;
 
-		DOMUtils.appendOrSelect(container, "path")
+		const skeletonAreaShape = DOMUtils.appendOrSelect(container, "path")
 			.attr("class", "skeleton-area-shape")
 			.attr("transform", `translate(${tcx}, ${tcy})`)
 			.attr("d", arcPathGenerator)
 			.classed("shimmer-effect-areas", shimmer)
 			.classed("empty-state-areas", !shimmer);
+		
+		// Position skeleton
+		let translateX = outerRadius + Configuration.pie.xOffset;
+		if (alignment === Alignments.CENTER) {
+			translateX = width / 2;
+		} else if (alignment === Alignments.RIGHT) {
+			translateX = width - outerRadius - Configuration.pie.xOffset;
+		}
+
+		const translateY = outerRadius + Configuration.pie.yOffset;
+		skeletonAreaShape.attr(
+			"transform",
+			`translate(${translateX}, ${translateY})`
+		);
 	}
 
 	// same logic in pie
