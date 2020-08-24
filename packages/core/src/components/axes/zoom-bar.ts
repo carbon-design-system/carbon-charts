@@ -304,6 +304,8 @@ export class ZoomBar extends Component {
 		const handleBarXDiff = -handleBarWidth / 2;
 		const handleYBarDiff = (handleHeight - handleBarHeight) / 2;
 
+		const ewHandleCursor = "ew-resize";
+
 		// handle
 		svg.select(this.brushSelector)
 			.selectAll("rect.handle")
@@ -326,7 +328,7 @@ export class ZoomBar extends Component {
 			.attr("y", 0)
 			.attr("width", handleWidth)
 			.attr("height", handleHeight)
-			.attr("cursor", "pointer")
+			.attr("cursor", ewHandleCursor)
 			.style("display", null); // always display
 
 		// handle-bar
@@ -359,7 +361,7 @@ export class ZoomBar extends Component {
 			.attr("y", handleYBarDiff)
 			.attr("width", handleBarWidth)
 			.attr("height", handleBarHeight)
-			.attr("cursor", "pointer");
+			.attr("cursor", ewHandleCursor);
 
 		// Update slider selected area
 		if (zoombarType === ZoomBarTypes.SLIDER_VIEW) {
