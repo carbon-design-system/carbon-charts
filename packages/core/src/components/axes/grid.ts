@@ -15,7 +15,7 @@ export class Grid extends Component {
 		const gridEnable = Tools.getProperty(
 			this.model.getOptions(),
 			"grid",
-			"enable"
+			"enabled"
 		);
 		if (!gridEnable) {
 			return;
