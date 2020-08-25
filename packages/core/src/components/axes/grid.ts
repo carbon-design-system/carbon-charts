@@ -12,6 +12,14 @@ export class Grid extends Component {
 	backdrop: any;
 
 	render(animate = true) {
+		const gridEnable = Tools.getProperty(
+			this.model.getOptions(),
+			"grid",
+			"enable"
+		);
+		if (!gridEnable) {
+			return;
+		}
 		// Draw the backdrop
 		this.drawBackdrop();
 		DOMUtils.appendOrSelect(this.backdrop, "g.x.grid");
