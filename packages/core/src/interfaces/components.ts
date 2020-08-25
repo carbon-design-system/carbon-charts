@@ -97,6 +97,7 @@ export interface ThresholdOptions {
 }
 
 export interface GridOptions {
+	enable: boolean;
 	y?: {
 		enabled?: boolean;
 		numberOfTicks?: number;
