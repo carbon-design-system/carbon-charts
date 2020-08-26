@@ -213,7 +213,6 @@ export class Grid extends Component {
 
 	cleanGrid(g) {
 		const options = this.model.getOptions();
-		g.selectAll("line").attr("stroke", options.grid.strokeColor);
 
 		// Remove extra elements
 		g.selectAll("text").remove();

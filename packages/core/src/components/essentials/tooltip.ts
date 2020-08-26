@@ -2,6 +2,8 @@ import { Component } from "../component";
 import { Tools } from "../../tools";
 import { DOMUtils } from "../../services";
 import { ChartModel } from "../../model";
+import { Events, TruncationTypes } from "../../interfaces";
+import * as Configuration from "../../configuration";
 
 // Carbon position service
 import Position, { PLACEMENTS } from "@carbon/utils-position";
@@ -11,8 +13,6 @@ import settings from "carbon-components/es/globals/js/settings";
 
 // D3 Imports
 import { select, mouse } from "d3-selection";
-import { TooltipPosition, Events, TruncationTypes } from "../../interfaces";
-import * as Configuration from "../../configuration";
 
 export class Tooltip extends Component {
 	type = "tooltip";
@@ -58,7 +58,7 @@ export class Tooltip extends Component {
 		this.services.events.addEventListener(
 			Events.Tooltip.SHOW,
 			(e: CustomEvent) => {
-				const data = e.detail.data;
+				const data = e.detail.data || e.detail.items;
 				const defaultHTML = this.getTooltipHTML(e);
 
 				// if there is a provided tooltip HTML function call it
@@ -169,9 +169,9 @@ export class Tooltip extends Component {
 							<div class="datapoint-tooltip ${item.bold ? "bold" : ""}">
 								${
 									item.color
-										? '<a style="background-color: ' +
+										? "<a style=\"background-color: " +
 										  item.color +
-										  '" class="tooltip-color"></a>'
+										  "\" class=\"tooltip-color\"></a>"
 										: ""
 								}
 								<p class="label">${item.label}</p>
@@ -258,7 +258,7 @@ export class Tooltip extends Component {
 			})
 		);
 
-		let { horizontalOffset } = this.model.getOptions().tooltip;
+		let { horizontalOffset } = Configuration.tooltips;
 		if (bestPlacementOption === PLACEMENTS.LEFT) {
 			horizontalOffset *= -1;
 		}

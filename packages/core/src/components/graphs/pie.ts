@@ -3,6 +3,7 @@ import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import { Tools } from "../../tools";
 import { CalloutDirections, Roles, Events, Alignments } from "../../interfaces";
+import * as Configuration from "../../configuration";
 
 // D3 Imports
 import { select } from "d3-selection";
@@ -45,8 +46,7 @@ export class Pie extends Component {
 	}
 
 	getInnerRadius() {
-		const options = this.model.getOptions();
-		return options.pie.innerRadius;
+		return Configuration.pie.innerRadius;
 	}
 
 	render(animate = true) {
@@ -65,13 +65,13 @@ export class Pie extends Component {
 		// Set the hover arc radius
 		this.hoverArc = arc()
 			.innerRadius(this.getInnerRadius())
-			.outerRadius(radius + options.pie.hoverArc.outerRadiusOffset);
+			.outerRadius(radius + Configuration.pie.hoverArc.outerRadiusOffset);
 
 		// Setup the pie layout
 		const pieLayout = pie()
 			.value((d: any) => d.value)
 			.sort(null)
-			.padAngle(options.pie.padAngle);
+			.padAngle(Configuration.pie.padAngle);
 
 		// Sort pie layout data based off of the indecies the layout creates
 		const pieLayoutData = pieLayout(displayData).sort(
@@ -186,16 +186,18 @@ export class Pie extends Component {
 
 				// check if last 2 slices (or just last) are < the threshold
 				if (i >= totalSlices - 2) {
-					if (sliceAngleDeg < options.pie.callout.minSliceDegree) {
+					if (
+						sliceAngleDeg < Configuration.pie.callout.minSliceDegree
+					) {
 						let labelTranslateX, labelTranslateY;
 						if (d.index === totalSlices - 1) {
 							labelTranslateX =
 								d.xPosition +
-								options.pie.callout.offsetX +
-								options.pie.callout.textMargin +
+								Configuration.pie.callout.offsetX +
+								Configuration.pie.callout.textMargin +
 								d.textOffsetX;
 							labelTranslateY =
-								d.yPosition - options.pie.callout.offsetY;
+								d.yPosition - Configuration.pie.callout.offsetY;
 
 							// Set direction of callout
 							d.direction = CalloutDirections.RIGHT;
@@ -203,11 +205,11 @@ export class Pie extends Component {
 						} else {
 							labelTranslateX =
 								d.xPosition -
-								options.pie.callout.offsetX -
+								Configuration.pie.callout.offsetX -
 								d.textOffsetX -
-								options.pie.callout.textMargin;
+								Configuration.pie.callout.textMargin;
 							labelTranslateY =
-								d.yPosition - options.pie.callout.offsetY;
+								d.yPosition - Configuration.pie.callout.offsetY;
 
 							// Set direction of callout
 							d.direction = CalloutDirections.LEFT;
@@ -234,16 +236,16 @@ export class Pie extends Component {
 		});
 
 		// Position Pie
-		let pieTranslateX = radius + options.pie.xOffset;
+		let pieTranslateX = radius + Configuration.pie.xOffset;
 		if (alignment === Alignments.CENTER) {
 			pieTranslateX = width / 2;
 		} else if (alignment === Alignments.RIGHT) {
-			pieTranslateX = width - radius - options.pie.xOffset;
+			pieTranslateX = width - radius - Configuration.pie.xOffset;
 		}
 
-		let pieTranslateY = radius + options.pie.yOffset;
+		let pieTranslateY = radius + Configuration.pie.yOffset;
 		if (calloutData.length > 0) {
-			pieTranslateY += options.pie.yOffsetCallout;
+			pieTranslateY += Configuration.pie.yOffsetCallout;
 		}
 
 		svg.attr("transform", `translate(${pieTranslateX}, ${pieTranslateY})`);
@@ -259,8 +261,6 @@ export class Pie extends Component {
 		)
 			.attr("role", Roles.GROUP)
 			.attr("aria-label", "callouts");
-
-		const options = this.model.getOptions();
 
 		// Update data on callouts
 		const callouts = svg.selectAll("g.callout").data(calloutData);
@@ -288,13 +288,16 @@ export class Pie extends Component {
 
 				// end position for the callout line
 				d.endPos = {
-					x: xPosition + options.pie.callout.offsetX,
-					y: yPosition - options.pie.callout.offsetY + d.textOffsetY
+					x: xPosition + Configuration.pie.callout.offsetX,
+					y:
+						yPosition -
+						Configuration.pie.callout.offsetY +
+						d.textOffsetY
 				};
 
 				// the intersection point of the vertical and horizontal line
 				d.intersectPointX =
-					d.endPos.x - options.pie.callout.horizontalLineLength;
+					d.endPos.x - Configuration.pie.callout.horizontalLineLength;
 			} else {
 				// start position for the callout line
 				d.startPos = {
@@ -304,13 +307,16 @@ export class Pie extends Component {
 
 				// end position for the callout line should be bottom aligned to the title
 				d.endPos = {
-					x: xPosition - options.pie.callout.offsetX,
-					y: yPosition - options.pie.callout.offsetY + d.textOffsetY
+					x: xPosition - Configuration.pie.callout.offsetX,
+					y:
+						yPosition -
+						Configuration.pie.callout.offsetY +
+						d.textOffsetY
 				};
 
 				// the intersection point of the vertical and horizontal line
 				d.intersectPointX =
-					d.endPos.x + options.pie.callout.horizontalLineLength;
+					d.endPos.x + Configuration.pie.callout.horizontalLineLength;
 			}
 
 			// Store the necessary data in the DOM element
@@ -457,13 +463,11 @@ export class Pie extends Component {
 
 	// Helper functions
 	protected computeRadius() {
-		const options = this.model.getOptions();
-
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
 		});
 		const radius: number = Math.min(width, height) / 2;
 
-		return radius + options.pie.radiusOffset;
+		return radius + Configuration.pie.radiusOffset;
 	}
 }
