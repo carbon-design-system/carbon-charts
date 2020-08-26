@@ -75,7 +75,7 @@ export const grid: GridOptions = {
  */
 export const ruler: RulerOptions = {
 	// enable or disable ruler
-	enabled: false
+	enabled: true
 };
 
 
@@ -156,6 +156,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	timeScale,
 	grid,
+	ruler,
 	zoomBar: {
 		top: {
 			enabled: false,

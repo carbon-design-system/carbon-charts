@@ -96,7 +96,7 @@ export interface GridOptions {
  * Ruler options
  */
 export interface RulerOptions {
-	enabled: boolean;
+	enabled?: boolean;
 }
 
 
