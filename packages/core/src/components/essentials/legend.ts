@@ -65,6 +65,12 @@ export class Legend extends Component {
 			"numCharacter"
 		);
 
+		const usePresetPalette = Tools.getProperty(
+			options,
+			"color",
+			"presetPalette"
+		);
+
 		addedLegendItems
 			.append("rect")
 			.classed("checkbox", true)
@@ -73,11 +79,11 @@ export class Legend extends Component {
 			.attr("height", checkboxRadius * 2)
 			.attr("rx", 1)
 			.attr("ry", 1)
-			.style("fill", (d) => {
-				return d.status === Configuration.legend.items.status.ACTIVE
-					? this.model.getStrokeColor(d.name)
-					: null;
-			})
+			// .style("fill", (d) => {
+			// 	return d.status === Configuration.legend.items.status.ACTIVE
+			// 		? this.model.getStrokeColor(d.name)
+			// 		: null;
+			// })
 			.classed("active", function (d, i) {
 				return d.status === Configuration.legend.items.status.ACTIVE;
 			});

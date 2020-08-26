@@ -103,6 +103,16 @@ export interface BaseChartOptions {
 		 * e.g. { "Dataset 1": "blue" }
 		 */
 		scale?: object;
+		/**
+		 * use a carbon dataviz preset color palette
+		 * put the index (selection of which variant)
+		 */
+		presetPalette?: {
+			/**
+			 * the number of the preset
+			 */
+			index: number;
+		}
 	};
 }
 

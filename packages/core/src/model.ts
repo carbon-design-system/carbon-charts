@@ -565,9 +565,28 @@ export class ChartModel {
 
 		const options = this.getOptions();
 		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const presetPalette = Tools.getProperty(options, "color", "presetPalette");
 
 		// If there is no valid user provided scale, use the default set of colors
-		if (
+		if (presetPalette) {
+			const colorRange = [];
+			this.allDataGroups.forEach((dataGroup, index) => {
+				colorRange.push(`fill-${index + 1}`);
+			});
+
+			this.colorScale = scaleOrdinal()
+			.range(colorRange)
+			.domain(this.allDataGroups);
+
+			// need to check if the index makes sense for the number of datasets
+			// const variant = presetPalette.index;
+			//const numberOfDatasets = this.allDataGroups.length;
+
+			// change the css variables for the data
+			// const root = document.documentElement;
+			// root.style.setProperty("--datasets", numberOfDatasets.toString());
+			return;
+		} else if (
 			userProvidedScale === null ||
 			Object.keys(userProvidedScale).length === 0
 		) {
@@ -602,5 +621,7 @@ export class ChartModel {
 		this.colorScale = scaleOrdinal()
 			.range(colorRange)
 			.domain(this.allDataGroups);
+
+
 	}
 }

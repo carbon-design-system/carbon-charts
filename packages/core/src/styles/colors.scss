@@ -1,0 +1,42 @@
+// global color palette
+
+// will return a palette class for that number of datasets
+@function palette($num) {
+	// we want a dark theme
+	@if ($num == 0) {
+		@return rgb(42, 176, 206);
+	} @else {
+		// we want a light theme
+		@return rgb(138, 206, 42);
+	}
+}
+
+// set the colors on the "root" which is the chart svg not a page root
+.#{$prefix}--#{$charts-prefix}--chart-svg {
+		--fill-01: magenta;
+		--fill-02: rgb(138, 206, 42);
+
+		.fill-1 {
+			fill: var(--fill-01);
+		}
+		.fill-2 {
+			fill: var(--fill-02);
+		}
+		.fill-03 {
+			fill: var(--fill-03);
+		}
+		.fill-04 {
+			fill: var(--fill-04);
+		}
+		.fill-05 {
+			fill: var(--fill-05);
+		}
+		.fill-06 {
+			fill: var(--fill-05);
+		}
+
+
+	// @if $carbon--theme == ($carbon--theme--g100 or $carbon--theme--g90) {
+	// } @else {
+	// }
+}
