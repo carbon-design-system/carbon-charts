@@ -70,7 +70,9 @@ const legend: LegendOptions = {
  */
 export const grid: GridOptions = {
 	// set enable to false will not draw grid and stroke of grid backdrop
-	enabled: true,
+	xGridEnabled: true,
+	yGridEnabled: true,
+
 	x: {
 		// set enable to false will not draw grid and stroke of grid backdrop
 		enabled: true,
