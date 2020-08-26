@@ -27,7 +27,7 @@ export class Ruler extends Component {
 	isGridEnabled = Tools.getProperty(
 		this.model.getOptions(),
 		"grid",
-		"enable"
+		"enabled"
 	);
 
 	render() {
@@ -236,7 +236,9 @@ export class Ruler extends Component {
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
 		const backdropRect = DOMUtils.appendOrSelect(
 			this.backdrop,
-			this.isGridEnabled ? "rect.chart-grid-backdrop" : "rect.chart-grid-backdrop-no-stroke"
+			this.isGridEnabled
+				? "rect.chart-grid-backdrop"
+				: "rect.chart-grid-backdrop-no-stroke"
 		);
 
 		this.backdrop
