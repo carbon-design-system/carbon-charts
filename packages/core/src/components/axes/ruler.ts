@@ -24,10 +24,17 @@ export class Ruler extends Component {
 		domainValue: number;
 		originalData: any;
 	}[];
+	isRulerEnabled =  Tools.getProperty(
+		this.model.getOptions(),
+		"ruler",
+		"enabled"
+	);
 
 	render() {
 		this.drawBackdrop();
-		this.addBackdropEventListeners();
+		if (this.isRulerEnabled) {
+			this.addBackdropEventListeners();
+		}
 	}
 
 	formatTooltipData(tooltipData) {
