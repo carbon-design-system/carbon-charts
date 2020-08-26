@@ -7,17 +7,9 @@
 		} @else {
 			fill: $ui-background;
 		}
-		stroke: $ui-03;
 	}
-
-	rect.chart-grid-backdrop-no-stroke {
-		@if $carbon--theme == $carbon--theme--g10 {
-			fill: $ui-01;
-		} @else if $carbon--theme == $carbon--theme--g90 {
-			fill: $carbon--gray-100;
-		} @else {
-			fill: $ui-background;
-		}
+	rect.stroke {
+		stroke: $ui-03;
 	}
 
 	g.x.grid g.tick,

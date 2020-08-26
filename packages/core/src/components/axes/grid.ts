@@ -12,22 +12,32 @@ export class Grid extends Component {
 	backdrop: any;
 
 	render(animate = true) {
-		const isGridEnabled = Tools.getProperty(
+		const isXGridEnabled = Tools.getProperty(
 			this.model.getOptions(),
 			"grid",
-			"enabled"
+			"xGridEnabled"
+		);
+		const isYGridEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			"grid",
+			"yGridEnabled"
 		);
 
-		if (!isGridEnabled) {
+		if (!isXGridEnabled && !isYGridEnabled) {
 			return;
 		}
 		// Draw the backdrop
-		this.drawBackdrop();
-		DOMUtils.appendOrSelect(this.backdrop, "g.x.grid");
-		DOMUtils.appendOrSelect(this.backdrop, "g.y.grid");
+		this.drawBackdrop(isXGridEnabled, isYGridEnabled);
 
-		this.drawXGrid(animate);
-		this.drawYGrid(animate);
+		if (isXGridEnabled) {
+			DOMUtils.appendOrSelect(this.backdrop, "g.x.grid");
+			this.drawXGrid(animate);
+		}
+
+		if (isYGridEnabled) {
+			DOMUtils.appendOrSelect(this.backdrop, "g.y.grid");
+			this.drawYGrid(animate);
+		}
 	}
 
 	drawXGrid(animate: boolean) {
@@ -193,7 +203,7 @@ export class Grid extends Component {
 		return xGridlines;
 	}
 
-	drawBackdrop() {
+	drawBackdrop(isXGridEnabled, isYGridEnabled) {
 		const svg = this.parent;
 
 		const mainXScale = this.services.cartesianScales.getMainXScale();
@@ -206,7 +216,9 @@ export class Grid extends Component {
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
 		const backdropRect = DOMUtils.appendOrSelect(
 			this.backdrop,
-			"rect.chart-grid-backdrop"
+			isXGridEnabled || isYGridEnabled
+				? "rect.chart-grid-backdrop.stroke"
+				: "rect.chart-grid-backdrop"
 		);
 
 		this.backdrop
