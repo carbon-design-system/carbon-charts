@@ -10,6 +10,7 @@ import {
 import { Tools } from "../../tools";
 import { ChartModel } from "../../model";
 import { DOMUtils } from "../../services";
+import { TickRotations } from "../../interfaces/enums";
 import * as Configuration from "../../configuration";
 import {
 	computeTimeIntervalName,
@@ -64,6 +65,44 @@ export class Axis extends Component {
 		// to make sure the tick rotation is calculated correctly
 		this.services.events.dispatchEvent(Events.Model.UPDATE);
 	};
+
+	// decide if the tick rotation is required
+	isTickRotationRequired(rotateTicksBySpaceCalculation: boolean) {
+		// if zoomDomain is changing
+		if (this.zoomDomainChanging) {
+			const { position: axisPosition } = this.configs;
+			const axisOptions = Tools.getProperty(
+				this.model.getOptions(),
+				"axes",
+				axisPosition
+			);
+			// user could decide if tick rotation is required during zoom domain changing
+			const rotateWhileZooming = Tools.getProperty(
+				axisOptions,
+				"ticks",
+				"rotateWhileZooming"
+			);
+
+			if (
+				!rotateWhileZooming || // default to always
+				rotateWhileZooming === TickRotations.ALWAYS
+			) {
+				// if option is set to ALWAYS or not set
+				return true;
+			} else if (rotateWhileZooming === TickRotations.NEVER) {
+				// if option is set to NEVER
+				return false;
+			} else if (rotateWhileZooming === TickRotations.DEPENDING) {
+				// if option is set to DEPENDING
+				// depending on the space calculation result
+				// may cause rotation flips during zoomDomain changing
+				return rotateTicksBySpaceCalculation;
+			}
+		} else {
+			//  if it's not in zoom domain changing, depends on the space calculation result
+			return rotateTicksBySpaceCalculation;
+		}
+	}
 
 	render(animate = true) {
 		const { position: axisPosition } = this.configs;
@@ -472,8 +511,7 @@ export class Axis extends Component {
 					: estimatedTickSize < minTickSize;
 			}
 
-			// always rotate ticks if zoomDomain is changing to avoid rotation flips during zoomDomain changing
-			if (rotateTicks || this.zoomDomainChanging) {
+			if (this.isTickRotationRequired(rotateTicks)) {
 				if (!isNumberOfTicksProvided) {
 					axis.ticks(
 						this.getNumberOfFittingTicks(

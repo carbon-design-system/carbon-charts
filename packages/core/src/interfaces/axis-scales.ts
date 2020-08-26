@@ -1,4 +1,4 @@
-import { ScaleTypes } from "./enums";
+import { ScaleTypes, TickRotations } from "./enums";
 import { AxisDomain } from "d3";
 import { Locale } from "date-fns";
 import { ThresholdOptions } from "./components";
@@ -74,6 +74,11 @@ export interface AxisOptions {
 		 * before getting rotated (in pixels)
 		 */
 		rotateIfSmallerThan?: number;
+		/**
+		 * whether rotate ticks while zoom domain is changing
+		 * only take effect when zoom bar is enabled
+		 */
+		rotateWhileZooming?: TickRotations;
 		/**
 		 * function to format the ticks
 		 */

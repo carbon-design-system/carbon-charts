@@ -163,3 +163,12 @@ export enum Statuses {
 	WARNING = "warning",
 	DANGER = "danger"
 }
+
+/**
+ * enum of domain axis ticks rotation during zoom domain change
+ */
+export enum TickRotations {
+	ALWAYS = "always",
+	DEPENDING = "depending",
+	NEVER = "never"
+}
