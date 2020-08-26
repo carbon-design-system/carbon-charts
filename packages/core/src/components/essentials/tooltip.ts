@@ -19,6 +19,11 @@ export class Tooltip extends Component {
 
 	tooltip: any;
 	positionService = new Position();
+	isTooltipEnabled = Tools.getProperty(
+		this.model.getOptions(),
+		"tooltip",
+		"enabled"
+	);
 
 	constructor(model: ChartModel, services: any, configs?: any) {
 		super(model, services, configs);
@@ -83,7 +88,7 @@ export class Tooltip extends Component {
 				this.positionTooltip(e);
 
 				// Fade in
-				this.tooltip.classed("hidden", false);
+				this.tooltip.classed("hidden", this.isTooltipEnabled ? false : true);
 			}
 		);
 

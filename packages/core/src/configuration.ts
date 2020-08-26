@@ -73,6 +73,7 @@ export const grid: GridOptions = {
  * Tooltip options
  */
 export const baseTooltip: TooltipOptions = {
+	enabled: false,
 	showTotal: true,
 	valueFormatter: (d) => d.toLocaleString(),
 	truncation: standardTruncationOptions
