@@ -5,7 +5,7 @@ import { DOMUtils } from "../../services";
 
 // D3 Imports
 import { brushX } from "d3-brush";
-import { event } from "d3-selection";
+import { event, mouse } from "d3-selection";
 import { scaleTime } from "d3-scale";
 
 // This class is used for handle brush events in chart
@@ -55,7 +55,12 @@ export class ChartBrush extends Component {
 			if (zoomDomain === undefined) {
 				// default to full range with extended domain
 				zoomDomain = this.services.zoom.getDefaultZoomBarDomain();
-				this.model.set({ zoomDomain: zoomDomain }, { animate: false });
+				if (zoomDomain) {
+					this.model.set(
+						{ zoomDomain: zoomDomain },
+						{ animate: false }
+					);
+				}
 			}
 
 			const updateSelectionDash = (selection) => {
@@ -81,9 +86,10 @@ export class ChartBrush extends Component {
 				frontSelection.attr("stroke-dasharray", dashArray);
 			};
 
-			const eventHandler = () => {
+			const brushEventHandler = () => {
+				// selection range: [0, width]
 				const selection = event.selection;
-				if (selection === null) {
+				if (selection === null || selection[0] === selection[1]) {
 					return;
 				}
 
@@ -97,69 +103,40 @@ export class ChartBrush extends Component {
 					.style("display", null);
 
 				updateSelectionDash(selection);
+			};
 
+			// assume max range is [0, width]
+			const handleZoomDomain = (startPoint, endPoint) => {
+				// create xScale based on current zoomDomain
 				const xScale = scaleTime().range([0, width]).domain(zoomDomain);
 
-				const newDomain = [
-					xScale.invert(selection[0]),
-					xScale.invert(selection[1])
+				let newDomain = [
+					xScale.invert(startPoint),
+					xScale.invert(endPoint)
 				];
+				// if selected start time and end time are the same
+				// reset to default full range
+				if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
+					// same as d3 behavior and zoom bar behavior: set to default full range
+					newDomain = this.services.zoom.getDefaultZoomBarDomain();
+				}
+
+				// only if zoomDomain needs update
 				if (
-					selection != null &&
-					event.sourceEvent != null &&
-					(event.sourceEvent.type === "mousemove" ||
-						event.sourceEvent.type === "mouseup" ||
-						event.sourceEvent.type === "mousedown" ||
-						event.sourceEvent.type === "touchstart" ||
-						event.sourceEvent.type === "touchmove" ||
-						event.sourceEvent.type === "touchend")
+					zoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
+					zoomDomain[1].valueOf() !== newDomain[1].valueOf()
 				) {
-					// dispatch selection events
-					let zoomBarEventType;
-					if (event.type === "start") {
-						zoomBarEventType = Events.ZoomBar.SELECTION_START;
-					} else if (event.type === "brush") {
-						zoomBarEventType = Events.ZoomBar.SELECTION_IN_PROGRESS;
-					} else if (event.type === "end") {
-						zoomBarEventType = Events.ZoomBar.SELECTION_END;
-					}
-					this.services.events.dispatchEvent(zoomBarEventType, {
-						selection,
-						newDomain
-					});
+					this.services.zoom.handleDomainChange(newDomain);
 				}
 			};
+
 			const brushed = () => {
+				// max selection range: [0, width]
 				const selection = event.selection;
 
 				if (selection !== null) {
-					// create xScale based on current zoomDomain
-					const xScale = scaleTime()
-						.range([0, width])
-						.domain(zoomDomain);
-
-					let newDomain = [
-						xScale.invert(selection[0]),
-						xScale.invert(selection[1])
-					];
-
-					// if selected start time and end time are the same
-					// reset to default full range
-					if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
-						// same as d3 behavior and zoom bar behavior: set to default full range
-						newDomain = this.services.zoom.getDefaultZoomBarDomain();
-					}
-
-					// only if zoomDomain needs update
-					if (
-						zoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
-						zoomDomain[1].valueOf() !== newDomain[1].valueOf()
-					) {
-						this.model.set(
-							{ zoomDomain: newDomain },
-							{ animate: false }
-						);
-					}
+					// handleZoomDomain assumes max range is [0, width]
+					handleZoomDomain(selection[0], selection[1]);
 
 					// clear brush selection
 					brushArea.call(brush.move, null);
@@ -167,17 +144,35 @@ export class ChartBrush extends Component {
 					frontSelection.style("display", "none");
 				}
 			};
-
 			// leave some space to display selection strokes besides axis
 			const brush = brushX()
 				.extent([
 					[0, 0],
 					[width - 1, height]
 				])
-				.on("start brush end", eventHandler)
+				.on("start brush end", brushEventHandler)
 				.on("end.brushed", brushed);
 
 			brushArea.call(brush);
+
+			const zoomRatio = this.services.zoom.getZoomRatio();
+			backdrop.on("click", function () {
+				if (event.shiftKey) {
+					// clickedX range: [0, width]
+					const clickedX = mouse(brushArea.node())[0];
+
+					let leftPoint = clickedX - (width * zoomRatio) / 2;
+					if (leftPoint < 0) {
+						leftPoint = 0;
+					}
+					let rightPoint = clickedX + (width * zoomRatio) / 2;
+					if (rightPoint > width) {
+						rightPoint = width;
+					}
+					// handleZoomDomain assumes max range is [0, width]
+					handleZoomDomain(leftPoint, rightPoint);
+				}
+			});
 		}
 	}
 }
