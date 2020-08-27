@@ -85,7 +85,9 @@ export class Tooltip extends Component {
 				}
 
 				// Position the tooltip
-				this.positionTooltip(e);
+				if (this.isTooltipEnabled) {
+					this.positionTooltip(e);
+				}
 
 				// Fade in
 				this.tooltip.classed("hidden", this.isTooltipEnabled ? false : true);
