@@ -117,6 +117,10 @@ export interface AxisChartOptions extends BaseChartOptions {
 	 * zoombar configuration
 	 */
 	zoomBar?: ZoomBarsOptions;
+	/**
+	 * enable or disable scatter dot
+	 */
+	scatterDotEnabled?: boolean;
 }
 
 /**

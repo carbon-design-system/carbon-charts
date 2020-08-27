@@ -51,6 +51,13 @@ export class Scatter extends Component {
 	}
 
 	render(animate: boolean) {
+		const isScatterEnabled = Tools.getProperty(this.model.getOptions(), "scatterDotEnabled");
+		if (!this.configs.ignoreScatterDisabled) {
+			if (!isScatterEnabled) {
+				return;
+			}
+		}
+
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
 

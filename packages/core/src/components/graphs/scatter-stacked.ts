@@ -1,11 +1,22 @@
 // Internal Imports
 import { Scatter } from "./scatter";
 import { Roles } from "../../interfaces";
+import { Tools } from "../../tools";
 
 export class StackedScatter extends Scatter {
 	type = "scatter-stacked";
 
 	render(animate: boolean) {
+		const isScatterEnabled = Tools.getProperty(this.model.getOptions(), "scatterDotEnabled");
+		console.log("!!! this.configs.ignoreScatterDisabled: ", this.configs.ignoreScatterDisabled);
+		if (!this.configs.ignoreScatterDisabled) {
+			console.log("!!! in first if");
+			if (!isScatterEnabled) {
+				console.log("!!! in second if");
+				console.log("!!! this.model.getOptions(): ", this.model.getOptions());
+				return;
+			}
+		}
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
 
