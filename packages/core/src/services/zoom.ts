@@ -103,15 +103,14 @@ export class Zoom extends Service {
 
 	// filter out data not inside zoom domain
 	// to get better range value for axis label
-	filterDataForRangeAxisLabel(displayData: object[], stacked = false) {
+	filterDataForRangeAxis(displayData: object[], stacked = false) {
 		const zoomDomain = this.model.get("zoomDomain");
-		const isRefreshRangeAxisLabel = Tools.getProperty(
+		const isUpdateRangeAxis = Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
-			"refreshRangeAxisLabel"
+			"updateRangeAxis"
 		);
-		if (this.isZoomBarEnabled() && isRefreshRangeAxisLabel && zoomDomain) {
+		if (this.isZoomBarEnabled() && isUpdateRangeAxis && zoomDomain) {
 			const domainIdentifier = stacked
 				? "sharedStackKey"
 				: this.services.cartesianScales.getDomainIdentifier();

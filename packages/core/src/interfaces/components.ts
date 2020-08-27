@@ -109,6 +109,10 @@ export interface ZoomBarsOptions {
 	 * currently only the top position is supported
 	 */
 	top?: ZoomBarOptions;
+	/**
+	 * whether keep updating range axis in real time while zoom domain is changing
+	 */
+	updateRangeAxis?: boolean;
 }
 
 /**
@@ -131,8 +135,4 @@ export interface ZoomBarOptions {
 	 * options related to zoom bar data
 	 */
 	data?: Object[];
-	/**
-	 * whether keep refreshing range axis label while zoom domain is changing
-	 */
-	refreshRangeAxisLabel?: boolean;
 }

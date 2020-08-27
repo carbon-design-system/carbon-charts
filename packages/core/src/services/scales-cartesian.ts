@@ -416,7 +416,7 @@ export class CartesianScales extends Service {
 		let allDataValues;
 		// If the scale is stacked
 		if (axisOptions.stacked) {
-			const dataValuesGroupedByKeys = this.services.zoom.filterDataForRangeAxisLabel(
+			const dataValuesGroupedByKeys = this.services.zoom.filterDataForRangeAxis(
 				this.model.getDataValuesGroupedByKeys(),
 				true
 			);
@@ -426,7 +426,7 @@ export class CartesianScales extends Service {
 			);
 		} else {
 			allDataValues = this.services.zoom
-				.filterDataForRangeAxisLabel(displayData)
+				.filterDataForRangeAxis(displayData)
 				.map((datum) => datum[mapsTo]);
 		}
 
