@@ -2,7 +2,6 @@
 import { Component } from "../component";
 import { DOMUtils } from "../../services";
 import * as Configuration from "../../configuration";
-import { DOMUtils } from "../../services";
 
 export class Spacer extends Component {
 	type = "spacer";
