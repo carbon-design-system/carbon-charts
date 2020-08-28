@@ -24,15 +24,15 @@ export class Ruler extends Component {
 		domainValue: number;
 		originalData: any;
 	}[];
-	isRulerEnabled =  Tools.getProperty(
-		this.model.getOptions(),
-		"ruler",
-		"enabled"
-	);
 
 	render() {
+		const isRulerEnabled =  Tools.getProperty(
+			this.model.getOptions(),
+			"ruler",
+			"enabled"
+		);
 		this.drawBackdrop();
-		if (this.isRulerEnabled) {
+		if (isRulerEnabled) {
 			this.addBackdropEventListeners();
 		}
 	}
