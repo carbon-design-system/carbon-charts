@@ -32,72 +32,72 @@ export class Tooltip extends Component {
 	}
 
 	init() {
-		// Grab the tooltip element
-		const holder = select(this.services.domUtils.getHolder());
-		const chartprefix = Tools.getProperty(
-			this.model.getOptions(),
-			"style",
-			"prefix"
-		);
-		this.tooltip = DOMUtils.appendOrSelect(
-			holder,
-			`div.${settings.prefix}--${chartprefix}--tooltip`
-		);
+		if (this.isTooltipEnabled) {
+			// Grab the tooltip element
+			const holder = select(this.services.domUtils.getHolder());
+			const chartprefix = Tools.getProperty(
+				this.model.getOptions(),
+				"style",
+				"prefix"
+			);
+			this.tooltip = DOMUtils.appendOrSelect(
+				holder,
+				`div.${settings.prefix}--${chartprefix}--tooltip`
+			);
 
-		// Apply html content to the tooltip
-		const tooltipTextContainer = DOMUtils.appendOrSelect(
-			this.tooltip,
-			"div.content-box"
-		);
-		this.tooltip.style("max-width", null);
+			// Apply html content to the tooltip
+			const tooltipTextContainer = DOMUtils.appendOrSelect(
+				this.tooltip,
+				"div.content-box"
+			);
+			this.tooltip.style("max-width", null);
 
-		// listen to move-tooltip Custom Events to move the tooltip
-		this.services.events.addEventListener(
-			Events.Tooltip.MOVE,
-			(e: CustomEvent) => {
-				this.positionTooltip(e);
-			}
-		);
-
-		// listen to show-tooltip Custom Events to render the tooltip
-		this.services.events.addEventListener(
-			Events.Tooltip.SHOW,
-			(e: CustomEvent) => {
-				const data = e.detail.data || e.detail.items;
-				const defaultHTML = this.getTooltipHTML(e);
-
-				// if there is a provided tooltip HTML function call it
-				if (
-					Tools.getProperty(
-						this.model.getOptions(),
-						"tooltip",
-						"customHTML"
-					)
-				) {
-					tooltipTextContainer.html(
-						this.model
-							.getOptions()
-							.tooltip.customHTML(data, defaultHTML)
-					);
-				} else {
-					// Use default tooltip
-					tooltipTextContainer.html(defaultHTML);
-				}
-
-				// Position the tooltip
-				if (this.isTooltipEnabled) {
+			// listen to move-tooltip Custom Events to move the tooltip
+			this.services.events.addEventListener(
+				Events.Tooltip.MOVE,
+				(e: CustomEvent) => {
 					this.positionTooltip(e);
 				}
+			);
 
-				// Fade in
-				this.tooltip.classed("hidden", this.isTooltipEnabled ? false : true);
-			}
-		);
+			// listen to show-tooltip Custom Events to render the tooltip
+			this.services.events.addEventListener(
+				Events.Tooltip.SHOW,
+				(e: CustomEvent) => {
+					const data = e.detail.data || e.detail.items;
+					const defaultHTML = this.getTooltipHTML(e);
 
-		// listen to hide-tooltip Custom Events to hide the tooltip
-		this.services.events.addEventListener(Events.Tooltip.HIDE, () => {
-			this.tooltip.classed("hidden", true);
-		});
+					// if there is a provided tooltip HTML function call it
+					if (
+						Tools.getProperty(
+							this.model.getOptions(),
+							"tooltip",
+							"customHTML"
+						)
+					) {
+						tooltipTextContainer.html(
+							this.model
+								.getOptions()
+								.tooltip.customHTML(data, defaultHTML)
+						);
+					} else {
+						// Use default tooltip
+						tooltipTextContainer.html(defaultHTML);
+					}
+
+					// Position the tooltip
+					this.positionTooltip(e);
+
+					// Fade in
+					this.tooltip.classed("hidden", false);
+				}
+			);
+
+			// listen to hide-tooltip Custom Events to hide the tooltip
+			this.services.events.addEventListener(Events.Tooltip.HIDE, () => {
+				this.tooltip.classed("hidden", true);
+			});
+		}
 	}
 
 	getItems(e: CustomEvent) {
@@ -209,7 +209,9 @@ export class Tooltip extends Component {
 	}
 
 	render() {
-		this.tooltip.classed("hidden", true);
+		if (this.isTooltipEnabled) {
+			this.tooltip.classed("hidden", true);
+		}
 	}
 
 	positionTooltip(e: CustomEvent) {
