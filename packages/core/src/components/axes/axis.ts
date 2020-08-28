@@ -66,44 +66,6 @@ export class Axis extends Component {
 		this.services.events.dispatchEvent(Events.Model.UPDATE);
 	};
 
-	// decide if the tick rotation is required
-	isTickRotationRequired(rotateTicksBySpaceCalculation: boolean) {
-		// if zoomDomain is changing
-		if (this.zoomDomainChanging) {
-			const { position: axisPosition } = this.configs;
-			const axisOptions = Tools.getProperty(
-				this.model.getOptions(),
-				"axes",
-				axisPosition
-			);
-			// user could decide if tick rotation is required during zoom domain changing
-			const rotateWhileZooming = Tools.getProperty(
-				axisOptions,
-				"ticks",
-				"rotateWhileZooming"
-			);
-
-			if (
-				!rotateWhileZooming || // default to always
-				rotateWhileZooming === TickRotations.ALWAYS
-			) {
-				// if option is set to ALWAYS or not set
-				return true;
-			} else if (rotateWhileZooming === TickRotations.NEVER) {
-				// if option is set to NEVER
-				return false;
-			} else if (rotateWhileZooming === TickRotations.AUTO) {
-				// if option is set to AUTO
-				// depending on the space calculation result
-				// may cause rotation flips during zoomDomain changing
-				return rotateTicksBySpaceCalculation;
-			}
-		} else {
-			//  if it's not in zoom domain changing, depends on the space calculation result
-			return rotateTicksBySpaceCalculation;
-		}
-	}
-
 	render(animate = true) {
 		const { position: axisPosition } = this.configs;
 		const options = this.model.getOptions();
@@ -478,40 +440,70 @@ export class Axis extends Component {
 			axisPosition === AxisPositions.BOTTOM ||
 			axisPosition === AxisPositions.TOP
 		) {
-			let rotateTicks = false;
+			let shouldRotateTicks = false;
+			// user could decide if tick rotation is required during zoom domain changing
+			const rotateWhileZooming = Tools.getProperty(
+				axisOptions,
+				"ticks",
+				"rotateWhileZooming"
+			);
 
-			// If we're dealing with a discrete scale type
-			// We're able to grab the spacing between the ticks
-			if (scale.step) {
-				const textNodes = invisibleAxisRef
-					.selectAll("g.tick text")
-					.nodes();
+			if (
+				this.zoomDomainChanging &&
+				(!rotateWhileZooming ||
+					rotateWhileZooming === TickRotations.ALWAYS)
+			) {
+				// if zoomDomain is changing and options is set to ALWAYS or not set
+				shouldRotateTicks = true;
+			} else if (
+				this.zoomDomainChanging &&
+				rotateWhileZooming === TickRotations.NEVER
+			) {
+				// if zoomDomain is changing and options is set to NEVER
+				shouldRotateTicks = false;
+			} else if (
+				!this.zoomDomainChanging ||
+				(this.zoomDomainChanging &&
+					rotateWhileZooming === TickRotations.AUTO)
+			) {
+				// if zoomDomain is NOT changing or
+				// zoomDomain is changing and options is set to AUTO
 
-				// If any ticks are any larger than the scale step size
-				rotateTicks = textNodes.some(
-					(textNode) =>
-						DOMUtils.getSVGElementSize(textNode, { useBBox: true })
-							.width >= scale.step()
-				);
-			} else {
-				// When dealing with a continuous scale
-				// We need to calculate an estimated size of the ticks
-				const minTickSize =
-					Tools.getProperty(
-						axisOptions,
-						"ticks",
-						"rotateIfSmallerThan"
-					) || Configuration.axis.ticks.rotateIfSmallerThan;
-				const ticksNumber = isTimeScaleType
-					? axis.tickValues().length
-					: scale.ticks().length;
-				const estimatedTickSize = width / ticksNumber / 2;
-				rotateTicks = isTimeScaleType
-					? estimatedTickSize < minTickSize * 2 // datetime tick could be very long
-					: estimatedTickSize < minTickSize;
+				// depending on if tick rotation is necessary by calculating space
+				// If we're dealing with a discrete scale type
+				// We're able to grab the spacing between the ticks
+				if (scale.step) {
+					const textNodes = invisibleAxisRef
+						.selectAll("g.tick text")
+						.nodes();
+
+					// If any ticks are any larger than the scale step size
+					shouldRotateTicks = textNodes.some(
+						(textNode) =>
+							DOMUtils.getSVGElementSize(textNode, {
+								useBBox: true
+							}).width >= scale.step()
+					);
+				} else {
+					// When dealing with a continuous scale
+					// We need to calculate an estimated size of the ticks
+					const minTickSize =
+						Tools.getProperty(
+							axisOptions,
+							"ticks",
+							"rotateIfSmallerThan"
+						) || Configuration.axis.ticks.rotateIfSmallerThan;
+					const ticksNumber = isTimeScaleType
+						? axis.tickValues().length
+						: scale.ticks().length;
+					const estimatedTickSize = width / ticksNumber / 2;
+					shouldRotateTicks = isTimeScaleType
+						? estimatedTickSize < minTickSize * 2 // datetime tick could be very long
+						: estimatedTickSize < minTickSize;
+				}
 			}
 
-			if (this.isTickRotationRequired(rotateTicks)) {
+			if (shouldRotateTicks) {
 				if (!isNumberOfTicksProvided) {
 					axis.ticks(
 						this.getNumberOfFittingTicks(
