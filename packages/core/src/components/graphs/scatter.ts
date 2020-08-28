@@ -52,7 +52,7 @@ export class Scatter extends Component {
 
 	render(animate: boolean) {
 		const isScatterEnabled = Tools.getProperty(this.model.getOptions(), "scatterDotEnabled");
-		if (!this.configs.ignoreScatterDisabled) {
+		if (!this.configs.alwaysEnableScatterDot) {
 			if (!isScatterEnabled) {
 				return;
 			}

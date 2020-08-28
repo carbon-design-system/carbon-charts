@@ -8,12 +8,8 @@ export class StackedScatter extends Scatter {
 
 	render(animate: boolean) {
 		const isScatterEnabled = Tools.getProperty(this.model.getOptions(), "scatterDotEnabled");
-		console.log("!!! this.configs.ignoreScatterDisabled: ", this.configs.ignoreScatterDisabled);
-		if (!this.configs.ignoreScatterDisabled) {
-			console.log("!!! in first if");
+		if (!this.configs.alwaysEnableScatterDot) {
 			if (!isScatterEnabled) {
-				console.log("!!! in second if");
-				console.log("!!! this.model.getOptions(): ", this.model.getOptions());
 				return;
 			}
 		}

@@ -45,7 +45,7 @@ export class ScatterChart extends AxisChart {
 			new Grid(this.model, this.services),
 			new Ruler(this.model, this.services),
 			new Scatter(this.model, this.services, {
-				ignoreScatterDisabled: true
+				alwaysEnableScatterDot: true
 			}),
 			new Skeleton(this.model, this.services, {
 				skeleton: Skeletons.GRID
