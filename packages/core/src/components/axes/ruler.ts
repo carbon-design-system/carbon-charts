@@ -31,10 +31,19 @@ export class Ruler extends Component {
 			"ruler",
 			"enabled"
 		);
+
 		this.drawBackdrop();
+
+		// remove backdrop event listeners
+		this.removeBackdropEventListeners();
+
 		if (isRulerEnabled) {
 			this.addBackdropEventListeners();
 		}
+	}
+
+	removeBackdropEventListeners() {
+		this.backdrop.on("mousemove mouseover mouseout", null);
 	}
 
 	formatTooltipData(tooltipData) {
