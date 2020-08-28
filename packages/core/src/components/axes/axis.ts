@@ -92,8 +92,8 @@ export class Axis extends Component {
 			} else if (rotateWhileZooming === TickRotations.NEVER) {
 				// if option is set to NEVER
 				return false;
-			} else if (rotateWhileZooming === TickRotations.DEPENDING) {
-				// if option is set to DEPENDING
+			} else if (rotateWhileZooming === TickRotations.AUTO) {
+				// if option is set to AUTO
 				// depending on the space calculation result
 				// may cause rotation flips during zoomDomain changing
 				return rotateTicksBySpaceCalculation;

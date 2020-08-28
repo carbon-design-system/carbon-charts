@@ -169,6 +169,6 @@ export enum Statuses {
  */
 export enum TickRotations {
 	ALWAYS = "always",
-	DEPENDING = "depending",
+	AUTO = "auto",
 	NEVER = "never"
 }
