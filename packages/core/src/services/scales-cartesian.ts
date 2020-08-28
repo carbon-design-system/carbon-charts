@@ -418,7 +418,7 @@ export class CartesianScales extends Service {
 		if (axisOptions.stacked) {
 			const dataValuesGroupedByKeys = this.services.zoom.filterDataForRangeAxis(
 				this.model.getDataValuesGroupedByKeys(),
-				true
+				{ stacked: true }
 			);
 
 			allDataValues = dataValuesGroupedByKeys.map((dataValues) =>
