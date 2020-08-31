@@ -134,3 +134,4 @@ export const zoomBarSkeletonOptions = addZoomBarToOptions(
 	)
 );
 zoomBarSkeletonOptions["title"] = "Zoom bar (skeleton)";
+zoomBarSkeletonOptions["zoomBar"]["top"]["loading"] = true;

@@ -120,6 +120,10 @@ export interface ZoomBarOptions {
 	 */
 	enabled?: boolean;
 	/**
+	 * is the zoom-bar in loading state
+	 */
+	loading?: boolean;
+	/**
 	 * whether the zoom bar is showing a slider view or a graph view etc.
 	 */
 	type?: ZoomBarTypes;

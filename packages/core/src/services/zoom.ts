@@ -64,4 +64,13 @@ export class Zoom extends Service {
 			extent(zoomBarData, (d: any) => d[domainIdentifier])
 		);
 	}
+
+	isTopZoomBarLoading() {
+		return Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"top",
+			"loading"
+		);
+	}
 }

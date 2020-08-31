@@ -56,9 +56,8 @@ export class ZoomBar extends Component {
 
 	render(animate = true) {
 		const svg = this.getContainerSVG();
-		const options = this.model.getOptions();
 
-		const isDataLoading = Tools.getProperty(options, "data", "loading");
+		const isTopZoomBarLoading = this.services.zoom.isTopZoomBarLoading();
 
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
@@ -66,6 +65,7 @@ export class ZoomBar extends Component {
 			"top",
 			"type"
 		);
+
 		const zoombarHeight = Configuration.zoomBar.height[zoombarType];
 
 		const { width } = DOMUtils.getSVGElementSize(this.parent, {
@@ -108,7 +108,7 @@ export class ZoomBar extends Component {
 				.attr("height", 2);
 		}
 
-		if (isDataLoading) {
+		if (isTopZoomBarLoading) {
 			// TODO - zoom bar skeleton could be improved in the future
 			return;
 		}
