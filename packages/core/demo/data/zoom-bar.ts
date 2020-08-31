@@ -121,6 +121,25 @@ export const zoomBarLineTimeSeriesInitDomainOptions = addZoomBarToOptions(
 zoomBarLineTimeSeriesInitDomainOptions["title"] += " (initial zoomed domain)";
 zoomBarLineTimeSeriesInitDomainOptions.zoomBar.top.initialZoomDomain = initialZoomDomain;
 
+export const zoomBarLockedData = [];
+export const zoomBarLockedOptions = addZoomBarToOptions(
+	Object.assign(
+		{
+			data: {
+				loading: true
+			}
+		},
+		barChart.stackedBarTimeSeriesOptions
+	),
+	{ includeDefinedZoomBarData: true }
+);
+zoomBarLockedOptions["title"] = "Zoom bar (Locked)";
+zoomBarLockedOptions.zoomBar.top.locked = true;
+zoomBarLockedOptions.zoomBar.top.initialZoomDomain = [
+	new Date(2019, 0, 3),
+	new Date(2019, 0, 15)
+];
+
 // assume no data set while loading is true
 export const zoomBarSkeletonData = [];
 export const zoomBarSkeletonOptions = addZoomBarToOptions(

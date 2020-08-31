@@ -73,4 +73,13 @@ export class Zoom extends Service {
 			"loading"
 		);
 	}
+
+	isTopZoomBarLocked() {
+		return Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"top",
+			"locked"
+		);
+	}
 }

@@ -58,6 +58,7 @@ export class ZoomBar extends Component {
 		const svg = this.getContainerSVG();
 
 		const isTopZoomBarLoading = this.services.zoom.isTopZoomBarLoading();
+		const isTopZoomBarLocked = this.services.zoom.isTopZoomBarLocked();
 
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
@@ -199,6 +200,13 @@ export class ZoomBar extends Component {
 						zoomDomain
 					);
 				}
+			}
+			if (isTopZoomBarLocked) {
+				this.brush.filter(() => {
+					return false;
+				});
+				// reset all cursor to auto
+				brushArea.selectAll("rect").attr("cursor", "auto");
 			}
 		}
 	}

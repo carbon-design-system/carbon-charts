@@ -56,6 +56,9 @@ export class AxisChart extends Chart {
 			mainXAxisPosition === AxisPositions.BOTTOM &&
 			mainXScaleType === ScaleTypes.TIME;
 
+		// @todo - should check if zoom bar in all axes are locked
+		const isZoomBarLocked = this.services.zoom.isTopZoomBarLocked();
+
 		const titleComponent = {
 			id: "title",
 			components: [new Title(this.model, this.services)],
@@ -74,7 +77,8 @@ export class AxisChart extends Chart {
 			}
 		};
 
-		if (zoomBarEnabled) {
+		// if all zoom bars are locked, no need to add chart brush
+		if (zoomBarEnabled && !isZoomBarLocked) {
 			graphFrameComponents.push(
 				new ChartClip(this.model, this.services),
 				new ChartBrush(this.model, this.services)
