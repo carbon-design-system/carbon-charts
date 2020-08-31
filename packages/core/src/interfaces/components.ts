@@ -124,6 +124,10 @@ export interface ZoomBarOptions {
 	 */
 	loading?: boolean;
 	/**
+	 * is the zoom-bar in locked state
+	 */
+	locked?: boolean;
+	/**
 	 * whether the zoom bar is showing a slider view or a graph view etc.
 	 */
 	type?: ZoomBarTypes;
