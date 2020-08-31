@@ -29,6 +29,7 @@ export class SimpleBar extends Bar {
 	render(animate: boolean) {
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
+		const dataGroups = this.model.getDataGroups();
 
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
@@ -43,6 +44,7 @@ export class SimpleBar extends Bar {
 
 		// Add the paths that need to be introduced
 		const barsEnter = bars.enter().append("path").attr("opacity", 0);
+		const paletteIndex = Tools.getProperty(options, "color", "presetPalette", "index");
 
 		barsEnter
 			.merge(bars)
@@ -54,7 +56,12 @@ export class SimpleBar extends Bar {
 					animate
 				)
 			)
-			.attr("fill", (d) => this.model.getFillColor(d[groupMapsTo]))
+			.attr("class", (d, i) => {
+				if (paletteIndex) {
+					return `bar color-fill-${dataGroups.length}-${paletteIndex}-${i + 1}`;
+				}
+			})
+			.attr("fill", (d) => !paletteIndex ? this.model.getFillColor(d[groupMapsTo]) : null)
 			.attr("d", (d, i) => {
 				/*
 				 * Orientation support for horizontal/vertical bar charts
