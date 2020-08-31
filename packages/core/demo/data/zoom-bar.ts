@@ -31,8 +31,8 @@ const addZoomBarToOptions = (
 ) => {
 	options["experimental"] = true;
 	if (configs.includeDefinedZoomBarData) {
-		options["title"] = options["title"] + " - Defined zoom bar enabled";
-		options["zoomBar"] = {
+		options.title += " - Defined zoom bar enabled";
+		options.zoomBar = {
 			top: {
 				enabled: true,
 				data: definedZoomBarData,
@@ -44,8 +44,8 @@ const addZoomBarToOptions = (
 			}
 		};
 	} else {
-		options["title"] = options["title"] + " - Zoom bar enabled";
-		options["zoomBar"] = {
+		options.title += " - Zoom bar enabled";
+		options.zoomBar = {
 			top: {
 				enabled: true,
 				...(configs.sliderView
@@ -118,7 +118,7 @@ export const zoomBarLineTimeSeriesInitDomainOptions = addZoomBarToOptions(
 	Object.assign({}, timeSeriesAxisChart.lineTimeSeries15secondsOptions),
 	{ sliderView: true }
 );
-zoomBarLineTimeSeriesInitDomainOptions["title"] += " (initial zoomed domain)";
+zoomBarLineTimeSeriesInitDomainOptions.title += " (initial zoomed domain)";
 zoomBarLineTimeSeriesInitDomainOptions.zoomBar.top.initialZoomDomain = initialZoomDomain;
 
 export const zoomBarLockedData = [];
@@ -133,7 +133,7 @@ export const zoomBarLockedOptions = addZoomBarToOptions(
 	),
 	{ includeDefinedZoomBarData: true }
 );
-zoomBarLockedOptions["title"] = "Zoom bar (Locked)";
+zoomBarLockedOptions.title = "Zoom bar (Locked)";
 zoomBarLockedOptions.zoomBar.top.locked = true;
 zoomBarLockedOptions.zoomBar.top.initialZoomDomain = [
 	new Date(2019, 0, 3),
@@ -152,5 +152,5 @@ export const zoomBarSkeletonOptions = addZoomBarToOptions(
 		barChart.stackedBarTimeSeriesOptions
 	)
 );
-zoomBarSkeletonOptions["title"] = "Zoom bar (skeleton)";
-zoomBarSkeletonOptions["zoomBar"]["top"]["loading"] = true;
+zoomBarSkeletonOptions.title = "Zoom bar (skeleton)";
+zoomBarSkeletonOptions.zoomBar.top.loading = true;
