@@ -61,14 +61,14 @@ const legend: LegendOptions = {
  * Grid options
  */
 export const grid: GridOptions = {
-	// set enable to false will not draw grid and stroke of grid backdrop
-	xGridEnabled: true,
-	yGridEnabled: true,
-
 	x: {
+		// set enable to false will not draw grid and stroke of grid backdrop
+		xGridEnabled: false,
 		numberOfTicks: 15
 	},
 	y: {
+		// set enable to false will not draw grid and stroke of grid backdrop
+		yGridEnabled: false,
 		numberOfTicks: 5
 	}
 };
