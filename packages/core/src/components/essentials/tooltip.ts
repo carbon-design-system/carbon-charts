@@ -19,11 +19,6 @@ export class Tooltip extends Component {
 
 	tooltip: any;
 	positionService = new Position();
-	isTooltipEnabled = Tools.getProperty(
-		this.model.getOptions(),
-		"tooltip",
-		"enabled"
-	);
 
 	constructor(model: ChartModel, services: any, configs?: any) {
 		super(model, services, configs);
@@ -32,7 +27,12 @@ export class Tooltip extends Component {
 	}
 
 	init() {
-		if (this.isTooltipEnabled) {
+		const isTooltipEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			"tooltip",
+			"enabled"
+		);
+		if (isTooltipEnabled) {
 			// Grab the tooltip element
 			const holder = select(this.services.domUtils.getHolder());
 			const chartprefix = Tools.getProperty(
@@ -209,7 +209,12 @@ export class Tooltip extends Component {
 	}
 
 	render() {
-		if (this.isTooltipEnabled) {
+		const isTooltipEnabled = Tools.getProperty(
+			this.model.getOptions(),
+			"tooltip",
+			"enabled"
+		);
+		if (isTooltipEnabled) {
 			this.tooltip.classed("hidden", true);
 		}
 	}
