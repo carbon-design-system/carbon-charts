@@ -94,7 +94,7 @@ export class ChartModel {
 		const allDataFromDomain = this.getAllDataFromDomain();
 		const isDataLoading = Tools.getProperty(this.getOptions(), "data", "loading");
 
-		// If data is loading, no data will be displayed
+		// No data should be displayed while data is loading
 		if (isDataLoading) {
 			return [];
 		}
