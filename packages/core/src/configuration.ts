@@ -208,7 +208,7 @@ const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
  * options specific to area charts
  */
 const areaChart: AreaChartOptions = Tools.merge({}, lineChart, {
-	isSparkline: true,
+	gradientEnabled: true,
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: 0
 	} as TimeScaleOptions)

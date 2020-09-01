@@ -193,9 +193,9 @@ export interface LineChartOptions extends ScatterChartOptions {
  */
 export interface AreaChartOptions extends AxisChartOptions {
 	/**
-	 * is sparkline or not
+	 * enable gradient or not
 	 */
-	isSparkline?: boolean;
+	gradientEnabled?: boolean;
 	/**
 	 * options for the curve of the line
 	 */
