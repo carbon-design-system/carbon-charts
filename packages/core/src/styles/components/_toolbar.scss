@@ -1,0 +1,83 @@
+$css--reset: false;
+@import "./../vendor/carbon-components/src/components/overflow-menu/overflow-menu";
+
+g.#{$prefix}--#{$charts-prefix}--toolbar {
+	@include carbon--motion(standard, expressive);
+	rect.icon-zoom {
+		fill: transparent;
+		cursor: pointer;
+	}
+
+	rect.icon-zoom:hover {
+		cursor: pointer;
+		pointer-events: visible;
+	}
+
+	polygon {
+		fill: $icon-02;
+	}
+
+	polygon:hover {
+		cursor: pointer;
+		pointer-events: visible;
+	}
+
+	svg.icon-zoomOut rect.rect-zoomOut {
+		fill: $icon-02;
+		pointer-events: visible;
+	}
+
+	svg.icon-zoomOut rect.rect-zoomOut:hover {
+		cursor: pointer;
+		pointer-events: visible;
+	}
+
+	path {
+		fill: $icon-02;
+	}
+
+	path:hover {
+		cursor: pointer;
+		pointer-events: visible;
+		fill-rule: nonzero;
+	}
+
+	svg.toolbar-overflow-menu-icon {
+		fill: $icon-02;
+		cursor: pointer;
+		pointer-events: visible;
+	}
+
+	rect.icon-zoomInRect {
+		fill: transparent;
+		cursor: pointer;
+	}
+
+	rect.icon-zoomOutRect {
+		fill: transparent;
+		cursor: pointer;
+	}
+
+	rect.icon-overflowRect {
+		fill: transparent;
+		cursor: pointer;
+	}
+
+	svg.toolbar-zoomIn:hover rect.icon-zoomInRect {
+		fill: $hover-ui;
+	}
+
+	svg.toolbar-zoomOut:hover rect.icon-zoomOutRect {
+		fill: $hover-ui;
+	}
+
+	svg.toolbar-overflow-menu:hover rect.icon-overflowRect {
+		fill: $hover-ui;
+	}
+
+	rect.icon-overflowRect-hovered {
+		fill: $hover-ui;
+	}
+}
+
+@include overflow-menu;

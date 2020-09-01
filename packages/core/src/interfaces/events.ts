@@ -18,6 +18,14 @@ export enum Model {
 }
 
 /**
+ * enum of all toolbar events
+ */
+export enum Toolbar {
+	SHOW_OVERFLOW_MENU = "show-toolbar-overflow-menu",
+	HIDE_OVERFLOW_MENU = "hide-toolbar-overflow-menu"
+}
+
+/**
  * enum of all events related to the zoom-bar
  */
 export enum ZoomBar {
@@ -25,6 +33,13 @@ export enum ZoomBar {
 	SELECTION_START = "zoom-bar-selection-start",
 	SELECTION_IN_PROGRESS = "zoom-bar-selection-in-progress",
 	SELECTION_END = "zoom-bar-selection-end"
+}
+
+/**
+ * enum of all events related to the zoom domain
+ */
+export enum ZoomDomain {
+	CHANGE = "zoom-domain-change"
 }
 
 /**

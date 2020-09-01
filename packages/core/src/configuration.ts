@@ -20,6 +20,9 @@ import {
 	LegendOptions,
 	StackedBarOptions,
 	MeterChartOptions,
+	ToolbarOptions,
+	ToolbarOverflowMenuItems,
+	ToolbarOverflowMenuItemOptions,
 	ZoomBarsOptions,
 	// ENUMS
 	Alignments,
@@ -147,11 +150,21 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	timeScale,
 	grid,
 	zoomBar: {
+		zoomRatio: 0.4,
 		top: {
 			enabled: false,
 			type: ZoomBarTypes.GRAPH_VIEW
 		}
-	} as ZoomBarsOptions
+	} as ZoomBarsOptions,
+	toolbar: {
+		enabled: false,
+		overflowMenuItems: {
+			resetZoom: {
+				enabled: true,
+				text: "Reset zoom"
+			} as ToolbarOverflowMenuItemOptions
+		} as ToolbarOverflowMenuItems
+	} as ToolbarOptions
 } as AxisChartOptions);
 
 /**
