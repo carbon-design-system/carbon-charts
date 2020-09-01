@@ -21,13 +21,17 @@ export class GradientUtils extends Service {
 	}
 
 	static need3Stops(domain) {
-		if(domain[0] < 0 && domain[1] > 0)
-		return true;
+		if (domain[0] < 0 && domain[1] > 0) {
+			return true;
+		}
 	}
 
 	static getOffsetRatio(dataset) {
-		const minAndMax = [Math.min.apply(Math, dataset.map(function(o) { return o.value; })), Math.max.apply(Math, dataset.map(function(o) { return o.value; }))];
-		const offsetRatio = (Math.abs(minAndMax[1])*100/Math.abs(minAndMax[0] - minAndMax[1])).toFixed(2)+"%";
+		const minAndMax = [
+			Math.min.apply(Math, dataset.map(function(o) { return o.value; })),
+			Math.max.apply(Math, dataset.map(function(o) { return o.value; }))
+		];
+		const offsetRatio = (Math.abs(minAndMax[1]) * 100 / Math.abs(minAndMax[0] - minAndMax[1])).toFixed(2) + "%";
 		return offsetRatio;
 	}
 

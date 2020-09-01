@@ -32,7 +32,7 @@ export class Area extends Component {
 	render(animate = true) {
 		const svg = this.getContainerSVG({ withinChartClip: true });
 		let minAndMax = [0, 0];
-		
+
 		const { cartesianScales } = this.services;
 
 		const orientation = cartesianScales.getOrientation();
@@ -61,18 +61,17 @@ export class Area extends Component {
 			this.parent
 				.selectAll("defs linearGradient")
 				.each(function() {
-					var self = this;
-					self.parentNode.remove();
+					this.parentNode.remove();
 				});
 		}
 		if (groupedData) {
 			groupedData.forEach((dataset) => {
 				GradientUtils.appendLinearGradient(
-					this.parent, 
-					dataset.name.replace(" ", "") + "_" + this.gradient_id, 
-					"0%", 
-					"0%", 
-					"0%", 
+					this.parent,
+					dataset.name.replace(" ", "") + "_" + this.gradient_id,
+					"0%",
+					"0%",
+					"0%",
 					"100%",
 					GradientUtils.getStopArray(
 						GradientUtils.need3Stops(minAndMax),
@@ -80,9 +79,9 @@ export class Area extends Component {
 						this.model.getFillColor(dataset.name)
 					)
 				);
-			})
+			});
 		}
-		
+
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
 		// Data filters are processed before entering new elements
@@ -97,12 +96,12 @@ export class Area extends Component {
 			enteringAreas
 				.merge(areas)
 				.style("fill", (group) => {
-					return `url(#${group.name.replace(" ", "")}_${this.gradient_id})`})
+					return `url(#${group.name.replace(" ", "")}_${this.gradient_id})`; })
 				.attr("class", "area")
 				.attr("d", (group) => {
 					const { data } = group;
 					return areaGenerator(data);
-				});	
+				});
 		} else {
 			enteringAreas
 			.attr("opacity", 0)
@@ -142,7 +141,7 @@ export class Area extends Component {
 
 				return Configuration.area.opacity.selected;
 			});
-	};
+	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -151,7 +150,7 @@ export class Area extends Component {
 				this.services.transitions.getTransition("legend-mouseout-area")
 			)
 			.attr("opacity", Configuration.area.opacity.selected);
-	};
+	}
 
 	destroy() {
 		// Remove event listeners

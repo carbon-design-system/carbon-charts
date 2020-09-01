@@ -106,7 +106,7 @@ export const sparklineOptions = {
 			mapsTo: "value",
 			scaleType: "linear"
 		}
-	},
+	}
 };
 
 export const stackedAreaTimeSeriesData = [
