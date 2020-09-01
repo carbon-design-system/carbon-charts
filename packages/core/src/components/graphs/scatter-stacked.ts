@@ -78,11 +78,11 @@ export class StackedScatter extends Scatter {
 		const stackedData = this.model.getStackedData({ percentage });
 		const tooltipData = [];
 		stackedData.forEach((groupData, groupDataIndex) => {
-			groupData.forEach((data, dataIndex) => {
-				const group = data[groupMapsTo];
-				const domainValue = data["data"]["sharedStackKey"];
-				let rangeValue = data["data"][group];
-				const stackedRangeValue = data[1];
+			groupData.forEach((datum, dataIndex) => {
+				const group = datum[groupMapsTo];
+				const domainValue = datum["data"]["sharedStackKey"];
+				let rangeValue = datum["data"][group];
+				const stackedRangeValue = datum[1];
 				if (
 					rangeValue &&
 					hoveredX ===
