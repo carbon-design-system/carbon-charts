@@ -162,6 +162,9 @@ export class Axis extends Component {
 			svg,
 			`g.axis.${axisPosition}`
 		);
+		if (!Tools.getProperty(options, "axes", axisPosition, "visible")) {
+			container.style("display", "none");
+		}
 		container.attr("aria-label", `${axisPosition} axis`);
 		const axisRefExists = !container.select(`g.ticks`).empty();
 		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
