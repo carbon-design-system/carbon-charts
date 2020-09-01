@@ -92,6 +92,12 @@ export class ChartModel {
 		const { groupMapsTo } = this.getOptions().data;
 
 		const allDataFromDomain = this.getAllDataFromDomain();
+		const isDataLoading = Tools.getProperty(this.getOptions(), "data", "loading");
+
+		// If data is loading, no data will be displayed
+		if (isDataLoading) {
+			return [];
+		}
 
 		return allDataFromDomain.filter((datum) => {
 			return dataGroups.find(
@@ -115,13 +121,7 @@ export class ChartModel {
 	 * @param newData The new raw data to be set
 	 */
 	setData(newData) {
-		const isDataLoading = Tools.getProperty(
-			this.getOptions(),
-			"data",
-			"loading"
-		);
-
-		const sanitizedData = isDataLoading ? [] : this.sanitize(Tools.clone(newData));
+		const sanitizedData = this.sanitize(Tools.clone(newData));
 		const dataGroups = this.generateDataGroups(sanitizedData);
 
 		this.set({
