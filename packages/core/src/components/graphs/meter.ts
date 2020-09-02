@@ -74,7 +74,7 @@ export class Meter extends Component {
 				? data.value
 				: peakValue;
 		// dont display peak if there isnt one
-		const peakData = updatedPeak === null ? [] : [updatedPeak];
+		const peakData = updatedPeak === null || maximumBarWidth ? [] : [updatedPeak];
 
 		// if a peak is supplied within the domain, we want to render it
 		const peak = svg.selectAll("line.peak").data(peakData);
