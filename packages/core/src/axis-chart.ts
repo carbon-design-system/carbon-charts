@@ -57,7 +57,7 @@ export class AxisChart extends Chart {
 			mainXScaleType === ScaleTypes.TIME;
 
 		// @todo - should check if zoom bar in all axes are locked
-		const isZoomBarLocked = this.services.zoom.isTopZoomBarLocked();
+		const isZoomBarLocked = this.services.zoom.isZoomBarLocked("top");
 
 		const titleComponent = {
 			id: "title",

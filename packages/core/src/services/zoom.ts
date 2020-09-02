@@ -65,20 +65,20 @@ export class Zoom extends Service {
 		);
 	}
 
-	isTopZoomBarLoading() {
+	isZoomBarLoading(position) {
 		return Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			position,
 			"loading"
 		);
 	}
 
-	isTopZoomBarLocked() {
+	isZoomBarLocked(position) {
 		return Tools.getProperty(
 			this.model.getOptions(),
 			"zoomBar",
-			"top",
+			position,
 			"locked"
 		);
 	}

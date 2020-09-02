@@ -57,8 +57,8 @@ export class ZoomBar extends Component {
 	render(animate = true) {
 		const svg = this.getContainerSVG();
 
-		const isTopZoomBarLoading = this.services.zoom.isTopZoomBarLoading();
-		const isTopZoomBarLocked = this.services.zoom.isTopZoomBarLocked();
+		const isTopZoomBarLoading = this.services.zoom.isZoomBarLoading("top");
+		const isTopZoomBarLocked = this.services.zoom.isZoomBarLocked("top");
 
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
