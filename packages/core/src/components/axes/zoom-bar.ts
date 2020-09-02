@@ -287,7 +287,7 @@ export class ZoomBar extends Component {
 
 	updateBrushHandle(svg, selection, domain) {
 		const self = this;
-		const handleWidth = 5;
+		const handleWidth = Configuration.zoomBar.handleWidth;
 
 		const zoombarType = Tools.getProperty(
 			this.model.getOptions(),
@@ -298,9 +298,11 @@ export class ZoomBar extends Component {
 		const handleHeight = Configuration.zoomBar.height[zoombarType];
 		const handleXDiff = -handleWidth / 2;
 
-		const handleBarWidth = 1;
+		const handleBarWidth = Configuration.zoomBar.handleBarWidth;
 		const handleBarHeight =
-			zoombarType === ZoomBarTypes.GRAPH_VIEW ? 12 : 6;
+			zoombarType === ZoomBarTypes.GRAPH_VIEW
+				? Configuration.zoomBar.handleBarHeight
+				: 6;
 		const handleBarXDiff = -handleBarWidth / 2;
 		const handleYBarDiff = (handleHeight - handleBarHeight) / 2;
 
