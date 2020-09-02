@@ -65,10 +65,7 @@ export class AxisChartsTooltip extends Tooltip {
 					rangeLabel = "x-value";
 				}
 			}
-			let rangeValue = datum[rangeIdentifier];
-			if (rangeAxisScaleType === ScaleTypes.LINEAR) {
-				rangeValue = rangeValue.toLocaleString();
-			}
+
 			items = [
 				{
 					label: domainLabel,
@@ -76,7 +73,7 @@ export class AxisChartsTooltip extends Tooltip {
 				},
 				{
 					label: rangeLabel,
-					value: rangeValue
+					value: this.valueFormatter(datum[rangeIdentifier])
 				},
 				{
 					label: "Group",
@@ -94,7 +91,7 @@ export class AxisChartsTooltip extends Tooltip {
 
 			items = items.concat(
 				data
-					.map((datum) => ({
+					.map(datum => ({
 						label: datum[groupMapsTo],
 						value: this.valueFormatter(datum[rangeIdentifier]),
 						color: this.model.getStrokeColor(datum[groupMapsTo])
