@@ -16,13 +16,13 @@ export class Grid extends Component {
 			this.model.getOptions(),
 			"grid",
 			"x",
-			"xGridEnabled"
+			"enabled"
 		);
 		const isYGridEnabled = Tools.getProperty(
 			this.model.getOptions(),
 			"grid",
 			"y",
-			"yGridEnabled"
+			"enabled"
 		);
 
 		if (!isXGridEnabled && !isYGridEnabled) {

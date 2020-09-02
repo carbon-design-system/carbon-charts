@@ -85,11 +85,11 @@ export interface ThresholdOptions {
 
 export interface GridOptions {
 	y?: {
-		yGridEnabled?: boolean;
+		enabled?: boolean;
 		numberOfTicks?: number;
 	};
 	x?: {
-		xGridEnabled?: boolean;
+		enabled?: boolean;
 		numberOfTicks?: number;
 	};
 }
