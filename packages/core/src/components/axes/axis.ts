@@ -441,6 +441,20 @@ export class Axis extends Component {
 			axisPosition === AxisPositions.TOP
 		) {
 			let shouldRotateTicks = false;
+			const isTopOrBottomZoomBarEnabled =
+				Tools.getProperty(
+					this.model.getOptions(),
+					"zoomBar",
+					"top",
+					"enabled"
+				) ||
+				Tools.getProperty(
+					this.model.getOptions(),
+					"zoomBar",
+					"bottom",
+					"enabled"
+				);
+
 			// user could decide if tick rotation is required during zoom domain changing
 			const rotateWhileZooming = Tools.getProperty(
 				axisOptions,
@@ -450,6 +464,7 @@ export class Axis extends Component {
 
 			if (
 				this.zoomDomainChanging &&
+				isTopOrBottomZoomBarEnabled &&
 				(!rotateWhileZooming ||
 					rotateWhileZooming === TickRotations.ALWAYS)
 			) {
@@ -457,6 +472,7 @@ export class Axis extends Component {
 				shouldRotateTicks = true;
 			} else if (
 				this.zoomDomainChanging &&
+				isTopOrBottomZoomBarEnabled &&
 				rotateWhileZooming === TickRotations.NEVER
 			) {
 				// if zoomDomain is changing and options is set to NEVER
@@ -464,6 +480,7 @@ export class Axis extends Component {
 			} else if (
 				!this.zoomDomainChanging ||
 				(this.zoomDomainChanging &&
+					isTopOrBottomZoomBarEnabled &&
 					rotateWhileZooming === TickRotations.AUTO)
 			) {
 				// if zoomDomain is NOT changing or
