@@ -142,14 +142,8 @@ export class Chart {
 			}
 		};
 
-		// if the chart is loading but has data, don't enable legend until loading is false
-		const isDataLoading = Tools.getProperty(
-			this.model.getOptions(),
-			"data",
-			"loading"
-		);
 		const isLegendEnabled =
-			this.model.getOptions().legend.enabled !== false && !isDataLoading;
+			this.model.getOptions().legend.enabled !== false;
 
 		// TODORF - REUSE BETWEEN AXISCHART & CHART
 		// Decide the position of the legend in reference to the chart
