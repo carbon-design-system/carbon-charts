@@ -56,14 +56,14 @@ export class Axis extends Component {
 
 	handleZoomBarSelectionStart = () => {
 		this.zoomDomainChanging = true;
-	};
+	}
 
 	handleZoomBarSelectionEnd = () => {
 		this.zoomDomainChanging = false;
 		// need another update after zoom bar selection is completed
 		// to make sure the tick rotation is calculated correctly
 		this.services.events.dispatchEvent(Events.Model.UPDATE);
-	};
+	}
 
 	render(animate = true) {
 		const { position: axisPosition } = this.configs;
@@ -162,9 +162,6 @@ export class Axis extends Component {
 			svg,
 			`g.axis.${axisPosition}`
 		);
-		if (!Tools.getProperty(options, "axes", axisPosition, "visible")) {
-			container.style("display", "none");
-		}
 		container.attr("aria-label", `${axisPosition} axis`);
 		const axisRefExists = !container.select(`g.ticks`).empty();
 		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
@@ -206,6 +203,10 @@ export class Axis extends Component {
 		const zoomDomain = this.model.get("zoomDomain");
 		if (zoomDomain && isTimeScaleType && !isVerticalAxis) {
 			scale.domain(zoomDomain);
+		}
+
+		if (!Tools.getProperty(options, "axes", axisPosition, "visible")) {
+			return;
 		}
 
 		// Initialize axis object
