@@ -17,6 +17,8 @@ import { select, mouse } from "d3-selection";
 export class Tooltip extends Component {
 	type = "tooltip";
 
+	// flag for checking whether tooltip event listener is added or not
+	isEventListenerAdded = false;
 	tooltip: any;
 	tooltipTextContainer: any;
 	positionService = new Position();
@@ -218,8 +220,6 @@ export class Tooltip extends Component {
 			"tooltip",
 			"enabled"
 		);
-		// remove tooltip eventListener
-		this.removeTooltipEventListener();
 		if (isTooltipEnabled) {
 			// Grab the tooltip element
 			const holder = select(this.services.domUtils.getHolder());
@@ -239,10 +239,15 @@ export class Tooltip extends Component {
 				"div.content-box"
 			);
 			this.tooltip.style("max-width", null);
-			this.removeTooltipEventListener();
-			this.addTooltipEventListener();
-
+			if (!this.isEventListenerAdded) {
+				this.addTooltipEventListener();
+				this.isEventListenerAdded = true;
+			}
 			this.tooltip.classed("hidden", true);
+		} else if (!isTooltipEnabled && this.isEventListenerAdded) {
+			// remove tooltip eventListener
+			this.removeTooltipEventListener();
+			this.isEventListenerAdded = false;
 		}
 	}
 
