@@ -179,6 +179,10 @@ export interface BubbleChartOptions extends AxisChartOptions {
  */
 export interface LineChartOptions extends ScatterChartOptions {
 	/**
+	 * sparkline loading
+	 */
+	sparklineLoading?: boolean;
+	/**
 	 * options for the curve of the line
 	 */
 	curve?:
