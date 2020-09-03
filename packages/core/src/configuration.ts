@@ -160,7 +160,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 		enabled: false,
 		overflowMenuItems: {
 			resetZoom: {
-				enabled: true,
+				enabled: false,
 				text: "Reset zoom"
 			} as ToolbarOverflowMenuItemOptions
 		} as ToolbarOverflowMenuItems

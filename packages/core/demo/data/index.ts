@@ -10,6 +10,7 @@ import * as stepDemos from "./step";
 import * as meterDemos from "./meter";
 import * as timeSeriesAxisDemos from "./time-series-axis";
 import * as radarDemos from "./radar";
+import * as toolbarDemos from "./toolbar";
 import * as zoomBarDemos from "./zoom-bar";
 
 export * from "./area";
@@ -759,6 +760,23 @@ let allDemoGroups = [
 				data: radarDemos.radarDenseData,
 				options: radarDemos.radarDenseOptions,
 				chartType: chartTypes.RadarChart
+			}
+		]
+	},
+	{
+		title: "Toolbar (alpha)",
+		demos: [
+			{
+				options: toolbarDemos.toolbarStackedBarTimeSeriesOptions,
+				data: toolbarDemos.toolbarStackedBarTimeSeriesData,
+				chartType: chartTypes.StackedBarChart,
+				isDemoExample: false
+			},
+			{
+				options: toolbarDemos.toolbarLineTimeSeriesOptions,
+				data: toolbarDemos.toolbarLineTimeSeriesData,
+				chartType: chartTypes.LineChart,
+				isDemoExample: false
 			}
 		]
 	},

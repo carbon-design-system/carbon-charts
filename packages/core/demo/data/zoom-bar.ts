@@ -24,15 +24,6 @@ const definedZoomBarData = [
 	{ date: new Date(2019, 0, 19), value: 21300 }
 ];
 
-const defaultToolBarOptions = {
-	enabled: true,
-	overflowMenuItems: {
-		resetZoom: {
-			enabled: true
-		}
-	}
-};
-
 // utility function to update title and enable zoomBar option
 const addZoomBarToOptions = (
 	options,
@@ -65,7 +56,6 @@ const addZoomBarToOptions = (
 			}
 		};
 	}
-	options["toolbar"] = defaultToolBarOptions;
 	return options;
 };
 
