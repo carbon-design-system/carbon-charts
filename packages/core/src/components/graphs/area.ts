@@ -54,6 +54,13 @@ export class Area extends Component {
 
 		// Update the bound data on area groups
 		const groupedData = this.model.getGroupedData();
+
+		// Should gradient style be applicable
+		const isGradientAllowed =
+			groupedData
+			&& groupedData.length === 1
+			&& Tools.getProperty(this.model.getOptions(), "gradientEnabled");
+
 		const areas = svg
 			.selectAll("path.area")
 			.data(groupedData, (group) => group.name);
@@ -64,7 +71,7 @@ export class Area extends Component {
 					this.parentNode.remove();
 				});
 		}
-		if (groupedData) {
+		if (isGradientAllowed) {
 			groupedData.forEach((dataset) => {
 				GradientUtils.appendLinearGradient(
 					this.parent,
@@ -92,7 +99,7 @@ export class Area extends Component {
 
 		// Enter paths that need to be introduced
 		const enteringAreas = areas.enter().append("path");
-		if (Tools.getProperty(this.model.getOptions(), "gradientEnabled")) {
+		if (isGradientAllowed) {
 			enteringAreas
 				.merge(areas)
 				.style("fill", (group) => {
