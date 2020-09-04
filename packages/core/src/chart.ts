@@ -142,9 +142,8 @@ export class Chart {
 			}
 		};
 
-		const isLegendEnabled = 
+		const isLegendEnabled =
 			this.model.getOptions().legend.enabled !== false;
-
 		// TODORF - REUSE BETWEEN AXISCHART & CHART
 		// Decide the position of the legend in reference to the chart
 		let fullFrameComponentDirection = LayoutDirection.COLUMN;
