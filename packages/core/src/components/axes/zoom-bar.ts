@@ -326,7 +326,7 @@ export class ZoomBar extends Component {
 			.attr("y", 0)
 			.attr("width", handleWidth)
 			.attr("height", handleHeight)
-			.attr("cursor", "pointer")
+			.attr("cursor", "ew-resize")
 			.style("display", null); // always display
 
 		// handle-bar
@@ -359,7 +359,7 @@ export class ZoomBar extends Component {
 			.attr("y", handleYBarDiff)
 			.attr("width", handleBarWidth)
 			.attr("height", handleBarHeight)
-			.attr("cursor", "pointer");
+			.attr("cursor", "ew-resize");
 
 		// Update slider selected area
 		if (zoombarType === ZoomBarTypes.SLIDER_VIEW) {

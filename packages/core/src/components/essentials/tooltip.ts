@@ -169,9 +169,9 @@ export class Tooltip extends Component {
 							<div class="datapoint-tooltip ${item.bold ? "bold" : ""}">
 								${
 									item.color
-										? '<a style="background-color: ' +
+										? "<a style=\"background-color: " +
 										  item.color +
-										  '" class="tooltip-color"></a>'
+										  "\" class=\"tooltip-color\"></a>"
 										: ""
 								}
 								<p class="label">${item.label}</p>
