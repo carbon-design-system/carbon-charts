@@ -14,8 +14,8 @@ import settings from "carbon-components/es/globals/js/settings";
 export class Toolbar extends Component {
 	type = "toolbar";
 
-	// overflow menu icon rect to control background
-	overflowIcon: any;
+	// overflow menu button to control background color
+	overflowButton: any;
 
 	// ul options list element
 	overflowMenu: any;
@@ -71,8 +71,8 @@ export class Toolbar extends Component {
 			"loading"
 		);
 
-		// size of overflow menu icon with background
-		const iconSize = Configuration.toolbar.iconSize;
+		// size of toolbar button with background
+		const buttonSize = Configuration.toolbar.buttonSize;
 
 		const svg = this.getContainerSVG();
 		const { width } = DOMUtils.getSVGElementSize(
@@ -90,7 +90,7 @@ export class Toolbar extends Component {
 		// assume the overflow icon has right alignment in layout
 		this.overflowMenuX = width - overflowMenuWidth;
 		this.overflowMenuY =
-			parseFloat(this.parent.node().getAttribute("y")) + iconSize;
+			parseFloat(this.parent.node().getAttribute("y")) + buttonSize;
 
 		const container = DOMUtils.appendOrSelect(svg, "svg.toolbar-container")
 			.attr("width", "100%")
@@ -109,7 +109,7 @@ export class Toolbar extends Component {
 			DOMUtils.appendOrSelect(container, "svg.toolbar-loading-spacer")
 				.append("rect")
 				.attr("height", Configuration.toolbar.height)
-				.attr("width", iconSize * 3) // value doesn't matter but can't be empty
+				.attr("width", buttonSize * 3) // value doesn't matter but can't be empty
 				.attr("opacity", 0);
 		} else {
 			// render toolbar buttons sequentially
@@ -120,18 +120,37 @@ export class Toolbar extends Component {
 					container,
 					`svg.${button.id}`
 				);
-				// add icon back ground rect
-				let buttonSVG = `<rect class="icon-${button.iconId}" x="${buttonXPosition}px" y="0px"
-					width="${iconSize}px" height="${iconSize}px"/>`;
-				buttonSVG += button.iconSVG(buttonXPosition);
-				buttonContainer.html(buttonSVG);
+				buttonContainer.classed("toolbar-button", true);
+				// add button background rect
+				DOMUtils.appendOrSelect(
+					buttonContainer,
+					"rect.toolbar-button-background"
+				)
+					.attr("x", buttonXPosition)
+					.attr("y", 0)
+					.attr("width", buttonSize)
+					.attr("height", buttonSize);
+
+				const buttonIcon = DOMUtils.appendOrSelect(
+					buttonContainer,
+					"svg.toolbar-button-icon"
+				)
+					.attr(
+						"x",
+						buttonXPosition + Configuration.toolbar.iconPadding
+					)
+					.attr("y", Configuration.toolbar.iconPadding)
+					.attr("width", Configuration.toolbar.iconSize)
+					.attr("height", Configuration.toolbar.iconSize)
+					.attr("viewBox", "0 0 15 15");
+
+				buttonIcon.html(button.iconSVGContent());
 				buttonContainer.on("click", button.clickFunction);
-				buttonXPosition += iconSize;
+				buttonXPosition += buttonSize;
 			});
 
-			this.overflowIcon = DOMUtils.appendOrSelect(
-				this.getContainerSVG(),
-				"rect.icon-overflowRect"
+			this.overflowButton = this.getContainerSVG().select(
+				"svg.toolbar-overflow-menu"
 			);
 
 			if (this.isOverflowMenuOpen()) {
@@ -151,9 +170,9 @@ export class Toolbar extends Component {
 
 	// show/hide overflow menu
 	showOverflowMenu(show: boolean) {
-		// update overflow icon background
-		if (this.overflowIcon) {
-			this.overflowIcon.classed("icon-overflowRect-hovered", show);
+		// update overflow button background
+		if (this.overflowButton) {
+			this.overflowButton.classed("toolbar-button--hovered", show);
 		}
 		if (show) {
 			this.services.events.dispatchEvent(
@@ -282,8 +301,7 @@ export class Toolbar extends Component {
 	getZoomInButtonConfig() {
 		return {
 			id: "toolbar-zoomIn",
-			iconId: "zoomInRect",
-			iconSVG: (startPosition) => this.getZoomInIcon(startPosition),
+			iconSVGContent: () => this.getZoomInIconSVGContent(),
 			clickFunction: () => this.services.zoom.zoomIn()
 		};
 	}
@@ -291,8 +309,7 @@ export class Toolbar extends Component {
 	getZoomOutButtonConfig() {
 		return {
 			id: "toolbar-zoomOut",
-			iconId: "zoomOutRect",
-			iconSVG: (startPosition) => this.getZoomOutIcon(startPosition),
+			iconSVGContent: () => this.getZoomOutIconSVGContent(),
 			clickFunction: () => this.services.zoom.zoomOut()
 		};
 	}
@@ -300,45 +317,26 @@ export class Toolbar extends Component {
 	getOverflowButtonConfig() {
 		return {
 			id: "toolbar-overflow-menu",
-			iconId: "overflowRect",
-			iconSVG: (startPosition) => this.getOverflowIcon(startPosition),
+			iconSVGContent: () => this.getOverflowIconSVGContent(),
 			clickFunction: () => this.toggleOverflowMenu()
 		};
 	}
 
-	getZoomInIcon(startPosition) {
-		// overflow menu icon background padding
-		const iconPadding = Configuration.toolbar.iconPadding;
-		return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-					x="${startPosition + iconPadding}px" y="${iconPadding}px"
-					width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
-					<polygon points="9,6 7,6 7,4 6,4 6,6 4,6 4,7 6,7 6,9 7,9 7,7 9,7 "/>
+	getZoomInIconSVGContent() {
+		return `<polygon points="9,6 7,6 7,4 6,4 6,6 4,6 4,7 6,7 6,9 7,9 7,7 9,7"/>
 					<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
-						L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>
-				</svg>`;
+						L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>`;
 	}
 
-	getZoomOutIcon(startPosition) {
-		// overflow menu icon background padding
-		const iconPadding = Configuration.toolbar.iconPadding;
-		return `<svg version="1.1" class="icon-zoomOut" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-				x="${startPosition + iconPadding}px" y="${iconPadding}px"
-				width="20px" height="20px" viewBox="0 0 15 15" xml:space="preserve">
-				<rect class="rect-zoomOut" x="4" y="6" width="5" height="1"/>
+	getZoomOutIconSVGContent() {
+		return `<rect x="4" y="6" width="5" height="1"/>
 				<path d="M10.7,10C11.5,9,12,7.8,12,6.5C12,3.5,9.5,1,6.5,1S1,3.5,1,6.5S3.5,12,6.5,12c1.3,0,2.5-0.5,3.5-1.3l3.8,3.8l0.7-0.7
-					L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>
-			</svg>`;
+					L10.7,10z M6.5,11C4,11,2,9,2,6.5S4,2,6.5,2S11,4,11,6.5S9,11,6.5,11L6.5,11z"/>`;
 	}
 
-	getOverflowIcon(startPosition) {
-		// overflow menu icon background padding
-		const iconPadding = Configuration.toolbar.iconPadding;
-		return `<svg class="toolbar-overflow-menu-icon" focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg"
-			x="${startPosition + iconPadding}px" y="${iconPadding}px"
-			width="20" height="20" viewBox="0 0 15 15" aria-hidden="true">
-				<circle cx="8" cy="3" r="1"></circle>
-				<circle cx="8" cy="8" r="1"></circle>
-				<circle cx="8" cy="13" r="1"></circle>
-			</svg>`;
+	getOverflowIconSVGContent() {
+		return `<circle cx="8" cy="3" r="1"/>
+				<circle cx="8" cy="8" r="1"/>
+				<circle cx="8" cy="13" r="1"/>`;
 	}
 }

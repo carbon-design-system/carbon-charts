@@ -114,7 +114,8 @@ export const transitions = {
 };
 
 export const toolbar = {
-	iconSize: 32,
+	buttonSize: 32,
+	iconSize: 20,
 	height: 32,
 	spacerHeight: 10,
 	iconPadding: 6
