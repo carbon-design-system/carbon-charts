@@ -22,6 +22,7 @@ import {
 import { Tools } from "./tools";
 
 import { CartesianScales, Curves, Zoom } from "./services";
+import { legend as LegendConfig } from "./configuration-non-customizable";
 
 export class AxisChart extends Chart {
 	services: any = Object.assign(this.services, {
@@ -75,8 +76,7 @@ export class AxisChart extends Chart {
 		);
 		if (radiusLabel) {
 			const outerRadius = Tools.getProperty(
-				options,
-				"legend",
+				LegendConfig,
 				"checkbox",
 				"radius"
 			);
