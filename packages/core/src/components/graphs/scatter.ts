@@ -329,11 +329,16 @@ export class Scatter extends Component {
 				);
 				const tooltipData = self.getTooltipData(hoveredX, hoveredY);
 				// Show tooltip
+				const bubbleOptions = Tools.getProperty(self.model.getOptions(), "bubble");
 				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 					hoveredElement,
 					data: tooltipData,
-					radiusLabel: self["radiusLabel"],
-					radiusMapsTo: self["radiusMapsTo"]
+					additionalItems: tooltipData.length == 1 
+						? [{
+							label: Tools.getProperty(bubbleOptions, "radiusLabel"),
+							value: tooltipData[0][Tools.getProperty(bubbleOptions, "radiusMapsTo")]
+						}]
+						: null
 				});
 
 				// Dispatch mouse event

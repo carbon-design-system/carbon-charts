@@ -10,16 +10,10 @@ import { scaleLinear } from "d3-scale";
 
 export class Bubble extends Scatter {
 	type = "bubble";
-	radiusLabel;
-	radiusMapsTo;
 
 	getRadiusScale(selection: Selection<any, any, any, any>) {
 		const options = this.model.getOptions();
-		const { radiusMapsTo, radiusLabel } = options.bubble;
-		
-		// Save static variables that other components can access
-		this.radiusLabel = radiusLabel;
-		this.radiusMapsTo = radiusMapsTo;
+		const { radiusMapsTo } = options.bubble;
 
 		const data = selection.data();
 		// Filter out any null/undefined values

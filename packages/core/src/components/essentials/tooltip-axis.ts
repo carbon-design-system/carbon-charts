@@ -82,12 +82,13 @@ export class AxisChartsTooltip extends Tooltip {
 				}
 			];
 
-			// Add radius label and value
-			if (e.detail.radiusLabel) {
-				items.push({
-					label: e.detail.radiusLabel,
-					value: datum[e.detail.radiusMapsTo] 
-				})
+			if (e.detail.additionalItems) {
+				e.detail.additionalItems.forEach(additionalItem => 
+					items.push({
+						label: additionalItem.label,
+						value: additionalItem.value
+					})
+				)
 			}
 		} else if (data.length > 1) {
 			items = [
