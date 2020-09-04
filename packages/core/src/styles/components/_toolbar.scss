@@ -12,6 +12,9 @@ g.#{$prefix}--#{$charts-prefix}--toolbar {
 				.toolbar-button-background {
 					fill: $hover-ui;
 				}
+				.toolbar-button-background--disabled {
+					fill: $ui-background;
+				}
 			}
 
 			&-icon {
@@ -34,8 +37,31 @@ g.#{$prefix}--#{$charts-prefix}--toolbar {
 				}
 			}
 
+			&-icon--disabled {
+				pointer-events: auto;
+				circle {
+					fill: $disabled-03;
+				}
+				rect {
+					fill: $disabled-03;
+				}
+				path {
+					fill: $disabled-03;
+				}
+				polygon {
+					fill: $disabled-03;
+				}
+				&:hover {
+					cursor: auto;
+					pointer-events: auto;
+				}
+			}
+
 			&--hovered {
 				fill: $hover-ui;
+			}
+			&--disabled {
+				cursor: auto;
 			}
 		}
 	}

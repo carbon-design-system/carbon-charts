@@ -119,10 +119,10 @@ export class Toolbar extends Component {
 				const buttonContainer = DOMUtils.appendOrSelect(
 					container,
 					`svg.${button.id}`
-				);
-				buttonContainer.classed("toolbar-button", true);
+				).classed("toolbar-button", true);
+
 				// add button background rect
-				DOMUtils.appendOrSelect(
+				const buttonBackground = DOMUtils.appendOrSelect(
 					buttonContainer,
 					"rect.toolbar-button-background"
 				)
@@ -145,7 +145,23 @@ export class Toolbar extends Component {
 					.attr("viewBox", "0 0 15 15");
 
 				buttonIcon.html(button.iconSVGContent());
-				buttonContainer.on("click", button.clickFunction);
+				if (button.shouldBeDisabled()) {
+					buttonContainer.classed("toolbar-button--disabled", true);
+					buttonIcon.classed("toolbar-button-icon--disabled", true);
+					buttonBackground.classed(
+						"toolbar-button-background--disabled",
+						true
+					);
+					buttonContainer.on("click", null);
+				} else {
+					buttonContainer.classed("toolbar-button--disabled", false);
+					buttonIcon.classed("toolbar-button-icon--disabled", false);
+					buttonBackground.classed(
+						"toolbar-button-background--disabled",
+						false
+					);
+					buttonContainer.on("click", button.clickFunction);
+				}
 				buttonXPosition += buttonSize;
 			});
 
@@ -301,6 +317,7 @@ export class Toolbar extends Component {
 	getZoomInButtonConfig() {
 		return {
 			id: "toolbar-zoomIn",
+			shouldBeDisabled: () => this.services.zoom.isMinZoomDomain(),
 			iconSVGContent: () => this.getZoomInIconSVGContent(),
 			clickFunction: () => this.services.zoom.zoomIn()
 		};
@@ -309,6 +326,7 @@ export class Toolbar extends Component {
 	getZoomOutButtonConfig() {
 		return {
 			id: "toolbar-zoomOut",
+			shouldBeDisabled: () => this.services.zoom.isMaxZoomDomain(),
 			iconSVGContent: () => this.getZoomOutIconSVGContent(),
 			clickFunction: () => this.services.zoom.zoomOut()
 		};
@@ -317,6 +335,9 @@ export class Toolbar extends Component {
 	getOverflowButtonConfig() {
 		return {
 			id: "toolbar-overflow-menu",
+			shouldBeDisabled: () => {
+				return false;
+			},
 			iconSVGContent: () => this.getOverflowIconSVGContent(),
 			clickFunction: () => this.toggleOverflowMenu()
 		};

@@ -161,6 +161,50 @@ export class Zoom extends Service {
 		}
 	}
 
+	// check if current zoom domain is already the min zoom domain
+	// when toolbar is rendered, we don't render chart yet
+	// don't depend on scale range
+	isMinZoomDomain() {
+		// get current zoomDomain
+		const currentZoomDomain = this.model.get("zoomDomain");
+		// assume the max zoom domain is the default zoom bar domain
+		const maxZoomDomain = this.getDefaultZoomBarDomain();
+		if (!currentZoomDomain || !maxZoomDomain) {
+			return false;
+		}
+
+		const currentZoomDomainPeriod =
+			currentZoomDomain[1].valueOf() - currentZoomDomain[0].valueOf();
+		const maxZoomDomainPeriod =
+			maxZoomDomain[1].valueOf() - maxZoomDomain[0].valueOf();
+
+		// if current zoom domain is already smaller than 1%
+		if (currentZoomDomainPeriod / maxZoomDomainPeriod < 0.01) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// check if current zoom domain is already the max zoom domain
+	isMaxZoomDomain() {
+		// get current zoom domain
+		const currentZoomDomain = this.model.get("zoomDomain");
+		// assume the max zoom domain is the default zoom bar domain
+		const maxZoomDomain = this.getDefaultZoomBarDomain();
+
+		if (
+			currentZoomDomain &&
+			maxZoomDomain &&
+			currentZoomDomain[0].valueOf() === maxZoomDomain[0].valueOf() &&
+			currentZoomDomain[1].valueOf() === maxZoomDomain[1].valueOf()
+		) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	getZoomRatio() {
 		return Tools.getProperty(
 			this.model.getOptions(),
