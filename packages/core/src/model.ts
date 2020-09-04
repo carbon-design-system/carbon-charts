@@ -92,12 +92,6 @@ export class ChartModel {
 		const { groupMapsTo } = this.getOptions().data;
 
 		const allDataFromDomain = this.getAllDataFromDomain();
-		const isDataLoading = Tools.getProperty(this.getOptions(), "data", "loading");
-
-		// No data should be displayed while data is loading
-		if (isDataLoading) {
-			return [];
-		}
 
 		return allDataFromDomain.filter((datum) => {
 			return dataGroups.find(
@@ -133,6 +127,16 @@ export class ChartModel {
 	}
 
 	getDataGroups() {
+		const isDataLoading = Tools.getProperty(
+			this.getOptions(),
+			"data",
+			"loading"
+		);
+
+		// No data should be displayed while data is still loading
+		if (isDataLoading) {
+			return [];
+		}
 		return this.get("dataGroups");
 	}
 
