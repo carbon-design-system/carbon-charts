@@ -249,15 +249,5 @@ export class Ruler extends Component {
 			this.backdrop,
 			"rect.chart-grid-backdrop"
 		);
-
-		this.backdrop
-			.merge(backdropRect)
-			.attr("x", xScaleStart)
-			.attr("y", yScaleStart)
-			.attr("width", xScaleEnd - xScaleStart)
-			.attr("height", yScaleEnd - yScaleStart)
-			.lower();
-
-		backdropRect.attr("width", "100%").attr("height", "100%");
 	}
 }
