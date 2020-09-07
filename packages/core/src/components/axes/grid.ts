@@ -219,7 +219,7 @@ export class Grid extends Component {
 		const backdropRect = DOMUtils.appendOrSelect(
 			this.backdrop,
 			isXGridEnabled || isYGridEnabled
-				? "rect.chart-grid-backdrop.stroke"
+				? "rect.chart-grid-backdrop.stroked"
 				: "rect.chart-grid-backdrop"
 		);
 

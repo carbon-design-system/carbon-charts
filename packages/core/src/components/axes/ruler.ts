@@ -244,7 +244,7 @@ export class Ruler extends Component {
 		const backdropRect = DOMUtils.appendOrSelect(
 			this.backdrop,
 			this.isXGridEnabled || this.isYGridEnabled
-				? "rect.chart-grid-backdrop.stroke"
+				? "rect.chart-grid-backdrop.stroked"
 				: "rect.chart-grid-backdrop"
 		);
 
