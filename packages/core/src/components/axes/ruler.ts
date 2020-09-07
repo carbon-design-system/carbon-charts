@@ -38,8 +38,24 @@ export class Ruler extends Component {
 	);
 
 	render() {
+		const isRulerEnabled =  Tools.getProperty(
+			this.model.getOptions(),
+			"ruler",
+			"enabled"
+		);
+
 		this.drawBackdrop();
-		this.addBackdropEventListeners();
+
+		// remove backdrop event listeners
+		this.removeBackdropEventListeners();
+
+		if (isRulerEnabled) {
+			this.addBackdropEventListeners();
+		}
+	}
+
+	removeBackdropEventListeners() {
+		this.backdrop.on("mousemove mouseover mouseout", null);
 	}
 
 	formatTooltipData(tooltipData) {
@@ -247,15 +263,5 @@ export class Ruler extends Component {
 				? "rect.chart-grid-backdrop.stroked"
 				: "rect.chart-grid-backdrop"
 		);
-
-		this.backdrop
-			.merge(backdropRect)
-			.attr("x", xScaleStart)
-			.attr("y", yScaleStart)
-			.attr("width", xScaleEnd - xScaleStart)
-			.attr("height", yScaleEnd - yScaleStart)
-			.lower();
-
-		backdropRect.attr("width", "100%").attr("height", "100%");
 	}
 }

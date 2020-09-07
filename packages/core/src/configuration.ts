@@ -14,6 +14,7 @@ import {
 	RadarChartOptions,
 	// Components
 	GridOptions,
+	RulerOptions,
 	AxesOptions,
 	TimeScaleOptions,
 	TooltipOptions,
@@ -63,15 +64,24 @@ const legend: LegendOptions = {
 export const grid: GridOptions = {
 	x: {
 		// set enable to false will not draw grid and stroke of grid backdrop
-		enabled: true,
+		enabled: false,
 		numberOfTicks: 15
 	},
 	y: {
 		// set enable to false will not draw grid and stroke of grid backdrop
-		enabled: true,
+		enabled: false,
 		numberOfTicks: 5
 	}
 };
+
+/**
+ * Ruler options
+ */
+export const ruler: RulerOptions = {
+	// enable or disable ruler
+	enabled: false
+};
+
 
 /**
  * Tooltip options
@@ -150,6 +160,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	axes,
 	timeScale,
 	grid,
+	ruler,
 	zoomBar: {
 		top: {
 			enabled: false,
