@@ -165,6 +165,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	timeScale,
 	grid,
 	ruler,
+	scatterDotEnabled: false,
 	zoomBar: {
 		top: {
 			enabled: false,
