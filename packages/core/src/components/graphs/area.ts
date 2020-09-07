@@ -2,12 +2,16 @@
 import { Component } from "../component";
 import * as Configuration from "../../configuration";
 import { CartesianOrientations, Events } from "../../interfaces";
+import { GradientUtils } from "../../services";
+import { Tools } from "../../tools";
 
 // D3 Imports
 import { area } from "d3-shape";
+import { select } from "d3";
 
 export class Area extends Component {
 	type = "area";
+	gradient_id = "gradient-id-" + Math.floor(Math.random() * 99999999999);
 
 	init() {
 		const eventsFragment = this.services.events;
@@ -27,6 +31,8 @@ export class Area extends Component {
 
 	render(animate = true) {
 		const svg = this.getContainerSVG({ withinChartClip: true });
+		let minAndMax = [0, 0];
+
 		const { cartesianScales } = this.services;
 
 		const orientation = cartesianScales.getOrientation();
@@ -37,18 +43,51 @@ export class Area extends Component {
 				.x((d, i) => cartesianScales.getDomainValue(d, i))
 				.y0(cartesianScales.getRangeValue(0))
 				.y1((d, i) => cartesianScales.getRangeValue(d, i));
+			minAndMax = this.services.cartesianScales.getMainYScale().domain();
 		} else {
 			areaGenerator
 				.x0(cartesianScales.getRangeValue(0))
 				.x1((d, i) => cartesianScales.getRangeValue(d, i))
 				.y((d, i) => cartesianScales.getDomainValue(d, i));
+			minAndMax = this.services.cartesianScales.getMainXScale().domain();
 		}
 
 		// Update the bound data on area groups
 		const groupedData = this.model.getGroupedData();
+
+		// Should gradient style be applicable
+		const isGradientAllowed =
+			groupedData
+			&& groupedData.length === 1
+			&& Tools.getProperty(this.model.getOptions(), "gradientEnabled");
+
 		const areas = svg
 			.selectAll("path.area")
 			.data(groupedData, (group) => group.name);
+		if (!this.parent.selectAll("defs linearGradient").empty()) {
+			this.parent
+				.selectAll("defs linearGradient")
+				.each(function() {
+					this.parentNode.remove();
+				});
+		}
+		if (isGradientAllowed) {
+			groupedData.forEach((dataset) => {
+				GradientUtils.appendLinearGradient(
+					this.parent,
+					dataset.name.replace(" ", "") + "_" + this.gradient_id,
+					"0%",
+					"0%",
+					"0%",
+					"100%",
+					GradientUtils.getStopArray(
+						GradientUtils.need3Stops(minAndMax),
+						dataset,
+						this.model.getFillColor(dataset.name)
+					)
+				);
+			});
+		}
 
 		// Remove elements that need to be exited
 		// We need exit at the top here to make sure that
@@ -59,10 +98,20 @@ export class Area extends Component {
 		const self = this;
 
 		// Enter paths that need to be introduced
-		const enteringAreas = areas.enter().append("path").attr("opacity", 0);
-
-		// Apply styles and datum
-		enteringAreas
+		const enteringAreas = areas.enter().append("path");
+		if (isGradientAllowed) {
+			enteringAreas
+				.merge(areas)
+				.style("fill", (group) => {
+					return `url(#${group.name.replace(" ", "")}_${this.gradient_id})`; })
+				.attr("class", "area")
+				.attr("d", (group) => {
+					const { data } = group;
+					return areaGenerator(data);
+				});
+		} else {
+			enteringAreas
+			.attr("opacity", 0)
 			.merge(areas)
 			.attr("fill", (group) => {
 				return this.model.getFillColor(group.name);
@@ -79,6 +128,9 @@ export class Area extends Component {
 				const { data } = group;
 				return areaGenerator(data);
 			});
+		}
+
+		// Apply shared styles and datum
 	}
 
 	handleLegendOnHover = (event: CustomEvent) => {
@@ -96,7 +148,7 @@ export class Area extends Component {
 
 				return Configuration.area.opacity.selected;
 			});
-	};
+	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -105,7 +157,7 @@ export class Area extends Component {
 				this.services.transitions.getTransition("legend-mouseout-area")
 			)
 			.attr("opacity", Configuration.area.opacity.selected);
-	};
+	}
 
 	destroy() {
 		// Remove event listeners

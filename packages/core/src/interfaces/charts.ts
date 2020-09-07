@@ -197,6 +197,10 @@ export interface LineChartOptions extends ScatterChartOptions {
  */
 export interface AreaChartOptions extends AxisChartOptions {
 	/**
+	 * enable gradient or not
+	 */
+	gradientEnabled?: boolean;
+	/**
 	 * options for the curve of the line
 	 */
 	curve?:
