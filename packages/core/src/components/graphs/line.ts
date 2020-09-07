@@ -88,7 +88,7 @@ export class Line extends Component {
 		// Or updating existing ones
 		lines.exit().attr("opacity", 0).remove();
 
-		const isSparklineLoading = 
+		const isSparklineLoading =
 			this.configs.allowSparklineLoading
 			&& Tools.getProperty(options, "sparklineLoading")
 			&& data.length === 1;
@@ -147,7 +147,7 @@ export class Line extends Component {
 
 				return Configuration.lines.opacity.selected;
 			});
-	};
+	}
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -156,7 +156,7 @@ export class Line extends Component {
 				this.services.transitions.getTransition("legend-mouseout-line")
 			)
 			.attr("opacity", Configuration.lines.opacity.selected);
-	};
+	}
 
 	destroy() {
 		// Remove event listeners

@@ -197,7 +197,7 @@ const stackedBarChart: StackedBarChartOptions = Tools.merge({}, baseBarChart, {
  * options specific to line charts
  */
 const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
-	sparklineLoading: true,
+	sparklineLoading: false,
 	points: {
 		// default point radius to 3
 		radius: 3,
