@@ -97,18 +97,22 @@ export const baseTooltip: TooltipOptions = {
 // and by TwoDimensionalAxes.
 const axes: AxesOptions = {
 	top: {
+		visible: true,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	},
 	bottom: {
+		visible: false,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	},
 	left: {
+		visible: false,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	},
 	right: {
+		visible: true,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	}
