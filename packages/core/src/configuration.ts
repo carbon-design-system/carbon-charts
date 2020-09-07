@@ -87,6 +87,7 @@ export const ruler: RulerOptions = {
  * Tooltip options
  */
 export const baseTooltip: TooltipOptions = {
+	enabled: false,
 	showTotal: true,
 	valueFormatter: (d) => d.toLocaleString(),
 	truncation: standardTruncationOptions
