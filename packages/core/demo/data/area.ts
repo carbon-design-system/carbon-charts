@@ -98,13 +98,30 @@ export const sparklineOptions = {
 	title: "Area (time series) as sparkline",
 	axes: {
 		bottom: {
+			visible: false,
 			title: "2019 Annual Sales Figures",
 			mapsTo: "date",
 			scaleType: "time"
 		},
 		left: {
+			visible: false,
 			mapsTo: "value",
 			scaleType: "linear"
+		}
+	},
+	tooltip: {
+		enabled: false
+	},
+	scatterDotEnabled: false,
+	ruler: {
+		enabled: false
+	},
+	grid: {
+		x: {
+			enabled: false
+		},
+		y: {
+			enabled: false
 		}
 	}
 };

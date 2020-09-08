@@ -76,17 +76,34 @@ export const sparklineLoadingOptions = {
 	title: "Sparkline (loading)",
 	axes: {
 		bottom: {
+			visible: false,
 			title: "2019 Annual Sales Figures",
 			mapsTo: "date",
 			scaleType: "time"
 		},
 		left: {
+			visible: false,
 			mapsTo: "value",
 			title: "Conversion rate",
 			scaleType: "linear"
 		}
 	},
-	sparklineLoading: true
+	sparklineLoading: true,
+	tooltip: {
+		enabled: false
+	},
+	scatterDotEnabled: false,
+	ruler: {
+		enabled: false
+	},
+	grid: {
+		x: {
+			enabled: false
+		},
+		y: {
+			enabled: false
+		}
+	}
 };
 
 export const lineCenteredLegendData = lineData;

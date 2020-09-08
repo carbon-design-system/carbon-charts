@@ -64,12 +64,12 @@ const legend: LegendOptions = {
 export const grid: GridOptions = {
 	x: {
 		// set enable to false will not draw grid and stroke of grid backdrop
-		enabled: false,
+		enabled: true,
 		numberOfTicks: 15
 	},
 	y: {
 		// set enable to false will not draw grid and stroke of grid backdrop
-		enabled: false,
+		enabled: true,
 		numberOfTicks: 5
 	}
 };
@@ -79,14 +79,14 @@ export const grid: GridOptions = {
  */
 export const ruler: RulerOptions = {
 	// enable or disable ruler
-	enabled: false
+	enabled: true
 };
 
 /**
  * Tooltip options
  */
 export const baseTooltip: TooltipOptions = {
-	enabled: false,
+	enabled: true,
 	showTotal: true,
 	valueFormatter: (d) => d.toLocaleString(),
 	truncation: standardTruncationOptions
@@ -102,12 +102,12 @@ const axes: AxesOptions = {
 		truncation: standardTruncationOptions
 	},
 	bottom: {
-		visible: false,
+		visible: true,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	},
 	left: {
-		visible: false,
+		visible: true,
 		includeZero: true,
 		truncation: standardTruncationOptions
 	},
@@ -165,7 +165,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	timeScale,
 	grid,
 	ruler,
-	scatterDotEnabled: false,
+	scatterDotEnabled: true,
 	zoomBar: {
 		top: {
 			enabled: false,
