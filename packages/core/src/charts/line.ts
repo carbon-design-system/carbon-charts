@@ -42,7 +42,9 @@ export class LineChart extends AxisChart {
 			new TwoDimensionalAxes(this.model, this.services),
 			new Grid(this.model, this.services),
 			new Ruler(this.model, this.services),
-			new Line(this.model, this.services),
+			new Line(this.model, this.services, {
+				allowSparklineLoading: true
+			}),
 			new Scatter(this.model, this.services, { handleThresholds: true }),
 			new Skeleton(this.model, this.services, {
 				skeleton: Skeletons.GRID

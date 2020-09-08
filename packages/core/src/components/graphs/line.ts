@@ -88,11 +88,17 @@ export class Line extends Component {
 		// Or updating existing ones
 		lines.exit().attr("opacity", 0).remove();
 
+		const isSparklineLoading =
+			this.configs.allowSparklineLoading &&
+			Tools.getProperty(options, "sparklineLoading") &&
+			data.length === 1;
+
 		// Add lines that need to be introduced
 		const enteringLines = lines
 			.enter()
 			.append("path")
 			.classed("line", true)
+			.classed("sparkline-loading", isSparklineLoading)
 			.attr("opacity", 0);
 
 		// Apply styles and datum

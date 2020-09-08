@@ -28,10 +28,24 @@ export class GradientUtils extends Service {
 
 	static getOffsetRatio(dataset) {
 		const minAndMax = [
-			Math.min.apply(Math, dataset.map(function(o) { return o.value; })),
-			Math.max.apply(Math, dataset.map(function(o) { return o.value; }))
+			Math.min.apply(
+				Math,
+				dataset.map(function (o) {
+					return o.value;
+				})
+			),
+			Math.max.apply(
+				Math,
+				dataset.map(function (o) {
+					return o.value;
+				})
+			)
 		];
-		const offsetRatio = (Math.abs(minAndMax[1]) * 100 / Math.abs(minAndMax[0] - minAndMax[1])).toFixed(2) + "%";
+		const offsetRatio =
+			(
+				(Math.abs(minAndMax[1]) * 100) /
+				Math.abs(minAndMax[0] - minAndMax[1])
+			).toFixed(2) + "%";
 		return offsetRatio;
 	}
 
@@ -69,7 +83,4 @@ export class GradientUtils extends Service {
 		}
 		return stopArray;
 	}
-
-
-
 }

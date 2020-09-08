@@ -82,7 +82,6 @@ export const ruler: RulerOptions = {
 	enabled: false
 };
 
-
 /**
  * Tooltip options
  */
