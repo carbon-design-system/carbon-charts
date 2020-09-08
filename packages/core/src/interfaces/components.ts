@@ -143,6 +143,16 @@ export interface ToolbarOverflowMenuItemOptions {
  */
 export interface ZoomBarsOptions {
 	/**
+	 * a variable to handle default zoom-in ratio (0 ~ 1.0)
+	 * ex: shift click zoom in ratio
+	 */
+	zoomRatio?: number;
+	/**
+	 * a variable to define the minimum zoom ratio (0 ~ 1.0)
+	 * If  ( zoom domain / max domain ) < minZoomRatio, zoom-in functions will be disabled
+	 */
+	minZoomRatio?: number;
+	/**
 	 * currently only the top position is supported
 	 */
 	top?: ZoomBarOptions;

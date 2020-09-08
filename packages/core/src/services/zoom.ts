@@ -177,9 +177,13 @@ export class Zoom extends Service {
 			currentZoomDomain[1].valueOf() - currentZoomDomain[0].valueOf();
 		const maxZoomDomainPeriod =
 			maxZoomDomain[1].valueOf() - maxZoomDomain[0].valueOf();
-
-		// if current zoom domain is already smaller than 1%
-		if (currentZoomDomainPeriod / maxZoomDomainPeriod < 0.01) {
+		const minZoomRatio = Tools.getProperty(
+			this.model.getOptions(),
+			"zoomBar",
+			"minZoomRatio"
+		);
+		// if current zoom domain is already smaller than minZoomRatio
+		if (currentZoomDomainPeriod / maxZoomDomainPeriod < minZoomRatio) {
 			return true;
 		} else {
 			return false;

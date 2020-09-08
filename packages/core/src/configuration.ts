@@ -151,6 +151,7 @@ const axisChart: AxisChartOptions = Tools.merge({}, chart, {
 	grid,
 	zoomBar: {
 		zoomRatio: 0.4,
+		minZoomRatio: 0.01,
 		top: {
 			enabled: false,
 			type: ZoomBarTypes.GRAPH_VIEW
