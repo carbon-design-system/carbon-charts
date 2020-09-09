@@ -38,20 +38,6 @@ export class ZoomBar extends Component {
 			Events.ZoomBar.UPDATE,
 			this.render.bind(this)
 		);
-
-		// get initZoomDomain
-		const initialZoomDomain = Tools.getProperty(
-			this.model.getOptions(),
-			"zoomBar",
-			"top",
-			"initialZoomDomain"
-		);
-		if (initialZoomDomain !== null) {
-			this.model.set(
-				{ zoomDomain: initialZoomDomain },
-				{ skipUpdate: true }
-			);
-		}
 	}
 
 	render(animate = true) {
@@ -127,6 +113,41 @@ export class ZoomBar extends Component {
 
 			// add value 0 to the extended domain for zoom bar area graph
 			this.compensateDataForDefaultDomain(zoomBarData, defaultDomain);
+
+			const initialZoomDomainInModel = this.model.get(
+				"initialZoomDomain"
+			);
+			// get initZoomDomain
+			const initialZoomDomainInProp = Tools.getProperty(
+				this.model.getOptions(),
+				"zoomBar",
+				"top",
+				"initialZoomDomain"
+			);
+
+			// update initialZoomDomain and set zoomDomain in model only if the configuration is changed
+			// not the same object, or both start date and end date are not equal
+			if (
+				!(
+					initialZoomDomainInModel === initialZoomDomainInProp ||
+					(initialZoomDomainInModel &&
+						initialZoomDomainInProp &&
+						initialZoomDomainInModel[0].valueOf() ===
+							initialZoomDomainInProp[0].valueOf() &&
+						initialZoomDomainInModel[1].valueOf() ===
+							initialZoomDomainInProp[1].valueOf())
+				)
+			) {
+				this.model.set(
+					{
+						initialZoomDomain: initialZoomDomainInProp,
+						zoomDomain: initialZoomDomainInProp
+							? initialZoomDomainInProp
+							: defaultDomain
+					},
+					{ skipUpdate: true }
+				);
+			}
 
 			this.xScale.range([axesLeftMargin, width]).domain(defaultDomain);
 
