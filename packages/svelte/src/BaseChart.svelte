@@ -4,14 +4,13 @@
   export let options = {};
   export let id = "chart-" + Math.random().toString(36);
 
-  import { onMount, afterUpdate, createEventDispatcher } from "svelte";
+  import { onMount, createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
 
   let ref = null;
   let chart = null;
   let element = null;
-  let prevChart = undefined;
 
   onMount(() => {
     /**
@@ -25,6 +24,11 @@
      */
     element = ref || document.getElementById(id);
 
+    if (element) {
+      chart = new Chart(element, { data, options });
+      dispatch("load", chart);
+    }
+
     return () => {
       if (chart) {
         chart.components.forEach((component) => component.destroy());
@@ -32,14 +36,6 @@
         dispatch("destroy");
       }
     };
-  });
-
-  afterUpdate(() => {
-    if (Chart && prevChart !== Chart) {
-      chart = new Chart(element, { data, options });
-      dispatch("load", chart);
-      prevChart = Chart;
-    }
   });
 
   $: if (chart) {
