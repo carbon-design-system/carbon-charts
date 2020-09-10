@@ -29,6 +29,7 @@ export class SimpleBar extends Bar {
 	render(animate: boolean) {
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
+		const dataGroups = this.model.getDataGroups();
 
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });
@@ -44,10 +45,6 @@ export class SimpleBar extends Bar {
 		// Add the paths that need to be introduced
 		const barsEnter = bars.enter().append("path").attr("opacity", 0);
 		const paletteIndex = Tools.getProperty(options, "color", "presetPalette", "index");
-
-		// const elem = document.querySelector('.color-fill-5-1-1');
-		// const style = getComputedStyle(elem);
-		// console.log(style);
 
 		barsEnter
 			.merge(bars)

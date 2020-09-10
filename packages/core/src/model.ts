@@ -413,6 +413,7 @@ export class ChartModel {
 	getFillColor(group: any, key?: any, data?: any) {
 		const options = this.getOptions();
 		const defaultFillColor = this.getFillScale()(group);
+		console.log(defaultFillColor)
 		if (options.getFillColor) {
 			return options.getFillColor(group, key, data, defaultFillColor);
 		} else {
@@ -572,16 +573,27 @@ export class ChartModel {
 		const defaultColors = colorPalettes.DEFAULT;
 		const options = this.getOptions();
 		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+		const paletteIndex = Tools.getProperty(options, "color", "presetPalette", "index");
 
-		// If there is no valid user provided scale, use the default set of colors
-		if (
+		let colorRange = [];
+		if (paletteIndex) {
+			const numberOfDataset = this.allDataGroups.length;
+			for (let i = 0; i < numberOfDataset; i++) {
+				colorRange.push(`color-fill-${numberOfDataset}-${paletteIndex}-${i + 1}`);
+			}
+
+			this.colorScale = scaleOrdinal()
+				.range(colorRange)
+				.domain(this.allDataGroups);
+			return;
+		} else if (
 			userProvidedScale === null ||
 			Object.keys(userProvidedScale).length === 0
 		) {
+			// If there is no valid user provided scale, use the default set of colors
 			this.colorScale = scaleOrdinal()
 				.range(defaultColors)
 				.domain(this.allDataGroups);
-
 			return;
 		}
 
@@ -590,7 +602,7 @@ export class ChartModel {
 		 * by the user, add that to the color range
 		 * If not, add a default color
 		 */
-		const colorRange = [];
+		colorRange = [];
 		let colorIndex = 0;
 		this.allDataGroups.forEach((dataGroup) => {
 			if (userProvidedScale[dataGroup]) {
