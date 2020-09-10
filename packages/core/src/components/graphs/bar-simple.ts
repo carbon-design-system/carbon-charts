@@ -29,7 +29,6 @@ export class SimpleBar extends Bar {
 	render(animate: boolean) {
 		const options = this.model.getOptions();
 		const { groupMapsTo } = options.data;
-		const dataGroups = this.model.getDataGroups();
 
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });

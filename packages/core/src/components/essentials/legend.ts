@@ -77,7 +77,7 @@ export class Legend extends Component {
 			.attr("ry", 1)
 			.attr("class", (d, i) => {
 				if (paletteIndex) {
-					return `checkbox color-fill-${dataGroups.length}-${paletteIndex}-${i + 1}`;
+					return `checkbox ${this.model.getColorClasses()(d.name)}`;
 				}
 			})
 			.style("fill", (d) => {
