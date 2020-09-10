@@ -135,7 +135,10 @@ const chart: BaseChartOptions = {
 		selectedGroups: []
 	},
 	color: {
-		scale: null
+		scale: null,
+		presetPalette: {
+			index: 1
+		}
 	}
 };
 

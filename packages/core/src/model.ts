@@ -35,6 +35,8 @@ export class ChartModel {
 	// Fill scales & fill related objects
 	protected colorScale: any = {};
 
+	protected colorClasses: any = {};
+
 	constructor(services: any) {
 		this.services = services;
 	}
@@ -309,6 +311,8 @@ export class ChartModel {
 		this.updateAllDataGroups();
 
 		this.setColorScale();
+		this.setColorClasses();
+
 		this.services.events.dispatchEvent(Events.Model.UPDATE, { animate });
 	}
 
@@ -428,6 +432,10 @@ export class ChartModel {
 
 	getFillScale() {
 		return this.colorScale;
+	}
+
+	getColorClasses() {
+		return this.colorClasses;
 	}
 
 	/**
@@ -562,7 +570,6 @@ export class ChartModel {
 	 */
 	protected setColorScale() {
 		const defaultColors = colorPalettes.DEFAULT;
-
 		const options = this.getOptions();
 		const userProvidedScale = Tools.getProperty(options, "color", "scale");
 
@@ -602,5 +609,27 @@ export class ChartModel {
 		this.colorScale = scaleOrdinal()
 			.range(colorRange)
 			.domain(this.allDataGroups);
+	}
+
+	protected setColorClasses() {
+		const options = this.getOptions();
+		const userProvidedScale = Tools.getProperty(options, "color", "scale");
+
+		const paletteIndex = Tools.getProperty(options, "color", "presetPalette", "index");
+		const colorClassNames = this.allDataGroups.map((dataGroup, index) => 
+			`color-fill-${this.allDataGroups.length}-${paletteIndex}-${index + 1}`
+		)
+
+		// If there is no valid user provided scale, use the default set of colors
+		if (
+			userProvidedScale === null ||
+			Object.keys(userProvidedScale).length === 0
+		) {
+			this.colorClasses = scaleOrdinal()
+				.range(colorClassNames)
+				.domain(this.allDataGroups);
+
+			return;
+		}
 	}
 }
