@@ -61,6 +61,9 @@ export class Area extends Component {
 			&& groupedData.length === 1
 			&& Tools.getProperty(this.model.getOptions(), "color", "gradientEnabled");
 
+		if (groupedData.length > 1 && Tools.getProperty(this.model.getOptions(), "color", "gradientEnabled")) {
+			console.error("Gradients can only be enabled when having 1 single dataset");
+		}
 		const areas = svg
 			.selectAll("path.area")
 			.data(groupedData, (group) => group.name);
