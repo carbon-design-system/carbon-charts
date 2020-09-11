@@ -84,6 +84,10 @@ export interface AxisOptions {
 		values?: any[];
 	};
 	truncation?: TruncationOptions;
+	/**
+	 * whether keep updating axis in real time while zoom domain is changing
+	 */
+	updateWhenZooming?: boolean;
 }
 
 /**
