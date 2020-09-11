@@ -24,6 +24,18 @@ export class Ruler extends Component {
 		domainValue: number;
 		originalData: any;
 	}[];
+	isXGridEnabled = Tools.getProperty(
+		this.model.getOptions(),
+		"grid",
+		"x",
+		"enabled"
+	);
+	isYGridEnabled = Tools.getProperty(
+		this.model.getOptions(),
+		"grid",
+		"y",
+		"enabled"
+	);
 
 	render() {
 		const isRulerEnabled =  Tools.getProperty(
@@ -247,7 +259,9 @@ export class Ruler extends Component {
 		this.backdrop = DOMUtils.appendOrSelect(svg, "svg.chart-grid-backdrop");
 		const backdropRect = DOMUtils.appendOrSelect(
 			this.backdrop,
-			"rect.chart-grid-backdrop"
+			this.isXGridEnabled || this.isYGridEnabled
+				? "rect.chart-grid-backdrop.stroked"
+				: "rect.chart-grid-backdrop"
 		);
 	}
 }
