@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.37.0](https://github.com/carbon-design-system/carbon-charts/compare/v0.36.4...v0.37.0) (2020-09-11)
+
+
+### Features
+
+* create options for tick rotation ([#770](https://github.com/carbon-design-system/carbon-charts/issues/770)) ([4063c8a](https://github.com/carbon-design-system/carbon-charts/commit/4063c8a0f4d441589116759b32f2b214fad46154))
+* enable or disable scatter dot on charts except scatter chart ([#769](https://github.com/carbon-design-system/carbon-charts/issues/769)) ([3131942](https://github.com/carbon-design-system/carbon-charts/commit/313194217318719152d6a14c2a3cba957b8fc009))
+
+
+
+
+
 ## [0.36.4](https://github.com/carbon-design-system/carbon-charts/compare/v0.36.3...v0.36.4) (2020-09-10)
 
 **Note:** Version bump only for package @carbon/charts
