@@ -68,51 +68,16 @@ export class Axis extends Component {
 	render(animate = true) {
 		const { position: axisPosition } = this.configs;
 		const options = this.model.getOptions();
-		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
-		const axisScaleType = Tools.getProperty(axisOptions, "scaleType");
-		const isDataLoading = Tools.getProperty(options, "data", "loading");
-		const numberOfTicksProvided = Tools.getProperty(
-			axisOptions,
-			"ticks",
-			"number"
-		);
-
-		// user can provide custom ticks to be displayed
-		// ticks need to be in the domain of the axis data
-		const userProvidedTickValues = Tools.getProperty(
-			axisOptions,
-			"ticks",
-			"values"
-		);
-
-		// get user provided custom values for truncation
-		const truncationType = Tools.getProperty(
-			axisOptions,
-			"truncation",
-			"type"
-		);
-		const truncationThreshold = Tools.getProperty(
-			axisOptions,
-			"truncation",
-			"threshold"
-		);
-		const truncationNumCharacter = Tools.getProperty(
-			axisOptions,
-			"truncation",
-			"numCharacter"
-		);
-
-		const isNumberOfTicksProvided = numberOfTicksProvided !== null;
-		const isVerticalAxis =
-			axisPosition === AxisPositions.LEFT ||
-			axisPosition === AxisPositions.RIGHT;
-		const timeScaleOptions = Tools.getProperty(options, "timeScale");
 
 		const svg = this.getContainerSVG();
 		const { width, height } = DOMUtils.getSVGElementSize(this.parent, {
 			useAttrs: true
 		});
-
+		// Add axis into the parent
+		const container = DOMUtils.appendOrSelect(
+			svg,
+			`g.axis.${axisPosition}`
+		);
 		let startPosition, endPosition;
 		if (
 			axisPosition === AxisPositions.BOTTOM ||
@@ -157,11 +122,6 @@ export class Axis extends Component {
 				break;
 		}
 
-		// Add axis into the parent
-		const container = DOMUtils.appendOrSelect(
-			svg,
-			`g.axis.${axisPosition}`
-		);
 		container.attr("aria-label", `${axisPosition} axis`);
 		const axisRefExists = !container.select(`g.ticks`).empty();
 		let axisRef = DOMUtils.appendOrSelect(container, `g.ticks`);
@@ -169,7 +129,6 @@ export class Axis extends Component {
 			axisRef.attr("role", `${Roles.GRAPHICS_OBJECT} ${Roles.GROUP}`);
 			axisRef.attr("aria-label", `${axisPosition} ticks`);
 		}
-
 		// We draw the invisible axis because of the async nature of d3 transitions
 		// To be able to tell the final width & height of the axis when initiaing the transition
 		// The invisible axis is updated instantly and without a transition
@@ -181,6 +140,50 @@ export class Axis extends Component {
 			.style("pointer-events", "none")
 			.attr("aria-hidden", true)
 			.attr("aria-label", `invisible ${axisPosition} ticks`);
+
+		if (!Tools.getProperty(options, "axes", axisPosition, "visible")) {
+			return;
+		}
+
+		const axisOptions = Tools.getProperty(options, "axes", axisPosition);
+		const axisScaleType = Tools.getProperty(axisOptions, "scaleType");
+		const isDataLoading = Tools.getProperty(options, "data", "loading");
+		const numberOfTicksProvided = Tools.getProperty(
+			axisOptions,
+			"ticks",
+			"number"
+		);
+
+		// user can provide custom ticks to be displayed
+		// ticks need to be in the domain of the axis data
+		const userProvidedTickValues = Tools.getProperty(
+			axisOptions,
+			"ticks",
+			"values"
+		);
+
+		// get user provided custom values for truncation
+		const truncationType = Tools.getProperty(
+			axisOptions,
+			"truncation",
+			"type"
+		);
+		const truncationThreshold = Tools.getProperty(
+			axisOptions,
+			"truncation",
+			"threshold"
+		);
+		const truncationNumCharacter = Tools.getProperty(
+			axisOptions,
+			"truncation",
+			"numCharacter"
+		);
+
+		const isNumberOfTicksProvided = numberOfTicksProvided !== null;
+		const isVerticalAxis =
+			axisPosition === AxisPositions.LEFT ||
+			axisPosition === AxisPositions.RIGHT;
+		const timeScaleOptions = Tools.getProperty(options, "timeScale");
 
 		// Append to DOM a fake tick to get the right computed font height
 		const fakeTick = DOMUtils.appendOrSelect(invisibleAxisRef, `g.tick`);
@@ -203,10 +206,6 @@ export class Axis extends Component {
 		const zoomDomain = this.model.get("zoomDomain");
 		if (zoomDomain && isTimeScaleType && !isVerticalAxis) {
 			scale.domain(zoomDomain);
-		}
-
-		if (!Tools.getProperty(options, "axes", axisPosition, "visible")) {
-			return;
 		}
 
 		// Initialize axis object
