@@ -36,6 +36,8 @@ export class Ruler extends Component {
 		"y",
 		"enabled"
 	);
+	// flag for checking whether ruler event listener is added or not
+	isEventListenerAdded = false;
 
 	render() {
 		const isRulerEnabled =  Tools.getProperty(
@@ -46,11 +48,13 @@ export class Ruler extends Component {
 
 		this.drawBackdrop();
 
-		// remove backdrop event listeners
-		this.removeBackdropEventListeners();
-
-		if (isRulerEnabled) {
+		if (isRulerEnabled && !this.isEventListenerAdded) {
+			this.isEventListenerAdded = true;
 			this.addBackdropEventListeners();
+		} else if (!isRulerEnabled && this.isEventListenerAdded) {
+			this.isEventListenerAdded = false;
+			// remove backdrop event listeners
+			this.removeBackdropEventListeners();
 		}
 	}
 
