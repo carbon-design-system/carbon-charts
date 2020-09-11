@@ -50,8 +50,7 @@ export class Meter extends Component {
 			.attr("x", 0)
 			.attr("y", 0)
 			.attr("height", Tools.getProperty(options, "meter", "height"))
-			.attr("class", "")
-			.classed(`value status--${status}`, status != null && !userProvidedScale)
+			.attr("class", status != null && !userProvidedScale ? `value status--${status}` : "")
 			.transition(
 				this.services.transitions.getTransition(
 					"meter-bar-update",
