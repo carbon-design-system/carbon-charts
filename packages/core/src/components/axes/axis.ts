@@ -30,9 +30,6 @@ export class Axis extends Component {
 	scale: any;
 	scaleType: ScaleTypes;
 
-	// Track whether zoom domain needs to update in a render
-	zoomDomainChanging = false;
-
 	constructor(model: ChartModel, services: any, configs?: any) {
 		super(model, services, configs);
 
@@ -41,30 +38,7 @@ export class Axis extends Component {
 		}
 
 		this.margins = this.configs.margins;
-		this.init();
 	}
-
-	init() {
-		this.services.events.addEventListener(
-			Events.ZoomBar.SELECTION_START,
-			this.handleZoomBarSelectionStart
-		);
-		this.services.events.addEventListener(
-			Events.ZoomBar.SELECTION_END,
-			this.handleZoomBarSelectionEnd
-		);
-	}
-
-	handleZoomBarSelectionStart = () => {
-		this.zoomDomainChanging = true;
-	};
-
-	handleZoomBarSelectionEnd = () => {
-		this.zoomDomainChanging = false;
-		// need another update after zoom bar selection is completed
-		// to make sure the tick rotation is calculated correctly
-		this.services.events.dispatchEvent(Events.Model.UPDATE);
-	};
 
 	render(animate = true) {
 		const { position: axisPosition } = this.configs;
@@ -441,50 +415,19 @@ export class Axis extends Component {
 			axisPosition === AxisPositions.TOP
 		) {
 			let shouldRotateTicks = false;
-			const isTopOrBottomZoomBarEnabled =
-				Tools.getProperty(
-					this.model.getOptions(),
-					"zoomBar",
-					"top",
-					"enabled"
-				) ||
-				Tools.getProperty(
-					this.model.getOptions(),
-					"zoomBar",
-					"bottom",
-					"enabled"
-				);
-
 			// user could decide if tick rotation is required during zoom domain changing
-			const rotateWhileZooming = Tools.getProperty(
+			const tickRotation = Tools.getProperty(
 				axisOptions,
 				"ticks",
-				"rotateWhileZooming"
+				"rotation"
 			);
 
-			if (
-				this.zoomDomainChanging &&
-				isTopOrBottomZoomBarEnabled &&
-				(!rotateWhileZooming ||
-					rotateWhileZooming === TickRotations.ALWAYS)
-			) {
-				// if zoomDomain is changing and options is set to ALWAYS or not set
+			if (tickRotation === TickRotations.ALWAYS) {
 				shouldRotateTicks = true;
-			} else if (
-				this.zoomDomainChanging &&
-				isTopOrBottomZoomBarEnabled &&
-				rotateWhileZooming === TickRotations.NEVER
-			) {
-				// if zoomDomain is changing and options is set to NEVER
+			} else if (tickRotation === TickRotations.NEVER) {
 				shouldRotateTicks = false;
-			} else if (
-				!this.zoomDomainChanging ||
-				(this.zoomDomainChanging &&
-					isTopOrBottomZoomBarEnabled &&
-					rotateWhileZooming === TickRotations.AUTO)
-			) {
-				// if zoomDomain is NOT changing or
-				// zoomDomain is changing and options is set to AUTO
+			} else if (!tickRotation || tickRotation === TickRotations.AUTO) {
+				// if the option is not set or set to AUTO
 
 				// depending on if tick rotation is necessary by calculating space
 				// If we're dealing with a discrete scale type
@@ -737,15 +680,5 @@ export class Axis extends Component {
 			.on("mouseover", null)
 			.on("mousemove", null)
 			.on("mouseout", null);
-
-		// Remove zoom bar event listeners
-		this.services.events.removeEventListener(
-			Events.ZoomBar.SELECTION_START,
-			this.handleZoomBarSelectionStart
-		);
-		this.services.events.removeEventListener(
-			Events.ZoomBar.SELECTION_END,
-			this.handleZoomBarSelectionEnd
-		);
 	}
 }

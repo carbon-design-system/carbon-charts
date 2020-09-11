@@ -75,10 +75,9 @@ export interface AxisOptions {
 		 */
 		rotateIfSmallerThan?: number;
 		/**
-		 * whether rotate ticks while zoom domain is changing
-		 * only take effect when zoom bar is enabled
+		 * when to rotate ticks
 		 */
-		rotateWhileZooming?: TickRotations;
+		rotation?: TickRotations;
 		/**
 		 * function to format the ticks
 		 */

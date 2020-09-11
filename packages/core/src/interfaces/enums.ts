@@ -165,7 +165,7 @@ export enum Statuses {
 }
 
 /**
- * enum of domain axis ticks rotation during zoom domain change
+ * enum of axis ticks rotation
  */
 export enum TickRotations {
 	ALWAYS = "always",
