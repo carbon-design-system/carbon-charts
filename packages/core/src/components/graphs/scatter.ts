@@ -51,11 +51,9 @@ export class Scatter extends Component {
 	}
 
 	render(animate: boolean) {
-		const isScatterEnabled = Tools.getProperty(this.model.getOptions(), "scatterDotEnabled");
-		if (!this.configs.alwaysEnableScatterDot) {
-			if (!isScatterEnabled) {
-				return;
-			}
+		const isScatterEnabled = Tools.getProperty(this.model.getOptions(), "points", "enabled") ||  Tools.getProperty(this.model.getOptions(), "bubble", "enabled");
+		if (!isScatterEnabled) {
+			return;
 		}
 
 		// Grab container SVG
