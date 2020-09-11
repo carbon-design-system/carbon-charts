@@ -2,15 +2,14 @@
   export let Chart = undefined;
   export let data = {};
   export let options = {};
-  export let id = "chart-" + Math.random().toString(36);
 
   import { onMount, createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
+  const id = "chart-" + Math.random().toString(36);
 
   let ref = null;
   let chart = null;
-  let element = null;
 
   onMount(() => {
     /**
@@ -22,7 +21,7 @@
      *
      * See https://github.com/sveltejs/svelte/issues/2937
      */
-    element = ref || document.getElementById(id);
+    const element = ref || document.getElementById(id);
 
     if (element) {
       chart = new Chart(element, { data, options });
@@ -45,4 +44,4 @@
   }
 </script>
 
-<div {...$$restProps} bind:this={ref} {id}></div>
+<div {...$$restProps} bind:this={ref} {id} />
