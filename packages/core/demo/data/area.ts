@@ -106,6 +106,9 @@ export const sparklineOptions = {
 			mapsTo: "value",
 			scaleType: "linear"
 		}
+	},
+	color: {
+		gradientEnabled: true
 	}
 };
 

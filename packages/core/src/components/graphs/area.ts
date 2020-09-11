@@ -31,7 +31,7 @@ export class Area extends Component {
 
 	render(animate = true) {
 		const svg = this.getContainerSVG({ withinChartClip: true });
-		let minAndMax = [0, 0];
+		let domain = [0, 0];
 
 		const { cartesianScales } = this.services;
 
@@ -43,13 +43,13 @@ export class Area extends Component {
 				.x((d, i) => cartesianScales.getDomainValue(d, i))
 				.y0(cartesianScales.getRangeValue(0))
 				.y1((d, i) => cartesianScales.getRangeValue(d, i));
-			minAndMax = this.services.cartesianScales.getMainYScale().domain();
+			domain = this.services.cartesianScales.getMainYScale().domain();
 		} else {
 			areaGenerator
 				.x0(cartesianScales.getRangeValue(0))
 				.x1((d, i) => cartesianScales.getRangeValue(d, i))
 				.y((d, i) => cartesianScales.getDomainValue(d, i));
-			minAndMax = this.services.cartesianScales.getMainXScale().domain();
+			domain = this.services.cartesianScales.getMainXScale().domain();
 		}
 
 		// Update the bound data on area groups
@@ -59,7 +59,7 @@ export class Area extends Component {
 		const isGradientAllowed =
 			groupedData
 			&& groupedData.length === 1
-			&& Tools.getProperty(this.model.getOptions(), "gradientEnabled");
+			&& Tools.getProperty(this.model.getOptions(), "color", "gradientEnabled");
 
 		const areas = svg
 			.selectAll("path.area")
@@ -74,17 +74,19 @@ export class Area extends Component {
 		if (isGradientAllowed) {
 			groupedData.forEach((dataset) => {
 				GradientUtils.appendLinearGradient(
-					this.parent,
-					dataset.name.replace(" ", "") + "_" + this.gradient_id,
-					"0%",
-					"0%",
-					"0%",
-					"100%",
-					GradientUtils.getStopArray(
-						GradientUtils.need3Stops(minAndMax),
-						dataset,
-						this.model.getFillColor(dataset.name)
-					)
+					{
+						svg: this.parent,
+						id: dataset.name.replace(" ", "") + "_" + this.gradient_id,
+						x1: "0%",
+						x2: "0%",
+						y1: "0%",
+						y2: "100%",
+						stops: GradientUtils.getStops(
+							domain,
+							dataset,
+							this.model.getFillColor(dataset.name)
+						)
+					}
 				);
 			});
 		}

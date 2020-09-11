@@ -139,7 +139,8 @@ const chart: BaseChartOptions = {
 		selectedGroups: []
 	},
 	color: {
-		scale: null
+		scale: null,
+		gradientEnabled: false
 	}
 };
 
@@ -212,7 +213,6 @@ const lineChart: LineChartOptions = Tools.merge({}, axisChart, {
  * options specific to area charts
  */
 const areaChart: AreaChartOptions = Tools.merge({}, lineChart, {
-	gradientEnabled: false,
 	timeScale: Tools.merge(timeScale, {
 		addSpaceOnEdges: 0
 	} as TimeScaleOptions)

@@ -3,20 +3,20 @@ import { Service } from "../service";
 import { DOMUtils } from "../";
 
 export class GradientUtils extends Service {
-	static appendLinearGradient(svg, id, x1, x2, y1, y2, stopAttrList) {
-		const lg = svg
+	static appendLinearGradient(configs) {
+		const lg = configs.svg
 			.append("defs")
 			.append("linearGradient")
-			.attr("id", id)
-			.attr("x1", x1)
-			.attr("x2", x2)
-			.attr("y1", y1)
-			.attr("y2", y2);
-		for (const stopAttr of stopAttrList) {
+			.attr("id", configs.id)
+			.attr("x1", configs.x1)
+			.attr("x2", configs.x2)
+			.attr("y1", configs.y1)
+			.attr("y2", configs.y2);
+		for (const stop of configs.stops) {
 			lg.append("stop")
-				.attr("offset", stopAttr.offset)
-				.style("stop-color", stopAttr.color)
-				.style("stop-opacity", stopAttr.opacity);
+				.attr("offset", stop.offset)
+				.style("stop-color", stop.color)
+				.style("stop-opacity", stop.opacity);
 		}
 	}
 
@@ -35,25 +35,26 @@ export class GradientUtils extends Service {
 		return offsetRatio;
 	}
 
-	static getStopArray(is3Stops, dataset, color) {
-		let stopArray: object[] = [
+	static getStops(domain, dataset, color) {
+		const is3Stops = GradientUtils.need3Stops(domain);
+		let stops: object[] = [
 			{
 				offset: "0%",
 				color: color,
-				opacity: "1"
+				opacity: "0.6"
 			},
 			{
-				offset: "100%",
+				offset: "80%",
 				color: color,
 				opacity: "0"
 			}
 		];
 		if (is3Stops) {
-			stopArray = [
+			stops = [
 				{
 					offset: "0%",
 					color: color,
-					opacity: "1"
+					opacity: "0.6"
 				},
 				{
 					offset: GradientUtils.getOffsetRatio(dataset.data),
@@ -63,11 +64,11 @@ export class GradientUtils extends Service {
 				{
 					offset: "100%",
 					color: color,
-					opacity: "1"
+					opacity: "0.6"
 				}
 			];
 		}
-		return stopArray;
+		return stops;
 	}
 
 

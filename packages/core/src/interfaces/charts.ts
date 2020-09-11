@@ -103,6 +103,10 @@ export interface BaseChartOptions {
 		 * e.g. { "Dataset 1": "blue" }
 		 */
 		scale?: object;
+		/**
+		 * enable gradient or not
+		 */
+		gradientEnabled?: boolean;
 	};
 }
 
@@ -192,10 +196,6 @@ export interface LineChartOptions extends ScatterChartOptions {
  * options specific to area charts
  */
 export interface AreaChartOptions extends AxisChartOptions {
-	/**
-	 * enable gradient or not
-	 */
-	gradientEnabled?: boolean;
 	/**
 	 * options for the curve of the line
 	 */
