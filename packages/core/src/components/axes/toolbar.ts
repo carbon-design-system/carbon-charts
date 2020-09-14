@@ -243,7 +243,12 @@ export class Toolbar extends Component {
 
 		// generate html for each overflow menu items
 		overflowMenuItems.forEach((menuItem) => {
-			overflowMenuHtml += `<li class="bx--overflow-menu-options__option">
+			const menuItemClasses = "bx--overflow-menu-options__option".concat(
+				menuItem.shouldBeDisabled()
+					? " bx--overflow-menu-options__option--disabled" // class for disabled menu item
+					: ""
+			);
+			overflowMenuHtml += `<li class="${menuItemClasses}">
 						<button class="bx--overflow-menu-options__btn" role="menuitem"
 							data-floating-menu-primary-focus
 							id="${menuItem.elementId}">
@@ -290,6 +295,7 @@ export class Toolbar extends Component {
 		return {
 			elementId: this.resetZoomMenuItemId, // this id needs to be unique in the whole web page
 			text: resetZoomText,
+			shouldBeDisabled: () => this.services.zoom.isMaxZoomDomain(),
 			clickFunction: () => this.services.zoom.resetZoomDomain()
 		};
 	}
