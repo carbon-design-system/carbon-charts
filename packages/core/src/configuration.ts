@@ -140,8 +140,11 @@ const chart: BaseChartOptions = {
 	},
 	color: {
 		scale: null,
-		gradientEnabled: false
-	}
+		gradient: {
+			enabled: false
+		}
+	},
+
 };
 
 /**

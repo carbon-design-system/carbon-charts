@@ -7,11 +7,9 @@ export class StackedScatter extends Scatter {
 	type = "scatter-stacked";
 
 	render(animate: boolean) {
-		const isScatterEnabled = Tools.getProperty(this.model.getOptions(), "scatterDotEnabled");
-		if (!this.configs.alwaysEnableScatterDot) {
-			if (!isScatterEnabled) {
-				return;
-			}
+		const isScatterEnabled = Tools.getProperty(this.model.getOptions(), "points", "enabled");
+		if (!isScatterEnabled) {
+			return;
 		}
 		// Grab container SVG
 		const svg = this.getContainerSVG({ withinChartClip: true });

@@ -7,7 +7,6 @@ import { Tools } from "../../tools";
 
 // D3 Imports
 import { area } from "d3-shape";
-import { select } from "d3";
 
 export class Area extends Component {
 	type = "area";
@@ -57,40 +56,54 @@ export class Area extends Component {
 
 		// Should gradient style be applicable
 		const isGradientAllowed =
-			groupedData
-			&& groupedData.length === 1
-			&& Tools.getProperty(this.model.getOptions(), "color", "gradientEnabled");
+			groupedData &&
+			groupedData.length === 1 &&
+			Tools.getProperty(
+				this.model.getOptions(),
+				"color",
+				"gradient",
+				"enabled"
+			);
 
-		if (groupedData.length > 1 && Tools.getProperty(this.model.getOptions(), "color", "gradientEnabled")) {
-			console.error("Gradients can only be enabled when having 1 single dataset");
+		if (
+			groupedData.length > 1 &&
+			Tools.getProperty(
+				this.model.getOptions(),
+				"color",
+				"gradient",
+				"enabled"
+			)
+		) {
+			console.error(
+				"Gradients can only be enabled when having 1 single dataset"
+			);
 		}
+
 		const areas = svg
 			.selectAll("path.area")
 			.data(groupedData, (group) => group.name);
+
 		if (!this.parent.selectAll("defs linearGradient").empty()) {
-			this.parent
-				.selectAll("defs linearGradient")
-				.each(function() {
-					this.parentNode.remove();
-				});
+			this.parent.selectAll("defs linearGradient").each(function () {
+				this.parentNode.remove();
+			});
 		}
+
 		if (isGradientAllowed) {
 			groupedData.forEach((dataset) => {
-				GradientUtils.appendLinearGradient(
-					{
-						svg: this.parent,
-						id: dataset.name.replace(" ", "") + "_" + this.gradient_id,
-						x1: "0%",
-						x2: "0%",
-						y1: "0%",
-						y2: "100%",
-						stops: GradientUtils.getStops(
-							domain,
-							dataset,
-							this.model.getFillColor(dataset.name)
-						)
-					}
-				);
+				GradientUtils.appendLinearGradient({
+					svg: this.parent,
+					id: dataset.name.replace(" ", "") + "_" + this.gradient_id,
+					x1: "0%",
+					x2: "0%",
+					y1: "0%",
+					y2: "100%",
+					stops: GradientUtils.getStops(
+						domain,
+						dataset,
+						this.model.getFillColor(dataset.name)
+					)
+				});
 			});
 		}
 
@@ -108,7 +121,10 @@ export class Area extends Component {
 			enteringAreas
 				.merge(areas)
 				.style("fill", (group) => {
-					return `url(#${group.name.replace(" ", "")}_${this.gradient_id})`; })
+					return `url(#${group.name.replace(" ", "")}_${
+						this.gradient_id
+					})`;
+				})
 				.attr("class", "area")
 				.attr("d", (group) => {
 					const { data } = group;
@@ -116,23 +132,23 @@ export class Area extends Component {
 				});
 		} else {
 			enteringAreas
-			.attr("opacity", 0)
-			.merge(areas)
-			.attr("fill", (group) => {
-				return this.model.getFillColor(group.name);
-			})
-			.transition(
-				this.services.transitions.getTransition(
-					"area-update-enter",
-					animate
+				.attr("opacity", 0)
+				.merge(areas)
+				.attr("fill", (group) => {
+					return this.model.getFillColor(group.name);
+				})
+				.transition(
+					this.services.transitions.getTransition(
+						"area-update-enter",
+						animate
+					)
 				)
-			)
-			.attr("opacity", Configuration.area.opacity.selected)
-			.attr("class", "area")
-			.attr("d", (group) => {
-				const { data } = group;
-				return areaGenerator(data);
-			});
+				.attr("opacity", Configuration.area.opacity.selected)
+				.attr("class", "area")
+				.attr("d", (group) => {
+					const { data } = group;
+					return areaGenerator(data);
+				});
 		}
 
 		// Apply shared styles and datum
@@ -153,7 +169,7 @@ export class Area extends Component {
 
 				return Configuration.area.opacity.selected;
 			});
-	}
+	};
 
 	handleLegendMouseOut = (event: CustomEvent) => {
 		this.parent
@@ -162,7 +178,7 @@ export class Area extends Component {
 				this.services.transitions.getTransition("legend-mouseout-area")
 			)
 			.attr("opacity", Configuration.area.opacity.selected);
-	}
+	};
 
 	destroy() {
 		// Remove event listeners

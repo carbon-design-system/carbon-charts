@@ -108,7 +108,12 @@ export const sparklineOptions = {
 		}
 	},
 	color: {
-		gradientEnabled: true
+		gradient: {
+			enabled: true
+		}
+	},
+	points: {
+		enabled: false
 	}
 };
 

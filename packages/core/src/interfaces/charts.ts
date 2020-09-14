@@ -104,9 +104,10 @@ export interface BaseChartOptions {
 		 */
 		scale?: object;
 		/**
-		 * enable gradient or not
+		 * options related to gradient
+		 * e.g. { enabled: true }
 		 */
-		gradientEnabled?: boolean;
+		gradient?: object;
 	};
 }
 

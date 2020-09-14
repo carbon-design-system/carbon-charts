@@ -49,6 +49,7 @@ export class GradientUtils extends Service {
 				opacity: "0"
 			}
 		];
+
 		if (is3Stops) {
 			stops = [
 				{
@@ -70,7 +71,4 @@ export class GradientUtils extends Service {
 		}
 		return stops;
 	}
-
-
-
 }
